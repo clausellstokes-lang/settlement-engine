@@ -24,7 +24,15 @@
 --   user access token). Read fully qualified; the pglite probe shims auth.jwt().
 --
 -- Depends on: 001 (auth.users), auth.uid()/auth.jwt(). Re-runnable.
--- @rollback: drop function if exists public.assert_current_session();
+-- THE spend_credits DB BELT (§7.2, M-9c): spend_credits is recreated from its
+--   net-current body (153) VERBATIM with ONE delta — a perform assert_current_session()
+--   at the top, so a superseded JWT can never move credits even if a request-layer
+--   gate let it through. The missing-row-allows semantics keeps every existing
+--   creditFlow pin green (a caller with no session row spends normally). CREATE OR
+--   REPLACE preserves the existing grant (authenticated).
+--
+-- @rollback: re-apply 153's spend_credits definition (drop the assert_current_session
+--   call); drop function if exists public.assert_current_session();
 --   drop function if exists public.is_current_session();
 --   drop function if exists public.claim_current_session(text);
 --   drop table if exists public.current_account_session;
@@ -86,7 +94,13 @@ declare v_uid uuid; v_sid text; v_row uuid;
 begin
   v_uid := auth.uid();
   if v_uid is null then return true; end if;           -- no user context → not enforceable here
-  v_sid := auth.jwt() ->> 'session_id';
+  -- auth.jwt() is Supabase-provided in prod; guard its absence (an unusual context /
+  -- a minimal test scaffold) so the belt never bricks a spend — ALLOW when unreadable.
+  begin
+    v_sid := auth.jwt() ->> 'session_id';
+  exception when undefined_function then
+    return true;
+  end;
   if v_sid is null or btrim(v_sid) = '' then return true; end if;  -- unexpected token shape → allow + (edge) log
   select session_id into v_row from public.current_account_session where user_id = v_uid;
   if v_row is null then return true; end if;            -- MISSING ROW ALLOWS (rollout safety)
@@ -111,3 +125,134 @@ end;
 $$;
 revoke all on function public.assert_current_session() from public;
 grant execute on function public.assert_current_session() to authenticated, service_role;
+
+-- ── THE spend_credits DB BELT (§7.2, M-9c) ─────────────────────────────────────
+-- Recreated from 153's net-current body VERBATIM with ONE delta: a
+-- `perform public.assert_current_session();` at the top (right after the auth check,
+-- before the 057 active-account gate and any credit movement). A superseded session
+-- raises 'session_superseded' here BEFORE a single credit is spent. The
+-- missing-row-allows semantics (161) keeps every existing creditFlow pin green.
+create or replace function public.spend_credits(feature text, p_profile text default null)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  cost integer;
+  remaining integer;
+  current_balance integer;
+  user_role text;
+  new_spend_id uuid;
+  needed integer;
+  grant_row record;
+  allocation integer;
+  base_feature text;
+  cfg_cost integer;
+begin
+  if auth.uid() is null then raise exception 'not authenticated'; end if;
+  -- SINGLE-SESSION BELT (161, §7.2): a superseded JWT can never move credits.
+  perform public.assert_current_session();
+  -- Trust-boundary gate (057): a banned/disabled/soft-deleted account may not
+  -- spend, even with a still-valid JWT.
+  if not public.account_is_active(auth.uid()) then
+    raise exception 'account is not active';
+  end if;
+
+  -- CONFIG-FIRST cost resolution (114): strip a trailing '_fast' to the base feature,
+  -- then — when a profile is supplied — read the per-profile config cost. Only an
+  -- integer 1..12 is honoured; ANY miss/malformation falls through to the 057 CASE.
+  base_feature := case when feature like '%\_fast' then left(feature, length(feature) - 5) else feature end;
+  cfg_cost := null;
+  if p_profile is not null then
+    begin
+      select nullif(v.value -> 'profiles' -> p_profile ->> base_feature, '')::integer
+        into cfg_cost
+        from public.system_config v
+       where v.key = 'ai_credit_costs';
+    exception when others then
+      cfg_cost := null;
+    end;
+    if cfg_cost is not null and (cfg_cost < 1 or cfg_cost > 12) then
+      cfg_cost := null;
+    end if;
+  end if;
+
+  if cfg_cost is not null then
+    cost := cfg_cost;
+  else
+    -- 057 CASE block + the Surveyor S1 (analysis, brief) + S3 (interpret, parley) +
+    -- S4–S6 (customContent, styleOverhaul, constructSettlement, constructRealm) +
+    -- S7 (autonomy) features.
+    cost := case feature
+      when 'chronicle' then 2
+      when 'narrative' then 3
+      when 'dailyLife' then 4
+      when 'progression' then 5
+      when 'narrative_fast' then 2
+      when 'dailyLife_fast' then 3
+      when 'progression_fast' then 4
+      when 'analysis' then 3
+      when 'brief' then 4
+      when 'interpret' then 5
+      when 'parley' then 3
+      when 'customContent' then 6
+      when 'styleOverhaul' then 3
+      when 'constructSettlement' then 6
+      when 'constructRealm' then 8
+      when 'autonomy' then 4
+      else null
+    end;
+    if cost is null then raise exception 'unknown feature: %', feature; end if;
+  end if;
+
+  select role into user_role from public.profiles where id = auth.uid() for update;
+  if user_role in ('developer', 'admin') or public.current_user_is_privileged() then
+    insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+      values (auth.uid(), 'spend', cost, feature, jsonb_build_object('elevated', true))
+      returning id into new_spend_id;
+    return jsonb_build_object('ok', true, 'balance', -2, 'spend_id', new_spend_id, 'elevated', true);
+  end if;
+
+  current_balance := public.get_credit_balance(auth.uid());
+  if current_balance < cost then
+    return jsonb_build_object('ok', false, 'reason', 'insufficient_funds', 'balance', coalesce(current_balance, 0));
+  end if;
+
+  insert into public.credit_ledger (user_id, kind, amount, source, metadata)
+    values (auth.uid(), 'spend', cost, feature, '{}'::jsonb)
+    returning id into new_spend_id;
+  needed := cost;
+
+  for grant_row in
+    select g.id, greatest(g.amount - coalesce(a.amount, 0), 0)::integer as available
+    from public.credit_ledger g
+    left join (
+      select grant_id, sum(amount)::integer as amount
+      from public.credit_spend_allocations group by grant_id
+    ) a on a.grant_id = g.id
+    where g.user_id = auth.uid()
+      and g.kind = 'grant'
+      and (g.expires_at is null or g.expires_at > now())
+      and greatest(g.amount - coalesce(a.amount, 0), 0) > 0
+    order by case when g.source = 'monthly_allowance' then 0 else 1 end,
+      g.expires_at nulls last, g.created_at
+    for update of g
+  loop
+    allocation := least(needed, grant_row.available);
+    if allocation > 0 then
+      insert into public.credit_spend_allocations (spend_id, grant_id, amount)
+        values (new_spend_id, grant_row.id, allocation);
+      needed := needed - allocation;
+    end if;
+    exit when needed <= 0;
+  end loop;
+  if needed > 0 then raise exception 'credit allocation failed'; end if;
+
+  insert into public.credit_transactions (user_id, amount, reason)
+    values (auth.uid(), -cost, feature);
+  remaining := public.get_credit_balance(auth.uid());
+  update public.profiles set credits = remaining, updated_at = now() where id = auth.uid();
+  return jsonb_build_object('ok', true, 'balance', remaining, 'spend_id', new_spend_id, 'elevated', false);
+end;
+$$;
