@@ -1153,6 +1153,14 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER CORRECTION (2026-07-19) — THE DEADLINE IS 11:59:59 PM PT **JULY 19**
+(= 02:59:59 EDT July 20), not tonight: ~25.5 hours of runway from issuance, all
+of it inside the free-Fable window.** Strategy adjusted: Fable escalations are
+affordable throughout (folds reconciliation + verification pre-planned on Fable);
+sustained 4-lane saturation targets the full pre-resurvey build (remaining §2
+slices → Phase D → the folds → the push) inside the window; the continuity order
+now governs TOMORROW night's boundary. Heartbeat re-armed with the corrected
+boundary text.
 **⬛ OWNER NIGHT ORDERS (2026-07-19 ~22:20 PT) — LANE SATURATION + THE FABLE
 DEADLINE:** "there should never be an empty lane, check every 15 minutes to see
 if a lane has stalled. I need to complete this by the end of 11:59:59 PM PT
