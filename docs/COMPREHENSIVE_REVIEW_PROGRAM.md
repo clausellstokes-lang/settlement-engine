@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ T-2 + IT-4 LANDED (2026-07-18) — culture OCCURS and skins are WEARABLE.**
+T-2 (claude/traditions @ 63c37358, 3 commits): the tick-time mover DARK behind
+traditionsEnabled — first-lit mint proven byte-identical to the T-1 preview;
+occurrence/skip/outcome engine live; pulseKernel name-swap at UNCHANGED effective
+lines (1387); dormancy golden 7/7 (dark pulse = same refs); a REAL 3-year lit
+walkthrough (5 founding traditions, outcome draws per year, prosperity
+Comfortable→Wealthy, legitimacy 55→76 — the upward-drift note is a §13 soak dial,
+not a defect). Vetoable: no foundedYear rebase (preserves mint==preview) · local
+applicator reimplementation · conservation-preserving faith transfer · skip
+thresholds · TRAD_TUNING dials. Interim: legitimacy routes to the seat until T-3
+owners land. Honest receipt caveat recorded: full suite exceeded the 10-min tool
+ceiling under load — first-run (9 reds: 2 self-caught walker regs FIXED + the
+expected 5) + base-verified parked set + isolation-cleared pglite flake stand as
+the evidence. IT-4 (claude/illustrated-town @ d7685332, 2 commits): THE DEAD SEAM
+CLOSED — saved AI skins SELECT + WEAR on pane/image-export/PDF/thumbnail in
+lockstep and flip back; wall extended (glyphSet/dress/seasonBias, bounded);
+townGlyphs = a registration manifest (the GENRE DOOR is now a registerGlyphSet
+call); ⚠ react-pdf renderToBuffer NON-deterministic — walk the element tree, never
+compare PDF bytes (recorded hazard); all town-map goldens byte-identical, zero
+eager. REMAINING per the docs: T-3..T-5 · IT-5..IT-6 · the deep-craft chain (C4
+next) — briefs derivable from the frozen designs + these reports.
 **⬛ THE LOADING JOURNEYS COMMISSIONED (owner, 2026-07-18):** generation loading =
 the journey film desk→target-tier, PROGRESS-SCRUBBED off the real pipeline steps
 (manager insight ratified into the spec: scrub beats timing — the film always lands
