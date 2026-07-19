@@ -394,6 +394,20 @@ A+ at this stage, rinse and repeat.")
   no client Stripe calls, instant, offline-proof) + a one-time backfill for
   pre-existing purchases · migration WRITTEN-NOT-DEPLOYED · zero eager (the
   account page is lazy) · paid-surface behavior untouched (read-only surface).
+  ⭐ WAVE E — LAUNCH OPS (PROPOSED 2026-07-19 from the manager's gap sweep;
+  awaiting the owner's go): (A) production error reporting + alerting —
+  privacy-first client error boundary → own edge endpoint → table +
+  owner notification; uptime checks on site + edge functions (the biggest
+  gap: launch is otherwise blind); (B) production email posture — custom SMTP
+  for auth (Supabase default is rate-limited, unfit for production) + a
+  transactional-mail seam for product notifications (#13's low-balance mail
+  depends on it), inert until keys; (C) the SEO surface — sitemap + OpenGraph/
+  social cards + meta for the public pages (compendium/gallery = the organic
+  funnel; the one gap that costs users); (D) commerce compliance — the
+  refund/cancellation policy page linked from checkout (text rides the legal
+  consult) + the STRIPE TAX question added to the consult; (E) ops runbooks —
+  deploy-rollback procedure + user-data backup/PITR verification (documented,
+  tested once). Owner-key/consult items inert as usual.
   ⭐ WAVE C (the B re-audit, 2026-07-19 — the manager's own "stage-blocked"
   label was safety-shaped): the §16 traditions seams are BUILDABLE DARK NOW and
   move into the completion waves — festival-week map dress (groundDressOps
