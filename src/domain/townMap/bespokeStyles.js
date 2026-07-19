@@ -25,11 +25,16 @@
  * surfaces ⇒ zero first-paint bytes.
  */
 
-import { resolveTownMapStyle, TOWN_MAP_STYLE_IDS } from '../../design/townMapStyles.js';
+import { resolveTownMapStyle, TOWN_MAP_LENS_IDS } from '../../design/townMapStyles.js';
 
-const _baseIdSet = new Set(TOWN_MAP_STYLE_IDS);
+// EVERY pickable base lens id (the five re-skins + the illustrated glyph lens), NOT only the
+// golden-pinned five: a bespoke skin may never shadow ANY base lens the picker offers, and
+// resolveActiveStyle must treat every one of them as a permanent base (the flip-back law). Using
+// TOWN_MAP_LENS_IDS (⊇ TOWN_MAP_STYLE_IDS + 'illustrated') closes the one gap where a bespoke id
+// literally named 'illustrated' could otherwise have shadowed the illustrated lens.
+const _baseIdSet = new Set(TOWN_MAP_LENS_IDS);
 
-/** True iff `id` names one of the four permanent base lenses. @param {unknown} id */
+/** True iff `id` names one of the permanent base lenses (never shadowable by a bespoke skin). @param {unknown} id */
 export function isBaseLensId(id) {
   return typeof id === 'string' && _baseIdSet.has(id);
 }

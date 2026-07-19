@@ -24,6 +24,16 @@
 
 import { resolveTownMapStyle, styleDistrictColor, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 import { drawListToSvg, landformDrawOps } from './townMapDraw.js';
+// THE GLYPH FACADE LAYER (THE ILLUSTRATED TOWN, IT5-b) — the medieval glyph library + the
+// facade compiler (design/townGlyphs) and the institution→glyphKind mapping (glyphAssign),
+// reused from the flat draw layer so screen + export never diverge. Reached ONLY via this
+// already-lazy panorama surface, so first paint is unmoved (the townMapLazy pin).
+import { getGlyphSet, compileGlyphFacade, FALLBACK_GLYPH_KIND } from '../../design/townGlyphs/index.js';
+import { glyphKindFor } from './glyphAssign.js';
+// THE GROUND DRESS (THE ILLUSTRATED TOWN, IT-2/IT-3) — the whole-ground-plane texture +
+// season/state portrait. A pure op emitter gated on the illustrated lens's dress fields;
+// [] for every other lens (the dormancy law), so the base-lens panorama stays byte-identical.
+import { groundDressOps } from './groundDress.js';
 
 const VIEW = 1000;
 
@@ -67,11 +77,12 @@ function landformLift(kind) {
   return kind === 'mountain-flank' ? 34 : kind === 'dunes' ? 10 : 0;
 }
 
-/** Re-pose ONE flat landform op (circle / line / open-poly — the only kinds
- * landformDrawOps emits) through the oblique projection at pseudo-elevation `lift`,
- * carrying its ink/weight/opacity across so the panorama landform matches the flat
- * one exactly, only re-posed. @param {DrawOp} op @param {number} lift @returns {DrawOp} */
-function projectLandformOp(op, lift) {
+/** Re-pose ONE flat ground-plane op (circle / line / open-poly — the only kinds the
+ * landform layer AND the ground-dress layer emit) through the oblique projection at
+ * pseudo-elevation `lift`, carrying its ink/fill/weight/opacity across so the re-posed
+ * mark matches the flat one exactly, only re-posed. Landform lifts by its relief; ground
+ * dress lies flat on the ground (lift 0). @param {DrawOp} op @param {number} lift @returns {DrawOp} */
+function projectFlatOp(op, lift) {
   if (op.t === 'circle') {
     const q = project(op.cx, op.cy, lift);
     return { t: 'circle', cx: q.x, cy: q.y, r: op.r, fill: op.fill };
@@ -96,11 +107,19 @@ function projectLandformOp(op, lift) {
  * Build the oblique panorama draw-op list for a model under a style. Same op
  * vocabulary as buildTownMapDrawList, so it renders through drawListToSvg / the PDF
  * plate / the viewer identically. PURE + deterministic.
+ * ILLUSTRATED ENRICHMENT (IT5-b): under a lens carrying a `glyphSet` (only the illustrated
+ * lens / a bespoke skin) each landmark prism wears its GLYPH FACADE — the medieval glyph's
+ * roofline + ink details painted on the prism's front face — and the illustrated GROUND DRESS
+ * is re-posed onto the oblique plane. Every OTHER lens carries no glyphSet + no dress fields ⇒
+ * no facades + no dress ⇒ byte-identical (the dormancy law). The OPTIONAL third `dress` carries
+ * the town's season/state portrait into the ground-dress layer (IT-3 precedent); ABSENT ⇒ the
+ * seasonless base bytes — so this parameter is a pure additive extension.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
  * @param {string | object} [styleArg]
+ * @param {import('./groundDress.js').MapDress | null} [dress]  season/state context; null ⇒ seasonless
  * @returns {DrawOp[]}
  */
-export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID) {
+export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID, dress = null) {
   /** @type {DrawOp[]} */
   const ops = [];
   if (!model || typeof model !== 'object') return ops;
@@ -149,8 +168,17 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID)
   //    ⇒ nothing added (the dormancy law). ──────────────────────────────────────────
   if (frame.landform) {
     const lift = landformLift(frame.landform.kind);
-    for (const o of landformDrawOps(frame.landform, style)) ops.push(projectLandformOp(o, lift));
+    for (const o of landformDrawOps(frame.landform, style)) ops.push(projectFlatOp(o, lift));
   }
+
+  // ── (1c) ground dress (the illustrated lens's whole-ground-plane texture + season/state
+  //    portrait) re-posed FLAT onto the oblique ground plane (lift 0). groundDressOps returns
+  //    [] for every non-illustrated lens (it draws only when the style names the dress fields —
+  //    the dormancy law), so the base-lens panorama is byte-identical. The optional `dress`
+  //    composes the season/state marks (IT-3 precedent: winter snow · autumn stubble · siege
+  //    ring …); absent ⇒ the seasonless base. Drawn here (below the streets / districts /
+  //    buildings) so the massing reads over it, mirroring the flat map's z-order. ──────────
+  for (const o of groundDressOps(model, style, dress)) ops.push(projectFlatOp(o, 0));
 
   // ── (2) roads + streets on the ground plane ───────────────────────────────────
   for (const r of (Array.isArray(frame.roads) ? frame.roads : [])) {
@@ -198,6 +226,11 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID)
   }
 
   // ── (5) buildings — extruded prisms, PAINTER-SORTED far→near (low map-y first) ──
+  // A lens carrying a `glyphSet` (only the illustrated lens / a bespoke skin) paints each
+  // LANDMARK prism's FRONT FACE with its glyph facade (roofline + ink identity marks). Fill
+  // mass keeps a plain prism (the LOD rule — it stays small + numerous). Absent glyphSet ⇒
+  // null ⇒ no facades ⇒ byte-identical (every base lens). Resolved once for the whole map.
+  const glyphLib = style.glyphSet ? getGlyphSet(style.glyphSet) : null;
   const massed = buildings.slice().sort((a, b) => (a.position.y - b.position.y) || (a.anchorKey < b.anchorKey ? -1 : a.anchorKey > b.anchorKey ? 1 : 0));
   for (const bld of massed) {
     const category = categoryById.get(bld.districtId);
@@ -220,6 +253,14 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID)
     ops.push({ t: 'poly', pts: [[baseSE.x, baseSE.y], [baseNE.x, baseNE.y], [topNE.x, topNE.y], [topSE.x, topSE.y]], closed: true, fill: color, fillOpacity: 0.32, stroke: P.ink, strokeOpacity: 0.45, strokeWidth: S.building });
     // roof (top face) — the category tint, so districts read from above
     ops.push({ t: 'poly', pts: [[topSW.x, topSW.y], [topSE.x, topSE.y], [topNE.x, topNE.y], [topNW.x, topNW.y]], closed: true, fill: color, fillOpacity: 0.7, stroke: P.ink, strokeOpacity: 0.5, strokeWidth: S.building });
+    // GLYPH FACADE (IT5-b) — the landmark's identity painted on its (axis-aligned) front-face
+    // rectangle: x0..x1 = baseSW.x..baseSE.x, yGround..yTop = baseSW.y..topSW.y. Fill mass keeps
+    // the plain prism. No added shadow (the prism's own face-shading is the ONE NW light).
+    if (glyphLib && bld.kind !== 'fill') {
+      const { kind, mirror } = glyphKindFor(bld, category);
+      const glyph = glyphLib[kind] || glyphLib[FALLBACK_GLYPH_KIND];
+      for (const op of compileGlyphFacade({ glyph, x0: baseSW.x, x1: baseSE.x, yGround: baseSW.y, yTop: topSW.y, mirror, ink: P.ink, weight: S.building })) ops.push(op);
+    }
   }
 
   // ── (6) hazard / condition markers — floated above their ground position ──────
@@ -242,15 +283,16 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID)
 
 /**
  * Convenience: model → self-contained oblique-panorama SVG string under a style.
- * Same (model, style) ⇒ byte-identical SVG. Reuses the flat map's SVG serializer, so
- * the panorama inherits the self-contained / taint-free / theme-independent contract.
+ * Same (model, style, dress) ⇒ byte-identical SVG. Reuses the flat map's SVG serializer, so
+ * the panorama inherits the self-contained / taint-free / theme-independent contract. The
+ * optional `dress` (IT-3) carries the season/state portrait through; absent ⇒ seasonless base.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
- * @param {{ width?: number, height?: number, background?: string, style?: string|object }} [opts]
+ * @param {{ width?: number, height?: number, background?: string, style?: string|object, dress?: import('./groundDress.js').MapDress | null }} [opts]
  * @returns {string}
  */
 export function buildTownMapPanoramaSvg(model, opts = {}) {
   const style = resolveTownMapStyle(opts.style);
-  return drawListToSvg(buildTownMapPanoramaDrawList(model, style), {
+  return drawListToSvg(buildTownMapPanoramaDrawList(model, style, opts.dress || null), {
     width: opts.width, height: opts.height, background: opts.background, style,
   });
 }

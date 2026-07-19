@@ -1,0 +1,38 @@
+{
+  "hash": "28b1b5381487ff2c8cb1d4a9ac7c9419045d042fc9ccfd88208591818d14a1e3",
+  "configs": 26,
+  "lenses": 6,
+  "totalOps": 13074,
+  "perLens": {
+    "parchment": {
+      "hash": "f49dd840068feffd62a9751fa46276ec058cc3d5cb2f4477cb5931bd8359399b",
+      "ops": 1748,
+      "svgBytes": 238351
+    },
+    "watercolor": {
+      "hash": "f607d40cf766ddbe3174639e2869224cb9e73f1e4645a1d2658a9c989e0e8da4",
+      "ops": 1748,
+      "svgBytes": 239682
+    },
+    "darkFantasy": {
+      "hash": "29b9e86cb70d482b59ad9e1359319f48d1fda9783832af9729e12fa1402fba35",
+      "ops": 1748,
+      "svgBytes": 236395
+    },
+    "vtt": {
+      "hash": "2ca254d0f120ae69400c2ec033f92f948e561de5eb5488de1e7561bf2704bf23",
+      "ops": 1748,
+      "svgBytes": 235952
+    },
+    "accessible": {
+      "hash": "9df1cdfe9234c2ca144a01bdbc44fd77fd4f25c313a728da858eb8fb475001b9",
+      "ops": 1748,
+      "svgBytes": 236322
+    },
+    "illustrated": {
+      "hash": "1a4f5005864606048750cf6d510da26f8eb14331f02d14590e15e5f881e479cb",
+      "ops": 4334,
+      "svgBytes": 528329
+    }
+  }
+}

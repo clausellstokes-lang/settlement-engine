@@ -30,6 +30,10 @@ export {
 // recent calamities), composed from fabricRead + the calamity read model. Pure,
 // lazy (consumed only by the map surfaces + tests).
 export { buildChangeView } from './changeView.js';
+// IT-3 THE SEASON/STATE PORTRAIT — the pure resolver that turns a settlement's live
+// worldState + reads into the bounded MapDress the ground-dress layer consumes. Never
+// stored on the settlement; null ⇒ seasonless base bytes. Lazy (map surfaces + tests only).
+export { resolveMapDress } from './mapDress.js';
 // SM-3 — the cosmetic mapEdits container (pure read + merge ops). Imported ONLY by
 // the lazy viewer pane + tests, so this stays out of the first-paint static closure.
 export {
@@ -43,6 +47,8 @@ export {
   readLayoutLawVersion,
   readAnnotations,
   readBespokeStyles,
+  readSeasonOverride,
+  SEASON_OVERRIDE_IDS,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
@@ -53,6 +59,7 @@ export {
   withAnnotation,
   withoutAnnotationAt,
   withBespokeStyles,
+  withSeasonOverride,
   newSettlementMapEdits,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
@@ -99,11 +106,25 @@ export {
   fogMaskFragment,
   injectFog,
 } from './fogGeometry.js';
+// THE SKIN REGISTRY (THE ILLUSTRATED TOWN, IT-4) — the pure additive-save + flip-back
+// resolver for saved bespoke skins. resolveActiveStyle is the chokepoint every render surface
+// routes through so a saved skin is WORN in lockstep (pane / image export / thumbnail / PDF);
+// a base lens is never shadowed. Lazy (consumed only by the town-map surfaces + AI panel + tests).
+export {
+  isBaseLensId,
+  addBespokeStyle,
+  readBespokeStyle,
+  removeBespokeStyle,
+  listBespokeStyles,
+  resolveActiveStyle,
+} from './bespokeStyles.js';
 // MAP STYLES — the bounded style layer (the four named lenses + the wall). A style
 // is data; the draw projection resolves it, the viewer reads it. Lazy (src/design,
 // consumed only by the town-map surfaces + tests), so first paint is unmoved.
 export {
   TOWN_MAP_STYLE_IDS,
+  TOWN_MAP_LENS_IDS,
+  ILLUSTRATED_STYLE_ID,
   DEFAULT_STYLE_ID,
   FURNITURE_KINDS,
   HAZARD_GLYPHS,

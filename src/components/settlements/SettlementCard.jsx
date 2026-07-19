@@ -183,8 +183,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               peaceful, non-campaign, deity-free card shows only the identity line. */}
           <div style={{ marginTop:SP.sm, display:'flex', flexDirection:'column', gap:SP.xs }}>
             {/* SM-4 — the lazy, cached town-map thumbnail. Self-collapses to nothing
-                for a map-less settlement / a canvas-less env. */}
-            {s.settlement && <SettlementCardMapThumb settlement={s.settlement} />}
+                for a map-less settlement / a canvas-less env. IT-3: worldState threads
+                the owning campaign's season/state dress (null ⇒ seasonless base bytes). */}
+            {s.settlement && <SettlementCardMapThumb settlement={s.settlement} worldState={worldState} />}
             {/* Living-world signal row (self-gating — nothing for a peaceful card). */}
             <LivingWorldSignalRow model={signals} />
             {!active && (

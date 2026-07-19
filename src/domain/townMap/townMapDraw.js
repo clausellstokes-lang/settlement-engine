@@ -45,6 +45,16 @@
 // in the sanctioned token zone (raw-color budget), not inline in this domain file.
 import { EXPORT_PALETTE } from '../../design/townMapExportPalette.js';
 import { resolveTownMapStyle, styleDistrictColor, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+// THE GLYPH LAYER (THE ILLUSTRATED TOWN, IT-1) — the medieval glyph library + compiler
+// (design/townGlyphs) and the institution→glyphKind mapping (glyphAssign). Reached ONLY
+// via this already-lazy draw surface, so first paint is unmoved (the townMapLazy pin).
+import { getGlyphSet, compileGlyph, FALLBACK_GLYPH_KIND } from '../../design/townGlyphs/index.js';
+import { glyphKindFor } from './glyphAssign.js';
+// THE GROUND DRESS (THE ILLUSTRATED TOWN, IT-2) — the whole-ground-plane texture (farm
+// furrows · woods stipple · water ripples · meadow · hedges · wall shadows + relief). A
+// pure op emitter gated on the illustrated lens's dress fields; [] for every other lens
+// (the dormancy law), so the re-skin goldens never move. Same lazy surface, no eager cost.
+import { groundDressOps } from './groundDress.js';
 
 export { EXPORT_PALETTE };
 
@@ -194,11 +204,16 @@ function pushScaleBar(ops, style) {
  * thumbnail draws no labels. Z-order mirrors the viewer (grid → water → roads →
  * streets → anchor → districts → fortifications → building landmarks → condition
  * badges → hazards → overlay furniture).
+ * SEASON + STATE (THE ILLUSTRATED TOWN, IT-3): the OPTIONAL third `dress` argument carries
+ * the town's current portrait (season / severity / live state) into the ground-dress layer.
+ * ABSENT (the 2-arg call every golden + export uses today) ⇒ the seasonless base bytes — so
+ * this parameter is a pure additive extension and existing outputs stay byte-identical.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
  * @param {string | object} [styleArg]  a style id ('parchment'…'vtt') or a resolved style
+ * @param {import('./groundDress.js').MapDress | null} [dress]  season/state context; null ⇒ seasonless
  * @returns {DrawOp[]}
  */
-export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
+export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID, dress = null) {
   /** @type {DrawOp[]} */
   const ops = [];
   if (!model || typeof model !== 'object') return ops;
@@ -238,6 +253,13 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
   //    ⇒ no ops ⇒ byte-identical (the dormancy law). ─────────────────────────────
   if (frame.landform) for (const o of landformDrawOps(frame.landform, style)) ops.push(o);
 
+  // ── (1c) ground dress (the illustrated lens's whole-ground-plane texture) — farm
+  //    furrows / woods stipple / water ripples / meadow / hedges / wall shadows + relief,
+  //    drawn HERE (below the streets / districts / buildings) adjacent to the landform.
+  //    Gated on the dress style fields ⇒ [] on every re-skin + the accessible lens ⇒
+  //    byte-identical (the dormancy law), exactly like the landform block above. ──────
+  for (const o of groundDressOps(model, style, dress)) ops.push(o);
+
   // ── (2) approach roads ────────────────────────────────────────────────────────
   for (const r of (Array.isArray(frame.roads) ? frame.roads : [])) {
     ops.push({ t: 'line', x1: r.from[0], y1: r.from[1], x2: r.to[0], y2: r.to[1], stroke: P.road, strokeOpacity: O.roadStroke, strokeWidth: S.roadBase + (r.weight || 0) });
@@ -274,13 +296,29 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
     }
   }
 
-  // ── (6) building landmarks (fill buildings are the accent above) ──────────────
+  // ── (6) buildings — legacy landmark rects, OR (illustrated lens) oblique glyphs ─
+  // A lens carrying a `glyphSet` (only the illustrated lens does) switches this z-slot
+  // to the GLYPH LAYER: each landmark gets a full oblique-elevation glyph and each fill-
+  // mass building a simplified massing row (the LOD rule). Glyphs COMPILE DOWN to the
+  // primitive op vocabulary, so the SVG/PDF/thumbnail/raster surfaces render them free.
+  // Absent glyphSet ⇒ the legacy rect branch below, byte-identical (parchment===legacy).
   const districtCategoryById = new Map(districts.map((d) => [d.id, d.category]));
-  for (const b of buildings) {
-    if (b.kind !== 'landmark') continue;
-    const color = styleDistrictColor(districtCategoryById.get(b.districtId), style);
-    const s = 8;
-    ops.push({ t: 'rect', x: b.position.x - s, y: b.position.y - s, w: s * 2, h: s * 2, rx: 3, fill: P.buildingFill, stroke: color, strokeWidth: S.building });
+  const glyphLib = style.glyphSet ? getGlyphSet(style.glyphSet) : null;
+  if (glyphLib) {
+    for (const b of buildings) {
+      const cat = districtCategoryById.get(b.districtId);
+      const tint = styleDistrictColor(cat, style);
+      const { kind, mirror } = glyphKindFor(b, cat);
+      const glyph = glyphLib[kind] || glyphLib[FALLBACK_GLYPH_KIND];
+      for (const op of compileGlyph({ glyph, cx: b.position.x, cy: b.position.y, mirror, style, tint })) ops.push(op);
+    }
+  } else {
+    for (const b of buildings) {
+      if (b.kind !== 'landmark') continue;
+      const color = styleDistrictColor(districtCategoryById.get(b.districtId), style);
+      const s = 8;
+      ops.push({ t: 'rect', x: b.position.x - s, y: b.position.y - s, w: s * 2, h: s * 2, rx: 3, fill: P.buildingFill, stroke: color, strokeWidth: S.building });
+    }
   }
 
   // ── (7) condition badges (district-level, the living layer) ───────────────────
@@ -422,14 +460,15 @@ export function drawListToSvg(ops, opts = {}) {
 
 /**
  * Convenience: model → self-contained SVG string (drawList + drawListToSvg) under a
- * style. Same (model, style) ⇒ byte-identical SVG.
+ * style. Same (model, style, dress) ⇒ byte-identical SVG. The optional `dress` (IT-3) carries
+ * the season/state portrait through to the ground-dress layer; absent ⇒ seasonless base bytes.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
- * @param {{ width?: number, height?: number, background?: string, style?: string|object }} [opts]
+ * @param {{ width?: number, height?: number, background?: string, style?: string|object, dress?: import('./groundDress.js').MapDress | null }} [opts]
  * @returns {string}
  */
 export function buildTownMapSvg(model, opts = {}) {
   const style = resolveTownMapStyle(opts.style);
-  return drawListToSvg(buildTownMapDrawList(model, style), { width: opts.width, height: opts.height, background: opts.background, style });
+  return drawListToSvg(buildTownMapDrawList(model, style, opts.dress || null), { width: opts.width, height: opts.height, background: opts.background, style });
 }
 
 /**

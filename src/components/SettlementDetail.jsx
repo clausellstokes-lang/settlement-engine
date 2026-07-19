@@ -201,6 +201,9 @@ export default function SettlementDetail({
   // this, the OutputContainer's narrative chrome would show "Generate"
   // for a save that already has a narrative on disk.
   const saveId = detail?.saveData?.id || null;
+  // IT-3 THE SEASON PORTRAIT selectors (mapWorldState / mapRegionalGraph) live in
+  // SettlementDossierHero — the composite fold moved them beside the relocated map
+  // pane render (deep-craft's size-ratchet extraction), same resolveExportSeam seam.
   const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
   const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
   const clearAiSettlement = useStore(s => s.clearAiSettlement);
@@ -760,7 +763,7 @@ export default function SettlementDetail({
           dossier hero (RESTORED @ S2r-a). Read mode = master's two-column hero
           (toggle-fed body + sticky rail aside); edit mode = single full-width
           column below the edit chrome. The rail wiring + shared canonize confirm
-          live inside. */}
+          live inside — as do the IT-3 season-portrait selectors the map pane reads. */}
       <SettlementDossierHero
         detail={detail}
         detailView={detailView}

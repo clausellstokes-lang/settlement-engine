@@ -21,6 +21,7 @@ import {
   MAP_EDITS_SCHEMA_KEYS, readMapEdits, readLegendPrefs, readLayoutVariant, readStyleLens,
   normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
   readAnnotations, withAnnotation, withoutAnnotationAt, readBespokeStyles, withBespokeStyles,
+  readSeasonOverride, withSeasonOverride, SEASON_OVERRIDE_IDS,
 } from '../../src/domain/townMap/mapEdits.js';
 import { addBespokeStyle, removeBespokeStyle, resolveActiveStyle } from '../../src/domain/townMap/bespokeStyles.js';
 import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
@@ -45,7 +46,7 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
     // its value is an opaque wall-validated collection, so its dynamic ids + role fields are
     // not a fixed vocabulary and cannot join the list). Every listed key ∉ PRIVATE_KEY_RE above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'annotations', 'audience', 'bespokeStyles', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
+      ['anchor', 'annotations', 'audience', 'bespokeStyles', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'seasonOverride', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
     );
   });
 });
@@ -295,5 +296,39 @@ describe('mapEdits — lifecycle (blob-resident survival)', () => {
     const snap = snapshotSettlement(s);
     expect(snap.mapEdits).toEqual(edits);      // the container rides the snapshot
     expect(snap.versionHistory).toBeUndefined(); // …while the timeline is still stripped
+  });
+});
+
+describe('mapEdits — seasonOverride (IT3-c, the styleLens shape)', () => {
+  it('the key is denylist-safe (∉ PRIVATE_KEY_RE) — pinned by the schema list, re-checked here', () => {
+    expect(PRIVATE_KEY_RE.test('seasonOverride')).toBe(false);
+    expect(MAP_EDITS_SCHEMA_KEYS).toContain('seasonOverride');
+  });
+
+  it('readSeasonOverride: absent / invalid ⇒ null; a valid bounded season ⇒ that season', () => {
+    expect(readSeasonOverride(null)).toBeNull();
+    expect(readSeasonOverride({})).toBeNull();
+    expect(readSeasonOverride({ seasonOverride: 'nonsense' })).toBeNull();
+    expect(readSeasonOverride({ seasonOverride: 'WINTER' })).toBeNull();  // case-exact vocab
+    for (const s of SEASON_OVERRIDE_IDS) expect(readSeasonOverride({ seasonOverride: s })).toBe(s);
+  });
+
+  it('DORMANCY: an unset / invalid override is DROPPED ⇒ byte-identical to no-edit', () => {
+    expect(normalizeMapEdits({ seasonOverride: null })).toBeNull();
+    expect(normalizeMapEdits({ seasonOverride: 'nonsense' })).toBeNull();
+    // set then clear returns the blob to no-edit (the flip-back / dormancy law)
+    const pinned = withSeasonOverride(null, 'winter');
+    expect(pinned).toEqual({ seasonOverride: 'winter' });
+    expect(withSeasonOverride(pinned, null)).toBeNull();
+    expect(withSeasonOverride(pinned, 'auto')).toBeNull();  // any non-vocab value clears
+  });
+
+  it('withSeasonOverride preserves every OTHER edit (merges, non-destructive)', () => {
+    const base = withStyleLens(null, 'illustrated');
+    const pinned = withSeasonOverride(base, 'autumn');
+    expect(pinned.styleLens).toBe('illustrated');
+    expect(pinned.seasonOverride).toBe('autumn');
+    // clearing the season keeps the lens
+    expect(withSeasonOverride(pinned, null)).toEqual({ styleLens: 'illustrated' });
   });
 });

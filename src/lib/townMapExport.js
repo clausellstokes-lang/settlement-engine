@@ -46,8 +46,8 @@
  */
 
 import {
-  buildTownMapModel, readMapEdits, readStyleLens, buildTownMapSvg,
-  hasDrawableMap, coerceStyleId, viewerPalette,
+  buildTownMapModel, readMapEdits, readStyleLens, readBespokeStyles, buildTownMapSvg,
+  hasDrawableMap, coerceStyleId, resolveActiveStyle, viewerPalette,
   buildTownMapDrawList, drawListToSvg, annotationDrawOps, readAnnotations,
 } from '../domain/townMap/index.js';
 import { fogMaskFragment, injectFog } from '../domain/townMap/fogGeometry.js';
@@ -88,15 +88,19 @@ function exportModel(settlement) {
 }
 
 /**
- * The lens to draw under: an explicit override (the pane's active lens) wins,
- * else the settlement's persisted styleLens. Always a valid style id.
+ * The lens ID to draw under: an explicit override (the pane's active lens) wins, else the
+ * settlement's persisted styleLens. Always a valid style id — a base lens OR a saved bespoke skin
+ * id present in THIS settlement's collection (THE SKIN REGISTRY, IT-4). A base lens is never
+ * shadowed; an unknown override coerces to the default. The FILENAME reads this id, so a worn skin
+ * names the file honestly.
  * @param {any} settlement
  * @param {string | null | undefined} styleOverride
  * @returns {string}
  */
 export function exportLens(settlement, styleOverride) {
-  if (styleOverride != null) return coerceStyleId(styleOverride);
-  return readStyleLens(readMapEdits(settlement));
+  const edits = readMapEdits(settlement);
+  if (styleOverride != null) return coerceStyleId(styleOverride, Object.keys(readBespokeStyles(edits)));
+  return readStyleLens(edits);
 }
 
 /**
@@ -116,8 +120,12 @@ export function exportLens(settlement, styleOverride) {
  * fogMaskFragment/injectFog) — the base draw list + annotation append are never touched, so
  * the UNFOGGED export (`fogReveal` absent) returns BYTE-IDENTICAL to pre-fog (the WYSIWYG
  * law extends to the mask; the unfogged handout stays pinned). Fog color tracks the lens ink.
+ * SEASON (IT-3): pass `opts.dress` (the pane's resolved season/state portrait) so the exported
+ * file matches the on-screen season (WYSIWYG). Absent ⇒ seasonless base bytes (byte-identical to
+ * pre-IT-3 — the dormancy law extends to every export surface).
  * @param {any} settlement
  * @param {{ style?: string, resolution?: number, audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number }} [opts]
  * @returns {string | null}
@@ -125,12 +133,17 @@ export function exportLens(settlement, styleOverride) {
 export function townMapExportSvg(settlement, opts = {}) {
   const model = exportModel(settlement);
   if (!model) return null;
-  const style = exportLens(settlement, opts.style);
+  // THE SKIN REGISTRY (IT-4): resolve the ACTIVE style OBJECT through the saved bespoke collection
+  // and DRAW with it, so a worn skin exports in lockstep with the pane (WYSIWYG). A base lens id and
+  // a stale/absent bespoke id both resolve parchment-safe; every draw surface below reads ONE style.
+  const styleId = exportLens(settlement, opts.style);
+  const style = resolveActiveStyle(styleId, readBespokeStyles(readMapEdits(settlement)));
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
+  const dress = opts.dress || null;
   const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);
   const base = markers.length === 0
-    ? buildTownMapSvg(model, { style, width: size, height: size })
-    : drawListToSvg(buildTownMapDrawList(model, style).concat(markers), { style, width: size, height: size });
+    ? buildTownMapSvg(model, { style, width: size, height: size, dress })
+    : drawListToSvg(buildTownMapDrawList(model, style, dress).concat(markers), { style, width: size, height: size });
   // FOG HANDOUT (DOOR 2): overlay the mask ONLY when a reveal set is supplied; absent ⇒ the
   // base is returned UNCHANGED (byte-identical to pre-fog — the unfogged-export pin).
   if (!opts.fogReveal) return base;
@@ -194,6 +207,7 @@ function browserRasterizeBlob(svg, size, mime, quality) {
  * it deterministically); the default is the real canvas rasterizer.
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number,
  *   rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]
@@ -203,7 +217,7 @@ export async function renderTownMapExport(settlement, opts = {}) {
   const format = FORMATS[opts.format] ? opts.format : 'png';
   const fmt = FORMATS[format];
   const svg = townMapExportSvg(settlement, {
-    style: opts.style, resolution: opts.resolution, audience: opts.audience,
+    style: opts.style, resolution: opts.resolution, audience: opts.audience, dress: opts.dress,
     fogReveal: opts.fogReveal, fogOpacity: opts.fogOpacity,
   });
   if (svg == null) return null;
@@ -300,6 +314,7 @@ export function downloadBlob(blob, filename) {
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, filename?: string,
  *   audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number,
  *   date?: Date, rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]

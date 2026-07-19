@@ -26,6 +26,7 @@ import FeatureErrorBoundary from '../FeatureErrorBoundary.jsx';
 import NextActionRail from '../settlement/NextActionRail.jsx';
 import { useNextActionRailHandlers } from './useNextActionRailHandlers.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { resolveExportSeam } from './resolveExportSeam.js';
 import { useStore } from '../../store/index.js';
 import { MUTED, PAGE_MAX, CHROME } from '../theme';
 
@@ -46,6 +47,16 @@ export default function SettlementDossierHero({
   // NextActionRail inputs — reuse existing selectors; no new store fields.
   const canonize = useStore(s => s.canonize);
   const isSettlementClockBound = useStore(s => s.isSettlementClockBound);
+  // IT-3 THE SEASON PORTRAIT: the owning campaign's live worldState (the same seam the PDF/
+  // Foundry export uses), threaded into the map pane so the illustrated map paints the current
+  // season. A stable store reference (resolveExportSeam reads owning.worldState) ⇒ no extra
+  // re-render; null for an unfoldered save ⇒ seasonless base bytes (the dormancy law). The
+  // selectors moved here at the composite fold — deep-craft extracted the map pane render
+  // into this hero, so the seam reads live beside their consumer.
+  const mapWorldState = useStore(s => (saveId != null ? resolveExportSeam(s, saveId).campaign?.worldState || null : null));
+  // The owning campaign's regionalGraph — feeds the illustrated map's siege-works STATE read
+  // (IT3-b). A stable store reference; null for an unfoldered save ⇒ no siege marks (dormant).
+  const mapRegionalGraph = useStore(s => (saveId != null ? resolveExportSeam(s, saveId).campaign?.regionalGraph || null : null));
   // `simulated` = this settlement's realm is clock-bound (already in the Realm),
   // driving the rail's gold "Send it to the Realm" vs "Open the Realm" rung.
   const simulated = !!(saveId && typeof isSettlementClockBound === 'function' && isSettlementClockBound(saveId));
@@ -81,7 +92,7 @@ export default function SettlementDossierHero({
       <DetailErrorBoundary>
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
           {detailView === 'map'
-            ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} />
+            ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} />
             : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} suppressNarrativeCta={!editMode} onRenameSettlement={onRenameSettlement} />}
         </Suspense>
       </DetailErrorBoundary>

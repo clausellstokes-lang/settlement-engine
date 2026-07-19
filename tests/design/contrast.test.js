@@ -39,6 +39,16 @@ import { LAMP_ACCENTS } from '../../src/design/organic/lampTones.js';
 // translucent rgba over varying surfaces, so the gold tone is checked against its
 // opaque soft-gold reference (GOLD_SOFT), the worst-case lightest backing.
 import { BAND_COLOR } from '../../src/domain/state/bands.js';
+// THE ILLUSTRATED TOWN (IT-2) — the GROUND DRESS marks (groundDress.js) drawn under the
+// illustrated lens. The marks are non-text GRAPHICS (WCAG 1.4.11 → 3:1) whose legibility
+// is carried by the ink colour at full strength (opacity is a texture-density choice, the
+// engraver's idiom — exactly like the organic hairline / landform stipple). The accessible
+// lens deliberately names NO dress field, so it never renders them — its byte-identity +
+// colourblind-safe contract is untouched. Imported directly (the lazy town-map surface).
+import { resolveTownMapStyle, ILLUSTRATED_STYLE_ID, TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
+import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
+import { buildTownMapModel } from '../../src/domain/townMap/index.js';
+import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
 // ── WCAG relative-luminance contrast ─────────────────────────────────────────
 function channel(c) {
@@ -379,5 +389,68 @@ describe('THE LIVING BACKDROP wash — dossier text legibility over the map ink 
   });
   test('MUTED is chrome-only — it fails as body over the wash (documents the split)', () => {
     expect(ratio(MUTED, washFloor)).toBeLessThan(AA_TEXT);
+  });
+});
+
+// ── THE ILLUSTRATED TOWN — GROUND DRESS legibility + colour-vision safety (IT-2) ─────
+// The dress marks (farm furrows / woods stipple / water ripples / meadow / hedges / wall
+// shadows / relief) are decorative GRAPHICS, so they owe the 3:1 non-text floor (1.4.11)
+// at the mark's ink strength on the illustrated ground — comfortably cleared, with text-AA
+// headroom (the low dress OPACITY is a deliberate texture-density choice, not a contrast
+// failure, exactly like the organic hairline / landform stipple). And the marks carry ONLY
+// the ink — never a district or water hue — so colour is NEVER the sole channel (pattern is
+// the discriminator, colourblind-safe by construction). The accessible lens names no dress
+// field, so it renders NONE of this and its palette contract is untouched.
+describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on the ground)', () => {
+  const il = resolveTownMapStyle(ILLUSTRATED_STYLE_ID);
+  test('dress ink clears the graphics floor on the illustrated ground (with AA headroom)', () => {
+    expect(ratio(il.palette.ink, il.background)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(il.palette.ink, il.background)).toBeGreaterThanOrEqual(AA_TEXT); // 14.4:1 — ample
+  });
+
+  test('every dress mark carries only the ink — colour is never the sole channel', () => {
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-contrast' }));
+    const ops = groundDressOps(model, ILLUSTRATED_STYLE_ID);
+    expect(ops.length).toBeGreaterThan(0);
+    for (const o of ops) {
+      if (o.stroke != null) expect(o.stroke).toBe(il.palette.ink);
+      if (o.fill != null) expect(o.fill).toBe(il.palette.ink);
+    }
+  });
+
+  test('the accessible lens names NO dress field ⇒ renders zero dress (byte-identical, a11y-safe)', () => {
+    const acc = resolveTownMapStyle('accessible');
+    expect(acc.opacity.dress).toBeUndefined();
+    expect(acc.stroke.dress).toBeUndefined();
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-acc' }));
+    expect(groundDressOps(model, 'accessible')).toEqual([]);
+    // and no re-skin lens names it either (only the illustrated lens dresses the ground)
+    for (const id of TOWN_MAP_STYLE_IDS) expect(resolveTownMapStyle(id).opacity.dress).toBeUndefined();
+  });
+
+  // IT-3 — the SEASON + STATE marks (snow fleck / bare tree / harvest stubble / parched crack /
+  // siege ring / scar grain / rebirth scaffold) are the SAME engraver's register: all-ink, so the
+  // discriminator is PATTERN, never colour (colourblind-safe by construction), and each clears the
+  // 3:1 graphics floor at the ink strength. The accessible lens stays dress-free EVEN WITH a full
+  // season+state context (byte-identical, a11y-safe) — the dormancy law holds at the dress fields.
+  test('every SEASON + STATE mark carries only the ink (pattern, not colour, is the channel)', () => {
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-season' }));
+    const cats = [...new Set((model.districts || []).map((d) => d.category))];
+    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
+    for (const dress of [{ season: 'winter' }, { season: 'autumn' }, { season: 'summer', severity: 'drought' }, full]) {
+      const ops = groundDressOps(model, ILLUSTRATED_STYLE_ID, dress);
+      expect(ops.length).toBeGreaterThan(0);
+      for (const o of ops) {
+        if (o.stroke != null) expect(o.stroke).toBe(il.palette.ink);
+        if (o.fill != null) expect(o.fill).toBe(il.palette.ink);
+      }
+    }
+  });
+
+  test('the accessible lens renders ZERO dress even WITH a full season+state context', () => {
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-acc2' }));
+    const cats = [...new Set((model.districts || []).map((d) => d.category))];
+    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
+    expect(groundDressOps(model, 'accessible', full)).toEqual([]);
   });
 });

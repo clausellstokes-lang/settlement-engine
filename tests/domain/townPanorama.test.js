@@ -72,6 +72,37 @@ describe('panorama — WYSIWYG (honors cosmetic mapEdits)', () => {
   });
 });
 
+describe('panorama — illustrated facades + dress (IT5-b)', () => {
+  const v2 = buildTownMapModel(s, V2);
+
+  it('the illustrated lens paints glyph facades — MORE ops than the plain re-skin projection', () => {
+    // Facades add roofline + ink identity marks on the landmark prisms; the base lenses draw
+    // the plain prisms only. So illustrated > parchment by the facade + ground-dress marks.
+    expect(buildTownMapPanoramaDrawList(v2, 'illustrated').length)
+      .toBeGreaterThan(buildTownMapPanoramaDrawList(v2, 'parchment').length);
+  });
+
+  it('a base re-skin lens is BYTE-IDENTICAL with or without a dress (the dormancy law)', () => {
+    // Only the illustrated lens names the dress fields; a base lens ignores dress entirely,
+    // so passing a winter portrait must not perturb a single byte (the base golden holds).
+    expect(stable(buildTownMapPanoramaDrawList(v2, 'parchment', { season: 'winter' })))
+      .toBe(stable(buildTownMapPanoramaDrawList(v2, 'parchment')));
+  });
+
+  it('the dress third param COMPOSES on the illustrated panorama (season repaints the ground)', () => {
+    const base = stable(buildTownMapPanoramaDrawList(v2, 'illustrated'));
+    expect(stable(buildTownMapPanoramaDrawList(v2, 'illustrated', { season: 'winter' }))).not.toBe(base);
+    expect(stable(buildTownMapPanoramaDrawList(v2, 'illustrated', { season: 'autumn' }))).not.toBe(base);
+  });
+
+  it('facades compile to ONLY the five primitive op kinds (react-pdf / raster render free)', () => {
+    const KNOWN = new Set(['poly', 'line', 'circle', 'rect', 'path']);
+    for (const o of buildTownMapPanoramaDrawList(v2, 'illustrated', { season: 'winter', severity: 'hard_winter' })) {
+      expect(KNOWN.has(o.t)).toBe(true);
+    }
+  });
+});
+
 describe('panorama — self-contained SVG contract', () => {
   it('emits a well-formed, external-ref-free SVG under a chosen lens', () => {
     const svg = buildTownMapPanoramaSvg(buildTownMapModel(s, V2), { style: 'watercolor' });

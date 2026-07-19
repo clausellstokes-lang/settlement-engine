@@ -39,7 +39,7 @@ function markElement(op, i, ink) {
  * The non-water landform texture layer (fills its 0..1000 map-space parent group).
  * Static — pointer events off — so the interactive layers above stay reachable.
  * @param {{ landform: import('../../domain/townMap/siteGenesis.js').TownLandform|null|undefined,
- *   lens: string, ink: string }} props
+ *   lens: string|object, ink: string }} props
  */
 export default function SettlementMapLandform({ landform, lens, ink }) {
   if (!landform) return null;

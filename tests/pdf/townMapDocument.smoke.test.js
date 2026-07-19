@@ -52,4 +52,40 @@ describe('TownMapDocument — single-map PDF export', () => {
     expect(el).toBeTruthy();
     expect(el.key).toBe('op-0');
   });
+
+  // THE SKIN REGISTRY (IT-4) — the standalone PDF is the fourth WORN surface (done-when #4). A
+  // settlement carrying a saved bespoke skin (blob-resident, selected) resolves through
+  // resolveActiveStyle, so the plate's draw ops + plate background wear the skin. The proof reads
+  // the DETERMINISTIC element tree TownMapDocument builds (react-pdf's renderToBuffer embeds a
+  // non-reproducible timestamp, so full-buffer comparison would be unsound); a still-valid PDF is
+  // pinned by the smoke render above.
+  test('a persisted bespoke skin is WORN on the standalone PDF plate (element tree; flips back)', async () => {
+    const s = makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'pdf-skin' });
+    const { validateBespokeStyle } = await import('../../src/design/townMapStyleWall.js');
+    const { addBespokeStyle } = await import('../../src/domain/townMap/bespokeStyles.js');
+    const SKIN_WATER = '#00e5ff'; // a hue that appears in NO base lens ⇒ a legible worn-marker
+    const { style } = validateBespokeStyle({ label: 'Skin', background: '#0a0a12', palette: { water: SKIN_WATER } }, { id: 'neon-noir', label: 'Skin' });
+    const worn = { ...s, mapEdits: { styleLens: 'neon-noir', bespokeStyles: addBespokeStyle({}, 'neon-noir', style) } };
+
+    // Collect every fill/stroke/backgroundColor string in the built element tree (no react-pdf
+    // renderer needed — TownMapDocument inlines the resolved ops + plate background synchronously).
+    const colors = (settlement, styleProp) => {
+      const out = new Set();
+      const walk = (node) => {
+        if (Array.isArray(node)) { node.forEach(walk); return; }
+        if (!node || typeof node !== 'object') return;
+        const p = node.props || {};
+        for (const v of [p.fill, p.stroke, p.backgroundColor, p.style?.backgroundColor]) if (typeof v === 'string') out.add(v);
+        if (p.children != null) walk(p.children);
+      };
+      walk(TownMapDocument({ settlement, style: styleProp }));
+      return out;
+    };
+
+    expect(colors(worn).has(SKIN_WATER)).toBe(true);                 // the skin is WORN (persisted lens)
+    expect(colors(worn, 'parchment').has(SKIN_WATER)).toBe(false);   // an explicit base override collapses off it
+    // flip the SELECTION back to parchment (collection preserved) ⇒ the skin color is gone; parchment worn.
+    const flipped = { ...worn, mapEdits: { ...worn.mapEdits, styleLens: 'parchment' } };
+    expect(colors(flipped).has(SKIN_WATER)).toBe(false);
+  });
 });
