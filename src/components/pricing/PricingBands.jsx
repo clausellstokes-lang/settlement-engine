@@ -137,9 +137,9 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, l
             : tp('band2.charter.seatsFallback', { seats })}
         </p>
         {typeof founderSeatsRemaining === 'number' && (
-          <div aria-hidden="true" style={{ height: 4, borderRadius: R.sm, overflow: 'hidden', background: BORDER }}>
+          <div aria-hidden="true" style={{ height: 4, overflow: 'hidden', background: BORDER }}>
             <div style={{
-              height: '100%', borderRadius: R.sm, background: GOLD,
+              height: '100%', background: GOLD,
               width: `${Math.min(100, Math.max(0, ((seats - founderSeatsRemaining) / seats) * 100))}%`,
             }} />
           </div>
