@@ -1,5 +1,5 @@
 /**
- * JourneyFilm.jsx — THE LOADING JOURNEY film layer (Slice C2L).
+ * JourneyFilm.jsx — THE JOURNEY film layer (Slice C2L + C2).
  *
  * A progress-scrubbed backdrop that renders the growth film as three stacked
  * layers, exactly the microsite architecture translated to React:
@@ -7,20 +7,24 @@
  *       renders from stills alone with the film entirely absent (engineering
  *       law #1); the film is a progressive enhancement, never a dependency.
  *   z1  THE FILM — the current travel leg's <video>, kept PAUSED and scrubbed
- *       (currentTime = legT * duration) by the conductor's progress. It fades in
- *       only when the bytes are ready (videoReady) and fades at each leg's mouth
- *       and end so the still shows through at the stops. Desktop fine-pointer +
+ *       (currentTime = legT * duration) by the driver's frame. It fades in only
+ *       when the bytes are ready (videoReady) and fades at each leg's mouth and
+ *       end so the still shows through at the stops. Desktop fine-pointer +
  *       motion-allowed only (law #4); touch / reduced-motion get the stills floor.
  *   z2  THE SCRIM — a solid ink layer dimmed with `opacity` (never rgba — the
  *       deep-craft kill-list forbids translucent washes) so overlaid UI stays
  *       legible: the film is the theater's BACKDROP, not the content.
  *
+ * TWO DRIVERS, ONE PRESENTATION (the C2 "extend, don't fork" law): the pure
+ * `JourneyFilmView` renders a driver-supplied frame ({currentLeg, legT,
+ * floorStill}); the default `JourneyFilm` wrapper is the CLOCK/PROGRESS driver
+ * (useJourneyConductor — generation + realm loading), and the scroll-driven
+ * Welcome backdrop (home/WelcomeJourneyBackdrop) renders the SAME view from a
+ * scroll-derived frame. The projection math both share is projectLegFrame.
+ *
  * Per-leg CHAPTER-SPLIT media (law #3): the current leg mounts as its own file;
  * leg N+1 is prefetched (a hidden warm-the-cache <video>) while leg N plays.
  * Media is referenced by URL string, never imported into JS (law #6).
- *
- * The conductor (useJourneyConductor) owns the theater/reality mode machine and
- * the arrival gate; this component is the presentation of its per-frame output.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -32,21 +36,22 @@ import { useJourneyConductor } from './useJourneyConductor.js';
 // film fades to the stop still. Matches the microsite conductor's 0.08 edge.
 const EDGE = 0.08;
 
-export default function JourneyFilm({
+/**
+ * JourneyFilmView — THE PURE PRESENTATION. Renders one driver frame; owns no
+ * timeline. `frame` is { currentLeg, legT, floorStill }; `filmEnabled` is the
+ * taste-gate (the clock wrapper leaves it true — PipelineReveal gates upstream;
+ * the Welcome backdrop passes flag('welcomeJourneyFilm') so film-off ships zero
+ * network weight while the stills floor still renders). Desktop fine-pointer +
+ * motion-allowed AND filmEnabled must all hold before one video byte is fetched.
+ */
+export function JourneyFilmView({
+  frame,
   set = 'bg',
   legsToPlay = 6,
-  arrived = false,
-  scriptWindowMs = 6000,
-  startedAtMs = null,
-  holdBoundary,
-  onFinished,
-  active = true,
-  // Dim the film so overlaid UI stays legible. Solid token + opacity (no rgba).
   scrimOpacity = 0.5,
+  filmEnabled = true,
 }) {
-  const { currentLeg, legT, floorStill } = useJourneyConductor({
-    active, legsToPlay, arrived, scriptWindowMs, startedAtMs, holdBoundary, onFinished,
-  });
+  const { currentLeg = 0, legT = 0, floorStill = 0 } = frame || {};
 
   // ── Law #4: desktop fine-pointer + motion-allowed gate ──────────────────────
   // Default false (SSR, touch, reduced-motion) → the stills floor alone renders,
@@ -66,6 +71,9 @@ export default function JourneyFilm({
     };
   }, []);
 
+  // The film mounts only when the taste-gate is on AND the device qualifies.
+  const showVideo = filmEnabled && filmLive;
+
   const currentLegN = currentLeg + 1;                                   // 1-based video number
   const nextLegN = currentLegN + 1 <= legsToPlay ? currentLegN + 1 : null;
 
@@ -81,13 +89,14 @@ export default function JourneyFilm({
     const d = v.duration;
     if (!d || Number.isNaN(d)) return;
     const t = Math.min(d - 0.05, Math.max(0, legT * d));
-    if (Math.abs((v.currentTime || 0) - t) > 0.01) {
+    // Redundant-seek guard (the microsite idiom): skip sub-0.008s deltas.
+    if (Math.abs((v.currentTime || 0) - t) > 0.008) {
       try { v.currentTime = t; } catch { /* seek on an unbuffered range — the still is the floor */ }
     }
   }, [legT, videoReady]);
 
   const floorUrl = stopStillUrl(set, floorStill);
-  const videoOpacity = filmLive && videoReady
+  const videoOpacity = showVideo && videoReady
     ? Math.max(0, Math.min(1, Math.min(legT / EDGE, (1 - legT) / EDGE, 1)))
     : 0;
 
@@ -109,7 +118,7 @@ export default function JourneyFilm({
 
       {/* z1 — THE FILM: current leg, scrubbed. Fades in only when bytes are ready,
               and fades at the leg's mouth/end so the still is the stop frame. */}
-      {filmLive && (
+      {showVideo && (
         <video
           key={`leg-${set}-${currentLegN}`}
           ref={videoRef}
@@ -127,7 +136,7 @@ export default function JourneyFilm({
 
       {/* Law #3 — prefetch leg N+1 while leg N plays (a hidden warm-the-cache
           element; 1px so it never paints). */}
-      {filmLive && nextLegN && (
+      {showVideo && nextLegN && (
         <video
           key={`prefetch-${set}-${nextLegN}`}
           src={legVideoUrl(set, nextLegN)}
@@ -140,7 +149,40 @@ export default function JourneyFilm({
       )}
 
       {/* z2 — THE SCRIM: solid ink dimmed with opacity (no rgba wash). */}
-      <div style={{ position: 'absolute', inset: 0, background: INK_DEEP, opacity: scrimOpacity }} />
+      {scrimOpacity > 0 && (
+        <div style={{ position: 'absolute', inset: 0, background: INK_DEEP, opacity: scrimOpacity }} />
+      )}
     </div>
+  );
+}
+
+/**
+ * JourneyFilm — THE CLOCK/PROGRESS DRIVER (generation + realm loading). Owns the
+ * theater/reality mode machine and the arrival gate via useJourneyConductor, and
+ * renders the shared JourneyFilmView from its per-frame output. Public signature
+ * and rendered DOM are unchanged from Slice C2L (its tests bind to both).
+ */
+export default function JourneyFilm({
+  set = 'bg',
+  legsToPlay = 6,
+  arrived = false,
+  scriptWindowMs = 6000,
+  startedAtMs = null,
+  holdBoundary,
+  onFinished,
+  active = true,
+  // Dim the film so overlaid UI stays legible. Solid token + opacity (no rgba).
+  scrimOpacity = 0.5,
+}) {
+  const frame = useJourneyConductor({
+    active, legsToPlay, arrived, scriptWindowMs, startedAtMs, holdBoundary, onFinished,
+  });
+  return (
+    <JourneyFilmView
+      frame={frame}
+      set={set}
+      legsToPlay={legsToPlay}
+      scrimOpacity={scrimOpacity}
+    />
   );
 }

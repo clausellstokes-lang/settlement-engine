@@ -203,6 +203,15 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'C2L: the progress-scrubbed journey film as the loading backdrop (generation + realm). OFF = stills floor only (default). Flip on at the taste walk to compare without a rebuild.',
   },
+  // C2 THE WELCOME (THE FILM RULING): the scroll-scrubbed travel-and-stop film as
+  // the Welcome page backdrop. OFF (default) = the stills journey ships (the floor
+  // is always present — desk still + six stop stills, every section readable, zero
+  // network weight); flip ON at the taste walk to compare film-on vs stills-only
+  // without a rebuild. Shares loadingJourneySetBg for the media set (below).
+  welcomeJourneyFilm: {
+    default: false,
+    description: 'C2: the scroll-scrubbed journey film behind the Welcome page. OFF = stills floor only (default, zero video bytes). Flip on at the taste walk to compare film-on vs stills-only without a rebuild.',
+  },
   // Which produced media set the film uses when loadingJourneyFilm is on. TRUE =
   // the "bg" set (six 5.04s legs, ~42 MB, cinematic drift); FALSE = the "journey"
   // set (six 2.5s legs, ~10 MB, lean). The owner ruled BOTH ship to the walk; this

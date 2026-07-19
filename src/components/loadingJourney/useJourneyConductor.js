@@ -74,6 +74,32 @@ export function boundaryFor(legsToPlay, holdBoundary) {
 }
 
 /**
+ * projectLegFrame — THE SHARED LEG-SCRUB PROJECTION (the C2 / C2L shared core).
+ *
+ * Given an effective progress in [0,1] and a leg count, resolve the crisp
+ * per-leg scrub state: which leg's video is current, the scrub fraction within
+ * it (legT), and the FLOOR stop still. This is the ONE projection consumed by
+ * BOTH drivers — the clock/progress-driven loading conductor (computeJourneyFrame
+ * below) and the scroll-driven Welcome conductor (useScrollJourney). The Welcome
+ * film EXTENDS this core; it never forks the projection math.
+ *
+ * The floor still is the near stop for the first half of a leg and the far stop
+ * for the second half; the ordered-tier still once progress reaches 1 — so a
+ * stop (legT 0 or 1) sits crisply on its own still with the video edge-faded out.
+ */
+export function projectLegFrame(effectiveProgress, legsToPlay) {
+  const legs = Math.max(1, legsToPlay | 0);
+  const p = clamp01(effectiveProgress);
+  const frac = p * legs;
+  let currentLeg = Math.floor(frac);
+  let legT = frac - currentLeg;
+  if (currentLeg >= legs) { currentLeg = legs - 1; legT = 1; }
+  if (currentLeg < 0) { currentLeg = 0; legT = 0; }
+  const floorStill = p >= 1 ? legs : (legT < 0.5 ? currentLeg : currentLeg + 1);
+  return { progress: p, currentLeg, legT, floorStill };
+}
+
+/**
  * computeJourneyFrame — THE PURE CORE. Given the wall-clock inputs and the caller-
  * owned `finalStart` (null until the held→arrived edge is detected), resolve the
  * effective progress through the arrival gate, the phase, and the leg-scrub state.
@@ -119,23 +145,15 @@ export function computeJourneyFrame({
     phase = JOURNEY_PHASE.traveling;
   }
 
-  // Project the effective progress onto the leg-scrub state.
-  const p = clamp01(effective);
-  const frac = p * legs;
-  let currentLeg = Math.floor(frac);
-  let legT = frac - currentLeg;
-  if (currentLeg >= legs) { currentLeg = legs - 1; legT = 1; }
-  if (currentLeg < 0) { currentLeg = 0; legT = 0; }
-  // The crisp stop still under the video: the near stop for the first half of a
-  // leg, the far stop for the second half; the ordered-tier still once finished.
-  const floorStill = p >= 1 ? legs : (legT < 0.5 ? currentLeg : currentLeg + 1);
+  // Project the effective progress onto the leg-scrub state (the shared core).
+  const proj = projectLegFrame(effective, legs);
 
   return {
-    progress: p,
+    progress: proj.progress,
     phase,
-    currentLeg,
-    legT,
-    floorStill,
+    currentLeg: proj.currentLeg,
+    legT: proj.legT,
+    floorStill: proj.floorStill,
     holding: phase === JOURNEY_PHASE.holding,
     finished: phase === JOURNEY_PHASE.finished,
   };
