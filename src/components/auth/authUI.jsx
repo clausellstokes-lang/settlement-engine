@@ -9,12 +9,15 @@
 import { useState, useId } from 'react';
 import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
-  GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
+  GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_,
   SP, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import Page from '../primitives/Page.jsx';
 import { t } from '../../copy/index.js';
+import { navigate } from '../../hooks/useRoute.js';
+import { viewToPath } from '../../lib/routes.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -103,8 +106,9 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
   // Password fields get an in-field show/hide toggle so the user can verify what
   // they typed (a real a11y + typo-safety win, load-bearing for the confirm-
   // password field). The toggle is a keyboard-operable IconButton (a native
-  // button element, aria-pressed + aria-label from the copy registry) at the 36px
-  // target, without changing the Input prop API its call sites depend on.
+  // button element, aria-pressed + aria-label from the copy registry) at the 44px
+  // usability target (Fitts's Law), without changing the Input prop API its call
+  // sites depend on.
   const [reveal, setReveal] = useState(false);
   const isPassword = type === 'password';
   const effectiveType = isPassword && reveal ? 'text' : type;
@@ -129,14 +133,17 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
       onKeyDown={onKeyDown}
       style={{
         width: '100%',
-        // Leave room for the trailing toggle on password fields so the text
-        // never runs under it.
+        // Leave room for the trailing 44px toggle on password fields so the
+        // text never runs under it.
         padding: isPassword
-          ? `${SP.md}px 44px ${SP.md}px ${SP.lg - 2}px`
+          ? `${SP.md}px ${SP.huge}px ${SP.md}px ${SP.lg - 2}px`
           : `${SP.md}px ${SP.lg - 2}px`,
-        // The ruled slip: a hairline field, square-cut (restraint law — the
-        // plainest pages), no rounded input chrome.
-        border: `1px solid ${BORDER}`,
+        // The ruled slip stays square-cut (restraint law — the plainest pages,
+        // no rounded input chrome), but the outline uses BORDER_STRONG (3.44:1
+        // on white), not the decorative parchment-200 BORDER (1.40:1): the field
+        // outline is the input's only affordance cue, so it must clear the WCAG
+        // 1.4.11 3:1 UI-boundary floor.
+        border: `1px solid ${BORDER_STRONG}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
@@ -152,7 +159,7 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
           Icon={reveal ? EyeOff : Eye}
           label={reveal ? t('auth.password.hide') : t('auth.password.show')}
           tone="ghost"
-          size="lg"
+          size="xl"
           pressed={reveal}
           onClick={() => setReveal(r => !r)}
         />
@@ -192,7 +199,9 @@ export function Select({ value, onChange, ariaLabel, children }) {
       style={{
         width: '100%',
         padding: `${SP.md}px ${SP.lg - 2}px`,
-        border: `1px solid ${BORDER}`,
+        // Same BORDER_STRONG outline as Input (clears the WCAG 1.4.11 3:1
+        // UI-boundary floor) so the picker and the answer field below it match.
+        border: `1px solid ${BORDER_STRONG}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, color: INK, outline: 'none',
         boxSizing: 'border-box', cursor: 'pointer',
@@ -306,22 +315,43 @@ export function RoleBadge({ role }) {
  */
 export function AuthPageShell({ title, subtitle, children, footer }) {
   return (
-    <div style={{
-      maxWidth: FORM_MAX, margin: '0 auto',
-      padding: `${SP.xxl}px 0`,
-      display: 'flex', flexDirection: 'column', alignItems: 'stretch',
-    }}>
+    // Route the shell through the shared Page primitive at form width instead of
+    // hand-rolling maxWidth + margin, so the auth routes share the one layout cap
+    // every other top-level surface uses (P12). Materials stay flat — the plainest
+    // page in the app (no scrim panel, no elevation); only the layout frame moves.
+    <Page
+      max={FORM_MAX}
+      pad={`${SP.xxl}px 0`}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
+    >
+      {/* Brand lockup doubles as the way back to the app. The dedicated auth
+          routes render full-bleed (App suppresses the persistent nav on these
+          surfaces), so without a home affordance here the only exits would be the
+          browser Back button and the inter-mode footer links. The wordmark is a
+          real anchor to /create (crawlable, middle-click-friendly) whose onClick
+          preventDefaults into the SPA navigator — the same pattern the footer
+          FooterLinks use. */}
       <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.sm,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         marginBottom: SP.lg,
       }}>
-        <MapIcon size={22} color={GOLD} />
-        <span style={{
-          fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
-          letterSpacing: '0.02em', textTransform: 'lowercase',
-        }}>
-          SettlementForge
-        </span>
+        <a
+          href={viewToPath('generate')}
+          onClick={(e) => { e.preventDefault(); navigate('generate'); }}
+          aria-label="SettlementForge home"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: SP.sm,
+            textDecoration: 'none',
+          }}
+        >
+          <MapIcon size={22} color={GOLD} />
+          <span style={{
+            fontSize: FS.xl, fontWeight: 700, color: GOLD, fontFamily: serif_,
+            letterSpacing: '0.02em', textTransform: 'lowercase',
+          }}>
+            SettlementForge
+          </span>
+        </a>
       </div>
 
       <div style={{
@@ -358,6 +388,6 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
           {footer}
         </div>
       )}
-    </div>
+    </Page>
   );
 }
