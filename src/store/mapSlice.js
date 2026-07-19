@@ -82,6 +82,12 @@ const DEFAULT_LAYERS = {
   // toggleLayer guard no-ops keys absent from this map).
   warFaith: true,
   roads: true,
+  // DESIGN_THE_ROADS §13 — the Travelers overlay: army columns + migrant columns +
+  // named-NPC envoys, moving on the road graph. DEFAULT OFF (opt-in DM-truth lens);
+  // the ~20 B eager default is this key (travelersFilter defaults null = all three
+  // sub-layers, set on demand). The army/migrant sub-layers read LIVE ledgers with no
+  // flag; the envoy sub-layer is present only when the roads ledger is lit (§13).
+  travelers: false,
   labels: true,
   markers: true,
   forests: true,
