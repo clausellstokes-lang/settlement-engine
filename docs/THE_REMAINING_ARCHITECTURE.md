@@ -387,6 +387,11 @@ A+ at this stage, rinse and repeat.")
   funnel (conversion frictionless — JUDGMENT); lazy widget behind the flag,
   zero eager; graceful degradation in the house register; activation checklist
   in the runbook (keys → flag → dashboard toggle → test sign-in).
+  ⬛ + CHECKOUT (owner, same day): the widget on purchase-initiation surfaces
+  (incl. the anon $2.99 path) + server-side siteverify INSIDE the
+  checkout-session edge function before any Stripe session (card-testing
+  defense at OUR door; Stripe Radar owns theirs); additive token, paid-surface
+  behavior byte-identical, purchase pins censused; inert without keys.
   HONEST LIMITS recorded: crawler directives are voluntary-
   compliance; user-credentialed browser agents are indistinguishable from
   users — the defense is server-side validity + limits + telemetry (automation
