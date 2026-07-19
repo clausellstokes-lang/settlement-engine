@@ -46,6 +46,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
@@ -389,6 +390,11 @@ export async function handleCreateCheckout(
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
+        // SINGLE-SESSION GATE (161, §7.2): authed products only — the anonymous
+        // single_dossier path carries no session and is intentionally ungated.
+        if (await isSessionSuperseded(adminClient(), authedUser.id, authHeader, deviceLabelFromRequest(req))) {
+          return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        }
       } else if (!isAnonymousProduct) {
         throw new Error('Not authenticated');
       }

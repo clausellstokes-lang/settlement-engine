@@ -47,6 +47,7 @@ import Stripe from "https://esm.sh/stripe@14.14.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
+import { isSessionSuperseded, deviceLabelFromRequest } from "../_shared/sessionGate.ts";
 import { logError } from "../_shared/logError.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 // Fail CLOSED, never "*": the endpoint is independently protected by JWT auth +
@@ -205,6 +206,11 @@ export async function handleAccountActions(
 
     // Service-role client → RLS-bypassing reads/writes + the processor RPC.
     const adminClient = makeAdminClient();
+
+    // SINGLE-SESSION GATE (161, §7.2): reject a superseded device's JWT.
+    if (await isSessionSuperseded(adminClient, callingUser.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: "session_superseded" }, 401);
+    }
 
     const {
       action, graceDays: graceOverride,
