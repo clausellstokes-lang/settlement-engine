@@ -71,6 +71,8 @@ interface Deps {
   stripeClient?: typeof stripe;
   // deno-lint-ignore no-explicit-any
   emailDispatch?: (o: { to: string; from: string; subject: string; text: string; apiKey: string }) => Promise<any>;
+  /** The expected due-runner cron secret. Defaults to FOUNDER_TRANSFER_CRON_SECRET; injectable for tests. */
+  cronSecret?: () => string | undefined;
 }
 
 export async function handleFounderTransfer(req: Request, deps: Deps = {}): Promise<Response> {
@@ -92,6 +94,16 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
   const action = typeof payload.action === 'string' ? payload.action : '';
 
   const admin = makeAdminClient();
+
+  // ── run_due (§6.6): the hourly cron sweep. Handled BEFORE the master switch + JWT
+  //    auth — the due-runner carries NO user token; it authenticates by the shared
+  //    x-cron-secret header (constant-time compare) and must run the sweeps regardless
+  //    of the USER-FACING master switch (its own gate is the 'founder_transfer_cron'
+  //    config the dispatcher reads; in-flight cases still finalize/payout, and the
+  //    auto-reload cancel sweep is independent of transfers entirely).
+  if (action === 'run_due') {
+    return handleRunDue(req, admin, stripeApi, deps, json);
+  }
 
   // MASTER SWITCH FIRST (§6.3): disabled → feature_unavailable for every action.
   const { data: enabled, error: switchErr } = await admin.rpc('founder_transfer_enabled');
@@ -338,13 +350,211 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
   }
 }
 
-/** Deterministic single-use token hash (the abort email token; M-7 stores it). */
+/** Deterministic single-use token hash (the abort email token; the cooling sweep
+ *  stores it, the `abort` action verifies against it). */
 export function hashToken(token: string): string {
   // A stable non-cryptographic fold is sufficient here — the token is high-entropy and
-  // single-use; the hash only avoids storing the raw token. (M-7's issuer uses the same.)
+  // single-use; the hash only avoids storing the raw token in the events log.
   let h = 0x811c9dc5;
   for (let i = 0; i < token.length; i += 1) { h ^= token.charCodeAt(i); h = Math.imul(h, 0x01000193); }
   return (h >>> 0).toString(16).padStart(8, '0');
+}
+
+/** A high-entropy single-use abort token (session-INDEPENDENT — §6.3, the takeover
+ *  victim / locked-out escape hatch). Only its hash is stored (hashToken). */
+export function makeAbortToken(): string {
+  return `${crypto.randomUUID()}${crypto.randomUUID()}`.replace(/-/g, '');
+}
+
+/** Constant-time secret compare (SHA-256 → XOR-fold), the pricing-resync-cron idiom.
+ *  Neither length nor an early-differing byte leaks a timing side channel. */
+async function timingSafeEqualStr(a: string, b: string): Promise<boolean> {
+  const enc = new TextEncoder();
+  const [da, db] = await Promise.all([
+    crypto.subtle.digest('SHA-256', enc.encode(a)),
+    crypto.subtle.digest('SHA-256', enc.encode(b)),
+  ]);
+  const va = new Uint8Array(da), vb = new Uint8Array(db);
+  let diff = 0;
+  for (let i = 0; i < va.length; i += 1) diff |= va[i] ^ vb[i];
+  return diff === 0;
+}
+
+/** Resolve a user's email via the admin auth API (never throws → null). */
+async function lookupEmail(admin: AnyClient, userId: string | null): Promise<string | null> {
+  if (!userId) return null;
+  try {
+    const { data } = await admin.auth.admin.getUserById(userId);
+    const e = data?.user?.email;
+    return typeof e === 'string' && e ? e : null;
+  } catch { return null; }
+}
+
+/** Run one sweep, swallowing any error (one failing sweep can never stall the others). */
+async function safeSweep<T>(label: string, fn: () => Promise<T>, fallback: T): Promise<T> {
+  try { return await fn(); }
+  catch (e) { logError('founder-transfer', null, (e as Error)?.message ?? 'sweep failed', { stage: `run_due:${label}` }); return fallback; }
+}
+
+/**
+ * handleRunDue — the hourly due-runner (§6.6). Secret-gated (constant-time), then runs
+ * each sweep independently + never-throw:
+ *   · cooling notifications + abort-token issuance (§6.3, idempotent per case)
+ *   · finalize-due cases + the finalize EDGE LEG (§6.5, crash-recoverable)
+ *   · release due payouts (§6.6/M-8 — added by the payout limb)
+ *   · expire stale cases (§6.3) · cancel stale auto-reload attempts (§4.5)
+ *   · stewardship: dormancy nudge + abandonment (§6.8/M-10 — added by the stewardship limb)
+ */
+async function handleRunDue(
+  req: Request, admin: AnyClient, stripeApi: typeof stripe, deps: Deps,
+  json: (body: Record<string, unknown>, status?: number) => Response,
+): Promise<Response> {
+  const expected = (deps.cronSecret?.() ?? Deno.env.get('FOUNDER_TRANSFER_CRON_SECRET') ?? '').trim();
+  if (!expected) {
+    logError('founder-transfer', null, 'due-runner secret not configured', { stage: 'run_due:secret' });
+    return json({ error: 'cron_not_configured' }, 503);
+  }
+  const provided = req.headers.get('x-cron-secret') || '';
+  if (!(await timingSafeEqualStr(provided, expected))) {
+    logError('founder-transfer', null, 'due-runner secret mismatch', { stage: 'run_due:secret' });
+    return json({ error: 'forbidden' }, 403);
+  }
+
+  const nowIso = new Date().toISOString();
+  const swept: Record<string, number> = {};
+  swept.coolingNotified = await safeSweep('cooling_notify', () => sweepCoolingNotifications(admin, deps), 0);
+  swept.finalized = await safeSweep('finalize', () => sweepFinalizeDue(admin, deps, nowIso), 0);
+  swept.payoutsReleased = await safeSweep('payout_release', () => sweepReleasePayouts(admin, stripeApi, deps, nowIso), 0);
+  // Buyback payouts + the stewardship sweeps ride the same release machinery (M-10).
+  swept.buybacksReleased = await safeSweep('buyback_release', () => sweepReleaseBuybacks(admin, stripeApi, deps, nowIso), 0);
+  swept.stewardship = await safeSweep('stewardship', () => sweepStewardship(admin, deps, nowIso), 0);
+  swept.expired = await safeSweep('expire', async () => {
+    const { data } = await admin.rpc('expire_stale_transfer_cases');
+    return typeof data === 'number' ? data : 0;
+  }, 0);
+  swept.autoReloadCanceled = await safeSweep('auto_reload_cancel', async () => {
+    const { data } = await admin.rpc('cancel_stale_auto_reload_attempts');
+    return typeof data === 'number' ? data : 0;
+  }, 0);
+  return json({ ok: true, swept });
+}
+
+/** Cooling notifications + abort-token issuance (§6.3). For each cooling case with no
+ *  abort_token_issued event yet: mint a single-use token, store its HASH in the event
+ *  (the idempotency claim — the token itself is emailed once), and email BOTH parties
+ *  the cooling notification carrying the session-independent abort link. */
+async function sweepCoolingNotifications(admin: AnyClient, deps: Deps): Promise<number> {
+  const { data: cooling, error } = await admin.from('founder_transfer_cases')
+    .select('id, from_user, to_user, seat_id, to_email_lower').eq('state', 'cooling');
+  if (error || !Array.isArray(cooling)) return 0;
+  let issued = 0;
+  for (const c of cooling) {
+    const { data: existing } = await admin.from('founder_transfer_events')
+      .select('id').eq('case_id', c.id).eq('event', 'abort_token_issued').maybeSingle();
+    if (existing) continue;
+    const token = makeAbortToken();
+    // Store the hash FIRST — its existence is the per-case idempotency claim (so the
+    // sweep re-mints nothing on the next hour). The token is emailed in the same pass.
+    await admin.rpc('_log_founder_transfer_event', {
+      p_case: c.id, p_actor: 'system', p_event: 'abort_token_issued',
+      p_detail: { token_hash: hashToken(token) },
+    });
+    const abortUrl = `${CLIENT_URL}/account?section=subscription&transfer_case=${c.id}&transfer_abort=${encodeURIComponent(token)}`;
+    const fromEmail = await lookupEmail(admin, c.from_user);
+    const toEmail = c.to_user ? (await lookupEmail(admin, c.to_user)) : (c.to_email_lower as string | null);
+    const body = (who: 'outgoing' | 'incoming') =>
+      `A Founder seat transfer (#${c.seat_id}) is now in its 72-hour review period. If it should NOT proceed — for any reason, including a lost or compromised account — you can stop it immediately with this one-click link, which works even if you cannot sign in:\n\n${abortUrl}\n\nThe transfer completes automatically after the review period unless it is stopped. This link is single-use.`;
+    await sendTransferEmail(fromEmail, 'Your SettlementForge seat transfer is under review (72 hours)', body('outgoing'), deps.emailDispatch);
+    await sendTransferEmail(toEmail, 'Your SettlementForge seat transfer is under review (72 hours)', body('incoming'), deps.emailDispatch);
+    issued += 1;
+  }
+  return issued;
+}
+
+/** Finalize-due sweep (§6.5). (a) Finalize cooling-elapsed cases via the claim-once RPC.
+ *  (b) Run the idempotent EDGE LEG for every finalized case lacking a finalized_edge_leg
+ *  event — crash-recoverable: the DB flags are already correct (the RPC set them), the
+ *  edge leg only mirrors auth metadata + retention + emails and re-runs safely. */
+async function sweepFinalizeDue(admin: AnyClient, deps: Deps, nowIso: string): Promise<number> {
+  // (a) Transition cooling-elapsed cases.
+  const { data: due } = await admin.from('founder_transfer_cases')
+    .select('id').eq('state', 'cooling').lte('cooling_ends_at', nowIso);
+  if (Array.isArray(due)) {
+    for (const c of due) {
+      await admin.rpc('transfer_case_finalize', { p_case: c.id });
+    }
+  }
+  // (b) Run the edge leg for finalized cases that have not had it yet.
+  const { data: finalized } = await admin.from('founder_transfer_cases')
+    .select('id, from_user, to_user').eq('state', 'finalized');
+  if (!Array.isArray(finalized)) return 0;
+  let legged = 0;
+  for (const c of finalized) {
+    const { data: done } = await admin.from('founder_transfer_events')
+      .select('id').eq('case_id', c.id).eq('event', 'finalized_edge_leg').maybeSingle();
+    if (done) continue;
+    await runFinalizeEdgeLeg(admin, c, deps);
+    await admin.rpc('_log_founder_transfer_event', { p_case: c.id, p_actor: 'system', p_event: 'finalized_edge_leg', p_detail: {} });
+    legged += 1;
+  }
+  return legged;
+}
+
+/** The finalize EDGE LEG (§6.5, M-7b): the non-DB steps, each idempotent + log-don't-throw.
+ *  auth.admin metadata for both users · the SUBSCRIBED-EX-FOUNDER guard (downgrade the
+ *  outgoing holder ONLY if they hold no live Cartographer subscription — a subscribed
+ *  ex-founder keeps premium via their sub) · restore_premium_settlements for the incoming
+ *  holder · both notification emails. NO credit movement of any kind (LAW 10). */
+async function runFinalizeEdgeLeg(admin: AnyClient, c: { id: string; from_user: string; to_user: string }, deps: Deps): Promise<void> {
+  // ── Outgoing holder: is_founder is already false (finalize RPC). Downgrade tier ONLY
+  //    if they hold no live subscription; a subscribed ex-founder keeps premium.
+  let fromSubscribed = false;
+  try {
+    const { data: prof } = await admin.from('profiles').select('stripe_subscription_id').eq('id', c.from_user).maybeSingle();
+    fromSubscribed = Boolean(prof?.stripe_subscription_id);
+  } catch (e) { logError('founder-transfer', c.from_user, (e as Error)?.message ?? 'profile read failed', { stage: 'edge_leg:from_profile', case_id: c.id }); }
+  if (!fromSubscribed) {
+    try { await admin.rpc('handle_premium_downgrade', { target_user: c.from_user }); }
+    catch (e) { logError('founder-transfer', c.from_user, (e as Error)?.message ?? 'downgrade failed', { stage: 'edge_leg:downgrade', case_id: c.id }); }
+  }
+  try {
+    // updateUserById MERGES user_metadata: a subscribed ex-founder keeps tier:'premium'
+    // (only is_founder flips); a non-subscribed one drops to tier:'free'.
+    await admin.auth.admin.updateUserById(c.from_user, {
+      user_metadata: fromSubscribed ? { is_founder: false } : { tier: 'free', is_founder: false },
+    });
+  } catch (e) { logError('founder-transfer', c.from_user, (e as Error)?.message ?? 'auth mirror failed', { stage: 'edge_leg:from_auth', case_id: c.id }); }
+
+  // ── Incoming holder: is_founder=true + tier='premium' are already set (finalize RPC);
+  //    restore any retention-purged settlements + mirror the auth metadata.
+  try { await admin.rpc('restore_premium_settlements', { target_user: c.to_user }); }
+  catch (e) { logError('founder-transfer', c.to_user, (e as Error)?.message ?? 'restore failed', { stage: 'edge_leg:restore', case_id: c.id }); }
+  try {
+    await admin.auth.admin.updateUserById(c.to_user, { user_metadata: { tier: 'premium', is_founder: true } });
+  } catch (e) { logError('founder-transfer', c.to_user, (e as Error)?.message ?? 'auth mirror failed', { stage: 'edge_leg:to_auth', case_id: c.id }); }
+
+  // ── Both notification emails (seam-inert until keys land).
+  const fromEmail = await lookupEmail(admin, c.from_user);
+  const toEmail = await lookupEmail(admin, c.to_user);
+  await sendTransferEmail(fromEmail, 'Your Founder seat transfer is complete',
+    'Your SettlementForge Founder seat transfer has completed. Your payout will follow within 14-30 days, at the payout form you elected. Thank you.', deps.emailDispatch);
+  await sendTransferEmail(toEmail, 'You are now a SettlementForge Founder',
+    'Your SettlementForge Founder seat transfer has completed and the seat is now yours. Your Founder benefits are active on your next sign-in.', deps.emailDispatch);
+}
+
+// ── The payout limb (§6.6/M-8) + the stewardship limb (§6.8/M-10) plug their release
+//    + sweep logic into the due-runner here. Stubs until those slices land.
+// deno-lint-ignore no-unused-vars
+async function sweepReleasePayouts(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
+  return 0; // M-8: claim scheduled→releasing → Stripe transfer or credits election → released/held/failed.
+}
+// deno-lint-ignore no-unused-vars
+async function sweepReleaseBuybacks(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
+  return 0; // M-10: the standing-buyback payouts ride the same release machinery.
+}
+// deno-lint-ignore no-unused-vars
+async function sweepStewardship(admin: AnyClient, deps: Deps, nowIso: string): Promise<number> {
+  return 0; // M-10: dormancy nudge (18mo) + abandonment (5y/90d/3 notices) sweeps.
 }
 
 serve((req) => handleFounderTransfer(req));
