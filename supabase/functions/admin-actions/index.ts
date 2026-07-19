@@ -21,6 +21,10 @@
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.108.2";
+// Stripe — same pinned client + apiVersion as stripe-webhook (the money path is
+// pinned EXACT, never a floating major). Used ONLY by the one-time
+// backfill_money_events verb (moves no money — it reads history + upserts rows).
+import Stripe from "https://esm.sh/stripe@14.14.0?target=deno";
 // Tier 0.10 — abuse defense baseline (shared with every edge function).
 import { botGuard } from "../_shared/requestMeta.ts";
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
@@ -148,6 +152,26 @@ function buildProfilePatch(metadata: Record<string, unknown>) {
   return patch;
 }
 
+// The Stripe surface the money backfill needs — a structural subset of the pinned
+// Stripe client (checkout.sessions.list + invoices.list, both cursor-paged). The
+// real client satisfies it; the test injects a stub.
+interface StripeListPage { data: Array<Record<string, unknown>>; has_more?: boolean }
+interface MoneyBackfillStripe {
+  checkout: { sessions: { list: (params: Record<string, unknown>) => Promise<StripeListPage> } };
+  invoices: { list: (params: Record<string, unknown>) => Promise<StripeListPage> };
+}
+
+// Description text for a backfilled money_events row (the UI maps kind→label itself;
+// this is only the durable NOT-NULL audit string). Mirrors the webhook's describeMoneyKind.
+const MONEY_KIND_DESC: Record<string, string> = {
+  credit_pack: "Credit pack",
+  founder_seat: "Founder Lifetime seat",
+  single_dossier: "Single dossier export",
+  subscription_start: "Cartographer subscription",
+  subscription_renewal: "Cartographer subscription renewal",
+  surveyor_start: "Surveyor subscription",
+};
+
 // Exported (not just inlined into serve) so the privilege gate can be EXECUTION-
 // tested: index.test.ts feeds requests with injected supabase stubs and asserts a
 // non-privileged caller is REJECTED (403) before any RPC runs, and that a valid
@@ -159,6 +183,9 @@ export async function handleAdminActions(
   deps: {
     userClient?: (authHeader: string) => ReturnType<typeof createClient>;
     adminClient?: () => ReturnType<typeof createClient>;
+    // Injection seam for the backfill_money_events verb's Stripe reads (tests stub
+    // the list pages); production passes nothing → the pinned Stripe client is built.
+    stripeClient?: MoneyBackfillStripe;
   } = {},
 ): Promise<Response> {
   const makeUserClient = deps.userClient ?? defaultUserClient;
@@ -1268,6 +1295,121 @@ export async function handleAdminActions(
         });
         if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
+      }
+
+      // ── Money-spine backfill (156/157 money_events, DESIGN_MONEY_WAVE §2/§11) ──
+      // One-time, highest-role, audited. Pages Stripe's historical checkout
+      // sessions + invoices and upserts money_events rows through the SAME
+      // event_key shield the webhook uses, so it is IDEMPOTENT — safe to re-run and
+      // safe to overlap live webhook writes (a row the webhook already wrote is a
+      // no-op here). Moves NO money, so it is live-on-deploy (no Stripe price
+      // needed) but does need the Stripe SECRET key to READ history.
+      case "backfill_money_events": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const secretKey = Deno.env.get("STRIPE_SECRET_KEY") || "";
+        if (!secretKey && !deps.stripeClient) {
+          return json({ error: "Stripe is not configured" }, 400);
+        }
+        const stripe: MoneyBackfillStripe = deps.stripeClient
+          ?? (new Stripe(secretKey, { apiVersion: "2023-10-16" }) as unknown as MoneyBackfillStripe);
+
+        let sessionsProcessed = 0, invoicesProcessed = 0, rowsUpserted = 0;
+        const upsertRow = async (row: Record<string, unknown>) => {
+          const { error: upErr } = await adminClient
+            .from("money_events")
+            .upsert(row, { onConflict: "event_key", ignoreDuplicates: true });
+          if (upErr) console.warn("[admin-actions] backfill upsert failed:", upErr.message);
+          else rowsUpserted += 1;
+        };
+        // Resolve a Stripe customer → our user id (cached; invoice rows have no
+        // metadata.supabase_user_id, so the renewal row's owner comes from here —
+        // without it a renewal row would be invisible to the owner-SELECT policy).
+        const userForCustomer = new Map<string, string | null>();
+        const resolveUser = async (customerId: string | null): Promise<string | null> => {
+          if (!customerId) return null;
+          if (userForCustomer.has(customerId)) return userForCustomer.get(customerId) ?? null;
+          const { data: prof } = await adminClient
+            .from("profiles").select("id").eq("stripe_customer_id", customerId).maybeSingle();
+          const uid = (prof?.id as string | null) ?? null;
+          userForCustomer.set(customerId, uid);
+          return uid;
+        };
+        const asId = (v: unknown): string | null =>
+          typeof v === "string" ? v : (v && typeof v === "object" ? ((v as { id?: string }).id ?? null) : null);
+
+        // Checkout sessions — one-time products + subscription starts.
+        let sAfter: string | undefined;
+        for (let guard = 0; guard < 1000; guard += 1) {
+          const page = await stripe.checkout.sessions.list({ limit: 100, ...(sAfter ? { starting_after: sAfter } : {}) });
+          const rows = Array.isArray(page?.data) ? page.data : [];
+          for (const s of rows) {
+            sessionsProcessed += 1;
+            const paymentStatus = s.payment_status as string | undefined;
+            if (paymentStatus && paymentStatus !== "paid" && paymentStatus !== "no_payment_required") continue;
+            const md = (s.metadata as Record<string, string> | undefined) ?? {};
+            const product = md.product;
+            const credits = parseInt(md.credits || "0", 10);
+            let kind: string | null = null;
+            if (product === "premium") kind = "subscription_start";
+            else if (product === "founder_lifetime") kind = "founder_seat";
+            else if (product === "single_dossier") kind = "single_dossier";
+            else if (product === "surveyor") kind = "surveyor_start";
+            else if (credits > 0) kind = "credit_pack";
+            if (!kind) continue;
+            const created = typeof s.created === "number" ? new Date(s.created * 1000).toISOString() : new Date().toISOString();
+            await upsertRow({
+              event_key: `sess:${s.id}`,
+              user_id: md.supabase_user_id || null,
+              occurred_at: created,
+              kind,
+              amount_cents: typeof s.amount_total === "number" ? s.amount_total : 0,
+              currency: (s.currency as string) || "usd",
+              description: MONEY_KIND_DESC[kind] ?? "Purchase",
+              stripe_session_id: s.id as string,
+              stripe_invoice_id: asId(s.invoice),
+              stripe_payment_intent_id: asId(s.payment_intent),
+              metadata: { backfilled: true },
+            });
+          }
+          if (!page?.has_more || rows.length === 0) break;
+          sAfter = rows[rows.length - 1].id as string;
+        }
+
+        // Invoices — subscription RENEWALS (starts come from the session rows above).
+        let iAfter: string | undefined;
+        for (let guard = 0; guard < 1000; guard += 1) {
+          const page = await stripe.invoices.list({ status: "paid", limit: 100, ...(iAfter ? { starting_after: iAfter } : {}) });
+          const rows = Array.isArray(page?.data) ? page.data : [];
+          for (const inv of rows) {
+            invoicesProcessed += 1;
+            if (inv.billing_reason !== "subscription_cycle") continue;
+            const customerId = asId(inv.customer);
+            const created = typeof inv.created === "number" ? new Date(inv.created * 1000).toISOString() : new Date().toISOString();
+            await upsertRow({
+              event_key: `inv:${inv.id}`,
+              user_id: await resolveUser(customerId),
+              occurred_at: created,
+              kind: "subscription_renewal",
+              amount_cents: typeof inv.amount_paid === "number" ? inv.amount_paid : 0,
+              currency: (inv.currency as string) || "usd",
+              description: MONEY_KIND_DESC.subscription_renewal,
+              receipt_url: (inv.hosted_invoice_url as string | null) ?? null,
+              stripe_invoice_id: inv.id as string,
+              metadata: { backfilled: true, stripe_customer_id: customerId },
+            });
+          }
+          if (!page?.has_more || rows.length === 0) break;
+          iAfter = rows[rows.length - 1].id as string;
+        }
+
+        await writeAudit({
+          action: "backfill_money_events",
+          targetType: "money_events",
+          after: { sessionsProcessed, invoicesProcessed, rowsUpserted },
+          destructive: false,
+          reversible: true,
+        });
+        return json({ success: true, sessionsProcessed, invoicesProcessed, rowsUpserted });
       }
 
       default:
