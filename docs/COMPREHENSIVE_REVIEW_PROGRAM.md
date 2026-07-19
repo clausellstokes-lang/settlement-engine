@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE MONEY WAVE DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_MONEY_WAVE.md
+committed (this commit).** The Fable architect lane delivered the full wave design per the
+two owner rulings (@ 15ba006c transfers-pre-launch + @ 4fd9a927 single session): NINE
+slices M-1..M-9 — money spine (money_events, 157) · purchase ledger UI · auto-reload
+reload-to-target (158) · Surveyor provisioning + the allowance price-id gate (159) · seat
+register (137 REWRITTEN IN PLACE — never applied, prod head 117; the ruling is its
+sign-off) · transfer choreography (160, five-state case machine, emailed challenge codes,
+recovery lockout, email abort tokens) · finalize/due-runner/clawback interplay · Connect
+payout limb (key-inert) · single session (161, last-login-wins, plan-independent gate,
+the eviction-preserves-work lifecycle pin). MANAGER SPOT-CHECK CONFIRMED the doc's
+load-bearing new hazard at the composite tip: grantMonthlyAllowanceIfNeeded
+(stripe-webhook index.ts:223-227) gates on billing_reason ONLY — a Surveyor subscription
+invoice WOULD mint the 30-credit Cartographer allowance; the M-4 price-id gate is a
+load-bearing new pin. HONEST NOTE bound into the design: no TOTP exists — "2FA" in the
+owner's model = password reauth + emailed challenge codes (067 idiom), TOTP adoption is
+§13 Q4. Top risks recorded: post-payout slow disputes = accepted $49.50 residual
+(owner/legal); Wave E mail seam + perimeter ~156 numbering are parallel-lane fold
+coordination points. Implementation lane (claude/money-wave off the composite, Opus)
+dispatches when a running lane frees. OPEN OWNER DECISION: the founder-promise dormancy
+question — 2-year inactivity forfeiture (owner-proposed) vs the recommended keep-lifetime
++ 5-year unreachable-abandonment clause + $49.50 standing buyback + dormancy nudge;
+§12/§13 amend on the ruling. Fraud-pass charter (§10) is MANDATORY before ROUND 3.
 **⬛ OWNER RULING (2026-07-19) — THE SOAK LADDER · THE COMBINATORIAL MANDATE · THE
 RESEQUENCING** (verbatim intent: "soak should have three levels: subcentury, century, and
 300 century"; "we need to tune things in every conceivable toggle turned on and off in
