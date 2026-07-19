@@ -1153,6 +1153,17 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER RE-RATIFICATION (2026-07-19, night) — the overnight delegation + the
+bold-over-safe law, verbatim intent:** "yes keep continuing. If there comes
+decisions to be made, I delegate them to you according to the standards that we
+have set… if you ever have to choose between maximal safety and something that is
+objectively better but introduces risk, you will choose the latter every single
+time and fix the consequences. I'm trying to get my code to work to its utmost
+perfect best. in which case no compromises." Standing synthesis unchanged and
+re-affirmed: boldness applies WITHIN the constitution — the owner's own gates
+(byte-identity/dormancy proofs, pins, ratchets, ⛔ classes) are what "fix the
+consequences" is proven WITH, not obstacles to it. Judgments continue to be
+recorded vetoably; owner-gated classes still never self-ruled.
 **⬛ OWNER AMENDMENT (2026-07-19) — table-reporting cadence refined: the
 remaining-work table updates on each COMPLETED LIST ITEM (slice/wave/phase/gate),
 not on every commit.**
