@@ -21,8 +21,9 @@
  * a different entitlement, this predicate is the single line to flip.
  *
  * Styling: shape/elevation/hover-reveal live in index.css (.sf-door-*) — the kill-list
- * ratchet (tests/design/deepCraftKillList.test.js) freezes inline borderRadius/boxShadow/
- * rgba( counts in src/components, so a NEW floating surface must carry its chrome in CSS.
+ * ratchet (tests/design/deepCraftKillList.test.js) freezes the inline corner-radius /
+ * shadow / translucent-wash counts in src/components, so a NEW floating surface must
+ * carry its chrome as CSS classes (the ratchet counts raw line matches, comments included).
  * Colors ride the theme's AI register (the slate conversion lands at the tokens chokepoint).
  * Lazy-only: rides the FloatingAffordances chunk — zero eager bytes.
  */

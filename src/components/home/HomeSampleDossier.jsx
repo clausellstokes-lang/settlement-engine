@@ -39,7 +39,7 @@ const serif = '"Crimson Text", Georgia, serif';
 
 const CALLOUTS = [
   { key: 'newDm',         accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'worldbuilder',  accent: VIOLET, bg: '#EBE2FA' },
+  { key: 'worldbuilder',  accent: VIOLET, bg: '#E4E9EE' },
   { key: 'fridaysSession',accent: AMBER,  bg: '#FBEAD0', italic: true },
 ];
 

@@ -167,7 +167,7 @@ export default function DevFlagPanel() {
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
                       fontSize: FS.micro, fontWeight: 700, color: VIOLET,
-                      background: VIOLET_BG, border: '1px solid #7B4FCF',
+                      background: VIOLET_BG, border: '1px solid #5A6E82',
                       borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
                     }}>
                       OVERRIDE
