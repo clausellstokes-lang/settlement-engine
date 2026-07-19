@@ -17,7 +17,7 @@
 
 import { customContentService } from '../lib/customContent.js';
 import { migrateCustomContent } from '../domain/customContentMigrations.js';
-import { validateDeity } from '../domain/customContentSchema.js';
+import { validateDeity, validateTradition } from '../domain/customContentSchema.js';
 import { customDeps } from '../lib/dependencyEngine.js';
 
 const LOCAL_KEY = 'sf_custom_content';
@@ -66,6 +66,7 @@ const EMPTY = {
   tradeGoods: [],
   deities: [],
   factions: [],
+  traditions: [],
   supplyChains: [],
   tradeRoutes: [],
   powerPresets: [],
@@ -146,6 +147,16 @@ export const createCustomContentSlice = (set, get) => {
         return null;
       }
     }
+    // Traditions (T-5): a name is required; a present motif must be a valid corpus key —
+    // reject here so a bad motif never reaches the cloud (the 155 category CHECK admits the
+    // bucket; the client validator is the field gate, as factions/deities are).
+    if (category === 'traditions') {
+      const { ok, errors } = validateTradition(item);
+      if (!ok) {
+        set(state => { state.customContentError = errors.join(' '); });
+        return null;
+      }
+    }
     // Optimistic local insert
     const entry = {
       ...item,
@@ -205,6 +216,14 @@ export const createCustomContentSlice = (set, get) => {
     if (category === 'deities') {
       const existing = (get().customContent.deities || []).find(x => x.id === id) || {};
       const { ok, errors } = validateDeity({ ...existing, ...partial });
+      if (!ok) {
+        set(state => { state.customContentError = errors.join(' '); });
+        return null;
+      }
+    }
+    if (category === 'traditions') {
+      const existing = (get().customContent.traditions || []).find(x => x.id === id) || {};
+      const { ok, errors } = validateTradition({ ...existing, ...partial });
       if (!ok) {
         set(state => { state.customContentError = errors.join(' '); });
         return null;
