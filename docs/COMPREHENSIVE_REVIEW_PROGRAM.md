@@ -1153,6 +1153,20 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER CLARIFICATION + THE COMPROMISE AUDIT (2026-07-19):** "undelayable"
+meant only that the push is NOT deferred until after the resurvey loop — never
+that it outranks better architecture (the manager's over-reading produced the
+re-pin recommendation, vetoed). Owner asked: were other such compromises made?
+AUDIT ANSWER — five same-shape calls found, ALL recorded-not-silent, now
+CONVERTED from deferrals to COMMITTED LOOP INTAKE: Segmented pill→divider-strip
+recomposition · Card de-shadow + cardElevation pin retarget · AdvanceReport
+tinted-chip re-tone · the throttled TTI/INP perf harness BUILD (no longer a
+named deferral) · WorldMapStage scrim tokenization. Defended as correct (veto
+with context): zero×4→loop (venue routing, not declination) · the partial
+rename (fold-correctness, COMPLETED at fold 2) · H3 session-scoped fire-once
+(the H-spec itself barred new persisted state). PRECEDENT NOTED: "safe reclaim
+exhausted"-class labels are re-examined by the loop's standard audit — gated-
+but-better lanes are orderable, per the de-eager ruling.
 **⬛⭐⭐ OWNER RULING (2026-07-19) — "then de-eager": THE DE-EAGERING LANE IS
 ORDERED; the 998-byte breach cures by ARCHITECTURE, not by re-pin.** The owner
 chose the objectively-better path over the manager's bridge recommendation
