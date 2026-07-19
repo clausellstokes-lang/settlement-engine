@@ -1,6 +1,6 @@
 {
-  "total": 2230,
-  "totalAny": 2191,
+  "total": 2229,
+  "totalAny": 2190,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -195,6 +195,10 @@
       "any": 0,
       "suppress": 4
     },
+    "src/domain/institutions/institutionRoster.js": {
+      "any": 1,
+      "suppress": 0
+    },
     "src/domain/magicLedger.js": {
       "any": 1,
       "suppress": 0
@@ -220,7 +224,7 @@
       "suppress": 0
     },
     "src/domain/region/discoverDependencyCandidates.js": {
-      "any": 6,
+      "any": 4,
       "suppress": 0
     },
     "src/domain/region/graph.js": {

@@ -43,6 +43,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { slugify } from '../../kernel/slugify.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { RETIRED_CHAIN_ALIASES } from '../../data/supplyChainResourceIndex.js';
@@ -444,7 +445,11 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
   if (!economicState || typeof economicState !== 'object') return economicState || {};
   const { settlement, oldResources, newResources, oldDepleted, newDepleted } = ctx;
   const config = settlement?.config || {};
-  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // LIVE roster only — a calamity-ruined mill/smithy is not a live chain processor, so a
+  // resource change must not (re)activate a production chain on a destroyed building
+  // (ruin-filter class). computeActiveChains itself is generation-shared (no ruin at gen),
+  // so the filter is applied here at the pulse-side call, not in the shared generator.
+  const institutions = liveInstitutions(settlement);
   const tier = String(settlement?.tier || 'village');
   const route = routeOf(settlement, config);
   const magic = config.magicExists === false ? 0 : (Number.isFinite(config.priorityMagic) ? Number(config.priorityMagic) : 50);
