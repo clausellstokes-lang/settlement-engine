@@ -102,12 +102,14 @@ function ActionRow({ item }) {
       aria-describedby={item.hint ? `${item.id}-hint` : undefined}
       title={item.disabled && item.disabledReason ? item.disabledReason : item.label}
       style={{
+        // S2r-c materials: rule-framed, not rounded — the deep-craft flat idiom
+        // (the rounded corners the restored master rail carried are struck;
+        // hairline rule only).
         display: 'flex', alignItems: 'flex-start',
         gap: 8, padding: '8px 10px',
         background: tone.bg,
         color: tone.fg,
         border: `1px solid ${tone.border}`,
-        borderRadius: 4,
         fontSize: FS.sm, fontWeight: 700,
         fontFamily: 'system-ui, -apple-system, sans-serif',
         textAlign: 'left',
@@ -127,12 +129,14 @@ function ActionRow({ item }) {
           {item.tag && (
             <span
               style={{
+                // S2r-c materials: flat parchment chip, hairline-ruled — no radius,
+                // palette tones (the master rail's rounded + rgba tag is struck).
                 flexShrink: 0,
                 fontSize: FS.xxs, fontWeight: 700,
                 letterSpacing: '0.02em',
-                padding: '1px 5px', borderRadius: 3,
-                background: item.primary ? 'rgba(255,251,245,0.18)' : '#f3ecdc',
-                border: `1px solid ${item.primary ? 'rgba(255,251,245,0.45)' : tone.border}`,
+                padding: '1px 5px',
+                background: item.primary ? '#f6ecd6' : '#f3ecdc',
+                border: `1px solid ${item.primary ? '#d8c9a0' : tone.border}`,
               }}
             >
               {item.tag}

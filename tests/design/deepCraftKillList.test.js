@@ -70,17 +70,17 @@ const CEILINGS = Object.freeze({
   // clerk's notes (−2 radius, −1 tinted), and the orphaned WizardChipRow — a
   // chrome-diet A/B leftover with ZERO importers repo-wide (its "ChangeModeBar
   // imports it" premise was false) — was deleted (−2 radius).
-  // RAISED @ S2r-a (owner's BASE RULING — the KNOWN COLLISION, 2026-07-18):
-  // reviving master's ActionRail.jsx — a ruled kill-list violator the owner
-  // ordered restored for the two-column dossier base — re-adds 2 rounded radii
-  // (borderRadius 4 / 3) and 2 rgba tones. This is the ONLY raise in the
-  // ratchet's history; it is DELIBERATE and DOCUMENTED, not creeping SaaS
-  // structure. The S2r-c materials pass flattens ActionRail to the deep-craft
-  // idiom (rule-framed, palette tones) and lowers both ceilings back below the
-  // frozen base. borderRadius 1078→1080, rgbaLiterals 270→272.
-  borderRadius: 1080,   // the rounded-card tell — plates are rule-framed, not rounded
+  // S2r-a/S2r-c round trip (owner's BASE RULING — the KNOWN COLLISION,
+  // 2026-07-18): S2r-a revived master's ActionRail.jsx (a ruled kill-list
+  // violator the owner ordered restored for the two-column dossier base),
+  // temporarily RAISING borderRadius 1078→1080 and rgba 270→272 for its 2 rounded
+  // radii + 2 rgba tones. S2r-c's materials pass then FLATTENED ActionRail to the
+  // deep-craft idiom (rule-framed, palette tones), striking exactly those 4 lines
+  // — so both ceilings return to the frozen base. Net across the two commits: the
+  // rail is restored AND flat, and the ratchet never permanently rose.
+  borderRadius: 1078,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 272,    // off-palette translucent washes — ink tones come from the ramp
+  rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
