@@ -14,7 +14,7 @@
 --   (founderLineage.js) expects it. Still WRITTEN-NOT-DEPLOYED (the whole 118+ chain
 --   ships together at the owner's `db push`).
 --
--- @rollback: drop function if exists public.release_founder_seat_on_clawback(uuid); drop function if exists public.claim_next_founder_seat(uuid); drop function if exists public.set_founder_display_optin(text, text); drop function if exists public.list_founder_seats_public(); drop table if exists public.founder_seat_transfers; drop table if exists public.founder_seats;
+-- @rollback: drop function if exists public.release_founder_seat_on_clawback(uuid); drop function if exists public.claim_next_founder_seat(uuid); drop function if exists public.set_founder_display_optin(text, text); drop function if exists public.list_founder_seats_public(); drop table if exists public.founder_seat_buyback_challenges; drop table if exists public.founder_seat_buybacks; drop table if exists public.founder_seat_transfers; drop table if exists public.founder_seats;
 --
 -- ⚠️  WRITTEN, NOT APPLIED (the 130–136 standing pattern). supabase/applied-head.json
 --   is deliberately NOT bumped — prod stays at its applied head; `validate:migration-head`
@@ -119,6 +119,13 @@ create table if not exists public.founder_seats (
   -- marks a post-payout dispute; 'escheat' marks an abandoned seat (§6.8).
   security_status text not null default 'normal'
                          check (security_status in ('normal','transfer_locked','flagged','escheat')),
+  -- ── Stewardship (§6.8, M-10). All nullable/defaulted (unclaimed + claimed rows stay
+  --    valid). last_dormancy_nudge_at gates the once-per-12-months dormancy nudge;
+  --    abandonment_notice_started_at stamps the escheat notice window (any sign-in clears
+  --    it); abandonment_notice_count paces the notices (≤ config notice_count). ──────
+  last_dormancy_nudge_at       timestamptz,
+  abandonment_notice_started_at timestamptz,
+  abandonment_notice_count     int not null default 0,
   updated_at         timestamptz not null default now()
 );
 
@@ -160,6 +167,49 @@ comment on table public.founder_seat_transfers is
 
 create index if not exists idx_founder_transfers_seat on public.founder_seat_transfers(seat_id, transferred_at);
 
+-- ── 2b. founder_seat_buybacks — the STANDING BUYBACK ledger (§6.8, M-10) ─────────
+-- One row per buyback (a holder sells their seat back to the company). amount_cents is
+-- snapshotted from the seat_buyback_cents dial AT CLAIM TIME (never hand-typed). The
+-- payout rides the SAME due-runner + performPayout as transfer payouts (idempotencyKey
+-- buyback-<id>; the seat_payout credits-election dedups on buyback_id — 163). state
+-- mirrors payout_status: pending_payout → releasing → paid | held | failed.
+create table if not exists public.founder_seat_buybacks (
+  id                uuid primary key default gen_random_uuid(),
+  seat_id           smallint not null references public.founder_seats(seat_id),
+  user_id           uuid references auth.users(id) on delete set null,
+  state             text not null default 'pending_payout'
+                      check (state in ('pending_payout','releasing','paid','held','failed')),
+  amount_cents      int not null,
+  payout_form       text not null default 'connect_cash'
+                      check (payout_form in ('connect_cash','account_credits')),
+  connect_account_id text,
+  stripe_transfer_id text unique,
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now(),
+  resolved_at       timestamptz
+);
+comment on table public.founder_seat_buybacks is
+  'Standing-buyback ledger (137, §6.8/M-10). One row per seat sold back to the company for the seat_buyback_cents dial amount (snapshotted at claim). Payout rides the transfer due-runner (performPayout; idempotencyKey buyback-<id>; credits-election dedups on buyback_id). Owner-readable (the account panel); service-role writes.';
+create index if not exists idx_seat_buybacks_state on public.founder_seat_buybacks(state);
+create index if not exists idx_seat_buybacks_user on public.founder_seat_buybacks(user_id, created_at desc);
+
+-- ── 2c. founder_seat_buyback_challenges — the caseless emailed 2FA code (§6.8) ───
+-- The buyback is a caseless action, so it cannot use the case-bound founder_transfer_
+-- challenges. This mirrors the 6.2 idiom (bcrypt hash, 10-min TTL, 5-attempt cap) keyed
+-- by USER. RLS-ON zero-policy — issued/verified only via the service-role RPCs (164).
+create table if not exists public.founder_seat_buyback_challenges (
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid not null references auth.users(id) on delete cascade,
+  code_hash   text not null,                     -- crypt(code, gen_salt('bf'))
+  expires_at  timestamptz not null,              -- now() + 10 min
+  attempts    int not null default 0,
+  consumed_at timestamptz,
+  created_at  timestamptz not null default now()
+);
+comment on table public.founder_seat_buyback_challenges is
+  'Emailed buyback confirmation codes (137, §6.8). Caseless (keyed by user) mirror of the founder_transfer_challenges idiom: bcrypt at rest, 10-min TTL, 5-attempt cap. RLS-ON zero-policy — service-role RPCs only.';
+create index if not exists idx_seat_buyback_challenges_user on public.founder_seat_buyback_challenges(user_id, created_at desc);
+
 -- ── 3. Seed the 30 unclaimed seats (the dignified pre-launch state at the DB) ────
 -- The seats exist as durable rows from day one, all unclaimed — the offer IS the
 -- content pre-launch. Idempotent: on-conflict-do-nothing never disturbs a claimed row.
@@ -168,8 +218,19 @@ select gs from generate_series(1, 30) as gs
 on conflict (seat_id) do nothing;
 
 -- ── 4. RLS — fail-closed; the base tables grant anon NOTHING ─────────────────────
-alter table public.founder_seats           enable row level security;
-alter table public.founder_seat_transfers  enable row level security;
+alter table public.founder_seats                    enable row level security;
+alter table public.founder_seat_transfers           enable row level security;
+alter table public.founder_seat_buybacks            enable row level security;
+alter table public.founder_seat_buyback_challenges  enable row level security;
+
+-- founder_seat_buybacks: a holder may SELECT their OWN buyback rows (feeds the account
+-- panel's buyback status). Service-role (definer RPCs) does all writes.
+drop policy if exists "Owner reads own seat buybacks" on public.founder_seat_buybacks;
+create policy "Owner reads own seat buybacks" on public.founder_seat_buybacks
+  for select using (auth.uid() = user_id);
+
+-- founder_seat_buyback_challenges: NO policy → default-deny; issued/verified only via
+-- the service-role definer RPCs (the code is never client-readable).
 
 -- founder_seats: a holder may UPDATE only their OWN seat row (the row-visibility
 -- backstop; the RPC below is the actual column-limited write path). No SELECT policy
@@ -324,6 +385,10 @@ begin
    where seat_id = (
      select seat_id from public.founder_seats
       where holder_user_id is null
+        -- ESCHEAT seats (§6.8/M-10) return to the pool but are NEVER auto-resold
+        -- (Q1) — only an owner decision releases them. A 'normal' unclaimed seat is
+        -- the only auto-assignable one.
+        and security_status = 'normal'
       order by seat_id
       for update skip locked
       limit 1

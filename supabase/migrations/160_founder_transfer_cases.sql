@@ -149,6 +149,36 @@ values ('founder_transfer_cron', jsonb_build_object(
   'note', 'Founder transfer due-runner (finalize/expiry/payout/auto-reload-cancel sweeps). url+secret null ⇒ inert; set them (runbook §11 step 7) to arm the hourly sweep.'
 )) on conflict (key) do nothing;
 
+-- ── 4b. Stewardship config (§6.8, M-10) ─────────────────────────────────────────
+-- Master switch for the STANDING BUYBACK: DISABLED by construction (LAW 1) — the owner
+-- flips it true to light the buyback affordance + edge action.
+insert into public.system_config (key, value)
+values ('founder_buyback', jsonb_build_object(
+  'enabled', false,
+  'note', 'Founder standing-buyback master switch. enabled=false until the owner lights it (dark by default; the account affordance renders the coming-soon line while off).'
+)) on conflict (key) do nothing;
+
+-- THE SEAT-BUYBACK PRICE DIAL (owner ruling 2026-07-19): ONE shared cents figure read at
+-- claim time by BOTH the standing buyback AND the abandonment claimable credit — never
+-- hand-typed into any RPC/edge body. Default $25 (2500¢). The TRANSFER payout is NOT
+-- routed through this dial — it stays price_cents/2 = $49.50 (the ratified even split).
+insert into public.system_config (key, value)
+values ('seat_buyback_cents', jsonb_build_object(
+  'cents', 2500,
+  'note', 'Standing-buyback repurchase price + abandonment claimable credit, in cents (default $25). Read at claim time. Transfer payouts are price_cents/2 and DO NOT use this dial.'
+)) on conflict (key) do nothing;
+
+-- Stewardship thresholds (§6.8): dormancy nudge cadence + abandonment notice window.
+insert into public.system_config (key, value)
+values ('seat_stewardship', jsonb_build_object(
+  'dormancy_nudge_months', 18,       -- nudge a holder dormant this long
+  'dormancy_renudge_months', 12,     -- at most once per this many months
+  'abandonment_dormant_years', 5,    -- start the escheat notice sequence past this
+  'abandonment_notice_window_days', 90,
+  'abandonment_notice_count', 3,
+  'note', 'Stewardship sweep thresholds (§6.8). The abandonment sweep fires for no one before ~2031; it exists under build-completeness.'
+)) on conflict (key) do nothing;
+
 -- ── 5. founder_transfer_enabled() — the master-switch read (surveyor_stage idiom) ─
 -- FAIL-CLOSED here (opposite of the launch-whole surveyor switch): an absent row or
 -- a non-true flag ⇒ DISABLED. A money surface stays dark unless explicitly enabled.
@@ -182,6 +212,55 @@ as $$
 $$;
 revoke all on function public._founder_transfer_dial(text, int) from public;
 grant execute on function public._founder_transfer_dial(text, int) to service_role;
+
+-- ── 5b. founder_buyback_enabled() + the buyback/stewardship dials (§6.8, M-10) ───
+-- Master-switch read for the standing buyback (FAIL-CLOSED like the transfer switch).
+create or replace function public.founder_buyback_enabled()
+returns boolean
+language plpgsql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+declare v_flag jsonb;
+begin
+  select value->'enabled' into v_flag from public.system_config where key = 'founder_buyback';
+  return v_flag is not null and jsonb_typeof(v_flag) = 'boolean' and (v_flag)::boolean;
+end;
+$$;
+revoke all on function public.founder_buyback_enabled() from public;
+grant execute on function public.founder_buyback_enabled() to authenticated, service_role;
+
+-- THE shared buyback/abandonment cents dial (owner ruling 2026-07-19). Read at claim
+-- time; default 2500 (never hand-typed). NOT used by transfer payouts.
+create or replace function public._seat_buyback_cents()
+returns int
+language sql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+  select coalesce(
+    (select (value->>'cents')::int from public.system_config where key = 'seat_buyback_cents'),
+    2500);
+$$;
+revoke all on function public._seat_buyback_cents() from public;
+grant execute on function public._seat_buyback_cents() to service_role;
+
+-- Internal int-dial reader for the 'seat_stewardship' config row (or a default).
+create or replace function public._seat_stewardship_dial(p_key text, p_default int)
+returns int
+language sql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+  select coalesce(
+    (select (value->>p_key)::int from public.system_config where key = 'seat_stewardship'),
+    p_default);
+$$;
+revoke all on function public._seat_stewardship_dial(text, int) from public;
+grant execute on function public._seat_stewardship_dial(text, int) to service_role;
 
 -- ── 6. _log_founder_transfer_event — the same-transaction audit append ──────────
 -- Internal helper (service-role); the transition RPCs call it while holding the row,

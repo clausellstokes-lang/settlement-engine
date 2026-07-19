@@ -91,7 +91,7 @@ create or replace function public.run_founder_transfer_due()
 returns text
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare cfg jsonb; verdict text; cfg_url text; cfg_secret text; req_id bigint;
 begin

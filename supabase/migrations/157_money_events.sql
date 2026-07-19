@@ -60,7 +60,8 @@ create table if not exists public.money_events (
                   'credit_pack','founder_seat','single_dossier',
                   'subscription_start','subscription_renewal',
                   'surveyor_start','surveyor_renewal','auto_reload',
-                  'seat_transfer_payment','seat_transfer_payout','refund_note')),
+                  'seat_transfer_payment','seat_transfer_payout',
+                  'seat_buyback','refund_note')),  -- seat_buyback: §6.8/M-10 standing buyback payout
   amount_cents  integer not null,
   currency      text not null default 'usd',
   description   text not null,                  -- server-composed, human-readable
