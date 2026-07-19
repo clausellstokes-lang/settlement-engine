@@ -1153,6 +1153,20 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER NIGHT ORDERS (2026-07-19 ~22:20 PT) — LANE SATURATION + THE FABLE
+DEADLINE:** "there should never be an empty lane, check every 15 minutes to see
+if a lane has stalled. I need to complete this by the end of 11:59:59 PM PT
+because that is when Fable free for users ends." Operationalized: 15-minute
+lane-keeper heartbeat armed (session cron; liveness by fresh commits/processes;
+stalled lanes resumed with corrective orders; freed worktrees refilled from the
+§2 queue). FOUR lanes saturated: C4 craft (deep-craft) · C2L (side-branch) · T-5
+(traditions) · ⭐ C13 THE ONE DOOR dispatched on a FABLE implementer (escalation
+clause spent deliberately inside the free-Fable window; side-branch
+claude/deep-craft-c13 off 67586c86; architecture-before-sweep build order;
+all-or-none violet→slate with fold-reconciliation file list). At the boundary
+(~03:00 EDT) THE CONTINUITY ORDER governs: the Opus ultracode successor
+continues the heartbeat + queue with full standing authority (START_HERE §6b);
+the ledger stays the source of truth commit-by-commit.
 **⬛ OWNER RE-RATIFICATION (2026-07-19, night) — the overnight delegation + the
 bold-over-safe law, verbatim intent:** "yes keep continuing. If there comes
 decisions to be made, I delegate them to you according to the standards that we
