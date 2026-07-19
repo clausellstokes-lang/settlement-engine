@@ -23,6 +23,25 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3b. ⭐ SNAPSHOT REFRESH 2026-07-19 (~05:45 EDT — supersedes §3 below; git wins)
+- The NIGHT RUN landed the ENTIRE deep-craft build: C1–C16 all complete;
+  traditions lane complete (T-1..T-5, tip 80b8ad71); illustrated-town complete
+  (d16d348e); FOLD BATCH 1 folded c2(+c2l)/c13/c5 into claude/deep-craft
+  (tip aa55836a+burn-down commits, main deep-craft worktree agent-a39bc...).
+- UNFOLDED branches awaiting FOLD BATCH 2 (ceilings set to measured counts at
+  the fold): deep-craft-c14c15 @ 7748d49a · deep-craft-c16 @ 41ae4a1e ·
+  deep-craft-pages @ 55e4a69c (carries a DECLARED kill-list red by design) ·
+  restoration-pdf @ 2e4f3282 · restoration-chrome (running) ·
+  restoration-compendium (running) · the burn-down commits on deep-craft itself.
+- Phase-D: census COMPLETE (docs/PHASE_D_RESTORATION_CENSUS_2026-07-19.md);
+  restoration ledger at ZERO PENDING (23 RESTORATION-OWED being worked by the
+  sweeps). Expected reds NOW: the 4 parked goldens + aiGrounding freshness;
+  organicSamples was CURED at C3-e (a red there = new drift); pages-lineage
+  branches carry the declared kill-list red until fold 2.
+- The 15-min lane-keeper heartbeat + the ledger rows (newest-first around line
+  ~1137) are the live state. THE FABLE BOUNDARY: 23:59:59 PT Jul 19 — the
+  continuity order (§6b) hands this loop to the Opus successor unchanged.
+
 ## 3. STATE SNAPSHOT AT WRITE TIME (verify with git — never trust this over git)
 - **Main tree** (/Users/cstokes/Desktop/settlement-engine) = branch
   `review-fixes-2026-07-08` — LEDGER ONLY. Never check out code branches here.

@@ -1153,6 +1153,24 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ RESTORATION SWEEP 1 COMPLETE (2026-07-19, claude/restoration-pdf @
+2e4f3282, 4 commits).** All of census §1 #18–21 restored: R1-a #20 causal-detail
+threading (inherited, re-verified) · cd4b7f40 R1-b #21 viewModel (entity-anchor
+ids · lineage · magicProfile · the shared collectPlotHooks aggregator; every
+program addition kept — pdf-3 byDesignContradictions untouched) · 29d60afd R1-c
+#18+#19 (RULE & SUCCESSION + OCCUPIED banner + PartyRef anchors; MAGIC LEGALITY
+gated liveWorld&&exists) · 2e4f3282 R1-d control-byte corruption fix (the F24
+class, caught by controlBytes.test + byte-scan). WIP VERDICT: the dead agent's
+inline WIP breached the viewModel ceiling by 24 lines — REVERTED that one file,
+REDONE cleanly. ⭐ THE CEILING OUTCOME BEAT THE PLAN: no leaf needed — the
+collectPlotHooks restoration is a net reduction; viewModel lands at 1002
+effective (master's own structure ≈1000) and the size baseline RATCHETS DOWN
+1043→1002. TWO CENSUS CLAIMS CORRECTED on inspection: relationshipsHeadline
+never existed (the real work = neighbour anchor ids); the goldenViewModel
+diff is NOT extended (it snapshots the canon deriveDossierViewModel, not
+buildViewModel) — nothing re-recorded, the parked diff stays defense 63→65 +
+institutions 54→55. 14 new element-tree pins. Full suite EXACTLY the 5 after
+isolation-clearing 7 contention flakes. Zero deferrals. FOLD-READY.
 **⚠ SESSION-LIMIT STRIKE + RELAUNCH (2026-07-19 ~04:50 EDT).** All four running
 lanes (burn-down · resto1 · resto2 · resto3) terminated early on the API session
 limit (reset 04:50). Damage: burn-down + resto3 died CLEAN (no commits/WIP lost);
