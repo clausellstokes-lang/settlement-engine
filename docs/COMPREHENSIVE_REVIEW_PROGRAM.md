@@ -1153,6 +1153,20 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ C1-FIN REMAINDER: STALE-BRIEF STOP (2026-07-19) — the manager's brief was
+WRONG and the lane caught it.** Items 1/2/4 (create consolidation + unfold leaf ·
+wizard tint trio · evolution backdrops) were ALREADY SHIPPED on this lineage as
+C1r-c1 5e7cbdf4 / C1r-c2 4075b499 / C1r-c3 01ad3a8f + C1r-d 88348274 — the
+manager scoped from a stale memory line instead of the lineage git log; the lane
+STOP-AND-REPORTED with receipts, wrote zero code, left the tree clean (the
+VERIFY-FIRST discipline working exactly as designed; memory
+c1fin-remainder-brief-stale.md records it). The ONE genuine remainder — the
+config-panel de-round (TradeDynamics −5 pills · ServicesToggle −4 ·
+LayeredConfigurationPanel net-neutral plate chrome) — is blocked by the
+kill-list single-writer seat and is HANDED TO C3 as a scope addendum (ceiling
+drop ~1054→1045 in the same commit, lane-verified count). The empty
+c1fin worktree/branch removed (zero commits, rev-parse-verified). SLICE C1-FIN
+IS THEREBY COMPLETE except the addendum riding C3. C14+C15 dispatch.
 **⬛⭐ C2 THE WELCOME FILM COMPLETE (2026-07-19, claude/deep-craft-c2 @ 34f4e554,
 3 commits stacked on the C2L tip, NOT folded).** 3d82a444 C2-a scroll conductor:
 shared-core EXTRACTION (projectLegFrame consumed by BOTH the clock and scroll
