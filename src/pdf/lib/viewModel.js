@@ -22,6 +22,7 @@
  */
 
 import { flag } from '../../lib/flags.js';
+import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
@@ -29,9 +30,12 @@ import {
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
+import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
-import { buildDossierEntityIndex } from '../../domain/dossier/entityLinks.js';
+import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
+import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
+import { factionIdFromName } from '../../lib/entities.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -492,6 +496,10 @@ function powerSlice(active) {
   const s = active || {};
   const factionList = s?.powerStructure?.factions || s?.factions || [];
   const factions = factionList.map(f => ({
+    // Phase-D anchor identity — the canonical faction id (snake) the index keys
+    // factions by and an NPC's `factionLink` resolves to. The faction card uses
+    // it to set its own anchor target; mentions elsewhere link to it.
+    id:          factionIdFromName(f?.faction || f?.name || f?.label) || null,
     name:        f?.faction || f?.name || '',
     power:       f?.power || 0,
     rawPower:    f?.rawPower ?? null,
@@ -556,6 +564,18 @@ function powerSlice(active) {
     governanceFractured: !!s?.powerStructure?.publicLegitimacy?.governanceFractured,
     criminalCapture: s?.powerStructure?.criminalCaptureState || null,
     governmentType:  s?.powerStructure?.governmentType || s?.governmentType || null,
+    // Rule & Succession lineage — the conquest/coup provenance the engine records
+    // on `previousGovernments` (warDeployment mints a `conquest`-cause transfer
+    // when a siege falls). Self-gating: an empty array renders nothing, so a
+    // settlement with no regime history is byte-identical.
+    lineage: (Array.isArray(s?.powerStructure?.previousGovernments)
+      ? s.powerStructure.previousGovernments
+      : []).map(g => ({
+        government: g?.government || g?.governingName || g?.name || null,
+        cause: g?.cause || null,
+        tick: Number.isFinite(g?.tick) ? g.tick : null,
+        by: g?.by || g?.successor || null,
+      })).filter(g => g.government || g.cause),
     conflicts,
     tensions,
   };
@@ -739,6 +759,8 @@ function servicesSlice(active) {
   const s = active || {};
   const institutions = s?.institutions || [];
   const detailed = institutions.map(inst => ({
+    // Phase-D anchor identity — matches the index entry built off this raw inst.
+    id: inst?.id || entityIdFor('institution', inst),
     name: inst?.name || inst?.label || 'Institution',
     category: inst?.category || 'other',
     subCategory: inst?.subCategory || inst?.type || null,
@@ -890,6 +912,22 @@ function viabilitySlice(active) {
     .filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
+  // Magic legality facets — the 10-facet magic profile summarized
+  // for the Viability/Identity chapter, via the SAME summarizeMagic the screen
+  // Magic sub-tab reads. Self-gating: a dead-magic world (magicExists === false)
+  // yields { exists:false, lines:[] } ⇒ the section renders nothing extra, so a
+  // no-magic save is byte-identical. The profile is `null` for a null settlement.
+  const magicProf = deriveMagicProfile(s);
+  const magicProfile = magicProf
+    ? {
+        exists: magicProf.magicExists !== false,
+        legality: magicProf.legality || null,
+        availability: magicProf.availability || null,
+        institutionalControl: magicProf.institutionalControl || null,
+        lines: magicProf.magicExists === false ? [] : summarizeMagic(s),
+      }
+    : { exists: false, legality: null, availability: null, institutionalControl: null, lines: [] };
+
   return {
     viable:                v.viable,
     verdict:               v?.verdict || (v?.viable === true ? 'viable' : v?.viable === false ? 'notViable' : null),
@@ -921,6 +959,7 @@ function viabilitySlice(active) {
     magicDependency:       !!dp?.magicDependency,
     activeMagicChains:     v?.activeMagicChains?.length ? v.activeMagicChains : activeMagicChains,
     byDesignContradictions: v?.byDesignContradictions?.length ? v.byDesignContradictions : byDesignContradictions,
+    magicProfile,
   };
 }
 
@@ -1017,7 +1056,14 @@ function npcsSlice(active) {
     }
     // Engine plotHooks is array of strings; titles aren't present as a separate field for some npcs
     const npcRace = n?.race || n?.culture || culture;
+    // Phase-D anchor identity. `id` keys this NPC's card anchor (matches the
+    // index entry built off the SAME raw npc); `factionLink` is the canonical
+    // faction id (== a faction card's id) the NPC's stated affiliation resolves
+    // to, so the affiliation chip can link to that faction with no name match.
+    const factionRefName = labelOfFactionRef(n?.factionAffiliation || n?.faction || n?.category);
     return {
+      id: n?.id || entityIdFor('npc', n),
+      factionLink: factionRefName ? factionIdFromName(factionRefName) : null,
       name: n?.name || 'Unnamed',
       title: n?.title || n?.role || n?.presentation || null,
       race: npcRace,
@@ -1046,98 +1092,45 @@ function npcsSlice(active) {
   };
 }
 
+// Map the on-screen plot-hook CATEGORY (collectPlotHooks) to the PDF section's
+// SOURCE group key (PlotHooks.jsx groups + labels by `source`). Keeps the two
+// surfaces rendering the SAME hooks from the SAME aggregator.
+const HOOK_CATEGORY_TO_SOURCE = Object.freeze({
+  npc: 'npc',
+  faction: 'conflict',
+  tension: 'tension',
+  economics: 'crisis',
+  safety: 'crime',
+  history: 'history',
+  relationship: 'relationship',
+});
+
+// collectPlotHooks priority is a 0–9 NUMBER; the PDF section keys its priority
+// dot/tag off a BAND string (PRIORITY_TONE in PlotHooks.jsx).
+function hookPriorityBand(n) {
+  if (n >= 8) return 'high';
+  if (n >= 6) return 'medium';
+  return 'low';
+}
+
 function hooksSlice(active) {
   const s = active || {};
-  const hooks = [];
-  for (const npc of (s?.npcs || [])) {
-    for (const h of (npc?.plotHooks || [])) {
-      hooks.push({
-        source: 'npc',
-        sourceName: npc.name || npc.title || 'NPC',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const c of (s?.conflicts || [])) {
-    for (const h of (c?.plotHooks || [])) {
-      hooks.push({
-        source: 'conflict',
-        sourceName: Array.isArray(c.parties) ? c.parties.join(' vs ') : 'Conflict',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const h of (s?.economicState?.safetyProfile?.plotHooks || [])) {
-    hooks.push({
-      source: 'crime',
-      sourceName: 'Underworld',
-      hook: h,
-      priority: priorityOfHook(h),
-      category: categoryOfHook(h),
-    });
-  }
-  for (const h of (s?.economicViability?.plotHooks || [])) {
-    hooks.push({
-      source: 'crisis',
-      sourceName: 'Economic Crisis',
-      hook: h,
-      priority: priorityOfHook(h),
-      category: categoryOfHook(h),
-    });
-  }
-  // Tensions hooks
-  for (const t of (s?.history?.currentTensions || [])) {
-    for (const h of (t?.plotHooks || [])) {
-      hooks.push({
-        source: 'tension',
-        sourceName: t?.label || t?.type || 'Tension',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  // Relationship hooks
-  if (s?.prominentRelationship?.plotHooks) {
-    for (const h of s.prominentRelationship.plotHooks) {
-      hooks.push({
-        source: 'relationship',
-        sourceName: s.prominentRelationship?.otherSettlement || 'Neighbour',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  for (const n of (s?.neighbours || s?.neighbourNetwork || [])) {
-    for (const h of (n?.plotHooks || [])) {
-      hooks.push({
-        source: 'relationship',
-        sourceName: n?.neighbourName || n?.name || 'Neighbour',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
-  // History event hooks
-  for (const e of (s?.history?.historicalEvents || [])) {
-    for (const h of (e?.plotHooks || [])) {
-      hooks.push({
-        source: 'history',
-        sourceName: e?.type || 'Historical event',
-        hook: h,
-        priority: priorityOfHook(h),
-        category: categoryOfHook(h),
-      });
-    }
-  }
+  // PARITY: the on-screen Plot Hooks tab and the PDF chapter now BOTH derive from
+  // the shared aggregator (domain/dossier/plotHooks.collectPlotHooks) — same seven
+  // sources, same `PLOT HOOK:`-prefix cleanup, same priority sort. The previous
+  // hand aggregation here used a different source set (neighbour/prominent-
+  // relationship hooks instead of settlement.relationships), no sort, no cleanup,
+  // and a priority that was null for every plain-string hook. We adapt the shared
+  // output to the PDF section's {source, sourceName, hook, priority, category} shape.
+  const all = collectPlotHooks(s).map((h) => ({
+    source: HOOK_CATEGORY_TO_SOURCE[h.category] || 'other',
+    sourceName: h.source,
+    hook: h.text,
+    priority: hookPriorityBand(h.priority),
+    category: h.category,
+  }));
   return {
-    all:      hooks,
+    all,
     tensions: s?.history?.currentTensions || [],
   };
 }
@@ -1150,14 +1143,26 @@ function relationshipsSlice(active) {
     crossConflicts:  s?.crossSettlementConflicts || [],
     crossNpcContacts: s?.crossSettlementNPCContacts || [],
     crossFactions:   s?.crossFactions || [],
-    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => ({
-      name: n?.neighbourName || n?.name || 'Neighbour',
-      type: n?.relationshipType || n?.type || null,
-      description: n?.description || null,
-      hooks: n?.plotHooks || [],
-      lastEvent: n?.lastEvent || null,
-      flavour: n?.flavour || n?.flavor || null,
-    })),
+    neighbours:      (s?.neighbourNetwork || s?.neighbours || []).map(n => {
+      const name = n?.neighbourName || n?.name || 'Neighbour';
+      return {
+        // Phase-D anchor identity — matches the index's neighbourIdFor (the
+        // entry's own id, or a name-derived `neighbour.<slug>`). The card sets
+        // this as its anchor target; trade partners resolve to it.
+        id: n?.id || `neighbour.${slugifyEntity(name)}`,
+        name,
+        type: n?.relationshipType || n?.type || null,
+        // For the asymmetric pairs (overlord/vassal, patron/client), the
+        // directional label states WHICH SIDE this settlement is, naming the
+        // neighbour ("Overlord of X"); null for symmetric links / legacy rows,
+        // so the card keeps its plain titled label.
+        directionalLabel: directionalRelationshipLabel(n, name),
+        description: n?.description || null,
+        hooks: n?.plotHooks || [],
+        lastEvent: n?.lastEvent || null,
+        flavour: n?.flavour || n?.flavor || null,
+      };
+    }),
     neighborSingle:  s?.neighborRelationship || null,
     npcs:            s?.npcs || [],
     npcRelationships: s?.npcRelationships || [],
@@ -1299,18 +1304,6 @@ function cleanRelationships(arr) {
     }
     return false;
   });
-}
-
-function priorityOfHook(h) {
-  if (!h) return null;
-  if (typeof h === 'object') return h.priority || null;
-  return null;
-}
-
-function categoryOfHook(h) {
-  if (!h) return null;
-  if (typeof h === 'object') return h.category || null;
-  return null;
 }
 
 function firstSentence(s) {
