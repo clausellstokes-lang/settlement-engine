@@ -65,6 +65,7 @@ import { ladderInstabilityOf } from '../townMap/ladderRead.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKernel.js';
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
+import { advanceRelations } from '../traditions/relations.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -516,6 +517,19 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
   /** @type {Record<string, TraditionRec[]>} */
   const nextLedger = {};
 
+  // §8/§9 RELATIONS cross-settlement read (T-4): resolve any settlement's rec set for the
+  // overlord's imposed rite / a migrant origin's carried rite — its persistent set from the
+  // PRIOR ledger (order-independent, a one-tick lag is immaterial for a rare yearly event),
+  // falling back to the pure founding derivation when it has not been minted yet.
+  /** @param {string} otherSid @returns {TraditionRec[]|null} */
+  const traditionsOf = (otherSid) => {
+    const other = String(otherSid);
+    const prior = priorLedger[other];
+    if (Array.isArray(prior)) return /** @type {TraditionRec[]} */ (prior);
+    const os = freshSettlement(other);
+    return os ? deriveFoundingTraditions(/** @type {Parameters<typeof deriveFoundingTraditions>[0]} */ (os)) : null;
+  };
+
   // §5 accumulators (applied ONCE after the pass, through the bounded writers).
   /** @type {Map<string, number>} */
   const prosperityDeltas = new Map();
@@ -543,17 +557,30 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     // checkpoints + §7 mutations otherwise. Ownership is fresh BEFORE occurrences resolve,
     // so this year's effect routes to the current owner.
     const politics = advancePolitics({ recs: baseRecs, settlement: asObject(s), worldState, sid, year, minted });
-    const workRecs = politics.recs;
+
+    // RELATIONS (T-4): §8 imposition/restoration (+ §9 adoption) run AFTER politics settles
+    // ownership/expression and BEFORE occurrences resolve, so this year's festival routes
+    // through the post-relation set. The founding core's scaleBand is the current tier band
+    // (politics keeps it current via scale-up) — the imposed-scale cap. A NO-OP at the mint.
+    const localTierBand = num(asObject(politics.recs[0]).scaleBand, 0);
+    const relations = advanceRelations({
+      recs: politics.recs, settlement: asObject(s), worldState, sid, year, localTierBand, minted, traditionsOf,
+    });
+    const workRecs = relations.recs;
 
     const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
-    const maxScale = workRecs.reduce((m, r) => Math.max(m, num(r.scaleBand, 0)), 0);
+    // The grandest ACTIVE (non-suppressed) observance sets the MAJOR-news bar; a suppressed
+    // rite does not occur, so it never counts toward the grandest.
+    const maxScale = workRecs.reduce((m, r) => (asObject(r).suppressedBy ? m : Math.max(m, num(r.scaleBand, 0))), 0);
     const warTypes = warStressorTypesFor(worldState, sid);
     const skip = shouldSkip(s, warTypes);
 
-    // Resolve each observance whose window opened this year (idempotent via lastHeldYear).
+    // Resolve each observance whose window opened this year (idempotent via lastHeldYear). A
+    // SUPPRESSED rite (traded away under vassalage, §8) does not occur — it waits for liberation.
     let occurred = false;
     /** @type {TraditionRec[]} */
     const nextRecs = workRecs.map((rec) => {
+      if (asObject(rec).suppressedBy) return rec;
       const opens = inWindow(weekOfYear, rec.window) && num(rec.lastHeldYear, -Infinity) < year;
       if (!opens) return rec;
       occurred = true;
@@ -588,9 +615,10 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       return { ...rec, lastHeldYear: year, lastOutcome: outcome };
     });
 
-    // Changed if freshly minted, a checkpoint reassigned/mutated, or an occurrence stamped
-    // a record; a fully-quiet carried set is byte-stable (the prior ledger ref).
-    const settlementChanged = minted || politics.changed || occurred;
+    // Changed if freshly minted, a checkpoint reassigned/mutated, a §8/§9 relation imposed/
+    // restored/adopted, or an occurrence stamped a record; a fully-quiet carried set is byte-
+    // stable (the prior ledger ref).
+    const settlementChanged = minted || politics.changed || relations.changed || occurred;
     if (!settlementChanged) nextLedger[sid] = /** @type {TraditionRec[]} */ (priorRecs); // byte-stable carry
     else nextLedger[sid] = nextRecs;
   }
