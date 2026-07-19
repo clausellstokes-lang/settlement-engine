@@ -599,7 +599,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
-      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
+      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return (

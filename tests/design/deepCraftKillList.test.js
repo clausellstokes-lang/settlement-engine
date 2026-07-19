@@ -78,7 +78,12 @@ const CEILINGS = Object.freeze({
   // deep-craft idiom (rule-framed, palette tones), striking exactly those 4 lines
   // — so both ceilings return to the frozen base. Net across the two commits: the
   // rail is restored AND flat, and the ratchet never permanently rose.
-  borderRadius: 1078,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C4 S1 panel C, THE DOSSIER — OverviewTab base restoration):
+  // borderRadius 1078→1077. The Overview tab's Spatial Layout was restored from
+  // the composite's bespoke green sub-collapsible to master's shared Section
+  // primitive (own top-level collapsible level), striking the hand-rolled outer
+  // div's inline borderRadius:8 (the Section's frame lives in the primitive).
+  borderRadius: 1077,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
