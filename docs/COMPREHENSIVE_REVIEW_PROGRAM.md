@@ -1134,6 +1134,26 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19) — THE EMBASSY EXTENSION (roads R-8).** Peace
+embassies join the roads: wartime sue-for-peace journeys with TWO VENUES (road parley
+when the TARGET's own army intercepts · court suit at the enemy gate), the THIRD-PARTY
+RULE (other enemies don't negotiate — standard capture), THE INSULT/HUMILITY AMPLIFIER
+(envoy rank × faction power; lowest-of-lowest = insult, highest-of-highest = humility;
+the trade-off — better envoy = better peace + richer hostage prize — is emergent and
+deliberate), honor-bound failure (hostage or turned home, never worse — the no-death
+law in period costume), and THE PEACE AMNESTY (peace releases ALL hostages both sides
+hold, immediate escorted return — the existing early-release trigger made bilateral).
+Plus purposes 6/7: DOMINION INSPECTION (occupied/vassal holdings) and RUMOR
+VERIFICATION (travel to a trusted source; the return WRITES the home rumor ledger —
+the coherence-mandate seed archetype promoted to a first-class purpose; LAW 6 write
+list gains deposit (g)). Plus the ESCORT REFINEMENT: protection gains
+settlement power + influence terms alongside military quality and NPC rank.
+ARCHITECTURE PRESERVED: the embassy DEPOSITS, the peace machinery CONSUMES (the
+returned-captive precedent; roads never writes war state; recon-first on the
+war-termination seam). §4.3's no-wartime-envoys rule amended: embassies are the
+sanctioned wartime journey. DESIGN_THE_ROADS §11b + R-8 slice added (this commit);
+R-8 dispatches AFTER the running R-5..R-7 lane closes; the running lane gets a
+scope-freeze heads-up (finish as briefed; don't pin purpose-count exhaustiveness).
 **⬛⭐⭐ WAVE A CLUSTER 2 COMPLETE — COMPLETION WAVES A-D ARE ALL LANDED (2026-07-19,
 claude/wave-a2-sweep @ 3398ecea, WA2-a..f atop aad6265e — manager-verified lineage).**
 The flat-idiom conversion for src/components OUTSIDE new/: 186 files, 6 lettered

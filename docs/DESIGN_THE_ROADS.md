@@ -303,8 +303,10 @@ Two kernel headers carve named-NPC protection as law and MUST be amended in plac
      merchant/economy category.
   3. DIPLOMACY — relationship home↔dest at rung `rival` or `cold_war`
      (relationshipState.js:74/:83) ⇒ a repair mission; government/noble
-     category candidates. `hostile` = open war ⇒ NO envoys (peace machinery
-     owns war termination; roads never duplicates it).
+     category candidates. `hostile` = open war ⇒ NO routine envoys — but PEACE
+     EMBASSIES are the sanctioned wartime journey (owner ruling 2026-07-19,
+     §11b/R-8): the embassy DEPOSITS, the peace machinery CONSUMES; roads
+     still never writes war state.
   4. LADDER — only when npcLadderEnabled is lit: a rung-holder with an active
      dynamic goal draws a seeded personal mission whose destination is the
      range-nearest settlement bearing on the goal's domain (e.g. a trade-domain
@@ -532,6 +534,64 @@ Two kernel headers carve named-NPC protection as law and MUST be amended in plac
   operationRegistry + `gen:compendium-data` regen (law 12). Both ops ship
   guidance whispers (the lifecycle-doc covenant).
 
+## §11b R-8 — THE EMBASSY EXTENSION (owner ruling 2026-07-19; implements after R-7)
+- PURPOSE 5 — PEACE EMBASSY (wartime-only): a court dispatches an envoy to a
+  settlement it is at open war with, intent = sue for peace. TWO VENUES:
+  (a) ROAD PARLEY — interception by the TARGET's own army column converts the
+  T1 encounter from a capture roll into a negotiation on the road; (b) COURT
+  SUIT — arrival at the enemy gate as a declared embassy → negotiation there.
+  THIRD-PARTY RULE: if the target is at war with 2+ powers, any OTHER enemy
+  encountered en route does NOT negotiate — the suit wasn't addressed to them;
+  standard T1 capture applies ("simply take them hostage").
+- THE AMPLIFIER — envoy weight = f(envoy ladder rank/importance, envoy
+  faction's power standing in the suing settlement), THE INSULT/HUMILITY
+  CURVE: lowest-of-the-lowest reads as INSULT (negative modifier — may worsen
+  the suit); highest-of-the-highest reads as HUMILITY (strongest positive).
+  THE TRADE-OFF IS EMERGENT and deliberate: a greater envoy amplifies peace
+  AND signals humility AND walks a richer ransom prize into the lion's den —
+  dispatch refusal (§5) and faction tolerance weigh it. "The better the
+  effort of pursuing peace, the least damaged out of the negotiations."
+- SINGLE-WRITER PRESERVED (the returned-captive precedent, §10): the embassy
+  writes an EMBASSY RECORD into the roads ledger (venue, envoyWeight,
+  amplifier, tick); the EXISTING war-termination/peace machinery consumes it
+  through its OWN gates as a peace-probability modifier + causal receipt
+  ("peace was sued at the gates of X by Y"). RECON-FIRST for the implementer:
+  locate the exact war-termination seam; if no consumable hook exists, add
+  the MINIMAL consumption limb in the war system (deposit-and-consume, never
+  a roads-side war write). Roads never resolves the war; it carries the suit.
+- FAILURE (honor & chivalry — the no-death law in period costume): the court
+  (or parley captor) rolls disposition: HOSTAGE (standard ransom machinery,
+  captor = the target) or TURNED HOME (expulsion-shape return, receipted).
+  Never worse. Success: the peace machinery does what it does; the envoy
+  returns home under escort with a NOTABLE receipt.
+- THE PEACE AMNESTY (generalizing the existing early-release event): when
+  peace settles between two powers, ALL hostages EITHER side holds release
+  IMMEDIATELY and begin the journey home under armed escort (the ordinary
+  return leg; escort = the RELEASING side's courtesy detail). The existing
+  "peace between home and captor" early-release trigger becomes bilateral
+  and universal; pinned both directions.
+- PURPOSE 6 — DOMINION INSPECTION: an envoy of an occupying/suzerain power
+  travels to view an occupied or vassalized holding (destination = a
+  settlement under the home power's occupation-ladder rung); low external
+  threat, hostile-population texture; receipts feed the occupation display.
+- PURPOSE 7 — RUMOR VERIFICATION: travel to a MORE TRUSTED source settlement
+  to confirm information ("confirm information and rumors from a more
+  trusted source") — the journey's RETURN explicitly WRITES the home rumor
+  ledger with a freshness/fidelity boost for the verified events (this
+  promotes the coherence-mandate seed archetype — traveler-writes-rumor —
+  from loop candidate to first-class purpose; the write rides the mover's
+  sanctioned ledger surface, LAW 6 amended to include the home rumor-ledger
+  deposit as write (g)).
+- ESCORT REFINEMENT (amendment to the §7 protection formula, ALL purposes):
+  protection = (1 + ESCORT_SCALE × importanceWeight) × militaryQuality01 ×
+  settlementWeight01, where settlementWeight01 = clamp(0.8 + 0.2 ×
+  powerRank01 + 0.15 × influenceRank01, 0.8, 1.3) — the home settlement's
+  power and influence rankings scale the escort's weight alongside military
+  might and the traveler's rank ("scales the protection weight based on the
+  military might, power ranking, and influence ranking of that settlement
+  and that NPC"). Read-only derivation from existing rankings; frozen at
+  dispatch like the rest.
+
 ## §12 CHRONICLE + SURFACES
 - NEWS (mover newsEntries[] → applyPulseMover fold, pulseKernel.js:2342;
   distance-priced spread untouched): departure (quiet; NOTABLE for pillar or
@@ -752,8 +812,17 @@ git: stage explicit files only, `git stash` FORBIDDEN)
   (worldState reference-equal). DONE-WHEN: a war-shaped fixture composes all
   three sections with sources; a quiet world composes an empty bundle; zero
   sim writes proven.
+- R-8 THE EMBASSY EXTENSION (§11b): a) embassy purpose + venues + amplifier +
+  embassy record + the war-seam consumption limb (recon-first) · b) failure/
+  amnesty (bilateral release pinned both ways) + escort refinement + purposes
+  6/7 (dominion inspection · rumor verification with the return-side ledger
+  write) · c) charter extension: embassy cells join the walkthrough (a peace
+  sued and settled; an insult suit; a third-party capture; the amnesty
+  release) + prose pools. GATES: focused + dormancy re-run + the war-system
+  goldens untouched except via its own consumption gates.
 ORDERING: R-1 → R-2 → R-3 → R-4 → R-5; R-6 after R-2 (mission records exist);
-R-7 after R-3 (threat reads exist). R-6a may land any time after R-1 if the
+R-7 after R-3 (threat reads exist); R-8 after R-4 (it consumes ransom/release
+machinery) — a separate dispatch after the R-5..R-7 lane closes. R-6a may land any time after R-1 if the
 lane needs parallelism. FULL SUITE at lane end (the focused-gates blind spot
 is proven — owner memory; resto2-style flake isolation: diff isolation runs,
 never raw failing sets).
