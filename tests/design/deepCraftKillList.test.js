@@ -99,7 +99,11 @@ const CEILINGS = Object.freeze({
   // became rule-framed impact lines in the two rationed rubric tones (gold
   // apparatus / oxblood critical); the ImpactRow radius and the panel's z-axis
   // drop-shadow (with its rgba) were struck (depth is a rule, not elevation).
-  borderRadius: 1072,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C4c-d, THE ERRATUM SLIP — WhatChangedPanel materials pass):
+  // borderRadius 1072→1071. The "what changed & why" card de-rounded to a
+  // rule-framed correction slip (container borderRadius:R.md struck); regressions
+  // now read in the oxblood erratum voice, improvements in neutral ink.
+  borderRadius: 1071,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 114,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 269,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 236,  // the tinted callout box — replaced by rubric-headed clerk's notes
