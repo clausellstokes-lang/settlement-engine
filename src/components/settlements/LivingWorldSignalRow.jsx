@@ -46,7 +46,7 @@ function Pip({ color, children, title, crisis = false }) {
         fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
         color: crisis ? CRISIS_TXT : color,
         background: crisis ? color : `${color}14`,
-        borderRadius: 8, padding: '1px 6px', whiteSpace: 'nowrap',
+        padding: '1px 6px', whiteSpace: 'nowrap',
       }}
     >
       {children}

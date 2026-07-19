@@ -165,7 +165,13 @@ const CEILINGS = Object.freeze({
   // border+ink stamp (−1 usage +1 import both drop AMBER_BG → −2 tinted). ELEV/R/
   // AMBER_BG imports retired; the seven data-tour anchors, the teaching-title panel,
   // and the pinned desktop-gate title are all untouched.
-  borderRadius: 1002,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C3-e, THE RETAINED LIBRARY CHIPS): borderRadius 1002→996. The six
+  // small status stamps the C3 ledger conversion left rounded fell to flat stamps —
+  // SettlementCard's neighbour badge, the network-effect +/- badges, and the three
+  // regional-count badges (queued/applied/resolved), plus the shared Pip in
+  // LivingWorldSignalRow (war/faith/disposition/standing). Radius only; the semantic
+  // tints (neighbour hue, success/danger/info/gold washes) are unchanged.
+  borderRadius: 996,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 108,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 260,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 232,  // the tinted callout box — replaced by rubric-headed clerk's notes

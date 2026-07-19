@@ -215,7 +215,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {(s.settlement.neighbourNetwork||[]).slice(0,3).map((n,ni) => {
                       const nc = REL_COLORS[n.relationshipType] || MUTED;
-                      return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap' }}>
+                      return <span key={ni} style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:`${nc}12`, padding:'1px 6px', whiteSpace:'nowrap' }}>
                         {n.neighbourName||n.name} · {(n.displayRelationshipType||n.localRelationshipRole||n.relationshipType||'linked').replace(/_/g,' ')}
                       </span>;
                     })}
@@ -231,7 +231,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   return <div style={{display:'flex',gap:SP.xs,flexWrap:'wrap'}}>
                     {badges.map(c => {
                       const v = m.totals[c.key]; const pos = v >= 0;
-                      return <span key={c.key} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, borderRadius:8, padding:'1px 5px', whiteSpace:'nowrap' }}>
+                      return <span key={c.key} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
                         {c.label} {fmtMod(v)}
                       </span>;
                     })}
@@ -240,17 +240,17 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 {regionalCounts && (regionalCounts.queued || regionalCounts.applied || regionalCounts.resolved) > 0 && (
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {regionalCounts.queued > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.queued} queued
                       </span>
                     )}
                     {regionalCounts.applied > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.successBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.applied} applied
                       </span>
                     )}
                     {regionalCounts.resolved > 0 && (
-                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, borderRadius:8, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
+                      <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:swatch.infoBg, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
                         {regionalCounts.resolved} resolved
                       </span>
                     )}
