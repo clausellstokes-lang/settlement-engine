@@ -7,7 +7,8 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
-import { botGuard } from '../_shared/requestMeta.ts';
+import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
+import { checkUserIpRate } from '../_shared/rateLimit.ts';
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
@@ -69,6 +70,32 @@ export async function handleCreateCustomerPortal(
     if (authError || !user) throw new Error('Not authenticated');
 
     const supabaseAdmin = adminClient();
+
+    // Per-user + per-IP rate limit BEFORE the Stripe calls. Opening the billing
+    // portal is a rare, deliberate action, so the ceiling is generous (a legit
+    // user never trips it) while a compromised token cannot hammer Stripe's
+    // customers.list / customers.create / billingPortal.sessions.create APIs
+    // (three Stripe round-trips per request, previously unthrottled — Wave-D
+    // rate-limit audit). Reuses ingest_check_rate (migration 036), FAIL-CLOSED,
+    // with a function-scoped 'ccp' key prefix so buckets never collide with
+    // ingest-events' bare keys. DEPLOY rides the owner batch.
+    const { ip } = readRequestMeta(req);
+    const underRate = await checkUserIpRate(supabaseAdmin, {
+      prefix: 'ccp',
+      userId: user.id,
+      ip,
+      userMax: 20,
+      userWindowSeconds: 3600,
+      ipMax: 60,
+      ipWindowSeconds: 3600,
+    });
+    if (!underRate) {
+      return new Response(
+        JSON.stringify({ error: 'Too many billing portal requests. Please wait a minute and try again.' }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
+    }
+
     const { data: profile } = await supabaseAdmin
       .from('profiles')
       .select('stripe_customer_id')
