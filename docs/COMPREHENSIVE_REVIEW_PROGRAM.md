@@ -1153,6 +1153,25 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ RESTORATION SWEEP 3 COMPLETE (2026-07-19, claude/restoration-compendium @
+f9b07930, 8 commits) — WITH THIS, 22 OF THE CENSUS'S 23 OWED ROWS ARE CLOSED
+(#1 HowToUse = the owner's direction call).** #9 CompendiumPanel identity +
+ARIA tablist + mobile paths · #10 GalleryPage shared identity (GalleryList's
+duplicate header removed — the lift's other half, JUDGMENT) · #11 CatalogTabs
+hierarchy + dead-first-click + honest guards + gold-as-text AA · #12
+CustomContent authoring affordances (org only, colors untouched; the two
+orphaned W-C4 leaves REVIVED to fit the 600 ratchet) · #13 GalleryDetail
+deferral + forge CTA — realmArcSummary VERDICT: RELOCATED to the Campaigns tab
+(producer chain alive), correctly NOT restored · #14 GallerySidebar BottomSheet
++ chip a11y · #8 criminal_network restored + palette re-pointed at relColor
+(the false removal-comment corrected; war_front deliberately kept #b91c1c —
+the regional-agreement pin requires it) · #17 CampaignFolder minors,
+FOLD-FLAGGED vs C3's edits (independent JSX regions, manual union expected
+clean). 7 new pin files/suites. Kill-list DECREASED to 980/103/239/217
+(declared red, counts only down). 5 non-lane reds proven pre-existing at base
+via temp worktree. Deferrals: peak-end forge CTA · ?cat= deep-link · #17
+bespoke pin — all reasoned. FOLD-READY. Only THE BURN-DOWN remains before
+FOLD BATCH 2 (actively progressing: partial rename on leaf files landed).
 **⬛⭐ RESTORATION SWEEP 2 COMPLETE (2026-07-19, claude/restoration-chrome @
 aaeec163, 8 commits).** All of census #4–7, #15–16, #22–23 restored, grafted
 onto the pages materials (never wholesale-reverted). WIP VERDICT: the dead
