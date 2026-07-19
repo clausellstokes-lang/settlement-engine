@@ -22,6 +22,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { maybeAutoReload } from '../_shared/autoReload.ts';
 import { runCreditedCall } from './creditFlow.ts';
 import { resolveProviderKey } from './byok.ts';
 import {
@@ -469,6 +470,7 @@ export async function handleAiAnalyst(
           refusalClass: capturedRefusalClass, doors: capturedRefusalDoors,
         }, 502, cors);
       case 'ok':
+        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
         return json({
           answer: outcome.answerText,
           claims: capturedValidated,

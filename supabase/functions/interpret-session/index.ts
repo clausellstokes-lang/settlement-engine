@@ -27,6 +27,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { maybeAutoReload } from '../_shared/autoReload.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
 import {
@@ -361,6 +362,7 @@ export async function handleInterpretSession(
       case 'model_failed':
         return json({ error: capturedRefused ? 'The interpreter declined this request.' : (capturedRefusalMessage || 'Interpretation failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
       case 'ok':
+        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
         return json({
           interpretation: capturedInterp,     // { ops:[labelled, protection-flagged], unsupported:[] }
           musings: capturedMusings,           // §3b the conversation register (uncited, op-free)
