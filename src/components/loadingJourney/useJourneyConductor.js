@@ -36,6 +36,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { clamp01 } from '../../kernel/math.js';
 
 export const JOURNEY_PHASE = Object.freeze({
   idle: 'idle',
@@ -45,7 +46,6 @@ export const JOURNEY_PHASE = Object.freeze({
   finished: 'finished',
 });
 
-const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const hasRaf = typeof requestAnimationFrame === 'function';
 
 /**
