@@ -20,7 +20,7 @@ import { useMemo, useState, useCallback } from 'react';
 import { Check, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, VIOLET, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
@@ -279,7 +279,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
           {nudges.map((n, i) => (
             <div key={i} data-testid={`autonomy-nudge-${i}`} style={{
               display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap',
-              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : nudgeDecisions[i] === 'approve' ? GOLD : VIOLET}`, borderRadius: R.md,
+              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : nudgeDecisions[i] === 'approve' ? GOLD : SLATE}`, borderRadius: R.md,
               padding: SP.xs, background: nudgeDecisions[i] === 'discard' ? CARD_ALT : '#fff',
               opacity: nudgeDecisions[i] === 'discard' ? 0.6 : 1,
             }}>

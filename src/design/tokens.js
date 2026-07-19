@@ -122,8 +122,8 @@ export const semantic = Object.freeze({
   // THE SLATE PAIR (C13 ruling): the semantic light/dim register for
   // AI-authored surfaces — `slateLight` washes draft-slip surfaces, `slateDim`
   // carries the legible slate text/rule. New AI surfaces read THESE names;
-  // the legacy VIOLET* flats below carry the same values for the frozen
-  // consumer set (rename deferred — see the flats' comment).
+  // the SLATE* flats below carry the same values (renamed from VIOLET* at
+  // fold batch 2, 2026-07-19 — see the flats' comment).
   slateLight:        color['slate-100'],
   slateDim:          color['slate-700'],
 
@@ -201,13 +201,12 @@ export const swatch = Object.freeze({
   '#E0D0B0': '#e0d0b0',
   '#E0E8F0': '#e0e8f0',
   '#E8D9B0': '#e8d9b0',
-  // THE SLATE CONVERSION (C13): the two violet-wash keys repoint to the slate
-  // wash — the documented consolidation mechanism ("a future consolidation pass
-  // repoints keys here at curated tokens — call sites never change again").
-  // The hex-shaped KEY names now lag their values; the key rename rides the
-  // kill-list burn-down (recorded deferral, C13 report).
-  '#EBE2FA': '#e4e9ee',
-  '#EBE2FA80': '#e4e9ee80',
+  // THE SLATE CONVERSION (C13): the two violet-wash keys repointed to the slate
+  // wash; at fold batch 2 (2026-07-19) the retired violet KEY spellings were
+  // dropped and the keys renamed to the honest slate hex (value === key, the
+  // swatchbook convention) — call sites updated in the same commit.
+  '#E4E9EE': '#e4e9ee',
+  '#E4E9EE80': '#e4e9ee80',
   '#F4DEDE': '#f4dede',
   '#F5ECD8': '#f5ecd8',
   '#F7EBF0': '#f7ebf0',
@@ -236,7 +235,7 @@ export const swatch = Object.freeze({
   stressAmber: '#ffd080',
   mutedBrown: '#9c8068',
   '#4A3B22': '#4a3b22',
-  '#7B4FCF': '#5a6e82', // THE SLATE CONVERSION (C13) — retired violet key, slate value (rename deferred)
+  '#5A6E82': '#5a6e82', // THE SLATE CONVERSION (C13) — was the retired violet key '#7B4FCF'; renamed to the honest slate hex at fold batch 2 (2026-07-19)
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
@@ -548,16 +547,15 @@ export const legacy = Object.freeze({
   // Flat aliases for palette colours that previously had only dashed keys.
   // Added in the colour burn-down so exact-match call sites can route through
   // a flat name like the rest.
-  // ⚠ THE SLATE CONVERSION (C13, owner ruling 2026-07-18): the VIOLET* names
-  // now carry the SLATE values — every consumer of the AI register converts at
-  // this one chokepoint (the all-or-none law). The IDENTIFIER rename
-  // (VIOLET*→SLATE*) is deferred: the shared deep-craft kill-list pins the
-  // exact `VIOLET_BG` line count across src/components, so the rename rides
-  // the kill-list burn-down phase (recorded in the C13 report). New AI
-  // surfaces read semantic.slateLight/slateDim or ctaAi/ctaAiBg instead.
-  VIOLET:    color['slate-500'],
-  VIOLET_DEEP: color['slate-700'],   // legible AI text on slate-100
-  VIOLET_BG: color['slate-100'],
+  // THE SLATE CONVERSION (C13, owner ruling 2026-07-18) — COMPLETED at fold
+  // batch 2 (2026-07-19): the AI register's flats are named SLATE* to match
+  // the slate values they have carried since C13. The deferred identifier
+  // rename (VIOLET*→SLATE*) landed as the batch's closing commit — every
+  // consumer renamed at once (the all-or-none law), no VIOLET* alias left
+  // behind. New AI surfaces read semantic.slateLight/slateDim or ctaAi/ctaAiBg.
+  SLATE:    color['slate-500'],
+  SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
+  SLATE_BG: color['slate-100'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

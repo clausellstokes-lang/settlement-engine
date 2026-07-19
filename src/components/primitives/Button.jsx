@@ -4,7 +4,7 @@ import useIsMobile from '../../hooks/useIsMobile.js';
 import {
   AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
-  VIOLET, VIOLET_BG, VIOLET_DEEP, sans, swatch,
+  SLATE, SLATE_BG, SLATE_DEEP, sans, swatch,
 } from '../theme.js';
 
 // Variant foreground/background pairs are chosen so every text+surface pair
@@ -47,9 +47,9 @@ const VARIANTS = {
     shadow: 'none',
   },
   ai: {
-    bg: VIOLET_BG,
-    fg: VIOLET_DEEP,
-    border: VIOLET,
+    bg: SLATE_BG,
+    fg: SLATE_DEEP,
+    border: SLATE,
     shadow: 'none',
   },
   // Solid violet primary — the LOUD form of the AI/upgrade affordance, peer to
@@ -59,9 +59,9 @@ const VARIANTS = {
   // for the one place the violet upgrade must out-shout everything (recurring
   // app-wide pricing nudge).
   aiSolid: {
-    bg: VIOLET,
+    bg: SLATE,
     fg: swatch.white,
-    border: VIOLET,
+    border: SLATE,
     shadow: 'none',
   },
   success: {

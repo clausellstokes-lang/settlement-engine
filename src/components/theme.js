@@ -53,13 +53,14 @@ export const CARD_ALT = L.CARD_ALT;
 export const CARD_HDR = L.CARD_HDR;
 
 // Flat aliases for dashed-key palette colors (P120 / V-2 color burn-down).
-export const VIOLET    = L.VIOLET;
-export const VIOLET_BG = L.VIOLET_BG;
-// VIOLET_DEEP / AMBER_DEEP — legible TEXT foregrounds for the AI-slate/amber tint
-// surfaces (the -500 fills as text fail AA on their -100 tint). VIOLET_DEEP now
+export const SLATE    = L.SLATE;
+export const SLATE_BG = L.SLATE_BG;
+// SLATE_DEEP / AMBER_DEEP — legible TEXT foregrounds for the AI-slate/amber tint
+// surfaces (the -500 fills as text fail AA on their -100 tint). SLATE_DEEP
 // re-exports the reference token so THE SLATE CONVERSION (C13) has one value
 // source; this is a token DEFINITION file, exempt from no-raw-color.
-export const VIOLET_DEEP = L.VIOLET_DEEP; // AI text on slate-100 (== color['slate-700'])
+// (VIOLET*→SLATE* rename completed at fold batch 2, 2026-07-19 — no aliases.)
+export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate-700'])
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const RED       = L.RED;
 export const RED_BG    = L.RED_BG;

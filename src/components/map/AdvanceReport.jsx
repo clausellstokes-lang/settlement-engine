@@ -29,7 +29,7 @@ import { chronicleForAdvance, hasChronicle } from '../../domain/display/chronicl
 import { decreesForAdvance } from '../../domain/display/decreeTracker.js';
 import {
   AMBER, AMBER_BG, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN,
-  INK, MUTED, RED, SECOND, SP, VIOLET, VIOLET_BG, sans,
+  INK, MUTED, RED, SECOND, SP, SLATE, SLATE_BG, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
@@ -157,10 +157,10 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
         {thread.arc.stands && thread.arc.stands !== thread.arc.turned ? <> · <strong style={{ color: SECOND }}>stands</strong> {thread.arc.stands}</> : null}
       </div>
       {thread.crossLinks?.length > 0 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: VIOLET, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: SLATE, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
           <GitBranch size={10} /> touches
           {thread.crossLinks.slice(0, 3).map((l, i) => (
-            <Chip key={i} tone={VIOLET} bg={VIOLET_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
+            <Chip key={i} tone={SLATE} bg={SLATE_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
           ))}
           <span style={{ color: MUTED, fontWeight: 700 }}>({thread.crossLinks.some((l) => !l.inferred) ? 'recorded' : 'inferred'})</span>
         </div>

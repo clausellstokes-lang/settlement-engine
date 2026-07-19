@@ -31,7 +31,7 @@
  */
 
 import { useMemo } from 'react';
-import { FS, VIOLET, swatch, EMPTY_VALUE } from '../theme.js';
+import { FS, SLATE, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
 
@@ -131,12 +131,12 @@ export default function QuickInspector() {
       )}
       {topHook && (
         <div style={{
-          fontSize: FS.xs, color: VIOLET, marginTop: 6,
+          fontSize: FS.xs, color: SLATE, marginTop: 6,
           display: 'flex', gap: 5, alignItems: 'baseline',
         }}>
           <span style={{
             fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.08em',
-            textTransform: 'uppercase', color: VIOLET,
+            textTransform: 'uppercase', color: SLATE,
           }}>
             Hook
           </span>

@@ -55,7 +55,15 @@ ruleTester.run('no-raw-color-literal', visualBudget.rules['no-raw-color-literal'
 
 // ── 2. Occurrence-budget ratchet ─────────────────────────────────────────────
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BUDGET = 1443; // committed max raw-color-literal occurrences — only lower it, never raise.
+const BUDGET = 1403; // committed max raw-color-literal occurrences — only lower it, never raise.
+// 2026-07-19 (FOLD BATCH 2 closing re-triage): 1443→1403 lowers the ceiling to the
+// count MEASURED on the folded tree (pages/chrome/compendium/c14c15/c16/pdf all
+// landed; the six branches NET-REMOVED 40 raw literals — the page recompositions
+// and the CustomContent consolidation retired more literals than the restorations
+// added). The VIOLET*→SLATE* rename itself is count-neutral: identifier renames
+// touch no hex literals, and the retired swatch-key renames ('#7B4FCF'→'#5A6E82',
+// '#EBE2FA'→'#E4E9EE', '#EBE2FA80'→'#E4E9EE80') live at swatch['#HEX'] call
+// sites, the sanctioned exempt form. Monotone-down, gate-green on this lineage.
 // 2026-07-19 (deep-craft burn-down, C16-lock): 1450→1443 lowers the ceiling to the
 // MEASURED count on claude/deep-craft, locking the current tree's position (the
 // deep-craft materials/burn-down work has added no raw literals). ⚠ HEADROOM NOTE for

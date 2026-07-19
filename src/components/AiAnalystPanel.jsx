@@ -21,7 +21,7 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, VIOLET, VIOLET_DEEP, sans, serif_, SP, R, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, R, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -113,7 +113,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
       style={{
         ...dockPos,
         width: 340, maxWidth: 'calc(100vw - 32px)', background: CARD, color: BODY,
-        border: `1px solid ${VIOLET}`, borderRadius: R.lg, padding: SP.lg,
+        border: `1px solid ${SLATE}`, borderRadius: R.lg, padding: SP.lg,
         boxShadow: '0 8px 28px rgba(0,0,0,0.28)', display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}
     >
@@ -190,8 +190,8 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
                 <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
                 <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{question}</p>
               </div>
-              <span className="sf-smallcap" style={{ fontSize: FS.xs, color: VIOLET_DEEP, fontFamily: sans }}>{t('surveyorDoor.analystFrom')}</span>
-              <div style={{ fontSize: FS.sm, color: BODY, whiteSpace: 'pre-wrap', lineHeight: 1.45, borderLeft: `2px solid ${VIOLET}`, paddingLeft: SP.sm }}>{result.answer}</div>
+              <span className="sf-smallcap" style={{ fontSize: FS.xs, color: SLATE_DEEP, fontFamily: sans }}>{t('surveyorDoor.analystFrom')}</span>
+              <div style={{ fontSize: FS.sm, color: BODY, whiteSpace: 'pre-wrap', lineHeight: 1.45, borderLeft: `2px solid ${SLATE}`, paddingLeft: SP.sm }}>{result.answer}</div>
               {Array.isArray(result.claims) && result.claims.length > 0 && (
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: FS.xs, color: MUTED }}>
                   {result.claims.map((c, i) => (

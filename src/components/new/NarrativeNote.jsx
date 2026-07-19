@@ -38,11 +38,11 @@ export function NarrativeNote({ note }) {
           cursor: 'pointer', textAlign: 'left',
         }}
       >
-        <span style={{ fontSize: FS.xs, color: swatch['#7B4FCF'] }}>✦</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#7B4FCF'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
+        <span style={{ fontSize: FS.xs, color: swatch['#5A6E82'] }}>✦</span>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.07em', flex: 1 }}>
           Narrative Layer
         </span>
-        <span style={{ fontSize: FS.xs, color: swatch['#7B4FCF'] }}>{open ? '▲' : '▼'}</span>
+        <span style={{ fontSize: FS.xs, color: swatch['#5A6E82'] }}>{open ? '▲' : '▼'}</span>
       </button>
 
       {/* Body */}

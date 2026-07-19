@@ -27,7 +27,7 @@ import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED, CHROME
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 
 // Reasons that want the violet (Cartographer / Founder upgrade) accent
 // rather than the gold (tier-unlock / signup) accent. Anything not in
@@ -40,7 +40,7 @@ const VIOLET = swatch['#7B4FCF'];
 // body copy literally says "Sign in (free)…") → it opens the auth modal.
 // The previous build sent every reason to the purchase modal, so the gold
 // "Sign in to unlock" CTA landed an anonymous user in a buy-credits wall.
-const VIOLET_REASONS = new Set([
+const SLATE_REASONS = new Set([
   'third_save',
   'regen_burst',
   'map_clicked',
@@ -77,7 +77,7 @@ export default function PricingMomentCard() {
   // AND the click destination so they cannot drift apart (P8/P11). A violet
   // reason upgrades (purchase modal); a gold reason is a signup/unlock prompt for
   // an anon user (auth modal).
-  const isUpgrade = VIOLET_REASONS.has(reason);
+  const isUpgrade = SLATE_REASONS.has(reason);
 
   const handleDismiss = useCallback(() => {
     Funnel.track(EVENTS.PRICING_MOMENT_DISMISSED, { reason });
@@ -104,7 +104,7 @@ export default function PricingMomentCard() {
   if (!activeMoment) return null;
 
   const { headline, body } = activeMoment;
-  const accent = isUpgrade ? VIOLET : GOLD;
+  const accent = isUpgrade ? SLATE : GOLD;
 
   return (
     <div

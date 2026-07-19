@@ -10,7 +10,7 @@ import { useState, useId } from 'react';
 import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_,
-  SP, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
+  SP, FS, swatch, SLATE, SLATE_BG, FORM_MAX,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -55,8 +55,8 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
       trailingIcon={soonNote && (
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
-          textTransform: 'uppercase', color: VIOLET,
-          background: VIOLET_BG, padding: '2px 5px',
+          textTransform: 'uppercase', color: SLATE,
+          background: SLATE_BG, padding: '2px 5px',
           marginLeft: 4,
         }}>
           Soon

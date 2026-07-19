@@ -40,7 +40,7 @@ const PARCH = swatch['#FBF5E6'];
 const BORDER = swatch['#E8D9B0'];
 
 const GREEN = swatch['#4A7A3A'];
-const SLATE = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 

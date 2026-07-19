@@ -26,8 +26,8 @@ import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { INK, sans, serif_, FS, SP, R, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
-const SLATE = swatch['#7B4FCF'];
-const SLATE_BG = swatch['#EBE2FA'];
+const SLATE = swatch['#5A6E82'];
+const SLATE_BG = swatch['#E4E9EE'];
 
 const DISMISS_KEY = 'sf.welcomeCredit.dismissed';
 

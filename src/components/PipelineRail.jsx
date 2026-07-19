@@ -37,7 +37,7 @@ import { t } from '../copy/index.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
 const COG_COLOR = swatch['#8C6F32'];      // gold-700 (procedural, bronze cog)
-const QUILL_COLOR = swatch['#7B4FCF'];    // violet-500 (AI refinement, quill)
+const QUILL_COLOR = swatch['#5A6E82'];    // violet-500 (AI refinement, quill)
 const RAIL_BG = swatch['#FBF5E6'];        // parchment-50
 const RAIL_BORDER = swatch['#E8D9B0'];    // parchment-200
 const INK = swatch['#1B1408'];

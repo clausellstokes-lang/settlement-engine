@@ -27,8 +27,8 @@ import { Funnel } from '../../lib/analytics.js';
 
 const PARCH = swatch['#FBF5E6'];
 const PARCH_GRAD_HI = swatch['#FCF6E7'];
-const SLATE = swatch['#7B4FCF'];
-const SLATE_DIM = swatch['#EBE2FA80'];
+const SLATE = swatch['#5A6E82'];
+const SLATE_DIM = swatch['#E4E9EE80'];
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];

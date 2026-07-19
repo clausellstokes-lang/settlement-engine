@@ -203,17 +203,15 @@ const PATTERNS = Object.freeze({
   borderRadius: /borderRadius/,
   boxShadow: /boxShadow/,
   rgbaLiterals: /rgba\(/,
-  // SLATE_BG added 2026-07-19 (partial VIOLET→SLATE rename): the AI register's
-  // values have BEEN slate since C13; nine clear leaf files that own a LOCAL
-  // `const VIOLET = swatch[...]` were renamed VIOLET*→SLATE* so the name matches
-  // the value. A slate-tinted callout is STILL a tinted callout, so SLATE_BG is
-  // counted alongside VIOLET_BG — the count is PRESERVED (the ratchet's intent is
-  // the count law, not the spelling). VIOLET_BG stays in the pattern because the
-  // six OFF-LIMITS files that reach the VIOLET register (App, TableView, authUI,
-  // Button, PricingBands, PricingMomentCard — owned by unfolded branches) keep the
-  // VIOLET spelling until their folds; the full rename + the '#7B4FCF' swatch-key
-  // retirement (consumed by off-limits TableView/PricingMomentCard) ride fold batch 2.
-  tintedCallouts: /VIOLET_BG|SLATE_BG|AMBER_BG|GREEN_BG|RED_BG|BLUE_BG|GOLD_BG|successBg|dangerBg|infoBg|warningBg/,
+  // THE RENAME COMPLETED (fold batch 2, 2026-07-19): with all six branches
+  // folded, the formerly off-limits files (App, authUI, Button, PricingBands,
+  // PricingMomentCard; TableView's lamp-tones fold dropped its VIOLET outright)
+  // and the theme.js/tokens.js exports renamed VIOLET*→SLATE* in one commit —
+  // no alias lines, so no double-count. VIOLET_BG left the pattern because
+  // ZERO VIOLET_BG spellings remain under src/components; every renamed line
+  // still matches via SLATE_BG, so the count is PRESERVED (the ratchet's
+  // intent is the count law, not the spelling).
+  tintedCallouts: /SLATE_BG|AMBER_BG|GREEN_BG|RED_BG|BLUE_BG|GOLD_BG|successBg|dangerBg|infoBg|warningBg/,
 });
 
 describe('THE DEEP CRAFT kill-list ratchets (shrink-only; zero closes the wave)', () => {

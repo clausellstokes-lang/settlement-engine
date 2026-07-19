@@ -27,7 +27,7 @@ import { tp } from '../../copy/pricingPage.js';
 import { t } from '../../copy/index.js';
 import {
   GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, R, FS, BODY,
-  VIOLET, VIOLET_BG, VIOLET_DEEP, PROSE_MAX,
+  SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX,
 } from '../theme.js';
 import { space } from '../../design/tokens.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
@@ -40,9 +40,9 @@ const TIER_ROW_MAX = 3 * 320 + 2 * 16; // 992 — the page's shared column edge
 // The violet AI channel (the §03-landing/faith-chip token family). Surveyor is
 // WALLED (ruling #3): a visually distinct violet band at the row's end, never
 // the badge, never a lookalike subscription — task-priced + BYOK, early access.
-const SURVEYOR_VIOLET = VIOLET;
-const SURVEYOR_VIOLET_BG = VIOLET_BG;
-const SURVEYOR_VIOLET_TEXT = VIOLET_DEEP;
+const SURVEYOR_SLATE = SLATE;
+const SURVEYOR_SLATE_BG = SLATE_BG;
+const SURVEYOR_SLATE_TEXT = SLATE_DEEP;
 
 export function SurveyorBand({ onSeeMenu }) {
   return (
@@ -50,8 +50,8 @@ export function SurveyorBand({ onSeeMenu }) {
       aria-labelledby="tier-surveyor-name"
       style={{
         flex: '1 1 240px', minWidth: 240, maxWidth: 320,
-        background: SURVEYOR_VIOLET_BG,
-        border: `1px solid ${SURVEYOR_VIOLET}`,
+        background: SURVEYOR_SLATE_BG,
+        border: `1px solid ${SURVEYOR_SLATE}`,
         borderRadius: R.xl,
         padding: `${SP.md}px ${SP.lg}px ${SP.lg}px`,
         display: 'flex', flexDirection: 'column', gap: SP.md,
@@ -63,7 +63,7 @@ export function SurveyorBand({ onSeeMenu }) {
         </h3>
         <span style={{
           fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-          color: SURVEYOR_VIOLET_TEXT,
+          color: SURVEYOR_SLATE_TEXT,
         }}>
           {tp('band2.surveyor.badge')}
         </span>

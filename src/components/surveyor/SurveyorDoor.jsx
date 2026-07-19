@@ -32,7 +32,7 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
-import { CARD, VIOLET, VIOLET_DEEP, MUTED, sans, SP, FS } from '../theme.js';
+import { CARD, SLATE, SLATE_DEEP, MUTED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { AnchorChip, PromptArea } from './surveyorPanelKit.jsx';
@@ -96,13 +96,13 @@ export default function SurveyorDoor({ visible = true }) {
           aria-label={t('surveyorDoor.heading')}
           className="sf-door-panel"
           style={{
-            background: CARD, border: `1px solid ${VIOLET}`,
+            background: CARD, border: `1px solid ${SLATE}`,
             display: 'flex', flexDirection: 'column', gap: SP.sm,
             padding: SP.lg, fontFamily: sans,
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: SP.sm }}>
-            <span className="sf-smallcap" style={{ fontSize: FS.sm, fontWeight: 700, color: VIOLET_DEEP }}>
+            <span className="sf-smallcap" style={{ fontSize: FS.sm, fontWeight: 700, color: SLATE_DEEP }}>
               {t('surveyorDoor.heading')}
             </span>
             <IconButton Icon={X} label={t('surveyorDoor.close')} size="sm" onClick={() => setPromptOpen(false)} />

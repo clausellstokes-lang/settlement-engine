@@ -10,7 +10,7 @@
 
 import { Sparkles } from 'lucide-react';
 import { t } from '../../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, VIOLET_DEEP, sans, serif_, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans, serif_, SP, R, FS } from '../theme.js';
 import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -136,7 +136,7 @@ export function MusingsBlock({ musings }) {
  */
 export function ProposalSlipLine() {
   return (
-    <span data-testid="proposal-slip-line" className="sf-smallcap" style={{ fontSize: FS.xs, color: VIOLET_DEEP, fontFamily: sans }}>
+    <span data-testid="proposal-slip-line" className="sf-smallcap" style={{ fontSize: FS.xs, color: SLATE_DEEP, fontFamily: sans }}>
       {t('surveyorDoor.proposed')}
     </span>
   );

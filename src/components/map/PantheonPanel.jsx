@@ -20,13 +20,13 @@ import { pantheonDepthModel, seatsFromMajor, deityTierStrength, deityStatusWord 
 import { deityNameFromSnapshots } from '../../domain/display/deityNames.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SECOND, VIOLET, VIOLET_DEEP, sans, swatch } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SECOND, SLATE, SLATE_DEEP, sans, swatch } from '../theme.js';
 
 const TIER_ORDER = ['major', 'minor', 'cult'];
 const TIER_LABEL = { major: 'Major Powers', minor: 'Minor Faiths', cult: 'Cults & Remnants' };
 // Tier accents routed through violet tokens (lint bans raw hex): major reuses the
-// exact #7c3aed swatch; minor/cult take the named VIOLET / VIOLET_DEEP tokens.
-const TIER_COLOR = { major: swatch['#7C3AED'], minor: VIOLET, cult: VIOLET_DEEP };
+// exact #7c3aed swatch; minor/cult take the named SLATE / SLATE_DEEP tokens.
+const TIER_COLOR = { major: swatch['#7C3AED'], minor: SLATE, cult: SLATE_DEEP };
 
 /**
  * Whether the campaign has an active (materialized) pantheon — the religion gate

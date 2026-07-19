@@ -22,7 +22,7 @@
  */
 
 import { liveSieges } from '../../domain/display/warStatus.js';
-import { GOLD_TXT, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
+import { GOLD_TXT, BODY, SLATE_DEEP, FS, sans, swatch } from '../theme.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
 
@@ -148,7 +148,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
 
       {faith && (
         <Seg title={`Dominant faith: ${faith.name} (${faith.tier})`}>
-          <span style={{ color: VIOLET_DEEP, fontWeight: 700 }}>{faith.name}</span>
+          <span style={{ color: SLATE_DEEP, fontWeight: 700 }}>{faith.name}</span>
           <span style={{ color: BODY }}> · {faith.tier}</span>
         </Seg>
       )}

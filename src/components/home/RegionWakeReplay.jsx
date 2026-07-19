@@ -30,7 +30,7 @@ import {
 } from '../../domain/display/regionWakeReplay.js';
 
 // No semantic violet/crimson token exists; keep these as swatch lookups.
-const SLATE = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const CRIMSON = swatch['#8B1A1A'];
 
 function StepDot({ active, done }) {

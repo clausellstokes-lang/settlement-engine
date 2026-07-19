@@ -14,7 +14,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
-  GOLD_TXT, GREEN, GREEN_BG, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, VIOLET, VIOLET_BG, VIOLET_DEEP,
+  GOLD_TXT, GREEN, GREEN_BG, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -33,8 +33,8 @@ import { INSTRUMENT, FIELD_INSTRUMENT } from '../../src/design/organic/instrumen
 import { LAMP_ACCENTS } from '../../src/design/organic/lampTones.js';
 // Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
 // warning / ai tones previously coloured their LABEL with the -500 fill hue
-// (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
-// use the darker text steps (GOLD_TXT, AMBER_DEEP, VIOLET_DEEP). Pinned so a
+// (GOLD / AMBER / SLATE), which failed AA as text on their soft tints. They now
+// use the darker text steps (GOLD_TXT, AMBER_DEEP, SLATE_DEEP). Pinned so a
 // future edit can't drop the label back onto its fill hue. GOLD_BG is a
 // translucent rgba over varying surfaces, so the gold tone is checked against its
 // opaque soft-gold reference (GOLD_SOFT), the worst-case lightest backing.
@@ -71,8 +71,8 @@ describe('Button variant text legibility (WCAG AA 4.5:1)', () => {
     ['gold',      GOLD_TXT,   GOLD_SOFT], // tertiary/active — gold-800 on opaque soft-gold
     ['warning',   AMBER_DEEP, AMBER_BG],  // amber-700 on amber-100
     ['danger',    RED,        RED_BG],
-    ['ai',        VIOLET_DEEP, VIOLET_BG],
-    ['aiSolid',   '#FFFFFF',   VIOLET],     // loud violet primary — white on violet-500
+    ['ai',        SLATE_DEEP, SLATE_BG],
+    ['aiSolid',   '#FFFFFF',   SLATE],     // loud AI primary — white on slate-500
     ['success',   GREEN,      GREEN_BG],
     ['info',      BLUE,       BLUE_BG],
   ];
@@ -102,7 +102,7 @@ describe('Badge tinted-tone text legibility (WCAG AA 4.5:1)', () => {
   const pairs = [
     ['gold',    GOLD_TXT,    GOLD_SOFT], // gold-800 on opaque soft-gold (GOLD_BG backing)
     ['warning', AMBER_DEEP,  AMBER_BG],  // amber-700 on amber-100
-    ['ai',      VIOLET_DEEP, VIOLET_BG], // violet-700 on violet-100
+    ['ai',      SLATE_DEEP, SLATE_BG], // slate-700 on slate-100
   ];
   for (const [name, fg, bg] of pairs) {
     test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
@@ -111,7 +111,7 @@ describe('Badge tinted-tone text legibility (WCAG AA 4.5:1)', () => {
   }
   test('the retired fill-hue labels would fail as text (documents the split)', () => {
     expect(ratio(GOLD, GOLD_SOFT)).toBeLessThan(AA_TEXT);
-    expect(ratio(VIOLET, VIOLET_BG)).toBeLessThan(AA_TEXT);
+    expect(ratio(SLATE, SLATE_BG)).toBeLessThan(AA_TEXT);
   });
 });
 

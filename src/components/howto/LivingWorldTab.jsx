@@ -13,7 +13,7 @@
  * All copy lives in en.js (valueLadder / aboutLiving). Pure presentational.
  */
 
-import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, RED, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
+import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, SLATE, GREEN, RED, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
 import { t, tx } from '../../copy/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import Button from '../primitives/Button.jsx';
@@ -21,7 +21,7 @@ import { navigate } from '../../hooks/useRoute.js';
 
 const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: SP.xl });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
-// P11: ride the semantic AI/premium (VIOLET) and success (GREEN) tokens, not raw
+// P11: ride the semantic AI/premium (SLATE) and success (GREEN) tokens, not raw
 // swatch[] hex keys — the values are identical (violet-500 / green-600) so this
 // is a zero-pixel aliasing win that keeps these one-offs in the same channel as
 // the rest of the app instead of drifting.
@@ -32,7 +32,7 @@ function ValueLadder() {
   const audience = useReaderAudience();
   const lensLine = t(`valueLadder.lens.${audience}`) || t('valueLadder.subhead');
   const rungs = ['tries', 'saves', 'simulates'];
-  const accentFor = { tries: GREEN, saves: GOLD, simulates: VIOLET };
+  const accentFor = { tries: GREEN, saves: GOLD, simulates: SLATE };
   // P9: the ladder names each next rung — wire the already-authored CTA so a GM
   // can climb it. Kept ghost/low-emphasis so the three rungs don't become three
   // co-equal primaries (the tab's single high-emphasis action is the upsell CTA
@@ -96,7 +96,7 @@ function LivingSystemCard({ id }) {
   // top of the shell card is still box-soup — the left rule + ~14px padding +
   // between-block margin carry the grouping.
   return (
-    <div style={{ ...NO_BREAK, borderLeft: `3px solid ${VIOLET}`,
+    <div style={{ ...NO_BREAK, borderLeft: `3px solid ${SLATE}`,
       paddingLeft: 14, marginBottom: SP.lg }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5, flexWrap: 'wrap' }}>
         <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK }}>{title}</span>
@@ -105,7 +105,7 @@ function LivingSystemCard({ id }) {
             native title= names it plainly as the paid simulation tier. */}
         <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
           style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-          color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`,
+          color: SLATE, background: `${SLATE}14`, border: `1px solid ${SLATE}40`,
           borderRadius: 999, padding: '2px 8px' }}>
           {t('aboutLiving.premiumChip')}
         </span>
@@ -154,14 +154,14 @@ function legBand(v) {
 function PantheonTeaser() {
   const { settlement, deities, contest, mandate } = SAMPLE_PANTHEON;
   return (
-    <section style={{ ...NO_BREAK, borderLeft: `3px solid ${VIOLET}`, paddingLeft: 14, marginBottom: SP.xl, maxWidth: PROSE_MAX }}>
+    <section style={{ ...NO_BREAK, borderLeft: `3px solid ${SLATE}`, paddingLeft: 14, marginBottom: SP.xl, maxWidth: PROSE_MAX }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: VIOLET }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: SLATE }}>
           Sample pantheon
         </span>
         <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
           style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-          color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`, borderRadius: 999, padding: '2px 8px' }}>
+          color: SLATE, background: `${SLATE}14`, border: `1px solid ${SLATE}40`, borderRadius: 999, padding: '2px 8px' }}>
           {t('aboutLiving.premiumChip')}
         </span>
       </div>

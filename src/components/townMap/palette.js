@@ -2,7 +2,7 @@
  * components/townMap/palette.js — the town-map district-category tint map, shared
  * by the viewer pane and its edit controls so a category's legend swatch is the
  * SAME tint its district polygon draws. Theme tokens only (the no-raw-color lint
- * bans raw hex); no VIOLET (AI-reserved).
+ * bans raw hex); no SLATE (AI-reserved).
  */
 import { AMBER, BLUE, BODY, GOLD, GOLD_DEEP, GREEN, INK, MUTED, RED, SECOND } from '../theme.js';
 

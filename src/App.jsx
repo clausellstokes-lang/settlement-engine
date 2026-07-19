@@ -33,7 +33,7 @@ import { supportMailto } from './copy/support.js';
 // whole en.js registry into the first-paint entry closure (byte budget).
 import { t } from './copy/footer.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, VIOLET, VIOLET_BG, sans, serif_, SP, R, FS, swatch,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -647,9 +647,9 @@ export default function App() {
                     display: 'flex', alignItems: 'center', gap: SP.xs,
                     height: 32, padding: `0 ${SP.md}px`,
                     borderRadius: 999,
-                    background: VIOLET_BG,
-                    border: `1px solid ${VIOLET}`,
-                    color: VIOLET,
+                    background: SLATE_BG,
+                    border: `1px solid ${SLATE}`,
+                    color: SLATE,
                     fontSize: FS.sm, fontFamily: sans,
                     letterSpacing: '0.02em', cursor: 'pointer',
                     transition: 'all 0.2s', whiteSpace: 'nowrap',

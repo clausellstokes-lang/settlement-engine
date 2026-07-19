@@ -37,7 +37,7 @@ import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT,
   PARCH, PARCH_100, BORDER, CARD, CARD_ALT,
-  VIOLET, VIOLET_BG, VIOLET_DEEP, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, AMBER_DEEP,
+  SLATE, SLATE_BG, SLATE_DEEP, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, AMBER_DEEP,
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
@@ -58,7 +58,7 @@ const CHIP = {
   success:  { bg: GREEN_BG,  fg: GREEN,       border: GREEN },
   danger:   { bg: RED_BG,    fg: RED,         border: RED },
   war:      { bg: RED_BG,    fg: RED,         border: RED },
-  faith:    { bg: VIOLET_BG, fg: VIOLET_DEEP, border: VIOLET },
+  faith:    { bg: SLATE_BG, fg: SLATE_DEEP, border: SLATE },
   economic: { bg: PARCH_100, fg: GOLD_TXT,    border: BORDER },
 };
 const dotColor = { danger: RED, success: GREEN, gold: GOLD, warning: AMBER };
@@ -238,7 +238,7 @@ export function VoiceCards() {
       <div style={{ background: CARD, border: '1px solid rgba(123,79,207,0.35)', borderRadius: R.lg, boxShadow: ELEV[1], padding: '18px 20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm, marginBottom: SP.md }}>
           <StateBadge kind="narrated" />
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: MONO, fontSize: FS.xs, color: VIOLET_DEEP }}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontFamily: MONO, fontSize: FS.xs, color: SLATE_DEEP }}>
             <Sparkles size={11} aria-hidden="true" />{tl('voice.credit')}
           </span>
         </div>
