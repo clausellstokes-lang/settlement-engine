@@ -1134,6 +1134,18 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ THE DOSSIER CONTENT MODEL IS CLOSED (owner, 2026-07-18: "with this the
+dossiers are done. i was missing culture and this added that in for me"):** with
+Traditions placed in the World group, the owner declares the dossier CONTENT-
+COMPLETE — the tab inventory is FINAL: Summary (overview · summary · plot hooks ·
+DM compass) / Systems (services · economics · power · defense · resources ·
+viability · substrate · magic · war&faith) / World (NPCs-first · relationships ·
+rumors · daily life · TRADITIONS · history · neighbours) / Notes (DM notes · AI
+notes · chronicle · versions). This is SCOPE CLOSURE for the dossier: C4 restores
++ polishes toward a now-fixed target; ROUND 3 reviews against a closed model; any
+future tab addition is a new owner ruling by definition. The settlement record now
+spans economy, power, arms, faith, people, bonds, days, culture, memory, and
+neighbors — the complete anthropology the product promised.
 **⬛⬛⭐ THE TRADITIONS COMMISSIONED — ENGINE LIFT #4 (owner, 2026-07-18: "lets bring
 in culture" → "yes do it"):** per-settlement traditions (holidays · festivals ·
 events · fairs) as the culture layer. Owner spec ratified: seeded genesis from the
