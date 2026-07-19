@@ -193,6 +193,35 @@ describe('Resource-state chip legibility (WCAG AA 4.5:1)', () => {
   }
 });
 
+// ServicesTab per-state tints (C4c-h — the state-tint contrast pass). The
+// impaired/reduced/missing status pills + the category-health grid were re-
+// grounded off the SaaS alert fills (bright pink/peach/cream) and the cool mint
+// 'healthy' wash onto the WARM PARCHMENT family, per the C4c-e recipe (impaired→
+// oxblood, reduced→amber-deep, missing→gold, healthy→warm parchment). The state
+// rides the INK: oxblood text for impaired, amber-deep for reduced, gold for
+// missing, neutral ink for healthy — and each pill/cell also carries a bold
+// status WORD (and the grid/cards a left rule), so colour is never the sole
+// channel. These pin the fg text over each new parchment fill at AA as text.
+describe('ServicesTab state-tint text legibility (WCAG AA 4.5:1)', () => {
+  const pairs = [
+    ['impaired', swatch['#7A1A1A'], swatch['#F4DEDE']], // oxblood on warm rose-parchment
+    ['reduced',  swatch['#7A3A00'], swatch['#FBEAD0']], // amber-deep on warm amber-parchment
+    ['missing',  swatch['#7A5010'], swatch['#F0E4C0']], // gold on warm gold-parchment
+    ['healthy',  swatch.inkMag3,    swatch['#F0EAD8']], // neutral ink on warm parchment
+  ];
+  for (const [name, fg, bg] of pairs) {
+    test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
+      expect(ratio(fg, bg)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  // The missing card's darker body ink + the grid's near-black category title
+  // clear AA a fortiori on their fills (documents the headroom above the floor).
+  test('missing card body ink + grid title clear AA on their fills', () => {
+    expect(ratio(swatch['#5A3A10'], swatch['#F0E4C0'])).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(swatch.inkMag, swatch['#F4DEDE'])).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+});
+
 // ── THE ORGANIC CRAFT ink tonal ramp (law §3/§6) ─────────────────────────────
 // The ramp replaces drop-shadow hierarchy with graded ink on parchment. Each
 // TEXT step is measured against PARCH_100 (#F4EAD0) — the darkest paper tone a
