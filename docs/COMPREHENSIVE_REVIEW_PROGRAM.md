@@ -1134,6 +1134,38 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — THE SOAK LADDER · THE COMBINATORIAL MANDATE · THE
+RESEQUENCING** (verbatim intent: "soak should have three levels: subcentury, century, and
+300 century"; "we need to tune things in every conceivable toggle turned on and off in
+combination with everything else… Everything on is very different compared with everything
+on vs one thing off and any combination beneath"; "the push and deploy comes before the
+soak because I will need to run that on a different computer"). Operationalized in
+SOAK_PLAN_R2 §5 (committed this date): three levels = CERT-30 / CENTURY-100 / CENTURY-300,
+all PASS criteria at every level · combinatorial matrix over every tick-path toggle (the
+eight regen flags + nine wave gates + tempo band; enumeration generated at harness build,
+never hand-typed) — FULL FACTORIAL at L1 where it fits the measured cost budget,
+ALL-ON + LEAVE-ONE-OUT + ONLY-ONE-ON + ALL-OFF at L2, ALL-ON + flagged combos at L3 ·
+display-only flags leave the factorial ONLY via executed same-seed byte-identity proof ·
+single-flag same-seed deltas = marginal-effect reads; super-additive anomalies = named
+tuning items · the soak executes on a SEPARATE machine cloned from the pushed branches,
+certs bound to a recorded SOAK-BASE SHA. MANAGER RECOMMENDATION (vetoable, recorded): the
+soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight flags unlit,
+the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
+carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
+THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ C2 MEDIA-PREP LANE REPORTED (2026-07-19) — ENCODE BLOCKED, RECIPE DELIVERED.** No
+ffmpeg/ffprobe/equivalent exists on this machine (exhaustively probed; Homebrew absent;
+installs forbidden to agents). Delivered to ~/Desktop/settlementforge-marketing-masters/
+derived-legs/: MANIFEST.md (source analysis, both boundary tables, asset inventory) +
+encode-legs.sh (parse-checked; applies the C2 all-keyframe law, 720p, CRF-escalates to
+≤8 MB/leg, cuts the 7 stop stills, prints all-keyframe proof) — one command once ffmpeg
+exists (or run on the soak machine). ⛔OWNER FORK SURFACED, not self-ruled: the brief's
+master journey-scrub (1920×1080, 15.042s ⇒ 2.507s legs) vs the film the microsite
+ACTUALLY plays, bg.mp4 (1600×900, 30.25s ⇒ 5.042s legs; the existing six masters are a
+prior full-res cut of it; conductor boundary law = duration/6). Manager recommendation:
+bg.mp4 — the owner approved the microsite's played film by pointing at it; flip if
+journey-scrub is the intended newer edit. marketing/assets/videos/ no longer exists in
+the repo (masters archived out 2026-07-18) — the Desktop archive is the only copy.
 **⬛⭐ T-3 POLITICS LANDED (2026-07-18, claude/traditions @ b79ea3d7, 2 commits).**
 0b7f410a ownership at mint (motif-fit; seat/faction/institution; keys on the REAL
 .faction shape via nameOf — the §17 hazard dodged) + owner-targeted legitimacy

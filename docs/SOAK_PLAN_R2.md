@@ -57,5 +57,53 @@ becomes either a TUNING item (weights — batched into the one regen) or a MISSI
 - Missing-mover verdicts → the owner decision (charter: "missing movers = owner decision") with
   the specific flattened loop named + the weights-vs-mover analysis.
 
+## 5. ⬛ OWNER RULING 2026-07-19 — THE THREE-LEVEL LADDER · THE COMBINATORIAL MANDATE · THE RESEQUENCING
+(Verbatim intent: "soak should have three levels: subcentury, century, and 300 century";
+"we need to tune things in every conceivable toggle turned on and off in combination with
+everything else… Everything on is very different compared with everything on vs one thing off
+and any combination beneath"; "this doesn't cost usage but just CPU churn which I have the
+hardware for… so the push and deploy comes before the soak because I will need to run that on
+a different computer.")
+
+### 5a. The three levels (ratifies §1's ladder, now the certification spine)
+LEVEL 1 SUBCENTURY = CERT-30 · LEVEL 2 CENTURY = CENTURY-100 · LEVEL 3 THE 300 = CENTURY-300.
+Every §2 PASS criterion evaluates at every level. NEIGHBOR-DIV / CAP-CURVE / DARK-CONTROL
+remain cross-level probes unchanged.
+
+### 5b. The combinatorial matrix (toggle-combination coverage, made tractable)
+- THE FLAG SET: every tick-path toggle — the eight dark engine flags of the regen batch
+  (distancePricedNewsEnabled · reframeEnabled · provenanceLedgerEnabled · urbanFabricEnabled ·
+  npcGrowthEnabled · spatialConsequenceEnabled · npcLadderEnabled · traditionsEnabled) + the
+  nine wave gates + the tempo-preset band. The definitive enumeration is produced AT HARNESS
+  BUILD from DEFAULT_SIMULATION_RULES + the virtual-flag registry and committed with the
+  harness (no hand-typed flag list may drift).
+- PRUNE BY PROOF: a flag claimed display-only leaves the factorial ONLY via an executed
+  same-seed pair (flag on vs off, all else on) showing metric-stream byte-identity — recorded
+  per flag. Dormancy goldens prove the all-else-off direction; this proves the in-context one.
+- TIERED DESIGN (the owner's "any combination beneath", structured):
+  · L1 SUBCENTURY: FULL FACTORIAL over the pruned dynamics set when 2^k fits the measured L1
+    cost budget (size after timing one CERT-30 run; target ≤ ~1,024 runs); otherwise a
+    pairwise-covering array plus the L2 structured subsets. ≥ 2 seeds per combo.
+  · L2 CENTURY: ALL-ON + LEAVE-ONE-OUT (k combos) + ONLY-ONE-ON (k combos) + ALL-OFF control
+    + every combo L1 flagged anomalous.
+  · L3 THE 300: ALL-ON (the shipping config) + the ≤ 3 combos L2 flags + DARK-CONTROL.
+- INTERACTION READS: for combo pairs differing in exactly one flag, the same-seed per-decade
+  metric delta = that flag's MARGINAL EFFECT in context; super-additive anomalies become named
+  tuning items. Tuning re-certs run at minimum ALL-ON + LEAVE-ONE-OUT at L1.
+
+### 5c. The resequencing: push (+ deploy) precede the soak; the soak runs on a SEPARATE machine
+- Cross-machine protocol: clone origin at a recorded SOAK-BASE SHA · npm ci · runs niced +
+  checkpointed · per-decade JSONL synced back via git (committed snapshots under
+  docs/review-r2/soak/ on a soak branch pushed from the soak machine).
+- The soak itself needs only THE PUSH (a clone suffices); production deploy is not a soak
+  prerequisite. MANAGER RECOMMENDATION (vetoable, recorded): the pre-soak deploy ships DARK —
+  the eight flags unlit, the exact configuration the dormancy goldens prove byte-identical —
+  and THE ONE REGEN + the lit deploy remain batch 2 after soak + tuning. The §8 VERY-END
+  carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
+- Engine freeze law unchanged in substance: certs BIND to the SOAK-BASE SHA; engine changes
+  after it invalidate affected running certs (re-run or re-base). Practical order: L1 factorial
+  may start early on the soak machine (cheap, informative); hold L3 until the engine is final
+  post-ROUND-3 so 300-year certs never need re-runs.
+
 > **Progress** (append per run)
 > - (pending DEPTH merge)

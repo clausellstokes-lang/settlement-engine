@@ -378,6 +378,13 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 
 ## §5 THE SOAK
+- ⬛ 2026-07-19 OWNER RULING (SOAK_PLAN_R2 §5 is the authority): THREE LEVELS
+  (CERT-30 / CENTURY-100 / CENTURY-300, all PASS criteria at each) + the COMBINATORIAL
+  MANDATE (tick-path toggle matrix: L1 factorial where affordable, L2 all-on +
+  leave-one-out + only-one-on + all-off, L3 all-on + flagged; display-only exclusions
+  only by executed same-seed byte-identity proof) + THE RESEQUENCING: the soak runs on
+  a SEPARATE machine cloned from the pushed branches (push precedes soak; a pre-soak
+  deploy, if any, ships DARK per the recorded recommendation; certs bind to a SOAK-BASE SHA).
 - Plan: docs/SOAK_PLAN_R2.md. CENTURY-300 first (300-settlement century run, local).
 - ADDS from this program: certify THE LADDER's cadence band (promotions rare;
   weeks-to-years goal spans; three-body distributions; stigma tax visible), the
@@ -404,6 +411,9 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
 5. Ledger the DECLARED SHIFT (the one-time same-seed change, its cause named).
 
 ## §8 THE VERY END
+- ⬛ 2026-07-19: the deploy may SPLIT per SOAK_PLAN_R2 §5c — batch 1 (owner-chosen,
+  pre-soak) ships DARK; batch 2 (post-soak/tuning/ONE-REGEN) lights the flags. The
+  carve-outs below gate whichever deploy goes PUBLIC first, regardless of batch.
 - PR from the composite to master per MASTER_MERGE_PLAN.md (re-survey the plan doc
   first — the third-lineage religion-arc + migration-chain collision is documented).
 - Deploy batch: ~35 pending migrations in numeric order (138–154+), the edge
