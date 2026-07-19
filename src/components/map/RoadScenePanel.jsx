@@ -17,7 +17,7 @@ import { BODY, BORDER, FS, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 
 const selectStyle = {
   fontSize: FS.xs, color: swatch.inkMag2, background: swatch['#FAF8F4'],
-  border: `1px solid ${swatch['#EDE3CC']}`, borderRadius: 4, padding: '4px 6px', maxWidth: '100%',
+  border: `1px solid ${swatch['#EDE3CC']}`, padding: '4px 6px', maxWidth: '100%',
 };
 
 /** A compact human line for one brief item (per section). Pure. */
@@ -123,7 +123,7 @@ export default function RoadScenePanel({ campaign }) {
       )}
 
       {brief && brief.sections.map(sec => (
-        <section key={sec.id} style={{ border: `1px solid ${BORDER}`, borderRadius: 4, padding: `${SP.xs}px ${SP.sm}px` }}>
+        <section key={sec.id} style={{ border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px` }}>
           <h4 style={{ margin: '0 0 4px', fontSize: FS.xs, fontWeight: 800, color: SECOND, fontFamily: sans }}>{sec.title}</h4>
           <ul style={{ margin: 0, paddingLeft: 16, display: 'grid', gap: 2 }}>
             {sec.items.map((it, i) => (

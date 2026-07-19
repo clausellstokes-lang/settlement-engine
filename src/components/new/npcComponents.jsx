@@ -255,13 +255,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the
               mover wrote the mirror; DM-SECRET by construction (§15). */}
           {wLine && (
-            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+              {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
               <span style={{
                 fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
                 color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
-                background: wBadge === 'Held' ? 'rgba(139,26,26,0.12)' : 'rgba(120,90,40,0.10)',
-                border: `1px solid ${wBadge === 'Held' ? 'rgba(139,26,26,0.4)' : 'rgba(120,90,40,0.35)'}`,
-                borderRadius:4,padding:'1px 6px',
               }}>{wBadge}</span>
               <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
