@@ -1153,6 +1153,25 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ THE TRADITIONS LANE COMPLETE (2026-07-19, claude/traditions @ 80b8ad71) —
+T-1..T-5 ALL LANDED, DARK.** T-5's four commits: 396f500f register glyphs (corpus
+`glyph` display-only — mint byte-identical) + mutationLog provenance line + the
+self-hiding realm almanac (no engine import) · fddb8423 prose pools (own FNV
+picker — keeps eventProse's ~560 lines OUT of dossier/PDF chunks, vetoable dup) +
+tension-category tradition hooks (source:'Traditions'; dedicated category needs a
+token path — vetoable) + PDF 07B mirror-only section (BYTE-IDENTICAL while dark;
+goldenViewModel's only diff verified base-red institutions 54→55; NO golden
+re-recorded; becomes additive at the regen — declared) · 2db3f8b7 custom_content
+'traditions' bucket + validator + AI seam + MIGRATION 155 WRITTEN-NOT-DEPLOYED
+(049 template; head gate green, PENDING non-fatal) · 80b8a71→80b8ad71 lane-end
+ratchet reconciliation. Full suite 13,143 / EXACTLY the expected 5; ~16 pglite
+setup-timeout flakes isolation-cleared. TASTE VETOABLES: the 16 motif glyphs +
+the prose register (walk samples); PDF uses text motif labels (react-pdf fonts
+lack the dingbats — tofu). OPEN SEAMS recorded (memory
+traditions-lane-complete.md): genesis declared-over-derived consumption · manual
+authoring UI for the bucket · faction.power routing at the folds. Shared-file
+fold flags: ARCHITECTURE.md + DEPLOY.md migration-head lines. THE LANE IS
+FOLD-READY; traditionsEnabled joins the regen's eight flags. C5 dispatches.
 **⬛⭐ SLICE C4 COMPLETE (2026-07-19, deep-craft @ b6c91dbe) — the dossier is
 DONE: base (panels A–D) + craft (6 registers) + grammar + tint pins.** 6040919d
 C4c-g manuscript grammar: 2-line illuminated initials via new `.oc-dropcap-prose`
