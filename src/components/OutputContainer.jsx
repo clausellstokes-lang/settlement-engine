@@ -107,7 +107,6 @@ const TABS = [
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
   { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
 ];
-const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
 // Coarse dwell-time banding (taxonomy §"Banding vocabularies": dwell_ms_band).
 // Derived inline so no raw durations ever leave the client.
@@ -706,9 +705,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             settlement={settlement}
             saveId={saveId}
             stressObj={stressObj}
-            selectedTab={selectedTab}
-            onRegenerate={onRegenerate}
-            REROLLABLE={REROLLABLE}
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
           />
         )}
