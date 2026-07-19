@@ -1134,6 +1134,16 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER REFINEMENT (2026-07-19) — CONTESTED GOALS × RELATIONS = TUNNEL VISION
+(relayed to the running architect).** NPC relationship history + personality modulate
+contest behavior: a strong grievance toward a specific rival (D5 relationship-memory +
+ladder rivalry state) or a prideful/vengeful/zealous dominant makes an NPC MORE
+tunnel-visioned against THAT rival — over-commits, accepts worse odds, discounts the
+risk-tolerance calculus (fixates on beating who they hate, not what's optimal); a
+pragmatic/neutral NPC stays rational. A personality-and-history-gated modifier on contest
+ENTRY + odds-weighting; couples contested-goals → relationship-memory + personality, no
+new memory machinery; no-death + single-writer intact. The point: the contestant reads as
+a PERSON (character-driven irrationality), not a rational optimizer.
 **⬛⭐ OWNER RULING (2026-07-19) — THE CONTESTED GOALS CLASS (7th Deep-Couplings
 piece, the largest — relayed to the running architect).** A NEW CLASS of NPC goals for
 POWER/POLITICS COMPETITION, ADDED to (never replacing) the solo npcLadderGoals: two NPCs
