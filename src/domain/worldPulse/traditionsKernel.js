@@ -64,6 +64,7 @@ import { activeArchetypes } from '../activeConditions.js';
 import { ladderInstabilityOf } from '../townMap/ladderRead.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKernel.js';
+import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -417,15 +418,20 @@ function traditionBeat(a) {
   const { sid, townName, rec, outcome, year, tick, now, major } = a;
   const phrase = /** @type {Record<string, string>} */ (OUTCOME_PHRASE)[outcome] || 'was held';
   const positive = outcome === TRADITION_OUTCOME.TRIUMPH || outcome === TRADITION_OUTCOME.GOOD;
+  // §6 display-side accountability: a faction/institution owner is NAMED (the seat is the
+  // town itself, so a seat-owned observance needs no attribution beyond the town).
+  const named = (rec.ownerKind === 'faction' || rec.ownerKind === 'institution') && typeof rec.ownerLabel === 'string' && rec.ownerLabel
+    ? rec.ownerLabel : null;
+  const ownerBit = named ? ` It is kept by ${named}, who answer for its fortune.` : '';
   const headline = outcome === TRADITION_OUTCOME.CANCELLED
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
   const summary = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `In ${townName}, ${rec.name} was set aside this year — hardship left no room for the observance, and a people that keeps its restraint is remembered for it too.`
-    : `In ${townName}, ${rec.name} ${phrase} this year. A settlement's traditions carry its identity forward; each holding — or failing — is a mark on the year.`;
+    ? `In ${townName}, ${rec.name} was set aside this year — hardship left no room for the observance, and a people that keeps its restraint is remembered for it too.${ownerBit}`
+    : `In ${townName}, ${rec.name} ${phrase} this year. A settlement's traditions carry its identity forward; each holding — or failing — is a mark on the year.${ownerBit}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
-    ? 'Cancelled under hard stress or a desperate economy (§3 skip) — no success roll was taken; a mild legitimacy cost fell on the seat.'
-    : `A weighted success roll (§4) resolved to ${outcome}; the outcome fed the settlement's economy and legitimacy through the bounded §5 applicators.`;
+    ? `Cancelled under hard stress or a desperate economy (§3 skip) — no success roll was taken; a mild legitimacy cost fell ${named ? `at half weight on the town (${named} named)` : 'on the seat'}.`
+    : `A weighted success roll (§4) resolved to ${outcome}; the outcome fed the settlement's economy and legitimacy${named ? ` at half weight (${named} named)` : ''} through the bounded §5 applicators.`;
   const outcomeId = `tradition.${outcome}.${sid}.${year}`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,
@@ -529,21 +535,28 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     // FIRST-LIT MINT: no ledger entry ⇒ derive the founding set (byte-identical to the
     // T-1 view-time preview by construction; foundedYear kept settlement-relative — see
     // the lane report's rebase JUDGMENT). Otherwise carry the persistent set forward.
+    const minted = !priorRecs;
     const baseRecs = priorRecs || deriveFoundingTraditions(/** @type {Parameters<typeof deriveFoundingTraditions>[0]} */ (s));
     if (!baseRecs.length) continue;
 
+    // POLITICS (T-3): assign ownership at the first-lit mint; run the reassignment
+    // checkpoints + §7 mutations otherwise. Ownership is fresh BEFORE occurrences resolve,
+    // so this year's effect routes to the current owner.
+    const politics = advancePolitics({ recs: baseRecs, settlement: asObject(s), worldState, sid, year, minted });
+    const workRecs = politics.recs;
+
     const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
-    const maxScale = baseRecs.reduce((m, r) => Math.max(m, num(r.scaleBand, 0)), 0);
+    const maxScale = workRecs.reduce((m, r) => Math.max(m, num(r.scaleBand, 0)), 0);
     const warTypes = warStressorTypesFor(worldState, sid);
     const skip = shouldSkip(s, warTypes);
 
     // Resolve each observance whose window opened this year (idempotent via lastHeldYear).
-    let mutated = false;
+    let occurred = false;
     /** @type {TraditionRec[]} */
-    const nextRecs = baseRecs.map((rec) => {
+    const nextRecs = workRecs.map((rec) => {
       const opens = inWindow(weekOfYear, rec.window) && num(rec.lastHeldYear, -Infinity) < year;
       if (!opens) return rec;
-      mutated = true;
+      occurred = true;
       let outcome;
       if (skip) {
         outcome = TRADITION_OUTCOME.CANCELLED;
@@ -555,8 +568,13 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       // §5 EFFECTS (write-bounded; accumulated, applied once below).
       const prospStep = /** @type {Record<string, number>} */ (TRAD_TUNING.PROSPERITY_STEP)[outcome];
       if (prospStep) bump(prosperityDeltas, sid, prospStep);
+      // §6 owner-targeted routing: the seat (or an interim unowned record) bears the full
+      // legitimacy hit; a faction/institution owner bears half + the news names them.
       const legitHit = /** @type {Record<string, number>} */ (TRAD_TUNING.LEGITIMACY_HIT)[outcome];
-      if (legitHit) bump(legitimacyHits, sid, legitHit);
+      if (legitHit) {
+        const routed = routedLegitimacyHit(legitHit, rec.ownerKind);
+        if (routed) bump(legitimacyHits, sid, routed);
+      }
       const faithStep = /** @type {Record<string, number>} */ (TRAD_TUNING.FAITH_STEP)[outcome];
       if (faithStep && typeof rec.deityRef === 'string' && rec.deityRef) {
         const m = faithBySid.get(sid) || new Map();
@@ -570,9 +588,10 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       return { ...rec, lastHeldYear: year, lastOutcome: outcome };
     });
 
-    // A freshly minted set is itself a change; a carried set changes only when an
-    // occurrence stamped a record.
-    if (priorRecs && !mutated) nextLedger[sid] = priorRecs; // byte-stable carry
+    // Changed if freshly minted, a checkpoint reassigned/mutated, or an occurrence stamped
+    // a record; a fully-quiet carried set is byte-stable (the prior ledger ref).
+    const settlementChanged = minted || politics.changed || occurred;
+    if (!settlementChanged) nextLedger[sid] = /** @type {TraditionRec[]} */ (priorRecs); // byte-stable carry
     else nextLedger[sid] = nextRecs;
   }
 

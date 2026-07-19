@@ -98,6 +98,7 @@ import {
  * @property {number}  scaleBand    0..6, aligned to tier index; the current grandeur
  * @property {string|null} ownerKey  NULL at genesis (T-3 assigns)
  * @property {('faction'|'institution'|'seat'|null)} ownerKind  NULL at genesis (T-3 assigns)
+ * @property {string|null} ownerLabel  the owner's display name; NULL at genesis (T-3 assigns)
  * @property {string|null} deityRef  the patron deity ref for devotional motifs, else null
  * @property {TraditionExpression} expression  {trappings, epithet}
  * @property {Array<{year:number, kind:string, cause:string}>} mutationLog  EMPTY at genesis (T-3 grows)
@@ -299,6 +300,7 @@ function assembleRec(p) {
     scaleBand: p.scaleBand,
     ownerKey: null,
     ownerKind: null,
+    ownerLabel: null,
     deityRef: p.deityRef,
     expression: { trappings: p.trappings, epithet: p.epithet },
     mutationLog: [],
