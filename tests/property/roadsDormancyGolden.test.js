@@ -36,6 +36,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
+import { PURPOSE_KINDS } from '../../src/domain/roads/state.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'roads-dormancy-golden.json');
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -228,7 +229,8 @@ describe('roads mover — lit-path anti-vacuity (§16 block c: gate ON mints mis
       const abroadByHome = {};
       for (const m of Object.values(missions)) {
         expect(IDS, 'destination is a real settlement').toContain(String(m.destId));
-        expect(['observance', 'trade', 'diplomacy', 'ladder'], 'purpose is a known kind').toContain(m.purpose.kind);
+        // Registry-driven (the §11b R-8 purposes extend PURPOSE_KINDS without touching this).
+        expect(PURPOSE_KINDS, 'purpose is a registered kind').toContain(m.purpose.kind);
         purposes.add(m.purpose.kind);
         abroadByHome[m.homeId] = (abroadByHome[m.homeId] || 0) + 1;
       }

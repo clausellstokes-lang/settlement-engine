@@ -105,10 +105,11 @@ export function cmp(a, b) {
 
 export const WHEREABOUTS_STATES = Object.freeze(['traveling', 'visiting', 'returning', 'hostage']);
 // §11b R-8 THE EMBASSY EXTENSION extends the purpose registry additively (never a hardcoded
-// complete list): 'embassy' (the wartime peace suit) here in R8-a; 'dominion' + 'verification'
-// in R8-b. Display surfaces (roadScene/whereaboutsDisplay) read PURPOSE_KINDS + a generic
-// fallback, so a new kind reads gracefully without a rewrite.
-export const PURPOSE_KINDS = Object.freeze(['observance', 'trade', 'diplomacy', 'ladder', 'embassy']);
+// complete list): 'embassy' (the wartime peace suit, R8-a), 'dominion' (occupier inspection,
+// purpose 6) + 'verification' (rumour verification, purpose 7 — R8-b). Display surfaces
+// (roadScene/whereaboutsDisplay) read PURPOSE_KINDS + a generic fallback, so a new kind reads
+// gracefully without a rewrite.
+export const PURPOSE_KINDS = Object.freeze(['observance', 'trade', 'diplomacy', 'ladder', 'embassy', 'dominion', 'verification']);
 export const THREAT_CLASSES = Object.freeze(['T1', 'T2', 'T3', 'T4']);
 
 // ── THE DORMANCY GATE (constitutional §1 law 2) — a virtual, defensively-read flag ─────
@@ -219,6 +220,15 @@ export const ROADS_TUNING = Object.freeze({
   EMBASSY_PEACE_W: 0.35, // sue_for_peace weight ×(1 + this×intensity01) — the consumption bound
   HUNT_AMPLIFIER: 1.6, // an informed third-party hunter's T1 capture roll ×this (the race)
   DEFAULT_FACTION_POWER: 55, // faction.power fallback when the envoy's faction is unreadable (0..100)
+  // §11b ESCORT REFINEMENT — settlementWeight01 scales escort by home power+influence ranking
+  SETTLEMENT_WEIGHT_BASE: 0.8,
+  SETTLEMENT_WEIGHT_POWER: 0.2, // × powerRank01 (governing-faction power / 100)
+  SETTLEMENT_WEIGHT_INFLUENCE: 0.15, // × influenceRank01 (publicLegitimacy.score / 100)
+  SETTLEMENT_WEIGHT_MIN: 0.8,
+  SETTLEMENT_WEIGHT_MAX: 1.3,
+  // §11b PURPOSE 7 RUMOR VERIFICATION — a home danger-rumour this un-fresh/un-sure is worth a trip
+  VERIFY_FIDELITY_CEIL: 0.75, // completeness01 (or accuracy01) below this ⇒ verifiable
+  VERIFY_BOOST01: 1.0, // the return writes the home rumour to this fidelity (a confirmed source)
 });
 
 // ── §4 RISK COHERENCE — personality → riskTolerance01 ──────────────────────────
@@ -481,4 +491,30 @@ export function embassyDetainShare(amplifier) {
 export function embassySuitIntensity01(envoyWeight01) {
   const T = ROADS_TUNING;
   return clamp01(T.EMBASSY_SUIT_BASE + T.EMBASSY_SUIT_GAIN * clamp01(envoyWeight01));
+}
+
+// ── §11b R-8 ESCORT REFINEMENT — the home power/influence escort multiplier (pure) ────
+/**
+ * The escort weight from the home settlement's POWER + INFLUENCE ranking (§11b ESCORT
+ * REFINEMENT): settlementWeight01 = clamp(0.8 + 0.2×powerRank01 + 0.15×influenceRank01, 0.8,
+ * 1.3), FROZEN AT DISPATCH onto escort01 alongside militaryQuality. powerRank01 = the governing
+ * faction's power / 100; influenceRank01 = the seat's publicLegitimacy.score / 100 (the
+ * available settlement-level signals — JUDGMENT, vetoable). Both fall back to a neutral 0.5.
+ * faction.power is a DERIVATION OUTPUT — READ ONLY. Pure.
+ * @param {unknown} settlement @returns {number}
+ */
+export function settlementWeight01(settlement) {
+  const T = ROADS_TUNING;
+  const ps = asObject(asObject(settlement).powerStructure);
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  let governingPower = null;
+  for (const f of factions) {
+    const fo = asObject(f);
+    if (fo.isGoverning) { governingPower = num(fo.power, NaN); break; }
+  }
+  const powerRank01 = Number.isFinite(governingPower) ? clamp01(/** @type {number} */ (governingPower) / 100) : 0.5;
+  const plRaw = asObject(ps.publicLegitimacy).score;
+  const influenceRank01 = Number.isFinite(Number(plRaw)) ? clamp01(Number(plRaw) / 100) : 0.5;
+  return clampNum(T.SETTLEMENT_WEIGHT_BASE + T.SETTLEMENT_WEIGHT_POWER * powerRank01
+    + T.SETTLEMENT_WEIGHT_INFLUENCE * influenceRank01, T.SETTLEMENT_WEIGHT_MIN, T.SETTLEMENT_WEIGHT_MAX);
 }

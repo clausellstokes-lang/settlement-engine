@@ -34,7 +34,7 @@
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions } from './traditionsKernel.js';
 import {
   roadsActive, ROADS_TUNING, isOffStage, roadsImportanceWeight, riskToleranceOf,
-  militaryQuality01, protectionOf, exposureOf, captureProbability, termWeeksFor,
+  militaryQuality01, settlementWeight01, protectionOf, exposureOf, captureProbability, termWeeksFor,
   conversionFlawFactor, conversionProbability, applyLegitimacySteps, applyProsperityBandSteps,
   asObject, num, clampNum, clamp01, cmp,
 } from '../roads/state.js';
@@ -43,6 +43,7 @@ import { EMBASSY_LEDGER_KEY, embassyPairKey } from '../roads/embassyLedger.js';
 import {
   relationshipTypeBetween, atOpenWar, atWarWith, isEmbassy, embassyEnvoyMetrics, evaluateEmbassyHazard,
 } from '../roads/embassyHazard.js';
+import { findVerifyPlan, boostHomeRumorFidelity } from '../roads/verification.js';
 import {
   getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest, hopWeeks,
 } from '../spatial/distanceRead.js';
@@ -389,6 +390,8 @@ function advanceLitRoads(args) {
   const returnedCaptiveDeposits = [];
   /** @type {Array<{ homeId: string, destId: string, venue: string, envoyWeight01: number, amplifier: number, intensity01: number }>} §11b heard peace suits */
   const embassyDeposits = [];
+  /** @type {Array<{ homeId: string, subject: string }>} §11b rumour-verification returns (write g) */
+  const verificationReturns = [];
   /** @type {Record<string, Record<string, unknown>>} the surviving/advanced missions */
   const missions = {};
 
@@ -444,6 +447,11 @@ function advanceLitRoads(args) {
       // COVERT, no news — the roads supply a channel, the web does everything else.
       if (m.releasedFromRansom && m.willConvert && corruptionWebActive(worldState)) {
         returnedCaptiveDeposits.push({ captorId: str(m.captorId), homeId, npcKey: str(m.npcKey) });
+      }
+      // §11b PURPOSE 7: a RUMOR-VERIFICATION traveller reaching home confirms the subject — the
+      // return writes the home rumour ledger with a freshness/fidelity boost (LAW 6 write g).
+      if (str(asObject(m.purpose).kind) === 'verification' && str(asObject(m.purpose).ref)) {
+        verificationReturns.push({ homeId, subject: str(asObject(m.purpose).ref) });
       }
       if (!m.releasedFromRansom) {
         const s = freshSettlement(homeId);
@@ -740,8 +748,23 @@ function advanceLitRoads(args) {
       if (hw >= 1 && hw <= ROADS_TUNING.EMBASSY_MAX_HOP_WEEKS) warTargets.push({ dest, hopWeeksOut: hw });
     }
     warTargets.sort((x, y) => cmp(x.dest, y.dest));
-    // Nothing to send: no routine journey (damped, or no trade-reachable dest) AND no peace suit.
-    if ((damped || !inRange.length) && !warTargets.length) continue;
+    // §11b PURPOSE 6 DOMINION INSPECTION targets: holdings this court OCCUPIES (over all
+    // settlements — an occupied holding shares no trade edge), routable within range.
+    /** @type {Array<{ dest: string, hopWeeksOut: number }>} */
+    const dominionTargets = [];
+    for (const dest of orderedIds) {
+      if (dest === sid || !idSet.has(dest)) continue;
+      if (str(asObject(occupations[dest]).occupierId) !== sid) continue;
+      const hw = num(hopWeeks(digest, sid, dest, season), 0);
+      if (hw >= 1 && hw <= ROADS_TUNING.MAX_HOP_WEEKS) dominionTargets.push({ dest, hopWeeksOut: hw });
+    }
+    dominionTargets.sort((x, y) => cmp(x.dest, y.dest));
+    // §11b PURPOSE 7 RUMOR VERIFICATION plan: a low-fidelity home rumour + a trusted source in
+    // range (null unless beliefs are live — omniscient/dark plans nothing ⇒ byte-identical).
+    const verifyPlan = damped ? null : findVerifyPlan(worldState, graph, sid, inRange, now2);
+    // Nothing to send: no routine journey (damped, or no reachable routine target) AND no suit.
+    const hasRoutine = !damped && (inRange.length || dominionTargets.length);
+    if (!hasRoutine && !warTargets.length) continue;
 
     const knownView = knownEmbattlementView(worldState, sid);
     const roster = rosterByS.get(sid) || new Map();
@@ -787,6 +810,16 @@ function advanceLitRoads(args) {
           });
           if (hit) { purpose = { kind: 'diplomacy', ref: `${sid}~${hit.dest}` }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
         }
+        // §11b PURPOSE 6 DOMINION INSPECTION — an envoy of an occupying court views a held holding.
+        if (!purpose && dominionTargets.length && DIPLO_CATEGORY.test(categoryOf(npc))) {
+          const t = dominionTargets[0];
+          purpose = { kind: 'dominion', ref: t.dest }; dest = t.dest; hopWeeksOut = t.hopWeeksOut;
+        }
+        // §11b PURPOSE 7 RUMOR VERIFICATION — travel to a trusted source to confirm a rumour; the
+        // RETURN writes the home rumour ledger (write g). ref = the subject to verify.
+        if (!purpose && verifyPlan && DIPLO_CATEGORY.test(categoryOf(npc))) {
+          purpose = { kind: 'verification', ref: verifyPlan.subject }; dest = verifyPlan.dest; hopWeeksOut = verifyPlan.hopWeeksOut;
+        }
         if (!purpose && ladderLit) {
           const goal = ladderGoalOf(/** @type {{ npcLadder?: unknown }} */ (s), npcKey);
           if (goal && goal.goal) { purpose = { kind: 'ladder', ref: goal.goal }; dest = inRange[0].dest; hopWeeksOut = inRange[0].hopWeeksOut; fullWeight = true; }
@@ -814,11 +847,14 @@ function advanceLitRoads(args) {
       const legWeeks = Math.max(1, num(hopWeeks(digest, sid, c.dest, season), 1));
       const stayFork = createPRNG(`${rngSeed}::roads:stay:${sid}:${c.npcKey}:${year}`);
       const stayWeeks = ROADS_TUNING.STAY_BASE_WEEKS + Math.round(stayFork.random());
+      // §11b ESCORT REFINEMENT (all purposes): the home power+influence ranking scales the escort
+      // weight alongside military quality — FROZEN AT DISPATCH onto escort01 (the guards who left
+      // with you are the guards you have). ×settlementWeight01 ∈ [0.8, 1.3].
       const escort01 = militaryQuality01({
         readiness01: readinessOf(/** @type {never} */ (s)),
         experience01: experienceOf(/** @type {never} */ (s)),
         capacityBand01: militaryCapacityScalar(s),
-      });
+      }) * settlementWeight01(s);
       const missionId = `road.${sid}.${c.npcKey}.${weekClock}`;
       missions[missionId] = {
         id: missionId, npcKey: c.npcKey, npcName: str(c.npc.name || c.npcKey),
@@ -974,6 +1010,22 @@ function advanceLitRoads(args) {
       nextWorldState = Object.keys(nextEmbassies).length
         ? setSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY, sortKeys(nextEmbassies))
         : dropSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY);
+      changed = true;
+    }
+  }
+
+  // ── §11b PURPOSE 7 THE RETURN-SIDE RUMOR WRITE (LAW 6 write g) — a returned verification
+  //    traveller boosts the home ledger's records about the confirmed subject. Only fires when a
+  //    verification mission arrived home this tick (⇒ dark/omniscient worlds never write). ──
+  if (verificationReturns.length) {
+    const priorRumors = getSpatialLedger(nextWorldState, 'rumorLedgers');
+    let nextRumors = priorRumors;
+    for (const v of verificationReturns) {
+      const boosted = boostHomeRumorFidelity(/** @type {Record<string, unknown>} */ (nextRumors), v.homeId, v.subject, now2);
+      if (boosted) nextRumors = boosted;
+    }
+    if (nextRumors !== priorRumors) {
+      nextWorldState = setSpatialLedger(nextWorldState, 'rumorLedgers', /** @type {never} */ (nextRumors));
       changed = true;
     }
   }
