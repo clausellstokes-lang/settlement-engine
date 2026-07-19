@@ -1153,6 +1153,34 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ T-4 RELATIONS LANDED (2026-07-19, claude/traditions @ dbd3eb2f, 2 commits) —
+CULTURES NOW INTERACT, DARK.** 70d12d40 T4-a: §8 imposition/suppression/restoration
+in a new pure leaf src/domain/traditions/relations.js — occupation ledger sole
+trigger (vassalized, rung 4), overlord's highest-scale rite imposed as a SECOND
+record (adoptedFrom + overlord expression, scale capped to vassal tier band), local
+rite suppressedBy{overlordId,sinceYear,traded} never deleted, index-0 founding core
+immutable; liberation clears suppression, removes the copy, stamps 'restoration';
+suppressed rites don't resolve outcomes · dbd3eb2f T4-b: §9 adoption (rolling
+3-yr influxLog on the founding core, 12% threshold, tier-cap replacement of the
+lowest non-founding, 'displaced' recorded) + aspatial dormancy PROVEN byte-identical
+(teleport path: JSON.stringify(ledger)===input). ⭐ THE PRE-DRAIN DIVERGENCE
+(judgment-ledger §6, prominently recorded): the design's literal "read due columns
+pre-drain in the last-running mover" is STRUCTURALLY IMPOSSIBLE — release drains at
+pulseKernel:688 discarding originId, the mover runs post-drain at :2342, and
+pulseKernel sits at its EXACT 1387-line ceiling (cannot reorder). Shipped: read
+in-transit columns at each column's last-visible-before-drain tick
+(tick === max(departTick, arrivalTick−1)) — fires exactly once per column,
+observationally equivalent for the 3-yr/12% detection, and more robust than a
+cross-pass stash. VETO reverts to a name-swap capture at the release site.
+Dials (soak-tunable, vetoable): IMPOSE_CHANCE 0.3/vassalized-yr ·
+ADOPTION_THRESHOLD 0.12 · INFLUX_WINDOW 3yr; 10 JUDGMENTs in the lane report incl.
+'imposition' logged as a mutation kind on both records. DECLARED for THE ONE REGEN:
+influxLog is new lit-only state (materializes when traditionsEnabled lights on
+spatial campaigns). Deferrals stand: faction.power routing (interim full-weight,
+§16) · culture-vector affinity (highest-scale proxy). Gates: 19+83 focused green ·
+strict/tsc/build/eager all clean · FULL SUITE 13,281 green / 7 reds = the expected
+5 + the flatqueue vendor-test damage (REPAIRED from .bak in-lane, tree clean) + 1
+isolation-cleared timeout flake. T-5 SURFACES dispatches (the lane's final slice).
 **⬛⭐ C4 PANEL D LANDED (2026-07-19, deep-craft @ 67586c86) — THE DOSSIER BASE
 COMPLETE (all four panels).** PostGenCoach revived as HOST of the wizard-postgen
 whisper exactly per the ledgered recipe (registry component swap; WizardNextSteps
