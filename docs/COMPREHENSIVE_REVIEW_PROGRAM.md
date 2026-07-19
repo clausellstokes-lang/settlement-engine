@@ -1134,6 +1134,26 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE DEEP COUPLINGS DESIGN IS WRITTEN (2026-07-19) — docs/DESIGN_DEEP_COUPLINGS.md
+(1,040 lines, uncommitted in the main tree; COMMIT HELD until the architect folds in the
+relationship-memory cohesion addendum, then manager-validate + commit the complete doc).**
+All SEVEN pieces as slices D-0..D-6, house style (frozen laws · recon-receipt landscape ·
+dependency graph · lettered commits/gates/done-whens · the THREE-BODY RANSOM matrix with
+weight formulas · verification charter with 7 dormancy goldens + per-piece lit walkthroughs
++ roster-conservation asserts + anti-hum tempo bands · owner-gated open questions). SEVEN
+FLAGS: migrationRumorsEnabled · beliefAxesEnabled · npcCredibilityEnabled · intelTradeEnabled
+· contestedGoalsEnabled (PRE-FOLD, order D-0→D-4 off aad6265e) + thirdPartyRansomEnabled ·
+seaRoadsEnabled (POST-ROADS-FOLD, re-survey mandated — roads advanced 1e962d01→99084183
+mid-design). Boundary law amended for per-NPC credibility (statecraft §6 — a credibility
+hit resolves no fate) and the contested-goals loser (a standing hit, never a fate), roads
+§0.5 pattern. ⚠ CONFIRMED LIVE BUG SURFACED (fold-dependency): the ladder faction-key
+collapses every real faction to `fac.unknown` in the composite — the one-commit FIX SITS
+UNFOLDED at claude/the-ladder 14e8a2fa; contested-goals (D-4) is GATED on it. ACTION: fold
+batch 3 MUST fold claude/the-ladder (engine lift #3, dark) AND carry its faction-key fix,
+or D-4 is dead-on-arrival. Architect's top risks: deposit-and-consume shortcuts (the §11
+write-lists are the grep target) · generosityKernel at 800/800 lines (D-3 gift wiring
+rides the instrument-catalog data path net-zero) · post-fold anchor drift (re-grep-at-fold
+mandated; shapes cited over line numbers).
 **⬛⭐ RELATIONSHIP-MEMORY RECON — VERDICT: settlement plane ALREADY organic + cohesive
 (do NOT rebuild); 4 bounded cohesion gaps to close (2026-07-19, read-only @ aad6265e).**
 The owner's "evolve organically with memory, cohesive like everything else" is largely
