@@ -610,13 +610,17 @@ transfer request.
 question resolved AGAINST inactivity forfeiture: the lifetime promise stays
 whole; reclamation is voluntary-first, abandonment-last):
 - STANDING BUYBACK: any founder may sell their seat back to the company for
-  $49.50, any time, via the account transfer panel. Flow (challenge-code
+  $25 — ONE config dial (system_config seat_buyback_cents, default 2500; owner
+  ruling 2026-07-19), SHARED with the abandonment credit; the TRANSFER share
+  stays price/2 = $49.50 by explicit same-day ruling (the even split is the
+  anti-side-deal incentive). Any time, via the account transfer panel. Flow (challenge-code
   confirmed, the 6.2 idiom; refused while a live transfer case exists or
   security_status ≠ normal): claim-once seat release → lineage row
   ('buyback' — append, never erase) → holder cleared (seat returns to the
   unclaimed pool; cap intact; resellable at $99) → is_founder=false + the 6.5
   subscribed-ex-founder tier logic → a founder_seat_buybacks row (id, seat_id,
-  user_id, state pending_payout/paid/held, amount_cents 4950, connect fields;
+  user_id, state pending_payout/paid/held, amount_cents from the
+  seat_buyback_cents dial (2500), connect fields;
   rides the 137 rewrite) → payout via the SAME Connect release in the
   due-runner (idempotencyKey `buyback-${id}`; Connect absent → 'held' + seam
   reminder — LAW 1 posture identical to transfer payouts) → money_events kind
@@ -635,8 +639,8 @@ whole; reclamation is voluntary-first, abandonment-last):
   (stamped abandonment_notice_started_at, rides 137); ANY sign-in during the
   window clears the stamp; unresponsive at window end → security_status
   'escheat' + holder cleared + lineage row 'abandonment' + money_events
-  'refund_note' with metadata {claimable_cents:4950} — the $49.50 is HELD AS A
-  CLAIMABLE CREDIT (support-mediated claim; never fired at a years-dead card).
+  'refund_note' with metadata {claimable_cents: seat_buyback_cents (2500)} —
+  the $25 is HELD AS A CLAIMABLE CREDIT (support-mediated claim; never fired at a years-dead card).
   Escheat seats are NEVER auto-resold (Q1). The sweep will fire for no one
   before ~2031; it exists now under the build-completeness doctrine.
 
@@ -929,12 +933,12 @@ TERMS BUNDLE (drafted for counsel; encode the four ratified amendments):
 - Death or incapacity of a holder: succession is handled case-by-case through
   an official estate process — contact support (amendment a).
 - STANDING BUYBACK: the company maintains a standing offer to repurchase any
-  seat for $49.50 through the account page; repurchased seats return to the
+  seat for $25 through the account page; repurchased seats return to the
   unclaimed pool.
 - ABANDONMENT (the license is NEVER revoked for mere non-use): a seat whose
   account has been inactive and unreachable for five (5) years, and which
   remains unresponsive to repeated notices over a further ninety (90) days, is
-  deemed abandoned and returns to the company; $49.50 is held for the former
+  deemed abandoned and returns to the company; $25 is held for the former
   holder as a claimable credit.
 - Payouts to outgoing holders are made 14-30 days after transfer completion,
   at the holder's election: in cash via Stripe Connect (requires completing

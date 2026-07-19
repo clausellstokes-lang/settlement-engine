@@ -1134,6 +1134,16 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19, "done!") — THE $25 DIAL:** the manager's
+recommendation adopted verbatim: the TRANSFER share stays $49.50 (price/2 — the even
+split is the anti-side-deal incentive, defended and ratified); the STANDING BUYBACK and
+the ABANDONMENT CLAIMABLE CREDIT become ONE shared config dial, system_config
+seat_buyback_cents default 2500 ($25). The incentive ladder is now strictly ordered:
+transfer to a successor $49.50 > hand back to the house $25 = the credit that waits for
+a vanished holder — every rung pushing seats toward living hands. DESIGN_MONEY_WAVE
+§6.8 + §12 terms amended (this commit); the running M-10 lane relayed mid-flight
+(amount from the dial, never hand-typed; the buyback credits-election grants
+round(dial/rate)). Nothing sold, nothing deployed — zero migration pain.
 **⬛⭐ ROADS R-1..R-4 CLOSED — THE CLOSER OVERTURNED THE FLAKE HYPOTHESIS (2026-07-19,
 claude/the-roads @ fa0bd2e7, RC-a..RC-f atop b059e808).** The predecessor's "23 failed
 files = load flakes" was WRONG for SIX: real, deterministic roads-introduced
