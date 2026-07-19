@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ WAVE C COMPLETE — THE FIVE DARK TRADITIONS SEAMS (2026-07-19,
+claude/wave-c-seams @ 295f27b8, WC-a..WC-e + typedef fix atop aad6265e —
+manager-verified lineage).** All five DESIGN_TRADITIONS §16 deferred seams built dark to
+completion, zero stale-brief hits (each verified genuinely absent at base): festival-week
+map dress (lantern dots on the high street during observance windows; townMap goldens
+byte-identical) · reframe 'tradition' act class (vocab pin 8→9 EXTENDED, real fact
+source over suppression rows) · culture-vector tradition kinship (Jaccard motif
+signature folding into migration + contraband distance) · fair trade-lane pulse (+1
+prosperity band-step, connective-route + GOOD-gated — trade proven derived-only by an
+adversarial map, prosperity is the only writable target) · cross-settlement pilgrimage
+(nearby attendance lifts a grand host observance ≤0.1 — closes the pilgrimage seam the
+ROADS observance purpose also feeds). Receipts: suite 13,636 P / 4 F = EXACTLY the parked
+goldens (re-confirmed red at base in a temp worktree) · dormancy 18/18 EXECUTED
+(traditions/reframe/spatial byte-identity) · closure byte-for-byte 1,040,998 = base
+(ZERO eager) · no migrations, no store actions, no DB. Lane wrote its own memory.
+THE FREED SLOT → THE ROADS IMPLEMENTATION DISPATCHED (claude/the-roads off aad6265e,
+Opus, slices R-1..R-4 per DESIGN_THE_ROADS §18: state+flag → missions+routing → the
+gauntlet → captivity; R-5..R-7 on manager checkpoint).
 **⬛⭐ THE ROADS DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_THE_ROADS.md committed
 (this commit; ~856 lines).** Engine Lift #5 designed against aad6265e with every owner
 ruling encoded: §0 spec spine · §0.5 the boundary amendment (exact in-place header edits;
