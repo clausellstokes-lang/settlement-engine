@@ -88,7 +88,11 @@ const CEILINGS = Object.freeze({
   // parchment register — the row's borderRadius:7 and the source-chip's
   // borderRadius:3 both struck (rows are a left source-rule + a feint annal
   // hairline now; chips are square small-caps source stamps).
-  borderRadius: 1075,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C4c-b, THE VOTIVE REGISTER — DeityAssignmentPanel materials
+  // pass): borderRadius 1075→1073. The patron/cult assignment card + its select
+  // both de-rounded to a rule-framed dedication plate (wrapStyle :7 + selectStyle
+  // :4 struck), and the SaaS AI-content violet accent became the votive gold.
+  borderRadius: 1073,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
