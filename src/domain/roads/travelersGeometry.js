@@ -4,17 +4,16 @@
  * path's settlement placements, at a derived fraction t ∈ [0,1], plus the heading for a
  * direction chevron.
  *
- * FIRST-PAINT LAW: a ZERO-IMPORT LAZY LEAF (imports nothing), read only from the lazy
- * TravelersLayer. Pure, total, deterministic — the derived-at-render discipline (ChainEdges).
+ * FIRST-PAINT LAW: a LAZY LEAF importing ONLY the kernel clamp primitive (code-quality-4:
+ * the ONE clamp01), read only from the lazy TravelersLayer. Pure, total, deterministic — the
+ * derived-at-render discipline (ChainEdges).
  *
  * @enforced-by tests/domain/roadsTravelersGeometry.test.js
  */
+import { clamp01 } from '../../kernel/math.js';
 
-/** @param {number} x @param {number} lo @param {number} hi @returns {number} */
-function clamp(x, lo, hi) { return x < lo ? lo : x > hi ? hi : x; }
-
-/** clamp a value into [0,1]; non-finite ⇒ 0. @param {unknown} x @returns {number} */
-export function clamp01(x) { const n = Number(x); return Number.isFinite(n) ? clamp(n, 0, 1) : 0; }
+// Re-exported so TravelersLayer + tests import the ONE clamp primitive from this leaf.
+export { clamp01 };
 
 /**
  * The fraction travelled between two ticks: (now − depart) / (arrive − depart), clamped [0,1].

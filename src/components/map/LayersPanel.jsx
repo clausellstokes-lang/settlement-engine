@@ -17,7 +17,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 // components-map-3: the relationship palette is single-sourced from
@@ -31,9 +31,9 @@ const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
 // DESIGN_THE_ROADS §13 — the Travelers overlay sub-layers. Armies + migrant columns read
 // live ledgers (always available); envoys are present only when the roads ledger is lit.
 const TRAVELER_SUBLAYERS = [
-  { id: 'armies', label: 'Armies', color: '#8B1A1A' },
-  { id: 'migrants', label: 'Migrant columns', color: '#5B7B9A' },
-  { id: 'envoys', label: 'Envoys', color: '#A0762A' },
+  { id: 'armies', label: 'Armies', color: swatch.danger },
+  { id: 'migrants', label: 'Migrant columns', color: swatch['#5A6E82'] },
+  { id: 'envoys', label: 'Envoys', color: swatch['#A0762A'] },
 ];
 
 function human(value) {

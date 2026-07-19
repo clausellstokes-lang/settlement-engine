@@ -29,7 +29,7 @@ import {
 import { seasonForTick } from '../../domain/worldPulse/worldState.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 
-const COLOR = { armies: swatch.danger, migrants: '#5B7B9A', envoys: swatch['#A0762A'] };
+const COLOR = { armies: swatch.danger, migrants: swatch['#5A6E82'], envoys: swatch['#A0762A'] };
 
 export default function TravelersLayer() {
   // Minimal primitives; derived data in useMemo for reference-stable output between renders.
