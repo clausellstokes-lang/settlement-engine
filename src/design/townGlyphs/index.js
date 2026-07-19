@@ -68,4 +68,4 @@ export function getGlyphSet(id) {
   return (typeof id === 'string' && REGISTRY.get(id)) || null;
 }
 
-export { compileGlyph, GLYPH_FOOTPRINT } from './glyphCompiler.js';
+export { compileGlyph, compileGlyphFacade, GLYPH_FOOTPRINT } from './glyphCompiler.js';

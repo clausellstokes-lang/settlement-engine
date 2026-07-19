@@ -106,3 +106,63 @@ export function compileGlyph({ glyph, cx, cy, mirror = false, footprint = GLYPH_
   }
   return ops;
 }
+
+/**
+ * Compile a glyph's FRONT-FACE detail onto an already-extruded panorama prism (THE
+ * ILLUSTRATED TOWN, IT5-b). The oblique panorama draws each building as a 2.5D prism
+ * (townPanorama.js CATEGORY_HEIGHT machinery); this paints the glyph's IDENTITY strokes —
+ * its roofline + ink details (door / window / cross / mill-wheel / crenellation / clock /
+ * chimney) — onto the prism's FRONT (south) face rectangle, so a church reads as a church
+ * and a mill as a mill instead of a blank block (the owner's "actual detail" spine).
+ *
+ * The prism IS the wall, so the glyph's `face` walls are SKIPPED (drawing them would double
+ * the massing); and the prism's own face-shading already cues the ONE fixed NW light
+ * (SHADOW_DIR), so NO second shadow is emitted here — nothing is lit from a second side.
+ * All ink; compiles ONLY to the five primitive op kinds, so the SVG string / react-pdf plate
+ * / raster export render it free (design §0.5), exactly like the plan-view glyph layer.
+ *
+ * The target is a screen-space AXIS-ALIGNED rectangle (the cavalier projection preserves x
+ * and the front face has constant depth): `x0..x1` is its horizontal span, `yGround` its
+ * bottom (the prism base) and `yTop` its top (the prism roofline). Local y (1 = ground)
+ * maps to yGround; local y (0 = top) to yTop. DETERMINISM: only + − × ÷ + Math.round.
+ * @param {{ glyph: Glyph|null|undefined, x0:number, x1:number, yGround:number, yTop:number,
+ *   mirror?: boolean, ink: string, weight?: number }} arg
+ * @returns {import('../../domain/townMap/townMapDraw.js').DrawOp[]}
+ */
+export function compileGlyphFacade({ glyph, x0, x1, yGround, yTop, mirror = false, ink, weight = 1 }) {
+  /** @type {import('../../domain/townMap/townMapDraw.js').DrawOp[]} */
+  const ops = [];
+  if (!glyph || !Array.isArray(glyph.strokes)) return ops;
+  const span = x1 - x0;
+  const rise = yGround - yTop;                 // front-face height (positive, up-screen)
+  const bw = w2(weight * 0.85);
+  /** local x (0..1, mirrored) → screen x across the front face */
+  const vx = (/** @type {number} */ lx) => Math.round(x0 + (mirror ? 1 - lx : lx) * span);
+  /** local y (0..1, 1 = ground) → screen y up the front face */
+  const vy = (/** @type {number} */ ly) => Math.round(yGround - (1 - ly) * rise);
+  for (const st of glyph.strokes) {
+    if (!st) continue;
+    if (st.r === 'face') continue;             // the prism is the wall — skip the glyph walls
+    if (st.r === 'circle') {
+      if (Array.isArray(st.c)) {
+        ops.push({
+          t: 'circle',
+          cx: vx(st.c[0]), cy: vy(st.c[1]),
+          r: Math.max(1, Math.round((st.rad || 0.1) * span)),
+          stroke: ink, strokeWidth: bw,
+        });
+      }
+      continue;
+    }
+    if (!Array.isArray(st.p) || st.p.length === 0) continue;
+    /** @type {Array<[number, number]>} */
+    const pts = st.p.map(([lx, ly]) => /** @type {[number, number]} */ ([vx(lx), vy(ly)]));
+    if (st.r === 'line') {
+      ops.push({ t: 'line', x1: pts[0][0], y1: pts[0][1], x2: pts[1][0], y2: pts[1][1], stroke: ink, strokeWidth: bw });
+    } else if (st.r === 'roof' || st.r === 'ink') {
+      // the roofline + ink details as open/closed ink polylines (the identity marks)
+      ops.push({ t: 'poly', pts, closed: !!st.c, stroke: ink, strokeWidth: bw });
+    }
+  }
+  return ops;
+}

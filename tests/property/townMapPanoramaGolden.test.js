@@ -32,11 +32,23 @@ import { TOWN_MAP_LENS_IDS, TOWN_MAP_STYLE_IDS, ILLUSTRATED_STYLE_ID } from '../
 import { GOLDEN_CONFIGS, V2_GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'town-panorama-golden.json');
+const SEASON_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'town-panorama-season-golden.json');
 const UPDATE = process.env.UPDATE_PANORAMA_GOLDEN === '1';
 
 // A tier-spanning v1 subset (thorp / hamlet / town / city / metropolis / village) so the
 // panorama is pinned over V1 geometry too, not only the v2 engine.
 const V1_SUBSET = [0, 3, 6, 9, 12, 15].map((i) => GOLDEN_CONFIGS[i]);
+
+// IT5-b seasonal variants — the illustrated panorama's season/severity contexts (the dress
+// third param composes onto the oblique plane, IT-3 precedent). Additive (a NEW fixture); the
+// seasonless illustrated row in the base manifest above is the dormancy anchor. Same set as the
+// flat illustrated-town season golden, so the two surfaces move together under one cause.
+const SEASON_VARIANTS = [
+  { key: 'winter', dress: { season: 'winter' } },
+  { key: 'winter-hard', dress: { season: 'winter', severity: 'hard_winter' } },
+  { key: 'autumn', dress: { season: 'autumn' } },
+  { key: 'summer-drought', dress: { season: 'summer', severity: 'drought' } },
+];
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
@@ -136,5 +148,55 @@ describe('GOLDEN — town-map PANORAMA (v2 corpus + v1 subset × every lens) →
     }
     expect(worst, `${worstLabel} panorama emitted ${worst} illustrated ops (> ${PANORAMA_OP_CEILING})`).toBeLessThanOrEqual(PANORAMA_OP_CEILING);
     expect(worst).toBeGreaterThan(0);
+  });
+});
+
+/** The per-config illustrated panorama draw lists × the season variants (v2 corpus + v1 subset). */
+function illustratedSeasonOutputs() {
+  const rows = [];
+  for (const { settlement, mapEdits } of V2_GOLDEN_CONFIGS) {
+    const model = buildTownMapModel(settlement, mapEdits);
+    for (const v of SEASON_VARIANTS) rows.push(buildTownMapPanoramaDrawList(model, ILLUSTRATED_STYLE_ID, v.dress));
+  }
+  for (const { settlement } of V1_SUBSET) {
+    const model = buildTownMapModel(settlement);
+    for (const v of SEASON_VARIANTS) rows.push(buildTownMapPanoramaDrawList(model, ILLUSTRATED_STYLE_ID, v.dress));
+  }
+  return rows;
+}
+
+describe('GOLDEN — town-map PANORAMA seasonal variants (additive; the dress third param composes)', () => {
+  it('the seasonal panorama corpus hashes to the committed manifest', () => {
+    const outputs = illustratedSeasonOutputs();
+    const hash = hashOf(outputs);
+    let totalOps = 0;
+    for (const ops of outputs) totalOps += ops.length;
+    const record = { hash, configs: outputs.length, totalOps, bytes: JSON.stringify(outputs).length };
+    if (UPDATE) {
+      mkdirSync(dirname(SEASON_MANIFEST), { recursive: true });
+      writeFileSync(SEASON_MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
+    }
+    expect(
+      existsSync(SEASON_MANIFEST),
+      'town-panorama-season-golden.json missing — mint: UPDATE_PANORAMA_GOLDEN=1 npx vitest run tests/property/townMapPanoramaGolden.test.js',
+    ).toBe(true);
+    const pinned = JSON.parse(readFileSync(SEASON_MANIFEST, 'utf-8'));
+    expect(hash).toBe(pinned.hash);
+    expect(record.configs).toBe(pinned.configs);
+    expect(record.totalOps).toBe(pinned.totalOps);
+  });
+
+  it('is reproducible — a second seasonal build hashes identically', () => {
+    expect(hashOf(illustratedSeasonOutputs())).toBe(hashOf(illustratedSeasonOutputs()));
+  });
+
+  it('every seasonal variant DIFFERS from the seasonless illustrated panorama (the dress paints)', () => {
+    for (const { settlement, mapEdits } of V2_GOLDEN_CONFIGS.slice(0, 4)) {
+      const model = buildTownMapModel(settlement, mapEdits);
+      const base = JSON.stringify(buildTownMapPanoramaDrawList(model, ILLUSTRATED_STYLE_ID));
+      for (const v of SEASON_VARIANTS) {
+        expect(JSON.stringify(buildTownMapPanoramaDrawList(model, ILLUSTRATED_STYLE_ID, v.dress)), `${v.key} == base`).not.toBe(base);
+      }
+    }
   });
 });

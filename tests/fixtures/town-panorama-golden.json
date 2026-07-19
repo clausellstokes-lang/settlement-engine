@@ -1,8 +1,8 @@
 {
-  "hash": "53deeb51c6c979dfd4399cb43eed832ae1e52d6d950008f46e7a0cffc47c3012",
+  "hash": "28b1b5381487ff2c8cb1d4a9ac7c9419045d042fc9ccfd88208591818d14a1e3",
   "configs": 26,
   "lenses": 6,
-  "totalOps": 10488,
+  "totalOps": 13074,
   "perLens": {
     "parchment": {
       "hash": "f49dd840068feffd62a9751fa46276ec058cc3d5cb2f4477cb5931bd8359399b",
@@ -30,9 +30,9 @@
       "svgBytes": 236322
     },
     "illustrated": {
-      "hash": "46c78acf6e047cd34c8ec55e11741d39f78f1bb39fd10ee91c502af1dd048a99",
-      "ops": 1748,
-      "svgBytes": 238351
+      "hash": "1a4f5005864606048750cf6d510da26f8eb14331f02d14590e15e5f881e479cb",
+      "ops": 4334,
+      "svgBytes": 528329
     }
   }
 }

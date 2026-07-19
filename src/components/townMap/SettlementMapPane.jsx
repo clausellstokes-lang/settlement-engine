@@ -200,10 +200,12 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // Absent worldState ⇒ null ⇒ seasonless base bytes (the dormancy law). Never persisted.
   const dress = useMemo(() => resolveMapDress(settlement, worldState, regionalGraph), [settlement, worldState, regionalGraph]);
   // The oblique panorama draw-ops — computed only in panorama mode, under the active
-  // lens (so it re-poses the SAME model the plan shows, honoring edits + lens).
+  // lens (so it re-poses the SAME model the plan shows, honoring edits + lens). The `dress`
+  // composes the season/state portrait onto the illustrated panorama (IT5-b), matching the
+  // plan-view underlay for WYSIWYG; a base lens ignores it (dormancy ⇒ byte-identical).
   const panoramaOps = useMemo(
-    () => (viewMode === 'panorama' ? buildTownMapPanoramaDrawList(model, activeStyle) : null),
-    [viewMode, model, activeStyle],
+    () => (viewMode === 'panorama' ? buildTownMapPanoramaDrawList(model, activeStyle, dress) : null),
+    [viewMode, model, activeStyle, dress],
   );
   const districtsById = useMemo(() => {
     const m = new Map();
