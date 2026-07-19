@@ -104,6 +104,31 @@ describe('SettlementCard — select mode', () => {
   });
 });
 
+describe('SettlementCard — AUDIT-2.2 frozen-card read-only export', () => {
+  // A retention-frozen (plan-lapsed) save: the paid-rights floor says the owner
+  // can always extract what they made.
+  const frozenSave = {
+    id: 's-frozen', name: 'Ashfen', tier: 'town', timestamp: Date.now(),
+    accessState: 'inactive_plan',
+    settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+  };
+
+  it('offers a read-only Export PDF alongside Reactivate on a frozen card', () => {
+    render(<SettlementCard s={frozenSave} {...baseProps} currentCampaignId={null} canReactivate={false} />);
+    expect(screen.getByRole('button', { name: /export pdf/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /reactivate/i })).toBeTruthy();
+    // The frozen export is NOT the simulation-resuming Open action.
+    expect(screen.queryByRole('button', { name: /open ashfen/i })).toBeNull();
+  });
+
+  it('an active card shows Open, never the frozen Export affordance', () => {
+    const activeSave = { ...frozenSave, id: 's-active', accessState: 'active' };
+    render(<SettlementCard s={activeSave} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByRole('button', { name: /open ashfen/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /export pdf/i })).toBeNull();
+  });
+});
+
 describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
   it('standalone card routes Advance Time to the move-to-campaign popover', () => {
     render(<SettlementCard s={peacefulSave} {...baseProps} currentCampaignId={null} campaigns={[{ id: 'c1', name: 'Camp One' }]} />);
