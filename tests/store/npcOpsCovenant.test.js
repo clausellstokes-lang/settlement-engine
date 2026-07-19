@@ -81,6 +81,31 @@ describe('NPC ops flow through the covenant (queueEdit → commit)', () => {
     expect(store.getState().settlement.npcs[0].stasis).toBeUndefined();
   });
 
+  test("THE PARTY'S HAND: ransom/rescue stamp the release marker on a hostage; non-hostage is a safe no-op (§11)", () => {
+    // DESIGN_THE_ROADS §11 — the two roads ops are committable and route through applyNpcOp,
+    // stamping whereabouts.partyRelease (the marker the mover consumes). Hostages live in
+    // canon campaigns, so this exercises the post-canon path.
+    for (const k of ['ransom-npc', 'rescue-npc']) expect(COMMITTABLE_EDIT_KINDS).toContain(k);
+    const store = makeStore();
+    store.setState(s => {
+      s.settlement = { id: 't1', name: 'Testholm', tier: 'town', npcs: [
+        { id: 'npc.cap', name: 'Cap', role: 'merchant', whereabouts: { state: 'hostage', placeId: 'e', purposeKind: 'trade', sinceTick: 10, expectedReturnTick: null, missionId: 'road.t1.npc.cap.10' } },
+        { id: 'npc.home', name: 'Homebody', role: 'ruler' },
+      ] };
+      s.phase = 'canon'; s.activeSaveId = null;
+    });
+    expect(store.getState().queueEdit('ransom-npc', { npcIndex: 0 })).not.toBe(null); // admitted post-canon
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].whereabouts.partyRelease).toBe('ransom');
+    store.getState().queueEdit('rescue-npc', { npcIndex: 0 });
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].whereabouts.partyRelease).toBe('rescue');
+    // A party op on a NON-hostage is refused inside applyNpcOp — no whereabouts appears.
+    store.getState().queueEdit('ransom-npc', { npcIndex: 1 });
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[1].whereabouts).toBeUndefined();
+  });
+
   test('EDITS CHANGE THE FUTURE, NEVER THE PAST: the NPC ops work POST-CANON', () => {
     const store = makeStore(); loadSettlement(store, 'canon');
     // rename-npc is identity-locked post-canon (refused at the queue seam)…

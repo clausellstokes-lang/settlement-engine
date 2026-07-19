@@ -623,37 +623,53 @@ function advanceLitRoads(args) {
     const w = npc ? roadsImportanceWeight(npc.npc) : clamp01((num(r.termWeeks, 13) - 13) / 26); // fall back from the term
     const elapsed = weekClock - num(r.startedWeek, weekClock);
     r.remainingWeeks = Math.max(0, num(r.termWeeks, 0) - elapsed);
-    // EARLY-RELEASE events (§9): captor razed/abandoned · captor occupied/liberated · peace.
+    // EARLY-RELEASE events: THE PARTY'S HAND (§11) · captor razed/abandoned · captor
+    // occupied/liberated · peace (§9). A party op's marker (whereabouts.partyRelease, the
+    // §3 stasis-collision precedent — the DM writes the npc, the mover reacts) WINS: the
+    // DM's explicit intervention overrides any automatic event this tick.
+    const partyRelease = npc ? str(asObject(asObject(npc.npc).whereabouts).partyRelease) : '';
     let early = '';
-    if (!idSet.has(captorId)) early = 'captor_gone';
+    if (partyRelease === 'ransom') early = 'party_ransom';
+    else if (partyRelease === 'rescue') early = 'party_rescue';
+    else if (!idSet.has(captorId)) early = 'captor_gone';
     else if (asObject(asObject(occupations)[captorId]).occupierId) early = 'captor_occupied';
     else if (r.hostileAtCapture && !atOpenWar(graph, homeId, captorId) && !HOSTILE_RUNGS.has(relationshipTypeBetween(graph, worldState, homeId, captorId))) early = 'peace';
     const termEnd = /** @type {number} */ (r.remainingWeeks) <= 0;
     if (!early && !termEnd) { ransoms[rid] = r; continue; } // still captive — carry the updated record
 
     // RELEASE: the captive turns for home ('returning' over hopWeeks); the ransom record clears.
+    // A PARTY RESCUE (§11) VOIDS the covert conversion — the captor's leverage was broken, not
+    // bargained — by dropping willConvert on the returning mission (consumed on arrival home).
     delete ransoms[rid];
     const retWeeks = Math.max(1, num(hopWeeks(digest, captorId, homeId, season), 1));
     const backMid = `road.${homeId}.${npcKey}.${weekClock}`;
+    const willConvertOut = early === 'party_rescue' ? false : !!r.willConvert;
     missions[backMid] = {
       id: backMid, npcKey, npcName: str(r.npcName), homeId, destId: captorId,
       purpose: { kind: str(r.purposeKind) || 'trade', ref: '' }, phase: 'returning', path: [captorId, homeId],
       departTick: weekClock, legArrivalTick: weekClock + retWeeks, stayWeeks: 0,
       escort01: 1, riskTolerance01: 0.65, knownDangerAtDispatch: 0, trappedBySiege: false,
-      startedYear: year, releasedFromRansom: true, willConvert: !!r.willConvert, captorId,
+      startedYear: year, releasedFromRansom: true, willConvert: willConvertOut, captorId,
     };
-    // WRITE SCHEDULE (§9) — term-end only; an EARLY release skips the captor credit + final hit.
+    // WRITE SCHEDULE (§9/§11): term-end pays the FULL schedule. A PARTY RANSOM keeps the captor
+    // prosperity pulse (the party met the price) but spares the home seat BOTH the legitimacy hit
+    // AND the pillar prosperity debit — the coin came from adventurers, not the treasury. Every
+    // other early release (rescue, captor_gone, occupied, peace) skips all credits.
     if (termEnd && !early) {
       bumpLegit(homeId, ROADS_TUNING.RANSOM_PAID_HOME_LEGIT); // -1: the treasury bled
       if (w >= ROADS_TUNING.CAPTOR_CREDIT_MIN_WEIGHT) captorProsperity.set(captorId, (captorProsperity.get(captorId) || 0) + ROADS_TUNING.CAPTOR_PROSPERITY_STEP);
       if (w >= ROADS_TUNING.PILLAR_WEIGHT) homeProsperity.set(homeId, (homeProsperity.get(homeId) || 0) + ROADS_TUNING.HOME_PILLAR_PROSPERITY_STEP);
+    } else if (early === 'party_ransom' && w >= ROADS_TUNING.CAPTOR_CREDIT_MIN_WEIGHT) {
+      captorProsperity.set(captorId, (captorProsperity.get(captorId) || 0) + ROADS_TUNING.CAPTOR_PROSPERITY_STEP);
     }
     const s = freshSettlement(homeId); const seed = `ransom.${rid}`;
     const interp = { npc: str(r.npcName), home: str(asObject(s).name || homeId), captor: captorId, dest: captorId };
+    const pool = early === 'party_ransom' ? ROADS_NEWS.partyRansom
+      : early === 'party_rescue' ? ROADS_NEWS.rescue : ROADS_NEWS.ransom;
     newsEntries.push(roadsBeat({
       sid: homeId, tick: now2, now, significance: 'notable',
-      headline: pickLine(ROADS_NEWS.ransom.headline, seed, interp),
-      summary: pickLine(ROADS_NEWS.ransom.summary, seed, interp),
+      headline: pickLine(pool.headline, seed, interp),
+      summary: pickLine(pool.summary, seed, interp),
       seed, tags: [early ? `ransom_${early}` : 'ransom'],
     }));
   }

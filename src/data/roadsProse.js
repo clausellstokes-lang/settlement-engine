@@ -128,6 +128,36 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `With the ransom settled, ${x.captor} lets ${x.npc} go home to ${x.home}.`,
     ],
   },
+  // ── PARTY RANSOM (NOTABLE — the party's coin bought the captive home, §11) ──
+  partyRansom: {
+    headline: [
+      (x) => `${x.npc} is bought home to ${x.home} by adventurers`, // canonical
+      (x) => `A party pays ${x.captor} to free ${x.npc}`,
+      (x) => `${x.npc} is ransomed from ${x.captor} by hired hands`,
+      (x) => `Adventurers settle ${x.npc}'s ransom to ${x.captor}`,
+    ],
+    summary: [
+      (x) => `A party of adventurers has paid ${x.captor} the price of ${x.npc}'s release; the envoy of ${x.home} rides home, the treasury untouched.`, // canonical
+      (x) => `${x.npc} of ${x.home} is free of ${x.captor} — the coin came from adventurers, not the seat, and the road home lies open.`,
+      (x) => `Hired hands met ${x.captor}'s price for ${x.npc}; the captive of ${x.home} turns homeward with the debt paid by others.`,
+      (x) => `${x.captor} has released ${x.npc} of ${x.home} to a party that bought them back; ${x.home}'s coffers were spared.`,
+    ],
+  },
+  // ── RESCUE (NOTABLE — the jailbreak; no coin, the captor is left the poorer, §11) ──
+  rescue: {
+    headline: [
+      (x) => `${x.npc} is broken free of ${x.captor}`, // canonical
+      (x) => `Adventurers spirit ${x.npc} out of ${x.captor}`,
+      (x) => `${x.npc} escapes ${x.captor} with help`,
+      (x) => `A rescue frees ${x.npc} from ${x.captor}`,
+    ],
+    summary: [
+      (x) => `A party has broken ${x.npc} of ${x.home} out of ${x.captor}'s hands — no ransom paid, and ${x.captor} nurses the insult as ${x.npc} rides home.`, // canonical
+      (x) => `${x.npc} of ${x.home} is spirited free of ${x.captor} by force; the captor keeps no coin and holds a fresh grudge against ${x.home}.`,
+      (x) => `The jailbreak succeeds: ${x.npc} of ${x.home} is gone from ${x.captor}, who is left the poorer and the angrier.`,
+      (x) => `Adventurers pulled ${x.npc} of ${x.home} out of ${x.captor} without paying a coin; ${x.captor} will remember the affront.`,
+    ],
+  },
   // ── TRAPPED / WAIT (texture — the siege or the hostile roads keep them abroad) ──
   trapped: {
     headline: [

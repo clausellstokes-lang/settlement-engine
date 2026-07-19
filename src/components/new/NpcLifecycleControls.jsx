@@ -1,4 +1,5 @@
 import { FS, MUTED, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import {
   NPC_ALIGNMENTS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, NPC_GOALS, npcFacetOf,
@@ -54,6 +55,17 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
     else queueEdit('stasis-npc', { npcIndex, reason: value });
   };
 
+  // DESIGN_THE_ROADS §11 — THE PARTY'S HAND. When this NPC is a roads HOSTAGE, the DM may
+  // intervene on the party's behalf: pay the ransom (the captor still profits, but the home
+  // treasury is spared) or stage a rescue (no coin, but the captor is left the poorer and
+  // angrier). Both queue through the standing covenant; the mover realises the release on its
+  // next tick. Absent for any non-hostage.
+  const isHostage = npc?.whereabouts?.state === 'hostage';
+  const onParty = (kind) => () => {
+    const npcIndex = resolveNpcIndex();
+    if (npcIndex >= 0) queueEdit(kind, { npcIndex });
+  };
+
   return (
     <div style={{ marginTop: 6, padding: '6px 8px', background: swatch['#F5F0E8'], borderRadius: 4 }}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>
@@ -87,6 +99,38 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
           </select>
         </div>
       </div>
+      {isHostage && (
+        <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
+          <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>
+            The party&apos;s hand — {npc?.name || 'this captive'} is held
+          </div>
+          {/* GUIDANCE WHISPER (§11 covenant): the two moves and their consequences, at the op. */}
+          <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
+            Pay the ransom to buy them home — the captor still profits, but the home treasury is
+            spared. Or stage a rescue: no coin, and the captive returns clean of any turned
+            loyalty, but the captor keeps a grudge. The move settles on the next advance; it
+            queues for review like any edit.
+          </p>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={onParty('ransom-npc')}
+              aria-label={`Pay the ransom to bring ${npc?.name || 'the captive'} home`}
+            >
+              Pay ransom
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              onClick={onParty('rescue-npc')}
+              aria-label={`Stage a rescue of ${npc?.name || 'the captive'}`}
+            >
+              Rescue
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
