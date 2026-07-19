@@ -1153,6 +1153,24 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ SLICE C4 COMPLETE (2026-07-19, deep-craft @ b6c91dbe) — the dossier is
+DONE: base (panels A–D) + craft (6 registers) + grammar + tint pins.** 6040919d
+C4c-g manuscript grammar: 2-line illuminated initials via new `.oc-dropcap-prose`
+(root-ink-ramp, initial-letter + float fallback, ≤520px degrade) on the Overview
+arrival band (light gold on umber) + the DM Summary lede (dark on parchment);
+Plot Hooks DECLINED — it is a data register, the law bars grammar there;
+MARGINALIA DECLINED on all three (no re-vehiclable annotation exists without
+inventing chrome — drop caps alone satisfy the grammar). · b6c91dbe C4c-h
+ServicesTab state tints re-grounded to warm parchment (rose/amber/gold-parchment
++ warm healthy; the one cool-mint off-palette tone eliminated) with 5 NEW
+per-state contrast pins (8.3/7.3/5.6/5.9:1, color never the sole channel).
+JUDGMENTs vetoable: 2-line initial size · two ground tones · state-leaning
+washes kept for scanning. Kill-list unchanged 1054/113/265/235 (tolerance-0
+re-proven at tip); eager 0 (36 CSS lines on organic.css). Focused gates green
+both commits; full suite deliberately not re-run (surfaces-bounded per brief;
+next full pass at the fold). Slice C4 deferral set CLOSED-with-reasons; the
+config-side panels remain the C1-fin remainder's. C3 DISPATCHES into the freed
+worktree (incl. the Panel-A allowRename CALLER WIRING owed to C3).
 **⬛⭐ C2L THE LOADING JOURNEYS LANDED (2026-07-19, claude/deep-craft-c2l @
 a8b5d313, 3 commits, NOT folded).** eedb67bf generation film = PipelineReveal's
 z0 backdrop (THEATER-ONCE stands; store-key pins untouched; reveal timing
