@@ -1134,6 +1134,14 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — CAPTURE FORMULA REFINEMENT (relayed to the running
+architect):** the PROTECTION term gains the home settlement's MILITARY MIGHT — protection
+= importance-scaled escort × home military quality (read from existing garrison/force
+state; "better soldiers and equipment do make a difference"). Asymmetry preserved:
+armies/occupation partially bypass protection; escort quality bites hardest on
+embattled-road threats. Optional escort-cost deepening (garrison marginally weakened
+while its best guards travel) left to the architect as a vetoable judgment — adopted
+only if it composes with existing military accounting without new bookkeeping.
 **⬛ OWNER RULING (2026-07-19) — THE ROADS WAVE GROWS TWO SURFACES (relayed to the
 running architect mid-design):** (A) THE TRAVELERS OVERLAY — a realm-map TOGGLE LAYER
 (recon-confirmed absent today: transit data exists, no renderer) drawing in-transit
