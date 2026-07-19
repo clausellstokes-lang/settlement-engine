@@ -1153,6 +1153,9 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER AMENDMENT (2026-07-19) — table-reporting cadence refined: the
+remaining-work table updates on each COMPLETED LIST ITEM (slice/wave/phase/gate),
+not on every commit.**
 **⬛ OWNER AMENDMENT (2026-07-19, same day) — THE ESCALATION CLAUSE COVERS
 VERIFICATION TOO:** "that also goes to verification." Fable verifiers allowed
 case-by-case for difficult verifications, never default; same criteria and
