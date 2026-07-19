@@ -1153,6 +1153,23 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ THE SECOND COMPROMISE SWEEP (2026-07-19, owner-prompted: "were there any
+other compromises?").** Full-program deferral audit, three classes: ⭐ CLASS A
+(scope-law refusals, orderable — now COMMITTED MANDATORY CYCLE-1 INTAKE, fixed
+regardless of survey findings): the 13 unauthored lastingEffects event types ·
+traditions genesis declared-over-derived consumption · the traditions manual
+authoring UI · the PDF counterseal structured-path refactor (de-listed from
+post-launch) · C13's deterministic-violet re-tone list (AutoSaveChip/
+VersionsTab/MagicTab/RealmStrip faith/Pantheon tiers/AdminTrends/QuickInspector)
+· the master "Viability →" button adjudication · WhatChangedPanel wire-or-
+remove · the ?cat= compendium deep-link · folder sub-table thead a11y · the
+journey_stop analytics enrichment · vendorManifestExactSet try/finally
+hardening. CLASS B (stage-blocked, ceilings named in the loop's grade tables):
+§16 lit-dependent traditions seams · game-feel (needs players) · soak-dependent
+tuning. CLASS C (owner-owned, untouched): the taste queue · HowToUse ·
+surveyor-tier semantics · the parked teaching tranche · the owner-authored
+post-launch list. Meta: every item was findable because NONE was silent — the
+deferral discipline held program-wide.
 **⬛ OWNER ORDER (2026-07-19) — THE CALIBER SWEEP: "go back and do all of those
 decisions to the objectively best architecture, quality and caliber."** The
 audit's five conversions execute NOW, not at cycle 1: (1) Segmented → the
