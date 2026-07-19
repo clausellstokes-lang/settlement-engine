@@ -35,21 +35,21 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| D | src/components/settlement/LockToggle.jsx |  | PENDING — master file deleted at merge; verify vs the reconciliation map |
-| D | src/copy/strings.js |  | PENDING — master file deleted at merge; verify vs the reconciliation map |
+| D | src/components/settlement/LockToggle.jsx |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/copy/strings.js |  | SUPERSEDED by copy/en.js t()/tx() |
 
 ## ⛔ADJUDICATE (deleted domain) — 8 files
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| D | src/domain/devAnomalies.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/devDebug.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/distributionDashboard.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/genreProfile.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/pipelineRail.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/provenance.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/domain/region/migrations.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
-| D | src/generators/rngContext.js |  | PENDING — master domain file DELETED at merge; verify named supersession (program provenance ledger / rng system / etc.) vs loss |
+| D | src/domain/devAnomalies.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/domain/devDebug.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/domain/distributionDashboard.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/domain/genreProfile.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/domain/pipelineRail.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/domain/provenance.js |  | SUPERSEDED by provenanceKernel/provenanceModel |
+| D | src/domain/region/migrations.js |  | PROGRAM-SIDE-RULED (owner dead-code @ 11fc55d0) |
+| D | src/generators/rngContext.js |  | RELOCATED to kernel/rngContext.js |
 
 ## C16 + C1 (PostGenCoach mount) — 1 files
 
@@ -61,103 +61,103 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/AppViews.jsx | ● | PENDING |
-| M | src/components/AccountPage.jsx | ● | PENDING |
-| M | src/components/AdminPanel.jsx |  | PENDING |
-| M | src/components/AuthModal.jsx | ● | PENDING |
-| M | src/components/BuyThisDossier.jsx | ● | PENDING |
-| M | src/components/CampaignSyncBanner.jsx |  | PENDING |
-| M | src/components/ChroniclePanel.jsx |  | PENDING |
-| M | src/components/CompendiumPanel.jsx | ● | PENDING |
-| M | src/components/ConfigurationPanel.jsx |  | PENDING |
-| M | src/components/FeatureErrorBoundary.jsx | ● | PENDING |
-| M | src/components/GalleryPage.jsx | ● | PENDING |
-| M | src/components/MapOverlay.jsx | ● | PENDING |
-| M | src/components/PrivacySettings.jsx |  | PENDING |
-| M | src/components/ProseParagraph.jsx | ● | PENDING |
-| M | src/components/PublicDossierView.jsx | ● | PENDING |
-| M | src/components/PurchaseModal.jsx |  | PENDING |
-| M | src/components/ShareToGallery.jsx | ● | PENDING |
-| M | src/components/SingleDossierSuccessPage.jsx | ● | PENDING |
-| M | src/components/TableView.jsx | ● | PENDING |
-| M | src/components/TradeDynamicsPanel.jsx |  | PENDING |
-| M | src/components/WorldMap.jsx | ● | PENDING |
-| M | src/components/account/AccountDataPrivacySection.jsx |  | PENDING |
-| M | src/components/account/AccountNav.jsx | ● | PENDING |
-| M | src/components/account/AccountRecoveryQuestionsSection.jsx |  | PENDING |
-| M | src/components/account/AccountSecuritySection.jsx |  | PENDING |
-| M | src/components/account/AccountSubscriptionSection.jsx |  | PENDING |
-| M | src/components/account/AccountSupportSection.jsx |  | PENDING |
-| M | src/components/account/AccountTickets.jsx |  | PENDING |
-| M | src/components/account/ReferralRedeemBlocks.jsx |  | PENDING |
-| M | src/components/admin/AdminAnalyticsPanel.jsx |  | PENDING |
-| M | src/components/admin/AdminTrendsPanel.jsx |  | PENDING |
-| M | src/components/admin/SupportQueuePanel.jsx |  | PENDING |
-| M | src/components/auth/AuthPanel.jsx | ● | PENDING |
-| M | src/components/auth/authUI.jsx |  | PENDING |
-| M | src/components/compendium/CatalogTabs.jsx | ● | PENDING |
-| M | src/components/compendium/ContentPackBar.jsx |  | PENDING |
-| M | src/components/compendium/CustomContent.jsx |  | PENDING |
-| M | src/components/compendium/DeityEffectPreview.jsx |  | PENDING |
-| M | src/components/compendium/HelpPopover.jsx |  | PENDING |
-| M | src/components/compendium/PantheonActivationStrip.jsx |  | PENDING |
-| M | src/components/gallery/GalleryDetail.jsx | ● | PENDING |
-| M | src/components/gallery/GalleryList.jsx | ● | PENDING |
-| M | src/components/gallery/GallerySidebar.jsx |  | PENDING |
-| M | src/components/gallery/GalleryTopbar.jsx |  | PENDING |
-| M | src/components/gallery/MapShareEditor.jsx |  | PENDING |
-| M | src/components/gallery/galleryMapsUtils.js | ● | PENDING |
-| M | src/components/gallery/galleryUtils.js | ● | PENDING |
-| M | src/components/map/AnnotateToolbar.jsx |  | PENDING |
-| M | src/components/map/AssignDeityFromMap.jsx | ● | PENDING |
-| M | src/components/map/AutoSaveChip.jsx | ● | PENDING |
-| M | src/components/map/ChronicleScrollback.jsx |  | PENDING |
-| M | src/components/map/IconButton.jsx |  | PENDING |
-| M | src/components/map/LiveWarStatus.jsx | ● | PENDING |
-| M | src/components/map/MapLegend.jsx | ● | PENDING |
-| M | src/components/map/PlacementDetailCard.jsx |  | PENDING |
-| M | src/components/map/PlacementsLayer.jsx | ● | PENDING |
-| M | src/components/map/QuickInspector.jsx |  | PENDING |
-| M | src/components/map/RealmDashboard.jsx | ● | PENDING |
-| M | src/components/map/RealmInspector.jsx | ● | PENDING |
-| M | src/components/map/RelationshipEdges.jsx |  | PENDING |
-| M | src/components/map/SettlementPalette.jsx |  | PENDING |
-| M | src/components/map/SimulationRulesDialog.jsx | ● | PENDING |
-| M | src/components/map/WizardNewsPanel.jsx |  | PENDING |
-| M | src/components/map/WorldMapOverlays.jsx |  | PENDING |
-| M | src/components/map/WorldMapStage.jsx | ● | PENDING |
-| M | src/components/map/WorldMapToolbar.jsx | ● | PENDING |
-| M | src/components/map/WorldPulseData.js |  | PENDING |
-| M | src/components/map/WorldPulsePanel.jsx | ● | PENDING |
-| M | src/components/map/relationshipEdgeStyle.js |  | PENDING |
-| M | src/components/new/SupplyChainsPanel.jsx | ● | PENDING |
-| M | src/components/new/dailyLifeLogic.js |  | PENDING |
-| M | src/components/new/npcComponents.jsx | ● | PENDING |
-| M | src/components/new/serviceComponents.jsx |  | PENDING |
-| M | src/components/purchase/ReferralIntentField.jsx |  | PENDING |
-| M | src/data/constants.js | ● | PENDING |
-| M | src/data/economicData.js |  | PENDING |
-| M | src/data/entityTags.js |  | PENDING |
-| M | src/data/geographyData.js | ● | PENDING |
-| M | src/data/historyData.js | ● | PENDING |
-| M | src/data/institutionServices.js | ● | PENDING |
-| M | src/data/institutionalCatalog.js | ● | PENDING |
-| M | src/data/namingData.js | ● | PENDING |
-| M | src/data/narrativeData.js | ● | PENDING |
-| M | src/data/npcData.js | ● | PENDING |
-| M | src/data/powerData.js |  | PENDING |
-| M | src/data/resourceData.js | ● | PENDING |
-| M | src/data/sampleDossier.js |  | PENDING |
-| M | src/data/sampleDossier.json |  | PENDING |
-| M | src/data/sampleSettlements.js |  | PENDING |
-| M | src/data/servicesData.js |  | PENDING |
-| M | src/data/spatialData.js |  | PENDING |
-| M | src/data/stressTypes.js |  | PENDING |
-| M | src/data/stressTypesMeta.js |  | PENDING |
-| M | src/data/supplyChainData.js |  | PENDING |
-| M | src/data/tradeGoodsData.js | ● | PENDING |
-| M | src/index.css |  | PENDING |
-| M | src/main.jsx | ● | PENDING |
+| M | src/AppViews.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/AccountPage.jsx | ● | OWNER-FLAG (census §2 — backend-gated) |
+| M | src/components/AdminPanel.jsx |  | RESTORATION-OWED (census §1 #2 — 3-tier hierarchy flattened; user table stays removed; sweep scheduled) |
+| M | src/components/AuthModal.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/BuyThisDossier.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/CampaignSyncBanner.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/ChroniclePanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/CompendiumPanel.jsx | ● | RESTORATION-OWED (census §1 #9 — Page identity, ARIA tabs dropped; sweep scheduled) |
+| M | src/components/ConfigurationPanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/FeatureErrorBoundary.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/GalleryPage.jsx | ● | RESTORATION-OWED (census §1 #10 — shared header/frame/Segmented dropped; sweep scheduled) |
+| M | src/components/MapOverlay.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/PrivacySettings.jsx |  | RESTORATION-OWED (census §1 #4 — bare-prop → card-in-card; consent opt-out = owner; sweep scheduled) |
+| M | src/components/ProseParagraph.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/PublicDossierView.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/PurchaseModal.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/ShareToGallery.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/SingleDossierSuccessPage.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/TableView.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/TradeDynamicsPanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/WorldMap.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/AccountDataPrivacySection.jsx |  | RESTORATION-OWED (census §1 #5 — bare-prop regression; visibility defaults backend-gated; sweep scheduled) |
+| M | src/components/account/AccountNav.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/AccountRecoveryQuestionsSection.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/AccountSecuritySection.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/AccountSubscriptionSection.jsx |  | RESTORATION-OWED (census §1 #6 — free-tier upgrade CTA lost; sweep scheduled) |
+| M | src/components/account/AccountSupportSection.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/AccountTickets.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/account/ReferralRedeemBlocks.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/admin/AdminAnalyticsPanel.jsx |  | RESTORATION-OWED (census §1 #3 — card-in-card; hand-rolled tablist; sweep scheduled) |
+| M | src/components/admin/AdminTrendsPanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/admin/SupportQueuePanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/auth/AuthPanel.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/auth/authUI.jsx |  | RESTORATION-OWED (census §1 #7 — wordmark link, Page dropped, a11y; sweep scheduled) |
+| M | src/components/compendium/CatalogTabs.jsx | ● | RESTORATION-OWED (census §1 #11 — SectionHeading hierarchy, guards, empty-states; sweep scheduled) |
+| M | src/components/compendium/ContentPackBar.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/compendium/CustomContent.jsx |  | RESTORATION-OWED (census §1 #12 — HEAVIEST: cloud-sync, two-lane IA; sweep scheduled) |
+| M | src/components/compendium/DeityEffectPreview.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/compendium/HelpPopover.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/compendium/PantheonActivationStrip.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/gallery/GalleryDetail.jsx | ● | RESTORATION-OWED (census §1 #13 — DesktopOnlyGate + forge-CTA dropped; sweep scheduled) |
+| M | src/components/gallery/GalleryList.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/gallery/GallerySidebar.jsx |  | RESTORATION-OWED (census §1 #14 — mobile BottomSheet, FilterChips a11y; sweep scheduled) |
+| M | src/components/gallery/GalleryTopbar.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/gallery/MapShareEditor.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/gallery/galleryMapsUtils.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/gallery/galleryUtils.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/AnnotateToolbar.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/AssignDeityFromMap.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/AutoSaveChip.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/ChronicleScrollback.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/IconButton.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/LiveWarStatus.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/MapLegend.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/PlacementDetailCard.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/PlacementsLayer.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/QuickInspector.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/RealmDashboard.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/RealmInspector.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/RelationshipEdges.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/SettlementPalette.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/SimulationRulesDialog.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WizardNewsPanel.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WorldMapOverlays.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WorldMapStage.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WorldMapToolbar.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WorldPulseData.js |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/WorldPulsePanel.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/map/relationshipEdgeStyle.js |  | RESTORATION-OWED (census §1 #8 — criminal_network type dropped; sweep scheduled) |
+| M | src/components/new/SupplyChainsPanel.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/new/dailyLifeLogic.js |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/new/npcComponents.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/new/serviceComponents.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/components/purchase/ReferralIntentField.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
+| M | src/data/constants.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/economicData.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/entityTags.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/geographyData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/historyData.js | ● | RESTORATION-OWED (census §1 #22 — lastingEffects absent from templates; sweep scheduled) |
+| M | src/data/institutionServices.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/institutionalCatalog.js | ● | RESTORATION-OWED (census §1 #23 — priorityCategory inconsistent, guard test absent; sweep scheduled) |
+| M | src/data/namingData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/narrativeData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/npcData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/powerData.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/resourceData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/sampleDossier.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/sampleDossier.json |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/sampleSettlements.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/servicesData.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/spatialData.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/stressTypes.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/stressTypesMeta.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/supplyChainData.js |  | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/data/tradeGoodsData.js | ● | PROGRAM-SIDE-RULED (data content relocation, census §4) |
+| M | src/index.css |  | MATCHES-MASTER (restyle-only, census §4) |
+| M | src/main.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 assign at slice) |
 
 ## C1 — 8 files
 
@@ -176,9 +176,9 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/HomeLanding.jsx | ● | PENDING |
-| M | src/components/HowToUse.jsx | ● | PENDING |
-| M | src/components/home/HomeSampleDossier.jsx | ● | PENDING |
+| M | src/components/HomeLanding.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C2/C6-C12) |
+| M | src/components/HowToUse.jsx | ● | RESTORATION-OWED (census §1 #1 — 11 headings collapsed to 1; sweep scheduled) |
+| M | src/components/home/HomeSampleDossier.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C2/C6-C12) |
 
 ## C4 — 23 files
 
@@ -212,9 +212,9 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/PricingPage.jsx | ● | PENDING |
-| M | src/components/pricing/FounderTile.jsx |  | PENDING |
-| M | src/components/pricing/PricingMomentCard.jsx |  | PENDING |
+| M | src/components/PricingPage.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C6) |
+| M | src/components/pricing/FounderTile.jsx |  | RESTORATION-OWED (census §1 #15 — checkout retry + scarcity meter dropped; sweep scheduled) |
+| M | src/components/pricing/PricingMomentCard.jsx |  | RESTORATION-OWED (census §1 #16 — anon sign-in buy-wall bug; sweep scheduled) |
 
 ## C3/C4 — 26 files
 
@@ -251,33 +251,33 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/SettlementsPanel.jsx | ● | PENDING |
-| M | src/components/library/LibraryToolbar.jsx |  | PENDING |
-| M | src/components/settlements/BulkActionBar.jsx |  | PENDING |
-| M | src/components/settlements/CampaignFolder.jsx |  | PENDING |
-| M | src/components/settlements/HealthPip.jsx |  | PENDING |
-| M | src/components/settlements/RealmStrip.jsx |  | PENDING |
-| M | src/components/settlements/SampleDashboard.jsx | ● | PENDING |
-| M | src/components/settlements/SaveQuotaMeter.jsx |  | PENDING |
-| M | src/components/settlements/SettlementCard.jsx | ● | PENDING |
-| M | src/components/settlements/advanceTimeTarget.js |  | PENDING |
+| M | src/components/SettlementsPanel.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/library/LibraryToolbar.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/BulkActionBar.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/CampaignFolder.jsx |  | RESTORATION-OWED (census §1 #17 — mobile reflow + member cap; sweep scheduled) |
+| M | src/components/settlements/HealthPip.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/RealmStrip.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/SampleDashboard.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/SaveQuotaMeter.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/SettlementCard.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
+| M | src/components/settlements/advanceTimeTarget.js |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C3) |
 
 ## C16 — 12 files
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/new/design.js |  | PENDING |
-| M | src/components/primitives/BottomSheet.jsx |  | PENDING |
-| M | src/components/primitives/Card.jsx |  | PENDING |
-| M | src/components/primitives/CausalNarrativeTable.jsx | ● | PENDING |
-| M | src/components/primitives/DesktopOnlyGate.jsx |  | PENDING |
-| M | src/components/primitives/Disclosure.jsx | ● | PENDING |
-| M | src/components/primitives/IconButton.jsx | ● | PENDING |
-| M | src/components/primitives/LockedDestination.jsx |  | PENDING |
-| M | src/components/primitives/MobileTabStrip.jsx |  | PENDING |
-| M | src/components/primitives/Page.jsx |  | PENDING |
-| M | src/design/tokens.js | ● | PENDING |
-| M | src/pdf/primitives/ProseText.jsx | ● | PENDING |
+| M | src/components/new/design.js |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/BottomSheet.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/Card.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| D | src/components/primitives/CausalNarrativeTable.jsx | ● | PROGRAM-SIDE-RULED (orphan — not mounted in master either, census §3) |
+| M | src/components/primitives/DesktopOnlyGate.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/Disclosure.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/IconButton.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/LockedDestination.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/MobileTabStrip.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/components/primitives/Page.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
+| M | src/design/tokens.js | ● | MATCHES-MASTER (restyle-only, census §4) |
+| M | src/pdf/primitives/ProseText.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C16) |
 
 ## C1/C16 — 1 files
 
@@ -565,23 +565,23 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/copy/en.js | ● | PENDING |
+| M | src/copy/en.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 copy law (cross-cut)) |
 
 ## C15/PDF — 14 files
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/pdf/SettlementPDF.jsx | ● | PENDING |
-| M | src/pdf/lib/format.js | ● | PENDING |
-| M | src/pdf/lib/liveWorld.js | ● | PENDING |
-| M | src/pdf/lib/viewModel.js | ● | PENDING |
-| M | src/pdf/sections/AIAppendix.jsx |  | PENDING |
-| M | src/pdf/sections/Cover.jsx | ● | PENDING |
-| M | src/pdf/sections/EconomicsTrade.jsx |  | PENDING |
-| M | src/pdf/sections/FaithWar.jsx | ● | PENDING |
-| M | src/pdf/sections/IdentityDailyLife.jsx |  | PENDING |
-| M | src/pdf/sections/PowerStructure.jsx |  | PENDING |
-| M | src/pdf/sections/Relationships.jsx |  | PENDING |
-| M | src/pdf/sections/Timeline.jsx |  | PENDING |
-| M | src/pdf/sections/ViabilityAssessment.jsx |  | PENDING |
-| M | src/pdf/variants.js | ● | PENDING |
+| M | src/pdf/SettlementPDF.jsx | ● | RESTORATION-OWED (census §1 #20 — campaign_state Current-State demoted; sweep scheduled) |
+| M | src/pdf/lib/format.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/lib/liveWorld.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/lib/viewModel.js | ● | RESTORATION-OWED (census §1 #21 — entity-anchor/lineage/magicProfile stripped; sweep scheduled) |
+| M | src/pdf/sections/AIAppendix.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/Cover.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/EconomicsTrade.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/FaithWar.jsx | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/IdentityDailyLife.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/PowerStructure.jsx |  | RESTORATION-OWED (census §1 #18 — RULE & SUCCESSION subsection deleted; sweep scheduled) |
+| M | src/pdf/sections/Relationships.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/Timeline.jsx |  | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
+| M | src/pdf/sections/ViabilityAssessment.jsx |  | RESTORATION-OWED (census §1 #19 — MAGIC LEGALITY subsection deleted; sweep scheduled) |
+| M | src/pdf/variants.js | ● | DISPOSITIONED-BY-CENSUS (matches-master/program-ruled, census §4 C15/PDF) |
