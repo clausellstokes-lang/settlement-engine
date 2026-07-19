@@ -39,9 +39,10 @@ export const LEGACY_DISMISSAL_MIGRATIONS = Object.freeze({
   postgen_read_dossier: { anyOf: ['sf.postGenCoachDismissedAt'] },
   postgen_watch_simulated: { anyOf: ['sf.postGenCoachDismissedAt'] },
   postgen_save_it: { anyOf: ['sf.postGenCoachDismissedAt'] },
-  // content-immersion-r2-3: WizardNextSteps migrates off its bespoke legacy key
-  // onto the unified sf:guidance:wizard_next_steps convention — a keeper who
-  // already dismissed the What's-next guide is never re-taught.
+  // content-immersion-r2-3: the wizard-postgen host (C4: PostGenCoach) migrates
+  // off its bespoke legacy key onto the unified sf:guidance:wizard_next_steps
+  // convention — a keeper who already dismissed the What's-next guide is never
+  // re-taught.
   wizard_next_steps: { anyOf: ['sf:dismissed_whats_next'] },
 });
 

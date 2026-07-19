@@ -620,7 +620,7 @@ export const en = Object.freeze({
       simulated: 'The rail shows the steps the engine took. Open any to see what it decided.',
       save:      'Sign in and your work survives the tab close. Your first three saves are free.',
     },
-    // The post-generate what's-next guide (WizardNextSteps).
+    // The post-generate what's-next coach (PostGenCoach — the C4 host).
     wizardNextSteps: 'A short, state-aware list of what to do with a fresh settlement.',
     // W-COMPOSER-2: the realm forcing surface + the docket (mechanism whispers).
     realmOrders: 'Anything the world can do, you can order. Orders stage as proposals; the walls hold even under force.',

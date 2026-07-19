@@ -33,8 +33,7 @@ import { supportMailto } from './copy/support.js';
 // whole en.js registry into the first-paint entry closure (byte budget).
 import { t } from './copy/footer.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY,
-  VIOLET, VIOLET_BG, MUTED, sans, serif_, SP, R, FS, swatch,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, VIOLET, VIOLET_BG, sans, serif_, SP, R, FS, swatch,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -53,12 +52,14 @@ const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
 // static closure (first-paint byte budget).
 const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
 
+// The post-generate coach hosts the guidance registry's single wizard-postgen
+// whisper (the "what's next" moves). Self-gates on a settlement + the unified
+// sf:guidance dismissal; lazy keeps it off first paint (byte budget).
+const PostGenCoach = lazy(() => import('./components/PostGenCoach.jsx'));
+
 // The two DEV panels are always-mounted but NOT first-paint critical (they
 // render null in production). Lazy so their code + icon references stay off the
 // entry's static closure (first-paint byte budget — tests/build/vendorPdfLazy.test.js).
-// (The post-generation coach was retired in W-GUIDE-1: a floating fixed dialog
-// violated the immersion law; its steps are now registered first_generate
-// whispers rendered in-flow at the dossier top — see guidanceRegistry.js §5.)
 const DevFlagPanel   = lazy(() => import('./components/dev/DevFlagPanel.jsx'));
 const DevEmailBanner = lazy(() => import('./components/dev/DevEmailBanner.jsx'));
 // Active pricing-moment card — inline, not a modal. Renders when a moment fires;
@@ -512,7 +513,7 @@ export default function App() {
           until focused (.skip-link in index.css), it lets keyboard/SR users jump
           past the header/nav straight to <main id="main-content">. */}
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <Suspense fallback={null}><CampaignSyncBanner /></Suspense>
+      <Suspense fallback={null}><CampaignSyncBanner /><PostGenCoach /></Suspense>
       <div
         // Painted clean views (home/settlements/gallery/compendium/pricing/account/
         // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream

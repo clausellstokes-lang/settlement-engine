@@ -21,7 +21,6 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import WizardNextSteps from './generate/WizardNextSteps.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
@@ -540,13 +539,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             <ExportDraftButton />
           </div>
 
-          {/* P134 / W-4 — post-generate "what's next" guide. Closes out the
-              post-generate flow (mirrors WizardCloseout's pre-generate
-              close-out) with a state-aware next-step checklist. Self-gates
-              on the flag; guidance only, so it never competes with the
-              canonical Save / Export / New controls above. */}
-          <WizardNextSteps />
-
+          {/* Post-generate "what's next" guidance now lives in the app-level
+              PostGenCoach (the guidance registry's wizard-postgen host, mounted
+              in App.jsx), so the canonical Save / Export / New controls above own
+              this in-flow space uncontested. */}
           <ConfirmDialog
             open={!!pendingExit}
             tone="warning"
