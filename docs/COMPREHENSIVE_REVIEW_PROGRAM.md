@@ -1153,6 +1153,28 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ THE COMPOSITE ASSEMBLY — folds 1–2 VERIFIED, STOPPED-BY-CONSTITUTION at
+b4e0f017 (2026-07-19); ⛔ THE 998-BYTE BUDGET DECISION QUEUED (blocks the
+push).** Step 0: R2-i swept into deep-craft @ 7fe77a85 (NUL-clean incl.
+escape-spelling scan; the parked generator golden's key set proven UNCHANGED by
+temp-worktree basecheck — 187/187 drifted before AND after; content extension
+rides inside, not re-recorded). Fold 1 deep-craft @ f8593514: ancestor merge,
+zero conflicts, 287 files; suite EXACTLY the expected 5, zero flakes. Fold 2
+traditions @ 6f5d29ae + b4e0f017: 3 conflicts resolved both-intents (the
+designed tab seam WIRED — NPC-first order kept, single entry, seam comment
+updated · RealmStrip SLATE_DEEP + almanac · SettlementPDF both consts + 07B
+chapter); 2 union reds cured (TraditionsTab → flat plates, kill-list 906/214;
+walker census 486→485, the motif stamp's redundant tooltip struck); suite at
+the stop-point 13,476 green / EXACTLY the expected 5, zero flakes. ⛔ THE
+BREACH: 1,040,998 vs 1,040,000 — probe forensics DISPROVED the lazy-leak
+hypothesis (TraditionsTab/almanac/pulseKernel/prose all 0-byte innocent); the
+998 = honest registration (schema+keys ≈793 engine-core; slice/vocab/
+registration ≈375 index); each lane green alone, the sum breaches; the only
+reduction = the OWNER-GATED de-eagering. Budget test UNTOUCHED; memory
+composite-budget-breach-998b.md. QUEUED §9 with the manager recommendation:
+re-pin AT the measured 1,040,998 (zero-slack raise). MEANWHILE fold 3 +
+freshness cure PROCEED (zero-eager proven, independent of the budget) so the
+composite is one owner signature from push.
 **⬛⭐⭐ FOLD BATCH 2 COMPLETE (2026-07-19, deep-craft @ 76cccbf2 — Fable, six
 folds + the rename completion).** Per-fold NUL-clean; conflicts = only the two
 pre-identified (CustomContent leaf: the branch's consolidation TAKEN with

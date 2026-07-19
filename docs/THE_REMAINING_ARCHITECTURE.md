@@ -489,6 +489,17 @@ A+ at this stage, rinse and repeat.")
 - ⛔OWNER physically: the PR merge button · `supabase db push`.
 
 ## §9 THE OWNER DECISION QUEUE (nothing blocks until its named point)
+⛔⭐ THE COMPOSITE BUDGET DECISION (2026-07-19, BLOCKS THE PUSH): the assembly
+measured the eager closure at 1,040,998 B vs the 1,040,000 ratchet — 998 B over,
+CONFIRMED irreducible without owner action (probe forensics: the bytes are honest
+traditions-registration in already-eager modules — schema validateTradition +
+key mirrors ≈793 B engine-core, slice/vocabulary/registration ≈375 B index; each
+lane green alone, the sum breaches; the only reduction lane is the owner-gated
+customRegistry de-eagering). OWNER OPTIONS: (a) MANAGER-RECOMMENDED: re-pin the
+budget AT the measured 1,040,998 (a zero-slack raise — grandfathers only the
+measured honest bytes, every future eager byte still fails; the ratchet's own
+text scheduled "the final tightening at the composite gate"); or (b) order the
+de-eagering lane (sync→async persisted-path conversion; delays the push). ·
 realm-unfurl film (C2L finding 2026-07-19: no master exists; the machine + drop-in
 seam ship; produce/choose the film = taste + media production) · ⚠ "SURVEYOR
 PREMIUM" SEMANTICS (C13 finding 2026-07-19): no Surveyor tier constant exists —
