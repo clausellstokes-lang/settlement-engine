@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ChevronLeft, Download, Eye, MessageCircle, Share2 } from 'lucide-react';
+import { Check, ChevronLeft, Download, Eye, MessageCircle, Share2, Sparkles } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -30,8 +30,10 @@ import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDo
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import { setSharedDossierMeta } from '../../lib/seoDossier.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
+import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
@@ -82,6 +84,10 @@ export default function GalleryDetail({
   auth,
   onNavigate,
 }) {
+  // Mobile is a read + light-act surface for a dossier: the public view, Import,
+  // Vote, Share, and Report stay live, but the owner's ShareToGallery listing
+  // editor (a full authoring form) defers to desktop.
+  const isMobile = useIsMobile();
   const [shared, setShared] = React.useState(false);
   const onShare = async () => {
     const r = await shareGalleryDossier({ slug: dossier?.slug, name: dossier?.name || dossier?.settlement?.name });
@@ -164,27 +170,38 @@ export default function GalleryDetail({
           <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
             This is your published settlement. Edit the listing details (image, description, tags, DM-private visibility) or remove it from the gallery. The public dossier always reflects your current saved settlement.
           </p>
-          <ShareToGallery
-            saveId={ownedSave.id}
-            isPublic={ownedSave.is_public}
-            publicSlug={ownedSave.public_slug}
-            campaignState={ownedSave.campaignState}
-            settlement={ownedSave.settlement}
-            galleryDescription={ownedSave.gallery_description}
-            galleryTitle={ownedSave.gallery_title}
-            galleryImageUrl={ownedSave.gallery_image_url}
-            galleryImageAlt={ownedSave.gallery_image_alt}
-            galleryTags={ownedSave.gallery_tags}
-            galleryShareNarrated={ownedSave.gallery_share_narrated}
-            galleryShareDm={ownedSave.gallery_share_dm}
-            galleryImportable={ownedSave.gallery_importable}
-            galleryMemberOverrides={ownedSave.gallery_member_overrides}
-            // Re-fetch the dossier in place after a save so the public view
-            // reflects the new narrated / DM-visibility choices — WITHOUT a full
-            // page reload (which would land on a fresh gallery URL where saves
-            // aren't hydrated, dropping this very card until you navigate away).
-            onSaved={() => { if (dossier?.slug) onOpen?.(dossier.slug, { replace: true }); }}
-          />
+          {/* The listing editor (image crop, description, tags, visibility) is a
+              full authoring form, so on mobile it defers to desktop. The public
+              dossier below stays fully readable, and Vote/Share/Report stay live,
+              so a mobile owner can still read and act on their listing. */}
+          {isMobile ? (
+            <DesktopOnlyGate
+              title="Edit your listing on a larger screen"
+              message="The listing editor (cover image, description, tags, and visibility) has room to work on desktop. Open this dossier there to change how your settlement appears in the gallery."
+            />
+          ) : (
+            <ShareToGallery
+              saveId={ownedSave.id}
+              isPublic={ownedSave.is_public}
+              publicSlug={ownedSave.public_slug}
+              campaignState={ownedSave.campaignState}
+              settlement={ownedSave.settlement}
+              galleryDescription={ownedSave.gallery_description}
+              galleryTitle={ownedSave.gallery_title}
+              galleryImageUrl={ownedSave.gallery_image_url}
+              galleryImageAlt={ownedSave.gallery_image_alt}
+              galleryTags={ownedSave.gallery_tags}
+              galleryShareNarrated={ownedSave.gallery_share_narrated}
+              galleryShareDm={ownedSave.gallery_share_dm}
+              galleryImportable={ownedSave.gallery_importable}
+              galleryMemberOverrides={ownedSave.gallery_member_overrides}
+              // Re-fetch the dossier in place after a save so the public view
+              // reflects the new narrated / DM-visibility choices — WITHOUT a full
+              // page reload (which would land on a fresh gallery URL where saves
+              // aren't hydrated, dropping this very card until you navigate away).
+              onSaved={() => { if (dossier?.slug) onOpen?.(dossier.slug, { replace: true }); }}
+            />
+          )}
         </div>
       )}
       <article style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD }}>
@@ -240,7 +257,20 @@ export default function GalleryDetail({
                 >
                   Import (premium)
                 </Button>
-              ) : null}
+              ) : (
+                // No import path (signed out, or the dossier isn't importable):
+                // the highest-intent page is never a dead-end — offer a forge
+                // next-step instead of nothing (P9).
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => onNavigate?.('generate')}
+                  icon={<Sparkles size={13} />}
+                  title="Forge a settlement of your own"
+                >
+                  {t('gallery.forgeYourOwn')}
+                </Button>
+              )}
               <VoteButton
                 count={dossier.netVotes}
                 voted={dossier.voteState?.voted}
