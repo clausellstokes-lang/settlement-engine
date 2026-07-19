@@ -1153,6 +1153,12 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER AMENDMENT (2026-07-19, same day) — THE ESCALATION CLAUSE COVERS
+VERIFICATION TOO:** "that also goes to verification." Fable verifiers allowed
+case-by-case for difficult verifications, never default; same criteria and
+reversion rule. Verification candidates: adversarial verification where a
+plausible-but-wrong finding could survive standard review · byte-identity/
+dormancy adjudication at the folds · soak metric verdicts.
 **⬛ OWNER RULING (2026-07-19) — THE ESCALATION CLAUSE (staffing amendment):**
 "where you deem it necessary, but not the default, implementation for difficult
 tasks can upgrade to fable before going back to opus. Judge on each case by case."
