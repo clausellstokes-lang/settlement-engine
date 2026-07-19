@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ TRADITIONS T-1 LANDED (2026-07-18, claude/traditions @ 686d2cb9, 3 commits).**
+cfe352b1 genesis leaf (400-line pure domain) + corpus data leaf + 51 tests ·
+1d649950 the World-group TraditionsTab (lazy; data-only registration; drafts get the
+view-time founding preview; the engine-mirror branch pre-wired so T-2 lights the
+surface with zero tab changes) · 686d2cb9 the 3 any-holes typed away (ratchet 9/9,
+baseline never widened). PROOFS: mint-time ruling CONFIRMED (drift capture base-vs-
+lane byte-IDENTICAL, 187/187 both — genesis provably never touches generation) ·
+determinism 220 configs/0 mismatches, frozen-input untouched · ZERO eager bytes
+(engine-core chunk hash identical) · tier bands empirical thorp{1,2}→capital{6,8}.
+BONUS: pre-existing engineChunkLazy regex fragility found + fixed (hash-order-
+dependent matcher → identity lookahead). Six vetoable JUDGMENTs (16-motif
+vocabulary · 5-template name grammar · Seedtime/Highsun/Harvest/Deepwinter labels ·
+capital band 6-8 · grand-act two-week windows). foundedYear is SETTLEMENT-RELATIVE
+(T-2 may rebase at mint — recorded). T-2 (the mover) dispatches.
 **⬛⭐ C1r-d + SURFACE 2 LANDED (2026-07-18, deep-craft @ a8d9fff0, 4 commits).**
 88348274 C1r-d = THE OWNER'S WALK FIXES LIVE (Instant World card removed; "instant
 generation" folded into the hero line; proof-pair top-aligned + new pin) ·
