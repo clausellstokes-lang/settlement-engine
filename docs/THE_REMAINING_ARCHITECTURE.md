@@ -432,6 +432,20 @@ A+ at this stage, rinse and repeat.")
   double-payout · chargeback-mid-cooling). Concerns ledgered: Connect is an
   external owner-side dependency; legal gates activation; the loop's start
   moves by ~a fleet-day.
+  ⬛ MONEY WAVE ADDENDUM (owner ruling 2026-07-19): #18 SINGLE CONCURRENT
+  SESSION, last-login-wins — new sign-in ALWAYS succeeds and supersedes the
+  old (never block); OWN enforcement in code (claim session_id on sign-in →
+  paid server surfaces reject superseded sessions fail-closed → client
+  validates on focus, graceful eviction preserving Zustand state through
+  sign-out→re-auth→rehydrate, pinned) because the Supabase org is NOT on Pro
+  yet (owner purchases this week; the Pro single-session toggle then becomes
+  defense-in-depth at refresh, an activation-runbook owner step, NOT a
+  dependency). Active-session panel + sign-out-everywhere (lazy), new-device
+  email via the Wave E mail seam, ToS one-concurrent-session line in the
+  terms appendix, session-supersession added to the fraud-pass charter
+  (claim/validate races; eviction mid-transfer freezes the seat machine).
+  Honest limit recorded: deters SIMULTANEOUS sharing only; serial sharing
+  is untouched by any session policy — tighten only on post-launch evidence.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
