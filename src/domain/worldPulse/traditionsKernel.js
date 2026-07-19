@@ -54,7 +54,8 @@
  * @enforced-by tests/property/traditionsDormancyGolden.test.js (dormancy byte-identity
  *   + the lit anti-vacuity block).
  */
-import { deriveFoundingTraditions } from '../traditions/genesis.js';
+import { deriveFoundingTraditions, traditionCountCap } from '../traditions/genesis.js';
+import { migrationActive } from '../spatial/migration.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { seasonForTick } from './worldState.js';
 import { seasonalSeverityFor } from './seasons.js';
@@ -530,6 +531,30 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     return os ? deriveFoundingTraditions(/** @type {Parameters<typeof deriveFoundingTraditions>[0]} */ (os)) : null;
   };
 
+  // §9 ADOPTION influx (T-4): capture each in-transit migration column's {originId, count} at its
+  // LAST tick before the release drain — tick === max(departTick, arrivalTick−1). The release pass
+  // (pulseKernel, early) discards origin when a column lands, so origin must be read while the
+  // column is still in transit; reading at its last visible tick captures it exactly once, before
+  // the drain, without reordering the ceiling-frozen pulse chain. A pure read (§14 READS). DORMANT
+  // when migration is dark (aspatial: no spatialCanonVersion) ⇒ empty influx ⇒ adoption dormant,
+  // byte-identical (the aspatial dormancy proof).
+  /** @type {Map<string, Array<{ originId: string, count: number }>>} */
+  const influxByDest = new Map();
+  if (migrationActive(worldState)) {
+    const migLedger = asObject(getSpatialLedger(worldState, 'migration'));
+    for (const key of Object.keys(migLedger).sort(cmp)) {
+      const col = asObject(migLedger[key]);
+      if (Math.max(num(col.departTick, 0), num(col.arrivalTick, 0) - 1) !== now2) continue;
+      const count = Math.max(0, Math.floor(num(col.arrivals, 0)));
+      const originId = String(col.originId || '');
+      const destId = String(col.destId || '');
+      if (!count || !originId || !destId) continue;
+      const arr = influxByDest.get(destId) || [];
+      arr.push({ originId, count });
+      influxByDest.set(destId, arr);
+    }
+  }
+
   // §5 accumulators (applied ONCE after the pass, through the bounded writers).
   /** @type {Map<string, number>} */
   const prosperityDeltas = new Map();
@@ -564,7 +589,8 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     // (politics keeps it current via scale-up) — the imposed-scale cap. A NO-OP at the mint.
     const localTierBand = num(asObject(politics.recs[0]).scaleBand, 0);
     const relations = advanceRelations({
-      recs: politics.recs, settlement: asObject(s), worldState, sid, year, localTierBand, minted, traditionsOf,
+      recs: politics.recs, worldState, sid, year, localTierBand, minted, traditionsOf,
+      influx: influxByDest.get(sid) || [], pop: num(asObject(s).population, 0), tierCap: traditionCountCap(asObject(s)),
     });
     const workRecs = relations.recs;
 

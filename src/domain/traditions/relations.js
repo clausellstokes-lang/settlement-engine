@@ -38,11 +38,15 @@
  */
 
 import { createPRNG } from '../../kernel/prng.js';
+import { slugify } from '../../kernel/slugify.js';
+import { reexpressed } from './politics.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
 
-// ── §8 IMPOSITION dials (soak-certified; every entry vetoable) ──────────────────
-const IMPOSE_CHANCE = 0.3;   // a vassalized settlement's per-year chance to be forced to trade a rite
+// ── §8/§9 RELATION dials (soak-certified; every entry vetoable) ─────────────────
+const IMPOSE_CHANCE = 0.3;        // a vassalized settlement's per-year chance to be forced to trade a rite
+const ADOPTION_THRESHOLD = 0.12;  // §9: cumulative influx from one origin ≥ 12% of destination pop ⇒ checkpoint
+const INFLUX_WINDOW_YEARS = 3;    // §9: the rolling window the cumulative influx accumulates over
 
 // ── narrowing helpers (self-contained; the kernel's asObject idiom, 0-hole) ──
 /** @param {unknown} x @returns {Record<string, unknown>} */
@@ -216,26 +220,160 @@ function applyRestoration({ recs, worldState, sid, year }) {
   return { recs: changed ? next : recs, changed };
 }
 
+// ── §9 ADOPTION — culture travels with population (aggregate-only, NPC-boundary-safe) ──
+/** The owner-stable slug of an id (byte-stable, never empty). @param {unknown} v @returns {string} */
+function slug(v) {
+  return slugify(String(v ?? ''), { sep: '_', max: 40, fallback: 'x', empty: 'x' });
+}
+
+/** @typedef {{ year: number, originId: string, count: number }} InfluxEntry */
+
+/** Merge this tick's influx into the founding core's rolling log (by year+origin), codepoint-
+ *  stable. @param {InfluxEntry[]} priorLog @param {Array<{originId:string,count:number}>} influx
+ *  @param {number} year @returns {InfluxEntry[]} */
+function mergeInflux(priorLog, influx, year) {
+  /** @type {Map<string, InfluxEntry>} */
+  const map = new Map();
+  for (const e of priorLog) {
+    const y = num(e.year, 0); const o = String(e.originId);
+    const cur = map.get(`${y}|${o}`) || { year: y, originId: o, count: 0 };
+    cur.count += Math.max(0, num(e.count, 0));
+    map.set(`${y}|${o}`, cur);
+  }
+  for (const { originId, count } of influx) {
+    const o = String(originId);
+    const cur = map.get(`${year}|${o}`) || { year, originId: o, count: 0 };
+    cur.count += Math.max(0, num(count, 0));
+    map.set(`${year}|${o}`, cur);
+  }
+  return [...map.values()].sort((a, b) => (a.year - b.year) || cmp(a.originId, b.originId));
+}
+
+/** Build the transplanted rite carried by settlers from an origin (§9): the origin's CORE MOTIF
+ *  + name travel; the expression is RE-DRESSED in the destination's identity (seeded); the scale
+ *  starts modest (a minority rite), capped to the destination's tier band; adoptedFrom stamps the
+ *  origin (owner fields null — interim full-weight routing). The placer fills the mutationLog cause.
+ *  Pure. @param {Object} a @param {TraditionRec} a.originTop @param {string} a.originId @param {string} a.sid
+ *  @param {number} a.destTierBand @param {number} a.year @returns {TraditionRec} */
+function buildAdoptedRec({ originTop, originId, sid, destTierBand, year }) {
+  const scaleBand = Math.max(1, Math.min(num(originTop.scaleBand, 1), Math.max(1, destTierBand)));
+  const motif = asObject(originTop.coreMotif);
+  const win = asObject(originTop.window);
+  const expr = asObject(originTop.expression);
+  const bare = /** @type {TraditionRec} */ ({
+    id: `tradition.${slug(sid)}.adopted.${slug(originId)}.${year}`,
+    coreMotif: { element: String(motif.element || ''), act: String(motif.act || '') },
+    name: String(originTop.name || 'A Settlers’ Rite'),
+    foundedYear: year,
+    window: { startWeekOfYear: num(win.startWeekOfYear, 1), weeks: num(win.weeks, 1) },
+    scaleBand,
+    ownerKey: null,
+    ownerKind: null,
+    ownerLabel: null,
+    deityRef: typeof originTop.deityRef === 'string' && originTop.deityRef ? originTop.deityRef : null,
+    expression: { trappings: Array.isArray(expr.trappings) ? expr.trappings.map(String) : [], epithet: String(expr.epithet || '') },
+    mutationLog: /** @type {Array<{year:number, kind:string, cause:string}>} */ ([]),
+    lastHeldYear: null,
+    lastOutcome: null,
+    suppressedBy: null,
+    adoptedFrom: originId,
+  });
+  return /** @type {TraditionRec} */ ({ ...reexpressed(bare, `${sid}::tradition:adopt:${originId}:${year}`) });
+}
+
+/** Place an adopted rite: append when under the tier cap; at/over cap, REPLACE the lowest-scale
+ *  non-founding, non-suppressed rite (a displacement, recorded in the adopted rite's mutationLog).
+ *  The founding core (index 0) is never displaced. @param {TraditionRec[]} recs
+ *  @param {TraditionRec} adopted @param {string} originId @param {number} tierCap @param {number} year
+ *  @returns {TraditionRec[]} */
+function placeAdopted(recs, adopted, originId, tierCap, year) {
+  const activeCount = recs.reduce((n, r) => (asObject(r).suppressedBy ? n : n + 1), 0);
+  const appendCause = `settlers from ${originId} brought their rite`;
+  if (activeCount < Math.max(1, tierCap)) return [...recs, logMutation(adopted, year, 'adoption', appendCause)];
+  let victimIdx = -1; let low = Infinity;
+  for (let i = 1; i < recs.length; i += 1) {
+    const r = asObject(recs[i]);
+    if (r.suppressedBy) continue;
+    const scale = num(r.scaleBand, 0);
+    if (scale < low || (scale === low && victimIdx >= 0 && cmp(String(recs[i].id), String(recs[victimIdx].id)) < 0)) {
+      victimIdx = i; low = scale;
+    }
+  }
+  if (victimIdx < 0) return [...recs, logMutation(adopted, year, 'adoption', appendCause)];
+  const displacedName = String(asObject(recs[victimIdx]).name || 'an older rite');
+  const next = recs.slice();
+  next.splice(victimIdx, 1);
+  next.push(logMutation(adopted, year, 'adoption', `${appendCause}; it displaced ${displacedName}`));
+  return next;
+}
+
 /**
- * Advance a settlement's RELATIONS one lit tick (§8 imposition/restoration; §9 adoption in T4-b).
+ * §9 ADOPTION — accumulate this tick's migration influx on the founding core's rolling log (per
+ * origin, over INFLUX_WINDOW_YEARS); when the cumulative influx from one origin reaches
+ * ADOPTION_THRESHOLD of the destination population, mint a transplanted rite (the origin's highest-
+ * affinity rite re-expressed locally) and RESET that origin's accumulator. No influx + no history
+ * ⇒ a NO-OP (aspatial byte-identity). Pure. @param {Object} a
+ * @param {TraditionRec[]} a.recs @param {string} a.sid @param {number} a.year
+ * @param {Array<{originId:string,count:number}>} a.influx @param {number} a.pop
+ * @param {number} a.destTierBand @param {number} a.tierCap
+ * @param {(otherSid: string) => TraditionRec[]|null} a.traditionsOf
+ * @returns {{ recs: TraditionRec[], changed: boolean }}
+ */
+function applyAdoption({ recs, sid, year, influx, pop, destTierBand, tierCap, traditionsOf }) {
+  const priorLog = Array.isArray(asObject(recs[0]).influxLog) ? /** @type {InfluxEntry[]} */ (asObject(recs[0]).influxLog) : [];
+  if (!influx.length && !priorLog.length) return { recs, changed: false }; // aspatial / no history ⇒ byte-identical
+
+  let log = mergeInflux(priorLog, influx, year).filter((e) => num(e.year, 0) > year - INFLUX_WINDOW_YEARS);
+  /** @type {Map<string, number>} */
+  const byOrigin = new Map();
+  for (const e of log) byOrigin.set(String(e.originId), (byOrigin.get(String(e.originId)) || 0) + num(e.count, 0));
+
+  const threshold = ADOPTION_THRESHOLD * Math.max(1, num(pop, 0));
+  const checkpoints = [...byOrigin.keys()].filter((o) => o !== sid && (byOrigin.get(o) || 0) >= threshold).sort(cmp);
+
+  let out = recs;
+  for (const originId of checkpoints) {
+    log = log.filter((e) => String(e.originId) !== originId); // reset the accumulator whether or not a rite mints
+    const originTop = topTradition(traditionsOf(originId));
+    if (!originTop) continue;
+    const already = out.some((r) => String(asObject(r).adoptedFrom) === originId
+      && JSON.stringify(asObject(r).coreMotif) === JSON.stringify(asObject(originTop.coreMotif)));
+    if (already) continue;
+    out = placeAdopted(out, buildAdoptedRec({ originTop, originId, sid, destTierBand, year }), originId, tierCap, year);
+  }
+
+  const changed = out !== recs || JSON.stringify(priorLog) !== JSON.stringify(log);
+  if (!changed) return { recs, changed: false };
+  // Write the pruned/updated influx log back onto the founding core (drop the field when empty).
+  const nextFounding = { ...asObject(out[0]) };
+  if (log.length) nextFounding.influxLog = log; else delete nextFounding.influxLog;
+  const nextOut = out.slice();
+  nextOut[0] = /** @type {TraditionRec} */ (nextFounding);
+  return { recs: nextOut, changed: true };
+}
+
+/**
+ * Advance a settlement's RELATIONS one lit tick (§8 imposition/restoration + §9 adoption).
  * At the FIRST-LIT mint: a NO-OP (the minted set must stay byte-identical to the pure view-time
  * preview — relations begin the next tick, exactly as politics defers its mutations). Otherwise:
- * restoration first (a liberated rite returns), then imposition (a vassal may be forced to trade).
- * Restoration precedes imposition so a settlement re-vassalized by a NEW overlord restores the old
- * rite before the new imposition lands. Pure + deterministic.
+ * restoration first (a liberated rite returns), then imposition (a vassal may be forced to trade),
+ * then adoption (settlers' rites arrive). Restoration precedes imposition so a settlement re-
+ * vassalized by a NEW overlord restores the old rite before the new imposition lands; adoption runs
+ * last, over the post-imposition set (so a suppressed slot frees adoption headroom). Pure + total.
  * @param {Object} a
  * @param {TraditionRec[]} a.recs
- * @param {Record<string, unknown>} a.settlement
  * @param {Record<string, unknown>} a.worldState
  * @param {string} a.sid
  * @param {number} a.year
- * @param {number} a.localTierBand  the destination's tier band index (0..6) — the imposed-scale cap
+ * @param {number} a.localTierBand  the destination's tier band index (0..6) — the imposed/adopted-scale cap
  * @param {boolean} a.minted
  * @param {(otherSid: string) => TraditionRec[]|null} a.traditionsOf  resolve another settlement's rec set
+ * @param {Array<{originId:string,count:number}>} [a.influx]  this tick's migration influx (§9); [] when aspatial
+ * @param {number} [a.pop]  the destination population (the §9 adoption denominator)
+ * @param {number} [a.tierCap]  the destination's tradition tier cap (§9 replacement bound)
  * @returns {{ recs: TraditionRec[], changed: boolean }}
  */
-export function advanceRelations({ recs, settlement, worldState, sid, year, localTierBand, minted, traditionsOf }) {
-  void settlement;
+export function advanceRelations({ recs, worldState, sid, year, localTierBand, minted, traditionsOf, influx, pop, tierCap }) {
   if (minted || !Array.isArray(recs) || !recs.length) return { recs, changed: false };
   let changed = false;
   let cur = recs;
@@ -245,6 +383,12 @@ export function advanceRelations({ recs, settlement, worldState, sid, year, loca
 
   const imposed = applyImposition({ recs: cur, worldState, sid, year, localTierBand, traditionsOf });
   if (imposed.changed) { cur = imposed.recs; changed = true; }
+
+  const adopted = applyAdoption({
+    recs: cur, sid, year, influx: Array.isArray(influx) ? influx : [], pop: num(pop, 0),
+    destTierBand: localTierBand, tierCap: num(tierCap, Number.MAX_SAFE_INTEGER), traditionsOf,
+  });
+  if (adopted.changed) { cur = adopted.recs; changed = true; }
 
   return { recs: changed ? cur : recs, changed };
 }

@@ -206,3 +206,108 @@ describe('§8 mover integration — a suppressed rite does not occur', () => {
     expect(victim.suppressedBy).not.toBe(null);
   });
 });
+
+// ── T4-b: §9 ADOPTION — culture travels with population ─────────────────────────
+const adoptSet = () => [
+  makeRec({ id: 'tradition.a.0', coreMotif: { element: 'founding', act: 'feast' }, name: 'The A Founding', scaleBand: 3 }),
+  makeRec({ id: 'tradition.a.1', coreMotif: { element: 'harvest', act: 'fair' }, name: 'The A Fair', scaleBand: 2 }),
+];
+const originSet = () => [
+  makeRec({ id: 'tradition.b.0', coreMotif: { element: 'first-landing', act: 'procession' }, name: 'The B Landfall', scaleBand: 5 }),
+];
+/** advanceRelations with adoption inputs (no occupations ⇒ imposition/restoration are inert). */
+const relate = (o) => advanceRelations({
+  recs: o.recs, worldState: { rngSeed: 'z' }, sid: 'a', year: o.year ?? 5, localTierBand: 3, minted: false,
+  traditionsOf: traditionsOf({ b: originSet() }), influx: o.influx ?? [], pop: o.pop ?? 1000, tierCap: o.tierCap ?? 5,
+});
+
+describe('§9 ADOPTION — the accumulator + the checkpoint', () => {
+  it('accumulates influx on the founding core BELOW threshold without minting', () => {
+    const out = relate({ recs: adoptSet(), influx: [{ originId: 'b', count: 10 }], pop: 1000 }); // 10 < 120
+    expect(out.changed).toBe(true);
+    expect(out.recs.some((r) => r.adoptedFrom === 'b')).toBe(false);
+    expect(out.recs[0].influxLog).toEqual([{ year: 5, originId: 'b', count: 10 }]);
+  });
+
+  it('mints a transplanted rite (origin core, adoptedFrom) when cumulative influx reaches 12% of pop', () => {
+    const out = relate({ recs: adoptSet(), influx: [{ originId: 'b', count: 200 }], pop: 1000 }); // 200 ≥ 120
+    expect(out.changed).toBe(true);
+    const adopted = out.recs.find((r) => r.adoptedFrom === 'b');
+    expect(adopted).toBeTruthy();
+    expect(adopted.coreMotif).toEqual({ element: 'first-landing', act: 'procession' }); // the origin's core travels
+    expect(adopted.mutationLog.at(-1)).toMatchObject({ year: 5, kind: 'adoption' });
+    // The founding core (index 0) is untouched; the accumulator for b resets.
+    expect(out.recs[0].id).toBe('tradition.a.0');
+    expect((out.recs[0].influxLog || []).some((e) => e.originId === 'b')).toBe(false);
+  });
+
+  it('at the tier cap, the adopted rite REPLACES the lowest-scale non-founding (net count preserved)', () => {
+    const out = relate({ recs: adoptSet(), influx: [{ originId: 'b', count: 200 }], pop: 1000, tierCap: 2 });
+    const ids = out.recs.map((r) => r.id);
+    expect(ids).not.toContain('tradition.a.1'); // the scale-2 Fair displaced
+    expect(out.recs[0].id).toBe('tradition.a.0'); // founding core kept
+    expect(out.recs.filter((r) => !r.suppressedBy).length).toBe(2); // net active count preserved
+    expect(out.recs.find((r) => r.adoptedFrom === 'b').mutationLog.at(-1).cause).toMatch(/displaced/);
+  });
+
+  it('does not duplicate a transplanted rite already carried from the same origin', () => {
+    const first = relate({ recs: adoptSet(), influx: [{ originId: 'b', count: 200 }], pop: 1000 });
+    expect(first.recs.filter((r) => r.adoptedFrom === 'b').length).toBe(1);
+    const second = relate({ recs: first.recs, influx: [{ originId: 'b', count: 200 }], pop: 1000, year: 6 });
+    expect(second.recs.filter((r) => r.adoptedFrom === 'b').length).toBe(1);
+  });
+
+  it('prunes influx entries older than the rolling window and drops the field when empty', () => {
+    const founding = { ...makeRec({ id: 'tradition.a.0', coreMotif: { element: 'founding', act: 'feast' } }), influxLog: [{ year: 1, originId: 'b', count: 50 }] };
+    const out = relate({ recs: [founding, adoptSet()[1]], influx: [], pop: 1000, year: 5 }); // year 1 ages out (≤ 5−3)
+    expect(out.changed).toBe(true);
+    expect(out.recs[0].influxLog).toBeUndefined();
+    expect(out.recs.some((r) => r.adoptedFrom)).toBe(false);
+  });
+
+  it('an aspatial tick (no influx, no history) is a pure NO-OP (no influxLog written)', () => {
+    const recs = adoptSet();
+    const out = relate({ recs, influx: [], pop: 1000 });
+    expect(out.changed).toBe(false);
+    expect(out.recs).toBe(recs);
+    expect(out.recs[0].influxLog).toBeUndefined();
+  });
+});
+
+describe('§9 mover integration — adoption fires under migration, dormant when aspatial', () => {
+  /** Drive one mover tick over a carried set with a due migration column b→a. `spatial` toggles
+   *  the spatialCanonVersion marker (migrationActive). Returns the resulting a-ledger. */
+  function moverRun(spatial) {
+    const aRecs = [
+      makeRec({ id: 'tradition.a.0', coreMotif: { element: 'founding', act: 'feast' }, name: 'The A Founding', window: { startWeekOfYear: 40, weeks: 1 }, scaleBand: 3 }),
+      makeRec({ id: 'tradition.a.1', coreMotif: { element: 'harvest', act: 'fair' }, name: 'The A Fair', window: { startWeekOfYear: 40, weeks: 1 }, scaleBand: 2 }),
+    ];
+    const bRecs = originSet();
+    const s = {
+      name: 'Aton', tier: 'town', population: 1000, economicState: { prosperity: 'Comfortable' },
+      powerStructure: { publicLegitimacy: { score: 50 }, factions: [] }, activeConditions: [], traditions: aRecs,
+    };
+    const snapshot = { settlements: [{ id: 'a', name: 'Aton', settlement: s }] };
+    const worldState = {
+      rngSeed: 'adopt', tick: 10, calendar: { elapsedWeeks: 9 }, // year 1, week 10 (the A windows at 40 are closed)
+      simulationRules: { traditionsEnabled: true }, stressors: [],
+      // column b→a: last-visible tick = max(departTick 5, arrivalTick 11 − 1) = 10 = the current tick.
+      spatialLedgers: { traditions: { a: aRecs, b: bRecs }, migration: { 'b:a:5': { originId: 'b', destId: 'a', arrivals: 300, departTick: 5, arrivalTick: 11 } } },
+    };
+    if (spatial) worldState.spatialCanonVersion = 1;
+    const res = advanceTraditions({ snapshot, worldState, settlementUpdates: [{ saveId: 'a', settlement: s }], tick: 10, now: NOW });
+    return { ledger: res.worldState?.spatialLedgers?.traditions?.a || aRecs, input: aRecs };
+  }
+
+  it('SPATIAL (migration active): the 30%-of-pop column mints a transplanted rite from the origin', () => {
+    const { ledger } = moverRun(true);
+    expect(ledger.some((r) => r.adoptedFrom === 'b')).toBe(true);
+  });
+
+  it('ASPATIAL (no spatialCanonVersion): the same column is inert — no adoption, no influxLog, byte-identical', () => {
+    const { ledger, input } = moverRun(false);
+    expect(ledger.some((r) => r.adoptedFrom === 'b')).toBe(false);
+    expect(ledger.every((r) => r.influxLog === undefined)).toBe(true);
+    expect(JSON.stringify(ledger)).toBe(JSON.stringify(input)); // the teleport path is byte-identical
+  });
+});

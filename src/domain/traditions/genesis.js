@@ -147,6 +147,18 @@ function resolveTierBand(settlement) {
 }
 
 /**
+ * The maximum tradition count a settlement's tier supports — the §2 COUNT_BAND upper bound.
+ * The T-4 adoption tier-cap sensor (§9): a settlement at its cap REPLACES a rite rather than
+ * growing past the band. Single-sources the tier→cap mapping so it never drifts from genesis.
+ * @param {TraditionSourceSettlement|null|undefined} settlement @returns {number}
+ */
+export function traditionCountCap(settlement) {
+  const { tier } = resolveTierBand(settlement);
+  const band = COUNT_BAND[tier] || COUNT_BAND.village;
+  return band[1];
+}
+
+/**
  * The stable identity signals genesis reads. Terrain via the one canonical read;
  * economic character via the trade-route access (a stable config fact); alignment
  * via the patron-deity snapshot's two axes (0.5 = no signal); deityRef for

@@ -265,8 +265,9 @@ function claimRoll(rngSeed, rec, year) {
 
 /** Re-DRESS a record's expression (§7 — trappings + epithet re-picked from the corpus by act;
  *  the CORE MOTIF and the NAME stay immutable — grandeur rides scaleBand, not a rename). Seeded,
- *  deterministic. @param {TraditionRec} rec @param {string} seedKey @returns {TraditionRec} */
-function reexpressed(rec, seedKey) {
+ *  deterministic. Exported so T-4 adoption can re-express an origin's carried rite in the
+ *  destination's identity (§9). @param {TraditionRec} rec @param {string} seedKey @returns {TraditionRec} */
+export function reexpressed(rec, seedKey) {
   const act = String(asObject(asObject(rec).coreMotif).act || 'feast');
   const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (TRADITION_TRAPPINGS)[act] || TRADITION_TRAPPINGS.feast;
   const rng = createPRNG(seedKey);
