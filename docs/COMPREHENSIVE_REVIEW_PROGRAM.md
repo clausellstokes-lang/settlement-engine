@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ SESSION-LIMIT STRIKE #2 (2026-07-19, resets 3pm ET) — three lanes killed
+mid-work; EMPIRICAL SURVEY: near-zero loss (the lettered-commit discipline held).**
+money-wave @ 4dfa4506 (M-7b+c THE DUE-RUNNER landed; M-8 IN FLIGHT: dirty
+founder-transfer index.ts+test + untracked 163_seat_payout_release.sql — PRESERVED,
+resume reads the diff first) · the-roads @ b059e808 (R-1..R-4 ALL LANDED clean — the
+chokepoint widen + census ratchet, gauntlet matrix, ransom schedule, returned-captive
+channel; only lane-end verification owed; prior suite showed 23 failed FILES / 16 tests
+— load-flake hallmark, isolation re-runs ordered) · wave-b-finisher @ 74a4658d (WBF-a..d
+ALL LANDED clean — frozen-card export, traditions authoring + genesis view-consumption,
+HowToUse substance restore, retention-warning cron job; lane-end verification owed).
+⚠ MIGRATION 163 NOW DOUBLE-MINTED (finisher retention job vs money payout release) —
+joins the fold's contiguous-renumber protocol (156 ×2, 157-163 money, 162 wave-b, 163
+finisher; names-only referencing proven in every lane). THREE RESUME AGENTS DISPATCHED
+(money M-8-completion→M-6f→M-9d/e/f→M-10→request-layer upgrade · roads lane-end closer ·
+finisher lane-end closer); if the pool is still exhausted pre-reset, the 15-min
+heartbeat relaunches them post-3pm-ET.
 **⬛ MONEY WAVE DISPATCH 2 — THE TRANSFER FOUNDATION LANDED, CLEAN HANDOFF
 (2026-07-19, claude/money-wave @ 6204e30d, 10 commits atop d8c7bc8d; 25 total on the
 branch).** Landed with executed receipts: the 137 REWRITE (seat register v2 + clawback
