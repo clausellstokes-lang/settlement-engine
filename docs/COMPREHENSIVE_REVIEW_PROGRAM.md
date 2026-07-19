@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ C1r-d + SURFACE 2 LANDED (2026-07-18, deep-craft @ a8d9fff0, 4 commits).**
+88348274 C1r-d = THE OWNER'S WALK FIXES LIVE (Instant World card removed; "instant
+generation" folded into the hero line; proof-pair top-aligned + new pin) ·
+eba0be75 S2r-a/b = master's TWO-COLUMN dossierHero RESTORED with NextActionRail +
+ActionRail REVIVED from the merge's deletions (guidance-collision superseded,
+recorded; only adaptation = retired strings.js COPY → t() templates; hero extracted
+to SettlementDossierHero.jsx per the max-lines extraction doctrine;
+suppressNarrativeCta revived so the rail owns paid CTAs while the free raw/narrated
+toggle survives) · 41757691 + a8d9fff0 = materials (flat, tokenized; kill-list
+ROUND-TRIPPED to frozen base 1078/115/270/246; raw-color budget net 0). Final full
+suite: 13,191 passed / 5 failed = EXACTLY the expected set, NO flakes. Protected-
+behavior census: all preserved, ZERO test retargets. Eager +10 B (restructure).
+8 restoration-ledger rows transcribed. TWO RECORDED DEFERRALS: (1) ⚠ InstantWorldEntry
+is now UNREACHABLE in the app (card removed per the owner; inline doorway crossed the
+brief's thresholds) — MANAGER RULING (vetoable): re-home it in THE REALM's empty
+state at slice C5 (it composes a realm; that is its natural host) — C5 brief amended;
+(2) THE LIVING BACKDROP decomposed by the agent → dispatched as its own focused
+session (device-local tuple + lazy wash leaf + contrast pins).
 **⬛⭐ ILLUSTRATED TOWN IT-2 LANDED (2026-07-18) — the ground dress, three commits
 on claude/illustrated-town @ 7f3664eb.** db62302c groundDressOps (pure domain
 module; furrows/tree-stipple/ripples/meadow-dots/hedge-ticks; v1 COVERAGE LAW

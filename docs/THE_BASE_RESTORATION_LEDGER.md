@@ -28,8 +28,8 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| D | src/components/primitives/ActionRail.jsx |  | SPEC READY (map S2) — ⚠ ActionRail deletion was a guidance-layer ruling; base ruling supersedes |
-| D | src/components/settlement/NextActionRail.jsx |  | SPEC READY (map S2) — ⚠ ActionRail deletion was a guidance-layer ruling; base ruling supersedes |
+| D | src/components/primitives/ActionRail.jsx |  | RESTORED @ eba0be75 + materials @ 41757691/a8d9fff0 (flat, tokenized) — guidance-layer deletion superseded by the base ruling (recorded) |
+| D | src/components/settlement/NextActionRail.jsx |  | RESTORED @ eba0be75 — from master; only adaptation: retired strings.js COPY map migrated to copy/en.js t() templates |
 
 ## ⛔ADJUDICATE (deleted UI/copy) — 2 files
 
@@ -184,7 +184,7 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/OutputContainer.jsx | ● | SPEC READY (map S1) |
+| M | src/components/OutputContainer.jsx | ● | PARTIAL @ eba0be75 (suppressNarrativeCta revived, backward-compatible) — S1 spec items (world order, header) remain at C4 |
 | M | src/components/dossier/DossierHeaderRow.jsx | ● | SPEC READY (map S1) |
 | M | src/components/dossier/DossierNarrativeButtons.jsx |  | SPEC READY (map S1) |
 | M | src/components/dossier/DossierTabStrip.jsx |  | SPEC READY (map S1) |
@@ -220,15 +220,15 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/SettlementDetail.jsx | ● | SPEC READY (map S2) |
-| M | src/components/primitives/LifecycleSpine.jsx |  | SPEC READY (map S2) |
-| M | src/components/primitives/StateBadge.jsx |  | SPEC READY (map S2) |
+| M | src/components/SettlementDetail.jsx | ● | RESTORED @ eba0be75 (two-column dossierHero + sticky rail) · PROGRAM-SIDE-RULED: hero extracted to SettlementDossierHero.jsx (max-lines ratchet; extraction doctrine) |
+| M | src/components/primitives/LifecycleSpine.jsx |  | VERIFIED @ S2r — renders in the lifecycle bar; no org divergence (agent census) |
+| M | src/components/primitives/StateBadge.jsx |  | VERIFIED @ S2r — no org divergence (agent census) |
 | M | src/components/settlement/AIInlineCard.jsx |  | SPEC READY (map S2) |
 | M | src/components/settlement/CoherencePanel.jsx |  | SPEC READY (map S2) |
 | M | src/components/settlement/EventComposer.jsx | ● | SPEC READY (map S2) |
-| M | src/components/settlement/ExportSheet.jsx | ● | SPEC READY (map S2) |
+| M | src/components/settlement/ExportSheet.jsx | ● | VERIFIED @ S2r — rail onExport reuses existing open state; no org divergence |
 | M | src/components/settlement/PendingIntentions.jsx | ● | SPEC READY (map S2) |
-| M | src/components/settlement/PhaseBadge.jsx |  | SPEC READY (map S2) |
+| M | src/components/settlement/PhaseBadge.jsx |  | VERIFIED @ S2r — no org divergence (agent census) |
 | M | src/components/settlement/ProvenanceBlock.jsx |  | SPEC READY (map S2) |
 | M | src/components/settlement/SuccessorPrompt.jsx | ● | SPEC READY (map S2) |
 | M | src/components/settlement/Timeline.jsx |  | SPEC READY (map S2) |
