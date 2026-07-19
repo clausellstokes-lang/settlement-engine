@@ -183,7 +183,9 @@ export function readLayoutLawVersion(edits) {
  * @returns {'spring'|'summer'|'autumn'|'winter'|null} */
 export function readSeasonOverride(edits) {
   const v = edits && typeof edits.seasonOverride === 'string' ? edits.seasonOverride : '';
-  return SEASON_OVERRIDE_IDS.includes(/** @type {any} */ (v)) ? /** @type {any} */ (v) : null;
+  // Iterate the bounded vocab so the returned value carries the literal-union type (no any-cast).
+  for (const s of SEASON_OVERRIDE_IDS) if (s === v) return s;
+  return null;
 }
 
 /**
@@ -393,7 +395,10 @@ export function withStyleLens(edits, lens) {
  * @param {MapEdits | null | undefined} edits @param {string | null} season @returns {MapEdits | null} */
 export function withSeasonOverride(edits, season) {
   const base = normalizeMapEdits(edits) || {};
-  const next = SEASON_OVERRIDE_IDS.includes(/** @type {any} */ (season)) ? /** @type {any} */ (season) : null;
+  // undefined (no match) CLEARS the key ⇒ normalizeMapEdits drops it (byte-identical dormancy).
+  /** @type {'spring'|'summer'|'autumn'|'winter'|undefined} */
+  let next;
+  for (const s of SEASON_OVERRIDE_IDS) if (s === season) { next = s; break; }
   return normalizeMapEdits({ ...base, seasonOverride: next });
 }
 

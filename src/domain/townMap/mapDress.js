@@ -48,7 +48,7 @@ function normSeason(raw) {
  * absent. Returns `null` when the town is in no notable state (no siege, no scars, no rebirth)
  * ⇒ contributes nothing to the dormancy decision. PURE.
  * @param {{ id?: string|number, urbanFabric?: unknown } | null | undefined} settlement
- * @param {any} worldState @param {any} regionalGraph
+ * @param {unknown} worldState @param {unknown} regionalGraph
  * @returns {import('./groundDress.js').MapDressState | null}
  */
 function resolveMapState(settlement, worldState, regionalGraph) {
@@ -85,7 +85,7 @@ function resolveMapState(settlement, worldState, regionalGraph) {
  * scars + rebirth (settlement-only reads).
  * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { season?: string, year?: number } | null, rngSeed?: string } | null | undefined} worldState
- * @param {any} [regionalGraph]
+ * @param {unknown} [regionalGraph]
  * @returns {import('./groundDress.js').MapDress | null}
  */
 export function resolveMapDress(settlement, worldState, regionalGraph = null) {
