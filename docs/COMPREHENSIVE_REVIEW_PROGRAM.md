@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ WA1 — THE DOSSIER TABS COMPLETE (2026-07-19, claude/wave-a-tabs @ 8fdd4b95,
+10 lettered commits atop aad6265e — manager-verified merge-base = composite tip).** The
+entire src/components/new/ dossier-tab family converted to the flat rule-framed
+deep-craft idiom: 29 files / 325 offender lines censused, 28 converted; kill-list counts
+driven strictly BELOW ceilings (borderRadius 906→646 · boxShadow 98→93 · rgba 234→209 ·
+tinted 214→188) — a DECLARED tolerance-0 red until the fold re-pins ceilings to measured.
+9 deferrals documented in-commit (5 cal-prim-gated Button suppressors · 2 magicSupplyBlue
+pinned tints · 2 design.js palette-source lines). Receipts: tsc 0 · domain:strict 0 ·
+build green · eager delta ZERO proven byte-identical vs base (1,040,998 both — the budget
+red stays sibling-owned) · full suite 11F/13,599P = 4 kill-list declared + 4 parked
+goldens (confirmed-at-base) + 3 flakes (proven pass in isolation). Judgments recorded
+vetoable: squared timeline dots (outline-ring technique, kill-list-neutral) · RumorsTab
+gold wash→border · badge ink stamps. New durable gotchas surfaced: rawColorLiteral
+counts whole-string hex only; swatch hex keys are UPPERCASE. FOLD BATCH 3 QUEUE GROWS:
+wave-a-tabs joins caliber ×3 + de-eager + perimeter(+finisher) + wave-e as they land.
+THE FREED LANE → MONEY WAVE IMPLEMENTATION DISPATCHED: claude/money-wave off aad6265e,
+Opus, slices M-1→M-4 (spine · ledger UI · auto-reload · surveyor limb) per
+DESIGN_MONEY_WAVE; M-5..M-10 follow on manager checkpoint.
 **⬛ OWNER RULING (2026-07-19, "do that!") — THE STEWARDSHIP RULING: the founder
 dormancy question is CLOSED against inactivity forfeiture.** The lifetime promise stays
 whole; reclamation is voluntary-first, abandonment-last: (1) STANDING BUYBACK $49.50 any
