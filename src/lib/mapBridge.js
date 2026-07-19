@@ -71,9 +71,18 @@ export function createMapBridge(getIframe, opts = {}) {
 
     // Source check: even within our own origin, only accept messages
     // from the iframe we created. Stops sibling iframes / popups from
-    // injecting bridge events.
-    const iframe = getIframe?.();
-    if (iframe?.contentWindow && event.source !== iframe.contentWindow) return;
+    // injecting bridge events. FAIL-CLOSED: if the iframe (or its
+    // contentWindow) is not resolvable at the instant a message arrives
+    // — early mount, teardown, or a reload-key remount when the ref is
+    // momentarily null — DROP the message rather than falling back to
+    // the origin-only check, which any same-origin frame/popup passes.
+    // Mirrors the iframe side's UNCONDITIONAL `event.source !==
+    // window.parent` guard (public/map/sf-bridge.js). The real iframe's
+    // contentWindow (a stable WindowProxy) exists as soon as the element
+    // is in the DOM, and React sets iframeRef.current before start()
+    // runs, so the first legitimate `fmg:ready` already resolves here.
+    const expected = getIframe?.()?.contentWindow;
+    if (!expected || event.source !== expected) return;
 
     // Ignore messages not meant for us — anything that doesn't start with
     // `fmg:` is someone else's concern.
