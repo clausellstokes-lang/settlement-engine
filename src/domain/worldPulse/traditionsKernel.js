@@ -210,7 +210,7 @@ function shouldSkip(settlement, warTypes) {
  * @param {Set<string>} a.warTypes
  * @returns {number}
  */
-function successScore(a) {
+export function successScore(a) {
   const { rec, settlement, worldState, sid, year, warTypes } = a;
   const T = TRAD_TUNING;
   let score = T.BASE;
@@ -260,7 +260,7 @@ function successScore(a) {
  * draw is a better festival. Pure.
  * @param {number} score @param {number} r @returns {string}
  */
-function outcomeForDraw(score, r) {
+export function outcomeForDraw(score, r) {
   const T = TRAD_TUNING;
   if (r < score + T.TRIUMPH_OFFSET) return TRADITION_OUTCOME.TRIUMPH;
   if (r < score) return TRADITION_OUTCOME.GOOD;
