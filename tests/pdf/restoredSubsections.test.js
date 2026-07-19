@@ -33,7 +33,7 @@ function collectText(node, out = []) {
   }
   return out;
 }
-const joined = (node) => collectText(node).join('  ');
+const joined = (node) => collectText(node).join('  ');
 
 const CFG = { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
 const SEED = 'restored-subsections-2026';
