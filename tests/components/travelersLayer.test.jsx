@@ -31,13 +31,14 @@ const armyLedger = { 'a>b': { armyId: 'a', originId: 'a', destId: 'b', role: 'ma
 const migrationLedger = { 'a:b:0': { originId: 'a', destId: 'b', arrivals: 40, departTick: 0, arrivalTick: 10 } };
 const roadsLedger = { missions: { 'road.a.a:m.0': { id: 'road.a.a:m.0', npcKey: 'a:m', npcName: 'Envoy', homeId: 'a', destId: 'b', purpose: { kind: 'trade', ref: 'b' }, phase: 'outbound', path: ['a', 'c', 'b'], departTick: 0, legArrivalTick: 8 } } };
 
-function buildStore({ worldState = {}, travelersFilter, savedSettlements = IDS.map(id => ({ id, settlement: { name: id.toUpperCase() } })) } = {}) {
+function buildStore({ worldState = {}, travelersFilter, authed = true, savedSettlements = IDS.map(id => ({ id, settlement: { name: id.toUpperCase() } })) } = {}) {
   return {
     savedSettlements,
     mapState: { placements: PLACEMENTS, layers: { travelers: true, ...(travelersFilter === undefined ? {} : { travelersFilter }) } },
     campaigns: [{ id: 'camp', settlementIds: IDS, worldState }],
     activeCampaignId: 'camp',
     geometryVersion: 1,
+    auth: authed ? { user: { id: 'u1' } } : { user: null }, // §15: owner session sees the overlay
   };
 }
 const litWorld = (extra = {}) => ({ tick: 5, calendar: { elapsedWeeks: 5 }, spatialCanonVersion: 1, spatialDigest: DIGEST, spatialLedgers: { armyTransit: armyLedger, migration: migrationLedger, ...extra } });
@@ -77,6 +78,12 @@ describe('TravelersLayer — sub-layers (§13)', () => {
 
   test('an empty/aspatial world renders nothing', () => {
     STORE = buildStore({ worldState: { tick: 0, spatialLedgers: {} } });
+    const { container } = render(<svg><TravelersLayer /></svg>);
+    expect(container.querySelector('[data-testid="travelers-overlay"]')).toBeNull();
+  });
+
+  test('§15 SECRETS SEAM: an unauthenticated (non-owner) context renders NOTHING (fail closed)', () => {
+    STORE = buildStore({ worldState: litWorld({ roads: roadsLedger }), authed: false });
     const { container } = render(<svg><TravelersLayer /></svg>);
     expect(container.querySelector('[data-testid="travelers-overlay"]')).toBeNull();
   });

@@ -27,6 +27,7 @@ import {
   getSpatialLedger, activeSpatialDigest, candidateRoutes, isPort, isTeleportNode, hopWeeks,
 } from '../../domain/spatial/distanceRead.js';
 import { seasonForTick } from '../../domain/worldPulse/worldState.js';
+import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 
 const COLOR = { armies: swatch.danger, migrants: '#5B7B9A', envoys: swatch['#A0762A'] };
 
@@ -38,14 +39,19 @@ export default function TravelersLayer() {
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const filter           = useStore(s => s.mapState.layers.travelersFilter);
   const geometryVersion  = useStore(s => s.geometryVersion);
+  const auth             = useStore(s => s.auth);
 
   const activeCampaign = useMemo(
     () => (activeCampaignId ? (campaigns || []).find(c => String(c.id) === String(activeCampaignId)) : null) || null,
     [campaigns, activeCampaignId],
   );
 
+  // §15 SECRETS SEAM: the overlay (army/migrant positions, envoy markers) is DM-SECRET; only an
+  // authenticated owner session renders it (fail closed — the future share surface flips this).
+  const seesSecrets = viewerSeesDmSecrets({ isOwner: !!auth?.user, authenticated: !!auth?.user });
+
   const markers = useMemo(() => {
-    if (!activeCampaign || !placements) return [];
+    if (!activeCampaign || !placements || !seesSecrets) return [];
     const worldState = activeCampaign.worldState || {};
     const digest = activeSpatialDigest(worldState);
     const tick = Math.floor(Number(worldState.tick) || 0);
@@ -126,7 +132,7 @@ export default function TravelersLayer() {
     // geometryVersion is a deliberate recompute trigger (geography can shift under identical
     // placements on campaign reload / regenerate), mirroring ChainEdges.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeCampaign, placements, savedSettlements, filter, geometryVersion]);
+  }, [activeCampaign, placements, savedSettlements, filter, geometryVersion, seesSecrets]);
 
   if (!markers.length) return null;
 

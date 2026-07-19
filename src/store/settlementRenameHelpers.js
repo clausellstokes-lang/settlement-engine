@@ -86,18 +86,12 @@ export function applyNpcOp(get, set, edit) {
   });
   if (changed) get().persistActiveSaveEdit?.();
   // The rescue's inflame rides the EXISTING inflame_relationship party impact (no new
-  // relationship writer): fire-and-forget through recordPartyImpact, async + campaign-scoped,
-  // exactly like every other manual party impact (same undo semantics — undoLastEvent/persist
-  // for the marker; the impact reverts by its own path).
+  // relationship writer). It lives in a LAZY leaf (roadsRescueInflame) dynamic-imported ONLY
+  // when a rescue lands — the cold path stays OFF the eager first-paint store closure (§16).
+  // Same undo semantics as every manual party impact (undoLastEvent/persist for the marker;
+  // the impact reverts by its own path).
   if (changed && rescueCaptorId) {
-    const homeId = get().activeSaveId;
-    const campaign = homeId != null ? get().getCampaignForSettlement?.(homeId) : null;
-    if (campaign?.id != null && String(homeId) !== rescueCaptorId
-        && typeof get().recordPartyImpact === 'function') {
-      Promise.resolve(get().recordPartyImpact(campaign.id, {
-        kind: 'inflame_relationship', settlementId: String(homeId), relationshipTargetId: rescueCaptorId,
-      })).catch(() => {});
-    }
+    import('./roadsRescueInflame.js').then(m => m.fireRescueInflame(get, rescueCaptorId)).catch(() => {});
   }
 }
 

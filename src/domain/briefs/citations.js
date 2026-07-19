@@ -40,6 +40,10 @@ export const SOURCE = Object.freeze({
   NPC_TABLE: 'read:npcTable',                   // tonightAtTheTable / NPC secrets + goals
   PLOT_HOOKS: 'read:plotHooks',                 // collectPlotHooks
   DRAMATIC_IRONY: 'read:dramaticIrony',         // belief-vs-truth divergence
+  // DESIGN_THE_ROADS §14/§15 — the road-scene truth read (the chosen route + per-hop
+  // conditions, army/migrant/envoy movement, siege/occupation/festival at the gates). All
+  // sections read TRUTH at the current tick ⇒ DM-ONLY (never player-safe, §15 classification).
+  ROADS_TRUTH: 'read:roads.truth',
 });
 
 /**
