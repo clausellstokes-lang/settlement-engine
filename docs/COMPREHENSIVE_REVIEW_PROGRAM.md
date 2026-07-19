@@ -1153,6 +1153,36 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ C13 THE ONE DOOR COMPLETE (2026-07-19, claude/deep-craft-c13 @ 4ccb2766,
+FABLE lane, 3 commits, NOT folded).** 7a2e0c14 the door+router: entry census
+found exactly 2 non-carve-out entries (analyst launcher, workshop compass) —
+both RETIRED into the single left-edge slate tab; promptless register links keep
+open-without-a-prompt; Polish/Narrate carve-out verified untouched. Router =
+pure zero-cost client fore-stage of the S3 compiler (domain/intent/doorRouter;
+context-first as the default ring; rejected alternatives ledgered: edge
+round-trip routing = credits for routing; door slice = breaks the floating-widget
+idiom; panel merge = machinery churn). · c2289e10 THE SLATE CONVERSION by
+VALUE-REPOINT at the tokens chokepoint (the kill-list pins the VIOLET_BG line
+count, making a rename gate-illegal from that lane — identifier rename DEFERRED
+to the kill-list burn-down, mechanism documented in tokens.js): 34 consumer
+files atomically slate; contrast math executed (5.27/6.40/4.84 AA); 3 pinning
+suites pass UNMODIFIED; adjacent purple families (deity/magic/swatch.ai/print)
+correctly NOT swept; the StaleNarrativeModal exclusion honored. · 4ccb2766
+slips/stamps/correspondence: "PROPOSED — the engine writes canon" verbatim on
+all 5 proposal surfaces; canon-writing accepts = gold STAMP, spend stays slate
+(JUDGMENT: spending is the AI act, stamping the canon act). ⚠⭐ OWNER FINDING
+(queued §9): NO Surveyor tier constant exists in the ladder — TIER_GATE is
+anon|free|premium and pricingDisplay says Surveyor "is NOT a subscription
+tier"; the door gates on the isSurveyorTier(tier)==='premium' chokepoint
+(one-line flip when the owner clarifies "surveyor premium"); recorded tension:
+free users lose all in-app AI entry per the no-lock-tease ruling. MANAGER
+SIGN-OFF (vetoable): +49 B eager measured (door anchor + slate pair; headroom
+now 1,176 B — the 1,412 figure was stale; lineage closure 1,038,824/1,040,000).
+2 pin retargets named (lazy-chain strengthened; launcher-click → controlled
+open). NEW HAZARD memory'd: the kill-list counts raw line matches INCLUDING
+COMMENTS. Full suite 13,185 / EXACTLY the 5. Deferrals: identifier rename ·
+per-surface deterministic-violet re-toning (C14 owns KIND_ACCENT.TWIST) ·
+browser walk at the fold. C6–C12 pages lane dispatches.
 **⬛⭐⭐ THE TRADITIONS LANE COMPLETE (2026-07-19, claude/traditions @ 80b8ad71) —
 T-1..T-5 ALL LANDED, DARK.** T-5's four commits: 396f500f register glyphs (corpus
 `glyph` display-only — mint byte-identical) + mutationLog provenance line + the
