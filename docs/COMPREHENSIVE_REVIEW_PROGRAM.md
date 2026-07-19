@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE FRAUD-FIX LANE COMPLETE — the 3 P1 money bugs are DEAD (2026-07-19,
+claude/money-wave @ d0eacd45, FF-a..FF-d atop 9d971f5c; each a red-first pin proven to
+FAIL on the parent + PASS on the fix).** FF-a orphan-charge refund (a nominee's $99 for
+an aborted/expired case now refunds exactly once, idempotency-keyed, never touching the
+legitimate paying session or its replay). FF-b clawback-aborts-first (the §6.7 ordering
+that was never landed: a goodwill $99 refund now aborts+refunds the live case BEFORE the
+is_founder flip, so finalize refuses wrong_state — no more $99+$49.50 double-recovery).
+FF-c buyback dispute-safety (the owner-queued reconciliation, built: "any time"
+initiation preserved; the PAYOUT parks until original_purchase_at + buyback_payout_hold_days
+[dial, default 120] — the buy→buyback→chargeback +$25/cycle arbitrage is closed; owner
+confirms before founder_buyback goes live). FF-d P2 hardening (anomaly pre-check fails
+CLOSED on read error; the §7.3 supersession audit event fires with enum-valid actor
+'system'; hashToken FNV→SHA-256). Receipts: full deno edge 402/402 (webhook 94/94,
+founder-transfer 37/37) · vitest 13,747 P, the 17 reds ALL expected (4 parked goldens +
+the fold-owned doc/numbering cluster + the title= src-ratchet, git diff proves 0 src/0
+docs/0 migration touched) · zero eager delta. Exploit probes NOT committed (inverted to
+pins — ratified). THE MONEY WAVE IS NOW FRAUD-CLEAN AND FOLD-READY. The buyback-payout-hold
+reconciliation joins the OWNER QUEUE (confirm before founder_buyback lights).
 **⬛ OWNER RULING (2026-07-19) — PUSH #3, THE ACTIVATION PUSH ("the final push after
 the very end").** THE VERY END's batch-2 deploy is NOT the last git op: activation steps
 clear on EXTERNAL timelines (MX verification, legal sign-off, Stripe Connect approval)
