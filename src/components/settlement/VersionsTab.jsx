@@ -27,7 +27,7 @@ import LockedDestination from '../primitives/LockedDestination.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#7B4FCF'];
 const GREEN = swatch['#4A7A3A'];
 const AMBER = swatch['#D08020'];
 
@@ -116,7 +116,7 @@ const KIND_ACCENT = {
   snapshot: GOLD,
   canonize: GREEN,
   export:   AMBER,
-  edit:     VIOLET,
+  edit:     SLATE,
   save:     BODY,
 };
 

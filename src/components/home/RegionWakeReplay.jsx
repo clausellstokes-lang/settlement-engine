@@ -30,7 +30,7 @@ import {
 } from '../../domain/display/regionWakeReplay.js';
 
 // No semantic violet/crimson token exists; keep these as swatch lookups.
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#7B4FCF'];
 const CRIMSON = swatch['#8B1A1A'];
 
 function StepDot({ active, done }) {
@@ -169,7 +169,7 @@ export default function RegionWakeReplay({ onUpgrade, compact = false }) {
             </span>
           )}
           {view.pantheon.length > 0 && (
-            <span style={chip(VIOLET)}>
+            <span style={chip(SLATE)}>
               {view.pantheon[0].id.split(/[:_]/).pop()} · {view.pantheon[0].tier}
             </span>
           )}

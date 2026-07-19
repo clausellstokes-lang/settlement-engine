@@ -27,8 +27,8 @@ import { Funnel } from '../../lib/analytics.js';
 
 const PARCH = swatch['#FBF5E6'];
 const PARCH_GRAD_HI = swatch['#FCF6E7'];
-const VIOLET = swatch['#7B4FCF'];
-const VIOLET_DIM = swatch['#EBE2FA80'];
+const SLATE = swatch['#7B4FCF'];
+const SLATE_DIM = swatch['#EBE2FA80'];
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];
@@ -105,8 +105,8 @@ export default function LockedDestination({
       <div style={{
         display: 'inline-block',
         padding: '3px 10px',
-        background: VIOLET_DIM,
-        color: VIOLET,
+        background: SLATE_DIM,
+        color: SLATE,
         borderRadius: 4,
         fontSize: FS.xxs, fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -171,7 +171,7 @@ export default function LockedDestination({
           onClick={handleCta}
           style={{
             padding: '10px 18px',
-            background: VIOLET, color: swatch.white,
+            background: SLATE, color: swatch.white,
             border: 'none', borderRadius: 4,
             fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',

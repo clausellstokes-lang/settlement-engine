@@ -32,14 +32,14 @@ const GOLD = swatch['#C9A24C'];
 const MUTED = swatch['#9C8068'];
 const BORDER = swatch['#E8D9B0'];
 const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#7B4FCF'];
 const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 const serif = '"Crimson Text", Georgia, serif';
 
 const CALLOUTS = [
   { key: 'newDm',         accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'worldbuilder',  accent: VIOLET, bg: '#E4E9EE' },
+  { key: 'worldbuilder',  accent: SLATE, bg: '#E4E9EE' },
   { key: 'fridaysSession',accent: AMBER,  bg: '#FBEAD0', italic: true },
 ];
 
