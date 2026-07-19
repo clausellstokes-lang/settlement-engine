@@ -82,7 +82,16 @@ import {
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
+  // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
+  // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` is a data-only
+  // registration seam (owner: "the tab should exist in the world tab of the
+  // dossier", slotted beside daily_life — culture next to daily life): the culture
+  // engine + TraditionsTab live on claude/traditions, NOT here, so nothing pushes
+  // `traditions` into `allTabs` and the resolver below drops it. When that branch
+  // merges, its presence-gate + renderTab case + component plug into this already-
+  // placed slot with no reorder. Deliberately inert until then — not a dead tab.
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
