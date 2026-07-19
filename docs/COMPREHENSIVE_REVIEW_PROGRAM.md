@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ MONEY WAVE DISPATCH 1 COMPLETE — M-1..M-4 (2026-07-19, claude/money-wave @
+d8c7bc8d, 15 commits atop aad6265e — manager-verified lineage).** THE SPINE: migration
+157 money_events (append-mostly, event_key redelivery shield, FK-independent of
+settlements) + webhook mirror map (never-throw, receipt capture) + audited backfill verb
+— replayed-session-mints-once and refund-status-flip both EXECUTED (stripe-webhook 56
+original pins untouched → 71/71). THE LEDGER UI: Past-purchases panel + fail-closed
+purchaseHistory lib, kill-list clean. AUTO-RELOAD: migration 158 (one-open-attempt
+partial-unique concurrency claim; FULLY-ATOMIC claim RPC pricing delta+cap inside one
+transaction — an improvement over the spec's two-step, ratified) + consent-gated saved
+card + the trigger wired into ALL 10 debit sites + webhook-confirmed grants (replay ×2 →
+one grant, executed) + account panel; creditFlow pins 9/9 untouched. SURVEYOR LIMB:
+migration 159 (grant/revoke RPCs + the byok entitlement-gate rider) + product branches +
+subscription.deleted surveyor-before-premium discrimination + THE ALLOWANCE PRICE-ID
+GATE (the load-bearing pin: a Surveyor invoice mints NO Cartographer allowance —
+EXECUTED) + admin verbs (the manual-SQL concierge gap is CLOSED). Receipts: full edge
+suite 333/0 · contracts 202/202 · vitest 13,648 P with 9 reds ALL ACCOUNTED (4 parked
+goldens + 5 fold-owned migration-numbering consequences of the 156 double-mint — the
+migrations themselves apply cleanly) · closure 1,040,998 = base EXACTLY (zero eager,
+proven). JUDGMENTS ratified by the manager (each vetoable in the report): start-once
+subscription mirroring · atomic claim pricing · component-local panels (§4.6 "or
+equivalent") · backfill receipt_url honest-NULL. FOLD DUTIES REGISTERED: renumber +
+ARCHITECTURE/DEPLOY doc-sync · wire deps.notify → notifyCreditLow at the seam ·
+check:edge is CI-only (environmental @types/node, reproduced on untouched files).
+DISPATCH 2 LAUNCHED on the same branch: M-5..M-10 per §9 ORDERING (seat register →
+session gate a/b/c → transfer choreography → money crossing → payout limb + election →
+session client + stewardship). The Fable fraud-pass follows assembly.
 **⬛⭐ WAVE C COMPLETE — THE FIVE DARK TRADITIONS SEAMS (2026-07-19,
 claude/wave-c-seams @ 295f27b8, WC-a..WC-e + typedef fix atop aad6265e —
 manager-verified lineage).** All five DESIGN_TRADITIONS §16 deferred seams built dark to
