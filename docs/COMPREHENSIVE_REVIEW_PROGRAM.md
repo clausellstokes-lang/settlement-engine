@@ -1153,6 +1153,18 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER RULINGS ×2 (2026-07-19, "with the standard I have set, do your
+recommendation for Class C"):** (1) ⭐ HOWTOUSE RESOLVED — the About/Compendium
+pivot STRUCTURE stands; master's lost Philosophy + Under-the-Hood content is
+RESTORED INTO it (census #1 closes; becomes Wave B item #12 — a content
+re-graft into the current architecture, register-matched, nothing invented).
+(2) ⭐ THE SURVEYOR GATE IS FINAL — premium-as-Surveyor is the launch
+semantics; the isSurveyorTier chokepoint stands as built; the C13 finding
+CLOSES (Wave B adds the one-line comment finalization: the chokepoint header's
+"awaiting owner clarification" becomes "OWNER-RATIFIED FINAL 2026-07-19"); a
+distinct Surveyor tier constant is post-launch work if ever. Both leave the §9
+owner queue. Class C is now PURE TASTE (film set · treatment · default lens ·
+glyphs · prose register — complete code in every position, awaiting the walk).
 **⬛⭐⭐⭐ THE COMPOSITE IS ASSEMBLED (2026-07-19, claude/the-composite @
 aad6265e — the deep-wave fold COMPLETE).** Fold 3 illustrated-town @ 857c5274:
 3 conflicts resolved as pre-studied (SettlementDetail selectors moved INTO the

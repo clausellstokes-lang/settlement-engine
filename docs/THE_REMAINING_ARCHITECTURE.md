@@ -533,11 +533,8 @@ measured honest bytes, every future eager byte still fails; the ratchet's own
 text scheduled "the final tightening at the composite gate"); or (b) order the
 de-eagering lane (sync→async persisted-path conversion; delays the push). ·
 realm-unfurl film (C2L finding 2026-07-19: no master exists; the machine + drop-in
-seam ship; produce/choose the film = taste + media production) · ⚠ "SURVEYOR
-PREMIUM" SEMANTICS (C13 finding 2026-07-19): no Surveyor tier constant exists —
-TIER_GATE is anon|free|premium, Surveyor is per-task credits by the owner's own
-pricing copy; the door gates on premium via the isSurveyorTier chokepoint
-(one-line flip); owner clarifies what "only show for the surveyor premium" keys on · losing
+seam ship; produce/choose the film = taste + media production) · ✅ SURVEYOR SEMANTICS RESOLVED (owner 2026-07-19): premium-as-Surveyor is FINAL
+launch semantics; the chokepoint stands; comment finalization rides Wave B · losing
 journey-legs media set deleted at the walk (bg vs journey) ·
 HowToUse direction (census #1: About-pivot vs master's 11-heading how-to — content
 verified not relocated) · research-consent opt-in→opt-out posture (census §2) ·
