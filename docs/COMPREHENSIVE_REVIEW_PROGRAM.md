@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE ROADS DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_THE_ROADS.md committed
+(this commit; ~856 lines).** Engine Lift #5 designed against aad6265e with every owner
+ruling encoded: §0 spec spine · §0.5 the boundary amendment (exact in-place header edits;
+roads = the SOLE sanctioned named-NPC motion layer; no-death law preserves the deeper
+carve) · 14 frozen laws · SEVEN slices R-1..R-7 (state+flag `roadsEnabled` → missions+
+known-picture routing → the gauntlet → captivity → the party's hand → the travelers
+overlay → the road scene). MANAGER VALIDATION EXECUTED: the decisive claim spot-checked
+CONFIRMED — hostage machinery ALREADY EXISTS (npc.stasis + isInStasis npc/npcOps.js:151 +
+the buildWorldSnapshot participation filter with same-reference dormancy + stasis-npc/
+return-npc already in COMMITTABLE_EDIT_KINDS) — the wave EXTENDS it, never forks.
+Design strengths ratified by the manager: travel-narrative/captivity-mechanical (law 5 —
+routine trips never churn courts) · conversion applied at RELEASE via a returned-captive
+channel the corruption web's OWN creation pass consumes (zero new machinery, scarcity
+preserved) · ransom's power cost EMERGENT through ladder standing decay (faction.power
+never written — it is derivation output) · silence-decays-toward-calm as the stale-intel
+mechanism · the §8 participation census with a `.npcs`-reader ratchet pin · §15 secrets:
+whereabouts EXCLUDED from publicSafe/server allowlists BY CONSTRUCTION + the
+viewerSeesDmSecrets fail-closed predicate (no campaign-share surface exists today —
+grep-confirmed; the toggle ships WITH that surface, Q9) · §19 charter (12-year lit
+walkthrough, roster conservation every tick, the secrets data-probe, catch-up
+equivalence). Two recon lenses (power/corruption) returned stubs and were RE-DERIVED by
+the architect. TEN open questions with recs + safe defaults — ⛔owner highlights: Q1 ONE
+REGEN membership (REC yes, DEFAULT dark) · Q2 the SimNpc.whereabouts shape (the wave's
+one schema change; free to reshape until the lane runs) · Q5 escort-drain REC AGAINST ·
+Q6 web-dark-no-conversion REC ratify · Q7 guest-right ON. Implementation lane
+(claude/the-roads, Opus, R-1..R-7) queues for the next free lane slot.
 **⬛⭐ THE PERIMETER FINISHER COMPLETE — WAVE D IS FULLY CODE-COMPLETE (2026-07-19,
 claude/wave-d-perimeter @ d93197da, WD-h..WD-k atop 4b65ab82 — manager-verified
 merge-base = composite tip).** All three finisher items at code-complete: (1) TURNSTILE
