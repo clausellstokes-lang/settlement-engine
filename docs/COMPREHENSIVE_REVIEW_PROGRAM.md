@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ MONEY WAVE RESUME LANDED — M-8 + M-6f + M-9d (2026-07-19, claude/money-wave @
+91a6b2df, 3 lettered commits atop 4dfa4506).** M-8 THE PAYOUT LIMB COMPLETE: the
+predecessor's in-flight WIP read-first and carried to done; REAL GAP FOUND AND FIXED —
+a 'held' connect_cash payout was never re-claimable (claim_due only took scheduled/
+stale-releasing) → reelect_transfer_payout RPC + reelect_payout action + held→scheduled
+re-arm in payout_onboarding ("the election is re-openable while parked" now TRUE);
+receipts: founder-transfer deno 21/21 (Connect-absent→held · credits grant-once
+round(4950/rate) · key-inert 503 · reelect) + founderTransferPayout.pglite 15/15
+(DOUBLE-RELEASE IMPOSSIBLE — atomic claim proven). M-6f: transfer panel (register idiom,
+lazy) + the FoundersPage promise line; closure 1,040,998 = base EXACT. M-9d: single-
+session client + THE LIFECYCLE PIN EXECUTED (real store, real persist middleware:
+persist key BYTE-IDENTICAL through eviction · no store-reset action fires · supersession
+dedupes first-wins); evictSession registered EXEMPT (ceiling 70→71, compendium
+regenerated). ⚠ MANAGER RULING (vetoable) ON THE M-9d EAGER ESCALATION: +850 B vs the
+wave's zero-eager LAW 4 — the store-integrated design is REQUIRED (synchronous dedupe
+or the pin is vacuous); LAW 4 AMENDED with a declared ≤900 B eviction-core allowance
+(this commit); the 1,040,000 hard budget needs NO raise (post-fold ≈ ~1,024k, ~16 KB
+headroom via de-eager). FINAL MONEY DISPATCH LAUNCHED: M-9e Active-session panel + seam
+email + analytics enrich · M-9f fraud-charter session probes · M-10 stewardship (sweep
+stubs exist; performPayout is the shared machinery) · the sessionGate census upgrade —
+then the WHOLE-WAVE lane end and the Fable fraud-pass.
 **⬛⭐ WAVE B FINISHER CLOSED (2026-07-19, claude/wave-b-finisher @ e7dc528b — WBF-a..d
 + closure fixes WBFC-a/b; VERDICT: defects found, fixed, every remaining red classified).**
 The closer proved the focused-gates blind spot RE-BIT TWICE (WBF-b tripped domainAnyCast/

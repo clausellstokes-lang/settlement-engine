@@ -34,7 +34,14 @@
    already lazy routes); client session/reload logic joins the LAZY
    authSecurity.js via the thin-wrapper idiom (auth.js:598-620). The composite's
    first-paint closure is currently OVER budget (1,040,998 vs 1,040,000 — owner
-   file composite-budget-breach-998b); this wave contributes 0 eager bytes, and
+   file composite-budget-breach-998b); this wave contributes 0 eager bytes
+   EXCEPT the M-9d eviction core — AMENDED 2026-07-19 (manager ruling,
+   vetoable): a DECLARED ≤900 B eager allowance for the single-session
+   eviction dedupe guard + store flag (measured +850 B) — the dedupe MUST be
+   synchronous store state or the lifecycle pin's guarantees are vacuous;
+   banner/validation/claim all lazy. The 1,040,000 hard budget is UNTOUCHED
+   (post-fold closure ≈ ~1,024k via the de-eager reclaim — ~16 KB headroom).
+   Otherwise zero eager holds, and
    any analytics need is met by ENRICHING existing events, never new eager names.
 5. MIGRATIONS WRITTEN-NOT-DEPLOYED (the 130-136 standing pattern);
    applied-head.json stays at 117. Numbering: the perimeter lane holds ~156
