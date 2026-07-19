@@ -46,6 +46,37 @@ import {
  */
 
 /**
+ * @typedef {Object} TraditionDeitySnapshot
+ * The embedded patron-deity snapshot fields genesis reads (the embed-on-assign
+ * bridge shape; deityAxes reads the two axis strings, dedication the ref).
+ * @property {string} [_deityRef]
+ * @property {string} [alignmentAxis]
+ * @property {string} [lawAxis]
+ *
+ * @typedef {Object} TraditionSourceConfig
+ * The stable config fields genesis reads. Loose by design — every field optional,
+ * every read defensive. Terrain legs mirror resolveTerrain's chain.
+ * @property {string} [culture]
+ * @property {string} [tradeRouteAccess]
+ * @property {string|null} [terrainType]
+ * @property {string|null} [terrainOverride]
+ * @property {string|null} [terrain]
+ * @property {TraditionDeitySnapshot|null} [primaryDeitySnapshot]
+ *
+ * @typedef {Object} TraditionSourceSettlement
+ * The stable identity fields genesis reads — a draft OR saved settlement. Loose by
+ * design: every field optional; garbage falls through to seeded fallbacks, never a
+ * throw. (Real settlements carry far more; structural typing admits them.)
+ * @property {string|number} [_seed]
+ * @property {string|number} [id]
+ * @property {string} [tier]
+ * @property {number} [population]
+ * @property {TraditionSourceConfig|null} [config]
+ * @property {TraditionDeitySnapshot|null} [primaryDeity]
+ * @property {{ seed?: string }} [identity]
+ */
+
+/**
  * @typedef {Object} TraditionWindow
  * @property {number} startWeekOfYear  1..52 (canonical 4-4-5 week clock)
  * @property {number} weeks            1 or 2 (the observance's duration)
@@ -103,7 +134,7 @@ function clampInt(x, lo, hi) {
 /**
  * Resolve the tier band index (0..6) from a settlement's tier label, falling back
  * to the population→tier map when the label is missing/unknown.
- * @param {any} settlement
+ * @param {TraditionSourceSettlement|null|undefined} settlement
  * @returns {{ tier: string, tierIndex: number }}
  */
 function resolveTierBand(settlement) {
@@ -119,9 +150,10 @@ function resolveTierBand(settlement) {
  * economic character via the trade-route access (a stable config fact); alignment
  * via the patron-deity snapshot's two axes (0.5 = no signal); deityRef for
  * dedication. NO live campaign state.
- * @param {any} settlement
+ * @param {TraditionSourceSettlement|null|undefined} settlement
  */
 function readIdentity(settlement) {
+  /** @type {TraditionSourceConfig} */
   const cfg = settlement?.config || {};
   const deity = (cfg.primaryDeitySnapshot && typeof cfg.primaryDeitySnapshot === 'object')
     ? cfg.primaryDeitySnapshot
@@ -282,8 +314,9 @@ function assembleRec(p) {
  * old/large settlement reconstructs its ladder (a singular origin core grown to its
  * current scale + per-tier-band additions), all from the settlement seed alone, so
  * the result is identical whether computed view-time (draft preview) or tick-time
- * (T-2 first-lit mint). Never mutates `settlement`.
- * @param {any} settlement
+ * (T-2 first-lit mint). Never mutates `settlement`. Total on garbage: a non-object
+ * (including a string smuggled through an untyped caller) returns [].
+ * @param {TraditionSourceSettlement|string|null|undefined} settlement
  * @returns {TraditionRec[]}
  */
 export function deriveFoundingTraditions(settlement) {
