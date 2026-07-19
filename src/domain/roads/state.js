@@ -34,6 +34,7 @@
 import { isInStasis } from '../npc/npcOps.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
+import { clamp01 } from '../../kernel/math.js';
 
 // ── narrowing helpers (self-contained; the traditionsKernel/npcLadderState idiom) ──────
 /** @param {unknown} x @returns {Record<string, unknown>} */
@@ -49,10 +50,10 @@ export function num(x, d) {
 export function clampNum(x, lo, hi) {
   return x < lo ? lo : x > hi ? hi : x;
 }
-/** @param {number} x @returns {number} */
-export function clamp01(x) {
-  return clampNum(num(x, 0), 0, 1);
-}
+// clamp01 = the ONE kernel primitive (code-quality-4). Re-exported so roads consumers keep
+// importing it from the state leaf; roads only ever feeds it finite numeric axes, so the
+// kernel's non-finite⇒0 policy is byte-neutral to the prior coerce-then-clamp local form.
+export { clamp01 };
 /** Codepoint-stable string compare (byte-stable iteration). @param {string} a @param {string} b @returns {number} */
 export function cmp(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
