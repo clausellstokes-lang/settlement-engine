@@ -331,6 +331,22 @@ button {
    token). */
 .sf-landing-voice { background-color: #f7f0e4; }
 
+/* ── C2 THE WELCOME — the travel-and-stop film journey ────────────────────────
+   The `.leg` travel spacers sit between the stops. Scrolling through one scrubs
+   the growth film between two tiers (the microsite mechanic, marketing/website/
+   src/main.js); they are transparent so the fixed film backdrop (home/
+   WelcomeJourneyBackdrop) shows through, while the opaque stop sections present
+   over the frozen still. Desktop fine-pointer gets a full viewport of travel per
+   leg; touch / mobile / reduced-motion get the COMPRESSED stills journey (law
+   #4): 70vh, no scrub — the stills floor serves both from one code path. */
+.sf-welcome-leg {
+  height: 100vh;
+  pointer-events: none;
+}
+@media (hover: none), (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .sf-welcome-leg { height: 70vh; }
+}
+
 /* 02 · The brief — deliberate incompleteness (owner amendment W-L2/1): the
    mini-dossier's final prose line fades out mid-thought, signalling the rest
    lives in the dossier the visitor forges themselves. A text mask, not a color
