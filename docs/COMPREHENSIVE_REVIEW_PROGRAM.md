@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ MONEY WAVE DISPATCH 2 — THE TRANSFER FOUNDATION LANDED, CLEAN HANDOFF
+(2026-07-19, claude/money-wave @ 6204e30d, 10 commits atop d8c7bc8d; 25 total on the
+branch).** Landed with executed receipts: the 137 REWRITE (seat register v2 + clawback
+release) · 160 case machine (RLS-zero-policy ×3, live-case partial uniques, claim-once
+transitions incl. finalize/reverse, challenge codes w/ 067 lockout, transfer lock,
+master switch + dials in one config row) — TRANSITION MATRIX 14/14 (every legal once,
+every illegal refused) · webhook seat-claim + clawback release · THE SUBSCRIPTION-PAUSE
+ADDENDUM (pause = downgrade-equivalent via handle_premium_downgrade, resume restores;
+surveyor-discriminated; 7 pins) · 161 single-session (claim/is/assert, missing-row-
+allows pinned) + _shared/sessionGate + the PAID-SURFACE CENSUS 16/16 (request-layer OR
+DB-belt everywhere; spend_credits belt landed) · the founder-transfer edge function
+(master switch → sessionGate → fail-closed velocity → challenges → nominee flow →
+case-bound checkout w/ LAW-2 trust boundary → abort+refund) · recovery lockout
+fail-closed · THE MONEY CROSSING (payment→cooling + the FULL chargeback matrix:
+cooling→abort, finalized-pre-payout→reverse, post-payout→flag). Receipts: money-wave
+vitest 97/97 · full Deno edge 365/365 · zero src/ files touched ⇒ eager delta EXACTLY 0.
+Judgments ratified (vetoable in report): finalize/reverse DB bodies in 160 · edge-
+enforced initiate-confirm invariant · pause-reuses-downgrade · dials-in-config. ONE
+JUDGMENT ESCALATED BY THE MANAGER: the 8 credit-spending AI surfaces currently rely on
+the DB belt alone — dispatch 3 ORDERS full request-layer sessionGate wiring (§7.2
+instant-eviction caliber). DISPATCH 3 LAUNCHED (same branch): M-6f panel + promise line
+· M-7b finalize edge leg · M-7c due-runner cron · M-8 Connect limb + CREDITS ELECTION +
+abort-token issuance · M-9d/e/f eviction + THE LIFECYCLE PIN + session probes · M-10
+stewardship · the request-layer census completion. Fold note registered: 161 is the
+net-current spend_credits for the guard.
 **⬛⭐ WAVE B REMAINDER + DOWNGRADE FIXES COMPLETE (2026-07-19,
 claude/wave-b-remainder @ 80db0799, 11 commits atop aad6265e — manager-verified
 lineage).** Landed: THE DOOR DISCRIMINATOR #15 (door + AI-keys gate =
