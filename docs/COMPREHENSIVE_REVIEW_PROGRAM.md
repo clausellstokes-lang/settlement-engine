@@ -1134,6 +1134,26 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ WAVE A CLUSTER 2 COMPLETE — COMPLETION WAVES A-D ARE ALL LANDED (2026-07-19,
+claude/wave-a2-sweep @ 3398ecea, WA2-a..f atop aad6265e — manager-verified lineage).**
+The flat-idiom conversion for src/components OUTSIDE new/: 186 files, 6 lettered
+commits, 5 sonnet de-round subagents for bulk mechanics + hand-work for every judgment
+call (z-axis shadows removed, off-palette washes → parchment + coloured left rule "the
+word carries the state", AI/founder violet → the slate channel). SCOPE COUNTS:
+borderRadius 641→95 · boxShadow 93→72 · rgba 209→167 · tinted 184→157. FULL-TREE NOW:
+360/77/192/187 vs ceilings 906/98/234/214 — all strictly below (the declared tolerance-0
+red; the fold sums BOTH Wave-A lanes and re-pins to measured). BONUS: the import-tidy
+(~120 orphaned theme imports) SHRANK the closure 1,040,998 → 1,040,781 (−217 B).
+Receipts: build green · eslint 0 (warnings 127→6, all pre-existing) · sharded suite
+13,594 P, reds = the declared kill-list 4 + the parked goldens 4 + the budget red ·
+render-pins + WCAG contrast green (deferrals held). Deferrals documented with pin
+names: caliber atoms → the caliber-primitives lane · home/ hero surfaces → a
+taste-gated pass (owner walk / loop intake) · pinned radii/avatar/theme sources.
+WAVES A-D STATUS: A (clusters 1+2) ✓ · B (remainder + finisher, closed) ✓ · C (five
+seams, closed) ✓ · D (perimeter, code-complete) ✓ — task #31 CLOSED. THE FREED SLOT →
+THE MEMORY CONSOLIDATION (both recent lanes flagged MEMORY.md nearing its read limit;
+a conservative merge-only pass dispatched: hazards never dropped, superseded chains
+merged, every pointer kept — the successor's bootstrap gets cleaner, not thinner).
 **⬛ OWNER AMENDMENT (2026-07-19, same day) — THE WALK MOVES AFTER THE ONE REGEN.**
 Final tail order: loop convergence → PUSH → SOAK → TUNING → ONE REGEN → THE WALK →
 THE VERY END. The owner now walks the FULLY-LIT world — every flag on, the product
