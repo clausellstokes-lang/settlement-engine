@@ -1153,6 +1153,18 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⚠ SESSION-LIMIT STRIKE + RELAUNCH (2026-07-19 ~04:50 EDT).** All four running
+lanes (burn-down · resto1 · resto2 · resto3) terminated early on the API session
+limit (reset 04:50). Damage: burn-down + resto3 died CLEAN (no commits/WIP lost);
+resto1 had landed R1-a (#20 causal-detail @ 8c387e30) with uncommitted viewModel
+WIP (mid-#21 magicProfile); resto2 had landed R2-a (#2+#3 admin chrome @
+e7234e93) with uncommitted PrivacySettings WIP (mid-#4 bare-prop). RECOVERY per
+the hazard protocol: four FRESH agents relaunched into the SAME worktrees at
+05:02 — dirty-file law: read the full diff, complete-if-coherent else revert
+that one file and redo; never stash, discard nothing else. A surviving recon
+subagent's idiom map (clerk-note/plate/rubric-token/rename-mechanism digest)
+was forwarded into the burn-down relaunch to skip re-recon. Four queued
+heartbeats coalesced into the relaunch action.
 **⬛⭐ C14+C15 COMPLETE (2026-07-19, claude/deep-craft-c14c15 @ 7748d49a, 3
 commits, NOT folded).** 68434851 THE LANTERN TABLE: four lamp tones on umber
 (moss 6.29 · gold 7.05 · slate 6.28 · ember 5.12 — all AA on the panel AND the
