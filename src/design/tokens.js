@@ -61,12 +61,17 @@ const lightColors = Object.freeze({
   // Muted — chrome-only secondary text (NEVER body copy — fails WCAG)
   'muted-500': '#9C8068',
 
-  // Violet — AI affordances. The single visual marker that means
-  // "this surface is gated / opt-in / spends credits". Never used for
-  // anything else, never collapses with gold.
-  'violet-500': '#7B4FCF',  // AI affordance — fills, borders, icons
-  'violet-700': '#6A3FBF',  // AI TEXT on violet-100 (violet-500 as text is 4.35:1, just under AA)
-  'violet-100': '#EBE2FA',
+  // Slate — the AI register (THE SLATE CONVERSION, C13 owner ruling 2026-07-18:
+  // "slate replaces violet, never removes the distinction"). The single visual
+  // marker that means "this surface is AI-authored / gated / opt-in / spends
+  // credits". Never used for anything else, never collapses with gold. Ratios
+  // mirror the retired violet trio (tests/design/contrast.test.js recomputes):
+  // white on slate-500 = 5.27 (AA) · slate-700 on slate-100 = 6.40 (AA) ·
+  // slate-500 as text on slate-100 = 4.31 (just under AA — the deliberate
+  // negative pin: the fill hue is never text on its own tint).
+  'slate-500': '#5A6E82',  // AI affordance — fills, borders, icons
+  'slate-700': '#435463',  // AI TEXT on slate-100
+  'slate-100': '#E4E9EE',
 
   // Red — destructive actions and hard errors only
   'red-600': '#A23434',
@@ -112,8 +117,15 @@ export const semantic = Object.freeze({
   ctaPrimary:        color['gold-500'],
   ctaPrimaryHover:   color['gold-400'],
   ctaPrimaryActive:  color['gold-700'],
-  ctaAi:             color['violet-500'],
-  ctaAiBg:           color['violet-100'],
+  ctaAi:             color['slate-500'],
+  ctaAiBg:           color['slate-100'],
+  // THE SLATE PAIR (C13 ruling): the semantic light/dim register for
+  // AI-authored surfaces — `slateLight` washes draft-slip surfaces, `slateDim`
+  // carries the legible slate text/rule. New AI surfaces read THESE names;
+  // the legacy VIOLET* flats below carry the same values for the frozen
+  // consumer set (rename deferred — see the flats' comment).
+  slateLight:        color['slate-100'],
+  slateDim:          color['slate-700'],
 
   // Status
   destructive:    color['red-600'],
@@ -189,8 +201,13 @@ export const swatch = Object.freeze({
   '#E0D0B0': '#e0d0b0',
   '#E0E8F0': '#e0e8f0',
   '#E8D9B0': '#e8d9b0',
-  '#EBE2FA': '#ebe2fa',
-  '#EBE2FA80': '#ebe2fa80',
+  // THE SLATE CONVERSION (C13): the two violet-wash keys repoint to the slate
+  // wash — the documented consolidation mechanism ("a future consolidation pass
+  // repoints keys here at curated tokens — call sites never change again").
+  // The hex-shaped KEY names now lag their values; the key rename rides the
+  // kill-list burn-down (recorded deferral, C13 report).
+  '#EBE2FA': '#e4e9ee',
+  '#EBE2FA80': '#e4e9ee80',
   '#F4DEDE': '#f4dede',
   '#F5ECD8': '#f5ecd8',
   '#F7EBF0': '#f7ebf0',
@@ -219,7 +236,7 @@ export const swatch = Object.freeze({
   stressAmber: '#ffd080',
   mutedBrown: '#9c8068',
   '#4A3B22': '#4a3b22',
-  '#7B4FCF': '#7b4fcf',
+  '#7B4FCF': '#5a6e82', // THE SLATE CONVERSION (C13) — retired violet key, slate value (rename deferred)
   // Long tail — keyed by exact hex (consolidation deferred)
   '#1A2A5A': '#1a2a5a',
   '#1A3A8B': '#1a3a8b',
@@ -528,12 +545,19 @@ export const legacy = Object.freeze({
   CARD_ALT: '#FAF6EF',
   CARD_HDR: '#FAF4E8',
 
-  // Flat aliases for palette colours that previously had only dashed keys
-  // (color['violet-500'] etc.). Added in the colour burn-down so exact-match
-  // call sites can route through a flat name like the rest.
-  VIOLET:    color['violet-500'],
-  VIOLET_DEEP: color['violet-700'],   // legible AI text on violet-100
-  VIOLET_BG: color['violet-100'],
+  // Flat aliases for palette colours that previously had only dashed keys.
+  // Added in the colour burn-down so exact-match call sites can route through
+  // a flat name like the rest.
+  // ⚠ THE SLATE CONVERSION (C13, owner ruling 2026-07-18): the VIOLET* names
+  // now carry the SLATE values — every consumer of the AI register converts at
+  // this one chokepoint (the all-or-none law). The IDENTIFIER rename
+  // (VIOLET*→SLATE*) is deferred: the shared deep-craft kill-list pins the
+  // exact `VIOLET_BG` line count across src/components, so the rename rides
+  // the kill-list burn-down phase (recorded in the C13 report). New AI
+  // surfaces read semantic.slateLight/slateDim or ctaAi/ctaAiBg instead.
+  VIOLET:    color['slate-500'],
+  VIOLET_DEEP: color['slate-700'],   // legible AI text on slate-100
+  VIOLET_BG: color['slate-100'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

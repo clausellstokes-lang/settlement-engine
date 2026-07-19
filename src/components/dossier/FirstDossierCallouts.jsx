@@ -41,7 +41,7 @@ const sans = '"Nunito", system-ui, sans-serif';
 
 const CALLOUTS = [
   { key: 'tension', accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'supply',  accent: VIOLET, bg: '#EBE2FA' },
+  { key: 'supply',  accent: VIOLET, bg: '#E4E9EE' },
   { key: 'hook',    accent: AMBER,  bg: '#FBEAD0' },
 ];
 

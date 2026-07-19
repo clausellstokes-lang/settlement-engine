@@ -1,11 +1,12 @@
 /**
  * components/AiAnalystPanel.jsx — the analyst chat panel (Surveyor S1).
  *
- * A LAZY, self-contained floating panel (the FeedbackWidget shape): it owns its
- * open/query state, reads the campaign read-model from the store, and calls the analyst
- * transport — which it DYNAMIC-imports, so the transport + its brief-composer graph
- * never touch first paint. Mounted once from App.jsx via React.lazy, so the whole panel
- * chunk is off the entry closure (zero eager bytes; verify:dist enforces it).
+ * A LAZY floating panel, now a DESTINATION of THE ONE DOOR (C13): SurveyorDoor owns
+ * open state and the staged question; this panel renders the correspondence when told
+ * to (`open`), and calls the analyst transport — which it DYNAMIC-imports, so the
+ * transport + its brief-composer graph never touch first paint. It rides the
+ * FloatingAffordances lazy chunk, off the entry closure (verify:dist enforces it).
+ * The former self-owned launcher is retired per the owner's ONE DOOR ruling.
  *
  * The audience toggle is the visible face of the STRUCTURAL audience rule: "Player-safe"
  * routes the question through player projections only; the server enforces it again.
@@ -13,13 +14,14 @@
  */
 
 import { useState, useMemo, useCallback } from 'react';
-import { X, ThumbsUp, ThumbsDown, Sparkles } from 'lucide-react';
+import { X, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { useRoute } from '../hooks/useRoute.js';
 import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, sans, serif_, SP, R, FS } from './theme.js';
+import { t } from '../copy/index.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, VIOLET, VIOLET_DEEP, sans, serif_, SP, R, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -29,9 +31,8 @@ const AUDIENCE_OPTIONS = [
   { id: 'player', label: 'Player-safe' },
 ];
 
-export default function AiAnalystPanel({ visible = true }) {
-  const [open, setOpen] = useState(false);
-  const [question, setQuestion] = useState('');
+export default function AiAnalystPanel({ open = false, onClose, initialQuestion = '' }) {
+  const [question, setQuestion] = useState(initialQuestion);
   const [audience, setAudience] = useState('dm'); // 'dm' | 'player'
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -103,38 +104,22 @@ export default function AiAnalystPanel({ visible = true }) {
     } catch { /* telemetry is best-effort */ }
   }, []);
 
-  if (!visible) return null;
+  if (!open) return null;
 
   const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
-
-  if (!open) {
-    return (
-      <div style={dockPos}>
-        <Button
-          variant="ai"
-          size="sm"
-          icon={<Sparkles size={14} />}
-          onClick={() => setOpen(true)}
-          aria-label="Open the campaign analyst"
-        >
-          Ask the analyst
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <div
       style={{
         ...dockPos,
         width: 340, maxWidth: 'calc(100vw - 32px)', background: CARD, color: BODY,
-        border: `1px solid ${BORDER}`, borderRadius: R.lg, padding: SP.lg,
+        border: `1px solid ${VIOLET}`, borderRadius: R.lg, padding: SP.lg,
         boxShadow: '0 8px 28px rgba(0,0,0,0.28)', display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>Campaign analyst</span>
-        <IconButton Icon={X} label="Close the analyst" size="sm" onClick={() => setOpen(false)} />
+        <IconButton Icon={X} label="Close the analyst" size="sm" onClick={onClose} />
       </div>
 
       {/* §2c THE CONTEXT ANCHOR — VISIBLE: transparency about what the analyst reads.
@@ -199,7 +184,14 @@ export default function AiAnalystPanel({ visible = true }) {
             <p style={{ fontSize: FS.sm, color: RED, margin: 0, lineHeight: 1.45 }}>{result.error}</p>
           ) : (
             <>
-              <div style={{ fontSize: FS.sm, color: BODY, whiteSpace: 'pre-wrap', lineHeight: 1.45 }}>{result.answer}</div>
+              {/* THE CORRESPONDENCE REGISTER (C13): the DM's question in ink, the
+                  analyst's reply in the slate register — the two hands never blur. */}
+              <div data-testid="analyst-correspondence" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
+                <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{question}</p>
+              </div>
+              <span className="sf-smallcap" style={{ fontSize: FS.xs, color: VIOLET_DEEP, fontFamily: sans }}>{t('surveyorDoor.analystFrom')}</span>
+              <div style={{ fontSize: FS.sm, color: BODY, whiteSpace: 'pre-wrap', lineHeight: 1.45, borderLeft: `2px solid ${VIOLET}`, paddingLeft: SP.sm }}>{result.answer}</div>
               {Array.isArray(result.claims) && result.claims.length > 0 && (
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: FS.xs, color: MUTED }}>
                   {result.claims.map((c, i) => (

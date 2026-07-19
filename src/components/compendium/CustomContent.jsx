@@ -176,7 +176,7 @@ export function CustomItemAttributes({ item }) {
   // the compact capitalized key, not the verbose enum label.
   if (item.alignmentAxis) chips.push({ label: `Moral · ${cap(item.alignmentAxis)}`, color: '#7c3aed' });
   if (item.lawAxis && item.lawAxis !== 'neutral') chips.push({ label: `Order · ${cap(item.lawAxis)}`, color: '#7c3aed' });
-  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#6a3fbf' });
+  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#435463' });
   if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5010' });
   if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
   if (!chips.length) return null;

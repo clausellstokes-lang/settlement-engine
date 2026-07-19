@@ -1,23 +1,24 @@
 /**
  * components/surveyor/SurveyorWorkshop.jsx — THE SURVEYOR SHELL for the WRITE stages
- * (DESIGN_AI_CONTROL_SURFACE §2c). One floating sigil (right side, the Surveyor's compass) →
- * a docked panel (never a modal — the world stays visible) hosting the four write surfaces
- * behind a stage switch: custom content (S4) · style overhaul · construction (S5/S6) ·
- * accept→mint (S3). Each stage body is React.lazy, so its code + its heavy domain graph load
- * only when its stage is opened; the whole workshop rides the existing FloatingAffordances lazy
- * chunk (App.jsx mounts that once) so first paint pays zero. Every stage carries the §2b
+ * (DESIGN_AI_CONTROL_SURFACE §2c), now a DESTINATION of THE ONE DOOR (C13): SurveyorDoor
+ * owns open state and routes prompts here with a pre-selected stage; the former floating
+ * compass launcher is retired per the owner's ONE DOOR ruling. A docked panel (never a
+ * modal — the world stays visible) hosts the write surfaces behind a stage switch: custom
+ * content (S4) · style overhaul · construction (S5/S6) · accept→mint (S3) · autonomy (S7).
+ * Each stage body is React.lazy, so its code + its heavy domain graph load only when its
+ * stage is opened; the whole workshop rides the existing FloatingAffordances lazy chunk
+ * (App.jsx mounts that once) so first paint pays zero. Every stage carries the §2b
  * early-access register and the visible §3c context anchor.
  *
- * JUDGMENT (vetoable): a SINGLE launcher + stage switch (not four floating sigils, not the full
- * §2c docked shell with Cmd+K / ambient glyphs — S3 deferred that polish as least-verifiable
- * headless). Placement + the compass sigil are cosmetic and vetoable.
+ * JUDGMENT (vetoable): destinations dock along the LEFT edge (the door's margin) so the
+ * one-door spatial story holds — the routed prompt seeds the stage's own prompt field
+ * (initialPrompt/initialScope are initialization-only; absent ⇒ identical behavior).
  */
 
 import { lazy, Suspense, useState } from 'react';
-import { Compass, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, BORDER, CARD, BODY, sans, SP, R, FS } from '../theme.js';
-import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { AnchorChip, EarlyAccessBadge } from './surveyorPanelKit.jsx';
@@ -37,36 +38,21 @@ const STAGES = [
   { id: 'autonomy', label: 'Run', Body: AutonomyPanel }, // S7 (additive registration)
 ];
 
-export default function SurveyorWorkshop({ visible = true }) {
-  const [open, setOpen] = useState(false);
-  const [stage, setStage] = useState('content');
+export default function SurveyorWorkshop({ open = false, onClose, initialStage = 'content', initialPrompt = '', initialScope }) {
+  const [stage, setStage] = useState(initialStage);
   const { anchorLabel } = useSurveyorContext();
   const isMobile = useIsMobile();
 
-  if (!visible) return null;
+  if (!open) return null;
 
   const dockPos = {
-    position: 'fixed', right: SP.lg, bottom: isMobile ? 136 : 76, zIndex: 60, fontFamily: sans,
+    position: 'fixed', left: SP.lg, bottom: isMobile ? 136 : 76, zIndex: 60, fontFamily: sans,
   };
-
-  if (!open) {
-    return (
-      <div style={dockPos}>
-        <Button
-          variant="ai"
-          size="sm"
-          icon={<Compass size={14} />}
-          onClick={() => setOpen(true)}
-          aria-label="Open the Surveyor's workshop"
-        >
-          Surveyor's workshop
-        </Button>
-      </div>
-    );
-  }
 
   const active = STAGES.find((s) => s.id === stage) || STAGES[0];
   const Body = active.Body;
+  // The routed prompt seeds ONLY the routed stage; switching stages starts clean.
+  const seeded = active.id === initialStage;
 
   return (
     <div
@@ -84,7 +70,7 @@ export default function SurveyorWorkshop({ visible = true }) {
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>Surveyor's workshop</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
           <EarlyAccessBadge />
-          <IconButton Icon={X} label="Close the workshop" size="sm" onClick={() => setOpen(false)} />
+          <IconButton Icon={X} label="Close the workshop" size="sm" onClick={onClose} />
         </div>
       </div>
 
@@ -93,7 +79,7 @@ export default function SurveyorWorkshop({ visible = true }) {
       <Segmented options={STAGES.map((s) => ({ id: s.id, label: s.label }))} value={stage} onChange={setStage} size="sm" ariaLabel="Surveyor write stage" />
 
       <Suspense fallback={<p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}>
-        <Body />
+        <Body initialPrompt={seeded ? initialPrompt : ''} initialScope={seeded ? initialScope : undefined} />
       </Suspense>
     </div>
   );
