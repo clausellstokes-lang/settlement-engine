@@ -29,7 +29,7 @@ function LiveTradeFlowSection({ drift }) {
   const color = FLOW_BAND_COLOR[drift.band] || FLOW_BAND_COLOR.adequate;
   return (
     <Section title="Live Trade Flow" collapsible defaultOpen accent={color}>
-      <div style={{background:`${color}0c`,border:`1px solid ${color}30`,borderLeft:`4px solid ${color}`,borderRadius:6,padding:'10px 14px'}}>
+      <div style={{background:`${color}0c`,border:`1px solid ${color}30`,borderLeft:`4px solid ${color}`,padding:'10px 14px'}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:6}}>
           <span style={{fontSize:FS.md,fontWeight:800,color,textTransform:'none'}}>{drift.label}</span>
           <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginLeft:'auto'}}>measured now</span>
@@ -106,7 +106,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
         ].filter(Boolean).map(f => (
           <Button key={f.key} variant="secondary" size="sm" aria-pressed={flowFilter===f.key}
             onClick={() => setFlowFilter(f.key)} style={{
-            padding:'4px 10px',borderRadius:4,minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
+            padding:'4px 10px',minHeight:undefined,fontSize:FS.xxs,fontWeight:flowFilter===f.key?700:500,
             background:flowFilter===f.key?(f.color?`${f.color}18`:'#1c140918'):'#fff',
             color:flowFilter===f.key?(f.color||'#1c1409'):'#6b5340',
             border:`1px solid ${flowFilter===f.key?(f.color||'#1c1409'):'#c8b89a'}`,
@@ -132,14 +132,14 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
             <div key={i} style={{
               background:st.bg, border:`1px solid ${st.border}`,
               borderLeft:`3px solid ${st.color}`,
-              borderRadius:6, padding:'8px 12px',
+              padding:'8px 12px',
             }}>
               {/* Header row */}
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
-                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,borderRadius:3,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
+                <span style={{fontSize:FS.micro,color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{chain.needIcon} {chain.needLabel}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
 
               {/* Institutions + outputs */}
@@ -152,7 +152,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:2}}>Outputs</div>
                   <div style={{display:'flex',flexWrap:'wrap',gap:2}}>
                     {chain.outputs.slice(0, 3).map((o, j) => (
-                      <span key={j} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:`${st.color}10`,borderRadius:3,padding:'1px 5px'}}>{o}</span>
+                      <span key={j} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:`${st.color}10`,padding:'1px 5px'}}>{o}</span>
                     ))}
                   </div>
                 </div>}
@@ -160,7 +160,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Impairment detail */}
               {chain.dependency && (
-                <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,borderRadius:4,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
+                <div style={{fontSize:FS.xs,color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
                   <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
                   {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
@@ -173,7 +173,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
               {/* Magic substitution note */}
               {chain.magicNote && (
-                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],borderRadius:4,
+                <div style={{fontSize:FS.xxs,color:swatch.magic,background:swatch['#F8F0FF'],
                   padding:'4px 8px',marginTop:4,borderLeft:'3px solid #c0a0e0',lineHeight:1.4}}>
                   ✦ <em>{chain.magicNote}</em>
                   {chain.magicRecovery && <span style={{marginLeft:6,fontSize:FS.micro,color:swatch['#7A4AAA'],fontWeight:700}}>
@@ -201,16 +201,16 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
             <div key={i} style={{
               background:swatch['#FAF8F4'],border:`1px solid ${svc.color}30`,
               borderLeft:`3px solid ${svc.color}`,
-              borderRadius:6,padding:'7px 12px',
+              padding:'7px 12px',
               display:'flex',alignItems:'flex-start',gap:8,
             }}>
               <span style={{fontSize: FS['16'],flexShrink:0}}>{svc.icon}</span>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:2,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{svc.label}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,borderRadius:3,padding:'0 5px'}}>service</span>
-                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],borderRadius:3,padding:'0 5px'}}>export</span>}
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
+                  <span style={{fontSize:FS.micro,fontWeight:700,color:svc.color,background:`${svc.color}15`,padding:'0 5px'}}>service</span>
+                  {svc.exportable && <span style={{fontSize:FS.micro,color:swatch.success,background:swatch['#E8F5EC'],padding:'0 5px'}}>export</span>}
+                  <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px',marginLeft:'auto'}}>○ Operational</span>
                 </div>
                 <div style={{fontSize:FS.xs,color:swatch.inkMag2}}>
                   <span style={{color:MUTED,marginRight:4}}>Via:</span>{svc.institutions.join(' · ')}
@@ -296,18 +296,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,borderRadius:8,padding:'12px 16px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
             <div style={{fontSize:FS.sm,color:swatch.inkMag3}}>{eco.economicComplexity}</div>
           </div>
           <div style={{display:'flex',gap:8,flexWrap:'wrap',alignItems:'flex-start'}}>
-            <div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
+            <div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
               <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Trade</div>
               <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag,textTransform:'capitalize'}}>{tradeLabel}</div>
             </div>
-            {ecoScore>0&&<div style={{textAlign:'center',background:'rgba(250,248,244,0.97)',border:'1px solid #d8c090',borderRadius:6,padding:'6px 12px'}}>
+            {ecoScore>0&&<div style={{textAlign:'center',background:swatch['#FAF8F4'],border:'1px solid #d8c090',padding:'6px 12px'}}>
               <div style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Output</div>
               <div style={{fontSize:FS.md,fontWeight:700,color:ecoScore>=60?'#1a5a28':ecoScore>=35?'#a0762a':'#8b1a1a'}}>{ecoScore}/100</div>
             </div>}
@@ -323,7 +323,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
           ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]),
         ].map(({label,value,sub,color})=>(
-          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
+          <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
             {sub&&<div style={{fontSize:FS.xxs,color:MUTED,lineHeight:1.3}}>{sub}</div>}
@@ -339,7 +339,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             const _barColor = isCrim ? '#4a1a4a' : `linear-gradient(to right,${prosColor},#b8860b)`;
             return (
             <div key={i} style={{display:'flex',alignItems:'center',gap:10}}>
-              <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:4,height:26,position:'relative',overflow:'hidden',minWidth:40}}>
+              <div style={{flex:1,background:swatch['#E8DCC8'],height:26,position:'relative',overflow:'hidden',minWidth:40}}>
                 <div style={{position:'absolute',inset:'0',right:`${100-Math.min(src.percentage,100)}%`,background:isCrim?'#4a1a4a':`linear-gradient(to right,${prosColor},#b8860b)`,display:'flex',alignItems:'center',paddingLeft:6}}>
                   {src.percentage>=8&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.white,whiteSpace:'nowrap'}}>{src.percentage}%</span>}
                 </div>
@@ -347,7 +347,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               </div>
               <div style={{width:mobile?130:210,flexShrink:0,minWidth:0}}>
                 <div style={{fontSize:FS.sm,fontWeight:600,color:isCrim?'#4a1a4a':'#1c1409',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>
-                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],borderRadius:2,padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
+                  {isCrim&&<span style={{fontSize:FS.micro,fontWeight:800,color:swatch['#4A1A4A'],background:swatch['#F0E0F0'],padding:'0 4px',marginRight:4}}>CRIMINAL</span>}
                   {src.source}
                 </div>
                 {src.desc&&<div style={{fontSize:FS.xxs,color:MUTED,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{src.desc}</div>}
@@ -367,8 +367,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                 {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>x.toLowerCase()===e.toLowerCase());const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
-                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,borderRadius:12,padding:'3px 9px'}}>{e}</span>;})}
+                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
+                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px'}}>{e}</span>;})}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
@@ -388,8 +388,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     const isCust=(eco.customTradeLabels?.imports||[]).some(x=>x.toLowerCase()===imp.toLowerCase());
                     const incl=isCust?(eco.customCategoryImports?.[imp]||null):null;
                     return isCust
-                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',borderRadius:12,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,borderRadius:12,padding:'3px 9px'}}>{imp}</span>;
+                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
+                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px'}}>{imp}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
@@ -421,7 +421,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         {eco.localProduction?.length>0&&<div style={{borderTop:'1px solid #e8d8b0',paddingTop:10}}>
           <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Produced Locally</div>
           <div style={{display:'flex',flexWrap:'wrap',gap:3}}>
-            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',borderRadius:4,padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
+            {eco.localProduction.map((p,i)=><span key={i} style={{fontSize:FS.xxs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d8c890',padding:'1px 7px',textTransform:'capitalize'}}>{p.replace(/_/g,' ')}</span>)}
           </div>
         </div>}
       </Section>}
@@ -444,11 +444,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
             <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
           </div>
-          <div style={{height:10,background:swatch['#E8DCC8'],borderRadius:5,overflow:'hidden',position:'relative'}}>
+          <div style={{height:10,background:swatch['#E8DCC8'],overflow:'hidden',position:'relative'}}>
             {/* Production bar */}
-            <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a',borderRadius:5}}/>
+            <div style={{height:'100%',width:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,background:foodDeficit?'#c08080':foodSurplus?'#1a5a28':'#a0762a'}}/>
             {/* Import coverage overlay */}
-            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A'],borderRadius:'0 5px 5px 0'}}/>}
+            {fb.importCoverage>0&&<div style={{position:'absolute',top:0,left:`${Math.min(100,Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100))}%`,height:'100%',width:`${Math.min(100-Math.round((fb.dailyProduction/Math.max(1,fb.dailyNeed))*100),Math.round((fb.importCoverage/Math.max(1,fb.dailyNeed))*100))}%`,background:swatch['#2A5A8A']}}/>}
           </div>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xxs,color:MUTED,marginTop:3}}>
             <span>Agriculture modifier: {Math.round((fb.agricultureModifier||1)*100)}%</span>
@@ -457,7 +457,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           </div>
         </div>
         {/* Narrative */}
-        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,borderRadius:6,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
+        <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',border:`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,borderLeft:`3px solid ${foodColor}`,padding:'8px 12px',fontSize:FS.sm,color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
               ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.`
@@ -507,7 +507,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             {eco.customChains.map((c,i)=>{
               const nodes = [c.resource, ...(c.processingInstitutions||[]), ...((c.outputs||[]).slice(0,3))].filter(Boolean);
               return (
-                <div key={i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', borderRadius:5, padding:'8px 12px'}}>
+                <div key={i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', padding:'8px 12px'}}>
                   <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:nodes.length?4:0,flexWrap:'wrap'}}>
                     <span style={{fontSize:FS.sm,fontWeight:800,color:swatch.inkMag}}>{c.label}</span>
                     <span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
@@ -517,7 +517,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                       {nodes.map((n,j)=>(
                         <React.Fragment key={j}>
                           {j>0 && <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>}
-                          <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:'rgba(255,255,255,0.55)',borderRadius:3,padding:'1px 6px',textTransform:'capitalize'}}>{n}</span>
+                          <span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#FAF8F4'],padding:'1px 6px',textTransform:'capitalize'}}>{n}</span>
                         </React.Fragment>
                       ))}
                     </div>
@@ -544,7 +544,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 ✓ Fully Exploited ({full.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {full.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
             {part.length>0&&<div>
@@ -556,7 +556,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 const name = r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?');
                 const missing = r.processingInstitutions?.length
                   ? '' : r.dependsOn?.length ? ' (needs: '+r.dependsOn.slice(0,2).join(', ')+')' : '';
-                return <span key={i} style={{fontSize:FS.xs,color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',borderRadius:4,padding:'2px 8px'}}>{name}{missing}</span>;
+                return <span key={i} style={{fontSize:FS.xs,color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',padding:'2px 8px'}}>{name}{missing}</span>;
               })}
               </div>
             </div>}
@@ -565,7 +565,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 ○ Unexploited Opportunity ({unex.length})
               </div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',borderRadius:4,padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
+                {unex.map((r,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',padding:'2px 8px'}}>{r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?')}</span>)}
               </div>
             </div>}
           </div>
@@ -604,7 +604,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}
-            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,borderRadius:6,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
+            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
               <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
                 <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
                 <div style={{fontSize:FS.micro,fontWeight:700,color:sevColor,textTransform:'uppercase',letterSpacing:'0.05em',marginTop:2}}>Off-book</div>
@@ -622,7 +622,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                 {crimInsts.map((name,i)=>{
                   const econ = criminalOpEcon(name);
                   return (
-                    <div key={i} style={{background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:5,padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
+                    <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger}}>{name}</span>
                       <span style={{fontSize:FS.xxs,color:swatch['#6B4040']}}>{econ}</span>
                     </div>
@@ -636,7 +636,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
               <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:5}}>Criminal Supply Chains</div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {crimChains.map((c,i)=>(
-                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch.dangerBg,border:'1px solid #e0b0b0',borderRadius:4,padding:'2px 8px'}}>
+                  <span key={i} style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
                     {c.chainId?.replace(/_/g,' ')} · {c.status}
                   </span>
                 ))}
