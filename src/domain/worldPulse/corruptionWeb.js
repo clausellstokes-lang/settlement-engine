@@ -273,7 +273,7 @@ function smugglePairs(worldState) {
  * the unordered pair set (folded into rawChannelQuality like smuggle) + a DIRECTIONAL pin map
  * (`${captorId}|${homeId}` → npcKey) so the web's target-NPC pick is pinned to the returned
  * captive. Absent ledger ⇒ empty ⇒ byte-neutral (the corruption-web dormancy golden holds). Pure.
- * @param {any} worldState
+ * @param {Record<string, unknown> | null | undefined} worldState
  * @returns {{ pairs: Set<string>, pinned: Map<string, string> }}
  */
 function returnedCaptiveChannels(worldState) {
@@ -704,7 +704,7 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpc
  * Write the foreign_settlement leash onto the chosen NPC's npcStates (the covert conversion).
  * Shared by the default importance-pick and THE ROADS §10 pinned-captive pick. Pure.
  * @param {Record<string, unknown>} npcStates @param {string} targetSid
- * @param {{ npc: any, index: number }} chosen @param {string} patronId @param {number} tick
+ * @param {{ npc: SimNpc, index: number }} chosen @param {string} patronId @param {number} tick
  * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
  */
 function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
