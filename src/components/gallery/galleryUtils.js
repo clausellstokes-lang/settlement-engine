@@ -55,6 +55,14 @@ export const GALLERY_RESPONSIVE_CSS = `
       position: static;
     }
   }
+
+  /* The specimen plate hovers by INKING its frame darker in place (motion
+     grammar: oc-m-inkdarken, on the card), never by lifting or shadowing.
+     Curated plates ink toward the deep gold entry tone, keeping their gold
+     identity; the rest ink toward strong ink. Reduced-motion collapses the
+     transition to its instant end state (the global rule in organic.css). */
+  .sf-gallery-card:hover { border-color: var(--oc-ink-strong); }
+  .sf-gallery-card--curated:hover { border-color: var(--oc-entry); }
 `;
 
 export function human(value) {
