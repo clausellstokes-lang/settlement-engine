@@ -39,12 +39,16 @@ import {
   asObject, num, clampNum, clamp01, cmp,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
+import { EMBASSY_LEDGER_KEY, embassyPairKey } from '../roads/embassyLedger.js';
+import {
+  relationshipTypeBetween, atOpenWar, atWarWith, isEmbassy, embassyEnvoyMetrics, evaluateEmbassyHazard,
+} from '../roads/embassyHazard.js';
 import {
   getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest, hopWeeks,
 } from '../spatial/distanceRead.js';
 import { chooseRoute, embattlementLevel } from '../spatial/embattlement.js';
 import { currentRegion } from '../spatial/armyTransit.js';
-import { tradeNeighbours } from '../spatial/rumorNetwork.js';
+import { tradeNeighbours, RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetwork.js';
 import { seasonForTick } from './worldState.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { pickLine } from './eventProse.js';
@@ -75,32 +79,8 @@ function categoryOf(npc) { return String(asObject(npc).category || '').toLowerCa
 const TRADE_CATEGORY = /(econom|merch|trade)/;
 const DIPLO_CATEGORY = /(govern|noble)/;
 const HOSTILE_RUNGS = new Set(['rival', 'cold_war', 'hostile']);
-
-/**
- * The relationship rung between two settlements (graph edge relationshipType, falling back
- * to worldState.relationshipStates) — 'rival'|'cold_war'|'hostile'|… or ''. Pure.
- * @param {Record<string, unknown>} graph @param {Record<string, unknown>} worldState
- * @param {string} a @param {string} b @returns {string}
- */
-function relationshipTypeBetween(graph, worldState, a, b) {
-  const A = String(a); const B = String(b);
-  const edges = Array.isArray(asObject(graph).edges) ? /** @type {unknown[]} */ (asObject(graph).edges) : [];
-  for (const e of edges) {
-    const from = str(asObject(e).from); const to = str(asObject(e).to);
-    if ((from === A && to === B) || (from === B && to === A)) {
-      const rt = String(asObject(e).relationshipType || '');
-      if (rt) return rt;
-    }
-  }
-  const rs = asObject(asObject(worldState).relationshipStates);
-  for (const key of Object.keys(rs)) {
-    if (key.includes(A) && key.includes(B)) {
-      const rt = String(asObject(rs[key]).relationshipType || '');
-      if (rt) return rt;
-    }
-  }
-  return '';
-}
+// relationshipTypeBetween / atOpenWar / atWarWith + the whole §11b embassy hazard subsystem
+// live in the roads/embassyHazard.js leaf (law 10 — engine logic out of the capped mover).
 
 /**
  * The HARD DAMPER (§4): a besieged / occupied / mobilizing settlement sends no envoys. Pure.
@@ -223,22 +203,13 @@ function hostHasActiveWindow(hostRecs, weekOfYear) {
   return false;
 }
 
-/**
- * Is the traveller's home at OPEN WAR with the host (§7 restraint)? Pure.
- * @param {Record<string, unknown>} graph @param {string} homeId @param {string} hostId @returns {boolean}
- */
-function atOpenWar(graph, homeId, hostId) {
-  return warFrontsInto(graph, hostId).includes(homeId)
-    || warFrontsFrom(graph, hostId).includes(homeId)
-    || warFrontsInto(graph, homeId).includes(hostId)
-    || warFrontsFrom(graph, homeId).includes(hostId);
-}
-
 // ── news beats (the traditionBeat idiom; impactKind 'roads') ───────────────────
 /**
  * A roads chronicle beat. @param {Object} a
  * @param {string} a.sid @param {number} a.tick @param {string|null} a.now @param {string} a.significance
  * @param {string} a.headline @param {string} a.summary @param {string} a.seed @param {string[]} a.tags
+ * @param {number} [a.score] optional salience override (§11b: the embassy-departure beat lifts to
+ *   the rumor seed floor so the EXISTING lattice carries the quiet news — the interception race)
  * @returns {Record<string, unknown>}
  */
 function roadsBeat(a) {
@@ -250,7 +221,7 @@ function roadsBeat(a) {
     scope: major ? 'regional' : 'local',
     significance: a.significance,
     severity: 0.2,
-    score: major ? 52 : a.significance === 'notable' ? 42 : 34,
+    score: a.score != null ? a.score : (major ? 52 : a.significance === 'notable' ? 42 : 34),
     headline: a.headline,
     summary: a.summary,
     kind: 'applied',
@@ -416,6 +387,8 @@ function advanceLitRoads(args) {
   const newsEntries = [];
   /** @type {Array<{ captorId: string, homeId: string, npcKey: string }>} §10 conversion deposits */
   const returnedCaptiveDeposits = [];
+  /** @type {Array<{ homeId: string, destId: string, venue: string, envoyWeight01: number, amplifier: number, intensity01: number }>} §11b heard peace suits */
+  const embassyDeposits = [];
   /** @type {Record<string, Record<string, unknown>>} the surviving/advanced missions */
   const missions = {};
 
@@ -520,46 +493,65 @@ function advanceLitRoads(args) {
     const hop = currentHopOf(m, weekClock, digest, season);
     const fork = createPRNG(`${rngSeed}::roads-hazard:${mid}:${now2}`);
 
-    /** @type {{ cls: string, outcome: string, captorId: string }|null} */
+    /** @type {{ cls: string, outcome: string, captorId: string, venue?: string, hunted?: boolean, envoyWeight01?: number, amplifier?: number, intensity01?: number }|null} */
     let res = null;
-    // T1 — army on the route / occupation during the stay.
-    let t1Captor = null;
-    if (phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
-    if (!t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
-    if (t1Captor) {
-      const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
-      res = fork.random() < p ? { cls: 'T1', outcome: 'hostage', captorId: t1Captor } : { cls: 'T1', outcome: 'delayed', captorId: t1Captor };
-    }
-    // T2 — siege into the host during the stay.
-    if (!res && phase === 'visiting') {
-      const besiegers = warFrontsInto(graph, destId);
-      if (besiegers.length) {
-        const captorId = String([...besiegers].sort(cmp)[0]);
-        const p = captureProbability({ base: ROADS_TUNING.T2_BASE, exposure, protection, alpha: ROADS_TUNING.T2_ALPHA });
-        res = fork.random() < p ? { cls: 'T2', outcome: 'hostage', captorId } : { cls: 'T2', outcome: 'trapped', captorId };
+    if (isEmbassy(m)) {
+      // §11b THE EMBASSY: the two venues (road parley · court suit) + the third-party rule +
+      // the interception race, weighed by the insult/humility amplifier. In transit, a bandit
+      // road (T3) can still take an embassy that no army meets (bandits do not parley).
+      const em = embassyEnvoyMetrics(freshSettlement(homeId), npc.npc, w);
+      res = evaluateEmbassyHazard({
+        mid, homeId, targetId: destId, phase, hop, protection, exposure, fork, graph, worldState,
+        armyLedger, now2, amplifier: em.amplifier, envoyWeight01: em.envoyWeight01,
+      });
+      if (!res && phase !== 'visiting') {
+        const level = embattlementLevel(worldState, hop);
+        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
+          const captorId = idSet.has(hop) ? hop : destId;
+          const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
+          res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
+        }
       }
-    }
-    // T3 — embattled roads (in-transit only).
-    if (!res && phase !== 'visiting') {
-      const level = embattlementLevel(worldState, hop);
-      if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
-        const captorId = idSet.has(hop) ? hop : destId;
-        const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
-        res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
+    } else {
+      // T1 — army on the route / occupation during the stay.
+      let t1Captor = null;
+      if (phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
+      if (!t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
+      if (t1Captor) {
+        const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
+        res = fork.random() < p ? { cls: 'T1', outcome: 'hostage', captorId: t1Captor } : { cls: 'T1', outcome: 'delayed', captorId: t1Captor };
       }
-    }
-    // T4 — hostile reception (the host also rolls; self-balancing).
-    if (!res && phase === 'visiting') {
-      const rung = /** @type {Record<string, number>} */ (ROADS_TUNING.T4_RUNG)[relationshipTypeBetween(graph, worldState, homeId, destId)];
-      if (rung) {
-        const war = atOpenWar(graph, homeId, destId);
-        const restraint = war ? 1.0 : ROADS_TUNING.LEGITIMACY_RESTRAINT;
-        const guestRight = hostHasActiveWindow(priorTraditionsG[destId], weekOfYear) ? ROADS_TUNING.GUEST_RIGHT_MULT : 1.0;
-        const detentionP = clampNum(ROADS_TUNING.T4_DETENTION_PER_RUNG * rung * exposure / Math.max(0.01, protection) * restraint * guestRight, 0, ROADS_TUNING.CAPTURE_CAP);
-        const r = fork.random();
-        if (r < detentionP) { res = { cls: 'T4', outcome: 'hostage', captorId: destId }; if (!war) bumpLegit(destId, ROADS_TUNING.DETAIN_LEGIT_HIT); }
-        else if (r < detentionP * 2) res = { cls: 'T4', outcome: 'expelled', captorId: destId };
-        else res = { cls: 'T4', outcome: 'received', captorId: destId };
+      // T2 — siege into the host during the stay.
+      if (!res && phase === 'visiting') {
+        const besiegers = warFrontsInto(graph, destId);
+        if (besiegers.length) {
+          const captorId = String([...besiegers].sort(cmp)[0]);
+          const p = captureProbability({ base: ROADS_TUNING.T2_BASE, exposure, protection, alpha: ROADS_TUNING.T2_ALPHA });
+          res = fork.random() < p ? { cls: 'T2', outcome: 'hostage', captorId } : { cls: 'T2', outcome: 'trapped', captorId };
+        }
+      }
+      // T3 — embattled roads (in-transit only).
+      if (!res && phase !== 'visiting') {
+        const level = embattlementLevel(worldState, hop);
+        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
+          const captorId = idSet.has(hop) ? hop : destId;
+          const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
+          res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
+        }
+      }
+      // T4 — hostile reception (the host also rolls; self-balancing).
+      if (!res && phase === 'visiting') {
+        const rung = /** @type {Record<string, number>} */ (ROADS_TUNING.T4_RUNG)[relationshipTypeBetween(graph, worldState, homeId, destId)];
+        if (rung) {
+          const war = atOpenWar(graph, homeId, destId);
+          const restraint = war ? 1.0 : ROADS_TUNING.LEGITIMACY_RESTRAINT;
+          const guestRight = hostHasActiveWindow(priorTraditionsG[destId], weekOfYear) ? ROADS_TUNING.GUEST_RIGHT_MULT : 1.0;
+          const detentionP = clampNum(ROADS_TUNING.T4_DETENTION_PER_RUNG * rung * exposure / Math.max(0.01, protection) * restraint * guestRight, 0, ROADS_TUNING.CAPTURE_CAP);
+          const r = fork.random();
+          if (r < detentionP) { res = { cls: 'T4', outcome: 'hostage', captorId: destId }; if (!war) bumpLegit(destId, ROADS_TUNING.DETAIN_LEGIT_HIT); }
+          else if (r < detentionP * 2) res = { cls: 'T4', outcome: 'expelled', captorId: destId };
+          else res = { cls: 'T4', outcome: 'received', captorId: destId };
+        }
       }
     }
     if (!res) continue;
@@ -588,7 +580,36 @@ function advanceLitRoads(args) {
         sid: homeId, tick: now2, now, significance: 'major',
         headline: pickLine(ROADS_NEWS.capture.headline, seed, interp),
         summary: pickLine(ROADS_NEWS.capture.summary, seed, interp),
-        seed, tags: ['capture', res.cls],
+        // §11b: an embassy detained at the venue, or intercepted mid-flight (the suit dies unheard).
+        seed, tags: ['capture', res.cls, ...(isEmbassy(m) ? ['embassy'] : []), ...(res.hunted ? ['interception'] : [])],
+      }));
+    } else if (res.outcome === 'embassy_received') {
+      // §11b THE SUIT IS HEARD (road parley or court suit): deposit the peace suit for the war
+      // machinery to consume, and send the envoy home under escort with a NOTABLE receipt.
+      embassyDeposits.push({
+        homeId, destId, venue: str(res.venue), envoyWeight01: num(res.envoyWeight01, 0),
+        amplifier: num(res.amplifier, 0), intensity01: num(res.intensity01, 0),
+      });
+      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
+      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.embassyHeard = true;
+      const seed = `embassy.${mid}`;
+      newsEntries.push(roadsBeat({
+        sid: homeId, tick: now2, now, significance: 'notable',
+        headline: pickLine(ROADS_NEWS.embassyReceived.headline, seed, interp),
+        summary: pickLine(ROADS_NEWS.embassyReceived.summary, seed, interp),
+        seed, tags: ['embassy_received', str(res.venue)],
+      }));
+    } else if (res.outcome === 'embassy_turned_home') {
+      // §11b TURNED HOME (honour & chivalry — never worse than expulsion): the suit is refused a
+      // hearing; the envoy rides home, the war unabated.
+      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
+      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.expelled = true;
+      const seed = `embassy-rebuff.${mid}`;
+      newsEntries.push(roadsBeat({
+        sid: homeId, tick: now2, now, significance: 'notable',
+        headline: pickLine(ROADS_NEWS.embassyRebuffed.headline, seed, interp),
+        summary: pickLine(ROADS_NEWS.embassyRebuffed.summary, seed, interp),
+        seed, tags: ['embassy_rebuffed', str(res.venue)],
       }));
     } else if (res.outcome === 'delayed') {
       m.legArrivalTick = num(m.legArrivalTick, 0) + 1;
@@ -693,7 +714,9 @@ function advanceLitRoads(args) {
   for (const sid of orderedIds) {
     const s = freshSettlement(sid);
     if (!s) continue;
-    if (warDamped(worldState, graph, sid)) continue;
+    // §11b: the war damper suppresses ROUTINE dispatches (besieged/occupied/mobilizing) but NOT
+    // the peace embassy — the sanctioned wartime journey. Compute it, don't `continue` on it.
+    const damped = warDamped(worldState, graph, sid);
     const slots = ROADS_TUNING.ABROAD_CAP - (abroadByHome.get(sid) || 0);
     if (slots <= 0) continue;
 
@@ -705,7 +728,20 @@ function advanceLitRoads(args) {
       const hw = num(hopWeeks(digest, sid, dest, season), 0);
       if (hw >= 1 && hw <= ROADS_TUNING.MAX_HOP_WEEKS) inRange.push({ dest, hopWeeksOut: hw });
     }
-    if (!inRange.length) continue;
+    // §11b THE PEACE EMBASSY targets: settlements this court is AT WAR with, routable within
+    // range. Found over ALL settlements — an enemy shares no trade edge, so tradeReachable never
+    // finds them. Codepoint-stable, first target sued.
+    /** @type {Array<{ dest: string, hopWeeksOut: number }>} */
+    const warTargets = [];
+    for (const dest of orderedIds) {
+      if (dest === sid || !idSet.has(dest)) continue;
+      if (!atWarWith(graph, worldState, sid, dest)) continue;
+      const hw = num(hopWeeks(digest, sid, dest, season), 0);
+      if (hw >= 1 && hw <= ROADS_TUNING.EMBASSY_MAX_HOP_WEEKS) warTargets.push({ dest, hopWeeksOut: hw });
+    }
+    warTargets.sort((x, y) => cmp(x.dest, y.dest));
+    // Nothing to send: no routine journey (damped, or no trade-reachable dest) AND no peace suit.
+    if ((damped || !inRange.length) && !warTargets.length) continue;
 
     const knownView = knownEmbattlementView(worldState, sid);
     const roster = rosterByS.get(sid) || new Map();
@@ -726,27 +762,35 @@ function advanceLitRoads(args) {
       const departWeekTarget = 1 + Math.floor(r2 * 51);
       if (weekOfYear < departWeekTarget) continue; // spread across the year; not yet time
 
-      // BORROWED-PURPOSE scan (first match): observance → trade → diplomacy → ladder.
+      // BORROWED-PURPOSE scan (first match). §11b: the PEACE EMBASSY (wartime, government/noble)
+      // is scanned FIRST and BYPASSES the damper — a court at war prioritizes suing for peace.
+      // The routine purposes (observance → trade → diplomacy → ladder) need an un-damped court.
       let purpose = null; let dest = ''; let major = false; let hopWeeksOut = 1; let fullWeight = false;
-      for (const cand of inRange) {
-        const obs = observanceMatch(/** @type {unknown[]} */ (priorTraditions[cand.dest]), weekOfYear, cand.hopWeeksOut);
-        if (obs) { purpose = { kind: 'observance', ref: obs.id }; dest = cand.dest; hopWeeksOut = cand.hopWeeksOut; major = obs.critical; fullWeight = obs.critical; break; }
+      if (warTargets.length && DIPLO_CATEGORY.test(categoryOf(npc))) {
+        const t = warTargets[0]; // the first (codepoint-sorted) enemy is sued
+        purpose = { kind: 'embassy', ref: `${sid}~${t.dest}` }; dest = t.dest; hopWeeksOut = t.hopWeeksOut; fullWeight = true;
       }
-      if (!purpose && TRADE_CATEGORY.test(categoryOf(npc))) {
-        const direct = new Set(tradeNeighbours(graph, sid).map((n) => String(n.neighbourId)));
-        const hit = inRange.find((c) => direct.has(c.dest));
-        if (hit) { purpose = { kind: 'trade', ref: hit.dest }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
-      }
-      if (!purpose && DIPLO_CATEGORY.test(categoryOf(npc))) {
-        const hit = inRange.find((c) => {
-          const rt = relationshipTypeBetween(graph, worldState, sid, c.dest);
-          return rt === 'rival' || rt === 'cold_war'; // hostile = open war ⇒ no envoy
-        });
-        if (hit) { purpose = { kind: 'diplomacy', ref: `${sid}~${hit.dest}` }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
-      }
-      if (!purpose && ladderLit) {
-        const goal = ladderGoalOf(/** @type {{ npcLadder?: unknown }} */ (s), npcKey);
-        if (goal && goal.goal) { purpose = { kind: 'ladder', ref: goal.goal }; dest = inRange[0].dest; hopWeeksOut = inRange[0].hopWeeksOut; fullWeight = true; }
+      if (!purpose && !damped && inRange.length) {
+        for (const cand of inRange) {
+          const obs = observanceMatch(/** @type {unknown[]} */ (priorTraditions[cand.dest]), weekOfYear, cand.hopWeeksOut);
+          if (obs) { purpose = { kind: 'observance', ref: obs.id }; dest = cand.dest; hopWeeksOut = cand.hopWeeksOut; major = obs.critical; fullWeight = obs.critical; break; }
+        }
+        if (!purpose && TRADE_CATEGORY.test(categoryOf(npc))) {
+          const direct = new Set(tradeNeighbours(graph, sid).map((n) => String(n.neighbourId)));
+          const hit = inRange.find((c) => direct.has(c.dest));
+          if (hit) { purpose = { kind: 'trade', ref: hit.dest }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
+        }
+        if (!purpose && DIPLO_CATEGORY.test(categoryOf(npc))) {
+          const hit = inRange.find((c) => {
+            const rt = relationshipTypeBetween(graph, worldState, sid, c.dest);
+            return rt === 'rival' || rt === 'cold_war'; // hostile = open war ⇒ the embassy, not routine
+          });
+          if (hit) { purpose = { kind: 'diplomacy', ref: `${sid}~${hit.dest}` }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
+        }
+        if (!purpose && ladderLit) {
+          const goal = ladderGoalOf(/** @type {{ npcLadder?: unknown }} */ (s), npcKey);
+          if (goal && goal.goal) { purpose = { kind: 'ladder', ref: goal.goal }; dest = inRange[0].dest; hopWeeksOut = inRange[0].hopWeeksOut; fullWeight = true; }
+        }
       }
       if (!purpose) continue;
 
@@ -787,15 +831,22 @@ function advanceLitRoads(args) {
       abroadByHome.set(sid, (abroadByHome.get(sid) || 0) + 1);
       awayKeys.add(c.npcKey);
 
+      // §11b THE EMBASSY DEPARTURE is a QUIET beat that nonetheless TRAVELS: its seed matches the
+      // interception-race rumor key (`embassy-depart.${missionId}` → the sourceEventId the EXISTING
+      // rumor lattice seeds/relays), and its salience is lifted to the seed floor so a third party
+      // at war with the target can learn of it in flight. No new carrier.
+      const isEmb = c.purpose.kind === 'embassy';
       const pillar = c.w >= ROADS_TUNING.PILLAR_WEIGHT;
-      const significance = (pillar || c.major) ? 'notable' : 'minor';
-      const seed = `depart.${missionId}`;
+      const significance = (pillar || c.major || isEmb) ? 'notable' : 'minor';
+      const seed = isEmb ? `embassy-depart.${missionId}` : `depart.${missionId}`;
       const interp = { npc: str(c.npc.name || c.npcKey), home: str(asObject(s).name || sid), dest: c.dest, purpose: c.purpose.kind };
+      const pool = isEmb ? ROADS_NEWS.embassyDeparture : ROADS_NEWS.departure;
       newsEntries.push(roadsBeat({
         sid, tick: now2, now, significance,
-        headline: pickLine(ROADS_NEWS.departure.headline, seed, interp),
-        summary: pickLine(ROADS_NEWS.departure.summary, seed, interp),
-        seed, tags: ['departure'],
+        headline: pickLine(pool.headline, seed, interp),
+        summary: pickLine(pool.summary, seed, interp),
+        seed, tags: [isEmb ? 'embassy_departure' : 'departure'],
+        ...(isEmb ? { score: RUMOR_NOTABLE_SCORE_FLOOR } : {}),
       }));
     }
   }
@@ -895,6 +946,34 @@ function advanceLitRoads(args) {
       nextWorldState = Object.keys(nextReturned).length
         ? setSpatialLedger(nextWorldState, 'roadsReturnedCaptives', sortKeys(nextReturned))
         : dropSpatialLedger(nextWorldState, 'roadsReturnedCaptives');
+      changed = true;
+    }
+  }
+
+  // ── §11b THE EMBASSY SUIT LEDGER — carry prior (pruning lapsed suits) + the new heard suits.
+  //    The war system's sue_for_peace weight consumes it (embassyLedger.embassySuitPeaceMult);
+  //    roads DEPOSITS, the war system CONSUMES — roads never writes war state. Drop-when-empty. ──
+  const priorEmbassies = asObject(getSpatialLedger(worldState, EMBASSY_LEDGER_KEY));
+  if (Object.keys(priorEmbassies).length || embassyDeposits.length) {
+    /** @type {Record<string, unknown>} */
+    const nextEmbassies = {};
+    for (const key of Object.keys(priorEmbassies).sort(cmp)) {
+      const e = asObject(priorEmbassies[key]);
+      if (num(e.expiresTick, 0) > weekClock) nextEmbassies[key] = e; // still standing
+    }
+    for (const d of embassyDeposits) {
+      nextEmbassies[embassyPairKey(d.homeId, d.destId)] = {
+        homeId: d.homeId, destId: d.destId, venue: d.venue, envoyWeight01: d.envoyWeight01,
+        amplifier: d.amplifier, intensity01: d.intensity01, tick: now2,
+        expiresTick: weekClock + ROADS_TUNING.EMBASSY_SUIT_TTL_WEEKS,
+      };
+    }
+    const prevEmb = JSON.stringify(Object.keys(priorEmbassies).length ? priorEmbassies : null);
+    const nextEmb = JSON.stringify(Object.keys(nextEmbassies).length ? sortKeys(nextEmbassies) : null);
+    if (prevEmb !== nextEmb) {
+      nextWorldState = Object.keys(nextEmbassies).length
+        ? setSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY, sortKeys(nextEmbassies))
+        : dropSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY);
       changed = true;
     }
   }

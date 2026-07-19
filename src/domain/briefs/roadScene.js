@@ -51,7 +51,7 @@ function nameResolver(settlements) {
   return (id) => byId.get(String(id)) || String(id ?? '');
 }
 
-const PURPOSE_LABEL = Object.freeze({ observance: 'a tradition observance', trade: 'trade business', diplomacy: 'a diplomatic errand', ladder: 'a personal ambition' });
+const PURPOSE_LABEL = Object.freeze({ observance: 'a tradition observance', trade: 'trade business', diplomacy: 'a diplomatic errand', ladder: 'a personal ambition', embassy: 'a peace embassy', dominion: 'a dominion inspection', verification: 'a rumour verification' });
 /** Registry-driven purpose label (PURPOSE_KINDS + a generic fallback so R-8 purposes read
  *  gracefully, never a hardcoded-complete list). Pure. @param {unknown} kind @returns {string} */
 function purposeLabel(kind) {

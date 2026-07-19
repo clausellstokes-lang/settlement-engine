@@ -104,7 +104,11 @@ export function cmp(a, b) {
  */
 
 export const WHEREABOUTS_STATES = Object.freeze(['traveling', 'visiting', 'returning', 'hostage']);
-export const PURPOSE_KINDS = Object.freeze(['observance', 'trade', 'diplomacy', 'ladder']);
+// §11b R-8 THE EMBASSY EXTENSION extends the purpose registry additively (never a hardcoded
+// complete list): 'embassy' (the wartime peace suit) here in R8-a; 'dominion' + 'verification'
+// in R8-b. Display surfaces (roadScene/whereaboutsDisplay) read PURPOSE_KINDS + a generic
+// fallback, so a new kind reads gracefully without a rewrite.
+export const PURPOSE_KINDS = Object.freeze(['observance', 'trade', 'diplomacy', 'ladder', 'embassy']);
 export const THREAT_CLASSES = Object.freeze(['T1', 'T2', 'T3', 'T4']);
 
 // ── THE DORMANCY GATE (constitutional §1 law 2) — a virtual, defensively-read flag ─────
@@ -200,6 +204,21 @@ export const ROADS_TUNING = Object.freeze({
   CONVERT_DURATION_MAX: 2,
   CONVERT_DURATION_DENOM: 26, // durationFactor = clamp(termWeeks/this, MIN, MAX)
   RETURNED_CAPTIVE_CHANNEL_QUALITY: 0.6, // the quality-boosted channel the web consumes (§10)
+  // §11b R-8 THE EMBASSY EXTENSION (peace embassy · amplifier · venues · interception race)
+  EMBASSY_MAX_HOP_WEEKS: 3, // a peace suit routes to a war target within this many weeks
+  EMBASSY_ENVOY_IMPORTANCE_W: 0.5, // envoyWeight01 = this×importanceWeight + (1-this)×factionPower01
+  EMBASSY_RECEIVED_BASE: 0.5, // the court/parley receives the suit with this base probability
+  EMBASSY_RECEIVED_AMP: 0.35, // ...shifted ±this by the insult/humility amplifier (signed [-1,1])
+  EMBASSY_RECEIVED_MIN: 0.1, // clamp on receivedP (an insult can still, rarely, be heard)
+  EMBASSY_RECEIVED_MAX: 0.9, // ...and humility is never a certainty
+  EMBASSY_DETAIN_SHARE: 0.5, // of a NON-received suit, this share detains (hostage); rest turns home
+  EMBASSY_DETAIN_AMP: 0.4, // ...humility lowers the detain share, insult raises it (× -amplifier)
+  EMBASSY_SUIT_BASE: 0.4, // a heard suit's peace intensity01 = clamp01(this + GAIN×envoyWeight01)
+  EMBASSY_SUIT_GAIN: 0.6, // ...a greater envoy walks a stronger case into the peace machinery
+  EMBASSY_SUIT_TTL_WEEKS: 26, // a deposited suit stands in the roadsEmbassies ledger this long
+  EMBASSY_PEACE_W: 0.35, // sue_for_peace weight ×(1 + this×intensity01) — the consumption bound
+  HUNT_AMPLIFIER: 1.6, // an informed third-party hunter's T1 capture roll ×this (the race)
+  DEFAULT_FACTION_POWER: 55, // faction.power fallback when the envoy's faction is unreadable (0..100)
 });
 
 // ── §4 RISK COHERENCE — personality → riskTolerance01 ──────────────────────────
@@ -390,4 +409,76 @@ export function applyProsperityBandSteps(updates, index, deltas) {
  */
 export function roadsImportanceWeight(npc) {
   return clamp01(importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (npc)));
+}
+
+// ── §11b R-8 THE EMBASSY EXTENSION — the amplifier / insult-humility curve (pure) ──────
+/**
+ * The envoy's faction power STANDING in the suing settlement (0..1): the power of the
+ * governing/home court's faction the envoy belongs to. faction key = `.faction` (never
+ * `.name`); faction.power is a DERIVATION OUTPUT — READ ONLY, never written. Falls back to
+ * DEFAULT_FACTION_POWER when the envoy carries no readable faction. Pure.
+ * @param {unknown} homeSettlement @param {unknown} npc @returns {number}
+ */
+export function factionPowerStanding01(homeSettlement, npc) {
+  const factions = asObject(asObject(homeSettlement).powerStructure).factions;
+  const list = Array.isArray(factions) ? factions : [];
+  const key = String(asObject(npc).faction || '');
+  let power = /** @type {number} */ (ROADS_TUNING.DEFAULT_FACTION_POWER);
+  if (key) {
+    for (const f of list) {
+      if (String(asObject(f).faction || '') === key) { power = num(asObject(f).power, power); break; }
+    }
+  }
+  return clamp01(power / 100);
+}
+
+/**
+ * The envoy weight (0..1): a blend of ladder importance and faction power standing (§11b THE
+ * AMPLIFIER). Lowest-of-the-lowest ⇒ near 0 (an INSULT); highest-of-the-highest ⇒ near 1
+ * (HUMILITY). Pure.
+ * @param {{ importanceWeight01: number, factionPower01: number }} a @returns {number}
+ */
+export function embassyEnvoyWeight01(a) {
+  const w = ROADS_TUNING.EMBASSY_ENVOY_IMPORTANCE_W;
+  return clamp01(w * clamp01(a.importanceWeight01) + (1 - w) * clamp01(a.factionPower01));
+}
+
+/**
+ * THE INSULT/HUMILITY CURVE: the signed amplifier [-1, +1] from an envoy weight. envoyWeight01
+ * 0 ⇒ -1 (insult, worsens the suit); 1 ⇒ +1 (humility, strongest positive). Pure.
+ * @param {number} envoyWeight01 @returns {number}
+ */
+export function embassyAmplifier(envoyWeight01) {
+  return clampNum((clamp01(envoyWeight01) - 0.5) * 2, -1, 1);
+}
+
+/**
+ * The probability the court/parley RECEIVES the suit (envoy heard, returns home), shifted by
+ * the amplifier: humility raises it, insult lowers it. Clamped [MIN, MAX]. Pure.
+ * @param {number} amplifier signed [-1, 1] @returns {number}
+ */
+export function embassyReceivedP(amplifier) {
+  const T = ROADS_TUNING;
+  return clampNum(T.EMBASSY_RECEIVED_BASE + clampNum(amplifier, -1, 1) * T.EMBASSY_RECEIVED_AMP,
+    T.EMBASSY_RECEIVED_MIN, T.EMBASSY_RECEIVED_MAX);
+}
+
+/**
+ * Of a suit that is NOT received, the share that DETAINS (hostage) vs turns the envoy home:
+ * humility lowers the detain share, an insult raises it. Clamped [0, 1]. Pure.
+ * @param {number} amplifier signed [-1, 1] @returns {number}
+ */
+export function embassyDetainShare(amplifier) {
+  const T = ROADS_TUNING;
+  return clamp01(T.EMBASSY_DETAIN_SHARE - clampNum(amplifier, -1, 1) * T.EMBASSY_DETAIN_AMP);
+}
+
+/**
+ * A heard suit's peace INTENSITY (0..1) that the war machinery consumes: a greater envoy walks
+ * a stronger case in. Pure.
+ * @param {number} envoyWeight01 @returns {number}
+ */
+export function embassySuitIntensity01(envoyWeight01) {
+  const T = ROADS_TUNING;
+  return clamp01(T.EMBASSY_SUIT_BASE + T.EMBASSY_SUIT_GAIN * clamp01(envoyWeight01));
 }

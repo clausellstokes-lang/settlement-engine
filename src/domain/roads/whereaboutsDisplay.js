@@ -19,6 +19,7 @@ function placeOf(id, resolveName) {
 
 const PURPOSE_LABEL = Object.freeze({
   observance: 'a tradition', trade: 'trade business', diplomacy: 'a diplomatic errand', ladder: 'a personal matter',
+  embassy: 'a peace embassy', dominion: 'a dominion inspection', verification: 'confirming a rumour',
 });
 
 /**

@@ -173,4 +173,49 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} of ${x.home} must wait in ${x.dest} while the siege lasts.`,
     ],
   },
+  // ── EMBASSY DEPARTURE (§11b — the wartime peace suit sets out; quiet, but it travels) ──
+  embassyDeparture: {
+    headline: [
+      (x) => `${x.npc} of ${x.home} rides to sue ${x.dest} for peace`, // canonical
+      (x) => `${x.home} sends ${x.npc} to treat with ${x.dest}`,
+      (x) => `A peace embassy of ${x.home} takes the road to ${x.dest}`,
+      (x) => `${x.npc} carries ${x.home}'s suit for peace toward ${x.dest}`,
+    ],
+    summary: [
+      (x) => `${x.home} has dispatched ${x.npc} to sue ${x.dest} for peace — a suit carried down the war road.`, // canonical
+      (x) => `${x.npc}, an envoy of ${x.home}, is bound for ${x.dest} to seek terms and an end to the war.`,
+      (x) => `The court of ${x.home} sends ${x.npc} to the enemy at ${x.dest}, bearing an overture of peace.`,
+      (x) => `${x.npc} of ${x.home} is on the war road to ${x.dest}, sent to plead for peace.`,
+    ],
+  },
+  // ── EMBASSY RECEIVED (§11b — the suit is heard, road parley or court suit; the envoy comes home) ──
+  embassyReceived: {
+    headline: [
+      (x) => `${x.dest} receives the peace suit of ${x.home}`, // canonical
+      (x) => `${x.npc} is heard at ${x.dest}; the suit for peace stands`,
+      (x) => `${x.dest} hears out ${x.home}'s envoy`,
+      (x) => `A peace overture from ${x.home} is received at ${x.dest}`,
+    ],
+    summary: [
+      (x) => `${x.dest} has received ${x.npc} of ${x.home} and heard the suit for peace; the envoy rides home under escort.`, // canonical
+      (x) => `The peace suit of ${x.home} was heard at ${x.dest} — ${x.npc} turns homeward, the overture laid before the enemy court.`,
+      (x) => `${x.npc} of ${x.home} was received at ${x.dest}; a case for peace now stands with the enemy, and the envoy comes home.`,
+      (x) => `${x.dest} took in ${x.home}'s envoy and heard the plea for terms; ${x.npc} is sent home in honour.`,
+    ],
+  },
+  // ── EMBASSY REBUFFED (§11b — turned home; the suit was refused a hearing, never worse) ──
+  embassyRebuffed: {
+    headline: [
+      (x) => `${x.dest} turns ${x.home}'s peace envoy away`, // canonical
+      (x) => `${x.npc}'s suit for peace is refused at ${x.dest}`,
+      (x) => `${x.dest} will not hear ${x.home}'s overture`,
+      (x) => `${x.npc} is sent home from ${x.dest} unheard`,
+    ],
+    summary: [
+      (x) => `${x.dest} refused to hear ${x.npc} of ${x.home}; the peace suit is turned back on the road, the war unabated.`, // canonical
+      (x) => `The enemy court at ${x.dest} would not receive ${x.home}'s envoy — ${x.npc} rides home, the overture rebuffed.`,
+      (x) => `${x.npc} of ${x.home} was turned away from ${x.dest} unheard; the suit for peace failed at the gates.`,
+      (x) => `${x.dest} sent ${x.home}'s peace envoy home with nothing; ${x.npc} carries back only the refusal.`,
+    ],
+  },
 });
