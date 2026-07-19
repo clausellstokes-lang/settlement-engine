@@ -65,7 +65,7 @@ function makeClaimTable(mode: 'track' | 'absent' = 'track') {
 
 /** A recording stub of the service-role admin client. Captures every RPC/auth/table
  *  write so a test can assert what the handler did (or, for forgeries, did NOT do). */
-function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Record<string, unknown> | null } = {}) {
+function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Record<string, unknown> | null; rpcData?: Record<string, unknown> } = {}) {
   const claims = makeClaimTable(claimMode);
   const calls: { rpc: Array<{ fn: string; args: unknown }>; authUpdates: unknown[]; profileUpdates: unknown[] } = {
     rpc: [], authUpdates: [], profileUpdates: [],
@@ -131,7 +131,10 @@ function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Rec
         },
       };
     },
-    rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+    rpc: (fn: string, args: unknown) => {
+      calls.rpc.push({ fn, args });
+      return Promise.resolve({ data: opts.rpcData ? (opts.rpcData[fn] ?? null) : null, error: null });
+    },
   };
   return { calls, claims, moneyEvents, autoReloadUpdates, adminClient: () => client };
 }
@@ -2018,4 +2021,88 @@ Deno.test('auto-reload: payment_intent.payment_failed marks the attempt failed w
   assertEquals(res.status, 200);
   assertEquals(stub.autoReloadUpdates[0].vals.state, 'failed');
   assertEquals(stub.autoReloadUpdates[0].vals.failure_reason, 'card_declined');
+});
+
+// ── Surveyor limb (159, §5, slice M-4b) ──────────────────────────────────────
+
+Deno.test('surveyor checkout grants the ENTITLEMENT (no tier/auth write) + surveyor_start money_events', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/surv' });
+  const body = JSON.stringify({
+    id: 'evt_surv_co', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_surv', payment_status: 'paid', amount_total: 900, currency: 'usd',
+      subscription: 'sub_s', invoice: 'in_s', customer: 'cus_s',
+      metadata: { supabase_user_id: 'us', product: 'surveyor' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'grant_surveyor_entitlement');
+  assertEquals((grant!.args as Record<string, unknown>).p_user, 'us');
+  assertEquals((grant!.args as Record<string, unknown>).p_subscription_id, 'sub_s');
+  assertEquals((grant!.args as Record<string, unknown>).p_customer_id, 'cus_s');
+  // The entitlement IS the truth — NO auth metadata write, NO tier/restore RPC.
+  assertEquals(stub.calls.authUpdates.length, 0);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'surveyor_start');
+});
+
+Deno.test('THE ALLOWANCE TRAP: a Surveyor invoice mints NO 30-credit allowance + is a surveyor_renewal', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  try {
+    const stub = makeStub('track', { profile: { id: 'us', is_founder: false, stripe_subscription_id: 'sub_s', tier: 'free' } });
+    const body = JSON.stringify({
+      id: 'evt_surv_inv', type: 'invoice.paid',
+      data: { object: { id: 'in_surv', customer: 'cus_s', billing_reason: 'subscription_cycle',
+        subscription: 'sub_s', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+        hosted_invoice_url: 'https://stripe.test/surv-renew',
+        lines: { data: [{ price: { id: 'price_surveyor' } }] } } },
+    });
+    const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+    assertEquals(res.status, 200);
+    // THE PIN: no Cartographer monthly allowance for a Surveyor invoice.
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), false);
+    assertEquals(stub.moneyEvents.length, 1);
+    assertEquals(stub.moneyEvents[0].kind, 'surveyor_renewal');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+Deno.test('a Cartographer invoice with the premium price still mints the allowance (subscription_renewal)', async () => {
+  Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
+  Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
+  try {
+    const stub = makeStub('track', { profile: { id: 'up', is_founder: false, stripe_subscription_id: 'sub_p', tier: 'premium' } });
+    const body = JSON.stringify({
+      id: 'evt_prem_inv', type: 'invoice.paid',
+      data: { object: { id: 'in_prem', customer: 'cus_p', billing_reason: 'subscription_cycle',
+        subscription: 'sub_p', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+        hosted_invoice_url: 'https://stripe.test/prem-renew',
+        lines: { data: [{ price: { id: 'price_premium' }, period: { end: 1893456000 } }] } } },
+    });
+    const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+    assertEquals(res.status, 200);
+    assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits' && (c.args as Record<string, unknown>).source === 'monthly_allowance'), true);
+    assertEquals(stub.moneyEvents[0].kind, 'subscription_renewal');
+  } finally {
+    Deno.env.delete('STRIPE_PRICE_PREMIUM');
+    Deno.env.delete('STRIPE_PRICE_SURVEYOR');
+  }
+});
+
+Deno.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the Cartographer downgrade', async () => {
+  const stub = makeStub('track', { rpcData: { revoke_surveyor_entitlement_by_subscription: true } });
+  const body = JSON.stringify({
+    id: 'evt_surv_del', type: 'customer.subscription.deleted',
+    data: { object: { id: 'sub_s', customer: 'cus_s' } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'revoke_surveyor_entitlement_by_subscription'), true);
+  // Broke before the Cartographer path — no downgrade, no auth write.
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+  assertEquals(stub.calls.authUpdates.length, 0);
 });

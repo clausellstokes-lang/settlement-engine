@@ -227,6 +227,24 @@ async function grantMonthlyAllowanceIfNeeded(
     return profile;
   }
 
+  // THE ALLOWANCE PRICE-ID GATE (§5, §14 — load-bearing). The 30-credit monthly
+  // allowance is the CARTOGRAPHER (premium) perk ONLY. Without this, a Surveyor
+  // subscription invoice (also billing_reason subscription_create/cycle) would mint
+  // the Cartographer allowance. Require the invoice's first line's price id to be
+  // STRIPE_PRICE_PREMIUM. Read at call time so the check tracks the env. FAIL-OPEN
+  // for back-compat: an unset env OR an absent line price proceeds (logged) — the
+  // gate only ever SKIPS the allowance for an invoice we can positively identify as
+  // a NON-Cartographer plan.
+  const premiumPriceId = Deno.env.get('STRIPE_PRICE_PREMIUM') || '';
+  const firstLinePriceId = invoice.lines?.data?.[0]?.price?.id ?? null;
+  if (premiumPriceId && firstLinePriceId && firstLinePriceId !== premiumPriceId) {
+    console.log(`[stripe-webhook] invoice ${invoice.id} price ${firstLinePriceId} is not the Cartographer plan (${premiumPriceId}) — skipping the monthly Cartographer allowance`);
+    return profile;
+  }
+  if (!premiumPriceId || !firstLinePriceId) {
+    console.log(`[stripe-webhook] monthly-allowance price-id gate inactive for invoice ${invoice.id} (env=${Boolean(premiumPriceId)}, line=${Boolean(firstLinePriceId)}) — proceeding for back-compat`);
+  }
+
   // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
   // users who pre-date the column. We deliberately do NOT overwrite an existing
   // recorded id from an invoice: Stripe reorders/redelivers, so a late OLD-sub
@@ -1620,6 +1638,30 @@ async function dispatchStripeEvent(
           }
         }
         console.log(`single_dossier purchased: session=${session.id}`);
+      } else if (product === 'surveyor') {
+        // Surveyor subscription (#16). Grants an ENTITLEMENT (139) — NOT a
+        // profiles.tier value and NOT auth metadata (the sim never reads it; the
+        // client tier bit is Wave B #15's lane). Out-of-order guard verbatim-adapted
+        // from the premium branch: a dead subscription (delivery reorder) is skipped.
+        const surveyorSubId = typeof session.subscription === 'string'
+          ? session.subscription
+          : session.subscription?.id || null;
+        if (surveyorSubId) {
+          const liveSub = await stripeApi.subscriptions.retrieve(surveyorSubId);
+          if (liveSub.status === 'canceled' || liveSub.status === 'incomplete_expired') {
+            console.log(`[stripe-webhook] session ${session.id} completed but surveyor subscription ${surveyorSubId} is already ${liveSub.status} (out-of-order delete) — not granting user ${userId}`);
+            break;
+          }
+        }
+        const surveyorCustomerId = typeof session.customer === 'string' ? session.customer : session.customer?.id || null;
+        const { error: surveyorErr } = await supabase.rpc('grant_surveyor_entitlement', {
+          p_user: userId!,
+          p_source: 'subscription',
+          p_subscription_id: surveyorSubId,
+          p_customer_id: surveyorCustomerId,
+        });
+        if (surveyorErr) throw new Error(`Surveyor entitlement grant failed: ${surveyorErr.message}`);
+        console.log(`User ${userId} granted Surveyor entitlement (subscription ${surveyorSubId})`);
       } else if (credits > 0) {
         // Credit pack purchase. The RPC handles ledger, legacy counter,
         // compatibility table, and audit writes atomically; the wrapper makes
@@ -1644,6 +1686,7 @@ async function dispatchStripeEvent(
       if (product === 'premium') mirrorKind = 'subscription_start';
       else if (product === 'founder_lifetime') mirrorKind = 'founder_seat';
       else if (product === 'single_dossier') mirrorKind = 'single_dossier';
+      else if (product === 'surveyor') mirrorKind = 'surveyor_start';
       else if (credits > 0) mirrorKind = 'credit_pack';
       if (mirrorKind) {
         await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, mirrorKind, userId ?? null, credits);
@@ -1696,9 +1739,14 @@ async function dispatchStripeEvent(
       // MONEY LEDGER (156): mirror RENEWALS only (billing_reason 'subscription_
       // cycle'). The *_start row is written from the checkout session, so a
       // subscription_create invoice must NOT write a second row (a Checkout-created
-      // subscription fires both events). NEVER-throw.
+      // subscription fires both events). Discriminate Surveyor vs Cartographer by the
+      // line price id (#16). NEVER-throw.
       if (profile?.userId && invoice.billing_reason === 'subscription_cycle') {
-        await mirrorInvoiceMoneyEvent(supabase, invoice, profile.userId, 'subscription_renewal');
+        const surveyorPriceId = Deno.env.get('STRIPE_PRICE_SURVEYOR') || '';
+        const renewalLinePriceId = invoice.lines?.data?.[0]?.price?.id ?? null;
+        const renewalKind: MoneyEventKind = (surveyorPriceId && renewalLinePriceId === surveyorPriceId)
+          ? 'surveyor_renewal' : 'subscription_renewal';
+        await mirrorInvoiceMoneyEvent(supabase, invoice, profile.userId, renewalKind);
       }
       // REFERRAL (107): the referee's FIRST paid subscription invoice
       // (billing_reason 'subscription_create' — renewals are 'subscription_
@@ -1770,6 +1818,20 @@ async function dispatchStripeEvent(
       // Downgrade from premium
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = subscription.customer as string;
+
+      // SURVEYOR DISCRIMINATION (#16, §14 — must run BEFORE the premium path). A
+      // deleted subscription may be a Surveyor sub, not the Cartographer one. Probe
+      // the surveyor revoke keyed on THIS sub id first; if it revoked a row, this
+      // deletion WAS a Surveyor sub — break, leaving the Cartographer downgrade
+      // untouched (its behavioral pins stay green). A non-surveyor sub revokes
+      // nothing (returns false) and falls through to the premium logic below.
+      const { data: surveyorRevoked, error: surveyorRevokeErr } = await supabase
+        .rpc('revoke_surveyor_entitlement_by_subscription', { p_subscription_id: subscription.id });
+      if (surveyorRevokeErr) throw new Error(`Surveyor revoke probe failed: ${surveyorRevokeErr.message}`);
+      if (surveyorRevoked) {
+        console.log(`[stripe-webhook] subscription ${subscription.id} deleted → Surveyor entitlement revoked (not a Cartographer downgrade)`);
+        break;
+      }
 
       const profile = await findUserIdForStripeCustomer(supabase, customerId);
       if (profile?.userId) {

@@ -62,6 +62,9 @@ const PRICE_MAP: Record<string, string> = {
   premium:          Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
   founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME') || '',
   single_dossier:   Deno.env.get('STRIPE_PRICE_SINGLE_DOSSIER') || '',
+  // Surveyor subscription (#16). Unset env ⇒ '' ⇒ unpurchasable (LAW 1). Signed-in
+  // only (non-anonymous), subscription mode (below). Grants an ENTITLEMENT, not a tier.
+  surveyor:         Deno.env.get('STRIPE_PRICE_SURVEYOR') || '',
   // ── Legacy SKUs (kept resolvable so refund + replay flows work) ──────────
   credits_5:        Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
   credits_15:       Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
@@ -86,7 +89,7 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // Products that bill as a subscription (vs one-time payment). Everything
 // else uses Stripe's payment mode. Keep this in sync with TIERS.billing
 // in src/config/pricing.js.
-const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
+const SUBSCRIPTION_PRODUCTS = new Set(['premium', 'surveyor']);
 
 // Founder Lifetime is advertised as "X of 30 seats remaining". Keep in sync
 // with `seatLimit` in src/config/pricing.js and FOUNDER_SEAT_CAP in

@@ -31,6 +31,7 @@ Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_credits_25');
 Deno.env.set('STRIPE_PRICE_PREMIUM', 'price_premium');
 Deno.env.set('STRIPE_PRICE_SINGLE_DOSSIER', 'price_single_dossier');
 Deno.env.set('STRIPE_PRICE_FOUNDER_LIFETIME', 'price_founder_lifetime');
+Deno.env.set('STRIPE_PRICE_SURVEYOR', 'price_surveyor');
 
 const { handleCreateCheckout } = await import('./index.ts');
 
@@ -626,4 +627,31 @@ Deno.test('savePaymentMethod is ignored on a non-credit-pack payment product (fo
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
   );
   assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+// ── Surveyor product (#16, M-4b): subscription mode, signed-in only ───────────
+
+Deno.test('surveyor creates a SUBSCRIPTION-mode checkout session for a signed-in user', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'surveyor' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+  assertEquals(stripe.created[0].mode, 'subscription');
+  assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'surveyor');
+  assertEquals((stripe.created[0].metadata as Record<string, string>).credits, '0');
+  // subscription mode never attaches payment_intent_data (savePaymentMethod ignored).
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+Deno.test('surveyor requires authentication (an anonymous request is rejected)', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'surveyor' }),   // no Authorization header
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status >= 400, true);
+  assertEquals(stripe.created.length, 0);   // never reached Stripe
 });
