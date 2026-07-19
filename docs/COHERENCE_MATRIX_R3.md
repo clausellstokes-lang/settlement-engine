@@ -80,7 +80,7 @@ read, war saw coherence). Full list in the journal synthesis.
 Convergence (per the mandate) = zero must-fix findings AND zero gate-passing coherence gaps
 left unbuilt (built, or explicitly deferred-with-rationale above).
 
-## DEFERRED FEATURES — need NEW machinery (recorded, NOT loop-scheduled)
+## DEFERRED FEATURES → NOW COMMISSIONED (owner 2026-07-19 "build them all, highest caliber, pre-loop") — see DESIGN_DEEP_COUPLINGS.md
 These are MISSING_NO_FOUNDATION pairs: a coupling logic/intent wants, but which cannot be
 built from existing state on both sides — each needs a new subsystem/attribute, so each is
 a FUTURE FEATURE (owner-commissioned), outside the loop's four gates. Recorded here so they
@@ -101,7 +101,12 @@ are found, not re-discovered. Two are ALREADY deliberately deferred by their own
 4. **generosity×roads — third-party ransom payer.** Ransom is hard-wired to the captive's OWN
    settlement. Build = a payer≠home path + an obligation/gratitude write into the generosity ledger.
    DOES: ransoming/rescuing someone else's captive as a favor-economy move (place a freed rival in
-   your debt; earn an ally's credit). [PENDING-ROADS-FOLD]
+   your debt; earn an ally's credit). ⭐ OWNER REFINEMENTS 2026-07-19: (i) the
+   outcome is EITHER debt OR the freed captive becomes COMPROMISED for the payer (the
+   existing corruption foreign-patron shape — beneficiary = payer; personality/circumstance
+   weighted, the roads-conversion trait read); (ii) the captive can REFUSE a ransom not from
+   their own settlement (personality/circumstance — a proud/loyal captive won't be bought by
+   a rival; refusal keeps them captive, the no-death law intact). [PENDING-ROADS-FOLD]
 5. **generosity×rumor/intel — the intel SELL lane (ALREADY DEFERRED by design).**
    informationStatecraft.js:1179 parks the SELL verb for "future wiring / the DM-verb path,"
    explicitly warning against "a constant whisper-war hum." Build = a mover/DM-verb subsystem to

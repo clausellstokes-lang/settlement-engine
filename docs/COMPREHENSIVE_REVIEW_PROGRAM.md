@@ -1134,6 +1134,26 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — THE DEEP COUPLINGS WAVE: build ALL SIX
+new-machinery features, highest caliber, PRE-LOOP** ("I like all of them. build them
+thoroughly and to the highest caliber before the resurvey. build it all"). The six
+MISSING_NO_FOUNDATION seams from the coherence matrix are promoted from deferred to
+COMMISSIONED: (1) beliefs×migration demographic belief axis · (2) beliefs×traditions
+cultural belief axis · (3) informationStatecraft×ladder PER-NPC credibility · (4)
+generosity×roads THIRD-PARTY RANSOM + ⭐TWO OWNER REFINEMENTS: outcome = debt OR the
+freed captive becomes COMPROMISED for the payer (existing corruption foreign-patron
+shape, personality-weighted), AND the captive can REFUSE a ransom not from their own
+settlement (personality/circumstance; refusal keeps them captive — no-death intact) · (5)
+generosity×intel the SELL/GIFT lane (respect the design's OWN anti-'whisper-war-hum'
+caution — bounded/gated, never an autonomous spammer) · (6) naval×roads MARITIME journeys
+(sea leg-type + sea hazards: pirates/storms/blockades). DEPENDENCY REALITY (the architect
+resolves): #4 and #6 are ROADS-dependent → post-fold slices; #1/#2 want the migration→rumor
+carrier (a loop candidate) first — pull it forward or sequence. Constitution binds: dark
+flags + dormancy goldens + rng discipline + single-writer write-lists + hot-file ceilings +
+lit walkthroughs for every behavior-shift; the compromised-outcome rides the EXISTING web's
+own gates (zero new corruption machinery). FABLE ARCHITECT DISPATCHED → DESIGN_DEEP_COUPLINGS.md.
+HONESTY: largest post-roads commission; extends the pre-loop phase; #4/#6 land post-fold,
+much under the Opus successor per the continuity order.
 **⬛⭐ THE FRAUD-FIX LANE COMPLETE — the 3 P1 money bugs are DEAD (2026-07-19,
 claude/money-wave @ d0eacd45, FF-a..FF-d atop 9d971f5c; each a red-first pin proven to
 FAIL on the parent + PASS on the fix).** FF-a orphan-charge refund (a nominee's $99 for
