@@ -1153,6 +1153,39 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C16 THE SHELL COMPLETE (2026-07-19, claude/deep-craft-c16 @ 41ae4a1e, 4
+commits, NOT folded).** Modals→plates over warm-dim (machinery byte-identical) ·
+toasts→desk-edge slips (centering moved off transform to free it for the slip —
+position unchanged) · nav→small-cap stations (App.jsx NET-ZERO at its 732
+ceiling — one value-swap line) · chassis→the oc instrument base face
+(consumer census: Button 189 files · IconButton 49 · Segmented 12 · Card 3;
+count-neutral value-swap technique; contrast pinned; mobileTapFloor green).
+MANAGER SIGN-OFF (vetoable): +199 B eager measured per-commit (+5 nav string,
++194 primitive className/token strings — unavoidable in eager primitives;
+headroom ~989 B). JUDGMENTs vetoable: primary/aiSolid shadows flattened
+("print has no z-axis") · secondary/default faces white→parchment instrument
+(the highest-blast-radius call) · Segmented pill kept (strip = recomposition,
+deferred). Deferrals: Card de-shadow (blocked by the cardElevation ELEV[1]
+pin — burn-down + pin-owner) · kill-list would-be deletions (Dialog −2 radii
+−1 shadow, Toast −1 shadow) · raw-color BUDGET lowering. NEW GOTCHA re-proven:
+the kill-list greps COMMENT text (a comment containing "boxShadow" tripped the
+ceiling — reworded inline). Full suite 13,210 / the 5 + the pre-C3-e-base
+fixture red (cured at fold); final committed-HEAD gate 124/124.
+**⬛⭐⭐ THE PHASE-D CENSUS COMPLETE (2026-07-19, committed
+docs/PHASE_D_RESTORATION_CENSUS_2026-07-19.md @ b6320795).** ALL 150 PENDING
+restoration rows dispositioned, ZERO unclassified: 23 GENUINELY-OWED (the
+census §1 list — PDF cluster #18–21 the heaviest, CustomContent #12, pricing
+conversion affordances #15–16 incl. the anon-sign-in-lands-in-buy-wall
+regression) · 4 OWNER FLAGS (§2: backend-gated profile RPCs + visibility
+defaults · research-consent posture · AdminPanel user table = SECURITY FIX
+KEEP) · 11 deletions adjudicated (§3; CausalNarrativeTable M→D mislabel
+found) · ~123 safely closable (superseded/program-ruled/matches-master).
+Topology confirmed: ZERO PENDING rows were restored by slices (the slices'
+restoration work was the already-RESTORED create-page rows). Passing
+correctness flags → ROUND 3 pre-stock. DISPATCHED: the ledger TRANSCRIPTION
+agent (main tree, single-writer window) + RESTORATION SWEEP lane 1 (the PDF
+cluster #18–21 off 97aa4f3d; viewModel at its 1043 ceiling — leaf/net-zero
+law; shifts declared at the parked golden).
 **⬛⭐ C6–C12 THE PAGES COMPLETE (2026-07-19, claude/deep-craft-pages @ 55e4a69c,
 7 lettered commits P-a..P-g, NOT folded).** Pricing bench (differentiated
 top-rules, daggers, gold stamp) · Compendium lexicon (shared Tag/Card engine

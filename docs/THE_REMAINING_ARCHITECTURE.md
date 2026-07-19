@@ -381,7 +381,14 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   2026-07-19) — add try/finally restoration so a crashed run cannot damage the tree. ·
   WhatChangedPanel has NO live importer (tested at whatChangedPanel.test.jsx, mounted
   nowhere in src/ — found at C4c-d 2026-07-19; erratum-slip materials applied so it is
-  register-correct if wired) — adjudicate wire-or-remove.
+  register-correct if wired) — adjudicate wire-or-remove. · CENSUS PASSING FLAGS
+  (2026-07-19, census §5): SettlementsPanel dropped owner-keyed `cancelled` latch
+  (cross-user library-write guard) + reportError seam · WizardNewsPanel dropped
+  try/catch (paid button can stick busy) · HomeSampleDossier accent eyebrow fails AA ·
+  ~7 map files P-principle styling reversion review · en.js 6 master footer/legal keys
+  absent (verify footer) · dailyLifeLogic buildPrompt supersession unverified ·
+  realmArcSummary relocation check · Card de-shadow vs cardElevation pin · Segmented
+  strip recomposition.
 - FIX WAVES: one commit per finding-cluster, full gate at each wave end, ledger rows.
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 
@@ -444,7 +451,10 @@ TIER_GATE is anon|free|premium, Surveyor is per-task credits by the owner's own
 pricing copy; the door gates on premium via the isSurveyorTier chokepoint
 (one-line flip); owner clarifies what "only show for the surveyor premium" keys on · losing
 journey-legs media set deleted at the walk (bg vs journey) ·
-cluster-1 walk (NOW) · finished-site walk (at fold) · six deep-wave JUDGMENTs ·
+HowToUse direction (census #1: About-pivot vs master's 11-heading how-to — content
+verified not relocated) · research-consent opt-in→opt-out posture (census §2) ·
+backend-gated restores (profile-name RPCs migration-075 · productPrefs visibility
+defaults) · cluster-1 walk (NOW) · finished-site walk (at fold) · six deep-wave JUDGMENTs ·
 plate .orig deletions · open-bottom ladder amendment · maker's-name on About ·
 audit-spine write path (rec: edge endpoint; can ride ROUND 3) · founder-seat
 transfers (no-build stands) · LFS-vs-move for marketing masters · legal consult ·
