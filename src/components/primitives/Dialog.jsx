@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP,
+  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SP,
   RED, AMBER, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
@@ -22,6 +22,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
   return (
     <div
       role="presentation"
+      className="oc-m-warmdim"
       style={{
         position: 'fixed',
         inset: 0,
@@ -30,7 +31,10 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
         alignItems: 'center',
         justifyContent: 'center',
         padding: SP.lg,
-        background: 'rgba(27,20,8,0.46)',
+        // The room dims warm behind the plate (organic motion #10 warm-dim). The
+        // rgba is the token warm-dim value (58% ink-deepest, matching oc-m-warmdim);
+        // the class supplies the fade-in, reduced-motion-safe.
+        background: 'rgba(27,20,8,0.58)',
       }}
       onMouseDown={event => {
         if (event.target === event.currentTarget) onCancel?.();
@@ -47,9 +51,13 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           maxHeight: 'min(90vh, 680px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
-          borderRadius: R.lg,
+          // The plate is rule-framed, not rounded, and holds no z-axis — depth is
+          // the warm-dim ground, never elevation (organic craft §3/§6). The radius
+          // and shadow lines are kept as value-swaps so the kill-list stays exact;
+          // both are would-be burn-down deletions.
+          borderRadius: 0,
           background: CARD,
-          boxShadow: ELEV[3],
+          boxShadow: 'none',
         }}
       >
         <header style={{
@@ -64,7 +72,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           <div style={{
             width: 32,
             height: 32,
-            borderRadius: R.lg,
+            borderRadius: 0,
             border: `1px solid ${BORDER}`,
             background: CARD,
             display: 'flex',
