@@ -34,13 +34,16 @@
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions } from './traditionsKernel.js';
 import {
   roadsActive, ROADS_TUNING, isOffStage, roadsImportanceWeight, riskToleranceOf,
-  militaryQuality01, asObject, num, clampNum, clamp01, cmp,
+  militaryQuality01, protectionOf, exposureOf, captureProbability, termWeeksFor,
+  conversionFlawFactor, conversionProbability, applyLegitimacySteps,
+  asObject, num, clampNum, clamp01, cmp,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
 import {
   getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest, hopWeeks,
 } from '../spatial/distanceRead.js';
-import { chooseRoute } from '../spatial/embattlement.js';
+import { chooseRoute, embattlementLevel } from '../spatial/embattlement.js';
+import { currentRegion } from '../spatial/armyTransit.js';
 import { tradeNeighbours } from '../spatial/rumorNetwork.js';
 import { seasonForTick } from './worldState.js';
 import { createPRNG } from '../../kernel/prng.js';
@@ -52,6 +55,7 @@ import { militaryCapacityScalar } from './militaryStrength.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { ladderGoalOf } from '../townMap/ladderRead.js';
 import { npcLadderActive } from './npcLadderKernel.js';
+import { CORRUPTIBLE_FLAWS } from '../corruption.js';
 
 /**
  * @typedef {Object} RoadsAdvanceResult
@@ -154,6 +158,78 @@ function observanceMatch(destRecs, weekOfYear, hopWeeksOut) {
     }
   }
   return best;
+}
+
+// ── §7 THE GAUNTLET — hop location + threat reads ──────────────────────────────
+/**
+ * The path node the traveller occupies right now (§7): the dest while visiting; interpolated
+ * along the frozen path (forward outbound, reverse returning). Pure.
+ * @param {Record<string, unknown>} m @param {number} weekClock @param {unknown} digest @param {string|null} season
+ * @returns {string}
+ */
+function currentHopOf(m, weekClock, digest, season) {
+  const path = Array.isArray(m.path) ? /** @type {string[]} */ (m.path) : [];
+  if (!path.length) return str(m.destId);
+  if (m.phase === 'visiting') return str(m.destId);
+  const last = path.length - 1;
+  if (m.phase === 'outbound') {
+    const span = Math.max(1, num(m.legArrivalTick, 0) - num(m.departTick, 0));
+    const f = clamp01((weekClock - num(m.departTick, 0)) / span);
+    return String(path[Math.max(0, Math.min(last, Math.floor(f * last)))]);
+  }
+  // returning — reverse the frozen path.
+  const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), str(m.homeId), season), 1));
+  const start = num(m.legArrivalTick, 0) - retWeeks;
+  const g = clamp01((weekClock - start) / retWeeks);
+  return String(path[Math.max(0, Math.min(last, Math.floor((1 - g) * last)))]);
+}
+
+/**
+ * A hostile army column occupying `hop` (currentRegion match) whose home is hostile to the
+ * traveller's home ⇒ its home id; else null. Pure.
+ * @param {Record<string, unknown>} armyLedger @param {Record<string, unknown>} graph
+ * @param {Record<string, unknown>} worldState @param {string} hop @param {string} homeId @returns {string|null}
+ */
+function armyOnHop(armyLedger, graph, worldState, hop, homeId) {
+  for (const key of Object.keys(armyLedger).sort(cmp)) {
+    const rec = asObject(armyLedger[key]);
+    if (currentRegion(rec) !== hop) continue;
+    const armyHome = str(rec.armyId || rec.originId);
+    if (!armyHome || armyHome === homeId) continue;
+    const rt = relationshipTypeBetween(graph, worldState, armyHome, homeId);
+    if (rt === 'rival' || rt === 'cold_war' || rt === 'hostile'
+      || warFrontsInto(graph, homeId).includes(armyHome) || warFrontsFrom(graph, homeId).includes(armyHome)) {
+      return armyHome;
+    }
+  }
+  return null;
+}
+
+/**
+ * Is a host tradition window ACTIVE this week (guest-right, §7)? Pure.
+ * @param {unknown} hostRecs @param {number} weekOfYear @returns {boolean}
+ */
+function hostHasActiveWindow(hostRecs, weekOfYear) {
+  const recs = Array.isArray(hostRecs) ? hostRecs : [];
+  for (const r of recs) {
+    const rec = asObject(r);
+    if (rec.suppressedBy) continue;
+    const start = clampNum(num(asObject(rec.window).startWeekOfYear, 1), 1, 52);
+    const weeks = clampNum(num(asObject(rec.window).weeks, 1), 1, 2);
+    if (weekOfYear >= start && weekOfYear <= start + weeks - 1) return true;
+  }
+  return false;
+}
+
+/**
+ * Is the traveller's home at OPEN WAR with the host (§7 restraint)? Pure.
+ * @param {Record<string, unknown>} graph @param {string} homeId @param {string} hostId @returns {boolean}
+ */
+function atOpenWar(graph, homeId, hostId) {
+  return warFrontsInto(graph, hostId).includes(homeId)
+    || warFrontsFrom(graph, hostId).includes(homeId)
+    || warFrontsInto(graph, homeId).includes(hostId)
+    || warFrontsFrom(graph, homeId).includes(hostId);
 }
 
 // ── news beats (the traditionBeat idiom; impactKind 'roads') ───────────────────
@@ -322,10 +398,32 @@ function advanceLitRoads(args) {
     if (m.phase === 'outbound' && weekClock >= num(m.legArrivalTick, 0)) {
       m.phase = 'visiting';
       m.legArrivalTick = num(m.legArrivalTick, 0) + Math.max(1, num(m.stayWeeks, 1)); // visit-end week
-    } else if (m.phase === 'visiting' && !m.trappedBySiege && weekClock >= num(m.legArrivalTick, 0)) {
-      const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), homeId, season), 1));
-      m.phase = 'returning';
-      m.legArrivalTick = weekClock + retWeeks;
+    } else if (m.phase === 'visiting' && weekClock >= num(m.legArrivalTick, 0)) {
+      // A lifted siege releases a trapped guest (§7 T2 extension).
+      if (m.trappedBySiege && !warFrontsInto(graph, str(m.destId)).length) m.trappedBySiege = false;
+      if (!m.trappedBySiege) {
+        // ALL-ROADS-HOSTILE (§6): if every believed return route is refused, WAIT (receipt once).
+        const knownView = knownEmbattlementView(worldState, homeId);
+        const back = chooseRoute(digest, knownView, str(m.destId), homeId, num(m.riskTolerance01, 0.65), season);
+        const believedReturn = back && Array.isArray(back.path) ? num(back.danger, 0) : Infinity;
+        if (!back || believedReturn > num(m.riskTolerance01, 0.65) * ROADS_TUNING.DANGER_REFUSAL_CEILING) {
+          if (!m.waitReceipted) {
+            const s = freshSettlement(homeId); const seed = `wait.${mid}.${year}`;
+            newsEntries.push(roadsBeat({
+              sid: homeId, tick: now2, now, significance: 'minor',
+              headline: pickLine(ROADS_NEWS.trapped.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+              summary: pickLine(ROADS_NEWS.trapped.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+              seed, tags: ['wait'],
+            }));
+            m.waitReceipted = true;
+          }
+        } else {
+          const retWeeks = Math.max(1, num(hopWeeks(digest, str(m.destId), homeId, season), 1));
+          m.phase = 'returning';
+          m.legArrivalTick = weekClock + retWeeks;
+          m.waitReceipted = false;
+        }
+      }
     } else if (m.phase === 'returning' && weekClock >= num(m.legArrivalTick, 0)) {
       // ARRIVE HOME — resolve: drop the mission, mint the return beat, mirror cleared below.
       const s = freshSettlement(homeId);
@@ -341,13 +439,131 @@ function advanceLitRoads(args) {
     missions[mid] = m;
   }
 
-  // A live-npcKey set for cadence pruning (drop cadence stamps for vanished NPCs).
+  // A live-npcKey set for cadence pruning (drop cadence stamps for vanished NPCs). Ransoms
+  // prune the same way (a DM-removed hostage's record is dropped).
   const liveKeys = new Set();
   for (const roster of rosterByS.values()) for (const k of roster.keys()) liveKeys.add(k);
   for (const k of Object.keys(cadence)) if (!liveKeys.has(k)) delete cadence[k];
+  /** @type {Record<string, Record<string, unknown>>} carried + new hostage records */
+  const ransoms = {};
+  for (const rid of Object.keys(priorRansoms).sort(cmp)) {
+    const r = asObject(priorRansoms[rid]);
+    if (liveKeys.has(str(r.npcKey))) ransoms[rid] = r; // prune a vanished captive's record (§3)
+  }
 
-  // npcKeys currently away (have a surviving mission) — excluded from genesis.
+  // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
+  /** @type {Map<string, number>} legitimacy hits (capture home hit · T4 detain host hit) */
+  const legitimacyHits = new Map();
+  const bumpLegit = (id, d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
+  const armyLedger = asObject(getSpatialLedger(worldState, 'armyTransit'));
+  const occupations = asObject(asObject(worldState).occupations);
+  const priorTraditionsG = asObject(getSpatialLedger(worldState, 'traditions'));
+  for (const mid of Object.keys(missions).sort(cmp)) {
+    const m = missions[mid];
+    const homeId = str(m.homeId); const destId = str(m.destId); const phase = str(m.phase);
+    const npc = (rosterByS.get(homeId) || new Map()).get(str(m.npcKey));
+    if (!npc) continue;
+    const w = roadsImportanceWeight(npc.npc);
+    const protection = protectionOf({ importanceWeight: w, militaryQuality01: num(m.escort01, 1) });
+    const legWeeks = phase === 'visiting' ? num(m.stayWeeks, 1)
+      : phase === 'returning' ? Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1))
+        : Math.max(1, num(m.legArrivalTick, 0) - num(m.departTick, 0));
+    const exposure = exposureOf({ legWeeks, phase });
+    const hop = currentHopOf(m, weekClock, digest, season);
+    const fork = createPRNG(`${rngSeed}::roads-hazard:${mid}:${now2}`);
+
+    /** @type {{ cls: string, outcome: string, captorId: string }|null} */
+    let res = null;
+    // T1 — army on the route / occupation during the stay.
+    let t1Captor = null;
+    if (phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
+    if (!t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
+    if (t1Captor) {
+      const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
+      res = fork.random() < p ? { cls: 'T1', outcome: 'hostage', captorId: t1Captor } : { cls: 'T1', outcome: 'delayed', captorId: t1Captor };
+    }
+    // T2 — siege into the host during the stay.
+    if (!res && phase === 'visiting') {
+      const besiegers = warFrontsInto(graph, destId);
+      if (besiegers.length) {
+        const captorId = String([...besiegers].sort(cmp)[0]);
+        const p = captureProbability({ base: ROADS_TUNING.T2_BASE, exposure, protection, alpha: ROADS_TUNING.T2_ALPHA });
+        res = fork.random() < p ? { cls: 'T2', outcome: 'hostage', captorId } : { cls: 'T2', outcome: 'trapped', captorId };
+      }
+    }
+    // T3 — embattled roads (in-transit only).
+    if (!res && phase !== 'visiting') {
+      const level = embattlementLevel(worldState, hop);
+      if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
+        const captorId = idSet.has(hop) ? hop : destId;
+        const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
+        res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
+      }
+    }
+    // T4 — hostile reception (the host also rolls; self-balancing).
+    if (!res && phase === 'visiting') {
+      const rung = /** @type {Record<string, number>} */ (ROADS_TUNING.T4_RUNG)[relationshipTypeBetween(graph, worldState, homeId, destId)];
+      if (rung) {
+        const war = atOpenWar(graph, homeId, destId);
+        const restraint = war ? 1.0 : ROADS_TUNING.LEGITIMACY_RESTRAINT;
+        const guestRight = hostHasActiveWindow(priorTraditionsG[destId], weekOfYear) ? ROADS_TUNING.GUEST_RIGHT_MULT : 1.0;
+        const detentionP = clampNum(ROADS_TUNING.T4_DETENTION_PER_RUNG * rung * exposure / Math.max(0.01, protection) * restraint * guestRight, 0, ROADS_TUNING.CAPTURE_CAP);
+        const r = fork.random();
+        if (r < detentionP) { res = { cls: 'T4', outcome: 'hostage', captorId: destId }; if (!war) bumpLegit(destId, ROADS_TUNING.DETAIN_LEGIT_HIT); }
+        else if (r < detentionP * 2) res = { cls: 'T4', outcome: 'expelled', captorId: destId };
+        else res = { cls: 'T4', outcome: 'received', captorId: destId };
+      }
+    }
+    if (!res) continue;
+
+    const s = freshSettlement(homeId);
+    const interp = { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: destId, captor: res.captorId };
+    if (res.outcome === 'hostage') {
+      // MISSION → RANSOM (§8): the hostage goes off-stage (mirror hostage; the R-4 chokepoint).
+      const termWeeks = termWeeksFor(w);
+      const willConvert = fork.random() < conversionProbability({ flawFactor: conversionFlawFactor(npc.npc, CORRUPTIBLE_FLAWS), termWeeks });
+      ransoms[`ransom.${mid}`] = {
+        id: `ransom.${mid}`, npcKey: str(m.npcKey), npcName: str(m.npcName), homeId, captorId: res.captorId,
+        threatClass: res.cls, purposeKind: str(asObject(m.purpose).kind), missionId: mid,
+        startedTick: now2, termWeeks, remainingWeeks: termWeeks, conversionRolled: true, willConvert,
+      };
+      delete missions[mid];
+      bumpLegit(homeId, -(ROADS_TUNING.CAPTURE_LEGIT_BASE + Math.round(ROADS_TUNING.CAPTURE_LEGIT_SCALE * w)));
+      const seed = `capture.${mid}`;
+      newsEntries.push(roadsBeat({
+        sid: homeId, tick: now2, now, significance: 'major',
+        headline: pickLine(ROADS_NEWS.capture.headline, seed, interp),
+        summary: pickLine(ROADS_NEWS.capture.summary, seed, interp),
+        seed, tags: ['capture', res.cls],
+      }));
+    } else if (res.outcome === 'delayed') {
+      m.legArrivalTick = num(m.legArrivalTick, 0) + 1;
+      if (!m.delayReceipted) {
+        m.delayReceipted = true; const seed = `delay.${mid}.${now2}`;
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed'] }));
+      }
+    } else if (res.outcome === 'trapped') {
+      if (!m.trappedBySiege) {
+        m.trappedBySiege = true; const seed = `trap.${mid}`;
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.trapped.headline, seed, interp), summary: pickLine(ROADS_NEWS.trapped.summary, seed, interp), seed, tags: ['trapped'] }));
+      }
+    } else if (res.outcome === 'robbed') {
+      if (!m.robbedReceipted) {
+        m.robbedReceipted = true; const seed = `rob.${mid}.${now2}`;
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.robbed.headline, seed, interp), summary: pickLine(ROADS_NEWS.robbed.summary, seed, interp), seed, tags: ['robbed'] }));
+      }
+    } else if (res.outcome === 'expelled') {
+      const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
+      m.phase = 'returning'; m.legArrivalTick = weekClock + retWeeks; m.expelled = true;
+      const seed = `expel.${mid}`;
+      newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.expulsion.headline, seed, interp), summary: pickLine(ROADS_NEWS.expulsion.summary, seed, interp), seed, tags: ['expulsion'] }));
+    }
+    // 'received' — the visit proceeds under strain; no state change, no news (not a §12 kind).
+  }
+
+  // npcKeys away (surviving missions) or hostage (ransoms) — both excluded from genesis.
   const awayKeys = new Set(Object.values(missions).map((m) => str(asObject(m).npcKey)));
+  const hostageKeys = new Set(Object.values(ransoms).map((r) => str(asObject(r).npcKey)));
   const abroadByHome = new Map();
   for (const m of Object.values(missions)) {
     const h = str(asObject(m).homeId);
@@ -380,8 +596,8 @@ function advanceLitRoads(args) {
     /** @type {Array<{ npcKey: string, npc: Record<string, unknown>, w: number, weight: number, dest: string, purpose: { kind: string, ref: string }, major: boolean, hopWeeksOut: number }>} */
     const candidates = [];
     for (const [npcKey, { npc }] of [...roster.entries()].sort((x, y) => cmp(x[0], y[0]))) {
-      if (isOffStage(npc)) continue; // stasis / hostage
-      if (awayKeys.has(npcKey)) continue; // already abroad
+      if (isOffStage(npc)) continue; // stasis / hostage (via the mirror)
+      if (awayKeys.has(npcKey) || hostageKeys.has(npcKey)) continue; // abroad OR a hostage this tick
       const w = roadsImportanceWeight(npc);
       if (w < ROADS_TUNING.MIN_TRAVEL_WEIGHT) continue; // minor/nameless never travel
       if (num(cadence[npcKey], -Infinity) >= year) continue; // already travelled this year
@@ -478,6 +694,14 @@ function advanceLitRoads(args) {
       sinceTick: num(mm.departTick, 0), expectedReturnTick: expectedReturnWeek(mm, digest, season), missionId: str(mm.id),
     });
   }
+  // Hostages (from ransoms) go OFF-STAGE: whereabouts.state='hostage', placeId=captor (§8).
+  for (const r of Object.values(ransoms)) {
+    const rr = asObject(r);
+    desired.set(str(rr.npcKey), {
+      state: 'hostage', placeId: str(rr.captorId), purposeKind: str(rr.purposeKind),
+      sinceTick: num(rr.startedTick, 0), expectedReturnTick: null, missionId: str(rr.missionId),
+    });
+  }
 
   let nextUpdates = settlementUpdates;
   let cloned = false;
@@ -508,12 +732,20 @@ function advanceLitRoads(args) {
     nextUpdates[ui] = { ...nextUpdates[ui], settlement: { ...asObject(freshSettlement(sid)), npcs: nextNpcs } };
   }
 
+  // ── §7/§9 legitimacy hits (capture home hit · T4 detain host hit) via the bounded writer ──
+  if (legitimacyHits.size) {
+    const li = new Map();
+    nextUpdates.forEach((u, i) => li.set(str(u.saveId), i));
+    const applied = applyLegitimacySteps(nextUpdates, li, legitimacyHits);
+    if (applied !== nextUpdates) { nextUpdates = applied; cloned = true; }
+  }
+
   // ── PERSIST the sidecar (drop-when-empty; codepoint-sorted, byte-stable) ──
   let nextWorldState = worldState;
   let changed = cloned || newsEntries.length > 0;
   const persisted = {};
   if (Object.keys(missions).length) persisted.missions = sortKeys(missions);
-  if (Object.keys(priorRansoms).length) persisted.ransoms = sortKeys(priorRansoms);
+  if (Object.keys(ransoms).length) persisted.ransoms = sortKeys(ransoms);
   if (Object.keys(cadence).length) persisted.cadence = sortKeys(cadence);
   const prevSerialized = JSON.stringify(Object.keys(priorRoads).length ? priorRoads : null);
   const nextSerialized = JSON.stringify(Object.keys(persisted).length ? persisted : null);

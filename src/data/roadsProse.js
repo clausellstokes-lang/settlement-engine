@@ -53,4 +53,79 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} has ridden back into ${x.home} from ${x.dest}.`,
     ],
   },
+  // ── CAPTURE (MAJOR — names the road and the captor, §9) ──
+  capture: {
+    headline: [
+      (x) => `${x.npc} of ${x.home} is taken on the ${x.dest} road`, // canonical
+      (x) => `${x.npc} is seized by ${x.captor} on the road`,
+      (x) => `${x.captor} holds ${x.npc} of ${x.home}`,
+      (x) => `${x.npc} is captured making for ${x.dest}`,
+    ],
+    summary: [
+      (x) => `${x.npc}, an envoy of ${x.home} bound for ${x.dest}, has fallen into the hands of ${x.captor} — a ransom will be raised.`, // canonical
+      (x) => `On the road to ${x.dest}, ${x.npc} of ${x.home} was taken by ${x.captor}; ${x.home} must ransom them home.`,
+      (x) => `${x.captor} has seized ${x.npc} of ${x.home} en route to ${x.dest}; the price of return is being reckoned.`,
+      (x) => `${x.npc} of ${x.home} is a captive of ${x.captor}, taken on the ${x.dest} road.`,
+    ],
+  },
+  // ── EXPULSION (NOTABLE — turned back at the gates) ──
+  expulsion: {
+    headline: [
+      (x) => `${x.captor} turns ${x.npc} away at the gates`, // canonical
+      (x) => `${x.npc} of ${x.home} is refused entry to ${x.dest}`,
+      (x) => `${x.captor} sends ${x.npc} back to ${x.home}`,
+      (x) => `${x.npc} is barred from ${x.dest}`,
+    ],
+    summary: [
+      (x) => `${x.captor} would not receive ${x.npc} of ${x.home}; the envoy is turned back on the ${x.dest} road, the errand failed.`, // canonical
+      (x) => `Denied at the gates of ${x.dest}, ${x.npc} of ${x.home} rides home with nothing to show.`,
+      (x) => `${x.captor} refused ${x.npc} of ${x.home} entry; the mission to ${x.dest} is broken off.`,
+      (x) => `${x.npc} of ${x.home} was turned away from ${x.dest} and sent back the way they came.`,
+    ],
+  },
+  // ── ROBBED (texture — journey continues) ──
+  robbed: {
+    headline: [
+      (x) => `${x.npc} is set upon on the ${x.dest} road`, // canonical
+      (x) => `Brigands waylay ${x.npc} near ${x.dest}`,
+      (x) => `${x.npc} loses baggage on the road to ${x.dest}`,
+      (x) => `${x.npc} is harried on the ${x.dest} road`,
+    ],
+    summary: [
+      (x) => `${x.npc} of ${x.home} was set upon on the embattled road to ${x.dest} but pressed on, lighter of purse.`, // canonical
+      (x) => `The road to ${x.dest} used ${x.npc} of ${x.home} roughly, though the journey goes on.`,
+      (x) => `${x.npc} of ${x.home} came through the ${x.dest} road robbed but unbowed.`,
+      (x) => `Waylaid short of ${x.dest}, ${x.npc} of ${x.home} lost baggage but not the road.`,
+    ],
+  },
+  // ── DELAYED (texture — an army on the road holds them a week) ──
+  delayed: {
+    headline: [
+      (x) => `${x.npc} is held up on the ${x.dest} road`, // canonical
+      (x) => `${x.npc} loses a week making for ${x.dest}`,
+      (x) => `An army on the road delays ${x.npc}`,
+      (x) => `${x.npc} is slowed on the ${x.dest} road`,
+    ],
+    summary: [
+      (x) => `A column on the ${x.dest} road forced ${x.npc} of ${x.home} to wait it out — a week lost, no more.`, // canonical
+      (x) => `${x.npc} of ${x.home} lost a week to a marching army on the ${x.dest} road.`,
+      (x) => `Held off the ${x.dest} road by soldiers, ${x.npc} of ${x.home} was delayed a week.`,
+      (x) => `${x.npc} of ${x.home} waited out a passing army and lost a week to ${x.dest}.`,
+    ],
+  },
+  // ── TRAPPED / WAIT (texture — the siege or the hostile roads keep them abroad) ──
+  trapped: {
+    headline: [
+      (x) => `${x.npc} is caught in ${x.dest} under siege`, // canonical
+      (x) => `${x.npc} cannot leave ${x.dest}`,
+      (x) => `${x.npc} waits out the ${x.dest} siege`,
+      (x) => `${x.npc} is shut inside ${x.dest}`,
+    ],
+    summary: [
+      (x) => `With ${x.dest} beset, ${x.npc} of ${x.home} cannot take the road home until the lines lift.`, // canonical
+      (x) => `${x.npc} of ${x.home} is trapped in ${x.dest} for as long as the siege holds.`,
+      (x) => `The siege of ${x.dest} keeps ${x.npc} of ${x.home} abroad, waiting for the road to open.`,
+      (x) => `${x.npc} of ${x.home} must wait in ${x.dest} while the siege lasts.`,
+    ],
+  },
 });
