@@ -367,6 +367,16 @@ A+ at this stage, rinse and repeat.")
   clean, the loop CLOSES with a completion row. Dimensions whose A+ is
   structurally unreachable at this stage (needs real users / the soak / launch)
   carry their ceiling NAMED, never silently regraded.
+- ⬛ THE STANDARD ITSELF IS AMENDABLE UPWARD (owner, 2026-07-19: "if you need to
+  ammend the A+ standard so that it is maximally expressed, please do so. This
+  is under my no compromises directive"): cycle 1 opens with a STANDARD AUDIT —
+  the A+ rubric (A_PLUS_ROADMAP · the depth standard's five columns · THE EIGHT
+  CROWNS) is itself reviewed for under-expression and AMENDED UP wherever it is
+  softer than the best conceivable expression of that dimension; amendments are
+  recorded vetoably in the ledger and become the loop's grading law. The
+  standard RATCHETS — amendments may only raise it, never lower it; a dimension
+  passing the old rubric but failing the amended one is a FINDING, not
+  grandfathered.
 - OWNER GATES SURVIVE EVERY CYCLE: no deploy · no db push · no golden regen
   (THE ONE REGEN stays pre-signed and separate) · no budget raises · no
   paid-surface behavior changes beyond frozen designs · taste/parked items stay
