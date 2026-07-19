@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19, "do that!") — THE STEWARDSHIP RULING: the founder
+dormancy question is CLOSED against inactivity forfeiture.** The lifetime promise stays
+whole; reclamation is voluntary-first, abandonment-last: (1) STANDING BUYBACK $49.50 any
+time via the account page (seat returns to the pool, resellable at $99 — same net as a
+transfer, zero taking); (2) DORMANCY NUDGE at 18 months of no sign-in (both exits offered;
+last-activity read from M-9's session table — free); (3) ABANDONMENT only at 5 years
+unreachable + 90-day notice sequence any sign-in aborts → escheat + $49.50 held as
+CLAIMABLE CREDIT (never fired at a dead card; no unclaimed-property exposure). The
+owner's 2-year-forfeiture proposal was recommended against (breaks the "lifetime"
+positioning, collides with the estate amendment, refund rail structurally unreliable at
+2+ years) and the owner adopted the recommendation. DESIGN_MONEY_WAVE.md amended in
+place: §6.8 + slice M-10 + fraud probe 10 (buyback abuse) + §12 terms (buyback +
+abandonment clauses; license NEVER revoked for mere non-use) + §13 Q1 narrowed to
+deleted-account orphans only. Committed this commit.
 **⬛⭐ THE MONEY WAVE DESIGN IS FROZEN (2026-07-19) — docs/DESIGN_MONEY_WAVE.md
 committed (this commit).** The Fable architect lane delivered the full wave design per the
 two owner rulings (@ 15ba006c transfers-pre-launch + @ 4fd9a927 single session): NINE

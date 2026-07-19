@@ -446,6 +446,10 @@ A+ at this stage, rinse and repeat.")
   (claim/validate races; eviction mid-transfer freezes the seat machine).
   Honest limit recorded: deters SIMULTANEOUS sharing only; serial sharing
   is untouched by any session policy — tighten only on post-launch evidence.
+  ⬛ STEWARDSHIP RULING (owner 2026-07-19): NO inactivity forfeiture ever —
+  lifetime stays whole; instead $49.50 standing buyback + 18-month dormancy
+  nudge + 5-year-unreachable abandonment (90d notices, claimable credit,
+  escheat). DESIGN_MONEY_WAVE §6.8 / slice M-10.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +

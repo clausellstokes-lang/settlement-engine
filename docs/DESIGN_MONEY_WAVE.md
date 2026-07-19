@@ -5,6 +5,9 @@
 ### wired, dark until the owner supplies keys/config). Code base of record: the
 ### composite worktree, claude/the-composite @ aad6265e. Recon receipts inline
 ### (file:line anchors verified against that tip).
+### AMENDED 2026-07-19 (owner ruling "do that!"): §6.8 THE STEWARDSHIP LIMB —
+### lifetime promise UNTOUCHED; 5-year abandonment · $49.50 standing buyback ·
+### dormancy nudge. Slice M-10; terms §12 + Q1 updated.
 
 ## §0 FROZEN LAWS (violating any of these is a design defect)
 1. KEY-INERT EVERYWHERE: every new money surface ships fully wired and DARK.
@@ -580,6 +583,40 @@ transfer request.
   live-transfer race UNREPRESENTABLE by timing; the goodwill-refund path above
   is the only survivor and it is serialized.
 
+6.8 THE STEWARDSHIP LIMB (slice M-10; owner ruling 2026-07-19 — the dormancy
+question resolved AGAINST inactivity forfeiture: the lifetime promise stays
+whole; reclamation is voluntary-first, abandonment-last):
+- STANDING BUYBACK: any founder may sell their seat back to the company for
+  $49.50, any time, via the account transfer panel. Flow (challenge-code
+  confirmed, the 6.2 idiom; refused while a live transfer case exists or
+  security_status ≠ normal): claim-once seat release → lineage row
+  ('buyback' — append, never erase) → holder cleared (seat returns to the
+  unclaimed pool; cap intact; resellable at $99) → is_founder=false + the 6.5
+  subscribed-ex-founder tier logic → a founder_seat_buybacks row (id, seat_id,
+  user_id, state pending_payout/paid/held, amount_cents 4950, connect fields;
+  rides the 137 rewrite) → payout via the SAME Connect release in the
+  due-runner (idempotencyKey `buyback-${id}`; Connect absent → 'held' + seam
+  reminder — LAW 1 posture identical to transfer payouts) → money_events kind
+  'seat_buyback' (ADD to 157's kind check). Master switch: system_config
+  'founder_buyback' {enabled:false} seeded by 160.
+- DORMANCY NUDGE (operational, not a term): the due-runner sweeps seats whose
+  holder's last sign-in (current_account_session.updated_at; missing row =
+  pre-M9 session → fall back to profiles.updated_at, never nudge on absent
+  data) is older than 18 months → 'seat_dormancy_nudge' email through the seam
+  presenting BOTH exits (nominate a transfer · take the buyback), at most once
+  per 12 months (last_dormancy_nudge_at on founder_seats, rides the 137
+  rewrite).
+- ABANDONMENT (the promise-preserving reclamation of last resort; thresholds
+  in system_config, defaults: dormant_years 5 · notice_window_days 90 ·
+  notice_count 3): seats past the dormancy threshold enter a notice sequence
+  (stamped abandonment_notice_started_at, rides 137); ANY sign-in during the
+  window clears the stamp; unresponsive at window end → security_status
+  'escheat' + holder cleared + lineage row 'abandonment' + money_events
+  'refund_note' with metadata {claimable_cents:4950} — the $49.50 is HELD AS A
+  CLAIMABLE CREDIT (support-mediated claim; never fired at a years-dead card).
+  Escheat seats are NEVER auto-resold (Q1). The sweep will fire for no one
+  before ~2031; it exists now under the build-completeness doctrine.
+
 ## §7 M-9 — SINGLE CONCURRENT SESSION, last-login-wins (slice M-9)
 One active session per account, uniform across tiers (free included). A new
 sign-in ALWAYS succeeds and supersedes the previous session — never blocked.
@@ -751,8 +788,18 @@ flake-isolation protocol; every JUDGMENT labeled vetoable in slice reports)
   pins green) · d) client claim/validate/evict + THE LIFECYCLE PIN (7.3) +
   store actions + registry + regen · e) Active-session panel + seam email +
   analytics enrich · f) fraud-charter session probes (§10).
+- M-10 STEWARDSHIP: buyback + nudge + abandonment (§6.8). Commits: a) 137/157/
+  160 deltas (buybacks table, stewardship stamps, kind, switch seed) + RPC
+  probes (buyback claim-once; mid-case refusal; clawback-race ordering) ·
+  b) buyback action + panel affordance + payout release reuse (double-payout
+  idem test) · c) due-runner dormancy/abandonment sweeps + sign-in-clears
+  test + seam templates. DONE-WHEN: buyback round-trip executed with Connect
+  absent parking at 'held'; abandonment sweep on seeded stale data escheats
+  exactly once and any sign-in aborts it (executed).
 ORDERING: M-1 → M-2/M-3/M-4 (parallel-safe) → M-5 → M-6 → M-7 → M-8; M-9's
-a/b/c land before M-6 (the transfer function consumes sessionGate). Full-suite
+a/b/c land before M-6 (the transfer function consumes sessionGate); M-10
+after M-8 (it consumes the payout limb + due-runner) and after M-9a (it reads
+the session table). Full-suite
 fold gate at lane end (the focused-gates blind spot is proven — owner memory).
 
 ## §10 THE FRAUD-PASS CHARTER (MANDATORY before the loop — a dedicated Fable
@@ -788,6 +835,10 @@ The pass executes attacks, not reviews prose. Minimum probe set:
 9. AUTO-RELOAD ABUSE: settings raced against spend (cap holds under concurrent
   crossings); a forged low-balance poke (there is none — the trigger is
   server-side only); PI metadata spoofing (purpose+attempt binding checked).
+10. BUYBACK ABUSE: buyback during a live case (refused); goodwill-clawback
+  racing a buyback (no double recovery — the release ordering probe); replayed
+  buyback confirm (claim-once); due-runner replay on a buyback payout (one
+  Stripe transfer object).
 
 ## §11 THE ACTIVATION RUNBOOK (owner steps, in order; everything before step 4
 is safe on day one — no money surface lights)
@@ -840,6 +891,14 @@ TERMS BUNDLE (drafted for counsel; encode the four ratified amendments):
   and unprotected (amendment c).
 - Death or incapacity of a holder: succession is handled case-by-case through
   an official estate process — contact support (amendment a).
+- STANDING BUYBACK: the company maintains a standing offer to repurchase any
+  seat for $49.50 through the account page; repurchased seats return to the
+  unclaimed pool.
+- ABANDONMENT (the license is NEVER revoked for mere non-use): a seat whose
+  account has been inactive and unreachable for five (5) years, and which
+  remains unresponsive to repeated notices over a further ninety (90) days, is
+  deemed abandoned and returns to the company; $49.50 is held for the former
+  holder as a claimable credit.
 - Payouts to outgoing holders are made via Stripe Connect 14-30 days after
   transfer completion and require the holder to complete Stripe onboarding.
 - The company may pause, reverse, or refuse a transfer for security, fraud, or
@@ -852,10 +911,10 @@ and the Stripe Tax question.)
 
 ## §13 OPEN QUESTIONS (owner-gated; each ships with a recommendation and a safe
 default that requires no answer to build)
-1. ESCHEAT: a deleted/abandoned founder account leaves an orphaned seat
-  (holder SET NULL). REC: seat parks at security_status='escheat' — never
-  auto-resold, released only by an owner decision (estate/abandonment policy).
-  DEFAULT BUILT: escheat parking; no resale path.
+1. ESCHEAT — PARTIALLY RULED 2026-07-19: abandonment policy is now DEFINED
+  (§6.8: 5y + 90d notices → escheat + claimable $49.50). REMAINING open sliver:
+  DELETED-account orphan seats (holder SET NULL) still park at escheat with no
+  resale path, released only by owner decision (estate process).
 2. SURVEYOR PRICE + BILLING SHAPE: monthly price set in Stripe by the owner;
   code is price-blind. DEFAULT: subscription mode, no trial.
 3. SURVEYOR MONTHLY MANAGED-CREDIT ALLOWANCE: does the Surveyor sub include
