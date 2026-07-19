@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ROADS R-1..R-4 CLOSED — THE CLOSER OVERTURNED THE FLAKE HYPOTHESIS (2026-07-19,
+claude/the-roads @ fa0bd2e7, RC-a..RC-f atop b059e808).** The predecessor's "23 failed
+files = load flakes" was WRONG for SIX: real, deterministic roads-introduced
+registration/hygiene defects, each isolated + base-compared, each FIXED: RC-a ledger-key
+registration (roads + roadsReturnedCaptives) · RC-b dead significance tier minor→notable
+· RC-c impactKind 'roads' registered (unvoiced, tradition precedent) · RC-d 3 any-holes
+retyped (JSDoc-only) · RC-e militaryStrength consumer allowlist · RC-f local clamp01 →
+kernel/math (baseline at ceiling 61/61). DEFINITIVE SHARDED RE-RUN: 13,742 tests, 4
+failures = EXACTLY the parked goldens (zero flakes at halved parallelism). All §19
+receipts EXECUTED and quoted: dormancy golden all three blocks · the 3-year lit run
+(purposes, refusal by risk-tolerance, clean returns, NO-DEATH) · capture→ransom→release
+with roster conservation · web-lit/web-dark conversion gating · the census ratchet ·
+closure 1,041,061 = base +63 B minifier noise, zero roads code eager (Law 11 holds).
+§17 write-list verified: only the two sanctioned §8 belts touch participation.
+⚠ CONFIRMED FOLD-BLOCKER (pre-existing at b059e808, closer-added zero): 35
+typecheck:domain:strict errors in the lane's own files (roadsKernel 30 · roads/state 4 ·
+pulseKernel 1) — JSDoc-erasable, byte-neutral, a distinct slice. FINAL ROADS DISPATCH
+LAUNCHED: the STRICT-CLEAN slice first (byte-neutrality proven by golden re-run), then
+R-5 party ops · R-6 travelers overlay · R-7 road scene + the §19 12-year lit walkthrough
+and adversarial self-audit. HOUSEKEEPING QUEUED: MEMORY.md ~20 KB nearing the 24 KB read
+limit — a consolidate-memory pass for the manager/successor (deliberately not rushed by
+a lane).
 **⬛⭐ MONEY WAVE RESUME LANDED — M-8 + M-6f + M-9d (2026-07-19, claude/money-wave @
 91a6b2df, 3 lettered commits atop 4dfa4506).** M-8 THE PAYOUT LIMB COMPLETE: the
 predecessor's in-flight WIP read-first and carried to done; REAL GAP FOUND AND FIXED —
