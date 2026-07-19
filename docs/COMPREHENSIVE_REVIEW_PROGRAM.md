@@ -1153,6 +1153,18 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER RULING (2026-07-19) — THE ESCALATION CLAUSE (staffing amendment):**
+"where you deem it necessary, but not the default, implementation for difficult
+tasks can upgrade to fable before going back to opus. Judge on each case by case."
+Opus 4.8 stays the standing implementer/verifier tier; the manager may staff a
+FABLE implementer for a specific difficult task, case-by-case, reason recorded,
+reverting to Opus after. Manager's criteria (recorded): judgment density + blast
+radius + architectural ambiguity — pre-identified candidates: fold conflict
+reconciliation · the master merge execution · ROUND 3 adversarial verification of
+subtle engine findings · C13 ONE DOOR consolidation · the soak combinatorial
+harness design. Mechanical/spec-clear slices never escalate. Also 2026-07-19,
+standing reporting order: every commit report carries the updated remaining-work
+table (memory: owner-reporting-table-preference).
 **⬛⭐ T-4 RELATIONS LANDED (2026-07-19, claude/traditions @ dbd3eb2f, 2 commits) —
 CULTURES NOW INTERACT, DARK.** 70d12d40 T4-a: §8 imposition/suppression/restoration
 in a new pure leaf src/domain/traditions/relations.js — occupation ledger sole
