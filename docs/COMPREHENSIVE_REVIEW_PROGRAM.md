@@ -1153,6 +1153,20 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER ORDER (2026-07-19) — THE CALIBER SWEEP: "go back and do all of those
+decisions to the objectively best architecture, quality and caliber."** The
+audit's five conversions execute NOW, not at cycle 1: (1) Segmented → the
+design sample's divider-strip recomposition (a11y two-channel active state
+preserved by construction, not by pill); (2) Card de-shadow per "print has no
+z-axis" WITH the cardElevation pin deliberately retargeted (named, justified —
+the pin pinned the pre-law state); (3) AdvanceReport tinted chips → source-
+stamp re-tone; (4) THE THROTTLED-PERF HARNESS BUILT (CPU-throttled TTI/INP
+measurement, scripted + recorded — no longer deferrable); (5) WorldMapStage
+scrims tokenized. Of the defended three: the rename is complete (nothing owed);
+H3 stays spec-compliant; the zero×4 residual sweep remains loop cycle-1 work
+(venue, not deferral). EXECUTION: a side-branch lane off the composite tip,
+parallel with the de-eagering lane (disjoint files), both folding back before
+the loop opens.
 **⬛ OWNER CLARIFICATION + THE COMPROMISE AUDIT (2026-07-19):** "undelayable"
 meant only that the push is NOT deferred until after the resurvey loop — never
 that it outranks better architecture (the manager's over-reading produced the
