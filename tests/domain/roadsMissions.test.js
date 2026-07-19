@@ -75,25 +75,13 @@ function rosterSize(saves) {
 }
 
 describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
-  // Drive N one-week ticks; return { saves, ... } for roster comparison.
-  function driveLit(seed, lit, ticks, collect) {
-    let { campaign, saves } = makeCampaign(seed, lit);
-    for (let t = 0; t < ticks; t++) {
-      const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', now: NOW });
-      if (collect) collect(r, saves);
-      const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
-      saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
-      campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
-    }
-    return { campaign, saves };
-  }
-
-  it('shows trade/diplomacy/observance journeys, a whereabouts mirror, clean returns, roster conserved (== dark), cadence <= 1/NPC-year', () => {
+  it('shows trade/diplomacy/observance journeys, a whereabouts mirror, clean returns, NO-DEATH for hostages, cadence <= 1/NPC-year', () => {
     let { campaign, saves } = makeCampaign('roads-3y', true);
     const initial = rosterSize(saves);
     const purposes = new Set();
     const seenMissions = new Set();
     const departuresByKeyYear = new Map(); // npcKey|year → count (cadence proof)
+    const capturedKeys = new Set(); // every NPC roads ever took hostage (NO-DEATH tracking)
     let whereaboutsSeen = 0;
     let returnBeats = 0;
     for (let t = 0; t < 156; t++) { // 3 years @ one_week
@@ -107,6 +95,7 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
           departuresByKeyYear.set(key, (departuresByKeyYear.get(key) || 0) + 1);
         }
       }
+      for (const rr of Object.values(r.worldState?.spatialLedgers?.roads?.ransoms || {})) capturedKeys.add(String(rr.npcKey));
       for (const e of (r.wizardNews?.entries || [])) {
         if (e?.impactKind === 'roads' && Array.isArray(e.tags) && e.tags.includes('return')) returnBeats += 1;
       }
@@ -123,14 +112,19 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
     expect(whereaboutsSeen, 'travellers carried a whereabouts mirror').toBeGreaterThan(0);
     // Journeys returned home cleanly (return beats + the mirror cleared by run-end recovery).
     expect(returnBeats, 'journeys completed with a return beat').toBeGreaterThan(0);
-    // NO-DEATH / roster conservation (relative to base): roads adds/removes NO named NPC —
-    // the lit roster is IDENTICAL to the dark roster for the same seed (the base sim's own
-    // succession is orthogonal; roads only adds a whereabouts field nothing yet reads).
-    const final = rosterSize(saves);
-    expect(final.count, 'roster size conserved').toBe(initial.count);
-    const dark = driveLit('roads-3y', false, 156, null);
-    const darkRoster = rosterSize(dark.saves);
-    expect([...final.ids].sort(), 'roads removes/adds no NPC vs the dark twin (NO-DEATH)').toEqual([...darkRoster.ids].sort());
+    // NO-DEATH: every NPC roads ever took HOSTAGE is still present in its home roster at the
+    // end (roads has no removal branch — it releases/expels/converts, never kills). (The lit
+    // lifecycle legitimately DIVERGES from a dark twin once a hostage is off-stage — the court
+    // fills the seat, §8 — so a lit==dark roster comparison would be wrong; the deterministic
+    // NO-DEATH proofs live in roadsGauntlet + roadsRansom.)
+    const finalIds = rosterSize(saves).ids;
+    for (const key of capturedKeys) {
+      const sid = key.slice(0, key.indexOf(':'));
+      const id = key.slice(key.indexOf(':') + 1);
+      const present = (saves.find((s) => s.id === sid)?.settlement?.npcs || []).some((n) => String(n.id) === id);
+      expect(present, `captured NPC ${key} is still in the roster (NO-DEATH)`).toBe(true);
+    }
+    expect(finalIds.size, 'the roster is non-empty (sanity)').toBeGreaterThan(0);
     // Cadence: no NPC departed twice in the same year.
     for (const [key, count] of departuresByKeyYear) expect(count, `<=1 journey for ${key}`).toBeLessThanOrEqual(1);
     // Infrequent by construction: journeys fit the soak band (≈0.2-0.6 per eligible NPC-year).

@@ -12,9 +12,10 @@ import { advanceRoads } from '../../src/domain/worldPulse/roadsKernel.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { ROADS_TUNING, protectionOf, exposureOf, captureProbability } from '../../src/domain/roads/state.js';
 
-// Three real settlements h, x, d (x = a waystation hop on the h→d road); 'e' is a phantom
-// enemy id (army home / besieger / occupier).
-const SIDS = ['h', 'x', 'd'];
+// Four real settlements h, x, d, e (x = a waystation hop on the h→d road; e = the captor —
+// army home / besieger / occupier — a REAL settlement so the ransom-tick captor_gone
+// early-release does not instantly fire).
+const SIDS = ['h', 'x', 'd', 'e'];
 function digestFor() {
   const pack = makeGridPack({ cols: 6, rows: 5 });
   const placed = placeSettlements(pack, SIDS.length);
@@ -28,7 +29,7 @@ const traveler = (importance) => ({ id: 'm', name: 'The Envoy', importance, cate
 function settlementsFor(importance) {
   const mk = (name) => ({ name, tier: 'town', npcs: [], economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [] } });
   const h = mk('Home'); h.npcs = [traveler(importance)];
-  return { h, x: mk('Waystation'), d: mk('Dest') };
+  return { h, x: mk('Waystation'), d: mk('Dest'), e: mk('Captorhold') };
 }
 function missionFor({ phase, escort01, stayWeeks }) {
   return {

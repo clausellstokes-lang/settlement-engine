@@ -2351,7 +2351,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // wired-but-dormant is byte-identical to pre-wire. Cadence forks a tick-invariant world
   // seed; hazards fork the per-tick pulse rng confluence with stable labels.
   ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads({
-    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war

@@ -35,7 +35,7 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions } from '
 import {
   roadsActive, ROADS_TUNING, isOffStage, roadsImportanceWeight, riskToleranceOf,
   militaryQuality01, protectionOf, exposureOf, captureProbability, termWeeksFor,
-  conversionFlawFactor, conversionProbability, applyLegitimacySteps,
+  conversionFlawFactor, conversionProbability, applyLegitimacySteps, applyProsperityBandSteps,
   asObject, num, clampNum, clamp01, cmp,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
@@ -73,6 +73,7 @@ function str(v) { return v == null ? '' : String(v); }
 function categoryOf(npc) { return String(asObject(npc).category || '').toLowerCase(); }
 const TRADE_CATEGORY = /(econom|merch|trade)/;
 const DIPLO_CATEGORY = /(govern|noble)/;
+const HOSTILE_RUNGS = new Set(['rival', 'cold_war', 'hostile']);
 
 /**
  * The relationship rung between two settlements (graph edge relationshipType, falling back
@@ -351,22 +352,55 @@ function advanceLitRoads(args) {
 
   const updateIndex = new Map();
   settlementUpdates.forEach((u, i) => updateIndex.set(str(u.saveId), i));
-  /** @param {string} id @returns {Record<string, unknown>|undefined} */
+  // The UPDATE settlement carries this tick's fresh on-stage roster + settlement fields, but
+  // buildWorldSnapshot FILTERED the off-stage NPCs out of it (§8). `freshSettlement` is used
+  // for settlement-level fields (name/economicState) + the mirror base.
+  /** @param {string} id @returns {Record<string, unknown>} */
   const freshSettlement = (id) => {
     const ui = updateIndex.get(String(id));
-    if (ui !== undefined) return asObject(settlementUpdates[ui]).settlement ? asObject(asObject(settlementUpdates[ui]).settlement) : undefined;
+    if (ui !== undefined && asObject(settlementUpdates[ui]).settlement) return asObject(asObject(settlementUpdates[ui]).settlement);
     const it = itemById.get(String(id));
-    return it ? asObject(it.settlement) : undefined;
+    return it ? asObject(it.settlement) : {};
+  };
+  // THE FULL ROSTER (§8 hostage management): the roads mover MUST see off-stage NPCs to tick
+  // their ransoms and clear their whereabouts on release, but the participation snapshot filters
+  // them out. `item.save` carries the untouched full roster; merge the update's FRESH on-stage
+  // NPCs over it (keyed by npcId) so active NPCs keep this tick's changes while hostages/travellers
+  // stay visible. This is why roads writes a FULL-roster mirror update below (the last word on the
+  // roster; the earlier movers' filtered update is superseded, off-stage NPCs never lost).
+  // The ORIGINAL saves carry the untouched FULL roster (off-stage NPCs included). The pulse
+  // threads them to roads specifically because postTimeSnapshot's item.save was rebuilt from
+  // the FILTERED localSettlements — so it, too, drops hostages. Falls back to item.save for the
+  // direct-call unit tests (which pass a full update roster and no `saves`).
+  /** @type {Map<string, Array<Record<string, unknown>>>} */
+  const saveRosterById = new Map();
+  for (const sv of (Array.isArray(args.saves) ? /** @type {unknown[]} */ (args.saves) : [])) {
+    const svo = asObject(sv);
+    const sid = str(svo.id || asObject(svo.settlement).id);
+    if (sid) saveRosterById.set(sid, Array.isArray(asObject(svo.settlement).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(svo.settlement).npcs) : []);
+  }
+  /** @param {string} id @returns {Array<Record<string, unknown>>} */
+  const saveNpcsOf = (id) => {
+    if (saveRosterById.has(String(id))) return /** @type {Array<Record<string, unknown>>} */ (saveRosterById.get(String(id)));
+    const it = asObject(asObject(asObject(itemById.get(String(id))).save).settlement);
+    return Array.isArray(it.npcs) ? /** @type {Array<Record<string, unknown>>} */ (it.npcs) : [];
+  };
+  /** @param {string} id @returns {Array<Record<string, unknown>>} */
+  const fullRoster = (id) => {
+    const saveNpcs = saveNpcsOf(id);
+    const updNpcs = Array.isArray(asObject(freshSettlement(id)).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(freshSettlement(id)).npcs) : [];
+    if (!saveNpcs.length) return updNpcs; // no save roster ⇒ the update roster is all we have
+    const updByKey = new Map();
+    updNpcs.forEach((n, i) => updByKey.set(npcId(id, n, i), asObject(n)));
+    return saveNpcs.map((n, i) => updByKey.get(npcId(id, n, i)) || asObject(n));
   };
 
-  // Per-settlement npcKey → { npc, index } (for prune + mirror + eligibility).
+  // Per-settlement npcKey → { npc, index } over the FULL roster (prune + mirror + eligibility).
   /** @type {Map<string, Map<string, { npc: Record<string, unknown>, index: number }>>} */
   const rosterByS = new Map();
   for (const sid of orderedIds) {
-    const s = freshSettlement(sid);
-    const npcs = Array.isArray(asObject(s).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(s).npcs) : [];
     const m = new Map();
-    npcs.forEach((npc, index) => m.set(npcId(sid, npc, index), { npc: asObject(npc), index }));
+    fullRoster(sid).forEach((npc, index) => m.set(npcId(sid, npc, index), { npc: asObject(npc), index }));
     rosterByS.set(sid, m);
   }
 
@@ -425,15 +459,19 @@ function advanceLitRoads(args) {
         }
       }
     } else if (m.phase === 'returning' && weekClock >= num(m.legArrivalTick, 0)) {
-      // ARRIVE HOME — resolve: drop the mission, mint the return beat, mirror cleared below.
-      const s = freshSettlement(homeId);
-      const seed = `return.${mid}`;
-      newsEntries.push(roadsBeat({
-        sid: homeId, tick: now2, now, significance: 'notable',
-        headline: pickLine(ROADS_NEWS.return.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
-        summary: pickLine(ROADS_NEWS.return.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
-        seed, tags: ['return'],
-      }));
+      // ARRIVE HOME — resolve: drop the mission, mirror cleared below. A released captive was
+      // already announced by the ransom-paid beat (§9), so its arrival is silent (no double
+      // news); an ordinary returning traveller mints the return beat.
+      if (!m.releasedFromRansom) {
+        const s = freshSettlement(homeId);
+        const seed = `return.${mid}`;
+        newsEntries.push(roadsBeat({
+          sid: homeId, tick: now2, now, significance: 'notable',
+          headline: pickLine(ROADS_NEWS.return.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+          summary: pickLine(ROADS_NEWS.return.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
+          seed, tags: ['return'],
+        }));
+      }
       continue;
     }
     missions[mid] = m;
@@ -522,10 +560,12 @@ function advanceLitRoads(args) {
       // MISSION → RANSOM (§8): the hostage goes off-stage (mirror hostage; the R-4 chokepoint).
       const termWeeks = termWeeksFor(w);
       const willConvert = fork.random() < conversionProbability({ flawFactor: conversionFlawFactor(npc.npc, CORRUPTIBLE_FLAWS), termWeeks });
+      const hostileAtCapture = atOpenWar(graph, homeId, res.captorId) || HOSTILE_RUNGS.has(relationshipTypeBetween(graph, worldState, homeId, res.captorId));
       ransoms[`ransom.${mid}`] = {
         id: `ransom.${mid}`, npcKey: str(m.npcKey), npcName: str(m.npcName), homeId, captorId: res.captorId,
         threatClass: res.cls, purposeKind: str(asObject(m.purpose).kind), missionId: mid,
-        startedTick: now2, termWeeks, remainingWeeks: termWeeks, conversionRolled: true, willConvert,
+        startedTick: now2, startedWeek: weekClock, termWeeks, remainingWeeks: termWeeks,
+        hostileAtCapture, conversionRolled: true, willConvert,
       };
       delete missions[mid];
       bumpLegit(homeId, -(ROADS_TUNING.CAPTURE_LEGIT_BASE + Math.round(ROADS_TUNING.CAPTURE_LEGIT_SCALE * w)));
@@ -559,6 +599,53 @@ function advanceLitRoads(args) {
       newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.expulsion.headline, seed, interp), summary: pickLine(ROADS_NEWS.expulsion.summary, seed, interp), seed, tags: ['expulsion'] }));
     }
     // 'received' — the visit proceeds under strain; no state change, no news (not a §12 kind).
+  }
+
+  // ── PASS 4: RANSOM TICKS (§9) — decrement, early-release checks, term-end release ──
+  /** @type {Map<string, number>} captor prosperity band-steps (key/pillar captives) */
+  const captorProsperity = new Map();
+  /** @type {Map<string, number>} home prosperity band-steps (PILLAR captives, §20 Q10) */
+  const homeProsperity = new Map();
+  for (const rid of Object.keys(ransoms).sort(cmp)) {
+    const r = { ...asObject(ransoms[rid]) };
+    const homeId = str(r.homeId); const captorId = str(r.captorId); const npcKey = str(r.npcKey);
+    const npc = (rosterByS.get(homeId) || new Map()).get(npcKey);
+    const w = npc ? roadsImportanceWeight(npc.npc) : clamp01((num(r.termWeeks, 13) - 13) / 26); // fall back from the term
+    const elapsed = weekClock - num(r.startedWeek, weekClock);
+    r.remainingWeeks = Math.max(0, num(r.termWeeks, 0) - elapsed);
+    // EARLY-RELEASE events (§9): captor razed/abandoned · captor occupied/liberated · peace.
+    let early = '';
+    if (!idSet.has(captorId)) early = 'captor_gone';
+    else if (asObject(asObject(occupations)[captorId]).occupierId) early = 'captor_occupied';
+    else if (r.hostileAtCapture && !atOpenWar(graph, homeId, captorId) && !HOSTILE_RUNGS.has(relationshipTypeBetween(graph, worldState, homeId, captorId))) early = 'peace';
+    const termEnd = r.remainingWeeks <= 0;
+    if (!early && !termEnd) { ransoms[rid] = r; continue; } // still captive — carry the updated record
+
+    // RELEASE: the captive turns for home ('returning' over hopWeeks); the ransom record clears.
+    delete ransoms[rid];
+    const retWeeks = Math.max(1, num(hopWeeks(digest, captorId, homeId, season), 1));
+    const backMid = `road.${homeId}.${npcKey}.${weekClock}`;
+    missions[backMid] = {
+      id: backMid, npcKey, npcName: str(r.npcName), homeId, destId: captorId,
+      purpose: { kind: str(r.purposeKind) || 'trade', ref: '' }, phase: 'returning', path: [captorId, homeId],
+      departTick: weekClock, legArrivalTick: weekClock + retWeeks, stayWeeks: 0,
+      escort01: 1, riskTolerance01: 0.65, knownDangerAtDispatch: 0, trappedBySiege: false,
+      startedYear: year, releasedFromRansom: true, willConvert: !!r.willConvert, captorId,
+    };
+    // WRITE SCHEDULE (§9) — term-end only; an EARLY release skips the captor credit + final hit.
+    if (termEnd && !early) {
+      bumpLegit(homeId, ROADS_TUNING.RANSOM_PAID_HOME_LEGIT); // -1: the treasury bled
+      if (w >= ROADS_TUNING.CAPTOR_CREDIT_MIN_WEIGHT) captorProsperity.set(captorId, (captorProsperity.get(captorId) || 0) + ROADS_TUNING.CAPTOR_PROSPERITY_STEP);
+      if (w >= ROADS_TUNING.PILLAR_WEIGHT) homeProsperity.set(homeId, (homeProsperity.get(homeId) || 0) + ROADS_TUNING.HOME_PILLAR_PROSPERITY_STEP);
+    }
+    const s = freshSettlement(homeId); const seed = `ransom.${rid}`;
+    const interp = { npc: str(r.npcName), home: str(asObject(s).name || homeId), captor: captorId, dest: captorId };
+    newsEntries.push(roadsBeat({
+      sid: homeId, tick: now2, now, significance: 'notable',
+      headline: pickLine(ROADS_NEWS.ransom.headline, seed, interp),
+      summary: pickLine(ROADS_NEWS.ransom.summary, seed, interp),
+      seed, tags: [early ? `ransom_${early}` : 'ransom'],
+    }));
   }
 
   // npcKeys away (surviving missions) or hostage (ransoms) — both excluded from genesis.
@@ -710,34 +797,33 @@ function advanceLitRoads(args) {
     if (!roster || !roster.size) continue;
     const ui = updateIndex.get(sid);
     if (ui === undefined) continue;
-    const s = freshSettlement(sid);
-    const npcs = Array.isArray(asObject(s).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(s).npcs) : [];
-    let npcsChanged = false;
-    const nextNpcs = npcs.map((npc, index) => {
+    // Iterate the FULL roster (off-stage hostages included) and apply the whereabouts diff.
+    const nextNpcs = fullRoster(sid).map((npc, index) => {
       const key = npcId(sid, npc, index);
       const want = desired.get(key) || null;
       const cur = asObject(npc).whereabouts || null;
-      const same = JSON.stringify(cur ?? null) === JSON.stringify(want ?? null);
-      if (same) return npc;
-      npcsChanged = true;
-      if (want == null) {
-        const rest = { ...asObject(npc) };
-        delete rest.whereabouts;
-        return rest;
-      }
+      if (JSON.stringify(cur ?? null) === JSON.stringify(want ?? null)) return npc;
+      if (want == null) { const rest = { ...asObject(npc) }; delete rest.whereabouts; return rest; }
       return { ...asObject(npc), whereabouts: want };
     });
-    if (!npcsChanged) continue;
+    // Emit when the roads full roster differs from the update roster — either a whereabouts
+    // changed OR the update dropped an off-stage NPC roads must keep (this full-roster update
+    // is the last word, so a hostage is never lost even under a naive save merge).
+    const curNpcs = Array.isArray(asObject(freshSettlement(sid)).npcs) ? /** @type {Array<Record<string, unknown>>} */ (asObject(freshSettlement(sid)).npcs) : [];
+    let diff = nextNpcs.length !== curNpcs.length;
+    if (!diff) for (let i = 0; i < nextNpcs.length; i += 1) { if (nextNpcs[i] !== curNpcs[i]) { diff = true; break; } }
+    if (!diff) continue;
     if (!cloned) { nextUpdates = settlementUpdates.slice(); cloned = true; }
     nextUpdates[ui] = { ...nextUpdates[ui], settlement: { ...asObject(freshSettlement(sid)), npcs: nextNpcs } };
   }
 
-  // ── §7/§9 legitimacy hits (capture home hit · T4 detain host hit) via the bounded writer ──
-  if (legitimacyHits.size) {
-    const li = new Map();
-    nextUpdates.forEach((u, i) => li.set(str(u.saveId), i));
-    const applied = applyLegitimacySteps(nextUpdates, li, legitimacyHits);
-    if (applied !== nextUpdates) { nextUpdates = applied; cloned = true; }
+  // ── §7/§9 bounded writes: legitimacy (capture · detain · ransom-paid) + prosperity band-
+  //    steps (captor credit for key/pillar captives · home debit for pillar captives) ──
+  if (legitimacyHits.size || captorProsperity.size || homeProsperity.size) {
+    const idx = () => { const m = new Map(); nextUpdates.forEach((u, i) => m.set(str(u.saveId), i)); return m; };
+    if (legitimacyHits.size) { const a = applyLegitimacySteps(nextUpdates, idx(), legitimacyHits); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
+    if (captorProsperity.size) { const a = applyProsperityBandSteps(nextUpdates, idx(), captorProsperity); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
+    if (homeProsperity.size) { const a = applyProsperityBandSteps(nextUpdates, idx(), homeProsperity); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
   }
 
   // ── PERSIST the sidecar (drop-when-empty; codepoint-sorted, byte-stable) ──
@@ -776,6 +862,7 @@ export function advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAn
     worldState: prior.worldState,
     settlementUpdates: prior.settlementUpdates,
     graph: /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (args)).graph,
+    saves: /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (args)).saves,
     tick: /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (args)).tick,
     now: /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (args)).now,
   });

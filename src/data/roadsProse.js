@@ -113,6 +113,21 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} of ${x.home} waited out a passing army and lost a week to ${x.dest}.`,
     ],
   },
+  // ── RANSOM PAID / RELEASE (NOTABLE — the captive is bought home) ──
+  ransom: {
+    headline: [
+      (x) => `${x.home} ransoms ${x.npc} home from ${x.captor}`, // canonical
+      (x) => `${x.npc} is freed from ${x.captor}`,
+      (x) => `${x.captor} releases ${x.npc} to ${x.home}`,
+      (x) => `${x.npc} is bought back from ${x.captor}`,
+    ],
+    summary: [
+      (x) => `The price is paid: ${x.captor} has released ${x.npc}, who now rides home to ${x.home}.`, // canonical
+      (x) => `${x.home} has ransomed ${x.npc} out of ${x.captor}'s hands; the road home lies open.`,
+      (x) => `${x.npc} is free of ${x.captor} at last, and turns for ${x.home}.`,
+      (x) => `With the ransom settled, ${x.captor} lets ${x.npc} go home to ${x.home}.`,
+    ],
+  },
   // ── TRAPPED / WAIT (texture — the siege or the hostile roads keep them abroad) ──
   trapped: {
     headline: [
