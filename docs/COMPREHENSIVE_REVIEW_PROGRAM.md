@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-E SHIPPED — the world reaches the table, the truth serves
+every AI, a world fits in a sentence, and the party gets its private door
+(2026-07-20, claude/vision-e @ 9d8d3411, FOLD-READY; manager-validated).** V-11
+FOUNDRY BRIDGE: worldExport DM/player variants REUSING the server-mirrored
+redactors (never a new one — ratified); player variant deep-scanned ZERO covert
+leaks over an every-secret fixture; foundry-module/ package + validate wired. V-12
+TRUTH SERVER: dependency-free stdio MCP over a local export, 4 read-only tools,
+receipts in every response, read-only BY MANIFEST-PIN, smoke-tested over real
+frames; private:true until the owner publishes. V-13 SEED POST: versioned
+checksummed fail-closed worldCode + lazy /world/<code> regenerating client-side;
+same-digest pin RELATIVE (no new golden family — ratified). V-20+V-13F (the owner's
+three rulings): MIGRATION 168 (written-NOT-deployed); MODEL B ratified — unlisted =
+is_public=false + crypto slug (~168 bits), so every browse/featured/curated RPC
+excludes it BY CONSTRUCTION (zero edits to the security-critical chain); by-slug
+reads reuse the REAL sanitizer; owner's PRIVATE filter + badge + rotation-revokes;
+featured hidden-until-occupied + admin-only; THE PAIR EXECUTED in pglite 10/10.
+Gate: validates all OK (mig head 168 contiguous) · strict OK · tsc 0 · lint +0 ·
+dist 165 · security suite 1047 sequential · parked goldens base-proven. V-J HANDOFF
+RECORDED: unlisted URL = /gallery?slug=<42-hex>; get_unlisted_dossier/map RPCs;
+NOT sitemapped — V-J owns noindex+exclusion pins. FOLLOW-ONS documented (DM realm
+overlay, featured visual band, MapShareEditor toggle). HAZARD: +1 migration trips
+~5 doc-freshness gates + @rollback discipline (banked). SLOT → V-J DISPATCHED
+(its provisioned worktree; unblocked by this handoff); vision-e worktree idles
+ready for V-K at the next landing.**
 **⬛⭐ VISION LANE V-H SHIPPED — the palette, the visible undo, the crafted empty
 rooms (2026-07-20, claude/vision-h @ 3668f33c, 4 commits, FOLD-READY;
 manager-validated).** R-20 cmd/ctrl-K palette (eager host sliver +562 B ONLY; body/
