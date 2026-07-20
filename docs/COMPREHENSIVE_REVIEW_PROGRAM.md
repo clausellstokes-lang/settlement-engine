@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-M LANDED — the party gets its window, the years export,
+the streets remember (2026-07-20, claude/vision-m @ 8816db97, base 5d9218c6, 6
+lettered commits, FOLD-READY; landed by MANAGER TAKEOVER).** The lane's agent
+built and gated everything, then STALLED in its suite-triage tail (its
+consolidating waiter died silently; 84 min no output, zero test processes — the
+watchdog rule fired). Manager takeover finished the triage: the 5 suspect
+shard-B files (catchUpCampaignWorld + the landing-decorative UI quartet) run
+GREEN IN ISOLATION 43/43 on clean CPU — contention flakes per the banked rule;
+shard A had shown only parked goldens. With the lane's own receipts (closure
+1,036,399 Δ0 EXACTLY — every surface a lazy leaf · verify:dist 174/174 · full
+tsc 0 · strict 0 · ratchets 34/34 incl. zero title= adds · lint · NUL clean)
+the lane meets the same landing bar as its siblings; pass 3's full gate
+re-covers the assembled tree. THE SIX: (a) player-safe road scene — the party
+sees the road, never the DM's ledger · (b) the campaign player view via the
+V-20 unlisted door · (c) street-level wear + district renaming echoes · (d)
+per-settlement timelapse drill + export-as-clip (deterministic frames,
+encode-free) · (e) radar lenses — trend, never prophecy · (f) the map-tour
+teaching tranche. HONEST RECORD: the agent's final per-item narrative died
+with its waiter — the commit bodies + memory file
+(vision-m-display-followons-shipped.md, agent-written) carry the detail; the
+pass-3 fold agent reads the commit bodies. HAZARD RE-BANKED: a background
+"consolidating waiter" that reports no heartbeat is a stall, not a wait —
+takeover after one watchdog tick. SLOT: the wave is FULLY LANDED (15/15
+lanes); FOLD PASS 3 DISPATCHED.**
 **⬛⭐⭐ THE SLIM LANE EXECUTED — the breach converted to surplus (2026-07-20,
 claude/composite-r4 @ 4a2447ae, 2 commits a7874d34+4a2447ae; manager-verified
 tip+clean).** JOB 1: forensics seam −5,309 B eager, CONTRACT INTACT — and a

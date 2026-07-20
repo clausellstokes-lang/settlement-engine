@@ -52,14 +52,20 @@
     arithmetic ~+5.4K ⇒ ~1,545 B slack, halt-on-breach stands as backstop.
     ⚠ full two-shard NOT run by the slim lane (recorded omission) — pass 3's
     gate covers it.
-  - HOT (1 workstream): V-M (display follow-ons) in the `vision-c` wt on
-    `claude/vision-m` @ base 5d9218c6 — BUILT (tip 8816db97, closure Δ0,
-    ratchets green); finishing its full-suite isolation triage. PASS 3
-    DISPATCHES THE MOMENT V-M LANDS (fold order suggestion: V-L → V-G → V-N →
-    V-O → V-M; seams: tableEvents' 3 mirrored constants → IMPORTS from
-    tableLedger [value-identical] + backfill→apply-path decision · V-O's mig
-    168-local → RENUMBER 169 + ARCHITECTURE/DEPLOY count re-bumps · per-merge
-    closure vs 6,945). V-N LANDED @ claude/vision-n
+  - V-M LANDED @ claude/vision-m `8816db97` (6 items, Δ0 exactly; landed by
+    MANAGER TAKEOVER — its triage waiter died; suspects proven contention
+    43/43 in isolation; agent-written memory file + commit bodies carry the
+    per-item detail). ⚠ HAZARD: a heartbeatless background waiter = a STALL.
+    THE WAVE IS FULLY LANDED — 15/15 lanes.
+  - HOT (1 workstream): FOLD PASS 3 in `minifold` @ composite-r4 `4a2447ae` —
+    the FINAL fold: V-L 3b33c1a6 → V-G 2902bdaf → V-N e017c1f2 → V-O b3692333
+    → V-M 8816db97 under the fold law (headroom 6,945; per-merge closure;
+    halt-on-breach). Seams: tableEvents' 3 mirrored constants → IMPORTS from
+    tableLedger (value-identical) + the backfill→apply-path decision · V-O's
+    mig 168-local → RENUMBER TO 169 + ARCHITECTURE/DEPLOY count re-bumps ·
+    V-L's EDIT_KIND edge-bundle regen check. Lane-end = full two-shard on the
+    assembled tree. AFTER: cycle 2 (cold-then-connect, 20 bars, termination
+    law). V-N LANDED @ claude/vision-n
     `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
     handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
     BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ
