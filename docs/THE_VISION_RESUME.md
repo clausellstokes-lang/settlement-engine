@@ -12,14 +12,15 @@
   (restate at close-out).
 - VISION WAVE (docs/DESIGN_VISION_WAVE.md = the full commissioned spec, V-1..V-18 +
   R-batch; THE FINITE-SEMANTICS LAW binds input surfaces):
-  - Lane V-A (V-6 biome + V-7 heirs): RUNNING in worktree `minifold` on
-    claude/composite-r4 (an Opus agent; commits at its boundary).
-  - Lane worktrees PROVISIONED off 212758ad: `vision-c` (claude/vision-c),
-    `vision-e` (claude/vision-e), `vision-i` (claude/vision-i) — npm ci in flight.
-  - BATCH 1 (after V-A commits): V-B in minifold (merge V-A tip first) · V-C in
-    vision-c · V-E in vision-e · V-I in vision-i (each lane's FIRST git act: merge
-    the V-A tip; verify branch with rev-parse). BATCH 2 (as slots free): V-D, V-F,
-    V-G, V-H — V-F before V-G (both touch pendingEdits); V-D solo-ish (persist paths).
+  - Lane V-A: LANDED @ composite-r4 `299f2843` (biome truth per-cell + heirs-lite;
+    ledger row 28ea1162; heirs×contests lit-together = cycle-2 verify item).
+  - BATCH 1 HOT (4 lanes, dispatched): V-B in `minifold` (composite-r4 @ 299f2843) ·
+    V-C in `vision-c` · V-E in `vision-e` · V-I in `vision-i` (the three vision-*
+    worktrees run on MAIN-tree node_modules by walk-up — npm ci is EUSAGE-broken on
+    this lineage, do not run it; branches claude/vision-{c,e,i} off 212758ad; the
+    manager reconciles the V-A delta at fold). BATCH 2 (as lanes land): V-D, V-F,
+    V-G, V-H — V-F before V-G (both touch pendingEdits); V-D prefers a quiet tree.
+  - THE A+ STANDARD: docs/THE_APLUS_STANDARD.md = the grading law from cycle 2 on.
   - FOLD DISCIPLINE: manager merges landed lanes back into claude/composite-r4
     (minifold) with NUL-scan + strict/tsc/lint + focused batteries + two-shard suite
     at wave end; per-lane briefs = scratchpad VISION_LANE_BRIEFS.md (A-E) + compose
