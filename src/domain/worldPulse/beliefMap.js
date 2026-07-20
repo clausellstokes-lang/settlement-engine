@@ -58,7 +58,8 @@ import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
 import { hasSpatialLedger, getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
-import { hopDelayTicks } from './distancePricedNews.js';
+import { routeAwareHopDelayTicks } from './distancePricedNews.js';
+import { embattlementLevel } from '../spatial/embattlement.js';
 import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
@@ -614,9 +615,12 @@ function relationshipNeighbourhood(snapshot, worldState) {
  * @param {import('../spatial/distanceRead.js').SpatialDigest | null} [digest]  D1
  *   distance-priced news: when present (distancePricedNewsActive), each report's
  *   effective age gains hopDelayTicks(origin→observer); null (dark) ⇒ byte-identical.
+ * @param {((id: string) => number) | null} [embattlementOf]  V-24b route-status reader
+ *   (sid → 0..1 embattlement level) that makes the surcharge REACT to route changes; null (dark)
+ *   ⇒ the geometric surcharge ⇒ byte-identical.
  * @returns {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>}
  */
-function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null) {
+function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null, embattlementOf = null) {
   /** @type {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>} */
   const out = new Map();
   const ledger = asObject(observerLedger);
@@ -643,9 +647,11 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null, 
     /** @type {BeliefReport} */
     const report = {
       hopCount: Math.max(0, Math.floor(finiteNumber(rec.hopCount, 0))),
-      // D1: effective info age = actual age (already rumor-relay-delayed) + the direct
-      // origin→observer distance surcharge (0 when digest null ⇒ byte-identical).
-      ageTicks: Math.max(0, now - arrivalTick) + hopDelayTicks(digest, sourceId, observerId),
+      // D1 + V-24b: effective info age = actual age (already rumor-relay-delayed) + the direct
+      // origin→observer distance surcharge, which REACTS to route status (0 when digest null ⇒
+      // byte-identical; the surcharge rises as the origin/observer embattles, re-pricing this
+      // in-flight report as routes sever/open — embattlementOf null ⇒ the geometric value).
+      ageTicks: Math.max(0, now - arrivalTick) + routeAwareHopDelayTicks(digest, sourceId, observerId, embattlementOf),
       independentSources: Array.isArray(rec.corroborationRoots) ? rec.corroborationRoots.length : 1,
       completeness01: clamp01(finiteNumber(rec.completeness01, 1)),
       accuracy01: clamp01(finiteNumber(rec.accuracy01, 1)),
@@ -1145,8 +1151,13 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   // D1: the frozen digest for the distance surcharge, read ONCE — null unless
   // distancePricedNewsEnabled is lit (dark ⇒ every reportsBySubject below is passed
   // null ⇒ zero surcharge ⇒ byte-identical).
-  const newsDigest = distancePricedNewsActive(worldState)
+  const distancePriced = distancePricedNewsActive(worldState);
+  const newsDigest = distancePriced
     ? activeSpatialDigest(/** @type {Parameters<typeof activeSpatialDigest>[0]} */ (worldState)) : null;
+  // V-24b PER-ROUTE RE-PROPAGATION: the route-status reader that makes each in-flight report's
+  // distance surcharge REACT to embattlement/blockade transitions. Null (dark) ⇒ the geometric
+  // surcharge ⇒ byte-identical. Bound once per advance; a pure per-settlement level read.
+  const newsEmbattlement = distancePriced ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
   // Every observer that either holds a belief OR heard a rumor this window. The
   // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
   // it. [spatial-engine-5]
@@ -1164,7 +1175,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
     const seat = reconcileSlot({
       priorSlot: priorSeat,
-      reports: reportsBySubject(rumorLedgers[observerId], observerId, now, null, newsDigest),
+      reports: reportsBySubject(rumorLedgers[observerId], observerId, now, null, newsDigest, newsEmbattlement),
       ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
     });
     if (seat.pruned) mutated = true;
@@ -1181,7 +1192,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const framingTag = /** @type {{ framingTag: string }} */ (slots.get(archetype)).framingTag;
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
-          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag), newsDigest),
+          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag), newsDigest, newsEmbattlement),
           ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
         });
         if (built.pruned) mutated = true;
@@ -1191,7 +1202,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
       const publicBuilt = reconcileSlot({
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
-          (f) => f.length === 0 || f.some((t) => leakedTags.has(t)), newsDigest),
+          (f) => f.length === 0 || f.some((t) => leakedTags.has(t)), newsDigest, newsEmbattlement),
         ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
       });
       if (publicBuilt.pruned) mutated = true;

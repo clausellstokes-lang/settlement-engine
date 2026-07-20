@@ -35,6 +35,7 @@ import { isInStasis } from '../npc/npcOps.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
+import { provenanceLedgerActive } from '../worldPulse/provenanceKernel.js';
 
 // ── narrowing helpers (self-contained; the traditionsKernel/npcLadderState idiom) ──────
 /** @param {unknown} x @returns {Record<string, unknown>} */
@@ -145,6 +146,59 @@ export function isOffStage(npc) {
   if (isInStasis(/** @type {Parameters<typeof isInStasis>[0]} */ (npc))) return true;
   const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
   return !!(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).state === 'hostage');
+}
+
+/**
+ * DESIGN_VISION_WAVE V-24a — THE RECALL RIDER (mission-side consume). If the traveller `npc`
+ * carries the recall marker (`whereabouts.recall === true`) and its `mission` is not already
+ * returning, mutate the mission IN PLACE into a sanctioned early return — phase='returning', an
+ * honestly-priced FUTURE arrival (never a teleport), the `recalled` flag, and a cleared wait
+ * receipt — and return true; otherwise return false (no change). The return leg is `retWeeksAtDest`
+ * (the destination→home leg the caller computed) when at the destination, or symmetric to the
+ * distance already covered when still outbound. Never adds a mover — the existing mission IS the
+ * traveller. Self-clearing at the source: the mover fully rewrites whereabouts from the ledger each
+ * tick, so the marker never lingers. Pure but for the caller-owned in-place mission mutation.
+ * @param {Record<string, unknown>} mission  the mission clone the caller will persist
+ * @param {unknown} npc  the traveller whose whereabouts carries the marker
+ * @param {number} weekClock  the current calendar week
+ * @param {number} retWeeksAtDest  the destination→home return leg (weeks)
+ * @returns {boolean} true iff a recall was consumed
+ */
+export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
+  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
+  if (mission.phase === 'returning'
+    || !(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).recall === true)) return false;
+  const retWeeks = mission.phase === 'visiting'
+    ? Math.max(1, num(retWeeksAtDest, 1))
+    : Math.max(1, weekClock - num(mission.departTick, 0));
+  mission.phase = 'returning';
+  mission.legArrivalTick = weekClock + retWeeks;
+  mission.recalled = true;
+  mission.waitReceipted = false;
+  return true;
+}
+
+/**
+ * DESIGN_VISION_WAVE V-24d — DEEPER PROVENANCE THREADING (the roads captivity lineage). The
+ * EXACT node id of the CAPTURE receipt that began a captivity, reconstructed from the ransom
+ * record a release/ransom pass holds in hand: roadsBeat mints an id `wizard_news.${tick}.roads.
+ * ${sid}.${seed}`, and the capture beat's tick / sid / seed are r.startedTick / r.homeId /
+ * `capture.${r.missionId}` — all on the record. Returned as a `causedBy` parent so the V-4
+ * cause-walk can trace a release (or ransom-paid) beat BACK to the capture that began it — a
+ * genuinely deeper edge than the release beat's own root. FLAG-DARK BYTE-NEUTRAL: returns
+ * undefined unless provenanceLedgerEnabled is lit, so the beat is byte-identical in every
+ * non-provenance run (the existing-provenance discipline — the causedBy lives only in the
+ * dark-gated ledger's world, never in a dormant beat). Pure, total.
+ * @param {unknown} worldState @param {unknown} r  the ransom record (RansomRec)
+ * @returns {string|undefined} the capture receipt node id, or undefined when dark / unreadable
+ */
+export function captureCauseId(worldState, r) {
+  if (!provenanceLedgerActive(/** @type {Record<string, unknown>} */ (worldState))) return undefined;
+  const rr = asObject(r);
+  const mid = String(rr.missionId == null ? '' : rr.missionId);
+  const home = String(rr.homeId == null ? '' : rr.homeId);
+  if (!mid || !home) return undefined;
+  return `wizard_news.${num(rr.startedTick, 0)}.roads.${home}.capture.${mid}`;
 }
 
 // ── §4-§10 TUNING (soak-certified dials; every entry vetoable) ──────────────────

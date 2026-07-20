@@ -38,7 +38,8 @@
 
 import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
-import { hopDelayTicks } from '../worldPulse/distancePricedNews.js';
+import { routeAwareHopDelayTicks } from '../worldPulse/distancePricedNews.js';
+import { embattlementLevel } from '../spatial/embattlement.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -554,6 +555,10 @@ export function settlementRumors({
     worldState && typeof worldState === 'object' ? worldState.simulationRules : undefined);
   const newsDigest = rules && rules.distancePricedNewsEnabled === true
     ? activeSpatialDigest(worldState) : null;
+  // V-24b PER-ROUTE RE-PROPAGATION: the route-status reader that lets the PLAYER-VISIBLE rumor
+  // staleness re-price as routes sever/open (embattlement/blockade). Null (dark) ⇒ geometric ⇒
+  // byte-identical projection. embattlementLevel is a light spatial read, not the belief engine.
+  const newsEmbattlement = newsDigest ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
   const arrived = Object.entries(ledger)
     .filter(([, record]) => record && typeof record === 'object'
       && finiteNumber(record.arrivalTick, Infinity) <= tick)
@@ -562,7 +567,7 @@ export function settlementRumors({
       || compareCodepoint(keyA, keyB));
   return arrived.map(([key, record]) => {
     const newsDelayTicks = newsDigest
-      ? hopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), String(settlementId))
+      ? routeAwareHopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), String(settlementId), newsEmbattlement)
       : 0;
     const projection = projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks });
     if (!includeGroundTruth) return projection;

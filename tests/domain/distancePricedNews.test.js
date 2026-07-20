@@ -9,7 +9,7 @@
  */
 import { describe, it, expect } from 'vitest';
 
-import { NEWS_SPEED_FACTOR, hopDelayTicks } from '../../src/domain/worldPulse/distancePricedNews.js';
+import { NEWS_SPEED_FACTOR, hopDelayTicks, routeAwareHopDelayTicks, ROUTE_IMPEDANCE_FACTOR } from '../../src/domain/worldPulse/distancePricedNews.js';
 import {
   distancePricedNewsActive, believedNeedScale, advanceBeliefMaps, GOVERNING_SEAT_KEY,
 } from '../../src/domain/worldPulse/beliefMap.js';
@@ -109,6 +109,37 @@ describe('D1 — believedNeedScale (the derived believed-need coupling)', () => 
   });
 });
 
+// ── V-24b PER-ROUTE RE-PROPAGATION: the surcharge REACTS to route status (severed ⇒ staler) ──
+describe('V-24b — routeAwareHopDelayTicks (the route-status-reactive surcharge)', () => {
+  const ids = ['a', 'b', 'c', 'd', 'e', 'f'];
+  const digest = digestFor(ids);
+  const far = farthestFrom(digest, 'a', ids);
+  const base = hopDelayTicks(digest, far, 'a'); // the geometric surcharge (> 0 for a far pair)
+
+  it('calm route (no embattlementOf / all-calm) ⇒ EXACTLY the geometric surcharge (byte-identical)', () => {
+    expect(base).toBeGreaterThan(0);
+    expect(routeAwareHopDelayTicks(digest, far, 'a', null)).toBe(base);       // no reader ⇒ geometric
+    expect(routeAwareHopDelayTicks(digest, far, 'a', () => 0)).toBe(base);    // all-calm ⇒ geometric
+    expect(routeAwareHopDelayTicks(null, far, 'a', () => 0.9)).toBe(0);       // dark digest ⇒ 0 regardless
+  });
+
+  it('a SEVERED route re-prices: an embattled endpoint (origin OR observer) raises the surcharge', () => {
+    const embOrigin = routeAwareHopDelayTicks(digest, far, 'a', (sid) => (sid === far ? 0.8 : 0));
+    const embObserver = routeAwareHopDelayTicks(digest, far, 'a', (sid) => (sid === 'a' ? 0.8 : 0));
+    expect(embOrigin).toBeGreaterThan(base);   // the severed route staled the news
+    expect(embObserver).toBeGreaterThan(base); // the endpoint under siege counts either way
+  });
+
+  it('monotone in embattlement, bounded (≤ base × (1 + FACTOR)); an OPENED route returns to geometric', () => {
+    const at = (lvl) => routeAwareHopDelayTicks(digest, far, 'a', () => lvl);
+    expect(at(0)).toBe(base);                          // opened / calm ⇒ geometric
+    expect(at(0.5)).toBeGreaterThanOrEqual(at(0));     // non-decreasing…
+    expect(at(1)).toBeGreaterThanOrEqual(at(0.5));     // …in embattlement
+    expect(at(1)).toBe(base + Math.round(base * 1 * ROUTE_IMPEDANCE_FACTOR)); // exact ceiling
+    expect(at(1)).toBeLessThanOrEqual(base * (1 + ROUTE_IMPEDANCE_FACTOR));   // bounded
+  });
+});
+
 // ── The belief-fold integration: distant news informs the picture LESS (and dark ⇒ identical) ──
 describe('D1 — belief recency fold', () => {
   const ids = ['a', 'b', 'c', 'd', 'e', 'f'];
@@ -133,13 +164,13 @@ describe('D1 — belief recency fold', () => {
   // A decayed prior belief a→far so the NORMAL reconcile path runs (not cold-start).
   const priorBeliefMaps = { a: { [GOVERNING_SEAT_KEY]: { [far]: { readiness: 0.2, strengthBand: 2, allianceLabel: 'hostile', faithLabel: 'Sol', confidence01: 0.4, lastUpdateTick: now - 5 } } } };
 
-  const run = (flag) => advanceBeliefMaps({
+  const run = (flag, emb) => advanceBeliefMaps({
     snapshot, pressureIdx: null, tick: now,
     worldState: {
       spatialCanonVersion: 1,
       simulationRules: { infoMode: 'perfect_delayed', ...(flag ? { distancePricedNewsEnabled: true } : {}) },
       spatialDigest: digest,
-      spatialLedgers: { rumorLedgers, beliefMaps: priorBeliefMaps },
+      spatialLedgers: { rumorLedgers, beliefMaps: priorBeliefMaps, ...(emb ? { embattlement: emb } : {}) },
     },
   });
 
@@ -164,6 +195,23 @@ describe('D1 — belief recency fold', () => {
     const darkConf = seatOf(dark.next, 'a')[far].confidence01;
     const litConf = seatOf(lit.next, 'a')[far].confidence01;
     expect(litConf).toBeLessThan(darkConf); // distance-staled news rebuilds certainty more slowly
+  });
+
+  it('V-24b: a SEVERED route (embattled origin) re-prices the in-flight report staler than a calm lit route', () => {
+    const calm = run(true);                                 // lit, calm routes (geometric surcharge only)
+    const severed = run(true, { [far]: { level: 0.9 } });   // lit, the origin `far` under siege (route severed)
+    const calmConf = seatOf(calm.next, 'a')[far].confidence01;
+    const severedConf = seatOf(severed.next, 'a')[far].confidence01;
+    // The severed route raises the origin→observer surcharge ⇒ the SAME in-flight report reads
+    // staler ⇒ certainty rebuilds even more slowly. This is the in-flight re-pricing on route change.
+    expect(severedConf).toBeLessThan(calmConf);
+  });
+
+  it('V-24b dormancy: the route-aware surcharge is inert when distance-priced news is dark', () => {
+    // Embattlement present but the flag absent ⇒ byte-identical to the plain dark run (no re-pricing).
+    const darkEmb = run(false, { [far]: { level: 0.9 } });
+    const dark = run(false);
+    expect(JSON.stringify(darkEmb.next)).toBe(JSON.stringify(dark.next));
   });
 });
 

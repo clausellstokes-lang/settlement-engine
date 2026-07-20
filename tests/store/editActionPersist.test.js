@@ -198,6 +198,36 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
     expect(store.getState().settlement.npcs[0].contestBacking).toBeUndefined();
   });
 
+  // ── DESIGN_VISION_WAVE V-24a — THE RECALL RIDER. The op stamps whereabouts.recall on a
+  // currently-traveling save npc; the roads mover engages the return leg on its next tick
+  // (deposit-and-consume, the party's-hand precedent). The marker is a plain save-npc field ⇒
+  // it rides the SAME persist / snapshot / undo path as every edit. ──
+  test('recall-npc (V-24a) commits, stamps whereabouts.recall on a traveller, persists, survives reload', async () => {
+    // Give the save's npc a live travelling whereabouts (the state the mover mirrors for an
+    // outbound traveller), on BOTH the live blob and the persisted entry.
+    store.setState(s => {
+      const wa = { state: 'traveling', placeId: 'e', purposeKind: 'diplomacy', sinceTick: 10, expectedReturnTick: 40, missionId: 'road.save-1.npc.aldis.10' };
+      s.settlement.npcs[0].whereabouts = { ...wa };
+      const idx = s.savedSettlements.findIndex(x => x.id === SAVE_ID);
+      s.savedSettlements[idx].settlement.npcs[0].whereabouts = { ...wa };
+    });
+    store.getState().queueEdit('recall-npc', { npcIndex: 0 });
+    store.getState().commitPendingEdits();
+
+    expect(store.getState().settlement.npcs[0].whereabouts.recall).toBe(true);       // live marker
+    expect(persistedEntry(store).settlement.npcs[0].whereabouts.recall).toBe(true);  // entry synced
+    await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());                 // cloud write requested
+    expect(reloadInto(persistedEntry(store)).npcs[0].whereabouts.recall).toBe(true); // survives reload
+    expect(persistedEntry(store).campaignState.eventLog).toEqual([]);                // a content edit, not an event
+  });
+
+  test('recall-npc is a byte-safe no-op on a non-traveller (the light dispatcher guard)', () => {
+    // npcs[0] (Aldis) has no whereabouts — the recall dispatcher refuses it, no marker appears.
+    store.getState().queueEdit('recall-npc', { npcIndex: 0 });
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].whereabouts).toBeUndefined();
+  });
+
   test('canon town rename persists the `name` column AND appends a RENAME_SETTLEMENT flavor entry', async () => {
     // Route-through-renameSettlementImpl also gives the queue path the designed
     // canon behavior: a canon rename is recorded as a flavor timeline line. Mark
