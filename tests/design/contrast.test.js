@@ -14,7 +14,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
-  GOLD_TXT, GREEN, GREEN_BG, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
+  GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -322,6 +322,29 @@ describe('THE LANTERN TABLE lamp-tone kind accents (WCAG AA 4.5:1 on the umber f
   // (3.09:1) — the exact deferral the lamp tones pay by re-grounding onto the umber.
   test('the retired saturated amber accent would fail AA as a label even on white (documents the lift)', () => {
     expect(ratio(swatch['#D08020'], '#FFFFFF')).toBeLessThan(AA_TEXT);
+  });
+});
+
+// ── HomeSampleDossier callout eyebrows (a11y-3 / content-1) ───────────────────
+// The three 9px uppercase eyebrows on the public landing sample-dossier card
+// read in the darker -700 INK of their accent hue (bright accent kept only for
+// the left border, a UI boundary with no text floor). Pins the AA lift so a
+// future edit can't drop the eyebrow text back onto its sub-AA -500/-600 accent.
+describe('HomeSampleDossier eyebrows — WCAG AA at 9px', () => {
+  const EYEBROWS = [
+    ['newDm green ink', GREEN_DEEP, '#E2EEDB'],
+    ['worldbuilder slate ink', SLATE_DEEP, '#E4E9EE'],
+    ['fridaysSession amber ink', AMBER_DEEP, '#FBEAD0'],
+  ];
+  for (const [name, ink, bg] of EYEBROWS) {
+    test(`${name}: ${ink} on ${bg} >= ${AA_TEXT}:1`, () => {
+      expect(ratio(ink, bg)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  test('the bright accents (used for the border only) would FAIL AA as eyebrow text — documents the lift', () => {
+    expect(ratio(GREEN, '#E2EEDB')).toBeLessThan(AA_TEXT);
+    expect(ratio(SLATE, '#E4E9EE')).toBeLessThan(AA_TEXT);
+    expect(ratio(swatch['#D08020'], '#FBEAD0')).toBeLessThan(AA_TEXT);
   });
 });
 

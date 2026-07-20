@@ -348,27 +348,35 @@ export default function WizardNewsPanel({ campaign }) {
     if (chronicleBusy || total === 0) return;
     setChronicleBusy(true);
     setChronicleError('');
-    const ids = new Set(campaign?.settlementIds || []);
-    const snapshot = {
-      settlements: saves
-        .filter(save => ids.has(save.id))
-        .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
-    };
-    const result = await requestCampaignChronicle({
-      campaign,
-      snapshot,
-      tick: latestEntryTick,
-    });
-    if (result.error || !result.chronicle) {
-      setChronicleError(result.error || 'Chronicle generation failed.');
-    } else {
-      appendCampaignChronicle(campaign.id, {
+    // try/catch/finally so the busy flag ALWAYS clears — a throw (from the
+    // request helper, appendCampaignChronicle, or setCreditBalance) must never
+    // leave the paid Chronicle button stuck spinning forever (correctness-2).
+    try {
+      const ids = new Set(campaign?.settlementIds || []);
+      const snapshot = {
+        settlements: saves
+          .filter(save => ids.has(save.id))
+          .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
+      };
+      const result = await requestCampaignChronicle({
+        campaign,
+        snapshot,
         tick: latestEntryTick,
-        prose: result.chronicle,
       });
-      if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
+      if (result.error || !result.chronicle) {
+        setChronicleError(result.error || 'Chronicle generation failed.');
+      } else {
+        appendCampaignChronicle(campaign.id, {
+          tick: latestEntryTick,
+          prose: result.chronicle,
+        });
+        if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
+      }
+    } catch (e) {
+      setChronicleError('Chronicle generation failed.');
+    } finally {
+      setChronicleBusy(false);
     }
-    setChronicleBusy(false);
   }
 
   if (!campaign) return null;

@@ -10,7 +10,7 @@ import { cleanup, render, fireEvent } from '@testing-library/react';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
-import RoadScenePanel from '../../src/components/map/RoadScenePanel.jsx';
+import RoadScenePanel, { itemLine } from '../../src/components/map/RoadScenePanel.jsx';
 
 let STORE = {};
 vi.mock('../../src/store/index.js', () => ({ useStore: selector => selector(STORE) }));
@@ -69,5 +69,26 @@ describe('RoadScenePanel — pick → compose → render (§14)', () => {
     expect(headings.some(t => /The road to Brackwater/.test(t))).toBe(true);
     // the "Dress with AI" affordance is offered.
     expect([...container.querySelectorAll('button')].some(b => /Dress with AI/.test(b.textContent))).toBe(true);
+  });
+});
+
+describe('RoadScenePanel itemLine — graceful fallback, never raw JSON (finding-12)', () => {
+  const JSON_CHARS = /[{}[\]"]/; // brace/bracket/quote = a JSON.stringify leak
+
+  test('an unrecognized brief item speaks its labelled fields, never JSON', () => {
+    const line = itemLine('onRoad', { kind: 'pilgrimage', at: 'Aldermoor' });
+    expect(line).not.toMatch(JSON_CHARS);
+    expect(line).toContain('pilgrimage');
+    expect(line).toContain('Aldermoor');
+  });
+
+  test('a bare/unknown item yields a calm in-world line, not "{}"', () => {
+    const line = itemLine('gates', {});
+    expect(line).not.toMatch(JSON_CHARS);
+    expect(line.length).toBeGreaterThan(0);
+  });
+
+  test('recognized items still render their existing lines (no regression)', () => {
+    expect(itemLine('gates', { state: 'under siege', by: 'The Coalition' })).toBe('Under siege by The Coalition');
   });
 });

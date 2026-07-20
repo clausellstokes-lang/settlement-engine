@@ -20,8 +20,9 @@ const selectStyle = {
   border: `1px solid ${swatch['#EDE3CC']}`, padding: '4px 6px', maxWidth: '100%',
 };
 
-/** A compact human line for one brief item (per section). Pure. */
-function itemLine(sectionId, it) {
+/** A compact human line for one brief item (per section). Pure.
+ *  Exported for the regression pin: an unrecognized item never renders raw JSON. */
+export function itemLine(sectionId, it) {
   if (sectionId === 'road') {
     if (it.leg) return `${it.leg} — ${it.hops} hop${it.hops === 1 ? '' : 's'}, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}`;
     return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}`;
@@ -36,7 +37,15 @@ function itemLine(sectionId, it) {
     if (it.state === 'under siege') return `Under siege by ${it.by}`;
     if (it.state === 'a festival is on') return `A festival is on — ${it.guestRight}`;
   }
-  return JSON.stringify(it);
+  // Graceful in-register fallback: the composer is registry-driven and grows (a
+  // future onRoad kind / gate state), so speak whatever labelled fields the item
+  // carries — never raw JSON on the DM's diegetic staging surface (§14).
+  const what = it.state || it.kind || it.condition || it.purpose;
+  const where = it.at || it.heading || it.to || it.by || it.home;
+  if (what && where) return `${what} — ${where}`;
+  if (what) return String(what);
+  if (where) return `Movement near ${where}`;
+  return 'Something stirs on the road, the particulars not yet clear.';
 }
 
 export default function RoadScenePanel({ campaign }) {

@@ -221,7 +221,16 @@ function transitionLabel(transition) {
  * @returns {Map<string, string>}
  */
 function nodeNameMap(graph) {
-  return new Map((graph.nodes || []).map(node => /** @type {[string, string]} */ ([String(node.id), node.name || String(node.id)])));
+  // Map only REALLY-NAMED nodes: graph normalization (region/graph.js) defaults a
+  // nameless node's name to String(node.id), so a node "has a name" that is just
+  // its raw internal id. Exclude those (name === id) as well as the truly nameless
+  // so the headline/summary fallback chains reach a neutral in-world phrase, never
+  // the raw id inside diegetic copy.
+  return new Map(
+    (graph.nodes || [])
+      .filter(node => node && node.name && String(node.name) !== String(node.id))
+      .map(node => /** @type {[string, string]} */ ([String(node.id), String(node.name)])),
+  );
 }
 
 /**
@@ -379,7 +388,7 @@ function scopeForImpact(impact) {
  */
 function headlineForImpact(impact, transition, names) {
   const label = impactLabel(impact.kind);
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'Unknown settlement';
+  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'Unknown settlement';
 
   if ((impact.waveDepth || 0) > 0 && (transition === 'queued' || transition === 'ready')) {
     return `Regional cascade reaches ${target}`;
@@ -407,8 +416,8 @@ function headlineForImpact(impact, transition, names) {
  * @returns {string}
  */
 function summaryForImpact(impact, transition, names, channels, event) {
-  const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || impact.sourceSettlementId || 'A regional source';
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || impact.targetSettlementId || 'the target';
+  const source = names.get(String(impact.sourceSettlementId)) || impact.sourceSettlementName || 'A regional source';
+  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'the target';
   const channel = channels.get(String(impact.channelId));
   const channelType = human(impact.channelType || channel?.type || 'regional channel').toLowerCase();
   const goods = (impact.goods || []).map(g => g.label || g.id).filter(Boolean).slice(0, 3).join(', ');

@@ -73,4 +73,27 @@ describe('WizardNewsPanel chronicle', () => {
     expect(appendSpy).toHaveBeenCalledWith('camp-1', { tick: 4, prose: 'A season of hunger.' });
     expect(setCreditSpy).toHaveBeenCalledWith(3);
   });
+
+  // correctness-2: the paid Chronicle button must never stick busy forever.
+  it('clears busy and surfaces an error when the request RESOLVES with { error }', async () => {
+    requestSpy.mockResolvedValue({ error: 'Sign in to generate a chronicle' });
+    render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);
+    fireEvent.click(screen.getByRole('button', { name: /chronicle/i }));
+    // the error surfaces...
+    expect(await screen.findByText(/Sign in to generate a chronicle/i)).toBeTruthy();
+    // ...and the button un-busies (label back to "Chronicle", enabled), never stuck on "Writing".
+    const button = screen.getByRole('button', { name: /chronicle/i });
+    expect(button.disabled).toBe(false);
+    expect(appendSpy).not.toHaveBeenCalled();
+  });
+
+  it('clears busy and surfaces an error when the request REJECTS (throws)', async () => {
+    requestSpy.mockRejectedValue(new Error('kaboom'));
+    render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);
+    fireEvent.click(screen.getByRole('button', { name: /chronicle/i }));
+    expect(await screen.findByText(/Chronicle generation failed/i)).toBeTruthy();
+    const button = screen.getByRole('button', { name: /chronicle/i });
+    expect(button.disabled).toBe(false);
+    expect(appendSpy).not.toHaveBeenCalled();
+  });
 });

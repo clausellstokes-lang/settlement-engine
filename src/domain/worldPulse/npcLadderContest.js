@@ -732,7 +732,7 @@ function driveSupportGoals(a) {
     const failed = patronGone || patronFailed.has(patronNid) || (patronOut && (patronOut.expired || patronOut.lapsed) && !patronOut.fired);
     const succeeded = !failed && (patronSucceeded.has(patronNid) || (patronOut && patronOut.fired));
     if (failed) {
-      mutate(nid, (st) => ({ ...st, goal: remint(nid) })); // his cause fell with his patron's
+      mutate(nid, (st) => ({ ...st, goal: remint(nid) })); // their cause fell with their patron's
       news.push(contestSupportBeat(sid, townName, nid, patronNid, 'cascade', tick, now));
       continue;
     }
@@ -824,10 +824,10 @@ function contestSupportBeat(sid, townName, nid, patronNid, phase, tick, now) {
   return {
     id: `wizard_news.${tick}.npc_support.${sid}.${phase}.${nid}.${patronNid}`,
     tick, createdAt: now, scope: 'local', significance: 'notable', severity: cascade ? 0.3 : 0.25, score: cascade ? 44 : 43,
-    headline: cascade ? 'A supporter\'s cause falls with his patron\'s' : 'A supporter shares in his patron\'s victory',
+    headline: cascade ? 'A supporter\'s cause falls with their patron\'s' : 'A supporter shares in their patron\'s victory',
     summary: cascade
-      ? `In ${townName}, a linked supporter's cause fell with his patron's — the dependency ran to its end.`
-      : `In ${townName}, a supporter shared in his patron's victory, and the bond deepened both ways.`,
+      ? `In ${townName}, a linked supporter's cause fell with their patron's — the dependency ran to its end.`
+      : `In ${townName}, a supporter shared in their patron's victory, and the bond deepened both ways.`,
     kind: 'applied', impactKind: 'npc_support', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [], sourceEventId: `npc_support.${sid}.${phase}.${nid}.${patronNid}.${tick}`,
     tags: ['world_pulse', 'npc_support', phase], reasons: ['A D-4f linked support-goal outcome.'],

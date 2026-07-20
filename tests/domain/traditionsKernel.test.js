@@ -203,6 +203,23 @@ describe('§5 effects — write-bounded economy + legitimacy', () => {
   });
 });
 
+describe('content/voice — tradition beat reasons stay in house voice (content-2)', () => {
+  it('no design-doc § reference or mechanism jargon reaches a user-facing beat reason', () => {
+    const cancelled = runTick({ settlement: town({ prosperity: 'Subsistence', legit: 50 }), recs: [makeRec()], weeks: 9 });
+    const rec = makeRec({ scaleBand: 4 });
+    const stlm = town({ prosperity: 'Comfortable', legit: 55 });
+    const seed = findSeed(TRADITION_OUTCOME.TRIUMPH, rec, stlm);
+    const triumph = runTick({ settlement: stlm, recs: [rec], rngSeed: seed, weeks: 9 });
+
+    const reasons = [...(cancelled.news || []), ...(triumph.news || [])].flatMap((n) => n.reasons || []);
+    expect(reasons.length).toBeGreaterThan(0);
+    for (const r of reasons) {
+      expect(r).not.toMatch(/§/);
+      expect(r.toLowerCase()).not.toMatch(/success roll|half weight|notable floor|rumor net|applicator/);
+    }
+  });
+});
+
 describe('§16 (Wave C) — the fair trade-lane pulse', () => {
   const fairRec = (o = {}) => makeRec({ id: 'tradition.ashford.fair', coreMotif: { element: 'harvest', act: 'fair' }, name: 'The Harvest Fair', scaleBand: 4, ...o });
   const onRoute = (route) => ({ ...town({ prosperity: 'Comfortable', legit: 55 }), config: { tradeRouteAccess: route } });

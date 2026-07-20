@@ -462,8 +462,8 @@ function traditionBeat(a) {
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `Cancelled under hard stress or a desperate economy (§3 skip) — no success roll was taken; a mild legitimacy cost fell ${named ? `at half weight on the town (${named} named)` : 'on the seat'}.`
-    : `A weighted success roll (§4) resolved to ${outcome}; the outcome fed the settlement's economy and legitimacy${named ? ` at half weight (${named} named)` : ''} through the bounded §5 applicators.`;
+    ? `Set aside under hard stress or a lean season — no observance was held, at a mild cost to ${named ? `the town's standing, borne lightly since ${named} keep it` : "the seat's standing"}.`
+    : `The observance was held and its fortune weighed: it ${positive ? 'lifted' : 'weighed on'} the town's trade and the standing of ${named ? `${named}, who answer for it` : 'the seat'}.`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,
     tick,
@@ -515,7 +515,7 @@ function traditionChangeBeat({ sid, townName, year, tick, now }) {
     channelIds: [],
     sourceEventId,
     tags: ['world_pulse', 'tradition', 'tradition_change'],
-    reasons: ['A tradition mutation reshaped the settlement’s dominant observance; the change enters the rumor net (score above the notable floor) so distant courts can in time learn of it.'],
+    reasons: ['The settlement’s foremost observance has taken a new form; word of the change travels the roads, and distant courts learn of it only in time.'],
   };
 }
 

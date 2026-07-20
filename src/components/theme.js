@@ -62,6 +62,7 @@ export const SLATE_BG = L.SLATE_BG;
 // (VIOLET*→SLATE* rename completed at fold batch 2, 2026-07-19 — no aliases.)
 export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate-700'])
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
+export const GREEN_DEEP = L.GREEN_DEEP; // legible green text on green-100 tints (== color['green-700'])
 export const RED       = L.RED;
 export const RED_BG    = L.RED_BG;
 export const GREEN     = L.GREEN;

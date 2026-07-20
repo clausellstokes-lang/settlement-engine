@@ -201,16 +201,38 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const inactiveRetained = useMemo(() => inactiveRetentionCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
 
+  // Owner-keyed cancel latch: a ref that holds the LIVE owner id, so a mount-once
+  // load (or an in-flight reload) can tell whether the account was switched while
+  // savesService.list() was resolving and discard a stale result — otherwise a
+  // slow load can paint the previous owner's library over the new one. Kept
+  // current in an effect (commits before any async list() resolves).
+  const ownerIdRef = useRef(authUser?.id ?? 'anon');
+  useEffect(() => { ownerIdRef.current = authUser?.id ?? 'anon'; }, [authUser?.id]);
+
   const reloadSaves = useCallback(async () => {
+    const ownerAtRequest = ownerIdRef.current;
     const loaded = await savesService.list();
+    // Discard a stale reload if the owner switched mid-flight.
+    if (ownerIdRef.current !== ownerAtRequest) return loaded;
     setSaves(loaded);
     return loaded;
   }, [setSaves]);
 
   useEffect(() => {
+    const ownerAtRequest = ownerIdRef.current;
+    let cancelled = false;
+    const stale = () => cancelled || ownerIdRef.current !== ownerAtRequest;
     savesService.list()
-      .then(loaded => { setSaves(loaded); setSavesLoading(false); })
-      .catch(e => { console.error('Failed to load saves:', e); setSavesLoading(false); });
+      .then(loaded => { if (stale()) return; setSaves(loaded); setSavesLoading(false); })
+      .catch(e => {
+        if (stale()) return;
+        // FAIL-VISIBLE, never fail-silent: a failed library load must not read
+        // as an empty library. Route it into the shared trust-surface alert.
+        console.error('Failed to load saves:', e);
+        setPersistenceError('Your library could not be loaded — check your connection and reload.');
+        setSavesLoading(false);
+      });
+    return () => { cancelled = true; };
   }, [setSaves]);
 
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
@@ -598,7 +620,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // search/sort/filter UI actually changes what renders).
   const assignedIds = useMemo(() => {
     const ids = new Set();
-    for (const c of activeCampaigns) for (const id of c.settlementIds) ids.add(id);
+    for (const c of activeCampaigns) for (const id of c.settlementIds || []) ids.add(id);
     return ids;
   }, [activeCampaigns]);
 
@@ -754,7 +776,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               // as campaignSettlements): a number/string-mismatched member now
               // ADVANCES, so it must also be visible in its campaign folder —
               // otherwise it could never be removed from the campaign.
-              ? campaign.settlementIds.map(id => saves.find(s => String(s.id) === String(id)))
+              ? (campaign.settlementIds || []).map(id => saves.find(s => String(s.id) === String(id)))
                   .filter(Boolean).filter(s => filteredIds.has(s.id))
               : [];
             return (

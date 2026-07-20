@@ -88,8 +88,9 @@ function localLoad(ownerId = 'anon') {
   return campaignService.loadCached(ownerId).map(migrateCampaign);
 }
 
-/** Migrate a single campaign object to the current schema */
-function migrateCampaign(camp) {
+/** Migrate a single campaign object to the current schema.
+ *  Exported for the correctness-1 regression pin (settlementIds normalization). */
+export function migrateCampaign(camp) {
   if (!camp || typeof camp !== 'object') return camp;
   const next = { ...camp };
   if (!isUuid(next.id)) next.id = newCampaignId();
@@ -98,6 +99,12 @@ function migrateCampaign(camp) {
   next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
   next.worldState = ensureWorldState(next.worldState, next);
   next.accessState = next.accessState || 'active';
+  // Normalize settlementIds at the single load chokepoint so no campaign ever
+  // enters the store without the field. SettlementsPanel iterates c.settlementIds
+  // unconditionally (assignedIds useMemo + the campaign-folder map); a legacy /
+  // partial campaign missing this array otherwise throws mid-render and white-
+  // screens the whole library.
+  next.settlementIds = Array.isArray(next.settlementIds) ? next.settlementIds : [];
   return next;
 }
 

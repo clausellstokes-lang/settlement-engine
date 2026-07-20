@@ -38,6 +38,7 @@ import { t } from '../../copy/index.js';
 import { CARD, SLATE, SLATE_DEEP, MUTED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { AnchorChip, PromptArea } from './surveyorPanelKit.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
@@ -59,6 +60,13 @@ export default function SurveyorDoor({ visible = true }) {
   const [nonce, setNonce] = useState(0);
   const surveyorEntitled = useSurveyorEntitled();
   const { anchorLabel } = useSurveyorContext();
+  // Route the slip through the app's shared modal focus standard (the same
+  // useDialogFocusTrap the 14+ sibling dialogs use): focus in on open, trap Tab,
+  // Escape closes, focus restored to the trigger on close. The trigger Button is
+  // kept mounted while the slip is open (tucked behind the panel via CSS) so the
+  // hook has a live element to restore focus to — Button does not forward refs,
+  // so the hook's native document.activeElement restore is the clean path.
+  const doorRef = useDialogFocusTrap(promptOpen, () => setPromptOpen(false));
 
   if (!visible || !surveyorEntitled) return null;
 
@@ -80,12 +88,14 @@ export default function SurveyorDoor({ visible = true }) {
   return (
     <>
       {/* The marker: no text until hover/focus (the label is a reveal flag; AT reads the
-          aria-label regardless). Rendered only when no surface of the door is open. */}
-      {!promptOpen && !dest && (
+          aria-label regardless). Kept mounted while the slip is open (tucked behind the
+          panel via sf-door-tab--open) so useDialogFocusTrap can restore focus here on
+          close; hidden only once a destination panel takes over. */}
+      {!dest && (
         <Button
           variant="ai"
           size="sm"
-          className="sf-door-tab"
+          className={`sf-door-tab${promptOpen ? ' sf-door-tab--open' : ''}`}
           onClick={() => setPromptOpen(true)}
           aria-label={t('surveyorDoor.label')}
           aria-haspopup="dialog"
@@ -96,7 +106,10 @@ export default function SurveyorDoor({ visible = true }) {
 
       {promptOpen && (
         <div
+          ref={doorRef}
           role="dialog"
+          aria-modal="true"
+          tabIndex={-1}
           aria-label={t('surveyorDoor.heading')}
           className="sf-door-panel"
           style={{

@@ -14,6 +14,20 @@ import {
 } from '../../src/domain/worldPulse/npcLadderContest.js';
 import { attributionWeight } from '../../src/domain/worldPulse/npcLadderGoals.js';
 import { normalizeContests, sortedContests, LADDER_TUNING } from '../../src/domain/worldPulse/npcLadderState.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+
+// content-4: NPCs carry a real 50/50 gender field, and the house voice uses the
+// gender-neutral singular 'their'. Pin the contest support beat so it can never
+// regress to the masculine 'his patron'.
+describe('content/voice — contest support beat is gender-neutral (content-4)', () => {
+  const SRC = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../src/domain/worldPulse/npcLadderContest.js'), 'utf8');
+  it('the support beat says "their patron", never the gendered "his patron"', () => {
+    expect(SRC).not.toMatch(/his patron/i);
+    expect(SRC).toMatch(/their patron/);
+  });
+});
 
 // ── Fixture builders ──────────────────────────────────────────────────────────
 /** A goal fixture (verb derives from startScore vs threshold). */

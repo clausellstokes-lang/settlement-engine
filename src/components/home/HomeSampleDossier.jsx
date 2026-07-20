@@ -19,7 +19,7 @@
  */
 
 import { useEffect } from 'react';
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, GREEN_DEEP, SLATE_DEEP, AMBER_DEEP } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -37,10 +37,14 @@ const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 const serif = '"Crimson Text", Georgia, serif';
 
+// Each callout keeps its bright `accent` for the left border / hairline (a UI
+// boundary, no text-contrast floor) but the 9px uppercase eyebrow reads in the
+// darker `-700` ink of the same hue so it clears WCAG AA 4.5:1 on its tint
+// (a11y-3 / content-1): green-700 5.40:1 · slate-700 6.40:1 · amber-700 5.39:1.
 const CALLOUTS = [
-  { key: 'newDm',         accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'worldbuilder',  accent: SLATE, bg: '#E4E9EE' },
-  { key: 'fridaysSession',accent: AMBER,  bg: '#FBEAD0', italic: true },
+  { key: 'newDm',         accent: GREEN,  ink: GREEN_DEEP, bg: '#E2EEDB' },
+  { key: 'worldbuilder',  accent: SLATE,  ink: SLATE_DEEP, bg: '#E4E9EE' },
+  { key: 'fridaysSession',accent: AMBER,  ink: AMBER_DEEP, bg: '#FBEAD0', italic: true },
 ];
 
 export default function HomeSampleDossier({ compact = false }) {
@@ -119,7 +123,7 @@ export default function HomeSampleDossier({ compact = false }) {
         padding: M.bodyPad,
         display: 'flex', flexDirection: 'column', gap: M.bodyGap,
       }}>
-        {CALLOUTS.map(({ key, accent, bg, italic }) => {
+        {CALLOUTS.map(({ key, accent, ink, bg, italic }) => {
           const eyebrow = t(`sampleDossier.callouts.${key}.eyebrow`);
           const body = t(`sampleDossier.callouts.${key}.body`);
           return (
@@ -136,7 +140,7 @@ export default function HomeSampleDossier({ compact = false }) {
               <div style={{
                 fontSize: FS.micro, fontWeight: 800,
                 letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: accent,
+                color: ink,
               }}>
                 {eyebrow}
               </div>

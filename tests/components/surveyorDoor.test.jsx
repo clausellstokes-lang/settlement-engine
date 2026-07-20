@@ -132,3 +132,28 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     expect(screen.getByTestId('dest-workshop').getAttribute('data-prompt')).toBe('');
   });
 });
+
+describe('SurveyorDoor — the slip is a real modal dialog (a11y-1)', () => {
+  it('the open slip is aria-modal and moves focus into itself (not orphaned on <body>)', () => {
+    setEntitled(true);
+    openDoor();
+    const dialog = screen.getByRole('dialog');
+    expect(dialog.getAttribute('aria-modal')).toBe('true');
+    expect(dialog.contains(document.activeElement)).toBe(true);
+  });
+
+  it('Escape closes the slip and restores focus to the door tab (never orphaned)', () => {
+    setEntitled(true);
+    render(<SurveyorDoor />);
+    const tab = screen.getByRole('button', { name: /ask the surveyor/i });
+    tab.focus(); // the trigger holds focus when the slip opens
+    fireEvent.click(tab);
+    expect(screen.getByRole('dialog')).toBeTruthy();
+
+    // The shared hook's window keydown handler dismisses on Escape.
+    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).toBeNull();
+    // Focus returns to the still-mounted trigger, not to <body>.
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: /ask the surveyor/i }));
+  });
+});

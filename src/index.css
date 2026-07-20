@@ -509,6 +509,14 @@ button {
   opacity: 1;
   transform: translate(0, -50%);
 }
+/* While the slip is open the trigger stays mounted (so the focus trap can
+   restore focus to it on close) but is tucked under the panel and made inert —
+   visually identical to the previous unmount, with focus never orphaned. */
+.sf-door-tab--open {
+  left: 12px;
+  z-index: 59;
+  pointer-events: none;
+}
 
 /* The door's prompt slip — docked at the tab's margin position. */
 .sf-door-panel {

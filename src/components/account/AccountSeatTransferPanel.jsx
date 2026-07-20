@@ -43,12 +43,29 @@ const textInputStyle = {
 };
 const codeInputStyle = { ...textInputStyle, width: 140, letterSpacing: '0.3em', textAlign: 'center' };
 
+/**
+ * WCAG 4.1.3 Status Messages: danger is an assertive alert; success + muted
+ * announce politely, so a screen-reader user hears the positive outcomes of a
+ * money action ("code sent", "transfer confirmed", "seat sold back") instead of
+ * being stranded mid-purchase — matching AccountAutoReloadPanel's role="status".
+ * Exported pure so the a11y-2 regression pin can assert the mapping directly.
+ * @param {'danger'|'success'|'muted'} tone
+ * @returns {{ role: 'alert'|'status', 'aria-live': 'assertive'|'polite' }}
+ */
+export function noteAria(tone) {
+  return tone === 'danger'
+    ? { role: 'alert', 'aria-live': 'assertive' }
+    : { role: 'status', 'aria-live': 'polite' };
+}
+
 function Note({ children, tone = 'muted' }) {
   const color = tone === 'danger' ? swatch.danger : tone === 'success' ? swatch.success : MUTED;
   const accent = tone === 'danger' ? swatch.danger : SECOND;
+  const aria = noteAria(tone);
   return (
     <div
-      role={tone === 'danger' ? 'alert' : undefined}
+      role={aria.role}
+      aria-live={aria['aria-live']}
       style={{ paddingLeft: SP.md, borderLeft: `3px solid ${accent}`, fontSize: FS.xs, color, marginTop: SP.sm, lineHeight: 1.55 }}
     >
       {children}
