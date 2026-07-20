@@ -74,8 +74,17 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
   // reader added here must be dispositioned before this pin is updated.
   const EXPECTED = [
     'src/domain/worldPulse/applyWorldPulse.js',
+    // V-K THE ASSIZE (dark): a RAW roster read (the roadsKernel/partyImpact idiom), gated by
+    // assizeEnabled — scans the full roster for a corrupt un-ousted seat-holder (captured-bench
+    // detection) and for the masses. Dormant by default (no flag in DEFAULT_SIMULATION_RULES);
+    // participation-independent (the assize reads standing/corruption, not stage presence).
+    'src/domain/worldPulse/assizeKernel.js',
     'src/domain/worldPulse/causeLifecycle.js',
     'src/domain/worldPulse/clergyTraitPlane.js',
+    // V-K THE COMMONS' VOICE (dark): a RAW roster read gated by commonsVoiceEnabled — reads the
+    // roster for the persistent per-settlement commons sidecar. Dormant by default; participation-
+    // independent (reads legitimacy/corruption/unrest scalars, not stage presence).
+    'src/domain/worldPulse/commonsVoiceKernel.js',
     'src/domain/worldPulse/corruptionImpair.js',
     'src/domain/worldPulse/corruptionWeb.js',
     'src/domain/worldPulse/disposition.js',

@@ -54,6 +54,7 @@ import { foldObligations } from '../spatial/generosityReactions.js';
 import { mintFactionPairIncident } from './factionPairLedger.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { institutionIsLawOrder } from '../institutionClassify.js';
+import { isLiveInstitution } from '../institutions/institutionRoster.js';
 import { npcId } from './npcAgency.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads } from './roadsKernel.js';
 import { advanceCommonsVoice } from './commonsVoiceKernel.js';
@@ -155,7 +156,10 @@ function judgeCourt(settlement, accusedNpc) {
 /** @param {Record<string, unknown>} settlement @returns {boolean} */
 function hasJusticeVenue(settlement) {
   const insts = Array.isArray(asObject(settlement).institutions) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).institutions) : [];
-  return insts.some((inst) => institutionIsLawOrder(/** @type {any} */ (inst)));
+  // Route through the canonical ruin-filter (institutionRoster): a calamity-ruined or
+  // abandoned courthouse is no venue — only a STANDING law-order institution can seat a
+  // judgment. Keeps the assize out of the ruin-filter defect class.
+  return insts.some((inst) => isLiveInstitution(/** @type {any} */ (inst)) && institutionIsLawOrder(/** @type {any} */ (inst)));
 }
 
 /** @param {Record<string, unknown>} settlement @param {Record<string, unknown>} accused @param {Record<string, unknown>|null} governing @returns {string} */
