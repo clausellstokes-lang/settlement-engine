@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ROUND 3 WAVE F2 SHIPPED — the engine's open defects closed (2026-07-20,
+composite-r4 @ 6298d9a6; manager-validated).** 9 of 11 fixed, 21 files: THE COURIER
+LIVENESS P1 closed across all 4 seam ledgers (exact-age depositTick===tick-1 guards,
+the gratitudeBonds idiom — WITH a real code-over-brief correction: roads deposits
+stamped the WEEK clock, not the tick clock; the implementer added the depositTick
+stamp writer-side so the guard is clock-consistent) · organic underways founding
+un-deadened (slug→catalog-NAME, gated behind new dark flag
+underwaysOrganicFoundingEnabled — the identifier repair alone would have ACTIVATED
+emission; the flag preserves byte-identity, good judgment) · occupation sheds refugees
+past 6 ticks (occupation_resistance/burden join WAR_CRISIS/CRISIS_FLIGHT) · the
+occupier installs category:'occupation' (the archetype bucket reachable, end-to-end
+pin) · third-party ransom speaks the payer's true voice (3 roadsProse pools by
+payerMotive) · perf hoists byte-identical (blockade targets, obligation index) ·
+generosity incident write stamped+annotated per the refuter amendment · manual DM
+decrees record provenance (flag-gated, dark byte-neutral, both paths probed). Gate:
+strict 0 · tsc 0 · lint 0 · dormancy goldens 43 · focused 357 · build ✓ · dist 162 ·
+closure 1,024,585 IDENTICAL · NUL clean. HONEST REVERT (→ owner queue): coherence-09
+governs-resolver unification MOVED beliefMapGolden bg-a (a NON-parked-family shift is
+impossible here — bg-a is INSIDE the parked family, but the unification changes its
+content beyond the ONE-REGEN re-mint's declared causes) — reverted; the divergence
+closes only via an owner-signed re-mint decision. §11 D-3 ownership row corrected on
+this ledger branch (generosity OWNS intelTransfers; statecraft reads). Parked-family
+sub-case reds (bg-a, gm-pulse-a/b) verified base-debt at ad15e2c1 by revert-probe —
+consistent with the 4 parked families, no new red. WAVE F3 (8 dark coherence builds)
+DISPATCHED.**
 **⬛⭐ ROUND 3 WAVE F1 SHIPPED — UI correctness + a11y + voice (2026-07-20,
 composite-r4 @ ad15e2c1 + ledger doc @ fab8f91d; manager-validated).** 11 of 13
 findings fixed + 13 pins across 24 files: the P1 library white-screen closed at the
