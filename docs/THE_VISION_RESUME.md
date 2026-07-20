@@ -43,18 +43,23 @@
     V-O (platform completions V-27a..f) in the `vision-e` wt
     on `claude/vision-o` (⚠ if V-27f mints a migration it mints 168-local off head
     167 and the REPORT flags it — V-E's 168 has fold precedence, the fold renumbers;
-    per the established sibling-mint protocol) · V-L (engine textures) in the
-    `vision-j` wt on `claude/vision-l` · V-G (campaign import → V-F's wall, world
-    book, founding seeds, table companion) in the `vision-i` wt on `claude/vision-g`.
+    per the established sibling-mint protocol) · V-N (multi-hop interview +
+    handbook rewrite staged-for-taste) in the `vision-j` wt on `claude/vision-n`
+    @ base 5d9218c6 (V-1's edge fn is in its base; edge tree changes ⇒
+    build:edge-shared + validate:edge; aiGrounding desync hazard) · V-G (campaign
+    import → V-F's wall, world book, founding seeds, table companion) in the
+    `vision-i` wt on `claude/vision-g`.
   - MORE FOLD-READY: V-F @ claude/vision-f `c15c2311` (session ledger/auspice/DM
     screen; ledger 9afbfbc7; seams: letter+oracle slot mounts, worker transport
     swap, import→wall unification when V-G lands) · V-J @ `3f3805b7` (pass-2 with
     rewrites) · V-K @ claude/vision-k `b0f1dbe6` (V-22 assize + V-23 commons, both
     dark; stigma rides the ladder; name-swap composition — pulseKernel FROZEN;
-    ledger row in; IN fold pass 2 now). Remaining queue: V-N ONLY (V-26a multi-hop
-    interview — extends V-1, which is now FOLDED, so it dispatches into the next
-    freed worktree slot; V-26b handbook rewrite staged-for-taste). V-M and V-O
-    are RUNNING (see HOT).
+    ledger row in; IN fold pass 2 now) · V-L @ claude/vision-l `3b33c1a6` (V-24a-d
+    engine textures, dark, eager Δ≈0; ⚠ roadsKernel at EXACTLY 800 — additions in
+    leaves; new EDIT_KIND ⇒ edge-bundle regen + revert spurious generatedAt churn;
+    fold pass 3). QUEUE EMPTY: V-N dispatched (vision-j wt → claude/vision-n @
+    5d9218c6) — EVERY lane V-A..V-O is now landed, folding, or hot. Fold pass 3 =
+    V-G + V-L + V-O + V-M + V-N (+ the import→wall seam once V-G lands).
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —

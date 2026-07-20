@@ -1134,6 +1134,35 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-L SHIPPED — the recall rider, the re-priced roads, the
+readable hearts, the deeper causes (2026-07-20, claude/vision-l @ 3b33c1a6, base
+212758ad, 5 commits, FOLD-READY; manager-verified tip+clean).** V-24a RECALL-NPC:
+a typed committable edit kind (the finite-semantics law) registered in LOCKSTEP
+across pendingEdits/editFingerprint/applyNpcOp/roads ops+state — the mission flips
+to `returning`, a real future arrival, never a teleport, no new mover; hostage/
+not-traveling no-op; secrets probe green. V-24b PER-ROUTE RE-PROPAGATION:
+routeAwareHopDelayTicks recomputes on READ, so in-flight rumor paths re-price live
+as routes sever/open (belief recency fold + player rumor display); calm/dark =
+byte-identical geometric; ENDPOINT embattlement only — mid-path hop = recorded
+follow-on. V-24c INTERIORITY-LITE: pure npcInteriorityRead.js leaf, disposition &
+wants from EXISTING state only, zero persisted writes; player-safe half renders;
+DM-truth relational block composed+tested but NOT wired (the display layer carries
+no worldState — the secrets architecture; one call lights it from a future
+worldState-bearing DM surface). V-24d PROVENANCE THREADING: the ransom release
+beat carries causedBy → the exact capture receipt node, flag-dark byte-neutral.
+Gate: strict 0 · tsc 0 · lint 0 · ~109 pins · dormancy goldens byte-identical ·
+dist 162 · closure 1,025,055 at tip (eager Δ ≈ 0; only the sanctioned edit-kind
+registry strings) · NUL clean · beliefMapGolden red PROVEN pre-existing at base by
+file-revert re-run. DEFERRED-RECORDED (cycle-2 intake): contests provenance edge
+needs ContestRec.openedTick (a lit-golden-affecting schema add — flagged, not
+built) · gratitude edge lacks a durable receipt id · believed-path mid-hop
+re-pricing. HAZARDS BANKED: roadsKernel at EXACTLY its 800-line ceiling (additions
+go in leaves) · new EDIT_KIND ⇒ build-edge-shared regen AND revert the spurious
+aiGroundingBundle generatedAt churn (sourceHash unchanged) · the piped-gate
+exit-masking hazard re-bit (strict check runs BARE, never through tail). SLOT →
+V-N (the LAST queued lane: multi-hop interview + handbook rewrite staged-for-
+taste) dispatched into the rotated vision-j worktree at the folded tip 5d9218c6 —
+with this dispatch EVERY lane of the wave (V-A..V-O) is landed, folding, or hot.**
 **⬛⭐⭐⭐ THE QUINTUPLE FOLD EXECUTED — the wave's first five lanes become one
 tree (2026-07-20, claude/composite-r4 @ 5d9218c6, base a9caa573; manager-verified:
 tip + clean tree + mig-168-contiguous CONFIRMED against git).** Merge order:
