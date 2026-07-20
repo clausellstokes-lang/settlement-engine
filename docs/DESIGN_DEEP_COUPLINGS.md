@@ -11,6 +11,12 @@
 ### constitution idioms · ladder goals inline) — every anchor re-verified against the
 ### tips named; the workflow journal cited by the matrix is GONE (path 404) — this
 ### doc carries the rationale inline so nothing depends on it.
+### ⛔ DESIGN CLOSED 2026-07-19 (owner scope freeze): sealed after absorbing, in
+### order — the contested-goals class · tunnel vision · the relationship-memory
+### cohesion · the positive-bond symmetry ruling (D-7c commissioned+symmetric,
+### D-7e, D-4f, the D-5 friendship channel) · the elite-bleed clause (D-7f).
+### Further ideas are vNext by the freeze (§15's closing note) — never absorbed
+### silently into this doc.
 
 ## §0 THE COMMISSION (the eight pieces → the slice map)
 These are the MISSING_NO_FOUNDATION pairs (each needs a new subsystem/attribute on at
@@ -25,7 +31,7 @@ and the relationship-memory cohesion). Slice map:
 | 5 | generosity×intel — the SELL/GIFT lane | D-3 | pre-fold |
 | 6 | naval×roads — MARITIME journeys | D-6 | POST-ROADS-FOLD |
 | 7 | CONTESTED GOALS (addendum) — head-to-head NPC goal contests | D-4 (cluster a-e) | pre-fold (after the-ladder residue folds) |
-| 8 | RELATIONSHIP-MEMORY COHESION (addendum) — the organic plane reused, ghosts wired | D-7 (+ the D-4 reads) | pre-fold (D-7c is ⛔owner-gated) |
+| 8 | RELATIONSHIP-MEMORY COHESION (addendum, completed by the positive-bond + elite-bleed rulings) — the organic plane reused, ghosts wired, SYMMETRIC bond memory (grudge AND bond, person and faction), linked/supportive goals, bonds flowing into contests/ransom/generosity, and the cross-settlement ELITE BLEED (personal elite relations become interstate relations, influence-weighted, double-counting-guarded) | D-7 (a-f) + D-4f + the D-5 matrix wiring | pre-fold machinery (D-7c commissioned 2026-07-19, shape owner-visible; D-7f's formation vectors live post-fold) |
 Pieces 1+2 are ONE belief-axis machinery with two feeders (designed together, D-1).
 Piece 7 is designed IN FULL here (not interface-stubbed): recon showed the resolution
 spine already exists (the challenge engine's pair-keyed deterministic contest), so the
@@ -59,8 +65,12 @@ defeat are all CONTINUATIONS of a life, never resolutions of one.
    THE EIGHT FLAGS: `migrationRumorsEnabled` (D-0) · `beliefAxesEnabled` (D-1) ·
    `npcCredibilityEnabled` (D-2) · `intelTradeEnabled` (D-3) ·
    `contestedGoalsEnabled` (D-4) · `thirdPartyRansomEnabled` (D-5) ·
-   `seaRoadsEnabled` (D-6) · `memoryWeaveEnabled` (D-7b, AND-ed with each ghost
-   host's own flag). Interplay gates (each null-safe): D-1 requires
+   `seaRoadsEnabled` (D-6) · `memoryWeaveEnabled` (ALL of D-7: the ghost wirings
+   AND-ed with each host's own flag, the symmetric person/faction bonds, the
+   generosity bond loop; D-4f linked goals gate on contestedGoalsEnabled ∧
+   memoryWeaveEnabled; D-5's friendship channel and bond-biased outcome read
+   bonds only when memoryWeaveEnabled — dark ⇒ the §9.1 matrix degrades to its
+   bond-free rows, stated there). Interplay gates (each null-safe): D-1 requires
    beliefsActive; D-2 requires infoStatecraftEnabled ∧ beliefsActive ∧ (ladder hook
    only when npcLadderEnabled); D-3 requires infoStatecraftEnabled ∧ (gift lane:
    constructiveFlowsEnabled); D-4 requires npcLadderEnabled; D-5 requires
@@ -296,7 +306,17 @@ defeat are all CONTINUATIONS of a life, never resolutions of one.
   verified verbatim): the incident-memory HALF-LIFE is not yet D5-band-scaled —
   an `undying` town's resentment persists but its derived memoryScore still
   decays on the 4-tick human half-life; relationshipMemoryWeight already
-  accepts the scaled options, "the wiring point is ready."
+  accepts the scaled options, "the wiring point is ready." NPC PAIRWISE MEMORY
+  IS NEGATIVE-ONLY (verified, npcLadderKernel.js:100-119): LadderStanding
+  carries `grudges: Record<string, LadderGrudge>` keyed by the other npcId,
+  LadderGrudge = {sev, week} — no positive twin exists anywhere. COALITION
+  MECHANICS (the D-7c recon-first set, anchors verified): coalition betrayal
+  ALREADY mints a typed settlement-plane incident — peaceTerms.js:1188-1206,
+  "deserter — resentment bump, typed 'coalition_betrayal' (the /betray/
+  revanchism …)", metadata {incidentType:'coalition_betrayal'} at :1206;
+  governingCoalition(item) at beliefMap.js:747; war-coalition formation lives
+  in the convergence layer (convergence.js — the implementer completes this
+  census at build time per the owner's recon-first order).
 - CONSTITUTION MACHINERY: dormancy-golden suite tests/property/*DormancyGolden
   .test.js (19 precedents); prng fork (prng.js:65); both commit-path stamps
   (campaignAdvanceSession.js:312/:511); COMMITTABLE_EDIT_KINDS (pendingEdits.js
@@ -314,7 +334,10 @@ PRE-FOLD (all build off claude/the-composite @ aad6265e, dark lanes):
   D-4 contested goals                (AFTER D-2 — the bluff/credibility coupling; GATE: the-ladder residue
                                       14e8a2fa folds or is absorbed first)
   D-7 the memory weave               (a+b free-order pre-fold — D-7a before D-4b sharpens tunnel vision;
-                                      D-7b's contest-loss incident needs D-4c; D-7c ⛔OWNER-GATED)
+                                      D-7b's contest-loss incident needs D-4c; D-7c/e commissioned, pre-fold;
+                                      D-7e before D-4f — support goals read bonds; D-7f MACHINERY pre-fold
+                                      but its formation vectors are roads contacts ⇒ it idles vacuously
+                                      until D-5/D-6 land, and its lit walkthrough runs on the post-fold lane)
 POST-ROADS-FOLD (design final now; build the instant claude/the-roads folds; RE-SURVEY anchors first —
 the branch moved during this design and will move again):
   D-5 third-party ransom             (roads + generosity + corruption-web substrates)
@@ -576,12 +599,15 @@ missing genesis. HIGHEST CALIBER HERE = the anti-hum law made structural.
   seller) in a lit walkthrough; tempo band held over 10 lit years; dark
   byte-identical; closure delta 0.
 
-## §8 D-4 — THE CONTESTED GOALS CLASS (flag: `contestedGoalsEnabled`; cluster D-4a..D-4e)
+## §8 D-4 — THE CONTESTED GOALS CLASS (flag: `contestedGoalsEnabled`; cluster D-4a..D-4f)
 Two named NPCs discover they are pursuing the SAME ambition — or opposing ones —
 and the resolution is head-to-head. The addendum's commission, designed in full.
 V1 SCOPE CUT (recorded): goals are conditions over settlement-scoped causal
 signals, so colliding goals are SAME-SETTLEMENT by construction; cross-settlement
-contests are a deferred seam (§15), not a silent absence.
+contest GENESIS is a vNext seam (§15) — but its outcome CHANNEL already exists:
+any future cross-border contest marks the NPC pair and reaches the settlement
+pair through D-7f's elite bleed, never a separate pathway (the channel contract,
+§10.5).
 - GENESIS (D-4a): inside the ladder pass (per settlement, npcLadderEnabled ∧
   contestedGoalsEnabled), after goal minting: scan active goals of DISTINCT NPCs
   for COLLISIONS on the same signalVar (goalSignalVar, npcLadderGoals.js:232):
@@ -729,6 +755,32 @@ contests are a deferred seam (§15), not a silent absence.
   folds the marker on its next pass). operationRegistry + gen:compendium-data +
   build:edge-shared; guidance whisper ships with the op (the lifecycle-doc
   covenant). Undo pin: champion → advance → undo leaves no marker and no backedBy.
+- LINKED / SUPPORTIVE GOALS (D-4f — the positive-bond ruling; gates
+  contestedGoalsEnabled ∧ memoryWeaveEnabled; the POSITIVE MIRROR of
+  tunnel-vision's rival-fixation): at goal genesis, an NPC holding a strong
+  positive bond (D-7e, sev ≥ SUPPORT_BOND_FLOOR) toward a rung-holder with an
+  active primary goal may mint a SUPPORT goal INSTEAD of a primary that year
+  (seeded draw, fork `ladder-support:${sid}:${nid}:${year}` tick-invariant;
+  ≤1 supporter per patron goal, codepoint tiebreak): LadderGoal gains optional
+  {supportOf: patronNid} — its condition IS the patron's condition (a derived
+  reference, re-resolved each tick against the patron's live goal; the patron
+  goal vanishing ⇒ the support goal LAPSES honestly). MECHANICS: progress =
+  the patron goal's progress (pure read); deposits = attributionWeight ×
+  SUPPORT_SHARE (0.4) as the patron's goal advances (office/domain rules apply
+  to the SUPPORTER's own seat — a highly-placed backer is worth more). THE
+  CASCADE (the owner's verbatim rule): the patron's primary FAILS — horizon
+  expiry, forestalled, or lapsed — ⇒ the support goal FAILS THE SAME WAY, SAME
+  TICK (the dependency edge; receipted "his cause fell with his patron's");
+  patron SUCCEEDS ⇒ the supporter books the support settlement AND the bond
+  deepens BOTH directions (a D-7e cooperation event — victory forges
+  friendship). CONTEST JOINING (bonds bias the contest): a live supporter — or
+  any bonded peer above JOIN_BOND_FLOOR — JOINS the patron's side of a contest
+  over that goal: the side gains BOND_JOIN_MARGIN (0.10) per joiner (cap 2 per
+  side) on resolution margins and tie-breaks (the backedBy precedent
+  generalized); losing-side joiners take no sting (the cascade, if linked, IS
+  their cost); winning-side joiners book a bond deepen with the winner.
+  NO-DEATH: a cascaded support goal is a goal failure — standing physics only;
+  the supporter's next year mints fresh.
 - NEWS/PROSE: discovery-when-both-aware (NOTABLE — "two hands reach for the same
   prize"), resolution (NOTABLE; MAJOR when a pillar contests), pools in
   `src/data/contestProse.js` via the eventProse registry (law 13).
@@ -755,7 +807,10 @@ contests are a deferred seam (§15), not a silent absence.
   bound pin) · D-4c resolution matrix + tie-break + window widening +
   conservation assert + plan-then-apply · D-4d news/prose + dormancy golden
   (contestedGoalsDormancy) + anti-vacuity · D-4e champion-npc op + registry +
-  regen + undo pin + eager delta quoted (≤300 B, the wave's only eager bytes).
+  regen + undo pin + eager delta quoted (≤300 B, the wave's only eager bytes) ·
+  D-4f support goals + the cascade + contest joining + the both-flag gating
+  pin (contests lit, memoryWeave dark ⇒ zero support goals, zero join terms —
+  byte-identical to D-4e's world).
 - GATES: focused + dormancy + ladder golden set untouched + the operationRegistry
   walker + compendiumDataFreshness (D-4e). DONE-WHEN: a lit walkthrough (§13)
   shows an unknowing convergent race discovered, bluffed, resolved, grudged, and
@@ -779,13 +834,21 @@ with the roads ransom as substrate and BOTH owner refinements binding.
   'succor'; OR (b) a PREDATORY seat — the generosity §2.1 leverage read (ambitious/
   evil-leaning governing archetype) with relationship home↔payer ∈ rival/cold_war
   — motive 'leverage' (buying a rival's notable IS the favor-economy weapon the
-  owner commissioned). Highest-EV candidate only; no auction (deferred §15).
-  Captor gate: a payer at open war with the CAPTOR cannot deal (atOpenWar read).
+  owner commissioned); OR (c) — when memoryWeaveEnabled — A FRIEND (the
+  positive-bond ruling): a settlement whose notable NPCs hold a D-7e positive
+  bond toward the captive (sev ≥ FRIEND_PAYER_FLOOR) — motive 'friendship',
+  ranked ahead of the other channels (a friend moves first). Highest-EV
+  candidate only; no auction (deferred §15). Captor gate: a payer at open war
+  with the CAPTOR cannot deal (atOpenWar read). On release by a friend-payer,
+  the captive's gratitude bond toward the payer's ruling-seat NPC deepens (a
+  D-7e formation event — being ransomed by a friend is how friendships become
+  legends).
 - THE REFUSAL (owner refinement ii — the pride-refusal seam made law): evaluated
   BEFORE any release logic (ahead of the :670-671 branch), fork
   `roads-ransom3p:refuse:${ransomId}`:
   ```
-  refuseP = clamp( BASE(motive,relation)            // 'succor' from an ally of home: 0.05
+  refuseP = clamp( BASE(motive,relation)            // 'friendship' (a friend's coin): 0.02
+                                                    // 'succor' from an ally of home: 0.05
                                                     // 'succor' from an unbonded neutral: 0.25
                                                     // 'leverage' (a rival's coin): 0.55
             + 0.30 × hasRefusingTrait               // dominant/flaw/modifier ∈
@@ -815,7 +878,9 @@ with the roads ransom as substrate and BOTH owner refinements binding.
                                                                   // the SAME read roads
                                                                   // conversion uses; ZERO
                                                                   // new trait machinery
-                 × motiveMult   ('leverage' 1.6 · 'succor'-unbonded 1.0 · 'succor'-ally 0.6)
+                 × motiveMult   ('leverage' 1.6 · 'succor'-unbonded 1.0 · 'succor'-ally 0.6
+                                 · 'friendship' 0.3 — a friend's ransom binds by GRATITUDE,
+                                   not leverage: the bond-biased outcome the owner ruled)
                  × acceptBias   (captive accepted VIA an accepting trait ? 1.4 : 1.0)
                  , 0, 0.5 )
   ```
@@ -845,7 +910,9 @@ with the roads ransom as substrate and BOTH owner refinements binding.
   | leverage (rival coin) | proud/loyal/principled | rival | 0.85 | ~0.13 | ~0.02 |
   | leverage | neutral | rival | 0.55 | ~0.32 | ~0.13 |
   | leverage | ambitious + corruptible flaw | rival | 0.30* | ~0.28 | ~0.42 (1.6 × 1.6 × 1.4, clamp 0.5) |
+  | friendship (bonded payer) | any refusing traits | any | 0.02-0.32 | ~dominant | ≤0.15 even for the flawed (0.3 mult — gratitude, not leverage) |
   | any, willConvert already latched | any | any | per row | remainder → DEBT (forced) | 0 (captor precedence) |
+  | any, memoryWeaveEnabled dark | (friendship rows unreachable) | — | bond-free rows only | per row | per row |
   (*accepting-trait −0.25 applied; servedFraction erosion moves every row's
   refuse column down as the term ages — the matrix is evaluated at half-term.)
   READ THE SHAPE: a rival's coin is usually refused by the honorable, usually
@@ -934,7 +1001,7 @@ THREE coordinated points plus hazards.
   against folded-roads; navalEnabled-dark ⇒ S1 unreachable, S2/S3 still live
   (blockades need the navy; weather and pirates do not — gating pinned).
 
-## §10.5 D-7 — THE MEMORY WEAVE (relationship-memory cohesion; pre-fold; D-7c ⛔OWNER-GATED)
+## §10.5 D-7 — THE MEMORY WEAVE (relationship-memory cohesion + the positive-bond symmetry + the elite bleed; pre-fold machinery; flag: `memoryWeaveEnabled`)
 The organic plane (§2's relationship-memory receipts) is ALREADY cohesive —
 one writer, typed decaying incidents, tuned decay, D5 bands. This slice does
 NOT rebuild anything; it closes the four bounded gaps the recon verified, so
@@ -966,32 +1033,124 @@ the contested-goals/tunnel-vision substrate is "cohesive like everything else."
   coupling-gating judgment, applied identically). Dormancy golden:
   memoryWeaveDormancy (lit-spatial + lit-traditions fixture, flag absent ⇒
   byte-identical).
-- D-7c THE FACTION-PAIR GRIEVANCE LEDGER (⛔ OWNER-GATED — NEW PERSISTED SCHEMA;
-  designed here, NOT assumed built; §14 Q10): a pairwise sub-record
-  (resentment + typed incidents, ≤8, decaying) as a SIBLING of the settlement
-  plane — nested under the existing factionStates surface, reusing the
+- D-7c THE FACTION-PAIR LEDGER — SYMMETRIC (OWNER-COMMISSIONED 2026-07-19, the
+  positive-bond ruling; the shape remains owner-VISIBLE, §14 Q10 records the
+  sign-off): a pairwise sub-record carrying BOTH signs — resentment AND
+  alliance/trust — plus typed incidents (≤8, decaying), as a SIBLING of the
+  settlement plane nested under the existing factionStates surface, reusing the
   relaxFactionStates / D5-band decay machinery (factionCompetition.js:280) so
-  the decay physics are inherited, not invented. Consumers: cross-faction
-  contest salience + fixation (§8), future faction-politics reads. The gate is
-  the SHAPE, not the code: a new persisted pairwise schema is owner-visible by
-  law; build only on sign-off. DEFAULT BUILT: absent — cross-faction fixation's
-  grievanceLean term reads 0 and the design degrades gracefully (stated in §8).
+  the decay physics are inherited for both signs, not invented. THE COALITION
+  COUPLING (recon-first — the §2 anchor set; the implementer completes the
+  census before writing): (i) FED BY — coalition betrayal/desertion (the
+  EXISTING typed 'coalition_betrayal' event, peaceTerms.js:1188-1206) DAMAGES
+  the pair's trust and feeds its resentment (consume the same event the
+  settlement plane already consumes — one event, two planes, each through its
+  own writer); standing together in a war coalition (the convergence layer's
+  formation/membership state) BUILDS trust on a slow accrual per shared-war
+  year; (ii) FEEDS — alliance FORMATION and DURABILITY reads bias on the
+  pair's trust (the coalition-formation seam consumes the ledger through its
+  own gates — deposit-and-consume, never a D-7 write into war state).
+  Consumers: cross-faction contest salience + fixation and the D-4 join/support
+  weights (§8), alliance formation/durability, future faction-politics reads.
 - D-7d (recorded rider, not a build): the incident half-life D5-band scaling
   deferral (relationshipMemory.js:13-22) — if ANY D-7 work touches
   relationshipMemoryWeight's call sites, thread the ready {halfLifeTicks,
   maxLookbackTicks} options per the file's own note; otherwise leave the
   deferral recorded as-is. Never silently re-find it.
+- D-7e PERSON-BOND SYMMETRY (the positive-bond ruling's person half): the
+  ladder-grudge structure gains its TWIN — LadderStanding gains
+  `bonds: Record<string, LadderBond>` keyed by the other npcId, LadderBond =
+  {sev, week, kind} with kind ∈ {loyalty, gratitude, friendship} — SAME
+  build/decay mechanics as grudges (D5-band half-life; additive stacking;
+  bounded cap), same single writer (the ladder kernel), same DELIBERATE
+  SUCCESSION RESET (a bond dies with the standing record — the
+  DESIGN_SIM_DEPTH_R2.md:170 state-never-fate doctrine; NEVER a parallel
+  NPC-pair graph). FORMATION EVENTS (each a deposit the ladder pass consumes,
+  or a write inside its own pass): sustained cooperation (same
+  bloc/governingCoalition membership across ≥2 consecutive years — the
+  beliefMap.js:747 read) · shared cause (same war-coalition side, per shared
+  year) · being RESCUED or RANSOMED by someone (the D-5 friendship/succor
+  payer and the roads rescue/ransom party ops deposit a gratitude event toward
+  the payer settlement's ruling-seat NPC) · being SUPPORTED in a contest (a
+  D-4 joiner/backer or a completed D-4f support goal — both directions).
+  THE GENEROSITY LOOP (the "flow into everything" clause, both directions):
+  (i) READ — generosityEV gains a bounded BOND term on the give side (the
+  courts' seated notables' bonds + the D-7c pair trust), biasing WHO receives
+  mercy; (ii) WRITE — a completed generosity act deposits a cooperation/
+  gratitude event (consumed by the ladder pass into bonds, beside the
+  obligations ledger entry the act already mints — obligation is the DEBT,
+  the bond is the FRIENDSHIP; they decay on different clocks and that
+  difference is the drama). ⚠ generosityKernel 800/800: the bond term rides
+  generosityEV/leaf per D-3's net-zero discipline.
+- D-7f THE ELITE BLEED (the final owner clause, 2026-07-19 — cross-settlement
+  NPC relationships ↔ settlement diplomacy, bidirectional, influence-weighted;
+  after this the design is CLOSED): NPC-level competition, goals, and
+  relationships EXTEND BETWEEN SETTLEMENTS, flavored by and shaping the
+  settlement↔settlement relationship, weighted by WHO the NPCs are.
+  * CROSS-BORDER MARKS: the D-7e bonds map and the grudges map MAY carry
+    FOREIGN counterpart keys — each mark gains optional {foreignSid} (each
+    side's ladder kernel writes only its OWN NPC's record on its own pass,
+    both consuming the same shared contact event — symmetric by construction,
+    no cross-writer). Prune tolerates foreign counterparts (the roster scan
+    consults foreignSid). FORMATION VECTORS are the roads contact events —
+    embassies, ransoms (a D-5 friend-payer's gratitude), visits, verification
+    journeys, cross-border contest outcomes — so PRE-FOLD worlds hold zero
+    cross-border marks and this machinery idles vacuously; it LIVES when the
+    post-fold slices land (sequencing stated in §3).
+  * DOWNWARD (flavor): the settlement-pair rung/scalars BIAS cross-border pair
+    disposition — a dispositionOf read (the grievanceRead leaf extended)
+    multiplies formation events: hostile pairs dampen bond formation and
+    amplify grudge formation (suspicion), trade-partner pairs ease merchant
+    bonds; contest-entry/discovery draws for cross-border rivals read the same
+    bias.
+  * UPWARD (shape — the bleed): personal elite relations BECOME interstate
+    relations, weighted:
+    `weight = importanceWeight(npc) × factionPowerStanding01 × politicsRank01`
+    (the governing faction's pillar ≫ a marginal faction's notable; BOTH NPCs
+    must be ≥ notable AND weight ≥ ELITE_BLEED_FLOOR or the pair contributes
+    NOTHING — two feuding nobodies are noise by law). The bleed is computed
+    INSIDE the relationship plane's OWN pass (relationshipEvolution — the
+    plane's writer reads the ladder ledgers read-only and applies its own
+    bounded term; ZERO new writers anywhere): a slow scalar nudge from the
+    pair's CURRENT accumulated bond/grudge standing, capped per settlement
+    pair per tick (ELITE_BLEED_CAP), decaying like everything else; a typed
+    incident (elite_feud / elite_amity) mints ONLY on significance-threshold
+    CROSSINGS (a state transition is an event; a persisting state is not).
+  * ⚠ THE DOUBLE-COUNTING GUARD (law-shaped, pinned): EVENTS mark the plane
+    they occur on, exactly as today — an embassy detention marks the
+    settlement pair directly (roads' existing write) and the NPC pair via its
+    contact mark, ONCE EACH; the BLEED carries only accumulated NPC-pair
+    STANDING and never re-counts events. One event, one mark per plane; the
+    bleed is state-driven, not event-driven. Fixture-pinned: a single
+    detention produces exactly one settlement-plane incident and one NPC mark,
+    and the subsequent bleed delta is bounded by the standing term alone.
+  * CROSS-SETTLEMENT CONTESTS INHERIT THE CHANNEL: contest GENESIS across
+    borders stays a vNext seam (§15 — the collision physics are
+    settlement-scoped), but any future cross-border contest's outcome marks
+    the NPC pair and bleeds through THIS channel — no separate pathway will
+    ever be built (recorded as the channel's contract).
 - WRITES ⇒ ONLY: typed incidents via applyRelationshipPatch (the applicator —
-  the plane's own writer does the writing) · the D-7c sub-records IF
-  owner-signed (via the factionStates surface's own relax pass) · NOTHING ELSE.
+  the plane's own writer does the writing) · the D-7c symmetric sub-records
+  via the factionStates surface's own relax pass · person bonds via the
+  LADDER's own writer (the bonds map — its list already amended in §8) ·
+  generosity's own deposit records · NOTHING ELSE.
 - COMMITS: D-7a read leaf + tests · D-7b the two ghost wirings + typed-incident
   vocabulary + dormancy golden + lit anti-vacuity (a seizure/imposition leaves
-  a mark that DECAYS on the decade clock, executed) · D-7c only-if-signed:
-  schema + decay reuse + cross-faction fixation wiring + its own dormancy
-  golden. GATES: focused + the relationship-plane golden set untouched +
-  dormancy. DONE-WHEN: a lit run shows route_seized/rite_imposed incidents
-  minted through the one writer, decaying, and READ by revanchism/fixation;
-  dark twin byte-identical; D-7c absent ⇒ everything still green.
+  a mark that DECAYS on the decade clock, executed) · D-7c symmetric schema +
+  decay reuse + the coalition census + betrayal-damages / standing-together-
+  builds / formation-bias wirings + pins · D-7e the bonds map + formation
+  events + the generosity loop (read term + deposit) + succession-reset pin +
+  its dormancy variant · D-7f the foreignSid marks + dispositionOf bias + the
+  bleed term in the plane's own pass + the threshold/cap/crossing-incident
+  machinery + the double-counting pin (machinery pre-fold; its lit walkthrough
+  runs on the POST-FOLD lane when roads contacts exist — stated, not slipped).
+  GATES: focused + the relationship-plane golden set untouched + dormancy.
+  DONE-WHEN: a lit run shows route_seized/rite_imposed incidents minted through
+  the one writer, decaying, and READ by revanchism/fixation; a coalition
+  betrayal decays the faction-pair bond (executed); a generosity act mints
+  obligation AND bond on their separate clocks; the D-7f guard pin green (one
+  event, one mark per plane); dark twin byte-identical; memoryWeave-dark ⇒
+  zero bonds keys anywhere (contract).
 
 ## §11 COHERENCE MATRIX (reads → / writes ⇒, per slice — the review greps each lane's diff against its row)
 | slice | READS | WRITES ⇒ ONLY |
@@ -1003,7 +1162,7 @@ the contested-goals/tunnel-vision substrate is "cohesive like everything else."
 | D-4 | goals · causal frame (read-only) · roster · faction keys (canonical .faction — post-14e8a2fa) · LadderStanding.grudges + relationshipMemory grievance/warmth + personality (the tunnel-vision reads) | spatialLedgers.npcLadder incl. contests (the ladder kernel, own list amended) · standing/stings/grudges/windows via its own writers · bluff-exposure deposit (consumed by D-2) · newsEntries |
 | D-5 | RansomRec · relationships/war state · generosity qualification + obligations (read) · CORRUPTIBLE_FLAWS via conversionFlawFactor · seat archetypes | roads ledger (RansomRec fields, ransomSettlements deposits, payer-beneficiary channel record) · legitimacy/prosperity via existing applicators (redirected) · newsEntries |
 | D-6 | seaLanes digest slot · activeBlockadeTargets · embattlement (port nodes) · season | roads ledger (legModes, delays, standard mission/ransom writes) · newsEntries |
-| D-7 | relationshipStates edges (resentment/memoryScore/recentIncidents — the grievanceRead leaf) · capture/imposition events in their host passes | typed incidents via applyRelationshipPatch ONLY (the applicator) · [⛔if signed] D-7c faction-pair sub-records via the factionStates relax surface |
+| D-7 | relationshipStates edges (resentment/memoryScore/recentIncidents + rung/scalars for dispositionOf — the grievanceRead leaf) · capture/imposition events in their host passes · coalition state (peaceTerms betrayal events, convergence membership, governingCoalition) · ladder bond/grudge maps READ-ONLY for the bleed (inside the plane's own pass) | typed incidents via applyRelationshipPatch ONLY (the applicator) · D-7c symmetric faction-pair sub-records via the factionStates relax surface · D-7e person bonds via the LADDER's own writer · the D-7f bleed term + crossing incidents inside relationshipEvolution's OWN pass (zero new writers) |
 NOTHING ELSE, in any row. Cross-system state moves ONLY by deposit-and-consume
 (law 5): D-2→ladder (stigma) · D-3 generosity↔statecraft (transfer record) ·
 D-4→D-2 (bluff exposure) · D-5→generosity (obligation) · D-5→web (channel).
@@ -1051,6 +1210,16 @@ generosityEV / rumorNetwork — measured, not assumed).
   * D-5: capture → half-term scan → all three terminal outcomes across fixtures
     (refused/debt/compromised) + captor-precedence; the obligation lands via
     generosity's own next-tick pass.
+  * D-7 (the memory-weave cells, owner-named): a patron falls → his client's
+    linked support goal cascades to failure the same tick; a coalition betrayal
+    decays the faction-pair bond; a friend ransoms a friend → DEBT not
+    compromise, and the gratitude bond forms toward the payer's seat. THE
+    ELITE-BLEED A/B (post-fold lane): a high-influence cross-border feud
+    (governing-faction pillar vs the neighbor's chancellor) measurably cools
+    the two settlements' relations; a low-influence feud leaves NO settlement
+    mark (the threshold pin); an elite bond formed by a friend's ransom
+    measurably warms them; the double-counting pin (one detention ⇒ exactly
+    one mark per plane) green.
   * D-6: the maritime fixture walkthrough (D-6c) + a mixed land-sea mission
     hitting a land hazard on a land hop and a sea hazard on a sea hop in one
     journey (the modality-dispatch proof).
@@ -1109,13 +1278,13 @@ generosityEV / rumorNetwork — measured, not assumed).
 9. D-5 payer-scan reach (any qualifying settlement vs trade-graph ≤2 hops of the
    captor). REC: relationship-qualified with no distance cap (favor economies
    span realms; the EV already prices attention). DEFAULT: no distance cap.
-10. ⛔ D-7c THE FACTION-PAIR GRIEVANCE LEDGER — a NEW PERSISTED pairwise schema
-   (resentment + typed incidents under the factionStates surface, D5-band decay
-   reused from factionCompetition.js:280). This is the wave's one genuinely new
-   persistence SHAPE (everything else is additive fields/sub-ledgers under
-   law 12). REC: sign it — cross-faction contested goals without it read a
-   zero grievance term and lose half their history. DEFAULT BUILT: absent;
-   §8's fixation degrades gracefully to grudges+traits.
+10. D-7c THE FACTION-PAIR LEDGER — RESOLVED: OWNER-COMMISSIONED 2026-07-19 (the
+   positive-bond ruling un-gated it and made it SYMMETRIC — resentment AND
+   alliance/trust). Recorded here because it remains the wave's one genuinely
+   new persistence SHAPE (owner-VISIBLE per law; everything else is additive
+   fields/sub-ledgers under law 12): pairwise sub-records under the
+   factionStates surface, D5-band decay reused from factionCompetition.js:280.
+   Reshaping before the lane closes is free; after, a migration.
 
 ## §15 DEFERRED SEAMS (recorded, never silent)
 The DM intel verb (world-scoped op surface — the statecraft §6 manual-twin
@@ -1129,8 +1298,12 @@ re-survey) · navalTransit convoy-interception as a sea hazard · sea-leg render
 on the Travelers Overlay (roads §13's sub-layer learns legModes) · a credibility
 line on the NPC dossier card (display lane) · the incident-memory half-life
 D5-band scaling (relationshipMemory.js:13-22 — "the wiring point is ready";
-D-7d's rider governs) · positive-bond NPC pairwise richness beyond the extended
-grudge shape (state-never-fate: extension only, never a parallel graph).
+D-7d's rider governs) · cross-settlement contest GENESIS (vNext by the freeze —
+the outcome channel is D-7f's and is already contracted; only the collision
+physics remain) · bond kinds beyond {loyalty, gratitude, friendship} (extension
+of the typed map only — never a parallel graph). THE FREEZE: the owner closed
+this design 2026-07-19 after the elite-bleed clause — further ideas go to
+vNext, recorded here, never absorbed silently.
 
 ## §16 RECON HAZARDS BOUND INTO THE BRIEFS (fire = defect)
 Roads/ladder anchors surveyed on MOVING branches (99084183 / 14e8a2fa) — re-grep
@@ -1159,7 +1332,11 @@ through applyRelationshipPatch (relationshipEvolution.js:283) — and beware the
 name trap: traditions/relations.js writes OCCUPATIONS, not relationships, and
 spatialConsequenceKernel.js writes no relationship state at all until D-7b ·
 score pair history from resentment/memoryScore/typed incidents (the
-scoreGrievance/scoreRevanchism clones), never the coarse rung ·
+scoreGrievance/scoreRevanchism clones), never the coarse rung · THE
+DOUBLE-COUNTING GUARD (D-7f): events mark the plane they occur on ONCE; the
+elite bleed carries accumulated STANDING only — any implementation that
+re-counts an event into the settlement pair via the NPC bleed is a defect
+(the one-event-one-mark-per-plane pin is mandatory) ·
 resto2-style full-suite flake isolation at lane ends ·
 stage explicit files only; `git stash` FORBIDDEN in agent lanes · the composite
 closure budget is breached by 998 B pending the de-eager fold — quote the closure
