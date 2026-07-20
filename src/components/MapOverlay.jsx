@@ -25,6 +25,9 @@ import ChainEdges        from './map/ChainEdges.jsx';
 import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
 import TravelersLayer    from './map/TravelersLayer.jsx';
+// V-3 THE TIMELAPSE — STATIC within this already-lazy map chunk (the FP-R idiom:
+// a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
+import TimelapseLayer    from './map/TimelapseLayer.jsx';
 import RoadsLayer        from './map/RoadsLayer.jsx';
 import LabelsLayer       from './map/LabelsLayer.jsx';
 import MarkersLayer      from './map/MarkersLayer.jsx';
@@ -39,6 +42,8 @@ export default function MapOverlay({ bridge, transformOut }) {
   const mapMode       = useStore(s => s.mapMode);
   const annotateTool  = useStore(s => s.annotateTool);
   const layers        = useStore(s => s.mapState.layers);
+  // V-3 THE TIMELAPSE: the overlay mounts only while scrubbing (timelapseTick set).
+  const timelapseActive = useStore(s => s.timelapseTick != null);
   const isDraggingOver = useStore(s => s.isDraggingOver);
   const updateLabel = useStore(s => s.updateLabel);
   const updateMarker = useStore(s => s.updateMarker);
@@ -321,6 +326,10 @@ export default function MapOverlay({ bridge, transformOut }) {
           {layers.roads && !imageMode && <RoadsLayer bridge={bridge} />}
           {layers.chains && mapChainsUnlocked && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
+          {/* V-3 THE TIMELAPSE — history pulses + grew/declined tint at the scrub
+              tick. A background lens (drawn early so glyphs + pins sit on top);
+              mounts only while scrubbing; DM-secret + dormant otherwise. */}
+          {timelapseActive && <TimelapseLayer />}
           <RegionalCausalityLayer />
           {/* UX Phase 5 — spatial war/faith glyphs (deployment arrows, siege rings +
               coalition badge, occupation shading, trade-war prize). Self-gates to

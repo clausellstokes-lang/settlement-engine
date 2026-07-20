@@ -200,6 +200,12 @@ export const createMapSlice = (set, get) => ({
   annotateTool: ANNOTATE_TOOLS.SELECT,  // current annotate tool
   selectedBurgId: null,        // clicked burg id (opaque placement handle)
   selectedSettlementId: null,  // clicked settlement UUID — primary key for detail panels
+  // V-3 THE TIMELAPSE + V-15 THE AGED MAP — the shared scrub position. null ⇒
+  // timelapse INACTIVE (live view; every derived overlay renders as today). A number
+  // ⇒ scrubbing that advance tick; the realm timelapse overlay and the town aged-map
+  // overlay both read it (the one coordination contract, "the scrubber drives both").
+  // Transient UI, not persisted, not worldState ⇒ zero golden / zero persist impact.
+  timelapseTick: null,
   selectedAnnotationId: null,  // clicked label/marker/forest
   selectedAnnotationKind: null,  // 'label' | 'marker' | 'forest' — which layer the id lives in
   // P136 / M-6 — quick-inspector hover state. Distinct from
@@ -253,6 +259,11 @@ export const createMapSlice = (set, get) => ({
   clearSelectedBurgId: () => set(state => { state.selectedBurgId = null; }),
 
   setSelectedSettlementId: (id) => set(state => { state.selectedSettlementId = id; }),
+
+  // V-3 THE TIMELAPSE — set the scrub position (null deactivates the timelapse).
+  setTimelapseTick: (tick) => set(state => {
+    state.timelapseTick = (tick == null || !Number.isFinite(Number(tick))) ? null : Number(tick);
+  }),
 
   clearSelectedSettlementId: () => set(state => { state.selectedSettlementId = null; }),
 

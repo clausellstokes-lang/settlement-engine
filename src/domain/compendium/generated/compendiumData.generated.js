@@ -40,7 +40,7 @@ export const COMPENDIUM_DATA = Object.freeze({
   },
   "operations": {
     "count": 164,
-    "exemptCount": 71,
+    "exemptCount": 72,
     "byKlass": {
       "canon": 5,
       "macro": 40,

@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -55,6 +55,9 @@ import AdvanceReport from './AdvanceReport.jsx';
 // THE ROAD SCENE (DESIGN_THE_ROADS §14 R-7): "Stage the road" — STATIC for the SAME FP-R
 // reason (rides this already-lazy chunk at zero eager manifest cost).
 import RoadScenePanel from './RoadScenePanel.jsx';
+// V-3 THE TIMELAPSE scrubber — STATIC for the SAME FP-R reason (a lazy() would mint a
+// preload entry and tip the ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
+import TimelapsePanel from './TimelapsePanel.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
@@ -71,6 +74,7 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'pantheon',  label: 'Pantheon', Icon: Sparkles },
   { id: 'pulse',     label: 'Pulse Results', Icon: Zap },
   { id: 'chronicle', label: 'Chronicle', Icon: Newspaper },
+  { id: 'timelapse', label: 'Timelapse', Icon: History },
 ]);
 
 /** Whether the campaign carries any live treaty (the treaty tab self-hide gate —
@@ -323,6 +327,11 @@ export default function RealmInspector({
             campaign
               ? <ChronicleSection campaign={campaign} nameById={nameById} />
               : <CampaignEmptyState lead="The chronicle fills as a live campaign's realm advances." {...emptyHandlers} />
+          )}
+          {activeSection === 'timelapse' && (
+            campaign
+              ? <TimelapsePanel campaign={campaign} nameFor={(id) => nameById?.get(String(id)) || String(id)} />
+              : <CampaignEmptyState lead="The timelapse replays a live campaign's history once it has advanced." {...emptyHandlers} />
           )}
         </Suspense>
       </div>

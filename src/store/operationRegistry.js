@@ -269,6 +269,7 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   clearSelectedBurgId: { slice: 'mapSlice', reason: 'clears selection; pure UI' },
   setSelectedSettlementId: { slice: 'mapSlice', reason: 'detail-panel selection; pure UI' },
   clearSelectedSettlementId: { slice: 'mapSlice', reason: 'clears selection; pure UI' },
+  setTimelapseTick: { slice: 'mapSlice', reason: 'V-3 timelapse scrub position; transient UI, not persisted' },
   setHoveredSettlementId: { slice: 'mapSlice', reason: 'hover-peek state; pure UI' },
   clearHoveredSettlementId: { slice: 'mapSlice', reason: 'clears hover peek; pure UI' },
   setSelectedAnnotationId: { slice: 'mapSlice', reason: 'annotation-layer selection; pure UI' },
@@ -325,7 +326,12 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // local sign-out (§7.3). Authorized by the wave's LAW 6 ("+ EXEMPT_CEILING bump if
 // tripped"); same transient-session-flag K-D class as setAuthModalOpen. A documented,
 // spec-sanctioned ratchet raise.
-export const EXEMPT_CEILING = 71;
+// 71 -> 72 (VISION V-3 THE TIMELAPSE): setTimelapseTick — the shared scrub position
+// (null = live). Pure transient map UI, not persisted, not domain data — the SAME
+// K-D EXEMPT class as its mapSlice peers setSelectedSettlementId / setHoveredSettlementId /
+// toggleLayer / setLayerFilter (all exempt above). A documented ratchet raise for a
+// genuinely-new UI setter, not an operation-surface omission.
+export const EXEMPT_CEILING = 72;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }
