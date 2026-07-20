@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE COLD-THEN-CONNECT LAW (owner order, 2026-07-20) — cycle-2 review
+methodology amended:** every cycle-2 (and confirming-cycle) survey lane runs
+COLD — no prior context in any discovery brief (charge + dimension + scope
+pointer only; no hazard lists, no expected reds, no deferral ledgers, no prior
+findings) — so discovery is never primed by the program's own memory, including
+the manager's. ONLY AFTER the cold pass does the RECONCILE phase connect
+findings to the record: cold re-finds of FIXED items are treated as possible
+regressions and re-verified by execution; cold re-finds of DEFERRED/deliberate
+rulings re-test the rationale AND count as documentation-legibility findings
+when repeated (the decision isn't discoverable in-repo); novel findings go to
+refuters unchanged. Rationale: the builder's memory is the largest blind-spot
+source in a self-reviewing program — fresh eyes must see the artifact, not the
+program's beliefs about it. Recorded in THE_VISION_RESUME.md cycle-2 section +
+the program memory file.**
 **⬛⭐⭐ VISION LANE V-N SHIPPED — the interview goes deep and wide; the handbook
 finds its voice, dark (2026-07-20, claude/vision-n @ e017c1f2, base 5d9218c6 the
 folded tip, 2 lettered commits, FOLD-READY; manager-verified tip+clean; foreign

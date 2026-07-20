@@ -93,6 +93,20 @@
   receipt-backed, arcs counted) and the AI-structure proofs (per-surface
   source-scan walkers · citation phantom-ref executed tests · clerk accuracy
   fixtures · model-pin/drift declaration);
+  ⭐ THE COLD-THEN-CONNECT LAW (owner order 2026-07-20, binds cycle 2 AND the
+  confirming cycle): PHASE S RUNS COLD — every survey lane reviews as though it
+  had NO prior context: brief = charge + dimension definition + scope pointer
+  ONLY; NO known-hazard lists, NO expected-red lists, NO deferral ledgers, NO
+  prior findings in any discovery brief (a cold lane re-finding the parked
+  goldens is correct behavior, not waste). ONLY AFTER the cold pass does PHASE R
+  (reconcile) connect findings to memory/ledger, per finding: (a) matches a
+  FIXED item ⇒ treat as possible regression/incomplete fix — re-verify the fix
+  with execution, never close on the record alone; (b) matches a DEFERRED/
+  deliberate ruling ⇒ re-examine whether the rationale survives fresh scrutiny;
+  closing cites the record, AND repeated cold re-discovery = a documentation-
+  legibility finding in its own right (the decision isn't written where a
+  stranger finds it); (c) novel ⇒ refuters as usual. The manager composes cold
+  briefs BEFORE re-reading its own hazard notes for that dimension;
   cycle-2 prevention intake: anachronism lint · per-chunk ceilings · tick-time golden ·
   load-normalizer walker · async-totality lint · courier seam registry · determinism
   lint widened · fixture-realism law · tracked-flags reconciliation+walker · AI
