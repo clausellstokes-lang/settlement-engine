@@ -301,7 +301,9 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                       <div style={{width:9,height:9,background:c,flexShrink:0}}/>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{f.faction}</span>
                       {instab > 0.05 && (
-                        <span title="Leadership churn — recent turnover at the top erodes effective power"
+                        // Churn badge: the explainer rides aria-label (screen-reader-complete,
+                        // touch-safe) — never a native title (the shrink-only title= census).
+                        <span aria-label="Leadership churn — recent turnover at the top erodes effective power"
                           style={{fontSize:FS.micro,fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
                           unstable {Math.round(instab*100)}%
                         </span>

@@ -80,6 +80,12 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/corruptionWeb.js',
     'src/domain/worldPulse/disposition.js',
     'src/domain/worldPulse/factionCapture.js',
+    // D-7e clause (i) (round-3 F3): seatGratitudeSevToward reads the persisted LADDER
+    // record's `.npcs` STANDINGS map (priorLedger[sid].npcs — ladder state, never the
+    // settlement roster), so it is participation-independent by construction: a
+    // captive seat-holder's standing (and bonds) persist through captivity exactly
+    // like the credibility-prune idiom. No roster read exists in the file.
+    'src/domain/worldPulse/gratitudeBonds.js',
     // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
     // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's

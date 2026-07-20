@@ -340,7 +340,7 @@ function ChromeControls({ expanded, minimized = false, onMinimize, onRestore, on
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
       {minimized ? (
-        <IconButton onClick={onRestore} title="Restore inspector" aria-label="Restore inspector">
+        <IconButton onClick={onRestore} aria-label="Restore inspector">
           <Maximize2 size={14} />
         </IconButton>
       ) : (

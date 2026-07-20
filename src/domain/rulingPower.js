@@ -145,6 +145,10 @@ const ALT_GOVERNMENT_LABELS = Object.freeze({
   [A.NOBLE]:    'Noble Regency',
   [A.MILITARY]: 'Garrison Command',
   [A.RELIGIOUS]: 'Ecclesiastical Council',
+  // The conquest occupier's own NAME ('<power> occupation authority') CONTAINS the
+  // preferred label — the containment check below falls here so the crowned seat
+  // never reads like a duplicate of the power behind it.
+  [A.OCCUPATION]: 'Martial Administration',
 });
 
 /** @type {Readonly<Record<string, string>>} */
@@ -271,12 +275,16 @@ const MAX_PREVIOUS_GOVERNMENTS = 6;
  */
 function resolveGovernmentLabel(archetype, tier, factions, governing) {
   const preferred = governmentLabelFor(archetype, tier);
-  const taken = new Set(
-    factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean),
-  );
-  if (!taken.has(preferred.toLowerCase())) return preferred;
+  // A label is taken when another faction's name EQUALS it — or CONTAINS it: the
+  // conquest occupier 'Ironhold occupation authority' contains the OCCUPATION label
+  // 'Occupation Authority', and an exact-match check would relabel the seat into a
+  // read-alike of the power behind it (two factions both reading "occupation
+  // authority" — the round-3 warDeployment collision).
+  const names = factions.filter(f => f !== governing).map(f => nameOf(f).toLowerCase()).filter(Boolean);
+  const takenBy = (/** @type {string} */ label) => names.some(n => n === label.toLowerCase() || n.includes(label.toLowerCase()));
+  if (!takenBy(preferred)) return preferred;
   const alt = ALT_GOVERNMENT_LABELS[archetype];
-  if (alt && !taken.has(alt.toLowerCase())) return alt;
+  if (alt && !takenBy(alt)) return alt;
   return `${preferred} Ascendant`;
 }
 
