@@ -25,7 +25,12 @@
     V-D (fresh branch off 212758ad; prefers a quiet tree) → V-F → V-G (F before G:
     both touch pendingEdits) → V-J (after V-E's report — reads its slug format) →
     V-K (THE ASSIZE + THE COMMONS' VOICE engine pair, design-doc V-22/V-23; the
-    cohesion law + masses clause binding; full engine gate).
+    cohesion law + masses clause binding; full engine gate) → THE CLEAN SWEEP
+    lanes V-L (engine textures V-24) → V-M (display follow-ons V-25) → V-N (AI/
+    content V-26) → V-O (platform completions V-27) — design-doc THE CLEAN SWEEP
+    section; one JUDGMENT inside: interiority ships as the LITE read-model (the
+    world-only boundary honored); 7 recorded skips are FINAL (infra/ffmpeg/
+    evidence/capital/humans-gated).
     Every brief carries THE TWO-BRANCH GEOGRAPHY note (lane worktrees cannot see
     the ledger-branch docs; cite absolute main-tree paths; the worktree's docs/
     lacking them is EXPECTED, not missing).
