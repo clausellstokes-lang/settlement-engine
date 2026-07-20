@@ -165,7 +165,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
         setQuestion(''); // cleared and ready for a follow-up
       }
     } catch {
-      setPendingError('The Interview is unavailable right now.');
+      setPendingError(t('errors.interviewUnavailable'));
     } finally {
       setLoading(false);
     }

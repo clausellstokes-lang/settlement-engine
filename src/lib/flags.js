@@ -176,6 +176,16 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'DEV-ONLY: re-run each Web Worker advance in-thread and diff the two worldStates, surfacing any determinism divergence. Default OFF; inert in production builds (import.meta.env.DEV gate) even if forced on. Doubles advance compute while on.',
   },
+  // V-26b HANDBOOK NARRATIVE VOICE — a house-voice rewrite of the Keeper's Handbook's
+  // NARRATIVE prose (the header + the "why it works this way" concept essay), landed
+  // COMPLETE but DARK. Default OFF ⇒ the exact current handbook (byte-identical). Flip ON
+  // to preview the voiced draft; the flip is the owner's taste call. The clarity-mandated
+  // surfaces (the numbered steps, Reference lifeline, billing FAQ) stay PLAIN in BOTH
+  // states — house voice never at clarity's expense. Help content only, never world canon.
+  handbookVoice: {
+    default: false,
+    description: 'V-26b: house-voice rewrite of the Keeper\'s Handbook narrative prose (header + concept essay), staged dark. OFF (default) = the exact current copy. Flip ON to preview; the steps/Reference/FAQ stay plain in both. Owner taste flip.',
+  },
   // The read-only surfacing layer for the war-economy phases. OFF by default.
   // When on, a "War & Resolve" Inspector tab reads each settlement's morale
   // signals — Hope, Resolve, Faith relation, Supply, pro-war / anti-war balance —
