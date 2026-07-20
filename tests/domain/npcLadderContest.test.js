@@ -253,6 +253,24 @@ describe('advanceContests — the settlement-wide pass', () => {
     expect(reminted).toBe(true);
     expect(res.news.some((n) => n.impactKind === 'npc_support')).toBe(true);
   });
+  it('D-4f CONTEST-SUPPORT: a bonded peer joins the WINNER\'s side and the win STRENGTHENS the bond', () => {
+    const npcs = {
+      n_a: mkStanding(mkGoal('ruling_authority', 78, 40, { progress: 1 }), { stock: 6 }),
+      n_b: mkStanding(mkGoal('ruling_authority', 80, 45, { progress: 0.5 }), { stock: 6 }),
+      // a rung-holder bonded to n_a above JOIN_BOND_FLOOR ⇒ he takes the field on n_a's side
+      j1: mkStanding(mkGoal('economic_capacity', 60, 40), { bonds: { n_a: { sev: 0.6, week: 0, kind: 'loyalty' } } }),
+    };
+    const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
+    const goalOutcomes = new Map([['n_a', { fired: true, expired: false, lapsed: false, signalVar: 'ruling_authority', endProgress: 1 }]]);
+    const res = advanceContests({
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      priorContests, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_a', 'n_b', 'j1']),
+      goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, memoryWeaveActive: true, now: null,
+    });
+    // n_a prevailed; his bonded backer j1 shared the victory ⇒ the bond deepened (sev rose above 0.6)
+    expect(res.contests['contest.s1.ruling_authority.10'].outcome).toBe('a_finished');
+    expect(res.npcs.j1.bonds.n_a.sev).toBeGreaterThan(0.6);
+  });
   it('§10.5 CROSS-FACTION loss deposits a faction-pair incident (memoryWeave lit); same-faction / dark ⇒ none', () => {
     const npcs = { n_a: mkStanding(mkGoal('ruling_authority', 78, 40, { progress: 1 }), { stock: 6 }), n_b: mkStanding(mkGoal('ruling_authority', 80, 45, { progress: 0.5 }), { stock: 6 }) };
     const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
