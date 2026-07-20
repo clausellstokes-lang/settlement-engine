@@ -126,7 +126,7 @@ import {
 } from '../spatial/generosityReactions.js';
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { applyFoodDeltasToUpdates, applyLegitimacyDeltasToUpdates, applyProsperityDeltasToUpdates } from '../spatial/generosityUpdates.js';
+import { applyFoodDeltasToUpdates, applyLegitimacyDeltasToUpdates, applyProsperityDeltasToUpdates } from './generosityUpdates.js';
 import {
   intelTradeActive, enumerateIntelOpportunities, planIntelAct, intelEligible, intelYearOf,
   intelPairKey, INTEL_TRANSFERS_LEDGER, INTEL_COOLDOWN_LEDGER, INTEL_TRADE_TUNING,

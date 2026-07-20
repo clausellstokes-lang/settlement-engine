@@ -14,7 +14,7 @@
  * input unchanged when nothing moved); imports NO store/React (the layerBoundaries law).
  */
 
-import { storageCapacityMonths } from '../worldPulse/foodStockpile.js';
+import { storageCapacityMonths } from './foodStockpile.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 
 // ── Kernel-mirrored read-shapes (0-hole discipline: no `any`) ──────────────────
