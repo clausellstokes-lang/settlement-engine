@@ -8,7 +8,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  decadeDecay, deriveAgePortrait, ageOverlayOps, SCAR_DECADE_HALF_LIFE_WEEKS,
+  decadeDecay, deriveAgePortrait, ageOverlayOps, streetWearOps, SCAR_DECADE_HALF_LIFE_WEEKS,
 } from '../../src/domain/townMap/ageOverlay.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { resolveTownMapStyle } from '../../src/design/townMapStyles.js';
@@ -82,5 +82,42 @@ describe('V-15 — ageOverlayOps (the op-emitter + the dormancy wall)', () => {
 
   it('a null model ⇒ [] (total on garbage)', () => {
     expect(ageOverlayOps(null, AGE_STYLE, portrait)).toEqual([]);
+  });
+});
+
+describe('V-25a — streetWearOps (the street-level wear follow-on)', () => {
+  const worn = { growth: { [cat]: 0.8 }, scars: [{ kind: 'burn_lots', week: 0, displaySeverity: 0.8 }], rebirthClasses: [], asOfWeek: 300 };
+
+  it('lays wear ruts on the thoroughfares when the town carries history', () => {
+    const ops = streetWearOps(model, AGE_STYLE, worn);
+    expect(ops.length).toBeGreaterThan(0);
+    for (const op of ops) {
+      expect(op.t).toBe('line');
+      for (const v of [op.x1, op.y1, op.x2, op.y2]) { expect(v).toBeGreaterThanOrEqual(0); expect(v).toBeLessThanOrEqual(1000); }
+    }
+  });
+
+  it('is deterministic — a second build is byte-identical', () => {
+    expect(JSON.stringify(streetWearOps(model, AGE_STYLE, worn))).toBe(JSON.stringify(streetWearOps(model, AGE_STYLE, worn)));
+  });
+
+  it('THE DORMANCY WALL — a base lens (no .age fields) emits NOTHING', () => {
+    for (const id of ['parchment', 'watercolor', 'darkFantasy', 'vtt', 'accessible']) {
+      expect(streetWearOps(model, resolveTownMapStyle(id), worn)).toEqual([]);
+    }
+  });
+
+  it('absent history ⇒ NOTHING (empty portrait ⇒ no wear signal)', () => {
+    const dark = { growth: {}, scars: [], rebirthClasses: [], asOfWeek: 300 };
+    expect(streetWearOps(model, AGE_STYLE, dark)).toEqual([]);
+    expect(streetWearOps(null, AGE_STYLE, worn)).toEqual([]);
+  });
+
+  it('is a SEPARATE layer — ageOverlayOps is untouched (its golden holds); wear adds its own marks', () => {
+    const area = ageOverlayOps(model, AGE_STYLE, worn);
+    const wear = streetWearOps(model, AGE_STYLE, worn);
+    // the district-area emitter still emits (unchanged path); the wear emitter contributes on top
+    expect(area.length).toBeGreaterThan(0);
+    expect(wear.length).toBeGreaterThan(0);
   });
 });

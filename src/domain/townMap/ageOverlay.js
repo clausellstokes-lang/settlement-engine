@@ -28,10 +28,22 @@
  * purity + determinism lint bans them); every coordinate rounded ⇒ (model, style,
  * portrait) → byte-identical ops across runs and machines.
  *
+ * ── V-25a STREET-LEVEL WEAR (V-15 recorded follow-on) ─────────────────────────
+ * streetWearOps is a SECOND, independent derived-only layer: ruts along the town's
+ * main thoroughfares (model.frame.roads, most-travelled first) whose intensity reads
+ * the same history the scars/growth do — a calamity ruts the streets; heavy use wears
+ * them. It shares the dormancy wall (empty style / absent fabric ⇒ []) and the scrub
+ * seam (asOfWeek). It is a SEPARATE emitter, so ageOverlayOps — and its golden — stay
+ * byte-identical. (The other recorded follow-on, DISTRICT RENAMING ECHOES, is
+ * deliberately deferred — documented, not a bug to re-find: no per-district name
+ * history is recorded anywhere in sim state today; it needs a new persisted signal,
+ * which is a schema change outside this derived-only display lane.)
+ *
  * @enforced-by tests/domain/ageOverlay.test.js + tests/property/ageOverlayGolden.test.js
  */
 
 import { createPRNG } from '../../kernel/prng.js';
+import { compareCodepoint } from '../deterministicSort.js';
 import { fabricStocksFor, fabricScarsOf, fabricRebirthsOf } from './fabricRead.js';
 
 const VIEW = 1000;
@@ -174,6 +186,66 @@ export function ageOverlayOps(model, ageStyle, portrait) {
     }
   }
 
+  return ops;
+}
+
+/**
+ * V-25a — STREET-LEVEL WEAR: ruts along the town's main thoroughfares. A SEPARATE,
+ * derived-only emitter (ageOverlayOps + its golden stay byte-identical). Shares the
+ * dormancy wall and the scrub seam. The wear signal reads the town's own history —
+ * the worst decade-decayed scar (a calamity ruts the roads) and the mean prosperity
+ * stock (traffic wears the thoroughfares) — so absent fabric ⇒ 0 ⇒ []. Ruts are laid
+ * on the most-travelled roads first (weight desc), as fractional offsets ALONG each
+ * segment (no trig / sqrt), seeded off geometry ⇒ byte-identical across runs.
+ * @param {Model|null|undefined} model
+ * @param {{ ink?: string, opacity?: { age?: number }, stroke?: { age?: number } }} ageStyle
+ * @param {AgePortrait} portrait
+ * @returns {import('./townMapDraw.js').DrawOp[]}
+ */
+export function streetWearOps(model, ageStyle, portrait) {
+  /** @type {import('./townMapDraw.js').DrawOp[]} */
+  const ops = [];
+  if (!model || typeof model !== 'object') return ops;
+  const oAge = ageStyle && ageStyle.opacity ? ageStyle.opacity.age : undefined;
+  const wAge = ageStyle && ageStyle.stroke ? ageStyle.stroke.age : undefined;
+  if (oAge == null || wAge == null) return ops; // THE DORMANCY WALL (shared with ageOverlayOps)
+  const roads = (model.frame && Array.isArray(model.frame.roads)) ? model.frame.roads : [];
+  if (roads.length === 0) return ops;
+  // The wear signal from the town's OWN history: a calamity ruts the streets; heavy
+  // use (prosperity) wears the thoroughfares. Absent history ⇒ 0 ⇒ nothing.
+  const worst = portrait.scars.reduce((m, s) => Math.max(m, s.displaySeverity), 0);
+  const gvals = Object.values(portrait.growth || {}).filter((v) => typeof v === 'number');
+  const growthMean = gvals.length ? gvals.reduce((a, b) => a + b, 0) / gvals.length : 0;
+  const wear = Math.min(1, worst * 0.6 + growthMean * 0.4);
+  if (wear < SCAR_FADE_FLOOR) return ops; // near-dark ⇒ nothing
+  const ink = (ageStyle && ageStyle.ink) || 'currentColor';
+  const water = (model.frame && model.frame.water) || null;
+  const coastY = water && water.kind === 'coast' && Array.isArray(water.path) && water.path[0] ? water.path[0][1] : null;
+  const opacity = Math.round(Math.max(0.12, Math.min(1, oAge * (0.3 + wear))) * 100) / 100;
+  const rng = createPRNG(`street-wear:${geometryDigest(model)}:${portrait.asOfWeek}`);
+  // The most-travelled roads wear first; a stable (weight desc, id) order keeps it deterministic.
+  const chosen = [...roads]
+    .sort((a, b) => (b.weight - a.weight) || compareCodepoint(String(a.id), String(b.id)))
+    .slice(0, Math.min(roads.length, 2 + Math.round(wear * 4))); // 2..6 roads
+  let placed = 0;
+  for (const road of chosen) {
+    if (placed >= 24) break;
+    if (!Array.isArray(road.from) || !Array.isArray(road.to)) continue;
+    const fx = road.from[0], fy = road.from[1], dx = road.to[0] - fx, dy = road.to[1] - fy;
+    const nMarks = Math.min(4, 1 + Math.round(wear * Math.max(1, Number(road.weight) || 1)));
+    const g = rng.fork(`road:${road.id}`);
+    for (let k = 0; k < nMarks && placed < 24; k++) {
+      const t = (k + 1) / (nMarks + 1);
+      const jt = Math.min(0.92, Math.max(0.08, t + g.randInt(-5, 5) / 100));
+      const a = Math.max(0.02, jt - 0.03), b = Math.min(0.98, jt + 0.03);
+      const x1 = R(fx + dx * a), y1 = R(fy + dy * a);
+      const x2 = R(fx + dx * b), y2 = R(fy + dy * b);
+      if (!onMap(x1) || !onMap(y1) || !onMap(x2) || !onMap(y2)) continue;
+      if (coastY != null && (y1 > coastY || y2 > coastY)) continue;
+      ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wAge, strokeOpacity: opacity });
+      placed++;
+    }
+  }
   return ops;
 }
 
