@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-H SHIPPED — the palette, the visible undo, the crafted empty
+rooms (2026-07-20, claude/vision-h @ 3668f33c, 4 commits, FOLD-READY;
+manager-validated).** R-20 cmd/ctrl-K palette (eager host sliver +562 B ONLY; body/
+combobox lazy; whole-library scope — vetoable) · R-21 undo history surfacing the
+EXISTING pulseUndoStack via (k+1)× undoLastPulse walk-back, secrets-safe rows ·
+R-22 flat EmptyState primitive (clerk's-note idiom) adopted at the four barest
+renders (first-open + library already met the bar — honest reuse) · R-23 error-copy
+register: 8 literals migrated + a NEW SHRINK-ONLY RATCHET (.error-copy-baseline
+frozen 53/21 — the burn-down carries) · R-24 VERDICT: faction dedup exists+pinned;
+SETTLEMENT + NPC realm-scale name dedup ABSENT (≈15-20% settlement collision odds
+mono-culture; evidence anchored) → OWNER QUEUE (fix = generation change =
+golden-shift). Gate: strict 0 · tsc 0 · lint +0 · 149 regression+pins · dist 165 ·
+closure 1,025,296 (lane Δ +562 B, headroom 14,704) · NUL clean. FENCE SEAM-REPORTS
+for the FOLD (V-B territory, correctly untouched): WizardNewsPanel emptyText →
+EmptyState adoption; WizardNewsPanel ×2 + campaignSlice ×2 error literals → migrate
++ strike from baseline. HAZARD BANKED (agent-authored memory): sizeBaseline is
+TOLERANCE-0 EXACT (App.jsx 732; a JSX comment COUNTS) — cure = net-zero combines.
+SLOT ROTATED → V-F dispatching.**
 **⬛⭐ VISION LANE V-C SHIPPED — the world answers with receipts (2026-07-20,
 claude/vision-c @ 98e327e0, 3 commits, FOLD-READY; manager-validated).** V-1 THE
 INTERVIEW: a new edge function on the EXACT nine-surface guard stack (session gate →
