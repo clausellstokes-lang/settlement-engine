@@ -59,6 +59,7 @@ import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
 import { hasSpatialLedger, getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { hopDelayTicks } from './distancePricedNews.js';
+import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
 /** The governing seat's operational belief — the v1 map that DRIVES the war
@@ -231,6 +232,8 @@ export function beliefRecord(worldState, observerId, subjectId, factionId = GOVE
  * @property {string | null} faithLabel believed dominant faith (public deity name)
  * @property {number} confidence01     0..1
  * @property {number} lastUpdateTick   tick of the last refresh
+ * @property {number} [populationTrendBand]  D-1 DEMOGRAPHIC axis: believed −2..+2 (emptying…swelling); present only when beliefAxesEnabled
+ * @property {string | null} [observanceLabel]  D-1 CULTURAL axis: believed dominant rite `${motif}:${patron}`; present only when beliefAxesEnabled
  */
 
 /**
@@ -368,7 +371,8 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
   const strength = item
     ? settlementStrength(item, buildPressureSummary(ctx.pressureIdx, String(subjectId)))
     : strengthOfBand(BELIEF_TUNING.NEUTRAL_STRENGTH_BAND);
-  return {
+  /** @type {BeliefRecord} */
+  const record = {
     readiness: round4(groundTruthReadiness(ctx.worldState, subjectId)),
     strengthBand: strengthBandOf(strength),
     allianceLabel: allianceLabel || 'unknown',
@@ -376,6 +380,10 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
     confidence01: 1,
     lastUpdateTick: now,
   };
+  // D-1 (deep-couplings): the two OPTIONAL axis fields, appended ONLY when the flag is lit
+  // (dormancy by absence — law 12). ABSENT ⇒ byte-identical.
+  if (ctx.axesActive) Object.assign(record, axisGroundTruth(item));
+  return record;
 }
 
 /**
@@ -396,6 +404,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @property {Map<string, SnapItem>} byId     snapshot items by id
  * @property {unknown} pressureIdx            the pressure index (settlementStrength input)
  * @property {{ warPosture?: unknown }} worldState  the ledgers (readiness)
+ * @property {boolean} [axesActive]           D-1: the belief-axes flag is lit (append the two axis fields)
  */
 
 // ── The reconciliation rule (V.4) — the pure, testable core ───────────────────
@@ -411,6 +420,8 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @property {number} score
  * @property {string} sortKey            the ledger event key (codepoint tie-break)
  * @property {string} [sourceId]         the origin telling's settlement (W-DOCTRINE-2 credibility weighting; optional — synthetic reports omit it)
+ * @property {{ what?: unknown, magnitude?: unknown, partyIds?: unknown } | null} [content]  D-1: raw rumor content for the axis fold (transient, never serialized)
+ * @property {string} [eventRef]         D-1: the canonical event id — the migration_flight direction (transient)
  */
 
 /** The aggregate weight + accuracy of a report set (provenance × recency ×
@@ -464,7 +475,7 @@ function aggregateReports(reports, credibilityOf = null) {
  *   reality always eventually wins. ABSENT (1) ⇒ byte-identical (weight * 1 === weight).
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1 }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1, axesActive = false, subjectId = '' }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -510,7 +521,8 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
     ? T.CONTRA_W * (Math.abs(obsStrengthBand - priorStrengthBand) / (STRENGTH_BANDS - 1))
     : 0;
   const confidence01 = clamp01(priorConf + weight * T.CONF_GAIN - contradiction);
-  return {
+  /** @type {BeliefRecord} */
+  const record = {
     readiness: round4(clamp01(blendedReadiness)),
     strengthBand: clamp(Math.round(blendedStrength), 0, STRENGTH_BANDS - 1),
     allianceLabel,
@@ -518,6 +530,10 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
     confidence01: round4(confidence01),
     lastUpdateTick: now,
   };
+  // D-1 (deep-couplings): fold the two axes AFTER the base reconcile (the credibilityOf
+  // injection shape — the leaf owns the logic). ABSENT flag ⇒ untouched ⇒ byte-identical.
+  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth, reports, subjectId }));
+  return record;
 }
 
 /**
@@ -632,6 +648,11 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null, 
       score: Math.max(0, finiteNumber(rec.score, 0)),
       sortKey: String(key),
       sourceId,
+      // D-1 (deep-couplings): the leaf's axis fold reads these transient fields (the raw content
+      // for the axis kind/magnitude/parties + the canonical eventRef for the migration direction).
+      // Transient (never serialized) ⇒ byte-neutral; the base aggregate/sort ignore them.
+      content,
+      eventRef: rec.eventRef != null ? String(rec.eventRef) : '',
     };
     for (const subjectId of parties) {
       if (subjectId === String(observerId)) continue; // self is never a rumor subject
@@ -1025,7 +1046,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01 });
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01, axesActive: ctx.axesActive === true, subjectId });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
@@ -1081,8 +1102,11 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   const byId = snapshot?.byId instanceof Map
     ? snapshot.byId
     : new Map((snapshot?.settlements || []).map((/** @type {SnapItem} */ it) => [String(it.id), it]));
+  // D-1 (deep-couplings): the belief-axes flag (requires beliefsActive — already asserted above).
+  // ABSENT ⇒ ctx.axesActive false ⇒ every ground-truth/reconcile path is byte-identical.
+  const axesActive = beliefAxesActive(worldState);
   /** @type {GroundTruthCtx} */
-  const ctx = { byId, pressureIdx, worldState };
+  const ctx = { byId, pressureIdx, worldState, axesActive };
   const neighbours = relationshipNeighbourhood(snapshot, worldState);
   const canonVersion = Number(worldState?.spatialCanonVersion) || 0;
   const realObserverKeys = prior ? Object.keys(prior).filter(k => k !== BELIEF_SEED_KEY) : [];

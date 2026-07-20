@@ -92,6 +92,14 @@ const EXPECTED_VOICE = {
   // culture observance — deliberately unvoiced (the npc_ladder/urban_fabric precedent; a
   // dedicated 'culture' crier is a T-5 surface question, not a T-2 mis-route).
   tradition: null,
+  // DEEP COUPLINGS (D-0 / D-1c): the belief-axis SUBSTRATE beats — a refugee column
+  // (migration_flight, the demographic axis) and a reshaped observance (tradition_change,
+  // the cultural axis) enter the rumor net to feed distant courts' beliefs, but neither is
+  // a town-crier proclamation: migration_flight would spam a crier on every column (the
+  // aggregate migration_pressure keeps the 'migration' voice), and tradition_change follows
+  // the tradition:null precedent (no culture crier). Deliberately unvoiced (JUDGMENT, vetoable).
+  migration_flight: null,
+  tradition_change: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

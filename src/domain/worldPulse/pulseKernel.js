@@ -66,7 +66,7 @@ import { releaseMigrationArrivals, dispatchMigrations, collectRealizedEmigration
 import { migrationActive } from '../spatial/migration.js';
 import { advanceCalamity } from './calamityKernel.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
-import { armyTransitLedger } from '../spatial/armyTransit.js';
+import { rumorCarrierParams } from '../spatial/migrationRumors.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
@@ -1772,32 +1772,27 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // byte-identical. Proposal/party applies outside this kernel seed at the
   // next pulse via the module's feed lookback (idempotent per event+witness).
   {
-    // M5 army carrier: the prior-tick in-transit armies' routes (empty when none
-    // afield ⇒ the army lane is dormant ⇒ byte-identical). Armies carry rumors along
-    // their path (round 9), same shape as the trade carrier.
-    const transitLedger = armyTransitLedger(memoryState);
-    const armyPaths = transitLedger
-      ? Object.keys(transitLedger).sort().map((id) => transitLedger[id].path).filter((p) => Array.isArray(p) && p.length > 1)
-      : null;
-    // M7 criminal carrier: this tick's SMUGGLE runs (marked on the supplyShipments ledger)
-    // relay news between the towns they run — a [source, destination] leg per run. EMPTY when
-    // no smuggle runs are afield ⇒ the criminal lane is dormant ⇒ byte-identical.
-    const shipLedger = /** @type {Record<string, { smuggle?: unknown, sourceId?: unknown, settlementId?: unknown }> | null} */ (
-      getSpatialLedger(memoryState, 'supplyShipments'));
-    const smugglePaths = shipLedger
-      ? Object.keys(shipLedger).sort().map((k) => shipLedger[k])
-          .filter((r) => r && r.smuggle === true && r.sourceId && r.settlementId && String(r.sourceId) !== String(r.settlementId))
-          .map((r) => [String(r.sourceId), String(r.settlementId)])
-      : null;
+    // D-0 (deep-couplings): the rumor CARRIER params (army + smuggle + refugee paths + the
+    // migration-flight seed entries) assemble in the migrationRumors leaf — pulseKernel is
+    // FROZEN at its effective-line ceiling, so the assembly lives outside it. armyPaths/
+    // smugglePaths read the POST-apply memoryState (byte-identical to the inline builders they
+    // replace); the migration columns read startingWorldState PRE-DRAIN (the early release pass
+    // already drained the due columns from memoryState) and light ONLY behind
+    // migrationRumorsEnabled (dark ⇒ null migrantPaths + no flight entries ⇒ byte-identical).
+    const carrier = rumorCarrierParams({ carrierState: memoryState, migrationState: startingWorldState, rules: simulationRules });
+    const feedEntries = carrier.flightEntries.length
+      ? [...(wizardNews?.entries || []), ...carrier.flightEntries]
+      : (wizardNews?.entries || []);
     const rumors = advanceRumorLedgers({
       worldState: memoryState,
-      feedEntries: wizardNews?.entries || [],
+      feedEntries,
       graph: applied.regionalGraph,
       tick: worldState.tick,
       season: roadSeason,
       rng,
-      armyPaths,
-      smugglePaths: smugglePaths && smugglePaths.length ? smugglePaths : null,
+      armyPaths: carrier.armyPaths,
+      smugglePaths: carrier.smugglePaths,
+      migrantPaths: carrier.migrantPaths,
     });
     if (rumors.changed) {
       if (rumors.next) {

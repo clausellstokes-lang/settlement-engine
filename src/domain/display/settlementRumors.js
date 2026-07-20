@@ -128,6 +128,8 @@ export const WHAT_PHRASES = Object.freeze({
   flow_migration: 'people on the move',
   migration_pressure: 'people on the move',
   population_emigration: 'families leaving',
+  // D-1 (deep-couplings): a refugee column on the road (the demographic belief-axis substrate)
+  migration_flight: 'families taking to the road',
   // institutions
   institution_build: 'a great work underway',
   institution_closure: 'a hall shuttered',
@@ -168,6 +170,8 @@ export const WHAT_PHRASES = Object.freeze({
   npc_support: 'a cause bound to a patron\'s',
   // THE TRADITIONS — a settlement's festival held or set aside (owner commission, engine lift #4)
   tradition: 'a festival kept',
+  // D-1c (deep-couplings): a rededicated/reshaped observance (the cultural belief-axis substrate)
+  tradition_change: 'an old rite made over',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
   blockade_lifted: 'a harbour opened again',
