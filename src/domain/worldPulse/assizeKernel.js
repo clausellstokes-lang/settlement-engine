@@ -45,7 +45,7 @@
  * the assize dormancy golden proves byte-identity to pre-wire. NO rng.
  */
 import {
-  num, asObject, compareCodepoint, round4, npcInFaction,
+  num, asObject, compareCodepoint, round4, npcInFaction, ladderFactionKey,
 } from './npcLadderState.js';
 import { clamp01 } from './relationshipState.js';
 import { getSpatialLedger, setSpatialLedger } from '../spatial/distanceRead.js';
@@ -137,8 +137,9 @@ function topUnrestStressorId(settlement) {
 function judgeCourt(settlement, accusedNpc) {
   const governing = governingFactionOf(/** @type {any} */ (settlement)) || null;
   if (!governing) return { sham: true, governing: null }; // no seat presides ⇒ no legitimate court
-  const gname = nameOf(/** @type {any} */ (governing));
-  const fkey = gname ? `fac.${String(gname).toLowerCase().replace(/[^a-z0-9]+/g, '_')}` : '';
+  // Canonical faction key (never hand-rolled — the faction-key defect-class cure): the
+  // same builder npcInFaction is designed to match, shared with the ladder + religion reads.
+  const fkey = ladderFactionKey(/** @type {any} */ (governing));
   if (accusedNpc && npcInFaction(accusedNpc, /** @type {any} */ (governing), fkey)) return { sham: true, governing };
   // Captured seat: a corrupt un-ousted NPC sitting in the governing faction.
   const npcs = Array.isArray(asObject(settlement).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).npcs) : [];
@@ -163,7 +164,7 @@ function accusedFactionKeyDistinctFromGoverning(settlement, accused, governing) 
   const gname = governing ? nameOf(/** @type {any} */ (governing)) : '';
   for (const f of factions) {
     const fname = nameOf(/** @type {any} */ (f));
-    const fkey = fname ? `fac.${String(fname).toLowerCase().replace(/[^a-z0-9]+/g, '_')}` : '';
+    const fkey = ladderFactionKey(/** @type {any} */ (f));
     if (npcInFaction(accused, /** @type {any} */ (f), fkey)) {
       if (fname && fname !== gname) return fname;
       return ''; // accused is in the governing faction (or unresolved) ⇒ no cross-faction pair
