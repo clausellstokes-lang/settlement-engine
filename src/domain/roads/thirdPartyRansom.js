@@ -251,10 +251,84 @@ export function resolveThirdPartyRansom(a) {
   };
 }
 
+/**
+ * §9 THE RELEASE EFFECTS: translate an ACCEPTED decision into the mover's deposit/applicator plan
+ * (the mover pushes these; this leaf never writes). COMPROMISED routes the returned-captive channel
+ * to the PAYER (web dark ⇒ falls through to DEBT, §9 gating coherence). DEBT deposits the
+ * ransom_relief obligation. A friend-payer's gratitude bond rides either. Pure.
+ * @param {ThirdPartyDecision} decision
+ * @param {{ homeId: string, captorId: string, npcKey: string, w: number, corruptionWebLit: boolean }} ctx
+ * @returns {{ payerId: string, payerProsperityStep: number,
+ *   returnedCaptiveDeposit: { captorId: string, homeId: string, npcKey: string, beneficiaryId: string }|null,
+ *   ransomSettlementDeposit: { homeId: string, payerId: string, magnitude: number, predatory: boolean }|null,
+ *   bondEventDeposit: { homeId: string, captiveNpcKey: string, targetNpcKey: string, targetSid: string, sev: number }|null }}
+ */
+export function thirdPartyReleaseEffects(decision, ctx) {
+  const T = THIRD_PARTY_RANSOM_TUNING;
+  const payerId = String(decision.payerId || '');
+  const compromised = decision.action === 'compromised' && ctx.corruptionWebLit; // web dark ⇒ degrade to debt
+  const gb = decision.gratitudeBond || null;
+  return {
+    payerId,
+    payerProsperityStep: clamp01(ctx.w) >= T.PAYER_CREDIT_MIN_WEIGHT ? T.PAYER_PROSPERITY_STEP : 0,
+    returnedCaptiveDeposit: compromised
+      ? { captorId: ctx.captorId, homeId: ctx.homeId, npcKey: ctx.npcKey, beneficiaryId: payerId } : null,
+    ransomSettlementDeposit: compromised
+      ? null : { homeId: ctx.homeId, payerId, magnitude: num(decision.obligationMag, 0), predatory: decision.predatory === true },
+    bondEventDeposit: gb
+      ? { homeId: ctx.homeId, captiveNpcKey: ctx.npcKey, targetNpcKey: gb.targetNpcKey, targetSid: gb.targetSid, sev: gb.sev } : null,
+  };
+}
+
 // ── §9 THE DEPOSIT LEDGERS — the mover persists these on this leaf's behalf (drop-when-empty,
 //    codepoint-stable). roadsRansomSettlements → advanceGenerosity (DEBT). roadsBondEvents →
 //    the ladder pass (gratitude). Both prune records older than one tick (consume-once by
 //    construction: the consumer runs earlier in the tick that follows the deposit — pulse order). ─
+
+/**
+ * §9 THE DEBT CONSUMER (generosity's arm): read the roadsRansomSettlements deposits into
+ * ransom_relief obligation mints {from: home (debtor), to: payer (creditor)}. The roads mover
+ * prunes the ledger the same tick (drop-all-prior), so each deposit is consumed exactly once
+ * (pulse order: generosity before roads-last). Absent ledger ⇒ [] ⇒ byte-neutral. Pure.
+ * @param {Record<string, unknown>} worldState @param {number} tick
+ * @returns {Array<{ from: string, to: string, kind: string, magnitude: number, mintTick: number, lastTick: number, predatory?: boolean }>}
+ */
+export function consumeRansomSettlements(worldState, tick) {
+  const ledger = asObject(getSpatialLedger(worldState, 'roadsRansomSettlements'));
+  /** @type {Array<{ from: string, to: string, kind: string, magnitude: number, mintTick: number, lastTick: number, predatory?: boolean }>} */
+  const out = [];
+  for (const key of Object.keys(ledger).sort(cmp)) {
+    const r = asObject(ledger[key]);
+    const from = String(r.homeId || ''); const to = String(r.payerId || '');
+    const magnitude = num(r.magnitude, 0);
+    if (!from || !to || from === to || magnitude <= 0) continue;
+    out.push({ from, to, kind: 'ransom_relief', magnitude, mintTick: tick, lastTick: tick, ...(r.predatory === true ? { predatory: true } : {}) });
+  }
+  return out;
+}
+
+/**
+ * §9 THE GRATITUDE CONSUMER (the ladder's arm): read the roadsBondEvents deposits into a lookup
+ * `${homeId}|${captiveNpcKey}` → { targetNpcKey, targetSid, sev }. The ladder pass mints the
+ * gratitude bond through ITS OWN writer (mintBond) when it processes the captive's standing; the
+ * roads mover prunes the ledger the same tick (consume-once, pulse order). Absent ⇒ empty ⇒
+ * byte-neutral. Pure.
+ * @param {Record<string, unknown>} worldState
+ * @returns {Map<string, { targetNpcKey: string, targetSid: string, sev: number }>}
+ */
+export function readRoadsBondEvents(worldState) {
+  const ledger = asObject(getSpatialLedger(worldState, 'roadsBondEvents'));
+  /** @type {Map<string, { targetNpcKey: string, targetSid: string, sev: number }>} */
+  const out = new Map();
+  for (const key of Object.keys(ledger).sort(cmp)) {
+    const r = asObject(ledger[key]);
+    const homeId = String(r.homeId || ''); const captiveNpcKey = String(r.captiveNpcKey || '');
+    const targetNpcKey = String(r.targetNpcKey || ''); const targetSid = String(r.targetSid || '');
+    if (!homeId || !captiveNpcKey || !targetNpcKey || !targetSid) continue;
+    out.set(`${homeId}|${captiveNpcKey}`, { targetNpcKey, targetSid, sev: num(r.sev, 0) });
+  }
+  return out;
+}
 
 /** Sort an object's keys codepoint-stably. @param {Record<string, unknown>} obj @returns {Record<string, unknown>} */
 function sortKeys(obj) {
@@ -265,20 +339,18 @@ function sortKeys(obj) {
 }
 
 /**
- * Carry + prune + append one deposit ledger; returns { worldState, changed } (drop-when-empty).
- * @param {Record<string, unknown>} worldState @param {string} key
- * @param {Record<string, unknown>} nextRecords  already carry-pruned + appended by the caller
- * @param {Record<string, unknown>} priorRecords
- * @returns {{ worldState: Record<string, unknown>, changed: boolean }}
+ * Decide the drop-when-empty write for one deposit ledger: null ⇒ no change; else the sorted
+ * next records (or null to drop). The CALLER performs the literal-key setSpatialLedger/
+ * dropSpatialLedger so the ledger-coverage walker detects the write. Pure.
+ * @param {Record<string, unknown>} nextRecords @param {Record<string, unknown>} priorRecords
+ * @returns {{ records: Record<string, unknown>|null }|null}
  */
-function persistOne(worldState, key, nextRecords, priorRecords) {
+function diffLedger(nextRecords, priorRecords) {
   const prev = JSON.stringify(Object.keys(priorRecords).length ? priorRecords : null);
-  const next = JSON.stringify(Object.keys(nextRecords).length ? sortKeys(nextRecords) : null);
-  if (prev === next) return { worldState, changed: false };
-  const ws = Object.keys(nextRecords).length
-    ? setSpatialLedger(worldState, key, sortKeys(nextRecords))
-    : dropSpatialLedger(worldState, key);
-  return { worldState: ws, changed: true };
+  const sorted = Object.keys(nextRecords).length ? sortKeys(nextRecords) : null;
+  const next = JSON.stringify(sorted);
+  if (prev === next) return null;
+  return { records: sorted };
 }
 
 /**
@@ -306,8 +378,11 @@ export function persistThirdPartyLedgers(worldState, deposits, weekClock) {
     for (const d of settlementDeps) {
       nextSettle[`${d.homeId}|${d.payerId}|${weekClock}`] = { homeId: d.homeId, payerId: d.payerId, magnitude: d.magnitude, predatory: d.predatory === true, week: weekClock };
     }
-    const res = persistOne(ws, 'roadsRansomSettlements', nextSettle, priorSettle);
-    ws = res.worldState; changed = changed || res.changed;
+    const res = diffLedger(nextSettle, priorSettle);
+    if (res) {
+      ws = res.records ? setSpatialLedger(ws, 'roadsRansomSettlements', res.records) : dropSpatialLedger(ws, 'roadsRansomSettlements');
+      changed = true;
+    }
   }
 
   const priorBonds = asObject(getSpatialLedger(worldState, 'roadsBondEvents'));
@@ -319,8 +394,11 @@ export function persistThirdPartyLedgers(worldState, deposits, weekClock) {
         homeId: d.homeId, captiveNpcKey: d.captiveNpcKey, targetNpcKey: d.targetNpcKey, targetSid: d.targetSid, sev: d.sev, week: weekClock,
       };
     }
-    const res = persistOne(ws, 'roadsBondEvents', nextBonds, priorBonds);
-    ws = res.worldState; changed = changed || res.changed;
+    const res = diffLedger(nextBonds, priorBonds);
+    if (res) {
+      ws = res.records ? setSpatialLedger(ws, 'roadsBondEvents', res.records) : dropSpatialLedger(ws, 'roadsBondEvents');
+      changed = true;
+    }
   }
   return { worldState: ws, changed };
 }

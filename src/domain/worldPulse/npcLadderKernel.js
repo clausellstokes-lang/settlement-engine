@@ -77,8 +77,9 @@ import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKe
 import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
   rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
-  sortedRecord, mirrorOf, maintainMarks,
+  sortedRecord, mirrorOf, maintainMarks, mintBond,
 } from './npcLadderState.js';
+import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
@@ -295,6 +296,9 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // + the cross-faction grievance read) additionally requires the memory weave.
   const contestsLit = contestedGoalsActive(worldState);
   const memWeave = memoryWeaveActive(worldState);
+  // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
+  // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
+  const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState) : new Map();
   /** @type {Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }>} D-4c §10.5 cross-faction loss deposits */
   const factionPairDeposits = [];
 
@@ -430,6 +434,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           npc: npcObj, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
         });
         npcs[nid] = gl.st;
+        // D-5 §9: a friend's ransom forms a gratitude bond toward the payer's NPC (the ladder is
+        // the bonds writer; roads only deposited the event). Cross-border ⇒ foreignSid = payer sid.
+        if (roadsBondEvents.size) {
+          const bev = roadsBondEvents.get(`${sid}|${nid}`);
+          if (bev) npcs[nid].bonds = mintBond(npcs[nid].bonds, bev.targetNpcKey, 'gratitude', bev.sev, weeks, bev.targetSid);
+        }
         if (contestsLit) {
           nidMeta.set(nid, { fkey, faction, rungIndex, rungCount: rungs.length, npc: npcObj });
           if (gl.outcome) goalOutcomes.set(nid, gl.outcome);
