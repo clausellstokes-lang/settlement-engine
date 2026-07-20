@@ -748,7 +748,7 @@ function coalitionOpponents(seatFac, roster) {
   const opponents = new Set();
   const rivals = seatFac ? seatFac.rivals : null;
   if (!Array.isArray(rivals) || !rivals.length) return opponents;
-  const rivalKeys = new Set(rivals.map((r) => String(r && typeof r === 'object' ? (r.id ?? r.name ?? r.faction ?? '') : r).toLowerCase()).filter(Boolean));
+  const rivalKeys = new Set(rivals.map((r) => String(r && typeof r === 'object' ? (r.id ?? r.faction ?? r.name ?? '') : r).toLowerCase()).filter(Boolean));
   for (const fac of roster) {
     const keys = [fac.id, fac.name, fac.faction].map((x) => String(x || '').toLowerCase()).filter(Boolean);
     if (keys.some((k) => rivalKeys.has(k))) opponents.add(factionArchetype(fac));

@@ -171,7 +171,7 @@ export function buildTargetOptions(settlement, collectionKey) {
   const out = [];
   for (const item of list) {
     const id = item.id || item.faction || item.name;
-    const name = item.name || item.faction || item.id;
+    const name = item.faction || item.name || item.id;
     if (!id || !name) continue;
     if (seen.has(id)) continue;
     seen.add(id);

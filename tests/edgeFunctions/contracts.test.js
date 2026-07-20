@@ -721,7 +721,14 @@ describe('Tier 3.3 — generate-narrative grounding fidelity', () => {
   });
 
   it('governing faction read tolerates the .faction key shape powerGenerator emits', () => {
-    expect(src).toMatch(/governing\?\.name \|\| governing\?\.faction \|\| null/);
+    // ORDER CORRECTED 2026-07-19 (faction-key precedence sweep). This assertion used to
+    // pin `governing?.name || governing?.faction`, which froze the REVERSED precedence:
+    // `.faction` is the canonical key (rulingPower.nameOf reads `.faction || .name`,
+    // pinned by dc0b6e2b) and `.name` is a legacy alias. The test's stated intent — that
+    // the read tolerates the `.faction` shape powerGenerator emits — is unchanged and
+    // still enforced; only the order the regex freezes is corrected, so this contract can
+    // no longer certify the defect it was meant to prevent.
+    expect(src).toMatch(/governing\?\.faction \|\| governing\?\.name \|\| null/);
   });
 });
 

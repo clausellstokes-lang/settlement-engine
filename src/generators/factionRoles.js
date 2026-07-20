@@ -131,7 +131,7 @@ export function generateFactionStructuralNpcs(faction, institutions = []) {
   if (!arch) return [];
   const defs = FACTION_ROLES[arch] || [];
   const factionId = faction.id || faction.faction || faction.name || '';
-  const factionName = faction.name || faction.faction || 'Unknown faction';
+  const factionName = faction.faction || faction.name || 'Unknown faction';
   return defs.map((def, i) => {
     const linkedInstId = def.linkToInst
       ? institutions.find(inst => def.linkToInst.test(String(inst.name || '').toLowerCase()))?.id

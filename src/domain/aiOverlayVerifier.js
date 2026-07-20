@@ -98,8 +98,13 @@ export const VIOLATION_KINDS = Object.freeze([
 // ── Helpers ─────────────────────────────────────────────────────────────
 
 /**
- * Stable identifier for an entity: explicit `id` first, then `name`,
- * then `faction` (legacy alias used by some power-structure entries).
+ * Stable identifier for an entity: explicit `id` first, then `faction`,
+ * then `name`. That order is NOT arbitrary — it is rulingPower.nameOf's
+ * precedence (`.faction || .name`), and this key must agree with it: a
+ * powerStructure.factions record's canonical display name lives in
+ * `.faction`, while `.name` is a legacy alias some records also carry.
+ * Reading the alias first would key a renamed faction under its stale name
+ * and misclassify the rename as a remove+invent pair.
  * The same identity function MUST be used for both sides so we don't
  * spuriously flag rename-as-id-change.
  */
@@ -110,8 +115,8 @@ export const VIOLATION_KINDS = Object.freeze([
 function entityKey(e) {
   if (!e || typeof e !== 'object') return null;
   if (e.id != null) return `id:${String(e.id)}`;
-  if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
   if (typeof e.faction === 'string' && e.faction.length) return `name:${e.faction}`;
+  if (typeof e.name === 'string' && e.name.length) return `name:${e.name}`;
   return null;
 }
 
@@ -120,7 +125,7 @@ function entityKey(e) {
  * @returns {unknown}
  */
 function displayName(e) {
-  return (e && typeof e === 'object' && (e.name || e.faction)) || null;
+  return (e && typeof e === 'object' && (e.faction || e.name)) || null;
 }
 
 /**
@@ -360,7 +365,7 @@ function compareUserFields(original, refined) {
     if (expected === undefined) continue;
     if (expected === actual) continue;
     const ent = locateEntity(refined, kind, entityIndex) || locateEntity(original, kind, entityIndex);
-    const label = ent?.name || ent?.faction || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
+    const label = ent?.faction || ent?.name || (kind === 'settlement' ? 'settlement' : `#${entityIndex}`);
     violations.push({
       kind: 'changed_user_field',
       field: kind === 'settlement' ? path : `${kind}[${entityIndex}].${path}`,

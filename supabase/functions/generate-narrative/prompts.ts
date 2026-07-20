@@ -203,10 +203,10 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
       type: typeof ps.government === 'string' ? ps.government : ps.government?.type,
       // Faction entries key the name under .faction (powerGenerator); .name
       // is the legacy/alternate shape.
-      governingFaction: governing?.name || governing?.faction || null,
+      governingFaction: governing?.faction || governing?.name || null,
     },
     factions: factions.slice(0, 6).map((f: any) => ({
-      name: f?.name || f?.faction,
+      name: f?.faction || f?.name,
       isGoverning: !!f?.isGoverning,
       desc: f?.desc,
       power: f?.power || f?.powerLabel,
@@ -518,7 +518,7 @@ Return JSON: { "items": [{ "id": <number>, "summary": "<refined>", "crisisHook":
     max_tokens: 1800,
     extract: (s) => (s.powerStructure?.factions || []).slice(0, 10).map((f: any, idx: number) => ({
       id: idx,
-      name: f?.name || f?.faction,
+      name: f?.faction || f?.name,
       isGoverning: !!f?.isGoverning,
       power: f?.power || f?.powerLabel,
       desc: f?.desc,
@@ -828,7 +828,7 @@ Return JSON: { "items": ["<marker 1>", "<marker 2>", ...] }. One sentence each. 
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const institutions = (s.institutions || []).slice(0, 3).map((i: any) => ({
         name: i?.name, category: i?.category,
@@ -863,7 +863,7 @@ Return JSON: { "items": [{ "who": "<named party or parties>", "what": "<1 senten
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
       })).filter((x: any) => x.name);
       const factions = (s.powerStructure?.factions || []).slice(0, 6).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const institutions = (s.institutions || []).slice(0, 5).map((i: any) => ({
         name: i?.name, category: i?.category,
@@ -937,7 +937,7 @@ Return JSON: { "items": [{ "from": "<name>", "to": "<name>", "via": "<name or em
       })).filter((x: any) => x.name);
       if (npcs.length) out.npcs = npcs;
       const factions = (s.powerStructure?.factions || []).slice(0, 3).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       if (factions.length) out.factions = factions;
       return out;
@@ -1012,7 +1012,7 @@ No preamble, no markdown.`,
         label: t?.label, summary: t?.summary,
       })).filter((x: any) => x.label);
       const factions = (s.powerStructure?.factions || []).slice(0, 4).map((f: any) => ({
-        name: f?.name || f?.faction, isGoverning: !!f?.isGoverning,
+        name: f?.faction || f?.name, isGoverning: !!f?.isGoverning,
       })).filter((x: any) => x.name);
       const npcs = (s.npcs || []).slice(0, 4).map((n: any) => ({
         name: n?.name, role: n?.role, faction: n?.factionAffiliation,
@@ -1343,7 +1343,7 @@ function overlayPriorRefinedProse(clone: any, prior: any): void {
 
   // Factions — match by name/faction
   if (Array.isArray(prior.powerStructure?.factions) && Array.isArray(clone.powerStructure?.factions)) {
-    const facKey = (f: any) => String(f?.name || f?.faction || '');
+    const facKey = (f: any) => String(f?.faction || f?.name || '');
     const priorMap = new Map(prior.powerStructure.factions.map((f: any) => [facKey(f), f]));
     for (const cf of clone.powerStructure.factions) {
       const p: any = priorMap.get(facKey(cf));
