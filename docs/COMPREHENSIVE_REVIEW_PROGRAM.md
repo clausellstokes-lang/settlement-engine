@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-I SHIPPED — the ops nervous system, inert-honest (2026-07-20,
+claude/vision-i @ e5e4ce1d, FOLD-READY; manager-validated).** All seven: R-15 nine
+PROPOSED soak bands (registry-mirrored manifest + validate:tuning-bands wired into
+check AND ci.yml) · R-25 load harness (target-refusal law HARD-CODED: prod domains
+unoverridably refused; exercises only the unauth gate — never spends AI budget) ·
+R-26 self-contained status.html outside the SPA bundle · R-27 VERIFIED-not-rebuilt
+(the restore drill already existed — honest reuse) · R-28 spend alarm migration-FREE
+(env-key inert, Turnstile pattern — a migration would break head-167 contiguity;
+JUDGMENT ratified) · R-29 First Hundred ships EMPTY (no fake names; distinct from
+the 30 paid Founder seats — ratified) · R-30 roadmap renders ONLY the committed
+ledger (source-scan pinned) + creator-kit manifest. 60/60 pins · strict 0 · tsc 0 ·
+lint 0 · build 168/168 · closure 1,025,216 (+482 B: two lazy routes' registry+manifest
+entries — legitimate eager route-table growth; headroom 14,784) · NUL clean. HAZARDS
+BANKED: check↔ci.yml validate-step parity is BIDIRECTIONAL (ciCheckParity bites) ·
+new components must use theme tokens never raw hex (rawColorLiteral 1403). PROCESS
+NOTE: lane worktrees cannot see the ledger-branch design doc — future briefs spell
+the two-branch geography. SLOT ROTATED → V-H (UX quartet) dispatching; V-I awaits
+fold at the next minifold boundary.**
 **⬛⭐ VISION LANE V-A SHIPPED — the map's knowledge reaches the prose, the court
 gains an heir (2026-07-20, composite-r4 @ 299f2843; manager-validated).** V-6 BIOME
 TRUTH: per-cell biome PROVED reachable at canonize (pack.biome[cellId] — no
