@@ -1134,6 +1134,36 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ ⟵ RESUME HERE (2026-07-20, owner switching accounts to finish) — CLEAN
+STOPPING POINT.** STATE: the ENTIRE BUILD IS DONE except the mini-fold's finalization.
+Pre-fold wave folded (fold batch 3 → claude/composite-r3 @ accd0242, BUDGET GREEN
+1,024,371). All 3 post-fold lanes DONE (D-5/D-6 @ dc-roads-followon d9121e8f · Formation α
+@ dc-formation-statecraft feaf5f9f · Formation β @ dc-formation-agency 58d45d7a). THE
+MINI-FOLD is at claude/composite-r4 @ 2f65369b (worktree .claude/worktrees/minifold):
+STEP 1 (all 3 merges) DONE + COMMITTED — merge 1/3 roads, 2/3 α (npcLadderKernel
+compose-both: D-5 roadsBondEvents read + α bluffChargeLit BOTH kept; spatialUsage exempt
+union), 3/3 β. REMAINING (uncommitted WIP discarded at stop — RE-DO from recipe): STEP 2
+clear the domain:strict debt (~16 errors in intelActs/beliefAxes/beliefMap/generosityKernel
+— the D-1/D-3 leaves; the stopped agent was bisecting base-vs-merge, its OWN annotations
+EXONERATED → the errors are BASE debt from composite-r3, mechanical JSDoc 0-holing,
+runtime byte-neutral, prove via the beliefMap/beliefAxes/intelTrade dormancy goldens) +
+STEP 3 build the now-unblocked generosity-gift GRATITUDE deposit (deposit half in a
+generosity LEAF [generosityKernel 785/800 — leaf, the D-3 precedent at :994+]; consume half
+in npcLadderKernel via mintBond onto the giver-settlement ruling-seat NPC, memoryWeave-gated,
+one-tick deposit-consume) — full recipe in β's report + the mini-fold dispatch row above +
+task #40. Then the MINI-FOLD GATE (build → verify:dist ≤1,040,000 → typecheck:domain:strict=0
+→ two-shard suite = ONLY the 4 parked goldens). RESUME ORDER after the mini-fold lands
+(→ composite-r4 = the finished world): (1) BUILD-COMPLETENESS gate · (2) PRODUCE
+docs/THE_RESURVEY_HANDOFF.md (⛔MANDATORY — the self-contained platform-agnostic loop brief;
+spec in the AI-HANDOFF ruling row) · (3) THE ROUND 3 LOOP (coherence-mandated, pre-stocked:
+COHERENCE_MATRIX_R3 + fold blissful-bhaskara faction-key sweep already in composite-r3) ·
+(4) the owner tail (promote composite → PUSH#1 → soak → tuning → ONE REGEN → walk → PUSH#2
+→ THE VERY END → PUSH#3). SHARED-TREE: the-composite stays UNTOUCHED at 24f46337 (promotion
+owner-gated); parallel owner sessions advance it — re-verify the tip before any fold. Task
+#40 holds the remaining small seams (shared-war coalition, champion covenant UI,
+unbonded-conscience payer, third-party news pool) → loop intake. ⚠ benign: a git gc.log /
+loose-objects warning — do NOT `git prune` while worktrees/parallel sessions are live.
+NOTHING is lost; everything is committed; re-derive done-state from GIT, not any brief.
 **⬛⭐ FORMATION LANE β COMPLETE — THE ACTORS' AGENCY (2026-07-20,
 claude/dc-formation-agency @ 58d45d7a, 5 commits off composite-r3 — manager-verified;
 re-derived done-state from CODE not the brief, correctly). BUILT: D-4e CHAMPION PRODUCER
