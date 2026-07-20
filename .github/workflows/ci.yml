@@ -57,6 +57,13 @@ jobs:
       - name: Validate vendored map JavaScript
         run: npm run validate:map
 
+      # Schema-guard the R-15 tuning-band manifest (src/domain/tuning/
+      # proposedSoakBands.js): every proposed soak band is well-formed and
+      # ships 'PROPOSED' (soak-vetoable), so a malformed or pre-ratified band
+      # cannot slip in.
+      - name: Validate tuning bands
+        run: npm run validate:tuning-bands
+
       # tsc --noEmit against src/domain/. The JSDoc types in the domain
       # layer get validated by tsc; the pipeline output object shapes,
       # impairment dimensions, event types, and faction-response shapes
