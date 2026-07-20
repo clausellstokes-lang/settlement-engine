@@ -9,6 +9,7 @@ import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
+import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import NpcLifecycleControls from './NpcLifecycleControls.jsx';
 
@@ -153,6 +154,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   const publicTraits = traits.filter(t => t.visibility !== 'gm');
+  // DESIGN_VISION_WAVE V-24c — INTERIORITY-LITE: the composed "disposition & wants" read-model
+  // (a pure display projection over existing state; no new store, no writes). Player-safe here —
+  // the DM-truth block (bonds/grudges/credibility) is gated in the leaf and left for a
+  // worldState-bearing surface; this card reads the mirror-safe view (secrets seam honoured).
+  const interiority = npcInteriority({ npc });
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
   // floor). Null unless the world pulse touched this compromise. The npc pin key
@@ -273,6 +279,20 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             <p style={{fontSize:FS.xs,color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
+          )}
+          {interiority && (interiority.wants.length > 0 || interiority.disposition.length > 0) && (
+            <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
+              {interiority.wants.length > 0 && (
+                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiority.wants.join(' · ')}
+                </div>
+              )}
+              {interiority.disposition.length > 0 && (
+                <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
+                  <span style={{fontWeight:700,color:MUTED}}>Disposition </span>{interiority.disposition.join(', ')}
+                </div>
+              )}
+            </div>
           )}
           {(npc.secret || editMode) && (
             <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
