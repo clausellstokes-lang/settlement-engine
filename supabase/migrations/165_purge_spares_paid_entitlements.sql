@@ -1,4 +1,4 @@
--- 162_purge_spares_paid_entitlements.sql
+-- 165_purge_spares_paid_entitlements.sql
 --
 -- Downgrade-transition audit P0 (2026-07-19): the retention purge cascade-destroys
 -- PAID durable dossier rights.

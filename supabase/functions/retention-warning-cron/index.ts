@@ -1,7 +1,7 @@
 /**
  * retention-warning-cron — the NIGHTLY retention-expiry warning sweep.
  *
- * Invoked once per local midnight by the pg_cron job scheduled in migration 163
+ * Invoked once per local midnight by the pg_cron job scheduled in migration 166
  * (run_retention_warning_nightly → net.http_post here). It sweeps the two asset
  * tables (settlements, saved_maps) for plan-inactive rows whose retention_expires_at
  * falls within the warning window, groups them by (owner, expiry date), and emails

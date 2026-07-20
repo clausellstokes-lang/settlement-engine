@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 163_retention_warning_cron.sql — the NIGHTLY, DST-proof retention-expiry warning.
+-- 166_retention_warning_cron.sql — the NIGHTLY, DST-proof retention-expiry warning.
 --
 -- WHY THIS EXISTS
 --   Migrations 023/024 gave a downgraded account a RETENTION WINDOW: its saved
@@ -49,7 +49,7 @@
 --   many days ahead of retention_expires_at an account is warned.
 --
 -- MIGRATION-NUMBER LEDGER. This lane's head is 155; siblings on parallel worktrees
---   (money-wave, roads) hold 156–162, so this migration takes 163 to avoid a
+--   (money-wave, roads) hold 156–162, so this migration took a high number to avoid a
 --   fold-time collision. That leaves a DELIBERATE gap 156..162 on THIS branch — a
 --   fold-owned red the merge closes by renumbering the parallel migrations
 --   contiguously. Reference these functions/jobs by NAME, never by number.
@@ -95,7 +95,7 @@ revoke all on table public.retention_warning_dispatch from authenticated;
 grant select, insert, delete on table public.retention_warning_dispatch to service_role;
 
 comment on table public.retention_warning_dispatch is
-  'At-most-once ledger for retention-expiry warning emails (migration 163). One row per (account_id, warn_for_date); the retention-warning-cron edge function claims a row before sending. Service-role only (RLS on, no policy).';
+  'At-most-once ledger for retention-expiry warning emails (migration 166). One row per (account_id, warn_for_date); the retention-warning-cron edge function claims a row before sending. Service-role only (RLS on, no policy).';
 
 -- ── 1. Seed the cron config row (inert: url/secret null) ────────────────────
 -- on conflict do nothing so a re-apply never clobbers a live operator edit.
@@ -107,7 +107,7 @@ values ('retention_warning_cron', jsonb_build_object(
   'timezone', 'America/New_York',
   'warnWindowDays', 14,
   'lastDispatchedOn', null,
-  'note', 'Nightly retention-expiry warning. INERT until an operator sets url + secret via service-role SQL (see migration 163 header). url = the deployed retention-warning-cron function URL; secret = its RETENTION_WARNING_CRON_SECRET env value. The pg_cron job fires hourly UTC; only the firing at local midnight in timezone dispatches (DST-proof). warnWindowDays = how many days ahead of retention_expires_at an account is warned. Set enabled=false to pause without unscheduling. The mail template ''retention_warning'' is registered by the Wave E adapter (parallel branch) — dispatches are inert until it lands.'
+  'note', 'Nightly retention-expiry warning. INERT until an operator sets url + secret via service-role SQL (see migration 166 header). url = the deployed retention-warning-cron function URL; secret = its RETENTION_WARNING_CRON_SECRET env value. The pg_cron job fires hourly UTC; only the firing at local midnight in timezone dispatches (DST-proof). warnWindowDays = how many days ahead of retention_expires_at an account is warned. Set enabled=false to pause without unscheduling. The mail template ''retention_warning'' is registered by the Wave E adapter (parallel branch) — dispatches are inert until it lands.'
 ))
 on conflict (key) do nothing;
 

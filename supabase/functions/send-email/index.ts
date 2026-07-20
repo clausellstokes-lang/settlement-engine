@@ -190,7 +190,7 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
   // ops_error_alert — the item-A error-alert consumer (Wave E). Authenticated
   // only (NOT in ANON_OK_TEMPLATES — the ops alert must never widen the anon
   // mailer surface). Sent to the operator's own address; the numbers come from
-  // report_client_error_alert() (migration 156). Kept in sync with
+  // report_client_error_alert() (migration 167). Kept in sync with
   // src/lib/emailTemplates.js.
   ops_error_alert: {
     subject: "SettlementForge: {distinctSignatures} distinct crash signatures in {windowMinutes} min",

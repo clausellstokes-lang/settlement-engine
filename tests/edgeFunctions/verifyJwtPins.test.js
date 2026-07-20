@@ -45,7 +45,7 @@ const SELF_AUTH_FALSE = new Set([
   // migration 115 — cron-invoked (pg_net), authenticated by the x-cron-secret
   // shared secret, not a JWT. Same posture as analytics-export.
   'pricing-resync-cron',
-  // migration 163 — cron-invoked (pg_net) retention-expiry warning, authenticated
+  // migration 166 — cron-invoked (pg_net) retention-expiry warning, authenticated
   // by the x-cron-secret shared secret, not a JWT. Same posture as pricing-resync-cron.
   'retention-warning-cron',
   // og-image — the callers ARE unfurl bots (no JWT); it reads only already-public

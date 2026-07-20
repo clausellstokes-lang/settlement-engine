@@ -1,6 +1,6 @@
 /**
  * purgeSparesPaidEntitlement.pglite.test.js — EXECUTION proof of the downgrade-
- * audit P0 fix (migration 162) against in-process Postgres (pglite).
+ * audit P0 fix (migration 165) against in-process Postgres (pglite).
  *
  * THE BUG (024): purge_expired_plan_inactive_assets() blind-DELETEs expired
  * inactive settlements; dossier_entitlements.save_id is ON DELETE CASCADE (108),
@@ -24,11 +24,11 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG = resolve(process.cwd(), 'supabase', 'migrations', '162_purge_spares_paid_entitlements.sql');
+const MIG = resolve(process.cwd(), 'supabase', 'migrations', '165_purge_spares_paid_entitlements.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
 
-it('migration 162 present (suite not vacuous)', () => {
+it('migration 165 present (suite not vacuous)', () => {
   expect(have).toBe(true);
 });
 
@@ -76,7 +76,7 @@ describe.runIf(have)('purge_expired_plan_inactive_assets spares live paid entitl
         status text not null default 'active'
       );
     `);
-    // The real migration 162, verbatim (the function + revoke/grant).
+    // The real migration 165, verbatim (the function + revoke/grant).
     await db.exec(SRC);
   }, 60000);
 

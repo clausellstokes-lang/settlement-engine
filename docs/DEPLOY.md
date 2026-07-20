@@ -130,7 +130,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `156_ai_ip_token_bucket.sql`** (this filename is kept
+**Current migration head: `167_client_error_reports.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 
@@ -214,6 +214,8 @@ npx supabase functions deploy send-email --no-verify-jwt              # per-temp
 npx supabase functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
 npx supabase functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
 npx supabase functions deploy health --no-verify-jwt                  # uptime liveness + deep DB probe (no JWT)
+npx supabase functions deploy founder-transfer --no-verify-jwt        # run_due cron x-cron-secret; user actions self-auth in-handler
+npx supabase functions deploy retention-warning-cron --no-verify-jwt  # nightly pg_net cron, x-cron-secret shared secret
 # verify_jwt = true (require an authenticated user — no flag):
 npx supabase functions deploy create-checkout
 npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
@@ -232,8 +234,8 @@ npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **26 deployable functions** (every `supabase/functions/*` dir except
-`_shared`) — deploy all of them on a first cutover. The ten `verify_jwt = false`
+There are **28 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The twelve `verify_jwt = false`
 and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir

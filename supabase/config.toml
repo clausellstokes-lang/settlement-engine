@@ -438,7 +438,7 @@ verify_jwt = false
 [functions.founder-transfer]
 verify_jwt = false
 
-# Cron-invoked nightly retention-expiry warning (migration 163, pg_net → this
+# Cron-invoked nightly retention-expiry warning (migration 166, pg_net → this
 # function), authenticated by the x-cron-secret shared secret
 # (RETENTION_WARNING_CRON_SECRET), not a JWT — fail-closed on a wrong/missing
 # secret (403) and refuses to run unconfigured (503). Same posture as

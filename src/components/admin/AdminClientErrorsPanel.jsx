@@ -2,7 +2,7 @@
  * AdminClientErrorsPanel.jsx — owner-facing read view over client crash reports
  * (client_error_events, migration 081). Mirrors AdminAnalyticsPanel: calls the
  * admin-actions `get_client_error_dashboard` action, which dispatches to the two
- * fixed migration-156 SECURITY DEFINER reads (report_client_errors +
+ * fixed migration-167 SECURITY DEFINER reads (report_client_errors +
  * report_client_error_alert). The privilege gate is server-side in admin-actions;
  * this is read-only.
  *
