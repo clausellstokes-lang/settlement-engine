@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-B SHIPPED — the chronicler writes, the years replay, the
+causes trace, the town wears its history (2026-07-20, composite-r4 @ a9caa573,
+6 commits ON the trunk lane; manager-validated). THE MINIFOLD IS FREE — THE
+QUINTUPLE FOLD DISPATCHED.** V-2 LETTER + R-16/R-17: deterministic composer over a
+persisted lastReadTick — the FULL lifecycle traced+pinned (migrateCampaign
+chokepoint · createCampaign/import init · persist-clone round-trip · undo-safe
+incl. the lastReadTick>currentTick paradox); world-deepened section dark till a
+flag delta; text export via downloadBlob (no react-pdf bytes). V-4 CAUSE-WALK:
+recordedAncestors backward mirror + BFS + covert-hop redaction leak-pinned. V-3
+TIMELAPSE: pulseHistory-derived track, deterministic golden, scrubber section.
+V-15 AGED MAP: draw-time derivation — town-map goldens BYTE-IDENTICAL (proven;
+the derived-only law honored perfectly). V-10 CERTIFICATE: closed soak-property
+vocab, inert-honest empty manifest, claims-parity pinned. Gate: strict 0 · tsc 0 ·
+lint 0 · 1390+782+769 across the shards (reds = 3 parked + one 9/9-isolated load
+flake) · closure 1,025,451 (Δ +717 B — the irreducible persisted-contract cost;
+headroom 14,549). JUDGMENTS RATIFIED: shared timelapseTick field · draw-time
+derivation · seesSecrets=true owner-only with redaction pinned. DEFERRED-RECORDED:
+V-B adoption telemetry (new-name eager cost — cycle-2 decision) · letter AI
+dressing · true time-delta thickening. HAZARD BANKED: the vitest ratchets are NOT
+eslint (anyCast/rawColor/mapPalette/killList fire only in the design+lint shard;
+killList counts COMMENT lines) · SettlementMapPane at 598/600. THE FOLD: five
+branches (i·c·h·e·d) into composite-r4 under THE FOLD LAW — closure measured per
+merge, breach halts; seams applied (EmptyState adoption, error-literal strikes);
+migration 168 contiguity checked.**
 **⬛⭐ VISION LANE V-D SHIPPED — the pins the platform was missing, and an honest
 stale-brief catch (2026-07-20, claude/vision-d @ 048e584d, 5 lettered commits,
 FOLD-READY; manager-validated).** THE LOAD-BEARING FINDING (verified against git,
