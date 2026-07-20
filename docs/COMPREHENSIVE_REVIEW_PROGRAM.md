@@ -1134,6 +1134,48 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ DEEP COUPLINGS D-4 COMPLETE — THE PRE-FOLD BUILD IS FINISHED (2026-07-19,
+claude/deep-couplings-contest @ 82c8095e, 3 commits stacked on the D-7 tip 49b145bb —
+manager-verified).** THE CONTESTED GOALS CLASS shipped dark (contestedGoalsEnabled): the
+full §8 class — settlement-wide collision genesis, knowing/unknowing discovery fog + the
+bluff, TUNNEL VISION (fixation01 from the inherited D-7a grievanceLean + traits biasing
+entry/window/heard-odds + the loss→typed-grudge loop), the HEAD-TO-HEAD resolution matrix
+(hash-jittered tie-break), D-4f SUPPORT GOALS + cascade + bond-joining (consuming D-7's
+bondedPeersAbove/strongestBond), PLAYER SIDING (backedBy first-class, folded into the
+margin), NO-DEATH (rung roster asserted a permutation every tick; loser = standing sting +
+decaying grudge via the ladder's writer). Receipts: 30 contest pins · 7 dormancy · 59
+ladder byte-identical dark · 80 security (mirror leaks nothing) · domain-strict 0 · closure
+delta 0. Deferred (compose at fold): D-4e the champion-npc STORE producer (engine
+consumption built+pinned) · the bluff→D-2 credibility charge (bluffDeposits live, the
+consume arm deferred). ContestRec owner-visible (+verb/loserNid beyond the doc, recorded).
+
+⭐ DEEP COUPLINGS PRE-FOLD BUILD COMPLETE: D-0/D-1 (627055b3) · D-2 (b986b4e8) · D-7
+(49b145bb) · D-4 (82c8095e) STACKED as one lineage; D-3 (87f52ce1) separate off composite.
+D-5/D-6 + the deferred formation seams are POST-FOLD.
+
+⬛ FOLD BATCH 3 MANIFEST (assembled; execute against the RE-VERIFIED live composite tip —
+was 24f46337, the owner's parallel sessions advance it):
+ BRANCHES: the deep-couplings STACK tip (82c8095e = D-0/1/2/7/4 in one lineage) · deep-
+ couplings-intel (87f52ce1, D-3) · roads (21bba9a1) · money-wave (d0eacd45) · ruin-filter
+ (4c1ccadc) · the completion waves (wave-a-tabs 8fdd4b95 · wave-a2-sweep 3398ecea · wave-b-
+ remainder 80db0799 · wave-b-finisher e7dc528b · wave-c-seams 295f27b8 · wave-d-perimeter
+ d93197da · wave-e-launch-ops f61f80a9 · de-eager 2c4d599b) · the faction-key sweep
+ (blissful-bhaskara b561d0d4).
+ CONFLICTS/RESOLUTIONS: (1) personaSlicer.js + religionLegitimacy.js — fixed on BOTH
+ composite (nameOf) and blissful — KEEP COMPOSITE's nameOf() version. (2) the roads
+ settlementStrategy.js edit lives in a WAR-system file — reconcile with any parallel war work.
+ (3) migration renumber: 156×N + 157-164 (money) + ruin-filter 162 + wave-b 162 + finisher
+ 163 → contiguous after the live head; names are the interface, numbers rename.
+ DEBT CLEANUPS (make green, do NOT ride past): build:edge-shared (aiGroundingBundle.freshness,
+ D-7 + D-3 inputs changed) · domainAnyCastBaseline reconcile (D-7 leaves' any-holes:
+ eliteBleed/factionPairLedger/relationshipEvolution) · spatialLedgerCoverage.walker EXEMPT
+ the D-2 npcCredibility + D-3 intelTransfers/intelCooldown + roads/D-7 sidecars · impactKinds
+ registered (done per-lane) · the D-2×D-3 credibility-loop + D-4×D-2 bluff composition +
+ D-4e champion producer land as post-fold completion commits.
+ CEILING RE-PINS: kill-list to measured (Wave-A lanes summed) · size-baseline (pulseKernel
+ 1381, generosityKernel 785, +the D-7/D-4 leaves) · de-eager reclaim → BUDGET GREEN.
+ GATE: NUL-scan (python) · --no-ff · bare full suite (two shards) · expected reds = ONLY the
+ 4 parked goldens (ONE REGEN re-mints) · closure ≤ 1,040,000 after the reclaim.
 **⬛⭐ DEEP COUPLINGS D-3 THE INTEL LANE COMPLETE (2026-07-19, claude/deep-couplings-intel
 @ 87f52ce1, 4 commits off composite 24f46337 — manager-verified).** Option A executed: the
 design premise was confirmed WRONG (warningSacrifice/intelSalePrice/intelSaleCredibilityDeltas
