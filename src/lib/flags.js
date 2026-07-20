@@ -72,6 +72,7 @@ const FLAG_DESCRIPTIONS = Object.freeze({
   advanceMultiTick: "PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=13, year=52) with a progress bar + pause/resume + auto-resolve toggle. Set false to fall back to the byte-identical single-tick advance.",
   simAdvanceWorker: "Run the multi-tick world advance in a Web Worker (main thread stays interactive). Byte-identical output; set false to fall back to the in-thread advance.",
   advanceWorkerParanoia: "DEV-ONLY: re-run each Web Worker advance in-thread and diff the two worldStates, surfacing any determinism divergence. Default OFF; inert in production builds (import.meta.env.DEV gate) even if forced on. Doubles advance compute while on.",
+  handbookVoice: "V-26b: house-voice rewrite of the Keeper's Handbook narrative prose (header + concept essay), staged dark. OFF (default) = the exact current copy. Flip ON to preview; the steps/Reference/FAQ stay plain in both. Owner taste flip.",
   warEconomySurfacing: "A read-only \"War & Resolve\" tab surfacing each settlement's Hope / Resolve / Faith relation / Supply / pro-war vs anti-war balance, and the same signals grounding the AI narrative + daily-life prose. Display-only; touches no simulation state.",
   sessionMode: "W-Session: distraction-free run-of-play overlay on a saved settlement.",
   foundryExport: "W-Session: Foundry VTT module export beside the PDF in ExportSheet.",

@@ -2,9 +2,13 @@ import { useState } from 'react';
 import { Zap, Star, List, Scale, HelpCircle, Globe } from 'lucide-react';
 import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, PAGE_MAX, PROSE_MAX, sans, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
+import { useFlag } from '../lib/flags.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
 import AboutManifesto from './howto/AboutManifesto.jsx';
+// V-26b: the house-voice draft of the handbook narrative, rendered only when the
+// (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
+import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop card with as
@@ -76,6 +80,10 @@ function QuickTab() {
   // 60-second action steps and demote the constraint-driven concept essay
   // to a "Why it works this way" coda below. Pure presentational order; the
   // copy in both fragments is byte-for-byte identical.
+
+  // V-26b: only the CONCEPT ESSAY (the coda) forks to the house voice; the numbered
+  // steps below are clarity-mandated and stay plain in both states.
+  const voiced = useFlag('handbookVoice');
 
   const conceptIntro = (
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
@@ -150,7 +158,7 @@ function QuickTab() {
         <div style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK, margin:'0 0 10px' }}>
           Why it works this way
         </div>
-        {conceptIntro}
+        {voiced ? <VoicedConceptIntro /> : conceptIntro}
       </div>
     </div>
   );
@@ -369,6 +377,10 @@ function FaqTab() {
 }
 
 export default function HowToUse({ standalone=false }) {
+  // V-26b: the handbook header narrative forks to the house voice when the flag is on;
+  // OFF (default) renders the exact current strings. The Compendium link stays plain and
+  // present in both (findability is clarity).
+  const voiced = useFlag('handbookVoice');
   // Open straight to a requested tab via ?tab= (e.g. /compare links redirect
   // here with ?tab=compare; the Account page links to ?tab=faq). Falls back to
   // Quick Start for any unknown value.
@@ -389,13 +401,13 @@ export default function HowToUse({ standalone=false }) {
       {/* THE KEEPER'S HANDBOOK — the practical, day-to-day guide. */}
       <div style={{ maxWidth: PROSE_MAX, margin:'44px auto 14px' }}>
         <div style={{ fontFamily:sans, fontSize:FS.xs, fontWeight:800, letterSpacing:'0.14em',
-          textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>The practical guide</div>
+          textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>{voiced ? VOICED_HEADER.eyebrow : 'The practical guide'}</div>
         <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK, margin:0, lineHeight:1.2 }}>
-          The Keeper&rsquo;s Handbook
+          {voiced ? VOICED_HEADER.title : <>The Keeper&rsquo;s Handbook</>}
         </h2>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'6px 0 0', fontFamily:sans }}>
-          How to drive the generator, day to day. Look any rule or catalog up in the{' '}
-          <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>.
+          {voiced ? VOICED_HEADER.subtitleLead : 'How to drive the generator, day to day. Look any rule or catalog up in the '}
+          <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>{voiced ? VOICED_HEADER.subtitleTail : '.'}
         </p>
       </div>
 

@@ -54,6 +54,7 @@ export const FLAG_DEFAULTS = Object.freeze({
   advanceMultiTick: true,
   simAdvanceWorker: true,
   advanceWorkerParanoia: false,
+  handbookVoice: false,
   warEconomySurfacing: false,
   sessionMode: true,
   foundryExport: true,

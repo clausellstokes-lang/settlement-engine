@@ -906,6 +906,9 @@ export const en = Object.freeze({
     corpusDeclined:     'The draft was declined.',
     corpusEmpty:        'The draft produced no usable prose to stage.',
     corpusUnavailable:  'The Corpus Factory draft is unavailable right now.',
+    // Vision V-N (V-26a): the Interview follow-on surfaces its transport failure through
+    // the register (the setPendingError path), one voice with the analyst's sibling.
+    interviewUnavailable: 'The Interview is unavailable right now.',
   },
 
   // ── Verb registry (P124 / C-1) ───────────────────────────────────────────

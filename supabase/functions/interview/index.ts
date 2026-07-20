@@ -154,6 +154,14 @@ export async function handleInterview(
     const audience: 'dm' | 'player' = body?.audience === 'dm' ? 'dm' : 'player';
     if (!question.trim()) return json({ error: 'Missing question' }, 400, cors);
     const bundle = buildRetrievalBundle(body?.slices);
+    // V-26a MULTI-HOP: prior Q&A carried by a follow-up. Context only — fenced as data
+    // in the prompt and NEVER a source; the new answer is still grounded in `bundle` and
+    // its citations resolved against it (buildPriorExchange caps turns + lengths).
+    const history: Array<{ question?: unknown; answer?: unknown }> = Array.isArray(body?.history)
+      ? body.history
+          .filter((t: unknown) => t && typeof t === 'object')
+          .map((t: any) => ({ question: t.question, answer: t.answer }))
+      : [];
 
     // SERVER-SIDE AUDIENCE BACKSTOP: a player-audience request may ground on ONLY
     // player-safe sources — a tampered payload smuggling a DM source is rejected.
@@ -257,7 +265,7 @@ export async function handleInterview(
         return { ok: !!res?.ok, spendId: capturedSpendId, elevated: !!res?.elevated, balance: res?.balance ?? null, reason: res?.reason ?? null };
       },
       async callModel() {
-        capturedPrompt = buildInterviewPrompt(question, bundle, audience, canary);
+        capturedPrompt = buildInterviewPrompt(question, bundle, audience, canary, history);
         const ac = new AbortController();
         const timer = setTimeout(() => ac.abort(), INTERVIEW_TIMEOUT_MS);
         let resp: Response;
