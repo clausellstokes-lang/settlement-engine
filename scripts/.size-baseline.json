@@ -11,5 +11,5 @@
   "src/generators/npcGenerator.js": 1498,
   "src/pdf/lib/viewModel.js": 1002,
   "src/store/aiSlice.js": 961,
-  "src/store/settlementSlice.js": 1345
+  "src/store/settlementSlice.js": 1344
 }
