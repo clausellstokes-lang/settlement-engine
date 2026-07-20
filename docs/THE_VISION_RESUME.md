@@ -110,8 +110,18 @@
   cycle-2 prevention intake: anachronism lint · per-chunk ceilings · tick-time golden ·
   load-normalizer walker · async-totality lint · courier seam registry · determinism
   lint widened · fixture-realism law · tracked-flags reconciliation+walker · AI
-  acceptance-metrics verification. Convergence = zero must-fix + zero gate-passing
-  gaps + zero achievable grade improvements → ONE confirming cycle → close-out
+  acceptance-metrics verification.
+  ⭐ THE TERMINATION LAW (owner order 2026-07-20, verbatim intent: "don't stop
+  until you either get every score to A+ or you, through physics, can't raise
+  the score any higher"): the loop may NOT close while ANY of the twenty bars
+  sits below A+ unless the residual gap is PROVABLY one of the four legitimate
+  ceilings — owner-gated / soak-certified / humans-certified / capital-or-
+  infra-gated — and each residual carries a written ceiling-proof ("ceiling,
+  not effort") in the close-out. "Searched and found nothing" is NOT a ceiling;
+  the cold protocol + refuters + completeness critics exist to disprove it.
+  Cycles repeat until the condition holds. Convergence = zero must-fix + zero
+  gate-passing gaps + zero achievable grade improvements + every sub-A+ bar
+  ceiling-proven → ONE confirming cycle → close-out
   (task #7: ledger completion rows, consolidated owner queue + remaining-work table,
   completion memory, REVIEW_PLAYBOOK freeze, owner-tail handback).
 - OWNER-GATED, never crossed: push/deploy/db push/golden re-mint/budget raise/
