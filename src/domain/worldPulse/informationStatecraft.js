@@ -53,7 +53,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
-import { intelTradeActive, intelInjectionBelief, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
+import { intelTradeActive, intelInjectionBelief, resolveIntelSale, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { relationshipKeyFromEdge } from './relationshipState.js';
 import { npcId } from './npcAgency.js';
@@ -1094,15 +1094,17 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
 
 // ── SHARE-SELL (design §2.4 SELL lane) — the self-policing market feedback ───────
 /**
- * One resolved intel sale, ready to feed the credibility stock.
- * @typedef {{ sellerId: string, accurate: boolean, magnitude01?: number }} ResolvedIntelSale
+ * One resolved intel sale/gift, ready to feed the credibility stock. `spokespersonNpcId` (D-2/
+ * D-3) is the named carrier of the sold/gifted read, present only when the seller stamped a
+ * mouthpiece — its presence routes the personal credibility charge (absent ⇒ settlement-only).
+ * @typedef {{ sellerId: string, accurate: boolean, magnitude01?: number, spokespersonNpcId?: string }} ResolvedIntelSale
  */
 
 /**
- * THE SELF-POLICING MARKET (design §2.4/§4): a sale later proven FALSE feeds a `deception`
- * CredibilityDelta against the SELLER (bad product damages the seller's stock → its future
- * sales are priced lower, since intelSalePrice discounts by the seller's credibility weight);
- * a sale proven TRUE feeds a slow `proven_true` rise. Expressible ENTIRELY with the live
+ * THE SELF-POLICING MARKET (design §2.4/§4/§7): a sold OR gifted read later proven FALSE feeds a
+ * `deception` CredibilityDelta against the SELLER SETTLEMENT (bad product damages the stock → its
+ * future sales are priced lower, since intelSalePrice discounts by the seller's credibility
+ * weight); a read proven TRUE feeds a slow `proven_true` rise. Expressible ENTIRELY with the live
  * credibility stock — no parallel ledger. Deterministic (codepoint-sorted). Pure.
  * @param {ReadonlyArray<ResolvedIntelSale>} sales @returns {CredibilityDelta[]}
  */
@@ -1118,6 +1120,66 @@ export function intelSaleCredibilityDeltas(sales) {
     });
   }
   return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)) || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
+}
+
+/**
+ * THE SELF-POLICING MARKET, PERSONALLY (D-2/D-3, design §6/§7): the SPOKESPERSON who carried a
+ * sold/gifted read is charged on his own stock the same way — a proven-false read discounts his
+ * next attributed telling (the boy who sold rumors goes broke in trust), a proven-true read pays
+ * a slow rise. Only sales bearing a spokespersonNpcId produce a delta (absent ⇒ degrades to the
+ * settlement-only charge above — "as today"). NO lieExposedBand: a private bad-faith sale is a
+ * credibility cost, not a public court scandal — no ladder `exposed_liar` stigma (that is the
+ * LIE/BLUFF path's province, design §7 charges "the seller's stock and the spokesperson's",
+ * never a stigma). Deterministic (codepoint-sorted). Pure.
+ * @param {ReadonlyArray<ResolvedIntelSale>} sales
+ * @returns {import('./npcCredibility.js').NpcCredibilityDelta[]}
+ */
+export function intelSaleNpcCredibilityDeltas(sales) {
+  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
+  const out = [];
+  for (const sale of (Array.isArray(sales) ? sales : [])) {
+    if (!sale || sale.spokespersonNpcId == null) continue;
+    out.push({
+      id: String(sale.spokespersonNpcId),
+      kind: sale.accurate === true ? 'proven_true' : 'deception',
+      magnitude01: clamp01(finiteNumber(sale.magnitude01, 1)),
+    });
+  }
+  return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)) || (a.kind < b.kind ? -1 : a.kind > b.kind ? 1 : 0));
+}
+
+// The shared spatialLedgers key of the D-4→D-2 bluff-exposure deposit: the LADDER writes +
+// prunes it (its own sanctioned deposit record, design §8 write-list), this mover only READS it.
+// A string literal on the write side (npcLadderKernel) so the spatialUsage coverage walker
+// registers it (EXEMPT); read here by the same key.
+const BLUFF_EXPOSURES_LEDGER = 'bluffExposures';
+
+/**
+ * THE CONTEST-BLUFF CHARGE (D-4→D-2, design §8 THE BLUFF): the ladder detected a contestant who
+ * BLUFFED a rival about his progress and then LOST — a bluff CONTRADICTED by the outcome, "a lie,
+ * same as intel" — and deposited it in the bluffExposures sidecar last tick. Mirror the exposed-lie
+ * → per-NPC path: charge the bluffer's PERSONAL credibility (kind 'deception') and carry the band
+ * as lieExposedBand so the SAME lie-stigma the exposed-lie path mints lands on the ladder one tick
+ * later (design §8: "personal credibility charge + possible exposed_liar stigma"). One-tick courier
+ * (law 14 — the ladder runs LAST, this mover FIRST): a deposit whose depositTick is behind `now`
+ * has served its turn ⇒ charged once here, then the ladder prunes it (never a same-tick double).
+ * DORMANT (no sidecar / dark) ⇒ an empty list ⇒ byte-identical. PURE.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState @param {number} tick
+ * @returns {import('./npcCredibility.js').NpcCredibilityDelta[]}
+ */
+function bluffExposureNpcDeltas(worldState, tick) {
+  const pending = asObject(getSpatialLedger(worldState, BLUFF_EXPOSURES_LEDGER));
+  const now = Math.floor(finiteNumber(tick, 0));
+  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
+  const out = [];
+  for (const key of Object.keys(pending).sort(compareCodepoint)) {
+    const rec = asObject(pending[key]);
+    if (rec.nid == null) continue;
+    if (Math.floor(finiteNumber(rec.depositTick, now)) >= now) continue; // deposited THIS tick ⇒ not yet couriered
+    const band = clamp(Math.round(finiteNumber(rec.band, 2)), 0, 4);
+    out.push({ id: String(rec.nid), kind: 'deception', magnitude01: clamp01(band / 4), lieExposedBand: band });
+  }
+  return out.sort((a, b) => compareCodepoint(String(a.id), String(b.id)));
 }
 
 // ── The grievance-edge writer (SEE/LIE exposure → the E1 incident machinery) ─────
@@ -1254,6 +1316,10 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
   //       cross-writer). Dark (intelTradeEnabled absent) ⇒ no-op ⇒ byte-identical.
   /** @type {Array<Record<string, unknown>>} */
   const intelNews = [];
+  // D-3 SELF-POLICING (design §7): each couriered read is resolved TRUE/FALSE at arrival (the only
+  // window — generosity prunes the record the same tick) and fed to the credibility stock below.
+  /** @type {ResolvedIntelSale[]} */
+  const resolvedSales = [];
   if (intelTradeActive(state)) {
     const nowTick = Math.max(0, Math.floor(finiteNumber(tick, 0)));
     const pending = asObject(getSpatialLedger(state, INTEL_TRANSFERS_LEDGER));
@@ -1268,6 +1334,11 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
       if (!planted) continue;
       if (!intelOverrides.has(receiverId)) intelOverrides.set(receiverId, new Map());
       /** @type {Map<string, BeliefRecord>} */ (intelOverrides.get(receiverId)).set(subjectId, planted);
+      // SELF-POLICING RESOLVE (design §7): was the transferred read TRUE? Compare the seller's
+      // sold band against the subject's ground-truth band NOW. A false product charges the seller
+      // (settlement + spokesperson, when stamped); a true one pays the slow trust rise.
+      const resolved = resolveIntelSale(rec, strengthBandOf(clamp01(strengthFn(subjectId))));
+      if (resolved) resolvedSales.push(resolved);
       const gift = rec.mode === 'gift';
       intelNews.push({
         kind: 'intel_transfer',
@@ -1302,22 +1373,29 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
   }
 
   // (5) CREDIBILITY: fold fractures (recorded-not-enforced seam) + exposed lies + exposed
-  //     spies + proven-true (incl. resolved intel sales) into the stock.
+  //     spies + proven-true (incl. resolved intel sales, D-3 self-policing) into the stock.
   const deltas = [
     ...fractureCredibilityDeltas(state, tick),
     ...sightRes.deltas,
     ...lie.deltas,
+    ...intelSaleCredibilityDeltas(resolvedSales),
     ...(Array.isArray(provenTrue) ? provenTrue : []),
   ];
   const cred = advanceCredibility({ worldState: state, tick, deltas });
   if (cred.changed) { state = /** @type {Record<string, unknown>} */ (cred.worldState); changed = true; }
 
-  // (5b) NPC CREDIBILITY (D-2): fold the per-NPC deltas (exposed-lie mouthpieces + D-3's
-  //      resolved intel-sale self-policing) into the per-NPC stock; prune vanished NPCs (the
-  //      roster scan — DM remove_npc leaves no dangling npcCredibility key). Gated: dark ⇒ a
+  // (5b) NPC CREDIBILITY (D-2): fold the per-NPC deltas — exposed-lie mouthpieces (D-2), D-3's
+  //      resolved intel-sale self-policing spokespersons, and the D-4→D-2 contest-bluff charges
+  //      (consumed from the ladder's bluffExposures sidecar) — into the per-NPC stock; prune
+  //      vanished NPCs (the roster scan — DM remove_npc leaves no dangling key). Gated: dark ⇒ a
   //      complete no-op (no key). The ladder consumes the lieExposure deposit NEXT tick.
   if (npcCredibilityActive(state)) {
-    const npcDeltas = [...lie.npcDeltas, ...(Array.isArray(npcProvenTrue) ? npcProvenTrue : [])];
+    const npcDeltas = [
+      ...lie.npcDeltas,
+      ...intelSaleNpcCredibilityDeltas(resolvedSales),
+      ...bluffExposureNpcDeltas(state, tick),
+      ...(Array.isArray(npcProvenTrue) ? npcProvenTrue : []),
+    ];
     if (npcDeltas.length || hasNpcCredibilityLedger(state)) {
       const liveNpcIds = buildLiveNpcIds(snap);
       const npcCred = advanceNpcCredibility({ worldState: state, tick, deltas: npcDeltas, liveNpcIds });

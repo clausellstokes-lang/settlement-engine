@@ -45,6 +45,12 @@
  * (spatialLedgers.npcLadder) + the compact settlement.npcLadder mirror. The power/
  * legitimacy reads CONSUME the mirror's modifiers when lit (absent ⇒ 1.0 ⇒ byte-
  * identical dark). The ladder never mutates any other system's state.
+ *   AMEND (DEEP COUPLINGS D-4→D-2, design §8 write-list, sanctioned in place): the ladder ALSO
+ *   writes the additive spatialLedgers.bluffExposures DEPOSIT sidecar — a contradicted-bluff
+ *   exposure record consumed by informationStatecraft's D-2 pass one tick later (the ladder is
+ *   its sole writer/pruner; the credibility CHARGE lands through the credibility system's OWN
+ *   writer, never a parallel one). Gated on contestedGoals ∧ npcCredibility ⇒ dark ⇒ no key,
+ *   byte-identical. This is a REPUTATION deposit, never a fate (§0.5 no-death carve preserved).
  *
  * THE DORMANCY GATE (constitutional §5): behind the VIRTUAL npcLadderEnabled flag
  * (ABSENT from DEFAULT_SIMULATION_RULES — the urbanFabric/npcGrowth/spatialConsequence
@@ -83,7 +89,7 @@ import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
-import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.js';
+import { freshLieExposureFor, hasNpcCredibilityLedger, npcCredibilityActive } from './npcCredibility.js';
 import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
 import { mintFactionPairIncident } from './factionPairLedger.js';
 
@@ -299,8 +305,15 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
   // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
   const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState) : new Map();
+  // D-4→D-2 THE BLUFF CHARGE rides BOTH flags (contestedGoals ∧ npcCredibility): the ladder
+  // deposits a contradicted-bluff exposure into the bluffExposures sidecar ONLY when the credibility
+  // system that consumes it is lit. Dark ⇒ no deposit, no sidecar key, byte-identical (a bluff that
+  // no one can charge is dropped, exactly as before this seam closed).
+  const bluffChargeLit = contestsLit && npcCredibilityActive(worldState);
   /** @type {Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }>} D-4c §10.5 cross-faction loss deposits */
   const factionPairDeposits = [];
+  /** @type {Array<{ nid: string, band: number }>} D-4→D-2 contradicted-bluff exposures carried to the bluffExposures sidecar */
+  const bluffDeposits = [];
 
   // The S7 reading frame for goal predicates — the registry evaluator resolves causal
   // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
@@ -543,13 +556,14 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       if (Object.keys(res.contests).length) contests = res.contests;
       for (const n of res.news) newsEntries.push(n);
       for (const d of res.factionPairDeposits) factionPairDeposits.push(d);
-      // res.bluffDeposits: the D-4→D-2 bluff-exposure deposits are DETECTED here (the bluff
-      // heardProgress inflation + the contradicted-bluff-on-loss detection are live and
-      // unit-pinned). The cross-subsystem credibility CHARGE (a new spatialLedgers sidecar +
-      // its spatialUsage walker registration + the informationStatecraft consume arm) is a
-      // RECORDED DEFERRAL (JUDGMENT, vetoable) — kept out of this lane to hold it to the
-      // ladder's own machinery; the deposit intent is exposed for the follow-up wiring.
-      void res.bluffDeposits;
+      // res.bluffDeposits (D-4→D-2, design §8 THE BLUFF): a contestant who bluffed a rival about
+      // his progress and then LOST is a contradicted liar — "a lie, same as intel". CARRY the
+      // deposits to the bluffExposures sidecar (persist below); informationStatecraft consumes them
+      // one tick later into a PERSONAL credibility charge + the same lie-stigma the exposed-lie path
+      // mints (mirror). The charge rides the credibility system's OWN writer (no parallel writer) —
+      // the ladder only DEPOSITS. Gated on npcCredibility lit (bluffChargeLit): dark ⇒ dropped,
+      // byte-identical (the pre-seam behaviour).
+      if (bluffChargeLit) for (const b of res.bluffDeposits) bluffDeposits.push(b);
     }
 
     nameBySettlement.set(sid, nameByNid);
@@ -610,6 +624,49 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       nextWorldState = mintFactionPairIncident(nextWorldState, { a: d.a, b: d.b, type: d.type, resentmentDelta: d.resentmentDelta, sev: d.sev, tick: now2, weeks });
     }
     changed = true;
+  }
+
+  // ── D-4→D-2 THE BLUFF-EXPOSURE SIDECAR (design §8 write-list: "the bluff-exposure deposit record,
+  // consumed by D-2's pass"): DEPOSIT this tick's contradicted bluffs (depositTick = now2) + carry
+  // forward any not-yet-couriered; PRUNE any from a PRIOR tick (informationStatecraft runs EARLIER in
+  // the tick and already charged them — law 14 one-tick courier). The ladder is the SOLE writer/pruner
+  // of this sidecar; statecraft only READS it (the intelTransfers ownership idiom, roles reversed).
+  // Dedupe by nid (one charge per bluffer per tick, max band). Drop-when-empty ⇒ byte-identical when
+  // bluffChargeLit is dark (zero deposits) or the sidecar has drained. The 'bluffExposures' literal on
+  // this WRITE is what the spatialUsage coverage walker registers (EXEMPT). ──
+  {
+    const bluffPrior = asObject(getSpatialLedger(nextWorldState, 'bluffExposures'));
+    if (bluffDeposits.length || Object.keys(bluffPrior).length) {
+      /** @type {Record<string, unknown>} */
+      const nextBluff = {};
+      for (const [k, v] of Object.entries(bluffPrior)) {
+        if (Math.floor(num(asObject(v).depositTick, now2)) < now2) continue; // consumed ⇒ prune
+        nextBluff[k] = v;
+      }
+      /** @type {Map<string, number>} */
+      const byNid = new Map();
+      for (const d of bluffDeposits) {
+        const nid = String(d.nid);
+        const band = clamp(Math.round(num(d.band, 2)), 0, 4);
+        byNid.set(nid, Math.max(byNid.get(nid) ?? 0, band));
+      }
+      for (const nid of [...byNid.keys()].sort(compareCodepoint)) {
+        nextBluff[`bluff.${nid}.${now2}`] = { nid, band: byNid.get(nid), depositTick: now2 };
+      }
+      const sortObj = (/** @type {Record<string, unknown>} */ o) => {
+        /** @type {Record<string, unknown>} */
+        const s = {};
+        for (const k of Object.keys(o).sort(compareCodepoint)) s[k] = o[k];
+        return s;
+      };
+      const sortedBluff = sortObj(nextBluff);
+      if (JSON.stringify(sortedBluff) !== JSON.stringify(sortObj(bluffPrior))) {
+        nextWorldState = Object.keys(sortedBluff).length
+          ? setSpatialLedger(nextWorldState, 'bluffExposures', sortedBluff)
+          : dropSpatialLedger(nextWorldState, 'bluffExposures');
+        changed = true;
+      }
+    }
   }
   if (newsEntries.length) changed = true;
 
