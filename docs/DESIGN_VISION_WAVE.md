@@ -178,8 +178,64 @@ FOLLOW-ON: street-level wear, district renaming echoes. PINS: derivation
 deterministic golden · stored layouts untouched (byte-identity) · toggle-off ⇒
 exact current render · lazy (closure Δ0).
 
-## FURTHER RECOMMENDATIONS (recorded 2026-07-20 — NOT commissioned; each awaits an
-## owner ruling; listed so no idea is lost to a transcript)
+## V-16..V-18 + R-1..R-10 — COMMISSIONED (owner rulings 2026-07-20: "for the rest,
+## add it into scope!" + the R-1 finite-semantics exchange)
+
+### THE FINITE-SEMANTICS LAW (owner doctrine, ratified this exchange — binding on
+### V-16/V-17/V-18/R-1 and every future input surface)
+Players have unlimited freedom; the world's memory of that freedom is FINITE. Every
+effect that touches the engine is a TYPED record from the closed edit-kind vocabulary
+with BOUNDED magnitude. Free text is FLAVOR ONLY: stored verbatim on the receipt
+(the DM's own words) and fuel for AI polish — NEVER mechanics. The AI's role at input
+surfaces is BUCKETING CLERK, never writer: it proposes {kind, targets, magnitude}
+from the closed vocabulary via the schema wall; the HUMAN confirms; only the
+confirmed typed record writes. Table-authored events carry provenance source:'table'
+(receipts distinguish world-authored from table-authored; the soak excludes 'table').
+
+### R-1 → THE SESSION LEDGER (commissioned in the owner's bucketed frame)
+Typed table-event kinds (a SMALL closed set mapped to existing engine effects:
+incident/obligation/bond/stressor-relief/legitimacy-nudge/exposure), bounded
+magnitudes, free-text flavor field per the law above; the clerk flow (free text →
+proposed buckets → DM confirms → typed commit through pendingEdits/
+COMMITTABLE_EDIT_KINDS). Pins: no free-text reaches mechanics (source scan on the
+new kinds' apply paths) · source:'table' provenance · registry lifecycle honored.
+
+### V-16 THE AUSPICE — consequence preview (the purity dividend)
+"Read the auspices" before committing a decree/table event: advance a THROWAWAY copy
+N ticks (the pure engine makes this cheap; worker-hosted per V-8), summarize via the
+V-2 Letter composer, DISCARD. Never persists; clearly labeled an omen, not a promise
+(the soak's tuning can shift futures — honesty note in the UI). Pins: preview leaves
+ZERO trace on the real world (byte-identity before/after) · deterministic preview.
+
+### V-17 THE CAMPAIGN IMPORT — bring your table's history
+Paste/upload existing campaign notes → the bucketing clerk proposes a typed event
+backfill (per-event human confirmation, batched UX); confirmed events enter as
+source:'table' history at DM-chosen ticks. The adoption unlock. Pins: the finite-
+semantics law scan · no unconfirmed event writes · import is resumable/abortable.
+
+### V-18 THE DM SCREEN — the table's desktop face
+Letter + Oracle + dossier in one at-the-table layout with a PLAYER-SAFE second face
+(the secrets seam as a display mode; pairs with R-3's phone companion). Pins:
+player face leaks zero covert marks (the V-11 player-export pin reused).
+
+### R-2..R-10 (commissioned; lane placement)
+R-2 curated first seeds → editorial batch after V-B (the Letter/timelapse make seed
+audition cheap) · R-3 table companion (read-only mobile: Letter/dossier/Oracle) →
+rides V-B/V-C surfaces + a responsive pass · R-4 world book (bound-book PDF) → V-B
+follow-on over the PDF pipeline · R-5 a11y-first arc → cycle-2 dimension mandate
+(B+→A+ named per surface) · R-6 temperament presets → config presets over the tempo
+governor (V-B adjacent) · R-7 portability covenant → covenant page + claims-parity
+pin · R-8 engine's-own-chronicle changelog → process (docs), starts at PUSH#1 ·
+R-9 contradiction bounty → covenant page + support-surface line · R-10 seed-diverse
+goldens → ONE-REGEN protocol amendment (recorded for the owner's regen step).
+
+### SEQUENCING AMENDMENT
+The commissioned additions slot AFTER lanes V-A..V-E as LANE V-F (session ledger +
+auspice + DM screen + presets + covenant/bounty pages) and LANE V-G (campaign import
++ world book + curated seeds + table companion responsive pass); R-5/R-10 ride
+cycle 2 and the regen protocol respectively. Cycle 2 resurveys ALL of it.
+
+## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
   through the EXISTING pendingEdits/COMMITTABLE_EDIT_KINDS machinery, with receipts,
