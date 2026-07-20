@@ -1,4 +1,5 @@
 import { clamp01 } from '../../kernel/math.js';
+import { decayFactionPairStates } from './factionPairLedger.js';
 import { stablePart } from './worldState.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 
@@ -282,7 +283,11 @@ export function relaxFactionStates(worldState) {
   for (const [id, s] of Object.entries(factionStates)) {
     factionStates[id] = { ...s, momentum: clamp01((s.momentum || 0) * 0.85) };
   }
-  return { ...worldState, factionStates };
+  const relaxed = { ...worldState, factionStates };
+  // D-7c: the faction-pair ledger's D5-band decay rides the SAME relax pass. Absent
+  // factionPairStates (memoryWeave never lit a pair) ⇒ a byte-safe no-op (dormancy).
+  const weeks = Math.floor(Number(worldState?.calendar?.elapsedWeeks ?? worldState?.tick ?? 0) || 0);
+  return decayFactionPairStates(relaxed, weeks);
 }
 
 // Coherence: seat each settlement's NPCs into the faction they belong to, so a
