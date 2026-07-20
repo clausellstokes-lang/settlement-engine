@@ -563,6 +563,7 @@ export const en = Object.freeze({
     routeHint:    'Questions, session recaps, content, styles, builds.',
     route:        'Take it to the Surveyor',
     openAnalyst:  'Open the analyst',
+    openInterview: 'Ask the world',
     openWorkshop: 'Open the workshop',
     proposed:     'PROPOSED — the engine writes canon',
     analystFrom:  'The analyst replies',
