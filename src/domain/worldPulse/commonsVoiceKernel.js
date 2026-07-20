@@ -309,7 +309,7 @@ function advanceLitCommonsVoice({ snapshot, worldState, settlementUpdates, tick,
       const entry = asObject(nextUpdates[ui]);
       const settlement = asObject(entry.settlement);
       const { stressors, changed } = adjustStressorSeverityById(
-        /** @type {any[]} */ (Array.isArray(settlement.stressors) ? settlement.stressors : []), b.id, b.delta, { now: nowIso || undefined },
+        Array.isArray(settlement.stressors) ? settlement.stressors : [], b.id, b.delta, { now: nowIso || undefined },
       );
       if (changed) nextUpdates[ui] = { ...entry, settlement: { ...settlement, stressors } };
     }

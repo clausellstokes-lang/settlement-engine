@@ -63,12 +63,12 @@ export function temperamentById(id) {
  * and runs them through the canonical normalizer (which fail-closes any bad value).
  * Returns null for an unknown id.
  * @param {string} id
- * @returns {Record<string, any> | null}
+ * @returns {Record<string, unknown> | null}
  */
 export function applyTemperament(id) {
   const t = temperamentById(id);
   if (!t) return null;
-  const preset = /** @type {Record<string, any>} */ (SIMULATION_RULE_PRESETS)[t.basePreset];
+  const preset = /** @type {Record<string, { rules?: Record<string, unknown> }>} */ (SIMULATION_RULE_PRESETS)[t.basePreset];
   const base = preset ? preset.rules : DEFAULT_SIMULATION_RULES;
   return normalizeSimulationRules({ ...base, ...t.overrides });
 }

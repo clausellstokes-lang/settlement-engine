@@ -136,16 +136,16 @@ function topUnrestStressorId(settlement) {
  * @param {Record<string, unknown>|null} accusedNpc @returns {{ sham: boolean, governing: Record<string, unknown>|null }}
  */
 function judgeCourt(settlement, accusedNpc) {
-  const governing = governingFactionOf(/** @type {any} */ (settlement)) || null;
+  const governing = governingFactionOf(/** @type {import('../rulingPower.js').RulingPowerSettlement} */ (settlement)) || null;
   if (!governing) return { sham: true, governing: null }; // no seat presides ⇒ no legitimate court
   // Canonical faction key (never hand-rolled — the faction-key defect-class cure): the
   // same builder npcInFaction is designed to match, shared with the ladder + religion reads.
-  const fkey = ladderFactionKey(/** @type {any} */ (governing));
-  if (accusedNpc && npcInFaction(accusedNpc, /** @type {any} */ (governing), fkey)) return { sham: true, governing };
+  const fkey = ladderFactionKey(governing);
+  if (accusedNpc && npcInFaction(accusedNpc, governing, fkey)) return { sham: true, governing };
   // Captured seat: a corrupt un-ousted NPC sitting in the governing faction.
   const npcs = Array.isArray(asObject(settlement).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(settlement).npcs) : [];
   for (const npc of npcs) {
-    if (npc && npc.corrupt === true && npc.ousted !== true && npcInFaction(npc, /** @type {any} */ (governing), fkey)) {
+    if (npc && npc.corrupt === true && npc.ousted !== true && npcInFaction(npc, governing, fkey)) {
       return { sham: true, governing };
     }
   }
@@ -159,17 +159,17 @@ function hasJusticeVenue(settlement) {
   // Route through the canonical ruin-filter (institutionRoster): a calamity-ruined or
   // abandoned courthouse is no venue — only a STANDING law-order institution can seat a
   // judgment. Keeps the assize out of the ruin-filter defect class.
-  return insts.some((inst) => isLiveInstitution(/** @type {any} */ (inst)) && institutionIsLawOrder(/** @type {any} */ (inst)));
+  return insts.some((inst) => isLiveInstitution(inst) && institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (inst)));
 }
 
 /** @param {Record<string, unknown>} settlement @param {Record<string, unknown>} accused @param {Record<string, unknown>|null} governing @returns {string} */
 function accusedFactionKeyDistinctFromGoverning(settlement, accused, governing) {
   const factions = Array.isArray(asObject(asObject(settlement).powerStructure).factions) ? /** @type {Record<string, unknown>[]} */ (asObject(asObject(settlement).powerStructure).factions) : [];
-  const gname = governing ? nameOf(/** @type {any} */ (governing)) : '';
+  const gname = governing ? nameOf(/** @type {import('../rulingPower.js').RulingFaction} */ (governing)) : '';
   for (const f of factions) {
-    const fname = nameOf(/** @type {any} */ (f));
-    const fkey = ladderFactionKey(/** @type {any} */ (f));
-    if (npcInFaction(accused, /** @type {any} */ (f), fkey)) {
+    const fname = nameOf(/** @type {import('../rulingPower.js').RulingFaction} */ (f));
+    const fkey = ladderFactionKey(f);
+    if (npcInFaction(accused, f, fkey)) {
       if (fname && fname !== gname) return fname;
       return ''; // accused is in the governing faction (or unresolved) ⇒ no cross-faction pair
     }
@@ -350,7 +350,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
         }
         if (c.accused && governing) {
           const convictFaction = accusedFactionKeyDistinctFromGoverning(s, c.accused, governing);
-          const gname = nameOf(/** @type {any} */ (governing));
+          const gname = nameOf(/** @type {import('../rulingPower.js').RulingFaction} */ (governing));
           if (convictFaction && gname) rankIncidents.push({ a: gname, b: convictFaction, resentmentDelta: AZ.RANK_RESENTMENT });
         }
       }
@@ -369,7 +369,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
       const entry = asObject(nextUpdates[ui]);
       const settlement = asObject(entry.settlement);
       const { stressors, changed } = adjustStressorSeverityById(
-        /** @type {any[]} */ (Array.isArray(settlement.stressors) ? settlement.stressors : []), b.id, b.delta, { now: nowIso || undefined },
+        Array.isArray(settlement.stressors) ? settlement.stressors : [], b.id, b.delta, { now: nowIso || undefined },
       );
       if (changed) nextUpdates[ui] = { ...entry, settlement: { ...settlement, stressors } };
     }
@@ -380,7 +380,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
     // the generosity mover already decayed the ledger THIS tick; the assize only upserts.
     const prev = getSpatialLedger(nextWorldState, 'obligations');
     const mints = obligationMints.map((m) => ({ from: m.from, to: m.to, kind: m.kind, magnitude: round4(clamp01(m.magnitude)), mintTick: now2, lastTick: now2 }));
-    const nextObl = foldObligations(/** @type {any} */ (prev), { mints, repayments: [], now: now2, decayPerTick: 0 });
+    const nextObl = foldObligations(/** @type {Record<string, unknown>} */ (prev), { mints, repayments: [], now: now2, decayPerTick: 0 });
     if (nextObl) nextWorldState = setSpatialLedger(nextWorldState, 'obligations', nextObl);
   }
 

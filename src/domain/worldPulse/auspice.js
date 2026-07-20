@@ -32,9 +32,9 @@ import { simulatePendingFuture } from './forecastRun.js';
 export const AUSPICE_FINGERPRINT = '::auspice:v1';
 
 /** The schema-owned loose record alias (the forecastRun Mut idiom).
- * @typedef {Record<string, any>} Mut */
+ * @typedef {Record<string, unknown>} Mut */
 
-/** @param {Mut} n @returns {{ tick: any, headline: string, kind: string, scope: string }} */
+/** @param {Mut} n @returns {{ tick: unknown, headline: string, kind: string, scope: string }} */
 function toBeat(n) {
   return {
     tick: n && n.tick != null ? n.tick : null,
@@ -51,18 +51,23 @@ function toBeat(n) {
  * world would await your word". Reads only the clone's result; never the real
  * campaign, so composing an omen cannot leave a trace either.
  * @param {{ result?: Mut }} run  simulatePendingFuture's return
- * @returns {{ major: any[], notable: any[], crossroads: any[],
+ * @returns {{ major: Array<ReturnType<typeof toBeat>>, notable: Array<ReturnType<typeof toBeat>>,
+ *            crossroads: Array<{ tick: unknown, headline: unknown }>,
  *            counts: { major: number, notable: number, crossroads: number } }}
  */
 export function composeOmen(run) {
-  const result = (run && run.result) || {};
-  const entries = Array.isArray(result.wizardNews && result.wizardNews.entries) ? result.wizardNews.entries : [];
+  const result = /** @type {Mut} */ ((run && run.result) || {});
+  const wizardNews = /** @type {Mut} */ (result.wizardNews || {});
+  const entries = Array.isArray(wizardNews.entries) ? wizardNews.entries : [];
   const major = entries.filter((/** @type {Mut} */ n) => n && n.significance === 'major').map(toBeat);
   const notable = entries.filter((/** @type {Mut} */ n) => n && n.significance !== 'major').map(toBeat);
-  const crossroads = (Array.isArray(result.majors) ? result.majors : []).map((/** @type {Mut} */ m) => ({
-    tick: m && m.tick != null ? m.tick : null,
-    headline: (m && (m.headline || (m.outcome && m.outcome.headline))) || 'The world would await your word.',
-  }));
+  const crossroads = (Array.isArray(result.majors) ? result.majors : []).map((/** @type {Mut} */ m) => {
+    const outcome = /** @type {Mut} */ ((m && m.outcome) || {});
+    return {
+      tick: m && m.tick != null ? m.tick : null,
+      headline: (m && (m.headline || outcome.headline)) || 'The world would await your word.',
+    };
+  });
   return {
     major, notable, crossroads,
     counts: { major: major.length, notable: notable.length, crossroads: crossroads.length },

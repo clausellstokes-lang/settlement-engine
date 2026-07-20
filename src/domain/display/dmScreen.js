@@ -18,9 +18,9 @@ export const SCREEN_AUDIENCES = Object.freeze(['dm', 'player']);
  * Project a settlement for a screen audience. 'dm' shows the full settlement;
  * 'player' returns the player-safe projection (fails closed). Any unknown
  * audience is treated as 'player' — the safe default (never leak on a typo).
- * @param {any} settlement
+ * @param {Record<string, unknown>} settlement
  * @param {string} audience  'dm' | 'player'
- * @returns {Record<string, any>}
+ * @returns {Record<string, unknown>}
  */
 export function toScreenView(settlement, audience) {
   if (audience === 'dm') return settlement || {};

@@ -82,7 +82,7 @@ export const KIND_SPEC = Object.freeze({
 });
 
 /** Clamp any value to a finite string; empty for non-strings.
- * @param {any} v @returns {string} */
+ * @param {unknown} v @returns {string} */
 function asText(v) {
   return typeof v === 'string' ? v : '';
 }
@@ -94,14 +94,14 @@ function asText(v) {
  * or the list of reasons it was refused. This is the ONLY gate a manual pick or
  * a clerk proposal passes before anything can commit.
  *
- * @param {any} input  { kind, targets?: { ref, label? }, magnitude?, flavor? }
+ * @param {unknown} input  { kind, targets?: { ref, label? }, magnitude?, flavor? }
  * @returns {{ ok: boolean, errors: string[], record: null | {
  *   kind: string, targetRef: string, targetLabel: string,
  *   band: string|null, severity: number|null, flavor: string } }}
  */
 export function validateTableEvent(input) {
   const errors = [];
-  const src = input && typeof input === 'object' ? input : {};
+  const src = /** @type {Record<string, unknown>} */ (input && typeof input === 'object' ? input : {});
   const kind = asText(src.kind);
   if (!_kindSet.has(kind)) {
     errors.push(`kind must be one of: ${TABLE_EVENT_KINDS.join(', ')}.`);
@@ -122,7 +122,7 @@ export function validateTableEvent(input) {
   }
 
   // Target — a typed reference; the closed obligation vocab for obligation.
-  const targets = src.targets && typeof src.targets === 'object' ? src.targets : {};
+  const targets = /** @type {Record<string, unknown>} */ (src.targets && typeof src.targets === 'object' ? src.targets : {});
   const targetRef = asText(targets.ref).trim();
   const targetLabel = asText(targets.label).trim() || targetRef;
   if (spec.needsTarget) {
@@ -154,7 +154,7 @@ export function validateTableEvent(input) {
  * — this is the structural guarantee the source-scan pin enforces.
  *
  * @param {ReturnType<typeof validateTableEvent>['record']} record
- * @returns {{ dispatch: 'flavor', entry: any } | { dispatch: 'applyEvent', event: any }}
+ * @returns {{ dispatch: 'flavor', entry: Record<string, unknown> } | { dispatch: 'applyEvent', event: Record<string, unknown> }}
  */
 export function buildTableEffect(record) {
   if (!record) throw new Error('tableLedger.buildTableEffect: null record');
@@ -195,14 +195,14 @@ export function buildTableEffect(record) {
  * human to confirm, and only a validated record can ever proceed. A hallucinated
  * off-vocabulary bucket lands in `rejected`, never in `accepted`.
  *
- * @param {any[]} rawProposals
- * @returns {{ accepted: Array<{ index: number, record: any, proposal: any }>,
- *            rejected: Array<{ index: number, errors: string[], proposal: any }> }}
+ * @param {unknown[]} rawProposals
+ * @returns {{ accepted: Array<{ index: number, record: ReturnType<typeof validateTableEvent>['record'], proposal: unknown }>,
+ *            rejected: Array<{ index: number, errors: string[], proposal: unknown }> }}
  */
 export function reviewClerkProposals(rawProposals) {
-  /** @type {Array<{ index: number, record: any, proposal: any }>} */
+  /** @type {Array<{ index: number, record: ReturnType<typeof validateTableEvent>['record'], proposal: unknown }>} */
   const accepted = [];
-  /** @type {Array<{ index: number, errors: string[], proposal: any }>} */
+  /** @type {Array<{ index: number, errors: string[], proposal: unknown }>} */
   const rejected = [];
   const list = Array.isArray(rawProposals) ? rawProposals : [];
   list.forEach((proposal, index) => {
