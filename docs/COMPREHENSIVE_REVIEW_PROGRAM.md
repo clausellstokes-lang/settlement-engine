@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ FACTION-KEY DEFECT-CLASS CENSUS — THE SWEEP ALREADY EXISTS (2026-07-19,
+read-only).** The structural-prevention sweep I flagged for the loop is DONE on a sibling
+parallel branch: claude/blissful-bhaskara-c43dcd @ b561d0d4 ("the faction-key precedence
+sweep: one canonical name, and a guard so the class cannot regrow"), forked from dc0b6e2b
+(sibling to the composite, NOT an ancestor either way). It swept ALL 25 reversed-precedence
+`.name||.faction` sites across 12 files INCLUDING 8 in the Deno edge tree (generate-narrative/
+prompts.ts — an src-only scan misses these) + the aiGroundingBundle mirror regen, and added
+tests/lint/factionNamePrecedenceScan.test.js (a source-scan ratchet, KNOWN_OFFENDERS frozen
+empty, covers src+edge, self-tests its own regex, documents its blind spots) + tests/domain/
+factionNamePrecedence.test.js (14 pins, revert-proven 9/14 fail on old code). Census
+CONFIRMED the bug is STILL LIVE on the composite (27 sites, 13 files) and neither test exists
+in composite history. RULING → FOLD BATCH 3 FOLDS/cherry-picks b561d0d4 rather than
+re-sweeping. ⚠ TWO FOLD GOTCHAS: (1) a REAL but trivial 2-file conflict — personaSlicer.js
++ religionLegitimacy.js were fixed on BOTH branches (composite via the shared nameOf()
+accessor @ 4c1143b9/24f46337; blissful inlines f?.faction||f?.name) — resolve KEEPING
+COMPOSITE's nameOf() version (the guard's own error message recommends it). (2) the sweep
+touches the edge tree + the generated bundle → build:edge-shared at fold. CANONICAL RECORD
+SHAPES table captured (faction mints .faction not .name; conflicts have no .name; stressors
+.type/.label; NPCs no .description) — matches ChroniclePanel's "SNAPSHOT-SHAPE LAW" comment.
+RETRACTION recorded (census discipline): journalPages.js:194 LOOKED like a 5th instance but
+powerSlice() (viewModel.js:498) already normalizes upstream — CLEAN, do not re-flag. OWNER-
+GATED latent (not live): addFaction mints .description while generators mint .desc — a
+persistence-shape call, deferred. This ADVANCES the loop intake: the record-shape defect
+class is now "fold the existing guarded sweep + widen its regex to the .desc/.description
+pair," not an open hunt.
 **⬛⭐ DEEP COUPLINGS D-7 THE MEMORY WEAVE COMPLETE (2026-07-19, claude/deep-couplings-mem
 @ 49b145bb, 7 commits stacked on the D-2 branch b986b4e8 — manager-verified).** The entire
 persisted CORE of the relationship weave, all single-writer + dark + dormancy-proven:
