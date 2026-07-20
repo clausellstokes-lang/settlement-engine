@@ -1,0 +1,33 @@
+/**
+ * certification/certificationManifest.js — THE COMMITTED CERTIFICATION MANIFEST
+ * (VISION WAVE V-10). The durable "seed/config band → soak results" record every
+ * certification surface reads.
+ *
+ * INERT-HONEST BY DESIGN: no soak has written a band yet, so `bands` is empty and
+ * `generatedAt` is null. Every surface therefore reads PENDING ("the hundred-year
+ * proving is scheduled") — the claims-parity law holds by construction because
+ * there is nothing to over-claim.
+ *
+ * ── HOW THE OWNER LIGHTS IT (the write path) ──────────────────────────────────
+ * When a soak (scripts/audit/whole-world-soak.mjs, run --json over a config band
+ * across seeds) completes, it appends a validated band here:
+ *   { bandId, presetId, status: 'certified', soak: { years, seedsTested,
+ *     ticksAdvanced, properties: [<subset of SOAK_PROPERTY_KEYS>], runAt, buildHash } }
+ * and sets generatedAt. validateCertificationManifest MUST pass before commit
+ * (the schema wall). A 'pending' band (soak:null) records a scheduled-but-unproven
+ * config band explicitly. This module is a pure data leaf: adding a band is the
+ * only edit; no consumer code changes.
+ *
+ * Pure data. Imported ONLY by the lazy certification read/panel — never eager.
+ */
+
+import { CERTIFICATION_MANIFEST_VERSION } from './certificationSchema.js';
+
+/** @type {import('./certificationSchema.js').CertificationManifest} */
+export const WORLD_CERTIFICATION_MANIFEST = Object.freeze({
+  manifestVersion: CERTIFICATION_MANIFEST_VERSION,
+  generatedAt: null,
+  // EMPTY until the owner's soak writes the first band (see header). Do NOT hand-
+  // author a band here — a band exists only as the receipt of a real soak run.
+  bands: Object.freeze([]),
+});

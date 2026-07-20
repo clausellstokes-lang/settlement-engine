@@ -39,6 +39,10 @@ import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+// V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
+// lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
+// tip the first-paint ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
+import WorldCertificationPanel from '../settlement/WorldCertificationPanel.jsx';
 
 const SEASON_LABEL = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', fall: 'Autumn', winter: 'Winter' };
 
@@ -473,6 +477,11 @@ export default function RealmDashboard({
           ))}
         </div>
       )}
+
+      {/* V-10 THE CERTIFICATE — the world's soak-endurance badge. Inert-honest
+          until the owner's soak writes the first manifest band (reads PENDING);
+          claims-parity holds by construction (buildWorldCertification). */}
+      <WorldCertificationPanel presetId={campaign?.worldState?.simulationRules?.presetId ?? null} />
     </div>
   );
 }
