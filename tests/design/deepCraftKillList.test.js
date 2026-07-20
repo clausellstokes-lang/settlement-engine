@@ -193,10 +193,16 @@ const CEILINGS = Object.freeze({
   // rgba 238→234 (−4). The CustomContent consolidation (the inline
   // CustomItemAttributes/Upsell block fell to the leaf module) and the
   // gallery/catalog restorations are net −7; boxShadow/tinted hold.
-  borderRadius: 906,    // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 98,        // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 234,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 214,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  // Lowered again (FOLD BATCH 3: claude/wave-a-tabs @ 8fdd4b95 + claude/
+  // wave-a2-sweep @ 3398ecea — both Wave-A kill-list lanes land together):
+  // borderRadius 906→100 (−806), boxShadow 98→72 (−26), rgba 234→167 (−67),
+  // tintedCallouts 214→161 (−53). The tab surfaces (wave A) and the app-wide
+  // residual sweep (wave A2) fell to the rule-framed plate idiom; ceilings
+  // set to the MEASURED post-fold counts (tolerance-0, summed both lanes).
+  borderRadius: 100,    // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 161,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
