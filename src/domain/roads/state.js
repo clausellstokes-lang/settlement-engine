@@ -35,6 +35,7 @@ import { isInStasis } from '../npc/npcOps.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
+import { provenanceLedgerActive } from '../worldPulse/provenanceKernel.js';
 
 // ── narrowing helpers (self-contained; the traditionsKernel/npcLadderState idiom) ──────
 /** @param {unknown} x @returns {Record<string, unknown>} */
@@ -163,6 +164,29 @@ export function isOffStage(npc) {
  * @param {number} retWeeksAtDest  the destination→home return leg (weeks)
  * @returns {boolean} true iff a recall was consumed
  */
+/**
+ * DESIGN_VISION_WAVE V-24d — DEEPER PROVENANCE THREADING (the roads captivity lineage). The
+ * EXACT node id of the CAPTURE receipt that began a captivity, reconstructed from the ransom
+ * record a release/ransom pass holds in hand: roadsBeat mints an id `wizard_news.${tick}.roads.
+ * ${sid}.${seed}`, and the capture beat's tick / sid / seed are r.startedTick / r.homeId /
+ * `capture.${r.missionId}` — all on the record. Returned as a `causedBy` parent so the V-4
+ * cause-walk can trace a release (or ransom-paid) beat BACK to the capture that began it — a
+ * genuinely deeper edge than the release beat's own root. FLAG-DARK BYTE-NEUTRAL: returns
+ * undefined unless provenanceLedgerEnabled is lit, so the beat is byte-identical in every
+ * non-provenance run (the existing-provenance discipline — the causedBy lives only in the
+ * dark-gated ledger's world, never in a dormant beat). Pure, total.
+ * @param {unknown} worldState @param {unknown} r  the ransom record (RansomRec)
+ * @returns {string|undefined} the capture receipt node id, or undefined when dark / unreadable
+ */
+export function captureCauseId(worldState, r) {
+  if (!provenanceLedgerActive(worldState)) return undefined;
+  const rr = asObject(r);
+  const mid = String(rr.missionId == null ? '' : rr.missionId);
+  const home = String(rr.homeId == null ? '' : rr.homeId);
+  if (!mid || !home) return undefined;
+  return `wizard_news.${num(rr.startedTick, 0)}.roads.${home}.capture.${mid}`;
+}
+
 export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
   const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
   if (mission.phase === 'returning'

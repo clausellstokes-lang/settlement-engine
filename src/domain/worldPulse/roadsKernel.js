@@ -36,7 +36,7 @@ import {
   roadsActive, ROADS_TUNING, isOffStage, roadsImportanceWeight, riskToleranceOf,
   militaryQuality01, settlementWeight01, protectionOf, exposureOf, captureProbability, termWeeksFor,
   conversionFlawFactor, conversionProbability, applyLegitimacySteps, applyProsperityBandSteps,
-  asObject, num, clampNum, clamp01, cmp, consumeMissionRecall,
+  asObject, num, clampNum, clamp01, cmp, consumeMissionRecall, captureCauseId,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
 import { persistEmbassySuits } from '../roads/embassyLedger.js';
@@ -238,7 +238,7 @@ function roadsBeat(a) {
     settlementIds: [a.sid],
     impactIds: [],
     channelIds: [],
-    sourceEventId: a.seed,
+    sourceEventId: a.seed, ...(a.causedBy ? { causedBy: a.causedBy } : {}), // V-24d: dark-gated deep cause-edge
     tags: ['world_pulse', 'roads', ...(a.tags || [])],
     reasons: a.tags && a.tags.length ? [`A roads ${a.tags[0]} beat (${a.significance}).`] : [],
   };
@@ -760,7 +760,7 @@ function advanceLitRoads(args) {
       pool = thirdPartyRansomPool(str(r.payerMotive));
     }
     newsEntries.push(roadsBeat({
-      sid: homeId, tick: now2, now, significance: 'notable',
+      sid: homeId, tick: now2, now, significance: 'notable', causedBy: captureCauseId(worldState, r), // V-24d: trace back to the capture
       headline: pickLine(pool.headline, seed, interp),
       summary: pickLine(pool.summary, seed, interp),
       seed, tags: [early ? `ransom_${early}` : 'ransom'],
