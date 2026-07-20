@@ -1134,6 +1134,29 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-F SHIPPED — the table writes history through the wall
+(2026-07-20, claude/vision-f @ c15c2311, FOLD-READY; manager-validated).** R-1 THE
+SESSION LEDGER: the finite-semantics law MADE CODE — tableLedger.js as a pure
+schema wall (closed vocabulary, named magnitude bands, flavor-only free text,
+source-scan pinned), table-event through pendingEdits/COMMITTABLE + the canonical
+applyEvent (cohesion over bespoke physics — ratified), source:'table' on the
+RECEIPT (the canonStatus enum untouched — owner-gated surface respected), manual
+always free + clerk optional (edge half = an owner-gated deploy, inert-honest).
+JUDGMENT ratified: 4 of 6 kinds ship; legitimacy-nudge + bond DEFERRED-WITH-SEAMS
+(no clean existing effect — the cohesion law held against its own feature). V-16
+THE AUSPICE: forecastRun reframed as a significance-tiered OMEN; THE ZERO-TRACE
+PIN EXECUTED (worldState byte-identical before/after). V-18 DM SCREEN: /screen
+(noindex) with DM|Player faces via toPublicSafe fails-closed + Letter/Oracle slots
+(fold-pass-2 mounts recorded). R-6 presets (compose-never-mutate, no new
+constants). R-7/R-9 covenant+bounty: every covenant claim BOUND to a real
+capability + over-claim guard; Page-not-LegalPage (a promise, not a disclaimer —
+ratified). Gate: strict 0 · tsc 0 · lint +0 · 113 new pins · broad suites
+518/162/801/1768 · closure 1,026,112 (Δ +1,378 B: routes + the eager dispatcher) ·
+sizeBaseline held (App 732 net-zero) · NUL clean. NOTE: title census 494→510 — 16
+verified COMPONENT props (the census's own documented false-positive class and
+raise precedent); cycle-2 may refine the regex instead. Foreign stash observed and
+untouched. FOLD-PASS-2 SEAMS: letter/oracle slot mounts + the worker transport
+swap. SLOT → V-G dispatching.**
 **⬛⭐ VISION LANE V-J SHIPPED — the findable truth (2026-07-20, claude/vision-j @
 3f3805b7, FOLD-READY [pass 2]; manager-validated).** 297 PRERENDERED DOCUMENTS
 (8 views + 289 compendium entries — ONE param route carries the long tail; sitemap
