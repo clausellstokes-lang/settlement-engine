@@ -405,6 +405,65 @@ PINS: the evaluator never writes any engine/tuning state (read-only
 by construction, source-scanned) · drift report determinism over a fixture corpus ·
 cohort-scoping enforced (a global-aggregate band verdict is a test failure).
 
+
+## V-22 THE ASSIZE + V-23 THE COMMONS' VOICE (owner-commissioned 2026-07-20 into the
+## build phase, with the MASSES CLAUSE: "courts and judgements to NPCs... is correct,
+## but to the masses in reacting or influencing populations, powers, militaries etc
+## they can still effect. But you have to make it completely cohesive.")
+
+### THE COHESION LAW governing both (the owner's demand, made structural)
+Neither feature invents a new effect vocabulary or a new writer. Both are CONSUMERS
+and REFRAMERS of state that already exists, whose consequences route EXCLUSIVELY
+through the existing writers (stigma via the ladder's own · legitimacy via its
+applicator · obligations via the generosity ledger · unrest via the stressor
+machinery · readiness/power via the §8 mirrors · beats via the news writers).
+The masses clause is honored the same way: crowd reaction = bounded terms into
+systems that already read crowd-state. NO-DEATH holds absolutely: a judgment is a
+STANDING outcome, never a fate; the condemned remain citizens.
+
+### V-22 THE ASSIZE — the court sits, and the crowd watches
+WHY: exposure events (corruption revealed, lies exposed, bluffs contradicted)
+currently punish through quiet stigma; pre-modern justice was a PUBLIC SOCIAL EVENT
+— the assize was theater, legitimacy ritual, and crowd politics at once. The DM
+gets a courtroom scene generator grounded in real causes.
+MECHANISM (flag assizeEnabled, dark): a deterministic ASSIZE PASS consumes the
+EXISTING exposure deposits (exposedCorruption · lie-stigma events · contradicted
+bluffs — deposit-and-consume, the house choreography) → a seated judgment event
+(the governing seat + the settlement's justice-facet institution preside; venue from
+the interiors' judges⇒chamber facet). PERSON-HALF outcomes (NPCs, as I planned):
+stigma through the ladder's writer · fines as obligations · standing/rank pressure
+through existing challenge inputs. THE MASSES-HALF (the owner's clause): the crowd
+REACTS through existing planes — a JUST judgment of a hated figure RELIEVES unrest
+(stressor relief) and lifts legitimacy; a SHAM (a captured court judging its own)
+RAISES unrest, taxes legitimacy, and writes the belief plane (the crowd SAW —
+rumor/belief entries); judgments of military figures nudge readiness through the §8
+modifier mirrors; sustained injustice feeds the migration push and coup-window
+inputs THAT ALREADY EXIST. Every arrow lands in a system that already reads that
+state. Beats in-register (the assize class). PINS: dormancy byte-identity ·
+consume-once on exposure deposits · no new writers (§11 grep) · just-vs-sham
+direction pins · no-death (roster permutation).
+
+### V-23 THE COMMONS' VOICE — the crowd becomes an actor, not a variable
+WHY + THE CHECK HALF FIRST: aggregate mood exists (stressors, legitimacy, flight,
+coups) but may lack NAMED collective expression between grumbling and revolution.
+The lane FIRST verifies what collective-action texture already fires (stressor
+beats, unrest events) and builds ONLY the verified gap.
+MECHANISM (flag commonsVoiceEnabled, dark): one new beat CLASS — collective
+expression events (petition · gathering · riot-band, severity-laddered,
+deterministic from the stressor/legitimacy state that already exists) — with
+INFLUENCE routed through existing readers: bounded legitimacy pressure · coup/
+challenge-window bias via existing inputs · readiness drag via the §8 mirrors ·
+tradition-spirit dips via the festival terms · migration push. THE COHESIVE LOOP
+(the two features coupling naturally): a commons PETITION can name a grievance an
+ASSIZE then answers — the crowd demands justice, the court delivers or shams, the
+masses react, powers and militaries feel it. Demand → judgment → reaction, all
+through existing state. PINS: dormancy · the verified-gap report (what existed vs
+built) · direction pins per influence arrow · no new writers.
+
+BUILD HOST: new engine lane V-K (both items — they couple), queued after V-D;
+separate worktree; the full engine gate (dormancy goldens, §11, strict, closure Δ0).
+Cycle 2 audits both under the 17-bar law like everything else.
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
