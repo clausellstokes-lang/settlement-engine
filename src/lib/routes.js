@@ -80,6 +80,16 @@ export const ROUTES = Object.freeze([
   { view: 'terms',                 path: '/terms',                 title: 'Terms of Service' },
   { view: 'privacy',               path: '/privacy',               title: 'Privacy Policy' },
   { view: 'refunds',               path: '/refunds',               title: 'Refunds' },
+  // R-7/R-9 — the portability covenant + the contradiction bounty. Public +
+  // indexable trust pages (footer-linked, no top-nav, no guard); content is
+  // claims-parity-bound to real product capabilities (components/legal/*).
+  { view: 'covenant',              path: '/covenant',              title: 'Portability Covenant' },
+  { view: 'bounty',                path: '/bounty',                title: 'Contradiction Bounty' },
+  // V-18 — the DM Screen: an at-the-table DM tool (letter + oracle + dossier +
+  // ledger + auspice) with a player-safe face. Reads the active settlement/
+  // campaign; degrades to a placeholder when nothing is open. Noindex app tool
+  // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
+  { view: 'screen',                path: '/screen',                title: 'The DM Screen' },
   // The dedicated competitor pages were deleted; App's redirect effect bounces
   // every `compare*` view to /how-to?tab=compare (the competitor-agnostic "How
   // We Compare" tab). The path entries stay so old/SEO links still resolve

@@ -275,7 +275,15 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // Section-prop class the regex cannot distinguish, not native tooltips), and
   // +1 SettlementCard native title (the wave-B retention affordances: the
   // reactivate/export hover hints on a frozen settlement — deliberate). 488 → 494.
-  const TITLE_BASELINE = 494;
+  //
+  // VISION WAVE V-F: +16 React component PROPS (the same Section/Card-prop class
+  // the regex cannot distinguish from native tooltips, NOT OS tooltips) across the
+  // new at-the-table surfaces — DM Screen (Card/PageHeader/SlotPlaceholder title=
+  // + subtitle=, which also matches title=), Session Ledger (Card + Disclosure
+  // title=), Auspice + Temperament (Card title=), and the Covenant/Bounty pages
+  // (PageHeader title= + subtitle=). Every one verified a component prop, no native
+  // title=. 494 → 510.
+  const TITLE_BASELINE = 510;
 
   function countTitles() {
     let n = 0;

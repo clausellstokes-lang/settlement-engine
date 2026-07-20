@@ -108,7 +108,7 @@ import { makeActionResult } from './actionResult.js';
 // Settlements-list + change-queue affordances consume. See each helper's header.
 import {
   renameSettlementImpl, syncActiveNeighbourFieldsImpl,
-  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl, applyNpcOp,
+  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl, applyEditOp,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -531,14 +531,16 @@ export const createSettlementSlice = (set, get) => ({
             }
             break;
           }
-          // The remaining committable kinds are the DESIGN_NPC_LIFECYCLE §2 typed NPC
-          // ops (edit / reassign / stasis+return); applyNpcOp dispatches them (a
-          // canon-tolerant mutation delegated to settlementRenameHelpers so this
-          // at-ceiling slice stays net-zero). A truly-uncommittable kind never
-          // reaches here — queueEdit admits only COMMITTABLE_EDIT_KINDS, pinned in
-          // editActionPersist.test.js + pendingEdits.test.js.
+          // The remaining committable kinds route through applyEditOp (delegated
+          // to settlementRenameHelpers so this at-ceiling slice stays net-zero):
+          // the DESIGN_NPC_LIFECYCLE §2 typed NPC ops (edit / reassign / stasis+
+          // return), and R-1 THE SESSION LEDGER's 'table-event' (a table-authored,
+          // schema-walled directive committed via applyEvent / a canon flavor line).
+          // A truly-uncommittable kind never reaches here — queueEdit admits only
+          // COMMITTABLE_EDIT_KINDS, pinned in editActionPersist.test.js +
+          // pendingEdits.test.js.
           default:
-            applyNpcOp(get, set, edit); break;
+            applyEditOp(get, set, edit); break;
         }
       } catch (e) {
         console.warn(`[commitPendingEdits] ${edit.kind} failed:`, e);

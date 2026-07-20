@@ -27,6 +27,24 @@
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 
+// R-1 THE SESSION LEDGER — the eager commit dispatcher for table-authored
+// events. THE FINITE-SEMANTICS LAW is enforced by the SCHEMA WALL in
+// domain/tableLedger.js (validateTableEvent + buildTableEffect), which runs in
+// the LAZY TableLedgerPanel at QUEUE time — so this eager dispatcher never
+// imports tableLedger.js (keeping the finite-semantics core OFF the first-paint
+// closure, the applyNpcOp precedent). The queued payload carries the ALREADY-
+// VALIDATED, ALREADY-BUILT directive; this dispatcher light-guards it (source
+// stamp + closed event-type set) and executes it through EXISTING store actions
+// (applyEvent / recordCanonFlavorEntry) — never a bypass. The string 'table'
+// mirrors TABLE_EVENT_SOURCE in domain/tableLedger.js (pinned equal in
+// tests/store/tableEventCommit.test.js so the two can never drift).
+const TABLE_SOURCE = 'table';
+// The closed set of engine event types a table event may commit — the eager
+// twin of tableLedger.KIND_SPEC's eventTypes (pinned equal). A directive naming
+// any other type is refused here, so even a corrupted queue can only reach the
+// existing, bounded table-authorable effects.
+const TABLE_AUTHORABLE_EVENT_TYPES = new Set(['RESOLVE_STRESSOR', 'APPLY_STRESSOR', 'EXPOSE_CORRUPTION']);
+
 // ── DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (delegated bodies) ─────────
 // commitPendingEdits' default case routes the NPC-lifecycle committable kinds here
 // (settlementSlice is AT its max-lines ceiling, so the bodies live in this delegated-
@@ -44,7 +62,7 @@ import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
  * Apply one typed NPC op to the live settlement (edit-npc / reassign-npc / stasis-npc
  * / return-npc). Mutates through the slice's Immer set(); persists so the op survives
  * reload. No-op-safe on a missing NPC / bad payload.
- * @param {Function} get @param {Function} set @param {{ kind: string, payload?: any }} edit
+ * @param {Function} get @param {Function} set @param {{ kind?: string, payload?: any }} edit
  */
 export function applyNpcOp(get, set, edit) {
   const k = edit?.kind;
@@ -105,6 +123,61 @@ export function applyNpcOp(get, set, edit) {
   if (changed && rescueCaptorId) {
     import('./roadsRescueInflame.js').then(m => m.fireRescueInflame(get, rescueCaptorId)).catch(() => {});
   }
+}
+
+/**
+ * R-1 THE SESSION LEDGER — commit ONE table-authored event to the live
+ * settlement. The payload carries a directive already built + validated by the
+ * schema wall (domain/tableLedger.buildTableEffect) in the lazy panel. This
+ * eager dispatcher LIGHT-GUARDS (the source stamp + the closed event-type set)
+ * and executes through EXISTING store actions:
+ *   • dispatch:'flavor'     → recordCanonFlavorEntry (a canon chronicle line,
+ *                             the DM's verbatim words as history; no delta).
+ *   • dispatch:'applyEvent' → the canonical applyEvent action (a typed, bounded
+ *                             RESOLVE/APPLY_STRESSOR or EXPOSE_CORRUPTION event),
+ *                             which logs the source:'table' receipt + persists.
+ * Free text lives ONLY on the directive's narrativeSummary / tableFlavor — never
+ * a mechanical field — so a table event can never smuggle prose into mechanics.
+ * @param {Function} get @param {Function} set @param {{ payload?: any }} edit
+ */
+export function applyTableEvent(get, set, edit) {
+  const directive = edit?.payload?.directive;
+  if (!directive || typeof directive !== 'object') return;
+  if (directive.dispatch === 'flavor') {
+    const e = directive.entry || {};
+    if (e.source !== TABLE_SOURCE) return; // provenance is mandatory (fail closed)
+    const recorded = recordCanonFlavorEntryImpl(get, set, {
+      type: typeof e.type === 'string' ? e.type : 'TABLE_INCIDENT',
+      narrativeSummary: typeof e.narrativeSummary === 'string' ? e.narrativeSummary : '',
+      source: TABLE_SOURCE,
+    });
+    // recordCanonFlavorEntry mutates the live eventLog but does not persist on
+    // its own (the flush owns that); the table ledger has no flush, so persist
+    // here so the incident survives reload (state-lifecycle).
+    if (recorded) get().persistActiveSaveEdit?.();
+    return;
+  }
+  if (directive.dispatch === 'applyEvent') {
+    const ev = directive.event || {};
+    if (ev.source !== TABLE_SOURCE) return;               // provenance mandatory
+    if (!TABLE_AUTHORABLE_EVENT_TYPES.has(ev.type)) return; // closed-vocab guard
+    // The canonical committer persists + logs the receipt (with ev.source:'table'
+    // preserved on logEntry.event) + threads the campaign clock (a clock-bound
+    // canon settlement queues it as a pending intention, exactly like any event).
+    get().applyEvent?.(ev);
+  }
+}
+
+/**
+ * The commit-dispatch router for commitPendingEdits' default arm: a table event
+ * routes to applyTableEvent; every other committable kind is an NPC-lifecycle op
+ * (applyNpcOp). Keeps the at-ceiling settlementSlice net-zero — the routing lives
+ * here, not in a grown switch.
+ * @param {Function} get @param {Function} set @param {{ kind?: string, payload?: any }} edit
+ */
+export function applyEditOp(get, set, edit) {
+  if (edit?.kind === 'table-event') return applyTableEvent(get, set, edit);
+  return applyNpcOp(get, set, edit);
 }
 
 /**
@@ -229,10 +302,10 @@ export function renameSettlementImpl(get, set, id, newName) {
  *
  * @param {Function} get  the slice's get()
  * @param {Function} set  the slice's set() (Immer producer)
- * @param {{ type: string, narrativeSummary: string, targetId?: string|null }} entry
+ * @param {{ type: string, narrativeSummary: string, targetId?: string|null, source?: string|null }} entry
  * @returns {boolean} true when an entry was appended.
  */
-export function recordCanonFlavorEntryImpl(get, set, { type, narrativeSummary, targetId = null }) {
+export function recordCanonFlavorEntryImpl(get, set, { type, narrativeSummary, targetId = null, source = null }) {
   if (get().phase !== 'canon') return false;
   const now = new Date().toISOString();
   let recorded = false;
@@ -243,6 +316,11 @@ export function recordCanonFlavorEntryImpl(get, set, { type, narrativeSummary, t
       type,
       targetId,
       timestamp: now,
+      // R-1 provenance: table-authored chronicle lines carry source:'table' so
+      // receipts distinguish table- from world-authored history (the soak
+      // excludes 'table'). Additive — omitted when null, so every existing
+      // caller's entry is byte-identical.
+      ...(source ? { source } : {}),
       // Flavor only — a recorded line of in-world history, no afterState delta.
       narrativeSummary,
       // R3 undo-safety: a flavor entry carries no real state transition. Stamp
