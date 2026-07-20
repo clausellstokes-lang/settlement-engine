@@ -105,6 +105,17 @@ const EXPECTED_VOICE = {
   // NOT a town-crier proclamation — deliberately unvoiced (the tradition/npc_ladder
   // precedent; newsVoiceCategory returns null for it via the set-but-unclassified guard).
   roads: null,
+  // V-22 THE ASSIZE + V-23 THE COMMONS' VOICE (Vision lane V-K): a seated judgement and the
+  // three rungs of the commons' escalation each carry their OWN in-register headline+summary
+  // (naming the accused/charge/verdict, or the grievance and rung) — chronicle beats, NOT
+  // generic town-crier proclamations, so they take no crier VoiceCategory (the ladder/roads/
+  // traditions precedent exactly; newsVoiceCategory returns null via the set-but-unclassified
+  // guard). Deliberately unvoiced (JUDGMENT, vetoable — a dedicated 'assize'/'commons' crier
+  // register is a surface question, not an engine-lane mis-route).
+  assize_verdict: null,
+  commons_petition: null,
+  commons_gathering: null,
+  commons_riot: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

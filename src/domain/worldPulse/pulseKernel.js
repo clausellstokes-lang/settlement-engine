@@ -70,7 +70,6 @@ import { rumorCarrierParams } from '../spatial/migrationRumors.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads } from './roadsKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -82,6 +81,7 @@ import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize } from './assizeKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
@@ -2345,7 +2345,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // ⇒ a complete no-op (zero key, zero mirror, zero news) — the roads dormancy golden proves
   // wired-but-dormant is byte-identical to pre-wire. Cadence forks a tick-invariant world
   // seed; hazards fork the per-tick pulse rng confluence with stable labels.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads({
+  // V-K (Vision): THE COMMONS' VOICE (V-23) + THE ASSIZE (V-22) are composed onto the growth
+  // chain's tail (…AndRoadsAndCommonsAndAssize — the roads-onto-traditions name-swap idiom, so
+  // the FROZEN pulseKernel changes by name only). Commons runs first (a deterministic per-
+  // settlement petition→gathering→riot-band escalation over the tick's settled legitimacy/
+  // unrest/corruption reads, its influence through the legitimacy applicator + stressor writer),
+  // then the assize (each AGE-ONE exposure — fresh exposedCorruption / lieExposure, read
+  // NON-destructively — becomes a seated public judgment; person-half fine/rank + masses-half
+  // just-relief-or-sham-unrest route through existing writers, stigma rides the ladder's own
+  // mark). The commons deposits a petition the assize can answer THIS tick (the cohesive loop);
+  // the organic legitimacy/unrest feedback closes it NEXT tick. Both DORMANT behind their virtual
+  // flags ⇒ complete no-ops (the assize + commons-voice dormancy goldens prove byte-identity). No rng.
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));

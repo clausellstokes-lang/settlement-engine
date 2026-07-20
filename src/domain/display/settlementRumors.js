@@ -191,6 +191,11 @@ export const WHAT_PHRASES = Object.freeze({
   diplomacy: 'envoys at parley',
   queue_refused: 'a petition denied',
   realm_verb_refused: 'a decree set aside',
+  // V-22 THE ASSIZE + V-23 THE COMMONS' VOICE (Vision lane V-K)
+  assize_verdict: 'a judgement handed down at the assize',
+  commons_petition: 'a petition raised by the common folk',
+  commons_gathering: 'the commons gathered in the square',
+  commons_riot: 'the streets risen in a riot-band',
 });
 
 // Bare LIFECYCLE/transition kinds — when a rumor's subject falls back to the
