@@ -23,8 +23,10 @@ every future hand — including its authors'.
    machine never takes the user's time without narrating it (waiting becomes witnessing).
 6. SECURITY — every trust boundary proven by EXECUTION: real policies exercised, real
    exploits attempted and defeated as routine CI, forever.
-7. AI COST-EFFICIENCY — every token has a job: maximal caching of the stable, structure
-   over retries, zero silent model drift; the meter is an instrument, not an apology.
+7. AI COST-EFFICIENCY + ECONOMIC VISIBILITY (widened 2026-07-20) — every token has a
+   job: maximal caching of the stable, structure over retries, zero silent model
+   drift; AND the owner can READ the unit economics — no paid surface whose
+   per-use/per-user cost is invisible; the meter is an instrument, not an apology.
 8. CONTENT/VOICE — one voice, no seams: hand, template, and clerk indistinguishable;
    the register never breaks, from error message to festival beat.
 9. ACCESSIBILITY — equivalence, not compliance: the screen-reader DM runs the same
@@ -48,6 +50,27 @@ every future hand — including its authors'.
     stale (freshness pinned); and nothing findable lies (13 applies to search
     snippets too). Ceiling doctrine: rankings belong to time and links — this bar
     grades everything findability-shaped that the REPO controls.
+15. OPERABILITY — the self-keeping machine (ADDED 2026-07-20): the product runs
+    itself while its solo keeper sleeps — alarms that fire, postures that fail
+    closed, health that is watched, runbooks REHEARSED not just written, crashes
+    arriving reproducible (seed+tick+flags forensics), and GRACE UNDER DEGRADED
+    CONDITIONS: offline, flaky network, storage-full, and heavy worlds on weak
+    machines all handled with dignity, pinned where testable. Launch must be a
+    season, never a siege.
+16. DATA STEWARDSHIP (ADDED 2026-07-20; distinct from security — security asks
+    can-it-be-breached, stewardship asks what-do-we-choose-to-hold): collection
+    minimalism PROVEN (the id-free prop-hygiene law, structurally enforced),
+    deletion COMPLETENESS tested (deleted means gone — every table, every cache),
+    export TOTALITY (the portability covenant enforced), retention honesty pinned
+    to the actual SQL, and consent posture explicit. The trust brand's data
+    conscience, graded first-class.
+
+## Considered and deliberately NOT dimensions (recorded so the audit is complete)
+Learnability (owned by bar 3's ten-minute + empty-state craft) · maintainability
+(IS the meta-criterion, proven by lane velocity) · internationalization (recorded
+post-launch deferral; registries keep the door open) · community health (instrumented
+now, gradeable only with humans in it — post-launch) · aesthetic taste (the OWNER'S
+dimension by constitutional design; never AI-graded).
 
 ## The meta-criterion ("across the board")
 THE STANDARD MUST SURVIVE ITS AUTHORS. Every bar a ratchet, every promise an enforcer,
