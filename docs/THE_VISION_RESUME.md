@@ -33,13 +33,21 @@
     MEASURE CLOSURE AFTER EVERY MERGE; a breach HALTS the fold (shave candidate:
     thinner forensics seam) — the budget raise stays owner-gated.
   - HOT (4 workstreams): THE FOLD AGENT in `minifold` (V-B landed @ a9caa573 — its
-    tip is the fold base) · V-K in `vision-e` wt · V-L (engine textures) in the
+    tip is the fold base) · V-O (platform completions V-27a..f) in the `vision-e` wt
+    on `claude/vision-o` (⚠ if V-27f mints a migration it mints 168-local off head
+    167 and the REPORT flags it — V-E's 168 has fold precedence, the fold renumbers;
+    per the established sibling-mint protocol) · V-L (engine textures) in the
     `vision-j` wt on `claude/vision-l` · V-G (campaign import → V-F's wall, world
     book, founding seeds, table companion) in the `vision-i` wt on `claude/vision-g`.
   - MORE FOLD-READY: V-F @ claude/vision-f `c15c2311` (session ledger/auspice/DM
     screen; ledger 9afbfbc7; seams: letter+oracle slot mounts, worker transport
     swap, import→wall unification when V-G lands) · V-J @ `3f3805b7` (pass-2 with
-    rewrites). Remaining queue: V-M → V-N → V-O only. The `vision-c` wt idles.
+    rewrites) · V-K @ claude/vision-k `b0f1dbe6` (V-22 assize + V-23 commons, both
+    dark; stigma rides the ladder; name-swap composition — pulseKernel FROZEN;
+    ledger row in; fold pass 3). Remaining queue: V-O RUNNING now (all items
+    base-independent); V-M → V-N dispatch AFTER the quintuple fold lands — they
+    extend V-B/V-C/V-E code that is mid-fold (V-25b needs V-20's unlisted door,
+    V-25c/d extend V-15/V-3, V-26a extends V-1). The `vision-c` wt idles.
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —

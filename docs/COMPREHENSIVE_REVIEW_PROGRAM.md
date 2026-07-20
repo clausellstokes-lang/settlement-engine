@@ -1134,6 +1134,41 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-K SHIPPED — the court sits, the crowd finds its voice
+(2026-07-20, claude/vision-k @ b0f1dbe6, base 212758ad, ONE commit, FOLD-READY;
+manager-validated).** V-22 THE ASSIZE (assizeEnabled, dark): assizeKernel.js turns
+each age-one exposure (exposedCorruption + npcCredibility lieExposure — perjury,
+which already absorbs contradicted bluffs) into a seated public judgment wherever a
+governing seat + a law-order institution (the venue) exist. Reads NON-destructive
+(exact-age freshness gate, not a drain — war-reasons/ladder-stigma/covert-diffusion
+keep their reads). Just-vs-sham = captured-bench detection via governingFactionOf +
+npcInFaction. Person-half rides the LADDER'S OWN stigma mark (no double-charge) +
+reparation fine via foldObligations + a rank incident; masses-half = unrest
+relief/raise + legitimacy lift/tax + sham belief-seeding — coup-window + migration
+push feed FREE off the deltas (THE MASSES CLAUSE honored). V-23 THE COMMONS' VOICE
+(commonsVoiceEnabled, dark): commonsVoiceKernel.js — persistent per-settlement
+sidecar; petition → gathering → riot-band escalation from legitimacy/corruption/
+unrest reads; influence through the legitimacy applicator + the stressor writer
+ONLY. THE COUPLING: a live grievance naming an accused amplifies the assize verdict
+and names the petition; the organic feedback de-escalates the crowd next tick.
+EXISTED-VS-BUILT verified FIRST: scalar rebellion stressors, faction challenges,
+the manual riot event, and the coup tier all EXIST — the only gap was a discrete,
+organically-born, NAMED commons actor between grumbling and coup; that alone was
+built, routed into the nine existing readers. Both movers composed via the
+NAME-SWAP idiom (frozen pulseKernel changed by name only). Gate: strict 0 · tsc 0 ·
+lint 0 · 84 dormancy-golden tests byte-identical (10 files) · 46 new pins (8 files)
+· dist 162 · closure 1,024,743 (lane eager Δ = 0) · NUL clean · 4 parked reds
+base-proven in a temp worktree. JUDGMENTS RATIFIED: stigma-rides-the-ladder ·
+null-crier voice (EXPECTED_VOICE: null per the engine-lift precedent; dedicated
+crier categories = a Δ0-eager upgrade path) · fine = settlement-pair reparation on
+just corruption verdicts only. DEFERRED-RECORDED: readiness nudge (no sanctioned
+writer exists) · explicit migration/tradition arrows (the legitimacy+unrest
+channels already transmit) · local-only exposures (no foreign-blowback entry ⇒ no
+trial). HAZARDS BANKED: pulseKernel is FROZEN (max-lines) — every future mover
+rides the name-swap chain, never a new block · the impactKind walker sees LITERAL
+kinds only. Memory: vision-k-assize-commons-shipped.md (indexed). SLOT → V-O
+(platform completions) dispatched into the rotated vision-e worktree; V-M/V-N wait
+on the quintuple fold — they extend V-B/V-C/V-E code that is mid-fold.**
 **⬛⭐⭐ VISION LANE V-F SHIPPED — the table writes history through the wall
 (2026-07-20, claude/vision-f @ c15c2311, FOLD-READY; manager-validated).** R-1 THE
 SESSION LEDGER: the finite-semantics law MADE CODE — tableLedger.js as a pure
