@@ -13,6 +13,11 @@
  * Absent/empty pulseHistory ⇒ an empty track ⇒ the overlay renders nothing
  * (byte-inert to a world that never advanced).
  *
+ * V-25d follow-ons (both pure projections of the SAME track — no new data source):
+ * settlementTimeline is the PER-SETTLEMENT DRILL (one settlement's slice); and
+ * serializeTimelapseClip is EXPORT-AS-CLIP — a deterministic, encode-free frame
+ * sequence (a JSON artifact a viewer replays; never an ffmpeg/raster path).
+ *
  * @enforced-by tests/domain/timelineTrack.test.js (derivation + determinism) and
  *   tests/property/timelineTrackGolden.test.js (the same-seed track hash).
  */
@@ -146,4 +151,82 @@ export function frameAtTick(track, scrubTick) {
     if (f.tick <= t) chosen = f; else break;
   }
   return chosen;
+}
+
+/**
+ * The distinct settlement ids that appear ANYWHERE in the track (struck by a pulse or
+ * moved by a delta), codepoint-sorted — the population for the per-settlement drill
+ * picker. Pure, total.
+ * @param {TimelineTrack|null|undefined} track
+ * @returns {string[]}
+ */
+export function trackSettlementIds(track) {
+  /** @type {Set<string>} */
+  const set = new Set();
+  for (const f of (track && Array.isArray(track.frames) ? track.frames : [])) {
+    for (const p of f.pulses) set.add(p.settlementId);
+    for (const id of Object.keys(f.deltas)) set.add(id);
+  }
+  return [...set].sort(byStr);
+}
+
+/**
+ * @typedef {Object} SettlementTimelinePoint
+ * @property {number} tick
+ * @property {number} severity                 strongest event severity that frame (0 if only a delta)
+ * @property {'up'|'down'|null} delta
+ */
+
+/**
+ * V-25d — THE PER-SETTLEMENT DRILL: one settlement's slice of the track. A point per
+ * frame the settlement was struck OR its population moved, plus summary counts. Pure,
+ * deterministic; empty points for a settlement that never appears. No new data source —
+ * the settlement is already the frame join key.
+ * @param {TimelineTrack|null|undefined} track
+ * @param {string} settlementId
+ * @returns {{ settlementId: string, points: SettlementTimelinePoint[], struck: number,
+ *   grew: number, declined: number, peakSeverity: number }}
+ */
+export function settlementTimeline(track, settlementId) {
+  const id = String(settlementId ?? '');
+  const frames = track && Array.isArray(track.frames) ? track.frames : [];
+  /** @type {SettlementTimelinePoint[]} */
+  const points = [];
+  let struck = 0, grew = 0, declined = 0, peakSeverity = 0;
+  for (const f of frames) {
+    const pulse = f.pulses.find((p) => p.settlementId === id);
+    const delta = f.deltas[id] || null;
+    if (!pulse && !delta) continue;
+    const severity = pulse ? pulse.severity : 0;
+    points.push({ tick: f.tick, severity, delta });
+    if (pulse) { struck += 1; if (severity > peakSeverity) peakSeverity = severity; }
+    if (delta === 'up') grew += 1;
+    else if (delta === 'down') declined += 1;
+  }
+  return { settlementId: id, points, struck, grew, declined, peakSeverity };
+}
+
+/** The self-describing clip format tag + schema version (a stable artifact id). */
+export const TIMELAPSE_CLIP_FORMAT = 'sf-timelapse-clip';
+export const TIMELAPSE_CLIP_VERSION = 1;
+
+/**
+ * V-25d — EXPORT-AS-CLIP: a DETERMINISTIC, encode-free frame sequence (no ffmpeg, no
+ * raster path — the recorded no-encode-dependency hazard). A self-describing JSON
+ * artifact a viewer replays tick-by-tick; a pure projection of the track, so the same
+ * seed yields byte-identical clip bytes. Total on a null/garbage track (empty clip).
+ * @param {TimelineTrack|null|undefined} track
+ * @returns {{ format: string, version: number, minTick: number|null, maxTick: number|null,
+ *   frameCount: number, frames: TimelineFrame[] }}
+ */
+export function serializeTimelapseClip(track) {
+  const frames = track && Array.isArray(track.frames) ? track.frames : [];
+  return {
+    format: TIMELAPSE_CLIP_FORMAT,
+    version: TIMELAPSE_CLIP_VERSION,
+    minTick: track && track.minTick != null ? track.minTick : null,
+    maxTick: track && track.maxTick != null ? track.maxTick : null,
+    frameCount: frames.length,
+    frames: frames.map((f) => ({ tick: f.tick, pulses: f.pulses, deltas: f.deltas })),
+  };
 }
