@@ -44,7 +44,9 @@ const LETTER_SECTIONS = Object.freeze([
   { id: 'trade', heading: 'Of trade and fortune', cats: ['trade', 'prosperity', 'migration'] },
   { id: 'traditions', heading: 'Of faith and custom', cats: ['faith', 'reframe'] },
   { id: 'mercy', heading: 'Of mercy given', cats: ['succor'] },
-  { id: 'sundry', heading: 'Of sundry other matters', cats: [/** @type {any} */ (null)] },
+  // sundry has NO cats of its own — an entry whose category maps to no section (a
+  // classified-null or unknown category) falls here via the `|| 'sundry'` route.
+  { id: 'sundry', heading: 'Of sundry other matters', cats: [] },
 ]);
 /** category → section id. */
 const SECTION_OF = (() => {
@@ -107,9 +109,22 @@ export function enabledFlagsOf(simulationRules) {
  */
 
 /**
+ * The news-entry fields the composer reads (a subset of WizardNewsEntry; newsVoice
+ * categorizes off impactKind/channelType). No `any` — the strict-domain rule.
+ * @typedef {Object} LetterNewsEntry
+ * @property {string|number} [id]
+ * @property {number} [tick]
+ * @property {string} [significance]
+ * @property {string} [headline]
+ * @property {string} [summary]
+ * @property {string} [impactKind]
+ * @property {string} [channelType]
+ */
+
+/**
  * Compose the chronicler's letter for a campaign, deterministically.
  * @param {Object} args
- * @param {{ currentTick?: number, entries?: ReadonlyArray<any> }|null|undefined} args.wizardNews
+ * @param {{ currentTick?: number, entries?: ReadonlyArray<LetterNewsEntry> }|null|undefined} args.wizardNews
  * @param {number} [args.lastReadTick]      the diff floor (default 0)
  * @param {unknown} [args.simulationRules]  the campaign's live flags (for R-16)
  * @param {ReadonlyArray<string>|null} [args.flagsSeen]  recorded flags at last read (null ⇒ R-16 dark)

@@ -16,7 +16,7 @@
  */
 
 import { useStore } from '../../store/index.js';
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, CARD_ALT, BORDER } from '../theme.js';
 import Card from '../primitives/Card.jsx';
 import { WORLD_CERTIFICATION_MANIFEST } from '../../domain/certification/certificationManifest.js';
 import { buildWorldCertification } from '../../domain/certification/certificationRead.js';
@@ -54,10 +54,11 @@ export default function WorldCertificationPanel({ presetId: presetIdProp } = {})
             letterSpacing: '0.04em',
             textTransform: 'uppercase',
             padding: '2px 8px',
-            borderRadius: 2,
-            color: certified ? '#1a5a28' : swatch.inkMag3,
-            background: certified ? '#e7f2e6' : '#f0ece2',
-            border: `1px solid ${certified ? '#bcd9bd' : '#ddd6c6'}`,
+            // Tokens only (no raw hue, square corners — the map-palette / raw-color /
+            // kill-list ratchets): the certified state reads green, pending neutral.
+            color: certified ? swatch.success : swatch.inkMag3,
+            background: CARD_ALT,
+            border: `1px solid ${certified ? swatch.success : BORDER}`,
           }}
           data-testid="certification-status"
         >

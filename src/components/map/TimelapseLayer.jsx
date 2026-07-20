@@ -23,9 +23,11 @@ import { swatch } from '../theme.js';
 import { buildTimelineTrack, frameAtTick } from '../../domain/display/timelineTrack.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 
-const GREW = swatch.success || '#1a5a28';
-const FELL = swatch.danger || '#8b1a1a';
-const PULSE = swatch['#A0762A'] || '#a0762a';
+// Single-sourced from the swatch registry (never a raw hue literal — the map
+// palette single-source + raw-color-literal ratchets).
+const GREW = swatch.success;
+const FELL = swatch.danger;
+const PULSE = swatch['#A0762A'];
 
 export default function TimelapseLayer() {
   const placements = useStore((s) => s.mapState.placements);

@@ -113,7 +113,7 @@ export function ageOverlayOps(model, ageStyle, portrait) {
   const wAge = ageStyle && ageStyle.stroke ? ageStyle.stroke.age : undefined;
   // THE DORMANCY WALL: a style that does not name the age fields draws nothing.
   if (oAge == null || wAge == null) return ops;
-  const ink = (ageStyle && ageStyle.ink) || '#4a4030';
+  const ink = (ageStyle && ageStyle.ink) || 'currentColor';
   const districts = Array.isArray(model.districts) ? model.districts : [];
   const water = (model.frame && model.frame.water) || null;
   const coastY = water && water.kind === 'coast' && Array.isArray(water.path) && water.path[0] ? water.path[0][1] : null;

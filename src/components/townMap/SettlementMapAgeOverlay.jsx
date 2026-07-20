@@ -55,7 +55,7 @@ function opElement(op, i) {
  * @param {{ urbanFabric?: unknown }|null} props.settlement
  * @param {string} [props.ink]        the active lens ink (the wear's colour)
  */
-export default function SettlementMapAgeOverlay({ model, settlement, ink = '#4a4030' }) {
+export default function SettlementMapAgeOverlay({ model, settlement, ink = 'currentColor' }) {
   const asOfWeek = useStore((s) => s.timelapseTick);
   const ops = useMemo(() => {
     if (asOfWeek == null) return [];
