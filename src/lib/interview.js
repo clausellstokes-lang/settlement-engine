@@ -46,14 +46,21 @@ function classifyRefusal(status) {
  * cited answer. Emits the id-free adoption signal { surface:'interview', verdict } so the
  * S4+ knobs decision has acceptance metrics to read.
  *
+ * V-26a follow-ons: `history` (prior {question, answer} turns) carries multi-hop context
+ * — each hop is a SEPARATE metered call, re-grounded on a fresh bundle (the citation law
+ * holds per hop). `scope: 'campaign'` grounds across the campaign's settlements at once
+ * (`campaignSettlements`), instead of the single anchored one.
+ *
  * @param {{ question?: string, worldState?: object, settlements?: Array<object>,
- *           settlement?: object|null, tick?: number, audience?: 'dm'|'player' }} ctx
+ *           settlement?: object|null, tick?: number, audience?: 'dm'|'player',
+ *           history?: Array<{question?: string, answer?: string}>,
+ *           scope?: 'settlement'|'campaign', campaignSettlements?: Array<object> }} ctx
  * @returns {Promise<{ answer?: string, segments?: Array<object>, citations?: Array<object>,
  *   confidence?: number|null, citationCoverage?: number|null, audience?: 'dm'|'player', byok?: boolean,
  *   creditsRemaining?: number|null, refused?: boolean, error?: string, refusalKind?: string|null,
  *   refusalClass?: string|null, doors?: string[]|null }>}
  */
-export async function askInterview({ question, worldState = null, settlements = [], settlement = null, tick = 0, audience } = {}) {
+export async function askInterview({ question, worldState = null, settlements = [], settlement = null, tick = 0, audience, history = [], scope = 'settlement', campaignSettlements = [] } = {}) {
   const q = typeof question === 'string' ? question.trim() : '';
   if (!q) return { error: 'Ask a question first.' };
   if (!isConfigured) return { error: 'Sign in to use the Interview.' };
@@ -62,11 +69,18 @@ export async function askInterview({ question, worldState = null, settlements = 
   // effective audience (a player-framed question is forced to 'player') comes back from
   // selectSlices — we POST that, so the server sees the audience the slices honour.
   const { audience: effectiveAudience, slices } = selectSlices({
-    question: q, worldState, settlements, settlement, tick, audience,
+    question: q, worldState, settlements, settlement, tick, audience, scope, campaignSettlements,
   });
 
+  // Multi-hop: the last few prior turns as CONTEXT (the server caps + fences them; we
+  // trim client-side so the wire body stays small). Each hop is still metered separately.
+  const priorTurns = (Array.isArray(history) ? history : [])
+    .filter((t) => t && (typeof t.question === 'string' || typeof t.answer === 'string'))
+    .slice(-6)
+    .map((t) => ({ question: String(t.question ?? ''), answer: String(t.answer ?? '') }));
+
   const { data, error } = await supabase.functions.invoke('interview', {
-    body: { question: q, audience: effectiveAudience, slices },
+    body: { question: q, audience: effectiveAudience, slices, history: priorTurns },
   });
 
   if (error) {

@@ -30,6 +30,12 @@ const AUDIENCE_OPTIONS = [
   { id: 'player', label: 'Player-safe' },
 ];
 
+// V-26a: ground on the anchored settlement, or across the whole campaign's settlements.
+const SCOPE_OPTIONS = [
+  { id: 'settlement', label: 'This settlement' },
+  { id: 'campaign', label: 'The campaign' },
+];
+
 function confidenceBand(v) {
   if (typeof v !== 'number') return null;
   if (v >= 0.75) return 'well-settled';
@@ -37,11 +43,61 @@ function confidenceBand(v) {
   return 'mostly conjecture';
 }
 
+/** The receipt chips for a cited segment (→ V-4 cause-walk via the data-* refs). */
+function CitationChips({ citations }) {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
+      {(Array.isArray(citations) ? citations : []).map((c, j) => (
+        <span
+          key={j}
+          data-testid="interview-citation"
+          data-cite-ref={c.ref}
+          data-cite-kind={c.kind}
+          style={{
+            fontSize: FS.xs, color: GOLD, fontFamily: sans,
+            border: `1px solid ${GOLD}`, padding: `0 ${SP.xs}px`,
+          }}
+        >
+          ◆ {c.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/** THE TWO REGISTERS: cited segments carry receipt chips; conjecture segments are
+ *  visibly marked as a guess (never dressed as record). */
+function AnswerSegments({ segments }) {
+  return (
+    <div data-testid="interview-answer" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+      {(Array.isArray(segments) ? segments : []).map((seg, i) => (
+        seg.register === 'cited' ? (
+          <div key={i} style={{ borderLeft: `2px solid ${SLATE}`, paddingLeft: SP.sm }}>
+            <p style={{ margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{seg.text}</p>
+            <CitationChips citations={seg.citations} />
+          </div>
+        ) : (
+          <div key={i} data-testid="interview-conjecture" style={{ borderLeft: `2px dashed ${MUTED}`, paddingLeft: SP.sm }}>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+              Conjecture · not in the record
+            </span>
+            <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>{seg.text}</p>
+          </div>
+        )
+      ))}
+    </div>
+  );
+}
+
 export default function InterviewPanel({ open = false, onClose, initialQuestion = '' }) {
   const [question, setQuestion] = useState(initialQuestion);
   const [audience, setAudience] = useState('dm');
+  const [scope, setScope] = useState('settlement');
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null);
+  // The multi-hop THREAD: successful hops only ({ question, result }). A follow-up
+  // carries the prior turns as context; each hop is still a separate metered call.
+  const [thread, setThread] = useState([]);
+  const [pendingError, setPendingError] = useState(null);
   const [feedback, setFeedback] = useState(null);
 
   const settlement = useStore((s) => s.settlement);
@@ -60,6 +116,13 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
     () => (Array.isArray(savedSettlements) ? savedSettlements.map((s) => ({ id: s?.id, name: s?.name })) : []),
     [savedSettlements],
   );
+  // The campaign's member settlements (full objects) — the campaign-wide grounding set.
+  const campaignMembers = useMemo(() => {
+    const ids = Array.isArray(activeCampaign?.settlementIds) ? activeCampaign.settlementIds : [];
+    const byId = new Map((Array.isArray(savedSettlements) ? savedSettlements : []).map((s) => [String(s?.id), s]));
+    return ids.map((id) => byId.get(String(id))).filter(Boolean);
+  }, [activeCampaign, savedSettlements]);
+  const canCampaign = campaignMembers.length >= 1;
   const cost = getSurveyorAiCost('analysis');
 
   const { view, params } = useRoute();
@@ -79,22 +142,41 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
   const ask = useCallback(async (override) => {
     const q = (typeof override === 'string' ? override : question).trim();
     if (!q || loading) return;
-    setQuestion(q);
     setLoading(true);
-    setResult(null);
+    setPendingError(null);
     setFeedback(null);
+    const useCampaign = scope === 'campaign' && canCampaign;
+    // Prior successful turns become the follow-up's context (server re-grounds each hop).
+    const history = thread
+      .map((turn) => ({ question: turn.question, answer: turn.result?.answer }))
+      .filter((h) => h.answer);
     try {
       const { askInterview } = await import('../lib/interview.js');
       const res = await askInterview({
         question: q, worldState, settlements, settlement: anchoredSettlement, tick: worldState?.tick || 0, audience,
+        history,
+        scope: useCampaign ? 'campaign' : 'settlement',
+        campaignSettlements: useCampaign ? campaignMembers : [],
       });
-      setResult(res);
+      if (res?.error) {
+        setPendingError(res.error);
+      } else {
+        setThread((prev) => [...prev, { question: q, result: res }]);
+        setQuestion(''); // cleared and ready for a follow-up
+      }
     } catch {
-      setResult({ error: 'The Interview is unavailable right now.' });
+      setPendingError('The Interview is unavailable right now.');
     } finally {
       setLoading(false);
     }
-  }, [question, loading, worldState, settlements, anchoredSettlement, audience]);
+  }, [question, loading, scope, canCampaign, thread, worldState, settlements, anchoredSettlement, audience, campaignMembers]);
+
+  const startOver = useCallback(() => {
+    setThread([]);
+    setPendingError(null);
+    setFeedback(null);
+    setQuestion('');
+  }, []);
 
   const rate = useCallback(async (accepted) => {
     setFeedback(accepted ? 'up' : 'down');
@@ -107,42 +189,90 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
   if (!open) return null;
 
   const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
-  const band = result ? confidenceBand(result.confidence) : null;
-  const citedCount = Array.isArray(result?.segments) ? result.segments.filter((s) => s.register === 'cited').length : 0;
+  const hasThread = thread.length > 0;
+  const lastIdx = thread.length - 1;
+  const scopeLabel = (scope === 'campaign' && canCampaign)
+    ? `The campaign · ${campaignMembers.length} settlement${campaignMembers.length === 1 ? '' : 's'}`
+    : anchor.label;
 
   return (
     <div
       style={{
         ...dockPos,
-        width: 360, maxWidth: 'calc(100vw - 32px)', background: CARD, color: BODY,
+        width: 360, maxWidth: 'calc(100vw - 32px)', maxHeight: 'calc(100vh - 32px)', overflowY: 'auto',
+        background: CARD, color: BODY,
         border: `1px solid ${SLATE}`, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>The Interview</span>
-        <IconButton Icon={X} label="Close the Interview" size="sm" onClick={onClose} />
+        <div style={{ display: 'flex', gap: SP.xs, alignItems: 'center' }}>
+          {hasThread && (
+            <Button variant="ai" size="sm" onClick={startOver}>New line of questions</Button>
+          )}
+          <IconButton Icon={X} label="Close the Interview" size="sm" onClick={onClose} />
+        </div>
       </div>
 
       <div
         data-testid="interview-anchor"
-        aria-label={anchor.label}
+        aria-label={scopeLabel}
         style={{
           fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
           border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}
       >
-        {anchor.label}
+        {scopeLabel}
       </div>
 
+      {canCampaign && (
+        <Segmented options={SCOPE_OPTIONS} value={scope} onChange={setScope} size="sm" ariaLabel="Grounding scope" />
+      )}
       <Segmented options={AUDIENCE_OPTIONS} value={audience} onChange={setAudience} size="sm" ariaLabel="Answer audience" />
+
+      {/* THE THREAD: every prior hop, oldest first. The last answer carries feedback. */}
+      {hasThread && (
+        <div data-testid="interview-thread" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+          {thread.map((turn, ti) => {
+            const r = turn.result || {};
+            const band = confidenceBand(r.confidence);
+            const citedCount = Array.isArray(r.segments) ? r.segments.filter((s) => s.register === 'cited').length : 0;
+            return (
+              <div key={ti} style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+                <div data-testid="interview-correspondence" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
+                  <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{turn.question}</p>
+                </div>
+                <AnswerSegments segments={r.segments} />
+                <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+                  <span>{citedCount}/{r.segments?.length ?? 0} cited</span>
+                  {band && <span>· {band}</span>}
+                  {r.byok && <span aria-label="Answered on your own provider key">· BYOK</span>}
+                  {ti === lastIdx && (
+                    <>
+                      <span style={{ flex: 1 }} />
+                      <IconButton Icon={ThumbsUp} label="Answer was helpful" size="sm" onClick={() => rate(true)} aria-pressed={feedback === 'up'} />
+                      <IconButton Icon={ThumbsDown} label="Answer was not helpful" size="sm" onClick={() => rate(false)} aria-pressed={feedback === 'down'} />
+                    </>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       <textarea
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
-        aria-label="Your question for the Interview"
-        placeholder={audience === 'player' ? 'Ask something safe to share with the party…' : 'Why does the temple hate the guild? Is the road safe? …'}
+        aria-label={hasThread ? 'Your follow-up for the Interview' : 'Your question for the Interview'}
+        placeholder={
+          hasThread
+            ? 'Ask a follow-up… (it remembers what you already asked)'
+            : (audience === 'player' ? 'Ask something safe to share with the party…' : 'Why does the temple hate the guild? Is the road safe? …')
+        }
         rows={2}
         style={{
           width: '100%', boxSizing: 'border-box', resize: 'vertical',
@@ -157,11 +287,11 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
           {Number.isFinite(creditBalance) && <span> · {creditBalance} left</span>}
         </span>
         <Button variant="aiSolid" size="sm" busy={loading} disabled={!question.trim()} onClick={() => ask()}>
-          {loading ? 'Asking…' : 'Ask the world'}
+          {loading ? 'Asking…' : (hasThread ? 'Ask follow-up' : 'Ask the world')}
         </Button>
       </div>
 
-      {!result && !loading && !question.trim() && suggestions.length > 0 && (
+      {!hasThread && !loading && !question.trim() && suggestions.length > 0 && (
         <div data-testid="interview-suggestions" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Try asking
@@ -174,68 +304,9 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
         </div>
       )}
 
-      {result && (
-        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          {result.error ? (
-            <p style={{ fontSize: FS.sm, color: RED, margin: 0, lineHeight: 1.45 }}>{result.error}</p>
-          ) : (
-            <>
-              <div data-testid="interview-correspondence" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <span className="sf-smallcap" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{t('surveyorDoor.youAsked')}</span>
-                <p style={{ margin: 0, fontSize: FS.sm, color: INK, fontFamily: serif_, fontStyle: 'italic', lineHeight: 1.45 }}>{question}</p>
-              </div>
-
-              {/* THE TWO REGISTERS: cited segments carry receipt chips; conjecture
-                  segments are visibly marked as a guess (never dressed as record). */}
-              <div data-testid="interview-answer" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-                {(Array.isArray(result.segments) ? result.segments : []).map((seg, i) => (
-                  seg.register === 'cited' ? (
-                    <div key={i} style={{ borderLeft: `2px solid ${SLATE}`, paddingLeft: SP.sm }}>
-                      <p style={{ margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{seg.text}</p>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 4 }}>
-                        {seg.citations.map((c, j) => (
-                          // Receipt chip → V-4 cause-walk. The ref/kind ride data-* so the
-                          // cause-walk can deep-link off them (the deep-link is V-4's build).
-                          <span
-                            key={j}
-                            data-testid="interview-citation"
-                            data-cite-ref={c.ref}
-                            data-cite-kind={c.kind}
-                            style={{
-                              fontSize: FS.xs, color: GOLD, fontFamily: sans,
-                              border: `1px solid ${GOLD}`, padding: `0 ${SP.xs}px`,
-                            }}
-                          >
-                            ◆ {c.label}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <div
-                      key={i}
-                      data-testid="interview-conjecture"
-                      style={{ borderLeft: `2px dashed ${MUTED}`, paddingLeft: SP.sm }}
-                    >
-                      <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                        Conjecture · not in the record
-                      </span>
-                      <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>{seg.text}</p>
-                    </div>
-                  )
-                ))}
-              </div>
-
-              <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                <span>{citedCount}/{result.segments?.length ?? 0} cited</span>
-                {band && <span>· {band}</span>}
-                {result.byok && <span aria-label="Answered on your own provider key">· BYOK</span>}
-                <span style={{ flex: 1 }} />
-                <IconButton Icon={ThumbsUp} label="Answer was helpful" size="sm" onClick={() => rate(true)} aria-pressed={feedback === 'up'} />
-                <IconButton Icon={ThumbsDown} label="Answer was not helpful" size="sm" onClick={() => rate(false)} aria-pressed={feedback === 'down'} />
-              </div>
-            </>
-          )}
+      {pendingError && (
+        <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
+          <p style={{ fontSize: FS.sm, color: RED, margin: 0, lineHeight: 1.45 }}>{pendingError}</p>
         </div>
       )}
     </div>

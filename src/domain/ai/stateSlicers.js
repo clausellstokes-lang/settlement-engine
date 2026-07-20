@@ -42,6 +42,34 @@ const PLAYER_FRAMED_RE = /(player|party|share|tell the (players|party)|what (do|
 /** The always-available settlement-scoped default kinds, by audience. */
 const DEFAULT_KINDS = Object.freeze({ dm: ['settlement'], player: ['playerSafe'] });
 
+/** Campaign-wide scope (V-26a) fans settlement-scoped briefs across the campaign's
+ *  members; the count is bounded so a large campaign cannot balloon the grounding
+ *  bundle past the edge body cap. The anchored settlement leads (caller-ordered). */
+const MAX_CAMPAIGN_SETTLEMENTS = 6;
+
+/**
+ * Compose one brief kind into retrieval slices and push them onto `out`. Shared by the
+ * settlement and campaign paths. `idSuffix`/`titlePrefix` NAMESPACE a slice to a specific
+ * settlement in campaign scope (so ids stay unique across members and a citation resolves
+ * to the right town); both empty ⇒ the exact single-settlement id/title shape. Inert-not-
+ * crash: a bad ingredient contributes nothing rather than failing retrieval.
+ * @param {Array<object>} out @param {string} kind
+ * @param {{ compose: Function }} entry @param {object} ctx
+ * @param {string} idSuffix @param {string} titlePrefix
+ */
+function pushKindSlices(out, kind, entry, ctx, idSuffix, titlePrefix) {
+  let brief;
+  try { brief = entry.compose(ctx); } catch { return; }
+  for (const sec of brief.sections) {
+    out.push({
+      id: `${kind}${idSuffix}:${sec.id}`,
+      source: sec.source,
+      title: titlePrefix ? `${titlePrefix} — ${sec.title}` : sec.title,
+      data: sec.items,
+    });
+  }
+}
+
 /**
  * True iff the question is player-framed (must receive projections only).
  * @param {unknown} question
@@ -96,21 +124,64 @@ function routeKinds(question, audience, hasSettlement) {
  * rule. Player audience yields ONLY player-safe slices — a ground-truth slice is
  * dropped by construction.
  *
+ * CAMPAIGN-WIDE SCOPE (V-26a): with `scope: 'campaign'` the settlement-scoped briefs are
+ * assembled ACROSS the campaign's members (`campaignSettlements`, bounded), each slice
+ * namespaced by settlement; realm-scoped briefs compose once. `scope: 'settlement'` (the
+ * default) is unchanged — byte-identical to V-1.
+ *
  * @param {{ question?: string,
  *           worldState?: Record<string, unknown>|null,
  *           settlements?: Array<Record<string, unknown>>,
  *           settlement?: Record<string, unknown>|null,
  *           tick?: number,
- *           audience?: 'dm'|'player' }} args
- * @returns {{ audience: 'dm'|'player', slices: Slice[] }}
+ *           audience?: 'dm'|'player',
+ *           scope?: 'settlement'|'campaign',
+ *           campaignSettlements?: Array<Record<string, unknown>> }} args
+ * @returns {{ audience: 'dm'|'player', slices: Slice[], scope: 'settlement'|'campaign' }}
  */
-export function selectSlices({ question = '', worldState = null, settlements = [], settlement = null, tick = 0, audience } = {}) {
+export function selectSlices({ question = '', worldState = null, settlements = [], settlement = null, tick = 0, audience, scope = 'settlement', campaignSettlements = [] } = {}) {
   const effective = resolveAudience(question, audience);
+  const composers = /** @type {Record<string, { compose: Function, audience: string, scope: string }>} */ (BRIEF_COMPOSERS);
+
+  // ── CAMPAIGN-WIDE SCOPE ───────────────────────────────────────────────────────
+  if (scope === 'campaign') {
+    const members = (Array.isArray(campaignSettlements) ? campaignSettlements : [])
+      .filter((s) => s && typeof s === 'object')
+      .slice(0, MAX_CAMPAIGN_SETTLEMENTS);
+    // The name resolver spans the whole campaign so realm briefs read real names.
+    const nameList = (Array.isArray(settlements) && settlements.length)
+      ? settlements
+      : members.map((s) => ({ id: s.id, name: s.name }));
+    const kinds = routeKinds(question, effective, members.length > 0);
+    /** @type {Slice[]} */
+    const campaignSlices = [];
+    for (const kind of kinds) {
+      const entry = composers[kind];
+      if (!entry) continue;
+      if (entry.scope === 'settlement') {
+        // Fan the settlement brief across every member, namespaced so a citation
+        // resolves to the right town (id `kind@sid:sec`, title "Name — Section").
+        for (const member of members) {
+          const sid = member.id != null ? String(member.id) : '';
+          const nm = member.name != null ? String(member.name) : (sid || 'a settlement');
+          pushKindSlices(campaignSlices, kind, entry, { settlement: member, worldState, settlements: nameList, tick, audience: effective }, `@${sid}`, nm);
+        }
+      } else {
+        // Realm-scoped brief: one instance for the whole campaign (unchanged id/title).
+        pushKindSlices(campaignSlices, kind, entry, { settlement: null, worldState, settlements: nameList, tick, audience: effective }, '', '');
+      }
+    }
+    const gatedCampaign = effective === 'player'
+      ? campaignSlices.filter((s) => isPlayerSafeSource(s.source))
+      : campaignSlices;
+    return { audience: effective, slices: gatedCampaign, scope: 'campaign' };
+  }
+
+  // ── SETTLEMENT SCOPE (default; byte-identical to V-1) ──────────────────────────
   const hasSettlement = !!(settlement && typeof settlement === 'object');
   const kinds = routeKinds(question, effective, hasSettlement);
 
   const slices = [];
-  const composers = /** @type {Record<string, { compose: Function, audience: string, scope: string }>} */ (BRIEF_COMPOSERS);
   for (const kind of kinds) {
     const entry = composers[kind];
     if (!entry) continue;
@@ -133,5 +204,5 @@ export function selectSlices({ question = '', worldState = null, settlements = [
     ? slices.filter((s) => isPlayerSafeSource(s.source))
     : slices;
 
-  return { audience: effective, slices: gated };
+  return { audience: effective, slices: gated, scope: 'settlement' };
 }
