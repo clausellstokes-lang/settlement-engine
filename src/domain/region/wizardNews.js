@@ -75,6 +75,7 @@ const MAX_ENTRIES = 240;
  * @property {string | null} sourceEventId
  * @property {string[]} tags
  * @property {string[]} reasons
+ * @property {string} [source]
  */
 
 /**
@@ -98,6 +99,7 @@ const MAX_ENTRIES = 240;
  * @property {string | null} [sourceEventId]
  * @property {Array<string | number | null | undefined>} [tags]
  * @property {Array<string | number | null | undefined>} [reasons]
+ * @property {string} [source]
  */
 
 /**
@@ -479,6 +481,11 @@ function normalizeEntry(entry, options = {}) {
     sourceEventId: entry.sourceEventId || null,
     tags: compactIds(entry.tags),
     reasons: compactIds(entry.reasons),
+    // V-17 provenance: table-authored history (source:'table') is distinguishable
+    // from world-authored (the soak excludes 'table'). BYTE-NEUTRAL: world entries
+    // pass no `source`, so this spread adds nothing and their serialization is
+    // unchanged; only table-imported entries carry the field.
+    ...(entry.source ? { source: entry.source } : {}),
   };
 }
 

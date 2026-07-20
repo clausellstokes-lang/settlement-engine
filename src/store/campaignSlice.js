@@ -32,7 +32,11 @@
 import {
   ensureRegionalGraph,
   ensureWizardNewsFeed,
+  appendWizardNewsEntries,
 } from '../domain/region/index.js';
+// V-17 THE CAMPAIGN IMPORT — light domain leaf (pure schema wall + news projection);
+// no store/sim-graph imports, so it never rides into first paint.
+import { tableEventToNewsEntry } from '../domain/tableEvents.js';
 // Leaf-module import (not the `export *` barrel) so the heavy simulation graph
 // can't ride into first paint via the barrel. ensureWorldState is a light,
 // synchronous default-shape helper used on read paths.
@@ -656,6 +660,31 @@ export const createCampaignSlice = (set, get) => {
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
     }),
+
+  // V-17 THE CAMPAIGN IMPORT — commit confirmed typed table-event records into the
+  // campaign's news feed as source:'table' HISTORY at each record's DM-chosen tick.
+  // The `records` are already-validated TableEventRecord objects (built + confirmed
+  // by the import UI through src/lib/campaignImport.js + the schema wall); this action
+  // is the ONLY write path and it commits them WHOLESALE — the per-event confirmation
+  // gate lives upstream (nothing unconfirmed is ever in `records`). NO-FREE-TEXT-
+  // REACHES-MECHANICS: tableEventToNewsEntry copies `flavor` ONLY into the display
+  // `summary`; every mechanical entry field comes from the typed record. Returns the
+  // count appended. Registered in operationRegistry (klass:'mechanical').
+  importTableEvents: (campaignId, records) => {
+    let appended = null;
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c || !Array.isArray(records) || !records.length) return;
+      const now = new Date().toISOString();
+      const feed = ensureWizardNewsFeed(c.wizardNews);
+      const entries = records.map(tableEventToNewsEntry);
+      c.wizardNews = appendWizardNewsEntries(feed, entries, { now });
+      c.updatedAt = now;
+      appended = entries.length;
+      persistCampaignState(state, campaignId);
+    });
+    return appended || 0;
+  },
 
   appendCampaignChronicle: (campaignId, entry) => {
     let chronicleCount = null;

@@ -39,12 +39,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     "count": 7
   },
   "operations": {
-    "count": 168,
+    "count": 169,
     "exemptCount": 72,
     "byKlass": {
       "canon": 5,
       "macro": 40,
-      "mechanical": 123
+      "mechanical": 124
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -133,6 +133,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"clearCampaignWizardNews","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"appendCampaignChronicle","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"markCampaignLettersRead","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
+      {"opType":"importTableEvents","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"setActiveCampaign","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"queueSettlementEvent","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"cancelQueuedEvent","klass":"mechanical","slice":"campaignSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
