@@ -12,6 +12,7 @@ import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, toneBg, pt, swatch } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
 import { HouseDeviceSeal } from '../primitives/HouseDeviceSeal.jsx';
+import { HouseCountersealSeal } from '../primitives/HouseCountersealSeal.jsx';
 import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 
@@ -301,10 +302,15 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             paddingTop: 12, borderTop: `0.5pt solid ${palette.border}`,
           }}
         >
-          {/* The house device beside the name in type — the export seal (the
-              settlement counterseal is web-only for now; see HouseDeviceSeal). */}
+          {/* The maker's device beside the subject's own seeded counterseal — the
+              charter close, now in the export too (V-27c structured-path refactor).
+              The counterseal seeds on the settlement name, the SAME seed the web
+              colophon uses, so a settlement's mark is identical across surfaces. */}
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ marginRight: 5 }}><HouseDeviceSeal size={14} /></View>
+            {settlement?.name && (
+              <View style={{ marginRight: 5 }}><HouseCountersealSeal seed={settlement.name} size={14} /></View>
+            )}
             <Text style={{ ...type.cover_meta, color: palette.faint }}>SETTLEMENTFORGE</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
