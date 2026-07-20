@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ DEEP COUPLINGS D-3 THE INTEL LANE COMPLETE (2026-07-19, claude/deep-couplings-intel
+@ 87f52ce1, 4 commits off composite 24f46337 — manager-verified).** Option A executed: the
+design premise was confirmed WRONG (warningSacrifice/intelSalePrice/intelSaleCredibilityDeltas
+are catalog-live orphans with zero callers; generosityKernel at exactly 800/800). D3-extract
+made headroom BEHAVIOR-PRESERVING (three settlementUpdates applicators → a lazy worldPulse
+leaf; kernel 800→719; generosity suite 117/117 BYTE-IDENTICAL incl. dormancy hash). D3-a the
+intel lane (new intelActs.js leaf + generosity deposit pass + statecraft consume pass; kernel
+785<800). D3-b dormancy golden (intelTradeDormancyGolden, 3 real config hashes) + lit
+walkthrough 7/7 (gift → warning obligation → statecraft injects belief conf 0.8→0.64 +
+intel_transfer beat; sale → reverse; dark → no keys). State (additive, no migration, both
+generosity-owned): intelTransfers[id]{seller,receiver,subject,mode,belief,fidelity,tick} +
+intelCooldown[pair]=lastWeek (26-week per-pair). §11 grep clean (statecraft writes only
+beliefMaps; generosity solely owns the intel ledgers) · closure delta 0 · flag intelTradeEnabled
+dark. ⚠ CORRECTLY DEFERRED (D-2 absent from THIS base — composes at fold): the self-policing
+credibility loop + per-NPC spokesperson attribution (degraded to settlement-level here);
+numeric-coin sale pricing; the DM verb. TWO DURABLE HAZARDS BANKED: (1) TIER-BLIND spatial
+scan — spatialDigest.invariants greps src/domain/spatial for `\btier\b`; a mover applicator
+writing an economic `tier` field belongs in worldPulse, NEVER spatial (caught in shards, fixed
+by relocation). (2) a `git add` including an already-moved path ABORTS the whole add — re-stage
+explicit, verify. DEEP COUPLINGS: D-0/D-1/D-2/D-3/D-7 DONE; D-4 the last pre-fold lane RUNNING;
+D-5/D-6 post-fold.
 **⬛⭐ FACTION-KEY DEFECT-CLASS CENSUS — THE SWEEP ALREADY EXISTS (2026-07-19,
 read-only).** The structural-prevention sweep I flagged for the loop is DONE on a sibling
 parallel branch: claude/blissful-bhaskara-c43dcd @ b561d0d4 ("the faction-key precedence
