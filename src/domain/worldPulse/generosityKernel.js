@@ -127,6 +127,10 @@ import {
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { applyFoodDeltasToUpdates, applyLegitimacyDeltasToUpdates, applyProsperityDeltasToUpdates } from '../spatial/generosityUpdates.js';
+import {
+  intelTradeActive, enumerateIntelOpportunities, planIntelAct, intelEligible, intelYearOf,
+  intelPairKey, INTEL_TRANSFERS_LEDGER, INTEL_COOLDOWN_LEDGER, INTEL_TRADE_TUNING,
+} from '../spatial/intelActs.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
@@ -987,6 +991,49 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
+  // ── THE INTEL LANE (deep-couplings D-3, dark behind intelTradeEnabled): a bounded gift/sell
+  //    of BELIEF. Generosity mints the favor-economy consideration (GIFT ⇒ a 'warning'
+  //    obligation of gratitude; SALE ⇒ a repaid/reverse 'intel_sale' debt) and DEPOSITS the
+  //    pending transfer; the statecraft mover (which runs earlier in the tick) INJECTS the
+  //    belief into the receiver on the NEXT tick — the deposit-and-consume choreography (law
+  //    5/14). Trigger-gated + per-pair cooldown + a TICK-INVARIANT yearly eligibility draw +
+  //    a per-tick cap ⇒ no whisper-war hum (law 4). Gated on intelTradeEnabled ∧ beliefsActive
+  //    ∧ infoStatecraftEnabled (so the consume actually runs), else a zero-fork no-op. ──
+  /** @type {Record<string, unknown>} */
+  const intelTransferWrites = {};
+  /** @type {Record<string, number>} */
+  const intelCooldownWrites = {};
+  const intelTransfersPrior = asObject(getSpatialLedger(worldState, INTEL_TRANSFERS_LEDGER));
+  const intelCooldownPrior = asObject(getSpatialLedger(worldState, INTEL_COOLDOWN_LEDGER));
+  const intelElapsedWeeks = num(/** @type {{ calendar?: { elapsedWeeks?: unknown } }} */ (worldState)?.calendar?.elapsedWeeks, 0);
+  if (intelTradeActive(worldState) && beliefsActive(worldState) && asObject(worldState?.simulationRules).infoStatecraftEnabled === true) {
+    const beliefMaps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
+    const intelYear = intelYearOf(intelElapsedWeeks);
+    const intelSeed = String(/** @type {{ rngSeed?: unknown }} */ (worldState)?.rngSeed ?? '');
+    const IT = INTEL_TRADE_TUNING;
+    const atWar = (/** @type {string} */ a, /** @type {string} */ b) =>
+      new Set([...warFrontsInto(graph, a), ...warFrontsFrom(graph, a)].map(String)).has(String(b));
+    let intelActs = 0;
+    for (const opp of enumerateIntelOpportunities({ beliefMaps, edges, graph, relStates, obligationLedger, atWar, tick })) {
+      if (intelActs >= IT.ACTS_PER_TICK_CAP) break;
+      const pk = intelPairKey(opp.sellerId, opp.receiverId);
+      if (pk in intelCooldownWrites) continue; // one intel act per pair per tick
+      if (intelElapsedWeeks - num(intelCooldownPrior[pk], -1e9) < IT.COOLDOWN_WEEKS) continue; // per-pair cooldown
+      if (!intelEligible(intelSeed, opp.sellerId, opp.receiverId, intelYear, IT.ELIGIBILITY_BASE_CHANCE)) continue; // rare
+      intelActs += 1;
+      const plan = planIntelAct(opp, { obligationLedger, tick });
+      for (const m of plan.mints) if (num(m.magnitude, 0) >= T.OBLIGATION_MIN) obligationMints.push(/** @type {ObligationRecord} */ (m));
+      for (const rp of plan.repayments) obligationRepayments.push(/** @type {{ from: string, to: string, kind: string, amount: number }} */ (rp));
+      const edge = pairToEdge.get(`${opp.sellerId}:${opp.receiverId}`);
+      if (opp.mode === 'gift' && edge && plan.giftMag >= T.OBLIGATION_MIN) {
+        const inc = reliefIncident({ kind: 'relief_given', tick, magnitude01: plan.giftMag, summary: 'intel gift' });
+        if (inc) incidentWrites.push({ key: relationshipKeyFromEdge(edge), incident: inc });
+      }
+      intelTransferWrites[`intel.${opp.sellerId}.${opp.receiverId}.${opp.subjectId}.${tick}`] = plan.transfer;
+      intelCooldownWrites[pk] = intelElapsedWeeks;
+    }
+  }
+
   // ── PERSIST. Nothing decided ⇒ byte-identical (no ledger touched). ──
   let changed = false;
 
@@ -1189,6 +1236,47 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       nextWorldState = Object.keys(sortedLend).length
         ? setSpatialLedger(nextWorldState, 'lendAppetite', sortedLend)
         : dropSpatialLedger(nextWorldState, 'lendAppetite');
+      changed = true;
+    }
+  }
+
+  // intelTransfers sub-ledger (D-3): mint this tick's deposits; PRUNE any from a PRIOR tick —
+  // the statecraft mover (which runs earlier in the tick) already injected them this tick, so
+  // a record whose depositTick is behind us has served its one-week courier turn (law 14).
+  // Drop-when-empty ⇒ byte-identical when the lane is dark.
+  if (Object.keys(intelTransferWrites).length || Object.keys(intelTransfersPrior).length) {
+    /** @type {Record<string, unknown>} */
+    const nextIntel = {};
+    for (const [k, v] of Object.entries(intelTransfersPrior)) {
+      if (num(asObject(v).depositTick, tick) < tick) continue; // consumed ⇒ prune
+      nextIntel[k] = v;
+    }
+    for (const [k, v] of Object.entries(intelTransferWrites)) nextIntel[k] = v;
+    const sortedIntel = sortedRecord(nextIntel);
+    if (JSON.stringify(sortedIntel) !== JSON.stringify(sortedRecord(intelTransfersPrior))) {
+      nextWorldState = Object.keys(sortedIntel).length
+        ? setSpatialLedger(nextWorldState, INTEL_TRANSFERS_LEDGER, sortedIntel)
+        : dropSpatialLedger(nextWorldState, INTEL_TRANSFERS_LEDGER);
+      changed = true;
+    }
+  }
+
+  // intelCooldown sub-ledger (D-3): upsert this tick's trades; stale-prune pairs past the
+  // cooldown horizon (the channel reopens). Keyed on the catch-up-stable elapsedWeeks clock.
+  // Drop-when-empty ⇒ byte-identical when the lane is dark.
+  if (Object.keys(intelCooldownWrites).length || Object.keys(intelCooldownPrior).length) {
+    /** @type {Record<string, unknown>} */
+    const nextCd = {};
+    for (const [k, v] of Object.entries(intelCooldownPrior)) {
+      if (intelElapsedWeeks - num(v, 0) > INTEL_TRADE_TUNING.COOLDOWN_WEEKS) continue; // reopened ⇒ prune
+      nextCd[k] = v;
+    }
+    for (const [k, v] of Object.entries(intelCooldownWrites)) nextCd[k] = v;
+    const sortedCd = sortedRecord(nextCd);
+    if (JSON.stringify(sortedCd) !== JSON.stringify(sortedRecord(intelCooldownPrior))) {
+      nextWorldState = Object.keys(sortedCd).length
+        ? setSpatialLedger(nextWorldState, INTEL_COOLDOWN_LEDGER, sortedCd)
+        : dropSpatialLedger(nextWorldState, INTEL_COOLDOWN_LEDGER);
       changed = true;
     }
   }

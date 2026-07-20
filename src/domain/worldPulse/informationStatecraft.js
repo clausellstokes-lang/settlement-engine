@@ -44,6 +44,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
+import { intelTradeActive, intelInjectionBelief, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { relationshipKeyFromEdge } from './relationshipState.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
@@ -1130,6 +1131,52 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
     changed = true;
   }
 
+  // (3.5) THE INTEL LANE CONSUME (deep-couplings D-3): the generosity mover DEPOSITED pending
+  //       belief-transfers on a prior tick (deposit-and-consume, law 5/14 — a shared/sold read
+  //       takes a week to reach the receiver's court); INJECT each into the receiver's belief
+  //       of the subject at the seller's fidelity (the LIE-plant twin) and chronicle the
+  //       landing. Generosity OWNS + prunes intelTransfers — this mover only READS it (no
+  //       cross-writer). Dark (intelTradeEnabled absent) ⇒ no-op ⇒ byte-identical.
+  /** @type {Array<Record<string, unknown>>} */
+  const intelNews = [];
+  if (intelTradeActive(state)) {
+    const nowTick = Math.max(0, Math.floor(finiteNumber(tick, 0)));
+    const pending = asObject(getSpatialLedger(state, INTEL_TRANSFERS_LEDGER));
+    /** @type {Map<string, Map<string, BeliefRecord>>} */
+    const intelOverrides = new Map();
+    for (const key of Object.keys(pending).sort(compareCodepoint)) {
+      const rec = asObject(pending[key]);
+      if (finiteNumber(rec.depositTick, nowTick) >= nowTick) continue; // deposited THIS tick ⇒ not yet couriered
+      const receiverId = String(rec.receiverId);
+      const subjectId = String(rec.subjectId);
+      const planted = /** @type {BeliefRecord|null} */ (intelInjectionBelief(rec, nowTick));
+      if (!planted) continue;
+      if (!intelOverrides.has(receiverId)) intelOverrides.set(receiverId, new Map());
+      /** @type {Map<string, BeliefRecord>} */ (intelOverrides.get(receiverId)).set(subjectId, planted);
+      const gift = rec.mode === 'gift';
+      intelNews.push({
+        kind: 'intel_transfer',
+        headline: gift
+          ? `Riders from ${nameFn(String(rec.sellerId))} bring ${nameFn(receiverId)} word of ${nameFn(subjectId)}`
+          : `${nameFn(receiverId)} buys ${nameFn(String(rec.sellerId))}'s read of ${nameFn(subjectId)}`,
+        summary: gift
+          ? `${nameFn(String(rec.sellerId))} shared what it knew of ${nameFn(subjectId)} — a gift of intelligence that binds like aid given in need.`
+          : `${nameFn(receiverId)} paid ${nameFn(String(rec.sellerId))} for its read of ${nameFn(subjectId)} — intelligence changing hands as a favor owed.`,
+        reasons: [`The report carries ${nameFn(String(rec.sellerId))}'s own certainty, no better — a courier's word is only as sure as its source.`],
+        settlementIds: [String(rec.sellerId), receiverId, subjectId],
+        significance: 'notable',
+        score: 60,
+        tick: nowTick,
+        tags: ['world_pulse', 'infowar', 'intel_trade', gift ? 'intel_gift' : 'intel_sale'],
+      });
+    }
+    if (intelOverrides.size) {
+      const curMaps = asObject(getSpatialLedger(state, 'beliefMaps'));
+      state = /** @type {Record<string, unknown>} */ (setSpatialLedger(state, 'beliefMaps', applyBeliefOverrides(curMaps, intelOverrides)));
+      changed = true;
+    }
+  }
+
   // (4) GRIEVANCE — SEE + LIE exposure grievances through the E1 incident machinery (feeds
   //     scoreGrievance/revanchism the same tick). No graph edge ⇒ a byte-safe skip.
   const edges = Array.isArray(graph?.edges) ? /** @type {Array<Record<string, unknown>>} */ (graph.edges) : [];
@@ -1150,7 +1197,7 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
   const cred = advanceCredibility({ worldState: state, tick, deltas });
   if (cred.changed) { state = /** @type {Record<string, unknown>} */ (cred.worldState); changed = true; }
 
-  return { worldState: state, changed, newsEntries: [...sightRes.newsEntries, ...lie.newsEntries] };
+  return { worldState: state, changed, newsEntries: [...sightRes.newsEntries, ...lie.newsEntries, ...intelNews] };
 }
 
 /* ───────────────────────────────────────────────────────────────────────────────
