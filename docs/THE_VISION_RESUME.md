@@ -66,12 +66,19 @@
     + dev-only parity drift-guard; shared-constants LEAF extraction = recorded
     follow-on. ⚠ coincident-value auto-merge lie caught (two "168"s hid the
     true 169) — hand-verify counts even when auto-merge agrees.
-  - HOT: ROUND 3 CYCLE 2 PHASE S — the COLD survey fleet over the assembled
-    wave @ c8c5baa8 (cold-then-connect law: lanes confined to the WORKTREE,
-    forbidden the ledger/resume/memory; the standard's bar text is their only
-    charge; 20 bar-lanes + story census + spell-break census + completeness
-    critic; schema-forced findings + per-bar grade). Phase R (reconcile with
-    memory) = the manager, after the fleet returns. V-N LANDED @ claude/vision-n
+  - HOT: ROUND 3 CYCLE 2 PHASE S — TWO cold fleets over the assembled wave @
+    c8c5baa8 (cold-then-connect law: lanes confined to the WORKTREE, forbidden
+    the ledger/resume/memory; probes to scratchpad only, tree READ-ONLY):
+    (1) the DIMENSION fleet — 20 bar-lanes + story census + spell-break census
+    + completeness critic (workflow cycle2-cold-survey); (2) the SUBSYSTEM
+    fleet — 26 adversarial deep-reviewers covering the ENTIRE tree by region,
+    engine kernels through enforcement machinery (workflow
+    cycle2-cold-subsystems; "review the reviewers" is its own region). ~49
+    cold reviewers total, schema-forced. THEN: Phase R (manager reconciles
+    findings against memory/ledger per the cold-then-connect law) → REFUTERS
+    (adversarial verify, 2-of-3 lenses per surviving finding, citation
+    spot-check) → fix waves (one commit per cluster) → checkpoint → the
+    termination law decides convergence. V-N LANDED @ claude/vision-n
     `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
     handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
     BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ
