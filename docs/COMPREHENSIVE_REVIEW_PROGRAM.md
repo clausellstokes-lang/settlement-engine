@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19) — POSITIVE-BOND MEMORY, SYMMETRIC + CONSEQUENTIAL
+(D-7 COMPLETION, in-scope under the freeze; the manager conceded his "grace note" framing
+was wrong — consequential bonds are structural, not decorative).** The relationship memory
+must remember loyalty/friendship AS SHARPLY as grudges, AND it must AFFECT things, flowing
+into everything: (1) SYMMETRIC BOND MEMORY — person↔person extends the ladder-grudge
+structure to carry positive bonds (same build/decay, no parallel graph; bonds form from
+cooperation/shared-cause/being-rescued-or-ransomed/being-supported); faction↔faction
+UN-GATES D-7c and makes it SYMMETRIC (resentment AND alliance/trust per pair), feeding +
+fed by the EXISTING coalition mechanics (peaceTerms coalition_betrayal/desertion, beliefMap
+governingCoalition — bonds bias alliance formation/durability; betrayal damages; standing
+together builds). (2) LINKED/SUPPORTIVE GOALS (owner verbatim) — a goal-DEPENDENCY: NPC A's
+support goal is tied to NPC B's primary; B fails ⇒ A's support goal fails too (cascading;
+bonds drive who supports whom — the positive mirror of tunnel-vision). (3) FLOW INTO
+EVERYTHING — bonds join a contest on your side (D-4); the D-5 third-party-ransom payer can
+be a FRIEND (bond → debt/gratitude vs rival → compromised); generosity biases + builds
+bonds. Constitution held (dark, dormancy, single-writer via applyRelationshipPatch, no-death
+— a broken bond/failed support is a standing cost never a fate). Relayed to the Deep
+Couplings architect as D-7's completion. THE FREEZE STILL HOLDS: this finishes an in-batch
+piece; anything BEYOND the symmetric memory weave → vNext.
 **⬛⭐⭐ OWNER RULING (2026-07-19, "i agree") — THE SCOPE FREEZE.** The Deep Couplings
 wave (D-0..D-7 as designed, incl. the post-fold D-5/D-6) is THE BATCH THAT CLOSES THE
 BUILD PHASE. From this ruling forward: NO new pre-loop feature scope. Every new idea —
