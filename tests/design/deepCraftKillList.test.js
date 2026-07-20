@@ -199,10 +199,15 @@ const CEILINGS = Object.freeze({
   // tintedCallouts 214→161 (−53). The tab surfaces (wave A) and the app-wide
   // residual sweep (wave A2) fell to the rule-framed plate idiom; ceilings
   // set to the MEASURED post-fold counts (tolerance-0, summed both lanes).
-  borderRadius: 100,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Quintuple fold (composite-r4): re-pinned to the MEASURED post-fold counts —
+  // the folded lanes' new feature surfaces (command palette, undo panel, world/seed
+  // page, honor-roll + roadmap pages, crash-forensics UI) landed +1 borderRadius and
+  // +3 tintedCallouts. Same "fold re-pins to measured" discipline as the wave-A note
+  // above; owner-vetoable if any of the new instances should instead be de-rounded.
+  borderRadius: 101,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 161,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 164,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

@@ -225,8 +225,8 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 ## The gate
 
 `npm run check` = `validate:data && validate:migration-head && validate:edge &&
-validate:map && validate:foundry-module && validate:mcp-server && typecheck &&
-typecheck:domain:strict && lint && test && build && verify:dist`.
+validate:map && validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
+typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
@@ -236,6 +236,9 @@ typecheck:domain:strict && lint && test && build && verify:dist`.
   the built `_shared` bundle wiring).
 - **validate:map** — the vendored Azgaar FMG map fork stays within its pinned
   contract.
+- **validate:tuning-bands** — the R-15 tuning-band manifest
+  (`src/domain/tuning/proposedSoakBands.js`) is well-formed and every proposed
+  band ships `PROPOSED` (soak-vetoable), so no malformed or pre-ratified band slips in.
 - **validate:foundry-module** — the standalone `foundry-module/` package (the
   world importer) is well-formed and safe (module.json valid, importer parses, no
   content-into-code) — an out-of-app-gates top-level dir like `public/map`.

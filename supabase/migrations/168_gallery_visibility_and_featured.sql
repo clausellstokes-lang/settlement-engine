@@ -62,7 +62,7 @@ create or replace function public.set_featured(
 returns void
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   caller_role text;
@@ -98,7 +98,7 @@ grant execute on function public.set_featured(uuid, boolean, integer) to authent
 
 create or replace function public.list_featured_dossiers()
 returns table (id uuid, public_slug text, name text, tier text, published_at timestamptz, view_count integer, featured_order integer)
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select id, public_slug, name, tier, published_at, view_count, featured_order
     from public.settlements
@@ -125,7 +125,7 @@ create or replace function public.set_featured_map(
   sort_order  integer default null
 )
 returns void
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare
   caller_role text;
@@ -161,7 +161,7 @@ grant execute on function public.set_featured_map(uuid, boolean, integer) to aut
 
 create or replace function public.list_featured_maps()
 returns table (id uuid, public_slug text, name text, share_kind text, published_at timestamptz, view_count integer, featured_order integer)
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select id, public_slug, name, share_kind, published_at, view_count, featured_order
     from public.saved_maps
@@ -210,7 +210,7 @@ create unique index if not exists saved_maps_unlisted_slug_unique
 -- Returns the unlisted slug (the party-share link tail).
 create or replace function public.share_settlement_unlisted(target_id uuid)
 returns text
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare new_slug text; owns boolean;
 begin
@@ -240,7 +240,7 @@ grant execute on function public.share_settlement_unlisted(uuid) to authenticate
 -- Rotate the unlisted slug (revoke: old link dies, new link issued).
 create or replace function public.rotate_settlement_unlisted_slug(target_id uuid)
 returns text
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare new_slug text; is_unlisted boolean;
 begin
@@ -269,7 +269,7 @@ grant execute on function public.rotate_settlement_unlisted_slug(uuid) to authen
 -- unshared settlement — publishing publicly stays a separate publish action).
 create or replace function public.revoke_settlement_unlisted(target_id uuid)
 returns void
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 begin
   if auth.uid() is null then raise exception 'not authenticated'; end if;
@@ -286,7 +286,7 @@ grant execute on function public.revoke_settlement_unlisted(uuid) to authenticat
 -- anon + authenticated (the link is the capability). Only visibility='unlisted'.
 create or replace function public.get_unlisted_dossier(p_slug text)
 returns jsonb
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select jsonb_build_object(
     'id', s.id,
@@ -317,7 +317,7 @@ grant execute on function public.get_unlisted_dossier(text) to authenticated, an
 -- gets an empty set. The RLS pair's owner half.
 create or replace function public.list_my_unlisted_dossiers()
 returns table (id uuid, unlisted_slug text, name text, tier text, published_at timestamptz)
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select id, unlisted_slug, name, tier, published_at
     from public.settlements
@@ -330,7 +330,7 @@ grant execute on function public.list_my_unlisted_dossiers() to authenticated;
 
 create or replace function public.share_map_unlisted(target_id uuid)
 returns text
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare new_slug text; owns boolean;
 begin
@@ -357,7 +357,7 @@ grant execute on function public.share_map_unlisted(uuid) to authenticated;
 
 create or replace function public.rotate_map_unlisted_slug(target_id uuid)
 returns text
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 declare new_slug text; is_unlisted boolean;
 begin
@@ -383,7 +383,7 @@ grant execute on function public.rotate_map_unlisted_slug(uuid) to authenticated
 
 create or replace function public.revoke_map_unlisted(target_id uuid)
 returns void
-language plpgsql security definer set search_path = public
+language plpgsql security definer set search_path = public, pg_temp
 as $$
 begin
   if auth.uid() is null then raise exception 'not authenticated'; end if;
@@ -400,7 +400,7 @@ grant execute on function public.revoke_map_unlisted(uuid) to authenticated;
 -- private map_data.
 create or replace function public.get_unlisted_map(p_slug text)
 returns jsonb
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select jsonb_build_object(
     'id', m.id,
@@ -423,7 +423,7 @@ grant execute on function public.get_unlisted_map(text) to authenticated, anon;
 
 create or replace function public.list_my_unlisted_maps()
 returns table (id uuid, unlisted_slug text, name text, share_kind text, published_at timestamptz)
-language sql stable security definer set search_path = public
+language sql stable security definer set search_path = public, pg_temp
 as $$
   select id, unlisted_slug, name, share_kind, published_at
     from public.saved_maps

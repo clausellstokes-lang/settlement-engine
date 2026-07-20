@@ -40,6 +40,7 @@
 
 import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { serializeWorldSnapshotPublic } from '../domain/display/worldSnapshotPublic.js';
+import { slugify } from '../kernel/slugify.js';
 
 /** The format discriminator a consumer keys on before trusting the shape. */
 export const WORLD_EXPORT_FORMAT = 'settlementforge-world';
@@ -71,7 +72,7 @@ function memberKey(member, dossier) {
   if (member && member.id != null && String(member.id)) return String(member.id);
   if (dossier && dossier.id != null && String(dossier.id)) return String(dossier.id);
   const name = String((member && member.name) || (dossier && dossier.name) || 'settlement');
-  return name.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase() || 'settlement';
+  return slugify(name, { sep: '_', fallback: 'settlement' });
 }
 
 /**
