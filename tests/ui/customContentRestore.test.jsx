@@ -73,9 +73,11 @@ describe('CustomContentManager — restored affordances (RESTORATION #12)', () =
 
   test('WB-j — a ?cat=traditions deep-link opens the traditions lane directly', async () => {
     state.customContentError = null;
-    window.history.replaceState({}, '', '/compendium?mode=custom&cat=traditions');
+    // In the composite, the URL is parsed ONCE by CompendiumPanel and threaded as
+    // the initialCat prop (the ?cat= URL→prop leg is covered by
+    // compendiumCatDeepLink.test.jsx); this pins the prop contract for traditions.
     const { CustomContentManager } = await import('../../src/components/compendium/CustomContent.jsx');
-    render(<CustomContentManager search="" />);
+    render(<CustomContentManager search="" initialCat="traditions" />);
     // The traditions bucket tab is the active (aria-pressed) one — the deep-link
     // resolved to the new lane rather than defaulting to Institutions.
     expect(screen.getByRole('button', { name: /Traditions/, pressed: true })).toBeTruthy();
