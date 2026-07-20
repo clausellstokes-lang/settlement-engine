@@ -998,6 +998,33 @@ export const enrichNpcCoherence = (settlement) => {
   return enrichNPCsWithStructure(rawMergedNpcs, settlement);
 };
 
+/**
+ * Re-link faction member records to the ENRICHED roster by id.
+ * [experience-faction-member-staleness] factionGrouping.buildFactions captures direct
+ * references to the PRE-enrichment npc objects; the coherence tail then mints NEW enriched
+ * npc objects for settlement.npcs (stress-woven goals + the secrets overlay + structural
+ * position), leaving every faction's embedded members pointing at the discarded generic
+ * copies — the ONE-SOURCE-PER-FACT violation. This remaps each member to the enriched npc
+ * of the same id (identity fallback to the original when no id match), so the canonical
+ * roster and the faction rosters carry the SAME npc records.
+ *
+ * Minimum honest repair only — NO id-reference / settlementMigration / normalizeSettlement
+ * persistence-shape rewrite (owner-gated). Same-seed generator output shifts (members now
+ * serialize the enriched shape): a DECLARED one-time move confined to the ALREADY-PARKED
+ * generatorGoldenMaster family (re-mints at THE ONE REGEN).
+ * @param {Array<{members?: Array<{id?: any}>}>|undefined} factions
+ * @param {Array<{id?: any}>} enrichedNpcs
+ * @returns {Array|undefined} the factions with members re-linked (input passed through when not an array)
+ */
+export const relinkFactionMembers = (factions, enrichedNpcs) => {
+  if (!Array.isArray(factions)) return factions;
+  const byId = new Map((Array.isArray(enrichedNpcs) ? enrichedNpcs : []).map((n) => [n?.id, n]));
+  return factions.map((f) => {
+    if (!f || !Array.isArray(f.members)) return f;
+    return { ...f, members: f.members.map((m) => (m && byId.has(m.id) ? byId.get(m.id) : m)) };
+  });
+};
+
 export const generateCoherence = settlement => {
   if (!settlement) return settlement;
 
@@ -1027,6 +1054,11 @@ export const generateCoherence = settlement => {
   return {
     ...settlement,
     npcs: mergedNpcs,
+    // Re-link faction rosters to the enriched npcs so members are not stale pre-enrichment
+    // copies (only when the settlement already carries faction groups). [faction-member-staleness]
+    ...(Array.isArray(settlement.factions)
+      ? { factions: relinkFactionMembers(settlement.factions, mergedNpcs) }
+      : {}),
     prominentRelationship,
     coherenceNotes,
     history: {

@@ -137,6 +137,25 @@ describe('PricingPage — the five-band drift contract', () => {
     expect(sql).toContain(`interval '${RETENTION_MONTHS} months'`);
   });
 
+  it('RETENTION_MONTHS matches the ACTIVE handle_premium_downgrade re-mint (024), via searchpath baseline', () => {
+    // [claims-parity-2] handle_premium_downgrade was RE-MINTED in migration 024 (line 341),
+    // so 024 — not 023 — is the version the DB actually runs (the searchpath-baseline
+    // resolves the active definition). Pinning ONLY 023 above would miss a reprice that
+    // updated config + 023 but left 024's re-mint (and its 024:232 campaign backfill) on
+    // the stale window. Resolve the active file via the searchpath baseline and pin it.
+    const baseline = JSON.parse(fs.readFileSync(
+      path.join(REPO, 'tests', 'lint', '.migration-searchpath-baseline.json'),
+      'utf8',
+    ));
+    const activeFile = baseline['public.handle_premium_downgrade'];
+    expect(activeFile, 'handle_premium_downgrade missing from the searchpath baseline').toBeTruthy();
+    const sql = fs.readFileSync(path.join(REPO, 'supabase', 'migrations', activeFile), 'utf8');
+    expect(
+      sql,
+      `the ACTIVE handle_premium_downgrade (${activeFile}) must derive its retention window from RETENTION_MONTHS`,
+    ).toContain(`interval '${RETENTION_MONTHS} months'`);
+  });
+
   it('copy-source guard: no hand-typed money or fact-counts in pricingPage strings', () => {
     const offenders = [];
     (function walk(node, trail) {

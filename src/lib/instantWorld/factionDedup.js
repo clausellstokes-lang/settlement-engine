@@ -25,6 +25,7 @@
 
 import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
+import { compareCodepoint } from '../../domain/deterministicSort.js';
 
 // ── AMENDMENT A — THE FACTION DE-CLUNK RULE ──────────────────────────────────
 // The old strategy stacked a collective-noun SUFFIX onto a reused base descriptor
@@ -196,7 +197,11 @@ function applyConflictRenames(settlement, renameMap) {
 export function dedupeWorldFactionNames(members) {
   if (!Array.isArray(members) || members.length === 0) return [];
   const ordered = [...members].sort(
-    (a, b) => (a?._slot ?? 0) - (b?._slot ?? 0) || String(a?.id ?? '').localeCompare(String(b?.id ?? '')),
+    // _slot is the primary order (composeInstantWorld stamps a unique _slot per site,
+    // so the tie-break is normally dead); the id tie-break uses codepoint order — never
+    // localeCompare — so a rename decision can never depend on host locale. Byte-identical
+    // on the live path (unique slots ⇒ tie-break never fires), removes the armed hazard.
+    (a, b) => (a?._slot ?? 0) - (b?._slot ?? 0) || compareCodepoint(a?.id, b?.id),
   );
   const used = new Set();
   const renames = [];

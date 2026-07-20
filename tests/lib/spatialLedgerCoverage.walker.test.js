@@ -37,18 +37,46 @@ function walk(dir, out = []) {
   return out;
 }
 
-// Match `setSpatialLedger(<firstArg>, '<key>'` where the key is a string literal.
-// [^,] spans newlines, so multi-line calls are covered; the accessor def uses a bare
-// identifier `key` (no quotes) and is excluded by file anyway.
-const WRITE_RE = /setSpatialLedger\s*\(\s*[^,]+,\s*['"]([A-Za-z][A-Za-z0-9_]*)['"]/g;
+// A ledger-key CONSTANT definition: `const NAME_LEDGER = 'value'` / `NAME_KEY` /
+// `NAME_LEDGER_KEY` (optionally exported). Some kernels key a setSpatialLedger write by
+// an imported constant (INTEL_TRANSFERS_LEDGER, EMBASSY_LEDGER_KEY, …) rather than an
+// inline literal; we resolve those to their string value so the scan is not blind to
+// them — the walker had gone blind to intelTransfers/intelCooldown/roadsEmbassies for
+// exactly this reason (lifecycle-1).
+const CONST_DEF_RE = /(?:export\s+)?const\s+([A-Z][A-Z0-9_]*(?:_LEDGER|_KEY|_LEDGER_KEY))\s*=\s*['"]([A-Za-z][A-Za-z0-9_]*)['"]/g;
+
+function ledgerKeyConstants() {
+  const map = new Map();
+  for (const abs of walk(DOMAIN)) {
+    const src = readFileSync(abs, 'utf8');
+    for (const m of src.matchAll(CONST_DEF_RE)) map.set(m[1], m[2]);
+  }
+  return map;
+}
+
+// Match `setSpatialLedger(<firstArg>, <key>` where <key> is EITHER a quoted string
+// literal OR an UPPER_SNAKE constant identifier. The first arg is [\s\S]+? (non-greedy)
+// rather than the old [^,]+ so a comma INSIDE the first arg — e.g. the JSDoc cast
+// `/** @type {Record<string,unknown>} */ (worldState)` at npcGrowthKernel — no longer
+// hides the call (the old regex stopped at that comma and never reached 'npcGrowth').
+// Non-greedy stops at the FIRST quoted/constant key, which is always a real call, so no
+// literal-keyed call is skipped; the exact-set test below is the safety net. (lifecycle-1)
+const WRITE_LITERAL_RE = /setSpatialLedger\s*\(\s*[\s\S]+?,\s*['"]([A-Za-z][A-Za-z0-9_]*)['"]/g;
+const WRITE_CONST_RE = /setSpatialLedger\s*\(\s*[\s\S]+?,\s*([A-Z][A-Za-z0-9_]*)\s*[,)]/g;
 
 function writtenLedgerKeys() {
+  const consts = ledgerKeyConstants();
   const keys = new Set();
   for (const abs of walk(DOMAIN)) {
     const rel = relative(ROOT, abs).replace(/\\/g, '/');
     if (rel === ACCESSOR_DEF) continue;
     const src = readFileSync(abs, 'utf8');
-    for (const m of src.matchAll(WRITE_RE)) keys.add(m[1]);
+    for (const m of src.matchAll(WRITE_LITERAL_RE)) keys.add(m[1]);
+    // A constant-keyed write: resolve the identifier to its defined string value.
+    for (const m of src.matchAll(WRITE_CONST_RE)) {
+      const resolved = consts.get(m[1]);
+      if (resolved) keys.add(resolved);
+    }
   }
   return [...keys].sort();
 }
@@ -59,6 +87,18 @@ describe('spatialUsage ledger-coverage walker (lib-infra-copy-1)', () => {
 
   test('the scan finds ledger writes (non-vacuous)', () => {
     expect(written.length).toBeGreaterThan(10);
+  });
+
+  // lifecycle-1 REVERT-PROOF: the hardened walker must SEE the four writes the old
+  // regex was blind to — three keyed by an exported constant (intelTransfers /
+  // intelCooldown / roadsEmbassies) and one hidden behind a comma-bearing JSDoc cast
+  // (npcGrowth). If the constant-resolution or comma-tolerant first-arg matching is
+  // reverted, this reds (and the exact-set test below reds in the other direction if
+  // their manifest classification is removed).
+  test('resolves constant-keyed + comma-first-arg ledger writes (intel/embassy/npcGrowth)', () => {
+    for (const k of ['intelTransfers', 'intelCooldown', 'roadsEmbassies', 'npcGrowth']) {
+      expect(written, `the walker must SEE the ${k} write (constant / comma-first-arg idiom)`).toContain(k);
+    }
   });
 
   test('every written spatialLedgers key is TRACKED or EXEMPT (and no phantom classifications)', () => {

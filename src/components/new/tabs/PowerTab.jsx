@@ -6,6 +6,7 @@ import { FACTION_COLORS } from '../tabConstants';
 import InstitutionLink from '../../primitives/InstitutionLink.jsx';
 import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
+import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
   const [expandedFaction, setExpandedFaction] = useState(null);
@@ -271,6 +272,60 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
       </Section>
 
 
+
+      {/* ── THE LADDER (intra-faction standings; hidden when the ladder is dark) ──
+          Wires the secrets-safe DM read-model (ladderRead / mirrorOf) into its declared
+          host. Renders ONLY rung name + normalized standing (0..1) — never nids, covert
+          marks, goals, or contest internals (the mirror already withholds those; the
+          §13 secrets seam). Absent mirror ⇒ hasLadder false ⇒ section hidden ⇒ a dark
+          world renders byte-identically. Lazy chunk (PowerTab is lazy). [game-feel-1] */}
+      {hasLadder(s) && (() => {
+        const rows = pf
+          .map((f, i) => {
+            const key = ladderFactionKeyOf(f);
+            return { f, i, rungs: ladderRungsOf(s, key), instab: ladderInstabilityOf(s, key) };
+          })
+          .filter((row) => row.rungs.length > 0);
+        if (!rows.length) return null;
+        return (
+          <Section title="The Ladder" collapsible defaultOpen>
+            <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,lineHeight:1.4}}>
+              Who is rising within each faction — standing on the internal ladder, top rung first.
+            </div>
+            <div style={{display:'flex',flexDirection:'column',gap:10}}>
+              {rows.map(({ f, i, rungs, instab }) => {
+                const c = FACTION_COLORS[i % FACTION_COLORS.length];
+                return (
+                  <div key={i}>
+                    <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4}}>
+                      <div style={{width:9,height:9,background:c,flexShrink:0}}/>
+                      <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{f.faction}</span>
+                      {instab > 0.05 && (
+                        <span title="Leadership churn — recent turnover at the top erodes effective power"
+                          style={{fontSize:FS.micro,fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
+                          unstable {Math.round(instab*100)}%
+                        </span>
+                      )}
+                    </div>
+                    <div style={{display:'flex',flexDirection:'column',gap:2}}>
+                      {rungs.map((rung, j) => (
+                        <div key={rung.npcId} style={{display:'flex',alignItems:'center',gap:8,padding:'1px 0 1px 15px'}}>
+                          <span style={{fontSize:FS.micro,color:MUTED,width:14,flexShrink:0,textAlign:'right'}}>{j+1}</span>
+                          <span style={{fontSize:FS.xs,fontWeight:j===0?700:600,color:swatch.inkMag2,flex:'0 0 42%',minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{rung.name}</span>
+                          <div style={{flex:1,height:6,background:`${c}20`,overflow:'hidden'}}>
+                            <div style={{width:`${Math.round(rung.standing*100)}%`,height:'100%',background:c}}/>
+                          </div>
+                          <span style={{fontSize:FS.micro,color:MUTED,width:28,flexShrink:0,textAlign:'right'}}>{Math.round(rung.standing*100)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Section>
+        );
+      })()}
 
       {/* ── CURRENT TENSIONS ─────────────────────────────────────────────── */}
       {tensions.length > 0 && (

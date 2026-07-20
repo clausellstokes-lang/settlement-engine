@@ -63,4 +63,22 @@ describe('errorReporter dedup + sampling cap', () => {
     reportError(errAt('boom'));
     expect(beacon).not.toHaveBeenCalled();
   });
+
+  // [security-3] The reported url must be origin+pathname only — never the query
+  // string or fragment. The founder-transfer cooling email's one-click abort link is
+  // /account?section=subscription&transfer_case=<id>&transfer_abort=<token>; a client
+  // crash on that page must NOT persist the single-use abort token into client_error_events.
+  it('strips the query string + fragment from the reported url (never leaks a token)', async () => {
+    const { beacon, reportError } = await loadWithEndpoint();
+    const TOKEN = 'abrt_SECRET_9f3c2a1b';
+    window.history.pushState({}, '', `/account?section=subscription&transfer_abort=${TOKEN}#frag`);
+    reportError(errAt('crash while aborting'));
+    expect(beacon).toHaveBeenCalledTimes(1);
+    const body = JSON.parse(beacon.mock.calls[0][1]);
+    expect(body.url).toBe(window.location.origin + '/account');
+    expect(body.url).not.toContain(TOKEN);
+    expect(body.url).not.toContain('transfer_abort');
+    expect(body.url).not.toContain('?');
+    expect(body.url).not.toContain('#');
+  });
 });

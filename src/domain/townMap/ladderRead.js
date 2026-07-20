@@ -189,6 +189,17 @@ function factionKeyOf(faction) {
 }
 
 /**
+ * PUBLIC: the ladder key for a powerStructure faction record (or a fixture). It is the
+ * EXACT key the mirror is keyed by, so a UI consumer that holds a faction object (the
+ * dossier Power tab) can look up its rungs via ladderRungsOf(settlement, key) without
+ * re-deriving the slug. Delegates to the internal keyer so the write/read/display sides
+ * can never drift. @param {{ id?: unknown, name?: unknown, faction?: unknown, label?: unknown }|null|undefined} faction @returns {string}
+ */
+export function ladderFactionKeyOf(faction) {
+  return factionKeyOf(faction);
+}
+
+/**
  * The §8 EFFECTIVE-POWER multiplier for a faction — leadership quality (the power modifier)
  * eroded by churn instability. Returns EXACTLY 1.0 when the ladder is dark/absent (no
  * mirror ⇒ null modifier + 0 instability), so a consumer that gates on `factor === 1`

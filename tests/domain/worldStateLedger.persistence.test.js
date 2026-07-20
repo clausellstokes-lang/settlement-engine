@@ -162,6 +162,32 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(ensureWorldState(once, CAMPAIGN)).toEqual(once);
   });
 
+  // INVARIANT 3c (lifecycle-2): factionPairStates is a CONDITIONAL ledger — the D-7c
+  // faction-pair trust/resentment ledger (memoryWeave). It must round-trip a populated
+  // ledger DEEP-cloned (so an apply→undo restore never aliases live state across ticks),
+  // and CLEAR to byte-neutral (absent) when empty — the politicsLedgers/narrativeTempo
+  // property. Before it was added to CONDITIONAL_LEDGER_KEYS an empty {} SURVIVED (it
+  // rode the shallow spread), breaking dormancy byte-identity.
+  test('factionPairStates round-trips deep-cloned and is ABSENT (byte-neutral) when empty', () => {
+    const pairs = { 'pair.a.b': { trust: 3, resentment: 1, sinceTick: 4 } };
+    const out = ensureWorldState({ tick: 5, factionPairStates: pairs }, CAMPAIGN);
+    expect(out.factionPairStates).toEqual(pairs);
+    // Deep-cloned: mutating the result never bleeds into the input ledger.
+    expect(out.factionPairStates).not.toBe(pairs);
+    out.factionPairStates['pair.a.b'].trust = 99;
+    expect(pairs['pair.a.b'].trust).toBe(3);
+
+    // DORMANCY / byte-neutral: no faction-pair state ⇒ no key; an empty {} normalizes
+    // to absent (parity with politicsLedgers), never carried as an empty object.
+    expect(ensureWorldState({}, CAMPAIGN)).not.toHaveProperty('factionPairStates');
+    expect(ensureWorldState({ tick: 5, factionPairStates: {} }, CAMPAIGN)).not.toHaveProperty('factionPairStates');
+
+    // Idempotent apply→undo round-trip: re-normalizing a normalized state is byte-exact
+    // (the wholesale preWorldState restore leans on this).
+    const once = ensureWorldState({ tick: 5, factionPairStates: pairs }, CAMPAIGN);
+    expect(ensureWorldState(once, CAMPAIGN)).toEqual(once);
+  });
+
   // INVARIANT 4: TOP-LEVEL non-aliasing for the KNOWN collections. cloneArray/
   // cloneObject are SHALLOW, so mutating the returned known collections (push/assign
   // at the top level) must NOT reach back into the input raw. Deep (nested-object)

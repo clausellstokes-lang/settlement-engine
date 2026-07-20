@@ -24,6 +24,21 @@ import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 import { TownMapDocument } from '../../src/pdf/TownMapDocument.jsx';
 import { renderTownMapOp } from '../../src/pdf/sections/TownMapPlate.jsx';
 
+// Deterministic element-tree color collector. react-pdf's renderToBuffer embeds a
+// non-reproducible timestamp, so a full-buffer Buffer.compare across two renders is
+// VACUOUS (always !== 0) and proves nothing about the lens plumbing (the IT-4 discipline).
+// We assert on the SYNCHRONOUS element tree TownMapDocument builds instead: walk it and
+// collect every fill/stroke/backgroundColor string.
+const collectColors = (node, out = new Set()) => {
+  if (Array.isArray(node)) { node.forEach((n) => collectColors(n, out)); return out; }
+  if (!node || typeof node !== 'object') return out;
+  const p = node.props || {};
+  for (const v of [p.fill, p.stroke, p.backgroundColor, p.style?.backgroundColor]) if (typeof v === 'string') out.add(v);
+  if (p.children != null) collectColors(p.children, out);
+  return out;
+};
+const colorsUnder = (settlement, style) => collectColors(TownMapDocument({ settlement, style }));
+
 describe('TownMapDocument — single-map PDF export', () => {
   test('renders a valid, non-trivial one-page PDF under a lens', async () => {
     const s = makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'pdf-map' });
@@ -32,11 +47,16 @@ describe('TownMapDocument — single-map PDF export', () => {
     expect(buf.slice(0, 5).toString('latin1')).toBe('%PDF-');
   });
 
-  test('honors the current lens: parchment vs VTT emit different bytes', async () => {
+  test('honors the current lens: parchment vs VTT build different plates (element tree, not bytes)', () => {
     const s = makeTownFixture({ tier: 'city', terrain: 'plains', walls: true, water: false, seed: 'pdf-lens' });
-    const parch = await renderToBuffer(React.createElement(TownMapDocument, { settlement: s, style: 'parchment' }));
-    const vtt = await renderToBuffer(React.createElement(TownMapDocument, { settlement: s, style: 'vtt' }));
-    expect(Buffer.compare(parch, vtt)).not.toBe(0);
+    // The VTT grid + palette change the plate, so the two lenses paint a different color
+    // set. Assert on the DETERMINISTIC element tree, never renderToBuffer bytes (a byte
+    // compare is vacuous — react-pdf embeds a non-reproducible timestamp, so it is always
+    // != 0 whether or not the lens plumbing actually works).
+    const parch = [...colorsUnder(s, 'parchment')].sort().join(',');
+    const vtt = [...colorsUnder(s, 'vtt')].sort().join(',');
+    expect(parch.length).toBeGreaterThan(0);
+    expect(parch).not.toBe(vtt);
   });
 
   test('a map-less settlement still emits a valid PDF, never a corrupt one', async () => {

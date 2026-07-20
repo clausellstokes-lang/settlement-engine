@@ -269,7 +269,8 @@ export function rulerLens(settlement) {
   //
   // The whole-roster fallback is kept for the shape where the seat has NO members at all —
   // hand-authored fixtures and sparse worlds — where an empty set would null `lead` and zero
-  // `rulerFlaw`, making the lens read blanker than before. @enforced-by the pin's two join cases.
+  // `rulerFlaw`, making the lens read blanker than before.
+  // @enforced-by tests/domain/religionLegitimacyFactionKey.test.js (the pin's two join cases).
   const allNpcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   const seatKey = ruler ? ladderFactionKey(ruler) : '';
   const seatMembers = ruler

@@ -19,7 +19,11 @@ import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // F6/[determinism-constitution-3] extended the ban to the remaining sim-path dirs.
-const TREES = ['src/generators', 'src/domain', 'src/workers', 'src/kernel'];
+// [determinism-pdf-locale-collation] added src/pdf (the same-seed paid PDF export) and
+// [determinism-instantworld-dedup-tiebreak] added src/lib/instantWorld (persisted
+// world-compose renames) — both land in same-seed/replayed output, so the collation ban
+// covers them too (the eslint block covers src/pdf; the source scan here covers both).
+const TREES = ['src/generators', 'src/domain', 'src/workers', 'src/kernel', 'src/pdf', 'src/lib/instantWorld'];
 
 // A .localeCompare( CALL (not the word in a comment/message). The bare-word
 // mentions in doc comments have no '(' after them, so this matches only calls.
@@ -36,7 +40,7 @@ function walkJs(dir, acc) {
 }
 
 describe('localeCompare determinism guard (F13)', () => {
-  test('src/generators/** + src/domain/** + src/workers/** + src/kernel/** contain ZERO localeCompare calls', () => {
+  test('the seeded/persisted trees (generators/domain/workers/kernel/pdf/instantWorld) contain ZERO localeCompare calls', () => {
     const offenders = [];
     for (const tree of TREES) {
       for (const file of walkJs(join(ROOT, tree), [])) {
@@ -57,18 +61,19 @@ describe('localeCompare determinism guard (F13)', () => {
     expect(CALL_RE.test(src)).toBe(false);
   });
 
-  test('eslint.config.js bans localeCompare in the generators, domain, workers, and kernel determinism blocks', () => {
+  test('eslint.config.js bans localeCompare in the generators, domain, workers, kernel, and pdf determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
     // The ban selector appears once per determinism block: generators + domain +
-    // workers + kernel(non-prng) + kernel/prng.js = 5.
+    // workers + kernel(non-prng) + kernel/prng.js + pdf = 6.
     const hits = cfg.match(/callee\.property\.name='localeCompare'/g) || [];
-    expect(hits.length).toBe(5);
+    expect(hits.length).toBe(6);
     // Every block is scoped to its tree/file.
     expect(cfg).toContain("files: ['src/generators/**/*.js']");
     expect(cfg).toContain("files: ['src/domain/**/*.js']");
     expect(cfg).toContain("files: ['src/workers/**/*.js']");
     expect(cfg).toContain("files: ['src/kernel/**/*.js']");
     expect(cfg).toContain("files: ['src/kernel/prng.js']");
+    expect(cfg).toContain("files: ['src/pdf/**/*.{js,jsx}']");
     // The ban message routes authors to the sanctioned comparator.
     expect(cfg).toMatch(/deterministicSort\.js/);
   });

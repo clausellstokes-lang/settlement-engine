@@ -15,7 +15,7 @@ import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence } from './narrativeGenerator.js';
+import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 
 // Side-effect: registers all pipeline steps
@@ -145,7 +145,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // freshly generated npcs; give it a settlement-shaped view with the new roster.
     const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
 
-    return { npcs: enrichedNpcs, relationships, factions, conflicts, _regenSeed: seed };
+    // Re-link the fresh faction rosters to the ENRICHED npcs (not the raw generateNPCs
+    // shape their members were built from) — the same one-source repair generateCoherence
+    // applies on the full-assembly path. [experience-faction-member-staleness]
+    return { npcs: enrichedNpcs, relationships, factions: relinkFactionMembers(factions, enrichedNpcs), conflicts, _regenSeed: seed };
   } finally {
     clearActiveRng(prevRng);
   }

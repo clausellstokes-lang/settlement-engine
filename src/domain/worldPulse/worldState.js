@@ -363,6 +363,15 @@ export const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   // settlementPolitics mover forms ≥1 bloc under its virtual flag; absent/empty ⇒
   // key omitted ⇒ byte-identical-dormant (the narrativeTempo precedent). APPEND-ONLY.
   'politicsLedgers',
+  // D-7c FACTION-PAIR LEDGER (worldState.factionPairStates, DESIGN_DEEP_COUPLINGS D-7c):
+  // { pairKey → { trust, resentment, ... } } — mutable across ticks (pair trust/resentment
+  // build + decay), additive, absent-when-dark, drop-when-empty: identical lifecycle to
+  // politicsLedgers/narrativeTempo. Missing from this list left it BOTH un-empty-stripped
+  // (an empty {} survived ensureWorldState, breaking dormancy byte-identity) and un-deep-
+  // cloned (undo/clone shared the ledger by reference). Rides the mutable
+  // deepCloneConditionalLedger branch. Materialized ONLY under the memoryWeave flag;
+  // absent/empty ⇒ key omitted ⇒ byte-identical-dormant. APPEND-ONLY. [lifecycle-2]
+  'factionPairStates',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

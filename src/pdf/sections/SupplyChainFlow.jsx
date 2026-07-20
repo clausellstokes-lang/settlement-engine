@@ -17,6 +17,7 @@ import { View, Text } from '@react-pdf/renderer';
 import { type, palette, pt } from '../theme.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
+import { compareCodepoint } from '../../domain/deterministicSort.js';
 import { safe } from '../lib/format.js';
 
 // chainId -> definition (for upstream import labels + fallback outputs).
@@ -237,7 +238,11 @@ export function SupplyChainFlow({ chains, instNames = [], primaryExports = [], t
       g.chains.filter((c) => c.status === 'impaired' || c.status === 'broken').length * 100 +
       g.chains.filter((c) => c.status === 'vulnerable').length * 10;
     const sorted = Object.values(groups).sort(
-      (a, b) => severity(b) - severity(a) || String(a.needLabel || '').localeCompare(String(b.needLabel || '')),
+      // Determinism: the paid PDF export is same-seed constitutional, so the name
+      // tie-break must NOT use localeCompare (host ICU tables order non-ASCII labels
+      // differently across machines) — codepoint order is the cross-device-stable total
+      // order. [determinism-pdf-locale-collation]
+      (a, b) => severity(b) - severity(a) || compareCodepoint(a.needLabel, b.needLabel),
     );
     return (
       <View>

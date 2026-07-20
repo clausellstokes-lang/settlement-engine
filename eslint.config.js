@@ -225,6 +225,25 @@ export default [
     },
   },
 
+  // ── [determinism-pdf-locale-collation] — the paid PDF export is same-seed ──────
+  // constitutional too, but src/pdf sat OUTSIDE the sim-tree determinism blocks, so a
+  // localeCompare tie-break (the SupplyChainFlow category-group ordering) could order
+  // non-ASCII labels differently across machines/locales. Ban localeCompare here as
+  // well (use compareCodepoint from domain/deterministicSort.js). Scope is COLLATION
+  // ONLY — the ledgered wall-clock allowance for Cover/Timeline USER timestamps
+  // (TEMPORAL_AUDIT.md) stays, so no Date/Intl ban here. @enforced-by this rule block.
+  {
+    files: ['src/pdf/**/*.{js,jsx}'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+      ],
+    },
+  },
+
   // ── A+ P1.2 — Determinism/purity guard widened to the domain kernel ──────────
   // The domain layer must be a pure function of its inputs (see P0.5, which removed
   // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by

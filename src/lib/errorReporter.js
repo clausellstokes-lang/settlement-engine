@@ -46,7 +46,11 @@ export function reportError(error, context = {}) {
     message: safe(() => String(e?.message ?? e)) || 'unknown error',
     stack: (safe(() => String(e?.stack || '')) || '').slice(0, 4000),
     componentStack: (safe(() => String(context.componentStack || '')) || '').slice(0, 4000),
-    url: safe(() => location.href) || '',
+    // Origin + pathname ONLY — never the query string or fragment. Those can carry
+    // single-use secrets (e.g. the founder-transfer one-click abort token in
+    // ?transfer_abort=<token>) that must not be persisted into the client_error_events
+    // sink. Honors the app's "no sensitive data in URL params" rule at the log boundary.
+    url: safe(() => location.origin + location.pathname) || '',
     ua: safe(() => navigator.userAgent) || '',
     ts: safe(() => new Date().toISOString()) || '',
     release: safe(() => import.meta.env.VITE_RELEASE) || '',
