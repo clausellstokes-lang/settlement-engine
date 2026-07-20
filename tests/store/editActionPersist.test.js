@@ -174,6 +174,30 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
     expect(reloadInto(persistedEntry(store)).name).toBe('Newhaven');  // survives blob reload
   });
 
+  // ── DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING (champion producer). The op stamps a
+  // contestBacking marker on the backed contestant's save npc; the ladder-contest pass folds it
+  // into ContestRec.backedBy on its next advance (deposit-and-consume, the roads-op precedent).
+  // The persistence trace: the marker is a plain save-npc field ⇒ it rides the SAME persist /
+  // snapshot / undo path as every edit (an advance→undo reverts the save, dropping the marker,
+  // AND reverts the ledger, dropping backedBy — both live in the one atomic undo snapshot). ──
+  test('champion-npc (D-4e) commits, stamps the contestBacking marker, persists, survives reload', async () => {
+    const cid = 'contest.save-1.ruling_authority.10';
+    store.getState().queueEdit('champion-npc', { npcIndex: 0, contestId: cid });
+    store.getState().commitPendingEdits();
+
+    expect(store.getState().settlement.npcs[0].contestBacking).toBe(cid);       // live marker
+    expect(persistedEntry(store).settlement.npcs[0].contestBacking).toBe(cid);  // entry synced
+    await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());            // cloud write requested
+    expect(reloadInto(persistedEntry(store)).npcs[0].contestBacking).toBe(cid); // survives reload
+    expect(persistedEntry(store).campaignState.eventLog).toEqual([]);           // a content edit, not an event
+  });
+
+  test('champion-npc is a byte-safe no-op without a contestId (the light dispatcher guard)', () => {
+    store.getState().queueEdit('champion-npc', { npcIndex: 0 });
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].contestBacking).toBeUndefined();
+  });
+
   test('canon town rename persists the `name` column AND appends a RENAME_SETTLEMENT flavor entry', async () => {
     // Route-through-renameSettlementImpl also gives the queue path the designed
     // canon behavior: a canon rename is recorded as a flavor timeline line. Mark

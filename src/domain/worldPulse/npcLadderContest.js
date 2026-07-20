@@ -161,6 +161,19 @@ function grudgeSevToward(st, otherNid) {
 }
 
 /**
+ * D-4e THE PLAYER SIDING marker (§8): the contest id the DM backed this contestant in, read off
+ * the contestant's SAVE npc record where the `champion-npc` store op stamps it (npc.contestBacking).
+ * This pass is the ONLY reader — the deposit-and-consume contract (law 5): the op writes a marker,
+ * the mover folds it into ContestRec.backedBy. Scoped to a specific contest id so a stale mark
+ * (left after that contest resolves) never re-fires on a later contest. Pure; '' when unmarked.
+ * @param {Record<string, unknown>|null|undefined} npc @returns {string}
+ */
+export function contestBackingMark(npc) {
+  const m = asObject(npc).contestBacking;
+  return typeof m === 'string' ? m : '';
+}
+
+/**
  * The cross-faction grievance lean between two contestants' factions via the D-7c faction-pair
  * ledger (memoryWeave only; same faction ⇒ 0 by construction — no faction-pair edge). Pure.
  * @param {Record<string, unknown>} worldState @param {string} fkeyFrom @param {string} fkeyTo
@@ -531,7 +544,17 @@ export function advanceContests(a) {
       if (weeks - c.resolvedWeek < T.WINDOW_SEASON_WEEKS) contests[id] = c; // linger for the window
       continue;
     }
-    contests[id] = { ...c, a: { ...c.a }, b: { ...c.b } };
+    const carried = { ...c, a: { ...c.a }, b: { ...c.b } };
+    // ── D-4e THE PLAYER SIDING consume (§8): a `champion-npc` edit stamped npc.contestBacking =
+    // <this contest id> on the backed contestant's save record; fold it into backedBy ONCE
+    // (idempotent — only while still null). Scoped to THIS id, so a stale mark left after a
+    // prior contest resolved never re-fires. The op never writes the ladder ledger; this is the
+    // contest-side consume of the marker (the roads whereabouts.partyRelease precedent). ──
+    if (carried.backedBy == null) {
+      if (contestBackingMark(metaOf(carried.a.nid).npc) === id) carried.backedBy = 'a';
+      else if (contestBackingMark(metaOf(carried.b.nid).npc) === id) carried.backedBy = 'b';
+    }
+    contests[id] = carried;
   }
 
   // ── AWARENESS (§8 D-4b) — discovery draws on live contests. ──
