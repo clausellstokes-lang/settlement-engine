@@ -1134,6 +1134,42 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ THE QUINTUPLE FOLD EXECUTED — the wave's first five lanes become one
+tree (2026-07-20, claude/composite-r4 @ 5d9218c6, base a9caa573; manager-verified:
+tip + clean tree + mig-168-contiguous CONFIRMED against git).** Merge order:
+vision-i abd4c91f → vision-c 32e4149d (RealmInspector import UNION; compendium
+REGENERATED to 168 ops) → vision-h e238fa89 → SEAMS d3058c72 (EmptyState adopted
+at WizardNewsPanel's two empty threads; WizardNewsPanel ×2 PLUS vision-c's
+CorpusFactoryPanel ×2 — an unbudgeted composition arrival — migrated to t();
+error-literal budget 53→51) → vision-e dba1b31d (ci/pkg validate-step UNIONS,
+ciCheckParity green; sitemap REGENERATED 41 URLs) → vision-d e4b54995 → FIXES
+5d9218c6 (six composition defects: errorReporter mock completed · two
+doc-freshness names · worldExport inline slug → kernel slugify BYTE-IDENTICAL,
+parity-pinned · killList re-pin · migration search-path pin). THE FOLD LAW HELD:
+closure measured after EVERY merge, never breached — final 1,036,399 ≤ 1,040,000,
+⚠⚠ MARGIN 3,601 (tightest ever; vision-d's forensics is EAGER +8,002 from
+store/index.js; shave candidate = a thinner forensics seam; the budget raise
+stays owner-gated — ANY further eager growth needs headroom review first).
+Two-shard suite: 14,902 passed / 5 expected-red FILES = the 4 parked goldens
+(base-proven at a9caa573) + advancePauseResume (load-flaky under full-suite
+contention; GREEN at base AND in isolation). TRIAGE RULE BANKED: re-run any
+full-suite red in ISOLATION before treating it as a defect — pglite + long-async
+tests are contention-flaky. VETOABLE FOLD CALLS (agent's, manager-RATIFIED, owner
+queue): (1) MIGRATION 168 pg_temp PIN — all 14 SECURITY DEFINER fns get
+`set search_path = public, pg_temp` (the owner's own migrationSearchPathPin
+ratchet mandates exactly this; behavior-preserving; migration UNSHIPPED, prod
+head 117; the 20 gallery-unlisted pglite tests green) — grazes security posture,
+hence queued though ratchet-codified; (2) deepCraftKillList ceilings re-pinned to
+measured (borderRadius 100→101, tintedCallouts 161→164 — the lanes' new feature
+UI) — raises anti-SaaS ceilings; alternative if vetoed: de-round the new
+instances; (3) campaignSlice seam DEFERRED — only ONE literal exists (brief said
+×2), it sits outside the errorCopy ratchet, and no store→t() precedent exists;
+the agent correctly refused to improvise architecture on an ambiguous
+instruction. NEXT: FOLD PASS 2 dispatched (V-F c15c2311 + V-J 3f3805b7 + V-K
+b0f1dbe6; seams: vercel rewrites /gallery+/world→meta-shell · letter+oracle slot
+mounts · worker transport swap; import→wall unification WAITS for V-G = a pass-3
+seam) · V-M dispatched at the folded tip (unblocked: the V-20 door, the V-B
+displays, and EmptyState are now all in its base).**
 **⬛⭐⭐ VISION LANE V-K SHIPPED — the court sits, the crowd finds its voice
 (2026-07-20, claude/vision-k @ b0f1dbe6, base 212758ad, ONE commit, FOLD-READY;
 manager-validated).** V-22 THE ASSIZE (assizeEnabled, dark): assizeKernel.js turns

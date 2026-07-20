@@ -22,18 +22,25 @@
     claude/vision-e `9d8d3411` (Foundry/MCP/seed-post + V-20 unlisted Model-B +
     featured; MIGRATION 168 written-not-deployed — fold renumbers if any sibling
     mints one; ledger 485d1398; V-J handoff: /gallery?slug=<42-hex>, unfurl seams).
-    THE QUINTUPLE FOLD IS RUNNING in minifold (i→c→h→e→d under the fold law:
-    closure per merge, breach halts; seams: EmptyState adoption + error-literal
-    strikes; mig-168 contiguity). FOLD PASS 2 QUEUE: V-J @ claude/vision-j
-    `3f3805b7` (297 prerenders; + vercel.json rewrites /gallery+/world→meta-shell;
-    /gallery stays OUT of the prerender — filesystem-before-rewrites law;
-    world-card og variant). Original five (+ V-D @ claude/vision-d `048e584d`
-    — V-8 pins/forensics/paranoia/museum; ledger 8017f2c3). ⚠⚠ THE FOLD LAW
-    TIGHTENED: V-D's forensics cost +8,003 B eager → headroom ≈7,263 B at its tip;
-    MEASURE CLOSURE AFTER EVERY MERGE; a breach HALTS the fold (shave candidate:
-    thinner forensics seam) — the budget raise stays owner-gated.
-  - HOT (4 workstreams): THE FOLD AGENT in `minifold` (V-B landed @ a9caa573 — its
-    tip is the fold base) · V-O (platform completions V-27a..f) in the `vision-e` wt
+    THE QUINTUPLE FOLD IS DONE @ composite-r4 `5d9218c6` (i·c·h·e·d + seams
+    d3058c72 + six fix-defects; mig head 168 contiguous; suite 14,902 passed /
+    5 expected-red files = 4 parked goldens + advancePauseResume load-flaky,
+    both base-proven; TRIAGE RULE: re-run full-suite reds in ISOLATION first).
+    ⚠⚠ CLOSURE 1,036,399 — MARGIN 3,601, the tightest ever (vision-d forensics
+    EAGER +8,002 via store/index.js; shave candidate = thinner forensics seam;
+    budget raise owner-gated; NO further eager growth without headroom review).
+    FOLD PASS 2 RUNNING in minifold: V-F `c15c2311` + V-J `3f3805b7` + V-K
+    `b0f1dbe6` under the fold law — halt on breach, no unilateral shaves (V-J
+    adds vercel.json rewrites /gallery+/world→meta-shell; /gallery stays OUT of
+    the prerender, filesystem-before-rewrites; V-F seams: letter+oracle slot
+    mounts + worker transport swap; import→wall unification WAITS for V-G — a
+    pass-3 seam). Vetoable pass-1 fold calls live in the ledger row (mig-168
+    pg_temp pin · killList re-pin · campaignSlice deferral) — OWNER QUEUE.
+  - HOT (5 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
+    follow-ons V-25a..f) in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6
+    — the FOLDED tip, so the V-20 unlisted door, the V-B displays, and EmptyState
+    are all visible to it (⚠ lane eager Δ MUST be ~0: fold margin is 3,601) ·
+    V-O (platform completions V-27a..f) in the `vision-e` wt
     on `claude/vision-o` (⚠ if V-27f mints a migration it mints 168-local off head
     167 and the REPORT flags it — V-E's 168 has fold precedence, the fold renumbers;
     per the established sibling-mint protocol) · V-L (engine textures) in the
@@ -44,10 +51,10 @@
     swap, import→wall unification when V-G lands) · V-J @ `3f3805b7` (pass-2 with
     rewrites) · V-K @ claude/vision-k `b0f1dbe6` (V-22 assize + V-23 commons, both
     dark; stigma rides the ladder; name-swap composition — pulseKernel FROZEN;
-    ledger row in; fold pass 3). Remaining queue: V-O RUNNING now (all items
-    base-independent); V-M → V-N dispatch AFTER the quintuple fold lands — they
-    extend V-B/V-C/V-E code that is mid-fold (V-25b needs V-20's unlisted door,
-    V-25c/d extend V-15/V-3, V-26a extends V-1). The `vision-c` wt idles.
+    ledger row in; IN fold pass 2 now). Remaining queue: V-N ONLY (V-26a multi-hop
+    interview — extends V-1, which is now FOLDED, so it dispatches into the next
+    freed worktree slot; V-26b handbook rewrite staged-for-taste). V-M and V-O
+    are RUNNING (see HOT).
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —
