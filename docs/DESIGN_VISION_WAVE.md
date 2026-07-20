@@ -162,8 +162,55 @@ basis (receipts culture). AI dressing optional via existing metered surfaces.
 V1 CORE: yes/no + scene prompt + complication draws, deterministic, receipt-noted.
 PINS: own rng stream (stream-isolation) · deterministic same-seed draws · reads-only.
 
+## V-15 THE AGED MAP — the town wears its history (owner: "add it in", 2026-07-20)
+WHY: crown 1's endgame — a map that BEARS its own past. A district that boomed
+visibly thickens; a calamity's scar lingers in the fabric; the urban fabric layer
+already knows more than the map shows. No competitor's map remembers anything.
+MECHANISM: an AGE OVERLAY derived from PERSISTED history (populationHistory deltas,
+calamityHistory, upswing/reconstruction events, urban fabric state) → per-district
+age marks: growth thickening (building-density tint/infill), calamity scars (a
+lingering mark with a half-life measured in decades), reconstruction patina; rendered
+as a town-map layer (the map-styles idiom, lazy) with a "show the years" toggle; the
+V-3 timelapse scrubber drives it backward. DERIVED-ONLY (never mutates stored
+layouts; the upgrade-restores law holds); deterministic from history.
+V1 CORE: growth thickening + calamity scars on the v1/v2 town map + the toggle.
+FOLLOW-ON: street-level wear, district renaming echoes. PINS: derivation
+deterministic golden · stored layouts untouched (byte-identity) · toggle-off ⇒
+exact current render · lazy (closure Δ0).
+
+## FURTHER RECOMMENDATIONS (recorded 2026-07-20 — NOT commissioned; each awaits an
+## owner ruling; listed so no idea is lost to a transcript)
+R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
+  first-class committable edits — "the party saved the granary" enters the world
+  through the EXISTING pendingEdits/COMMITTABLE_EDIT_KINDS machinery, with receipts,
+  and the simulation reacts. Closes the product's one missing loop: the world feeds
+  the table, but the table cannot yet feed the world. Retention + emotional lock-in.
+R-2 CURATED FIRST SEEDS: an editorial set of opening seeds whose first decade tells a
+  legible drama (a famine→mercy→friendship arc; a coup brewing) so a new user
+  WITNESSES depth in their first ten minutes. Conversion lives or dies here.
+R-3 THE TABLE COMPANION (mobile ruling): read-only phone mode = the Letter + dossier
+  + Oracle at the table; authoring stays desktop. Answers the queued mobile-scope
+  question with the audience's actual moment.
+R-4 THE WORLD BOOK: a bound-book PDF export (chronicle + dossiers + maps + receipts
+  appendix) — the keepsake artifact DMs gift and tables treasure; the PDF pipeline
+  exists, this is composition.
+R-5 A11Y-FIRST AS MARKET POSITION: the receipts/text-first architecture makes truly
+  screen-reader-navigable worldbuilding POSSIBLE — a commitment no competitor can
+  follow; finish the B+ → A+ arc and say it publicly.
+R-6 TEMPERAMENT PRESETS: curated flag/tuning bundles ("a quiet march", "an age of
+  storms") over the tempo governor instead of raw dials — preset-as-product.
+R-7 THE PORTABILITY COVENANT: full world export/import, local-first, no lock-in —
+  mostly true today; make it an explicit public promise (claims-parity enforced).
+R-8 THE ENGINE'S OWN CHRONICLE: the public changelog written in the chronicler's
+  voice — dev-log as product content, community-building at zero marginal cost.
+R-9 THE CONTRADICTION BOUNTY: invite users to report any receipt that fails to trace
+  — a world-coherence bug class turned into confidence marketing.
+R-10 SEED-DIVERSE GOLDENS: at THE ONE REGEN, widen golden families to a seed corpus
+  (not single configs) so distribution honesty is pinned across many worlds.
+
 ## SEQUENCING + LANES (after Round-3 cycle-1 waves F3/F4 close)
 LANE V-A engine-dark: V-6 biome · V-7 heirs (dormancy proofs).
+LANE V-B displays additionally carries V-15 THE AGED MAP (commissioned same day).
 LANE V-B displays: V-2 letter · V-3 timelapse · V-4 cause-walk · V-10 certificate.
 LANE V-C AI/authoring: V-1 interview · V-14 oracle · V-5 factory.
 LANE V-D platform: V-8 worker · V-9 de-eager.
