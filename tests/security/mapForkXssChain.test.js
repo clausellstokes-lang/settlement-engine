@@ -29,6 +29,8 @@ const read = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf8');
 const GENERAL_SRC = read('public/map/modules/ui/general.js');
 const LOAD_SRC = read('public/map/modules/io/load.js');
 const MAIN_SRC = read('public/map/main.js');
+const MARKERS_SRC = read('public/map/modules/ui/markers-editor.js');
+const NOTES_SRC = read('public/map/modules/ui/notes-editor.js');
 
 /**
  * Slice a self-contained block out of a fork source file and evaluate it in
@@ -147,5 +149,85 @@ describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', ()
   test('the CDN-importScripts service worker is deleted and never registered', () => {
     expect(existsSync(resolve(process.cwd(), 'public/map/sw.js'))).toBe(false);
     expect(MAIN_SRC).not.toContain('serviceWorker.register');
+  });
+});
+
+// ── Wave 1 — no untrusted map content reaches an injection sink ──────────────
+// These pin the second cluster of fork XSS sinks: the raw-SVG segment of an
+// uploaded .map (load.js), the untrusted marker icon (markers-editor.js), and
+// the runtime cross-origin TinyMCE load (notes-editor.js). Same slice-and-eval
+// idiom as the layers above for the functional guards.
+
+describe('wave-1 layer A — the uploaded .map SVG segment is scrubbed before injection', () => {
+  const sanitizeMapSvg = evalBlock(GENERAL_SRC, 'function sanitizeMapSvg', 'sanitizeMapSvg');
+
+  test('strips <script>, inline event handlers and javascript: hrefs from a crafted data[5]', () => {
+    const out = sanitizeMapSvg(
+      '<svg id="map" onload="window.pwned=1">' +
+        '<rect onclick="window.pwned=1" fill="red"/>' +
+        '<script>window.pwned=1</script>' +
+        '<a xlink:href="javascript:window.pwned=1">x</a>' +
+        '</svg>',
+    );
+    expect(out).not.toMatch(/onload/i);
+    expect(out).not.toMatch(/onclick/i);
+    expect(out).not.toMatch(/<script/i);
+    expect(out).not.toMatch(/javascript:/i);
+  });
+
+  test('preserves the legitimate map SVG (id, drawing attrs, data: image hrefs)', () => {
+    const out = sanitizeMapSvg(
+      '<svg id="map"><rect fill="red" stroke="#000"/><image href="data:image/png;base64,AAAA"/></svg>',
+    );
+    expect(out).toMatch(/id="map"/);
+    expect(out).toMatch(/fill="red"/);
+    expect(out).toContain('data:image/png;base64,AAAA');
+  });
+
+  test('load.js routes data[5] through the scrubber, never raw', () => {
+    expect(LOAD_SRC).toContain('insertAdjacentHTML("afterbegin", sanitizeMapSvg(data[5]))');
+    expect(LOAD_SRC).not.toContain('insertAdjacentHTML("afterbegin", data[5])');
+  });
+});
+
+describe('wave-1 layer B — untrusted marker icons cannot break out of innerHTML', () => {
+  const escapeHtml = evalBlock(GENERAL_SRC, 'function escapeHtml', 'escapeHtml');
+
+  test('a crafted icon can neither inject a tag nor break out of an attribute', () => {
+    // non-http branch: raw innerHTML — must not survive as a live tag
+    const injected = escapeHtml('<img src=x onerror="window.pwned=1">');
+    expect(injected).not.toMatch(/</);
+    expect(injected).not.toMatch(/>/);
+    // http branch: interpolated into `<img src="${icon}">` — the quote that would
+    // close the src attribute and start an onerror handler must be encoded
+    const breakout = escapeHtml('http://x" onerror="window.pwned=1');
+    expect(breakout).not.toMatch(/"/);
+    expect(breakout).toContain('&quot;');
+  });
+
+  test('legitimate icons (emoji, plain URL) pass through unchanged', () => {
+    expect(escapeHtml('\u{1F3F0}')).toBe('\u{1F3F0}');
+    expect(escapeHtml('https://example.com/icon.png')).toBe('https://example.com/icon.png');
+  });
+
+  test('markers-editor.js routes marker.icon and the chosen icon through escapeHtml', () => {
+    expect(MARKERS_SRC).toContain('escapeHtml(marker.icon)');
+    expect(MARKERS_SRC).toContain('escapeHtml(value)');
+    // no raw interpolation of the icon into the img src remains
+    expect(MARKERS_SRC).not.toContain('src="${marker.icon}"');
+    expect(MARKERS_SRC).not.toContain('src="${value}"');
+  });
+});
+
+describe('wave-1 layer C — TinyMCE loads from our vendored copy, not azgaar.github.io', () => {
+  test('notes-editor.js references no runtime azgaar.github.io resource', () => {
+    expect(NOTES_SRC).not.toContain('azgaar.github.io');
+  });
+
+  test('notes-editor.js loads the local pinned TinyMCE and sets a local base URL', () => {
+    expect(NOTES_SRC).toContain('libs/tinymce/tinymce.min.js');
+    expect(NOTES_SRC).toContain('_setBaseUrl(new URL("libs/tinymce"');
+    // the vendored, hash-pinned copy actually exists
+    expect(existsSync(resolve(process.cwd(), 'public/map/libs/tinymce/tinymce.min.js'))).toBe(true);
   });
 });

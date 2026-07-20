@@ -360,7 +360,12 @@ export const createCampaignSlice = (set, get) => {
         h: Number(backdrop.customBackdrop.h) || 0,
       };
     } else if (backdrop.fmgSnapshot) {
-      mapState.fmgSnapshot = backdrop.fmgSnapshot;
+      // SECURITY (finding F6): do NOT import another user's raw FMG snapshot.
+      // It is a serialized SVG blob the map iframe loads via
+      // document.body.insertAdjacentHTML on our own (Supabase-token-bearing)
+      // origin — a cross-user stored-XSS / account-takeover sink. Carry only the
+      // seed so the local map can regenerate comparable geography (identical to
+      // the importGalleryMapWithCampaign treatment below).
       mapState.seed = backdrop.seed ?? null;
     } else {
       throw new Error('That shared map has no backdrop to import.');

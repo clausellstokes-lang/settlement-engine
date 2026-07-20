@@ -332,7 +332,13 @@ async function parseLoadedData(data, mapVersion) {
 
     {
       svg.remove();
-      document.body.insertAdjacentHTML("afterbegin", data[5]);
+      // SECURITY (SettlementForge fork patch): data[5] is the raw SVG segment of
+      // an untrusted .map (manual upload or ?maplink= from a trusted host that
+      // may still serve a hostile file). Injecting it verbatim on our own
+      // token-bearing origin would run any smuggled on*=/<script>/javascript:
+      // payload. Scrub before injection; sanitizeMapSvg (modules/ui/general.js)
+      // preserves the legitimate map SVG.
+      document.body.insertAdjacentHTML("afterbegin", sanitizeMapSvg(data[5]));
     }
 
     {

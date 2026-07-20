@@ -65,7 +65,13 @@ function editNotes(id, name) {
 
   async function initEditor() {
     if (!window.tinymce) {
-      const url = "https://azgaar.github.io/Fantasy-Map-Generator/libs/tinymce/tinymce.min.js";
+      // SECURITY (SettlementForge fork patch): load TinyMCE from our OWN vendored,
+      // hash-pinned copy (public/map/libs/tinymce/, in VENDOR-MANIFEST.json), not
+      // from Azgaar's upstream GitHub Pages host at runtime — that was an unpinned
+      // cross-origin script on our token-bearing origin. The /map/ CSP script-src
+      // is 'self'-only, so the remote fetch was also blocked; the local path both
+      // closes the supply-chain gap and makes the editor actually load.
+      const url = new URL("libs/tinymce/tinymce.min.js", document.baseURI).href;
       try {
         await import(url);
       } catch (error) {
@@ -80,7 +86,7 @@ function editNotes(id, name) {
     }
 
     if (window.tinymce) {
-      window.tinymce._setBaseUrl("https://azgaar.github.io/Fantasy-Map-Generator/libs/tinymce");
+      window.tinymce._setBaseUrl(new URL("libs/tinymce", document.baseURI).href);
       tinymce.init({
         license_key: "gpl",
         selector: "#notesLegend",

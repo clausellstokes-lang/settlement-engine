@@ -26,6 +26,21 @@ Small modifications to FMG's behavior that have to live inline. These need to be
 
 When upgrading FMG, search the diff for the markers `settlementforge` / `SettlementForge` / `sf-` to find any new scattered patch sites that need to be carried forward.
 
+### 3. Security patches to FMG-native module files (must survive an upgrade)
+
+The fork ships to the **same origin as the auth + payments app**, so an XSS anywhere in it is an account-takeover-class bug. Upstream FMG treats a loaded `.map` as trusted; we do not (a `.map` can arrive via manual upload, a `?maplink=` from a trusted host that serves a hostile file, or — historically — a cross-user gallery import). These patches close the injection sinks and **must be reapplied** on every upgrade. Search the diff for `SettlementForge fork patch` to relocate them.
+
+| File (approx line) | What | Why |
+|---|---|---|
+| `modules/ui/general.js` (~122) | Added `escapeHtml()` + `sanitizeMapSvg()` globals, right after the existing `sanitizeNoteHtml()` | Shared, early-loaded (before `load.js` / the editors) security helpers. `escapeHtml` entity-encodes untrusted `.map` text before it hits `innerHTML`; `sanitizeMapSvg` scrubs `<script>` / inline `on*=` handlers / `javascript:` hrefs from the raw map SVG while preserving legitimate drawing markup (inert `text/html` parse — no script exec, no fetch). |
+| `modules/io/load.js` (~335) | `insertAdjacentHTML("afterbegin", data[5])` → `…, sanitizeMapSvg(data[5]))` | `data[5]` is the untrusted SVG segment of a loaded `.map`, injected verbatim onto our token-bearing origin — any smuggled event handler / `<script>` would run. |
+| `modules/ui/markers-editor.js` (~98, ~121) | Wrapped `marker.icon` / the chosen icon in `escapeHtml(...)` before the `innerHTML` assignment (both the raw-text and `<img src="…">` branches) | `marker.icon` comes from `pack.markers = JSON.parse(data[35])` (untrusted) — a crafted value could inject a tag or break out of the `img src` attribute. |
+| `modules/ui/notes-editor.js` (~68, ~83) | TinyMCE `import(url)` + `_setBaseUrl(...)` now resolve `libs/tinymce` via `new URL(..., document.baseURI)` instead of `https://azgaar.github.io/Fantasy-Map-Generator/libs/tinymce` | The upstream code fetches an unpinned cross-origin script at runtime onto our origin. TinyMCE is already vendored + hash-pinned under `libs/tinymce/` (in `VENDOR-MANIFEST.json`); loading it locally closes the supply-chain gap. (The `/map/` CSP `script-src` is `'self'`-only, so the remote fetch was also blocked — this additionally makes the notes editor load.) |
+
+Pinned by `tests/security/mapForkXssChain.test.js` (fork sinks — functional scrub/escape guards + structural routing checks) and `tests/security/mapSnapshotImport.contract.test.js` (the store-side gallery-import F6 guard for **both** `importGalleryMap` and `importGalleryMapWithCampaign`).
+
+**Known documented follow-on (not yet done):** the same untrusted-`.map`-text-into-`innerHTML` class still exists across ~30+ overview/editor panel sinks (burg/state/river/culture/regiment names interpolated into template-string `innerHTML` in `modules/ui/*-overview.js` and `modules/dynamic/editors/*.js`). These are lower-severity defense-in-depth (reachable only when a user manually loads a hostile `.map` **and** opens that specific panel, behind the now-closed gallery-import and raw-SVG sinks) and were deferred as a mechanical routing sweep through `escapeHtml` rather than forced into the XSS-chain wave. Deliberately deferred — documented, not a bug to re-find.
+
 ## Upgrade procedure
 
 1. **Get the new FMG release** locally (clone, checkout a tag, etc.)

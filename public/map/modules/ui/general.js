@@ -119,6 +119,38 @@ function sanitizeNoteHtml(html) {
   return doc.body.innerHTML;
 }
 
+// SECURITY (SettlementForge fork patch): shared HTML-text escaper for the
+// innerHTML sinks that interpolate untrusted loaded-.map strings (marker icons,
+// panel names). Emoji / icon-font glyphs pass through unchanged; the five HTML
+// metacharacters are entity-encoded so a value can neither introduce a tag nor
+// break out of an attribute. Defined here (loaded before load.js / the editors)
+// so every fork consumer can reach it as a global.
+function escapeHtml(value) {
+  const map = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"};
+  return String(value ?? "").replace(/[&<>"']/g, ch => map[ch]);
+}
+
+// SECURITY (SettlementForge fork patch): a saved .map's SVG segment (data[5] in
+// modules/io/load.js) is untrusted markup injected into our own token-bearing
+// origin via document.body.insertAdjacentHTML. Scrub every script vector —
+// <script> elements, inline on* event handlers, and javascript:/vbscript:
+// navigations — while preserving the map SVG (all drawing attributes, ids,
+// data: image hrefs). Parsed as text/html so parsing is inert: no script runs
+// and no resource is fetched, exactly like sanitizeNoteHtml above.
+function sanitizeMapSvg(markup) {
+  const doc = new DOMParser().parseFromString(String(markup ?? ""), "text/html");
+  for (const element of doc.body.querySelectorAll("script")) element.remove();
+  for (const element of doc.body.querySelectorAll("*")) {
+    for (const attribute of [...element.attributes]) {
+      const name = attribute.name.toLowerCase();
+      if (name.startsWith("on")) element.removeAttribute(attribute.name);
+      else if ((name === "href" || name === "xlink:href") && /^\s*(javascript|vbscript):/i.test(attribute.value))
+        element.removeAttribute(attribute.name);
+    }
+  }
+  return doc.body.innerHTML;
+}
+
 // show note box on hover (if any)
 function showNotes(e) {
   if (notesEditor?.offsetParent) return;
