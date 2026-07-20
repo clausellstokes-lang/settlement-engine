@@ -7,6 +7,21 @@
 > a cached truth — re-verify every tip with git.
 
 ## CURRENT STATE (updated 2026-07-20, parallel setup)
+- ⭐ OWNER ORDERS (2026-07-20, evening): (1) THE FMG FORK IS IN REVIEW SCOPE —
+  "review azgaard as well. treat it as part of this system. because while the
+  fork is there, we have modified the code." A THIRD cold fleet
+  (cycle2-cold-fmg-fork) runs 3 lenses: modification census (the runbook's
+  4-patch claim vs the REAL 16+ commit surface — under-count = upgrades
+  silently drop mods) · fork security surface (postMessage origin, .map
+  loading, snapshot→gallery stored-XSS re-verify) · bridge determinism +
+  integration (seed flow, contract, lifecycle desync, failure honesty).
+  fmg-fork-world-map.md memory AMENDED. House style-ratchets still don't
+  grade third-party idioms; correctness/security/determinism DO. (2) WATCHDOG
+  CADENCE: the 1-minute model check was CANCELLED by the owner — reverted to
+  the standard single ~15-MINUTE STALL SWEEP (task-output + git-state check).
+  Session model is FABLE 5 (owner sets it via `/model`; the manager cannot
+  switch it from a tool and no longer polls for it — agents spawned are still
+  staffed per the model split regardless).
 - Round 3 CYCLE 1: CLOSED @ composite-r4 `212758ad` (ledger row 9915dbe7). Suite
   14,563 / 4-parked-only. 15-item owner queue in scratchpad CYCLE1_CLOSING_DRAFT.md
   (restate at close-out).
@@ -150,6 +165,16 @@
   load-normalizer walker · async-totality lint · courier seam registry · determinism
   lint widened · fixture-realism law · tracked-flags reconciliation+walker · AI
   acceptance-metrics verification.
+  ⭐ THE FIX-TO-ZERO MANDATE (owner order 2026-07-20): after the refuter pass,
+  FIX EVERYTHING to ZERO — every CONFIRMED/PARTIAL finding across must-fix,
+  should-fix, AND polish, in gated fix waves (one commit per cluster). "Zero" is
+  bounded only by the four legitimate ceilings of the termination law: an item
+  closable ONLY by an owner-gated act (a default-flip that changes shipped-world
+  output ⇒ the ONE REGEN golden re-mint; a security-posture flip; a push/deploy/
+  migration) is BUILT to the edge of that gate and QUEUED with a recommendation,
+  not crossed; a ceiling item (soak/humans) gets its instrument built + a written
+  ceiling-proof. Everything else = fixed with a reproducing pin. REFUTED findings
+  are struck WITH the refuter's reason (documented, not silently dropped).
   ⭐ THE TERMINATION LAW (owner order 2026-07-20, verbatim intent: "don't stop
   until you either get every score to A+ or you, through physics, can't raise
   the score any higher"): the loop may NOT close while ANY of the twenty bars

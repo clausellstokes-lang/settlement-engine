@@ -1255,6 +1255,51 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐ ROUND 3 CYCLE 2 — PHASE S COMPLETE (cold), refuters running (2026-07-20).**
+The cold-then-connect survey of the assembled wave @ c8c5baa8 landed: ~49 cold
+reviewers across the DIMENSION fleet (20 bars + story + spell censuses + critic),
+the SUBSYSTEM fleet (26 regions), and the FMG fleets (seam 3 lenses + source 6
+regions). 6 lanes that died on the schema-retry cap were RE-RUN with raw-JSON
+output (the fix that worked for the bridge lens) and recovered. THE POOL: 277
+findings consolidated to scratchpad/CYCLE2_FINDINGS_POOL.json — 38 must-fix · 149
+should-fix · 90 polish. GRADES (first cold pass, un-refuted): A- ×8 (bars
+1,2,3,4,6,11,12,13) · B+ ×9 (5,7,9,10,14,15,18,19,20) · B ×3 (8,16,17); story
+census B, spell census B — NO bar at A+ on the cold pass, exactly as a maximal
+standard should read against a real tree. CONVERGENCE SIGNAL (the cold protocol
+working): the recorded-causality/provenance ledger shipping DARK in every preset
+was found INDEPENDENTLY by bars 2, 4, and 20 (the story capstone) — the
+single highest-leverage fix, because cause-walk + epistemic drama + arc-tracing
+all depend on it. Two FMG security must-fixes (ATO-class DOM-XSS via
+importGalleryMap; seed-never-captured) manager-CONFIRMED at code level before
+relay. NOW RUNNING: the REFUTER pass — one adversarial verifier per must-fix
+(reproduce-or-refute in real code) — before ANY fix wave. NEXT after refuters:
+Phase R (reconcile survivors vs memory per the cold-then-connect law) → fix waves
+(one commit per cluster, provenance-dark + FMG-XSS lead) → checkpoint → the
+termination law decides convergence. NOTHING pushed; prod head 117; the fix
+waves await the refuter verdicts + owner go-ahead.**
+**⬛⭐ THE FMG FORK ENTERS REVIEW SCOPE (owner order, 2026-07-20): "review
+azgaard as well. treat it as part of this system... MIT license makes it
+partially our code which we modified... make it perfect too."** The vendored
+Azgaar FMG fork (public/map/, ~30k LOC authored source + ~26k LOC minified
+libs, MODIFIED across 16+ commits since vendoring f386f48d) is no longer
+outside review — it SHIPS TO THE SAME ORIGIN as auth+payments, so its defects
+are ours. TWO cold fleets: (A) cycle2-cold-fmg-fork = OUR seam (modification
+census vs the stale 4-patch runbook claim · fork security surface · bridge
+determinism/integration); (B) cycle2-cold-fmg-source = the AZGAAR-AUTHORED code
+itself, 6 regions (generation core + orchestration · untrusted .map/JSON I/O
+[XSS/RCE on the payment origin] · editor UIs ×2 · dynamic/self-update/telemetry
+[auto-update RCE? SW disable verify? umami beacon?] · supply chain [jQuery 3.1.1
+CVE debt already ledgered in VENDOR-MANIFEST — verify reachable + recommend
+upgrade/drop]). MANAGER JUDGMENT (vetoable): "perfect" = no defect survives on
+LOAD-BEARING axes (correctness/security/determinism/dead-code/upgrade-safety);
+DELIBERATELY NOT house-standardizing untouched upstream (voice/design/ratchets)
+nor line-reviewing minified libs — because cosmetic divergence compounds the
+upstream-upgrade path (the runbook = diff-release + reapply-patches); the libs
+get the manifest/CVE/integrity track. Veto = go full house-standardization.
+fmg-fork-world-map.md memory amended. Also this session: THE SPLIT WATCHDOG —
+stall sweep every ~15 min, model-identity check every 1 min (owner: keep the
+session on Fable 5; the manager can only DETECT+FLAG a drift to Opus, `/model`
+is owner-only).**
 **⬛⭐ THE COLD-THEN-CONNECT LAW (owner order, 2026-07-20) — cycle-2 review
 methodology amended:** every cycle-2 (and confirming-cycle) survey lane runs
 COLD — no prior context in any discovery brief (charge + dimension + scope
