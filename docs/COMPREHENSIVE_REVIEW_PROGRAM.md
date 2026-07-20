@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ROUND 3 WAVE F3 SHIPPED — the missing couplings built dark (2026-07-20,
+composite-r4 @ 45dffd55; manager-validated).** 9 builds, 15 files, +422/−14, ALL
+dark: trade_route_cut cancels festivals + calamity/boom successScore terms (ride
+traditionsEnabled) · faction_captured + bloc_backed ladder challenge windows (NEW
+ladderPoliticalWindowsEnabled — the implementer's byte-safety divergence from the
+brief, ratified: factionCompetition is default-lit so a dedicated flag GUARANTEES
+identity) · institution control/suppression flips closure vulnerability ×0.5/×1.5
+(institutionPoliticalControlEnabled) · the coup counts coin (economicAdj ±0.125 into
+resolveCoupVerdict's pHold, economicCoupReadEnabled) · corruption sheds migrants
+(τ-factor, migrationCorruptionPushEnabled — direct stamped reads, NOT
+criminalStrength01Of, because supplyKernel already imports migrationKernel: an
+IMPORT-CYCLE dodge, ratified) · reconstruction skim amplifies onset hazard
+(upswingHazardReadEnabled; helper hosted in LAZY piety.js because corruption.js is
+EAGER and npcAgency sits at its 833 ceiling) · D-7e clause (i) COMPLETE: generosityEV
+gains the seatBond01 person-bond mercy term (W_SEAT_BOND 0.15, memoryWeave-gated) —
+friendship now BIASES mercy, closing the loop the gratitude lane opened. Gate:
+strict 0 · tsc full 0 · lint 0 · dormancy 47 · batches 590 + lit pins 45 ·
+baselines green · build ✓ · dist 162 · closure 1,024,585 Δ0 · anyCast unchanged.
+DEFERRED-CORRECT → OWNER QUEUE (manager verified §16 on the ledger tree): 10c
+obligations→festival-spirit + 10d corruption_exposed penalty are NOT among §16's six
+recorded seams — net-new couplings needing an owner ruling; RECOMMEND APPROVING BOTH
+(both-endpoint-converged in the matrix). Tuning magnitudes soak-vetoable. HAZARDS
+BANKED: supplyKernel↔migrationKernel import cycle · corruption.js EAGER vs piety.js
+lazy hosting · 5 new virtual flags (ladderPoliticalWindows, institutionPoliticalControl,
+economicCoupRead, migrationCorruptionPush, upswingHazardRead — all default-absent,
+ONE-REGEN membership owner-decided). WAVE F4 (final cycle-1 wave) DISPATCHED.**
 **⬛⭐ ROUND 3 WAVE F2 SHIPPED — the engine's open defects closed (2026-07-20,
 composite-r4 @ 6298d9a6; manager-validated).** 9 of 11 fixed, 21 files: THE COURIER
 LIVENESS P1 closed across all 4 seam ledgers (exact-age depositTick===tick-1 guards,
