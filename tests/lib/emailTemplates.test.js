@@ -32,6 +32,7 @@ const ALL_KEYS = [
   'founder_thank_you',
   'cap_warning',
   'retention_warning',
+  'ops_error_alert',
 ];
 
 describe('Tier 8.5 — TEMPLATES inventory', () => {

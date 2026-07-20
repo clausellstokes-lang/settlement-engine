@@ -52,6 +52,7 @@ const INTENDED_ANON = new Set([
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
   'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards
   'founder-transfer',      // run_due cron (x-cron-secret, no JWT); user actions self-auth in-handler
+  'health',                // uptime monitors / the ops probe (no JWT); reads no user data
 ]);
 // Everything else must be JWT-gated (platform default), notably:
 const INTENDED_JWT = [

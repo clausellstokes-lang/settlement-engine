@@ -307,6 +307,18 @@ export default function PurchaseModal({ onClose }) {
           <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
             Payments processed securely by Stripe. Credits never expire.
           </div>
+
+          {/* Point-of-purchase legal links (additive only — no paid-surface
+              behavior change). New tab so the checkout flow is never disrupted.
+              The refund/cancellation policy lives in Terms §Refunds; /refunds
+              resolves to it. */}
+          <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5, marginTop: SP.xs }}>
+            <a href="/terms" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.terms')}</a>
+            {' · '}
+            <a href="/refunds" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.refunds')}</a>
+            {' · '}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" style={{ color: MUTED, textDecoration: 'underline' }}>{t('footer.privacy')}</a>
+          </div>
         </div>
       </div>
     </div>

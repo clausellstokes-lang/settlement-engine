@@ -191,7 +191,7 @@ shows all visible items.
   atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
   consent + velocity guards, and gallery view-dedup — up to the current head. RLS
   is the security spine.
-- **functions/** (25 Deno edge functions) (Deno edge):
+- **functions/** (26 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.

@@ -25,7 +25,10 @@
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
-const OG_IMAGE_DEFAULT = `${ORIGIN}/og-default.png`;
+// House-sealed share card, matching index.html + src/lib/seo.js (was the
+// pre-seal og-default.png). Used as the fallback when a gallery slug has no
+// dynamic per-settlement card.
+const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
 
 /** river_valley → River Valley (matches seoDossier.humanize). */
 function humanize(v) {

@@ -47,7 +47,7 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **25** edge functions under `supabase/functions/` (excluding
+There are **26** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
@@ -114,6 +114,11 @@ flip intent):
   gallery projection behind the seed-secret firewall (name, tier,
   terrain, coarse public stats); its only write path (view counts) is
   deliberately not touched, so scraping it leaks nothing private.
+- `health` — anonymous liveness + optional deep DB probe for uptime
+  monitoring (monitors carry no JWT). Deliberately NOT bot-guarded
+  (uptime services ARE automated clients); reads no user data and takes
+  no write path — the deep probe is a bounded head-count on the ops
+  table only.
 
 ### Database (Postgres + RLS)
 

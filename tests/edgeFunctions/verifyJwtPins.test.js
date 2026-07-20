@@ -57,6 +57,10 @@ const SELF_AUTH_FALSE = new Set([
   // user action does its own getUser()/session-gate/velocity check in-handler. The
   // platform gate would 401 the hourly due-runner sweep. See founder-transfer/index.ts.
   'founder-transfer',
+  // health — uptime liveness + optional deep DB probe (Wave E). The callers are
+  // uptime monitors / the ops probe with no JWT; it reads no user data and takes
+  // no write path. See supabase/functions/health/index.ts.
+  'health',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

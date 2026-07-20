@@ -26,6 +26,14 @@ function safe(fn) {
   }
 }
 
+// Dedup + per-session cap on the NETWORK send only (never the local console): a
+// render-loop crash must not fire hundreds of identical beacons. In-memory, no
+// PII. The signature (kind|message|first-stack-frame) is the dedup key directly —
+// send each distinct signature at most once, never more than MAX_REPORTS total.
+const MAX_REPORTS = 25;
+const seen = new Set();
+let sentCount = 0;
+
 /**
  * Report a client error. Always logs; POSTs only when an endpoint is set.
  * @param {unknown} error
@@ -48,6 +56,12 @@ export function reportError(error, context = {}) {
   console.error('[error]', payload.kind, payload.message);
 
   if (!ENDPOINT) return;
+
+  // Dedup + cap (see MAX_REPORTS above). payload fields are already strings.
+  const sig = payload.kind + '|' + payload.message + '|' + (payload.stack.split('\n')[1] || '');
+  if (seen.has(sig) || sentCount >= MAX_REPORTS) return;
+  seen.add(sig);
+  sentCount += 1;
 
   const body = safe(() => JSON.stringify(payload));
   if (!body) return;

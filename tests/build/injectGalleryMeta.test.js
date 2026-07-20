@@ -28,11 +28,11 @@ const SAMPLE_HTML = `<!doctype html>
     <meta property="og:description" content="Default og description." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://settlementforge.com/" />
-    <meta property="og:image" content="https://settlementforge.com/og-default.png" />
+    <meta property="og:image" content="https://settlementforge.com/og-craft.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SettlementForge — default" />
     <meta name="twitter:description" content="Default og description." />
-    <meta name="twitter:image" content="https://settlementforge.com/og-default.png" />
+    <meta name="twitter:image" content="https://settlementforge.com/og-craft.png" />
   </head>
   <body><div id="root"></div></body>
 </html>`;
@@ -65,8 +65,8 @@ describe('buildGalleryMeta', () => {
   });
 
   test('card image falls back to the static default without a supabase origin', () => {
-    expect(galleryCardImage('slug', '')).toBe(`${ORIGIN}/og-default.png`);
-    expect(galleryCardImage('', SUPA)).toBe(`${ORIGIN}/og-default.png`);
+    expect(galleryCardImage('slug', '')).toBe(`${ORIGIN}/og-craft.png`);
+    expect(galleryCardImage('', SUPA)).toBe(`${ORIGIN}/og-craft.png`);
   });
 
   test('slug is URL-encoded in the canonical', () => {
@@ -104,7 +104,7 @@ describe('injectGalleryMeta', () => {
 
   test('leaves the default og:image untouched once overwritten (no stale default remains)', () => {
     const out = injectGalleryMeta(SAMPLE_HTML, meta);
-    expect(out).not.toContain('<meta property="og:image" content="https://settlementforge.com/og-default.png" />');
+    expect(out).not.toContain('<meta property="og:image" content="https://settlementforge.com/og-craft.png" />');
     // og:site_name (not targeted) is preserved.
     expect(out).toContain('<meta property="og:site_name" content="SettlementForge" />');
   });
