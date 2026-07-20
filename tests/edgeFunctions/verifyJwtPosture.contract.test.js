@@ -47,6 +47,7 @@ const INTENDED_ANON = new Set([
   'log-client-error',      // anon crash sink; sendBeacon cannot set a JWT header
   'analytics-export',      // cron pg_net; x-export-secret shared secret, not a JWT
   'pricing-resync-cron',   // cron pg_net; x-cron-secret shared secret, not a JWT
+  'retention-warning-cron',// cron pg_net; x-cron-secret shared secret, not a JWT (WBF-d, migration 163)
   'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
   'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards

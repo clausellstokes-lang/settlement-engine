@@ -144,6 +144,29 @@ export default function AboutManifesto() {
           plot point — players feel it. The town seems to have existed before they arrived, and
           like it will keep existing after they leave.
         </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          When a settlement doesn&rsquo;t have what a player is looking for, that isn&rsquo;t a hole in
+          your prep — it is the world being honest. The frontier town has no one to lift a curse
+          because no institution here provides one. Now the question writes itself: who would know
+          someone who does, how far would the party have to travel, what would it cost to bring that
+          help here? The constraint generates the question, and the question generates the session. A
+          world that always has exactly what players need isn&rsquo;t a world; it is a service.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          And no settlement here is an island. Each one is a node in your world, tied to everything
+          around it by trade, politics, and old grievances. Its exports point outward to whoever buys
+          them; its imports point inward to wherever the need is met; its factions reach to the
+          regional powers you already run. The town becomes real when it has relationships with the
+          rest of your world, and the engine hands you those threads to pull rather than a finished
+          picture to drop in.
+        </p>
+        <p style={{ ...PROSE, margin: '0 0 14px' }}>
+          Sometimes what comes out is not what you pictured. You imagined a cathedral town; the
+          constraints gave you a garrison and a black market. That is not the tool arguing with you —
+          it is a variation worth sitting with. Why didn&rsquo;t the church reach this far, and what
+          fills the space where it didn&rsquo;t? In worldbuilding the unexpected result usually deepens
+          the setting more than the expected one would have, precisely because you had to earn it.
+        </p>
       </Band>
 
       {/* ── BAND 3 · THE COVENANT ──────────────────────────────────────────── */}
@@ -215,6 +238,38 @@ export default function AboutManifesto() {
           is sequential: a tannery needs hides, a leatherworker needs tanned leather, an armorer needs
           both leather and metal. Break one link and the downstream chain fails, which is why a
           prosperous settlement can be one burned mill away from decline.
+        </Mechanism>
+        <Mechanism title="Magic can stand in for a broken supply chain">
+          A high-magic town doesn&rsquo;t only gain arcane institutions; magic also buffers against
+          material shortfall. Arcane supply can substitute for missing infrastructure, so a town with
+          no farmland and no road access can still hold together on magic alone. Lower the magic and
+          that same town tips into a viability warning. The dossier&rsquo;s viability view shows which
+          supply chains are real and which are being propped up by magic or trade.
+        </Mechanism>
+        <Mechanism title="Prosperity is an output, not a dial">
+          You don&rsquo;t set how prosperous a town is. It falls out of export volume and value, the
+          number of income sources, trade access, how complete the supply chains are, the safety
+          profile, and the stresses in play. A comfortable-looking settlement can rest on a fragile
+          base, and the viability view names exactly which of those factors are holding the number up
+          and which are absent — so the decline is one you can see coming.
+        </Mechanism>
+        <Mechanism title="Stresses compound into new conditions">
+          Two stresses together make a third, named thing. Famine in a politically fractured town
+          isn&rsquo;t only scarcity — it is food distribution contested by factions, which changes who
+          is hoarding, which bloc controls the grain, and where the danger sits. The dossier names the
+          compound condition, not just its parts, so you always know what you are actually running.
+        </Mechanism>
+        <Mechanism title="Who your neighbour is changes the economy">
+          A settlement is shaped by its neighbour before its own institutions are even chosen. A trade
+          partner skews production toward complementary exports; a rival suppresses them; a patron
+          leaves the town partly dependent on what the patron demands. Two identical configurations
+          become two different economies depending on who sits next door.
+        </Mechanism>
+        <Mechanism title="Legitimacy bends the power structure">
+          Raw faction power comes from institutions and priorities, but effective power bends to how
+          legitimate the governing authority is. When governance falters, the ruling faction weakens
+          and criminal power grows to fill the gap. So every economic and military swing quietly
+          reshapes who really holds the town — through legitimacy, never by decree.
         </Mechanism>
         <Mechanism title="Beneath it all: the causal substrate">
           Once a campaign advances, {CD.causal.variableCount} live causal variables sit under every

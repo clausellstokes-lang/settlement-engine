@@ -21,6 +21,8 @@
 
 import { useMemo } from 'react';
 import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '../../../domain/traditions/genesis.js';
+import { mergeCustomFoundingTraditions } from '../../../domain/traditions/customFounding.js';
+import { useStore } from '../../../store/index.js';
 import {
   BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
@@ -100,9 +102,15 @@ export default function TraditionsTab({ settlement }) {
   const mirror = Array.isArray(settlement?.traditions) ? settlement.traditions : null;
   const preview = !mirror || mirror.length === 0;
 
+  // WB-j genesis consumption — a DM's authored custom traditions merge into the
+  // PREVIEW founding set (empty ⇒ the pure leaf's bytes, untouched). Never merged
+  // into the engine mirror (the lit mirror is the tick mover's authored truth).
+  const customTraditions = useStore(s => s.customContent?.traditions);
   const traditions = useMemo(
-    () => (preview ? deriveFoundingTraditions(settlement) : mirror),
-    [preview, mirror, settlement],
+    () => (preview
+      ? mergeCustomFoundingTraditions(deriveFoundingTraditions(settlement), customTraditions)
+      : mirror),
+    [preview, mirror, settlement, customTraditions],
   );
 
   const name = settlement?.name || settlement?.identity?.name || 'this settlement';

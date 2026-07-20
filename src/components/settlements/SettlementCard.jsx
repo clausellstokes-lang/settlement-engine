@@ -1,6 +1,11 @@
 import { useMemo, useState, useRef, useEffect } from 'react';
-import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2} from 'lucide-react';
+import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2, FileText} from 'lucide-react';
 
+// AUDIT-2.2 — the paid-rights floor: a lapsed plan can always extract what it
+// made. A retention-frozen card keeps a read-only PDF export. Lazy so the jsPDF
+// chunk stays out of the Library first paint (mirrors CampaignFolder's export).
+const generateSettlementPDF = (...args) =>
+  import('../../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
 import { EFFECT_CATEGORIES, fmtMod } from '../../lib/relationshipGraph.js';
 import { GOLD, GOLD_BG, GOLD_TXT, INK, MUTED, BODY, SECOND, BORDER, CARD, FS, SP, swatch, sans, serif_ } from '../theme.js';
 import { isPlanInactiveSave, isSaveActive } from '../../lib/saveAccess.js';
@@ -45,6 +50,26 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const planInactive = isPlanInactiveSave(s);
   const isCanon = canonPhaseOf(s) === 'canon';
   const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
+
+  // AUDIT-2.2 — read-only PDF extraction for a retention-frozen save. Exports the
+  // STORED settlement (never the live store, no worldState, no faith chapter, no
+  // reactivation), so it can never resume the simulation — the lapsed-plan owner
+  // gets out exactly what they made. Busy/error tracked so the click is never
+  // silent (mirrors CampaignFolder.handleExportPdf).
+  const [exportBusy, setExportBusy] = useState(false);
+  const [exportError, setExportError] = useState(null);
+  const handleExportFrozen = async () => {
+    if (exportBusy) return;
+    setExportError(null);
+    setExportBusy(true);
+    try {
+      await generateSettlementPDF(s.settlement, { phase: canonPhaseOf(s) });
+    } catch (err) {
+      setExportError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
+    } finally {
+      setExportBusy(false);
+    }
+  };
 
   // Lifecycle spine stage — pure derivation from fields/selectors already in
   // scope, no new store fields (mirrors OutputContainer's derivation). A library
@@ -193,6 +218,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
               </div>
             )}
+            {/* AUDIT-2.2 — a failed read-only export is surfaced here (not silent). */}
+            {exportError && (
+              <div role="alert" style={{ fontSize:FS.xs, color:swatch.danger, fontFamily:sans }}>{exportError}</div>
+            )}
             {/* Blocked-reactivation recovery — when the slots are full, the reason +
                 the path forward render as a VISIBLE line (not the hover-only title),
                 scoped to the blocked state so reactivatable/active rows stay clean. */}
@@ -298,17 +327,33 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         <td data-card-actions style={{ ...LEDGER_CELL, textAlign:'right', whiteSpace:'nowrap' }}>
           <div style={{ display:'inline-flex', gap:SP.xs, alignItems:'center' }}>
           {!active && planInactive ? (
-            <Button
-              variant="gold"
-              size="sm"
-              onClick={() => onReactivate?.(s)}
-              disabled={!canReactivate || reactivatingId === s.id}
-              busy={reactivatingId === s.id}
-              icon={<Unlock size={12}/>}
-              title={canReactivate ? 'Reactivate this retained settlement' : undefined}
-            >
-              {reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
-            </Button>
+            <>
+              <Button
+                variant="gold"
+                size="sm"
+                onClick={() => onReactivate?.(s)}
+                disabled={!canReactivate || reactivatingId === s.id}
+                busy={reactivatingId === s.id}
+                icon={<Unlock size={12}/>}
+                title={canReactivate ? 'Reactivate this retained settlement' : undefined}
+              >
+                {reactivatingId === s.id ? 'Restoring...' : 'Reactivate'}
+              </Button>
+              {/* AUDIT-2.2 — read-only extraction, always available on a frozen
+                  save even without an active plan. Subordinate to the gold
+                  Reactivate: a quiet outline that never resumes the simulation. */}
+              <Button
+                variant="info"
+                size="sm"
+                onClick={handleExportFrozen}
+                disabled={exportBusy}
+                busy={exportBusy}
+                icon={<FileText size={12}/>}
+                title="Export this settlement as a PDF — yours to keep even while frozen"
+              >
+                {exportBusy ? 'Exporting…' : 'Export PDF'}
+              </Button>
+            </>
           ) : (
             <>
               {/* The whole row is the primary open target; this is the explicit,

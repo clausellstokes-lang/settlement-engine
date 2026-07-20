@@ -38,6 +38,8 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 afterEach(cleanup);
+// Keep the location clean between tests — the WB-j ?cat= deep-link test sets it.
+afterEach(() => { try { window.history.replaceState({}, '', '/'); } catch { /* jsdom */ } });
 
 describe('CustomContentManager — restored affordances (RESTORATION #12)', () => {
   test('renders the two authoring lanes, aria-pressed tabs, and the seed-picker entry', async () => {
@@ -67,5 +69,16 @@ describe('CustomContentManager — restored affordances (RESTORATION #12)', () =
     fireEvent.click(retry);
     expect(state.loadCustomContentFromCloud).toHaveBeenCalled();
     state.customContentError = null;
+  });
+
+  test('WB-j — a ?cat=traditions deep-link opens the traditions lane directly', async () => {
+    state.customContentError = null;
+    window.history.replaceState({}, '', '/compendium?mode=custom&cat=traditions');
+    const { CustomContentManager } = await import('../../src/components/compendium/CustomContent.jsx');
+    render(<CustomContentManager search="" />);
+    // The traditions bucket tab is the active (aria-pressed) one — the deep-link
+    // resolved to the new lane rather than defaulting to Institutions.
+    expect(screen.getByRole('button', { name: /Traditions/, pressed: true })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Institutions/, pressed: false })).toBeTruthy();
   });
 });
