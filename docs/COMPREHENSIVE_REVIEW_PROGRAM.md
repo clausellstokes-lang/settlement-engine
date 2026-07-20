@@ -1134,6 +1134,21 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19, the FINAL clause) — CROSS-SETTLEMENT NPC DIPLOMACY:
+the two memory planes joined, influence-weighted, bidirectional.** NPC competition/goals/
+relationships EXTEND BETWEEN settlements — flavored BY and SHAPING the settlement pair,
+weighted by importanceWeight(npc) × faction-power-standing × the faction's politics
+ranking. DOWNWARD: the settlement rung biases cross-border NPC pair formation (hostile =
+suspicion, trade = easier bonds; roads contact events are the formation vector). UPWARD:
+the accumulated NPC-pair standing bleeds a bounded, thresholded, typed term (elite_feud /
+elite_amity, decaying) into the settlement pair via applyRelationshipPatch — two nobodies
+feuding = noise, no mark; the governing pillar feuding with the neighbor's chancellor = a
+diplomatic incident. Personal elite relationships become interstate relations (the
+pre-modern truth). ⚠ DOUBLE-COUNTING GUARD designed in: events mark the plane they occur
+on; the bleed carries only accumulated STANDING (state-driven, never event-re-counting).
+Cross-border D-4 contests inherit the same channel. Relayed to the architect mid-
+integration. THE SCOPE FREEZE NOW CLOSES HARD: the design is complete; every further idea
+→ the vNEXT ledger, no exceptions.
 **⬛⭐ OWNER RULING (2026-07-19) — POSITIVE-BOND MEMORY, SYMMETRIC + CONSEQUENTIAL
 (D-7 COMPLETION, in-scope under the freeze; the manager conceded his "grace note" framing
 was wrong — consequential bonds are structural, not decorative).** The relationship memory
