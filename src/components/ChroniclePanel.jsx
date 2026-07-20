@@ -20,6 +20,7 @@ import { useState } from 'react';
 import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
+import EmptyState from './primitives/EmptyState.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { nameOf } from '../domain/rulingPower.js';
@@ -368,9 +369,10 @@ export default function ChroniclePanel({ entries }) {
       {open && (
         <div style={{ padding: '12px 14px', background: swatch['#FAF8F4'], maxHeight: 420, overflowY: 'auto' }}>
           {list.length === 0 ? (
-            <div style={{ padding: '18px 0', textAlign: 'center', color: MUTED, fontSize: FS.sm, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-              No narrative chronicle entries yet. Generate a narrative to start the log.
-            </div>
+            <EmptyState
+              heading="No chronicle yet."
+              body="Narrate an advance and it opens the log. Each account is kept here in the order the realm lived it."
+            />
           ) : (
             list.map((e) => (
               <EntryCard key={e.id} entry={e} onOpen={setModalEntry} />

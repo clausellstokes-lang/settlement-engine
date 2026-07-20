@@ -28,6 +28,7 @@ import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
 import CampaignStatePanel from './CampaignStatePanel.jsx';
 import Button from '../primitives/Button.jsx';
+import EmptyState from '../primitives/EmptyState.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
 
@@ -186,7 +187,10 @@ export default function GalleryCampaigns({ onNavigate }) {
       {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared campaigns…</p>}
       {!viewingSlug && error && <p style={{ color: swatch.danger || RED, fontSize: FS.sm }}>Couldn’t load campaigns: {error}</p>}
       {!viewingSlug && !loading && !error && items.length === 0 && (
-        <p style={{ color: MUTED, fontSize: FS.sm }}>No shared campaigns yet. Premium DMs can share a map with its campaign from the world-map toolbar.</p>
+        <EmptyState
+          heading="No shared campaigns yet."
+          body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
+        />
       )}
 
       {!viewingSlug && (

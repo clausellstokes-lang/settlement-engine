@@ -11,6 +11,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
+import EmptyState from '../primitives/EmptyState.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
 
@@ -132,7 +133,10 @@ export default function GalleryMaps({ onNavigate }) {
       {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared maps…</p>}
       {!viewingSlug && error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
       {!viewingSlug && !loading && !error && items.length === 0 && (
-        <p style={{ color: MUTED, fontSize: FS.sm }}>No shared maps yet. Premium DMs can share a map from the world-map toolbar.</p>
+        <EmptyState
+          heading="No shared maps yet."
+          body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
+        />
       )}
 
       {!viewingSlug && (
