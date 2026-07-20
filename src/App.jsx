@@ -43,6 +43,7 @@ import IconButton from './components/primitives/IconButton.jsx';
 // The route→component registry + shared Loading live in AppViews (extracted so
 // the shell stays legible; the view table has one home).
 import { AppViews, Loading } from './AppViews.jsx';
+import CommandPaletteHost from './components/CommandPaletteHost.jsx';
 
 // Modals stay in the shell (not view-switched): they overlay whatever view is up.
 const AuthModal     = lazy(() => import('./components/AuthModal.jsx'));
@@ -136,12 +137,10 @@ export default function App() {
   // pulse writeback / AI overlay mutation. Subscribe to the boolean instead so
   // the shell only re-renders when the settlement toggles absent↔present.
   const hasSettlement = useStore(s => !!s.settlement);
-  const initAuth = useStore(s => s.initAuth);
-  const initOnboarding = useStore(s => s.initOnboarding);
+  const initAuth = useStore(s => s.initAuth), initOnboarding = useStore(s => s.initOnboarding); // grouped: hold App.jsx at its max-lines ceiling (see the command-palette host addition)
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
-  const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
-  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const purchaseModalOpen = useStore(s => s.purchaseModalOpen), setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen); // grouped: hold App.jsx at its max-lines ceiling
   const setCreditBalance = useStore(s => s.setCreditBalance);
   const creditBalance = useStore(s => s.creditBalance);
   const loadCampaigns = useStore(s => s.loadCampaigns);
@@ -892,6 +891,8 @@ export default function App() {
       {/* ── Feedback widget (global floating affordance) ─────────
           Off the auth/checkout chrome; self-contained (reads the store, owns its
           open/submit state) so the mount is a one-liner. */}
+      <CommandPaletteHost />
+
       <Suspense fallback={null}>
         <FloatingAffordances visible={!AUTH_ROUTE_VIEWS.has(view)} />
       </Suspense>
