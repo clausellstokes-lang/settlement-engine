@@ -63,11 +63,11 @@ function fixture() {
 }
 
 /** Assign the store's only authored deity as the settlement's patron; return its
- *  embedded identity ref. */
-function assignPatron(store, localUid) {
+ *  embedded identity ref. (setPrimaryDeity is async since the de-eager lane.) */
+async function assignPatron(store, localUid) {
   store.setState(s => { s.settlement = fixture(); s.lastSeed = 'seed'; });
   store.getState().refreshSystemState();
-  const res = store.getState().setPrimaryDeity(customRefIdFromItem(warFather(localUid)));
+  const res = await store.getState().setPrimaryDeity(customRefIdFromItem(warFather(localUid)));
   expect(res).not.toBeNull();
   return store.getState().settlement.config.primaryDeitySnapshot;
 }
@@ -91,11 +91,11 @@ describe('mintDeityRef — account-scoped deity identity', () => {
 });
 
 describe('deity ref-collision — two accounts, same god name, distinct identities', () => {
-  test('same-named homebrew patrons embed DISTINCT scoped refs (no identity-merge)', () => {
+  test('same-named homebrew patrons embed DISTINCT scoped refs (no identity-merge)', async () => {
     // Account A authors + assigns "War Father"…
-    const snapA = assignPatron(makeStore({ deities: [warFather('lu_a')] }), 'lu_a');
+    const snapA = await assignPatron(makeStore({ deities: [warFather('lu_a')] }), 'lu_a');
     // …and account B authors + assigns its OWN, unrelated "War Father".
-    const snapB = assignPatron(makeStore({ deities: [warFather('lu_b')] }), 'lu_b');
+    const snapB = await assignPatron(makeStore({ deities: [warFather('lu_b')] }), 'lu_b');
 
     // Embedded identities are scoped, distinct, and NOT the resolution ref.
     expect(snapA._deityRef).toBe('deity:lu_a:war_father');

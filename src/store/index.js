@@ -45,7 +45,7 @@ import { createUiSlice }            from './uiSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
 import { createFogEditSlice }       from './fogEditSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
-import { setCustomContentSource }   from '../lib/dependencyEngine.js';
+import { setCustomContentSource }   from '../lib/customContentSource.js';
 import { saves as savesService }    from '../lib/saves.js';
 
 export const useStore = create(
@@ -122,6 +122,11 @@ export const useStore = create(
 // store, rather than inside dependencyEngine itself — that keeps the
 // generator side free of any zustand/react import and makes it
 // runnable headlessly (snapshot tests, scripts, server jobs).
+// DE-EAGER (2026-07-19): the wiring goes through the tiny EAGER seam
+// (lib/customContentSource.js), NOT dependencyEngine directly — a static
+// import of dependencyEngine here dragged the whole registry (~41 KB) into
+// the first-paint closure. The lazy registry reads the getter off the seam
+// when it loads with its real consumers.
 setCustomContentSource(() => useStore.getState().customContent);
 
 // ── P101 / X-3 — Auth intent handlers ───────────────────────────────────

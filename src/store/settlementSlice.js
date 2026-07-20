@@ -65,7 +65,9 @@ import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
 // applyEvent) + the mapping gate (in rippleEventThroughWorld). The heavy applier
 // rides the lazy world-engine chunk (recordCanonRelationshipRipple).
 import { captureCanonRelationshipUndo, canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
-import { eligibleCustomContent } from '../domain/customContentSchema.js';
+// eligibleCustomContent + settlementDeityHelpers: DYNAMIC-imported in their
+// async actions since the de-eager lane (2026-07-19) — static imports here
+// dragged customContentSchema + the registry into the first-paint closure.
 import {
   CRISIS_EVENT_TYPES,
   crisisTwinFor,
@@ -104,7 +106,6 @@ import { makeActionResult } from './actionResult.js';
 // (subsystemActivation.js reads config.primaryDeitySnapshot / cultDeitySnapshots);
 // the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
 // Settlements-list + change-queue affordances consume. See each helper's header.
-import { setPrimaryDeityImpl, imposeCultImpl } from './settlementDeityHelpers.js';
 import {
   renameSettlementImpl, syncActiveNeighbourFieldsImpl,
   recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl, applyNpcOp,
@@ -883,6 +884,8 @@ export const createSettlementSlice = (set, get) => ({
     };
 
     const eng = await loadEngine();
+    // De-eager: the tier-gate filter loads with the generation it serves.
+    const { eligibleCustomContent } = await import('../domain/customContentSchema.js');
 
     const seed = seedOverride || eng.generateSeed();
       // Capture the full pipeline context (lastCtx) so the pipeline-rail
@@ -2253,9 +2256,15 @@ export const createSettlementSlice = (set, get) => ({
   // SET_PRIMARY_DEITY / IMPOSE_CULT through applyEvent with the frozen snapshot in
   // the payload, so the pure mutate handler + pulse read ONLY config.*DeitySnapshot
   // and the religion subsystem gate (subsystemActivation.js) flips off the embed.
-  // The return value is applyEvent's ActionResult envelope (null when refused).
-  setPrimaryDeity: (deityRefId) => setPrimaryDeityImpl(get, deityRefId),
-  imposeCult: (deityRefId, removeRef = null) => imposeCultImpl(get, deityRefId, removeRef),
+  // ASYNC since the de-eager lane (2026-07-19): the impls' registry resolution
+  // (buildRegistryFromStore) rides the lazy custom-registry chunk, so these
+  // actions await its dynamic import. Resolves to the same value the sync form
+  // returned — applyEvent's ActionResult envelope (null when refused) — and the
+  // persisted event-log OUTPUT is byte-identical; only the API shape moved. The
+  // chunk is warm in practice: the deity panel/composer field statically import
+  // customRegistry, so assigning from either surface awaits a fetched module.
+  setPrimaryDeity: async (deityRefId) => (await import('./settlementDeityHelpers.js')).setPrimaryDeityImpl(get, deityRefId),
+  imposeCult: async (deityRefId, removeRef = null) => (await import('./settlementDeityHelpers.js')).imposeCultImpl(get, deityRefId, removeRef),
 
   // ── Identity edits + canon-by-id (Wave 4a) ────────────────────────────────
   // The always-allowed town rename, the Settlements-list canonize-by-id, and the

@@ -132,7 +132,10 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
     const { accepted, rejected } = reviewContentDraft(draft, decisions);
     let landed = 0; let failed = 0;
     for (const a of accepted) {
-      const r = addCustomItem(a.bucket, a.entry);
+      // addCustomItem is ASYNC since the de-eager lane (the axis-bearing
+      // buckets await the lazily-loaded schema); it still resolves null only
+      // on a validation-rejected write, so the landed/failed tally is exact.
+      const r = await addCustomItem(a.bucket, a.entry);
       if (r === null) failed += 1; else landed += 1;
     }
     setApplied({ landed, failed, rejected: rejected.length });

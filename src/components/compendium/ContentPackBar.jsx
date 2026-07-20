@@ -68,8 +68,9 @@ export default function ContentPackBar() {
     const { items, rejected } = prepareImport(parsed.pack);
     let added = 0;
     for (const { bucket, item } of items) {
-      const res = addCustomItem(bucket, item);
-      // addCustomItem returns null only on a rejected (e.g. invalid deity) write.
+      // addCustomItem is ASYNC since the de-eager lane; it still resolves null
+      // only on a rejected (e.g. invalid deity) write.
+      const res = await addCustomItem(bucket, item);
       if (res !== null) added += 1;
     }
     const parts = [`Imported ${added} item${added === 1 ? '' : 's'}.`];

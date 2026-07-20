@@ -69,7 +69,10 @@ describe('customContentSlice add/update/delete cloud-id race', () => {
 
   test('delete issued before add() resolves removes the freshly-added cloud row', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('institutions', { name: 'Doomed Hall' });
+    // addCustomItem is async since the de-eager lane; awaiting it lands the
+    // optimistic local insert while the CLOUD add stays in flight (held open by
+    // the mock queue) — the race under test is unchanged.
+    await store.getState().addCustomItem('institutions', { name: 'Doomed Hall' });
     const localId = store.getState().customContent.institutions[0].id;
 
     // Delete while add() is still in flight — old bug deleted the local id (a
@@ -85,10 +88,10 @@ describe('customContentSlice add/update/delete cloud-id race', () => {
 
   test('update issued before add() resolves reaches the cloud and survives the id swap', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('institutions', { name: 'Original' });
+    await store.getState().addCustomItem('institutions', { name: 'Original' });
     const localId = store.getState().customContent.institutions[0].id;
 
-    store.getState().updateCustomItem('institutions', localId, { name: 'Edited' });
+    await store.getState().updateCustomItem('institutions', localId, { name: 'Edited' });
     expect(store.getState().customContent.institutions[0].name).toBe('Edited');
 
     h.flushAdds();
@@ -102,7 +105,7 @@ describe('customContentSlice add/update/delete cloud-id race', () => {
 
   test('delete after add() resolves targets the cloud id directly', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('institutions', { name: 'Hall' });
+    await store.getState().addCustomItem('institutions', { name: 'Hall' });
     h.flushAdds();
     await flush();
 

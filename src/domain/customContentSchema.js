@@ -270,10 +270,14 @@ export function validateDeity(deity = {}) {
 // derived founding traditions use, plus an optional free-text epithet.
 //
 // The two key arrays are DUPLICATED as frozen literals from src/data/traditionCorpus.js
-// (TRADITION_ELEMENTS / TRADITION_ACTS ids) rather than IMPORTED — this schema module is
-// EAGER (the store slice imports it), and importing the corpus would drag its tables into
-// first-paint. A drift-guard test (customContentSchema traditions) pins these equal to the
-// corpus so they can never silently diverge.
+// (TRADITION_ELEMENTS / TRADITION_ACTS ids) rather than IMPORTED. Original reason (T5-c):
+// this module was EAGER (the store slice imported it statically) and importing the corpus
+// would have dragged its tables into first paint. Since the de-eager lane (2026-07-19) the
+// module rides the lazy 'custom-schema' chunk (the store reaches it only by dynamic import
+// at the validation chokepoint) — the duplication STAYS, now so the small validation chunk
+// never hauls the corpus prose tables along to validate two enum axes. The drift-guard test
+// (tests/domain/customContentTraditions.test.js) pins these equal to the corpus so they can
+// never silently diverge; the mirror and its guard move together.
 export const TRADITION_ELEMENT_KEYS = Object.freeze([
   'founding', 'first-landing', 'charter', 'hearth', 'harvest', 'river', 'stone', 'the-dead',
   'field', 'forge', 'market', 'hunt', 'long-sun', 'tide', 'greening', 'stars',
