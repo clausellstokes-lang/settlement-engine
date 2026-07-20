@@ -144,6 +144,9 @@ export const OPERATIONS = Object.freeze({
   updateSavedCampaign: { opType:'updateSavedCampaign', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   clearCampaignWizardNews: { opType:'clearCampaignWizardNews', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   appendCampaignChronicle: { opType:'appendCampaignChronicle', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
+  // V-17 THE CAMPAIGN IMPORT — commits confirmed typed table-events as source:'table'
+  // news history at DM-chosen ticks (the per-event confirmation gate is upstream).
+  importTableEvents: { opType:'importTableEvents', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   setActiveCampaign: { opType:'setActiveCampaign', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   queueSettlementEvent: { opType:'queueSettlementEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   cancelQueuedEvent: { opType:'cancelQueuedEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
