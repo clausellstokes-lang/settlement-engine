@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ FORMATION LANE α COMPLETE — THE STATECRAFT CONSUMERS (2026-07-20,
+claude/dc-formation-statecraft @ feaf5f9f, 2 commits off composite-r3 accd0242 —
+manager-verified).** Both self-policing seams the fold flagged are closed: D-3 THE
+SELF-POLICING LOOP (intelSaleCredibilityDeltas orphan now called at courier-arrival —
+resolveIntelSale charges the seller's settlement stock AND, when a mouthpiece is stamped,
+the spokesperson's per-NPC stock, both via the credibility system's own writers; false
+sale discounts future sales, true sale pays the slow trust rise; degrades settlement-only
+without a spokesperson; 11 pins) + D-4→D-2 THE BLUFF CHARGE (void res.bluffDeposits closed
+— the ladder carries contradicted-bluff deposits into an additive bluffExposures sidecar;
+statecraft mints a per-NPC deception charge carrying lieExposedBand so the SAME exposed_liar
+stigma the lie path mints lands via the ladder a tick on; 8 pins incl. one pinning
+advanceContests' bluffDeposits production that NO prior test covered). Receipts: build 0 ·
+closure 1,024,371 delta 0 (zero eager) · two shards = ONLY the 4 parked goldens (confirmed
+at base) · dormancy byte-identical (both parent flags off) · §11 grep clean (only new write
+= bluffExposures; charges route through existing advanceCredibility). TWO DURABLE HAZARDS
+BANKED: (1) the spatialLedgerCoverage walker matches ONLY string-literal setSpatialLedger
+keys — a key written via a constant slips through unregistered (intelTransfers is currently
+walker-blind); new sidecars = literal + EXEMPT. (2) ORDERING INVARIANT: statecraft (~1881)
+→ generosity (~2205) → ladder (~2348 last); both deposit-and-consume sidecars rely on it
+(producer last, consumer first, depositTick<now = couriered). COORDINATION POINT for D-5/β:
+the seller-side spokesperson STAMP (generosity's planIntelAct picking a mouthpiece via
+pickMouthpiece) is NOT built here — the per-NPC intel-sale arm stays dormant until it lands;
+the READ + optional field are in. VETOABLE: sale accuracy resolved at courier-arrival;
+self-polices both sold AND gifted; a private bad sale = credibility cost, no court stigma.
+FINAL BUILD LANES: α DONE; D-5/D-6 + Formation β still running.
 **⬛⭐⭐⭐ FOLD BATCH 3 COMPLETE — THE WORLD IS ASSEMBLED, THE BUDGET BREACH IS CLEARED
 (2026-07-20, claude/composite-r3 @ accd0242, forked from the re-verified live tip 24f46337;
 27 fold commits = 16 merges + 11 cleanup/composition; manager-spot-checked).** ALL 15
