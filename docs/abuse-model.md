@@ -47,7 +47,7 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **26** edge functions under `supabase/functions/` (excluding
+There are **28** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
@@ -119,6 +119,14 @@ flip intent):
   (uptime services ARE automated clients); reads no user data and takes
   no write path — the deep probe is a bounded head-count on the ops
   table only.
+- `founder-transfer` — the `run_due` cron action authenticates by the
+  `x-cron-secret` shared secret (constant-time compared, 503 when
+  unconfigured); every USER action does its own `getUser()` JWT check
+  plus the single-session gate and velocity limits in-handler, so the
+  platform gate is off without widening the anonymous surface.
+- `retention-warning-cron` — nightly pg_net cron (migration 166)
+  authenticated by the `x-cron-secret` shared secret; fail-closed on a
+  wrong/missing secret (403) and refuses to run unconfigured (503).
 
 ### Database (Postgres + RLS)
 

@@ -269,7 +269,13 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // recorded "the two panels" (measured per-file against base aad6265e:
   // AutoReload +1, PurchaseHistory +1, SeatTransfer +1). Same React-prop class,
   // not a native tooltip. Re-pinned to the MEASURED count. 487 → 488.
-  const TITLE_BASELINE = 488;
+  //
+  // FOLD BATCH 3 (the completion waves): +5 AboutManifesto <Mechanism title=…>
+  // React component props (WBF-c's restored HowToUse substance — the same
+  // Section-prop class the regex cannot distinguish, not native tooltips), and
+  // +1 SettlementCard native title (the wave-B retention affordances: the
+  // reactivate/export hover hints on a frozen settlement — deliberate). 488 → 494.
+  const TITLE_BASELINE = 494;
 
   function countTitles() {
     let n = 0;
