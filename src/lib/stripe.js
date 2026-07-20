@@ -74,7 +74,7 @@ const PRODUCTS = new Proxy({}, {
  * Stripe follows regardless).
  *
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string, settlement?: object, redeemCode?: string, saveId?: string, captchaToken?: string }} options
+ * @param {{ checkoutToken?: string, settlement?: object, redeemCode?: string, saveId?: string, captchaToken?: string, savePaymentMethod?: boolean }} options
  *   For single_dossier, `settlement` is persisted server-side before payment so
  *   the paid dossier survives a lost/overwritten local stash (F21/F23).
  *   `saveId` (single_dossier + signed-in only): binds the durable export right

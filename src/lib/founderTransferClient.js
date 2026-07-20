@@ -36,14 +36,14 @@ async function readInvokeError(error) {
 /** A throwing action call: returns the ok body, or throws a coded Error. */
 async function callAction(action, extra = {}, fallbackMsg = 'The transfer request could not be completed.') {
   if (!isConfigured) {
-    const err = new Error('Transfers are not configured in this environment.');
+    const err = /** @type {Error & { code?: string, reason?: string|null }} */ (new Error('Transfers are not configured in this environment.'));
     err.code = 'feature_unavailable';
     throw err;
   }
   const { data, error } = await supabase.functions.invoke(FN, { body: { action, ...extra } });
   if (error) {
     const body = await readInvokeError(error);
-    const err = new Error(body?.reason || body?.error || fallbackMsg);
+    const err = /** @type {Error & { code?: string, reason?: string|null }} */ (new Error(body?.reason || body?.error || fallbackMsg));
     err.code = body?.error || 'request_failed';
     err.reason = body?.reason || null;
     throw err;
@@ -70,7 +70,7 @@ export async function fetchTransferStatus() {
   }
 }
 
-/** Outgoing: anomaly-checked open + emailed 'initiate' code. @returns {{case_id}} */
+/** Outgoing: anomaly-checked open + emailed 'initiate' code. @returns {Promise<{ case_id: string }>} */
 export function initiateTransfer({ toEmail, payoutForm }) {
   return callAction('initiate', { to_email: toEmail, payout_form: payoutForm });
 }
@@ -85,7 +85,7 @@ export function nomineeAcceptStart() {
   return callAction('nominee_accept_start', {});
 }
 
-/** Incoming: verify → bind → the case-bound Stripe checkout session. @returns {{url}} */
+/** Incoming: verify → bind → the case-bound Stripe checkout session. @returns {Promise<{ url: string }>} */
 export function nomineeConfirm({ caseId, code }) {
   return callAction('nominee_confirm', { case_id: caseId, code });
 }
@@ -100,7 +100,7 @@ export function reelectPayout({ caseId }) {
   return callAction('reelect_payout', { case_id: caseId });
 }
 
-/** Outgoing: start Stripe Connect Express onboarding for a cash payout. @returns {{url}} */
+/** Outgoing: start Stripe Connect Express onboarding for a cash payout. @returns {Promise<{ url: string }>} */
 export function payoutOnboarding() {
   return callAction('payout_onboarding', {});
 }
@@ -129,7 +129,7 @@ export function buybackStart() {
   return callAction('buyback_start', {});
 }
 
-/** Outgoing: verify the code → release the seat + record the buyback. @returns {{buyback_id, amount_cents}} */
+/** Outgoing: verify the code → release the seat + record the buyback. @returns {Promise<{ buyback_id: string, amount_cents: number }>} */
 export function buybackConfirm({ code, payoutForm }) {
   return callAction('buyback_confirm', { code, payout_form: payoutForm });
 }

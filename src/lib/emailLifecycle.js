@@ -161,7 +161,7 @@ export function notifyCreditLow({ displayName, balance, narrativeCost = 3, daily
  *  the 'new_device_signin' template is registered by the parallel Wave-E lane, so
  *  send-email returns a soft unknown_template here until it folds. Fire-and-forget /
  *  never-throw (send() swallows), exactly like the other lifecycle helpers. */
-export function notifyNewDeviceSignin({ device_label, at } = {}) {
+export function notifyNewDeviceSignin({ device_label, at } = /** @type {{ device_label?: string, at?: string }} */ ({})) {
   return send('new_device_signin', {
     device_label: device_label || 'a new device',
     at: at || new Date().toISOString(),
@@ -190,7 +190,7 @@ export function notifyCapWarning({ recipient, capUsed, capTotal }) {
 /** Retention warning — a downgraded account's retained-inactive settlements are
  *  nearing the purge window. Authenticated call; the server reads the recipient
  *  from auth.uid(). Fire-and-forget, same as the rest. */
-export function notifyRetentionWarning({ displayName, retentionUntil } = {}) {
+export function notifyRetentionWarning({ displayName, retentionUntil } = /** @type {{ displayName?: string, retentionUntil?: string }} */ ({})) {
   return send('retention_warning', {
     displayName:    displayName || 'there',
     retentionUntil: retentionUntil || 'soon',
