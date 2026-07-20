@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ FOLD BATCH 3 COMPLETE — THE WORLD IS ASSEMBLED, THE BUDGET BREACH IS CLEARED
+(2026-07-20, claude/composite-r3 @ accd0242, forked from the re-verified live tip 24f46337;
+27 fold commits = 16 merges + 11 cleanup/composition; manager-spot-checked).** ALL 15
+manifest branches folded into the staging composite (the shared claude/the-composite stays
+UNTOUCHED at 24f46337 — promotion owner-gated; main tree undisturbed). Every merge
+NUL-scanned + focused-gated. TWO MANIFEST DEFECTS the fold agent caught & cured (verify-first
+on the manager): D-0/D-1 were a SEPARATE lineage (merged additionally, not in the D-2/7/4
+stack); ruin-filter carries NO migration. Conflicts resolved per ruling: personaSlicer +
+religionLegitimacy → kept composite's nameOf(); the roads war-file settlementStrategy.js
+auto-composed (embassy multiplier ×1-when-absent verified alongside bloc factors); wave-D's
+13 perimeter conflicts all compose-both (autoReload+rateGuard, savePaymentMethod+captchaToken,
+session-gate+rate-limit). MIGRATION RENUMBER: contiguous head 167 (validator green; purge-spares
+162→165, retention cron 163→166, client-errors 156→167; token-bucket keeps 156, money keeps
+157-164). DEBT CLEANUPS GREEN: build:edge-shared regenerated (aiGrounding freshness) ·
+domainAnyCast reconciled to 2242 <2252 (JUDGMENT vetoable: baseline-update OR-branch, not
+0-holing the dormancy-pinned D-7 leaves — that's burn-down work, deferred) · spatial walker
+npcCredibility EXEMPT · a REAL composition fix (the D-2 prune scan reads the untouched
+item.save roster so a CAPTIVE'S CREDIBILITY survives captivity). CEILING RE-PINS to MEASURED:
+kill-list 906→100 / 98→72 / 234→167 / 214→161 (tolerance-0) · title 487→494 · raw-color 1403
+· size-baseline trims. ⭐ THE PAYOFF — BUDGET GREEN: first-paint closure = 1,024,371 B ≤
+1,040,000 (headroom 15,629); verify:dist exit 0. THE 1,040,998 BREACH THAT WAS OWNER-GATED ALL
+NIGHT IS CLEARED. SUITE: two shards, every non-golden red fixed+committed, all 9 isolation-
+re-run at the final tip → EXACTLY 4 reds = the 4 parked goldens (ONE REGEN re-mints).
+composite-r3 IS the loop's substrate + the base for task #40. Flagged for #40 (in-code deferral
+markers): D-3 self-policing (intelSaleCredibilityDeltas 0 callers) · D-4 bluff charge (void
+res.bluffDeposits) · D-4e champion producer (backedBy consumed-not-written) · D-5/D-6.
 **⬛⭐⭐ DEEP COUPLINGS D-4 COMPLETE — THE PRE-FOLD BUILD IS FINISHED (2026-07-19,
 claude/deep-couplings-contest @ 82c8095e, 3 commits stacked on the D-7 tip 49b145bb —
 manager-verified).** THE CONTESTED GOALS CLASS shipped dark (contestedGoalsEnabled): the
