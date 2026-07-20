@@ -349,8 +349,12 @@ PINS carry the grade: unfurls enforced, never hoped.
    public list/browse, noindex + sitemap-excluded (V-J pins), but unfurls normally
    when pasted (the party-share story); owner can REVOKE by slug rotation (old links
    die). RLS: public lists WHERE visibility='public'; unlisted readable by exact
-   slug lookup only, never listable; owner full — all proven by executed pglite
-   tests. Migration WRITTEN-NOT-DEPLOYED (standing law). 3) V-13 FEATURED AMENDED:
+   slug lookup only, never listable BY NON-OWNERS; AMENDMENT (owner 2026-07-20):
+   the OWNER'S OWN GALLERY still shows their unlisted items — owner alone — with a
+   dedicated PRIVATE/UNLISTED FILTER for easy location and an at-a-glance unlisted
+   badge; pin the PAIR (owner-sees-own-unlisted AND non-owner-listing-never-
+   contains-unlisted), both executed in pglite. Migration WRITTEN-NOT-DEPLOYED
+   (standing law). 3) V-13 FEATURED AMENDED:
    per-section Featured (settlement / map / campaign), HIDDEN-UNTIL-OCCUPIED (an
    empty Featured never renders — the no-fake-names honesty), admin-only RLS write,
    explicit display-order field. Build host: lane V-E (already building the gallery
