@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ FORMATION LANE β COMPLETE — THE ACTORS' AGENCY (2026-07-20,
+claude/dc-formation-agency @ 58d45d7a, 5 commits off composite-r3 — manager-verified;
+re-derived done-state from CODE not the brief, correctly). BUILT: D-4e CHAMPION PRODUCER
+(champion-npc edit kind → npc.contestBacking → the contest pass folds it into
+ContestRec.backedBy once, contest-id-scoped; the player's SIDE lever, proven end-to-end
++ persist/reload) · COALITION COOPERATION governing-arm (depositCoalitionTrust via the
+pair-ledger writer, year cadence, 156wk decay) · CONTEST-SUPPORT bond (verified pre-built
++ added the missing end-to-end pin). VETOABLE (good call): champion-npc rides
+commitPendingEdits (the ransom/rescue-npc precedent) → NO operationRegistry entry (the
+registry is store-action-keyed; a phantom op breaks the walker) — walker + compendium
+green untouched. Receipts: closure 1,024,511 ≤ budget (+140 B champion string within the
+≤300 allowance; coalition 0 eager) · §11 clean (factionPairStates only via its writer;
+backedBy only in the contest pass) · dormancy byte-identical. DEFERRED WITH RECIPES (correct
+— cross-lane/ceiling blockers): (a) GENEROSITY GRATITUDE deposit — needs α's npcLadderKernel
+consume side + generosityKernel is 785/800 (leaf) → BUILDABLE at the mini-fold once α+β
+coexist; (b) SHARED-WAR-COALITION arm (settlement→governing-faction resolution — the
+design's own fold-time concern); (c) champion COVENANT UI (needs npcLadderState mirror to
+expose nids past the secrets seam — polish, mechanism complete). ⚠⚠ β's LOAD-BEARING BASE
+FINDING: composite-r3 (accd0242) is RED on typecheck:domain:strict — 16 errors in
+intelActs/beliefAxes/beliefMap/generosityKernel (the D-1/D-3 leaves; each lane called it
+"pre-existing at my base" so NOBODY owned it; the fold took the domainAnyCast OR-branch and
+DEFERRED the strict 0-holing). This is a CEILING-0 GATE red on the loop's base — MUST be
+cleaned pre-loop (mechanical JSDoc 0-holing, no behavior change). ALL 3 POST-FOLD LANES DONE
+(D-5/D-6, α, β) → THE MINI-FOLD + strict-clean + the now-unblocked gratitude deposit
+dispatched. Deferred arms (shared-war, champion UI) → task #40 / loop intake.
 **⬛⭐ DEEP COUPLINGS D-5 + D-6 COMPLETE (2026-07-20, claude/dc-roads-followon @ d9121e8f,
 6 commits off composite-r3 accd0242 — manager-verified).** D-5 THIRD-PARTY RANSOM
 (thirdPartyRansom leaf; RansomRec +payerId/payerMotive/thirdPartyResolved): a payer≠home
