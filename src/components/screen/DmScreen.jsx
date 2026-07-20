@@ -8,18 +8,19 @@
  * audience gate, which reuses toPublicSafe and FAILS CLOSED), and hides every
  * DM-only tool (the ledger, the auspice, the oracle's private reads).
  *
- * SLOTS + FOLD SEAMS: the Letter panel (V-B) and the Oracle panel (V-C) are built
- * by other lanes and are NOT on this base. This screen mounts each in a SLOT that
- * degrades to a graceful placeholder when the panel is absent. The one-line mounts
- * are reported as fold seams:
- *   • Letter:  import ChroniclersLetter and render it in the letter slot.
- *   • Oracle:  import OraclePanel (V-C's RealmInspector panel) in the oracle slot.
- * Neither is depended on here; the screen stands alone without them.
+ * SLOTS (fold pass 2, mounts applied): the Letter panel (V-B,
+ * ChroniclersLetterPanel) and the Oracle panel (V-C, OraclePanel) are now on the
+ * composite base, so this screen MOUNTS them directly. Both null-guard their
+ * `campaign` prop — the Letter renders null with no active campaign, the Oracle
+ * still reads the anchored settlement — so the screen stands even with nothing
+ * open. The Letter shows on both faces (it is a reformatting of the public
+ * wizardNews chronicle, no secret content); the Oracle stays DM-only (its reads
+ * are the GM's, not the table's), alongside the ledger and the auspice.
  */
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { toScreenView } from '../../domain/display/dmScreen.js';
-import { sans, serif_, FS, SP, R, INK, BODY, MUTED, BORDER, CARD, GOLD_DEEP } from '../theme.js';
+import { sans, serif_, FS, SP, INK, BODY, MUTED, GOLD_DEEP } from '../theme.js';
 import Page from '../primitives/Page.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import Card from '../primitives/Card.jsx';
@@ -28,22 +29,13 @@ import Badge from '../primitives/Badge.jsx';
 import TableLedgerPanel from '../tableLedger/TableLedgerPanel.jsx';
 import AuspicePanel from '../auspice/AuspicePanel.jsx';
 import TemperamentPicker from '../temperament/TemperamentPicker.jsx';
+import ChroniclersLetterPanel from '../map/ChroniclersLetterPanel.jsx';
+import OraclePanel from '../map/OraclePanel.jsx';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM view' },
   { id: 'player', label: 'Player view' },
 ];
-
-/** A graceful placeholder for a panel another lane will mount (Letter / Oracle). */
-function SlotPlaceholder({ title, kicker, children }) {
-  return (
-    <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.lg, padding: SP.lg, background: CARD }}>
-      <div style={{ fontSize: FS.xs, letterSpacing: '0.06em', textTransform: 'uppercase', color: MUTED, fontFamily: sans, marginBottom: SP.xs }}>{kicker}</div>
-      <div style={{ fontFamily: serif_, fontSize: FS.lg, color: INK, marginBottom: SP.xs }}>{title}</div>
-      <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: 0 }}>{children}</p>
-    </div>
-  );
-}
 
 /** The compact dossier summary — rendered from the AUDIENCE-projected settlement,
  * so the player face can only ever show player-safe fields. */
@@ -104,17 +96,19 @@ export default function DmScreen() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: SP.lg, alignItems: 'start' }}>
           <DossierSummary view={view} audience={audience} />
 
-          {/* Letter slot — V-B's Chronicler's Letter mounts here (fold seam). */}
-          <SlotPlaceholder title="The Chronicler's Letter" kicker="Session prep">
-            The five-minute letter that catches you up on the realm will appear here.
-          </SlotPlaceholder>
+          {/* Letter slot — V-B's Chronicler's Letter (fold-pass-2 mount). Shown on
+              both faces; renders null with no active campaign. The panel carries its
+              own header, so the Card supplies only the frame + kicker (no dup title). */}
+          <Card kicker="Session prep">
+            <ChroniclersLetterPanel campaign={activeCampaign} />
+          </Card>
 
-          {/* Oracle slot — V-C's OraclePanel mounts here (fold seam). Hidden on the
-              player face: the oracle's reads are the GM's, not the table's. */}
+          {/* Oracle slot — V-C's OraclePanel (fold-pass-2 mount). DM-only: the
+              oracle's reads are the GM's, not the table's. */}
           {isDm && (
-            <SlotPlaceholder title="The Oracle" kicker="Ask the world">
-              Put a question to the world and get a cited answer. The Oracle mounts here.
-            </SlotPlaceholder>
+            <Card title="The Oracle" kicker="Ask the world">
+              <OraclePanel campaign={activeCampaign} />
+            </Card>
           )}
 
           {/* DM-only tools. The player face never renders these. */}
