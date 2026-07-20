@@ -1,0 +1,36 @@
+[
+  {
+    "id": "s_ffeeddccbbaa9988",
+    "name": "Thistledown",
+    "tier": "hamlet",
+    "seed": null,
+    "toggles": {
+      "institutionToggles": {},
+      "categoryToggles": {},
+      "goodsToggles": {},
+      "servicesToggles": {}
+    },
+    "config": {
+      "terrain": "downs",
+      "culture": "anglo"
+    },
+    "campaignState": {
+      "phase": "draft",
+      "eventLog": [],
+      "systemState": null,
+      "locks": {},
+      "canonizedAt": null
+    },
+    "settlement": {
+      "name": "Thistledown",
+      "tier": "hamlet",
+      "population": 140,
+      "config": {
+        "terrain": "downs",
+        "culture": "anglo"
+      },
+      "stress": null,
+      "schemaVersion": 99
+    }
+  }
+]
