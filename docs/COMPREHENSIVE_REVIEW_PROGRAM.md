@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ DEEP COUPLINGS D-0 + D-1 COMPLETE (2026-07-19, claude/deep-couplings @ 627055b3,
+6 commits atop aad6265e — manager-verified).** D-0 MIGRATION→RUMOR CARRIER
+(migrationRumorsEnabled): refugee columns seed the rumor net via the army/smuggle idiom
+(new lazy leaf migrationRumors.js; pulseKernel name-swapped NET −6 lines 1387→1381,
+size-baseline ratcheted DOWN). D-1 THE BELIEF AXES (beliefAxesEnabled): BeliefRecord gains
+populationTrendBand (demographic −2..+2) + observanceLabel (cultural) — BOTH OPTIONAL,
+present only lit, appended (owner-visible §14 Q2). LIT PROOFS QUOTED: a 3-hop observer
+believes a GROWING city is EMPTYING (the fog end-to-end); a court still believes the OLD
+rite until the rededication news arrives (staleness proven t=12→14). Receipts: dormancy
+goldens green + byte-identical dark · closure delta 0 (all lazy leaves) · §11 write-list
+CLEAN (zero new writers — axes ride advanceBeliefMaps, rumor entries are inputs) · walker
+compliance (2 new impactKinds registered) · 120/120 wave gate. Both flags DEFAULT DARK
+(no simulationRules edit; lit at ONE REGEN). Deferred seam: ally-intel sharing drops axis
+fields momentarily (byte-identical dark, low). ⚠⚠ STRUCTURAL-PREVENTION TRIGGER — THE
+FACTION-KEY / RECORD-SHAPE DEFECT CLASS: parallel owner sessions are fixing it
+instance-by-instance (ladder 25749ae5 · chronicle-snapshot 29f7abc9 · persona-slicer
+4c1143b9 · religion-ruler-lens 24f46337 — FOUR instances, "consumer reads a canonical key
+the record doesn't carry"). Per the 3rd-same-shape rule this is now a MANDATORY LOOP
+STRUCTURAL SWEEP: find-ALL instances (a walker/lint over record-key reads vs the shapes
+records actually mint) + a RATCHET so no new instance can land. Recorded as loop cycle-1
+intake — instance-whacking alone will miss hidden readers. Composite advancing fast
+(29f7abc9 → 4c1143b9 → 24f46337); FOLD BATCH 3 targets the LIVE tip, re-verified pre-fold.
 **⬛ THE COMPOSITE IS LIVE-ADVANCING via parallel owner sessions (2026-07-19) —
 dc0b6e2b → 29f7abc9 (THE SNAPSHOT-SHAPE BUG: the chronicle modal now reads the keys its
 records actually carry — a real display bug, ChroniclePanel.jsx + test only, verified-first,
