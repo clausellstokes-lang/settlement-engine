@@ -17,7 +17,8 @@
  *
  * AGGREGATE, NAMED-NPC-SAFE (owner boundary): this moves population COUNTS only. It
  * reads no npc roster and returns no npc mutation — named NPCs are the §4h protected
- * excursion model, never emigration/mortality.
+ * excursion model — their sanctioned mover is the roads layer (DESIGN_THE_ROADS),
+ * never this kernel.
  *
  * DORMANT (constitutional): a no-op without the spatial-canon marker (migrationActive
  * false) — an aspatial world keeps populationDynamics' exact path (byte-identical), no

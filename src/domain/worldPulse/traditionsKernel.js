@@ -49,7 +49,9 @@
  * Pure, deterministic, side-effect-free, clock-free. The ONE draw per (tradition, year)
  * is a TICK-INVARIANT fork of the WORLD seed (the seasonalSeverityFor pattern), NEVER
  * the per-tick pulse rng. AGGREGATE culture motion — a settlement's observances hold or
- * fail; never a named soul's fate.
+ * fail; never a named soul's fate. (Named-NPC MOTION is the roads layer's sanctioned
+ * province — roadsKernel, owner ruling 2026-07-19; fates remain unresolvable everywhere,
+ * DESIGN_THE_ROADS §1 law 1.)
  *
  * @enforced-by tests/property/traditionsDormancyGolden.test.js (dormancy byte-identity
  *   + the lit anti-vacuity block).
