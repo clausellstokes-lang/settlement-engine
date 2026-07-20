@@ -464,6 +464,71 @@ BUILD HOST: new engine lane V-K (both items — they couple), queued after V-D;
 separate worktree; the full engine gate (dormancy goldens, §11, strict, closure Δ0).
 Cycle 2 audits both under the 17-bar law like everything else.
 
+
+## V-24..V-27 THE CLEAN SWEEP (owner ruling 2026-07-20: "if it is not waiting on the
+## soak, just build it this round") — the vNext ledger drained of everything
+## pure building can finish; lanes V-L..V-O, queued after V-K
+
+### LANE V-L — engine textures (all dark, cohesion law binding)
+V-24a RECALL-NPC: a typed committable edit kind (finite-semantics law) requesting a
+traveled NPC's return; the roads machinery executes the return leg; no new movers.
+V-24b PER-ROUTE RE-PROPAGATION: rumor re-spread on route change (severed/opened
+routes re-price affected rumor paths); rides the existing rumor/di
+stance machinery.
+V-24c INTERIORITY-LITE (the honest form of the old seed — JUDGMENT: full inner
+lives would violate the recorded world-only/simplicity boundary; this builds the
+READ-MODEL instead): a derived per-NPC "disposition & wants" projection composed
+ENTIRELY from existing state (goals, bonds, grudges, traits, standing) — a pure
+display read, zero new persisted state, secrets-seam-safe. The DM sees who wants
+what; the engine stores nothing new.
+V-24d DEEPER PROVENANCE THREADING: more cause-edges recorded where kernels already
+compute causes (flag-dark byte-neutral, widens the V-4 cause-walk's reach).
+
+### LANE V-M — display & creative follow-ons
+V-25a PLAYER-SAFE ROAD SCENE: the composer's player-audience variant (the
+fail-closed audience machinery exists; add the surface + pin zero covert leak).
+V-25b THE CAMPAIGN PLAYER VIEW: a read-only player face for a campaign via its
+unlisted link (V-20 substrate + the secrets seam as display mode; the party sees
+the world as inhabitants, never the DM's ledger).
+V-25c AGED-MAP FOLLOW-ONS: street-level wear + district renaming echoes (V-15's
+recorded follow-ons).
+V-25d TIMELAPSE FOLLOW-ONS: per-settlement drill + export-as-clip (V-3's recorded
+follow-ons; clip = deterministic frame sequence, encode-free format).
+V-25e RADAR LENSES v1: the future-lens display family, minimal honest form (derived
+trend indicators from existing history rings; no prediction claims — trend, not
+prophecy; claims-parity guarded).
+V-25f WORLDMAPTOOLBAR TEACHING TRANCHE: the owed teaching polish.
+
+### LANE V-N — AI scope + content follow-ons
+V-26a INTERVIEW FOLLOW-ONS: multi-hop questions + campaign-wide scope (the V-1
+follow-on, same wall/gates/metering).
+V-26b HANDBOOK NARRATIVE REWRITE: house-voice rewrite STAGED FOR TASTE (the draft
+lands complete; the owner flips it — help content, not world canon, but voice is
+taste-adjacent; the flip is one click).
+
+### LANE V-O — platform completions (inert-honest where external)
+V-27a LOCALIZATION SCAFFOLD: locale plumbing + extraction-completeness pin + ONE
+pseudo-locale proving the door swings (translation itself = post-launch content).
+V-27b TTI/INP THROTTLED E2E HARNESS: the owed perf harness on the existing
+playwright base.
+V-27c PDF COUNTERSEAL STRUCTURED-PATH REFACTOR (WB-k): with full parity pins
+(walk the tree, never bytes — the standing hazard).
+V-27d IM FELL DISPLAY FACE: implemented toggle-OFF (lazy font, zero eager) —
+lighting it is the owner's taste flip.
+V-27e CONTENT-VT-2 AUDIT+LAND: the parked view-time content branch audited against
+the current tree and landed or superseded-with-reasons.
+V-27f GALLERY COMMENTS, PERIMETER-POSTURED: schema (written-not-deployed) + RLS
+executed-tests + rate-limits + report/hide + admin moderation flags — code-complete,
+INERT until the owner enables post-launch (community needs humans; the SURFACE
+does not).
+
+### SKIPPED — each waiting on something no build substitutes (recorded, final)
+Hosted MCP + fog realtime v2 (owner infra/deploy) · film 720p variants (no ffmpeg
+on this machine — recorded hazard; encode recipe exists for the owner's machine) ·
+second Founder ring (pricing evidence) · S4+ knobs (live acceptance metrics) ·
+free Interview taste (capital-gated, ruled) · translations (humans) · everything
+lived/soak-certified by definition.
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
