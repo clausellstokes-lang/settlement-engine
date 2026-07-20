@@ -105,7 +105,9 @@ export function currentSeaHop(m, weekClock, digest, season) {
   return { overSea, a, b };
 }
 
-/** Is a blockader (or embattled port seat) hostile to the traveller's home? Pure. */
+/** Is a blockader (or embattled port seat) hostile to the traveller's home? Pure.
+ *  @param {Record<string, unknown>} graph @param {Record<string, unknown>} worldState
+ *  @param {string} homeId @param {string} otherId @returns {boolean} */
 function hostileToHome(graph, worldState, homeId, otherId) {
   if (!otherId || otherId === homeId) return false;
   if (atOpenWar(graph, homeId, otherId)) return true;

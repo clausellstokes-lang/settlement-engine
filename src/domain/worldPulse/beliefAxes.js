@@ -130,7 +130,7 @@ export function axisGroundTruth(item) {
 /**
  * A report as the axis fold reads it — the beliefMap BeliefReport with the two transient fields
  * beliefMap.reportsBySubject attaches for the axes (the raw content + the canonical eventRef).
- * @typedef {{ accuracy01?: number, completeness01?: number,
+ * @typedef {{ accuracy01: number, completeness01: number,
  *   content?: { what?: unknown, magnitude?: unknown, partyIds?: unknown } | null,
  *   eventRef?: string }} AxisReport
  */

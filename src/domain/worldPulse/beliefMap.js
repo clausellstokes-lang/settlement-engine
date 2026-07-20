@@ -395,7 +395,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  *   relationshipStates?: unknown } | null | undefined} BeliefWorldState
  */
 
-/** @typedef {{ id?: string | number, name?: string, settlement?: { config?: { primaryDeitySnapshot?: { name?: unknown } } } }} SnapItem */
+/** @typedef {{ id?: string | number, name?: string, settlement?: { config?: { primaryDeitySnapshot?: { name?: unknown } }, populationHistory?: unknown, traditions?: unknown } }} SnapItem */
 /** @typedef {{ from?: unknown, to?: unknown, source?: unknown, target?: unknown, a?: unknown, b?: unknown, id?: unknown, relationshipType?: unknown }} RawEdge */
 /** @typedef {{ byId?: Map<string, SnapItem>, settlements?: SnapItem[], regionalGraph?: { edges?: RawEdge[] }, relationships?: RawEdge[] }} BeliefSnapshot */
 
@@ -473,6 +473,10 @@ function aggregateReports(reports, credibilityOf = null) {
  *   resisted). Bounded below (> 0) so it only SLOWS convergence, never inverts it; the
  *   contradiction-widens-uncertainty (confidence) term below runs at FULL weight regardless —
  *   reality always eventually wins. ABSENT (1) ⇒ byte-identical (weight * 1 === weight).
+ * @param {boolean} [args.axesActive]  D-1 (deep-couplings): fold the two axis fields AFTER the
+ *   base reconcile (the leaf owns the logic). ABSENT/false ⇒ untouched ⇒ byte-identical.
+ * @param {string} [args.subjectId]  D-1: the subject id the axis fold resolves the
+ *   migration_flight direction against (unused when axesActive is false).
  * @returns {BeliefRecord}
  */
 export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1, axesActive = false, subjectId = '' }) {
@@ -532,7 +536,7 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   };
   // D-1 (deep-couplings): fold the two axes AFTER the base reconcile (the credibilityOf
   // injection shape — the leaf owns the logic). ABSENT flag ⇒ untouched ⇒ byte-identical.
-  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth, reports, subjectId }));
+  if (axesActive) Object.assign(record, foldBeliefAxes({ prior, groundTruth: /** @type {{ populationTrendBand: number, observanceLabel: string | null }} */ (/** @type {unknown} */ (groundTruth)), reports, subjectId }));
   return record;
 }
 
@@ -617,7 +621,7 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null, 
   const out = new Map();
   const ledger = asObject(observerLedger);
   for (const key of Object.keys(ledger)) {
-    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown, provenance?: unknown } | null } */ (ledger[key]);
+    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown, provenance?: unknown, eventRef?: unknown } | null } */ (ledger[key]);
     if (!rec || typeof rec !== 'object') continue;
     const arrivalTick = Math.floor(finiteNumber(rec.arrivalTick, Infinity));
     if (arrivalTick > now) continue; // in transit — not yet heard

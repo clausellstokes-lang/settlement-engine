@@ -128,7 +128,9 @@ export function intelEligible(rngSeed, a, b, year, baseChance) {
 export function intelInjectionBelief(record, tick) {
   const b = record && typeof record.belief === 'object' && record.belief ? record.belief : null;
   if (!b) return null;
-  const fidelity = clamp01(typeof record.fidelity01 === 'number' ? record.fidelity01 : 0.7);
+  // b truthy ⇒ record is the non-null carrier (the guard above) — the checker cannot thread that.
+  const rec = /** @type {{ fidelity01?: number }} */ (record);
+  const fidelity = clamp01(typeof rec.fidelity01 === 'number' ? rec.fidelity01 : 0.7);
   const conf = typeof b.confidence01 === 'number' ? b.confidence01 : 0.5;
   return {
     readiness: b.readiness,
@@ -250,7 +252,7 @@ export function enumerateIntelOpportunities({ beliefMaps, edges, graph, relState
   const tradeCache = new Map();
   const tradeSetOf = (/** @type {string} */ id) => {
     let s = tradeCache.get(id);
-    if (!s) { s = new Set(tradeNeighbours(graph, id).map((n) => String(n.neighbourId))); tradeCache.set(id, s); }
+    if (!s) { s = new Set(tradeNeighbours(/** @type {import('./rumorNetwork.js').RumorGraphRead} */ (graph), id).map((n) => String(n.neighbourId))); tradeCache.set(id, s); }
     return s;
   };
 

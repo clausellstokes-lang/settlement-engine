@@ -18,12 +18,13 @@ import { storageCapacityMonths } from './foodStockpile.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 
 // ── Kernel-mirrored read-shapes (0-hole discipline: no `any`) ──────────────────
+/** @typedef {{ _deityRef?: unknown, alignmentAxis?: string, lawAxis?: string }} GenDeity */
 /** @typedef {{ name?: unknown, type?: unknown, category?: unknown }} GenInstitution */
 /** @typedef {{ faction?: unknown, category?: unknown, power?: unknown }} GenFaction */
 /** @typedef {{ population?: number, institutions?: GenInstitution[],
  *   economicState?: { foodSecurity?: { storageMonths?: unknown }, economicBase?: unknown, primaryIndustry?: unknown, prosperity?: unknown },
  *   powerStructure?: { factions?: GenFaction[] },
- *   config?: { primaryDeitySnapshot?: unknown, economicBase?: unknown } }} GenSettlement */
+ *   config?: { primaryDeitySnapshot?: GenDeity|null, economicBase?: unknown } }} GenSettlement */
 /** @typedef {{ saveId?: (string|number), settlement?: GenSettlement }} GenUpdate */
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
