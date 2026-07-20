@@ -57,6 +57,14 @@ export const LADDER_TUNING = Object.freeze({
   // npcGrowth decay idiom). A caught schemer climbs at half strength for years.
   STIGMA_HALF_LIFE_WEEKS: 312, // ~6 years base — "a caught schemer climbs at half strength for years"
   GRUDGE_HALF_LIFE_WEEKS: 156, // ~3 years base — grudges are real but fade
+  // D-7e THE POSITIVE-BOND SYMMETRY: the grudge structure's TWIN. Same D5-band decay
+  // clock (bonds fade like grudges), additive stacking, a bounded cap. loyalty/gratitude/
+  // friendship. A bond dies with the standing record (the deliberate succession reset —
+  // state-never-fate; NEVER a parallel NPC-pair graph). Absent unless memoryWeave lit AND
+  // a bond formed (drop-when-empty ⇒ zero bonds keys when dark — the D-7 contract).
+  BOND_HALF_LIFE_WEEKS: 156,   // ~3 years base — a friendship fades like a grudge
+  BOND_MINT_SEV: 0.5,          // a formation event deposits half a mark (additive, capped)
+  BOND_MAX_SEV: 1.0,           // the bounded cap (a bond cannot exceed a full mark)
   STIGMA_MINT_SEV: 1.0,        // a fresh exposure stamps a full mark (refresh extends)
   // D-2 (design §6): a fresh LIE-exposure mints the SAME stigma shape, sev SCALED by the
   // lie's magnitude band (0..4) with a floor — a band-4 whopper stigmatizes as fully as a
@@ -253,8 +261,24 @@ export function maintainMarks(st, npc, bandMult, weeks, tick, lieExposure = null
     lastLieSeen = Math.floor(num(lieExposure.tick, tick));
     freshLieExposed = true;
   }
+  // D-7e: decay the POSITIVE bonds on the same band-scaled clock (only when present —
+  // a dark / bond-free record carries no bonds field, so none is created here). Prune
+  // spent bonds; the field itself drops when the last bond fades (drop-when-empty).
+  /** @type {Record<string, import('./npcLadderKernel.js').LadderBond>|undefined} */
+  let bonds;
+  if (st.bonds && typeof st.bonds === 'object') {
+    /** @type {Record<string, import('./npcLadderKernel.js').LadderBond>} */
+    const next = {};
+    for (const k of Object.keys(st.bonds).sort(compareCodepoint)) {
+      const b = st.bonds[k];
+      const sev = round4(decayMark(b.sev, Math.max(0, weeks - b.week), T.BOND_HALF_LIFE_WEEKS, bandMult));
+      if (sev >= T.MARK_PRUNE_EPSILON) next[k] = { sev, week: weeks, kind: b.kind };
+    }
+    if (Object.keys(next).length) bonds = next;
+  }
   /** @type {import('./npcLadderKernel.js').LadderStanding} */
   const nextSt = { ...st, stigma, grudges, lastExposed: exposedNow, wasOusted: oustedNow };
+  if (bonds) nextSt.bonds = bonds; else delete nextSt.bonds;
   if (lastLieSeen !== undefined) nextSt.lastLieSeen = lastLieSeen;
   return { st: nextSt, freshExposed, freshLieExposed };
 }
@@ -277,6 +301,9 @@ export function normalizeStanding(v, weeks) {
   // D-2: the last lie-exposure tick the ladder already stigmatized (consume-once). Additive-
   // optional — absent on legacy records ⇒ a stale deposit re-fires once, then latches.
   if (typeof o.lastLieSeen === 'number' && Number.isFinite(o.lastLieSeen)) st.lastLieSeen = Math.floor(o.lastLieSeen);
+  // D-7e: the positive bonds — additive-optional (absent on legacy / dark records ⇒ no key).
+  const bonds = normalizeBonds(o.bonds);
+  if (Object.keys(bonds).length) st.bonds = bonds;
   return st;
 }
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderGoal|null} */
@@ -313,6 +340,66 @@ function normalizeGrudges(v) {
   }
   return out;
 }
+// ── D-7e THE PERSON BONDS (the grudge twin; loyalty / gratitude / friendship) ──
+/** The three positive-bond kinds — the grudge's mirror image. @type {ReadonlySet<string>} */
+export const BOND_KINDS = Object.freeze(new Set(['loyalty', 'gratitude', 'friendship']));
+
+/** Normalize a persisted bonds map (defensive; drop-when-invalid). Each entry is
+ *  {sev, week, kind∈BOND_KINDS}; a bad kind coerces to 'friendship' (the generic tie).
+ *  @param {unknown} v @returns {Record<string, import('./npcLadderKernel.js').LadderBond>} */
+export function normalizeBonds(v) {
+  const o = asObject(v);
+  /** @type {Record<string, import('./npcLadderKernel.js').LadderBond>} */
+  const out = {};
+  for (const key of Object.keys(o).sort(compareCodepoint)) {
+    const b = asObject(o[key]);
+    const sev = num(b.sev, 0);
+    if (sev > 0) {
+      const kind = typeof b.kind === 'string' && BOND_KINDS.has(b.kind) ? b.kind : 'friendship';
+      out[key] = { sev: round4(clamp01(sev)), week: num(b.week, 0), kind };
+    }
+  }
+  return out;
+}
+
+/** Deposit a bond of `kind` toward `otherNid` into a bonds map (a NEW map — never mutate).
+ *  ADDITIVE stacking on sev, bounded by BOND_MAX_SEV; the latest formation sets the kind
+ *  (a gratitude event over a loyalty tie reads as gratitude now). The caller has gated on
+ *  memoryWeaveActive. Pure. @param {Record<string, import('./npcLadderKernel.js').LadderBond>|undefined} bonds
+ *  @param {string} otherNid @param {string} kind @param {number} addSev @param {number} weeks
+ *  @returns {Record<string, import('./npcLadderKernel.js').LadderBond>} */
+export function mintBond(bonds, otherNid, kind, addSev, weeks) {
+  const T = LADDER_TUNING;
+  const cur = asObject(bonds);
+  const prior = asObject(cur[otherNid]);
+  const priorSev = num(prior.sev, 0);
+  const sev = round4(clamp(priorSev + Math.max(0, num(addSev, 0)), 0, T.BOND_MAX_SEV));
+  const k = typeof kind === 'string' && BOND_KINDS.has(kind) ? kind : 'friendship';
+  return { ...cur, [otherNid]: { sev, week: weeks, kind: k } };
+}
+
+/** The bond severity toward a specific NPC (0 when none). @param {import('./npcLadderKernel.js').LadderStanding|null|undefined} st
+ *  @param {string} otherNid @returns {number} */
+export function bondSevToward(st, otherNid) {
+  const b = st && st.bonds ? st.bonds[otherNid] : null;
+  return b ? num(b.sev, 0) : 0;
+}
+
+/** The strongest bond a standing holds ({ nid, sev, kind } | null) — the D-4f support-goal
+ *  patron pick / the generosity give-side read. @param {import('./npcLadderKernel.js').LadderStanding|null|undefined} st
+ *  @returns {{ nid: string, sev: number, kind: string }|null} */
+export function strongestBond(st) {
+  const bonds = st && st.bonds ? st.bonds : null;
+  if (!bonds) return null;
+  /** @type {{ nid: string, sev: number, kind: string }|null} */
+  let best = null;
+  for (const nid of Object.keys(bonds).sort(compareCodepoint)) {
+    const b = bonds[nid];
+    if (!best || b.sev > best.sev) best = { nid, sev: b.sev, kind: b.kind };
+  }
+  return best;
+}
+
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderFactionRec} */
 export function normalizeFactionRec(v) {
   const o = asObject(v);
@@ -359,6 +446,16 @@ function sortedStanding(st) {
   if (typeof st.lastExposed === 'number' && st.lastExposed > 0) out.lastExposed = st.lastExposed;
   if (st.wasOusted === true) out.wasOusted = true;
   if (typeof st.lastLieSeen === 'number' && st.lastLieSeen > 0) out.lastLieSeen = st.lastLieSeen; // D-2 consume-once
+  // D-7e: persist bonds ONLY when non-empty (drop-when-empty ⇒ zero bonds keys when dark).
+  if (st.bonds) {
+    const bk = Object.keys(st.bonds).sort(compareCodepoint);
+    if (bk.length) {
+      /** @type {Record<string, unknown>} */
+      const b = {};
+      for (const k of bk) b[k] = { kind: st.bonds[k].kind, sev: st.bonds[k].sev, week: st.bonds[k].week };
+      out.bonds = b;
+    }
+  }
   return out;
 }
 /** The codepoint-sorted persisted record (byte-stable serialization). Empty ⇒ null so an
