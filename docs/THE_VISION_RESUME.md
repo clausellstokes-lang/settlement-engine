@@ -23,7 +23,9 @@
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-D (fresh branch off 212758ad; prefers a quiet tree) → V-F → V-G (F before G:
-    both touch pendingEdits) → V-J (after V-E's report — reads its slug format).
+    both touch pendingEdits) → V-J (after V-E's report — reads its slug format) →
+    V-K (THE ASSIZE + THE COMMONS' VOICE engine pair, design-doc V-22/V-23; the
+    cohesion law + masses clause binding; full engine gate).
     Every brief carries THE TWO-BRANCH GEOGRAPHY note (lane worktrees cannot see
     the ledger-branch docs; cite absolute main-tree paths; the worktree's docs/
     lacking them is EXPECTED, not missing).
