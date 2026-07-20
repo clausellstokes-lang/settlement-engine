@@ -16,6 +16,7 @@
 
 import { useMemo } from 'react';
 import { compareCausalState, deriveCausalState } from '../../domain/causalState.js';
+import { buildTrendLenses } from '../../domain/display/trendLens.js';
 import {
   INK, MUTED, BODY, BORDER, CARD, CARD_HDR, sans, FS, SP,
 } from '../theme.js';
@@ -69,7 +70,10 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
             .map((/** @type {any} */ p) => (typeof p === 'number' ? p : Number(p?.population)))
             .filter((/** @type {any} */ n) => Number.isFinite(n))
           : []);
-    return { deltas, history, hasPrior: !!beforeState };
+    // V-25e — RADAR LENSES v1: derived trend readings from the populationHistory ring
+    // (trend, never prophecy — every reading is retrospective and claims-parity-pinned).
+    const lenses = buildTrendLenses({ settlement });
+    return { deltas, history, hasPrior: !!beforeState, lenses };
   }, [settlement, priorSettlement, before, after, populationHistory]);
 
   // Self-gate: no prior snapshot and no population arc ⇒ nothing to say.
@@ -133,6 +137,22 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
             <span style={{ color: popChange >= 0 ? OINK.strong : RUBRIC.rubric, fontWeight: 700 }}>
               ({popChange >= 0 ? '+' : ''}{popChange.toLocaleString()})
             </span>
+          </div>
+        )}
+
+        {/* V-25e — the trend lens strip: what the recent history HAS shown (a retrospective
+            reading, never a forecast). Colour + the reading word carry the direction (two
+            channels); self-gates to nothing when there is no ring to read. */}
+        {model.lenses.length > 0 && (
+          <div data-testid="trend-lenses" style={{ marginTop: SP.sm, display: 'grid', gap: 3 }}>
+            {model.lenses.map(lens => (
+              <div key={lens.id} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>
+                <strong>{lens.label}</strong>{' '}
+                <span style={{ color: lens.direction === 'rising' ? OINK.strong : lens.direction === 'falling' ? RUBRIC.rubric : MUTED, fontWeight: 700 }}>
+                  {lens.reading}
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </div>
