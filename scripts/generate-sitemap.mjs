@@ -45,6 +45,9 @@ export const NOINDEX_VIEWS = new Set([
   'signin', 'register', 'reset-password', 'set-new-password',
   'verify-email', 'confirm-email', 'dossier-success',
   'refunds',
+  // V-18 — the DM Screen is an app tool, not indexable content. covenant/bounty
+  // ARE public content and remain indexable (absent here).
+  'screen',
 ]);
 
 // Retired redirect surfaces (kept in ROUTES so old links still resolve, but they

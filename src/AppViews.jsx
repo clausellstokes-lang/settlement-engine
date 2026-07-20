@@ -53,6 +53,10 @@ const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.
 // there is no separate RefundsPage chunk.
 const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
 const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
+// R-7/R-9 trust pages + V-18 the DM Screen — all lazy (off the first-paint graph).
+const CovenantPage      = lazy(() => import('./components/legal/CovenantPage.jsx'));
+const BountyPage        = lazy(() => import('./components/legal/BountyPage.jsx'));
+const DmScreen          = lazy(() => import('./components/screen/DmScreen.jsx'));
 // The public Founder seat-lineage page. Lazy — off the first-paint graph; its lineage
 // read (lib/founderLineage.js) is dynamically imported on mount and fails closed.
 const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
@@ -102,6 +106,9 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'founders'    && <FoundersPage onNavigate={setView} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
+      {view === 'covenant'    && <CovenantPage />}
+      {view === 'bounty'      && <BountyPage />}
+      {view === 'screen'      && <DmScreen />}
       {/* /refunds is retired as a standalone page — its content is now the Terms
           "Refunds and cancellation" section. The old URL still resolves: it
           renders Terms and scrolls to that subsection, so no emailed/shared

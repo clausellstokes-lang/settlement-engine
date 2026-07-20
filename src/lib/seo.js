@@ -88,6 +88,9 @@ const NOINDEX_VIEWS = new Set([
   'signin', 'register', 'reset-password', 'set-new-password',
   'verify-email', 'confirm-email', 'dossier-success',
   'refunds',
+  // V-18 — the DM Screen is an at-the-table app tool (reads active state),
+  // not indexable content. covenant/bounty ARE public content (absent here).
+  'screen',
 ]);
 
 // Exported so the lazy per-dossier enricher (seoDossier.js) reuses one

@@ -40,7 +40,8 @@
  *           | 'edit-prose'
  *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'
  *           | 'ransom-npc' | 'rescue-npc'
- *           | 'champion-npc'} EditKind */
+ *           | 'champion-npc'
+ *           | 'table-event'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -55,6 +56,10 @@ export const EDIT_KINDS = Object.freeze([
   // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING: back a live contestant's side of a
   // contested goal (stamps a marker the ladder-contest pass folds into ContestRec.backedBy).
   'champion-npc',
+  // R-1 THE SESSION LEDGER — a table-authored event (the DM records what happened at the
+  // game table). The payload carries a schema-walled directive (domain/tableLedger.js) that
+  // commits a typed, bounded, EXISTING engine effect with source:'table' provenance.
+  'table-event',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
@@ -83,6 +88,11 @@ export const COMMITTABLE_EDIT_KINDS = Object.freeze([
   // arm), stamping the contestBacking marker the ladder-contest pass folds into backedBy.
   // Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op precedent).
   'champion-npc',
+  // R-1 THE SESSION LEDGER — dispatched via applyEditOp→applyTableEvent (the default arm),
+  // committing the payload's schema-walled directive through applyEvent / a canon flavor
+  // line. Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op
+  // precedent; the underlying effects — applyEvent — are already registered).
+  'table-event',
 ]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the
