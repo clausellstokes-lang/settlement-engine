@@ -272,7 +272,9 @@ export function maintainMarks(st, npc, bandMult, weeks, tick, lieExposure = null
     for (const k of Object.keys(st.bonds).sort(compareCodepoint)) {
       const b = st.bonds[k];
       const sev = round4(decayMark(b.sev, Math.max(0, weeks - b.week), T.BOND_HALF_LIFE_WEEKS, bandMult));
-      if (sev >= T.MARK_PRUNE_EPSILON) next[k] = { sev, week: weeks, kind: b.kind };
+      if (sev >= T.MARK_PRUNE_EPSILON) {
+        next[k] = b.foreignSid ? { sev, week: weeks, kind: b.kind, foreignSid: b.foreignSid } : { sev, week: weeks, kind: b.kind };
+      }
     }
     if (Object.keys(next).length) bonds = next;
   }
@@ -356,7 +358,12 @@ export function normalizeBonds(v) {
     const sev = num(b.sev, 0);
     if (sev > 0) {
       const kind = typeof b.kind === 'string' && BOND_KINDS.has(b.kind) ? b.kind : 'friendship';
-      out[key] = { sev: round4(clamp01(sev)), week: num(b.week, 0), kind };
+      /** @type {import('./npcLadderKernel.js').LadderBond} */
+      const entry = { sev: round4(clamp01(sev)), week: num(b.week, 0), kind };
+      // D-7f THE ELITE BLEED: an optional FOREIGN counterpart marker — the counterpart NPC
+      // lives in settlement foreignSid (a cross-border tie). Absent on same-settlement bonds.
+      if (typeof b.foreignSid === 'string' && b.foreignSid) entry.foreignSid = b.foreignSid;
+      out[key] = entry;
     }
   }
   return out;
@@ -368,14 +375,19 @@ export function normalizeBonds(v) {
  *  memoryWeaveActive. Pure. @param {Record<string, import('./npcLadderKernel.js').LadderBond>|undefined} bonds
  *  @param {string} otherNid @param {string} kind @param {number} addSev @param {number} weeks
  *  @returns {Record<string, import('./npcLadderKernel.js').LadderBond>} */
-export function mintBond(bonds, otherNid, kind, addSev, weeks) {
+export function mintBond(bonds, otherNid, kind, addSev, weeks, foreignSid = null) {
   const T = LADDER_TUNING;
   const cur = asObject(bonds);
   const prior = asObject(cur[otherNid]);
   const priorSev = num(prior.sev, 0);
   const sev = round4(clamp(priorSev + Math.max(0, num(addSev, 0)), 0, T.BOND_MAX_SEV));
   const k = typeof kind === 'string' && BOND_KINDS.has(kind) ? kind : 'friendship';
-  return { ...cur, [otherNid]: { sev, week: weeks, kind: k } };
+  /** @type {import('./npcLadderKernel.js').LadderBond} */
+  const entry = { sev, week: weeks, kind: k };
+  // D-7f: carry the foreign counterpart marker (or inherit a prior one) for cross-border ties.
+  const fsid = foreignSid || (typeof prior.foreignSid === 'string' ? prior.foreignSid : null);
+  if (fsid) entry.foreignSid = fsid;
+  return { ...cur, [otherNid]: entry };
 }
 
 /** The bond severity toward a specific NPC (0 when none). @param {import('./npcLadderKernel.js').LadderStanding|null|undefined} st
@@ -452,7 +464,12 @@ function sortedStanding(st) {
     if (bk.length) {
       /** @type {Record<string, unknown>} */
       const b = {};
-      for (const k of bk) b[k] = { kind: st.bonds[k].kind, sev: st.bonds[k].sev, week: st.bonds[k].week };
+      for (const k of bk) {
+        const bd = st.bonds[k];
+        b[k] = bd.foreignSid
+          ? { foreignSid: bd.foreignSid, kind: bd.kind, sev: bd.sev, week: bd.week }
+          : { kind: bd.kind, sev: bd.sev, week: bd.week };
+      }
       out.bonds = b;
     }
   }

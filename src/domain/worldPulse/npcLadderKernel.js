@@ -120,7 +120,7 @@ import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.j
  *   progress: number, basis: string }} LadderGoal */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
 /** @typedef {{ sev: number, week: number }} LadderGrudge */
-/** @typedef {{ sev: number, week: number, kind: string }} LadderBond — D-7e loyalty|gratitude|friendship */
+/** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string }} LadderBond — D-7e loyalty|gratitude|friendship; foreignSid marks a D-7f cross-border counterpart */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
 /** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding> }} LadderRecord */
 

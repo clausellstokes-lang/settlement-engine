@@ -104,3 +104,27 @@ export function grievanceLean(relState, tick) {
   const revanchism = scoreRevanchismLean(relState, tick);
   return clamp01(grievance + GRIEVANCE_READ_TUNING.REVANCHISM_LEAN_BONUS * revanchism);
 }
+
+// The downward (flavor) bias magnitude — how far a hostile / warm settlement pair skews
+// cross-border ELITE bond vs grudge formation (D-7f). Centered on 1; bounded.
+const DISPOSITION_SKEW = 0.5;
+
+/**
+ * D-7f DOWNWARD FLAVOR: the settlement-pair disposition biasing cross-border formation
+ * events. Reads the pair's edge (trust vs resentment) and returns multipliers centered on
+ * 1.0: a HOSTILE pair (resentment > trust) DAMPENS elite bond formation and AMPLIFIES grudge
+ * formation (suspicion); a WARM / trade pair does the reverse (merchant bonds ease). A neutral
+ * or absent edge ⇒ { bondMult: 1, grudgeMult: 1 } (byte-identical — no bias). Pure.
+ * @param {{ trust?: number, resentment?: number } | null | undefined} relState
+ * @returns {{ bondMult: number, grudgeMult: number }}
+ */
+export function dispositionOf(relState) {
+  if (!relState || typeof relState !== 'object') return { bondMult: 1, grudgeMult: 1 };
+  const trust = clamp01(Number(relState.trust) || 0);
+  const resentment = clamp01(Number(relState.resentment) || 0);
+  const lean = trust - resentment; // −1 (hostile) .. +1 (warm)
+  return {
+    bondMult: Math.max(0, 1 + DISPOSITION_SKEW * lean),   // warm ⇒ >1 (bonds ease); hostile ⇒ <1
+    grudgeMult: Math.max(0, 1 - DISPOSITION_SKEW * lean), // hostile ⇒ >1 (suspicion); warm ⇒ <1
+  };
+}
