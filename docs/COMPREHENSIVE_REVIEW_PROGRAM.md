@@ -1134,6 +1134,15 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE LADDER FACTION-KEY FIX IS FOLDED (2026-07-19, owner's separate session
+task_1375e56f) — COMPOSITE ADVANCED aad6265e → dc0b6e2b.** FOLD: claude/the-ladder @
+14e8a2fa (25749ae5, the ladder reads the canonical .faction field — the CONFIRMED live
+bug that collapsed every faction to fac.unknown) + dc0b6e2b (pin-hardening: closed the
+write-read loop, pinned precedence + the traditions cross-layer join). ⚠ COMPOSITE BASE
+MOVED: all pending fold-ready lanes (roads @ 21bba9a1, money @ d0eacd45, ruin-filter @
+4c1ccadc, deep-couplings building) were cut off aad6265e — FOLD BATCH 3 now targets
+dc0b6e2b (merges reconcile the 2-commit advance; re-run the full gate post-merge). D-4
+CONTESTED-GOALS GATE RESOLVED: the ladder faction-key is now correct in the composite.
 **⬛⭐ THE RUIN-FILTER STRUCTURAL LANE COMPLETE (2026-07-19, claude/ruin-filter @
 4c1ccadc, RF-a/b/c atop aad6265e — manager-verified).** The coherence-matrix ruin-class
 defect + point bugs, fixed STRUCTURALLY. RF-a: the shared accessor
