@@ -1134,6 +1134,21 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ OWNER STANDING ORDER (2026-07-19) — SCOPE CLOSED, DRIVE TO THE LOOP.**
+Verbatim: "make it all cohesive, coherent, and comprehensive as always. with this I'll
+stop adding. please continue building all the way to the survey." THE BUILD PHASE IS
+CLOSED — the scope freeze is now ABSOLUTE and owner-affirmed; zero further pre-loop scope;
+every future idea → the vNext ledger, no exceptions. The manager (and the Opus successor
+at THE FABLE BOUNDARY, under the continuity order) drives AUTONOMOUSLY to convergence, NO
+owner input required to reach the loop: finish Deep Couplings (D-0..D-7 incl. the bond +
+cross-settlement completion, once the architect's final integrated doc lands) → FOLD BATCH
+3 (all fold-ready lanes onto dc0b6e2b: roads · money · ruin-filter · completion waves ·
+deep-couplings; migration renumber; ceiling re-pins; war-file reconcile; de-eager reclaim
+→ budget green) → BUILD-COMPLETENESS GATE → THE ROUND 3 LOOP (coherence-mandated,
+pre-stocked with COHERENCE_MATRIX_R3) → convergence (zero must-fix + zero gate-passing
+gaps + A+). CLOSING STANDARD: the constitution + the coherence mandate + cohesive/coherent/
+comprehensive at EVERY fold and EVERY loop cycle. The owner tail (PUSH#1 → soak → tuning →
+ONE REGEN → walk → PUSH#2 → THE VERY END → PUSH#3) awaits at the end, owner-gated.
 **⬛⭐ OWNER RULING (2026-07-19, the FINAL clause) — CROSS-SETTLEMENT NPC DIPLOMACY:
 the two memory planes joined, influence-weighted, bidirectional.** NPC competition/goals/
 relationships EXTEND BETWEEN settlements — flavored BY and SHAPING the settlement pair,
