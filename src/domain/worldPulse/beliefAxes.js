@@ -84,9 +84,11 @@ export function trendBandFromHistory(history) {
 }
 
 /**
- * The ground-truth observance label from a settlement's traditions mirror: the LARGEST-scale
- * tradition's motif + patron, `${motif}:${patronOrNull}`. Highest scaleBand wins (tie ⇒ earliest
- * index — the founding core). Absent/empty mirror ⇒ null. Pure.
+ * The ground-truth observance label from a settlement's traditions mirror: the DOMINANT rite's
+ * motif + patron, `${motif}:${patronOrNull}`. Highest scaleBand wins; among the largest, a
+ * PATRON-BEARING (devotional) rite wins over a patronless one (so a rededication — which changes
+ * a devotional rite's patron — moves the believed observance, the axis's headline use case),
+ * then earliest index (the founding order). Absent/empty mirror ⇒ null. Pure.
  * @param {Array<{ coreMotif?: { element?: unknown }, scaleBand?: unknown, deityRef?: unknown }> | null | undefined} traditions
  * @returns {string | null}
  */
@@ -94,10 +96,15 @@ export function observanceFromTraditions(traditions) {
   if (!Array.isArray(traditions) || !traditions.length) return null;
   let best = null;
   let bestBand = -Infinity;
+  let bestHasPatron = false;
   for (const rec of traditions) {
     if (!rec || typeof rec !== 'object') continue;
     const band = finiteNumber(rec.scaleBand, 0);
-    if (band > bestBand) { bestBand = band; best = rec; }
+    const hasPatron = typeof rec.deityRef === 'string' && !!rec.deityRef;
+    // Higher band wins; tie ⇒ a patron-bearing rite wins; further tie ⇒ earliest (index order).
+    if (band > bestBand || (band === bestBand && hasPatron && !bestHasPatron)) {
+      bestBand = band; best = rec; bestHasPatron = hasPatron;
+    }
   }
   if (!best) return null;
   const motif = best.coreMotif && typeof best.coreMotif === 'object' ? String(best.coreMotif.element || '') : '';

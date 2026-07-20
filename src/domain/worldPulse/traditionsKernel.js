@@ -68,6 +68,7 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKe
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 import { advanceRelations } from '../traditions/relations.js';
 import { traditionBeatProse } from '../traditions/prose.js';
+import { beliefAxesActive, observanceFromTraditions } from './beliefAxes.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -451,6 +452,39 @@ function traditionBeat(a) {
   };
 }
 
+/**
+ * D-1c (deep-couplings) CULTURAL FEEDER — a tradition-MUTATION beat (rededication / imposition /
+ * restoration / adoption reshaped the settlement's dominant observance). Scored ABOVE the rumor
+ * floor (RUMOR_NOTABLE_SCORE_FLOOR = 60) so it ENTERS the rumor net — where the ordinary
+ * OUTCOME beats (traditionBeat, 42/58) never reach — so distant courts can, in time, learn a
+ * rite has changed (and, until they hear it, keep believing the OLD one — the D-1 staleness
+ * feature). The rumor packet copies only structured fields; headline/summary are DM-facing.
+ * Pure. @param {{ sid: string, townName: string, year: number, tick: number, now: string|null }} a
+ * @returns {Record<string, unknown>} */
+function traditionChangeBeat({ sid, townName, year, tick, now }) {
+  const sourceEventId = `tradition_change.${sid}.${year}`;
+  return {
+    id: `wizard_news.${tick}.tradition_change.${sid}.${year}`,
+    tick,
+    createdAt: now,
+    scope: 'regional',
+    significance: 'notable',
+    severity: 0.4,
+    score: 62, // > RUMOR_NOTABLE_SCORE_FLOOR (60) ⇒ the mutation beat enters the rumor net
+    headline: `${townName} reshapes the rite it keeps`,
+    summary: `Word carries out of ${townName} that its foremost observance has taken a new form.`,
+    kind: 'applied',
+    impactKind: 'tradition_change',
+    channelType: 'settlement',
+    settlementIds: [sid],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId,
+    tags: ['world_pulse', 'tradition', 'tradition_change'],
+    reasons: ['A tradition mutation reshaped the settlement’s dominant observance; the change enters the rumor net (score above the notable floor) so distant courts can in time learn of it.'],
+  };
+}
+
 // ── THE ADVANCE ───────────────────────────────────────────────────────────────
 /**
  * Advance the traditions layer one pulse. DORMANT (flag absent) ⇒ a complete no-op
@@ -487,6 +521,10 @@ export function advanceTraditions({ snapshot, worldState, settlementUpdates, tic
 function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, now }) {
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  // D-1c (deep-couplings) CULTURAL FEEDER gate: emit the tradition-mutation beat ONLY when the
+  // belief-axes flag is lit. A lit-traditions world WITHOUT the axes keeps today's EXACT news
+  // volume (byte-identical) — the coupling lights as one system (the §5 D-1c JUDGMENT).
+  const axesActive = beliefAxesActive(worldState);
   const now2 = Math.max(0, Math.floor(num(tick, 0)));
   const weeks = num(asObject(asObject(worldState).calendar).elapsedWeeks, now2);
   const clock = seasonForTick(weeks);
@@ -635,6 +673,19 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       return { ...rec, lastHeldYear: year, lastOutcome: outcome };
     });
 
+    // D-1c CULTURAL FEEDER: a MUTATION this tick (rededication / imposition / restoration /
+    // adoption — politics/relations reported changed) that reshaped the DOMINANT observance (the
+    // largest-scale motif:patron) mints a rumor-net-clearing beat, so a distant court can learn the
+    // rite changed — and, until it hears, keeps believing the OLD one (the staleness feature). The
+    // changed-this-tick gate fires the beat ONCE per mutation (politics.changed is true only on the
+    // mutation tick — no per-tick beat-spam, the anti-hum law). Gated on beliefAxesEnabled; never on
+    // the first-lit mint. Byte-identical when the axes are dark (no beat pushed).
+    if (axesActive && !minted && priorRecs && (politics.changed || relations.changed)) {
+      const nextObs = observanceFromTraditions(nextRecs);
+      if (nextObs != null && nextObs !== observanceFromTraditions(priorRecs)) {
+        newsEntries.push(traditionChangeBeat({ sid, townName, year, tick: now2, now }));
+      }
+    }
     // Changed if freshly minted, a checkpoint reassigned/mutated, a §8/§9 relation imposed/
     // restored/adopted, or an occurrence stamped a record; a fully-quiet carried set is byte-
     // stable (the prior ledger ref).
