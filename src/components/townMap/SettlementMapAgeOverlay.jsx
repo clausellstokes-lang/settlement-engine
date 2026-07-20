@@ -17,7 +17,7 @@
 
 import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
-import { deriveAgePortrait, ageOverlayOps } from '../../domain/townMap/ageOverlay.js';
+import { deriveAgePortrait, ageOverlayOps, streetWearOps } from '../../domain/townMap/ageOverlay.js';
 
 /** The bounded AGE style — the ONLY style naming opacity.age / stroke.age (the
  *  dormancy wall gate in ageOverlayOps). `ink` is threaded from the active lens so
@@ -60,7 +60,10 @@ export default function SettlementMapAgeOverlay({ model, settlement, ink = 'curr
   const ops = useMemo(() => {
     if (asOfWeek == null) return [];
     const portrait = deriveAgePortrait({ settlement, asOfWeek });
-    return ageOverlayOps(model, { ink, opacity: { age: AGE_OPACITY }, stroke: { age: AGE_STROKE } }, portrait);
+    const style = { ink, opacity: { age: AGE_OPACITY }, stroke: { age: AGE_STROKE } };
+    // V-25a — district-area marks PLUS street-level wear (both derived-only, both
+    // gated by the same dormancy wall + scrub week).
+    return [...ageOverlayOps(model, style, portrait), ...streetWearOps(model, style, portrait)];
   }, [model, settlement, ink, asOfWeek]);
   if (ops.length === 0) return null;
   return (

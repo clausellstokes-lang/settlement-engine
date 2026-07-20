@@ -10,6 +10,7 @@ import { Sparkles } from 'lucide-react';
 import { t as tr } from '../copy/index.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryCampaigns from './gallery/GalleryCampaigns.jsx';
+import CampaignPlayerView from './gallery/CampaignPlayerView.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryHubPage from './gallery/GalleryHubPage.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
@@ -66,6 +67,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
     dossier,
     dossierLoading,
     dossierError,
+    unlistedCampaign,
     voteBusyId,
     reactionBusyKey,
     reportBusyId,
@@ -107,6 +109,22 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
     // malformed gallery payload (bad chronicle, missing fields) must degrade to
     // a recoverable in-place fallback, not blank the whole app. resetKey is the
     // slug so opening a different dossier clears a stale error.
+    // V-25b — the slug resolved to an unlisted CAMPAIGN party link, not a
+    // settlement dossier: render its read-only player face.
+    if (unlistedCampaign) {
+      return (
+        <FeatureErrorBoundary
+          label="GalleryPage.campaignPlayer"
+          kind="react.render.gallery"
+          fallbackTitle={tr('errors.galleryDossier')}
+          resetKeys={[activeSlug]}
+        >
+          <Page>
+            <CampaignPlayerView campaign={unlistedCampaign} onBack={backToList} />
+          </Page>
+        </FeatureErrorBoundary>
+      );
+    }
     return (
       <FeatureErrorBoundary
         label="GalleryPage.detail"

@@ -10,7 +10,7 @@
  */
 import { useState, useMemo } from 'react';
 import { useStore } from '../../store/index.js';
-import { composeRoadSceneBrief } from '../../domain/briefs/roadScene.js';
+import { composeRoadSceneBrief, composeRoadScenePlayerBrief } from '../../domain/briefs/roadScene.js';
 import { viewerSeesDmSecrets } from '../../domain/display/viewerSecrets.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, FS, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
@@ -24,7 +24,8 @@ const selectStyle = {
  *  Exported for the regression pin: an unrecognized item never renders raw JSON. */
 export function itemLine(sectionId, it) {
   if (sectionId === 'road') {
-    if (it.leg) return `${it.leg} — ${it.hops} hop${it.hops === 1 ? '' : 's'}, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}`;
+    // The player-safe lead carries no danger/tolls numbers (it.danger absent) — coarse by design.
+    if (it.leg) return `${it.leg} — ${it.hops} hop${it.hops === 1 ? '' : 's'}${it.danger != null ? `, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}` : ''}`;
     // V-6 BIOME TRUTH: the season/terrain texture appends only on a biomeTexture canon
     // (it.terrain present); absent ⇒ the line is byte-identical to the pre-V-6 render.
     return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}${it.terrain ? ` — ${it.terrain}` : ''}`;
@@ -35,7 +36,7 @@ export function itemLine(sectionId, it) {
     if (it.kind === 'envoy') return `${it.npc} of ${it.home}, ${it.purpose}, under ${it.escort}, bound for ${it.heading}`;
   }
   if (sectionId === 'gates') {
-    if (it.state === 'occupied') return `Occupied by ${it.by} (${it.rung})`;
+    if (it.state === 'occupied') return `Occupied by ${it.by}${it.rung ? ` (${it.rung})` : ''}`;
     if (it.state === 'under siege') return `Under siege by ${it.by}`;
     if (it.state === 'a festival is on') return `A festival is on — ${it.guestRight}`;
   }
@@ -68,6 +69,7 @@ export default function RoadScenePanel({ campaign }) {
 
   const [origin, setOrigin] = useState(() => (selectedId != null ? String(selectedId) : ''));
   const [dest, setDest] = useState('');
+  const [asPlayer, setAsPlayer] = useState(false); // V-25a — preview/show the inhabitant view
   const [dressing, setDressing] = useState(false);
   const [dressed, setDressed] = useState(/** @type {{answer?:string,error?:string}|null} */(null));
 
@@ -76,11 +78,12 @@ export default function RoadScenePanel({ campaign }) {
 
   const brief = useMemo(() => {
     if (!seesSecrets || !origin || !dest || origin === dest) return null;
-    return composeRoadSceneBrief({
+    const compose = asPlayer ? composeRoadScenePlayerBrief : composeRoadSceneBrief;
+    return compose({
       originId: origin, destId: dest, worldState, settlements: savedSettlements,
       regionalGraph, tick: worldState.tick,
     });
-  }, [seesSecrets, origin, dest, worldState, savedSettlements, regionalGraph]);
+  }, [seesSecrets, origin, dest, asPlayer, worldState, savedSettlements, regionalGraph]);
 
   if (!campaign) {
     return <p style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>Stage the road once a campaign is live.</p>;
@@ -125,6 +128,15 @@ export default function RoadScenePanel({ campaign }) {
         {pickerRow('road-scene-to', 'To', dest, setDest, origin)}
       </div>
 
+      {/* V-25a — the DM previews (and can read aloud) the inhabitant view: the same road, but only
+          what the party would themselves perceive. No covert movement, no secret war. */}
+      <div role="group" aria-label="View the road as" style={{ display: 'flex', gap: SP.xs, alignItems: 'center', flexWrap: 'wrap' }}>
+        <span style={{ fontSize: FS.micro, color: MUTED, fontWeight: 700 }}>View as</span>
+        <Button variant={asPlayer ? 'ghost' : 'secondary'} size="sm" aria-pressed={!asPlayer} onClick={() => setAsPlayer(false)}>DM</Button>
+        <Button variant={asPlayer ? 'secondary' : 'ghost'} size="sm" aria-pressed={asPlayer} onClick={() => setAsPlayer(true)}>Players</Button>
+        {asPlayer && <span style={{ fontSize: FS.micro, color: MUTED }}>What the party sees — no DM secrets.</span>}
+      </div>
+
       {origin && dest && origin === dest && (
         <p style={{ color: MUTED, fontSize: FS.micro }}>Choose two different settlements.</p>
       )}
@@ -144,7 +156,7 @@ export default function RoadScenePanel({ campaign }) {
         </section>
       ))}
 
-      {brief && brief.sections.length > 0 && (
+      {brief && brief.sections.length > 0 && !asPlayer && (
         <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', flexWrap: 'wrap' }}>
           <Button variant="ai" size="sm" onClick={onDress} busy={dressing} disabled={dressing}
             aria-label="Dress the road scene with grounded AI prose (spends credits)">

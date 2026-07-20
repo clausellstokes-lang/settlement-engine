@@ -417,6 +417,7 @@ export {
   shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
   fetchMyUnlistedDossiers, fetchUnlistedDossier,
   shareMapUnlisted, rotateMapUnlistedSlug, fetchMyUnlistedMaps, fetchUnlistedMap,
+  adaptUnlistedCampaign, fetchUnlistedCampaign,
 } from './galleryUnlisted.js';
 // fetchUnlistedDossier is also used internally by the fetchPublicDossier fallback.
 import { fetchUnlistedDossier } from './galleryUnlisted.js';

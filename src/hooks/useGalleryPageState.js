@@ -6,6 +6,7 @@ import {
   fetchMyGallery,
   fetchMyUnlistedDossiers,
   fetchFeaturedGallery,
+  fetchUnlistedCampaign,
   reportGalleryDossier,
   toggleGalleryVote,
   toggleGalleryReaction,
@@ -66,6 +67,10 @@ export function useGalleryPageState(routeSlug = null) {
   const [dossier, setDossier] = useState(null);
   const [dossierLoading, setDossierLoading] = useState(false);
   const [dossierError, setDossierError] = useState(null);
+  // V-25b — an unlisted party link may resolve to a CAMPAIGN (map_with_campaign)
+  // rather than a settlement dossier; when it does, the detail area renders the
+  // read-only player face instead of the settlement not-found note.
+  const [unlistedCampaign, setUnlistedCampaign] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
   // Reactions (GALLERY-2 phase 2) — busy key is `${id}:${reactionKey}` so one
   // in-flight chip never locks the other five.
@@ -159,13 +164,22 @@ export function useGalleryPageState(routeSlug = null) {
     setActiveSlug(slug);
     setDossierLoading(true);
     setDossierError(null);
+    setUnlistedCampaign(null);
     setActionError(null);
     setActionNotice(null);
     if (!options.replace) navigate('gallery', { params: { slug } });
     try {
       const next = await fetchPublicDossier(slug);
-      setDossier(next);
-      if (!next) setDossierError('This settlement is not available.');
+      // V-25b — a settlement miss may be an unlisted CAMPAIGN party link. Resolve it
+      // to its read-only player face before declaring the slug unavailable.
+      if (!next) {
+        const campaign = await fetchUnlistedCampaign(slug);
+        if (openSlugRef.current !== slug) return; // a newer open superseded this one
+        if (campaign) { setUnlistedCampaign(campaign); setDossier(null); }
+        else { setDossier(null); setDossierError('This settlement is not available.'); }
+      } else {
+        setDossier(next);
+      }
     } catch (err) {
       setDossierError(err?.message || 'This settlement could not be opened.');
       setDossier(null);
@@ -197,6 +211,7 @@ export function useGalleryPageState(routeSlug = null) {
     setActiveSlug(null);
     setDossier(null);
     setDossierError(null);
+    setUnlistedCampaign(null);
   }, [routeSlug, openDossier]);
 
   const loadMore = useCallback(async () => {
@@ -224,6 +239,7 @@ export function useGalleryPageState(routeSlug = null) {
     setActiveSlug(null);
     setDossier(null);
     setDossierError(null);
+    setUnlistedCampaign(null);
     setActionError(null);
     setActionNotice(null);
     navigate('gallery');
@@ -360,6 +376,7 @@ export function useGalleryPageState(routeSlug = null) {
     dossier,
     dossierLoading,
     dossierError,
+    unlistedCampaign,
     voteBusyId,
     reactionBusyKey,
     reportBusyId,

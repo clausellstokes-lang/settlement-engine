@@ -120,3 +120,41 @@ export async function fetchUnlistedMap(slug) {
   if (error) { console.error('[gallery] unlisted map fetch failed:', error); return null; }
   return data || null;
 }
+
+/**
+ * V-25b — THE CAMPAIGN PLAYER VIEW adapter. Pure, FAIL-CLOSED. Reshapes the flat
+ * get_unlisted_map payload into the nested {world:{snapshot,sections}} shape
+ * CampaignStatePanel consumes — but ONLY for a genuine campaign share that carries
+ * a living world. It returns null for a plain map, a non-map_with_campaign kind, or
+ * a campaign whose owner did not opt the world in (world_snapshot null). It reads a
+ * fixed set of already-sanitized fields and copies NOTHING else — the snapshot was
+ * projected through serializeWorldSnapshotPublic at share time (covert-off,
+ * allowlist), so the party face leaks no more than any public read. The result is
+ * the party's inhabitant view: never the DM's ledger.
+ * @param {any} raw a get_unlisted_map response
+ * @returns {{ name: string, slug: string, description: string|null, realmArcSummary: string|null,
+ *   imageUrl: string|null, world: { snapshot: any, sections: any } } | null}
+ */
+export function adaptUnlistedCampaign(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+  // Fail-closed: only a campaign share with an opted-in living world renders as a
+  // player view. A plain unlisted map (no campaign world) is not this surface.
+  if (raw.share_kind !== 'map_with_campaign') return null;
+  const snapshot = raw.world_snapshot;
+  if (!snapshot || typeof snapshot !== 'object' || Array.isArray(snapshot)) return null;
+  const str = (v) => (typeof v === 'string' && v ? v : null);
+  return {
+    name: str(raw.name) || 'A shared world',
+    slug: str(raw.slug) || '',
+    description: str(raw.description),
+    realmArcSummary: str(raw.realm_arc_summary),
+    imageUrl: str(raw.image_url),
+    world: { snapshot, sections: Array.isArray(raw.world_sections) ? raw.world_sections : [] },
+  };
+}
+
+/** Read an unlisted CAMPAIGN as its player face (fetch + fail-closed adapt). Null
+ *  for a miss, a plain map, or a campaign whose living world was not shared. */
+export async function fetchUnlistedCampaign(slug) {
+  return adaptUnlistedCampaign(await fetchUnlistedMap(slug));
+}

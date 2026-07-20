@@ -11,12 +11,16 @@
  * A new lazy chunk (mounted in RealmInspector under Suspense). Zero eager.
  */
 
-import { useEffect, useMemo } from 'react';
-import { History, ChevronLeft, ChevronRight, Radio } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { History, ChevronLeft, ChevronRight, Radio, Download } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { buildTimelineTrack, frameAtTick } from '../../domain/display/timelineTrack.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
+import { buildTimelineTrack, frameAtTick, trackSettlementIds, settlementTimeline, serializeTimelapseClip } from '../../domain/display/timelineTrack.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+
+const SELECT_STYLE = { fontSize: FS.micro, color: swatch.inkMag2, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#EDE3CC']}`, padding: '3px 5px', maxWidth: '100%' };
+/** A filesystem-safe slug from a campaign name (the export-filename idiom). */
+const clipSlug = (name) => (String(name || 'realm').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'realm');
 
 /**
  * @param {Object} props
@@ -30,6 +34,19 @@ export default function TimelapsePanel({ campaign, nameFor }) {
 
   const track = useMemo(() => buildTimelineTrack({ worldState: campaign?.worldState }), [campaign]);
   const frames = track.frames;
+
+  // V-25d — the per-settlement drill (a pure slice of the same track).
+  const [drillId, setDrillId] = useState('');
+  const drillIds = useMemo(() => trackSettlementIds(track), [track]);
+  const drill = useMemo(() => (drillId ? settlementTimeline(track, drillId) : null), [track, drillId]);
+
+  // V-25d — export-as-clip: a deterministic, encode-free JSON frame sequence.
+  const onExportClip = async () => {
+    const clip = serializeTimelapseClip(track);
+    const { downloadBlob } = await import('../../lib/townMapExport.js');
+    const blob = new Blob([JSON.stringify(clip, null, 2)], { type: 'application/json' });
+    downloadBlob(blob, `timelapse-${clipSlug(campaign?.name)}.json`);
+  };
 
   // Mounting activates the timelapse at the latest tick; unmounting returns to live.
   useEffect(() => {
@@ -94,6 +111,33 @@ export default function TimelapsePanel({ campaign, nameFor }) {
           ? <>Struck: {struckNames.join(', ')}{activeFrame.pulses.length > 3 ? ` +${activeFrame.pulses.length - 3}` : ''}. </>
           : 'A quiet advance. '}
         <span style={{ color: SECOND, fontWeight: 800 }}>{grew} grew · {fell} declined.</span>
+      </div>
+
+      {/* V-25d — PER-SETTLEMENT DRILL: one settlement's slice of the same history. */}
+      {drillIds.length > 0 && (
+        <div style={{ display: 'grid', gap: 4, padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD }}>
+          <label htmlFor="timelapse-drill" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: FS.micro, color: MUTED, fontWeight: 800 }}>
+            Drill into
+            <select id="timelapse-drill" aria-label="Drill into a settlement's history" value={drillId} onChange={(e) => setDrillId(e.target.value)} style={SELECT_STYLE}>
+              <option value="">the whole realm</option>
+              {drillIds.map((id) => <option key={id} value={id}>{resolveName(id) || id}</option>)}
+            </select>
+          </label>
+          {drill && (
+            <div data-testid="timelapse-drill-summary" style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+              {drill.points.length === 0
+                ? <>Never struck, never moved — quiet through every advance.</>
+                : <>Struck <b>{drill.struck}</b>{drill.peakSeverity > 0 ? ` (peak ${Math.round(drill.peakSeverity * 100) / 100})` : ''} · <span style={{ color: SECOND, fontWeight: 800 }}>grew {drill.grew} · declined {drill.declined}</span> across {drill.points.length} advance{drill.points.length === 1 ? '' : 's'}.</>}
+            </div>
+          )}
+        </div>
+      )}
+
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
+        <Button variant="ghost" size="sm" onClick={onExportClip} aria-label="Export the timelapse as a deterministic clip (JSON frame sequence)">
+          <Download size={12} /> Export clip
+        </Button>
+        <span style={{ fontSize: FS.micro, color: MUTED }}>A replayable frame sequence — no video, just the history itself.</span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
