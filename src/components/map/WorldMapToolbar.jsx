@@ -475,6 +475,7 @@ function WorldMapToolbarImpl({
                   opens the full session advance history for a return-to-any-point. */}
               {canUndoPulse && (
                 <IconButton
+                  data-tour="history"
                   onClick={() => setShowHistory(true)}
                   aria-label="Open advance history"
                   disabled={worldPulseBusy}
@@ -530,6 +531,7 @@ function WorldMapToolbarImpl({
                   of its own (the accessible name is the aria-label), so it adds
                   nothing to the native-tooltip census it exists to shrink. */}
               <IconButton
+                data-tour="controls"
                 onClick={() => setMapHelpOpen(o => !o)}
                 active={mapHelpOpen}
                 aria-label="About the map controls"
