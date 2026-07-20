@@ -79,6 +79,11 @@ export const CONTEST_TUNING = Object.freeze({
   STING_STAND: 0.5,
   WINDOW_SEASON_WEEKS: 13,
   CONTEST_LOSS_GRUDGE_SEV: 0.5,
+  // A CROSS-FACTION contest loss also deposits a typed faction-pair incident (D-4c aftermath /
+  // §10.5) when memoryWeave is lit — the loss→faction-pair-resentment→future-fixation loop the
+  // grievanceLean read consumes. Gated: same-faction ⇒ no deposit; memoryWeave dark ⇒ no deposit.
+  CONTEST_LOSS_PAIR_RESENTMENT: 0.15,
+  CONTEST_LOSS_PAIR_SEV: 0.3,
   RESOLVE_JITTER: 0.05,
   // BACKING (D-4e player siding) + JOINING (D-4f bonded peers): margin bonuses on the tie-break.
   BACKED_MARGIN: 0.15,
@@ -487,7 +492,8 @@ const seatWeightOf = (/** @type {number} */ rungIndex, /** @type {number} */ run
  * @param {string|null} a.now
  * @returns {{ npcs: Record<string, import('./npcLadderKernel.js').LadderStanding>,
  *   contests: Record<string, import('./npcLadderKernel.js').ContestRec>,
- *   news: Array<Record<string, unknown>>, bluffDeposits: Array<{ nid: string, band: number }> }}
+ *   news: Array<Record<string, unknown>>, bluffDeposits: Array<{ nid: string, band: number }>,
+ *   factionPairDeposits: Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }> }}
  */
 export function advanceContests(a) {
   const T = CONTEST_TUNING;
@@ -501,6 +507,10 @@ export function advanceContests(a) {
   const news = [];
   /** @type {Array<{ nid: string, band: number }>} */
   const bluffDeposits = [];
+  /** D-4c §10.5: cross-faction contest-loss faction-pair incidents (applied by the faction-pair
+   *  ledger's OWN writer in the kernel; deposit-and-consume — the ladder never writes that ledger). */
+  /** @type {Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }>} */
+  const factionPairDeposits = [];
   /** Stock deltas + grudges + bonds — PLAN-THEN-APPLY (§8 iii; applied after the pass). */
   /** @type {Array<{ nid: string, stock?: number, grudge?: { to: string, kind: string, sev: number }, bond?: { to: string, kind: string, sev: number } }>} */
   const plan = [];
@@ -595,6 +605,13 @@ export function advanceContests(a) {
       // (a fixated loser one step deeper, bounded by the cap). The loss→grievance→fixation loop.
       plan.push({ nid: loseNid, grudge: { to: winNid, kind: grudgeKind, sev: clamp(T.CONTEST_LOSS_GRUDGE_SEV + T.FIXATION_GRUDGE_DEEPEN * loserFix, 0, 1) } });
       patronFailed.add(loseNid); patronSucceeded.add(winNid);
+      // §10.5 THE CROSS-FACTION LOOP: a loss between DIFFERENT factions ALSO deepens the
+      // faction-pair resentment (memoryWeave-gated; the faction-pair ledger's own writer applies
+      // it in the kernel). Same-faction ⇒ no faction-pair edge ⇒ no deposit (byte-safe).
+      const winFkey = metaOf(winNid).fkey;
+      if (memoryWeaveActive && lm.fkey && winFkey && lm.fkey !== winFkey) {
+        factionPairDeposits.push({ a: lm.fkey, b: winFkey, type: 'contest_loss', resentmentDelta: T.CONTEST_LOSS_PAIR_RESENTMENT, sev: T.CONTEST_LOSS_PAIR_SEV });
+      }
       // THE BLUFF CONTRADICTED (§8 D-2 coupling): a bluffer who LOST deposits a deception exposure.
       const loserSide = c[verdict.loser];
       if (loserSide.heardWeek != null && hasAny(traitWordsOf(lm.npc), BLUFF_TRAITS) && verdict.loser != null) {
@@ -639,7 +656,7 @@ export function advanceContests(a) {
       return next;
     });
   }
-  return { npcs: work, contests, news, bluffDeposits };
+  return { npcs: work, contests, news, bluffDeposits, factionPairDeposits };
 }
 
 /** The still-LIVE contests (resolvedWeek null). @param {Record<string, import('./npcLadderKernel.js').ContestRec>} contests @param {number} weeks */

@@ -253,6 +253,28 @@ describe('advanceContests — the settlement-wide pass', () => {
     expect(reminted).toBe(true);
     expect(res.news.some((n) => n.impactKind === 'npc_support')).toBe(true);
   });
+  it('§10.5 CROSS-FACTION loss deposits a faction-pair incident (memoryWeave lit); same-faction / dark ⇒ none', () => {
+    const npcs = { n_a: mkStanding(mkGoal('ruling_authority', 78, 40, { progress: 1 }), { stock: 6 }), n_b: mkStanding(mkGoal('ruling_authority', 80, 45, { progress: 0.5 }), { stock: 6 }) };
+    const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
+    const goalOutcomes = new Map([['n_a', { fired: true, expired: false, lapsed: false, signalVar: 'ruling_authority', endProgress: 1 }]]);
+    // cross-faction meta: n_a in fac.crown, n_b in fac.watch
+    const crossMeta = new Map([
+      ['n_a', { fkey: 'fac.crown', faction: gov, rungIndex: 0, rungCount: 1, npc: proud }],
+      ['n_b', { fkey: 'fac.watch', faction: gov, rungIndex: 0, rungCount: 1, npc: proud }],
+    ]);
+    const base = { sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState, priorContests, npcs, priorNpcs: npcs, goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, now: null };
+    const litCross = advanceContests({ ...base, nidMeta: crossMeta, memoryWeaveActive: true });
+    expect(litCross.factionPairDeposits.length).toBe(1);
+    expect(litCross.factionPairDeposits[0].type).toBe('contest_loss');
+    // same faction ⇒ no faction-pair edge ⇒ no deposit
+    const sameMeta = new Map([
+      ['n_a', { fkey: 'fac.crown', faction: gov, rungIndex: 0, rungCount: 2, npc: proud }],
+      ['n_b', { fkey: 'fac.crown', faction: gov, rungIndex: 1, rungCount: 2, npc: proud }],
+    ]);
+    expect(advanceContests({ ...base, nidMeta: sameMeta, memoryWeaveActive: true }).factionPairDeposits.length).toBe(0);
+    // memoryWeave dark ⇒ no deposit even cross-faction
+    expect(advanceContests({ ...base, nidMeta: crossMeta, memoryWeaveActive: false }).factionPairDeposits.length).toBe(0);
+  });
   it('D-4f support/join is inert when memoryWeave is DARK (no bonds ⇒ no conversion, no joiners)', () => {
     const npcs = { n_sup: mkStanding(mkGoal('ruling_authority', 78, 40), { bonds: { n_pat: { sev: 0.9, week: 0, kind: 'loyalty' } } }), n_pat: mkStanding(mkGoal('ruling_authority', 78, 40)) };
     const res = advanceContests({

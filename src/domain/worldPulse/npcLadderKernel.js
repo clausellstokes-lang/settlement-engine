@@ -84,6 +84,7 @@ import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadder
 import { faithRuptured } from './npcLadderCoherence.js';
 import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.js';
 import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
+import { mintFactionPairIncident } from './factionPairLedger.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -294,6 +295,8 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // + the cross-faction grievance read) additionally requires the memory weave.
   const contestsLit = contestedGoalsActive(worldState);
   const memWeave = memoryWeaveActive(worldState);
+  /** @type {Array<{ a: string, b: string, type: string, resentmentDelta: number, sev: number }>} D-4c §10.5 cross-faction loss deposits */
+  const factionPairDeposits = [];
 
   // The S7 reading frame for goal predicates — the registry evaluator resolves causal
   // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
@@ -529,6 +532,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       npcs = res.npcs;
       if (Object.keys(res.contests).length) contests = res.contests;
       for (const n of res.news) newsEntries.push(n);
+      for (const d of res.factionPairDeposits) factionPairDeposits.push(d);
       // res.bluffDeposits: the D-4→D-2 bluff-exposure deposits are DETECTED here (the bluff
       // heardProgress inflation + the contradicted-bluff-on-loss detection are live and
       // unit-pinned). The cross-subsystem credibility CHARGE (a new spatialLedgers sidecar +
@@ -585,6 +589,16 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     nextWorldState = Object.keys(persisted).length
       ? setSpatialLedger(worldState, 'npcLadder', persisted)
       : dropSpatialLedger(worldState, 'npcLadder');
+    changed = true;
+  }
+  // ── D-4c §10.5 THE CROSS-FACTION LOSS LOOP: apply the collected faction-pair incidents through
+  // the faction-pair ledger's OWN writer (the sanctioned applicator idiom — the ladder requests,
+  // factionPairLedger writes its own ledger). memoryWeave-gated at deposit time, so an empty list
+  // when dark ⇒ no write ⇒ byte-identical. Codepoint-ordered for determinism. ──
+  if (factionPairDeposits.length) {
+    for (const d of factionPairDeposits.slice().sort((x, y) => compareCodepoint(`${x.a}|${x.b}`, `${y.a}|${y.b}`))) {
+      nextWorldState = mintFactionPairIncident(nextWorldState, { a: d.a, b: d.b, type: d.type, resentmentDelta: d.resentmentDelta, sev: d.sev, tick: now2, weeks });
+    }
     changed = true;
   }
   if (newsEntries.length) changed = true;
