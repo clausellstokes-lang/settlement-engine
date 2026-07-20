@@ -34,6 +34,12 @@
 /** The two release modes and their edit-kind spellings. */
 export const ROADS_RELEASE_MODE = Object.freeze({ 'ransom-npc': 'ransom', 'rescue-npc': 'rescue' });
 
+/** DESIGN_VISION_WAVE V-24a — the travel states a RECALL can act on. A traveller out on the
+ *  roads (mirror state 'traveling' = outbound, or 'visiting' = at the destination) can be
+ *  summoned home; a 'returning' traveller is already homeward (recall is a no-op), and a
+ *  'hostage' uses the party-release ops, not recall. */
+export const RECALLABLE_STATES = Object.freeze(['traveling', 'visiting']);
+
 /** A roads-editable NPC (only the fields the ops read/write).
  * @typedef {{ whereabouts?: { state?: string, placeId?: string, partyRelease?: string } &
  *   Record<string, unknown> } & Record<string, unknown>} RoadsOpNpc */
@@ -65,6 +71,39 @@ export function applyRoadsPartyRelease(settlement, npcIndex, editKind) {
   const w = /** @type {Record<string, unknown>} */ (prev.whereabouts || {});
   const nextNpcs = npcs.slice();
   nextNpcs[npcIndex] = { ...prev, whereabouts: { ...w, partyRelease: mode } };
+  return { ok: true, reason: null, settlement: { ...settlement, npcs: nextNpcs } };
+}
+
+/**
+ * Is this NPC a currently-recallable roads TRAVELLER? Pure, total. True only for a live
+ * traveller mid-journey (state 'traveling' or 'visiting') — a returning traveller is already
+ * homeward and a hostage is the party-release path (isRoadsHostage). Non-traveller ⇒ false.
+ * @param {unknown} npc @returns {boolean}
+ */
+export function isRoadsTraveler(npc) {
+  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
+  return !!(w && typeof w === 'object'
+    && RECALLABLE_STATES.includes(String(/** @type {Record<string, unknown>} */ (w).state)));
+}
+
+/**
+ * DESIGN_VISION_WAVE V-24a — apply a RECALL: stamp `whereabouts.recall = true` so the roads
+ * mover engages the traveller's return leg EARLY on its next tick (§6 the PARTY'S HAND marker
+ * precedent — the DM writes the npc, the mover reacts; never a teleport, never a new mover).
+ * Pure — returns { ok, reason, settlement } with a NEW settlement (never mutates the input).
+ * Refuses a non-traveller / bad index (the graceful no-op contract). Self-clearing: the mover
+ * fully rewrites whereabouts from the ledger each tick, so the marker never lingers.
+ * @param {RoadsOpSettlement} settlement @param {number} npcIndex
+ * @returns {{ ok: boolean, reason: string|null, settlement: RoadsOpSettlement }}
+ */
+export function applyRoadsRecall(settlement, npcIndex) {
+  const npcs = settlement?.npcs;
+  if (!Array.isArray(npcs) || !npcs[npcIndex]) return { ok: false, reason: 'no npc at index', settlement };
+  const prev = npcs[npcIndex];
+  if (!isRoadsTraveler(prev)) return { ok: false, reason: 'not a recallable traveller', settlement };
+  const w = /** @type {Record<string, unknown>} */ (prev.whereabouts || {});
+  const nextNpcs = npcs.slice();
+  nextNpcs[npcIndex] = { ...prev, whereabouts: { ...w, recall: true } };
   return { ok: true, reason: null, settlement: { ...settlement, npcs: nextNpcs } };
 }
 

@@ -147,6 +147,36 @@ export function isOffStage(npc) {
   return !!(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).state === 'hostage');
 }
 
+/**
+ * DESIGN_VISION_WAVE V-24a — THE RECALL RIDER (mission-side consume). If the traveller `npc`
+ * carries the recall marker (`whereabouts.recall === true`) and its `mission` is not already
+ * returning, mutate the mission IN PLACE into a sanctioned early return — phase='returning', an
+ * honestly-priced FUTURE arrival (never a teleport), the `recalled` flag, and a cleared wait
+ * receipt — and return true; otherwise return false (no change). The return leg is `retWeeksAtDest`
+ * (the destination→home leg the caller computed) when at the destination, or symmetric to the
+ * distance already covered when still outbound. Never adds a mover — the existing mission IS the
+ * traveller. Self-clearing at the source: the mover fully rewrites whereabouts from the ledger each
+ * tick, so the marker never lingers. Pure but for the caller-owned in-place mission mutation.
+ * @param {Record<string, unknown>} mission  the mission clone the caller will persist
+ * @param {unknown} npc  the traveller whose whereabouts carries the marker
+ * @param {number} weekClock  the current calendar week
+ * @param {number} retWeeksAtDest  the destination→home return leg (weeks)
+ * @returns {boolean} true iff a recall was consumed
+ */
+export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
+  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
+  if (mission.phase === 'returning'
+    || !(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).recall === true)) return false;
+  const retWeeks = mission.phase === 'visiting'
+    ? Math.max(1, num(retWeeksAtDest, 1))
+    : Math.max(1, weekClock - num(mission.departTick, 0));
+  mission.phase = 'returning';
+  mission.legArrivalTick = weekClock + retWeeks;
+  mission.recalled = true;
+  mission.waitReceipted = false;
+  return true;
+}
+
 // ── §4-§10 TUNING (soak-certified dials; every entry vetoable) ──────────────────
 export const ROADS_TUNING = Object.freeze({
   // §4 GENESIS — range, cadence, selection, stay

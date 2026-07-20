@@ -50,15 +50,16 @@ describe('pendingEdits — committable-kinds contract (no silent drop)', () => {
     }
   });
 
-  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle + roads ops + player siding)', () => {
+  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle + roads ops + player siding + recall)', () => {
     // DESIGN_NPC_LIFECYCLE §2 added live dispatchers for the three typed NPC ops
     // (edit / reassign / stasis+return); DESIGN_THE_ROADS §11 added the two party-hand
     // roads ops (ransom / rescue); DESIGN_DEEP_COUPLINGS §8 D-4e added the player-siding op
-    // (champion) — all route through applyNpcOp (commitPendingEdits' default arm). Kept in
-    // lockstep with the commitPendingEdits switch.
+    // (champion); DESIGN_VISION_WAVE V-24a added the recall rider (recall) — all route through
+    // applyNpcOp (commitPendingEdits' default arm). Kept in lockstep with the commitPendingEdits
+    // switch.
     expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual([
-      'champion-npc', 'edit-npc', 'ransom-npc', 'reassign-npc', 'rename-npc', 'rename-settlement',
-      'rescue-npc', 'return-npc', 'stasis-npc',
+      'champion-npc', 'edit-npc', 'ransom-npc', 'reassign-npc', 'recall-npc', 'rename-npc',
+      'rename-settlement', 'rescue-npc', 'return-npc', 'stasis-npc',
     ]);
   });
 

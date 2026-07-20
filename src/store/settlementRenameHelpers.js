@@ -93,6 +93,18 @@ export function applyNpcOp(get, set, edit) {
       // this eager dispatcher stamps trustingly (the covenant UI offers it only to contestants).
       if (!p.contestId || typeof p.contestId !== 'string') return;
       npc.contestBacking = p.contestId;
+    } else if (k === 'recall-npc') {
+      // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER. Stamp the recall marker the roads mover
+      // consumes on its next tick (the whereabouts.partyRelease precedent: the DM writes the
+      // npc, the mover reacts by engaging the return leg early). Only a currently-traveling NPC
+      // (mirror state 'traveling' = outbound, or 'visiting') can be recalled — a 'returning'
+      // traveller is already homeward, a hostage uses the party-release ops, and a non-traveller
+      // has nowhere to be recalled from (the graceful no-op). The pure body + pins live in
+      // domain/roads/ops.js (applyRoadsRecall / RECALLABLE_STATES), kept in lockstep with this
+      // thin dispatcher. Self-clearing: the mover rewrites whereabouts from the ledger each tick.
+      const wa = npc.whereabouts;
+      if (!wa || (wa.state !== 'traveling' && wa.state !== 'visiting')) return;
+      npc.whereabouts = { ...wa, recall: true };
     } else { return; }
     changed = true;
   });

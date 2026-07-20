@@ -40,7 +40,8 @@
  *           | 'edit-prose'
  *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'
  *           | 'ransom-npc' | 'rescue-npc'
- *           | 'champion-npc'} EditKind */
+ *           | 'champion-npc'
+ *           | 'recall-npc'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -55,6 +56,10 @@ export const EDIT_KINDS = Object.freeze([
   // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING: back a live contestant's side of a
   // contested goal (stamps a marker the ladder-contest pass folds into ContestRec.backedBy).
   'champion-npc',
+  // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER (finite-semantics law): request a TRAVELED
+  // NPC's early return. Stamps a marker (whereabouts.recall) the roads mover consumes on its
+  // next tick, engaging the return leg early — never teleports, never adds a mover.
+  'recall-npc',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
@@ -83,6 +88,10 @@ export const COMMITTABLE_EDIT_KINDS = Object.freeze([
   // arm), stamping the contestBacking marker the ladder-contest pass folds into backedBy.
   // Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op precedent).
   'champion-npc',
+  // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER; dispatched via applyNpcOp (the default arm),
+  // stamping whereabouts.recall on a traveling NPC (the roads whereabouts.partyRelease
+  // precedent). The roads mover engages the return leg early. No dedicated operationRegistry op.
+  'recall-npc',
 ]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the

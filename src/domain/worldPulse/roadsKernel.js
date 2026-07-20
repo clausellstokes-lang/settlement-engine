@@ -36,7 +36,7 @@ import {
   roadsActive, ROADS_TUNING, isOffStage, roadsImportanceWeight, riskToleranceOf,
   militaryQuality01, settlementWeight01, protectionOf, exposureOf, captureProbability, termWeeksFor,
   conversionFlawFactor, conversionProbability, applyLegitimacySteps, applyProsperityBandSteps,
-  asObject, num, clampNum, clamp01, cmp,
+  asObject, num, clampNum, clamp01, cmp, consumeMissionRecall,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
 import { persistEmbassySuits } from '../roads/embassyLedger.js';
@@ -413,12 +413,19 @@ function advanceLitRoads(args) {
     const npcKey = str(m0.npcKey);
     // Home vanished ⇒ prune (drop). NPC vanished ⇒ prune. DM shelved (stasis) ⇒ cancel.
     if (!idSet.has(homeId)) continue;
-    const roster = rosterByS.get(homeId);
-    const hit = roster ? roster.get(npcKey) : undefined;
+    const hit = rosterByS.get(homeId)?.get(npcKey); // (roster inlined to hold the file's 800-line ceiling)
     if (!hit) continue; // npc removed by DM (remove_npc) ⇒ mission pruned, cadence pruned below
     if (isOffStage(hit.npc)) continue; // DM stasis-npc overtook the traveler ⇒ CANCEL (quiet, no roll)
 
     const m = { ...m0 };
+    // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER: a DM recall (whereabouts.recall, stamped by
+    // applyNpcOp on a live traveller) engages the return leg EARLY via roads/state.consumeMissionRecall
+    // — a sanctioned early return (never a teleport, never a new mover; this mission IS the
+    // traveller). Only outbound/visiting turn back; 'returning' is already homeward (a no-op,
+    // self-cleared by the mirror pass). The leg is priced from the destination (at-destination) or
+    // symmetric to the distance already covered (outbound). The heavy body lives in the leaf so
+    // this at-ceiling kernel stays net-neutral.
+    if (consumeMissionRecall(m, hit.npc, weekClock, num(hopWeeks(digest, str(m.destId), homeId, season), 1))) { missions[mid] = m; continue; }
     if (m.phase === 'outbound' && weekClock >= num(m.legArrivalTick, 0)) {
       m.phase = 'visiting';
       m.legArrivalTick = num(m.legArrivalTick, 0) + Math.max(1, num(m.stayWeeks, 1)); // visit-end week

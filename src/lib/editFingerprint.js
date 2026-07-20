@@ -30,6 +30,8 @@ const TARGET_OF = {
   'ransom-npc': 'npc', 'rescue-npc': 'npc',
   // DESIGN_DEEP_COUPLINGS §8 D-4e — player siding targets the backed contestant (an npc).
   'champion-npc': 'npc',
+  // DESIGN_VISION_WAVE V-24a — the recall rider targets the traveled npc.
+  'recall-npc': 'npc',
 };
 /** edit kind → change tier (cosmetic|structural|prose) — same grouping the
  *  commit path's EDIT_COMMITTED counts use. */
@@ -45,6 +47,8 @@ const TIER_OF = {
   'ransom-npc': 'structural', 'rescue-npc': 'structural',
   // Player siding is structural (it moves a sim-visible contest resolution margin).
   'champion-npc': 'structural',
+  // The recall rider is structural (it moves a sim-visible travel state — the return leg).
+  'recall-npc': 'structural',
 };
 
 /** Coarse cascade signal from previewCascade() — counts + impact enum only.

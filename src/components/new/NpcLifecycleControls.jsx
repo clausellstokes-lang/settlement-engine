@@ -65,6 +65,16 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
     if (npcIndex >= 0) queueEdit(kind, { npcIndex });
   };
 
+  // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER. When this NPC is out on the roads (outbound or
+  // at the destination), the DM may summon them home early. The recall queues through the standing
+  // covenant; the mover engages the return leg on its next tick (no teleport). A returning
+  // traveller is already homeward, so the control is absent for them.
+  const isTraveling = npc?.whereabouts?.state === 'traveling' || npc?.whereabouts?.state === 'visiting';
+  const onRecall = () => {
+    const npcIndex = resolveNpcIndex();
+    if (npcIndex >= 0) queueEdit('recall-npc', { npcIndex });
+  };
+
   return (
     <div style={{ marginTop: 6, padding: '6px 8px', background: swatch['#F5F0E8']}}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>
@@ -128,6 +138,25 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
               Rescue
             </Button>
           </div>
+        </div>
+      )}
+      {isTraveling && !isHostage && (
+        <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
+          <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>
+            On the road — {npc?.name || 'this traveller'} is away
+          </div>
+          <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
+            Summon them home early. They turn for the road at once — no shortcut, only an
+            earlier start; the journey back still takes its weeks. Queues for review like any edit.
+          </p>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={onRecall}
+            aria-label={`Recall ${npc?.name || 'the traveller'} home early`}
+          >
+            Recall home
+          </Button>
         </div>
       )}
     </div>

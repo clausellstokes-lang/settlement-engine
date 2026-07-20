@@ -106,6 +106,39 @@ describe('NPC ops flow through the covenant (queueEdit → commit)', () => {
     expect(store.getState().settlement.npcs[1].whereabouts).toBeUndefined();
   });
 
+  test('THE RECALL RIDER: recall-npc stamps whereabouts.recall on a traveller; returning/hostage/non-traveller are safe no-ops (V-24a)', () => {
+    // DESIGN_VISION_WAVE V-24a — the recall rider is committable and routes through applyNpcOp,
+    // stamping whereabouts.recall (the marker the roads mover consumes to engage the return leg
+    // early). Only an outbound/visiting traveller is a valid target.
+    expect(COMMITTABLE_EDIT_KINDS).toContain('recall-npc');
+    const store = makeStore();
+    store.setState(s => {
+      s.settlement = { id: 't1', name: 'Testholm', tier: 'town', npcs: [
+        { id: 'npc.out', name: 'Outbound', role: 'envoy', whereabouts: { state: 'traveling', placeId: 'e', purposeKind: 'diplomacy', sinceTick: 10, expectedReturnTick: 40, missionId: 'road.t1.npc.out.10' } },
+        { id: 'npc.vis', name: 'Visiting', role: 'merchant', whereabouts: { state: 'visiting', placeId: 'e', purposeKind: 'trade', sinceTick: 8, expectedReturnTick: 36, missionId: 'road.t1.npc.vis.8' } },
+        { id: 'npc.back', name: 'Homeward', role: 'scholar', whereabouts: { state: 'returning', placeId: 'e', purposeKind: 'verification', sinceTick: 6, expectedReturnTick: 20, missionId: 'road.t1.npc.back.6' } },
+        { id: 'npc.cap', name: 'Cap', role: 'merchant', whereabouts: { state: 'hostage', placeId: 'e', purposeKind: 'trade', sinceTick: 10, expectedReturnTick: null, missionId: 'road.t1.npc.cap.10' } },
+        { id: 'npc.home', name: 'Homebody', role: 'ruler' },
+      ] };
+      s.phase = 'canon'; s.activeSaveId = null;
+    });
+    // An outbound traveller: admitted post-canon, marker stamped.
+    expect(store.getState().queueEdit('recall-npc', { npcIndex: 0 })).not.toBe(null);
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].whereabouts.recall).toBe(true);
+    // A visiting traveller: marker stamped.
+    store.getState().queueEdit('recall-npc', { npcIndex: 1 });
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[1].whereabouts.recall).toBe(true);
+    // A returning traveller (already homeward), a hostage, and a non-traveller are refused inside
+    // applyNpcOp — the recall marker never appears on any of them.
+    for (const idx of [2, 3, 4]) {
+      store.getState().queueEdit('recall-npc', { npcIndex: idx });
+      store.getState().commitPendingEdits();
+      expect(store.getState().settlement.npcs[idx].whereabouts?.recall).toBeUndefined();
+    }
+  });
+
   test('EDITS CHANGE THE FUTURE, NEVER THE PAST: the NPC ops work POST-CANON', () => {
     const store = makeStore(); loadSettlement(store, 'canon');
     // rename-npc is identity-locked post-canon (refused at the queue seam)…
