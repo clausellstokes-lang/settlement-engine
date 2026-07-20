@@ -97,6 +97,8 @@ byte-identity · inheritance bounded + marked · no new succession triggers ·
 conservation (rungs remain a permutation).
 
 ## V-8 THE PATIENT ENGINE — worker-threaded advances
+## [CORRECTED 2026-07-20: the harness ALREADY EXISTED at base (wave 5a) — V-D
+## verified against git and shipped the PINS (byte-identity, DOM-free scan) only]
 WHY: a century advance should feel like a chronicle being written, not a frozen tab.
 Audience: the "simulate 50 years" moment must be a pleasure.
 MECHANISM: the domain engine is pure/deterministic → run multi-tick advances in a Web
@@ -107,6 +109,8 @@ THAT MATTERS: worker vs sync SAME-SEED BYTE-IDENTITY (the determinism claim must
 survive the thread boundary). Plus: no engine import touches window/document (scan).
 
 ## V-9 THE LIGHT ENTRANCE — customRegistry de-eagering (owner order lifts the gate)
+## [CORRECTED 2026-07-20: ALREADY FOLDED pre-wave (DE-a/b/c, −18,036 B) — V-D
+## verified intact + round-trips green; the catalog was stale, the tree was truth]
 WHY: ~41KB off first paint; the budget headroom funds every future surface.
 MECHANISM: the recorded lane — sync→async persisted-path conversion with the seam
 pinned to the kernel; the de-eager lane's discipline (parity pins, no behavior shift).

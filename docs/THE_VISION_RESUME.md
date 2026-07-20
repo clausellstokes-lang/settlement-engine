@@ -22,12 +22,13 @@
     claude/vision-e `9d8d3411` (Foundry/MCP/seed-post + V-20 unlisted Model-B +
     featured; MIGRATION 168 written-not-deployed — fold renumbers if any sibling
     mints one; ledger 485d1398; V-J handoff: /gallery?slug=<42-hex>, unfurl seams).
-    FOLD ALL FOUR at the next minifold boundary.
-  - HOT (4 lanes): V-B in `minifold` (composite-r4 @ 299f2843) · V-D in the
-    `vision-c` WORKTREE on branch `claude/vision-d` (rotated; V-C's commits safe on
-    their branch) · V-F in the `vision-i` WORKTREE on branch `claude/vision-f` · V-J in `vision-j`
-    (dispatched with V-E's slug/unfurl handoff). The `vision-e` worktree idles
-    READY for V-K at the next landing.
+    FOLD ALL FIVE at the next minifold boundary (+ V-D @ claude/vision-d `048e584d`
+    — V-8 pins/forensics/paranoia/museum; ledger 8017f2c3). ⚠⚠ THE FOLD LAW
+    TIGHTENED: V-D's forensics cost +8,003 B eager → headroom ≈7,263 B at its tip;
+    MEASURE CLOSURE AFTER EVERY MERGE; a breach HALTS the fold (shave candidate:
+    thinner forensics seam) — the budget raise stays owner-gated.
+  - HOT (4 lanes): V-B in `minifold` (composite-r4 @ 299f2843) · V-K in the `vision-e` WORKTREE on branch `claude/vision-k` (rotated) · V-F in the `vision-i` WORKTREE on branch `claude/vision-f` · V-J in `vision-j`
+    (dispatched with V-E's slug/unfurl handoff). The `vision-c` worktree idles READY for the next queue item (V-G after V-F, else V-L).
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —
