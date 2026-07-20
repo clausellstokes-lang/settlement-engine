@@ -61,6 +61,7 @@ import {
   SIMULATION_RULE_PRESETS, DEFAULT_SIMULATION_PRESET_ID, DEFAULT_SIMULATION_RULES,
 } from '../src/domain/worldPulse/simulationRules.js';
 import { ARCHETYPES, REL_TYPES } from '../src/domain/compendium/catalogData.js';
+import { APPROVED_CORPUS, corpusCompendiumBlock } from '../src/domain/compendium/corpusStaging.js';
 import { institutionalCatalog } from '../src/data/institutionalCatalog.js';
 import { fixture } from '../src/components/home/landingFixture.js';
 
@@ -268,6 +269,11 @@ export function buildCompendiumDataObject() {
       authored: true,
       entries: REL_TYPES.map((r) => ({ id: r.id, label: r.label, color: r.color, effect: r.effect })),
     },
+
+    // ── V-5 THE CORPUS FACTORY — the owner-approved corpus folded into canon (empty
+    // until the owner commits approved candidates to corpusStaging.js). Staged/rejected
+    // candidates live only in the runtime store and NEVER reach this artifact. ─────────
+    corpus: corpusCompendiumBlock(APPROVED_CORPUS),
 
     institutions: {
       tierCount: Object.keys(institutionalCatalog).length,

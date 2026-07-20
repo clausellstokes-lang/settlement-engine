@@ -23,8 +23,10 @@ const read = (name) => {
 };
 
 // The §7.2 paid-surface roster. Each must be gated by request-layer OR belt.
+// interview (V-1 THE INTERVIEW) joins as the 9th credit-spending AI surface — a
+// citation-grounded read answer metered under the 'analysis' feature.
 const REQUIRED = [
-  'ai-analyst', 'generate-narrative', 'generate-chronicle', 'custom-content',
+  'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
   'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
   'surveyor-byok', 'create-checkout', 'create-customer-portal', 'account-actions',
   'founder-transfer',
@@ -40,10 +42,11 @@ const DEFERRED = ['verify-checkout-session'];
 const importsGate = (src) => /_shared\/sessionGate\.ts/.test(src) && /isSessionSuperseded\s*\(/.test(src);
 const usesSpendBelt = (src) => /rpc\(\s*['"]spend_credits['"]/.test(src);
 
-// The 8 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
-// spend_credits belt (defense-in-depth) after the M-9 census upgrade.
+// The 9 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
+// spend_credits belt (defense-in-depth) after the M-9 census upgrade. interview (V-1)
+// is the 9th: it spends the existing 'analysis' feature through spend_credits.
 const AI_SPENDING = [
-  'ai-analyst', 'generate-narrative', 'generate-chronicle', 'custom-content',
+  'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
   'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
 ];
 

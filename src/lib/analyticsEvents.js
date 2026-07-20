@@ -273,6 +273,14 @@ export const EVENTS = Object.freeze({
   // carries props.feature + the style-domain vocabulary (base lens, palette family,
   // motif class, oov) when feature = styleOverhaul (the §3f/§4b lens roadmap radar).
   AI_STAGE_RIDER:                 'ai_stage_rider',
+
+  // ── VISION WAVE adoption signal — the ONE id-free verdict event shared by the new
+  //    surfaces (Interview / Oracle / Corpus Factory), discriminated by props (eager-
+  //    frugal: one name, not three). The S4+ tuning-knobs decision reads acceptance
+  //    metrics from here. Props (never content, never an id): { surface, verdict }.
+  //    surface ∈ {interview, oracle, corpus}; verdict ∈
+  //    {answered, refused, accepted, declined, revised, drawn}.
+  SURVEYOR_ADOPTION:              'surveyor_adoption',
 });
 
 /**

@@ -44,6 +44,7 @@ import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
 import { routeDoorPrompt } from '../../domain/intent/doorRouter.js';
 import AiAnalystPanel from '../AiAnalystPanel.jsx';
+import InterviewPanel from '../InterviewPanel.jsx';
 import SurveyorWorkshop from './SurveyorWorkshop.jsx';
 
 // The ONE entitlement chokepoint lives in surveyorGate.js (a pure, import-free
@@ -71,9 +72,13 @@ export default function SurveyorDoor({ visible = true }) {
   if (!visible || !surveyorEntitled) return null;
 
   const openDestination = (routed, promptText) => {
+    // 'analyst' and 'interview' are QUESTION destinations (they carry a question, not a
+    // prompt+scope); every other destination is a workshop stage.
     setDest(routed.destination === 'analyst'
       ? { id: 'analyst', question: promptText }
-      : { id: routed.destination, prompt: promptText, scope: routed.scope });
+      : routed.destination === 'interview'
+        ? { id: 'interview', question: promptText }
+        : { id: routed.destination, prompt: promptText, scope: routed.scope });
     setNonce((n) => n + 1);
     setPromptOpen(false);
     setText('');
@@ -149,6 +154,9 @@ export default function SurveyorDoor({ visible = true }) {
             <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'analyst' }, '')}>
               {t('surveyorDoor.openAnalyst')}
             </Button>
+            <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'interview' }, '')}>
+              {t('surveyorDoor.openInterview')}
+            </Button>
             <Button variant="ghost" size="sm" onClick={() => openDestination({ destination: 'content', scope: 'settlement' }, '')}>
               {t('surveyorDoor.openWorkshop')}
             </Button>
@@ -159,7 +167,10 @@ export default function SurveyorDoor({ visible = true }) {
       {dest?.id === 'analyst' && (
         <AiAnalystPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
       )}
-      {dest && dest.id !== 'analyst' && (
+      {dest?.id === 'interview' && (
+        <InterviewPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
+      )}
+      {dest && dest.id !== 'analyst' && dest.id !== 'interview' && (
         <SurveyorWorkshop
           key={nonce}
           open

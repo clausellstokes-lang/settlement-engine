@@ -178,7 +178,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 28 functions total — deploy all of them on a first cutover.
+There are 29 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -223,6 +223,7 @@ npx supabase functions deploy create-customer-portal                  # "Manage 
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy ai-analyst, surveyor-byok                              # Surveyor S1 analyst (requires ANTHROPIC_API_KEY + BYOK secret)
+npx supabase functions deploy interview                               # V-1 THE INTERVIEW — cited answers + conjecture register (JWT + entitlement, metered 'analysis')
 npx supabase functions deploy interpret-session                       # Surveyor S3 intent compiler (JWT + entitlement + kill-switch)
 npx supabase functions deploy parley                                  # Surveyor S3 in-character parley (JWT + entitlement + kill-switch)
 npx supabase functions deploy custom-content                          # Surveyor S4 custom-content compiler (JWT + entitlement + kill-switch)
@@ -234,9 +235,9 @@ npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **28 deployable functions** (every `supabase/functions/*` dir except
+There are **29 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The twelve `verify_jwt = false`
-and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
+and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here.
