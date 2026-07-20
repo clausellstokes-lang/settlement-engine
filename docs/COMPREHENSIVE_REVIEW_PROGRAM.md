@@ -1134,6 +1134,33 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-D SHIPPED — the pins the platform was missing, and an honest
+stale-brief catch (2026-07-20, claude/vision-d @ 048e584d, 5 lettered commits,
+FOLD-READY; manager-validated).** THE LOAD-BEARING FINDING (verified against git,
+correcting the manager's own clean-sweep catalog): V-8's worker harness (wave 5a:
+advanceInterval.worker + client + transport test) AND V-9's de-eagering (DE-a/b/c,
+fold batch 3, −18,036 B) were ALREADY SHIPPED — the agent verified rather than
+rebuilt (re-derive from git, not the brief; the doctrine held). SHIPPED NEW: the
+V-8 PINS (worker↔sync BYTE-IDENTITY over a real one_year advance via the
+postMessage-equivalent structuredClone + end-to-end through the real client; the
+DOM-free spine source-scan) · R-14 CRASH FORENSICS (whitelist-by-construction
+{seed,tick,flags_on} — no state, no PII, even a fat provider leaks nothing; rides
+the Wave-E reporter) · R-18 PARANOIA MODE (flag ∧ DEV — dead code in prod
+regardless; divergence reports via R-14) · R-19 SAVE MUSEUM (4 eras incl. a
+forward-version exhibit proving the tolerant loader's honest limit; provenance-
+declared real/synthetic; loads through the real saves spine) · tsc type-fixes.
+Gate: 38 pins · strict 0 · tsc 0 · lint +0 · dist 162 · NUL clean. JUDGMENTS
+RATIFIED: V-9 verify-not-rebuild · per-tick news STREAMING deferred (no consuming
+surface — "no rich state without a surface" honored; onProgress extensible when
+V-B's ticker exists) · R-14 eager-and-complete over lazy-and-unreliable-at-crash.
+⚠⚠ FOLD-CRITICAL: R-14 = +8,003 B raw eager (~5KB minifier cascade from
+store/index.js imports) → headroom at V-D's tip = 7,263 B. THE FOLD LAW TIGHTENS:
+measure closure AFTER EVERY MERGE; a breach halts the fold for a shave-or-owner
+decision (candidate shave: a thinner forensics seam into store/index). HAZARD
+BANKED (agent memory): parallel-session git ops can TRANSIENTLY materialize sibling
+files in a shared-object-store worktree listing — explicit staging + fresh status
+per commit is the shield. FIVE branches now fold-ready. SLOT → V-K (assize +
+commons) dispatching into the staged vision-e worktree.**
 **⬛⭐⭐ VISION LANE V-E SHIPPED — the world reaches the table, the truth serves
 every AI, a world fits in a sentence, and the party gets its private door
 (2026-07-20, claude/vision-e @ 9d8d3411, FOLD-READY; manager-validated).** V-11
