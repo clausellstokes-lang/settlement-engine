@@ -39,7 +39,7 @@ import {
   asObject, num, clampNum, clamp01, cmp,
 } from '../roads/state.js';
 import { knownEmbattlementView } from '../roads/knownWorld.js';
-import { EMBASSY_LEDGER_KEY, embassyPairKey } from '../roads/embassyLedger.js';
+import { persistEmbassySuits } from '../roads/embassyLedger.js';
 import {
   relationshipTypeBetween, atOpenWar, atWarWith, isEmbassy, embassyEnvoyMetrics, evaluateEmbassyHazard,
 } from '../roads/embassyHazard.js';
@@ -62,6 +62,12 @@ import { ladderGoalOf } from '../townMap/ladderRead.js';
 import { npcLadderActive } from './npcLadderKernel.js';
 import { CORRUPTIBLE_FLAWS } from '../corruption.js';
 import { corruptionWebActive } from './corruptionWeb.js';
+import { memoryWeaveActive } from './relationshipEvolution.js';
+import {
+  thirdPartyRansomActive, resolveThirdPartyRansom, thirdPartyReleaseEffects,
+  persistThirdPartyLedgers, THIRD_PARTY_RANSOM_TUNING,
+} from '../roads/thirdPartyRansom.js';
+import { seaRoadsActive, resolveSeaHazard, classifyLegModes, currentSeaHop } from '../roads/seaRoads.js';
 
 /**
  * @typedef {Object} RoadsAdvanceResult
@@ -386,8 +392,12 @@ function advanceLitRoads(args) {
 
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
-  /** @type {Array<{ captorId: string, homeId: string, npcKey: string }>} §10 conversion deposits */
+  /** @type {Array<{ captorId: string, homeId: string, npcKey: string, beneficiaryId?: string }>} §10 conversion deposits (+ D-5 payer-beneficiary channels) */
   const returnedCaptiveDeposits = [];
+  /** @type {Array<{ homeId: string, payerId: string, magnitude: number, predatory: boolean }>} D-5 §9 debt deposits (generosity consumes) */
+  const ransomSettlementDeposits = [];
+  /** @type {Array<{ homeId: string, captiveNpcKey: string, targetNpcKey: string, targetSid: string, sev: number }>} D-5 §9 gratitude-bond deposits (the ladder consumes) */
+  const bondEventDeposits = [];
   /** @type {Array<{ homeId: string, destId: string, venue: string, envoyWeight01: number, amplifier: number, intensity01: number }>} §11b heard peace suits */
   const embassyDeposits = [];
   /** @type {Array<{ homeId: string, subject: string }>} §11b rumour-verification returns (write g) */
@@ -481,6 +491,7 @@ function advanceLitRoads(args) {
   }
 
   // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
+  const seaLit = seaRoadsActive(worldState); // D-6 SEA ROADS (§10): sea-hazard dispatch on water hops
   /** @type {Map<string, number>} legitimacy hits (capture home hit · T4 detain host hit) */
   const legitimacyHits = new Map();
   const bumpLegit = (/** @type {string} */ id, /** @type {number} */ d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
@@ -521,10 +532,17 @@ function advanceLitRoads(args) {
         }
       }
     } else {
+      // D-6 SEA ROADS (§10): an IN-TRANSIT SEA hop swaps the land in-transit checks (T1-army/T3) for
+      // the sea-hazard dispatch (S1 blockade · S2 storm · S3 piracy). A calm crossing ⇒ res stays
+      // null (no land army/embattlement check). T2/T4 are visiting-only ⇒ never reached over water.
+      const overSea = seaLit && phase !== 'visiting' && currentSeaHop(m, weekClock, digest, season).overSea;
+      if (overSea) {
+        res = resolveSeaHazard({ m, weekClock, digest, season, worldState, graph, homeId, destId, exposure, protection, fork, rngSeed, now2, idSet });
+      }
       // T1 — army on the route / occupation during the stay.
       let t1Captor = null;
-      if (phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
-      if (!t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
+      if (!overSea && phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
+      if (!res && !overSea && !t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
       if (t1Captor) {
         const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
         res = fork.random() < p ? { cls: 'T1', outcome: 'hostage', captorId: t1Captor } : { cls: 'T1', outcome: 'delayed', captorId: t1Captor };
@@ -538,8 +556,8 @@ function advanceLitRoads(args) {
           res = fork.random() < p ? { cls: 'T2', outcome: 'hostage', captorId } : { cls: 'T2', outcome: 'trapped', captorId };
         }
       }
-      // T3 — embattled roads (in-transit only).
-      if (!res && phase !== 'visiting') {
+      // T3 — embattled roads (LAND in-transit only; a sea hop's piracy is S3, handled above).
+      if (!res && !overSea && phase !== 'visiting') {
         const level = embattlementLevel(worldState, hop);
         if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
           const captorId = idSet.has(hop) ? hop : destId;
@@ -620,10 +638,11 @@ function advanceLitRoads(args) {
         seed, tags: ['embassy_rebuffed', str(res.venue)],
       }));
     } else if (res.outcome === 'delayed') {
-      m.legArrivalTick = num(m.legArrivalTick, 0) + 1;
+      // D-6: a storm (S2) delays 1-2 weeks (res.delayWeeks); a land army-delay (T1) is +1.
+      m.legArrivalTick = num(m.legArrivalTick, 0) + Math.max(1, num(/** @type {{ delayWeeks?: number }} */ (res).delayWeeks, 1));
       if (!m.delayReceipted) {
         m.delayReceipted = true; const seed = `delay.${mid}.${now2}`;
-        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed'] }));
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed', ...(/** @type {{ overSea?: boolean }} */ (res).overSea ? ['sea'] : [])] }));
       }
     } else if (res.outcome === 'trapped') {
       if (!m.trappedBySiege) {
@@ -649,6 +668,10 @@ function advanceLitRoads(args) {
   const captorProsperity = new Map();
   /** @type {Map<string, number>} home prosperity band-steps (PILLAR captives, §20 Q10) */
   const homeProsperity = new Map();
+  /** @type {Map<string, number>} D-5 §9 payer prosperity band-steps (mercy priced for key/pillar captives) */
+  const payerProsperity = new Map();
+  const thirdPartyLit = thirdPartyRansomActive(worldState); // D-5 §9 the virtual flag
+  const memWeaveLit = memoryWeaveActive(worldState); // D-5 §9 the friend channel + gratitude gate
   for (const rid of Object.keys(ransoms).sort(cmp)) {
     const r = { ...asObject(ransoms[rid]) };
     const homeId = str(r.homeId); const captorId = str(r.captorId); const npcKey = str(r.npcKey);
@@ -667,6 +690,18 @@ function advanceLitRoads(args) {
     else if (!idSet.has(captorId)) early = 'captor_gone';
     else if (asObject(asObject(occupations)[captorId]).occupierId) early = 'captor_occupied';
     else if (r.hostileAtCapture && !atOpenWar(graph, homeId, captorId) && !HOSTILE_RUNGS.has(relationshipTypeBetween(graph, worldState, homeId, captorId))) early = 'peace';
+    // D-5 THIRD-PARTY RANSOM (§9): once, at half-term, scan for a payer. DM/party ops WIN (only when !early).
+    let thirdPartyDecision = null;
+    if (thirdPartyLit && !early && !r.thirdPartyResolved
+        && num(r.remainingWeeks, 0) <= num(r.termWeeks, 0) * THIRD_PARTY_RANSOM_TUNING.HALF_TERM_FRACTION) {
+      const d = resolveThirdPartyRansom({
+        ransom: r, captiveNpc: npc ? npc.npc : {}, w, servedFraction: clamp01(elapsed / Math.max(1, num(r.termWeeks, 1))),
+        graph, worldState, settlementOf: freshSettlement, candidateIds: orderedIds,
+        rngSeed, memoryWeaveLit: memWeaveLit, corruptibleFlaws: CORRUPTIBLE_FLAWS,
+      });
+      r.thirdPartyResolved = true; r.payerId = d.payerId; r.payerMotive = d.payerMotive;
+      if (d.action === 'debt' || d.action === 'compromised') { early = 'third_party'; thirdPartyDecision = d; }
+    }
     const termEnd = /** @type {number} */ (r.remainingWeeks) <= 0;
     if (!early && !termEnd) { ransoms[rid] = r; continue; } // still captive — carry the updated record
 
@@ -694,6 +729,14 @@ function advanceLitRoads(args) {
       if (w >= ROADS_TUNING.PILLAR_WEIGHT) homeProsperity.set(homeId, (homeProsperity.get(homeId) || 0) + ROADS_TUNING.HOME_PILLAR_PROSPERITY_STEP);
     } else if (early === 'party_ransom' && w >= ROADS_TUNING.CAPTOR_CREDIT_MIN_WEIGHT) {
       captorProsperity.set(captorId, (captorProsperity.get(captorId) || 0) + ROADS_TUNING.CAPTOR_PROSPERITY_STEP);
+    } else if (early === 'third_party' && thirdPartyDecision) {
+      // §9 REDIRECTED SCHEDULE: the payer's coin covered the shame (home skips the legit hit); the
+      // payer bleeds a band-step for key/pillar captives; the outcome (debt/compromised/gratitude) deposits.
+      const eff = thirdPartyReleaseEffects(thirdPartyDecision, { homeId, captorId, npcKey, w, corruptionWebLit: corruptionWebActive(worldState) });
+      if (eff.payerProsperityStep) payerProsperity.set(eff.payerId, (payerProsperity.get(eff.payerId) || 0) + eff.payerProsperityStep);
+      if (eff.returnedCaptiveDeposit) returnedCaptiveDeposits.push(eff.returnedCaptiveDeposit);
+      if (eff.ransomSettlementDeposit) ransomSettlementDeposits.push(eff.ransomSettlementDeposit);
+      if (eff.bondEventDeposit) bondEventDeposits.push(eff.bondEventDeposit);
     }
     const s = freshSettlement(homeId); const seed = `ransom.${rid}`;
     const interp = { npc: str(r.npcName), home: str(asObject(s).name || homeId), captor: captorId, dest: captorId };
@@ -862,6 +905,8 @@ function advanceLitRoads(args) {
         path: route.path.slice(), departTick: weekClock, legArrivalTick: weekClock + legWeeks,
         stayWeeks, escort01, riskTolerance01: riskTolerance, knownDangerAtDispatch: believedDanger,
         trappedBySiege: false, startedYear: year,
+        // D-6 SEA ROADS (§10): freeze per-hop modality at dispatch (absent when dark ⇒ legacy all-land).
+        ...(seaLit ? { legModes: classifyLegModes(digest, route.path) } : {}),
       };
       cadence[c.npcKey] = year;
       abroadByHome.set(sid, (abroadByHome.get(sid) || 0) + 1);
@@ -936,11 +981,12 @@ function advanceLitRoads(args) {
 
   // ── §7/§9 bounded writes: legitimacy (capture · detain · ransom-paid) + prosperity band-
   //    steps (captor credit for key/pillar captives · home debit for pillar captives) ──
-  if (legitimacyHits.size || captorProsperity.size || homeProsperity.size) {
+  if (legitimacyHits.size || captorProsperity.size || homeProsperity.size || payerProsperity.size) {
     const idx = () => { const m = new Map(); nextUpdates.forEach((u, i) => m.set(str(u.saveId), i)); return m; };
     if (legitimacyHits.size) { const a = applyLegitimacySteps(nextUpdates, idx(), legitimacyHits); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
     if (captorProsperity.size) { const a = applyProsperityBandSteps(nextUpdates, idx(), captorProsperity); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
     if (homeProsperity.size) { const a = applyProsperityBandSteps(nextUpdates, idx(), homeProsperity); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } }
+    if (payerProsperity.size) { const a = applyProsperityBandSteps(nextUpdates, idx(), payerProsperity); if (a !== nextUpdates) { nextUpdates = a; cloned = true; } } // D-5 §9 mercy priced
   }
 
   // ── PERSIST the sidecar (drop-when-empty; codepoint-sorted, byte-stable) ──
@@ -974,7 +1020,10 @@ function advanceLitRoads(args) {
       nextReturned[key] = r;
     }
     for (const d of returnedCaptiveDeposits) {
-      nextReturned[`${d.captorId}|${d.homeId}|${d.npcKey}`] = { captorId: d.captorId, homeId: d.homeId, npcKey: d.npcKey, tick: now2 };
+      // D-5 §9: a payer-beneficiary channel keys/beneficiaries on the PAYER (the web recruits FOR the
+      // payer, not the captor); a plain captor channel omits beneficiaryId ⇒ the consumer falls back to captorId.
+      const bid = d.beneficiaryId && d.beneficiaryId !== d.captorId ? d.beneficiaryId : null;
+      nextReturned[`${bid || d.captorId}|${d.homeId}|${d.npcKey}`] = { captorId: d.captorId, homeId: d.homeId, npcKey: d.npcKey, tick: now2, ...(bid ? { beneficiaryId: bid } : {}) };
     }
     const prevRet = JSON.stringify(Object.keys(priorReturned).length ? priorReturned : null);
     const nextRet = JSON.stringify(Object.keys(nextReturned).length ? sortKeys(nextReturned) : null);
@@ -986,32 +1035,22 @@ function advanceLitRoads(args) {
     }
   }
 
-  // ── §11b THE EMBASSY SUIT LEDGER — carry prior (pruning lapsed suits) + the new heard suits.
-  //    The war system's sue_for_peace weight consumes it (embassyLedger.embassySuitPeaceMult);
-  //    roads DEPOSITS, the war system CONSUMES — roads never writes war state. Drop-when-empty. ──
-  const priorEmbassies = asObject(getSpatialLedger(worldState, EMBASSY_LEDGER_KEY));
-  if (Object.keys(priorEmbassies).length || embassyDeposits.length) {
-    /** @type {Record<string, unknown>} */
-    const nextEmbassies = {};
-    for (const key of Object.keys(priorEmbassies).sort(cmp)) {
-      const e = asObject(priorEmbassies[key]);
-      if (num(e.expiresTick, 0) > weekClock) nextEmbassies[key] = e; // still standing
-    }
-    for (const d of embassyDeposits) {
-      nextEmbassies[embassyPairKey(d.homeId, d.destId)] = {
-        homeId: d.homeId, destId: d.destId, venue: d.venue, envoyWeight01: d.envoyWeight01,
-        amplifier: d.amplifier, intensity01: d.intensity01, tick: now2,
-        expiresTick: weekClock + ROADS_TUNING.EMBASSY_SUIT_TTL_WEEKS,
-      };
-    }
-    const prevEmb = JSON.stringify(Object.keys(priorEmbassies).length ? priorEmbassies : null);
-    const nextEmb = JSON.stringify(Object.keys(nextEmbassies).length ? sortKeys(nextEmbassies) : null);
-    if (prevEmb !== nextEmb) {
-      nextWorldState = Object.keys(nextEmbassies).length
-        ? setSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY, sortKeys(nextEmbassies))
-        : dropSpatialLedger(nextWorldState, EMBASSY_LEDGER_KEY);
-      changed = true;
-    }
+  // ── D-5 §9 THE THIRD-PARTY DEPOSIT LEDGERS — the debt (generosity consumes) + the gratitude bond
+  //    (the ladder consumes). Drop-when-empty; consume-once by pulse order (both consumers run
+  //    before roads-last, so this tick's deposits are theirs next tick, then pruned). ──
+  if (ransomSettlementDeposits.length || bondEventDeposits.length
+    || Object.keys(asObject(getSpatialLedger(worldState, 'roadsRansomSettlements'))).length
+    || Object.keys(asObject(getSpatialLedger(worldState, 'roadsBondEvents'))).length) {
+    const tp = persistThirdPartyLedgers(nextWorldState, { ransomSettlements: ransomSettlementDeposits, bondEvents: bondEventDeposits }, weekClock);
+    if (tp.changed) { nextWorldState = tp.worldState; changed = true; }
+  }
+
+  // ── §11b THE EMBASSY SUIT LEDGER — carry live prior suits + the new heard suits (the war
+  //    system's sue_for_peace weight consumes it; roads DEPOSITS, the war system CONSUMES).
+  //    Persisted through the embassyLedger leaf (ceiling-safe; byte-identical). ──
+  {
+    const emb = persistEmbassySuits(nextWorldState, embassyDeposits, { weekClock, now2 });
+    if (emb.changed) { nextWorldState = emb.worldState; changed = true; }
   }
 
   // ── §11b PURPOSE 7 THE RETURN-SIDE RUMOR WRITE (LAW 6 write g) — a returned verification

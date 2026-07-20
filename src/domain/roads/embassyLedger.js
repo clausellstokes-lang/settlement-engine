@@ -17,11 +17,54 @@
  *
  * @enforced-by tests/domain/roadsEmbassy.test.js
  */
-import { getSpatialLedger } from '../spatial/distanceRead.js';
-import { ROADS_TUNING, asObject, num, clamp01 } from './state.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { ROADS_TUNING, asObject, num, clamp01, cmp } from './state.js';
 
 /** The roads-owned spatial ledger the embassy suit rides (drop-when-empty; roads-written). */
 export const EMBASSY_LEDGER_KEY = 'roadsEmbassies';
+
+/** Sort an object's keys codepoint-stably (byte-stable ledger serialization). Pure.
+ *  @param {Record<string, unknown>} obj @returns {Record<string, unknown>} */
+function sortKeys(obj) {
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const k of Object.keys(obj).sort(cmp)) out[k] = obj[k];
+  return out;
+}
+
+/**
+ * Persist the embassy suit ledger (§11b): carry the live (un-expired) prior suits + append this
+ * tick's heard suits; drop-when-empty. Pure code motion from the roads mover — byte-identical.
+ * @param {Record<string, unknown>} worldState
+ * @param {Array<{ homeId: string, destId: string, venue: string, envoyWeight01: number, amplifier: number, intensity01: number }>} deposits
+ * @param {{ weekClock: number, now2: number }} ctx
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean }}
+ */
+export function persistEmbassySuits(worldState, deposits, ctx) {
+  const priorEmbassies = asObject(getSpatialLedger(worldState, EMBASSY_LEDGER_KEY));
+  const list = Array.isArray(deposits) ? deposits : [];
+  if (!Object.keys(priorEmbassies).length && !list.length) return { worldState, changed: false };
+  /** @type {Record<string, unknown>} */
+  const nextEmbassies = {};
+  for (const key of Object.keys(priorEmbassies).sort(cmp)) {
+    const e = asObject(priorEmbassies[key]);
+    if (num(e.expiresTick, 0) > ctx.weekClock) nextEmbassies[key] = e; // still standing
+  }
+  for (const d of list) {
+    nextEmbassies[embassyPairKey(d.homeId, d.destId)] = {
+      homeId: d.homeId, destId: d.destId, venue: d.venue, envoyWeight01: d.envoyWeight01,
+      amplifier: d.amplifier, intensity01: d.intensity01, tick: ctx.now2,
+      expiresTick: ctx.weekClock + ROADS_TUNING.EMBASSY_SUIT_TTL_WEEKS,
+    };
+  }
+  const prevEmb = JSON.stringify(Object.keys(priorEmbassies).length ? priorEmbassies : null);
+  const nextEmb = JSON.stringify(Object.keys(nextEmbassies).length ? sortKeys(nextEmbassies) : null);
+  if (prevEmb === nextEmb) return { worldState, changed: false };
+  const ws = Object.keys(nextEmbassies).length
+    ? setSpatialLedger(worldState, EMBASSY_LEDGER_KEY, sortKeys(nextEmbassies))
+    : dropSpatialLedger(worldState, EMBASSY_LEDGER_KEY);
+  return { worldState: ws, changed: true };
+}
 
 /** The directed suing-pair key `${party}>${foe}` (party sued foe for peace). Pure.
  *  @param {string} party @param {string} foe @returns {string} */

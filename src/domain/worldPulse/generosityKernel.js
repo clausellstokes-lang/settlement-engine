@@ -132,6 +132,7 @@ import {
   intelPairKey, INTEL_TRANSFERS_LEDGER, INTEL_COOLDOWN_LEDGER, INTEL_TRADE_TUNING,
 } from '../spatial/intelActs.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+import { consumeRansomSettlements } from '../roads/thirdPartyRansom.js';
 import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
@@ -1032,6 +1033,14 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       intelTransferWrites[`intel.${opp.sellerId}.${opp.receiverId}.${opp.subjectId}.${tick}`] = plan.transfer;
       intelCooldownWrites[pk] = intelElapsedWeeks;
     }
+  }
+
+  // ── D-5 §9 THE RANSOM-RELIEF CONSUME (deposit-and-consume, law 5): the roads mover deposits a
+  //    third-party ransom settlement (roadsRansomSettlements); this pass mints the ransom_relief
+  //    obligation home→payer the NEXT tick (the freed man walks home before the ledger knows his
+  //    price). Roads prunes the deposit the same tick ⇒ consume-once. Absent ledger ⇒ a no-op. ──
+  for (const m of consumeRansomSettlements(worldState, tick)) {
+    if (num(m.magnitude, 0) >= T.OBLIGATION_MIN) obligationMints.push(/** @type {ObligationRecord} */ (m));
   }
 
   // ── PERSIST. Nothing decided ⇒ byte-identical (no ledger touched). ──

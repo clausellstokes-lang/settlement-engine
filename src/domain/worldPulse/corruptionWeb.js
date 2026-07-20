@@ -284,7 +284,9 @@ function returnedCaptiveChannels(worldState) {
   const ledger = asObject(getSpatialLedger(worldState, 'roadsReturnedCaptives'));
   for (const key of Object.keys(ledger).sort(compareCodepoint)) {
     const r = asObject(ledger[key]);
-    const captor = String(r.captorId ?? '');
+    // D-5 §9: a THIRD-PARTY RANSOM channel names the PAYER as the beneficiary/patron (the web recruits
+    // the returned captive FOR the payer, not the captor); a plain captor channel omits it ⇒ captorId.
+    const captor = String(r.beneficiaryId ?? r.captorId ?? '');
     const home = String(r.homeId ?? '');
     const npcKey = String(r.npcKey ?? '');
     if (!captor || !home || captor === home) continue;

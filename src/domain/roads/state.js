@@ -78,6 +78,7 @@ export function cmp(a, b) {
  * @property {number} knownDangerAtDispatch  the stale-intel receipt
  * @property {boolean} trappedBySiege
  * @property {number} startedYear
+ * @property {Array<'land'|'sea'>} [legModes]  D-6 SEA ROADS: per-hop modality, frozen at dispatch (absent ⇒ all-land, legacy-tolerant)
  */
 /**
  * @typedef {Object} RansomRec
@@ -92,6 +93,9 @@ export function cmp(a, b) {
  * @property {number} remainingWeeks
  * @property {boolean} conversionRolled
  * @property {boolean} willConvert
+ * @property {string|null} [payerId]        D-5 THIRD-PARTY RANSOM: the third party who paid (null until scanned)
+ * @property {string|null} [payerMotive]    D-5: 'friendship'|'succor_ally'|'succor_unbonded'|'leverage'|null
+ * @property {boolean} [thirdPartyResolved] D-5: the half-term third-party checkpoint has fired (no re-scan)
  */
 /**
  * @typedef {Object} Whereabouts
