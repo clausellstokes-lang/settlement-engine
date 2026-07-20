@@ -115,6 +115,7 @@ export function applyEliteBleed(worldState, { pairs = [], tick }) {
     const significance = clamp(num(p.standing01, 0), -1, 1) * clamp01(num(p.weight01, 0));
     const cur = /** @type {{ trust?: number, resentment?: number }} */ ((worldState?.relationshipStates || {})[p.key] || {});
     // A warming term lifts trust; a cooling term lifts resentment. Bounded by the applicator.
+    /** @type {Record<string, number>} */
     const patch = term > 0
       ? { trust: clamp01(num(cur.trust, 0) + term) }
       : { resentment: clamp01(num(cur.resentment, 0) - term) };

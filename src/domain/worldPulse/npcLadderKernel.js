@@ -108,9 +108,9 @@ import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.j
  * @property {LadderGoal|null} goal — the current minted goal (null ⇒ none this state)
  * @property {LadderStigma|null} stigma — the §10 exposure mark (null ⇒ clean)
  * @property {Record<string, LadderGrudge>} grudges — §4e D5 marks, keyed by defender npcId
- * @property {Record<string, LadderBond>} [bonds] — D-7e the positive twin (loyalty/gratitude/
- *   friendship), keyed by the other npcId; additive-optional (absent unless memoryWeave lit AND
- *   a bond formed — the drop-when-empty dormancy contract); dies with the record (succession reset)
+ * @property {Record<string, LadderBond>} [bonds] the D-7e positive twin (loyalty, gratitude,
+ *   friendship), keyed by the other npcId; additive-optional (absent unless memoryWeave lit and
+ *   a bond formed, the drop-when-empty dormancy contract); dies with the record (succession reset)
  * @property {number} [lastExposed] last-seen timesExposed count (fresh-exposure detection)
  * @property {boolean} [wasOusted] last-seen ousted flag (fresh-exposure detection)
  * @property {number} [lastLieSeen] D-2: last lie-exposure tick already stigmatized (consume-once)
@@ -120,7 +120,7 @@ import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.j
  *   progress: number, basis: string }} LadderGoal */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
 /** @typedef {{ sev: number, week: number }} LadderGrudge */
-/** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string }} LadderBond — D-7e loyalty|gratitude|friendship; foreignSid marks a D-7f cross-border counterpart */
+/** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string }} LadderBond */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
 /** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding> }} LadderRecord */
 

@@ -383,7 +383,7 @@ export function normalizeBonds(v) {
  *  @returns {Record<string, import('./npcLadderKernel.js').LadderBond>} */
 export function mintBond(bonds, otherNid, kind, addSev, weeks, foreignSid = null) {
   const T = LADDER_TUNING;
-  const cur = asObject(bonds);
+  const cur = /** @type {Record<string, import('./npcLadderKernel.js').LadderBond>} */ (asObject(bonds));
   const prior = asObject(cur[otherNid]);
   const priorSev = num(prior.sev, 0);
   const sev = round4(clamp(priorSev + Math.max(0, num(addSev, 0)), 0, T.BOND_MAX_SEV));
