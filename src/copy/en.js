@@ -889,6 +889,16 @@ export const en = Object.freeze({
     networkOff:   'You’re offline. Reconnect and we’ll retry.',
     generateFail: 'The simulator hit a snag. We’re looking at it. Try again in a moment.',
     aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected. Your settlement still generates and exports.',
+    // Vision V-H (R-23): user-facing failure copy routed off component literals
+    // into the register, so failures speak in one voice and the i18n door stays open.
+    forgeStart:        'The forge stalled before your settlement took shape. Try once more.',
+    realmSlots:        'There aren’t enough free save slots for a realm this size. Clear a few, then try again.',
+    realmBuild:        'The realm didn’t come together this time. Try once more.',
+    mapExport:         'The map didn’t finish exporting. Try once more.',
+    prefSave:          'That preference didn’t save. Try once more.',
+    galleryCollection: 'This gallery collection could not be shown.',
+    galleryDossier:    'This gallery dossier could not be shown.',
+    galleryView:       'The gallery could not be shown.',
   },
 
   // ── Verb registry (P124 / C-1) ───────────────────────────────────────────

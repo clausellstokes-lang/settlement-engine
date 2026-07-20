@@ -1,0 +1,23 @@
+[
+  "src/components/GenerateWizard.jsx",
+  "src/components/OutputContainer.jsx",
+  "src/components/SettlementDetail.jsx",
+  "src/components/SettlementsPanel.jsx",
+  "src/components/ShareToGallery.jsx",
+  "src/components/WorldMap.jsx",
+  "src/components/account/AccountDataPrivacySection.jsx",
+  "src/components/account/AccountSeatTransferPanel.jsx",
+  "src/components/account/AccountSecuritySection.jsx",
+  "src/components/auth/AuthPanel.jsx",
+  "src/components/gallery/GalleryHubPage.jsx",
+  "src/components/gallery/GalleryReportDialog.jsx",
+  "src/components/gallery/ImageCropper.jsx",
+  "src/components/generate/ExportDraftButton.jsx",
+  "src/components/generate/SaveToLibraryButton.jsx",
+  "src/components/map/SimulationRulesDialog.jsx",
+  "src/components/map/WizardNewsPanel.jsx",
+  "src/components/map/WorldPulsePanel.jsx",
+  "src/components/new/tabs/NotesTab.jsx",
+  "src/components/settlement/VersionsTab.jsx",
+  "src/components/settlements/useCampaignAdvance.js"
+]

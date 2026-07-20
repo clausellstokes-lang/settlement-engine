@@ -94,7 +94,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
       <FeatureErrorBoundary
         label="GalleryPage.hub"
         kind="react.render.gallery"
-        fallbackTitle="This gallery collection could not be displayed."
+        fallbackTitle={tr('errors.galleryCollection')}
         resetKeys={[routeHub.facet, routeHub.value]}
       >
         <GalleryHubPage routeHub={routeHub} />
@@ -111,7 +111,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
       <FeatureErrorBoundary
         label="GalleryPage.detail"
         kind="react.render.gallery"
-        fallbackTitle="This gallery dossier could not be displayed."
+        fallbackTitle={tr('errors.galleryDossier')}
         resetKeys={[activeSlug]}
       >
         <GalleryDetail
@@ -164,7 +164,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
       <FeatureErrorBoundary
         label="GalleryPage.list"
         kind="react.render.gallery"
-        fallbackTitle="The gallery could not be displayed."
+        fallbackTitle={tr('errors.galleryView')}
         resetKeys={[tab]}
       >
         {tab === 'maps' ? (
