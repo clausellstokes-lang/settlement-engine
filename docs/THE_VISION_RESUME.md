@@ -18,13 +18,16 @@
     ledger 9f439a73) · V-C @ claude/vision-c `98e327e0` (Interview/Oracle/corpus
     factory, 30+ pins; ledger 221e9f12) · V-H @ claude/vision-h `3668f33c` (UX quartet
     + errorCopy ratchet; ledger bcddd3c5; TWO FOLD SEAMS recorded: WizardNewsPanel
-    EmptyState adoption + the 4 frozen error literals migrate-and-strike). Fold all
-    three at the next minifold boundary.
+    EmptyState adoption + the 4 frozen error literals migrate-and-strike) · V-E @
+    claude/vision-e `9d8d3411` (Foundry/MCP/seed-post + V-20 unlisted Model-B +
+    featured; MIGRATION 168 written-not-deployed — fold renumbers if any sibling
+    mints one; ledger 485d1398; V-J handoff: /gallery?slug=<42-hex>, unfurl seams).
+    FOLD ALL FOUR at the next minifold boundary.
   - HOT (4 lanes): V-B in `minifold` (composite-r4 @ 299f2843) · V-D in the
     `vision-c` WORKTREE on branch `claude/vision-d` (rotated; V-C's commits safe on
-    their branch) · V-E in `vision-e` (+ the V-20 unlisted-sharing & V-13 featured
-    amendments folded into its scope mid-lane) · V-F in the `vision-i` WORKTREE on
-    branch `claude/vision-f` (rotated again; V-H safe on its branch).
+    their branch) · V-F in the `vision-i` WORKTREE on branch `claude/vision-f` · V-J in `vision-j`
+    (dispatched with V-E's slug/unfurl handoff). The `vision-e` worktree idles
+    READY for V-K at the next landing.
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —
