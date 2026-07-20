@@ -30,6 +30,11 @@ export const SOURCE = Object.freeze({
   CREDIBILITY: 'read:credibility',              // settlementCredibility/realmCredibility (band only)
   RUMORS_PUBLIC: 'read:rumors.public',          // settlementRumors (includeGroundTruth:false)
   SETTLEMENT_PUBLIC: 'read:settlement.public',  // toPublicSafe(settlement) — the public projection
+  // V-25a — the INHABITANT-LEVEL road view: route legs (public settlement names), a coarse
+  // qualitative road condition (a band word, never the embattlement number), and the PUBLIC gate
+  // facts a traveller sees (a public-front siege, a foreign garrison, a festival's guest-right).
+  // NO troop banners/allegiance/ETAs, migrant causes, or envoy missions — those stay ROADS_TRUTH.
+  ROADS_PUBLIC: 'read:roads.public',
 
   // ── DM-only reads (ground truth / covert / secrets) ────────────────────────
   POLITICS_COVERT: 'read:politics.covert',      // conspiracies (includeCovert:true)
@@ -57,6 +62,7 @@ export const PLAYER_SAFE_SOURCES = /** @type {ReadonlySet<string>} */ (Object.fr
   SOURCE.CREDIBILITY,
   SOURCE.RUMORS_PUBLIC,
   SOURCE.SETTLEMENT_PUBLIC,
+  SOURCE.ROADS_PUBLIC,
 ])));
 
 /** Every registered source id (for validation that a section tags a KNOWN source). */

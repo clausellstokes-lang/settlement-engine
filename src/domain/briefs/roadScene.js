@@ -6,7 +6,15 @@
  *
  * The briefs/composers S2 idiom: pure, citation-law via ./citations.js, INERT-NOT-CRASH — a
  * quiet realm yields dropped (empty) sections, never a throw. AUDIENCE = 'dm' (§15: every
- * road-scene section reads truth and is DM-SECRET; a player-safe variant is a deferred seam §21).
+ * road-scene section reads truth and is DM-SECRET).
+ *
+ * V-25a — composeRoadScenePlayerBrief is the INHABITANT-LEVEL variant (audience 'player',
+ * SOURCE.ROADS_PUBLIC): the same chosen route, but only what a traveller would themselves
+ * perceive — legs (public names), a coarse road-condition word (never the embattlement number),
+ * and PUBLIC gate facts (a public-visibility siege, a foreign garrison, a festival's guest-right).
+ * The whole ON-THE-ROAD layer (troop banners/allegiance/ETAs, migrant causes, envoy missions) is
+ * dropped — it stays DM-secret. Fail-closed by construction: a covert (visibility:'gm') war front
+ * is NEVER named, and assembleBrief(audience:'player') throws on any non-player-safe source.
  *
  * Sections:
  *   THE ROAD    — the chosen route (chooseRoute over TRUTH) with per-hop conditions
@@ -27,7 +35,7 @@ import {
 import { activeSpatialDigest, getSpatialLedger } from '../spatial/distanceRead.js';
 import { chooseRoute, embattlementLevel, tollRateOf } from '../spatial/embattlement.js';
 import { currentRegion } from '../spatial/armyTransit.js';
-import { warFrontsInto } from '../worldPulse/warFrontReads.js';
+import { warFrontsInto, isLiveWarFront } from '../worldPulse/warFrontReads.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { migrationColumnReason } from '../roads/migrationReason.js';
 import { biomeSeasonTexture } from '../../data/biomeTexture.js';
@@ -193,4 +201,65 @@ export function composeRoadSceneChecked(args) {
   const ws = asObject(args).worldState;
   const brief = composeRoadSceneBrief(args);
   return { brief, wrote: asObject(args).worldState !== ws };
+}
+
+/**
+ * V-25a — THE PLAYER-SAFE road scene: the inhabitant's view of the same route. Pure, zero-write,
+ * INERT-NOT-CRASH; audience 'player', every section SOURCE.ROADS_PUBLIC. It carries ONLY what a
+ * traveller perceives: the legs + a coarse condition WORD (no embattlement number, no tolls), and
+ * the PUBLIC gate facts (a public-visibility siege, a foreign garrison by name, a festival's
+ * guest-right). It NEVER emits the ON-THE-ROAD movement layer (banners/allegiance/ETAs, migrant
+ * causes, envoy missions) and NEVER names a covert (visibility:'gm') war front — fail-closed by
+ * construction. assembleBrief(audience:'player') is the structural backstop.
+ * @param {Parameters<typeof composeRoadSceneBrief>[0]} args
+ * @returns {import('./citations.js').Brief}
+ */
+export function composeRoadScenePlayerBrief(args) {
+  const a = asObject(args);
+  const worldState = asObject(a.worldState);
+  const graph = asObject(a.regionalGraph);
+  const digest = activeSpatialDigest(worldState);
+  const from = str(a.originId); const to = str(a.destId);
+  const nowTick = Math.floor(num(a.tick ?? worldState.tick, 0));
+  const clock = seasonForTick(num(asObject(worldState.calendar).elapsedWeeks, nowTick));
+  const season = a.season != null ? String(a.season) : clock.season;
+  const weekOfYear = num(clock.weekOfYear, 1);
+  const nameOf = nameResolver(a.settlements);
+
+  const route = (digest && from && to) ? chooseRoute(digest, worldState, from, to, DEFAULT_RISK, season) : null;
+  const path = route && Array.isArray(route.path) ? route.path.map(str) : [];
+
+  // ── THE ROAD — legs + coarse condition WORD only (no numeric embattlement, no tolls) ──
+  /** @type {Array<Record<string, unknown>>} */
+  const roadItems = [];
+  if (path.length >= 2) {
+    roadItems.push({ leg: `${nameOf(from)} → ${nameOf(to)}`, hops: path.length - 1 });
+    for (const hop of path) roadItems.push({ at: nameOf(hop), condition: conditionLabel(embattlementLevel(worldState, hop)) });
+  }
+
+  // ── AT THE GATES — public facts only ──
+  /** @type {Array<Record<string, unknown>>} */
+  const gates = [];
+  const occ = asObject(asObject(worldState.occupations)[to]);
+  if (occ.occupierId) gates.push({ state: 'occupied', by: nameOf(occ.occupierId) }); // a foreign garrison is visible; the rung (DM classification) is dropped
+  // A siege is public ONLY when the war front is visibility:'public' — a covert front is never named.
+  const publicBesiegers = [...new Set(
+    (Array.isArray(graph.channels) ? graph.channels : [])
+      .filter((c) => isLiveWarFront(c) && asObject(c).visibility === 'public' && str(asObject(c).to) === to)
+      .map((c) => str(asObject(c).from)),
+  )].map(nameOf).sort(cmp);
+  if (publicBesiegers.length) gates.push({ state: 'under siege', by: publicBesiegers.join(', ') });
+  const traditionsLedger = asObject(getSpatialLedger(worldState, 'traditions'));
+  if (hostHasActiveWindow(traditionsLedger[to], weekOfYear)) {
+    gates.push({ state: 'a festival is on', guestRight: 'the guest-right holds — a host is loath to seize a visitor mid-observance' });
+  }
+
+  return assembleBrief({
+    kind: 'roadScenePlayer',
+    audience: 'player',
+    sections: [
+      section('road', `The road to ${nameOf(to) || 'the destination'}`, SOURCE.ROADS_PUBLIC, roadItems),
+      section('gates', `At the gates of ${nameOf(to) || 'the destination'}`, SOURCE.ROADS_PUBLIC, gates),
+    ],
+  });
 }
