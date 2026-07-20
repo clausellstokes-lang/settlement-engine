@@ -68,6 +68,16 @@ export const INTEL_TRADE_TUNING = Object.freeze({
   // intelSalePrice's ceiling ≈ BASE(1)·fidelity(1)·(1+STAKES_GAIN)(1.6)·cred(1, neutral) ⇒
   // ~1.6; normalize the priced consideration into [0,1] against this.
   SALE_PRICE_NORM: 1.6,
+  // THE SELF-POLICING RESOLVER (design §7 — "if the sold/gifted read later CONTRADICTS …
+  // charges the seller's stock; if it PROVES OUT, the proven_true rise pays"): a transferred
+  // read is CONTRADICTED (a bad product) when its band diverges from the subject's true band
+  // by ≥ this (the LIE_TUNING.EXPOSE_CONTRADICT_BANDS semantics, mirrored at the sale grain);
+  // within it, the read PROVED OUT. Resolved AT COURIER-ARRIVAL — the only window the record
+  // survives (generosity prunes it the same tick, generosityKernel §1250).
+  SALE_CONTRADICT_BANDS: 2,
+  // The proven-true magnitude fed to the credibility rise (the slow TRUE_RISE side of the
+  // asymmetry is already gentle; a full-magnitude honest sale is still a slow climb).
+  SALE_TRUE_MAG: 1,
 });
 
 /**
@@ -128,6 +138,34 @@ export function intelInjectionBelief(record, tick) {
     confidence01: Math.round(clamp01(conf * fidelity) * 10000) / 10000,
     lastUpdateTick: Math.max(0, Math.floor(Number(tick) || 0)),
   };
+}
+
+/**
+ * THE SELF-POLICING RESOLVER (design §7 — closes the intel lane's credibility loop). Given a
+ * couriered transfer record and the subject's TRUE strength band at courier-arrival, judge
+ * whether the seller's transferred read PROVED OUT (band within SALE_CONTRADICT_BANDS of truth)
+ * or was CONTRADICTED (a stale/false product). Returns a ResolvedIntelSale-shaped verdict the
+ * statecraft mover feeds to intelSaleCredibilityDeltas (the seller settlement's stock) AND
+ * intelSaleNpcCredibilityDeltas (the seller SPOKESPERSON's stock, when D-2 stamped one — degrades
+ * to settlement-only when absent, exactly as today). Applies to sold AND gifted reads (design §7
+ * "the sold/gifted read"). Unresolvable band (no belief, non-finite truth) ⇒ null (no charge).
+ * PURE. @param {{ sellerId?: string, belief?: Record<string, unknown>, spokespersonNpcId?: string }|null|undefined} rec
+ * @param {number} trueBand @returns {{ sellerId: string, accurate: boolean, magnitude01: number, spokespersonNpcId?: string }|null}
+ */
+export function resolveIntelSale(rec, trueBand) {
+  const r = asObject(rec);
+  if (r.sellerId == null) return null;
+  const belief = asObject(r.belief);
+  const soldBand = Number(belief.strengthBand);
+  const tb = Number(trueBand);
+  if (!Number.isFinite(soldBand) || !Number.isFinite(tb)) return null;
+  const diff = Math.abs(Math.round(soldBand) - Math.round(tb));
+  const accurate = diff < INTEL_TRADE_TUNING.SALE_CONTRADICT_BANDS;
+  const magnitude01 = accurate ? clamp01(INTEL_TRADE_TUNING.SALE_TRUE_MAG) : clamp01(diff / 4);
+  /** @type {{ sellerId: string, accurate: boolean, magnitude01: number, spokespersonNpcId?: string }} */
+  const out = { sellerId: String(r.sellerId), accurate, magnitude01 };
+  if (r.spokespersonNpcId != null) out.spokespersonNpcId = String(r.spokespersonNpcId);
+  return out;
 }
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
@@ -279,9 +317,10 @@ export function intelGiftMagnitude({ fidelity01 = 0, stakes01 = 0 } = {}) {
 /**
  * The SALE consideration magnitude (design §7 THE SALE): the priced value of the intel
  * (intelSalePrice — fidelity-discounted, stakes-scaled), normalized to [0,1]. Seller
- * credibility is NEUTRAL (1.0) at this base — the credibility-discount + self-policing
- * feedback is the deferred D-3 self-policing seam (it needs D-2's per-NPC attribution,
- * absent from this composite). Pure.
+ * credibility is NEUTRAL (1.0) at this PRICING base; the CONSEQUENCE side — a sale later
+ * proven false charging the seller's stock so its FUTURE prices fall — is now closed by the
+ * self-policing loop (resolveIntelSale → the statecraft mover's intelSaleCredibilityDeltas /
+ * intelSaleNpcCredibilityDeltas folds). Pure.
  * @param {{ fidelity01?: number, stakes01?: number }} a @returns {number}
  */
 export function intelSaleMagnitude({ fidelity01 = 0, stakes01 = 0 } = {}) {
@@ -295,11 +334,20 @@ export function intelSaleMagnitude({ fidelity01 = 0, stakes01 = 0 } = {}) {
  * writer (foldObligations) and deposits the transfer. GIFT ⇒ the receiver owes the giver a
  * 'warning' obligation of gratitude. SALE ⇒ the consideration REPAYS a debt the seller owes
  * the buyer (information as repayment), else mints a REVERSE 'intel_sale' debt (buyer indebted).
+ * D-3 SELF-POLICING COORDINATION POINT (seller-side stamp): the transfer record carries an
+ * optional `spokespersonNpcId` — the named carrier of the sold/gifted read — so the statecraft
+ * consume arm can charge that soul's PERSONAL credibility when the read is later contradicted
+ * (design §6/§7). This leaf only PASSES it onto the record when the caller supplies it; PICKING
+ * the mouthpiece (a seeded importance-weighted roster draw, the informationStatecraft.pickMouthpiece
+ * idiom) belongs to the SELLER SIDE at deposit time — the generosity kernel owns the intelTransfers
+ * writes, so wiring `ctx.spokespersonNpcId` through generosityKernel's planIntelAct call is a D-3-lane
+ * coordination point (deliberately NOT edited from the statecraft lane). Absent ⇒ the field is omitted
+ * ⇒ the transfer record is byte-identical to today and the loop degrades to settlement-level.
  * @param {IntelOpportunity} opp
- * @param {{ obligationLedger?: Record<string, unknown>|null, tick: number }} ctx
+ * @param {{ obligationLedger?: Record<string, unknown>|null, tick: number, spokespersonNpcId?: string|null }} ctx
  * @returns {{ mints: Array<Record<string, unknown>>, repayments: Array<Record<string, unknown>>, giftMag: number, transfer: Record<string, unknown> }}
  */
-export function planIntelAct(opp, { obligationLedger, tick }) {
+export function planIntelAct(opp, { obligationLedger, tick, spokespersonNpcId = null }) {
   const obl = asObject(obligationLedger);
   const now = Math.max(0, Math.floor(Number(tick) || 0));
   /** @type {Array<Record<string, unknown>>} */
@@ -322,6 +370,9 @@ export function planIntelAct(opp, { obligationLedger, tick }) {
   const transfer = {
     sellerId: opp.sellerId, receiverId: opp.receiverId, subjectId: opp.subjectId,
     mode: opp.mode, belief: opp.belief, fidelity01: opp.fidelity01, depositTick: now,
+    // D-3 self-policing: the seller's mouthpiece, stamped ONLY when the caller supplies one
+    // (the coordination point above) — additive-optional, absent ⇒ byte-identical.
+    ...(spokespersonNpcId != null ? { spokespersonNpcId: String(spokespersonNpcId) } : {}),
   };
   return { mints, repayments, giftMag, transfer };
 }
