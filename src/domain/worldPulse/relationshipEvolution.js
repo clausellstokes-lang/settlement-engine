@@ -280,6 +280,76 @@ export function deriveRelationshipCandidates(/** @type {any} */ snapshot, /** @t
   return evaluateRelationshipRules(snapshot, pressureIdx, options);
 }
 
+// ── THE MEMORY WEAVE (D-7) — the virtual flag, the typed-incident vocabulary, the
+//    sanctioned incident applicator, and the pair→edge-key resolver ───────────────
+/**
+ * Is THE MEMORY WEAVE lit? Reads simulationRules.memoryWeaveEnabled === true,
+ * defensively — ABSENT ⇒ false ⇒ DORMANT (the eighth virtual flag; NO entry in
+ * DEFAULT_SIMULATION_RULES, so goldens do not move). The ghost wirings (D-7b), the
+ * symmetric bonds/faction-pair ledgers (D-7c/e), the generosity bond loop, and the
+ * elite bleed (D-7f) all AND their host's own flag with this one, so a lit host
+ * with the weave dark stays byte-identical. Pure, total.
+ * @param {{ simulationRules?: Record<string, unknown> }|null|undefined} worldState
+ * @returns {boolean}
+ */
+export function memoryWeaveActive(worldState) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).memoryWeaveEnabled === true);
+}
+
+/**
+ * The typed decaying incidents the memory weave mints on the settlement plane
+ * (all through applyRelationshipPatch — the plane's own writer). Each is caught by
+ * the grievanceRead revanchism clone's wound set; route_seized/rite_imposed match
+ * /seiz/ and /impos/, elite_feud/elite_amity ride the D-7f bleed's crossing marks.
+ */
+export const MEMORY_WEAVE_INCIDENT_TYPES = Object.freeze({
+  ROUTE_SEIZED: 'route_seized',   // D-7b (POST-ROADS-FOLD host): a seizer↔victim route capture
+  RITE_IMPOSED: 'rite_imposed',   // D-7b: an overlord↔vassal rite imposition (host live on this base)
+  ELITE_FEUD: 'elite_feud',       // D-7f: a cross-border elite feud crossing (settlement pair cools)
+  ELITE_AMITY: 'elite_amity',     // D-7f: a cross-border elite amity crossing (settlement pair warms)
+});
+
+/**
+ * The relationship-edge key for the pair (a, b), or null when no edge connects
+ * them in the regional graph (⇒ a byte-safe no-op — the peaceTerms edgeKeyBetween
+ * idiom, exported here for reuse by the memory-weave ghost wirings and the bleed).
+ * @param {ReadonlyArray<{ from?: unknown, to?: unknown, id?: unknown }>|null|undefined} edges
+ * @param {string} a @param {string} b @returns {string|null}
+ */
+export function edgeKeyBetween(edges, a, b) {
+  for (const edge of Array.isArray(edges) ? edges : []) {
+    const f = edge?.from != null ? String(edge.from) : '';
+    const t = edge?.to != null ? String(edge.to) : '';
+    if ((f === a && t === b) || (f === b && t === a)) return relationshipKeyFromEdge(edge);
+  }
+  return null;
+}
+
+/**
+ * Mint a typed MEMORY-WEAVE incident on a settlement-pair edge through the plane's
+ * ONE writer (applyRelationshipPatch — law 13's sanctioned applicator idiom, exactly
+ * like applyLegitimacyHits). The caller has already gated on memoryWeaveActive ∧ its
+ * host flag and resolved the (bounded, clamped) scalar patch; this is the single
+ * chokepoint every ghost wiring and the elite bleed pass through — no hand-editing
+ * of relationshipStates anywhere. No key / no patch ⇒ a byte-safe no-op.
+ * @param {any} worldState
+ * @param {{ relationshipKey: string|null, incidentType: string, patch: Record<string, number>, severity?: number, id?: string|null }} spec
+ * @param {any} now
+ * @returns {any}
+ */
+export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentType, patch, severity, id }, now) {
+  if (!relationshipKey || !patch || typeof patch !== 'object') return worldState;
+  return applyRelationshipPatch(worldState, {
+    relationshipKey,
+    relationshipPatch: patch,
+    metadata: { incidentType },
+    severity: Number.isFinite(severity) ? severity : 0.3,
+    id: id || null,
+    proposalPayload: null,
+  }, now);
+}
+
 export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now) {
   if (!outcome.relationshipKey || !outcome.relationshipPatch) return worldState;
   const current = ensureRelationshipState({}, worldState.relationshipStates?.[outcome.relationshipKey]);

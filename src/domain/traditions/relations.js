@@ -157,23 +157,26 @@ function buildImposedCopy(overlordTop, victim, overlordId, localTierBand, year) 
  * @param {TraditionRec[]} a.recs @param {Record<string, unknown>} a.worldState @param {string} a.sid
  * @param {number} a.year @param {number} a.localTierBand
  * @param {(otherSid: string) => TraditionRec[]|null} a.traditionsOf
- * @returns {{ recs: TraditionRec[], changed: boolean }}
+ * @returns {{ recs: TraditionRec[], changed: boolean, imposedOverlordId: string|null }}
+ *   imposedOverlordId names the overlord when a rite was imposed THIS tick (the D-7b
+ *   memory-weave ghost-event surface — the mover mints the rite_imposed incident on the
+ *   overlord↔vassal edge), else null.
  */
 function applyImposition({ recs, worldState, sid, year, localTierBand, traditionsOf }) {
   const overlordId = vassalOverlordOf(worldState, sid);
-  if (!overlordId) return { recs, changed: false };
+  if (!overlordId) return { recs, changed: false, imposedOverlordId: null };
   // Idempotency: this overlord already imposed a rite here ⇒ nothing further this vassalage.
   if (recs.some((r) => String(asObject(asObject(r).suppressedBy).overlordId) === overlordId)) {
-    return { recs, changed: false };
+    return { recs, changed: false, imposedOverlordId: null };
   }
   const rngSeed = String(asObject(worldState).rngSeed || '');
   if (!createPRNG(`${rngSeed}::tradition:impose:${sid}:${year}`).chance(IMPOSE_CHANCE)) {
-    return { recs, changed: false };
+    return { recs, changed: false, imposedOverlordId: null };
   }
   const overlordTop = topTradition(traditionsOf(overlordId));
-  if (!overlordTop) return { recs, changed: false };
+  if (!overlordTop) return { recs, changed: false, imposedOverlordId: null };
   const vi = impositionVictimIndex(recs);
-  if (vi < 0) return { recs, changed: false }; // nothing but the immutable founding core — no trade
+  if (vi < 0) return { recs, changed: false, imposedOverlordId: null }; // nothing but the immutable founding core — no trade
 
   const victim = recs[vi];
   const imposed = buildImposedCopy(overlordTop, victim, overlordId, localTierBand, year);
@@ -184,7 +187,7 @@ function applyImposition({ recs, worldState, sid, year, localTierBand, tradition
   const next = recs.slice();
   next[vi] = suppressed;
   next.push(imposed); // appended at the end — the founding core (index 0) never moves
-  return { recs: next, changed: true };
+  return { recs: next, changed: true, imposedOverlordId: overlordId };
 }
 
 /**
@@ -371,10 +374,11 @@ function applyAdoption({ recs, sid, year, influx, pop, destTierBand, tierCap, tr
  * @param {Array<{originId:string,count:number}>} [a.influx]  this tick's migration influx (§9); [] when aspatial
  * @param {number} [a.pop]  the destination population (the §9 adoption denominator)
  * @param {number} [a.tierCap]  the destination's tradition tier cap (§9 replacement bound)
- * @returns {{ recs: TraditionRec[], changed: boolean }}
+ * @returns {{ recs: TraditionRec[], changed: boolean, imposedOverlordId: string|null }}
+ *   imposedOverlordId names the overlord when a rite was imposed THIS tick (D-7b), else null.
  */
 export function advanceRelations({ recs, worldState, sid, year, localTierBand, minted, traditionsOf, influx, pop, tierCap }) {
-  if (minted || !Array.isArray(recs) || !recs.length) return { recs, changed: false };
+  if (minted || !Array.isArray(recs) || !recs.length) return { recs, changed: false, imposedOverlordId: null };
   let changed = false;
   let cur = recs;
 
@@ -390,5 +394,5 @@ export function advanceRelations({ recs, worldState, sid, year, localTierBand, m
   });
   if (adopted.changed) { cur = adopted.recs; changed = true; }
 
-  return { recs: changed ? cur : recs, changed };
+  return { recs: changed ? cur : recs, changed, imposedOverlordId: imposed.imposedOverlordId };
 }
