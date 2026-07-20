@@ -80,10 +80,19 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/corruptionWeb.js',
     'src/domain/worldPulse/disposition.js',
     'src/domain/worldPulse/factionCapture.js',
+    // D-2 (fold batch 3): the statecraft MOUTHPIECE draw reads the participation view (a
+    // hostage cannot front a court's bluff — via-snapshot, protected); the credibility PRUNE
+    // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's
+    // credibility key survives captivity.
+    'src/domain/worldPulse/informationStatecraft.js',
     'src/domain/worldPulse/momentum.js',
     'src/domain/worldPulse/npcAgency.js',
     'src/domain/worldPulse/npcGrowthKernel.js',
     'src/domain/worldPulse/npcLadderChallenge.js',
+    // D-4 (fold batch 3): `.npcs` here is the ladder-standings map PARAMETER (a
+    // Record<string, LadderStanding> named npcs), never a settlement roster read — the
+    // contest kernel receives post-gate standings; no participation exposure.
+    'src/domain/worldPulse/npcLadderContest.js',
     'src/domain/worldPulse/npcLadderKernel.js',
     'src/domain/worldPulse/npcLadderState.js',
     'src/domain/worldPulse/partyImpact.js',

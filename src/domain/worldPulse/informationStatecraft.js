@@ -553,7 +553,15 @@ function buildLiveNpcIds(snapshot) {
   /** @type {Set<string>} */
   const out = new Set();
   for (const [sid, item] of byId) {
-    const settlement = asObject(asObject(item).settlement);
+    // FOLD BATCH 3 composition (THE ROADS §8 × D-2): the snapshot's settlement is the
+    // PARTICIPATION view — the master gate filters off-stage souls (hostage / DM-shelved).
+    // The prune scan reads the UNTOUCHED roster (`item.save`, the roadsKernel idiom): a
+    // captive is still a live soul — pruning their credibility key mid-captivity would
+    // reset their reputation the day they come home. Falls back to the participation view
+    // when no raw roster exists (synthetic snapshots).
+    const it = asObject(item);
+    const rawSettlement = asObject(asObject(it.save).settlement);
+    const settlement = Array.isArray(rawSettlement.npcs) ? rawSettlement : asObject(it.settlement);
     const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
     npcs.forEach((npc, index) => { out.add(npcId(String(sid), /** @type {Parameters<typeof npcId>[1]} */ (npc), index)); });
   }
