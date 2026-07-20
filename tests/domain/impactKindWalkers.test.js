@@ -82,6 +82,11 @@ const EXPECTED_VOICE = {
   // order is a quiet court beat carrying its own reason receipt, NOT a town-crier
   // proclamation — deliberately unvoiced (the npc_growth/urban_fabric precedent).
   npc_ladder: null,
+  // THE CONTESTED GOALS CLASS (Deep Couplings D-4): a head-to-head goal rivalry and a linked
+  // support-goal outcome are quiet court beats carrying their own reason receipts, NOT
+  // town-crier proclamations — deliberately unvoiced (the npc_ladder precedent exactly).
+  npc_contest: null,
+  npc_support: null,
   // THE TRADITIONS (owner commission, engine lift #4): a festival held or set aside is a
   // chronicle beat carrying its own reason receipt, and no crier VoiceCategory fits a
   // culture observance — deliberately unvoiced (the npc_ladder/urban_fabric precedent; a

@@ -163,6 +163,9 @@ export const WHAT_PHRASES = Object.freeze({
   spatial_consequence: 'where in a settlement the blow fell',
   // THE LADDER — a shift in a faction's rank order (owner commission, engine lift #3)
   npc_ladder: 'a change in who holds rank within a faction',
+  // THE CONTESTED GOALS CLASS — two named NPCs reach for the same prize (Deep Couplings D-4)
+  npc_contest: 'a rivalry over the same ambition',
+  npc_support: 'a cause bound to a patron\'s',
   // THE TRADITIONS — a settlement's festival held or set aside (owner commission, engine lift #4)
   tradition: 'a festival kept',
   // W-NAVY sea war

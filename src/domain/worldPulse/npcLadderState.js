@@ -318,7 +318,8 @@ export function normalizeStanding(v, weeks) {
 function normalizeGoal(v) {
   const o = asObject(v);
   if (!o.condition || typeof o.condition !== 'object') return null;
-  return {
+  /** @type {import('./npcLadderKernel.js').LadderGoal} */
+  const goal = {
     condition: /** @type {import('../autonomy/stopConditions.js').StopCondition} */ (o.condition),
     stakes: round4(num(o.stakes, 0)),
     horizonWeeks: Math.max(1, Math.floor(num(o.horizonWeeks, 1))),
@@ -328,6 +329,9 @@ function normalizeGoal(v) {
     progress: round4(clamp01(num(o.progress, 0))),
     basis: typeof o.basis === 'string' ? o.basis : '',
   };
+  // D-4f: the LINKED SUPPORT-goal patron (additive-optional — absent on ordinary primaries).
+  if (typeof o.supportOf === 'string' && o.supportOf) goal.supportOf = o.supportOf;
+  return goal;
 }
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderStigma|null} */
 function normalizeStigma(v) {
@@ -336,6 +340,8 @@ function normalizeStigma(v) {
   if (!(sev > 0)) return null;
   return { sev: round4(clamp01(sev)), week: num(o.week, 0), tick: Math.floor(num(o.tick, 0)) };
 }
+/** The typed contest-grudge kinds (D-4c) — the memory-weave loss→fixation loop. @type {ReadonlySet<string>} */
+export const GRUDGE_KINDS = Object.freeze(new Set(['contest_loss', 'contest_forestalled']));
 /** @param {unknown} v @returns {Record<string, import('./npcLadderKernel.js').LadderGrudge>} */
 function normalizeGrudges(v) {
   const o = asObject(v);
@@ -344,7 +350,13 @@ function normalizeGrudges(v) {
   for (const key of Object.keys(o).sort(compareCodepoint)) {
     const g = asObject(o[key]);
     const sev = num(g.sev, 0);
-    if (sev > 0) out[key] = { sev: round4(clamp01(sev)), week: num(g.week, 0) };
+    if (sev > 0) {
+      /** @type {import('./npcLadderKernel.js').LadderGrudge} */
+      const entry = { sev: round4(clamp01(sev)), week: num(g.week, 0) };
+      // D-4c: a typed contest grudge carries its kind (additive-optional — absent on plain grudges).
+      if (typeof g.kind === 'string' && GRUDGE_KINDS.has(g.kind)) entry.kind = g.kind;
+      out[key] = entry;
+    }
   }
   return out;
 }
@@ -436,6 +448,80 @@ export function bondedPeersAbove(st, floor) {
   return out.sort((a, b) => (b.sev - a.sev) || compareCodepoint(a.nid, b.nid));
 }
 
+// ── D-4 THE CONTESTS SUB-KEY (the THIRD state chokepoint — normalize / sort) ──────────────
+/** @param {unknown} v @returns {number|null} a finite number or null (the awareness-fog fields) */
+function numOrNull(v) { return typeof v === 'number' && Number.isFinite(v) ? v : null; }
+/** @param {unknown} v @returns {import('./npcLadderKernel.js').ContestSide|null} */
+function normalizeSide(v) {
+  const o = asObject(v);
+  if (typeof o.nid !== 'string' || !o.nid) return null;
+  /** @type {import('./npcLadderKernel.js').ContestSide} */
+  const side = { nid: o.nid, awareSince: numOrNull(o.awareSince), heardProgress: numOrNull(o.heardProgress), heardWeek: numOrNull(o.heardWeek) };
+  if (o.verb === 'raise' || o.verb === 'hold') side.verb = o.verb;
+  return side;
+}
+/** Normalize the persisted contests sub-record (defensive; drop a malformed contest). @param {unknown} v
+ *  @returns {Record<string, import('./npcLadderKernel.js').ContestRec>} */
+export function normalizeContests(v) {
+  const o = asObject(v);
+  /** @type {Record<string, import('./npcLadderKernel.js').ContestRec>} */
+  const out = {};
+  for (const id of Object.keys(o).sort(compareCodepoint)) {
+    const c = asObject(o[id]);
+    const a = normalizeSide(c.a);
+    const b = normalizeSide(c.b);
+    if (!a || !b) continue;
+    out[id] = {
+      id: typeof c.id === 'string' && c.id ? c.id : id,
+      signalVar: String(c.signalVar || ''),
+      kind: c.kind === 'opposed' ? 'opposed' : 'convergent',
+      a, b,
+      openedWeek: num(c.openedWeek, 0),
+      backedBy: c.backedBy === 'a' || c.backedBy === 'b' ? c.backedBy : null,
+      resolvedWeek: numOrNull(c.resolvedWeek) == null ? null : Math.floor(num(c.resolvedWeek, 0)),
+      outcome: typeof c.outcome === 'string' ? c.outcome : null,
+      loserNid: typeof c.loserNid === 'string' && c.loserNid ? c.loserNid : null,
+    };
+  }
+  return out;
+}
+/** Byte-stable serialize one contest side (alphabetical keys; drop-when-null fog fields). */
+function sortedSide(/** @type {import('./npcLadderKernel.js').ContestSide} */ s) {
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  if (s.awareSince != null) out.awareSince = s.awareSince;
+  if (s.heardProgress != null) out.heardProgress = s.heardProgress;
+  if (s.heardWeek != null) out.heardWeek = s.heardWeek;
+  out.nid = s.nid;
+  if (s.verb) out.verb = s.verb;
+  return out;
+}
+/** Byte-stable serialize the contests sub-record (codepoint-sorted, alphabetical keys, drop-when-
+ *  null optionals). Empty ⇒ null (drop-when-empty ⇒ byte-identical dark). @param {Record<string,
+ *  import('./npcLadderKernel.js').ContestRec>|undefined} contests @returns {Record<string, unknown>|null} */
+export function sortedContests(contests) {
+  const c = asObject(contests);
+  const ids = Object.keys(c).sort(compareCodepoint);
+  if (!ids.length) return null;
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const id of ids) {
+    const r = /** @type {import('./npcLadderKernel.js').ContestRec} */ (c[id]);
+    /** @type {Record<string, unknown>} */
+    const rec = { a: sortedSide(r.a), b: sortedSide(r.b) };
+    if (r.backedBy) rec.backedBy = r.backedBy;
+    rec.id = r.id;
+    rec.kind = r.kind;
+    if (r.loserNid) rec.loserNid = r.loserNid;
+    rec.openedWeek = r.openedWeek;
+    if (r.outcome) rec.outcome = r.outcome;
+    if (r.resolvedWeek != null) rec.resolvedWeek = r.resolvedWeek;
+    rec.signalVar = r.signalVar;
+    out[id] = rec;
+  }
+  return out;
+}
+
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderFactionRec} */
 export function normalizeFactionRec(v) {
   const o = asObject(v);
@@ -456,7 +542,12 @@ export function normalizeRecord(v, weeks) {
   const npcs = {};
   const rawN = asObject(o.npcs);
   for (const nid of Object.keys(rawN)) npcs[nid] = normalizeStanding(rawN[nid], weeks);
-  return { factions, npcs };
+  /** @type {import('./npcLadderKernel.js').LadderRecord} */
+  const rec = { factions, npcs };
+  // D-4: the additive contests sub-key (absent on legacy / dark records ⇒ no key).
+  const contests = normalizeContests(o.contests);
+  if (Object.keys(contests).length) rec.contests = contests;
+  return rec;
 }
 
 // ── Byte-stable persistence (codepoint-sorted, drop-when-empty) ───────────────
@@ -465,18 +556,24 @@ function sortedStanding(st) {
   /** @type {Record<string, unknown>} */
   const out = { since: st.since, stock: round4(st.stock), week: st.week };
   if (st.goal) {
-    out.goal = {
+    /** @type {Record<string, unknown>} */
+    const goal = {
       basis: st.goal.basis, condition: st.goal.condition, horizonWeeks: st.goal.horizonWeeks,
       mintedRung: st.goal.mintedRung, mintedWeek: st.goal.mintedWeek, progress: st.goal.progress,
       stakes: st.goal.stakes, startScore: st.goal.startScore,
     };
+    if (st.goal.supportOf) goal.supportOf = st.goal.supportOf; // D-4f (drop-when-absent)
+    out.goal = goal;
   }
   if (st.stigma) out.stigma = { sev: st.stigma.sev, tick: st.stigma.tick, week: st.stigma.week };
   const gk = Object.keys(st.grudges).sort(compareCodepoint);
   if (gk.length) {
     /** @type {Record<string, unknown>} */
     const g = {};
-    for (const k of gk) g[k] = { sev: st.grudges[k].sev, week: st.grudges[k].week };
+    for (const k of gk) {
+      const gd = st.grudges[k];
+      g[k] = gd.kind ? { kind: gd.kind, sev: gd.sev, week: gd.week } : { sev: gd.sev, week: gd.week }; // D-4c
+    }
     out.grudges = g;
   }
   if (typeof st.lastExposed === 'number' && st.lastExposed > 0) out.lastExposed = st.lastExposed;
@@ -520,13 +617,15 @@ export function sortedRecord(rec) {
   for (const nid of Object.keys(rec.npcs).sort(compareCodepoint)) {
     npcs[nid] = sortedStanding(rec.npcs[nid]);
   }
+  const contests = sortedContests(rec.contests); // D-4 (drop-when-empty ⇒ byte-identical dark)
   const hasF = Object.keys(factions).length > 0;
   const hasN = Object.keys(npcs).length > 0;
-  if (!hasF && !hasN) return null;
+  if (!hasF && !hasN && !contests) return null;
   /** @type {Record<string, unknown>} */
   const out = {};
   if (hasF) out.factions = factions;
   if (hasN) out.npcs = npcs;
+  if (contests) out.contests = contests;
   return out;
 }
 
@@ -565,10 +664,22 @@ export function mirrorOf(rec, nameByNid, modByFkey) {
     if (!st.goal) continue;
     goals[nid] = { rung: st.goal.mintedRung, goal: st.goal.basis, stakes: round4(st.goal.stakes) };
   }
+  // D-4: a COMPACT live-contest summary for the DM read (signalVar/kind/knownToBoth only — no
+  // per-NPC awareness fog, no heardProgress; the authoritative contest state stays in the
+  // hard-dropped sidecar, honoring the §13 secrets seam — no publicSafe allowlist is extended).
+  /** @type {Array<Record<string, unknown>>} */
+  const contests = [];
+  for (const id of Object.keys(asObject(rec.contests)).sort(compareCodepoint)) {
+    const c = /** @type {import('./npcLadderKernel.js').ContestRec} */ (asObject(rec.contests)[id]);
+    if (!c || c.resolvedWeek != null) continue; // live contests only
+    contests.push({ signalVar: c.signalVar, kind: c.kind, knownToBoth: c.a.awareSince != null && c.b.awareSince != null });
+  }
   const hasF = Object.keys(factions).length > 0;
-  if (!hasF) return null;
+  if (!hasF && !contests.length) return null;
   /** @type {Record<string, unknown>} */
-  const out = { factions };
+  const out = {};
+  if (hasF) out.factions = factions;
   if (Object.keys(goals).length) out.goals = goals;
+  if (contests.length) out.contests = contests;
   return out;
 }

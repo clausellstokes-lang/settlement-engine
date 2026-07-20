@@ -72,7 +72,7 @@
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { npcId } from './npcAgency.js';
-import { memoryHorizonMultiplierOf } from './relationshipEvolution.js';
+import { memoryHorizonMultiplierOf, memoryWeaveActive } from './relationshipEvolution.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
 import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
@@ -83,6 +83,7 @@ import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar }
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
 import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.js';
+import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -117,12 +118,35 @@ import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.j
  */
 /** @typedef {{ condition: import('../autonomy/stopConditions.js').StopCondition, stakes: number,
  *   horizonWeeks: number, mintedWeek: number, mintedRung: number, startScore: number,
- *   progress: number, basis: string }} LadderGoal */
+ *   progress: number, basis: string, supportOf?: string }} LadderGoal
+ *   supportOf (D-4f): the patron npcId a LINKED SUPPORT goal is tied to — its condition IS the
+ *   patron's, re-resolved each tick; the patron's goal failing cascades this one (§8). */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
-/** @typedef {{ sev: number, week: number }} LadderGrudge */
+/** @typedef {{ sev: number, week: number, kind?: string }} LadderGrudge
+ *   kind (D-4c): a typed contest grudge ('contest_loss' | 'contest_forestalled'); absent on the
+ *   ordinary failed-challenge grudge (the memory-weave WOUND_TYPE_RE reads it via recentIncidents). */
 /** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string }} LadderBond */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
-/** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding> }} LadderRecord */
+/**
+ * @typedef {Object} ContestSide — one contestant's per-contest view (§8 D-4b awareness fog).
+ * @property {string} nid @property {string} [verb] the goal verb captured AT GENESIS ('raise'|'hold')
+ * @property {number|null} awareSince the week discovery stamped (null ⇒ UNKNOWING — a blind race)
+ * @property {number|null} heardProgress the STALE snapshot of the rival's progress at the last hear
+ * @property {number|null} heardWeek the week of that snapshot
+ */
+/**
+ * @typedef {Object} ContestRec — a head-to-head goal contest (§8; the THIRD ladder sub-key, a
+ *   goal SHAPE, never a standing writer). Canonical: a.nid ≤ b.nid (codepoint).
+ * @property {string} id `contest.${sid}.${signalVar}.${openedWeek}`
+ * @property {string} signalVar @property {'convergent'|'opposed'} kind
+ * @property {ContestSide} a @property {ContestSide} b
+ * @property {number} openedWeek @property {'a'|'b'|null} backedBy the D-4e player-siding marker
+ * @property {number|null} resolvedWeek @property {string|null} outcome @property {string|null} loserNid
+ */
+/** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding>,
+ *   contests?: Record<string, ContestRec> }} LadderRecord
+ *   contests (D-4): the additive contested-goals sub-key (absent unless contestedGoals lit and a
+ *   contest opened — the drop-when-empty dormancy contract). */
 
 // The pure state helpers (num/asObject/compareCodepoint/round4 + derivation, decay,
 // normalization, byte-stable sort, mirror) live in the npcLadderState.js sibling leaf.
@@ -141,6 +165,17 @@ export function npcLadderActive(worldState) {
   return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).npcLadderEnabled === true);
 }
 
+/**
+ * Is THE CONTESTED GOALS CLASS lit (D-4)? Reads simulationRules.contestedGoalsEnabled === true,
+ * defensively — ABSENT ⇒ false ⇒ DORMANT (NO entry in DEFAULT_SIMULATION_RULES, so goldens do
+ * not move). AND-gated by the caller with npcLadderActive (D-4 requires the ladder). Pure, total.
+ * @param {{ simulationRules?: Record<string, unknown> }|null|undefined} worldState @returns {boolean}
+ */
+export function contestedGoalsActive(worldState) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).contestedGoalsEnabled === true);
+}
+
 // v1 goals reference NO pressure signals, so an empty pressures stub satisfies the S7
 // frame contract (resolveSignal touches frame.pressures ONLY for pressure.* reads).
 const EMPTY_PRESSURES = Object.freeze({ get: () => null });
@@ -156,21 +191,27 @@ const EMPTY_PRESSURES = Object.freeze({ get: () => null });
  * @param {{ npc: Record<string, unknown>, faction: unknown, rungIndex: number, sid: string,
  *   frame: import('../autonomy/signalRegistry.js').SignalFrame,
  *   item: {causal?: unknown}|null, weeks: number }} ctx
- * @returns {LadderStanding}
+ * @returns {{ st: LadderStanding, outcome: { fired: boolean, expired: boolean, lapsed: boolean, signalVar: string, endProgress: number }|null }}
  */
 function applyGoalLifecycle(st, ctx) {
   const { npc, faction, rungIndex, sid, frame, item, weeks } = ctx;
   const mint = () => mintGoal({ npc, faction, rungIndex, sid, frame, item, weeks });
   let goal = st.goal;
   let stock = st.stock;
-  if (!goal) return { ...st, goal: mint() };
+  if (!goal) return { st: { ...st, goal: mint() }, outcome: null };
+  // D-4f: a LINKED SUPPORT goal is driven by the settlement-wide contest pass (its progress
+  // mirrors the patron's, its fate cascades with the patron's) — the per-rung lifecycle leaves
+  // it untouched here (the pass owns its deposit/cascade/remint).
+  if (goal.supportOf) return { st, outcome: null };
+  const signalVar = goalSignalVar(goal);
   const ev = evaluateGoal(goal, frame);
   if (!ev.readable) {
-    // LAPSED — the premise died by outside forces (the signal is gone): remint, no deposit.
-    return { ...st, goal: mint() };
+    // LAPSED — the premise died by outside forces (the signal is gone): remint, no deposit; the
+    // contest pass (D-4c) reads this outcome and voids any race grounded on it.
+    return { st: { ...st, goal: mint() }, outcome: { fired: false, expired: false, lapsed: true, signalVar, endProgress: goal.progress } };
   }
   const delta = ev.progress - goal.progress;
-  const aw = attributionWeight(rungIndex, faction, goalSignalVar(goal));
+  const aw = attributionWeight(rungIndex, faction, signalVar);
   const deposit = goal.stakes * delta * aw * GOAL_TUNING.DEPOSIT_SCALE;
   stock = clamp(stock + deposit, 0, LADDER_TUNING.STAND_MAX);
   goal = { ...goal, progress: ev.progress };
@@ -178,8 +219,14 @@ function applyGoalLifecycle(st, ctx) {
   // goal (the delta above is already banked — completion/expiry keep the earned deposits).
   const expired = (weeks - goal.mintedWeek) >= goal.horizonWeeks;
   const rungChanged = goal.mintedRung !== rungIndex;
-  if (ev.fired || expired || rungChanged) goal = mint();
-  return { ...st, stock: round4(stock), goal };
+  const settled = ev.fired || expired || rungChanged;
+  if (settled) goal = mint();
+  // The D-4 goal OUTCOME (consumed by the settlement-wide contest pass): fired ⇒ finisher/prevailed,
+  // expired-unfired ⇒ the horizon lapse, rungChanged ⇒ the premise moved (a contest lapse).
+  const outcome = settled
+    ? { fired: ev.fired, expired: expired && !ev.fired, lapsed: rungChanged && !ev.fired && !expired, signalVar, endProgress: ev.progress }
+    : null;
+  return { st: { ...st, stock: round4(stock), goal }, outcome };
 }
 
 // ── The advance ───────────────────────────────────────────────────────────────
@@ -242,6 +289,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // ladder is byte-identical (the ladder-dark twin's mirror image — credibility runs, ladder
   // doesn't; here the ladder runs, credibility didn't).
   const lieStigmaLit = hasNpcCredibilityLedger(worldState);
+  // D-4: the contested-goals class (AND-gated with the ladder, already lit here). Dark ⇒ the
+  // settlement-wide contest pass never runs, no contests key, byte-identical. D-4f (support/join
+  // + the cross-faction grievance read) additionally requires the memory weave.
+  const contestsLit = contestedGoalsActive(worldState);
+  const memWeave = memoryWeaveActive(worldState);
 
   // The S7 reading frame for goal predicates — the registry evaluator resolves causal
   // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
@@ -293,13 +345,23 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     /** @type {Record<string, import('./npcLadderKernel.js').LadderFactionRec>} */
     const factions = {};
     /** @type {Record<string, import('./npcLadderKernel.js').LadderStanding>} */
-    const npcs = {};
+    let npcs = {}; // reassigned by the D-4 contest pass (plan-then-apply produces a new map)
     /** @type {Map<string, string>} */
     const nameByNid = new Map();
     /** @type {Set<string>} */
     const activeNids = new Set();
     /** @type {Map<string, { power: number, legit: number, instab: number }>} §8 mirror modifiers */
     const modByFkey = new Map();
+    // D-4: per-NPC contest metadata (faction/rung/npc) + the per-advance goal OUTCOMES the
+    // settlement-wide contest pass consumes, and the challenge-window inputs derived from the
+    // PRIOR tick's contests (cross-tick, law 14 — the contested_goal window + fixation rate bias).
+    /** @type {Map<string, { fkey: string, faction: unknown, rungIndex: number, rungCount: number, npc: Record<string, unknown> }>} */
+    const nidMeta = new Map();
+    /** @type {Map<string, { fired: boolean, expired: boolean, lapsed: boolean, signalVar: string, endProgress: number }>} */
+    const goalOutcomes = new Map();
+    const contestInputs = contestsLit
+      ? contestChallengeInputs({ priorContests: prior.contests || {}, priorNpcs: prior.npcs, npcByNid, weeks })
+      : null;
     // COUP TRUNCATION (§7): a fresh coup this tick replaces the top rung wholesale — the
     // ladder DEFERS (truncates the stage faction's pending challenges + seals it).
     const coupTruncated = coupTruncatedFkeys(s, factionsList, now2);
@@ -361,9 +423,14 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         const marks = maintainMarks(st, npcObj, bandMult, weeks, now2, lieExp);
         if (marks.freshExposed) freshExposed.add(nid);
         if (marks.freshLieExposed) freshLieExposed.add(nid);
-        npcs[nid] = applyGoalLifecycle(marks.st, {
+        const gl = applyGoalLifecycle(marks.st, {
           npc: npcObj, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
         });
+        npcs[nid] = gl.st;
+        if (contestsLit) {
+          nidMeta.set(nid, { fkey, faction, rungIndex, rungCount: rungs.length, npc: npcObj });
+          if (gl.outcome) goalOutcomes.set(nid, gl.outcome);
+        }
       });
 
       const power = num(asObject(faction).power, 0);
@@ -382,6 +449,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
           seed, factionRising, factionFalling, freshExposed, freshLieExposed, faithRuptured: ruptured, worldState,
           realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
+          // D-4b: the contested_goal window (live-contest adjacent rivals + recent losers) +
+          // the tunnel-vision attempt-rate bias. Absent ⇒ no window, no bias (byte-identical dark).
+          contestPairs: contestInputs ? contestInputs.contestPairs : null,
+          loserWindowNids: contestInputs ? contestInputs.loserWindowNids : null,
+          rateMultDir: contestInputs ? contestInputs.rateMultDir : null,
         });
       if (truncated) rec.cooldownUntil = Math.max(rec.cooldownUntil, weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS);
       let normBreakingWins = 0;
@@ -437,9 +509,41 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       npcs[nid] = { ...priorSt, stock: round4(decayed), week: weeks };
     }
 
+    // ── D-4 THE SETTLEMENT-WIDE CONTEST PASS (§8) — runs AFTER the per-faction goal + challenge
+    // loops (determinism discipline i: a separate settlement-wide pass, so cross-faction pairs are
+    // visible and no NPC mints "vs B" while B mints "vs A"). Prunes dead contests, runs awareness
+    // discovery, resolves fired/expired contests (plan-then-apply standing writes), drives + mints
+    // D-4f support goals, and mints new contests. Dark ⇒ skipped, byte-identical. ──
+    /** @type {Record<string, import('./npcLadderKernel.js').ContestRec>|undefined} */
+    let contests;
+    if (contestsLit) {
+      const remint = (/** @type {string} */ nid) => {
+        const meta = nidMeta.get(nid);
+        return meta ? mintGoal({ npc: meta.npc, faction: meta.faction, rungIndex: meta.rungIndex, sid, frame: goalFrame, item: causalItem, weeks }) : null;
+      };
+      const res = advanceContests({
+        sid, weeks, tick: now2, seed, townName, worldState,
+        priorContests: prior.contests || {}, npcs, priorNpcs: prior.npcs, nidMeta, goalOutcomes,
+        remint, attributionWeight, memoryWeaveActive: memWeave, now,
+      });
+      npcs = res.npcs;
+      if (Object.keys(res.contests).length) contests = res.contests;
+      for (const n of res.news) newsEntries.push(n);
+      // res.bluffDeposits: the D-4→D-2 bluff-exposure deposits are DETECTED here (the bluff
+      // heardProgress inflation + the contradicted-bluff-on-loss detection are live and
+      // unit-pinned). The cross-subsystem credibility CHARGE (a new spatialLedgers sidecar +
+      // its spatialUsage walker registration + the informationStatecraft consume arm) is a
+      // RECORDED DEFERRAL (JUDGMENT, vetoable) — kept out of this lane to hold it to the
+      // ladder's own machinery; the deposit intent is exposed for the follow-up wiring.
+      void res.bluffDeposits;
+    }
+
     nameBySettlement.set(sid, nameByNid);
     modBySettlement.set(sid, modByFkey);
-    nextLedger[sid] = { factions, npcs };
+    /** @type {LadderRecord} */
+    const settlementRec = { factions, npcs };
+    if (contests) settlementRec.contests = contests;
+    nextLedger[sid] = settlementRec;
   }
 
   // ── PASS 2: mirror the read model onto the roster (self-healing projection). ──
