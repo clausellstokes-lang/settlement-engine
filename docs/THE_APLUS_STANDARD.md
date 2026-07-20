@@ -92,9 +92,15 @@ every future hand — including its authors'.
     every moment the artifact confesses to being software; each break is a finding
     HERE and may also be one in its home dimension (deliberate overlap — the
     census hunts the class the fragments miss). A+ = a full session where the
-    spell never breaks. Ceiling doctrine: sustained immersion is CERTIFIED only
-    by real players lost in real worlds — the lived tier signs the final word;
-    the census signs everything the repo controls.
+    spell never breaks. THE CLARITY CLAUSE (owner, 2026-07-20: "except where
+    clarity must trump costume"): immersion is never purchased with confusion —
+    on surfaces where understanding or money is at stake (checkout, entitlements,
+    settings, safety rails, destructive confirms), PLAIN CLARITY WINS and the
+    census does NOT count mandated plainness as a break; the break is costume AT
+    CLARITY'S EXPENSE, or software-voice where world-voice would serve equally.
+    Ceiling doctrine: sustained immersion is CERTIFIED only by real players lost
+    in real worlds — the lived tier signs the final word; the census signs
+    everything the repo controls.
 
 ## Considered and deliberately NOT dimensions (recorded so the audit is complete)
 Learnability (owned by bar 3's ten-minute + empty-state craft) · maintainability
