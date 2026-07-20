@@ -33,7 +33,7 @@ export function computeGuildStrengthBy(worldState, snapshot) {
   for (const item of (snapshot?.settlements || [])) {
     const facs = item.settlement?.powerStructure?.factions || item.settlement?.factions || [];
     for (const f of facs) {
-      powerBy.set(`${item.id}:${stablePart(f.name || f.faction || '')}`, Number(f.power) || 0);
+      powerBy.set(`${item.id}:${stablePart(f.faction || f.name || '')}`, Number(f.power) || 0);
     }
   }
 
@@ -70,7 +70,7 @@ export function applyGuildToSettlement(settlement, strength) {
     const floor = GUILD_TUNING.powerFloorBase + s * GUILD_TUNING.powerFloorRange;
     let changed = false;
     const mapped = facs.map((f) => {
-      if (!CRIMINAL_NAME_RE.test(String(f.name || f.faction || ''))) return f;
+      if (!CRIMINAL_NAME_RE.test(String(f.faction || f.name || ''))) return f;
       const power = Math.max(Number(f.power) || 0, floor);
       const legitimacy = Math.min(Number.isFinite(f.legitimacy) ? f.legitimacy : 50, GUILD_TUNING.legitimacyCap);
       if (power === f.power && legitimacy === f.legitimacy) return f;

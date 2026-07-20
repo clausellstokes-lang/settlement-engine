@@ -356,7 +356,7 @@ function addFaction(s, event) {
   const flatFactions = s.factions;
   const list = psFactions || flatFactions || [];
   const existing = list.find(
-    (/** @type {MutEntity} */ f) => String(f.name || f.faction || '').toLowerCase() === name.toLowerCase(),
+    (/** @type {MutEntity} */ f) => String(f.faction || f.name || '').toLowerCase() === name.toLowerCase(),
   );
   if (existing) {
     // Re-add is scoped like restoreFaction: clear ONLY the removal — the

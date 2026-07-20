@@ -205,8 +205,14 @@ export function rulerLens(settlement) {
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
   const governing = String(ps.governingName || '').toLowerCase();
   // Match the governing faction by name; fall back to the highest-power faction.
-  let ruler = factions.find((/** @type {any} */ f) => String(f?.name || '').toLowerCase() === governing);
-  if (!ruler && governing) ruler = factions.find((/** @type {any} */ f) => governing.startsWith(String(f?.name || '').toLowerCase()) && f?.name);
+  // `.faction` before `.name` — rulingPower.nameOf's precedence. Reading `.name` alone
+  // matched NOTHING on generator-minted records (they carry only `.faction`), so both
+  // arms below always missed and every settlement silently fell through to the
+  // highest-power faction — the wrong archetype whenever the governing seat is not the
+  // strongest power (post-coup, occupation, or a thieves-guild power floor).
+  const facName = (/** @type {any} */ f) => String(f?.faction || f?.name || '').toLowerCase();
+  let ruler = factions.find((/** @type {any} */ f) => facName(f) === governing);
+  if (!ruler && governing) ruler = factions.find((/** @type {any} */ f) => facName(f) && governing.startsWith(facName(f)));
   if (!ruler) ruler = factions.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => (Number(b?.power) || 0) - (Number(a?.power) || 0))[0];
   const lean = ARCHETYPE_LEAN[String(ruler?.archetype || 'other')] || ARCHETYPE_LEAN.other;
 

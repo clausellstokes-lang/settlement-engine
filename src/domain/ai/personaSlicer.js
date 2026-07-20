@@ -24,6 +24,12 @@ import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js'
  * Structural slices of the store/world shapes THIS module reads (typed narrowly so the
  * slicer carries zero any-holes — the domain ratchet — while accepting the real objects).
  * @typedef {{ type?: string, glueType?: string, glue?: Array<{ type?: string }>, strain?: number }} BlocLite
+ * A faction display-name carrier. `.faction` is the CANONICAL key on
+ * powerStructure.factions records (rulingPower.nameOf reads `.faction || .name`);
+ * `.name` is a legacy alias, and is also the only key the DIFFERENT top-level
+ * settlement.factions NPC-grouping list carries. Both lists feed the roster read
+ * below, so both arms are optional here.
+ * @typedef {{ faction?: string, name?: string }} FactionNameLite
  * @typedef {{ dominant?: string, alignment?: string, temperament?: string }} PersonalityLite
  * @typedef {{ id?: string|number, name?: string, settlementId?: string|number,
  *            alignment?: string, temperament?: string, role?: string,
@@ -38,8 +44,8 @@ import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js'
  *            economicState?: EconomyLite, economy?: EconomyLite, prosperity?: unknown,
  *            config?: { primaryDeitySnapshot?: unknown, cultDeitySnapshots?: unknown[] },
  *            primaryDeity?: unknown,
- *            powerStructure?: { factions?: Array<string|{ name?: string }> },
- *            factions?: Array<string|{ name?: string }>,
+ *            powerStructure?: { factions?: Array<string|FactionNameLite> },
+ *            factions?: Array<string|FactionNameLite>,
  *            appliedDecrees?: unknown[], decrees?: unknown[],
  *            politicsLedgers?: Record<string, { blocs?: BlocLite[] }>,
  *            blocs?: BlocLite[] }} HomeLite
@@ -122,7 +128,10 @@ export function buildPersonaSlice({
   facets.push(facet('faction', entityId, 'Faction', safe(() => ({
     affiliation: e.factionAffiliation ?? e.factionLink ?? null,
     archetype: e.factionArchetype ?? null,
-    roster: (home?.powerStructure?.factions || home?.factions || []).map((f) => (typeof f === 'string' ? f : f?.name)).filter(Boolean).slice(0, 8),
+    // `.faction` before `.name` — rulingPower.nameOf's precedence. Generator-minted
+    // powerStructure.factions records carry ONLY `.faction`, so reading `.name` first
+    // returned undefined for every one of them and filter(Boolean) emptied the roster.
+    roster: (home?.powerStructure?.factions || home?.factions || []).map((f) => (typeof f === 'string' ? f : (f?.faction || f?.name))).filter(Boolean).slice(0, 8),
   }))));
 
   // (b) HEGEMONY through the entity's FOG — she ranks powers as her BELIEFS rank them

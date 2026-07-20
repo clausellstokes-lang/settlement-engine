@@ -411,7 +411,7 @@ export function summarizeUserEdits(settlement) {
   const tuples = walkUserEdits(settlement);
   return tuples.map(({ kind, entity, entityIndex, path }) => {
     if (kind === 'settlement') return `settlement > ${path}`;
-    const label = entity?.name || entity?.faction || `#${entityIndex}`;
+    const label = entity?.faction || entity?.name || `#${entityIndex}`;
     return `${kind}: ${label} > ${path}`;
   });
 }

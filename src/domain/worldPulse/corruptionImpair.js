@@ -16,7 +16,7 @@ import { readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 /** @param {any} s */
 const norm = (s) => String(s || '').trim().toLowerCase();
 /** @param {any} x */
-const nameOf = (x) => x?.name || x?.faction || '';
+const nameOf = (x) => x?.faction || x?.name || '';
 
 /**
  * @param {any} arr

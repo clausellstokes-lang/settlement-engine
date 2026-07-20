@@ -37,8 +37,10 @@ function norm(x) {
 
 /**
  * The faction list lives at powerStructure.factions (canonical) but some
- * older/neighbour records keep a flat settlement.factions. Read both, and
- * accept either `name` or `faction` as the label key.
+ * older/neighbour records keep a flat settlement.factions. Read both, taking
+ * `faction` ahead of `name` — rulingPower.nameOf's precedence, so a record
+ * carrying both keys dedups under its canonical name and the compendium never
+ * offers a faction the settlement already has.
  *
  * @typedef {{ name?: string, faction?: string }} FactionNameCarrier
  * @param {{ powerStructure?: { factions?: FactionNameCarrier[] }, factions?: FactionNameCarrier[] } | null | undefined} settlement
@@ -48,7 +50,7 @@ export function presentFactionNames(settlement) {
   const list = settlement?.powerStructure?.factions || settlement?.factions || [];
   const set = new Set();
   for (const f of list) {
-    const n = norm(f?.name || f?.faction);
+    const n = norm(f?.faction || f?.name);
     if (n) set.add(n);
   }
   return set;

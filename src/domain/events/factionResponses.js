@@ -98,7 +98,7 @@ const ARCHETYPE_RESPONDERS = {
  * @param {SettlementLike | null | undefined} [_settlement]
  */
 function respondAsMerchantGuild(faction, event, _settlement) {
-  const name = faction.name || faction.faction || 'Merchant Guild';
+  const name = faction.faction || faction.name || 'Merchant Guild';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 
   switch (event.type) {
@@ -215,7 +215,7 @@ function respondAsMerchantGuild(faction, event, _settlement) {
  * @param {EventWithPayload} event
  */
 function respondAsTemple(faction, event /* , settlement */) {
-  const name = faction.name || faction.faction || 'Temple';
+  const name = faction.faction || faction.name || 'Temple';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 
   switch (event.type) {
@@ -336,7 +336,7 @@ function respondAsTemple(faction, event /* , settlement */) {
  * @param {EventWithPayload} event
  */
 function respondAsWatch(faction, event /* , settlement */) {
-  const name = faction.name || faction.faction || 'Watch';
+  const name = faction.faction || faction.name || 'Watch';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 
   switch (event.type) {
@@ -470,7 +470,7 @@ function respondAsWatch(faction, event /* , settlement */) {
  * @param {EventWithPayload} event
  */
 function respondAsThievesGuild(faction, event /* , settlement */) {
-  const name = faction.name || faction.faction || 'Thieves\' Guild';
+  const name = faction.faction || faction.name || 'Thieves\' Guild';
   const id   = faction.id   || `faction.${name.toLowerCase().replace(/\s+/g, '_')}`;
 
   switch (event.type) {
