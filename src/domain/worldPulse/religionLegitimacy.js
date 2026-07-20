@@ -36,6 +36,17 @@ import { evil01, chaos01, deityTemper } from './deityAxes.js';
 // peacelike one, registers as DRIFT. Both read 0 for a settlement with none ⇒ byte-identical.
 import { settlementMoralConductLean } from './moralMartialLean.js';
 import { settlementMartialConductLean } from './martialReadiness.js';
+// THE FACTION-KEY BUG (same class as the ladder's, commits 25749ae5 + dc0b6e2b): real
+// powerStructure.factions records carry the display name in `.faction` and carry NEITHER
+// `.name` NOR `.id` NOR `.archetype`. rulerLens hand-rolled its own `.name` lookups and its
+// own `.id` join, so all three read dead on every generated settlement. These are the
+// canonical accessors — the SAME chokepoints the other faction consumers use — imported
+// rather than re-spelled, because a tenth hand-rolled variant is how this class propagates.
+// rulingPower/factionArchetypes are EAGER modules and this is a lazy worldPulse leaf, so
+// the import runs in the safe lazy → eager direction and adds 0 first-paint bytes.
+import { governingFactionOf } from '../rulingPower.js';
+import { factionArchetype } from '../factionArchetypes.js';
+import { npcInFaction, ladderFactionKey } from './npcLadderState.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 // 'peacelike' is deriveTemper's spelling (deityAxes/deityPool); 'peaceful' is the
@@ -203,20 +214,67 @@ export function orgPower(npc) {
 export function rulerLens(settlement) {
   const ps = settlement?.powerStructure || {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = String(ps.governingName || '').toLowerCase();
-  // Match the governing faction by name; fall back to the highest-power faction.
-  let ruler = factions.find((/** @type {any} */ f) => String(f?.name || '').toLowerCase() === governing);
-  if (!ruler && governing) ruler = factions.find((/** @type {any} */ f) => governing.startsWith(String(f?.name || '').toLowerCase()) && f?.name);
-  if (!ruler) ruler = factions.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => (Number(b?.power) || 0) - (Number(a?.power) || 0))[0];
-  const lean = ARCHETYPE_LEAN[String(ruler?.archetype || 'other')] || ARCHETYPE_LEAN.other;
+  // THE SEAT. governingFactionOf is the canonical accessor (`.isGoverning` first, then
+  // nameOf === governingName, where nameOf reads `.faction || .name`). The two hand-rolled
+  // `.name` finds it replaces were DEAD on real data — 0 matches over every generated
+  // record probed — so every settlement fell through to the highest-power fallback.
+  //
+  // THAT FALLBACK IS WRONG ON FRESH WORLDS, not merely on exotic ones. rulingStructure sorts
+  // the faction array governing-first REGARDLESS of power, so the seat is routinely not the
+  // strongest faction and the array order hides it; re-sorting by power alone lands
+  // elsewhere. Measured through the full generateSettlementPipeline: the fallback picks the
+  // WRONG faction on 66/180 = 36.7% of freshly generated settlements (an independent probe
+  // over a different corpus measured 25-35%, so the rate is corpus-sensitive but the
+  // direction is not). A repeat coup makes it worse — each win banks +6 on the winner while
+  // the seat's own power never moves. Measuring against the BARE generatePowerStructure
+  // instead shows 360/360 agreement and reads as harmless; that corpus is not
+  // representative, and believing it is how this defect stayed unnoticed.
+  //
+  // The fallback is KEPT as a last resort for the shape that has no seat to find: no
+  // `.isGoverning` record and no matching governingName (the legacy/partial fixture shape).
+  const ruler = governingFactionOf(
+    /** @type {Parameters<typeof governingFactionOf>[0]} */ (/** @type {unknown} */ (settlement)))
+    || factions.slice().sort((/** @type {any} */ a, /** @type {any} */ b) => (Number(b?.power) || 0) - (Number(a?.power) || 0))[0];
+  // THE ARCHETYPE. `.archetype` is a hand-authored fixture key only — no generator writes
+  // it, so `String(ruler?.archetype || 'other')` resolved 'other' on 100% of real data and
+  // the whole ARCHETYPE_LEAN table was dead weight. factionArchetype is the canonical
+  // detector and reads the `.category` every real record DOES carry. Fixture `.archetype`
+  // keeps precedence so the legacy unit shape still drives the lens it was written for.
+  // The cast is load-bearing DOCUMENTATION, not a silencer: now that `ruler` comes from the
+  // typed governingFactionOf, tsc correctly reports that `.archetype` is not on
+  // RulingFaction — which is exactly the defect. It stays OFF the typedef (adding it would
+  // legitimize a key no writer produces) and is read here only to honour hand-authored
+  // fixtures, so the read is cast at the one site that needs it.
+  const archetype = String(/** @type {{ archetype?: string }} */ (ruler)?.archetype || '') || factionArchetype(ruler);
+  const lean = ARCHETYPE_LEAN[archetype] || ARCHETYPE_LEAN.other;
 
-  // The faction's strongest linked NPC sharpens the alignment lean (authored character).
-  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-  const rulerId = String(ruler?.id || '');
+  // The ruling faction's strongest linked NPC sharpens the alignment lean (authored
+  // character). The old join read `String(ruler?.id || '')` — always '' on real data, because
+  // no generated record carries `.id` — so the filter never skipped anyone and the scan
+  // silently covered the WHOLE roster. `lead` was therefore the strongest NPC in the
+  // settlement, not the seat's, and `rulerFlaw` rotted the throne for a flaw carried by
+  // ANY townsperson. Membership now routes through npcInFaction, the canonical chokepoint,
+  // which matches the generator's real joins (factionAffiliation / linkedFactionIds, both of
+  // which hold the DISPLAY NAME) as well as `.id` for authored records.
+  //
+  // THIS NARROWING FIRES ON REAL DATA: measured over generateSettlementPipeline, the
+  // governing seat has at least one affiliated NPC in 180/180 settlements, so the scan
+  // genuinely narrows from the roster to the seat. (A bare-generatePowerStructure probe
+  // suggested the opposite — that the seat is always memberless — because it does not run
+  // the pipeline's NPC affiliation step. It is not a representative corpus; see the note in
+  // tests/domain/religionLegitimacyFactionKey.test.js.)
+  //
+  // The whole-roster fallback is kept for the shape where the seat has NO members at all —
+  // hand-authored fixtures and sparse worlds — where an empty set would null `lead` and zero
+  // `rulerFlaw`, making the lens read blanker than before. @enforced-by the pin's two join cases.
+  const allNpcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const seatKey = ruler ? ladderFactionKey(ruler) : '';
+  const seatMembers = ruler
+    ? allNpcs.filter((n) => npcInFaction(/** @type {Record<string, unknown>} */ (n || {}), ruler, seatKey))
+    : [];
+  const npcs = seatMembers.length ? seatMembers : allNpcs;
   let lead = null; let leadPow = -1; let rulerFlaw = 0;
   for (const n of npcs) {
-    const linked = Array.isArray(n?.linkedFactionIds) ? n.linkedFactionIds.map(String) : [];
-    if (rulerId && !linked.includes(rulerId)) continue;
     const p = orgPower(n);
     if (p > leadPow) { leadPow = p; lead = n; }
     // A corruptible flaw on a power-holder rots the throne proportional to their clout.
@@ -232,7 +290,9 @@ export function rulerLens(settlement) {
   // a criminal ruling faction each rot the legitimate rulership. Saturating 0..1. This
   // is the variable amplifier for evil faiths (consumed by deityGrowthFavor).
   const crimInst = climate.hasCriminalInst ? clamp01(0.3 + 0.18 * (Array.isArray(climate.criminalInstitutions) ? climate.criminalInstitutions.length : 1)) : 0;
-  const factionDark = String(ruler?.archetype) === 'criminal' ? 0.5 : 0;
+  // Reads the DERIVED archetype for the same reason the lean does: `.archetype` is absent
+  // from every generated record, so this compromise term could never fire on real data.
+  const factionDark = archetype === 'criminal' ? 0.5 : 0;
   const compromise = clamp01(0.35 * crime + 0.28 * crimInst + 0.40 * rulerFlaw + 0.25 * factionDark);
   // W-F8: the settlement's own STANDING structure as endogenous conduct — its
   // morally-coded institutions ({cruelty,disorder} signed lean) and its martial

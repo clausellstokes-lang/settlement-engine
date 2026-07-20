@@ -1,6 +1,6 @@
 {
-  "total": 2230,
-  "totalAny": 2191,
+  "total": 2228,
+  "totalAny": 2189,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -456,7 +456,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/religionLegitimacy.js": {
-      "any": 22,
+      "any": 20,
       "suppress": 0
     },
     "src/domain/worldPulse/religionState.js": {
