@@ -40,6 +40,7 @@ import {
 } from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { flag } from '../lib/flags.js';
+import { verifyAdvanceDeterminism } from '../lib/advanceParanoia.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
 import { getConsent } from '../lib/consent.js';
 import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
@@ -258,6 +259,23 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
             interval,
             now,
           });
+
+      // R-18 WORKER PARANOIA MODE (dev-only, default OFF): re-run the just-completed
+      // worker advance in-thread and diff the two worldStates, surfacing any worker↔
+      // sync divergence through the R-14 pipeline. The gate (paranoiaEnabled) ANDs the
+      // flag with import.meta.env.DEV — a build-time `false` in production — so this is
+      // inert (and tree-shakeable) on every prod path; off, it is byte-neutral (one
+      // flag read, no second advance). Read-only: it never touches `result` or state.
+      // (Only the multi-tick worker path produces the composed 'complete' result this
+      // guards; the single-tick advanceCampaignWorld branch has no worker to diff.)
+      if (result && result.status === 'complete' && useMultiTick) {
+        await verifyAdvanceDeterminism({
+          workerResult: result,
+          // Re-run in-thread over a clone so the paranoia pass can neither be
+          // contaminated by nor contaminate the committed advance.
+          runSync: () => simulateCampaignWorldInterval(cloneJson(multiTickArgs)),
+        });
+      }
     }
 
     // §10 (W-COMPOSER-2): the queue-mouth refusals ride the advance digest —

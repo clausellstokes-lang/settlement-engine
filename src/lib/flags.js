@@ -165,6 +165,17 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Run the multi-tick world advance in a Web Worker (main thread stays interactive). Byte-identical output; set false to fall back to the in-thread advance.',
   },
+  // R-18 WORKER PARANOIA MODE — a DEV-ONLY self-verification of the worker↔sync
+  // determinism claim. When on, every worker advance is ALSO re-run in-thread and
+  // the two worldStates are diffed; any divergence is reported loudly. Default OFF
+  // and gated on import.meta.env.DEV so it is inert (dead code) on every production
+  // path REGARDLESS of the flag — the promise is structural, not honor-system. Off
+  // it is byte-neutral (one flag read, no second advance). Doubles the advance cost
+  // when on, which is exactly the deal a paranoia switch offers.
+  advanceWorkerParanoia: {
+    default: false,
+    description: 'DEV-ONLY: re-run each Web Worker advance in-thread and diff the two worldStates, surfacing any determinism divergence. Default OFF; inert in production builds (import.meta.env.DEV gate) even if forced on. Doubles advance compute while on.',
+  },
   // The read-only surfacing layer for the war-economy phases. OFF by default.
   // When on, a "War & Resolve" Inspector tab reads each settlement's morale
   // signals — Hope, Resolve, Faith relation, Supply, pro-war / anti-war balance —
