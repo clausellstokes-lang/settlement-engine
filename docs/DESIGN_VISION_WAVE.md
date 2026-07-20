@@ -235,9 +235,18 @@ auspice + DM screen + presets + covenant/bounty pages) and LANE V-G (campaign im
 + world book + curated seeds + table companion responsive pass); R-5/R-10 ride
 cycle 2 and the regen protocol respectively. Cycle 2 resurveys ALL of it.
 
-## R-11..R-30 — THE EXHAUSTIVE SWEEP (recorded 2026-07-20 after cycle 1; disposition
-## recommended per item; commissioning is the owner's except the cycle-2
-## structural-prevention intake, sanctioned by the loop's own class-prevention mandate)
+## R-11..R-30 — THE EXHAUSTIVE SWEEP (recorded 2026-07-20; owner ruling same day:
+## "do it all" — ALL COMMISSIONED. Lane assignments: R-11/12/13 → cycle-2 prevention
+## intake as recorded · R-16/R-17 → V-B riders (World-Deepened + shareable letter) ·
+## R-14/R-18/R-19 → V-D riders (crash forensics seed+tick+flags, worker paranoia mode,
+## save museum corpus+pin) · R-15 → V-I (the tuning-band manifest, per-flag proposed
+## bands) · R-20..R-24 → NEW LANE V-H (command palette · undo-history surface ·
+## designed empty states · error-copy register · name-collision audit) · R-25..R-30 →
+## NEW LANE V-I (load-test harness+runbook [RUNS against prod = owner] · status page ·
+## restore-drill runbook · AI spend alarm [key-inert] · The First Hundred page ·
+## creator kit assets + public roadmap page fed from the vNext ledger). Publication/
+## execution against live infrastructure stays owner-gated as always; everything
+## code-complete and inert-honest in-repo.)
 
 ### Tier 1 — cycle-2 structural-prevention intake (class-prevention of REVIEWED classes;
 ### joins the earlier four: load-normalizer walker · async-totality lint · courier seam
