@@ -16,15 +16,18 @@
     ledger row 28ea1162; heirs×contests lit-together = cycle-2 verify item).
   - LANDED FOLD-READY: V-I @ claude/vision-i `e5e4ce1d` (7/7 ops+GTM, 60 pins;
     ledger 9f439a73) · V-C @ claude/vision-c `98e327e0` (Interview/Oracle/corpus
-    factory, 30+ pins; ledger 221e9f12). Fold both at the next minifold boundary.
+    factory, 30+ pins; ledger 221e9f12) · V-H @ claude/vision-h `3668f33c` (UX quartet
+    + errorCopy ratchet; ledger bcddd3c5; TWO FOLD SEAMS recorded: WizardNewsPanel
+    EmptyState adoption + the 4 frozen error literals migrate-and-strike). Fold all
+    three at the next minifold boundary.
   - HOT (4 lanes): V-B in `minifold` (composite-r4 @ 299f2843) · V-D in the
     `vision-c` WORKTREE on branch `claude/vision-d` (rotated; V-C's commits safe on
     their branch) · V-E in `vision-e` (+ the V-20 unlisted-sharing & V-13 featured
-    amendments folded into its scope mid-lane) · V-H in the `vision-i` WORKTREE on
-    branch `claude/vision-h` (rotated).
+    amendments folded into its scope mid-lane) · V-F in the `vision-i` WORKTREE on
+    branch `claude/vision-f` (rotated again; V-H safe on its branch).
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
-    V-F → V-G (F before G:
+    V-G (after V-F lands —
     both touch pendingEdits) → V-J (after V-E's report — reads its slug format) →
     V-K (THE ASSIZE + THE COMMONS' VOICE engine pair, design-doc V-22/V-23; the
     cohesion law + masses clause binding; full engine gate) → THE CLEAN SWEEP
