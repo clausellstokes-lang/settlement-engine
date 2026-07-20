@@ -57,6 +57,12 @@ export const FLAGS = Object.freeze({
     description: 'Wave-D PERIMETER: adaptive human-verification (Cloudflare Turnstile, managed/invisible mode) on the auth flows (sign-in/up/reset) and the purchase-initiation surfaces. Default OFF and INERT: with the flag off the widget is never imported (zero eager bytes) and no captchaToken is sent. Flip ON only AFTER the owner adds the Turnstile site+secret keys and enables Supabase Auth captcha protection — see docs/PERIMETER_RUNBOOK.md. The anonymous generation funnel is DELIBERATELY excluded (kept frictionless; rate limits + bot-wave telemetry cover it).',
   },
 
+  // ── Display face (V-27d) — the taste-gate ──────────────────────────────────
+  imFellDisplayFace: {
+    default: false,
+    description: 'V-27d: swap the DISPLAY face (hero + section titles only, not prose) to IM Fell English via the runtime --oc-display-face var. Default OFF and INERT: with the flag off neither lib/flags nor lib/imFellFace enters the first-paint closure (both load via dynamic import) and no @font-face is injected (zero eager bytes). Lighting it is the owner TASTE flip AND requires vendoring the IM Fell OFL woff2 into public/fonts/ — see src/lib/imFellFace.js. Until the woff2 is present the flag-on path degrades to the Crimson serif fallback.',
+  },
+
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
   // Each flag below gates one critique-mandated change that is NOT yet
   // promoted to GA — defaults are false; flip to true (locally, via env, or

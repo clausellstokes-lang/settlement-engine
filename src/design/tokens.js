@@ -417,11 +417,19 @@ export const fontFamily = Object.freeze({
   mono:  '"JetBrains Mono", "Fira Code", Consolas, monospace',
 });
 
+// The DISPLAY face is swappable at runtime via the `--oc-display-face` CSS custom
+// property (V-27d IM Fell scaffold): UNSET (the default), var() falls back to the
+// Crimson serif — byte-identical to the historical rendering; SET (e.g. to the IM
+// Fell display face, src/lib/imFellFace.js) it swaps hero + section titles ONLY,
+// leaving prose/body on the serif. Applied as an inline style value, so the browser
+// resolves var() per element. Nothing lights it by default — see imFellFace.js.
+const displaySerif = 'var(--oc-display-face, "Crimson Text"), Georgia, serif';
+
 export const type = Object.freeze({
-  // Display — Crimson serif, used for hero + section titles
-  'display-xl': { family: fontFamily.serif, size: 40, weight: 600, lineHeight: 1.15 },
-  'display-l':  { family: fontFamily.serif, size: 32, weight: 600, lineHeight: 1.2 },
-  'display-m':  { family: fontFamily.serif, size: 22, weight: 600, lineHeight: 1.25 },
+  // Display — Crimson serif (runtime-swappable display face), hero + section titles
+  'display-xl': { family: displaySerif, size: 40, weight: 600, lineHeight: 1.15 },
+  'display-l':  { family: displaySerif, size: 32, weight: 600, lineHeight: 1.2 },
+  'display-m':  { family: displaySerif, size: 22, weight: 600, lineHeight: 1.25 },
 
   // Prose — Crimson serif, used for dossier body
   'prose-l':    { family: fontFamily.serif, size: 18, weight: 400, lineHeight: 1.65, style: 'italic' },
