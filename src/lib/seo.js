@@ -26,7 +26,7 @@ import { titleForView, viewToPath } from './routes.js';
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
-const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates them as a persistent world for game masters.';
+export const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settlements with economies, factions, NPCs, and history, then simulates them as a persistent world for game masters.';
 
 // The site-default unfurl card (1200×630 PNG). Raster, because Facebook, X,
 // LinkedIn, Slack, Discord et al. do not rasterize SVG.
@@ -34,8 +34,8 @@ const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settl
 // static og:image in index.html. Previously og-default.png (the pre-seal
 // wordmark-only card) — a JS-rendered route or a fallback then served the old
 // image while the static unfurl showed the seal.
-const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
-const OG_IMAGE_ALT_DEFAULT = 'SettlementForge: living settlements for game masters';
+export const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
+export const OG_IMAGE_ALT_DEFAULT = 'SettlementForge: living settlements for game masters';
 
 // Supabase project URL, inlined at build. The dynamic OG endpoint is a
 // verify_jwt=false edge function, so an unfurl bot fetches it keyless (the same
@@ -61,7 +61,7 @@ export function galleryCardImage(slug) {
 
 // Hand-written descriptions for the public content routes. Everything else falls
 // back to the site default (and the private routes below get noindex regardless).
-const VIEW_DESCRIPTIONS = {
+export const VIEW_DESCRIPTIONS = {
   home:       DEFAULT_DESCRIPTION,
   generate:   'Generate a living tabletop-RPG settlement in seconds: economy, factions, NPCs, institutions, and history, ready for the table.',
   compendium: 'The SettlementForge compendium: settlement tiers, trade and economy, power and faction archetypes, religion, stress, the neighbour system, and the institution catalog.',
@@ -146,7 +146,9 @@ function removeJsonLd(id) {
 
 // The site-wide identity graph. Ported from the reference index.html so JSON-LD
 // coverage no longer depends on a static block our index.html does not carry.
-function siteGraph() {
+// Exported so the build-time prerender (scripts/prerender-routes.mjs) bakes the
+// SAME graph a non-JS crawler sees into every static route's <head>.
+export function siteGraph() {
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -187,41 +189,76 @@ export function setSocialImage(image, alt) {
  * @param {string} view
  * @param {{ slug?: string, id?: string }} [params] route params (e.g. gallery slug)
  */
-export function applyDocumentHead(view, params) {
-  if (typeof document === 'undefined') return;
+/**
+ * The PURE per-route head projection — no DOM, no env — so the build-time
+ * prerender (scripts/prerender-routes.mjs) bakes byte-for-byte the SAME head a
+ * non-JS crawler needs that applyDocumentHead applies at runtime. This is the
+ * single source of truth for both; the prerender pins verify the two agree.
+ * @param {string} view
+ * @param {{ slug?: string, id?: string }} [params]
+ * @returns {{ title: string, description: string, canonical: string,
+ *   ogType: string, image: string, imageAlt: string, isGalleryItem: boolean,
+ *   noindex: boolean, jsonLd: object }}
+ */
+export function headForView(view, params) {
   const title = titleForView(view);
   const description = VIEW_DESCRIPTIONS[view] || DEFAULT_DESCRIPTION;
   const path = view === 'home' ? '/' : (viewToPath(view, params) || '/');
   const canonical = ORIGIN + path;
   const isGalleryItem = view === 'gallery' && !!(params && params.slug);
-
-  document.title = title;
-  upsertMeta('name', 'description', description);
-
-  // Open Graph
-  upsertMeta('property', 'og:site_name', SITE_NAME);
-  upsertMeta('property', 'og:type', isGalleryItem ? 'article' : 'website');
-  upsertMeta('property', 'og:title', title);
-  upsertMeta('property', 'og:description', description);
-  upsertMeta('property', 'og:url', canonical);
-
-  // Twitter card (mirrors OG; large-image card on every public route)
-  upsertMeta('name', 'twitter:card', 'summary_large_image');
-  upsertMeta('name', 'twitter:title', title);
-  upsertMeta('name', 'twitter:description', description);
-
-  // Image: the dynamic per-settlement card for a shared dossier, else the
-  // site-default card. setSharedDossierMeta refines the alt text once named.
+  // The dynamic per-settlement card for a shared dossier, else the site-default.
   const image = isGalleryItem ? galleryCardImage(params.slug) : OG_IMAGE_DEFAULT;
-  setSocialImage(image, OG_IMAGE_ALT_DEFAULT);
+  return {
+    title,
+    description,
+    canonical,
+    ogType: isGalleryItem ? 'article' : 'website',
+    image,
+    imageAlt: OG_IMAGE_ALT_DEFAULT,
+    isGalleryItem,
+    noindex: NOINDEX_VIEWS.has(view),
+    jsonLd: siteGraph(),
+  };
+}
 
-  upsertCanonical(canonical);
-  setRobotsNoindex(NOINDEX_VIEWS.has(view));
+export function applyDocumentHead(view, params) {
+  if (typeof document === 'undefined') return;
+  const h = headForView(view, params);
+
+  // A per-entry Compendium route (/compendium/<id>) carries its OWN title / OG /
+  // description — baked by the prerender and refined by CompendiumPanel's lazy
+  // setCompendiumEntryMeta. This eager pass runs with only the generic compendium
+  // copy (the entry data is lazy), so it must NOT clobber those entry-owned
+  // fields: it would otherwise overwrite the baked "Thorp" head with "Compendium"
+  // whenever it re-runs (params identity churns each render). It still owns the
+  // site-level bits below, and the canonical is already the entry path (viewToPath
+  // handles params.entry).
+  const entryOwned = view === 'compendium' && !!(params && params.entry);
+
+  if (!entryOwned) {
+    document.title = h.title;
+    upsertMeta('name', 'description', h.description);
+    upsertMeta('property', 'og:type', h.ogType);
+    upsertMeta('property', 'og:title', h.title);
+    upsertMeta('property', 'og:description', h.description);
+    upsertMeta('name', 'twitter:title', h.title);
+    upsertMeta('name', 'twitter:description', h.description);
+    // Image: the dynamic per-settlement card for a shared dossier, else the
+    // site-default card. setSharedDossierMeta refines the alt text once named.
+    setSocialImage(h.image, h.imageAlt);
+  }
+
+  // Site-level bits — always correct regardless of route kind.
+  upsertMeta('property', 'og:site_name', SITE_NAME);
+  upsertMeta('property', 'og:url', h.canonical);
+  upsertMeta('name', 'twitter:card', 'summary_large_image');
+  upsertCanonical(h.canonical);
+  setRobotsNoindex(h.noindex);
 
   // Site-level structured data on every route (it describes the site, not the
   // page). A shared dossier layers a CreativeWork on top via setSharedDossierMeta
   // (lib/seoDossier.js, loaded lazily with the gallery); leaving a route clears
   // any stale item graph.
-  upsertJsonLd('ld-site', siteGraph());
-  if (!isGalleryItem) removeJsonLd('ld-gallery-item');
+  upsertJsonLd('ld-site', h.jsonLd);
+  if (!h.isGalleryItem) removeJsonLd('ld-gallery-item');
 }

@@ -90,7 +90,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {(view === 'realm' || view === 'map') && (
         <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
       )}
-      {view === 'compendium'  && <CompendiumPanel standalone />}
+      {view === 'compendium'  && <CompendiumPanel standalone routeEntry={params.entry} />}
       {view === 'howto'       && <HowToUse standalone />}
       {/* Guarded views: render only once authorized. The guard effect
           redirects unauthorized visitors; until the session resolves we

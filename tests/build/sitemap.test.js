@@ -15,7 +15,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES } from '../../src/lib/routes.js';
 import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
-import { buildSitemap, staticUrls, galleryHubUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
+import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
+import { buildSitemap, staticUrls, galleryHubUrls, compendiumEntryUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
 
 // The per-slug gallery fan-out is ON by default (GALLERY-2 phase 2) but needs
 // Supabase credentials to contribute anything. Pin it OFF here so the
@@ -84,9 +85,32 @@ describe('public/sitemap.xml', () => {
 
   it('the per-slug fan-out contributes nothing when suppressed or credential-less (deterministic committed file)', async () => {
     // The suite-level pin sets SITEMAP_INCLUDE_GALLERY='0'; a fresh build must
-    // therefore be exactly static + hubs.
+    // therefore be exactly static + hubs + the per-entry compendium fan.
     const fresh = await buildSitemap();
     const urlCount = fresh.match(/<url>/g)?.length ?? 0;
-    expect(urlCount).toBe(staticUrls().length + galleryHubUrls().length);
+    expect(urlCount).toBe(
+      staticUrls().length + galleryHubUrls().length + compendiumEntryUrls().length,
+    );
+  });
+
+  // V-19 the long tail — the per-entry Compendium fan (src/domain/compendium/
+  // searchIndex.js). Every named entry becomes an indexable /compendium/<id>.
+  it('fans the compendium to one URL per named entry — the enumeration-deep long tail', () => {
+    const entryLocs = compendiumEntryUrls().map((u) => u.loc);
+    // One URL per index entry, all unique, all under /compendium/.
+    expect(entryLocs).toHaveLength(COMPENDIUM_INDEX.length);
+    expect(new Set(entryLocs).size).toBe(entryLocs.length);
+    for (const loc of entryLocs) {
+      expect(loc.startsWith('https://settlementforge.com/compendium/')).toBe(true);
+    }
+    // A representative slice is present in the committed sitemap (freshness above
+    // proves the whole set; this names a couple so the intent is legible).
+    for (const id of ['tier-thorp', 'arch-plague-of-beasts']) {
+      expect(committed, `entry ${id} missing from the committed sitemap`).toContain(
+        `<loc>https://settlementforge.com/compendium/${id}</loc>`,
+      );
+    }
+    // The bare /compendium overview stays a distinct URL, not swallowed by the fan.
+    expect(entryLocs).not.toContain('https://settlementforge.com/compendium');
   });
 });

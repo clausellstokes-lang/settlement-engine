@@ -31,6 +31,8 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES } from '../src/lib/routes.js';
 import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
+import { COMPENDIUM_INDEX } from '../src/domain/compendium/searchIndex.js';
+import { compendiumEntryPath } from '../src/lib/seoCompendium.js';
 
 const ORIGIN = 'https://settlementforge.com';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -74,7 +76,7 @@ const COMPENDIUM_TABS = [
 ];
 
 /** Is this ROUTES entry an indexable public content route? */
-function isIndexable(route) {
+export function isIndexable(route) {
   return (
     !!route.path &&
     !route.guard &&
@@ -121,6 +123,22 @@ export function galleryHubUrls() {
   }));
 }
 
+/**
+ * The per-ENTRY Compendium URLs (V-19 the long tail) — static + deterministic,
+ * derived from the committed compendium index (src/domain/compendium/
+ * searchIndex.js). One /compendium/<entry-id> per named entry; the build-time
+ * prerender bakes each its own <head>, so the fan is receipt-true and
+ * enumeration-deep. Regenerating after a registry change reshapes this set (the
+ * byte-match test forces it), exactly like the facet hubs.
+ */
+export function compendiumEntryUrls() {
+  return COMPENDIUM_INDEX.map((e) => ({
+    loc: `${ORIGIN}${compendiumEntryPath(e.id)}`,
+    changefreq: 'monthly',
+    priority: '0.4',
+  }));
+}
+
 /** Best-effort public gallery slugs (ON by default; opt-out '0'). Never throws. */
 async function galleryUrls() {
   if (process.env.SITEMAP_INCLUDE_GALLERY === '0') return [];
@@ -151,7 +169,12 @@ async function galleryUrls() {
 }
 
 export async function buildSitemap() {
-  const urls = [...staticUrls(), ...galleryHubUrls(), ...(await galleryUrls())];
+  const urls = [
+    ...staticUrls(),
+    ...galleryHubUrls(),
+    ...compendiumEntryUrls(),
+    ...(await galleryUrls()),
+  ];
   const body = urls.map(urlEntry).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!--
@@ -159,8 +182,9 @@ export async function buildSitemap() {
 
   Derived from src/lib/routes.js: every indexable public route (excluding
   noindex app/auth/transient routes, guarded routes, and retired redirect
-  surfaces), the seven compendium sections, the gallery facet hubs
-  (src/lib/galleryHubs.js), and — at deploy, where Supabase credentials exist
+  surfaces), the compendium sections, every per-entry Compendium route
+  (src/domain/compendium/searchIndex.js — the V-19 long tail), the gallery facet
+  hubs (src/lib/galleryHubs.js), and — at deploy, where Supabase credentials exist
   in the env (opt out with SITEMAP_INCLUDE_GALLERY=0) — every public
   /gallery/:slug. Vercel serves /public/* as static files. Regenerate with:
   node scripts/generate-sitemap.mjs

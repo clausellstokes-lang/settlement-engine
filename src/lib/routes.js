@@ -98,6 +98,13 @@ export const ROUTES = Object.freeze([
 // the gallery view — GalleryHubPage renders its own not-found state.
 const PARAM_ROUTES = Object.freeze([
   { view: 'settlements', re: /^\/settlements\/([^/]+)$/, build: m => ({ id: decodeURIComponent(m[1]) }) },
+  // Per-ENTRY Compendium routes (V-19 the long tail): /compendium/<entry-id>
+  // (kebab-case ids like `tier-thorp`, `arch-plague-of-beasts`, `deity-…`). The
+  // exact `/compendium` overview is matched first (PATH_TO_ROUTE); this fans the
+  // 289 named entries into their own indexable path routes. The sitemap +
+  // prerender enumerate the ids from the committed compendium index, so this ONE
+  // pattern carries the whole tail without a 289-line eager route table.
+  { view: 'compendium', re: /^\/compendium\/([a-z0-9][a-z0-9-]*)$/, build: m => ({ entry: m[1] }) },
   { view: 'gallery', re: /^\/gallery\/(terrain|tier)\/([a-z0-9_-]+)$/, build: m => ({ hub: { facet: m[1], value: m[2] } }) },
   { view: 'gallery', re: /^\/gallery\/(at-war|most-alive)$/, build: m => ({ hub: { facet: m[1] } }) },
   { view: 'gallery', re: /^\/gallery\/([^/]+)$/, build: m => ({ slug: decodeURIComponent(m[1]) }) },
@@ -164,6 +171,10 @@ export function viewToPath(view, params) {
   }
   if (params && params.id && view === 'settlements') {
     return `/settlements/${encodeURIComponent(params.id)}`;
+  }
+  // Per-entry Compendium path (V-19 long tail).
+  if (params && params.entry && view === 'compendium') {
+    return `/compendium/${encodeURIComponent(params.entry)}`;
   }
   const r = VIEW_TO_ROUTE[view];
   return r ? r.path : VIEW_TO_ROUTE[DEFAULT_VIEW].path;
