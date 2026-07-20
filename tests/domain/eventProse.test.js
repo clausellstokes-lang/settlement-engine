@@ -29,6 +29,7 @@ const SAMPLE_INTERP = Object.freeze({
   resource: 'silver', a: 'Ashfield', b: 'Brookend', pop: 340,
   // THE ROADS tokens (ENGINE LIFT #5) — the roads.* pools read these.
   npc: 'Sir Aldric', home: 'Ashford', dest: 'Briar', captor: 'Corvin', purpose: 'trade',
+  payer: 'Wexbridge', // D-5 third-party-ransom voice — the paying court's name
 });
 
 /** Resolve a pool entry (string or fn) with the sample interp. */

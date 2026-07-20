@@ -218,4 +218,61 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.dest} sent ${x.home}'s peace envoy home with nothing; ${x.npc} carries back only the refusal.`,
     ],
   },
+  // ── THIRD-PARTY RANSOM (D-5 §9 — a court OTHER than home buys the captive's freedom; the
+  // voice names the PAYER and speaks its motive: a friend's gift, an ally/creditor's favour, or
+  // a rival's leash. Never the home-paid line. DARK behind thirdPartyRansomEnabled). Token {payer}
+  // is the paying settlement's name; {captor} the captor. ──
+  thirdPartyFriend: {
+    headline: [
+      (x) => `${x.payer} buys ${x.npc} free of ${x.captor} as a friend`, // canonical
+      (x) => `A friend in ${x.payer} ransoms ${x.npc} home to ${x.home}`,
+      (x) => `${x.payer} pays ${x.captor} to free ${x.npc}, asking nothing`,
+      (x) => `${x.npc} is freed from ${x.captor} by a friend's coin from ${x.payer}`,
+    ],
+    summary: [
+      (x) => `${x.payer} met ${x.captor}'s price for ${x.npc} of ${x.home} out of friendship — a gift of freedom that binds ${x.home} in gratitude, not debt.`, // canonical
+      (x) => `A friendly hand in ${x.payer} bought ${x.npc} out of ${x.captor}'s keeping; ${x.home}'s treasury was spared and a bond of thanks was made.`,
+      (x) => `${x.npc} of ${x.home} rides home free of ${x.captor} — ${x.payer} paid the ransom as a friend, and ${x.home} remembers the mercy.`,
+      (x) => `Out of goodwill, ${x.payer} settled ${x.npc}'s ransom to ${x.captor}; the envoy of ${x.home} is freed and the friendship deepened.`,
+    ],
+  },
+  thirdPartyAlly: {
+    headline: [
+      (x) => `${x.payer} ransoms ${x.npc} of ${x.home} from ${x.captor}`, // canonical
+      (x) => `${x.payer} pays ${x.captor} to free ${x.home}'s envoy`,
+      (x) => `An allied court in ${x.payer} buys ${x.npc} home`,
+      (x) => `${x.npc} is bought free of ${x.captor} by ${x.payer}`,
+    ],
+    summary: [
+      (x) => `${x.payer} paid ${x.captor} the price of ${x.npc}'s release — a favour to ${x.home} that leaves a debt of gratitude owed to ${x.payer}.`, // canonical
+      (x) => `An allied purse in ${x.payer} met ${x.captor}'s demand for ${x.npc} of ${x.home}; the envoy comes home owing ${x.payer} the favour.`,
+      (x) => `${x.npc} of ${x.home} is free of ${x.captor}, the coin found by ${x.payer} — a kindness ${x.home} will be expected to repay.`,
+      (x) => `${x.payer} covered ${x.npc}'s ransom to ${x.captor}; ${x.home}'s envoy rides home, the seat now indebted to ${x.payer}.`,
+    ],
+  },
+  thirdPartyRival: {
+    headline: [
+      (x) => `${x.payer}, no friend to ${x.home}, pays ${x.npc}'s ransom to ${x.captor}`, // canonical
+      (x) => `A rival in ${x.payer} buys ${x.npc} out of ${x.captor}'s hands`,
+      (x) => `${x.payer} settles ${x.npc}'s ransom — and gains a hold over ${x.home}`,
+      (x) => `${x.npc} is freed from ${x.captor} by rival coin from ${x.payer}`,
+    ],
+    summary: [
+      (x) => `${x.payer}, ${x.home}'s rival, paid ${x.captor} for ${x.npc}'s freedom — a coin that frees the envoy but leaves ${x.home} beholden to an enemy.`, // canonical
+      (x) => `A rival purse in ${x.payer} met ${x.captor}'s price for ${x.npc} of ${x.home}; the envoy is home, but the favour is a leash in ${x.payer}'s hand.`,
+      (x) => `${x.npc} of ${x.home} is bought free of ${x.captor} by ${x.payer} — no kindness, but a debt owed to a rival who will call it in.`,
+      (x) => `${x.payer} settled ${x.npc}'s ransom to ${x.captor} for its own ends; ${x.home}'s envoy rides home under obligation to an enemy court.`,
+    ],
+  },
 });
+
+/**
+ * The third-party-ransom news pool for a payer motive (D-5 §9 game-feel-3): a friend's gift, a
+ * rival's leash, or an ally/creditor's favour. Keeps the roads mover's release beat to one line.
+ * @param {string} motive @returns {Record<string, ProseVariant[]>}
+ */
+export function thirdPartyRansomPool(motive) {
+  return motive === 'friendship' ? ROADS_NEWS.thirdPartyFriend
+    : motive === 'leverage' ? ROADS_NEWS.thirdPartyRival
+      : ROADS_NEWS.thirdPartyAlly;
+}

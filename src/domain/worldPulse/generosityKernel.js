@@ -1307,13 +1307,22 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   // relationshipMemory incidents (edge-backed pairs; append immutably, bounded to last 8) +
   // the credit-maturity scalar patches (SET clamped-absolute trust/resentment — the
   // applyRelationshipPatch idiom; the resentment ratchet IS the casus-belli seam).
+  //
+  // SANCTIONED BATCHING EXCEPTION (cohesion-generosity-incident-bypass): this is the ONE inline
+  // relationshipStates writer that does NOT route through applyRelationshipPatch — deliberately, so
+  // a whole tick's relief/intel incidents fold into ONE immutable rebuild instead of N patch passes.
+  // It MUST stay shape-compatible with the applicator: the incident row matches reliefIncident's
+  // shape, scalars are pre-clamped at the call sites, and updatedAt is stamped with the SAME
+  // deterministic overlay `now` the applicator uses (relationshipEvolution.js:403) — never a wall
+  // clock — so the two write paths cannot drift.
+  // @enforced-by tests/domain/generosityKernel.credit.test.js + tests/property/generosityDormancyGolden.test.js
   if (incidentWrites.length) {
     const nextStates = { ...relStates };
     for (const w of incidentWrites) {
       const cur = asObject(nextStates[w.key]);
       const prior = Array.isArray(cur.recentIncidents) ? cur.recentIncidents : [];
       /** @type {Record<string, unknown>} */
-      const nextRec = { ...cur };
+      const nextRec = { ...cur, updatedAt: now };
       if (w.incident) nextRec.recentIncidents = [...prior.slice(-7), w.incident];
       if (w.patch) for (const [k, v] of Object.entries(w.patch)) nextRec[k] = v;
       nextStates[w.key] = nextRec;

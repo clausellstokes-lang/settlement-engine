@@ -131,6 +131,8 @@ function hostileToHome(graph, worldState, homeId, otherId) {
  * @param {string} a.homeId @param {string} a.destId @param {number} a.exposure @param {number} a.protection
  * @param {ReturnType<typeof createPRNG>} a.fork  the shared roads-hazard fork (S1/S3 ride it)
  * @param {string} a.rngSeed @param {number} a.now2 @param {Set<string>} a.idSet
+ * @param {Map<string, Set<string>>} [a.blockades]  the tick-invariant blockade map, hoisted once per
+ *   roads pass (perf); direct callers may omit it and it is rebuilt here (behaviour-identical).
  * @returns {SeaHazardResult|null}
  */
 export function resolveSeaHazard(a) {
@@ -141,7 +143,7 @@ export function resolveSeaHazard(a) {
 
   // S1 — BLOCKADE (naval only): an endpoint port blockaded by a power hostile to home.
   if (navalLit(a.worldState)) {
-    const blockades = activeBlockadeTargets(a.worldState);
+    const blockades = a.blockades instanceof Map ? a.blockades : activeBlockadeTargets(a.worldState);
     for (const port of ports) {
       const owners = blockades.get(port);
       if (!owners || !owners.size) continue;

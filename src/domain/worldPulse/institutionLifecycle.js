@@ -307,8 +307,13 @@ function buildableEntryForProcessor(/** @type {any} */ pattern, /** @type {any} 
  * Returns [{name, category, spec, nativeTier, kind, affinity, reason, context}]
  * sorted best-first, deduped by institution name. Pure + deterministic.
  */
-export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null) {
+export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null, /** @type {{ underwaysFoundingLit?: boolean }} */ options = {}) {
   if (!settlement) return [];
+  // D6 THE UNDERWAYS organic founding is dormant behind a virtual flag (default absent): the
+  // catalog resolver is now correct, but LIGHTING the clandestine gap shifts same-seed worldPulse
+  // goldens for vice-bearing village+ worlds ⇒ owner-gated (rides the G2 + lighting regen). Dark ⇒
+  // no clandestine gap emitted ⇒ byte-identical.
+  const underwaysFoundingLit = options && options.underwaysFoundingLit === true;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const existingNames = existingInstitutionNames(settlement);
   const localResources = resourceList(settlement);
@@ -420,18 +425,20 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
 
   // D6 THE UNDERWAYS (coupling 5 — organic founding): sustained criminal presence at a
   // village+ settlement calls for excavated tunnels (the mine-founds-itself pattern;
-  // excavation needs labor, so village+). The engine hook is wired HERE; the catalog +
-  // generation half rides Track-G2, so buildableCatalogEntry('underground_network')
-  // resolves to null on this lineage ⇒ addGap NO-OPS (byte-identical) and activates
-  // automatically once the catalog entry merges. Facet-read (never a name string): a
-  // 'vice'-nature institution is the criminal-underground signal; skip if tunnels exist.
-  if (tierRankOf(tier) >= tierRankOf('village')) {
+  // excavation needs labor, so village+). The engine hook is wired HERE; the G2 catalog
+  // entry 'Underground network' now EXISTS on this lineage, so the resolver resolves — the
+  // dormancy is now the FLAG (underwaysFoundingLit), not a dead lookup. Dark ⇒ no clandestine
+  // gap ⇒ byte-identical; lit (owner, at the G2 + lighting regen) ⇒ it founds. Facet-read
+  // (never a name string): a 'vice'-nature institution is the criminal-underground signal;
+  // skip if tunnels exist. The catalog lookup is by NAME, so pass the catalog NAME (the prior
+  // 'underground_network' SLUG never matched catalogEntryByName's exact-name resolve — dead).
+  if (underwaysFoundingLit && tierRankOf(tier) >= tierRankOf('village')) {
     const insts = /** @type {ReadonlyArray<unknown>} */ (Array.isArray(settlement.institutions) ? settlement.institutions : []);
     const hasVice = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionNature') === 'vice');
     const hasUnderways = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
     if (hasVice && !hasUnderways) {
       addGap(
-        buildableCatalogEntry('underground_network', settlement, existingNames),
+        buildableCatalogEntry('Underground network', settlement, existingNames),
         'clandestine',
         'A thriving criminal underground calls for excavated tunnels — smugglers’ warrens and escape ways.',
         { via: 'underways' },
@@ -616,6 +623,9 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
   if (!rules.institutionLifecycleEnabled) return { worldState, candidates: [] };
+  // D6 underways organic founding — a virtual flag read defensively from the RAW rules (absent from
+  // DEFAULT_SIMULATION_RULES; the thirdPartyRansomEnabled idiom). Dark ⇒ no clandestine gap.
+  const underwaysFoundingLit = (context.simulationRules || worldState?.simulationRules || {}).underwaysOrganicFoundingEnabled === true;
 
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
@@ -672,7 +682,7 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       if (drift.streak < t.requiredStreak) continue;
       if (drift.lastCandidateTick != null && tick - drift.lastCandidateTick < t.cooldownTicks) continue;
       const chains = deriveLifecycleChains(settlement);
-      const gaps = detectInstitutionGaps(settlement, chains);
+      const gaps = detectInstitutionGaps(settlement, chains, { underwaysFoundingLit });
       if (!gaps.length) continue;
       // W-F8 EMERGENCE WEIGHTING: a militarized town seeds MARTIAL institutions sooner
       // (garrison/armoury — the war-supply birth distribution). Lift the affinity of any

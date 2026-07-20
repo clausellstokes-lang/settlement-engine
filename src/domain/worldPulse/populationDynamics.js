@@ -78,16 +78,22 @@ const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
 // war_drain when OFF, and a generation-occupied town already carried
 // vassal_extraction before this change — but it never lost population for it until
 // now), so a no-war campaign that never stamps either is byte-identical.
-const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain']);
+// occupation_resistance (the occupied town's ongoing refreshed stressor) and occupation_burden
+// (the occupier's overextension) are re-emitted EVERY tick by occupation.js, unlike the one-shot
+// vassal_extraction proxy (stamped once at conquest, expiring after 6 ticks): both press the
+// population RATE while the occupation stands. All war archetypes are gated behind warLayerEnabled
+// at the source, so a no-war campaign never stamps them ⇒ byte-identical.
+const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain', 'occupation_resistance', 'occupation_burden']);
 const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap', 'relief_burden']);
 // siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
 const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'occupation_lifted', 'stressor_residual']);
 // One crisis-flight class feeds both the severe classifier and the
 // mass-emigration gate; recovery archetypes are deliberately absent. Occupation
-// (vassal_extraction) drives REFUGEE FLIGHT — the column flees the occupier — so it
-// joins the flight set alongside war_pressure; war_drain is austerity, not flight,
-// so it stays out of the flight set (it presses the rate, not the emigration gate).
-const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'regional_migration_pressure']);
+// drives REFUGEE FLIGHT — the column flees the occupier — so vassal_extraction AND
+// the occupied town's ongoing occupation_resistance join the flight set alongside
+// war_pressure; occupation_burden (the OCCUPIER's overextension) is austerity, not
+// flight — like war_drain it presses the rate, not the emigration gate, so it stays out.
+const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'occupation_resistance', 'regional_migration_pressure']);
 
 /**
  * @param {any} item

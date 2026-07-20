@@ -15,6 +15,7 @@ import { describe, expect, test } from 'vitest';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { factionArchetype } from '../../src/domain/factionArchetypes.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -79,6 +80,13 @@ describe('a DM-dismissed conquest leaves no occupation/ledger residue', () => {
     expect(baseline.worldState.occupations?.beta).toBeTruthy();
     expect(baseline.worldState.dispositionStats?.alpha?.wins).toBe(1);
     expect(baseline.worldState.dispositionStats?.beta?.losses).toBe(1);
+    // coherence-08: the crowned occupier resolves to the OCCUPATION archetype (category:'occupation'),
+    // not 'military' — so its rank/label/disposition bucket is reachable, not shadowed by 'military'.
+    const betaFactions = (baseline.settlementUpdates || []).find(u => String(u.saveId) === 'beta')?.settlement?.powerStructure?.factions || [];
+    const occupier = betaFactions.find(f => (f.modifiers || []).includes('occupier'));
+    expect(occupier, 'the conquered town carries an installed occupier').toBeTruthy();
+    expect(occupier.category).toBe('occupation');
+    expect(factionArchetype(occupier)).toBe('occupation');
   });
 
   test('dismissing the conquest writes NO occupation and NO disposition residue', () => {

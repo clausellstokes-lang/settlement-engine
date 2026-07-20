@@ -237,14 +237,23 @@ export function enumerateIntelOpportunities({ beliefMaps, edges, graph, relState
     addBond(from, to, kind, strength01);
     addBond(to, from, kind, strength01);
   }
-  const hasLiveObl = (/** @type {string} */ x, /** @type {string} */ y) => {
-    for (const k of Object.keys(obl)) {
-      const r = asObject(obl[k]);
-      const f = String(r.from); const t = String(r.to);
-      if ((f === x && t === y) || (f === y && t === x)) return true;
-    }
-    return false;
+  // Obligation adjacency index (id → Set of counterpart ids), built ONCE per enumerate call
+  // (O(obligations)) — mirrors the `bonds` Map above so hasLiveObl is an O(1) membership check
+  // instead of a full-ledger scan per seller×subject×receiver triple. Both directions are added,
+  // so a lookup is order-independent — behaviour-identical to the prior linear scan.
+  /** @type {Map<string, Set<string>>} */
+  const oblAdj = new Map();
+  const addObl = (/** @type {string} */ x, /** @type {string} */ y) => {
+    let s = oblAdj.get(x);
+    if (!s) { s = new Set(); oblAdj.set(x, s); }
+    s.add(y);
   };
+  for (const k of Object.keys(obl)) {
+    const r = asObject(obl[k]);
+    const f = String(r.from); const t = String(r.to);
+    addObl(f, t); addObl(t, f);
+  }
+  const hasLiveObl = (/** @type {string} */ x, /** @type {string} */ y) => oblAdj.get(x)?.has(y) || false;
   // R has STAKES in subject J when it holds a qualifying bond to J or a live obligation with J.
   const hasStakes = (/** @type {string} */ r, /** @type {string} */ j) => (bonds.get(r)?.has(j) || hasLiveObl(r, j));
 

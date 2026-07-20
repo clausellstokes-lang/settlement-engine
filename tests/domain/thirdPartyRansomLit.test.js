@@ -119,6 +119,12 @@ describe('D-5 §9 lit walkthrough — the three terminal outcomes execute', () =
     const fx = fixture({ payerRel: 'rival', archetype: 'militarist_expansionist', personality: { flaw: 'greedy' }, rules });
     const seed = seedFor(fx, 'compromised');
     const r = run(fx, seed);
+    // game-feel-3: a predatory rival's coin speaks the RIVAL voice — names the payer and reads as
+    // a leash/enemy debt, never the home-paid line.
+    const rivalNews = (r.newsEntries || []).find((n) => (n.tags || []).includes('ransom_third_party'));
+    expect(rivalNews, 'a third-party release beat fired').toBeTruthy();
+    expect(rivalNews.headline).toContain('Payerton');
+    expect(rivalNews.summary).toMatch(/rival|enemy/i);
     const chans = r.worldState?.spatialLedgers?.roadsReturnedCaptives || {};
     const rec = Object.values(chans)[0];
     expect(rec, 'a returned-captive channel was deposited').toBeTruthy();
@@ -153,14 +159,21 @@ describe('D-5 §9 lit walkthrough — the three terminal outcomes execute', () =
     const dec = decisionFor(fx, seed, true);
     expect(dec.payerMotive).toBe('friendship'); // a friend moves first
     const r = run(fx, seed);
+    // game-feel-3: the release speaks the FRIEND voice — names the PAYER (Payerton), not the
+    // home-paid line, and reads as friendship, never a bare ransom.
+    const friendNews = (r.newsEntries || []).find((n) => (n.tags || []).includes('ransom_third_party'));
+    expect(friendNews, 'a third-party release beat fired').toBeTruthy();
+    expect(friendNews.headline).toContain('Payerton'); // the payer is named (home-paid never names it)
+    expect(friendNews.summary).toMatch(/friend/i); // the friend voice, not the ally/rival one
     const bonds = r.worldState?.spatialLedgers?.roadsBondEvents || {};
     const bev = Object.values(bonds)[0];
     expect(bev, 'a gratitude bond event was deposited').toBeTruthy();
     expect(bev.captiveNpcKey).toBe('h:cap');
     expect(bev.targetNpcKey).toBe('p:friend');
     expect(bev.targetSid).toBe('p');
-    // the ladder's read helper surfaces it for the mintBond consume.
-    const evs = readRoadsBondEvents(r.worldState);
+    // the ladder's read helper surfaces it for the mintBond consume ONE tick later (the courier
+    // window: depositTick === consume-tick − 1).
+    const evs = readRoadsBondEvents(r.worldState, WEEK + 1);
     expect(evs.get('h|h:cap')).toEqual({ targetNpcKey: 'p:friend', targetSid: 'p', sev: bev.sev });
   });
 

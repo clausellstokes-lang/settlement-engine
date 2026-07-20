@@ -1175,7 +1175,11 @@ function bluffExposureNpcDeltas(worldState, tick) {
   for (const key of Object.keys(pending).sort(compareCodepoint)) {
     const rec = asObject(pending[key]);
     if (rec.nid == null) continue;
-    if (Math.floor(finiteNumber(rec.depositTick, now)) >= now) continue; // deposited THIS tick ⇒ not yet couriered
+    // CONSUME-ONCE DOUBLE GUARD (courier-liveness): a bluff exposure is couriered EXACTLY one
+    // tick after the ladder deposits it (depositTick === now − 1); a same-tick deposit is not yet
+    // couriered and a STALE one (the ladder went dark, so its next-tick prune never fired) is
+    // skipped, never re-charged. Exact-age, not the old lower-bound `>= now`, closes both.
+    if (Math.floor(finiteNumber(rec.depositTick, now)) !== now - 1) continue;
     const band = clamp(Math.round(finiteNumber(rec.band, 2)), 0, 4);
     out.push({ id: String(rec.nid), kind: 'deception', magnitude01: clamp01(band / 4), lieExposedBand: band });
   }
@@ -1327,7 +1331,11 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
     const intelOverrides = new Map();
     for (const key of Object.keys(pending).sort(compareCodepoint)) {
       const rec = asObject(pending[key]);
-      if (finiteNumber(rec.depositTick, nowTick) >= nowTick) continue; // deposited THIS tick ⇒ not yet couriered
+      // CONSUME-ONCE DOUBLE GUARD (courier-liveness): a couriered read lands EXACTLY one tick
+      // after generosity deposits it (depositTick === nowTick − 1); a same-tick deposit is not yet
+      // couriered and a STALE one (generosity went dark, so its next-tick prune never fired) is
+      // skipped, never re-injected. Exact-age, not the old lower-bound `>= nowTick`, closes both.
+      if (Math.floor(finiteNumber(rec.depositTick, nowTick)) !== nowTick - 1) continue;
       const receiverId = String(rec.receiverId);
       const subjectId = String(rec.subjectId);
       const planted = /** @type {BeliefRecord|null} */ (intelInjectionBelief(rec, nowTick));

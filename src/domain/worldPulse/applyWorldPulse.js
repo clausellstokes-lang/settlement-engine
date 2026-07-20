@@ -33,6 +33,7 @@ import { normalizeSimulationRules, propagationDepthForRules } from './simulation
 import { resolveProposalToOutcome } from './decisionTier.js';
 import { applyRealmVerbOrder, buildRealmVerbOutcome, REALM_VERB_PAYLOAD_KIND } from './realmVerbExecution.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
+import { recordProposalProvenance } from './provenanceKernel.js';
 import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { withImpairment } from '../entities/status.js';
@@ -435,7 +436,11 @@ function installOccupationAuthority(/** @type {any} */ settlement, /** @type {an
   const occupier = {
     faction: name,
     name,
-    category: 'military',
+    // category:'occupation' (not 'military') so factionArchetype — which resolves category BEFORE
+    // the name rules — buckets the crowned occupier as OCCUPATION, reaching its rank/label/
+    // disposition. CATEGORY_MAP already maps 'occupation'; modifiers:['occupier'] still tags it.
+    // Dormant behind warLayerEnabled ⇒ golden-neutral.
+    category: 'occupation',
     power: 90,
     isGoverning: false,
     desc: 'A foreign occupation authority installed by conquest.',
@@ -1368,12 +1373,13 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     advanceRegionalImpacts: false,
     simulationRules: campaign.worldState?.simulationRules,
   });
-  // W-COMPOSER-2 lapse honesty: a realm-verb order whose gates refused at apply
-  // is stamped 'refused' (visible in the queue's history), never 'applied' — the
-  // §10 phantom-hole law at the proposal mouth. Organic outcomes are untouched.
-  const wasRefused = Array.isArray(result.newsEntries)
-    && result.newsEntries.some((/** @type {NonNullable<SimSettlement['config']>} */ n) => n && n.impactKind === 'realm_verb_refused');
-  result.worldState = updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now });
+  // W-COMPOSER-2 lapse honesty: a realm-verb order whose gates refused at apply is stamped 'refused'
+  // (visible in the queue's history), never 'applied' — the §10 phantom-hole law at the proposal
+  // mouth. Organic outcomes are untouched. correctness-4: the SAME provenance writer the organic tick
+  // uses now records the decree's cause-edges too (flag-gated in recordProposalProvenance ⇒ byte-
+  // identical when dark), so a DM-approved decree leaves a recorded-causality entry, not only pulses.
+  const wasRefused = Array.isArray(result.newsEntries) && result.newsEntries.some((/** @type {NonNullable<SimSettlement['config']>} */ n) => n && n.impactKind === 'realm_verb_refused');
+  result.worldState = recordProposalProvenance(updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now }), result, campaign.worldState?.tick || proposal.tick || 0);
   return result;
 }
 

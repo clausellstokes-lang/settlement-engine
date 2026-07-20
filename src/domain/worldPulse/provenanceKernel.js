@@ -280,3 +280,22 @@ export function appendPulseHistoryWithProvenance(worldState, pulseRecord, applie
   const withLedger = recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
   return appendPulseHistory(withLedger, pulseRecord);
 }
+
+/**
+ * correctness-4 — the MANUAL-APPLY (DM decree) twin of appendPulseHistoryWithProvenance: record a
+ * hand-approved decree's cause-edges so it leaves a recorded-causality entry too, not only organic
+ * pulses. applyWorldPulseProposal has no pulseRecord to append, so this records the ledger DIRECTLY.
+ * The durable set is the applied outcomes ∪ news ids (a decree's own receipts scope its recording).
+ * FLAG-GATED: recordProvenanceLedger returns the input worldState untouched when dark ⇒ byte-identical.
+ * @param {ProvWorldState} worldState  the post-apply worldState (status already stamped)
+ * @param {Record<string, unknown>} applied  the applyWorldPulseOutcomes result (read structurally)
+ * @param {number} tick
+ * @returns {ProvWorldState}
+ */
+export function recordProposalProvenance(worldState, applied, tick) {
+  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[] }} */ (applied || {});
+  const outcomes = [...(app.autoApplied || []), ...(app.proposals || [])];
+  const newsEntries = app.newsEntries || [];
+  const durableIds = new Set([...outcomes, ...newsEntries].map((r) => (r && r.id != null ? String(r.id) : '')).filter(Boolean));
+  return recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
+}

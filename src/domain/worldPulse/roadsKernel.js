@@ -53,7 +53,7 @@ import { tradeNeighbours, RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetw
 import { seasonForTick } from './worldState.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { pickLine } from './eventProse.js';
-import { ROADS_NEWS } from '../../data/roadsProse.js';
+import { ROADS_NEWS, thirdPartyRansomPool } from '../../data/roadsProse.js';
 import { npcId } from './npcAgency.js';
 import { readinessOf, experienceOf } from './martialReadiness.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
@@ -68,6 +68,7 @@ import {
   persistThirdPartyLedgers, THIRD_PARTY_RANSOM_TUNING,
 } from '../roads/thirdPartyRansom.js';
 import { seaRoadsActive, resolveSeaHazard, classifyLegModes, currentSeaHop } from '../roads/seaRoads.js';
+import { activeBlockadeTargets } from '../spatial/navalLayer.js';
 
 /**
  * @typedef {Object} RoadsAdvanceResult
@@ -492,6 +493,9 @@ function advanceLitRoads(args) {
 
   // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
   const seaLit = seaRoadsActive(worldState); // D-6 SEA ROADS (§10): sea-hazard dispatch on water hops
+  // perf: the blockade map is TICK-INVARIANT (a pure read of the navalTransit ledger), so hoist it
+  // ONCE per pass instead of rebuilding it inside resolveSeaHazard for every in-transit sea mission.
+  const seaBlockades = seaLit ? activeBlockadeTargets(worldState) : undefined;
   /** @type {Map<string, number>} legitimacy hits (capture home hit · T4 detain host hit) */
   const legitimacyHits = new Map();
   const bumpLegit = (/** @type {string} */ id, /** @type {number} */ d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
@@ -537,7 +541,7 @@ function advanceLitRoads(args) {
       // null (no land army/embattlement check). T2/T4 are visiting-only ⇒ never reached over water.
       const overSea = seaLit && phase !== 'visiting' && currentSeaHop(m, weekClock, digest, season).overSea;
       if (overSea) {
-        res = resolveSeaHazard({ m, weekClock, digest, season, worldState, graph, homeId, destId, exposure, protection, fork, rngSeed, now2, idSet });
+        res = resolveSeaHazard({ m, weekClock, digest, season, worldState, graph, homeId, destId, exposure, protection, fork, rngSeed, now2, idSet, blockades: seaBlockades });
       }
       // T1 — army on the route / occupation during the stay.
       let t1Captor = null;
@@ -739,9 +743,15 @@ function advanceLitRoads(args) {
       if (eff.bondEventDeposit) bondEventDeposits.push(eff.bondEventDeposit);
     }
     const s = freshSettlement(homeId); const seed = `ransom.${rid}`;
+    /** @type {{ npc: string, home: string, captor: string, dest: string, payer?: string }} */
     const interp = { npc: str(r.npcName), home: str(asObject(s).name || homeId), captor: captorId, dest: captorId };
-    const pool = early === 'party_ransom' ? ROADS_NEWS.partyRansom
-      : early === 'party_rescue' ? ROADS_NEWS.rescue : ROADS_NEWS.ransom;
+    // D-5 §9 game-feel-3: a third-party release speaks the PAYER's true voice (friend / ally-creditor
+    // / rival leash), NOT the home-paid line. payerMotive was stamped on the record at the checkpoint.
+    let pool = early === 'party_ransom' ? ROADS_NEWS.partyRansom : early === 'party_rescue' ? ROADS_NEWS.rescue : ROADS_NEWS.ransom;
+    if (early === 'third_party') {
+      interp.payer = str(asObject(freshSettlement(str(r.payerId))).name || str(r.payerId));
+      pool = thirdPartyRansomPool(str(r.payerMotive));
+    }
     newsEntries.push(roadsBeat({
       sid: homeId, tick: now2, now, significance: 'notable',
       headline: pickLine(pool.headline, seed, interp),
@@ -1041,7 +1051,7 @@ function advanceLitRoads(args) {
   if (ransomSettlementDeposits.length || bondEventDeposits.length
     || Object.keys(asObject(getSpatialLedger(worldState, 'roadsRansomSettlements'))).length
     || Object.keys(asObject(getSpatialLedger(worldState, 'roadsBondEvents'))).length) {
-    const tp = persistThirdPartyLedgers(nextWorldState, { ransomSettlements: ransomSettlementDeposits, bondEvents: bondEventDeposits }, weekClock);
+    const tp = persistThirdPartyLedgers(nextWorldState, { ransomSettlements: ransomSettlementDeposits, bondEvents: bondEventDeposits }, weekClock, now2);
     if (tp.changed) { nextWorldState = tp.worldState; changed = true; }
   }
 

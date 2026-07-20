@@ -71,7 +71,7 @@ const byId = new Map([
 const snapshot = { settlements: [{ id: 'sell' }, { id: 'recv' }, { id: 'subj' }], byId };
 
 /** Seed one couriered transfer (deposited last tick) and run the statecraft consume this tick. */
-function consume({ soldBand, subjStrength, spokesperson = 'sell:reeve', intelLit = true, credLit = true }) {
+function consume({ soldBand, subjStrength, spokesperson = 'sell:reeve', intelLit = true, credLit = true, tick = 1 }) {
   const rules = { infoStatecraftEnabled: true, infoMode: 'unreliable' };
   if (intelLit) rules.intelTradeEnabled = true;
   if (credLit) rules.npcCredibilityEnabled = true;
@@ -86,7 +86,7 @@ function consume({ soldBand, subjStrength, spokesperson = 'sell:reeve', intelLit
     spatialLedgers: { intelTransfers: { 'k': transfer } },
   };
   return advanceInformationStatecraft({
-    snapshot, worldState, graph: { edges: [] }, rng, tick: 1, now: null,
+    snapshot, worldState, graph: { edges: [] }, rng, tick, now: null,
     strengthOf: (id) => (id === 'subj' ? subjStrength : 0.5),
     alignmentOf: () => ({ malice01: 0.4, lawfulness01: 0.6 }), nameFor: (id) => String(id),
   }).worldState;
@@ -123,6 +123,15 @@ describe('D-3 self-policing — the closed loop through advanceInformationStatec
 
   it('INTEL-DARK: intelTradeEnabled absent ⇒ no consume, no charge (byte-identical)', () => {
     const ws = consume({ soldBand: 4, subjStrength: 0.05, intelLit: false });
+    expect(getSpatialLedger(ws, 'credibility')).toBeFalsy();
+    expect(getSpatialLedger(ws, 'npcCredibility')).toBeFalsy();
+  });
+
+  it('CONSUME-ONCE UNDER A DARK DEPOSITOR: a STALE transfer (depositTick two ticks behind) is NOT re-consumed', () => {
+    // Generosity (the intelTransfers depositor/pruner) went dark, so its next-tick prune never fired
+    // and the transfer sits. It resolved ONCE the tick after it landed; the exact-age guard now skips
+    // it. Pre-fix (lower-bound `depositTick < nowTick`) this re-charged the seller every tick.
+    const ws = consume({ soldBand: 4, subjStrength: 0.05, tick: 2 });
     expect(getSpatialLedger(ws, 'credibility')).toBeFalsy();
     expect(getSpatialLedger(ws, 'npcCredibility')).toBeFalsy();
   });

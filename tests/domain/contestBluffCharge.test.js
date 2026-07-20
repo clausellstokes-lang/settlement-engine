@@ -80,6 +80,13 @@ describe('D-4→D-2 consume — informationStatecraft charges the contradicted b
     const ws = consume({ depositTick: 1, tick: 1 });
     expect(getSpatialLedger(ws, 'npcCredibility')).toBeFalsy();
   });
+  it('CONSUME-ONCE UNDER A DARK DEPOSITOR: a STALE deposit (depositTick two ticks behind) is NOT re-charged', () => {
+    // The ladder (the sidecar's depositor/pruner) went dark, so its next-tick prune never fired and
+    // the deposit sits. It charged ONCE the tick after it landed; the exact-age guard now skips it
+    // forever after. Pre-fix (lower-bound `depositTick < now`) this would have re-charged every tick.
+    const ws = consume({ depositTick: 0, tick: 2 });
+    expect(getSpatialLedger(ws, 'npcCredibility')).toBeFalsy();
+  });
   it('CREDIBILITY-DARK: npcCredibilityEnabled absent ⇒ no charge, no read (byte-identical)', () => {
     const ws = consume({ depositTick: 0, tick: 1, credLit: false });
     expect(getSpatialLedger(ws, 'npcCredibility')).toBeFalsy();

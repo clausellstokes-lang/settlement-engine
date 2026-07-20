@@ -289,16 +289,24 @@ export function thirdPartyReleaseEffects(decision, ctx) {
  * §9 THE DEBT CONSUMER (generosity's arm): read the roadsRansomSettlements deposits into
  * ransom_relief obligation mints {from: home (debtor), to: payer (creditor)}. The roads mover
  * prunes the ledger the same tick (drop-all-prior), so each deposit is consumed exactly once
- * (pulse order: generosity before roads-last). Absent ledger ⇒ [] ⇒ byte-neutral. Pure.
+ * (pulse order: generosity before roads-last). CONSUME-ONCE DOUBLE GUARD (courier-liveness):
+ * a deposit is couriered EXACTLY one tick after it lands (depositTick === tick − 1); a stale
+ * one whose depositor went dark (drop-all-prior never fired) is skipped, never re-consumed —
+ * the readGratitudeBondEvents idiom in the pulse-tick clock (the deposit's `week` field rides
+ * the interval-scaled calendar, so only depositTick is safe to age against). Absent depositTick
+ * (a legacy in-flight record) defaults to one-tick-old ⇒ consumed once, as before. Absent
+ * ledger ⇒ [] ⇒ byte-neutral. Pure.
  * @param {Record<string, unknown>} worldState @param {number} tick
  * @returns {Array<{ from: string, to: string, kind: string, magnitude: number, mintTick: number, lastTick: number, predatory?: boolean }>}
  */
 export function consumeRansomSettlements(worldState, tick) {
   const ledger = asObject(getSpatialLedger(worldState, 'roadsRansomSettlements'));
+  const oneTickAgo = Math.floor(num(tick, 0)) - 1;
   /** @type {Array<{ from: string, to: string, kind: string, magnitude: number, mintTick: number, lastTick: number, predatory?: boolean }>} */
   const out = [];
   for (const key of Object.keys(ledger).sort(cmp)) {
     const r = asObject(ledger[key]);
+    if (Math.floor(num(r.depositTick, oneTickAgo)) !== oneTickAgo) continue; // stale (dark depositor) ⇒ never re-consume
     const from = String(r.homeId || ''); const to = String(r.payerId || '');
     const magnitude = num(r.magnitude, 0);
     if (!from || !to || from === to || magnitude <= 0) continue;
@@ -311,17 +319,22 @@ export function consumeRansomSettlements(worldState, tick) {
  * §9 THE GRATITUDE CONSUMER (the ladder's arm): read the roadsBondEvents deposits into a lookup
  * `${homeId}|${captiveNpcKey}` → { targetNpcKey, targetSid, sev }. The ladder pass mints the
  * gratitude bond through ITS OWN writer (mintBond) when it processes the captive's standing; the
- * roads mover prunes the ledger the same tick (consume-once, pulse order). Absent ⇒ empty ⇒
- * byte-neutral. Pure.
- * @param {Record<string, unknown>} worldState
+ * roads mover prunes the ledger the same tick (consume-once, pulse order). CONSUME-ONCE DOUBLE
+ * GUARD (courier-liveness): consume ONLY a deposit exactly one tick old (depositTick === tick − 1,
+ * the pulse-tick clock); a stale one left by a dark depositor is skipped, never re-consumed.
+ * Absent depositTick (legacy in-flight) defaults to one-tick-old ⇒ consumed once, as before.
+ * Absent ⇒ empty ⇒ byte-neutral. Pure.
+ * @param {Record<string, unknown>} worldState @param {number} [tick]
  * @returns {Map<string, { targetNpcKey: string, targetSid: string, sev: number }>}
  */
-export function readRoadsBondEvents(worldState) {
+export function readRoadsBondEvents(worldState, tick) {
   const ledger = asObject(getSpatialLedger(worldState, 'roadsBondEvents'));
+  const oneTickAgo = Math.floor(num(tick, 0)) - 1;
   /** @type {Map<string, { targetNpcKey: string, targetSid: string, sev: number }>} */
   const out = new Map();
   for (const key of Object.keys(ledger).sort(cmp)) {
     const r = asObject(ledger[key]);
+    if (Math.floor(num(r.depositTick, oneTickAgo)) !== oneTickAgo) continue; // stale (dark depositor) ⇒ never re-consume
     const homeId = String(r.homeId || ''); const captiveNpcKey = String(r.captiveNpcKey || '');
     const targetNpcKey = String(r.targetNpcKey || ''); const targetSid = String(r.targetSid || '');
     if (!homeId || !captiveNpcKey || !targetNpcKey || !targetSid) continue;
@@ -362,10 +375,14 @@ function diffLedger(nextRecords, priorRecords) {
  * @param {Object} deposits
  * @param {Array<{ homeId: string, payerId: string, magnitude: number, predatory: boolean }>} deposits.ransomSettlements
  * @param {Array<{ homeId: string, captiveNpcKey: string, targetNpcKey: string, targetSid: string, sev: number }>} deposits.bondEvents
- * @param {number} weekClock
+ * @param {number} weekClock  the calendar week (interval-scaled) — the record key + informational `week`
+ * @param {number} [depositTick]  the PULSE tick (+1/tick, catch-up-stable) — the consumers' consume-once
+ *   clock; a deposit is couriered exactly one tick later, so consume-once ages against THIS, not `week`
+ *   (which jumps by the tick interval, up to 52 weeks). Defaults to weekClock for callers that omit it.
  * @returns {{ worldState: Record<string, unknown>, changed: boolean }}
  */
-export function persistThirdPartyLedgers(worldState, deposits, weekClock) {
+export function persistThirdPartyLedgers(worldState, deposits, weekClock, depositTick = weekClock) {
+  const stamp = Math.floor(num(depositTick, weekClock));
   let ws = worldState;
   let changed = false;
   const settlementDeps = Array.isArray(deposits.ransomSettlements) ? deposits.ransomSettlements : [];
@@ -376,7 +393,7 @@ export function persistThirdPartyLedgers(worldState, deposits, weekClock) {
     /** @type {Record<string, unknown>} */
     const nextSettle = {};
     for (const d of settlementDeps) {
-      nextSettle[`${d.homeId}|${d.payerId}|${weekClock}`] = { homeId: d.homeId, payerId: d.payerId, magnitude: d.magnitude, predatory: d.predatory === true, week: weekClock };
+      nextSettle[`${d.homeId}|${d.payerId}|${weekClock}`] = { homeId: d.homeId, payerId: d.payerId, magnitude: d.magnitude, predatory: d.predatory === true, week: weekClock, depositTick: stamp };
     }
     const res = diffLedger(nextSettle, priorSettle);
     if (res) {
@@ -391,7 +408,7 @@ export function persistThirdPartyLedgers(worldState, deposits, weekClock) {
     const nextBonds = {};
     for (const d of bondDeps) {
       nextBonds[`${d.homeId}|${d.captiveNpcKey}|${d.targetSid}|${d.targetNpcKey}|${weekClock}`] = {
-        homeId: d.homeId, captiveNpcKey: d.captiveNpcKey, targetNpcKey: d.targetNpcKey, targetSid: d.targetSid, sev: d.sev, week: weekClock,
+        homeId: d.homeId, captiveNpcKey: d.captiveNpcKey, targetNpcKey: d.targetNpcKey, targetSid: d.targetSid, sev: d.sev, week: weekClock, depositTick: stamp,
       };
     }
     const res = diffLedger(nextBonds, priorBonds);

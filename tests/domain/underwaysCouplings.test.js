@@ -74,17 +74,31 @@ describe('D6 coupling 2 — siege + blockade endurance (land–sea parity)', () 
 // The EXPOSURE-DISCOUNT leg is SEAMED (exposureChance lives in the eager corruption.js chunk
 // AND npcAgency is at its max-lines ceiling — see the npcAgency.js seam). No pin here.
 
-describe('D6 coupling 5 — organic founding hook (dormant until G2 catalog)', () => {
-  it('a vice-bearing village+ settlement produces NO underways gap on this lineage (null catalog entry)', () => {
-    const settlement = {
-      name: 'Crookharbor', tier: 'town', population: 3000,
-      institutions: [VICE_DEN], // criminal underground present, but no clandestine institution yet
-      economicState: {}, activeConditions: [],
-    };
+describe('D6 coupling 5 — organic founding hook (dormant behind the underways-founding flag)', () => {
+  const settlement = {
+    name: 'Crookharbor', tier: 'town', population: 3000,
+    institutions: [VICE_DEN], // criminal underground present, but no clandestine institution yet
+    economicState: {}, activeConditions: [],
+  };
+
+  it('DARK (default): a vice-bearing village+ settlement produces NO underways gap (byte-identical)', () => {
+    // The G2 catalog entry 'Underground network' now EXISTS, so the resolver resolves — but the
+    // clandestine emission is gated behind underwaysFoundingLit (default off), owner-parked because
+    // lighting it shifts same-seed worldPulse goldens. Dark ⇒ addGap never fires ⇒ no clandestine gap.
     const gaps = detectInstitutionGaps(settlement);
-    // The hook fires (vice present, no tunnels) but buildableCatalogEntry('underground_network')
-    // is null until Track-G2 lands the catalog ⇒ addGap no-ops ⇒ no clandestine gap emitted.
     expect(gaps.every((g) => g.kind !== 'clandestine')).toBe(true);
     expect(() => detectInstitutionGaps(settlement)).not.toThrow();
+  });
+
+  it('LIT: the organic founding path resolves the catalog entry and emits the clandestine gap', () => {
+    // With the flag lit, the hook resolves 'Underground network' (the catalog NAME — the prior
+    // 'underground_network' SLUG passed to the exact-name resolver was DEAD forever) and founds it.
+    const gaps = detectInstitutionGaps(settlement, null, { underwaysFoundingLit: true });
+    const clandestine = gaps.find((g) => g.kind === 'clandestine');
+    expect(clandestine, 'the clandestine gap now EMITS when lit').toBeTruthy();
+    expect(clandestine.name).toBe('Underground network'); // the catalog entry resolved (no longer null)
+    // negative control: a settlement that already has tunnels emits NO gap even when lit.
+    const tunneled = { ...settlement, institutions: [VICE_DEN, WARREN_FACETS] };
+    expect(detectInstitutionGaps(tunneled, null, { underwaysFoundingLit: true }).every((g) => g.kind !== 'clandestine')).toBe(true);
   });
 });

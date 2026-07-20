@@ -305,7 +305,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   const memWeave = memoryWeaveActive(worldState);
   // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
   // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
-  const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState) : new Map();
+  const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState, now2) : new Map();
   // D-7e (ii) THE GENEROSITY GRATITUDE consume — the same-tick twin of the roads deposit
   // (generosity ran earlier THIS tick; events carry tick === now and the ledger lives one
   // tick). The receiving COURT is grateful: its ruling-seat NPC bonds toward the GIVER's

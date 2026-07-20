@@ -18,6 +18,7 @@ import {
   mintRealmVerbProposal, applyWorldPulseProposal, applyWorldPulseOutcomes,
 } from '../../src/domain/worldPulse/applyWorldPulse.js';
 import { updateProposalStatus } from '../../src/domain/worldPulse/worldState.js';
+import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 import { declareCasus, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { sueForPeaceOrder } from '../../src/domain/worldPulse/peaceReasons.js';
 import { advanceIntervention } from '../../src/domain/worldPulse/convergence.js';
@@ -154,6 +155,32 @@ describe('force ≡ organic at the arm (byte-compared against the kernel functio
     expect(p.status).toBe('refused');
     // The refused order never enters the applied ledger.
     expect(applied.autoApplied).toHaveLength(0);
+  });
+});
+
+describe('correctness-4 — a DM-approved decree records provenance (flag-gated, byte-neutral dark)', () => {
+  const DECREE_SAVES = [{ id: 'a', settlement: { id: 'a', name: 'Aldford', population: 900, tier: 'village', activeConditions: [] } }];
+  const decreeCampaign = (lit) => ({
+    id: 'c1', regionalGraph: { edges: [] }, wizardNews: { entries: [], currentTick: 5 },
+    worldState: {
+      tick: 5, simulationRules: lit ? { provenanceLedgerEnabled: true } : {},
+      proposals: [{
+        id: 'p1', status: 'pending', tick: 5,
+        outcome: { id: 'decree.cond.a.5', type: 'condition', candidateType: 'add_condition', targetSaveId: 'a', causedBy: 'dm_decree.root', applyMode: 'auto', condition: { archetype: 'unrest', severity: 0.5 }, severity: 0.5, headline: 'A decree', summary: 'x', reasons: [] },
+      }],
+    },
+  });
+
+  it('DARK: provenanceLedgerEnabled absent ⇒ the manual apply writes NO provenance ledger (byte-identical)', () => {
+    const r = applyWorldPulseProposal({ campaign: decreeCampaign(false), saves: DECREE_SAVES, proposalId: 'p1', now: '2026-01-02T00:00:00.000Z' });
+    expect(getSpatialLedger(r.worldState, 'provenance')).toBeFalsy();
+  });
+
+  it('LIT: the manual apply records the decree cause-edges through the SAME writer the organic tick uses', () => {
+    const r = applyWorldPulseProposal({ campaign: decreeCampaign(true), saves: DECREE_SAVES, proposalId: 'p1', now: '2026-01-02T00:00:00.000Z' });
+    const ledger = getSpatialLedger(r.worldState, 'provenance') || {};
+    // the applied outcome's cause is recorded (decree → its parent), matching the organic pulse.
+    expect(ledger['decree.cond.a.5']?.parents).toEqual(['dm_decree.root']);
   });
 });
 

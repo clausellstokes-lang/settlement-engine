@@ -3,6 +3,7 @@ import {
   thirdPartyRansomActive, THIRD_PARTY_RANSOM_TUNING,
   hasRefusingTrait, hasAcceptingTrait, payerRefuseProbability, payerCompromiseProbability,
   resolveThirdPartyRansom, persistThirdPartyLedgers,
+  consumeRansomSettlements, readRoadsBondEvents,
 } from '../../src/domain/roads/thirdPartyRansom.js';
 import { CORRUPTIBLE_FLAWS } from '../../src/domain/corruption.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
@@ -167,7 +168,7 @@ describe('D-5 persistThirdPartyLedgers (deposit ledgers, drop-when-empty)', () =
     }, 10);
     expect(changed).toBe(true);
     const settle = getSpatialLedger(worldState, 'roadsRansomSettlements');
-    expect(settle['home|payer|10']).toEqual({ homeId: 'home', payerId: 'payer', magnitude: 0.3, predatory: false, week: 10 });
+    expect(settle['home|payer|10']).toEqual({ homeId: 'home', payerId: 'payer', magnitude: 0.3, predatory: false, week: 10, depositTick: 10 });
     const bonds = getSpatialLedger(worldState, 'roadsBondEvents');
     expect(bonds['home|home::cap::0|payer|payer::gov::0|10']).toMatchObject({ targetSid: 'payer', sev: 0.5, week: 10 });
   });
@@ -177,5 +178,26 @@ describe('D-5 persistThirdPartyLedgers (deposit ledgers, drop-when-empty)', () =
     const { worldState, changed } = persistThirdPartyLedgers(w0, { ransomSettlements: [], bondEvents: [] }, 10);
     expect(changed).toBe(true);
     expect(getSpatialLedger(worldState, 'roadsRansomSettlements')).toBeUndefined();
+  });
+});
+
+// ── CONSUME-ONCE UNDER A DARK DEPOSITOR (courier-liveness) — the consumers' exact-age double guard.
+// The roads mover is the sole pruner of both ledgers; if it goes dark with a deposit in flight, the
+// drop-all-prior never fires and the deposit sits. The consumers now age against depositTick (the
+// pulse-tick clock, NOT `week` which jumps by the interval): couriered ONCE the tick after it lands,
+// skipped forever after — never a double mint / double bond. ──
+describe('D-5 consume-once holds when the depositor (roads mover) goes dark', () => {
+  const wsWith = (ledgers) => ({ spatialLedgers: ledgers });
+
+  it('consumeRansomSettlements: a deposit stamped depositTick=10 mints ONCE at tick 11, nothing at 12', () => {
+    const w = wsWith({ roadsRansomSettlements: { 'home|payer|10': { homeId: 'home', payerId: 'payer', magnitude: 0.3, week: 10, depositTick: 10 } } });
+    expect(consumeRansomSettlements(w, 11)).toContainEqual(expect.objectContaining({ from: 'home', to: 'payer', kind: 'ransom_relief' }));
+    expect(consumeRansomSettlements(w, 12), 'a STALE deposit is never re-minted').toEqual([]);
+  });
+
+  it('readRoadsBondEvents: a deposit stamped depositTick=10 surfaces ONCE at tick 11, nothing at 12', () => {
+    const w = wsWith({ roadsBondEvents: { 'home|home:cap|payer|payer:gov|10': { homeId: 'home', captiveNpcKey: 'home:cap', targetNpcKey: 'payer:gov', targetSid: 'payer', sev: 0.5, week: 10, depositTick: 10 } } });
+    expect(readRoadsBondEvents(w, 11).get('home|home:cap')).toEqual({ targetNpcKey: 'payer:gov', targetSid: 'payer', sev: 0.5 });
+    expect(readRoadsBondEvents(w, 12).size, 'a STALE deposit is never re-bonded').toBe(0);
   });
 });
