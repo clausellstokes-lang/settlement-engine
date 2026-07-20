@@ -4,6 +4,8 @@
   "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "rewrites": [
     { "source": "/gallery/:slug", "destination": "/api/gallery-meta?slug=:slug" },
+    { "source": "/gallery", "destination": "/api/meta-shell?gallery=1" },
+    { "source": "/world/:code", "destination": "/api/meta-shell?worldCode=:code" },
     { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
   ],
   "headers": [
