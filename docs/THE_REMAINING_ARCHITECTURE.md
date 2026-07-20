@@ -456,7 +456,11 @@ A+ at this stage, rinse and repeat.")
   (post-launch intake; recorded with full care, built after launch). Loop-found
   defects = fixes not scope; the enumerated coherence candidates + already-queued
   owner gates stay live decisions. The build phase ENDS at the Deep Couplings
-  landing → fold batch 3 (onto dc0b6e2b) → build-completeness → THE ROUND 3 LOOP.
+  landing → fold batch 3 (onto the LIVE composite tip) → build-completeness →
+  ⭐ THE AI HANDOFF GATE (owner 2026-07-19): produce docs/THE_RESURVEY_HANDOFF.md
+  — a SELF-CONTAINED, PLATFORM-AGNOSTIC loop brief for a DIFFERENT (non-Claude)
+  AI that will run the resurvey; spec in the ledger; supersedes START_HERE §6
+  for that successor → THE ROUND 3 LOOP (run by the different AI).
   The successor enforces this freeze with the same authority as every law here.
   ⬛⭐ THE ROADS WAVE (owner ruling 2026-07-19 "build it all!"): journeys-with-
   stakes — mission-purposed travel (traditions/trade/diplomacy/ladder-rank

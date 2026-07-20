@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — THE AI HANDOFF AT THE RESURVEY: "right before the
+resurvey prepare that I am going to switch to a different AI."** The Round 3 loop (the
+resurvey) will be executed by a DIFFERENT AI — NOT necessarily Claude, so NOT the
+continuity-order successor's assumptions (no auto-memory, no skill suite, possibly no
+Claude idioms). MANDATORY NEW GATE inserted between BUILD-COMPLETENESS and THE ROUND 3
+LOOP: produce **docs/THE_RESURVEY_HANDOFF.md** — a fully SELF-CONTAINED, PLATFORM-AGNOSTIC
+loop-execution brief a cold non-Claude AI can run with zero external context. IT MUST
+CONTAIN: (1) the live code location (composite branch + a RE-VERIFY-THE-TIP instruction —
+never a cached hash) + how to build/test/gate (concrete commands from package.json, not
+Claude tool names); (2) THE LOOP DEFINITION — resurvey→adversarially-verified-fix cycles,
+the coherence mandate, convergence = zero must-fix AND zero gate-passing coherence gaps
+AND every achievable dimension at A+ (one clean + one confirming cycle); (3) the
+PRE-STOCKED intake: COHERENCE_MATRIX_R3.md (the 105-pair matrix, defects, gated-in
+candidates) + the faction-key/record-shape structural sweep; (4) THE CONSTITUTION as
+explicit rules (eager budget ratchet, kill-list, dormancy goldens, single-writer,
+domain-strict 0, the expected 4 parked-golden reds, NUL-scan, shared-tree git discipline,
+NEVER git add -A/stash); (5) THE OWNER-GATED BOUNDARIES it must NEVER cross (pushes,
+deploy, db push, golden re-mint/ONE REGEN, budget raises, paid-surface behavior, legal,
+the parked owner-decision queue); (6) THE TAIL it hands back to the owner (PUSH#1→soak→
+tuning→ONE REGEN→walk→PUSH#2→THE VERY END→PUSH#3). It supersedes START_HERE's Claude-
+specific §6 for this successor. PRODUCED right before the loop (state is live then; writing
+it now would go stale) — but the SPEC is fixed here so it can't be shortchanged.
 **⬛⭐ DEEP COUPLINGS D-2 COMPLETE + D-3 BLOCKED ON A REAL DESIGN DEFECT (2026-07-19,
 claude/deep-couplings-cred @ b986b4e8, 4 commits atop 29f7abc9 — manager-verified).**
 D-2 PER-NPC CREDIBILITY done: lazy npcCredibility leaf + statecraft threading + the ladder
