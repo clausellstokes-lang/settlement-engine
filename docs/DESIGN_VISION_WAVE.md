@@ -235,6 +235,66 @@ auspice + DM screen + presets + covenant/bounty pages) and LANE V-G (campaign im
 + world book + curated seeds + table companion responsive pass); R-5/R-10 ride
 cycle 2 and the regen protocol respectively. Cycle 2 resurveys ALL of it.
 
+## R-11..R-30 — THE EXHAUSTIVE SWEEP (recorded 2026-07-20 after cycle 1; disposition
+## recommended per item; commissioning is the owner's except the cycle-2
+## structural-prevention intake, sanctioned by the loop's own class-prevention mandate)
+
+### Tier 1 — cycle-2 structural-prevention intake (class-prevention of REVIEWED classes;
+### joins the earlier four: load-normalizer walker · async-totality lint · courier seam
+### registry · determinism lint widened; plus fixture-realism law + refuter-cite check)
+R-11 ANACHRONISM LINT: the house voice as machinery — a deny-vocabulary scan (modern
+  idioms, %, 'okay', design-jargon) over user-facing strings (the content-2 §-leak
+  class generalized; en.js + beat composers + prose pools in scope).
+R-12 PER-CHUNK SIZE CEILINGS: the eager closure is ratcheted; LAZY chunks are not — a
+  per-chunk budget manifest (ceilings at measured+margin) so no lazy chunk quietly
+  becomes the next 1.8MB vendor-pdf.
+R-13 TICK-TIME BUDGET GOLDEN: runtime perf has no pin — a reference-world per-tick
+  wall-time band (generous, CI-advisory) so an O(n²) coupling regression is caught
+  before the soak.
+
+### Tier 2 — small riders on already-commissioned Vision lanes (recommend folding in)
+R-14 CRASH FORENSICS BY CONSTRUCTION (rider on Wave-E error boundary + V-8): the error
+  report captures seed + tick + flags + build hash (NEVER world state) — determinism
+  makes every user crash locally reproducible from four small values. No competitor
+  can have this; it is the determinism dividend applied to support.
+R-15 TUNING-BAND MANIFEST (rider on the soak protocol): pre-declare target
+  distribution bands per coupling/flag (contest rates, bond saturation, festival
+  cadence) BEFORE the soak — turning tuning from taste-reaction into
+  contract-verification; the F3/V-A flags each ship a proposed band.
+R-16 'THE WORLD DEEPENED' LETTER (rider on V-2 + the regen): the post-regen one-time
+  in-product letter announcing the newly-lit layers in the chronicler's voice — the
+  flag-lighting becomes a product MOMENT, not a silent diff.
+R-17 SHAREABLE LETTER (rider on V-2/V-13): export the chronicler's letter as a
+  styled image/PDF — every week's session prep doubles as a social artifact.
+R-18 WORKER PARANOIA MODE (rider on V-8): a dev-only flag running sync+worker in
+  parallel and diffing — continuous self-verification of the determinism claim.
+R-19 SAVE MUSEUM (rider on lifecycle dimension): a committed corpus of REAL
+  historical save files from each schema era; the load path must accept every
+  exhibit forever (the tolerant-loader claim, pinned against reality).
+
+### Tier 3 — owner queue (product/UX judgment calls, each cheap)
+R-20 COMMAND PALETTE (cmd-K): jump to any settlement/NPC/panel — power-DM speed.
+R-21 UNDO HISTORY SURFACE: the byte-exact undo exists engine-side; give it a visible
+  history affordance (trust made touchable).
+R-22 DESIGNED EMPTY STATES: first-open / no-campaign / feature-dark states get the
+  same craft as full states (the ten-second first impression).
+R-23 ERROR-COPY REGISTER: user-facing error strings routed through the copy registry
+  (voice-consistent failures; i18n door stays open).
+R-24 NAME-COLLISION AUDIT: realm-scale settlement/NPC name dedup verification (the
+  faction dedup precedent extended).
+
+### Tier 4 — launch ops (before or at launch; owner-executed with recipes)
+R-25 EDGE LOAD TEST: a k6-style pass on the AI + checkout functions at expected
+  launch burst (the burst gates are built; prove the ceilings hold).
+R-26 PUBLIC STATUS PAGE + incident template (the runbooks' public face).
+R-27 RECURRING RESTORE DRILL: the backup/PITR verification on a calendar, not once.
+R-28 AI SPEND ALARM: daily spend telemetry thresholds alongside the per-user gates.
+
+### Tier 5 — go-to-market seeds (zero mechanics, high leverage)
+R-29 THE FIRST HUNDRED: founding cohort acknowledgment page (community seeding).
+R-30 CREATOR KIT + PUBLIC ROADMAP: press/creator asset bundle (curated seeds,
+  timelapse clips, screenshots) + a public roadmap page fed from the vNext ledger.
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
