@@ -82,8 +82,14 @@
     (minifold) with NUL-scan + strict/tsc/lint + focused batteries + two-shard suite
     at wave end; per-lane briefs = scratchpad VISION_LANE_BRIEFS.md (A-E) + compose
     F-I from the design doc with the same COMMON template.
-- AFTER THE WAVE: ROUND 3 CYCLE 2 (13 dimensions + intake + critic → refuters
-  [add the citation spot-check] → fix waves → checkpoint) over the ENLARGED product;
+- AFTER THE WAVE: ROUND 3 CYCLE 2 (the TWENTY-BAR A+ standard — bars 19 AI
+  STRUCTURE + 20 THE STORY added 2026-07-20 by owner commission, THE STORY is
+  the CAPSTONE graded last; + intake + critic → refuters [add the citation
+  spot-check] → fix waves → checkpoint) over the ENLARGED product; cycle-2
+  instruments now include THE STORY CENSUS (seeded decade retold, beats
+  receipt-backed, arcs counted) and the AI-structure proofs (per-surface
+  source-scan walkers · citation phantom-ref executed tests · clerk accuracy
+  fixtures · model-pin/drift declaration);
   cycle-2 prevention intake: anachronism lint · per-chunk ceilings · tick-time golden ·
   load-normalizer walker · async-totality lint · courier seam registry · determinism
   lint widened · fixture-realism law · tracked-flags reconciliation+walker · AI

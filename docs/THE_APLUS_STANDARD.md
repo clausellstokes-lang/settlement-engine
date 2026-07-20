@@ -9,7 +9,7 @@ A+ ACROSS THE BOARD does not mean "no known defects." It means EXCELLENCE MADE
 STRUCTURAL: quality that persists unattended, enforced by the codebase itself against
 every future hand — including its authors'.
 
-## The eighteen bars, maximally expressed
+## The twenty bars, maximally expressed
 1. CORRECTNESS — no discovered class of bug retains a habitat. A new defect requires
    inventing a new KIND of mistake; every found class has its remover (walker, lint,
    ratchet, chokepoint) standing.
@@ -101,6 +101,55 @@ every future hand — including its authors'.
     Ceiling doctrine: sustained immersion is CERTIFIED only by real players lost
     in real worlds — the lived tier signs the final word; the census signs
     everything the repo controls.
+
+19. AI USE & STRUCTURE — THE CLERK'S CONSTITUTION (ADDED 2026-07-20, the owner's
+    question; distinct from bar 7, which grades the economics — this bar grades
+    the ARCHITECTURE): the finite-semantics law as PROVABLE STRUCTURE, not prompt
+    discipline — no code path exists where model output writes a mechanical
+    field, and a standing source-scan walker proves it (the import wall's
+    source-scan pin is the prototype; every AI surface gets its equivalent).
+    GROUNDED TRUTHFULNESS: every AI statement about the world carries citations
+    resolved SERVER-SIDE against actual world state, phantom references rejected
+    by executed tests, uncited sentences visibly conjecture-styled — the AI
+    cannot lie about the world without the interface confessing it. NO
+    LOAD-BEARING AI: every AI surface has a deterministic fallback and the
+    product is FULLY functional with AI off — AI is dressing on truth, never
+    truth's source. ONE WALL: every AI surface rides the same gate stack
+    (session, burst, metering, kill-switch), census-pinned so a new surface
+    CANNOT skip a guard. DRIFT CONTAINMENT: models pinned, prompts versioned,
+    output schemas validated-with-retry; a model swap is a DECLARED event with
+    acceptance re-verification, never a silent drift. CLERK QUALITY
+    INSTRUMENTED: bucketing accuracy measured against labeled fixtures; polished
+    text held to bar 8's register. PROMPT PRIVACY: grounding bundles are
+    whitelisted projections — no PII reaches a provider by construction.
+    Ceiling doctrine: the clerk's judged quality on live free text is certified
+    by usage; the structure is provable NOW, and all of it is.
+
+20. THE STORY — COHESIVE EMERGENT STORYTELLING & LEGIBILITY (ADDED 2026-07-20;
+    THE CAPSTONE, placed last BY THE OWNER'S RULING because it is the most
+    important thing: the bar the other nineteen exist to serve). The product's
+    telos is not simulation — it is STORY THE TABLE CAN TRUST AND RETELL. A+
+    means: every seeded century contains discoverable ARCS, not event lists —
+    multi-system causal chains that read as cause, escalation, turn, and
+    consequence, retrievable by the cause-walk; the chronicler NARRATES rather
+    than logs (this month connected to its past — the grain mercy of year three
+    returning as the alliance of year nine); LEGIBILITY: any beat's story is
+    reconstructible in a bounded walk of receipts, and a stranger can retell a
+    decade accurately after reading its letters alone; COHESION ACROSS
+    TELLINGS: letter, chronicle, timelapse, world book, and cause-walk all tell
+    THE SAME story from one narrative substrate (claims-parity applied to
+    narrative — no surface may embellish beyond the ledgers); EPISTEMIC DRAMA
+    ON PURPOSE: truth, court belief, and rumor diverge by design and every
+    surface keeps them straight, so dramatic irony is a feature with receipts,
+    never a bug; PACING AS CRAFT: quiet stretches have texture, cascades have
+    build-up and aftermath (the tempo governor's bands, soak-certified). THE
+    INSTRUMENT: THE STORY CENSUS — seeded decade-walkthroughs in which the
+    grader must retell the decade as a story, every beat receipt-backed, arcs
+    counted and their link-depth measured; a decade that can only be summarized
+    as "things happened" FAILS regardless of how many events fired. Ceiling
+    doctrine: whether the story MOVES someone is certified only by real tables
+    — the lived tier signs the final word; the census signs that the arcs
+    exist, connect, narrate identically everywhere, and never contradict.
 
 ## Considered and deliberately NOT dimensions (recorded so the audit is complete)
 Learnability (owned by bar 3's ten-minute + empty-state craft) · maintainability

@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE STANDARD RAISED TO TWENTY BARS (owner commission, 2026-07-20):**
+docs/THE_APLUS_STANDARD.md amended upward (the only permitted direction) with
+BAR 19 — AI USE & STRUCTURE, the clerk's constitution (distinct from bar 7's
+economics: finite-semantics as PROVABLE structure via per-surface source-scan
+walkers · server-resolved citations with executed phantom-ref rejection · NO
+load-bearing AI, deterministic fallback everywhere · ONE wall census-pinned ·
+model-pin/versioned-prompt drift containment with DECLARED swaps · clerk
+accuracy on labeled fixtures · whitelisted-projection prompt privacy), and
+BAR 20 — THE STORY, cohesive emergent storytelling & legibility, THE CAPSTONE
+placed LAST by the owner's ruling ("that, of everything, is the most important
+thing"): arcs not event lists, the chronicler narrates not logs, any beat
+reconstructible by a bounded receipt-walk, ONE narrative substrate across
+letter/chronicle/timelapse/book/cause-walk (claims-parity for narrative),
+epistemic drama on purpose with the layers kept straight, pacing as craft;
+instrument = THE STORY CENSUS (a seeded decade must be RETOLD as a story,
+every beat receipt-backed — "things happened" FAILS); lived tier signs whether
+it moves anyone. Cycle 2 grades against ALL TWENTY; the two new instruments
+enter the cycle-2 plan. Bars 19's structure claims are provable NOW; bar 20's
+census runs in cycle 2 and its rates await the soak.**
 **⬛⭐⭐ VISION LANE V-O SHIPPED — the platform completes itself (2026-07-20,
 claude/vision-o @ b3692333, base 212758ad, 5 lettered commits, FOLD-READY;
 manager-verified tip+clean).** V-27a LOCALIZATION SCAFFOLD: real locale registry
