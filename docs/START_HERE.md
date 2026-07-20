@@ -35,7 +35,8 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
   restoration-compendium (running) · the burn-down commits on deep-craft itself.
 - Phase-D: census COMPLETE (docs/PHASE_D_RESTORATION_CENSUS_2026-07-19.md);
   restoration ledger at ZERO PENDING (23 RESTORATION-OWED being worked by the
-  sweeps). Expected reds NOW: the 4 parked goldens + aiGrounding freshness;
+  sweeps). Expected reds NOW: the 4 parked goldens (aiGrounding freshness was
+  CURED at the deep-wave fold — no longer expected);
   organicSamples was CURED at C3-e (a red there = new drift); pages-lineage
   branches carry the declared kill-list red until fold 2.
 - The 15-min lane-keeper heartbeat + the ledger rows (newest-first around line
@@ -57,10 +58,11 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
   deep-craft@9906d793 pushed/verified. The lane branches were NOT yet pushed
   (pre-push hook rejected under machine load — retry when quiet; hook runs the
   full suite, ~7 min; NEVER --no-verify).
-- **Expected suite reds on the composite lineage — EXACTLY 5**: the 4 parked
+- **Expected suite reds on the composite lineage — EXACTLY 4**: the 4 parked
   golden families (generatorGoldenMaster, beliefMapGolden, worldpulseDeityGolden,
-  pdf goldenViewModel) + aiGroundingBundle.freshness (cure queued at the deep-wave
-  fold: `npm run build:edge-shared`, declared). ANY other red: triage by name vs
+  pdf goldenViewModel). aiGroundingBundle.freshness was CURED at the deep-wave
+  fold (`npm run build:edge-shared`) and is no longer a red. THE_RESURVEY_HANDOFF
+  §3g carries the live baseline. ANY other red: triage by name vs
   the base tip; timeout-shaped reds under machine load are FLAKES — isolation
   re-run before diagnosis (proven ~6× on 2026-07-18).
 
