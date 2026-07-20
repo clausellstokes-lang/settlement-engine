@@ -61,6 +61,14 @@ export const ROUTES = Object.freeze([
   // indexable, footer-linked (no top-nav block), no guard. Lazy route; its lineage
   // read is fail-closed (components/founders/FoundersPage.jsx).
   { view: 'founders',              path: '/founders',              title: 'Founders' },
+  // The First Hundred: the founding-cohort honor roll (an unpriced acknowledgment of
+  // early members, distinct from the paid Founder seats). Public + indexable, no
+  // top-nav block, no guard. Reached by direct link + the sitemap (it links out to
+  // the Founders page). Lazy route; renders only the committed opted-in roll.
+  { view: 'first-hundred',         path: '/first-hundred',         title: 'The First Hundred' },
+  // The public roadmap: rendered only from the committed vNext ledger. Public +
+  // indexable, no top-nav block, no guard. Lazy route.
+  { view: 'roadmap',               path: '/roadmap',               title: 'Roadmap' },
   // Legal / trust pages. Public + indexable (no nav block — they live in the
   // footer, not the top nav; no guard — anyone can read them). Content is
   // derived from the actual product behavior (see components/legal/*).

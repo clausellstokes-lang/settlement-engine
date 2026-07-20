@@ -56,6 +56,10 @@ const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'
 // The public Founder seat-lineage page. Lazy — off the first-paint graph; its lineage
 // read (lib/founderLineage.js) is dynamically imported on mount and fails closed.
 const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
+// The First Hundred honor roll (/first-hundred) and the public roadmap (/roadmap).
+// Lazy — off the first-paint graph; each renders from a committed data module.
+const FirstHundredPage  = lazy(() => import('./components/founders/FirstHundredPage.jsx'));
+const RoadmapPage       = lazy(() => import('./components/howto/RoadmapPage.jsx'));
 
 export function Loading() {
   // The diegetic loading emblem — the still house device over the plain word
@@ -100,6 +104,8 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersPage onNavigate={setView} />}
+      {view === 'first-hundred' && <FirstHundredPage onNavigate={setView} />}
+      {view === 'roadmap'     && <RoadmapPage onNavigate={setView} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
       {/* /refunds is retired as a standalone page — its content is now the Terms
