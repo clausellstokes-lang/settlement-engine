@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-A SHIPPED — the map's knowledge reaches the prose, the court
+gains an heir (2026-07-20, composite-r4 @ 299f2843; manager-validated).** V-6 BIOME
+TRUTH: per-cell biome PROVED reachable at canonize (pack.biome[cellId] — no
+degradation needed); additive digest key spread LAST (absent ⇒ byte-identical);
+biomeTexture corpus leaf; road-scene per-hop texture; virtual biomeTruthEnabled —
+JUDGMENT ratified: the flag exists because the keystone golden fixture CARRIES biome
+data and unconditional emission would force a forbidden re-mint. V-7 HEIRS-LITE:
+designated heir (strongest bond, codepoint tie-break) SEATS on the coup path only
+(the faceless path; the challenge path keeps its meritocratic winner — ratified);
+bounded ≤0.4 dampened memory inheritance marked inherited:true on ALL succession
+paths; investiture beat; conservation pinned. Receipts: strict 0 · tsc 0 · lint 0 ·
+dormancy 62 · ladder+ratchets 144 · new pins 18 · dist 162 · closure 1,024,734
+(+60 B module-graph reshuffle, zero eager feature symbols — grep-proven). DEFERRED
+SEAM (recorded): roads travel-news biome texture (corpus ready; rides the roads beat
+pipeline later). CYCLE-2 VERIFY ITEM: heirs+contestedGoals lit together (the contest
+pass reassigns standings after inheritance — unexercised, flagged not defect).
+PARALLEL STATE: V-C/V-E/V-I running in their worktrees; V-B dispatching into
+minifold — 4 lanes hot per the owner's order. THE A+ STANDARD committed as
+docs/THE_APLUS_STANDARD.md — the loop's grading law from cycle 2 forward.**
 **⬛⭐⭐⭐ ROUND 3 CYCLE 1 IS CLOSED — every verified finding fixed, built, queued, or
 deferred-with-rationale (2026-07-20, composite-r4 @ 212758ad).** WAVE F4 @ 5b436227
 (13 findings: THE LADDER IS VISIBLE — PowerTab section, render+secrets pins, lazy ·
