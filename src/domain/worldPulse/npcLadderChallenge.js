@@ -150,13 +150,19 @@ export function defenseScore(d, ctx) {
 
 /** The windows a defender is vulnerable through (§2). @param {Combatant} d @param {ChallengeCtx} ctx
  *  @param {boolean} defenderExposed @param {boolean} [faithRuptured] the high priest against his god (4b)
+ *  @param {boolean} [defenderLieExposed] D-2: a fresh lie-exposure this advance (the exposed_liar window)
  *  @returns {string[]} the open window reasons ([] ⇒ no window) */
-export function openWindows(d, ctx, defenderExposed, faithRuptured = false) {
+export function openWindows(d, ctx, defenderExposed, faithRuptured = false, defenderLieExposed = false) {
   /** @type {string[]} */
   const w = [];
   if (ctx.factionFalling) w.push('faction_power_falling');
   if (d.standing < LADDER_TUNING.STAND_BASELINE) w.push('incumbent_underperforming');
   if (defenderExposed || d.stigma) w.push('revealed_corruption');
+  // D-2 (design §6): a fresh lie-exposure opens the exposed_liar window — the sibling of
+  // revealed_corruption (a caught liar invites challengers exactly as a caught schemer does).
+  // Absent unless npcCredibility is lit AND the ladder consumed a fresh deposit ⇒ dark worlds
+  // never push it (byte-identical). The lie-stigma itself feeds revealed_corruption thereafter.
+  if (defenderLieExposed) w.push('exposed_liar');
   if (faithRuptured) w.push('faith_rupture'); // §4b PERMANENT — a head against his faith cannot rest
   return w;
 }
@@ -206,6 +212,7 @@ function grudgeSevOf(rec, defenderNid) {
  * @param {number} a.cooldownUntil @param {number} a.weeks @param {number} a.tick @param {string} a.seed
  * @param {boolean} a.factionRising @param {boolean} a.factionFalling
  * @param {Set<string>} a.freshExposed @param {Set<string>} [a.faithRuptured] the ruptured defenders (4b)
+ * @param {Set<string>} [a.freshLieExposed] D-2: defenders freshly exposed as liars this advance
  * @param {Record<string, unknown>} a.worldState @param {number} a.realmBudget
  * @returns {ChallengePlan}
  */
@@ -213,6 +220,7 @@ export function resolveFactionChallenges(a) {
   const T = CHALLENGE_TUNING;
   const { rungs, npcs, npcByNid, faction, fkey, cooldownUntil, weeks, tick, seed, factionRising, factionFalling, freshExposed, worldState, realmBudget } = a;
   const faithRuptured = a.faithRuptured instanceof Set ? a.faithRuptured : new Set();
+  const freshLieExposed = a.freshLieExposed instanceof Set ? a.freshLieExposed : new Set();
   const empty = /** @type {ChallengePlan} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 });
   if (cooldownUntil > weeks) return empty;           // (3) the interregnum
   if (realmBudget <= 0) return empty;                 // (4) the realm E0 cap is spent
@@ -247,7 +255,7 @@ export function resolveFactionChallenges(a) {
   for (let i = 1; i < rungCount; i++) {
     const defender = mk(i - 1);
     defender.isChallenging = straining.has(defender.nid); // decided on the earlier iteration
-    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid));
+    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid), freshLieExposed.has(defender.nid));
     if (!windows.length) continue;
     const challenger = mk(i);
     challenger.grudgeVsDefender = grudgeSevOf(npcs[challenger.nid], defender.nid);

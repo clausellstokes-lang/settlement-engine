@@ -58,6 +58,11 @@ export const LADDER_TUNING = Object.freeze({
   STIGMA_HALF_LIFE_WEEKS: 312, // ~6 years base — "a caught schemer climbs at half strength for years"
   GRUDGE_HALF_LIFE_WEEKS: 156, // ~3 years base — grudges are real but fade
   STIGMA_MINT_SEV: 1.0,        // a fresh exposure stamps a full mark (refresh extends)
+  // D-2 (design §6): a fresh LIE-exposure mints the SAME stigma shape, sev SCALED by the
+  // lie's magnitude band (0..4) with a floor — a band-4 whopper stigmatizes as fully as a
+  // corruption exposure; even a small caught lie stings. A caught liar and a caught schemer
+  // wear the same mark (both feed revealed_corruption + the STIGMA_CHALLENGE_TAX thereafter).
+  LIE_STIGMA_SEV_FLOOR: 0.4,
   MARK_PRUNE_EPSILON: 0.05,
   // §8 THE STANDING LOOP (ladder→faction feedback, single-writer to the mirror):
   // (a) leadership quality → a bounded power modifier; (b) churn instability (a decaying
@@ -201,11 +206,17 @@ function decayMark(sev, deltaWeeks, halfLife, bandMult) {
  * exposure (timesExposed bumped or newly ousted vs the last-seen values) and mint/refresh
  * the stigma mark. Returns the updated standing + whether a fresh exposure fired this
  * advance (the widest challenge window §2 + the §10 tax trigger). PURE.
+ * D-2 (design §6): `lieExposure` is the ladder-consumed deposit ({tick, band}, already
+ * filtered by npcCredibility.freshLieExposureFor for the one-tick lag + the since check). When
+ * present, a fresh lie-exposure mints/refreshes the SAME stigma (sev band-scaled), stamps
+ * lastLieSeen (consume-once), and reports freshLieExposed (the exposed_liar window). A
+ * REPUTATION cost, never a fate (§0.5): the NPC keeps his rung, marked.
  * @param {import('./npcLadderKernel.js').LadderStanding} st @param {Record<string, unknown>} npc
  * @param {number} bandMult @param {number} weeks @param {number} tick
- * @returns {{ st: import('./npcLadderKernel.js').LadderStanding, freshExposed: boolean }}
+ * @param {{ tick: number, band: number } | null} [lieExposure]
+ * @returns {{ st: import('./npcLadderKernel.js').LadderStanding, freshExposed: boolean, freshLieExposed: boolean }}
  */
-export function maintainMarks(st, npc, bandMult, weeks, tick) {
+export function maintainMarks(st, npc, bandMult, weeks, tick, lieExposure = null) {
   const T = LADDER_TUNING;
   // Decay stigma + grudges on their band-scaled clocks; prune spent marks.
   let stigma = st.stigma;
@@ -229,10 +240,23 @@ export function maintainMarks(st, npc, bandMult, weeks, tick) {
     // Mint or REFRESH+extend the stigma mark (§10 second-exposure refreshes).
     stigma = { sev: T.STIGMA_MINT_SEV, week: weeks, tick: Math.floor(tick) };
   }
-  return {
-    st: { ...st, stigma, grudges, lastExposed: exposedNow, wasOusted: oustedNow },
-    freshExposed,
-  };
+  // D-2 THE LIE-STIGMA (deposit-and-consume, one tick after exposure): mint/refresh the same
+  // stigma shape, sev SCALED by the lie's magnitude band, keeping the STRONGER mark if a
+  // corruption exposure also fired this tick. Stamp lastLieSeen so the deposit fires once.
+  let freshLieExposed = false;
+  let lastLieSeen = st.lastLieSeen;
+  if (lieExposure && typeof lieExposure === 'object') {
+    const band = clamp(Math.round(num(lieExposure.band, 0)), 0, 4);
+    const lieSev = clamp01(T.LIE_STIGMA_SEV_FLOOR + (1 - T.LIE_STIGMA_SEV_FLOOR) * (band / 4));
+    const sev = round4(stigma ? Math.max(stigma.sev, lieSev) : lieSev);
+    stigma = { sev, week: weeks, tick: Math.floor(tick) };
+    lastLieSeen = Math.floor(num(lieExposure.tick, tick));
+    freshLieExposed = true;
+  }
+  /** @type {import('./npcLadderKernel.js').LadderStanding} */
+  const nextSt = { ...st, stigma, grudges, lastExposed: exposedNow, wasOusted: oustedNow };
+  if (lastLieSeen !== undefined) nextSt.lastLieSeen = lastLieSeen;
+  return { st: nextSt, freshExposed, freshLieExposed };
 }
 
 // ── Record normalization (defensive reads of the persisted shape) ─────────────
@@ -250,6 +274,9 @@ export function normalizeStanding(v, weeks) {
   };
   if (typeof o.lastExposed === 'number' && Number.isFinite(o.lastExposed)) st.lastExposed = Math.floor(o.lastExposed);
   if (o.wasOusted === true) st.wasOusted = true;
+  // D-2: the last lie-exposure tick the ladder already stigmatized (consume-once). Additive-
+  // optional — absent on legacy records ⇒ a stale deposit re-fires once, then latches.
+  if (typeof o.lastLieSeen === 'number' && Number.isFinite(o.lastLieSeen)) st.lastLieSeen = Math.floor(o.lastLieSeen);
   return st;
 }
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderGoal|null} */
@@ -331,6 +358,7 @@ function sortedStanding(st) {
   }
   if (typeof st.lastExposed === 'number' && st.lastExposed > 0) out.lastExposed = st.lastExposed;
   if (st.wasOusted === true) out.wasOusted = true;
+  if (typeof st.lastLieSeen === 'number' && st.lastLieSeen > 0) out.lastLieSeen = st.lastLieSeen; // D-2 consume-once
   return out;
 }
 /** The codepoint-sorted persisted record (byte-stable serialization). Empty ⇒ null so an

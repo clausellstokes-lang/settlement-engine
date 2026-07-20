@@ -82,6 +82,7 @@ import {
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
+import { freshLieExposureFor, hasNpcCredibilityLedger } from './npcCredibility.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -109,6 +110,7 @@ import { faithRuptured } from './npcLadderCoherence.js';
  * @property {Record<string, LadderGrudge>} grudges — §4e D5 marks, keyed by defender npcId
  * @property {number} [lastExposed] last-seen timesExposed count (fresh-exposure detection)
  * @property {boolean} [wasOusted] last-seen ousted flag (fresh-exposure detection)
+ * @property {number} [lastLieSeen] D-2: last lie-exposure tick already stigmatized (consume-once)
  */
 /** @typedef {{ condition: import('../autonomy/stopConditions.js').StopCondition, stakes: number,
  *   horizonWeeks: number, mintedWeek: number, mintedRung: number, startScore: number,
@@ -231,6 +233,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   const weeks = num(asObject(asObject(worldState).calendar).elapsedWeeks, now2);
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
   const itemById = new Map(items.map((it) => [String(it.id), it]));
+  // D-2: the lie-stigma hook is live only when the per-NPC credibility ledger has
+  // materialized (⇒ npcCredibilityEnabled was lit). Dark ⇒ no deposit read, no stigma, the
+  // ladder is byte-identical (the ladder-dark twin's mirror image — credibility runs, ladder
+  // doesn't; here the ladder runs, credibility didn't).
+  const lieStigmaLit = hasNpcCredibilityLedger(worldState);
 
   // The S7 reading frame for goal predicates — the registry evaluator resolves causal
   // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
@@ -323,6 +330,8 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       // lifecycle (§3.2 mint/evolve, §9 weighted deeds, §11.3 partial-progress deposits).
       /** @type {Set<string>} the rung-holders freshly exposed for corruption THIS advance */
       const freshExposed = new Set();
+      /** @type {Set<string>} D-2: the rung-holders freshly exposed as LIARS THIS advance */
+      const freshLieExposed = new Set();
       /** @type {Set<string>} §4b religious-faction heads standing AGAINST their faith */
       const ruptured = new Set();
       rungs.forEach((nid, rungIndex) => {
@@ -341,8 +350,13 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
             since: weeks, week: weeks, goal: null, stigma: null, grudges: {},
           };
         }
-        const marks = maintainMarks(st, npcObj, bandMult, weeks, now2);
+        // D-2 (design §6, law 14): consume a fresh lie-exposure deposit — one tick after
+        // exposure, once (freshLieExposureFor filters the lag + the last-seen). The stigma
+        // is minted through the ladder's own writer (maintainMarks); statecraft only deposits.
+        const lieExp = lieStigmaLit ? freshLieExposureFor(worldState, nid, num(st.lastLieSeen, -1), now2) : null;
+        const marks = maintainMarks(st, npcObj, bandMult, weeks, now2, lieExp);
         if (marks.freshExposed) freshExposed.add(nid);
+        if (marks.freshLieExposed) freshLieExposed.add(nid);
         npcs[nid] = applyGoalLifecycle(marks.st, {
           npc: npcObj, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
         });
@@ -362,7 +376,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         ? /** @type {ReturnType<typeof resolveFactionChallenges>} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 })
         : resolveFactionChallenges({
           rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
-          seed, factionRising, factionFalling, freshExposed, faithRuptured: ruptured, worldState,
+          seed, factionRising, factionFalling, freshExposed, freshLieExposed, faithRuptured: ruptured, worldState,
           realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
         });
       if (truncated) rec.cooldownUntil = Math.max(rec.cooldownUntil, weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS);
