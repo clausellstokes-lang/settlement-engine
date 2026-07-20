@@ -65,6 +65,12 @@ export const LADDER_TUNING = Object.freeze({
   BOND_HALF_LIFE_WEEKS: 156,   // ~3 years base — a friendship fades like a grudge
   BOND_MINT_SEV: 0.5,          // a formation event deposits half a mark (additive, capped)
   BOND_MAX_SEV: 1.0,           // the bounded cap (a bond cannot exceed a full mark)
+  // D-4f LINKED / SUPPORTIVE GOALS (the positive mirror of tunnel-vision): a strong bond
+  // toward a patron with a live primary goal lets a backer mint a SUPPORT goal instead of a
+  // primary; a bond above the join floor lets a peer JOIN the patron's side of a contest.
+  // Consumed by the D-4 contest machinery (npcLadderGoals/Contest) when both flags light.
+  SUPPORT_BOND_FLOOR: 0.5,     // sev ≥ this ⇒ eligible to mint a support goal toward the patron
+  JOIN_BOND_FLOOR: 0.4,        // sev ≥ this ⇒ eligible to join the patron's contest side
   STIGMA_MINT_SEV: 1.0,        // a fresh exposure stamps a full mark (refresh extends)
   // D-2 (design §6): a fresh LIE-exposure mints the SAME stigma shape, sev SCALED by the
   // lie's magnitude band (0..4) with a floor — a band-4 whopper stigmatizes as fully as a
@@ -410,6 +416,24 @@ export function strongestBond(st) {
     if (!best || b.sev > best.sev) best = { nid, sev: b.sev, kind: b.kind };
   }
   return best;
+}
+
+/** The NPCs a standing is bonded to at or above `floor`, strongest-first (codepoint tiebreak) —
+ *  the D-4f contest-JOINING candidate list (a bonded peer above JOIN_BOND_FLOOR joins the
+ *  patron's side) and the support-goal patron pick. Empty when no bonds / none qualify. Pure.
+ *  @param {import('./npcLadderKernel.js').LadderStanding|null|undefined} st @param {number} floor
+ *  @returns {Array<{ nid: string, sev: number, kind: string }>} */
+export function bondedPeersAbove(st, floor) {
+  const bonds = st && st.bonds ? st.bonds : null;
+  if (!bonds) return [];
+  const min = Number(floor) || 0;
+  /** @type {Array<{ nid: string, sev: number, kind: string }>} */
+  const out = [];
+  for (const nid of Object.keys(bonds).sort(compareCodepoint)) {
+    const b = bonds[nid];
+    if (num(b.sev, 0) >= min) out.push({ nid, sev: b.sev, kind: b.kind });
+  }
+  return out.sort((a, b) => (b.sev - a.sev) || compareCodepoint(a.nid, b.nid));
 }
 
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderFactionRec} */

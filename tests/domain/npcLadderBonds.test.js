@@ -11,7 +11,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   LADDER_TUNING, BOND_KINDS, mintBond, normalizeBonds, bondSevToward, strongestBond,
-  maintainMarks, normalizeStanding, sortedRecord, mirrorOf,
+  bondedPeersAbove, maintainMarks, normalizeStanding, sortedRecord, mirrorOf,
 } from '../../src/domain/worldPulse/npcLadderState.js';
 
 const T = LADDER_TUNING;
@@ -85,6 +85,26 @@ describe('D-7e persistence — round-trip + the drop-when-empty dormancy contrac
     const rec = { factions: { 'fac.x': { rungs: ['npc:a'], cooldownUntil: 0, lastPower: 0, instability: 0, week: 0 } }, npcs: { 'npc:a': normalizeStanding({ stock: 5, since: 0, week: 0, grudges: {}, bonds: { 'npc:b': { sev: 1, week: 0, kind: 'loyalty' } } }, 0) } };
     const mirror = mirrorOf(rec, new Map([['npc:a', 'Alia']]), new Map());
     expect(JSON.stringify(mirror)).not.toMatch(/bond/);
+  });
+});
+
+describe('D-4f the bond-read API — the memory side of linked/supportive goals', () => {
+  const st = { grudges: {}, bonds: {
+    'npc:patron': { sev: 0.7, week: 0, kind: 'loyalty' },   // ≥ SUPPORT_BOND_FLOOR (0.5)
+    'npc:friend': { sev: 0.45, week: 0, kind: 'friendship' }, // ≥ JOIN_BOND_FLOOR (0.4), < SUPPORT
+    'npc:acquaint': { sev: 0.3, week: 0, kind: 'gratitude' }, // below both floors
+  } };
+  it('exposes the SUPPORT / JOIN floors the D-4 contest machinery consumes', () => {
+    expect(LADDER_TUNING.SUPPORT_BOND_FLOOR).toBe(0.5);
+    expect(LADDER_TUNING.JOIN_BOND_FLOOR).toBe(0.4);
+    expect(LADDER_TUNING.SUPPORT_BOND_FLOOR).toBeGreaterThan(LADDER_TUNING.JOIN_BOND_FLOOR);
+  });
+  it('bondedPeersAbove returns qualifying peers strongest-first (the join/support candidate list)', () => {
+    const joiners = bondedPeersAbove(st, LADDER_TUNING.JOIN_BOND_FLOOR);
+    expect(joiners.map((p) => p.nid)).toEqual(['npc:patron', 'npc:friend']); // acquaint below floor
+    const supporters = bondedPeersAbove(st, LADDER_TUNING.SUPPORT_BOND_FLOOR);
+    expect(supporters.map((p) => p.nid)).toEqual(['npc:patron']); // only the strong tie
+    expect(bondedPeersAbove({ grudges: {} }, 0.4)).toEqual([]); // no bonds ⇒ none
   });
 });
 
