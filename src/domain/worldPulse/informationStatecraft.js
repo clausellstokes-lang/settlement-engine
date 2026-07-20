@@ -39,6 +39,15 @@
  * PURE + lazy: imported ONLY by the dynamically-loaded pulse kernel (a lazy engine
  * leaf) — zero first-paint bytes. No Date, no Math.random, no tier/auth reads; all
  * randomness forks off the pulse rng confluence; all folds codepoint-sorted.
+ *
+ * BOUNDARY (design §0.5 amendment, owner ruling 2026-07-19 — the anonymity law amended in
+ * place, never crossed): paid eyes and exposed agents are ANONYMOUS AGGREGATES; a named NPC
+ * may be CITED as a channel in prose but is never burned, turned, or executed by the engine.
+ * PER-NPC CREDIBILITY (DEEP COUPLINGS D-2, npcCredibility.js) is the sanctioned exception: a
+ * personal credibility stock and a lie-stigma standing hit are REPUTATION costs, NOT fate
+ * resolutions — no exposure removes, kills, or disappears the NPC. Fates remain unresolvable
+ * everywhere. The LIE verb now stamps a SPOKESPERSON (the court's mouthpiece) so the personal
+ * charge can land on exposure; the deeper no-fate carve is preserved intact.
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
@@ -46,6 +55,12 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger
 import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { relationshipKeyFromEdge } from './relationshipState.js';
+import { npcId } from './npcAgency.js';
+import { importanceWeight } from '../entities/npcs.js';
+import {
+  npcCredibilityActive, npcCredibilityWeightOf, compositeCredibilityWeight,
+  advanceNpcCredibility, hasNpcCredibilityLedger,
+} from './npcCredibility.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 
@@ -200,11 +215,26 @@ export function credibilityScoreOf(worldState, id, tick) {
  */
 export function makeCredibilityWeightFn(worldState, tick) {
   if (!infoStatecraftActive(worldState)) return null;
-  if (!hasSpatialLedger(worldState, 'credibility')) return null;
+  // D-2: also serve the closure when only the per-NPC ledger has materialized (a composite
+  // source is still weightable). Byte-safe: a settlement-only source with no credibility
+  // ledger weighs EXACTLY 1.0 ⇒ identical to passing null.
+  if (!hasSpatialLedger(worldState, 'credibility') && !hasNpcCredibilityLedger(worldState)) return null;
   const ledger = asObject(getSpatialLedger(worldState, 'credibility'));
   const now = Math.floor(finiteNumber(tick, 0));
+  const npcCredLit = npcCredibilityActive(worldState);
   return (/** @type {string} */ sourceId) => {
-    const entry = /** @type {CredibilityEntry | undefined} */ (ledger[String(sourceId)]);
+    const raw = String(sourceId);
+    // D-2 (§6): an NPC-attributed source is `settlement#npc` — weight settlementCred ×
+    // npcCred, clamped. No '#' ⇒ the settlement-only weight, byte-identical (no report
+    // carries a composite source until an act stamps a spokesperson).
+    const sep = raw.indexOf('#');
+    if (sep >= 0 && npcCredLit) {
+      const settId = raw.slice(0, sep);
+      const nid = raw.slice(sep + 1);
+      const settW = credibilityWeight(decayedCredibilityScore(/** @type {CredibilityEntry | undefined} */ (ledger[settId]), now));
+      return compositeCredibilityWeight(settW, npcCredibilityWeightOf(worldState, nid, now));
+    }
+    const entry = /** @type {CredibilityEntry | undefined} */ (ledger[raw]);
     return credibilityWeight(decayedCredibilityScore(entry, now));
   };
 }
@@ -474,7 +504,60 @@ const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
  * @property {number} trueBand     the true band at seed (the contradiction reference)
  * @property {number} seededTick
  * @property {string} lineageId    the synthetic-origin telling id (deniable-until-lineage)
+ * @property {string} [spokespersonNpcId] D-2: the court's mouthpiece (the named npcId that
+ *   fronted the bluff) — present only when npcCredibilityEnabled is lit; on exposure the
+ *   personal credibility charge + the lie-stigma land on this soul (a REPUTATION cost, §0.5).
  */
+
+// D-2 (design §6): only government/notable souls front a court's bluff (the mouthpiece floor
+// mirrors the ladder's RUNG_ELIGIBLE_FLOOR — a nameless extra never speaks for the court).
+const MOUTHPIECE_FLOOR = 0.4;
+
+/**
+ * Pick the court's MOUTHPIECE for a bluff (design §6 attribution): a seeded, importance-
+ * weighted draw over the settlement's notable+ roster (fork `npc-cred:lie:${sid}:${tick}`).
+ * Returns the npcId (the eligibleMembers idiom's key) or null (no eligible soul ⇒ the court
+ * speaks anonymously, the pre-D-2 behaviour). PURE. @param {{ settlement?: { npcs?: unknown } } | undefined} item
+ * @param {string} sid @param {{ fork?: (label: string) => { random: () => number } } | null} rng @param {number} now
+ * @returns {string | null}
+ */
+function pickMouthpiece(item, sid, rng, now) {
+  const settlement = asObject(asObject(item).settlement);
+  const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
+  /** @type {Array<{ nid: string, w: number }>} */
+  const roster = [];
+  npcs.forEach((npc, index) => {
+    const n = asObject(npc);
+    if (n.stasis) return;
+    const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
+    if (w < MOUTHPIECE_FLOOR) return;
+    roster.push({ nid: npcId(sid, /** @type {Parameters<typeof npcId>[1]} */ (n), index), w });
+  });
+  if (!roster.length) return null;
+  roster.sort((a, b) => (b.w - a.w) || compareCodepoint(a.nid, b.nid));
+  const fork = rng && typeof rng.fork === 'function' ? rng.fork(`npc-cred:lie:${sid}:${now}`) : null;
+  const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 0)) : 0;
+  const total = roster.reduce((sum, r) => sum + r.w, 0);
+  if (!(total > 0)) return roster[0].nid;
+  const target = u * total;
+  let acc = 0;
+  for (const r of roster) { acc += r.w; if (target <= acc) return r.nid; }
+  return roster[roster.length - 1].nid;
+}
+
+/** The complete set of live npcIds across the roster this tick (the D-2 prune scan — a
+ *  vanished NPC's credibility key is dropped). @param {{ byId?: Map<string, unknown> }} snapshot @returns {Set<string>} */
+function buildLiveNpcIds(snapshot) {
+  const byId = snapshot && snapshot.byId instanceof Map ? snapshot.byId : new Map();
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const [sid, item] of byId) {
+    const settlement = asObject(asObject(item).settlement);
+    const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
+    npcs.forEach((npc, index) => { out.add(npcId(String(sid), /** @type {Parameters<typeof npcId>[1]} */ (npc), index)); });
+  }
+  return out;
+}
 
 /**
  * LIE lifecycle (design §2.3): seed → propagate → corroborate → contradict → expose →
@@ -491,7 +574,8 @@ const HOSTILE_LABELS = new Set(['hostile', 'cold_war', 'rival']);
  * @param {(id: string) => { malice01: number, lawfulness01: number }} args.alignmentOf  derived alignment
  * @param {(id: string) => string} args.nameFor
  * @returns {{ overrides: Map<string, Map<string, BeliefRecord>>, disinfo: Record<string, DisinfoRecord> | null,
- *   deltas: CredibilityDelta[], grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>> }}
+ *   deltas: CredibilityDelta[], npcDeltas: import('./npcCredibility.js').NpcCredibilityDelta[],
+ *   grievances: GrievanceWrite[], newsEntries: Array<Record<string, unknown>> }}
  */
 export function processLies({ snapshot, worldState, beliefMaps, rng, tick, strengthOf, alignmentOf, nameFor }) {
   const T = LIE_TUNING;
@@ -499,10 +583,16 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
   const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
   const strength = typeof strengthOf === 'function' ? strengthOf : () => 0.5;
   const byId = snapshot?.byId instanceof Map ? snapshot.byId : new Map();
+  // D-2: the LIE verb attributes a mouthpiece + charges it personally on exposure ONLY when
+  // npcCredibilityEnabled is lit (else no spokesperson is stamped, credW is settlement-only,
+  // and every existing infoStatecraft golden is byte-identical).
+  const npcCredLit = npcCredibilityActive(worldState);
   /** @type {Map<string, Map<string, BeliefRecord>>} */
   const overrides = new Map();
   /** @type {CredibilityDelta[]} */
   const deltas = [];
+  /** @type {import('./npcCredibility.js').NpcCredibilityDelta[]} */
+  const npcDeltas = [];
   /** @type {GrievanceWrite[]} */
   const grievances = [];
   /** @type {Array<Record<string, unknown>>} */
@@ -529,6 +619,14 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
     const agedOut = now - Math.floor(finiteNumber(rec.seededTick, now)) >= T.EXPOSE_MAX_AGE_TICKS;
     if (contradicted || agedOut) {
       deltas.push({ id: rec.liarId, kind: 'deception', magnitude01: T.EXPOSE_CHARGE01 });
+      // D-2 THE PERSONAL CHARGE (§6): the court takes today's deception delta unchanged AND
+      // the mouthpiece takes a personal one (sharper — the npc LIE_FALL is steeper). The
+      // magnitude band (the size of the exaggeration) rides as lieExposedBand so the ladder
+      // can scale the stigma sev. Only when a spokesperson was stamped (npcCredibility lit).
+      if (rec.spokespersonNpcId) {
+        const band = clamp(Math.abs(Math.round(finiteNumber(rec.assertedBand, 0)) - Math.round(finiteNumber(rec.trueBand, 0))), 0, 4);
+        npcDeltas.push({ id: String(rec.spokespersonNpcId), kind: 'deception', magnitude01: T.EXPOSE_CHARGE01, lieExposedBand: band });
+      }
       // THE LIE EDGE-GRIEVANCE (W-DOCTRINE-2b follow-up from 2a's boundary): beyond the
       // news receipt, the exposure banks a PEOPLE-HELD grievance on the (audience↔liar)
       // relationship edge — "the court that lies to neighbours" — applied through the E1
@@ -591,8 +689,15 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
     const u = fork && typeof fork.random === 'function' ? clamp01(finiteNumber(fork.random(), 1)) : 1;
     if (u >= T.INITIATE_BASE * willingness * willingness) continue;
 
-    // The liar's current credibility scales how believable the bluff is (ex-ante trust).
-    const credW = credibilityWeight(credibilityScoreOf(worldState, liarId, now));
+    // D-2 ATTRIBUTION (§6): the lying court picks ONE mouthpiece for this scandal (a court
+    // speaks with one voice). Gated — dark ⇒ null ⇒ no spokesperson, settlement-only credW,
+    // byte-identical. The composite weight (settlementCred × mouthpieceCred, clamped) scales
+    // the bluff's ex-ante believability: a known liar fronting it is believed even less.
+    const mouthpiece = npcCredLit ? pickMouthpiece(item, liarId, rng, now) : null;
+    const settlementCredW = credibilityWeight(credibilityScoreOf(worldState, liarId, now));
+    const credW = mouthpiece
+      ? compositeCredibilityWeight(settlementCredW, npcCredibilityWeightOf(worldState, mouthpiece, now))
+      : settlementCredW;
     const assertedBand = clamp(selfBand + T.INFLATE_BANDS, 0, 4);
     for (const audienceId of hostiles) {
       // The audience must have a CHANNEL to hear it (a belief about the liar already —
@@ -615,12 +720,13 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
         liarId, subjectId: liarId, audienceId,
         assertedBand, trueBand: selfBand, seededTick: now,
         lineageId: `disinfo:${liarId}:${audienceId}:${now}`,
+        ...(mouthpiece ? { spokespersonNpcId: mouthpiece } : {}),
       };
     }
   }
 
   const disinfo = Object.keys(nextDisinfo).length ? sortDisinfo(nextDisinfo) : null;
-  return { overrides, disinfo, deltas, grievances, newsEntries };
+  return { overrides, disinfo, deltas, npcDeltas, grievances, newsEntries };
 }
 
 /** Codepoint-stable disinfo ledger ordering. @param {Record<string, DisinfoRecord>} ledger
@@ -1072,9 +1178,10 @@ function applyExposureGrievances(worldState, edges, grievances, now) {
  * @param {(id: string) => { malice01: number, lawfulness01: number }} [args.alignmentOf]  derived alignment
  * @param {(id: string) => string} [args.nameFor]
  * @param {CredibilityDelta[]} [args.provenTrue]  proven-true rises + resolved intel sales (SHARE-SELL self-policing)
+ * @param {import('./npcCredibility.js').NpcCredibilityDelta[]} [args.npcProvenTrue]  D-2/D-3: per-NPC proven-true rises (a mouthpiece's sale/warning proved out)
  * @returns {{ worldState: unknown, changed: boolean, newsEntries: Array<Record<string, unknown>> }}
  */
-export function advanceInformationStatecraft({ snapshot, worldState, graph = null, rng = null, tick, now = null, strengthOf, alignmentOf, nameFor, provenTrue = [] }) {
+export function advanceInformationStatecraft({ snapshot, worldState, graph = null, rng = null, tick, now = null, strengthOf, alignmentOf, nameFor, provenTrue = [], npcProvenTrue = [] }) {
   if (!infoStatecraftActive(worldState)) {
     return { worldState, changed: false, newsEntries: [] };
   }
@@ -1149,6 +1256,19 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
   ];
   const cred = advanceCredibility({ worldState: state, tick, deltas });
   if (cred.changed) { state = /** @type {Record<string, unknown>} */ (cred.worldState); changed = true; }
+
+  // (5b) NPC CREDIBILITY (D-2): fold the per-NPC deltas (exposed-lie mouthpieces + D-3's
+  //      resolved intel-sale self-policing) into the per-NPC stock; prune vanished NPCs (the
+  //      roster scan — DM remove_npc leaves no dangling npcCredibility key). Gated: dark ⇒ a
+  //      complete no-op (no key). The ladder consumes the lieExposure deposit NEXT tick.
+  if (npcCredibilityActive(state)) {
+    const npcDeltas = [...lie.npcDeltas, ...(Array.isArray(npcProvenTrue) ? npcProvenTrue : [])];
+    if (npcDeltas.length || hasNpcCredibilityLedger(state)) {
+      const liveNpcIds = buildLiveNpcIds(snap);
+      const npcCred = advanceNpcCredibility({ worldState: state, tick, deltas: npcDeltas, liveNpcIds });
+      if (npcCred.changed) { state = /** @type {Record<string, unknown>} */ (npcCred.worldState); changed = true; }
+    }
+  }
 
   return { worldState: state, changed, newsEntries: [...sightRes.newsEntries, ...lie.newsEntries] };
 }
