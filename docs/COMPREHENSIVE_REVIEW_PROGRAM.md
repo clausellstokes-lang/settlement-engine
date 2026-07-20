@@ -1134,6 +1134,16 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE COMPOSITE IS LIVE-ADVANCING via parallel owner sessions (2026-07-19) —
+dc0b6e2b → 29f7abc9 (THE SNAPSHOT-SHAPE BUG: the chronicle modal now reads the keys its
+records actually carry — a real display bug, ChroniclePanel.jsx + test only, verified-first,
+same defect class as the ladder faction-key bug).** IMPLICATION for the autonomous drive:
+the composite tip MOVES between dispatches — every new lane VERIFY-FIRST-gates on the live
+tip and bases off it (the D-2/D-3 lane correctly STOPPED on the dc0b6e2b→29f7abc9 mismatch,
+manager ruled Option B: rebase to 29f7abc9, benign zero-overlap). FOLD BATCH 3 must
+re-verify `git rev-parse claude/the-composite` immediately pre-fold and target whatever the
+live tip is then — never a cached hash. Parallel composite-hygiene fixes are WELCOME (they
+reduce the loop's display-defect surface); the manager reconciles them at fold.
 **⬛⭐⭐ OWNER STANDING ORDER (2026-07-19) — SCOPE CLOSED, DRIVE TO THE LOOP.**
 Verbatim: "make it all cohesive, coherent, and comprehensive as always. with this I'll
 stop adding. please continue building all the way to the survey." THE BUILD PHASE IS
