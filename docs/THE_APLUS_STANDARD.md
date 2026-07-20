@@ -9,7 +9,7 @@ A+ ACROSS THE BOARD does not mean "no known defects." It means EXCELLENCE MADE
 STRUCTURAL: quality that persists unattended, enforced by the codebase itself against
 every future hand — including its authors'.
 
-## The thirteen bars, maximally expressed
+## The seventeen bars, maximally expressed
 1. CORRECTNESS — no discovered class of bug retains a habitat. A new defect requires
    inventing a new KIND of mistake; every found class has its remover (walker, lint,
    ratchet, chokepoint) standing.
