@@ -60,9 +60,30 @@ export default function SettlementMapEditControls({
   onReroll, onToggleLabels, onToggleLegend, onReset,
   annotating, onToggleAnnotate, entitled = false, savedMap = false,
 }) {
+  // V-15 THE AGED MAP "show the years": a VIEW-mode toggle (unlike the edit-only
+  // Labels/Legend chrome below). Self-contained — reuses the shared V-3 timelapseTick
+  // (null ⇒ off; set to the live week ⇒ the town wears its history). When the realm
+  // scrubber later moves timelapseTick, the town wear follows (the scrubber drives it).
+  const timelapseTick = useStore((s) => s.timelapseTick);
+  const setTimelapseTick = useStore((s) => s.setTimelapseTick);
+  const liveWeek = useStore((s) => {
+    const c = Array.isArray(s.campaigns) ? s.campaigns.find((x) => x && x.id === s.activeCampaignId) : null;
+    const ws = c && c.worldState ? c.worldState : null;
+    const cal = ws && ws.calendar && typeof ws.calendar === 'object' ? ws.calendar : null;
+    if (cal && Number.isFinite(cal.elapsedWeeks)) return Number(cal.elapsedWeeks);
+    return ws && Number.isFinite(ws.tick) ? Number(ws.tick) : 0;
+  });
+  const yearsShown = timelapseTick != null;
   return (
     <>
       <MapLensSwitcher styleIds={styleIds} bespokeSkins={bespokeSkins} activeLens={activeLens} persisted={!!lensPersisted} onPickLens={onPickLens} />
+      <div data-town-years-control style={{ position: 'absolute', bottom: SP.sm, left: SP.sm, zIndex: 4 }}>
+        <Button data-town-years variant={yearsShown ? 'primary' : 'secondary'} size="sm"
+          aria-pressed={yearsShown} onClick={() => setTimelapseTick(yearsShown ? null : liveWeek)}
+          aria-label="Show the years — the town's growth, scars, and rebuilding, written on the map">
+          Show the years
+        </Button>
+      </div>
       {/* THE DM PIN GATE (THE FREELY-GIVEN RULINGS: DM pins are Cartographer). The
           locked state is VISIBLE, never absent (the fog/mapChains premium-seam law):
           a free owner with a saved map sees the affordance with a drawn padlock +

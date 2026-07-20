@@ -79,6 +79,7 @@ import SettlementMapLandform from './SettlementMapLandform.jsx';
 // the exports use), mounted under the interactive layers whose fills go transparent.
 import SettlementMapGrid from './SettlementMapGrid.jsx';
 import SettlementMapIllustratedUnderlay from './SettlementMapIllustratedUnderlay.jsx';
+import SettlementMapAgeOverlay from './SettlementMapAgeOverlay.jsx'; // V-15 THE AGED MAP (self-gates on the shared timelapseTick; toggle-off ⇒ byte-exact)
 // IT3-c — the DM season-override control (a lazy leaf; the pane is max-lines-capped so this
 // stays out-of-file, mounted only in illustrated edit mode).
 import SettlementMapSeasonControl from './SettlementMapSeasonControl.jsx';
@@ -458,6 +459,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
               layers; the plain visual layers below self-suppress and the interactive
               fills go transparent for hit-testing (design §4, the two-paths cure). ─── */}
           {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeStyle} dress={dress} />}
+          <SettlementMapAgeOverlay model={model} settlement={settlement} ink={C.ink} />
 
           {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
           <SettlementMapGrid step={gridStep} ink={C.ink} />
