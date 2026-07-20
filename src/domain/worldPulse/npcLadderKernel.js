@@ -86,6 +86,7 @@ import {
   sortedRecord, mirrorOf, maintainMarks, mintBond,
 } from './npcLadderState.js';
 import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
+import { readGratitudeBondEvents, governingLadderFkeyOf, rulingSeatNidOf } from './gratitudeBonds.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 import { faithRuptured } from './npcLadderCoherence.js';
@@ -305,6 +306,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
   // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
   const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState) : new Map();
+  // D-7e (ii) THE GENEROSITY GRATITUDE consume — the same-tick twin of the roads deposit
+  // (generosity ran earlier THIS tick; events carry tick === now and the ledger lives one
+  // tick). The receiving COURT is grateful: its ruling-seat NPC bonds toward the GIVER's
+  // ruling-seat NPC (cross-border ⇒ foreignSid = giver sid), through mintBond only.
+  const gratitudeBondEvents = memWeave ? readGratitudeBondEvents(worldState, now2) : new Map();
   // D-4→D-2 THE BLUFF CHARGE rides BOTH flags (contestedGoals ∧ npcCredibility): the ladder
   // deposits a contradicted-bluff exposure into the bluffExposures sidecar ONLY when the credibility
   // system that consumes it is lit. Dark ⇒ no deposit, no sidecar key, byte-identical (a bluff that
@@ -385,6 +391,10 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     // COUP TRUNCATION (§7): a fresh coup this tick replaces the top rung wholesale — the
     // ladder DEFERS (truncates the stage faction's pending challenges + seals it).
     const coupTruncated = coupTruncatedFkeys(s, factionsList, now2);
+    // D-7e (ii): this settlement's gratitude deposits (if any) land on its RULING seat —
+    // resolve the governing faction's ladder key once per settlement (canonical accessor).
+    const gratSidEvents = gratitudeBondEvents.size ? (gratitudeBondEvents.get(sid) || null) : null;
+    const gratGovFkey = gratSidEvents ? governingLadderFkeyOf(s) : null;
 
     for (const faction of factionsList) {
       const fkey = ladderFactionKey(faction);
@@ -452,6 +462,16 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         if (roadsBondEvents.size) {
           const bev = roadsBondEvents.get(`${sid}|${nid}`);
           if (bev) npcs[nid].bonds = mintBond(npcs[nid].bonds, bev.targetNpcKey, 'gratitude', bev.sev, weeks, bev.targetSid);
+        }
+        // D-7e (ii): generosity's gratitude lands COURT-TO-COURT — only on the receiving
+        // settlement's ruling-seat NPC (top rung of the governing faction), toward the giver
+        // court's seat resolved from the PRIOR persisted ladder (deterministic, order-free).
+        // Any unresolvable hop (vacant court, no ladder yet) skips — absent machinery no-ops.
+        if (gratSidEvents && rungIndex === 0 && fkey === gratGovFkey) {
+          for (const gev of gratSidEvents) {
+            const giverSeatNid = rulingSeatNidOf(priorLedger[gev.giverSid], freshSettlement(gev.giverSid));
+            if (giverSeatNid) npcs[nid].bonds = mintBond(npcs[nid].bonds, giverSeatNid, 'gratitude', gev.sev, weeks, gev.giverSid);
+          }
         }
         if (contestsLit) {
           nidMeta.set(nid, { fkey, faction, rungIndex, rungCount: rungs.length, npc: npcObj });

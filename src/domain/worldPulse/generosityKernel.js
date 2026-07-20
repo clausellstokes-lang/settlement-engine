@@ -133,6 +133,8 @@ import {
 } from '../spatial/intelActs.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { consumeRansomSettlements } from '../roads/thirdPartyRansom.js';
+import { noteGratitudeBond, applyGratitudeBondLedger } from './gratitudeBonds.js';
+import { memoryWeaveActive } from './relationshipEvolution.js';
 import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
@@ -536,6 +538,9 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const willingnessWrites = {};
   /** @type {Array<{ key: string, incident?: Record<string, unknown>|null, patch?: Record<string, number> }>} */
   const incidentWrites = [];
+  /** @type {Record<string, import('./gratitudeBonds.js').GratitudeBondEvent>} D-7e (ii) pass-local deposits (leaf-gated) */
+  const gratitudeBondWrites = {};
+  const weaveLit = memoryWeaveActive(worldState);
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
   /** @type {Array<{ giverId: string, receiverId: string, verdict: string, magnitude: number }>} */
@@ -788,6 +793,8 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
         const recvInc = reliefIncident({ kind: 'relief_received', tick, magnitude01: gratitude });
         if (givenInc) incidentWrites.push({ key: relKey, incident: givenInc });
         if (recvInc) incidentWrites.push({ key: relKey, incident: recvInc });
+        // D-7e (ii): mercy mints FRIENDSHIP beside the DEBT (credit/predatory = debt only).
+        if (!isCredit && leverageIntent < 0.6) noteGratitudeBond(gratitudeBondWrites, { lit: weaveLit, receiverSid: receiverId, giverSid: giverId, sev: gratitude, tick, floor: T.OBLIGATION_MIN });
 
         newsEntries.push(succorNews({
           giverId, receiverId,
@@ -1029,6 +1036,8 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       if (opp.mode === 'gift' && edge && plan.giftMag >= T.OBLIGATION_MIN) {
         const inc = reliefIncident({ kind: 'relief_given', tick, magnitude01: plan.giftMag, summary: 'intel gift' });
         if (inc) incidentWrites.push({ key: relationshipKeyFromEdge(edge), incident: inc });
+        // D-7e (ii): a warning gifted is mercy court-to-court — the same gratitude-bond deposit.
+        noteGratitudeBond(gratitudeBondWrites, { lit: weaveLit, receiverSid: opp.receiverId, giverSid: opp.sellerId, sev: plan.giftMag, tick, floor: T.OBLIGATION_MIN });
       }
       intelTransferWrites[`intel.${opp.sellerId}.${opp.receiverId}.${opp.subjectId}.${tick}`] = plan.transfer;
       intelCooldownWrites[pk] = intelElapsedWeeks;
@@ -1057,6 +1066,11 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       changed = true;
     }
   }
+
+  // D-7e (ii): the deposit ledger lives EXACTLY one tick — rebuilt-or-dropped every pass
+  // (the one-tick lifetime IS the consume-once discipline). Never-lit ⇒ untouched.
+  const grat = applyGratitudeBondLedger(worldState, nextWorldState, gratitudeBondWrites);
+  if (grat.changed) { nextWorldState = grat.worldState; changed = true; }
 
   // Willingness latch sub-ledger (upsert the refusing latches; drop cleared ones).
   {
