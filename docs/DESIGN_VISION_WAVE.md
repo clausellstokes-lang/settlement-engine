@@ -382,8 +382,21 @@ certifies at launch; the observatory re-certifies forever. V-10's certificate ga
 a LIVING tier post-launch (field-certified, world-years counted). BUILD SLOT: the
 evaluator + report surface ride cycle 2's window or a late lane (small — R-15 manifest
 + R-28 seam + analytics aggregates already exist); the post-launch halves activate
-with real data. PINS: the evaluator never writes any engine/tuning state (read-only
-by construction, source-scanned) · drift report determinism over a fixture corpus.
+with real data. THE COMBINATION LAW (owner amendment 2026-07-20: "every combination of toggles is
+different"): band comparisons are COHORT-SCOPED — never global. Cohort key = the
+world's exact flags_on set + preset + AI-use axis (AI-touched vs untouched, from the
+V-C adoption telemetry); minimum-cohort-size floors (thin cohorts ⇒ NO VERDICT,
+never noise); the observatory computes NATURAL LEAVE-ONE-OUT DIFFERENTIALS across
+cohorts differing by exactly one flag (organic all-on-minus-one at field scale).
+Bands v1 are declared against the all-lit reference cohort; per-cohort variants as
+data earns them. The SYNTHETIC soak keeps the systematic frontier (SOAK_PLAN_R2 §5's
+combinatorial mandate: all-on / leave-one-out / only-one-on / all-off — unchanged).
+PRE-LAUNCH ECHO → cycle-2 intake: a TARGETED PAIRWISE-LIT sweep for this program's
+13 new flags — pairs selected by SHARED STATE per the §11 read/write matrix (never
+blind all-pairs); heirs×contests (the V-A flag) is instance one.
+PINS: the evaluator never writes any engine/tuning state (read-only
+by construction, source-scanned) · drift report determinism over a fixture corpus ·
+cohort-scoping enforced (a global-aggregate band verdict is a test failure).
 
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
