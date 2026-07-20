@@ -1134,6 +1134,43 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-O SHIPPED — the platform completes itself (2026-07-20,
+claude/vision-o @ b3692333, base 212758ad, 5 lettered commits, FOLD-READY;
+manager-verified tip+clean).** V-27a LOCALIZATION SCAFFOLD: real locale registry
+(register/set/get/list + en-fallback) + derived pseudo-locale en-XA + an
+extraction-completeness WALKER pin (set-equality) — the door swings, content
+stays post-launch, zero eager. V-27b PERF HARNESS: throttled TTI/INP e2e (CDP
+4×-CPU + network), RAN GREEN (TTI 111ms · LCP 15,380ms · INP 112ms); budgets
+land as owner-gated PLACEHOLDERS (~1.6× dev baseline) — RATIFICATION QUEUED for
+a production-build run. V-27c PDF COUNTERSEAL (WB-k): structured emblem geometry
++ react-pdf seal + Cover wiring, FULL parity pins (geometry mirror + cross-
+surface selection + tree-walk NEVER bytes) 19 green — parallel-paths + parity
+chosen over a single-source draw() rewrite because the web ornament golden pins
+draw() bytes (vetoable: the bolder rewrite w/ byte-identity pin). V-27d IM FELL
+FACE: display-only --oc-display-face var seam + lazy DOM-idempotent face module,
+flag default-OFF, eager Δ +295 B total (the toggle wiring — the lane's ONLY
+eager bytes); DEFERRED-HONESTLY: the woff2 BINARY is unsourceable here — owner
+lights it by flag-flip + dropping IMFellEnglish-Regular.woff2 (SIL OFL) into
+public/fonts/; flag-on degrades to Crimson until then. V-27e CONTENT-VT-2:
+verdict ALREADY IN BASE — content-vt-2 (39a56a1d) is a git ANCESTOR of 212758ad;
+the parked-lineage premise was stale, the tree won, no work forced. V-27f
+GALLERY COMMENTS: existed-vs-built honest — gallery_comments ALREADY SHIPS
+(mig 019); built the missing MODERATION layer: report table + hide columns +
+report RPC + service-role hide RPC + list filtering, 16 pglite tests green,
+INERT until owner enables; ⚠ minted MIGRATION 168-LOCAL off head 167 — V-E's
+168 has FOLD PRECEDENCE, this one RENUMBERS TO 169 at fold (+ re-bump
+ARCHITECTURE/DEPLOY counts then); the +1-mig doc-freshness set satisfied.
+DEFERRED (recorded): the admin-actions dispatch arm — it modifies the
+security-critical JWT-role-gated Deno function untestable on this machine; a
+security change was NOT forced unverified (mirror the set_account_banned arm
+when wired). Gate: full two-shard suite 14,614 passed / 4 parked-goldens-ONLY ·
+strict 0 · tsc 0 · lint clean · dist 162 · ratchets 29 + title census 23 ·
+closure 1,025,029 at tip (headroom 14,971) · NUL clean. HAZARDS BANKED (memory
+vision-o-platform-completions-shipped.md, indexed): errorCopy baseline is a
+vision-h artifact ABSENT on this base (post-fold it exists — run it then) ·
+parallel background worktree commands can land in the WRONG worktree (pwd-guard
+every one). OWNER QUEUE +3: perf-budget ratification · IM Fell font drop +
+flip · admin dispatch arm wiring. SLOT: queue empty — vision-e wt idles.**
 **⬛⭐⭐ VISION LANE V-G SHIPPED — bring your campaign, bind the book, light the
 founding seeds, set the table's companion (2026-07-20, claude/vision-g @ 2902bdaf,
 base 212758ad, 6 lettered commits, FOLD-READY; manager-verified tip+clean; foreign

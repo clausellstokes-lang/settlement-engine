@@ -36,14 +36,10 @@
     mounts + worker transport swap; import→wall unification WAITS for V-G — a
     pass-3 seam). Vetoable pass-1 fold calls live in the ledger row (mig-168
     pg_temp pin · killList re-pin · campaignSlice deferral) — OWNER QUEUE.
-  - HOT (4 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
+  - HOT (3 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
     follow-ons V-25a..f) in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6
-    — the FOLDED tip, so the V-20 unlisted door, the V-B displays, and EmptyState
-    are all visible to it (⚠ lane eager Δ MUST be ~0: fold margin is 3,601) ·
-    V-O (platform completions V-27a..f) in the `vision-e` wt
-    on `claude/vision-o` (⚠ if V-27f mints a migration it mints 168-local off head
-    167 and the REPORT flags it — V-E's 168 has fold precedence, the fold renumbers;
-    per the established sibling-mint protocol) · V-N (multi-hop interview +
+    — BUILT (tip 8816db97, closure Δ0, ratchets green); finishing its full-suite
+    isolation triage before the lane lands · V-N (multi-hop interview +
     handbook rewrite staged-for-taste) in the `vision-j` wt on `claude/vision-n`
     @ base 5d9218c6 (V-1's edge fn is in its base; edge tree changes ⇒
     build:edge-shared + validate:edge; aiGrounding desync hazard). V-G LANDED @
@@ -59,9 +55,14 @@
     ledger row in; IN fold pass 2 now) · V-L @ claude/vision-l `3b33c1a6` (V-24a-d
     engine textures, dark, eager Δ≈0; ⚠ roadsKernel at EXACTLY 800 — additions in
     leaves; new EDIT_KIND ⇒ edge-bundle regen + revert spurious generatedAt churn;
-    fold pass 3). QUEUE EMPTY: V-N dispatched (vision-j wt → claude/vision-n @
-    5d9218c6) — EVERY lane V-A..V-O is now landed, folding, or hot. Fold pass 3 =
-    V-G + V-L + V-O + V-M + V-N (+ the import→wall seam once V-G lands).
+    fold pass 3) · V-O @ claude/vision-o `b3692333` (locale scaffold · perf
+    harness [budgets=owner placeholders] · counterseal parity · IM Fell
+    toggle-OFF [owner: drop woff2 + flip] · VT-2 proven ALREADY-IN-BASE ·
+    comment moderation INERT; ⚠ its migration 168-LOCAL RENUMBERS TO 169 at
+    fold, V-E precedence; suite 14,614/4-parked-only at its tip; fold pass 3).
+    QUEUE EMPTY — EVERY lane V-A..V-O is landed, folding, or hot. Fold pass 3 =
+    V-G + V-L + V-O + V-M + V-N (+ the tableEvents→tableLedger import seam and
+    the mig-169 renumber). The `vision-e` + `vision-i` wts idle.
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —
