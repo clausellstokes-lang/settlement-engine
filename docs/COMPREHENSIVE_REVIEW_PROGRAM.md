@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ DEEP COUPLINGS D-5 + D-6 COMPLETE (2026-07-20, claude/dc-roads-followon @ d9121e8f,
+6 commits off composite-r3 accd0242 — manager-verified).** D-5 THIRD-PARTY RANSOM
+(thirdPartyRansom leaf; RansomRec +payerId/payerMotive/thirdPartyResolved): a payer≠home
+path — the refusal check (proud/loyal/zealous refuse a non-home ransom, stay captive,
+no-death), the outcome fork reusing conversionFlawFactor (a FRIEND payer → debt +
+GRATITUDE BOND [this WIRES the D-7 ransom-gratitude seam live — mintBond had zero callers];
+a RIVAL → COMPROMISED via the corruptionWeb beneficiaryId reroute), the redirected legit/
+prosperity write to the payer, generosity ransom_relief consume, ladder mintBond consume.
+D-6 SEA ROADS (seaRoads leaf; MissionRec +legModes): sea legs at dispatch + a PASS-3
+sea-hazard branch — blockade capture (captor=blockader, reads navalLayer), piracy=banditry-
+by-construction (port seat), storms PRICED not rolled (season-scaled delay, never a
+capture). Lit walkthroughs quoted (D-5: refuse/debt/compromised/friend-gratitude/captor-
+precedence + roster conservation; D-6: blockade/piracy/storm/navalEnabled-dark). Receipts:
+closure 1,024,371 IDENTICAL to base (zero eager) · dormancy byte-identical both flags ·
+§11 clean (new keys roadsRansomSettlements + roadsBondEvents EXEMPT; NO faction.power /
+relationshipStates / naval writes) · sharded suite = ONLY the 4 parked goldens (confirmed
+at base) · roadsKernel 795/800 (embassy-persist leaf-extracted for headroom). Additive, no
+migration. VETOABLE: gratitude bonds to the specific friend NPC; the unbonded-conscience
+altruist payer channel DEFERRED; embassy-over-sea DEFERRED (§15). LAST BUILD LANE:
+Formation β still running (champion + coalition + contest-support done; gratitude deposit
++ gate remaining).
 **⬛⭐ FORMATION LANE α COMPLETE — THE STATECRAFT CONSUMERS (2026-07-20,
 claude/dc-formation-statecraft @ feaf5f9f, 2 commits off composite-r3 accd0242 —
 manager-verified).** Both self-policing seams the fold flagged are closed: D-3 THE
