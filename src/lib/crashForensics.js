@@ -14,7 +14,10 @@
  * Pure + total: never throws (errorReporter must never be able to fail from here).
  */
 
-import { getAllFlags } from './flags.js';
+// Import from the LEAN resolution core, not lib/flags.js: this keeps the
+// ~4.5 KB flag-description registry OUT of the eager crash-forensics closure
+// while flags_on stays synchronously readable at crash time (R-14 contract).
+import { getAllFlags } from './flagRegistry.js';
 
 /**
  * The active campaign, if any — read defensively (the store shape is owned
