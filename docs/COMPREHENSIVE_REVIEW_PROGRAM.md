@@ -1134,6 +1134,26 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-J SHIPPED — the findable truth (2026-07-20, claude/vision-j @
+3f3805b7, FOLD-READY [pass 2]; manager-validated).** 297 PRERENDERED DOCUMENTS
+(8 views + 289 compendium entries — ONE param route carries the long tail; sitemap
+38→327 URLs) each with baked og/Twitter/canonical/JSON-LD + a noscript crawl-graph;
+head truth SINGLE-SOURCED (headForView exported — build and runtime read one
+function, parity-pinned). THE META-SHELL: serverless resolver (the host's real
+pattern — judgment ratified over a static fallback) classifying gallery-index /
+unlisted (noindex-yet-unfurls, the party-share guarantee PINNED) / world seed
+posts; degrades honestly until V-E's RPC lands. THE PINS: dist-walk (every route's
+own card + valid JSON-LD) · sitemap==router==dist · unlisted sitemap-exclusion BY
+CONSTRUCTION · robots posture (search bots welcomed, AI crawlers reserved — Wave D
+honored) · LIVE BROWSER receipt on /compendium/tier-thorp. Gate: dist 179 · strict
+0 · tsc 0 · lint 0 · closure 1,025,213 (Δ +479 B — one param route) · NUL clean.
+JUDGMENTS RATIFIED: entry-route head-clobber deferral (the latent per-tab SEO race
+recorded, scope-disciplined) · /compendium/<id> for rank. FOLD PASS 2 SEAMS
+(recorded for after the quintuple fold): merge vision-j · vercel.json rewrites
+(/gallery + /world/:code → meta-shell) · /gallery stays OUT of the prerender
+(filesystem-before-rewrites — load-bearing, boot-confirmed) · world-card og-image
+variant. DIMENSION 14: machinery COMPLETE — B → A-grade pending fold + cycle-2's
+census. SLOT → V-L (engine textures) dispatching.**
 **⬛⭐⭐ VISION LANE V-B SHIPPED — the chronicler writes, the years replay, the
 causes trace, the town wears its history (2026-07-20, composite-r4 @ a9caa573,
 6 commits ON the trunk lane; manager-validated). THE MINIFOLD IS FREE — THE
