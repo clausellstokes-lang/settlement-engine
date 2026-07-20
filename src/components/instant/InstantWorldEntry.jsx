@@ -13,6 +13,7 @@
  */
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
+import { t } from '../../copy/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { REALM_SIZES, TONES, MAP_KINDS, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
@@ -63,9 +64,9 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
       // Land the user in the freshly staged realm (canonize is their next act).
       onNavigate?.('realm');
     } else if (result?.reason === 'not_enough_slots') {
-      setError('Not enough save slots for a realm this size.');
+      setError(t('errors.realmSlots'));
     } else if (result && result.ok === false && result.reason !== 'in_flight') {
-      setError('Could not build the realm. Please try again.');
+      setError(t('errors.realmBuild'));
     }
   };
 

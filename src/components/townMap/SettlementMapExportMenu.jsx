@@ -25,6 +25,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
+import { t } from '../../copy/index.js';
 import BuyThisDossier, { resolveExportAccess } from '../BuyThisDossier.jsx';
 import { BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS, INK, MUTED, RED, SP, sans } from '../theme.js';
 import {
@@ -84,7 +85,7 @@ export default function SettlementMapExportMenu({ settlement, saveId = null, sty
     try {
       await fn();
     } catch {
-      setError('Export failed. Please try again.');
+      setError(t('errors.mapExport'));
     } finally {
       setBusy(null);
     }

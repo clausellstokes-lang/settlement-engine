@@ -185,7 +185,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
-      setBeginError('Something went wrong forging your settlement. Try again.');
+      setBeginError(t('errors.forgeStart'));
     } finally {
       setGenerating(false);
     }

@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { Mail } from 'lucide-react';
 import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import { EMAIL_CATEGORIES, getMyEmailPreferences, setMyEmailPreference } from '../../lib/emailPreferences.js';
+import { t } from '../../copy/index.js';
 import Section from './AccountSection.jsx';
 
 function Toggle({ checked, onChange, label }) {
@@ -53,7 +54,7 @@ export default function AccountEmailPreferencesSection() {
       await setMyEmailPreference(category, next);
     } catch {
       setPrefs(prev => ({ ...prev, [category]: !next }));
-      setError('We could not save that preference. Please try again.');
+      setError(t('errors.prefSave'));
     }
   };
 

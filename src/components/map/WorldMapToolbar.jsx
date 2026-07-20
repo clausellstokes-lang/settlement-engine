@@ -23,7 +23,7 @@ import { memo, Suspense, lazy, useState, useRef, useEffect } from 'react';
 import {
   FolderOpen, Save, Trash2, RefreshCw, Layers, Loader, Map as MapIcon, Globe,
   SlidersHorizontal, Zap, HelpCircle, Image as ImageIcon, X as XIcon, Share2, Undo2,
-  Eye, Settings,
+  Eye, Settings, History,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_DEEP, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, PARCH_100, sans, FS, SP } from '../theme.js';
@@ -32,6 +32,9 @@ import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
 
 const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
+// Vision V-H (R-21): the visible advance-undo history — lazy overlay reading the
+// session pulseUndoStack, restoring through the existing undoLastPulse walk-back.
+const UndoHistoryPanel = lazy(() => import('../UndoHistoryPanel.jsx'));
 
 /** Advance-scaling Stage 5 — the human interval label the Undo affordance folds in
  *  when the last advance was a MULTI-TICK interval (month/season/year). one_week is
@@ -346,6 +349,7 @@ function WorldMapToolbarImpl({
   // The in-theme control reference (the "?" affordance). Replaces the native
   // title= OS tooltips that used to carry each control's teaching.
   const [mapHelpOpen, setMapHelpOpen] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
 
   const campaignActive = canManageCampaigns && activeCampaignId;
 
@@ -466,6 +470,22 @@ function WorldMapToolbarImpl({
                       byte-unchanged. */}
                   <Undo2 size={13} /> Undo Advance{MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval] ? ` (${MULTI_TICK_INTERVAL_LABELS[lastAdvanceInterval]})` : ''}
                 </IconButton>
+              )}
+              {/* Vision V-H (R-21): the walk-back affordance beside the single Undo —
+                  opens the full session advance history for a return-to-any-point. */}
+              {canUndoPulse && (
+                <IconButton
+                  onClick={() => setShowHistory(true)}
+                  aria-label="Open advance history"
+                  disabled={worldPulseBusy}
+                >
+                  <History size={13} /> History
+                </IconButton>
+              )}
+              {showHistory && (
+                <Suspense fallback={null}>
+                  <UndoHistoryPanel campaignId={activeCampaignId} onClose={() => setShowHistory(false)} />
+                </Suspense>
               )}
               {/* Advance-scaling Stage 4: a determinate progress bar while a
                   multi-tick advance is running (reads N of Y from the session).

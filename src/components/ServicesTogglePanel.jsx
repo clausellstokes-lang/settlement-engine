@@ -3,6 +3,7 @@ import {INSTITUTION_SERVICES} from '../data/tradeGoodsData';
 import ControlsStrip from './ControlsStrip.jsx';
 import { GOLD, GOLD_SOFT, INK, MUTED, SECOND, sans, FS, CARD_HDR, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
+import EmptyState from './primitives/EmptyState.jsx';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 
@@ -164,9 +165,12 @@ export default function ServicesTogglePanel() {
   }));
 
   if (Object.keys(instServiceMap).length === 0) {
-    return <div style={{padding:'14px 16px', background:swatch['#FAF8F4'], fontSize:FS.md, color:MUTED}}>
-      No services available at this tier.
-    </div>;
+    return (
+      <EmptyState
+        heading="No services at this tier."
+        body="Larger settlements sustain more trades. Raise the tier, or widen the filters above, and the services return to the roster."
+      />
+    );
   }
 
   return (
