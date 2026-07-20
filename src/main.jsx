@@ -22,6 +22,20 @@ import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js'
 // `var(--sem-text-body)`, etc. JS imports keep working unchanged.
 emitCssTokens();
 
+// V-27d IM FELL DISPLAY FACE — taste-gated, OFF by default. ZERO EAGER: both the
+// flag registry (lib/flags.js, its own lazy chunk) and the face module load ONLY
+// when the flag is on, via dynamic import — so the default flag-off path adds no
+// static import to the first-paint closure and injects no @font-face. Lighting it
+// is the owner's taste flip AND requires vendoring the IM Fell woff2 (imFellFace.js).
+import('./lib/flags.js')
+  .then(({ flag }) => {
+    if (flag('imFellDisplayFace')) {
+      return import('./lib/imFellFace.js').then((m) => m.applyImFellDisplayFace());
+    }
+    return undefined;
+  })
+  .catch(() => {});
+
 // Tier 8.8 - install the analytics provider (Plausible by default, when
 // VITE_PLAUSIBLE_DOMAIN is set; PostHog as an opt-in alternative). No-op
 // when neither env var is set, in which case analytics.js falls back to

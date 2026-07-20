@@ -33,6 +33,7 @@ export const FLAG_DEFAULTS = Object.freeze({
   googleOauth: true,
   copyGuard: false,
   perimeterCaptcha: false,
+  imFellDisplayFace: false,
   dossierFiveTabs: true,
   inlineEdit: true,
   workshopNav: true,
