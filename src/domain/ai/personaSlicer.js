@@ -19,6 +19,7 @@
  */
 
 import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js';
+import { nameOf } from '../rulingPower.js';
 
 /**
  * Structural slices of the store/world shapes THIS module reads (typed narrowly so the
@@ -38,8 +39,8 @@ import { requiredManifestKeys, PERSON_FACET_KEYS } from './groundingManifest.js'
  *            economicState?: EconomyLite, economy?: EconomyLite, prosperity?: unknown,
  *            config?: { primaryDeitySnapshot?: unknown, cultDeitySnapshots?: unknown[] },
  *            primaryDeity?: unknown,
- *            powerStructure?: { factions?: Array<string|{ name?: string }> },
- *            factions?: Array<string|{ name?: string }>,
+ *            powerStructure?: { factions?: Array<string|{ faction?: string, name?: string }> },
+ *            factions?: Array<string|{ faction?: string, name?: string }>,
  *            appliedDecrees?: unknown[], decrees?: unknown[],
  *            politicsLedgers?: Record<string, { blocs?: BlocLite[] }>,
  *            blocs?: BlocLite[] }} HomeLite
@@ -119,10 +120,30 @@ export function buildPersonaSlice({
   if (cls === 'npc') facets.push(...personFacets(e, npcState, entityId));
 
   // (a) faction / archetype / stance — the entity's own affiliation + the home roster
+  //
+  // THE FACTION-KEY LAW. The roster name routes through the canonical rulingPower.nameOf
+  // (`.faction || .name`) — never a hand-rolled accessor. Real powerStructure.factions
+  // records carry the display name in `.faction` and carry NO `.name` at all (executed
+  // generateSettlementPipeline probe: keys [faction, modifier, power, desc, isGoverning,
+  // category, rawPower, powerLabel, modifiers, legitimacyCrisis, crisisNote] over 361
+  // records across all six tiers). An earlier cut read `.name`, so every record mapped to
+  // undefined, `.filter(Boolean)` dropped them all, and this roster was ALWAYS empty —
+  // silently, because an empty roster is indistinguishable from a settlement that has none.
+  // Same defect class and same cure as the npcLadder faction key (composite 25749ae5 /
+  // dc0b6e2b) and the ChroniclePanel snapshot rows.
+  //
+  // THREE SHAPES REACH THIS LINE, and nameOf is chosen precisely because it serves all
+  // three: powerStructure.factions (`.faction`); a settlement's TOP-LEVEL `.factions`,
+  // which is a DIFFERENT record type — the NPC grouping list, keys [name, members,
+  // dominantCategory, powerFaction*] — and legitimately carries `.name`; and a NEIGHBOUR's
+  // top-level `.factions`, which neighbourGenerator.js:180 fills with powerStructure-shaped
+  // records. The `typeof f === 'string'` arm is LOAD-BEARING and must stay: nameOf reads
+  // properties, so it returns '' for a bare string and `.filter(Boolean)` would drop it.
+  // @enforced-by tests/domain/personaSlicerFactionRoster.test.js
   facets.push(facet('faction', entityId, 'Faction', safe(() => ({
     affiliation: e.factionAffiliation ?? e.factionLink ?? null,
     archetype: e.factionArchetype ?? null,
-    roster: (home?.powerStructure?.factions || home?.factions || []).map((f) => (typeof f === 'string' ? f : f?.name)).filter(Boolean).slice(0, 8),
+    roster: (home?.powerStructure?.factions || home?.factions || []).map((f) => (typeof f === 'string' ? f : nameOf(f))).filter(Boolean).slice(0, 8),
   }))));
 
   // (b) HEGEMONY through the entity's FOG — she ranks powers as her BELIEFS rank them
