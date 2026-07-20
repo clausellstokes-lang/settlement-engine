@@ -1134,6 +1134,37 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ THE MINI-FOLD IS COMPLETE — THE BUILD PHASE IS CLOSED (2026-07-20, the
+handed-off executor session; claude/composite-r4 @ ceb77368, worktree minifold).**
+The RESUME HERE row below is EXECUTED. Steps landed: STEP 2 strict-clean @ 2bec2f64
+(the stopped agent's uncommitted WIP was NOT discarded — verified annotation-only and
+COMPLETE: base RED 20 strict errors → GREEN 0, negative control run both directions;
+kept as the head start, vetoable) · STEP 3 THE GENEROSITY GRATITUDE LANE @ f30fd058
+(D-7e clause ii: gratitudeBonds.js leaf + one-line kernel call-sites + memoryWeave-gated
+ladder consume; court-to-court seat-to-seat via canonical governingFactionOf, foreignSid
+per D-7f; one-tick deposit-consume by double construction; sev = widow's-mite 1:1;
+credit/predatory/refuge excluded [refuge = loop-intake candidate]; walker EXEMPT literal;
+9 pins) · STEP 4 full-tsc base debt @ ceb77368 (12 pre-existing errors, 3 lib files
+[emailLifecycle/founderTransferClient/stripe], annotations only, pre-existence proven by
+construction — npm run check is now FULLY GREEN on the loop's substrate). MINI-FOLD GATE
+GREEN: build ✓ · verify:dist 162/162 exit 0, closure 1,024,511 ≤ 1,040,000 (Δ0 from base
+— the lane is entirely lazy) · domain-strict 0 · tsc full 0 · lint 0 · validate chain ✓
+(mig head 167 contiguous · 56 edge fns · 141 vendored libs) · TWO SHARDS 14,460 passed /
+4 failed = EXACTLY the parked golden families, zero flakes (shard receipts span
+f30fd058→ceb77368; step 4 is JSDoc-only/runtime-identical; the 3 touched files' focused
+suites re-run green at tip 16/16). FRAUD-PASS RECONCILIATION CLOSED: the §10 pass ran
+2026-07-19 (verdict SAFE TO FOLD @ 9d971f5c) AND its fraud-fix lane FF-a..FF-d
+(a7ecd7e2·b6e4bd98·68d8293f·d0eacd45) is an ANCESTOR of composite-r4 — all three P1s
+fixed at source pre-fold. LOOP-INTAKE ADDITIONS from this fold: the D-7e clause-(i)
+generosityEV bond READ term is CONFIRMED ABSENT (strongestBond's only consumer is the
+D-4f contest pick — MISSING-WITH-FOUNDATION) · refuge-gratitude seat-bond (deliberate
+exclusion, candidate). OWNER SESSION ORDERS IN FORCE (this session = the switched-to
+executor): Fable architect/validator/manager + Opus implementer, staffing per-task,
+Fable takeover where coverage wins · NO COMPROMISES (objectively-better-with-risk) ·
+15-min stall watchdog live · pushes REMAIN owner-gated (recorded judgment — nothing
+pushed). NEXT: build-completeness audit (8-auditor workflow wf_61870393-aa2, running) →
+THE_RESURVEY_HANDOFF.md → THE ROUND 3 LOOP (executor = THIS session; 13-dimension
+amended standard staged, recorded at the loop's opening row).**
 **⬛⭐⭐⭐ ⟵ RESUME HERE (2026-07-20, owner switching accounts to finish) — CLEAN
 STOPPING POINT.** STATE: the ENTIRE BUILD IS DONE except the mini-fold's finalization.
 Pre-fold wave folded (fold batch 3 → claude/composite-r3 @ accd0242, BUDGET GREEN
