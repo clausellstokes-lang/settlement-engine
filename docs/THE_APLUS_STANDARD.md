@@ -9,7 +9,7 @@ A+ ACROSS THE BOARD does not mean "no known defects." It means EXCELLENCE MADE
 STRUCTURAL: quality that persists unattended, enforced by the codebase itself against
 every future hand — including its authors'.
 
-## The seventeen bars, maximally expressed
+## The eighteen bars, maximally expressed
 1. CORRECTNESS — no discovered class of bug retains a habitat. A new defect requires
    inventing a new KIND of mistake; every found class has its remover (walker, lint,
    ratchet, chokepoint) standing.
@@ -78,6 +78,23 @@ every future hand — including its authors'.
     ratchets ARE this dimension's gates); A+ = the machinery's targets REACHED and
     held. Ceiling doctrine: task-effectiveness is CERTIFIED only by real users —
     the lived tier signs that half.
+
+18. IMMERSION — THE SUSTAINED SPELL (ADDED 2026-07-20, the owner's question; the
+    commission's own third word — "cohesive, complete, IMMERSIVE" — given its
+    dimension): the negative-space bar. Immersion is what remains when NOTHING
+    jars — no jargon in a beat, no raw id in a headline, no JSON where prose
+    belongs, no error that speaks software instead of world, no wait that breaks
+    the fiction of a living place, no surface that admits to being an app. Its
+    fragments are guarded by bars 3/5/8/10/17; THIS bar grades their INTERSECTION
+    AND CONTINUITY — the whole-session integrity of the fiction. THE INSTRUMENT:
+    the SPELL-BREAK CENSUS — a sustained in-character walkthrough of the full loop
+    (generate → advance → letter → interview → road → court → gallery), counting
+    every moment the artifact confesses to being software; each break is a finding
+    HERE and may also be one in its home dimension (deliberate overlap — the
+    census hunts the class the fragments miss). A+ = a full session where the
+    spell never breaks. Ceiling doctrine: sustained immersion is CERTIFIED only
+    by real players lost in real worlds — the lived tier signs the final word;
+    the census signs everything the repo controls.
 
 ## Considered and deliberately NOT dimensions (recorded so the audit is complete)
 Learnability (owned by bar 3's ten-minute + empty-state craft) · maintainability
