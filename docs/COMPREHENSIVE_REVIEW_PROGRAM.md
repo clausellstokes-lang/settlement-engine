@@ -1255,6 +1255,24 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐ CYCLE 2 REFUTERS + FIX WAVE 1 (2026-07-20).** Refuter pass over the 38
+must-fix findings: 17 CONFIRMED + 11 PARTIAL survive to fix waves; 10 REFUTED
+(struck WITH reason — cause-walk-dark/epistemic-drama/tempo-governor ruled
+INTENDED-dormant-by-design, deletion/export/spend-alarm/transcendental-FP
+disproven). Plan: scratchpad/CYCLE2_FIX_PLAN.md (5 waves + owner-gated
+built-to-edge; Fable-architected as CLASS-KILLS: fix at the chokepoint + a
+STANDING ENFORCER — 3 new enforcers this cycle: E1 no-engine-token-in-prose
+walker, E2 voiceMechanics walker, E3 live-truth single-source selectors).
+⭐ FIX WAVE 1 DONE @ composite-r4 257b0eed — the FMG XSS chain closed
+(ATO-class): importGalleryMap F6 mirror (idx22) · load.js sanitizeMapSvg scrub
+(idx23) · marker.icon escaped at ALL FOUR sinks incl the redrawIcon path the
+implementer MISSED and the Fable checker caught (idx24) · TinyMCE local-vendored
+off azgaar.github.io (idx26) · runbook updated. Security suite 23/23; build 0 ·
+strict 0 · tsc 0 · lint 0 · validate-map-fork 141/141 · NUL clean. ⚠ the impl
+agent STOPPED pre-commit — Fable took over verify+commit (lesson banked: XSS
+briefs must enumerate ALL sinks). CSP enforce-flip owner-queued. FIX WAVE 2
+(store/engine correctness — phantom siege, wizardNews clobber, cross-campaign
+undo, tier/war contradictions) DISPATCHED.**
 **⬛⭐⭐ ROUND 3 CYCLE 2 — PHASE S COMPLETE (cold), refuters running (2026-07-20).**
 The cold-then-connect survey of the assembled wave @ c8c5baa8 landed: ~49 cold
 reviewers across the DIMENSION fleet (20 bars + story + spell censuses + critic),
