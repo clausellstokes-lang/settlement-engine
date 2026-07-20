@@ -39,7 +39,8 @@
  *           | 'add-stressor' | 'remove-stressor'
  *           | 'edit-prose'
  *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'
- *           | 'ransom-npc' | 'rescue-npc'} EditKind */
+ *           | 'ransom-npc' | 'rescue-npc'
+ *           | 'champion-npc'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -51,6 +52,9 @@ export const EDIT_KINDS = Object.freeze([
   'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
   // DESIGN_THE_ROADS §11 — THE PARTY'S HAND: the two roads-hostage intervention ops.
   'ransom-npc', 'rescue-npc',
+  // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING: back a live contestant's side of a
+  // contested goal (stamps a marker the ladder-contest pass folds into ContestRec.backedBy).
+  'champion-npc',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
@@ -75,6 +79,10 @@ export const COMMITTABLE_EDIT_KINDS = Object.freeze([
   // DESIGN_THE_ROADS §11 — the party's roads-hostage ops; dispatched via applyNpcOp
   // (commitPendingEdits' default arm), stamping whereabouts.partyRelease for the mover.
   'ransom-npc', 'rescue-npc',
+  // DESIGN_DEEP_COUPLINGS §8 D-4e — player siding; dispatched via applyNpcOp (the default
+  // arm), stamping the contestBacking marker the ladder-contest pass folds into backedBy.
+  // Rides commitPendingEdits (no dedicated operationRegistry op — the roads-op precedent).
+  'champion-npc',
 ]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the

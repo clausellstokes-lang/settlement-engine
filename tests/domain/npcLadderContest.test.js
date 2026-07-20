@@ -10,7 +10,7 @@ import { describe, it, expect } from 'vitest';
 import {
   CONTEST_TUNING, fixation01, goalVerb, goalThreshold, canonicalPair, contestPairKey,
   genesisContests, advanceAwareness, resolveContest, contestMargin, joinersFor,
-  buildSupportGoal, contestChallengeInputs, advanceContests,
+  buildSupportGoal, contestChallengeInputs, advanceContests, contestBackingMark,
 } from '../../src/domain/worldPulse/npcLadderContest.js';
 import { attributionWeight } from '../../src/domain/worldPulse/npcLadderGoals.js';
 import { normalizeContests, sortedContests, LADDER_TUNING } from '../../src/domain/worldPulse/npcLadderState.js';
@@ -253,6 +253,24 @@ describe('advanceContests — the settlement-wide pass', () => {
     expect(reminted).toBe(true);
     expect(res.news.some((n) => n.impactKind === 'npc_support')).toBe(true);
   });
+  it('D-4f CONTEST-SUPPORT: a bonded peer joins the WINNER\'s side and the win STRENGTHENS the bond', () => {
+    const npcs = {
+      n_a: mkStanding(mkGoal('ruling_authority', 78, 40, { progress: 1 }), { stock: 6 }),
+      n_b: mkStanding(mkGoal('ruling_authority', 80, 45, { progress: 0.5 }), { stock: 6 }),
+      // a rung-holder bonded to n_a above JOIN_BOND_FLOOR ⇒ he takes the field on n_a's side
+      j1: mkStanding(mkGoal('economic_capacity', 60, 40), { bonds: { n_a: { sev: 0.6, week: 0, kind: 'loyalty' } } }),
+    };
+    const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
+    const goalOutcomes = new Map([['n_a', { fired: true, expired: false, lapsed: false, signalVar: 'ruling_authority', endProgress: 1 }]]);
+    const res = advanceContests({
+      sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+      priorContests, npcs, priorNpcs: npcs, nidMeta: metaFor(['n_a', 'n_b', 'j1']),
+      goalOutcomes, remint: () => mkGoal('ruling_authority', 78, 50), attributionWeight, memoryWeaveActive: true, now: null,
+    });
+    // n_a prevailed; his bonded backer j1 shared the victory ⇒ the bond deepened (sev rose above 0.6)
+    expect(res.contests['contest.s1.ruling_authority.10'].outcome).toBe('a_finished');
+    expect(res.npcs.j1.bonds.n_a.sev).toBeGreaterThan(0.6);
+  });
   it('§10.5 CROSS-FACTION loss deposits a faction-pair incident (memoryWeave lit); same-faction / dark ⇒ none', () => {
     const npcs = { n_a: mkStanding(mkGoal('ruling_authority', 78, 40, { progress: 1 }), { stock: 6 }), n_b: mkStanding(mkGoal('ruling_authority', 80, 45, { progress: 0.5 }), { stock: 6 }) };
     const priorContests = { 'contest.s1.ruling_authority.10': { id: 'contest.s1.ruling_authority.10', signalVar: 'ruling_authority', kind: 'convergent', a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 }, b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 }, openedWeek: 10, backedBy: null, resolvedWeek: null, outcome: null, loserNid: null } };
@@ -284,6 +302,54 @@ describe('advanceContests — the settlement-wide pass', () => {
     });
     // no support conversion happened (memoryWeave dark) — the supporter keeps its primary
     expect(res.npcs.n_sup.goal.supportOf).toBeUndefined();
+  });
+});
+
+// ── §8 D-4e THE PLAYER SIDING (the champion producer) ────────────────────────────
+describe('D-4e player siding — the champion producer (marker → backedBy consume)', () => {
+  const worldState = { rngSeed: 'seed-1' };
+  const ID = 'contest.s1.ruling_authority.10';
+  const marked = (/** @type {string} */ contestId) => ({ ...proud, contestBacking: contestId });
+  const liveContest = (/** @type {'a'|'b'|null} */ backedBy = null) => ({
+    [ID]: {
+      id: ID, signalVar: 'ruling_authority', kind: 'convergent',
+      a: { nid: 'n_a', verb: 'raise', awareSince: 12, heardProgress: 0.4, heardWeek: 12 },
+      b: { nid: 'n_b', verb: 'raise', awareSince: 12, heardProgress: 0.9, heardWeek: 12 },
+      openedWeek: 10, backedBy, resolvedWeek: null, outcome: null, loserNid: null,
+    },
+  });
+  const metaWith = (/** @type {any} */ aNpc, /** @type {any} */ bNpc) => new Map([
+    ['n_a', { fkey: 'fac.crown', faction: gov, rungIndex: 0, rungCount: 2, npc: aNpc }],
+    ['n_b', { fkey: 'fac.crown', faction: gov, rungIndex: 1, rungCount: 2, npc: bNpc }],
+  ]);
+  const advance = (/** @type {any} */ nidMeta, /** @type {any} */ priorContests) => advanceContests({
+    sid: 's1', weeks: 30, tick: 30, seed: 'seed-1', townName: 'Town', worldState,
+    priorContests, npcs: { n_a: mkStanding(mkGoal('ruling_authority', 78, 40)), n_b: mkStanding(mkGoal('ruling_authority', 80, 45)) },
+    priorNpcs: {}, nidMeta, goalOutcomes: new Map(), remint: () => null, attributionWeight, memoryWeaveActive: false, now: null,
+  });
+
+  it('a champion-npc marker on a contestant folds into backedBy (the DM sided; the mover reacted)', () => {
+    expect(advance(metaWith(marked(ID), proud), liveContest()).contests[ID].backedBy).toBe('a');
+    expect(advance(metaWith(proud, marked(ID)), liveContest()).contests[ID].backedBy).toBe('b');
+  });
+  it('contest-SCOPED: a stale marker (a different, resolved contest id) never re-fires', () => {
+    const res = advance(metaWith(marked('contest.s1.ruling_authority.99'), proud), liveContest());
+    expect(res.contests[ID].backedBy).toBeNull();
+  });
+  it('idempotent: an already-backed contest is not flipped by a marker on the other side', () => {
+    expect(advance(metaWith(proud, marked(ID)), liveContest('a')).contests[ID].backedBy).toBe('a');
+  });
+  it('contestBackingMark reads the save-npc marker; unmarked / null ⇒ empty', () => {
+    expect(contestBackingMark({ contestBacking: 'x' })).toBe('x');
+    expect(contestBackingMark(proud)).toBe('');
+    expect(contestBackingMark(null)).toBe('');
+  });
+  it('shifts the resolution: with equal claims, the backed side takes a both-fire tie', () => {
+    const contest = liveContest()[ID];
+    const m = (/** @type {boolean} */ backed) => ({ seatWeight: 1, stakes: 1, attribution: 1, backed, joiners: 0 });
+    expect(contestMargin(m(true))).toBeGreaterThan(contestMargin(m(false)));
+    const v = resolveContest({ contest, outA: { fired: true }, outB: { fired: true }, marginA: m(true), marginB: m(false), seed: 'seed-1' });
+    expect(v.winner).toBe('a'); // the backed side prevails the dead heat
   });
 });
 

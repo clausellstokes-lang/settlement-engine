@@ -81,6 +81,18 @@ export function applyNpcOp(get, set, edit) {
       if (!wa || wa.state !== 'hostage') return;
       npc.whereabouts = { ...wa, partyRelease: k === 'ransom-npc' ? 'ransom' : 'rescue' };
       if (k === 'rescue-npc') rescueCaptorId = String(wa.placeId || '');
+    } else if (k === 'champion-npc') {
+      // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING. Stamp the contestBacking marker the
+      // ladder-contest pass folds into ContestRec.backedBy on its next advance (the roads
+      // whereabouts.partyRelease precedent: the DM writes the npc, the mover reacts). The marker
+      // is scoped to a SPECIFIC contest id, so a stale mark never re-fires on a later contest.
+      // The op writes NO ladder ledger directly; the pure marker contract (contestBackingMark)
+      // and its consume (the carry-forward fold in advanceContests) live in
+      // domain/worldPulse/npcLadderContest.js. The consume VALIDATES (a bogus id with no matching
+      // live contest is a byte-safe no-op), so
+      // this eager dispatcher stamps trustingly (the covenant UI offers it only to contestants).
+      if (!p.contestId || typeof p.contestId !== 'string') return;
+      npc.contestBacking = p.contestId;
     } else { return; }
     changed = true;
   });
