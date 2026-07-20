@@ -20,6 +20,7 @@
  *                  tradeGoods + services) is the registry category to pick from.
  */
 import { Sparkles, AlertTriangle, Link2, Building2, Package, HeartHandshake, Flag, Coins, CalendarDays } from 'lucide-react';
+import { swatch } from '../../design/tokens.js';
 
 export const CUSTOM_CATEGORIES = [
   { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
@@ -80,7 +81,7 @@ export const CUSTOM_CATEGORIES = [
   // (TRADITION_ELEMENT_KEYS/TRADITION_ACT_KEYS) and `epithet` is a free-text flavor
   // line (≤300). They surface in a dossier's Traditions tab via the view-consumer
   // merge (customFounding.js); they never touch generation or the tick.
-  { key:'traditions',   label:'Traditions',   Icon:CalendarDays, color:'#8a5a1a', singular:'Tradition',
+  { key:'traditions',   label:'Traditions',   Icon:CalendarDays, color:swatch['#8A5A1A'], singular:'Tradition',
     fields:['name','motifElement','motifAct','epithet'] },
   { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
     fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],

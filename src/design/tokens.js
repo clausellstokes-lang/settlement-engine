@@ -188,6 +188,7 @@ export const swatch = Object.freeze({
   '#7C3AED12': '#7c3aed12',
   '#7C3AED40': '#7c3aed40',
   '#8A2F4A': '#8a2f4a',
+  '#8A5A1A': '#8a5a1a',
   '#8B1A1A': '#8b1a1a',
   '#8C6F32': '#8c6f32',
   '#9C8068': '#9c8068',

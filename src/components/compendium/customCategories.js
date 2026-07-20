@@ -4,8 +4,10 @@
  * importable without pulling the whole manager component (and to break the
  * CustomContent ↔ Dependencies ↔ FactionEventBanner import cycle).
  *
- * Pure data + the lane grouping. No store, no React state.
+ * Pure data + the lane grouping. No store, no React state. The one import is
+ * the design-token swatch leaf (raw-color census routing — zero rendered change).
  */
+import { swatch } from '../../design/tokens.js';
 
 // Per-category schema:
 //   fields:        flat scalar fields rendered in the main form
@@ -83,7 +85,7 @@ export const CUSTOM_CATEGORIES = [
   // Traditions — homebrew holidays/festivals/rites (WB-j). motifElement/motifAct
   // pick the frozen genesis vocab; epithet is free-text flavor. No dependencies —
   // they surface in the dossier's Traditions tab, not through generation wiring.
-  { key:'traditions',   label:'Traditions',    color:'#8a5a1a',
+  { key:'traditions',   label:'Traditions',    color:swatch['#8A5A1A'],
     fields:['name','motifElement','motifAct','epithet'],
   },
   // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types

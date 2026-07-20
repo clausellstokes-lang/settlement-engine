@@ -178,7 +178,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 26 functions total — deploy all of them on a first cutover.
+There are 28 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
