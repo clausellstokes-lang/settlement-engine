@@ -14,7 +14,7 @@ import { resolveLeash } from '../corruptionLeash.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
-import { corruptionPlaneMultOf } from './piety.js';
+import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -721,7 +721,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // W-F3 site #7: the corruption-plane amplifier over the onset rate — a devout
     // chaotic-evil patron makes the rot spread faster, a lawful-good one starves it.
     // 1.0 for a deity-free / legacy 3-axis / non-devout settlement ⇒ byte-identical.
-    const planePressureMult = deity ? corruptionPlaneMultOf(item.settlement, deity) : 1;
+    const planePressureMult = (deity ? corruptionPlaneMultOf(item.settlement, deity) : 1) * skimPressureMultFor(item, worldState);
     // Real thieves-guild strength (if threaded) drags effective security down
     // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;

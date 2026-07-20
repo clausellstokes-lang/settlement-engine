@@ -152,8 +152,10 @@ export function defenseScore(d, ctx) {
  *  @param {boolean} defenderExposed @param {boolean} [faithRuptured] the high priest against his god (4b)
  *  @param {boolean} [defenderLieExposed] D-2: a fresh lie-exposure this advance (the exposed_liar window)
  *  @param {boolean} [contestedGoal] D-4b: a live intra-faction contest with this rival, or a recent loss
+ *  @param {boolean} [factionCaptured] coherence-11: the faction is held by the underworld (captureState corrupted/capture)
+ *  @param {boolean} [blocBacked] coherence-14: the governing faction commands a consolidated ruling bloc
  *  @returns {string[]} the open window reasons ([] ⇒ no window) */
-export function openWindows(d, ctx, defenderExposed, faithRuptured = false, defenderLieExposed = false, contestedGoal = false) {
+export function openWindows(d, ctx, defenderExposed, faithRuptured = false, defenderLieExposed = false, contestedGoal = false, factionCaptured = false, blocBacked = false) {
   /** @type {string[]} */
   const w = [];
   if (ctx.factionFalling) w.push('faction_power_falling');
@@ -169,6 +171,16 @@ export function openWindows(d, ctx, defenderExposed, faithRuptured = false, defe
   // challenge engine already models. Absent unless contestedGoals is lit AND a contest touches this
   // adjacent pair (or the defender lost one within the window season) ⇒ dark worlds never push it.
   if (contestedGoal) w.push('contested_goal');
+  // coherence-11 (D-corruption→ladder): a faction the underworld holds (captureState corrupted/
+  // capture) is unstable at every rung — the compromise invites challengers, exactly as a caught
+  // schemer's stigma does. Absent unless ladderPoliticalWindowsEnabled is lit AND the faction is
+  // captured (the caller supplies false otherwise) ⇒ dark worlds never push it (byte-identical).
+  if (factionCaptured) w.push('faction_captured');
+  // coherence-14 (D-politics→ladder): the governing faction of a consolidated ruling bloc emboldens
+  // its own climbers — the coalition's backing opens the seat to a windowed bid (the challenge is
+  // BACKED, not deterred; JUDGMENT — say "veto" to invert to a stability read). Same flag family;
+  // absent unless ladderPoliticalWindowsEnabled is lit AND a ruling bloc holds the seat.
+  if (blocBacked) w.push('bloc_backed');
   if (faithRuptured) w.push('faith_rupture'); // §4b PERMANENT — a head against his faith cannot rest
   return w;
 }
@@ -222,6 +234,8 @@ function grudgeSevOf(rec, defenderNid) {
  * @param {Set<string>|null} [a.contestPairs] D-4b: canonical pair keys of live contests (the contested_goal window)
  * @param {Set<string>|null} [a.loserWindowNids] D-4b: recent contest losers still inside the window season
  * @param {Map<string, number>|null} [a.rateMultDir] D-4b: the directional tunnel-vision attempt-rate multiplier
+ * @param {boolean} [a.factionCaptured] coherence-11: this faction is held by the underworld (the faction_captured window; caller supplies false unless ladderPoliticalWindowsEnabled is lit)
+ * @param {boolean} [a.blocBacked] coherence-14: this faction commands a consolidated ruling bloc (the bloc_backed window; caller supplies false unless ladderPoliticalWindowsEnabled is lit)
  * @param {Record<string, unknown>} a.worldState @param {number} a.realmBudget
  * @returns {ChallengePlan}
  */
@@ -233,6 +247,9 @@ export function resolveFactionChallenges(a) {
   const contestPairs = a.contestPairs instanceof Set ? a.contestPairs : null;
   const loserWindowNids = a.loserWindowNids instanceof Set ? a.loserWindowNids : null;
   const rateMultDir = a.rateMultDir instanceof Map ? a.rateMultDir : null;
+  // coherence-11/14: per-faction political windows — constant across this faction's rungs. Dark ⇒ false.
+  const factionCaptured = a.factionCaptured === true;
+  const blocBacked = a.blocBacked === true;
   const empty = /** @type {ChallengePlan} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 });
   if (cooldownUntil > weeks) return empty;           // (3) the interregnum
   if (realmBudget <= 0) return empty;                 // (4) the realm E0 cap is spent
@@ -275,7 +292,7 @@ export function resolveFactionChallenges(a) {
       (contestPairs && contestPairs.has(compareCodepoint(challenger0, defender.nid) <= 0 ? `${challenger0}|${defender.nid}` : `${defender.nid}|${challenger0}`))
       || (loserWindowNids && loserWindowNids.has(defender.nid))
     );
-    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid), freshLieExposed.has(defender.nid), contestedGoal);
+    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid), freshLieExposed.has(defender.nid), contestedGoal, factionCaptured, blocBacked);
     if (!windows.length) continue;
     const challenger = mk(i);
     challenger.grudgeVsDefender = grudgeSevOf(npcs[challenger.nid], defender.nid);

@@ -133,6 +133,15 @@ describe('§4 successScore — the weighting moves in the designed directions', 
     expect(peace).toBeLessThanOrEqual(0.95);
     expect(successScore({ ...base, rec: makeRec({ scaleBand: 6 }), settlement: town({ prosperity: 'Subsistence' }) })).toBeGreaterThanOrEqual(0.05);
   });
+  it('coherence-10b: a fresh calamity (custom_crisis) sinks the score; a boom lifts it', () => {
+    const crisisCond = [{ id: 'condition.custom_crisis.x', archetype: 'custom_crisis', label: 'Crisis', severity: 0.6 }];
+    const boomCond = [{ id: 'condition.boom.x', archetype: 'boom', label: 'Boom', severity: 0.5 }];
+    const neutral = successScore({ ...base, settlement: town({ prosperity: 'Comfortable' }) });
+    const crisis = successScore({ ...base, settlement: town({ prosperity: 'Comfortable', activeConditions: crisisCond }) });
+    const boom = successScore({ ...base, settlement: town({ prosperity: 'Comfortable', activeConditions: boomCond }) });
+    expect(crisis).toBeLessThan(neutral);
+    expect(boom).toBeGreaterThan(neutral);
+  });
 });
 
 describe('§3 occurrence — the calendar window', () => {
@@ -172,6 +181,12 @@ describe('§3 skip — hard stress / desperate economy ⇒ CANCELLED', () => {
     const recs = [makeRec()];
     const plague = [{ id: 'condition.plague.x', archetype: 'plague', label: 'Plague', severity: 0.8 }];
     const out = runTick({ settlement: town({ activeConditions: plague }), recs, weeks: 9 });
+    expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.CANCELLED);
+  });
+  it('coherence-10a: a severed trade lane (trade_route_cut → economic_collapse) cancels', () => {
+    const recs = [makeRec()];
+    const cut = [{ id: 'condition.trade_route_cut.x', archetype: 'trade_route_cut', label: 'Trade Route Cut', severity: 0.7 }];
+    const out = runTick({ settlement: town({ activeConditions: cut }), recs, weeks: 9 });
     expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.CANCELLED);
   });
   it('a realm siege stressor affecting the settlement cancels', () => {

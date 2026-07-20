@@ -93,6 +93,9 @@ import { faithRuptured } from './npcLadderCoherence.js';
 import { freshLieExposureFor, hasNpcCredibilityLedger, npcCredibilityActive } from './npcCredibility.js';
 import { advanceContests, contestChallengeInputs } from './npcLadderContest.js';
 import { mintFactionPairIncident } from './factionPairLedger.js';
+// coherence-14: the ruling-bloc read (a PURE, dormant⇒null read; settlementPolitics imports only
+// pure leaves, so no cycle). Consumed ONLY behind ladderPoliticalWindowsEnabled ⇒ dark ⇒ never called.
+import { rulingBlocOf } from './settlementPolitics.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -183,6 +186,21 @@ export function npcLadderActive(worldState) {
 export function contestedGoalsActive(worldState) {
   const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
   return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).contestedGoalsEnabled === true);
+}
+
+/**
+ * Are THE POLITICAL CHALLENGE WINDOWS lit (coherence-11 + coherence-14)? Reads the VIRTUAL flag
+ * simulationRules.ladderPoliticalWindowsEnabled === true, defensively — ABSENT ⇒ false ⇒ DORMANT (NO
+ * entry in DEFAULT_SIMULATION_RULES, so goldens do not move). AND-gated by the caller with the ladder
+ * (already lit here). Opens the faction_captured window (a faction the underworld holds — captureState
+ * corrupted/capture) and the bloc_backed window (the governing faction of a consolidated ruling bloc).
+ * factionCompetition (captureState) and settlementPolitics (blocs) are default/opt-in subsystems, so
+ * this dedicated flag — not their presence — is what keeps the windows dark. Pure, total.
+ * @param {{ simulationRules?: Record<string, unknown> }|null|undefined} worldState @returns {boolean}
+ */
+export function ladderPoliticalWindowsActive(worldState) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).ladderPoliticalWindowsEnabled === true);
 }
 
 // v1 goals reference NO pressure signals, so an empty pressures stub satisfies the S7
@@ -303,6 +321,9 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // + the cross-faction grievance read) additionally requires the memory weave.
   const contestsLit = contestedGoalsActive(worldState);
   const memWeave = memoryWeaveActive(worldState);
+  // coherence-11/14: the political challenge windows (faction_captured + bloc_backed). Dark ⇒ the
+  // per-faction window inputs stay false ⇒ openWindows never pushes them ⇒ byte-identical.
+  const politicalWindowsLit = ladderPoliticalWindowsActive(worldState);
   // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
   // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
   const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState, now2) : new Map();
@@ -395,6 +416,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     // resolve the governing faction's ladder key once per settlement (canonical accessor).
     const gratSidEvents = gratitudeBondEvents.size ? (gratitudeBondEvents.get(sid) || null) : null;
     const gratGovFkey = gratSidEvents ? governingLadderFkeyOf(s) : null;
+    // coherence-14: the settlement's ruling bloc (rulingBlocOf is dormant⇒null and needs
+    // settlementPolitics lit; only consulted when the political-windows flag is lit). The GOVERNING
+    // faction of a consolidated bloc — definitionally a bloc member — gets the bloc_backed window,
+    // so no fragile faction-name match against bloc.members is needed (the isGoverning read suffices).
+    const rulingBloc = politicalWindowsLit ? rulingBlocOf(worldState, sid, /** @type {Parameters<typeof rulingBlocOf>[2]} */ (causalItem)) : null;
 
     for (const faction of factionsList) {
       const fkey = ladderFactionKey(faction);
@@ -483,6 +509,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       const priorPower = priorRec ? priorRec.lastPower : power;
       const factionRising = power > priorPower + CHALLENGE_TUNING.POWER_TRAJECTORY_EPS;
       const factionFalling = power < priorPower - CHALLENGE_TUNING.POWER_TRAJECTORY_EPS;
+      // coherence-11: this faction is held by the underworld (captureState corrupted/capture) ⇒ the
+      // faction_captured window. coherence-14: the governing faction of a consolidated ruling bloc ⇒
+      // the bloc_backed window. Both false unless ladderPoliticalWindowsEnabled is lit (⇒ byte-dark).
+      const captureRung = String(asObject(faction).captureState || 'none');
+      const factionCaptured = politicalWindowsLit && (captureRung === 'corrupted' || captureRung === 'capture');
+      const blocBacked = politicalWindowsLit && rulingBloc != null && asObject(faction).isGoverning === true;
 
       // ── THE CHALLENGE ENGINE (§2/§3/§11.4): windowed, seeded, margin-gated contests
       // (a win SWAPS the pair — conservation; a loss drops the challenger — the stake). ──
@@ -500,6 +532,8 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           contestPairs: contestInputs ? contestInputs.contestPairs : null,
           loserWindowNids: contestInputs ? contestInputs.loserWindowNids : null,
           rateMultDir: contestInputs ? contestInputs.rateMultDir : null,
+          // coherence-11/14: the political challenge windows (false unless the flag is lit ⇒ dark).
+          factionCaptured, blocBacked,
         });
       if (truncated) rec.cooldownUntil = Math.max(rec.cooldownUntil, weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS);
       let normBreakingWins = 0;

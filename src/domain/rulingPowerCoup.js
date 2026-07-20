@@ -138,12 +138,13 @@ export function coupContenders(settlement) {
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
  * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
  * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
+ * @param {number} [args.economicAdj]  coherence-13 flag (economicCoupReadEnabled): signed shift to the incumbent hold-chance from the settlement's economic capacity — a prosperous seat holds, a hollowed treasury falls; the caller supplies 0 when the flag is dark ⇒ byte-identical (the warSentimentAdj precedent)
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0 }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0, economicAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -169,7 +170,10 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // interventionAdj (W-CONVERGENCE): 0 when the intervention layer is dark ⇒ byte-
     // identical. A surviving foreign force backing the incumbent raises the seat's
     // hold-chance; one backing the challengers lowers it. The clamp below bounds it.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0)));
+    // economicAdj (coherence-13): 0 when economicCoupReadEnabled is dark ⇒ byte-identical.
+    // A prosperous seat (high economic_capacity) holds; a hollowed treasury falls. Same ±0.125
+    // magnitude as authorityAdj; the caller supplies the signed value, the clamp bounds the sum.
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0) + (Number(economicAdj) || 0)));
   }
 
   const roll = rng.random();

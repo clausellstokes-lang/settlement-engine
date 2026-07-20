@@ -132,6 +132,10 @@ const TRAD_TUNING = Object.freeze({
   PROSPERITY_BY_RANK: Object.freeze([-0.25, -0.17, -0.08, 0, 0.05, 0.1, 0.15]),
   SEVERITY_PENALTY: -0.12, // drought / hard_winter in the afflicted half-year
   SEVERITY_BONUS: 0.08, // a bountiful year
+  // coherence-10b: symmetric to the seasonal severity term (vetoable magnitudes). A fresh calamity /
+  // trade bust weighs on the observance; a boom / rebuild buoys it.
+  CALAMITY_PENALTY: -0.12, // an active custom_crisis (disaster response / trade bust)
+  BOOM_BONUS: 0.08, // an active boom / flourishing / reconstruction condition
   LEGIT_MIN: -0.1, LEGIT_MAX: 0.08, // owner-health map over publicLegitimacy.score 0..100
   INSTAB_PENALTY: -0.06, INSTAB_THRESHOLD: 0.5, // ladder churn of the owner faction (T-3+; null-safe)
   WAR_PRESSURE_PENALTY: -0.08, // a milder 'wartime' stressor (siege/occupation CANCEL first)
@@ -158,7 +162,17 @@ const TRAD_TUNING = Object.freeze({
 // when a rite is forced on it (the tribute_strain magnitude family). Vetoable.
 const RITE_IMPOSED_RESENTMENT_W = 0.12;
 
-const HARD_STRESSOR_ARCHETYPES = new Set(['plague', 'famine', 'war_pressure', 'occupation_burden', 'vassal_extraction']);
+// coherence-10a (trade×traditions): a severed trade lane (trade_route_cut → economic_collapse,
+// threatProfile.js) is a hard economic stressor — a town whose lifeline is cut does not hold its
+// fair. Joins the five sibling cancel-stressors; dark by inheritance (traditionsEnabled off ⇒ never
+// reached), and no lit-traditions golden carries this condition ⇒ byte-identical.
+const HARD_STRESSOR_ARCHETYPES = new Set(['plague', 'famine', 'war_pressure', 'occupation_burden', 'vassal_extraction', 'trade_route_cut']);
+// coherence-10b (calamity×traditions): the fresh-calamity / boom read, symmetric to the seasonal
+// severity term in successScore. An active crisis (custom_crisis — disaster-response or trade-bust)
+// PENALIZES the observance; a booming or rebuilding town (boom / flourishing / reconstruction) LIFTS
+// it. Read from the settlement's active conditions (pure). Byte-identical when neither is present.
+const FRESH_CALAMITY_ARCHETYPES = new Set(['custom_crisis']);
+const BOOM_ARCHETYPES = new Set(['boom', 'flourishing', 'reconstruction']);
 // Realm war stressors that CANCEL (the hard war-shapes) vs merely PENALIZE ('wartime').
 const CANCEL_STRESSOR_TYPES = new Set(['siege', 'occupation']);
 const ACTIVE_STRESSOR_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
@@ -263,6 +277,14 @@ export function successScore(a) {
 
   // war pressure — a milder 'wartime' stressor (siege/occupation already CANCELLED upstream).
   if (warTypes.has('wartime')) score += T.WAR_PRESSURE_PENALTY;
+
+  // coherence-10b fresh calamity / boom — symmetric to the seasonal severity term above. An active
+  // crisis (custom_crisis: a fresh disaster response or a trade bust) weighs on the observance; a
+  // booming or rebuilding town (boom / flourishing / reconstruction) is buoyed. Pure read of the
+  // settlement's active conditions; byte-identical when neither is present (the common case).
+  const arches = new Set(activeArchetypes(settlement));
+  if ([...FRESH_CALAMITY_ARCHETYPES].some((a) => arches.has(a))) score += T.CALAMITY_PENALTY;
+  else if ([...BOOM_ARCHETYPES].some((a) => arches.has(a))) score += T.BOOM_BONUS;
 
   // scale-vs-means mismatch — a grand observance beyond the prosperity-supported band.
   if (pRank >= 0 && rec.scaleBand > pRank) score += T.SCALE_MISMATCH_PER_STEP * (rec.scaleBand - pRank);

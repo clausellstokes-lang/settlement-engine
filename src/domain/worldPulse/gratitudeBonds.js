@@ -26,7 +26,7 @@
 
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { governingFactionOf } from '../rulingPower.js';
-import { ladderFactionKey, num, asObject, compareCodepoint } from './npcLadderState.js';
+import { ladderFactionKey, num, asObject, compareCodepoint, bondSevToward } from './npcLadderState.js';
 import { clamp01 } from '../../kernel/math.js';
 
 /** @typedef {{ sev: number, tick: number }} GratitudeBondEvent */
@@ -137,4 +137,30 @@ export function rulingSeatNidOf(rawPriorRecord, settlement) {
   if (!Array.isArray(rungs) || !rungs.length) return null;
   const top = rungs[0];
   return typeof top === 'string' && top ? top : null;
+}
+
+/**
+ * D-7e clause (i) THE PERSON-BOND READ — the give-side twin of the (ii) WRITE lane above. Returns
+ * the gratitude/friendship severity (0..1) the GIVER court's ruling-seat NPC already holds toward the
+ * RECEIVER court's ruling-seat NPC, read from the PRIOR persisted ladder (the exact seat resolution
+ * the (ii) consume uses — deterministic, iteration-order-independent). Consumed by generosityEV as a
+ * bounded person-bond term DISTINCT from its faction bond (no double-count). Returns 0 unless the
+ * weave is lit AND both seats resolve AND a bond exists ⇒ a dark / ladder-absent world contributes
+ * exactly 0 ⇒ generosityEV byte-identical. Reuses rulingSeatNidOf + bondSevToward (no duplication).
+ * Null-safe at every hop (absent machinery no-ops, never throws). Pure.
+ * @param {Record<string, unknown>} worldState  the give-decision's read state (the prior ladder)
+ * @param {{ lit: boolean, giverSid: string, receiverSid: string, giverSettlement: (Record<string, unknown>|null|undefined), receiverSettlement: (Record<string, unknown>|null|undefined) }} args
+ * @returns {number}
+ */
+export function seatGratitudeSevToward(worldState, { lit, giverSid, receiverSid, giverSettlement, receiverSettlement }) {
+  if (!lit) return 0;
+  const g = String(giverSid || '');
+  const r = String(receiverSid || '');
+  if (!g || !r || g === r) return 0;
+  const priorLedger = asObject(getSpatialLedger(worldState, 'npcLadder'));
+  const giverSeatNid = rulingSeatNidOf(priorLedger[g], giverSettlement);
+  const receiverSeatNid = rulingSeatNidOf(priorLedger[r], receiverSettlement);
+  if (!giverSeatNid || !receiverSeatNid) return 0;
+  const giverStanding = asObject(asObject(priorLedger[g]).npcs)[giverSeatNid];
+  return clamp01(bondSevToward(/** @type {Parameters<typeof bondSevToward>[0]} */ (giverStanding), receiverSeatNid));
 }

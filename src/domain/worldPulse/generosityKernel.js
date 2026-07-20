@@ -133,7 +133,7 @@ import {
 } from '../spatial/intelActs.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { consumeRansomSettlements } from '../roads/thirdPartyRansom.js';
-import { noteGratitudeBond, applyGratitudeBondLedger } from './gratitudeBonds.js';
+import { noteGratitudeBond, applyGratitudeBondLedger, seatGratitudeSevToward } from './gratitudeBonds.js';
 import { memoryWeaveActive } from './relationshipEvolution.js';
 import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
@@ -710,10 +710,12 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       (willingnessLedger[`${giverId}:${receiverId}:grain_relief`]) || null);
 
     // ── THE VERDICT. ──
+    // D-7e (i): the person-bond severity between the two courts' ruling seats (0 when memoryWeave dark).
+    const seatBond01 = seatGratitudeSevToward(worldState, { lit: weaveLit, giverSid: giverId, receiverSid: receiverId, giverSettlement: giverS, receiverSettlement: receiverS });
     const verdict = generosityEV({
       giverId, receiverId, kind: 'grain_relief', now: tick,
       bond, history, conscience, strategy, faith, margin, commitment,
-      routeRisk, domestic, reliefCountRecent, askFraction01,
+      routeRisk, domestic, reliefCountRecent, askFraction01, seatBond01,
       quadrantMod, lensMod,
       conscienceException: false,
       priorWillingness,

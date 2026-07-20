@@ -561,6 +561,30 @@ export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} *
   return true;
 }
 
+// ── coherence-12: the political-control read (dark behind institutionPoliticalControlEnabled) ──
+// A faction-CONTROLLED institution resists closure (its patron shields it); a SUPPRESSED one closes
+// first (starved of support). Multiplicative on the vulnerability sort-key; 1 (identity) for any
+// institution neither list touches, so a settlement without control writes is byte-identical. Vetoable.
+const CONTROLLED_CLOSE_SHIELD = 0.5;
+const SUPPRESSED_CLOSE_EXPOSE = 1.5;
+/**
+ * The union of faction-CONTROLLED and faction-SUPPRESSED institution slugs on a settlement, read from
+ * the powerStructure.factions arrays factionCompetition writes (stablePart(id) slugs — the SAME slug
+ * `stablePart(inst.id || inst.name)` resolves to on the read side). Pure.
+ * @param {{ powerStructure?: ({ factions?: Array<Record<string, unknown>> }|null) }|null|undefined} settlement
+ * @returns {{ controlled: Set<string>, suppressed: Set<string> }}
+ */
+function factionControlSets(settlement) {
+  /** @type {Set<string>} */ const controlled = new Set();
+  /** @type {Set<string>} */ const suppressed = new Set();
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  for (const f of factions) {
+    for (const id of (Array.isArray(f?.controlledInstitutions) ? f.controlledInstitutions : [])) controlled.add(String(id));
+    for (const id of (Array.isArray(f?.suppressedInstitutions) ? f.suppressedInstitutions : [])) suppressed.add(String(id));
+  }
+  return { controlled, suppressed };
+}
+
 // ── Damped chances ───────────────────────────────────────────────────────────
 export function buildChance({ streak = 0, health = 0.5, affinity = 0.5, priorBuilds = 0 } = {}) {
   const t = INSTITUTION_LIFECYCLE_TUNING.build;
@@ -626,6 +650,10 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
   // D6 underways organic founding — a virtual flag read defensively from the RAW rules (absent from
   // DEFAULT_SIMULATION_RULES; the thirdPartyRansomEnabled idiom). Dark ⇒ no clandestine gap.
   const underwaysFoundingLit = (context.simulationRules || worldState?.simulationRules || {}).underwaysOrganicFoundingEnabled === true;
+  // coherence-12 institution political control — a virtual flag read defensively from the RAW rules
+  // (absent from DEFAULT_SIMULATION_RULES; the underwaysFoundingLit idiom). Dark ⇒ closure ranking
+  // ignores controlled/suppressed ⇒ byte-identical (institutionLifecycleEnabled is default-true).
+  const politicalControlLit = (context.simulationRules || worldState?.simulationRules || {}).institutionPoliticalControlEnabled === true;
 
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
@@ -749,11 +777,20 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       const closable = activeInstitutions(settlement).filter((/** @type {any} */ inst) => isClosableInstitution(inst, settlement));
       if (!closable.length) continue;
       // Most vulnerable first: contributing least and impaired most.
+      // coherence-12: when lit, a faction-controlled institution resists closure and a suppressed one
+      // closes first (multiplicative on the sort-key). Null sets when dark ⇒ factor 1 ⇒ byte-identical.
+      const controlSets = politicalControlLit ? factionControlSets(settlement) : null;
       const ranked = closable
         .map((/** @type {any} */ inst) => {
           const contribution = institutionContribution(settlement, inst, chains);
           const impairment = institutionImpairmentLoad(inst);
-          return { inst, contribution, impairment, vulnerability: (1 - contribution) * 0.6 + impairment * 0.4 };
+          let vulnerability = (1 - contribution) * 0.6 + impairment * 0.4;
+          if (controlSets) {
+            const slug = stablePart(inst.id || inst.name);
+            if (controlSets.controlled.has(slug)) vulnerability *= CONTROLLED_CLOSE_SHIELD;
+            else if (controlSets.suppressed.has(slug)) vulnerability *= SUPPRESSED_CLOSE_EXPOSE;
+          }
+          return { inst, contribution, impairment, vulnerability };
         })
         .sort((/** @type {any} */ a, /** @type {any} */ b) => b.vulnerability - a.vulnerability || byCodepoint(a.inst.name, b.inst.name));
       const target = ranked[0];

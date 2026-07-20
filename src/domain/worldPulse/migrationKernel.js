@@ -84,6 +84,10 @@ export const MIGRATION_KERNEL_TUNING = Object.freeze({
   // A merchant-caravan-grade danger-reading fidelity for the refugee route choice
   // when the origin has no alignment signal (mirrors supplyKernel's steady default).
   DEFAULT_RISK_TOLERANCE: 0.5,
+  // coherence-15: the maximum fraction a fully corruption-captured origin lowers its
+  // carrying-capacity tolerance by (a sharper out-migration shed). At grip 1 ⇒ τ×0.75.
+  // Only applied when migrationCorruptionPushEnabled is lit ⇒ otherwise ×1. Vetoable.
+  CORRUPTION_PUSH_MAX: 0.25,
 });
 
 // ── Live culture-vector extraction (the §II.5-2 LIVE read) ────────────────────
@@ -252,6 +256,40 @@ export function originTolerance(originItem, reachableCount) {
   return carryingCapacityTolerance({ prosperity01, connectivity01, granary01 });
 }
 
+/**
+ * coherence-15: the origin's criminal-network GRIP (0..1) — the stamped thievesGuildStrength, or a
+ * floor read from the criminalCaptureState ladder (corrupted/capture) when the guild stamp is absent.
+ * A DIRECT settlement read: importing supplyKernel's criminalStrength01Of would CYCLE (supplyKernel
+ * already imports buildCultureVector from this module). Pure, total.
+ * @param {{ thievesGuildStrength?: number, powerStructure?: (Record<string, unknown>|null) }|null|undefined} settlement
+ * @returns {number}
+ */
+function originCriminalGrip01(settlement) {
+  const s = settlement || {};
+  const guild = num(s.thievesGuildStrength, 0);
+  if (guild > 0) return clamp01(guild);
+  const cap = String((s.powerStructure || {}).criminalCaptureState || 'none');
+  return cap === 'capture' ? 0.85 : cap === 'corrupted' ? 0.6 : 0;
+}
+
+/**
+ * coherence-15: a corruption-riddled origin sheds harder — the underworld's grip LOWERS the
+ * carrying-capacity tolerance (a ≤1 multiplier on τ ⇒ a higher origin death rate in planMigration).
+ * DARK unless migrationCorruptionPushEnabled is lit (a VIRTUAL flag, absent from
+ * DEFAULT_SIMULATION_RULES — thievesGuildStrength/captureState are PRESENT in any corruption-lit
+ * world, so a bare signal-absent multiplier would NOT be byte-identical; the flag is the gate) ⇒ 1;
+ * also 1 when the origin carries no criminal grip. Pure.
+ * @param {Record<string, unknown>} worldState
+ * @param {{ thievesGuildStrength?: number, powerStructure?: (Record<string, unknown>|null) }|null|undefined} settlement
+ * @returns {number}
+ */
+export function migrationCorruptionPushMult(worldState, settlement) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  if (!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).migrationCorruptionPushEnabled === true)) return 1;
+  const grip = originCriminalGrip01(settlement);
+  return grip > 0 ? 1 - MIGRATION_KERNEL_TUNING.CORRUPTION_PUSH_MAX * grip : 1;
+}
+
 // ── RELEASE — credit the in-transit arrivals that have landed (early) ──────────
 /**
  * Release every migration column whose arrivalTick has come, crediting each
@@ -414,7 +452,8 @@ export function dispatchMigrations({ events, snapshot, pIndex, digest, worldStat
       if (cand) candidates.push(cand);
     }
 
-    const tolerance = originTolerance(originItem, reachable.length);
+    // coherence-15: a corruption-captured origin sheds harder (×1 when the flag is dark or no grip).
+    const tolerance = originTolerance(originItem, reachable.length) * migrationCorruptionPushMult(worldState, originItem.settlement);
     const plan = planMigration({
       originId, departures: loss, tolerance, candidates, season,
       rng: rng && typeof rng.fork === 'function' ? rng.fork(`migration:${originId}:${tick}`) : null,

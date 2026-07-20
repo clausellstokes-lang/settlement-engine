@@ -45,12 +45,18 @@ import { believedDestinationDanger } from './dispatchEV.js';
 
 // ── Tuning (documented; retuned in the E1a soak) ──────────────────────────────
 export const GENEROSITY_TUNING = Object.freeze({
-  // GIVE-side term weights (sum 1.0 ⇒ giveScore ∈ [0,1]). §2.1.
+  // GIVE-side term weights (the base five sum 1.0 ⇒ their giveScore ∈ [0,1]). §2.1.
   W_BOND: 0.30,
   W_HISTORY: 0.22,
   W_CONSCIENCE: 0.20,
   W_STRATEGY: 0.18,
   W_FAITH: 0.10,
+  // D-7e clause (i) THE PERSON-BOND: an ADDITIVE dark-gated bias beyond the normalized base — the
+  // gratitude/friendship a giver's ruling seat already holds toward the receiver's seat visibly
+  // tilts GIVE (the tieContribution idiom), the clamp01 keeping it from overturning the reserve
+  // floor. 0 when memoryWeave is dark ⇒ byte-identical. Half W_BOND — a personal tie is a secondary
+  // signal beside the faction one, and never double-counts it (distinct source). Vetoable.
+  W_SEAT_BOND: 0.15,
 
   // WITHHOLD-side term weights (sum 1.0 ⇒ withholdScore ∈ [0,1]). §2.2.
   W_MARGIN: 0.32,
@@ -374,6 +380,7 @@ export function dependencyTerm(reliefCountRecent = 0) {
  * @property {MarginRead|null} [margin]
  * @property {CommitmentRead|null} [commitment]
  * @property {number} [routeRisk]    a pre-computed belief-gated route risk [0,1] (else 0)
+ * @property {number} [seatBond01]   D-7e (i): the giver seat's gratitude-bond severity toward the receiver seat [0,1] (0 when memoryWeave dark / no bond)
  * @property {DomesticRead|null} [domestic]
  * @property {number} [reliefCountRecent]
  * @property {number} [askFraction01]  the share of the giver's spareable reserve the ask represents (1 = asks all headroom)
@@ -426,6 +433,9 @@ export function generosityEV(inputs) {
   const strategyVal = clamp01(strat.value01 * lStrategy);
   const leverageIntent = clamp01(strat.leverage01 * lLeverage);
   const faith = faithTerm(inputs?.faith);
+  // D-7e (i): the PERSON-bond severity (giver seat → receiver seat), pre-resolved by the caller
+  // (0 when memoryWeave is dark / no seat bond). A DISTINCT source from the faction `bond` above.
+  const seatBond = clamp01(finiteNumber(inputs?.seatBond01, 0));
 
   // The betrayal killswitch zeros the give-side (§2.1).
   const giveRaw = hist.betrayalKill ? 0 : clamp01(
@@ -433,7 +443,8 @@ export function generosityEV(inputs) {
     + T.W_HISTORY * hist.value01
     + T.W_CONSCIENCE * conscienceRaw
     + T.W_STRATEGY * strategyVal
-    + T.W_FAITH * faith,
+    + T.W_FAITH * faith
+    + T.W_SEAT_BOND * seatBond,
   );
   const giveScore = giveRaw;
 

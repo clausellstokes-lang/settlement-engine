@@ -444,3 +444,34 @@ export function corruptionPlaneMultOf(settlement, deity) {
   // (moral-kin) runner-up leaves it undiluted; only a moral-opposed rival mutes it.
   return corruptionPlaneMult(d, pietyMoralBleedOf(settlement));
 }
+
+// coherence-16: how hard a full-severity reconstruction skim lifts corruption onset (vetoable). The
+// final pressureMult is clamped to [0,2] by onsetHazard's pressureRateMult, so this stays bounded.
+const SKIM_ONSET_W = 0.6;
+/**
+ * coherence-16: THE RECONSTRUCTION-SKIM ONSET AMPLIFIER — the graft that takes root amid the
+ * scaffolding (upswing's `reconstruction_skim` condition) now raises real per-NPC corruption ONSET
+ * pressure, not narrative alone. Returns a ≥1 multiplier for onsetHazard's pressureMult channel (the
+ * corruptionPlaneMult sibling, same clamp). DARK on TWO independent absences — the VIRTUAL flag
+ * upswingHazardReadEnabled (ABSENT from DEFAULT_SIMULATION_RULES; the skim itself is also dark unless
+ * upswingArcs is lit) OR no skim condition present ⇒ 1.0 ⇒ byte-identical. Scales with the skim's
+ * severity. Pure, total.
+ * @param {{ activeConditions?: Array<Record<string, unknown>>, settlement?: ({ activeConditions?: Array<Record<string, unknown>> }|null) }|null|undefined} item  the snapshot settlement item (carries activeConditions / settlement.activeConditions)
+ * @param {Record<string, unknown> | null | undefined} worldState  for the flag read
+ * @returns {number} ≥ 1
+ */
+export function skimPressureMultFor(item, worldState) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  if (!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).upswingHazardReadEnabled === true)) return 1;
+  const conds = Array.isArray(item?.activeConditions) ? item.activeConditions
+    : Array.isArray(item?.settlement?.activeConditions) ? item.settlement.activeConditions : null;
+  if (!conds) return 1;
+  let sev = 0;
+  for (const c of conds) {
+    if (c && typeof c.id === 'string' && c.id.startsWith('condition.reconstruction_skim.')) {
+      const s = Number(c.severity);
+      if (Number.isFinite(s) && s > sev) sev = s;
+    }
+  }
+  return sev > 0 ? 1 + SKIM_ONSET_W * Math.min(1, sev) : 1;
+}
