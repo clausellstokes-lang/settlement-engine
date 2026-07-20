@@ -133,4 +133,21 @@ describe('injectGalleryMeta', () => {
     expect(injectGalleryMeta(SAMPLE_HTML, {})).toBe(SAMPLE_HTML);
     expect(injectGalleryMeta(undefined, meta)).toBe(undefined);
   });
+
+  // V-20 unlisted class: noindex stamps robots:noindex over the static
+  // reservation while the card still unfurls; the public path never sets it.
+  test('meta.noindex stamps robots:noindex, nofollow (unlisted); absent leaves robots alone', () => {
+    const withRobots = SAMPLE_HTML.replace(
+      '<title>SettlementForge</title>',
+      '<meta name="robots" content="noai, noimageai" />\n    <title>SettlementForge</title>',
+    );
+    const unlisted = injectGalleryMeta(withRobots, { ...meta, noindex: true });
+    expect(unlisted).toContain('<meta name="robots" content="noindex, nofollow" />');
+    expect(unlisted).not.toContain('noai, noimageai');
+    // The card still unfurls — title/image are present.
+    expect(unlisted).toContain('<meta property="og:title" content="Oakmere · SettlementForge" />');
+    // Public path (no noindex) leaves the reservation untouched.
+    const publicOut = injectGalleryMeta(withRobots, meta);
+    expect(publicOut).toContain('<meta name="robots" content="noai, noimageai" />');
+  });
 });

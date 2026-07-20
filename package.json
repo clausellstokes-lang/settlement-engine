@@ -7,6 +7,7 @@
     "preview": "vite preview",
     "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/prerender-routes.mjs",
     "validate:data": "node scripts/find-duplicate-keys.js",
     "validate:migration-head": "node scripts/check-migration-head.mjs",
     "validate:edge": "node scripts/validate-edge-functions.mjs",

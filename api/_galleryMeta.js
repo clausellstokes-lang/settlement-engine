@@ -148,8 +148,13 @@ function upsertMeta(html, attr, key, value) {
  * og:url/og:type. Pure: same input → same output. Unknown/empty meta returns the
  * html unchanged.
  *
+ * `meta.noindex` (V-20 unlisted class): stamp `robots: noindex, nofollow` over the
+ * static `noai, noimageai` tag so a party-shared unlisted link UNFURLS (the card
+ * is still built) yet never enters a search index. Backward compatible — omitted
+ * for the public gallery path, which stays indexable.
+ *
  * @param {string} html — the built index.html
- * @param {{ title?: string, description?: string, image?: string, url?: string, type?: string }} meta
+ * @param {{ title?: string, description?: string, image?: string, url?: string, type?: string, noindex?: boolean }} meta
  * @returns {string}
  */
 export function injectGalleryMeta(html, meta) {
@@ -172,6 +177,9 @@ export function injectGalleryMeta(html, meta) {
   }
   if (meta.url) out = upsertMeta(out, 'property', 'og:url', meta.url);
   if (meta.type) out = upsertMeta(out, 'property', 'og:type', meta.type);
+  // Unlisted (V-20): keep it out of the index while still unfurling. Supersedes
+  // the static `noai, noimageai` robots value on this served copy only.
+  if (meta.noindex) out = upsertMeta(out, 'name', 'robots', 'noindex, nofollow');
 
   return out;
 }

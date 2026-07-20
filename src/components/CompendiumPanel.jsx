@@ -17,6 +17,10 @@ import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
 import { DeitiesHub, LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
 import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
 import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } from './compendium/CustomContent.jsx';
+// The flat per-entry index (already in the compendium chunk via the global
+// search) + the lazy per-entry head helpers — V-19 long-tail routing.
+import { COMPENDIUM_INDEX } from '../domain/compendium/searchIndex.js';
+import { setCompendiumEntryMeta, clearCompendiumEntryMeta } from '../lib/seoCompendium.js';
 
 // The custom-content bucket keys a ?cat= deep-link may open (validated so an
 // arbitrary query value can never select a non-existent bucket).
@@ -114,7 +118,13 @@ const TAB_META = Object.freeze({
                   desc: 'Every named Compendium entry in one alphabetical index — archetypes, deities, operations, systems, and more, each a stable deep-link.' },
 });
 
-export default function CompendiumPanel({ config, standalone=false }) {
+export default function CompendiumPanel({ config, standalone=false, routeEntry }) {
+  // V-19 long tail: /compendium/<entry-id> lands here with routeEntry set. Resolve
+  // it to the flat index entry (id -> tab + anchor) so the panel opens on that
+  // entry's section and its head matches the prerendered page.
+  const entryFromRoute = routeEntry
+    ? COMPENDIUM_INDEX.find((e) => e.id === routeEntry) || null
+    : null;
   // Honor a ?cat=<bucket> deep-link on mount — a direct link into the custom-
   // content workspace focused on one authoring bucket (e.g. ?cat=deities from an
   // "Author a deity" CTA). Only a valid CUSTOM_CATEGORIES key is honored.
@@ -141,6 +151,8 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // ANCHOR_TO_TAB below; if the hash doesn't match a known anchor, we
   // ignore it and respect ?tab= instead.
   const initialTab = (() => {
+    // A per-entry route (/compendium/<id>) opens directly on the entry's tab.
+    if (entryFromRoute) return entryFromRoute.tab;
     if (typeof window === 'undefined') return 'tiers';
     const params = new URLSearchParams(window.location.search);
     const t = params.get('tab');
@@ -197,6 +209,27 @@ export default function CompendiumPanel({ config, standalone=false }) {
       if (prevDesc !== null && descEl) descEl.setAttribute('content', prevDesc);
     };
   }, [activeTab, standalone]);
+
+  // V-19 long tail: arriving via /compendium/<id> refines the head to THAT entry
+  // (so a JS-rendering crawler's DOM matches the prerendered page — bar 14) and
+  // scrolls its section into view. Runs after the per-tab head effect so the
+  // entry head wins on mount; its cleanup removes the DefinedTerm JSON-LD when
+  // the panel unmounts (leaving the compendium).
+  useEffect(() => {
+    if (!standalone || !entryFromRoute) return undefined;
+    setCompendiumEntryMeta(entryFromRoute);
+    const timer = setTimeout(() => {
+      if (typeof document === 'undefined') return;
+      const el = document.getElementById(entryFromRoute.anchor);
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 140);
+    return () => {
+      clearTimeout(timer);
+      clearCompendiumEntryMeta();
+    };
+  }, [standalone, entryFromRoute]);
 
   // Jump to a tab and scroll a section/entry anchor into view (used by the
   // Overview dashboard's hub links and the A–Z index's per-entry links).
