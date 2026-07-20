@@ -1134,6 +1134,35 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ ROUND 3 CYCLE 1 IS CLOSED — every verified finding fixed, built, queued, or
+deferred-with-rationale (2026-07-20, composite-r4 @ 212758ad).** WAVE F4 @ 5b436227
+(13 findings: THE LADDER IS VISIBLE — PowerTab section, render+secrets pins, lazy ·
+faction re-link with the DECLARED parked-family shift · PDF collation
+locale-independent + the vacuous lens test made real · the walker sees 4 more ledgers ·
+factionPairStates undo-protected · @enforced-by existence pin (64 tags resolve) ·
+retention parity to mig 024 · money-RLS executed-policy census 30/30 · the redacting
+edge logger + CI guard · error-reporter token strip · CDN pin walker; og-image
+vendoring → owner queue). THE CHECKPOINT DID ITS JOB: the two-shard run caught 3
+non-parked reds no focused gate could see — TRIAGED @ 212758ad (the occupation LABEL
+COLLISION — a real product defect F2's correct archetype fix exposed; the title=
+census net −2 with no ratchet re-pin; the gratitudeBonds census disposition), each
+fixed at cause, probe-proven. FINAL CYCLE-1 SUITE: 14,563 passed / 4 failed = EXACTLY
+the parked golden families, zero flakes, closure 1,024,674 ≤ 1,040,000. CYCLE TALLY:
+72 findings → 50 verified (121 refuters, 1 killed) → 46 fixed/built across F1-F4 +
+triage (37 commits' worth in 5 wave commits + 2 doc commits), 13 new dark
+flags/couplings, ~90 new pins. GRADE MOVEMENT (cycle-1 close, self-assessed;
+cycle 2 re-grades independently): correctness A-→A+ · cohesion A-→A · a11y B+→A- ·
+content A-→A · determinism A→A+ · lifecycle A-→A+ · claims A-→A · security A-→A ·
+perf A+ holds · experience/substance/game-feel regrade AFTER the Vision Wave lands
+their surfaces. THE OWNER QUEUE (15 items, each with a recommendation — the full
+table in scratchpad CYCLE1_CLOSING_DRAFT.md, restated at close-out): ai-cost 1-4 ·
+narrativeTempo wire-or-remove · About covenant copy ×2 · believed-distress consumer ·
+npc-agency voice (T-5) · coherence-09 re-mint fold-in · 10c/10d festival terms
+(REC approve) · og-image vendoring · FMG pin cadence · ONE-REGEN flag membership
+(5 F3 flags + underways + heirs). DEFERRAL LEDGER: gifts-ledger UI → V-B delivers ·
+4 task-#40 seams four-gate-DEFERRED · security-2 call-site migration seeded. NEXT:
+THE VISION WAVE lanes V-A → V-G (owner-commissioned, 18 items + the R-batch,
+docs/DESIGN_VISION_WAVE.md) → CYCLE 2 resurveys the enlarged product.**
 **⬛⭐ ROUND 3 WAVE F3 SHIPPED — the missing couplings built dark (2026-07-20,
 composite-r4 @ 45dffd55; manager-validated).** 9 builds, 15 files, +422/−14, ALL
 dark: trade_route_cut cancels festivals + calamity/boom successScore terms (ride
