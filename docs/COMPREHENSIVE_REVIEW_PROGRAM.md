@@ -1134,6 +1134,21 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ OWNER RULING (2026-07-19, "i agree") — THE SCOPE FREEZE.** The Deep Couplings
+wave (D-0..D-7 as designed, incl. the post-fold D-5/D-6) is THE BATCH THAT CLOSES THE
+BUILD PHASE. From this ruling forward: NO new pre-loop feature scope. Every new idea —
+however excellent — lands in a vNEXT LEDGER (post-launch program intake) instead of the
+pre-loop queue: recorded with the same care (spec, foundations, rationale), built AFTER
+launch. The loop's convergence definition is now reachable because the target has stopped
+moving. EXCEPTIONS (narrow, by construction): defects found by the loop are FIXES not
+scope; coherence-matrix gate-passing candidates already enumerated are loop intake as
+ruled; owner-gated items already in the queue (buyback-hold confirm, faction-pair schema
+D-7c, plague-economy re-mint, port-severs-connectivity, ONE-REGEN flag membership) remain
+live decisions, not new scope. The already-recorded deferred seams + the six-item vNext
+seed (per-NPC interiority, second founder ring, per-route re-propagation, recall-npc,
+player-safe road-scene composer, campaign-share surface + secrets toggle) form the vNext
+ledger's opening entries. THE BUILD PHASE ENDS when Deep Couplings lands; then: fold
+batch 3 (onto dc0b6e2b) → build-completeness → THE ROUND 3 LOOP → convergence → the tail.
 **⬛ THE LADDER FACTION-KEY FIX IS FOLDED (2026-07-19, owner's separate session
 task_1375e56f) — COMPOSITE ADVANCED aad6265e → dc0b6e2b.** FOLD: claude/the-ladder @
 14e8a2fa (25749ae5, the ladder reads the canonical .faction field — the CONFIRMED live
