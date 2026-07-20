@@ -20,6 +20,7 @@ import { getAllFlags } from './flags.js';
  * The active campaign, if any — read defensively (the store shape is owned
  * elsewhere; this must survive a partially-initialized or foreign state).
  * @param {any} state
+ * @returns {any}
  */
 function activeCampaign(state) {
   const id = state?.activeCampaignId;
@@ -35,19 +36,21 @@ function activeCampaign(state) {
  *   • tick  — the active campaign's world clock (absent outside a campaign).
  *   • flags_on — the sorted names of every flag currently resolved ON.
  * @param {any} state
- * @returns {{ seed: (string|null), tick: (number|null), flags_on: string[] }}
+ * @returns {{ seed: (string|number|null), tick: (number|null), flags_on: string[] }}
  */
 export function buildCrashForensics(state) {
+  /** @type {string|number|null} */
   let seed = null;
+  /** @type {number|null} */
   let tick = null;
   try {
     const c = activeCampaign(state);
     const ws = c && typeof c.worldState === 'object' ? c.worldState : null;
-    const candidate =
-      (ws && (ws.rngSeed ?? null)) ??
-      (state?.lastSeed ?? null) ??
-      (c && c.map && (c.map.seed ?? null)) ??
-      null;
+    /** @type {unknown} */
+    let candidate = null;
+    if (ws && ws.rngSeed != null) candidate = ws.rngSeed;
+    else if (state && state.lastSeed != null) candidate = state.lastSeed;
+    else if (c && c.map && c.map.seed != null) candidate = c.map.seed;
     if (typeof candidate === 'string' || typeof candidate === 'number') seed = candidate;
     if (ws && typeof ws.tick === 'number' && Number.isFinite(ws.tick)) tick = ws.tick;
   } catch { /* forensics is best-effort; never throw into the error reporter */ }

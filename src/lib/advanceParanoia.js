@@ -48,23 +48,27 @@ export function firstDivergence(a, b, path = 'worldState') {
   const tb = typeOf(b);
   if (ta !== tb) return `${path}: type ${ta} ≠ ${tb}`;
   if (ta === 'array') {
-    if (a.length !== b.length) return `${path}: length ${a.length} ≠ ${b.length}`;
-    for (let i = 0; i < a.length; i++) {
-      const d = firstDivergence(a[i], b[i], `${path}[${i}]`);
+    const arrA = /** @type {unknown[]} */ (a);
+    const arrB = /** @type {unknown[]} */ (b);
+    if (arrA.length !== arrB.length) return `${path}: length ${arrA.length} ≠ ${arrB.length}`;
+    for (let i = 0; i < arrA.length; i++) {
+      const d = firstDivergence(arrA[i], arrB[i], `${path}[${i}]`);
       if (d) return d;
     }
     return null;
   }
   if (ta === 'object') {
-    const ka = Object.keys(a).sort();
-    const kb = Object.keys(b).sort();
+    const objA = /** @type {Record<string, unknown>} */ (a);
+    const objB = /** @type {Record<string, unknown>} */ (b);
+    const ka = Object.keys(objA).sort();
+    const kb = Object.keys(objB).sort();
     if (ka.length !== kb.length || ka.some((k, i) => k !== kb[i])) {
-      const onlyA = ka.filter((k) => !(k in b));
-      const onlyB = kb.filter((k) => !(k in a));
+      const onlyA = ka.filter((k) => !(k in objB));
+      const onlyB = kb.filter((k) => !(k in objA));
       return `${path}: keys differ (+${JSON.stringify(onlyA)} / -${JSON.stringify(onlyB)})`;
     }
     for (const k of ka) {
-      const d = firstDivergence(a[k], b[k], `${path}.${k}`);
+      const d = firstDivergence(objA[k], objB[k], `${path}.${k}`);
       if (d) return d;
     }
     return null;
