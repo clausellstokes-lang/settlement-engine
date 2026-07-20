@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ BUILD-COMPLETENESS PASSED + THE HANDOFF GATE CLOSED — THE ROUND 3 LOOP IS
+OPEN (2026-07-20, the executor session).** The 8-auditor completeness workflow
+(wf_61870393-aa2, ~104 slices across every design source) returned EXACTLY ONE missing
+item: THE ROADS §0.5 kernel-header scope notes (comment-only; the functional sanction
+was already enforced) — REPAIRED @ ca244100 (traditionsKernel + migrationKernel headers
+amended verbatim; strict 0, lint 0, sizeBaseline+traditionsDormancy green). Everything
+else LANDED / DEFERRED_RECORDED / HUMAN_GATED — notable adjudications: Wave A residual
+= ALL recorded-deferral (kill-list tolerance-0 at 100/72/167/161 + 4 taste-deferrals
+pinned) · WB-g deterministic-violet closed-as-misconceived (vetoable) · WB-k PDF
+counterseal = §10 post-launch owed · fraud-pass + FF-a..d verified folded (previous
+row). docs/THE_RESURVEY_HANDOFF.md COMMITTED @ 868c1fc7 (the AI-handoff gate: the
+platform-agnostic loop brief; loop-entry baseline pinned @ ca244100). THE 13-DIMENSION
+AMENDED STANDARD recorded (the cycle-1 standard audit, vetoable): the ruling's ten +
+11 DETERMINISM/REPRODUCIBILITY + 12 STATE-LIFECYCLE INTEGRITY + 13 CLAIMS-VS-ENFORCEMENT
+PARITY — amendments only raise. CYCLE 1 RESURVEY DISPATCHED: workflow wf_1b5674b1-770 —
+15 lanes (6 Fable judgment-dense: cohesion/experience/substance/game-feel/determinism/
+claims-parity · 9 Opus breadth: correctness/perf/security/AI-cost/content/a11y/lifecycle
++ coherence-matrix-re-verify + pre-stocked-disposition) + a completeness critic.
+Loop discipline: findings → 2-of-3 adversarial refuters → clustered fix waves (full gate
+each) → cycle ledger row + grade table → converge (zero must-fix + zero gate-passing
+gaps + zero achievable grade improvements) → ONE confirming cycle → the owner tail.**
 **⬛⭐⭐⭐ THE MINI-FOLD IS COMPLETE — THE BUILD PHASE IS CLOSED (2026-07-20, the
 handed-off executor session; claude/composite-r4 @ ceb77368, worktree minifold).**
 The RESUME HERE row below is EXECUTED. Steps landed: STEP 2 strict-clean @ 2bec2f64
