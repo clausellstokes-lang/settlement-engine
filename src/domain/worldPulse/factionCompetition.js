@@ -315,7 +315,8 @@ export const COALITION_TRUST_TUNING = Object.freeze({
  * The co-governing faction IDs of a settlement item: the roster factions whose archetype sits in the
  * GOVERNING COALITION's members and not among its opponents (the SEAT's real declared-rivals politics,
  * via governingCoalition — NOT the auto-seeded factionStates peers). Faction ids match factionPairKey.
- * Codepoint-sorted for deterministic pairing under the cap. Pure. @param {any} item @returns {string[]}
+ * Codepoint-sorted for deterministic pairing under the cap. Pure.
+ * @param {import('./beliefMap.js').SnapItem} item @returns {string[]}
  */
 function coGoverningFactionIds(item) {
   const coalition = governingCoalition(item);
@@ -323,7 +324,7 @@ function coGoverningFactionIds(item) {
   const opponents = coalition.opponents instanceof Set ? coalition.opponents : new Set();
   /** @type {string[]} */
   const ids = [];
-  settlementFactions(item).forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
+  settlementFactions(item).forEach((/** @type {import('../settlement.schema.js').SimFaction} */ faction, /** @type {number} */ index) => {
     const a = factionArchetype(faction);
     if (a && a !== FA.OTHER && members.has(a) && !opponents.has(a)) ids.push(factionId(item.id, faction, index));
   });
@@ -333,8 +334,9 @@ function coGoverningFactionIds(item) {
 /**
  * Deposit the coalition-cooperation trust for every co-governing faction pair across the snapshot's
  * settlements (year-cadence gated per pair; capped fan-out). memoryWeave DARK ⇒ the ORIGINAL worldState
- * back (no factionPairStates touched ⇒ byte-identical). Pure. @param {any} worldState @param {any} snapshot
- * @param {number} weeks @returns {any}
+ * back (no factionPairStates touched ⇒ byte-identical). Pure.
+ * @param {Record<string, unknown>} worldState @param {import('./beliefMap.js').BeliefSnapshot} snapshot
+ * @param {number} weeks @returns {Record<string, unknown>}
  */
 export function depositCoalitionTrust(worldState, snapshot, weeks) {
   if (!memoryWeaveActive(worldState)) return worldState;
@@ -352,7 +354,7 @@ export function depositCoalitionTrust(worldState, snapshot, weeks) {
         // pair's incident history IS the tenure clock — no new persisted field, catch-up-tolerant).
         const rec = factionPairOf(ws, ids[i], ids[j]);
         const banked = !!(rec && Array.isArray(rec.incidents) && rec.incidents.some(
-          (/** @type {any} */ inc) => inc && inc.type === 'coalition_standing' && (now - Math.floor(Number(inc.tick) || 0)) < T.YEAR_WEEKS));
+          (/** @type {{ type?: string, tick?: number }} */ inc) => inc && inc.type === 'coalition_standing' && (now - Math.floor(Number(inc.tick) || 0)) < T.YEAR_WEEKS));
         if (banked) continue;
         ws = mintFactionPairIncident(ws, { a: ids[i], b: ids[j], type: 'coalition_standing', trustDelta: T.TRUST_STEP, sev: T.SEV, tick: now, weeks: now });
         deposited += 1;
