@@ -14,12 +14,19 @@
   R-batch; THE FINITE-SEMANTICS LAW binds input surfaces):
   - Lane V-A: LANDED @ composite-r4 `299f2843` (biome truth per-cell + heirs-lite;
     ledger row 28ea1162; heirs×contests lit-together = cycle-2 verify item).
-  - BATCH 1 HOT (4 lanes, dispatched): V-B in `minifold` (composite-r4 @ 299f2843) ·
-    V-C in `vision-c` · V-E in `vision-e` · V-I in `vision-i` (the three vision-*
-    worktrees run on MAIN-tree node_modules by walk-up — npm ci is EUSAGE-broken on
-    this lineage, do not run it; branches claude/vision-{c,e,i} off 212758ad; the
-    manager reconciles the V-A delta at fold). BATCH 2 (as lanes land): V-D, V-F,
-    V-G, V-H — V-F before V-G (both touch pendingEdits); V-D prefers a quiet tree.
+  - LANDED FOLD-READY: V-I @ claude/vision-i `e5e4ce1d` (7/7 ops+GTM, 60 pins;
+    fold at the next minifold boundary; ledger row 9f439a73).
+  - HOT (4 lanes): V-B in `minifold` (composite-r4 @ 299f2843) · V-C in `vision-c` ·
+    V-E in `vision-e` (+ the V-20 unlisted-sharing & V-13 featured amendments folded
+    into its scope mid-lane) · V-H in the `vision-i` WORKTREE on branch
+    `claude/vision-h` (worktree ROTATED — V-I's commit is safe on its own branch).
+    Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
+    EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
+    V-D (fresh branch off 212758ad; prefers a quiet tree) → V-F → V-G (F before G:
+    both touch pendingEdits) → V-J (after V-E's report — reads its slug format).
+    Every brief carries THE TWO-BRANCH GEOGRAPHY note (lane worktrees cannot see
+    the ledger-branch docs; cite absolute main-tree paths; the worktree's docs/
+    lacking them is EXPECTED, not missing).
   - THE A+ STANDARD: docs/THE_APLUS_STANDARD.md = the grading law from cycle 2 on.
   - FOLD DISCIPLINE: manager merges landed lanes back into claude/composite-r4
     (minifold) with NUL-scan + strict/tsc/lint + focused batteries + two-shard suite
