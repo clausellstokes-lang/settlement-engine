@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -52,6 +52,9 @@ import TreatyPanel from './TreatyPanel.jsx';
 // the SAME FP-R reason — it rides RealmInspector's already-lazy chunk at zero eager
 // manifest cost (a lazy() here would mint a preload entry and tip the ratchet).
 import AdvanceReport from './AdvanceReport.jsx';
+// THE ROAD SCENE (DESIGN_THE_ROADS §14 R-7): "Stage the road" — STATIC for the SAME FP-R
+// reason (rides this already-lazy chunk at zero eager manifest cost).
+import RoadScenePanel from './RoadScenePanel.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
@@ -62,6 +65,7 @@ import AdvanceReport from './AdvanceReport.jsx';
 export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard', label: 'Dashboard', Icon: LayoutDashboard },
   { id: 'war',       label: 'War and Diplomacy', Icon: Swords },
+  { id: 'road',      label: 'Stage the Road', Icon: Route },
   { id: 'treaty',    label: 'Treaties', Icon: ScrollText },
   { id: 'resolve',   label: 'War & Resolve', Icon: HeartHandshake },
   { id: 'pantheon',  label: 'Pantheon', Icon: Sparkles },
@@ -289,6 +293,11 @@ export default function RealmInspector({
             campaign
               ? <WarSection campaign={campaign} nameById={nameById} />
               : <CampaignEmptyState lead="War and diplomacy appears once a campaign is live." {...emptyHandlers} />
+          )}
+          {activeSection === 'road' && (
+            campaign
+              ? <RoadScenePanel campaign={campaign} />
+              : <CampaignEmptyState lead="Stage a road once a campaign is live." {...emptyHandlers} />
           )}
           {activeSection === 'treaty' && (
             campaign

@@ -17,7 +17,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 // components-map-3: the relationship palette is single-sourced from
@@ -27,6 +27,14 @@ import { REL_TYPES } from './relationshipEdgeStyle.js';
 
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
 const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];
+
+// DESIGN_THE_ROADS §13 — the Travelers overlay sub-layers. Armies + migrant columns read
+// live ledgers (always available); envoys are present only when the roads ledger is lit.
+const TRAVELER_SUBLAYERS = [
+  { id: 'armies', label: 'Armies', color: swatch.danger },
+  { id: 'migrants', label: 'Migrant columns', color: swatch['#5A6E82'] },
+  { id: 'envoys', label: 'Envoys', color: swatch['#A0762A'] },
+];
 
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
@@ -80,6 +88,17 @@ export default function LayersPanel({ onClose }) {
     const next = new Set(regionalImpactFilter);
     if (next.has(status)) next.delete(status); else next.add(status);
     setLayerFilter('regionalImpactStatusFilter', Array.from(next));
+  }
+
+  const travelersFilter = new Set(
+    Array.isArray(layers.travelersFilter) && layers.travelersFilter.length
+      ? layers.travelersFilter
+      : TRAVELER_SUBLAYERS.map(s => s.id)
+  );
+  function toggleTravelerSub(id) {
+    const next = new Set(travelersFilter);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    setLayerFilter('travelersFilter', next.size === TRAVELER_SUBLAYERS.length ? null : Array.from(next));
   }
 
   return (
@@ -226,6 +245,24 @@ export default function LayersPanel({ onClose }) {
           checked={!!layers.roads}
           onChange={() => toggleLayer('roads')}
         />
+        <LayerToggle
+          label="Travelers & columns"
+          checked={!!layers.travelers}
+          onChange={() => toggleLayer('travelers')}
+        />
+        {layers.travelers && (
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
+            {TRAVELER_SUBLAYERS.map(s => (
+              <FilterChip
+                key={s.id}
+                label={s.label}
+                color={s.color}
+                active={travelersFilter.has(s.id)}
+                onClick={() => toggleTravelerSub(s.id)}
+              />
+            ))}
+          </div>
+        )}
         <LayerToggle
           label="Labels"
           checked={!!layers.labels}

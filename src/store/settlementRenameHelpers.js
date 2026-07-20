@@ -50,6 +50,10 @@ export function applyNpcOp(get, set, edit) {
   const k = edit?.kind;
   const p = edit?.payload || {};
   let changed = false;
+  // DESIGN_THE_ROADS §11 — a rescue also worsens the captor↔home edge; captured here (the
+  // captor id read inside set()) and fired AFTER the sync commit, since recordPartyImpact is
+  // async + campaign-scoped. Null unless a rescue landed on a live hostage.
+  let rescueCaptorId = null;
   set(state => {
     const npc = state.settlement?.npcs?.[p.npcIndex];
     if (!npc) return;
@@ -68,10 +72,27 @@ export function applyNpcOp(get, set, edit) {
       npc.stasis = { reason: p.reason };
     } else if (k === 'return-npc') {
       delete npc.stasis;
+    } else if (k === 'ransom-npc' || k === 'rescue-npc') {
+      // DESIGN_THE_ROADS §11 — THE PARTY'S HAND. Stamp the release marker the roads mover
+      // consumes on its next tick (the §3 stasis-collision precedent: the DM writes the npc,
+      // the mover reacts). Only a LIVE HOSTAGE can be intervened on. The pure body + all pins
+      // live in domain/roads/ops.js, kept in lockstep with this thin eager dispatcher.
+      const wa = npc.whereabouts;
+      if (!wa || wa.state !== 'hostage') return;
+      npc.whereabouts = { ...wa, partyRelease: k === 'ransom-npc' ? 'ransom' : 'rescue' };
+      if (k === 'rescue-npc') rescueCaptorId = String(wa.placeId || '');
     } else { return; }
     changed = true;
   });
   if (changed) get().persistActiveSaveEdit?.();
+  // The rescue's inflame rides the EXISTING inflame_relationship party impact (no new
+  // relationship writer). It lives in a LAZY leaf (roadsRescueInflame) dynamic-imported ONLY
+  // when a rescue lands — the cold path stays OFF the eager first-paint store closure (§16).
+  // Same undo semantics as every manual party impact (undoLastEvent/persist for the marker;
+  // the impact reverts by its own path).
+  if (changed && rescueCaptorId) {
+    import('./roadsRescueInflame.js').then(m => m.fireRescueInflame(get, rescueCaptorId)).catch(() => {});
+  }
 }
 
 /**

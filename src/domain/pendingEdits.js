@@ -38,7 +38,8 @@
  *           | 'add-resource' | 'remove-resource'
  *           | 'add-stressor' | 'remove-stressor'
  *           | 'edit-prose'
- *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'} EditKind */
+ *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'
+ *           | 'ransom-npc' | 'rescue-npc'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -48,6 +49,8 @@ export const EDIT_KINDS = Object.freeze([
   'edit-prose',
   // DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (edit / reassign / stasis+return).
   'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
+  // DESIGN_THE_ROADS §11 — THE PARTY'S HAND: the two roads-hostage intervention ops.
+  'ransom-npc', 'rescue-npc',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
@@ -69,6 +72,9 @@ const _editKindSet = new Set(EDIT_KINDS);
 export const COMMITTABLE_EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-settlement',
   'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
+  // DESIGN_THE_ROADS §11 — the party's roads-hostage ops; dispatched via applyNpcOp
+  // (commitPendingEdits' default arm), stamping whereabouts.partyRelease for the mover.
+  'ransom-npc', 'rescue-npc',
 ]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the

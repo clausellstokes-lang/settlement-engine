@@ -79,6 +79,12 @@ import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjec
 // receipt names the top reasons — the weights ARE the reasons.
 import { peaceCausalActive, warReasonFactor, warReasonsFor, topReasons } from './warReasons.js';
 import { peaceReasonFactor, peaceReasonsFor } from './peaceReasons.js';
+// §11b R-8 THE EMBASSY SUIT: a peace embassy that reached the venue deposits a bounded peace
+// modifier into the roads-owned roadsEmbassies ledger; sue_for_peace CONSUMES it here. The
+// reader returns ×1 EXACTLY when the ledger is absent / no live suit stands ⇒ byte-identical
+// (roads deposits, the war system consumes; roads never writes war state).
+import { embassySuitPeaceMult, EMBASSY_LEDGER_KEY } from '../roads/embassyLedger.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
 // W-DOCTRINE-4 §3: the OVERT twin of the causal war-load — the ruling bloc loads the
 // settlement's decision weights toward its END (the SAME §H kernel, receipted in the
 // visible record). Dormant / no ruling bloc ⇒ factor 1.0 ⇒ byte-identical scoring.
@@ -550,9 +556,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null,
  *   coalitionLoad?: { factorFor: (move: string) => number } | null,
  *   commitmentLoad?: { factorFor: (move: string, targetId?: string|null) => number } | null,
- *   extractionEV?: { adjFor: (targetId: string) => number } | null }} args
+ *   extractionEV?: { adjFor: (targetId: string) => number } | null,
+ *   embassy?: { suitFor: (foes: string[]) => number } | null }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null, embassy = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -627,6 +634,13 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
         if (m > peaceMult) peaceMult = m;
       }
       if (peaceMult !== 1) peaceScore = clamp01(peaceScore * peaceMult);
+    }
+    // §11b R-8 THE EMBASSY SUIT: a heard peace embassy loads the sue_for_peace weight the same
+    // bounded way as the causal ledger — roads DEPOSITED, the war system CONSUMES. NULL (⇒ the
+    // ledger is absent, roads dark / no suit) ⇒ ×1 ⇒ byte-identical. Codepoint-stable max.
+    if (embassy) {
+      const m = embassy.suitFor([...ctx.hostileTargets, ...ctx.besieging].map(String).sort());
+      if (m !== 1) peaceScore = clamp01(peaceScore * m);
     }
     scored.sue_for_peace = peaceScore;
   }
@@ -989,7 +1003,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const extractionEV = upswingArcsActive(worldState)
       ? { adjFor: (/** @type {string} */ targetId) => extractionUpswingAdj({ worldState, snapshot, conquerorId: String(sId), targetId }) }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV });
+    // §11b R-8: a heard peace embassy's suit loads sue_for_peace. NULL when the roads-owned
+    // roadsEmbassies ledger is absent (roads dark / no suit) ⇒ the scorer is byte-identical.
+    const embassy = getSpatialLedger(worldState, EMBASSY_LEDGER_KEY)
+      ? { suitFor: (/** @type {string[]} */ foes) => embassySuitPeaceMult(worldState, String(sId), foes) }
+      : null;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV, embassy });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);

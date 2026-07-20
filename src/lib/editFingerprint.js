@@ -26,6 +26,8 @@ const TARGET_OF = {
   'edit-prose': 'prose',
   // DESIGN_NPC_LIFECYCLE §2 — all three NPC ops target the npc entity.
   'edit-npc': 'npc', 'reassign-npc': 'npc', 'stasis-npc': 'npc', 'return-npc': 'npc',
+  // DESIGN_THE_ROADS §11 — the party's hostage-intervention ops target the npc entity.
+  'ransom-npc': 'npc', 'rescue-npc': 'npc',
 };
 /** edit kind → change tier (cosmetic|structural|prose) — same grouping the
  *  commit path's EDIT_COMMITTED counts use. */
@@ -37,6 +39,8 @@ const TIER_OF = {
   'edit-prose': 'prose',
   // NPC lifecycle ops are structural (they move sim-visible facets / seats / state).
   'edit-npc': 'structural', 'reassign-npc': 'structural', 'stasis-npc': 'structural', 'return-npc': 'structural',
+  // Roads hostage-intervention ops are structural (they move a sim-visible captivity state).
+  'ransom-npc': 'structural', 'rescue-npc': 'structural',
 };
 
 /** Coarse cascade signal from previewCascade() — counts + impact enum only.

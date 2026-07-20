@@ -100,6 +100,11 @@ const EXPECTED_VOICE = {
   // the tradition:null precedent (no culture crier). Deliberately unvoiced (JUDGMENT, vetoable).
   migration_flight: null,
   tradition_change: null,
+  // THE ROADS (owner commission, engine lift #5): a named NPC's journey / capture /
+  // ransom / return is a chronicle beat carrying its own roadsProse headline+summary,
+  // NOT a town-crier proclamation — deliberately unvoiced (the tradition/npc_ladder
+  // precedent; newsVoiceCategory returns null for it via the set-but-unclassified guard).
+  roads: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

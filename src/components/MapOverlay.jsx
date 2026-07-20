@@ -24,6 +24,7 @@ import RelationshipEdges from './map/RelationshipEdges.jsx';
 import ChainEdges        from './map/ChainEdges.jsx';
 import RegionalCausalityLayer from './map/RegionalCausalityLayer.jsx';
 import WarFaithMapOverlay from './map/WarFaithMapOverlay.jsx';
+import TravelersLayer    from './map/TravelersLayer.jsx';
 import RoadsLayer        from './map/RoadsLayer.jsx';
 import LabelsLayer       from './map/LabelsLayer.jsx';
 import MarkersLayer      from './map/MarkersLayer.jsx';
@@ -325,6 +326,10 @@ export default function MapOverlay({ bridge, transformOut }) {
               coalition badge, occupation shading, trade-war prize). Self-gates to
               null when no campaign / no live war state; honors channel visibility. */}
           <WarFaithMapOverlay />
+          {/* DESIGN_THE_ROADS §13 — moving armies / migrant columns / named-NPC envoys over
+              the road graph. Opt-in DM-truth lens (default off); dormant ledgers render
+              nothing. Above war glyphs, below the settlement pins. */}
+          {layers.travelers && <TravelersLayer />}
           {layers.placements !== false && <PlacementsLayer transformRef={transformRef} />}
           {layers.markers       && <MarkersLayer onEditMarker={marker => setEditDialog({ kind: 'marker', item: marker })} />}
           {layers.labels        && <LabelsLayer onEditLabel={label => setEditDialog({ kind: 'label', item: label })} />}

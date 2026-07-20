@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
@@ -9,6 +9,7 @@ import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
+import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
 import NpcLifecycleControls from './NpcLifecycleControls.jsx';
 
 /**
@@ -118,6 +119,16 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const applyUserEditAction  = useStore(s => s.applyUserEditAction);
   const revertUserEditAction = useStore(s => s.revertUserEditAction);
   const settlement           = useStore(s => s.settlement);
+  const savedSettlements     = useStore(s => s.savedSettlements);
+  // DESIGN_THE_ROADS §12 — the ONE dossier whereabouts line + short badge (display-read only;
+  // DM-SECRET by construction — npc.whereabouts never ships, §15). Resolves place ids to names
+  // from the saved roster so "Held in Dulwich" reads over a raw id.
+  const resolvePlaceName = useMemo(() => {
+    const map = new Map((savedSettlements || []).map((s) => [String(s?.id), s?.settlement?.name || s?.name]));
+    return (id) => map.get(String(id)) || null;
+  }, [savedSettlements]);
+  const wLine = whereaboutsLine(npc.whereabouts, resolvePlaceName);
+  const wBadge = whereaboutsBadge(npc.whereabouts);
   const npcKey               = npc?.id != null ? String(npc.id) : (npc?.name != null ? String(npc.name) : null);
   const resolveNpcIndex = () => {
     if (!settlement?.npcs || !npcKey) return -1;
@@ -239,6 +250,18 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
               Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
+            </div>
+          )}
+          {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the
+              mover wrote the mirror; DM-SECRET by construction (§15). */}
+          {wLine && (
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
+              {/* Flat material (deep-craft): a colored uppercase label, no box/tint/radius. */}
+              <span style={{
+                fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                color: wBadge === 'Held' ? swatch.danger : swatch.inkMag3,
+              }}>{wBadge}</span>
+              <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
           )}
           {npc.goal?.short && (

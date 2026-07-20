@@ -200,6 +200,8 @@ describe('mounted-everywhere-it-should-be guarantee', () => {
       'src/domain/worldPulse/religiousContest.js',       // religion rework — occupation→conversion force-scaling (occupying-force size)
       'src/domain/display/armyStrength.js',              // F1 — player-safe army-strength read-model
       'src/domain/display/warResolve.js',                // P5 — War & Resolve display read-model (needs the raw facets for the exact will/hope the siege uses)
+      'src/domain/worldPulse/roadsKernel.js',            // THE ROADS §7 amendment C — escort protection reads the home settlement's military quality (readiness/experience/capacity) at dispatch ("better soldiers and equipment do make a difference")
+      'tests/domain/roadsEmbassyExtensions.test.js',     // THE ROADS §11b R-8 — the escort-refinement test reconstructs the frozen escort01 = militaryQuality01(readiness/experience/capacity) × settlementWeight01 (a deliberate test reader, the RC-e roadsKernel precedent)
     ]);
     const offenders = hits.filter(p => !ALLOWED.has(p));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
