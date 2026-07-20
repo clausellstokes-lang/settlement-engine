@@ -1,11 +1,15 @@
 import { useState, lazy, Suspense } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText} from 'lucide-react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText, BookOpen} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
+// R-4 THE WORLD BOOK — the bound-book export (chronicle + dossiers + map + realm +
+// receipts). Same lazy jsPDF path, its own module; loaded only on user action.
+const generateWorldBook = (...args) =>
+  import('../../utils/generateWorldBook.js').then(m => m.generateWorldBook(...args));
 // V-17 THE CAMPAIGN IMPORT — the paste/upload → review → commit surface. Lazy so
 // its schema wall + review UI stay off the Settlements first paint.
 const CampaignImportPanel = lazy(() => import('./CampaignImportPanel.jsx'));
@@ -51,6 +55,22 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   const [pdfError, setPdfError] = useState(null);
   // V-17 THE CAMPAIGN IMPORT — the import surface opens on demand (lazy-mounted).
   const [importOpen, setImportOpen] = useState(false);
+  // R-4 THE WORLD BOOK — busy/error for the bound-book export (both faces).
+  const [wbBusy, setWbBusy] = useState(false);
+  const [wbError, setWbError] = useState(null);
+  const handleWorldBook = (mode) => async (e) => {
+    e.stopPropagation();
+    if (wbBusy) return;
+    setWbError(null);
+    setWbBusy(true);
+    try {
+      await generateWorldBook(campaign, settlements, { mode });
+    } catch (err) {
+      setWbError(err?.message ? `World Book failed: ${err.message}` : 'World Book export failed. Please try again.');
+    } finally {
+      setWbBusy(false);
+    }
+  };
   // How far one Advance Time step carries the campaign world. Mirrors the World
   // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
   // the same default the store's advanceCampaignWorld uses.
@@ -165,6 +185,24 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               onClick={(e) => { e.stopPropagation(); setImportOpen(true); }}>
               Import
             </Button>
+            {/* R-4 THE WORLD BOOK — the bound keepsake. Two faces: the DM's full
+                book, and a player-safe handout that leaks zero covert marks. */}
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<BookOpen size={10}/>}
+              onClick={handleWorldBook('dm')}
+              disabled={settlements.length === 0 || wbBusy}>
+              {wbBusy ? 'Binding…' : 'World Book'}
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<BookOpen size={10}/>}
+              onClick={handleWorldBook('player')}
+              disabled={settlements.length === 0 || wbBusy}>
+              Player Book
+            </Button>
             <Button
               variant="danger"
               size="sm"
@@ -180,13 +218,14 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         )}
       </div>
 
-      {/* Campaign PDF export error — inline alert so a failed export is never silent */}
-      {pdfError && (
+      {/* Export error — inline alert so a failed export is never silent. One alert
+          serves both the campaign PDF and the R-4 World Book (they never run at once). */}
+      {(pdfError || wbError) && (
         <div
           role="alert"
           style={{ padding:'6px 12px', fontSize:FS.xs, color:RED, background:RED_BG, fontFamily:sans }}
         >
-          {pdfError}
+          {pdfError || wbError}
         </div>
       )}
 
