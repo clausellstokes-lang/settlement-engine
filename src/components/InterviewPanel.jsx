@@ -203,7 +203,7 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
                             data-cite-kind={c.kind}
                             style={{
                               fontSize: FS.xs, color: GOLD, fontFamily: sans,
-                              border: `1px solid ${GOLD}`, borderRadius: 2, padding: `0 ${SP.xs}px`,
+                              border: `1px solid ${GOLD}`, padding: `0 ${SP.xs}px`,
                             }}
                           >
                             ◆ {c.label}

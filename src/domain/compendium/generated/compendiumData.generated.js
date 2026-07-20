@@ -39,12 +39,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     "count": 7
   },
   "operations": {
-    "count": 164,
+    "count": 167,
     "exemptCount": 71,
     "byKlass": {
       "canon": 5,
       "macro": 40,
-      "mechanical": 119
+      "mechanical": 122
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -160,6 +160,9 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"updateCustomItem","klass":"mechanical","slice":"customContentSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"deleteCustomItem","klass":"mechanical","slice":"customContentSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"clearCloudCustomContent","klass":"mechanical","slice":"customContentSlice","targetScope":"global","receiptRef":null,"undoToken":"loadCustomContentFromCloud"},
+      {"opType":"stageCorpusCandidates","klass":"mechanical","slice":"corpusFactorySlice","targetScope":"global","receiptRef":null,"undoToken":"removeCorpusCandidate"},
+      {"opType":"reviewCorpusCandidate","klass":"mechanical","slice":"corpusFactorySlice","targetScope":"global","receiptRef":null,"undoToken":null},
+      {"opType":"removeCorpusCandidate","klass":"mechanical","slice":"corpusFactorySlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"addPlacement","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
       {"opType":"removePlacementLocal","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
       {"opType":"updatePlacement","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
@@ -364,6 +367,17 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"hostile","label":"Hostile","color":"#8b1a1a","effect":"Open conflict. Military dominates. Exports embargoed. Safety degraded. Criminal infiltration likely."},
       {"id":"neutral","label":"Neutral","color":"#6b5340","effect":"No generation influence. Minor economic contact only."}
     ]
+  },
+  "corpus": {
+    "count": 0,
+    "authored": true,
+    "kinds": ["institutionDesc","npcVoice","traditionMotif"],
+    "byKind": {
+      "institutionDesc": 0,
+      "npcVoice": 0,
+      "traditionMotif": 0
+    },
+    "entries": []
   },
   "institutions": {
     "tierCount": 6,

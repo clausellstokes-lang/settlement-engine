@@ -97,7 +97,7 @@ export const OPERATIONS = Object.freeze({
   // W-COMPOSER-2: the realm-verb force-as-proposal mint (cancel = dismissWorldPulseProposal; apply = applyWorldPulseProposal).
   stageRealmVerb: { opType:'stageRealmVerb', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'realm-proposal', undoToken:null },
   undoLastPulse: { opType:'undoLastPulse', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
-  // ── K-B MECHANICAL (115) — simple setters/updaters of durable/domain state ──
+  // ── K-B MECHANICAL (118) — simple setters/updaters of durable/domain state ──
   queueEdit: { opType:'queueEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertSingleEdit' },
   revertSingleEdit: { opType:'revertSingleEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   revertPendingEdits: { opType:'revertPendingEdits', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
@@ -176,6 +176,11 @@ export const OPERATIONS = Object.freeze({
   updateCustomItem: { opType:'updateCustomItem', klass:'mechanical', slice:'customContentSlice', targetScope:'global', receiptRef:null, undoToken:null },
   deleteCustomItem: { opType:'deleteCustomItem', klass:'mechanical', slice:'customContentSlice', targetScope:'global', receiptRef:null, undoToken:null },
   clearCloudCustomContent: { opType:'clearCloudCustomContent', klass:'mechanical', slice:'customContentSlice', targetScope:'global', receiptRef:null, undoToken:'loadCustomContentFromCloud' },
+  // V-5 THE CORPUS FACTORY — staging-catalog mutations. None writes canon (canon is the
+  // owner's gen:compendium-data fold of APPROVED_CORPUS); these only stage/review candidates.
+  stageCorpusCandidates: { opType:'stageCorpusCandidates', klass:'mechanical', slice:'corpusFactorySlice', targetScope:'global', receiptRef:null, undoToken:'removeCorpusCandidate' },
+  reviewCorpusCandidate: { opType:'reviewCorpusCandidate', klass:'mechanical', slice:'corpusFactorySlice', targetScope:'global', receiptRef:null, undoToken:null },
+  removeCorpusCandidate: { opType:'removeCorpusCandidate', klass:'mechanical', slice:'corpusFactorySlice', targetScope:'global', receiptRef:null, undoToken:null },
   addPlacement: { opType:'addPlacement', klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo' },
   removePlacementLocal: { opType:'removePlacementLocal', klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo' },
   updatePlacement: { opType:'updatePlacement', klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo' },

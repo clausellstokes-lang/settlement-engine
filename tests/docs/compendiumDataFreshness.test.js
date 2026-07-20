@@ -28,6 +28,7 @@ import { DEITY_POOL } from '../../src/generators/data/deityPool.js';
 import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { ARCHETYPES, REL_TYPES } from '../../src/domain/compendium/catalogData.js';
+import { APPROVED_CORPUS, CORPUS_KINDS } from '../../src/domain/compendium/corpusStaging.js';
 
 describe('Compendium data — the drift contract', () => {
   it('the committed artifact is byte-identical to a fresh generation', () => {
@@ -81,6 +82,20 @@ describe('Compendium data — the drift contract', () => {
     expect(COMPENDIUM_DATA.lenses.entries.map((e) => e.id)).toEqual([...TOWN_MAP_STYLE_IDS]);
     expect(COMPENDIUM_DATA.archetypes.count).toBe(ARCHETYPES.length);
     expect(COMPENDIUM_DATA.relationships.count).toBe(REL_TYPES.length);
+  });
+
+  it('renders the corpus block from the OWNER-COMMITTED APPROVED_CORPUS only (V-5)', () => {
+    // Parity: the generated corpus count equals the committed canon leaf's length. Staged/
+    // rejected candidates live in the runtime store and can NEVER inflate this number —
+    // gen:compendium-data reads corpusStaging.js, not the store (the approval boundary).
+    expect(COMPENDIUM_DATA.corpus.count).toBe(APPROVED_CORPUS.length);
+    expect(COMPENDIUM_DATA.corpus.entries).toHaveLength(APPROVED_CORPUS.length);
+    expect(COMPENDIUM_DATA.corpus.kinds).toEqual([...CORPUS_KINDS]);
+    expect(COMPENDIUM_DATA.corpus.authored).toBe(true);
+    // Every canon entry carries provenance (no anonymous corpus in the compendium).
+    for (const e of COMPENDIUM_DATA.corpus.entries) {
+      expect(e.provenance && typeof e.provenance.source === 'string').toBe(true);
+    }
   });
 
   it('derives preset-lighting membership from the real preset configs', () => {

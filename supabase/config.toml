@@ -503,6 +503,13 @@ verify_jwt = true
 [functions.ai-analyst]
 verify_jwt = true
 
+# interview (V-1 THE INTERVIEW) — authenticated, user-facing AI control surface (the
+# analyst's sibling: cited answers with a conjecture register). verify_jwt true (the
+# handler additionally re-checks auth, account status, and the Surveyor entitlement gate,
+# and spends the metered 'analysis' credit inside the function).
+[functions.interview]
+verify_jwt = true
+
 # surveyor-byok (BYOK MANAGEMENT SURFACE, #29) — authenticated key management: the
 # verify-by-test-call. verify_jwt true (the handler additionally re-checks auth,
 # account status, and the Surveyor entitlement gate inside the function).

@@ -17,14 +17,13 @@
 
 import { createPRNG } from '../kernel/prng.js';
 import { pickVariant } from '../kernel/proseHash.js';
+import { clamp01 } from '../kernel/math.js';
 import { embattlementLevel } from './spatial/embattlement.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
 import {
   ORACLE_SCENE_TEXTURE, ORACLE_QUIET_SCENE, ORACLE_COMPLICATION_FRAMES, ORACLE_LIKELIHOODS,
 } from '../data/oracleCorpus.js';
 
-/** @param {number} n @returns {number} */
-const clamp01 = (n) => (Number.isFinite(n) ? Math.max(0, Math.min(1, n)) : 0);
 /** The most a live world may bend the player's prior (bounded — the dice still matter). */
 const PRESSURE_CAP = 0.35;
 

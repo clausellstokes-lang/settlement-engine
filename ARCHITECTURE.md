@@ -147,7 +147,7 @@ section is only the entry pointer to it.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 17 slices, with `immer + persist +
+One Zustand store composed from 18 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.
@@ -191,7 +191,7 @@ shows all visible items.
   atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
   consent + velocity guards, and gallery view-dedup — up to the current head. RLS
   is the security spine.
-- **functions/** (28 Deno edge functions) (Deno edge):
+- **functions/** (29 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
