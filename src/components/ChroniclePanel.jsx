@@ -22,6 +22,7 @@ import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import { nameOf } from '../domain/rulingPower.js';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
@@ -63,6 +64,25 @@ function relativeTime(iso) {
 function absoluteTime(iso) {
   if (!iso) return '';
   try { return new Date(iso).toLocaleString('en-US'); } catch (_) { return iso; }
+}
+
+// `Label: blurb`, or a bare `Label` when the record carries no blurb at all. A
+// trailing colon with nothing after it reads as a rendering failure, and some real
+// records genuinely have no prose: `npcs` mixes two kinds, and the STRUCTURAL
+// office-holders (npcStructure.js — `generatedAs`, `importance`, linked ids) carry
+// no goal/secret/desc of any sort.
+function labelled(label, blurb) {
+  return blurb ? `${label}: ${blurb}` : label;
+}
+
+// `settlement.stress` is a SINGLE OBJECT, not an array — confirmed by executed probe
+// (0 arrays / 10 plain objects / 30 absent across 40 generations). renderList's
+// `Array.isArray` guard therefore dropped the Stressors row outright on real data, which
+// is why fixing only that row's key spelling would have been cosmetic. The narrative edge
+// function normalizes exactly this way before reading it (prompts.ts stress extract).
+function asList(value) {
+  if (Array.isArray(value)) return value;
+  return value ? [value] : [];
 }
 
 // Chip with label + icon.
@@ -177,11 +197,35 @@ function FullEntryModal({ entry, onClose }) {
           {renderSection('History', s.history)}
           {renderSection('Economic Viability', s.economicViability)}
 
-          {renderList('Institutions', s.institutions, (it) => `${it?.name || 'Unnamed'}: ${it?.description || ''}`)}
-          {renderList('NPCs', s.npcs, (n) => `${n?.name || 'Unnamed'} (${n?.role || ''}): ${n?.description || ''}`)}
-          {renderList('Factions', s.powerStructure?.factions, (f) => `${f?.name || 'Unnamed'}: ${f?.description || ''}`)}
-          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.description || JSON.stringify(c)))}
-          {renderList('Stressors', s.stress, (st) => `${st?.label || ''}: ${st?.description || st?.text || ''}`)}
+          {/* THE SNAPSHOT-SHAPE LAW. `entry.aiSettlement` is NOT an AI-authored object —
+              generate-narrative deep-clones the GENERATOR settlement and refines text in
+              place (prompts.ts extract/apply write `desc`/`summary`/`issue` back onto the
+              existing records), so these five rows carry GENERATOR keys: factions
+              [faction, power, desc, ...], conflicts [parties, issue, stakes, desc, ...],
+              institutions [name, category, desc, ...], npcs [name, role, goal, secret, ...],
+              stress [type, label, summary, crisisHook, ...] — all five confirmed by an
+              executed generateSettlementPipeline probe. An earlier cut read
+              `.name`/`.description` throughout — spellings NO generator record carries — so
+              factions rendered "Unnamed: ", institutions/NPCs/stressors rendered a bare
+              label with an empty blurb, and conflicts fell through to a raw JSON dump.
+              Real key FIRST, legacy `.description` kept as a tail fallback (fixture-shaped
+              data still renders). Faction naming routes through the canonical
+              rulingPower.nameOf (`.faction || .name`) rather than a fourth hand-rolled
+              accessor — same chokepoint the ladder faction-key fix adopted.
+              Contrast: identityMarkers and frictionPoints below are AI-authored WHOLESALE
+              (apply() mints them), so their accessors were already correct.
+              @enforced-by tests/ui/chronicleSnapshotShape.test.jsx */}
+          {renderList('Institutions', s.institutions, (it) => labelled(it?.name || 'Unnamed', it?.desc || it?.description || ''))}
+          {renderList('NPCs', s.npcs, (n) => labelled(
+            `${n?.name || 'Unnamed'}${n?.role ? ` (${n.role})` : ''}`,
+            // goal.short then secret.what — the two fields the narrative pass actually
+            // refines for an NPC (prompts.ts npcs apply()). Structural office-holders
+            // have neither and correctly render as a bare name.
+            n?.goal?.short || n?.secret?.what || n?.desc || n?.description || '',
+          ))}
+          {renderList('Factions', s.powerStructure?.factions, (f) => labelled(nameOf(f) || 'Unnamed', f?.desc || f?.description || ''))}
+          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.desc || c?.issue || c?.description || JSON.stringify(c)))}
+          {renderList('Stressors', asList(s.stress), (st) => labelled(st?.label || 'Stressor', st?.summary || st?.description || st?.text || ''))}
 
           {renderList('Identity Markers', s.identityMarkers, (m) => m)}
           {renderList('Friction Points', s.frictionPoints, (fp) => `${fp?.who || ''} - ${fp?.what || ''}`)}
