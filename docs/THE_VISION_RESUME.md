@@ -36,7 +36,7 @@
     mounts + worker transport swap; import→wall unification WAITS for V-G — a
     pass-3 seam). Vetoable pass-1 fold calls live in the ledger row (mig-168
     pg_temp pin · killList re-pin · campaignSlice deferral) — OWNER QUEUE.
-  - HOT (5 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
+  - HOT (4 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
     follow-ons V-25a..f) in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6
     — the FOLDED tip, so the V-20 unlisted door, the V-B displays, and EmptyState
     are all visible to it (⚠ lane eager Δ MUST be ~0: fold margin is 3,601) ·
@@ -46,9 +46,11 @@
     per the established sibling-mint protocol) · V-N (multi-hop interview +
     handbook rewrite staged-for-taste) in the `vision-j` wt on `claude/vision-n`
     @ base 5d9218c6 (V-1's edge fn is in its base; edge tree changes ⇒
-    build:edge-shared + validate:edge; aiGrounding desync hazard) · V-G (campaign
-    import → V-F's wall, world book, founding seeds, table companion) in the
-    `vision-i` wt on `claude/vision-g`.
+    build:edge-shared + validate:edge; aiGrounding desync hazard). V-G LANDED @
+    claude/vision-g `2902bdaf` (import wall + world book + founding seeds + 375px
+    pins; ⭐ pass-3 seam: tableEvents' 3 mirrored constants → IMPORTS from V-F's
+    tableLedger, value-identical, + decide backfill→apply-path wiring). The
+    `vision-i` wt IDLES — queue empty.
   - MORE FOLD-READY: V-F @ claude/vision-f `c15c2311` (session ledger/auspice/DM
     screen; ledger 9afbfbc7; seams: letter+oracle slot mounts, worker transport
     swap, import→wall unification when V-G lands) · V-J @ `3f3805b7` (pass-2 with

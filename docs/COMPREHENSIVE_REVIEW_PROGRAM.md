@@ -1134,6 +1134,41 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-G SHIPPED — bring your campaign, bind the book, light the
+founding seeds, set the table's companion (2026-07-20, claude/vision-g @ 2902bdaf,
+base 212758ad, 6 lettered commits, FOLD-READY; manager-verified tip+clean; foreign
+stash untouched).** V-17 THE CAMPAIGN IMPORT: tableEvents.js = the schema-wall
+MIRROR of V-F's tableLedger (closed vocabulary, named bands = the ONLY place a
+band becomes a number, source:'table' provenance) + a DETERMINISTIC keyword
+bucketing clerk (key-free, proposes-never-writes) + importTableEvents as the sole
+write path (byte-neutral source passthrough on normalizeEntry — world entries
+serialize identically) + a resumable/abortable per-event-confirmation session +
+lazy paste/upload→review→confirm panel with a fully-manual path; source-scan pin
+PROVES no free text reaches mechanics (the finite-semantics law made code,
+twice). R-4 THE WORLD BOOK: pure collector + jsPDF painter on the campaign-PDF
+idiom; DM face binds everything, PLAYER face projects through toPublicSafe —
+zero covert marks pinned; tree-walked, never byte-compared. R-2 CURATED FIRST
+SEEDS: three probe-PROVEN openings (The Crown That Will Not Hold — a brewing
+coup · The Mill That Outlived Its Wars — a survivor · The Rot Beneath the Ore —
+corruption/insurgency), every receipt asserted by generate→assert tests; pure
+data on the lazy create chunk. R-3 THE TABLE COMPANION: audit finding — the
+surfaces were ALREADY responsive (useIsMobile + 44px floors); the gap was
+missing ENFORCEMENT, now added as 375px render pins; no src change; brief's
+Letter/Oracle/DM-screen slots are sibling-lane code absent on this base —
+correctly guarded what exists. Gate: strict 0 · tsc 0 · lint 0 · 123 focused +
+162 dist · closure 1,029,304 at tip (all feature code lazy) · NUL clean 16
+files. JUDGMENTS RATIFIED: table events ride wizardNews with source:'table'
+(one storage site, soak-excludable) · deterministic clerk with the AI-polish
+seam inert · R-2 receipts rest on GENERATED state not post-advance news
+(rngSeed derives from the random campaign id, not the settlement seed — the
+banked determinism hazard) · maps stay native-vector. ⭐ THE PASS-3 SEAM,
+PRECISELY RECORDED: at fold, tableEvents' three mirrored constants become
+IMPORTS from V-F's tableLedger (must be value-identical) + decide whether V-F's
+apply path also consumes backfilled history. HAZARDS BANKED (memory:
+vision-g-lane-shipped.md, indexed): founding rngSeed=campaign.id · em-dash
+inside JSDoc @tags breaks tsc-strict (TS1127) · deepCraftKillList counts
+import/RED_BG lines. SLOT: queue empty — the `vision-i` wt idles; remaining
+work = landings (fold pass 2 · V-O · V-M · V-N) → fold pass 3 → cycle 2.**
 **⬛⭐⭐ VISION LANE V-L SHIPPED — the recall rider, the re-priced roads, the
 readable hearts, the deeper causes (2026-07-20, claude/vision-l @ 3b33c1a6, base
 212758ad, 5 commits, FOLD-READY; manager-verified tip+clean).** V-24a RECALL-NPC:
