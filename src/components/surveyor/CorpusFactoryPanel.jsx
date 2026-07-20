@@ -15,6 +15,7 @@ import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { serializeApprovedCorpus, CORPUS_KINDS } from '../../domain/compendium/corpusStaging.js';
 import { track, EVENTS } from '../../lib/analytics.js';
+import { t } from '../../copy/index.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, SLATE, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -83,15 +84,15 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
         intent: q, settlement, savedSettlements, activeCampaign,
         worldState: activeCampaign?.worldState || null,
       });
-      if (!res.ok) { setError(res.error || 'The draft was declined.'); return; }
+      if (!res.ok) { setError(res.error || t('errors.corpusDeclined')); return; }
       const entries = Array.isArray(res.draft?.entries) ? res.draft.entries : [];
       const items = entries
         .map((e) => ({ kind, target: entryTarget(e), text: entryText(e) }))
         .filter((it) => it.text);
-      if (items.length === 0) { setError('The draft produced no usable prose to stage.'); return; }
+      if (items.length === 0) { setError(t('errors.corpusEmpty')); return; }
       stageCorpusCandidates(items, { model: 'claude-opus-4-8', promptFamily: 'custom-content' });
     } catch {
-      setError('The Corpus Factory draft is unavailable right now.');
+      setError(t('errors.corpusUnavailable'));
     } finally { setLoading(false); }
   }, [intent, loading, kind, settlement, savedSettlements, activeCampaign, stageCorpusCandidates]);
 

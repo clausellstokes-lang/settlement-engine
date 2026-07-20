@@ -900,6 +900,12 @@ export const en = Object.freeze({
     galleryCollection: 'This gallery collection could not be shown.',
     galleryDossier:    'This gallery dossier could not be shown.',
     galleryView:       'The gallery could not be shown.',
+    // Fold seams (quintuple fold): literals migrated off components so the
+    // error-copy ratchet (tests/lint/errorCopyBaseline.test.js) stays honest.
+    chronicleFail:      'Chronicle generation failed.',
+    corpusDeclined:     'The draft was declined.',
+    corpusEmpty:        'The draft produced no usable prose to stage.',
+    corpusUnavailable:  'The Corpus Factory draft is unavailable right now.',
   },
 
   // ── Verb registry (P124 / C-1) ───────────────────────────────────────────

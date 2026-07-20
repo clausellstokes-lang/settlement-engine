@@ -35,7 +35,11 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 // Committed max hardcoded user-facing error-literal occurrences under
 // src/components — lower it as literals migrate onto t('errors.*'); never raise it.
-const ERROR_LITERAL_BUDGET = 53;
+// Quintuple-fold seams: WizardNewsPanel ×2 migrated onto t('errors.chronicleFail'),
+// struck from the baseline; vision-c's CorpusFactoryPanel ×2 (an unbudgeted fold-
+// composition arrival) migrated onto t('errors.corpus*') in the same pass. Budget
+// lowered 53 → 51 to lock the WizardNewsPanel win.
+const ERROR_LITERAL_BUDGET = 51;
 
 // Detector idioms (see header). File-test = "does any idiom appear"; occurrence
 // count = total matches. Fresh RegExp per pass so the /g lastIndex never leaks.

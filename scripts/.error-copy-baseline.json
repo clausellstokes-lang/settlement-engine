@@ -15,7 +15,6 @@
   "src/components/generate/ExportDraftButton.jsx",
   "src/components/generate/SaveToLibraryButton.jsx",
   "src/components/map/SimulationRulesDialog.jsx",
-  "src/components/map/WizardNewsPanel.jsx",
   "src/components/map/WorldPulsePanel.jsx",
   "src/components/new/tabs/NotesTab.jsx",
   "src/components/settlement/VersionsTab.jsx",

@@ -6,7 +6,9 @@ import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
 import { useStore } from '../../store/index.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import EmptyState from '../primitives/EmptyState.jsx';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
 
 function percent(value) {
@@ -279,16 +281,7 @@ function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById })
         </div>
       )}
       {threads.length === 0 ? (
-        <div style={{
-          border: `1px dashed ${BORDER}`,
-          padding: 16,
-          color: MUTED,
-          fontFamily: sans,
-          fontSize: FS.sm,
-          background: CARD_ALT,
-        }}>
-          {emptyText}
-        </div>
+        <EmptyState heading={emptyText} />
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           {threads.map(thread => (
@@ -347,7 +340,7 @@ export default function WizardNewsPanel({ campaign }) {
   async function generateChronicle() {
     if (chronicleBusy || total === 0) return;
     setChronicleBusy(true);
-    setChronicleError('');
+    setChronicleError(null);
     // try/catch/finally so the busy flag ALWAYS clears — a throw (from the
     // request helper, appendCampaignChronicle, or setCreditBalance) must never
     // leave the paid Chronicle button stuck spinning forever (correctness-2).
@@ -364,7 +357,7 @@ export default function WizardNewsPanel({ campaign }) {
         tick: latestEntryTick,
       });
       if (result.error || !result.chronicle) {
-        setChronicleError(result.error || 'Chronicle generation failed.');
+        setChronicleError(result.error || t('errors.chronicleFail'));
       } else {
         appendCampaignChronicle(campaign.id, {
           tick: latestEntryTick,
@@ -373,7 +366,7 @@ export default function WizardNewsPanel({ campaign }) {
         if (Number.isFinite(result.creditsRemaining)) setCreditBalance(result.creditsRemaining);
       }
     } catch (e) {
-      setChronicleError('Chronicle generation failed.');
+      setChronicleError(t('errors.chronicleFail'));
     } finally {
       setChronicleBusy(false);
     }
