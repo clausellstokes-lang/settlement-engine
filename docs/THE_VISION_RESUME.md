@@ -57,15 +57,21 @@
     43/43 in isolation; agent-written memory file + commit bodies carry the
     per-item detail). ⚠ HAZARD: a heartbeatless background waiter = a STALL.
     THE WAVE IS FULLY LANDED — 15/15 lanes.
-  - HOT (1 workstream): FOLD PASS 3 in `minifold` @ composite-r4 `4a2447ae` —
-    the FINAL fold: V-L 3b33c1a6 → V-G 2902bdaf → V-N e017c1f2 → V-O b3692333
-    → V-M 8816db97 under the fold law (headroom 6,945; per-merge closure;
-    halt-on-breach). Seams: tableEvents' 3 mirrored constants → IMPORTS from
-    tableLedger (value-identical) + the backfill→apply-path decision · V-O's
-    mig 168-local → RENUMBER TO 169 + ARCHITECTURE/DEPLOY count re-bumps ·
-    V-L's EDIT_KIND edge-bundle regen check. Lane-end = full two-shard on the
-    assembled tree. AFTER: cycle 2 (cold-then-connect, 20 bars, termination
-    law). V-N LANDED @ claude/vision-n
+  - ⭐⭐⭐ THE WAVE IS ASSEMBLED: FOLD PASS 3 DONE @ composite-r4 `c8c5baa8`
+    (15/15 lanes ancestor-proven; mig head 169 contiguous; closure 1,038,320 —
+    ⚠⚠ MARGIN 1,680, no new eager bytes without owner review; suite 15,187 /
+    4-parked-goldens + the advancePauseResume flake, goldens' mismatch sets
+    BYTE-IDENTICAL base↔tip = the fold shifted zero output). ⚠ tableEvents
+    "mirror" = a NAME COLLISION (bands array vs band→number map) — mirror kept
+    + dev-only parity drift-guard; shared-constants LEAF extraction = recorded
+    follow-on. ⚠ coincident-value auto-merge lie caught (two "168"s hid the
+    true 169) — hand-verify counts even when auto-merge agrees.
+  - HOT: ROUND 3 CYCLE 2 PHASE S — the COLD survey fleet over the assembled
+    wave @ c8c5baa8 (cold-then-connect law: lanes confined to the WORKTREE,
+    forbidden the ledger/resume/memory; the standard's bar text is their only
+    charge; 20 bar-lanes + story census + spell-break census + completeness
+    critic; schema-forced findings + per-bar grade). Phase R (reconcile with
+    memory) = the manager, after the fleet returns. V-N LANDED @ claude/vision-n
     `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
     handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
     BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ

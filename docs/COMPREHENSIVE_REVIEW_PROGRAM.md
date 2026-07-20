@@ -1134,6 +1134,40 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐⭐ FOLD PASS 3 EXECUTED — THE VISION WAVE IS ASSEMBLED (2026-07-20,
+claude/composite-r4 @ c8c5baa8, base 4a2447ae; manager-verified: tip + clean +
+ALL 13 lane branches proven ANCESTORS of the tip + mig head 169 contiguous —
+15/15 lanes, wave-completeness CONFIRMED).** Merges: V-L 41457700 (+341; both
+edit-kinds kept, edge bundle REGENERATED, spurious churn reverted) → V-G
+d0428218+e2517ef3 (+4,570 — the predicted eager surface; operationRegistry
+union, compendium REGEN → 169 ops) → V-N a4545b5d (+20 — the slim lane's
+lazy-prose split made V-N's +270 nearly free) → V-O 3c4824c5 (+334; MIGRATION
+RENUMBERED 168→169 incl. pglite refs; caught a COINCIDENT-VALUE auto-merge lie —
+ARCHITECTURE.md count "agreed" on 168 while truth was 169, hand-fixed) → V-M
+eb9afc7f (+0, clean) → fixes c8c5baa8. THE FOLD LAW HELD: final closure
+1,038,320 ≤ 1,040,000 — MARGIN 1,680, no breach (the foreseen one dissolved:
+the tableEvents revert saved +1,863 and slim's split neutralized V-N).
+VETOABLE (agent's, manager-RATIFIED): the tableEvents→tableLedger import
+unification was REVERTED — the value-identity assertion FAILED (MAGNITUDE_BANDS
+is a NAME COLLISION: a band-names array vs a band→number map — the mirror was
+never a mirror) AND the unification measured +1,863 eager (tableEvents is eager
+via campaignSlice; importing lazy tableLedger drags it into first paint); kept
+the mirror + a dev-only value-parity drift-guard test; follow-on recorded =
+shared-constants LEAF extraction (veto = do the leaf now). DEFECTS FIXED (only
+the assembled suite could see them): trendLens named a local `window` (DOM-free
+scan blind to destructured bindings — renamed windowSize) · V-G/V-M inline slug
+builders → kernel slugify, byte-parity proven on 12 inputs, baseline back to
+36. GATE (all at c8c5baa8, VERBATIM): strict 0 · tsc 0 · lint 0 (84 files) ·
+ratchets 31 (anyCast 2242 HELD · killList no re-pin needed · errorCopy green) ·
+dist 191/191 · two-shard suite 15,187 passed / reds = EXACTLY the 4 parked
+goldens + advancePauseResume (goldens BASE-PROVEN at 4a2447ae with mismatch
+sets BYTE-IDENTICAL base↔tip, 192 keys empty diff — the fold shifted ZERO
+output despite V-L touching beliefMap/roads; the flake green 9/9 isolated).
+Memory: fold-pass-3-executed.md (indexed). THE WAVE: 15 lanes → ~28 features +
+~700 pins → ONE TREE, budget margin 1,680, zero output drift. NEXT: ROUND 3
+CYCLE 2 — cold-then-connect, twenty bars, the termination law governs. The
+owner tail (promote → PUSH#1 → soak → tuning → ONE REGEN re-records the 4
+parked goldens → walk → PUSH#2 → VERY END → PUSH#3) remains owner-gated.**
 **⬛⭐⭐ VISION LANE V-M LANDED — the party gets its window, the years export,
 the streets remember (2026-07-20, claude/vision-m @ 8816db97, base 5d9218c6, 6
 lettered commits, FOLD-READY; landed by MANAGER TAKEOVER).** The lane's agent
