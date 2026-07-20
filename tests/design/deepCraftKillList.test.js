@@ -204,10 +204,15 @@ const CEILINGS = Object.freeze({
   // page, honor-roll + roadmap pages, crash-forensics UI) landed +1 borderRadius and
   // +3 tintedCallouts. Same "fold re-pins to measured" discipline as the wave-A note
   // above; owner-vetoable if any of the new instances should instead be de-rounded.
-  borderRadius: 101,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Fold pass 2 (V-F + V-K + V-J): V-F's new at-the-table surfaces — the DM Screen,
+  // the Auspice / Session-Ledger / Temperament panels, and the Covenant + Bounty
+  // trust pages — landed +3 borderRadius (101→104) and +3 tintedCallouts (164→167).
+  // Same "fold re-pins to measured" discipline; owner-vetoable if any of the new
+  // instances should instead be de-rounded to the rule-framed plate idiom.
+  borderRadius: 104,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 164,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 167,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
