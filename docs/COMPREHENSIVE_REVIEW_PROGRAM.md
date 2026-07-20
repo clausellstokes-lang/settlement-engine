@@ -1134,6 +1134,40 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ VISION LANE V-N SHIPPED — the interview goes deep and wide; the handbook
+finds its voice, dark (2026-07-20, claude/vision-n @ e017c1f2, base 5d9218c6 the
+folded tip, 2 lettered commits, FOLD-READY; manager-verified tip+clean; foreign
+stash untouched). THE LAST LANE — with this landing every build of the wave
+(V-A..V-O) exists in git.** V-26a INTERVIEW FOLLOW-ONS: multi-hop + campaign
+scope REUSING V-1's entire wall — no new edge function, no new billable feature;
+each follow-up = a separate METERED re-grounded POST (every hop pays); prior Q&A
+rides its own fence between stable-prefix and volatile-question (cache ordering
+preserved), stripped + capped, data-not-instructions; empty history ⇒ first-hop
+prompt BYTE-IDENTICAL to V-1; campaign scope fans settlement briefs (cap 6, the
+128KB body guard) namespaced kind@sid:sec so every citation resolves to the
+right town; default scope byte-identical (aiAnalyst pins prove it). V-26b
+HANDBOOK REWRITE STAGED FOR TASTE: house voice on the header + concept essay
+ONLY, dark behind handbookVoice (default-off, lazy, zero first-paint); steps/
+Reference/FAQ/PowerTab/Compare stay PLAIN in both states — the clarity clause
+honored by construction; no copy test weakened; the flip is one click, yours.
+Gate: interview+scope+aiAnalyst 64/64 · edgeFunctions 528 · sessionGateCensus
+18 (interview = the 9th gated surface, unchanged) · validate:edge 59 files no
+_shared churn · domain dir 7,467 (3 parallelism flakes green 32/32 in
+ISOLATION — the banked triage rule applied) · ratchets green (errorCopy 51/20
+unraised) · strict 0 · tsc 0 · lint 0 · dist 174 · NUL clean · closure
+1,036,669 at tip = lane eager Δ +270, HEADROOM 3,331 on the folded lineage.
+JUDGMENTS RATIFIED: voiced surface minimal per clarity clause (veto = expand) ·
+multi-hop client-driven metered calls not a server loop · campaign cap 6.
+DEFERRED-RECORDED: a dedicated 'interview' billable feature = the owner-gated
+spend_credits migration follow-on (hops meter under 'analysis' today). HAZARDS
+BANKED (memory vision-n-ai-content-followons-shipped.md): errorCopy ratchet is
+SETTER-NAME-sensitive (set*Error('lit') seen; setResult({error}) not — route
+t('errors.*')) · helper-only-mutated arrays infer any[] (annotate @type) ·
+gradient-embedded hex isn't a pure-hex literal to rawColor. ⚠ PASS-3 CLOSURE
+BUDGET (manager's arithmetic): folded 1,036,399 + V-J 479 + V-N 270 + V-O 295 +
+V-F/V-L/V-G/V-M ≈0 known ⇒ ~1,037,443 + V-F's unmeasured Δ — headroom ~2,557
+MINUS V-F; pass 2's per-merge measurement decides whether the shave-or-owner
+decision fires. BUILD PHASE OF THE WAVE: COMPLETE.**
 **⬛⭐⭐ THE STANDARD RAISED TO TWENTY BARS (owner commission, 2026-07-20):**
 docs/THE_APLUS_STANDARD.md amended upward (the only permitted direction) with
 BAR 19 — AI USE & STRUCTURE, the clerk's constitution (distinct from bar 7's

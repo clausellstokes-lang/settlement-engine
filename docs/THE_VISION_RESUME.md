@@ -36,13 +36,16 @@
     mounts + worker transport swap; import→wall unification WAITS for V-G — a
     pass-3 seam). Vetoable pass-1 fold calls live in the ledger row (mig-168
     pg_temp pin · killList re-pin · campaignSlice deferral) — OWNER QUEUE.
-  - HOT (3 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
+  - HOT (2 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
     follow-ons V-25a..f) in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6
     — BUILT (tip 8816db97, closure Δ0, ratchets green); finishing its full-suite
-    isolation triage before the lane lands · V-N (multi-hop interview +
-    handbook rewrite staged-for-taste) in the `vision-j` wt on `claude/vision-n`
-    @ base 5d9218c6 (V-1's edge fn is in its base; edge tree changes ⇒
-    build:edge-shared + validate:edge; aiGrounding desync hazard). V-G LANDED @
+    isolation triage before the lane lands. V-N LANDED @ claude/vision-n
+    `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
+    handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
+    BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ
+    ≈ headroom ~2,557 − V-F — pass 2's per-merge numbers decide if the
+    shave-or-owner decision fires). THE WAVE'S BUILD PHASE IS COMPLETE — every
+    lane V-A..V-O exists in git. V-G LANDED @
     claude/vision-g `2902bdaf` (import wall + world book + founding seeds + 375px
     pins; ⭐ pass-3 seam: tableEvents' 3 mirrored constants → IMPORTS from V-F's
     tableLedger, value-identical, + decide backfill→apply-path wiring). The
