@@ -263,7 +263,13 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // AccountAutoReloadPanel "Automatic credit reload"). These are React component
   // props, NOT native OS tooltips — the census regex can't distinguish them, and
   // every account section already carries one in the baseline. 485 → 487.
-  const TITLE_BASELINE = 487;
+  //
+  // FOLD BATCH 3 correction: the money wave actually added THREE such Section
+  // title= props — AccountSeatTransferPanel was the third, missed when the lane
+  // recorded "the two panels" (measured per-file against base aad6265e:
+  // AutoReload +1, PurchaseHistory +1, SeatTransfer +1). Same React-prop class,
+  // not a native tooltip. Re-pinned to the MEASURED count. 487 → 488.
+  const TITLE_BASELINE = 488;
 
   function countTitles() {
     let n = 0;
