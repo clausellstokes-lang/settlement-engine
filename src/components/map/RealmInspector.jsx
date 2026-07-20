@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, Dices, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -55,6 +55,10 @@ import AdvanceReport from './AdvanceReport.jsx';
 // THE ROAD SCENE (DESIGN_THE_ROADS §14 R-7): "Stage the road" — STATIC for the SAME FP-R
 // reason (rides this already-lazy chunk at zero eager manifest cost).
 import RoadScenePanel from './RoadScenePanel.jsx';
+// STATIC within this already-lazy chunk (same FP-R class as RoadScenePanel above): the
+// Oracle rides this lazy chunk, so it costs first paint nothing; a lazy() here would mint
+// a preload entry and tip the ratchet.
+import OraclePanel from './OraclePanel.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
@@ -66,6 +70,7 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard', label: 'Dashboard', Icon: LayoutDashboard },
   { id: 'war',       label: 'War and Diplomacy', Icon: Swords },
   { id: 'road',      label: 'Stage the Road', Icon: Route },
+  { id: 'oracle',    label: 'The Oracle', Icon: Dices },
   { id: 'treaty',    label: 'Treaties', Icon: ScrollText },
   { id: 'resolve',   label: 'War & Resolve', Icon: HeartHandshake },
   { id: 'pantheon',  label: 'Pantheon', Icon: Sparkles },
@@ -298,6 +303,11 @@ export default function RealmInspector({
             campaign
               ? <RoadScenePanel campaign={campaign} />
               : <CampaignEmptyState lead="Stage a road once a campaign is live." {...emptyHandlers} />
+          )}
+          {activeSection === 'oracle' && (
+            campaign
+              ? <OraclePanel campaign={campaign} />
+              : <CampaignEmptyState lead="The oracle reads a live campaign's world." {...emptyHandlers} />
           )}
           {activeSection === 'treaty' && (
             campaign
