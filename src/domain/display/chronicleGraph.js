@@ -372,6 +372,38 @@ export function recordedDescendants(rootId, edges, scope) {
 }
 
 /**
+ * The recorded transitive ANCESTORS of `nodeId` — every node reachable by following
+ * recorded PARENT edges backward (the mirror of recordedDescendants; the V-4
+ * cause-walk substrate: "trace the causes"). Cycle-safe (visited set), deterministic
+ * (sorted). Walks THROUGH out-of-scope ids to reach in-scope grandparents, but only
+ * in-scope ids are returned when `scope` is given. The node is never its own ancestor.
+ * @param {string} nodeId
+ * @param {RecordedEdges} edges
+ * @param {Set<string>} [scope]  restrict the returned set to these ids
+ * @returns {string[]}
+ */
+export function recordedAncestors(nodeId, edges, scope) {
+  const root = String(nodeId);
+  /** @type {Set<string>} */
+  const out = new Set();
+  const seen = new Set([root]);
+  const stack = [root];
+  while (stack.length) {
+    const cur = stack.pop();
+    const parents = edges?.parentsOf?.get(/** @type {string} */ (cur));
+    if (!parents) continue;
+    for (const p of parents) {
+      if (seen.has(p)) continue;
+      seen.add(p);
+      if (!scope || scope.has(p)) out.add(p);
+      stack.push(p);
+    }
+  }
+  out.delete(root);
+  return [...out].sort(byStr);
+}
+
+/**
  * Is there a DIRECT recorded edge between a and b (either direction)? Used to flip a
  * thread cross-link's `inferred` label to recorded.
  * @param {string} aId

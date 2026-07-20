@@ -32,6 +32,9 @@ import {
   INK, MUTED, RED, SECOND, SP, SLATE, SLATE_BG, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+// V-4 THE CAUSE-WALK — STATIC within this already-lazy chunk (the FP-R idiom:
+// a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
+import CauseWalkPanel from './CauseWalkPanel.jsx';
 
 const human = (v) => String(v || '').replace(/_/g, ' ');
 
@@ -65,11 +68,26 @@ function Chip({ children, tone = SECOND, bg = CARD_ALT }) {
   );
 }
 
-/** A clickable receipt row → highlights the affected settlement on the map. */
-function ReceiptRow({ node, resolveName, onHighlight }) {
+/** A clickable receipt row → highlights the affected settlement on the map. When
+ *  `canTrace` (the provenance ledger is lit), a "Trace the causes" affordance opens
+ *  the V-4 backward cause-walk for this receipt (its click does not bubble to the
+ *  row's highlight). */
+function ReceiptRow({ node, resolveName, onHighlight, nodeId, canTrace, onTrace }) {
   const ids = (node.settlementIds || node.receipt?.settlementIds || []).filter((id) => id && !String(id).includes(':'));
   const names = ids.map(resolveName).filter(Boolean);
   const canHighlight = ids.length > 0;
+  const traceable = !!(canTrace && onTrace && nodeId);
+  const traceButton = traceable ? (
+    <Button
+      variant="ghost" size="sm"
+      data-testid="cause-walk-trigger"
+      aria-label="Trace the causes of this event"
+      onClick={(e) => { e.stopPropagation(); onTrace(nodeId); }}
+      style={{ marginTop: 4, minHeight: undefined, padding: '1px 7px', border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, fontSize: FS.micro, fontWeight: 850 }}
+    >
+      <GitBranch size={9} /> Trace the causes
+    </Button>
+  ) : null;
   const body = (
     <>
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.3 }}>
@@ -83,6 +101,7 @@ function ReceiptRow({ node, resolveName, onHighlight }) {
           <MapPin size={9} color={GOLD} /> {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
         </div>
       )}
+      {traceButton}
     </>
   );
   const style = { border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px' };
@@ -322,6 +341,8 @@ export default function AdvanceReport({ campaign, nameFor }) {
   // The altitude the reader is viewing — defaults to the span's deepest scaffolding
   // (full descent always AVAILABLE via the tabs).
   const [altitude, setAltitude] = useState(/** @type {string|null} */(null));
+  // V-4 THE CAUSE-WALK: the receipt whose causes are being traced (null = none).
+  const [tracedId, setTracedId] = useState(/** @type {string|null} */(null));
 
   if (!campaign) return null;
 
@@ -402,9 +423,17 @@ export default function AdvanceReport({ campaign, nameFor }) {
         <div data-testid="chronicle-events" style={{ display: 'grid', gap: 4 }}>
           <SectionTitle icon={Sparkles}>Events</SectionTitle>
           {chronicle.events.map((e) => (
-            <ReceiptRow key={e.nodeId} node={{ headline: e.headline, summary: e.summary, settlementIds: e.receipt?.settlementIds || [] }} resolveName={resolveName} onHighlight={setSelectedSettlementId} />
+            <ReceiptRow key={e.nodeId} nodeId={e.nodeId} canTrace={hasRecordedEdges} onTrace={setTracedId} node={{ headline: e.headline, summary: e.summary, settlementIds: e.receipt?.settlementIds || [] }} resolveName={resolveName} onHighlight={setSelectedSettlementId} />
           ))}
         </div>
+      )}
+
+      {/* V-4 THE CAUSE-WALK — the backward provenance chain for the traced receipt.
+          seesSecrets: this is the campaign owner's own realm inspector reading live
+          worldState, so covert causes are the DM's to see; a non-owner mount must
+          pass seesSecrets={false} (the read model then redacts — pinned). */}
+      {tracedId && (
+        <CauseWalkPanel worldState={worldState} rootId={tracedId} resolveName={resolveName} seesSecrets onClose={() => setTracedId(null)} />
       )}
 
       {/* ── THE DECREE TRACKER — always present, never top-forced ────────── */}
