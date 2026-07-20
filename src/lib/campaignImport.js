@@ -72,6 +72,26 @@ export function createImportSession(rawNotes, opts = {}) {
   };
 }
 
+/**
+ * Append a blank row for the FULLY-MANUAL path — the DM authors a table event by
+ * hand with no notes and no clerk (the required deterministic manual path). The row
+ * starts on the safe defaults (incident/moderate) for the DM to set. Pure.
+ * @param {ImportSession} session @param {{ tick?: number }} [opts]
+ * @returns {ImportSession}
+ */
+export function addBlankRow(session, opts = {}) {
+  const rows = Array.isArray(session?.rows) ? session.rows : [];
+  const nextIndex = rows.reduce((m, r) => Math.max(m, r.index), -1) + 1;
+  const tick = Number.isFinite(opts.tick) ? Math.max(0, Math.floor(Number(opts.tick))) : (session?.defaultTick ?? 0);
+  return {
+    ...session,
+    rows: [...rows, {
+      index: nextIndex, flavor: '', kind: 'incident', band: 'moderate',
+      confident: false, tick, settlementIds: [], confirmed: false, skipped: false,
+    }],
+  };
+}
+
 /** Immutably replace the row at `index` with `{ ...row, ...patch }`. Pure. */
 export function updateRow(session, index, patch) {
   if (!session || !Array.isArray(session.rows)) return session;

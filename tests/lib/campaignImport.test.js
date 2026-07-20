@@ -8,6 +8,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   createImportSession,
+  addBlankRow,
   updateRow,
   setRowConfirmed,
   setRowSkipped,
@@ -78,6 +79,26 @@ describe('manual override path (no clerk trust required)', () => {
     expect(recs).toHaveLength(1);
     expect(recs[0]).toMatchObject({ kind: 'exposure', band: 'major', tick: 40 });
     expect(recs[0].targets.settlementIds).toEqual(['ashford']);
+  });
+});
+
+describe('the fully-manual path (addBlankRow — no notes, no clerk)', () => {
+  it('appends a blank row with a fresh index that the DM authors by hand', () => {
+    let s = createImportSession('', { defaultTick: 7 });
+    expect(s.rows).toEqual([]);
+    s = addBlankRow(s);
+    expect(s.rows).toHaveLength(1);
+    expect(s.rows[0]).toMatchObject({ index: 0, flavor: '', kind: 'incident', band: 'moderate', tick: 7, confirmed: false });
+    s = addBlankRow(s);
+    expect(s.rows.map(r => r.index)).toEqual([0, 1]); // fresh, non-colliding indices
+  });
+  it('a hand-authored blank row commits once filled and confirmed', () => {
+    let s = addBlankRow(createImportSession(''), { tick: 2 });
+    s = updateRow(s, 0, { kind: 'obligation', band: 'moderate', flavor: 'the crown owes the guild a charter' });
+    s = setRowConfirmed(s, 0, true);
+    const recs = confirmedRecords(s);
+    expect(recs).toHaveLength(1);
+    expect(recs[0]).toMatchObject({ kind: 'obligation', tick: 2, source: 'table' });
   });
 });
 

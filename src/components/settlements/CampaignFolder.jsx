@@ -1,11 +1,14 @@
-import { useState } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock} from 'lucide-react';
+import { useState, lazy, Suspense } from 'react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
+// V-17 THE CAMPAIGN IMPORT — the paste/upload → review → commit surface. Lazy so
+// its schema wall + review UI stay off the Settlements first paint.
+const CampaignImportPanel = lazy(() => import('./CampaignImportPanel.jsx'));
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { useStore } from '../../store/index.js';
@@ -46,6 +49,8 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // busy + error so the click always has visible feedback.
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState(null);
+  // V-17 THE CAMPAIGN IMPORT — the import surface opens on demand (lazy-mounted).
+  const [importOpen, setImportOpen] = useState(false);
   // How far one Advance Time step carries the campaign world. Mirrors the World
   // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
   // the same default the store's advanceCampaignWorld uses.
@@ -149,6 +154,16 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                   ? 'Advancing the world…'
                   : 'Advance the campaign world and open the Realm'}>
               {advanceInFlight ? 'Advancing…' : 'Advance Time'}
+            </Button>
+            {/* V-17 — bring an existing table's history into the campaign chronicle.
+                A per-CAMPAIGN action; the folder only renders active for
+                canManageCampaigns, so free/anon never reach it. */}
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<ScrollText size={10}/>}
+              onClick={(e) => { e.stopPropagation(); setImportOpen(true); }}>
+              Import
             </Button>
             <Button
               variant="danger"
@@ -266,6 +281,17 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           </div>
           )}
         </div>
+      )}
+
+      {/* V-17 THE CAMPAIGN IMPORT — lazy-mounted overlay; nothing loads until opened */}
+      {importOpen && (
+        <Suspense fallback={null}>
+          <CampaignImportPanel
+            campaign={campaign}
+            settlements={settlements}
+            onClose={() => setImportOpen(false)}
+          />
+        </Suspense>
       )}
     </div>
   );
