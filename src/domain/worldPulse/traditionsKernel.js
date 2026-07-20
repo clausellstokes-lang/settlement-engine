@@ -60,7 +60,8 @@ import { createPRNG } from '../../kernel/prng.js';
 import { seasonForTick } from './worldState.js';
 import { seasonalSeverityFor } from './seasons.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
-import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { tradeRouteTier } from '../tradeRouteSemantics.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { activeArchetypes } from '../activeConditions.js';
 import { ladderInstabilityOf } from '../townMap/ladderRead.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
@@ -71,6 +72,7 @@ import { traditionBeatProse } from '../traditions/prose.js';
 import { memoryWeaveActive, mintMemoryWeaveIncident, edgeKeyBetween, MEMORY_WEAVE_INCIDENT_TYPES } from './relationshipEvolution.js';
 import { clamp01 } from '../../kernel/math.js';
 import { beliefAxesActive, observanceFromTraditions } from './beliefAxes.js';
+import { pilgrimageDraw } from '../traditions/pilgrimage.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -142,6 +144,10 @@ const TRAD_TUNING = Object.freeze({
   PROSPERITY_STEP: Object.freeze({ triumph: 1, failure: -1 }),
   LEGITIMACY_HIT: Object.freeze({ triumph: 3, good: 1, troubled: -1, failure: -3, cancelled: -1 }),
   FAITH_STEP: Object.freeze({ triumph: 1, failure: -1 }),
+  // §16 (Wave C) THE FAIR TRADE-LANE PULSE: a successful market fair on a real trade lane draws
+  // trade BEYOND the standard prosperity step — an extra band-step (routed through the SAME §5
+  // applicator; trade is derived-only, so prosperity is its only writable target).
+  FAIR_TRADE_PULSE: 1,
 });
 
 // §3 SKIP CHECK — the hard-stressor archetypes (per-settlement activeConditions) that
@@ -278,6 +284,26 @@ export function outcomeForDraw(score, r) {
   if (r < score + T.MODEST_OFFSET) return TRADITION_OUTCOME.MODEST;
   if (r < score + T.TROUBLED_OFFSET) return TRADITION_OUTCOME.TROUBLED;
   return TRADITION_OUTCOME.FAILURE;
+}
+
+// ── §16 (Wave C) THE FAIR TRADE-LANE PULSE ────────────────────────────────────
+/**
+ * The extra prosperity band-step a successful market FAIR earns from the trade it draws
+ * (DESIGN_TRADITIONS §16: "tradition-aware trade lane bonus — fair = trade pulse beyond the
+ * prosperity step"). Trade is DERIVED-ONLY in this engine — no writable trade field exists; every
+ * trade→economy effect routes through prosperity — so this "trade pulse" is realized as ONE
+ * additional band-step through the SAME §5 prosperity applicator (never a new write path, §14).
+ * Fires ONLY for a 'fair'-act observance that lands GOOD-or-better at a settlement on a real trade
+ * LANE (a connective route tier — merchants come from afar); an isolated/route-less fair (local
+ * only) or a non-fair earns nothing extra ⇒ 0. Pure, total.
+ * @param {TraditionRec} rec @param {TradSettlement} settlement @param {string} outcome @returns {number}
+ */
+export function fairTradePulse(rec, settlement, outcome) {
+  if (String(asObject(/** @type {Record<string, unknown>} */ (rec).coreMotif).act) !== 'fair') return 0;
+  if (outcome !== TRADITION_OUTCOME.TRIUMPH && outcome !== TRADITION_OUTCOME.GOOD) return 0;
+  const route = asObject(asObject(settlement).config).tradeRouteAccess;
+  const tier = tradeRouteTier(typeof route === 'string' ? route : null);
+  return (tier === 'major' || tier === 'standard') ? TRAD_TUNING.FAIR_TRADE_PULSE : 0;
 }
 
 // ── §3 OCCURRENCE — the calendar window test ──────────────────────────────────
@@ -593,6 +619,12 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     }
   }
 
+  // §16 (Wave C) PILGRIMAGE: the frozen spatial digest, resolved ONCE per tick (a grand festival
+  // draws pilgrims from nearby reachable settlements, lifting its outcome). Null on an ASPATIAL
+  // campaign ⇒ zero draw ⇒ every host outcome is byte-identical to the pre-seam engine (the §9
+  // aspatial dormancy, mirrored). A pure read.
+  const spatialDigest = activeSpatialDigest(worldState);
+
   // §5 accumulators (applied ONCE after the pass, through the bounded writers).
   /** @type {Map<string, number>} */
   const prosperityDeltas = new Map();
@@ -658,13 +690,22 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       if (skip) {
         outcome = TRADITION_OUTCOME.CANCELLED;
       } else {
-        const score = successScore({ rec, settlement: s, worldState, sid, year, warTypes });
+        // §16 (Wave C) pilgrimage attendance: a grand festival draws pilgrims from nearby reachable
+        // settlements, lifting its success. Bounded; 0 when aspatial (digest null) ⇒ byte-identical.
+        const pilgrimBonus = pilgrimageDraw({ hostId: sid, hostRec: rec, settlements: items, digest: spatialDigest });
+        const score = clampNum(successScore({ rec, settlement: s, worldState, sid, year, warTypes }) + pilgrimBonus,
+          TRAD_TUNING.SCORE_MIN, TRAD_TUNING.SCORE_MAX);
         const r = createPRNG(`${String(asObject(worldState).rngSeed || '')}::tradition:${rec.id}:${year}`).random();
         outcome = outcomeForDraw(score, r);
       }
       // §5 EFFECTS (write-bounded; accumulated, applied once below).
       const prospStep = /** @type {Record<string, number>} */ (TRAD_TUNING.PROSPERITY_STEP)[outcome];
       if (prospStep) bump(prosperityDeltas, sid, prospStep);
+      // §16 (Wave C) fair trade-lane pulse: a successful market fair on a trade lane draws trade
+      // beyond the standard step (through the SAME prosperity applicator — trade is derived-only).
+      // Byte-identical when absent (non-fair / isolated / not GOOD+) ⇒ 0.
+      const tradePulse = fairTradePulse(rec, s, outcome);
+      if (tradePulse) bump(prosperityDeltas, sid, tradePulse);
       // §6 owner-targeted routing: the seat (or an interim unowned record) bears the full
       // legitimacy hit; a faction/institution owner bears half + the news names them.
       const legitHit = /** @type {Record<string, number>} */ (TRAD_TUNING.LEGITIMACY_HIT)[outcome];

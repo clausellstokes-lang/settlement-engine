@@ -243,6 +243,92 @@ describe('season override (IT3-c) — the pin wins over the live clock', () => {
   });
 });
 
+describe('festival dress (Wave C, §10) — DORMANCY (absent read ⇒ zero festival ops)', () => {
+  it('no festival === festival:null === season base (byte-identical)', () => {
+    const model = richModel();
+    const winter = stable(groundDressOps(model, 'illustrated', { season: 'winter' }));
+    expect(stable(groundDressOps(model, 'illustrated', { season: 'winter', festival: null }))).toBe(winter);
+    // the seasonless base is unmoved too (a plain {} carries no festival key)
+    const base = stable(groundDressOps(model, 'illustrated'));
+    expect(stable(groundDressOps(model, 'illustrated', {}))).toBe(base);
+  });
+
+  it('a non-illustrated lens emits ZERO festival dress even WITH an active festival', () => {
+    const model = richModel();
+    for (const lens of TOWN_MAP_STYLE_IDS) {
+      expect(groundDressOps(model, lens, { festival: { scale: 6 } }).length, `${lens} dressed`).toBe(0);
+    }
+  });
+
+  it('resolveMapDress: no traditions mirror ⇒ no festival (the dormancy source)', () => {
+    // a lit-clock campaign with NO traditions mirror ⇒ festival null (byte-identical to today).
+    const d = resolveMapDress({ id: 'x' }, { calendar: { season: 'summer', year: 1, elapsedWeeks: 3 } });
+    expect(d.festival).toBeNull();
+  });
+});
+
+describe('festival dress (Wave C, §10) — the lantern marks + the resolver', () => {
+  it('an active festival adds lantern ops over the seasonless base (illustrated lens)', () => {
+    const model = richModel();
+    expect((model.skeleton && model.skeleton.streets || []).length, 'the rich model has a high street').toBeGreaterThan(0);
+    const base = groundDressOps(model, 'illustrated').length;
+    const dressed = groundDressOps(model, 'illustrated', { festival: { scale: 4 } }).length;
+    expect(dressed).toBeGreaterThan(base);
+    // a grander festival strings at least as many lanterns as a modest one
+    const modest = groundDressOps(model, 'illustrated', { festival: { scale: 0 } }).length;
+    expect(dressed).toBeGreaterThanOrEqual(modest);
+    expect(modest).toBeGreaterThan(base);
+  });
+
+  it('is deterministic across runs (lanterns are seeded off the same stream)', () => {
+    const model = richModel();
+    const dress = { season: 'autumn', festival: { scale: 5 } };
+    expect(stable(groundDressOps(model, 'illustrated', dress))).toBe(stable(groundDressOps(model, 'illustrated', dress)));
+  });
+
+  it('resolveMapDress reads the traditions mirror: an in-window observance ⇒ festival, out-of-window ⇒ none', () => {
+    // elapsedWeeks 3 ⇒ weekOfYear 4. A rite whose window opens week 4 is OPEN; one at week 30 is not.
+    const inWindow = { window: { startWeekOfYear: 4, weeks: 1 }, scaleBand: 5, suppressedBy: null };
+    const outWindow = { window: { startWeekOfYear: 30, weeks: 1 }, scaleBand: 5, suppressedBy: null };
+    const worldState = { calendar: { season: 'spring', year: 1, elapsedWeeks: 3 } };
+    const open = resolveMapDress({ id: 's1', traditions: [inWindow] }, worldState);
+    expect(open.festival).not.toBeNull();
+    expect(open.festival.scale).toBe(5);
+    expect(resolveMapDress({ id: 's1', traditions: [outWindow] }, worldState).festival).toBeNull();
+    // a SUPPRESSED rite does not occur ⇒ no festival even in its window
+    const suppressed = { window: { startWeekOfYear: 4, weeks: 1 }, scaleBand: 5, suppressedBy: { overlordId: 'o', sinceYear: 1 } };
+    expect(resolveMapDress({ id: 's1', traditions: [suppressed] }, worldState).festival).toBeNull();
+    // the GRANDEST in-window observance sets the scale
+    const two = resolveMapDress({ id: 's1', traditions: [{ window: { startWeekOfYear: 4, weeks: 2 }, scaleBand: 2 }, inWindow] }, worldState);
+    expect(two.festival.scale).toBe(5);
+  });
+
+  it('a resolved festival fed through the draw list paints the lanterns', () => {
+    const model = richModel();
+    const dress = resolveMapDress({ id: 's7', traditions: [{ window: { startWeekOfYear: 4, weeks: 1 }, scaleBand: 4 }] },
+      { calendar: { season: 'spring', year: 1, elapsedWeeks: 3 } });
+    expect(dress.festival).not.toBeNull();
+    expect(stable(buildTownMapDrawList(model, 'illustrated', dress)))
+      .not.toBe(stable(buildTownMapDrawList(model, 'illustrated')));
+  });
+});
+
+describe('festival dress (Wave C, §10) — BOUNDED (≤ DRESS_CAP on every seed)', () => {
+  it('the grandest festival stacked on the full state dress stays ≤ DRESS_CAP', () => {
+    let worst = { label: '', ops: 0 };
+    const configs = [
+      ...GOLDEN_CONFIGS.map((c) => ({ label: `v1 ${c.spec.tier}/${c.spec.terrain}`, model: buildTownMapModel(c.settlement) })),
+      ...V2_GOLDEN_CONFIGS.map((c) => ({ label: `v2 ${c.spec.tier}/${c.spec.terrain}`, model: buildTownMapModel(c.settlement, c.mapEdits) })),
+    ];
+    for (const c of configs) {
+      const cats = [...new Set((c.model.districts || []).map((d) => d.category))];
+      const n = groundDressOps(c.model, 'illustrated', { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats }, festival: { scale: 6 } }).length;
+      if (n > worst.ops) worst = { label: c.label, ops: n };
+    }
+    expect(worst.ops, `worst full-stack+festival dress ${worst.label} = ${worst.ops} (> ${DRESS_CAP})`).toBeLessThanOrEqual(DRESS_CAP);
+  });
+});
+
 describe('state dress (IT3-b) — BOUNDED (full stack ≤ DRESS_CAP)', () => {
   it('the worst season + siege + scars + all-classes rebuilt stays ≤ DRESS_CAP on every seed', () => {
     let worst = { label: '', ops: 0 };

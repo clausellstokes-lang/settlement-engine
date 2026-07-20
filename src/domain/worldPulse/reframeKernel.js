@@ -106,13 +106,17 @@ export const REFRAME_VOCAB = Object.freeze({
   mediation: Object.freeze({ base: 'goodwill', role: 'broker', dark: Object.freeze(['manipulation']), bright: 'goodwill_true' }),
   religion: Object.freeze({ base: 'piety', role: 'patron', dark: Object.freeze(['infiltration']), bright: 'piety_true' }),
   kinship: Object.freeze({ base: 'bond', role: 'kin', dark: Object.freeze(['leverage']), bright: 'bond_true' }),
+  // Wave C (DESIGN_TRADITIONS §8/§16): a vassal reframes an overlord's IMPOSED rite. base =
+  // the neutral observance now kept here; dark = the old rite pushed aside / culture effaced;
+  // bright = a custom charitably welcomed. POV = the keeper (the vassal). Wired by FACT SOURCE 3.
+  tradition: Object.freeze({ base: 'observance', role: 'keeper', dark: Object.freeze(['rite_supplanted', 'culture_effaced']), bright: 'custom_welcomed' }),
 });
 
 /** The act classes the mover ENUMERATES in v1 (the rest are vocab-complete + seamed). */
 export const REFRAME_ACT_CLASSES = Object.freeze(Object.keys(REFRAME_VOCAB).sort());
 
 /** The standalone bright-lane misreadings (design §D7 the bright misreading lane). */
-export const BRIGHT_MISREADINGS = Object.freeze(['gift_forgiven', 'unintended_kindness', 'misattributed_aid', 'noble_enemy_myth', 'common_threat_misread', 'honored_terms_true', 'bonds_of_commerce', 'candor_kept', 'goodwill_true', 'piety_true', 'bond_true']);
+export const BRIGHT_MISREADINGS = Object.freeze(['gift_forgiven', 'unintended_kindness', 'misattributed_aid', 'noble_enemy_myth', 'common_threat_misread', 'honored_terms_true', 'bonds_of_commerce', 'candor_kept', 'goodwill_true', 'piety_true', 'bond_true', 'custom_welcomed']);
 
 /** Every dark reading term, for the consumer/display dark-classification. */
 const DARK_TERMS = Object.freeze(new Set(Object.values(REFRAME_VOCAB).flatMap((v) => v.dark)));
@@ -445,6 +449,30 @@ export function advanceReframe({ snapshot, worldState, graph, hegemonyFear = nul
     const patron = dependent === a ? b : a;
     // A trade tie has no mint tick — it is a standing structure, always within memory.
     addCandidate(dependent, patron, 'trade_dependence', NaN, false);
+  }
+
+  // ── FACT SOURCE 3: the traditions sidecar (Wave C — DESIGN_TRADITIONS §8/§16 imposition). A rite
+  // an overlord IMPOSED under vassalage suppressed a LOCAL rite, marked suppressedBy.overlordId on
+  // the record it displaced. That suppression is the fact: the VASSAL (observer) reframes the
+  // OVERLORD's (subject) cultural imposition — observance → rite_supplanted / culture_effaced (dark)
+  // or custom_welcomed (bright). Coercive by construction ⇒ predatory; a standing structure while the
+  // suppression is in force ⇒ NO mint tick (always within memory, the trade-dependence idiom). ABSENT
+  // ledger (traditions dark) ⇒ no candidate ⇒ byte-identical. ──
+  const traditions = /** @type {Record<string, unknown> | null} */ (getSpatialLedger(worldState, 'traditions'));
+  if (traditions && typeof traditions === 'object') {
+    for (const sid of Object.keys(traditions).sort()) {
+      const recs = Array.isArray(traditions[sid]) ? /** @type {Array<unknown>} */ (traditions[sid]) : [];
+      /** @type {Set<string>} one candidate per (vassal, overlord) — the same overlord may suppress several rites */
+      const seen = new Set();
+      for (const raw of recs) {
+        const rec = raw && typeof raw === 'object' ? /** @type {Record<string, unknown>} */ (raw) : null;
+        const sup = rec && rec.suppressedBy && typeof rec.suppressedBy === 'object' ? /** @type {Record<string, unknown>} */ (rec.suppressedBy) : null;
+        const overlordId = sup && typeof sup.overlordId === 'string' ? sup.overlordId : '';
+        if (!overlordId || overlordId === sid || seen.has(overlordId)) continue;
+        seen.add(overlordId);
+        addCandidate(sid, overlordId, 'tradition', NaN, true);
+      }
+    }
   }
 
   // ── Fold: sticky, hysteresis-guarded, capped, both-signs, deterministic. ──
