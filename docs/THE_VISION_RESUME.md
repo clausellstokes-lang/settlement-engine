@@ -44,13 +44,22 @@
     ceiling) — cure = the SLIM LANE, not a raise. ⚠ PARKED SET AT r4 =
     beliefMap · generator · deity · pdf goldenViewModel (pipeline.property is
     GREEN here — V-K's memory listed the pre-r4 set).
-  - HOT (2 workstreams): THE SLIM LANE in `minifold` on composite-r4 (pre-pass-3:
-    thin the R-14 forensics EAGER seam −5-6K keeping eager-and-complete semantics
-    + burn the 32 any-holes to keep the frozen ceiling; pass-3 breach arithmetic:
-    V-G ~+4.5K + V-N 270 + V-O 295 + V-L ~312 vs 1,636) · V-M (display follow-ons)
-    in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6 — BUILT (tip
-    8816db97, closure Δ0, ratchets green); finishing its full-suite isolation
-    triage before the lane lands. V-N LANDED @ claude/vision-n
+  - SLIM LANE DONE @ composite-r4 `4a2447ae` (a7874d34: forensics −5,309 B eager
+    via the flagRegistry lean-leaf split — the "cascade" theory was WRONG, flags
+    PROSE was the cost; arming stays synchronous, boot-timing pin added ·
+    4a2447ae: 34 any-holes burned to the EXACT frozen baseline 2242, ratchet
+    green, baseline file untouched). CLOSURE 1,033,055 — HEADROOM 6,945; pass-3
+    arithmetic ~+5.4K ⇒ ~1,545 B slack, halt-on-breach stands as backstop.
+    ⚠ full two-shard NOT run by the slim lane (recorded omission) — pass 3's
+    gate covers it.
+  - HOT (1 workstream): V-M (display follow-ons) in the `vision-c` wt on
+    `claude/vision-m` @ base 5d9218c6 — BUILT (tip 8816db97, closure Δ0,
+    ratchets green); finishing its full-suite isolation triage. PASS 3
+    DISPATCHES THE MOMENT V-M LANDS (fold order suggestion: V-L → V-G → V-N →
+    V-O → V-M; seams: tableEvents' 3 mirrored constants → IMPORTS from
+    tableLedger [value-identical] + backfill→apply-path decision · V-O's mig
+    168-local → RENUMBER 169 + ARCHITECTURE/DEPLOY count re-bumps · per-merge
+    closure vs 6,945). V-N LANDED @ claude/vision-n
     `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
     handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
     BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ

@@ -1134,6 +1134,33 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE SLIM LANE EXECUTED — the breach converted to surplus (2026-07-20,
+claude/composite-r4 @ 4a2447ae, 2 commits a7874d34+4a2447ae; manager-verified
+tip+clean).** JOB 1: forensics seam −5,309 B eager, CONTRACT INTACT — and a
+ROOT-CAUSE CORRECTION: vision-d's "minifier cascade" theory was a
+MISATTRIBUTION, probe-proven; the real cost was store→crashForensics→flags.js
+dragging the 4,565-B description-heavy FLAGS registry eager. Cure = the house
+registryProse idiom: lean src/lib/flagRegistry.js (defaults+resolution only,
+first-paint-safe) + flags.js becomes the LAZY prose sidecar re-exporting the
+API verbatim (~20 consumers untouched); arming stays SYNCHRONOUS at boot (the
+ratified eager-and-complete judgment preserved); NEW PIN
+crashForensicsBootTiming = real-store crash-immediately-after-boot captures the
+full whitelist (a future lazy-arming regression fails it). CLOSURE 1,038,364 →
+1,033,055; HEADROOM 1,636 → 6,945. JOB 2: the anyCast holes burned — tree won
+over the brief (34 holes, not 32; baseline total 2242, not 2252-as-count):
+JSDoc-only cures across 6 files (8 casts DROPPED as already-assignable, 6 cast
+to real types via import()), total back to EXACTLY the frozen baseline 2242,
+`.domain-any-baseline.json` UNTOUCHED, ratchet 9/9 green. Receipts: strict 0 ·
+tsc:full 0 · lint 0 · dist 26/26 forensics+budget · assize/commons dormancy
+BYTE-IDENTICAL (cast-drops runtime-neutral) · 20 flag-consumer surfaces green ·
+NUL clean. HONEST OMISSION (recorded): full two-shard suite NOT run (no
+mig/edge changes; pass 3's own full gate covers it). PASS-3 ARITHMETIC NOW:
+~+5.4K across 5 lanes vs 6,945 headroom ⇒ ~1,545 B slack — the fold law's
+halt-on-breach stands as the backstop. JUDGMENTS RATIFIED: registryProse split
+over manualChunks (probe-proven; manualChunks pins backfire here — recorded
+hazard honored) · burn-to-exact-baseline over re-freeze · timing pin as a REAL
+store integration. Memory: slim-lane-executed.md (indexed; corrects the
+cascade misattribution). GATE TO PASS 3: V-M's triage is the last landing.**
 **⬛⭐⭐⭐ FOLD PASS 2 EXECUTED — the table's ledger, the findable truth, and the
 court join the composite (2026-07-20, claude/composite-r4 @ dbbc6fb6, base
 5d9218c6, 8 commits; manager-verified tip+clean).** Merges: V-K 0ee0c9e1 (zero
