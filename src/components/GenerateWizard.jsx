@@ -32,6 +32,7 @@ import { ModeSelector } from './generate/ModeSelector.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
+import FoundingWorlds from './generate/FoundingWorlds.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
 import ExportDraftButton from './generate/ExportDraftButton.jsx';
@@ -354,6 +355,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           onNavigate={onNavigate}
           isMobile={isMobile}
         />
+        {/* R-2 CURATED FIRST SEEDS — offered on the create landing (forges a real
+            world whose opening years tell a story; claims-parity-proven). */}
+        <FoundingWorlds onNavigate={onNavigate} />
       </>
     );
   }
