@@ -337,6 +337,25 @@ SEQUENCING: first free lane slot AFTER V-I (its pages join the prerender) readin
 V-E's share-code format. Worktree vision-j (claude/vision-j) provisioned.
 PINS carry the grade: unfurls enforced, never hoped.
 
+
+## V-20 UNLISTED SHARING + V-13/V-19 AMENDMENTS (owner-commissioned 2026-07-20,
+## the three gallery rulings)
+1) V-19 SHARPENED (owner wording): EVERY individual gallery link unfurls with a
+   rendered thumbnail (the og-image card of the map/settlement/campaign) + a
+   caption/description derived from the item's own data; plus the polished generic
+   site card for bare-domain shares. 2) V-20 UNLISTED SHARING (settlements, maps,
+   campaigns): visibility {public | unlisted}; unlisted = reachable ONLY by exact
+   link — CRYPTO-RANDOM unguessable slug (never sequential), absent from every
+   public list/browse, noindex + sitemap-excluded (V-J pins), but unfurls normally
+   when pasted (the party-share story); owner can REVOKE by slug rotation (old links
+   die). RLS: public lists WHERE visibility='public'; unlisted readable by exact
+   slug lookup only, never listable; owner full — all proven by executed pglite
+   tests. Migration WRITTEN-NOT-DEPLOYED (standing law). 3) V-13 FEATURED AMENDED:
+   per-section Featured (settlement / map / campaign), HIDDEN-UNTIL-OCCUPIED (an
+   empty Featured never renders — the no-fake-names honesty), admin-only RLS write,
+   explicit display-order field. Build host: lane V-E (already building the gallery
+   featured flags + RLS census — one coherent gallery migration, not two).
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
