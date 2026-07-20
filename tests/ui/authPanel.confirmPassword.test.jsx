@@ -67,6 +67,9 @@ describe('AuthPanel — confirm-password mismatch guard', () => {
 
     fireEvent.click(screen.getByRole('button', { name: t('auth.button.createAcct') }));
 
-    await waitFor(() => expect(authSignUp).toHaveBeenCalledWith('gm@example.com', 'abcdef'));
+    // The 3rd arg is the Wave-D captchaToken (ADDITIVE, undefined while the
+    // perimeterCaptcha flag is off — the mocked flags.js returns false here, so
+    // CaptchaGate never mints a token). The pass-through behaviour is unchanged.
+    await waitFor(() => expect(authSignUp).toHaveBeenCalledWith('gm@example.com', 'abcdef', undefined));
   });
 });

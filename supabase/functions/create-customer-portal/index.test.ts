@@ -81,9 +81,17 @@ function makeUserClient(user: { id: string; email?: string | null } | null, auth
   });
 }
 
-/** Admin stub: profile read returns the given stripe_customer_id; records updates. */
-function makeAdminClient(customerId: string | null = null) {
+/**
+ * Admin stub: profile read returns the given stripe_customer_id; records updates.
+ * `rate` seeds the ingest_check_rate RPC result the rate gate reads (default:
+ * under rate, so the existing identity tests are unaffected).
+ */
+function makeAdminClient(
+  customerId: string | null = null,
+  rate: { data?: unknown; error?: { message: string } | null } = { data: true, error: null },
+) {
   const updates: Array<Record<string, unknown>> = [];
+  const rpcCalls: string[] = [];
   // deno-lint-ignore no-explicit-any
   const adminClient = (): any => ({
     from: (_t: string) => ({
@@ -95,8 +103,16 @@ function makeAdminClient(customerId: string | null = null) {
         },
       }),
     }),
+    rpc: (fn: string) => {
+      rpcCalls.push(fn);
+      return Promise.resolve(
+        fn === 'ingest_check_rate'
+          ? { data: rate.data ?? null, error: rate.error ?? null }
+          : { data: null, error: null },
+      );
+    },
   });
-  return { updates, adminClient };
+  return { updates, rpcCalls, adminClient };
 }
 
 const req = (headers: Record<string, string> = {}) =>
@@ -161,6 +177,35 @@ Deno.test('no Authorization header is rejected (400) before any Stripe call', as
   assertEquals(res.status, 400);
   assertEquals(stripe.getListCalls(), 0);
   assertEquals(stripe.created.length, 0);
+  assertEquals(stripe.portalSessions.length, 0);
+});
+
+Deno.test('over the per-user rate limit returns 429 BEFORE any Stripe call', async () => {
+  const stripe = makeStripe([{ id: 'cus_x', metadata: {} }]);
+  // ingest_check_rate reports OVER rate (data:false) → the gate fails closed.
+  const admin = makeAdminClient(null, { data: false, error: null });
+  const res = await handleCreateCustomerPortal(
+    req({ Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'me@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 429);
+  assertEquals((await res.json()).error.includes('Too many'), true);
+  // The Stripe customer/portal APIs were never touched.
+  assertEquals(stripe.getListCalls(), 0);
+  assertEquals(stripe.created.length, 0);
+  assertEquals(stripe.portalSessions.length, 0);
+  // The rate gate actually consulted ingest_check_rate.
+  assertEquals(admin.rpcCalls.includes('ingest_check_rate'), true);
+});
+
+Deno.test('an ingest_check_rate RPC error fails CLOSED (429), not open', async () => {
+  const stripe = makeStripe();
+  const admin = makeAdminClient(null, { error: { message: 'rpc exploded' } });
+  const res = await handleCreateCustomerPortal(
+    req({ Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'me@x.com' }), adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 429);
   assertEquals(stripe.portalSessions.length, 0);
 });
 

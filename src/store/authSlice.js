@@ -337,10 +337,12 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /** Sign up with email + password. Returns { needsVerification } or throws. */
-  authSignUp: async (email, password) => {
+  authSignUp: async (email, password, captchaToken) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      const result = /** @type {any} */ (await authService.signUp(email, password));
+      // captchaToken is ADDITIVE (Wave-D perimeter): undefined unless the
+      // perimeterCaptcha flag is on and the widget produced a token.
+      const result = /** @type {any} */ (await authService.signUp(email, password, captchaToken));
       if (result.session) {
         // Auto-confirmed (dev mode or mock)
         set(state => {
@@ -366,10 +368,10 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /** Sign in with email + password. rememberMe controls session persistence. */
-  authSignIn: async (email, password, rememberMe = true) => {
+  authSignIn: async (email, password, rememberMe = true, captchaToken) => {
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
-      const result = await authService.signIn(email, password, rememberMe);
+      const result = await authService.signIn(email, password, rememberMe, captchaToken);
       set(state => {
         state.auth = {
           user: result.user, session: result.session,
@@ -399,9 +401,9 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /** Send password reset email. */
-  authResetPassword: async (email) => {
+  authResetPassword: async (email, captchaToken) => {
     try {
-      await authService.resetPassword(email);
+      await authService.resetPassword(email, captchaToken);
     } catch (e) {
       set(state => { state.auth.error = e.message; });
       throw e;

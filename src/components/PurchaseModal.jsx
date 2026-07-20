@@ -23,6 +23,7 @@ import IconButton from './primitives/IconButton.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
+import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
@@ -38,6 +39,10 @@ export default function PurchaseModal({ onClose }) {
   // Advisory input only — create-checkout re-validates and reserves it.
   const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
   const [redeemNotice, setRedeemNotice] = useState(null);
+  // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
+  // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
+  // body. Null while the flag is off — the checkout body is then byte-identical.
+  const [captchaToken, setCaptchaToken] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
 
@@ -61,7 +66,7 @@ export default function PurchaseModal({ onClose }) {
       // before the first payment lands. recordIntent never throws and a
       // rejection surfaces as a note — it must never block the purchase.
       await referral.recordIntent();
-      const { redeemNotice: notice } = await startCheckout(product, { redeemCode, savePaymentMethod: saveCard });
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode, savePaymentMethod: saveCard, captchaToken: captchaToken || undefined });
       // The code is consumed (reserved or declined server-side) — drop the
       // stash so it cannot resurface on a later, unrelated purchase.
       clearPendingRedeemCode();
@@ -293,6 +298,11 @@ export default function PurchaseModal({ onClose }) {
               {' '}for a monthly credit allowance.
             </div>
           )}
+
+          {/* Wave-D human verification (INERT until activated). Managed/invisible:
+              silent for humans, so it adds no visible step; renders nothing while
+              the perimeterCaptcha flag is off. */}
+          <CaptchaGate action="checkout" onToken={setCaptchaToken} className="captcha-checkout" />
 
           <div style={{ fontSize: FS.xxs, color: MUTED, textAlign: 'center', lineHeight: 1.5 }}>
             Payments processed securely by Stripe. Credits never expire.

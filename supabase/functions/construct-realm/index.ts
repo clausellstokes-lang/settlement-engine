@@ -19,6 +19,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
 import {
@@ -125,6 +126,12 @@ export async function handleConstructRealm(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Inert in tests / local (no cf-connecting-ip → sentinel IP → no RPC).
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, cors);
+    if (ipGate) return ipGate;
 
     const { data: isActive, error: activeErr } = await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
     if (activeErr) logError('construct-realm', user.id, `account_is_active errored: ${activeErr.message}`);

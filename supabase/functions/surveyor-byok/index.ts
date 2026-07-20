@@ -23,6 +23,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
 import {
   ANTHROPIC_SUPPORTED_MODELS, ANTHROPIC_RETENTION_CLASS, intersectModels,
@@ -109,6 +110,12 @@ export async function handleSurveyorByok(
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
     // SINGLE-SESSION GATE (161, §7.2): a superseded device's JWT is rejected here.
     if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) return json({ error: 'session_superseded' }, 401, cors);
+
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Inert in tests / local (no cf-connecting-ip → sentinel IP → no RPC).
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, cors);
+    if (ipGate) return ipGate;
 
     const { data: isActive, error: activeErr } = await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
     if (activeErr) logError('surveyor-byok', user.id, `account_is_active errored: ${activeErr.message}`);

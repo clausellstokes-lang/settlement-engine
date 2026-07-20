@@ -105,8 +105,16 @@ function authPayload(user, session, profile, extra = {}) {
 
 // ── Supabase auth methods ───────────────────────────────────────────────────
 
-async function supabaseSignUp(email, password) {
-  const { data, error } = await supabase.auth.signUp({ email, password });
+async function supabaseSignUp(email, password, captchaToken) {
+  // captchaToken is ADDITIVE (Wave-D perimeter): passed to Supabase Auth's native
+  // captcha support ONLY when present, so with the perimeterCaptcha flag off (no
+  // widget, no token) this call is byte-identical to before. Server-side
+  // enforcement is the owner's Supabase dashboard "Enable Captcha protection"
+  // toggle — see docs/PERIMETER_RUNBOOK.md.
+  const { data, error } = await supabase.auth.signUp({
+    email, password,
+    ...(captchaToken ? { options: { captchaToken } } : {}),
+  });
   if (error) throw error;
   // Supabase returns an OBFUSCATED user with an EMPTY identities array when the
   // email already belongs to an account (it declines to leak existence via an
@@ -121,14 +129,19 @@ async function supabaseSignUp(email, password) {
   });
 }
 
-async function supabaseSignIn(email, password, rememberMe = true) {
+async function supabaseSignIn(email, password, rememberMe = true, captchaToken) {
   // Route persistence BEFORE sign-in so the token (and every auto-refresh after)
   // is written to the correct store: sessionStorage when "remember me" is off
   // (cleared on browser close), localStorage otherwise. This replaces the old
   // one-time localStorage delete, which auto-refresh silently undid.
   setSessionPersistence(rememberMe);
 
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+  // captchaToken is ADDITIVE (see supabaseSignUp): included only when present, so
+  // the flag-off path is byte-identical.
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email, password,
+    ...(captchaToken ? { options: { captchaToken } } : {}),
+  });
   if (error) throw error;
 
   const profile = await fetchProfileAuth(data.user);
@@ -148,9 +161,11 @@ async function supabaseGetSession() {
   return authPayload(session.user, session, profile);
 }
 
-async function supabaseResetPassword(email) {
+async function supabaseResetPassword(email, captchaToken) {
+  // captchaToken is ADDITIVE (see supabaseSignUp): included only when present.
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${window.location.origin}/reset-password`,
+    ...(captchaToken ? { captchaToken } : {}),
   });
   if (error) throw error;
 }

@@ -52,6 +52,10 @@ export const FLAGS = Object.freeze({
     default: false,
     description: 'Site-wide copy/cut/context-menu deterrent (lib/copyGuard.js). Default OFF per owner ruling (reconciliation #5); machinery + [data-allow-copy] exemptions retained. This is the one flag to flip to enable.',
   },
+  perimeterCaptcha: {
+    default: false,
+    description: 'Wave-D PERIMETER: adaptive human-verification (Cloudflare Turnstile, managed/invisible mode) on the auth flows (sign-in/up/reset) and the purchase-initiation surfaces. Default OFF and INERT: with the flag off the widget is never imported (zero eager bytes) and no captchaToken is sent. Flip ON only AFTER the owner adds the Turnstile site+secret keys and enables Supabase Auth captcha protection — see docs/PERIMETER_RUNBOOK.md. The anonymous generation funnel is DELIBERATELY excluded (kept frictionless; rate limits + bot-wave telemetry cover it).',
+  },
 
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
   // Each flag below gates one critique-mandated change that is NOT yet

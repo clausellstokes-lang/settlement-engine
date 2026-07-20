@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SettlementForge</title>
 
+    <!-- ── AI-crawler reservation ────────────────────────────────────────────
+      noai / noimageai: this content and its images are reserved against AI-model
+      training and AI image ingestion. Belt-and-suspenders with the site-wide
+      `X-Robots-Tag: noai, noimageai` + `TDM-Reservation: 1` response headers
+      (vercel.json) — the header is the authoritative, JS-independent signal (most
+      training crawlers fetch raw HTML and never run the SPA), and robots.txt names
+      the specific AI-crawler user-agents. This static tag is what a no-JS fetch of
+      the entry document sees; the SPA keeps it on public routes and swaps in
+      `noindex, nofollow` on private routes (src/lib/seo.js). These are all
+      VOLUNTARY-compliance signals — see docs/PERIMETER_RUNBOOK.md for limits. -->
+    <meta name="robots" content="noai, noimageai" />
+
     <!--
       Self-hosted fonts. The @font-face declarations live in src/index.css and
       are served from /public/fonts (Vite serves public/ at the web root). We no
