@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ VISION LANE V-C SHIPPED — the world answers with receipts (2026-07-20,
+claude/vision-c @ 98e327e0, 3 commits, FOLD-READY; manager-validated).** V-1 THE
+INTERVIEW: a new edge function on the EXACT nine-surface guard stack (session gate →
+burst → active → entitlement → governor → reserve/spend/refund → aiOperationLog;
+sessionGateCensus 9), schema-walled {answer, citations, confidence}, SERVER-DERIVED
+citation kinds (unspoofable), segmented conjecture register, receipt chips → V-4;
+17 pins. V-14 THE ORACLE: deterministic no-AI core, own named rng stream, yes/no
+bent by real embattlement/turmoil with basis notes, FREE + ungated (the solo
+player's tool costs no AI — judgment ratified); 13 pins. V-5 THE CORPUS FACTORY:
+staging slice + workshop panel; THE APPROVAL BOUNDARY IS STRUCTURAL (canon =
+committed corpusStaging leaf; gen:compendium-data reads ONLY the leaf — staged can
+NEVER reach the artifact); registry lifecycle honored. Adoption rider: one id-free
+SURVEYOR_ADOPTION event (two-names idiom) across all three. Gate: strict 0 · tsc 0
+· lint +0 · validate:edge 59 · build ✓ · dist 162 · closure 1,026,262 (+1,528 B
+eager: the V-5 slice + registry rows — legitimate; headroom 13,738) · full suite
+triaged: reds = parked goldens (base-verified) + isolation-passing parallel flakes,
+NONE lane-caused. JUDGMENTS RATIFIED: interview meters under 'analysis' (dedicated
+feature = migration = owner follow-on) · promptless door link (NL routing follow-on)
+· V-5 canon fold = owner build-time step. CYCLE-2 INTAKE (confirmed, out-of-lane):
+the EXISTING analyst's SOURCE_SHAPE regex is lowercase-only and silently DROPS
+camelCase receipt tags (read:warCausal etc.) — the analyst cannot cite the slice
+that answers its flagship question; the interview shipped tolerant. DURABLE: one
+new edge fn trips ~8 doc/config gates (verifyJwtPins·docCounts·runbook·abuseModel·
+architecture·metrics·clampBaseline·killList) · an F24 NUL recurrence in a Write was
+caught by controlBytes + python-fixed. SLOT ROTATED → V-D dispatching.**
 **⬛⭐ VISION LANE V-I SHIPPED — the ops nervous system, inert-honest (2026-07-20,
 claude/vision-i @ e5e4ce1d, FOLD-READY; manager-validated).** All seven: R-15 nine
 PROPOSED soak bands (registry-mirrored manifest + validate:tuning-bands wired into
