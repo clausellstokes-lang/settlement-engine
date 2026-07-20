@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, Route, History, Mail, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -58,6 +58,9 @@ import RoadScenePanel from './RoadScenePanel.jsx';
 // V-3 THE TIMELAPSE scrubber — STATIC for the SAME FP-R reason (a lazy() would mint a
 // preload entry and tip the ratchet). @enforced-by tests/build/vendorPdfLazy.test.js
 import TimelapsePanel from './TimelapsePanel.jsx';
+// V-2 THE CHRONICLER'S LETTER — STATIC for the SAME FP-R reason (rides this already-
+// lazy chunk at zero eager manifest cost).
+import ChroniclersLetterPanel from './ChroniclersLetterPanel.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
@@ -67,6 +70,7 @@ import TimelapsePanel from './TimelapsePanel.jsx';
  */
 export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard', label: 'Dashboard', Icon: LayoutDashboard },
+  { id: 'letter',    label: 'Letter', Icon: Mail },
   { id: 'war',       label: 'War and Diplomacy', Icon: Swords },
   { id: 'road',      label: 'Stage the Road', Icon: Route },
   { id: 'treaty',    label: 'Treaties', Icon: ScrollText },
@@ -332,6 +336,11 @@ export default function RealmInspector({
             campaign
               ? <TimelapsePanel campaign={campaign} nameFor={(id) => nameById?.get(String(id)) || String(id)} />
               : <CampaignEmptyState lead="The timelapse replays a live campaign's history once it has advanced." {...emptyHandlers} />
+          )}
+          {activeSection === 'letter' && (
+            campaign
+              ? <ChroniclersLetterPanel campaign={campaign} />
+              : <CampaignEmptyState lead="The chronicler's letter sums a live campaign's news for your next session." {...emptyHandlers} />
           )}
         </Suspense>
       </div>

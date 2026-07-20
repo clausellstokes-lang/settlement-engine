@@ -105,6 +105,14 @@ export function migrateCampaign(camp) {
   // partial campaign missing this array otherwise throws mid-render and white-
   // screens the whole library.
   next.settlementIds = Array.isArray(next.settlementIds) ? next.settlementIds : [];
+  // V-2 THE CHRONICLER'S LETTER: the per-campaign read floor. Normalized at the
+  // single load chokepoint so no campaign (legacy / partial / imported) enters the
+  // store without it — the composer diffs `wizardNews.entries` with tick > this.
+  next.lastReadTick = Number.isFinite(next.lastReadTick) ? Number(next.lastReadTick) : 0;
+  // R-16 THE 'WORLD DEEPENED' LETTER: the flags-seen baseline. null (never recorded)
+  // ⇒ the deepened section stays DARK; an array ⇒ a flag delta lights it. A non-array
+  // (absent/legacy) normalizes to null, so the R-16 path is dormant by default.
+  next.flagsSeen = Array.isArray(next.flagsSeen) ? next.flagsSeen.map(String) : null;
   return next;
 }
 
@@ -292,6 +300,11 @@ export const createCampaignSlice = (set, get) => {
         worldState: ensureWorldState(null, { id, name }),
         collapsed: false,
         accessState: 'active',
+        // V-2 / R-16: the letter read floor + the flags-seen baseline (see
+        // migrateCampaign). A fresh campaign has read nothing (0) and recorded no
+        // flags baseline (null ⇒ the deepened section is dark until first read).
+        lastReadTick: 0,
+        flagsSeen: null,
         // Never-synced marker: this campaign lives only on this device until a
         // cloud upsert confirms it. mergeCampaignLists keeps a local-only
         // campaign (absent from remote) only while this is truthy, and clears
@@ -669,6 +682,28 @@ export const createCampaignSlice = (set, get) => {
       track(EVENTS.CHRONICLE_GENERATED, { entry_count_after: chronicleCount, tick: chronicleTick });
     }
   },
+
+  // V-2 THE CHRONICLER'S LETTER: mark the campaign's letters read up to the feed's
+  // current tick, and record the flags-seen baseline (R-16). Mirrors
+  // appendCampaignChronicle (findActiveCampaign → mutate → updatedAt →
+  // persistCampaignState). The enabled-flag set is computed INLINE (never importing
+  // the lazy composer's enabledFlagsOf into the eager store) — the same
+  // Object.keys(rules).filter(===true).sort() the composer uses, so R-16's baseline
+  // and its delta agree. Persisted per campaign; survives reload (cloneJson) and
+  // pulse undo (which swaps worldState only, never these top-level fields).
+  markCampaignLettersRead: (campaignId) =>
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      const feed = ensureWizardNewsFeed(c.wizardNews);
+      c.lastReadTick = Number.isFinite(feed.currentTick) ? Number(feed.currentTick) : (Number(c.lastReadTick) || 0);
+      const rules = c.worldState && typeof c.worldState === 'object' ? c.worldState.simulationRules : null;
+      c.flagsSeen = rules && typeof rules === 'object'
+        ? Object.keys(rules).filter(k => rules[k] === true).sort()
+        : [];
+      c.updatedAt = new Date().toISOString();
+      persistCampaignState(state, campaignId);
+    }),
 
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
   setActiveCampaign: (id) => {

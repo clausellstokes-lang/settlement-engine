@@ -144,6 +144,7 @@ export const OPERATIONS = Object.freeze({
   updateSavedCampaign: { opType:'updateSavedCampaign', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   clearCampaignWizardNews: { opType:'clearCampaignWizardNews', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   appendCampaignChronicle: { opType:'appendCampaignChronicle', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
+  markCampaignLettersRead: { opType:'markCampaignLettersRead', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   setActiveCampaign: { opType:'setActiveCampaign', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   queueSettlementEvent: { opType:'queueSettlementEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   cancelQueuedEvent: { opType:'cancelQueuedEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
