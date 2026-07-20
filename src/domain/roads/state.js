@@ -78,6 +78,7 @@ export function cmp(a, b) {
  * @property {number} knownDangerAtDispatch  the stale-intel receipt
  * @property {boolean} trappedBySiege
  * @property {number} startedYear
+ * @property {Array<'land'|'sea'>} [legModes]  D-6 SEA ROADS: per-hop modality, frozen at dispatch (absent ⇒ all-land, legacy-tolerant)
  */
 /**
  * @typedef {Object} RansomRec

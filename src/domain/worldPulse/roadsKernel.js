@@ -67,6 +67,7 @@ import {
   thirdPartyRansomActive, resolveThirdPartyRansom, thirdPartyReleaseEffects,
   persistThirdPartyLedgers, THIRD_PARTY_RANSOM_TUNING,
 } from '../roads/thirdPartyRansom.js';
+import { seaRoadsActive, resolveSeaHazard, classifyLegModes, currentSeaHop } from '../roads/seaRoads.js';
 
 /**
  * @typedef {Object} RoadsAdvanceResult
@@ -490,6 +491,7 @@ function advanceLitRoads(args) {
   }
 
   // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
+  const seaLit = seaRoadsActive(worldState); // D-6 SEA ROADS (§10): sea-hazard dispatch on water hops
   /** @type {Map<string, number>} legitimacy hits (capture home hit · T4 detain host hit) */
   const legitimacyHits = new Map();
   const bumpLegit = (/** @type {string} */ id, /** @type {number} */ d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
@@ -530,10 +532,17 @@ function advanceLitRoads(args) {
         }
       }
     } else {
+      // D-6 SEA ROADS (§10): an IN-TRANSIT SEA hop swaps the land in-transit checks (T1-army/T3) for
+      // the sea-hazard dispatch (S1 blockade · S2 storm · S3 piracy). A calm crossing ⇒ res stays
+      // null (no land army/embattlement check). T2/T4 are visiting-only ⇒ never reached over water.
+      const overSea = seaLit && phase !== 'visiting' && currentSeaHop(m, weekClock, digest, season).overSea;
+      if (overSea) {
+        res = resolveSeaHazard({ m, weekClock, digest, season, worldState, graph, homeId, destId, exposure, protection, fork, rngSeed, now2, idSet });
+      }
       // T1 — army on the route / occupation during the stay.
       let t1Captor = null;
-      if (phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
-      if (!t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
+      if (!overSea && phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
+      if (!res && !overSea && !t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
       if (t1Captor) {
         const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
         res = fork.random() < p ? { cls: 'T1', outcome: 'hostage', captorId: t1Captor } : { cls: 'T1', outcome: 'delayed', captorId: t1Captor };
@@ -547,8 +556,8 @@ function advanceLitRoads(args) {
           res = fork.random() < p ? { cls: 'T2', outcome: 'hostage', captorId } : { cls: 'T2', outcome: 'trapped', captorId };
         }
       }
-      // T3 — embattled roads (in-transit only).
-      if (!res && phase !== 'visiting') {
+      // T3 — embattled roads (LAND in-transit only; a sea hop's piracy is S3, handled above).
+      if (!res && !overSea && phase !== 'visiting') {
         const level = embattlementLevel(worldState, hop);
         if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
           const captorId = idSet.has(hop) ? hop : destId;
@@ -629,10 +638,11 @@ function advanceLitRoads(args) {
         seed, tags: ['embassy_rebuffed', str(res.venue)],
       }));
     } else if (res.outcome === 'delayed') {
-      m.legArrivalTick = num(m.legArrivalTick, 0) + 1;
+      // D-6: a storm (S2) delays 1-2 weeks (res.delayWeeks); a land army-delay (T1) is +1.
+      m.legArrivalTick = num(m.legArrivalTick, 0) + Math.max(1, num(/** @type {{ delayWeeks?: number }} */ (res).delayWeeks, 1));
       if (!m.delayReceipted) {
         m.delayReceipted = true; const seed = `delay.${mid}.${now2}`;
-        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed'] }));
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed', ...(/** @type {{ overSea?: boolean }} */ (res).overSea ? ['sea'] : [])] }));
       }
     } else if (res.outcome === 'trapped') {
       if (!m.trappedBySiege) {
@@ -895,6 +905,8 @@ function advanceLitRoads(args) {
         path: route.path.slice(), departTick: weekClock, legArrivalTick: weekClock + legWeeks,
         stayWeeks, escort01, riskTolerance01: riskTolerance, knownDangerAtDispatch: believedDanger,
         trappedBySiege: false, startedYear: year,
+        // D-6 SEA ROADS (§10): freeze per-hop modality at dispatch (absent when dark ⇒ legacy all-land).
+        ...(seaLit ? { legModes: classifyLegModes(digest, route.path) } : {}),
       };
       cadence[c.npcKey] = year;
       abroadByHome.set(sid, (abroadByHome.get(sid) || 0) + 1);
