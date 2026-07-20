@@ -64,13 +64,29 @@ every future hand — including its authors'.
     export TOTALITY (the portability covenant enforced), retention honesty pinned
     to the actual SQL, and consent posture explicit. The trust brand's data
     conscience, graded first-class.
+17. UI/UX CRAFT (ADDED 2026-07-20, the owner's catch — deliberately scoped: TASTE
+    [which look is right] remains the OWNER'S constitutional dimension, never
+    AI-graded; CRAFT [how well the chosen look is executed] is graded here):
+    ONE design system with zero forks — primitives the only way to build interface,
+    tokens the only colors, the kill-list/ratchet family driven to its targets;
+    every interactive element carries its COMPLETE state set (hover/focus/active/
+    disabled/loading/error), none defaulted; hierarchy legible at a glance; spacing
+    and type on a SYSTEM, never by incident; motion purposeful and reduced-motion-
+    respecting; empty/loading/error states DESIGNED (an invitation, never an
+    apology); and interface effectiveness heuristically clean — flows short, errors
+    recoverable, features findable. The enforcement machinery already exists (the
+    ratchets ARE this dimension's gates); A+ = the machinery's targets REACHED and
+    held. Ceiling doctrine: task-effectiveness is CERTIFIED only by real users —
+    the lived tier signs that half.
 
 ## Considered and deliberately NOT dimensions (recorded so the audit is complete)
 Learnability (owned by bar 3's ten-minute + empty-state craft) · maintainability
 (IS the meta-criterion, proven by lane velocity) · internationalization (recorded
 post-launch deferral; registries keep the door open) · community health (instrumented
-now, gradeable only with humans in it — post-launch) · aesthetic taste (the OWNER'S
-dimension by constitutional design; never AI-graded).
+now, gradeable only with humans in it — post-launch) · aesthetic TASTE (the OWNER'S
+dimension by constitutional design; never AI-graded — note: UI/UX CRAFT was
+originally over-bundled here and is now bar 17; the taste/craft boundary is the
+lesson: WHICH look is the owner's; HOW WELL it is executed is gradeable).
 
 ## The meta-criterion ("across the board")
 THE STANDARD MUST SURVIVE ITS AUTHORS. Every bar a ratchet, every promise an enforcer,
