@@ -148,6 +148,19 @@ export function notifyCreditLow({ displayName, balance, narrativeCost = 3, daily
   });
 }
 
+/** New-device sign-in notification (DESIGN_MONEY_WAVE §7.4 / M-9e). Fired only when a
+ *  new sign-in SUPERSEDED a different prior session (single-session, last-login-wins).
+ *  COORDINATION POINT: coded against the Wave-E seam's template-name+payload interface —
+ *  the 'new_device_signin' template is registered by the parallel Wave-E lane, so
+ *  send-email returns a soft unknown_template here until it folds. Fire-and-forget /
+ *  never-throw (send() swallows), exactly like the other lifecycle helpers. */
+export function notifyNewDeviceSignin({ device_label, at } = {}) {
+  return send('new_device_signin', {
+    device_label: device_label || 'a new device',
+    at: at || new Date().toISOString(),
+  });
+}
+
 /** Founder thank-you. Fires server-side after Stripe webhook upgrades
  *  the user; here we expose the client-side helper for completeness
  *  but in practice this should be called from the stripe-webhook

@@ -46,6 +46,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
@@ -62,6 +63,9 @@ const PRICE_MAP: Record<string, string> = {
   premium:          Deno.env.get('STRIPE_PRICE_PREMIUM') || '',
   founder_lifetime: Deno.env.get('STRIPE_PRICE_FOUNDER_LIFETIME') || '',
   single_dossier:   Deno.env.get('STRIPE_PRICE_SINGLE_DOSSIER') || '',
+  // Surveyor subscription (#16). Unset env ⇒ '' ⇒ unpurchasable (LAW 1). Signed-in
+  // only (non-anonymous), subscription mode (below). Grants an ENTITLEMENT, not a tier.
+  surveyor:         Deno.env.get('STRIPE_PRICE_SURVEYOR') || '',
   // ── Legacy SKUs (kept resolvable so refund + replay flows work) ──────────
   credits_5:        Deno.env.get('STRIPE_PRICE_CREDITS_5') || '',
   credits_15:       Deno.env.get('STRIPE_PRICE_CREDITS_15') || '',
@@ -86,7 +90,7 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // Products that bill as a subscription (vs one-time payment). Everything
 // else uses Stripe's payment mode. Keep this in sync with TIERS.billing
 // in src/config/pricing.js.
-const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
+const SUBSCRIPTION_PRODUCTS = new Set(['premium', 'surveyor']);
 
 // Founder Lifetime is advertised as "X of 30 seats remaining". Keep in sync
 // with `seatLimit` in src/config/pricing.js and FOUNDER_SEAT_CAP in
@@ -309,7 +313,7 @@ export async function handleCreateCheckout(
     // saved settlement at checkout, the durable-rights entitlement (108) binds
     // to it. It is verified for ownership below and stashed in the session
     // metadata; the webhook grants the right on the paid session.
-    const { product, checkoutToken, redeemCode, saveId, settlement } = await req.json();
+    const { product, checkoutToken, redeemCode, saveId, settlement, savePaymentMethod } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -386,6 +390,11 @@ export async function handleCreateCheckout(
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
+        // SINGLE-SESSION GATE (161, §7.2): authed products only — the anonymous
+        // single_dossier path carries no session and is intentionally ungated.
+        if (await isSessionSuperseded(adminClient(), authedUser.id, authHeader, deviceLabelFromRequest(req))) {
+          return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+        }
       } else if (!isAnonymousProduct) {
         throw new Error('Not authenticated');
       }
@@ -563,6 +572,18 @@ export async function handleCreateCheckout(
       // the webhook's zero-dollar gates (referral grant, redeem apply) assume
       // every discount on a session was placed by this line.
       sessionParams.discounts = [{ coupon: redeemCoupon }];
+    }
+
+    // AUTO-RELOAD CONSENT (§4.2 / #13): a SIGNED-IN buyer of a CREDIT PACK may opt
+    // to save the card off-session so future auto-reloads can charge it. Gated
+    // server-side on ALL three conditions re-derived here (never trust the body
+    // flag alone to bypass them): payment mode (payment_intent_data is invalid in
+    // subscription mode), a signed-in user (never anonymous), and a credit-pack
+    // product (present in CREDIT_AMOUNTS). Stripe stores the payment method for
+    // off_session reuse; no raw card data ever touches our code.
+    const isCreditPack = Object.prototype.hasOwnProperty.call(CREDIT_AMOUNTS, product);
+    if (savePaymentMethod === true && mode === 'payment' && user && isCreditPack) {
+      sessionParams.payment_intent_data = { setup_future_usage: 'off_session' };
     }
 
     let session: { id: string; url: string | null };

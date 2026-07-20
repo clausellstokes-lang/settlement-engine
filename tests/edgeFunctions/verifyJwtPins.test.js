@@ -49,6 +49,11 @@ const SELF_AUTH_FALSE = new Set([
   // gallery data and takes no write path. The platform gate would 401 every social
   // preview. See supabase/functions/og-image/index.ts.
   'og-image',
+  // founder-transfer (Money Wave #17) — self-authenticating: the run_due cron action
+  // carries NO JWT (x-cron-secret shared secret, like pricing-resync-cron), while every
+  // user action does its own getUser()/session-gate/velocity check in-handler. The
+  // platform gate would 401 the hourly due-runner sweep. See founder-transfer/index.ts.
+  'founder-transfer',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

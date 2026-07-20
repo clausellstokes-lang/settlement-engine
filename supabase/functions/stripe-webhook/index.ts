@@ -227,6 +227,24 @@ async function grantMonthlyAllowanceIfNeeded(
     return profile;
   }
 
+  // THE ALLOWANCE PRICE-ID GATE (§5, §14 — load-bearing). The 30-credit monthly
+  // allowance is the CARTOGRAPHER (premium) perk ONLY. Without this, a Surveyor
+  // subscription invoice (also billing_reason subscription_create/cycle) would mint
+  // the Cartographer allowance. Require the invoice's first line's price id to be
+  // STRIPE_PRICE_PREMIUM. Read at call time so the check tracks the env. FAIL-OPEN
+  // for back-compat: an unset env OR an absent line price proceeds (logged) — the
+  // gate only ever SKIPS the allowance for an invoice we can positively identify as
+  // a NON-Cartographer plan.
+  const premiumPriceId = Deno.env.get('STRIPE_PRICE_PREMIUM') || '';
+  const firstLinePriceId = invoice.lines?.data?.[0]?.price?.id ?? null;
+  if (premiumPriceId && firstLinePriceId && firstLinePriceId !== premiumPriceId) {
+    console.log(`[stripe-webhook] invoice ${invoice.id} price ${firstLinePriceId} is not the Cartographer plan (${premiumPriceId}) — skipping the monthly Cartographer allowance`);
+    return profile;
+  }
+  if (!premiumPriceId || !firstLinePriceId) {
+    console.log(`[stripe-webhook] monthly-allowance price-id gate inactive for invoice ${invoice.id} (env=${Boolean(premiumPriceId)}, line=${Boolean(firstLinePriceId)}) — proceeding for back-compat`);
+  }
+
   // BACK-FILL (not overwrite) the recorded subscription id for legacy premium
   // users who pre-date the column. We deliberately do NOT overwrite an existing
   // recorded id from an invoice: Stripe reorders/redelivers, so a late OLD-sub
@@ -584,6 +602,7 @@ async function deductReferralCredits(
  */
 async function clawbackFounderForSession(
   supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
   key: string,
 ): Promise<void> {
   const { data: grantRow, error: grantErr } = await supabase
@@ -595,6 +614,14 @@ async function clawbackFounderForSession(
   if (grantErr) throw new Error(`founder clawback lookup failed: ${grantErr.message}`);
   const userId = grantRow?.user_id as string | undefined;
   if (!userId) return; // this key never granted the founder bonus — nothing to reverse.
+
+  // FP-4 (§6.7): BEFORE reversing founder state, abort any LIVE transfer case for this
+  // holder's seat (refunding the nominee's $99 if the case was paid — the abort-refund
+  // path). Ordered FIRST so the subsequent transfer_case_finalize refuses (wrong_state):
+  // otherwise the cooling case would still finalize, handing the just-unwound seat to the
+  // nominee AND scheduling a $49.50 payout to the refunded holder (double recovery). The
+  // live-state filter makes it idempotent — a redelivery finds no live case and no-ops.
+  await abortLiveCaseForClawback(supabase, stripeApi, userId);
 
   // Claim-once: flip is_founder true→false in one atomic statement. A redelivered
   // refund/dispute finds it already false, claims no row, and no-ops.
@@ -630,6 +657,104 @@ async function clawbackFounderForSession(
     await deductFounderCredits(supabase, userId, key);
   } catch (err) {
     logError('stripe-webhook', userId, err, { stage: 'founder_clawback_credits', key });
+  }
+
+  // SEAT REGISTER (137, §6.1): release the seat back to the unclaimed pool — the
+  // mirror of claim_next_founder_seat. Post-claim + log-don't-throw like the steps
+  // above: the is_founder flip is the claim, so a redelivered refund/dispute finds it
+  // already false, returns at the claim check, and NEVER re-runs this (no double
+  // release). release_founder_seat_on_clawback is itself claim-once (a cleared holder
+  // no-ops). The fuller "abort any LIVE transfer case for this seat first" interplay
+  // (§6.7) lands in M-7; this basic release is the mirror the seat register needs.
+  try {
+    const { error: seatErr } = await supabase.rpc('release_founder_seat_on_clawback', { p_user: userId });
+    if (seatErr) logError('stripe-webhook', userId, seatErr.message, { stage: 'founder_clawback_seat_release', key });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'founder_clawback_seat_release', key });
+  }
+}
+
+/**
+ * FP-4 (§6.7, family 2): abort any LIVE transfer case for a holder whose ORIGINAL $99 is
+ * being goodwill-refunded, refunding the nominee's $99 if that case was already paid. This
+ * is the §6.7 "clawback FIRST aborts any live case" ordering that M-7 deferred. Called by
+ * clawbackFounderForSession BEFORE the is_founder flip so a subsequent transfer_case_finalize
+ * refuses (the case is no longer 'cooling'). Idempotent: the partial-unique live-case filter
+ * (one live case per from_user) returns nothing on a redelivery once aborted, so no second
+ * abort or refund is attempted; the refund also carries the same `abort-refund-<case>` key
+ * as the edge abort path, so even a racing edge abort dedups to ONE Stripe refund.
+ * NEVER-throw — a failure here logs and lets the founder reversal proceed.
+ */
+async function abortLiveCaseForClawback(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  userId: string,
+): Promise<void> {
+  try {
+    const { data: liveCase, error } = await supabase
+      .from('founder_transfer_cases')
+      .select('id, state, stripe_session_id')
+      .eq('from_user', userId)
+      .in('state', ['initiated', 'nominee_verified', 'awaiting_payment', 'cooling'])
+      .maybeSingle();
+    if (error) { logError('stripe-webhook', userId, error.message, { stage: 'founder_clawback_live_case_lookup' }); return; }
+    if (!liveCase) return; // no live case for this holder's seat — nothing to abort.
+
+    const { data: aborted, error: aErr } = await supabase.rpc('transfer_case_abort', {
+      p_case: liveCase.id, p_actor: 'admin', p_reason: 'goodwill_refund_original',
+    });
+    if (aErr) { logError('stripe-webhook', userId, aErr.message, { stage: 'founder_clawback_case_abort', case_id: liveCase.id }); return; }
+
+    // Refund the nominee's $99 iff the aborted case was paid (cooling). Same idempotency
+    // key as the edge abort-refund path so both dedup to one Stripe refund object.
+    if (aborted?.was_paid && aborted?.payment_session) {
+      const sess = await stripeApi.checkout.sessions.retrieve(aborted.payment_session as string);
+      const pi = typeof sess.payment_intent === 'string' ? sess.payment_intent : sess.payment_intent?.id ?? null;
+      if (pi) {
+        await stripeApi.refunds.create({ payment_intent: pi }, { idempotencyKey: `abort-refund-${liveCase.id}` });
+      } else {
+        logError('stripe-webhook', userId, 'aborted transfer case has no payment_intent to refund', { stage: 'founder_clawback_case_refund', case_id: liveCase.id });
+      }
+    }
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'founder_clawback_case_abort', user_id: userId });
+  }
+}
+
+/**
+ * TRANSFER dispute/refund interplay (§6.7, M-7). A refund/dispute resolving to a
+ * TRANSFER checkout session (the case's stripe_session_id) reverses the transfer by
+ * its case state — claim-once via the 160 RPCs (a redelivery finds a non-live state
+ * and no-ops). NEVER-throw: a mirror failure must not stall the other clawbacks.
+ *   - cooling            → abort (chargeback); no seat ever moved.
+ *   - finalized, payout not released → reverse; the seat moves BACK.
+ *   - finalized, payout released     → flag the seat + loud operator log; the company
+ *     is out $49.50 (the 14-day floor covers fast fraud; slow disputes are a support
+ *     case). money_events is flipped to 'disputed' by flipMoneyEventStatus on the same key.
+ */
+async function clawbackTransferForSession(
+  supabase: ReturnType<typeof adminClient>,
+  key: string,
+): Promise<void> {
+  const { data: c, error } = await supabase
+    .from('founder_transfer_cases')
+    .select('id, state, payout_status, seat_id')
+    .eq('stripe_session_id', key)
+    .maybeSingle();
+  if (error) { logError('stripe-webhook', null, error.message, { stage: 'transfer_clawback_lookup', key }); return; }
+  if (!c) return; // this key is not a transfer session — nothing to reverse.
+
+  if (c.state === 'cooling') {
+    const { error: aErr } = await supabase.rpc('transfer_case_abort', { p_case: c.id, p_actor: 'chargeback', p_reason: 'dispute_or_refund' });
+    if (aErr) logError('stripe-webhook', null, aErr.message, { stage: 'transfer_clawback_abort', case_id: c.id });
+  } else if (c.state === 'finalized' && c.payout_status !== 'released' && c.payout_status !== 'releasing') {
+    const { error: rErr } = await supabase.rpc('transfer_case_reverse', { p_case: c.id, p_reason: 'dispute_or_refund' });
+    if (rErr) logError('stripe-webhook', null, rErr.message, { stage: 'transfer_clawback_reverse', case_id: c.id });
+  } else if (c.state === 'finalized') {
+    // Payout already out — the seat is administratively flagged; recorded accepted-risk.
+    const { error: fErr } = await supabase.from('founder_seats').update({ security_status: 'flagged' }).eq('seat_id', c.seat_id);
+    if (fErr) logError('stripe-webhook', null, fErr.message, { stage: 'transfer_clawback_flag', case_id: c.id });
+    logError('stripe-webhook', null, 'transfer disputed AFTER payout released — seat flagged, company out $49.50 (accepted residual)', { stage: 'transfer_post_payout_dispute', case_id: c.id });
   }
 }
 
@@ -1172,9 +1297,356 @@ async function clawbackDossierEntitlementForSession(
   }
 }
 
+// ── The money ledger mirror (156, DESIGN_MONEY_WAVE §2) ──────────────────────
+//
+// Every successful money movement mirrors ONE row into money_events (the purchase
+// ledger reads it). Defined here (below handleStripeWebhook, with the 108 set) so
+// this file's signature-first textual order is untouched — none of these helpers
+// read session.metadata, and they run only from dispatchStripeEvent (after the
+// signature is verified). EVERY writer is NEVER-THROW into the money path: a mirror
+// failure logs via logError and must not stall fulfillment (the referralEmails /
+// dossier-voucher posture). event_key is the redelivery shield — the upsert
+// ignoreDuplicates makes a replayed webhook re-insert nothing.
+type MoneyEventKind =
+  | 'credit_pack' | 'founder_seat' | 'single_dossier'
+  | 'subscription_start' | 'subscription_renewal'
+  | 'surveyor_start' | 'surveyor_renewal' | 'auto_reload'
+  | 'seat_transfer_payment' | 'seat_transfer_payout' | 'refund_note';
+
+/** Server-composed, human-readable description for a mirrored row (NOT NULL). The
+ *  UI maps kind→label itself (purchaseHistory.js); this is the durable audit text. */
+function describeMoneyKind(kind: MoneyEventKind, extra: { credits?: number } = {}): string {
+  switch (kind) {
+    case 'credit_pack': return extra.credits ? `Credit pack (${extra.credits} credits)` : 'Credit pack';
+    case 'founder_seat': return 'Founder Lifetime seat';
+    case 'single_dossier': return 'Single dossier export';
+    case 'subscription_start': return 'Cartographer subscription';
+    case 'subscription_renewal': return 'Cartographer subscription renewal';
+    case 'surveyor_start': return 'Surveyor subscription';
+    case 'surveyor_renewal': return 'Surveyor subscription renewal';
+    case 'auto_reload': return 'AI credit auto-reload';
+    case 'seat_transfer_payment': return 'Founder seat transfer';
+    case 'seat_transfer_payout': return 'Founder seat transfer payout';
+    case 'refund_note': return 'Refund note';
+    default: return 'Purchase';
+  }
+}
+
+interface MoneyEventRow {
+  event_key: string;
+  user_id: string | null;
+  occurred_at: string;
+  kind: MoneyEventKind;
+  amount_cents: number;
+  currency: string;
+  description: string;
+  receipt_url: string | null;
+  status?: 'paid' | 'refunded' | 'disputed' | 'reversed';   // default 'paid'; a refund_note sets 'refunded'
+  stripe_session_id?: string | null;
+  stripe_invoice_id?: string | null;
+  stripe_payment_intent_id?: string | null;
+  stripe_charge_id?: string | null;
+  metadata?: Record<string, unknown>;
+}
+
+/** Upsert one money_events row, deduped on event_key (a replayed webhook re-inserts
+ *  nothing). NEVER throws — a mirror-write failure is logged, not propagated. */
+async function writeMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  row: MoneyEventRow,
+): Promise<void> {
+  try {
+    const { error } = await supabase
+      .from('money_events')
+      .upsert(row, { onConflict: 'event_key', ignoreDuplicates: true });
+    if (error) {
+      logError('stripe-webhook', row.user_id, error.message, { stage: 'write_money_event', event_key: row.event_key });
+    }
+  } catch (err) {
+    logError('stripe-webhook', row.user_id, err, { stage: 'write_money_event', event_key: row.event_key });
+  }
+}
+
+/** Retrieve a one-time payment's hosted receipt via payment_intent → latest_charge.
+ *  One extra Stripe call on the fulfillment path; the caller isolates it so a miss
+ *  leaves receipt_url NULL (honest degradation) without dropping the ledger row. */
+async function captureChargeReceipt(
+  stripeApi: typeof stripe,
+  paymentIntentId: string,
+): Promise<{ receiptUrl: string | null; chargeId: string | null }> {
+  const pi = await stripeApi.paymentIntents.retrieve(paymentIntentId, { expand: ['latest_charge'] });
+  const charge = pi?.latest_charge;
+  if (charge && typeof charge === 'object') {
+    return { receiptUrl: (charge as Stripe.Charge).receipt_url ?? null, chargeId: (charge as Stripe.Charge).id ?? null };
+  }
+  return { receiptUrl: null, chargeId: null };
+}
+
+/** Mirror ONE checkout fulfillment into money_events (event_key sess:{id}). One-time
+ *  products capture the charge receipt (payment_intent → latest_charge); subscription
+ *  starts capture the hosted invoice receipt (session.invoice). Subscriptions are
+ *  mirrored HERE (the *_start row); their renewals come from invoice.paid on
+ *  billing_reason='subscription_cycle', so a Checkout-created subscription — which
+ *  fires BOTH completed AND a subscription_create invoice — is never double-counted. */
+async function mirrorCheckoutMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  session: Stripe.Checkout.Session,
+  kind: MoneyEventKind,
+  userId: string | null,
+  credits: number,
+): Promise<void> {
+  try {
+    const isSubscription = kind === 'subscription_start' || kind === 'surveyor_start';
+    const paymentIntentId = typeof session.payment_intent === 'string'
+      ? session.payment_intent : session.payment_intent?.id ?? null;
+    const invoiceId = typeof session.invoice === 'string'
+      ? session.invoice : session.invoice?.id ?? null;
+
+    let receiptUrl: string | null = null;
+    let chargeId: string | null = null;
+    try {
+      if (isSubscription && invoiceId) {
+        const inv = await stripeApi.invoices.retrieve(invoiceId);
+        receiptUrl = inv?.hosted_invoice_url ?? null;
+        chargeId = typeof inv?.charge === 'string' ? inv.charge : (inv?.charge as Stripe.Charge | null)?.id ?? null;
+      } else if (!isSubscription && paymentIntentId) {
+        const cap = await captureChargeReceipt(stripeApi, paymentIntentId);
+        receiptUrl = cap.receiptUrl;
+        chargeId = cap.chargeId;
+      }
+    } catch (recErr) {
+      // Receipt is optional — a miss leaves the column NULL and the UI shows no
+      // link (honest degradation). Log, still write the row.
+      logError('stripe-webhook', userId, recErr, { stage: 'mirror_receipt_capture', session_id: session.id });
+    }
+
+    await writeMoneyEvent(supabase, {
+      event_key: `sess:${session.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind,
+      amount_cents: typeof session.amount_total === 'number' ? session.amount_total : 0,
+      currency: session.currency ?? 'usd',
+      description: describeMoneyKind(kind, { credits }),
+      receipt_url: receiptUrl,
+      stripe_session_id: session.id,
+      stripe_invoice_id: invoiceId,
+      stripe_payment_intent_id: paymentIntentId,
+      stripe_charge_id: chargeId,
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'mirror_checkout_money_event', session_id: session.id, kind });
+  }
+}
+
+/** Mirror a subscription RENEWAL invoice into money_events (event_key inv:{id}). The
+ *  hosted invoice url is the permanent receipt. NEVER throws. */
+async function mirrorInvoiceMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  invoice: Stripe.Invoice,
+  userId: string,
+  kind: MoneyEventKind,
+): Promise<void> {
+  try {
+    await writeMoneyEvent(supabase, {
+      event_key: `inv:${invoice.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind,
+      amount_cents: typeof invoice.amount_paid === 'number' ? invoice.amount_paid : 0,
+      currency: invoice.currency ?? 'usd',
+      description: describeMoneyKind(kind),
+      receipt_url: invoice.hosted_invoice_url ?? null,
+      stripe_invoice_id: invoice.id,
+      stripe_payment_intent_id: typeof invoice.payment_intent === 'string'
+        ? invoice.payment_intent : invoice.payment_intent?.id ?? null,
+      stripe_charge_id: typeof invoice.charge === 'string'
+        ? invoice.charge : (invoice.charge as Stripe.Charge | null)?.id ?? null,
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'mirror_invoice_money_event', invoice_id: invoice.id, kind });
+  }
+}
+
+/** Flip the mirrored row's status on a refund/dispute. Keyed on the SAME candidate
+ *  keys resolveChargeClawbackKeys already computes (sess:/inv: forms) — the one
+ *  sanctioned mutation on money_events. NEVER throws (a status-mirror failure must
+ *  not stall the referral/dossier/founder clawbacks running alongside it). */
+async function flipMoneyEventStatus(
+  supabase: ReturnType<typeof adminClient>,
+  keys: string[],
+  status: 'refunded' | 'disputed',
+): Promise<void> {
+  if (keys.length === 0) return;
+  try {
+    const eventKeys = keys.flatMap((k) => [`sess:${k}`, `inv:${k}`]);
+    const { error } = await supabase
+      .from('money_events')
+      .update({ status })
+      .in('event_key', eventKeys);
+    if (error) {
+      logError('stripe-webhook', null, error.message, { stage: 'flip_money_event_status', status });
+    }
+  } catch (err) {
+    logError('stripe-webhook', null, err, { stage: 'flip_money_event_status', status });
+  }
+}
+
+/**
+ * FP-2 (§6.8 family 8 / §6.6): refund a $99 transfer charge that COMPLETED for a case
+ * that is no longer awaiting_payment. transfer_case_mark_paid no-opped (wrong_state), so
+ * the seat never moved for THIS session — the nominee's charge is orphaned and must be
+ * returned. The ONE exception is a redelivery of the session that LEGITIMATELY paid the
+ * case (paid_at set AND stripe_session_id === this session): that money bought the cooling
+ * seat and must NOT be clawed back. Redelivery-safe by construction: the Stripe
+ * idempotencyKey dedups the refund and the money_events event_key dedups the note, so a
+ * replay re-sends the same refund request and re-inserts no row. NEVER-throw — a
+ * refund/mirror failure must not turn the ack into a redelivery loop that keeps
+ * re-completing the same charge (the operator log is the remediation surface).
+ */
+async function refundOrphanedTransferCharge(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  session: Stripe.Checkout.Session,
+  caseId: string,
+  reason: string,
+): Promise<void> {
+  const userId = session.metadata?.supabase_user_id ?? null;
+  try {
+    // Only refund when THIS session did not legitimately pay the case. A found case whose
+    // paid_at is set AND whose bound session IS this one is the seat-buying payment
+    // (redelivered) — leave it. An absent case row means the $99 has no valid home → refund.
+    const { data: c, error: cErr } = await supabase
+      .from('founder_transfer_cases')
+      .select('paid_at, stripe_session_id')
+      .eq('id', caseId)
+      .maybeSingle();
+    if (cErr) { logError('stripe-webhook', userId, cErr.message, { stage: 'transfer_orphan_lookup', session_id: session.id, case_id: caseId }); return; }
+    const paidByThisSession = !!c && c.paid_at != null && c.stripe_session_id === session.id;
+    if (paidByThisSession) {
+      console.log(`[stripe-webhook] transfer session ${session.id} mark_paid no-op (${reason}) — this session legitimately paid case ${caseId}; NOT refunding`);
+      return;
+    }
+
+    // Resolve the charge's payment_intent and refund it, idempotency-keyed on the session.
+    const full = await stripeApi.checkout.sessions.retrieve(session.id);
+    const pi = typeof full.payment_intent === 'string' ? full.payment_intent : full.payment_intent?.id ?? null;
+    if (pi) {
+      await stripeApi.refunds.create({ payment_intent: pi }, { idempotencyKey: `transfer-orphan-refund-${session.id}` });
+      console.log(`[stripe-webhook] orphaned transfer session ${session.id} (case ${caseId}, ${reason}) refunded`);
+    } else {
+      logError('stripe-webhook', userId, 'orphaned transfer charge has no payment_intent to refund', { stage: 'transfer_orphan_refund', session_id: session.id, case_id: caseId });
+    }
+
+    // Mirror a refund_note into the money ledger (redelivery-safe via the event_key upsert).
+    await writeMoneyEvent(supabase, {
+      event_key: `refund:transfer-orphan:${session.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind: 'refund_note',
+      amount_cents: typeof session.amount_total === 'number' ? session.amount_total : 0,
+      currency: session.currency ?? 'usd',
+      description: describeMoneyKind('refund_note'),
+      receipt_url: null,
+      status: 'refunded',
+      stripe_session_id: session.id,
+      stripe_payment_intent_id: pi,
+      metadata: { reason: 'transfer_orphan_refund', transfer_case_id: caseId, mark_paid_reason: reason },
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'transfer_orphan_refund', session_id: session.id, case_id: caseId });
+  }
+}
+
+// ── Auto-reload payment confirmation (158, §4.5) ─────────────────────────────
+//
+// The off-session PaymentIntent's create result is NOT trusted for the grant
+// (_shared/autoReload.ts only stamps the PI id). The WEBHOOK is authoritative:
+//   payment_intent.succeeded (purpose credit_auto_reload) → grant credits (atomic
+//     per-PI claim via system_grant_credits 'auto_reload' key → exactly once
+//     across redelivery) → attempt 'succeeded' (claim-once) → money_events row.
+//   payment_intent.payment_failed → attempt 'failed' + reason (best-effort).
+
+/** Grant the reloaded credits, mark the attempt succeeded, mirror money_events. The
+ *  GRANT throws on RPC error (releases the event claim → Stripe redelivers →
+ *  re-grant is idempotent on the PI key); the post-grant steps are best-effort. */
+async function handleAutoReloadSucceeded(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  pi: Stripe.PaymentIntent,
+): Promise<void> {
+  const userId = pi.metadata?.supabase_user_id;
+  const attemptId = pi.metadata?.attempt_id;
+  const credits = parseInt(pi.metadata?.credits || '0', 10);
+  if (!userId || !attemptId || !(credits > 0)) {
+    logError('stripe-webhook', userId ?? null, 'auto_reload PI missing metadata', { stage: 'auto_reload_succeeded', payment_intent: pi.id });
+    return;
+  }
+
+  // AUTHORITATIVE grant: system_grant_credits claims once per PI id (158 delivery
+  // key), so a redelivered succeeded event grants exactly once. Throws on error.
+  await grantCredits(supabase, userId, credits, 'auto_reload', { stripe_payment_intent_id: pi.id });
+
+  // Post-grant, best-effort (log-don't-throw) — the grant is the money truth and
+  // is idempotent, so a partial failure here is operator-repairable off the rows.
+  try {
+    await supabase.from('credit_auto_reload_attempts')
+      .update({ state: 'succeeded', resolved_at: new Date().toISOString() })
+      .eq('stripe_payment_intent_id', pi.id)
+      .in('state', ['pending', 'requires_action']);
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'auto_reload_mark_succeeded', payment_intent: pi.id });
+  }
+
+  let receiptUrl: string | null = null;
+  let chargeId: string | null = null;
+  try {
+    const cap = await captureChargeReceipt(stripeApi, pi.id);
+    receiptUrl = cap.receiptUrl;
+    chargeId = cap.chargeId;
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'auto_reload_receipt', payment_intent: pi.id });
+  }
+  await writeMoneyEvent(supabase, {
+    event_key: `pi:${pi.id}`,
+    user_id: userId,
+    occurred_at: new Date().toISOString(),
+    kind: 'auto_reload',
+    amount_cents: typeof pi.amount_received === 'number' ? pi.amount_received
+      : (typeof pi.amount === 'number' ? pi.amount : 0),
+    currency: pi.currency ?? 'usd',
+    description: describeMoneyKind('auto_reload', { credits }),
+    receipt_url: receiptUrl,
+    stripe_payment_intent_id: pi.id,
+    stripe_charge_id: chargeId,
+  });
+}
+
+/** Mark a failed auto-reload attempt (best-effort; a payment_failed is terminal). */
+async function handleAutoReloadFailed(
+  supabase: ReturnType<typeof adminClient>,
+  pi: Stripe.PaymentIntent,
+): Promise<void> {
+  try {
+    await supabase.from('credit_auto_reload_attempts')
+      .update({
+        state: 'failed',
+        failure_reason: pi.last_payment_error?.code || 'payment_failed',
+        resolved_at: new Date().toISOString(),
+      })
+      .eq('stripe_payment_intent_id', pi.id)
+      .in('state', ['pending', 'requires_action']);
+  } catch (err) {
+    logError('stripe-webhook', pi.metadata?.supabase_user_id ?? null, err, { stage: 'auto_reload_mark_failed', payment_intent: pi.id });
+  }
+}
+
 // The per-event handlers, extracted from the inline switch so the claim/release
 // bracket above stays readable. Behavior is IDENTICAL to the previous inline
-// switch — every guard, log line, and throw is preserved verbatim.
+// switch — every guard, log line, and throw is preserved verbatim; the money_events
+// mirror calls added below are additive and NEVER-throw (they cannot change any
+// existing guard, log, or throw).
 async function dispatchStripeEvent(
   event: Stripe.Event,
   supabase: ReturnType<typeof adminClient>,
@@ -1211,6 +1683,32 @@ async function dispatchStripeEvent(
       // individually idempotent and re-run fine. A session with no code
       // no-ops here (no_reserved_redemption).
       await applyRedemptionIfBound(supabase, session.id);
+
+      // FOUNDER SEAT TRANSFER (§6.6, M-7): a case-bound $99 payment. This session
+      // carries purpose='founder_seat_transfer' + transfer_case_id (server-validated
+      // state, set by founder-transfer/nominee_confirm), NOT a `product`. Mark the case
+      // paid → cooling (claim-once on the awaiting_payment state + the bound session)
+      // and mirror a seat_transfer_payment money_events row. Handled BEFORE the product
+      // dispatch so it never falls into the "unhandled product" throw.
+      if (session.metadata?.purpose === 'founder_seat_transfer') {
+        const transferCaseId = session.metadata?.transfer_case_id;
+        if (!transferCaseId) throw new Error('founder_seat_transfer session missing transfer_case_id');
+        const { data: paid, error: paidErr } = await supabase.rpc('transfer_case_mark_paid', {
+          p_case: transferCaseId, p_session: session.id, p_price_cents: session.amount_total ?? 0,
+        });
+        if (paidErr) throw new Error(`transfer_case_mark_paid failed: ${paidErr.message}`);
+        if (paid?.ok) {
+          await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, 'seat_transfer_payment', session.metadata?.supabase_user_id ?? null, 0);
+        } else {
+          // FP-2 (§6.8 family 8): a wrong-state session (aborted/expired, or a stale
+          // nominee session superseded by a re-minted one). The seat never moved for THIS
+          // session, so the orphaned charge is refunded — UNLESS this is a redelivery of
+          // the session that legitimately paid the case (that money bought the cooling
+          // seat). Redelivery-safe (idempotency-keyed refund + event_key-deduped note).
+          await refundOrphanedTransferCharge(supabase, stripeApi, session, transferCaseId, paid?.reason ?? 'unknown');
+        }
+        break;
+      }
 
       const userId  = session.metadata?.supabase_user_id;
       const product = session.metadata?.product;
@@ -1288,6 +1786,17 @@ async function dispatchStripeEvent(
         const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
 
+        // SEAT REGISTER (137, §6.1): claim the durable seat entitlement now that the
+        // profile writes have landed. NEVER-throw into fulfillment — is_founder stays
+        // the fast flag + the money truth, and a missed seat row is operator-repairable
+        // via the idempotent primitive (log-don't-throw). 137's deliberate deferral ends.
+        try {
+          const { error: seatErr } = await supabase.rpc('claim_next_founder_seat', { p_user: userId! });
+          if (seatErr) logError('stripe-webhook', userId!, seatErr.message, { stage: 'founder_seat_claim', session: session.id });
+        } catch (err) {
+          logError('stripe-webhook', userId!, err, { stage: 'founder_seat_claim', session: session.id });
+        }
+
         // Founder bonus: one-time 30-credit grant (idempotent on session id).
         await grantCreditsForSessionOnce(supabase, userId!, FOUNDER_CREDIT_BONUS, 'founder_grant', session.id, /* oncePerUser */ true);
         console.log(`User ${userId} upgraded to Founder Lifetime (+30 credits)`);
@@ -1340,6 +1849,30 @@ async function dispatchStripeEvent(
           }
         }
         console.log(`single_dossier purchased: session=${session.id}`);
+      } else if (product === 'surveyor') {
+        // Surveyor subscription (#16). Grants an ENTITLEMENT (139) — NOT a
+        // profiles.tier value and NOT auth metadata (the sim never reads it; the
+        // client tier bit is Wave B #15's lane). Out-of-order guard verbatim-adapted
+        // from the premium branch: a dead subscription (delivery reorder) is skipped.
+        const surveyorSubId = typeof session.subscription === 'string'
+          ? session.subscription
+          : session.subscription?.id || null;
+        if (surveyorSubId) {
+          const liveSub = await stripeApi.subscriptions.retrieve(surveyorSubId);
+          if (liveSub.status === 'canceled' || liveSub.status === 'incomplete_expired') {
+            console.log(`[stripe-webhook] session ${session.id} completed but surveyor subscription ${surveyorSubId} is already ${liveSub.status} (out-of-order delete) — not granting user ${userId}`);
+            break;
+          }
+        }
+        const surveyorCustomerId = typeof session.customer === 'string' ? session.customer : session.customer?.id || null;
+        const { error: surveyorErr } = await supabase.rpc('grant_surveyor_entitlement', {
+          p_user: userId!,
+          p_source: 'subscription',
+          p_subscription_id: surveyorSubId,
+          p_customer_id: surveyorCustomerId,
+        });
+        if (surveyorErr) throw new Error(`Surveyor entitlement grant failed: ${surveyorErr.message}`);
+        console.log(`User ${userId} granted Surveyor entitlement (subscription ${surveyorSubId})`);
       } else if (credits > 0) {
         // Credit pack purchase. The RPC handles ledger, legacy counter,
         // compatibility table, and audit writes atomically; the wrapper makes
@@ -1353,6 +1886,21 @@ async function dispatchStripeEvent(
         // session we did not fulfil, so a metadata misconfiguration surfaces in
         // Stripe's webhook dashboard + retries instead of being swallowed.
         throw new Error(`Unhandled checkout product: ${product || '(missing)'} (session=${session.id})`);
+      }
+
+      // MONEY LEDGER MIRROR (156): one money_events row per successful fulfilment.
+      // Runs only after the branches above complete — the unpaid-defer and the
+      // out-of-order dead-subscription paths `break` before reaching here, so no
+      // un-fulfilled session is ever mirrored. Anonymous single_dossier mirrors
+      // with user_id NULL (a financial record with no owner). NEVER-throw.
+      let mirrorKind: MoneyEventKind | null = null;
+      if (product === 'premium') mirrorKind = 'subscription_start';
+      else if (product === 'founder_lifetime') mirrorKind = 'founder_seat';
+      else if (product === 'single_dossier') mirrorKind = 'single_dossier';
+      else if (product === 'surveyor') mirrorKind = 'surveyor_start';
+      else if (credits > 0) mirrorKind = 'credit_pack';
+      if (mirrorKind) {
+        await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, mirrorKind, userId ?? null, credits);
       }
       break;
     }
@@ -1377,6 +1925,30 @@ async function dispatchStripeEvent(
       if (reverted?.ok) {
         console.log(`[stripe-webhook] redemption ${reverted.redemption_id} reverted on expired session ${expired.id}`);
       }
+      // FOUNDER SEAT TRANSFER (§6.3, M-7): an expired unpaid transfer session regresses
+      // its case to nominee_verified so acceptance can re-mint a session. Claim-once
+      // (only an awaiting_payment case bound to THIS session regresses). NEVER-throw.
+      try {
+        const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', { p_session: expired.id });
+        if (regressErr) logError('stripe-webhook', null, regressErr.message, { stage: 'transfer_session_expired_regress', session_id: expired.id });
+      } catch (err) {
+        logError('stripe-webhook', null, err, { stage: 'transfer_session_expired_regress', session_id: expired.id });
+      }
+      break;
+    }
+
+    // ── Auto-reload off-session confirmation (158, §4.5) ───────────────────
+    case 'payment_intent.succeeded': {
+      const pi = event.data.object as Stripe.PaymentIntent;
+      if (pi.metadata?.purpose !== 'credit_auto_reload') break; // not ours — ignore
+      await handleAutoReloadSucceeded(supabase, stripeApi, pi);
+      break;
+    }
+
+    case 'payment_intent.payment_failed': {
+      const pi = event.data.object as Stripe.PaymentIntent;
+      if (pi.metadata?.purpose !== 'credit_auto_reload') break;
+      await handleAutoReloadFailed(supabase, pi);
       break;
     }
 
@@ -1384,6 +1956,18 @@ async function dispatchStripeEvent(
     case 'invoice.payment_succeeded': {
       const invoice = event.data.object as Stripe.Invoice;
       const profile = await grantMonthlyAllowanceIfNeeded(supabase, invoice);
+      // MONEY LEDGER (156): mirror RENEWALS only (billing_reason 'subscription_
+      // cycle'). The *_start row is written from the checkout session, so a
+      // subscription_create invoice must NOT write a second row (a Checkout-created
+      // subscription fires both events). Discriminate Surveyor vs Cartographer by the
+      // line price id (#16). NEVER-throw.
+      if (profile?.userId && invoice.billing_reason === 'subscription_cycle') {
+        const surveyorPriceId = Deno.env.get('STRIPE_PRICE_SURVEYOR') || '';
+        const renewalLinePriceId = invoice.lines?.data?.[0]?.price?.id ?? null;
+        const renewalKind: MoneyEventKind = (surveyorPriceId && renewalLinePriceId === surveyorPriceId)
+          ? 'surveyor_renewal' : 'subscription_renewal';
+        await mirrorInvoiceMoneyEvent(supabase, invoice, profile.userId, renewalKind);
+      }
       // REFERRAL (107): the referee's FIRST paid subscription invoice
       // (billing_reason 'subscription_create' — renewals are 'subscription_
       // cycle') with real money moved. grant_referral re-asserts both gates.
@@ -1432,8 +2016,15 @@ async function dispatchStripeEvent(
         // invoice, so its key is the checkout SESSION id — the same id its founder_grant
         // ledger row keyed on. Reverses is_founder (freeing the seat), the premium tier,
         // and the 30-credit bonus. No-ops for every key that never granted the bonus.
-        await clawbackFounderForSession(supabase, key);
+        await clawbackFounderForSession(supabase, stripeApi, key);
+        // TRANSFER clawback (§6.7): a refunded/disputed transfer charge's key is the
+        // case's checkout SESSION id — reverse the transfer by its case state.
+        await clawbackTransferForSession(supabase, key);
       }
+      // MONEY LEDGER (156): flip the mirrored row's status (refund → 'refunded',
+      // dispute → 'disputed') on the SAME candidate keys. The one sanctioned
+      // mutation on money_events; NEVER-throw so it can't stall the clawbacks above.
+      await flipMoneyEventStatus(supabase, keys, event.type === 'charge.dispute.created' ? 'disputed' : 'refunded');
       break;
     }
 
@@ -1446,10 +2037,97 @@ async function dispatchStripeEvent(
       break;
     }
 
+    case 'customer.subscription.updated': {
+      // SUBSCRIPTION PAUSE / RESUME (downgrade audit; manager addendum). Stripe's
+      // customer-portal "pause" sets pause_collection on the subscription WITHOUT a
+      // .deleted event — so a paused Cartographer sub previously retained premium
+      // indefinitely (the audit's UNHANDLED finding). Treat pause_collection-active
+      // as a downgrade-equivalent and resumption as a restore.
+      //
+      // SURVEYOR DISCRIMINATION FIRST (like .deleted): a surveyor sub id lives ONLY in
+      // surveyor_entitlements (never profiles.stripe_subscription_id). A surveyor
+      // .updated must not touch Cartographer premium — surveyor pause is out of scope
+      // here (it keeps its entitlement; a future item may revisit).
+      const subscription = event.data.object as Stripe.Subscription;
+      const subId = subscription.id;
+
+      const { data: surveyorRow, error: survProbeErr } = await supabase
+        .from('surveyor_entitlements').select('user_id').eq('stripe_subscription_id', subId).maybeSingle();
+      if (survProbeErr) throw new Error(`Surveyor sub probe failed: ${survProbeErr.message}`);
+      if (surveyorRow) {
+        console.log(`[stripe-webhook] subscription.updated ${subId} is a Surveyor sub — pause handling is Cartographer-only, ignoring`);
+        break;
+      }
+
+      const updatedCustomerId = subscription.customer as string;
+      const updatedProfile = await findUserIdForStripeCustomer(supabase, updatedCustomerId);
+      if (!updatedProfile?.userId) break;
+      // Founders hold premium for life regardless of any subscription state.
+      if (updatedProfile.isFounder) {
+        console.log(`[stripe-webhook] subscription.updated ${subId} for founder ${updatedProfile.userId} — premium is lifetime, ignoring`);
+        break;
+      }
+      // STALE-SUB GUARD (087 idiom): only act on the user's CURRENTLY-recorded sub, so
+      // a redelivered/reordered .updated for an old subscription can't move their tier.
+      if (updatedProfile.stripeSubscriptionId && updatedProfile.stripeSubscriptionId !== subId) {
+        console.log(`[stripe-webhook] ignoring subscription.updated for ${subId}; user ${updatedProfile.userId}'s current sub is ${updatedProfile.stripeSubscriptionId}`);
+        break;
+      }
+
+      const isPaused = subscription.pause_collection != null;
+      if (isPaused) {
+        // JUDGMENT (vetoable): reuse handle_premium_downgrade rather than a new
+        // pause-specific state — a paused sub IS a loss of premium access, and the
+        // downgrade's 3-month retention window protects the user's assets exactly as a
+        // cancellation would (a resume within the window restores cleanly). Idempotent:
+        // only a currently-premium user downgrades (a redelivered pause no-ops).
+        if (updatedProfile.tier !== 'premium') {
+          console.log(`[stripe-webhook] subscription ${subId} paused but user ${updatedProfile.userId} is already not premium — no-op`);
+          break;
+        }
+        const { error: pauseDowngradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: updatedProfile.userId });
+        if (pauseDowngradeErr) throw new Error(`Premium pause-downgrade failed: ${pauseDowngradeErr.message}`);
+        const { error: pauseAuthErr } = await supabase.auth.admin.updateUserById(updatedProfile.userId, { user_metadata: { tier: 'free' } });
+        if (pauseAuthErr) throw new Error(`Auth pause-downgrade failed: ${pauseAuthErr.message}`);
+        // The recorded stripe_subscription_id is deliberately KEPT (unlike .deleted) so
+        // a later resume matches it and restores premium.
+        console.log(`[stripe-webhook] user ${updatedProfile.userId} downgraded to free while subscription ${subId} is paused`);
+      } else if (subscription.status === 'active') {
+        // Resume: restore premium ONLY if a prior pause left the user non-premium.
+        // A normal active .updated on an already-premium user is a no-op (the common
+        // case — most .updated events are routine and must not thrash the tier).
+        if (updatedProfile.tier === 'premium') break;
+        const { error: resumeAuthErr } = await supabase.auth.admin.updateUserById(updatedProfile.userId, { user_metadata: { tier: 'premium' } });
+        if (resumeAuthErr) throw new Error(`Auth resume-upgrade failed: ${resumeAuthErr.message}`);
+        const { error: resumeProfileErr } = await supabase.from('profiles')
+          .update({ tier: 'premium', premium_downgraded_at: null, premium_retention_expires_at: null })
+          .eq('id', updatedProfile.userId);
+        if (resumeProfileErr) throw new Error(`Resume profile update failed: ${resumeProfileErr.message}`);
+        const { error: resumeRestoreErr } = await supabase.rpc('restore_premium_settlements', { target_user: updatedProfile.userId });
+        if (resumeRestoreErr) throw new Error(`Resume restore failed: ${resumeRestoreErr.message}`);
+        console.log(`[stripe-webhook] user ${updatedProfile.userId} restored to premium after subscription ${subId} resumed`);
+      }
+      break;
+    }
+
     case 'customer.subscription.deleted': {
       // Downgrade from premium
       const subscription = event.data.object as Stripe.Subscription;
       const customerId = subscription.customer as string;
+
+      // SURVEYOR DISCRIMINATION (#16, §14 — must run BEFORE the premium path). A
+      // deleted subscription may be a Surveyor sub, not the Cartographer one. Probe
+      // the surveyor revoke keyed on THIS sub id first; if it revoked a row, this
+      // deletion WAS a Surveyor sub — break, leaving the Cartographer downgrade
+      // untouched (its behavioral pins stay green). A non-surveyor sub revokes
+      // nothing (returns false) and falls through to the premium logic below.
+      const { data: surveyorRevoked, error: surveyorRevokeErr } = await supabase
+        .rpc('revoke_surveyor_entitlement_by_subscription', { p_subscription_id: subscription.id });
+      if (surveyorRevokeErr) throw new Error(`Surveyor revoke probe failed: ${surveyorRevokeErr.message}`);
+      if (surveyorRevoked) {
+        console.log(`[stripe-webhook] subscription ${subscription.id} deleted → Surveyor entitlement revoked (not a Cartographer downgrade)`);
+        break;
+      }
 
       const profile = await findUserIdForStripeCustomer(supabase, customerId);
       if (profile?.userId) {

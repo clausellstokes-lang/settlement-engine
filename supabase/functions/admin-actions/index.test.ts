@@ -441,3 +441,132 @@ Deno.test('an unknown action from a privileged caller is rejected 400 with no mu
   // no RPC was dispatched for an unrecognized action.
   assertEquals(stub.rpc.length, 0);
 });
+
+// ── Money-spine backfill (backfill_money_events, DESIGN_MONEY_WAVE §2/§11, M-1c) ──
+// Highest-role, one-time, audited. Pages Stripe history and upserts money_events
+// rows through the event_key shield (idempotent). These EXECUTE the verb with a
+// stubbed Stripe + admin client and assert the composed rows + the audit + the gate.
+
+/** Admin stub that also models money_events.upsert + profiles.maybeSingle (customer→user). */
+function makeBackfillAdminClient(callerRole: string, resolvedUserId: string | null = 'u1', callerEmail = 'admin@x.com') {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const upserts: Array<{ table: string; row: Record<string, unknown> }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (t: string) => ({
+      select: () => ({
+        eq: () => ({
+          single: () => Promise.resolve({ data: { role: callerRole, email: callerEmail }, error: null }),
+          maybeSingle: () => Promise.resolve({ data: resolvedUserId ? { id: resolvedUserId } : null, error: null }),
+        }),
+      }),
+      upsert: (row: Record<string, unknown>, _o?: unknown) => { upserts.push({ table: t, row }); return Promise.resolve({ data: null, error: null }); },
+    }),
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ data: {}, error: null }); },
+  };
+  return { rpc, upserts, adminClient: () => client };
+}
+
+const backfillStripe = {
+  checkout: { sessions: { list: (_p: Record<string, unknown>) => Promise.resolve({ data: [
+    { id: 'cs_h1', payment_status: 'paid', amount_total: 500, currency: 'usd', created: 1700000000, payment_intent: 'pi_h1', metadata: { product: 'credits_25', credits: '25', supabase_user_id: 'u1' } },
+    { id: 'cs_h2', payment_status: 'paid', amount_total: 9900, currency: 'usd', created: 1700000100, payment_intent: 'pi_h2', metadata: { product: 'founder_lifetime', supabase_user_id: 'u2' } },
+    { id: 'cs_h3', payment_status: 'unpaid', amount_total: 500, currency: 'usd', created: 1700000150, metadata: { product: 'credits_25', credits: '25', supabase_user_id: 'u3' } },
+  ], has_more: false }) } },
+  invoices: { list: (_p: Record<string, unknown>) => Promise.resolve({ data: [
+    { id: 'in_h1', billing_reason: 'subscription_cycle', amount_paid: 900, currency: 'usd', created: 1700000200, hosted_invoice_url: 'https://x/inv', customer: 'cus_h1' },
+    { id: 'in_h2', billing_reason: 'subscription_create', amount_paid: 900, currency: 'usd', created: 1700000300, customer: 'cus_h2' },
+  ], has_more: false }) },
+};
+
+Deno.test('backfill_money_events pages Stripe and upserts money_events rows (idempotent, audited)', async () => {
+  const stub = makeBackfillAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'backfill_money_events' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient, stripeClient: backfillStripe },
+  );
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.sessionsProcessed, 3);
+  assertEquals(body.invoicesProcessed, 2);
+  // 2 paid sessions (the unpaid one skipped) + 1 renewal (the subscription_create skipped).
+  assertEquals(body.rowsUpserted, 3);
+  const me = stub.upserts.filter((u) => u.table === 'money_events');
+  assertEquals(me.length, 3);
+  assertEquals(me.some((u) => u.row.event_key === 'sess:cs_h1' && u.row.kind === 'credit_pack'), true);
+  assertEquals(me.some((u) => u.row.event_key === 'sess:cs_h2' && u.row.kind === 'founder_seat' && u.row.amount_cents === 9900), true);
+  const renewal = me.find((u) => u.row.event_key === 'inv:in_h1');
+  assertEquals(renewal !== undefined, true);
+  assertEquals(renewal!.row.kind, 'subscription_renewal');
+  assertEquals(renewal!.row.user_id, 'u1');            // owner resolved from the customer
+  assertEquals(renewal!.row.receipt_url, 'https://x/inv');
+  // No sess:cs_h3 (unpaid) and no inv:in_h2 (subscription_create → start comes from the session).
+  assertEquals(me.some((u) => u.row.event_key === 'sess:cs_h3'), false);
+  assertEquals(me.some((u) => u.row.event_key === 'inv:in_h2'), false);
+  assertEquals(stub.rpc.some((c) => c.fn === 'write_audit'), true);
+});
+
+Deno.test('backfill_money_events rejects a non-highest role (403) and reads no Stripe', async () => {
+  let listed = false;
+  const stripe = {
+    checkout: { sessions: { list: () => { listed = true; return Promise.resolve({ data: [], has_more: false }); } } },
+    invoices: { list: () => { listed = true; return Promise.resolve({ data: [], has_more: false }); } },
+  };
+  const stub = makeBackfillAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'backfill_money_events' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient, stripeClient: stripe },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(listed, false);
+  assertEquals(stub.upserts.length, 0);
+});
+
+// ── Surveyor admin verbs (159, §5, slice M-4c) ───────────────────────────────
+
+Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, audited)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const call = stub.rpc.find((c) => c.fn === 'grant_surveyor_entitlement');
+  assertEquals((call!.args as { p_user: string }).p_user, 'u9');
+  assertEquals((call!.args as { p_source: string }).p_source, 'grant');
+  const audit = stub.rpc.find((c) => c.fn === 'write_audit');
+  assertEquals((audit!.args as { p_action: string }).p_action, 'grant_surveyor');
+});
+
+Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destructive)', async () => {
+  const stub = makeAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'revoke_surveyor', userId: 'u9', reason: 'refund' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'revoke_surveyor_entitlement'), true);
+  const audit = stub.rpc.find((c) => c.fn === 'write_audit');
+  assertEquals((audit!.args as { p_action: string }).p_action, 'revoke_surveyor');
+});
+
+Deno.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispatched)', async () => {
+  const stub = makeAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
+Deno.test('grant_surveyor requires a userId', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stub.rpc.length, 0);
+});

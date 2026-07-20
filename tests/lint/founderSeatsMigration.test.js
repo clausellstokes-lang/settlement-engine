@@ -21,7 +21,7 @@ const SQL = readFileSync(
 );
 const lower = SQL.toLowerCase();
 
-describe('137 founder_seats — draft shape pins (THE FOUNDER LANE)', () => {
+describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () => {
   it('creates both the seat table and its append-only transfer ledger', () => {
     expect(lower).toMatch(/create table if not exists public\.founder_seats\b/);
     expect(lower).toMatch(/create table if not exists public\.founder_seat_transfers\b/);
@@ -85,6 +85,41 @@ describe('137 founder_seats — draft shape pins (THE FOUNDER LANE)', () => {
     expect(lower).toMatch(/service_role/);
   });
 
+  // ── Money Wave v2 (§6.1): the transfer-lifecycle columns/stamps + the wired
+  //    webhook hook + the mirrored clawback release. ──────────────────────────
+  it('adds the transfer-lifecycle columns to founder_seats', () => {
+    expect(lower).toMatch(/original_purchase_at\s+timestamptz/);
+    expect(lower).toMatch(/acquired_via\s+text\s+not null\s+default 'purchase'/);
+    expect(lower).toMatch(/acquired_via in \('purchase','transfer','estate','grant'\)/);
+    expect(lower).toMatch(/transfer_eligible_at\s+timestamptz/);
+    expect(lower).toMatch(/last_transfer_at\s+timestamptz/);
+    expect(lower).toMatch(/cooldown_until\s+timestamptz/);
+    expect(lower).toMatch(/security_status\s+text\s+not null\s+default 'normal'/);
+    expect(lower).toMatch(/security_status in \('normal','transfer_locked','flagged','escheat'\)/);
+  });
+
+  it('claim_next_founder_seat stamps the original-purchase lifecycle', () => {
+    // The claim path stamps original_purchase_at + a +12mo transfer_eligible_at.
+    expect(lower).toMatch(/original_purchase_at\s*=\s*now\(\)/);
+    expect(lower).toMatch(/transfer_eligible_at\s*=\s*now\(\)\s*\+\s*interval '12 months'/);
+  });
+
+  it('adds the service-role clawback seat-release RPC (mirror of the claim)', () => {
+    expect(lower).toMatch(/create or replace function public\.release_founder_seat_on_clawback\(/);
+    expect(lower).toMatch(/revoke all on function public\.release_founder_seat_on_clawback\([^)]*\) from public/);
+    expect(lower).toMatch(/grant execute on function public\.release_founder_seat_on_clawback\([^)]*\) to service_role/);
+    // Appends a 'clawback' lineage note (append, never erase).
+    expect(lower).toMatch(/'clawback'/);
+  });
+
+  it('is SIGNED OFF (production shape), still written-not-deployed', () => {
+    expect(lower).toMatch(/signed off/);
+    // Prod head stays 117 — the whole 118+ chain ships together at db push.
+    expect(lower).toMatch(/written-not-deployed/);
+    // The draft/awaiting-sign-off framing is gone.
+    expect(lower).not.toMatch(/awaiting owner sign-off/);
+  });
+
   it('every SECURITY DEFINER function pins search_path = public, pg_temp (pg_temp LAST)', () => {
     // Each definer function header must carry the pinned search_path (the global
     // migrationSearchPathPin walker also enforces this; asserted locally so a shape
@@ -97,8 +132,4 @@ describe('137 founder_seats — draft shape pins (THE FOUNDER LANE)', () => {
     expect(pinned.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('is a DRAFT, marked written-not-applied and awaiting owner sign-off', () => {
-    expect(lower).toMatch(/draft/);
-    expect(lower).toMatch(/written, not applied/);
-  });
 });

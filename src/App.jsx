@@ -50,7 +50,7 @@ const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
 // The cloud-sync banner renders null unless a persist actually fails, so it is
 // never first-paint critical — lazy so its code + icons stay off the entry's
 // static closure (first-paint byte budget).
-const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
+const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx')), SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx')); // combined: App.jsx at max-lines ceiling
 
 // The post-generate coach hosts the guidance registry's single wizard-postgen
 // whisper (the "what's next" moves). Self-gates on a settlement + the unified
@@ -513,7 +513,7 @@ export default function App() {
           until focused (.skip-link in index.css), it lets keyboard/SR users jump
           past the header/nav straight to <main id="main-content">. */}
       <a href="#main-content" className="skip-link">Skip to content</a>
-      <Suspense fallback={null}><CampaignSyncBanner /><PostGenCoach /></Suspense>
+      <Suspense fallback={null}><CampaignSyncBanner /><SessionEvictedBanner /><PostGenCoach /></Suspense>
       <div
         // Painted clean views (home/settlements/gallery/compendium/pricing/account/
         // admin/howto/legal) get `.page-painted scrim-<profile>`: a flat-cream

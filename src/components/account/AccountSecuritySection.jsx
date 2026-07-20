@@ -36,6 +36,16 @@ const LINKABLE = [
   { provider: 'discord', label: 'Discord' },
 ];
 
+/** Format an ISO signed-in-at into a coarse local label (null when unparseable). */
+function formatSignedInAt(iso) {
+  if (!iso) return null;
+  try {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  } catch { return null; }
+}
+
 function fieldStyle() {
   return {
     padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`,
@@ -94,11 +104,31 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
   // ── Sign out everywhere ───────────────────────────────────────────────────
   const [globalBusy, setGlobalBusy] = useState(false);
 
+  // ── Active session (§7.4, M-9e) ───────────────────────────────────────────
+  // The current device + signed-in-at, read from current_account_session (owner-SELECT
+  // RLS, 161). Lazy import of fetchActiveSession DIRECTLY — no eager auth.js wrapper
+  // (this panel is already on the lazy account route). Fails closed to null.
+  const [activeSession, setActiveSession] = useState(null); // {deviceLabel, signedInAt} | null
+  const [deviceFallback, setDeviceFallback] = useState(null);
+
   useEffect(() => {
     let alive = true;
     authService.getIdentities().then((list) => {
       if (alive) setIdentities(Array.isArray(list) ? list : []);
     }).catch(() => { if (alive) setIdentities([]); });
+    return () => { alive = false; };
+  }, []);
+
+  useEffect(() => {
+    let alive = true;
+    import('../../lib/authSecurity.js')
+      .then(async ({ fetchActiveSession, sessionDeviceLabel }) => {
+        const s = await fetchActiveSession();
+        if (!alive) return;
+        setActiveSession(s);
+        try { setDeviceFallback(sessionDeviceLabel()); } catch { /* ignore */ }
+      })
+      .catch(() => { if (alive) setActiveSession(null); });
     return () => { alive = false; };
   }, []);
 
@@ -315,13 +345,20 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
           </div>
         </div>
 
-        {/* ── Sign out everywhere ───────────────────────────────────────── */}
+        {/* ── Active session + sign out everywhere (§7.4, M-9e) ──────────── */}
         <div>
           <div style={actionRow}>
             <div style={{ flex: 1 }}>
-              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sign out everywhere</div>
+              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Active session</div>
+              <div style={{ fontSize: FS.sm, color: INK, marginTop: 2, lineHeight: 1.45 }}>
+                {activeSession?.deviceLabel || deviceFallback || 'This device'}
+                {formatSignedInAt(activeSession?.signedInAt)
+                  ? <span style={{ color: BODY }}> · signed in {formatSignedInAt(activeSession?.signedInAt)}</span>
+                  : null}
+              </div>
               <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-                Sign out of every device and browser. Use this if you have lost a device.
+                Your account allows one active session at a time. Signing in on another device
+                signs this one out. Lost a device? Sign out everywhere to revoke every session.
               </div>
             </div>
             <Button variant="secondary" size="md" busy={globalBusy} icon={<KeyRound size={13} />} onClick={handleSignOutEverywhere}>

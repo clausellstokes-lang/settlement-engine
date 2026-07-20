@@ -427,6 +427,17 @@ verify_jwt = false
 [functions.pricing-resync-cron]
 verify_jwt = false
 
+# founder-transfer (Money Wave #17) — SELF-AUTHENTICATING, same posture as
+# pricing-resync-cron: its `run_due` cron action carries NO Supabase JWT (it
+# authenticates by the x-cron-secret shared secret, constant-time compared, and
+# refuses 503 when the secret is unconfigured), so the platform gate would 401 the
+# hourly sweep and the whole due-runner (finalize / payout release / expiry /
+# auto-reload cancel / stewardship) would silently never run. Every USER action does
+# its own getUser() JWT check (401 without it) PLUS the single-session gate + velocity,
+# so verify_jwt=false is safe. Missing this pin ⇒ deploy.sh deploys it WITH the gate on.
+[functions.founder-transfer]
+verify_jwt = false
+
 # Per-template self-auth: authenticated templates read the recipient from
 # auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate

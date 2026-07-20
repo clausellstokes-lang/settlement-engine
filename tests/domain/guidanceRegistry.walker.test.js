@@ -257,7 +257,13 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // Advance: it folds in the last advance's interval + is pinned by
   // advanceMultiTickToolbar.test.jsx (Stage-5), so it keeps its native title.
   // Shrink-only resumes from 485.
-  const TITLE_BASELINE = 485;
+  //
+  // MONEY WAVE (M-2/M-3): +2 for the two account Subscription-section panels'
+  // `<Section title=…>` PROPS (AccountPurchaseHistoryPanel "Past purchases" +
+  // AccountAutoReloadPanel "Automatic credit reload"). These are React component
+  // props, NOT native OS tooltips — the census regex can't distinguish them, and
+  // every account section already carries one in the baseline. 485 → 487.
+  const TITLE_BASELINE = 487;
 
   function countTitles() {
     let n = 0;

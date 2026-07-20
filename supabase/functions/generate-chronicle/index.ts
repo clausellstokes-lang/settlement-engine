@@ -20,8 +20,10 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { maybeAutoReload } from '../_shared/autoReload.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -176,6 +178,11 @@ export async function handleGenerateChronicle(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): instant 401 eviction where AI money
+    // burns — a superseded device is rejected at the request layer, before any spend.
+    if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: 'session_superseded' }, 401, cors);
+    }
 
     // Trust-boundary gate: reject a banned / disabled / soft-deleted account
     // even though its JWT is still valid (review B16 finding #1). The DB
@@ -392,6 +399,7 @@ export async function handleGenerateChronicle(
     }
 
     await releaseReservation();   // success: COGS metered, reservation no longer needed
+    void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
     return json({ chronicle: prose, creditsRemaining: balanceAfter }, 200, cors);
   } catch (e) {
     // Release a reservation taken before this throw (086). supabaseAdmin is

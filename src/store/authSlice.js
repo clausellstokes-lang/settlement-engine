@@ -72,6 +72,8 @@ function resolveTier(tier, role) {
   return ELEVATED_ROLES.includes(role) ? 'premium' : (tier || 'free');
 }
 let authUnsubscribe = null;
+// M-9d — teardown for the single-session validation loop (focus/visibility + interval).
+let sessionValidationCleanup = null;
 
 export const createAuthSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
@@ -95,6 +97,12 @@ export const createAuthSlice = (set, get) => ({
   // this is a read cache only — refreshed on demand (after a purchase success,
   // after a retro auto-upgrade) and cleared on sign-out.
   dossierEntitlements: {},
+
+  // Single-session eviction banner flag (§7.3, M-9d). TOP-LEVEL (not inside `auth`),
+  // so clearAuth's auth-reset leaves it standing — the banner survives the sign-out
+  // it announces. NOT persisted (absent from the partialize), so a fresh load is never
+  // pre-evicted. Cleared on the next SIGNED_IN.
+  sessionEvicted: false,
 
   // ── Core setters ──────────────────────────────────────────────────────────
   setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE) =>
@@ -126,6 +134,27 @@ export const createAuthSlice = (set, get) => ({
     } catch {
       // Other slices may not be present in isolated unit tests.
     }
+  },
+
+  /**
+   * THE EVICTION (§7.3, M-9d) — this session was superseded by a sign-in on another
+   * device. THE NON-NEGOTIABLE LIFECYCLE REQUIREMENT: eviction must NEVER destroy
+   * unsaved local work. So this does the MINIMUM:
+   *   (1) raise the banner flag (sessionEvicted — top-level, survives clearAuth),
+   *   (2) sign out ONLY this device's session (LOCAL scope; the other device is the
+   *       legitimate winner). The SIGNED_OUT event then transitions auth to anon
+   *       exactly as a normal sign-out does; the persist partialize (config +
+   *       toggles) is NEVER touched, so unsaved edits survive to re-auth rehydration.
+   * It NEVER calls a store-reset (clearSavedSettlements / resetConfig / …) — that is
+   * the wall THE LIFECYCLE PIN guards. Supersession DEDUPES: the first eviction wins,
+   * later ones no-op (no error-toast storm from N in-flight paid calls all 401-ing).
+   */
+  evictSession: () => {
+    if (get().sessionEvicted) return;                 // dedupe — first supersession wins
+    set(state => { state.sessionEvicted = true; });
+    // Local-scope sign-out (lazy authSecurity). Fire-and-forget: the banner is already
+    // up, and the SIGNED_OUT transition follows on its own. NEVER a global sign-out.
+    Promise.resolve(authService.signOutLocalSession?.()).catch(() => { /* banner already shown */ });
   },
 
   setAuthLoading: (loading) =>
@@ -237,7 +266,17 @@ export const createAuthSlice = (set, get) => ({
             modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
             loading: false, error: null,
           };
+          // A fresh sign-in clears any prior eviction banner (§7.3): re-auth returns
+          // the user to their (persisted) work with a clean slate.
+          state.sessionEvicted = false;
         });
+
+        // M-9d — claim this account to THE CURRENT session (last-login-wins, §7.1).
+        // Fire-and-forget via the LAZY sessionClient (off the first-paint closure). Only
+        // on a real SIGNED_IN — a TOKEN_REFRESHED keeps the same session_id.
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/sessionClient.js').then((m) => m.claimSession()).catch(() => { /* never block auth */ });
+        }
 
         // Tier 8.5 — fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
@@ -281,7 +320,20 @@ export const createAuthSlice = (set, get) => ({
         }
       }
     });
-    return authUnsubscribe;
+
+    // M-9d — session validation (focus/visibility + 5-min interval). LAZILY loaded so
+    // the listener/interval machinery stays OFF the first-paint closure (LAW 4); its
+    // teardown is captured for cleanup once the module resolves.
+    if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
+    import('../lib/sessionClient.js')
+      .then(({ startValidation }) => { sessionValidationCleanup = startValidation(get); })
+      .catch(() => { /* validation is a convenience; the request gate is the enforcement */ });
+
+    // Combined teardown: unsubscribe onAuthChange AND tear down the validation loop.
+    return () => {
+      if (authUnsubscribe) { authUnsubscribe(); authUnsubscribe = null; }
+      if (sessionValidationCleanup) { sessionValidationCleanup(); sessionValidationCleanup = null; }
+    };
   },
 
   /** Sign up with email + password. Returns { needsVerification } or throws. */

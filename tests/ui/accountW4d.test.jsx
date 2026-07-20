@@ -75,7 +75,10 @@ describe('W4d — Security section wires the auth methods', () => {
     await waitFor(() => expect(authMock.getIdentities).toHaveBeenCalled());
     expect(screen.getByText('Login and security')).toBeTruthy();
     expect(screen.getByText('Linked accounts')).toBeTruthy();
-    expect(screen.getByText('Sign out everywhere')).toBeTruthy();
+    // M-9e (§7.4): the sign-out-everywhere control now lives in the "Active session"
+    // panel (device + signed-in-at), with the "Sign out all" button relocated beside it
+    // (asserted by the next test). The standalone "Sign out everywhere" heading is gone.
+    expect(screen.getByText('Active session')).toBeTruthy();
   });
 
   test('"Sign out all" calls signOutEverywhere', async () => {

@@ -18,6 +18,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { maybeAutoReload } from '../_shared/autoReload.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
 import {
@@ -339,6 +340,7 @@ export async function handleConstructRealm(
       case 'model_failed':
         return json({ error: capturedRefused ? 'The constructor declined this request.' : (capturedRefusalMessage || 'Construction failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
       case 'ok':
+        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
         return json({
           config: capturedResult.config,          // validated realm knobs (realmSize/tone/mapKind, schema-walled)
           constraints: capturedResult.constraints, // the declared intent the comparator judges

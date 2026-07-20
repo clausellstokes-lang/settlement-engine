@@ -21,7 +21,9 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { maybeAutoReload } from '../_shared/autoReload.ts';
 import { runCreditedCall } from './creditFlow.ts';
 import { resolveProviderKey } from './byok.ts';
 import {
@@ -174,6 +176,11 @@ export async function handleAiAnalyst(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): instant 401 eviction where AI money
+    // burns — a superseded device is rejected at the request layer, before any spend.
+    if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: 'session_superseded' }, 401, cors);
+    }
 
     // Trust-boundary gate: banned/disabled/soft-deleted accounts (fail closed on !== true).
     const { data: isActive, error: activeErr } = await supabaseAdmin.rpc('account_is_active', { p_uid: user.id });
@@ -469,6 +476,7 @@ export async function handleAiAnalyst(
           refusalClass: capturedRefusalClass, doors: capturedRefusalDoors,
         }, 502, cors);
       case 'ok':
+        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
         return json({
           answer: outcome.answerText,
           claims: capturedValidated,

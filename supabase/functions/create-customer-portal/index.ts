@@ -8,6 +8,7 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
@@ -69,6 +70,10 @@ export async function handleCreateCustomerPortal(
     if (authError || !user) throw new Error('Not authenticated');
 
     const supabaseAdmin = adminClient();
+    // SINGLE-SESSION GATE (161, §7.2): reject a superseded device's JWT with a 401.
+    if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) {
+      return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
     const { data: profile } = await supabaseAdmin
       .from('profiles')
       .select('stripe_customer_id')
