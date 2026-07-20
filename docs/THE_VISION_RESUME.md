@@ -32,8 +32,14 @@
     TIGHTENED: V-D's forensics cost +8,003 B eager → headroom ≈7,263 B at its tip;
     MEASURE CLOSURE AFTER EVERY MERGE; a breach HALTS the fold (shave candidate:
     thinner forensics seam) — the budget raise stays owner-gated.
-  - HOT (4 lanes): THE FOLD AGENT in `minifold` (V-B landed @ a9caa573 — its tip is the fold base) · V-K in `vision-e` wt · V-L (engine textures) in the `vision-j` WORKTREE on branch `claude/vision-l` (rotated) · V-F in the `vision-i` WORKTREE on branch `claude/vision-f` · V-J in `vision-j`
-    (dispatched with V-E's slug/unfurl handoff). The `vision-c` worktree idles READY for the next queue item (V-G after V-F, else V-L).
+  - HOT (4 workstreams): THE FOLD AGENT in `minifold` (V-B landed @ a9caa573 — its
+    tip is the fold base) · V-K in `vision-e` wt · V-L (engine textures) in the
+    `vision-j` wt on `claude/vision-l` · V-G (campaign import → V-F's wall, world
+    book, founding seeds, table companion) in the `vision-i` wt on `claude/vision-g`.
+  - MORE FOLD-READY: V-F @ claude/vision-f `c15c2311` (session ledger/auspice/DM
+    screen; ledger 9afbfbc7; seams: letter+oracle slot mounts, worker transport
+    swap, import→wall unification when V-G lands) · V-J @ `3f3805b7` (pass-2 with
+    rewrites). Remaining queue: V-M → V-N → V-O only. The `vision-c` wt idles.
     Vision-* worktrees run on MAIN-tree node_modules by walk-up — npm ci is
     EUSAGE-broken on this lineage, do not run it. QUEUE (rotate as slots free):
     V-G (after V-F lands —
