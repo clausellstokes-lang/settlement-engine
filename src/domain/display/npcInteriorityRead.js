@@ -133,7 +133,7 @@ export function npcInteriority({ npc, worldState, nid, tick = 0, includeGroundTr
   // DISPOSITION (player-safe): the NPC's visible stance — temperament, standing, loyalty, fear.
   const disposition = dedupe([
     firstText(p.dominant, n.temperament),
-    INFLUENCE_WORD[/** @type {string} */ (n.influence)] || null,
+    (/** @type {Record<string, string>} */ (INFLUENCE_WORD))[String(n.influence)] || null,
     firstText(n.loyalty, n.loyalties),
     firstText(n.fear, n.fears),
   ]);

@@ -218,6 +218,7 @@ function hostHasActiveWindow(hostRecs, weekOfYear) {
  * @param {string} a.headline @param {string} a.summary @param {string} a.seed @param {string[]} a.tags
  * @param {number} [a.score] optional salience override (§11b: the embassy-departure beat lifts to
  *   the rumor seed floor so the EXISTING lattice carries the quiet news — the interception race)
+ * @param {string} [a.causedBy] V-24d: a dark-gated deep cause-edge parent id (undefined ⇒ absent)
  * @returns {Record<string, unknown>}
  */
 function roadsBeat(a) {

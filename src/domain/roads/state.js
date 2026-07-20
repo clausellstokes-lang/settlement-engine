@@ -164,6 +164,20 @@ export function isOffStage(npc) {
  * @param {number} retWeeksAtDest  the destination→home return leg (weeks)
  * @returns {boolean} true iff a recall was consumed
  */
+export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
+  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
+  if (mission.phase === 'returning'
+    || !(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).recall === true)) return false;
+  const retWeeks = mission.phase === 'visiting'
+    ? Math.max(1, num(retWeeksAtDest, 1))
+    : Math.max(1, weekClock - num(mission.departTick, 0));
+  mission.phase = 'returning';
+  mission.legArrivalTick = weekClock + retWeeks;
+  mission.recalled = true;
+  mission.waitReceipted = false;
+  return true;
+}
+
 /**
  * DESIGN_VISION_WAVE V-24d — DEEPER PROVENANCE THREADING (the roads captivity lineage). The
  * EXACT node id of the CAPTURE receipt that began a captivity, reconstructed from the ransom
@@ -179,26 +193,12 @@ export function isOffStage(npc) {
  * @returns {string|undefined} the capture receipt node id, or undefined when dark / unreadable
  */
 export function captureCauseId(worldState, r) {
-  if (!provenanceLedgerActive(worldState)) return undefined;
+  if (!provenanceLedgerActive(/** @type {Record<string, unknown>} */ (worldState))) return undefined;
   const rr = asObject(r);
   const mid = String(rr.missionId == null ? '' : rr.missionId);
   const home = String(rr.homeId == null ? '' : rr.homeId);
   if (!mid || !home) return undefined;
   return `wizard_news.${num(rr.startedTick, 0)}.roads.${home}.capture.${mid}`;
-}
-
-export function consumeMissionRecall(mission, npc, weekClock, retWeeksAtDest) {
-  const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
-  if (mission.phase === 'returning'
-    || !(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).recall === true)) return false;
-  const retWeeks = mission.phase === 'visiting'
-    ? Math.max(1, num(retWeeksAtDest, 1))
-    : Math.max(1, weekClock - num(mission.departTick, 0));
-  mission.phase = 'returning';
-  mission.legArrivalTick = weekClock + retWeeks;
-  mission.recalled = true;
-  mission.waitReceipted = false;
-  return true;
 }
 
 // ── §4-§10 TUNING (soak-certified dials; every entry vetoable) ──────────────────

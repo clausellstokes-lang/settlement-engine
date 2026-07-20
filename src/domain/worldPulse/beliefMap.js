@@ -615,6 +615,9 @@ function relationshipNeighbourhood(snapshot, worldState) {
  * @param {import('../spatial/distanceRead.js').SpatialDigest | null} [digest]  D1
  *   distance-priced news: when present (distancePricedNewsActive), each report's
  *   effective age gains hopDelayTicks(origin→observer); null (dark) ⇒ byte-identical.
+ * @param {((id: string) => number) | null} [embattlementOf]  V-24b route-status reader
+ *   (sid → 0..1 embattlement level) that makes the surcharge REACT to route changes; null (dark)
+ *   ⇒ the geometric surcharge ⇒ byte-identical.
  * @returns {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>}
  */
 function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null, embattlementOf = null) {
