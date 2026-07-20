@@ -91,6 +91,14 @@ export const RUMOR_CARRIER_SHIP = 'ship';
  *  near-instant teleport hopWeeks (the cheapest edge ⇒ 1 week). EMPTY when the teleportEdges
  *  slot is dormant ⇒ the teleport lane never fires ⇒ byte-identical (the other lanes untouched). */
 export const RUMOR_CARRIER_TELEPORT = 'teleport';
+/** D-0 (deep-couplings): the REFUGEE/migration carrier lights WITH the migration mover — an
+ *  in-flight refugee column carries the news of the towns between its origin and destination
+ *  (framing 'refugee'), and the column ITSELF seeds a `migration_flight` event (advanceRumorLedgers
+ *  reads the flight entries as ordinary feed seeds). Same per-event record shape as the
+ *  trade/army/criminal carriers; an additive lane keyed under the same per-event record, gated by
+ *  the virtual `migrationRumorsEnabled` flag at the kernel. EMPTY when no columns are afield / the
+ *  flag is dark ⇒ the refugee lane never fires ⇒ byte-identical (the other lanes untouched). */
+export const RUMOR_CARRIER_REFUGEE = 'refugee';
 
 /** The regional-graph channel types merchant traffic rides (the P0 economic
  *  set): a confirmed channel of any of these types carries news BOTH ways
@@ -331,6 +339,17 @@ export function smugglePathNeighbourMap(smugglePaths) {
   return pathNeighbourMap(smugglePaths, 'crime');
 }
 
+/**
+ * The REFUGEE-carrier neighbour map (D-0, deep-couplings). An in-flight refugee column carries
+ * the news of the towns between its origin and destination — same shape as the army/criminal
+ * carriers, edge-prefixed 'migr' so its edge ids never collide with the trade/army/crime lanes.
+ * EMPTY when no migrant paths are supplied ⇒ the refugee lane is dormant ⇒ byte-identical (the
+ * other lanes untouched). @param {Array<string[]>|null|undefined} migrantPaths
+ * @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+export function migrantPathNeighbourMap(migrantPaths) {
+  return pathNeighbourMap(migrantPaths, 'migr');
+}
+
 /** The shared mover-path neighbour builder (army + criminal carriers). Links adjacent path
  *  nodes BOTH ways (a mover relays news forward and back over the leg it travels), deduped
  *  codepoint-first edge, codepoint-sorted. @param {Array<string[]>|null|undefined} paths
@@ -514,10 +533,14 @@ export function degradeTelling(record, fork, digest) {
  * @param {Array<string[]> | null} [args.smugglePaths]  M7 criminal carrier (round 9): the
  *   in-transit smuggle runs' [source, destination] legs. A smuggler relays news between the
  *   towns it runs. EMPTY / absent ⇒ the criminal lane is dormant ⇒ byte-identical.
+ * @param {Array<string[]> | null} [args.migrantPaths]  D-0 refugee carrier (deep-couplings): the
+ *   in-flight refugee columns' [origin, destination] legs. A column relays news between the towns
+ *   it crosses. EMPTY / absent (the migrationRumorsEnabled flag dark) ⇒ the refugee lane is dormant
+ *   ⇒ byte-identical. The flight EVENTS themselves ride `feedEntries` (the kernel appends them).
  * @returns {{ next: RumorLedgers | null, changed: boolean }}  next=null ⇒ the
  *   key should be absent (empty ledger drops, the conditional-ledger idiom).
  */
-export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null, smugglePaths = null }) {
+export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null, smugglePaths = null, migrantPaths = null }) {
   const prior = /** @type {RumorLedgers | null} */ (
     hasSpatialLedger(worldState, 'rumorLedgers')
       ? asLedgers(getSpatialLedger(worldState, 'rumorLedgers'))
@@ -627,6 +650,10 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
   // M7 criminal carrier: the in-transit smuggle runs' path adjacencies (dormant + empty
   // when no smugglePaths supplied ⇒ the criminal lane never fires ⇒ byte-identical).
   const criminalNeighbours = smugglePathNeighbourMap(smugglePaths);
+  // D-0 refugee carrier: the in-flight refugee columns' path adjacencies (dormant + empty when
+  // no migrantPaths supplied / the migrationRumorsEnabled flag dark ⇒ the refugee lane never
+  // fires ⇒ byte-identical).
+  const migrantNeighbours = migrantPathNeighbourMap(migrantPaths);
   // M8 ship-crew carrier: the FROZEN sea-lane port adjacencies (port → connected ports).
   // A ship crew relays news port-to-port over the cheap fast lane. EMPTY when the seaLanes
   // slot is dormant ⇒ the ship lane never fires ⇒ byte-identical (the other lanes untouched).
@@ -708,6 +735,9 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       relayVia(RUMOR_CARRIER_ARMY, 'army', armyNeighbours.get(sid) || []);
       relayVia(RUMOR_CARRIER_CRIMINAL, 'criminal', criminalNeighbours.get(sid) || []);
       relayVia(RUMOR_CARRIER_SHIP, 'ship', shipNeighbours.get(sid) || []);
+      // D-0 refugee carrier: an in-flight column carries the news of where it has been to
+      // the next town on its road (same packet shape; only carrier tag / framing / fork differ).
+      relayVia(RUMOR_CARRIER_REFUGEE, 'refugee', migrantNeighbours.get(sid) || []);
       // M9c teleport carrier (hi-fi): the bloc's zero-hop, full-fidelity magic channel.
       relayVia(RUMOR_CARRIER_TELEPORT, 'teleport', teleportNeighbours.get(sid) || [], true);
     }

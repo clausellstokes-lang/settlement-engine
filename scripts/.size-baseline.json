@@ -5,7 +5,7 @@
   "src/domain/explanation.js": 827,
   "src/domain/worldPulse/applyWorldPulse.js": 948,
   "src/domain/worldPulse/npcAgency.js": 833,
-  "src/domain/worldPulse/pulseKernel.js": 1387,
+  "src/domain/worldPulse/pulseKernel.js": 1381,
   "src/domain/worldPulse/warDeployment.js": 1134,
   "src/generators/historyGenerator.js": 883,
   "src/generators/npcGenerator.js": 1498,
