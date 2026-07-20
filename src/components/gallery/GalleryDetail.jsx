@@ -4,28 +4,7 @@ import { Check, ChevronLeft, Download, Eye, MessageCircle, Share2, Sparkles } fr
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
 import {
-  BLUE,
-  BLUE_BG,
-  BODY,
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  GOLD,
-  GREEN,
-  GREEN_BG,
-  INK,
-  MUTED,
-  PAGE_MAX,
-  R,
-  RED,
-  RED_BG,
-  SECOND,
-  SP,
-  sans,
-  serif_,
-} from '../theme.js';
+  BLUE, BLUE_BG, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, GREEN_BG, INK, MUTED, PAGE_MAX, RED, RED_BG, SECOND, SP, sans, serif_ } from '../theme.js';
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
@@ -56,7 +35,7 @@ function StatusMessage({ tone = 'info', children }) {
     <div
       role={tone === 'danger' ? 'alert' : 'status'}
       aria-live={tone === 'danger' ? 'assertive' : 'polite'}
-      style={{ border: `1px solid ${cfg.border}`, borderRadius: R.md, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+      style={{ border: `1px solid ${cfg.border}`, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
     >
       {children}
     </div>
@@ -117,7 +96,7 @@ export default function GalleryDetail({
     // height) inside the page container, with the polite announce on the wrapper.
     return (
       <div role="status" aria-live="polite" style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
-        <div aria-hidden="true" style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, minHeight: 310, boxShadow: '0 4px 14px rgba(27,20,8,0.08)' }} />
+        <div aria-hidden="true" style={{ border: `1px solid ${BORDER}`, background: CARD, minHeight: 310, boxShadow: '0 4px 14px rgba(27,20,8,0.08)' }} />
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
           Opening settlement...
         </div>
@@ -131,7 +110,7 @@ export default function GalleryDetail({
         <Button variant="ghost" onClick={onBack} icon={<ChevronLeft size={14} />} style={{ justifySelf: 'start' }}>
           {t('gallery.backToList')}
         </Button>
-        <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, color: BODY, padding: SP.xl, textAlign: 'center' }}>
+        <div style={{ border: `1px solid ${BORDER}`, background: CARD, color: BODY, padding: SP.xl, textAlign: 'center' }}>
           {error || 'This settlement is not available.'}
         </div>
       </div>
@@ -163,7 +142,7 @@ export default function GalleryDetail({
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
       {ownedSave && (
-        <div style={{ border: `1px solid ${GOLD}`, borderRadius: R.lg, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
+        <div style={{ border: `1px solid ${GOLD}`, background: CARD_ALT, padding: SP.md, display: 'grid', gap: SP.sm }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
             Your gallery listing
           </div>
@@ -204,13 +183,13 @@ export default function GalleryDetail({
           )}
         </div>
       )}
-      <article style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD }}>
+      <article style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, background: CARD }}>
         <div className="gallery-detail-hero" style={{ display: 'grid', gap: 0 }}>
           <GalleryImage item={dossier} height={310} />
           <div style={{ padding: SP.xl, display: 'grid', gap: SP.md, alignContent: 'center' }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               {dossier.tags?.map(tag => (
-                <span key={tag} style={{ border: `1px solid ${BORDER2}`, borderRadius: 6, background: CARD_ALT, color: SECOND, padding: '3px 7px', fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'capitalize' }}>
+                <span key={tag} style={{ border: `1px solid ${BORDER2}`, background: CARD_ALT, color: SECOND, padding: '3px 7px', fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'capitalize' }}>
                   {human(tag)}
                 </span>
               ))}

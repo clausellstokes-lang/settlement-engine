@@ -28,7 +28,7 @@ import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
 import Button from './primitives/Button.jsx';
-import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 
 const MUTED = swatch['#6B5340'];
 const _BODY  = swatch['#4A3B22'];
@@ -198,7 +198,7 @@ export default function ShareToGallery({
     <div style={{
       width: '100%', display: 'flex', alignItems: 'flex-start', gap: 6,
       padding: '7px 9px', marginTop: SP.xs,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md,
+      border: `1px solid ${BORDER2}`,
       background: CARD_ALT, color: BODY,
       fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45,
     }}>
@@ -218,7 +218,7 @@ export default function ShareToGallery({
     return (
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '6px 10px', borderRadius: R.md,
+        padding: '6px 10px',
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
@@ -342,14 +342,13 @@ export default function ShareToGallery({
       gap: SP.sm,
       padding: SP.sm,
       border: `1px solid ${BORDER2}`,
-      borderRadius: R.md,
       background: CARD_ALT,
       marginTop: SP.xs,
     }}>
       {hasNarrative && (
         <label htmlFor="share-to-gallery-narrated" style={{
           display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-          padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+          padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
         }}>
           <input
             id="share-to-gallery-narrated"
@@ -367,7 +366,7 @@ export default function ShareToGallery({
       {/* Owner opt-in: expose the full DM-private layer publicly. Off by default. */}
       <label htmlFor="share-to-gallery-dm" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${shareDm ? RED : BORDER2}`, background: CARD,
       }}>
         <input
           id="share-to-gallery-dm"
@@ -387,7 +386,7 @@ export default function ShareToGallery({
       {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
       <label htmlFor="share-to-gallery-importable" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
       }}>
         <input
           id="share-to-gallery-importable"
@@ -422,7 +421,6 @@ export default function ShareToGallery({
           style={{
             minHeight: 32,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -453,7 +451,6 @@ export default function ShareToGallery({
           style={{
             minHeight: 32,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -472,7 +469,6 @@ export default function ShareToGallery({
           style={{
             minHeight: 32,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -505,9 +501,9 @@ export default function ShareToGallery({
       }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 9px', borderRadius: R.md,
-          background: 'rgba(74,122,58,0.10)', color: GREEN,
-          border: '1px solid rgba(74,122,58,0.30)',
+          padding: '4px 9px',
+          background: 'transparent', color: GREEN,
+          border: `1px solid ${GREEN}`,
           fontSize: FS.xs, fontWeight: 700,
           textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>

@@ -14,7 +14,7 @@
  */
 
 import { useId } from 'react';
-import { BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, FS, GOLD, INK, PARCH_100, R, SP, sans } from '../theme.js';
+import { BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, FS, GOLD, INK, PARCH_100, SP, sans } from '../theme.js';
 
 export function AdvanceAutoResolveToggle({ value, onChange }) {
   const helpId = useId();
@@ -24,7 +24,7 @@ export function AdvanceAutoResolveToggle({ value, onChange }) {
       style={{
         display: 'flex', alignItems: 'flex-start', gap: SP.sm,
         padding: SP.md, marginBottom: SP.md,
-        border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT,
+        border: `1px solid ${BORDER}`, background: CARD_ALT,
       }}
     >
       <div style={{ flex: 1, minWidth: 0 }}>
@@ -59,7 +59,7 @@ export function AdvanceAutoResolveToggle({ value, onChange }) {
         <span
           aria-hidden="true"
           style={{
-            width: 40, height: 22, borderRadius: 11,
+            width: 40, height: 22,
             background: on ? GOLD : CARD,
             border: `1px solid ${on ? GOLD : BORDER_STRONG}`,
             transition: 'background 120ms ease',

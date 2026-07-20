@@ -10,7 +10,7 @@
 
 import { Undo2 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export default function Timeline() {
@@ -27,7 +27,7 @@ export default function Timeline() {
 
   return (
     <div style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+      background: CARD, border: `1px solid ${BORDER}`,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -87,7 +87,7 @@ function Entry({ entry, isLatest, onUndo }) {
     <div style={{
       padding: SP.sm,
       background: CARD,
-      border: `1px solid ${BORDER}`, borderRadius: R.sm,
+      border: `1px solid ${BORDER}`,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
         <span style={{

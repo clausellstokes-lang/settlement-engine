@@ -58,7 +58,7 @@ function Caption({ children }) {
 // receipt a skeptic can open. The receipt is the load-bearing element.
 function Covenant({ claim, mechanism, receipt }) {
   return (
-    <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`, borderRadius: 8,
+    <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`,
       padding: '14px 16px', background: CARD, marginBottom: 12, breakInside: 'avoid' }}>
       <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, marginBottom: 6 }}>{claim}</div>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 8px', fontFamily: sans }}>{mechanism}</p>
@@ -244,7 +244,7 @@ export default function AboutManifesto() {
           it was about provenance and consent. So we don&rsquo;t ask you to trust a policy. We show you
           the architecture.
         </p>
-        <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${SLATE}`, borderRadius: 8,
+        <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${SLATE}`,
           padding: '14px 16px', background: `${SLATE}0A`, marginBottom: 16 }}>
           <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.7, margin: 0, fontFamily: sans }}>
             The AI works in three stages, and each stage has exactly one job. An analyst

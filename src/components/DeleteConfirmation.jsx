@@ -18,8 +18,7 @@ export default function DeleteConfirmation({ entityName, details, onConfirm, onC
   return (
     <div style={{
       marginTop: 6, padding: '10px 12px',
-      background: swatch.dangerBg, border: '1px solid #e8c0c0',
-      borderRadius: 6,
+      background: swatch['#FAF8F4'], border: '1px solid #e8c0c0', borderLeft: `3px solid ${swatch.danger}`,
     }}>
       <div style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 600, marginBottom: 5 }}>
         Delete "{entityName}"?

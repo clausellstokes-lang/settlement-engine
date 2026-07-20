@@ -108,7 +108,7 @@ export function DependencySummary({ deps, item }) {
                   color: e.missing ? '#8b1a1a' : (e.source==='custom' ? '#7c3aed' : SEC),
                   background: e.missing ? '#fdebec' : (e.source==='custom' ? '#7c3aed14' : '#0001'),
                   border:`1px solid ${e.missing ? '#f0c8cc' : (e.source==='custom' ? '#7c3aed44' : BOR)}`,
-                  borderRadius:8, padding:'1px 5px',
+                  padding:'1px 5px',
                 }}
               >
                 {e.missing && '! '}{e.name}
@@ -144,7 +144,7 @@ export function DependencySummary({ deps, item }) {
                   <span key={`${verb}-${i}`} style={{
                     fontSize:FS.micro, fontWeight:700, color:CUSTOM_INK,
                     background:CUSTOM_BG, border:`1px solid ${CUSTOM_BORDER}`,
-                    borderRadius:8, padding:'1px 5px',
+                    padding:'1px 5px',
                   }}>{n}</span>
                 ))}
               </div>
@@ -188,7 +188,7 @@ export function DependenciesSection({ deps, draft, setDraft }) {
           Dependencies {total > 0 && (
             <span style={{
               marginLeft:6, background:'rgba(124,58,237,0.15)', color:swatch.magic,
-              borderRadius:8, padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
+              padding:'1px 6px', fontSize:FS.micro, fontWeight:800,
             }}>{total}</span>
           )}
         </span>

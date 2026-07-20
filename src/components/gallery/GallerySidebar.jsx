@@ -6,15 +6,7 @@ import { TIER_LABELS } from '../new/design.js';
 import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  BORDER,
-  CARD_ALT,
-  FS,
-  GOLD,
-  INK,
-  R,
-  SP,
-  sans,
-} from '../theme.js';
+  BORDER, CARD_ALT, FS, GOLD, INK, SP, sans } from '../theme.js';
 import {
   activeFilterCount,
   CULTURE_OPTIONS,
@@ -194,7 +186,6 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
       alignSelf: 'start',
       padding: SP.md,
       border: `1px solid ${BORDER}`,
-      borderRadius: R.lg,
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

@@ -23,7 +23,7 @@ import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
-import { SP, CARD, BORDER, R, CHROME } from './theme.js';
+import { SP, CARD, BORDER, CHROME } from './theme.js';
 import { saves as savesService } from '../lib/saves.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { nameMapFromSaves } from './map/WorldPulseData.js';
@@ -824,7 +824,7 @@ export default function WorldMap({ onNavigate } = {}) {
             not stacked boxes. Each row strips its own border/fill; the SP.sm gap
             between them carries the grouping (P5 — flatten nested cards). */}
       <div style={{
-        background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+        background: CARD, border: `1px solid ${BORDER}`,
         display: 'flex', flexDirection: 'column',
       }}>
         {/* mapMode/setMapMode, mapLoading, mapError, and imageMode are no longer

@@ -9,7 +9,7 @@
  * max-lines ceiling — the same move that extracted GateToggle.
  */
 import Button from '../primitives/Button.jsx';
-import { BODY, FS, GOLD, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, FS, GOLD, INK, MUTED, SP, sans } from '../theme.js';
 
 export default function DisclosureHeader({ open, onToggle, regionId, title, summary }) {
   return (
@@ -24,7 +24,6 @@ export default function DisclosureHeader({ open, onToggle, regionId, title, summ
         gap: SP.sm,
         width: '100%',
         padding: `${SP.sm}px ${SP.md}px`,
-        borderRadius: R.md,
         justifyContent: 'flex-start',
         textAlign: 'left',
         whiteSpace: 'normal',

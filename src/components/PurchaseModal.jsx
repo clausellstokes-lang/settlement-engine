@@ -18,7 +18,7 @@ import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } fr
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
 import { getTierDisplayName, getActivePacks } from '../config/pricing.js';
 import { t } from '../copy/index.js';
-import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, ELEV, swatch } from './theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
@@ -107,9 +107,8 @@ export default function PurchaseModal({ onClose }) {
         aria-modal="true"
         aria-labelledby="purchase-modal-title"
         style={{
-          background: CARD, borderRadius: R.xl,
+          background: CARD,
           border: `1px solid ${BORDER}`,
-          boxShadow: ELEV[3],
           width: '90%', maxWidth: 520, overflow: 'hidden',
         }}
       >
@@ -135,8 +134,8 @@ export default function PurchaseModal({ onClose }) {
         <div style={{ padding: `${SP.xxl}px ${SP.xl}px`, display: 'flex', flexDirection: 'column', gap: SP.lg }}>
           {/* Current balance */}
           <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: GOLD_BG,
-            borderRadius: R.lg, border: `1px solid rgba(160,118,42,0.2)`,
+            padding: `${SP.md}px ${SP.lg}px`, background: swatch['#FAF8F4'],
+            border: `1px solid ${GOLD}33`,
             display: 'flex', justifyContent: 'space-between', alignItems: 'center',
           }}>
             <span style={{ fontSize: FS.sm, color: SECOND, fontFamily: sans }}>Current Balance</span>
@@ -149,8 +148,8 @@ export default function PurchaseModal({ onClose }) {
           {isElevated && (
             <div style={{
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: 'rgba(124,58,237,0.08)', border: '1px solid rgba(124,58,237,0.2)',
-              borderRadius: R.md, fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
+              background: swatch['#FAF8F4'], border: '1px solid #5A6E82',
+              fontSize: FS.sm, color: swatch['#7C3AED'], textAlign: 'center',
             }}>
               Developer accounts have unlimited credits. Purchases are not required.
             </div>
@@ -161,7 +160,7 @@ export default function PurchaseModal({ onClose }) {
             <div style={{
               display: 'flex', alignItems: 'center', gap: SP.sm,
               padding: `${SP.sm + 2}px ${SP.md}px`,
-              background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
+              background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', borderLeft: `3px solid ${swatch.danger}`,
               fontSize: FS.sm, color: swatch.danger,
             }}>
               <AlertCircle size={16} />
@@ -205,9 +204,9 @@ export default function PurchaseModal({ onClose }) {
                   disabled={loading || !isConfigured}
                   style={{
                     flex: 1, padding: `${SP.lg}px ${SP.sm}px`,
-                    background: isBest ? 'rgba(42,122,42,0.06)' : isValue ? 'rgba(160,118,42,0.04)' : CARD,
+                    background: isBest ? swatch['#FAF8F4'] : isValue ? swatch['#FAF8F4'] : CARD,
                     border: `2px solid ${borderColor}`,
-                    borderRadius: R.xl, cursor: loading ? 'wait' : 'pointer',
+                    cursor: loading ? 'wait' : 'pointer',
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs + 2,
                     fontFamily: sans, transition: 'border-color 0.2s, transform 0.1s',
                     opacity: loading ? 0.6 : 1,
@@ -218,7 +217,7 @@ export default function PurchaseModal({ onClose }) {
                   {p.discount && (
                     <div style={{
                       position: 'absolute', top: -10, right: -4,
-                      padding: '2px 8px', borderRadius: R.md,
+                      padding: '2px 8px',
                       background: accentColor, color: swatch.white,
                       fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.02em',
                     }}>

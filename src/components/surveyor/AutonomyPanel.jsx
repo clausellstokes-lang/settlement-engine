@@ -20,7 +20,7 @@ import { useMemo, useState, useCallback } from 'react';
 import { Check, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
@@ -41,7 +41,7 @@ const cost = getSurveyorAiCost('autonomy');
 
 const inputStyle = {
   fontSize: FS.xs, fontFamily: sans, color: INK, background: '#fff',
-  border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.xs}px`,
+  border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px`,
 };
 
 /** One picker-built test row → a TestNode (ids come ONLY from the registry/campaign). */
@@ -279,7 +279,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
           {nudges.map((n, i) => (
             <div key={i} data-testid={`autonomy-nudge-${i}`} style={{
               display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap',
-              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : nudgeDecisions[i] === 'approve' ? GOLD : SLATE}`, borderRadius: R.md,
+              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : nudgeDecisions[i] === 'approve' ? GOLD : SLATE}`,
               padding: SP.xs, background: nudgeDecisions[i] === 'discard' ? CARD_ALT : '#fff',
               opacity: nudgeDecisions[i] === 'discard' ? 0.6 : 1,
             }}>

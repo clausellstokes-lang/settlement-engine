@@ -18,7 +18,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { BORDER, PARCH, R } from '../theme.js';
+import { BORDER, PARCH } from '../theme.js';
 
 /**
  * @param {{ settlement: any, size?: number, worldState?: any }} props
@@ -83,7 +83,6 @@ export default function SettlementCardMapThumb({ settlement, size = 46, worldSta
     width: size,
     height: size,
     flexShrink: 0,
-    borderRadius: R?.md ?? 6,
     border: `1px solid ${BORDER}`,
     background: PARCH,
     overflow: 'hidden',

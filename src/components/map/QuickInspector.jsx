@@ -87,7 +87,6 @@ export default function QuickInspector() {
         background: PARCH,
         border: `1px solid ${BORDER}`,
         borderLeft: `3px solid ${GOLD}`,
-        borderRadius: 5,
         boxShadow: '0 4px 14px rgba(0,0,0,0.20)',
         fontFamily: sans,
         pointerEvents: 'none',  // never blocks clicks on the map underneath

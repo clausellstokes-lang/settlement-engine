@@ -14,7 +14,7 @@ import { useState } from 'react';
 import { Edit3, BookMarked, RotateCcw, Lock } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
+import { GOLD, GOLD_BG, INK, sans, FS } from '../theme.js';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
@@ -76,7 +76,7 @@ export default function PhaseBadge() {
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '3px 8px',
             background: c.bg, color: c.fg,
-            border: `1px solid ${c.border}`, borderRadius: R.sm,
+            border: `1px solid ${c.border}`,
             fontSize: FS.xs, fontWeight: 800, fontFamily: sans, letterSpacing: '0.04em',
           }}
         >
@@ -114,7 +114,7 @@ export default function PhaseBadge() {
               display: 'inline-flex', alignItems: 'center', gap: 4,
               padding: '3px 8px',
               background: GOLD_BG, color: INK,
-              border: `1px solid ${GOLD}`, borderRadius: R.sm,
+              border: `1px solid ${GOLD}`,
               fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
             }}
           >

@@ -20,7 +20,7 @@ import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { hasPending, activeEdits } from '../../domain/pendingEdits.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { sans, FS, SP, R, swatch } from '../theme.js';
+import { sans, FS, SP, swatch } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -92,7 +92,6 @@ export default function PendingChangesBar() {
           background: AMBER_BG,
           border: `1px solid ${AMBER}`,
           borderLeft: `3px solid ${AMBER}`,
-          borderRadius: R.sm,
           display: 'flex', alignItems: 'center', gap: SP.sm,
           fontFamily: sans, fontSize: FS.xs, color: INK,
           flexWrap: 'wrap',

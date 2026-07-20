@@ -23,8 +23,7 @@
 
 import { LogIn, Map, Download } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, R, SP, sans,
-} from '../theme.js';
+  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, SP, sans } from '../theme.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
@@ -89,7 +88,7 @@ export default function DossierLadderModal({ onClose, onCreateAccount, onCartogr
         tabIndex={-1}
         style={{
           width: 'min(100%, 460px)', maxHeight: 'min(90vh, 680px)', overflow: 'auto',
-          border: `1px solid ${BORDER}`, borderRadius: R.lg,
+          border: `1px solid ${BORDER}`,
           background: CARD, boxShadow: ELEV[3], fontFamily: sans,
         }}
       >

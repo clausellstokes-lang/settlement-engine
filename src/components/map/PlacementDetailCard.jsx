@@ -14,7 +14,7 @@ import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
-import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R, EMPTY_VALUE } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -74,7 +74,6 @@ export default function PlacementDetailCard({ onOpenDetail }) {
       width: 260,
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: R.lg,
       boxShadow: '0 6px 24px rgba(28, 20, 9, 0.18)',
       overflow: 'hidden',
       zIndex: 10,

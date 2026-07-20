@@ -327,13 +327,13 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                     onClick={() => setMenuOpen(o => !o)}
                   />
                   {menuOpen && (
-                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, borderRadius:6, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
+                    <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:200, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
                       {/* Canonize (draft → canon) or a static Canon marker. */}
                       {!isCanon ? (
                         <Button variant="ghost" fullWidth onClick={() => { onCanonize?.(s); setMenuOpen(false); }}
                           icon={<BookMarked size={13} color={GOLD}/>}
                           title="Canonize: lock names and start the campaign timeline"
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
                           Canonize
                         </Button>
                       ) : (
@@ -349,7 +349,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                         <Button variant="ghost" fullWidth
                           onClick={() => { setMenuOpen(false); onNavigate?.('pricing'); }}
                           icon={<Clock size={13} color={GOLD}/>}
-                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500, borderRadius:3 }}>
+                          style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:GOLD_TXT, fontWeight:500 }}>
                           Advance time and run campaigns. Upgrade
                         </Button>
                       ) : (
@@ -365,7 +365,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                             title={currentCampaignId
                               ? 'Advance the campaign world and open the post-advance results'
                               : 'Add this settlement to a campaign below to advance its world.'}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
+                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
                             Advance Time
                           </Button>
 
@@ -376,7 +376,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                             <Button variant="ghost" fullWidth key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMenuOpen(false); }}
                               icon={<FolderOpen size={13} color={GOLD}/>}
                               title={currentCampaignId ? `Move to ${c.name}` : `Add to ${c.name}`}
-                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
+                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
                               {currentCampaignId ? 'Move to' : 'Add to'} {c.name}
                             </Button>
                           ))}
@@ -386,7 +386,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                             <Button variant="ghost" fullWidth onClick={() => { setMenuOpen(false); onCreateCampaign?.(); }}
                               icon={<ArrowRight size={13} color={GOLD}/>}
                               title="Create a campaign to organize this settlement"
-                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500, borderRadius:3 }}>
+                              style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
                               Create a campaign
                             </Button>
                           )}
@@ -398,7 +398,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                         <>
                           <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
                           <Button variant="ghost" fullWidth onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMenuOpen(false); }}
-                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', fontSize:FS.sm, color:swatch.danger, fontWeight:500, borderRadius:3 }}>
+                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', fontSize:FS.sm, color:swatch.danger, fontWeight:500 }}>
                             Remove from campaign
                           </Button>
                         </>

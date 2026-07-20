@@ -19,7 +19,7 @@ import { Scale, Swords, HeartHandshake } from 'lucide-react';
 
 import { warCausalBrief } from '../../domain/worldPulse/peaceReasons.js';
 import { human } from './WorldPulseData.js';
-import { INK, BODY, MUTED, SECOND, CARD, BORDER, BORDER2, RED, GREEN, sans, FS, R, SP } from '../theme.js';
+import { INK, BODY, MUTED, SECOND, CARD, BORDER, BORDER2, RED, GREEN, sans, FS, SP } from '../theme.js';
 
 /** One reason row: its human-named type + the ledger receipt. */
 function ReasonRow({ type, receipt, tone }) {
@@ -68,7 +68,7 @@ export default function WarCausalBrief({ worldState, partyId, foeId, compact = f
   }
 
   return (
-    <div data-testid="war-causal-brief" style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: SP.xs, border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD }}>
+    <div data-testid="war-causal-brief" style={{ display: 'flex', flexDirection: 'column', gap: 6, padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
         <Scale size={12} color={MUTED} aria-hidden />
         <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>

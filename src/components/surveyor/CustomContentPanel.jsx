@@ -12,7 +12,7 @@ import { useState, useCallback } from 'react';
 import { Check, Pencil, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
@@ -44,7 +44,7 @@ function DraftEntryCard({ entry: e, index, decision, onDecide }) {
     <div
       data-testid={`content-entry-${index}`}
       style={{
-        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : SLATE}`, borderRadius: R.md,
+        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : SLATE}`,
         padding: SP.sm, background: action === 'reject' ? CARD_ALT : '#fff',
         opacity: action === 'reject' ? 0.6 : 1, display: 'flex', flexDirection: 'column', gap: 6,
       }}
@@ -81,7 +81,7 @@ function DraftEntryCard({ entry: e, index, decision, onDecide }) {
                   value={typeof val === 'object' ? JSON.stringify(val) : String(val ?? '')}
                   onChange={(ev) => setField(field, ev.target.value)}
                   style={{ flex: 1, minWidth: 96, fontSize: FS.xs, fontFamily: sans, color: INK,
-                    border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.xs}px` }}
+                    border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px` }}
                 />
               ) : (
                 <span style={{ fontSize: FS.xs, color: kind === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>

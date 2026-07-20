@@ -14,14 +14,14 @@ export default function SettlementDetailEditNames({
   handleApplyRename,
 }) {
   return (
-      settlement&&<div style={{borderRadius:8,overflow:'hidden'}}>
+      settlement&&<div style={{overflow:'hidden'}}>
         {/* A routine collapsible rename utility doesn't earn a permanent full
             card border: the header tint carries the affordance, and the open
             body attaches by spacing rather than a borderTop false-floor. */}
         <Button variant="secondary" fullWidth
           onClick={()=>{setEditNamesOpen(v=>!v);setEditingName(null);setEditDraft('');}}
           aria-expanded={editNamesOpen} aria-pressed={editNamesOpen}
-          style={{justifyContent:'flex-start',gap:8,padding:'10px 14px',borderRadius:editNamesOpen?'8px 8px 0 0':8,
+          style={{justifyContent:'flex-start',gap:8,padding:'10px 14px',
             background:editNamesOpen?'#f5ede0':CARD,border:'none',boxShadow:'none',fontWeight:600,textAlign:'left'}}>
           <span style={{fontFamily:serif_,fontSize:FS.md,fontWeight:600,color:INK,flex:1}}>
             Edit Names
@@ -63,7 +63,7 @@ export default function SettlementDetailEditNames({
                           if(e.key==='Escape'){setEditingName(null);setEditDraft('');}
                         }}
                         style={{flex:1,fontSize:FS.sm,minHeight:40,padding:'8px 10px',border:`1px solid ${BORDER_STRONG}`,
-                          borderRadius:4,fontFamily:sans,color:INK}}
+                          fontFamily:sans,color:INK}}
                       />
                       <Button variant="primary" size="md" onClick={()=>handleApplyRename('npc',npc.id,npc.name,editDraft)}>
                         Save
@@ -107,7 +107,7 @@ export default function SettlementDetailEditNames({
                           if(e.key==='Escape'){setEditingName(null);setEditDraft('');}
                         }}
                         style={{flex:1,fontSize:FS.sm,minHeight:40,padding:'8px 10px',border:`1px solid ${BORDER_STRONG}`,
-                          borderRadius:4,fontFamily:sans,color:INK}}
+                          fontFamily:sans,color:INK}}
                       />
                       <Button variant="primary" size="md" onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}>
                         Save

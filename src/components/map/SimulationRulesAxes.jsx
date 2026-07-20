@@ -1,10 +1,6 @@
-import {
-  infoModeOf,
-  politicalAutonomyOf,
-  worldProgressionOf,
-} from '../../domain/worldPulse/simulationRules.js';
+import { infoModeOf, politicalAutonomyOf, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
 import { domainState } from '../../domain/worldPulse/simulationProfile.js';
-import { BODY, BORDER2, CARD, FS, GOLD_BG, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, BORDER2, CARD, FS, GOLD_BG, INK, MUTED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 /*
@@ -184,7 +180,6 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
               gap: 6,
               padding: SP.sm,
               border: `1px solid ${BORDER2}`,
-              borderRadius: R.md,
               background: CARD,
             }}
           >
@@ -269,7 +264,6 @@ export function DomainRows({ draft, advanceBlocked, onSetDomain }) {
                 flexWrap: 'wrap',
                 padding: '6px 10px',
                 border: `1px solid ${BORDER2}`,
-                borderRadius: R.md,
                 background: CARD,
                 opacity: warBlocked ? 0.7 : 1,
               }}
@@ -379,7 +373,6 @@ export function EngineWaves({ draft, advanceBlocked, spatialMapped = false, onSe
                 gap: 8,
                 padding: '8px 10px',
                 border: `1px solid ${BORDER2}`,
-                borderRadius: R.md,
                 background: checked ? GOLD_BG : CARD,
                 cursor: disabled ? 'default' : 'pointer',
                 opacity: disabled ? 0.7 : 1,

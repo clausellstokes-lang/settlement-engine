@@ -36,8 +36,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD, GOLD, INK, MUTED, PARCH, R, RED, RED_BG, sans,
-} from '../theme.js';
+  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD, GOLD, INK, MUTED, PARCH, RED, RED_BG, sans } from '../theme.js';
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 // THE LIVING BACKDROP (owner ruling 2026-07-18) — device-local last-viewed {view,lens}
@@ -430,7 +429,6 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         height: 'min(72vh, 720px)',
         minHeight: 360,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         background: C.bg,
         overflow: 'hidden',
         touchAction: 'none',

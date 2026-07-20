@@ -34,7 +34,7 @@ function Step({ id, index, here, active, compact, onStep, label, hint }) {
       style={{
         width: dot, height: dot, borderRadius: '50%', flexShrink: 0,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        background: here ? GOLD : active ? 'rgba(201,162,76,0.18)' : CARD,
+        background: here ? GOLD : active ? `${GOLD}2e` : CARD,
         border: `1.5px solid ${active ? GOLD : BORDER}`,
         color: here ? INK : active ? GOLD_DEEP : MUTED,
         fontFamily: sans, fontSize: compact ? FS.micro : FS.xs, fontWeight: 800,
@@ -115,7 +115,7 @@ export default function LifecycleSpine({ stage = 'draft', onStep, compact = fals
           />
           {i < STAGES.length - 1 && (
             <span aria-hidden="true" style={{
-              width: compact ? 12 : 20, height: 2, borderRadius: 2,
+              width: compact ? 12 : 20, height: 2,
               background: i < idx ? GOLD : BORDER,
             }} />
           )}

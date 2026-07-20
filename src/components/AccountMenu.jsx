@@ -11,11 +11,11 @@
  * for anonymous visitors, inline on the Create page once they hit the cap).
  *
  * The menu closes on outside-click, Escape, or item selection. Colors come
- * from theme tokens / rgba (no raw hex) so the visual-budget lint stays clean.
+ * from theme tokens (no raw hex) so the visual-budget lint stays clean.
  */
 import { useState, useRef, useEffect } from 'react';
 import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, BORDER, FS, SP, R, swatch } from './theme.js';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, SLATE, SLATE_DEEP, GREEN, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 function MenuRow({ icon, label, onClick }) {
@@ -33,7 +33,7 @@ function MenuRow({ icon, label, onClick }) {
         justifyContent: 'flex-start', gap: SP.sm, textAlign: 'left',
         padding: `${SP.sm}px ${SP.md}px`,
         background: hover ? GOLD_BG : 'transparent',
-        border: 'none', borderRadius: R.sm,
+        border: 'none',
         color: INK, fontSize: FS.sm, fontWeight: 600,
       }}
     >
@@ -92,9 +92,11 @@ export default function AccountMenu({
   }
 
   const name = displayName || (isElevated ? 'Developer' : 'Account');
-  const chipBg = isElevated ? 'rgba(124,58,237,0.15)' : 'rgba(42,122,42,0.2)';
-  const chipBorder = isElevated ? 'rgba(124,58,237,0.3)' : 'rgba(42,122,42,0.4)';
-  const chipColor = isElevated ? swatch['#C8A0F0'] : 'rgba(74,138,74,1)';
+  // Status reads in a colored rule + ink, not a wash (deep-craft): the founder/
+  // developer chip is the in-palette slate channel, the active account is green.
+  const chipBg = 'transparent';
+  const chipBorder = isElevated ? SLATE : GREEN;
+  const chipColor = isElevated ? SLATE_DEEP : GREEN;
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>
@@ -112,7 +114,6 @@ export default function AccountMenu({
           maxWidth: compact ? 168 : 220,
           background: chipBg,
           border: `1px solid ${chipBorder}`,
-          borderRadius: R.md,
           color: chipColor,
           fontSize: chipFont, fontWeight: compact ? 700 : 600,
           letterSpacing: '0.04em', textTransform: 'uppercase',
@@ -131,8 +132,6 @@ export default function AccountMenu({
             minWidth: 236,
             background: swatch.white,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
-            boxShadow: '0 8px 24px rgba(27,20,8,0.16)',
             padding: 6, zIndex: 1200,
           }}
         >

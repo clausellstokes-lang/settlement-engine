@@ -20,7 +20,6 @@ export function Pill({ children, tone = 'neutral' }) {
       minHeight: 22,
       padding: '2px 7px',
       border: `1px solid ${BORDER2}`,
-      borderRadius: 6,
       background: bg,
       color,
       fontFamily: sans,
@@ -38,7 +37,7 @@ export function EntityPill({ label, value }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
-      padding: '2px 8px', border: `1px solid ${BORDER2}`, borderRadius: 6,
+      padding: '2px 8px', border: `1px solid ${BORDER2}`,
       background: swatch.infoBg, color: INK,
       fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,
     }}>
@@ -64,7 +63,7 @@ export function NameAttackerControl({ stressor, onName, busy }) {
         aria-label={`Name the force behind ${stressor.label || human(stressor.type)}`}
         style={{
           flex: 1, minWidth: 0, minHeight: 30, padding: '5px 9px',
-          border: `1px solid ${BORDER2}`, borderRadius: 6,
+          border: `1px solid ${BORDER2}`,
           background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs,
         }}
       />
@@ -85,7 +84,6 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
   return (
     <article style={{
       border: `1px solid ${major ? GOLD : BORDER}`,
-      borderRadius: 8,
       background: major ? GOLD_BG : CARD,
       padding: 12,
       display: 'flex',

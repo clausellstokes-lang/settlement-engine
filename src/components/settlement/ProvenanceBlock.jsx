@@ -85,5 +85,5 @@ function shortSeed(s) {
 const codeStyle = {
   fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
   fontSize: FS.xxs, color: '#3a2a18',
-  background: '#f3ead8', padding: '1px 4px', borderRadius: 3,
+  background: '#f3ead8', padding: '1px 4px',
 };

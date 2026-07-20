@@ -203,7 +203,7 @@ export default function LivingWorldTab() {
     <>
       {/* Thesis */}
       <div style={{ padding: '14px 16px', background: 'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
-        borderRadius: 7, marginBottom: SP.lg, maxWidth: PROSE_MAX }}>
+        marginBottom: SP.lg, maxWidth: PROSE_MAX }}>
         <h2 style={{ fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: GOLD, margin: '0 0 8px' }}>
           {t('aboutLiving.thesis')}
         </h2>
@@ -221,7 +221,7 @@ export default function LivingWorldTab() {
           src="/backgrounds/settlement-progression.jpg"
           alt="Settlement Progression across the six tiers. A thorpe is a few huts and farmsteads with no formal defenses; a hamlet adds basic services and a local trade and farming focus; a village has densely clustered homes, a church or chapel, a market, and some defenses; a town is walled with diverse districts, markets and guilds, and a regional trade hub; a city has strong fortifications, many districts, extensive services, and major trade and industry; a metropolis has grand fortifications, advanced infrastructure, international trade, and complex governance. Each settlement grows through population, security, infrastructure, governance, and economy."
           loading="lazy"
-          style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
+          style={{ width: '100%', height: 'auto', display: 'block', border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
         />
       </figure>
 

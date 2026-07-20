@@ -24,7 +24,7 @@ import { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, R, SP, sans, swatch } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, SP, sans, swatch } from '../theme.js';
 import { glossaryEntryFor } from '../../domain/display/glossary.js';
 
 const FOCUSABLE =
@@ -76,7 +76,7 @@ function GlossaryCard({ open, entry, onClose }) {
         tabIndex={-1}
         style={{
           width: 'min(100%, 380px)', maxHeight: 'min(90vh, 520px)', overflow: 'auto',
-          border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, boxShadow: ELEV[3],
+          border: `1px solid ${BORDER}`, background: CARD, boxShadow: ELEV[3],
         }}
       >
         <header style={{

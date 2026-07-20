@@ -48,15 +48,17 @@ const KIND_LABELS = {
 };
 
 const COLORS = Object.freeze({
-  hardBg:    'rgba(139,26,26,0.05)',
+  // Tone reads in the border rule + the coloured heading, not a wash (deep-craft):
+  // hard/soft groups sit on the same parchment ground, parted by their rules.
+  hardBg:    swatch['#FAF8F4'],
   hardBdr:   'rgba(139,26,26,0.32)',
   hardText:  '#8b1a1a',
-  softBg:    'rgba(196,128,60,0.06)',
+  softBg:    swatch['#FAF8F4'],
   softBdr:   'rgba(196,128,60,0.25)',
   softText:  '#8a5a20',
   muted:     '#9c8068',
   ink:       '#1c1409',
-  headerBg:  'rgba(139,26,26,0.10)',
+  headerBg:  swatch['#FAF8F4'],
 });
 
 export function AiOverlayViolations({ violations, onDismiss }) {
@@ -80,8 +82,6 @@ export function AiOverlayViolations({ violations, onDismiss }) {
         margin: '8px 18px',
         background: CARD,
         border: `1px solid ${COLORS.hardBdr}`,
-        borderRadius: 6,
-        boxShadow: '0 1px 3px rgba(139,26,26,0.05)',
         overflow: 'hidden',
         fontFamily: 'Nunito, sans-serif',
       }}
@@ -130,7 +130,7 @@ export function AiOverlayViolations({ violations, onDismiss }) {
             title="Dismiss this notice. Violations will resurface if the AI overlay regenerates."
             style={{
               background: 'none', border: `1px solid ${COLORS.hardBdr}`,
-              borderRadius: 3, cursor: 'pointer',
+              cursor: 'pointer',
               fontSize: FS.xxs, fontWeight: 700, color: COLORS.hardText,
               padding: '2px 7px',
             }}
@@ -178,7 +178,6 @@ function Group({ violations, tone, caption }) {
         listStyle: 'none', margin: 0, padding: 0,
         background: isHard ? COLORS.hardBg : COLORS.softBg,
         border: `1px solid ${isHard ? COLORS.hardBdr : COLORS.softBdr}`,
-        borderRadius: 4,
       }}>
         {violations.map((v, idx) => (
           <li
@@ -196,7 +195,7 @@ function Group({ violations, tone, caption }) {
               color: isHard ? COLORS.hardText : COLORS.softText,
               background: swatch.white,
               border: `1px solid ${isHard ? COLORS.hardBdr : COLORS.softBdr}`,
-              borderRadius: 3, padding: '1px 5px',
+              padding: '1px 5px',
               marginTop: 1,
             }}>
               {KIND_LABELS[v.kind] || v.kind}

@@ -20,7 +20,7 @@
  */
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
-import { BORDER, CARD, ELEV, FS, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BORDER, CARD, ELEV, FS, INK, MUTED, SP, sans } from '../theme.js';
 import { resolveTownMapStyle } from '../../domain/townMap/index.js';
 import { districtColor } from './palette.js';
 
@@ -77,7 +77,7 @@ export default function SettlementMapEditControls({
             position: 'absolute', top: SP.sm, right: SP.sm, zIndex: 4,
             display: 'flex', flexWrap: 'wrap', gap: SP.xs, maxWidth: 'calc(100% - 24px)',
             padding: SP.xs, background: CARD, border: `1px solid ${BORDER}`,
-            borderRadius: R.md, boxShadow: ELEV[1],
+            boxShadow: ELEV[1],
           }}
         >
           {/* Accessible names via aria-label, never native title= — the guidance
@@ -131,7 +131,7 @@ function LockedMarkers() {
         position: 'absolute', top: SP.sm, right: SP.sm, zIndex: 4,
         display: 'flex', flexDirection: 'column', gap: SP.xs, maxWidth: 'min(78vw, 220px)',
         padding: SP.sm, background: CARD, border: `1px solid ${BORDER}`,
-        borderRadius: R.md, boxShadow: ELEV[1], fontFamily: sans,
+        boxShadow: ELEV[1], fontFamily: sans,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.xs }}>
@@ -177,7 +177,7 @@ function MapLensSwitcher({ styleIds, bespokeSkins, activeLens, persisted, onPick
         position: 'absolute', top: SP.sm, left: SP.sm, zIndex: 4,
         display: 'flex', flexWrap: 'wrap', gap: 2, maxWidth: 'calc(100% - 24px)',
         padding: 2, background: CARD, border: `1px solid ${BORDER}`,
-        borderRadius: R.md, boxShadow: ELEV[1],
+        boxShadow: ELEV[1],
       }}
     >
       {styleIds.map((id) => {
@@ -251,12 +251,12 @@ function MapLegend({ districts }) {
         position: 'absolute', bottom: SP.sm, left: SP.sm, zIndex: 3,
         display: 'flex', flexDirection: 'column', gap: 2, maxHeight: '40%', overflow: 'auto',
         padding: `${SP.xs}px ${SP.sm}px`, background: CARD, border: `1px solid ${BORDER}`,
-        borderRadius: R.md, boxShadow: ELEV[1], pointerEvents: 'none',
+        boxShadow: ELEV[1], pointerEvents: 'none',
       }}
     >
       {cats.map((c) => (
         <div key={c} style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
-          <span style={{ width: 10, height: 10, borderRadius: 2, background: districtColor(c), flexShrink: 0 }} />
+          <span style={{ width: 10, height: 10, background: districtColor(c), flexShrink: 0 }} />
           <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, textTransform: 'capitalize' }}>{c}</span>
         </div>
       ))}

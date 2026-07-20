@@ -16,7 +16,7 @@
 import { useState } from 'react';
 import { Map as MapIcon, ChevronDown, ChevronUp } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, R, SP, sans, swatch } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import { REL_EDGE_STYLE, REL_TYPES, relChannelColor } from './relationshipEdgeStyle.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 import { LIFECYCLE_GLYPH_STYLE } from './lifecycleGlyphStyle.js';
@@ -99,7 +99,7 @@ export default function MapLegend() {
       style={{
         position: 'absolute', left: SP.sm, bottom: SP.sm, zIndex: 20,
         width: open ? 232 : 'auto',
-        border: `1px solid ${BORDER}`, borderRadius: R.md,
+        border: `1px solid ${BORDER}`,
         background: CARD, boxShadow: ELEV[3],
         overflow: 'hidden', fontFamily: sans,
       }}

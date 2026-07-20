@@ -23,7 +23,7 @@
 
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
-import { FS, ELEV, swatch } from './theme.js';
+import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
 import { FIELD_INK } from '../design/organic/ink.js';
@@ -122,8 +122,6 @@ export default function TableView({ settlement, onClose }) {
           height: '100%', maxHeight: 760,
           background: UMBER_DESK,
           border: `1px solid ${FIELD_RULE}`,
-          borderRadius: 14,
-          boxShadow: ELEV[3],
           overflow: 'hidden',
           display: 'flex', flexDirection: 'column',
           fontFamily: sans,
@@ -180,7 +178,6 @@ export default function TableView({ settlement, onClose }) {
               background: UMBER_CARD,
               border: `1px solid ${FIELD_RULE}`,
               borderLeft: `3px solid ${LAMP_ACCENTS.HOOK}`,
-              borderRadius: 6,
               fontFamily: serif, fontSize: FS.lg, fontStyle: 'italic',
               color: CREAM, lineHeight: 1.5,
             }}>
@@ -195,9 +192,9 @@ export default function TableView({ settlement, onClose }) {
                 <span key={i} style={{
                   fontSize: FS.micro, fontWeight: 800,
                   letterSpacing: '0.04em', textTransform: 'uppercase',
-                  color: LAMP_ACCENTS.RED, background: 'rgba(224,121,78,0.12)',
-                  border: '1px solid rgba(224,121,78,0.32)',
-                  borderRadius: 4, padding: '3px 8px',
+                  color: LAMP_ACCENTS.RED, background: 'transparent',
+                  border: `1px solid ${LAMP_ACCENTS.RED}`,
+                  padding: '3px 8px',
                 }}>
                   {s.label || s.type}
                 </span>
@@ -232,7 +229,6 @@ export default function TableView({ settlement, onClose }) {
                       background: UMBER_CARD,
                       border: `1px solid ${FIELD_RULE}`,
                       borderLeft: `4px solid ${accent}`,
-                      borderRadius: 6,
                     }}>
                       <div style={{
                         display: 'flex', justifyContent: 'space-between',

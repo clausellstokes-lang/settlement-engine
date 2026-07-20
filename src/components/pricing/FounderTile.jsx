@@ -27,7 +27,7 @@ import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
-import { sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { sans, serif_, FS, SP, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const GOLD_500 = swatch['#C9A24C'];
@@ -112,7 +112,7 @@ export default function FounderTile() {
       maxWidth: 380, margin: `${SP.lg}px auto`,
       background: `linear-gradient(180deg, ${INK_900} 0%, ${INK_800} 100%)`,
       border: `1.5px solid ${GOLD_500}`,
-      borderRadius: R.lg, overflow: 'hidden',
+      overflow: 'hidden',
       boxShadow: '0 12px 32px rgba(27,20,8,0.40)',
       fontFamily: sans,
     }}>
@@ -123,7 +123,7 @@ export default function FounderTile() {
       }}>
         <div style={{
           display: 'inline-block',
-          padding: '3px 10px', borderRadius: R.sm,
+          padding: '3px 10px',
           background: GOLD_WASH,
           color: GOLD_500, fontSize: FS.xxs, fontWeight: 800,
           letterSpacing: '0.12em', textTransform: 'uppercase',
@@ -154,7 +154,7 @@ export default function FounderTile() {
         <div style={{
           padding: SP.md, background: 'rgba(201,162,76,0.06)',
           border: `1px solid rgba(201,162,76,0.20)`,
-          borderRadius: R.sm, fontSize: FS.sm, color: swatch['#C8B098'],
+          fontSize: FS.sm, color: swatch['#C8B098'],
           lineHeight: 1.6, fontFamily: serif_,
         }}>
           <div>Two years of Cartographer = <b style={{ color: GOLD_400 }}>$144</b></div>

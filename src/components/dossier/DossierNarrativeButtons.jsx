@@ -34,7 +34,7 @@ export default function DossierNarrativeButtons({
     const costLabel = isConfigured ? ` (${getCost('narrative')} credits)` : '';
     const btnBase = {
       display: 'flex', alignItems: 'center', gap: 6,
-      padding: '6px 14px', borderRadius: 20,
+      padding: '6px 14px',
       fontSize: FS.xs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.04em',
       transition: 'all 0.2s', whiteSpace: 'nowrap',

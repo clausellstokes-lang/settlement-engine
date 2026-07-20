@@ -10,7 +10,7 @@
  */
 
 import { ChevronLeft } from 'lucide-react';
-import { INK, MUTED, SECOND, BORDER, CARD_HDR, SP, R, FS } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD_HDR, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 
@@ -31,7 +31,6 @@ export function ChangeModeBar({ mode, onChangeMode }) {
       padding: `${SP.sm}px ${SP.md}px`,
       background: CARD_HDR,
       border: `1px solid ${BORDER}`,
-      borderRadius: R.md,
       fontSize: FS.sm, color: SECOND,
     }}>
       {/* Breadcrumb root: the back affordance is reframed as a clickable

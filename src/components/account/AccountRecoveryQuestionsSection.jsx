@@ -15,7 +15,7 @@
  * get_my_security_question_ids, which returns only the question ids, never the
  * hash.
  *
- * Styling note: uses this tree's theme vocabulary (GOLD/GOLD_BG/BODY/swatch) —
+ * Styling note: uses this tree's theme vocabulary (GOLD/BODY/swatch) —
  * no new raw colors, so the raw-color ratchet is untouched.
  */
 import { useEffect, useState } from 'react';
@@ -24,13 +24,13 @@ import { useStore } from '../../store/index.js';
 import { securityQuestionText } from '../../data/securityQuestions.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import { GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, SP, R, FS, swatch } from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 import SecurityQuestionsFields from '../auth/SecurityQuestionsFields.jsx';
 
 function ErrorBanner({ children }) {
   return (
-    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger }}>
       {children}
     </div>
   );
@@ -38,7 +38,7 @@ function ErrorBanner({ children }) {
 
 function OkBanner({ children }) {
   return (
-    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.success}`, fontSize: FS.sm, color: swatch.success }}>
       {children}
     </div>
   );
@@ -134,8 +134,8 @@ export default function AccountRecoveryQuestionsSection() {
             warning — it points to the set control directly below. */}
         {hasQuestions === false && !editing && !done && (
           <div style={{
-            padding: `${SP.sm}px ${SP.md}px`, background: GOLD_BG,
-            border: `1px solid ${BORDER}`, borderRadius: R.md,
+            padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'],
+            border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
             fontSize: FS.sm, color: GOLD, lineHeight: 1.5,
           }}>
             {t('auth.security.account.nudge')}

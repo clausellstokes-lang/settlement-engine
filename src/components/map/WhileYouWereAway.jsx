@@ -21,7 +21,7 @@ import { History, Sparkles, AlertTriangle, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { IconButton } from './IconButton.jsx';
-import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, R, SECOND, sans } from '../theme.js';
+import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
 
 /**
  * @param {Object} props
@@ -66,7 +66,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
         role="status"
         style={{
           display: 'flex', alignItems: 'center', gap: 8,
-          border: `1px solid ${BORDER2}`, borderRadius: R.md,
+          border: `1px solid ${BORDER2}`,
           background: GOLD_BG, padding: '9px 12px',
           color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
         }}
@@ -82,7 +82,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
     <div
       data-testid="while-you-were-away"
       style={{
-        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`,
         background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 8,
       }}
     >
@@ -108,7 +108,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
       {error ? (
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6,
-          border: '1px solid rgba(197,74,74,0.45)', borderRadius: R.sm,
+          border: '1px solid rgba(197,74,74,0.45)',
           background: 'rgba(197,74,74,0.08)', padding: '7px 9px',
           color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.45,
         }}>

@@ -17,7 +17,7 @@
  * Drawn-SVG padlock, no lucide (the map's icons-off posture).
  */
 import { useState } from 'react';
-import { INK, MUTED, BORDER, CARD, GREEN, AMBER, sans, FS, R, SP } from '../../theme.js';
+import { INK, MUTED, BORDER, CARD, GREEN, AMBER, sans, FS, SP } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
 
 /** A small drawn padlock (the map chrome is lucide-free). */
@@ -36,7 +36,7 @@ const BRUSH_KINDS = [
 
 const selStyle = {
   fontFamily: sans, fontSize: FS.sm, color: INK, background: CARD,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px 6px`,
+  border: `1px solid ${BORDER}`, padding: `2px 6px`,
 };
 
 /**
@@ -59,7 +59,7 @@ export default function SettlementMapFogControls({ fog, editing, entitled = fals
 
   const wrap = {
     fontFamily: sans, fontSize: FS.sm, color: INK, background: CARD,
-    border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.sm,
+    border: `1px solid ${BORDER}`, padding: SP.sm,
     display: 'flex', flexDirection: 'column', gap: SP.xs, minWidth: 220,
   };
   const row = { display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' };

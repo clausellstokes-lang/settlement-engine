@@ -96,7 +96,6 @@ export default function HelpPopover({ topic, label = 'Help' }) {
             background: PARCH_100,
             color: BODY,
             border: `1px solid ${GOLD}`,
-            borderRadius: 8,
             boxShadow: ELEV[3],
             fontSize: FS.xs,
             lineHeight: 1.55,

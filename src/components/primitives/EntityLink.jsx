@@ -66,7 +66,6 @@ export default function EntityLink({ id, type, fallback = '', style }) {
         textDecorationColor: `${swatch['#A0762A']}80`,
         textUnderlineOffset: 2,
         cursor: 'pointer',
-        borderRadius: 2,
         WebkitTapHighlightColor: 'transparent',
         ...style,
       }}

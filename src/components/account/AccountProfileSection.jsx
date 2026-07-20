@@ -6,15 +6,13 @@
  * and arrive via props. The RoleBadge helper moved here with it (it was only
  * used by this section).
  */
-import {
-  User, Shield, Check, X, Edit3, Mail, Bot,
-} from 'lucide-react';
+import { User, Shield, Check, X, Edit3, Mail, Bot, } from 'lucide-react';
 import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 function RoleBadge({ role }) {
@@ -27,7 +25,7 @@ function RoleBadge({ role }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '3px 10px', borderRadius: R.md,
+      padding: '3px 10px',
       background: c.bg, color: c.color,
       fontSize: FS.xs, fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
@@ -100,7 +98,7 @@ export default function AccountProfileSection({
                   onKeyDown={e => e.key === 'Enter' && handleSaveName()}
                   style={{
                     flex: 1, padding: `${SP.xs}px ${SP.sm}px`,
-                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
+                    border: `1px solid ${GOLD}`,
                     fontSize: FS.lg, fontFamily: serif_, fontWeight: 600,
                     outline: 'none',
                   }}
@@ -148,7 +146,7 @@ export default function AccountProfileSection({
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md, marginTop: SP.lg }}>
         {profileError && (
-          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+          <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', fontSize: FS.sm, color: swatch.danger }}>
             {profileError}
           </div>
         )}
@@ -160,7 +158,7 @@ export default function AccountProfileSection({
             value={avatarInput}
             onChange={e => setAvatarInput(e.target.value)}
             placeholder="https://..."
-            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK }}
           />
         </label>
         <label htmlFor="account-email-notifications" style={{ display: 'flex', alignItems: 'center', gap: SP.sm, fontSize: FS.sm, color: SECOND, fontWeight: 700 }}>
@@ -179,7 +177,7 @@ export default function AccountProfileSection({
             id="account-model-preference"
             value={modelPreference}
             onChange={e => setModelPreference(e.target.value)}
-            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
+            style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD }}
           >
             {AI_MODEL_OPTIONS.map(option => (
               <option key={option.key} value={option.key}>{option.label}</option>

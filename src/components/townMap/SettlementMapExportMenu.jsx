@@ -26,7 +26,7 @@ import { useEffect, useRef, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
 import BuyThisDossier, { resolveExportAccess } from '../BuyThisDossier.jsx';
-import { BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS, INK, MUTED, R, RED, SP, sans } from '../theme.js';
+import { BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS, INK, MUTED, RED, SP, sans } from '../theme.js';
 import {
   TOWN_MAP_EXPORT_FORMATS, TOWN_MAP_EXPORT_FORMAT_LABELS,
   TOWN_MAP_EXPORT_RESOLUTIONS, DEFAULT_EXPORT_RESOLUTION,
@@ -205,7 +205,7 @@ const panelStyle = {
   position: 'absolute', bottom: 'calc(100% + 6px)', right: 0,
   display: 'flex', flexDirection: 'column', gap: SP.xs, minWidth: 210,
   padding: SP.sm, background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`,
-  borderRadius: R.lg, boxShadow: ELEV[2],
+  boxShadow: ELEV[2],
 };
 const headerStyle = {
   fontSize: FS.xxs, fontWeight: 800, color: INK,
@@ -218,7 +218,7 @@ const labelStyle = {
 };
 const selectStyle = {
   minHeight: 28, padding: '3px 8px', border: `1px solid ${BORDER}`,
-  borderRadius: R.sm, background: CARD, color: INK, fontSize: FS.xs,
+  background: CARD, color: INK, fontSize: FS.xs,
   fontFamily: sans, cursor: 'pointer',
 };
 const errStyle = { fontSize: FS.xs, color: RED };

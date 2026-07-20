@@ -86,7 +86,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
     <section style={{
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       padding: '12px 14px',
       marginTop: 12,
       marginBottom: 12,
@@ -116,7 +115,6 @@ export default function RegionalImpactInbox({ saveId, onApplied }) {
                   gap: 8,
                   padding: '7px 8px',
                   border: `1px solid ${BORDER}`,
-                  borderRadius: 6,
                   background: impact.status === 'applied' ? swatch.successBg : GOLD_BG,
                 }}
               >

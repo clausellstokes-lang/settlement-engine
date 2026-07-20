@@ -13,7 +13,7 @@
 import { useState } from 'react';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import { INK, BODY, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, SECOND, BORDER, sans, SP, FS } from '../theme.js';
 
 /**
  * @param {object} props
@@ -65,7 +65,7 @@ export default function RedeemCodeField({ code, onChange, idPrefix = 'purchase' 
           style={{
             minHeight: 44, maxWidth: 280,
             padding: `${SP.sm}px ${SP.md}px`,
-            border: `1px solid ${BORDER}`, borderRadius: R.md,
+            border: `1px solid ${BORDER}`,
             fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 400,
           }}
         />

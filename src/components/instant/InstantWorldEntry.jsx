@@ -17,7 +17,7 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { REALM_SIZES, TONES, MAP_KINDS, DEFAULT_REALM_SIZE, DEFAULT_TONE, DEFAULT_MAP_KIND } from '../../domain/instantWorld/worldPlan.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
-import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, sans, serif_, FS, R, SP, swatch } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, BORDER2, CARD, CARD_HDR, GOLD, sans, serif_, FS, SP, swatch } from '../theme.js';
 
 const REALM_OPTIONS = Object.values(REALM_SIZES).map(s => ({ id: s.id, label: s.label }));
 const TONE_OPTIONS = TONES.map(t => ({ id: t.id, label: t.label }));
@@ -72,7 +72,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
   return (
     <div
       data-testid="instant-world-entry"
-      style={{ border: `2px solid ${GOLD}`, borderRadius: R.lg, overflow: 'hidden', background: CARD }}
+      style={{ border: `2px solid ${GOLD}`, overflow: 'hidden', background: CARD }}
     >
       {/* ── Header / entry CTA ─────────────────────────────────────────── */}
       <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`, display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
@@ -81,7 +81,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>Instant World</span>
             <span style={{
               fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, letterSpacing: 0.4, textTransform: 'uppercase',
-              color: swatch.white, background: GOLD, borderRadius: R.sm, padding: '2px 6px',
+              color: swatch.white, background: GOLD, padding: '2px 6px',
             }}>
               Premium
             </span>
@@ -119,7 +119,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
               onChange={(e) => setMapKind(e.target.value)}
               style={{
                 fontFamily: sans, fontSize: FS.sm, color: INK, background: CARD,
-                border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, minHeight: 34,
+                border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, minHeight: 34,
               }}
             >
               {MAP_KINDS.map(k => <option key={k.id || 'random'} value={k.id}>{k.label}</option>)}
@@ -134,7 +134,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
                 onChange={(e) => setSeed(e.target.value)}
                 style={{
                   fontFamily: sans, fontSize: FS.sm, color: INK, background: CARD,
-                  border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`, minHeight: 34, minWidth: 140,
+                  border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`, minHeight: 34, minWidth: 140,
                 }}
               />
               <Button variant="ghost" size="sm" onClick={() => setSeed(freshSeed())} data-testid="instant-world-surprise">
@@ -156,7 +156,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             style={{
               padding: isMobile ? `${SP.lg}px 0` : `${SP.md}px 0`,
               background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-              color: swatch.white, border: 'none', borderRadius: R.lg,
+              color: swatch.white, border: 'none',
               fontFamily: serif_, fontSize: isMobile ? 20 : FS.xl, fontWeight: 600,
             }}
           >

@@ -29,9 +29,7 @@ import AlivenessBadge from './AlivenessBadge.jsx';
 import CampaignStatePanel from './CampaignStatePanel.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED,
-  sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
 
 // The age-band vocabulary (domain/ageBands.js), read as a world's age.
 const WORLD_AGE_LABELS = Object.freeze({
@@ -49,7 +47,7 @@ function WorldAgeChip({ band }) {
     <span aria-label={`World age: ${label}`} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
       fontSize: FS.pico, fontWeight: 700, color: SECOND,
-      background: PARCH, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 6px',
+      background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px',
     }}>
       <Castle size={10} aria-hidden="true" /> World {label}
     </span>
@@ -119,7 +117,7 @@ export default function GalleryCampaigns({ onNavigate }) {
     <div style={{ fontFamily: sans }}>
       {notice && (
         <div style={{
-          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md, fontSize: FS.sm,
+          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, fontSize: FS.sm,
           background: notice.kind === 'ok' ? (swatch.successBg || GOLD_BG) : (swatch.dangerBg || GOLD_BG),
           color: notice.kind === 'ok' ? INK : (swatch.danger || RED),
           border: `1px solid ${BORDER}`,
@@ -138,7 +136,7 @@ export default function GalleryCampaigns({ onNavigate }) {
             {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This campaign is no longer available.</p>}
             {!detailLoading && d.slug && (
               <div style={{ display: 'grid', gap: SP.md }}>
-                <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden' }}>
+                <div style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
                   {img && (
                     <div style={{ background: CARD_ALT, maxHeight: 380, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <img src={img} alt={d.imageAlt || d.name || 'Campaign map'} style={{ maxWidth: '100%', maxHeight: 380, display: 'block' }} />
@@ -161,7 +159,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                               {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
                             </Button>
                           ) : (
-                            <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px` }}>
+                            <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
                               {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
                             </span>
                           ))}
@@ -194,7 +192,7 @@ export default function GalleryCampaigns({ onNavigate }) {
       {!viewingSlug && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: SP.md }}>
           {items.map((m) => (
-            <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <div key={m.slug} style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
                 {(m.thumb_url || m.image_url) ? (
                   <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared campaign'} loading="lazy"
@@ -205,7 +203,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                   </div>
                 )}
                 {m.at_war === true && (
-                  <span aria-label="This realm is at war" style={{ position: 'absolute', top: 6, right: 6, display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: RED, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 5px' }}>
+                  <span aria-label="This realm is at war" style={{ position: 'absolute', top: 6, right: 6, display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: RED, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
                     <Swords size={10} aria-hidden="true" /> At war
                   </span>
                 )}
@@ -219,7 +217,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                 <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 5 }}>
                   <WorldAgeChip band={m.world_age} />
                   {Number(m.member_count) > 0 && (
-                    <span aria-label={`${m.member_count} settlements`} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 6px' }}>
+                    <span aria-label={`${m.member_count} settlements`} style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
                       <Users size={10} aria-hidden="true" /> {m.member_count} settlement{m.member_count === 1 ? '' : 's'}
                     </span>
                   )}
@@ -229,7 +227,7 @@ export default function GalleryCampaigns({ onNavigate }) {
                 {Array.isArray(m.tags) && m.tags.length > 0 && (
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
                     {m.tags.slice(0, 4).map((t) => (
-                      <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, borderRadius: R.sm, padding: '1px 5px' }}>{t}</span>
+                      <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
                     ))}
                   </div>
                 )}

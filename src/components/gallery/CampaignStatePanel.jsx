@@ -24,20 +24,7 @@
 import { Activity, BookOpen, CalendarClock, Globe2, MapPin, Sparkles, Swords } from 'lucide-react';
 
 import {
-  BODY,
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  GOLD,
-  GOLD_TXT,
-  INK,
-  R,
-  SECOND,
-  SP,
-  sans,
-} from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_TXT, INK, SECOND, SP, sans } from '../theme.js';
 
 const SECTION_KEYS = Object.freeze(['worldClock', 'dashboard', 'chronicle', 'pantheon', 'warNetwork']);
 
@@ -63,7 +50,7 @@ function Chip({ children, title }) {
   return (
     <span
       title={title}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, borderRadius: R.sm, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: 4, background: CARD_ALT, border: `1px solid ${BORDER2}`, color: BODY, padding: `2px ${SP.xs}px`, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}
     >
       {children}
     </span>
@@ -132,7 +119,7 @@ function ChronicleTick({ entry }) {
   const names = Array.isArray(entry?.affectedSettlementNames) ? entry.affectedSettlementNames : [];
   if (headlines.length === 0) return null;
   return (
-    <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.sm, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
+    <article style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5 }}>
       <div style={{ color: GOLD_TXT, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         Tick {Math.max(0, Math.floor(Number(entry?.tick) || 0))}
       </div>
@@ -181,7 +168,7 @@ function DeityRow({ deity }) {
   const wins = Math.max(0, Math.floor(Number(deity?.wins) || 0));
   const losses = Math.max(0, Math.floor(Number(deity?.losses) || 0));
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 10px', border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '7px 10px', border: `1px solid ${BORDER2}`, background: CARD }}>
       <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
         {deity?.name || 'Unnamed faith'}
       </span>
@@ -224,7 +211,7 @@ function SiegeRow({ siege }) {
     ? `${coalition.slice(0, 2).join(', ')} +${coalition.length - 2}`
     : coalition.join(' and ');
   return (
-    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.sm, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+    <div style={{ padding: '7px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
       <strong>{siege?.targetName || 'A settlement'}</strong> under siege
       {named ? <span style={{ color: BODY }}> by {named}</span> : null}
     </div>
@@ -313,7 +300,7 @@ export default function CampaignStatePanel({ snapshot, sections }) {
   return (
     <section
       data-testid="campaign-state-panel"
-      style={{ display: 'grid', gap: SP.lg, border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg }}
+      style={{ display: 'grid', gap: SP.lg, border: `1px solid ${BORDER}`, background: CARD, padding: SP.lg }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <Activity size={15} color={GOLD} aria-hidden />

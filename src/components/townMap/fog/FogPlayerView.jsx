@@ -16,7 +16,7 @@
  */
 
 import { useMemo } from 'react';
-import { INK, MUTED, CARD, sans, FS, R, SP } from '../../theme.js';
+import { INK, MUTED, CARD, sans, FS, SP } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
 import { DEFAULT_STYLE_ID } from '../../../design/townMapStyles.js';
 import { townMapExportSvg } from '../../../lib/townMapExport.js';
@@ -74,10 +74,10 @@ export default function FogPlayerView({ settlement, reveal = null, styleId = DEF
         <img
           src={dataUrl}
           alt={`Player map of ${(settlement && settlement.name) || 'the settlement'}`}
-          style={{ display: 'block', maxWidth: '100%', maxHeight: '92vh', width: 'auto', height: 'auto', boxShadow: '0 0 40px rgba(0,0,0,0.6)', borderRadius: R.md }}
+          style={{ display: 'block', maxWidth: '100%', maxHeight: '92vh', width: 'auto', height: 'auto', boxShadow: '0 0 40px rgba(0,0,0,0.6)' }}
         />
       ) : (
-        <div style={{ fontSize: FS.md, background: CARD, color: INK, padding: SP.lg, borderRadius: R.md }}>
+        <div style={{ fontSize: FS.md, background: CARD, color: INK, padding: SP.lg }}>
           This settlement has no drawable map.
         </div>
       )}

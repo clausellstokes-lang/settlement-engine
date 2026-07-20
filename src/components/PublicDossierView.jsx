@@ -24,7 +24,7 @@ import Button from './primitives/Button.jsx';
 import Segmented from './primitives/Segmented.jsx';
 import DetailErrorBoundary from './settlementDetail/DetailErrorBoundary.jsx';
 import { TIER_LABELS } from './new/design.js';
-import { INK, BORDER, sans, serif_, SP, R, FS, swatch, PARCH, PARCH_100 } from './theme.js';
+import { INK, BORDER, sans, serif_, SP, FS, swatch, PARCH, PARCH_100 } from './theme.js';
 import { t } from '../copy/index.js';
 
 // SM-4 gallery opt-in — the town map, reused from the library viewer. Lazy: the
@@ -85,7 +85,6 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
         padding: `${SP.md}px ${SP.lg}px`,
         background: `linear-gradient(135deg, ${PARCH} 0%, ${PARCH_100} 100%)`,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.xl,
         display: 'flex', alignItems: 'center', gap: SP.lg,
         flexWrap: 'wrap',
       }}>

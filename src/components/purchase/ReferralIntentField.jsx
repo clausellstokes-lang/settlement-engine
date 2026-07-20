@@ -14,7 +14,7 @@ import Button from '../primitives/Button.jsx';
 // AMBER is this tree's house warning color (design token `warning` = amber-500);
 // it stands in for the incoming tree's AMBER_DEEP (amber-700), which this
 // tree's palette does not mint. The note is small inline text, never a fill.
-import { INK, SECOND, BORDER, sans, SP, R, FS, swatch, AMBER } from '../theme.js';
+import { INK, SECOND, BORDER, sans, SP, FS, swatch, AMBER } from '../theme.js';
 
 /**
  * @param {object} props
@@ -58,7 +58,7 @@ export default function ReferralIntentField({ referral, idPrefix = 'purchase' })
               style={{
                 minHeight: 44,
                 padding: `${SP.sm}px ${SP.md}px`,
-                border: `1px solid ${BORDER}`, borderRadius: R.md,
+                border: `1px solid ${BORDER}`,
                 fontSize: FS.sm, fontFamily: sans, color: INK, fontWeight: 400,
               }}
             />

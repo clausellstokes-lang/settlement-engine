@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 import { AlertTriangle, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { checkDraftEdit } from '../../domain/coherence/checkDraftEdit.js';
-import { GOLD, INK, MUTED, BORDER, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, BORDER, sans, FS, SP, swatch } from '../theme.js';
 
 export default function CoherencePanel() {
   const phase      = useStore(s => s.phase);
@@ -28,7 +28,7 @@ export default function CoherencePanel() {
 
   return (
     <div style={{
-      background: swatch['#FFF7EC'], border: `1px solid ${GOLD}`, borderRadius: R.md,
+      background: swatch['#FFF7EC'], border: `1px solid ${GOLD}`,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -53,7 +53,7 @@ function Warning({ w }) {
   return (
     <div style={{
       padding: SP.xs,
-      background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+      background: swatch.white, border: `1px solid ${BORDER}`,
     }}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
         <Icon size={12} color={color} style={{ marginTop: 2, flexShrink: 0 }} />

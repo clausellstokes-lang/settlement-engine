@@ -27,7 +27,7 @@
  */
 import { Monitor } from 'lucide-react';
 import {
-  BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, MUTED, R, SP, sans,
+  BODY, BORDER, CARD, CARD_ALT, FS, INK, MUTED, SP, sans,
 } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
 
@@ -52,16 +52,13 @@ export default function DesktopOnlyGate({
         gap: SP.md,
         padding: SP.lg,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         background: CARD_ALT,
-        boxShadow: ELEV[1],
       }}
     >
       {iconsOn && (
         <div style={{
           width: 32,
           height: 32,
-          borderRadius: R.lg,
           border: `1px solid ${BORDER}`,
           background: CARD,
           display: 'flex',
@@ -116,7 +113,6 @@ export default function DesktopOnlyGate({
           userSelect: 'none',
           opacity: 0.62,
           border: `1px solid ${BORDER}`,
-          borderRadius: R.lg,
           background: CARD,
           padding: SP.lg,
           overflow: 'hidden',

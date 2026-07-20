@@ -26,9 +26,7 @@ import { auth as authService } from '../../lib/auth.js';
 import { validateRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../../lib/referralRedeem.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, R, FS, swatch,
-  AMBER_DEEP,
-} from '../theme.js';
+  GOLD_BG, GOLD_TXT, INK, BODY, SECOND, BORDER, sans, SP, FS, swatch, AMBER_DEEP } from '../theme.js';
 import { TINT_GOLD, TINT_VIOLET } from './accountTheme.js';
 
 // Matches the "Purchase Credits" block-label idiom in the parent section.
@@ -74,7 +72,7 @@ export function ReferralCard({ auth }) {
     <div style={{ marginTop: SP.lg }}>
       <div style={BLOCK_LABEL}>{t('account.referralLabel')}</div>
       <div style={{
-        background: GOLD_BG, borderRadius: R.lg, padding: SP.lg,
+        background: GOLD_BG, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
         <span style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55, fontFamily: sans }}>
@@ -89,7 +87,7 @@ export function ReferralCard({ auth }) {
               style={{
                 padding: `${SP.xs}px ${SP.sm}px`,
                 background: TINT_GOLD, color: GOLD_TXT,
-                border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                border: `1px solid ${BORDER}`,
                 fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
                 fontSize: FS.sm, fontWeight: 700, letterSpacing: '0.04em',
               }}
@@ -174,7 +172,7 @@ export function RedeemBlock({ onNavigatePricing }) {
     <div style={{ marginTop: SP.lg }}>
       <div style={BLOCK_LABEL}>{t('account.redeemLabel')}</div>
       <div style={{
-        background: TINT_VIOLET, borderRadius: R.lg, padding: SP.lg,
+        background: TINT_VIOLET, padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
         <span style={{ fontSize: FS.xs, color: SECOND, lineHeight: 1.5 }}>
@@ -191,7 +189,7 @@ export function RedeemBlock({ onNavigatePricing }) {
             style={{
               flex: '1 1 180px', minWidth: 180, minHeight: 44,
               padding: `${SP.sm}px ${SP.md}px`,
-              border: `1px solid ${BORDER}`, borderRadius: R.md,
+              border: `1px solid ${BORDER}`,
               fontSize: FS.sm, fontFamily: sans, color: INK,
             }}
           />

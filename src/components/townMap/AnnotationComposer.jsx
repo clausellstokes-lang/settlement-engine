@@ -9,7 +9,7 @@
 import { useCallback, useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
-import { BORDER, BORDER_STRONG, CARD, ELEV, FS, INK, R, SP, sans } from '../theme.js';
+import { BORDER, BORDER_STRONG, CARD, ELEV, FS, INK, SP, sans } from '../theme.js';
 
 /** Keep the popover on-screen near the anchor. */
 function clampPos(x, y, w, h) {
@@ -46,7 +46,7 @@ export default function AnnotationComposer({ composing, onAdd, onCancel }) {
         position: 'fixed', left, top, zIndex: 280, width: 240,
         display: 'flex', flexDirection: 'column', gap: SP.xs,
         padding: SP.sm, background: CARD, border: `1px solid ${BORDER_STRONG}`,
-        borderRadius: R.lg, boxShadow: ELEV[3], fontFamily: sans,
+        boxShadow: ELEV[3], fontFamily: sans,
       }}
     >
       <input
@@ -60,7 +60,7 @@ export default function AnnotationComposer({ composing, onAdd, onCancel }) {
         maxLength={80}
         style={{
           minHeight: 30, padding: '4px 8px', border: `1px solid ${BORDER}`,
-          borderRadius: R.sm, background: CARD, color: INK, fontSize: FS.sm, fontFamily: sans,
+          background: CARD, color: INK, fontSize: FS.sm, fontFamily: sans,
         }}
       />
       <Segmented

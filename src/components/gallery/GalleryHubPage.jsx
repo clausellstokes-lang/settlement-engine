@@ -26,7 +26,7 @@ import { useStore } from '../../store/index.js';
 import GalleryCard from './GalleryCard.jsx';
 import Button from '../primitives/Button.jsx';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { BORDER, CARD, FS, INK, INK_DEEP, MUTED, PAGE_MAX, R, SECOND, SP, sans, serif_ } from '../theme.js';
+import { BORDER, CARD, FS, INK, INK_DEEP, MUTED, PAGE_MAX, SECOND, SP, sans, serif_ } from '../theme.js';
 
 const PAGE_SIZE = 24;
 
@@ -118,7 +118,7 @@ export default function GalleryHubPage({ routeHub }) {
       </header>
 
       {notice && (
-        <div role="status" aria-live="polite" style={{ marginBottom: SP.md, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, color: INK, fontSize: FS.sm }}>
+        <div role="status" aria-live="polite" style={{ marginBottom: SP.md, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD, color: INK, fontSize: FS.sm }}>
           {notice}
         </div>
       )}

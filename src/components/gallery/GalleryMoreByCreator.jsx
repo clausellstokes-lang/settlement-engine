@@ -1,6 +1,6 @@
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
-import { BORDER, CARD, FS, INK, MUTED, R, SP, sans, serif_ } from '../theme.js';
+import { BORDER, CARD, FS, INK, MUTED, SP, sans, serif_ } from '../theme.js';
 import { human } from './galleryUtils.js';
 import GalleryImage from './GalleryImage.jsx';
 
@@ -18,7 +18,7 @@ export default function GalleryMoreByCreator({ items, onOpen }) {
             key={item.slug}
             onClick={() => onOpen(item.slug)}
             aria-label={`Open ${item.name || t('gallery.untitled')}`}
-            style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: 0, textAlign: 'left', cursor: 'pointer' }}
+            style={{ overflow: 'hidden', border: `1px solid ${BORDER}`, background: CARD, padding: 0, textAlign: 'left', cursor: 'pointer' }}
           >
             <GalleryImage item={item} height={100} />
             <div style={{ padding: SP.sm, display: 'grid', gap: 4 }}>

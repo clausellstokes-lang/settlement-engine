@@ -15,7 +15,6 @@ export function SampleCard({ sample, onFork, forking }) {
       background: CARD,
       border: `1px solid ${BORDER}`,
       borderLeft: `3px solid ${GOLD}`,
-      borderRadius: 8,
       padding: '14px 16px',
       display: 'flex', flexDirection: 'column', gap: 8,
       fontFamily: sans,
@@ -55,7 +54,7 @@ export function SampleCard({ sample, onFork, forking }) {
             fontSize: FS.xs, fontWeight: 700, color: SECOND,
             background: swatch['#FAF6EE'],
             border: `1px solid ${BORDER}`,
-            padding: '1px 6px', borderRadius: 4,
+            padding: '1px 6px',
             textTransform: 'uppercase', letterSpacing: '0.05em',
           }}>
             {tag}

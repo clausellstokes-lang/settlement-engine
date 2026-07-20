@@ -5,7 +5,7 @@
  * responses. DeltaRow is also reused by BatchCart, so it is exported.
  */
 
-import { SP, CARD, GOLD, R, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
+import { SP, CARD, GOLD, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
 import { vetoProse } from '../../../domain/events/affordanceManifest.js';
 import { PARTY, PARTY_BG } from './helpers.js';
 
@@ -17,7 +17,7 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
-      background: CARD, border: `1px solid ${vetoed ? swatch.danger : GOLD}`, borderRadius: R.sm,
+      background: CARD, border: `1px solid ${vetoed ? swatch.danger : GOLD}`,
       // THE STALENESS LAW (§5): a preview whose payload-key or settlement
       // diverged is visibly voided — grayed while the live re-derivation lands.
       opacity: stale ? 0.55 : 1,

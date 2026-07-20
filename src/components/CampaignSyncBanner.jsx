@@ -15,7 +15,7 @@
  */
 import { X, RefreshCw } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { RED, RED_BG, AMBER, AMBER_BG, FS, R, SP, sans, ELEV } from './theme.js';
+import { RED, AMBER, PARCH, FS, SP, sans } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import Button from './primitives/Button.jsx';
 
@@ -51,10 +51,10 @@ export default function CampaignSyncBanner() {
         zIndex: 260, maxWidth: 'min(92vw, 560px)',
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm}px ${SP.md}px`,
-        border: `1px solid ${danger ? RED : AMBER}`, borderRadius: R.lg,
-        background: danger ? RED_BG : AMBER_BG, color: danger ? RED : AMBER,
+        border: `1px solid ${danger ? RED : AMBER}`,
+        borderLeft: `3px solid ${danger ? RED : AMBER}`,
+        background: PARCH, color: danger ? RED : AMBER,
         fontFamily: sans, fontSize: FS.sm, fontWeight: 700,
-        boxShadow: ELEV[2],
       }}
     >
       <span style={{ flex: 1 }}>

@@ -1,6 +1,6 @@
 import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
-import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
+import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import Badge from './Badge.jsx';
 
 export default function Disclosure({
@@ -33,7 +33,6 @@ export default function Disclosure({
     <section
       style={{
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         background: CARD,
         overflow: 'hidden',
         ...style,

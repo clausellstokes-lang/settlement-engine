@@ -12,7 +12,7 @@
 
 import { X, Check } from 'lucide-react';
 import Button from '../../primitives/Button.jsx';
-import { INK, CARD, sans, FS, SP, R, swatch } from '../../theme.js';
+import { INK, CARD, sans, FS, SP, swatch } from '../../theme.js';
 
 export function ApplyControls({
   type, phase, isLinkNeighbour, canSubmit, settlement,
@@ -31,7 +31,7 @@ export function ApplyControls({
         Preview
       </Button>
       {isDestroy && (
-        <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, borderRadius: R.sm, background: swatch.dangerBg }}>
+        <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, background: swatch.dangerBg }}>
           <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
             ⚠ This destroys {settlement?.name || 'the settlement'} — services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
           </div>
@@ -40,7 +40,7 @@ export function ApplyControls({
             onChange={(e) => setDestroyConfirm(e.target.value)}
             placeholder={`Type "${settlement?.name || ''}" to confirm`}
             aria-label="Type the settlement name to confirm destruction"
-            style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, borderRadius: 4, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
+            style={{ width: '100%', padding: '5px 8px', border: `1px solid ${swatch.danger}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, boxSizing: 'border-box' }}
           />
         </div>
       )}

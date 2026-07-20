@@ -82,7 +82,6 @@ function Card({ accent = null, children }) {
       background: swatch.white,
       border: `1px solid ${BORDER}`,
       borderLeft: accent ? `4px solid ${accent}` : `1px solid ${BORDER}`,
-      borderRadius: 6,
     }}>
       {children}
     </div>
@@ -290,7 +289,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
             <div style={{
               padding: '12px 16px', background: swatch.white,
               border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD_ACCENT}`,
-              borderRadius: 6, fontFamily: serif, fontSize: FS.xl,
+              fontFamily: serif, fontSize: FS.xl,
               fontStyle: 'italic', color: INK_DEEP, lineHeight: 1.5,
             }}>
               {settlement.pressureSentence}
@@ -322,7 +321,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   {dims.map(([name, d]) => (
                     <div key={name} style={{
                       flex: '1 1 140px', padding: '8px 10px', background: swatch.white,
-                      border: `1px solid ${BORDER}`, borderRadius: 6,
+                      border: `1px solid ${BORDER}`,
                     }}>
                       <div style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase', color: MUTED }}>{name}</div>
                       <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.lg, color: BAND_TONE[d.band] || INK }}>

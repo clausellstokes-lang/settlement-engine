@@ -47,7 +47,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
         // add to the list's box-soup or out-rank the page header above it.
         display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
         padding: '7px 12px', background: swatch['#FBF5E6'],
-        borderRadius: 7, fontFamily: sans, fontSize: FS.xs, color: INK,
+        fontFamily: sans, fontSize: FS.xs, color: INK,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1, minWidth: 200 }}>
@@ -82,7 +82,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
           aria-valuemin={0}
           aria-valuemax={max}
           aria-valuetext={`${Math.max(0, max - used)} of ${max} saves left on ${getTierDisplayName(tier)}${used >= max ? '. at cap' : ''}`}
-          style={{ flex: '0 1 140px', minWidth: 100, height: 7, background: swatch['#E8D9B0'], borderRadius: 4, overflow: 'hidden' }}
+          style={{ flex: '0 1 140px', minWidth: 100, height: 7, background: swatch['#E8D9B0'], overflow: 'hidden' }}
         >
           <div style={{
             width: `${Math.min(100, max > 0 ? (used / max) * 100 : 0)}%`, height: '100%',
@@ -111,7 +111,7 @@ export default function SaveQuotaMeter({ tier, used, max, onUpgrade, onSignIn })
             // strip's demotion (P5). GOLD_BG fill + bold GOLD_TXT carry it,
             // matching the card pips' tint-only pattern.
             display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, color: GOLD_TXT,
-            fontWeight: 700, background: GOLD_BG, borderRadius: 8, padding: '2px 8px',
+            fontWeight: 700, background: GOLD_BG, padding: '2px 8px',
           }}>
             {PREMIUM_PITCH}
           </span>

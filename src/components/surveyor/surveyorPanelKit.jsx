@@ -10,7 +10,7 @@
 
 import { Sparkles } from 'lucide-react';
 import { t } from '../../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans, serif_, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans, serif_, SP, FS } from '../theme.js';
 import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -151,7 +151,7 @@ export function AnchorChip({ label }) {
       aria-label={label}
       style={{
         fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
-        border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px`,
+        border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       }}
     >
@@ -191,7 +191,7 @@ export function PromptArea({ value, onChange, label, placeholder, rows = 3, disa
       rows={rows}
       disabled={disabled}
       style={{
-        width: '100%', boxSizing: 'border-box', resize: 'vertical', borderRadius: R.md,
+        width: '100%', boxSizing: 'border-box', resize: 'vertical',
         border: `1px solid ${BORDER}`, background: disabled ? CARD_ALT : '#fff', color: INK,
         padding: SP.sm, fontSize: FS.sm, fontFamily: sans, lineHeight: 1.5,
       }}

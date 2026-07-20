@@ -26,8 +26,7 @@
 import { Shield, ChevronRight } from 'lucide-react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  INK, SECOND, MUTED, BORDER, GOLD_TXT, GOLD_SOFT, FS, R, SP, sans,
-} from '../theme.js';
+  INK, SECOND, MUTED, BORDER, GOLD_TXT, GOLD_SOFT, FS, SP, sans } from '../theme.js';
 import { space } from '../../design/tokens.js';
 import Button from '../primitives/Button.jsx';
 import MobileTabStrip from '../primitives/MobileTabStrip.jsx';
@@ -100,7 +99,6 @@ export default function AccountNav({
               fontWeight: active ? 800 : 600,
               color: active ? GOLD_TXT : SECOND,
               background: active ? GOLD_SOFT : 'transparent',
-              borderRadius: R.lg,
             }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>{label}</span>

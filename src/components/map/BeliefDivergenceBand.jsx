@@ -33,7 +33,7 @@ import { Eye } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { settlementBeliefs, hasBeliefMaps } from '../../domain/display/settlementBeliefs.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 
 const CONFIDENCE_LABEL = { certain: 'certain', confident: 'confident', uncertain: 'uncertain', vague: 'only a vague sense' };
 const STALENESS_LABEL = { current: 'current', aging: 'aging', stale: 'stale' };
@@ -59,7 +59,7 @@ function BeliefRow({ belief }) {
   return (
     <article style={{
       border: `1px solid ${divergence.length ? GOLD : BORDER}`,
-      borderRadius: R.sm, background: divergence.length ? GOLD_BG : CARD,
+      background: divergence.length ? GOLD_BG : CARD,
       padding: '8px 10px',
     }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
@@ -122,7 +122,7 @@ export default function BeliefDivergenceBand({ campaign, nameById }) {
       </p>
       {observers.map((o) => (
         <div key={o.observerId} style={{
-          border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT, padding: '9px 11px',
+          border: `1px solid ${BORDER}`, background: CARD_ALT, padding: '9px 11px',
           display: 'grid', gap: 6,
         }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>

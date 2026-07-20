@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { BODY, BORDER2, CARD, FS, GOLD, GOLD_BG, INK, MUTED, R, sans } from '../theme.js';
+import { BODY, BORDER2, CARD, FS, GOLD, GOLD_BG, INK, MUTED, sans } from '../theme.js';
 
 /**
  * One living-world subsystem gate (War / Settlement Strategy / Religion) rendered
@@ -20,7 +20,6 @@ export default function GateToggle({ checked, label, description, onChange, disa
       gap: 4,
       padding: '10px 12px',
       border: `1px solid ${checked ? GOLD : BORDER2}`,
-      borderRadius: R.md,
       background: checked ? GOLD_BG : CARD,
       cursor: disabled ? 'default' : 'pointer',
       opacity: disabled ? 0.85 : 1,

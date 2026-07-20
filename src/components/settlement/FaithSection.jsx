@@ -51,9 +51,9 @@ function Meter({ label, value, color = GOLD }) {
       <div
         role="img"
         aria-label={`${label}: ${pct} percent`}
-        style={{ height: 4, borderRadius: 2, background: BORDER2, overflow: 'hidden' }}
+        style={{ height: 4, background: BORDER2, overflow: 'hidden' }}
       >
-        <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 2 }} />
+        <div style={{ width: `${pct}%`, height: '100%', background: color }} />
       </div>
     </div>
   );
@@ -79,7 +79,7 @@ function ActiveFaith({ model }) {
       data-testid="faith-section"
       style={{
         marginTop: 16, background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
-        borderRadius: 8, overflow: 'hidden', fontFamily: sans,
+        overflow: 'hidden', fontFamily: sans,
       }}
     >
       <header style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 13px', borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
@@ -177,7 +177,7 @@ function ActiveFaith({ model }) {
                 <div
                   role="img"
                   aria-label={`${d.name} adherent share ${d.share} percent`}
-                  style={{ height: 5, background: BORDER2, borderRadius: 3, overflow: 'hidden', marginTop: 2 }}
+                  style={{ height: 5, background: BORDER2, overflow: 'hidden', marginTop: 2 }}
                 >
                   <div style={{ width: `${Math.max(0, Math.min(100, d.share))}%`, height: '100%', background: d.isPatron ? GOLD : SECOND }} />
                 </div>
@@ -233,7 +233,7 @@ function FaithTeaser({ publicDossier }) {
       data-testid="faith-teaser"
       style={{
         marginTop: 16, background: CARD_ALT, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${BORDER2}`,
-        borderRadius: 8, padding: '11px 13px', fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 6,
+        padding: '11px 13px', fontFamily: sans, display: 'flex', flexDirection: 'column', gap: 6,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>

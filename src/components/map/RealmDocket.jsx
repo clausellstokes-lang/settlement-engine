@@ -13,7 +13,7 @@
 import { useMemo, useState } from 'react';
 import { CalendarClock, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import { t } from '../../copy/index.js';
@@ -47,7 +47,7 @@ export default function RealmDocket({ campaign }) {
 
   return (
     <div style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+      background: CARD, border: `1px solid ${BORDER}`,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -66,7 +66,7 @@ export default function RealmDocket({ campaign }) {
       {taught && (
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
-          padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+          padding: SP.sm, border: `1px dashed ${BORDER}`,
           fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmDocket')}</span>
@@ -98,10 +98,10 @@ export default function RealmDocket({ campaign }) {
               <div key={item.queueId} style={{
                 display: 'flex', alignItems: 'center', gap: 8,
                 padding: SP.sm, background: CARD,
-                border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                border: `1px solid ${BORDER}`,
               }}>
                 <span style={{
-                  padding: '1px 6px', borderRadius: R.sm, border: `1px solid ${BORDER}`,
+                  padding: '1px 6px', border: `1px solid ${BORDER}`,
                   fontSize: FS.xxs, fontFamily: sans, color: MUTED, whiteSpace: 'nowrap',
                 }}>
                   {name}
@@ -111,7 +111,7 @@ export default function RealmDocket({ campaign }) {
                   {lapsed && (
                     <>
                       <span style={{
-                        marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
+                        marginLeft: 8, padding: '1px 6px',
                         border: `1px solid ${BORDER}`, color: MUTED,
                         fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
                       }}>

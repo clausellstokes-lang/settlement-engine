@@ -19,7 +19,6 @@ export function SampleDashboard({ onFork, forkingId }) {
       padding: '20px 16px',
       background: 'rgba(255,251,245,0.96)',
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
     }}>
       {/* W-GUIDE-2 §8: the empty library greets the keeper in the Surveyor's
           note register (registered whisper library_empty_invitation). A margin

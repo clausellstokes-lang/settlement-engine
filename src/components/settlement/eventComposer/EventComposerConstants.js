@@ -8,7 +8,7 @@
  */
 
 import { Plus, Trash2, Flame, AlertOctagon, MapPinOff } from 'lucide-react';
-import { GOLD, INK, MUTED, BORDER, sans, FS, SP, R, swatch } from '../../theme.js';
+import { GOLD, INK, MUTED, BORDER, sans, FS, SP, swatch } from '../../theme.js';
 
 export const _TYPE_ICONS = {
   ADD_INSTITUTION:    Plus,
@@ -36,7 +36,7 @@ export {
 export const CUSTOM_RESOURCE_OPTION = '__custom_resource__';
 
 export const inputStyle = {
-  padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
+  padding: '4px 8px', border: `1px solid ${BORDER}`,
   fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180, background: '#fff',
 };
 export const selectStyle = { ...inputStyle, minWidth: 180 };
@@ -44,12 +44,12 @@ export const selectStyle = { ...inputStyle, minWidth: 180 };
 // store-hooks-state-1) — blocking, danger-toned, keeps the form.
 export const refusalBoxStyle = {
   marginTop: SP.sm, padding: '8px 10px', border: `1px solid ${swatch.danger}`,
-  borderRadius: R.sm, background: swatch.dangerBg,
+  background: swatch.dangerBg,
   fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
 };
 export const pickedChipStyle = {
   display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 4,
-  padding: '3px 8px', border: `1px solid ${GOLD}`, borderRadius: R.sm,
+  padding: '3px 8px', border: `1px solid ${GOLD}`,
   fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700, background: swatch['#FAF8F4'],
 };
 export const chipClearBtn = {
@@ -61,7 +61,7 @@ export function primaryBtn(disabled) {
     padding: '5px 12px',
     background: disabled ? '#eee' : GOLD,
     color: disabled ? '#999' : '#fff',
-    border: 'none', borderRadius: R.sm,
+    border: 'none',
     fontSize: FS.xs, fontWeight: 700, fontFamily: sans,
     cursor: disabled ? 'not-allowed' : 'pointer',
   };
@@ -69,12 +69,12 @@ export function primaryBtn(disabled) {
 export const confirmBtn = {
   display: 'inline-flex', alignItems: 'center', gap: 4,
   padding: '5px 12px', background: '#1a5a28', color: '#fff',
-  border: 'none', borderRadius: R.sm,
+  border: 'none',
   fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
 };
 export const cancelBtn = {
   display: 'inline-flex', alignItems: 'center', gap: 4,
   padding: '5px 12px', background: '#fff', color: INK,
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
+  border: `1px solid ${BORDER}`,
   fontSize: FS.xs, fontWeight: 700, fontFamily: sans, cursor: 'pointer',
 };

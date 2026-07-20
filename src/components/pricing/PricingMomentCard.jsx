@@ -23,7 +23,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED, CHROME, bottomClearance } from '../theme.js';
+import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, MUTED, CHROME, bottomClearance } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
@@ -126,7 +126,6 @@ export default function PricingMomentCard() {
         background: swatch.white,
         border: `1px solid ${BORDER}`,
         borderLeft: `4px solid ${accent}`,
-        borderRadius: R.md,
         padding: SP.md,
         boxShadow: '0 8px 24px rgba(27, 20, 8, 0.18)',
         transform: exiting ? 'translateY(20px)' : 'translateY(0)',

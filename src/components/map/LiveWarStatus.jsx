@@ -47,7 +47,6 @@ function StatusRow({ tone = 'neutral', heading, detail }) {
       padding: '8px 10px',
       border: `1px solid ${BORDER2}`,
       borderLeft: `3px solid ${accent}`,
-      borderRadius: 6,
       background: CARD,
     }}>
       <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
@@ -163,7 +162,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 return (
                   <span key={`disp-${s.id}`} style={{
                     display: 'inline-flex', alignItems: 'center', gap: 5,
-                    padding: '3px 8px', borderRadius: 6,
+                    padding: '3px 8px',
                     border: `1px solid ${BORDER2}`,
                     background: aggressor ? swatch.dangerBg : CARD_ALT,
                     color: aggressor ? RED : BODY,

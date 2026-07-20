@@ -24,7 +24,7 @@
  */
 
 import { useStore } from '../../store';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, swatch } from '../theme.js';
 import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff, Lock } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
@@ -79,7 +79,7 @@ export default function RoutesToolbar() {
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`,
     }}>
       {/* Eyebrow */}
       <div style={{
@@ -115,13 +115,12 @@ export default function RoutesToolbar() {
                 padding: '3px 8px',
                 background: active ? `${rt.color}1A` : 'transparent',
                 border: `1px solid ${active ? rt.color : BORDER2}`,
-                borderRadius: R.sm,
                 color: active ? INK : SECOND,
                 fontWeight: active ? 700 : 500,
               }}
             >
               <span style={{
-                width: 8, height: 8, borderRadius: 4,
+                width: 8, height: 8,
                 background: rt.color,
                 opacity: active ? 1 : 0.45,
               }} />
@@ -180,7 +179,6 @@ export default function RoutesToolbar() {
           background: 'rgba(162,52,52,0.08)',
           border: '1px solid rgba(162,52,52,0.35)',
           borderLeft: '3px solid #A23434',
-          borderRadius: R.sm,
           fontSize: FS.xs, fontFamily: sans,
         }}>
           <AlertTriangle size={11} color="#A23434" />

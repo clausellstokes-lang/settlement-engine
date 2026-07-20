@@ -80,7 +80,7 @@ export default function RegionalCausalChainViewer({
   if (!model.rows.length) return null;
 
   return (
-    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, borderRadius: 6, background: CARD, overflow: 'hidden' }}>
+    <div style={{ marginTop: 9, border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
       <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -189,7 +189,6 @@ export default function RegionalCausalChainViewer({
                   gap: 7,
                   padding: '7px 8px',
                   borderTop: `1px solid ${BORDER}`,
-                  borderRadius: 5,
                   background: GOLD_BG,
                 }}>
                   <DetailBlock
@@ -245,7 +244,6 @@ export default function RegionalCausalChainViewer({
 
 const selectStyle = {
   border: `1px solid ${BORDER}`,
-  borderRadius: 5,
   background: CARD,
   color: SECOND,
   fontFamily: sans,

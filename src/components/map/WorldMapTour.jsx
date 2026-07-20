@@ -12,7 +12,7 @@
  * centered card. No manual memoization — the React Compiler handles it.
  */
 import { useEffect, useState } from 'react';
-import { GOLD, INK, BODY, CARD, BORDER, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, BODY, CARD, BORDER, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const DONE_KEY = 'sf_worldmap_tour_done';
@@ -82,7 +82,7 @@ export default function WorldMapTour({ open, steps = [], onClose }) {
           position: 'fixed',
           top: rect.top - PAD, left: rect.left - PAD,
           width: rect.width + PAD * 2, height: rect.height + PAD * 2,
-          borderRadius: R.sm, border: `2px solid ${GOLD}`,
+          border: `2px solid ${GOLD}`,
           boxShadow: '0 0 0 9999px rgba(20,14,6,0.62)',
           pointerEvents: 'none', transition: 'all 0.18s ease',
         }} />
@@ -92,7 +92,7 @@ export default function WorldMapTour({ open, steps = [], onClose }) {
 
       <div style={{
         position: 'fixed', top: tip.top, left: tip.left, width: TIP_W,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        background: CARD, border: `1px solid ${BORDER}`,
         boxShadow: '0 8px 28px rgba(0,0,0,0.45)', padding: SP.lg, fontFamily: sans,
       }}>
         <div style={{ fontSize: FS.xxs, fontWeight: 700, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>

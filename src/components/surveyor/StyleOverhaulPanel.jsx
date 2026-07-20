@@ -19,7 +19,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { slugify } from '../../kernel/slugify.js';
-import { MUTED, BORDER, CARD_ALT, GREEN, sans, SP, R, FS } from '../theme.js';
+import { MUTED, BORDER, CARD_ALT, GREEN, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import Badge from '../primitives/Badge.jsx';
@@ -157,7 +157,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
               data-testid="style-preview"
               role="img"
               aria-label={lens === CANDIDATE_LENS ? 'Map preview under the candidate style' : `Map preview under the ${LENS_LABEL[lens] || lens} base lens`}
-              style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden', background: CARD_ALT }}
+              style={{ border: `1px solid ${BORDER}`, overflow: 'hidden', background: CARD_ALT }}
               dangerouslySetInnerHTML={{ __html: previewSvg }}
             />
           ) : (
@@ -184,7 +184,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
               value={styleName}
               onChange={(e) => setStyleName(e.target.value)}
               placeholder="Name this style"
-              style={{ flex: 1, minWidth: 120, fontSize: FS.sm, fontFamily: sans, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `4px ${SP.sm}px` }}
+              style={{ flex: 1, minWidth: 120, fontSize: FS.sm, fontFamily: sans, border: `1px solid ${BORDER}`, padding: `4px ${SP.sm}px` }}
             />
             <Button variant="primary" size="sm" disabled={!styleName.trim()} onClick={accept}>Accept & save</Button>
             <Button variant="ghost" size="sm" onClick={decline}>Decline</Button>

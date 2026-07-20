@@ -25,7 +25,7 @@ import { Sun, Swords, ArrowRight } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import DeityAssignmentPanel from '../settlement/DeityAssignmentPanel.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, R, SP, SECOND, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SP, SECOND, sans } from '../theme.js';
 
 // components-map-4: the war/diplomacy steering verbs SHIPPED with W-COMPOSER-2 —
 // they now live in Realm Orders (the World Pulse composer). This surface points
@@ -80,7 +80,7 @@ export default function AssignDeityFromMap({ campaign }) {
                 if (m) hydrateFromSave(m.save);
               }}
               style={{
-                width: '100%', padding: '8px 10px', minHeight: 36, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                width: '100%', padding: '8px 10px', minHeight: 36, border: `1px solid ${BORDER}`,
                 fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD,
               }}
             >
@@ -105,7 +105,7 @@ export default function AssignDeityFromMap({ campaign }) {
 
       {/* ── War & diplomacy steering: SHIPPED — now in Realm Orders ────────── */}
       <div style={{
-        border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: SP.sm,
+        border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: SP.sm,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>
           <Swords size={12} /> War &amp; diplomacy steering
@@ -119,7 +119,7 @@ export default function AssignDeityFromMap({ campaign }) {
               key={label}
               title="Available in Realm Orders (the World Pulse composer) — staged, previewed, and undoable."
               style={{
-                padding: '3px 8px', border: `1px solid ${BORDER2}`, borderRadius: R.sm,
+                padding: '3px 8px', border: `1px solid ${BORDER2}`,
                 background: CARD, color: INK, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
               }}
             >

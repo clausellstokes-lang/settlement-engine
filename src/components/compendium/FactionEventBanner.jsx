@@ -24,7 +24,6 @@ export default function FactionEventBanner() {
     <div style={{
       marginBottom: 10, padding: '9px 12px',
       background: `${FACTION}0F`, border: `1px solid ${FACTION}44`, borderLeft: `3px solid ${FACTION}`,
-      borderRadius: 7,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: FACTION, textTransform: 'uppercase', letterSpacing: '0.05em' }}>

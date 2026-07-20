@@ -16,9 +16,7 @@
 
 import { getActiveAiCosts, TIERS } from '../../config/pricing.js';
 import {
-  getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths,
-  SURVEYOR_SURFACE,
-} from '../../config/pricingDisplay.js';
+  getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths, SURVEYOR_SURFACE, } from '../../config/pricingDisplay.js';
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
@@ -26,9 +24,7 @@ import { isConfigured } from '../../lib/supabase.js';
 import { tp } from '../../copy/pricingPage.js';
 import { t } from '../../copy/index.js';
 import {
-  GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, R, FS, BODY,
-  SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX,
-} from '../theme.js';
+  GOLD, GOLD_DEEP, INK, BORDER, sans, serif_, SP, FS, BODY, SLATE, SLATE_BG, SLATE_DEEP, PROSE_MAX } from '../theme.js';
 import { space } from '../../design/tokens.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import Button from '../primitives/Button.jsx';
@@ -52,7 +48,6 @@ export function SurveyorBand({ onSeeMenu }) {
         flex: '1 1 240px', minWidth: 240, maxWidth: 320,
         background: SURVEYOR_SLATE_BG,
         border: `1px solid ${SURVEYOR_SLATE}`,
-        borderRadius: R.xl,
         padding: `${SP.md}px ${SP.lg}px ${SP.lg}px`,
         display: 'flex', flexDirection: 'column', gap: SP.md,
       }}

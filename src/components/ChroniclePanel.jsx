@@ -28,7 +28,7 @@ import { nameOf } from '../domain/rulingPower.js';
 const BORDER = swatch['#E0D0B0'];
 const INK    = swatch['#1C1409'];
 const MUTED  = swatch['#9C8068'];
-const CARD   = 'rgba(255,251,245,0.96)';
+const CARD   = swatch['#FFFBF5'];
 
 const REASON_META = {
   initial:     { label: 'Initial',     color: '#1a5a28', Icon: Sparkles },
@@ -90,7 +90,7 @@ function Chip({ color, Icon, children, filled = false, title }) {
   return (
     <span title={title} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      padding: '2px 8px', borderRadius: 11, fontSize: FS.xxs, fontWeight: 800,
+      padding: '2px 8px', fontSize: FS.xxs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase',
       color: filled ? '#fff' : color,
       background: filled ? color : `${color}18`,
@@ -161,15 +161,14 @@ function FullEntryModal({ entry, onClose }) {
         aria-label="Chronicle entry details"
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
+          background: CARD, border: `1px solid ${BORDER}`,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',
-          boxShadow: '0 12px 48px rgba(0,0,0,0.45)',
         }}
       >
         {/* Header */}
         <div style={{
           padding: '12px 18px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 100%)',
-          display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(196,154,60,0.2)',
+          display: 'flex', alignItems: 'center', gap: 10, borderBottom: `1px solid ${swatch['#C49A3C']}33`,
         }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS['18'], fontWeight: 600, color: swatch['#C49A3C'] }}>
@@ -188,7 +187,7 @@ function FullEntryModal({ entry, onClose }) {
         {/* Body */}
         <div style={{ padding: '16px 22px', overflowY: 'auto', flex: 1 }}>
           {entry.triggeredBy && (
-            <div style={{ marginBottom: 12, padding: '6px 10px', background: 'rgba(106,42,154,0.08)', border: '1px solid rgba(106,42,154,0.2)', borderRadius: 5, fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
+            <div style={{ marginBottom: 12, padding: '6px 10px', background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`, borderLeft: '3px solid #5A6E82', fontSize: FS.xs, color: swatch.ai, fontFamily: 'Nunito, sans-serif' }}>
               <strong>Triggered by:</strong> {entry.triggeredBy}
             </div>
           )}
@@ -288,7 +287,6 @@ function EntryCard({ entry, onOpen }) {
       background: CARD,
       border: `1px solid ${BORDER}`,
       borderLeft: `3px solid ${meta.color}`,
-      borderRadius: 6,
       marginBottom: 8,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
@@ -341,7 +339,7 @@ export default function ChroniclePanel({ entries }) {
     // cluster), so the parent's gap owns the spacing — a baked-in marginBottom
     // double-counted it and broke the spacing rhythm (P5). The border stays: this
     // is a genuinely-interactive collapsible (a click target earns it).
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
       <button
         type="button"
         aria-expanded={open}

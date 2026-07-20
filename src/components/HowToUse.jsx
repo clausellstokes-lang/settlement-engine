@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Zap, Star, List, Scale, HelpCircle, Globe } from 'lucide-react';
-import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, PROSE_MAX, sans, serif_, FS, swatch } from './theme.js';
+import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, PAGE_MAX, PROSE_MAX, sans, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
@@ -31,7 +31,7 @@ const TABS = [
 
 function Insight({ title, children }) {
   return (
-    <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`, borderRadius:7,
+    <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
       padding:'10px 12px', background:CARD, marginBottom:14, ...NO_BREAK }}>
       <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD, textTransform:'uppercase',
         letterSpacing:'0.06em', marginBottom:5 }}>{title}</div>
@@ -55,7 +55,7 @@ function Step({ n, children }) {
 function Tip({ children }) {
   return (
     <div style={{ padding:'8px 12px', background:`${GOLD}10`, border:`1px solid ${GOLD}40`,
-      borderLeft:`3px solid ${GOLD}`, borderRadius:5, marginTop:12 }}>
+      borderLeft:`3px solid ${GOLD}`, marginTop:12 }}>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>{children}</p>
     </div>
   );
@@ -79,7 +79,7 @@ function QuickTab() {
 
   const conceptIntro = (
     <div style={{ padding:'12px 14px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
-      borderRadius:7, marginBottom:14 }}>
+      marginBottom:14 }}>
       <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:6 }}>
         A settlement generator that thinks. And stays within your constraints.
       </div>
@@ -399,8 +399,8 @@ export default function HowToUse({ standalone=false }) {
         </p>
       </div>
 
-      <div style={{ background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl,
-        boxShadow:ELEV[1], overflow:'hidden' }}>
+      <div style={{ background:CARD, border:`1px solid ${BOR}`,
+        overflow:'hidden' }}>
         {/* Tab bar */}
         <div className="tab-strip" role="tablist" aria-label="Guide sections"
           style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
@@ -433,7 +433,7 @@ export default function HowToUse({ standalone=false }) {
   );
 
   return (
-    <div style={{ borderRadius:8, overflow:'hidden' }}>
+    <div style={{ overflow:'hidden' }}>
       <>
         {/* Tab bar */}
         <div role="tablist" aria-label="Guide sections"
