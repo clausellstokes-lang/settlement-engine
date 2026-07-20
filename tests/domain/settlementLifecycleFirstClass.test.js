@@ -278,6 +278,15 @@ describe('the death writer (scarcity + fates + geometry status)', () => {
     expect(evt.description).toContain('fates unresolved');
   });
 
+  it('the death event carries authored lasting-effects prose (not an empty array)', () => {
+    const dead = applySettlementLifecycleOutcomeToSettlement(thorp('a', { peakTier: 'city' }), deathOutcome());
+    const evt = (dead.history.historicalEvents || []).find((e) => e.campaignEra);
+    expect(Array.isArray(evt.lastingEffects)).toBe(true);
+    expect(evt.lastingEffects.length).toBeGreaterThan(0);              // authored, not the old []
+    expect(evt.lastingEffects.every((s) => typeof s === 'string')).toBe(true); // string-array contract
+    expect(evt.lastingEffects.join(' ')).not.toMatch(/undefined/);    // undefined-prose guard
+  });
+
   it('death is a STATUS: population 0, institutions deactivated-not-erased, conditions cleared, stamps dual-written', () => {
     const s = thorp('a', {
       peakTier: 'city', population: 18,

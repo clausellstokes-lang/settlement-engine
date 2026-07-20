@@ -9,16 +9,20 @@
  * points. The dossier Polish/Narrate lane is the owner-named carve-out and does not route
  * through here.
  *
- * ENTITLEMENT (owner-ratified twice, 2026-07-18): the door and everything behind it are
- * SURVEYOR-gated and the marker RENDERS ONLY for Surveyor-tier users — no lock-tease, no
- * placeholder; the left margin is simply empty for everyone else. AI-tier discovery lives
- * on Pricing + tierFacts surfaces, never as in-app chrome.
- * ⚠ FINDING (recorded in the C13 report): the code ladder has NO Surveyor tier constant —
- * subscription tiers are 'anon' | 'free' | 'premium' (store/authSlice.js TIER_GATE), and
- * pricingDisplay.js states "Surveyor is NOT a subscription tier". `isSurveyorTier` below
- * is the ONE chokepoint mapping the ruling's "surveyor premium" onto the only paid tier
- * in the ladder ('premium', which elevated roles already resolve to). If the owner means
- * a different entitlement, this predicate is the single line to flip.
+ * ENTITLEMENT (owner ruling 2026-07-19, FINAL — supersedes the premium-as-Surveyor
+ * ratification): the door and everything behind it render ONLY for (a) a live Surveyor
+ * entitlement, (b) Founders, or (c) elevated roles (dev/admin, who carry perpetual
+ * premium and must reach the surface to test it). A CARTOGRAPHER 'premium' subscription
+ * is EXCLUDED — it gets no door, not shown and not functional. No lock-tease, no
+ * placeholder; the left margin is simply empty for everyone else. AI-tier discovery
+ * lives on Pricing + tierFacts surfaces, never as in-app chrome.
+ * THE DISCRIMINATOR (audit 2026-07-19): the client tier field ('anon'|'free'|'premium')
+ * conflates Cartographer and Surveyor as 'premium', so bare tier==='premium' is
+ * INSUFFICIENT. The Surveyor bit is surfaced separately via has_surveyor_entitlement()
+ * (surveyor_entitlements, migration 139) — read LAZILY by useSurveyorEntitled (kept off
+ * the eager auth closure to hold the first-paint budget at zero delta) and combined
+ * with the eager is_founder / role through the isSurveyorTier chokepoint
+ * (surveyorGate.js), re-exported here for the C13 consumers + contract test.
  *
  * Styling: shape/elevation/hover-reveal live in index.css (.sf-door-*) — the kill-list
  * ratchet (tests/design/deepCraftKillList.test.js) freezes the inline corner-radius /
@@ -30,21 +34,21 @@
 
 import { useState } from 'react';
 import { X } from 'lucide-react';
-import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import { CARD, SLATE, SLATE_DEEP, MUTED, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { AnchorChip, PromptArea } from './surveyorPanelKit.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
+import { useSurveyorEntitled } from './useSurveyorEntitled.js';
 import { routeDoorPrompt } from '../../domain/intent/doorRouter.js';
 import AiAnalystPanel from '../AiAnalystPanel.jsx';
 import SurveyorWorkshop from './SurveyorWorkshop.jsx';
 
-/** The ONE entitlement chokepoint (see the FINDING in the header). */
-export function isSurveyorTier(tier) {
-  return tier === 'premium';
-}
+// The ONE entitlement chokepoint lives in surveyorGate.js (a pure, import-free
+// predicate, kept off the eager closure). Re-exported here so the C13 consumers
+// and the door contract test keep importing it from the door module.
+export { isSurveyorTier } from './surveyorGate.js';
 
 export default function SurveyorDoor({ visible = true }) {
   const [promptOpen, setPromptOpen] = useState(false);
@@ -53,10 +57,10 @@ export default function SurveyorDoor({ visible = true }) {
   const [dest, setDest] = useState(null);
   // Remount destinations per routing so initial* props re-seed (panels stay dumb).
   const [nonce, setNonce] = useState(0);
-  const tier = useStore((s) => s.auth.tier);
+  const surveyorEntitled = useSurveyorEntitled();
   const { anchorLabel } = useSurveyorContext();
 
-  if (!visible || !isSurveyorTier(tier)) return null;
+  if (!visible || !surveyorEntitled) return null;
 
   const openDestination = (routed, promptText) => {
     setDest(routed.destination === 'analyst'

@@ -18,6 +18,12 @@ import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
+// Screen-reader-only clip (the hidden caption + column heads) and a zero-box
+// <th> style so the folder table carries accessible column semantics without
+// painting a visible header row.
+const SR_ONLY = { position:'absolute', width:1, height:1, padding:0, margin:-1, overflow:'hidden', clip:'rect(0 0 0 0)', whiteSpace:'nowrap', border:0 };
+const HIDDEN_TH = { padding:0, border:0, height:0, lineHeight:0 };
+
 // ── Campaign Folder ──────────────────────────────────────────────────────────
 export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, onCreateCampaign, onNavigate, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
   const worldState = campaign?.worldState || null;
@@ -216,7 +222,22 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           ) : (
           <div style={{ overflowX:'auto', maxWidth:PROSE_MAX }}>
             <table style={{ width:'100%', borderCollapse:'collapse' }}>
-              <caption style={{ position:'absolute', width:1, height:1, padding:0, margin:-1, overflow:'hidden', clip:'rect(0 0 0 0)', whiteSpace:'nowrap', border:0 }}>Settlements in {campaign.name}</caption>
+              <caption style={SR_ONLY}>Settlements in {campaign.name}</caption>
+              {/* Column heads are stated for screen readers but kept visually
+                  hidden — the folder header already names the campaign, so the
+                  design does not repeat the heads on screen. Mirrors the visible
+                  UnassignedLedger head (same SettlementCard columns) so both
+                  ledgers announce identical column semantics. */}
+              <thead>
+                <tr>
+                  {selectMode && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Select</span></th>}
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Settlement</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Tier</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Phase</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Standing</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Actions</span></th>
+                </tr>
+              </thead>
               <tbody>
           {settlements.map(s => (
             <SettlementCard key={s.id} s={s} allModifiers={allModifiers}

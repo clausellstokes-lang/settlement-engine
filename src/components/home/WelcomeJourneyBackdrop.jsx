@@ -22,9 +22,11 @@
  * keeps the full stills journey — the floor serves film-on and film-off alike.
  */
 
+import { useEffect, useRef } from 'react';
 import { flag } from '../../lib/flags.js';
 import { JourneyFilmView } from '../loadingJourney/JourneyFilm.jsx';
 import { useScrollJourney } from '../loadingJourney/useScrollJourney.js';
+import { trackLandingJourneyStop } from '../../lib/landingFunnelAnalytics.js';
 
 // Kept in sync with tests/build/loadingJourneyLazy.test.js (WELCOME_FINGERPRINT).
 export const WELCOME_JOURNEY_FINGERPRINT = '::welcome-journey:v1:';
@@ -37,6 +39,20 @@ export default function WelcomeJourneyBackdrop({ rootRef }) {
   const filmEnabled = flag('welcomeJourneyFilm');
   const useBgSet = flag('loadingJourneySetBg');
   const frame = useScrollJourney({ rootRef, legs: WELCOME_LEGS });
+
+  // Funnel depth: emit one journey_stop as each new stop is first reached. The
+  // floor still is monotonic as the viewer scrolls down, so tracking its running
+  // max fires each intermediate stop exactly once (the helper double-dedups per
+  // session). Independent of the film toggle — the stills journey has the same
+  // stops, so film-off funnels are measured too.
+  const maxStopRef = useRef(0);
+  const stop = frame.floorStill | 0;
+  useEffect(() => {
+    if (stop > maxStopRef.current) {
+      for (let s = maxStopRef.current + 1; s <= stop; s++) trackLandingJourneyStop(s);
+      maxStopRef.current = stop;
+    }
+  }, [stop]);
 
   return (
     <div

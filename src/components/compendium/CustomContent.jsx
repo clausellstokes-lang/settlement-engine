@@ -159,9 +159,10 @@ const FIELD_LABELS = {
 };
 
 // ── Read-only viewer for grandfathered local items (free tier) ─────────────
-export function ReadOnlyCustomContentList({ search }) {
+export function ReadOnlyCustomContentList({ search, initialCat }) {
   const customContent = useStore(s => s.customContent);
-  const [activeCat, setActiveCat] = useState('institutions');
+  // Seed the active bucket from a validated ?cat= deep-link; institutions otherwise.
+  const [activeCat, setActiveCat] = useState(() => (initialCat && CUSTOM_CATEGORIES.some(c => c.key === initialCat) ? initialCat : 'institutions'));
   const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
   const items = customContent[activeCat] || [];
   const filtered = search
@@ -254,7 +255,7 @@ const CATEGORY_BY_KEY = Object.fromEntries(CUSTOM_CATEGORIES.map((c) => [c.key, 
 // Buckets with a prebuilt catalog to clone from ("start from a built-in").
 const SEEDABLE = new Set(['institutions', 'services', 'resources', 'stressors', 'tradeGoods']);
 
-export function CustomContentManager({ search }) {
+export function CustomContentManager({ search, initialCat }) {
   const customContent = useStore(s => s.customContent);
   const addCustomItem = useStore(s => s.addCustomItem);
   const updateCustomItem = useStore(s => s.updateCustomItem);
@@ -265,7 +266,9 @@ export function CustomContentManager({ search }) {
   const customContentError = useStore(s => s.customContentError);
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
 
-  const [activeCat, setActiveCat] = useState('institutions');
+  // Seed the active bucket from a validated ?cat= deep-link so an "Author a X"
+  // link opens straight on that bucket; falls back to institutions otherwise.
+  const [activeCat, setActiveCat] = useState(() => (initialCat && CATEGORY_BY_KEY[initialCat] ? initialCat : 'institutions'));
   const [addingNew, setAddingNew] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);

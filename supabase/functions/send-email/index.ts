@@ -161,6 +161,30 @@ const TEMPLATES: Record<string, { subject: string; text: string }> = {
       "— SettlementForge",
     ].join("\n"),
   },
+
+  // Retention warning (downgrade-transition audit 2.2) — kept in sync with
+  // src/lib/emailTemplates.js. Authenticated template (recipient from auth.uid()).
+  retention_warning: {
+    subject: "Your retained settlements expire soon",
+    text: [
+      "Hello {displayName},",
+      "",
+      "Your account has returned to the free tier, so settlements beyond your",
+      "free slots are held in read-only retention. They will be permanently",
+      "removed after {retentionUntil} unless you act.",
+      "",
+      "To keep them, you can:",
+      "  • Reactivate or export a retained settlement from your library:",
+      "    https://settlementforge.com/settlements",
+      "  • Resubscribe to restore full access to every retained settlement:",
+      "    https://settlementforge.com/pricing",
+      "",
+      "Your simulator output is untouched — retention only limits how many",
+      "settlements stay in your live library.",
+      "",
+      "— SettlementForge",
+    ].join("\n"),
+  },
 };
 
 // Templates that don't require an authenticated caller. These accept

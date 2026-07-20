@@ -100,25 +100,31 @@ export default function WhatChangedPanel({ settlement, priorSettlement, before, 
       </div>
 
       <div style={{ padding: SP.md }}>
-        {model.deltas.length > 0 ? (
-          <ul data-testid="what-changed-list" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
-            {model.deltas.map(entry => (
-              <li
-                key={entry.variable}
-                data-variable={entry.variable}
-                style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, marginBottom: 4 }}
-              >
-                <span style={{ color: deltaColor(entry), fontWeight: 800, marginRight: 4 }}>
-                  {entry.change > 0 ? `+${entry.change}` : entry.change}
-                </span>
-                {entry.explanation}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div style={{ fontSize: FS.sm, color: MUTED }}>
-            The causal substrate held steady. No variable moved.
-          </div>
+        {/* The causal-diff block is shown ONLY when a real prior snapshot was
+            compared (hasPrior). Without one, "held steady" would be a quiet lie —
+            we didn't compare, we just lack the before. In that case only the
+            population arc below reports change. */}
+        {model.hasPrior && (
+          model.deltas.length > 0 ? (
+            <ul data-testid="what-changed-list" style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+              {model.deltas.map(entry => (
+                <li
+                  key={entry.variable}
+                  data-variable={entry.variable}
+                  style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, marginBottom: 4 }}
+                >
+                  <span style={{ color: deltaColor(entry), fontWeight: 800, marginRight: 4 }}>
+                    {entry.change > 0 ? `+${entry.change}` : entry.change}
+                  </span>
+                  {entry.explanation}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div style={{ fontSize: FS.sm, color: MUTED }}>
+              The causal substrate held steady. No variable moved.
+            </div>
+          )
         )}
 
         {model.history.length >= 2 && (

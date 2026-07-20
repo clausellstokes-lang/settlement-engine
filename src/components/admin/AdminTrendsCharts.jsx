@@ -237,7 +237,7 @@ export function Heatmap({ rows }) {
           <tr>
             <th aria-label="row versus column" style={{ padding: SP.xs }} />
             {colKeys.map((c) => (
-              <th key={c} style={{ padding: SP.xs, color: MUTED, fontWeight: 600, textAlign: 'center', maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c}>{c}</th>
+              <th key={c} scope="col" style={{ padding: SP.xs, color: MUTED, fontWeight: 600, textAlign: 'center', maxWidth: 64, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={c}>{c}</th>
             ))}
           </tr>
         </thead>

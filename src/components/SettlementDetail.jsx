@@ -33,6 +33,7 @@ const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
 import SettlementDossierHero from './settlementDetail/SettlementDossierHero.jsx';
 import { renameDetailSettlement } from './settlements/helpers.js';
 import ChroniclePanel from './ChroniclePanel.jsx';
+import WhatChangedPanel from './settlement/WhatChangedPanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
@@ -729,6 +730,13 @@ export default function SettlementDetail({
         isCanonLocked={isCanonLocked}
         handleApplyRename={handleApplyRename}
       />
+
+      {/* ── What changed & why: the erratum-slip read of the last world move.
+             Self-gates to null unless the settlement carries a population arc or
+             a prior causal snapshot, so a fresh/never-advanced town shows nothing
+             extra. Sits above the Chronicle annals (the correction slip precedes
+             the log). ── */}
+      <WhatChangedPanel settlement={detail.settlement} />
 
       {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
       {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
