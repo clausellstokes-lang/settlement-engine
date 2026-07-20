@@ -46,6 +46,8 @@ import { createAccountImportSlice } from './accountImportSlice.js';
 import { createFogEditSlice }       from './fogEditSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
 import { setCustomContentSource }   from '../lib/customContentSource.js';
+import { setCrashForensics }        from '../lib/errorReporter.js';
+import { buildCrashForensics }      from '../lib/crashForensics.js';
 import { saves as savesService }    from '../lib/saves.js';
 
 export const useStore = create(
@@ -128,6 +130,13 @@ export const useStore = create(
 // the first-paint closure. The lazy registry reads the getter off the seam
 // when it loads with its real consumers.
 setCustomContentSource(() => useStore.getState().customContent);
+
+// R-14 CRASH FORENSICS: register the reproduction-coordinate provider so any
+// client error report carries the active world's seed + tick + flags_on. Reads
+// only scalars off the live state; errorReporter whitelists again before send —
+// never world state, never PII. (errorReporter stays store-free; the store
+// injects the reader, mirroring the custom-content seam above.)
+setCrashForensics(() => buildCrashForensics(useStore.getState()));
 
 // ── P101 / X-3 — Auth intent handlers ───────────────────────────────────
 // Register handlers for post-auth pending intents. Keep authIntents itself

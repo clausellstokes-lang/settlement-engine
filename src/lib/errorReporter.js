@@ -13,6 +13,18 @@
  * Sentry tunnel, Logflare, etc.). The payload is intentionally tiny and
  * PII-light: message, stack, componentStack, url, user-agent, timestamp,
  * release. The reporter never throws.
+ *
+ * R-14 CRASH FORENSICS BY CONSTRUCTION: because the world is deterministic, a
+ * crash reproduces locally from FOUR small values — seed + tick + flags_on +
+ * build hash (`release`). The store registers a forensics provider at boot
+ * (setCrashForensics); reportError snapshots it and WHITELISTS three scalar
+ * fields (`forensics: { seed, tick, flags_on }`) into the payload — with the
+ * `release` build hash that is already captured, those four values regenerate the
+ * exact world state a crash happened in. The whitelist is the no-leak guarantee
+ * BY CONSTRUCTION: even if the provider returns a fat object, only the three
+ * type-coerced scalars survive — never world state, never PII (the prop-hygiene
+ * law). @enforced-by tests/lib/errorReporter.test.js (the forensics shape +
+ * no-state pins).
  */
 
 const ENDPOINT =
@@ -24,6 +36,55 @@ function safe(fn) {
   } catch {
     return undefined;
   }
+}
+
+// ── R-14 crash-forensics seam ────────────────────────────────────────────────
+// The store registers a provider at boot returning the reproduction coordinates
+// of the active world. errorReporter stays store-/React-free (a pure lib), so the
+// store injects the reader rather than this module importing the store.
+/** @type {(() => unknown) | null} */
+let _forensicsProvider = null;
+
+/**
+ * Register the crash-forensics provider (called once at store init). The provider
+ * returns the active world's reproduction coordinates; whatever else it returns is
+ * discarded by the whitelist in `forensicsSnapshot`.
+ * @param {(() => unknown) | null | undefined} provider
+ */
+export function setCrashForensics(provider) {
+  _forensicsProvider = typeof provider === 'function' ? provider : null;
+}
+
+const SEED_MAX = 200;      // seeds are short opaque generation strings; cap defensively
+const FLAGS_MAX = 100;     // the flag registry is ~30 entries; cap far above it
+
+/**
+ * Snapshot the forensics provider and WHITELIST it to exactly three type-coerced
+ * scalar fields. This is the structural no-leak guarantee: no matter what the
+ * provider returns, only { seed, tick, flags_on } — all primitives — can escape
+ * into the payload. Never throws (a broken provider yields an empty snapshot).
+ * @returns {{ seed?: string, tick?: number, flags_on?: string[] }}
+ */
+function forensicsSnapshot() {
+  const raw = safe(() => (_forensicsProvider ? _forensicsProvider() : null));
+  if (!raw || typeof raw !== 'object') return {};
+  const out = {};
+  // seed — a string or number generation coordinate only.
+  const seed = /** @type {any} */ (raw).seed;
+  if (typeof seed === 'string' || typeof seed === 'number') {
+    const s = String(seed).slice(0, SEED_MAX);
+    if (s) out.seed = s;
+  }
+  // tick — a finite world-clock integer only.
+  const tick = /** @type {any} */ (raw).tick;
+  if (typeof tick === 'number' && Number.isFinite(tick)) out.tick = tick;
+  // flags_on — a bounded array of flag NAMES (strings) only; never values/objects.
+  const flags = /** @type {any} */ (raw).flags_on;
+  if (Array.isArray(flags)) {
+    const names = flags.filter((f) => typeof f === 'string').slice(0, FLAGS_MAX);
+    out.flags_on = names;
+  }
+  return out;
 }
 
 // Dedup + per-session cap on the NETWORK send only (never the local console): a
@@ -53,7 +114,12 @@ export function reportError(error, context = {}) {
     url: safe(() => location.origin + location.pathname) || '',
     ua: safe(() => navigator.userAgent) || '',
     ts: safe(() => new Date().toISOString()) || '',
+    // The build hash — the fourth reproduction value alongside forensics below.
     release: safe(() => import.meta.env.VITE_RELEASE) || '',
+    // R-14: seed + tick + flags_on — the three world-reproduction coordinates,
+    // whitelisted to scalars (never world state, never PII). Absent when no
+    // provider is registered (SSR / pre-boot / self-host with none wired).
+    forensics: forensicsSnapshot(),
   };
 
   // Always surface locally (no-console is intentionally off in this repo).
