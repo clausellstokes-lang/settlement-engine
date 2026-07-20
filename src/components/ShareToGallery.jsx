@@ -15,9 +15,13 @@
  */
 
 import { useMemo, useState } from 'react';
-import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
+import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save, Link2 } from 'lucide-react';
 import { useStore } from '../store/index.js';
-import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
+import {
+  publishSettlement, unpublishSettlement, updateGalleryMetadata,
+  shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
+} from '../lib/gallery.js';
+import UnlistedShareBar from './gallery/UnlistedShareBar.jsx';
 import { t } from '../copy/index.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
@@ -79,6 +83,11 @@ export default function ShareToGallery({
   saveId,
   isPublic: isPublicProp,
   publicSlug: slugProp,
+  // V-20 UNLISTED SHARING — optional round-trip of the party-link state from the
+  // saved row. Callers that don't thread it still work (the unlisted state is
+  // entered via the button; persistence-across-reload is the light follow-on).
+  visibility: visibilityProp = 'public',
+  unlistedSlug: unlistedSlugProp = null,
   campaignState = null,
   settlement = null,
   galleryDescription = '',
@@ -108,6 +117,10 @@ export default function ShareToGallery({
 
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
+  // V-20 unlisted (party-link) state.
+  const [isUnlisted, setIsUnlisted]   = useState(visibilityProp === 'unlisted');
+  const [unlistedSlug, setUnlistedSlug] = useState(unlistedSlugProp || null);
+  const [unlistedCopied, setUnlistedCopied] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
   const [description, setDescription] = useState(galleryDescription || '');
   // Gallery display title (migration 147) — empty falls back to the settlement
@@ -335,6 +348,59 @@ export default function ShareToGallery({
       .catch(() => { /* clipboard refused; nothing to do */ });
   }
 
+  // ── V-20 UNLISTED SHARING (party link) ────────────────────────────────────
+  async function handleShareUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await shareSettlementUnlisted(saveId);
+      setUnlistedSlug(newSlug);
+      setIsUnlisted(true);
+      setIsPublic(false); // sharing unlisted removes it from the public gallery
+      try { updateSavedSettlement?.(saveId, { is_public: false, visibility: 'unlisted', unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not create the unlisted link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleRotateUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      const newSlug = await rotateSettlementUnlistedSlug(saveId);
+      setUnlistedSlug(newSlug);
+      try { updateSavedSettlement?.(saveId, { unlisted_slug: newSlug }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not rotate the link');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleStopUnlisted() {
+    setBusy(true); setError(null);
+    try {
+      await revokeSettlementUnlisted(saveId);
+      setIsUnlisted(false);
+      setUnlistedSlug(null);
+      try { updateSavedSettlement?.(saveId, { visibility: 'public', unlisted_slug: null }); } catch { /* non-fatal */ }
+    } catch (e) {
+      setError(e.message || 'Could not stop the unlisted share');
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function handleCopyUnlisted() {
+    if (!unlistedSlug || typeof navigator === 'undefined' || !navigator.clipboard) return;
+    navigator.clipboard.writeText(publicUrlFor(unlistedSlug))
+      .then(() => {
+        setUnlistedCopied(true);
+        setTimeout(() => setUnlistedCopied(false), 2000);
+      })
+      .catch(() => { /* clipboard refused */ });
+  }
+
   const detailsForm = detailsOpen && (
     <div style={{
       width: '100%',
@@ -492,6 +558,20 @@ export default function ShareToGallery({
     </div>
   );
 
+  // V-20 UNLISTED state — party link: copy + rotate (revoke) + stop sharing.
+  if (isUnlisted && unlistedSlug) {
+    return (
+      <UnlistedShareBar
+        copied={unlistedCopied}
+        busy={busy}
+        error={error}
+        onCopy={handleCopyUnlisted}
+        onRotate={handleRotateUnlisted}
+        onStop={handleStopUnlisted}
+      />
+    );
+  }
+
   // Published state — show "Public" badge + copy link + unshare.
   if (isPublic && slug) {
     return (
@@ -571,6 +651,15 @@ export default function ShareToGallery({
         icon={<Globe size={12} />}
       >
         {busy ? 'Publishing…' : 'Share to gallery'}
+      </Button>
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={handleShareUnlisted}
+        busy={busy}
+        icon={<Link2 size={12} />}
+      >
+        Unlisted link
       </Button>
       <Button
         variant="ghost"

@@ -4,6 +4,8 @@ import {
   fetchPublicDossier,
   fetchPublicGallery,
   fetchMyGallery,
+  fetchMyUnlistedDossiers,
+  fetchFeaturedGallery,
   reportGalleryDossier,
   toggleGalleryVote,
   toggleGalleryReaction,
@@ -24,6 +26,10 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
   hasImage: false,
   hasComments: false,
   curatedOnly: false,
+  // V-13 — "Featured only": the admin-featured hero set (hidden-until-occupied:
+  // when nothing is featured, the feed is simply empty). Swaps to
+  // list_featured_dossiers.
+  featuredOnly: false,
   // Owner import opt-in + patron-deity presence facets (migrations 047/063).
   importable: false,
   hasDeity: false,
@@ -31,6 +37,10 @@ export const EMPTY_GALLERY_FILTERS = Object.freeze({
   // owner-scoped list_my_gallery_dossiers RPC (ignored by the public feed's
   // server-side filter normalizer, which allowlists keys).
   mine: false,
+  // V-20 — "My Unlisted": the PRIVATE/UNLISTED filter (owner amendment). Swaps
+  // the feed for list_my_unlisted_dossiers — the ONLY listing path that ever
+  // surfaces the owner's unlisted rows (every other listing excludes them).
+  unlistedMine: false,
 });
 
 const PAGE_SIZE = 24;
@@ -92,15 +102,21 @@ export function useGalleryPageState(routeSlug = null) {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- spinner on query change
     setListLoading(true); // show the spinner immediately on a query change
     const mine = !!galleryQuery.filters?.mine;
-    const run = mine
-      ? fetchMyGallery()
-      : fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
+    const unlistedMine = !!galleryQuery.filters?.unlistedMine;
+    const featuredOnly = !!galleryQuery.filters?.featuredOnly;
+    // Owner/curated lists each return their whole set at once (no pagination).
+    const oneShot = mine || unlistedMine || featuredOnly;
+    let run;
+    if (unlistedMine) run = fetchMyUnlistedDossiers().then(list => ({ items: list, hasMore: false, total: list.length }));
+    else if (featuredOnly) run = fetchFeaturedGallery().then(list => ({ items: list, hasMore: false, total: list.length }));
+    else if (mine) run = fetchMyGallery();
+    else run = fetchPublicGallery({ page: 0, pageSize: PAGE_SIZE, excludeCurated: false, ...galleryQuery });
     run
       .then(res => {
         if (cancelled || queryGenRef.current !== gen) return;
         setItems(res.items);
         setTotal(res.total ?? res.items.length);
-        setHasMore(mine ? false : res.hasMore);
+        setHasMore(oneShot ? false : res.hasMore);
         setPage(0);
         setListError(null);
       })
@@ -184,7 +200,7 @@ export function useGalleryPageState(routeSlug = null) {
   }, [routeSlug, openDossier]);
 
   const loadMore = useCallback(async () => {
-    if (galleryQuery.filters?.mine) return; // My Settlements returns all at once
+    if (galleryQuery.filters?.mine || galleryQuery.filters?.unlistedMine || galleryQuery.filters?.featuredOnly) return; // owner/featured lists return all at once
     const nextPage = page + 1;
     const gen = queryGenRef.current; // snapshot the query generation
     setListLoading(true);

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Check, Eye, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
+import { Check, Eye, Link2, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -113,6 +113,23 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 fontWeight: 950,
               }}>
                 <Sparkles size={10} /> Curated
+              </span>
+            )}
+            {item.unlisted && (
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 3,
+                minHeight: 24,
+                padding: '3px 7px',
+                background: CARD,
+                color: SECOND,
+                border: `1px solid ${BORDER2}`,
+                fontFamily: sans,
+                fontSize: FS.xxs,
+                fontWeight: 950,
+              }}>
+                <Link2 size={10} /> Unlisted
               </span>
             )}
           </div>

@@ -56,6 +56,10 @@ const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'
 // The public Founder seat-lineage page. Lazy — off the first-paint graph; its lineage
 // read (lib/founderLineage.js) is dynamically imported on mount and fails closed.
 const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
+// THE SEED POST (V-13): /world/<code> regenerates a shared world client-side.
+// Lazy — its dynamic import of the composer/engine stays off the first-paint graph
+// (tests/build/worldPageLazy.test.js).
+const WorldPage         = lazy(() => import('./components/WorldPage.jsx'));
 
 export function Loading() {
   // The diegetic loading emblem — the still house device over the plain word
@@ -100,6 +104,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersPage onNavigate={setView} />}
+      {view === 'world'       && <WorldPage code={params.code} onNavigate={setView} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
       {/* /refunds is retired as a standalone page — its content is now the Terms

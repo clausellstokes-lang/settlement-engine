@@ -61,6 +61,11 @@ export const ROUTES = Object.freeze([
   // indexable, footer-linked (no top-nav block), no guard. Lazy route; its lineage
   // read is fail-closed (components/founders/FoundersPage.jsx).
   { view: 'founders',              path: '/founders',              title: 'Founders' },
+  // THE SEED POST (V-13): a shareable world lives at /world/<code>. Public + no
+  // guard — the code regenerates the identical world client-side (no server
+  // state). The bare /world base exists so viewToPath/titleForView resolve; the
+  // param route below carries the code. Lazy route (components/WorldPage.jsx).
+  { view: 'world',                 path: '/world',                 title: 'Shared World' },
   // Legal / trust pages. Public + indexable (no nav block — they live in the
   // footer, not the top nav; no guard — anyone can read them). Content is
   // derived from the actual product behavior (see components/legal/*).
@@ -101,6 +106,8 @@ const PARAM_ROUTES = Object.freeze([
   { view: 'gallery', re: /^\/gallery\/(terrain|tier)\/([a-z0-9_-]+)$/, build: m => ({ hub: { facet: m[1], value: m[2] } }) },
   { view: 'gallery', re: /^\/gallery\/(at-war|most-alive)$/, build: m => ({ hub: { facet: m[1] } }) },
   { view: 'gallery', re: /^\/gallery\/([^/]+)$/, build: m => ({ slug: decodeURIComponent(m[1]) }) },
+  // THE SEED POST (V-13): /world/<share-code> → the World replay page.
+  { view: 'world', re: /^\/world\/([^/]+)$/, build: m => ({ code: decodeURIComponent(m[1]) }) },
 ]);
 
 // Old view ids that have since been renamed map here (old → new). The single
@@ -164,6 +171,10 @@ export function viewToPath(view, params) {
   }
   if (params && params.id && view === 'settlements') {
     return `/settlements/${encodeURIComponent(params.id)}`;
+  }
+  // THE SEED POST (V-13): /world/<share-code>.
+  if (params && params.code && view === 'world') {
+    return `/world/${encodeURIComponent(params.code)}`;
   }
   const r = VIEW_TO_ROUTE[view];
   return r ? r.path : VIEW_TO_ROUTE[DEFAULT_VIEW].path;

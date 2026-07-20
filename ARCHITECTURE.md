@@ -181,7 +181,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (167) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (168) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
@@ -225,8 +225,8 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 ## The gate
 
 `npm run check` = `validate:data && validate:migration-head && validate:edge &&
-validate:map && typecheck && typecheck:domain:strict && lint && test && build &&
-verify:dist`.
+validate:map && validate:foundry-module && validate:mcp-server && typecheck &&
+typecheck:domain:strict && lint && test && build && verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
@@ -236,6 +236,12 @@ verify:dist`.
   the built `_shared` bundle wiring).
 - **validate:map** — the vendored Azgaar FMG map fork stays within its pinned
   contract.
+- **validate:foundry-module** — the standalone `foundry-module/` package (the
+  world importer) is well-formed and safe (module.json valid, importer parses, no
+  content-into-code) — an out-of-app-gates top-level dir like `public/map`.
+- **validate:mcp-server** — the standalone `mcp-server/` package (the local Truth
+  Server) is dependency-free, parses, has no write/network path, and its tool
+  manifest is read-only by construction (no mutating tool exists).
 - **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
   tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
   punch-list reached zero, so the gate was switched to full coverage;

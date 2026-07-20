@@ -110,10 +110,13 @@ function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
     <>
       {isSignedIn && (
         <SidebarSection title="Yours">
-          <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
+          <div style={{ display: 'grid', gap: 8 }}>
+            <ToggleRow checked={!!filters.mine} label="My settlements only" onChange={value => onToggleBool('mine', value)} />
+            <ToggleRow checked={!!filters.unlistedMine} label="My unlisted only" onChange={value => onToggleBool('unlistedMine', value)} />
+          </div>
         </SidebarSection>
       )}
-      {!filters.mine && (<>
+      {!filters.mine && !filters.unlistedMine && (<>
       <SidebarSection title="Tier" count={filters.tier?.length || 0}>
         <FilterChips options={TIER_OPTIONS} value={filters.tier} onToggle={option => onToggleArray('tier', option)} />
       </SidebarSection>
@@ -136,6 +139,7 @@ function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
           <ToggleRow checked={filters.curatedOnly} label="Curated only" onChange={value => onToggleBool('curatedOnly', value)} />
+          <ToggleRow checked={filters.featuredOnly} label="Featured only" onChange={value => onToggleBool('featuredOnly', value)} />
         </div>
       </SidebarSection>
       </>)}
