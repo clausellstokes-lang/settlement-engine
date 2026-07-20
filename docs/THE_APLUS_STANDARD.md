@@ -39,6 +39,15 @@ every future hand — including its authors'.
     proven against real history (the museum), not fixtures.
 13. CLAIMS-VS-ENFORCEMENT PARITY — the documentation cannot lie: every claim
     mechanically bound to its enforcing gate; marketing is a projection of the suite.
+14. DISCOVERABILITY — the product is its own best advertisement to machines as well
+    as people (AMENDED IN 2026-07-20, the owner's catch): every public truth
+    crawlable, structured (JSON-LD where it earns rank), and fast for crawlers; the
+    compendium functions as the organic funnel — indexable, receipt-true,
+    enumeration-deep; every shareable artifact (seed post, letter, gallery world)
+    UNFURLS beautifully (OG/social cards pinned, not hoped); the sitemap cannot go
+    stale (freshness pinned); and nothing findable lies (13 applies to search
+    snippets too). Ceiling doctrine: rankings belong to time and links — this bar
+    grades everything findability-shaped that the REPO controls.
 
 ## The meta-criterion ("across the board")
 THE STANDARD MUST SURVIVE ITS AUTHORS. Every bar a ratchet, every promise an enforcer,
