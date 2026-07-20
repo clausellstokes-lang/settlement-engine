@@ -28,6 +28,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
@@ -53,7 +54,9 @@ const INSTITUTION_CLASSES = Object.freeze({
 export function institutionClassValue(/** @type {any} */ settlement, /** @type {any} */ className) {
   const re = INSTITUTION_CLASSES[/** @type {keyof typeof INSTITUTION_CLASSES} */ (className)];
   if (!re) return 0;
-  const count = (settlement?.institutions || [])
+  // LIVE roster only — a calamity-ruined garrison/temple/court supplies no capacity to
+  // gate stressor mitigation (siege relief, famine, faith, admin, …) (ruin-filter class).
+  const count = liveInstitutions(settlement)
     .filter((/** @type {any} */ inst) => re.test(String(inst?.name || ''))).length;
   return Math.min(1, count / 2);
 }

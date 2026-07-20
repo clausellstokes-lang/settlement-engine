@@ -1,6 +1,6 @@
 {
-  "total": 2228,
-  "totalAny": 2189,
+  "total": 2242,
+  "totalAny": 2203,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -195,6 +195,10 @@
       "any": 0,
       "suppress": 4
     },
+    "src/domain/institutions/institutionRoster.js": {
+      "any": 1,
+      "suppress": 0
+    },
     "src/domain/magicLedger.js": {
       "any": 1,
       "suppress": 0
@@ -220,7 +224,7 @@
       "suppress": 0
     },
     "src/domain/region/discoverDependencyCandidates.js": {
-      "any": 6,
+      "any": 4,
       "suppress": 0
     },
     "src/domain/region/graph.js": {
@@ -335,12 +339,20 @@
       "any": 7,
       "suppress": 0
     },
+    "src/domain/worldPulse/eliteBleed.js": {
+      "any": 2,
+      "suppress": 0
+    },
     "src/domain/worldPulse/factionCapture.js": {
       "any": 21,
       "suppress": 0
     },
     "src/domain/worldPulse/factionCompetition.js": {
       "any": 93,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/factionPairLedger.js": {
+      "any": 9,
       "suppress": 0
     },
     "src/domain/worldPulse/feasibilityGate.js": {
@@ -428,7 +440,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/relationshipEvolution.js": {
-      "any": 21,
+      "any": 24,
       "suppress": 0
     },
     "src/domain/worldPulse/relationshipHierarchy.js": {
@@ -537,6 +549,10 @@
     },
     "src/domain/worldPulse/tradeWar.js": {
       "any": 19,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/traditionsKernel.js": {
+      "any": 1,
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {

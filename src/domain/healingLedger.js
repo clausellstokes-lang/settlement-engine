@@ -16,6 +16,8 @@
  * so unlike the other ledgers there is no present-gate on the count.
  */
 
+import { liveInstitutions } from './institutions/institutionRoster.js';
+
 /**
  * Canonical healing-institution classifier. Single source of truth for "what name reads as a
  * healing-capable institution" across every healing lens.
@@ -47,7 +49,9 @@ export const HEALING_INSTITUTION_PATTERN =
  * @returns {HealingLedger}
  */
 export function healingLedger(settlement) {
-  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // LIVE roster only — a calamity-ruined temple/hospital/infirmary is not a live healer
+  // (ruin-filter class). `present` below still reads the raw roster (existence, not liveness).
+  const inst = liveInstitutions(settlement);
   const healerCount = inst.filter(i => HEALING_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
   const svc = settlement?.economicState?.availableServices?.healing
            ?? settlement?.availableServices?.healing;

@@ -818,12 +818,19 @@ export function exposedCorruptionForPair(worldState, fromId, toId, tick) {
  * spuriously re-point on an unresolvable name). Pure.
  * @param {{ foreign?: boolean, settlementId?: string|null }} leash
  * @param {{ byId?: { get?: (id: string) => unknown }, settlements?: Array<Record<string, unknown>> } | null | undefined} snapshot
+ * @param {Record<string, unknown> | null | undefined} [occupations]  worldState.occupations, keyed by settlement id
  * @returns {boolean}
  */
-export function foreignEndpointLive(leash, snapshot) {
+export function foreignEndpointLive(leash, snapshot, occupations) {
   if (!leash || leash.foreign !== true) return true; // not a foreign leash — not our concern
   const sid = leash.settlementId != null ? String(leash.settlementId) : '';
   if (!sid) return true; // pure faction endpoint — unverifiable, never spuriously re-point
+  // An occupied endpoint no longer commands its arm. The real occupation state lives in
+  // worldState.occupations[sid] (mercenaryMarket/martialReadiness read it the same way) —
+  // the old `s.occupiedBy/s.occupation/s.conqueredBy` fields are NEVER written, so that
+  // check was dead and an occupied patron's leash never collapsed. Absent map ⇒ no
+  // occupations this tick ⇒ not occupied (byte-identical dormancy).
+  if (occupations != null && occupations[sid] != null) return false;
   // Resolve from byId (the kernel snapshot) or the settlements array (the causeLifecycle snapshot).
   const fromById = snapshot?.byId?.get?.(sid);
   const item = fromById != null
@@ -833,7 +840,6 @@ export function foreignEndpointLive(leash, snapshot) {
   const s = asObject(asObject(item).settlement);
   const status = String(s.status || '').toLowerCase();
   if (DEAD_ENDPOINT_STATUS.has(status)) return false;
-  if (s.occupiedBy != null || s.occupation != null || s.conqueredBy != null) return false; // occupied ⇒ no longer commands its arm
   return true;
 }
 

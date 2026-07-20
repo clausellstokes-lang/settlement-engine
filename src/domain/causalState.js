@@ -46,6 +46,7 @@
  */
 
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deityLawDirection, DEITY_LAW_TUNING } from './corruption.js';
 import { deriveAllActiveConditions } from './activeConditions.js';
@@ -818,7 +819,8 @@ function deriveLawOrder(s) {
   // Law/order institutions — courts, the watch, magistrates, gaols give the law
   // teeth. Id-first (rename-proof) via institutionClassify; a DM-renamed-but-stamped
   // court still counts. id-match === the old name rule for the current corpus.
-  const institutions = Array.isArray(s?.institutions) ? s.institutions : [];
+  // LIVE roster only — a calamity-razed court/gaol/watch upholds no law (ruin-filter class).
+  const institutions = liveInstitutions(s);
   const lawCount = institutions.filter(i => institutionIsLawOrder(/** @type {{ catalogId?: string, name?: string }} */ (i))).length;
   if (lawCount >= 2) {
     score += 10; push(contributors, 'institutions', 'broad', +10, `${lawCount} law-and-order institutions uphold the courts and the watch.`);
@@ -1103,8 +1105,9 @@ function deriveInfrastructureCondition(s) {
     push(contributors, 'defenseProfile.scores', 'measured', c,
       `Fortification + logistics scores imply infrastructure ~${Math.round(infra)}.`);
   } else {
-    // No defense profile (un-generated / legacy) — infer from institution count.
-    const instCount = Array.isArray(s.institutions) ? s.institutions.length : 0;
+    // No defense profile (un-generated / legacy) — infer from LIVE institution count
+    // (ruined rows must not inflate inferred infrastructure; ruin-filter class).
+    const instCount = liveInstitutions(s).length;
     if (instCount >= 15) { score += 10; push(contributors, 'institutions', 'dense', +10, `${instCount} institutions imply robust infrastructure.`); }
     else if (instCount <= 5) { score -= 6; push(contributors, 'institutions', 'thin', -6, `${instCount} institutions imply thin infrastructure.`); }
   }

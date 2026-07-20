@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-19T12:40:54.344Z",
+  "generatedAt": "2026-07-19T23:32:24.037Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "72ab2db88f4ef70a",
+  "sourceHash": "076bb3d71022aac6",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -28,6 +28,7 @@
     "src/domain/historyBeats.js",
     "src/domain/hookEscalation.js",
     "src/domain/institutionClassify.js",
+    "src/domain/institutions/institutionRoster.js",
     "src/domain/magicLedger.js",
     "src/domain/magicProfile.js",
     "src/domain/npcProfile.js",

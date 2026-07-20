@@ -7,6 +7,7 @@
  */
 
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
@@ -243,7 +244,9 @@ const INSTITUTIONAL_HEALING_PATTERN = /(hospital|monaster|temple)/i;
 function healingCapacityOf(save) {
   const settlement = settlementFromSave(save) || {};
   const ledger = healingLedger(/** @type {Parameters<typeof healingLedger>[0]} */ (settlement));
-  const institutions = Array.isArray((/** @type {{ institutions?: any[] }} */ (settlement)).institutions) ? (/** @type {{ institutions?: any[] }} */ (settlement)).institutions : [];
+  // LIVE roster only — a calamity-ruined temple/monastery/hospital cannot anchor regional
+  // healing capacity (ruin-filter class); healerCount is already live via healingLedger.
+  const institutions = liveInstitutions(settlement);
   const anchor = institutions.find((/** @type {{ name?: unknown }} */ i) => INSTITUTIONAL_HEALING_PATTERN.test(String(i?.name || '')));
   return {
     healerCount: ledger.healerCount,

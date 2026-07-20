@@ -20,6 +20,7 @@
  */
 
 import { deriveAllFactionProfiles } from './factionProfile.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
 import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
@@ -93,7 +94,9 @@ const ROLE_BANDS = Object.freeze([
  * @returns {MagicInstitution[]}
  */
 function institutionsByPattern(s, pattern) {
-  const inst = Array.isArray(s?.institutions) ? s.institutions : [];
+  // LIVE roster only — a calamity-ruined mage-tower/temple confers no magic capability
+  // (availability / institutional control / roles) (ruin-filter class).
+  const inst = liveInstitutions(s);
   return inst.filter(i => pattern.test(String(i?.name || '')));
 }
 

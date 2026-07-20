@@ -29,6 +29,7 @@ import { lawSign } from './deityStance.js';
 // Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
 // (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
 import { evil01, chaos01, deityTemper } from './deityAxes.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 // Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
 // STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
 // and its martial readiness (a maintained war machine is warlike conduct). Both close
@@ -187,7 +188,9 @@ const STANDING_BACKING = /** @type {Record<string, number>} */ ({ ascendant: 1, 
  * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
  */
 export function institutionBackingOf(settlement) {
-  const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // LIVE roster only — a calamity-destroyed cathedral is a ruin, not standing worship,
+  // and lends no faith backing (ruin-filter class).
+  const insts = liveInstitutions(settlement);
   let weighted = 0;
   for (const it of insts) {
     const tags = Array.isArray(it?.tags) ? it.tags : [];

@@ -49,6 +49,7 @@
  */
 
 import { deriveAllActiveConditions } from './activeConditions.js';
+import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
 import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
@@ -261,7 +262,9 @@ function populationOf(settlement) {
  * @returns {string[]}
  */
 function institutionNamesMatching(settlement, pattern) {
-  const inst = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // LIVE roster only — a calamity-ruined institution supplies no capacity in any of the
+  // SUPPLY derivers this feeds (admin/food/transport/welfare/craft/magical) (ruin-filter class).
+  const inst = liveInstitutions(settlement);
   return inst.filter(i => pattern.test(String(i?.name || ''))).map(i => i?.name || '');
 }
 
