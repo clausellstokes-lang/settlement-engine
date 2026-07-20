@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ DEEP COUPLINGS D-2 COMPLETE + D-3 BLOCKED ON A REAL DESIGN DEFECT (2026-07-19,
+claude/deep-couplings-cred @ b986b4e8, 4 commits atop 29f7abc9 — manager-verified).**
+D-2 PER-NPC CREDIBILITY done: lazy npcCredibility leaf + statecraft threading + the ladder
+lie-stigma hook; THE §0.5 BOUNDARY AMENDMENT landed in place (statecraft §6 "never burned/
+turned/executed" scoped so a credibility hit resolves NO fate). Lit walkthrough executed
+& quoted — a Reeve's exposed bluff drops his personal credibility, earns a ladder stigma
+(he keeps his seat, marked), and his next bluff is believed less (0.7→0.21, the boy who
+cried wolf). Owner-visible shape (§14 Q2): spatialLedgers.npcCredibility{score,lastUpdateTick,
+lieExposure?} + DisinfoRecord.spokespersonNpcId? + LadderStanding.lastLieSeen?. Receipts:
+domain shard 6814/6814 · closure delta 0 (all lazy) · reds = the 3 parked goldens at base ·
+§11 write-list clean (only npcCredibility). ⚠ D-3 INTEL LANE BLOCKED — a REAL design defect
+the lane PROVED (not a stall): the design premise "the intel act rides the live catalog data
+path, net-zero" is FALSE — the `warning`/`intel_sale` acts are catalog-registered (live:true
+data) but have NO live kernel evaluation/mint path (only grain_relief/credit/refuge/purchase/
+trade_overture are wired inline), AND generosityKernel.js is at EXACTLY 800/800 (hard ceiling)
+— so wiring needs new kernel lines the ceiling forbids. The DESIGN_DEEP_COUPLINGS §D-3
+premise + the generosityKernel:89 comment ("all six instruments ship live") are INACCURATE.
+MANAGER RULING: D-3 → Option A (dedicated leaf-extraction lane: behavior-preserving headroom
+in generosityKernel FIRST, then wire per the pinned choreography — a goldens-sensitive hot-file
+refactor deserving its own full-suite lane, NOT squeezed) — sequenced AFTER D-7/D-4 (it's the
+least-blocking of the remaining pieces and the extraction wants a quiet hot file). D-3 design
+premise correction folded into the doc's known-issues.
 **⬛⭐ DEEP COUPLINGS D-0 + D-1 COMPLETE (2026-07-19, claude/deep-couplings @ 627055b3,
 6 commits atop aad6265e — manager-verified).** D-0 MIGRATION→RUMOR CARRIER
 (migrationRumorsEnabled): refugee columns seed the rumor net via the army/smuggle idiom
