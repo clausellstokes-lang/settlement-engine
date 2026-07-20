@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ DEEP COUPLINGS D-7 THE MEMORY WEAVE COMPLETE (2026-07-19, claude/deep-couplings-mem
+@ 49b145bb, 7 commits stacked on the D-2 branch b986b4e8 — manager-verified).** The entire
+persisted CORE of the relationship weave, all single-writer + dark + dormancy-proven:
+D7-a grievanceRead leaf (resentment+memoryScore+decade-clock incidents, NEVER the rung —
+feeds D-4 fixation) · D7-b the memory-weave core (memoryWeaveActive = 8th flag, typed
+incidents, mintMemoryWeaveIncident applicator; rite_imposed wired live; dark-weave ⇒
+relationship plane BYTE-IDENTICAL while traditions still imposes) · D7-e the PERSON-BOND
+map (LadderStanding.bonds — loyalty/gratitude/friendship, the exact grudge twin: D5 decay,
+additive stacking, single writer, succession reset; mintBond/bondSevToward/strongestBond) ·
+D7-c the FACTION-PAIR LEDGER (worldState.factionPairStates[a|b] = {trust, resentment,
+incidents≤8, week} — the wave's one new persisted shape, owner-visible; additive, absent-
+when-dark, NO migration, D5-decayed) · D7-f the ELITE BLEED (weighted importanceWeight ×
+factionPowerStanding × politicsRank, bounded settlement nudge from cross-border standing,
+ZERO new writers, elite_amity/elite_feud on threshold; THE DOUBLE-COUNT GUARD PINNED —
+state-driven never event-re-counting) · D-4f the memory-side bond-read API (bondedPeersAbove,
+support/join floors). Receipts: domain 6865/0 · property 213 (3 reds = parked goldens at
+base) · closure delta 0 · §11 grep clean · dormancy byte-identical · 51 weave pins. HONEST
+SCOPE SPLIT (correct): every SHAPE/API/dormancy-contract built now; the BEHAVIORAL
+FORMATION wiring that crosses UNFOLDED lanes is flagged not force-built — route_seized
+(post-roads-fold), bond formation deposits (generosity gratitude / coalition / D-5 ransom /
+D-4 contest-support), D-7c coalition coupling (needs settlement↔faction identity
+resolution), D-7f in-pass live-weight + the A/B lit cell (post-fold). VETOABLE: D-7c landed
+as a SIBLING factionPairStates ledger (not nested in factionStates) — say veto to nest.
+DEEP COUPLINGS STATUS: D-0/D-1/D-2/D-7 DONE · D-4 NEXT (consumes the bonds API) · D-3
+Option-A extraction lane · D-5/D-6 post-fold.
 **⬛⭐⭐ OWNER RULING (2026-07-19) — THE AI HANDOFF AT THE RESURVEY: "right before the
 resurvey prepare that I am going to switch to a different AI."** The Round 3 loop (the
 resurvey) will be executed by a DIFFERENT AI — NOT necessarily Claude, so NOT the
