@@ -39,7 +39,7 @@ export default function SteadingsSection({ settlement }) {
   return (
     <div style={{ marginTop: 14 }}>
       {grade ? (
-        <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.danger}`, borderRadius: 6, padding: '8px 12px', marginBottom: 10 }}>
+        <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.danger}`, padding: '8px 12px', marginBottom: 10 }}>
           <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             {GRADE_LABEL[grade] || 'Remnant'}
           </div>
@@ -52,7 +52,7 @@ export default function SteadingsSection({ settlement }) {
       ) : null}
 
       {ancient ? (
-        <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.inkMag3}`, borderRadius: 6, padding: '8px 12px', marginBottom: 10 }}>
+        <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.inkMag3}`, padding: '8px 12px', marginBottom: 10 }}>
           <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
             Ancient ruin nearby
           </div>
@@ -69,7 +69,7 @@ export default function SteadingsSection({ settlement }) {
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {steadings.map(rec => (
-              <div key={rec.id} style={{ flex: '1 1 180px', minWidth: 0, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderRadius: 6, padding: '7px 10px' }}>
+              <div key={rec.id} style={{ flex: '1 1 180px', minWidth: 0, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, padding: '7px 10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 6 }}>
                   <span style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag }}>{rec.name}</span>
                   <span style={{ fontSize: FS.xxs, color: MUTED }}>{rec.tier}</span>

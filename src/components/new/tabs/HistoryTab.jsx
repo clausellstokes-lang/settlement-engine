@@ -75,7 +75,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
       <NarrativeNote note={narrativeNote} />
 
       {/* ── IDENTITY HEADER ───────────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',borderRadius:8,padding:'14px 18px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'14px 18px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'baseline',gap:12,marginBottom:historicalCharacter?8:0,flexWrap:'wrap'}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>
@@ -93,18 +93,18 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           {recentEvents.map((event,i)=>{
             const accent = event.source==='party'?PARTY : event.source==='manual'?SRC_EDIT : swatch.info;
             return (
-            <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${accent}`,borderRadius:7,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
+            <div key={event.id||i} style={{border:'1px solid #c8d0e8',borderLeft:`3px solid ${accent}`,background:swatch['#F4F6FD'],padding:'10px 12px'}}>
               <div style={{display:'flex',alignItems:'baseline',gap:8,flexWrap:'wrap',marginBottom:event.summary?4:0}}>
                 <span style={{fontSize:FS.xs,fontWeight:800,color:accent,textTransform:'uppercase',letterSpacing:'0.05em'}}>
                   {String(event.title||'Event').replace(/_/g,' ')}
                 </span>
                 {event.at&&<span style={{fontSize:FS.micro,color:MUTED,fontWeight:700}}>{formatRecentDate(event.at)}</span>}
                 {event.partyCaused
-                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,borderRadius:3,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>
+                  ? <span title="Caused by the party" style={{fontSize:FS.micro,color:PARTY,background:PARTY_BG,border:`1px solid ${PARTY}`,padding:'0 5px',fontWeight:800}}>⚔ PARTY</span>
                   : event.source==='manual'
-                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,borderRadius:3,padding:'0 5px',fontWeight:800}}>EDIT</span>
-                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],borderRadius:3,padding:'0 5px',fontWeight:800}}>WORLD</span>}
-                {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],borderRadius:3,padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
+                    ? <span title="A change you authored" style={{fontSize:FS.micro,color:SRC_EDIT,background:SRC_EDIT_BG,padding:'0 5px',fontWeight:800}}>EDIT</span>
+                    : <span title="The world engine produced this" style={{fontSize:FS.micro,color:swatch.info,background:swatch['#F4F6FD'],padding:'0 5px',fontWeight:800}}>WORLD</span>}
+                {event.severity&&<span style={{fontSize:FS.micro,color:swatch['#5A3010'],background:swatch['#FDF4EC'],padding:'0 5px',fontWeight:800}}>{String(event.severity)}</span>}
               </div>
               {event.summary&&<p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{event.summary}</p>}
             </div>
@@ -116,7 +116,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
       {/* ── VISUAL TIMELINE ──────────────────────────────────────────────── */}
       {age>0&&eventsTimeline.length>0&&<div style={{marginBottom:16}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Historical Timeline</div>
-        <div style={{position:'relative',height:36,background:swatch['#F0EAD8'],borderRadius:4,overflow:'visible',marginTop:14,marginBottom:20}}>
+        <div style={{position:'relative',height:36,background:swatch['#F0EAD8'],overflow:'visible',marginTop:14,marginBottom:20}}>
           {/* Axis line */}
           <div style={{position:'absolute',top:'50%',left:0,right:0,height:2,background:swatch['#D0B880'],transform:'translateY(-50%)'}}/>
           {/* "Founded" */}
@@ -145,9 +145,9 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                   style={{position:'absolute',left:`${te.pct}%`,top:'50%',
                     transform:'translate(-50%,-50%)',
                     width:te.anchored?14:10,height:te.anchored?14:10,
-                    borderRadius:'50%',background:te.ec.color,
-                    border:`2px solid ${te.anchored?'#fff':'rgba(255,255,255,0.5)'}`,
-                    boxShadow:te.anchored?`0 0 0 2px ${te.ec.color}`:'none',
+                    background:te.ec.color,
+                    border:`2px solid ${te.anchored?'#fff':swatch['#F0EAD8']}`,
+                    outline:te.anchored?`2px solid ${te.ec.color}`:'none',
                     cursor:'pointer',zIndex:2}}>
                 </div>
                 {/* Year label — alternates above/below to avoid overlap */}
@@ -173,12 +173,12 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
           {[...new Set(eventsTimeline.map(te=>te.type))].map(type=>{
             const ec = ALL_EC[type]||ALL_EC.political;
             return <span key={type} style={{display:'flex',alignItems:'center',gap:4,fontSize:FS.xxs,color:swatch.inkMag3}}>
-              <div style={{width:8,height:8,borderRadius:'50%',background:ec.color,flexShrink:0}}/>
+              <div style={{width:8,height:8,background:ec.color,flexShrink:0}}/>
               {ec.label}
             </span>;
           })}
           <span style={{display:'flex',alignItems:'center',gap:4,fontSize:FS.xxs,color:swatch.inkMag3}}>
-            <div style={{width:10,height:10,borderRadius:'50%',background:MUTED,border:'2px solid #fff',boxShadow:'0 0 0 2px #9c8068',flexShrink:0}}/>
+            <div style={{width:10,height:10,background:MUTED,border:'2px solid #fff',outline:'2px solid #9c8068',flexShrink:0}}/>
             Still relevant today ()
           </span>
         </div>
@@ -193,19 +193,19 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
             const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
             const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
             return (
-              <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,borderRadius:7,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
+              <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
                 {/* Header */}
                 <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:tm.color,textTransform:'uppercase',letterSpacing:'0.05em'}}>{tm.label}</span>
                   {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
-                    <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,borderRadius:3,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
+                    <span key={j} style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
                   ))}
                 </div>
                 {/* Description */}
                 <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
                 {/* Factions */}
                 {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:t.plotHooks?.length>0?8:0}}>
-                  {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'1px 6px'}}>{f}</span>)}
+                  {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
                 </div>}
                 {/* Plot hooks — inline, prominent */}
                 {t.plotHooks?.length>0&&<div style={{borderTop:`1px solid ${border}30`,paddingTop:8,marginTop:4}}>
@@ -227,7 +227,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
 
       {/* ── FOUNDING ─────────────────────────────────────────────────────── */}
       {founding&&<Collapsible title="Founding" defaultOpen={false}>
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #a0762a',borderRadius:7,padding:'12px 14px'}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #a0762a',padding:'12px 14px'}}>
           <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'6px 14px',marginBottom:founding.stressNote?10:0}}>
             {[
               {label:'Origin',     value:founding.reason},
@@ -241,7 +241,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               </div>
             ))}
           </div>
-          {founding.stressNote&&<div style={{background:swatch['#FDF4EC'],border:'1px solid #e0c090',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'8px 10px'}}>
+          {founding.stressNote&&<div style={{background:swatch['#FDF4EC'],border:'1px solid #e0c090',borderLeft:'3px solid #b8860b',padding:'8px 10px'}}>
             <p style={{fontSize:FS.sm,color:swatch['#5A3010'],lineHeight:1.5,margin:0,fontStyle:'italic'}}>{founding.stressNote}</p>
           </div>}
         </div>
@@ -262,7 +262,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
               <div key={i} style={{
                 border:`1px solid ${isAnchored?ec.color+'60':ec.border}`,
                 borderLeft:`3px solid ${ec.color}`,
-                borderRadius:7, overflow:'hidden',
+                overflow:'hidden',
                 background: isAnchored?ec.bg:'#faf8f4',
                 cursor:'pointer',
               }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
@@ -277,7 +277,7 @@ export function HistoryTab({settlement:r, narrativeNote, recentEvents = [], onRe
                       <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
                         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
                         {evtName!==typeLabel&&<span style={{fontSize:FS.xs,fontWeight:700,color:ec.color,textTransform:'uppercase',letterSpacing:'0.04em'}}>{typeLabel}</span>}
-                        {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,borderRadius:3,padding:'0 5px'}}>{sev}</span>}
+                        {sev&&<span style={{fontSize:FS.micro,fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
                       </div>
                       <p style={{fontSize:FS.md,color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
                     </div>

@@ -75,7 +75,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         background: viable===false ? '#fdf4f4' : viable===true ? '#f0faf4' : '#fdf8e8',
         border: `2px solid ${viable===false?'#e8c0c0':viable===true?'#a8d8b0':'#e0c860'}`,
         borderLeft: `6px solid ${viable===false?'#8b1a1a':viable===true?'#1a5a28':'#b8860b'}`,
-        borderRadius: 8, padding: '14px 18px', marginBottom: 14,
+        padding: '14px 18px', marginBottom: 14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1}}>
@@ -93,7 +93,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           </div>
           {/* Quick metric pills */}
           <div style={{display:'flex',gap:6,flexWrap:'wrap',flexShrink:0}}>
-            {metrics.criticalIssueCount>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',borderRadius:4,padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
+            {metrics.criticalIssueCount>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',padding:'3px 9px'}}>{metrics.criticalIssueCount} critical</span>}
             
             
           </div>
@@ -105,7 +105,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       {/* ── MAGIC DEPENDENCY WARNING ───────────────────────────────────────── */}
       {s?.defenseProfile?.magicDependency&&(
         <div style={{background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderLeft:'4px solid #7a3a9a',
-          borderRadius:6,padding:'10px 14px',marginBottom:12}}>
+          padding:'10px 14px',marginBottom:12}}>
           <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
             ✦ Magic Dependency Detected
           </div>
@@ -130,7 +130,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
         </div>
         {byDesignIssues.map((v2,i)=>(
-          <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',borderRadius:4,marginBottom:6}}>
+          <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
             <div style={{fontSize: FS['11.5'],color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
             {v2.suggestedFixes?.[0] && (
@@ -143,7 +143,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
       {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
-          <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',borderRadius:6,padding:'10px 14px',marginBottom:8}}>
+          <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
             <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>
               {v2.institution||v2.group}
             </div>
@@ -155,7 +155,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       {/* ── CRITICAL ISSUES ──────────────────────────────────────────────── */}
       {criticalIssues.length>0&&<Section title={`Critical Issues (${criticalIssues.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {criticalIssues.map((issue,i)=>(
-          <div key={i} style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'12px 14px',marginBottom:10}}>
+          <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:4,flexWrap:'wrap'}}>
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.danger,textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
@@ -180,7 +180,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         {otherIssues.map((issue,i)=>{
           const sc = sevColor(issue.severity);
           const sb = sevBg(issue.severity);
-          return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,borderRadius:6,padding:'10px 14px',marginBottom:8}}>
+          return <div key={i} style={{background:sb,border:`1px solid ${sc}40`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
               {issue.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{issue.category}</span>}
               {issue.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
@@ -204,7 +204,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
         </p>
         {stressConsequences.map((item,i)=>(
-          <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',borderRadius:5,padding:'8px 10px',marginBottom:6}}>
+          <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
             <p style={{fontSize:FS.sm,color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
           </div>
@@ -215,7 +215,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         {filteredWarnings.map((w,i)=>{
           const wobj = typeof w==='object' ? w : {description:w};
           const sc = sevColor(wobj.severity||'warning');
-          return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,borderRadius:6,padding:'10px 14px',marginBottom:8}}>
+          return <div key={i} style={{background:sevBg(wobj.severity||'warning'),border:`1px solid ${sc}35`,borderLeft:`3px solid ${sc}`,padding:'10px 14px',marginBottom:8}}>
             <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:3,flexWrap:'wrap'}}>
               {wobj.category&&<span style={{fontSize:FS.xxs,fontWeight:700,color:sc,textTransform:'uppercase',letterSpacing:'0.05em'}}>{wobj.category}</span>}
               {wobj.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch.inkMag}}>{wobj.title}</span>}

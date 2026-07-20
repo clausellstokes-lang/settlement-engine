@@ -28,8 +28,8 @@ function ScoreRow({ label, score }) {
         <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
         <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{Math.round(n)}</span>
       </div>
-      <div style={{ height: 6, background: swatch['#E8DCC8'], borderRadius: 3, overflow: 'hidden' }}>
-        <div style={{ height: '100%', width: `${n}%`, background: c, borderRadius: 3, transition: 'width 0.4s' }} />
+      <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
+        <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ function ScoreRow({ label, score }) {
 
 function StatusTag({ label, value, _color, accent }) {
   return (
-    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, borderRadius: 6, padding: '7px 10px', minWidth: 0 }}>
+    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', border: `1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, borderLeft: `3px solid ${accent || '#c8b89a'}`, padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: accent || '#6b5340', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 3 }}>{label}</div>
       <div style={{ fontSize: FS.sm, fontWeight: 700, color: swatch.inkMag, lineHeight: 1.3 }}>{value || EMPTY_VALUE}</div>
     </div>
@@ -87,7 +87,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       <SteadingsSection settlement={r} />
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',borderRadius:8,padding:'12px 16px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.tier}</span>
@@ -100,8 +100,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:FS.sm,color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
           <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
-            {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',borderRadius:4,padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
-            {r.spatialLayout?.layout&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',borderRadius:4,padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
+            {ra.terrain&&<span style={{fontSize:FS.xs,color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
+            {r.spatialLayout?.layout&&<span style={{fontSize:FS.xs,color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
       </div>
@@ -109,12 +109,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       {/* ── ACTIVE CRISIS (compact if present) ───────────────────────────── */}
       {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
         {stresses.map((v,i)=>(
-          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,borderRadius:8,padding:'10px 14px'}}>
+          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px'}}>
             <span style={{fontSize: FS['18'],flexShrink:0}}>{v.icon}</span>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,borderRadius:4,padding:'1px 6px',letterSpacing:'0.06em'}}>ACTIVE CRISIS</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:swatch.white,background:v.colour,padding:'1px 6px',letterSpacing:'0.06em'}}>ACTIVE CRISIS</span>
               </div>
               <p style={{fontSize: FS['12.5'],color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:FS.xs,color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
@@ -136,7 +136,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
 
         {/* Magic dependency badge */}
         {dp.magicDependency&&<div style={{display:'flex',alignItems:'center',gap:6,
-          background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderRadius:5,
+          background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
@@ -155,8 +155,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
               <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Enforcement Ratio</span>
               <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?`${sp.safetyRatio.toFixed(1)}×`:EMPTY_VALUE}</span>
             </div>
-            <div style={{height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden'}}>
-              <div style={{height:'100%',width:`${Math.min(100,(sp.safetyRatio||0)*25)}%`,background:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a',borderRadius:3}}/>
+            <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
+              <div style={{height:'100%',width:`${Math.min(100,(sp.safetyRatio||0)*25)}%`,background:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}/>
             </div>
           </div>}
         </div>
@@ -164,8 +164,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
         {/* Food balance if significant */}
         {foodBal.deficitPct>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
           <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}>Food Deficit</span>
-          <div style={{flex:1,background:swatch['#E8DCC8'],borderRadius:3,height:6,overflow:'hidden'}}>
-            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPct)}%`,background:swatch.danger,borderRadius:3}}/>
+          <div style={{flex:1,background:swatch['#E8DCC8'],height:6,overflow:'hidden'}}>
+            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPct)}%`,background:swatch.danger}}/>
           </div>
           <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,flexShrink:0}}>{foodBal.deficitPct}%</span>
         </div>}
@@ -179,7 +179,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
             <div>
               <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.45,margin:0}}>{typeof t==='object'?t.description:t}</p>
               {t.factions?.length>0&&<div style={{display:'flex',gap:4,marginTop:3,flexWrap:'wrap'}}>
-                {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 5px'}}>{f}</span>)}
+                {t.factions.map((f,j)=><span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 5px'}}>{f}</span>)}
               </div>}
             </div>
           </div>
@@ -190,7 +190,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
             <div>
               <div style={{display:'flex',gap:6,alignItems:'baseline',flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,borderRadius:3,padding:'0 4px'}}>{iHigh?'HIGH':'MODERATE'}</span>
+                <span style={{fontSize:FS.micro,fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'HIGH':'MODERATE'}</span>
               </div>
               {c.issue&&<p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
             </div>
@@ -199,7 +199,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       </Section>}
 
       {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
-      {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,borderRadius:8,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+      {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
         {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
         {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
         {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
@@ -216,7 +216,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       </Section>}
 
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
-      {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',borderRadius:7,padding:'9px 13px',marginBottom:14}}>
+      {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
@@ -235,7 +235,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
             <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Strengths</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E0F0E0'],borderRadius:4,padding:'1px 6px'}}>{s}</span>)}
+              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:FS.xs,color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
             </div>
           </div>}
           {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
@@ -256,7 +256,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
         {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
           {r.spatialLayout.quarters.map((q,i)=>(
-            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',borderRadius:6,padding:'8px 10px'}}>
+            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
               <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
               <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
               {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
@@ -267,29 +267,29 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
 
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
-        {r.structuralViolations?.length>0&&<div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'10px 14px',marginBottom:8}}>
+        {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
-          <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',borderRadius:7,padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
+          <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
         {r.coherenceNotes?.filter(n=>n.severity!=='contradiction').map((note,i)=>(
-          <div key={i} style={{background:swatch['#F0F4FD'],border:'1px solid #a0b4d4',borderLeft:'3px solid #1a3a8b',borderRadius:7,padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
+          <div key={i} style={{background:swatch['#F0F4FD'],border:'1px solid #a0b4d4',borderLeft:'3px solid #1a3a8b',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{color:swatch['#1A3A8B'],flexShrink:0}}>ℹ</span>
             <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
-        {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px'}}>
+        {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
           <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
           {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
         </div>}
       </div>}
 
       {/* ── INSTITUTIONS ──────────────────────────────────────────────────── */}
-      <div style={{border:'1px solid #e0d0b0',borderRadius:8,overflow:'hidden'}}>
+      <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
         <button type="button" onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
           <div style={{display:'flex',alignItems:'center',gap:10}}>
             <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
@@ -297,14 +297,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           </div>
           <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
             {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
-              <span key={cat} style={{fontSize:FS.xxs,fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,borderRadius:3,padding:'1px 5px'}}>{cat} {insts.length}</span>
+              <span key={cat} style={{fontSize:FS.xxs,fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
             ))}
             <span style={{fontSize:FS.xs,color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
           </div>
         </button>
         {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
           {/* Visual category distribution bar */}
-          <div style={{display:'flex',height:8,borderRadius:4,overflow:'hidden',gap:1,marginBottom:12}}>
+          <div style={{display:'flex',height:8,overflow:'hidden',gap:1,marginBottom:12}}>
             {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).map(([cat,insts])=>(
               <div key={cat} title={`${cat}: ${insts.length}`} style={{flex:insts.length,background:getCatColor(cat),minWidth:insts.length>0?4:0}}/>
             ))}
@@ -320,7 +320,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
                     const isCustom = inst.source==='custom' || inst.isCustom===true;
                     const srcColor={required:'#a0762a',forced:'#2d7a44','auto-resolved':'#2a3a7a'}[inst.source]||'#6b5340';
                     const srcLabel={required:'REQ',forced:'','auto-resolved':'→'}[inst.source];
-                    const base = {fontSize:FS.xs,padding:'2px 8px',borderRadius:4,color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
+                    const base = {fontSize:FS.xs,padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
                     const skin = isCustom
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
                       : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};

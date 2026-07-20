@@ -12,7 +12,7 @@
 
 import { deriveMagicPosture } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
-import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, SLATE_BG, sans, SP, R } from '../../theme.js';
+import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -64,7 +64,7 @@ export default function MagicTab({ settlement }) {
         <>
           {/* The 6 envelope facets. */}
           <div style={{
-            background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden', marginBottom: 12,
+            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
           }}>
             <div style={{
               fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -79,7 +79,7 @@ export default function MagicTab({ settlement }) {
 
           {/* The 4 role lines. */}
           <div style={{
-            background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden', marginBottom: 12,
+            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
           }}>
             <div style={{
               fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -95,8 +95,8 @@ export default function MagicTab({ settlement }) {
           {/* Deity ⇄ magic-legality coupling (self-gates to nothing without a major deity). */}
           {magicCoupling.length > 0 && (
             <div data-testid="magic-deity-coupling" style={{
-              background: SLATE_BG, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
-              borderRadius: R.md, padding: `${SP.sm}px ${SP.md}px`,
+              background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
+              padding: `${SP.sm}px ${SP.md}px`,
             }}>
               <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SLATE, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
                 Deity &amp; magic

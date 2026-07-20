@@ -139,7 +139,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
           {npcContacts.map((isr,i)=>{
             const relColors={trade_partner:'#1a5a28',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8a5010',cold_war:'#8a3010',hostile:'#8b1a1a',neutral:'#6b5340'};
             const c=relColors[isr.relType]||'#6b5340';
-            return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',background:`${c}08`}}>
+            return <div key={i} style={{border:`1px solid ${c}30`,borderLeft:`3px solid ${c}`,padding:'10px 14px',background:`${c}08`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{isr.npcName}</span>
                 {isr.npcRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({isr.npcRole})</span>}
@@ -150,7 +150,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
               </div>
               {isr.description&&<div style={{fontSize:FS.xs,color:swatch.inkMag2,lineHeight:1.45,fontStyle:'italic'}}>{isr.description}</div>}
               <div style={{marginTop:4}}>
-                <span style={{fontSize:FS.xxs,fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,borderRadius:10,padding:'1px 8px'}}>
+                <span style={{fontSize:FS.xxs,fontWeight:700,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'1px 8px'}}>
                   {(isr.relType||'linked').replace(/_/g,' ')}
                 </span>
               </div>
@@ -169,7 +169,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
             const isFaction = c.type==='faction_engagement';
             const relColors={trade_partner:'#a0762a',allied:'#1a3a7a',patron:'#4a1a6a',client:'#6a3a1a',rival:'#8b1a1a',cold_war:'#5a1a1a',hostile:'#8b0000',neutral:'#6b5340'};
             const col = relColors[c.relType]||'#6b5340';
-            return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,borderRadius:7,padding:'10px 14px',background:`${col}06`}}>
+            return <div key={i} style={{border:`1px solid ${col}30`,borderLeft:`3px solid ${col}`,padding:'10px 14px',background:`${col}06`}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:5,flexWrap:'wrap'}}>
                 {isFaction
                   ? <><span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{c.factionName}</span>
@@ -181,7 +181,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
                       <span style={{fontSize:FS.xs,color:MUTED}}>vs</span>
                       <span style={{fontSize:FS.sm,fontWeight:700,color:col}}>{c.partnerName}</span>
                       <span style={{fontSize:FS.xs,color:MUTED}}>({c.partnerRole}, {c.partnerSettlement})</span></>}
-                <span style={{fontSize:FS.xxs,fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,borderRadius:8,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
+                <span style={{fontSize:FS.xxs,fontWeight:700,color:col,background:`${col}18`,border:`1px solid ${col}40`,padding:'1px 7px',marginLeft:'auto',flexShrink:0}}>
                   {isFaction ? 'faction' : (c.conflictNature||'conflict')}
                 </span>
               </div>
@@ -193,7 +193,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
       {/* Emergent conditions banner */}
       {!neighboursOnly&&<>
-      {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',borderRadius:7,padding:'10px 14px',marginBottom:16}}>
+      {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'10px 14px',marginBottom:16}}>
         <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.magic,marginBottom:4}}>◆ EMERGENT CONDITIONS ACTIVE</div>
         <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
           {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
@@ -232,7 +232,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         {filteredRels.map((rel,i)=><NPCRelCard2 key={`rel_${i}`} rel={rel} style={styleFor(rel.type)}/>)}
         {/* Cross-settlement connections */}
         {crossConns.map((conn,i)=>(
-          <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',borderRadius:7,padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
+          <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
             <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
               <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{conn.primaryNPCName}</span>
               {conn.primaryNPCRole&&<span style={{fontSize:FS.xs,color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
@@ -251,11 +251,11 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
         {factionGroups.map((fac,i)=>{
           const catColors={economy:'#a0762a',government:'#2a3a7a',military:'#8b1a1a',religious:'#1a4a2a',magic:'#3a1a7a',criminal:'#4a1a4a',other:'#5a4a2a'};
           const c=catColors[fac.dominantCategory]||'#6b5340';
-          return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,borderRadius:7,padding:'10px 14px',marginBottom:10}}>
+          return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,padding:'10px 14px',marginBottom:10}}>
             <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag,marginBottom:6}}>{fac.name}</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {(fac.members||[]).map(m=>(
-                <span key={m.id||m.name} style={{fontSize:FS.xs,color:c,background:`${c}18`,border:`1px solid ${c}40`,borderRadius:10,padding:'2px 9px'}}>
+                <span key={m.id||m.name} style={{fontSize:FS.xs,color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'2px 9px'}}>
                   {m.name} <span style={{color:MUTED}}>({m.role})</span>
                 </span>
               ))}

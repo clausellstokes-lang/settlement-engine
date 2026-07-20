@@ -34,7 +34,7 @@ import { settlementOccupation, occupierHoldings } from '../../../domain/display/
 import { renderTreatiesForSettlement } from '../../../domain/display/treatyDocument.js';
 import FaithSection from '../../settlement/FaithSection.jsx';
 import {
-  FS, MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, SECOND, CARD, sans, R,
+  FS, MUTED, BODY, BORDER, RED, GOLD, GREEN, SECOND, CARD, sans,
 } from '../../theme.js';
 
 function Line({ strong, tone = BODY, children }) {
@@ -54,8 +54,8 @@ function WarBlock({ war, nameFor }) {
   const statusColor = besieged || occupied ? RED : deploying ? GOLD : MUTED;
   return (
     <div data-testid="war-block" style={{
-      background: RED_BG, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
-      borderRadius: R.md, padding: '12px 14px', marginBottom: 14,
+      background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
+      padding: '12px 14px', marginBottom: 14,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
         <span style={{ fontSize: FS.xxs, fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.07em' }}>War</span>
@@ -118,7 +118,7 @@ function TreatyBlock({ treaties, sid }) {
       {treaties.map((doc) => {
         const role = doc.victorId === sid ? 'as victor' : doc.loserId === sid ? 'as the bound party' : 'as a party';
         return (
-          <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
+          <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
               <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
               <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>

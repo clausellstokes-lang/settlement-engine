@@ -17,7 +17,7 @@
 
 import { useMemo } from 'react';
 import { deriveCausalState } from '../../../domain/causalState.js';
-import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, RED_BG, sans, SP, R, swatch } from '../../theme.js';
+import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -55,7 +55,7 @@ function BandPill({ band }) {
   const tone = BAND_TONE[band] || MUTED;
   return (
     <span data-band={band} style={{
-      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px', borderRadius: R.sm,
+      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px', 
       fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
       color: swatch.white, background: tone,
     }}>{band}</span>
@@ -110,10 +110,10 @@ export default function SubstrateTab({ settlement }) {
 
       {/* Pressures callout — the systems the model flags strained-or-worse. */}
       <div data-testid="substrate-pressures" style={{
-        background: pressures.length ? RED_BG : CARD_ALT,
+        background: CARD_ALT,
         border: `1px solid ${pressures.length ? BORDER : BORDER2}`,
         borderLeft: `3px solid ${pressures.length ? RED : GREEN}`,
-        borderRadius: R.md, padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
+        padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
       }}>
         {pressures.length ? (
           <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
@@ -127,7 +127,7 @@ export default function SubstrateTab({ settlement }) {
       </div>
 
       {/* The 16-variable grid. */}
-      <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden' }}>
+      <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
