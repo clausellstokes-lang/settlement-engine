@@ -281,6 +281,20 @@ R-19 SAVE MUSEUM (rider on lifecycle dimension): a committed corpus of REAL
   historical save files from each schema era; the load path must accept every
   exhibit forever (the tolerant-loader claim, pinned against reality).
 
+### THE FREE-INTERVIEW TASTE — owner ruling 2026-07-20: CONDITIONALLY PARKED.
+The manager's recommendation (a capped free taste of V-1, ~3 questions/world, as the
+conversion moment) is ACCEPTED IN PRINCIPLE but activation is GATED ON capital +
+proven unit economics ("I'll have to wait until I have enough capital and proof that
+I can sustain that free service even if capped"). NOT a rejection — a sequencing
+ruling. When revisited, two cost-bounding shapes are pre-designed: (a) a HARD GLOBAL
+MONTHLY POOL for the free taste (fail-closed via the existing burst-gate + R-28
+spend-alarm machinery — the tap becomes a fixed marketing budget the owner sets, and
+an empty pool degrades honestly in the house register), and (b) the ZERO-COST
+variant available ANYTIME: precomputed sample interviews on the curated first seeds
+(R-2) — canned questions answered once at authoring time with REAL receipts, served
+statically; the receipt experience demonstrated at zero marginal cost. (b) needs no
+capital and could ride V-C/R-2 whenever the owner nods.
+
 ### Tier 3 — owner queue (product/UX judgment calls, each cheap)
 R-20 COMMAND PALETTE (cmd-K): jump to any settlement/NPC/panel — power-DM speed.
 R-21 UNDO HISTORY SURFACE: the byte-exact undo exists engine-side; give it a visible
