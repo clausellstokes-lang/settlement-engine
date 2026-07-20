@@ -54,11 +54,19 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     : liveCaptureSpatialPack;
   const captured = await capture({ campaignId, get });
   if (!captured || !captured.pack) return { ok: false, reason: 'spatial_capture_unavailable' };
+  // V-6 BIOME TRUTH (DARK): the additive biome sub-digest lights ONLY under the VIRTUAL
+  // biomeTruthEnabled flag (ABSENT from DEFAULT_SIMULATION_RULES — the npcLadder/heirs idiom).
+  // Absent ⇒ biomeTexture false ⇒ NO biomes key ⇒ byte-identical (every existing canon/golden).
+  // Lit ⇒ a §V.1 receipted re-canonize freezes the per-settlement/per-leg biome into the canon.
+  const priorRules = /** @type {{ biomeTruthEnabled?: unknown }} */ (
+    (findActiveCampaign(get().campaigns, campaignId)?.worldState || {}).simulationRules || {});
+  const biomeTexture = priorRules.biomeTruthEnabled === true;
   const digest = buildSpatialDigest({
     pack: captured.pack,
     placements: captured.placements,
     spatialGeometryVersion: SPATIAL_GEOMETRY_VERSION,
     costLawVersion: COST_LAW_VERSION,
+    biomeTexture,
     // SEASONS-B (M3): a NEW canon lights the seasonal-road overlay (per-season ×
     // per-terrain cost law) under overlayVersion SEASONAL_OVERLAY_VERSION — the
     // §V.1 receipted re-canonize. Existing saved canons keep their frozen v1 (no

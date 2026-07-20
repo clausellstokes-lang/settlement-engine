@@ -96,6 +96,11 @@ export const SPATIAL_GEOMETRY_VERSION = 1;
 export const COST_LAW_VERSION = 1;
 export const OVERLAY_VERSION = 1;
 
+// V-6 BIOME TRUTH: the version of the additive biome sub-digest (per-settlement +
+// per-leg FMG biome). Self-describing so a materializing wave can evolve the shape
+// under its own version, never a silent drift on an old canon (§V.1 semantics).
+export const BIOME_TEXTURE_VERSION = 1;
+
 // The four reserved edge/overlay slots, schema-present + null by default. Frozen
 // so every digest carries the same shape and a materializing wave (§4j sea lanes,
 // air/teleport edge sets, §4i seasonal overlay) can light its slot without a
@@ -220,6 +225,43 @@ function sortedObject(entries) {
 const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `${a}|${b}` : `${b}|${a}`);
 
 /**
+ * V-6 BIOME TRUTH — the additive biome sub-digest: per-settlement biome (the raw FMG
+ * biome id + the terrain class the cost law reads) and per-leg (gate) biome ids. A PURE
+ * function of the frozen pack + the resolved seeds/gates — deterministic and byte-stable
+ * (sortedObject key order). An absent/ragged biome cell reads as null (never a throw); the
+ * terrain class folds height in (a settlement on a high cell reads 'mountain'). Built ONLY
+ * on the biomeTexture opt-in ⇒ omitted when dark ⇒ byte-identical.
+ * @param {Array<{id:string, cellId:number}>} seeds
+ * @param {string[]} idOf
+ * @param {Record<string, { a:string, b:string, cost:number, cellA:number, cellB:number }>} crossings
+ * @param {string[]} gateKeys
+ * @param {{ h:number[], biome:number[] }} pack
+ * @returns {{ version:number, bySettlement: Record<string, {biome:number|null, terrain:string}>,
+ *   byLeg: Record<string, {a:number|null, b:number|null}> }}
+ */
+function buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack) {
+  const biomeAt = (/** @type {number} */ cell) => {
+    const b = pack.biome[cell];
+    return typeof b === 'number' && Number.isInteger(b) ? b : null;
+  };
+  /** @type {Array<[string, {biome:number|null, terrain:string}]>} */
+  const bySettlementEntries = seeds.map((s, k) => [idOf[k], {
+    biome: biomeAt(s.cellId),
+    terrain: terrainClassOf(pack.h[s.cellId], pack.biome[s.cellId]),
+  }]);
+  /** @type {Array<[string, {a:number|null, b:number|null}]>} */
+  const byLegEntries = gateKeys.map((key) => {
+    const g = crossings[key];
+    return [key, { a: biomeAt(g.cellA), b: biomeAt(g.cellB) }];
+  });
+  return {
+    version: BIOME_TEXTURE_VERSION,
+    bySettlement: sortedObject(bySettlementEntries),
+    byLeg: sortedObject(byLegEntries),
+  };
+}
+
+/**
  * Build the frozen spatial digest. The ONE public entry point.
  * SEASONS-B (M3): `seasonalRoads:true` LIGHTS the reserved seasonalOverlay slot
  * (a per-season × per-terrain cost law) and stamps overlayVersion to
@@ -237,9 +279,15 @@ const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `
  * placement roster), magic-gated + geography-independent (§4e). With fewer than two
  * circle-holders the slot stays null (the dormancy floor). Omitted, or opted-in but
  * <2 holders (every existing golden/canon) ⇒ teleportEdges null ⇒ dormant, byte-identical.
+ * BIOME TRUTH (V-6): `biomeTexture:true` appends the additive `biomes` key (per-settlement
+ * biome id + terrain class, and per-leg gate biome) extracted from the captured pack's
+ * per-cell biome array. DARK by default: OMITTED (the default, and every existing golden/
+ * canon) ⇒ NO biomes key ⇒ BYTE-IDENTICAL. The road scene + travel news read it for
+ * biome/season texture. A pure function of the frozen pack ⇒ deterministic extraction.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
- *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean }} input
+ *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean,
+ *           biomeTexture?:boolean }} input
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);
@@ -491,6 +539,14 @@ export function buildSpatialDigest(input) {
     }];
   });
 
+  // V-6 BIOME TRUTH: the additive biome sub-digest, appended LAST and ONLY when opted in.
+  // Omitted (the default, every existing golden/canon) ⇒ the returned shape is byte-identical
+  // to the pre-V-6 digest (a conditional spread of {} adds no key). Present ⇒ a materializing
+  // biomeTexture canon (the seasonalOverlay/seaLanes/teleport opt-in idiom).
+  const biomes = input?.biomeTexture === true
+    ? buildBiomeTexture(seeds, idOf, crossings, gateKeys, pack)
+    : null;
+
   // ── assemble the digest (fixed key order; object-shaped for the conditional
   //    ledger clone; nested arrays live INSIDE) ───────────────────────────────
   return {
@@ -508,5 +564,6 @@ export function buildSpatialDigest(input) {
     gates,
     routeReceipts: sortedObject(receiptEntries),
     reserved: reservedSlots(seasonalOverlay, seaLanes, teleportEdges),
+    ...(biomes ? { biomes } : {}),
   };
 }

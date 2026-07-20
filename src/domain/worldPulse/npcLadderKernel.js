@@ -84,6 +84,7 @@ import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
   rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
   sortedRecord, mirrorOf, maintainMarks, mintBond,
+  designateHeir, swapIntoSeat, inheritSeatMemory,
 } from './npcLadderState.js';
 import { readRoadsBondEvents } from '../roads/thirdPartyRansom.js';
 import { readGratitudeBondEvents, governingLadderFkeyOf, rulingSeatNidOf } from './gratitudeBonds.js';
@@ -134,10 +135,12 @@ import { rulingBlocOf } from './settlementPolitics.js';
  *   supportOf (D-4f): the patron npcId a LINKED SUPPORT goal is tied to — its condition IS the
  *   patron's, re-resolved each tick; the patron's goal failing cascades this one (§8). */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
-/** @typedef {{ sev: number, week: number, kind?: string }} LadderGrudge
+/** @typedef {{ sev: number, week: number, kind?: string, inherited?: boolean }} LadderGrudge
  *   kind (D-4c): a typed contest grudge ('contest_loss' | 'contest_forestalled'); absent on the
- *   ordinary failed-challenge grudge (the memory-weave WOUND_TYPE_RE reads it via recentIncidents). */
-/** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string }} LadderBond */
+ *   ordinary failed-challenge grudge (the memory-weave WOUND_TYPE_RE reads it via recentIncidents).
+ *   inherited (V-7): a grudge carried to an heir at a seat succession, dampened + marked. */
+/** @typedef {{ sev: number, week: number, kind: string, foreignSid?: string, inherited?: boolean }} LadderBond
+ *   inherited (V-7): a bond carried to an heir at a seat succession, dampened + marked. */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
 /**
  * @typedef {Object} ContestSide — one contestant's per-contest view (§8 D-4b awareness fog).
@@ -201,6 +204,19 @@ export function contestedGoalsActive(worldState) {
 export function ladderPoliticalWindowsActive(worldState) {
   const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
   return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).ladderPoliticalWindowsEnabled === true);
+}
+
+/**
+ * Is V-7 HEIRS-LITE lit? Reads the VIRTUAL flag simulationRules.heirsEnabled === true, defensively
+ * — ABSENT ⇒ false ⇒ DORMANT (NO entry in DEFAULT_SIMULATION_RULES, so goldens do not move). AND-
+ * gated by the caller with the ladder (already lit here). Lit ⇒ on the EXISTING succession events
+ * (challenge/coup — no new triggers, no death) the governing seat's successor inherits the
+ * predecessor's dampened bonds/grudges and an investiture beat fires. Pure, total.
+ * @param {{ simulationRules?: Record<string, unknown> }|null|undefined} worldState @returns {boolean}
+ */
+export function heirsActive(worldState) {
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).heirsEnabled === true);
 }
 
 // v1 goals reference NO pressure signals, so an empty pressures stub satisfies the S7
@@ -324,6 +340,9 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   // coherence-11/14: the political challenge windows (faction_captured + bloc_backed). Dark ⇒ the
   // per-faction window inputs stay false ⇒ openWindows never pushes them ⇒ byte-identical.
   const politicalWindowsLit = ladderPoliticalWindowsActive(worldState);
+  // V-7 HEIRS-LITE: the governing seat gains a designated heir + inherited memory on the EXISTING
+  // succession events. Dark ⇒ no heir swap, no inheritance, no investiture beat ⇒ byte-identical.
+  const heirsLit = heirsActive(worldState);
   // D-5 §9: the roads gratitude-bond deposits (a friend ransomed an NPC home) — consumed into
   // person bonds through this kernel's own writer (mintBond), memoryWeave-gated. Absent ⇒ empty.
   const roadsBondEvents = memWeave ? readRoadsBondEvents(worldState, now2) : new Map();
@@ -562,6 +581,29 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
             if ((cst && cst.stigma) || cobj.corrupt === true) normBreakingWins += 1;
           }
           newsEntries.push(ladderBeat(sid, townName, fkey, ev, now2, now));
+        }
+      }
+      // ── V-7 HEIRS-LITE: on a GOVERNING-seat succession the seat gains a face + inherited
+      // memory. NO new trigger (rides the EXISTING coup-truncation / challenge rise), NO death,
+      // CONSERVATION held (the heir SWAP is a permutation of the rungs). Dark ⇒ skipped entirely
+      // ⇒ byte-identical. Governing factions only ("who follows the old lion?" is the ruler). ──
+      if (heirsLit && asObject(faction).isGoverning === true && rungs.length) {
+        const seatBefore = rungs[0];
+        if (truncated) {
+          // COUP: the ladder deferred (rungs untouched) — seat the DESIGNATED HEIR (the most-bonded
+          // lieutenant below the seat), a permutation swap, so a coup has a real successor face
+          // rather than a faceless regime change. On a challenge the merited climber already holds it.
+          const heir = designateHeir(rec.rungs, npcs);
+          if (heir && heir !== seatBefore) rec.rungs = swapIntoSeat(rec.rungs, heir);
+        }
+        const seatAfter = rec.rungs[0];
+        if (seatAfter && seatBefore && seatAfter !== seatBefore) {
+          // The new seat-holder inherits a bounded, dampened fraction of the predecessor's bonds/
+          // grudges (marked inherited — the memory carries) + an investiture beat via the ladder's
+          // own writer. Single-writer preserved: the copy lands on the heir's OWN standing (no graph).
+          const predSt = npcs[seatBefore] || prior.npcs[seatBefore] || null;
+          if (npcs[seatAfter]) npcs[seatAfter] = inheritSeatMemory(npcs[seatAfter], predSt, seatAfter, weeks);
+          newsEntries.push(investitureBeat(sid, townName, fkey, seatAfter, seatBefore, nameByNid, truncated ? 'coup' : 'challenge', now2, now));
         }
       }
       // §8 THE STANDING LOOP (single-writer to the mirror): leadership quality → the power
@@ -814,6 +856,38 @@ function ladderBeat(sid, townName, fkey, ev, tick, now) {
     settlementIds: [sid], impactIds: [], channelIds: [],
     sourceEventId: `npc_ladder.${sid}.${slug}.${tick}`,
     tags: ['world_pulse', 'npc_ladder', ev.kind],
+    reasons: [reason],
+  };
+}
+
+/**
+ * V-7 THE INVESTITURE BEAT — a governing seat has a new holder after a succession (a coup that
+ * toppled the old ruler, or a challenge that unseated them), and the office's dampened memory
+ * carries to them. Reuses impactKind 'npc_ladder' (registered), unvoiced crier-wise. AGGREGATE
+ * court motion — ranks move, never a named soul's FATE (state-never-fate §4g). PURE.
+ * @param {string} sid @param {string} townName @param {string} fkey
+ * @param {string} heirNid @param {string} predNid @param {Map<string, string>} nameByNid
+ * @param {'coup'|'challenge'} kind @param {number} tick @param {string|null} now
+ * @returns {Record<string, unknown>}
+ */
+function investitureBeat(sid, townName, fkey, heirNid, predNid, nameByNid, kind, tick, now) {
+  const heirName = nameByNid.get(heirNid) || heirNid;
+  const predName = nameByNid.get(predNid) || predNid;
+  const headline = `${heirName} takes the seat after ${predName}`;
+  const summary = kind === 'coup'
+    ? `In ${townName}, a coup has thrown down ${predName}; ${heirName}, the closest of the old court, takes the seat and inherits its ties — the friends and the grudges carried on, dampened but not forgotten.`
+    : `In ${townName}, ${heirName} has taken the seat from ${predName} and inherits the office's memory — its friends and its enemies, carried forward and faded by the succession.`;
+  const reason = `A ${kind} succession seated ${heirName} above ${predName}; the seat's bonds and grudges pass to the heir at a bounded, dampened fraction (marked inherited) — the memory carries, the ranks stay a permutation.`;
+  const slug = `investiture.${fkey}.${heirNid}.${predNid}`;
+  return {
+    id: `wizard_news.${tick}.npc_ladder.${sid}.${slug}`,
+    tick, createdAt: now, scope: 'local', significance: 'notable', severity: 0.4, score: 50,
+    headline,
+    summary,
+    kind: 'applied', impactKind: 'npc_ladder', channelType: 'settlement',
+    settlementIds: [sid], impactIds: [], channelIds: [],
+    sourceEventId: `npc_ladder.${sid}.${slug}.${tick}`,
+    tags: ['world_pulse', 'npc_ladder', 'investiture', kind],
     reasons: [reason],
   };
 }

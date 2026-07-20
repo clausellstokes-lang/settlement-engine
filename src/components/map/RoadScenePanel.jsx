@@ -25,7 +25,9 @@ const selectStyle = {
 export function itemLine(sectionId, it) {
   if (sectionId === 'road') {
     if (it.leg) return `${it.leg} — ${it.hops} hop${it.hops === 1 ? '' : 's'}, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}`;
-    return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}`;
+    // V-6 BIOME TRUTH: the season/terrain texture appends only on a biomeTexture canon
+    // (it.terrain present); absent ⇒ the line is byte-identical to the pre-V-6 render.
+    return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}${it.terrain ? ` — ${it.terrain}` : ''}`;
   }
   if (sectionId === 'onRoad') {
     if (it.kind === 'army') return `Army of ${it.banner} at ${it.at}, ${it.posture} toward ${it.heading}`;

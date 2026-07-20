@@ -185,6 +185,24 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws2.spatialDigest.settlementIds.length).toBe(9);
   });
 
+  test('BIOME TRUTH (V-6): the virtual biomeTruthEnabled flag LIGHTS the biomes sub-digest; absent ⇒ no key', async () => {
+    const store = makeStore();
+    seedStore(store);
+    // DARK (flag absent from simulationRules): the injected canon carries NO biomes key ⇒
+    // byte-identical to the pre-V-6 canon (the same posture as every existing saved canon).
+    await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: fixtureCapture(6) });
+    expect('biomes' in store.getState().campaigns[0].worldState.spatialDigest).toBe(false);
+    // LIGHT the virtual flag on the campaign worldState ⇒ a re-canonize freezes the biome
+    // sub-digest into the canon (per-settlement biome id + terrain class).
+    store.setState(state => { state.campaigns[0].worldState.simulationRules = { biomeTruthEnabled: true }; });
+    const lit = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: fixtureCapture(6) });
+    expect(lit.ok).toBe(true);
+    const ws = store.getState().campaigns[0].worldState;
+    expect(ws.spatialDigest.biomes, 'the biome sub-digest materializes when the flag is lit').toBeTruthy();
+    expect(ws.spatialDigest.biomes.version).toBe(1);
+    expect(Object.keys(ws.spatialDigest.biomes.bySettlement).length).toBe(6);
+  });
+
   test('SEA LANES (M8): a port-carrying capture LIGHTS the seaLanes slot (the opt-in)', async () => {
     const store = makeStore();
     seedStore(store);

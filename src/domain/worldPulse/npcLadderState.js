@@ -66,6 +66,10 @@ export const LADDER_TUNING = Object.freeze({
   BOND_HALF_LIFE_WEEKS: 156,   // ~3 years base — a friendship fades like a grudge
   BOND_MINT_SEV: 0.5,          // a formation event deposits half a mark (additive, capped)
   BOND_MAX_SEV: 1.0,           // the bounded cap (a bond cannot exceed a full mark)
+  // V-7 HEIRS-LITE: the bounded fraction of a predecessor's bonds/grudges an heir inherits on
+  // a governing-seat succession (marked inherited) — the memory carries, dampened. The heir's
+  // inherited sev = predecessor sev × this, so an inherited mark is ALWAYS ≤ this fraction.
+  HEIR_INHERIT_FRACTION: 0.4,
   // D-4f LINKED / SUPPORTIVE GOALS (the positive mirror of tunnel-vision): a strong bond
   // toward a patron with a live primary goal lets a backer mint a SUPPORT goal instead of a
   // primary; a bond above the join floor lets a peer JOIN the patron's side of a contest.
@@ -244,7 +248,14 @@ export function maintainMarks(st, npc, bandMult, weeks, tick, lieExposure = null
   for (const k of Object.keys(st.grudges).sort(compareCodepoint)) {
     const g = st.grudges[k];
     const sev = round4(decayMark(g.sev, Math.max(0, weeks - g.week), T.GRUDGE_HALF_LIFE_WEEKS, bandMult));
-    if (sev >= T.MARK_PRUNE_EPSILON) grudges[k] = { sev, week: weeks };
+    if (sev >= T.MARK_PRUNE_EPSILON) {
+      /** @type {import('./npcLadderKernel.js').LadderGrudge} */
+      const e = { sev, week: weeks };
+      // V-7: the inherited marker survives decay (the memory carries) — dark-safe (only an
+      // inherited grudge, which exists solely when heirs are lit, carries the flag).
+      if (g.inherited === true) e.inherited = true;
+      grudges[k] = e;
+    }
   }
   // Fresh exposure detection: the corruption mirror bumps timesExposed / sets ousted.
   const exposedNow = Math.floor(num(npc.timesExposed, 0));
@@ -280,7 +291,11 @@ export function maintainMarks(st, npc, bandMult, weeks, tick, lieExposure = null
       const b = st.bonds[k];
       const sev = round4(decayMark(b.sev, Math.max(0, weeks - b.week), T.BOND_HALF_LIFE_WEEKS, bandMult));
       if (sev >= T.MARK_PRUNE_EPSILON) {
-        next[k] = b.foreignSid ? { sev, week: weeks, kind: b.kind, foreignSid: b.foreignSid } : { sev, week: weeks, kind: b.kind };
+        /** @type {import('./npcLadderKernel.js').LadderBond} */
+        const e = b.foreignSid ? { sev, week: weeks, kind: b.kind, foreignSid: b.foreignSid } : { sev, week: weeks, kind: b.kind };
+        // V-7: the inherited marker survives decay (dark-safe — only inherited bonds carry it).
+        if (b.inherited === true) e.inherited = true;
+        next[k] = e;
       }
     }
     if (Object.keys(next).length) bonds = next;
@@ -356,6 +371,9 @@ function normalizeGrudges(v) {
       const entry = { sev: round4(clamp01(sev)), week: num(g.week, 0) };
       // D-4c: a typed contest grudge carries its kind (additive-optional — absent on plain grudges).
       if (typeof g.kind === 'string' && GRUDGE_KINDS.has(g.kind)) entry.kind = g.kind;
+      // V-7: a grudge INHERITED at a seat succession carries the marker (additive-optional —
+      // absent on ordinary grudges ⇒ heirs-dark records are byte-identical).
+      if (g.inherited === true) entry.inherited = true;
       out[key] = entry;
     }
   }
@@ -382,6 +400,9 @@ export function normalizeBonds(v) {
       // D-7f THE ELITE BLEED: an optional FOREIGN counterpart marker — the counterpart NPC
       // lives in settlement foreignSid (a cross-border tie). Absent on same-settlement bonds.
       if (typeof b.foreignSid === 'string' && b.foreignSid) entry.foreignSid = b.foreignSid;
+      // V-7: a bond INHERITED at a seat succession carries the marker (additive-optional —
+      // absent on ordinary bonds ⇒ heirs-dark records are byte-identical).
+      if (b.inherited === true) entry.inherited = true;
       out[key] = entry;
     }
   }
@@ -447,6 +468,94 @@ export function bondedPeersAbove(st, floor) {
     if (num(b.sev, 0) >= min) out.push({ nid, sev: b.sev, kind: b.kind });
   }
   return out.sort((a, b) => (b.sev - a.sev) || compareCodepoint(a.nid, b.nid));
+}
+
+// ── V-7 HEIRS-LITE (the governing seat gains a face on a succession) ──────────
+/**
+ * The DESIGNATED HEIR of a governing seat: among the rung-holders BELOW the seat (rungs[1..]),
+ * the one with the strongest bond toward the seat-holder (rungs[0]) — the most loyal lieutenant,
+ * "who follows the old lion" — codepoint tie-break (iterate in codepoint order, keep the first
+ * strict maximum). Returns the heir npcId, or null when no one stands below the seat. PURE.
+ * @param {string[]} rungs @param {Record<string, import('./npcLadderKernel.js').LadderStanding>} npcs
+ * @returns {string|null}
+ */
+export function designateHeir(rungs, npcs) {
+  if (!Array.isArray(rungs) || rungs.length < 2) return null;
+  const seatNid = rungs[0];
+  /** @type {{ nid: string, sev: number }|null} */
+  let best = null;
+  for (const nid of rungs.slice(1).sort(compareCodepoint)) {
+    const sev = bondSevToward(npcs[nid], seatNid);
+    if (!best || sev > best.sev) best = { nid, sev };
+  }
+  return best ? best.nid : null;
+}
+
+/**
+ * Swap `heirNid` into the top seat (index 0) — a PERMUTATION of the rungs (the conservation law:
+ * the SET is invariant, only the order changes — never an insertion). A no-op when the heir is
+ * absent or already the seat. Returns a NEW array (never mutates). PURE.
+ * @param {string[]} rungs @param {string} heirNid @returns {string[]}
+ */
+export function swapIntoSeat(rungs, heirNid) {
+  const j = Array.isArray(rungs) ? rungs.indexOf(heirNid) : -1;
+  if (j <= 0) return rungs;
+  const next = rungs.slice();
+  const tmp = next[0]; next[0] = next[j]; next[j] = tmp;
+  return next;
+}
+
+/**
+ * The heir inherits a BOUNDED, dampened fraction of the predecessor's bonds AND grudges, each
+ * marked inherited:true (the seat's relational memory carries across a succession — dampened).
+ * Only toward third parties the heir has no existing tie with (the heir's own relationships take
+ * precedence), never toward the heir themselves, and only where the dampened mark is still
+ * meaningful (≥ the prune epsilon). Inherited sev = predecessor sev × HEIR_INHERIT_FRACTION, so
+ * an inherited mark is ALWAYS ≤ that fraction (the bounded pin). Returns a NEW standing (never
+ * mutates; no parallel graph — the copy lands on the heir's OWN record). PURE.
+ * @param {import('./npcLadderKernel.js').LadderStanding} heirSt
+ * @param {import('./npcLadderKernel.js').LadderStanding|null|undefined} predSt
+ * @param {string} heirNid @param {number} weeks
+ * @returns {import('./npcLadderKernel.js').LadderStanding}
+ */
+export function inheritSeatMemory(heirSt, predSt, heirNid, weeks) {
+  if (!heirSt || !predSt) return heirSt;
+  const T = LADDER_TUNING;
+  const frac = T.HEIR_INHERIT_FRACTION;
+  // Grudges (always present): dampened copies toward third parties the heir does not already resent.
+  /** @type {Record<string, import('./npcLadderKernel.js').LadderGrudge>} */
+  const grudges = { ...heirSt.grudges };
+  for (const tid of Object.keys(predSt.grudges).sort(compareCodepoint)) {
+    if (tid === heirNid || grudges[tid]) continue;
+    const sev = round4(clamp01(num(predSt.grudges[tid].sev, 0) * frac));
+    if (sev < T.MARK_PRUNE_EPSILON) continue;
+    /** @type {import('./npcLadderKernel.js').LadderGrudge} */
+    const e = { sev, week: weeks, inherited: true };
+    const kind = predSt.grudges[tid].kind;
+    if (typeof kind === 'string' && GRUDGE_KINDS.has(kind)) e.kind = kind;
+    grudges[tid] = e;
+  }
+  // Bonds (optional): dampened copies toward third parties the heir is not already bonded to.
+  const priorBonds = heirSt.bonds && typeof heirSt.bonds === 'object' ? heirSt.bonds : null;
+  /** @type {Record<string, import('./npcLadderKernel.js').LadderBond>} */
+  const bonds = priorBonds ? { ...priorBonds } : {};
+  const predBonds = predSt.bonds && typeof predSt.bonds === 'object' ? predSt.bonds : null;
+  if (predBonds) {
+    for (const tid of Object.keys(predBonds).sort(compareCodepoint)) {
+      if (tid === heirNid || bonds[tid]) continue;
+      const b = predBonds[tid];
+      const sev = round4(clamp01(num(b.sev, 0) * frac));
+      if (sev < T.MARK_PRUNE_EPSILON) continue;
+      /** @type {import('./npcLadderKernel.js').LadderBond} */
+      const e = { sev, week: weeks, kind: BOND_KINDS.has(b.kind) ? b.kind : 'friendship', inherited: true };
+      if (typeof b.foreignSid === 'string' && b.foreignSid) e.foreignSid = b.foreignSid;
+      bonds[tid] = e;
+    }
+  }
+  /** @type {import('./npcLadderKernel.js').LadderStanding} */
+  const next = { ...heirSt, grudges };
+  if (Object.keys(bonds).length) next.bonds = bonds; else delete next.bonds;
+  return next;
 }
 
 // ── D-4 THE CONTESTS SUB-KEY (the THIRD state chokepoint — normalize / sort) ──────────────
@@ -573,7 +682,14 @@ function sortedStanding(st) {
     const g = {};
     for (const k of gk) {
       const gd = st.grudges[k];
-      g[k] = gd.kind ? { kind: gd.kind, sev: gd.sev, week: gd.week } : { sev: gd.sev, week: gd.week }; // D-4c
+      // Fixed key order (alphabetical: inherited < kind < sev < week); each optional dropped when
+      // absent so an ordinary grudge (no kind, no inherited) is byte-identical to the pre-V-7 shape.
+      /** @type {Record<string, unknown>} */
+      const ge = {};
+      if (gd.inherited === true) ge.inherited = true; // V-7
+      if (gd.kind) ge.kind = gd.kind;                 // D-4c
+      ge.sev = gd.sev; ge.week = gd.week;
+      g[k] = ge;
     }
     out.grudges = g;
   }
@@ -588,9 +704,14 @@ function sortedStanding(st) {
       const b = {};
       for (const k of bk) {
         const bd = st.bonds[k];
-        b[k] = bd.foreignSid
-          ? { foreignSid: bd.foreignSid, kind: bd.kind, sev: bd.sev, week: bd.week }
-          : { kind: bd.kind, sev: bd.sev, week: bd.week };
+        // Fixed key order (alphabetical: foreignSid < inherited < kind < sev < week); each optional
+        // dropped when absent so an ordinary bond is byte-identical to the pre-V-7 shape.
+        /** @type {Record<string, unknown>} */
+        const be = {};
+        if (bd.foreignSid) be.foreignSid = bd.foreignSid;
+        if (bd.inherited === true) be.inherited = true; // V-7
+        be.kind = bd.kind; be.sev = bd.sev; be.week = bd.week;
+        b[k] = be;
       }
       out.bonds = b;
     }

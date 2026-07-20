@@ -30,6 +30,7 @@ import { currentRegion } from '../spatial/armyTransit.js';
 import { warFrontsInto } from '../worldPulse/warFrontReads.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { migrationColumnReason } from '../roads/migrationReason.js';
+import { biomeSeasonTexture } from '../../data/biomeTexture.js';
 import { SOURCE, section, assembleBrief } from './citations.js';
 
 const DEFAULT_RISK = 0.65; // the party sees the real best road (a middling risk tolerance)
@@ -112,6 +113,12 @@ export function composeRoadSceneBrief(args) {
   const path = route && Array.isArray(route.path) ? route.path.map(str) : [];
   const pathSet = new Set(path);
 
+  // V-6 BIOME TRUTH: the per-settlement biome/terrain from the digest's additive `biomes`
+  // sub-key (present ONLY on a biomeTexture canon). Absent ⇒ empty ⇒ no texture appended ⇒
+  // byte-identical (the dormancy contract at the read side). Pulls a season texture line so a
+  // road through tundra reads as such.
+  const biomeBySettlement = asObject(asObject(asObject(digest).biomes).bySettlement);
+
   // ── SECTION 1: THE ROAD — per-hop conditions ──
   /** @type {Array<Record<string, unknown>>} */
   const roadItems = [];
@@ -123,6 +130,9 @@ export function composeRoadSceneBrief(args) {
       /** @type {Record<string, unknown>} */
       const item = { at: nameOf(hop), condition: conditionLabel(level), embattlement: round2(level) };
       if (toll > 0) item.toll = round2(toll);
+      // V-6: the terrain/season texture for THIS hop's biome (drop-when-absent ⇒ dark-identical).
+      const terrainClass = str(asObject(biomeBySettlement[hop]).terrain);
+      if (terrainClass) item.terrain = biomeSeasonTexture(terrainClass, season);
       roadItems.push(item);
     }
   }

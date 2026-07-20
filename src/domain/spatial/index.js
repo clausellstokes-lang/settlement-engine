@@ -38,6 +38,7 @@ export {
   SPATIAL_GEOMETRY_VERSION,
   COST_LAW_VERSION,
   OVERLAY_VERSION,
+  BIOME_TEXTURE_VERSION,
   normalizeSpatialPack,
   resolveSeeds,
   buildSpatialDigest,
