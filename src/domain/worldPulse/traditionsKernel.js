@@ -68,6 +68,8 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKe
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 import { advanceRelations } from '../traditions/relations.js';
 import { traditionBeatProse } from '../traditions/prose.js';
+import { memoryWeaveActive, mintMemoryWeaveIncident, edgeKeyBetween, MEMORY_WEAVE_INCIDENT_TYPES } from './relationshipEvolution.js';
+import { clamp01 } from '../../kernel/math.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -143,6 +145,10 @@ const TRAD_TUNING = Object.freeze({
 
 // §3 SKIP CHECK — the hard-stressor archetypes (per-settlement activeConditions) that
 // cancel a festival (a town under plague/famine/war/occupation does not celebrate).
+// D-7b: the bounded resentment the imposed-upon vassal accrues toward its overlord
+// when a rite is forced on it (the tribute_strain magnitude family). Vetoable.
+const RITE_IMPOSED_RESENTMENT_W = 0.12;
+
 const HARD_STRESSOR_ARCHETYPES = new Set(['plague', 'famine', 'war_pressure', 'occupation_burden', 'vassal_extraction']);
 // Realm war stressors that CANCEL (the hard war-shapes) vs merely PENALIZE ('wartime').
 const CANCEL_STRESSOR_TYPES = new Set(['siege', 'occupation']);
@@ -558,6 +564,11 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
   const faithBySid = new Map();
   /** @param {Map<string, number>} m @param {string} k @param {number} d */
   const bump = (m, k, d) => m.set(k, (m.get(k) || 0) + d);
+  // D-7b THE MEMORY WEAVE — rite impositions that fired THIS tick (overlord↔vassal),
+  // folded into relationshipStates AFTER the pass through the plane's one writer,
+  // gated on memoryWeaveActive so a lit-traditions / weave-dark world stays byte-identical.
+  /** @type {Array<{ overlordId: string, sid: string }>} */
+  const riteImpositions = [];
 
   // ── PASS 1: per live settlement — mint (first lit) or carry; resolve occurrences. ──
   for (const sid of orderedIds) {
@@ -587,6 +598,7 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       influx: influxByDest.get(sid) || [], pop: num(asObject(s).population, 0), tierCap: traditionCountCap(asObject(s)),
     });
     const workRecs = relations.recs;
+    if (relations.imposedOverlordId) riteImpositions.push({ overlordId: relations.imposedOverlordId, sid });
 
     const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
     // The grandest ACTIVE (non-suppressed) observance sets the MAJOR-news bar; a suppressed
@@ -698,6 +710,31 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     changed = true;
   }
   if (newsEntries.length) changed = true;
+
+  // ── D-7b THE MEMORY WEAVE: mint the rite_imposed grievance mark ──────────────
+  // A rite imposition finally leaves a DECAYING grievance on the overlord↔vassal
+  // edge (the vassal resents the trade), through the plane's ONE writer. Gated on
+  // memoryWeaveActive: a lit-traditions world with the weave dark is byte-identical
+  // (no key touched). No edge between the pair ⇒ a byte-safe no-op. The write rides
+  // the returned worldState (survives both commit paths); read next tick by
+  // scoreGrievance/revanchism + the D-4 fixation grievanceLean (law 14's honest lag).
+  if (riteImpositions.length && memoryWeaveActive(worldState)) {
+    const edges = /** @type {any} */ (asObject(asObject(snapshot).regionalGraph).edges);
+    for (const { overlordId, sid } of riteImpositions) {
+      const key = edgeKeyBetween(edges, String(overlordId), String(sid));
+      if (!key) continue;
+      const current = asObject(asObject(nextWorldState).relationshipStates)[key];
+      const resentment = clamp01(num(asObject(current).resentment, 0) + RITE_IMPOSED_RESENTMENT_W);
+      nextWorldState = mintMemoryWeaveIncident(nextWorldState, {
+        relationshipKey: key,
+        incidentType: MEMORY_WEAVE_INCIDENT_TYPES.RITE_IMPOSED,
+        patch: { resentment },
+        severity: 0.35,
+        id: `tradition_rite_imposed.${sid}.${overlordId}.${now2}`,
+      }, now);
+      changed = true;
+    }
+  }
 
   return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries };
 }

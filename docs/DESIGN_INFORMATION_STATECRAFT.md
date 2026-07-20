@@ -124,7 +124,10 @@ World-only (no party-facing spy missions — that pen is the DM's; the world's i
 scenery and consequence, never a quest generator). No named-character fates: paid eyes and
 exposed agents are ANONYMOUS AGGREGATES ("her eyes in Thornwall went quiet"); a named NPC may be
 CITED as a channel in prose (via §G ties) but is never burned, turned, or executed by the
-engine. Dormant/additive: all posture state nests under the spatialLedgers namespace, absent ⇒
+engine. (PER-NPC CREDIBILITY is the deep-couplings layer's sanctioned province — DESIGN_DEEP_COUPLINGS
+D-2, owner ruling 2026-07-19: a personal credibility stock and a lie-stigma standing hit are
+REPUTATION costs, not fate resolutions; no exposure removes, kills, or disappears the NPC — fates
+remain unresolvable everywhere.) Dormant/additive: all posture state nests under the spatialLedgers namespace, absent ⇒
 byte-identical; the verbs light with W-DOCTRINE's gate. Party never feeds the math; tier never
 touches it. E0 governs initiation tempo (deception and posture-change are drama-classed
 spontaneity; consequence chains — exposure, grievance, credibility collapse — are never
