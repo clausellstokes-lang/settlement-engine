@@ -36,10 +36,21 @@
     mounts + worker transport swap; import→wall unification WAITS for V-G — a
     pass-3 seam). Vetoable pass-1 fold calls live in the ledger row (mig-168
     pg_temp pin · killList re-pin · campaignSlice deferral) — OWNER QUEUE.
-  - HOT (2 workstreams): FOLD PASS 2 in `minifold` (base 5d9218c6) · V-M (display
-    follow-ons V-25a..f) in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6
-    — BUILT (tip 8816db97, closure Δ0, ratchets green); finishing its full-suite
-    isolation triage before the lane lands. V-N LANDED @ claude/vision-n
+  - FOLD PASS 2 DONE @ composite-r4 `dbbc6fb6` (V-K+V-F+V-J + seams + fixes;
+    per-merge closures 1,036,408→1,037,885→1,038,364; suite 14,983/4-parked
+    + anyCast; DM screen mounts letter+oracle; vercel meta-shell rewrites in;
+    sitemap 336). ⚠⚠ HEADROOM 1,636. THE ONLY NON-PARKED RED =
+    domainAnyCastBaseline (V-K+V-F's 32 house-idiom holes vs the FROZEN 2252
+    ceiling) — cure = the SLIM LANE, not a raise. ⚠ PARKED SET AT r4 =
+    beliefMap · generator · deity · pdf goldenViewModel (pipeline.property is
+    GREEN here — V-K's memory listed the pre-r4 set).
+  - HOT (2 workstreams): THE SLIM LANE in `minifold` on composite-r4 (pre-pass-3:
+    thin the R-14 forensics EAGER seam −5-6K keeping eager-and-complete semantics
+    + burn the 32 any-holes to keep the frozen ceiling; pass-3 breach arithmetic:
+    V-G ~+4.5K + V-N 270 + V-O 295 + V-L ~312 vs 1,636) · V-M (display follow-ons)
+    in the `vision-c` wt on `claude/vision-m` @ base 5d9218c6 — BUILT (tip
+    8816db97, closure Δ0, ratchets green); finishing its full-suite isolation
+    triage before the lane lands. V-N LANDED @ claude/vision-n
     `e017c1f2` (multi-hop+campaign interview on V-1's wall, every hop metered ·
     handbook voice dark; Δ+270 ⇒ headroom 3,331 on the folded lineage; ⚠ PASS-3
     BUDGET: folded 1,036,399 +479(V-J) +270(V-N) +295(V-O) + V-F's UNMEASURED Δ

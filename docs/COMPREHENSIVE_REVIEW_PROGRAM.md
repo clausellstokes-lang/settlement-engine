@@ -1134,6 +1134,42 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐⭐ FOLD PASS 2 EXECUTED — the table's ledger, the findable truth, and the
+court join the composite (2026-07-20, claude/composite-r4 @ dbbc6fb6, base
+5d9218c6, 8 commits; manager-verified tip+clean).** Merges: V-K 0ee0c9e1 (zero
+conflicts, name-swap chain intact) → V-F 7eae9a8b (registry unions hand-verified)
+→ V-J cf4fa74c (one conflict, routes union). SEAMS: DM screen mounts the
+Chronicler's Letter (public-chronicle reformat, both faces — verified no secret
+content) + Oracle (DM-only) 1d581ea7 · vercel afterFiles rewrites
+/gallery+/world→meta-shell, sitemap regen 336 URLs byte-match 4b992cc3 · worker-
+transport swap = VERIFIED NO-OP (advance already rides V-D's harness; the
+auspice's sync forecast is a recorded do-not-worker seam) · import→wall waits on
+pass 3 by design. FIXES: killList re-pin (V-F UI) · slugify defect-class cure in
+assizeKernel → canonical ladderFactionKey (baseline 36==36, ceiling NOT widened)
+· stale analytics edge bundle regen (table-event kind; spurious timestamp
+reverted) · .npcs/.institutions census dispositions (a ruined courthouse is no
+venue — isLiveInstitution). THE FOLD LAW HELD: per-merge closures 1,036,408 →
+1,037,885 → 1,038,364 ≤ 1,040,000 — ⚠⚠ HEADROOM NOW 1,636 (V-F measured +1,477;
+V-J +479 exactly as documented). Suite (clean-load, authoritative): 14,983
+passed / failures = the 4 parked goldens (pdf goldenViewModel BASE-PROVEN; the
+parked set at composite-r4 = beliefMap·generator·deity·pdfViewModel — V-K's
+memory's pipeline.property is GREEN here, the set shifted) + anyCast (below).
+A 229-load contention storm false-flagged 35 files mid-run — every one green in
+isolation; hazard re-banked. tsc 0 · strict 0 · lint 0 · dist green · migration
+head 168 (no lane minted). ⚠ THE ONE NON-PARKED RED: domainAnyCastBaseline —
+V-K+V-F's 6 new domain files add 32 house-idiom any-holes vs the OWNER-FROZEN
+ceiling 2252 (total would be 2274). JUDGMENT (manager, vetoable): TYPE BURN-DOWN
+over ceiling-raise — the ceiling is owner-frozen ("NEVER raise") and the
+termination law forbids weakening a gate to pass it; V-L proved the cure idiom
+(JSDoc/casts only). Raising stays owner-gated; veto = park the raise question to
+the owner queue instead. ⚠⚠ PASS-3 BREACH FORESEEN (manager arithmetic): V-G
+looks ~+4.5K eager (registry strings/store surface) + V-N +270 + V-O +295 + V-L
+~+312 + V-M 0 ≈ +5.4K vs 1,636 headroom ⇒ breach ~3.8K. JUDGMENT (manager,
+vetoable): PRE-PASS-3 SLIM LANE dispatched on composite-r4 — thin the R-14
+forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
+bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
+and pass 3 still measures per merge and halts on breach. Veto = revert the slim
+commits. Memory: fold-pass-2-executed.md (indexed).**
 **⬛⭐ THE COLD-THEN-CONNECT LAW (owner order, 2026-07-20) — cycle-2 review
 methodology amended:** every cycle-2 (and confirming-cycle) survey lane runs
 COLD — no prior context in any discovery brief (charge + dimension + scope
