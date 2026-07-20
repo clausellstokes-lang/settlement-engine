@@ -318,6 +318,25 @@ R-29 THE FIRST HUNDRED: founding cohort acknowledgment page (community seeding).
 R-30 CREATOR KIT + PUBLIC ROADMAP: press/creator asset bundle (curated seeds,
   timelapse clips, screenshots) + a public roadmap page fed from the vNext ledger.
 
+
+## V-19 THE FINDABLE TRUTH — lane V-J (owner-commissioned 2026-07-20: raise
+## dimension 14 to A/A+ IN the building phase)
+WHY: the SPA's client-only rendering caps discoverability at B — deep links unfurl as
+the homepage (unfurlers do not execute JS), client JSON-LD is crawler-invisible, and
+the compendium funnel stops at per-tab URLs. All repo-controlled; V-13's seed-post
+virality DEPENDS on per-world unfurls.
+MECHANISM: (1) post-build PRERENDER of every public route to static HTML with
+route-specific <head> (OG + description + JSON-LD) baked; SPA hydrates over it;
+zero eager bytes, zero new servers. (2) META-SHELL unfurl endpoint for dynamic
+links (gallery worlds, /world/<code>) + the existing og-image card — a shared seed
+unfurls as ITS world. (3) PER-ENTRY compendium routes — the route-derived sitemap
+fans the long tail automatically. (4) PINS: a dist-walking build test asserting
+per-route og:title/desc/image + schema-valid JSON-LD; sitemap==router; the Wave-D
+AI-crawler directives verified not to block legitimate search bots.
+SEQUENCING: first free lane slot AFTER V-I (its pages join the prerender) reading
+V-E's share-code format. Worktree vision-j (claude/vision-j) provisioned.
+PINS carry the grade: unfurls enforced, never hoped.
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
