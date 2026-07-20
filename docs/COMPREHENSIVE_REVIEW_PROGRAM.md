@@ -1134,6 +1134,23 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ROUND 3 WAVE F1 SHIPPED — UI correctness + a11y + voice (2026-07-20,
+composite-r4 @ ad15e2c1 + ledger doc @ fab8f91d; manager-validated).** 11 of 13
+findings fixed + 13 pins across 24 files: the P1 library white-screen closed at the
+migrateCampaign chokepoint · the paid Chronicle button made total (try/finally +
+requestCampaignChronicle totality) · fail-visible library load + owner-keyed latch ·
+THE ONE DOOR routed through useDialogFocusTrap · money-action SUCCESS announcements
+(noteAria, WCAG 4.1.3) · eyebrow AA via -700 inks (green 5.40 / slate 6.40 / amber
+5.39) · tradition beats de-jargoned (no §refs) · their-patron · no raw-id headlines
+(incl. the graph.js name-defaults-to-id discovery) · no raw JSON on the road scene.
+Gate: strict 0 · tsc 0 · lint 0 · 203/203 focused (18 files) · build ✓ · verify:dist
+162/162 · closure 1,024,585 (+74 B, in tolerance). TWO HONEST STOPS (correct):
+npc-agency crier voice DEFERRED — it would reverse the RECORDED deliberately-unvoiced
+EXPECTED_VOICE decision (a T-5 surface question → owner queue); START_HERE.md lives
+only on the ledger branch → fixed there (5→4 expected reds). REFUTER-AMENDMENT
+CORRECTED BY CODE: the a11y-3 'violet' claim was wrong for this tree (code = SLATE);
+the implementer followed the code — the layered-skepticism pipeline works both ways.
+WAVE F2 (11 engine repairs) DISPATCHED.**
 **⬛⭐⭐ BUILD-COMPLETENESS PASSED + THE HANDOFF GATE CLOSED — THE ROUND 3 LOOP IS
 OPEN (2026-07-20, the executor session).** The 8-auditor completeness workflow
 (wf_61870393-aa2, ~104 slices across every design source) returned EXACTLY ONE missing
