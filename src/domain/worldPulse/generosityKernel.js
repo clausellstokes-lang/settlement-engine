@@ -126,6 +126,7 @@ import {
 } from '../spatial/generosityReactions.js';
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { applyFoodDeltasToUpdates, applyLegitimacyDeltasToUpdates, applyProsperityDeltasToUpdates } from '../spatial/generosityUpdates.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
@@ -1243,118 +1244,6 @@ function sortedRecord(rec) {
   const out = {};
   for (const k of Object.keys(rec).sort()) out[k] = rec[k];
   return out;
-}
-
-/**
- * Apply the conserved per-settlement storageMonths deltas to settlementUpdates (clamped to
- * [0, granary capacity], rounded to the tenth-month — the applyFoodStockpileOutcome idiom).
- * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} foodDeltas
- * @returns {GenUpdate[]}
- */
-function applyFoodDeltasToUpdates(updates, updateIndex, foodDeltas) {
-  let next = updates;
-  let cloned = false;
-  for (const [id, delta] of foodDeltas) {
-    if (!delta) continue;
-    const ui = updateIndex.get(String(id));
-    if (ui === undefined) continue;
-    const entry = next[ui];
-    const settlement = entry?.settlement;
-    const fs = settlement?.economicState?.foodSecurity;
-    if (!fs || !Number.isFinite(Number(fs.storageMonths))) continue;
-    const cap = storageCapacityMonths(asSimSettlement(settlement));
-    const nextMonths = Math.round(Math.max(0, Math.min(cap, Number(fs.storageMonths) + delta)) * 10) / 10;
-    if (nextMonths === Number(fs.storageMonths)) continue;
-    if (!cloned) { next = updates.slice(); cloned = true; }
-    next[ui] = {
-      ...entry,
-      settlement: {
-        ...settlement,
-        economicState: { ...settlement.economicState, foodSecurity: { ...fs, storageMonths: nextMonths } },
-      },
-    };
-  }
-  return next;
-}
-
-/**
- * Apply the bounded per-giver publicLegitimacy.score deltas to settlementUpdates (§9): a
- * hungry giver's ruler loses legitimacy for shipping food out, a comfortable one gains a
- * small "granary city" lift. Integer, clamped [0,100] (the applyDivineMandate idiom); SKIPS
- * a legacy bare-number or absent legitimacy (only nudges a structured {score}). Pure.
- * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} legitimacyDeltas
- * @returns {GenUpdate[]}
- */
-function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) {
-  let next = updates;
-  let cloned = false;
-  for (const [id, delta] of legitimacyDeltas) {
-    if (!delta) continue;
-    const ui = updateIndex.get(String(id));
-    if (ui === undefined) continue;
-    const entry = next[ui];
-    const settlement = entry?.settlement;
-    if (!settlement) continue;
-    const ps = asObject(settlement.powerStructure);
-    const plRaw = ps.publicLegitimacy;
-    const pl = plRaw && typeof plRaw === 'object' && !Array.isArray(plRaw)
-      ? /** @type {Record<string, unknown>} */ (plRaw) : null;
-    if (!pl || !Number.isFinite(Number(pl.score))) continue;
-    const nextScore = Math.round(Math.max(0, Math.min(100, Number(pl.score) + delta)));
-    if (nextScore === Number(pl.score)) continue;
-    if (!cloned) { next = updates.slice(); cloned = true; }
-    next[ui] = /** @type {GenUpdate} */ ({
-      ...entry,
-      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
-        ...settlement,
-        powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } },
-      })),
-    });
-  }
-  return next;
-}
-
-/**
- * Apply the PURCHASE payment prosperity BAND-STEP deltas to settlementUpdates (§4/A2 — E1d):
- * a buyer's band-step debit + a bounded seller income nudge, both ranked on the canonical
- * PROSPERITY_TIERS ladder (data/constants — never a hand-typed band match), clamped [0,6], and
- * written back IN KIND (a string label stays a string; a { tier } object keeps its shape). A
- * settlement with no readable prosperity band (numeric/absent ⇒ rank −1) is SKIPPED. Because
- * the ladder is coarse, a single sale's sub-band nudge often rounds to no change; a settlement
- * that sells to several buyers in one tick accumulates its credits and CAN step up a band (the
- * "granary city grows rich on volume" story). Pure.
- * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} prosperityDeltas
- * @returns {GenUpdate[]}
- */
-function applyProsperityDeltasToUpdates(updates, updateIndex, prosperityDeltas) {
-  let next = updates;
-  let cloned = false;
-  const maxRank = Math.max(1, PROSPERITY_TIERS.length - 1);
-  for (const [id, delta] of prosperityDeltas) {
-    if (!delta) continue;
-    const ui = updateIndex.get(String(id));
-    if (ui === undefined) continue;
-    const entry = next[ui];
-    const settlement = entry?.settlement;
-    const ec = asObject(settlement?.economicState);
-    const cur = ec.prosperity;
-    const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (cur));
-    if (rank < 0) continue; // no readable band (numeric/absent) — nothing to step
-    const nextRank = Math.round(Math.max(0, Math.min(maxRank, rank + delta)));
-    if (nextRank === rank) continue;
-    const nextLabel = PROSPERITY_TIERS[nextRank];
-    // Preserve the field shape (string label vs { tier } object).
-    const nextProsperity = cur && typeof cur === 'object' && !Array.isArray(cur)
-      ? { .../** @type {Record<string, unknown>} */ (cur), tier: nextLabel } : nextLabel;
-    if (!cloned) { next = updates.slice(); cloned = true; }
-    next[ui] = /** @type {GenUpdate} */ ({
-      ...entry,
-      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
-        ...settlement, economicState: { ...ec, prosperity: nextProsperity },
-      })),
-    });
-  }
-  return next;
 }
 
 export { REACTION_TUNING };
