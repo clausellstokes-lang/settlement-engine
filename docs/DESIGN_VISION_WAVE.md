@@ -360,6 +360,31 @@ PINS carry the grade: unfurls enforced, never hoped.
    explicit display-order field. Build host: lane V-E (already building the gallery
    featured flags + RLS census — one coherent gallery migration, not two).
 
+
+## V-21 THE LIVING SOAK (owner insight 2026-07-20: "isn't that our soak? can we make
+## that our continuous soak through public use?") — COMMISSIONED with the
+## ANTI-AUTO-TUNE LAW explicit
+THE LAW FIRST (constitutional, non-negotiable): the program NEVER updates itself
+against field data. Auto-tuning = continuous undeclared same-seed shifts = the death
+of "a seed is a world." The loop closes ONLY through the owner's signature.
+THE ARCHITECTURE — closed-loop observation, human-signed actuation:
+(1) THE FIELD OBSERVATORY (buildable core): an evaluator comparing id-free telemetry
+aggregates against the R-15 proposedSoakBands manifest, emitting DRIFT REPORTS via
+the R-28 alarm seam ("metric X runs Nx its declared band across M worlds"); fully
+automatic WATCHING, zero actuation. (2) OWNER-SIGNED VERSIONED TUNING: drift review
+→ a versioned tuning release with its declared honesty row (the existing tune law,
+unchanged). (3) WORLD-PINNED PHYSICS: campaigns keep the ruleset version they were
+born under (the rulesetLog/CL-0 machinery); new worlds take new tuning; migration is
+a player-visible choice, never an ambush. HONEST LIMIT (recorded): field bands are
+coarse (id-free by design) — they certify DISTRIBUTIONS; deep invariants
+(conservation, byte-identity) remain the synthetic soak's job. The synthetic soak
+certifies at launch; the observatory re-certifies forever. V-10's certificate gains
+a LIVING tier post-launch (field-certified, world-years counted). BUILD SLOT: the
+evaluator + report surface ride cycle 2's window or a late lane (small — R-15 manifest
++ R-28 seam + analytics aggregates already exist); the post-launch halves activate
+with real data. PINS: the evaluator never writes any engine/tuning state (read-only
+by construction, source-scanned) · drift report determinism over a fixture corpus.
+
 ## SUPERSEDED — original recorded-not-commissioned list (kept for the record)
 R-1 THE SESSION LEDGER (my strongest recommendation): DM-authored table events as
   first-class committable edits — "the party saved the granary" enters the world
