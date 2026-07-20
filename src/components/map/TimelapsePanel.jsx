@@ -17,10 +17,11 @@ import { useStore } from '../../store/index.js';
 import { buildTimelineTrack, frameAtTick, trackSettlementIds, settlementTimeline, serializeTimelapseClip } from '../../domain/display/timelineTrack.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { slugify } from '../../kernel/slugify.js';
 
 const SELECT_STYLE = { fontSize: FS.micro, color: swatch.inkMag2, background: swatch['#FAF8F4'], border: `1px solid ${swatch['#EDE3CC']}`, padding: '3px 5px', maxWidth: '100%' };
-/** A filesystem-safe slug from a campaign name (the export-filename idiom). */
-const clipSlug = (name) => (String(name || 'realm').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'realm');
+/** A filesystem-safe slug from a campaign name (the export-filename idiom, kernel primitive). */
+const clipSlug = (name) => slugify(name || 'realm', { fallback: 'realm' });
 
 /**
  * @param {Object} props

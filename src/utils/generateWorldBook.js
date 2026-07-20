@@ -28,6 +28,7 @@ import { getAllModifiers } from '../lib/relationshipGraph.js';
 import { autoLayout } from './graphLayout.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { collectRealmSummary } from './generateCampaignPDF.js';
+import { slugify } from '../kernel/slugify.js';
 
 // ── Page geometry + palette (mirrors the campaign PDF) ───────────────────────────
 const PW = 210, PH = 297;
@@ -410,6 +411,6 @@ export function generateWorldBook(campaign, allSaves = [], opts = {}) {
   pageN = buildRealmChapter(d, book, pageN);
   // Last chapter: its returned page count is not read again (the doc saves next).
   buildReceiptsAppendix(d, book, pageN);
-  const slug = String(book.title || 'world').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'world';
+  const slug = slugify(book.title || 'world', { max: 40, fallback: 'world' });
   d.save(`world-book-${slug}${book.mode === 'player' ? '-player' : ''}.pdf`);
 }

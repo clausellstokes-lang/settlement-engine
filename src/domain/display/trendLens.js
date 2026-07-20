@@ -80,8 +80,12 @@ export function populationTrendBand(history) {
  */
 export function buildTrendLenses({ settlement } = {}) {
   const history = settlement && Array.isArray(settlement.populationHistory) ? settlement.populationHistory : [];
-  const { band, net, window } = populationTrendBand(history);
-  if (window < 2) return [];
+  // NB: destructured as windowSize (not `window`) — the engine spine must stay DOM-free
+  // and worker-loadable; a local named `window` shadows the browser global and trips the
+  // engineWorkerDomFree source-scan guard (its binding heuristic can't see a destructured
+  // `window`). The public TrendLens field is still `window`.
+  const { band, net, window: windowSize } = populationTrendBand(history);
+  if (windowSize < 2) return [];
   const key = String(band);
   const direction = /** @type {'rising'|'steady'|'falling'} */ ((/** @type {Record<string, string>} */ (DIRECTION))[key] || 'steady');
   const verb = (/** @type {Record<string, string>} */ (POP_READING))[key] || 'has held level';
@@ -92,7 +96,7 @@ export function buildTrendLenses({ settlement } = {}) {
     band,
     direction,
     magnitude: net,
-    window,
-    reading: `${verb} over the last ${window} reading${window === 1 ? '' : 's'}${netClause}`,
+    window: windowSize,
+    reading: `${verb} over the last ${windowSize} reading${windowSize === 1 ? '' : 's'}${netClause}`,
   }];
 }
