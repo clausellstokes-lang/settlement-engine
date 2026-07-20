@@ -64,6 +64,12 @@ jobs:
       - name: Validate tuning bands
         run: npm run validate:tuning-bands
 
+      - name: Validate Foundry module package
+        run: npm run validate:foundry-module
+
+      - name: Validate MCP truth-server package
+        run: npm run validate:mcp-server
+
       # tsc --noEmit against src/domain/. The JSDoc types in the domain
       # layer get validated by tsc; the pipeline output object shapes,
       # impairment dimensions, event types, and faction-response shapes

@@ -364,8 +364,71 @@ export async function setCurated(settlementId, curated, sortOrder = null) {
 }
 
 /**
+ * Fetch the FEATURED gallery — the small, top-billed set of hero worlds shown
+ * first (Vision V-13, the sibling of the curated set). Backed by the
+ * `list_featured_dossiers()` RPC (migration 168); returns dossiers in explicit
+ * featured order (featured_order asc, nulls last → published_at desc). Empty
+ * array when Supabase isn't configured.
+ */
+export async function fetchFeaturedGallery() {
+  if (!isConfigured) return [];
+
+  const { data, error } = await supabase.rpc('list_featured_dossiers');
+  if (error) {
+    console.error('[gallery] featured listing failed:', error);
+    return [];
+  }
+
+  return (data || []).map(row => ({
+    id:          row.id,
+    slug:        row.public_slug,
+    name:        row.name,
+    tier:        row.tier,
+    publishedAt: row.published_at,
+    viewCount:   row.view_count ?? 0,
+    featured:    true,
+  }));
+}
+
+/**
+ * Admin-only: mark a dossier as featured (or unmark it). The server RPC
+ * (migration 168) gates this to developer/admin roles and writes an audit row;
+ * a normal user's call is rejected (tests/security/galleryFeatured.pglite).
+ *
+ * @param {string} settlementId — The settlement to feature.
+ * @param {boolean} featured    — Target state.
+ * @param {number} [sortOrder]  - Optional explicit sort index within the featured section.
+ */
+export async function setFeatured(settlementId, featured, sortOrder = null) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  const { error } = await supabase.rpc('set_featured', {
+    target_id:  settlementId,
+    featured,
+    sort_order: sortOrder,
+  });
+  if (error) throw new Error(error.message || 'Featured toggle failed');
+}
+
+// ── V-20 UNLISTED SHARING + featured maps (migration 168) ────────────────────
+// Extracted to ./galleryUnlisted.js (hot-file ceiling) and re-exported so every
+// existing consumer keeps importing from gallery.js.
+export {
+  fetchFeaturedMaps, setFeaturedMap,
+  shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
+  fetchMyUnlistedDossiers, fetchUnlistedDossier,
+  shareMapUnlisted, rotateMapUnlistedSlug, fetchMyUnlistedMaps, fetchUnlistedMap,
+} from './galleryUnlisted.js';
+// fetchUnlistedDossier is also used internally by the fetchPublicDossier fallback.
+import { fetchUnlistedDossier } from './galleryUnlisted.js';
+
+/**
  * Fetch a single public dossier by its slug. Returns the sanitized
  * settlement payload that OutputContainer can render read-only.
+ *
+ * V-20: falls back to the unlisted-by-slug read when the public lookup misses,
+ * so a party link (/gallery?slug=<unlisted_slug>) opens the world in-app. The
+ * unlisted read reuses the SAME server sanitizer, so it leaks no more than a
+ * public read.
  */
 export async function fetchPublicDossier(slug) {
   if (!isConfigured) return null;
@@ -378,7 +441,25 @@ export async function fetchPublicDossier(slug) {
     return null;
   }
   const row = Array.isArray(data) ? data[0] : data;
-  if (!row) return null;
+  if (!row) {
+    // V-20: a public lookup miss may be an UNLISTED party link — resolve it by
+    // its unlisted slug (the server already sanitized the dossier). No votes /
+    // reactions / view-bump for an unlisted read (those are public-gallery
+    // features an unlisted world is deliberately absent from).
+    const unlisted = await fetchUnlistedDossier(slug);
+    if (!unlisted) return null;
+    return {
+      ...sanitizeDossier({
+        id: unlisted.id,
+        name: unlisted.name,
+        tier: unlisted.tier,
+        public_slug: unlisted.slug,
+        data: unlisted.dossier,
+        author_name: unlisted.author_name,
+      }),
+      unlisted: true,
+    };
+  }
 
   // Fire-and-forget view bump. We don't want a slow counter write to
   // delay rendering; failure here just leaves the number stale.
