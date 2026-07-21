@@ -307,6 +307,15 @@ function ensureTerminal(s) {
   return /[.?]$/.test(s) ? s : `${s}.`;
 }
 
+/** Lowercase the first character of an AUTHORED connective (never a recorded
+ *  headline). Used when a register is comma-joined mid-sentence after the calendar
+ *  opener, so "In the spring of year 1, In its shadow:" reads "..., in its shadow:".
+ *  A deterministic compose-time transform, not a second lexicon spelling.
+ *  @param {string} s */
+function lowerFirst(s) {
+  return s ? s.charAt(0).toLowerCase() + s.slice(1) : s;
+}
+
 /**
  * Whether the discourse-prose realizer is active for a world — the virtual
  * `discourseProseEnabled` flag, read defensively (mirrors provenanceLedgerActive).
@@ -405,8 +414,9 @@ export function realizeCauseWalk(walk, opts = {}) {
     if (anticip) {
       relation = 'anticipatory';
       const reg = pick(/** @type {ReadonlyArray<string>} */ (CONNECTIVE_LEXICON.anticipatory), seedId, `anticipatory:${node.id}`);
-      // opener + register: keep the calendar time first, comma-joined, register second.
-      connective = (opening && node.tick != null) ? `In ${tickCalendarLabel(node.tick)}, ${reg}` : reg;
+      // opener + register: calendar time first, comma, register second. Comma-joined
+      // mid-sentence, the register loses its standalone capital (authored text only).
+      connective = (opening && node.tick != null) ? `In ${tickCalendarLabel(node.tick)}, ${lowerFirst(reg)}` : reg;
     } else {
       relation = opening ? 'open' : relationOf(prev, node);
       connective = relation === 'open' ? openingConnective(node) : connectiveFor(relation, node, seedId);

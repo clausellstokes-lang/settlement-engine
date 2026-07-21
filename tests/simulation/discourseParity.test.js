@@ -57,7 +57,7 @@ const FALLBACKS = new Set([REDACTED_HOP, 'an earlier cause', 'World pulse outcom
 /** a connective is a finite lexicon entry, a tickCalendarLabel opener, an anticipatory
  *  opener (opener + register, the elision-rule-2 joining rule), or empty. */
 const OPENER = /^In the (spring|summer|autumn|winter) of year \d+:$/;
-const ANTIC_OPENER = /^In the (spring|summer|autumn|winter) of year \d+, (Forewarned:|Against what was coming:|In its shadow:)$/;
+const ANTIC_OPENER = /^In the (spring|summer|autumn|winter) of year \d+, (forewarned:|against what was coming:|in its shadow:)$/;
 const legalConnective = (c) => c === '' || ALL_CONNECTIVES.has(c) || OPENER.test(c) || ANTIC_OPENER.test(c);
 /** the spellBreakCensus detectors (replicated), applied to the AUTHORED tissue only. */
 const DETECTORS = [
@@ -171,7 +171,8 @@ function measure(campaign) {
   const roots = Object.keys(ledger).sort(byStr);
 
   const provenance = ledger;
-  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a));
+  // detect a register in either its standalone or comma-joined-lowercased form.
+  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a) || c.connective.includes(a.charAt(0).toLowerCase() + a.slice(1)));
 
   let walksWithHops = 0;
   let clauseCount = 0;

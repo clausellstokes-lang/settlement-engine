@@ -192,7 +192,9 @@ describe('3c discourse kernel — PREDICTION ELISION (owner amendment; typed, DA
   const C_ID = 'candidate.condition.crime.c.10';
   const R_ID = 'wizard_news.10.world_pulse.applied.candidate.condition.crime.c.10';
   const X_ID = 'muster.b_city_guard.10';
-  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a));
+  // detect a register in either its standalone or comma-joined-lowercased form.
+  const lf = (s) => s.charAt(0).toLowerCase() + s.slice(1);
+  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a) || c.connective.includes(lf(a)));
 
   it('realizationCandidateId reads the candidate id from the TYPED key, never a headline', () => {
     expect(realizationCandidateId(R_ID)).toBe(C_ID);
@@ -260,8 +262,9 @@ describe('3c discourse kernel — PREDICTION ELISION (owner amendment; typed, DA
     expect(x.relation).toBe('anticipatory');
     expect(x.anticipatedBy).toBe(C_ID);
     expect(hasAnticipatory(x)).toBe(true);
-    // opener + register (the owner's joining rule): calendar time first, register second.
-    expect(x.connective).toMatch(/^In the (spring|summer|autumn|winter) of year \d+, (Forewarned:|Against what was coming:|In its shadow:)$/);
+    // opener + register (the owner's joining rule): calendar time first, register
+    // second, lowercased at the comma join (authored text only).
+    expect(x.connective).toMatch(/^In the (spring|summer|autumn|winter) of year \d+, (forewarned:|against what was coming:|in its shadow:)$/);
     expect(out.text).not.toContain('may take hold'); // the forecast is gone
     expect(out.text).toContain('The city guard musters');
     expect(out.text).toContain('Criminal pressure takes hold');
