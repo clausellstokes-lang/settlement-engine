@@ -34,7 +34,7 @@ export const footer = {
   privacy:  'Privacy',
   terms:    'Terms',
   refunds:  'Refunds',
-  contact:  'Contact',
+  contact:  'Feedback & support',
   copyright: '© {year} SettlementForge',
 };
 

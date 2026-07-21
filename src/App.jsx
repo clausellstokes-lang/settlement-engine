@@ -27,7 +27,6 @@ import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
-import { supportMailto } from './copy/support.js';
 // The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
 // namespace with an identical t(). Importing copy/index.js here would drag the
 // whole en.js registry into the first-paint entry closure (byte budget).
@@ -740,11 +739,11 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            Pricing | Contact | Terms | Privacy above the copyright line. Refunds
+            Pricing | Feedback & support | Terms | Privacy above the copyright. Refunds
             is no longer its own link — the refund policy now lives in the Terms
             "Refunds and cancellation" section (the /refunds URL still resolves).
-            Contact routes through supportMailto() so the address is a one-line
-            change in copy/support.js, never a hardcoded literal in the shell. */}
+            Feedback & support OPENS the feedback panel (W2-a-REVISED) via an app-wide
+            'sf:open-feedback' event; the mailto: support dependency was removed. */}
         <footer style={{
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
@@ -769,12 +768,13 @@ export default function App() {
               {t('footer.pricing')}
             </Button>
             <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <a href={supportMailto()} style={{
-              color: PARCH_100, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4,
-              padding: isMobile ? `0 ${SP.sm}px` : 0, minHeight: isMobile ? 44 : undefined,
-            }}>
-              {t('footer.contact')}
-            </a>
+            <Button
+              variant="ghost"
+              size="sm"
+              aria-haspopup="dialog"
+              onClick={() => window.dispatchEvent(new CustomEvent('sf:open-feedback'))}
+              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}
+            >{t('footer.contact')}</Button>
             <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
             <Button variant="ghost" size="sm" onClick={() => setView('terms')}
               style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
