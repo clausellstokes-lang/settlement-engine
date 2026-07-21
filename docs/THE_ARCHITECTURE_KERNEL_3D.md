@@ -52,40 +52,39 @@ v1 claimed CPU-projected SVG reaches the reference bar. **FLAWED.** Flat-primiti
 is flat/cel shading BY CONSTRUCTION: it categorically cannot render the soft shadows,
 ambient occlusion, and material texture the owner's reference names.
 
-**OWNER RULING (2026-07-21): NO COMPROMISE — the highest ceiling.** SVG-as-fidelity is
-REJECTED (it caps fidelity; the rule forbids the cap). The corrected stack targets the
-maximum reachable ceiling on TWO surfaces at once:
-- The grammar → rational-JS MESH is the single source of truth. THE PROMISE binds HERE:
-  the mesh (geometry, placement, alignment-driven detail params) is byte-deterministic and
-  golden-pinned. This is "the world."
-- **CANONICAL PLATE = a DETERMINISTIC OFFLINE CPU RENDERER at maximum fidelity.** Key
-  insight that makes "highest ceiling" and "byte-reproducible" NOT a tradeoff: film-quality
-  rendering is CPU/OFFLINE (RenderMan, path tracers) — the GPU's edge is SPEED, not
-  CEILING, and the canonical plate is generated ONCE (no real-time budget), so a CPU
-  renderer's fidelity is capped only by authoring effort, not the medium. It can do
-  per-pixel shading, ambient occlusion, soft-shadow penumbrae, material texture, and up to
-  path-traced global illumination. Determinism is preserved by keeping ALL math in the
-  byte-exact set — transcendentals (BRDF pow/exp, sin/cos) resolved through PINNED RATIONAL
-  LOOKUP TABLES (as fine as needed), never runtime Math.sin/exp (ECMA-262 impl-varying).
-  Encoded by a pinned in-repo deterministic PNG encoder; delivered as SVG embedding the
-  raster plate as a data: URI with vector linework overlaid. Byte-reproducible,
-  golden-pinnable, ZERO GPU, generation-time only, eager budget UNTOUCHED. THE PROMISE
-  stays LITERAL.
-- **INTERACTIVE VIEWER = the absolute-highest LIVE ceiling (GPU/WebGL/PBR), opt-in,
-  non-golden.** Same seed → same mesh → same world; the live view's pixels are
-  device-dependent, which is fine because it is a VIEW of the identical world, not the
-  canonical truth (two cameras photographing one statue). Lazy-chunked per the react-pdf
-  vendor precedent, zero eager bytes.
-- SVG-only vector survives as a SECONDARY print/plotter/line-art export, never the ceiling.
+**OWNER RULING v2 (2026-07-21): NO COMPROMISE, and the DELIVERABLE IS A FULL 3D STRUCTURE,
+not a flat plate.** The plate (K-0's raster) is one photograph of the real object; the owner
+wants the real object — a navigable, rotatable 3D building viewable from any angle. This is
+the HIGHER ceiling, so No-Compromise demands it. It also RESOLVES the old fork rather than
+facing it. The corrected stack:
+- **THE 3D MESH IS THE DELIVERABLE AND THE TRUTH.** The grammar builds actual 3D geometry
+  in pure rational JS — K-0 already proved this (the buttress reads as a stepped 3D mass, the
+  window has real recess). It is byte-deterministic and **GOLDEN-PINNED AS GEOMETRY** (vertex/
+  face data), not as pixels. THE PROMISE binds to the STRUCTURE: same seed → the same
+  building, byte-identical, forever. This is MORE faithful to "a seed is a world, forever"
+  than pinning a photograph of it — the world is the structure, not the snapshot.
+- **PRIMARY EXPERIENCE = an INTERACTIVE FULL-3D VIEWER (GPU/WebGL/PBR).** Rotate, orbit, view
+  any angle, real materials and shadows — the absolute-highest ceiling. Promoted from
+  "optional" to the primary way you see a building. Its live pixels are device-dependent, and
+  that is CORRECT and PROMISE-SAFE: two users on the same seed see the IDENTICAL structure,
+  each rendered by their own GPU — exactly how every deterministic game renders one world on
+  many machines. Lazy-chunked (react-pdf vendor precedent), zero eager bytes, loads only when
+  a building is opened in 3D.
+- **SECONDARY EXPORTS = deterministic CPU-rendered PLATES** (the K-0 raster/SVG, from canonical
+  fixed angles) for print, PDF, gallery thumbnails, and any surface that needs a byte-stable
+  image. These stay byte-reproducible and golden-pinnable — a plate is now an EXPORT FORMAT of
+  the structure, never the deliverable.
 
-⚠ THE ONE CONSTITUTIONAL FORK I WILL NOT DECIDE ALONE (owner-queue #1, below): the
-deterministic CPU renderer reaches the reference bar ONLY if tabulated lighting hits the
-needed precision. K-0's spike renders it so you SEE the real ceiling of the
-PROMISE-keeping path. IF it reaches the reference → no tension, ship it. IF it provably
-cannot → the No-Compromise rule and THE PROMISE genuinely collide (GPU render as canonical
-would go higher but breaks byte-determinism), and THAT trade is a conscious constitutional
-call only the owner makes — THE PROMISE is ratified "never re-litigate," so I surface it
-with the spike's evidence rather than silently break it.
+⚠ THE ONE CONSTITUTIONAL NUANCE FOR THE OWNER TO AFFIRM (owner-queue #1): making full-3D the
+deliverable MOVES what the golden pins — from rendered PIXELS to the 3D GEOMETRY. I read this
+as STRENGTHENING THE PROMISE (it binds the world, not a photo of it), not re-litigating it —
+but because THE PROMISE is ratified constitutional, the owner affirms the shift consciously.
+Consequence: the existing town-map pixel-goldens become geometry-goldens + a small set of
+canonical-angle plate-goldens; the live 3D view is deliberately non-golden (a view, like any
+3D app). K-0 already proved the deterministic geometry + a high-fidelity plate; the remaining
+proof is K-0b — load K-0's mesh into the lazy WebGL viewer and confirm rotate/zoom + the
+lazy-chunk budget. No GPU-vs-PROMISE collision remains: the GPU renders a VIEW, the geometry
+stays the deterministic truth.
 
 ## CORRECTION 4 — DRIFT BINDING: axes are real but DEAD at the render surface as wired
 The axes exist and are continuous, but v1 read the wrong field. Fixes:
