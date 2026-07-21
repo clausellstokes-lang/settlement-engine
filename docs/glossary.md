@@ -67,12 +67,12 @@ _How a single capacity (food, defense, healing, …) reads against its demand._
 
 | Term | Definition |
 | --- | --- |
-| Surplus | More capacity than the settlement needs — a cushion against a bad season. |
+| Surplus | More capacity than the settlement needs. A cushion against a bad season. |
 | Adequate | Supply meets demand. The settlement is not straining here. |
 | Strained | Demand is outrunning supply; the margin is thin and a shock would bite. |
-| Critical | Supply is far short of demand — this capacity is close to failing. |
+| Critical | Supply is far short of demand. This capacity is close to failing. |
 | Collapsed | Demand dwarfs supply; the function has effectively broken down. |
-| Absent | Neither supplied nor demanded — the capacity does not exist here at all. |
+| Absent | Neither supplied nor demanded. The capacity does not exist here at all. |
 
 ## Capture rungs
 
@@ -80,11 +80,11 @@ _How far a criminal interest has taken a seat of power._
 
 | Term | Definition |
 | --- | --- |
-| None | No criminal capture — the seat answers to its lawful holder. |
+| None | No criminal capture. The seat answers to its lawful holder. |
 | Adversarial | A criminal interest is pushing at the seat, and the seat is pushing back. |
 | Equilibrium | The lawful holder and the criminal interest have reached an uneasy standoff. |
 | Corrupted | The criminal interest now bends the seat to its ends more often than not. |
-| Capture | The seat is captured — the criminal interest owns its decisions outright. |
+| Capture | The seat is captured. The criminal interest owns its decisions outright. |
 
 ## Severity
 

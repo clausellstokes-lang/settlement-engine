@@ -68,21 +68,21 @@ function titleize(key) {
 
 /** capacityModel CAPACITY_BANDS — the strain instrument. */
 const STRAIN_DEFS = Object.freeze({
-  surplus:   'More capacity than the settlement needs — a cushion against a bad season.',
+  surplus:   'More capacity than the settlement needs. A cushion against a bad season.',
   adequate:  'Supply meets demand. The settlement is not straining here.',
   strained:  'Demand is outrunning supply; the margin is thin and a shock would bite.',
-  critical:  'Supply is far short of demand — this capacity is close to failing.',
+  critical:  'Supply is far short of demand. This capacity is close to failing.',
   collapsed: 'Demand dwarfs supply; the function has effectively broken down.',
-  absent:    'Neither supplied nor demanded — the capacity does not exist here at all.',
+  absent:    'Neither supplied nor demanded. The capacity does not exist here at all.',
 });
 
 /** corruption CAPTURE_LADDER — how far a criminal interest has taken a seat. */
 const CAPTURE_DEFS = Object.freeze({
-  none:        'No criminal capture — the seat answers to its lawful holder.',
+  none:        'No criminal capture. The seat answers to its lawful holder.',
   adversarial: 'A criminal interest is pushing at the seat, and the seat is pushing back.',
   equilibrium: 'The lawful holder and the criminal interest have reached an uneasy standoff.',
   corrupted:   'The criminal interest now bends the seat to its ends more often than not.',
-  capture:     'The seat is captured — the criminal interest owns its decisions outright.',
+  capture:     'The seat is captured. The criminal interest owns its decisions outright.',
 });
 
 /** affordanceManifest STRESSOR_SEVERITY_VALUES — the severity dial. */
