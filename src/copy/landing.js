@@ -17,6 +17,12 @@
  * Copy is VERBATIM from the landing spec §6 (typographic punctuation preserved).
  * No emoji or icon glyphs live in these strings — the ✦ / 🔒 / arrows in the
  * spec render as Lucide icons in the components (spec §3.5).
+ *
+ * CLAIMS PARITY (bar 13): the checkable capability claims in this file (the anon
+ * daily-forge count, the anon size ceiling, wars-that-end, never-invents-facts,
+ * same-seed determinism) are bound to their enforcing config/suites by
+ * tests/copy/landingClaimsParity.test.js — rewording a bound claim or changing
+ * the underlying enforcement reds that gate so the binding is revisited.
  */
 
 export const landing = {

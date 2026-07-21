@@ -1,8 +1,9 @@
 /**
- * clientErrorReports.pglite.test.js — EXECUTION tests for the migration-156
- * admin read/alert functions over public.client_error_events.
+ * clientErrorReports.pglite.test.js — EXECUTION tests for the client-error
+ * admin read/alert functions over public.client_error_events (migration 167 —
+ * renumbered from 156 by the V-E fold; caught by migrationRefIntegrity.meta).
  *
- * The two REAL migration-156 function bodies run inside in-process Postgres
+ * The two REAL migration function bodies run inside in-process Postgres
  * against a minimal client_error_events mirror. What's pinned:
  *
  *   • report_client_errors GROUPS by the normalized signature (digit runs
@@ -20,9 +21,9 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG_156 = resolve(process.cwd(), 'supabase', 'migrations', '156_client_error_reports.sql');
-const exists = existsSync(MIG_156);
-const src = exists ? readFileSync(MIG_156, 'utf8') : '';
+const MIG_167 = resolve(process.cwd(), 'supabase', 'migrations', '167_client_error_reports.sql');
+const exists = existsSync(MIG_167);
+const src = exists ? readFileSync(MIG_167, 'utf8') : '';
 
 /** Extract a `create or replace function … $$;` block verbatim (harness idiom). */
 function extractFn(text, name) {

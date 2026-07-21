@@ -505,12 +505,12 @@ export const createSettlementSlice = (set, get) => ({
     for (const edit of active) {
       try {
         switch (edit.kind) {
-          case 'rename-npc':
-            if (typeof state.renameNPC === 'function' &&
-                edit.payload?.npcIndex != null) {
-              state.renameNPC(edit.payload.npcIndex, edit.payload.newName);
-            }
+          case 'rename-npc': {
+            const p = edit.payload || {}; // accepts {npcIndex} or the documented {npcId}
+            const idx = p.npcIndex ?? (state.settlement?.npcs || []).findIndex(n => n?.id === p.npcId);
+            if (typeof state.renameNPC === 'function' && idx != null && idx >= 0) state.renameNPC(idx, p.newName);
             break;
+          }
           case 'rename-settlement': {
             // §10.4 + state-lifecycle-1 / store-hooks-state-5: route through the
             // ONE town-rename writer (renameSettlementImpl). The old inline path

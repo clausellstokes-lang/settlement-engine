@@ -28,11 +28,16 @@
  *
  * ACCEPTED BLIND SPOTS of a regex gate (verified by an adversarial pass, recorded here so
  * nobody mistakes the guard for total coverage):
- *   (a) NO-FALLBACK reads — `f.name` alone off a faction record — are NOT caught. Scanning
- *       for a bare `.name` would false-positive on every unrelated record in the codebase.
- *       One such site is known and deliberately left to another lane: ChroniclePanel.jsx
- *       (owned by the chronicle-snapshot work, see tests/ui/chronicleSnapshotShape.test.jsx).
- *       personaSlicer.js was the other and is fixed + pinned in the behavioural file.
+ *   (a) NO-FALLBACK reads — `f.name` alone off a faction record — are only PARTIALLY
+ *       caught. Scanning for a bare `.name` everywhere would false-positive on every
+ *       unrelated record, but the NO-FALLBACK SCAN below (SS4, 2026-07-20) now catches
+ *       the same-line spelling whose receiver chain literally names
+ *       `powerStructure.factions` (direct index reads AND single-line map/find arrows).
+ *       Receiver-alias forms (`const fs = s.powerStructure.factions; fs[0].name`) remain
+ *       uncaught — hand-search those when auditing this class. ChroniclePanel.jsx (the
+ *       last known site) was FIXED by the chronicle-snapshot work — it routes through
+ *       nameOf now (see its snapshot-shape header + tests/ui/chronicleSnapshotShape
+ *       .test.jsx); personaSlicer.js is fixed + pinned in the behavioural file.
  *   (b) Multi-statement forms (`if (e.name) return ...; if (e.faction) return ...`) are not
  *       matched. aiOverlayVerifier.js's entityKey was exactly this shape; it is fixed and
  *       carries an explanatory header, but a NEW one would slip past this scan.
@@ -165,5 +170,67 @@ describe('faction display-name precedence — .faction before .name (dc0b6e2b)',
       .filter(([file, ceiling]) => ceiling > 0 && !(found[file] > 0))
       .map(([file]) => `${file}: no longer offends — delete its row (never leave headroom).`);
     expect(stale).toEqual([]);
+  });
+});
+
+// ── THE NO-FALLBACK SCAN (SS4) — blind spot (a)/(e) narrowed ─────────────────
+// Both hand-found instances of this class (personaSlicer's roster,
+// religionLegitimacy's rulerLens) were bare `.name` reads with NO `.faction`
+// fallback — unconditionally wrong on generator data (those records carry
+// `faction:`, no `name:`), and invisible to the reversed-order scan above.
+// This scan catches the same-line spelling whose receiver chain literally names
+// `powerStructure.factions`: direct reads (`s.powerStructure.factions[i].name`)
+// and single-line callback arrows (`.factions.map(f => f.name)`). Lines that
+// carry a `.faction` read (the legal fallback chain / canonical order) or route
+// through nameOf( are excluded by construction.
+// CANNOT-CATCH: receiver aliases (`const fs = ps.factions; fs[0].name`) and
+// multi-line callbacks — hand-search those; see blind spots (a)/(d) above.
+const NOFALLBACK_RE = new RegExp(
+  String.raw`powerStructure\s*\??\.\s*factions\b[^;\n]*?(?:\.\s*name\b|\[\s*['"]name['"]\s*\])`,
+);
+const NOFALLBACK_LEGAL = /\.\s*faction\b|\[\s*['"]faction['"]\s*\]|nameOf\s*\(/;
+
+function scanNoFallback() {
+  const found = {};
+  for (const abs of ROOTS.flatMap((g) => globSync(join(REPO, g)))) {
+    const file = relative(REPO, abs).split(sep).join('/');
+    const lines = stripComments(readFileSync(abs, 'utf8')).split('\n');
+    const n = lines.filter((l) => NOFALLBACK_RE.test(l) && !NOFALLBACK_LEGAL.test(l)).length;
+    if (n > 0) found[file] = n;
+  }
+  return found;
+}
+
+describe('faction NO-FALLBACK reads — bare .name off powerStructure.factions', () => {
+  it('the scan is non-vacuous — catches the bare spellings, spares the legal ones', () => {
+    const caught = [
+      'const n = s.powerStructure.factions[0].name;',
+      'const names = s.powerStructure?.factions.map(f => f.name);',
+      "const n = s.powerStructure.factions.find(f => f.id === id)?.name || '';",
+    ];
+    for (const sample of caught) {
+      expect(NOFALLBACK_RE.test(sample) && !NOFALLBACK_LEGAL.test(sample), `should be caught: ${sample}`).toBe(true);
+    }
+    const allowed = [
+      'const n = nameOf(s.powerStructure.factions[0]);',                                  // canonical accessor
+      'const n = s.powerStructure.factions[0].faction || s.powerStructure.factions[0].name;', // legal chain
+      'const names = s.factions.map(x => x.name);',                                        // NPC grouping list
+      'const c = s.powerStructure.conflicts[0];',                                          // unrelated read
+    ];
+    for (const sample of allowed) {
+      expect(NOFALLBACK_RE.test(sample) && !NOFALLBACK_LEGAL.test(sample), `must NOT be flagged: ${sample}`).toBe(false);
+    }
+  });
+
+  it('no bare powerStructure.factions .name read exists (cleared 2026-07-20; never re-add)', () => {
+    const found = scanNoFallback();
+    const violations = Object.entries(found).map(([file, count]) =>
+      `${file}: ${count} bare .name read(s) off powerStructure.factions.\n` +
+      `  Generator faction records carry .faction and NO .name key, so this read is\n` +
+      `  undefined on real pipeline data (it only looks right on fixtures).\n` +
+      `  FIX: use nameOf() from src/domain/rulingPower.js (canonical), or at minimum\n` +
+      `  ".faction || .name". There is no legal way to add an offender here.`,
+    );
+    expect(violations).toEqual([]);
   });
 });

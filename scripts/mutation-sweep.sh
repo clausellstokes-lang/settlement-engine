@@ -10,6 +10,13 @@
 # .github/workflows/ci.yml — workflow_dispatch + a weekly cron ONLY, never
 # per-push, because it runs a gate step once per injected mutation (slow). The
 # job's fresh checkout is clean, so the dirty-tree guard below is a no-op there.
+#
+# SS4 hardening — ATTRIBUTION CONTROL. The old check_caught scored ANY nonzero
+# exit as CAUGHT, so a gate erroring for an unrelated reason (a moved vitest
+# target exits 1 with "No test files found" — EXECUTED) read as a healthy
+# spine. Every area now re-runs its gate on the REVERTED (clean) tree: the red
+# must be ATTRIBUTABLE to the mutation (mutated=red AND clean=green). A gate
+# that is red either way is reported as GATE-BROKEN, not CAUGHT.
 cd "$(dirname "$0")/.." || exit 2
 PASS=0; FAIL=0
 results=()
@@ -28,6 +35,8 @@ MUTATED_FILES=(
   src/domain/display/parityContract.js
   ARCHITECTURE.md
   src/domain/events/undoEvent.js
+  src/lib/saves.js
+  eslint.config.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -42,12 +51,35 @@ fi
 
 # check_caught <label> <file> <check-cmd>
 # Call AFTER the file has been mutated. check-cmd must EXIT NONZERO when the
-# regression is present (gate caught it). Always reverts <file> via git.
+# regression is present (gate caught it). Always reverts <file> via git, then
+# re-runs check-cmd on the clean tree: CAUGHT requires mutated=red AND
+# clean=green (attribution), otherwise the gate itself is broken/mistargeted.
 check_caught() {
   local label="$1" file="$2" check="$3"
   $check >/dev/null 2>&1; local code=$?
   git checkout -- "$file" 2>/dev/null
-  if [ "$code" -ne 0 ]; then
+  $check >/dev/null 2>&1; local clean=$?
+  if [ "$clean" -ne 0 ]; then
+    results+=("BROKEN  GAP  $label  (gate red even without the mutation — misattributed/moved target?)"); FAIL=$((FAIL+1))
+  elif [ "$code" -ne 0 ]; then
+    results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
+  else
+    results+=("MISSED  GAP  $label  (gate stayed green)"); FAIL=$((FAIL+1))
+  fi
+}
+
+# check_caught_missing <label> <file> <check-cmd>
+# Variant for areas whose mutation is "the artifact went MISSING" (rename /
+# renumber). Moves the file aside, expects red, restores, expects green.
+check_caught_missing() {
+  local label="$1" file="$2" check="$3"
+  mv "$file" "$file.mutsweep.bak"
+  $check >/dev/null 2>&1; local code=$?
+  mv "$file.mutsweep.bak" "$file"
+  $check >/dev/null 2>&1; local clean=$?
+  if [ "$clean" -ne 0 ]; then
+    results+=("BROKEN  GAP  $label  (gate red even with the file restored)"); FAIL=$((FAIL+1))
+  elif [ "$code" -ne 0 ]; then
     results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
   else
     results+=("MISSED  GAP  $label  (gate stayed green)"); FAIL=$((FAIL+1))
@@ -89,13 +121,34 @@ check_caught "enforcement/meta-pin naked claim" ARCHITECTURE.md "npx vitest run 
 perl -0pi -e "s/CHANGE_RULING_POWER: Object.freeze\(\['powerStructure'\]\)/CHANGE_RULING_POWER: Object.freeze([])/" src/domain/events/undoEvent.js
 check_caught "domain.5/undo inverse round-trip" src/domain/events/undoEvent.js "npx vitest run tests/domain/events/undoRoundTrip.test.js"
 
+# 9. Faction-key precedence — a hand-rolled reversed `.name || .faction` read
+#    (SS4; the class regrew twice by hand — the scan must catch the next one)
+printf '\nconst _mutF = { name: "a", faction: "b" };\nexport const _mutName = _mutF.name || _mutF.faction;\n' >> src/generators/cascadeGenerator.js
+check_caught "faction-key/reversed name-precedence read" src/generators/cascadeGenerator.js "npx vitest run tests/lint/factionNamePrecedenceScan.test.js"
+
+# 10. Ghost column — a settlements column written but never read back (SS4;
+#     the gallery opt-in data loss, generalized into a standing walker)
+perl -0pi -e "s/  if \(entry.seed !== undefined\) row.seed = entry.seed;\n/  if (entry.seed !== undefined) row.seed = entry.seed;\n  if (entry.zzz !== undefined) row.zzz_ghost = entry.zzz;\n/" src/lib/saves.js
+check_caught "state-lifecycle/ghost settlements column" src/lib/saves.js "npx vitest run tests/lib/savesColumnParity.test.js"
+
+# 11. Determinism-ban shadow — a later flat-config block whose glob overlaps
+#     src/domain silently REPLACES the whole determinism ban (last-wins). The
+#     coverage pin must catch the shadow the moment it lands.
+perl -0pi -e "s/  \.\.\.sizeBaselineOverrides,\n/  { files: ['src\/domain\/**\/*.js'], rules: { 'no-restricted-syntax': 'off' } },\n  ...sizeBaselineOverrides,\n/" eslint.config.js
+check_caught "determinism/eslint last-wins shadow block" eslint.config.js "npx vitest run tests/lint/determinismBanCoverage.test.js"
+
+# 12. Security runIf vacuity — a renumbered migration must red the reference
+#     walker LOUDLY instead of silently skipping the runIf-gated suite (SS4;
+#     runIf(false) with a guaranteed-fail test was EXECUTED to exit 0).
+check_caught_missing "security/runIf migration renumber" supabase/migrations/087_review_money_hardening.sql "npx vitest run tests/security/migrationRefIntegrity.meta.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
 echo "────────────────────────────────────────────────────────"
-echo "  CAUGHT: $PASS    MISSED: $FAIL"
-if [ -n "$(git status --short src/ ARCHITECTURE.md 2>/dev/null)" ]; then
-  echo "  WARNING: tree not clean after sweep:"; git status --short src/ ARCHITECTURE.md
+echo "  CAUGHT: $PASS    MISSED/BROKEN: $FAIL"
+if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ 2>/dev/null)" ]; then
+  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/
 fi
-if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate."; fi
+if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
 exit "$FAIL"

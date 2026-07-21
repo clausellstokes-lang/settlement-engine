@@ -14,7 +14,7 @@
  *   {
  *     id:        string         — uuid-ish, stable for revert
  *     kind:      EditKind       — see EDIT_KINDS below
- *     payload:   any            — kind-specific (renameNPC: { npcId, newName })
+ *     payload:   any            — kind-specific (rename-npc: { npcIndex | npcId, newName })
  *     ts:        number         — monotonic timestamp from edit clock
  *     reverted?: boolean        — soft-revert (kept in history)
  *   }

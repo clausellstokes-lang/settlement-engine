@@ -36,6 +36,25 @@ describe('domain strict-typecheck ratchet (A+ domain.7)', () => {
     expect(strictCfg.extends).toBe('./tsconfig.json');
   });
 
+  test('the strict config\'s EFFECTIVE include still covers src/domain (scope cannot silently narrow)', () => {
+    // SS4: the ratchet script's fail-closed sentinel proves tsc ran, not that it
+    // ran over the domain — check-domain-strict.mjs's --listFilesOnly sentinel
+    // guards that at runtime; this pins the config shape statically. The strict
+    // config inherits include/exclude from tsconfig.json (it declares neither),
+    // so what gets strict-checked is whatever the BASE include says.
+    const base = JSON.parse(readFileSync(join(ROOT, 'tsconfig.json'), 'utf8'));
+    const include = strictCfg.include ?? base.include ?? [];
+    expect(
+      include.some((g) => /^src\/domain\//.test(g)),
+      `neither tsconfig.domain-strict.json nor tsconfig.json includes src/domain — the strict ratchet would check nothing of the kernel (include: ${JSON.stringify(include)})`,
+    ).toBe(true);
+    const exclude = [...(strictCfg.exclude ?? []), ...(strictCfg.include ? [] : base.exclude ?? [])];
+    expect(
+      exclude.some((g) => /src\/domain(?:$|\/)/.test(g)),
+      'an exclude entry carves src/domain out of the strict scope',
+    ).toBe(false);
+  });
+
   test("baseline.total equals the sum of its per-file counts (no stale drift)", () => {
     const sum = Object.values(baseline.files).reduce((a, b) => a + b, 0);
     expect(baseline.total).toBe(sum);

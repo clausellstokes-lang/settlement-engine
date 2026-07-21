@@ -41,12 +41,18 @@ try {
 
 // Count errors per src/domain file (ignore import-followed errors outside the
 // domain — those belong to the non-strict full typecheck, not this scope).
+// SS4 hardening: the old RE only matched cwd-relative forward-slash paths, so a
+// tsc emitting absolute or backslash paths would parse to 0 domain errors while
+// located diagnostics elsewhere kept the fail-closed sentinel quiet — a silent
+// green. Match the src/domain segment anywhere in the located path and
+// normalize, so path-format drift cannot zero the count.
 const counts = {};
-const RE = /^(src\/domain\/[^(]+\.js)\((\d+),(\d+)\): error TS/;
+const RE = /(?:^|[\\/])(src[\\/]domain[\\/][^(]+\.js)\((\d+),(\d+)\): error TS/;
 for (const line of out.split('\n')) {
   const m = RE.exec(line.trim());
   if (!m) continue;
-  counts[m[1]] = (counts[m[1]] || 0) + 1;
+  const file = m[1].split('\\').join('/');
+  counts[file] = (counts[file] || 0) + 1;
 }
 const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
@@ -91,6 +97,31 @@ if (tscExitedNonZero && locatedDiagnostics.length === 0) {
   );
   console.error('\nA broken-toolchain vacuous pass is not a clean typecheck. Fix the config/install; do not ignore.');
   process.exit(1);
+}
+
+// ── Scope sentinel (SS4) — "the DOMAIN was actually in the compilation" ──────
+// The fail-closed guard above proves tsc RAN; it cannot prove tsc ran OVER
+// src/domain. If tsconfig.json's include (which tsconfig.domain-strict.json
+// inherits) is narrowed away from the domain, tsc checks something else, any
+// located diagnostic suppresses the fail-closed path, the src/domain regex
+// matches nothing, and total=0 reads as a clean ratchet — the domain kernel
+// silently loses its strict gate. `--listFilesOnly` resolves the file set from
+// the SAME config without typechecking (cheap) and must name the domain.
+// Skipped when DOMAIN_STRICT_TSC_CMD injects a fake tsc (the fail-closed
+// meta-test seam); the static include pin in tests/lint/domainStrictBaseline
+// covers the config shape there.
+if (!process.env.DOMAIN_STRICT_TSC_CMD) {
+  let listed;
+  try {
+    listed = execSync('npx tsc -p tsconfig.domain-strict.json --listFilesOnly', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    listed = `${e.stdout || ''}`;
+  }
+  if (!/[\\/]src[\\/]domain[\\/]/.test(String(listed || ''))) {
+    console.error('[domain-strict] scope sentinel: tsc\'s resolved file set contains NO src/domain file — the strict ratchet is no longer checking the domain kernel.');
+    console.error('Check tsconfig.domain-strict.json / tsconfig.json include+exclude; a narrowed include makes this ratchet vacuously green.');
+    process.exit(1);
+  }
 }
 
 if (UPDATE) {

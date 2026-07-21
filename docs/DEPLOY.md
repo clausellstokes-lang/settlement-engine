@@ -133,6 +133,7 @@ under-apply this trust-boundary set.
 **Current migration head: `169_gallery_comment_moderation.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
+<!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
 
 Do **not** hand-count from a fixed starting migration — `db push` applies EVERY
 pending migration on top of the current schema, in order, and self-corrects
@@ -240,7 +241,7 @@ There are **29 deployable functions** (every `supabase/functions/*` dir except
 and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
-stops being named here.
+stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:

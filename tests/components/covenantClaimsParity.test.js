@@ -18,16 +18,39 @@ const covenantSrc = readFileSync(join(ROOT, 'src/components/legal/CovenantPage.j
 const existsSrc = (rel) => { try { readFileSync(join(ROOT, rel), 'utf8'); return true; } catch { return false; } };
 
 describe('R-7 portability covenant — claims parity', () => {
-  it('the JSON-export claim is backed by a real exporter', () => {
+  it('the JSON-export claim is backed by a WORKING exporter (executed round-trip, not a symbol check)', () => {
+    // SS4: `typeof === 'function'` proved a symbol existed, not that the claim
+    // held — a gutted exporter returning {} kept the pin green. Execute it.
     expect(typeof accountData.downloadAccountExport).toBe('function');
-    expect(typeof accountData.buildAccountExport).toBe('function');
+    const out = accountData.buildAccountExport({
+      auth: { user: { email: 'dm@example.test' }, displayName: 'DM', tier: 'free' },
+      savedSettlements: [{ id: 's1', name: 'Bridgeford', settlement: { name: 'Bridgeford', tier: 'town' } }],
+      campaigns: [{ id: 'c1', name: 'The Long Road' }],
+    });
+    const parsed = JSON.parse(JSON.stringify(out)); // the covenant promises a JSON file
+    expect(parsed.version).toBe(accountData.ACCOUNT_EXPORT_VERSION);
+    expect(parsed.profile.email).toBe('dm@example.test');
+    expect(parsed.settlements).toHaveLength(1);
+    expect(parsed.settlements[0].settlement.name).toBe('Bridgeford');
+    expect(parsed.campaigns).toHaveLength(1);
     expect(covenantSrc).toMatch(/JSON file/i);           // the page claims it…
     expect(covenantSrc).toMatch(/export/i);
   });
 
-  it('the import-it-back claim is backed by a real importer', () => {
+  it('the import-it-back claim is backed by a WORKING import validator (the export round-trips)', async () => {
     expect(OPERATIONS.importAccountData).toBeTruthy();    // the store action exists
     expect(covenantSrc).toMatch(/[Ii]mport that file back/);
+    // Executed half: the file the exporter produces must be ACCEPTED by the
+    // import pipeline's validator — "export it… import that file back" as a
+    // real round-trip, so gutting either side reddens this pin.
+    const { validateAccountImport } = await import('../../src/lib/accountImport.js');
+    const text = JSON.stringify(accountData.buildAccountExport({
+      auth: { user: { email: 'dm@example.test' }, tier: 'free' },
+      savedSettlements: [{ id: 's1', name: 'Bridgeford', settlement: { name: 'Bridgeford', tier: 'town' } }],
+      campaigns: [],
+    }), null, 2);
+    const verdict = validateAccountImport(text);
+    expect(verdict.ok, `exporter output rejected by the import validator: ${verdict.error || ''}`).toBe(true);
   });
 
   it('the PDF-keepsake claim is backed by a real PDF document', () => {

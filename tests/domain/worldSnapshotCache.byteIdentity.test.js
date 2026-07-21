@@ -77,7 +77,12 @@ describe('buildWorldSnapshot — per-settlement derivation cache', () => {
     const a = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
     const b = buildWorldSnapshot({ campaign, saves, worldState: campaign.worldState });
 
-    // Whole-snapshot deep equality is the byte-identity oracle.
+    // Deep equality + the stringify pin together form the byte-identity oracle:
+    // toEqual ignores key order, so a regen path that deterministically
+    // REORDERED keys (same content, different serialization) used to pass a
+    // test that called itself byte-exact. The stringify comparison closes that
+    // (the worker-boundary test already had this rigor; the regen leg lacked it).
+    expect(JSON.stringify(b.settlements)).toBe(JSON.stringify(a.settlements));
     expect(b.settlements).toEqual(a.settlements);
     expect(b.settlements.map(s => s.causal)).toEqual(a.settlements.map(s => s.causal));
     expect(b.settlements.map(s => s.system)).toEqual(a.settlements.map(s => s.system));

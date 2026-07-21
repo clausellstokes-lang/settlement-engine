@@ -1,5 +1,7 @@
 /**
- * store/index.js — Unified Zustand store with 14 slices.
+ * store/index.js — Unified Zustand store, one slice per domain (the create*Slice
+ * spreads below are the authoritative census; the old "14 slices" header count
+ * rotted to 18 unnoticed, so no count is transcribed here).
  *
  * Slices:
  *   auth              – user session, tier (anon / free / premium), permissions
@@ -14,8 +16,12 @@
  *   campaignRegional  – campaign regional graph + channels + cross-settlement impacts/stressors
  *   campaignWorldPulse– campaign world-pulse simulation (preview/advance/proposals/undo)
  *   customContent     – user-authored institutions / resources / trade routes
+ *   corpusFactory     – generation-time content corpus factory state
+ *   instantWorld      – the instant-world (one-click realm) flow state
  *   onboarding        – first-run coaching + nudge state
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
+ *   accountImport     – the "Import my data" write pipeline (batch + rollback)
+ *   fogEdit           – map fog-of-war editing state
  *
  * Usage:
  *   import { useStore } from '../store';

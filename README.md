@@ -18,8 +18,11 @@ Postgres + RLS, edge functions) · Stripe (credits / subscription / one-shot dos
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — the canonical map of the system: layer
   boundaries (`data → generators → presentation`), the generation pipeline, state
   (Zustand slices), routing, the Supabase backend, the design system, and the gate.
-  Read this first; it is kept in sync with the code and its checkable claims are
-  gate-enforced (`tests/docs/enforcement-claims.test.js`).
+  Read this first; it is kept in sync with the code, and its *completeness claims*
+  (the "machine-enforced" / "promoted to ERROR" vocabulary) are gate-checked against
+  live enforcers (`tests/docs/enforcement-claims.test.js`). Other prose there is
+  maintained by review, not by a gate.
+  <!-- @enforced-by tests/docs/enforcement-claims.test.js -->
 - **[docs/README.md](docs/README.md)** — index of the `docs/` corpus, split into
   **canonical** (trust as current) and **historical** (point-in-time snapshots;
   when a historical doc and the code disagree, the code wins).
@@ -46,8 +49,10 @@ map-bridge validation, migration-head ledger check, full-tree typecheck, strict 
 typecheck, zero-warning lint, the Vitest suite, and the bundle-budget build. It runs in
 CI on every push/PR and via a husky `pre-push` hook; production deploys are
 **fail-closed gated on CI** (`scripts/vercel-ignore-build.mjs`). Edge (Deno) tests run
-via `npm run check:edge-behavior` / the CI `deno-tests` job. See ARCHITECTURE.md → "The
-gate" and [docs/DEPLOY.md](docs/DEPLOY.md).
+via `npm run check:edge-behavior` / the CI `deno-tests` job. The money/security
+coverage floors (`npm run test:coverage:floors`) run as a **separate required CI job**,
+not inside `npm run check` — a local green check has not exercised them. See
+ARCHITECTURE.md → "The gate" and [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Status & scope
 
