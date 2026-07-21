@@ -5,7 +5,11 @@ import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../gener
 // P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
 // global-search index (CP-4) and these tabs render from one source of truth.
 import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
-import { Tag, Row, Card } from './primitives.jsx';
+// W6 — banded concepts render their FULL ladder (every rung named + a one-line
+// reading), derived from the engine's typed band tables. Never enumerate a band
+// list by hand here; the projection lives in domain/compendium/bandLadders.js.
+import { bandLaddersForTab } from '../../domain/compendium/bandLadders.js';
+import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 
 // REL_TYPES + ARCHETYPES are imported from '../../domain/compendium/catalogData.js'
@@ -42,7 +46,8 @@ export function TiersTab({ _search='' }) {
 export function EconomyTab() {
   return <>
     <div id="economy" />
-    <Card title="Prosperity Tiers" accent={GOLD}>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
+    {bandLaddersForTab('economy').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
     <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
     <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
@@ -69,6 +74,11 @@ export function PowerTab_({ search='' }) {
           <div style={{ fontSize:FS.xxs, color:MUT, fontStyle:'italic', marginBottom:4 }}>{a.cond}</div>
           <div style={{ fontSize: FS['11.5'], color:SEC, lineHeight:1.5 }}>{a.desc}</div>
         </div>))}
+    </div>
+    {/* W6 — how far a criminal interest has taken a seat of power: the capture ladder. */}
+    <div style={{ marginTop:16 }}>
+      {bandLaddersForTab('power').map((l) => (
+        <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
   </>;
 }
@@ -102,6 +112,11 @@ export function StressTab({ search='' }) {
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||EMPTY_VALUE}</div>
       </div>))}
+    {/* W6 — how the resulting state reads: the settlement-stability and capacity-strain ladders. */}
+    <div style={{ marginTop:16 }}>
+      {bandLaddersForTab('stress').map((l) => (
+        <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
+    </div>
   </>;
 }
 
