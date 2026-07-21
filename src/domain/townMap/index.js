@@ -20,7 +20,20 @@ export {
 export { scoreLynch, RUBRIC_WEIGHTS, LYNCH_ACCEPT_FLOOR } from './lynchRubric.js';
 // THE PANORAMA PROJECTION (#38, RULING #5) — an oblique 2.5D projection of any model
 // that composes with every lens. Lazy, consumed only by the map surfaces + tests.
-export { buildTownMapPanoramaDrawList, buildTownMapPanoramaSvg } from './townPanorama.js';
+export { buildTownMapPanoramaDrawList, buildTownMapPanoramaSvg, buildingElevation } from './townPanorama.js';
+// THE PROCEDURAL MASSING SUBSTRATE (TRANCHE M, M-0) — per-building volumetric construction
+// (footprint × height × kind-keyed roof form) the dimensional views consume, projection-
+// injected + trig-free. Lazy (map surfaces + the sample-plate script + tests only).
+export {
+  ROOF_FORMS,
+  SILHOUETTE_BY_KIND,
+  silhouetteForKind,
+  OBLIQUE_PROJ,
+  FLAT_PLAN_PROJ,
+  makeCavalierProject,
+  buildingMassingOps,
+  compareMassingDepth,
+} from './massing.js';
 export {
   assignInstitutionsToDistricts,
   CATEGORY_AFFINITY,
