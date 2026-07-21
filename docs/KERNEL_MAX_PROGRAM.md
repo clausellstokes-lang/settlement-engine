@@ -87,6 +87,45 @@ mount in SettlementMapPane (598/600). Gate: townKernelOpBudget under 2200; the E
 aiGrounding.js untouched). Checkpoint: **THE PICTURESQUE GATE — all five surfaces from real seeds
 under the owner's eyes; green gates never certify beauty.**
 
+## THE GENRE LIBRARY + AI CURATION + THE EDITOR (owner order 2026-07-21 — cross-genre resolved)
+The owner's resolution to the cross-genre visual boundary: hold a VAST RESERVE of generic building
+SHAPES + a vast reserve of SKINS, and the AI CHOOSES (judges fit) among them; expose both as picker
+options in the settlement map editor. This is law-perfect and it generalizes the kernel from "gothic
+generator" to "genre-spanning building library with AI curation." Three registries + a selector:
+- **THE SHAPE LIBRARY** — a finite, versioned, LAZY-per-pack registry of PARAMETRIC building grammars
+  (K-1 ops), organized by FUNCTIONAL ARCHETYPE (genre-agnostic, so selection maps to institution
+  function): sacred (spire/dome/ziggurat/pagoda/stupa/minaret), civic (basilica-hall/longhouse/
+  rotunda/moot), martial (keep/bastion/blockhouse/bunker), industrial (mill/forge/kiln/stack),
+  mercantile (stall-row/arcade/exchange), domestic (cottage/rowhouse/tenement/tower-block/arcology),
+  agrarian (granary/barn/silo), exotic (organic/crystalline/floating). Gothic/medieval is the FIRST
+  deep family (K-3); genre families (sci-fi/modern/post-apoc) are additional lazy shape packs the
+  architecture holds uniformly. "Vast in reserve" = the registry grows; the engine treats all packs
+  identically.
+- **THE SKIN LIBRARY** — a finite registry of MATERIAL+ornament treatments (the K-3 material system,
+  DECOUPLED from shape so any skin dresses any shape — the reskin seam): stone-ashlar, timber-frame,
+  brick, marble, adobe, steel-glass-curtain, concrete-brutalist, corrugated-industrial, neon-cyber,
+  chitin-organic, crystalline. Each a deterministic recipe (palette + procedural texture + weathering).
+- **THE SELECTOR (AI-clerk + deterministic fallback)** — given (institution function, culture,
+  genre-intent, prosperity, condition), pick (shapeId, skinId) from the libraries. AI MODE: the AI
+  JUDGES FIT — classifies into the best shape archetype + skin, from the FINITE libraries, and the
+  pick is RECORDED as typed data → deterministic forever after (the AI classifies ONCE, the typed
+  result is the truth; FINITE-SEMANTICS: AI chooses from buckets, NEVER draws geometry). RULE MODE
+  (AI-off, no-load-bearing-AI per E-D): the four-rung ladder (name-match → supply-chain function →
+  category → floor) selects deterministically; the product is fully functional AI-off.
+- **THE EDITOR** — shape + skin become picker/browse options in the settlement map editor, overriding
+  the selector per building; extends the existing mapEdits/bespokeStyles TYPED-edit vocabulary
+  (anchored, deterministic, WYSIWYG) so a bad AI pick is one click to fix and a DM can dress a town
+  cross-genre by hand from the reserve.
+LAWS: FINITE-SEMANTICS (libraries = finite typed vocab; AI classifies never invents/draws) · THE
+PROMISE (picks recorded typed; geometry deterministic; same seed → same building) · no-load-bearing-
+AI (rule fallback) · edit-anchoring (editor picks = typed edits) · goldens by EXEMPLAR-SAMPLING (the
+shape×skin cross-product is vast — never the full matrix). RESHAPES THE WAVES: K-3 = the shape+skin
+library foundation + decoupled material system (gothic = first deep family); K-2 = the SELECTOR
+(AI-clerk + rule ladder over the library) + the fantasy-core shape set + the shared kindResolver;
+K-5 = the editor pickers + library browse. Cross-genre is now bounded by LIBRARY BREADTH (growable
+lazy packs), not by "gothic only" — and the AI navigates it as a clerk, the user overrides it in the
+editor.
+
 ## THE ADAPTIVE FIDELITY GOVERNOR (owner order 2026-07-21 — continuous degrade to a usable floor)
 A runtime quality controller in the LIVE VIEW ONLY (outside the determinism perimeter, behind the
 one-way import wall) — it NEVER touches geometry, goldens, the plate export, or the GLB (those are
