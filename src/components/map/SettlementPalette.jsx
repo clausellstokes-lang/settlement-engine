@@ -189,13 +189,13 @@ export default function SettlementPalette({
                 if (isPlaced) {
                   setPlacementHint(`${name} is already placed on the map.`);
                 } else if (!activeCampaign) {
-                  setPlacementHint(`${name} selected — its overview is showing beside the map. Select a campaign to place it on the map.`);
+                  setPlacementHint(`${name} selected. Its overview is showing beside the map. Select a campaign to place it on the map.`);
                 } else if (typeof onKeyboardPlace === 'function') {
                   onKeyboardPlace(save);
                 } else {
                   // Isolated mounts without the stage (tests, storybook-style
                   // harnesses): keep the honest pointer guidance.
-                  setPlacementHint(`${name} selected — its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`);
+                  setPlacementHint(`${name} selected. Its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`);
                 }
               }}
               onHover={(hovering) => {
