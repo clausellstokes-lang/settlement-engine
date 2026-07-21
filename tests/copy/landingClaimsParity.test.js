@@ -15,37 +15,30 @@
  * day" OVERSTATES enforcement was REFUTED against the code — the single
  * enforcement point (settlementSlice.generateSettlement → anonAtCap()) gates on
  * the COMBINED daily cap (DEFAULT_DAILY_FULL_CAP 1 + DEFAULT_DAILY_REROLL_CAP 2
- * = 3 generations/day), so "three forges a day" matches what an anon actually
- * gets. What WAS real: the number was hand-typed and unbound — the drift trap
- * below closes that.
+ * = 3 generations/day), so "three forges a day" matched what an anon actually got.
+ *
+ * Walk W1 (owner order 2026-07-21): the ANONYMOUS tier card was REMOVED from the
+ * set-out strip, so the "three forges a day" claim no longer lives on the landing —
+ * its binding is retired below. The anon SIZE ceiling still appears in §01 Forge
+ * (forge.ceiling) and stays bound; the hero's "free, no account" line is unbound copy.
  */
 import { describe, it, expect } from 'vitest';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { landing } from '../../src/copy/landing.js';
-import { DEFAULT_DAILY_CAP } from '../../src/lib/anonGenCounter.js';
 import { ANON_MAX_SIZE_LABEL } from '../../src/config/tierFacts.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const has = (rel) => existsSync(join(ROOT, rel));
 
 const tierByName = (name) => landing.closer.tiers.find((t) => t.name === name);
-const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 
 describe('landing copy — claims-vs-enforcement parity (bar 13)', () => {
-  it('the anon daily-forge count matches the enforced combined cap', () => {
-    // Enforcement: settlementSlice.generateSettlement blocks on anonAtCap()
-    // (combined full+reroll cap). The copy states the same number in words.
-    const body = tierByName('Anonymous').body.toLowerCase();
-    const word = NUMBER_WORDS[DEFAULT_DAILY_CAP];
-    expect(word, `DEFAULT_DAILY_CAP=${DEFAULT_DAILY_CAP} outgrew the words table — extend it`).toBeTruthy();
-    expect(
-      body,
-      `Anonymous tier copy no longer matches the enforced cap (${DEFAULT_DAILY_CAP}/day).\n` +
-      `If the cap changed, update landing.closer.tiers Anonymous body; if the copy was\n` +
-      `reworded, re-bind the new phrasing here — never leave the number hand-typed and unbound.`,
-    ).toContain(`up to ${word} forges a day`);
+  it('the ANONYMOUS tier card stays removed from the set-out strip (W1 demotion)', () => {
+    // The Anonymous card was removed (owner order 2026-07-21). If it is re-added,
+    // its daily-cap + {anonSize} claims must be re-bound to enforcement here.
+    expect(tierByName('Anonymous')).toBeUndefined();
   });
 
   it('the anon size ceiling in §01 Forge matches tierFacts (the enforced gate label)', () => {
@@ -56,8 +49,9 @@ describe('landing copy — claims-vs-enforcement parity (bar 13)', () => {
 
   it('the tier numeric facts stay CONFIG-INTERPOLATED, never hand-typed', () => {
     // TierStrip interpolates these from config/tierFacts.js. If someone inlines
-    // a literal number, the placeholder disappears and this reddens.
-    expect(tierByName('Anonymous').body).toContain('{anonSize}');
+    // a literal number, the placeholder disappears and this reddens. (The Anonymous
+    // {anonSize} binding was retired with the Anonymous card in W1; only Wanderer's
+    // {freeSaves} remains on the strip.)
     expect(tierByName('Wanderer').body).toContain('{freeSaves}');
   });
 

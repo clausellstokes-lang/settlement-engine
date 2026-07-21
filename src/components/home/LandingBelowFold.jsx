@@ -157,26 +157,29 @@ function InstantDraftCard() {
   );
 }
 
-// ── 05 · Commons — up to four REAL published gallery towns (W-L2/3) ─────────
+// ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
 // top_voted — the strongest ranking signal src/lib/gallery.js actually tracks
-// (it has net_votes + view counts; there is NO fork counter). Decorative cards
-// fill the remaining slots; a failed or empty fetch renders all four decorative.
-// Slot dimensions are identical in every state (150px thumb + one footer row),
-// so the swap-in causes zero layout shift.
+// (it has net_votes + view counts; there is NO fork counter). Real published
+// towns fill the slots first; any slot without a real town falls back to a
+// decorative card LABELED ' (placeholder)'. When six real towns exist, all six
+// slots are real and no placeholder shows. A failed or empty fetch renders six
+// placeholders (the empty-gallery dev state). Slot dimensions are identical in
+// every state (150px thumb + one footer row), so the swap-in causes zero layout shift.
+const COMMONS_SLOTS = 6; // owner order 2026-07-21, ledger 4f71743a
 function GalleryCards({ onNavigate }) {
   const decoratives = tl('commons.cards') || [];
   const [tiles, setTiles] = useState(null); // null = not landed yet → decorative
   useEffect(() => {
     let live = true;
-    fetchPublicGallery({ pageSize: 4, sort: 'top_voted' })
-      .then((r) => { if (live) setTiles((r?.items || []).slice(0, 4)); })
+    fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
+      .then((r) => { if (live) setTiles((r?.items || []).slice(0, COMMONS_SLOTS)); })
       .catch(() => { if (live) setTiles([]); });
     return () => { live = false; };
   }, []);
 
   const real = tiles || [];
-  const slots = decoratives.slice(0, 4).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
+  const slots = decoratives.slice(0, COMMONS_SLOTS).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
 
   return (
     <div style={{
@@ -201,7 +204,7 @@ function GalleryCards({ onNavigate }) {
               position: 'absolute', left: 0, right: 0, bottom: 0, padding: '26px 14px 10px',
               backgroundImage: 'linear-gradient(rgba(20,14,5,0), rgba(20,14,5,0.72))',
               fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: PARCH,
-            }}>{tile ? tile.name : deco.name}</span>
+            }}>{tile ? tile.name : `${deco.name} (placeholder)`}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: tile ? '7px 14px' : '11px 14px', minHeight: 52 }}>
             {tile ? (

@@ -60,8 +60,12 @@ export const FLAG_DEFAULTS = Object.freeze({
   sessionMode: true,
   foundryExport: true,
   pricingSimulationCopy: true,
-  loadingJourneyFilm: false,
-  welcomeJourneyFilm: false,
+  // Walk W1 (owner order 2026-07-21, ledger 70a19ce5): both growth-film systems
+  // flipped ON at the taste walk. The stills floor stays the fallback (JourneyFilm
+  // mobile/coarse-pointer/reduced-motion gates are unchanged). loadingJourneyFilm
+  // also activates the RealmUnfurlLoading backdrop over the booting FMG map.
+  loadingJourneyFilm: true,
+  welcomeJourneyFilm: true,
   loadingJourneySetBg: true,
 });
 

@@ -52,12 +52,17 @@ export const landing = {
     ceiling: 'Without an account, forge up to a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
     draftTitle: 'Instant draft',
     draftHint:  'pick a size and go',
+    // Population bands mirror the engine canon (src/data/constants.js
+    // POPULATION_RANGES) exactly — the same figures the Create-page gauge reads
+    // live. Walk W1 (owner order 2026-07-21, ledger 70a19ce5) corrected these:
+    // they were stale by ~a tier (Hamlet 20–80 etc.), contradicting the Create
+    // page. En-dash separator + 'min+' for the open top tier match HomeHero.popFigure.
     sizes: [
-      { name: 'Hamlet',     range: '20–80' },
-      { name: 'Village',    range: '80–400',    selected: true },
-      { name: 'Town',       range: '400–3,000' },
-      { name: 'City',       range: '3,000–12k', locked: true },
-      { name: 'Metropolis', range: '12,000+',   locked: true },
+      { name: 'Hamlet',     range: '61–400' },
+      { name: 'Village',    range: '401–900',    selected: true },
+      { name: 'Town',       range: '901–5,000' },
+      { name: 'City',       range: '5,001–25,000', locked: true },
+      { name: 'Metropolis', range: '25,001+',   locked: true },
     ],
     modeBasic:    'Basic',
     modeAdvanced: 'Advanced',
@@ -167,11 +172,18 @@ export const landing = {
     fork: 'Fork',
     open: 'Open',
     votes: '{n} votes',
+    // Walk W1 (owner order 2026-07-21, ledger 4f71743a): the commons strip shows
+    // SIX slots, fed dynamically from the community gallery (real published towns
+    // fill first, ranked top_voted). These decorative entries are the PLACEHOLDER
+    // backfill for any slot without a real town — the renderer labels each backfilled
+    // card ' (placeholder)' beside its name. When six real towns exist, none show.
     cards: [
       { name: 'The Drowned Spire', author: 'mistwarden', pop: '412', size: 'City',    scene: 'city',    pos: 'center 30%' },
       { name: 'Ashfall Crossing',  author: 'dm_corvid',  pop: '388', size: 'Town',    scene: 'thorpe',  pos: 'center 55%' },
       { name: 'Greyharbor',        author: 'quiethand',  pop: '291', size: 'Village', scene: 'village', pos: 'center 40%' },
       { name: 'Saltmere Ford',     author: 'lanternkeep', pop: '203', size: 'Village', scene: 'thorpe',  pos: 'center 20%' },
+      { name: 'Hollowmere',        author: 'oldferry',   pop: '156', size: 'Hamlet',  scene: 'village', pos: 'center 50%' },
+      { name: 'Thornbrook',        author: 'saltpath',   pop: '97',  size: 'Hamlet',  scene: 'thorpe',  pos: 'center 35%' },
     ],
   },
 
@@ -182,17 +194,16 @@ export const landing = {
     sub:      'Forge a town before the kettle boils. Keep it if it’s good.',
     cta:      'Forge your first settlement',
     // 'Free. No account needed.' removed here (owner) — the hero already says it.
-    // W-DOC reconcile (brief §4): the numeric facts ({anonSize}, {freeSaves})
-    // are CONFIG-SOURCED — TierStrip interpolates them from config/tierFacts.js
-    // (ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT), never hand-typed, so the closer can
-    // never restate a ceiling the catalog didn't. The anon line was corrected:
-    // "completely randomized" was an overstatement (the engine rolls the five
-    // priority sliders per generation via _randomizePriorities, then derives the
-    // town from those constraints — it is not "completely" random). Surveyor
-    // renders as the WALLED violet AI-channel early-access band (ruling #3),
-    // not a subscription tier — it is the optional AI workshop, priced per task.
+    // Walk W1 (owner order 2026-07-21, ledger): the ANONYMOUS tier card was REMOVED
+    // from the set-out strip; the remaining cards fill the row naturally (no forced
+    // 2x2). The hero already carries the "free, no account" line, so the anon daily-
+    // cap claim no longer lives here (its landing claims-parity binding was retired
+    // in tests/copy/landingClaimsParity.test.js). W-DOC reconcile (brief §4): the
+    // remaining numeric fact ({freeSaves}) stays CONFIG-SOURCED — TierStrip interpolates
+    // it from config/tierFacts.js (FREE_SAVE_LIMIT), never hand-typed. Surveyor renders
+    // as the WALLED violet AI-channel early-access band (ruling #3), not a subscription
+    // tier — it is the optional AI workshop, priced per task.
     tiers: [
-      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up. Priorities rolled, the town derived from them. Up to {anonSize} size, nothing kept.' },
       { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
       { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
