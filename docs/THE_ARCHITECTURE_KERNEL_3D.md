@@ -1,11 +1,16 @@
 # THE ARCHITECTURE KERNEL — cathedral-grade procedural buildings (research-backed, Fable, 2026-07-21)
 
-Owner order (the walk): each institution rendered as a DETAILED, DISTINCTIVE 3D building —
-a cathedral that emulates a real gothic reference (nave, transept, flying buttresses,
-traceried windows, spire, statuary) — with per-building COSMETIC/DETAIL DRIFT keyed to
-the two D&D alignment axes (lawful↔chaos, good↔evil), economic profile, and
-terrain/resource. This supersedes the M-0 "recognizable massing" tier as the CEILING;
-M-0 is the floor it climbs from. Backed by 4-agent research (wf_8f8917a5-363; sources in
+Owner order (the walk, CONFIRMED 2026-07-21): **EVERY institution** rendered as a
+DETAILED, DISTINCTIVE 3D building — not the cathedral alone. The cathedral (emulating a
+real gothic reference: nave, transept, flying buttresses, traceried windows, spire,
+statuary) is the STATED EXEMPLAR and the fidelity BAR; the mandate is that the smithy,
+mill, keep, guildhall, market, granary, temple, dock, manor, inn, moot-hall, mage-tower,
+and every other institution kind — built-in AND custom — each gets its own grammar to
+that same bar. Every building carries per-building COSMETIC/DETAIL DRIFT keyed to the two
+D&D alignment axes (lawful↔chaos, good↔evil), economic profile, and terrain/resource.
+This supersedes the M-0 "recognizable massing" tier as the CEILING; M-0 is the floor it
+climbs from. TOTALITY IS THE CONTRACT: the detail walker reds if ANY institution kind
+lacks a grammar — no kind is exempt, none ships as a generic box. Backed by 4-agent research (wf_8f8917a5-363; sources in
 the journal). VERDICT: buildable thoroughly, under our laws, as a multi-wave kernel.
 
 ## THE MECHANISM (research verdict): SHAPE GRAMMARS
