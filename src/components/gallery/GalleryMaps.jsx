@@ -130,7 +130,7 @@ export default function GalleryMaps({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared maps…</p>}
+      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Unfurling the shared maps…</p>}
       {!viewingSlug && error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
       {!viewingSlug && !loading && !error && items.length === 0 && (
         <EmptyState

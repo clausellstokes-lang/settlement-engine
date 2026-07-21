@@ -26,7 +26,11 @@
  * A11y:
  *   - role="status" + aria-live="polite" so screen readers hear each
  *     active step.
- *   - Esc dismisses immediately (power-user fast-path).
+ *   - There is NO skip / Esc fast-path — the reveal deliberately plays to
+ *     completion (owner-signed, a52a88b1 "loading reveal plays through";
+ *     the earlier Esc handler + Skip button were removed there). Reduced-
+ *     motion drops the film backdrop (JourneyFilm), not the dwell window —
+ *     shortening the dwell is an owner pacing decision, not a repair.
  *
  * Flag: `pipelineReveal` (default on in prod).
  */

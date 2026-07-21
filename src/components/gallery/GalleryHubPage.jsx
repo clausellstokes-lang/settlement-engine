@@ -130,7 +130,7 @@ export default function GalleryHubPage({ routeHub }) {
       >
         {notice || ''}
       </div>
-      {loading && items.length === 0 && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading settlements…</p>}
+      {loading && items.length === 0 && <p style={{ color: MUTED, fontSize: FS.sm }}>Opening the settlement archive…</p>}
       {error && <p role="alert" style={{ color: INK, fontSize: FS.sm }}>{error}</p>}
       {!loading && !error && items.length === 0 && (
         <p style={{ color: MUTED, fontSize: FS.sm }}>No public settlements here yet — share one to found this collection.</p>

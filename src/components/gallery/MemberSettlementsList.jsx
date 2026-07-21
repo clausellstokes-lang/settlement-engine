@@ -91,7 +91,7 @@ function InlineMemberCard({ member }) {
       </Button>
       {open && canExpand && (
         <div style={{ borderTop: `1px solid ${BORDER2}`, background: CARD_ALT, padding: SP.md }}>
-          <Suspense fallback={<p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading dossier...</p>}>
+          <Suspense fallback={<p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Opening the dossier…</p>}>
             <PublicDossierView dossier={dossier} showHeader={false} />
           </Suspense>
         </div>

@@ -1,11 +1,14 @@
 /**
- * PrivacySettings.jsx — three plain-language consent toggles (doc §3).
+ * PrivacySettings.jsx — four plain-language consent toggles (doc §3).
  *
  * essential — product telemetry (default on unless DNT/opt-out). Cookieless,
  *             pseudonymous; powers funnels that tune the app.
  * research  — contribute anonymous STRUCTURAL data (no names/prose/secrets) to
  *             improve the generator. Consent model v2: ON by default (opt-OUT),
  *             one click to turn off; DNT is a hard override.
+ * market    — opt-IN (default off): include usage in aggregate anonymous market
+ *             research that may be shared/licensed. Disclosed in the privacy
+ *             policy (privacyPolicyParity.test.js pins policy ↔ this roster).
  * ai_prose  — reserved; gates nothing today (shown so the UI doesn't churn later).
  *
  * Writes through consent.js and fires CONSENT_UPDATED. Stamp-at-write: downgrades

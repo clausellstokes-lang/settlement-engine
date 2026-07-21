@@ -75,8 +75,12 @@ describe('RealmDashboard — live summary (premium)', () => {
     expect(screen.getByText(/1 siege/)).toBeTruthy();
     // The dominant faith reads off the pantheon ledger.
     expect(screen.getByText('Vol')).toBeTruthy();
-    // The war-weariest power surfaces from warExhaustionStandings.
-    expect(screen.getByText('s1')).toBeTruthy();
+    // The war-weariest power surfaces from warExhaustionStandings. This render
+    // passes no nameById, so the name lookup misses — and the fallback must be
+    // the in-fiction generic, never the raw id (C3 finding 12; this line used
+    // to pin 's1', the defect's own output).
+    expect(screen.getAllByText('a settlement').length).toBeGreaterThan(0);
+    expect(screen.queryByText('s1')).toBeNull();
     // No locked teaser / no pricing moment for premium.
     expect(screen.queryByTestId('realm-dashboard-locked')).toBeNull();
     expect(triggerSpy).not.toHaveBeenCalled();
@@ -165,5 +169,22 @@ describe('RealmInspector — overlay structure', () => {
     expect(screen.queryByRole('button', { name: 'Pantheon' })).toBeNull();
     // …but War and Diplomacy and Chronicle remain.
     expect(screen.getByRole('button', { name: 'War and Diplomacy' })).toBeTruthy();
+  });
+});
+
+// ── C3 finding 12 — no raw settlement id in a realm headline ─────────────────
+// The Conflict sub-line and the hegemony nameFor once fell back to the raw id
+// ("s_3 war-weary") when the name lookup missed. Both now degrade to in-fiction
+// generics; this source pin keeps the raw-id fallback from returning.
+describe('RealmDashboard — headline fallbacks stay in-fiction', () => {
+  test('no raw-id fallback in the conflict sub-line or hegemony nameFor', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { resolve } = await import('node:path');
+    const src = readFileSync(resolve(process.cwd(), 'src/components/map/RealmDashboard.jsx'), 'utf-8');
+    expect(src).not.toMatch(/\|\|\s*weariest\.id/);
+    expect(src).not.toMatch(/\|\|\s*topAggressor\.id/);
+    expect(src).not.toMatch(/nameFor:[^\n]*\|\|\s*String\(id\)/);
+    expect(src).toMatch(/\|\|\s*'a settlement'/);
+    expect(src).toMatch(/\|\|\s*'an unnamed seat'/);
   });
 });

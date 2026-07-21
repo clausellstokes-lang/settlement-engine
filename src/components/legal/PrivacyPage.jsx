@@ -30,18 +30,24 @@ export default function PrivacyPage() {
           Your private campaign text, NPC secrets, and personal notes are never
           collected. The research tier captures settlement structure only, never
           names, prose, or secrets. Generation seeds and private configuration are
-          never exposed on shared or gallery surfaces. We do not sell your data.
+          never exposed on shared or gallery surfaces. We do not sell your
+          personal data; if you opt in to anonymous market research, aggregate
+          structural statistics may be shared or licensed to the worldbuilding
+          market — never your names, prose, seeds, or campaign content, and never
+          anything tied to you.
         </LegalP>
       </LegalSection>
 
       <LegalSection heading="Your consent and control" id="privacy-consent">
         <LegalP>
-          Telemetry consent has three plain-language settings in Account then
+          Telemetry consent has four plain-language settings in Account then
           Privacy and data: essential product telemetry, the anonymous research
-          contribution, and a reserved AI-prose research tier that is off and
-          collects nothing today. The research contribution is on by default and
-          the opt-out is silent, with no pop-up, so you are never nagged. You can
-          turn it off there whenever you like, and your choice is remembered.
+          contribution, an opt-in anonymous market-research tier, and a reserved
+          AI-prose research tier that is off and collects nothing today. The
+          research contribution is on by default and the opt-out is silent, with
+          no pop-up, so you are never nagged. The market-research tier is off by
+          default and covers aggregate, anonymous structure only. You can change
+          any of these there whenever you like, and your choice is remembered.
         </LegalP>
         <LegalP>
           If your browser sends a Do Not Track signal, we honor it as a full
@@ -70,11 +76,19 @@ export default function PrivacyPage() {
       <LegalSection heading="Deleting your data" id="privacy-deletion">
         <LegalP>
           You can delete settlements and unpublish shared content from your
-          account at any time. To request deletion of your account and its
-          associated data, contact us from the address on your account and we
-          will remove it. Some records required to meet legal or tax obligations,
-          such as payment receipts, may be retained for the period the law
-          requires.
+          account at any time; that removes them immediately. To request deletion
+          of your account, contact us from the address on your account. After a
+          short grace window your sign-in is removed, billing stops, and your
+          profile is irreversibly anonymised and locked — the anonymised shell
+          can never be signed into or written to again. Some records required to
+          meet legal or tax obligations, such as payment receipts, may be
+          retained for the period the law requires.
+        </LegalP>
+        <LegalP>
+          If a paid plan lapses, settlements and maps created under it enter a
+          three-month retention window. Export or delete them during that window,
+          or resubscribe to keep them; when the window ends they are permanently
+          cleared.
         </LegalP>
       </LegalSection>
 

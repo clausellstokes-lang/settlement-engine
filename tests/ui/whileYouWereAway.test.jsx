@@ -69,10 +69,17 @@ describe('WhileYouWereAway digest banner', () => {
     expect(getByTestId('while-you-were-away').textContent).toMatch(/snag.*kernel exploded/i);
   });
 
-  test('notes when the catch-up was capped', () => {
+  test('notes when the catch-up was capped — and tells the TRUTH about the cap', () => {
     setStore({ livingCatchUp: { campaignId: 'camp-1', weeksCaughtUp: 26, capped: true, majors: [], error: null } });
-    expect(render(<WhileYouWereAway campaignId="camp-1" />).getByTestId('while-you-were-away').textContent)
-      .toMatch(/more time had passed/i);
+    const text = render(<WhileYouWereAway campaignId="camp-1" />).getByTestId('while-you-were-away').textContent;
+    expect(text).toMatch(/more time had passed/i);
+    // C3 finding 11: past the cap the realm lives the FIRST capped weeks and the
+    // remainder is skipped for good (owner ruling: calendar-advances-past-cap).
+    expect(text).toMatch(/lived the first 26 weeks/i);
+    // The old misleading halves must stay out: the weeks shown are not the most
+    // recent, and the skipped span cannot be run later.
+    expect(text).not.toMatch(/most recent/i);
+    expect(text).not.toMatch(/run the rest/i);
   });
 
   test('the dismiss button clears the digest', () => {

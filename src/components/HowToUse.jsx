@@ -196,7 +196,7 @@ function PowerTab() {
         <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
         <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
         <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
-        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets and elevates criminal presence. A Patron creates dependency chains in the client's economy. A Cold War generates intelligence NPCs on both sides.</Tip>
+        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions — deep-cover operatives, commercial fronts — on both sides.</Tip>
       </section>
 
       <section style={{ ...NO_BREAK, marginBottom:18 }}>
