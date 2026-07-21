@@ -1255,6 +1255,27 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐⭐ CYCLE-2 FIX DRIVE COMPLETE @ composite-r4 b339e178 (2026-07-21,
+checker-verified).** ALL 277 findings through the pipeline: must-fix tier (28
+fixed / 10 struck) + should-fix/polish batches A (~100) + B-r1 (~37) + B-r2 (~29)
++ C-r1 (~31) + C-r2 (~42). Final batch C-r2 fold (C6 return-visit fallback + C3
+experience/UX [handbook rival-claim drift, privacy↔SQL parity, 4-member raw-id
+headline class, Ti] + C2 voice [THE Ashford-probe coherence fix: threads no
+longer conflate co-location with causation; raw ids/Unknown-settlement speak
+names or 'a far settlement'; raw JSON removed from the chronicle; verbatim
+repeats coalesced]). Two-shard = 4-parked-goldens-ONLY; letter golden
+BYTE-IDENTICAL GREEN throughout (conditional-spread discipline); closure
+1,039,971 — margin GREW 25→29B (C2 net-NEGATIVE eager by re-leading headline
+templates); F24 NUL byte caught by the python scan. THE FIX DRIVE ALSO DELIVERED
+MUCH OF TRANCHE 2 EARLY: story-census executable (C5, PASSES green) · candidateType
+voice-chokepoint walker (C1) · RLS-census 70-tbl/0-gap + AI-metering-census +
+model-drift binding + a live N-1 credit-AI session-gate gap CLOSED (C4) ·
+transcendental-Math + committed-secrets + non-JS-first-paint budget walkers (C5) ·
+handbook/privacy/loading-narration parity gates (C3). ⛔ OWNER STOP LINE: after
+the REMAINING tranche-2 enforcers + tranche-3 burn-down → HALT (no cold cycle 3 /
+convergence / confirming cycle — owner's call). LARGE ONE-REGEN QUEUE accumulated
+(C2-Q1 letter-header/em-dash/flag-key debt, C2-Q2 prose-pool variety, + every
+golden-bound composer edit) — the owner's single re-record lights it all.**
 **⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
 checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
 deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
