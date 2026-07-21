@@ -1315,6 +1315,53 @@ families; closure 31/31 VERIFY_DIST green (Δ0); domain-strict 0; tsc 0; docs
 (23+3 mutation-proven / 125 rationaled / 199 uncovered shrink-only burn-down).
 NEXT = TRANCHE 3 (spell-break + error-copy + non-taste kill-list) → close-out →
 HALT per owner stop line.**
+**⬛⭐⭐⭐ TRANCHE 3 COMPLETE + PROGRAM HALT @ composite-r4 bff01718 (2026-07-21,
+per the owner's stop line — no cold cycle 3 / convergence / confirming cycle).**
+T3-A ERROR-COPY 48→0, NO remainder @ cb096d92: all 48 raw literals across 17
+files routed t('errors.*')/t('auth.error.*'); every offender lazy-proven before
+import; WorldMap.jsx net-zero at 598 (was exactly 600); 3 more JSX em-dashes
+banked (voice baseline down); empty-clears → null idiom. T3-B SPELL-BREAK @
+3aaf963b: chronicle camelKey 3→0 (M9a lever reason humanized at the authoring
+point, stable ×3); decrees rawId 3 = GOLDEN-BOUND BY EXPERIMENT (humanize-test
+proved decrees 3→0 and parked chronicle rawId 32→6 fall TOGETHER via
+pressureModel.js `raw.reasons` — ONE humanization at the ONE REGEN retires
+both); kill-list = ZERO safe mechanical removals (~500 live lines TASTE, 3
+comment false-positives left un-gamed, 3 orphaned zero-importer components
+owner-flagged: MemberSettlementsList/GalleryMapsSidebar/SimulationRulesGate-
+Toggle). FOLD GATE on bff01718: two-shard 15,726 pass / EXACTLY-4-parked;
+domain-strict 0; tsc 0; letter golden byte-identical both lanes; CLOSURE
+(authoritative, the ratchet's own BFS) = 1,039,977 — MARGIN 23 B (the +6 vs the
+long-quoted 1,039,971 arose in the enforcer-fold chunk composition — the known
+shared-chunk rebalance artifact class; both enforcer lanes proved Δ0
+individually; recorded, not chased at 23 B). Holds confirmed: title census,
+rawColor, mapPalette, anyCast at frozen targets (suite-green = the proof).
+═══ THE CONSOLIDATED OWNER QUEUE (the program's hand-off; every act
+owner/reality-gated BY DESIGN) ═══
+T4 · THE ONE REGEN (one signed batch, highest leverage): (1) light
+provenanceLedgerEnabled in full_simulation — NOW lights the E-J-v2 MULTI-HOP
+DAG (deepChains 0→6 incl. conquest→info-shock→import-shortage) + the recorded
+halves of bars 2/4/20; (2) letter humanizer wiring (tickCalendarLabel +
+humanizeFlagKey → letterToPlainText) — retires letter camelKey 37 + tickSpeak 1;
+(3) pressureModel `raw.reasons` humanization — retires chronicle rawId 32 +
+decrees rawId 3 in one edit (proven coupled); (4) golden-bound em-dash prose
+sweep + C2-Q1 letter-header debt + C2-Q2 prose-pool variety; (5) tuning: idx21,
+idx19, obligations-decay F6+F19 (the one real architecture fix in the batch);
+(6) re-record the 4 parked golden families ONCE, tuning manifest signed — the
+suite goes fully green at that moment.
+T5 · POSTURE ACTS (independent): CSP Report-Only→ENFORCE (vercel.json) ·
+COGS/margin readout deploy (report_ai_cogs fn + migration) · DR runbook
+rehearsal · E-J TIER-2 (pulseKernel ~1615 impactDigest snapshot AFTER movers,
+records contest/generosity beats; shipped-path risk — my rec: after soak) +
+E-J family-2 (war applied-outcome→mobilization edge; needs its own
+reachability proof) · DE-ROUND taste call (~500 lines) + the 3 orphaned
+components (delete vs wire) · FMG BYOK re-enable (product call).
+T6 · CERTIFICATION: the soak (rates/boundedness bands pre-declared) · the
+LIVED tier (real tables sign bars 3/9/10/20-felt).
+STANDING (not gated, recorded): mutation-manifest 199-file uncovered burn-down
+(shrink-only worklist) · parley has NO client seam (E-D; informational) · E-E
+content-fidelity variant = possible future enforcer (never specced; E-G covers
+the adjacent class) · support email unconfirmed pre-deploy · founder-transfer
+legal sign-off = activation gate · master-merge blockers per memory index.**
 **⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
 checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
 deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
