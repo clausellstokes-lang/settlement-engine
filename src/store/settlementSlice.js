@@ -444,9 +444,15 @@ export const createSettlementSlice = (set, get) => ({
     if (!_pe_COMMITTABLE.includes(kind)) return null;
     // Campaign-clock identity lock: NPC names freeze once the settlement is
     // canonized (settlement renames stay allowed post-canon).
-    if (get().phase === 'canon' && kind === 'rename-npc') {
-      return null;
-    }
+    if (get().phase === 'canon' && kind === 'rename-npc') return null;
+    // No-silent-drop PRECONDITION leg: a 'flavor' table directive (an incident
+    // chronicle line) records ONLY in canon — recordCanonFlavorEntryImpl no-ops
+    // off-canon, so admitting one on a draft would clear the queue with a success
+    // indication while writing nothing (the moment lost). Refuse it here (immediate
+    // null), the same contract the dispatcher-existence check above enforces, now
+    // for the dispatcher's precondition. 'applyEvent' table directives are unaffected
+    // (applyEvent handles draft + canon), so only the canon-gated leg is gated.
+    if (kind === 'table-event' && payload?.directive?.dispatch === 'flavor' && get().phase !== 'canon') return null;
     const clock = (get().pendingEditsClock || 0) + 1;
     const edit = _pe_buildEdit(kind, payload, clock);
     set(state => {

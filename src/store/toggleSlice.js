@@ -147,8 +147,9 @@ export const createToggleSlice = (set, get) => ({
   // One-time on-load migration: rewrite any servicesToggles persisted under the
   // pre-Stage-2b display-name key into the current svcKey form. Idempotent — a
   // bag already in the new form normalizes to itself, so re-running is a no-op.
-  // Wire from the store's onRehydrateStorage so orphaned toggles are recovered
-  // before the panel reads them.
+  // The store's onRehydrateStorage (store/index.js) runs this normalization at
+  // rehydrate (via the shared normalizeServicesToggles) so orphaned toggles are
+  // recovered before the panel reads them; this action is the explicit seam.
   hydrateServicesToggles: () =>
     set(state => { state.servicesToggles = normalizeServicesToggles(state.servicesToggles); }),
 

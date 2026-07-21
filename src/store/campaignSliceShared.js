@@ -71,6 +71,43 @@ export function isUuid(value) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
 }
 
+/**
+ * DETERMINISTIC v4-shaped UUID derived from a legacy (non-UUID) campaign id.
+ *
+ * WHY: migrateCampaign remints a non-UUID id (rowForCampaign omits non-UUID ids
+ * on upsert). loadCampaigns runs migrateCampaign SEPARATELY over the local cache
+ * and the remote list, so a random newCampaignId() gave the SAME legacy campaign
+ * two different UUIDs — mergeCampaignLists (keyed by id) then could not dedupe the
+ * two copies and yielded a duplicate row. Deriving the new id as a pure function
+ * of the legacy id makes both copies converge on ONE id, so the merge dedupes.
+ *
+ * The output satisfies isUuid(): version nibble forced to 4, variant nibble to
+ * 8..b. 128 bits from four independent FNV-1a passes over salted copies of the
+ * source keep distinct legacy ids collision-resistant. Callers pass a NON-EMPTY
+ * source (an empty/missing id can't identify a copy to dedupe against — those keep
+ * the random newCampaignId() so genuinely-distinct id-less campaigns never
+ * collapse into one).
+ * @param {string|number} source the legacy id
+ * @returns {string} a stable v4-shaped UUID
+ */
+export function uuidFromLegacyId(source) {
+  const str = String(source == null ? '' : source);
+  let hex = '';
+  for (let salt = 0; salt < 4; salt++) {
+    let h = (0x811c9dc5 ^ salt) >>> 0;
+    const s = `${salt}:${str}`;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 0x01000193);
+    }
+    hex += (h >>> 0).toString(16).padStart(8, '0');
+  }
+  // hex is 32 hex chars. Force the UUID v4 shape (isUuid-valid): version '4',
+  // variant ∈ 8..b. The remaining nibbles are the derived hash.
+  const variant = ((parseInt(hex[16], 16) & 0x3) | 0x8).toString(16);
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-4${hex.slice(13, 16)}-${variant}${hex.slice(17, 20)}-${hex.slice(20, 32)}`;
+}
+
 export function findActiveCampaign(campaigns, campaignId) {
   const campaign = campaigns.find(item => item.id === campaignId);
   return isCampaignActive(campaign) ? campaign : null;
