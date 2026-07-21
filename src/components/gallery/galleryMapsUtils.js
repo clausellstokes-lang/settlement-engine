@@ -1,10 +1,18 @@
-// Option catalogs + active-filter count for the gallery MAPS tab.
+// Option catalogs + campaign facets for the gallery MAPS surfaces.
 //
 // Filter/sort/search now run SERVER-SIDE in list_gallery_maps (migration 065),
 // mirroring the dossier feed: GalleryMaps sends its facet/search/sort state to
 // the RPC and renders the returned rows directly. This module keeps only the
-// pieces that stay client-side — the option catalogs, the dynamic tag vocabulary,
-// the active-filter count, and the owner-edit gate.
+// pieces that stay client-side — the option catalogs, the owner-edit gate, and
+// the campaign-facet derivations.
+//
+// SPLIT 2026-07-21 (T5, the orphaned-components ruling): the dependency-free
+// filter model (BACKDROP_OPTIONS / emptyMapFilters / deriveTagVocabulary /
+// activeMapFilterCount) moved to galleryMapsFilters.js so the gallery chunk
+// never imports THIS module — its campaign-facet half rides the
+// MapShareEditorOverlay chunk, and sharing it across both lazy chunks split
+// out a new chunk whose dep-map filename broke the first-paint closure budget
+// (+42 B). See galleryMapsFilters.js's header for the full rationale.
 //
 // Tile shape per item (list_gallery_maps): slug, name, kind ('map' |
 // 'map_with_campaign'), description, tags (text[]), backdrop_kind ('image' |
@@ -21,12 +29,6 @@ export const KIND_OPTIONS = Object.freeze([
   ['map_with_campaign', 'Map and campaign', 'The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the chronicle, the pantheon, its wars and settlement network, and the dashboard.'],
 ]);
 
-// backdrop_kind facet — an uploaded image vs procedurally generated terrain.
-export const BACKDROP_OPTIONS = Object.freeze([
-  ['image', 'Image backdrop'],
-  ['fmg', 'Generated terrain'],
-]);
-
 // Sort options, all applied server-side (migration 065). 'most_imported' orders
 // by the real import_count; 'most_viewed' by view_count; newest is the default
 // published_at desc order.
@@ -35,18 +37,6 @@ export const MAP_SORT_OPTIONS = Object.freeze([
   ['most_viewed', 'Most viewed'],
   ['most_imported', 'Most imported'],
 ]);
-
-// The empty maps-filters shape — the single source of truth for "no narrowing"
-// (the GalleryMaps initial state + its Clear reset). `importable` is the owner
-// import opt-in facet (saved_maps.gallery_importable, migration 072). A fresh
-// copy each call so callers can mutate freely without sharing array refs.
-export function emptyMapFilters() {
-  return { kind: [], backdrop: [], tags: [], hasSettlements: false, importable: false };
-}
-
-export function human(value) {
-  return String(value || '').replace(/_/g, ' ');
-}
 
 /**
  * Build a strict slug -> owned-campaign lookup for the gallery edit gate.
@@ -69,23 +59,6 @@ export function ownedCampaignBySlug(campaigns = []) {
     }
   }
   return map;
-}
-
-/**
- * The union of tags across the fetched items, lowercased and de-duped, sorted
- * for a stable chip order. The maps vocabulary is dynamic (owner-authored), not
- * a fixed catalog, so it is derived from the batch rather than declared.
- */
-export function deriveTagVocabulary(items = []) {
-  const seen = new Set();
-  for (const item of Array.isArray(items) ? items : []) {
-    const tags = Array.isArray(item?.tags) ? item.tags : [];
-    for (const tag of tags) {
-      const norm = String(tag || '').trim().toLowerCase();
-      if (norm) seen.add(norm);
-    }
-  }
-  return Array.from(seen).sort();
 }
 
 // ── Campaign facets + suggested tags (map_with_campaign shares) ─────────────
@@ -265,15 +238,4 @@ export function campaignFacets(campaign = {}, members = []) {
     aliveness: computeAliveness(campaign),
     worldAge: campaignWorldAgeBand(campaign),
   };
-}
-
-/** Count of active facets — drives the "Clear" affordance and section badges. */
-export function activeMapFilterCount(filters = {}) {
-  let sum = 0;
-  sum += Array.isArray(filters.kind) ? filters.kind.length : 0;
-  sum += Array.isArray(filters.backdrop) ? filters.backdrop.length : 0;
-  sum += Array.isArray(filters.tags) ? filters.tags.length : 0;
-  sum += filters.hasSettlements ? 1 : 0;
-  sum += filters.importable ? 1 : 0;
-  return sum;
 }

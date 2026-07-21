@@ -9,6 +9,24 @@ ruled against; every deletion is left UNSTAGED and is git-reversible.
 **Source:** `[code-quality-2]` (orphaned modules) and `[code-quality-3]` (tested-but-unconsumed
 read-models) in `docs/COMPREHENSIVE_REVIEW_2026-07-13.md`, re-verified in wave F7.
 
+**Addendum 2026-07-21 (T5, the orphaned-components ruling — FINAL disposition):** four of the
+deletions below were RESURRECTED after this doc was applied — the master-merge screening
+(`de9b0361`, "revert deletion-orphans") restored master's live copies — so the per-row
+**DELETED 2026-07-14** marks no longer described the tree. The owner resolved the limbo per file
+on 2026-07-21:
+- `gallery/CampaignStatePanel.jsx` — **resurrected AND re-wired for real**: the Campaigns tab
+  (`CampaignPlayerView.jsx`, `GalleryCampaigns.jsx`) renders it. Alive; no action.
+- `gallery/GalleryMapsSidebar.jsx` — **WIRED 2026-07-21** into the maps tab (the MOUNT arm of its
+  row): backdrop / importable / tags facets feed `list_gallery_maps` server-side. The kind chips
+  and has-settlements toggle were struck as incoherent with the GALLERY-2 phase-2 blank-maps
+  narrowing (campaign shares live on the Campaigns tab).
+- `gallery/MemberSettlementsList.jsx` — **DELETED again 2026-07-21.** Its exclusive parent
+  `MapGalleryDetail.jsx` stayed deleted; the maps tab's read-only preview renders the simpler
+  inline member chips instead. Kill-list borderRadius ceiling lowered in the same commit.
+- `map/SimulationRulesGateToggle.jsx` — **DELETED again 2026-07-21.** The dialog's inline `Toggle`
+  serves its eight generic switches; the extracted card's subsystem-gate use case left the dialog.
+  Kill-list tintedCallouts ceiling lowered in the same commit.
+
 ## Method
 
 Import census per file: `grep` every `from '…'` / `import('…')` specifier across `src/`, `tests/`,
