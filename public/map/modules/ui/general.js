@@ -137,15 +137,42 @@ function escapeHtml(value) {
 // navigations — while preserving the map SVG (all drawing attributes, ids,
 // data: image hrefs). Parsed as text/html so parsing is inert: no script runs
 // and no resource is fetched, exactly like sanitizeNoteHtml above.
+// HARDENED (cycle-3 security fix): the previous version stripped only <script>,
+// on* handlers, and javascript:/vbscript: hrefs — leaving <iframe srcdoc>,
+// <object>, <embed>, <base>, <form>, <foreignObject> (the SVG→HTML escape
+// hatch), src=javascript:, and SMIL href animation to execute on this
+// token-bearing origin. This mirrors sanitizeNoteHtml's denylist, adapted for
+// SVG: it PRESERVES the legitimate map (drawing attributes, ids, <style> for
+// map styling, and data:image hrefs for embedded raster) while removing every
+// script-execution vector. Parsed as text/html so parsing is inert.
+const UNSAFE_SVG_TAGS = /^(script|iframe|frame|frameset|object|embed|link|meta|base|form|template|foreignObject)$/i;
+const UNSAFE_URL_PROTOCOL = /^\s*(javascript|vbscript):/i;
+// href/xlink:href is a navigation context: block script protocols AND any data:
+// that is NOT an embeddable raster image (data:image/svg+xml can carry script
+// when navigated, so it too is blocked here; <image> raster stays legitimate).
+const UNSAFE_NAV_DATA = /^\s*data:(?!image\/(?:png|jpe?g|gif|webp|bmp|avif))/i;
+const SVG_URL_ATTRS = ["href", "xlink:href", "src", "poster", "background"];
+const SVG_ANIM_VALUE_ATTRS = ["values", "to", "from", "by", "begin", "end"];
 function sanitizeMapSvg(markup) {
   const doc = new DOMParser().parseFromString(String(markup ?? ""), "text/html");
-  for (const element of doc.body.querySelectorAll("script")) element.remove();
-  for (const element of doc.body.querySelectorAll("*")) {
+  for (const element of [...doc.body.querySelectorAll("*")]) {
+    if (UNSAFE_SVG_TAGS.test(element.tagName)) {
+      element.remove();
+      continue;
+    }
     for (const attribute of [...element.attributes]) {
       const name = attribute.name.toLowerCase();
-      if (name.startsWith("on")) element.removeAttribute(attribute.name);
-      else if ((name === "href" || name === "xlink:href") && /^\s*(javascript|vbscript):/i.test(attribute.value))
+      const value = attribute.value;
+      if (name.startsWith("on") || name === "srcdoc" || name === "xlink:actuate") {
         element.removeAttribute(attribute.name);
+      } else if (name === "href" || name === "xlink:href") {
+        if (UNSAFE_URL_PROTOCOL.test(value) || UNSAFE_NAV_DATA.test(value)) element.removeAttribute(attribute.name);
+      } else if (SVG_URL_ATTRS.includes(name) && UNSAFE_URL_PROTOCOL.test(value)) {
+        element.removeAttribute(attribute.name);
+      } else if (SVG_ANIM_VALUE_ATTRS.includes(name) && UNSAFE_URL_PROTOCOL.test(value)) {
+        // SMIL <animate attributeName="href" values="javascript:...">
+        element.removeAttribute(attribute.name);
+      }
     }
   }
   return doc.body.innerHTML;

