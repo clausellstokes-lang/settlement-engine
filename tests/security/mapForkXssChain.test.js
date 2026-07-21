@@ -31,6 +31,9 @@ const LOAD_SRC = read('public/map/modules/io/load.js');
 const MAIN_SRC = read('public/map/main.js');
 const MARKERS_SRC = read('public/map/modules/ui/markers-editor.js');
 const NOTES_SRC = read('public/map/modules/ui/notes-editor.js');
+const CLOUD_SRC = read('public/map/modules/io/cloud.js');
+const AI_SRC = read('public/map/modules/ui/ai-generator.js');
+const LAYERS_SRC = read('public/map/modules/ui/layers.js');
 
 /**
  * Slice a self-contained block out of a fork source file and evaluate it in
@@ -229,5 +232,78 @@ describe('wave-1 layer C — TinyMCE loads from our vendored copy, not azgaar.gi
     expect(NOTES_SRC).toContain('_setBaseUrl(new URL("libs/tinymce"');
     // the vendored, hash-pinned copy actually exists
     expect(existsSync(resolve(process.cwd(), 'public/map/libs/tinymce/tinymce.min.js'))).toBe(true);
+  });
+});
+
+// ── Wave 2 — the FMG-remainder security follow-ons ───────────────────────────
+// Three defensive follow-ons wave 1 did not cover: (D) the untrusted-.map-name
+// innerHTML sinks in the cell-info hover overlay are escaped, (E) the Dropbox
+// OAuth access token is neither console-logged nor persisted to disk, and (F)
+// FMG's BYOK AI generator's direct cross-origin LLM egress is disabled. Same
+// slice-and-eval (functional) / source-slice (structural) idiom as the layers
+// above.
+
+describe('wave-2 layer D — the cell-info overlay escapes untrusted .map names', () => {
+  const escapeHtml = evalBlock(GENERAL_SRC, 'function escapeHtml', 'escapeHtml');
+
+  test('a crafted state/burg/culture name cannot introduce a tag or break out', () => {
+    const injected = escapeHtml('<img src=x onerror="window.pwned=1">');
+    expect(injected).not.toMatch(/[<>]/);
+    expect(injected).toContain('&lt;img');
+    // a quote that would break out of an interpolation is encoded
+    expect(escapeHtml('a" onmouseover="window.pwned=1')).toContain('&quot;');
+  });
+
+  test('every untrusted name sink in updateCellInfo routes through escapeHtml', () => {
+    const fnStart = GENERAL_SRC.indexOf('function updateCellInfo(');
+    expect(fnStart).toBeGreaterThan(-1);
+    const body = GENERAL_SRC.slice(fnStart, GENERAL_SRC.indexOf('\n}', fnStart) + 2);
+    expect(body).toContain('escapeHtml(pack.states[cells.state[i]].fullName)');
+    expect(body).toContain('escapeHtml(pack.provinces[cells.province[i]].fullName)');
+    expect(body).toContain('escapeHtml(pack.cultures[cells.culture[i]].name)');
+    expect(body).toContain('escapeHtml(pack.religions[cells.religion[i]].name)');
+    expect(body).toContain('escapeHtml(pack.burgs[cells.burg[i]].name)');
+    expect(body).toContain('escapeHtml(biomesData.name[cells.biome[i]])');
+    // and none of the escaped names is interpolated raw any longer
+    expect(body).not.toMatch(/\$\{pack\.states\[cells\.state\[i\]\]\.fullName\}/);
+    expect(body).not.toMatch(/\$\{pack\.cultures\[cells\.culture\[i\]\]\.name\}/);
+    expect(body).not.toContain('pack.burgs[cells.burg[i]].name + " ("');
+  });
+
+  test('drawProvinces escapes the province label name (auto-render sink)', () => {
+    // layers.js injects province <text> labels into #provs innerHTML on layer
+    // render — no user interaction — so the untrusted p.name must be escaped.
+    expect(LAYERS_SRC).toContain('id="provinceLabel${p.i}">${escapeHtml(p.name)}</text>');
+    expect(LAYERS_SRC).not.toContain('id="provinceLabel${p.i}">${p.name}</text>');
+  });
+});
+
+describe('wave-2 layer E — the Dropbox OAuth token is not leaked or persisted to disk', () => {
+  test('no active console statement in cloud.js references the token', () => {
+    const offenders = CLOUD_SRC.split('\n')
+      .map(line => line.trim())
+      .filter(line => !line.startsWith('//') && /console\.\w+\(/.test(line) && /\btoken\b/.test(line));
+    expect(offenders).toEqual([]);
+    // the historical raw-token debug line is gone
+    expect(CLOUD_SRC).not.toContain('console.info("Access token:"');
+  });
+
+  test('the token is held session-scoped (sessionStorage), never localStorage', () => {
+    expect(CLOUD_SRC).toContain('sessionStorage.setItem(lSKey(prov), key)');
+    expect(CLOUD_SRC).toContain('sessionStorage.getItem(lSKey(prov))');
+    expect(CLOUD_SRC).not.toMatch(/localStorage\.(set|get)Item\(lSKey/);
+  });
+});
+
+describe('wave-2 layer F — the FMG BYOK AI generator does not egress to LLM hosts', () => {
+  test('generate() short-circuits before any provider dispatch (egress is dead)', () => {
+    const fnStart = AI_SRC.indexOf('async function generate(button)');
+    expect(fnStart).toBeGreaterThan(-1);
+    const guard = AI_SRC.indexOf('AI text generation is disabled', fnStart);
+    const dispatch = AI_SRC.indexOf('PROVIDERS[provider].generate(', fnStart);
+    expect(guard).toBeGreaterThan(fnStart);
+    expect(dispatch).toBeGreaterThan(fnStart);
+    // the disabling early return sits before the only path that reaches fetch()
+    expect(guard).toBeLessThan(dispatch);
   });
 });
