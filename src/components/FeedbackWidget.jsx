@@ -28,7 +28,7 @@ import { useStore } from '../store/index.js';
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { deriveGenerationId } from '../lib/generationTelemetry.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch, CHROME, bottomClearance } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 export default function FeedbackWidget({ visible = true }) {
@@ -85,11 +85,14 @@ export default function FeedbackWidget({ visible = true }) {
     }
   };
 
-  // Sit above the mobile bottom nav; clear of the desktop edge otherwise.
+  // Base of the coordinated bottom-right floating stack (W2-a). On mobile it clears
+  // the bottom nav + home-indicator via the shared bottomClearance(CHROME.fabLift)
+  // token (was a raw 76 literal); the scroll-to-top/bottom controls pin directly
+  // above it (App.jsx, fabLift + a one-button step), so the two read as one stack.
   const anchor = {
     position: 'fixed',
     right: SP.lg,
-    bottom: isMobile ? 76 : SP.lg,
+    bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
     zIndex: 900,
   };
 

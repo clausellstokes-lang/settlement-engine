@@ -33,7 +33,7 @@ import { supportMailto } from './copy/support.js';
 // whole en.js registry into the first-paint entry closure (byte budget).
 import { t } from './copy/footer.js';
 import {
-  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch,
+  GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY, SLATE, SLATE_BG, sans, serif_, SP, R, FS, swatch, CHROME, bottomClearance,
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
@@ -852,7 +852,7 @@ export default function App() {
         };
         return (
           <div style={{
-            position: 'fixed', bottom: isMobile ? 70 : SP.xxl, right: SP.xl, zIndex: 200,
+            position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift + 56) : SP.lg + 56, right: SP.lg, zIndex: 200,
             display: 'flex', flexDirection: 'column', gap: 8,
           }}>
             {showScrollTop && (
