@@ -49,3 +49,22 @@ export function Card({ title, sub, children, accent=GOLD, lead=false }) {
     </div>
   );
 }
+
+// BandLadder — a banded concept's FULL ladder: every level NAMED with a one-line
+// reading of how to interpret a settlement at that band. Data comes from
+// COMPENDIUM_DATA.bandLadders (the generated drift-contract artifact), so this
+// component authors nothing — it lays the rungs out in the same accent-rule idiom
+// Card uses, with each rung a name + reading row (the Tiers/Threat table rhythm).
+export function BandLadder({ concept, blurb, levels = [], accent=GOLD }) {
+  return (
+    <div style={{ borderLeft:`3px solid ${accent}`, padding:'10px 12px', marginBottom:8 }}>
+      <div style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:700, color:INK, marginBottom:blurb?2:6 }}>{concept}</div>
+      {blurb && <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, maxWidth:PROSE_MEASURE, marginBottom:8 }}>{blurb}</div>}
+      {levels.map((l) => (
+        <div key={l.name} style={{ display:'flex', gap:10, padding:'4px 0' }}>
+          <span style={{ fontSize:FS.xs, fontWeight:700, color:accent, minWidth:104, flexShrink:0 }}>{l.name}</span>
+          <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5, maxWidth:PROSE_MEASURE }}>{l.reading}</span>
+        </div>))}
+    </div>
+  );
+}

@@ -7,7 +7,7 @@ import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../gener
 // archetypes/relationships routed through from the authored catalogData taxonomy).
 // A divergent constant fails tests/docs/compendiumDataFreshness.test.js.
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
-import { Tag, Row, Card } from './primitives.jsx';
+import { Tag, Row, Card, BandLadder } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 
 // Gold-as-TEXT clears AA only at the darker token (#7A5A1A, 6.16:1 on card); the
@@ -18,6 +18,10 @@ const ECON_TXT = swatch['#7A5A1A'];
 // Archetypes + relationships render from the generated artifact CD (see import
 // block above). CAT_COLORS stays here — it's display-only.
 const CAT_COLORS = { Economic:ECON_TXT, Military:'#8b1a1a', Religious:'#1a4a2a', Magic:'#3a1a7a', Criminal:'#4a1a4a', Balanced:'#1a3a7a' };
+
+// Banded concepts render their full ladder from the generated artifact (every rung
+// NAMED + a one-line reading). A tab pulls only the ladders routed to it.
+const laddersFor = (tab) => (CD.bandLadders || []).filter((l) => l.tab === tab);
 
 // ── Tab content ─────────────────────────────────────────────────────────────
 
@@ -82,9 +86,10 @@ export function EconomyTab() {
     <div style={{ fontSize:FS.xs, color:BODY, fontStyle:'italic', margin:'0 0 12px' }}>
       How prosperity is produced, traded, and stressed.
     </div>
-    {/* The lead concept — prosperity is an OUTPUT, not a dial — is the focal
-        tier; the rest are the quieter supporting set (P4). */}
-    <Card title="Prosperity Tiers" accent={GOLD} lead>Subsistence to Affluent. Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial. An output.</Card>
+    {/* The lead concept — prosperity is an OUTPUT, not a dial — renders its full
+        ladder: every rung named with how a settlement at that rung reads (P4). */}
+    {laddersFor('economy').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
     <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
     <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
@@ -126,6 +131,11 @@ export function PowerTab_({ search='' }) {
         </div>))}
     </div>
     )}
+    {/* How far a criminal interest has taken a seat of power: the capture ladder. */}
+    <div style={{ marginTop:16 }}>
+      {laddersFor('power').map((l) => (
+        <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
+    </div>
   </>;
 }
 
@@ -158,6 +168,10 @@ export function StressTab({ search='' }) {
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
         <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||EMPTY_VALUE}</div>
       </div>))}
+    {/* How the resulting state reads: the settlement-stability and capacity-strain ladders. */}
+    <SectionHeading accent={INK}>Reading a Settlement</SectionHeading>
+    {laddersFor('stress').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
   </>;
 }
 

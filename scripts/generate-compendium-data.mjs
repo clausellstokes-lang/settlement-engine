@@ -61,6 +61,7 @@ import {
   SIMULATION_RULE_PRESETS, DEFAULT_SIMULATION_PRESET_ID, DEFAULT_SIMULATION_RULES,
 } from '../src/domain/worldPulse/simulationRules.js';
 import { ARCHETYPES, REL_TYPES } from '../src/domain/compendium/catalogData.js';
+import { buildBandLadders } from '../src/domain/compendium/bandLadders.js';
 import { APPROVED_CORPUS, corpusCompendiumBlock } from '../src/domain/compendium/corpusStaging.js';
 import { institutionalCatalog } from '../src/data/institutionalCatalog.js';
 import { fixture } from '../src/components/home/landingFixture.js';
@@ -186,6 +187,13 @@ export function buildCompendiumDataObject() {
       tiers: [...PROSPERITY_TIERS],
       count: PROSPERITY_TIERS.length,
     },
+
+    // Banded concepts render their FULL ladder — every rung NAMED with a one-line
+    // reading of how to interpret a settlement at that rung. Names read from the
+    // typed tables (PROSPERITY_TIERS / glossary stability+strain+capture); prosperity
+    // readings are authored (src/domain/compendium/bandLadders.js), the rest read
+    // from the glossary derivation. A new band without a reading fails the walker.
+    bandLadders: buildBandLadders(),
 
     operations: {
       count: Object.keys(OPERATIONS).length,
