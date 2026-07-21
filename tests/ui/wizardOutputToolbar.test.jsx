@@ -20,7 +20,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { CHROME } from '../../src/components/theme.js';
@@ -164,5 +164,46 @@ describe('Create-view sticky chrome: occlusion root-cause guards', () => {
     expect(Number(desktopPad[1])).toBeGreaterThanOrEqual(120);
     // Mobile stacked clearance must clear both bars.
     expect(CHROME.headerMobile + CHROME.toolbarHeight).toBeGreaterThanOrEqual(120);
+  });
+});
+
+describe('WizardOutputToolbar mobile compaction (order W2-f)', () => {
+  // On mobile the three utilities (How this was simulated / Regenerate / New Draft)
+  // collapse into one "⋯" overflow menu so Back + name + trigger fit a single row,
+  // instead of a full-width third row wrapping under the name. Desktop is unchanged.
+  test('desktop shows the utilities inline, with no overflow menu', () => {
+    renderToolbar({ isMobile: false });
+    expect(screen.queryByRole('button', { name: /more draft actions/i })).toBeNull();
+    expect(screen.getByRole('button', { name: /regenerate/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /new draft/i })).toBeTruthy();
+  });
+
+  test('mobile hides the utilities behind an "⋯" overflow menu that opens to reveal them', () => {
+    renderToolbar({ isMobile: true });
+    // Back stays a first-class control; the utilities are behind the menu.
+    expect(screen.getByRole('button', { name: /back/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /regenerate/i })).toBeNull();
+    expect(screen.queryByRole('button', { name: /new draft/i })).toBeNull();
+
+    const trigger = screen.getByRole('button', { name: /more draft actions/i });
+    expect(trigger.getAttribute('aria-haspopup')).toBe('menu');
+    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+
+    fireEvent.click(trigger);
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    expect(screen.getByRole('menu', { name: /draft actions/i })).toBeTruthy();
+    // The SAME three utilities are now reachable inside the menu.
+    expect(screen.getByRole('button', { name: /regenerate/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /new draft/i })).toBeTruthy();
+  });
+
+  test('Escape closes the overflow menu (keyboard dismissible)', () => {
+    renderToolbar({ isMobile: true });
+    const trigger = screen.getByRole('button', { name: /more draft actions/i });
+    fireEvent.click(trigger);
+    expect(trigger.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.keyDown(document, { key: 'Escape' });
+    expect(trigger.getAttribute('aria-expanded')).toBe('false');
+    expect(screen.queryByRole('button', { name: /regenerate/i })).toBeNull();
   });
 });
