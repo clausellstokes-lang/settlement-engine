@@ -145,13 +145,42 @@ function furnitureOps(style, { x0, y0, side }) {
   return ops;
 }
 
+/**
+ * Compose the ILLUSTRATED lens's glyph + ground-dress capability fields ONTO a base
+ * palette. A re-skin lens (parchment / watercolor) keeps its own palette identity but now
+ * renders through the FULL illustrated-town path — institution-keyed glyph FACADES (in
+ * place of the legacy building rects) and the whole-ground-plane DRESS (field furrows,
+ * meadow stipple, hedge ticks, coast ripples where water exists, wall shadows where walls
+ * exist, mountain-flank relief on v2) — instead of the bare re-skin's flat district wash +
+ * generic rectangles + ZERO dress that the dormancy law otherwise emits (the flat-square
+ * cause diagnosed in W7 §b: `style.glyphSet` and `style.opacity.dress` live ONLY on the
+ * illustrated lens, so parchment/watercolor fall to townMapDraw.js's legacy-rect branch and
+ * groundDressOps returns []). The composed object carries `__resolved` so
+ * buildTownMapDrawList's resolver passes it through UNCHANGED — the merged fields survive
+ * re-resolution rather than being rebuilt from the bare lens id.
+ * @param {string} styleId  the base palette lens ('parchment' | 'watercolor')
+ * @returns {object} a resolved-style object: base palette + illustrated glyph/dress fields
+ */
+export function dressedStyle(styleId) {
+  const base = resolveTownMapStyle(styleId);
+  const illus = resolveTownMapStyle('illustrated');
+  return Object.freeze({
+    ...base,
+    glyphSet: illus.glyphSet,
+    stroke: Object.freeze({ ...base.stroke, dress: illus.stroke.dress, building: illus.stroke.building }),
+    opacity: Object.freeze({ ...base.opacity, dress: illus.opacity.dress, shadow: illus.opacity.shadow, roofFill: illus.opacity.roofFill }),
+    __resolved: true,
+  });
+}
+
 /** Render one cropped plate (content ops + crop furniture, crop viewBox). */
 export function renderPlate(model, styleId, crop) {
   const resolved = resolveTownMapStyle(styleId);
-  // Content only — the renderer's full-sheet furniture is re-composed for the
-  // crop by furnitureOps (the grid stays for the vtt lens family; neither plate
-  // lens uses it).
-  const contentStyle = { ...resolved, furniture: [] };
+  // THE FULL ILLUSTRATED-TOWN PATH (W7 §b): the chosen lens's palette dressed with the
+  // illustrated glyph + ground-dress fields, so the plate carries glyph facades + ground
+  // dress instead of the flat re-skin rects. Full-sheet furniture is still turned off here
+  // (furnitureOps re-composes the neatline + compass FOR the crop below).
+  const contentStyle = { ...dressedStyle(styleId), furniture: [] };
   const ops = buildTownMapDrawList(model, contentStyle);
   ops.push(...furnitureOps(resolved, crop));
   const svg = drawListToSvg(ops, { width: PLATE_SIZE, height: PLATE_SIZE, style: resolved });
@@ -168,6 +197,7 @@ export function renderPlate(model, styleId, crop) {
 /** The provenance comment stamped into each plate (pinned by the contract test). */
 function provenanceComment(styleId, town) {
   return `<!-- settlementforge landing plate · seed ${fixture.seed} · style ${styleId}`
+    + ` · illustrated-dress (glyph facades + ground dress)`
     + ` · ${town.name} (pop ${town.population})`
     + ` · generator ${fixture.engine.generatorVersion} / simulation ${fixture.engine.simulationVersion} -->`;
 }

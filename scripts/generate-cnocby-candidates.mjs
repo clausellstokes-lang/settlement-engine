@@ -33,11 +33,11 @@
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildTownMapModel, hasDrawableMap } from '../src/domain/townMap/index.js';
+import { buildTownMapModel, hasDrawableMap, buildTownMapPanoramaSvg } from '../src/domain/townMap/index.js';
 import { slugify } from '../src/kernel/slugify.js';
 import { fixture } from '../src/components/home/landingFixture.js';
 import {
-  PLATE_STYLES, replayFixtureTown, contentBounds, cropBox, renderPlate,
+  PLATE_STYLES, replayFixtureTown, contentBounds, cropBox, renderPlate, dressedStyle,
 } from './generate-landing-map-plates.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -60,10 +60,32 @@ function candidateFileName(styleId, layoutId) {
 /** Candidate provenance comment — records the layout version + crop so each file is
  * self-documenting for the fold pick (a superset of the canonical plate stamp). */
 function provenanceComment(styleId, layout, town, crop) {
-  return `<!-- settlementforge landing plate CANDIDATE (W4 showcase) · seed ${fixture.seed}`
-    + ` · style ${styleId} · layout ${layout.id} (layoutLawVersion ${layout.layoutLawVersion})`
+  return `<!-- settlementforge landing plate CANDIDATE (W7 illustrated re-emit) · seed ${fixture.seed}`
+    + ` · style ${styleId} · illustrated-dress (glyph facades + ground dress)`
+    + ` · layout ${layout.id} (layoutLawVersion ${layout.layoutLawVersion})`
     + ` · ${town.name} (pop ${town.population}) · crop ${crop.side}×${crop.side} @ ${crop.x0},${crop.y0}`
     + ` · generator ${fixture.engine.generatorVersion} / simulation ${fixture.engine.simulationVersion} -->`;
+}
+
+/** The panorama candidate's filename + provenance (the owner's 2.5D taste look). */
+function panoramaFileName() {
+  return `${SLUG}.parchment.panorama.svg`;
+}
+function panoramaProvenance(town) {
+  return `<!-- settlementforge landing plate CANDIDATE (W7 townPanorama · owner 2.5D taste look) · seed ${fixture.seed}`
+    + ` · style parchment · illustrated-dress (glyph facades + ground dress) · projection panorama (oblique 2.5D)`
+    + ` · ${town.name} (pop ${town.population})`
+    + ` · generator ${fixture.engine.generatorVersion} / simulation ${fixture.engine.simulationVersion} -->`;
+}
+/** Render the parchment-dressed oblique panorama plate for the fixture town (v2 layout). */
+function renderPanorama(town) {
+  const model = buildTownMapModel(town, { layoutLawVersion: 2 });
+  if (!hasDrawableMap(model)) {
+    console.error('[cnocby-candidates] panorama: the fixture town has no drawable map — cannot emit.');
+    process.exit(1);
+  }
+  const svg = buildTownMapPanoramaSvg(model, { style: dressedStyle('parchment'), width: 720, height: 720 });
+  return `${panoramaProvenance(town)}\n${svg}`;
 }
 
 function main() {
@@ -114,6 +136,23 @@ function main() {
       mkdirSync(OUT_DIR, { recursive: true });
       writeFileSync(file, plate);
       console.log(`[cnocby-candidates] emitted → ${file} (${plate.length} bytes, ${layout.label}, crop ${crop.side}×${crop.side} @ ${crop.x0},${crop.y0})`);
+    }
+  }
+
+  // ── THE PANORAMA VARIANT (owner's 2.5D taste look) ─────────────────────────
+  {
+    const plate = renderPanorama(town);
+    const file = join(OUT_DIR, panoramaFileName());
+    if (checkOnly) {
+      const committed = existsSync(file) ? readFileSync(file, 'utf8') : null;
+      if (committed !== plate) {
+        console.error(`[cnocby-candidates] STALE: ${file} does not match the replayed render.`);
+        stale += 1;
+      }
+    } else {
+      mkdirSync(OUT_DIR, { recursive: true });
+      writeFileSync(file, plate);
+      console.log(`[cnocby-candidates] emitted → ${file} (${plate.length} bytes, townPanorama oblique 2.5D, parchment illustrated-dress)`);
     }
   }
 
