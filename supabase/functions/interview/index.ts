@@ -156,11 +156,13 @@ export async function handleInterview(
     const bundle = buildRetrievalBundle(body?.slices);
     // V-26a MULTI-HOP: prior Q&A carried by a follow-up. Context only — fenced as data
     // in the prompt and NEVER a source; the new answer is still grounded in `bundle` and
-    // its citations resolved against it (buildPriorExchange caps turns + lengths).
-    const history: Array<{ question?: unknown; answer?: unknown }> = Array.isArray(body?.history)
+    // its citations resolved against it (buildPriorExchange caps turns + lengths). Each
+    // turn carries the AUDIENCE it was produced under so buildInterviewPrompt can re-project
+    // the history to this request's audience (a DM answer never seeds a player prompt).
+    const history: Array<{ question?: unknown; answer?: unknown; audience?: unknown }> = Array.isArray(body?.history)
       ? body.history
           .filter((t: unknown) => t && typeof t === 'object')
-          .map((t: any) => ({ question: t.question, answer: t.answer }))
+          .map((t: any) => ({ question: t.question, answer: t.answer, audience: t.audience }))
       : [];
 
     // SERVER-SIDE AUDIENCE BACKSTOP: a player-audience request may ground on ONLY

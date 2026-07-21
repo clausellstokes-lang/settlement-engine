@@ -183,6 +183,52 @@ describe('interview core — multi-hop (V-26a: prior exchange carried as context
   });
 });
 
+describe('interview core — the audience gate holds across hops (secrets-seam)', () => {
+  const bundle = buildRetrievalBundle(SLICES);
+  // A DM asked hop 1 under the DM audience and the answer NAMED A SECRET. The DM then
+  // flips to Player-safe and asks a follow-up. The prior DM answer must NOT reach the
+  // player prompt — via its answer OR its (DM-framed) question.
+  const DM_SECRET = 'the reeve is secretly poisoning the town well';
+  const DM_QUESTION = 'who is the hidden traitor?';
+  const PLAYER_FACT = 'the market is busiest on market day';
+  const history = [
+    { question: DM_QUESTION, answer: DM_SECRET, audience: 'dm' },
+    { question: 'when is the market?', answer: PLAYER_FACT, audience: 'player' },
+  ];
+
+  it('a player-audience prompt embeds NO DM-audience prior answer or question (the leak)', () => {
+    const p = buildInterviewPrompt('Is the town safe to visit?', bundle, 'player', 'sf-x', history);
+    // FAILS against pre-fix code: buildPriorExchange ignored audience and embedded the DM turn.
+    expect(p).not.toContain(DM_SECRET);
+    expect(p).not.toContain(DM_QUESTION);
+    // … but a prior PLAYER-audience turn is still carried (no over-blocking).
+    expect(p).toContain(PLAYER_FACT);
+  });
+
+  it('a DM-audience prompt still sees everything (no false suppression of DM history)', () => {
+    const p = buildInterviewPrompt('Who is behind this?', bundle, 'dm', 'sf-x', history);
+    expect(p).toContain(DM_SECRET);
+    expect(p).toContain(PLAYER_FACT);
+  });
+
+  it('buildPriorExchange drops DM turns under a player audience, keeps them under DM', () => {
+    const playerBlock = buildPriorExchange(history, 'player');
+    expect(playerBlock).not.toContain(DM_SECRET);
+    expect(playerBlock).toContain(PLAYER_FACT);
+    const dmBlock = buildPriorExchange(history, 'dm');
+    expect(dmBlock).toContain(DM_SECRET);
+    expect(dmBlock).toContain(PLAYER_FACT);
+  });
+
+  it('FAIL CLOSED: a prior turn with a missing/unknown audience is dropped under player', () => {
+    const untagged = [{ question: 'q', answer: DM_SECRET }]; // no audience tag
+    const block = buildPriorExchange(untagged, 'player');
+    expect(block).not.toContain(DM_SECRET);
+    // the same untagged turn is DM-visible (DM audience carries all prior context)
+    expect(buildPriorExchange(untagged, 'dm')).toContain(DM_SECRET);
+  });
+});
+
 describe('interview core — bundle helpers + audit', () => {
   it('bundleKindIndex maps slice id → source', () => {
     const bundle = buildRetrievalBundle(SLICES);
