@@ -189,9 +189,9 @@ function statesEditorAddLines() {
         data-expansionism=""
       >
         <svg width="1em" height="1em" class="placeholder"></svg>
-        <input data-tip="Neutral lands name. Click to change" class="stateName name pointer italic" value="${
+        <input data-tip="Neutral lands name. Click to change" class="stateName name pointer italic" value="${escapeHtml(
           s.name
-        }" readonly />
+        )}" readonly />
         <svg class="coaIcon placeholder"></svg>
         <input class="stateForm placeholder" value="none" />
         <span class="icon-star-empty placeholder"></span>
@@ -214,31 +214,37 @@ function statesEditorAddLines() {
 
     const capital = pack.burgs[s.capital].name;
     COArenderer.trigger("stateCOA" + s.i, s.coa);
+    // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape (and the
+    // previously-unquoted data-culture / data-type attributes are quoted so a name with a space
+    // cannot inject a further attribute).
+    const stateName = escapeHtml(s.name);
+    const stateForm = escapeHtml(s.formName);
+    const stateCapital = escapeHtml(capital);
+    const stateColor = escapeHtml(s.color);
+    const stateCultureName = escapeHtml(pack.cultures[s.culture].name);
     lines += /* html */ `<div
       class="states"
       data-id=${s.i}
-      data-name="${s.name}"
-      data-form="${s.formName}"
-      data-capital="${capital}"
-      data-color="${s.color}"
+      data-name="${stateName}"
+      data-form="${stateForm}"
+      data-capital="${stateCapital}"
+      data-color="${stateColor}"
       data-cells=${s.cells}
       data-area=${area}
       data-population=${population}
       data-burgs=${s.burgs}
-      data-culture=${pack.cultures[s.culture].name}
-      data-type=${s.type}
+      data-culture="${stateCultureName}"
+      data-type="${escapeHtml(s.type)}"
       data-expansionism=${s.expansionism}
     >
-      <fill-box fill="${s.color}"></fill-box>
-      <input data-tip="State name. Click to change" class="stateName name pointer" value="${s.name}" readonly />
+      <fill-box fill="${stateColor}"></fill-box>
+      <input data-tip="State name. Click to change" class="stateName name pointer" value="${stateName}" readonly />
       <svg data-tip="Click to show and edit state emblem" class="coaIcon pointer" viewBox="0 0 200 200"><use href="#stateCOA${
         s.i
       }"></use></svg>
-      <input data-tip="State form name. Click to change" class="stateForm name pointer" value="${
-        s.formName
-      }" readonly />
+      <input data-tip="State form name. Click to change" class="stateForm name pointer" value="${stateForm}" readonly />
       <span data-tip="State capital. Click to zoom into view" class="icon-star-empty pointer"></span>
-      <input data-tip="Capital name. Click and type to rename" class="stateCapital" value="${capital}" autocorrect="off" spellcheck="false" />
+      <input data-tip="Capital name. Click and type to rename" class="stateCapital" value="${stateCapital}" autocorrect="off" spellcheck="false" />
       <select data-tip="Dominant culture. Click to change" class="stateCulture hide">${getCultureOptions(
         s.culture
       )}</select>
@@ -760,7 +766,7 @@ function showStatesChart() {
 
   function showInfo(ev, d) {
     d3.select(ev.target).select("circle").classed("selected", 1);
-    const state = d.data.fullName;
+    const state = escapeHtml(d.data.fullName); // SettlementForge fork patch: untrusted .map name → innerHTML
 
     const area = getArea(d.data.area) + " " + getAreaUnit();
     const rural = rn(d.data.rural * populationRate);

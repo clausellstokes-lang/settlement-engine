@@ -15,16 +15,19 @@ We deliberately keep the SettlementForge integration in **one extracted file** p
 - **An FMG upgrade does not touch this file.** Reapply it as-is.
 
 ### 2. Scattered inline patches in `public/map/main.js`
-Small modifications to FMG's behavior that have to live inline. These need to be reapplied when upgrading. As of 2026-05 there are **4 of them**:
+Small modifications to FMG's behavior that have to live inline. These must be reapplied when upgrading. The set has grown well past the original four; the current inline patches are all tagged `SettlementForge fork patch` in-source:
 
 | Line (approx) | What | Why |
 |---|---|---|
-| `~16` | `if (false && PRODUCTION && "serviceWorker" in navigator)` | Disables FMG's SW registration — we don't want the embedded iframe registering its own SW. Pattern: prepend `false && ` to the condition. |
+| `~16` | FMG's `PRODUCTION && "serviceWorker"` SW-registration block **and** `public/map/sw.js` are **DELETED outright** — *not* guarded with `false &&`. | Upstream `sw.js` `importScripts`-es workbox from a Google CDN onto our auth origin (persistent-control supply-chain risk). There is deliberately **no** `serviceWorker.register` anywhere in `main.js`; a re-vendor that restores the block or `sw.js` must be reverted. Pinned by `mapForkXssChain.test.js` (asserts `sw.js` absent + no `serviceWorker.register`). |
 | `~275` | Error message text: "SettlementForge Map cannot run serverless…" | Replaces FMG's branded error string. |
-| `~597` | Comment + branch in drop handler: "upload path only if this isn't a settlementforge drag" | Skips FMG's file-upload codepath when the drop carries our MIME type. |
-| `~607` | `e.dataTransfer.getData('application/settlementforge')` | Checks for our drag MIME type before falling through to FMG's drop logic. |
+| `~590–665` | The settlement drag-drop bridge — an **~80-line inline block**, not a one-line MIME check. Detects our `application/settlementforge` drag type, converts screen→map coords via `window.__sfScreenToMap`, mints a synthetic burg id, `findCell`s, and `postMessage`s `fmg:settlementPlaced` to the **same-origin** parent (fail-closed to our concrete `http(s)` origin, never `*`). Debug `console.*` traces were stripped (they leaked settlement id/name/coords on every drop). | A blind re-vendor that keeps only the trivial upstream MIME check **silently breaks drag-to-place.** |
+| `~344` `generateMapOnLoad` | Bails out when `generate()` left an empty/partial `pack` (generate swallows its own errors) so the follow-on draw calls don't throw behind the handled "please retry" dialog. |
+| `~355` `focusOn` / `~796` `setSeed` | Null-guard `params.get("seed")` for `?from=MFCG` with no `seed` param (was an unhandled `TypeError` from `null.length`). |
+| `~408` `toggleAssistant` | Early-return that **disables the remote OpenWidget SaaS chat** (`libs/openwidget.min.js` appends `<script src=cdn.openwidget.com>` to `<head>` under azgaar's org id) from loading onto the auth/payment origin. Upstream code left intact below the return; re-enabling is an owner decision. |
+| `~858` `addLakesInDeepDepressions` | **NOT patched — a known FMG bug left alone (owner-gated).** `cells.t[c] = 1` indexes the typed array with the whole neighbor array instead of the neighbor id `n`, so inland-lake shores are never marked. Fixing it would change same-seed generation output ("a seed is a world"), so it is deliberately not touched here. |
 
-When upgrading FMG, search the diff for the markers `settlementforge` / `SettlementForge` / `sf-` to find any new scattered patch sites that need to be carried forward.
+When upgrading FMG, search the diff for `SettlementForge fork patch`, `settlementforge` / `SettlementForge`, and `sf-` to find every scattered patch site that must be carried forward.
 
 ### 3. Security patches to FMG-native module files (must survive an upgrade)
 
@@ -40,28 +43,43 @@ The fork ships to the **same origin as the auth + payments app**, so an XSS anyw
 | `modules/ui/layers.js` (~561, `drawProvinces`) | The province label `${p.name}` interpolated into the `#provs` SVG `innerHTML` is wrapped in `escapeHtml(...)`. | `p.name` is untrusted `.map` text, and this sink fires **automatically when the province layer renders** (map load / layer toggle) — no user interaction — so it is the highest-reach sink after the hover overlay. Escaping stops a crafted name smuggling an event-handler-bearing SVG element (e.g. `<image onerror=…>`) into the live DOM. |
 | `modules/io/cloud.js` (~20, ~120) | (a) The Dropbox OAuth access token is held in **`sessionStorage`** (session-scoped) instead of `localStorage`, and (b) the `DEBUG.cloud && console.info("Access token:", token)` line was **removed**. | The token is a bearer secret and the fork ships same-origin with auth + payments. `sessionStorage` keeps it off disk across browser sessions (a restart forces re-auth); the console line leaked the raw token under a debug flag. **Residual risk:** the token is still readable by same-origin script for the life of the tab — inherent to the client-side Dropbox SDK, which needs the raw token to sign API calls; there is no server-side custody in this fork. |
 | `modules/ui/ai-generator.js` (~196, `generate()`) | The BYOK AI generator's direct cross-origin egress to `api.openai.com` / `api.anthropic.com` / local Ollama is **disabled** by an early `return` at the top of `generate()` (the sole caller of `PROVIDERS[provider].generate`, so every LLM egress path is neutralized). Upstream code is left intact below the return for easy re-enable / upgrade reconciliation. | FMG's native "generate note with AI" button POSTs a user-supplied API key + prompt straight to an LLM host from our token-bearing `/map/` origin. **Reachability:** hidden in the SettlementForge iframe embed (`sf-bridge.js` adds `sf-embedded`, which hides `#optionsContainer` / the notes editor that hosts the button), but reachable via direct top-level `/map/` navigation, where it is a latent exfil vector. The app's own AI path is server-brokered (`tests/security/clientAiBoundary.contract.test.js`). **Re-enabling this is an owner product decision.** The `/map/` CSP `connect-src` does not list the LLM hosts, so flipping the `/map/` CSP from `Report-Only` to enforced is the complementary origin-level closure. |
+| **The panel-gated `innerHTML` sink-sweep (SS1, 2026-07-20)** — every remaining untrusted-`.map`-string → `innerHTML` sink across ~24 fork files (the `*-overview.js` / `dynamic/editors/*.js` / `*-editor.js` list-builders, `hierarchy-tree.js`, `battle-screen.js`, `tools.js` marker-types, chart-hover tooltips, and the `regiment-editor` / `markers-overview` / `military-overview` / `battle-screen` / `tools.js` **icon-into-`img src`** twins of the wave-1 markers sink). Untrusted per-entity strings (names, types, groups, colors, icons, deity/form, codes) are wrapped in `escapeHtml()` at interpolation; the `diplomacy` relations-history contenteditable now persists **plain text** and escapes on render; the `notes-editor` AI-apply path routes through `sanitizeNoteHtml`; the `export.js` `@font-face` builder strips CSS-structural chars from the loaded font family. | Closes the whole panel-gated member of the map-text-sink class that section-3's earlier note deferred. Legitimate fork-built handlers (`onmouseover=showElementLockTip`) are preserved — escaping is **per-field**, never a wholesale scrub. **Residual (deliberately deferred):** custom **military-unit-type names** (`options.military[].name`) are also used in attribute-*name* position (`data-${u.name}=`), which output-escaping cannot neutralize — that needs load-time identifier validation (a different fix that would break `dataset[u.name]` read-back), so it is left as a documented residual. |
+| `main.js` (~408, `toggleAssistant`) | The remote OpenWidget SaaS chat load is disabled (see §2). | Third-party remote-code surface on the auth/payment origin; chats route to azgaar's account. |
+| `libs/umami.js` — **DELETED** (and removed from `VENDOR-MANIFEST.json`). | A dead third-party analytics beacon (POSTs nav data to `fmg-stats.herokuapp.com`). `grep` proved zero references, but a re-vendor of upstream `index.html` would restore its `<script>` tag. | A latent exfiltration primitive with no offsetting use — removed rather than carried. On upgrade, do **not** re-add it. |
 
 Pinned by `tests/security/mapForkXssChain.test.js` (fork sinks — functional scrub/escape guards + structural routing checks) and `tests/security/mapSnapshotImport.contract.test.js` (the store-side gallery-import F6 guard for **both** `importGalleryMap` and `importGalleryMapWithCampaign`).
 
-**Known documented follow-on (partially done — the rest DELIBERATELY DEFERRED, not a bug to re-find):** a full enumeration (2026-07-20) of `public/map/modules/**` found **~51 untrusted-`.map`-string → `innerHTML` sinks** across ~25 files (out of ~340 total `innerHTML`/`insertAdjacentHTML` assignments; the other ~278 are numeric counts / `si()`/`rn()` formatters / `<path d=…>` geometry / static dialog copy, and ~11 are already sanitized via `sanitizeNoteHtml`/`escapeHtml`/`sanitizeMapSvg`).
+**The map-text-sink class is now CLOSED (SS1, 2026-07-20).** A 2026-07-20 enumeration of `public/map/modules/**` found **~51 untrusted-`.map`-string → `innerHTML` sinks** across ~25 files (out of ~340 total `innerHTML`/`insertAdjacentHTML` assignments; the other ~278 are numeric counts / `si()`/`rn()` formatters / `<path d=…>` geometry / static dialog copy). Wave 1 patched the raw-SVG and marker-icon sinks and closed the delivery vectors (gallery-import, `?maplink=`); wave 2 patched the two auto-firing sinks (`updateCellInfo` hover overlay, `drawProvinces` auto-render). **SS1 completed the sweep**, escaping every remaining **panel-gated** sink (they render only after a user manually opens the specific overview/editor on a loaded `.map`) — the `*-overview.js` / `dynamic/editors/*.js` / `*-editor.js` list-builders, `hierarchy-tree.js`, `battle-screen.js`, `tools.js`, the chart-hover tooltips, and the `regiment-editor` / `markers-overview` / `military-overview` / `battle-screen` / `tools.js` icon-into-`img src` twins of the markers sink. Each is a `SettlementForge fork patch`-tagged `escapeHtml()` (or `sanitizeNoteHtml` for the AI-note path). Pinned by source-slice checks in `mapForkXssChain.test.js`.
 
-**Fixed in this wave** = the sinks that fire **without opening a tools-menu panel**: the `updateCellInfo` hover overlay (general.js) and the `drawProvinces` auto-render (layers.js), both above.
+**Do not "revert to upstream" any of these on an FMG upgrade** — re-vendoring a fork editor file drops the escaping. Re-apply by re-wrapping the untrusted interpolations (search the old file for `escapeHtml(` / `SettlementForge fork patch`).
 
-**Deferred** = the remaining ~40+ sinks, **all of which are panel-gated** — they render only after a user manually loads a hostile `.map` (the automated gallery-import and raw-SVG delivery vectors are closed by wave 1) **and** opens the specific overview/editor that builds the list. They are the same mechanical `escapeHtml`-routing shape and split into two sub-classes:
-- **Name/text list-builders** in `modules/ui/*-overview.js` (burgs 141 / rivers 79 / routes 70 / regiments 102 / military 119 / markers 105), `modules/dynamic/editors/*.js` (states 266 / cultures 220 / religions 218), and `modules/ui/*-editor.js` (burg 65, provinces 186, biomes 136/313, zones 115, diplomacy 139/446, burg-group 55/124/193, labels 316/317, namesbase 100), plus `dynamic/hierarchy-tree.js` 385/439 and the chart-hover tooltips (burgs-overview 354, provinces-editor 692, states-editor 781).
-- **Icon-into-`img src` sinks** — the exact structural parallel of the marker-icon sink that wave 1 *did* patch in `markers-editor.js`, left unescaped in `modules/ui/regiment-editor.js` (47/162/163), `markers-overview.js` (105), `military-overview.js` (339), `battle-screen.js` (202), and the marker-types editor `tools.js` (912). **Flagged here so the regiment-editor↔markers-editor asymmetry is a recorded deferral, not a surprise.**
+**Documented residual (not a bug to re-find):** custom **military-unit-type names** (`options.military[].name`) are interpolated into attribute-*name* position (`data-${u.name}=…`), which output-escaping cannot neutralize; the correct fix is load-time identifier validation (which would break the `dataset[u.name]` read-back if done naively), so it is deliberately left for a future targeted pass. The `main.js` `addLakesInDeepDepressions` typed-array bug (§2, `~858`) is likewise deferred (owner-gated — fixing it shifts same-seed output).
 
-These were deferred (rather than forced into this wave) because a correct routing sweep across ~25 vendored fork files that no gate type-checks or lints, and that cannot be runtime-tested here, carries more regression risk than the defense-in-depth value warrants — the delivery vectors are already closed and the remainder is panel-gated. Do them as a single mechanical `escapeHtml`-routing pass when the fork is next touched, and pin each with a source-slice check in `mapForkXssChain.test.js` (the wave-2 idiom).
+### 4. Branded / cosmetic patches to FMG-native files (survive an upgrade)
+
+These are **not** in `main.js` and are easy to miss — a clean re-vendor reverts them silently. They are cosmetic (no security weight) but the runbook lists them so the reapply checklist is complete:
+
+| File | What |
+|---|---|
+| `modules/ui/style-presets.js` (~32) | In embedded mode the default style preset is forced to `ancient` (parchment) instead of FMG's blue `default`, to match the SettlementForge palette. **This is a patch inside `modules/` — the "`modules/` is FMG-native/unpatched" shorthand is not literally true.** |
+| `modules/ui/general.js` (~610) | The app-description `alertMessage` string is rebranded to "**SettlementForge Map** is an interactive fantasy cartography tool." |
+| `versioning.js` (~54, ~66) | The "map has been updated to version …" notice text + dialog title are rebranded to "SettlementForge Map". |
+| `manifest.webmanifest` | Fully rebranded PWA identity: `name` / `short_name` "SettlementForge Map", custom `description`, `scope`/`start_url` `/map/`, custom icon paths. |
+| `index.html` | `<title>` / `application-name` / `author` meta (~7–9), a palette-override `<style>` block (~31), and `#titleName` "SettlementForge" (~411). |
+
+## The `index-*.js` build bundle
+
+`index.html` (~169) loads a hashed Vite bundle, currently `index-Bp79q281.js` (~672 KB), that holds a large chunk of FMG core (`window.drawTemperature`, `generate`, biome/graph globals). It is FMG-native (no SF markers) but is **not** pinned by `VENDOR-MANIFEST.json` (which pins `libs/` only) and is not diffed against upstream. On an upgrade it must be regenerated from the new release's build, not carried over stale, and the `<script src>` hash in `index.html` re-pointed. (Extending the hash gate to cover it, and `dropbox.html`'s inline OAuth script, is a tracked follow-up in `scripts/validate-map-fork.mjs` — its `SHIPPABLE_EXTS` currently pins only `.js/.mjs/.wasm/.css`.)
 
 ## Upgrade procedure
 
 1. **Get the new FMG release** locally (clone, checkout a tag, etc.)
 2. **Diff against our fork**: `diff -ru <new-fmg>/ public/map/`
-3. **Update `main.js`** to the new release's `main.js`. The 4 scattered patches above need to be reapplied:
-   - SW disable (line ~16)
-   - Branded error text (line ~275)
-   - Drag-handler branches (lines ~597, ~607)
-4. **Update FMG-native asset files** (`modules/`, `libs/`, `images/`, `styles/`, etc.) directly from the new release. We do not patch these.
+3. **Update `main.js`** to the new release's `main.js`. Reapply **every** inline patch in §2's table (SW block + `sw.js` stay deleted, branded error text, the ~80-line drag-drop bridge, the `generateMapOnLoad` / `focusOn` / `setSeed` guards, and the `toggleAssistant` OpenWidget disable). Search the new `main.js` for the upstream shapes and re-apply — the `SettlementForge fork patch` tags in the old file mark every site.
+4. **Update FMG-native asset files** (`libs/`, `images/`, `styles/`, etc.) directly from the new release — **BUT `modules/` and several top-level files are NOT pristine** and a blind overwrite silently reverts our patches. Reapply after overwriting:
+   - **Security (§3, must survive):** the escaping in every `modules/**` sink the SS1 sweep touched (`*-overview.js`, `dynamic/editors/*.js`, `*-editor.js`, `hierarchy-tree.js`, `battle-screen.js`, `tools.js`, `general.js`, `layers.js`, `notes-editor.js`, `io/load.js`, `io/cloud.js`, `io/export.js`, `dynamic/auto-update.js`, `ai-generator.js`), plus the polish bug-fixes tagged `SettlementForge fork patch` in `military-overview.js`, `regiments-overview.js`, `routes-overview.js`, `charts-overview.js`, `world-configurator.js`, `relief-editor.js`, `namesbase-editor.js`, `biomes-editor.js`, `lakes-editor.js`, `versioning.js`, `editors.js`.
+   - **Branding / cosmetic (§4 below):** `modules/ui/style-presets.js` (embedded-mode default preset), `modules/ui/general.js` (app-description string), `versioning.js`, `manifest.webmanifest`, and `index.html`.
+   - **Supply-chain:** keep `libs/umami.js` **deleted**; keep `libs/openwidget.min.js` un-loaded (the `toggleAssistant` disable). Re-pin the manifest (`--update-manifest`) only after a *deliberate* upgrade.
 5. **Leave `sf-bridge.js` alone.** If FMG's API surface has changed (e.g. `pack.cells.burgs` was renamed), update only the references inside `sf-bridge.js`.
 6. **Bump cachebusters** so browsers don't serve stale files:
    - `main.js` URL in `index.html` (the `?v=...` suffix)
@@ -96,17 +114,19 @@ After re-pinning the libs manifest following a deliberate upgrade:
 
 ## Why not a hard fork (rename + own it)?
 
-That was on the table. Decision (2026-05): the extracted bridge + 4 documented inline patches is the right balance. A hard fork would mean we own ~14,000 lines of map-generation code we don't understand and can't reasonably maintain. Keeping the integration surface this small means upstream improvements (bug fixes, new biome generators, etc.) cost us at most an hour of reconciliation per release.
+That was on the table. Decision (2026-05): the extracted bridge + the documented inline/module patches (§2–§4) is the right balance. A hard fork would mean we own ~14,000 lines of map-generation code we don't understand and can't reasonably maintain. Keeping the integration surface this small means upstream improvements (bug fixes, new biome generators, etc.) cost us at most an hour of reconciliation per release.
 
 ## Quick reference
 
 ```
 public/map/
-├── main.js          ← FMG-native + 4 scattered patches (1382 lines)
-├── sf-bridge.js     ← All SettlementForge bridge logic (1136 lines)
-├── index.html       ← Loads main.js then sf-bridge.js (both defer)
-├── modules/         ← FMG-native, unpatched
-├── libs/            ← FMG-native, unpatched
+├── main.js          ← FMG-native + the §2 inline patches (~1385 lines)
+├── sf-bridge.js     ← All SettlementForge bridge logic (~1275 lines)
+├── index-*.js       ← hashed Vite bundle of FMG core (~672 KB, NOT hash-pinned — see above)
+├── index.html       ← Loads main.js then sf-bridge.js (both defer); also SF-branded (title/meta/palette/#titleName)
+├── modules/         ← FMG-native, BUT patched: §3 security escaping + §4 branding (style-presets, general.js)
+├── libs/            ← FMG-native + VENDOR-MANIFEST.json hash gate; umami.js deleted, openwidget.min.js not loaded
+├── versioning.js, manifest.webmanifest  ← SF-branded (§4)
 ├── images/, charges/, heightmaps/, styles/  ← FMG-native, unpatched
 └── (other small files)
 ```
@@ -127,8 +147,10 @@ React app (parent)   →  src/lib/mapBridge.js owns the parent side of the RPC
 The vendored FMG fork is a large third-party app that the strict app-origin policy would break, so `/map/*` relaxes specific directives:
 - `public/map/index.html` ships ~80 inline `on*=` handlers → needs `'unsafe-inline'` for `script-src`.
 - d3-dsv's CSV parser builds row objects via `new Function` → needs `'unsafe-eval'`.
-- `public/map/dropbox.html` loads the Dropbox SDK from unpkg and talks to `api.dropboxapi.com`.
+- `public/map/dropbox.html` loads a **local vendored** `libs/dropbox-sdk.min.js` (hash-pinned; **not** unpkg — the CDN load was deliberately removed in wave 1) and talks to `api.dropboxapi.com` for cloud save/load. The `connect-src` relaxation for the Dropbox API hosts is what remains load-bearing here; do **not** re-add unpkg/CDN trust to `script-src`.
 - FMG embeds `watabou.github.io` / `deorum.vercel.app` generators in iframes.
+
+**Current enforcement posture:** `vercel.json` ships the `/map/*` (and app) policy as **`Content-Security-Policy-Report-Only`** — a deliberate, owner-tracked rollout stage (violations are reported to `api/csp-report.js`, not blocked). The no-CDN `script-src` and pinned `navigate-to` invariants hold under either key, and `mapForkXssChain.test.js` accepts both. **Flip-to-enforce is on the owner punch list** and is the origin-level complement to the in-fork escaping (it would block the disabled OpenWidget/LLM egress at the browser too). Clickjacking is already blocked by `X-Frame-Options: SAMEORIGIN` regardless of the Report-Only posture. `vercel.json` is **outside this fork's scope** (repo root) — changing the posture is an owner action.
 
 These relaxations are **scoped to `/map/*` only** — the app origin keeps its locked-down `script-src` (`'self' 'wasm-unsafe-eval'`, no `'unsafe-inline'` / `'unsafe-eval'`). The isolation is enforced by **mutually-exclusive `source` patterns**, NOT by rule order: the app-wide header block matches `/((?!map/).*)` (a negative lookahead that excludes every `/map/` path), while the relaxed block matches `/map/(.*)`. So any given request matches exactly ONE of the two blocks and receives exactly ONE `Content-Security-Policy` header. This is deliberately robust against how a CDN combines overlapping header rules: if both the strict and the relaxed blocks matched a `/map/` path, a browser would enforce the **intersection** of the two CSP headers (the stricter policy), silently breaking FMG — so we never let both match. The relaxed `/map/*` block also carries the same HSTS / nosniff / frame / referrer / permissions headers as the app block, since excluding `/map/` from the app block would otherwise drop them there. (Enforced by `tests/security/cspForkIsolation.test.js`.)
 

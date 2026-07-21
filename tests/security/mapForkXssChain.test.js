@@ -307,3 +307,187 @@ describe('wave-2 layer F — the FMG BYOK AI generator does not egress to LLM ho
     expect(guard).toBeLessThan(dispatch);
   });
 });
+
+// ── SS1 — the panel-gated innerHTML sink-sweep + fork polish ──────────────────
+// Wave 1/2 closed the delivery vectors and the auto-firing sinks; SS1 closes the
+// remaining panel-gated untrusted-.map → innerHTML sinks across the editor files
+// and lands the accompanying fork bug-fixes. These are vendored plain-script fork
+// files with no FMG runtime here, so they are pinned STRUCTURALLY (source-slice):
+// each pin asserts the escaping/fix is present and (where cheap) the raw form gone.
+// A regression — a re-vendor dropping a patch — reddens the exact file.
+
+const src = rel => read(rel);
+const UI = f => src(`public/map/modules/ui/${f}`);
+const ED = f => src(`public/map/modules/dynamic/editors/${f}`);
+
+describe('SS1 layer A — overview/editor list-builders escape untrusted .map strings', () => {
+  test('burgs-overview escapes burg/state/culture names + the chart tooltip', () => {
+    const s = UI('burgs-overview.js');
+    expect(s).toContain('const name = escapeHtml(b.name)');
+    expect(s).toContain('const group = escapeHtml(b.group)');
+    expect(s).toContain('const state = escapeHtml(pack.states[b.state].name)');
+    expect(s).toContain('const name = escapeHtml(d.data.name)'); // chart tooltip
+    expect(s).not.toContain('data-name="${b.name}"');
+  });
+
+  test('rivers / routes / regiments / military / markers overviews escape names, types and icons', () => {
+    expect(UI('rivers-overview.js')).toContain('const name = escapeHtml(r.name)');
+    expect(UI('rivers-overview.js')).toContain('const basin = escapeHtml(');
+    expect(UI('routes-overview.js')).toContain('const name = escapeHtml(route.name)');
+    const reg = UI('regiments-overview.js');
+    expect(reg).toContain('const regName = escapeHtml(r.name)');
+    expect(reg).toContain('const regIcon = escapeHtml(r.icon)');
+    expect(reg).not.toContain('data-state="${s.name}"');
+    const mil = UI('military-overview.js');
+    expect(mil).toContain('const stateName = escapeHtml(s.name)');
+    expect(mil).toContain('const safe = escapeHtml(value)'); // selectIcon → img src
+    expect(mil).toContain('const safeIcon = escapeHtml(icon)'); // addUnitLine
+    const mk = UI('markers-overview.js');
+    expect(mk).toContain('const safeIcon = escapeHtml(icon)');
+    expect(mk).toContain('const safeType = escapeHtml(type)');
+  });
+
+  test('regiment-editor + battle-screen escape the emblem/icon (the markers-sink twins)', () => {
+    const rge = UI('regiment-editor.js');
+    expect(rge).toContain('const safeEmblem = escapeHtml(regiment.icon)');
+    expect(rge).toContain('const safeValue = escapeHtml(value)');
+    expect(rge).not.toContain('<img src="${regiment.icon}"');
+    const bs = UI('battle-screen.js');
+    expect(bs).toContain('const safeIcon = escapeHtml(regiment.icon)');
+    expect(bs).toContain('data-state="${escapeHtml(s.name)}"'); // was unquoted attr
+    expect(bs).not.toContain('data-state=${\n          s.name\n        }');
+  });
+
+  test('states / cultures / religions editors escape names, forms, deity, colors', () => {
+    const st = ED('states-editor.js');
+    expect(st).toContain('const stateName = escapeHtml(s.name)');
+    expect(st).toContain('data-culture="${stateCultureName}"'); // was unquoted
+    expect(st).toContain('const state = escapeHtml(d.data.fullName)'); // chart tooltip
+    expect(ED('cultures-editor.js')).toContain('const cultureName = escapeHtml(c.name)');
+    const rel = ED('religions-editor.js');
+    expect(rel).toContain('const religionDeity = escapeHtml(r.deity || "")');
+    expect(rel).toContain('const religionForm = escapeHtml(r.form)');
+  });
+
+  test('hierarchy-tree / burg / provinces / biomes / zones editors escape their sinks', () => {
+    expect(src('public/map/modules/dynamic/hierarchy-tree.js')).toContain('const safeCode = escapeHtml(code)');
+    expect(UI('burg-editor.js')).toContain(
+      'const stateName = escapeHtml(pack.states[b.state].fullName || pack.states[b.state].name)',
+    );
+    const pv = UI('provinces-editor.js');
+    expect(pv).toContain('const provinceName = escapeHtml(p.name)');
+    expect(pv).toContain('this.innerHTML = escapeHtml(d.data.name)'); // treemap label
+    expect(UI('biomes-editor.js')).toContain('escapeHtml(b.name[i])');
+    expect(UI('zones-editor.js')).toContain('const safeName = escapeHtml(name)');
+  });
+
+  test('labels / group editors + marker-types (tools.js) escape their sinks', () => {
+    expect(UI('labels-editor.js')).toContain('${escapeHtml(line)}');
+    expect(UI('burg-group-editor.js')).toContain('const safeGroupName = escapeHtml(group.name)');
+    expect(UI('route-group-editor.js')).toContain('const safeId = escapeHtml(el.id)');
+    const tools = UI('tools.js');
+    expect(tools).toContain('const safeIcon = escapeHtml(icon)');
+    expect(tools).toContain('const safeType = escapeHtml(type)');
+  });
+
+  test('diplomacy history persists PLAIN TEXT and escapes on render (stored-XSS closed)', () => {
+    const d = UI('diplomacy-editor.js');
+    expect(d).toContain('group[i[1]] = this.innerText');
+    expect(d).toContain('${escapeHtml(l)}');
+    expect(d).not.toContain('group[i[1]] = this.innerHTML');
+  });
+
+  test('notes AI-apply is sanitized; export @font-face strips CSS-structural chars', () => {
+    expect(UI('notes-editor.js')).toContain('const safe = sanitizeNoteHtml(result)');
+    const exp = src('public/map/modules/io/export.js');
+    expect(exp).toContain('const cleanCss = v =>');
+    expect(exp).toContain('cleanCss(family)');
+    expect(exp).not.toContain('font-family: "${family}"');
+  });
+
+  test('auto-update oceanic href is quoted + escaped (pre-1.61 migration injection closed)', () => {
+    expect(src('public/map/modules/dynamic/auto-update.js')).toContain('href="${escapeHtml(href)}"');
+  });
+});
+
+describe('SS1 layer B — the accompanying fork bug-fixes', () => {
+  test('military changeAlert cannot divide by zero (no Infinity → null corruption)', () => {
+    expect(UI('military-overview.js')).toContain('const dif = s.alert ? alert / s.alert : 1');
+  });
+
+  test('regiments percentage-mode memo actually returns (dead guard fixed)', () => {
+    expect(UI('regiments-overview.js')).toContain('if (cache[type]) return cache[type]');
+  });
+
+  test('routes lock-all icon reflects the new state (un-inverted)', () => {
+    expect(UI('routes-overview.js')).toContain('allLocked ? "icon-lock-open" : "icon-lock"');
+  });
+
+  test('charts-overview no longer throws on the undefined plotByLabel', () => {
+    expect(src('public/map/modules/dynamic/overview/charts-overview.js')).toContain(
+      'const plotByLabel = byId("chartsOverview__plotBySelect").selectedOptions[0]?.text',
+    );
+  });
+
+  test('biomes skip-guard coerces to Number; relief tip passes the "error" string', () => {
+    expect(UI('biomes-editor.js')).toContain('const biomeNew = +selected.dataset.id');
+    expect(UI('relief-editor.js')).toContain('tip("Please select an icon", false, "error")');
+    expect(UI('relief-editor.js')).not.toContain('false, error);');
+  });
+
+  test('world-configurator debounces ThreeD.update instead of calling it immediately', () => {
+    const w = UI('world-configurator.js');
+    expect(w).toContain('setTimeout(() => ThreeD.update(), 500)');
+  });
+
+  test('namesbase upload clears any pending listener before re-attaching', () => {
+    const n = UI('namesbase-editor.js');
+    expect(n).toContain('const onNamesbaseUpload =');
+    expect(n).toContain('uploader.removeEventListener("change", onNamesbaseUpload)');
+  });
+
+  test('versioning parseMapVersion derives patch before truncating minor', () => {
+    const v = read('public/map/versioning.js');
+    const at = v.indexOf('patch = minor.slice(2);');
+    const then = v.indexOf('minor = minor.slice(0, 2);', at);
+    expect(at).toBeGreaterThan(-1);
+    expect(then).toBeGreaterThan(at); // patch computed FIRST
+  });
+
+  test('lakes group create/remove keep feature.group in sync with the DOM', () => {
+    const l = UI('lakes-editor.js');
+    expect(l).toContain('getLake().group = group;');
+    expect(l).toContain('lake.group = "freshwater";');
+  });
+
+  test('main.js: MFCG null-seed guarded, partial-pack draw guarded, drop traces stripped', () => {
+    expect(MAIN_SRC).toContain('params.get("seed")?.length === 13');
+    expect(MAIN_SRC).toContain('urlSeed?.length === 13');
+    expect(MAIN_SRC).toContain('if (!pack?.cells?.i?.length) return;');
+    expect(MAIN_SRC).not.toContain("console.log('[sfBridge] posting to parent:'");
+    expect(MAIN_SRC).not.toContain("console.log('[sfBridge] sf drop payload:'");
+  });
+});
+
+describe('SS1 layer C — supply-chain: dead beacon removed, remote chat disabled', () => {
+  test('the umami analytics beacon is deleted and de-listed from the manifest', () => {
+    expect(existsSync(resolve(process.cwd(), 'public/map/libs/umami.js'))).toBe(false);
+    const manifest = read('public/map/libs/VENDOR-MANIFEST.json');
+    expect(manifest).not.toContain('"name": "umami"');
+    expect(manifest).not.toContain('umami.js');
+  });
+
+  test('the OpenWidget remote SaaS chat load is disabled (early return in toggleAssistant)', () => {
+    const fnStart = MAIN_SRC.indexOf('function toggleAssistant()');
+    expect(fnStart).toBeGreaterThan(-1);
+    const ret = MAIN_SRC.indexOf('return;', fnStart);
+    const importAt = MAIN_SRC.indexOf('import("./libs/openwidget.min.js")', fnStart);
+    expect(ret).toBeGreaterThan(fnStart);
+    expect(importAt).toBeGreaterThan(fnStart);
+    expect(ret).toBeLessThan(importAt); // the disabling return sits before the remote import
+  });
+
+  test('sf-bridge readiness poll is bounded (cannot spin forever on an upstream rename)', () => {
+    expect(read('public/map/sf-bridge.js')).toContain('readyPollAttempts');
+  });
+});

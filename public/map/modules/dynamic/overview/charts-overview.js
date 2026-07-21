@@ -354,6 +354,9 @@ function addChart(event) {
   const {stackable} = quantizationMap[plotBy];
 
   if (!stackable && groupBy !== entity) {
+    // SettlementForge fork patch: plotByLabel was undefined here (declared only in renderChart) — in this
+    // ES module that threw a ReferenceError before the groupBy=entity recovery, so the chart never rendered.
+    const plotByLabel = byId("chartsOverview__plotBySelect").selectedOptions[0]?.text || plotBy;
     tip(`Grouping is not supported for ${plotByLabel}`, false, "warn", 4000);
     groupBy = entity;
   }

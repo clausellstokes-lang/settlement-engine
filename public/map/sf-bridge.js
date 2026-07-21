@@ -1242,12 +1242,21 @@
 
   // Ready poll: check for pack.cells (geography is done) instead of
   // pack.burgs (which may be empty when manors=0).
+  // SettlementForge fork patch: bound the poll. Without a timeout, an upstream `pack` rename would leave the
+  // optional chain undefined forever — the interval never clears, fmg:ready never fires, and the blank iframe
+  // gives zero diagnostic. After ~60s (120 × 500ms) stop and surface a console warning instead of spinning.
+  let readyPollAttempts = 0;
   const readyPoll = setInterval(() => {
     const hasCells = pack?.cells?.i?.length > 0;
     const hasBurgs = pack?.burgs?.length > 0;
     if (hasCells || hasBurgs) {
       clearInterval(readyPoll);
       notifyReady();
+    } else if (++readyPollAttempts >= 120) {
+      clearInterval(readyPoll);
+      try {
+        console.warn('[sf-bridge] fmg:ready timed out — pack.cells never populated (upstream global rename?)');
+      } catch (e) { /* best-effort */ }
     }
   }, 500);
 

@@ -107,11 +107,12 @@ function editDiplomacy() {
     const states = pack.states;
     const selectedLine = body.querySelector("div.Self");
     const selectedId = selectedLine ? +selectedLine.dataset.id : states.find(s => s.i && !s.removed).i;
-    const selectedName = states[selectedId].name;
+    // SettlementForge fork patch: untrusted loaded-.map names → innerHTML — escape.
+    const selectedName = escapeHtml(states[selectedId].name);
 
     COArenderer.trigger("stateCOA" + selectedId, states[selectedId].coa);
     let lines = /* html */ `<div class="states Self" data-id=${selectedId} data-tip="List below shows relations to ${selectedName}">
-      <div style="width: max-content">${states[selectedId].fullName}</div>
+      <div style="width: max-content">${escapeHtml(states[selectedId].fullName)}</div>
       <svg class="coaIcon" viewBox="0 0 200 200"><use href="#stateCOA${selectedId}"></use></svg>
     </div>`;
 
@@ -120,18 +121,21 @@ function editDiplomacy() {
       const relation = state.diplomacy[selectedId];
       const {color, inText} = relations[relation];
 
-      const tip = `${state.name} ${inText} ${selectedName}`;
-      const tipSelect = `${tip}. Click to see relations to ${state.name}`;
+      // SettlementForge fork patch: untrusted loaded-.map names/color → innerHTML — escape.
+      const safeStateName = escapeHtml(state.name);
+      const safeColor = escapeHtml(color);
+      const tip = `${safeStateName} ${inText} ${selectedName}`;
+      const tipSelect = `${tip}. Click to see relations to ${safeStateName}`;
       const tipChange = `Click to change relations. ${tip}`;
 
-      const name = state.fullName.length < 23 ? state.fullName : state.name;
+      const name = escapeHtml(state.fullName.length < 23 ? state.fullName : state.name);
       COArenderer.trigger("stateCOA" + state.i, state.coa);
 
       lines += /* html */ `<div class="states" data-id=${state.i} data-name="${name}" data-relations="${relation}">
         <svg data-tip="${tipSelect}" class="coaIcon" viewBox="0 0 200 200"><use href="#stateCOA${state.i}"></use></svg>
         <div data-tip="${tipSelect}" style="width: 12em">${name}</div>
         <div data-tip="${tipChange}" class="changeRelations" style="width: 6em">
-          <fill-box fill="${color}" size=".9em"></fill-box>
+          <fill-box fill="${safeColor}" size=".9em"></fill-box>
           ${relation}
         </div>
       </div>`;
@@ -370,7 +374,7 @@ function editDiplomacy() {
       message += `<div>`;
       entry.forEach((l, entryIndex) => {
         message += /* html */ `<div contenteditable="true" data-id="${index}-${entryIndex}"
-          ${entryIndex ? "" : "style='font-weight:bold'"}>${l}</div>`;
+          ${entryIndex ? "" : "style='font-weight:bold'"}>${escapeHtml(l)}</div>`;
       });
       message += `&#8205;</div>`;
     });
@@ -410,10 +414,14 @@ function editDiplomacy() {
   function changeReliationsHistory() {
     const i = this.dataset.id.split("-");
     const group = pack.states[0].diplomacy[i[0]];
-    if (this.innerHTML === "") {
+    // SettlementForge fork patch: persist the contenteditable as PLAIN TEXT (innerText), never innerHTML.
+    // Storing innerHTML let pasted/crafted markup survive into the saved .map and re-execute on next render
+    // (the render side now also escapes). Known residual: after a splice the remaining divs keep their stale
+    // data-id until the dialog is reopened — a pre-existing FMG indexing quirk, not a security issue.
+    if (this.innerText === "") {
       group.splice(i[1], 1);
       this.remove();
-    } else group[i[1]] = this.innerHTML;
+    } else group[i[1]] = this.innerText;
   }
 
   function showRelationsMatrix() {
@@ -422,12 +430,15 @@ function editDiplomacy() {
     const diplomacyMatrixBody = document.getElementById("diplomacyMatrixBody");
 
     let table = `<table><thead><tr><th data-tip='&#8205;'></th>`;
-    table += states.map(state => `<th data-tip='Relations to ${state.fullName}'>${state.name}</th>`).join("") + `</tr>`;
+    table +=
+      states
+        .map(state => `<th data-tip='Relations to ${escapeHtml(state.fullName)}'>${escapeHtml(state.name)}</th>`)
+        .join("") + `</tr>`;
     table += `<tbody>`;
 
     states.forEach(state => {
       table +=
-        `<tr data-id=${state.i}><th data-tip='Relations of ${state.fullName}'>${state.name}</th>` +
+        `<tr data-id=${state.i}><th data-tip='Relations of ${escapeHtml(state.fullName)}'>${escapeHtml(state.name)}</th>` +
         state.diplomacy
           .filter((v, i) => valid.includes(i))
           .map((relation, index) => {
@@ -435,7 +446,7 @@ function editDiplomacy() {
             if (!relationObj) return `<td class='${relation}'>${relation}</td>`;
 
             const objectState = pack.states[valid[index]];
-            const tip = `${state.fullName} ${relationObj.inText} ${objectState.fullName}`;
+            const tip = `${escapeHtml(state.fullName)} ${relationObj.inText} ${escapeHtml(objectState.fullName)}`;
             return `<td data-id=${objectState.i} data-tip='${tip}' class='${relation}'>${relation}</td>`;
           })
           .join("") +

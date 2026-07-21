@@ -28,8 +28,9 @@ function editRouteGroups() {
 
     const lines = Array.from(routes.selectAll("g")._groups[0]).map(el => {
       const count = el.children.length;
-      return /* html */ `<div data-id="${el.id}" class="states" style="display: flex; justify-content: space-between;">
-          <span>${el.id} (${count})</span>
+      const safeId = escapeHtml(el.id); // SettlementForge fork patch: route group id is untrusted .map text
+      return /* html */ `<div data-id="${safeId}" class="states" style="display: flex; justify-content: space-between;">
+          <span>${safeId} (${count})</span>
           <div style="width: auto; display: flex; gap: 0.4em;">
             <span data-tip="Edit style" class="editStyle icon-brush pointer" style="font-size: smaller;"></span>
             <span data-tip="Remove group" class="removeGroup icon-trash pointer"></span>

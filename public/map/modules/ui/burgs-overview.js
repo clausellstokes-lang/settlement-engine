@@ -99,28 +99,32 @@ function overviewBurgs(settings = {stateId: null, cultureId: null}) {
       const population = b.population * populationRate * urbanization;
       totalPopulation += population;
       const features = b.capital && b.port ? "a-capital-port" : b.capital ? "c-capital" : b.port ? "p-port" : "z-burg";
-      const state = pack.states[b.state].name;
+      // SettlementForge fork patch: these are untrusted loaded-.map strings rendered
+      // into innerHTML on our token-bearing origin — escape before interpolation.
+      const state = escapeHtml(pack.states[b.state].name);
       const prov = pack.cells.province[b.cell];
-      const province = prov ? pack.provinces[prov].name : "";
-      const culture = pack.cultures[b.culture].name;
+      const province = escapeHtml(prov ? pack.provinces[prov].name : "");
+      const culture = escapeHtml(pack.cultures[b.culture].name);
+      const name = escapeHtml(b.name);
+      const group = escapeHtml(b.group);
 
       lines += /* html */ `<div
         class="states"
         data-id=${b.i}
-        data-name="${b.name}"
+        data-name="${name}"
         data-state="${state}"
         data-province="${province}"
         data-culture="${culture}"
-        data-group="${b.group}"
+        data-group="${group}"
         data-population=${population}
         data-features="${features}"
       >
         <span data-tip="Click to zoom into view" class="icon-dot-circled pointer"></span>
-        <input data-tip="Settlement name" class="burgName" value="${b.name}" disabled />
+        <input data-tip="Settlement name" class="burgName" value="${name}" disabled />
         <input data-tip="Settlement province" value="${province}" disabled />
         <input data-tip="Settlement state" value="${state}" disabled />
         <input data-tip="Dominant culture" value="${culture}" disabled />
-        <input data-tip="Settlement group" value="${b.group}" disabled />
+        <input data-tip="Settlement group" value="${group}" disabled />
         <span data-tip="Settlement population" class="icon-male"></span>
         <input data-tip="Settlement population" value=${si(population)} style="width: 5em" disabled />
         <div style="width: 3em">
@@ -347,8 +351,8 @@ function overviewBurgs(settings = {stateId: null, cultureId: null}) {
 
     function showInfo(ev, d) {
       d3.select(ev.target).transition().duration(1500).attr("stroke", "#c13119");
-      const name = d.data.name;
-      const parent = d.parent.data.name;
+      const name = escapeHtml(d.data.name); // SettlementForge fork patch: untrusted .map name → innerHTML
+      const parent = escapeHtml(d.parent.data.name);
       const population = si(d.value * populationRate * urbanization);
 
       burgsInfo.innerHTML = /* html */ `${name}. ${parent}. Population: ${population}`;
