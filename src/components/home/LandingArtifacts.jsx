@@ -49,13 +49,14 @@ import { fixture } from './landingFixture.js';
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 
-// PENDING-ASSET (Walk W1, item 8, owner order 2026-07-21, ledger 4f71743a): the §04
-// Realm map preview. Today it is the painted world-map/crossroads placeholder scene;
-// W4 (a parallel asset lane) is generating a REAL realm-map preview (settlements,
-// deterministic seed, house style) into public/. This is the SINGLE swap site — when
-// W4's asset name is known, repoint this one constant at it (e.g. `url('/backgrounds/
-// landing/<w4-asset>')`). Until then it renders the existing crossroads painting.
-const REALM_MAP_PREVIEW = SCENE('world-map');
+// Walk W1, item 8 (owner order 2026-07-21, ledger 4f71743a): the §04 Realm map preview.
+// The painted world-map/crossroads placeholder is REPLACED by W7's generated realm-map
+// preview (settlements, deterministic seed, house style), folded onto the composite tip
+// at d18768fa. This is the SINGLE swap site. Manager pick (vetoable): fallowmere /
+// parchment. NOTE: the SVG lives on the composite TIP, not this branch's base — it
+// arrives when W1 folds onto the tip, so this references the path as a string (a
+// worktree-local load 404s until the fold; that is expected).
+const REALM_MAP_PREVIEW = "url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
 
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
