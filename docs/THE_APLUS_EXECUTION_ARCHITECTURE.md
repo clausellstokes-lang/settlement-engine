@@ -154,7 +154,112 @@ Drive the shrink-only ratchets to their ZERO targets where the work is mechanica
 RULE: each burn-down step declares the goldens it touches; golden-bound remainder → tranche 4.
 
 ═══════════════════════════════════════════════════════════════════════════
-## THE OWNER MANIFEST — TRANCHES 4-6 (NOT mine; each item = {act, unlocks, my-recommendation})
+## TRANCHE 3b — THE BUILDABLE-CEILING CLOSERS (owner LIFTED the stop line for
+## EXACTLY this trio, 2026-07-21; spec'd for the post-account-switch successor)
+═══════════════════════════════════════════════════════════════════════════
+Origin: the owner asked "is this the maximum for each bar?" — adversarial
+re-audit found THREE bars below their buildable ceiling. Scope is CLOSED: these
+three packages and the fold, nothing else; the halt resumes after the 3b fold.
+BASE for all lanes: composite-r4 @ bff01718 — but VERIFY `git rev-parse
+claude/composite-r4` still says bff01718 before dispatch; if moved, read the
+ledger top rows first and base on the actual tip. ⚠️ Fresh-session hazard
+(t3b-orphans-wrong-lineage memory): a new session can land on an ANCESTOR
+(d024286e) — cd + rev-parse in the named worktree before trusting anything.
+Dispatch all three in PARALLEL (file-disjoint); Opus for 3b-A/3b-C, Fable-tier
+for 3b-B (voice work per the model split). Every brief: VERIFY-FIRST preamble,
+FORBID git stash, explicit staging, never push/fold, memory file per lane.
+
+### 3b-A · E-H LIT BURN-DOWN → bar 4 (SUBSTANCE) A → A+
+WHERE: worktree .claude/worktrees/vision-i (holds folded e-a-mutation; reuse),
+branch claude/t3b-lit-burndown off bff01718. Opus.
+BUILD: strike ALL 12 baselined entries in
+tests/fixtures/mechanism-lit-coverage-baseline.json — 9 modules
+(canonRelationshipImpact · generosityNews · generosityUpdates ·
+mobilizationEffects · relationshipRuleHelpers · relationshipRulesAdversarial ·
+relationshipRulesCore · stablePart · stressorSeverity) + 3 dark F3-era flags
+with ZERO flag-ON drives anywhere (ladderPoliticalWindowsEnabled ·
+underwaysOrganicFoundingEnabled · warDispositionEnabled).
+METHOD: per module, a lit test that DIRECT-imports the module (⚠️ barrel
+imports via worldPulse/index.js earn NO credit — E-H law) and drives it
+flag-ON with real behavioral assertions (anti-vacuity: non-zero effects, not
+import-and-run); where an existing test already proves it indirectly, a
+validated LIT_COVERED_BY registry entry instead. Per flag, a drive with the
+LITERAL `<flag>: true` in the rules object (⚠️ the detector is
+literal-sensitive; variable-fed flags are invisible — registry those). Strike
+each baseline entry IN THE SAME CHANGE (the walker is strict-equality forced-
+shrink: gained coverage with an unstruck entry REDS — by design, cite E-H).
+Tests-only ⇒ eager Δ 0 structurally. Lit drives set rules explicitly in test
+fixtures — NO preset change, NO golden shift, dark flags stay dark in shipped
+worlds. Hazards: dormancy/byteIdentity tests deliberately earn no credit;
+determinism bans (no wall-clock/random; fs.writeFileSync for probe output).
+GATE: mechanismLitCoverage walker green with baseline [] (or the honest
+remainder, each flagged with WHY unlightable); domain-strict BARE 0; tsc 0;
+eslint 0 new; focused suites; NUL scan 0. Full suite not required (fold covers).
+CLOSES: bar 4 to A+ (100% lit coverage) — the last non-owner PROVEN-tier gap.
+
+### 3b-B · JSX VOICE BURN → bar 8 (VOICE) A− → A
+WHERE: worktree .claude/worktrees/vision-j (holds folded t3-errorcopy; reuse),
+branch claude/t3b-voice-burn off bff01718. FABLE-TIER (voice judgment).
+BUILD: burn tests/copy/.voice-mechanics-jsx-baseline.json toward ZERO — 396
+em-dashes + 10 exclamation points across 133 src/**/*.jsx files (E-E's Tier-3
+substrate; components are NOT under the letter golden and the voice ban is
+LAW, not taste — E2 already burned data/domain prose to 0; components were
+just never covered until E-E).
+METHOD: rewrite every counted string-literal/JSXText/template segment in the
+house voice — em-dash → period-separated sentences / comma / colon (read the
+error-copy register + VOICE_AND_TONE first and match); bangs → plain
+statements ("Credits added!" → "Credits added."). Bank every fall in the
+exact-match baseline file-by-file; NEVER raise it. CSS-in-JS `<style>`
+template-literal comment edge cases: rewrite the comment text (the AST walker
+counts cooked segments) — verify per-site rather than blanket-exempting.
+HAZARDS: ⚠️ ceiling files ARE in scope (App.jsx 732 exact) — copy edits must
+stay same-line-count there; ⚠️ 23 B closure margin — em-dash (3 B UTF-8) →
+". " (2 B) SHRINKS eager bytes where the file is eager, but PROVE it:
+npm run build + VERIFY_DIST=1 (the ratchet is skipIf(!VERIFY_DIST) — plain
+runs silently green); report the exact closure vs 1,039,977, Δ must be ≤ 0;
+⚠️ E-I's placement pins + palette a11y must stay green (announcer strings
+already banked em:0 — don't reintroduce); ⚠️ meaning-preserving rewrites only
+— this is user-facing help/settings/toast prose; where a rewrite would damage
+meaning or voice, leave it counted and FLAG it (an honest small remainder
+beats degraded copy; target 0, report what voice allows).
+GATE: voiceMechanics green at the banked baseline; proseLeak; full tests/copy
++ tests/design + tests/lint families; letter golden byte-identical; eslint;
+tsc; domain-strict; VERIFY_DIST closure; NUL scan.
+CLOSES: bar 8 to A (A+ stays gated on the ONE REGEN letter debt); assists 18.
+
+### 3b-C · E-J FAMILY-2 REACHABILITY PROBE → bar 20 depth (grade-neutral now)
+WHERE: worktree .claude/worktrees/vision-e (holds folded t3-spellbreak; reuse),
+branch claude/t3b-family2-probe off bff01718. Opus. VERIFY-FIRST, E-J-v2's
+exact discipline: PROVE preconditions before ANY edit; a disproof that stops
+with evidence is a COMPLETE, VALUED result.
+QUESTION: can a conquest/occupation applied-outcome receipt name its
+mobilization/deploy parent's RECORDED key, dark, with NO persisted-shape
+change? (Deferred by E-J-v2 precisely because this is the CROSS-TICK case —
+mobilization happens ticks before conquest, so the same-advance transient
+derivation that carried family-1 does NOT apply.)
+V1 REACHABILITY: do conquest/occupation applied-outcomes reach
+recordProvenanceLedger's recorded set on a full_simulation drive? Probe:
+dump recorded keys via fs.writeFileSync (vitest eats console.log on pass).
+V2 CROSS-TICK PARENT-KEY: is the mobilization tick ALREADY PERSISTED on the
+army/transit state (armyTransitKernel — an ArmyRec departure/mobilization
+tick field) such that `wizard_news.<parentTick>.<transition>.<parentId>` is
+derivable transiently at record time? If YES → buildable. If it requires a
+NEW persisted field or a migration → STOP, write the blocked finding, move it
+to the owner manifest (the E-J-v1 outcome shape) — do NOT force it.
+IF PROVEN: mint the additive causedBy edge in LAZY provenanceKernel.js ONLY
+(⚠️ wizardNews.js is EAGER — the +284 B lesson), keep the root edge, dark
+behind provenanceLedgerActive. GATE: E-J-v2's V3-V7 verbatim (dark
+byte-identity vs base via temp worktree; lit deepChains grows above 6;
+same-seed determinism; eager Δ 0 with VERIFY_DIST; domain-strict/tsc/NUL).
+CLOSES: nothing lettered today (bar 20 stays A until the owner's flip) — it
+deepens the DAG the flip lights; the probe's answer is valuable either way.
+
+### 3b FOLD + RE-GRADE (manager, after all three land)
+Merge the three branches into composite-r4 (--no-ff each), full two-shard
+suite (EXACTLY the 4 parked golden families tolerated), authoritative closure
+BFS (report vs 1,039,977 / ceiling 1,040,000), ledger row with the re-graded
+bars (4 → A+, 8 → A, 20-depth note), updated RESUME marker, memory. Then THE
+HALT RESUMES — the owner queue (tranches 4-6) is untouched by 3b.
 ═══════════════════════════════════════════════════════════════════════════
 Everything above gets the product to: Group-1 bars A+, Group-2 at "A+ pending ONE act below",
 Group-3 at "A+ pending soak/lived." These acts finish it. Ordered by leverage.
