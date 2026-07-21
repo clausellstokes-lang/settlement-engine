@@ -56,7 +56,9 @@ describe('cross-user map import never carries an untrusted raw snapshot (F6)', (
   });
 
   it('still imports the safe fields (seed) so geography can regenerate locally', () => {
-    expect(/mapState\.seed\s*=\s*sharedMap\.seed/.test(body)).toBe(true);
+    // importGalleryMap reads its shared payload via `backdrop`; the WithCampaign
+    // sibling uses `sharedMap`. Either safe-field-carry proves the F6 seed import.
+    expect(/mapState\.seed\s*=\s*(backdrop|sharedMap)\.seed/.test(body)).toBe(true);
   });
 });
 
