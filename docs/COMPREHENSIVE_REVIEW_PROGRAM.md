@@ -1276,6 +1276,25 @@ the REMAINING tranche-2 enforcers + tranche-3 burn-down → HALT (no cold cycle 
 convergence / confirming cycle — owner's call). LARGE ONE-REGEN QUEUE accumulated
 (C2-Q1 letter-header/em-dash/flag-key debt, C2-Q2 prose-pool variety, + every
 golden-bound composer edit) — the owner's single re-record lights it all.**
+**⬛⭐⭐ TRANCHE-2 ENFORCERS 8/9 LANDED (2026-07-21, all base b339e178, all Δ0
+eager, NOT folded).** E-C lifecycle round-trip @ e-lifecycle 31a1e2a6 · E-D AI-wall
+@ e-aiwall e1fbbbef (finding: parley has no client seam) · E-G narrative-parity @
+e-narrative 2d892d0f · E-H mechanism-lit @ e-h-mechanism de94d733 (94.4%) · E-F
+tick op-budget @ e-f-opbudget 9f5ff2bf (4,671 ops→6,500 ceiling + 12 per-component
+pins) · E-I keyboard placement @ e-i-keyboard ed704fe9 (SR-user places a
+settlement; WorldMap.jsx untouched at 600) · E-E voice→JSX @ e-e-voice aa5350f0
+(FINDING: 396 em-dashes/10 bangs in 133 JSX files now ratcheted; brief-vs-spec
+drift caught by the agent, spec won) · ⭐ E-J-v2 RECORDED MULTI-HOP DEPTH @
+e-j-recorded-depth 707a3974 under the owner's no-compromises go-ahead — wave
+receipts name their immediate parent's recorded key (additive causedBy, DARK,
+transient derivation, NO migration); deepChains 0→6 lit incl.
+conquest→info-shock→import-shortage; dark BYTE-IDENTITY + closure 1,039,971
+byte-equal CONFIRMED; agent self-caught a +284B eager first draft (wizardNews path
+is EAGER — the ratchet is skipIf(!VERIFY_DIST), silently green in plain runs) and
+re-hosted identical DAG in lazy provenanceKernel. Family-2 (war applied-outcome
+seam) deferred w/ rationale; Tier-2 digest-move + default-flip stay owner-gated.
+E-A mutation-totality sweep still running. NEXT: E-A lands → 9-branch enforcer
+fold into composite-r4 (full two-shard gate) → tranche-3 burn-down → HALT.**
 **⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
 checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
 deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
