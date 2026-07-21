@@ -18,7 +18,8 @@
   "rationales": {
     "pglite-executed": "Executed-SQL boundary test: it loads the real migration SQL into pglite and asserts behavior by EXECUTION — the stronger form of proof this sweep approximates for source-scan invariants. Its mutation target is committed migration SQL; transiently mutating shared migration files risks discarding parallel-session work, and each pglite boot is heavy, so standing family-level mutation proof lives in the sweep areas security/runIf migration renumber, security/verify_jwt platform gate loosened, and security/public table without RLS. Per-suite mutation proofs were executed at build time (each suite’s Done-when in docs/A_PLUS_ROADMAP.md).",
     "golden-byte-pin": "Same-seed golden byte/structure pin over the full seeded pipeline. Its catching power is exercised operationally: legitimate behavior shifts redden the affected goldens and are recorded in the golden-shift ledgers (docs/GOLDEN_SHIFT_LEDGER*.md). A synthetic planted mutation would need a hand-crafted behavior-changing kernel edit per golden plus two full pipeline runs each in the sweep — redundant proof at disproportionate cost.",
-    "self-proving-meta": "Guard-the-guard meta-test that injects its own broken fixtures (a fake failing tsc, a temp baseline) and asserts the enforcer reds — the mutation proof is embedded in the test body and executes on every suite run."
+    "self-proving-meta": "Guard-the-guard meta-test that injects its own broken fixtures (a fake failing tsc, a temp baseline) and asserts the enforcer reds — the mutation proof is embedded in the test body and executes on every suite run.",
+    "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves."
   },
   "invariants": {
     "tests/build/ciCheckParity.test.js": {
@@ -467,6 +468,10 @@
     "tests/lint/determinismBanCoverage.test.js": {
       "kind": "mutation",
       "label": "determinism/eslint last-wins shadow block"
+    },
+    "tests/lint/discourseLexiconCoverage.test.js": {
+      "kind": "mutation",
+      "label": "discourse/lexicon relation-type coverage gap"
     },
     "tests/lint/domainAnyCastBaseline.test.js": {
       "kind": "mutation",
@@ -1201,6 +1206,10 @@
     "tests/security/aiSurfaceSourceScan.test.js": {
       "kind": "mutation",
       "label": "ai-wall/new model-calling surface unwalled"
+    },
+    "tests/simulation/discourseParity.test.js": {
+      "kind": "rationale",
+      "ref": "discourse-parity-variant"
     },
     "tests/simulation/narrativeParity.test.js": {
       "kind": "mutation",

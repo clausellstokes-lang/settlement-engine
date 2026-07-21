@@ -14,6 +14,7 @@
 import { useMemo } from 'react';
 import { X } from 'lucide-react';
 import { buildCauseWalk } from '../../domain/display/causeWalk.js';
+import { discourseProseActive, realizeCauseWalk } from '../../domain/display/discourseKernel.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
 
@@ -27,10 +28,25 @@ import { IconButton } from './IconButton.jsx';
  * @param {() => void} [props.onClose]
  */
 export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSecrets = true, onClose }) {
-  const nameOf = resolveName || ((id) => String(id));
+  const nameOf = useMemo(() => resolveName || ((id) => String(id)), [resolveName]);
   const walk = useMemo(
     () => buildCauseWalk({ worldState, rootId, seesSecrets }),
     [worldState, rootId, seesSecrets],
+  );
+
+  // TRANCHE 3c THE DISCOURSE KERNEL — when the virtual `discourseProseEnabled`
+  // flag is lit, the disconnected receipt list renders as ONE connected passage,
+  // every clause still tracing to its receipt. Absent flag ⇒ null ⇒ the exact
+  // current rendering path below, byte-identical (the dormancy law).
+  const discourse = useMemo(
+    () => (discourseProseActive(worldState)
+      ? realizeCauseWalk(walk, {
+        seedId: worldState?.rngSeed ?? rootId,
+        nameOf,
+        provenance: worldState?.spatialLedgers?.provenance,
+      })
+      : null),
+    [worldState, walk, rootId, nameOf],
   );
 
   const rootHeadline = walk.root ? walk.root.headline : String(rootId);
@@ -51,45 +67,53 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
         )}
       </div>
 
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, lineHeight: 1.3 }}>
-        {rootHeadline}
-      </div>
+      {discourse ? (
+        <p data-testid="cause-walk-prose" style={{ margin: 0, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 650, lineHeight: 1.55 }}>
+          {discourse.text}
+        </p>
+      ) : (
+        <>
+          <div style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, lineHeight: 1.3 }}>
+            {rootHeadline}
+          </div>
 
-      {walk.chain.length > 0 && (
-        <ol data-testid="cause-walk-chain" style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 4 }}>
-          {walk.chain.map((hop, i) => {
-            const names = (hop.settlementIds || []).map(nameOf).filter(Boolean);
-            return (
-              <li
-                key={`${hop.id}-${i}`}
-                data-testid="cause-walk-hop"
-                data-redacted={hop.redacted ? 'true' : undefined}
-                style={{
-                  marginLeft: Math.min(hop.depth - 1, 4) * 10,
-                  borderLeft: `2px solid ${BORDER}`,
-                  paddingLeft: 8,
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                  <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
-                    ← because
-                  </span>
-                  <span style={{ color: hop.redacted ? MUTED : BODY, fontFamily: sans, fontSize: FS.micro, fontWeight: 750, fontStyle: hop.redacted ? 'italic' : undefined }}>
-                    {hop.headline}
-                  </span>
-                  {hop.tick != null && (
-                    <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>· tick {hop.tick}</span>
-                  )}
-                </div>
-                {names.length > 0 && (
-                  <div style={{ marginTop: 2, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
-                    {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+          {walk.chain.length > 0 && (
+            <ol data-testid="cause-walk-chain" style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gap: 4 }}>
+              {walk.chain.map((hop, i) => {
+                const names = (hop.settlementIds || []).map(nameOf).filter(Boolean);
+                return (
+                  <li
+                    key={`${hop.id}-${i}`}
+                    data-testid="cause-walk-hop"
+                    data-redacted={hop.redacted ? 'true' : undefined}
+                    style={{
+                      marginLeft: Math.min(hop.depth - 1, 4) * 10,
+                      borderLeft: `2px solid ${BORDER}`,
+                      paddingLeft: 8,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+                        ← because
+                      </span>
+                      <span style={{ color: hop.redacted ? MUTED : BODY, fontFamily: sans, fontSize: FS.micro, fontWeight: 750, fontStyle: hop.redacted ? 'italic' : undefined }}>
+                        {hop.headline}
+                      </span>
+                      {hop.tick != null && (
+                        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>· tick {hop.tick}</span>
+                      )}
+                    </div>
+                    {names.length > 0 && (
+                      <div style={{ marginTop: 2, color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+                        {names.slice(0, 3).join(', ')}{names.length > 3 ? ` +${names.length - 3}` : ''}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ol>
+          )}
+        </>
       )}
 
       {walk.graceLine && (
