@@ -1255,6 +1255,24 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐ CYCLE 2 FIX WAVE 2 DONE @ composite-r4 8dfd2aed (2026-07-20).** Store &
+engine truth single-sourced, 3 class-kills + 1 contradiction resolved, ONE
+commit, checker-verified: `isLiveWarFront` (warFrontReads.js) is now THE read-side
+siege gate that confirmedWarFronts/liveSieges/settlementWarStatus + every consumer
+route through — a merely-hostile pair no longer renders a phantom siege (idx32),
+and the strategy-vs-war-surface contradiction (idx20) dissolves because both now
+read the same gate · `reconcileWizardNewsForCommit` merges table-event imports
+that land during an in-flight worker advance on BOTH commit paths, so a DM's
+import can't be silently clobbered (idx33) · map undo/redo stacks clear on
+campaign switch, killing the cross-campaign secret-marker leak (idx35). 3 pins;
+byte-identity goldens RE-VERIFIED GREEN by the Fable checker (no shift declared,
+independently re-run 36/36); build 0 · strict 0 · tsc 0 · lint 0 · closure
+1,038,424 (eager Δ ~0) · NUL clean. CORRECT OWNER-GATED DEFERRALS: idx21
+(tier/population narration) + idx19 (durable-memory drops turning points) both
+shift same-seed output = the ONE REGEN under THE PROMISE — queued for the
+owner-signed tuning pass, not forced. FIX WAVE 3 (voice/immersion — E1
+no-engine-token walker + E2 voiceMechanics walker + em-dash sweep under golden
+discipline) DISPATCHED as a model:'fable' subagent (session-drift-proof pinning).**
 **⬛⭐ CYCLE 2 REFUTERS + FIX WAVE 1 (2026-07-20).** Refuter pass over the 38
 must-fix findings: 17 CONFIRMED + 11 PARTIAL survive to fix waves; 10 REFUTED
 (struck WITH reason — cause-walk-dark/epistemic-drama/tempo-governor ruled
