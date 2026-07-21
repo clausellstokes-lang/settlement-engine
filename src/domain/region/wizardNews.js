@@ -76,6 +76,7 @@ const MAX_ENTRIES = 240;
  * @property {string[]} tags
  * @property {string[]} reasons
  * @property {string} [source]
+ * @property {boolean} [covert]
  */
 
 /**
@@ -100,6 +101,7 @@ const MAX_ENTRIES = 240;
  * @property {Array<string | number | null | undefined>} [tags]
  * @property {Array<string | number | null | undefined>} [reasons]
  * @property {string} [source]
+ * @property {boolean} [covert]
  */
 
 /**
@@ -486,6 +488,12 @@ function normalizeEntry(entry, options = {}) {
     // pass no `source`, so this spread adds nothing and their serialization is
     // unchanged; only table-imported entries carry the field.
     ...(entry.source ? { source: entry.source } : {}),
+    // Covert pass-through (the same byte-neutral idiom): no generated feed writes
+    // `covert` today, so every existing entry serializes unchanged — but an
+    // imported/future covert entry KEEPS its flag through normalization, so the
+    // World Book's player-face isCovertEntry filter is live end-to-end instead of
+    // a dead branch (SB2 finding: covert marks must not survive into the handout).
+    ...(entry.covert === true ? { covert: true } : {}),
   };
 }
 

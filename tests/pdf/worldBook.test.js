@@ -121,6 +121,52 @@ describe('the player-safe face carries ZERO covert marks', () => {
   });
 });
 
+describe('the chronicle reads start → end, and covert history never reaches the player face (SB2)', () => {
+  // Production stores wizardNews NEWEST-FIRST (sortEntries: b.tick - a.tick); the
+  // old fixture was hand-ordered ascending, so the order pin never saw the real
+  // shape. This fixture is stored descending, carries a covert-tagged MAJOR, and
+  // canonizes the world so the realm chapter (collectRealmSummary) is exercised.
+  function covertFixture() {
+    const { campaign, saves } = fixtureCampaign();
+    campaign.worldState = { tick: 32, canonizedAt: '2026-01-01T00:00:00.000Z' };
+    campaign.wizardNews = {
+      schemaVersion: 1, currentTick: 32, entries: [
+        { id: 'w30', tick: 30, headline: 'The harvest held', summary: '', significance: 'major' },
+        { id: 'c20', tick: 20, headline: 'SECRET_CABAL_MOVE', summary: 'COVERTSUMMARY', significance: 'major', tags: ['covert'] },
+        { id: 'w10', tick: 10, headline: 'A hard winter', summary: '', significance: 'notable' },
+      ],
+    };
+    return { campaign, saves };
+  }
+
+  it('a newest-first feed binds an ASCENDING chronicle (the season reads start → end)', () => {
+    const { campaign, saves } = covertFixture();
+    expect(collectWorldBook(campaign, saves, { mode: 'dm' }).chronicle.map(c => c.tick)).toEqual([10, 20, 30]);
+  });
+
+  it('the DM face keeps the covert major — chronicle AND realm', () => {
+    const { campaign, saves } = covertFixture();
+    const book = collectWorldBook(campaign, saves, { mode: 'dm' });
+    expect(book.chronicle.some(c => c.headline === 'SECRET_CABAL_MOVE')).toBe(true);
+    expect(book.realm.present).toBe(true);
+    expect((book.realm.majors || [])).toContain('SECRET_CABAL_MOVE');
+  });
+
+  it('the player face drops the covert major from EVERY chapter (chronicle, realm, whole JSON)', () => {
+    const { campaign, saves } = covertFixture();
+    const book = collectWorldBook(campaign, saves, { mode: 'player' });
+    expect(book.chronicle.map(c => c.tick)).toEqual([10, 30]); // covert tick 20 gone, order kept
+    expect(book.realm.present).toBe(true);
+    expect((book.realm.majors || [])).toContain('The harvest held');
+    expect((book.realm.majors || [])).not.toContain('SECRET_CABAL_MOVE');
+    // The whole serialized book carries neither the covert headline nor its summary
+    // (JSON.stringify skips realm.nameFor, a function — data only).
+    const json = JSON.stringify(book);
+    expect(json).not.toContain('SECRET_CABAL_MOVE');
+    expect(json).not.toContain('COVERTSUMMARY');
+  });
+});
+
 describe('painter smoke (no bytes asserted — the collector pins stay the contract)', () => {
   // Fix wave 3 rewired the chronicle row (calendar date via tickCalendarLabel +
   // a measured at-the-table offset); this proves the painter still runs

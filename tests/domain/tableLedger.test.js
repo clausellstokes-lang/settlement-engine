@@ -10,7 +10,7 @@ import { describe, test, expect } from 'vitest';
 import {
   TABLE_EVENT_KINDS, MAGNITUDE_BANDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES,
   TABLE_EVENT_SOURCE, KIND_SPEC,
-  validateTableEvent, buildTableEffect, reviewClerkProposals,
+  validateTableEvent, buildTableEffect, reviewClerkProposals, exposureTargets,
 } from '../../src/domain/tableLedger.js';
 
 describe('the closed vocabulary + bounded bands', () => {
@@ -127,5 +127,41 @@ describe('the clerk is a bucketing clerk, never a writer', () => {
 
   test('a non-array clerk output is safely empty', () => {
     expect(reviewClerkProposals(null)).toEqual({ accepted: [], rejected: [] });
+  });
+});
+
+describe('the exposure roster mirrors the affordance manifest (SB2 parity pin)', () => {
+  // exposureTargets is a MIRROR of affordanceManifest.compromisedTargets (the
+  // manifest is a lazy leaf the Session Ledger chunk must not import — the
+  // recorded chunk-rebalance hazard). This pin is what makes the mirror safe:
+  // the two rosters can never drift without a red here.
+  const fx = {
+    npcs: [
+      { id: 'npc.aldis', name: 'Aldis', corrupt: true },
+      { name: 'Berta', corrupt: true },           // no id — keys by name (findNpc resolves both)
+      { id: 'npc.cato', name: 'Cato' },           // clean — never offered
+    ],
+    institutions: [
+      { id: 'inst.guild', name: 'The Guild', impairments: [{ type: 'corruption' }] },
+      { id: 'inst.watch', name: 'The Watch', impairments: [{ type: 'legitimacy' }] }, // not corruption
+    ],
+    powerStructure: { factions: [
+      { id: 'fac.cabal', faction: 'The Cabal', impairments: [{ type: 'corruption' }] },
+      { faction: 'The Clean Hands' },
+    ] },
+  };
+
+  test('exposureTargets returns exactly the manifest EXPOSE_CORRUPTION targetOptions', async () => {
+    const { AFFORDANCE_MANIFEST } = await import('../../src/domain/events/affordanceManifest.js');
+    const manifest = AFFORDANCE_MANIFEST.EXPOSE_CORRUPTION.targetOptions(fx);
+    const mirror = exposureTargets(fx).map((t) => ({ id: t.ref, name: t.label }));
+    expect(mirror).toEqual(manifest);
+    // And the roster itself is the compromised set, id-or-name keyed.
+    expect(mirror.map((m) => m.id)).toEqual(['npc.aldis', 'Berta', 'inst.guild', 'fac.cabal']);
+  });
+
+  test('a settlement with nothing compromised yields an empty roster (the picker offers nothing)', () => {
+    expect(exposureTargets({ npcs: [{ id: 'n1', name: 'Clean' }] })).toEqual([]);
+    expect(exposureTargets(null)).toEqual([]);
   });
 });

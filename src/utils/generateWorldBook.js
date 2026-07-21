@@ -198,11 +198,25 @@ export function collectWorldBook(campaign, allSaves = [], opts = {}) {
       summary: e.summary || '',
       source: e.source || 'world',
       significance: e.significance || 'notable',
-    }));
+    }))
+    // Production stores the feed NEWEST-FIRST (wizardNews sortEntries: b.tick - a.tick);
+    // a chronicle chapter narrates the season start → end, so sort ascending by tick
+    // (stable — same-tick entries keep their feed order).
+    .sort((a, b) => a.tick - b.tick);
 
+  // The map and receipts chapters read only mechanical fields off the members —
+  // name/tier/neighbour ids+types (buildMapModel) and relationshipGraph modifier
+  // totals/sources (buildReceipts) — never a DM-private field, so they need no
+  // player projection. The REALM chapter, though, derives its majors/arcs from
+  // wizardNews via collectRealmSummary; in player mode feed it the covert-filtered
+  // entries so a covert-tagged major can never leak into the handout's "State of
+  // the Realm" while the player Chronicle drops it (the two chapters must agree).
   const map = buildMapModel(members);
   const receipts = buildReceipts(members);
-  const realm = collectRealmSummary(campaign, members);
+  const realmCampaign = player
+    ? { ...campaign, wizardNews: { ...(campaign.wizardNews || {}), entries: rawEntries.filter(e => !isCovertEntry(e)) } }
+    : campaign;
+  const realm = collectRealmSummary(realmCampaign, members);
 
   return {
     present: true,
