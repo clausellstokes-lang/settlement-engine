@@ -95,9 +95,25 @@ and if it can't land eager-neutral it WAITS for the owner eager reclaim (the ONE
 headroom). CLOSES the repo-provable half of bar 9 (SR PARITY is still lived-certified). Pin: a
 keyboard-driven placement round-trips to the store.
 
-### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — buildable DARK now
-(Added 2026-07-21 under NO-COMPROMISES — previously mis-labeled fully owner-gated; the DEFAULT-FLIP
-is owner, but the CODE is buildable dark now.) BUILD: have 2-3 high-value kernels (ladder contests,
+### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — ⛔ OWNER-GATED (CORRECTED 2026-07-21)
+⛔⛔ CORRECTION (2026-07-21, proven by the E-J investigation — enforcer-ej-depth-blocked-finding.md):
+the earlier "buildable DARK now" claim was WRONG. Proven at code + by a 15y everything-on drive:
+contest/generosity/roads mover beats NEVER reach the recorded ledger — impactDigest is snapshotted at
+pulseKernel.js:1615 BEFORE the movers run, so their beats (appended to wizardNews, not applied.newsEntries)
+are structurally excluded; plus a namespace mismatch (ledger keys = `wizard_news.${tick}.${transition}.${id}`
+receipts; causedBy values = raw ids). Lit drive = byte-identical 3144 entries, ZERO deep chains. Recorded
+DEPTH therefore requires a PROVENANCE-SEMANTICS change touching CENTRAL files (applyWorldPulse / region
+propagation / the war layer) + new parent-receipt-tick tracking so a child receipt can name its immediate
+parent's recorded receipt KEY — an OWNER-GATED persistence/attribution-shape decision, NOT an isolated dark
+kernel edit. RECOMMENDED PATH (owner sign-off): mint additive causedBy at the level that reaches the ledger
+(the queued regional-wave d≥1 receipt → its immediate-parent impact's recorded key, adding parent-tick
+tracking through the queue; and/or conquest/occupation applied-outcome → the mobilization/deploy
+applied-outcome key), keep the root edge, gate dark; then arc-soak deepChains lights for a real drive.
+⇒ E-J is REMOVED from the buildable set and MOVED to the OWNER MANIFEST (tranche 5, story-depth).
+Bar 20's BUILDABLE ceiling = E-G narrative-parity (done) + story census (done) + the fixes = A-; recorded
+DEPTH + LIVED "moves someone" are owner/human-gated. HONEST NOTE: this corrects the exhaustive-to-buildable
+claim — the buildable ceiling is real, but recorded-depth was over-attributed to it. ORIGINAL (now void):
+buildable-dark — BUILD: have 2-3 high-value kernels (ladder contests,
 generosity→gratitude, war→occupation) mint RECORDED outcome→outcome `causedBy` edges — moving the
 provenance ledger from one-hop-to-ROOT toward genuine MULTI-HOP chains (today only roads V-24d mints
 one, outside full_simulation; see [[recorded-causal-depth-reality]]). ARCH: build the edges behind
