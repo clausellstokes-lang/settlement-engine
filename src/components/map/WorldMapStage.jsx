@@ -74,6 +74,15 @@ function WorldMapStageImpl({
   // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
   // surface is byte-unchanged; the walk flips it on to compare without a rebuild).
   const showRealmFilm = flag('loadingJourneyFilm');
+  // The world map, in words (SB5 / bar 9): the FMG iframe is a visual,
+  // pointer-driven editor with no accessible tree of its own, so an sr-only
+  // summary inside the map container carries the map's factual content — which
+  // settlements stand on the world — to screen readers. Names resolve through
+  // the SAME saves list the palette renders; non-covert scalars only.
+  const placedNames = Object.values(placements || {})
+    .map((p) => (activeSaves || []).find((sv) => String(sv?.id ?? sv?.settlement?.id ?? '') === String(p?.settlementId ?? '')))
+    .map((sv) => sv?.name || sv?.settlement?.name)
+    .filter(Boolean);
   return (
       showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -148,6 +157,14 @@ function WorldMapStageImpl({
               isolation is serving /map/ from a SEPARATE ORIGIN (an infra change): the
               bridge already speaks postMessage, so that is a src + origin-config swap,
               not a rewrite. Tracked as the follow-up; do not add a same-origin sandbox. */}
+          {/* Text equivalent of the map's spatial content for screen readers.
+              Rendered before the iframe so it is the first thing an SR reads
+              inside the map container. */}
+          <div className="sr-only" data-testid="world-map-in-words">
+            {placedNames.length
+              ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed — ${placedNames.join(', ')}. The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
+              : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map with a pointer; each placed settlement will be listed here.'}
+          </div>
           {!imageMode && (
             <iframe
               // Keyed on mapReloadKey so the "Reload map" recovery action drops
@@ -157,6 +174,14 @@ function WorldMapStageImpl({
               data-tour="map"
               src={FMG_URL}
               title="Fantasy Map"
+              // a11y (SB5, bar 9): the FMG editor is a third-party visual tool —
+              // tabbing into it strands a keyboard user inside an unmanaged
+              // editor (WCAG 2.4.3), and its DOM is meaningless to a screen
+              // reader. Removed from the Tab order and the accessibility tree;
+              // the sr-only "world map in words" summary above and the palette
+              // carry the equivalent content. Pointer interaction is unchanged.
+              tabIndex={-1}
+              aria-hidden="true"
               // Don't leak the parent URL (which can carry view/query state) to any
               // request the map frame issues. Zero functional impact; small hardening.
               referrerPolicy="no-referrer"

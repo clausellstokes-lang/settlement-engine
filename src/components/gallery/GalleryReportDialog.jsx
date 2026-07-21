@@ -15,6 +15,7 @@ import {
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import { t } from '../../copy/index.js';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
 export default function GalleryReportDialog({ dossier, auth, disabled, onReport }) {
@@ -51,10 +52,10 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
         setBody('');
         setReason('unsafe_content');
       } else {
-        setError('Report could not be sent.');
+        setError(t('errors.reportSendFail'));
       }
     } catch (err) {
-      setError(err?.message || 'Report could not be sent.');
+      setError(err?.message || t('errors.reportSendFail'));
     } finally {
       setBusy(false);
     }
@@ -175,7 +176,10 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               {error && (
                 // The tinted error box becomes a rubric-ruled note (errors as
                 // rubric notes, not washes): oxblood left rule, oxblood text.
-                <div style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>
+                // role=alert (SB5): the failure appears after the user acts, so
+                // it must interrupt assistive tech (WCAG 4.1.3, the Alert
+                // primitive's tone→liveness contract).
+                <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>
                   {error}
                 </div>
               )}

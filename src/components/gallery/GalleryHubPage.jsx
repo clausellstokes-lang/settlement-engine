@@ -22,6 +22,7 @@ import { GALLERY_HUBS, resolveHub } from '../../lib/galleryHubs.js';
 import { fetchPublicGallery, toggleGalleryVote } from '../../lib/gallery.js';
 import { setGalleryHubMeta } from '../../lib/seoDossier.js';
 import { navigate } from '../../hooks/useRoute.js';
+import { t } from '../../copy/index.js';
 import { useStore } from '../../store/index.js';
 import GalleryCard from './GalleryCard.jsx';
 import Button from '../primitives/Button.jsx';
@@ -64,7 +65,7 @@ export default function GalleryHubPage({ routeHub }) {
         setTotal(Number(r.total) || 0);
         setHasMore(!!r.hasMore);
       })
-      .catch((e) => { if (!ignore) setError(e?.message || 'The gallery could not be loaded.'); })
+      .catch((e) => { if (!ignore) setError(e?.message || t('errors.galleryLoadFail')); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
   }, [hub, page]);
@@ -74,14 +75,14 @@ export default function GalleryHubPage({ routeHub }) {
   }, []);
 
   const voteOn = useCallback(async (item) => {
-    if (!auth?.user) { setNotice('Sign in to vote on public settlements.'); return; }
+    if (!auth?.user) { setNotice(t('errors.signInToVote')); return; }
     if (!item?.id || voteBusyId) return;
     setVoteBusyId(item.id); setNotice(null);
     try {
       const result = await toggleGalleryVote(item.id);
       setItems(current => current.map(row => row.id === item.id ? { ...row, netVotes: result.netVotes, voted: result.voted } : row));
     } catch (err) {
-      setNotice(err?.message || 'Vote could not be saved.');
+      setNotice(err?.message || t('errors.voteSaveFail'));
     } finally {
       setVoteBusyId(null);
     }
@@ -117,11 +118,18 @@ export default function GalleryHubPage({ routeHub }) {
         )}
       </header>
 
-      {notice && (
-        <div role="status" aria-live="polite" style={{ marginBottom: SP.md, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD, color: INK, fontSize: FS.sm }}>
-          {notice}
-        </div>
-      )}
+      {/* Persistent polite region (SB5): the node stays MOUNTED so a notice is a
+          text CHANGE inside an existing live region — a role=status inserted
+          together with its text is announced inconsistently across screen
+          readers. sr-only while idle; the visible notice box when set. */}
+      <div
+        role="status"
+        aria-live="polite"
+        className={notice ? undefined : 'sr-only'}
+        style={notice ? { marginBottom: SP.md, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD, color: INK, fontSize: FS.sm } : undefined}
+      >
+        {notice || ''}
+      </div>
       {loading && items.length === 0 && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading settlements…</p>}
       {error && <p role="alert" style={{ color: INK, fontSize: FS.sm }}>{error}</p>}
       {!loading && !error && items.length === 0 && (

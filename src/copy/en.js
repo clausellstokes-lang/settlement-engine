@@ -909,6 +909,25 @@ export const en = Object.freeze({
     // Vision V-N (V-26a): the Interview follow-on surfaces its transport failure through
     // the register (the setPendingError path), one voice with the analyst's sibling.
     interviewUnavailable: 'The Interview is unavailable right now.',
+    // SB5 (error-copy burn-down): gallery + draft-export literals migrated off
+    // their components so the ratchet keeps shrinking toward zero.
+    reportSendFail: 'Report could not be sent.',
+    galleryLoadFail: 'The gallery could not be loaded.',
+    signInToVote:   'Sign in to vote on public settlements.',
+    voteSaveFail:   'Vote could not be saved.',
+    pdfExportFail:  'PDF export failed: {detail}',
+  },
+
+  // ── Command palette (V-H R-20; SB5 routed its strings off inline literals) ──
+  palette: {
+    dialogLabel:  'Command palette',
+    inputLabel:   'Jump to a page, a settlement, or a figure',
+    placeholder:  'Jump to a page, a settlement, or a figure…',
+    resultsLabel: 'Results',
+    pageHint:     'Page',
+    goTo:         'Go to {label}',
+    emptyNoMatch: 'Nothing by that name in this realm. Try a page, a settlement, or a figure within one.',
+    emptyPrompt:  'Type to search your pages, settlements, and the figures within them.',
   },
 
   // ── Verb registry (P124 / C-1) ───────────────────────────────────────────

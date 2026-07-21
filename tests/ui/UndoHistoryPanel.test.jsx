@@ -77,4 +77,30 @@ describe('UndoHistoryPanel — the visible walk-back', () => {
     expect(screen.getByText('No advances to undo yet.')).toBeTruthy();
     expect(screen.queryAllByRole('button', { name: 'Return here' })).toHaveLength(0);
   });
+
+  // ── SB5 (WCAG 2.1.2 — same root cause the palette fixed in wave 4/idx37):
+  // keys pressed INSIDE the dialog must reach the window-level focus trap. A
+  // wrapper onKeyDown stopPropagation silently disabled Escape-close and Tab
+  // containment while window-dispatched tests stayed green — so these pins
+  // originate on in-dialog nodes, where a user's keys actually land.
+  it('Escape pressed INSIDE the dialog reaches the trap and closes', () => {
+    const onClose = vi.fn();
+    mockState.pulseUndoStack = [entry('c1', 3, 'one_week')];
+    render(<UndoHistoryPanel campaignId="c1" onClose={onClose} />);
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Return here' }), { key: 'Escape' });
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('Tab from the last focusable wraps to the first (containment under aria-modal)', () => {
+    mockState.pulseUndoStack = [entry('c1', 3, 'one_week')];
+    render(<UndoHistoryPanel campaignId="c1" onClose={() => {}} />);
+    const returnBtn = screen.getByRole('button', { name: 'Return here' });
+    const close = screen.getByRole('button', { name: 'Close advance history' });
+    returnBtn.focus();
+    expect(document.activeElement).toBe(returnBtn);
+    fireEvent.keyDown(returnBtn, { key: 'Tab' });
+    // The trap cycles to the dialog's first focusable (the header close) —
+    // focus never walks out from under aria-modal.
+    expect(document.activeElement).toBe(close);
+  });
 });

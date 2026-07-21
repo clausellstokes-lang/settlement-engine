@@ -1,6 +1,5 @@
 /**
- * tests/copy/localeParity.test.js — the localization extraction-completeness pin
- * (V-27a scaffold).
+ * tests/copy/localeParity.test.js — the locale KEY-PARITY pin (V-27a scaffold).
  *
  * The localization door swings on ONE invariant: a locale is only valid if it
  * covers every key the base `en` locale defines. This pins that invariant with
@@ -10,6 +9,15 @@
  * missing keys (completeness), no orphan keys (no stale). The moment a real
  * hand-authored locale (es.js, …) is added, this same pin is the gate it must
  * pass before it can ship.
+ *
+ * HONESTY (SB5): the pseudo-locale is DERIVED from `en` (deepPseudo(en) in
+ * copy/pseudo.js), so en ⇄ pseudo parity holds by construction — this file
+ * proves the parity MACHINERY and the runtime door; it can NOT detect a
+ * user-facing string that was never extracted into the registry, because a
+ * hardcoded JSX literal bypasses t() and every locale table equally.
+ * EXTRACTION completeness has no automated gate today; the working instrument
+ * is visual QA under the pseudo-locale, where an unextracted string stays
+ * plain English amid ⟦bracketed⟧ text (pseudo.js payoff 2).
  *
  * It also proves the door actually swings: activating the pseudo-locale changes
  * what `t()` returns, interpolation survives the transform, and falling back to
@@ -51,7 +59,7 @@ function leafPaths(node, prefix = '', out = []) {
 // Always leave the shared module-level active locale on 'en' for other suites.
 afterEach(() => setLocale('en'));
 
-describe('locale extraction-completeness (en ⇄ pseudo key parity)', () => {
+describe('locale key parity (en ⇄ pseudo, walker set-equality)', () => {
   const enKeys = leafPaths(en).sort();
   const pseudoKeys = leafPaths(pseudo).sort();
 

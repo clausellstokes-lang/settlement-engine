@@ -8,7 +8,7 @@
  * owning settlement); and it TRAPS focus / closes on Escape via the shared trap.
  */
 import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, cleanup, screen, fireEvent } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 
 let mockState;
 vi.mock('../../src/store/index.js', () => ({ useStore: (sel) => sel(mockState) }));
@@ -17,6 +17,7 @@ vi.mock('../../src/lib/saves.js', () => ({ saves: { list: vi.fn().mockResolvedVa
 
 import CommandPalette from '../../src/components/CommandPalette.jsx';
 import { navigate } from '../../src/hooks/useRoute.js';
+import { saves } from '../../src/lib/saves.js';
 
 afterEach(cleanup);
 beforeEach(() => {
@@ -36,22 +37,23 @@ describe('CommandPalette — the jump bar', () => {
     render(<CommandPalette onClose={() => {}} />);
     expect(screen.getByRole('dialog', { name: 'Command palette' })).toBeTruthy();
     expect(screen.getByRole('combobox')).toBeTruthy();
-    // A primary route surfaces as a jump target with no query typed.
-    expect(screen.getByRole('button', { name: 'Go to Realm' })).toBeTruthy();
+    // A primary route surfaces as a jump target with no query typed. (SB5: the
+    // rows are role=option — the option IS the interactive element now.)
+    expect(screen.getByRole('option', { name: 'Go to Realm' })).toBeTruthy();
   });
 
   it('filters to a settlement by typed text', () => {
     render(<CommandPalette onClose={() => {}} />);
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Iron' } });
-    expect(screen.getByRole('button', { name: 'Ironhold' })).toBeTruthy();
+    expect(screen.getByRole('option', { name: 'Ironhold' })).toBeTruthy();
     // A non-matching page drops out of the results.
-    expect(screen.queryByRole('button', { name: 'Go to Realm' })).toBeNull();
+    expect(screen.queryByRole('option', { name: 'Go to Realm' })).toBeNull();
   });
 
   it('finds a figure and jumps to its owning settlement on select', () => {
     render(<CommandPalette onClose={() => {}} />);
     fireEvent.change(screen.getByRole('combobox'), { target: { value: 'Brandt' } });
-    const opt = screen.getByRole('button', { name: 'Mayor Brandt' });
+    const opt = screen.getByRole('option', { name: 'Mayor Brandt' });
     fireEvent.click(opt);
     expect(navigate).toHaveBeenCalledWith('settlements', { params: { id: 's1' } });
   });
@@ -59,7 +61,7 @@ describe('CommandPalette — the jump bar', () => {
   it('navigates to a page on select', () => {
     const onClose = vi.fn();
     render(<CommandPalette onClose={onClose} />);
-    fireEvent.click(screen.getByRole('button', { name: 'Go to Compendium' }));
+    fireEvent.click(screen.getByRole('option', { name: 'Go to Compendium' }));
     expect(navigate).toHaveBeenCalledWith('compendium');
     expect(onClose).toHaveBeenCalled();
   });
@@ -102,15 +104,57 @@ describe('CommandPalette — the jump bar', () => {
     }
   });
 
-  it('Tab is trapped WITHIN the dialog — from the last focusable it wraps to the first', () => {
+  it('Tab is trapped WITHIN the dialog — the combobox is the single tab stop and wraps to itself', () => {
     render(<CommandPalette onClose={() => {}} />);
-    const options = screen.getAllByRole('button');
-    const last = options[options.length - 1];
-    last.focus();
-    expect(document.activeElement).toBe(last);
-    fireEvent.keyDown(last, { key: 'Tab' });
-    // The trap cycles to the dialog's first focusable (the combobox input) —
-    // focus never leaks behind the overlay.
-    expect(document.activeElement).toBe(screen.getByRole('combobox'));
+    const input = screen.getByRole('combobox');
+    input.focus();
+    expect(document.activeElement).toBe(input);
+    fireEvent.keyDown(input, { key: 'Tab' });
+    // SB5: the options rove via aria-activedescendant (tabIndex -1), so the
+    // input is the dialog's only sequential focusable — the trap wraps it onto
+    // itself and focus never leaks behind the overlay.
+    expect(document.activeElement).toBe(input);
+  });
+
+  // ── SB5 — the combobox model is real: options are single-element role=option
+  // rows outside the Tab order, and the active row can never dangle.
+  it('options are role=option with tabIndex -1 and no interactive descendants (one tab stop total)', () => {
+    render(<CommandPalette onClose={() => {}} />);
+    const opts = screen.getAllByRole('option');
+    expect(opts.length).toBeGreaterThan(0);
+    for (const o of opts) {
+      expect(o.getAttribute('tabindex')).toBe('-1');
+      // ARIA forbids interactive children inside an option — the option IS the
+      // button element itself, nothing nested.
+      expect(o.querySelector('button')).toBeNull();
+    }
+    // No element in the palette competes with the input for Tab.
+    expect(screen.queryAllByRole('button')).toHaveLength(0);
+  });
+
+  it('aria-activedescendant is clamped when results hydrate after arrowing on an empty list (Enter stays live)', async () => {
+    // The cold-library edge: type an unhydrated name (0 results), ArrowDown
+    // (pre-fix this drove active to -1), then the library hydrates. Pre-fix,
+    // aria-activedescendant became the dangling 'cmdk-opt--1' and Enter a
+    // silent no-op; post-fix the active row clamps into the live range.
+    mockState.savedSettlements = [];
+    mockState.savedSettlementsLoaded = false;
+    mockState.setSavedSettlements = (list) => {
+      mockState.savedSettlements = list;
+      mockState.savedSettlementsLoaded = true;
+    };
+    saves.list.mockResolvedValueOnce([
+      { id: 's9', settlement: { name: 'Ironhold', npcs: [] } },
+    ]);
+    const { rerender } = render(<CommandPalette onClose={() => {}} />);
+    const input = screen.getByRole('combobox');
+    fireEvent.change(input, { target: { value: 'Iron' } }); // 0 results while cold
+    fireEvent.keyDown(input, { key: 'ArrowDown' });          // must not underflow
+    await waitFor(() => expect(mockState.savedSettlementsLoaded).toBe(true));
+    rerender(<CommandPalette onClose={() => {}} />);         // mock store is not reactive
+    expect(screen.getByRole('option', { name: 'Ironhold' })).toBeTruthy();
+    expect(input.getAttribute('aria-activedescendant')).toBe('cmdk-opt-0');
+    fireEvent.keyDown(input, { key: 'Enter' });
+    expect(navigate).toHaveBeenCalledWith('settlements', { params: { id: 's9' } });
   });
 });

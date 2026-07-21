@@ -92,12 +92,16 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
       className="oc-m-warmdim"
       style={{ position: 'fixed', inset: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
     >
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      {/* Clicks stop here so the backdrop's click-to-close never fires from inside
+          the plate. Keydown deliberately does NOT stop (SB5, WCAG 2.1.2 — same
+          root cause the palette fixed in wave 4): the shared focus trap (Escape +
+          Tab cycling) listens on window, so a blanket keydown stopPropagation
+          silently disabled Escape-close and Tab containment for this dialog. */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- the onClick is a propagation fence for the backdrop, not an interaction; keyboard behavior lives in the window-level trap. */}
       <div
         ref={dialogRef}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="undo-history-title"
