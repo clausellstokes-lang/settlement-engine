@@ -893,14 +893,18 @@ function configMarkersGeneration() {
 
     const lines = config.map(({type, icon, multiplier}) => {
       const isExternal = icon.startsWith("http") || icon.startsWith("data:image");
+      // SettlementForge fork patch: untrusted .map marker type/icon → innerHTML — escape (the icon-into-img
+      // structural twin of the markers-editor sink patched in wave 1).
+      const safeType = escapeHtml(type);
+      const safeIcon = escapeHtml(icon);
 
       return /* html */ `<tr>
-        <td><input class="type" value="${type}" /></td>
+        <td><input class="type" value="${safeType}" /></td>
         <td style="position: relative">
-          <img class="image" src="${isExternal ? icon : ""}" ${
+          <img class="image" src="${isExternal ? safeIcon : ""}" ${
         isExternal ? "" : "hidden"
       } style="width:1.2em; height:1.2em; vertical-align: middle;">
-          <span class="emoji" style="font-size:1.2em">${isExternal ? "" : icon}</span>
+          <span class="emoji" style="font-size:1.2em">${isExternal ? "" : safeIcon}</span>
           <button class="changeIcon icon-pencil"></button>
         </td>
         <td><input class="multiplier" type="number" min="0" max="100" step="0.1" value="${multiplier}" /></td>

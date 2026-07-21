@@ -48,17 +48,20 @@ function overviewRoutes() {
       route.name = route.name || Routes.generateName(route);
       route.length = route.length || Routes.getLength(route.i);
       const length = rn(route.length * distanceScale) + " " + distanceUnitInput.value;
+      // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+      const name = escapeHtml(route.name);
+      const group = escapeHtml(route.group);
 
       lines += /* html */ `<div
         class="states"
         data-id="${route.i}"
-        data-name="${route.name}"
-        data-group="${route.group}"
+        data-name="${name}"
+        data-group="${group}"
         data-length="${route.length}"
       >
         <span data-tip="Click to focus on route" class="icon-dot-circled pointer"></span>
-        <div data-tip="Route name" style="width: 15em; margin-left: 0.4em;">${route.name}</div>
-        <div data-tip="Route group" style="width: 8em;">${route.group}</div>
+        <div data-tip="Route name" style="width: 15em; margin-left: 0.4em;">${name}</div>
+        <div data-tip="Route group" style="width: 8em;">${group}</div>
         <div data-tip="Route length" style="width: 6em;">${length}</div>
         <span data-tip="Edit route" class="icon-pencil"></span>
         <span class="locks pointer ${
@@ -153,7 +156,9 @@ function overviewRoutes() {
     });
 
     routesOverviewAddLines();
-    byId("routesLockAll").className = allLocked ? "icon-lock" : "icon-lock-open";
+    // SettlementForge fork patch: the icon was inverted — after unlocking everything (allLocked was true) the
+    // toolbar showed the locked glyph. Reflect the NEW state: all-just-unlocked → open, all-just-locked → lock.
+    byId("routesLockAll").className = allLocked ? "icon-lock-open" : "icon-lock";
   }
 
   function triggerRouteRemove() {

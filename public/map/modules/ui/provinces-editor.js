@@ -133,31 +133,33 @@ function editProvinces() {
       totalPopulation += population;
       totalBurgs += p.burgs.length;
 
-      const stateName = pack.states[p.state].name;
-      const capital = p.burg ? pack.burgs[p.burg].name : "";
+      // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+      const stateName = escapeHtml(pack.states[p.state].name);
+      const capital = escapeHtml(p.burg ? pack.burgs[p.burg].name : "");
+      const provinceName = escapeHtml(p.name);
+      const provinceForm = escapeHtml(p.formName);
+      const provinceColor = escapeHtml(p.color);
       const separable = p.burg && p.burg !== pack.states[p.state].capital;
       const focused = defs.select("#fog #focusProvince" + p.i).size();
       COArenderer.trigger("provinceCOA" + p.i, p.coa);
       lines += /* html */ `<div
         class="states"
         data-id=${p.i}
-        data-name="${p.name}"
-        data-form="${p.formName}"
-        data-color="${p.color}"
+        data-name="${provinceName}"
+        data-form="${provinceForm}"
+        data-color="${provinceColor}"
         data-capital="${capital}"
         data-state="${stateName}"
         data-area=${area}
         data-population=${population}
         data-burgs=${p.burgs.length}
       >
-        <fill-box fill="${p.color}"></fill-box>
-        <input data-tip="Province name. Click to change" class="name pointer" value="${p.name}" readonly />
+        <fill-box fill="${provinceColor}"></fill-box>
+        <input data-tip="Province name. Click to change" class="name pointer" value="${provinceName}" readonly />
         <svg data-tip="Click to show and edit province emblem" class="coaIcon pointer hide" viewBox="0 0 200 200"><use href="#provinceCOA${
           p.i
         }"></use></svg>
-        <input data-tip="Province form name. Click to change" class="name pointer hide" value="${
-          p.formName
-        }" readonly />
+        <input data-tip="Province form name. Click to change" class="name pointer hide" value="${provinceForm}" readonly />
         <span data-tip="Province capital. Click to zoom into view" class="icon-star-empty pointer hide ${
           p.burg ? "" : "placeholder"
         }"></span>
@@ -673,8 +675,9 @@ function editProvinces() {
 
     function showInfo(ev, d) {
       d3.select(ev.target).select("rect").classed("selected", 1);
-      const name = d.data.fullName;
-      const state = pack.states[d.data.state].fullName;
+      // SettlementForge fork patch: untrusted loaded-.map names → innerHTML — escape.
+      const name = escapeHtml(d.data.fullName);
+      const state = escapeHtml(pack.states[d.data.state].fullName);
 
       const area = getArea(d.data.area) + " " + getAreaUnit();
       const rural = rn(d.data.rural * populationRate);
@@ -720,7 +723,7 @@ function editProvinces() {
 
     function hideNonfittingLabels() {
       node.select("text").each(function (d) {
-        this.innerHTML = d.data.name;
+        this.innerHTML = escapeHtml(d.data.name); // SettlementForge fork patch: untrusted .map name → innerHTML
         let b = this.getBBox();
         if (b.y + b.height > d.y1 + 1) this.innerHTML = "";
 

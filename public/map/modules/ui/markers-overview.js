@@ -81,14 +81,18 @@ function overviewMarkers() {
 
     const lines = markers
       .map(({i, type, icon, pinned, lock}) => {
+        // SettlementForge fork patch: untrusted loaded-.map marker type/icon → innerHTML — escape.
+        const safeType = escapeHtml(type);
+        const isExternalIcon = icon.startsWith("http") || icon.startsWith("data:image");
+        const safeIcon = escapeHtml(icon);
         return /* html */ `
-          <div class="states" data-i=${i} data-type="${type}">
+          <div class="states" data-i=${i} data-type="${safeType}">
             ${
-              icon.startsWith("http") || icon.startsWith("data:image")
-                ? `<img src="${icon}" data-tip="Marker icon" style="width:1.2em; height:1.2em; vertical-align: middle;">`
-                : `<span data-tip="Marker icon" style="width:1.2em">${icon}</span>`
+              isExternalIcon
+                ? `<img src="${safeIcon}" data-tip="Marker icon" style="width:1.2em; height:1.2em; vertical-align: middle;">`
+                : `<span data-tip="Marker icon" style="width:1.2em">${safeIcon}</span>`
             }
-            <div data-tip="Marker type" style="width:10em">${type}</div>
+            <div data-tip="Marker type" style="width:10em">${safeType}</div>
             <span style="padding-right:.1em" data-tip="Edit marker" class="icon-pencil"></span>
             <span style="padding-right:.1em" data-tip="Focus on marker position" class="icon-dot-circled pointer"></span>
             <span style="padding-right:.1em" data-tip="Pin marker (display only pinned markers)" class="icon-pin ${

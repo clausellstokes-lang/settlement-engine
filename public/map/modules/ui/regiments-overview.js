@@ -60,6 +60,13 @@ function overviewRegiments(state) {
       if (state !== -1 && s.i !== state) continue; // specific state is selected
 
       for (const r of s.military) {
+        // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape.
+        const stateName = escapeHtml(s.name);
+        const stateFullName = escapeHtml(s.fullName);
+        const stateColor = escapeHtml(s.color);
+        const regName = escapeHtml(r.name);
+        const isExternalIcon = r.icon.startsWith("http") || r.icon.startsWith("data:image");
+        const regIcon = escapeHtml(r.icon);
         const sortData = options.military.map(u => `data-${u.name}=${r.u[u.name] || 0}`).join(" ");
         const lineData = options.military
           .map(
@@ -67,17 +74,15 @@ function overviewRegiments(state) {
           )
           .join(" ");
 
-        lines += /* html */ `<div class="states" data-id="${r.i}" data-s="${s.i}" data-state="${s.name}" data-name="${
-          r.name
-        }" ${sortData} data-total="${r.a}">
-          <fill-box data-tip="${s.fullName}" fill="${s.color}" disabled></fill-box>
-          <input data-tip="${s.fullName}" style="width:6em" value="${s.name}" readonly />
+        lines += /* html */ `<div class="states" data-id="${r.i}" data-s="${s.i}" data-state="${stateName}" data-name="${regName}" ${sortData} data-total="${r.a}">
+          <fill-box data-tip="${stateFullName}" fill="${stateColor}" disabled></fill-box>
+          <input data-tip="${stateFullName}" style="width:6em" value="${stateName}" readonly />
           ${
-            r.icon.startsWith("http") || r.icon.startsWith("data:image")
-              ? `<img src="${r.icon}" data-tip="Regiment's emblem" style="width:1.2em; height:1.2em; vertical-align: middle;">`
-              : `<span data-tip="Regiment's emblem" style="width:1em">${r.icon}</span>`
+            isExternalIcon
+              ? `<img src="${regIcon}" data-tip="Regiment's emblem" style="width:1.2em; height:1.2em; vertical-align: middle;">`
+              : `<span data-tip="Regiment's emblem" style="width:1em">${regIcon}</span>`
           }
-          <input data-tip="Regiment's name" style="width:13em" value="${r.name}" readonly />
+          <input data-tip="Regiment's name" style="width:13em" value="${regName}" readonly />
           ${lineData}
           <div data-type="total" data-tip="Total military personnel (not considering crew)" style="font-weight: bold">${
             r.a
@@ -142,7 +147,7 @@ function overviewRegiments(state) {
         cache = [];
 
       const total = function (type) {
-        if (cache[type]) cache[type];
+        if (cache[type]) return cache[type]; // SettlementForge fork patch: was a no-op expression statement (dead memo)
         cache[type] = d3.sum(array.map(el => +el.dataset[type]));
         return cache[type];
       };

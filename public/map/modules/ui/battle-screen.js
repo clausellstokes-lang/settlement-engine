@@ -132,7 +132,8 @@ class Battle {
     for (const u of options.military) {
       const label = capitalize(u.name.replace(/_/g, " "));
       const isExternal = u.icon.startsWith("http") || u.icon.startsWith("data:image");
-      const iconHTML = isExternal ? `<img src="${u.icon}" width="15" height="15">` : u.icon;
+      const safeIcon = escapeHtml(u.icon); // SettlementForge fork patch: escape untrusted unit icon → innerHTML
+      const iconHTML = isExternal ? `<img src="${safeIcon}" width="15" height="15">` : safeIcon;
       headers += `<th data-tip="${label}">${iconHTML}</th>`;
     }
 
@@ -149,19 +150,23 @@ class Battle {
     const color = state.color[0] === "#" ? state.color : "#999";
 
     const isExternal = regiment.icon.startsWith("http") || regiment.icon.startsWith("data:image");
+    // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — escape before interpolation.
+    const safeIcon = escapeHtml(regiment.icon);
+    const safeColor = escapeHtml(color);
+    const safeRegName = escapeHtml(regiment.name);
+    const safeStateFullName = escapeHtml(state.fullName);
     const iconHtml = isExternal
-      ? `<image href="${regiment.icon}" x="0.1em" y="0.1em" width="1.2em" height="1.2em"></image>`
-      : `<text x="50%" y="1em" style="text-anchor: middle">${regiment.icon}</text>`;
+      ? `<image href="${safeIcon}" x="0.1em" y="0.1em" width="1.2em" height="1.2em"></image>`
+      : `<text x="50%" y="1em" style="text-anchor: middle">${safeIcon}</text>`;
     const icon = `<svg width="1.4em" height="1.4em" style="margin-bottom: -.6em; stroke: #333">
-      <rect x="0" y="0" width="100%" height="100%" fill="${color}"></rect>${iconHtml}</svg>`;
+      <rect x="0" y="0" width="100%" height="100%" fill="${safeColor}"></rect>${iconHtml}</svg>`;
     const body = `<tbody id="battle${state.i}-${regiment.i}">`;
 
-    let initial = `<tr class="battleInitial"><td>${icon}</td><td class="regiment" data-tip="${
-      regiment.name
-    }">${regiment.name.slice(0, 24)}</td>`;
-    let casualties = `<tr class="battleCasualties"><td></td><td data-tip="${state.fullName}">${state.fullName.slice(
-      0,
-      26
+    let initial = `<tr class="battleInitial"><td>${icon}</td><td class="regiment" data-tip="${safeRegName}">${escapeHtml(
+      regiment.name.slice(0, 24)
+    )}</td>`;
+    let casualties = `<tr class="battleCasualties"><td></td><td data-tip="${safeStateFullName}">${escapeHtml(
+      state.fullName.slice(0, 26)
     )}</td>`;
     let survivors = `<tr class="battleSurvivors"><td></td><td data-tip="Supply line length, affects morale">Distance to base: ${distance} ${distanceUnitInput.value}</td>`;
 
@@ -204,16 +209,15 @@ class Battle {
         const s = pack.states[r.state],
           added = isAdded(r),
           dist = added ? "0 " + distanceUnitInput.value : distance(r);
-        return `<div ${added ? "class='inactive'" : ""} data-s=${s.i} data-i=${r.i} data-state=${
-          s.name
-        } data-regiment=${r.name} 
-        data-total=${r.a} data-distance=${dist} data-tip="Click to select regiment">
-        <svg width=".9em" height=".9em" style="margin-bottom:-1px; stroke: #333"><rect x="0" y="0" width="100%" height="100%" fill="${
-          s.color
-        }" ></svg>
-        <div style="width:6em">${s.name.slice(0, 11)}</div>
-        <div style="width:1.2em">${r.icon}</div>
-        <div style="width:13em">${r.name.slice(0, 24)}</div>
+        // SettlementForge fork patch: untrusted loaded-.map strings → innerHTML — quote + escape.
+        // data-state/data-regiment were UNQUOTED, so a name with a space could inject an attribute
+        // (an event handler) that escapeHtml alone would not neutralize; quote them as well.
+        return `<div ${added ? "class='inactive'" : ""} data-s=${s.i} data-i=${r.i} data-state="${escapeHtml(s.name)}" data-regiment="${escapeHtml(r.name)}"
+        data-total=${r.a} data-distance="${escapeHtml(dist)}" data-tip="Click to select regiment">
+        <svg width=".9em" height=".9em" style="margin-bottom:-1px; stroke: #333"><rect x="0" y="0" width="100%" height="100%" fill="${escapeHtml(s.color)}" ></svg>
+        <div style="width:6em">${escapeHtml(s.name.slice(0, 11))}</div>
+        <div style="width:1.2em">${escapeHtml(r.icon)}</div>
+        <div style="width:13em">${escapeHtml(r.name.slice(0, 24))}</div>
         <div style="width:4em">${r.a}</div>
         <div style="width:4em">${dist}</div>
       </div>`;

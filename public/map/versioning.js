@@ -94,9 +94,11 @@ function parseMapVersion(version) {
   let [major, minor, patch] = version.split(".");
 
   if (patch === undefined) {
-    // e.g. 1.732
-    minor = minor.slice(0, 2);
+    // SettlementForge fork patch: legacy 2-part format, e.g. "1.732" → major 1, minor 73, patch 2.
+    // The original truncated minor to 2 chars FIRST and then sliced(2) that same 2-char string, always
+    // yielding "" (patch silently 0). Derive patch from the full minor before truncating it.
     patch = minor.slice(2);
+    minor = minor.slice(0, 2);
   }
 
   // e.g. 0.7b
