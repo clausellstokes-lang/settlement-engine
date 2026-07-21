@@ -87,6 +87,33 @@ mount in SettlementMapPane (598/600). Gate: townKernelOpBudget under 2200; the E
 aiGrounding.js untouched). Checkpoint: **THE PICTURESQUE GATE — all five surfaces from real seeds
 under the owner's eyes; green gates never certify beauty.**
 
+## THE ADAPTIVE FIDELITY GOVERNOR (owner order 2026-07-21 — continuous degrade to a usable floor)
+A runtime quality controller in the LIVE VIEW ONLY (outside the determinism perimeter, behind the
+one-way import wall) — it NEVER touches geometry, goldens, the plate export, or the GLB (those are
+offline/deterministic and always render at full fidelity). So it is PROMISE-safe by construction:
+same seed → same mesh; the governor only decides how much of that mesh the local GPU draws right
+now, exactly like adaptive quality in any 3D game. Two users on one seed see the identical building;
+the weaker device shows a lower live-LOD. Design:
+- **Metric:** a rolling EMA of frame time (rAF delta; EXT_disjoint_timer_query GPU time where
+  available) + draw-call count (the M1's first-binding limit). HIGH watermark (over budget → degrade)
+  and LOW watermark (comfortably under → recover) with a dead-band between = hysteresis; degrade fast,
+  recover slow (asymmetric step, N-frames-over vs M-frames-under, M>N) so it never oscillates/pops.
+- **Control:** one continuous `qualityLevel ∈ [FLOOR, 1.0]`, adjusted incrementally per window.
+- **The degradation ladder (best-visual-value-retained-first, engaged continuously as quality drops):**
+  (1) dynamic render-resolution scale 1.0→~0.6 (cheapest big win); (2) shadow-map res → off;
+  (3) GLOBAL LOD BIAS — push the static distance/significance thresholds inward so more buildings
+  drop signature→commons→glyph (the biggest lever, maps continuously); (4) the crease ink-line pass
+  → off; (5) instance/detail cull distance shrinks; (6) FIDELITY FLOOR = massing-silhouettes-only 3D.
+- **Two floors, always usable:** the fidelity floor is massing-only 3D; if even that can't hold the
+  frame-rate floor, the viewer auto-switches to the deterministic 2D bird's-eye projection (K-5's
+  guaranteed-renders fallback) — the map stays legible and navigable, never blank, never a slideshow.
+- **User override:** an auto/high/medium/low cap (auto default); the governor treats a manual cap as
+  its ceiling.
+- Lands as the viewer's controller in K-5; K-1 productionizes the viewer with the qualityLevel HOOK
+  (a single scalar the LOD selector + passes read) so K-5 wires the governor without touching K-1's
+  contract. This is what makes the measured M1 ceiling a SHIP-able floor on any device or heavier
+  scene: above the M1 it runs full; below it, it degrades gracefully to usable rather than stuttering.
+
 ## THE STANDING SPINE (lands with K-1, binds every wave; each extends a named enforcer)
 meshBudget (E-F/townMapOpBudget: per-kind×tier tri/vertex/draw ceilings, counts not ms) ·
 meshGolden (k0Determinism: double-build byte identity + SHA-256 exemplar hashes + GLB/plate goldens) ·
@@ -96,7 +123,12 @@ contract + single-lazy-parent pin for the +42 B shared-chunk wall) · meshManifo
 zero NaN) · purity + the view wall (transcendental ratchet 0 in arch/; the view lives OUTSIDE the
 determinism perimeter behind a one-way import scan — camera trig legal there, view is non-golden) ·
 dormancy pin (E-C) · permutation-invariance · E-A plants per wave isolation-proven + version-axis
-bumps write their doc-freshness updates in-wave · worker-seam build (Float32Array transferables).
+bumps write their doc-freshness updates in-wave · worker-seam build (Float32Array transferables) ·
+**adaptiveGovernor.test.js** — the governor lives in the non-golden view (import-wall pin: it reads
+no golden, writes no model state); monotone-degrade property (quality only drops while over-budget,
+only rises while under); the FLOOR is always reachable and always renders (never blank); hysteresis
+never oscillates on a synthetic load ramp; and the governor's presence is byte-neutral to every
+deterministic surface (geometry/plate/GLB unchanged at any qualityLevel).
 
 ## STAFFING (model split): Opus builds each wave, Fable validates + folds, owner taste-checks
 rendered output. K-2 fans out to parallel Opus lanes (3-4 kinds each) after cathedral-first proves
