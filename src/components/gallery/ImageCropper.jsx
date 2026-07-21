@@ -15,6 +15,7 @@ import { RotateCcw, Check, X } from 'lucide-react';
 import {
   clampOffset, centeredOffset, cropRectFromTransform, outputSize, } from './cropGeometry.js';
 import { BORDER2, CARD_ALT, GOLD, MUTED, RED, SP, FS, sans } from '../theme.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -132,15 +133,15 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
       canvas.width = out.w;
       canvas.height = out.h;
       const ctx = canvas.getContext('2d');
-      if (!ctx) { setError('Could not prepare the image for cropping.'); return; }
+      if (!ctx) { setError(t('errors.cropPrepFail')); return; }
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, rect.sx, rect.sy, rect.sWidth, rect.sHeight, 0, 0, out.w, out.h);
       canvas.toBlob((blob) => {
         if (blob) onCommit?.(blob);
-        else setError('Could not export the cropped image. The source may not allow cross-origin use.');
+        else setError(t('errors.cropExportFail'));
       }, 'image/jpeg', 0.85);
     } catch {
-      setError('Could not export the cropped image. The source may not allow cross-origin use.');
+      setError(t('errors.cropExportFail'));
     }
   };
 
@@ -177,7 +178,7 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           // isn't tainted on commit. Omitted for blob:/data: (same-origin).
           {...(needsCrossOrigin(src) ? { crossOrigin: 'anonymous' } : {})}
           onLoad={onImgLoad}
-          onError={() => setError('Could not load the image.')}
+          onError={() => setError(t('errors.imageLoadFail'))}
           style={{
             position: 'absolute',
             left: 0,

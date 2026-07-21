@@ -42,7 +42,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // SB5 (2026-07-21): GalleryReportDialog, ExportDraftButton and GalleryHubPage
 // migrated onto t('errors.reportSendFail'/'pdfExportFail'/'signInToVote' + the
 // dynamic-fallback siblings) and struck from the baseline. Budget 51 → 48.
-const ERROR_LITERAL_BUDGET = 48;
+// T3 (2026-07-21): the burn-down closed. The last 17 files (48 occurrences —
+// GenerateWizard/OutputContainer/SettlementDetail/SettlementsPanel/ShareToGallery/
+// WorldMap/AccountDataPrivacy/AccountSeatTransfer/AccountSecurity/AuthPanel/
+// ImageCropper/SaveToLibraryButton/SimulationRulesDialog/WorldPulsePanel/NotesTab/
+// VersionsTab/useCampaignAdvance) routed onto t('errors.*') / t('auth.error.*'),
+// with the four empty-clears converted to setX(null). Baseline emptied, BUDGET
+// 48 → 0. The ratchet now holds at zero: any new raw error literal reds it.
+const ERROR_LITERAL_BUDGET = 0;
 
 // Detector idioms (see header). File-test = "does any idiom appear"; occurrence
 // count = total matches. Fresh RegExp per pass so the /g lastIndex never leaks.

@@ -242,14 +242,18 @@ export default function ShareToGallery({
 
   async function handlePublish() {
     if (!canonReady) {
-      setError(`${t('canon.startWorldClock')} before sharing this dossier publicly.`);
+      setError(t('errors.shareCanonFirst', { action: t('canon.startWorldClock') }));
       return;
     }
     // Trust gate (feature doc §1b): never publish a dossier whose facts
     // contradict across surfaces — public content must be internally consistent.
     const { blocking } = validateDossier(settlement);
     if (blocking.length > 0) {
-      setError(`Can't publish yet — ${blocking.length} consistency issue${blocking.length === 1 ? '' : 's'} to resolve: ${blocking.map(b => b.description).join(' · ')}`);
+      setError(t('errors.publishBlocked', {
+        count: blocking.length,
+        issues: blocking.length === 1 ? 'issue' : 'issues',
+        details: blocking.map(b => b.description).join(' · '),
+      }));
       return;
     }
     setBusy(true); setError(null);

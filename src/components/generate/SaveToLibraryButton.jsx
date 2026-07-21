@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { saves as savesService } from '../../lib/saves.js';
+import { t } from '../../copy/index.js';
 import { writeDraft, clearDraft } from '../../lib/pendingSaveDraft.js';
 import { useStore } from '../../store';
 import { sans, FS, SP, swatch } from '../theme.js';
@@ -66,7 +67,7 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
         .catch(() => { /* never block the save */ });
     } catch (e) {
       console.error('Save failed:', e);
-      setSaveError(`Failed to save: ${e.message || e}`);
+      setSaveError(t('errors.saveFailed'));
     } finally {
       setSaving(false);
     }

@@ -24,6 +24,7 @@
 import { useState } from 'react';
 import { Download, AlertTriangle, Upload } from 'lucide-react';
 import { downloadAccountExport, requestAccountDeletion } from '../../lib/accountData.js';
+import { t } from '../../copy/index.js';
 import { MAX_IMPORT_BYTES } from '../../lib/accountImport.js';
 import { activeSaveCount } from '../../lib/saveAccess.js';
 import { useStore } from '../../store/index.js';
@@ -122,7 +123,7 @@ export default function AccountDataPrivacySection({
 
     if (file.size > MAX_IMPORT_BYTES) {
       setImportStage('result');
-      setImportError('That file is too large to be a SettlementForge export.');
+      setImportError(t('errors.importTooLarge'));
       return;
     }
 
@@ -131,7 +132,7 @@ export default function AccountDataPrivacySection({
       text = await file.text();
     } catch {
       setImportStage('result');
-      setImportError("That file couldn't be read. Try downloading a fresh export.");
+      setImportError(t('errors.importUnreadable'));
       return;
     }
 
@@ -199,7 +200,7 @@ export default function AccountDataPrivacySection({
 
   const handleRequestDeletion = async () => {
     if (deletePhrase.trim().toUpperCase() !== DELETE_PHRASE) {
-      setDeleteError(`Type ${DELETE_PHRASE} to confirm.`);
+      setDeleteError(t('errors.deleteConfirmPhrase', { phrase: DELETE_PHRASE }));
       return;
     }
     setDeleteBusy(true);

@@ -30,7 +30,7 @@ describe('useCampaignAdvance — typed refusals speak', () => {
     await act(async () => { await hook.result.current.handleAdvanceCampaignTime('c1'); });
     expect(setActiveCampaign).toHaveBeenCalledWith('c1');
     expect(onNavigate).toHaveBeenCalledWith(ADVANCE_TIME_NAV_TARGET.view);
-    expect(hook.result.current.advanceError).toBe('');
+    expect(hook.result.current.advanceError).toBe(null);
   });
 
   test('the Library twin ADVANCE_REFUSAL_TEXT stays identical to the map source ADVANCE_ERROR_TEXT', () => {
@@ -50,7 +50,7 @@ describe('useCampaignAdvance — typed refusals speak', () => {
   test('advance_paused is a navigation (park a decision), not an error', async () => {
     const { hook, setActiveCampaign, onNavigate } = setup({ ok: false, reason: 'advance_paused' });
     await act(async () => { await hook.result.current.handleAdvanceCampaignTime('c1'); });
-    expect(hook.result.current.advanceError).toBe('');
+    expect(hook.result.current.advanceError).toBe(null);
     expect(setActiveCampaign).toHaveBeenCalledWith('c1');
     expect(onNavigate).toHaveBeenCalledWith(ADVANCE_TIME_NAV_TARGET.view);
   });

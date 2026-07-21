@@ -31,12 +31,8 @@
     "em": 1,
     "bang": 0
   },
-  "src/components/SettlementsPanel.jsx": {
-    "em": 1,
-    "bang": 0
-  },
   "src/components/ShareToGallery.jsx": {
-    "em": 3,
+    "em": 2,
     "bang": 0
   },
   "src/components/SingleDossierSuccessPage.jsx": {
@@ -304,7 +300,7 @@
     "bang": 0
   },
   "src/components/new/tabs/NotesTab.jsx": {
-    "em": 2,
+    "em": 1,
     "bang": 0
   },
   "src/components/new/tabs/OverviewTab.jsx": {
