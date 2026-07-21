@@ -1,6 +1,11 @@
 // Filter sidebar for the gallery MAPS tab. Mirrors GallerySidebar's structure
-// (SidebarSection + chip rows + ToggleRow + Clear) but over map facets: kind,
-// backdrop, a has-settlements toggle, and the dynamic tag vocabulary.
+// (SidebarSection + chip rows + ToggleRow + Clear) but over map facets:
+// backdrop, the importable toggle, and the dynamic tag vocabulary.
+//
+// The kind facet and the has-settlements toggle were struck when GALLERY-2
+// phase 2 split campaign shares onto their own Campaigns tab: this tab is
+// narrowed server-side to blank maps (kind=['map']), which carry no
+// settlements, so both facets could only ever return the full set or nothing.
 //
 // Icons are OFF here — the gallery is not the Realm map surface, so chips are
 // text/glyph only (gated Button primitives, variant gold/secondary). Theme
@@ -12,12 +17,8 @@ import {
   CARD_ALT, FS, GOLD, GOLD_TXT, INK, SP, sans } from '../theme.js';
 import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
-import {
-  activeMapFilterCount,
-  BACKDROP_OPTIONS,
-  human,
-  KIND_OPTIONS,
-} from './galleryMapsUtils.js';
+import { activeMapFilterCount, BACKDROP_OPTIONS } from './galleryMapsFilters.js';
+import { human } from './galleryUtils.js';
 
 function SidebarSection({ title, count = 0, children, style }) {
   return (
@@ -131,20 +132,8 @@ function ToggleRow({ checked, label, onChange }) {
 function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool }) {
   return (
     <>
-      <SidebarSection title="Kind" count={filters.kind?.length || 0}>
-        <PairChips options={KIND_OPTIONS} value={filters.kind} onToggle={option => onToggleArray('kind', option)} />
-      </SidebarSection>
-
       <SidebarSection title="Backdrop" count={filters.backdrop?.length || 0}>
         <PairChips options={BACKDROP_OPTIONS} value={filters.backdrop} onToggle={option => onToggleArray('backdrop', option)} />
-      </SidebarSection>
-
-      <SidebarSection title="Settlements">
-        <ToggleRow
-          checked={!!filters.hasSettlements}
-          label="Has settlements"
-          onChange={value => onToggleBool('hasSettlements', value)}
-        />
       </SidebarSection>
 
       <SidebarSection title="Import">

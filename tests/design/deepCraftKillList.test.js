@@ -209,10 +209,18 @@ const CEILINGS = Object.freeze({
   // trust pages — landed +3 borderRadius (101→104) and +3 tintedCallouts (164→167).
   // Same "fold re-pins to measured" discipline; owner-vetoable if any of the new
   // instances should instead be de-rounded to the rule-framed plate idiom.
-  borderRadius: 104,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (T5, the orphaned-components ruling): borderRadius 104→103,
+  // tintedCallouts 167→165. The owner ruled two of the three orphaned components
+  // dead: MemberSettlementsList (its MapGalleryDetail consumer page was removed;
+  // −1 radius) and SimulationRulesGateToggle (the dialog's inline Toggle serves
+  // the 8 generic switches; the extracted gate card's subsystem-gate use case
+  // left the dialog — −2 tinted, its GOLD_BG import + fill). The third orphan,
+  // GalleryMapsSidebar, was WIRED into the maps tab instead (no count change —
+  // its facets were already on the census).
+  borderRadius: 103,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 167,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 165,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

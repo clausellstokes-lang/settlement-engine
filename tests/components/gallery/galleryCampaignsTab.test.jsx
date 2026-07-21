@@ -91,8 +91,11 @@ describe('the Campaigns third tab', () => {
     render(<GalleryPage onNavigate={vi.fn()} />);
     fireEvent.click(screen.getByText('Maps'));
     expect(await screen.findByText(/No shared maps yet/i)).toBeTruthy();
+    // The sidebar facets (backdrop / importable / tags) ride along in their
+    // empty shape — normalizeMapFilters drops them, so the wire payload stays
+    // exactly the kind narrowing. The pin binds kind, not the empty facets.
     expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenCalledWith(
-      expect.objectContaining({ filters: { kind: ['map'] } }),
+      expect.objectContaining({ filters: expect.objectContaining({ kind: ['map'] }) }),
     );
   });
 

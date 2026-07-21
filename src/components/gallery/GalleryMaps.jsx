@@ -6,14 +6,22 @@
  * (backdrop thumbnail for image maps), and imports a blank-canvas map into a NEW
  * premium campaign via the importGalleryMap store action. Viewing is free;
  * importing is premium (it creates a campaign).
+ *
+ * Filtering runs server-side (list_gallery_maps p_filters, migration 090):
+ * the GalleryMapsSidebar facets (backdrop / importable / tags) feed straight
+ * into the fetch, mirroring the settlements tab's sidebar-plus-grid layout.
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../../store';
+import { t } from '../../copy/index.js';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
+import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters } from './galleryMapsFilters.js';
+import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
@@ -31,6 +39,14 @@ export default function GalleryMaps({ onNavigate }) {
   const [viewingSlug, setViewingSlug] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  // Sidebar facet state (server-side narrowing). kind stays out of the UI:
+  // this tab is pinned to blank maps at the fetch (campaign shares live on
+  // the Campaigns tab), so the sidebar never offers a kind chip.
+  const [filters, setFilters] = useState(emptyMapFilters);
+  // The tag vocabulary comes from the UNFILTERED batch and holds sticky:
+  // deriving it from a filtered batch would collapse the chips to the very
+  // tags already selected.
+  const [tagVocabulary, setTagVocabulary] = useState([]);
 
   useEffect(() => {
     if (!viewingSlug) { setDetail(null); return; }
@@ -48,13 +64,34 @@ export default function GalleryMaps({ onNavigate }) {
     setLoading(true); setError(null);
     // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
     // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
-    // honors the kind facet (normalizeMapFilters → p_filters).
-    fetchGalleryMaps({ page: 0, pageSize: 36, filters: { kind: ['map'] } })
-      .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
+    // honors every facet (normalizeMapFilters → p_filters); kind is pinned
+    // here over whatever the sidebar narrows.
+    const unfiltered = activeMapFilterCount(filters) === 0;
+    fetchGalleryMaps({ page: 0, pageSize: 36, filters: { ...filters, kind: ['map'] } })
+      .then((r) => {
+        if (ignore) return;
+        const list = Array.isArray(r?.items) ? r.items : [];
+        setItems(list);
+        if (unfiltered) setTagVocabulary(deriveTagVocabulary(list));
+      })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
+  }, [filters]);
+
+  const toggleArrayFilter = useCallback((key, value) => {
+    setFilters((prev) => {
+      const arr = Array.isArray(prev[key]) ? prev[key] : [];
+      const next = arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
+      return { ...prev, [key]: next };
+    });
   }, []);
+
+  const toggleBoolFilter = useCallback((key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: !!value }));
+  }, []);
+
+  const clearFilters = useCallback(() => { setFilters(emptyMapFilters()); }, []);
 
   const handleImport = useCallback(async (slug, kind) => {
     if (!isPremium) { setNotice({ kind: 'err', text: 'Importing maps is a premium feature.' }); return; }
@@ -73,8 +110,11 @@ export default function GalleryMaps({ onNavigate }) {
     }
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
+  const isFiltered = activeMapFilterCount(filters) > 0;
+
   return (
     <div style={{ fontFamily: sans }}>
+      <style>{GALLERY_RESPONSIVE_CSS}</style>
       {notice && (
         <div style={{
           margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, fontSize: FS.sm,
@@ -130,16 +170,33 @@ export default function GalleryMaps({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Unfurling the shared maps…</p>}
-      {!viewingSlug && error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
-      {!viewingSlug && !loading && !error && items.length === 0 && (
-        <EmptyState
-          heading="No shared maps yet."
-          body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
-        />
+      {!viewingSlug && (
+      <div className="gallery-main-layout" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
+      <GalleryMapsSidebar
+        filters={filters}
+        tagVocabulary={tagVocabulary}
+        onToggleArray={toggleArrayFilter}
+        onToggleBool={toggleBoolFilter}
+        onClear={clearFilters}
+      />
+      <main style={{ minWidth: 0 }}>
+      {loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Unfurling the shared maps…</p>}
+      {error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
+      {!loading && !error && items.length === 0 && (
+        isFiltered ? (
+          <EmptyState
+            heading="No maps match those filters."
+            body="Loosen a facet, or clear them all to see every shared map."
+            action={{ label: t('gallery.clearFilters'), onClick: clearFilters, variant: 'secondary' }}
+          />
+        ) : (
+          <EmptyState
+            heading="No shared maps yet."
+            body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
+          />
+        )
       )}
 
-      {!viewingSlug && (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: SP.md }}>
         {items.map((m) => (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -192,6 +249,8 @@ export default function GalleryMaps({ onNavigate }) {
             </div>
           </div>
         ))}
+      </div>
+      </main>
       </div>
       )}
     </div>

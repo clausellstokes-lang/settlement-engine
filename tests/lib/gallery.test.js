@@ -41,7 +41,7 @@ import {
   fetchGalleryReports, resolveGalleryReport,
   fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
-import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsUtils.js';
+import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
 
 afterEach(() => vi.clearAllMocks());
 
