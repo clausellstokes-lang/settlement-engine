@@ -16,6 +16,17 @@ WebGL/true perspective — GPU float variance breaks same-seed-same-image (THE
 PROMISE) and the eager budget. Massing replaces glyph STAMPS in every dimensional
 view; glyphs remain legitimate iconography in flat views.
 
+**THE INSTITUTION SILHOUETTE LAW (owner, 2026-07-21): a cathedral must look
+like a cathedral.** Massing is COMPOSITE, never single-extrusion, for every
+named glyph kind: cathedral = nave + transept + tower + spire (cruciform read);
+keep = mass + corner towers; mill = house + wheelhouse + wheel; smithy = block +
+chimney; market hall = long open-sided mass. The glyph library's named-landmark
+vocabulary IS the silhouette taxonomy, lifted from flat to 3D; category defaults
+get generic house massing. Composite forms construct WITHIN the building's
+allotted footprint. The silhouette totality walker: every named kind maps to a
+composite form or the explicit generic default — unmapped REDS. Acceptance =
+recognition unlabeled at a glance (the picturesque gate's first question).
+
 ## M-1..M-4 · THE FOUR VIEWS
 - **M-1 VTT**: top-down plan, configurable grid overlay, high-contrast lens,
   token-legible walls/openings, export-ready. Cosmetics MUTED by design.
