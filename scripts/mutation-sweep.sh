@@ -37,6 +37,7 @@ MUTATED_FILES=(
   src/domain/events/undoEvent.js
   src/lib/saves.js
   eslint.config.js
+  supabase/config.toml
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -142,13 +143,21 @@ check_caught "determinism/eslint last-wins shadow block" eslint.config.js "npx v
 #     runIf(false) with a guaranteed-fail test was EXECUTED to exit 0).
 check_caught_missing "security/runIf migration renumber" supabase/migrations/087_review_money_hardening.sql "npx vitest run tests/security/migrationRefIntegrity.meta.test.js"
 
+# 13. Security invariant — a LOOSENED verify_jwt platform gate (C4). Flip an
+#     authenticated surface's config.toml pin true→false: the deploy source of
+#     truth now says "no JWT" for a money/account endpoint. The census must red —
+#     proving the security spine (not just its existence) catches a weakening,
+#     the gap the sweep otherwise leaves against RLS/JWT/sanitizer invariants.
+perl -0pi -e "s/\[functions.account-actions\]\nverify_jwt = true/[functions.account-actions]\nverify_jwt = false/" supabase/config.toml
+check_caught "security/verify_jwt platform gate loosened" supabase/config.toml "npx vitest run tests/edgeFunctions/verifyJwtPins.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
 echo "────────────────────────────────────────────────────────"
 echo "  CAUGHT: $PASS    MISSED/BROKEN: $FAIL"
-if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ 2>/dev/null)" ]; then
-  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/
+if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml 2>/dev/null)" ]; then
+  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml
 fi
 if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
 exit "$FAIL"

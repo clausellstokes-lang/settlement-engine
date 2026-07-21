@@ -33,10 +33,19 @@ jobs:
 
       # A+ P0.4: fail the gate on a HIGH+ vulnerability in a PRODUCTION dependency
       # (e.g. the dompurify advisory behind the gallery XSS floor). Dev-only
-      # advisories (esbuild/vite dev server) are excluded via --omit=dev and tracked
-      # separately — they require a breaking major bump.
+      # advisories (esbuild/vite dev server) are excluded via --omit=dev — they
+      # require a breaking major bump and must not gate production users.
       - name: Audit production dependencies
         run: npm audit --audit-level=high --omit=dev
+
+      # C4 (bar-6): dev/build advisories are no longer tracked ONLY by hand. This
+      # standing step surfaces the FULL (dev-inclusive) HIGH+ audit on every run, so a
+      # dev-time-exploitable advisory can no longer ride green indefinitely. It is
+      # continue-on-error (NON-BLOCKING) — a dev-server advisory awaiting a breaking
+      # major bump annotates the run without failing production's gate above.
+      - name: Audit dev dependencies (non-blocking visibility)
+        run: npm audit --audit-level=high
+        continue-on-error: true
 
       # Fail fast on data corruption: duplicate object keys silently
       # overwrite earlier definitions in JS, so a regression here would
