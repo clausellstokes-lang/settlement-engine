@@ -519,7 +519,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 only — content is fully in the DOM at t=0, instant under
                 reduced-motion, and it replays on any dossier re-mount, e.g.
                 returning via View Settlement — the document is re-delivered). */}
-            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', willChange: 'transform' }}>
               <OutputContainer hideHeader />
             </div>
           </Suspense>

@@ -41,12 +41,13 @@ export function WizardOutputToolbar({
       // a height-collapsed parent, or it would lose its sticky containing block
       // and scroll away with the dossier.
       maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
-      // Pin below the sticky app header. On mobile the header is slim
-      // (CHROME.headerMobile) and also sticky at top:0; pinning this bar at the
-      // header's height stacks the two cleanly instead of letting the toolbar
-      // slide UNDER the header. zIndex 40 keeps it above the dossier but below
-      // the header (z:50), so the header always wins the overlap.
-      position: 'sticky', top: isMobile ? CHROME.headerMobile : 60, zIndex: 40,
+      // Pin below the sticky app header so bar and dossier sit flush on BOTH
+      // breakpoints. Both offsets are now CHROME tokens (headerMobile / headerDesktop)
+      // — the desktop side was a hardcoded `60` literal that could silently drift from
+      // the real header height; the tokens keep the toolbar pinned to the header's
+      // exact height. zIndex 40 keeps it above the dossier but below the header
+      // (z:50), so the header always wins the overlap.
+      position: 'sticky', top: isMobile ? CHROME.headerMobile : CHROME.headerDesktop, zIndex: 40,
     }}>
       {/* Back is a subordinate nav/reset that discards the just-earned draft —
           it must not out-shout the dossier or Save. Demoted to the same
