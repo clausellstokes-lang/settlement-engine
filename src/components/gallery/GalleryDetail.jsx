@@ -163,6 +163,8 @@ export default function GalleryDetail({
               saveId={ownedSave.id}
               isPublic={ownedSave.is_public}
               publicSlug={ownedSave.public_slug}
+              visibility={ownedSave.visibility}
+              unlistedSlug={ownedSave.unlisted_slug}
               campaignState={ownedSave.campaignState}
               settlement={ownedSave.settlement}
               galleryDescription={ownedSave.gallery_description}

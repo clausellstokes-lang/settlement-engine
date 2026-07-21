@@ -78,6 +78,8 @@ export default function DossierActionBand({
           saveId={saveId}
           isPublic={liveSaveEntry?.is_public}
           publicSlug={liveSaveEntry?.public_slug}
+          visibility={liveSaveEntry?.visibility}
+          unlistedSlug={liveSaveEntry?.unlisted_slug}
           settlement={settlement}
           galleryDescription={liveSaveEntry?.gallery_description}
           galleryTitle={liveSaveEntry?.gallery_title}
