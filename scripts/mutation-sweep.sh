@@ -292,6 +292,13 @@ check_caught_planted "ai-wall/new model-calling surface unwalled" \
 perl -i -pe "s/headline: String\(e\.headline \|\| 'A matter of the realm'\),/headline: String(e.headline || 'A matter of the realm').slice(0, -1),/" src/domain/display/chroniclersLetter.js
 check_caught "narrative/letter headline drift breaks beat parity" src/domain/display/chroniclersLetter.js "npx vitest run tests/simulation/narrativeParity.test.js"
 
+# 27. Discourse lexicon totality (tranche 3c) — a known relation type loses its
+#     connective family: drop reframe's RELATION_FOR_TYPE mapping so the live
+#     vocabulary is no longer fully covered. The lexicon totality walker must red
+#     (a known type with no family = deposit-and-consume).
+perl -i -pe "s/^  reframe: 'adversative',\n//" src/domain/display/discourseKernel.js
+check_caught "discourse/lexicon relation-type coverage gap" src/domain/display/discourseKernel.js "npx vitest run tests/lint/discourseLexiconCoverage.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

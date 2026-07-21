@@ -49,3 +49,49 @@ describe('CauseWalkPanel', () => {
     expect(container.querySelector('[data-redacted="true"]')).toBeTruthy();
   });
 });
+
+// TRANCHE 3c ENFORCER (e) — DORMANCY BYTE-IDENTITY + the lit discourse render. The
+// virtual `discourseProseEnabled` flag is absent from every preset; without it the
+// panel renders the EXACT current path (the byte-identity is additionally proven at
+// the gate by a temp-worktree render diff against the base commit). With it, the
+// disconnected list becomes ONE connected passage, every clause still tracing to a
+// receipt, and the covert redaction never leaks even in prose.
+describe('CauseWalkPanel — 3c discourse dormancy', () => {
+  it('flag ABSENT ⇒ the current rendering path (no prose node; the receipt list stands)', () => {
+    render(<CauseWalkPanel worldState={worldState} rootId="C" seesSecrets />);
+    expect(screen.queryByTestId('cause-walk-prose')).toBeNull();
+    expect(screen.getAllByTestId('cause-walk-hop').length).toBe(2);
+    expect(screen.getByText('B happened')).toBeTruthy();
+  });
+
+  it('flag FALSE ⇒ still the current path (defensive read, byte-neutral off)', () => {
+    const ws = { ...worldState, simulationRules: { discourseProseEnabled: false } };
+    render(<CauseWalkPanel worldState={ws} rootId="C" seesSecrets />);
+    expect(screen.queryByTestId('cause-walk-prose')).toBeNull();
+    expect(screen.getAllByTestId('cause-walk-hop').length).toBe(2);
+  });
+
+  it('flag LIT ⇒ one connected passage; the list is gone, the receipts survive verbatim', () => {
+    const ws = { ...worldState, rngSeed: 'seed-x', simulationRules: { discourseProseEnabled: true } };
+    render(<CauseWalkPanel worldState={ws} rootId="C" seesSecrets />);
+    const prose = screen.getByTestId('cause-walk-prose');
+    expect(screen.queryAllByTestId('cause-walk-hop').length).toBe(0);
+    const text = prose.textContent || '';
+    expect(text).toContain('Your decree');
+    expect(text).toContain('B happened');
+    expect(text).toContain('C happened');
+    expect(text).not.toMatch(/tick \d/);
+  });
+
+  it('flag LIT ⇒ a covert hop is still redacted verbatim, never leaked into the prose', () => {
+    const covert = [outcomes[0], { ...outcomes[1], metadata: { covert: true } }, outcomes[2]];
+    const ws = {
+      rngSeed: 'seed-x', pulseHistory: [{ tick: 300, selectedOutcomes: covert, impactDigest: [] }],
+      spatialLedgers: { provenance }, simulationRules: { discourseProseEnabled: true },
+    };
+    render(<CauseWalkPanel worldState={ws} rootId="C" seesSecrets={false} />);
+    const text = screen.getByTestId('cause-walk-prose').textContent || '';
+    expect(text).not.toContain('B happened');
+    expect(text).toContain('a cause the ledger keeps hidden');
+  });
+});
