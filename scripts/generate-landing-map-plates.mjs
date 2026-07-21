@@ -39,7 +39,7 @@
 
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { generateSettlementPipeline } from '../src/generators/generateSettlementPipeline.js';
 import {
   buildTownMapModel, buildTownMapDrawList, drawListToSvg, hasDrawableMap, resolveTownMapStyle,
@@ -64,7 +64,7 @@ const CROP_MIN_SIDE = 460;
 const SHEET = 1000; // the renderer's full sheet (VIEW)
 
 /** Replay the committed fixture's forge inputs deterministically. */
-function replayFixtureTown() {
+export function replayFixtureTown() {
   const cfg = {
     ...fixture.forge.config,
     ...(fixture.forge.randomSliderMode === true ? { _randomizePriorities: true } : {}),
@@ -73,7 +73,7 @@ function replayFixtureTown() {
 }
 
 /** Union bounds of the model's CONTENT (districts + buildings + water). */
-function contentBounds(model) {
+export function contentBounds(model) {
   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   const eat = (x, y) => {
     if (Number.isFinite(x) && Number.isFinite(y)) {
@@ -97,7 +97,7 @@ function contentBounds(model) {
 }
 
 /** The cartographer's crop: pad, square, floor, clamp to the sheet. */
-function cropBox(bounds) {
+export function cropBox(bounds) {
   const w = bounds.maxX - bounds.minX;
   const h = bounds.maxY - bounds.minY;
   const side = Math.min(SHEET, Math.max(CROP_MIN_SIDE, Math.max(w, h) + 2 * CROP_PAD));
@@ -146,7 +146,7 @@ function furnitureOps(style, { x0, y0, side }) {
 }
 
 /** Render one cropped plate (content ops + crop furniture, crop viewBox). */
-function renderPlate(model, styleId, crop) {
+export function renderPlate(model, styleId, crop) {
   const resolved = resolveTownMapStyle(styleId);
   // Content only — the renderer's full-sheet furniture is re-composed for the
   // crop by furnitureOps (the grid stays for the vtt lens family; neither plate
@@ -234,4 +234,9 @@ function main() {
   }
 }
 
-main();
+// Auto-run ONLY as the entry script — so the candidate generator
+// (generate-cnocby-candidates.mjs) can import the pure helpers above WITHOUT
+// triggering an emit/check of the canonical plates.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}
