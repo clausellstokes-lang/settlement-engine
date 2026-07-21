@@ -14,17 +14,21 @@ import { useMemo } from 'react';
 import { Mail, Check, Download, Sparkles } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { composeChroniclersLetter, letterToPlainText } from '../../domain/display/chroniclersLetter.js';
+import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD_ALT, FS, GOLD, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 /** The R-17 export: a portable, house-voiced text file (the downloadBlob idiom,
- *  inlined so the panel drags no heavy export module). */
+ *  inlined so the panel drags no heavy export module). C2 (bar 18): the filename
+ *  speaks the calendar, not the engine's tick counter — "spring-of-year-2", via
+ *  the humanizer chokepoint. */
 function downloadLetter(text, tick) {
   const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
+  const when = tickCalendarLabel(tick).replace(/^the /, '').replace(/ /g, '-');
+  a.download = `chroniclers-letter-${when}.txt`;
   a.href = url;
-  a.download = `chroniclers-letter-tick-${tick}.txt`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -85,13 +89,24 @@ export default function ChroniclersLetterPanel({ campaign }) {
                 <li key={l.id} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
                   <span style={{ fontWeight: l.significance === 'major' ? 800 : 650 }}>{l.headline}</span>
                   {l.significance === 'major' && <span style={{ color: RED, fontSize: FS.micro, fontWeight: 800 }}> · of great moment</span>}
+                  {(l.repeats || 1) > 1 && <span style={{ color: MUTED, fontSize: FS.micro }}> · so noted {l.repeats} times</span>}
                   {l.summary ? <div style={{ color: BODY, fontSize: FS.micro, lineHeight: 1.4 }}>{l.summary}</div> : null}
+                  {l.recalls ? (
+                    <div style={{ color: MUTED, fontSize: FS.micro, fontStyle: 'italic', lineHeight: 1.4 }}>
+                      In this my earlier record returns, from {l.recalls.when}: {l.recalls.headline}.
+                    </div>
+                  ) : null}
                 </li>
               ))}
             </ul>
           </div>
         ))}
 
+        {letter.truncationNote ? (
+          <p data-testid="letter-truncation-note" style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic', lineHeight: 1.4 }}>
+            {letter.truncationNote}
+          </p>
+        ) : null}
         <p style={{ margin: 0, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontStyle: 'italic', borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
           {letter.closing}
         </p>

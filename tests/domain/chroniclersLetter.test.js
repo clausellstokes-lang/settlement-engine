@@ -102,3 +102,141 @@ describe('V-2 R-17 — the shareable text export', () => {
     expect(letterToPlainText(letter)).toBe(text); // deterministic
   });
 });
+
+// ── C2 (bar 18/20/97) — sections beyond the crier, dedupe, recall, cap honesty ──
+
+describe('C2 — the letter-local kind → section fallback (the sundry monoculture)', () => {
+  const mk = (id, impactKind, headline, tick = 6) => ({ id, tick, significance: 'notable', impactKind, headline });
+
+  it('routes promoted candidateType kinds to their house sections (crier untouched)', () => {
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries: [
+      mk('n1', 'npc_ladder', 'The steward rises'),
+      mk('b1', 'field_battle', 'Battle at the ford'),
+      mk('h1', 'harvest', 'The harvest comes in'),
+      mk('t1', 'tradition_change', 'An old custom bends'),
+      mk('r1', 'generosity_refusal', 'The gates stay shut'),
+    ] }, lastReadTick: 0 });
+    const byId = Object.fromEntries(l.sections.map((s) => [s.id, s.lines.map((x) => x.id)]));
+    expect(byId.courts).toEqual(['n1']);
+    expect(byId.wars).toEqual(['b1']);
+    expect(byId.trade).toEqual(['h1']);
+    expect(byId.traditions).toEqual(['t1']);
+    expect(byId.mercy).toEqual(['r1']);
+    expect(byId.sundry).toBeUndefined();
+  });
+
+  it('a truly unknown kind still falls to sundry (never dropped)', () => {
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries: [
+      mk('x1', 'utterly_unmapped_kind', 'A matter of the realm'),
+    ] }, lastReadTick: 0 });
+    expect(l.sections.map((s) => s.id)).toEqual(['sundry']);
+  });
+
+  it('classified kinds keep their crier route (precedence unchanged — the golden holds this too)', () => {
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries: [
+      mk('w1', 'conflict_pressure', 'The border burns'),
+    ] }, lastReadTick: 0 });
+    expect(l.sections.map((s) => s.id)).toEqual(['wars']);
+  });
+});
+
+describe('C2 — verbatim duplicate lines coalesce within a section', () => {
+  it('the same headline+summary collapses to one line carrying its tally', () => {
+    const entries = [1, 2, 3, 4].map((i) => ({
+      id: `d${i}`, tick: 4 + i, significance: 'notable', impactKind: 'conflict_pressure',
+      headline: 'The Archmagister may reform', summary: 'The court holds its breath.',
+    }));
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries }, lastReadTick: 0 });
+    expect(l.sections).toHaveLength(1);
+    expect(l.sections[0].lines).toHaveLength(1);
+    expect(l.sections[0].lines[0].repeats).toBe(4);
+    const text = letterToPlainText(l);
+    expect(text).toContain('(so noted 4 times)');
+    expect(text.match(/The Archmagister may reform/g)).toHaveLength(1);
+    // counts stay honest to the FEED (4 beats happened), only the rendering coalesces
+    expect(l.counts.total).toBe(4);
+  });
+
+  it('lines differing in summary do NOT coalesce', () => {
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 9, entries: [
+      { id: 'a', tick: 5, significance: 'notable', impactKind: 'conflict_pressure', headline: 'H', summary: 'one' },
+      { id: 'b', tick: 6, significance: 'notable', impactKind: 'conflict_pressure', headline: 'H', summary: 'two' },
+    ] }, lastReadTick: 0 });
+    expect(l.sections[0].lines).toHaveLength(2);
+  });
+});
+
+describe('C2 — the cross-time recall (narrate, not log)', () => {
+  it('a section lead recalls the older record it echoes (same place, same section, pre-floor)', () => {
+    const l = composeChroniclersLetter({ wizardNews: { currentTick: 60, entries: [
+      { id: 'old1', tick: 3, significance: 'major', impactKind: 'generosity_relief', headline: 'Grain reaches the starving of Ormsund', settlementIds: ['s1', 's2'] },
+      { id: 'new1', tick: 55, significance: 'major', impactKind: 'generosity_relief', headline: 'Ormsund repays its mercy', settlementIds: ['s2'] },
+    ] }, lastReadTick: 10 });
+    const mercy = l.sections.find((s) => s.id === 'mercy');
+    expect(mercy.lines[0].recalls).toEqual({ headline: 'Grain reaches the starving of Ormsund', when: 'the spring of year 1' });
+    expect(letterToPlainText(l)).toContain('In this my earlier record returns, from the spring of year 1: Grain reaches the starving of Ormsund.');
+  });
+
+  it('no shared place or no pre-floor twin ⇒ no recall field at all (byte-inert)', () => {
+    const l = composeChroniclersLetter({ wizardNews: feed, lastReadTick: 4 });
+    for (const s of l.sections) for (const line of s.lines) expect('recalls' in line).toBe(false);
+  });
+});
+
+describe('C2 — cap honesty (the letter must not claim completeness it cannot keep)', () => {
+  const bigFeed = (oldest) => ({
+    currentTick: 500,
+    entries: Array.from({ length: 240 }, (_, i) => ({
+      id: `e${i}`, tick: oldest + i, significance: 'notable', impactKind: 'conflict_pressure', headline: `Beat ${i}`,
+    })),
+  });
+
+  it('a full feed whose oldest survivor post-dates the floor is marked truncated', () => {
+    const l = composeChroniclersLetter({ wizardNews: bigFeed(200), lastReadTick: 10 });
+    expect(l.truncated).toBe(true);
+    expect(l.truncationNote).toMatch(/outran my pages/);
+    expect(l.closing).not.toContain('the whole of it');
+    expect(letterToPlainText(l)).toContain(l.truncationNote);
+  });
+
+  it('an un-truncated letter carries neither field (byte-inert; the golden holds this too)', () => {
+    const l = composeChroniclersLetter({ wizardNews: feed, lastReadTick: 4 });
+    expect('truncated' in l).toBe(false);
+    expect('truncationNote' in l).toBe(false);
+  });
+
+  it('FEED_CAP mirrors wizardNews MAX_ENTRIES (the sidecar pin)', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/domain/region/wizardNews.js', 'utf8');
+    expect(src).toMatch(/const MAX_ENTRIES = 240;/);
+    const letterSrc = readFileSync('src/domain/display/chroniclersLetter.js', 'utf8');
+    expect(letterSrc).toMatch(/const FEED_CAP = 240;/);
+  });
+});
+
+describe('C2 — KIND_SECTION drift walker (every key is a genuinely minted kind)', () => {
+  it('every mapped kind exists as a minted candidateType or a literal impactKind', async () => {
+    const { KIND_SECTION } = await import('../../src/domain/display/chroniclersLetter.js');
+    const { readFileSync, readdirSync, statSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const walk = (dir, out = []) => {
+      for (const e of readdirSync(dir)) {
+        const p = join(dir, e);
+        if (statSync(p).isDirectory()) walk(p, out);
+        else if (/\.js$/.test(e) && !/\.test\./.test(e)) out.push(p);
+      }
+      return out;
+    };
+    const minted = new Set();
+    for (const f of walk('src/domain')) {
+      const src = readFileSync(f, 'utf8');
+      for (const m of src.matchAll(/candidateType:\s*['"]([a-z][a-z0-9_]*)['"]/g)) minted.add(m[1]);
+      for (const m of src.matchAll(/impactKind:\s*['"]([a-z][a-z0-9_]*)['"]/g)) minted.add(m[1]);
+    }
+    expect(minted.size).toBeGreaterThan(50); // non-vacuous scan
+    const dead = Object.keys(KIND_SECTION).filter((k) => !minted.has(k));
+    expect(dead).toEqual([]); // a struck/renamed mint must be struck here too
+    const valid = new Set(['wars', 'courts', 'trade', 'traditions', 'mercy', 'sundry']);
+    for (const v of Object.values(KIND_SECTION)) expect(valid.has(v)).toBe(true);
+  });
+});

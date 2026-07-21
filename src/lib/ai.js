@@ -50,6 +50,34 @@ const AUTH_TOKEN_LS_KEY = (() => {
  * so a "remember me off" session (token in sessionStorage) or a chunked token
  * fell through to a spurious "Not signed in".
  */
+/**
+ * C2 (bar 8): THE CLERK'S REGISTER SCRUB. The AI is a bucketing clerk, never a
+ * writer with its own voice — yet its two most legible tells (the em dash and the
+ * exclamation point, both banned by docs/VOICE_AND_TONE.md §3) had no gate on the
+ * returned prose. Every STRING the narrative stream delivers passes through this
+ * before it reaches the store (and so before ai_data persists): U+2014 becomes a
+ * comma join, `!` becomes a full stop. Mechanical by design — names and numbers
+ * are untouched (the generator never mints either tell), so the overlay verifier's
+ * fact checks see the same facts. Exported for the unit test only.
+ * @param {unknown} v @returns {unknown}
+ */
+export function scrubClerkRegister(v) {
+  if (typeof v === 'string') return v.replace(/\s*—\s*/g, ', ').replace(/!/g, '.');
+  if (Array.isArray(v)) return v.map(scrubClerkRegister);
+  if (v && typeof v === 'object') {
+    /** @type {Record<string, unknown>} */
+    const out = {};
+    for (const [k, x] of Object.entries(v)) {
+      // The setPath guard's sibling: a crafted streamed key must not graft a
+      // prototype onto the rebuilt object.
+      if (k === '__proto__' || k === 'constructor' || k === 'prototype') continue;
+      out[k] = scrubClerkRegister(x);
+    }
+    return out;
+  }
+  return v;
+}
+
 async function getAccessTokenSafe() {
   // Read + validate a persisted supabase session from one Web Storage area,
   // reassembling the chunked form supabase-js writes for large tokens.
@@ -266,10 +294,12 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       return;
     }
 
-    // Per-field success — progressive UI update (supports dotted paths)
+    // Per-field success — progressive UI update (supports dotted paths). The
+    // value passes the clerk's register scrub before store or UI meet it.
     if (msg.field) {
-      setPath(result, msg.field, msg.value);
-      try { opts.onField?.(msg.field, msg.value); } catch (_) { /* UI error should not break stream */ }
+      const clean = scrubClerkRegister(msg.value);
+      setPath(result, msg.field, clean);
+      try { opts.onField?.(msg.field, clean); } catch (_) { /* UI error should not break stream */ }
       return;
     }
 
@@ -281,7 +311,7 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       // empty {} over what should have been a real narrative (and charge a
       // credit for nothing). Flag it fatal so the caller retries.
       if (msg.result && typeof msg.result === 'object') {
-        result = msg.result;
+        result = /** @type {Record<string, unknown>} */ (scrubClerkRegister(msg.result));
       } else {
         fatalError = new Error('AI generation completed without a result (malformed response). Please retry.');
       }

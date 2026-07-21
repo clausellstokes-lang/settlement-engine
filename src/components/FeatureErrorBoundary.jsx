@@ -84,7 +84,7 @@ export default class FeatureErrorBoundary extends Component {
       if (typeof fallback === 'function') return fallback(this.state.error, this.handleRetry);
       if (fallback !== undefined && fallback !== null) return fallback;
 
-      const title = this.props.fallbackTitle || 'Something went wrong rendering this view.';
+      const title = this.props.fallbackTitle || 'This page would not open.';
       return (
         <div
           role="alert"
@@ -103,7 +103,7 @@ export default class FeatureErrorBoundary extends Component {
           <HouseDevice size={22} mode="light" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
           <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
           <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
-            The rest of the app is still working. You can try again or navigate away.
+            The rest of the realm stands. Try again, or turn elsewhere.
           </div>
           <Button variant="danger" size="sm" onClick={this.handleRetry} style={{ minHeight: 44 }}>
             Try again

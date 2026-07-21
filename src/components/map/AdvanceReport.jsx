@@ -170,12 +170,21 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
         </Button>
       </div>
       {/* Arc: began → turned → stands-now (a structural summary; the collapse
-          removed interior time — see the read-model note). */}
-      <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
-        <strong style={{ color: SECOND }}>Began</strong> {thread.arc.began}
-        {thread.arc.turned && thread.arc.turned !== thread.arc.began ? <> · <strong style={{ color: SECOND }}>turned</strong> {thread.arc.turned}</> : null}
-        {thread.arc.stands && thread.arc.stands !== thread.arc.turned ? <> · <strong style={{ color: SECOND }}>stands</strong> {thread.arc.stands}</> : null}
-      </div>
+          removed interior time — see the read-model note). C2 (bar 2): a LOOSE
+          WEAVE — beats united only by shared ground across differing drama
+          classes — is presented as co-located matters, never narrated as a
+          chain the world did not demonstrate. */}
+      {thread.looseWeave ? (
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+          Separate matters on the same ground, set down together.
+        </div>
+      ) : (
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
+          <strong style={{ color: SECOND }}>Began</strong> {thread.arc.began}
+          {thread.arc.turned && thread.arc.turned !== thread.arc.began ? <> · <strong style={{ color: SECOND }}>turned</strong> {thread.arc.turned}</> : null}
+          {thread.arc.stands && thread.arc.stands !== thread.arc.turned ? <> · <strong style={{ color: SECOND }}>stands</strong> {thread.arc.stands}</> : null}
+        </div>
+      )}
       {thread.crossLinks?.length > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: SLATE, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
           <GitBranch size={10} /> touches
@@ -208,12 +217,14 @@ function DeputyDiary({ diary }) {
           <div key={i} style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
               <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, flex: 1, minWidth: 0 }}>{v.headline}</span>
+              {/* C2 (misc): reader words, not seam vocabulary — 'sealed' for a
+                  ruling whose change is done, with the inference owned in-register. */}
               <Chip tone={v.reversibility === 'consumed' ? MUTED : GREEN}>
-                {v.reversibility === 'consumed' ? 'consumed' : 'still amendable'}
+                {v.reversibility === 'consumed' ? 'sealed' : 'still amendable'}
               </Chip>
             </div>
             {v.reversibilityInferred && (
-              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, marginTop: 2 }}>reversibility inferred</div>
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, marginTop: 2 }}>standing read from the record, not decreed</div>
             )}
           </div>
         ))}
@@ -353,9 +364,9 @@ export default function AdvanceReport({ campaign, nameFor }) {
         padding: SP.md, border: `1px dashed ${BORDER2}`,
         color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
       }}>
-        No advance to report yet. Advance the realm and this report will compress what
-        happened — a week, a season, or a year — into headline, chapters, threads, and
-        the receipts beneath, and it will track how your decrees fared.
+        No advance to report yet. Advance the realm, and this page will set down what
+        unfolded in the span: the headline, its chapters and threads, the receipts
+        beneath them, and how your decrees fared.
       </div>
     );
   }

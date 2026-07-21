@@ -181,8 +181,12 @@ describe('newsVoice — herald register guard', () => {
       expect(line.trim(), where).toBe(line);
       expect(line.length, `${where} length`).toBeGreaterThanOrEqual(4);
       expect(line.length, `${where} length`).toBeLessThanOrEqual(240);
-      // Terminal punctuation: . ! ? ” (U+201D) or a straight double-quote.
-      expect(/[.!?”"]$/.test(line), `${where} terminal punct: ${line}`).toBe(true);
+      // Terminal punctuation: . ? ” (U+201D) or a straight double-quote. The
+      // exclamation point is NOT valid — the register bans it outright
+      // (VOICE_AND_TONE §3), so the guard must not be looser than the rule it
+      // protects (C2 bar 8). Enforced anywhere in the line, not just terminally.
+      expect(/[.?”"]$/.test(line), `${where} terminal punct: ${line}`).toBe(true);
+      expect(line.includes('!'), `${where} exclamation banned by the register: ${line}`).toBe(false);
       // No template tokens.
       for (const token of ['{', '}', '%s', 'TODO']) {
         expect(line.includes(token), `${where} token ${token}: ${line}`).toBe(false);

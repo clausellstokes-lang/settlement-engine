@@ -86,6 +86,17 @@ function asList(value) {
   return value ? [value] : [];
 }
 
+// C2 (bar 18): compose a readable line for a conflict record that carries neither
+// desc nor issue nor description — from its own parties/stakes when present, a
+// neutral in-register sentence otherwise. The reader never meets JSON.
+function conflictLine(c) {
+  const parties = Array.isArray(c?.parties) ? c.parties.filter(Boolean).map(String).join(' and ') : '';
+  const stakes = typeof c?.stakes === 'string' ? c.stakes.trim() : '';
+  if (parties && stakes) return `${parties} contend; at stake: ${stakes}`;
+  if (parties) return `A quarrel stands between ${parties}.`;
+  return 'A quarrel of the town, its terms not set down.';
+}
+
 // Chip with label + icon.
 function Chip({ color, Icon, children, filled = false, title }) {
   return (
@@ -117,11 +128,24 @@ function FullEntryModal({ entry, onClose }) {
   const dl = entry.aiDailyLife || {};
   const meta = REASON_META[entry.reason] || REASON_META.initial;
 
-  // Plain-text dumper for known narrative sections. Intentionally simple — the
+  // Plain-text renderer for known narrative sections. Intentionally simple — the
   // point is to let the DM read what they had, not to re-render the tab UI.
+  // C2 (bar 18, "raw JSON where prose belongs"): a non-string body (the pipeline's
+  // History/EconomicViability object shapes) is flattened to its PROSE — every
+  // nested string value in reading order — and a body with no prose renders
+  // nothing. A serialized-object dump never reaches the reader.
+  const flattenProse = (v, depth = 0) => {
+    if (typeof v === 'string') return v.trim();
+    if (Array.isArray(v)) return v.map((x) => flattenProse(x, depth + 1)).filter(Boolean).join(' ');
+    if (v && typeof v === 'object' && depth < 3) {
+      return Object.values(v).map((x) => flattenProse(x, depth + 1)).filter(Boolean).join(' ');
+    }
+    return '';
+  };
   const renderSection = (title, body) => {
     if (!body) return null;
-    const text = typeof body === 'string' ? body : JSON.stringify(body, null, 2);
+    const text = typeof body === 'string' ? body : flattenProse(body);
+    if (!text) return null;
     return (
       <div style={{ marginBottom: 14 }}>
         <div style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{title}</div>
@@ -224,7 +248,9 @@ function FullEntryModal({ entry, onClose }) {
             n?.goal?.short || n?.secret?.what || n?.desc || n?.description || '',
           ))}
           {renderList('Factions', s.powerStructure?.factions, (f) => labelled(nameOf(f) || 'Unnamed', f?.desc || f?.description || ''))}
-          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.desc || c?.issue || c?.description || JSON.stringify(c)))}
+          {/* C2 (bar 18): the last-resort tail is composed prose from the record's own
+              parties/stakes, never a JSON dump in the serif register. */}
+          {renderList('Conflicts', s.powerStructure?.conflicts, (c) => (typeof c === 'string' ? c : c?.desc || c?.issue || c?.description || conflictLine(c)))}
           {renderList('Stressors', asList(s.stress), (st) => labelled(st?.label || 'Stressor', st?.summary || st?.description || st?.text || ''))}
 
           {renderList('Identity Markers', s.identityMarkers, (m) => m)}

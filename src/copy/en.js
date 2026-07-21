@@ -889,7 +889,7 @@ export const en = Object.freeze({
     loadFailed:   'Couldn’t load that dossier. Refresh and try again.',
     networkOff:   'You’re offline. Reconnect and we’ll retry.',
     generateFail: 'The simulator hit a snag. We’re looking at it. Try again in a moment.',
-    aiUnavailable: 'Narrative refinement is temporarily unavailable. The simulator is unaffected. Your settlement still generates and exports.',
+    aiUnavailable: 'Narrative refinement is unavailable for the moment. The world itself is untouched. Your settlement still generates and exports.',
     // Vision V-H (R-23): user-facing failure copy routed off component literals
     // into the register, so failures speak in one voice and the i18n door stays open.
     forgeStart:        'The forge stalled before your settlement took shape. Try once more.',
@@ -902,13 +902,13 @@ export const en = Object.freeze({
     galleryView:       'The gallery could not be shown.',
     // Fold seams (quintuple fold): literals migrated off components so the
     // error-copy ratchet (tests/lint/errorCopyBaseline.test.js) stays honest.
-    chronicleFail:      'Chronicle generation failed.',
+    chronicleFail:      'The chronicler set down the pen before this entry was ready. Try once more.',
     corpusDeclined:     'The draft was declined.',
     corpusEmpty:        'The draft produced no usable prose to stage.',
     corpusUnavailable:  'The Corpus Factory draft is unavailable right now.',
     // Vision V-N (V-26a): the Interview follow-on surfaces its transport failure through
     // the register (the setPendingError path), one voice with the analyst's sibling.
-    interviewUnavailable: 'The Interview is unavailable right now.',
+    interviewUnavailable: 'No interview can be taken down right now. Try again in a little while.',
     // SB5 (error-copy burn-down): gallery + draft-export literals migrated off
     // their components so the ratchet keeps shrinking toward zero.
     reportSendFail: 'Report could not be sent.',

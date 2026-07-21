@@ -142,7 +142,7 @@ export default function RoadScenePanel({ campaign }) {
       )}
 
       {brief && brief.sections.length === 0 && (
-        <p style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>No road runs between them (no land route on the realm graph).</p>
+        <p style={{ color: BODY, fontFamily: sans, fontSize: FS.xs }}>No road runs between them; no land route joins the two.</p>
       )}
 
       {brief && brief.sections.map(sec => (

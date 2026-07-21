@@ -392,7 +392,12 @@ function scopeForImpact(impact) {
  */
 function headlineForImpact(impact, transition, names) {
   const label = impactLabel(impact.kind);
-  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'Unknown settlement';
+  // C2 (bar 4): the neutral fallback speaks the world's register, never the
+  // software's — "a far settlement". The two templates that once LED with the
+  // target now lead with the label instead, so the lowercase phrase serves every
+  // position (and no capitalized twin literal is needed — the eager-byte law).
+  // Raw ids still never leak (finding-11's law holds).
+  const target = names.get(String(impact.targetSettlementId)) || impact.targetSettlementName || 'a far settlement';
 
   if ((impact.waveDepth || 0) > 0 && (transition === 'queued' || transition === 'ready')) {
     return `Regional cascade reaches ${target}`;
@@ -405,10 +410,10 @@ function headlineForImpact(impact, transition, names) {
   }
   if (transition === 'ready') return `${label} reaches ${target}`;
   if (transition === 'applied') return `${label} takes hold in ${target}`;
-  if (transition === 'resolved') return `${target} resolves ${label.toLowerCase()}`;
+  if (transition === 'resolved') return `${label} is resolved in ${target}`;
   if (transition === 'ignored') return `${label} is dismissed for ${target}`;
   if (transition === 'expired') return `${label} passes before reaching ${target}`;
-  return `${target} faces ${label.toLowerCase()}`;
+  return `${label} weighs on ${target}`;
 }
 
 /**

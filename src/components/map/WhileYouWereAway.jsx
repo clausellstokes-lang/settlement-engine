@@ -113,7 +113,12 @@ export default function WhileYouWereAway({ campaignId = null }) {
           color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.45,
         }}>
           <AlertTriangle size={13} style={{ marginTop: 1, flexShrink: 0 }} />
-          <span>The catch-up hit a snag and stopped early: {error}. Advance the realm to resume.</span>
+          {/* C2 (misc): the sentence stays in the register; the raw diagnostic is
+              set apart beneath it, never spliced mid-sentence. */}
+          <span style={{ display: 'grid', gap: 3 }}>
+            <span>The catch-up stopped early, before the record was complete. Advance the realm to resume.</span>
+            <span style={{ color: MUTED, fontWeight: 700 }}>({String(error)})</span>
+          </span>
         </div>
       ) : majors.length > 0 ? (
         <div style={{ display: 'grid', gap: 5 }}>
