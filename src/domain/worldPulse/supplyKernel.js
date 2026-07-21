@@ -126,9 +126,16 @@ export function resolveConsumingInstitution(settlement, goodId) {
     const processor = String((chain?.processingInstitutions || [])[0] || chain?.dependency?.institution || '');
     if (!processor) continue;
     const needle = processor.toLowerCase();
+    // Prefer an EXACT name match BEFORE any substring containment, so a processor name that is a
+    // substring/superstring of an UNRELATED institution ('Forge' vs an earlier-ordered 'Forgery
+    // Guild') never shadows the real one — the SUPPLY-STARVED impairment stamp (and its later lift)
+    // lands on the actual processor. Containment stays as a fallback (name-variant tolerance) only
+    // when nothing matches exactly.
+    const exact = institutions.find((/** @type {SupplyInstitution} */ inst) => String(inst?.name || '').toLowerCase() === needle);
+    if (exact) return String(exact.name);
     const match = institutions.find((/** @type {SupplyInstitution} */ inst) => {
       const n = String(inst?.name || '').toLowerCase();
-      return n === needle || n.includes(needle) || needle.includes(n);
+      return n.includes(needle) || needle.includes(n);
     });
     if (match) return String(match.name);
   }

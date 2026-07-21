@@ -13,6 +13,7 @@ import { buildRecordedEdges, recordedAncestors } from '../../src/domain/display/
 import {
   buildCauseWalk, receiptIsCovert, NO_DEEPER_MEMORY, LEDGER_DARK_LINE, REDACTED_HOP,
 } from '../../src/domain/display/causeWalk.js';
+import { compactOutcomeForHistory } from '../../src/domain/worldPulse/pulseHelpers.js';
 
 const baseOutcomes = [
   { id: 'A', applyMode: 'proposal', proposalPayload: { kind: 'realm_verb_order' }, targetSaveId: 'sA', headline: 'Your decree', severity: 0.6 },
@@ -81,6 +82,21 @@ describe('V-4 — the secrets seam (no covert leak)', () => {
     expect(receiptIsCovert({ stressor: { covert: true } })).toBe(true);
     expect(receiptIsCovert({ covert: true })).toBe(true);
     expect(receiptIsCovert({ headline: 'plain' })).toBe(false);
+  });
+
+  it('SS2-F11: a covert marker SURVIVES compactOutcomeForHistory (durable receipt stays redactable)', () => {
+    // The DURABLE pulseHistory receipt is compactOutcomeForHistory(outcome). It previously dropped
+    // top-level `covert` and rebuilt `stressor` WITHOUT its covert field, so receiptIsCovert read
+    // false on the compacted receipt and causeWalk leaked a covert coup/corruption headline to a
+    // non-DM viewer for either idiom (only metadata.covert survived, masking the gap in tests).
+    const topLevel = compactOutcomeForHistory({ id: 'X', type: 'condition', headline: 'a coup', covert: true });
+    expect(receiptIsCovert(topLevel)).toBe(true);
+    const viaStressor = compactOutcomeForHistory({ id: 'Y', headline: 'rot', stressor: { id: 's', type: 'unrest', label: 'u', severity: 0.5, covert: true } });
+    expect(receiptIsCovert(viaStressor)).toBe(true);
+    // A non-covert outcome compacts WITHOUT a covert field (byte-identical to before the guard).
+    const plain = compactOutcomeForHistory({ id: 'Z', type: 'condition', headline: 'open' });
+    expect('covert' in plain).toBe(false);
+    expect(receiptIsCovert(plain)).toBe(false);
   });
 
   it('REDACTS a covert hop for a non-DM viewer — no headline, no settlements leak', () => {

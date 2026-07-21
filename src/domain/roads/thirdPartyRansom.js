@@ -213,7 +213,9 @@ export function resolveThirdPartyRansom(a) {
     else if (ALLY_LIKE.has(relation)) { motive = 'succor_ally'; tier = 3; }
     else if (obligationHomeOwes(obligations, homeId, payerId) > 0 && !RIVAL_LIKE.has(relation)) {
       // (a) CREDITOR: home owes the payer — a debtor's captive is a chance to collect in gratitude.
-      motive = ALLY_LIKE.has(relation) ? 'succor_ally' : 'succor_unbonded'; tier = 2;
+      // (ALLY_LIKE was already claimed as succor_ally by the branch above, so this arm is always
+      // reached with a non-ally relation ⇒ always succor_unbonded — the prior ternary was dead.)
+      motive = 'succor_unbonded'; tier = 2;
     } else if (TRADE_LIKE.has(relation)) { motive = 'succor_unbonded'; tier = 2; }
     else if (RIVAL_LIKE.has(relation) && predatorySeat(a.settlementOf(payerId))) {
       // (b) LEVERAGE: a predatory rival buys a rival's notable — the favor-economy weapon.

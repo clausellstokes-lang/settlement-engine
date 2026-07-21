@@ -33,7 +33,11 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // extra 'auto' token leaves terrainOverride unpinned, so the terrain comes from
 // the route (route-derived terrain) — fuzzing that branch too.
 const tier            = fc.constantFrom('thorp', 'hamlet', 'village', 'town', 'city', 'metropolis');
-const culture         = fc.constantFrom('germanic', 'celtic', 'norse', 'mediterranean');
+// SS2-F33: the REAL NAMING_DATA cultures — the prior list fuzzed a bogus 'mediterranean' that
+// resolveNameCulture silently folds to germanic, so 8 of 11 real culture naming branches (latin,
+// arabic, slavic, east_asian, mesoamerican, south_asian, steppe, greek) were never exercised by
+// the deep-JSON byte-identity pin. These are the culture keys the pipeline actually resolves.
+const culture         = fc.constantFrom('germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek');
 const terrainOverride = fc.constantFrom('plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert', 'auto');
 const tradeRoute      = fc.constantFrom('road', 'river', 'port', 'crossroads', 'isolated', 'none');
 const monsterThreat   = fc.constantFrom('safe', 'civilized', 'frontier', 'plagued');

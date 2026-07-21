@@ -231,7 +231,27 @@ export function foldObligations(prevLedger, args) {
     if (!rec) continue;
     draft[key] = { ...rec, magnitude: clamp01(rec.magnitude * (1 - decay)) };
   }
-  // Mints: upsert (deepen an existing debt, capped; keep the original mintTick).
+  // Repayments/defaults consume the outstanding obligation FIRST — BEFORE mints — so a same-tick
+  // re-loan to the same (debtor, creditor, kind) is not erased by a full-clear repayment of the
+  // PRIOR (matured) obligation. Without this ordering a credit that matures + fully repays this
+  // tick (repayment {amount:1}) and a fresh GIVE_AS_CREDIT mint the same tick share one key: the
+  // mint deepened the dead record, then the repayment zeroed the SUM → the new loan (and its
+  // future maturity / casus-belli) vanished though the grain moved. Byte-identical when mints and
+  // repayments touch DIFFERENT keys (the normal case — order is immaterial there). A repayment
+  // only ever targets a PRIOR-tick obligation (maturity needs CREDIT_TERM ticks), so it always
+  // finds a carried record here.
+  for (const rp of repayments || []) {
+    if (!rp || typeof rp !== 'object') continue;
+    const key = obligationKey(String(rp.from), String(rp.to), String(rp.kind));
+    const existing = draft[key];
+    if (!existing) continue;
+    const magnitude = clamp01(existing.magnitude - Math.max(0, finiteNumber(rp.amount, 0)));
+    // A drained record is REMOVED here (not left at ~0) so a same-tick mint to this key lands as
+    // a FRESH obligation (its own mintTick/maturity), not a deepen inheriting the dead mintTick.
+    if (magnitude <= REACTION_TUNING.OBLIGATION_EPS) delete draft[key];
+    else draft[key] = { ...existing, magnitude, lastTick: tick };
+  }
+  // Mints: upsert (deepen a SURVIVING debt, capped; keep its mintTick — a fresh key mints anew).
   for (const m of mints || []) {
     const rec = normalizeObligation(m);
     if (!rec) continue;
@@ -248,15 +268,6 @@ export function foldObligations(prevLedger, args) {
       lastTick: tick,
       ...(rec.predatory === true || existing?.predatory === true ? { predatory: true } : {}),
     };
-  }
-  // Repayments/defaults: consume the outstanding obligation.
-  for (const rp of repayments || []) {
-    if (!rp || typeof rp !== 'object') continue;
-    const key = obligationKey(String(rp.from), String(rp.to), String(rp.kind));
-    const existing = draft[key];
-    if (!existing) continue;
-    const magnitude = clamp01(existing.magnitude - Math.max(0, finiteNumber(rp.amount, 0)));
-    draft[key] = { ...existing, magnitude, lastTick: tick };
   }
   // Prune drained records; round survivors.
   /** @type {Record<string, ObligationRecord>} */

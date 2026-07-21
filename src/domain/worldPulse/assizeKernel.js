@@ -181,10 +181,10 @@ function accusedFactionKeyDistinctFromGoverning(settlement, accused, governing) 
  * Build the seated-judgment beat (own in-register prose; deliberately unvoiced at the crier —
  * the ladder/roads/traditions precedent — newsVoiceCategory returns null via the
  * set-but-unclassified guard).
- * @param {{ sid: string, townName: string, accusedName: string, charge: string, sham: boolean, coupled: boolean, tick: number, now: string|null }} a
+ * @param {{ sid: string, townName: string, accusedName: string, charge: string, sham: boolean, coupled: boolean, tick: number, now: string|null, accusedKey: string }} a
  * @returns {Record<string, unknown>}
  */
-function assizeBeat({ sid, townName, accusedName, charge, sham, coupled, tick, now }) {
+function assizeBeat({ sid, townName, accusedName, charge, sham, coupled, tick, now, accusedKey }) {
   const chargeWord = charge === 'corruption' ? 'corruption' : charge === 'perjury' ? 'a proven lie' : 'a false boast unmasked';
   const headline = sham
     ? `${townName}: the assize acquits its own over ${chargeWord}`
@@ -193,7 +193,11 @@ function assizeBeat({ sid, townName, accusedName, charge, sham, coupled, tick, n
     ? `The seat convened its court over ${chargeWord} and cleared ${accusedName} — a captured bench judging its own. The square saw it plainly${coupled ? ', and the petition it was meant to answer curdles into fury' : ''}: the seat's word is worth less by nightfall.`
     : `The seat convened its court over ${chargeWord} and found against ${accusedName} in the open, before the crowd. Justice done in daylight${coupled ? ', answering the commons that demanded it,' : ''} steadies the town — the mark on ${accusedName} is now a public one.`;
   return {
-    id: `wizard_news.${tick}.assize_verdict.${sid}.${sham ? 'sham' : 'just'}`,
+    // The id is keyed by (tick, sid, direction, ACCUSED+CHARGE): two same-direction verdicts in
+    // one settlement/tick (e.g. a corruption exposure AND a lie, both judged JUST) are DISTINCT
+    // beats — without the accusedKey they shared one id and the Map-by-id fold in appendWizardNews
+    // dropped all but the last, silently vanishing a verdict whose state deltas had all landed.
+    id: `wizard_news.${tick}.assize_verdict.${sid}.${sham ? 'sham' : 'just'}.${accusedKey}`,
     createdAt: now || null,
     tick,
     scope: 'local',
@@ -330,7 +334,9 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
         (String(liveCommons.kind) === 'corruption' && c.charge === 'corruption')
       );
 
-      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, charge: c.charge, sham, coupled, tick: now2, now: nowIso }));
+      // The charge map key (`${charge}:${accusedNid||sid}`) is unique per (charge, accused);
+      // sanitized it disambiguates the beat id so same-direction verdicts don't collapse.
+      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, charge: c.charge, sham, coupled, tick: now2, now: nowIso, accusedKey: ckey.replace(/[^a-z0-9]+/gi, '_') }));
 
       // ── THE MASSES ──
       const coupleLegit = coupled ? AZ.COUPLE_LEGIT : 0;

@@ -28,6 +28,11 @@ function compactNpcPatch(patch = null) {
 function compactOutcomeForHistory(outcome = {}) {
   return {
     id: outcome.id,
+    // Preserve the covert marker on the DURABLE receipt: causeWalk's receiptIsCovert redaction
+    // reads top-level `covert` (and stressor.covert, below) to hide a covert cause's headline from
+    // non-DM viewers. Dropping them here let a covert coup/corruption cause leak its true headline
+    // through a compacted pulseHistory receipt. Conditional ⇒ byte-identical for non-covert outcomes.
+    ...(outcome.covert === true ? { covert: true } : {}),
     type: outcome.type || null,
     candidateType: outcome.candidateType || null,
     ruleId: outcome.ruleId || null,
@@ -59,6 +64,9 @@ function compactOutcomeForHistory(outcome = {}) {
           label: outcome.stressor.label,
           severity: outcome.stressor.severity,
           affectedSettlementIds: clone(outcome.stressor.affectedSettlementIds || []),
+          // Carry the stressor's covert marker (see receiptIsCovert above) — conditional ⇒
+          // byte-identical when the stressor is not covert.
+          ...(outcome.stressor.covert === true ? { covert: true } : {}),
         }
       : null,
   };

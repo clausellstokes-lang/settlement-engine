@@ -854,7 +854,13 @@ function advanceLitRoads(args) {
         const t = warTargets[0]; // the first (codepoint-sorted) enemy is sued
         purpose = { kind: 'embassy', ref: `${sid}~${t.dest}` }; dest = t.dest; hopWeeksOut = t.hopWeeksOut; fullWeight = true;
       }
-      if (!purpose && !damped && inRange.length) {
+      // dominionTargets is INDEPENDENT of inRange (a held holding need not be a trade neighbour)
+      // and hasRoutine already admits an occupier with only dominionTargets — so the dominion
+      // branch below must be reachable without an in-range trade dest, else an occupier with no
+      // in-range trade neighbour never dispatches an inspection. The observance/trade/diplomacy
+      // arms iterate/.find over inRange (safe no-ops when empty); the ladder arm needs inRange[0]
+      // so it carries its own inRange.length guard.
+      if (!purpose && !damped && (inRange.length || dominionTargets.length)) {
         for (const cand of inRange) {
           const obs = observanceMatch(/** @type {unknown[]} */ (priorTraditions[cand.dest]), weekOfYear, cand.hopWeeksOut);
           if (obs) { purpose = { kind: 'observance', ref: obs.id }; dest = cand.dest; hopWeeksOut = cand.hopWeeksOut; major = obs.critical; fullWeight = obs.critical; break; }
@@ -881,7 +887,7 @@ function advanceLitRoads(args) {
         if (!purpose && verifyPlan && DIPLO_CATEGORY.test(categoryOf(npc))) {
           purpose = { kind: 'verification', ref: verifyPlan.subject }; dest = verifyPlan.dest; hopWeeksOut = verifyPlan.hopWeeksOut;
         }
-        if (!purpose && ladderLit) {
+        if (!purpose && ladderLit && inRange.length) {
           const goal = ladderGoalOf(/** @type {{ npcLadder?: unknown }} */ (s), npcKey);
           if (goal && goal.goal) { purpose = { kind: 'ladder', ref: goal.goal }; dest = inRange[0].dest; hopWeeksOut = inRange[0].hopWeeksOut; fullWeight = true; }
         }
@@ -898,7 +904,10 @@ function advanceLitRoads(args) {
     for (const c of picked) {
       const riskTolerance = riskToleranceOf(c.npc);
       const route = chooseRoute(digest, knownView, sid, c.dest, riskTolerance, season);
-      if (!route || !Array.isArray(route.path) || route.path.length < 2) continue; // unreachable in the believed view
+      // Unreachable in the believed view (broken/hostile-avoided): SPEND the year like a dispatch
+      // refusal (below) so the NPC doesn't re-qualify weekly, consume a weightedPick slot each
+      // tick, and starve other notable candidates out of the ABROAD_CAP with no receipt.
+      if (!route || !Array.isArray(route.path) || route.path.length < 2) { cadence[c.npcKey] = year; continue; }
       const believedDanger = num(route.danger, 0);
       // DISPATCH REFUSAL (§5): a cautious court, believing the road unsafe, stays home.
       if (believedDanger > riskTolerance * ROADS_TUNING.DANGER_REFUSAL_CEILING) {

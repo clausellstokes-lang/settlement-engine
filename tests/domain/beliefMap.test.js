@@ -84,6 +84,21 @@ describe('WAVE A — reconciliation (V.4)', () => {
     expect(JSON.stringify(reconcileBelief({ prior: PRIOR, groundTruth: GT, reports, now: 10 }))).toBe(JSON.stringify(a));
   });
 
+  it('DEGENERATE zero-weight new belief: a completeness-0 report on a NULL prior yields FINITE bands (not NaN)', () => {
+    // SS2-F2: prior null ⇒ priorConf 0; a completeness-0 report ⇒ aggregate weight 0 ⇒ blendW 0 ⇒
+    // denom 0 ⇒ the weighted blend was 0/0 = NaN, poisoning the byte-pinned belief ledger. This
+    // exported fn is called directly by generosityKernel/others (not only via rumorNetwork, which
+    // floors completeness), so the guard must live here. The record must carry finite bands.
+    const rec = reconcileBelief({ prior: null, groundTruth: GT, reports: [report({ completeness01: 0 })], now: 10 });
+    expect(Number.isFinite(rec.strengthBand)).toBe(true);
+    expect(Number.isFinite(rec.readiness)).toBe(true);
+    expect(Number.isNaN(rec.strengthBand)).toBe(false);
+    expect(Number.isNaN(rec.readiness)).toBe(false);
+    // A non-degenerate new belief (weight > 0) still re-anchors toward truth — the guard is inert there.
+    const live = reconcileBelief({ prior: null, groundTruth: GT, reports: [report()], now: 10 });
+    expect(Number.isFinite(live.strengthBand)).toBe(true);
+  });
+
   it('INDEPENDENCE beats the echo chamber (more independent lineages ⇒ higher confidence + stronger re-anchor)', () => {
     const one = reconcileBelief({ prior: PRIOR, groundTruth: GT, reports: [report({ independentSources: 1 })], now: 10 });
     const three = reconcileBelief({ prior: PRIOR, groundTruth: GT, reports: [report({ independentSources: 3 })], now: 10 });
