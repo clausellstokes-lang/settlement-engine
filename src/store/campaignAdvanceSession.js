@@ -89,6 +89,36 @@ export function buildPausedAdvanceCursor(result, now) {
 }
 
 /**
+ * Deposit-and-consume reconcile (fix wave 2 #2). applyWorldPulseResultToState commits
+ * `result.wizardNews` WHOLESALE, and that feed was derived from the pre-advance clone
+ * lifted BEFORE the advance's in-flight yield. A wizardNews write that landed on the
+ * LIVE feed during that yield — a confirmed table-event import (importTableEvents, the
+ * one ungated wizardNews writer) — is therefore absent from `resultWizardNews` and
+ * would be silently clobbered. This folds back ONLY the entries whose id is NEW since
+ * the pre-advance snapshot (`preIds`); the pre-existing entries the advance's own cap
+ * intentionally evicted stay evicted (their ids ARE in `preIds`), so a no-concurrent-
+ * write advance is byte-identical (empty landed set ⇒ the original feed is returned by
+ * reference). Idempotent: appendWizardNewsEntries dedups by stable id. Called at the
+ * pre-commit point of BOTH commit paths (advance + paused-resume) so the two can never
+ * diverge — the same single-source discipline the war-front reads follow.
+ * @param {any} resultWizardNews the pure result feed (the wholesale-commit target)
+ * @param {any} liveWizardNews    the live campaign feed at commit time (with any import)
+ * @param {Set<string>} preIds    wizardNews entry ids present BEFORE the advance
+ * @param {string} now
+ * @returns {any} the reconciled feed (the input feed unchanged when nothing landed)
+ */
+export function reconcileWizardNewsForCommit(resultWizardNews, liveWizardNews, preIds, now) {
+  if (!resultWizardNews) return resultWizardNews;
+  const liveEntries = Array.isArray(liveWizardNews?.entries) ? liveWizardNews.entries : [];
+  const guard = preIds instanceof Set ? preIds : new Set();
+  const landed = liveEntries.filter(
+    (/** @type {any} */ e) => e && e.id != null && !guard.has(String(e.id))
+  );
+  if (!landed.length) return resultWizardNews;
+  return appendWizardNewsEntries(resultWizardNews, cloneJson(landed), { now });
+}
+
+/**
  * The advance BODY — snapshot + drain + lift (Phase 1), the pure/awaited compute
  * (flag-branched single-tick vs multi-tick, worker vs in-thread), the commit
  * (Phase 2 + pause-park), then the analytics + persist + party-replay tail. Split
@@ -223,6 +253,17 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
     // is the pre-advance value.
     const preTick = simCampaign?.worldState?.tick;
 
+    // Deposit-and-consume reconcile (fix wave 2 #2): the pre-advance wizardNews ids,
+    // lifted off the same pre-advance clone. result.wizardNews is derived from this
+    // clone, so any live-feed entry NOT in this set landed during the await. (When the
+    // Phase-1 set bailed — e.g. world_not_canonized — simCampaign is null ⇒ empty set,
+    // and the reconcile block below is guarded by `simCampaign` so it never runs.)
+    /** @type {Set<string>} */
+    const preAdvanceNewsIds = new Set(
+      (Array.isArray(simCampaign?.wizardNews?.entries) ? simCampaign.wizardNews.entries : [])
+        .map((/** @type {any} */ e) => String(e?.id))
+    );
+
     // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited: the
     // orchestrator yields to the event loop between tick batches so a long advance
     // (up to 48 one-week kernel passes) does not freeze the UI. The compute is a pure
@@ -282,6 +323,20 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
     // append them to the result's feed through the house appender (dedupe/cap).
     if (simCampaign && result && drainRefusalNews.length && result.wizardNews) {
       result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews);
+    }
+
+    // Deposit-and-consume reconcile (fix wave 2 #2): fold back any wizardNews entry
+    // (e.g. a confirmed table-event import) that landed on the LIVE feed during this
+    // advance's in-flight yield, BEFORE the wholesale commit below clobbers it. A
+    // no-concurrent-write advance is byte-identical. Covers BOTH commit paths (manual
+    // Advance AND the setActiveCampaign auto-catch-up), which share this Phase-2 commit.
+    if (simCampaign && result && result.wizardNews) {
+      result.wizardNews = reconcileWizardNewsForCommit(
+        result.wizardNews,
+        findActiveCampaign(get().campaigns, campaignId)?.wizardNews,
+        preAdvanceNewsIds,
+        now,
+      );
     }
 
     // ── Phase 2: commit the pure result back onto the draft.
@@ -462,6 +517,17 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
 
   if (!simCampaign || !cursor) return result;
 
+  // Deposit-and-consume reconcile (fix wave 2 #2): the wizardNews ids on the LIVE
+  // feed before this resume's await, lifted off the same clone the commit re-derives
+  // over. Any live-feed entry NOT here at commit time (e.g. a table-event import that
+  // landed during the resume's yield) must survive the wholesale wizardNews commit.
+  // Mirrors runAdvanceCampaignWorld — the resume is the OTHER path through
+  // applyWorldPulseResultToState.
+  const preResumeNewsIds = new Set(
+    (Array.isArray(simCampaign?.wizardNews?.entries) ? simCampaign.wizardNews.entries : [])
+      .map((/** @type {any} */ e) => String(e?.id))
+  );
+
   // Determinism: replay with the advance's ORIGINAL `now` (parked on the cursor),
   // NOT a fresh wall-clock — the resume re-derives the paused tick through the
   // kernel, which stamps `now` into regional-graph/wizard-news records. An explicit
@@ -498,6 +564,17 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
     : simulateCampaignWorldInterval(resumeArgs));
 
   if (result && result.status) {
+    // Deposit-and-consume reconcile (fix wave 2 #2): re-append only wizardNews
+    // entries that landed during this resume's yield (see runAdvanceCampaignWorld)
+    // before the wholesale commit below clobbers them.
+    if (result.wizardNews) {
+      result.wizardNews = reconcileWizardNewsForCommit(
+        result.wizardNews,
+        findActiveCampaign(get().campaigns, campaignId)?.wizardNews,
+        preResumeNewsIds,
+        now,
+      );
+    }
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;

@@ -45,6 +45,34 @@ describe('mapSlice annotation undo/redo (F6)', () => {
     expect(store.getState().mapState.labels).toHaveLength(1);
   });
 
+  test('campaign switch (replaceMapState) CLEARS both stacks — no cross-campaign injection (fix wave 2 #3)', () => {
+    const store = makeStore();
+    // Campaign A: build undo history including a SECRET marker.
+    store.getState().addLabel({ x: 1, y: 1, text: 'A-note' });
+    store.getState().addMarker({ x: 2, y: 2, title: 'A-hidden-cache', note: 'GM secret' });
+    expect(store.getState().mapUndoStack.length).toBeGreaterThan(0);
+
+    // Switch to campaign B (its saved map has no markers).
+    store.getState().replaceMapState({ placements: {}, labels: [], markers: [], forests: [] });
+    expect(store.getState().mapUndoStack).toEqual([]);
+    expect(store.getState().mapRedoStack).toEqual([]);
+
+    // Undo in B must be a no-op — it can NEVER resurrect campaign A's marker/label.
+    store.getState().mapUndo();
+    expect(store.getState().mapState.markers).toEqual([]);
+    expect(store.getState().mapState.labels).toEqual([]);
+  });
+
+  test('deselect (resetMapState) clears both undo AND redo stacks (fix wave 2 #3)', () => {
+    const store = makeStore();
+    store.getState().addLabel({ x: 1, y: 1, text: 'A' });
+    store.getState().mapUndo(); // populate the redo stack too
+    expect(store.getState().mapRedoStack.length).toBeGreaterThan(0);
+    store.getState().resetMapState();
+    expect(store.getState().mapUndoStack).toEqual([]);
+    expect(store.getState().mapRedoStack).toEqual([]);
+  });
+
   test('undo restores a MOVED label (pushMapUndo) without reverting geography/camera', () => {
     const store = makeStore();
     store.getState().addLabel({ x: 10, y: 10, text: 'A' });

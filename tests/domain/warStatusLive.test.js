@@ -134,6 +134,53 @@ describe('live war status (§S3)', () => {
   });
 });
 
+describe('phantom-siege gate (fix wave 2 #1 — single-sourced through isLiveWarFront)', () => {
+  // A merely-hostile pair mints a CONFIRMED war_front in BOTH directions off the
+  // hostile-relationship bundle (source:'relationship_label', NO army). channelIdFor
+  // keys on (type,from,to), so it collides with the war-layer siege id — and the
+  // display read used to treat any confirmed front as a siege (the phantom-siege bug).
+  // With NO deployments/occupations it must read as PEACE on every war-status surface.
+  const HOSTILE_ONLY_GRAPH = {
+    channels: [
+      { id: 'wf1', type: 'war_front', status: 'confirmed', from: 'a', to: 'b', strength: 0.7, visibility: 'public', evidence: [{ source: 'relationship_label' }] },
+      { id: 'wf2', type: 'war_front', status: 'confirmed', from: 'b', to: 'a', strength: 0.7, visibility: 'public', evidence: [{ source: 'relationship_label' }] },
+    ],
+  };
+  const noDeployments = { deployments: {}, tradeWarState: {}, dispositionStats: {} };
+
+  test('a merely-hostile pair yields ZERO live sieges', () => {
+    expect(liveSieges({ worldState: noDeployments, regionalGraph: HOSTILE_ONLY_GRAPH })).toEqual([]);
+  });
+
+  test('settlementWarStatus reports atWar=false (null) for both merely-hostile settlements', () => {
+    expect(settlementWarStatus({ settlementId: 'a', worldState: noDeployments, regionalGraph: HOSTILE_ONLY_GRAPH })).toBeNull();
+    expect(settlementWarStatus({ settlementId: 'b', worldState: noDeployments, regionalGraph: HOSTILE_ONLY_GRAPH })).toBeNull();
+  });
+
+  test('hasLiveWarState is false for a merely-hostile world (byte-identical off-state)', () => {
+    expect(hasLiveWarState({ worldState: noDeployments, regionalGraph: HOSTILE_ONLY_GRAPH })).toBe(false);
+  });
+
+  test('a WAR-LAYER front (a mobilized army) DOES still read as a live siege', () => {
+    const graph = {
+      channels: [
+        { id: 'wf1', type: 'war_front', status: 'confirmed', from: 'a', to: 'b', strength: 0.7, visibility: 'public', evidence: [{ source: 'war_layer_deploy' }] },
+      ],
+    };
+    const sieges = liveSieges({ worldState: noDeployments, regionalGraph: graph });
+    expect(sieges).toHaveLength(1);
+    expect(sieges[0].targetId).toBe('b');
+    expect(sieges[0].coalition).toEqual(['a']);
+    expect(settlementWarStatus({ settlementId: 'b', worldState: noDeployments, regionalGraph: graph }))
+      .toMatchObject({ besiegedBy: ['a'], atWar: true });
+  });
+
+  test('a bare/legacy confirmed front (no evidence) is still read as a siege (tolerance preserved)', () => {
+    const graph = { channels: [{ id: 'wf1', type: 'war_front', status: 'confirmed', from: 'a', to: 'b' }] };
+    expect(liveSieges({ worldState: noDeployments, regionalGraph: graph })).toHaveLength(1);
+  });
+});
+
 describe('occupiedSettlements (Phase 5 — occupation shading reader)', () => {
   test('returns the nodes whose most-recent transfer was a conquest', () => {
     const items = [

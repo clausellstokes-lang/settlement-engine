@@ -557,6 +557,15 @@ export const createMapSlice = (set, get) => ({
    * Does NOT touch the FMG snapshot — that needs to be loaded via the bridge.
    */
   replaceMapState: (next) => set(state => {
+    // Lifecycle-clear (fix wave 2 #3): the annotation/placement undo+redo stacks are
+    // scoped to the map they were recorded against. A campaign switch swaps mapState
+    // here but PREVIOUSLY left the stacks intact, so pressing Undo in campaign B
+    // injected campaign A's placements / secret markers into B (a cross-campaign
+    // secret leak, and geometry from the wrong world). The stacks MUST be dropped
+    // whenever the underlying map is replaced; the AnnotateToolbar Undo button reads
+    // mapUndoStack.length so an emptied stack disables it automatically.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
     if (!next) { state.mapState = freshMapState(); return; }
     // Merge with defaults to handle older snapshots missing new fields
     const fresh = freshMapState();
@@ -583,6 +592,11 @@ export const createMapSlice = (set, get) => ({
     // pointing at the now-gone settlement.
     state.selectedSettlementId = null;
     state.hoveredSettlementId = null;
+    // Lifecycle-clear (fix wave 2 #3): drop the map-scoped undo/redo history so a
+    // deselect / fresh-campaign switch can't let a later Undo restore the prior
+    // campaign's placements or secret markers into a different (or empty) map.
+    state.mapUndoStack = [];
+    state.mapRedoStack = [];
   }),
 
   // ── Undo/redo (per-action snapshot of annotation/placement sub-slices) ─────
