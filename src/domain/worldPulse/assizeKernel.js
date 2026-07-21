@@ -56,6 +56,7 @@ import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { institutionIsLawOrder } from '../institutionClassify.js';
 import { isLiveInstitution } from '../institutions/institutionRoster.js';
 import { npcId } from './npcAgency.js';
+import { slugify } from '../../kernel/slugify.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads } from './roadsKernel.js';
 import { advanceCommonsVoice } from './commonsVoiceKernel.js';
 
@@ -336,7 +337,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
 
       // The charge map key (`${charge}:${accusedNid||sid}`) is unique per (charge, accused);
       // sanitized it disambiguates the beat id so same-direction verdicts don't collapse.
-      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, charge: c.charge, sham, coupled, tick: now2, now: nowIso, accusedKey: ckey.replace(/[^a-z0-9]+/gi, '_') }));
+      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, charge: c.charge, sham, coupled, tick: now2, now: nowIso, accusedKey: slugify(ckey, { sep: '_' }) }));
 
       // ── THE MASSES ──
       const coupleLegit = coupled ? AZ.COUPLE_LEGIT : 0;

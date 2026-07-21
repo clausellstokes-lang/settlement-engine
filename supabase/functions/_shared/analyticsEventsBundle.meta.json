@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-20T20:20:53.890Z",
+  "generatedAt": "2026-07-21T03:36:56.951Z",
   "entry": "src/lib/analyticsEvents.js",
-  "sourceHash": "c3f062c0746b54e9",
+  "sourceHash": "548a9dfdd0332968",
   "inputs": [
     "src/domain/pendingEdits.js",
     "src/lib/analyticsEvents.js"
