@@ -95,7 +95,23 @@ and if it can't land eager-neutral it WAITS for the owner eager reclaim (the ONE
 headroom). CLOSES the repo-provable half of bar 9 (SR PARITY is still lived-certified). Pin: a
 keyboard-driven placement round-trips to the store.
 
-### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — ⛔ OWNER-GATED (CORRECTED 2026-07-21)
+### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — SPLIT: TIER-1 BUILDING / TIER-2 OWNER-GATED
+✅ OWNER GO-AHEAD (2026-07-21): owner directed "do what is objectively better, plan+validate with Fable,
+comprehensively clean the fallout." Re-grounding at code showed the earlier blanket ⛔ over-deferred the
+CLEAN half. The immediate-parent reference ALREADY EXISTS on every derived receipt (propagation.js:471
+`sourceImpactId: sourceImpact.id`, `waveDepth: depth`); `causedBy` is an EXISTING field (roadsKernel V-24d
+ships a dark-gated edge already); the ledger is behind the VIRTUAL `provenanceLedgerActive` flag (absent from
+all presets ⇒ byte-neutral off). So TIER-1 — resolve `sourceImpactId` → the parent's RECORDED KEY
+(`wizard_news.${tick}.${transition}.${id}`) and mint the ADDITIVE immediate-parent `causedBy` edge on the
+region-wave d≥1 receipts + conquest/occupation applied-outcomes that ALREADY reach the ledger — is buildable
+DARK now, NO new persisted field, NO golden shift. DISPATCHED to Opus @ claude/e-j-recorded-depth (base
+b339e178) with a VERIFY-FIRST gate (STOP+report if reachability/parent-key-derivability fail; do NOT force it)
+and a DARK-BYTE-IDENTITY master invariant. STILL OWNER-GATED (unchanged, NOT built): (a) the default-on flip
+`provenanceLedgerEnabled` in a preset = the ONE REGEN; (b) TIER-2 = moving pulseKernel.js:~1615's impactDigest
+snapshot to AFTER movers run to record contest/generosity beats — risks the SHIPPED applied.newsEntries path,
+changes recorded-set composition broadly. Tier-2 + the flip are the owner-manifest tail; Tier-1 is mine under
+the go-ahead. See [[enforcer-ej-v2-recorded-depth-shipped]] once it lands.
+─────────────────────────────────────────────────────────────────────────
 ⛔⛔ CORRECTION (2026-07-21, proven by the E-J investigation — enforcer-ej-depth-blocked-finding.md):
 the earlier "buildable DARK now" claim was WRONG. Proven at code + by a 15y everything-on drive:
 contest/generosity/roads mover beats NEVER reach the recorded ledger — impactDigest is snapshotted at
