@@ -31,10 +31,17 @@
  * (generate-sitemap.mjs). The prerender pins (tests/build/prerenderRoutes.test.js)
  * assert the baked head matches the runtime head, so build and SPA cannot drift.
  *
- * The gallery family is DELIBERATELY excluded (DYNAMIC_VIEWS): a shared gallery
- * world unfurls per-item via the dynamic meta-shell (api/meta-shell.js +
- * api/gallery-meta.js), and a static dist/gallery/index.html would SHADOW the
- * unlisted ?slug= rewrite the fold connects.
+ * The gallery INDEX + per-slug family is DELIBERATELY excluded (DYNAMIC_VIEWS):
+ * a shared gallery world unfurls per-item via the dynamic meta-shell
+ * (api/meta-shell.js + api/gallery-meta.js), and a static dist/gallery/
+ * index.html would SHADOW the unlisted ?slug= rewrite the fold connects.
+ * The gallery FACET HUBS (src/lib/galleryHubs.js) are the exception (SB4):
+ * they are static, deterministic, sitemap-promoted pages, yet /gallery/at-war
+ * previously matched the /gallery/:slug rewrite (generic 'Shared settlement'
+ * card) and /gallery/terrain|tier/* fell through to the SPA catch-all (homepage
+ * card). Baking each hub a static document wins the filesystem check ahead of
+ * both rewrites, so a no-JS scraper sees the hub's own head — the same
+ * projection setGalleryHubMeta (lib/seoDossier.js) applies at runtime.
  *
  * Run: `node scripts/prerender-routes.mjs`  (reads + writes dist/)
  */
@@ -45,7 +52,8 @@ import { ROUTES } from '../src/lib/routes.js';
 import { headForView, siteGraph } from '../src/lib/seo.js';
 import { compendiumEntryHead } from '../src/lib/seoCompendium.js';
 import { COMPENDIUM_INDEX } from '../src/domain/compendium/searchIndex.js';
-import { injectGalleryMeta } from '../api/_galleryMeta.js';
+import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
+import { injectGalleryMeta, SITE_NAME } from '../api/_galleryMeta.js';
 import { isIndexable } from './generate-sitemap.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -205,6 +213,37 @@ function renderEntry(baseHtml, entry) {
   return html;
 }
 
+/**
+ * Render a gallery FACET HUB (SB4 — see the header). The head is EXACTLY the
+ * projection setGalleryHubMeta applies at runtime (title `${hub.title} · SITE`,
+ * description = blurb, canonical = the hub's own path, a CollectionPage JSON-LD
+ * under the same 'ld-gallery-item' id), pinned against the manifest in
+ * prerenderRoutes.test.js. No og:image override: the runtime leaves the
+ * site-default card for hubs, and so does the baked head.
+ */
+function renderHub(baseHtml, hub) {
+  const title = `${hub.title} · ${SITE_NAME}`;
+  const canonical = `${ORIGIN}${hub.path}`;
+  let html = injectGalleryMeta(baseHtml, {
+    title,
+    description: hub.blurb,
+    url: canonical,
+    type: 'website',
+  });
+  html = upsertCanonical(html, canonical);
+  html = upsertJsonLd(html, 'ld-site', siteGraph());
+  html = upsertJsonLd(html, 'ld-gallery-item', {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: hub.title,
+    url: canonical,
+    description: hub.blurb,
+    isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${ORIGIN}/` },
+  });
+  html = injectNoscript(html, noscriptSummary({ heading: hub.title, description: hub.blurb }));
+  return html;
+}
+
 // ── main ──────────────────────────────────────────────────────────────────────
 function main() {
   if (!existsSync(INDEX_HTML)) {
@@ -219,6 +258,13 @@ function main() {
     writeHtml(path, renderStatic(baseHtml, view, path));
     written++;
   }
+  // The 15 facet hubs (SB4). Their paths live under /gallery/<facet>[/<value>],
+  // so no dist/gallery/index.html is ever created — the bare-/gallery dynamic
+  // seam (unlisted ?slug=) keeps reaching the meta-shell rewrite (pinned).
+  for (const hub of GALLERY_HUBS) {
+    writeHtml(hub.path, renderHub(baseHtml, hub));
+    written++;
+  }
   for (const entry of COMPENDIUM_INDEX) {
     writeHtml(`/compendium/${entry.id}`, renderEntry(baseHtml, entry));
     written++;
@@ -226,14 +272,15 @@ function main() {
 
   console.log(
     `[prerender] wrote ${written} static route documents ` +
-    `(${statics.length} views + ${COMPENDIUM_INDEX.length} compendium entries) under dist/`,
+    `(${statics.length} views + ${GALLERY_HUBS.length} gallery hubs + ` +
+    `${COMPENDIUM_INDEX.length} compendium entries) under dist/`,
   );
 }
 
 // Exported for the prerender pins (tests/build/prerenderRoutes.test.js).
 export {
   ORIGIN, DYNAMIC_VIEWS, staticRouteViews, distFileForPath,
-  renderStatic, renderEntry, upsertCanonical, upsertJsonLd, noscriptSummary,
+  renderStatic, renderEntry, renderHub, upsertCanonical, upsertJsonLd, noscriptSummary,
 };
 
 if (import.meta.url === `file://${process.argv[1]}`) {

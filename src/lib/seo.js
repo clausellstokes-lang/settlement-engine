@@ -64,9 +64,12 @@ export function galleryCardImage(slug) {
 export const VIEW_DESCRIPTIONS = {
   home:       DEFAULT_DESCRIPTION,
   generate:   'Generate a living tabletop-RPG settlement in seconds: economy, factions, NPCs, institutions, and history, ready for the table.',
-  compendium: 'The SettlementForge compendium: settlement tiers, trade and economy, power and faction archetypes, religion, stress, the neighbour system, and the institution catalog.',
+  // SB4: description copy is kept at SERP length (~120-160 chars — Google
+  // truncates past ~160) AND byte-lean: seo.js is first-paint EAGER and the
+  // closure budget has only a few hundred bytes of headroom. Trim, never pad.
+  compendium: 'The SettlementForge compendium: settlement tiers, trade, power and faction archetypes, religion, stress, and the institution catalog.',
   pricing:    'SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement simulation.',
-  howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person. The covenant, how one town is derived, and where the AI is caged by mechanism, plus the keeper\'s handbook.',
+  howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person, with the AI caged by mechanism.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
   founders:   'The SettlementForge Founders: thirty lifetime seats, shown as a public lineage. Meet the people who backed the project first.',
   terms:      'The SettlementForge terms of service: your account, acceptable use, subscriptions, cancellation, and refunds.',
@@ -75,6 +78,17 @@ export const VIEW_DESCRIPTIONS = {
   // cancellation" section — kept so a shared /refunds link still unfurls with an
   // accurate refund-policy description, even though the URL is noindex (below).
   refunds:    'The SettlementForge refund policy: how credit refunds on failed generations, subscription cancellation, and PDF entitlements work.',
+  // SB4 (SEO bar 14): the public content routes below previously fell back to
+  // DEFAULT_DESCRIPTION, so sharing /covenant or /roadmap unfurled with the
+  // whole-product tagline. Copy is receipt-true to each page's actual content
+  // (the covenant/bounty pages are claims-parity-bound). Guarded by the
+  // every-indexable-route-has-its-own-description pin in prerenderRoutes.test.js.
+  // `world` is DELIBERATELY absent: the seed-post family is noindex (below) and
+  // its scraper-facing card is built by api/_metaShell.js from the decoded code.
+  covenant:   'The SettlementForge portability covenant: generate without an account, export everything as JSON, import it back, and delete means gone.',
+  bounty:     'The SettlementForge contradiction bounty: every fact traces to a cause. Find a receipt that does not trace, and tell us.',
+  roadmap:    'The public SettlementForge roadmap: what is available, what is being built, and what is being explored. No promised dates.',
+  'first-hundred': 'The First Hundred: an honor roll of the first hundred people to make a home in SettlementForge, distinct from the Founder seats.',
 };
 
 // Private / app / transient routes that must never index. Mirrors robots.txt.
@@ -83,7 +97,12 @@ export const VIEW_DESCRIPTIONS = {
 // retired into the Terms "Refunds and cancellation" section, so /refunds now
 // renders the same content as /terms; noindex avoids indexing a duplicate while
 // keeping the old URL working.
-const NOINDEX_VIEWS = new Set([
+//
+// SB4: this set is the SINGLE SOURCE for the whole noindex posture — the sitemap
+// generator (scripts/generate-sitemap.mjs) and the prerender derive from it via
+// import (previously a hand-copied twin that could silently drift). Exported for
+// them + the identity pin in tests/build/sitemap.test.js.
+export const NOINDEX_VIEWS = new Set([
   'settlements', 'realm', 'map', 'workshop', 'account', 'admin',
   'signin', 'register', 'reset-password', 'set-new-password',
   'verify-email', 'confirm-email', 'dossier-success',
@@ -91,6 +110,14 @@ const NOINDEX_VIEWS = new Set([
   // V-18 — the DM Screen is an at-the-table app tool (reads active state),
   // not indexable content. covenant/bounty ARE public content (absent here).
   'screen',
+  // SB4 — the seed-post family. /world/<code> is an UNBOUNDED generated URL
+  // space (any decodable code 200s with a near-identical card) and bare /world
+  // without a code renders an invalid-code state: indexing either is soft-200
+  // duplicate/dead-end content. The class mirrors the unlisted gallery: it
+  // UNFURLS richly (api/meta-shell.js serves the card) but never indexes.
+  // Deliberately NOT in robots.txt — the noindex meta must stay crawlable and
+  // unfurl bots must reach the card.
+  'world',
 ]);
 
 // Exported so the lazy per-dossier enricher (seoDossier.js) reuses one

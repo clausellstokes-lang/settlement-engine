@@ -4,8 +4,8 @@
  * The old sitemap was hand-maintained against the retired `?view=` query
  * routing (and listed the deleted /compare pages). This derives the indexable
  * URL set from src/lib/routes.js so it can never drift from the router: a route
- * is included unless it is noindex (app/auth/transient — mirrors seo.js
- * NOINDEX_VIEWS + robots.txt), guarded, or a retired redirect surface.
+ * is included unless it is noindex (app/auth/transient — IMPORTS seo.js's
+ * NOINDEX_VIEWS, the single source), guarded, or a retired redirect surface.
  *
  * Home canonicalizes to '/', and the compendium fans out to one URL per tab
  * (each indexes with its own title via CompendiumPanel's ?tab= deep link).
@@ -33,24 +33,17 @@ import { ROUTES } from '../src/lib/routes.js';
 import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
 import { COMPENDIUM_INDEX } from '../src/domain/compendium/searchIndex.js';
 import { compendiumEntryPath } from '../src/lib/seoCompendium.js';
+import { NOINDEX_VIEWS } from '../src/lib/seo.js';
 
 const ORIGIN = 'https://settlementforge.com';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-// Mirrors seo.js NOINDEX_VIEWS + robots.txt. App / auth / transient routes that
-// must never appear in the sitemap. Kept in lockstep by tests/build/sitemap.test.js.
-// `refunds` is here (not a content route): the standalone refund page was retired
-// into the Terms "Refunds and cancellation" section, so /refunds now renders the
-// same content as /terms — indexing it would duplicate /terms.
-export const NOINDEX_VIEWS = new Set([
-  'settlements', 'realm', 'map', 'workshop', 'account', 'admin',
-  'signin', 'register', 'reset-password', 'set-new-password',
-  'verify-email', 'confirm-email', 'dossier-success',
-  'refunds',
-  // V-18 — the DM Screen is an app tool, not indexable content. covenant/bounty
-  // ARE public content and remain indexable (absent here).
-  'screen',
-]);
+// SB4: the noindex set is SINGLE-SOURCED in src/lib/seo.js (NOINDEX_VIEWS) —
+// previously a hand-copied twin lived here under a comment that falsely claimed
+// test-enforced lockstep (sitemap.test.js only ever imported THIS copy). Now the
+// SPA's robots meta, the sitemap, and the prerender all read one set by
+// construction; re-exported for the sitemap/hub tests, which pin the identity.
+export { NOINDEX_VIEWS };
 
 // Retired redirect surfaces (kept in ROUTES so old links still resolve, but they
 // forward to /how-to and carry no unique content — never indexed).
