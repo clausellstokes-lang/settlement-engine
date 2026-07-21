@@ -331,8 +331,8 @@ export function buildingMassingOps({ x, y, footprint, height, roofKind, color, s
   const sz = base * spec.foot;
   const h = Number.isFinite(height) && height > 0 ? height : 12;
   const palette = (style && style.palette) || {};
-  const ink = palette.ink || '#000000';
-  const fill = palette.buildingFill || '#ffffff';
+  const ink = palette.ink;
+  const fill = palette.buildingFill;
   const bw = (style && style.stroke && style.stroke.building) || 1.5;
   const tint = color || fill;
   // PURE-HASH variant (previewing the never-restamp law): a small per-building roof-pitch nudge
