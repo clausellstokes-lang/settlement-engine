@@ -409,6 +409,15 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // 1,065,000 -> 1,031,197). ~8.8KB headroom deliberately retained to fund the remaining
 // build-out waves' honest registration costs (S3-S6, gallery phase 2, content); the
 // FINAL tightening happens at the composite gate. Monotone-down per the constitution.
+// (2026-07-21, C5 claims-parity note on the line above): the retained headroom did
+// its funded job — the S/V/C build-out landed and the review composite measures
+// 1,039,975 (`npm run build` on this lineage), 25 B under budget. The "~8.8KB
+// headroom" is GONE (spent on exactly what it was retained for), and the remaining
+// margin sits BELOW the ~85 B house working margin — so the composite-gate FINAL
+// tightening now has nothing to cut: at promotion the owner either lands a reclaim
+// first or re-pins budget = measured + ~85 B house margin then. Until promotion,
+// treat eager Δ as HARD-ZERO for every remaining lane. Monotone-down unchanged;
+// raises stay owner-signed.
 const CLOSURE_BUDGET_BYTES = 1_040_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
