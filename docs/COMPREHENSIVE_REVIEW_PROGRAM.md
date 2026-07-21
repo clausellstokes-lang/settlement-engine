@@ -1255,6 +1255,24 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
+checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
+deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
+units, useFlag, townMapThumb → townMap/components/lib waves]; ⚠ operationRegistry
+walker hazard: co-importing a slice helper on the createXSlice line drops the slice
+from census — banked) · SB2 display/pdf (a997039b — 8 fixed incl. player-book covert
+leak fixed at the collector chokepoint; ONE-REGEN queue empty) · SB3 gallery/platform/
+edge (33b91d63 — 4 fixed incl. a REAL BILLING BUG [account deletion canceled only the
+recorded sub; dual-plan 2nd sub charged forever] + unlisted-reload 404; 2 OWNER-GATED
+[dead ai_ip_rate_limit config · credit-pack refund clawback]; 10 struck-documented).
+FOLD: 3 merges 0-conflict + fold-fixes de590e3c = ruinFilter walker exempts
+tableLedger.exposureTargets (name/existence picker) + mapSnapshotImport F6 pin accepts
+backdrop.seed (importGalleryMap's share source — SECURITY INTACT, no raw snapshot on
+either path). GATE: build 0 · closure green · strict 0 · tsc 0 · edge-validate 59 ·
+fork-validator 140 · letter golden GREEN · deity drift unchanged · full two-shard =
+4-parked-ONLY (all extras isolation/negative-control-proven). Worktrees freed → BATCH
+B-r2 (SB4-seo 10 · SB5-a11y 19) DISPATCHED; C-remainder (73 product-wide bars + voice)
+prepped. Then tranche-2 enforcers (THE_APLUS_EXECUTION_ARCHITECTURE.md).**
 **⬛⭐⭐ SHOULD-FIX/POLISH BATCH A FOLDED @ composite-r4 084549e4 (2026-07-21,
 checker-verified).** SS4 enforcement (472f7f51 — determinism-ban coverage +
 ghost-column parity + migration-ref walker [CAUGHT a live skipped-pglite test]
