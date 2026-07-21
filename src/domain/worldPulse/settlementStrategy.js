@@ -49,6 +49,7 @@ import {
   relationshipRoles,
 } from './relationshipEvolution.js';
 import { computeAggressiveness } from './disposition.js';
+import { humanizeToken } from '../display/humanizeEngineTokens.js';
 import { softmaxWeights, stableSampleByWeight, clamp01, hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
@@ -859,7 +860,7 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
       summary: copy.summary(name, targetName),
       reasons: [
         `${name}'s strategy chooser reached for the ${move} lever rather than a war move.`,
-        ...(nudge ? [`The ${move} lever presses ${targetName} — a bounded ${Object.keys(nudge.relationshipPatch).join('/')} nudge.`] : []),
+        ...(nudge ? [`The ${move} lever presses ${targetName} — a bounded ${Object.keys(nudge.relationshipPatch).map(humanizeToken).join('/')} nudge.`] : []),
       ],
       relationshipNudge: nudge
         ? { relationshipKey: nudge.relationshipKey, relationshipPatch: nudge.relationshipPatch, incidentType: nudge.incidentType }
