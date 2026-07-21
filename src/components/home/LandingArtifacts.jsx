@@ -49,6 +49,14 @@ import { fixture } from './landingFixture.js';
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 
+// PENDING-ASSET (Walk W1, item 8, owner order 2026-07-21, ledger 4f71743a): the §04
+// Realm map preview. Today it is the painted world-map/crossroads placeholder scene;
+// W4 (a parallel asset lane) is generating a REAL realm-map preview (settlements,
+// deterministic seed, house style) into public/. This is the SINGLE swap site — when
+// W4's asset name is known, repoint this one constant at it (e.g. `url('/backgrounds/
+// landing/<w4-asset>')`). Until then it renders the existing crossroads painting.
+const REALM_MAP_PREVIEW = SCENE('world-map');
+
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
 // outside §03; it is NOT a second violet — it is the same violet token family.
@@ -299,7 +307,7 @@ export function RealmMapCard() {
       {/* Map half */}
       <div style={{
         position: 'relative', minHeight: 320,
-        backgroundImage: SCENE('world-map'), backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundImage: REALM_MAP_PREVIEW, backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', top: 14, left: 14, background: 'rgba(255,251,245,0.94)',
