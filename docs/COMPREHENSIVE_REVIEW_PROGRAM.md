@@ -1255,6 +1255,34 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐ CYCLE 2 FIX WAVES 3+5+FMG+INSTRUMENTS FOLDED @ composite-r4 e457d923
+(2026-07-20, checker-verified).** WAVE 3 (voice/immersion, f5132f20, ran on
+Fable): the two durable ENFORCERS built — E1 proseLeak (renders 4 composers,
+scans output for flag keys/tick-speak/schema/ids/em-dash, shrink-only baseline)
++ E2 voiceMechanics (the phantom test 3 sites CLAIMED — now REAL, hard-zero
+em-dash/'!' on copy registries + per-file ratchet 112 files; kills idx3);
+idx0 inverted-claim corrected; humanizer chokepoint built + wired golden-safe;
+em-dash sweep to ZERO in copy registries + all 14 src/data prose files (493
+dashes); chroniclersLetterGolden stayed GREEN byte-identical (discipline held).
+Then PARALLEL BATCH folded (all off 8dfd2aed, 0 conflicts, file-disjoint):
+WAVE 5 interview audience gate (3db3a955 — history projected to audience,
+fail-closed, secrets pin neg-controlled) · FMG-REMAINDER (42346d93 — 2
+auto-firing innerHTML sinks escaped, Dropbox token→sessionStorage + console
+leak removed, AI egress disabled) · INSTRUMENTS (e457d923 — arc-soak +
+spell-break census standing proofs). COMBINED GATE: build 0 · closure ratchet
+GREEN (~1,038K ≤ 1,040,000; fold eager Δ ~0) · strict 0 · tsc 0 · edge-validate
+59 · fork-validator 141/141 · chroniclersLetterGolden + byte-identity GREEN
+(no shift) · security + interview-gate + both instruments GREEN · FULL TWO-SHARD
+= ONLY the 4 parked families red (6 shard-1 extras all proven CONTENTION in
+isolation 44/44; the classic pglite/ordering/advancePauseResume set). mig head
+169. ⚠ INSTRUMENT FINDING (relayed to owner + banked recorded-causal-depth-
+reality): recorded link-depth ≥2 = ZERO — provenance is one-hop-to-ROOT
+attribution, coupling IS ~9 deep but recorded chains are not; corrects the
+"9-link" claim. ONE-REGEN QUEUE GREW: chroniclersLetter.js humanizer wiring
+(reddens the green letter golden) + the deferred eventProse/roads/tradition
+prose wave (180 dashes, held shrink-only by E2). NEXT: wave 4 (a11y/UX/SEO,
+sequential — adds eager) + FMG-sink-sweep + idx4 COGS + the should-fix/polish
+tiers.**
 **⬛⭐ CYCLE 2 FIX WAVE 2 DONE @ composite-r4 8dfd2aed (2026-07-20).** Store &
 engine truth single-sourced, 3 class-kills + 1 contradiction resolved, ONE
 commit, checker-verified: `isLiveWarFront` (warFrontReads.js) is now THE read-side
