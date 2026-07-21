@@ -27,6 +27,25 @@ allotted footprint. The silhouette totality walker: every named kind maps to a
 composite form or the explicit generic default — unmapped REDS. Acceptance =
 recognition unlabeled at a glance (the picturesque gate's first question).
 
+**CUSTOM INSTITUTIONS (owner, 2026-07-21): the derivation ladder.** Shape and
+placement for user-created institutions resolve through four deterministic
+rungs, each falling through to the next: (1) explicit typed fields —
+silhouetteClass + placementAffinity picked from the FINITE taxonomies; when AI
+constructs a custom institution, its instructions include making these picks
+FROM THE ENUMERATED VOCABULARIES (the bucketing-clerk law: AI classifies into
+our determinism, validated on arrival, rejected out-of-vocabulary — never
+geometry, never free text). ⚠ Rung 1's schema fields + the Surveyor prompt
+update are OWNER-GATED (additive persistence shape + edge-function deploy);
+(2) supply-chain derivation — economic role dictates urban logic: processors
+near inputs, sellers on the market spine, storage by docks/gates; workshop
+massing with the craft's signature element; (3) the name-match ladder — the
+existing glyphAssign/institutionAssignment idiom extended: '…Cathedral…' earns
+the cruciform composite with zero AI and zero schema; (4) the category floor —
+category-default massing + the total assigner's guaranteed home. TOTALITY: no
+custom institution ever renders unshaped or unplaced; the silhouette walker
+proves the ladder resolves for every custom, or REDS. Customs carry stable
+anchorKeys already — every drift/edit/cosmetic law applies to them unreduced.
+
 ## M-1..M-4 · THE FOUR VIEWS
 - **M-1 VTT**: top-down plan, configurable grid overlay, high-contrast lens,
   token-legible walls/openings, export-ready. Cosmetics MUTED by design.
