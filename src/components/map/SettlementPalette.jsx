@@ -174,9 +174,14 @@ export default function SettlementPalette({
                 setSelectedBurgId(null);
                 setHover?.(save.id); // surface the QuickInspector peek
                 setPlacementHint(
+                  // Fix wave 4 (idx28): the hint leads with what selection just
+                  // DID for a keyboard user (the overview peek beside the map)
+                  // instead of dead-ending on what the map can't do. Placement
+                  // itself is still a pointer drag — the keyboard placement
+                  // commit is a scoped follow-on (see the F28 note above).
                   isPlaced
                     ? `${name} is already placed on the map.`
-                    : `${name} selected. Drag its card onto the map with a mouse or touch to place it — keyboard placement isn't available for the map yet.`,
+                    : `${name} selected — its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`,
                 );
               }}
               onHover={(hovering) => {

@@ -54,6 +54,10 @@ describe('F28 slice 2 — SettlementPalette keyboard honesty', () => {
     fireEvent.keyDown(screen.getByRole('button', { name: /Springhaven/i }), { key: 'Enter' });
     expect(live.textContent).toMatch(/Springhaven selected/i);
     expect(live.textContent).toMatch(/mouse or touch/i);
+    // Fix wave 4 (idx28): the hint leads with the real keyboard outcome (the
+    // overview peek) and never dead-ends on "isn't available".
+    expect(live.textContent).toMatch(/overview is showing beside the map/i);
+    expect(live.textContent).not.toMatch(/isn't available/i);
   });
 
   test('Space also triggers selection guidance', () => {

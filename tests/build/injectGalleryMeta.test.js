@@ -33,6 +33,7 @@ const SAMPLE_HTML = `<!doctype html>
     <meta name="twitter:title" content="SettlementForge — default" />
     <meta name="twitter:description" content="Default og description." />
     <meta name="twitter:image" content="https://settlementforge.com/og-craft.png" />
+    <link rel="canonical" href="https://settlementforge.com/" />
   </head>
   <body><div id="root"></div></body>
 </html>`;
@@ -132,6 +133,35 @@ describe('injectGalleryMeta', () => {
     expect(injectGalleryMeta(SAMPLE_HTML, null)).toBe(SAMPLE_HTML);
     expect(injectGalleryMeta(SAMPLE_HTML, {})).toBe(SAMPLE_HTML);
     expect(injectGalleryMeta(undefined, meta)).toBe(undefined);
+  });
+
+  // Fix wave 4 (idx36 / SEO bar 14): a dynamically served page must claim
+  // ITSELF as canonical. The fetched shell carries the prerendered HOMEPAGE
+  // canonical; before this fix it rode through untouched, telling crawlers to
+  // fold every gallery/world card into `/`.
+  describe('canonical == og:url (never the homepage)', () => {
+    test('replaces the shell homepage canonical with the served page own URL', () => {
+      const out = injectGalleryMeta(SAMPLE_HTML, meta);
+      expect(out).toContain(`<link rel="canonical" href="${ORIGIN}/gallery/oakmere" />`);
+      expect(out).not.toContain('<link rel="canonical" href="https://settlementforge.com/" />');
+      // Lockstep: the canonical href equals the og:url content, exactly.
+      const canonical = (out.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1];
+      const ogUrl = (out.match(/<meta\s+property="og:url"\s+content="([^"]*)"/i) || [])[1];
+      expect(canonical).toBe(ogUrl);
+      expect(canonical).toBe(meta.url);
+    });
+
+    test('inserts a canonical before </head> when the shell lacks one', () => {
+      const noCanonical = SAMPLE_HTML.replace(/\s*<link rel="canonical"[^>]*>/, '');
+      const out = injectGalleryMeta(noCanonical, { url: `${ORIGIN}/gallery/x` });
+      expect(out).toContain(`<link rel="canonical" href="${ORIGIN}/gallery/x" />`);
+      expect(out.indexOf('rel="canonical"')).toBeLessThan(out.indexOf('</head>'));
+    });
+
+    test('without meta.url the canonical is left untouched', () => {
+      const out = injectGalleryMeta(SAMPLE_HTML, { title: 'Just a title' });
+      expect(out).toContain('<link rel="canonical" href="https://settlementforge.com/" />');
+    });
   });
 
   // V-20 unlisted class: noindex stamps robots:noindex over the static

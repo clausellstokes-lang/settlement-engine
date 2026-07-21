@@ -143,7 +143,10 @@ export default function Button({
       disabled={inert}
       // The instrument gives under the finger (organic motion #5 press). Any
       // caller-supplied className is preserved after it (prop-compatible).
-      className={`oc-m-press ${className}`.trim()}
+      // sf-btn = the interactive state floor (a11y.css): the fill rides the
+      // --sf-btn-bg custom property so :hover can derive a perceivable shift
+      // for EVERY variant; a caller's inline `background` override still wins.
+      className={`oc-m-press sf-btn ${className}`.trim()}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -154,7 +157,7 @@ export default function Button({
         padding: s.padding,
         border: `1px solid ${v.border}`,
         borderRadius: R.sm,
-        background: v.bg,
+        '--sf-btn-bg': v.bg,
         color: v.fg,
         fontFamily: sans,
         fontSize: s.fontSize,

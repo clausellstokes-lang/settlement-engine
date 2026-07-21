@@ -99,12 +99,17 @@ export default function CommandPalette({ onClose }) {
       className="oc-m-warmdim"
       style={{ position: 'fixed', inset: 0, zIndex: 1100, display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}
     >
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+      {/* Clicks stop here so the backdrop's click-to-close never fires from inside
+          the plate. Keydown deliberately does NOT stop: the shared focus trap
+          (Escape + Tab cycling) and the host's cmd/ctrl-K toggle both listen on
+          window, so a blanket stopPropagation would keyboard-trap the dialog
+          (WCAG 2.1.2) — background keymaps already go quiet on their own by
+          checking for an open [role="dialog"][aria-modal="true"]. */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- the onClick is a propagation fence for the backdrop, not an interaction; keyboard behavior lives in the window-level trap. */}
       <div
         ref={dialogRef}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-label="Command palette"

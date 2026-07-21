@@ -143,10 +143,25 @@ function upsertMeta(html, attr, key, value) {
 }
 
 /**
+ * Upsert `<link rel="canonical" href="…">` (Fix wave 4, idx36 / SEO bar 14).
+ * The fetched shell is the prerendered index.html, which carries the HOMEPAGE
+ * canonical — leaving it in place tells crawlers to fold every dynamically
+ * served gallery/world card into `/`. A served page must claim ITSELF as
+ * canonical, so this is kept in lockstep with og:url by injectGalleryMeta.
+ */
+function upsertCanonical(html, href) {
+  const tag = `<link rel="canonical" href="${escapeAttr(href)}" />`;
+  const re = /<link\s+[^>]*rel=["']canonical["'][^>]*>/i;
+  if (re.test(html)) return html.replace(re, tag);
+  return html.replace(/<\/head>/i, `    ${tag}\n  </head>`);
+}
+
+/**
  * Inject per-slug OG/Twitter meta into a full index.html string. Rewrites the
  * document <title>, description, and the og:/twitter: title/description/image plus
- * og:url/og:type. Pure: same input → same output. Unknown/empty meta returns the
- * html unchanged.
+ * og:url/og:type — and the rel=canonical link, which always equals og:url so a
+ * crawler can never fold a served card into the homepage. Pure: same input →
+ * same output. Unknown/empty meta returns the html unchanged.
  *
  * `meta.noindex` (V-20 unlisted class): stamp `robots: noindex, nofollow` over the
  * static `noai, noimageai` tag so a party-shared unlisted link UNFURLS (the card
@@ -175,7 +190,11 @@ export function injectGalleryMeta(html, meta) {
     out = upsertMeta(out, 'property', 'og:image', meta.image);
     out = upsertMeta(out, 'name', 'twitter:image', meta.image);
   }
-  if (meta.url) out = upsertMeta(out, 'property', 'og:url', meta.url);
+  // canonical rides og:url in lockstep — a served page is its OWN canonical.
+  if (meta.url) {
+    out = upsertMeta(out, 'property', 'og:url', meta.url);
+    out = upsertCanonical(out, meta.url);
+  }
   if (meta.type) out = upsertMeta(out, 'property', 'og:type', meta.type);
   // Unlisted (V-20): keep it out of the index while still unfurling. Supersedes
   // the static `noai, noimageai` robots value on this served copy only.

@@ -66,6 +66,23 @@ input[type="radio"],
   }
 }
 
+/* Interactive state floor for the button primitives (Button / IconButton).
+ * The primitives publish their fill as --sf-btn-bg (plus a designed hover
+ * fill as --sf-btn-hover-bg where the tone defines one), and these rules
+ * give EVERY consumer a perceivable hover without per-callsite wiring.
+ * The fallback derives hover from the base fill (an 8% ink mix), so no
+ * variant can opt out by forgetting a token — even `transparent` gains a
+ * soft ink tint. Completes the state set with the :focus-visible ring
+ * above, the .oc-m-press:active press give (organic.css), and the
+ * primitives' own disabled treatment (hence the :not(:disabled) guard).
+ * A caller's inline `background` override still outranks both rules. */
+.sf-btn {
+  background-color: var(--sf-btn-bg, transparent);
+}
+.sf-btn:hover:not(:disabled) {
+  background-color: var(--sf-btn-hover-bg, color-mix(in srgb, var(--sf-btn-bg, transparent), #1c1409 8%));
+}
+
 /* Visually hidden but accessible to assistive tech. Used by IconButton
  * for the redundant text label and by future skip-to-content links. */
 .sr-only {

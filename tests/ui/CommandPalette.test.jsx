@@ -76,4 +76,41 @@ describe('CommandPalette — the jump bar', () => {
     window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     expect(onClose).toHaveBeenCalled();
   });
+
+  // ── Fix wave 4 (idx37, WCAG 2.1.2) — the keyboard CLOSE paths must work from
+  // INSIDE the dialog. The pin above dispatches on window directly, which is why
+  // it stayed green while a wrapper stopPropagation killed the real DOM path:
+  // the trap and the cmd-K host both listen on window, and a synthetic keydown
+  // stopped at the React root never reaches them. These pins originate on the
+  // combobox input — the place a user's keys actually land.
+  it('Escape pressed IN the dialog reaches the trap and closes (no keyboard trap)', () => {
+    const onClose = vi.fn();
+    render(<CommandPalette onClose={onClose} />);
+    fireEvent.keyDown(screen.getByRole('combobox'), { key: 'Escape' });
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('the cmd/ctrl-K chord pressed IN the dialog bubbles to window (host toggle stays reachable)', () => {
+    const seen = vi.fn();
+    window.addEventListener('keydown', seen);
+    try {
+      render(<CommandPalette onClose={() => {}} />);
+      fireEvent.keyDown(screen.getByRole('combobox'), { key: 'k', metaKey: true });
+      expect(seen).toHaveBeenCalled();
+    } finally {
+      window.removeEventListener('keydown', seen);
+    }
+  });
+
+  it('Tab is trapped WITHIN the dialog — from the last focusable it wraps to the first', () => {
+    render(<CommandPalette onClose={() => {}} />);
+    const options = screen.getAllByRole('button');
+    const last = options[options.length - 1];
+    last.focus();
+    expect(document.activeElement).toBe(last);
+    fireEvent.keyDown(last, { key: 'Tab' });
+    // The trap cycles to the dialog's first focusable (the combobox input) —
+    // focus never leaks behind the overlay.
+    expect(document.activeElement).toBe(screen.getByRole('combobox'));
+  });
 });

@@ -78,6 +78,34 @@ describe('the unlisted class UNFURLS but never indexes (V-20)', () => {
   });
 });
 
+// Fix wave 4 (idx36): every dynamically served kind claims ITSELF as canonical.
+// The shell arrives carrying the prerendered homepage canonical; the injector
+// must replace it with the page's own URL (== og:url) for every route kind.
+describe('every served kind is its OWN canonical (never the homepage)', () => {
+  const shellWithHomeCanonical =
+    '<html><head><title>SF</title>' +
+    '<link rel="canonical" href="https://settlementforge.com/" />' +
+    '</head><body><div id="root"></div></body></html>';
+
+  const KINDS = [
+    { req: { pathname: '/gallery' }, label: 'gallery-index' },
+    { req: { pathname: '/gallery', searchParams: 'slug=cryptoSlug42' }, label: 'gallery-unlisted' },
+    { req: { pathname: '/world/Zx9-Ab' }, label: 'world' },
+  ];
+
+  for (const { req, label } of KINDS) {
+    it(`${label}: served canonical == og:url == the page's own URL`, () => {
+      const m = buildMetaForKind(resolveMetaRoute(req), null, { supabaseUrl: SUPA });
+      const out = injectGalleryMeta(shellWithHomeCanonical, m);
+      const canonical = (out.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1];
+      const ogUrl = (out.match(/<meta\s+property="og:url"\s+content="([^"]*)"/i) || [])[1];
+      expect(canonical, `${label} canonical`).toBe(m.url);
+      expect(ogUrl, `${label} og:url`).toBe(m.url);
+      expect(out).not.toContain('<link rel="canonical" href="https://settlementforge.com/" />');
+    });
+  }
+});
+
 describe('unlisted is sitemap-excluded BY CONSTRUCTION', () => {
   it('the sitemap draws gallery slugs ONLY from the PUBLIC list RPC — no unlisted source', () => {
     const src = readFileSync(join(ROOT, 'scripts/generate-sitemap.mjs'), 'utf8');

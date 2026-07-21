@@ -84,7 +84,10 @@ export default function IconButton({
       title={label || ''}
       aria-pressed={pressed === undefined ? undefined : !!pressed}
       // Instrument press (organic motion #5); caller className preserved after.
-      className={`oc-m-press ${className}`.trim()}
+      // sf-btn = the interactive state floor (a11y.css). The fill + the tone's
+      // DESIGNED hover fill ride custom properties so :hover actually applies
+      // the TONES.hover data (it was defined-but-dead before Fix wave 4).
+      className={`oc-m-press sf-btn ${className}`.trim()}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         // Desktop: fixed box. Mobile: floor to >=44 in both axes (min-* lets the
@@ -94,7 +97,8 @@ export default function IconButton({
         minWidth:  mobileFloor != null ? mobileFloor : undefined,
         minHeight: mobileFloor != null ? mobileFloor : undefined,
         padding: 0,
-        background: pressed ? TONES.active.bg : t.bg,
+        '--sf-btn-bg': pressed ? TONES.active.bg : t.bg,
+        '--sf-btn-hover-bg': pressed ? TONES.active.hover : t.hover,
         color:      pressed ? TONES.active.fg : t.fg,
         border: `1px solid ${pressed ? TONES.active.border : t.border}`,
         borderRadius: 4,
