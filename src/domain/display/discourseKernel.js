@@ -131,30 +131,28 @@ export const RELATION_FOR_TYPE = Object.freeze({
 export const CONNECTIVE_LEXICON = Object.freeze({
   causal: Object.freeze({
     deep: Object.freeze([
-      'Further along:',
-      'Out of that:',
       'From there:',
+      'In its wake:',
     ]),
     near: Object.freeze([
-      'In consequence:',
-      'And from that:',
-      'Which brought on:',
+      'And so:',
+      'From that:',
+      'In turn:',
     ]),
     pivot: Object.freeze([
-      'And so, at the last:',
       'So it came to this:',
+      'And at the last:',
       'And in the end:',
     ]),
   }),
   parallel: Object.freeze([
-    'At the same time:',
     'In the same season:',
-    'Alongside it:',
+    'At the same time:',
+    'Meanwhile:',
   ]),
   adversative: Object.freeze([
-    'Even so:',
     'And yet:',
-    'Against that current:',
+    'Even so:',
   ]),
 });
 
