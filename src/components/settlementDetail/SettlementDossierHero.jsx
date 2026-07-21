@@ -19,7 +19,6 @@
  */
 
 import { lazy, Suspense, useState } from 'react';
-import Segmented from '../primitives/Segmented.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import DetailErrorBoundary from './DetailErrorBoundary.jsx';
 import FeatureErrorBoundary from '../FeatureErrorBoundary.jsx';
@@ -34,13 +33,12 @@ import { MUTED, PAGE_MAX, CHROME } from '../theme';
 // OutputContainer load only when their surface renders, never on first paint
 // (tests/build/townMapLazy.test.js, vendorPdfLazy.test.js).
 const OutputContainer = lazy(() => import('../OutputContainer'));
-const SettlementMapPane = lazy(() => import('../townMap/SettlementMapPane.jsx'));
 // THE LIVING BACKDROP wash (LB-b) — lazy exactly like the pane so the town-map
 // model's fork-key fingerprint stays off first paint (tests/build/townMapLazy).
 const SettlementDossierBackdrop = lazy(() => import('./SettlementDossierBackdrop.jsx'));
 
 export default function SettlementDossierHero({
-  detail, detailView, setDetailView,
+  detail,
   editMode, canEdit, saveId, authTier, phase, narrated,
   toggleEditMode, openExportSheet, onRenameSettlement,
 }) {
@@ -74,26 +72,23 @@ export default function SettlementDossierHero({
 
   if (!detail.settlement) return null;
 
-  const toggle = (
-    <div style={{ margin: '0 0 12px', width: '100%' }}>
-      <Segmented
-        ariaLabel="Settlement view"
-        options={[{ id: 'dossier', label: 'Dossier' }, { id: 'map', label: 'Map' }]}
-        value={detailView}
-        onChange={setDetailView}
-      />
-    </div>
-  );
-  // In read mode the rail owns the paid Narrate/Regenerate CTAs, so the read
-  // dossier suppresses its own (the free raw/narrated toggle stays); edit mode
-  // (no rail) keeps them.
+  // W2-c — the [Dossier | Map] segmented toggle is RETIRED: the town map is now a
+  // first-class tab inside OutputContainer (Summary / Systems / World / Map / Notes),
+  // which also makes it reachable from the wizard draft flow. The owner-only map seam
+  // (season/siege worldState + regionalGraph, and the premium edit gate) is threaded
+  // straight into the dossier so the map tab keeps full fidelity. Reverting this
+  // commit restores the sibling toggle — one revert away (manager-flagged vetoable).
+  // In read mode the rail owns the paid Narrate/Regenerate CTAs, so the read dossier
+  // suppresses its own (the free raw/narrated toggle stays); edit mode (no rail) keeps them.
   const body = (
     <div style={{ marginBottom: 12 }}>
       <DetailErrorBoundary>
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-          {detailView === 'map'
-            ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} />
-            : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} suppressNarrativeCta={!editMode} onRenameSettlement={onRenameSettlement} />}
+          <OutputContainer
+            settlement={detail.settlement} readOnly saveId={saveId}
+            suppressNarrativeCta={!editMode} onRenameSettlement={onRenameSettlement}
+            mapWorldState={mapWorldState} mapRegionalGraph={mapRegionalGraph} mapCanEdit={canEdit}
+          />
         </Suspense>
       </DetailErrorBoundary>
     </div>
@@ -103,7 +98,6 @@ export default function SettlementDossierHero({
     <>
       {editMode ? (
         <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-          {toggle}
           {body}
         </div>
       ) : (
@@ -119,7 +113,6 @@ export default function SettlementDossierHero({
             </FeatureErrorBoundary>
           )}
           <div style={{ flex: '1 1 520px', minWidth: 0, position: 'relative', zIndex: 1 }}>
-            {toggle}
             {body}
           </div>
           {saveId && (

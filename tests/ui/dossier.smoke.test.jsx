@@ -105,4 +105,12 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
   });
+
+  // W2-c — the Map group is a first-class tab, ordered Summary / Systems / World /
+  // Map / Notes. Pin the group ORDER (Object insertion order) + the single map tab.
+  test('the Map group sits fifth, between World and Notes', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(Object.keys(mod.TAB_GROUPS)).toEqual(['summary', 'systems', 'world', 'map', 'notes']);
+    expect(mod.TAB_GROUPS.map.tabs).toEqual(['map']);
+  });
 });
