@@ -334,7 +334,7 @@ export default function RealmDashboard({
   // headcount-share here (no per-settlement strength on the dashboard); the DEPTH
   // reason half passes real land+naval strength. Descriptive-always; DM baptism (a
   // persisted canon label) is a separate store lane — omitted here by design.
-  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || String(id) });
+  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || 'an unnamed seat' });
   const topSphere = hegemony.spheres[0] || null;
 
   // One focal Conflict digest: the tension band is the headline, and the four
@@ -347,7 +347,9 @@ export default function RealmDashboard({
   if (occupations.length) conflictParts.push(`${occupations.length} occupied`);
   if (mobilizing.length) conflictParts.push(`${mobilizing.length} mobilizing${mobilizing.some(m => m.covert) ? ' (some covert)' : ''}`);
   if (weariest && weariest.warExhaustion >= 0.6) {
-    conflictParts.push(`${nameById?.get(String(weariest.id)) || weariest.id} war-weary`);
+    // Never a raw settlement id in a headline (C3 finding 12) — a missed name
+    // lookup degrades to an in-fiction generic, not a database key.
+    conflictParts.push(`${nameById?.get(String(weariest.id)) || 'a settlement'} war-weary`);
   }
   const conflictSub = conflictParts.length ? conflictParts.join(' · ') : 'No sieges, occupations, or mobilizations';
   const conflictTone = tension.tone === 'crisis' ? 'crisis'
@@ -403,7 +405,7 @@ export default function RealmDashboard({
         <Stat
           Icon={Flame}
           label="War-weariest"
-          value={weariest ? (nameById?.get(String(weariest.id)) || weariest.id) : '–'}
+          value={weariest ? (nameById?.get(String(weariest.id)) || 'a settlement') : '–'}
           sub={weariest ? warExhaustionBand(weariest.warExhaustion) : 'None war-weary'}
           tone={weariest && weariest.warExhaustion >= 0.6 ? 'hot' : undefined}
         />
@@ -445,7 +447,7 @@ export default function RealmDashboard({
         <Stat
           Icon={Flame}
           label="Top aggressor"
-          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || topAggressor.id) : '–'}
+          value={topAggressor ? (nameById?.get(String(topAggressor.id)) || 'a settlement') : '–'}
           sub={topAggressor
             ? `${topAggressor.wins}W / ${topAggressor.losses}L`
             : 'No win record yet'}

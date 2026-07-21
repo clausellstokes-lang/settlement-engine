@@ -41,10 +41,22 @@ export function TabIntro({ tabKey }) {
   );
 }
 
-// Safe string coercer
-export const Ti = v => v == null ? '' : typeof v === 'string' ? v
-  : typeof v === 'object' ? (v.product||v.name||v.chain||v.hook||v.description||v.title||JSON.stringify(v))
-  : String(v);
+// Safe string coercer. Never dumps raw JSON onto a dossier surface (C3
+// finding 13): an unexpected object falls back to its first string field,
+// then a quiet dash; arrays read as a joined list, and known keys recurse
+// (so a nested shape can never reach React as an object child).
+export const Ti = (v) => {
+  if (v == null) return '';
+  if (typeof v === 'string') return v;
+  if (Array.isArray(v)) return v.map(Ti).filter(Boolean).join(', ');
+  if (typeof v === 'object') {
+    const known = v.product || v.name || v.chain || v.hook || v.description || v.title;
+    if (known) return Ti(known);
+    const first = Object.values(v).find((x) => typeof x === 'string' && x);
+    return first || '–';
+  }
+  return String(v);
+};
 
 // Collapsible section with Crimson header + ▲/▼ (Sn in original)
 export function Collapsible({ title, defaultOpen = true, children }) {

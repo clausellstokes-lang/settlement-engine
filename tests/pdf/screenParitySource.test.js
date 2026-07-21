@@ -12,6 +12,16 @@
  * If a future edit makes EconomicsTab compute food (or DefenseTab compute defense)
  * from raw settlement fields instead of the shared helper, this fails, naming the
  * file — turning the "pins helper-not-screen" gap into a build failure.
+ *
+ * CANNOT-CATCH (C3-experience finding 10): this pins TWO contracted facts, not
+ * the whole surface. Any OTHER fact a screen tab reads from raw settlement.*
+ * while the PDF derives it via viewModel.js can still diverge with all tests
+ * green (e.g. a future legitimacy sub-score computed tab-side). A structural
+ * guard needs an enumeration of the viewModel parity contract plus a per-fact
+ * screen-source walker — a design lift deliberately NOT taken as a polish fix.
+ * Residual: viewModelParity.test.js holds the PDF side; new contracted facts
+ * must add their screen pin here when they land (deliberately deferred —
+ * documented, not a bug to re-find).
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';

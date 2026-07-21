@@ -138,9 +138,15 @@ export default function WhileYouWereAway({ campaignId = null }) {
         </div>
       )}
 
+      {/* Honest capped note (C3 finding 11): past the cap the realm lives the FIRST
+          capped weeks of the absence, then the calendar leaps to now and the
+          remainder is skipped for good (owner ruling 2026-07-13,
+          calendar-advances-past-cap — no perpetual re-catch-up). The old copy
+          claimed the "most recent" weeks were shown and the rest could still be
+          run — both halves were false. */}
       {capped && !error && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-          More time had passed than a single catch-up covers — the most recent {weeks} {weekWord} are shown. Advance the realm to run the rest.
+          More time had passed than a single catch-up covers — the realm lived the first {weeks} {weekWord} of it, then time leapt to today. The span between passes into history unrecorded.
         </div>
       )}
     </div>

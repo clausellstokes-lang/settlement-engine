@@ -296,7 +296,7 @@ export default function GalleryDetail({
       </article>
       <div className="gallery-detail-body" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
         <section style={{ minWidth: 0 }}>
-          <React.Suspense fallback={<p style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading dossier...</p>}>
+          <React.Suspense fallback={<p style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Opening the dossier…</p>}>
             <PublicDossierView dossier={dossier} showHeader={false} />
           </React.Suspense>
         </section>

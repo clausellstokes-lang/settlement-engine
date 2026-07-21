@@ -510,7 +510,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             maxWidth={PAGE_MAX}
           />
 
-          <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
+          <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Laying out the settlement dossier…</div>}>
             {/* P139 — cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
                 toolbar above stays full-width.
