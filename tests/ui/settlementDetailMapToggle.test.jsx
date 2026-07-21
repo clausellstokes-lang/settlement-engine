@@ -1,17 +1,20 @@
 /**
  * @vitest-environment jsdom
  *
- * settlementDetailMapToggle.test.jsx — the SM-2 [Dossier | Map] lens toggle.
+ * settlementDetailMapToggle.test.jsx — the [Dossier | Map] lens toggle is RETIRED.
  *
- * The Segmented toggle switches the detail BODY between OutputContainer (dossier)
- * and SettlementMapPane (map). We reuse the proven settlementdetail.smoke store
- * mock (view mode, ~20 selectors) and stub the two heavy lazy bodies so the test
- * asserts the body FORK, not their internals. The map must render as a SIBLING of
- * OutputContainer, never both at once.
+ * The town map moved from a sibling Segmented toggle into a first-class TAB inside
+ * OutputContainer (Summary / Systems / World / Map / Notes, order W2-c), which also
+ * makes it reachable from the wizard draft flow. This test now guards the
+ * retirement: SettlementDetail renders the dossier body with NO sibling Dossier/Map
+ * toggle and NO sibling map pane (the map is mounted inside OutputContainer, mocked
+ * here, so the pane never mounts in this test). We reuse the proven
+ * settlementdetail.smoke store mock + stub the heavy bodies. Reverting the W2-c
+ * commit restores the sibling toggle — one revert away.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -71,8 +74,8 @@ const detail = {
 };
 const noop = () => {};
 
-describe('SettlementDetail — Dossier/Map toggle', () => {
-  test('defaults to the dossier body, and the Map segment swaps in the map pane', async () => {
+describe('SettlementDetail — map toggle retired; map is a dossier tab (W2-c)', () => {
+  test('renders the dossier body, with NO sibling [Dossier | Map] toggle or map pane', async () => {
     const { default: SettlementDetail } = await import('../../src/components/SettlementDetail.jsx');
     render(
       <SettlementDetail
@@ -91,20 +94,14 @@ describe('SettlementDetail — Dossier/Map toggle', () => {
       />,
     );
 
-    // Default lens = dossier.
+    // The dossier body renders. The town map now lives as a TAB inside
+    // OutputContainer (mocked here), so the sibling map pane is never mounted.
     expect(await screen.findByTestId('dossier-body')).toBeTruthy();
     expect(screen.queryByTestId('map-body')).toBeNull();
 
-    // Click the "Map" segment.
-    fireEvent.click(screen.getByRole('button', { name: 'Map' }));
-
-    // Map pane swaps in; dossier body is gone (sibling fork, not both).
-    expect(await screen.findByTestId('map-body')).toBeTruthy();
-    expect(screen.queryByTestId('dossier-body')).toBeNull();
-
-    // Back to Dossier restores the dossier body.
-    fireEvent.click(screen.getByRole('button', { name: 'Dossier' }));
-    expect(await screen.findByTestId('dossier-body')).toBeTruthy();
-    expect(screen.queryByTestId('map-body')).toBeNull();
+    // The retired [Dossier | Map] segmented toggle is gone — neither segment button
+    // exists on the detail surface any more.
+    expect(screen.queryByRole('button', { name: 'Map' })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Dossier' })).toBeNull();
   });
 });

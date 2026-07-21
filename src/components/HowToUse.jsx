@@ -6,6 +6,7 @@ import { useFlag } from '../lib/flags.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
 import AboutManifesto from './howto/AboutManifesto.jsx';
+import Disclosure from './primitives/Disclosure.jsx';
 // V-26b: the house-voice draft of the handbook narrative, rendered only when the
 // (default-off) `handbookVoice` flag is on. Rides this already-lazy chunk (zero eager).
 import { VoicedConceptIntro, VOICED_HEADER } from './howto/HandbookVoiced.jsx';
@@ -390,57 +391,73 @@ export default function HowToUse({ standalone=false }) {
       return TABS.some(t => t.id === tab) ? tab : 'quick';
     } catch { return 'quick'; }
   });
+  // A VALID ?tab= deep-link (the /compare redirect, Account → ?tab=faq, etc.)
+  // auto-expands the Keeper's Handbook collapsible so the linked tab lands visible
+  // on arrival. Read once at mount, exactly like the activeTab initial value above.
+  const hasTabParam = (() => {
+    try {
+      const tab = new URLSearchParams(window.location.search).get('tab');
+      return TABS.some(t => t.id === tab);
+    } catch { return false; }
+  })();
 
   if (standalone) return (
-    // The About TRUST PAGE leads (the manifesto), with the practical Keeper's
-    // Handbook (the tabbed guide) below it. Centered, shared-width; short tabs let
-    // the parchment painting show through to the footer (no dead cream rectangle).
+    // The About page splits into TWO collapsibles (order W2-e): 'What this is' —
+    // the trust-page manifesto, open by default — and 'The Keeper's Handbook' —
+    // the practical tabbed guide, collapsed by default. A valid ?tab= deep-link
+    // auto-expands the handbook so the linked tab lands visible on arrival.
     <div style={{ maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
-      <AboutManifesto />
+      <Disclosure title="What this is" defaultOpen style={{ marginBottom:16 }}>
+        <AboutManifesto />
+      </Disclosure>
 
-      {/* THE KEEPER'S HANDBOOK — the practical, day-to-day guide. */}
-      <div style={{ maxWidth: PROSE_MAX, margin:'44px auto 14px' }}>
-        <div style={{ fontFamily:sans, fontSize:FS.xs, fontWeight:800, letterSpacing:'0.14em',
-          textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>{voiced ? VOICED_HEADER.eyebrow : 'The practical guide'}</div>
-        <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK, margin:0, lineHeight:1.2 }}>
-          {voiced ? VOICED_HEADER.title : <>The Keeper&rsquo;s Handbook</>}
-        </h2>
-        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'6px 0 0', fontFamily:sans }}>
-          {voiced ? VOICED_HEADER.subtitleLead : 'How to drive the generator, day to day. Look any rule or catalog up in the '}
-          <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>{voiced ? VOICED_HEADER.subtitleTail : '.'}
-        </p>
-      </div>
+      {/* THE KEEPER'S HANDBOOK — the practical, day-to-day guide. Collapsed by
+          default; a ?tab= deep-link (the /compare redirect, Account → ?tab=faq,
+          etc.) auto-expands it so the requested tab is visible on arrival. */}
+      <Disclosure title="The Keeper's Handbook" defaultOpen={hasTabParam}>
+        <div style={{ maxWidth: PROSE_MAX, margin:'0 auto 14px' }}>
+          <div style={{ fontFamily:sans, fontSize:FS.xs, fontWeight:800, letterSpacing:'0.14em',
+            textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>{voiced ? VOICED_HEADER.eyebrow : 'The practical guide'}</div>
+          <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK, margin:0, lineHeight:1.2 }}>
+            {voiced ? VOICED_HEADER.title : <>The Keeper&rsquo;s Handbook</>}
+          </h2>
+          <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'6px 0 0', fontFamily:sans }}>
+            {voiced ? VOICED_HEADER.subtitleLead : 'How to drive the generator, day to day. Look any rule or catalog up in the '}
+            <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>{voiced ? VOICED_HEADER.subtitleTail : '.'}
+          </p>
+        </div>
 
-      <div style={{ background:CARD, border:`1px solid ${BOR}`,
-        overflow:'hidden' }}>
-        {/* Tab bar */}
-        <div className="tab-strip" role="tablist" aria-label="Guide sections"
-          style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
-          overflowX:'auto' }}>
-          {TABS.map(({ id, label, Icon }) => (
-            <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
-              aria-selected={activeTab===id}
-              style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
-                background: activeTab===id ? CARD : 'transparent',
-                border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
-                cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
-                fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
-                WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
-              <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
-            </button>
-          ))}
+        <div style={{ background:CARD, border:`1px solid ${BOR}`,
+          overflow:'hidden' }}>
+          {/* Tab bar */}
+          <div className="tab-strip" role="tablist" aria-label="Guide sections"
+            style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
+            overflowX:'auto' }}>
+            {TABS.map(({ id, label, Icon }) => (
+              <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
+                aria-selected={activeTab===id}
+                style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
+                  background: activeTab===id ? CARD : 'transparent',
+                  border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
+                  cursor:'pointer', color: activeTab===id ? INK : MUT, fontFamily:sans,
+                  fontSize:FS.sm, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap',
+                  WebkitTapHighlightColor:'transparent', flexShrink:0 }}>
+                <Icon size={13} /><span style={{ marginLeft:4 }}>{label}</span>
+              </button>
+            ))}
+          </div>
+          {/* Content — the card is PAGE_MAX wide; tab bodies fill it via their
+              own responsive multi-column layouts (no inner max-width here). */}
+          <div style={{ padding:'24px 28px' }}>
+            {activeTab==='quick' && <QuickTab />}
+            {activeTab==='power' && <PowerTab />}
+            {activeTab==='living' && <LivingWorldTab />}
+            {activeTab==='ref'   && <RefTab />}
+            {activeTab==='compare' && <CompareTab />}
+            {activeTab==='faq' && <FaqTab />}
+          </div>
         </div>
-        {/* Content — the card is PAGE_MAX wide; tab bodies fill it via their
-            own responsive multi-column layouts (no inner max-width here). */}
-        <div style={{ padding:'24px 28px' }}>
-          {activeTab==='quick' && <QuickTab />}
-          {activeTab==='power' && <PowerTab />}
-          {activeTab==='living' && <LivingWorldTab />}
-          {activeTab==='ref'   && <RefTab />}
-          {activeTab==='compare' && <CompareTab />}
-          {activeTab==='faq' && <FaqTab />}
-        </div>
-      </div>
+      </Disclosure>
     </div>
   );
 

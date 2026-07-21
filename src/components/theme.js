@@ -126,6 +126,8 @@ export const EMPTY_VALUE = '—';
 // fixed content never tucks under the home indicator OR the bottom nav.
 //
 //   headerMobile  — the mobile sticky top bar (~59px painted).
+//   headerDesktop — the desktop sticky top bar (~60px painted); the dossier
+//                   toolbar pins flush below it (was a hardcoded top:60 literal).
 //   toolbarHeight — the dossier toolbar that pins under the header (~64px).
 //   bottomNav     — the 5-tab mobile bottom nav row (44px tap floor + borders).
 //   scrollPadDesktop — scroll-padding-top so anchored/focus scrolls clear chrome.
@@ -137,6 +139,7 @@ export const EMPTY_VALUE = '—';
 //   stickyTop      — desktop sticky-aside top breathing gap.
 export const CHROME = Object.freeze({
   headerMobile:    59,
+  headerDesktop:   60,
   toolbarHeight:   64,
   bottomNav:       57,
   scrollPadDesktop: 124,

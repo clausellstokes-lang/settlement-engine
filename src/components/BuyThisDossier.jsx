@@ -25,7 +25,7 @@
  * paid download; it only forgoes the later auto-upgrade.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useId } from 'react';
 import { Download, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { startCheckout } from '../lib/stripe.js';
@@ -35,7 +35,7 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { isConfigured } from '../lib/supabase.js';
 import { viewToPath } from '../lib/routes.js';
 import { t } from '../copy/index.js';
-import { sans, FS, RED, BODY } from './theme.js';
+import { sans, FS, RED, BODY, INK, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
@@ -88,6 +88,11 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
   // body. Null while the flag is off, so the checkout body is byte-identical.
   const [captchaToken, setCaptchaToken] = useState(null);
+  // Order W2-b — the anon reassurance caption rides a hover/focus tooltip pill
+  // rather than a permanent line. captionHover drives its visibility; noteId wires
+  // the button's aria-describedby to the (always-in-DOM) pill text.
+  const [captionHover, setCaptionHover] = useState(false);
+  const noteId = useId();
 
   const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
@@ -187,21 +192,37 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   if (access.reason === 'anon') {
     return (
       <div style={wrapStyle}>
-        <Button
-          type="button"
-          variant="primary"
-          size={size}
-          icon={<Download size={12} />}
-          disabled={!isConfigured}
-          onClick={() => { setError(null); setLadderOpen(true); }}
-          style={{ minHeight: 44 }}
-          title={isConfigured
-            ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
-            : 'Payments are not configured in this environment.'}
-        >
-          {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
-        </Button>
-        <span style={captionStyle}>One-time, no account needed.</span>
+        {/* The Buy button + its hover pill. The reassurance caption (order W2-b,
+            owner-dictated) rides a hover/focus tooltip instead of a permanent line.
+            It stays in the DOM and is wired through the button's aria-describedby via
+            an OPACITY toggle (never display/visibility) — so it never leaves the a11y
+            tree and screen readers announce it even while the pill is visually hidden.
+            (The manager flagged mobile-invisibility to the owner separately; the
+            string's aria-describedby home keeps it reachable regardless.) */}
+        <div style={{ position: 'relative', display: 'inline-flex' }}>
+          <Button
+            type="button"
+            variant="primary"
+            size={size}
+            icon={<Download size={12} />}
+            disabled={!isConfigured}
+            aria-describedby={noteId}
+            onClick={() => { setError(null); setLadderOpen(true); }}
+            onMouseEnter={() => setCaptionHover(true)}
+            onMouseLeave={() => setCaptionHover(false)}
+            onFocus={() => setCaptionHover(true)}
+            onBlur={() => setCaptionHover(false)}
+            style={{ minHeight: 44 }}
+            title={isConfigured
+              ? `Buy this dossier as a PDF for ${SINGLE_DOSSIER.priceLabel}. No account required.`
+              : 'Payments are not configured in this environment.'}
+          >
+            {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
+          </Button>
+          <span id={noteId} role="tooltip" style={{ ...pillStyle, opacity: captionHover ? 1 : 0 }}>
+            One-time, no account needed.
+          </span>
+        </div>
         {/* Wave-D human verification (INERT until activated). Managed/invisible;
             the token is captured before the ladder's one-time checkout fires. */}
         <CaptchaGate action="dossier" onToken={setCaptchaToken} />
@@ -285,3 +306,14 @@ const errStyle = { fontSize: FS.xs, color: RED, textAlign: 'center' };
 // BODY (ink-600) is the WCAG-passing helper-text color; MUTED fails 4.5:1 and
 // must not carry the price/rationale a purchaser needs.
 const captionStyle = { fontSize: FS.xs, color: BODY, textAlign: 'center', lineHeight: 1.4 };
+// Order W2-b — the anon reassurance as a hover/focus tooltip. Absolutely positioned
+// above the button so it never shifts layout; toggled by OPACITY only (stays in the
+// DOM + a11y tree so aria-describedby keeps announcing it). A flat dark ink plate /
+// parchment text (the deep-craft rule-framed idiom — no rounded corner, no z-axis
+// shadow); pointer-events off so it never eats a click.
+const pillStyle = {
+  position: 'absolute', bottom: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
+  whiteSpace: 'nowrap', padding: '4px 10px',
+  background: INK, color: PARCH, fontSize: FS.xs, fontFamily: sans, lineHeight: 1.4,
+  pointerEvents: 'none', transition: 'opacity 0.15s ease', zIndex: 5,
+};

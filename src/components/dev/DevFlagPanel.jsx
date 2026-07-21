@@ -18,10 +18,11 @@
 
 import { useState, useSyncExternalStore } from 'react';
 import { X } from 'lucide-react';
-import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY } from '../theme.js';
+import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY, CHROME, bottomClearance } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 
 const STORAGE_KEY = 'flag.__devPanelOpen';
 
@@ -57,6 +58,8 @@ export default function DevFlagPanel() {
   });
   // Force re-renders when any flag override changes.
   useSyncExternalStore(subscribe, getTick, () => 0);
+  // Called before the DEV gate below so hook order is stable across dev/prod.
+  const isMobile = useIsMobile();
 
   // Hard-gate on DEV. The component renders nothing in prod builds; Vite
   // tree-shakes the rest of this file out via dead-code elimination once
@@ -72,7 +75,11 @@ export default function DevFlagPanel() {
   }
 
   const baseStyle = {
-    position: 'fixed', bottom: 12, right: 12, zIndex: 10000,
+    // W2-a — the DEV-only chip moves to the bottom-LEFT so it no longer piles into
+    // the coordinated bottom-right prod stack (Feedback + scroll controls); mobile
+    // lifts it clear of the bottom nav + home indicator via the shared token. Stays
+    // DEV-gated (this whole component tree-shakes out of prod above).
+    position: 'fixed', bottom: isMobile ? bottomClearance(CHROME.fabLift) : 12, left: 12, zIndex: 10000,
     fontFamily: 'system-ui, -apple-system, sans-serif',
     fontSize: FS.sm, color: '#1c1409',
   };

@@ -25,6 +25,14 @@ function clickTab(container, label) {
   fireEvent.click(btn);
 }
 
+/** Order W2-e — the About page splits into two collapsibles; the Keeper's Handbook
+ *  (the tabbed guide) is COLLAPSED by default. Open it so its tabs/content render. */
+function expandHandbook(container) {
+  const btn = [...container.querySelectorAll('button[aria-expanded]')]
+    .find(b => /Keeper/i.test(b.textContent));
+  if (btn && btn.getAttribute('aria-expanded') === 'false') fireEvent.click(btn);
+}
+
 // Analytics is fire-and-forget — stub so the mount path stays quiet.
 vi.mock('../../src/lib/analytics.js', () => ({
   track: vi.fn(),
@@ -52,6 +60,7 @@ describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () =>
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { container } = render(<HowToUse standalone />);
     expect(container.firstChild).not.toBeNull();
+    expandHandbook(container); // the handbook is collapsed by default (order W2-e)
     const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
     // The practical handbook keeps The Living World tab.
     expect(labels).toContain('The Living World');
@@ -65,6 +74,7 @@ describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () =>
   it('clicking The Living World renders the thesis + the value ladder', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { getAllByText, container } = render(<HowToUse standalone />);
+    expandHandbook(container); // the handbook is collapsed by default (order W2-e)
     clickTab(container, 'The Living World');
     // The thesis line.
     expect(container.textContent.toLowerCase()).toContain('runs the region for years');
@@ -84,6 +94,34 @@ describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () =>
     expect(text).toContain('constraint-driven worldbuilding');
     expect(text).toContain('sliders shift probability');
     expect(text).toContain('causal variables');
+  });
+});
+
+describe('HowToUse — About split into two collapsibles (order W2-e)', () => {
+  it('"What this is" is open by default; the Keeper\'s Handbook is collapsed until opened', async () => {
+    const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
+    const { container } = render(<HowToUse standalone />);
+    // 'What this is' (the manifesto) is expanded on mount — its mechanism prose shows.
+    expect(container.textContent.toLowerCase()).toContain('resolves constraints');
+    // 'The Keeper's Handbook' is collapsed — its tab strip is not rendered yet.
+    expect(container.querySelectorAll('button[role="tab"]').length).toBe(0);
+    // Opening it reveals the tabbed guide.
+    expandHandbook(container);
+    expect(container.querySelectorAll('button[role="tab"]').length).toBeGreaterThan(0);
+  });
+
+  it('a valid ?tab= deep-link auto-expands the Keeper\'s Handbook on arrival', async () => {
+    const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
+    const orig = window.location.pathname + window.location.search;
+    window.history.replaceState({}, '', '/how-to?tab=living');
+    try {
+      const { container } = render(<HowToUse standalone />);
+      // Deep-link → handbook open without any click → its tabs are present.
+      const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
+      expect(labels).toContain('The Living World');
+    } finally {
+      window.history.replaceState({}, '', orig);
+    }
   });
 });
 

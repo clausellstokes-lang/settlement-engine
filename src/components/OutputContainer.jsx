@@ -37,6 +37,11 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
+// W2-c — MAP AS THE FIFTH TAB. The SAME lazy specifier SettlementDossierHero and
+// PublicDossierView already mint, so this adds no new chunk and no first-paint leak
+// (tests/build/townMapLazy). Mounted, NEVER edited — the pane sits at its exact size
+// ceiling. Fed the mechanical settlement + the owner-only map props (below).
+const SettlementMapPane = lazy(() => import('./townMap/SettlementMapPane.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2). The editable name now
@@ -92,6 +97,11 @@ export const TAB_GROUPS = Object.freeze({
   // registration and renderTab case arrived with claude/traditions and plugged
   // into this already-placed slot with no reorder.
   world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
+  // Map (W2-c) — the SM-2 town map as a first-class tab, ordered Summary / Systems
+  // / World / Map / Notes. Present on the owner surfaces (wizard draft + saved view)
+  // but dropped from a public gallery dossier, which keeps its own owner-opt-in map
+  // toggle (the map tab self-drops there via the !publicDossier registration gate).
+  map:     { label: 'Map',     tabs: ['map'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
@@ -159,7 +169,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapWorldState = null, mapRegionalGraph = null, mapCanEdit = false }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -453,7 +463,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // save): needs an owning saved entry and never renders on the public player
     // view. Self-gates further inside (versionHistory flag, tier lock).
     ...(liveSaveEntry && !playerView
-      ? [{ id:'versions', label:'Versions', Icon: Clock }] : [])
+      ? [{ id:'versions', label:'Versions', Icon: Clock }] : []),
+    // Map (W2-c) — the town-map tab. Present on the owner surfaces (wizard draft +
+    // saved view); DROPPED from a public gallery dossier (readOnly + no saveId),
+    // which surfaces the map through its own owner-opt-in [Dossier | Map] toggle
+    // (fail-closed gallery share) — this gate keeps the two from double-rendering.
+    // Reuses the already-bundled MapPin glyph (no new first-paint icon).
+    ...(!publicDossier ? [{ id:'map', label:'Map', Icon: MapPin }] : [])
   ];
   const selectedTab = allTabs.some(t => t.id === activeTab)
     ? activeTab
@@ -623,6 +639,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         </>
       );
       case 'substrate':  return <SubstrateTab settlement={s} />;
+      // Map (W2-c) — the town map, mounted (never edited). Reads the MECHANICAL
+      // settlement (rawSettlement), not the AI-narrated clone. mapCanEdit / saveId /
+      // worldState / regionalGraph arrive as props: the wizard draft passes none
+      // (view-only base map — the dormancy law), the saved view threads the owner's
+      // edit gate + season/siege seam. Covered by the outer Suspense in the render.
+      case 'map':        return <SettlementMapPane settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} />;
       case 'magic':      return <MagicTab settlement={s} />;
       // War & Faith — OUR gated FaithSection + a war half from OUR light
       // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,
