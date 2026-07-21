@@ -260,6 +260,125 @@ suite (EXACTLY the 4 parked golden families tolerated), authoritative closure
 BFS (report vs 1,039,977 / ceiling 1,040,000), ledger row with the re-graded
 bars (4 → A+, 8 → A, 20-depth note), updated RESUME marker, memory. Then THE
 HALT RESUMES — the owner queue (tranches 4-6) is untouched by 3b.
+
+═══════════════════════════════════════════════════════════════════════════
+## TRANCHE 3c — THE DISCOURSE KERNEL (owner-authorized NEW CAPABILITY,
+## 2026-07-21; dispatch AFTER the 3b fold; one lane + its own gated fold)
+═══════════════════════════════════════════════════════════════════════════
+ORIGIN + AUTHORIZATION: the owner asked for "a very rudimentary LLM inherent
+in the system" whose ONLY purpose is connecting the cause-walk's reasons into
+seamless prose (today: a logically-correct but prose-disconnected
+chronological list). RULING (agreed in-session): a neural LM is the WRONG
+mechanism for exactly that goal — tiny LMs are the least coherent writers,
+cross-device float inference threatens THE PROMISE, and generative free text
+on a truth surface violates THE FINITE-SEMANTICS LAW (AI is never the
+writer). The RIGHT mechanism is CLASSICAL DISCOURSE REALIZATION: a
+deterministic, finite-lexicon prose-connection kernel over the recorded
+cause DAG. The owner authorized THIS. It is new capability (not repair) —
+that sign-off is THIS section; do not re-ask.
+
+### WHAT IT IS
+A pure display-layer kernel that turns a resolved cause-walk (a typed chain
+of recorded receipts, now MULTI-HOP via E-J-v2's `causedBy` edges) into ONE
+connected passage instead of N disconnected lines. Four classical moves:
+1. CONNECTIVE SELECTION — a finite RELATION→CONNECTIVE lexicon: causal edges
+   draw from the because/so/"which in turn" family; same-tick/parallel hops
+   from meanwhile/"at the same time"; adversative outcomes from
+   despite/"even so". Relation typing derives from the hop's existing
+   `type` (dramaClass || kind — causeWalk.js:101) + tick deltas — a FINITE
+   enumeration; ⚠️ the impactKind walker law: kinds are LITERAL — enumerate
+   from the real vocabulary, never invent.
+2. ENTITY TRACKING (anaphora) — first mention = full name via the CANONICAL
+   helpers (nameOf/governingFactionOf/factionArchetype — the faction-key law,
+   NEVER hand-rolled; ⚠️ graph.js defaults node.name to its id — a
+   name-shaped id is that defect class, resolve through the helpers);
+   subsequent mentions = pronoun (settlements/institutions 'it', persons
+   they/them unless the record carries pronouns).
+3. AGGREGATION — adjacent same-subject clauses fuse into one sentence
+   (deterministic, capped clause count per sentence); repeated shapes
+   coalesce (the C2 dedup idiom).
+4. TENSE/PACING — tick-distance banding: deep-past hops in past perfect, the
+   pivot in simple past; reuse tickCalendarLabel for any spoken time.
+
+### WHERE IT LIVES (the architecture)
+- NEW lazy leaf `src/domain/display/discourseKernel.js` — pure function
+  `realizeCauseWalk(walk, { seedId }) → { text, clauses: [{ text,
+  receiptKey }] }`. NO store access, NO Date/random/localeCompare (the
+  determinism bans); variant choice, if any, = the conjunction ladder's
+  PURE-HASH idiom (seedId,key) — no rng stream.
+- ⚠️⚠️ PRIOR ART IS LAW — READ FIRST, EXTEND, NEVER FORK: the CONJUNCTION
+  CONTENT LADDER already exists (causeConjunctionContent.js + Role/Class
+  tables + causeLifecycleVocabulary.causeLifecyclePhrase floor) — it is
+  NPC-lifecycle SINGLE-LINE content selection, not cross-hop discourse, so
+  the kernel is genuinely new — but it CALLS INTO those ladders for per-hop
+  phrasing where keys match, adopts their tiered-specificity + pure-hash +
+  lazy-only laws verbatim, and duplicates ZERO content. Also read
+  newsVoice.js + humanizeEngineTokens.js before writing any word.
+- CONSUMER: CauseWalkPanel.jsx (the one renderer) chooses realizer by flag;
+  flag OFF ⇒ the EXACT current rendering path, byte-identical (dormancy law).
+  Preserve the covert/redaction contract untouched: REDACTED_HOP /
+  NO_DEEPER_MEMORY / LEDGER_DARK_LINE stay verbatim (E-G's secrets test
+  pins redaction — the kernel must never paraphrase a redaction line).
+- DARK GATE: virtual flag `discourseProseEnabled`, ABSENT from every preset
+  (the provenanceLedgerEnabled idiom — read defensively, byte-neutral off).
+  The owner's flip can ride the same ONE-REGEN batch that lights the ledger:
+  the DAG and its connected prose light TOGETHER (amend T4 item 1's note).
+- SCOPE CLOSED: Phase 1 = the cause-walk ONLY. Decree reasons + chronicle
+  thread intros = recorded Phase-2 follow-ons (owner queue), NOT this lane.
+
+### THE ENFORCERS (built in the SAME commit — the kernel ships pre-audited)
+a. CLAUSE-PROVENANCE PIN — every emitted clause carries its receiptKey and
+   the pin asserts each maps to a REAL recorded receipt (the E-G
+   claims-parity idiom): connected prose that embellishes = RED. This is the
+   anti-LLM guarantee made executable.
+b. LIT NARRATIVE-PARITY VARIANT — a flag-ON drive through the E-G walker's
+   claims/direction checks: discourse output introduces ZERO contradictions
+   and ZERO unrecorded claims.
+c. DETERMINISM PIN — same seed ×2 ⇒ byte-equal text (deep-equal clauses).
+d. LEXICON TOTALITY WALKER — every relation type in the live vocabulary has
+   a connective entry or the explicit default; a NEW kind with no entry REDS
+   (deposit-and-consume; the E-A manifest will demand this walker's own
+   planted mutation at fold — plant it in the same change).
+e. DORMANCY BYTE-IDENTITY — flag OFF, CauseWalkPanel output byte-equal to
+   base (the temp-worktree diff method, E-J-v2's V3 verbatim).
+f. VOICE — the lexicon lives where voiceMechanics scans it (or extend the
+   scan): NO em-dashes, NO exclamations, house register (read VOICE_AND_TONE
+   + the letter frame first). Lexicon copy is FABLE-TIER work: implement
+   machinery on Opus; the connective lexicon text gets a Fable-tier
+   authoring/review pass before the lane commits.
+
+### HAZARDS (each has bitten; honor or re-verify)
+⚠️ EAGER Δ 0 HARD — margin 23 B: new file must stay out of the entry
+closure (CauseWalkPanel is lazy — VERIFY with the closure BFS, never assume;
+the ratchet is skipIf(!VERIFY_DIST) — plain runs are silently green).
+⚠️ spellBreakCensus SCANS causeWalk strings — its drive uses default rules
+(flag off) so the baseline must be UNCHANGED; verify, and add the flag-ON
+census expectation as part of the lit variant (b) rather than shifting the
+frozen baseline. ⚠️ em-dash in JSDoc @tags breaks tsc-strict (V-G). ⚠️ new
+file + walkers: a new tests/ invariant file will red the E-A totality
+manifest at fold until it gets its planted mutation or rationale — that red
+is the contract; budget for it. ⚠️ deterministic ordering: kernel sorts by
+(tick, id codepoint) — never insertion order, never localeCompare.
+⚠️ chronicle `stress` is a single OBJECT, not an array, if touched for
+context reads.
+
+### LANE MECHANICS
+WHERE: any freed worktree AFTER the 3b fold (vision-i/j/e rotate; cd +
+rev-parse first — the ancestor-landing trap). Branch
+`claude/t3c-discourse-kernel` off the POST-3b composite tip (read the ledger
+for the hash; verify with rev-parse). Staffing: Opus implementer + the
+Fable-tier lexicon pass (f). VERIFY-FIRST preamble, FORBID stash, explicit
+staging, never push/fold from the lane.
+GATE (verbatim receipts): domain-strict BARE 0 · tsc 0 · eslint 0 new ·
+enforcers a–f green · focused causeWalk/CauseWalkPanel/narrativeParity/
+spellBreakCensus suites · npm run build + VERIFY_DIST=1 closure (exact
+number vs ceiling; Δ ≤ 0) · letter golden byte-identical · python NUL 0 ·
+4-parked-only tolerated.
+FOLD: manager merges post-3b-fold, full two-shard, authoritative BFS, ledger
+row, RESUME marker update, memory.
+CLOSES: nothing lettered while dark (bar 2/20 QUALITY when the owner's flip
+lights it — the cause-walk then reads as one thread, every clause still
+tracing to its receipt). The capstone's display half, done the engine's way.
 ═══════════════════════════════════════════════════════════════════════════
 Everything above gets the product to: Group-1 bars A+, Group-2 at "A+ pending ONE act below",
 Group-3 at "A+ pending soak/lived." These acts finish it. Ordered by leverage.
@@ -269,6 +388,9 @@ Group-3 at "A+ pending soak/lived." These acts finish it. Ordered by leverage.
    UNLOCKS: the RECORDED-law half of bars 2, 4, and 20 AT ONCE (cause-walk renders, chronicle
    records instead of infers, arcs trace). REC: do it — it's the single act that most moves the
    capstone; the instruments (arc-soak) already prove it produces real structure when lit.
+   AMENDED (2026-07-21, §3c): flip `discourseProseEnabled` IN THE SAME BATCH once the
+   discourse kernel lands — the multi-hop DAG (E-J-v2) and its connected prose (§3c)
+   light TOGETHER: the cause-walk becomes one readable thread, every clause receipted.
 2. REGEN THE GOLDEN-BOUND PROSE: the deferred eventProse/roads/tradition em-dash sweep + the
    letter-humanizer wiring (tickCalendarLabel/humanizeFlagKey into letterToPlainText). UNLOCKS:
    bars 8 + 18 golden-bound remainder. REC: batch with #1.
