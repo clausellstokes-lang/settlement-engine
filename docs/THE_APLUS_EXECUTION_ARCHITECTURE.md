@@ -72,6 +72,43 @@ narrative truth; a surface inventing a beat reddens. PIN: the walker. CLOSES: th
 all surfaces" half of bar 20 (the recorded-DEPTH enhancement + LIVED sign the rest — tranche 5/6).
 
 ═══════════════════════════════════════════════════════════════════════════
+### E-H · PER-MECHANISM LIT-WALKTHROUGH WALKER  → closes bar 4 (SUBSTANCE, provable half)
+(Added 2026-07-21 under NO-COMPROMISES — previously deferred by C1 as "its own lane"; that
+was a compromise. It is buildable and mine.) BUILD: a walker that enumerates every worldPulse
+MECHANISM (the ~152 kernels/movers) and asserts each ships a flag-ON LIT walkthrough test (not
+just a flag-OFF dormancy golden) — i.e. every mechanism has an executed proof of its lit
+behavior, not only its dark byte-identity. WHERE: tests/property/mechanismLitCoverage.test.js +
+a REGISTRY of mechanisms ⇄ their lit tests, completeness-asserted (a new mechanism with only a
+dormancy golden REDS). Land shrink-only baselined to the current lit-coverage gap, drive to 0.
+CONTRACT: "a lit walkthrough runs for every mechanism" becomes STRUCTURAL, not convention.
+CLOSES the repo-provable half of bar 4 (the soak still signs the RATES). Eager Δ 0 (test-only).
+
+### E-I · KEYBOARD MAP-PLACEMENT (bar 9 ACCESSIBILITY) — buildable BUT budget-gated
+(Added 2026-07-21 under NO-COMPROMISES — previously a "scoped follow-on"; packaged now WITH its
+real constraint.) BUILD: a keyboard interaction for placing settlements on the world map — a
+focusable control + arrow/enter placement committing through the existing addPlacement store gate
+(or the bridge), so a keyboard/SR user is not dead-ended. ⚠ CONSTRAINT (why it's not free): the
+natural home, WorldMap.jsx, is at its TOLERANCE-0 sizeBaseline ceiling (600) and composite headroom
+is ~29 B — so this is REAL UI code that can add eager. ARCH to stay in budget: a LAZY-LEAF keyboard
+controller (its own chunk) wired via a net-zero hook in WorldMap, NOT inline growth; measure closure,
+and if it can't land eager-neutral it WAITS for the owner eager reclaim (the ONE REGEN restores
+headroom). CLOSES the repo-provable half of bar 9 (SR PARITY is still lived-certified). Pin: a
+keyboard-driven placement round-trips to the store.
+
+### E-J · KERNEL OUTCOME→OUTCOME DEPTH ADOPTION (bar 20 THE STORY) — buildable DARK now
+(Added 2026-07-21 under NO-COMPROMISES — previously mis-labeled fully owner-gated; the DEFAULT-FLIP
+is owner, but the CODE is buildable dark now.) BUILD: have 2-3 high-value kernels (ladder contests,
+generosity→gratitude, war→occupation) mint RECORDED outcome→outcome `causedBy` edges — moving the
+provenance ledger from one-hop-to-ROOT toward genuine MULTI-HOP chains (today only roads V-24d mints
+one, outside full_simulation; see [[recorded-causal-depth-reality]]). ARCH: build the edges behind
+the existing provenanceLedgerEnabled flag (DARK by default) so NO shipped golden shifts — the code
+lands now, the default-on flip rides the owner's ONE REGEN. Needs the ContestRec.openedTick schema
+field (a persisted-shape add — the ONE part that IS owner-gated; build the kernel code to consume it,
+flag the schema add). Pin: the arc-soak's deepChains metric (already wired, dark) lights up ≥ a
+measured floor when the flag + these kernels are on. CLOSES the recorded-DEPTH half of bar 20 that
+the narrative-parity walker (E-G) + story census can't reach alone (the LIVED "moves someone" stays
+human). Eager Δ 0 (engine-lazy, dark-default).
+
 ## TRANCHE 3 — RATCHET BURN-DOWN (mine, except owner-taste entries)  → bars 17, 18, 8
 ═══════════════════════════════════════════════════════════════════════════
 Drive the shrink-only ratchets to their ZERO targets where the work is mechanical, not taste:
