@@ -1,0 +1,19 @@
+{
+  "comment": "E-H per-mechanism lit-walkthrough baseline — the CURRENT lit-coverage gap, SHRINK-ONLY. Each entry is a worldPulse mechanism (module) or simulation-rules flag with NO standing flag-ON lit proof (no direct-import lit test, no LIT_COVERED_BY registry reference in tests/property/mechanismLitCoverage.test.js). Strike entries as lit tests land; never add one except as a deliberate, vetoable burn-down decision. The walker fails on ANY drift in either direction.",
+  "mechanisms": [
+    "canonRelationshipImpact",
+    "generosityNews",
+    "generosityUpdates",
+    "mobilizationEffects",
+    "relationshipRuleHelpers",
+    "relationshipRulesAdversarial",
+    "relationshipRulesCore",
+    "stablePart",
+    "stressorSeverity"
+  ],
+  "flags": [
+    "ladderPoliticalWindowsEnabled",
+    "underwaysOrganicFoundingEnabled",
+    "warDispositionEnabled"
+  ]
+}
