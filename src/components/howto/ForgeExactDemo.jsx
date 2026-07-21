@@ -61,7 +61,7 @@ export default function ForgeExactDemo() {
         </div>
         <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: 0, fontFamily: sans }}>
           This forges <strong style={{ color: INK }}>{fixture.town.name}</strong> from seed{' '}
-          <code style={{ fontFamily: 'monospace', color: GOLD }}>{fixture.seed}</code> — the exact town
+          <code style={{ fontFamily: 'monospace', color: GOLD }}>{fixture.seed}</code>: the exact town
           the landing page shows, every time. Same seed, same world. No re-roll behind your back.
         </p>
       </div>

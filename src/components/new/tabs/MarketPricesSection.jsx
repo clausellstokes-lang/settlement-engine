@@ -64,7 +64,7 @@ export default function MarketPricesSection({ prices }) {
         )}
       </div>
       <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
-        Quoted in local coin — a market-crier&rsquo;s coarse reckoning off the founding trade profile and the live scarcity of the roads, not a fixed rate.
+        Quoted in local coin: a market-crier&rsquo;s coarse reckoning off the founding trade profile and the live scarcity of the roads, not a fixed rate.
       </p>
     </Section>
   );

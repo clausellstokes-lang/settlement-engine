@@ -453,7 +453,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
 
       {/* ── Self-explaining footer (the whisper via an existing organ) ───── */}
       <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
-        This report compresses — never truncates — what unfolded, scaled to the span.
+        This report compresses, never truncates, what unfolded, scaled to the span.
         {hasRecordedEdges
           ? ' Causal links are recorded from the engine’s provenance ledger where marked, inferred from shared entities otherwise; click any receipt to find it on the map.'
           : ' Causal links between events are inferred from what they touched; click any receipt to find it on the map.'}

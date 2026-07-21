@@ -318,7 +318,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         <td style={{ ...LEDGER_CELL, whiteSpace:'nowrap' }}>
           {health && health.severity >= 2
             ? <HealthPip pip={health}/>
-            : <span aria-hidden="true" style={{ color:MUTED }}>—</span>}
+            : <span aria-hidden="true" style={{ color:MUTED }}>–</span>}
         </td>
 
         {/* ── Action cluster — ONE primary (Open), rare actions behind a kebab
@@ -349,7 +349,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 disabled={exportBusy}
                 busy={exportBusy}
                 icon={<FileText size={12}/>}
-                title="Export this settlement as a PDF — yours to keep even while frozen"
+                title="Export this settlement as a PDF, yours to keep even while frozen"
               >
                 {exportBusy ? 'Exporting…' : 'Export PDF'}
               </Button>

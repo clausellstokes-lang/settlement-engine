@@ -82,7 +82,7 @@ function OpCard({ op, index, decision, onDecide }) {
             onChange={(e) => onDecide(index, { ...decision, consented: e.target.checked })}
             aria-label={`Consent to the protected op ${op.opType}`}
           />
-          This op touches a protected constraint — tick to consent, or it will not apply.
+          This op touches a protected constraint. Tick to consent, or it will not apply.
         </label>
       )}
     </div>

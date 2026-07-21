@@ -89,7 +89,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
         setGenerated({ deviations, dossier, config, kind: 'settlement' });
       }
     } catch {
-      setGenerated({ error: 'Generation failed — the config could not be built.' });
+      setGenerated({ error: 'Generation failed. The config could not be built.' });
     } finally {
       setGenerating(false);
     }
@@ -124,7 +124,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
         // separate canonize step — surfaced honestly (canonizes nothing until commit).
         const res = await instantWorld?.(result.config, { seed });
         setCommitted(res?.ok
-          ? { kind: 'realm', detail: `Placed ${res.settlementCount ?? ''} settlements. The realm’s map is not yet frozen — canonize it when you’re ready.` }
+          ? { kind: 'realm', detail: `Placed ${res.settlementCount ?? ''} settlements. The realm’s map is not yet frozen. Canonize it when you’re ready.` }
           : { kind: 'error', detail: res?.reason ? `Could not place the realm (${res.reason}).` : 'Could not place the realm.' });
       } else {
         const { saves } = await import('../../lib/saves.js');
@@ -152,7 +152,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
       <Segmented options={SCOPE_OPTIONS} value={scope} onChange={(s) => { setScope(s); setResult(null); setGenerated(null); setCommitted(null); }} size="sm" ariaLabel="Construction scope" />
-      <Eyebrow>{scope === 'realm' ? 'Compose a realm — describe it' : 'Construct a settlement — describe it'}</Eyebrow>
+      <Eyebrow>{scope === 'realm' ? 'Compose a realm: describe it' : 'Construct a settlement: describe it'}</Eyebrow>
       <PromptArea
         value={intent}
         onChange={setIntent}
@@ -186,7 +186,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
               {unsupported.map((u, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <Badge tone="warning" size="sm">dropped</Badge>
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{String(u.key)}{u.reason ? ` — ${u.reason}` : ''}</span>
+                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{String(u.key)}{u.reason ? `: ${u.reason}` : ''}</span>
                 </div>
               ))}
             </div>
@@ -226,7 +226,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, minWidth: 130 }}>{DIMENSION_LABEL[d.dimension] || d.dimension}</span>
                   <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                    is <b>{d.actual}</b>, you asked <b>{d.target}</b> — {d.direction} it
+                    is <b>{d.actual}</b>, you asked <b>{d.target}</b>. {d.direction} it
                   </span>
                 </div>
               ))}
@@ -239,12 +239,12 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
                 Revise (delta-only)
               </Button>
               <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                Pass {round + 1} of {MAX_REVISE_ROUNDS} — sends only the {deviations.length} deviation{deviations.length === 1 ? '' : 's'} + the current config, no re-grounding.
+                Pass {round + 1} of {MAX_REVISE_ROUNDS}: sends only the {deviations.length} deviation{deviations.length === 1 ? '' : 's'} + the current config, no re-grounding.
               </span>
             </div>
           )}
           {!canRevise && deviations.length > 0 && (
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Revise budget spent — commit as-is or refine your prompt.</span>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Revise budget spent. Commit as-is or refine your prompt.</span>
           )}
 
           <Button variant="primary" size="sm" busy={committing} disabled={committing} onClick={commit}>

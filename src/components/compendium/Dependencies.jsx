@@ -111,7 +111,7 @@ export function DependencySummary({ deps, item }) {
                   padding:'1px 5px',
                 }}
               >
-                {e.missing && '! '}{e.name}
+                {e.name}
               </span>
             ))}
           </div>

@@ -8,7 +8,7 @@
  * so a missing READINESS/SAFETY printed a bare comma-space in the dossier.
  * The fix is two-sided and these tests pin both sides:
  *   1. Value-rendering primitives (StatStrip, StatTile, ScoreCard,
- *      ScoreWithBreakdown) fall back to an em-dash — and still render a
+ *      ScoreWithBreakdown) fall back to a placeholder dash (en dash) — and still render a
  *      genuine zero rather than swallowing it as falsy.
  *   2. Sections no longer inject ', ' — a sparse settlement renders no
  *      comma-space text node anywhere in the swept chapters.
@@ -52,8 +52,8 @@ function collectText(node, out = []) {
   return out;
 }
 
-describe('primitive missing-value fallbacks (em-dash, zero-preserving)', () => {
-  test('StatStrip renders em-dash for undefined/empty values and keeps zero', () => {
+describe('primitive missing-value fallbacks (placeholder dash (en dash), zero-preserving)', () => {
+  test('StatStrip renders placeholder dash (en dash) for undefined/empty values and keeps zero', () => {
     const texts = collectText(StatStrip({
       stats: [
         { label: 'READINESS', value: undefined },
@@ -61,25 +61,25 @@ describe('primitive missing-value fallbacks (em-dash, zero-preserving)', () => {
         { label: 'SCORE', value: 0 },
       ],
     }));
-    expect(texts.filter(t => t === '—')).toHaveLength(2);
+    expect(texts.filter(t => t === '–')).toHaveLength(2);
     expect(texts).toContain('0');
     expect(texts).not.toContain(', ');
   });
 
-  test('StatTile renders em-dash for a missing value and keeps zero', () => {
-    expect(collectText(StatTile({ label: 'POP', value: undefined }))).toContain('—');
+  test('StatTile renders placeholder dash (en dash) for a missing value and keeps zero', () => {
+    expect(collectText(StatTile({ label: 'POP', value: undefined }))).toContain('–');
     expect(collectText(StatTile({ label: 'POP', value: 0 }))).toContain('0');
     expect(collectText(StatTile({ label: 'POP', value: undefined }))).not.toContain(', ');
   });
 
-  test('ScoreCard renders em-dash for a null score and keeps zero', () => {
-    expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).toContain('—');
+  test('ScoreCard renders placeholder dash (en dash) for a null score and keeps zero', () => {
+    expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).toContain('–');
     expect(collectText(ScoreCard({ label: 'THREAT', score: 0 }))).toContain('0');
     expect(collectText(ScoreCard({ label: 'THREAT', score: null }))).not.toContain(', ');
   });
 
-  test('ScoreWithBreakdown renders em-dash for a missing score and keeps zero', () => {
-    expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).toContain('—');
+  test('ScoreWithBreakdown renders placeholder dash (en dash) for a missing score and keeps zero', () => {
+    expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).toContain('–');
     expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY', score: 0 }))).toContain('0');
     expect(collectText(ScoreWithBreakdown({ label: 'LEGITIMACY' }))).not.toContain(', ');
   });
@@ -110,21 +110,21 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
     expect(texts).not.toContain(', ');
   });
 
-  test('missing stat-strip values surface as em-dash (DefenseSecurity)', () => {
-    expect(collectText(DefenseSecurity({ settlement: SPARSE, vm: sparseVm }))).toContain('—');
+  test('missing stat-strip values surface as placeholder dash (en dash) (DefenseSecurity)', () => {
+    expect(collectText(DefenseSecurity({ settlement: SPARSE, vm: sparseVm }))).toContain('–');
   });
 
-  test('ViabilityAssessment formatVal: null and shapeless-object metrics render em-dash', () => {
+  test('ViabilityAssessment formatVal: null and shapeless-object metrics render placeholder dash (en dash)', () => {
     const vm = {
       ...sparseVm,
       viability: { ...sparseVm.viability, metrics: { waterAccess: null, oddity: {} } },
     };
     const texts = collectText(ViabilityAssessment({ settlement: SPARSE, vm }));
-    expect(texts.filter(t => t === '—').length).toBeGreaterThanOrEqual(2);
+    expect(texts.filter(t => t === '–').length).toBeGreaterThanOrEqual(2);
     expect(texts).not.toContain(', ');
   });
 
-  test('AIAppendix connection endpoints fall back to em-dash, not comma-space', () => {
+  test('AIAppendix connection endpoints fall back to placeholder dash (en dash), not comma-space', () => {
     const vm = {
       aiAppendix: {
         connectionsMap: [
@@ -134,7 +134,7 @@ describe("section sweep — no literal ', ' text node on sparse data", () => {
       },
     };
     const texts = collectText(AIAppendix({ settlement: SPARSE, narrativeMode: true, vm }));
-    expect(texts.filter(t => t === '—')).toHaveLength(2);
+    expect(texts.filter(t => t === '–')).toHaveLength(2);
     expect(texts).toContain('Mira Veld');
     expect(texts).toContain('Harbor Guild');
     expect(texts).not.toContain(', ');

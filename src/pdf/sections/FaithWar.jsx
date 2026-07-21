@@ -202,7 +202,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
           {tradeWars.map(prize => (
             <Line key={prize.prizeId} label="Trade war." tone="warn">
               {prize.role === 'market'
-                ? `Its ${prize.commodityLabel} market is a contested prize — ${prize.winner} now supplies it.`
+                ? `Its ${prize.commodityLabel} market is a contested prize. ${prize.winner} now supplies it.`
                 : prize.role === 'supplier'
                   ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
                   : prize.role === 'displaced'
@@ -237,7 +237,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
               </Text>
               {doc.terms.map((term, i) => (
                 <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
-                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} — {term.strainLine}
+                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} · {term.strainLine}
                 </Text>
               ))}
               {doc.frayingLine && (
@@ -387,7 +387,7 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 2 }}>
               <Text style={{ ...type.body_em, color: palette.ink }}>{b.subject}: </Text>
               believed {b.strength}, {b.readiness} ({b.confidence}, {b.staleness})
-              {b.divergence.length > 0 ? ` — ${b.divergence.join('; ')}` : ''}
+              {b.divergence.length > 0 ? `: ${b.divergence.join('; ')}` : ''}
             </Text>
           ))}
         </View>

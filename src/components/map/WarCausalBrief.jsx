@@ -29,7 +29,7 @@ function ReasonRow({ type, receipt, tone }) {
       <span aria-hidden style={{ color: accent, flexShrink: 0, marginTop: 2, fontSize: FS.pico }}>●</span>
       <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs }}>
         <span style={{ color: INK, fontWeight: 800 }}>{human(type)}</span>
-        {receipt ? <span style={{ color: SECOND }}> — {receipt}</span> : null}
+        {receipt ? <span style={{ color: SECOND }}>: {receipt}</span> : null}
       </span>
     </li>
   );

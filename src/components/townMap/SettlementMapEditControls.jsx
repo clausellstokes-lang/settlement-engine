@@ -80,7 +80,7 @@ export default function SettlementMapEditControls({
       <div data-town-years-control style={{ position: 'absolute', bottom: SP.sm, left: SP.sm, zIndex: 4 }}>
         <Button data-town-years variant={yearsShown ? 'primary' : 'secondary'} size="sm"
           aria-pressed={yearsShown} onClick={() => setTimelapseTick(yearsShown ? null : liveWeek)}
-          aria-label="Show the years — the town's growth, scars, and rebuilding, written on the map">
+          aria-label="Show the years: the town's growth, scars, and rebuilding, written on the map">
           Show the years
         </Button>
       </div>
@@ -104,7 +104,7 @@ export default function SettlementMapEditControls({
           {/* Accessible names via aria-label, never native title= — the guidance
               layer's title= census is shrink-only (guidanceRegistry.walker). */}
           <Button data-town-edit-reroll variant="secondary" size="sm" onClick={onReroll}
-            aria-label="Reroll the layout — same settlement, a different deterministic arrangement">
+            aria-label="Reroll the layout: same settlement, a different deterministic arrangement">
             Reroll layout
           </Button>
           <Button data-town-edit-labels variant={legendPrefs.showLabels ? 'primary' : 'secondary'} size="sm"
@@ -120,12 +120,12 @@ export default function SettlementMapEditControls({
           {typeof onToggleAnnotate === 'function' && (
             <Button data-town-edit-annotate variant={annotating ? 'primary' : 'secondary'} size="sm"
               aria-pressed={!!annotating} onClick={onToggleAnnotate}
-              aria-label="Toggle DM marker placement — click the map to drop a labelled pin">
+              aria-label="Toggle DM marker placement. Click the map to drop a labelled pin">
               Markers
             </Button>
           )}
           <Button data-town-edit-reset variant="ghost" size="sm" disabled={!hasEdits} onClick={onReset}
-            aria-label="Clear all cosmetic map edits — restores the generated layout">
+            aria-label="Clear all cosmetic map edits. Restores the generated layout">
             Reset
           </Button>
         </div>
@@ -164,7 +164,7 @@ function LockedMarkers() {
       </div>
       <Button
         variant="secondary" size="sm" onClick={onUnlock}
-        aria-label="DM markers are a Cartographer premium feature — upgrade to unlock"
+        aria-label="DM markers are a Cartographer premium feature. Upgrade to unlock"
       >
         DM markers (Premium)
       </Button>

@@ -17,9 +17,9 @@ import PricingSample from './PricingSample.jsx';
  * the same dossier in FIELD MODE (dim) — the mobile field-notebook art direction.
  */
 export const SAMPLES = Object.freeze([
-  { id: 'dossier-desk',     title: 'The settlement dossier — desk',     field: false, posture: 'desk',  register: 'artifact',   render: () => <DossierSample posture="desk" /> },
-  { id: 'library-desk',     title: 'The library — desk',                field: false, posture: 'desk',  register: 'instrument', render: () => <LibrarySample posture="desk" /> },
-  { id: 'compendium-desk',  title: 'Compendium · Deities — desk',       field: false, posture: 'desk',  register: 'reference',  render: () => <CompendiumSample posture="desk" /> },
-  { id: 'pricing-desk',     title: 'Pricing — desk',                    field: false, posture: 'desk',  register: 'instrument', render: () => <PricingSample posture="desk" /> },
-  { id: 'dossier-field',    title: 'The dossier in FIELD MODE — mobile, dim', field: true, posture: 'field', register: 'artifact', render: () => <DossierSample field posture="field" /> },
+  { id: 'dossier-desk',     title: 'The settlement dossier: desk',      field: false, posture: 'desk',  register: 'artifact',   render: () => <DossierSample posture="desk" /> },
+  { id: 'library-desk',     title: 'The library: desk',                 field: false, posture: 'desk',  register: 'instrument', render: () => <LibrarySample posture="desk" /> },
+  { id: 'compendium-desk',  title: 'Compendium · Deities: desk',        field: false, posture: 'desk',  register: 'reference',  render: () => <CompendiumSample posture="desk" /> },
+  { id: 'pricing-desk',     title: 'Pricing: desk',                     field: false, posture: 'desk',  register: 'instrument', render: () => <PricingSample posture="desk" /> },
+  { id: 'dossier-field',    title: 'The dossier in FIELD MODE: mobile, dim', field: true, posture: 'field', register: 'artifact', render: () => <DossierSample field posture="field" /> },
 ]);

@@ -29,7 +29,7 @@ export function DeitiesHub() {
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 12px', fontFamily: sans, maxWidth: '40em' }}>
         The {CD.deities.count} deities of the core pantheon. Assign one and the living pantheon
         contests converts, seats, and the axes each god steers. Author your own under My Custom
-        Content — the same alignment / temperament / rank vocabulary applies.
+        Content. The same alignment / temperament / rank vocabulary applies.
       </p>
       <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginBottom: 12 }}>
         {filters.map((f) => (
@@ -66,7 +66,7 @@ export function LensesHub() {
     <div id="lenses" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 12px', fontFamily: sans, maxWidth: '40em' }}>
         Every town map renders in one of {lenses.count} lenses. A bespoke or AI-styled lens must
-        stay inside the same schema vocabulary below — the wall that keeps a custom style legible.
+        stay inside the same schema vocabulary below, the wall that keeps a custom style legible.
       </p>
       {lenses.entries.map((l) => (
         <div key={l.id} id={`lens-${slug(l.id)}`} style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
@@ -92,16 +92,16 @@ export function FacetsHub() {
         furnishings are drawn from that kind&rsquo;s vocabulary. This is the grammar behind every
         building interior.
       </p>
-      <Card title={`Institution natures — ${facets.natures.length}`} accent="#3a1a7a" lead>
+      <Card title={`Institution natures: ${facets.natures.length}`} accent="#3a1a7a" lead>
         {facets.natures.join(' · ')}
       </Card>
-      <Card title={`Interior kinds — ${facets.interiorKinds.length}`} accent="#1a3a7a">
+      <Card title={`Interior kinds: ${facets.interiorKinds.length}`} accent="#1a3a7a">
         {facets.interiorKinds.join(' · ')}
       </Card>
-      <Card title={`Room kinds — ${facets.roomKinds.length}`} accent="#a0762a">
+      <Card title={`Room kinds: ${facets.roomKinds.length}`} accent="#a0762a">
         {facets.roomKinds.join(' · ')}
       </Card>
-      <Card title={`Furnishing kinds — ${facets.furnishingKinds.length}`} accent="#6b5340">
+      <Card title={`Furnishing kinds: ${facets.furnishingKinds.length}`} accent="#6b5340">
         {facets.furnishingKinds.join(' · ')}
       </Card>
     </div>
@@ -114,7 +114,7 @@ export function CalamityHub() {
   return (
     <div id="calamity" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 12px', fontFamily: sans, maxWidth: '40em' }}>
-        There is one calamity mechanic — the Great Calamity. Its <em>type</em> is cosmetic flavour
+        There is one calamity mechanic: the Great Calamity. Its <em>type</em> is cosmetic flavour
         chosen from the terrain; the mechanics are the same underneath. Honest by design: a flood and
         a fire differ in the telling, not in the maths.
       </p>

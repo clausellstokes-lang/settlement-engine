@@ -42,15 +42,15 @@ function humanizeMotif(id) {
 
 /** A tradition row: motif glyph, name, motif chip, window phrase, owner, last outcome, provenance. */
 function TraditionRow({ rec, preview }) {
-  const owner = preview ? '—' : (rec.ownerLabel || rec.ownerKey || '—');
-  const outcome = preview ? '—' : (OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '—');
+  const owner = preview ? '–' : (rec.ownerLabel || rec.ownerKey || '–');
+  const outcome = preview ? '–' : (OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '–');
   const glyph = motifGlyph(rec.coreMotif?.element);
   const log = Array.isArray(rec.mutationLog) ? rec.mutationLog : [];
   // The mutationLog as a provenance line (design §10): a count, then the most recent
   // changes as their own readable causes (the tradition's history, most recent last).
   const recentCauses = log.map((e) => (e && typeof e.cause === 'string' ? e.cause : '')).filter(Boolean).slice(-3);
   const provenance = log.length > 0
-    ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded — ${recentCauses.join('; ')}`
+    ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded: ${recentCauses.join('; ')}`
     : (rec.expression?.epithet || null);
   // Rule-framed plate (the composite kill-list reconciliation): the card and its
   // motif stamp fell to the flat idiom — radius struck, the gold tinted wash now a
@@ -127,7 +127,7 @@ export default function TraditionsTab({ settlement }) {
     <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
         {preview ? (
-          <>The <strong style={{ color: INK }}>founding traditions</strong> of {name} — the observances its
+          <>The <strong style={{ color: INK }}>founding traditions</strong> of {name}: the observances its
           people have kept since the beginning, reconstructed from what the town is. Ownership and outcomes
           come once the world turns.</>
         ) : (
@@ -141,7 +141,7 @@ export default function TraditionsTab({ settlement }) {
       </div>
       {preview && (
         <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: FS.xxs, background: CARD_ALT, border: `1px dashed ${BORDER}`, padding: '8px 10px' }}>
-          These are <span style={{ color: GOLD, fontWeight: 800 }}>founding traditions</span> — the core each
+          These are <span style={{ color: GOLD, fontWeight: 800 }}>founding traditions</span>: the core each
           settlement carries from its origin. In a living campaign they gain owners, hold or fail by the year,
           and slowly change.
         </p>

@@ -36,7 +36,7 @@ export function OperationsHub() {
   return (
     <div id="operations" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.65, margin: '0 0 10px', fontFamily: sans, maxWidth: '40em' }}>
-        This is every operation the engine can perform — the complete list of ways your world can
+        This is every operation the engine can perform: the complete list of ways your world can
         change. It is the proof behind the covenant: canon changes flow only through these named
         operations, each carrying the receipt it leaves and whether it can be undone.
       </p>
@@ -45,7 +45,7 @@ export function OperationsHub() {
           The AI never appears in this list as an author. It works in three stages: an analyst
           <strong style={{ color: INK }}> reads </strong> the state, a compiler
           <strong style={{ color: INK }}> proposes </strong> a plan or prose, and only the
-          deterministic engine <strong style={{ color: INK }}> writes </strong> — through these
+          deterministic engine <strong style={{ color: INK }}> writes</strong>, through these
           operations. Read, propose, write: the model narrates, it never decides.
         </p>
       </div>
@@ -108,18 +108,18 @@ export function SystemsHub() {
     <div id="living-world" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
       <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 14px', fontFamily: sans, maxWidth: '40em' }}>
         The generator builds a town in seconds; the living world then runs the region for years.
-        These systems wake once a campaign advances. Each is opt-in and off by default — a
+        These systems wake once a campaign advances. Each is opt-in and off by default. A
         non-campaign save stays byte-identical.
       </p>
 
-      <Card title={`The causal substrate — ${causal.variableCount} variables`} accent="#1a3a7a" lead>
+      <Card title={`The causal substrate: ${causal.variableCount} variables`} accent="#1a3a7a" lead>
         Beneath every settlement sit {causal.variableCount} live causal variables
         ({causal.variables.slice(0, 4).map((v) => v.replace(/_/g, ' ')).join(', ')}, and the rest),
         each with a score, a band ({causal.bands.join(' / ')}), and named contributors. They are the
         shared state every other system reads from. Advance time and they shift together.
       </Card>
       <div id="pressures" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
-        <Card title={`Pressures — ${pressures.count} axes`} accent="#a0762a">
+        <Card title={`Pressures: ${pressures.count} axes`} accent="#a0762a">
           Above the variables ride {pressures.count} pressures ({pressures.kinds.join(', ')}), scored
           0&ndash;1: the directional strain on the settlement, each carrying its own reasons. Pressures
           are how the engine turns a static state into a settlement about to do something.
@@ -131,7 +131,7 @@ export function SystemsHub() {
       </div>
       <p style={{ fontSize: FS.xs, color: MUT, margin: '0 0 8px', fontFamily: sans, fontStyle: 'italic' }}>
         Each is gated by a virtual simulation flag. Preset membership below is rendered from the real
-        preset configs — a preset lights a system when its rules set that flag.
+        preset configs: a preset lights a system when its rules set that flag.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 6 }}>
         {systems.map((s) => (
@@ -142,7 +142,7 @@ export function SystemsHub() {
             <code style={{ fontFamily: 'monospace', fontSize: FS.xxs, color: SEC }}>{s.flag}</code>
             <div style={{ marginTop: 5, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>
               {s.dormant
-                ? <span style={{ color: MUT, fontStyle: 'italic' }}>dormant — lit by no preset</span>
+                ? <span style={{ color: MUT, fontStyle: 'italic' }}>dormant: lit by no preset</span>
                 : <>lit in: {s.presets.join(', ')}</>}
             </div>
           </div>

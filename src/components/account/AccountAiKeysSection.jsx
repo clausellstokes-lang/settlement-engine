@@ -43,7 +43,7 @@ function healthMeta(health) {
 
 const inputStyle = { padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: '#fff', width: '100%', boxSizing: 'border-box' };
 const labelStyle = { fontSize: FS.xs, color: MUTED, fontFamily: sans, marginBottom: 2 };
-const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString() : '—');
+const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString() : '–');
 
 export default function AccountAiKeysSection() {
   // Defense-in-depth: the BYOK surface is Surveyor-gated (owner ruling
@@ -218,7 +218,7 @@ export default function AccountAiKeysSection() {
                 >
                   <option value="">Default</option>
                   {models.map((m) => (
-                    <option key={m.id} value={m.id}>{m.id} — retention: {m.retentionClass}</option>
+                    <option key={m.id} value={m.id}>{m.id} · retention: {m.retentionClass}</option>
                   ))}
                 </select>
               </div>
@@ -264,7 +264,7 @@ export default function AccountAiKeysSection() {
             </label>
           </div>
           <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
-            Caps are enforced at the edge before anything runs — over a cap or paused, a request is
+            Caps are enforced at the edge before anything runs. Over a cap or paused, a request is
             refused before it costs you (and nothing is charged). Blank fields mean uncapped.
           </div>
         </div>

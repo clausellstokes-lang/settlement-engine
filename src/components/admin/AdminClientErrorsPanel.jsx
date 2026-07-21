@@ -25,7 +25,7 @@ const COLUMNS = [
 ];
 
 function fmt(col, value) {
-  if (value == null) return '—';
+  if (value == null) return '–';
   if (col === 'last_seen') return new Date(value).toLocaleString('en-US');
   return String(value);
 }
@@ -92,7 +92,7 @@ export default function AdminClientErrorsPanel() {
           <strong>{over ? 'Alert: ' : ''}</strong>
           {alert.distinct_signatures} distinct error signature{Number(alert.distinct_signatures) === 1 ? '' : 's'}
           {' '}({alert.total_events} event{Number(alert.total_events) === 1 ? '' : 's'}) in the last {alert.window_minutes} min
-          {' — '}
+          {', '}
           {over
             ? `over the alert threshold of ${alert.threshold}.`
             : `under the alert threshold of ${alert.threshold}.`}

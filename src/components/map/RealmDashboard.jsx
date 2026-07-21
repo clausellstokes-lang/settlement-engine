@@ -459,7 +459,7 @@ export default function RealmDashboard({
           label="Spheres of influence"
           value={hegemony.spheres.length ? hegemony.spheres.length : '–'}
           sub={topSphere ? topSphere.brief : 'No hegemony has formed'}
-          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere — an unnamed empire the topology exhibits. Its name is the DM's to give."
+          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere, an unnamed empire the topology exhibits. Its name is the DM's to give."
         />
       </div>
 
@@ -474,7 +474,7 @@ export default function RealmDashboard({
           {hegemony.spheres.map((s) => (
             <div key={String(s.centerId)} style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
               <span style={{ fontWeight: 700, color: INK }}>{s.label}</span>
-              {' — '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
+              {': '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
             </div>
           ))}
         </div>

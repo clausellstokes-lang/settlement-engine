@@ -93,7 +93,7 @@ export function AIAppendix({ settlement, narrativeMode, vm }) {
                 </Text>
                 {a.dmCompass.redFlags.map((f, i) => (
                   <View key={`rf-${i}`} style={{ flexDirection: 'row', marginBottom: 4 }} wrap={false}>
-                    <Text style={{ ...type.body_em, color: palette.bad, marginRight: 6 }}>!</Text>
+                    <Text style={{ ...type.body_em, color: palette.bad, marginRight: 6 }}>•</Text>
                     <Text style={{ ...type.body, flex: 1 }}>{textOf(f)}</Text>
                   </View>
                 ))}
@@ -242,9 +242,9 @@ function textOf(item) {
 }
 
 function endpointOf(e) {
-  if (!e) return '—';
+  if (!e) return '–';
   if (typeof e === 'string') return e;
-  return e.name || e.label || e.title || '—';
+  return e.name || e.label || e.title || '–';
 }
 
 function relationshipOf(c) {

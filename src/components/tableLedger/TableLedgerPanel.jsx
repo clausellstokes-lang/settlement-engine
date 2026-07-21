@@ -40,7 +40,7 @@ const KIND_LABELS = {
   exposure: 'A secret laid bare',
 };
 const KIND_HINTS = {
-  incident: 'A moment worth remembering — recorded as a line of the settlement’s chronicle.',
+  incident: 'A moment worth remembering, recorded as a line of the settlement’s chronicle.',
   'stressor-relief': 'The party lifted a hardship the settlement was carrying.',
   obligation: 'The settlement now owes a debt or bears a new burden.',
   exposure: 'A hidden corruption is dragged into the light.',
@@ -99,8 +99,8 @@ export default function TableLedgerPanel() {
     return (
       <Card title="The Session Ledger" kicker="At the table">
         <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: 0 }}>
-          Open a settlement to keep its ledger. What happens at your table &mdash; a hardship eased,
-          a debt taken on, a secret laid bare &mdash; is recorded here as a line the world remembers.
+          Open a settlement to keep its ledger. What happens at your table (a hardship eased,
+          a debt taken on, a secret laid bare) is recorded here as a line the world remembers.
         </p>
       </Card>
     );
@@ -127,7 +127,7 @@ export default function TableLedgerPanel() {
     <Card title="The Session Ledger" kicker="At the table">
       <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: `0 0 ${SP.md}px` }}>
         Record what happened at your table. Each entry becomes a typed, bounded line the world
-        remembers &mdash; and your own words are kept, verbatim, on the receipt.
+        remembers, and your own words are kept, verbatim, on the receipt.
       </p>
 
       <div style={{ marginBottom: SP.md }}>
@@ -161,7 +161,7 @@ export default function TableLedgerPanel() {
           style={{ ...selectStyle, resize: 'vertical', minHeight: 44 }}
         />
         <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.xs}px 0 0` }}>
-          Kept verbatim on the receipt. Never fed to the engine &mdash; flavor only.
+          Kept verbatim on the receipt. Never fed to the engine. Flavor only.
         </p>
       </div>
 

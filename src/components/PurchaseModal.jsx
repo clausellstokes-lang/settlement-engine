@@ -256,7 +256,7 @@ export default function PurchaseModal({ onClose }) {
               />
               <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
                 Save my card for automatic credit reloads. When your balance runs low we'll
-                top it back up to your target and charge this card. Off by default — manage or
+                top it back up to your target and charge this card. Off by default. Manage or
                 cancel anytime from your account.
               </span>
             </label>

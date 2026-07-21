@@ -56,7 +56,7 @@ export default function OraclePanel({ campaign }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, fontFamily: sans, color: BODY }}>
       <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, lineHeight: 1.45 }}>
-        A yes/no oracle that answers from your world&apos;s own ledgers — no dungeon master required.
+        A yes/no oracle that answers from your world&apos;s own ledgers. No dungeon master required.
         {anchored ? <> Reading <strong style={{ color: INK }}>{anchored.name}</strong>.</> : ' Select a settlement to read its danger and troubles.'}
       </p>
 
@@ -116,7 +116,7 @@ export default function OraclePanel({ campaign }) {
           <div data-testid="oracle-basis" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <span style={{ fontSize: FS.xs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>Why the oracle says so</span>
             {result.basis.map((b, i) => (
-              <span key={i} style={{ fontSize: FS.xs, color: MUTED }}>◆ {b.label} — {b.detail}</span>
+              <span key={i} style={{ fontSize: FS.xs, color: MUTED }}>◆ {b.label}: {b.detail}</span>
             ))}
           </div>
         </div>

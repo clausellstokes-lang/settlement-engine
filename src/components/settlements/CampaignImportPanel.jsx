@@ -72,12 +72,12 @@ function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
           style={{ ...fieldStyle, width: 76 }} />
         {!row.confident && (
           <span style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', fontFamily: sans }}>
-            unsure — set it yourself
+            unsure, set it yourself
           </span>
         )}
       </div>
 
-      <span style={descStyle}>Your words (kept verbatim, shown in the chronicle — never changes the mechanics)</span>
+      <span style={descStyle}>Your words (kept verbatim, shown in the chronicle, never changes the mechanics)</span>
       <textarea aria-label="Your words for this event, kept verbatim" value={row.flavor} rows={2}
         onChange={e => onPatch({ flavor: e.target.value })}
         placeholder="What the table remembers…"

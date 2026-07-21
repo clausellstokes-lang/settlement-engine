@@ -71,7 +71,7 @@ export function MoneyLine({ cost, creditBalance, busy, disabled, onSubmit, submi
       </div>
       {short && (
         <span data-testid="surveyor-insufficient" style={{ fontSize: FS.xs, color: RED, fontFamily: sans }}>
-          Not enough credits for this — you have {creditBalance}, this needs {cost}. Nothing is charged until it runs.
+          Not enough credits for this. You have {creditBalance}, this needs {cost}. Nothing is charged until it runs.
         </span>
       )}
     </div>
@@ -98,7 +98,7 @@ export function RefusalNote({ error, refusalClass, doors }) {
       <p style={{ margin: 0, fontSize: FS.sm, color: RED, lineHeight: 1.45 }}>{error}</p>
       {(paused || (Array.isArray(doors) && doors.length > 0)) && (
         <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-          {paused ? 'This stage is paused — nothing was charged.' : 'Nothing was charged.'}
+          {paused ? 'This stage is paused. Nothing was charged.' : 'Nothing was charged.'}
         </span>
       )}
     </div>

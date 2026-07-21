@@ -72,7 +72,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           scoreLabel={cap(p.legitimacy.label) || ''}
           tone={legitTone(p.legitimacy.score)}
           breakdown={p.legitimacyBreakdown}
-          footer={p.governanceFractured ? '(!) Governance fractured. No faction holds clear authority' : null}
+          footer={p.governanceFractured ? 'Governance fractured. No faction holds clear authority' : null}
         />
       )}
 
@@ -81,7 +81,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
         <View style={{ flex: 1, padding: 6, backgroundColor: swatch['#FAF3E8'], border: `0.4pt solid ${palette.border}`, borderRadius: 2 }}>
           <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>STABILITY</Text>
           <Text style={{ ...type.body_em, fontSize: pt['11'], color: palette.ink, marginTop: 1 }}>
-            {cap(p.stability) || '—'}
+            {cap(p.stability) || '–'}
           </Text>
         </View>
         {governing && (
@@ -367,7 +367,7 @@ function FactionCard({ faction, index, entityIndex }) {
       />
       {f.crisisNote && (
         <Text style={{ ...type.caption, color: palette.bad, fontSize: pt['8'], fontStyle: 'italic', marginTop: 2 }}>
-          (!) {f.crisisNote}
+          {f.crisisNote}
         </Text>
       )}
       {f.blurb && (

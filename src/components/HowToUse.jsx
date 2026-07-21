@@ -141,7 +141,7 @@ function QuickTab() {
         <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
-      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
+      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
       <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
@@ -196,7 +196,7 @@ function PowerTab() {
         <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
         <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
         <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
-        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions — deep-cover operatives, commercial fronts — on both sides.</Tip>
+        <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions (deep-cover operatives, commercial fronts) on both sides.</Tip>
       </section>
 
       <section style={{ ...NO_BREAK, marginBottom:18 }}>
@@ -265,7 +265,7 @@ function RefTab() {
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
-      ['Compendium','The reference spine — every catalog rendered live from the engine. See the deep-links below.'],
+      ['Compendium','The reference spine: every catalog rendered live from the engine. See the deep-links below.'],
       ['How to Use','This guide.'],
     ]},
     { title: 'Settlement Detail Tabs', rows: [
@@ -302,15 +302,15 @@ function RefTab() {
       <section style={{ ...NO_BREAK, marginBottom:16 }}>
         <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 4px' }}>Look it up in the Compendium</div>
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>
-          Every catalog — tiers, institutions, stresses, factions, the living-world verbs — is rendered
+          Every catalog (tiers, institutions, stresses, factions, the living-world verbs) is rendered
           live from the engine in the <a href="/compendium" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Compendium</a>,
           so the reference can never drift from what the simulator actually does. Jump straight to a section:
         </p>
         {COMPENDIUM_TABS.map(([tab, label, desc]) => <CompendiumLink key={tab} tab={tab} label={label} desc={desc} />)}
         <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'8px 0 0' }}>
           Build your own institutions, resources, stressors, and presets under{' '}
-          <a href="/compendium?mode=custom" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>My Custom Content</a> —
-          custom items appear in the Settlement Editor catalog and persist to your browser.
+          <a href="/compendium?mode=custom" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>My Custom Content</a>.
+          Custom items appear in the Settlement Editor catalog and persist to your browser.
         </p>
       </section>
       {sections.map(s => <RefSection key={s.title} title={s.title} rows={s.rows} />)}

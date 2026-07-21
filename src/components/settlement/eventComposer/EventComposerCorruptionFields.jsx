@@ -35,7 +35,7 @@ export function EventComposerCorruptionFields({
     <>
       {/* THE BENEFICIARY — who holds the leash. Only offered when foreign courts are known. */}
       {foreignSettlements.length > 0 && (
-        <Field label="Beneficiary" hint="Who benefits — this settlement's own underworld, or a foreign court">
+        <Field label="Beneficiary" hint="Who benefits: this settlement's own underworld, or a foreign court">
           <select value={corruptBeneficiary || ''} onChange={e => setCorruptBeneficiary?.(e.target.value)} style={selectStyle}>
             <option value="">This settlement&rsquo;s underworld</option>
             {foreignSettlements.map(o => (
@@ -46,9 +46,9 @@ export function EventComposerCorruptionFields({
       )}
 
       {isForeign ? (
-        <Field label="Criminal organization" hint="A foreign leash needs no local organization — the channel is the patron court">
+        <Field label="Criminal organization" hint="A foreign leash needs no local organization. The channel is the patron court">
           <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
-            The rot is leashed to <strong>{foreignName}</strong> through a covert channel — no local organization is required.
+            The rot is leashed to <strong>{foreignName}</strong> through a covert channel. No local organization is required.
           </div>
         </Field>
       ) : criminalOrgs.length > 0 ? (
@@ -60,7 +60,7 @@ export function EventComposerCorruptionFields({
       ) : (
         <Field label="Criminal organization" hint="No criminal organization in this settlement to corrupt through">
           <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, padding: '6px 0' }}>
-            This settlement has no criminal organization — add one (e.g. a Thieves&rsquo; Guild) before imposing corruption, or choose a foreign patron above.
+            This settlement has no criminal organization. Add one (e.g. a Thieves&rsquo; Guild) before imposing corruption, or choose a foreign patron above.
           </div>
         </Field>
       )}

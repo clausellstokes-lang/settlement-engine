@@ -62,7 +62,7 @@ export default function SurveyorNote({ topic, moment, surface, signal, id = 'not
             {line}
           </p>
           <div style={{ marginTop: 8, fontSize: FS.sm, color: ACCENT, fontFamily: 'Georgia, serif', fontStyle: 'italic', textAlign: 'right' }}>
-            {'— S.'}
+            {'– S.'}
           </div>
         </div>
       </div>

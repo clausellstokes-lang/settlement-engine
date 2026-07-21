@@ -33,7 +33,7 @@ export default function PrivacyPage() {
           never exposed on shared or gallery surfaces. We do not sell your
           personal data; if you opt in to anonymous market research, aggregate
           structural statistics may be shared or licensed to the worldbuilding
-          market — never your names, prose, seeds, or campaign content, and never
+          market: never your names, prose, seeds, or campaign content, and never
           anything tied to you.
         </LegalP>
       </LegalSection>
@@ -79,7 +79,7 @@ export default function PrivacyPage() {
           account at any time; that removes them immediately. To request deletion
           of your account, contact us from the address on your account. After a
           short grace window your sign-in is removed, billing stops, and your
-          profile is irreversibly anonymised and locked — the anonymised shell
+          profile is irreversibly anonymised and locked. The anonymised shell
           can never be signed into or written to again. Some records required to
           meet legal or tax obligations, such as payment receipts, may be
           retained for the period the law requires.

@@ -140,7 +140,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:FS.xs,fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>— resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}

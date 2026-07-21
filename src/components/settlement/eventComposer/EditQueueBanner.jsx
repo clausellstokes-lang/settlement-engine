@@ -15,7 +15,7 @@ export default function EditQueueBanner({ onStop }) {
       fontSize: FS.xxs, fontFamily: sans, color: INK, background: CARD,
     }}>
       <span style={{ flex: 1 }}>
-        Editing a queued order — applying replaces it in place (same slot, same identity).
+        Editing a queued order. Applying replaces it in place (same slot, same identity).
         Changing the verb starts a fresh composition instead.
       </span>
       <Button variant="ghost" size="sm" onClick={onStop}>

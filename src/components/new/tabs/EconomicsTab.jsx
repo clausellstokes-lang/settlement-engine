@@ -40,7 +40,7 @@ function LiveTradeFlowSection({ drift }) {
           <span><span style={{color:MUTED,marginRight:4}}>Outbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.outbound}</strong></span>
         </div>
         <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
-          Live movement on the trade roads — a drift on top of the settlement's founding trade profile, not a replacement for it.
+          Live movement on the trade roads: a drift on top of the settlement's founding trade profile, not a replacement for it.
         </p>
       </div>
     </Section>
@@ -600,7 +600,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                         ct.type?.toLowerCase().includes('black market'))
           .slice(0, 2);
 
-        return <Section title={`Shadow Economy — ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+        return <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
           <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
             {/* Capture rate + scale context */}

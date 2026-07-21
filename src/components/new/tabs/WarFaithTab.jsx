@@ -128,7 +128,7 @@ function TreatyBlock({ treaties, sid }) {
               <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>
                 <strong style={{ color: term.fraying ? RED : BODY, textTransform: 'capitalize' }}>{term.label}</strong>
                 <span style={{ color: MUTED }}>{term.yearsRemaining > 0 ? ` · ${term.yearsRemaining}y left` : ' · lapsing'}</span>
-                <span style={{ color: SECOND, fontStyle: 'italic' }}>{` — ${term.strainLine}`}</span>
+                <span style={{ color: SECOND, fontStyle: 'italic' }}>{` · ${term.strainLine}`}</span>
               </div>
             ))}
             {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}

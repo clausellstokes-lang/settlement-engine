@@ -36,12 +36,12 @@ export default function BountyPage() {
       <LegalSection heading="The bounty" id="bounty-invite">
         <LegalP>So we invite you to try to break that promise. Send us:</LegalP>
         <LegalList items={[
-          'A receipt that does not trace — a stated fact with no cause you can follow.',
+          'A receipt that does not trace: a stated fact with no cause you can follow.',
           'A number that contradicts the history that supposedly produced it.',
           'A claim on any page that the product cannot actually back.',
         ]} />
         <LegalP>
-          Include the world seed and what you were looking at, if you can &mdash; the seed is the
+          Include the world seed and what you were looking at, if you can. The seed is the
           world, bit for bit, so a seed lets us stand exactly where you stood.
         </LegalP>
       </LegalSection>
@@ -49,11 +49,11 @@ export default function BountyPage() {
       <LegalSection heading="How to report it" id="bounty-report">
         <LegalP>
           Write to{' '}
-          <a href={supportMailto('Contradiction bounty — a receipt that does not trace')} style={linkStyle}>
+          <a href={supportMailto('Contradiction bounty: a receipt that does not trace')} style={linkStyle}>
             our support inbox
           </a>{' '}
           with the details above. We read every one. Finding the world in a contradiction is not a
-          failure of the tool &mdash; it is exactly the thing we most want to know.
+          failure of the tool. It is exactly the thing we most want to know.
         </LegalP>
       </LegalSection>
 

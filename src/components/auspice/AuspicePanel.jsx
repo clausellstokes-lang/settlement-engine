@@ -27,7 +27,7 @@ const SPANS = [
 function Beat({ b, tone }) {
   return (
     <li style={{ display: 'flex', gap: SP.sm, alignItems: 'baseline', fontFamily: sans, fontSize: FS.sm, color: tone || BODY, margin: `${SP.xs}px 0` }}>
-      <span style={{ color: MUTED, fontSize: FS.xs, minWidth: 44 }}>{b.tick != null ? `Tick ${b.tick}` : '—'}</span>
+      <span style={{ color: MUTED, fontSize: FS.xs, minWidth: 44 }}>{b.tick != null ? `Tick ${b.tick}` : '–'}</span>
       <span>{b.headline}</span>
     </li>
   );
@@ -60,7 +60,7 @@ export default function AuspicePanel({ campaign }) {
     return (
       <Card title="The Auspice" kicker="Read the omens">
         <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: 0 }}>
-          Open a canonized realm to read its auspices &mdash; a glimpse of the season to come, cast
+          Open a canonized realm to read its auspices: a glimpse of the season to come, cast
           from the world as it stands.
         </p>
       </Card>
@@ -70,7 +70,7 @@ export default function AuspicePanel({ campaign }) {
   return (
     <Card title="The Auspice" kicker="Read the omens">
       <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: `0 0 ${SP.md}px` }}>
-        Cast a glimpse of the season to come &mdash; then let it go. Reading the auspices touches
+        Cast a glimpse of the season to come, then let it go. Reading the auspices touches
         nothing; the world advances only when you say so.
       </p>
       <div style={{ display: 'flex', gap: SP.xs, alignItems: 'center', flexWrap: 'wrap', marginBottom: SP.md }}>

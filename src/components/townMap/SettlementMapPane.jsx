@@ -785,7 +785,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
       {active && active.kind === 'building' && !isPinned && active.payload.show && (
         <FloatingLabel anchor={active.anchor}>
           <strong style={{ color: INK, fontWeight: 800 }}>{active.payload.institution?.name}</strong>
-          <span style={{ color: MUTED }}> — click for profile</span>
+          <span style={{ color: MUTED }}> · click for profile</span>
         </FloatingLabel>
       )}
       {active && active.kind === 'district' && (

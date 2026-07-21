@@ -57,7 +57,7 @@ export default function UnlistedShareBar({ copied = false, busy = false, error =
         </span>
       )}
       <span style={{ flexBasis: '100%', fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
-        Only people with this exact link can open it — it never appears in the public gallery.
+        Only people with this exact link can open it. It never appears in the public gallery.
         Rotate the link to revoke every copy you&apos;ve shared.
       </span>
     </div>

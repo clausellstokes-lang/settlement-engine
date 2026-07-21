@@ -293,7 +293,7 @@ export default function PlacementsLayer({ transformRef }) {
                   return (
                     <g key={rec.id}>
                       <circle cx={cx} cy={cy} r={r} fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth={0.6 / scale}>
-                        <title>{`${rec.name} — ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
+                        <title>{`${rec.name}: ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
                       </circle>
                       {rec.charterPending && (
                         <circle cx={cx} cy={cy} r={r + 1.4 / scale} fill="none" stroke={LIFECYCLE_GLYPH_STYLE.charterRing.stroke} strokeWidth={0.6 / scale} />
@@ -323,7 +323,7 @@ export default function PlacementsLayer({ transformRef }) {
                   selected={isSelected}
                   scale={scale}
                   label={it.lifecycleStatus
-                    ? `${it.name} — ${it.lifecycleStatus === 'relic_ruin' ? 'ruins' : 'abandoned'}`
+                    ? `${it.name}: ${it.lifecycleStatus === 'relic_ruin' ? 'ruins' : 'abandoned'}`
                     : it.name}
                   cursor={isSelected && !mapCanonized ? 'grab' : 'pointer'}
                   onClick={(e) => {

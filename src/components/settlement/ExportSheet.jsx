@@ -151,7 +151,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
             </div>
             {format === 'foundry' && (
               <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
-                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable — the journals import on first load.
+                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable. The journals import on first load.
               </div>
             )}
           </div>
@@ -176,7 +176,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
             </div>
             <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
               {useAi
-                ? 'Exports the AI-narrated dossier — canonical facts are preserved.'
+                ? 'Exports the narrated dossier. Canonical facts are preserved.'
                 : 'Exports the raw simulation. Your AI narrative stays out of this file.'}
             </div>
           </div>

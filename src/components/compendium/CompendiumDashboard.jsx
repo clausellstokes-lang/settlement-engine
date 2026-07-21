@@ -38,7 +38,7 @@ export function CompendiumOverview({ onNavigate }) {
   return (
     <div id="overview">
       <p style={{ fontSize:FS.md, color:SEC, lineHeight:1.7, margin:'0 0 6px', fontFamily:sans, maxWidth:'42em' }}>
-        Everything here is rendered by the deterministic engine from its own registries — the same
+        Everything here is rendered by the deterministic engine from its own registries, the same
         code that builds your worlds. It cannot drift from what the simulator actually does.
       </p>
       <p style={{ fontSize:FS.sm, color:MUT, lineHeight:1.6, margin:'0 0 16px', fontFamily:sans }}>
@@ -101,7 +101,7 @@ export function AtoZIndex({ onNavigate }) {
   return (
     <div id="az">
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 14px', fontFamily:sans, maxWidth:'42em' }}>
-        Every named entry in the Compendium — {total} in all — in one alphabetical index. Each is a
+        Every named entry in the Compendium ({total} in all) in one alphabetical index. Each is a
         stable link into its catalog.
       </p>
       {groups.map(([letter, list]) => (

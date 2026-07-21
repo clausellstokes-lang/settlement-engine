@@ -75,7 +75,7 @@ export default function WorldPage({ code, onNavigate }) {
           <Panel>
             <h1 style={titleStyle}>Rebuilding the world…</h1>
             <p style={bodyStyle}>
-              This world is being regenerated from its share code on your own device — the
+              This world is being regenerated from its share code on your own device. The
               same seed always builds the same world.
             </p>
           </Panel>
@@ -124,7 +124,7 @@ function ReadyView({ world, decoded, shareUrl, copied, onCopy, onNavigate }) {
           <Chip>{settlements.length} settlements</Chip>
         </div>
         <p style={bodyStyle}>
-          Rebuilt from its share code on your device — identical to the original. Its seed is{' '}
+          Rebuilt from its share code on your device, identical to the original. Its seed is{' '}
           <code>{decoded?.seed}</code>.
         </p>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 14 }}>

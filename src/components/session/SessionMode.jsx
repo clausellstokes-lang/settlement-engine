@@ -137,10 +137,10 @@ function WarPanel({ war }) {
       : `Held by ${occupied.occupierName || 'an occupier'}.`]);
   }
   if (mobilization) {
-    rows.push(['Mobilizing', AMBER, `${mobilization.phrase}${mobilization.ticksToDeploy > 0 ? ` — roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'week' : 'weeks'} from marching.` : '.'}`]);
+    rows.push(['Mobilizing', AMBER, `${mobilization.phrase}${mobilization.ticksToDeploy > 0 ? `, roughly ${mobilization.ticksToDeploy} ${mobilization.ticksToDeploy === 1 ? 'week' : 'weeks'} from marching.` : '.'}`]);
   }
   if (holdings?.holds?.length) {
-    rows.push(['Occupier', AMBER, `Holds ${holdings.holds.map(h => h.name).join(', ')}${holdings.stretchedThin ? ' — stretched thin.' : '.'}`]);
+    rows.push(['Occupier', AMBER, `Holds ${holdings.holds.map(h => h.name).join(', ')}${holdings.stretchedThin ? ', stretched thin.' : '.'}`]);
   }
   if (exhaustionBand && exhaustionBand !== 'rested') {
     rows.push(['War-weary', AMBER, `This settlement's war fatigue reads ${exhaustionBand}.`]);
@@ -336,7 +336,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   {recent.map((en, i) => (
                     <div key={i} style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
                       <strong style={{ color: INK }}>{en?.event?.description || en?.event?.type || 'Event'}</strong>
-                      {en?.narrativeSummary ? <> — {en.narrativeSummary}</> : null}
+                      {en?.narrativeSummary ? <>: {en.narrativeSummary}</> : null}
                     </div>
                   ))}
                 </div>

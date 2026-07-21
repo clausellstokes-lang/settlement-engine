@@ -75,12 +75,12 @@ export default function SettlementMapFogControls({ fog, editing, entitled = fals
           <LockGlyph />
         </div>
         <div style={{ color: MUTED, fontSize: FS.xs }}>
-          Run a live table session — reveal quarters, streets, and buildings as your players explore.
+          Run a live table session. Reveal quarters, streets, and buildings as your players explore.
         </div>
         <Button
           variant="secondary" size="sm"
           onClick={() => { if (typeof onUnlock === 'function') onUnlock(); }}
-          aria-label="Fog of war is a Cartographer premium feature — upgrade to unlock"
+          aria-label="Fog of war is a Cartographer premium feature. Upgrade to unlock"
         >
           Fog of war (Premium)
         </Button>

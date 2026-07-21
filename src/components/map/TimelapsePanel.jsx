@@ -69,7 +69,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
     return (
       <div data-testid="timelapse-empty" style={{ padding: SP.md, border: `1px dashed ${BORDER2}`, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5 }}>
         No history to replay yet. Advance the realm and the timelapse will let you scrub
-        back through every pulse — who grew, who declined, and where the trouble struck.
+        back through every pulse: who grew, who declined, and where the trouble struck.
       </div>
     );
   }
@@ -136,7 +136,7 @@ export default function TimelapsePanel({ campaign, nameFor }) {
           {drill && (
             <div data-testid="timelapse-drill-summary" style={{ color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5 }}>
               {drill.points.length === 0
-                ? <>Never struck, never moved — quiet through every advance.</>
+                ? <>Never struck, never moved. Quiet through every advance.</>
                 : <>Struck <b>{drill.struck}</b>{drill.peakSeverity > 0 ? ` (peak ${Math.round(drill.peakSeverity * 100) / 100})` : ''} · <span style={{ color: SECOND, fontWeight: 800 }}>grew {drill.grew} · declined {drill.declined}</span> across {drill.points.length} advance{drill.points.length === 1 ? '' : 's'}.</>}
             </div>
           )}
@@ -147,11 +147,11 @@ export default function TimelapsePanel({ campaign, nameFor }) {
         <Button variant="ghost" size="sm" onClick={onExportClip} aria-label="Export the timelapse as a deterministic clip (JSON frame sequence)">
           <Download size={12} /> Export clip
         </Button>
-        <span style={{ fontSize: FS.micro, color: MUTED }}>A replayable frame sequence — no video, just the history itself.</span>
+        <span style={{ fontSize: FS.micro, color: MUTED }}>A replayable frame sequence: no video, just the history itself.</span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
-        <Radio size={9} /> Scrubbing history — close this to return to the live realm.
+        <Radio size={9} /> Scrubbing history. Close this to return to the live realm.
       </div>
     </div>
   );

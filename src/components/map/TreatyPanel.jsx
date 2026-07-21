@@ -128,7 +128,7 @@ export default function TreatyPanel({ campaign, nameById }) {
     return (
       <div data-testid="treaty-panel" style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5, padding: SP.xs }}>
         No treaties stand in this realm. When a war ends by a negotiated peace, its terms are
-        recorded here — a document the DM can read like history.
+        recorded here, a document the DM can read like history.
       </div>
     );
   }

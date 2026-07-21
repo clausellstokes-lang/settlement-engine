@@ -47,7 +47,7 @@ export function EventComposerSecondaryFields({
         </Field>
       )}
       {type === 'ADD_TRADE_GOOD' && tradeDirection === 'export' && (
-        <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses — listed as "(transit)"' : 'Produced locally'}>
+        <Field label="Handling" hint={tradeEntrepot ? 'Re-exported through the warehouses, listed as "(transit)"' : 'Produced locally'}>
           <select
             value={tradeEntrepot ? 'transit' : 'local'}
             onChange={e => setTradeEntrepot(e.target.value === 'transit')}
@@ -62,7 +62,7 @@ export function EventComposerSecondaryFields({
       {/* APPLY_STRESSOR — word-banded severity (no 0-100 math at the table) */}
       {type === 'APPLY_STRESSOR' && (
         <Field label="Severity" hint={
-          stressorSeverity === 'severe' ? 'A defining crisis — expect cascades' :
+          stressorSeverity === 'severe' ? 'A defining crisis. Expect cascades' :
           stressorSeverity === 'minor'  ? 'A pressure, not yet a catastrophe'   :
                                           'A serious, active crisis'
         }>
@@ -79,7 +79,7 @@ export function EventComposerSecondaryFields({
       {(type === 'FORCE_RELIEF' || type === 'OFFER_CREDIT') && (
         <Field label="Magnitude" hint={
           reliefMagnitude === 'generous' ? 'Near everything above the reserve floor' :
-          reliefMagnitude === 'token'    ? 'A token — enough to be remembered'       :
+          reliefMagnitude === 'token'    ? 'A token, enough to be remembered'        :
                                            'A measured share of the surplus'
         }>
           <select value={reliefMagnitude} onChange={e => setReliefMagnitude(e.target.value)} style={selectStyle}>
@@ -93,11 +93,11 @@ export function EventComposerSecondaryFields({
       {/* CHANGE_RULING_POWER — how power changes hands shapes the aftermath */}
       {type === 'CHANGE_RULING_POWER' && (
         <Field label="How" hint={
-          powerCause === 'election'   ? 'A fresh mandate — legitimacy starts warmer' :
-          powerCause === 'conquest'   ? 'Imposed from outside — legitimacy starts cold' :
+          powerCause === 'election'   ? 'A fresh mandate. Legitimacy starts warmer' :
+          powerCause === 'conquest'   ? 'Imposed from outside. Legitimacy starts cold' :
           powerCause === 'succession' ? 'The line held; the household reorders' :
           powerCause === 'appointment'? 'Installed by a higher authority' :
-                                        'Seized by force — loyalties re-sworn at swordpoint'
+                                        'Seized by force. Loyalties re-sworn at swordpoint'
         }>
           <select value={powerCause} onChange={e => setPowerCause(e.target.value)} style={selectStyle}>
             {RULING_POWER_CAUSES.map(c => (

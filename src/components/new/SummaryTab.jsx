@@ -165,7 +165,7 @@ function SummaryTab({ settlement:r }) {
             <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {formatCount(pop)} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
           <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
-            {copied?'✓ Copied!':'Copy'}
+            {copied?'✓ Copied':'Copy'}
           </Button>
         </div>
         <p style={{fontSize: FS['13.5'],...serif,color:swatch['#E8D8B0'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>

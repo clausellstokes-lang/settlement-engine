@@ -118,7 +118,7 @@ export default function BeliefDivergenceBand({ campaign, nameById }) {
         <Eye size={13} /> What they believe
       </div>
       <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-        The fog of war, made watchable — each settlement&apos;s picture of the others, as it believes it.
+        The fog of war, made watchable: each settlement&apos;s picture of the others, as it believes it.
       </p>
       {observers.map((o) => (
         <div key={o.observerId} style={{

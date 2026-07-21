@@ -86,7 +86,7 @@ export default function RealmForecast({ campaign }) {
               padding: SP.sm, marginBottom: SP.sm, border: `1px dashed ${BORDER}`,
               fontSize: FS.xxs, fontFamily: sans, color: MUTED,
             }}>
-              The world or the docket changed underneath this forecast — it no longer speaks for the pending future. Run it again.
+              The world or the docket changed underneath this forecast. It no longer speaks for the pending future. Run it again.
             </div>
           )}
           {(view.refusals || []).length > 0 && (
@@ -106,7 +106,7 @@ export default function RealmForecast({ campaign }) {
                 </div>
                 {m.beats.slice(0, 5).map((b, i) => (
                   <div key={i} style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: 2 }}>
-                    {Number.isFinite(b.tick) ? `Week ${b.tick} — ` : ''}{b.headline}
+                    {Number.isFinite(b.tick) ? `Week ${b.tick}: ` : ''}{b.headline}
                   </div>
                 ))}
               </div>
@@ -126,7 +126,7 @@ export default function RealmForecast({ campaign }) {
               </div>
               {view.digest.realm.slice(0, 6).map((b, i) => (
                 <div key={i} style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: 2 }}>
-                  {Number.isFinite(b.tick) ? `Week ${b.tick} — ` : ''}{b.headline}
+                  {Number.isFinite(b.tick) ? `Week ${b.tick}: ` : ''}{b.headline}
                 </div>
               ))}
             </div>
@@ -137,8 +137,8 @@ export default function RealmForecast({ campaign }) {
             </div>
           )}
           <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-            The ceteris-paribus future: exact if nothing else changes — no party actions, no further orders,
-            and assuming defaults where the world would await your word. Barring further edits, this IS the next tick.
+            The ceteris-paribus future: exact if nothing else changes (no party actions, no further orders,
+            and assuming defaults where the world would await your word). Barring further edits, this IS the next tick.
           </p>
         </div>
       )}

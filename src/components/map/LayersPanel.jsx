@@ -319,7 +319,7 @@ function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
       <input
         id={inputId}
         type="checkbox"
-        aria-label={locked && lockedHint ? `${label} — ${lockedHint}` : label}
+        aria-label={locked && lockedHint ? `${label}: ${lockedHint}` : label}
         checked={checked}
         onChange={onChange}
         style={{ accentColor: GOLD, cursor: 'pointer' }}

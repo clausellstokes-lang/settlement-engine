@@ -34,8 +34,8 @@ export default function SessionEvictedBanner() {
       }}
     >
       <span>
-        Signed out because your account signed in on another device. Your work is saved —
-        sign in again to continue.
+        Signed out because your account signed in on another device. Your work is saved.
+        Sign in again to continue.
       </span>
       <span style={{ flexShrink: 0 }}>
         <IconButton Icon={X} label="Dismiss" onClick={() => setDismissed(true)} size="md" />

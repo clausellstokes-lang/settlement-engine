@@ -117,7 +117,7 @@ export default function AssignDeityFromMap({ campaign }) {
           {NOW_IN_ORDERS.map(label => (
             <span
               key={label}
-              title="Available in Realm Orders (the World Pulse composer) — staged, previewed, and undoable."
+              title="Available in Realm Orders (the World Pulse composer). Staged, previewed, and undoable."
               style={{
                 padding: '3px 8px', border: `1px solid ${BORDER2}`,
                 background: CARD, color: INK, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
@@ -128,8 +128,8 @@ export default function AssignDeityFromMap({ campaign }) {
           ))}
         </div>
         <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
-          These orders now live in <strong>Realm Orders</strong>, in the World Pulse panel —
-          each one staged, previewed against the forecast, and fully undoable before it lands.
+          These orders now live in <strong>Realm Orders</strong>, in the World Pulse panel.
+          Each one staged, previewed against the forecast, and fully undoable before it lands.
         </p>
       </div>
     </div>

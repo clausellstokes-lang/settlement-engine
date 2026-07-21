@@ -115,7 +115,7 @@ export default function ChroniclersLetterPanel({ campaign }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs }}>
         <Button data-testid="letter-mark-read" variant="secondary" size="sm"
           onClick={() => markCampaignLettersRead(campaign.id)}
-          aria-label="Mark the chronicle read up to now — the next letter starts here"
+          aria-label="Mark the chronicle read up to now. The next letter starts here"
           style={{ minHeight: undefined }}>
           <Check size={12} /> Mark as read
         </Button>

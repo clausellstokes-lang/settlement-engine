@@ -98,7 +98,7 @@ export default function GalleryCampaigns({ onNavigate }) {
     try {
       const id = await importGalleryMapWithCampaign(slug);
       setActiveCampaign(id);
-      setNotice({ kind: 'ok', text: 'Campaign imported — map and settlements are in your library.' });
+      setNotice({ kind: 'ok', text: 'Campaign imported. Map and settlements are in your library.' });
       if (typeof onNavigate === 'function') onNavigate('map');
     } catch (e) {
       setNotice({ kind: 'err', text: e?.message || 'Import failed.' });
