@@ -46,22 +46,46 @@ kappa constants, not runtime trig — the doc's v1 "compass-and-straightedge" fr
 mathematically FALSE for those counts; corrected. (c) projection stays affine-rational.
 (d) √ pinned/guarded per the massing.js precedent.
 
-## CORRECTION 3 — RENDER/FIDELITY (the v1 error that mattered most): SVG has a hard ceiling
+## CORRECTION 3 — RENDER/FIDELITY: SVG has a hard ceiling → NO-COMPROMISE decision
 v1 claimed CPU-projected SVG reaches the reference bar. **FLAWED.** Flat-primitive SVG
 (poly/line/circle/rect/path, constant fill, scalar opacity — no gradient/filter/image op)
 is flat/cel shading BY CONSTRUCTION: it categorically cannot render the soft shadows,
-ambient occlusion, and material texture the owner's reference names. Corrected stack:
-- The grammar → rational-JS MESH stays the single source of truth.
-- CPU SVG projection is DEMOTED to the STRUCTURAL + PRINT/PLOTTER surface (the engraving
-  look), still byte-reproducible and golden-pinnable.
-- NEW fidelity surface: a DETERMINISTIC CPU SOFTWARE RASTERIZER over the same mesh —
-  scanline/edge-function fill, per-pixel Lambert from the one fixed NW light, baked AO +
-  soft-shadow penumbrae from fixed RATIONAL sample tables, integer-hash stone grain, all
-  in the massing.js op discipline. Encoded by a pinned in-repo deterministic PNG encoder;
-  delivered as the hybrid the draw-op contract already allows: an SVG embedding the raster
-  plate as a data: URI with vector linework overlaid. Golden-pinnable bytes, ZERO GPU,
-  generation-time cost only, eager budget UNTOUCHED. (three.js remains the optional,
-  owner-gated, non-golden interactive viewer only.)
+ambient occlusion, and material texture the owner's reference names.
+
+**OWNER RULING (2026-07-21): NO COMPROMISE — the highest ceiling.** SVG-as-fidelity is
+REJECTED (it caps fidelity; the rule forbids the cap). The corrected stack targets the
+maximum reachable ceiling on TWO surfaces at once:
+- The grammar → rational-JS MESH is the single source of truth. THE PROMISE binds HERE:
+  the mesh (geometry, placement, alignment-driven detail params) is byte-deterministic and
+  golden-pinned. This is "the world."
+- **CANONICAL PLATE = a DETERMINISTIC OFFLINE CPU RENDERER at maximum fidelity.** Key
+  insight that makes "highest ceiling" and "byte-reproducible" NOT a tradeoff: film-quality
+  rendering is CPU/OFFLINE (RenderMan, path tracers) — the GPU's edge is SPEED, not
+  CEILING, and the canonical plate is generated ONCE (no real-time budget), so a CPU
+  renderer's fidelity is capped only by authoring effort, not the medium. It can do
+  per-pixel shading, ambient occlusion, soft-shadow penumbrae, material texture, and up to
+  path-traced global illumination. Determinism is preserved by keeping ALL math in the
+  byte-exact set — transcendentals (BRDF pow/exp, sin/cos) resolved through PINNED RATIONAL
+  LOOKUP TABLES (as fine as needed), never runtime Math.sin/exp (ECMA-262 impl-varying).
+  Encoded by a pinned in-repo deterministic PNG encoder; delivered as SVG embedding the
+  raster plate as a data: URI with vector linework overlaid. Byte-reproducible,
+  golden-pinnable, ZERO GPU, generation-time only, eager budget UNTOUCHED. THE PROMISE
+  stays LITERAL.
+- **INTERACTIVE VIEWER = the absolute-highest LIVE ceiling (GPU/WebGL/PBR), opt-in,
+  non-golden.** Same seed → same mesh → same world; the live view's pixels are
+  device-dependent, which is fine because it is a VIEW of the identical world, not the
+  canonical truth (two cameras photographing one statue). Lazy-chunked per the react-pdf
+  vendor precedent, zero eager bytes.
+- SVG-only vector survives as a SECONDARY print/plotter/line-art export, never the ceiling.
+
+⚠ THE ONE CONSTITUTIONAL FORK I WILL NOT DECIDE ALONE (owner-queue #1, below): the
+deterministic CPU renderer reaches the reference bar ONLY if tabulated lighting hits the
+needed precision. K-0's spike renders it so you SEE the real ceiling of the
+PROMISE-keeping path. IF it reaches the reference → no tension, ship it. IF it provably
+cannot → the No-Compromise rule and THE PROMISE genuinely collide (GPU render as canonical
+would go higher but breaks byte-determinism), and THAT trade is a conscious constitutional
+call only the owner makes — THE PROMISE is ratified "never re-litigate," so I surface it
+with the spike's evidence rather than silently break it.
 
 ## CORRECTION 4 — DRIFT BINDING: axes are real but DEAD at the render surface as wired
 The axes exist and are continuous, but v1 read the wrong field. Fixes:
@@ -95,14 +119,19 @@ shipped with M-0 massing) while deferring all three live risks. Corrected order:
 - **K-0 — the grammar-less SPIKE (days, not a wave; THE CHEAPEST FALSIFIER):** hand-code
   in direct JS (no interpreter) ONE traceried gothic window + ONE flying-buttress bay in
   the massing.js purity discipline; push through a minimal projector extension (the
-  Bézier DrawOp add); ALSO render a small deterministic RASTER swatch of the same fragment
-  (flat Lambert + hard shadow + hash grain; AO deferred). GATES: (a) tracery-without-trig
-  proven executable; (b) hidden-surface — does dy-sort survive buttress cyclic overlap or
-  is Newell/rational-BSP needed, byte-stable under ties; (c) measured ops + SVG bytes vs
-  OP_CEILING extrapolated → the per-building LOD law BEFORE any wave; (d) **THE FORK
-  EXHIBIT** — both plates (engraving-vector and render-raster) in front of the OWNER with
-  the question "WHICH BAR GOVERNS?" The owner's answer decides whether the rasterizer
-  stage exists, before one grammar is authored.
+  Bézier DrawOp add); ALSO render a MAX-FIDELITY deterministic CPU raster swatch of the same
+  fragment — NOT a flat-Lambert placeholder but the real ceiling of the PROMISE-keeping
+  path: per-pixel shading + soft-shadow penumbra + ambient occlusion + material texture via
+  pinned rational tables, so the owner judges the ACTUAL deterministic ceiling against the
+  reference. GATES: (a) tracery-without-trig proven executable; (b) hidden-surface — does
+  dy-sort survive buttress cyclic overlap or is Newell/rational-BSP needed, byte-stable
+  under ties; (c) measured ops + bytes vs OP_CEILING extrapolated → the per-building LOD law
+  BEFORE any wave; (d) **THE CEILING EXHIBIT** — the deterministic max-fidelity raster plate
+  beside the owner's reference image, answering the only question left: does the
+  PROMISE-keeping renderer MEET the bar (ship it, no tension) or NOT (surface the
+  GPU-vs-PROMISE constitutional fork with evidence). The engraving-vector plate ships too as
+  the print/line-art comparison, but per the No-Compromise ruling it is NOT a fidelity
+  candidate.
 - K-1 grammar interpreter + projector, spec'd against K-0-measured reality.
 - K-3 ornament sublibrary + the K-4 PARAMETER CONTRACT frozen (the condition-vector surface
   every grammar must expose).
@@ -111,9 +140,14 @@ shipped with M-0 massing) while deferring all three live risks. Corrected order:
 - K-4 full drift binding + goldens. K-5 optional viewer (owner-gated).
 
 ## OWNER-QUEUE (the true gates, before any build):
-1. ⭐ THE FIDELITY-BAR FORK — engraving-vector look vs render-raster look. This single
-   answer decides whether the software-rasterizer stage exists and roughly doubles-or-not
-   the render scope. Surfaced by K-0's fork exhibit; the owner picks from real plates.
+1. ⭐⭐ THE PROMISE-vs-CEILING FORK (RESOLVED to highest-ceiling by the No-Compromise
+   ruling, pending K-0 evidence): the canonical render is the deterministic max-fidelity
+   CPU renderer (keeps THE PROMISE literal) at the highest tier it can reach. K-0 shows
+   whether that tier meets the reference bar. ONLY IF it provably cannot does a second
+   owner decision arise — consciously relaxing THE PROMISE's byte-guarantee for the
+   canonical image to allow GPU rendering as canonical. Surfaced with spike evidence; never
+   decided unilaterally (THE PROMISE is constitutional). The GPU INTERACTIVE VIEWER ships
+   regardless as the highest live ceiling (non-canonical).
 2. LATENT-ALIGNMENT COSMETIC SURFACING — the drift fix (a) shows a latent deity's alignment
    cosmetically to free tiers; owner ok/veto.
 3. GO on K-0 itself (days-long spike; the only thing that needs authorizing to start).
