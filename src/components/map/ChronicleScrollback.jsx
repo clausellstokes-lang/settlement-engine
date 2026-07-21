@@ -172,10 +172,23 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
     pulseHistory: campaign?.worldState?.pulseHistory,
   });
 
-  // The scrubber index into the (newest-first) timeline. Clamp on changes.
-  const [index, setIndex] = useState(0);
-  const safeIndex = Math.min(index, Math.max(0, timeline.length - 1));
+  // The scrubber ANCHORS TO A TICK, not a position: the timeline is newest-first
+  // and GROWS AT THE FRONT on each advance, so a stored index would silently
+  // re-point to a neighbouring tick when a new frame prepends under the DM.
+  // null ⇒ follow the newest (the default, and what "Newer" past the top means);
+  // a vanished tick falls back to the newest.
+  const [selectedTick, setSelectedTick] = useState(null);
+  const safeIndex = useMemo(() => {
+    if (selectedTick == null) return 0;
+    const i = timeline.findIndex((t) => t.tick === selectedTick);
+    return i >= 0 ? i : 0;
+  }, [timeline, selectedTick]);
   const selected = timeline[safeIndex] || null;
+  const gotoIndex = (i) => {
+    const clamped = Math.max(0, Math.min(timeline.length - 1, i));
+    const frame = timeline[clamped];
+    if (frame) setSelectedTick(clamped === 0 ? null : frame.tick);
+  };
 
   const resolveName = nameFor || ((id) => String(id));
 
@@ -218,7 +231,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
           variant="ghost" size="sm"
           aria-label="Newer tick"
           disabled={safeIndex <= 0}
-          onClick={() => setIndex(i => Math.max(0, i - 1))}
+          onClick={() => gotoIndex(safeIndex - 1)}
           style={{ minHeight: undefined, padding: 2 }}
         >
           <ChevronLeft size={15} />
@@ -235,7 +248,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
           variant="ghost" size="sm"
           aria-label="Older tick"
           disabled={safeIndex >= timeline.length - 1}
-          onClick={() => setIndex(i => Math.min(timeline.length - 1, i + 1))}
+          onClick={() => gotoIndex(safeIndex + 1)}
           style={{ minHeight: undefined, padding: 2 }}
         >
           <ChevronRight size={15} />
@@ -252,7 +265,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
               size="sm"
               aria-pressed={i === safeIndex}
               aria-label={`Tick ${t.tick}`}
-              onClick={() => setIndex(i)}
+              onClick={() => gotoIndex(i)}
               style={{
                 minWidth: 24, minHeight: undefined, padding: '2px 6px',
                 border: `1px solid ${i === safeIndex ? GOLD : BORDER2}`,

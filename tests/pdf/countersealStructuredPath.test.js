@@ -59,6 +59,23 @@ function collectPrimitives(node, out = []) {
 
 const P = ornamentPalette('light');
 
+// SB2 — PAINT-ROLE extraction: geometry equality alone let a fill↔stroke flip
+// slip through with every test green (a disc on the PDF, a ring on the web).
+// Each element's role comes from its OWN attributes in the draw() string: a
+// fill= that isn't "none" with no own stroke= ⇒ 'fill' (the tower's window dot);
+// anything else — bare tags inheriting the group's S(p) stroke idiom, or an own
+// stroke= (the coin's cross) ⇒ 'stroke'. Returned in DOCUMENT ORDER with the
+// element's geometry key so role and shape are pinned together.
+function paintedFromSvgString(svg) {
+  return [...svg.matchAll(/<(path|circle)\b([^>]*?)\/>/g)].map(([, el, attrs]) => {
+    const ownFill = /fill="(?!none")[^"]*"/.test(attrs);
+    const ownStroke = /\bstroke="/.test(attrs);
+    const role = ownFill && !ownStroke ? 'fill' : 'stroke';
+    if (el === 'path') return { el, role, key: /d="([^"]+)"/.exec(attrs)[1] };
+    return { el, role, key: `${/cx="([^"]+)"/.exec(attrs)[1]},${/cy="([^"]+)"/.exec(attrs)[1]},${/r="([^"]+)"/.exec(attrs)[1]}` };
+  });
+}
+
 describe('1. geometry mirror — EMBLEM_PATHS faithfully mirrors pools.js draw()', () => {
   it('every emblem has a structured entry', () => {
     for (const e of EMBLEMS) {
@@ -78,7 +95,28 @@ describe('1. geometry mirror — EMBLEM_PATHS faithfully mirrors pools.js draw()
       expect(structured.ds).toEqual(drawn.ds);
       expect(structured.circles).toEqual(drawn.circles);
     });
+
+    it(`${e.name}: structured PAINT ROLES mirror draw() (fill vs stroke, in document order)`, () => {
+      const painted = paintedFromSvgString(e.draw(P));
+      const structured = EMBLEM_PATHS[e.name].map((n) => ({
+        el: n.el,
+        role: n.role,
+        key: n.el === 'path' ? n.d : `${n.cx},${n.cy},${n.r}`,
+      }));
+      expect(structured).toEqual(painted);
+    });
   }
+
+  it('stroke widths agree — every draw() stroke is width 2, every structured stroke node resolves to 2', () => {
+    for (const e of EMBLEMS) {
+      const widths = [...e.draw(P).matchAll(/stroke-width="([^"]+)"/g)].map((m) => m[1]);
+      expect(widths.length, `${e.name} declares at least the group stroke width`).toBeGreaterThan(0);
+      for (const w of widths) expect(w, `${e.name} stroke width`).toBe('2');
+      for (const n of EMBLEM_PATHS[e.name]) {
+        if (n.role === 'stroke') expect(n.w || 2, `${e.name} structured stroke width`).toBe(2);
+      }
+    }
+  });
 });
 
 describe('2. cross-surface selection — same seed, same mark on web and PDF', () => {
@@ -119,5 +157,50 @@ describe('3. render tree — HouseCountersealSeal renders the geometry, no text'
   it('returns null for an absent seed (no counterseal, like the web)', () => {
     expect(HouseCountersealSeal({ seed: undefined })).toBeNull();
     expect(HouseCountersealSeal({ seed: '' })).toBeNull();
+  });
+
+  // SB2 — the PDF paints each node BY ITS ROLE: 'fill' ⇒ solid ink, no stroke;
+  // 'stroke' ⇒ fill none + inked outline at the node's width. Walk the rendered
+  // props against the structured roles so a role drift renders red here, not as
+  // a silent disc-vs-ring mismatch between surfaces.
+  function collectPaint(node, out = []) {
+    if (node == null || typeof node !== 'object') return out;
+    if (Array.isArray(node)) {
+      for (const n of node) collectPaint(n, out);
+      return out;
+    }
+    const props = node.props || {};
+    if (typeof props.d === 'string' || props.cx !== undefined) {
+      out.push({ fill: props.fill, stroke: props.stroke, strokeWidth: props.strokeWidth });
+    }
+    if (props.children) collectPaint(props.children, out);
+    return out;
+  }
+
+  it('paints role:fill solid and role:stroke outlined — the tower (the one fill node) included', () => {
+    // Find a seed that selects the tower deterministically (seededPicker is pure),
+    // so the fill-role branch is exercised no matter how the sample seeds land.
+    const candidates = ['Aldergate', 'Highfen', 'Cinderhollow', 'Umberford', 'Wren',
+      ...Array.from({ length: 200 }, (_, i) => `seed-${i}`)];
+    const towerSeed = candidates.find((s) => countersealEmblemName(s) === 'tower');
+    expect(towerSeed, 'a tower-selecting seed exists in the candidate space').toBeTruthy();
+    for (const seed of [towerSeed, 'Highfen']) {
+      const name = countersealEmblemName(seed);
+      const paints = collectPaint(HouseCountersealSeal({ seed, size: 14 }));
+      const nodes = EMBLEM_PATHS[name];
+      expect(paints).toHaveLength(nodes.length);
+      nodes.forEach((n, i) => {
+        const p = paints[i];
+        if (n.role === 'fill') {
+          expect(p.fill, `${name}[${i}] fill role is inked`).toBeTruthy();
+          expect(p.fill).not.toBe('none');
+          expect(p.stroke, `${name}[${i}] fill role has no stroke`).toBeUndefined();
+        } else {
+          expect(p.fill, `${name}[${i}] stroke role is unfilled`).toBe('none');
+          expect(p.stroke, `${name}[${i}] stroke role is inked`).toBeTruthy();
+          expect(p.strokeWidth, `${name}[${i}] stroke width`).toBe(n.w || 2);
+        }
+      });
+    }
   });
 });

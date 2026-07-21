@@ -188,6 +188,43 @@ export function buildTableEffect(record) {
 }
 
 /**
+ * THE EXPOSURE ROSTER — the entities EXPOSE_CORRUPTION can actually act on:
+ * corrupt NPCs (the rich path), plus institutions/factions carrying a
+ * corruption-typed impairment (the scandal path). MIRRORS the §3 current-state
+ * filter `compromisedTargets` in events/affordanceManifest.js — the manifest is
+ * a LAZY LEAF pinned to the composer chunk, and importing it from the Session
+ * Ledger's chunk would share it across two lazy chunks (the recorded
+ * chunk-rebalance hazard), so the ledger reads this mirror instead; parity with
+ * the manifest is pinned in tests/domain/tableLedger.test.js so the two rosters
+ * cannot drift. Refs use the SAME id-or-name key the engine's findNpc /
+ * findInstitution / findFaction resolve, so a picked target always resolves —
+ * never the index-keyed ghost ref that vetoes to target_not_found.
+ * @param {{ npcs?: unknown, institutions?: unknown,
+ *   powerStructure?: { factions?: unknown }, factions?: unknown } | null | undefined} settlement
+ * @returns {Array<{ ref: string, label: string }>}
+ */
+export function exposureTargets(settlement) {
+  const s = settlement || {};
+  /** @type {Array<{ ref: string, label: string }>} */
+  const out = [];
+  const marked = (/** @type {Record<string, unknown>} */ e) =>
+    Array.isArray(e?.impairments) && e.impairments.some((i) => !!i && i.type === 'corruption');
+  const npcs = Array.isArray(s.npcs) ? s.npcs : [];
+  for (const n of npcs) {
+    if (n?.corrupt) out.push({ ref: String(n.id || n.name), label: String(n.name || n.id) });
+  }
+  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
+  for (const i of institutions) {
+    if (marked(i)) out.push({ ref: String(i.id || i.name), label: String(i.name || i.id) });
+  }
+  const factions = s.powerStructure?.factions || s.factions || [];
+  for (const f of Array.isArray(factions) ? factions : []) {
+    if (marked(f)) out.push({ ref: String(f.id || f.faction || f.name), label: String(f.faction || f.name || f.id) });
+  }
+  return out;
+}
+
+/**
  * THE CLERK REVIEW (the bucketing-clerk contract). Take a list of RAW proposals
  * (from the AI clerk's free-text → {kind, targets, magnitude} pass) and run each
  * through the schema wall, partitioning into accepted (normalized records) and

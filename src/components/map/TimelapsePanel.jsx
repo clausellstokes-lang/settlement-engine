@@ -5,13 +5,15 @@
  * `timelapseTick`, which drives the realm TimelapseLayer (event pulses + grew/
  * declined tint) AND — when a town map is open — the V-15 aged-map overlay. The
  * track derives lazily from the durable pulseHistory (buildTimelineTrack). Mounting
- * this panel ACTIVATES the timelapse (at the latest tick); unmounting DEACTIVATES it
- * (timelapseTick → null), so the overlays vanish and the live view returns exactly.
+ * this panel ACTIVATES the timelapse (at the latest tick); unmounting RESTORES the
+ * tick that stood before it mounted — null in the common case (the overlays vanish
+ * and the live view returns exactly), or the town map's own "Show the years" week,
+ * so a visit to this panel never discards that toggle's selection (SB2).
  *
  * A new lazy chunk (mounted in RealmInspector under Suspense). Zero eager.
  */
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { History, ChevronLeft, ChevronRight, Radio, Download } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { buildTimelineTrack, frameAtTick, trackSettlementIds, settlementTimeline, serializeTimelapseClip } from '../../domain/display/timelineTrack.js';
@@ -49,10 +51,17 @@ export default function TimelapsePanel({ campaign, nameFor }) {
     downloadBlob(blob, `timelapse-${clipSlug(campaign?.name)}.json`);
   };
 
-  // Mounting activates the timelapse at the latest tick; unmounting returns to live.
+  // Mounting activates the timelapse at the latest tick; unmounting RESTORES the
+  // pre-mount tick, not a blanket null — the shared timelapseTick also carries the
+  // town map's "Show the years" selection (SettlementMapEditControls), and a null
+  // here silently discarded it. The ref captures the store value at first render
+  // (before the mount effect writes), so restore is exact; null pre-mount (the
+  // common case) still returns the live view exactly as before.
+  const preMountTick = useRef(timelapseTick);
   useEffect(() => {
+    const restoreTick = preMountTick.current; // captured once at first render; never reassigned
     if (frames.length > 0) setTimelapseTick(track.maxTick);
-    return () => setTimelapseTick(null);
+    return () => setTimelapseTick(restoreTick);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [track.maxTick, frames.length]);
 

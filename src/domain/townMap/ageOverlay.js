@@ -39,6 +39,15 @@
  * history is recorded anywhere in sim state today; it needs a new persisted signal,
  * which is a schema change outside this derived-only display lane.)
  *
+ * ── GROWTH-VS-SCRUB (deliberately deferred — documented, not a bug to re-find) ─
+ * Only the scars and rebirths are time-aware under the V-3 scrub: growth
+ * THICKENING reads fabricStocksFor's CURRENT cumulative prominence — the fabric
+ * mirror keeps no per-week stock history — so scrubbing backward fades scars and
+ * hides rebirths while the growth infill stays at present-day density (a young
+ * town wears modern infill). Making growth time-aware needs a TIMESTAMPED stocks
+ * history in the mirror: a new persisted signal, the same schema-change class as
+ * the renaming echoes above, outside this derived-only display lane (SB2).
+ *
  * @enforced-by tests/domain/ageOverlay.test.js + tests/property/ageOverlayGolden.test.js
  */
 

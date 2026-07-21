@@ -55,6 +55,26 @@ describe('V-3 — buildTimelineTrack', () => {
     expect(JSON.stringify(buildTimelineTrack({ worldState }))).toBe(JSON.stringify(track));
   });
 
+  it('collapses same-tick records into ONE frame, the later outcomes appended (SB2)', () => {
+    const ws = { pulseHistory: [
+      { tick: 4, selectedOutcomes: [{ severity: 0.2, settlementIds: ['s1'], populationDeltas: { s1: 10 } }], impactDigest: [] },
+      { tick: 4, selectedOutcomes: [
+        { severity: 0.7, settlementIds: ['s1'] },
+        { severity: 0.5, settlementIds: ['s2'], populationDeltas: { s2: -5 } },
+      ], impactDigest: [] },
+    ] };
+    const t = buildTimelineTrack({ worldState: ws });
+    // One frame per tick — so the scrubber's findIndex-by-tick and frameAtTick
+    // can never resolve two different frames for the same tick.
+    expect(t.ticks).toEqual([4]);
+    expect(t.frames).toHaveLength(1);
+    expect(t.frames[0].pulses).toEqual([
+      { settlementId: 's1', severity: 0.7 },
+      { settlementId: 's2', severity: 0.5 },
+    ]);
+    expect(t.frames[0].deltas).toEqual({ s1: 'up', s2: 'down' });
+  });
+
   it('an absent / empty pulseHistory yields an empty track (byte-inert overlay)', () => {
     for (const ws of [undefined, null, {}, { pulseHistory: [] }]) {
       const t = buildTimelineTrack({ worldState: ws });

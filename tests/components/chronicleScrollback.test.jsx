@@ -83,6 +83,48 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     fireEvent.click(screen.getByTestId('chronicle-headline'));
     expect(setSelectedSettlementId).toHaveBeenCalledWith('b');
   });
+
+  test('the selection ANCHORS TO ITS TICK when a new advance prepends a frame (SB2)', () => {
+    STORE = { setSelectedSettlementId };
+    const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
+    // The DM scrubs back to tick 5…
+    fireEvent.click(screen.getByRole('button', { name: 'Tick 5' }));
+    expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
+    // …then an advance lands while the panel is open: the newest-first timeline
+    // grows at the FRONT (tick 9 prepends). A positional index would now point
+    // at tick 7; the tick anchor must keep tick 5 selected.
+    const grown = {
+      ...campaign,
+      worldState: {
+        pulseHistory: [
+          ...campaign.worldState.pulseHistory,
+          { tick: 9, selectedOutcomes: [{ id: 'o9', headline: 'A new dawn', summary: '', targetSaveId: 'a', severity: 0.2 }], impactDigest: [] },
+        ],
+      },
+    };
+    rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
+    expect(screen.getByText(/Tick 5/)).toBeTruthy();
+    expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
+    expect(screen.queryByText('Bram falls')).toBeNull();
+  });
+
+  test('parked at the newest, the view FOLLOWS a new advance (the default keeps live)', () => {
+    STORE = { setSelectedSettlementId };
+    const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
+    expect(screen.getByText(/Tick 7/)).toBeTruthy();
+    const grown = {
+      ...campaign,
+      worldState: {
+        pulseHistory: [
+          ...campaign.worldState.pulseHistory,
+          { tick: 9, selectedOutcomes: [{ id: 'o9', headline: 'A new dawn', summary: '', targetSaveId: 'a', severity: 0.2 }], impactDigest: [] },
+        ],
+      },
+    };
+    rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
+    expect(screen.getByText(/Tick 9/)).toBeTruthy();
+    expect(screen.getByText('A new dawn')).toBeTruthy();
+  });
 });
 
 describe('ChronicleScrollback — per-tick compareCausalState diff', () => {

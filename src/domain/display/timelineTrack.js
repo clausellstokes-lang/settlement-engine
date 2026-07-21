@@ -118,12 +118,24 @@ export function buildTimelineTrack({ worldState }) {
     records.push({ tick, record: r });
   }
   records.sort((a, b) => a.tick - b.tick || 0);
-  /** @type {TimelineFrame[]} */
-  const frames = records.map(({ tick, record }) => {
+  // Same-tick ties COLLAPSE into ONE frame, the later record's outcomes appended
+  // (the documented contract above; the sort is stable, so "later" is the input
+  // order). One frame per tick also keeps the scrubber's findIndex-by-tick and
+  // frameAtTick agreeing on a single frame — duplicate-tick frames made them
+  // resolve different records (SB2).
+  /** @type {Map<number, TrackOutcome[]>} */
+  const outcomesByTick = new Map();
+  /** @type {number[]} */
+  const tickOrder = [];
+  for (const { tick, record } of records) {
     const selected = Array.isArray(record.selectedOutcomes) ? /** @type {ReadonlyArray<TrackOutcome>} */ (record.selectedOutcomes) : [];
     const impacts = Array.isArray(record.impactDigest) ? /** @type {ReadonlyArray<TrackOutcome>} */ (record.impactDigest) : [];
-    return frameFromOutcomes(tick, [...selected, ...impacts]);
-  });
+    const bucket = outcomesByTick.get(tick);
+    if (bucket) bucket.push(...selected, ...impacts);
+    else { outcomesByTick.set(tick, [...selected, ...impacts]); tickOrder.push(tick); }
+  }
+  /** @type {TimelineFrame[]} */
+  const frames = tickOrder.map((tick) => frameFromOutcomes(tick, outcomesByTick.get(tick) || []));
   const ticks = frames.map((f) => f.tick);
   return {
     ticks,

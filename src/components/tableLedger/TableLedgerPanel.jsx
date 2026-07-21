@@ -20,8 +20,12 @@ import { useStore } from '../../store/index.js';
 import { sans, FS, SP, R, INK, SLATE, SLATE_BG, MUTED, CARD, AMBER_DEEP, RED } from '../theme.js';
 import {
   TABLE_EVENT_KINDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES, KIND_SPEC,
-  validateTableEvent, buildTableEffect,
+  validateTableEvent, buildTableEffect, exposureTargets,
 } from '../../domain/tableLedger.js';
+// The canonical stressor accessor (already eager via the engine substrate): the
+// picker and the clerk must see the SAME hardships every domain reader sees —
+// `stressors` / `stress` / `stresses` aliases and the bare-object legacy shape.
+import { canonStressors } from '../../domain/canonicalAccessors.js';
 import Card from '../primitives/Card.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import Button from '../primitives/Button.jsx';
@@ -74,18 +78,18 @@ export default function TableLedgerPanel() {
   const spec = KIND_SPEC[kind];
 
   // Targets drawn from the LIVE settlement — the DM can only name what is there.
+  // Stressors resolve through canonStressors (every alias + legacy shape); exposure
+  // offers ONLY what EXPOSE_CORRUPTION can act on (exposureTargets — corrupt NPCs +
+  // corruption-impaired institutions/factions, id-or-name refs the engine resolves),
+  // so a recorded exposure can never ghost into a target_not_found veto.
   const targetOptions = useMemo(() => {
     if (kind === 'obligation') return OBLIGATION_TYPES.map((t) => ({ ref: t, label: OBLIGATION_LABELS[t] || t }));
     if (kind === 'stressor-relief') {
-      const list = Array.isArray(settlement?.stressors) ? settlement.stressors
-        : Array.isArray(settlement?.stress) ? settlement.stress : [];
-      return list.map((s) => ({ ref: String(s.type || s.name || ''), label: s.label || s.name || s.type || 'a hardship' }))
+      return canonStressors(settlement)
+        .map((s) => ({ ref: String(s.type || s.name || ''), label: String(s.label || s.name || s.type || 'a hardship') }))
         .filter((o) => o.ref);
     }
-    if (kind === 'exposure') {
-      const list = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-      return list.map((n, i) => ({ ref: String(n.id || i), label: n.name || `NPC ${i + 1}` }));
-    }
+    if (kind === 'exposure') return exposureTargets(settlement);
     return [];
   }, [kind, settlement]);
 
@@ -173,9 +177,12 @@ export default function TableLedgerPanel() {
       <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center' }}>
         <Button variant="primary" size="sm" onClick={record} disabled={!canRecord}>Record it</Button>
         <TableClerkAffordance
+          // The clerk grounds on the SAME rosters the manual picker offers: canonical
+          // stressors (all aliases) and the compromised exposure roster — so the two
+          // paths can never disagree about what is nameable on this settlement.
           targets={{
-            stressors: (Array.isArray(settlement?.stressors) ? settlement.stressors : []).map((s) => String(s.type || s.name || '')).filter(Boolean),
-            npcs: (Array.isArray(settlement?.npcs) ? settlement.npcs : []).map((n, i) => ({ id: String(n.id || i), name: n.name || `NPC ${i + 1}` })),
+            stressors: canonStressors(settlement).map((s) => String(s.type || s.name || '')).filter(Boolean),
+            npcs: exposureTargets(settlement).map((t) => ({ id: t.ref, name: t.label })),
           }}
           onAccept={(rec) => queueEdit('table-event', { directive: buildTableEffect(rec), record: rec })}
         />
