@@ -240,7 +240,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           fontSize: FS.md, color: BODY, lineHeight: 1.55,
         }}>
           {verification.error || 'We hit a temporary snag confirming the payment.'}
-          {' '}Your dossier is safe — this usually clears in a few seconds.
+          {' '}Your dossier is safe. This usually clears in a few seconds.
         </p>
         <Button variant="primary" size="lg" icon={<RefreshCw size={16} />} onClick={retryVerify}>
           Try again

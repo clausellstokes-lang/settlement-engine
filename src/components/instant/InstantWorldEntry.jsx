@@ -88,7 +88,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             </span>
           </div>
           <p style={{ margin: `${SP.xs}px 0 0`, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>
-            One click and a little configuration builds a whole coherent realm — a map, a mix of settlements, and the ties between them, all staged and ready for you to shape. The advanced wizard stays here for full control.
+            One click and a little configuration builds a whole coherent realm: a map, a mix of settlements, and the ties between them, all staged and ready for you to shape. The advanced wizard stays here for full control.
           </p>
         </div>
         <Button
@@ -127,7 +127,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             </select>
           </Knob>
 
-          <Knob label="Seed" hint="Everything else is a surprise — same seed always rebuilds the same realm.">
+          <Knob label="Seed" hint="Everything else is a surprise. Same seed always rebuilds the same realm.">
             <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', flexWrap: 'wrap' }}>
               <input
                 aria-label="Seed"
@@ -164,7 +164,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
             {busy ? 'Building your realm…' : 'Generate Instant World'}
           </Button>
           <p style={{ margin: 0, textAlign: 'center', fontFamily: sans, fontSize: FS.xxs, color: MUTED }}>
-            It places everything and canonizes nothing — you can move, edit, or regenerate before mapping the geography.
+            It places everything and canonizes nothing. You can move, edit, or regenerate before mapping the geography.
           </p>
         </div>
       )}

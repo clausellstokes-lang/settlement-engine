@@ -85,7 +85,7 @@ export default function TravelersLayer() {
         out.push({
           id: `army.${key}`, kind: 'armies', x: pt.x, y: pt.y,
           angleDeg: retreat ? pt.angleDeg + 180 : pt.angleDeg,
-          tip: `${nameOf(rec.armyId || rec.originId)} — army ${retreat ? 'retreating' : 'on the march'}${eta ? `, ETA ${eta}w` : ''}`,
+          tip: `${nameOf(rec.armyId || rec.originId)}: army ${retreat ? 'retreating' : 'on the march'}${eta ? `, ETA ${eta}w` : ''}`,
         });
       }
     }
@@ -105,7 +105,7 @@ export default function TravelersLayer() {
         const hw = retWeeks(o, d);
         const t = progress01(tick, Number(rec.arrivalTick) - hw, Number(rec.arrivalTick)); // 1 − (arrival−tick)/hw
         const pt = pointAlongPath(pts, t); if (!pt) continue;
-        out.push({ id: `mig.${key}`, kind: 'migrants', x: pt.x, y: pt.y, angleDeg: pt.angleDeg, tip: `Migrant column — ${nameOf(o)} → ${nameOf(d)}` });
+        out.push({ id: `mig.${key}`, kind: 'migrants', x: pt.x, y: pt.y, angleDeg: pt.angleDeg, tip: `Migrant column: ${nameOf(o)} → ${nameOf(d)}` });
       }
     }
 
@@ -124,7 +124,7 @@ export default function TravelersLayer() {
         out.push({
           id: `envoy.${mid}`, kind: 'envoys', x: pt.x, y: pt.y,
           angleDeg: flip ? pt.angleDeg + 180 : pt.angleDeg,
-          tip: `${m.npcName || 'An envoy'} of ${nameOf(m.homeId)} — ${purpose}`,
+          tip: `${m.npcName || 'An envoy'} of ${nameOf(m.homeId)}, ${purpose}`,
         });
       }
     }

@@ -137,7 +137,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
 
       <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
         Costs are <strong>estimates</strong> from a maintained price table. No provider exposes a live balance,
-        so this meter is your <em>trend</em> — your provider’s console is the source of truth.
+        so this meter is your <em>trend</em>. Your provider’s console is the source of truth.
       </div>
     </div>
   );

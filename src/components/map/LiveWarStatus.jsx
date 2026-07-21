@@ -118,8 +118,8 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                     ? `${portName} is blockaded by a coalition fleet`
                     : `${fleets[0] || 'A hostile fleet'} blockades ${portName}`}
                   detail={isCoalition
-                    ? `${phrase} — ${fleets.join(', ')} command the sea approaches.`
-                    : `${phrase} — the sea approaches are held.`}
+                    ? `${phrase}. ${fleets.join(', ')} command the sea approaches.`
+                    : `${phrase}. The sea approaches are held.`}
                 />
               );
             })}

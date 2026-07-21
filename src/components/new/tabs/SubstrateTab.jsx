@@ -103,7 +103,7 @@ export default function SubstrateTab({ settlement }) {
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>Causal substrate</div>
       <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        The sixteen forces the engine simulates — food, legitimacy, defense, trade, and the rest.
+        The sixteen forces the engine simulates: food, legitimacy, defense, trade, and the rest.
         Bands read the settlement&apos;s own conditions; a live siege, drawdown, or outbreak is already
         pressed into the scores below.
       </p>

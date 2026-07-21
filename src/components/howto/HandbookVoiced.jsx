@@ -22,7 +22,7 @@ import { GOLD, serif_, FS, swatch } from '../theme.js';
 export const VOICED_HEADER = Object.freeze({
   eyebrow: 'The keeper’s craft',
   title: 'The Keeper’s Handbook',
-  subtitleLead: 'How to keep a world, day to day — the plain working of the engine. Any rule or catalog is set down in the ',
+  subtitleLead: 'How to keep a world, day to day: the plain working of the engine. Any rule or catalog is set down in the ',
   subtitleTail: '.',
 });
 
@@ -38,32 +38,32 @@ export function VoicedConceptIntro() {
       </div>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         Most generators roll on a table. This one keeps a world. Every institution, every guarded secret, every
-        faction&rsquo;s grudge and the reach of its trade is derived &mdash; not drawn from a hat, but settled by the
+        faction&rsquo;s grudge and the reach of its trade is derived, not drawn from a hat, but settled by the
         same mechanical pressures that governed real towns. Nothing here is decoration.
       </p>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         <strong style={{ color: GOLD }}>Constraint</strong> is the whole method. You do not describe the town you
         want; you set the bounds of the town that can exist. A slider, a stress, a forced institution, the terrain at
-        its gates, the temper of its neighbours &mdash; each is a wall. The settlement that emerges is the only one
+        its gates, the temper of its neighbours: each is a wall. The settlement that emerges is the only one
         that can stand inside all of them at once. That is a different act from rolling dice, prompting for prose, or
         choosing from a list.
       </p>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         <strong style={{ color: GOLD }}>Coherence</strong> is the reward for constraint. A hungry frontier town told
         to fear its criminals will grow a bought guard, a starved wall, a black market, and people whose secrets bend
-        to exactly that pressure &mdash; because every one of those answers is drawn from the same set of bounds, not
+        to exactly that pressure, because every one of those answers is drawn from the same set of bounds, not
         invented apart from the others.
       </p>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: '0 0 8px' }}>
         <strong style={{ color: GOLD }}>The Narrative Refinement Layer</strong> waits under a single button. The town
         itself is simulated, never written; but when you want table-ready prose, the layer gathers the whole simulated
-        state &mdash; the faction tensions, the strain on the purse, the character earned by its history, the texture
-        of a working day &mdash; into one voice that says only what the engine already holds. It dresses the truth; it
+        state (the faction tensions, the strain on the purse, the character earned by its history, the texture
+        of a working day) into one voice that says only what the engine already holds. It dresses the truth; it
         never replaces it.
       </p>
       <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: 0 }}>
         <strong style={{ color: GOLD }}>The Narrative AI Prompt</strong> is for deeper work. The export packs the full
-        brief &mdash; economy, power, every goal and secret, the standing stresses, the history &mdash; as a structured
+        brief (economy, power, every goal and secret, the standing stresses, the history) as a structured
         prompt for any outside tool. Because the brief is coherent, an outside assistant keeps its story straight across
         a dozen questions. Hand it over and ask it anything about the town.
       </p>

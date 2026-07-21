@@ -453,7 +453,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             </div>
             {!GRID_PRESETS.some(([presetId]) => presetId === draft.presetId) && (
               <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-                {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom — this world follows its own laws.'}
+                {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom: this world follows its own laws.'}
               </div>
             )}
           </div>
@@ -553,7 +553,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 onClick={runPreview}
                 busy={previewBusy}
                 disabled={!campaign?.id || frozen}
-                title={frozen ? 'Time is frozen — there is nothing to preview until it thaws.' : undefined}
+                title={frozen ? 'Time is frozen. There is nothing to preview until it thaws.' : undefined}
               >
                 Preview
               </Button>

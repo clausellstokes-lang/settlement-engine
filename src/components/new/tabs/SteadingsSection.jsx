@@ -45,8 +45,8 @@ export default function SteadingsSection({ settlement }) {
           </div>
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
             {grade === 'relic_ruin'
-              ? 'This settlement has died; its stones stand as a relic ruin. The last residents left with the wagons — their fates unresolved. The interior is yours.'
-              : 'This settlement has died; a quiet site marks where it stood. The last residents left with the wagons — their fates unresolved.'}
+              ? 'This settlement has died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved. The interior is yours.'
+              : 'This settlement has died; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.'}
           </div>
         </div>
       ) : null}
@@ -57,7 +57,7 @@ export default function SteadingsSection({ settlement }) {
             Ancient ruin nearby
           </div>
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
-            The relic ruin of {ancient.name} stands nearby — a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting. Its interior is yours.
+            The relic ruin of {ancient.name} stands nearby, a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting. Its interior is yours.
           </div>
         </div>
       ) : null}

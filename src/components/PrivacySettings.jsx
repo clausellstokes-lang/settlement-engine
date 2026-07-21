@@ -130,13 +130,13 @@ export default function PrivacySettings({ bare = false }) {
       />
       <Row
         id="research" title="You're helping improve the generator"
-        desc="SettlementForge studies the anonymous structure of settlements — tiers, counts, conditions — to make generation better. Never your names, prose, or secrets. It's on by default; you can turn it off here at any time."
+        desc="SettlementForge studies the anonymous structure of settlements (tiers, counts, conditions) to make generation better. Never your names, prose, or secrets. It's on by default; you can turn it off here at any time."
         on={consent.research} disabled={dnt}
         onToggle={update}
       />
       <Row
         id="market" title="Anonymous market research"
-        desc="Include your usage in anonymous, aggregate market research (which systems and settlement shapes players build) that may be shared or licensed to the worldbuilding market. Aggregate-only and never tied to you — no names, prose, seeds, or campaign content. Off by default."
+        desc="Include your usage in anonymous, aggregate market research (which systems and settlement shapes players build) that may be shared or licensed to the worldbuilding market. Aggregate-only and never tied to you: no names, prose, seeds, or campaign content. Off by default."
         on={consent.market} disabled={dnt}
         onToggle={update}
       />

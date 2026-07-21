@@ -37,7 +37,7 @@ export default function CampaignPlayerView({ campaign, onBack }) {
           <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK_DEEP }}>{name || 'A shared world'}</div>
           {/* The party's frame: this is the world as its people know it, not the DM's notes. */}
           <div style={{ display: 'inline-flex', alignSelf: 'start', fontSize: FS.pico, fontWeight: 700, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: '1px 6px' }}>
-            A shared world — read as its people know it
+            A shared world, read as its people know it
           </div>
           {realmArcSummary && <div style={{ fontSize: FS.sm, color: INK, fontStyle: 'italic', lineHeight: 1.5 }}>{realmArcSummary}</div>}
           {description && <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5 }}>{description}</div>}
@@ -46,7 +46,7 @@ export default function CampaignPlayerView({ campaign, onBack }) {
       {/* The living world — the owner's opted-in, pre-sanitized snapshot sections. */}
       <CampaignStatePanel snapshot={world?.snapshot} sections={world?.sections} />
       {!world?.snapshot && (
-        <p style={{ color: MUTED, fontSize: FS.sm }}>This world&apos;s living state was not shared — only its name and story travel with the link.</p>
+        <p style={{ color: MUTED, fontSize: FS.sm }}>This world&apos;s living state was not shared. Only its name and story travel with the link.</p>
       )}
     </div>
   );

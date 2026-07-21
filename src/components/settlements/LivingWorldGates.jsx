@@ -62,7 +62,7 @@ export const LIVING_WORLD_GATES = Object.freeze([
     key: 'faithSpreadEnabled',
     label: 'Faith spread',
     moment: 'pantheon_preview',
-    description: 'Faith crosses BETWEEN settlements — a dominant creed spreads along trade, alliance, and war ties into its neighbours. Off: each settlement still grows its own pantheon, but no creed reaches across the borders.',
+    description: 'Faith crosses BETWEEN settlements: a dominant creed spreads along trade, alliance, and war ties into its neighbours. Off: each settlement still grows its own pantheon, but no creed reaches across the borders.',
   }),
 ]);
 

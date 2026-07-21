@@ -142,7 +142,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat — higher is better.</div>
+        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat. Higher is better.</div>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({icon,label,color,assess},i)=>{
             const sc = threatScores[label]||0;
@@ -211,7 +211,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
           {/* Criminal structure classification */}
           {csd&&<div style={{background:csd.bg,border:`1px solid ${csd.color}30`,borderLeft:`3px solid ${csd.color}`,padding:'9px 13px'}}>
-            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure — {csd.label}</div>
+            <div style={{fontSize:FS.xxs,fontWeight:700,color:csd.color,textTransform:'uppercase',letterSpacing:'0.07em',marginBottom:3}}>Criminal Structure: {csd.label}</div>
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{csd.note}</p>
           </div>}
 

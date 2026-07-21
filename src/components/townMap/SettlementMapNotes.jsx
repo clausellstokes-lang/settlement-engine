@@ -87,7 +87,7 @@ export default function SettlementMapNotes({ settlement, story = null, changes =
         variant={open ? 'primary' : 'secondary'}
         size="sm"
         aria-expanded={open}
-        aria-label={open ? 'Hide the map notes' : 'Read the map — what the map knows and never told'}
+        aria-label={open ? 'Hide the map notes' : 'Read the map: what the map knows and never told'}
         onClick={openDrawer}
         style={{ minHeight: 0, padding: '3px 10px' }}
       >
@@ -199,7 +199,7 @@ function ChangeSection({ changes, settlement, entitled = false }) {
               data-town-change-depth-locked
               variant="ghost" size="sm"
               onClick={onUnlock}
-              aria-label={`See ${hidden} earlier ${hidden === 1 ? 'change' : 'changes'} — a Cartographer premium feature`}
+              aria-label={`See ${hidden} earlier ${hidden === 1 ? 'change' : 'changes'} (a Cartographer premium feature)`}
               style={depthLockStyle}
             >
               <LockGlyph />

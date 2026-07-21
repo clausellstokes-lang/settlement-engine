@@ -125,11 +125,11 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const autonomy = politicalAutonomyOf(rules);
   const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
   const proposalNote = autonomy === 'recommendations'
-    ? 'The realm recommends these turns and shows its reasoning with each — apply or dismiss.'
+    ? 'The realm recommends these turns and shows its reasoning with each. Apply or dismiss.'
     : autonomy === 'dm_only'
       ? 'Every major turn awaits your word. Each carries the reasoning behind it.'
       : routineMajorApproval
-        ? 'Routine life runs itself; the campaign-altering turns — a war declaration, a coup — wait here for your word (they stand down on their own if left unanswered).'
+        ? 'Routine life runs itself; the campaign-altering turns (a war declaration, a coup) wait here for your word. They stand down on their own if left unanswered.'
         : null;
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
@@ -324,7 +324,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
                 The advance paused for your word. {pendingMajors.length > 0
-                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict — keep each (it applies as recommended) or dismiss it — then resume the interval.`
+                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict. Keep each (it applies as recommended) or dismiss it, then resume the interval.`
                   : 'Resume or undo the advance to continue. Applying, dismissing, or naming here would be undone on resume.'}
               </div>
               {pendingMajors.map((major) => {
@@ -391,7 +391,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       <SmallButton
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
-                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Apply proposal'}
+                        title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
@@ -399,7 +399,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       <SmallButton
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
-                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Dismiss proposal'}
+                        title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
@@ -415,7 +415,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-              No active stressors. The realm is quiet — for now.
+              No active stressors. The realm is quiet, for now.
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -466,7 +466,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {echoes.map(stressor => (
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
-                  title={`${stressor.label || human(stressor.type)} — in living memory`}
+                  title={`${stressor.label || human(stressor.type)}, in living memory`}
                   summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
                   severity={stressor.memoryStrength ?? 0}
                   details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}

@@ -104,7 +104,7 @@ describe('MapOverlay — ChainEdges renders only through the tier gate', () => {
 describe('LayersPanel — the Supply-chains toggle is the gate moment', () => {
   test('free tier SEES the gate: row visible, unchecked, locked; click fires the pricing moment, never toggles', () => {
     render(<LayersPanel onClose={() => {}} />);
-    const checkbox = screen.getByLabelText(/Supply chains — Supply chains unlock with Cartographer/);
+    const checkbox = screen.getByLabelText(/Supply chains: Supply chains unlock with Cartographer/);
     expect(checkbox.checked).toBe(false);            // displayed OFF while locked (stored value untouched)
     expect(screen.getByTestId('layer-toggle-supply-chains-lock')).toBeTruthy();
     fireEvent.click(checkbox);

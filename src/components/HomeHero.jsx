@@ -259,7 +259,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             fontFamily: serif_, fontStyle: 'italic',
             fontSize: FS.md, color: BODY, lineHeight: 1.55,
           }}>
-            Pick a size. Roll a settlement — instant generation, every size from thorp to metropolis.
+            Pick a size. Roll a settlement: instant generation, every size from thorp to metropolis.
           </p>
         </>
       )}
@@ -286,7 +286,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         /* THE STAGE BACKDROP (C1r-c3). Faint, sepia-toned, masked top+bottom so
            it reads as a ground the strip sits ON, never a wash competing with the
            ink stations (opacity 0.13 keeps the INK labels + population figures AA
-           on the parchment). Flat — no radius, shadow, or rgba. The still fades in
+           on the parchment). Flat: no radius, shadow, or rgba. The still fades in
            on first pick; under prefers-reduced-motion it is simply present. */
         .sf-gauge-backdrop {
           position: absolute;

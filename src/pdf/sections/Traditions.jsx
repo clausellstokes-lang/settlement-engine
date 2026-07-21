@@ -36,7 +36,7 @@ function provenanceLine(rec) {
   const log = Array.isArray(rec.mutationLog) ? rec.mutationLog : [];
   if (!log.length) return (rec.expression && typeof rec.expression.epithet === 'string') ? rec.expression.epithet : null;
   const causes = log.map((e) => (e && typeof e.cause === 'string' ? e.cause : '')).filter(Boolean).slice(-3);
-  return `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded — ${causes.join('; ')}`;
+  return `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded: ${causes.join('; ')}`;
 }
 
 /**
@@ -55,16 +55,16 @@ export function Traditions({ settlement, narrativeMode }) {
         sub="festivals & rites"
       />
       <ChapterHeadline tone="gold">
-        The observances this settlement keeps — its founding rite and the customs it has accrued.
+        The observances this settlement keeps: its founding rite and the customs it has accrued.
       </ChapterHeadline>
 
       {mirror.map((rec, i) => {
         const suppressed = !!(rec && rec.suppressedBy);
         const motif = (rec && rec.coreMotif) || {};
-        const owner = rec && (rec.ownerLabel || rec.ownerKey) ? String(rec.ownerLabel || rec.ownerKey) : '—';
+        const owner = rec && (rec.ownerLabel || rec.ownerKey) ? String(rec.ownerLabel || rec.ownerKey) : '–';
         const outcome = rec && rec.lastOutcome
           ? (OUTCOME_LABEL[/** @type {string} */ (rec.lastOutcome)] || String(rec.lastOutcome))
-          : '—';
+          : '–';
         const prov = provenanceLine(rec || {});
         return (
           <View key={(rec && rec.id) || i} style={{ marginBottom: space.sm }} wrap={false}>
@@ -91,7 +91,7 @@ export function Traditions({ settlement, narrativeMode }) {
 
       <HairRule />
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic' }}>
-        A settlement&apos;s traditions carry its identity forward — each holding, or failing, is a mark on the year.
+        A settlement&apos;s traditions carry its identity forward. Each holding, or failing, is a mark on the year.
       </Text>
     </PageChrome>
   );

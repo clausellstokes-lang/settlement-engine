@@ -24,12 +24,12 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
     }}>
       {stale && (
         <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic', marginBottom: 4 }}>
-          Preview is stale — updating to the edited change…
+          Preview is stale. Updating to the edited change…
         </div>
       )}
       {vetoed && (
         <div style={{ fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 800, marginBottom: 4 }}>
-          ✕ The world refuses this change — nothing will be committed.
+          ✕ The world refuses this change. Nothing will be committed.
         </div>
       )}
       {partyCaused && (

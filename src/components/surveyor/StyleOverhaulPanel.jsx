@@ -132,7 +132,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-      <Eyebrow>Reskin the map — describe the look</Eyebrow>
+      <Eyebrow>Reskin the map: describe the look</Eyebrow>
       <PromptArea
         value={prompt}
         onChange={setPrompt}
@@ -172,7 +172,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
               {violations.map((v, i) => (
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <Badge tone="warning" size="sm">rejected</Badge>
-                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{String(v.field)}{v.reason ? ` — ${v.reason}` : ''}</span>
+                  <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{String(v.field)}{v.reason ? `: ${v.reason}` : ''}</span>
                 </div>
               ))}
             </div>
@@ -194,7 +194,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
             <div data-testid="style-saved" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
               {saved.persisted ? (
                 <>
-                  <span style={{ color: GREEN }}>◆</span> Saved “{saved.label}” to this settlement’s map — it stays across
+                  <span style={{ color: GREEN }}>◆</span> Saved “{saved.label}” to this settlement’s map. It stays across
                   sessions. The base lenses stay permanent; you can flip back anytime.
                 </>
               ) : (

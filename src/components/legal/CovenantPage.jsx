@@ -35,10 +35,10 @@ export default function CovenantPage() {
       </LegalSection>
 
       <LegalSection heading="Take it with you" id="covenant-export">
-        <LegalP>Everything you make, you can carry out — in plain, open formats:</LegalP>
+        <LegalP>Everything you make, you can carry out in plain, open formats:</LegalP>
         <LegalList items={[
           'Export every settlement and campaign you own as a single JSON file, any time, from your account.',
-          'Import that file back — into this browser, another machine, or a fresh account. A world that leaves can return.',
+          'Import that file back into this browser, another machine, or a fresh account. A world that leaves can return.',
           'Bind any settlement into a PDF dossier to keep, print, or hand across the table.',
         ]} />
       </LegalSection>
@@ -46,7 +46,7 @@ export default function CovenantPage() {
       <LegalSection heading="Delete means gone" id="covenant-delete">
         <LegalP>
           You can delete your settlements and campaigns, or ask to close your account entirely. What
-          you remove is removed — we do not keep a shadow copy to win you back.
+          you remove is removed. We do not keep a shadow copy to win you back.
         </LegalP>
       </LegalSection>
 
@@ -54,7 +54,7 @@ export default function CovenantPage() {
         <LegalP>
           The simulation is deterministic: the same seed makes the same world, everywhere. Your
           data is not a hostage and your history is not a trade secret. If a receipt ever fails to
-          trace, that is a bug we want to hear about &mdash; see the{' '}
+          trace, that is a bug we want to hear about. See the{' '}
           <a href="/bounty" style={linkStyle}>Contradiction Bounty</a>.
         </LegalP>
       </LegalSection>

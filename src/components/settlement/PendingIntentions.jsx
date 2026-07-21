@@ -109,7 +109,7 @@ export default function PendingIntentions() {
                       border: `1px solid ${BORDER}`, color: MUTED,
                       fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
                     }}>
-                      LAPSED — needs your attention
+                      LAPSED: needs your attention
                     </span>
                     <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
                       {lapsed} Left as-is, the tick will refuse it visibly.
@@ -126,7 +126,7 @@ export default function PendingIntentions() {
                   const anchor = document.querySelector('[data-anchor="event-composer"]');
                   if (anchor?.scrollIntoView) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                aria-label="Reopen this queued order in the composer — applying replaces it in place"
+                aria-label="Reopen this queued order in the composer. Applying replaces it in place"
               >
                 Edit
               </Button>

@@ -262,16 +262,16 @@ export default function App() {
           // consumed the URL params, so a remount can never double-fire.
           stripeLib.trackCheckoutSuccess(result.product);
           const msg = result.product === 'premium'
-            ? 'Cartographer activated!'
+            ? 'Cartographer activated.'
             : result.product === 'founder_lifetime'
-              ? 'Welcome aboard, Founder!'
-              : 'Credits added!';
+              ? 'Welcome aboard, Founder.'
+              : 'Credits added.';
           setCheckoutToast({ text: msg, persistent: false });
           setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
         } else if (outcome.outcome === OUTCOME.PROCESSING) {
           const ref = (result.sessionId || '').slice(0, 12);
           setCheckoutToast({
-            text: `Payment received — your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
+            text: `Payment received. Your purchase is still processing. Refresh in a minute${ref ? ` (ref ${ref})` : ''}.`,
             persistent: true,
           });
         } else {

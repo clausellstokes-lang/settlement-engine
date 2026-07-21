@@ -85,7 +85,7 @@ export default function InstitutionCard({ open, institution, settlement, onClose
         ref={cardRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`${profile.name} — institution profile`}
+        aria-label={`${profile.name} (institution profile)`}
         tabIndex={-1}
         style={{
           width: 'min(100%, 420px)', maxHeight: 'min(90vh, 620px)', overflow: 'auto',

@@ -86,10 +86,10 @@ function when(iso) {
 
 const STATE_LABEL = {
   initiated: 'Awaiting the outgoing holder’s confirmation',
-  nominee_verified: 'Verified — awaiting payment',
+  nominee_verified: 'Verified: awaiting payment',
   awaiting_payment: 'Awaiting the $99 payment',
   cooling: 'In the 72-hour review period',
-  finalized: 'Completed — the seat has transferred',
+  finalized: 'Completed: the seat has transferred',
 };
 const PAYOUT_LABEL = {
   none: null,
@@ -97,7 +97,7 @@ const PAYOUT_LABEL = {
   releasing: 'Your payout is being released',
   released: 'Your payout has been released',
   held: 'Your payout is on hold',
-  failed: 'Your payout could not be completed — contact support',
+  failed: 'Your payout could not be completed. Contact support',
 };
 
 /**
@@ -174,7 +174,7 @@ function BuybackAffordance({ onDone }) {
           </Row>
           <div style={{ marginTop: SP.md }}>
             <Button variant="secondary" size="md" disabled={busy} onClick={start}>
-              {busy ? 'Working…' : 'Sell seat back — email me a code'}
+              {busy ? 'Working…' : 'Sell seat back: email me a code'}
             </Button>
           </div>
           <Note>You’ll confirm with an emailed code. Re-enter your password first if prompted.</Note>
@@ -290,7 +290,7 @@ export default function AccountSeatTransferPanel({ auth }) {
                     const { nomineeAcceptStart } = await import('../../lib/founderTransferClient.js');
                     return nomineeAcceptStart();
                   }, 'We emailed you a verification code.')}>
-                  {busy ? 'Working…' : 'Accept — email me a code'}
+                  {busy ? 'Working…' : 'Accept: email me a code'}
                 </Button>
               )}
               {(incoming.state === 'nominee_verified' || incoming.state === 'awaiting_payment') && (
@@ -399,7 +399,7 @@ export default function AccountSeatTransferPanel({ auth }) {
                         if (out?.case_id) setInitiateCaseId(out.case_id);
                         return out;
                       }, 'We emailed you a confirmation code.')}>
-                      {busy ? 'Working…' : 'Begin transfer — email me a code'}
+                      {busy ? 'Working…' : 'Begin transfer: email me a code'}
                     </Button>
                   </div>
                   <Note>You’ll confirm with an emailed code. Re-enter your password first if prompted.</Note>

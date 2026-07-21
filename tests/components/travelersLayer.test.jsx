@@ -94,6 +94,6 @@ describe('TravelersLayer — sub-layers (§13)', () => {
     const army = container.querySelector('[data-traveler="armies"] title');
     expect(army.textContent).toMatch(/army on the march, ETA 5w/);
     const envoy = container.querySelector('[data-traveler="envoys"] title');
-    expect(envoy.textContent).toMatch(/Envoy of A — trade/);
+    expect(envoy.textContent).toMatch(/Envoy of A, trade/);
   });
 });

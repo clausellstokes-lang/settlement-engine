@@ -57,7 +57,7 @@ function DossierSummary({ view, audience }) {
       </div>
       {audience === 'player' && (
         <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.sm}px 0 0` }}>
-          Secrets, DM notes, and covert marks are hidden on this face &mdash; show it to your table.
+          Secrets, DM notes, and covert marks are hidden on this face. Show it to your table.
         </p>
       )}
     </Card>
@@ -79,14 +79,14 @@ export default function DmScreen() {
       <PageHeader
         eyebrow="At the table"
         title="The DM Screen"
-        subtitle="Your letter, your oracle, your dossier — and the two faces of the table."
+        subtitle="Your letter, your oracle, your dossier, and the two faces of the table."
         actions={<Segmented options={AUDIENCE_OPTIONS} value={audience} onChange={setAudience} ariaLabel="Screen audience" />}
       />
 
       {!settlement && (
         <Card title="Open a settlement" kicker="Nothing on the table yet">
           <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: 0 }}>
-            Open a settlement from your library to set the table &mdash; its dossier, its ledger, and
+            Open a settlement from your library to set the table: its dossier, its ledger, and
             its auspices will gather here.
           </p>
         </Card>

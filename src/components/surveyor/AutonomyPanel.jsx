@@ -140,7 +140,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
     // undefined (not null) so serialization DROPS the key entirely when cleared —
     // the campaign record returns to its pre-S7 shape (dormancy-lawful).
     updateSavedCampaign(activeCampaignId, { [STANDING_INSTRUCTIONS_KEY]: next ?? undefined });
-    setSavedNote(next ? `Saved (v${next.version}) — every compile now carries this.` : 'Cleared.');
+    setSavedNote(next ? `Saved (v${next.version}). Every compile now carries this.` : 'Cleared.');
     setDraftText(null);
   }, [draftText, activeCampaignId, persisted, updateSavedCampaign]);
 
@@ -228,12 +228,12 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
   const receipt = run?.receipt;
 
   if (!activeCampaignId) {
-    return <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Open a campaign first — autonomous advances run a campaign world.</p>;
+    return <p style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Open a campaign first. Autonomous advances run a campaign world.</p>;
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-      <Eyebrow>Standing instructions — carried by every compile</Eyebrow>
+      <Eyebrow>Standing instructions: carried by every compile</Eyebrow>
       {draftText == null ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
           <span style={{ fontSize: FS.xs, color: persisted ? BODY : MUTED, fontFamily: sans, flex: 1, minWidth: 120 }}>
@@ -254,7 +254,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
         </div>
       )}
 
-      <Eyebrow>Compose a run — describe when the world should stop</Eyebrow>
+      <Eyebrow>Compose a run: describe when the world should stop</Eyebrow>
       <PromptArea value={intent} onChange={setIntent} disabled={loading}
         label="Describe the autonomous run you want"
         placeholder="e.g. run until Bramwick's food turns critical or two months pass; stir a rebellion…" />
@@ -267,14 +267,14 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
         <div data-testid="autonomy-unsupported" style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <Eyebrow>Asked for, but the engine cannot express it</Eyebrow>
           {unsupported.map((u, i) => (
-            <span key={i} style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>◇ {u.requested} — {u.reason}</span>
+            <span key={i} style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>◇ {u.requested}: {u.reason}</span>
           ))}
         </div>
       )}
 
       {nudges.length > 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-          <Eyebrow>Proposed nudges — raise conditions, the simulator decides</Eyebrow>
+          <Eyebrow>Proposed nudges: raise conditions, the simulator decides</Eyebrow>
           <ProposalSlipLine />
           {nudges.map((n, i) => (
             <div key={i} data-testid={`autonomy-nudge-${i}`} style={{
@@ -284,7 +284,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
               opacity: nudgeDecisions[i] === 'discard' ? 0.6 : 1,
             }}>
               <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, flex: 1, minWidth: 140 }}>
-                {describeNudge(n)}{n.rationale ? ` — ${n.rationale}` : ''}
+                {describeNudge(n)}{n.rationale ? `: ${n.rationale}` : ''}
               </span>
               {nudgeDecisions[i] === 'approve' && <Badge tone="gold" size="sm">injected</Badge>}
               {!nudgeDecisions[i] && (
@@ -298,7 +298,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
         </div>
       )}
 
-      <Eyebrow>The stop condition — registered signals only</Eyebrow>
+      <Eyebrow>The stop condition: registered signals only</Eyebrow>
       {condition && (
         <p data-testid="autonomy-condition" style={{ margin: 0, fontSize: FS.xs, color: wall?.ok ? BODY : MUTED, fontFamily: sans, lineHeight: 1.5 }}>
           {describeStopCondition(condition)}
@@ -321,7 +321,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
         {composed && <Button variant="ghost" size="sm" onClick={() => setComposed(null)}>Build by hand instead</Button>}
       </div>
 
-      <Eyebrow>Run — advance until it fires, or the cap</Eyebrow>
+      <Eyebrow>Run: advance until it fires, or the cap</Eyebrow>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
         <label htmlFor="autonomy-max-weeks" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
           Max weeks{' '}
@@ -356,7 +356,7 @@ export default function AutonomyPanel({ initialPrompt = '' }) {
               <ReceiptLine engineVersion={receipt.engineVersion} seed={receipt.seed} applied={receipt.weeksAdvanced} />
             </>
           ) : (
-            <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, fontFamily: sans }}>The run failed before it could stop cleanly — the world is unchanged past its last committed week.</p>
+            <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, fontFamily: sans }}>The run failed before it could stop cleanly. The world is unchanged past its last committed week.</p>
           )}
         </div>
       )}

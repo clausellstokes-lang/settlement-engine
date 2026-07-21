@@ -57,7 +57,7 @@ export default function LockedDestination({
   body,
   previewImageSrc,
   previewAlt,
-  ctaLabel = 'Upgrade — $6/mo',
+  ctaLabel = 'Upgrade ($6/mo)',
   onCta,
   secondaryLink,
   trackEvent,

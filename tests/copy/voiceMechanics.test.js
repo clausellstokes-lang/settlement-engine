@@ -277,22 +277,23 @@ describe('E-E voiceMechanics JSX extension — src/**/*.jsx component ratchet (s
   });
 
   it('total JSX debt never grows past its committed budget', () => {
-    // FINDING (E-E build, 2026-07-21): this is the first time JSX components
-    // were ever scanned for the VOICE_AND_TONE em-dash/`!` ban — the ban held
-    // ZERO enforcement here before this walker. The measured floor: 396 em
-    // dashes across 133 files (mostly HowToUse/CompendiumPanel/PrivacySettings
-    // prose paragraphs and a few CSS-in-JS `/* comment — text */` blocks inside
-    // template-literal <style> blocks — a known, precedent-matched blind spot:
-    // Tier 2 also only strips JS `//` and `/* */` comments, not comments-inside-
-    // a-string in a different embedded language) and 10 exclamation points
-    // (toast/banner copy: "Credits added!", "Welcome aboard, Founder!", plus a
-    // handful of literal "(!)" glyphs used as inline warning icons in PDF
-    // sections). Real, reader-facing debt — recorded here rather than forced
-    // to zero by editing ceiling-bound/unrelated component files out of scope
-    // for a test-only enforcer. LOWER these as components get their own
-    // VOICE_AND_TONE pass; NEVER raise them.
-    const EM_BUDGET_JSX = 396;
-    const BANG_BUDGET_JSX = 10;
+    // FINDING (E-E build, 2026-07-21): the first JSX scan measured 396 em
+    // dashes + 10 exclamation points across 133 files — the ban held ZERO
+    // enforcement in components before this walker.
+    // BURNED (tranche 3b-B, 2026-07-21): the components got their
+    // VOICE_AND_TONE pass — every reader-facing em dash and bang was rewritten
+    // per docs/VOICE_AND_TONE.md §6 (period / comma / colon / parentheses;
+    // bangs to plain statements; placeholder glyphs to the en-dash/middot
+    // idioms). The remaining 6 em are NOT prose: they are the string-literal
+    // arguments of defensive `.split('—')` / `.split(' — ')` parsers
+    // (SummaryTab, EconomicsTab, OverviewTab) matched to em-dash separators
+    // composed in src/domain (dossierViewModel granary/safety/stability
+    // strings — Tier-2 baseline debt). They burn WITH that Tier-2 debt: when
+    // the domain composer drops its em dash, the parser literal goes in the
+    // same change. Encoding the char to dodge the walker was rejected as
+    // ratchet-gaming. NEVER raise these.
+    const EM_BUDGET_JSX = 6;
+    const BANG_BUDGET_JSX = 0;
     const totals = Object.values(currentJsx).reduce(
       (t, c) => ({ em: t.em + c.em, bang: t.bang + c.bang }),
       { em: 0, bang: 0 },

@@ -190,7 +190,7 @@ function WorldMapStageImpl({
               inside the map container. */}
           <div className="sr-only" data-testid="world-map-in-words">
             {placedNames.length
-              ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed — ${placedNames.join(', ')}. The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
+              ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed (${placedNames.join(', ')}). The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
               : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map, or by pressing Enter on a palette card and steering with the arrow keys; each placed settlement will be listed here.'}
           </div>
           {!imageMode && (

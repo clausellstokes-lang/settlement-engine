@@ -18,10 +18,10 @@ import { t } from '../../src/copy/index.js';
 describe('SurveyorNote — the Surveyor persona margin note', () => {
   afterEach(() => cleanup());
 
-  it('renders the eyebrow, glyph, resolved serif prose, and the "— S." signature', () => {
+  it('renders the eyebrow, glyph, resolved serif prose, and the "– S." signature', () => {
     render(<SurveyorNote topic="library" moment="empty" id="fixture-1" />);
     expect(screen.getByText('A Note from the Surveyor')).toBeTruthy();
-    expect(screen.getByText('— S.')).toBeTruthy();
+    expect(screen.getByText('– S.')).toBeTruthy();
     const expected = t(noteKeyFor('library', 'empty', 'fixture-1'));
     expect(screen.getByText(expected)).toBeTruthy();
   });

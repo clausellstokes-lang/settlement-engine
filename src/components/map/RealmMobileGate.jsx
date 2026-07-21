@@ -51,7 +51,7 @@ function CopyRealmLink() {
         } catch { /* clipboard unavailable — the label simply stays */ }
       }}
     >
-      {copied ? 'Link copied — it will be waiting' : 'Copy the desktop link'}
+      {copied ? 'Link copied. It will be waiting' : 'Copy the desktop link'}
     </Button>
   );
 }
@@ -77,7 +77,7 @@ export default function RealmMobileGate({
       <DesktopOnlyGate
         variant="gate"
         title="The Realm is best explored on desktop"
-        message="The Realm table is built for a bigger canvas — placing settlements, advancing years, and charting routes want a desk and a pointer. Your world is saved and will be waiting, exactly here, when you next sit down at one. Below, the field companion: a read-only look at the living state of your realm."
+        message="The Realm table is built for a bigger canvas. Placing settlements, advancing years, and charting routes want a desk and a pointer. Your world is saved and will be waiting, exactly here, when you next sit down at one. Below, the field companion: a read-only look at the living state of your realm."
         cta={<CopyRealmLink />}
       />
       <Suspense fallback={null}>

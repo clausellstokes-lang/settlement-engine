@@ -209,7 +209,7 @@ function ActiveFaith({ model }) {
 
         {!live && (
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            The faith has only just taken root — adherent shares, legitimacy, and the tides of devotion emerge as the world turns.
+            The faith has only just taken root. Adherent shares, legitimacy, and the tides of devotion emerge as the world turns.
           </div>
         )}
       </div>
@@ -241,12 +241,12 @@ function FaithTeaser({ publicDossier }) {
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Faith</span>
       </div>
       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-        The people keep their own quiet observances — no single creed holds sway, and the shrines answer to no named god.
+        The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
       </div>
       {!publicDossier && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-            Awaken a living pantheon — a patron god, rival cults, and the rising and ebbing of devotion — with a premium campaign.
+            Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
           </span>
           <Button
             variant="ghost"

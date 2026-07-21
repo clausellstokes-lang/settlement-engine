@@ -105,7 +105,7 @@ function SettlementCard({ sig, nameById }) {
           {(faith.patron.alignment || faith.patron.temper) ? ` (${[faith.patron.alignment, faith.patron.temper].filter(Boolean).join(', ')})` : ''}.
           {opposed.length > 0 && (
             <span style={{ color: RED, fontWeight: 700 }}>
-              {' '}Set against {opposed.map(o => o.deity || nameFor(o.besieger, nameById)).join(', ')} — a war of opposed faiths, and the faithful dig in.
+              {' '}Set against {opposed.map(o => o.deity || nameFor(o.besieger, nameById)).join(', ')}: a war of opposed faiths, and the faithful dig in.
             </span>
           )}
         </div>

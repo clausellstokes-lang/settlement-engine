@@ -59,7 +59,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
     subordinate: { color:'#4a6a1a', bg:'#f4f8ec', border:'#b8d8a0', icon:'↓', label:'Subordinate' },
     tense:       { color:'#8a4010', bg:'#fdf6ec', border:'#e0c070', icon:'~', label:'Tense'       },
     competitive: { color:'#8b1a1a', bg:'#fdf4f4', border:'#e8c0c0', icon:'X', label:'Competitive' },
-    corrupted:   { color:'#4a1a4a', bg:'#fdf0fc', border:'#d8a0d8', icon:'!', label:'Corrupted'   },
+    corrupted:   { color:'#4a1a4a', bg:'#fdf0fc', border:'#d8a0d8', icon:'◆', label:'Corrupted'   },
   };
 
   // ── Criminal capture state display ─────────────────────────────────────────
@@ -290,7 +290,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
         return (
           <Section title="The Ladder" collapsible defaultOpen>
             <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,lineHeight:1.4}}>
-              Who is rising within each faction — standing on the internal ladder, top rung first.
+              Who is rising within each faction: standing on the internal ladder, top rung first.
             </div>
             <div style={{display:'flex',flexDirection:'column',gap:10}}>
               {rows.map(({ f, i, rungs, instab }) => {
@@ -303,7 +303,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                       {instab > 0.05 && (
                         // Churn badge: the explainer rides aria-label (screen-reader-complete,
                         // touch-safe) — never a native title (the shrink-only title= census).
-                        <span aria-label="Leadership churn — recent turnover at the top erodes effective power"
+                        <span aria-label="Leadership churn: recent turnover at the top erodes effective power"
                           style={{fontSize:FS.micro,fontWeight:700,color:swatch.danger,background:`${swatch.danger}12`,border:`1px solid ${swatch.danger}40`,padding:'0 5px'}}>
                           unstable {Math.round(instab*100)}%
                         </span>

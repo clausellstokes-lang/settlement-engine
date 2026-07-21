@@ -252,7 +252,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           )}
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>
-              Newly installed — replaced {npc.replacedNpc} after a corruption scandal.
+              Newly installed. Replaced {npc.replacedNpc} after a corruption scandal.
             </div>
           )}
           {/* DESIGN_THE_ROADS §12 — the whereabouts line (away/held). Present only when the

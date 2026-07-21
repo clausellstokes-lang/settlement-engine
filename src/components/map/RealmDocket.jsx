@@ -61,7 +61,7 @@ export default function RealmDocket({ campaign }) {
         marginBottom: SP.sm,
       }}>
         <CalendarClock size={12} />
-        The Docket — staged for the next tick
+        The Docket: staged for the next tick
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {queue.length} queued
         </span>
@@ -119,10 +119,10 @@ export default function RealmDocket({ campaign }) {
                         border: `1px solid ${BORDER}`, color: MUTED,
                         fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
                       }}>
-                        LAPSED — needs your attention
+                        LAPSED: needs your attention
                       </span>
                       <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
-                        {lapsed} Left as-is, the tick will refuse it visibly — edit it from {name}&apos;s dossier, or cancel it here.
+                        {lapsed} Left as-is, the tick will refuse it visibly. Edit it from {name}&apos;s dossier, or cancel it here.
                       </span>
                     </>
                   )}

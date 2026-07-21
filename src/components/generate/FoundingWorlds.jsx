@@ -54,7 +54,7 @@ export default function FoundingWorlds({ onNavigate }) {
         <h2 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS.lg, fontWeight: 900 }}>Founding Worlds</h2>
       </div>
       <p style={{ margin: `0 0 ${SP.md}px`, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
-        Start somewhere already alive. Each of these forges a real world whose opening years tell a story — no two the same, all deterministic from their seed.
+        Start somewhere already alive. Each of these forges a real world whose opening years tell a story: no two the same, all deterministic from their seed.
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: SP.md }}>
         {FOUNDING_SEEDS.map((entry) => (

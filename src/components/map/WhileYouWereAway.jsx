@@ -133,7 +133,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
         </div>
       ) : (
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.45 }}>
-          The realm advanced quietly — no major turns while you were gone.
+          The realm advanced quietly. No major turns while you were gone.
         </div>
       )}
 
@@ -151,7 +151,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
           run — both halves were false. */}
       {capped && !error && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-          More time had passed than a single catch-up covers — the realm lived the first {weeks} {weekWord} of it, then time leapt to today. The span between passes into history unrecorded.
+          More time had passed than a single catch-up covers. The realm lived the first {weeks} {weekWord} of it, then time leapt to today. The span between passes into history unrecorded.
         </div>
       )}
     </div>

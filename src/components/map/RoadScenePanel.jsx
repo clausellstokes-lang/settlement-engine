@@ -25,10 +25,10 @@ const selectStyle = {
 export function itemLine(sectionId, it) {
   if (sectionId === 'road') {
     // The player-safe lead carries no danger/tolls numbers (it.danger absent) — coarse by design.
-    if (it.leg) return `${it.leg} — ${it.hops} hop${it.hops === 1 ? '' : 's'}${it.danger != null ? `, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}` : ''}`;
+    if (it.leg) return `${it.leg}: ${it.hops} hop${it.hops === 1 ? '' : 's'}${it.danger != null ? `, danger ${it.danger}${it.tolls ? `, tolls ${it.tolls}` : ''}` : ''}`;
     // V-6 BIOME TRUTH: the season/terrain texture appends only on a biomeTexture canon
     // (it.terrain present); absent ⇒ the line is byte-identical to the pre-V-6 render.
-    return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}${it.terrain ? ` — ${it.terrain}` : ''}`;
+    return `${it.at}: ${it.condition}${it.toll ? ` (toll ${it.toll})` : ''}${it.terrain ? `, ${it.terrain}` : ''}`;
   }
   if (sectionId === 'onRoad') {
     if (it.kind === 'army') return `Army of ${it.banner} at ${it.at}, ${it.posture} toward ${it.heading}`;
@@ -38,14 +38,14 @@ export function itemLine(sectionId, it) {
   if (sectionId === 'gates') {
     if (it.state === 'occupied') return `Occupied by ${it.by}${it.rung ? ` (${it.rung})` : ''}`;
     if (it.state === 'under siege') return `Under siege by ${it.by}`;
-    if (it.state === 'a festival is on') return `A festival is on — ${it.guestRight}`;
+    if (it.state === 'a festival is on') return `A festival is on. ${it.guestRight}`;
   }
   // Graceful in-register fallback: the composer is registry-driven and grows (a
   // future onRoad kind / gate state), so speak whatever labelled fields the item
   // carries — never raw JSON on the DM's diegetic staging surface (§14).
   const what = it.state || it.kind || it.condition || it.purpose;
   const where = it.at || it.heading || it.to || it.by || it.home;
-  if (what && where) return `${what} — ${where}`;
+  if (what && where) return `${what}, ${where}`;
   if (what) return String(what);
   if (where) return `Movement near ${where}`;
   return 'Something stirs on the road, the particulars not yet clear.';
@@ -111,7 +111,7 @@ export default function RoadScenePanel({ campaign }) {
     <label htmlFor={id} style={{ display: 'flex', flexDirection: 'column', gap: 2, fontSize: FS.micro, color: MUTED, fontWeight: 700 }}>
       {label}
       <select id={id} aria-label={label} value={value} onChange={e => onChange(e.target.value)} style={selectStyle}>
-        <option value="">—</option>
+        <option value="">–</option>
         {members.filter(m => m.id !== exclude).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
       </select>
     </label>
@@ -121,7 +121,7 @@ export default function RoadScenePanel({ campaign }) {
     <div style={{ display: 'grid', gap: SP.sm }} data-testid="road-scene-panel">
       <div style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.4 }}>
         Pick an origin and destination (or click a settlement on the map for the origin). The road
-        is read from truth — staging it writes nothing.
+        is read from truth. Staging it writes nothing.
       </div>
       <div style={{ display: 'flex', gap: SP.sm, flexWrap: 'wrap' }}>
         {pickerRow('road-scene-from', 'From', origin, setOrigin, dest)}
@@ -134,7 +134,7 @@ export default function RoadScenePanel({ campaign }) {
         <span style={{ fontSize: FS.micro, color: MUTED, fontWeight: 700 }}>View as</span>
         <Button variant={asPlayer ? 'ghost' : 'secondary'} size="sm" aria-pressed={!asPlayer} onClick={() => setAsPlayer(false)}>DM</Button>
         <Button variant={asPlayer ? 'secondary' : 'ghost'} size="sm" aria-pressed={asPlayer} onClick={() => setAsPlayer(true)}>Players</Button>
-        {asPlayer && <span style={{ fontSize: FS.micro, color: MUTED }}>What the party sees — no DM secrets.</span>}
+        {asPlayer && <span style={{ fontSize: FS.micro, color: MUTED }}>What the party sees. No DM secrets.</span>}
       </div>
 
       {origin && dest && origin === dest && (
@@ -162,7 +162,7 @@ export default function RoadScenePanel({ campaign }) {
             aria-label="Dress the road scene with grounded AI prose (spends credits)">
             {dressing ? 'Dressing…' : 'Dress with AI'}
           </Button>
-          <span style={{ fontSize: FS.micro, color: MUTED }}>Optional — spends credits; the scene above stands on its own.</span>
+          <span style={{ fontSize: FS.micro, color: MUTED }}>Optional. Spends credits; the scene above stands on its own.</span>
         </div>
       )}
       {dressed?.error && <p style={{ color: swatch.danger, fontSize: FS.micro }}>{dressed.error}</p>}

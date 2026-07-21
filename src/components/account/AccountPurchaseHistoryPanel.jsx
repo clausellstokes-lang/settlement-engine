@@ -138,7 +138,7 @@ export default function AccountPurchaseHistoryPanel({ auth }) {
                       Receipt
                     </a>
                   ) : (
-                    <span style={{ fontSize: FS.xs, color: MUTED }} aria-hidden="true">—</span>
+                    <span style={{ fontSize: FS.xs, color: MUTED }} aria-hidden="true">–</span>
                   )}
                 </span>
               </div>

@@ -188,7 +188,7 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
       >
         {used >= maxLength && (
           <span style={{ color: AMBER_DEEP, fontWeight: 700 }}>
-            At the {maxLength}-character limit — trimmed to fit.
+            At the {maxLength}-character limit. Trimmed to fit.
           </span>
         )}
         <span style={{ color: used >= maxLength ? AMBER_DEEP : MUTED, fontWeight: 700 }}>

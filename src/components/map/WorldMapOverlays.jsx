@@ -120,7 +120,7 @@ export function WorldMapOverlays({
                   padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
                 }}>
                   <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
-                    This realm's world clock hasn't started yet — its history can't advance until it does.
+                    This realm's world clock hasn't started yet. Its history can't advance until it does.
                     Start the World Clock to lock the world and begin its timeline.
                   </div>
                   <Button

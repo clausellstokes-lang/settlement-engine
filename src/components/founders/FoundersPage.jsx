@@ -159,7 +159,7 @@ export default function FoundersPage({ onNavigate }) {
   const header = {
     eyebrow: 'Founders',
     title: 'The Founders',
-    subtitle: 'Thirty lifetime seats — the people who backed SettlementForge first.',
+    subtitle: 'Thirty lifetime seats: the people who backed SettlementForge first.',
   };
 
   return (
@@ -184,8 +184,8 @@ export default function FoundersPage({ onNavigate }) {
         </p>
         <p style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.65 }}>
           A seat can be passed on, but the cap never grows: a transfer is a succession,
-          not a new seat. Names appear here only when a Founder chooses to be named — and
-          where they share worlds to the community Gallery, this page links to them.
+          not a new seat. Names appear here only when a Founder chooses to be named.
+          Where they share worlds to the community Gallery, this page links to them.
         </p>
         <div style={{ display: 'flex', gap: SP.md, flexWrap: 'wrap', alignItems: 'center', marginTop: SP.xs }}>
           <Button variant="primary" size="lg" onClick={() => onNavigate && onNavigate('pricing')}>

@@ -96,7 +96,7 @@ export default function AccountEmailPreferencesSection() {
         )}
 
         <p style={{ fontSize: FS.xs, color: MUTED, margin: 0, lineHeight: 1.5 }}>
-          Account and payment emails — receipts, password resets, and email confirmations —
+          Account and payment emails (receipts, password resets, and email confirmations)
           are always sent and are not affected by these settings.
         </p>
       </div>

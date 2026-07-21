@@ -26,8 +26,8 @@ export const AXES = [
     options: [
       ['frozen', 'Frozen', 'Time stands still. You reshape the world by hand.', true],
       ['dm_advanced', 'On your mark', 'The world changes only when you advance it.', true],
-      ['living', 'Living', 'Routine life advances with time itself — the world catches up when you return.', true],
-      ['autonomous', 'Autonomous', 'The realm carries its own story forward — it advances and acts on its own while you are away.', true],
+      ['living', 'Living', 'Routine life advances with time itself. The world catches up when you return.', true],
+      ['autonomous', 'Autonomous', 'The realm carries its own story forward. It advances and acts on its own while you are away.', true],
     ],
   },
   {
@@ -52,9 +52,9 @@ export const AXES = [
     question: 'Does geography constrain the world?',
     derived: true,
     options: [
-      ['ignore', 'Ignore distance', 'Every settlement is a neighbour — until you canonize a map for this realm.', true],
+      ['ignore', 'Ignore distance', 'Every settlement is a neighbour until you canonize a map for this realm.', true],
       ['abstract', 'Near and far', 'Nearby, regional, and distant matter.', false],
-      ['mapped', 'Mapped geography', 'Real distances and routes over your canonized map — frozen at canonization.', false],
+      ['mapped', 'Mapped geography', 'Real distances and routes over your canonized map, frozen at canonization.', false],
       ['full', 'Full terrain', 'Mountains, chokepoints, and blockades. Arrives in a later chapter.', false],
     ],
   },
@@ -64,9 +64,9 @@ export const AXES = [
     question: 'Does movement consume time?',
     derived: true,
     options: [
-      ['instant', 'Instant', 'Word and armies arrive the moment they depart — until a map gives the realm real roads.', true],
+      ['instant', 'Instant', 'Word and armies arrive the moment they depart, until a map gives the realm real roads.', true],
       ['compressed', 'Swift', 'A continent crosses in a week.', false],
-      ['standard', 'Standard', 'Word and armies travel the real road network — news and caravans arrive late over distance.', false],
+      ['standard', 'Standard', 'Word and armies travel the real road network. News and caravans arrive late over distance.', false],
       ['slow', 'Slow', 'A continent crosses in a season. Arrives in a later chapter.', false],
     ],
   },
@@ -79,7 +79,7 @@ export const AXES = [
     question: 'Is knowledge of the world complete?',
     options: [
       ['omniscient', 'All-knowing', 'Everyone knows the true state of the world.', true],
-      ['perfect_delayed', 'Accurate but slow', 'News is true but travels by road — a mapped realm learns of distant events late.', true],
+      ['perfect_delayed', 'Accurate but slow', 'News is true but travels by road. A mapped realm learns of distant events late.', true],
       ['unreliable', 'Unreliable', 'News travels and twists: distance breeds rumor, error, and echo. A mapped realm hears the world as its roads tell it.', true],
       ['full', 'Rumor and lies', 'Carriers, distortion, and silence. Arrives in a later chapter.', false],
     ],
@@ -106,7 +106,7 @@ export function axisValue(draft, key, spatialMapped = false) {
 // Off = the world holds this still. 'By your leave' (dm) = it moves only as
 // proposals you approve. 'On its own' (auto) = the engine may initiate.
 const DOMAIN_ROWS = [
-  ['diplomacy', 'Diplomacy', 'Ties between settlements — alliances, rivalries, vassalage.'],
+  ['diplomacy', 'Diplomacy', 'Ties between settlements: alliances, rivalries, vassalage.'],
   ['trade', 'Trade', 'Trade relationships form, shift, and fail.'],
   ['migration', 'Migration', 'People move between settlements.'],
   ['religion', 'Faith spread', 'Creeds cross borders along trade, alliance, and war ties.'],
@@ -119,7 +119,7 @@ const DOMAIN_STATE_LABELS = { off: 'Off', dm: 'By your leave', auto: 'On its own
 
 const DRIFT_REASON = 'Needs Diplomacy: war is a relationship dynamic, so a frozen web cannot raise fronts.';
 const WAR_DM_DEFERRED = 'War by-your-leave arrives with the war-layer rework. Off still lets you narrate wars yourself; the engine just never starts one.';
-const SEASONS_DM = 'The year turns of its own accord — there is no leave to ask of winter.';
+const SEASONS_DM = 'The year turns of its own accord. There is no leave to ask of winter.';
 const DM_STATE_GLOBAL = 'Approval is realm-wide today: set “Who decides” to “Your word only” or “Proposes to you”. Per-domain approval arrives in a later chapter.';
 
 // One selectable world-assumption chip inside an axis card or domain row.
@@ -167,7 +167,7 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
         // Distance/Travel are engine-derived facts, never a click: the map sets them.
         const derivedNote = axis.derived
           ? (spatialMapped
-            ? 'Set by your canonized realm map — the world reckons real distance.'
+            ? 'Set by your canonized realm map. The world reckons real distance.'
             : 'Set once you canonize a map for this realm. Until then, distance is ignored.')
           : null;
         const selectedOption = axis.options.find(([optionValue]) => optionValue === value);
@@ -322,7 +322,7 @@ const ENGINE_WAVES = [
   ['navalEnabled', 'Sea lanes', 'Fleets carry war and trade across open water.', 'map'],
   ['interventionEnabled', 'Intervention', 'Foreign powers take sides in other realms’ succession fights.', 'war'],
   ['settlementLifecycleEnabled', 'New & lost steadings', 'Fresh settlements are founded, and broken ones are abandoned or resettled.'],
-  ['peaceEngineEnabled', 'Causes of war and peace', 'Wars begin and end for stated reasons — and can be talked back down.', 'war'],
+  ['peaceEngineEnabled', 'Causes of war and peace', 'Wars begin and end for stated reasons, and can be talked back down.', 'war'],
   ['supplyWebWarfareEnabled', 'Supply-line war', 'Armies strangle each other’s supply lines, not only their walls.', 'war'],
   ['upswingArcsEnabled', 'Recovery and boom', 'Ruined places rebuild, and fortunate ones flower into boom years.'],
   ['resourceDynamicsEnabled', 'Resource discovery', 'New veins are struck, and worked-out ones run dry.'],
@@ -346,7 +346,7 @@ export function EngineWaves({ draft, advanceBlocked, spatialMapped = false, onSe
           Engine waves
         </div>
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-          The deep systems that make a realm feel alive. Turning one off never deletes anything — the world just stops doing it on its own.
+          The deep systems that make a realm feel alive. Turning one off never deletes anything. The world just stops doing it on its own.
         </div>
       </div>
       <div style={{

@@ -78,7 +78,7 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
   return (
     <div style={{ marginTop: 6, padding: '6px 8px', background: swatch['#F5F0E8']}}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>
-        Edit (bank) — queues a reviewable change
+        Edit (bank): queues a reviewable change
       </div>
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
         {FACETS.map(({ kind, label, vocab }) => (
@@ -90,7 +90,7 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
               onChange={onFacet(kind)}
               style={selectStyle}
             >
-              <option value="">—</option>
+              <option value="">–</option>
               {vocab.map(v => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
@@ -111,11 +111,11 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
       {isHostage && (
         <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
           <div style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>
-            The party&apos;s hand — {npc?.name || 'this captive'} is held
+            The party&apos;s hand: {npc?.name || 'this captive'} is held
           </div>
           {/* GUIDANCE WHISPER (§11 covenant): the two moves and their consequences, at the op. */}
           <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
-            Pay the ransom to buy them home — the captor still profits, but the home treasury is
+            Pay the ransom to buy them home. The captor still profits, but the home treasury is
             spared. Or stage a rescue: no coin, and the captive returns clean of any turned
             loyalty, but the captor keeps a grudge. The move settles on the next advance; it
             queues for review like any edit.
@@ -143,10 +143,10 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
       {isTraveling && !isHostage && (
         <div style={{ marginTop: 8, paddingTop: 6, borderTop: `1px solid ${swatch['#EDE3CC']}` }}>
           <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 3 }}>
-            On the road — {npc?.name || 'this traveller'} is away
+            On the road: {npc?.name || 'this traveller'} is away
           </div>
           <p style={{ fontSize: FS.micro, color: MUTED, margin: '0 0 6px', lineHeight: 1.4 }}>
-            Summon them home early. They turn for the road at once — no shortcut, only an
+            Summon them home early. They turn for the road at once: no shortcut, only an
             earlier start; the journey back still takes its weeks. Queues for review like any edit.
           </p>
           <Button

@@ -96,7 +96,7 @@ export default function AdminAnalyticsPanel() {
                 <tr key={i}>
                   {columns.map(c => (
                     <td key={c} style={{ padding: `${SP.xs}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, color: SECOND, whiteSpace: 'nowrap' }}>
-                      {row[c] == null ? '—' : (typeof row[c] === 'object' ? JSON.stringify(row[c]) : String(row[c]))}
+                      {row[c] == null ? '–' : (typeof row[c] === 'object' ? JSON.stringify(row[c]) : String(row[c]))}
                     </td>
                   ))}
                 </tr>

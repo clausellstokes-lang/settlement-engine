@@ -111,11 +111,11 @@ const TAB_META = Object.freeze({
   lenses:       { title: 'Map lenses & style schema: SettlementForge Compendium',
                   desc: 'The map rendering lenses (parchment, watercolor, dark fantasy, VTT, accessible) and the style-schema vocabulary a bespoke lens must stay inside.' },
   facets:       { title: 'Facets & interior grammar: SettlementForge Compendium',
-                  desc: 'The institution-nature facets and the interior grammar — the interior kinds, room kinds, and furnishing kinds every building draws from.' },
+                  desc: 'The institution-nature facets and the interior grammar: the interior kinds, room kinds, and furnishing kinds every building draws from.' },
   calamity:     { title: 'Calamity reference: SettlementForge Compendium',
                   desc: 'The one unified calamity mechanic, its cosmetic terrain flavours, and its severity bands. Honest by design: a flood and a fire differ in the telling, not the maths.' },
   az:           { title: 'A–Z index: SettlementForge Compendium',
-                  desc: 'Every named Compendium entry in one alphabetical index — archetypes, deities, operations, systems, and more, each a stable deep-link.' },
+                  desc: 'Every named Compendium entry in one alphabetical index: archetypes, deities, operations, systems, and more, each a stable deep-link.' },
 });
 
 export default function CompendiumPanel({ config, standalone=false, routeEntry }) {

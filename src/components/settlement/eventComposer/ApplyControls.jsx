@@ -33,7 +33,7 @@ export function ApplyControls({
       {isDestroy && (
         <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, background: swatch.dangerBg }}>
           <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
-            ⚠ This destroys {settlement?.name || 'the settlement'} — services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
+            ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
           </div>
           <input
             value={destroyConfirm}

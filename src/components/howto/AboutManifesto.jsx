@@ -98,8 +98,8 @@ export default function AboutManifesto() {
           A settlement that remembers what your players did to it.
         </h1>
         <p style={{ ...PROSE, margin: '0 0 24px' }}>
-          SettlementForge is a deterministic world simulator. You set the conditions — terrain,
-          trade, the pressures a region is under — and the engine derives the only coherent
+          SettlementForge is a deterministic world simulator. You set the conditions (terrain,
+          trade, the pressures a region is under) and the engine derives the only coherent
           settlement those conditions would produce: its institutions, its economy, its power
           structure, the secrets its people carry. Then it holds still. The same seed yields the
           same world, every time, so the town you prepped last week is byte-for-byte the town at
@@ -117,7 +117,7 @@ export default function AboutManifesto() {
       {/* ── BAND 2 · THE PHILOSOPHY LADDER ─────────────────────────────────── */}
       <Band eyebrow="The premise" title="What if the town remembered?">
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
-          Ask a table what happened after they burned the granary. In most worlds, nothing —
+          Ask a table what happened after they burned the granary. In most worlds, nothing:
           the fire was a scene, and the scene is over. Here, the mill has no grain to turn, so
           flour is scarce, so bread prices climb next season, so the garrison that ate on credit
           starts to grumble. Nobody scripted that chain. It fell out of the same supply web that
@@ -127,7 +127,7 @@ export default function AboutManifesto() {
           That is <strong style={{ color: INK }}>constraint-driven worldbuilding</strong>. You
           don&rsquo;t describe what you want; you constrain what is possible, and the settlement that
           comes out is the only one that satisfies every constraint at once. It is meaningfully
-          different from rolling on a table, prompting a language model, or picking from a list —
+          different from rolling on a table, prompting a language model, or picking from a list,
           and it is why the coherence holds up when players push on it.
         </p>
         <blockquote style={{ margin: '18px 0', padding: '4px 0 4px 20px', borderLeft: `3px solid ${GOLD}`,
@@ -136,17 +136,17 @@ export default function AboutManifesto() {
           you uncovered.
         </blockquote>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
-          You set the conditions of your world — the terrain, the trade pressures, the regional
-          history you&rsquo;ve established — and the generator derives what a settlement in those
+          You set the conditions of your world (the terrain, the trade pressures, the regional
+          history you&rsquo;ve established) and the generator derives what a settlement in those
           conditions would actually look like. What appears is genuinely new to you, even though
-          you built the world it lives in. When a settlement has that internal logic — when the
+          you built the world it lives in. When a settlement has that internal logic (when the
           blacksmith is poor because the iron supply chain is broken, not because the DM needed a
-          plot point — players feel it. The town seems to have existed before they arrived, and
+          plot point) players feel it. The town seems to have existed before they arrived, and
           like it will keep existing after they leave.
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           When a settlement doesn&rsquo;t have what a player is looking for, that isn&rsquo;t a hole in
-          your prep — it is the world being honest. The frontier town has no one to lift a curse
+          your prep. It is the world being honest. The frontier town has no one to lift a curse
           because no institution here provides one. Now the question writes itself: who would know
           someone who does, how far would the party have to travel, what would it cost to bring that
           help here? The constraint generates the question, and the question generates the session. A
@@ -162,8 +162,8 @@ export default function AboutManifesto() {
         </p>
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           Sometimes what comes out is not what you pictured. You imagined a cathedral town; the
-          constraints gave you a garrison and a black market. That is not the tool arguing with you —
-          it is a variation worth sitting with. Why didn&rsquo;t the church reach this far, and what
+          constraints gave you a garrison and a black market. That is not the tool arguing with you.
+          It is a variation worth sitting with. Why didn&rsquo;t the church reach this far, and what
           fills the space where it didn&rsquo;t? In worldbuilding the unexpected result usually deepens
           the setting more than the expected one would have, precisely because you had to earn it.
         </p>
@@ -179,7 +179,7 @@ export default function AboutManifesto() {
         <Covenant
           claim="The same seed can never yield a different world."
           mechanism="Every change flows through one deterministic tick. There is no wall-clock input and no hidden re-roll, so a world cannot drift behind your back between sessions."
-          receipt={<>The landing page forges the exact same town — {CD.meta.demoWorld.name}, seed {CD.meta.demoWorld.seed} — every time, and a drift-gated replay test fails the build if that town ever changes. You can run it yourself at the bottom of this page.</>}
+          receipt={<>The landing page forges the exact same town ({CD.meta.demoWorld.name}, seed {CD.meta.demoWorld.seed}) every time, and a drift-gated replay test fails the build if that town ever changes. You can run it yourself at the bottom of this page.</>}
         />
         <Covenant
           claim="The AI can never write to your world&rsquo;s canon."
@@ -189,7 +189,7 @@ export default function AboutManifesto() {
         <Covenant
           claim="No change can happen without leaving a receipt."
           mechanism="Each operation carries a receipt reference and, where it is reversible, an undo token. The chronicle that writes itself is derived from those receipts, so it can only ever say what the simulation actually did."
-          receipt={<>The <A href="/compendium?tab=operations">operation registry</A> lists all {CD.operations.count} operations — {CD.operations.byKlass.canon} of them canon-class — each with the receipt it leaves and whether it can be undone.</>}
+          receipt={<>The <A href="/compendium?tab=operations">operation registry</A> lists all {CD.operations.count} operations ({CD.operations.byKlass.canon} of them canon-class), each with the receipt it leaves and whether it can be undone.</>}
         />
         <Covenant
           claim="Your world can never be locked inside this tool."
@@ -198,12 +198,12 @@ export default function AboutManifesto() {
         />
         <Covenant
           claim="The engine can never resolve a named character&rsquo;s fate."
-          mechanism="The simulation moves world-level state — economies, institutions, factions, power. It deliberately stops at the threshold of a named person&rsquo;s story, which is yours to tell. State, never fate."
-          receipt="Even when a settlement dies, the engine records that its last residents disperse with their fates unresolved. It kills no named character, ever — a rule enforced in the lifecycle kernel, not a stylistic choice."
+          mechanism="The simulation moves world-level state: economies, institutions, factions, power. It deliberately stops at the threshold of a named person&rsquo;s story, which is yours to tell. State, never fate."
+          receipt="Even when a settlement dies, the engine records that its last residents disperse with their fates unresolved. It kills no named character, ever, a rule enforced in the lifecycle kernel, not a stylistic choice."
         />
         <Covenant
           claim="The maps can never show a world the engine doesn&rsquo;t hold."
-          mechanism="Every map renders from the same simulated state as the dossier. The engraved plates are drawn from the town&rsquo;s real geometry — no invented distances, no decorative places that don&rsquo;t exist in the data."
+          mechanism="Every map renders from the same simulated state as the dossier. The engraved plates are drawn from the town&rsquo;s real geometry: no invented distances, no decorative places that don&rsquo;t exist in the data."
           receipt={<>The landing&rsquo;s frozen map plates are drift-gated replays of the fixture town&rsquo;s own geometry; the plate test fails the build if a plate stops matching the town it claims to show. Browse the live data in the <A href="/compendium">Compendium</A>.</>}
         />
         <p style={{ ...PROSE, fontSize: FS.sm, margin: '4px 0 0', color: MUT }}>
@@ -222,7 +222,7 @@ export default function AboutManifesto() {
           </Caption>
         </div>
         <p style={{ ...PROSE, fontSize: FS.sm, margin: '14px 0 18px' }}>
-          You can skip the terms below and lose nothing — the town at your table works either way.
+          You can skip the terms below and lose nothing. The town at your table works either way.
           But if you want to know why it holds together, it is worth two minutes.
         </p>
         <Mechanism title="Constraints, not a die roll">
@@ -233,7 +233,7 @@ export default function AboutManifesto() {
           a systematically different settlement, not a random variation.
         </Mechanism>
         <Mechanism title="Sliders shift probability; supply chains create fragility">
-          The five priority sliders don&rsquo;t guarantee institutions — they shift their probability
+          The five priority sliders don&rsquo;t guarantee institutions. They shift their probability
           and interact, so a high-Religion, low-Magic town tips toward heresy suppression. Production
           is sequential: a tannery needs hides, a leatherworker needs tanned leather, an armorer needs
           both leather and metal. Break one link and the downstream chain fails, which is why a
@@ -251,11 +251,11 @@ export default function AboutManifesto() {
           number of income sources, trade access, how complete the supply chains are, the safety
           profile, and the stresses in play. A comfortable-looking settlement can rest on a fragile
           base, and the viability view names exactly which of those factors are holding the number up
-          and which are absent — so the decline is one you can see coming.
+          and which are absent, so the decline is one you can see coming.
         </Mechanism>
         <Mechanism title="Stresses compound into new conditions">
           Two stresses together make a third, named thing. Famine in a politically fractured town
-          isn&rsquo;t only scarcity — it is food distribution contested by factions, which changes who
+          isn&rsquo;t only scarcity. It is food distribution contested by factions, which changes who
           is hoarding, which bloc controls the grain, and where the danger sits. The dossier names the
           compound condition, not just its parts, so you always know what you are actually running.
         </Mechanism>
@@ -269,15 +269,15 @@ export default function AboutManifesto() {
           Raw faction power comes from institutions and priorities, but effective power bends to how
           legitimate the governing authority is. When governance falters, the ruling faction weakens
           and criminal power grows to fill the gap. So every economic and military swing quietly
-          reshapes who really holds the town — through legitimacy, never by decree.
+          reshapes who really holds the town: through legitimacy, never by decree.
         </Mechanism>
         <Mechanism title="Beneath it all: the causal substrate">
           Once a campaign advances, {CD.causal.variableCount} live causal variables sit under every
-          settlement — food security, public legitimacy, defense readiness, criminal opportunity,
-          and the rest — each with a score, a band ({CD.causal.bands.join(' / ')}), and named
+          settlement (food security, public legitimacy, defense readiness, criminal opportunity,
+          and the rest) each with a score, a band ({CD.causal.bands.join(' / ')}), and named
           contributors. Above them ride {CD.pressures.count} pressures: the directional strain on
           the settlement, each carrying its own reasons, so &ldquo;high external threat&rdquo; always names
-          the deployment or the famine driving it. Advance time and they shift together — a war drains
+          the deployment or the famine driving it. Advance time and they shift together: a war drains
           economic capacity, which lowers the settlement&rsquo;s strength, which feeds the drive back
           toward peace. That loop is why the war layer ends its own wars; peace is the equilibrium it
           returns to, not a script.
@@ -295,8 +295,8 @@ export default function AboutManifesto() {
       <Band eyebrow="Where the AI fits" title="Caged by mechanism, not by promise">
         <p style={{ ...PROSE, margin: '0 0 14px' }}>
           This hobby&rsquo;s distrust of generative AI is earned. Players have watched policies about AI
-          get written and then quietly reversed, and the objection was never really about capability —
-          it was about provenance and consent. So we don&rsquo;t ask you to trust a policy. We show you
+          get written and then quietly reversed, and the objection was never really about capability.
+          It was about provenance and consent. So we don&rsquo;t ask you to trust a policy. We show you
           the architecture.
         </p>
         <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${SLATE}`,
@@ -304,7 +304,7 @@ export default function AboutManifesto() {
           <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.7, margin: 0, fontFamily: sans }}>
             The AI works in three stages, and each stage has exactly one job. An analyst
             <strong style={{ color: SLATE_DEEP }}> reads </strong>
-            the simulated state — the facts the engine already derived. A compiler
+            the simulated state: the facts the engine already derived. A compiler
             <strong style={{ color: SLATE_DEEP }}> proposes </strong>
             table-ready prose or a plan, grounded in those facts. And only the deterministic engine
             <strong style={{ color: SLATE_DEEP }}> writes </strong>
@@ -314,10 +314,10 @@ export default function AboutManifesto() {
         </div>
         <p style={{ ...PROSE, fontSize: FS.sm, margin: '0 0 14px' }}>
           Because the brief the AI works from is coherent, the fiction it produces stays consistent
-          across many queries — everything it needs is in the brief, not in its training. And the
+          across many queries. Everything it needs is in the brief, not in its training. And the
           negative space is stated plainly: no AI-generated art is passed off as the product&rsquo;s own,
           and the maps and settlements are simulated, not painted by a model. You can verify the
-          boundary rather than take it on faith — every operation the engine can perform, with its
+          boundary rather than take it on faith: every operation the engine can perform, with its
           class and its receipt, is public in the{' '}
           <A href="/compendium?tab=operations">operation registry</A>.
         </p>
@@ -331,7 +331,7 @@ export default function AboutManifesto() {
           the engine renders from its own registries. Read the{' '}
           <A href="/compendium?tab=operations">operation registry</A> and see exactly what the engine
           can and cannot do. When you are ready, <A href="/pricing">pricing</A> is plain-spoken and
-          the ownership terms are on the page — you never need a subscription to keep what you made,
+          the ownership terms are on the page: you never need a subscription to keep what you made,
           and you are never charged for a task that produced nothing.
         </p>
         <ForgeExactDemo />

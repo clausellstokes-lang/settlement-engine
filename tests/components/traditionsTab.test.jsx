@@ -41,8 +41,8 @@ describe('TraditionsTab — preview mode (draft settlement)', () => {
     }
 
     // preview: ownership + outcomes read "—" (no time has passed)
-    expect(screen.getAllByText(/Owner: —/).length).toBe(expected.length);
-    expect(screen.getAllByText(/Last held: —/).length).toBe(expected.length);
+    expect(screen.getAllByText(/Owner: –/).length).toBe(expected.length);
+    expect(screen.getAllByText(/Last held: –/).length).toBe(expected.length);
   });
 
   it('renders an empty-state for a null settlement without throwing', () => {

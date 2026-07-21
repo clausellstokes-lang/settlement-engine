@@ -236,7 +236,7 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
  *  panel cannot); its session-only caveat is repeated here for touch readers. */
 const MAP_CONTROL_HELP = Object.freeze([
   ['The realm', [
-    ['Advance Realm', 'Advances the living world by the interval you choose above — a week through a year. Each advance runs a pulse whose changes wait for your review.'],
+    ['Advance Realm', 'Advances the living world by the interval you choose above (a week through a year). Each advance runs a pulse whose changes wait for your review.'],
     ['Undo Advance', 'Rolls the world back to just before the last advance. Available for the current session only; a page reload makes the advance permanent.'],
   ]],
   ['View', [
@@ -248,7 +248,7 @@ const MAP_CONTROL_HELP = Object.freeze([
     ['Save', 'Saves the current map to the active campaign. Auto-save keeps it current between manual saves.'],
   ]],
   ['More menu', [
-    ['Rules', 'Opens the simulation rules — the dials and engine waves that shape how the realm evolves.'],
+    ['Rules', 'Opens the simulation rules: the dials and engine waves that shape how the realm evolves.'],
     ['Quiet · Realistic · Dramatic', 'One-click presets that set how eventful the simulation runs.'],
     ['Import / Clear Image', 'Import Image drapes a picture of your own over the map; Clear Image returns to the generated terrain.'],
     ['Share to gallery', 'Opens the share editor to publish this map to the public gallery.'],

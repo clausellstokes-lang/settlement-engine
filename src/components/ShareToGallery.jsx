@@ -449,7 +449,7 @@ export default function ShareToGallery({
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45, display: 'flex', alignItems: 'flex-start', gap: 5 }}>
           <AlertCircle size={12} style={{ marginTop: 1, flexShrink: 0, color: shareDm ? RED : MUTED }} />
           <span>
-            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong> — secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
+            <strong style={{ color: shareDm ? RED : INK }}>Reveal DM-private content</strong>. Secrets, plot hooks, NPC goals and relationships, your DM notes, and the DM Compass become <strong>publicly visible</strong> to anyone who opens this gallery page. Off by default; save details (or re-share) to apply.
           </span>
         </span>
       </label>
@@ -467,7 +467,7 @@ export default function ShareToGallery({
           style={{ marginTop: 2, flexShrink: 0 }}
         />
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
-          <strong style={{ color: INK }}>Allow others to import this settlement</strong> — let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
+          <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
         </span>
       </label>
       {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the

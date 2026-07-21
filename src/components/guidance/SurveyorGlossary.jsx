@@ -72,7 +72,7 @@ function GlossaryCard({ open, entry, onClose }) {
         ref={cardRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`${entry.term} — glossary`}
+        aria-label={`${entry.term} (glossary)`}
         tabIndex={-1}
         style={{
           width: 'min(100%, 380px)', maxHeight: 'min(90vh, 520px)', overflow: 'auto',

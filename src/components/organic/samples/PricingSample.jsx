@@ -57,7 +57,7 @@ export default function PricingSample({ posture = 'desk' }) {
       {/* The one-time lane — its own composition, not a fourth card. */}
       <div className="oc-bundle">
         <div className="oc-bundle__body">
-          <Rubric variant="sectionLabel">One-time — no subscription</Rubric>
+          <Rubric variant="sectionLabel">One-time. No subscription</Rubric>
           <Display size="s" as="h2">{pr.bundle.name}</Display>
           <Prose wide><p>{pr.bundle.body}</p></Prose>
         </div>

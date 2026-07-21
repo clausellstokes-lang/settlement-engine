@@ -121,7 +121,7 @@ export default function CorpusFactoryPanel({ initialPrompt = '' }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, fontFamily: sans, color: BODY }}>
       <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, lineHeight: 1.45 }}>
         Draft corpus prose with the Surveyor or by hand, stage it with provenance, then approve. Approved
-        candidates fold into canon only when you commit the leaf and regenerate — your taste stays the gate.
+        candidates fold into canon only when you commit the leaf and regenerate. Your taste stays the gate.
       </p>
 
       <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>

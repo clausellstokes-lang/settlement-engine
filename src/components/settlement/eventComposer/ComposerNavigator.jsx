@@ -58,7 +58,7 @@ function VerbChips({ verbs, settlement, ctx, onPick }) {
             variant="ghost"
             disabled={!p.available}
             title={why || v.label}
-            aria-label={p.available ? v.label : `${v.label} — ${why}`}
+            aria-label={p.available ? v.label : `${v.label} (${why})`}
             onClick={() => onPick(v.type)}
             style={chipStyle(p.available)}
           >
@@ -91,7 +91,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
       // findable, its description saying exactly why and what would unlock it.
       desc: p.available
         ? (EVENT_PROSE[v.type]?.description || '')
-        : `Unavailable — ${[...p.reasons, ...p.unlocks].join(' ')}`,
+        : `Unavailable: ${[...p.reasons, ...p.unlocks].join(' ')}`,
     };
   });
 
@@ -148,7 +148,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
             aria-label="Entity kind"
             style={selectStyle}
           >
-            <option value="">— What are you acting on? —</option>
+            <option value="">What are you acting on?</option>
             {ENTITY_KINDS.map(k => <option key={k} value={k}>{KIND_LABELS[k] || k}</option>)}
           </select>
           {entityKind && entityKind !== 'settlement' && (
@@ -158,7 +158,7 @@ export function ComposerNavigator({ settlement, ctx, onPickVerb, onPickTargetVer
               aria-label={`${KIND_LABELS[entityKind] || entityKind} to act on`}
               style={selectStyle}
             >
-              <option value="">— Pick one —</option>
+              <option value="">Pick one</option>
               {entityOptions.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
             </select>
           )}

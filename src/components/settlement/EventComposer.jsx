@@ -459,7 +459,7 @@ export default function EventComposer({ onLink = null }) {
               const p = v.predicate(settlement, verbCtx);
               return (
                 <option key={v.type} value={v.type} disabled={!p.available}>
-                  {v.label}{p.available ? '' : ` — ${p.reasons[0] || 'unavailable'}`}
+                  {v.label}{p.available ? '' : ` (${p.reasons[0] || 'unavailable'})`}
                 </option>
               );
             })}
@@ -636,7 +636,7 @@ export default function EventComposer({ onLink = null }) {
             return (
               <Field label="Role" hint={role ? `Importance: ${derivedImp}` : 'Roles available at this institution'}>
                 <select value={role} onChange={e => setRole(e.target.value)} style={selectStyle}>
-                  <option value="">— Pick a role —</option>
+                  <option value="">Pick a role</option>
                   {roleOpts.map(r => <option key={r.role} value={r.role}>{r.role}</option>)}
                 </select>
               </Field>
@@ -652,7 +652,7 @@ export default function EventComposer({ onLink = null }) {
         {(type === 'ADD_NPC' || type === 'ASSIGN_NPC_TO_ROLE') && institutionOptions.length > 0 && (
           <Field label="Institution" hint="link this NPC to an institution">
             <select value={institutionId} onChange={e => setInstitutionId(e.target.value)} style={selectStyle}>
-              <option value="">— None —</option>
+              <option value="">None</option>
               {institutionOptions.map(o => (
                 <option key={o.id} value={o.id}>{o.name}</option>
               ))}

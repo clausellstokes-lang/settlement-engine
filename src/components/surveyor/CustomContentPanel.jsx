@@ -85,7 +85,7 @@ function DraftEntryCard({ entry: e, index, decision, onDecide }) {
                 />
               ) : (
                 <span style={{ fontSize: FS.xs, color: kind === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>
-                  {typeof val === 'object' ? JSON.stringify(val) : String(val ?? '—')}
+                  {typeof val === 'object' ? JSON.stringify(val) : String(val ?? '–')}
                 </span>
               )}
             </div>
@@ -148,7 +148,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-      <Eyebrow>Homebrew content — describe what you want</Eyebrow>
+      <Eyebrow>Homebrew content: describe what you want</Eyebrow>
       <PromptArea
         value={intent}
         onChange={setIntent}
@@ -178,7 +178,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <FieldLabelBadge kind="unsupported" />
                   <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                    {String(u.requested ?? u.field ?? u.key ?? 'unknown')}{u.reason ? ` — ${u.reason}` : ''}
+                    {String(u.requested ?? u.field ?? u.key ?? 'unknown')}{u.reason ? `: ${u.reason}` : ''}
                   </span>
                 </div>
               ))}

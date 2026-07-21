@@ -43,7 +43,7 @@ export default function DossierSample({ field = false, posture = 'desk' }) {
       <Marginalia label="Whence these numbers?" open>
         {d.provenance.map((p, i) => <p key={i}>{p}</p>)}
       </Marginalia>
-      <p><Ink tone="secondary">Recorded on the coast road, at the toll-gate, in fair weather. — S.</Ink></p>
+      <p><Ink tone="secondary">Recorded on the coast road, at the toll-gate, in fair weather. – S.</Ink></p>
     </>
   );
 
@@ -82,7 +82,7 @@ export default function DossierSample({ field = false, posture = 'desk' }) {
         </section>
 
         <section className="oc-crisis">
-          <Rubric variant="sectionLabel">Active crisis — {d.crisis.label}</Rubric>
+          <Rubric variant="sectionLabel">Active crisis: {d.crisis.label}</Rubric>
           <Prose><p>{d.crisis.summary}</p></Prose>
           <p><Rubric variant="instruction">The hook.</Rubric> <Ink tone="body">{d.crisis.hook}</Ink></p>
         </section>
@@ -93,7 +93,7 @@ export default function DossierSample({ field = false, posture = 'desk' }) {
           <Rubric variant="sectionLabel">Key figures</Rubric>
           {d.npcs.map((n) => (
             <p key={n.name}>
-              <Ink tone="strong">{n.name}</Ink>{' — '}<Ink tone="secondary">{n.role}. </Ink>
+              <Ink tone="strong">{n.name}</Ink>{', '}<Ink tone="secondary">{n.role}. </Ink>
               <Ink tone="body" className="oc-i">{n.trait}</Ink>
             </p>
           ))}
@@ -114,7 +114,7 @@ export default function DossierSample({ field = false, posture = 'desk' }) {
 
       <footer className="oc-dossier__foot">
         <Rule variant="single" />
-        <p><Ink tone="secondary">Surveyed for the table. State, never fate — the engine records what happened; the fate of any named soul is yours to decide.</Ink></p>
+        <p><Ink tone="secondary">Surveyed for the table. State, never fate: the engine records what happened; the fate of any named soul is yours to decide.</Ink></p>
       </footer>
     </Surface>
   );

@@ -36,7 +36,7 @@ export default function TemperamentPicker() {
   return (
     <Card title="The World's Temper" kicker="Set the age">
       <p style={{ fontFamily: sans, fontSize: FS.sm, color: MUTED, margin: `0 0 ${SP.md}px` }}>
-        Choose the temper of the age &mdash; a curated bundle of the world&rsquo;s dials, not a wall
+        Choose the temper of the age: a curated bundle of the world&rsquo;s dials, not a wall
         of switches. Each is a choice, not a new rule.
       </p>
       {!hasCampaign && (

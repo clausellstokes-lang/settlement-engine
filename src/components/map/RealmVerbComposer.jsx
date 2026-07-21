@@ -87,7 +87,7 @@ export default function RealmVerbComposer({ campaign }) {
     const staged = typeof active.entry.stageArgs === 'function' ? active.entry.stageArgs(args) : args;
     const r = await stageRealmVerb(campaign.id, active.entry.verb, staged);
     if (r && r.ok) {
-      setNotice({ ok: true, text: 'Queued as a pending proposal — approve or dismiss it in the proposals list.' });
+      setNotice({ ok: true, text: 'Queued as a pending proposal. Approve or dismiss it in the proposals list.' });
     } else {
       setNotice({ ok: false, text: r?.prose || realmVetoProse(r?.code) || 'The order could not be staged.' });
     }
@@ -153,7 +153,7 @@ export default function RealmVerbComposer({ campaign }) {
                   value={dialState[d.key] || ''}
                   onChange={e => setDialState(s => ({ ...s, [d.key]: e.target.value }))}
                 >
-                  <option value="">— pick a settlement —</option>
+                  <option value="">Pick a settlement</option>
                   {(active.entry.targetOptions?.(worldState, ctx) || memberOptions).map(o => (
                     <option key={o.id} value={o.id}>{o.name}</option>
                   ))}
@@ -216,7 +216,7 @@ export default function RealmVerbComposer({ campaign }) {
       )}
 
       <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-        Every order stages as a pending proposal and applies through the world&apos;s own machinery on approval —
+        Every order stages as a pending proposal and applies through the world&apos;s own machinery on approval:
         the walls hold even under force, and a refused order says why.
       </p>
     </div>

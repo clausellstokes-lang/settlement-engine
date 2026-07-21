@@ -55,7 +55,7 @@ export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose, pr
   return (
     <div
       role={pinned ? 'dialog' : 'tooltip'}
-      aria-label={`${name} — district`}
+      aria-label={`${name} (district)`}
       style={{
         position: 'fixed', left, top, zIndex: 260,
         width: 'min(92vw, 320px)', maxHeight: 'min(70vh, 420px)', overflow: 'auto',

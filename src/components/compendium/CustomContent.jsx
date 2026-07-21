@@ -49,12 +49,12 @@ const POSTURES = ['peaceful','defensive','aggressive','fortified','guerrilla'];
 // Plain-language helper text under each field, so the form explains itself
 // (spec §14: as intuitive as possible). Keyed by field name; missing = no hint.
 const FIELD_HINTS = {
-  category:       'Which part of settlement life this belongs to — also where it appears in the dossier. Pick “+ New category…” to add your own.',
-  authority:      'Which power it feeds in the settlement’s leadership — e.g. a temple → religious authority, a garrison → martial.',
+  category:       'Which part of settlement life this belongs to. Also where it appears in the dossier. Pick “+ New category…” to add your own.',
+  authority:      'Which power it feeds in the settlement’s leadership, e.g. a temple → religious authority, a garrison → martial.',
   defenseRole:    'Whether and how this strengthens the settlement’s defense.',
-  essential:      'Always included when this settlement is generated — like a mill or watch — never rolled probabilistically.',
+  essential:      'Always included when this settlement is generated (like a mill or watch), never rolled probabilistically.',
   foodImpact:     'Whether this raises or drains food security (a farm produces; a large garrison consumes). Moves the deficit.',
-  satisfies:      'Trade category this good belongs to — e.g. Dragonbone Greatswords → Weapons & armour. In the Economics tab the good folds into this category line (incl. its name) instead of a separate pill. Demand categories (weapons/religious/maritime/luxury/alchemical) also cover local need + export surplus. Pick “Other” to type your own — it stays available while any item uses it.',
+  satisfies:      'Trade category this good belongs to, e.g. Dragonbone Greatswords → Weapons & armour. In the Economics tab the good folds into this category line (incl. its name) instead of a separate pill. Demand categories (weapons/religious/maritime/luxury/alchemical) also cover local need + export surplus. Pick “Other” to type your own. It stays available while any item uses it.',
   criticality:    'How essential this is. Critical things (food, water, timber) cause crises when supply breaks; luxuries don’t.',
   economicWeight: 'How much this reinforces the local economy.',
   magical:        'Turn on if this is arcane or enchanted in nature.',
@@ -64,7 +64,7 @@ const FIELD_HINTS = {
   archetype:      'e.g. merchant guild, thieves’ cabal, knightly order.',
   agenda:         'What this faction is trying to achieve.',
   scale:          'How much reach and influence this faction has.',
-  methods:        'How it pursues its agenda — e.g. bribery, force, diplomacy.',
+  methods:        'How it pursues its agenda, e.g. bribery, force, diplomacy.',
   // Deities — the axis hints explain what each axis DOES in the engine (copy in
   // the lazy deityAuthoring namespace, so it never rides first paint).
   alignmentAxis:  td('form.alignmentHint'),
@@ -73,8 +73,8 @@ const FIELD_HINTS = {
   portfolio:      td('form.portfolioHint'),
   domain:         td('form.domainHint'),
   // Traditions (WB-j) — plain-language, no lazy namespace (light corpus vocab).
-  motifElement:   'The founding image this holiday is built around — harvest, the hearth, the river, the dead.',
-  motifAct:       'How the town observes it — a feast, a procession, a vigil, a contest, a fair, or an offering.',
+  motifElement:   'The founding image this holiday is built around: harvest, the hearth, the river, the dead.',
+  motifAct:       'How the town observes it: a feast, a procession, a vigil, a contest, a fair, or an offering.',
   epithet:        'An optional flavour line shown beneath the tradition in a dossier.',
 };
 
@@ -353,7 +353,7 @@ export function CustomContentManager({ search, initialCat }) {
       case 'fortification': return <select {...shared} value={val||'none'}>{['none','basic','moderate','heavy','legendary'].map(f=><option key={f} value={f}>{f}</option>)}</select>;
       case 'militiaLevel': return <select {...shared} value={val||'none'}>{['none','volunteer','trained','professional','elite'].map(m=><option key={m} value={m}>{m}</option>)}</select>;
       case 'factionCount': return <input {...shared} type="number" min="1" max="10" placeholder="Number of factions"/>;
-      case 'tags': return <input {...shared} placeholder="Comma-separated keywords (e.g. ancient, foreign, ceremonial) — used for search" onChange={e=>setDraft(d=>({...d,tags:e.target.value}))}/>;
+      case 'tags': return <input {...shared} placeholder="Comma-separated keywords (e.g. ancient, foreign, ceremonial), used for search" onChange={e=>setDraft(d=>({...d,tags:e.target.value}))}/>;
       case 'commodities': return <input {...shared} placeholder="Comma-separated (e.g. iron ore, coal, gemstones)" onChange={e=>setDraft(d=>({...d,commodities:e.target.value}))}/>;
       case 'affects': return renderPills('affects', STRESSOR_AFFECT_CATEGORIES, '#8b1a1a');
       case 'description': return <textarea {...shared} rows={2} placeholder="Description..." style={{...shared.style, resize:'vertical'}}/>;
@@ -378,7 +378,7 @@ export function CustomContentManager({ search, initialCat }) {
         const ev = draft.epithet || '';
         return (
           <>
-            <textarea {...shared} value={ev} rows={2} maxLength={TRADITION_EPITHET_MAX_LENGTH} placeholder="A short flavour line — e.g. “kept since the first hearth was lit”." style={{...shared.style, resize:'vertical'}}/>
+            <textarea {...shared} value={ev} rows={2} maxLength={TRADITION_EPITHET_MAX_LENGTH} placeholder="A short flavour line, e.g. “kept since the first hearth was lit”." style={{...shared.style, resize:'vertical'}}/>
             <div style={{ textAlign:'right', fontSize:FS.micro, color:MUT, marginTop:2 }}>{ev.length} / {TRADITION_EPITHET_MAX_LENGTH}</div>
           </>
         );
