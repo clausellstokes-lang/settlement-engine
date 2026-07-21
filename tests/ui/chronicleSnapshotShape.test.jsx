@@ -291,3 +291,32 @@ describe('counter-pin: the AI-authored rows were already correct', () => {
     expect(rowsUnder(dialog, 'Friction Points')).toEqual(['Ana and Bo - argue over the well.']);
   });
 });
+
+// ── C2 (bar 18): raw JSON never reaches the serif register — structurally ──────
+describe('C2 — the last-resort fallbacks compose prose, never JSON', () => {
+  test('a conflict with neither desc nor issue nor description renders composed prose', () => {
+    const dialog = openModal({
+      thesis: 'T',
+      powerStructure: { factions: [], conflicts: [{ parties: ['The Grain Court', 'The Quay Guild'], stakes: 'the toll ledger' }] },
+    });
+    expect(rowsUnder(dialog, 'Conflicts')).toEqual(['The Grain Court and The Quay Guild contend; at stake: the toll ledger']);
+  });
+
+  test('an OBJECT-shaped narrative section renders its prose strings, not a JSON dump', () => {
+    const dialog = openModal({
+      thesis: 'T',
+      history: { arc: 'A toll town that outlived its toll.', turningPoint: 'The bridge fell.' },
+    });
+    const heading = dialog.queryAllByText('History', { selector: 'div' });
+    expect(heading.length).toBeGreaterThan(0);
+    const p = heading[0].parentElement.querySelector('p');
+    expect(p.textContent).toBe('A toll town that outlived its toll. The bridge fell.');
+    expect(p.textContent).not.toContain('{');
+  });
+
+  test('the component carries NO JSON.stringify at all (the habitat is removed)', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync('src/components/ChroniclePanel.jsx', 'utf8');
+    expect(src.includes('JSON.stringify')).toBe(false);
+  });
+});

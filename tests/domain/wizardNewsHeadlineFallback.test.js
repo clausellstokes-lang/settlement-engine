@@ -22,8 +22,10 @@ describe('wizardNews headline/summary — no raw id leaks (finding-11)', () => {
     expect(entry).toBeTruthy();
     expect(entry.headline).not.toMatch(/tgt-node|src-node/);
     expect(entry.summary).not.toMatch(/tgt-node|src-node/);
-    // the neutral in-world phrase stands in for the missing name
-    expect(entry.headline).toContain('Unknown settlement');
+    // the neutral phrase stands in for the missing name — and it speaks the
+    // world's register, not the software's (C2 bar 4).
+    expect(entry.headline).toMatch(/a far settlement/i);
+    expect(entry.headline).not.toContain('Unknown settlement');
   });
 
   it('a NAMED node still resolves to its name (control — no regression)', () => {

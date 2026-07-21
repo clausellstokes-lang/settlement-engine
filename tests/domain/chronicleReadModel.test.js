@@ -134,3 +134,76 @@ describe('chronicleReadModel — determinism (§7)', () => {
     expect(a).toBe(b);
   });
 });
+
+// ── C2 (misc + bar 2): twin-row coalescing and the loose-weave honesty flag ──
+
+describe('chronicleReadModel — outcome+impact twins collapse for the reader (C2)', () => {
+  it('an impactDigest twin with identical headline+summary folds into its outcome', () => {
+    const ws = { pulseHistory: [{
+      tick: 4,
+      selectedOutcomes: [{ id: 'o1', headline: 'The ford floods', summary: 'The road drowns.', targetSaveId: 'A', severity: 0.5 }],
+      impactDigest: [{ id: 'i1', headline: 'The ford floods', summary: 'The road drowns.', settlementIds: ['A', 'B'] }],
+    }] };
+    const c = latestChronicle(ws);
+    expect(c.eventCount).toBe(1);
+    expect(c.events).toHaveLength(1);
+    expect(c.events[0].kind).toBe('outcome'); // the outcome absorbs the twin
+    // the absorbed twin's entity keys survive on the kept node's thread
+    expect(c.threads[0].keys).toContain('B');
+  });
+
+  it('rows that differ in prose are NOT coalesced (negative control)', () => {
+    const ws = { pulseHistory: [{
+      tick: 4,
+      selectedOutcomes: [{ id: 'o1', headline: 'The ford floods', summary: 'one', targetSaveId: 'A' }],
+      impactDigest: [{ id: 'i1', headline: 'The ford floods', summary: 'two', settlementIds: ['A'] }],
+    }] };
+    expect(latestChronicle(ws).eventCount).toBe(2);
+  });
+
+  it('deltas still aggregate over the RAW record (coalescing is reader-facing only)', () => {
+    const ws = { pulseHistory: [{
+      tick: 4,
+      selectedOutcomes: [{ id: 'o1', headline: 'H', summary: 'S', targetSaveId: 'A', populationDeltas: { A: -10 } }],
+      impactDigest: [{ id: 'i1', headline: 'H', summary: 'S', settlementIds: ['A'] }],
+    }] };
+    const c = latestChronicle(ws);
+    expect(c.eventCount).toBe(1);
+    expect(c.delta.population.net).toBe(-10);
+  });
+});
+
+describe('chronicleReadModel — the loose-weave flag (C2 bar 2: co-location is not causation)', () => {
+  it('two beats of DIFFERENT drama classes united only by shared ground are a loose weave', () => {
+    const ws = { pulseHistory: [{
+      tick: 4,
+      selectedOutcomes: [
+        { id: 'o1', headline: 'A granary fire', candidateType: 'monster_raider_pressure', targetSaveId: 'A', severity: 0.5 },
+        { id: 'o2', headline: 'A market shock', candidateType: 'market_shock_tightening', targetSaveId: 'A', severity: 0.4 },
+      ],
+      impactDigest: [],
+    }] };
+    const c = latestChronicle(ws);
+    expect(c.threads).toHaveLength(1); // still one component (shared ground)
+    expect(c.threads[0].looseWeave).toBe(true);
+  });
+
+  it('a stressor spine keeps the thread a REAL chain (negative control)', () => {
+    const ws = { pulseHistory: [{
+      tick: 4,
+      selectedOutcomes: [
+        { id: 'o1', headline: 'The siege begins', stressor: { id: 's1', type: 'siege', affectedSettlementIds: ['A'] }, targetSaveId: 'A', severity: 0.8 },
+        { id: 'o2', headline: 'The walls hold', stressor: { id: 's1', type: 'siege', affectedSettlementIds: ['A'] }, targetSaveId: 'A', severity: 0.6 },
+      ],
+      impactDigest: [],
+    }] };
+    const c = latestChronicle(ws);
+    expect(c.threads).toHaveLength(1);
+    expect(c.threads[0].looseWeave).toBe(false);
+  });
+
+  it('a single-beat thread is never a loose weave', () => {
+    const ws = { pulseHistory: [{ tick: 4, selectedOutcomes: [{ id: 'o1', headline: 'H', targetSaveId: 'A' }], impactDigest: [] }] };
+    expect(latestChronicle(ws).threads[0].looseWeave).toBe(false);
+  });
+});

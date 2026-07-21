@@ -713,7 +713,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     // D-7e (i): the person-bond severity between the two courts' ruling seats (0 when memoryWeave dark).
     const seatBond01 = seatGratitudeSevToward(worldState, { lit: weaveLit, giverSid: giverId, receiverSid: receiverId, giverSettlement: giverS, receiverSettlement: receiverS });
     const verdict = generosityEV({
-      giverId, receiverId, kind: 'grain_relief', now: tick,
+      giverId, receiverId, kind: 'grain_relief', now: tick, giverName: String(giverItem?.name || ''), receiverName: String(receiverItem?.name || ''),
       bond, history, conscience, strategy, faith, margin, commitment,
       routeRisk, domestic, reliefCountRecent, askFraction01, seatBond01,
       quadrantMod, lensMod,

@@ -23,6 +23,7 @@
  */
 
 import { newsVoiceCategory } from './newsVoice.js';
+import { tickCalendarLabel } from './humanizeEngineTokens.js';
 
 /** Local FNV-1a (the newsVoice idiom — each module keeps its own copy rather than
  *  import a sibling's table). @param {string} str @returns {number} */
@@ -56,6 +57,61 @@ const SECTION_OF = (() => {
   return m;
 })();
 
+/**
+ * C2 (bar 18, "the sundry monoculture"): the LETTER-LOCAL kind → section fallback.
+ * newsVoiceCategory deliberately classifies only the semantic impact-nature tokens
+ * (the candidateType walker LOCKS every promoted candidateType to NO crier voice,
+ * and the npc-agency-voice deferral is a recorded owner decision — this map must
+ * NEVER be folded into newsVoiceCategory). But the letter's SECTIONS are a
+ * different chokepoint: routing here dresses a beat under the right heading
+ * without giving it a crier line, so an ordinary realm's letter stops filing
+ * ninety percent of its record under "Of sundry other matters". Fires ONLY when
+ * newsVoiceCategory returned null; classified kinds keep their existing route
+ * (both pinned letter fixtures carry only classified kinds ⇒ byte-identical).
+ * Kinds deliberately left to sundry: the refusal receipts (queue_refused,
+ * realm_verb_refused), the generic stressor lifecycle (stressor_residual /
+ * _aftermath / _graduated / _wind_down, party_stressor_residual), and
+ * spatial_consequence — none carries a section-worthy nature on its face.
+ * Exported for the drift walker only (every key must be a genuinely minted kind).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const KIND_SECTION = Object.freeze({
+  // Of war and calamity.
+  war_mobilization: 'wars', war_conscription: 'wars', war_levy: 'wars', war_spoils: 'wars',
+  army_homecoming: 'wars', hostile_raid: 'wars', conquest: 'wars', siege_lifted: 'wars',
+  blockade_declared: 'wars', blockade_lifted: 'wars', field_battle: 'wars', sea_battle: 'wars',
+  intercept_ordered: 'wars', convoy_ordered: 'wars', reinforcement_ordered: 'wars',
+  intervention_ordered: 'wars', intervention: 'wars', intervention_clash: 'wars',
+  strategy_deploy: 'wars', occupation_lifted: 'wars', occupation_vassalized: 'wars',
+  vassal_rebellion: 'wars', cold_war_supply_sanctions: 'wars', ally_burden: 'wars',
+  settlement_terminal_death: 'wars',
+  // Of courts and crowns (power, judgment, and persons of note).
+  coup_succeeded: 'courts', coup_suppressed: 'courts', faction_government_challenge: 'courts',
+  faction_rival_power_contest: 'courts', faction_capture: 'courts', faction_exhaustion: 'courts',
+  hierarchy_cascade: 'courts', assize_verdict: 'courts', diplomacy: 'courts',
+  vassal_tribute_extraction: 'courts', reconsideration_forced: 'courts',
+  commons_gathering: 'courts', commons_petition: 'courts', commons_riot: 'courts',
+  npc_goal_culmination: 'courts', npc_goal_rebranch: 'courts', npc_growth: 'courts',
+  npc_ladder: 'courts', npc_contest: 'courts', npc_support: 'courts',
+  // Of trade and fortune (goods, roads, harvests, and the moving of peoples).
+  flow_trade_scarcity: 'trade', trade_embargo_collapse: 'trade', resource_discovery: 'trade',
+  resource_depletion: 'trade', resource_recovery: 'trade', resource_removal: 'trade',
+  harvest: 'trade', hungry_gap: 'trade', spring_thaw: 'trade', roads: 'trade',
+  urban_fabric: 'trade', institution_build: 'trade', institution_closure: 'trade',
+  institution_founding: 'trade', settlement_resettled: 'trade', flow_migration: 'trade',
+  population_emigration: 'trade', migration_flight: 'trade',
+  generosity_credit_default: 'trade', generosity_purchase: 'trade', generosity_trade_overture: 'trade',
+  // Of faith and custom.
+  faith_foothold_recruited: 'traditions', faith_pact_formed: 'traditions',
+  pantheon_ascendancy: 'traditions', pantheon_twilight: 'traditions',
+  tradition: 'traditions', tradition_change: 'traditions', moral_reckoning: 'traditions',
+  belief_misjudgment: 'traditions', cause_lifecycle: 'traditions',
+  stressor_birth_religious_conversion_fracture: 'traditions',
+  stressor_birth_religious_pact_betrayal: 'traditions',
+  // Of mercy given (relief granted and relief refused — the succor floor's own pair).
+  generosity_refusal: 'mercy', generosity_refuge: 'mercy',
+});
+
 /** Greeting variants (FNV-picked by the diff's own fingerprint — deterministic). */
 const GREETINGS = Object.freeze([
   'To the keeper of this realm, greetings. Since last I wrote, the following came to pass.',
@@ -76,6 +132,15 @@ const QUIET = Object.freeze([
 ]);
 const DEEPENED_LEAD = 'The world itself has deepened since last we spoke — new currents now run beneath it:';
 
+/** C2 (bar 97, "claims completeness it cannot keep"): the honest line the letter
+ *  carries when the capped feed has provably shed beats older than the read floor.
+ *  Rendered only when `truncated` is true (both pinned fixtures: never). */
+const TRUNCATION_NOTE = 'Some older matters outran my pages before this letter was writ; the record here begins where my keeping does.';
+
+/** The feed's entry cap — mirrors wizardNews.js MAX_ENTRIES (the display sidecar
+ *  idiom: no engine import; the test pins the two constants against drift). */
+const FEED_CAP = 240;
+
 /** WIZARD_NEWS significance ⇒ order weight (MAJOR before NOTABLE). */
 const SIG_WEIGHT = { major: 0, notable: 1 };
 
@@ -94,6 +159,8 @@ export function enabledFlagsOf(simulationRules) {
  * @property {string} headline
  * @property {string} summary
  * @property {'major'|'notable'} significance
+ * @property {number} [repeats]   C2: >1 ⇒ this line stood verbatim N times in the span
+ * @property {{ headline: string, when: string }|null} [recalls]  C2: the older record this beat echoes
  */
 
 /**
@@ -105,6 +172,8 @@ export function enabledFlagsOf(simulationRules) {
  * @property {Array<{ id: string, heading: string, lines: LetterLine[] }>} sections
  * @property {{ flags: string[], lead: string }|null} deepened   R-16 (null ⇒ dark)
  * @property {string} closing
+ * @property {boolean} [truncated]   C2: present (true) only when the capped feed provably shed pre-floor beats
+ * @property {string|null} [truncationNote]  C2: present only beside truncated
  * @property {{ major: number, notable: number, total: number }} counts
  */
 
@@ -119,7 +188,74 @@ export function enabledFlagsOf(simulationRules) {
  * @property {string} [summary]
  * @property {string} [impactKind]
  * @property {string} [channelType]
+ * @property {ReadonlyArray<string>} [settlementIds]
  */
+
+/** The section a raw feed entry routes to: the crier category first (unchanged
+ *  precedence), the letter-local kind map only where the crier stayed silent.
+ *  @param {LetterNewsEntry|undefined} raw @returns {string} */
+function sectionOfEntry(raw) {
+  const cat = newsVoiceCategory(raw || {});
+  return SECTION_OF[String(cat)] || KIND_SECTION[String(raw?.impactKind || '')] || 'sundry';
+}
+
+/**
+ * C2 (misc, "identical sentences repeat up to 4x"): collapse verbatim duplicate
+ * lines WITHIN a section — same headline and same summary — keeping the first
+ * (highest-sorted) and counting the rest on it as `repeats`. A person keeping a
+ * record notes a matter once and says it recurred; a machine log prints it four
+ * times. Deterministic (input already sorted); lines that differ at all survive.
+ * @param {LetterLine[]} lines  sorted section lines
+ * @returns {LetterLine[]}
+ */
+function coalesceLines(lines) {
+  /** @type {Map<string, LetterLine>} */
+  const seen = new Map();
+  /** @type {LetterLine[]} */
+  const out = [];
+  for (const l of lines) {
+    const key = `${l.headline}\u241F${l.summary}`;
+    const kept = seen.get(key);
+    if (kept) { kept.repeats = (kept.repeats || 1) + 1; continue; }
+    seen.set(key, l);
+    out.push(l);
+  }
+  return out;
+}
+
+/**
+ * C2 (bar 20): the older record a section lead echoes — the newest pre-floor
+ * beat still in the feed that shares a settlement with the lead and routes to
+ * the same section. Deterministic: majors first, then newest tick, then id.
+ * @param {LetterNewsEntry|undefined} lead  the lead line's raw feed entry
+ * @param {string} sectionId
+ * @param {ReadonlyArray<LetterNewsEntry>} entries  the whole feed
+ * @param {number} since  the read floor
+ * @returns {{ headline: string, when: string }|null}
+ */
+function recallFor(lead, sectionId, entries, since) {
+  if (!lead || typeof lead !== 'object') return null;
+  const leadPlaces = new Set((Array.isArray(lead.settlementIds) ? lead.settlementIds : []).map(String));
+  if (leadPlaces.size === 0) return null;
+  /** @type {LetterNewsEntry|null} */
+  let best = null;
+  for (const e of entries) {
+    if (!e || typeof e !== 'object') continue;
+    const tick = Number.isFinite(e.tick) ? Math.floor(Number(e.tick)) : null;
+    if (tick == null || tick > since) continue;               // only the already-read past
+    if (!e.headline || String(e.id ?? '') === String(lead.id ?? '')) continue;
+    if (sectionOfEntry(e) !== sectionId) continue;
+    const places = Array.isArray(e.settlementIds) ? e.settlementIds : [];
+    if (!places.some((p) => leadPlaces.has(String(p)))) continue;
+    if (best == null) { best = e; continue; }
+    const sw = (/** @type {LetterNewsEntry} */ x) => (x.significance === 'major' ? 0 : 1);
+    const bt = Math.floor(Number(best.tick) || 0);
+    if (sw(e) < sw(best) || (sw(e) === sw(best) && (tick > bt
+      || (tick === bt && byStr(String(e.id ?? ''), String(best.id ?? '')) < 0)))) best = e;
+  }
+  if (!best) return null;
+  return { headline: String(best.headline), when: tickCalendarLabel(Math.floor(Number(best.tick) || 0)) };
+}
 
 /**
  * Compose the chronicler's letter for a campaign, deterministically.
@@ -159,8 +295,7 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
   const bySection = new Map();
   const rawById = new Map(entries.filter((e) => e && typeof e === 'object').map((e) => [String(e.id ?? ''), e]));
   for (const l of diff) {
-    const cat = newsVoiceCategory(rawById.get(l.id) || {});
-    const sectionId = SECTION_OF[String(cat)] || 'sundry';
+    const sectionId = sectionOfEntry(rawById.get(l.id));
     if (!bySection.has(sectionId)) bySection.set(sectionId, []);
     (bySection.get(sectionId) || []).push(l);
   }
@@ -168,16 +303,39 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
     .map((s) => ({
       id: s.id,
       heading: s.heading,
-      lines: (bySection.get(s.id) || []).sort((a, b) =>
+      lines: coalesceLines((bySection.get(s.id) || []).sort((a, b) =>
         (SIG_WEIGHT[a.significance] - SIG_WEIGHT[b.significance])
         || (b.tick - a.tick)
-        || byStr(a.id, b.id)),
+        || byStr(a.id, b.id))),
     }))
     .filter((s) => s.lines.length > 0);
+
+  // C2 (bar 20, "logs rather than narrates"): the cross-time join. For each
+  // section's LEAD line, look for the older record it echoes — a beat at or
+  // before the read floor, still held in the feed, sharing a settlement and the
+  // same section — and let the letter recall it. One recall per section keeps
+  // the device an inkwell, not a mechanism. Fixtures carry no pre-floor beats
+  // that qualify ⇒ byte-identical there.
+  // (Fields land on the model ONLY when lit — an inert letter stays byte-identical
+  // to the pre-C2 shape, which is what keeps the GREEN golden green.)
+  for (const s of sections) {
+    const lead = s.lines[0];
+    const recall = lead ? recallFor(rawById.get(lead.id), s.id, entries, since) : null;
+    if (lead && recall) lead.recalls = recall;
+  }
 
   const major = diff.filter((l) => l.significance === 'major').length;
   const counts = { major, notable: diff.length - major, total: diff.length };
   const empty = diff.length === 0;
+
+  // C2 (bar 97): the feed can only hold FEED_CAP beats; when it is full AND its
+  // oldest survivor post-dates the read floor by more than one tick, beats in the
+  // span were provably shed — the letter must not then claim completeness.
+  const oldestTick = entries.reduce((m, e) => {
+    const t = e && typeof e === 'object' && Number.isFinite(e.tick) ? Math.floor(Number(e.tick)) : null;
+    return t == null ? m : (m == null ? t : Math.min(m, t));
+  }, /** @type {number|null} */(null));
+  const truncated = entries.length >= FEED_CAP && oldestTick != null && oldestTick > since + 1;
 
   // R-16: the flag-set delta vs the recorded baseline. flagsSeen null ⇒ DARK (no
   // baseline ⇒ no deepened section; byte-identical to the pre-R-16 letter).
@@ -191,12 +349,19 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
   }
 
   // House-voice frame, FNV-picked by the diff's own fingerprint so the same letter
-  // reads the same every render, and two different weeks differ.
+  // reads the same every render, and two different weeks differ. A TRUNCATED span
+  // must not draw the completeness closing ("This is the whole of it, honestly
+  // kept") — the honest pool excludes it; the un-truncated pick is unchanged.
   const fp = fnv1a32(`${since}:${through}:${diff.map((l) => l.id).join(',')}`);
   const greeting = empty ? QUIET[fp % QUIET.length] : GREETINGS[fp % GREETINGS.length];
-  const closing = CLOSINGS[fp % CLOSINGS.length];
+  const closingPool = truncated ? CLOSINGS.filter((c) => !c.includes('the whole of it')) : CLOSINGS;
+  const closing = closingPool[fp % closingPool.length];
 
-  return { sinceTick: since, throughTick: through, empty, greeting, sections, deepened, closing, counts };
+  return {
+    sinceTick: since, throughTick: through, empty, greeting, sections, deepened, closing,
+    ...(truncated ? { truncated: true, truncationNote: TRUNCATION_NOTE } : {}),
+    counts,
+  };
 }
 
 /**
@@ -219,9 +384,15 @@ export function letterToPlainText(letter) {
     lines.push('');
     lines.push(s.heading.toUpperCase());
     for (const l of s.lines) {
-      lines.push(`  • ${l.headline}${l.significance === 'major' ? ' (of great moment)' : ''}`);
+      const tally = (l.repeats || 1) > 1 ? ` (so noted ${l.repeats} times)` : '';
+      lines.push(`  • ${l.headline}${l.significance === 'major' ? ' (of great moment)' : ''}${tally}`);
       if (l.summary) lines.push(`    ${l.summary}`);
+      if (l.recalls) lines.push(`    In this my earlier record returns, from ${l.recalls.when}: ${l.recalls.headline}.`);
     }
+  }
+  if (letter.truncationNote) {
+    lines.push('');
+    lines.push(letter.truncationNote);
   }
   lines.push('');
   lines.push(letter.closing);

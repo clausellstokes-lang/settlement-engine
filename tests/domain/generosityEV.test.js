@@ -412,3 +412,25 @@ describe('anti-vacuity — the machinery MOVES when lit', () => {
     expect(verdicts.size).toBeGreaterThanOrEqual(3);
   });
 });
+
+// ── C2 (misc): the receipt speaks NAMES, never raw save ids ──────────────────
+describe('C2 — generosityReceipt prefers display names over ids', () => {
+  const base = {
+    giverId: 'cs-b', receiverId: 'cs-c', now: 10,
+    giverName: 'Kaltenstadt', receiverName: 'Strathglen',
+    bond: { kind: 'allied', strength01: 0.8 },
+    margin: { storageMonths: 9, floorMonths: 2, seasonalOutlook01: 0.8 },
+    commitment: { warCommitted01: 0 },
+    conscience: { good01: 0.7, lawful01: 0.7, need01: 0.8 }, askFraction01: 0.4,
+  };
+  it('a gift receipt carries the receiver NAME, and no raw id', () => {
+    const v = generosityEV(base);
+    expect(v.receipt).toContain('Strathglen');
+    expect(v.receipt).not.toMatch(/cs-b|cs-c/);
+  });
+  it('a nameless caller still degrades to the id (fixtures keep working)', () => {
+    const { giverName, receiverName, ...noNames } = base;
+    const v = generosityEV(noNames);
+    expect(v.receipt).toContain('cs-c');
+  });
+});

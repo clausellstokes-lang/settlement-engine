@@ -66,7 +66,12 @@ describe('WhileYouWereAway digest banner', () => {
   test('surfaces a failure — never swallows it', () => {
     setStore({ livingCatchUp: { campaignId: 'camp-1', weeksCaughtUp: 2, capped: false, majors: [], error: 'kernel exploded' } });
     const { getByTestId } = render(<WhileYouWereAway campaignId="camp-1" />);
-    expect(getByTestId('while-you-were-away').textContent).toMatch(/snag.*kernel exploded/i);
+    const text = getByTestId('while-you-were-away').textContent;
+    // C2 (misc): the register sentence and the raw diagnostic are now SEPARATE —
+    // the sentence stays in the world's voice, the detail is still never swallowed.
+    expect(text).toMatch(/stopped early/i);
+    expect(text).toMatch(/kernel exploded/);
+    expect(text).not.toMatch(/stopped early[^.]*kernel exploded/i); // never spliced mid-sentence
   });
 
   test('notes when the catch-up was capped — and tells the TRUTH about the cap', () => {

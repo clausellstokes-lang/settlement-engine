@@ -59,6 +59,9 @@ import {
  * @property {string[]} keys
  * @property {ReadonlyArray<PulseOutcome>} receipts
  * @property {string[]} settlementIds
+ * @property {boolean} looseWeave  C2 (bar 2): true ⇒ the component is united ONLY by
+ *   shared ground (settlement-scale keys) across ≥2 distinct drama classes — beats
+ *   that shared a stage, not a demonstrated chain; the surface must not narrate an arc
  * @property {Array<{ id: string, dramaClass: string|null, sharedKeys: string[], inferred: boolean }>} [crossLinks]
  */
 
@@ -240,6 +243,43 @@ export function deltaFirst(nodes) {
 }
 
 /**
+ * C2 (bar 2, "threads conflate co-occurrence with causation"): the STRONG keys of a
+ * node — the identifiers that name an actor or a standing bond (npc, faction,
+ * relationship, stressor), never mere shared ground. A component whose members are
+ * united ONLY by settlement co-location across differing drama classes is a weave of
+ * proximity, and the surface must say so rather than narrate an arc.
+ * @param {ChronicleNode} n
+ * @returns {string[]}
+ */
+function strongKeysOf(n) {
+  const o = n.raw || {};
+  /** @type {string[]} */
+  const out = [];
+  const add = (/** @type {unknown} */ v) => { if (v != null && v !== '') out.push(String(v)); };
+  add(o.npcId); add(o.factionId); add(o.stressor?.id);
+  if (o.relationshipKey) { add(o.relationshipKey); for (const part of String(o.relationshipKey).split(/[:|>-]+/)) add(part); }
+  return out;
+}
+
+/** Whether a component is a LOOSE WEAVE: ≥2 beats, ≥2 distinct non-null drama
+ *  classes, and no strong key shared between any two members. @param {ChronicleNode[]} component */
+function isLooseWeave(component) {
+  if (component.length < 2) return false;
+  const classes = new Set(component.map(n => n.dramaClass).filter(Boolean));
+  if (classes.size < 2) return false;
+  /** @type {Map<string, number>} */
+  const owners = new Map();
+  for (let i = 0; i < component.length; i++) {
+    for (const k of strongKeysOf(component[i])) {
+      const first = owners.get(k);
+      if (first != null && first !== i) return false; // a strong key spans two beats ⇒ a real chain
+      if (first == null) owners.set(k, i);
+    }
+  }
+  return true;
+}
+
+/**
  * Build one THREAD (§2) from a connected component: title (register-safe persisted
  * headline of the most-severe beat), typed drama class, a structural arc
  * (began/turned/stands), key beats, and the receipts beneath. Deterministic.
@@ -270,6 +310,7 @@ function buildThread(component) {
     keys: [...keys].sort(byStr),
     receipts: beats.map(n => n.raw),
     settlementIds: [...keys].filter(k => !String(k).includes(':')).sort(byStr),
+    looseWeave: isLooseWeave(component),
   };
 }
 
@@ -391,6 +432,42 @@ export function hasChronicle(worldState) {
 }
 
 /**
+ * C2 (misc, "outcome+impact node pairs render as doubled rows"): the interval's
+ * collapsed record can carry the SAME event twice — once in selectedOutcomes and
+ * once in impactDigest, with identical persisted headline+summary — and the reader
+ * then meets every such beat as two rows. Collapse the twins for the READER:
+ * the outcome (it carries decree/severity/receipt standing) absorbs the impact
+ * twin's entity keys, so graph linkage only tightens, never loosens. Records
+ * without twins pass through structurally byte-identical. Deterministic.
+ * @param {ChronicleNode[]} nodes  nodesFromRecord output (sorted by node id, so a
+ *   twin may arrive in either kind-order — both orders collapse to the outcome)
+ * @returns {ChronicleNode[]}
+ */
+function coalesceTwinNodes(nodes) {
+  /** @type {Map<string, number>} */
+  const byProse = new Map();
+  /** @type {ChronicleNode[]} */
+  const out = [];
+  for (const n of nodes) {
+    const key = `${n.headline}\u241F${n.summary}`;
+    const at = byProse.get(key);
+    const kept = at == null ? null : out[at];
+    if (kept && kept.kind !== n.kind) {
+      // A twin pair — keep the OUTCOME (whichever side it arrived on) and union
+      // the absorbed twin's keys into it (sorted, deduped).
+      const outcome = kept.kind === 'outcome' ? kept : n;
+      const absorbed = kept.kind === 'outcome' ? n : kept;
+      outcome.keys = [...new Set([...outcome.keys, ...absorbed.keys])].sort(byStr);
+      out[/** @type {number} */(at)] = outcome;
+      continue;
+    }
+    byProse.set(key, out.length);
+    out.push(n);
+  }
+  return out;
+}
+
+/**
  * THE ZOOM PYRAMID (§1) for ONE advance entry. Threads are extracted (§2), the
  * delta-first summary (§3) and deputy's diary (§4) derived, chapters framed by
  * the seasons crossed, events surfaced as the receipts. `altitudes` is the
@@ -405,7 +482,8 @@ export function hasChronicle(worldState) {
 export function chronicleForAdvance(entry, provenance) {
   if (!entry || !entry.record) return null;
   const edges = buildRecordedEdges(provenance);
-  const nodes = nodesFromRecord(entry.record);
+  const rawNodes = nodesFromRecord(entry.record);
+  const nodes = coalesceTwinNodes(rawNodes);
   const components = connectedComponents(nodes, edges);
   const threads = components
     .map(buildThread)
@@ -413,7 +491,9 @@ export function chronicleForAdvance(entry, provenance) {
     .sort((a, b) => classRank(a.dramaClass) - classRank(b.dramaClass) || byStr(a.id, b.id));
   const links = crossLinksFor(threads, edges);
   for (const t of threads) t.crossLinks = links.get(t.id) || [];
-  const delta = deltaFirst(nodes);
+  // Deltas aggregate over the RAW nodes — coalescing is a READER-facing collapse
+  // (twin rows), never a change to what the advance did.
+  const delta = deltaFirst(rawNodes);
   const diary = deputysDiary(threads);
   const chapters = chapterSeasons(entry.prevTick, entry.tick);
   return {

@@ -25,9 +25,13 @@ import RealmForecast from './RealmForecast.jsx';
 // dismissible through the unified sf:guidance store.
 const DOCKET_WHISPER_ID = 'realm_docket_teaching';
 
-function entryLabel(event) {
+// C2 (misc, "raw save ids in narrative prose"): the target renders by NAME when the
+// docket can resolve it; an unresolvable id never reaches the reader — the verb
+// stands alone rather than dressed with a raw save id.
+function entryLabel(event, resolveTargetName) {
   const base = event?.type ? String(event.type).replace(/_/g, ' ').toLowerCase() : 'change';
-  const target = event?.payload?.label || event?.targetId;
+  const target = event?.payload?.label
+    || (event?.targetId != null ? resolveTargetName?.(event.targetId) : null);
   return target ? `${base}: ${target}` : base;
 }
 
@@ -107,7 +111,7 @@ export default function RealmDocket({ campaign }) {
                   {name}
                 </span>
                 <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
-                  {entryLabel(item.event)}
+                  {entryLabel(item.event, (id) => settlementById.get(String(id))?.name || null)}
                   {lapsed && (
                     <>
                       <span style={{

@@ -370,6 +370,8 @@ export function dependencyTerm(reliefCountRecent = 0) {
  * @typedef {Object} GenerosityInputs
  * @property {string} giverId
  * @property {string} receiverId
+ * @property {string} [giverName]    display name for the receipt's prose (C2 — ids never reach the reader)
+ * @property {string} [receiverName] display name for the receipt's prose
  * @property {string} [kind]        the instrument kind (default 'grain_relief')
  * @property {number} now           tick-time
  * @property {BondRead|null} [bond]
@@ -551,6 +553,7 @@ export function generosityEV(inputs) {
     terms,
     receipt: generosityReceipt({
       verdict, giverId: String(inputs?.giverId ?? ''), receiverId: String(inputs?.receiverId ?? ''),
+      giverName: String(inputs?.giverName ?? ''), receiverName: String(inputs?.receiverName ?? ''),
       terms, strategicOverride: strategicOverrideActive && wouldRefuse, leverageIntent,
     }),
   };
@@ -745,13 +748,16 @@ export function triageAllocation({ claimants, budget01, lawfulness01 = 0.5, cons
  * The dominant deciding term drives the receipt's voice — the loaded dice narrated
  * (design §2.3: "Thornwall's granaries stayed shut: the army at the front eats first" /
  * "Grain went to Marchmont — the old debt from the flood-year, and their pass shields the
- * valley"). Pure, deterministic.
- * @param {{ verdict: string, giverId: string, receiverId: string, terms: { bond: number, history: number, conscience: number, strategy: number, faith: number, margin: number, commitment: number, route: number, domestic: number, dependency: number }, strategicOverride: boolean, leverageIntent: number }} a
+ * valley"). Pure, deterministic. C2 (misc, "raw save ids in narrative prose"): the
+ * receipt speaks settlement NAMES when the caller supplies them (giverName/
+ * receiverName ride GenerosityInputs from the kernel, which holds the items); the
+ * id is only the last-resort stand-in for a nameless caller (fixtures/tests).
+ * @param {{ verdict: string, giverId: string, receiverId: string, giverName?: string, receiverName?: string, terms: { bond: number, history: number, conscience: number, strategy: number, faith: number, margin: number, commitment: number, route: number, domestic: number, dependency: number }, strategicOverride: boolean, leverageIntent: number }} a
  * @returns {string}
  */
-export function generosityReceipt({ verdict, giverId, receiverId, terms, strategicOverride, leverageIntent }) {
-  const g = giverId || 'the giver';
-  const r = receiverId || 'the receiver';
+export function generosityReceipt({ verdict, giverId, receiverId, giverName, receiverName, terms, strategicOverride, leverageIntent }) {
+  const g = giverName || giverId || 'the giver';
+  const r = receiverName || receiverId || 'the receiver';
   if (verdict === VERDICTS.REFUSE) {
     // Name the dominant withhold term.
     if (terms.commitment >= terms.margin && terms.commitment >= terms.route && terms.commitment > 0.2) {

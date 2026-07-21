@@ -91,7 +91,8 @@ describe('WizardNewsPanel chronicle', () => {
     requestSpy.mockRejectedValue(new Error('kaboom'));
     render(<WizardNewsPanel campaign={campaignWith(SKEWED_FEED)} />);
     fireEvent.click(screen.getByRole('button', { name: /chronicle/i }));
-    expect(await screen.findByText(/Chronicle generation failed/i)).toBeTruthy();
+    // C2 (bar 18): the failure copy now speaks in the register (errors.chronicleFail).
+    expect(await screen.findByText(/set down the pen/i)).toBeTruthy();
     const button = screen.getByRole('button', { name: /chronicle/i });
     expect(button.disabled).toBe(false);
     expect(appendSpy).not.toHaveBeenCalled();
