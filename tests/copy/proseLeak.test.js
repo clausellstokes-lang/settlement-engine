@@ -21,8 +21,23 @@
  * The entries below are REAL, KNOWN debt in the chronicler's letter composer,
  * deliberately left in place because fixing them shifts the GREEN
  * chroniclersLetterGolden — that re-record is owner-gated (the ONE-REGEN queue).
+ *
+ * E-E EXTENSION (docs/THE_APLUS_EXECUTION_ARCHITECTURE.md §E-E): the above only
+ * ever scanned COMPOSER OUTPUT (letter/worldBook/chronicle/decrees) — it never
+ * looked at src/**\/*.jsx component source, where a leak could be hardcoded
+ * directly into a component's JSX text or attributes instead of composed
+ * dynamically. The "component JSX engine-token scan" describe block below
+ * closes that gap with the same 4 non-punctuation detectors (flagKey, tick,
+ * week, schema, rawId — emDash is intentionally OUT of scope here: it stays
+ * voiceMechanics.test.js's Tier 3, so the same violation is never asserted
+ * twice under two different budgets) via a real JSX-aware AST walk
+ * (tests/helpers/jsxLiteralWalk.js — same parser voiceMechanics Tier 3 uses).
+ * SHRINK-ONLY, baselined in tests/copy/.prose-leak-jsx-baseline.json.
  */
 import { describe, expect, it } from 'vitest';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { composeChroniclersLetter, letterToPlainText } from '../../src/domain/display/chroniclersLetter.js';
 import { collectWorldBook } from '../../src/utils/generateWorldBook.js';
@@ -30,6 +45,11 @@ import { advanceEntries } from '../../src/domain/display/chronicleGraph.js';
 import { chronicleForAdvance } from '../../src/domain/display/chronicleReadModel.js';
 import { decreesForAdvance } from '../../src/domain/display/decreeTracker.js';
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
+import { extractJsxProseStrings, scanJsxTree } from '../helpers/jsxLiteralWalk.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+const JSX_BASELINE_PATH = join(ROOT, 'tests/copy/.prose-leak-jsx-baseline.json');
+const UPDATE = process.env.UPDATE_VOICE_BASELINE === '1';
 
 // ── The flag-key set (live from simulationRules.js — new flags auto-covered) ──
 const FLAG_KEYS = (() => {
@@ -245,5 +265,120 @@ describe('E1 — no engine token reaches reader prose (shrink-only ratchet)', ()
     it('does NOT flag the sanctioned `week k of N` span idiom or calendar dates', () => {
       expect(scan(['landed in week 3 of 13, in the winter of year 2'])).toEqual([]);
     });
+  });
+});
+
+// ── E-E: the JSX extension — engine-token leaks hardcoded into components ────
+// The 4 non-punctuation detector classes (flagKey/tick/week/schema/rawId) run
+// against the SAME string surfaces voiceMechanics Tier 3 extracts (JSXText,
+// string Literal, template-cooked-segment) across every src/**/*.jsx file.
+// emDash is deliberately excluded — voiceMechanics.test.js Tier 3 already
+// owns that ban for JSX so it is never double-counted under two budgets.
+const JSX_TOKEN_DETECTORS = { flagKey: DETECTORS.flagKey, tick: DETECTORS.tick, week: DETECTORS.week, schema: DETECTORS.schema, rawId: DETECTORS.rawId };
+
+/** @param {string[]} strings @returns {{flagKey:number,tick:number,week:number,schema:number,rawId:number}} */
+function countJsxTokenLeaks(strings) {
+  const counts = { flagKey: 0, tick: 0, week: 0, schema: 0, rawId: 0 };
+  for (const s of strings) {
+    for (const [name, detect] of Object.entries(JSX_TOKEN_DETECTORS)) {
+      counts[name] += detect(s).length;
+    }
+  }
+  return counts;
+}
+
+const JSX_SCAN = scanJsxTree(join(ROOT, 'src'), ROOT);
+
+/** @type {Record<string, {flagKey:number,tick:number,week:number,schema:number,rawId:number}>} */
+const currentJsxLeaks = {};
+for (const { rel, strings } of JSX_SCAN) {
+  const c = countJsxTokenLeaks(strings);
+  if (Object.values(c).some((n) => n > 0)) currentJsxLeaks[rel] = c;
+}
+
+if (UPDATE) {
+  writeFileSync(JSX_BASELINE_PATH, JSON.stringify(currentJsxLeaks, null, 1) + '\n');
+}
+
+const ZERO_LEAKS = { flagKey: 0, tick: 0, week: 0, schema: 0, rawId: 0 };
+
+describe('E-E proseLeak JSX extension — component engine-token ratchet (shrink-only)', () => {
+  it('the committed JSX baseline exists', () => {
+    expect(
+      existsSync(JSX_BASELINE_PATH),
+      'baseline missing — for an APPROVED sweep run: UPDATE_VOICE_BASELINE=1 npx vitest run tests/copy/proseLeak.test.js',
+    ).toBe(true);
+  });
+
+  it('per-file JSX engine-token debt exactly matches the baseline (grew ⇒ humanize it; fell ⇒ bank the win)', () => {
+    /** @type {Record<string, {flagKey:number,tick:number,week:number,schema:number,rawId:number}>} */
+    const baseline = JSON.parse(readFileSync(JSX_BASELINE_PATH, 'utf8'));
+    /** @type {string[]} */
+    const diffs = [];
+    const keys = new Set([...Object.keys(baseline), ...Object.keys(currentJsxLeaks)]);
+    for (const k of [...keys].sort()) {
+      const b = baseline[k] || ZERO_LEAKS;
+      const c = currentJsxLeaks[k] || ZERO_LEAKS;
+      const changed = Object.keys(ZERO_LEAKS).some((d) => b[d] !== c[d]);
+      if (changed) {
+        diffs.push(`${k}: baseline ${JSON.stringify(b)} → current ${JSON.stringify(c)}`);
+      }
+    }
+    expect(diffs, `\n${diffs.join('\n')}\n`).toEqual([]);
+  });
+
+  it('total JSX engine-token debt never grows past its committed budget', () => {
+    // FINDING (E-E build, 2026-07-21): the measured floor is 29 flagKey hits
+    // across exactly 3 files (src/components/map/SimulationRulesAxes.jsx,
+    // SimulationRulesDialog.jsx, src/components/settlements/LivingWorldGates.jsx)
+    // and ZERO tick/week/schema/rawId leaks anywhere in components. Read all 3
+    // before assuming these are leaks: every one is SETTINGS/GATING UI — a
+    // flag-key -> human-label toggle table (e.g. `['momentumEnabled',
+    // 'Momentum', '...']`) or a gates array (`key: 'warLayerEnabled'`) — where
+    // displaying the real flag key is the CORRECT behavior (it is a config
+    // editor, not narrative prose). E1's own ban is scoped to READER PROSE
+    // reached through a composer; a settings panel is a different surface with
+    // a different contract. Kept as real, uninspected debt rather than
+    // special-cased by directory (that would be a judgment call outside this
+    // enforcer's mandate) — but recorded here so nobody re-discovers it as a
+    // mystery. NEVER raise.
+    const BUDGET = { flagKey: 29, tick: 0, week: 0, schema: 0, rawId: 0 };
+    const totals = Object.values(currentJsxLeaks).reduce((t, c) => {
+      for (const k of Object.keys(ZERO_LEAKS)) t[k] += c[k];
+      return t;
+    }, { ...ZERO_LEAKS });
+    for (const k of Object.keys(ZERO_LEAKS)) {
+      expect(totals[k], `${k}: ${totals[k]} > budget ${BUDGET[k]}`).toBeLessThanOrEqual(BUDGET[k]);
+    }
+  });
+
+  it('the JSX detectors discriminate (positive control): catches a seeded leak in JSX text and stays quiet on clean JSX', () => {
+    const seeded = [
+      "import React from 'react';",
+      'export function Seed() {',
+      '  return (',
+      '    <p>',
+      '      The warLayerEnabled flag lit at tick 12 in week 3 for npc_4',
+      '      (candidate.npc.goal_culmination.x.9) — goalProgress rose.',
+      '    </p>',
+      '  );',
+      '}',
+    ].join('\n');
+    const strings = extractJsxProseStrings(seeded);
+    expect(strings).not.toBeNull();
+    const counts = countJsxTokenLeaks(/** @type {string[]} */ (strings));
+    expect(counts.flagKey).toBeGreaterThanOrEqual(1);
+    expect(counts.tick).toBeGreaterThanOrEqual(1);
+    expect(counts.week).toBeGreaterThanOrEqual(1);
+    expect(counts.schema).toBeGreaterThanOrEqual(1);
+    expect(counts.rawId).toBeGreaterThanOrEqual(1);
+  });
+
+  it('does NOT flag clean JSX with no engine tokens', () => {
+    const clean = 'export const Seed = () => <p>plain, clean, no tells</p>;';
+    const strings = extractJsxProseStrings(clean);
+    expect(strings).not.toBeNull();
+    const counts = countJsxTokenLeaks(/** @type {string[]} */ (strings));
+    expect(counts).toEqual(ZERO_LEAKS);
   });
 });

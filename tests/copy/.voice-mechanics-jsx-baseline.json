@@ -1,0 +1,534 @@
+{
+ "src/App.jsx": {
+  "em": 1,
+  "bang": 3
+ },
+ "src/components/CompendiumPanel.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/GalleryDescriptionEditor.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/HomeHero.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/HowToUse.jsx": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/components/PrivacySettings.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/PurchaseModal.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/SessionEvictedBanner.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/SettlementsPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/ShareToGallery.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/SingleDossierSuccessPage.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/WorldPage.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/account/AccountAiKeysSection.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/account/AccountEmailPreferencesSection.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/account/AccountPurchaseHistoryPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/account/AccountSeatTransferPanel.jsx": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/components/account/AiUsageDashboard.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/admin/AdminAnalyticsPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/admin/AdminClientErrorsPanel.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/auspice/AuspicePanel.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/compendium/CatalogHubs.jsx": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/components/compendium/CompendiumDashboard.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/compendium/CustomContent.jsx": {
+  "em": 11,
+  "bang": 0
+ },
+ "src/components/compendium/CustomContentGate.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/compendium/Dependencies.jsx": {
+  "em": 0,
+  "bang": 1
+ },
+ "src/components/compendium/RegistryHubs.jsx": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/components/dossier/EngineSections.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/founders/FoundersPage.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/gallery/CampaignPlayerView.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/gallery/GalleryCampaigns.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/gallery/GalleryHubPage.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/gallery/UnlistedShareBar.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/generate/FoundingWorlds.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/guidance/SurveyorGlossary.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/guidance/SurveyorNote.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/howto/AboutManifesto.jsx": {
+  "em": 30,
+  "bang": 0
+ },
+ "src/components/howto/ForgeExactDemo.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/howto/HandbookVoiced.jsx": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/components/instant/InstantWorldEntry.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/legal/BountyPage.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/legal/CovenantPage.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/legal/PrivacyPage.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/legal/TermsPage.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/map/AdvanceReport.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/AssignDeityFromMap.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/BeliefDivergenceBand.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/ChroniclersLetterPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/LayersPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/LiveWarStatus.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/OraclePanel.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/PlacementsLayer.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/RealmDashboard.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/RealmDocket.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/map/RealmForecast.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/map/RealmMobileGate.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/RealmVerbComposer.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/map/RoadScenePanel.jsx": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/components/map/SettlementPalette.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/SimulationRulesAxes.jsx": {
+  "em": 12,
+  "bang": 0
+ },
+ "src/components/map/SimulationRulesDialog.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/TimelapsePanel.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/map/TravelersLayer.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/map/TreatyPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/WarCausalBrief.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/WarResolveSection.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/WhileYouWereAway.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/WorldMapOverlays.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/WorldMapStage.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/map/WorldMapToolbar.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/map/WorldPulsePanel.jsx": {
+  "em": 9,
+  "bang": 0
+ },
+ "src/components/new/NpcLifecycleControls.jsx": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/components/new/SummaryTab.jsx": {
+  "em": 2,
+  "bang": 1
+ },
+ "src/components/new/npcComponents.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/new/tabs/DefenseTab.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/new/tabs/EconomicsTab.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/components/new/tabs/MarketPricesSection.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/new/tabs/NotesTab.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/new/tabs/OverviewTab.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/new/tabs/PowerTab.jsx": {
+  "em": 2,
+  "bang": 1
+ },
+ "src/components/new/tabs/RumorsTab.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/new/tabs/SteadingsSection.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/new/tabs/SubstrateTab.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/new/tabs/TraditionsTab.jsx": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/components/new/tabs/WarFaithTab.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/organic/samples/DossierSample.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/organic/samples/PricingSample.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/organic/samples/registry.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/components/primitives/InstitutionCard.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/primitives/LockedDestination.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/screen/DmScreen.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/session/SessionMode.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/settlement/EventComposer.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/components/settlement/ExportSheet.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/settlement/FaithSection.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/settlement/PendingIntentions.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/settlement/PhaseBadge.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/ApplyControls.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/ComposerNavigator.jsx": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/EditQueueBanner.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/EventComposerCorruptionFields.jsx": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/EventComposerTargetField.jsx": {
+  "em": 12,
+  "bang": 0
+ },
+ "src/components/settlement/eventComposer/PreviewPanel.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/settlements/CampaignImportPanel.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/settlements/LivingWorldGates.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/settlements/SettlementCard.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/surveyor/AutonomyPanel.jsx": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/components/surveyor/ConstructionPanel.jsx": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/components/surveyor/CorpusFactoryPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/surveyor/CustomContentPanel.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/surveyor/InterpretApplyPanel.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/surveyor/StyleOverhaulPanel.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/components/surveyor/surveyorPanelKit.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/tableLedger/TableLedgerPanel.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/components/temperament/TemperamentPicker.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/townMap/SettlementMapCards.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/townMap/SettlementMapEditControls.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/components/townMap/SettlementMapNotes.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/components/townMap/SettlementMapPane.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/components/townMap/fog/SettlementMapFogControls.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/pdf/primitives/Dense.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/pdf/primitives/StatTile.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/pdf/primitives/Visuals.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/pdf/sections/AIAppendix.jsx": {
+  "em": 2,
+  "bang": 1
+ },
+ "src/pdf/sections/Cover.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/pdf/sections/EconomicsTrade.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/pdf/sections/FaithWar.jsx": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/pdf/sections/HistoryFounding.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/pdf/sections/IdentityDailyLife.jsx": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/pdf/sections/PowerStructure.jsx": {
+  "em": 1,
+  "bang": 2
+ },
+ "src/pdf/sections/ResourcesProduction.jsx": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/pdf/sections/Traditions.jsx": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/pdf/sections/ViabilityAssessment.jsx": {
+  "em": 3,
+  "bang": 1
+ }
+}
