@@ -102,6 +102,49 @@ describe('drama-class registry — STRESSOR_CATALOG coverage (walker (c): the §
   });
 });
 
+describe('drama-class registry — the UNWIRED set is pinned shrink-only (C5 bar-10)', () => {
+  // The soak's honesty note (cacophonySoak.test.js) documents that the bypass
+  // producers are REGISTERED-BUT-NOT-WIRED by deliberate per-entry rationale —
+  // but until now nothing pinned the SET, so a future producer could land
+  // wired:false silently and the ungoverned surface would GROW with every gate
+  // green. This is the exact-set idiom: the list below may only SHRINK (a
+  // producer gets wired → remove it here in the same diff — a conscious act);
+  // a NEW unwired entry reds with its key named. Wiring itself is a product
+  // decision on the owner/domain lane — this pin only makes drift visible.
+  const UNWIRED_PINNED = Object.freeze([
+    'calamity_annual_strike',
+    'reframe_transition',
+    'religious_contest_flip',
+    'satellite_founded',
+    'settlement_resettled',
+    'settlement_terminal_death',
+    'upswing_flourishing',
+    'war_mobilization_open',
+  ]);
+
+  test('no NEW unwired producer beyond the pinned set (the ungoverned surface never grows silently)', () => {
+    const actual = Object.entries(DRAMA_CLASS_REGISTRY)
+      .filter(([, e]) => !e.wired)
+      .map(([k]) => k)
+      .sort();
+    const novel = actual.filter((k) => !UNWIRED_PINNED.includes(k));
+    expect(
+      novel,
+      `new REGISTERED-BUT-NOT-WIRED producer(s): ${novel.join(', ')} — either wire the producer through the governor seam (dramaClassOf requires wired:true) or make the deferral a visible, reviewed act by extending UNWIRED_PINNED with the rationale recorded in decisionTier.js`,
+    ).toEqual([]);
+  });
+
+  test('no stale pin: every pinned key still exists and is still unwired (wiring ratchets the pin down)', () => {
+    const stale = [];
+    for (const key of UNWIRED_PINNED) {
+      const entry = DRAMA_CLASS_REGISTRY[key];
+      if (!entry) stale.push(`${key}: no longer in the registry — remove it from UNWIRED_PINNED`);
+      else if (entry.wired) stale.push(`${key}: now wired:true — remove it from UNWIRED_PINNED (lock the win in)`);
+    }
+    expect(stale, `\n${stale.join('\n')}`).toEqual([]);
+  });
+});
+
 describe('dramaClassOf — the runtime classifier honours the registry', () => {
   test('a wired seam producer classifies to its registered class', () => {
     expect(dramaClassOf({ candidateType: 'stressor_birth_famine' })).toBe('economic_shock');
