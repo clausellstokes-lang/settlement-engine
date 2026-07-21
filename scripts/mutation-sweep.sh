@@ -17,6 +17,16 @@
 # spine. Every area now re-runs its gate on the REVERTED (clean) tree: the red
 # must be ATTRIBUTABLE to the mutation (mutated=red AND clean=green). A gate
 # that is red either way is reported as GATE-BROKEN, not CAUGHT.
+#
+# E-A TOTALITY (A+ tranche 2): this sweep is one half of the mutation-coverage
+# contract. The other half is scripts/mutation-coverage-manifest.json — every
+# correctness-asserting invariant test file in the suite is enumerated there and
+# must carry either a planted mutation below (kind:"mutation", label matching a
+# check_caught* call here) or a documented rationale / baselined-uncovered entry.
+# tests/lint/mutationCoverageManifest.test.js enforces the pairing BOTH ways:
+# a label below with no manifest entry reds, a manifest "mutation" claim with no
+# label below reds, and a NEW invariant file with no manifest entry reds. Keep
+# labels stable — they are the join key.
 cd "$(dirname "$0")/.." || exit 2
 PASS=0; FAIL=0
 results=()
@@ -38,6 +48,8 @@ MUTATED_FILES=(
   src/lib/saves.js
   eslint.config.js
   supabase/config.toml
+  src/App.jsx
+  scripts/mutation-coverage-manifest.json
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -80,6 +92,35 @@ check_caught_missing() {
   $check >/dev/null 2>&1; local clean=$?
   if [ "$clean" -ne 0 ]; then
     results+=("BROKEN  GAP  $label  (gate red even with the file restored)"); FAIL=$((FAIL+1))
+  elif [ "$code" -ne 0 ]; then
+    results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
+  else
+    results+=("MISSED  GAP  $label  (gate stayed green)"); FAIL=$((FAIL+1))
+  fi
+}
+
+# check_caught_planted <label> <path> <content> <check-cmd>
+# Variant for areas whose mutation is "a NEW offending artifact LANDED" (a
+# migration without RLS, an unmetered edge function). Writes <content> to <path>
+# (creating parent dirs), expects red, deletes it (and any dir it created),
+# expects green. The planted path must not previously exist — refuses otherwise
+# so it can never delete a real file.
+check_caught_planted() {
+  local label="$1" file="$2" content="$3" check="$4"
+  if [ -e "$file" ]; then
+    results+=("BROKEN  GAP  $label  (planted path already exists — refusing to overwrite: $file)"); FAIL=$((FAIL+1))
+    return
+  fi
+  local dir; dir="$(dirname "$file")"
+  local made_dir=0
+  if [ ! -d "$dir" ]; then mkdir -p "$dir"; made_dir=1; fi
+  printf '%s\n' "$content" > "$file"
+  $check >/dev/null 2>&1; local code=$?
+  rm -f "$file"
+  if [ "$made_dir" -eq 1 ]; then rmdir "$dir" 2>/dev/null; fi
+  $check >/dev/null 2>&1; local clean=$?
+  if [ "$clean" -ne 0 ]; then
+    results+=("BROKEN  GAP  $label  (gate red even with the planted file removed)"); FAIL=$((FAIL+1))
   elif [ "$code" -ne 0 ]; then
     results+=("CAUGHT  ok   $label"); PASS=$((PASS+1))
   else
@@ -151,13 +192,80 @@ check_caught_missing "security/runIf migration renumber" supabase/migrations/087
 perl -0pi -e "s/\[functions.account-actions\]\nverify_jwt = true/[functions.account-actions]\nverify_jwt = false/" supabase/config.toml
 check_caught "security/verify_jwt platform gate loosened" supabase/config.toml "npx vitest run tests/edgeFunctions/verifyJwtPins.test.js"
 
+# ── E-A totality areas (14-22) — one planted mutation per invariant family the
+# ── first 13 left unproven; see scripts/mutation-coverage-manifest.json ───────
+
+# 14. Size ratchet — a baselined file grows ONE effective line past its frozen
+#     tolerance-0 ceiling (App.jsx is frozen at its exact current count; the
+#     baseline-honesty test must red on any drift, either direction).
+printf '\nconst _mutSizeSweep = 1;\n' >> src/App.jsx
+check_caught "size-ratchet/App.jsx grows past frozen ceiling" src/App.jsx "npx vitest run tests/lint/sizeBaseline.test.js"
+
+# 15. Domain strict ratchet — a new implicit-any strict error lands in the
+#     strict-clean domain kernel (ceiling 0). Gate = the enforcing script
+#     itself, run bare (never piped — exit code is the signal).
+printf '\nexport function _mutStrictProbe(q) { return q; }\n' >> src/domain/userEdits.js
+check_caught "domain-strict/new implicit-any error" src/domain/userEdits.js "node scripts/check-domain-strict.mjs"
+
+# 16. Committed-secrets scan — a synthetic AWS access-key shape lands in a
+#     tracked text file (the scanner reads the working tree of tracked files,
+#     so the uncommitted mutation is exactly what it must catch).
+#     ⚠ The probe is built by CONCATENATION (the scanner's own idiom): this
+#     script is itself a tracked text file in the scan corpus, so a contiguous
+#     key literal here would red the gate on the CLEAN tree (proven: the first
+#     totality run scored this area BROKEN for exactly that reason).
+printf '\nmutation probe: %s\n' "AKIA""ABCDEFGHIJKLMNOP" >> ARCHITECTURE.md
+check_caught "secrets/committed AWS key shape" ARCHITECTURE.md "npx vitest run tests/security/committedSecretsScan.test.js"
+
+# 17. Whole-schema RLS census — a migration CREATES a public table and never
+#     enables row level security (the unauthorized-access habitat).
+check_caught_planted "security/public table without RLS" \
+  supabase/migrations/zzz_mutation_sweep_probe.sql \
+  "create table public.zzz_mutsweep_probe (id uuid primary key);" \
+  "npx vitest run tests/security/publicTableRlsCensus.test.js"
+
+# 18. AI metering census — a new edge function spends credits with NO
+#     ai_usage_events insert (COGS burns invisibly; the census must red).
+check_caught_planted "ai-cost/unmetered spend_credits function" \
+  supabase/functions/zzz-mutsweep-probe/index.ts \
+  "const r = await supabase.rpc('spend_credits', { amount: 1 });" \
+  "npx vitest run tests/edgeFunctions/aiMeteringCensus.test.js"
+
+# 19. Determinism — a localeCompare CALL in a seeded producer tree (host-ICU
+#     collation forks same-seed worlds across devices/locales).
+printf '\nexport const _mutLocale = (a, b) => a.localeCompare(b);\n' >> src/generators/cascadeGenerator.js
+check_caught "determinism/localeCompare in generators" src/generators/cascadeGenerator.js "npx vitest run tests/lint/localeCompareGuard.test.js"
+
+# 20. Determinism — a transcendental (Math.pow) lands in the domain kernel
+#     (implementation-approximated per spec; forks same-seed worlds across
+#     ENGINES while same-engine goldens stay green).
+printf '\nexport const _mutTrans = Math.pow(2, 3);\n' >> src/domain/userEdits.js
+check_caught "determinism/transcendental Math.pow in domain" src/domain/userEdits.js "npx vitest run tests/lint/transcendentalMathBaseline.test.js"
+
+# 21. Voice mechanics — an exclamation point lands in a scanned prose string
+#     literal (the em-dash/'!' ban, shrink-only over src/data + src/domain).
+printf "\nexport const _mutVoice = 'sweep probe!';\n" >> src/data/stressTypes.js
+check_caught "voice/exclamation in scanned data prose" src/data/stressTypes.js "npx vitest run tests/copy/voiceMechanics.test.js"
+
+# 22. Type-hygiene ratchet — a JSDoc any-cast lands in the strict-clean domain
+#     (the suppression-debt counter must red on growth).
+printf '\n/** @type {any} */\nexport const _mutAny = 0;\n' >> src/domain/userEdits.js
+check_caught "type-hygiene/any-cast in domain" src/domain/userEdits.js "npx vitest run tests/lint/domainAnyCastBaseline.test.js"
+
+# 23. THE MANIFEST ITSELF — a mutation-coverage label is tampered into a phantom
+#     (claims coverage the sweep does not provide). The meta-test must red on
+#     both the phantom claim and the now-orphaned sweep label — proving the
+#     totality contract's own enforcer has teeth.
+perl -0pi -e "s/faction-key\/reversed name-precedence read/zzz-phantom-label/" scripts/mutation-coverage-manifest.json
+check_caught "meta/manifest label tampered" scripts/mutation-coverage-manifest.json "npx vitest run tests/lint/mutationCoverageManifest.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
 echo "────────────────────────────────────────────────────────"
 echo "  CAUGHT: $PASS    MISSED/BROKEN: $FAIL"
-if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml 2>/dev/null)" ]; then
-  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml
+if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml supabase/functions/ 2>/dev/null)" ]; then
+  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml supabase/functions/
 fi
 if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
 exit "$FAIL"

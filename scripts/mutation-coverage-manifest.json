@@ -1,0 +1,1215 @@
+{
+  "_doc": [
+    "E-A MUTATION-COVERAGE MANIFEST (A+ tranche 2, bar 1 CORRECTNESS).",
+    "Every correctness-asserting invariant test file (enumeration rule:",
+    "tests/lint/mutationCoverage.shared.mjs) must appear here with one of:",
+    "  kind:'mutation'  — a planted regression in scripts/mutation-sweep.sh proves the",
+    "                     invariant reds (label = the check_caught* label there);",
+    "  kind:'rationale' — a documented reason mutation-testing is redundant or",
+    "                     disproportionate (ref resolves in 'rationales' below);",
+    "  kind:'uncovered' — a known gap, counted against uncoveredBaseline (shrink-only,",
+    "                     exact-equality: drive toward 0 by upgrading entries).",
+    "The 'meta' section carries non-test-file invariants (eslint config bans) the",
+    "sweep proves directly. tests/lint/mutationCoverageManifest.test.js enforces:",
+    "new invariant with no entry REDS; stale entry REDS; label claims match the",
+    "sweep script bidirectionally; uncovered count matches the baseline exactly."
+  ],
+  "uncoveredBaseline": 199,
+  "rationales": {
+    "pglite-executed": "Executed-SQL boundary test: it loads the real migration SQL into pglite and asserts behavior by EXECUTION — the stronger form of proof this sweep approximates for source-scan invariants. Its mutation target is committed migration SQL; transiently mutating shared migration files risks discarding parallel-session work, and each pglite boot is heavy, so standing family-level mutation proof lives in the sweep areas security/runIf migration renumber, security/verify_jwt platform gate loosened, and security/public table without RLS. Per-suite mutation proofs were executed at build time (each suite’s Done-when in docs/A_PLUS_ROADMAP.md).",
+    "golden-byte-pin": "Same-seed golden byte/structure pin over the full seeded pipeline. Its catching power is exercised operationally: legitimate behavior shifts redden the affected goldens and are recorded in the golden-shift ledgers (docs/GOLDEN_SHIFT_LEDGER*.md). A synthetic planted mutation would need a hand-crafted behavior-changing kernel edit per golden plus two full pipeline runs each in the sweep — redundant proof at disproportionate cost.",
+    "self-proving-meta": "Guard-the-guard meta-test that injects its own broken fixtures (a fake failing tsc, a temp baseline) and asserts the enforcer reds — the mutation proof is embedded in the test body and executes on every suite run."
+  },
+  "invariants": {
+    "tests/build/ciCheckParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/components/covenantClaimsParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/components/dmPinsTierGate.test.jsx": {
+      "kind": "uncovered"
+    },
+    "tests/components/handbookClaimsParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/components/mapOverlayThumbContract.test.jsx": {
+      "kind": "uncovered"
+    },
+    "tests/components/privacyPolicyParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/components/surveyorGateParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/config/tierFacts.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/copy.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/landingClaimsParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/localeParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/noGmailCopy.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/pricingP9.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/proseLeak.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/spellBreakCensus.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/copy/voiceMechanics.test.js": {
+      "kind": "mutation",
+      "label": "voice/exclamation in scanned data prose"
+    },
+    "tests/data/biomeTexture.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/catalogTagGovernance.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/categoryGovernance.test.js": {
+      "kind": "mutation",
+      "label": "data-schema.4/dead priorityCategory"
+    },
+    "tests/data/chainServicesVocabulary.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/dataVocabularyCoverage.test.js": {
+      "kind": "mutation",
+      "label": "data-schema.5/orphan TAG"
+    },
+    "tests/data/depletedImportRegistry.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/foundingSeeds.probe.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/foundingSeeds.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/galleryReactionVocab.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/institutionNameIntegrity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/institutionVocabulary.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/namingDecontamination.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/popToTierBoundary.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/priorityCategoryConsistency.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/priorityCategoryPlausibility.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/roadmapLedger.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/sampleSettlements.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/stressTypeRegistration.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/stressTypesMeta.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/terrainInstitutionModifiersReachable.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/data/underwaysInstitutionParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/atlasSamples.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/contrast.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/deepCraftArrival.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/deepCraftKillList.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/elevation.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicFixtureLeak.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicFluid.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicInk.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicLogo.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicMaterial.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicMotion.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicOrnament.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicPosture.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicRules.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicSamples.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/organicVars.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/townGlyphSetRegistry.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/townGlyphs.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/townMapOpBudget.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/design/townMapStyleWall.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/abuse-model-paths.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/abuseModelFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/analyticsDictionaryFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/architectureFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/compendiumDataFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/contributingFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/deployEdgeUngatedWarning.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/deployRunbookFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/docCounts.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/enforcedByExists.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/enforcement-claims.test.js": {
+      "kind": "mutation",
+      "label": "enforcement/meta-pin naked claim"
+    },
+    "tests/docs/glossaryFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/metricsRegistry.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/migrationAppliedHead.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/migrationContiguity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/migrationRollbackDiscipline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/opsScriptsExist.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/playbookBudgetFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/docs/riskRegisterFreshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/authorityLegacyPin.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/autoTunableRailsWalker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/autonomy/signalRegistry.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/candidateTypeVoicePhrasing.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/causalStateConditionScan.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/certificationClaimsParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/changeAuthorityPolicy.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/corruptionWebPins.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/dispositionRatchet.integration.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/dramaClassRegistry.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/events/affordanceCoverage.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/events/composerDocketRoundTrip.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/events/predicateParity.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/events/realmCoverage.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/events/undoRoundTrip.test.js": {
+      "kind": "mutation",
+      "label": "domain.5/undo inverse round-trip"
+    },
+    "tests/domain/governanceLedger.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/guidanceRegistry.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/impactKindWalkers.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/informationStatecraftPins.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/institutionClassify.parity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/npc/npcFacetConsumer.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/pinNowGuard.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/relationshipIndexEquivalence.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/settlementPoliticsPins.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/simulationSpine.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/trace.coverage.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/domain/trendLensClaimsParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/aiGroundingBundle.freshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/aiGroundingContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/aiMeteringCensus.test.js": {
+      "kind": "mutation",
+      "label": "ai-cost/unmetered spend_credits function"
+    },
+    "tests/edgeFunctions/aiProviderAbstraction.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/analyticsEventsBundle.freshness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/autonomyCore.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/cdnImportsPinned.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/contracts.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/cors.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/creditFlow.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/edgeModelDefaultsCensus.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/entityRefWrapper.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/loadTestHarness.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/promptEfficiency.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/providerErrors.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/sessionGateCensus.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/supabaseJsPinned.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/surveyorByok.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/surveyorKillSwitch.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/surveyorS4S6KillSwitch.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/edgeFunctions/verifyJwtPins.test.js": {
+      "kind": "mutation",
+      "label": "security/verify_jwt platform gate loosened"
+    },
+    "tests/edgeFunctions/verifyJwtPosture.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/generators/adversarialNeighbourGovernance.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/generators/configSeamContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/generators/dataFlowContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/generators/factionStructuralOfficeCoverage.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/generators/pipelineContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/kernel/clampPrimitive.parity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/kernel/slugify.parity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/entityRefProducerConsumer.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/funnelEventContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/galleryPublishMapContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/mapBridge.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/savesColumnParity.test.js": {
+      "kind": "mutation",
+      "label": "state-lifecycle/ghost settlements column"
+    },
+    "tests/lib/snapshotCapContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lib/spatialLedgerCoverage.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/analyticsPropsHygiene.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/analyticsTrackPropsPrivacy.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/clampPrimitiveBaseline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/controlBytes.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/copyCorruption.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/deepCloneHotPath.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/determinismBanCoverage.test.js": {
+      "kind": "mutation",
+      "label": "determinism/eslint last-wins shadow block"
+    },
+    "tests/lint/domainAnyCastBaseline.test.js": {
+      "kind": "mutation",
+      "label": "type-hygiene/any-cast in domain"
+    },
+    "tests/lint/domainStrictBaseline.test.js": {
+      "kind": "mutation",
+      "label": "domain-strict/new implicit-any error"
+    },
+    "tests/lint/domainStrictFailClosed.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
+    "tests/lint/errorCopyBaseline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/factionNamePrecedenceScan.test.js": {
+      "kind": "mutation",
+      "label": "faction-key/reversed name-precedence read"
+    },
+    "tests/lint/forkedColorBaseline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/founderSeatsMigration.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/loadingNarrationRatchet.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/localeCompareGuard.test.js": {
+      "kind": "mutation",
+      "label": "determinism/localeCompare in generators"
+    },
+    "tests/lint/localeFormatGuard.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/mapPaletteSingleSource.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/migrationGrantPosturePin.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/migrationSearchPathPin.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/mutationCoverageManifest.test.js": {
+      "kind": "mutation",
+      "label": "meta/manifest label tampered"
+    },
+    "tests/lint/promptCompactionParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/rawButtonBaseline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/rawColorLiteral.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/relationshipEdgeCriminalNetwork.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/ruinFilterRoster.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/sizeBaseline.test.js": {
+      "kind": "mutation",
+      "label": "size-ratchet/App.jsx grows past frozen ceiling"
+    },
+    "tests/lint/slugifyIdiomBaseline.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/swatchResolves.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/lint/transcendentalMathBaseline.test.js": {
+      "kind": "mutation",
+      "label": "determinism/transcendental Math.pow in domain"
+    },
+    "tests/lint/visionKCohesionLaw.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/fontGlyphCoverage.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/fontRegistrationParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/goldenViewModel.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/pdf/liveWorldBTrack.parity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/parityContractExemptions.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/pdfLiveWorldParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/pdfParityFixes.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/printPaletteContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/screenParitySource.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/supplyChainFlowStatusParity.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/pdf/viewModelParity.test.js": {
+      "kind": "mutation",
+      "label": "pdf/parity canonPath drift"
+    },
+    "tests/property/ageOverlayGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/assizeDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/beliefAxesDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/beliefMapGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/chroniclersLetterGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/commonsVoiceDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/contestedGoalsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/corruptionWebDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/generatorGoldenMaster.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/generosityDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/illustratedTownGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/informationStatecraftDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/intelTradeDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/interventionDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/migrationRumorsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/momentumDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/navalDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/npcCredibilityDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/npcGrowthDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/npcLadderDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/peaceCausalDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/provenanceDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/reframeDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/resourceDynamicsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/roadsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/rumorLedgerGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/seaLanesGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/seaRoadsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/seasonalOverlayGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/settlementLifecycleDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/settlementPoliticsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/spatialConsequenceDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/spatialDigestGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/supplyWebWarfareDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/teleportEdgesGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/thirdPartyRansomDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/timelineTrackGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/townMapGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/townMapPanoramaGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/townMapStyleGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/townMapV2Golden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/traditionsDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/upswingDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/urbanFabricDormancyGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/worldpulseDeityGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/worldpulseSeasonsGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/property/worldpulseSpatialGolden.test.js": {
+      "kind": "rationale",
+      "ref": "golden-byte-pin"
+    },
+    "tests/security/accountDeletionProcessing.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/accountIdentity.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/accountStatusDirectWrites.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/accountStatusGate.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/accountStatusProfilesCustomContent.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/accountStatusSupportTickets.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/actionVelocity.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/adminLeastPrivilege.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/adminUserManagement.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/aiRequestIdempotency.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/aiSpendReservation.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/aiSpendSafety.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/analyticsV2Rollups.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/billingRetentionHardening.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/byokNeverLogged.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/clientAiBoundary.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/clientErrorReports.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/committedSecretsScan.test.js": {
+      "kind": "mutation",
+      "label": "secrets/committed AWS key shape"
+    },
+    "tests/security/creditAllocationTrigger.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/creditAutoReload.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/creditBalanceIdorGuard.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/creditLedger.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/cspForkIsolation.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/cspHeaderShape.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/cspReportSinkCap.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/customContentDeities.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/denyAllRlsCensus.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/dossierEntitlements.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/edgeLogRedaction.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/emailPreferences.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/enforceSaveLimit.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/feeSchedule.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/founderSeats.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/founderTransferCases.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/founderTransferDueCron.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/founderTransferPayout.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/fraudCharterSession.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryAlivenessTitleChain.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryCampaignTiles.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryCommentModeration.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryDmFull.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryMapMemberCount.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryReactions.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/gallerySanitize.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/gallerySanitizeAllowlist.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/gallerySanitizer.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/gallerySeedLeak.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryUnlisted.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryViewDedup.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/galleryWorldSnapshotScanner.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/gallery_privacy.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/ingestCheckRate.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/intentCorpusAtlas.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/ipPrivacy.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/mapForkXssChain.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/mapSnapshotImport.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/migration062Authz.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/migrationOrdering.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/migrationRefIntegrity.meta.test.js": {
+      "kind": "mutation",
+      "label": "security/runIf migration renumber"
+    },
+    "tests/security/migrationSequenceAll.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/migrations100to102AccessGates.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/migrations104to106LowFixes.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/moneyCheckConstraints.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/moneyPathCoverageContract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/moneyPathJourney.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/moneyRpcNetCurrentGuards.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/moneySecurityExecutionFloor.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/neighbourBacklinkMerge.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/noHardcodedPrivilegeEmail.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/profileEscalation.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/profileModerationColumnLock.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/profileStripeSubPin.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/profile_escalation.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/profile_security.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/publicTableRlsCensus.test.js": {
+      "kind": "mutation",
+      "label": "security/public table without RLS"
+    },
+    "tests/security/purgeSparesPaidEntitlement.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/rateLimitConfig.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/rateLimiterRpcs.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/recoveryLockout.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/recoveryLockoutSelfheal.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/referralRedeem.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/refundDedup.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/refundLedger.contract.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/refundServiceRole.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/reservedNamesRls.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/roadsSecretsProbe.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/savedMapsSnapshotTrigger.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/seatStewardship.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/securityAnswers.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/securityQuestions.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/serviceAdjustCredits.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/singleSession.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/singleSessionBelt.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/snapshotDenylistDrift.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/supportTickets.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/surveyorByokHealth.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/surveyorProvisioning.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/surveyorStageKillSwitch.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/surveyorUsageGovernors.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/systemConfigPublicRead.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/tokenBucket.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/townMapEditsPublicDrop.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/townMapFogPublicDrop.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/townMapGalleryOptIn.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/security/worldPulseAtomicPersist.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/worldSnapshotDenyCensus.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/store/operationRegistry.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/store/sessionEvictionLifecycle.pin.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/ui/dossierTabGroups.walker.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/ui/globalSpinKeyframe.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/ui/mapOverlayTransformContract.test.jsx": {
+      "kind": "uncovered"
+    },
+    "tests/ui/settlementMapHoverParity.test.jsx": {
+      "kind": "uncovered"
+    },
+    "tests/ui/settlementMapIllustratedCensus.test.jsx": {
+      "kind": "uncovered"
+    },
+    "tests/ui/spinnerKeyframeGlobal.test.js": {
+      "kind": "uncovered"
+    },
+    "tests/ui/worldMapInWords.test.jsx": {
+      "kind": "uncovered"
+    }
+  },
+  "meta": {
+    "meta:eslint-determinism-domain-wallclock": {
+      "kind": "mutation",
+      "label": "determinism/domain new Date()",
+      "what": "eslint no-restricted-syntax wall-clock ban over src/domain (eslint.config.js)"
+    },
+    "meta:eslint-determinism-generators-random": {
+      "kind": "mutation",
+      "label": "determinism/generators Math.random()",
+      "what": "eslint Math.random ban over src/generators (eslint.config.js)"
+    },
+    "meta:eslint-data-purity-imports": {
+      "kind": "mutation",
+      "label": "data-purity/src/data->generators import",
+      "what": "eslint no-restricted-imports purity wall on src/data (eslint.config.js)"
+    }
+  }
+}
