@@ -19,6 +19,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import { INK, BODY, MUTED, SECOND, BORDER, sans, SP, FS, swatch } from '../theme.js';
+import { t } from '../../copy/index.js';
 
 const INCOMING_ACTIONABLE = ['initiated', 'nominee_verified', 'awaiting_payment'];
 const OUTGOING_LIVE = ['initiated', 'nominee_verified', 'awaiting_payment', 'cooling'];
@@ -133,9 +134,9 @@ function BuybackAffordance({ onDone }) {
       const { buybackStart } = await import('../../lib/founderTransferClient.js');
       await buybackStart();
       setStep('code');
-      setNotice('We emailed you a confirmation code.');
+      setNotice(t('errors.seatCodeSent'));
     } catch (e) {
-      setError(e?.message || 'The buyback could not be started.');
+      setError(e?.message || t('errors.buybackStartFail'));
     } finally { setBusy(false); }
   }, []);
 
@@ -145,10 +146,10 @@ function BuybackAffordance({ onDone }) {
       const { buybackConfirm } = await import('../../lib/founderTransferClient.js');
       await buybackConfirm({ code: code.trim(), payoutForm });
       setStep('idle'); setCode('');
-      setNotice('Your seat has been sold back. Your payout will follow.');
+      setNotice(t('errors.seatSoldBack'));
       if (typeof onDone === 'function') await onDone();
     } catch (e) {
-      setError(e?.message || 'The buyback could not be completed.');
+      setError(e?.message || t('errors.buybackFail'));
     } finally { setBusy(false); }
   }, [code, payoutForm, onDone]);
 

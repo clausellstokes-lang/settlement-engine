@@ -20,6 +20,7 @@ import { useEffect, useState } from 'react';
 import {
   KeyRound, Link2, Unlink, Check, } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
@@ -134,15 +135,15 @@ export default function AccountSecuritySection({ auth, onSignOut }) {
     setPwError(null);
     setPwDone(false);
     if (!currentPw || !newPw) {
-      setPwError('Enter your current and new password.');
+      setPwError(t('errors.pwEnterBoth'));
       return;
     }
     if (newPw.length < 8) {
-      setPwError('Your new password must be at least 8 characters.');
+      setPwError(t('errors.pwTooShort'));
       return;
     }
     if (newPw !== confirmPw) {
-      setPwError('The new passwords do not match.');
+      setPwError(t('errors.pwMismatch'));
       return;
     }
     setPwBusy(true);

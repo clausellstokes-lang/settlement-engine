@@ -9,6 +9,7 @@ import { DomainRows, EngineWaves, WorldLawAxes } from './SimulationRulesAxes.jsx
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, RED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -271,9 +272,9 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
     try {
       const result = await Promise.resolve(previewWorldPulse(campaign.id, 'one_month', { simulationRules: draft }));
       setPreviewResult(result);
-      if (!result) setError('Preview could not be generated.');
+      if (!result) setError(t('errors.previewFail'));
     } catch (err) {
-      setError(`Preview failed: ${err?.message || err}`);
+      setError(t('errors.previewFail'));
     } finally {
       setPreviewBusy(false);
     }
@@ -284,14 +285,14 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
     // The store no-ops the rules write while the realm advances; refuse here so
     // Save never reports success over a dropped write. The button is also disabled
     // off advanceBlocked — this is the belt-and-braces guard.
-    if (advanceBlocked) { setError('The realm is advancing. Give it a moment, then save your rules.'); return; }
+    if (advanceBlocked) { setError(t('errors.realmAdvancingSaveLater')); return; }
     setBusy(true);
     setError(null);
     try {
       await updateRules(campaign.id, draft);
       onClose?.();
     } catch (err) {
-      setError(`Rules could not be saved: ${err?.message || err}`);
+      setError(t('errors.rulesSaveFail'));
     } finally {
       setBusy(false);
     }

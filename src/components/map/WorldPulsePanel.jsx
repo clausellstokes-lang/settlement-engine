@@ -59,12 +59,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       for (const id of dismissedMajorIds) decisions[String(id)] = { decision: 'dismissed' };
       const result = await resolveIntervalMajors(campaignId, decisions);
       if (result && result.ok === false) {
-        setActionError('The realm could not continue. Try again in a moment.');
+        setActionError(t('errors.realmContinueFail'));
       } else {
         setDismissedMajorIds(new Set());
       }
     } catch (err) {
-      setActionError(`Resume failed: ${err?.message || err}`);
+      setActionError(t('errors.resumeFail'));
     } finally {
       setResumeBusy(false);
     }
@@ -147,9 +147,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
     try {
       const fn = action === 'apply' ? applyProposal : dismissProposal;
       const updated = await fn(campaign.id, proposalId);
-      if (!updated) setActionError('Proposal could not be updated.');
+      if (!updated) setActionError(t('errors.proposalUpdateFail'));
     } catch (err) {
-      setActionError(`Proposal update failed: ${err?.message || err}`);
+      setActionError(t('errors.proposalUpdateFail'));
     } finally {
       setBusyProposalId(null);
     }
@@ -162,7 +162,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
     try {
       await canonizeCampaignWorld(campaign.id);
     } catch (err) {
-      setActionError(`Starting the world clock failed: ${err?.message || err}`);
+      setActionError(t('errors.worldClockStartFail'));
     } finally {
       setCanonBusy(false);
     }
@@ -436,7 +436,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       label: `Named the force behind ${stressor.label || human(stressor.type)}`,
                     });
                   } catch (err) {
-                    setActionError(`Naming failed: ${err?.message || err}`);
+                    setActionError(t('errors.namingFail'));
                   } finally {
                     setNamingStressorId(null);
                   }

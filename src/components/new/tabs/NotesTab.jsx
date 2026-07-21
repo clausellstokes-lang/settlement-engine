@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
+import { t } from '../../../copy/index.js';
 import { sans, TabIntro } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
@@ -34,7 +35,7 @@ export default function NotesTab({ saveId, notes, section }) {
   }));
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
   if (!saving && draft.sourceKey !== notesSourceKey) {
     setDraft({
@@ -57,7 +58,7 @@ export default function NotesTab({ saveId, notes, section }) {
     if (!saveId) return;
     setSaving(true);
     setSaved(false);
-    setError('');
+    setError(null);
     try {
       await updateDossierNotes(saveId, { dmNotes, aiGuidance });
       // Reconcile the draft's sourceKey to the values we just saved so the
@@ -74,7 +75,7 @@ export default function NotesTab({ saveId, notes, section }) {
       // the cloud write fails — without this catch the rejection was unhandled and
       // the user saw no error, then the notes vanished on reload (cloud never got
       // them). Surface it so they can retry; the draft text is still in the boxes.
-      setError('Those notes could not be saved. Your text is still here — try again.');
+      setError(t('errors.notesSaveFail'));
     } finally {
       setSaving(false);
     }

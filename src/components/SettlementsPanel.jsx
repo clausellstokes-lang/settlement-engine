@@ -11,6 +11,7 @@ import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
+import { t } from '../copy/index.js';
 import { isCampaignActive } from '../lib/campaigns.js';
 import { activeSaveCount, inactiveRetentionCount, isSaveActive } from '../lib/saveAccess.js';
 import {
@@ -193,8 +194,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [newCampaignName, setNewCampaignName] = useState('');
   const [showNewCampaign, setShowNewCampaign] = useState(false);
   const [reactivatingId, setReactivatingId] = useState(null);
-  const [reactivationError, setReactivationError] = useState('');
-  const [persistenceError, setPersistenceError] = useState('');
+  const [reactivationError, setReactivationError] = useState(null);
+  const [persistenceError, setPersistenceError] = useState(null);
 
   const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
@@ -229,7 +230,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // FAIL-VISIBLE, never fail-silent: a failed library load must not read
         // as an empty library. Route it into the shared trust-surface alert.
         console.error('Failed to load saves:', e);
-        setPersistenceError('Your library could not be loaded — check your connection and reload.');
+        setPersistenceError(t('errors.libraryLoadFail'));
         setSavesLoading(false);
       });
     return () => { cancelled = true; };
@@ -246,23 +247,23 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
 
   const handleReactivateSave = async (save) => {
     if (!save?.id || !canReactivateInactive) {
-      setReactivationError('Choose an inactive settlement after freeing one of your three free slots.');
+      setReactivationError(t('errors.reactivateNeedsSlot'));
       return;
     }
     setReactivatingId(save.id);
-    setReactivationError('');
+    setReactivationError(null);
     try {
       const result = await savesService.reactivateFreeSettlement(save.id);
       if (result && result.ok === false) {
         setReactivationError(result.reason === 'free_limit_reached'
-          ? 'Your three free settlement slots are already active.'
-          : 'That settlement could not be reactivated.');
+          ? t('errors.reactivateSlotsFull')
+          : t('errors.reactivateFail'));
         return;
       }
       await reloadSaves();
     } catch (e) {
       console.error('Reactivation failed:', e);
-      setReactivationError('That settlement could not be reactivated.');
+      setReactivationError(t('errors.reactivateFail'));
     } finally {
       setReactivatingId(null);
     }
@@ -344,7 +345,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const persistBatch = async (updatedSaves, modifiedIds, options = {}) => {
     const previousSaves = saves;
     try {
-      setPersistenceError('');
+      setPersistenceError(null);
       const updates = modifiedIds
         .map(id => updatedSaves.find(entry => String(entry.id) === String(id)))
         .filter(Boolean);
@@ -359,7 +360,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       const openId = detail?.saveData?.id;
       const previousDetail = previousSaves.find(entry => String(entry.id) === String(openId));
       if (openId) setDetail(previousDetail ? { ...previousDetail, saveData: previousDetail } : null);
-      setPersistenceError('That change could not be saved. The library was restored to its previous state.');
+      setPersistenceError(t('errors.persistFail'));
     }
   };
 

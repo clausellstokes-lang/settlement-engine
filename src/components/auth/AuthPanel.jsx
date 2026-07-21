@@ -136,7 +136,7 @@ export default function AuthPanel({
 
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
-    if (password.length < 6) { setError('Password must be at least 6 characters'); return; }
+    if (password.length < 6) { setError(t('auth.error.passwordTooShort')); return; }
     // Confirm-password mismatch guard: a typo'd password would otherwise create
     // an account the user can never sign back into. Block submit and say so.
     if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
@@ -148,21 +148,21 @@ export default function AuthPanel({
         // Supabase reports a signup for an already-registered email with empty
         // identities and no error / no email — the verify screen would never
         // resolve. Point the user at sign-in / reset instead of a dead end.
-        setError('That email may already have an account. Try signing in, or reset your password.');
+        setError(t('auth.error.emailMayExist'));
       } else if (needsVerification) {
         setMode('verify'); // inline "check your inbox" — no route change
       } else {
         onAuthed?.();
       }
     } catch (e) {
-      setError(e.message || 'Sign-up failed');
+      setError(e.message || t('auth.error.signUpFailed'));
     } finally {
       setLoading(false);
     }
   };
 
   const handleMagicLink = async () => {
-    if (!email.trim()) { setError('Enter your email address'); return; }
+    if (!email.trim()) { setError(t('auth.error.emailRequired')); return; }
     setError(null);
     setLoading(true);
     try {

@@ -15,6 +15,7 @@ import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
 import HouseColophon from './organic/HouseColophon.jsx';
 import { flag } from '../lib/flags.js';
+import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
@@ -875,7 +876,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 not propagate to the root boundary and blank the whole app. The
                 resetKeys are the selected tab + settlement so switching either
                 auto-recovers. (B2.) */}
-            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle="This section of the dossier could not be displayed." resetKeys={[selectedTab, readSessionSubject]}>
+            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle={t('errors.dossierSection')} resetKeys={[selectedTab, readSessionSubject]}>
               {/* Completes the WAI-ARIA tabs relationship the strip begins: each
                   tab carries aria-controls={'sf-panel-' + id}; this panel answers
                   with the matching id + aria-labelledby, and tabIndex={0} lets a

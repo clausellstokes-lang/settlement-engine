@@ -22,6 +22,7 @@
 import { useState, useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
+import { t } from '../../copy/index.js';
 import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
@@ -142,12 +143,12 @@ export default function VersionsTab({ save }) {
 
   const handleRevert = (snapshotId) => {
     if (!snapshotId || typeof revertToSnapshot !== 'function') {
-      setRevertError('Snapshot restore is unavailable.');
+      setRevertError(t('errors.snapshotRestoreUnavailable'));
       return;
     }
     const ok = revertToSnapshot({ saveId: save?.id || null, snapshotId });
     if (!ok) {
-      setRevertError('Snapshot could not be restored.');
+      setRevertError(t('errors.snapshotRestoreFail'));
       return;
     }
     setConfirmRevert(null);

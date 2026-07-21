@@ -212,7 +212,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       setShowOutput(true); // show output after generation
     } catch (e) {
       console.error('GENERATE ERROR:', e);
-      setGenerateError(`Error: ${e.message || e}`);
+      setGenerateError(t('errors.generateFail'));
     }
   }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 

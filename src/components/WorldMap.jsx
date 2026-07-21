@@ -15,6 +15,7 @@
 
 import { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from 'react';
 import { flag } from '../lib/flags.js';
+import { t } from '../copy/index.js';
 import { EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { useMapBridge } from '../hooks/useMapBridge.js';
@@ -422,7 +423,7 @@ export default function WorldMap({ onNavigate } = {}) {
       // showToast is the component's own stable (useCallback) toast helper;
       // called from an async drop handler (not during render), so the
       // set-state-in-render immutability rule doesn't apply.
-      showToast('error', `Place failed: ${err.message || err}`);
+      showToast('error', t('errors.mapPlaceFail'));
     }
   }, [setDraggingOver, addPlacement, showToast]);
 
@@ -505,7 +506,7 @@ export default function WorldMap({ onNavigate } = {}) {
         bumpGeometryVersion();
       } catch (err) {
         console.warn('[WorldMap] snapshot load failed', err);
-        showToast('error', `Load failed: ${err.message || err}`);
+        showToast('error', t('errors.mapLoadFail'));
       }
     }
      
@@ -547,10 +548,7 @@ export default function WorldMap({ onNavigate } = {}) {
   const performSaveMap = useCallback(async () => {
     if (!activeCampaignId) return;
     const bridge = bridgeRef.current;
-    if (!bridge?.isReady) {
-      showToast('error', 'Map not ready');
-      return;
-    }
+    if (!bridge?.isReady) { showToast('error', t('errors.mapNotReady')); return; }
     setSavingMap(true);
     try {
       showToast('info', 'Capturing map snapshot…');
@@ -578,7 +576,7 @@ export default function WorldMap({ onNavigate } = {}) {
       showToast('success', `Saved ${placementCount} placement(s) to ${activeCampaign?.name}`);
     } catch (err) {
       console.warn('[WorldMap] save snapshot failed', err);
-      showToast('error', `Save failed: ${err.message || err}`);
+      showToast('error', t('errors.mapSaveFail'));
     } finally {
       setSavingMap(false);
     }
@@ -660,7 +658,7 @@ export default function WorldMap({ onNavigate } = {}) {
       bumpGeometryVersion();
       showToast('success', 'New world generated');
     } catch (err) {
-      showToast('error', `Regenerate failed: ${err.message || err}`);
+      showToast('error', t('errors.mapRegenFail'));
     }
   }, [resetMapState, bumpGeometryVersion, showToast]);
 
@@ -865,7 +863,7 @@ export default function WorldMap({ onNavigate } = {}) {
             a recoverable fallback in place of the map rather than blanking the
             whole app via the root boundary. resetKey is the active campaign so
             switching campaigns clears a stale error. */}
-        <FeatureErrorBoundary label="WorldMap.stage" kind="react.render.map" fallbackTitle="The map couldn't be displayed." resetKeys={[activeCampaignId]}>
+        <FeatureErrorBoundary label="WorldMap.stage" kind="react.render.map" fallbackTitle={t('errors.mapRender')} resetKeys={[activeCampaignId]}>
           <WorldMapStage
             showingWizardNews={false} showingWorldPulse={false} showingPantheon={false}
             activeCampaign={activeCampaign} activeSaves={activeSaves}

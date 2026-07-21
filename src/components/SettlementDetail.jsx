@@ -399,7 +399,7 @@ export default function SettlementDetail({
     } catch (err) {
       console.error(`[${kind} export] failed:`, err);
       const msg = err?.message || String(err) || 'unknown error';
-      setPdfError(`${kind === 'foundry' ? 'Foundry' : 'PDF'} export failed: ${msg}`);
+      setPdfError(t('errors.exportFail', { kind: kind === 'foundry' ? 'Foundry' : 'PDF', detail: msg }));
     } finally {
       setExporting(false);
     }
