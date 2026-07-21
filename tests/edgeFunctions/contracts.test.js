@@ -887,7 +887,7 @@ describe('Campaign Context surface copy (NotesTab)', () => {
 
   it('the disclosure states flavor weaving, fact priority, prose exposure, and DM privacy', () => {
     expect(src).toMatch(/Woven into AI narration as established campaign flavor/);
-    expect(src).toMatch(/settlement facts still win/);
+    expect(src).toMatch(/Settlement facts still win/);
     expect(src).toMatch(/may therefore appear in generated prose, including shared narration if you publish it/);
     expect(src).toMatch(/otherwise it stays DM-private/);
     expect(src).toMatch(/DM Notes are never included/);
