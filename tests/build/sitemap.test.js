@@ -29,6 +29,15 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const committed = readFileSync(join(ROOT, 'public', 'sitemap.xml'), 'utf8');
 
 describe('public/sitemap.xml', () => {
+  // SB4: the noindex set used to exist TWICE (seo.js + a hand-copied twin here)
+  // under a comment that falsely claimed test-enforced lockstep. It is now
+  // single-sourced: generate-sitemap.mjs re-exports seo.js's set. This pin makes
+  // a re-fork (someone reintroducing a local copy) fail by IDENTITY, not value.
+  it('the sitemap noindex set IS seo.js NOINDEX_VIEWS — one writer, same object', async () => {
+    const { NOINDEX_VIEWS: seoSet } = await import('../../src/lib/seo.js');
+    expect(NOINDEX_VIEWS).toBe(seoSet);
+  });
+
   it('is byte-identical to a fresh generation (regenerate after route changes)', async () => {
     const fresh = await buildSitemap();
     expect(

@@ -28,8 +28,11 @@
  *
  * ── Fail-safe ────────────────────────────────────────────────────────────────
  * ANY failure (missing/garbage slug, unknown slug, RPC error, rasterize fault)
- * 302-redirects to the static og-default.png. A scraper always gets a valid
- * card, never a broken image — worst case is the site-default card.
+ * 302-redirects to the static og-craft.png — the house-sealed site-default card
+ * the rest of the system pins (seo.js / _galleryMeta.js / index.html). A scraper
+ * always gets a valid, on-brand card, never a broken image. (SB4: was
+ * og-default.png, the RETIRED pre-seal card — the fallback fired precisely when
+ * a scraper hit an error path, serving the off-brand image.)
  *
  * The rasterizer + data fetch are injectable `deps` seams so the trust boundary
  * is execution-testable without a live Supabase or the WASM rasterizer.
@@ -39,7 +42,9 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 
 const SITE_ORIGIN = 'https://settlementforge.com';
-const OG_DEFAULT_URL = `${SITE_ORIGIN}/og-default.png`;
+// The house-sealed default card (matches seo.js OG_IMAGE_DEFAULT + index.html);
+// og-default.png is the retired pre-seal card and must not resurface here.
+const OG_DEFAULT_URL = `${SITE_ORIGIN}/og-craft.png`;
 // Where the rasterizer fetches the display fonts (same TTFs the PDF path ships,
 // served from /public/fonts). Overridable for a staging origin.
 const ASSET_ORIGIN = Deno.env.get('OG_ASSET_ORIGIN') || SITE_ORIGIN;

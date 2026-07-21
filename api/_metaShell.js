@@ -32,12 +32,26 @@ import {
   ORIGIN,
   SITE_NAME,
 } from './_galleryMeta.js';
+// PURE decode (no fetch, no env): a world code carries its own preset, so the
+// card can name real facts (realm size / tone) without any server state. The
+// seed inside the code NEVER reaches the head.
+import { decodeWorldCode } from '../src/lib/worldCode.js';
 
-/** Match a /world/<code> pathname (seed post). Codes are URL-safe tokens. */
+/**
+ * Match a /world/<code> pathname (seed post). Real codes are DOTTED
+ * (`w1.<base64url>.<checksum>` — see src/lib/worldCode.js), so the token class
+ * must include `.`; the previous dot-less class rejected every real code on the
+ * path form (production survived only because the vercel rewrite passes the code
+ * via ?worldCode=). Pinned with a real encodeWorldCode code in metaShell.test.js.
+ */
 function matchWorldPath(pathname) {
-  const m = String(pathname || '').match(/^\/world\/([A-Za-z0-9_-]+)\/?$/);
+  const m = String(pathname || '').match(/^\/world\/([A-Za-z0-9._-]+)\/?$/);
   return m ? m[1] : '';
 }
+
+// Human labels for the world-code preset knobs (mirrors WorldPage.jsx's chips).
+const WORLD_REALM_LABEL = { small: 'small realm', medium: 'medium realm', large: 'large realm' };
+const WORLD_TONE_LABEL = { quiet_local: 'quiet', realistic_regional: 'realistic', dramatic_campaign: 'dramatic' };
 
 /**
  * Classify a request into a meta-shell KIND from its path + query. The fold's
@@ -55,9 +69,13 @@ export function resolveMetaRoute(req = {}) {
       ? req.searchParams
       : new URLSearchParams(req.searchParams || '');
 
-  // Seed post: /world/<code> (fold rewrite passes ?worldCode=).
+  // Seed post: /world/<code> (fold rewrite passes ?worldCode=). SB4: the world
+  // family is UNFURL-BUT-NOINDEX, the same posture as unlisted — /world/<code>
+  // is an unbounded generated URL space (every decodable code 200s with a
+  // near-identical card), so indexing it is soft-200 duplicate content. Kept in
+  // lockstep with seo.js NOINDEX_VIEWS ('world') for the SPA + sitemap side.
   const code = p.get('worldCode') || matchWorldPath(pathname);
-  if (code) return { kind: 'world', code, noindex: false };
+  if (code) return { kind: 'world', code, noindex: true };
 
   // The gallery family (bare index + unlisted ?slug=). The fold's rewrite sets
   // gallery=1; a direct /gallery path is honored too.
@@ -113,18 +131,35 @@ export function buildMetaForKind(route, data, opts = {}) {
     }
 
     case 'world': {
+      // SB4: decode the code at the pure seam — a valid code yields its preset
+      // (realm size / tone), so two different worlds no longer unfurl with one
+      // identical generic card. The world's NAME would need full generation
+      // (the entire engine inside a serverless function): rejected. The seed
+      // never reaches the head. An undecodable code degrades to the generic card.
+      const decoded = decodeWorldCode(route.code);
+      const preset = (decoded && decoded.basicConfig) || {};
+      const realm = WORLD_REALM_LABEL[preset.realmSize] || '';
+      const tone = WORLD_TONE_LABEL[preset.tone] || '';
       const name = (data && (data.name || data.title)) || '';
+      const title = name
+        ? `${name} · ${SITE_NAME}`
+        : realm
+          ? `A shared ${realm} · ${SITE_NAME}`
+          : `A shared world · ${SITE_NAME}`;
+      const description = decoded
+        ? `A ${realm || 'living world'}${tone ? ` with a ${tone} tone` : ''}, rebuilt byte for byte from its share code. The same seed always builds the same world on SettlementForge.`
+        : 'A living world generated and shared on SettlementForge.';
       return {
-        title: name ? `${name} · ${SITE_NAME}` : `A shared world · ${SITE_NAME}`,
-        description: name
-          ? `${name}, a living world generated and shared on SettlementForge.`
-          : 'A living world generated and shared on SettlementForge.',
+        title,
+        description,
         // Seed-post card seam: the og-image function's world variant is a fold
         // item; until then a valid world card falls back to the site-default.
         image: galleryCardImage(data && data.slug ? data.slug : '', supabaseUrl),
         url: `${origin}/world/${encodeURIComponent(route.code)}`,
         type: 'article',
-        noindex: false,
+        // Unfurl-but-noindex (see resolveMetaRoute): the handler adds the
+        // X-Robots-Tag header and the injector stamps the robots meta from this.
+        noindex: true,
       };
     }
 

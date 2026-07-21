@@ -21,13 +21,14 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { ROUTES } from '../../src/lib/routes.js';
-import { headForView } from '../../src/lib/seo.js';
+import { ROUTES, isKnownView } from '../../src/lib/routes.js';
+import { headForView, VIEW_DESCRIPTIONS, DEFAULT_DESCRIPTION } from '../../src/lib/seo.js';
 import { compendiumEntryHead } from '../../src/lib/seoCompendium.js';
 import { COMPENDIUM_INDEX } from '../../src/domain/compendium/searchIndex.js';
+import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
 import { isIndexable } from '../../scripts/generate-sitemap.mjs';
 import {
-  renderStatic, renderEntry, staticRouteViews, distFileForPath, DYNAMIC_VIEWS,
+  renderStatic, renderEntry, renderHub, staticRouteViews, distFileForPath, DYNAMIC_VIEWS,
 } from '../../scripts/prerender-routes.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -148,9 +149,53 @@ describe('prerender — pure render (build head == runtime head, the single sour
     }
   });
 
-  it('the gallery family is NOT prerendered (it belongs to the dynamic meta-shell seam)', () => {
+  it('the gallery INDEX family is NOT prerendered (it belongs to the dynamic meta-shell seam)', () => {
     expect(DYNAMIC_VIEWS.has('gallery')).toBe(true);
     expect(STATIC.some((r) => r.view === 'gallery')).toBe(false);
+  });
+
+  // SB4 — the 15 facet hubs ARE prerendered: sitemap-promoted, static,
+  // deterministic pages that previously unfurled as a generic 'Shared
+  // settlement' card (at-war/most-alive hit the /gallery/:slug rewrite) or the
+  // raw homepage card (terrain/tier fell to the SPA catch-all).
+  it('every gallery facet hub bakes EXACTLY the head setGalleryHubMeta applies at runtime', () => {
+    expect(GALLERY_HUBS.length).toBeGreaterThan(0);
+    for (const hub of GALLERY_HUBS) {
+      const html = renderHub(SHELL, hub);
+      const expectedTitle = `${hub.title} · SettlementForge`;
+      const expectedCanonical = `https://settlementforge.com${hub.path}`;
+      expect(titleTag(html), `${hub.id} <title>`).toBe(expectedTitle);
+      expect(ogTitle(html), `${hub.id} og:title`).toBe(expectedTitle);
+      expect(ogDesc(html), `${hub.id} og:description`).toBe(hub.blurb);
+      expect(ogUrl(html), `${hub.id} og:url`).toBe(expectedCanonical);
+      expect(canonical(html), `${hub.id} canonical`).toBe(expectedCanonical);
+      const ld = jsonLdBlocks(html);
+      const cp = ld.find((b) => b.id === 'ld-gallery-item');
+      expect(cp, `${hub.id} CollectionPage LD`).toBeTruthy();
+      expect(cp.obj['@type']).toBe('CollectionPage');
+      expect(cp.obj.name).toBe(hub.title);
+      expect(cp.obj.url).toBe(expectedCanonical);
+      expect(ld.find((b) => b.id === 'ld-site'), `${hub.id} ld-site`).toBeTruthy();
+      expect(bootIntact(html), `${hub.id} SPA boot shell`).toBe(true);
+    }
+  });
+
+  // SB4 — no indexable route may ship the generic site description: a
+  // description-less route previously passed every gate (baked == runtime ==
+  // both generic). Home is the one deliberate DEFAULT_DESCRIPTION user.
+  it('every indexable route ships a hand-written description, never the site fallback', () => {
+    for (const r of ROUTES) {
+      if (!isIndexable(r) || r.view === 'home') continue;
+      const d = VIEW_DESCRIPTIONS[r.view];
+      expect(d, `route ${r.view} (${r.path}) has no VIEW_DESCRIPTIONS entry`).toBeTruthy();
+      expect(d, `route ${r.view} (${r.path}) reuses the generic site description`).not.toBe(DEFAULT_DESCRIPTION);
+    }
+  });
+
+  it('VIEW_DESCRIPTIONS carries no orphan keys (a renamed route would strand its copy)', () => {
+    for (const key of Object.keys(VIEW_DESCRIPTIONS)) {
+      expect(isKnownView(key), `VIEW_DESCRIPTIONS['${key}'] is not a known view`).toBe(true);
+    }
   });
 });
 
@@ -187,5 +232,30 @@ describe('prerender — dist walk (the emitted files carry their own truth)', ()
       const path = r.view === 'home' ? '/' : r.path;
       expect(existsSync(distFileForPath(path)), `route ${r.view} (${path}) not prerendered`).toBe(true);
     }
+  });
+
+  // SB4 — the facet hubs exist in dist, and the bare-/gallery dynamic seam is
+  // NOT shadowed: a static dist/gallery/index.html would intercept the
+  // /gallery -> meta-shell rewrite and kill the unlisted ?slug= unfurl class.
+  it.skipIf(!requireDistRead)('every gallery facet hub is emitted; bare /gallery stays dynamic (never shadowed)', () => {
+    for (const hub of GALLERY_HUBS) {
+      const file = distFileForPath(hub.path);
+      expect(existsSync(file), `missing prerendered hub file for ${hub.path}`).toBe(true);
+      const html = readFileSync(file, 'utf8');
+      expect(ogTitle(html), `${hub.id} og:title`).toBe(`${hub.title} · SettlementForge`);
+      expect(canonical(html), `${hub.id} canonical`).toBe(`https://settlementforge.com${hub.path}`);
+      expect(bootIntact(html), `${hub.id} SPA boot shell`).toBe(true);
+    }
+    expect(
+      existsSync(distFileForPath('/gallery')),
+      'dist/gallery/index.html must NOT exist — it would shadow the unlisted meta-shell rewrite',
+    ).toBe(false);
+  });
+
+  // SB4 — the noindex world family must NOT be prerendered or sitemap-listed:
+  // bare /world renders an invalid-code state, and /world/<code> is served by
+  // the dynamic meta-shell (unfurl-but-noindex).
+  it.skipIf(!requireDistRead)('the seed-post family is not baked into dist', () => {
+    expect(existsSync(distFileForPath('/world'))).toBe(false);
   });
 });

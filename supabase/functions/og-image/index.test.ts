@@ -55,7 +55,9 @@ Deno.test('non-GET is rejected 405', async () => {
 Deno.test('missing slug redirects to the default card (302)', async () => {
   const res = await handleOgImage(new Request('https://edge/og-image', { method: 'GET' }));
   assertEquals(res.status, 302);
-  assertStringIncludes(res.headers.get('Location') || '', 'og-default.png');
+  // SB4: the fail-safe must serve the CURRENT house-sealed card (og-craft.png),
+  // not the retired pre-seal og-default.png.
+  assertStringIncludes(res.headers.get('Location') || '', 'og-craft.png');
 });
 
 Deno.test('a garbage/injection slug redirects to default and never fetches', async () => {

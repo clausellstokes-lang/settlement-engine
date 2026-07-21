@@ -67,8 +67,11 @@ export default async function handler(request) {
 
   const html = await fetchIndexHtml(origin);
   if (!html) {
-    // Can't reach the shell — never strand the visitor; the gallery index still boots the SPA.
-    return Response.redirect(`${origin}/gallery`, 302);
+    // SB4: can't reach the shell — never strand the visitor, and NEVER redirect
+    // into a rewritten route: /gallery rewrites into api/meta-shell, which under
+    // the same shell outage redirects back to /gallery — an infinite 302 loop.
+    // `/` is served from the static filesystem ahead of every rewrite.
+    return Response.redirect(`${origin}/`, 302);
   }
 
   const dossier = await fetchDossier(slug);

@@ -13,7 +13,8 @@
  * Resilience mirrors gallery-meta.js: every I/O step is best-effort; a missing
  * RPC (the V-E unlisted/world fetchers are the fold's) degrades to a generic
  * per-slug card rather than failing. If index.html itself can't be fetched, we
- * redirect to /gallery so the visitor is never stranded.
+ * redirect to `/` (static-served, rewrite-free) so the visitor is never
+ * stranded AND the redirect can never loop back into this function.
  *
  * Runtime: default Vercel Node.js serverless function. Reads only public data.
  *
@@ -77,8 +78,13 @@ export default async function handler(request) {
   const origin = url.origin;
   const route = resolveMetaRoute({ pathname: url.pathname, searchParams: url.searchParams });
 
+  // SB4: the shell is unreachable — NEVER redirect into a rewritten route. The
+  // old target /gallery rewrites straight back into THIS function (vercel.json),
+  // so a shell outage became an infinite 302 loop. `/` is served from the static
+  // filesystem ahead of every rewrite, so it always terminates; worst case the
+  // visitor lands on the homepage SPA and navigates from there.
   const html = await fetchIndexHtml(origin);
-  if (!html) return Response.redirect(`${origin}/gallery`, 302);
+  if (!html) return Response.redirect(`${origin}/`, 302);
 
   const meta = buildMetaForKind(route, await fetchDataForRoute(route), {
     origin,
@@ -95,12 +101,15 @@ export default async function handler(request) {
 
   const out = injectGalleryMeta(html, meta);
   const headers = { 'content-type': 'text/html; charset=utf-8' };
-  if (meta.noindex) {
-    // Unlisted: never cache a per-party card at the shared CDN, and belt-and-
-    // suspenders the noindex with the header (defense in depth beside the meta).
+  // Belt-and-suspenders the noindex with the header (defense in depth beside
+  // the robots meta). SB4: applies to BOTH noindex kinds (unlisted + world).
+  if (meta.noindex) headers['x-robots-tag'] = 'noindex';
+  if (route.kind === 'gallery-unlisted') {
+    // Unlisted: never cache a per-party card at the shared CDN.
     headers['cache-control'] = 'private, no-store';
-    headers['x-robots-tag'] = 'noindex';
   } else {
+    // Public-by-link kinds (gallery index, seed posts): cacheable — a world
+    // card is noindex yet not private, so the CDN may keep it.
     headers['cache-control'] = 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400';
   }
   return new Response(out, { status: 200, headers });

@@ -7,15 +7,24 @@
  * (V-E's /gallery?slug= unlisted + /world/:code) is verified by classification
  * and card-building here so the guarantees hold before the routes exist.
  */
-import { describe, it, expect } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { describe, it, expect, afterEach, vi } from 'vitest';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { resolveMetaRoute, buildMetaForKind } from '../../api/_metaShell.js';
 import { injectGalleryMeta, ORIGIN } from '../../api/_galleryMeta.js';
+import metaShellHandler from '../../api/meta-shell.js';
+import galleryMetaHandler from '../../api/gallery-meta.js';
+import { encodeWorldCode } from '../../src/lib/worldCode.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const SUPA = 'https://proj.supabase.co';
+// A REAL share code (dotted: `w1.<b64>.<checksum>`), not a hand-typed token —
+// the path matcher must accept what encodeWorldCode actually emits.
+const REAL_CODE = encodeWorldCode({
+  seed: 'sb4-probe-seed',
+  basicConfig: { realmSize: 'medium', tone: 'realistic_regional' },
+});
 
 describe('meta-shell route resolver (the fold seam)', () => {
   it('classifies the gallery family + seed posts from path OR the fold query flags', () => {
@@ -35,6 +44,9 @@ describe('meta-shell route resolver (the fold seam)', () => {
     // seed post /world/<code> (path form AND fold form)
     expect(resolveMetaRoute({ pathname: '/world/Zx9-Ab' })).toMatchObject({ kind: 'world', code: 'Zx9-Ab' });
     expect(resolveMetaRoute({ pathname: '/api/meta-shell', searchParams: 'worldCode=Zx9-Ab' })).toMatchObject({ kind: 'world', code: 'Zx9-Ab' });
+    // SB4: REAL codes are dotted (w1.<b64>.<checksum>) — the path form must
+    // accept them (the old dot-less matcher classified every real code 'none').
+    expect(resolveMetaRoute({ pathname: `/world/${REAL_CODE}` })).toMatchObject({ kind: 'world', code: REAL_CODE });
     // anything else is inert (serve the shell unchanged)
     expect(resolveMetaRoute({ pathname: '/pricing' }).kind).toBe('none');
   });
@@ -104,6 +116,137 @@ describe('every served kind is its OWN canonical (never the homepage)', () => {
       expect(out).not.toContain('<link rel="canonical" href="https://settlementforge.com/" />');
     });
   }
+});
+
+// SB4 — the seed post: decoded facts on the card, and the world family is
+// UNFURL-BUT-NOINDEX (an unbounded generated URL space must never index; the
+// posture mirrors the unlisted gallery class).
+describe('the seed post unfurls with decoded facts yet never indexes (SB4)', () => {
+  it('a real code yields realm-size + tone facts, never the seed', () => {
+    const route = resolveMetaRoute({ pathname: `/world/${REAL_CODE}` });
+    expect(route.noindex).toBe(true);
+    const m = buildMetaForKind(route, null, { supabaseUrl: SUPA });
+    expect(m.title).toBe('A shared medium realm · SettlementForge');
+    expect(m.description).toContain('medium realm');
+    expect(m.description).toContain('realistic tone');
+    expect(m.url).toBe(`${ORIGIN}/world/${encodeURIComponent(REAL_CODE)}`);
+    expect(m.noindex).toBe(true);
+    // The seed is inside the code, but it must never surface in the head copy.
+    expect(m.title).not.toContain('sb4-probe-seed');
+    expect(m.description).not.toContain('sb4-probe-seed');
+  });
+
+  it('an undecodable code degrades to the generic card, still noindex', () => {
+    const route = resolveMetaRoute({ pathname: '/world/not-a-real-code' });
+    const m = buildMetaForKind(route, null, { supabaseUrl: SUPA });
+    expect(m.title).toMatch(/A shared world/);
+    expect(m.description).toBe('A living world generated and shared on SettlementForge.');
+    expect(m.noindex).toBe(true);
+  });
+
+  it('the served world HTML carries robots:noindex while the card still unfurls', () => {
+    const shell = readFileSync(join(ROOT, 'index.html'), 'utf8');
+    const route = resolveMetaRoute({ pathname: `/world/${REAL_CODE}` });
+    const out = injectGalleryMeta(shell, buildMetaForKind(route, null, { supabaseUrl: SUPA }));
+    expect(out).toMatch(/<meta name="robots" content="noindex, nofollow"/);
+    expect(out).toContain('og:title" content="A shared medium realm');
+  });
+
+  it('the world view is noindex on the SPA + sitemap side too (one posture, one set)', async () => {
+    const { NOINDEX_VIEWS } = await import('../../src/lib/seo.js');
+    expect(NOINDEX_VIEWS.has('world')).toBe(true);
+  });
+});
+
+// SB4 — HANDLER-LEVEL pins: the previous suite only exercised the pure halves,
+// so the I/O shell (what production actually serves) had zero coverage. fetch is
+// stubbed; no network.
+describe('the meta-shell + gallery-meta HANDLERS serve what the pure halves promise (SB4)', () => {
+  const SHELL_HTML =
+    '<html><head><title>SF</title>' +
+    '<link rel="canonical" href="https://settlementforge.com/" />' +
+    '<meta name="robots" content="noai, noimageai" />' +
+    '</head><body><div id="root"></div></body></html>';
+
+  /** Stub fetch: serve the shell for /index.html, 404 anything else (RPCs). */
+  function stubFetch({ shellOk = true } = {}) {
+    vi.stubGlobal('fetch', vi.fn(async (url) => {
+      if (String(url).endsWith('/index.html') && shellOk) {
+        return new Response(SHELL_HTML, { status: 200, headers: { 'content-type': 'text/html' } });
+      }
+      return new Response('not found', { status: 404 });
+    }));
+  }
+  afterEach(() => vi.unstubAllGlobals());
+
+  it('a world request serves a self-canonical, noindex-headed, CDN-cacheable card', async () => {
+    stubFetch();
+    const res = await metaShellHandler(new Request(`https://x.test/api/meta-shell?worldCode=${encodeURIComponent(REAL_CODE)}`));
+    expect(res.status).toBe(200);
+    expect(res.headers.get('x-robots-tag')).toBe('noindex');
+    // Public-by-link, not per-party: the CDN may cache it (NOT private/no-store).
+    expect(res.headers.get('cache-control')).toContain('s-maxage');
+    const html = await res.text();
+    const canonical = (html.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1];
+    expect(canonical).toBe(`https://x.test/world/${encodeURIComponent(REAL_CODE)}`);
+    expect(html).toMatch(/<meta name="robots" content="noindex, nofollow"/);
+  });
+
+  it('an unlisted request adds the private no-store posture on top of noindex', async () => {
+    stubFetch();
+    const res = await metaShellHandler(new Request('https://x.test/api/meta-shell?gallery=1&slug=s3cr3t'));
+    expect(res.status).toBe(200);
+    expect(res.headers.get('x-robots-tag')).toBe('noindex');
+    expect(res.headers.get('cache-control')).toBe('private, no-store');
+  });
+
+  it('the gallery index serves indexable (no x-robots-tag), its own canonical', async () => {
+    stubFetch();
+    const res = await metaShellHandler(new Request('https://x.test/api/meta-shell?gallery=1'));
+    expect(res.status).toBe(200);
+    expect(res.headers.get('x-robots-tag')).toBeNull();
+    const html = await res.text();
+    expect((html.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1]).toBe('https://x.test/gallery');
+  });
+
+  it('shell-fetch failure NEVER redirects into a rewritten route (the /gallery 302 loop)', async () => {
+    stubFetch({ shellOk: false });
+    // /gallery rewrites into meta-shell (vercel.json), so a /gallery redirect
+    // under a shell outage re-enters this very handler forever. `/` is static.
+    const r1 = await metaShellHandler(new Request('https://x.test/api/meta-shell?gallery=1'));
+    expect(r1.status).toBe(302);
+    expect(r1.headers.get('location')).toBe('https://x.test/');
+    const r2 = await galleryMetaHandler(new Request('https://x.test/api/gallery-meta?slug=abc'));
+    expect(r2.status).toBe(302);
+    expect(r2.headers.get('location')).toBe('https://x.test/');
+  });
+});
+
+// SB4 — the REAL deployed shell: production handlers fetch the PRERENDERED
+// dist/index.html (which carries the homepage canonical the injector must
+// replace), not the committed index.html the pure tests read. Gated like every
+// dist read (a stale dist would make it vacuous).
+describe('the dynamic injection holds against the ACTUAL dist shell (VERIFY_DIST)', () => {
+  const requireDistRead = process.env.VERIFY_DIST === '1';
+
+  it.skipIf(!requireDistRead)('dist/index.html carries the home canonical, and every dynamic kind replaces it', () => {
+    const distIndex = join(ROOT, 'dist', 'index.html');
+    expect(existsSync(distIndex), 'dist/index.html missing — run npm run build').toBe(true);
+    const shell = readFileSync(distIndex, 'utf8');
+    // The precondition that makes canonical replacement load-bearing.
+    expect(shell).toMatch(/<link rel="canonical" href="https:\/\/settlementforge\.com\/" \/>/);
+    for (const req of [
+      { pathname: '/gallery' },
+      { pathname: '/gallery', searchParams: 'slug=zz9' },
+      { pathname: `/world/${REAL_CODE}` },
+    ]) {
+      const m = buildMetaForKind(resolveMetaRoute(req), null, { supabaseUrl: SUPA });
+      const out = injectGalleryMeta(shell, m);
+      const canonical = (out.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i) || [])[1];
+      expect(canonical, `${req.pathname} canonical`).toBe(m.url);
+      expect(out).not.toContain('<link rel="canonical" href="https://settlementforge.com/" />');
+    }
+  });
 });
 
 describe('unlisted is sitemap-excluded BY CONSTRUCTION', () => {
