@@ -28,23 +28,3 @@ export function Card({ title, sub, children, accent=GOLD }) {
     </div>
   );
 }
-
-// BandLadder (W6) — render a banded concept's FULL ladder: every level named,
-// each with a one-line reading of how to interpret a settlement at that band.
-// Data comes from domain/compendium/bandLadders.js (a pure projection of the
-// engine's typed band tables), so this component authors nothing — it only lays
-// the rungs out in the same name+description row idiom the Tiers/Threat tables use.
-export function BandLadder({ concept, blurb, levels = [], accent=GOLD }) {
-  return (
-    <div style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid ${accent}`, borderRadius:7,
-      padding:'10px 12px', background:'rgba(255,251,245,0.95)', marginBottom:8 }}>
-      <div style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:700, color:INK, marginBottom:blurb?2:6 }}>{concept}</div>
-      {blurb && <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, marginBottom:8 }}>{blurb}</div>}
-      {levels.map((l) => (
-        <div key={l.name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-          <span style={{ fontSize:FS.xs, fontWeight:700, color:accent, minWidth:104, flexShrink:0 }}>{l.name}</span>
-          <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{l.reading}</span>
-        </div>))}
-    </div>
-  );
-}
