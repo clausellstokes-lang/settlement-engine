@@ -1295,6 +1295,26 @@ re-hosted identical DAG in lazy provenanceKernel. Family-2 (war applied-outcome
 seam) deferred w/ rationale; Tier-2 digest-move + default-flip stay owner-gated.
 E-A mutation-totality sweep still running. NEXT: E-A lands → 9-branch enforcer
 fold into composite-r4 (full two-shard gate) → tranche-3 burn-down → HALT.**
+**⬛⭐⭐⭐ THE ENFORCER FOLD COMPLETE @ composite-r4 17d46413 (2026-07-21).**
+All 9 tranche-2 enforcers folded (20 commits: 9 no-ff merges + reconcile + fold
+fix), incl. E-A mutation totality @ d3ff6778 (23/23 CAUGHT; the one BROKEN row
+was the secrets gate CORRECTLY catching the sweep's own synthetic AKIA key —
+cured by the concatenation idiom). RECONCILE @ 2c706f51: E-A's totality walker
+red on the 4 newly-folded invariant files exactly as designed; closed with 3
+PLANTED MUTATIONS (all isolation-proven mutated-red/reverted-green: unregistered
+campaign family 1-red→22/22 · synthetic model-calling surface red→19/19 · letter
+headline one-char drift 3-red→9/9; a diff-floor off-by-one was tried first and
+ABSORBED by tick cadence — recorded) + 1 genuine rationale (mechanism-lit is
+self-proving-meta). FOLD FIX @ 17d46413 = the fold gate's REAL CATCH: E-I's two
+em-dash announcer strings vs E-E's frozen JSX voice baseline (both lanes green
+in isolation, combination red) — copy rewritten per the ratchet's own rule
+(grew⇒rewrite, never re-baseline up), palette banked to em:0. FINAL GATE on the
+final tree: two-shard = 15,726 passed / 23 skipped / EXACTLY the 4 parked golden
+families; closure 31/31 VERIFY_DIST green (Δ0); domain-strict 0; tsc 0; docs
+108/108; totality meta 6/6; foreign stash intact. Manifest now 347 invariants
+(23+3 mutation-proven / 125 rationaled / 199 uncovered shrink-only burn-down).
+NEXT = TRANCHE 3 (spell-break + error-copy + non-taste kill-list) → close-out →
+HALT per owner stop line.**
 **⬛⭐ SHOULD-FIX/POLISH BATCH B round 1 FOLDED @ composite-r4 de590e3c (2026-07-21,
 checker-verified).** SB1 store (27369696 — 6 fixed incl. dead-migration wiring +
 deterministic legacy-id remint; 4 deferred out-of-lane [fogged handout, timelapseTick
