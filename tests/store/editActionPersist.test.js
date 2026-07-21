@@ -314,6 +314,37 @@ describe('queueEdit no-silent-drop contract: only committable kinds enter the qu
   });
 });
 
+describe('rename-npc commit payload contract (SS4: JSDoc {npcId} vs dispatcher {npcIndex})', () => {
+  // pendingEdits.js's edit-shape JSDoc documented the rename-npc payload as
+  // { npcId, newName } while the commit dispatcher read payload.npcIndex — a
+  // future rename UI wired to the documented shape would queue fine, fail the
+  // dispatcher guard, and the all-or-nothing queue clear would swallow the
+  // rename while reporting success (the silent-drop class, one layer below the
+  // kind-level contract). These pins hold BOTH spellings working.
+  let store;
+  beforeEach(() => { store = makeStore(); withActiveSave(store); });
+
+  test('a rename-npc queued with {npcIndex} commits the rename', () => {
+    expect(store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' })).not.toBeNull();
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].name).toBe('Aldric');
+    expect(store.getState().pendingEditsQueue).toEqual([]);
+  });
+
+  test('a rename-npc queued with the DOCUMENTED {npcId} shape also commits (no silent drop)', () => {
+    expect(store.getState().queueEdit('rename-npc', { npcId: 'npc.aldis', newName: 'Aldwyn' })).not.toBeNull();
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].name).toBe('Aldwyn');
+    expect(store.getState().pendingEditsQueue).toEqual([]);
+  });
+
+  test('a rename-npc naming a MISSING npcId drops the edit without renaming anyone else', () => {
+    expect(store.getState().queueEdit('rename-npc', { npcId: 'npc.ghost', newName: 'Nobody' })).not.toBeNull();
+    store.getState().commitPendingEdits();
+    expect(store.getState().settlement.npcs[0].name).toBe('Aldis'); // untouched
+  });
+});
+
 describe('edit-persist guards (no spurious writes)', () => {
   test('no hydrated save: edit applies to live memory but requests no cloud write', async () => {
     const store = makeStore();

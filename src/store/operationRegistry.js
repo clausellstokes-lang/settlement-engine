@@ -97,7 +97,9 @@ export const OPERATIONS = Object.freeze({
   // W-COMPOSER-2: the realm-verb force-as-proposal mint (cancel = dismissWorldPulseProposal; apply = applyWorldPulseProposal).
   stageRealmVerb: { opType:'stageRealmVerb', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'realm-proposal', undoToken:null },
   undoLastPulse: { opType:'undoLastPulse', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
-  // ── K-B MECHANICAL (118) — simple setters/updaters of durable/domain state ──
+  // ── K-B MECHANICAL — simple setters/updaters of durable/domain state ──
+  // (No count in this header: the old "(118)" rotted to 124 unnoticed. Census
+  //  the live number with `grep -c "klass:'mechanical'"` — never transcribe it.)
   queueEdit: { opType:'queueEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertSingleEdit' },
   revertSingleEdit: { opType:'revertSingleEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   revertPendingEdits: { opType:'revertPendingEdits', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },

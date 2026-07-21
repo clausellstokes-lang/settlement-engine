@@ -152,7 +152,7 @@ ruling prevents regression.
   ratchet. Do NOT trust a number transcribed here: this bullet used to re-quote the
   budget and re-rotted on every ratchet, so a walker now fails the gate if any
   present-tense `CLOSURE_BUDGET_BYTES = N` claim in this file drifts from the const
-  (`tests/docs/playbookBudgetFreshness.test.js`). The STANDING rulings that do NOT
+  (`tests/docs/playbookBudgetFreshness.test.js`). <!-- @enforced-by tests/docs/playbookBudgetFreshness.test.js --> The STANDING rulings that do NOT
   move: the budget only ratchets **DOWN**, and is **never raised without the owner**
   (§0.2-5); headroom is single-allocation, so every wave stays lazy/dormant or
   **STOPs** — a wave that needs eager bytes beyond the live margin triggers a reclaim

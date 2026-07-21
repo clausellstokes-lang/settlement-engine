@@ -312,10 +312,12 @@ Every coherence consumer — quarters, defense buckets, corruption climate, carr
 prize rankings, supply-web dependency, lenses, quadrants, coalition eligibility, tempo
 classes, the settlement map's renderer, Composer V2's target-first verb resolution and
 affordance predicates, analytics groupings — resolves customs via `facetOf(entity, facetKind)`
-(ONE chokepoint: declared ?? inferred ?? kind-default). A WALKER (shrink-only exemption
-ledger) pins that every registered coherence consumer routes through the chokepoint — a new
-E-wave reader that greps names directly fails the gate. Analytics reads FACETS, never custom
-names (id-free law extended: user inventions stay as private as user worlds).
+(ONE chokepoint: declared ?? inferred ?? kind-default). DESIGN INTENT, not yet built
+(claims-parity correction 2026-07-20: no such walker exists in tests/ — the consumers are
+covered by their behavior suites): a WALKER (shrink-only exemption ledger) is to pin that
+every registered coherence consumer routes through the chokepoint, so a new E-wave reader
+that greps names directly must fail the gate once it lands. Analytics reads FACETS, never
+custom names (id-free law extended: user inventions stay as private as user worlds).
 
 ### I.3 The criterion extension (standing, playbook-mirrored)
 The COUNTERPART CRITERION gains one clause: **no coherence system ships without its

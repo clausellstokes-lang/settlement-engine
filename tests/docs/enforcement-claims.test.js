@@ -38,15 +38,34 @@ const rel = (p) => path.join(REPO, p);
 // the phantom-claim shape this pin exists to kill.
 const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|fails the build|zero violations/;
 
-// Standing-claim corpus. Meta-docs that merely QUOTE the vocabulary
-// (CONTRIBUTING.md, docs/A_PLUS_ROADMAP.md) are deliberately absent.
+// Standing-claim corpus (SS4: generalized from a fixed 3-doc list). The old
+// corpus was enumerated by hand, so a NEW doc making a completeness claim was
+// outside the gate BY CONSTRUCTION. Now the corpus is every root-level *.md and
+// docs/**/*.md, minus the frozen EXEMPT list below of docs that QUOTE the
+// vocabulary rather than assert current state — a new doc is in-corpus by
+// default, and exempting one is a visible, reviewed act on this list.
+const EXEMPT_DOCS = Object.freeze({
+  'CONTRIBUTING.md': 'defines the @enforced-by operating standard (quotes the vocabulary as spec)',
+  'docs/A_PLUS_ROADMAP.md': 'the A+ spec — quotes the vocabulary as acceptance criteria',
+  'CODEBASE_REVIEW.md': 'historical point-in-time review snapshot (quotes claims as findings)',
+  'docs/COMPREHENSIVE_REVIEW_2026-07-13.md': 'historical review snapshot (quotes claims as findings)',
+  'docs/COMPREHENSIVE_REVIEW_2026-07-15.md': 'historical review snapshot (quotes claims as findings)',
+});
+
+function walkMd(dir, out = []) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fp = path.join(dir, e.name);
+    if (e.isDirectory()) walkMd(fp, out);
+    else if (/\.md$/i.test(e.name)) out.push(fp);
+  }
+  return out;
+}
+
 const DOC_FILES = [
-  'ARCHITECTURE.md',
-  'docs/critique-implementation-status.md',
-  'docs/COHESION_REMEDIATION_PLAN.md',
-  'docs/VOICE_AND_TONE.md',
+  ...fs.readdirSync(REPO).filter((n) => /\.md$/i.test(n)),
+  ...walkMd(rel('docs')).map((abs) => path.relative(REPO, abs).split(path.sep).join('/')),
   'eslint.config.js',
-];
+].filter((f) => !(f in EXEMPT_DOCS));
 
 // Representative files whose resolved eslint config we inspect for rule
 // severities. One JSX (component layer: jsx-a11y + visual-budget jsx rules)
@@ -177,6 +196,13 @@ describe('enforcement-claims meta-pin (A+ P1.1)', () => {
 
   it('every corpus file exists (a rename must update the corpus list, not silently drop coverage)', () => {
     for (const f of DOC_FILES) expect(fs.existsSync(rel(f)), `${f} missing`).toBe(true);
+  });
+
+  it('every EXEMPT doc still exists and the corpus stays non-trivial (walk did not silently collapse)', () => {
+    for (const f of Object.keys(EXEMPT_DOCS)) {
+      expect(fs.existsSync(rel(f)), `${f} exempt but missing — a rename must update EXEMPT_DOCS`).toBe(true);
+    }
+    expect(DOC_FILES.length, 'md walk found implausibly few corpus docs').toBeGreaterThanOrEqual(10);
   });
 
   it('`npm run check` includes typecheck, lint, and test (the three enforcer classes)', () => {
