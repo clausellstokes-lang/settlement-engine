@@ -17,6 +17,14 @@
  *      output. Forking via config means samples re-derive every time
  *      and stay synchronised with the engine's actual capabilities.
  *
+ * NARRATIVE PARITY (W5, owner order 2026-07-21, ledger 707b7d5a): each card
+ * is a REAL generation. Its seed+config were seed-hunted through the live
+ * generateSettlementPipeline until the generated FACTS carried the card's
+ * bones, then the teaser was rewritten to the generated truth — the same
+ * narrative-parity discipline the dossier obeys, applied to marketing. The
+ * seeds are quoted forever; changing a config or seed re-derives a different
+ * settlement and the teaser must be re-matched.
+ *
  * Each sample carries:
  *   - id        — stable identifier (used by the fork action)
  *   - name      — display name shown on the card
@@ -31,10 +39,16 @@
  *                 / priorityCriminal / priorityMagic), a terrainOverride,
  *                 and a bounded monsterThreat tier — NOT a nested
  *                 `sliders` object or a `nearbyTerrain` key (the engine
- *                 ignores both). Plus a seed so forks are reproducible
- *                 within a session (but each user gets a different
- *                 character because the SEED is suffixed with the user
- *                 id at fork time).
+ *                 ignores both). Each config also pins `culture` and
+ *                 `customName` (real wizard dials) so the fork's names and
+ *                 settlement name match the card, and MAY pin nearby-resource
+ *                 state (Black Crag marks iron `depleted`) when a defining
+ *                 resource trait must survive the per-user fork suffix rather
+ *                 than ride the random depletion roll. Plus a seed so forks
+ *                 are reproducible within a session — each user still gets a
+ *                 different SETTLEMENT because the seed is suffixed with the
+ *                 user id at fork time (they share the card's name, not its
+ *                 people or history).
  */
 
 export const SAMPLE_SETTLEMENTS = Object.freeze([
@@ -43,19 +57,21 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Mossgate',
     tier:    'town',
     terrain: 'coastal',
-    teaser:  'A rain-blessed lakeside town where the council and the temple have stopped speaking, and the harbour-master quietly runs both.',
+    teaser:  'A rain-grey harbour town where the council and the temple have stopped speaking, and the merchant guilds quietly profit from the silence.',
     tags:    ['Coastal trade', 'Contested council', 'Religious tension'],
     config: {
       settType:         'town',
       tradeRouteAccess: 'port',
       terrainOverride:  'coastal',
       monsterThreat:    'heartland',
+      culture:          'germanic',
+      customName:       'Mossgate',
       priorityMilitary: 35,
       priorityReligion: 70,
       priorityEconomy:  68,
       priorityCriminal: 30,
       priorityMagic:    25,
-      seed:             'sample-mossgate-v1',
+      seed:             'mossgate-004',
     },
   },
   {
@@ -63,19 +79,31 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Black Crag',
     tier:    'city',
     terrain: 'mountain',
-    teaser:  'A mountain city built on iron, ruled by a guild of master smiths, surrounded by mines that have started giving up too little ore.',
+    teaser:  'A mountain city built on iron, ruled by its guild-masters, whose mines now give up too little ore.',
     tags:    ['Industrial', 'Guild power', 'Dwindling resource'],
     config: {
       settType:         'city',
       tradeRouteAccess: 'crossroads',
       terrainOverride:  'mountain',
       monsterThreat:    'frontier',
+      culture:          'germanic',
+      customName:       'Black Crag',
       priorityMilitary: 60,
       priorityReligion: 35,
       priorityEconomy:  78,
       priorityCriminal: 45,
-      priorityMagic:    30,
-      seed:             'sample-blackcrag-v1',
+      priorityMagic:    12,
+      // The card's central promise — a city on iron whose mines are giving
+      // out — must survive every user's fork, not just the canonical seed.
+      // Iron presence + depletion are both random rolls, so under a pure seed
+      // it held in only ~2 of 12 suffixed forks. Pin the nearby resources (a
+      // real wizard dial — the four-state resource picker) with iron marked
+      // DEPLETED; now it holds 12/12, deterministic and honest. The canonical
+      // seed reads "Iron ore (local mines exhausted)" + a smelter starved of ore.
+      nearbyResourcesRandom: false,
+      nearbyResources:       ['iron_deposits', 'coal_deposits', 'stone_quarry', 'mountain_timber', 'alpine_pasture', 'crossroads_position'],
+      nearbyResourcesState:  { iron_deposits: 'depleted' },
+      seed:                  'blackcrag-016',
     },
   },
   {
@@ -83,19 +111,21 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
     name:    'Thornwell',
     tier:    'village',
     terrain: 'forest',
-    teaser:  'A forest village a week from the nearest road, where every cottage has a door that locks twice and the woodward kills more wolves than the militia has ever fought men.',
+    teaser:  "A forest village a week from the nearest road, where every cottage bars its door twice and the hunter's lodge kills more wolves than the militia has ever fought men.",
     tags:    ['Frontier', 'Monster pressure', 'Self-reliant'],
     config: {
       settType:         'village',
-      tradeRouteAccess: 'road',
+      tradeRouteAccess: 'isolated',
       terrainOverride:  'forest',
-      monsterThreat:    'frontier',
-      priorityMilitary: 55,
-      priorityReligion: 50,
+      monsterThreat:    'plagued',
+      culture:          'germanic',
+      customName:       'Thornwell',
+      priorityMilitary: 60,
+      priorityReligion: 45,
       priorityEconomy:  30,
       priorityCriminal: 20,
-      priorityMagic:    40,
-      seed:             'sample-thornwell-v1',
+      priorityMagic:    35,
+      seed:             'thornwell-034',
     },
   },
 ]);
