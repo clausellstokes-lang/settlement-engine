@@ -1,24 +1,22 @@
 /**
  * @vitest-environment jsdom
  *
- * tests/ui/wizardEmptyState.proofPair.test.jsx — anon-Create tidying lock-in.
+ * tests/ui/wizardEmptyState.proofPair.test.jsx — CREATE-PAGE DEMOTION (Walk W1,
+ * owner order 2026-07-21, ledger).
  *
- * Two changes are pinned here:
- *   1. The redundant "Want full control? … unlock Basic & Advanced generation"
- *      sign-in banner was removed (it duplicated HomeHero's sign-in messaging).
- *      The test asserts that copy never renders.
- *   2. The two anon proof cards (HomeSampleDossier + RegionWakeReplay) now sit
- *      inside a single .sf-proof-pair wrapper so they lay out side by side on
- *      wider screens and stack on narrow ones, instead of two full-width
- *      stacked cards. The test asserts the wrapper exists and contains BOTH
- *      cards.
+ * The two anon proof cards (HomeSampleDossier "Hightower's Reach" + RegionWakeReplay
+ * "watch a region wake up") were REMOVED from the Create page — that job moved to the
+ * landing/welcome page. This pins that neither card, nor the old .sf-proof-pair
+ * wrapper, renders on Create, and that the previously-removed redundant "unlock Basic"
+ * sign-in banner still never renders.
  *
- * The two lazy cards and HomeHero are stubbed — this test is about
- * WizardEmptyState's own layout/copy, not the cards' internals.
+ * HomeHero is stubbed. The two proof modules are also stubbed so that IF the
+ * component still imported them, they WOULD surface here — the absence assertions
+ * therefore prove the mounts are gone, not merely that a module failed to load.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -38,8 +36,8 @@ vi.mock('../../src/components/home/RegionWakeReplay.jsx', () => ({
   ),
 }));
 
-describe('WizardEmptyState — anon-Create tidying', () => {
-  test('drops the redundant sign-in banner and pairs the two proof cards', async () => {
+describe('WizardEmptyState — Create-page demotion', () => {
+  test('renders the hero but neither proof card nor the proof-pair wrapper', async () => {
     const { WizardEmptyState } = await import(
       '../../src/components/generate/WizardEmptyState.jsx'
     );
@@ -54,24 +52,15 @@ describe('WizardEmptyState — anon-Create tidying', () => {
       />
     );
 
-    // Both proof cards mount inside the single responsive pair wrapper.
-    await waitFor(() => {
-      expect(screen.getByTestId('sample-dossier')).toBeTruthy();
-      expect(screen.getByTestId('region-wake-replay')).toBeTruthy();
-    });
+    expect(screen.getByTestId('home-hero')).toBeTruthy();
 
-    const pair = container.querySelector('.sf-proof-pair');
-    expect(pair).not.toBeNull();
-    expect(pair.querySelector('[data-testid="sample-dossier"]')).not.toBeNull();
-    expect(pair.querySelector('[data-testid="region-wake-replay"]')).not.toBeNull();
+    // Give any (now-removed) lazy chunk a tick; the proof cards must never appear.
+    await new Promise((r) => setTimeout(r, 20));
+    expect(screen.queryByTestId('sample-dossier')).toBeNull();
+    expect(screen.queryByTestId('region-wake-replay')).toBeNull();
+    expect(container.querySelector('.sf-proof-pair')).toBeNull();
 
-    // C1r-c2: both proof cards render as half-scale miniatures below the fold, so
-    // WizardEmptyState passes `compact` to each.
-    expect(pair.querySelector('[data-testid="sample-dossier"]').getAttribute('data-compact')).toBe('true');
-    expect(pair.querySelector('[data-testid="region-wake-replay"]').getAttribute('data-compact')).toBe('true');
-
-    // The removed redundant banner copy must not render anywhere.
-    expect(screen.queryByText(/unlock Basic/i)).toBeNull();
+    // The old redundant banner copy must still not render.
     expect(container.textContent).not.toMatch(/unlock Basic/i);
   });
 });

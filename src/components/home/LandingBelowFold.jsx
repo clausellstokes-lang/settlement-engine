@@ -157,26 +157,29 @@ function InstantDraftCard() {
   );
 }
 
-// ── 05 · Commons — up to four REAL published gallery towns (W-L2/3) ─────────
+// ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
 // top_voted — the strongest ranking signal src/lib/gallery.js actually tracks
-// (it has net_votes + view counts; there is NO fork counter). Decorative cards
-// fill the remaining slots; a failed or empty fetch renders all four decorative.
-// Slot dimensions are identical in every state (150px thumb + one footer row),
-// so the swap-in causes zero layout shift.
+// (it has net_votes + view counts; there is NO fork counter). Real published
+// towns fill the slots first; any slot without a real town falls back to a
+// decorative card LABELED ' (placeholder)'. When six real towns exist, all six
+// slots are real and no placeholder shows. A failed or empty fetch renders six
+// placeholders (the empty-gallery dev state). Slot dimensions are identical in
+// every state (150px thumb + one footer row), so the swap-in causes zero layout shift.
+const COMMONS_SLOTS = 6; // owner order 2026-07-21, ledger 4f71743a
 function GalleryCards({ onNavigate }) {
   const decoratives = tl('commons.cards') || [];
   const [tiles, setTiles] = useState(null); // null = not landed yet → decorative
   useEffect(() => {
     let live = true;
-    fetchPublicGallery({ pageSize: 4, sort: 'top_voted' })
-      .then((r) => { if (live) setTiles((r?.items || []).slice(0, 4)); })
+    fetchPublicGallery({ pageSize: COMMONS_SLOTS, sort: 'top_voted' })
+      .then((r) => { if (live) setTiles((r?.items || []).slice(0, COMMONS_SLOTS)); })
       .catch(() => { if (live) setTiles([]); });
     return () => { live = false; };
   }, []);
 
   const real = tiles || [];
-  const slots = decoratives.slice(0, 4).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
+  const slots = decoratives.slice(0, COMMONS_SLOTS).map((deco, i) => (real[i] ? { real: real[i], deco } : { deco }));
 
   return (
     <div style={{
@@ -201,7 +204,7 @@ function GalleryCards({ onNavigate }) {
               position: 'absolute', left: 0, right: 0, bottom: 0, padding: '26px 14px 10px',
               backgroundImage: 'linear-gradient(rgba(20,14,5,0), rgba(20,14,5,0.72))',
               fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: PARCH,
-            }}>{tile ? tile.name : deco.name}</span>
+            }}>{tile ? tile.name : `${deco.name} (placeholder)`}</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: tile ? '7px 14px' : '11px 14px', minHeight: 52 }}>
             {tile ? (
@@ -365,12 +368,15 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
       <div ref={rootRef} style={{ position: 'relative', zIndex: 1 }}>
         {/* leg 1 · desk → thorp */}
         <div className="sf-welcome-leg" data-welcome-leg="0" aria-hidden="true" />
-        {/* ══ 01 · Forge — painted thorpe scene (stop 1 · thorp) ══ */}
+        {/* ══ 01 · Forge + the drawn town. Item 9 (owner 2026-07-21): the §05 map
+            section is MERGED into this card — forge first, the drawn town second, copy
+            verbatim. Item 10: translucent cream (sf-landing-scene-cream) with no painted
+            scene, so the growth film reads through (stop 1 · thorp). ══ */}
       <section
         id="forge"
         aria-labelledby="sf-forge-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad, '--sf-scene': SCENE('thorpe') }}
+        style={{ ...pad }}
       >
         <Waypoint pill={tl('forge.waypoint')} />
         <div style={twoColGrid(28)}>
@@ -387,12 +393,24 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </div>
           <InstantDraftCard />
         </div>
+        {/* ── The drawn town (was §05 · The map), merged in (item 9). W-DOC: THE MAP
+            WAYPOINT's frozen v2 lens plates of the same fixture town — copy verbatim. ── */}
+        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xxl}px auto 0` }}>
+          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+            <h2 id="sf-map-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
+            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
+          </div>
+          <MapPlateCard />
+          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
+            {tl('map.tease')}
+          </p>
+        </div>
       </section>
 
         {/* leg 2 · thorp → hamlet */}
         <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
         {/* ══ 02 · The brief — plain parchment (stop 2 · hamlet) ══ */}
-      <section id="brief" aria-labelledby="sf-brief-title" style={{ ...pad, background: PARCH }}>
+      <section id="brief" aria-labelledby="sf-brief-title" className="sf-landing-scene-cream" style={{ ...pad }}>
         <Waypoint pill={tl('brief.waypoint')} />
         <div style={twoColGrid(36)}>
           <div>
@@ -416,7 +434,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
       <section
         id="voice"
         aria-labelledby="sf-voice-title"
-        className="sf-landing-voice"
+        className="sf-landing-scene-cream"
         style={{ ...pad, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}
       >
         <Waypoint pill={tl('voice.waypoint')} />
@@ -452,7 +470,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="realm"
         aria-labelledby="sf-realm-title"
         className="sf-landing-scene-cream"
-        style={{ ...pad, '--sf-scene': SCENE('city') }}
+        style={{ ...pad }}
       >
         {/* THE FILM RULING (owner): the town-stop caption — the film has just
             scrubbed desk → town, so the world is alive before "make it canon". */}
@@ -479,30 +497,13 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <RealmMapCard />
       </section>
 
-      {/* ══ 05 · The map — plain parchment; THE MAP WAYPOINT (W-DOC, brief §4).
-          The plate card renders the frozen v2 lens plates of the FIXTURE town
-          (the same town as §02's dossier — the seed tag is the receipt), with
-          the lens flip + provenance tease. ══ */}
-        {/* leg 5 · town → city */}
+        {/* leg 5 · town → city. Item 9 merged the §05 map card into §01 Forge, so
+            this travel leg (the film still has six: data-welcome-leg 0..5) now leads
+            straight into §06 The commons at the city stop. */}
         <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
-        {/* Stop 5 · city — §05 The map and §06 The commons both present here (the
-            city stop; the artifacts + maps the spec groups at this tier). */}
-      <section id="map" aria-labelledby="sf-map-title" style={{ ...pad, background: PARCH }}>
-        <Waypoint pill={tl('map.waypoint')} />
-        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
-          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="sf-map-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
-            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
-          </div>
-          <MapPlateCard />
-          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
-            {tl('map.tease')}
-          </p>
-        </div>
-      </section>
 
-      {/* ══ 06 · The commons — plain parchment ══ */}
-      <section id="commons" aria-labelledby="sf-commons-title" style={{ ...pad, background: PARCH }}>
+      {/* ══ 06 · The commons — translucent cream (item 10) ══ */}
+      <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
@@ -523,7 +524,10 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         id="closer"
         aria-labelledby="sf-closer-title"
         className="sf-landing-scene-dark"
-        style={{ padding: isMobile ? `0 ${SP.md}px ${SP.xxl}px` : `0 ${SP.xxl}px 56px`, '--sf-scene': SCENE('create') }}
+        // Item 11 (owner 2026-07-21): FLUSH BOTTOM. Zero bottom padding so the set-out
+        // card's footer sits flush against the page end / the global app footer, with no
+        // dead trailing scroll region. Set-out keeps its dark scene (item-10 exempt).
+        style={{ padding: isMobile ? `0 ${SP.md}px 0` : `0 ${SP.xxl}px 0`, '--sf-scene': SCENE('create') }}
       >
         <Waypoint pill={tl('closer.waypoint')} dark />
         <div style={{ maxWidth: 880, margin: `${SP.xxl * 2}px auto 0`, textAlign: 'center' }}>

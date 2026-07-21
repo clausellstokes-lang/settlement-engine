@@ -289,16 +289,16 @@ button {
   min-height: 86vh;
 }
 
-/* Sections 01 · Forge and 04 · The Realm — cream scrim over their painted
-   scenes (thorpe / city), attachment scroll (never more than one fixed layer). */
+/* Walk W1 (owner order 2026-07-21, item 10): every below-fold section card drops its
+   painted-scene / opaque-parchment background and adopts ONE translucent cream, so the
+   scrubbed growth film (WelcomeJourneyBackdrop, item 1) reads THROUGH behind every card.
+   Alpha 0.9 keeps INK/BODY text AA over the film's brightest frame while still letting
+   the settlement art show. The set-out (07) card is EXEMPT — it keeps its dark scene.
+   (Was `.sf-landing-scene-cream`: a cream scrim over per-section painted scenes; the
+   scenes were dropped for the film read-through, so this is now a flat translucent tone
+   applied to 01/02/03/04/06 alike.) */
 .sf-landing-scene-cream {
-  background-image:
-    linear-gradient(rgba(247, 240, 228, 0.66), rgba(247, 240, 228, 0.72)),
-    var(--sf-scene, none);
-  background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
-  background-repeat: no-repeat;
+  background-color: rgba(247, 240, 228, 0.9);
 }
 
 /* Closer 06 · Set out — dark scrim over the create scene, attachment scroll. */
@@ -324,12 +324,10 @@ button {
   .sf-landing-cue { animation: none; }
 }
 
-/* 03 · The voice — plain parchment at the page-body cream (#F7F0E4). This exact
-   tone has no semantic token (the brief/commons plains use parchment-50, a
-   token), so its one background lives here in CSS rather than as a raw hex in
-   JS (visual-budget lint). Hairline top/bottom borders are set inline (BORDER
-   token). */
-.sf-landing-voice { background-color: #f7f0e4; }
+/* 03 · The voice previously used `.sf-landing-voice` (#F7F0E4 opaque parchment).
+   Walk W1 item 10 retired that in favour of the shared translucent
+   `.sf-landing-scene-cream` so the growth film reads through it like every other
+   section; its hairline top/bottom borders stay set inline (BORDER token). */
 
 /* ── C2 THE WELCOME — the travel-and-stop film journey ────────────────────────
    The `.leg` travel spacers sit between the stops. Scrolling through one scrubs

@@ -1,49 +1,26 @@
 /**
  * WizardEmptyState.jsx — Create landing (no mode picked, no settlement).
  *
- * The empty state: HomeHero + the two anon proof cards for anonymous visitors,
- * the "Create a settlement" PageHeader for signed-in, and the Basic/Advanced
- * mode picker (gated to signed-in) rendered as ONE quiet parchment card.
- * Presentational — every value and handler arrives via props; state stays in
- * the parent. Restores master's base-of-record composition (LANDING_MAX frame,
- * PageHeader, quiet ModeSelector); the 0168e287 merge had regressed it to a
- * plain-h2 heading + large ModeSelector + an above-the-fold InstantWorldEntry.
+ * The empty state: HomeHero for anonymous visitors, the "Create a settlement"
+ * PageHeader for signed-in, and the Basic/Advanced mode picker (gated to signed-in)
+ * rendered as ONE quiet parchment card. Presentational — every value and handler
+ * arrives via props; state stays in the parent. Restores master's base-of-record
+ * composition (LANDING_MAX frame, PageHeader, quiet ModeSelector).
  *
- * C1r-d (owner's walk fix): the Instant World premium card was UNMOUNTED from
- * this surface entirely — the create page declutters to hero + proof pair +
- * mode picker. InstantWorldEntry.jsx is left intact (no other consumers) so the
- * capability can be re-homed deliberately; only this page's card dies.
+ * Walk W1 (owner order 2026-07-21, ledger — CREATE-PAGE DEMOTION): the two anon
+ * proof exhibits (HomeSampleDossier "Hightower's Reach" + RegionWakeReplay "watch a
+ * region wake up") were UNMOUNTED from this surface — "that job has been transferred
+ * to the landing page," which now carries the proof-of-depth. The two component files
+ * are left intact: they have no other runtime consumer, and they are DISTINCT modules
+ * (not duplicates of the landing's own fixture artifacts), so the item's delete-only-
+ * duplicates permission does not apply — they stay available to be re-homed. The
+ * Instant World premium card was earlier unmounted the same way (C1r-d).
  */
 
-import { lazy, Suspense } from 'react';
-import { BORDER, CARD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
+import { BORDER, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
-
-// Below-hero proof cards lazy-load; reserve their space with a height-matched
-// skeleton so the acquisition surface reads as "loading", not a blank gap that
-// pops in and shifts layout on cold connections (P9: skeletons over null).
-function ProofSkeleton({ height }) {
-  return (
-    <div aria-hidden="true" style={{
-      height, border: `1px solid ${BORDER}`, background: CARD,
-      opacity: 0.6,
-    }} />
-  );
-}
-
-// Sample dossier proof card. Self-gates on flag +
-// anonymous + no settlement yet; renders nothing once any of those
-// flip. Mounted directly below HomeHero so anon visitors see proof of
-// the moat without scrolling.
-const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
-
-// "Watch a region wake up" read-only replay. Self-gates inside on
-// anon + no-settlement (same as the sample dossier), so it renders nothing once
-// the visitor has the real thing. Mounted below the sample dossier so the
-// teaser ladder reads: proof of the static dossier → proof of the LIVING world.
-const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
 export function WizardEmptyState({
   showHomeHero,
@@ -52,32 +29,13 @@ export function WizardEmptyState({
   onSignIn,
   onNavigate,
 }) {
-  // ONE landing frame. The whole Create-landing stack (hero + proof cards + the
-  // signed-in heading + mode picker) shares LANDING_MAX so the column has a
-  // single edge, rather than HomeHero/WelcomeBack/mode-picker each nesting a
-  // bespoke width inside a wider parent.
+  // ONE landing frame. The Create-landing stack (hero + the signed-in heading +
+  // mode picker) shares LANDING_MAX so the column has a single edge, rather than
+  // HomeHero/WelcomeBack/mode-picker each nesting a bespoke width inside a wider parent.
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: LANDING_MAX, margin: '0 auto', padding: `${SP.xl}px 0` }}>
       {showHomeHero && (
-        <>
-          <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          {/* The two anon proof cards sit side by side on wider screens and
-              stack on narrow ones (see .sf-proof-pair), so they stop doubling
-              the landing's vertical length: proof of the static dossier beside
-              proof of the living world. */}
-          <div className="sf-proof-pair">
-            {/* Below the fold, both proof cards render as half-scale miniatures
-                (C1r-c2 "true miniatures") — flat, narrower exhibits that stop the
-                pair from doubling the landing's vertical length. `compact` is
-                presentational; the replay keeps its >=44px scrubber controls. */}
-            <Suspense fallback={<ProofSkeleton height={300} />}>
-              <HomeSampleDossier compact />
-            </Suspense>
-            <Suspense fallback={<ProofSkeleton height={300} />}>
-              <RegionWakeReplay compact onUpgrade={() => onNavigate?.('pricing')} />
-            </Suspense>
-          </div>
-        </>
+        <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
       )}
       {!showHomeHero && (
         <PageHeader

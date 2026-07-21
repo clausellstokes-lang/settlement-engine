@@ -49,6 +49,15 @@ import { fixture } from './landingFixture.js';
 const MONO = fontFamily.mono;
 export const SCENE = (name) => `url('/backgrounds/landing/${name}-1400.jpg')`;
 
+// Walk W1, item 8 (owner order 2026-07-21, ledger 4f71743a): the §04 Realm map preview.
+// The painted world-map/crossroads placeholder is REPLACED by W7's generated realm-map
+// preview (settlements, deterministic seed, house style), folded onto the composite tip
+// at d18768fa. This is the SINGLE swap site. Manager pick (vetoable): fallowmere /
+// parchment. NOTE: the SVG lives on the composite TIP, not this branch's base — it
+// arrives when W1 folds onto the tip, so this references the path as a string (a
+// worktree-local load 404s until the fold; that is expected).
+const REALM_MAP_PREVIEW = "url('/landing-maps/realm-preview.fallowmere.parchment.svg')";
+
 // Status-tint chip palette — all from tokens. `faith` reuses the app's
 // faith-event convention (semantic violet), the one §9-sanctioned violet
 // outside §03; it is NOT a second violet — it is the same violet token family.
@@ -299,7 +308,7 @@ export function RealmMapCard() {
       {/* Map half */}
       <div style={{
         position: 'relative', minHeight: 320,
-        backgroundImage: SCENE('world-map'), backgroundSize: 'cover', backgroundPosition: 'center',
+        backgroundImage: REALM_MAP_PREVIEW, backgroundSize: 'cover', backgroundPosition: 'center',
       }}>
         <div style={{
           position: 'absolute', top: 14, left: 14, background: 'rgba(255,251,245,0.94)',

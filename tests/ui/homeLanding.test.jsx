@@ -18,8 +18,8 @@
  *     (the regen-policy drift signal);
  *   - the mono seed provenance tag renders (determinism is the promise);
  *   - COMMONS FALLBACK: with the gallery unreachable (jsdom → supabase
- *     unconfigured), all four decorative cards render — four full slots, no
- *     empty grid, zero layout shift.
+ *     unconfigured), all six slots render as labeled placeholders — six full
+ *     slots, no empty grid, zero layout shift.
  *
  * Copy is asserted against the `landing` registry object and the frozen
  * fixture, so a copy/fixture change is a data change here, never a literal edit.
@@ -219,14 +219,17 @@ describe('HomeLanding — scrollable landing', () => {
     }
   });
 
-  test('commons fallback renders all four decorative slots when the gallery is unreachable', async () => {
+  test('commons fallback renders six labeled placeholder slots when the gallery is unreachable', async () => {
     renderLanding();
     await screen.findByText(landing.commons.h2);
-    // jsdom has no Supabase config → fetchPublicGallery resolves empty → all
-    // four decorative cards render (zero layout shift, no empty grid).
-    expect(landing.commons.cards).toHaveLength(4);
+    // W1 (owner order 2026-07-21): the commons strip is fed dynamically from the
+    // gallery into SIX slots; real towns fill first, decorative placeholders back-
+    // fill the rest and are LABELED ' (placeholder)'. jsdom has no Supabase config
+    // → fetchPublicGallery resolves empty → all six slots render as placeholders
+    // (zero layout shift, no empty grid).
+    expect(landing.commons.cards).toHaveLength(6);
     for (const card of landing.commons.cards) {
-      expect(await screen.findByText(card.name)).toBeTruthy();
+      expect(await screen.findByText(`${card.name} (placeholder)`)).toBeTruthy();
     }
   });
 });
