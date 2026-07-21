@@ -16,9 +16,18 @@ restore(): restore access tokens from storage if possible
 
 window.Cloud = (function () {
   // helpers to use in providers for token handling
+  // SECURITY (SettlementForge fork patch): the Dropbox OAuth access token is a
+  // bearer secret, and this fork ships to the SAME ORIGIN as the auth + payments
+  // app. Hold it in sessionStorage (session-scoped) instead of localStorage so it
+  // is not written to disk across browser sessions — a browser restart forces a
+  // fresh re-auth rather than leaving the token at rest indefinitely. Residual
+  // risk (documented in docs/fmg-fork.md): the token is still readable by
+  // same-origin script for the life of the tab, which is inherent to the
+  // client-side Dropbox SDK — it needs the raw token to sign its API calls, and
+  // there is no server-side token custody in this vendored fork.
   const lSKey = x => `auth-${x}`;
-  const setToken = (prov, key) => localStorage.setItem(lSKey(prov), key);
-  const getToken = prov => localStorage.getItem(lSKey(prov));
+  const setToken = (prov, key) => sessionStorage.setItem(lSKey(prov), key);
+  const getToken = prov => sessionStorage.getItem(lSKey(prov));
 
   /**********************************************************/
   /* Dropbox provider                                       */
@@ -111,7 +120,10 @@ window.Cloud = (function () {
     },
 
     async setDropBoxToken(token) {
-      DEBUG.cloud && console.info("Access token:", token);
+      // SECURITY (SettlementForge fork patch): the upstream debug log of the raw
+      // access token was removed here. It is a bearer secret and this origin also
+      // carries the auth session, so a debug-flag console leak of it is still a
+      // leak. Do not reintroduce any logging of the token value.
       setToken(this.name, token);
       await this.connect(token);
     },

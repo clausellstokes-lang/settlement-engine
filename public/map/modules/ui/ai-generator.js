@@ -193,6 +193,21 @@ function generateWithAi(defaultPrompt, onApply) {
   }
 
   async function generate(button) {
+    // SECURITY (SettlementForge fork patch): FMG's BYOK AI generator POSTs a
+    // user-supplied API key + prompt directly to api.openai.com /
+    // api.anthropic.com (and localhost Ollama) from the /map/ origin, which is
+    // SAME-ORIGIN with the auth + payments app. This cross-origin egress is
+    // disabled in the fork: the feature is not part of the SettlementForge
+    // product (the embedded map hides the notes editor that hosts this button —
+    // see sf-bridge.js `sf-embedded`), and the app's own AI path is
+    // server-brokered (tests/security/clientAiBoundary.contract.test.js). It is
+    // reachable only via direct top-level /map/ navigation, where it is a latent
+    // exfil vector on the token-bearing origin — so the network call never
+    // fires. `generate()` is the sole caller of PROVIDERS[provider].generate, so
+    // this single early return neutralizes every LLM egress path. Re-enabling is
+    // an owner product decision (see docs/fmg-fork.md).
+    return tip("AI text generation is disabled in SettlementForge.", true, "error", 4000);
+
     const key = byId("aiGeneratorKey").value;
     if (!key) return tip("Please enter an API key", true, "error", 4000);
 

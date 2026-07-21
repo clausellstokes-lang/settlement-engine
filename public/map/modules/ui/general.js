@@ -336,23 +336,33 @@ function updateCellInfo(point, i, g) {
   infoTemp.innerHTML = convertTemperature(grid.cells.temp[g]);
   infoPrec.innerHTML = cells.h[i] >= 20 ? getFriendlyPrecipitation(i) : "n/a";
   infoRiver.innerHTML = cells.h[i] >= 20 && cells.r[i] ? getRiverInfo(cells.r[i]) : "no";
+  // SECURITY (SettlementForge fork patch): the state/province/culture/religion/
+  // burg/biome NAMES below are untrusted strings from a loaded .map (pack.* is
+  // JSON.parse'd from uploaded data) rendered raw into innerHTML on this
+  // token-bearing origin. Route every name through escapeHtml() so a crafted
+  // name can neither introduce a tag nor break out of the interpolation. The
+  // numeric cell indices interpolated alongside them are safe as-is.
   infoState.innerHTML =
     cells.h[i] >= 20
       ? cells.state[i]
-        ? `${pack.states[cells.state[i]].fullName} (${cells.state[i]})`
+        ? `${escapeHtml(pack.states[cells.state[i]].fullName)} (${cells.state[i]})`
         : "neutral lands (0)"
       : "no";
   infoProvince.innerHTML = cells.province[i]
-    ? `${pack.provinces[cells.province[i]].fullName} (${cells.province[i]})`
+    ? `${escapeHtml(pack.provinces[cells.province[i]].fullName)} (${cells.province[i]})`
     : "no";
-  infoCulture.innerHTML = cells.culture[i] ? `${pack.cultures[cells.culture[i]].name} (${cells.culture[i]})` : "no";
+  infoCulture.innerHTML = cells.culture[i]
+    ? `${escapeHtml(pack.cultures[cells.culture[i]].name)} (${cells.culture[i]})`
+    : "no";
   infoReligion.innerHTML = cells.religion[i]
-    ? `${pack.religions[cells.religion[i]].name} (${cells.religion[i]})`
+    ? `${escapeHtml(pack.religions[cells.religion[i]].name)} (${cells.religion[i]})`
     : "no";
   infoPopulation.innerHTML = getFriendlyPopulation(i);
-  infoBurg.innerHTML = cells.burg[i] ? pack.burgs[cells.burg[i]].name + " (" + cells.burg[i] + ")" : "no";
+  infoBurg.innerHTML = cells.burg[i]
+    ? escapeHtml(pack.burgs[cells.burg[i]].name) + " (" + cells.burg[i] + ")"
+    : "no";
   infoFeature.innerHTML = f ? pack.features[f].group + " (" + f + ")" : "n/a";
-  infoBiome.innerHTML = biomesData.name[cells.biome[i]];
+  infoBiome.innerHTML = escapeHtml(biomesData.name[cells.biome[i]]);
 }
 
 function getGeozone(latitude) {

@@ -558,7 +558,12 @@ function drawProvinces() {
     .filter(p => p.i && !p.removed)
     .map(p => {
       const [x, y] = p.pole || cells.p[p.center];
-      return /* html */ `<text x="${x}" y="${y}" id="provinceLabel${p.i}">${p.name}</text>`;
+      // SECURITY (SettlementForge fork patch): p.name is an untrusted string from
+      // a loaded .map, injected into #provs via innerHTML when the province layer
+      // renders (automatic on map load / layer toggle — no user interaction).
+      // Escape it so a crafted name cannot smuggle an event-handler-bearing SVG
+      // element into our token-bearing origin. (x/y and p.i are engine numerics.)
+      return /* html */ `<text x="${x}" y="${y}" id="provinceLabel${p.i}">${escapeHtml(p.name)}</text>`;
     });
 
   byId("provs").innerHTML = /* html */ `
