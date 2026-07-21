@@ -34,6 +34,11 @@ import { glyphKindFor } from './glyphAssign.js';
 // season/state portrait. A pure op emitter gated on the illustrated lens's dress fields;
 // [] for every other lens (the dormancy law), so the base-lens panorama stays byte-identical.
 import { groundDressOps } from './groundDress.js';
+// THE PROCEDURAL MASSING SUBSTRATE (TRANCHE M, M-0) — per-building volumetric construction
+// (walls + roof + cast shadow) that supersedes the glyph facade in a DIMENSIONAL view. Gated
+// on the `massingSet` style capability field; no shipped lens names it, so this stays dormant
+// (byte-identical) everywhere. Reached only via this already-lazy panorama surface.
+import { buildingMassingOps } from './massing.js';
 
 const VIEW = 1000;
 
@@ -60,9 +65,11 @@ const CATEGORY_HEIGHT = Object.freeze({
 });
 
 /** Pseudo-elevation of a landmark/fill building — tier scales the base, category the
- * silhouette. Deterministic in the model data (no rng).
+ * silhouette. Deterministic in the model data (no rng). EXPORTED (M-0) so the massing
+ * sample-plate script derives building heights from THIS single source of truth (never a
+ * duplicated table); the massing substrate itself receives the computed height.
  * @param {string} kind @param {number} tierIndex @param {string} [category] @returns {number} */
-function buildingElevation(kind, tierIndex, category) {
+export function buildingElevation(kind, tierIndex, category) {
   const base = kind === 'fill' ? 24 : 40 + tierIndex * 5;
   const mult = CATEGORY_HEIGHT[/** @type {string} */ (category)] ?? 0.9;
   return Math.round(base * mult);
@@ -239,6 +246,17 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID,
     const sz = bld.kind === 'fill' ? 6 : 9;
     const x = bld.position.x;
     const y = bld.position.y;
+    // ── MASSING SEAM (TRANCHE M, M-0) — a lens carrying the `massingSet` capability field
+    //    renders this building as a VOLUME (walls + kind-keyed roof + cast shadow) through
+    //    THIS projection + the ONE fixed NW light, in place of the flat prism + glyph facade
+    //    below. No shipped lens names massingSet ⇒ this branch never fires ⇒ every shipped
+    //    panorama is byte-identical (the dormancy law). The roof form keys off the SAME
+    //    glyphKindFor derivation the facade uses; the height is the shared buildingElevation. ──
+    if (style.massingSet) {
+      const { kind: roofKind } = glyphKindFor(bld, category);
+      for (const op of buildingMassingOps({ x, y, footprint: sz, height: h, roofKind, color, style, project, anchorKey: bld.anchorKey })) ops.push(op);
+      continue;
+    }
     // footprint corners NW,NE,SE,SW
     const baseSE = project(x + sz, y + sz, 0);
     const baseSW = project(x - sz, y + sz, 0);

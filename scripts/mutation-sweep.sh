@@ -52,6 +52,7 @@ MUTATED_FILES=(
   scripts/mutation-coverage-manifest.json
   src/store/campaignSlice.js
   src/domain/display/chroniclersLetter.js
+  src/design/townGlyphs/medieval.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -291,6 +292,14 @@ check_caught_planted "ai-wall/new model-calling surface unwalled" \
 #     mutation for this walker.)
 perl -i -pe "s/headline: String\(e\.headline \|\| 'A matter of the realm'\),/headline: String(e.headline || 'A matter of the realm').slice(0, -1),/" src/domain/display/chroniclersLetter.js
 check_caught "narrative/letter headline drift breaks beat parity" src/domain/display/chroniclersLetter.js "npx vitest run tests/simulation/narrativeParity.test.js"
+
+# 27. Massing silhouette totality (TRANCHE M, M-0 — the institution silhouette
+#     law) — a NEW glyph kind lands in the medieval library with no massing
+#     silhouette spec. Every named kind must map to a composite form (or the
+#     explicit generic default), so the dimensional map never renders a wrong
+#     generic shape for a new institution. The M-0 silhouette walker must red.
+perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsweep_orphan: cottage(),\n/" src/design/townGlyphs/medieval.js
+check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

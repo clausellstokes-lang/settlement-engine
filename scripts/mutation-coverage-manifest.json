@@ -541,6 +541,10 @@
     "tests/lint/swatchResolves.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/townMapMassingSilhouette.walker.test.js": {
+      "kind": "mutation",
+      "label": "massing/silhouette totality unmapped kind"
+    },
     "tests/lint/transcendentalMathBaseline.test.js": {
       "kind": "mutation",
       "label": "determinism/transcendental Math.pow in domain"
