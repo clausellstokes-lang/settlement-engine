@@ -1,103 +1,128 @@
-# THE ARCHITECTURE KERNEL — cathedral-grade procedural buildings (research-backed, Fable, 2026-07-21)
+# THE ARCHITECTURE KERNEL — cathedral-grade procedural buildings (Fable, 2026-07-21)
+## v2 — CORRECTED after Fable-tier adversarial verification (wf_4326e20d-c29)
 
-Owner order (the walk, CONFIRMED 2026-07-21): **EVERY institution** rendered as a
-DETAILED, DISTINCTIVE 3D building — not the cathedral alone. The cathedral (emulating a
-real gothic reference: nave, transept, flying buttresses, traceried windows, spire,
-statuary) is the STATED EXEMPLAR and the fidelity BAR; the mandate is that the smithy,
-mill, keep, guildhall, market, granary, temple, dock, manor, inn, moot-hall, mage-tower,
-and every other institution kind — built-in AND custom — each gets its own grammar to
-that same bar. Every building carries per-building COSMETIC/DETAIL DRIFT keyed to the two
-D&D alignment axes (lawful↔chaos, good↔evil), economic profile, and terrain/resource.
-This supersedes the M-0 "recognizable massing" tier as the CEILING; M-0 is the floor it
-climbs from. TOTALITY IS THE CONTRACT: the detail walker reds if ANY institution kind
-lacks a grammar — no kind is exempt, none ships as a generic box. Backed by 4-agent research (wf_8f8917a5-363; sources in
-the journal). VERDICT: buildable thoroughly, under our laws, as a multi-wave kernel.
+Owner order (the walk, CONFIRMED): **EVERY institution** rendered as a DETAILED,
+DISTINCTIVE 3D building — the cathedral (real gothic reference: nave, transept, flying
+buttresses, traceried windows, spire, statuary) is the stated EXEMPLAR and fidelity BAR;
+the mandate covers smithy, mill, keep, guildhall, market, temple, dock, manor, inn,
+moot-hall, mage-tower, and every kind, built-in AND custom, each to that bar, each with
+per-building DRIFT keyed to the two D&D alignment axes (lawful↔chaos, good↔evil), economic
+profile, and terrain/resource. Totality is the contract: the detail walker reds if any
+kind lacks a grammar — no generic boxes.
 
-## THE MECHANISM (research verdict): SHAPE GRAMMARS
-The state of the art is CGA/split shape grammars (Müller 2006 CGA shape; Wonka 2003 split
-grammars; CGA++ 2015 cross-shape events; Recompose 2024). A shape = symbol + scope
-(oriented box) + geometry; rules rewrite shapes into child shapes building a shape tree;
-leaves carry geometry. Core ops: extrude · comp(f) component-split · split(axis) with
-absolute/relative/FLOATING(~) sizes + repeat(*) · roof ops · instance(asset) · occlusion
-queries (context-sensitive: a window becomes wall where a wing abuts). Gothic ornament
-(tracery, buttresses) = Havemann-Fellner GML: parametric compass-and-straightedge
-constructions (circles + lines + booleans), boolean-free where possible.
-**Determinism: CLEAN.** Interpretation is pure CPU geometry algebra; the only randomness
-is per-shape seeded PRNG (seed → identical mesh). This is EXACTLY our pure-hash idiom
-lifted from motifs to geometry. The condition-driven DRIFT the owner wants IS the
-grammar's parameter vector — grammars were built to be parameterized.
+**VERIFICATION STATUS (2026-07-21):** the v1 design was pressure-tested by six Fable-tier
+skeptics + a Fable reconciler (all `model: fable`, mandated to REFUTE). Verdict:
+**GO-WITH-REVISIONS.** The kernel concept, determinism basis, build-from-scratch ruling,
+drift substrate, and no-GPU law SURVIVED six hostile attacks. Four decisions were
+corrected (below); one owner decision is now the true gate. This v2 records the
+corrections. Do NOT dispatch the old K-1.
 
-## THE RENDER STACK (research verdict): GENERATE-3D → PROJECT-TO-SVG, viewer optional
-Three candidates weighed; the winner is the HYBRID:
-1. Grammar emits 3D GEOMETRY in PURE RATIONAL JS (IEEE-754 +,−,×,÷,√ are correctly-rounded
-   and cross-machine stable; NO transcendentals/trig — the massing.js cavalier-rationals
-   discipline extended). This mesh is the single source of truth.
-2. CPU SOFTWARE-PROJECTION of that mesh to SVG (painter's-sort, the town draw-op
-   vocabulary) = the CANONICAL artifact: byte-reproducible, print-grade, golden-pinnable,
-   ZERO GPU in the artifact path. THIS is what ships and what goldens bind to.
-3. OPTIONAL interactive three.js viewer over an OPTIONAL byte-reproducible GLB emitted
-   from the same mesh — OWNER-GATED and NON-GOLDEN: WebGL raster is provably
-   non-reproducible across GPUs (the basis of WebGL fingerprinting), so it may NEVER be a
-   truth surface; and three.js is a ~150 KB gzip floor that CANNOT be eager (25 B budget
-   margin) — it lives only as a lazy, opt-in, viewer-only lens the way react-pdf's vendor
-   chunk stays out of the entry closure (vendorPdfLazy precedent). REJECTED as canonical
-   for the same two reasons massing.js already rejected it: THE PROMISE + the budget.
+═══════════════════════════════════════════════════════════════════
+## CORRECTION 1 — MECHANISM: a THREE-RUNG stack, not "shape grammars"
+Split grammars provably CANNOT produce curves (Zmugg et al., Visual Computer 2013:
+"split grammars as such are unable to handle curved shapes") — and gothic is DEFINED by
+curves (pointed arches, rose windows, tracery, the apse/chevet). So the grammar is the
+best-in-class SKELETON but NOT the detail mechanism. Restated honestly:
+1. STRUCTURE — CGA/split grammar + CGA++ cross-shape events: massing, bay rhythm, façade
+   subdivision, buttress-flyer coordination. (Grammar genuinely beat every rival:
+   WFC = no global structure + discrete drift; SDF = sharp-edge loss + op-budget blow-up
+   + transcendental ban; neuro-symbolic = illegal under AI-never-draws + float inference.)
+2. CURVED DETAIL — a Havemann-Fellner-style parametric CONSTRUCTION library (circles +
+   lines + booleans under sqrt-only discipline). This is the LOAD-BEARING cathedral-grade
+   rung, co-equal with the grammar, NOT a sub-bullet — its op-budget and authoring cost
+   DOMINATE the program (K-3 is the real risk center).
+3. INSTANCED ASSETS — baked kit pieces for repeated statuary.
+   NEW OP the split vocabulary lacks: a RADIAL/n-gon prism scope (apse, round towers) on
+   hardcoded rational direction tables (the townMapModel.js:18 integer-table precedent) —
+   else curved MASSING has no owner between the box-split layer and the ornament library.
 
-## PRIOR ART (research verdict): BUILD, reuse sparingly
-No off-the-shelf OSS reaches "textured isometric cathedral." Gothic tracery = ZERO
-maintained libraries (academic only) — build it, we want to own it regardless.
-Shape-grammar→façade = no maintained permissive JS lib (cgajs is a dead Apache prototype).
-Reuse candidates (MIT), offline/tooling only: mxgmn/three-wfc (seeded WFC) for
-constraint-driven kit assembly; building_tools (Blender, MIT) to BAKE a medieval/gothic
-kit offline. The kernel itself is ours.
+## CORRECTION 2 — DETERMINISM: SOUND, with four build-time guardrails
+{+,−,×,÷,√} in JS is byte-reproducible cross-machine (ES2025 makes √ correctly-rounded;
+de facto on all earlier engines via IEEE hardware √). The full gothic vocabulary fits IF:
+(a) BEZIER-ONLY CURVES — every arc as cubic Béziers in model space; NEVER the SVG arc `A`
+command (its x-rotation param needs atan2, a transcendental). (b) n-foil/rose counts whose
+cos(2π/n) is NOT in the {+,−,×,÷,√} closure (n=7,9,11… — Gauss-Wantzel) use pinned literal
+kappa constants, not runtime trig — the doc's v1 "compass-and-straightedge" framing was
+mathematically FALSE for those counts; corrected. (c) projection stays affine-rational.
+(d) √ pinned/guarded per the massing.js precedent.
 
-## THE DRIFT MODEL (feasibility CONFIRMED at code — the axes already exist)
-The owner's alignment axes are ALREADY in the typed state, derivable, no schema add:
-- Lawful↔chaos: computeLawfulness (worldPulse/disposition.js:512); good↔evil: computeMalice
-  (:544); ALIGNMENT_TUNING (:571). Deity axes evil01/chaos01 (worldPulse/deityAxes.js;
-  customContentSchema.js:162,193). Moral drift target: spatial/moralDrift.js.
-- Economic profile: prosperity band + trade web (existing). Terrain/resource:
-  resolveTerrain.js:40,57 + nearbyResources. Corruption covert/revealed: corruption.js:597.
-So the building-detail parameter vector = f(alignment[law,good] × prosperity × terrain ×
-resource × age × condition) — the SAME cosmetic-field cohesion laws already written (M-0b),
-now feeding GRAMMAR PARAMETERS instead of flat motifs. Lawful/good → ordered symmetric
-ornament, bright glass, maintained; chaotic/evil → asymmetric skew, darkened, defaced,
-weathered; poverty strips flourishes; terrain/resource changes material. Deterministic
-pure-hash over (seedId, anchorKey, conditionVector).
+## CORRECTION 3 — RENDER/FIDELITY (the v1 error that mattered most): SVG has a hard ceiling
+v1 claimed CPU-projected SVG reaches the reference bar. **FLAWED.** Flat-primitive SVG
+(poly/line/circle/rect/path, constant fill, scalar opacity — no gradient/filter/image op)
+is flat/cel shading BY CONSTRUCTION: it categorically cannot render the soft shadows,
+ambient occlusion, and material texture the owner's reference names. Corrected stack:
+- The grammar → rational-JS MESH stays the single source of truth.
+- CPU SVG projection is DEMOTED to the STRUCTURAL + PRINT/PLOTTER surface (the engraving
+  look), still byte-reproducible and golden-pinnable.
+- NEW fidelity surface: a DETERMINISTIC CPU SOFTWARE RASTERIZER over the same mesh —
+  scanline/edge-function fill, per-pixel Lambert from the one fixed NW light, baked AO +
+  soft-shadow penumbrae from fixed RATIONAL sample tables, integer-hash stone grain, all
+  in the massing.js op discipline. Encoded by a pinned in-repo deterministic PNG encoder;
+  delivered as the hybrid the draw-op contract already allows: an SVG embedding the raster
+  plate as a data: URI with vector linework overlaid. Golden-pinnable bytes, ZERO GPU,
+  generation-time cost only, eager budget UNTOUCHED. (three.js remains the optional,
+  owner-gated, non-golden interactive viewer only.)
 
-## WHERE IT LIVES / THE LAWS IT INHERITS
-- New lazy leaf src/domain/townMap/architectureKernel.js (+ tracery/, grammar/ leaves);
-  pure, store-free, the townMap source-scan purity bans (no Date/random/localeCompare/trig).
-- The massingSet seam generalizes to an architectureSet capability — absent from every
-  shipped lens ⇒ byte-dormant by construction (M-0's proven pattern).
-- Silhouette totality walker → detail totality walker: every institution kind maps to a
-  grammar or the explicit default; unmapped REDS. Custom institutions ride the four-rung
-  ladder (typed grammar-class pick → supply-chain → name-match → category floor).
-- Determinism golden per (kind, conditionVector, lens); op-budget on the grammar
-  derivation; the picturesque gate (manager + owner eyes on real renders per wave).
+## CORRECTION 4 — DRIFT BINDING: axes are real but DEAD at the render surface as wired
+The axes exist and are continuous, but v1 read the wrong field. Fixes:
+(a) DEITY term resolves `config.primaryDeitySnapshot ?? latentPantheonOf(settlement).patron`
+    — primaryDeitySnapshot is populated for ZERO normally-generated settlements (executed
+    probe 0/48; premium-activation-gated), so as v1-wired the chaos/evil poles NEVER fire
+    and the law axis spans only 0.52–0.68. The latent-patron fallback is present 48/48 and
+    TIER-INVARIANT (activation copies latent verbatim), so it PRESERVES one-golden-per-seed
+    and THE PROMISE, and widens the law span to 0.37–0.80. ⚠ OWNER FLAG: it surfaces a
+    latent deity's ALIGNMENT (not name) cosmetically to free tiers.
+(b) `buildTownMapModel(settlement, mapEdits, conditionVector?)` gains the vector param —
+    without it the occupation/war-scar/moralDrift ornament is unreachable from the map
+    forever; absent vector ⇒ byte-identical dormancy.
+(c) Calibrate grammar-parameter ramps to MEASURED band occupancy (not assumed 0..1); pin
+    the band constants with a distribution golden.
 
-## SEQUENCING (multi-wave, research-backed; each wave gated + owner taste checkpoint)
-K-1 GRAMMAR CORE: the shape-grammar interpreter (extrude/split/comp/repeat/instance/
-   occlusion) + CPU SVG projector, proven deterministic + dormant. Sample: one cathedral
-   grammar to the reference bar. OWNER CHECKPOINT before K-2.
-K-2 THE KIT: per-institution grammars (cathedral, keep, mill, market, guildhall, …) to
-   recognizable-detailed; the detail totality walker.
-K-3 GOTHIC ORNAMENT: the GML tracery/buttress/statuary-niche sublibrary (the owned,
-   build-from-scratch layer).
-K-4 THE DRIFT BINDING: wire the alignment×economy×terrain condition vector into grammar
-   params; per-axis visual-consequence tables; determinism goldens across the vector.
-K-5 THE VIEWER (owner-gated, optional): lazy three.js + byte-reproducible GLB export, a
-   non-golden opt-in lens.
-The four map VIEWS (M-1..M-4) consume the kernel's output the same as they'd consume
-massing; VTT stays legibility-first (kernel detail muted there).
+## CONFIRMED UNDER ATTACK (survived, stand):
+- BUILD-FROM-SCRATCH for the grammar core + gothic ornament — every OSS candidate failed on
+  license (CC-BY-SA/no-license/paid EULA), maintenance (dead 2017-2021), fidelity (nothing
+  permissive reaches gothic ornament), or the trig-free law. Reuse only offline: three-wfc
+  / building_tools to BAKE kits (MIT). The kernel is ours.
+- THE NO-GPU / THE PROMISE / FINITE-SEMANTICS laws — all hold: canonical artifact is pure
+  CPU (vector OR software-raster), never GPU pixels; AI (if ever used for a custom grammar
+  pick) classifies into the finite grammar vocabulary, never draws.
+
+═══════════════════════════════════════════════════════════════════
+## CORRECTED SEQUENCING — K-0 spike is the real proof gate (do NOT dispatch old K-1)
+v1's K-1 was internally contradictory (its "reference-bar cathedral" needs tracery that
+lived in K-3) and front-loaded the two ALREADY-PROVEN properties (determinism + dormancy
+shipped with M-0 massing) while deferring all three live risks. Corrected order:
+- **K-0 — the grammar-less SPIKE (days, not a wave; THE CHEAPEST FALSIFIER):** hand-code
+  in direct JS (no interpreter) ONE traceried gothic window + ONE flying-buttress bay in
+  the massing.js purity discipline; push through a minimal projector extension (the
+  Bézier DrawOp add); ALSO render a small deterministic RASTER swatch of the same fragment
+  (flat Lambert + hard shadow + hash grain; AO deferred). GATES: (a) tracery-without-trig
+  proven executable; (b) hidden-surface — does dy-sort survive buttress cyclic overlap or
+  is Newell/rational-BSP needed, byte-stable under ties; (c) measured ops + SVG bytes vs
+  OP_CEILING extrapolated → the per-building LOD law BEFORE any wave; (d) **THE FORK
+  EXHIBIT** — both plates (engraving-vector and render-raster) in front of the OWNER with
+  the question "WHICH BAR GOVERNS?" The owner's answer decides whether the rasterizer
+  stage exists, before one grammar is authored.
+- K-1 grammar interpreter + projector, spec'd against K-0-measured reality.
+- K-3 ornament sublibrary + the K-4 PARAMETER CONTRACT frozen (the condition-vector surface
+  every grammar must expose).
+- K-2 the per-institution kit LAST (the totality-contracted expensive wave, written once
+  against the frozen op vocabulary + parameter surface).
+- K-4 full drift binding + goldens. K-5 optional viewer (owner-gated).
+
+## OWNER-QUEUE (the true gates, before any build):
+1. ⭐ THE FIDELITY-BAR FORK — engraving-vector look vs render-raster look. This single
+   answer decides whether the software-rasterizer stage exists and roughly doubles-or-not
+   the render scope. Surfaced by K-0's fork exhibit; the owner picks from real plates.
+2. LATENT-ALIGNMENT COSMETIC SURFACING — the drift fix (a) shows a latent deity's alignment
+   cosmetically to free tiers; owner ok/veto.
+3. GO on K-0 itself (days-long spike; the only thing that needs authorizing to start).
 
 ## HONEST SIZING
-This is the LARGEST single build discussed — larger than the whole prior map suite. It is
-a research-backed KERNEL with its own constitution, not a lane. M-0's massing ships as the
-floor NOW (already folded); the architecture kernel is the ceiling, built in gated waves
-K-1..K-5, each with an owner taste checkpoint. Recommendation: authorize K-1 (grammar core
-+ one reference-bar cathedral) as the proof; judge the sample; then commit the rest or
-hold at the massing floor. Nothing here violates a law — determinism, THE PROMISE, the
-budget, and FINITE-SEMANTICS all hold because the canonical artifact is pure-CPU geometry,
-never GPU pixels, and the AI (if ever used for a custom grammar pick) classifies into the
-finite grammar vocabulary, never draws.
+Largest single build discussed; a research-backed kernel, not a lane. M-0 massing ships as
+the FLOOR now (folded). The v1 design had four real flaws — mechanism mis-naming, an SVG
+fidelity ceiling, a dead drift field, and a non-decisive proof wave — ALL caught by
+Fable-tier verification before a line of code, which is precisely why the owner ordered
+research at the Fable tier. Recommendation: authorize K-0 (the spike + the fork exhibit);
+its four gates + the owner's fidelity-fork answer de-risk the entire kernel for the cost of
+days, before K-1 grammar work begins.
