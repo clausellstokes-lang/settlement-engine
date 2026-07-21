@@ -26,23 +26,25 @@
  *   · MULTI-SYSTEM cones — one cause whose recorded consequence set spans ≥2 (some
  *                          ≥3) subsystem families across advances
  *
- * MEASURED on seed 'arc-soak-seed' @ 15y (180 one_month ticks) × 8 settlements:
- * 3144 recorded edges · 118 cross-system · 64 cross-tick · 44 wave · 36 cones with
- * ≥2 consequences · 93 multi-system cones · 4 triple-system cones · 8 families.
+ * MEASURED on seed 'arc-soak-seed' @ 15y (180 one_month ticks) × 8 settlements
+ * (post-E-J, the wave→immediate-parent seam lit): 3180 recorded edges · 144 cross-
+ * system · 64 cross-tick · 59 wave · 46 cones with ≥2 consequences · 117 multi-system
+ * cones · 6 triple-system cones · 8 families · 6 deepChains (≥2-hop recorded links).
  * Every floor below is pinned WELL UNDER observed (the cacophony ratchet-floor
  * philosophy) so the pin is a regression floor, not a brittle exact match.
  *
  * HONEST LIMITS (measured, not assumed):
- *   1. RECORDED LINK-DEPTH ≥ 2 (a recorded child that is itself a recorded parent)
- *      measured ZERO in this soak. Structural, verified by source census: the only
- *      kernel that mints the `causedBy` outcome→outcome seam today is roads V-24d
- *      (release → capture, unit-pinned by tests/domain/roadsProvenanceThread.test.js),
- *      and roads is a virtual flag outside full_simulation; every other recorded edge
- *      is child → root (news/queued impacts name their ULTIMATE cause, and the engine
- *      flattens wave lineage onto the root while marking hop-generation in the wave
- *      receipt). The `deepChains` metric stays wired and reported in diagnostics so
- *      the number lights up as kernels adopt the seam; the DEPTH story here is
- *      carried by the wave/cross-tick cones the engine actually records.
+ *   1. RECORDED LINK-DEPTH ≥ 2 (a recorded child that is itself a recorded parent) is
+ *      now LIVE (E-J). deriveWizardNewsEntriesFromGraphChange, under the lit recorder,
+ *      makes each regional WAVE receipt name its SOURCE impact's recorded key as an
+ *      additive `causedBy` — so full_simulation records genuine ≥2-hop chains (measured
+ *      deepChains=6: e.g. conquest → information shock → import-shortage wave). This
+ *      joins roads V-24d (release → capture, unit-pinned by
+ *      tests/domain/roadsProvenanceThread.test.js) as the second kernel minting the
+ *      `causedBy` child-edge; unlike roads it rides full_simulation directly. The seam
+ *      is also unit-pinned by tests/domain/recordedDepthMultiHop.test.js. Non-wave edges
+ *      are still child → root (they name their ultimate cause), so deepChains is a FLOOR
+ *      on recorded depth, not a census.
  *   2. Only receipts landing in the durable pulseRecord (selectedOutcomes ≤24 +
  *      impactDigest ≤18 per advance) are recorded — arc counts are a FLOOR on the
  *      causal coupling present, not a census of it.
@@ -50,7 +52,7 @@
  *      type/id vocabulary; an unmatched endpoint maps to null and is EXCLUDED from
  *      cross-system counts (under-count, never inflate).
  *   4. The ledger's horizon governor (MAX_PROVENANCE_EDGES = 4096, lowest-tick
- *      eviction) never fired at this density (3144 < 4096); a much denser soak
+ *      eviction) never fired at this density (3180 < 4096); a much denser soak
  *      would measure the surviving window.
  */
 import { describe, expect, test } from 'vitest';
@@ -304,7 +306,7 @@ describe(`THE EMERGENT-ARC SOAK — ${YEARS}y everything-on, arcs measured over 
     expect(true).toBe(true);
   }, 240_000);
 
-  test('anti-vacuity: the lit recorder produced a rich DAG at scale (measured 3144 edges; floor 1200)', () => {
+  test('anti-vacuity: the lit recorder produced a rich DAG at scale (measured 3180 edges; floor 1200)', () => {
     expect(Object.keys(provenance).length).toBeGreaterThanOrEqual(1200);
     expect(mined.totalEdges).toBeGreaterThanOrEqual(1200);
     // The classifier is not degenerate: most of the subsystem families are live
@@ -312,7 +314,7 @@ describe(`THE EMERGENT-ARC SOAK — ${YEARS}y everything-on, arcs measured over 
     expect(mined.familyCount).toBeGreaterThanOrEqual(6);
   }, 240_000);
 
-  test('ARCS CROSS SYSTEMS: recorded cause-edges couple different subsystems (measured 118; floor 40)', () => {
+  test('ARCS CROSS SYSTEMS: recorded cause-edges couple different subsystems (measured 144; floor 40)', () => {
     expect(mined.crossSystemEdges).toBeGreaterThanOrEqual(40);
   }, 240_000);
 
@@ -320,11 +322,15 @@ describe(`THE EMERGENT-ARC SOAK — ${YEARS}y everything-on, arcs measured over 
     expect(mined.crossTickEdges).toBeGreaterThanOrEqual(20);
   }, 240_000);
 
-  test('ARCS PROPAGATE ≥2 HOPS: the engine records second-generation wave receipts (measured 44; floor 12)', () => {
+  test('ARCS PROPAGATE ≥2 HOPS: the engine records second-generation wave receipts (measured 59; floor 12)', () => {
     expect(mined.waveEdges).toBeGreaterThanOrEqual(12);
   }, 240_000);
 
-  test('MULTI-SYSTEM CONES: one recorded cause fans consequences across ≥2 families (measured 93; floor 30), some ≥3 (measured 4; floor 1)', () => {
+  test('RECORDED DEPTH ≥2 (E-J): a recorded wave receipt names a parent that is ITSELF recorded — genuine ≥2-hop chains, not child→root (measured deepChains 6; floor 1)', () => {
+    expect(mined.deepChains).toBeGreaterThanOrEqual(1);
+  }, 240_000);
+
+  test('MULTI-SYSTEM CONES: one recorded cause fans consequences across ≥2 families (measured 117; floor 30), some ≥3 (measured 6; floor 1)', () => {
     expect(mined.cones2).toBeGreaterThanOrEqual(12);
     expect(mined.multiSystemCones).toBeGreaterThanOrEqual(30);
     expect(mined.tripleSystemCones).toBeGreaterThanOrEqual(1);

@@ -258,6 +258,63 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
 }
 
 /**
+ * E-J — RECORDED PROVENANCE GOES MULTI-HOP. Given this advance's raw news entries and the
+ * post-advance regional queued impacts, return the entries with an ADDITIVE `causedBy` on each
+ * WAVE receipt: the recorded receipt KEY of its IMMEDIATE-PARENT impact. A derived regional wave
+ * (waveDepth ≥ 1) carries `sourceImpactId` = the id of the impact it propagated from, and
+ * deriveRegionalImpacts mints a wave and its source impact TOGETHER (same advance) — so the
+ * parent's recorded key is this advance's `wizard_news.<tick>.<transition>.<parentImpactId>`,
+ * already present among these same newsEntries. Resolving it here needs NO persisted field and
+ * NO migration (the parent id is read transiently off the live queued-impact record).
+ *
+ * Before this, every recorded wave edge was child → ROOT (the wave's `sourceEventId` names its
+ * ULTIMATE cause), so the recorded DAG was one-hop-to-root and `deepChains` (a recorded child
+ * that is itself a recorded parent) measured ZERO. This adds the IMMEDIATE-parent edge WITHOUT
+ * removing the root edge (`sourceEventId` is untouched — the returned entry keeps every field),
+ * so full_simulation records genuine ≥2-hop chains (conquest → information shock → import-shortage
+ * wave). Additive & pure: returns the SAME array reference when nothing resolves; never mutates an
+ * input entry (enriched entries are shallow copies). This lives in the LAZY recorder — the eager
+ * first-paint closure is unchanged (the wave receipts already reach here via the durable set).
+ *
+ * @param {ProvReceipt[]} newsEntries               applied.newsEntries (raw, carrying impactIds + sourceEventId)
+ * @param {ReadonlyArray<Record<string, unknown>>|undefined} queuedImpacts  applied.regionalGraph.queuedImpacts
+ * @returns {ProvReceipt[]}
+ */
+export function withWaveCauseEdges(newsEntries, queuedImpacts) {
+  if (!Array.isArray(newsEntries) || newsEntries.length === 0 || !Array.isArray(queuedImpacts)) return newsEntries;
+  // impactId → its immediate SOURCE impact id (only WAVE impacts carry a non-empty sourceImpactId).
+  /** @type {Map<string, string>} */
+  const srcByImpactId = new Map();
+  for (const q of queuedImpacts) {
+    const id = q && q.id != null ? String(q.id) : '';
+    const src = q && q.sourceImpactId != null && q.sourceImpactId !== '' ? String(q.sourceImpactId) : '';
+    if (id && src) srcByImpactId.set(id, src);
+  }
+  if (srcByImpactId.size === 0) return newsEntries;
+  // impactId → this advance's recorded news key (the receipt id it lands under).
+  /** @type {Map<string, string>} */
+  const keyByImpactId = new Map();
+  for (const e of newsEntries) {
+    const iid = e && Array.isArray(/** @type {{ impactIds?: unknown }} */ (e).impactIds) && /** @type {{ impactIds: unknown[] }} */ (e).impactIds.length
+      ? String(/** @type {{ impactIds: unknown[] }} */ (e).impactIds[0]) : '';
+    if (iid && e?.id != null) keyByImpactId.set(iid, String(e.id));
+  }
+  let changed = false;
+  const out = newsEntries.map((e) => {
+    const iid = e && Array.isArray(/** @type {{ impactIds?: unknown }} */ (e).impactIds) && /** @type {{ impactIds: unknown[] }} */ (e).impactIds.length
+      ? String(/** @type {{ impactIds: unknown[] }} */ (e).impactIds[0]) : '';
+    const src = iid ? srcByImpactId.get(iid) : undefined;
+    if (!src) return e;
+    const parentKey = keyByImpactId.get(src);
+    if (!parentKey || parentKey === String(e.id)) return e;
+    changed = true;
+    // ADDITIVE: keep every existing field (the sourceEventId → root edge included); add causedBy.
+    return { ...e, causedBy: parentKey };
+  });
+  return changed ? out : newsEntries;
+}
+
+/**
  * THE CEILING-SAFE COMMIT WRAPPER — the single seam pulseKernel calls in place of
  * appendPulseHistory. When the ledger is dormant it IS appendPulseHistory (returns
  * its exact result — byte-identical). When lit it records the advance's cause-edges
@@ -273,13 +330,14 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
 export function appendPulseHistoryWithProvenance(worldState, pulseRecord, applied) {
   if (!provenanceLedgerActive(worldState)) return appendPulseHistory(worldState, pulseRecord);
   const rec = /** @type {{ tick?: number, selectedOutcomes?: ProvReceipt[], impactDigest?: ProvReceipt[] }} */ (pulseRecord || {});
-  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[] }} */ (applied || {});
+  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[], regionalGraph?: { queuedImpacts?: ReadonlyArray<Record<string, unknown>> } }} */ (applied || {});
   /** @type {Set<string>} */
   const durableIds = new Set();
   for (const o of (rec.selectedOutcomes || [])) if (o?.id != null) durableIds.add(String(o.id));
   for (const d of (rec.impactDigest || [])) if (d?.id != null) durableIds.add(String(d.id));
   const outcomes = [...(app.autoApplied || []), ...(app.proposals || [])];
-  const newsEntries = app.newsEntries || [];
+  // E-J: enrich wave receipts with their immediate-parent recorded key (additive, dark).
+  const newsEntries = withWaveCauseEdges(app.newsEntries || [], app.regionalGraph?.queuedImpacts);
   const tick = Number.isFinite(rec.tick) ? Number(rec.tick) : Number(worldState?.tick) || 0;
   const withLedger = recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
   return appendPulseHistory(withLedger, pulseRecord);
@@ -297,9 +355,10 @@ export function appendPulseHistoryWithProvenance(worldState, pulseRecord, applie
  * @returns {ProvWorldState}
  */
 export function recordProposalProvenance(worldState, applied, tick) {
-  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[] }} */ (applied || {});
+  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[], regionalGraph?: { queuedImpacts?: ReadonlyArray<Record<string, unknown>> } }} */ (applied || {});
   const outcomes = [...(app.autoApplied || []), ...(app.proposals || [])];
-  const newsEntries = app.newsEntries || [];
+  // E-J: a hand-approved decree that queues regional waves records the immediate-parent edge too.
+  const newsEntries = withWaveCauseEdges(app.newsEntries || [], app.regionalGraph?.queuedImpacts);
   const durableIds = new Set([...outcomes, ...newsEntries].map((r) => (r && r.id != null ? String(r.id) : '')).filter(Boolean));
   return recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
 }
