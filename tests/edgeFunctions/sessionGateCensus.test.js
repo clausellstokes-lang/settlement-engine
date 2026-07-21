@@ -28,6 +28,10 @@ const read = (name) => {
 const REQUIRED = [
   'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
   'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
+  // construct-realm + construct-settlement (S6/S5 AI construction) — credit-spending AI
+  // surfaces that were LIVE without the request-layer gate (C4 hardening): they spend
+  // through spend_credits + meter ai_usage_events, so they join the TOTAL roster.
+  'construct-realm', 'construct-settlement',
   'surveyor-byok', 'create-checkout', 'create-customer-portal', 'account-actions',
   'founder-transfer',
 ];
@@ -42,12 +46,14 @@ const DEFERRED = ['verify-checkout-session'];
 const importsGate = (src) => /_shared\/sessionGate\.ts/.test(src) && /isSessionSuperseded\s*\(/.test(src);
 const usesSpendBelt = (src) => /rpc\(\s*['"]spend_credits['"]/.test(src);
 
-// The 9 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
+// The 11 credit-spending AI surfaces — they carry BOTH the request-layer gate AND the
 // spend_credits belt (defense-in-depth) after the M-9 census upgrade. interview (V-1)
-// is the 9th: it spends the existing 'analysis' feature through spend_credits.
+// joined as the 9th; construct-realm + construct-settlement are the 10th/11th (C4
+// hardening — they were live spending credits without the request-layer gate).
 const AI_SPENDING = [
   'ai-analyst', 'interview', 'generate-narrative', 'generate-chronicle', 'custom-content',
   'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
+  'construct-realm', 'construct-settlement',
 ];
 
 describe('single-session census — request-layer coverage is TOTAL (every paid surface)', () => {

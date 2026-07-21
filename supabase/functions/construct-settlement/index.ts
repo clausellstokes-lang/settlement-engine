@@ -19,6 +19,7 @@ import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 import { maybeAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
 import {
@@ -125,6 +126,11 @@ export async function handleConstructSettlement(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): instant 401 eviction where AI money
+    // burns — a superseded device is rejected at the request layer, before any spend.
+    if (await isSessionSuperseded(supabaseAdmin, user.id, authHeader, deviceLabelFromRequest(req))) {
+      return json({ error: 'session_superseded' }, 401, cors);
+    }
 
     // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
     // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
