@@ -38,8 +38,11 @@ function walk(dir, out = []) {
 }
 
 // Every `impactKind: '<literal>'` minted by a domain kernel/news-builder. (Dynamic
-// `impactKind: <var>` assignments — the proposal candidateType path — are out of this
-// literal scan's reach; those tokens are candidateTypes already phrased in WHAT_PHRASES.)
+// `impactKind: <var>` assignments — the proposal candidateType path, where
+// applyWorldPulse stamps `impactKind: outcome.candidateType || outcome.type` — are out
+// of this literal scan's reach; that sibling path is covered by its own walker,
+// candidateTypeVoicePhrasing.walker.test.js, which locks the phrasing + no-mis-voice
+// invariants for every minted candidateType.)
 const MINT_RE = /impactKind:\s*['"]([a-z][a-z0-9_]*)['"]/g;
 
 function mintedImpactKinds() {
