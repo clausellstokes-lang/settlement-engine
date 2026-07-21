@@ -185,12 +185,14 @@ export function WizardOutputToolbar({
               role="menu"
               aria-label="Draft actions"
               style={{
+                // A flat gold-ruled plate (the deep-craft rule-framed idiom — a token
+                // border, no z-axis shadow); the strong rule separates it from the
+                // dark toolbar without elevation.
                 position: 'absolute', right: 0, top: 'calc(100% + 6px)', zIndex: 1,
                 display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.xs,
                 padding: SP.sm, minWidth: 220,
                 background: INK_DEEP,
-                border: '1px solid rgba(160,118,42,0.45)',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.45)',
+                border: `1px solid ${GOLD}`,
               }}
             >
               {utilities}

@@ -306,14 +306,14 @@ const errStyle = { fontSize: FS.xs, color: RED, textAlign: 'center' };
 // BODY (ink-600) is the WCAG-passing helper-text color; MUTED fails 4.5:1 and
 // must not carry the price/rationale a purchaser needs.
 const captionStyle = { fontSize: FS.xs, color: BODY, textAlign: 'center', lineHeight: 1.4 };
-// Order W2-b — the anon reassurance as a hover/focus tooltip pill. Absolutely
-// positioned above the button so it never shifts layout; toggled by OPACITY only
-// (stays in the DOM + a11y tree so aria-describedby keeps announcing it). Dark pill
-// / parchment text for legibility; pointer-events off so it never eats a click.
+// Order W2-b — the anon reassurance as a hover/focus tooltip. Absolutely positioned
+// above the button so it never shifts layout; toggled by OPACITY only (stays in the
+// DOM + a11y tree so aria-describedby keeps announcing it). A flat dark ink plate /
+// parchment text (the deep-craft rule-framed idiom — no rounded corner, no z-axis
+// shadow); pointer-events off so it never eats a click.
 const pillStyle = {
   position: 'absolute', bottom: 'calc(100% + 6px)', left: '50%', transform: 'translateX(-50%)',
-  whiteSpace: 'nowrap', padding: '4px 10px', borderRadius: 999,
+  whiteSpace: 'nowrap', padding: '4px 10px',
   background: INK, color: PARCH, fontSize: FS.xs, fontFamily: sans, lineHeight: 1.4,
-  boxShadow: '0 2px 10px rgba(0,0,0,0.3)', pointerEvents: 'none',
-  transition: 'opacity 0.15s ease', zIndex: 5,
+  pointerEvents: 'none', transition: 'opacity 0.15s ease', zIndex: 5,
 };
