@@ -56,7 +56,7 @@ import {
   clearCampaignSyncBookkeeping,
   initPersistFailureReporter,
   retryOutboxPersist,
-  newCampaignId, isUuid, findActiveCampaign,
+  newCampaignId, isUuid, uuidFromLegacyId, findActiveCampaign,
 } from './campaignSliceShared.js';
 import { initOutboxStatusReporter, getStatus as outboxStatus } from './outbox.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -97,7 +97,12 @@ function localLoad(ownerId = 'anon') {
 export function migrateCampaign(camp) {
   if (!camp || typeof camp !== 'object') return camp;
   const next = { ...camp };
-  if (!isUuid(next.id)) next.id = newCampaignId();
+  // Remint a non-UUID legacy id DETERMINISTICALLY from the id itself, so the local
+  // cache copy and the remote list copy of the same campaign converge on one id and
+  // mergeCampaignLists dedupes them (a random newCampaignId() gave the two copies
+  // different ids → a duplicate row). An empty/missing id has nothing to converge
+  // on → keep the random mint (distinct id-less campaigns must not collapse).
+  if (!isUuid(next.id)) next.id = (next.id == null || next.id === '') ? newCampaignId() : uuidFromLegacyId(next.id);
   if (camp.mapState) next.mapState = migrateMapState(camp.mapState);
   if (next.regionalGraph) next.regionalGraph = ensureRegionalGraph(next.regionalGraph);
   next.wizardNews = ensureWizardNewsFeed(next.wizardNews);
@@ -405,6 +410,13 @@ export const createCampaignSlice = (set, get) => {
       throw new Error(`Not enough save slots: this campaign needs ${members.length} settlement slot(s).`);
     }
 
+    // Parity with importGallerySettlement + accountImport: canonicalize each
+    // member clone through the migration chain so a legacy-shape shared member
+    // arrives with the same backfilled fields a standalone import of it would get
+    // (downstream dossier / deriveSystemState otherwise read undefined for fields
+    // the chain fills). Dynamic import keeps normalizeSettlement's transitive
+    // closure off the eager first-paint entry — this action is import-click-only.
+    const { normalizeSettlement } = await import('../domain/normalizeSettlement.js');
     // Clone each member into the importer's cloud saves; build oldId → newId.
     const idMap = {};
     const newEntries = [];
@@ -419,7 +431,7 @@ export const createCampaignSlice = (set, get) => {
           // re-trigger supabaseSave's bidirectional back-link path (keyed on
           // settlement.neighborRelationship.name), wiring the clone into the
           // IMPORTER's unrelated saves. Forcing the simple-insert path is correct.
-          settlement: { ...src, neighbourNetwork: [], neighborRelationship: null, interSettlementRelationships: [] },
+          settlement: normalizeSettlement({ ...src, neighbourNetwork: [], neighborRelationship: null, interSettlementRelationships: [] }),
           config: src.config || null,
           seed: src._seed || src.config?._seed || null,
           aiData: {},

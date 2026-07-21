@@ -36,6 +36,10 @@ import { devtools, persist, subscribeWithSelector } from 'zustand/middleware';
 import { createAuthSlice }       from './authSlice.js';
 import { createConfigSlice }     from './configSlice.js';
 import { createToggleSlice }     from './toggleSlice.js';
+// normalizeServicesToggles rides a SEPARATE import (not the createToggleSlice
+// line) so the operationRegistry census walker — which derives the composed-slice
+// file list from the `import { createXSlice }` lines — still recognises this slice.
+import { normalizeServicesToggles } from './toggleSlice.js';
 import { createSettlementSlice } from './settlementSlice.js';
 import { createAiSlice }         from './aiSlice.js';
 import { createNeighbourSlice }  from './neighbourSlice.js';
@@ -113,11 +117,21 @@ export const useStore = create(
             servicesToggles:    state.servicesToggles,
           }),
           // On rehydrate: always start the Create page at the mode picker.
-          // (Also wipes any stale wizardMode persisted by older builds.)
+          // (Also wipes any stale wizardMode persisted by older builds.) AND heal
+          // legacy service toggles keyed under the pre-Stage-2b display-name form
+          // into the current svcKey form. store-lifecycle: servicesToggles IS
+          // persisted (partialize below), but the normalize migration ran on NO
+          // product path — the hydrateServicesToggles action was never invoked and
+          // save-load wrote the bag raw — so a returning user's saved service prefs
+          // silently stopped applying and never self-healed. This is the single
+          // rehydrate chokepoint the migration's own docstring prescribes; the pass
+          // is pure + idempotent, so a bag already in the new form normalizes to
+          // itself (no churn for the common case).
           onRehydrateStorage: () => (state) => {
             if (!state) return;
             state.wizardStep = 0;
             state.wizardMode = null;
+            state.servicesToggles = normalizeServicesToggles(state.servicesToggles);
           },
         },
       ),

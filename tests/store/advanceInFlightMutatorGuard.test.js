@@ -206,3 +206,74 @@ describe('store-2 — mutators are gated by advanceInFlight', () => {
     expect(snap(store)).toBe(before);
   });
 });
+
+// store-registries (SB1) — the DM-reachable regional mutators that MISSED the
+// store-2 / store-hooks-state-4 guard their siblings received. Each writes a field
+// a running or PARKED advance restores WHOLESALE (worldState.stressors / regionalGraph
+// / wizardNews), and each is reachable from a DM surface that can fire mid-advance:
+//   • injectCampaignStressor       — surveyor AutonomyPanel nudge approval
+//   • rebuildCampaignRegionalGraph — SettlementsPanel "Discover channels"
+//   • setRegionalChannelStatus     — SettlementsPanel "confirm channel"
+//   • setRegionalChannelVisibility — its DM-curation sibling (guarded for parity)
+// The ripple-only twins (resolveCampaignStressor / setCampaignRegionalGraph) are
+// DELIBERATELY left unguarded: their sole caller (settlementSlice.rippleEventThroughWorld)
+// is upstream-gated by the queueSettlementEvent guard, so they never run in-flight —
+// guarding them there would create a latent split-truth trap, not close a gap.
+describe('store-registries — the missed regional DM mutators are gated (in-flight + parked)', () => {
+  beforeEach(() => { installLocalStorage(); });
+
+  const STRESSOR = { type: 'famine', label: 'Famine', originSettlementId: 'ash', affectedSettlementIds: ['ash'], severity: 0.5 };
+
+  test('injectCampaignStressor: injects when idle, no-ops (null) both in-flight AND parked', () => {
+    // Idle baseline — the injection lands (the guard is the block, not a wedge).
+    const idle = makeStore(); seedStore(idle);
+    expect(idle.getState().injectCampaignStressor('camp-1', STRESSOR)).toBeTruthy();
+    expect(idle.getState().campaigns[0].worldState.stressors || []).toHaveLength(1);
+
+    const inflight = makeStore(); seedStore(inflight); markInFlight(inflight);
+    let before = snap(inflight);
+    expect(inflight.getState().injectCampaignStressor('camp-1', STRESSOR)).toBe(null);
+    expect(snap(inflight)).toBe(before);
+
+    const parked = makeStore(); seedStore(parked); markPaused(parked);
+    before = snap(parked);
+    expect(parked.getState().injectCampaignStressor('camp-1', STRESSOR)).toBe(null);
+    expect(snap(parked)).toBe(before);
+  });
+
+  test('rebuildCampaignRegionalGraph no-ops (null) both in-flight AND parked', () => {
+    const inflight = makeStore(); seedStore(inflight); markInFlight(inflight);
+    let before = snap(inflight);
+    expect(inflight.getState().rebuildCampaignRegionalGraph('camp-1')).toBe(null);
+    expect(snap(inflight)).toBe(before);
+
+    const parked = makeStore(); seedStore(parked); markPaused(parked);
+    before = snap(parked);
+    expect(parked.getState().rebuildCampaignRegionalGraph('camp-1')).toBe(null);
+    expect(snap(parked)).toBe(before);
+  });
+
+  test('setRegionalChannelStatus no-ops (null) both in-flight AND parked', () => {
+    const inflight = makeStore(); seedStore(inflight); markInFlight(inflight);
+    let before = snap(inflight);
+    expect(inflight.getState().setRegionalChannelStatus('camp-1', 'any-ch', 'confirmed')).toBe(null);
+    expect(snap(inflight)).toBe(before);
+
+    const parked = makeStore(); seedStore(parked); markPaused(parked);
+    before = snap(parked);
+    expect(parked.getState().setRegionalChannelStatus('camp-1', 'any-ch', 'confirmed')).toBe(null);
+    expect(snap(parked)).toBe(before);
+  });
+
+  test('setRegionalChannelVisibility no-ops (null) both in-flight AND parked', () => {
+    const inflight = makeStore(); seedStore(inflight); markInFlight(inflight);
+    let before = snap(inflight);
+    expect(inflight.getState().setRegionalChannelVisibility('camp-1', 'any-ch', 'hidden')).toBe(null);
+    expect(snap(inflight)).toBe(before);
+
+    const parked = makeStore(); seedStore(parked); markPaused(parked);
+    before = snap(parked);
+    expect(parked.getState().setRegionalChannelVisibility('camp-1', 'any-ch', 'hidden')).toBe(null);
+    expect(snap(parked)).toBe(before);
+  });
+});

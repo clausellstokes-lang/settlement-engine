@@ -155,3 +155,54 @@ describe('R-1 the session ledger commits typed, bounded, source:table effects', 
     expect(store.getState().eventLog.some(e => e.event?.type === 'DESTROY_SETTLEMENT')).toBe(false);
   });
 });
+
+// SB1 store-registries — the no-silent-drop contract's PRECONDITION leg. An
+// 'incident' (dispatch 'flavor') records ONLY in canon (recordCanonFlavorEntryImpl
+// no-ops off-canon). On a DRAFT settlement, admitting one to the queue would clear
+// it on commit with a success indication while writing NOTHING — the moment lost.
+// queueEdit must refuse it at ADMISSION (immediate null), the way it already refuses
+// an un-dispatched kind and a post-canon rename-npc.
+describe('R-1 the session ledger — an incident on a DRAFT settlement is refused, not silently dropped', () => {
+  function withDraftSave(store) {
+    store.setState(s => {
+      s.settlement = structuredClone(canonFixture());
+      s.savedSettlements = [{
+        id: SAVE_ID, name: 'Bridgeford', tier: 'town',
+        settlement: structuredClone(canonFixture()),
+        campaignState: { phase: 'draft', eventLog: [], systemState: {}, canonizedAt: null, editedAt: null },
+      }];
+      s.activeSaveId = SAVE_ID;
+      s.phase = 'draft';
+      s.eventLog = [];
+      s.systemState = {};
+    });
+  }
+
+  test('queueEdit refuses the incident (null) and NEVER queues it — no false success on commit', () => {
+    const store = makeStore();
+    withDraftSave(store);
+    const res = queueTableEvent(store, { kind: 'incident', flavor: 'The tavern burned down.' });
+    expect(res).toBeNull();
+    // Nothing entered the queue, so commit is a no-op and no line is written.
+    expect(store.getState().pendingEditsQueue.filter(e => !e.revertedAt)).toHaveLength(0);
+    store.getState().commitPendingEdits();
+    expect(store.getState().eventLog.some(e => e.type === 'TABLE_INCIDENT')).toBe(false);
+  });
+
+  test('an OBLIGATION (dispatch applyEvent) is NOT over-refused on a draft — it still queues', () => {
+    const store = makeStore();
+    withDraftSave(store);
+    const res = queueTableEvent(store, {
+      kind: 'obligation', magnitude: 'major', targets: { ref: 'debt', label: 'debt' }, flavor: 'a debt fell due',
+    });
+    expect(res).not.toBeNull();
+    expect(store.getState().pendingEditsQueue.filter(e => !e.revertedAt)).toHaveLength(1);
+  });
+
+  test('the same incident on a CANON settlement is admitted (the gate is the phase, not a wedge)', () => {
+    const store = makeStore();
+    withCanonSave(store);
+    const res = queueTableEvent(store, { kind: 'incident', flavor: 'A festival was held.' });
+    expect(res).not.toBeNull();
+  });
+});

@@ -107,6 +107,14 @@ export const createCampaignRegionalSlice = (set, get) => ({
    * measurements and adds suggested P0 channels for new pairs.
    */
   rebuildCampaignRegionalGraph: (campaignId, options = {}) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): rebuild replaces
+    // c.regionalGraph, which a running advance's Phase-2 commit AND a resume from a
+    // PARKED pause restore WHOLESALE from the pre-interval snapshot — so a DM's
+    // "Discover channels" (SettlementsPanel → discoverCampaignRegionalChannels →
+    // here) landing in either window is silently reverted. Same null no-op as the
+    // guarded siblings; callers read the returned graph (null = no change).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     const { discover = true } = options;
     let graph = null;
     set(state => {
@@ -130,6 +138,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   setRegionalChannelStatus: (campaignId, channelId, status) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): DM channel curation
+    // (SettlementsPanel "confirm channel") writes c.regionalGraph, which a running
+    // or PARKED advance restores wholesale — silently dropping the curation. Null
+    // no-op in both windows, matching the guarded regional siblings.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let graph = null;
     let channelEvent = null;
     set(state => {
@@ -152,6 +166,11 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): the DM-curation sibling
+    // of setRegionalChannelStatus — same wholesale-restore clobber class. Guarded so
+    // a future "hide channel" wiring cannot reintroduce the lost-write here.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let graph = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -176,6 +195,16 @@ export const createCampaignRegionalSlice = (set, get) => ({
    * than stacks.
    */
   injectCampaignStressor: (campaignId, stressor) => {
+    // Advance/parked guard (store-2 / store-hooks-state-4): this writes
+    // c.worldState.stressors, which a running or PARKED advance restores wholesale.
+    // Reachable independently of the canon-edit bridge via the surveyor autonomy
+    // nudge (AutonomyPanel → injectCampaignStressor), so a nudge approved mid-advance
+    // would ghost. The rippleEventThroughWorld caller is upstream-gated (applyEvent
+    // routes clock-bound canon settlements through the already-guarded
+    // queueSettlementEvent), so it never runs in-flight and this guard is inert there
+    // — no split truth. Standalone nudge → clean null no-op (no coupled dossier edit).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let injected = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
