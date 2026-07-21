@@ -154,6 +154,15 @@ export const CONNECTIVE_LEXICON = Object.freeze({
     'And yet:',
     'Even so:',
   ]),
+  // The ANTICIPATORY register (owner amendment: PREDICTION ELISION rule 2). A
+  // response taken because of a forecast whose own clause is elided carries this
+  // "done because of what was foretold" register. Licensed ONLY on a clause whose
+  // recorded parent is a typed prediction (the anticipatory-license pin).
+  anticipatory: Object.freeze([
+    'Forewarned:',
+    'Against what was coming:',
+    'In its shadow:',
+  ]),
 });
 
 /** The explicit default connective (the totality floor: a relation/band with no
@@ -174,8 +183,24 @@ export const ALL_CONNECTIVES = Object.freeze(new Set([
     /** @type {Record<string, ReadonlyArray<string>>} */ (CONNECTIVE_LEXICON.causal)[b])),
   .../** @type {ReadonlyArray<string>} */ (CONNECTIVE_LEXICON.parallel),
   .../** @type {ReadonlyArray<string>} */ (CONNECTIVE_LEXICON.adversative),
+  .../** @type {ReadonlyArray<string>} */ (CONNECTIVE_LEXICON.anticipatory),
   DEFAULT_CONNECTIVE,
 ]));
+
+/**
+ * The candidate (prediction) receipt id embedded in a realization receipt key, or
+ * null. A realized candidate event is recorded under a key of the shape
+ * `wizard_news.<tick>.<domain>.applied.<candidateId>` (the TYPED transition segment,
+ * candidateEvents.js -> pulseKernel apply), so the prediction<->realization pairing
+ * reads from the structural id, NEVER from a headline string-match (the owner's
+ * hard precondition for prediction elision). Total on garbage.
+ * @param {unknown} receiptId
+ * @returns {string|null}
+ */
+export function realizationCandidateId(receiptId) {
+  const m = /\.applied\.(candidate\..+)$/.exec(String(receiptId ?? ''));
+  return m ? m[1] : null;
+}
 
 /** Adversative node types (an outcome against the grain of its causes). */
 const ADVERSATIVE_TYPES = new Set(
@@ -206,8 +231,9 @@ const byStr = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 
  * @property {string} receiptKey    the recorded receipt id this clause realizes
  * @property {string} connective    the authored connective ('' for the opener when timeless)
  * @property {string} recorded      the byte-verbatim recorded headline
- * @property {'causal'|'parallel'|'adversative'|'open'} relation
+ * @property {'causal'|'parallel'|'adversative'|'anticipatory'|'open'} relation
  * @property {boolean} redacted
+ * @property {string|null} anticipatedBy  the elided prediction id licensing an anticipatory clause
  */
 
 /**
@@ -302,12 +328,22 @@ export function discourseProseActive(worldState) {
  * only authored text is the finite connective. Redaction lines (REDACTED_HOP) and
  * the grace lines are never paraphrased — grace lines are the panel's own verbatim
  * render and are NOT clauses here (they carry no receipt).
+ * PREDICTION ELISION (owner amendment): a forecast and its fulfillment read
+ * redundant ("X may take hold ... X takes hold"). When a realization node names its
+ * candidate (via realizationCandidateId) and that candidate is a recorded parent in
+ * this walk, the candidate's clause is ELIDED (the realization carries the fact);
+ * any OTHER in-walk child of the candidate is a response taken because of the
+ * forecast and takes the anticipatory register. A candidate whose realization is NOT
+ * in this walk is KEPT verbatim (an unfulfilled forecast is real information). This
+ * needs the recorded parent edges, so `provenance` is read defensively; without it,
+ * no elision fires (byte-neutral). Omission is selection, never invention.
  * @param {import('./causeWalk.js').CauseWalk} walk
- * @param {{ seedId?: string|number, nameOf?: (id: string) => string }} [opts]
+ * @param {{ seedId?: string|number, nameOf?: (id: string) => string, provenance?: Record<string, { parents?: ReadonlyArray<string> }>|null }} [opts]
  * @returns {DiscoursePassage}
  */
 export function realizeCauseWalk(walk, opts = {}) {
   const seedId = opts.seedId ?? (walk && walk.rootId) ?? '';
+  const provenance = opts.provenance && typeof opts.provenance === 'object' ? opts.provenance : null;
   // nameOf is accepted (the canonical resolver, injected) for entity tracking; the
   // kernel never injects a name INTO a verbatim headline (the truth surface), so in
   // Phase 1 it informs continuity only. Kept in the signature for the recorded
@@ -329,18 +365,55 @@ export function realizeCauseWalk(walk, opts = {}) {
   }
   nodes.sort(byChrono);
 
+  // ── PREDICTION ELISION (typed, DAG-deterministic) ──────────────────────────
+  const walkIds = new Set(nodes.map((n) => n.id));
+  /** recorded parents of `id` that are also in this walk, sorted (determinism). */
+  const parentsInWalk = (/** @type {string} */ id) => {
+    const entry = provenance ? provenance[id] : null;
+    const ps = entry && Array.isArray(entry.parents) ? entry.parents.map(String) : [];
+    return ps.filter((p) => walkIds.has(p)).sort(byStr);
+  };
+  /** @type {Set<string>} elided prediction ids (their realization is in the walk). */
+  const elided = new Set();
+  for (const node of nodes) {
+    const candId = realizationCandidateId(node.id);
+    if (candId && walkIds.has(candId) && parentsInWalk(node.id).includes(candId)) elided.add(candId);
+  }
+  /** @type {Map<string, string>} response node id -> its elided prediction (the license). */
+  const anticipatedBy = new Map();
+  for (const node of nodes) {
+    if (elided.has(node.id)) continue;                       // the prediction itself is gone
+    if (realizationCandidateId(node.id)) continue;           // the realization is not a "response"
+    for (const p of parentsInWalk(node.id)) {
+      if (elided.has(p) && !anticipatedBy.has(node.id)) anticipatedBy.set(node.id, p);
+    }
+  }
+
   /** @type {DiscourseClause[]} */
   const clauses = [];
   /** @type {WalkNode|null} */
   let prev = null;
   for (const node of nodes) {
+    if (elided.has(node.id)) continue;                       // rule 1/2: drop the forecast clause
     // AGGREGATION (C2 dedup): coalesce an adjacent identical recorded shape.
     if (prev && node.headline === prev.headline) { prev = node; continue; }
-    const relation = relationOf(prev, node);
-    const connective = relation === 'open' ? openingConnective(node) : connectiveFor(relation, node, seedId);
+    const opening = prev === null;
+    const anticip = anticipatedBy.get(node.id) || null;
+    /** @type {DiscourseClause['relation']} */
+    let relation;
+    let connective;
+    if (anticip) {
+      relation = 'anticipatory';
+      const reg = pick(/** @type {ReadonlyArray<string>} */ (CONNECTIVE_LEXICON.anticipatory), seedId, `anticipatory:${node.id}`);
+      // opener + register: keep the calendar time first, comma-joined, register second.
+      connective = (opening && node.tick != null) ? `In ${tickCalendarLabel(node.tick)}, ${reg}` : reg;
+    } else {
+      relation = opening ? 'open' : relationOf(prev, node);
+      connective = relation === 'open' ? openingConnective(node) : connectiveFor(relation, node, seedId);
+    }
     const recorded = node.headline;
     const text = connective ? `${connective} ${recorded}` : recorded;
-    clauses.push({ text, receiptKey: node.id, connective, recorded, relation, redacted: node.redacted });
+    clauses.push({ text, receiptKey: node.id, connective, recorded, relation, redacted: node.redacted, anticipatedBy: anticip });
     prev = node;
   }
 

@@ -40,7 +40,11 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
   // current rendering path below, byte-identical (the dormancy law).
   const discourse = useMemo(
     () => (discourseProseActive(worldState)
-      ? realizeCauseWalk(walk, { seedId: worldState?.rngSeed ?? rootId, nameOf })
+      ? realizeCauseWalk(walk, {
+        seedId: worldState?.rngSeed ?? rootId,
+        nameOf,
+        provenance: worldState?.spatialLedgers?.provenance,
+      })
       : null),
     [worldState, walk, rootId, nameOf],
   );

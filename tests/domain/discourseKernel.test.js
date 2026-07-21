@@ -17,6 +17,7 @@ import { buildCauseWalk, REDACTED_HOP, NO_DEEPER_MEMORY, LEDGER_DARK_LINE } from
 import { nodesFromRecord } from '../../src/domain/display/chronicleGraph.js';
 import {
   realizeCauseWalk, discourseProseActive, ALL_CONNECTIVES, KNOWN_RELATION_TYPES, RELATION_FOR_TYPE,
+  CONNECTIVE_LEXICON, realizationCandidateId,
 } from '../../src/domain/display/discourseKernel.js';
 
 // The lit DAG mirrors causeWalk.test.js: A (a decree) -> B -> C, disjoint entity
@@ -184,6 +185,100 @@ describe('3c discourse kernel — the adversative and parallel relations realize
     const fevers = out.clauses.filter((c) => c.recorded === 'Fever spreads');
     expect(fevers.length).toBe(1);
     expect((out.text.match(/Fever spreads/g) || []).length).toBe(1);
+  });
+});
+
+describe('3c discourse kernel — PREDICTION ELISION (owner amendment; typed, DAG-deterministic)', () => {
+  const C_ID = 'candidate.condition.crime.c.10';
+  const R_ID = 'wizard_news.10.world_pulse.applied.candidate.condition.crime.c.10';
+  const X_ID = 'muster.b_city_guard.10';
+  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a));
+
+  it('realizationCandidateId reads the candidate id from the TYPED key, never a headline', () => {
+    expect(realizationCandidateId(R_ID)).toBe(C_ID);
+    expect(realizationCandidateId(C_ID)).toBe(null);            // a bare candidate is not a realization
+    expect(realizationCandidateId('wizard_news.10.world_pulse.applied.some.impact')).toBe(null); // applied, but not a candidate
+    expect(realizationCandidateId(null)).toBe(null);
+  });
+
+  // RULE 1 — the forecast's only in-walk child is its realization ⇒ elide the forecast.
+  const rule1Walk = {
+    rootId: R_ID,
+    root: { headline: 'Criminal pressure takes hold', tick: 10, type: 'outcome', settlementIds: [] },
+    chain: [{ id: C_ID, depth: 1, headline: 'Criminal pressure may take hold', tick: 8, type: 'outcome', redacted: false, settlementIds: [] }],
+    ledgerDark: false, atRoot: false, gated: false, graceLine: '',
+  };
+  const prov1 = { [R_ID]: { parents: [C_ID] } };
+
+  it('(a) ELISION PIN rule 1: the prediction clause is dropped; the realization carries the fact', () => {
+    const out = realizeCauseWalk(rule1Walk, { seedId: 's', provenance: prov1 });
+    expect(out.clauses.map((c) => c.receiptKey)).toEqual([R_ID]); // C elided
+    expect(out.clauses[0].recorded).toBe('Criminal pressure takes hold');
+    expect(out.text).not.toContain('may take hold');
+    expect(out.clauses.every((c) => c.anticipatedBy === null)).toBe(true);
+  });
+
+  it('(a) elision is byte-deterministic from the DAG (same walk+provenance twice)', () => {
+    const a = realizeCauseWalk(rule1Walk, { seedId: 's', provenance: prov1 });
+    const b = realizeCauseWalk(rule1Walk, { seedId: 's', provenance: prov1 });
+    expect(a.text).toBe(b.text);
+    expect(a.clauses).toEqual(b.clauses);
+  });
+
+  it('no provenance ⇒ no elision (byte-neutral): both clauses survive', () => {
+    const out = realizeCauseWalk(rule1Walk, { seedId: 's' });
+    expect(out.clauses.map((c) => c.receiptKey)).toEqual([C_ID, R_ID]);
+  });
+
+  it('RULE 3: a forecast whose realization is NOT in the walk is KEPT (real information)', () => {
+    const walkC = {
+      rootId: C_ID, root: { headline: 'Criminal pressure may take hold', tick: 8, type: 'outcome', settlementIds: [] },
+      chain: [], ledgerDark: false, atRoot: true, gated: false, graceLine: NO_DEEPER_MEMORY,
+    };
+    const out = realizeCauseWalk(walkC, { seedId: 's', provenance: prov1 });
+    expect(out.clauses.map((c) => c.receiptKey)).toEqual([C_ID]); // kept
+    expect(out.text).toContain('may take hold');
+  });
+
+  // RULE 2 — the forecast has a RESPONSE child (an action taken because of it) in the
+  // walk: elide the forecast, and the response takes the anticipatory register.
+  const rule2Walk = {
+    rootId: R_ID,
+    root: { headline: 'Criminal pressure takes hold', tick: 10, type: 'outcome', settlementIds: [] },
+    chain: [
+      { id: X_ID, depth: 1, headline: 'The city guard musters', tick: 9, type: 'outcome', redacted: false, settlementIds: [] },
+      { id: C_ID, depth: 2, headline: 'Criminal pressure may take hold', tick: 8, type: 'outcome', redacted: false, settlementIds: [] },
+    ],
+    ledgerDark: false, atRoot: false, gated: false, graceLine: '',
+  };
+  const prov2 = { [R_ID]: { parents: [C_ID, X_ID] }, [X_ID]: { parents: [C_ID] } };
+
+  it('RULE 2: the forecast is elided and its response takes the anticipatory register', () => {
+    const out = realizeCauseWalk(rule2Walk, { seedId: 's', provenance: prov2 });
+    expect(out.clauses.map((c) => c.receiptKey)).toEqual([X_ID, R_ID]); // C elided, X + R remain
+    const x = out.clauses.find((c) => c.receiptKey === X_ID);
+    expect(x.relation).toBe('anticipatory');
+    expect(x.anticipatedBy).toBe(C_ID);
+    expect(hasAnticipatory(x)).toBe(true);
+    // opener + register (the owner's joining rule): calendar time first, register second.
+    expect(x.connective).toMatch(/^In the (spring|summer|autumn|winter) of year \d+, (Forewarned:|Against what was coming:|In its shadow:)$/);
+    expect(out.text).not.toContain('may take hold'); // the forecast is gone
+    expect(out.text).toContain('The city guard musters');
+    expect(out.text).toContain('Criminal pressure takes hold');
+  });
+
+  it('(b) ANTICIPATORY-LICENSE PIN: an anticipatory connective appears ONLY on a clause whose recorded parent is a typed prediction', () => {
+    for (const walk of [rule1Walk, rule2Walk]) {
+      const out = realizeCauseWalk(walk, { seedId: 's', provenance: walk === rule1Walk ? prov1 : prov2 });
+      for (const c of out.clauses) {
+        if (hasAnticipatory(c)) {
+          expect(c.relation).toBe('anticipatory');
+          expect(typeof c.anticipatedBy).toBe('string');
+          expect(String(c.anticipatedBy).startsWith('candidate.')).toBe(true); // the license is a typed prediction
+        }
+        if (c.relation === 'anticipatory') expect(hasAnticipatory(c)).toBe(true); // and vice-versa
+      }
+    }
   });
 });
 

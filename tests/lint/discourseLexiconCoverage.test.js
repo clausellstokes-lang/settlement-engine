@@ -65,7 +65,8 @@ describe('3c (d) lexicon totality — the live vocabulary is fully covered', () 
       const pool = CONNECTIVE_LEXICON.causal[band];
       expect(Array.isArray(pool) && pool.length >= 1, `causal.${band} pool is empty`).toBe(true);
     }
-    for (const family of ['parallel', 'adversative']) {
+    // parallel, adversative, and the anticipatory register (prediction-elision rule 2).
+    for (const family of ['parallel', 'adversative', 'anticipatory']) {
       const pool = CONNECTIVE_LEXICON[family];
       expect(Array.isArray(pool) && pool.length >= 1, `${family} pool is empty`).toBe(true);
     }

@@ -35,7 +35,7 @@ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { nodesFromRecord } from '../../src/domain/display/chronicleGraph.js';
 import { buildCauseWalk, REDACTED_HOP } from '../../src/domain/display/causeWalk.js';
-import { realizeCauseWalk, ALL_CONNECTIVES } from '../../src/domain/display/discourseKernel.js';
+import { realizeCauseWalk, ALL_CONNECTIVES, CONNECTIVE_LEXICON, realizationCandidateId } from '../../src/domain/display/discourseKernel.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -54,9 +54,11 @@ const RULES = Object.freeze({
 
 /** honest fallbacks a clause may legitimately carry (not embellishment). */
 const FALLBACKS = new Set([REDACTED_HOP, 'an earlier cause', 'World pulse outcome', 'World pulse impact']);
-/** a connective is a finite lexicon entry, a tickCalendarLabel opener, or empty. */
+/** a connective is a finite lexicon entry, a tickCalendarLabel opener, an anticipatory
+ *  opener (opener + register, the elision-rule-2 joining rule), or empty. */
 const OPENER = /^In the (spring|summer|autumn|winter) of year \d+:$/;
-const legalConnective = (c) => c === '' || ALL_CONNECTIVES.has(c) || OPENER.test(c);
+const ANTIC_OPENER = /^In the (spring|summer|autumn|winter) of year \d+, (Forewarned:|Against what was coming:|In its shadow:)$/;
+const legalConnective = (c) => c === '' || ALL_CONNECTIVES.has(c) || OPENER.test(c) || ANTIC_OPENER.test(c);
 /** the spellBreakCensus detectors (replicated), applied to the AUTHORED tissue only. */
 const DETECTORS = [
   ['rawId', () => /\b[a-z0-9]+(?:[._][a-z0-9]+){2,}\b/gi],
@@ -168,13 +170,19 @@ function measure(campaign) {
     ? worldState.spatialLedgers.provenance : {};
   const roots = Object.keys(ledger).sort(byStr);
 
+  const provenance = ledger;
+  const hasAnticipatory = (c) => CONNECTIVE_LEXICON.anticipatory.some((a) => c.connective.includes(a));
+
   let walksWithHops = 0;
   let clauseCount = 0;
+  let elidedPredictions = 0;   // (a) elision fired
+  let anticipatoryClauses = 0; // (b) register used
   const unbacked = [];        // (b1)
   const contradictions = [];  // (b2)
   const compositionBreaks = [];  // (b3)
   const illegalConnectives = []; // (b3)
   const connectiveBreaks = [];   // (b4)
+  const unlicensedAntic = [];    // (b) anticipatory-license
   const projection = [];
   const samples = [];
   const connectiveKinds = new Set();
@@ -182,8 +190,14 @@ function measure(campaign) {
   for (const rootId of roots) {
     const walk = buildCauseWalk({ worldState, rootId, seesSecrets: true });
     if (walk.chain.length > 0) walksWithHops += 1;
-    const out = realizeCauseWalk(walk, { seedId });
-    if (out.clauses.length >= 3 && samples.length < 2 && walk.chain.length >= 2) samples.push(out.text);
+    const out = realizeCauseWalk(walk, { seedId, provenance });
+    if (out.clauses.length >= 2 && samples.length < 3 && walk.chain.length >= 2) samples.push(out.text);
+    const outIds = new Set(out.clauses.map((c) => c.receiptKey));
+    // (a) count elided predictions: a candidate node in the walk, absent from the
+    // output, whose realization IS in the output (typed, not string-matched).
+    for (const id of [String(walk.rootId), ...walk.chain.map((h) => String(h.id))]) {
+      if (!outIds.has(id) && id.startsWith('candidate.') && [...outIds].some((oid) => realizationCandidateId(oid) === id)) elidedPredictions += 1;
+    }
     for (const c of out.clauses) {
       clauseCount += 1;
       projection.push(`${rootId}|${c.receiptKey}|${c.connective}|${c.recorded}`);
@@ -202,11 +216,19 @@ function measure(campaign) {
         const hits = c.connective.match(mk());
         if (hits && hits.length) connectiveBreaks.push(`${name} in "${c.connective}"`);
       }
+      // (b) anticipatory-license: the register may ONLY ride a clause licensed by a
+      // typed prediction parent (relation flagged + anticipatedBy a candidate id).
+      if (hasAnticipatory(c) || c.relation === 'anticipatory') {
+        anticipatoryClauses += 1;
+        if (!(hasAnticipatory(c) && c.relation === 'anticipatory' && String(c.anticipatedBy || '').startsWith('candidate.'))) {
+          unlicensedAntic.push(`${c.receiptKey}: "${c.connective}" antic=${c.anticipatedBy}`);
+        }
+      }
     }
   }
   return {
-    counts: { roots: roots.length, walksWithHops, clauseCount, relations: connectiveKinds.size },
-    violations: { unbacked, contradictions, compositionBreaks, illegalConnectives, connectiveBreaks },
+    counts: { roots: roots.length, walksWithHops, clauseCount, relations: connectiveKinds.size, elidedPredictions, anticipatoryClauses },
+    violations: { unbacked, contradictions, compositionBreaks, illegalConnectives, connectiveBreaks, unlicensedAntic },
     projectionHash: hashOf(projection.sort(byStr)),
     samples,
   };
@@ -222,10 +244,16 @@ describe(`3c (b) THE LIT NARRATIVE-PARITY VARIANT — connected prose keeps the 
     expect(true).toBe(true);
   }, 120_000);
 
-  test('anti-vacuity: the drive produced a real recorded DAG the realizer connected', () => {
+  test('anti-vacuity: the drive produced a real recorded DAG the realizer connected, and prediction elision actually fired', () => {
     expect(run.counts.roots).toBeGreaterThanOrEqual(20);
     expect(run.counts.walksWithHops).toBeGreaterThanOrEqual(5);
     expect(run.counts.clauseCount).toBeGreaterThanOrEqual(30);
+    // the owner amendment is exercised on real data, not just synthetic fixtures.
+    expect(run.counts.elidedPredictions).toBeGreaterThanOrEqual(5);
+  }, 120_000);
+
+  test('(a/b) ELISION stays honest: every anticipatory clause is licensed by a typed prediction (omission is selection, not invention)', () => {
+    expect(run.violations.unlicensedAntic).toEqual([]);
   }, 120_000);
 
   test('(b1) CLAIMS-PARITY: every realized clause traces to a recorded receipt (zero unrecorded claims)', () => {
