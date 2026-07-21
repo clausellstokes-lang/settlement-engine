@@ -23,7 +23,9 @@ const LOAD_TIMEOUT_MS = 15000;
 // Generic reject copy for a placement that arrives via the FMG bridge and is
 // refused by the store's authoritative gate. Mirrors WorldMap.handleDrop's UI
 // copy (minus the settlement name, which the bridge event doesn't carry).
-const PLACEMENT_REJECT_COPY = {
+// Exported: KeyboardPlacementControl speaks the SAME refusal copy through the
+// palette's live region, so the gate never has two spellings (E-I).
+export const PLACEMENT_REJECT_COPY = {
   'no-campaign': 'Select a campaign before placing settlements on the map.',
   'not-canon':   'Only canon settlements can be placed. Canonize it first.',
   'duplicate':   'That settlement is already on this map.',

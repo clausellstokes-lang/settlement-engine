@@ -13,7 +13,7 @@
  * Rendered DOM is unchanged.
  */
 
-import { memo, Suspense, lazy } from 'react';
+import { memo, Suspense, lazy, useCallback, useRef, useState } from 'react';
 import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
 import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
@@ -34,6 +34,10 @@ const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./WorldPulsePanel.jsx'));
 const PantheonPanel   = lazy(() => import('./PantheonPanel.jsx'));
 const MapLegend       = lazy(() => import('./MapLegend.jsx'));
+// E-I (bar 9): the keyboard placement session — its own lazy chunk, mounted
+// only when a palette card's Enter arms it, so it costs zero eager bytes (the
+// composite first-paint margin is ~25 B; nothing new may ride the entry).
+const KeyboardPlacementControl = lazy(() => import('./KeyboardPlacementControl.jsx'));
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
@@ -71,6 +75,28 @@ function WorldMapStageImpl({
   const mapError      = useStore(s => s.mapError);
   const setMapMode    = useStore(s => s.setMapMode);
   const imageMode     = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+  // E-I — the keyboard placement session (bar 9). The palette card's Enter arms
+  // it; the lazy overlay steers + commits through the pointer path's own gates.
+  // announceRef is the palette's aria-live setter (assigned via announceOut, the
+  // transformOut ref idiom), so BOTH input paths speak through ONE announcer.
+  const [kbPlaceSave, setKbPlaceSave] = useState(null);
+  const kbReturnFocusRef = useRef(null);
+  const announceRef = useRef(null);
+  const announce = useCallback((text) => { announceRef.current?.(text); }, []);
+  const handleKeyboardPlace = useCallback((save) => {
+    if (!bridgeReady && !imageMode) {
+      announce('The map is still loading. Try again in a moment.');
+      return;
+    }
+    kbReturnFocusRef.current = (typeof document !== 'undefined') ? document.activeElement : null;
+    setKbPlaceSave(save);
+  }, [bridgeReady, imageMode, announce]);
+  const endKeyboardPlace = useCallback(() => {
+    setKbPlaceSave(null);
+    const el = kbReturnFocusRef.current;
+    kbReturnFocusRef.current = null;
+    if (el && typeof el.focus === 'function') el.focus();
+  }, []);
   // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
   // surface is byte-unchanged; the walk flips it on to compare without a rebuild).
   const showRealmFilm = flag('loadingJourneyFilm');
@@ -119,6 +145,8 @@ function WorldMapStageImpl({
               onCreateCampaign={onCreateCampaign}
               onSelectCampaign={onSelectCampaign}
               hasCampaigns={hasCampaigns}
+              onKeyboardPlace={handleKeyboardPlace}
+              announcerRef={announceRef}
             />
           </Suspense>
         </SidebarShell>
@@ -163,7 +191,7 @@ function WorldMapStageImpl({
           <div className="sr-only" data-testid="world-map-in-words">
             {placedNames.length
               ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed — ${placedNames.join(', ')}. The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
-              : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map with a pointer; each placed settlement will be listed here.'}
+              : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map, or by pressing Enter on a palette card and steering with the arrow keys; each placed settlement will be listed here.'}
           </div>
           {!imageMode && (
             <iframe
@@ -324,6 +352,32 @@ function WorldMapStageImpl({
                 </div>
               )}
             </>
+          )}
+          {/* E-I — the keyboard placement session, mounted last so it paints
+              above every map overlay. Lazy: the chunk loads only when a palette
+              card's Enter arms a session. Commits through the pointer path's
+              own seam (bridge.placeSettlement / addPlacement — ONE gate). */}
+          {kbPlaceSave && (
+            <Suspense fallback={(
+              // Narrated wait (witnessed-wait ratchet): the session chunk loads
+              // on the FIRST arm only; the chip narrates that beat in-world.
+              <div style={{
+                position: 'absolute', top: 12, left: '50%', transform: 'translateX(-50%)',
+                background: INK, color: PARCH_100, border: `1px solid ${GOLD}`,
+                padding: '6px 10px', fontSize: FS.xs,
+              }}
+              >
+                Readying the placement target…
+              </div>
+            )}
+            >
+              <KeyboardPlacementControl
+                save={kbPlaceSave} imageMode={imageMode}
+                bridgeRef={bridgeRef} iframeRef={iframeRef}
+                containerRef={mapContainerRef} transformRef={overlayTransformRef}
+                announce={announce} onDone={endKeyboardPlace}
+              />
+            </Suspense>
           )}
         </div>
 

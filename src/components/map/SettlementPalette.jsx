@@ -6,7 +6,7 @@
  * Placed settlements show a "placed" badge and are visually muted.
  */
 
-import { lazy, Suspense, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -29,15 +29,24 @@ const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'))
 export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
+  onKeyboardPlace, announcerRef,
 }) {
   const [query, setQuery] = useState('');
-  // F28 — keyboard placement is impossible here: a settlement lands on the map
-  // by dragging its card onto an <iframe> world map at a pointer coordinate,
-  // resolved by the FMG bridge in WorldMap.jsx. There is no keyboard-reachable
-  // map target, so pressing Enter on a card can't place it. Rather than lie via
-  // role="button"+aria-label "Drag X onto the map" (an action a keyboard user
-  // can't take), the card now announces honest guidance into this live region.
+  // F28 → E-I — the placement live region. F28 made Enter honest (it selected
+  // and announced guidance instead of promising an impossible drag); E-I makes
+  // Enter PLACE: on a placeable card it arms the keyboard placement session
+  // (onKeyboardPlace → WorldMapStage's lazy overlay), which steers a target
+  // with the arrow keys and commits through the same store gate as a drop.
   const [placementHint, setPlacementHint] = useState('');
+  // (announcerRef is a parent-owned ref, assigned in the effect below.)
+  // E-I — expose this live region as THE placement announcer (the transformOut
+  // ref idiom): the keyboard session speaks its instructions, moves, commits,
+  // and refusals through the same aria-live footer the cards already use.
+  useEffect(() => {
+    if (!announcerRef) return undefined;
+    announcerRef.current = setPlacementHint;
+    return () => { announcerRef.current = null; };
+  }, [announcerRef]);
   const setSelectedBurgId = useStore(s => s.setSelectedBurgId);
   // P136 / M-6 — hover on a palette card sets the QuickInspector
   // target so the worldbuilder peeks what they're about to drag.
@@ -173,16 +182,21 @@ export default function SettlementPalette({
               onSelect={(name, isPlaced) => {
                 setSelectedBurgId(null);
                 setHover?.(save.id); // surface the QuickInspector peek
-                setPlacementHint(
-                  // Fix wave 4 (idx28): the hint leads with what selection just
-                  // DID for a keyboard user (the overview peek beside the map)
-                  // instead of dead-ending on what the map can't do. Placement
-                  // itself is still a pointer drag — the keyboard placement
-                  // commit is a scoped follow-on (see the F28 note above).
-                  isPlaced
-                    ? `${name} is already placed on the map.`
-                    : `${name} selected — its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`,
-                );
+                // Fix wave 4 (idx28) + E-I: the hint leads with what Enter just
+                // DID. A placeable card now ARMS the keyboard placement session
+                // (the F28 "scoped follow-on", built); the blocked cases keep
+                // announcing the honest reason instead of dead-ending.
+                if (isPlaced) {
+                  setPlacementHint(`${name} is already placed on the map.`);
+                } else if (!activeCampaign) {
+                  setPlacementHint(`${name} selected — its overview is showing beside the map. Select a campaign to place it on the map.`);
+                } else if (typeof onKeyboardPlace === 'function') {
+                  onKeyboardPlace(save);
+                } else {
+                  // Isolated mounts without the stage (tests, storybook-style
+                  // harnesses): keep the honest pointer guidance.
+                  setPlacementHint(`${name} selected — its overview is showing beside the map. To place it, drag its card onto the map with a mouse or touch.`);
+                }
               }}
               onHover={(hovering) => {
                 if (hovering) setHover?.(save.id);
@@ -255,11 +269,11 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
     }));
   }
 
-  // F28 — Enter/Space is a REAL action now: it selects the settlement (drives
-  // the QuickInspector peek) and announces honest placement guidance via the
-  // palette's aria-live footer. Placement itself remains a pointer drag (the
-  // map is an untabbable iframe), so the aria-label no longer commands a
-  // keyboard-impossible "Drag … onto the map".
+  // F28 → E-I — Enter/Space is a REAL action: it selects the settlement (the
+  // QuickInspector peek) and, on a placeable card, arms the keyboard placement
+  // session (arrow keys steer a map target; Enter commits through the same
+  // store gate as a pointer drop). Blocked cases (already placed, no campaign)
+  // announce the honest reason via the palette's aria-live footer.
   function handleKeyDown(e) {
     if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
       e.preventDefault(); // Space would otherwise scroll the list
