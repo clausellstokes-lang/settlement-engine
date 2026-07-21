@@ -20,6 +20,23 @@ export const BACKDROP_OPTIONS = Object.freeze([
   ['fmg', 'Generated terrain'],
 ]);
 
+// The maps/campaigns sort options — the THREE keys list_gallery_maps applies
+// server-side (migration 065/090): 'most_viewed' by view_count, 'most_imported'
+// by import_count, and the default 'newest' (published_at desc). No relevance /
+// population / aliveness sort exists for maps — those are settlement-feed keys
+// the maps RPC does not implement, so offering them would be a dead control.
+//
+// HOME HERE, NOT galleryMapsUtils (chunk-graph): the Maps and Campaigns tabs
+// render this dropdown and ride the GALLERY chunk, so the sort catalog must
+// live in this gallery-only module — importing it from galleryMapsUtils (the
+// share-editor chunk's home) would drag that module into the gallery chunk and
+// re-trigger the +42 B shared-chunk rebalance this split exists to prevent.
+export const MAP_SORT_OPTIONS = Object.freeze([
+  ['newest', 'Newest'],
+  ['most_viewed', 'Most viewed'],
+  ['most_imported', 'Most imported'],
+]);
+
 // The empty maps-filters shape — the single source of truth for "no narrowing"
 // (the GalleryMaps initial state + its Clear reset). `importable` is the owner
 // import opt-in facet (saved_maps.gallery_importable, migration 072). kind and

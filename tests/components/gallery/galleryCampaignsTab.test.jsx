@@ -14,7 +14,7 @@
  *     press shows the premium notice), never rendering.
  */
 import { afterEach, describe, expect, test, vi } from 'vitest';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 import GalleryPage from '../../../src/components/GalleryPage.jsx';
 import GalleryCampaigns from '../../../src/components/gallery/GalleryCampaigns.jsx';
@@ -81,8 +81,13 @@ describe('the Campaigns third tab', () => {
     expect(screen.getByText('Maps')).toBeTruthy();
     fireEvent.click(screen.getByText('Campaigns'));
     expect(await screen.findByText('The Reach')).toBeTruthy();
+    // The Campaigns tab now carries the full Settlements-tab filter shape (its
+    // sidebar facets ride along in their empty form), so the wire payload's
+    // filters is { ...emptyMapFilters, kind:['map_with_campaign'] } — pin the
+    // kind narrowing with objectContaining (the Maps-tab idiom), not an exact
+    // object match.
     expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenCalledWith(
-      expect.objectContaining({ filters: { kind: ['map_with_campaign'] } }),
+      expect.objectContaining({ filters: expect.objectContaining({ kind: ['map_with_campaign'] }) }),
     );
   });
 
@@ -124,5 +129,70 @@ describe('the Campaigns third tab', () => {
     expect(screen.queryByLabelText(/Aliveness/)).toBeNull();
     expect(screen.queryByLabelText(/World age/)).toBeNull();
     expect(screen.queryByLabelText('This realm is at war')).toBeNull();
+  });
+});
+
+// ── Settlements-tab PARITY: filter rail + search + sort + filtered-empty ──────
+describe('the Campaigns tab — full filter/search/sort parity', () => {
+  afterEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+    mocks.storeState.auth = null;
+    mocks.galleryApi.fetchGalleryMaps.mockResolvedValue({ items: [] });
+  });
+
+  test('renders the honest campaign facets: Backdrop + Has settlements + Importable + Tags', async () => {
+    mocks.galleryApi.fetchGalleryMaps.mockResolvedValue({ items: [CAMPAIGN_TILE] });
+    render(<GalleryCampaigns onNavigate={vi.fn()} />);
+    expect(await screen.findByText('The Reach')).toBeTruthy();
+    expect(screen.getByText('Filters')).toBeTruthy();
+    expect(screen.getByText('Backdrop')).toBeTruthy();
+    // Has-settlements IS coherent for campaigns (member_count can be > 0) — the
+    // facet struck on the blank-maps tab is shown here.
+    expect(screen.getByLabelText('Has settlements')).toBeTruthy();
+    expect(screen.getByLabelText('Importable only')).toBeTruthy();
+    // The dynamic tag vocabulary renders as chips (button, capitalized human()).
+    expect(screen.getByRole('button', { name: 'frontier' })).toBeTruthy();
+    // The result-count chip reports the shared-campaign count.
+    expect(screen.getByText('1 shared campaign')).toBeTruthy();
+  });
+
+  test('toggling has-settlements refetches with the facet AND kind=map_with_campaign intact', async () => {
+    render(<GalleryCampaigns onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared campaigns yet/i)).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Has settlements'));
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ filters: expect.objectContaining({ hasSettlements: true, kind: ['map_with_campaign'] }) }),
+    ));
+  });
+
+  test('a filtered-empty result offers Clear filters, and clearing refetches unfiltered', async () => {
+    render(<GalleryCampaigns onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared campaigns yet/i)).toBeTruthy();
+    fireEvent.click(screen.getByLabelText('Importable only'));
+    expect(await screen.findByText(/No campaigns match those filters/i)).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Clear filters' }));
+    expect(await screen.findByText(/No shared campaigns yet/i)).toBeTruthy();
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ filters: expect.objectContaining({ importable: false, kind: ['map_with_campaign'] }) }),
+    ));
+  });
+
+  test('changing the sort refetches with the server sort key', async () => {
+    render(<GalleryCampaigns onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared campaigns yet/i)).toBeTruthy();
+    fireEvent.change(screen.getByLabelText('Sort campaigns'), { target: { value: 'most_imported' } });
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sort: 'most_imported', filters: expect.objectContaining({ kind: ['map_with_campaign'] }) }),
+    ));
+  });
+
+  test('typing a search refetches (debounced) with the query and the kind narrowing', async () => {
+    render(<GalleryCampaigns onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared campaigns yet/i)).toBeTruthy();
+    fireEvent.change(screen.getByLabelText('Search campaigns'), { target: { value: 'reach' } });
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ search: 'reach', filters: expect.objectContaining({ kind: ['map_with_campaign'] }) }),
+    ), { timeout: 1500 });
   });
 });

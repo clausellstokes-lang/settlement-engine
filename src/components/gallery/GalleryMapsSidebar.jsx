@@ -129,19 +129,34 @@ function ToggleRow({ checked, label, onChange }) {
 
 // The map facet body, shared by the desktop sidebar and the mobile sheet. The
 // Clear control is rendered by the chrome so the body holds only the facets.
-function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool }) {
+//
+// `showHasSettlements` gates the has-settlements toggle: it is OFF for the Maps
+// tab (pinned to blank maps, which carry no members — the facet could only ever
+// return the full set or nothing) and ON for the Campaigns tab (map_with_campaign
+// tiles carry a real member_count, so member_count > 0 is a meaningful filter the
+// list_gallery_maps RPC honors — migration 090's hasSettlements arm).
+function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBool, showHasSettlements = false }) {
   return (
     <>
       <SidebarSection title="Backdrop" count={filters.backdrop?.length || 0}>
         <PairChips options={BACKDROP_OPTIONS} value={filters.backdrop} onToggle={option => onToggleArray('backdrop', option)} />
       </SidebarSection>
 
-      <SidebarSection title="Import">
-        <ToggleRow
-          checked={!!filters.importable}
-          label="Importable only"
-          onChange={value => onToggleBool('importable', value)}
-        />
+      <SidebarSection title="Contents">
+        <div style={{ display: 'grid', gap: SP.sm }}>
+          {showHasSettlements && (
+            <ToggleRow
+              checked={!!filters.hasSettlements}
+              label="Has settlements"
+              onChange={value => onToggleBool('hasSettlements', value)}
+            />
+          )}
+          <ToggleRow
+            checked={!!filters.importable}
+            label="Importable only"
+            onChange={value => onToggleBool('importable', value)}
+          />
+        </div>
       </SidebarSection>
 
       {tagVocabulary.length > 0 && (
@@ -165,11 +180,13 @@ function MapFilterBody({ filters, tagVocabulary = [], onToggleArray, onToggleBoo
  * @param {(key:string, value:string) => void} props.onToggleArray
  * @param {(key:string, value:boolean) => void} props.onToggleBool
  * @param {() => void} props.onClear
+ * @param {boolean} [props.showHasSettlements]  show the has-settlements toggle
+ *   (Campaigns tab only; struck on the blank-maps tab)
  */
-export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onToggleArray, onToggleBool, onClear }) {
+export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onToggleArray, onToggleBool, onClear, showHasSettlements = false }) {
   const isMobile = useIsMobile();
   const activeCount = activeMapFilterCount(filters);
-  const bodyProps = { filters, tagVocabulary, onToggleArray, onToggleBool };
+  const bodyProps = { filters, tagVocabulary, onToggleArray, onToggleBool, showHasSettlements };
 
   if (isMobile) {
     return (
