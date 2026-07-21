@@ -57,12 +57,18 @@ not a flat plate.** The plate (K-0's raster) is one photograph of the real objec
 wants the real object — a navigable, rotatable 3D building viewable from any angle. This is
 the HIGHER ceiling, so No-Compromise demands it. It also RESOLVES the old fork rather than
 facing it. The corrected stack:
-- **THE 3D MESH IS THE DELIVERABLE AND THE TRUTH.** The grammar builds actual 3D geometry
-  in pure rational JS — K-0 already proved this (the buttress reads as a stepped 3D mass, the
-  window has real recess). It is byte-deterministic and **GOLDEN-PINNED AS GEOMETRY** (vertex/
-  face data), not as pixels. THE PROMISE binds to the STRUCTURE: same seed → the same
-  building, byte-identical, forever. This is MORE faithful to "a seed is a world, forever"
-  than pinning a photograph of it — the world is the structure, not the snapshot.
+- **THE 3D MESH IS THE DELIVERABLE AND THE TRUTH — at MAXIMUM ARCHITECTURAL FIDELITY** (owner,
+  2026-07-21: "as much fidelity as possible to the architecture and structure"). The mesh is
+  not simplified massing: it carries the real gothic structural system as true 3D geometry —
+  nave/aisle/transept volumes, the flying-buttress load path (pier + flyer + pinnacle), ribbed
+  vault springing, traceried windows modelled in depth (mullions, cusped foils, the rose as
+  real openings), spire, crockets/finials where the LOD tier allows. Fidelity is capped only
+  by the deterministic-geometry discipline (rational math, pinned tables for non-constructible
+  angles) and the per-building LOD ladder K-0 derived (signature institutions get full detail;
+  commons get massing; distant fill gets glyphs). It is byte-deterministic and **GOLDEN-PINNED
+  AS GEOMETRY** (vertex/face data), not as pixels. THE PROMISE binds to the STRUCTURE: same
+  seed → the same building, byte-identical, forever. More faithful to "a seed is a world,
+  forever" than pinning a photograph of it — the world is the structure, not the snapshot.
 - **PRIMARY EXPERIENCE = an INTERACTIVE FULL-3D VIEWER (GPU/WebGL/PBR).** Rotate, orbit, view
   any angle, real materials and shadows — the absolute-highest ceiling. Promoted from
   "optional" to the primary way you see a building. Its live pixels are device-dependent, and
