@@ -51,8 +51,20 @@ export function WorldMapOverlays({
     <>
       {/* Toast — an optional `action` renders a recovery CTA (P10) so an error
           (e.g. "canonize first") offers a reachable next step, not a dead-end. */}
+      {/* Persistent polite announcer (SB5): this toast previously carried NO live
+          semantics at all — a save/advance confirmation was invisible to screen
+          readers. Non-error text is announced as a TEXT CHANGE inside this
+          always-mounted region (a role=status inserted with its text is read
+          inconsistently); errors interrupt via role=alert on the visible box,
+          which IS reliable on insertion. */}
+      <div className="sr-only" role="status" aria-live="polite">
+        {toast && toast.kind !== 'error' ? toast.text : ''}
+      </div>
       {toast && (
-        <div style={{
+        <div
+          role={toast.kind === 'error' ? 'alert' : undefined}
+          aria-live={toast.kind === 'error' ? 'assertive' : undefined}
+          style={{
           position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
           display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
@@ -61,7 +73,10 @@ export function WorldMapOverlays({
           boxShadow: ELEV[2],
           zIndex: 100,
         }}>
-          <span>{toast.text}</span>
+          {/* Non-error text is aria-hidden here (the announcer above carries it);
+              the action button must stay in the a11y tree, so only the text span
+              is hidden, never the box. */}
+          <span aria-hidden={toast.kind === 'error' ? undefined : true}>{toast.text}</span>
           {toast.action && (
             <Button
               variant="ghost"

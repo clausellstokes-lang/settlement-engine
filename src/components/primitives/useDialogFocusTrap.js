@@ -39,7 +39,15 @@ export function useDialogFocusTrap(open, onCancel) {
     if (!open) return undefined;
     restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
     const node = dialogRef.current;
-    const focusables = () => node ? Array.from(node.querySelectorAll(FOCUSABLE)) : [];
+    // Sequentially focusable only (SB5): the selector can match elements that
+    // carry tabindex="-1" (e.g. a roving-focus listbox option that is a real
+    // <button>, as in CommandPalette), but the browser's Tab order SKIPS those —
+    // so the wrap logic must skip them too, or Tab from the last real tab-stop
+    // would fall through the dialog instead of wrapping. el.tabIndex is -1
+    // exactly for those elements.
+    const focusables = () => node
+      ? Array.from(node.querySelectorAll(FOCUSABLE)).filter((el) => el.tabIndex !== -1)
+      : [];
     // Honour an explicit autofocus first: a dialog input that opted into
     // autoFocus (e.g. a rename field) should keep focus rather than have it
     // yanked to the header close button. React's autoFocus prop does not emit

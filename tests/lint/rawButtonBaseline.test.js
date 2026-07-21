@@ -30,7 +30,12 @@ import { describe, expect, test } from 'vitest';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed max raw-button occurrence count — lower it as buttons migrate onto
 // the primitive; never raise it. (Splitting files does NOT change this number.)
-const BUTTON_BUDGET = 50;
+// SB5 (2026-07-21): tightened 50 → 45, the count MEASURED on this tree — the
+// slack banked by earlier migrations is now locked so no new raw button can
+// spend it. Migrating the 45 grandfathered buttons themselves is a burn-down
+// lane (each swap changes rendered chrome — border/minHeight/padding — so it
+// is per-surface craft work, not a mechanical sweep).
+const BUTTON_BUDGET = 45;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;

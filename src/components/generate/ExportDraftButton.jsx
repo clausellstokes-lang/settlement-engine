@@ -24,6 +24,7 @@
  */
 import { useState, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
+import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import { sans, FS, SP, swatch } from '../theme.js';
 
@@ -70,7 +71,7 @@ export default function ExportDraftButton() {
       setOpen(false);
     } catch (err) {
       console.error('[draft PDF export] failed:', err);
-      setError(`PDF export failed: ${err?.message || String(err) || 'unknown error'}`);
+      setError(t('errors.pdfExportFail', { detail: err?.message || String(err) || 'unknown error' }));
     } finally {
       setExporting(false);
     }
@@ -87,7 +88,9 @@ export default function ExportDraftButton() {
         Export PDF
       </Button>
       {error && (
-        <span style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 320, textAlign: 'center' }}>
+        // role=alert (SB5): the export failure appears after the user acts, so
+        // it must interrupt assistive tech (WCAG 4.1.3).
+        <span role="alert" style={{ color: swatch.danger, fontSize: FS.xs, fontFamily: sans, maxWidth: 320, textAlign: 'center' }}>
           {error}
         </span>
       )}

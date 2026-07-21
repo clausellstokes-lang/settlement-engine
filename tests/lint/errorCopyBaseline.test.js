@@ -39,7 +39,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // struck from the baseline; vision-c's CorpusFactoryPanel ×2 (an unbudgeted fold-
 // composition arrival) migrated onto t('errors.corpus*') in the same pass. Budget
 // lowered 53 → 51 to lock the WizardNewsPanel win.
-const ERROR_LITERAL_BUDGET = 51;
+// SB5 (2026-07-21): GalleryReportDialog, ExportDraftButton and GalleryHubPage
+// migrated onto t('errors.reportSendFail'/'pdfExportFail'/'signInToVote' + the
+// dynamic-fallback siblings) and struck from the baseline. Budget 51 → 48.
+const ERROR_LITERAL_BUDGET = 48;
 
 // Detector idioms (see header). File-test = "does any idiom appear"; occurrence
 // count = total matches. Fresh RegExp per pass so the /g lastIndex never leaks.

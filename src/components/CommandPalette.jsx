@@ -17,6 +17,7 @@ import { useStore } from '../store/index.js';
 import { ROUTES } from '../lib/routes.js';
 import { navigate } from '../hooks/useRoute.js';
 import { saves as savesService } from '../lib/saves.js';
+import { t } from '../copy/index.js';
 import Button from './primitives/Button.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from './theme.js';
@@ -85,10 +86,17 @@ export default function CommandPalette({ onClose }) {
 
   const choose = (it) => { if (!it) return; onClose(); it.run(); };
 
+  // The active row, CLAMPED into the live results range on every render (SB5).
+  // `active` can go stale against `results`: results hydrate asynchronously
+  // (cold library) and shrink as the query narrows, so the raw state may sit at
+  // -1 or past the end — which used to point aria-activedescendant at a
+  // dangling id ('cmdk-opt--1') and make Enter a silent no-op.
+  const activeIdx = results.length === 0 ? -1 : Math.min(Math.max(active, 0), results.length - 1);
+
   const onKeyDown = (e) => {
-    if (e.key === 'ArrowDown') { e.preventDefault(); setActive((a) => Math.min(a + 1, results.length - 1)); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); }
-    else if (e.key === 'Enter') { e.preventDefault(); choose(results[active]); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); if (results.length) setActive(Math.min(activeIdx + 1, results.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); if (results.length) setActive(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (activeIdx >= 0) choose(results[activeIdx]); }
     // Escape is handled by the shared focus trap (onCancel = onClose).
   };
 
@@ -112,7 +120,7 @@ export default function CommandPalette({ onClose }) {
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-label="Command palette"
+        aria-label={t('palette.dialogLabel')}
         style={{
           background: CARD, border: `1px solid ${BORDER}`,
           width: '92%', maxWidth: 560, marginTop: '12vh',
@@ -126,12 +134,12 @@ export default function CommandPalette({ onClose }) {
             autoFocus
             onChange={(e) => { setQuery(e.target.value); setActive(0); }}
             onKeyDown={onKeyDown}
-            placeholder="Jump to a page, a settlement, or a figure…"
-            aria-label="Jump to a page, a settlement, or a figure"
+            placeholder={t('palette.placeholder')}
+            aria-label={t('palette.inputLabel')}
             role="combobox"
             aria-expanded={results.length > 0}
             aria-controls={listId}
-            aria-activedescendant={results.length > 0 ? `cmdk-opt-${active}` : undefined}
+            aria-activedescendant={activeIdx >= 0 ? `cmdk-opt-${activeIdx}` : undefined}
             autoComplete="off"
             style={{
               width: '100%', boxSizing: 'border-box', border: `1px solid ${BORDER}`,
@@ -142,32 +150,40 @@ export default function CommandPalette({ onClose }) {
         </div>
 
         {results.length > 0 ? (
-          <div id={listId} role="listbox" aria-label="Results" style={{ padding: SP.xs, overflowY: 'auto' }}>
+          <div id={listId} role="listbox" aria-label={t('palette.resultsLabel')} style={{ padding: SP.xs, overflowY: 'auto' }}>
+            {/* Each option IS the interactive element (SB5): role="option" rides
+                the Button itself — ARIA forbids interactive descendants inside an
+                option, and a wrapper-div option over a tabbable button made every
+                row a tab stop, breaking the single-tab-stop combobox model. The
+                options rove via aria-activedescendant instead (tabIndex -1; the
+                shared trap skips non-sequentially-focusable elements). */}
             {results.map((it, i) => (
-              <div key={it.id} id={`cmdk-opt-${i}`} role="option" aria-selected={i === active}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  fullWidth
-                  aria-label={it.page ? `Go to ${it.label}` : it.label}
-                  onMouseEnter={() => setActive(i)}
-                  onClick={() => choose(it)}
-                  style={{ justifyContent: 'flex-start', gap: SP.sm, background: i === active ? PARCH : 'transparent' }}
-                >
-                  <span style={{ flex: 1, minWidth: 0, color: INK, fontSize: FS.sm, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                    {it.label}
-                  </span>
-                  <span style={{ color: it.page ? GOLD : MUTED, fontSize: FS.xxs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
-                    {it.page ? 'Page' : it.hint}
-                  </span>
-                </Button>
-              </div>
+              <Button
+                key={it.id}
+                id={`cmdk-opt-${i}`}
+                role="option"
+                aria-selected={i === activeIdx}
+                tabIndex={-1}
+                variant="ghost"
+                size="sm"
+                fullWidth
+                aria-label={it.page ? t('palette.goTo', { label: it.label }) : it.label}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => choose(it)}
+                style={{ justifyContent: 'flex-start', gap: SP.sm, background: i === activeIdx ? PARCH : 'transparent' }}
+              >
+                <span style={{ flex: 1, minWidth: 0, color: INK, fontSize: FS.sm, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {it.label}
+                </span>
+                <span style={{ color: it.page ? GOLD : MUTED, fontSize: FS.xxs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
+                  {it.page ? t('palette.pageHint') : it.hint}
+                </span>
+              </Button>
             ))}
           </div>
         ) : (
           <div style={{ padding: `${SP.lg}px ${SP.md}px`, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
-            {q ? 'Nothing by that name in this realm. Try a page, a settlement, or a figure within one.'
-               : 'Type to search your pages, settlements, and the figures within them.'}
+            {q ? t('palette.emptyNoMatch') : t('palette.emptyPrompt')}
           </div>
         )}
       </div>
