@@ -42,6 +42,7 @@ import { tableEventToNewsEntry } from '../domain/tableEvents.js';
 // synchronous default-shape helper used on read paths.
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
 import { saves as savesService } from '../lib/saves.js';
+import { scrubImportedConfig } from '../lib/importScrub.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
   mergeCampaignLists,
@@ -432,7 +433,13 @@ export const createCampaignSlice = (set, get) => {
           // settlement.neighborRelationship.name), wiring the clone into the
           // IMPORTER's unrelated saves. Forcing the simple-insert path is correct.
           settlement: normalizeSettlement({ ...src, neighbourNetwork: [], neighborRelationship: null, interSettlementRelationships: [] }),
-          config: src.config || null,
+          // DORMANCY SCRUB (cycle-3 security fix): route the cloned member config
+          // through the single-writer import scrub — matches galleryImportSettlement
+          // and accountImport. Without it a shared map's member could carry the
+          // author's primaryDeitySnapshot / cultDeitySnapshots / faithProfile, live-
+          // activating the importer's premium religion subsystem with a foreign
+          // pantheon. The imported copy must arrive DORMANT.
+          config: scrubImportedConfig(src.config) || null,
           seed: src._seed || src.config?._seed || null,
           aiData: {},
           campaignState: { phase: 'canon', eventLog: [] },

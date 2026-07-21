@@ -88,4 +88,45 @@ describe('importGalleryMapWithCampaign normalizes each member clone (SB1)', () =
     // The cross-settlement refs are still stripped (the clone contract is intact).
     expect(saved.settlement.neighbourNetwork).toEqual([]);
   });
+
+  test('a member config carrying a foreign pantheon arrives DORMANT (cycle-3 scrub)', async () => {
+    fetchGalleryMap.mockResolvedValue({
+      kind: 'map_with_campaign',
+      name: 'Contested Realm',
+      members: [{
+        old_id: 'm1',
+        name: 'Zealot Town',
+        tier: 'town',
+        settlement: {
+          name: 'Zealot Town',
+          tier: 'town',
+          // The author's activated religion embeds — the exact keys the
+          // single-writer scrub drops. Without the scrub these live-activate the
+          // IMPORTER's premium religion subsystem with a foreign pantheon.
+          config: {
+            settlementType: 'town',
+            primaryDeityRef: 'deity:acct:war-god',
+            primaryDeitySnapshot: { name: 'The War God', evil01: 0.9, chaos01: 0.8 },
+            cultDeitySnapshots: [{ name: 'The Hidden Flame' }],
+            faithProfile: { piety: 0.7 },
+            _seed: 424242,
+          },
+        },
+      }],
+      mapState: { placements: {} },
+    });
+
+    const store = makeStore();
+    await store.getState().importGalleryMapWithCampaign('contested');
+    const saved = store.getState().savedSettlements.find(s => s.id === 'new-save-id');
+    expect(saved).toBeTruthy();
+    // Every faith/deity embed is gone; the config is dormant.
+    expect(saved.config).toBeTruthy();
+    expect(saved.config.settlementType).toBe('town');
+    expect(saved.config.primaryDeityRef).toBeUndefined();
+    expect(saved.config.primaryDeitySnapshot).toBeUndefined();
+    expect(saved.config.cultDeitySnapshots).toBeUndefined();
+    expect(saved.config.faithProfile).toBeUndefined();
+    expect(saved.config._seed).toBeUndefined();
+  });
 });
