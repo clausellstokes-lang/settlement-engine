@@ -1,0 +1,450 @@
+{
+ "src/data/roadsProse.js": {
+  "em": 15,
+  "bang": 0
+ },
+ "src/data/traditionProse.js": {
+  "em": 17,
+  "bang": 0
+ },
+ "src/domain/activeConditions.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/ai/stateSlicers.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/aiGrounding.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/aiOverlayVerifier.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/autonomy/accelerationOps.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/autonomy/signalRegistry.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/autonomy/stopConditions.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/briefs/roadScene.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/capacityModel.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/causalViews.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/certification/certificationRead.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/clock.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/compendium/generated/compendiumData.generated.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/contradictions.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/counterfactual.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/customContentSchema.js": {
+  "em": 15,
+  "bang": 0
+ },
+ "src/domain/dailyLife.js": {
+  "em": 9,
+  "bang": 0
+ },
+ "src/domain/display/causeLifecycleVocabulary.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/display/chroniclersLetter.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/display/credibilityRead.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/display/decreeTracker.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/defenseDisplay.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/display/dossierViewModel.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/display/exportPosture.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/display/giftsAndDebtsRead.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/display/glossary.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/display/marketPrices.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/display/newsVoice.js": {
+  "em": 27,
+  "bang": 0
+ },
+ "src/domain/display/parityContract.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/politicsRead.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/settlementPestilence.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/settlementRumors.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/display/threatAssessment.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/display/tradeFlowEconomics.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/display/treatyDocument.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/display/warResolve.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/districtProfile.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/dossier/plotHooks.js": {
+  "em": 4,
+  "bang": 5
+ },
+ "src/domain/entities/npcs.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/events/affordanceManifest.js": {
+  "em": 18,
+  "bang": 0
+ },
+ "src/domain/events/factionResponses.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/events/realmManifest.js": {
+  "em": 13,
+  "bang": 0
+ },
+ "src/domain/events/registry.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/events/registryProse.js": {
+  "em": 14,
+  "bang": 0
+ },
+ "src/domain/explanation.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/factionRelationshipUpdate.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/fieldManifest.js": {
+  "em": 4,
+  "bang": 4
+ },
+ "src/domain/hookEscalation.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/instantWorld/worldPlan.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/magicProfile.js": {
+  "em": 13,
+  "bang": 0
+ },
+ "src/domain/mapProfile.js": {
+  "em": 9,
+  "bang": 0
+ },
+ "src/domain/npc/npcFacets.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/npcProfile.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/oracle.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/pendingEdits.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/region/propagation.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/regionalGraph.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/roads/whereaboutsDisplay.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/rulingPower.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/rulingPowerCoup.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/settlementMigrations.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/simulationSpine.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/spatial/dispatchEV.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/spatial/generosityEV.js": {
+  "em": 12,
+  "bang": 0
+ },
+ "src/domain/spatial/generosityReactions.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/spatial/moralDrift.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/state/deriveSystemState.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/threatProfile.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/trace.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/armyTransitKernel.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/assizeKernel.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/beliefMap.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/causeLifecycle.js": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/domain/worldPulse/changeAuthorityPolicy.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/worldPulse/commonsVoiceKernel.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/worldPulse/convergence.js": {
+  "em": 18,
+  "bang": 0
+ },
+ "src/domain/worldPulse/decisionTier.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/eventProse.js": {
+  "em": 148,
+  "bang": 0
+ },
+ "src/domain/worldPulse/generosityNews.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/worldPulse/hegemony.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/informationStatecraft.js": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/domain/worldPulse/institutionLifecycle.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/mercenaryMarket.js": {
+  "em": 1,
+  "bang": 6
+ },
+ "src/domain/worldPulse/momentum.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/worldPulse/moralInstitutionPressure.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/moralMartialLean.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/worldPulse/narrativeTempo.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/navalKernel.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/worldPulse/npcGrowthKernel.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/npcLadderContest.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/worldPulse/npcLadderKernel.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/worldPulse/partyImpactKinds.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/peaceReasons.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/peaceTerms.js": {
+  "em": 16,
+  "bang": 0
+ },
+ "src/domain/worldPulse/pulseKernel.js": {
+  "em": 3,
+  "bang": 0
+ },
+ "src/domain/worldPulse/realmVerbExecution.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/worldPulse/residueStripGuard.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/resourceDynamicsKernel.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/settlementLifecycleFirstClass.js": {
+  "em": 15,
+  "bang": 0
+ },
+ "src/domain/worldPulse/settlementLifecycleKernel.js": {
+  "em": 5,
+  "bang": 0
+ },
+ "src/domain/worldPulse/settlementPolitics.js": {
+  "em": 8,
+  "bang": 0
+ },
+ "src/domain/worldPulse/settlementStrategy.js": {
+  "em": 6,
+  "bang": 0
+ },
+ "src/domain/worldPulse/simulationProfile.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/worldPulse/spatialConsequenceKernel.js": {
+  "em": 2,
+  "bang": 0
+ },
+ "src/domain/worldPulse/supplyWebWarfare.js": {
+  "em": 10,
+  "bang": 0
+ },
+ "src/domain/worldPulse/temperamentPresets.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/traditionsKernel.js": {
+  "em": 1,
+  "bang": 0
+ },
+ "src/domain/worldPulse/upswingKernel.js": {
+  "em": 7,
+  "bang": 0
+ },
+ "src/domain/worldPulse/urbanFabricKernel.js": {
+  "em": 4,
+  "bang": 0
+ },
+ "src/domain/worldPulse/warDeployment.js": {
+  "em": 2,
+  "bang": 0
+ }
+}

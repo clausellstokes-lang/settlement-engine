@@ -565,7 +565,7 @@ export const en = Object.freeze({
     openAnalyst:  'Open the analyst',
     openInterview: 'Ask the world',
     openWorkshop: 'Open the workshop',
-    proposed:     'PROPOSED — the engine writes canon',
+    proposed:     'PROPOSED: the engine writes canon',
     analystFrom:  'The analyst replies',
     youAsked:     'You asked',
   },
@@ -645,7 +645,7 @@ export const en = Object.freeze({
     wizardNextSteps: 'A short, state-aware list of what to do with a fresh settlement.',
     // W-COMPOSER-2: the realm forcing surface + the docket (mechanism whispers).
     realmOrders: 'Anything the world can do, you can order. Orders stage as proposals; the walls hold even under force.',
-    realmDocket: 'The realm’s staged future, in the order the tick will consume it — every entry editable or cancelable until then.',
+    realmDocket: 'The realm’s staged future, in the order the tick will consume it. Every entry stays editable or cancelable until then.',
     // The return-visit resume (WelcomeBackCard).
     welcomeBack: 'Pick up your last settlement, or forge a follow-up.',
     // The absorbed HelpPopover compendium hints (§5) — title + body per config
@@ -688,30 +688,30 @@ export const en = Object.freeze({
     notes: {
       library: {
         empty: {
-          a: 'Your shelves stand empty, and that is only the first morning of your survey — every realm here began exactly where yours does now.',
+          a: 'Your shelves stand empty, and that is only the first morning of your survey. Every realm here began exactly where yours does now.',
           b: 'You have an empty study and a whole country to chart; start with one settlement and let the rest of your library grow around it.',
         },
         first: {
-          a: 'Your first settlement is on the shelf now — keep it, and it will still be here when you return to build the next.',
+          a: 'Your first settlement is on the shelf now. Keep it, and it will still be here when you return to build the next.',
           b: 'You have made your first mark; the settlements that follow will feel like neighbours to it, not strangers.',
         },
         onward: {
-          a: 'Your library has grown past a single page — try binding two of your settlements as neighbours, and watch their fortunes start to lean on one another.',
+          a: 'Your library has grown past a single page. Try binding two of your settlements as neighbours, and watch their fortunes start to lean on one another.',
           b: 'You have kept enough now to see the pattern in your own hand; the realm rewards a keeper who lets places touch.',
         },
       },
       realm: {
         empty: {
           a: 'You are looking at an unmarked realm; set down your first holdings and the distances between them become something the simulation can read.',
-          b: 'Your map waits for its first settlement — once you place one, the roads, the borders, and the reach of each become yours to shape.',
+          b: 'Your map waits for its first settlement. Once you place one, the roads, the borders, and the reach of each become yours to shape.',
         },
         first: {
           a: 'You have set your first stone on the realm; freeze its geography when you are ready, and the world will remember where everything stands.',
-          b: 'Your realm has one fixed point now — the more you place, the more the country between them starts to matter.',
+          b: 'Your realm has one fixed point now. The more you place, the more the country between them starts to matter.',
         },
         onward: {
           a: 'You have a realm worth advancing; let a season pass and see which of your settlements thrives and which one you will need to tend.',
-          b: 'Your country has grown crowded enough to have its own weather — let time run, and read what the year does to the places you made.',
+          b: 'Your country has grown crowded enough to have its own weather. Let time run, and read what the year does to the places you made.',
         },
       },
       dossier: {
@@ -721,11 +721,11 @@ export const en = Object.freeze({
         },
         first: {
           a: 'You are reading the engine’s own reasoning here, not a tale told at you; every line was decided before you arrived.',
-          b: 'You will find no invented facts in your dossier — each figure was reasoned from the last, and you can trace any of them home.',
+          b: 'You will find no invented facts in your dossier. Each figure was reasoned from the last, and you can trace any of them home.',
         },
         onward: {
           a: 'You have read enough dossiers to argue with one; when a figure surprises you, follow it back and see what the engine weighed.',
-          b: 'Your eye has learned this page — look now for what the place is quietly straining under, and you will see its next year coming.',
+          b: 'Your eye has learned this page. Look now for what the place is quietly straining under, and you will see its next year coming.',
         },
       },
       simulation: {
@@ -734,12 +734,12 @@ export const en = Object.freeze({
           b: 'Your country is holding its breath, unadvanced; let time pass through it and watch which of your choices the world decides to keep.',
         },
         first: {
-          a: 'You have let the world move for the first time — nothing here waits politely for you; a place you neglect will change on its own.',
+          a: 'You have let the world move for the first time. Nothing here waits politely for you; a place you neglect will change on its own.',
           b: 'Your realm has taken its first breath without you; return often, for the country keeps its own calendar whether you watch or not.',
         },
         onward: {
           a: 'You have watched a few seasons turn; trust the pressures the engine raises, for they read the year better than a hunch of yours will.',
-          b: 'Your world has a memory now — what you let pass last season is quietly shaping the trouble you will meet in this one.',
+          b: 'Your world has a memory now. What you let pass last season is quietly shaping the trouble you will meet in this one.',
         },
       },
       floor: {
@@ -1232,7 +1232,7 @@ export const en = Object.freeze({
     // map export for this settlement.
     buySaved: {
       cta:      'Unlock all exports for this settlement · {price}',
-      subline:  'A one-time purchase unlocks every export for this settlement — the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
+      subline:  'A one-time purchase unlocks every export for this settlement: the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
       busy:     'Redirecting…',
       error:    'Checkout could not start. Please try again.',
     },
@@ -1240,7 +1240,7 @@ export const en = Object.freeze({
     // honest path is to save first.
     saveFirst: {
       cta:      'Save this settlement to unlock its exports',
-      subline:  'Export rights attach to a saved settlement. Save it first, then one {price} purchase unlocks all its exports — dossier PDF, map images, and the VTT token map — to re-download.',
+      subline:  'Export rights attach to a saved settlement. Save it first, then one {price} purchase unlocks all its exports to re-download: the dossier PDF, map images, and the VTT token map.',
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
       error:    'Could not save this settlement. Please try again.',
     },

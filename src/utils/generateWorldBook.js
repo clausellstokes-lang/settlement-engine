@@ -27,6 +27,7 @@ import { truncateAtWord } from '../lib/text.js';
 import { getAllModifiers } from '../lib/relationshipGraph.js';
 import { autoLayout } from './graphLayout.js';
 import { toPublicSafe } from '../domain/display/publicSafe.js';
+import { tickCalendarLabel } from '../domain/display/humanizeEngineTokens.js';
 import { collectRealmSummary } from './generateCampaignPDF.js';
 import { slugify } from '../kernel/slugify.js';
 
@@ -266,11 +267,17 @@ function buildChronicle(d, book, pageN) {
     const lines = wrap(d, e.summary || e.headline, CW - 24, 8);
     const rowH = 8 + lines.length * 4;
     const sp = ensureSpace(d, y, rowH, book.title, pageN); y = sp.y; pageN = sp.pageN;
+    // The reader gets a calendar date, never a bare engine tick (fix wave 3).
     d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, e.source === 'table' ? BROWN : INK);
-    d.text(s(`Tick ${e.tick}`), ML, y + 3);
-    if (e.source === 'table') { d.setFont('helvetica', 'italic'); d.setFontSize(6.5); st(d, MUTED); d.text('at the table', ML + 22, y + 3); }
+    const when = s(tickCalendarLabel(e.tick));
+    d.text(when, ML, y + 3);
+    if (e.source === 'table') {
+      const wWhen = d.getStringUnitWidth(when) * 8 / d.internal.scaleFactor;
+      d.setFont('helvetica', 'italic'); d.setFontSize(6.5); st(d, MUTED);
+      d.text('at the table', ML + wWhen + 2, y + 3);
+    }
     d.setFont('helvetica', 'bold'); d.setFontSize(9); st(d, INK);
-    d.text(s(e.headline), ML + 40, y + 3);
+    d.text(s(e.headline), ML + 52, y + 3);
     y += 5;
     d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, BROWN);
     for (const line of clampLines(lines, 4)) { d.text(line, ML + 6, y + 3); y += 4; }

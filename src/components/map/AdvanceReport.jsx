@@ -25,6 +25,7 @@ import {
 
 import { useStore } from '../../store/index.js';
 import { advanceEntries } from '../../domain/display/chronicleGraph.js';
+import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { chronicleForAdvance, hasChronicle } from '../../domain/display/chronicleReadModel.js';
 import { decreesForAdvance } from '../../domain/display/decreeTracker.js';
 import {
@@ -372,7 +373,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
         <div style={{ flex: 1, textAlign: 'center', minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>{chronicle.headline}</div>
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
-            the {chronicle.spanLabel} to tick {chronicle.tick} · {safeIndex + 1} of {entries.length}
+            the {chronicle.spanLabel} to {tickCalendarLabel(chronicle.tick)} · {safeIndex + 1} of {entries.length}
           </div>
         </div>
         <Button variant="ghost" size="sm" aria-label="Older advance" disabled={safeIndex >= entries.length - 1} onClick={() => setIndex(i => Math.min(entries.length - 1, i + 1))} style={{ minHeight: undefined, padding: 2 }}>

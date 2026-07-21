@@ -686,7 +686,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Trade & Entrepôt',
     icon: '️',
     color: '#a0762a',
-    desc: 'Goods that flow through for redistribution — the wealth of crossroads, ports, and river hubs',
+    desc: 'Goods that flow through for redistribution: the wealth of crossroads, ports, and river hubs',
     chains: [
       {
         id: 'spices_dyes',
@@ -761,7 +761,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: true,
         entrepotNote:
-          'Ports and crossroads profit by charging for storage, loading, and onward transport — not by producing anything themselves.',
+          'Ports and crossroads profit by charging for storage, loading, and onward transport, not by producing anything themselves.',
         minTier: 'town',
       },
       {
@@ -1207,7 +1207,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Religion & Civic',
     icon: '',
     color: '#5a3a1a',
-    desc: 'What holds the settlement together — faith, law, administration, and social order',
+    desc: 'What holds the settlement together: faith, law, administration, and social order',
     chains: [
       {
         id: 'parish',
@@ -1291,7 +1291,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'hamlet',
-        note: 'Holy sites generate economic activity through pilgrim spending — effectively a non-trade income stream.',
+        note: 'Holy sites generate economic activity through pilgrim spending: effectively a non-trade income stream.',
       },
     ],
   },
@@ -1368,7 +1368,7 @@ export const SUPPLY_CHAIN_NEEDS = {
     label: 'Criminal Economy',
     icon: '️',
     color: '#4a1a4a',
-    desc: 'The shadow economy — what moves without documentation and who profits',
+    desc: 'The shadow economy: what moves without documentation and who profits',
     chains: [
       {
         id: 'smuggling',

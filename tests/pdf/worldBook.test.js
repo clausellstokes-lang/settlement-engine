@@ -9,7 +9,8 @@
  * player-safe face carries ZERO covert marks (toPublicSafe engaged).
  */
 import { describe, it, expect } from 'vitest';
-import { collectWorldBook } from '../../src/utils/generateWorldBook.js';
+import { existsSync, rmSync, statSync } from 'node:fs';
+import { collectWorldBook, generateWorldBook } from '../../src/utils/generateWorldBook.js';
 
 function fixtureCampaign() {
   const ashford = {
@@ -117,6 +118,32 @@ describe('the player-safe face carries ZERO covert marks', () => {
 
   it('is deterministic in player mode too', () => {
     expect(collectWorldBook(campaign, saves, { mode: 'player' })).toEqual(collectWorldBook(campaign, saves, { mode: 'player' }));
+  });
+});
+
+describe('painter smoke (no bytes asserted — the collector pins stay the contract)', () => {
+  // Fix wave 3 rewired the chronicle row (calendar date via tickCalendarLabel +
+  // a measured at-the-table offset); this proves the painter still runs
+  // end-to-end over the fixture, without ever comparing painter bytes.
+  it('generateWorldBook paints and saves without throwing (dm + player faces)', () => {
+    const { campaign, saves } = fixtureCampaign();
+    // jsPDF's save is an OWN instance property (defineProperty in its
+    // constructor — un-stubbable from outside), and its node build writes a
+    // real file to cwd. So the receipt IS the artifact: paint both faces,
+    // assert the PDFs materialized with real bytes, then remove them.
+    const dmFile = 'world-book-the-long-winter.pdf';
+    const playerFile = 'world-book-the-long-winter-player.pdf';
+    try {
+      generateWorldBook(campaign, saves, { mode: 'dm', now: '1/1/2026' });
+      generateWorldBook(campaign, saves, { mode: 'player', now: '1/1/2026' });
+      expect(existsSync(dmFile), 'dm face saved').toBe(true);
+      expect(existsSync(playerFile), 'player face saved').toBe(true);
+      expect(statSync(dmFile).size).toBeGreaterThan(1000);
+      expect(statSync(playerFile).size).toBeGreaterThan(1000);
+    } finally {
+      rmSync(dmFile, { force: true });
+      rmSync(playerFile, { force: true });
+    }
   });
 });
 

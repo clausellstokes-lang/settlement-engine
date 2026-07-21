@@ -212,7 +212,9 @@ When two replacements both fit, choose the one that yields **one idea per senten
 
 ## 7. Enforcement
 
-A guard test (`tests/copy/voiceMechanics.test.js`) walks the centralized copy objects (`en` and `COPY`) and fails the build if any user-facing string contains an em dash or an exclamation point. New copy cannot reintroduce the tells. The data files the dossier reads are swept for the same rules; extend the guard to them as composition coverage grows.
+A guard test (`tests/copy/voiceMechanics.test.js`) walks the centralized copy registries (`en`, `landing`, `pricingPage`, `footer`, `deityAuthoring`) and fails the build if any user-facing string value contains an em dash or an exclamation point. New copy cannot reintroduce the tells. The prose source files the dossier and the engine read (`src/data/*.js`, `src/domain/**/*.js`) are scanned for the same tells in their string literals and held to a shrink-only per-file baseline: existing debt burns down wave by wave, and no file's count may grow. A sibling walker (`tests/copy/proseLeak.test.js`) renders the reader-facing composers (letter, world book, advance report) over a fixture world and fails the build if an engine token — a bare tick counter, a camelCase rules flag, a schema field name, a raw id — reaches the output prose.
+<!-- @enforced-by tests/copy/voiceMechanics.test.js, tests/copy/proseLeak.test.js -->
+
 
 ---
 

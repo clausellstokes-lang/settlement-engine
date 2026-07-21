@@ -11,7 +11,7 @@
 
 /** Scene texture for a world under some live pressure (danger and/or turmoil present). */
 export const ORACLE_SCENE_TEXTURE = Object.freeze([
-  'A hush sits over the approach — the kind that comes just before news.',
+  'A hush sits over the approach: the kind that comes just before news.',
   'You catch the smell of woodsmoke and the sound of hurried feet.',
   'Doors that should stand open are barred, and eyes track you from the shutters.',
   'The road is busier than it should be, all of it moving one way.',
@@ -22,7 +22,7 @@ export const ORACLE_SCENE_TEXTURE = Object.freeze([
 /** Scene texture for a quiet world (no live danger or turmoil bears on the question). */
 export const ORACLE_QUIET_SCENE = Object.freeze([
   'The road gives you nothing to fear today; the day is only itself.',
-  'Ordinary business fills the way — carts, gossip, a dog asleep in the sun.',
+  'Ordinary business fills the way: carts, gossip, a dog asleep in the sun.',
   'Nothing stirs that the ledgers have not already forgotten.',
   'The approach is unremarkable, which is its own kind of answer.',
 ]);

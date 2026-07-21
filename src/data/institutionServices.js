@@ -19,7 +19,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Village headman": {
     "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
-    "Communal labour": { on: true, p: 0.9, desc: "Organises shared work — harvest, repairs, the common fields" },
+    "Communal labour": { on: true, p: 0.9, desc: "Organises shared work: harvest, repairs, the common fields" },
     "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the parish tithe" },
     "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
   },
@@ -172,7 +172,7 @@ export const INSTITUTION_SERVICES = {
     "Spellcasting (1st-8th level)": { on: true, p: 0.9, desc: "Near-full arcane capability available for hire" },
     "Teleportation": { on: false, p: 0.5, desc: "Long-distance instant travel for paying clients" },
     "Divination and scrying": { on: true, p: 0.7, desc: "Locate persons, find objects, read intentions" },
-    "Resurrection services": { on: false, p: 0.4, desc: "Raise dead — expensive, not guaranteed" }
+    "Resurrection services": { on: false, p: 0.4, desc: "Raise dead. Expensive, not guaranteed" }
   },
 
   "Academy": {
@@ -236,7 +236,7 @@ export const INSTITUTION_SERVICES = {
   
   "Assassins Guild": {
     "Contract killing": { on: false, p: 0.9, desc: "Verified, deniable, professional" },
-    "Intimidation only": { on: false, p: 0.7, desc: "Scare targets without killing — cheaper" },
+    "Intimidation only": { on: false, p: 0.7, desc: "Scare targets without killing (cheaper)" },
     "Poison supply": { on: false, p: 0.6, desc: "Custom preparations, untraceable" }
   },
 
@@ -299,7 +299,7 @@ export const INSTITUTION_SERVICES = {
   },
 
   "Inn/Tavern District": {
-    "Lodging (all grades)": { on: true, p: 1.0, desc: "Flophouse to private suite — multiple establishments" },
+    "Lodging (all grades)": { on: true, p: 1.0, desc: "Flophouse to private suite (multiple establishments)" },
     "Food and drink (all grades)": { on: true, p: 1.0, desc: "Street food to formal dining" },
     "Entertainment": { on: true, p: 0.9, desc: "Music, games, storytelling every night" },
     "Hiring hall": { on: true, p: 0.8, desc: "Workers, mercenaries, guides available" },
@@ -318,7 +318,7 @@ export const INSTITUTION_SERVICES = {
   
   
   "Adventurers' Charter Hall": {
-    "Monster bounties": { on: true, p: 1.0, desc: "Posted bounties for verified monster kills. Bring proof — claw, ear, or head." },
+    "Monster bounties": { on: true, p: 1.0, desc: "Posted bounties for verified monster kills. Bring proof: claw, ear, or head." },
     "Armed escort": { on: true, p: 0.8, desc: "Adventuring party escort through dangerous territory. Higher cost, higher capability than guards." },
     "Dungeon clearance": { on: true, p: 0.6, desc: "Full site clearance of dangerous locations. Quoted per job." },
     "Rescue operations": { on: false, p: 0.4, desc: "Recovery of persons taken by monsters, bandits, or worse. No guarantee of success." }
@@ -328,19 +328,19 @@ export const INSTITUTION_SERVICES = {
   // ── New institutions added in v181-v182 ─────────────────────────────────────
 
   "Fisher's Landing": {
-    "Fresh fish": { on: true, p: 1.0, desc: "Catch of the day — buy and cook same-day." },
+    "Fresh fish": { on: true, p: 1.0, desc: "Catch of the day. Buy and cook same-day." },
     "Salted fish": { on: true, p: 0.8, desc: "Preserved fish for travel or winter." },
     "Fish oil": { on: false, p: 0.4, desc: "Rendered fish oil for lamps and waterproofing." }
   },
   "Hunter's Lodge": {
-    "Game meat": { on: true, p: 1.0, desc: "Venison, boar, rabbit — seasonal and fresh." },
+    "Game meat": { on: true, p: 1.0, desc: "Venison, boar, rabbit. Seasonal and fresh." },
     "Hunting guide hire": { on: true, p: 0.9, desc: "A tracker who knows the territory." },
     "Furs and pelts": { on: true, p: 0.8, desc: "Raw pelts ready for tanning." },
     "Hunting trophies": { on: false, p: 0.4, desc: "Heads, antlers, and tusks for noble halls." },
     "Trapping services": { on: false, p: 0.5, desc: "Set and manage trap lines across the territory." }
   },
     "Maltster": {
-    "Malted barley": { on: true, p: 1.0, desc: "Sprouted and kiln-dried barley — the basis of all ale." },
+    "Malted barley": { on: true, p: 1.0, desc: "Sprouted and kiln-dried barley. The basis of all ale." },
     "Malt (surplus)": { on: false, p: 0.5, desc: "Excess malt for sale to other brewers." }
   },
                   "Pawnbroker": {
@@ -360,7 +360,7 @@ export const INSTITUTION_SERVICES = {
   "Dyer": {
     "Dyed cloth": { on: true, p: 1.0, desc: "Coloured fabric. Madder red cheapest, indigo expensive." },
     "Custom dyeing": { on: false, p: 0.7, desc: "Dye cloth to specification." },
-    "Dye materials": { on: false, p: 0.5, desc: "Raw dyes — mordants, plant matter, mineral pigments." }
+    "Dye materials": { on: false, p: 0.5, desc: "Raw dyes: mordants, plant matter, mineral pigments." }
   },
   "Potter": {
     "Pottery and ceramics": { on: true, p: 1.0, desc: "Plates, jugs, storage crocks. Functional and cheap." },
@@ -398,9 +398,9 @@ export const INSTITUTION_SERVICES = {
     "Custom garments": { on: false, p: 0.6, desc: "Measured and cut to your cloth." }
   },
     "Woodcarver": {
-    "Carved goods": { on: true, p: 1.0, desc: "Spoons, bowls, handles, toys — functional items." },
+    "Carved goods": { on: true, p: 1.0, desc: "Spoons, bowls, handles, toys. Functional items." },
     "Religious carvings": { on: true, p: 0.8, desc: "Crucifixes, reliquaries, saints' images." },
-    "Custom carving": { on: false, p: 0.5, desc: "Decorative commissions — furniture inlays, structural details." }
+    "Custom carving": { on: false, p: 0.5, desc: "Decorative commissions: furniture inlays, structural details." }
   },
       "Waystation": {
     "Overnight stabling": { on: true, p: 1.0, desc: "Secure enclosure for pack animals. Feed included." },
@@ -417,7 +417,7 @@ export const INSTITUTION_SERVICES = {
     "Standard boots": { on: true, p: 1.0, desc: "Guild-certified boots. Quality-marked, price-regulated." },
     "Military boots": { on: true, p: 0.8, desc: "Thick-soled marching boots." },
     "Custom footwear": { on: false, p: 0.7, desc: "Measured and made to specification." },
-    "Shoe repair": { on: true, p: 0.9, desc: "Full guild workshop — any repair." }
+    "Shoe repair": { on: true, p: 0.9, desc: "Full guild workshop. Any repair." }
   },
   "Tailor's Guild": {
     "Livery and uniforms": { on: true, p: 1.0, desc: "House colours, guild uniforms, city watch livery." },
@@ -427,7 +427,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Chandler": {
     "Tallow candles": { on: true, p: 1.0, desc: "Standard household candles." },
-    "Beeswax candles": { on: true, p: 0.8, desc: "Premium candles — cleaner burn, better light." },
+    "Beeswax candles": { on: true, p: 0.8, desc: "Premium candles. Cleaner burn, better light." },
     "Soap": { on: true, p: 0.9, desc: "Lye and tallow soap." },
     "Rope": { on: true, p: 0.7, desc: "Hemp rope in standard lengths." }
   },
@@ -453,7 +453,7 @@ export const INSTITUTION_SERVICES = {
     "Way-bill services": { on: false, p: 0.6, desc: "Cargo manifest and bonded documentation." }
   },
   "Jeweller": {
-    "Jewellery purchase": { on: true, p: 1.0, desc: "Rings, necklaces, brooches — precious metalwork." },
+    "Jewellery purchase": { on: true, p: 1.0, desc: "Rings, necklaces, brooches. Precious metalwork." },
     "Custom commission": { on: true, p: 0.8, desc: "Design your own piece." },
     "Gem purchase": { on: true, p: 0.7, desc: "Cut and uncut gemstones." },
     "Jewellery appraisal": { on: true, p: 0.9, desc: "Valuation for insurance, sale, or inheritance." },
@@ -468,11 +468,11 @@ export const INSTITUTION_SERVICES = {
           "Harbour Master's Office": {
     "Berth assignment": { on: true, p: 1.0, desc: "Register vessel and be assigned a berth." },
     "Pilotage": { on: true, p: 0.9, desc: "Pilot to guide through harbour approaches." },
-    "Maritime clearance": { on: true, p: 0.9, desc: "Departure clearance — duty paid, manifest checked." },
+    "Maritime clearance": { on: true, p: 0.9, desc: "Departure clearance. Duty paid, manifest checked." },
     "Ship chandlery": { on: false, p: 0.6, desc: "Rope, pitch, sailcloth, provisions at the quayside." }
   },
   "Furrier's District": {
-    "Quality furs": { on: true, p: 1.0, desc: "Processed and dressed furs — ermine, marten, fox, beaver." },
+    "Quality furs": { on: true, p: 1.0, desc: "Processed and dressed furs: ermine, marten, fox, beaver." },
     "Fur garments": { on: true, p: 0.9, desc: "Fur-lined cloaks, hats, gloves." },
     "Raw pelts (bulk)": { on: false, p: 0.5, desc: "Unprocessed pelts for merchant resale." }
   },
@@ -495,7 +495,7 @@ export const INSTITUTION_SERVICES = {
     "Trail maintenance": { on: false, p: 0.5, desc: "Cleared and marked trails in lodge territory." }
   },
   "Elder Grove Council": {
-    "Nature arbitration": { on: true, p: 1.0, desc: "Mediate disputes — logging rights, water access, beast encroachment." },
+    "Nature arbitration": { on: true, p: 1.0, desc: "Mediate disputes: logging rights, water access, beast encroachment." },
     "Druidic consultation": { on: true, p: 0.9, desc: "Advise city authorities on ecological matters." },
     "High-level nature magic": { on: false, p: 0.6, desc: "Commune with Nature, Control Weather, Awaken." },
     "Urban grove access": { on: false, p: 0.5, desc: "Permission to use the hidden urban grove." }
@@ -530,7 +530,7 @@ export const INSTITUTION_SERVICES = {
   "Customs house": {
     "Duties and tariffs": { on: true,  p: 1.0, desc: "Assessment and collection of import and export duties on all goods." },
     "Cargo inspection": { on: true, p: 0.9, desc: "Check manifests against actual goods. Flag contraband and undervalued shipments." },
-    "Import permits": { on: false, p: 0.7, desc: "Issue permits required to bring restricted goods — spices, weapons, exotic animals — into the settlement." },
+    "Import permits": { on: false, p: 0.7, desc: "Issue permits required to bring restricted goods (spices, weapons, exotic animals) into the settlement." },
     "Smuggling investigation": { on: false, p: 0.5, desc: "Investigate suspected evasion of duties. Informants and rewards involved." }
   },
 
@@ -559,7 +559,7 @@ export const INSTITUTION_SERVICES = {
     "Credit letters": { on: true, p: 0.9, desc: "Issue letters of credit honored across the entire trade network." },
     "Investment pooling": { on: true, p: 0.8, desc: "Pool capital from multiple guild members to finance large ventures." },
     "Caravan organization": { on: false, p: 0.7, desc: "Organize and insure shared merchant caravans for long-distance trade." },
-    "Guild arbitration": { on: false, p: 0.6, desc: "Binding dispute resolution with teeth — guild membership at stake." }
+    "Guild arbitration": { on: false, p: 0.6, desc: "Binding dispute resolution with teeth. Guild membership at stake." }
   },
 
   "Blacksmiths (3-10)": {
@@ -740,7 +740,7 @@ export const INSTITUTION_SERVICES = {
     "Musical training": { on: true,  p: 1.0, desc: "Instrument tuition, vocal training, and music theory." },
     "Performance": { on: true, p: 0.9, desc: "Concerts, recitals, and formal entertainments for patrons." },
     "Historical research": { on: false, p: 0.6, desc: "Access to oral histories, genealogical records, and regional lore." },
-    "Composition commission": { on: false, p: 0.5, desc: "Commission an original work — ballad, epic, elegy, or ceremonial piece." },
+    "Composition commission": { on: false, p: 0.5, desc: "Commission an original work: ballad, epic, elegy, or ceremonial piece." },
     "Rumour collection": { on: false, p: 0.7, desc: "Bards travel everywhere and hear everything. Useful for intelligence." }
   },
   "Barge and river transport company": {
@@ -750,7 +750,7 @@ export const INSTITUTION_SERVICES = {
     "Freight insurance": { on: false, p: 0.5, desc: "Cover against loss by flood, theft, or accident." }
   },
   "Beast trainers": {
-    "Animal training": { on: true,  p: 1.0, desc: "Train animals for specific purposes — guard, hunt, war, labour, entertainment." },
+    "Animal training": { on: true,  p: 1.0, desc: "Train animals for specific purposes: guard, hunt, war, labour, entertainment." },
     "Exotic animal sales": { on: true, p: 0.7, desc: "Unusual animals sourced from distant regions. Status symbols and curiosities." },
     "Veterinary care": { on: true, p: 0.8, desc: "Treatment of animal illness and injury." },
     "Beast acquisition": { on: false, p: 0.5, desc: "Commission sourcing of specific animals from remote suppliers." }
@@ -763,7 +763,7 @@ export const INSTITUTION_SERVICES = {
   "Black market bazaar": {
     "Contraband goods": { on: true,  p: 1.0, desc: "Large-scale illicit market. Greater selection, greater risk of attention." },
     "Stolen goods": { on: true, p: 0.9, desc: "Fenced items from across the region. Recognizable pieces a risk to buyers." },
-    "Illicit services": { on: false, p: 0.7, desc: "Not just goods — services that cannot be advertised in the open market." },
+    "Illicit services": { on: false, p: 0.7, desc: "Not just goods: services that cannot be advertised in the open market." },
     "Information brokerage": { on: false, p: 0.5, desc: "People know things here that they won't say elsewhere." }
   },
   "Bowyer & fletcher": {
@@ -944,7 +944,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Gambling district": {
     "Full gambling services": { on: true,  p: 1.0, desc: "Every form of gambling available across multiple establishments." },
-    "Bookmaking": { on: true, p: 0.8, desc: "Place and take bets on external events — races, fights, elections." },
+    "Bookmaking": { on: true, p: 0.8, desc: "Place and take bets on external events: races, fights, elections." },
     "Money changing": { on: false, p: 0.7, desc: "Convert winnings and losses across currencies. Ubiquitous in gambling districts." }
   },
   "Gladiatorial school": {
@@ -967,7 +967,7 @@ export const INSTITUTION_SERVICES = {
     "High religious ceremony": { on: true,  p: 1.0, desc: "The most significant religious observances. Major feast days and state occasions." },
     "Pilgrimage services": { on: true, p: 0.9, desc: "Accommodate and process pilgrims. Relics, blessings, and indulgences." },
     "Ecclesiastical courts": { on: false, p: 0.6, desc: "Church legal proceedings for matters within clerical jurisdiction." },
-    "Dispensations": { on: false, p: 0.5, desc: "Church permission for forbidden actions — marriages, business practices, oaths." }
+    "Dispensations": { on: false, p: 0.5, desc: "Church permission for forbidden actions: marriages, business practices, oaths." }
   },
   "Great library": {
     "Research access": { on: true,  p: 1.0, desc: "Access to an enormous collection of texts, scrolls, and records." },
@@ -986,7 +986,7 @@ export const INSTITUTION_SERVICES = {
     "Member discipline": { on: false, p: 0.5, desc: "Sanction guild members who violate standards or engage in dishonest trade." }
   },
     "Hedge wizard": {
-    "Minor spells": { on: true,  p: 1.0, desc: "Small practical magic — light, mending, cleaning, minor wards. Day-to-day use." },
+    "Minor spells": { on: true,  p: 1.0, desc: "Small practical magic: light, mending, cleaning, minor wards. Day-to-day use." },
     "Curse removal": { on: true, p: 0.7, desc: "Break minor curses and hexes. Stronger magic beyond their capability." },
     "Fortune telling": { on: false, p: 0.8, desc: "Reading signs and portents. Accuracy varies wildly." },
     "Hedge medicine": { on: false, p: 0.5, desc: "Combination of herbal knowledge and minor magic for common ailments." }
@@ -1042,7 +1042,7 @@ export const INSTITUTION_SERVICES = {
     "Appraisal": { on: false, p: 0.5, desc: "Professional valuation of luxury goods, heirlooms, and estate items." }
   },
   "Mages' guild": {
-    "Spell services": { on: true,  p: 1.0, desc: "Contracted magical services — scrying, communication, transport, warding." },
+    "Spell services": { on: true,  p: 1.0, desc: "Contracted magical services: scrying, communication, transport, warding." },
     "Arcane training": { on: true, p: 0.8, desc: "Structured magical education for members and paying students." },
     "Magic item appraisal": { on: false, p: 0.7, desc: "Assess the nature and value of magical items." },
     "Research access": { on: false, p: 0.5, desc: "Member access to the guild library and research resources." }
@@ -1120,7 +1120,7 @@ export const INSTITUTION_SERVICES = {
   "Multiple criminal factions": {
     "Protection rackets": { on: true,  p: 0.9, desc: "Multiple gangs running protection in different districts." },
     "Illicit goods": { on: true, p: 0.8, desc: "Contraband, stolen goods, and prohibited services across multiple networks." },
-    "Faction information": { on: false, p: 0.5, desc: "Information about criminal operations — loyalties, territories, and rivalries." }
+    "Faction information": { on: false, p: 0.5, desc: "Information about criminal operations: loyalties, territories, and rivalries." }
   },
   "Multiple garrisons": {
     "District security": { on: true,  p: 1.0, desc: "Military presence distributed across multiple districts." },
@@ -1129,7 +1129,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Multiple market squares": {
     "District trading": { on: true,  p: 1.0, desc: "Each district has its own market square serving local needs." },
-    "Specialty markets": { on: false, p: 0.6, desc: "Different squares specialize — livestock here, cloth there, luxury goods elsewhere." }
+    "Specialty markets": { on: false, p: 0.6, desc: "Different squares specialize: livestock here, cloth there, luxury goods elsewhere." }
   },
   "Multiple monasteries": {
     "Religious network": { on: true,  p: 1.0, desc: "Multiple religious orders provide diverse spiritual services across the city." },
@@ -1185,9 +1185,9 @@ export const INSTITUTION_SERVICES = {
   },
   "Planar traders": {
     "Exotic extraplanar goods": { on: true,  p: 1.0, desc: "Goods from other planes unavailable by any other means." },
-    "Rare materials": { on: true, p: 0.8, desc: "Planar components — stardust, shadow silk, elemental crystals." },
+    "Rare materials": { on: true, p: 0.8, desc: "Planar components: stardust, shadow silk, elemental crystals." },
     "Dimensional storage": { on: false, p: 0.5, desc: "Bag of holding and portable hole services. Useful for merchants." },
-    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes — geography, factions, and dangers." }
+    "Planar information": { on: false, p: 0.4, desc: "Knowledge of other planes: geography, factions, and dangers." }
   },
   "Priest (resident)": {
     "Religious services": { on: true,  p: 1.0, desc: "Daily prayers, blessings, and religious counsel." },
@@ -1249,7 +1249,7 @@ export const INSTITUTION_SERVICES = {
   },
   "Smuggling operation": {
     "Contraband transport": { on: true,  p: 1.0, desc: "Move restricted goods across borders and through customs." },
-    "Safe passage": { on: false, p: 0.6, desc: "Move people who cannot travel openly — fugitives, spies, deserters." },
+    "Safe passage": { on: false, p: 0.6, desc: "Move people who cannot travel openly: fugitives, spies, deserters." },
     "Hidden storage": { on: false, p: 0.4, desc: "Conceal goods in false walls, underground caches, and decoy shipments." }
   },
   "Smuggling waypoint": {
@@ -1383,7 +1383,7 @@ export const INSTITUTION_SERVICES = {
   "Cooper": {
     "Barrel making": { on: true,  p: 1.0, desc: "Watertight barrels for ale, wine, salted meat, and fish. Essential packaging for trade." },
     "Cask repair": { on: true, p: 0.8, desc: "Re-coopering and repair of used barrels. Cheaper than new for small leaks." },
-    "Custom containers": { on: false, p: 0.4, desc: "Specialty containers — butter churns, water buckets, storage vats." }
+    "Custom containers": { on: false, p: 0.4, desc: "Specialty containers: butter churns, water buckets, storage vats." }
   },
   "Apothecary": {
     "Herbal remedies": { on: true,  p: 1.0, desc: "Dried herbs, tinctures, and simple remedies for common ailments." },
@@ -1482,7 +1482,7 @@ export const INSTITUTION_SERVICES = {
   "Fence (word of mouth)": {
     "Discreet sale": { on: true, p: 0.9, desc: "Move stolen goods quietly through a trusted referral network." },
     "Contraband purchase": { on: true, p: 0.8, desc: "Purchase restricted or illegal goods without documentation." },
-    "Rumour brokering": { on: false, p: 0.5, desc: "Trade information — this fence hears everything." }
+    "Rumour brokering": { on: false, p: 0.5, desc: "Trade information. This fence hears everything." }
   },
   "Outlaw shelter": {
     "Hideout rental": { on: true, p: 0.9, desc: "Secure hiding place for fugitives. Paid in advance." },
@@ -1572,7 +1572,7 @@ export const INSTITUTION_SERVICES = {
     "Map reading": { on: false, p: 0.5, desc: "Interpret and explain complex or archaic maps." }
   },
   "Traveling performers": {
-    "Public performance": { on: true, p: 1.0, desc: "Street and square performances — juggling, music, comedy, acrobatics." },
+    "Public performance": { on: true, p: 1.0, desc: "Street and square performances: juggling, music, comedy, acrobatics." },
     "Private entertainment": { on: true, p: 0.8, desc: "Hire the troupe for private events and festivals." },
     "Festival coordination": { on: false, p: 0.5, desc: "Organize and manage entertainment for a major festival." }
   },

@@ -364,7 +364,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"allied","label":"Allied","color":"#1a3a7a","effect":"Military and economic cooperation. Elevated garrison institutions and shared defense logic on both sides."},
       {"id":"patron","label":"Patron","color":"#4a1a6a","effect":"The generating settlement is client-dependent. Economy shaped by patron demands. Fewer autonomous institutions."},
       {"id":"client","label":"Client","color":"#6a3a1a","effect":"Production biased toward what the patron needs. Trade dependency embedded in exports."},
-      {"id":"rival","label":"Rival","color":"#8a5010","effect":"Competing for the same markets. Overlapping exports suppressed. Criminal presence elevated."},
+      {"id":"rival","label":"Rival","color":"#8a5010","effect":"Competing for the same markets. Exports tend to mirror the rival and stay contested. Criminal presence elevated."},
       {"id":"cold_war","label":"Cold War","color":"#8a3010","effect":"Covert conflict. Intelligence infrastructure elevated. Criminal and military institutions higher on both sides."},
       {"id":"hostile","label":"Hostile","color":"#8b1a1a","effect":"Open conflict. Military dominates. Exports embargoed. Safety degraded. Criminal infiltration likely."},
       {"id":"neutral","label":"Neutral","color":"#6b5340","effect":"No generation influence. Minor economic contact only."}

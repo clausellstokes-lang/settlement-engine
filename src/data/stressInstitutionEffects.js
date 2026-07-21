@@ -16,7 +16,7 @@
 export const STRESS_INSTITUTION_EFFECTS = {
   under_siege: [
     {
-      secret: "Secretly negotiating surrender terms with the besieging force — without the council's knowledge",
+      secret: "Secretly negotiating surrender terms with the besieging force, without the council's knowledge",
       stakes: "Treason. The garrison would execute them on the spot if they found out",
     },
     {
@@ -32,7 +32,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "Telling the council means explaining why they knew and said nothing for two weeks",
     },
     {
-      secret: "Has already made personal arrangements to leave before the final assault — their family left last week",
+      secret: "Has already made personal arrangements to leave before the final assault. Their family left last week",
       stakes: "{npc} saw them loading the cart. They don't know what {npc} understood",
     },
     {
@@ -40,12 +40,12 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "People are starving. The supplies could last another month",
     },
     {
-      secret: "Is in contact with the besieging commander — not as a spy, as a former colleague",
+      secret: "Is in contact with the besieging commander (not as a spy, as a former colleague)",
       stakes:
         "The relationship predates the siege. They've been using it to buy time, but the council would not accept the distinction",
     },
     {
-      secret: "Authorised an illegal sortie that failed — five people died and no record was kept",
+      secret: "Authorised an illegal sortie that failed. Five people died and no record was kept",
       stakes: "{npc} survived it. They know, and they've been drinking heavily ever since",
     },
     {
@@ -70,12 +70,12 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "People have died. The regional inspector arrives in six days",
     },
     {
-      secret: "Knows who is hoarding and has made a private arrangement to share the information — for a price",
+      secret: "Knows who is hoarding and has made a private arrangement to share the information, for a price",
       stakes: "Both the hoarder and {faction} would move against them if either found out",
     },
     {
       secret:
-        "Their family has been eating normally throughout the famine — not from stores, from a private source they will not name",
+        "Their family has been eating normally throughout the famine (not from stores, from a private source they will not name)",
       stakes: "{npc} has noticed. They asked once. They were told to forget it",
     },
     {
@@ -90,13 +90,13 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has documentation proving the famine was caused by export decisions made by {faction} — and has been paid to lose it",
+        "Has documentation proving the famine was caused by export decisions made by {faction}, and has been paid to lose it",
       stakes: "The documentation exists in another form. Somewhere",
     },
   ],
   occupied: [
     {
-      secret: "Has been feeding information to the occupation authority since the first week — not under duress",
+      secret: "Has been feeding information to the occupation authority since the first week, not under duress",
       stakes: "{npc} is part of the resistance. They trust this person completely",
     },
     {
@@ -112,20 +112,20 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has been documenting occupation atrocities in secret — but for sale to the highest bidder, not for justice",
+        "Has been documenting occupation atrocities in secret, but for sale to the highest bidder, not for justice",
       stakes: "{faction} would pay well. So would the occupation authority, to suppress it",
     },
     {
       secret:
-        "Their position under the occupation exists because they helped legitimise the takeover — a public statement they made in the first week",
+        "Their position under the occupation exists because they helped legitimise the takeover (a public statement they made in the first week)",
       stakes: "They were told it was just paperwork. They knew it wasn't",
     },
     {
-      secret: "Is smuggling people out — but only those who can pay, and the price has been rising",
+      secret: "Is smuggling people out, but only those who can pay, and the price has been rising",
       stakes: "{npc} can't pay. They've been waiting for weeks. The next group leaves in two days",
     },
     {
-      secret: "Knows the occupation commander's real orders — not the stated ones — and those orders include a date",
+      secret: "Knows the occupation commander's real orders (not the stated ones), and those orders include a date",
       stakes: "The date is soon. Telling anyone means explaining how they know",
     },
   ],
@@ -135,7 +135,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "{faction} just sent someone to verify information that won't check out. The meeting is tomorrow",
     },
     {
-      secret: "The vote that split the council was not actually close — they falsified the count",
+      secret: "The vote that split the council was not actually close. They falsified the count",
       stakes: "The original tallies still exist somewhere. {npc} was in the room",
     },
     {
@@ -145,17 +145,17 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Was responsible for the incident that triggered the fracture — an act of deliberate sabotage they've successfully blamed on the other faction",
+        "Was responsible for the incident that triggered the fracture: an act of deliberate sabotage they've successfully blamed on the other faction",
       stakes: "One member of the faction they framed knows the truth and has been building a case",
     },
     {
       secret:
-        "Knows where the settlement's founding documents are — documents that would legally invalidate the current governing structure entirely",
+        "Knows where the settlement's founding documents are (documents that would legally invalidate the current governing structure entirely)",
       stakes: "They've been sitting on this information for eighteen months, waiting for the right moment",
     },
     {
       secret:
-        "Their public neutrality is a cover — they are actively funding one faction's operations through a third party",
+        "Their public neutrality is a cover. They are actively funding one faction's operations through a third party",
       stakes:
         "{npc} traced one payment. They came to ask about it. They accepted the explanation. They didn't believe it",
     },
@@ -163,7 +163,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   indebted: [
     {
       secret:
-        "The debt was not authorised by the council — they signed alone under pressure and have been hiding it for two years",
+        "The debt was not authorised by the council. They signed alone under pressure and have been hiding it for two years",
       stakes: "{faction} is about to discover this in the accounts they requested",
     },
     {
@@ -173,7 +173,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Knows the debt contains a clause that transfers significant civic assets to the creditor on default — a clause that was buried in the original document",
+        "Knows the debt contains a clause that transfers significant civic assets to the creditor on default (a clause that was buried in the original document)",
       stakes: "{npc} is a notary who helped draft it. They've been avoiding eye contact for six months",
     },
     {
@@ -183,7 +183,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Sold privileged commercial information to a foreign merchant house to cover an interest payment — information that {faction} considers proprietary",
+        "Sold privileged commercial information to a foreign merchant house to cover an interest payment (information that {faction} considers proprietary)",
       stakes: "The merchant house used the information publicly. The source will be traced",
     },
     {
@@ -194,19 +194,19 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has already transferred personal assets out of the settlement to a safe location — anticipating default and the personal liability that follows",
+        "Has already transferred personal assets out of the settlement to a safe location, anticipating default and the personal liability that follows",
       stakes:
         "{npc} helped with the transfer. They've said nothing. They're waiting to see what they get for their silence",
     },
   ],
   recently_betrayed: [
     {
-      secret: "They were the betrayer — not the person the investigation has been pursuing",
+      secret: "They were the betrayer, not the person the investigation has been pursuing",
       stakes:
         "The evidence against the other person is circumstantial but strong. Letting it proceed is the easiest thing in the world",
     },
     {
-      secret: "Knows who did it and has said nothing — the betrayer is someone they owe a significant debt to",
+      secret: "Knows who did it and has said nothing. The betrayer is someone they owe a significant debt to",
       stakes:
         "The debt is called in if they speak. The settlement suffers if they don't. They've been choosing themselves for six weeks",
     },
@@ -217,13 +217,13 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has the actual evidence of who committed the betrayal — they found it accidentally and immediately hid it",
+        "Has the actual evidence of who committed the betrayal. They found it accidentally and immediately hid it",
       stakes:
         "The evidence also implicates {faction}, which means the fallout would be much larger than anyone currently expects",
     },
     {
       secret:
-        "Was approached before the betrayal and said no — but also said nothing to warn anyone, for reasons they still believe were defensible",
+        "Was approached before the betrayal and said no, but also said nothing to warn anyone, for reasons they still believe were defensible",
       stakes:
         "If the investigation reaches them, the question of what they knew and when will end their career even if they're not charged",
     },
@@ -231,7 +231,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
   infiltrated: [
     {
       secret:
-        "Has been meeting with someone whose affiliation they now suspect — they didn't know at the time, and stopping the meetings would confirm they suspect something",
+        "Has been meeting with someone whose affiliation they now suspect. They didn't know at the time, and stopping the meetings would confirm they suspect something",
       stakes: "The information passed was minor. Or seemed minor. They're no longer certain",
     },
     {
@@ -241,13 +241,13 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Their correspondence has been read — by whom, they don't know, but the evidence is there for anyone paying attention",
+        "Their correspondence has been read (by whom, they don't know), but the evidence is there for anyone paying attention",
       stakes:
         "The correspondence contains something that would end their career if taken out of context. It will be taken out of context",
     },
     {
       secret:
-        "Is the infiltrator — placed by an outside interest before the settlement's current leadership took power",
+        "Is the infiltrator, placed by an outside interest before the settlement's current leadership took power",
       stakes:
         "Their handler has not made contact in four months. They don't know if that means the operation is over or if something has changed",
     },
@@ -263,7 +263,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The outbreak has spread to three more households since they made that decision",
     },
     {
-      secret: "Has already been exposed and is symptomatic — presenting publicly as unaffected",
+      secret: "Has already been exposed and is symptomatic, presenting publicly as unaffected",
       stakes: "{npc} stands close to them every day. They've said nothing",
     },
     {
@@ -273,35 +273,35 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Has been selling access to unquarantined routes for cash — the price goes up as the desperation increases",
+        "Has been selling access to unquarantined routes for cash. The price goes up as the desperation increases",
       stakes: "Three of the people who paid are now symptomatic. They know where they got through",
     },
     {
       secret:
-        "Falsified the initial case count to prevent panic — and now the actual count is far higher than the official record",
+        "Falsified the initial case count to prevent panic, and now the actual count is far higher than the official record",
       stakes: "{faction} is about to do their own independent count as part of a resource audit",
     },
     {
       secret:
-        "Is hoarding medicinal {commodity} that should have been distributed — rationing it for their own use and close associates",
+        "Is hoarding medicinal {commodity} that should have been distributed, rationing it for their own use and close associates",
       stakes: "The official stores are now visibly insufficient. Someone will investigate where the gap is",
     },
   ],
   succession_void: [
     {
       secret:
-        "Has already committed to supporting a specific claimant in private — while publicly presenting as neutral",
+        "Has already committed to supporting a specific claimant in private, while publicly presenting as neutral",
       stakes: "They made the same commitment to the other claimant last week",
     },
     {
       secret:
-        "Knows the deceased's actual wishes regarding succession — they were told privately and have chosen not to share them",
+        "Knows the deceased's actual wishes regarding succession. They were told privately and have chosen not to share them",
       stakes:
         "The wishes favour neither of the current claimants. Sharing them would destabilise everything and serve justice simultaneously",
     },
     {
       secret:
-        "Has a document that would legally resolve the succession — in a direction that would require them to give up their current position",
+        "Has a document that would legally resolve the succession, in a direction that would require them to give up their current position",
       stakes: "They've been sitting on it for three weeks. The longer they wait, the harder the explanation",
     },
     {
@@ -319,33 +319,33 @@ export const STRESS_INSTITUTION_EFFECTS = {
   monster_pressure: [
     {
       secret:
-        "The attacks are not random — they sent a patrol into that territory three weeks ago and provoked something. No one came back. They filed a false report",
+        "The attacks are not random. They sent a patrol into that territory three weeks ago and provoked something. No one came back. They filed a false report",
       stakes: "The survivors' families believe their people died in an accident. They've been asking questions",
     },
     {
       secret:
-        "Has been negotiating with the creature threat on their own authority — and the terms they've offered include access rights the settlement doesn't know they gave",
+        "Has been negotiating with the creature threat on their own authority, and the terms they've offered include access rights the settlement doesn't know they gave",
       stakes: "{npc} intercepted one communication. They don't fully understand what they read",
     },
     {
       secret:
-        "The {commodity} operation they authorised six months ago disturbed a nesting site — the attacks started three weeks later",
+        "The {commodity} operation they authorised six months ago disturbed a nesting site. The attacks started three weeks later",
       stakes: "The connection is in the geographic data. Someone with the right maps will make it",
     },
     {
       secret:
-        "Has been selling information about patrol schedules to an outside party who claims to be a monster hunter — and may not be",
+        "Has been selling information about patrol schedules to an outside party who claims to be a monster hunter, and may not be",
       stakes: "The last three ambushes hit patrols on days that weren't in the standard rotation",
     },
     {
       secret:
-        "Their private property — inherited land outside the walls — is part of the territory being contested. They've been subtly steering the garrison away from it",
+        "Their private property (inherited land outside the walls) is part of the territory being contested. They've been subtly steering the garrison away from it",
       stakes: "Two soldiers died in an area they should have been sent to protect",
     },
   ],
   insurgency: [
     {
-      secret: "Has been quietly forwarding a share of the taxes they collect to the insurgency — as insurance, not conviction",
+      secret: "Has been quietly forwarding a share of the taxes they collect to the insurgency (as insurance, not conviction)",
       stakes: "If the authority survives, this is treason. If the insurgency wins, it is not enough. They bet on neither side and owe both",
     },
     {
@@ -365,12 +365,12 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The night is close. {faction} still believes this person is loyal",
     },
     {
-      secret: "Knows the insurgency is being funded from outside the settlement — by a party the authority itself has been quietly dealing with",
+      secret: "Knows the insurgency is being funded from outside the settlement, by a party the authority itself has been quietly dealing with",
       stakes: "Exposing the funding exposes the deal. They have been sitting on both halves for months",
     },
     {
       // [D6 THE UNDERWAYS] the insurgency uses the tunnels — content integration.
-      secret: "Has been moving insurgent fighters and sealed messages through the underways — the dug tunnels beneath the settlement — one cellar-mouth at a time",
+      secret: "Has been moving insurgent fighters and sealed messages through the underways (the dug tunnels beneath the settlement), one cellar-mouth at a time",
       stakes: "The warren has no map, but {npc} has walked it. If the authority ever forces one, this person's own route becomes the confession",
     },
   ],
@@ -381,7 +381,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves",
-      stakes: "People in the camp are dying of the shortfall. The blame is holding — for now",
+      stakes: "People in the camp are dying of the shortfall. The blame is holding, for now",
     },
     {
       secret: "Is themselves a newcomer, arrived a decade ago under a false history that the current upheaval is threatening to expose",
@@ -389,10 +389,10 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret: "Has been quietly buying up the emptied properties of those who fled, through a third party, at a fraction of their worth",
-      stakes: "Some of the departed intend to return. The purchases will not survive their claims — or their questions",
+      stakes: "Some of the departed intend to return. The purchases will not survive their claims, or their questions",
     },
     {
-      secret: "Knows the migration was triggered by something upstream — a failed harvest, a war, a purge — that {faction} helped cause and has been concealing",
+      secret: "Knows the migration was triggered by something upstream (a failed harvest, a war, a purge) that {faction} helped cause and has been concealing",
       stakes: "The newcomers carry the proof in their own stories, if anyone here thinks to listen",
     },
     {
@@ -422,7 +422,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The rival's heir survived the war the seizure was meant to fund, and has come home with the original documents",
     },
     {
-      secret: "Has been feeding the enemy's quartermasters the same false supply figures they feed their own — playing both requisitions for the skim",
+      secret: "Has been feeding the enemy's quartermasters the same false supply figures they feed their own, playing both requisitions for the skim",
       stakes: "When the war ends, both sides will reconcile their books. The discrepancy points one direction",
     },
   ],
@@ -440,7 +440,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The apparatus still exists, hidden. Anyone who found it would unmake the conversion and every career built on it",
     },
     {
-      secret: "Was a senior figure in the old faith and surrendered its secrets — its finances, its sanctuary lists, its private sins — to the new one to secure a place",
+      secret: "Was a senior figure in the old faith and surrendered its secrets (its finances, its sanctuary lists, its private sins) to the new one to secure a place",
       stakes: "The sanctuary lists named people now being hunted. {npc} was on a list this person handed over",
     },
     {
@@ -448,7 +448,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "One of the unmade legitimacies belongs to a family with the means to check the originals",
     },
     {
-      secret: "Knows the conversion was arranged for reasons that had nothing to do with faith — a debt, a marriage, a foreign hand — and holds the correspondence that proves it",
+      secret: "Knows the conversion was arranged for reasons that had nothing to do with faith (a debt, a marriage, a foreign hand) and holds the correspondence that proves it",
       stakes: "{faction} would pay to bury it. The other faith would pay more to reveal it",
     },
   ],
@@ -462,7 +462,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "{npc} kept a copy. They have not yet decided what to do with it",
     },
     {
-      secret: "Freed and armed a group of the enslaved themselves, quietly, before the revolt began — for reasons they have not disclosed and cannot now defend",
+      secret: "Freed and armed a group of the enslaved themselves, quietly, before the revolt began, for reasons they have not disclosed and cannot now defend",
       stakes: "Those they armed are among the revolt's leaders. If it is known who gave them steel, the answer implicates this person entirely",
     },
     {

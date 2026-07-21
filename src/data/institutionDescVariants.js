@@ -251,12 +251,12 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Reanimated dead put to work. A contested practice.",
   ],
   "city|Government|City administration": [
-    "Officials, clerks, and ward officers run the city's affairs between them — a looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork.",
+    "Officials, clerks, and ward officers run the city's affairs between them. A looser arrangement than a council, but one that works. It governs by the momentum of its own paperwork.",
     "The city is administered by a standing body of officials, clerks, and ward officers, less formally constituted than a council yet functional all the same. What moves it is bureaucratic inertia.",
   ],
   "city|Government|City-state government": [
     "The settlement rules itself and the land around it as a sovereign polity, answering to no higher lord and holding no external charter.",
-    "An independent state in its own right, governing both itself and its hinterland — no overlord above it, no charter granted from outside.",
+    "An independent state in its own right, governing both itself and its hinterland. No overlord above it, no charter granted from outside.",
   ],
   "city|Government|Democratic assembly": [
     "Formal power rests with an assembly of citizens; those entitled to vote argue and decide the major ordinances and appointments.",
@@ -279,11 +279,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Rule falls to a royal or ducal appointee, the city being worked as a noble's fief.",
   ],
   "city|Government|Royal seat": [
-    "A royal governor or viceroy administers the city directly for the crown — the standing is high, and so is the scrutiny.",
+    "A royal governor or viceroy administers the city directly for the crown. The standing is high, and so is the scrutiny.",
     "The crown governs here at first hand, through a royal governor or viceroy. Great prestige, and no less watchfulness.",
   ],
   "city|Infrastructure|Aqueduct or water system": [
-    "A built water supply — conduits, cisterns, and fountains.",
+    "A built water supply: conduits, cisterns, and fountains.",
     "Engineered waterworks: conduits feeding cisterns and fountains.",
   ],
   "city|Infrastructure|City hall": [
@@ -304,11 +304,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "city|Infrastructure|Sewage system": [
     "Drains laid underground. Uncommon, and vital to public health.",
-    "Buried drainage — a rarity, and one the city's health depends on.",
+    "Buried drainage. A rarity, and one the city's health depends on.",
   ],
   "city|Infrastructure|Workhouse": [
-    "The able-bodied poor are given shelter and food, and made to earn it at compulsory labour — textile work, grinding, construction. It is not a prison, though the distinction is thin. It thins the ranks of vagrants and turns out goods besides, and its conditions are kept harsh on purpose, so that none grow too content to leave.",
-    "In return for a roof and a meal, the able-bodied poor are set to forced work — textiles, milling, construction. Not quite a gaol, but the line blurs. It cuts vagrancy and yields product, and the deliberately grim conditions are the point: dependency is meant to sting.",
+    "The able-bodied poor are given shelter and food, and made to earn it at compulsory labour: textile work, grinding, construction. It is not a prison, though the distinction is thin. It thins the ranks of vagrants and turns out goods besides, and its conditions are kept harsh on purpose, so that none grow too content to leave.",
+    "In return for a roof and a meal, the able-bodied poor are set to forced work: textiles, milling, construction. Not quite a gaol, but the line blurs. It cuts vagrancy and yields product, and the deliberately grim conditions are the point: dependency is meant to sting.",
   ],
   "city|Magic|Alchemist quarter": [
     "Several alchemical workshops, run under a guild.",
@@ -359,11 +359,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Raises and repairs both structures and tools.",
   ],
   "hamlet|Crafts|Charcoal burner": [
-    "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn — the necessary link between forest and forge.",
+    "Tends kilns out in the nearby woods, supplying the fuel that smiths and bakers burn. The necessary link between forest and forge.",
     "Works his kilns in the woodland close by, turning timber into the fuel for forge and oven. Without him nothing gets from the trees to the fire.",
   ],
   "hamlet|Crafts|Dairy farmer": [
-    "Runs cattle or goats for their milk, butter, and cheese — the one dependable fat and protein when the grain runs short. The work is seasonal, and heaviest in summer.",
+    "Runs cattle or goats for their milk, butter, and cheese. The one dependable fat and protein when the grain runs short. The work is seasonal, and heaviest in summer.",
     "Keeps a herd of cattle or goats for milk, butter, and cheese. In a bad grain year it is the only fat and protein to be had. Seasonal work, cresting in the summer months.",
   ],
   "hamlet|Crafts|Fisher's landing": [
@@ -384,7 +384,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "hamlet|Crafts|Pack animal trader": [
     "Deals in mules, donkeys, and draft horses, buying and selling, and hires them out to travellers and merchants who need something to carry a load down the road.",
-    "Buys and sells mules, donkeys, and draft horses, and rents them to whoever on the road wants carrying power — traveller or merchant alike.",
+    "Buys and sells mules, donkeys, and draft horses, and rents them to whoever on the road wants carrying power. Traveller or merchant alike.",
   ],
   "hamlet|Crafts|Peat cutter": [
     "Cuts peat from the marsh nearby and dries it into blocks for the hearth. Seasonal work: what he sells is winter warmth.",
@@ -396,23 +396,23 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "hamlet|Crafts|Salt works": [
     "Boils or dries salt out of seawater or brine springs, yielding the raw salt that preserves food. It works only where there are salt flats or a way to the coast.",
-    "Evaporates coastal water or brine to leave salt behind — the raw salt everything is preserved with. Nowhere but by salt flats or the sea can it be done.",
+    "Evaporates coastal water or brine to leave salt behind. The raw salt everything is preserved with. Nowhere but by salt flats or the sea can it be done.",
   ],
   "hamlet|Crafts|Shepherd": [
     "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
-    "Runs sheep for their wool and meat, moving the flocks with the seasons — down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
+    "Runs sheep for their wool and meat, moving the flocks with the seasons: down to the lowland in winter, up to the hills in summer. The textile trade leans on him.",
   ],
   "hamlet|Crafts|Stable yard": [
     "A shared stable where travellers may leave their horses, the stableman offering rough farriery and fodder.",
     "A common stable for travellers to lodge their mounts; the stableman sees to basic shoeing and feed.",
   ],
   "hamlet|Crafts|Stone quarry": [
-    "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges — slow going, but the only source of proper building material there is.",
+    "Cuts and dresses building stone into blocks. A gang of quarrymen work it with picks and wedges. Slow going, but the only source of proper building material there is.",
     "Quarrymen with picks and wedges cut and dress the stone for building. It is slow, and it is the sole way to come by real building material.",
   ],
   "hamlet|Criminal|Bandit affiliate": [
     "A household or two here keep quiet ties to the bandits who work the roads about. News, shelter, and goods pass in both directions.",
-    "Somewhere among these homes are people bound to the road-bandits nearby. What flows between them — word, refuge, supply — flows both ways.",
+    "Somewhere among these homes are people bound to the road-bandits nearby. What flows between them (word, refuge, supply) flows both ways.",
   ],
   "hamlet|Criminal|Fence (word of mouth)": [
     "Stolen property passes through the hamlet without fuss. You would know the go-between by sight, never by name.",
@@ -428,18 +428,18 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "hamlet|Defense|Palisade or earthworks": [
     "A plain wooden palisade, or a bank of earth. Enough to slow a raid or a wandering beast, no more.",
-    "A rough timber palisade or an earthen berm — it checks raiders and creatures without stopping them.",
+    "A rough timber palisade or an earthen berm. It checks raiders and creatures without stopping them.",
   ],
   "hamlet|Economy|Access to external mill": [
-    "A manor mill holding the sole right to grind — the banalité.",
+    "A manor mill holding the sole right to grind (the banalité).",
     "The lord's mill, and by banalité the only one grain may lawfully be ground at.",
   ],
   "hamlet|Economy|Alehouse": [
-    "Ale brewed at home and sold out of a back room. It doubles as the hamlet's common room — every rumour, quarrel, and bargain passes through it.",
+    "Ale brewed at home and sold out of a back room. It doubles as the hamlet's common room. Every rumour, quarrel, and bargain passes through it.",
     "Somebody's back room, a barrel of home brew, and a bench. It is where the hamlet hears its news, airs its grievances, and strikes its deals.",
   ],
   "hamlet|Economy|Caravanserai": [
-    "A walled waystation offering merchants, their beasts, and their goods a safe night's rest. It is the hinge of the desert trade — water, fodder, and protection, all for a fee — and without it no caravan crosses the country around in safety.",
+    "A walled waystation offering merchants, their beasts, and their goods a safe night's rest. It is the hinge of the desert trade (water, fodder, and protection, all for a fee), and without it no caravan crosses the country around in safety.",
     "Behind its walls, merchants shelter their animals and cargo overnight in security. Water, fodder, and guard are had here for payment, and it stands at the heart of the desert trade; lacking one, no caravan can safely make the surrounding passage.",
   ],
   "hamlet|Economy|Common grazing land": [
@@ -452,7 +452,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "hamlet|Economy|Periodic market": [
     "A trading day held monthly or by season. There is no charter behind it, only habit, nearness, and a flat patch of ground.",
-    "Monthly or seasonal, the market gathers without any charter to sanction it — sustained by custom, by convenience, and by a level piece of earth.",
+    "Monthly or seasonal, the market gathers without any charter to sanction it. Sustained by custom, by convenience, and by a level piece of earth.",
   ],
   "hamlet|Economy|Subsistence farming": [
     "Strips worked in the open fields.",
@@ -464,14 +464,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "hamlet|Government|Informal elder consensus": [
     "A free hamlet, with no lord's man set over it; the elders, agreeing among themselves, settle what the community holds in common.",
-    "No lord's representative stands here — the hamlet is free, and its shared affairs are decided by the common consent of its elders.",
+    "No lord's representative stands here. The hamlet is free, and its shared affairs are decided by the common consent of its elders.",
   ],
   "hamlet|Government|Lord's steward": [
     "A lord's man runs the hamlet's holdings, gathers the rents, and speaks for noble authority.",
     "Acting for the lord, he administers the land, takes in rent, and imposes the noble's will.",
   ],
   "hamlet|Government|Village headman": [
-    "One well-regarded resident holds sway without a mandate — nobody voted, nobody appointed, everybody accepts it. What gets decided is practical, never ceremonial.",
+    "One well-regarded resident holds sway without a mandate. Nobody voted, nobody appointed, everybody accepts it. What gets decided is practical, never ceremonial.",
     "A single trusted figure runs things by common agreement rather than any office. The rulings are matters of sense, not procedure.",
   ],
   "hamlet|Infrastructure|Dwellings (17-80)": [
@@ -499,7 +499,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Modest prayer marker. Unattended.",
   ],
   "metropolis|Crafts|Craft guilds (100-150+)": [
-    "More than a hundred separate craft specialisations, each with a guild — no trade goes unrepresented.",
+    "More than a hundred separate craft specialisations, each with a guild. No trade goes unrepresented.",
     "A guild for every trade imaginable, well past a hundred distinct crafts in all.",
   ],
   "metropolis|Criminal|Assassins' guild": [
@@ -519,7 +519,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "An old warren of catacombs and passages, repurposed as a sanctuary for the hunted and the hiding.",
   ],
   "metropolis|Defense|Massive walls and fortifications": [
-    "Walls within walls — an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
+    "Walls within walls: an outer line, an inner line, and the citadel ring. Garrison districts and gatehouses at every stage.",
     "A defence built in layers: outer wall, inner wall, and the ring about the citadel, with garrisons and gatehouses throughout.",
   ],
   "metropolis|Defense|Multiple garrisons": [
@@ -527,7 +527,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Troops quartered in several places at once, a metropolis being far too large for one garrison.",
   ],
   "metropolis|Economy|Banking district": [
-    "A whole quarter given to money — banking across borders, credit by letter, and speculation in coin at scale.",
+    "A whole quarter given to money: banking across borders, credit by letter, and speculation in coin at scale.",
     "The city's finance gathered into one district: international houses, letters of credit, and currency dealing on a grand scale.",
   ],
   "metropolis|Economy|Daily markets": [
@@ -535,7 +535,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The scale of the metropolis has left it behind.",
   ],
   "metropolis|Economy|District markets (5-10)": [
-    "Between five and ten standing market districts, each to its own trade — grain, livestock, cloth, metals, exotica.",
+    "Between five and ten standing market districts, each to its own trade: grain, livestock, cloth, metals, exotica.",
     "Five to ten permanent quarters given over to markets, sorted by ware: grain, livestock, cloth, metals, and the exotic.",
   ],
   "metropolis|Economy|International trade center": [
@@ -551,15 +551,15 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "State-managed grain stores, kept as a strategic reserve.",
   ],
   "metropolis|Government|Multiple court buildings": [
-    "Several courts sitting at once, each to its province — commercial, criminal, appellate, ecclesiastical.",
+    "Several courts sitting at once, each to its province: commercial, criminal, appellate, ecclesiastical.",
     "Commercial, criminal, appellate, and ecclesiastical courts, all in session at the same time.",
   ],
   "metropolis|Government|Palace/government complex": [
-    "The heart of metropolitan or state rule — a palace with its ministries, audience halls, and clerks' bureaux.",
+    "The heart of metropolitan or state rule. A palace with its ministries, audience halls, and clerks' bureaux.",
     "Where the metropolis or the state governs from: palace, ministries, halls of audience, and offices without number.",
   ],
   "metropolis|Infrastructure|Advanced water infrastructure": [
-    "Aqueducts, cisterns, and fountains throughout — water managed across the whole city at scale.",
+    "Aqueducts, cisterns, and fountains throughout. Water managed across the whole city at scale.",
     "Several aqueducts feed cisterns and fountains spread across the districts, a water system built for a city's size.",
   ],
   "metropolis|Infrastructure|Massive prison": [
@@ -568,23 +568,23 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "metropolis|Magic|Academy of magic": [
     "A chartered school of the arcane, with a full course of study, laboratories, and scholars come from abroad.",
-    "A formal college of magic — a complete curriculum, rooms for research, and a stream of visiting adepts.",
+    "A formal college of magic. A complete curriculum, rooms for research, and a stream of visiting adepts.",
   ],
   "metropolis|Magic|Great library": [
     "The region's greatest store of learning: thousands of volumes, archives of maps, and the historical record.",
-    "No larger collection of knowledge exists in the region — thousands of books, a map archive, and the histories.",
+    "No larger collection of knowledge exists in the region: thousands of books, a map archive, and the histories.",
   ],
   "metropolis|Magic|Mages' district": [
     "A whole quarter of arcane practitioners, all towers, workshops, libraries, and reagent sellers.",
-    "The magic-workers keep to one district — its towers, workshops, libraries, and reagent merchants mark it out.",
+    "The magic-workers keep to one district. Its towers, workshops, libraries, and reagent merchants mark it out.",
   ],
   "metropolis|Magic|Planar embassy": [
     "A formal legation from a power of another plane. It trades, it gathers word, and now and then it intervenes.",
-    "The standing diplomatic mission of a planar power — commerce, intelligence, and the occasional intervention.",
+    "The standing diplomatic mission of a planar power: commerce, intelligence, and the occasional intervention.",
   ],
   "metropolis|Religious|Great cathedral": [
     "The metropolitan cathedral, seat of the region's highest prelate and a draw for pilgrims.",
-    "The great church of the metropolis — the region's chief religious authority sits here, and the faithful travel to it.",
+    "The great church of the metropolis. The region's chief religious authority sits here, and the faithful travel to it.",
   ],
   "metropolis|Religious|Hospital network": [
     "Hospitals and infirmaries across the districts, medical care organised for a city's numbers.",
@@ -595,7 +595,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Five to ten major monasteries, their scholarly, contemplative, and charitable work carried out on a grand scale.",
   ],
   "metropolis|Religious|Parish churches (50-100+)": [
-    "Parish churches in the hundreds, across every district — no neighbourhood is without the faith.",
+    "Parish churches in the hundreds, across every district. No neighbourhood is without the faith.",
     "Hundreds of parishes, one church to each, so that faith runs through every quarter of the city.",
   ],
   "thorp|Criminal|Local fence": [
@@ -604,15 +604,15 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "thorp|Criminal|Outlaw shelter": [
     "Someone here will hide a person who needs to vanish. A barn, a cellar, a bargain no one speaks of.",
-    "There is cover here for those who must disappear — a loft, a cellar, an understanding that stays unspoken.",
+    "There is cover here for those who must disappear: a loft, a cellar, an understanding that stays unspoken.",
   ],
   "thorp|Economy|Access to external mill": [
     "Grain goes to the manor or village mill; grinding it at home is commonly against the law.",
-    "No mill of its own — the manor's or the village's must serve, and milling at home is often forbidden.",
+    "No mill of its own. The manor's or the village's must serve, and milling at home is often forbidden.",
   ],
   "thorp|Economy|Fishing community": [
     "Nets, traps, and racks for drying. The thorp lives by the water and cannot be parted from it.",
-    "Its livelihood is the water itself — the nets, the traps, the drying racks are the whole of the economy.",
+    "Its livelihood is the water itself. The nets, the traps, the drying racks are the whole of the economy.",
   ],
   "thorp|Economy|Shepherd collective": [
     "The flock is held and worked in common, and the thorp keeps time by the grazing calendar.",
@@ -627,11 +627,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Timber cut and stacked when the season allows, and the air over the thorp is all sawdust and resin.",
   ],
   "thorp|Government|Head-of-household consensus": [
-    "Every head of household has an equal say in shared concerns — slower to decide, but the fairer for it.",
+    "Every head of household has an equal say in shared concerns. Slower to decide, but the fairer for it.",
     "Common matters are settled by all the family heads together, each voice equal. It is unhurried, and the more egalitarian for that.",
   ],
   "thorp|Government|Household elder": [
-    "A single household head speaks for the settlement without ever being chosen to — no office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
+    "A single household head speaks for the settlement without ever being chosen to. No office, no title, no vote. Simply the door people knock on when a thing has to be settled.",
     "One head of household carries the settlement's voice by common habit rather than any appointment. Nobody named them to it; everybody defers to it anyway.",
   ],
   "thorp|Government|Informal elder consensus": [
@@ -644,7 +644,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "thorp|Infrastructure|Communal root cellar": [
     "A shared cellar for grain, roots, and preserved food. It is what stands between the thorp and a failed harvest.",
-    "Grain, roots, and preserves kept in a common underground store — the settlement's guard against a bad year.",
+    "Grain, roots, and preserves kept in a common underground store. The settlement's guard against a bad year.",
   ],
   "thorp|Infrastructure|Dwellings (4-16)": [
     "Wattle-and-daub or timber, one or two rooms to a household.",
@@ -671,7 +671,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The region's principal adventuring hub, working under charter. Contracts are posted here, monster threats graded, equipment maintained, and the great operations beyond any militia coordinated from its floor.",
   ],
   "town|Adventuring|Beast trainers": [
-    "Ordinary beasts only — horses, dogs, falcons.",
+    "Ordinary beasts only: horses, dogs, falcons.",
     "Horses, dogs, and falcons. Nothing more exotic.",
   ],
   "town|Adventuring|Charlatan fortune tellers": [
@@ -684,11 +684,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Adventuring|Merchant warehouses": [
     "Storage for merchants' goods held back for sale, transit, or the season's distribution. No trade-route settlement does without it.",
-    "Warehouses where traders keep stock awaiting sale, shipment, or seasonal release — indispensable to any town on a trade route.",
+    "Warehouses where traders keep stock awaiting sale, shipment, or seasonal release. Indispensable to any town on a trade route.",
   ],
   "town|Crafts|Apothecary (established)": [
     "A proper shop kept by a trained herbalist, its shelves stocked and a back room set aside for consultations. It sells herbalism kit supplies, common antidotes, medicinal herbs, and basic surgical dressings. A few of its keepers also work as chirurgeons.",
-    "An established herbalist's shop, well stocked, with a back room for private consultation. On offer are herbalism kit supplies, common antidotes, medicinal herbs, and simple surgical dressings — and some apothecaries here double as chirurgeons.",
+    "An established herbalist's shop, well stocked, with a back room for private consultation. On offer are herbalism kit supplies, common antidotes, medicinal herbs, and simple surgical dressings, and some apothecaries here double as chirurgeons.",
   ],
   "town|Crafts|Bakers (5-15)": [
     "The town's bread. Prices fixed by the guild.",
@@ -700,11 +700,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Crafts|Bowyers & fletchers (guild)": [
     "Several craftsmen banded into a guild. Standard arrows by the sheaf, specialty broadheads, and composite bows made to order. They restock the merchant caravans and arm the town militias.",
-    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission — enough to resupply the caravans and outfit the militias.",
+    "A guild of bowyers and fletchers. Arrows come by the sheaf, broadheads to specialty, and composite bows on commission. Enough to resupply the caravans and outfit the militias.",
   ],
   "town|Crafts|Brewery": [
     "Ale and beer brewed at commercial scale, supplying the town's taverns and the wider region. It eats grain and hires hands in quantity.",
-    "A brewery working at commercial scale — it keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
+    "A brewery working at commercial scale. It keeps the taverns stocked and sends beer across the region, and stands among the larger buyers of grain and employers in the town.",
   ],
   "town|Crafts|Butchers (3-8)": [
     "Meat dressed and sold, under close regulation.",
@@ -723,7 +723,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Organised cobblers who shoe the town in boots, shoes, and sandals, with quality kept under strict regulation.",
   ],
   "town|Crafts|Glassblower": [
-    "Glass worked on a small scale — bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
+    "Glass worked on a small scale: bottles, window panes, goblets. It calls for silica sand, potash, and a skilled hand at the furnace.",
     "A modest glassworks making bottles, panes, and goblets, dependent on silica sand, potash, and a practised furnace operator.",
   ],
   "town|Crafts|Mills (2-5)": [
@@ -744,7 +744,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Crafts|Smelter": [
     "Charcoal furnaces reduce raw ore to refined metal. It stands between the mine and the smithy.",
-    "Refines crude ore into workable metal over charcoal fire — the industrial step from what the mine yields to what the smith uses.",
+    "Refines crude ore into workable metal over charcoal fire. The industrial step from what the mine yields to what the smith uses.",
   ],
   "town|Crafts|Tailor's guild": [
     "Master clothiers cutting garments from finished cloth, working clothes and household livery alike.",
@@ -752,7 +752,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Crafts|Tanner (established)": [
     "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.",
-    "Multiple vats, trained hands from the guild — a proper tannery whose leather is good enough for footwear, armour, and saddlery.",
+    "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.",
   ],
   "town|Crafts|Tanners": [
     "Leather-making. Kept downstream and downwind, always.",
@@ -780,7 +780,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Criminal|Underground network": [
     "Tunnels and false cellars, dug and linked to move contraband beneath the streets.",
-    "A network of excavated passages joining cellars and yards to the town's edge — none of it on any map.",
+    "A network of excavated passages joining cellars and yards to the town's edge. None of it on any map.",
   ],
   "town|Defense|Barracks": [
     "Quarters for the guard or a small garrison.",
@@ -791,7 +791,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The obligation of defence falls on all who are fit, served part-time. Found only in towns without a professional watch.",
   ],
   "town|Defense|Free company hall": [
-    "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here — cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.",
+    "A billet and hiring office for professional soldiers idle between campaigns. Caravan escort, garrison work, and short-term hire go at day-wages here. Cheaper than a standing army and steadier than a mob. These are salaried men who fight in formation, not for plunder.",
     "Where a band of soldiers lodges and takes contracts between wars. They hire out by the day for escort, garrison duty, and brief campaigns: less costly than keeping an army, more dependable than a rabble. They form up for a wage, not for treasure.",
   ],
   "town|Defense|Gates (if walled)": [
@@ -811,15 +811,15 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "A yearly draw for regional traders, with fine goods on offer.",
   ],
   "town|Economy|Assay office": [
-    "Tests the purity of precious metals brought in — infrastructure without which banking and minting cannot work. It charges by the assay.",
+    "Tests the purity of precious metals brought in. Infrastructure without which banking and minting cannot work. It charges by the assay.",
     "Precious metals are proved here for their fineness, a necessity for any bank or mint. A fee is taken on each test.",
   ],
   "town|Economy|Caravaneer's post": [
-    "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here — the town's forerunner to the city's Caravan masters' exchange.",
+    "Coordinates caravan assembly, departure times, and word of the roads. Merchants register cargo, take on guards, and pool ventures here. The town's forerunner to the city's Caravan masters' exchange.",
     "Where regional caravans are mustered, scheduled, and briefed on their routes. Traders enrol their goods, hire escorts, and strike joint ventures, on the scale that precedes a city's Caravan masters' exchange.",
   ],
   "town|Economy|Carriers' guild": [
-    "A guild of carters, teamsters, and pack-drivers who haul goods overland for pay. They know every road, every toll, and every road shut by season — and price their work by it.",
+    "A guild of carters, teamsters, and pack-drivers who haul goods overland for pay. They know every road, every toll, and every road shut by season, and price their work by it.",
     "Professional carters and teamsters, organised, moving cargo across country for hire. Every route, levy, and winter closure is known to them, and billed for.",
   ],
   "town|Economy|Carriers' hiring hall": [
@@ -828,11 +828,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Economy|Cartographer's workshop": [
     "Sells road maps, regional surveys, and coastal charts, and takes commissions to survey estates or sketch dungeons. An older collection is kept for reference. Adventurers, merchants, and army scouts all stop here.",
-    "Road maps, regional surveys, and coastal charts for sale; estate surveys and dungeon sketches to order; a reference shelf of older maps to consult. A usual call for anyone who travels with purpose — adventurer, merchant, or scout.",
+    "Road maps, regional surveys, and coastal charts for sale; estate surveys and dungeon sketches to order; a reference shelf of older maps to consult. A usual call for anyone who travels with purpose: adventurer, merchant, or scout.",
   ],
   "town|Economy|Coaching inn": [
     "Built for the road: relay stabling, coaches on a schedule, meals at set hours, and a room for waiting passengers. Horses are changed here, not merely rested.",
-    "A house made for travellers by coach — fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest.",
+    "A house made for travellers by coach: fresh horses stabled, departures timed, fixed mealtimes, and a passengers' waiting room. The teams are swapped out, not just given a rest.",
   ],
   "town|Economy|Craft guilds (5-15)": [
     "They set the standard of work, the prices, and the terms of apprenticeship.",
@@ -864,14 +864,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Economy|Money changers": [
     "Foreign coin exchanged. The first stirrings of banking, past 3,000 people.",
-    "They change coin from abroad — banking in its infancy, and only above 3,000 population.",
+    "They change coin from abroad. Banking in its infancy, and only above 3,000 population.",
   ],
   "town|Economy|Post relay station": [
     "Keeps a string of horses for fast relay of messages. Letters and small parcels outpace any courier on foot. It needs a coaching inn to run.",
     "Fresh horses stand ready to carry messages onward at speed, letters and small packages moving far quicker than a man walking. A coaching inn is required.",
   ],
   "town|Economy|Public bathhouse": [
-    "Heated water for communal bathing. Some places treat it as a gathering-house, others eye it as a den of vice — but nowhere in town carries more rumour and news.",
+    "Heated water for communal bathing. Some places treat it as a gathering-house, others eye it as a den of vice, but nowhere in town carries more rumour and news.",
     "A shared bath fed with heated water, prized as a social hub in one culture and mistrusted as a haunt of vice in another. Whichever it is, it is where the town's talk collects.",
   ],
   "town|Economy|Shipyard": [
@@ -879,7 +879,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Sea-going trade vessels are built and repaired here, on a footing of constant timber, iron fittings, and specialist labour. It employs many and ties up much capital.",
   ],
   "town|Economy|Slave market": [
-    "Enslaved people sold at public auction — taken in war, ruined by debt, condemned by court, or trafficked. Where the law permits slavery, this counts as civic commerce.",
+    "Enslaved people sold at public auction. Taken in war, ruined by debt, condemned by court, or trafficked. Where the law permits slavery, this counts as civic commerce.",
     "A public sale of the enslaved: war captives, debtors, convicts, and the trafficked. In places where slavery is lawful, it stands as ordinary commercial infrastructure.",
   ],
   "town|Economy|Stable district": [
@@ -908,14 +908,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Entertainment|Gambling den": [
     "Dice, cards, and the plainer games of chance.",
-    "Games of chance — dice and cards, nothing elaborate.",
+    "Games of chance: dice and cards, nothing elaborate.",
   ],
   "town|Entertainment|Gladiatorial school": [
     "Trains fighters for the crowd's amusement, drawn from prisoners, debtors, and volunteers. It supplies the arena circuit.",
     "Prisoners, debtors, and the willing are made into fighters for public show, and sent on to feed the arenas.",
   ],
   "town|Entertainment|Hired blades": [
-    "Professional fighters, alone or in small bands, taking private work — guarding a person, collecting a debt, or quietly ending a difficulty.",
+    "Professional fighters, alone or in small bands, taking private work: guarding a person, collecting a debt, or quietly ending a difficulty.",
     "Fighters for private hire, singly or in small groups: bodyguarding, debt-collection, and the discreet removal of problems.",
   ],
   "town|Entertainment|Traveling performers": [
@@ -964,10 +964,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "town|Magic|Elder Grove Council": [
     "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with nature's magic.",
-    "A council of elder druids charged with their circle's standing in the city — sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with nature magic.",
+    "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with nature magic.",
   ],
   "town|Magic|Teleportation circle": [
-    "A permanent circle, and a rare one — dear to build and dearer to keep, calling for magical skill past what a town usually commands.",
+    "A permanent circle, and a rare one. Dear to build and dearer to keep, calling for magical skill past what a town usually commands.",
     "Rarely seen: a fixed teleportation circle whose construction and upkeep cost enormously, and which demands expertise beyond the ordinary town's means.",
   ],
   "town|Magic|Warden's Lodge": [
@@ -995,12 +995,12 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "The ailing poor are nursed here, most often by a religious order.",
   ],
   "village|Crafts|Apothecary": [
-    "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist — nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
+    "Herbal medicines, poultices, and everyday remedies for sale. Not to be confused with the alchemist. Nothing magical here, no acid flasks. The proprietor knows the roots that break a fever and the mushrooms that end a life. Herbalism supplies on hand.",
     "Sells poultices, common cures, and medicines drawn from herbs. Where the alchemist deals in magical compounds and acid, this trade does not. Its keeper can name which root treats fever and which mushroom kills, and keeps herbalism supplies in stock.",
   ],
   "village|Crafts|Beekeeper": [
     "Keeps hives for their honey and wax. The honey sweetens; the beeswax goes to candles, seals, and polish.",
-    "Tends bees for honey and beeswax alike — one to sweeten food, the other for candles, wax seals, and polish.",
+    "Tends bees for honey and beeswax alike. One to sweeten food, the other for candles, wax seals, and polish.",
   ],
   "village|Crafts|Blacksmith": [
     "A full-time smith. Indispensable for tools and shoeing.",
@@ -1012,7 +1012,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Crafts|Brewer": [
     "Turns malted grain into ale by the barrel. After the bakers, no trade eats more grain. It supplies both alehouses and homes.",
-    "Makes ale in bulk from malted grain — the second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
+    "Makes ale in bulk from malted grain. The second-greatest draw on the grain supply after bread. Alehouses and households alike are stocked from here.",
   ],
   "village|Crafts|Brickmaker": [
     "Shapes and fires clay into bricks for building. With them, structures can be made to last. Clay deposits and fuel are needed.",
@@ -1023,7 +1023,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Raises houses, builds carts, makes furniture.",
   ],
   "village|Crafts|Cartographer's workshop": [
-    "A mapmaker who draws and sells his work — road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
+    "A mapmaker who draws and sells his work: road maps of the region, property surveys, and rough sketches of the wilds pieced from travellers' tales. Uncommon enough that most villages lack one.",
     "Here a craftsman renders and sells maps: regional roads, land surveys, and crude wilderness charts drawn from what travellers report. Few enough exist that the average village has none.",
   ],
   "village|Crafts|Charcoal burner": [
@@ -1039,7 +1039,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Casks for storage and carriage, all his making.",
   ],
   "village|Crafts|Dairy farmer": [
-    "Runs cattle or goats for their milk, butter, and soft cheese — vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.",
+    "Runs cattle or goats for their milk, butter, and soft cheese. Vital protein and fat when the grain runs thin. What isn't used goes to the weekly market.",
     "Keeps a herd of cattle or goats, yielding milk, butter, and soft cheese; in the lean grain months these are the settlement's protein and fat. The surplus is sold at the weekly market.",
   ],
   "village|Crafts|Dyer": [
@@ -1047,7 +1047,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Puts colour into wool and cloth, raw or woven. Anything beyond plain grey wool depends on the work.",
   ],
   "village|Crafts|Fishmonger": [
-    "Buys the catch, salts it, and sells it on — the trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
+    "Buys the catch, salts it, and sells it on. The trade that carries fish from the net to the table. By the water it comes fresh; inland, dried or salted.",
     "Deals in fish: bought, salted, and sold. It bridges the fisherman and the eater. Near water the stock is fresh, further inland dried or salted.",
   ],
   "village|Crafts|Fuller": [
@@ -1055,7 +1055,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Cleans and felts fresh-woven cloth to finish it, frequently by water power, turning loose weave into a durable fabric.",
   ],
   "village|Crafts|Hunter's lodge": [
-    "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best — which trails are safe and which are not.",
+    "Musters hunting parties across the lands about the settlement, selling venison, pelts, and game at market. It is also where the wilderness is known best: which trails are safe and which are not.",
     "Sends out hunting parties over the surrounding country and brings venison, pelts, and game to sell. It doubles as the local authority on the wilds, the safe trails and the treacherous ones.",
   ],
   "village|Crafts|Midwife": [
@@ -1071,11 +1071,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Ore, coal, or stone is won from a shaft or open cut here. The capital and organisation are more than a thorp could carry, but a village near the seams manages it, working its poorest hands.",
   ],
   "village|Crafts|Potter": [
-    "Throws pottery at the wheel for the household — plates, jugs, vessels for storage — and fires it in a small kiln.",
+    "Throws pottery at the wheel for the household (plates, jugs, vessels for storage) and fires it in a small kiln.",
     "Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
   ],
   "village|Crafts|Salt works": [
-    "Evaporation pans or brine-works set along the coast or the riverbank. By weight, salt is the most traded thing the settlement produces — no household does without it.",
+    "Evaporation pans or brine-works set along the coast or the riverbank. By weight, salt is the most traded thing the settlement produces. No household does without it.",
     "Salt won from brine or evaporation pans by the shore or river. It is the settlement's most-traded good by weight, wanted in every home.",
   ],
   "village|Crafts|Sawmill": [
@@ -1084,11 +1084,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Crafts|Stable master": [
     "Keeps the stables and breaks horses to saddle and harness. Any settlement on a road needs one.",
-    "Maintains stabling and trains horses for the saddle and the traces — indispensable wherever a road runs through.",
+    "Maintains stabling and trains horses for the saddle and the traces. Indispensable wherever a road runs through.",
   ],
   "village|Crafts|Stone quarry": [
     "Building stone cut in an ordered working. A village sitting on good quarry ground can furnish half a region's building, and the quarry master is well aware of the fact.",
-    "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it — something the quarry master never forgets.",
+    "The methodical winning of building stone. Set on the right ground, a village can meet half a region's need for it. Something the quarry master never forgets.",
   ],
   "village|Crafts|Tailor": [
     "Cuts and stitches finished cloth into clothes, filling the middle ground between the home seamstress and the master clothier.",
@@ -1096,7 +1096,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Crafts|Tannery": [
     "Turns hides to leather with oak bark. The stink of it keeps it downstream. Without it there are no shoes, no harness, no straps.",
-    "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream — but shoes, harness, and straps all depend on it.",
+    "Hides become leather here, cured with oak bark. It reeks, and so it sits downstream, but shoes, harness, and straps all depend on it.",
   ],
   "village|Crafts|Thatcher": [
     "Lays roofs and mends them.",
@@ -1104,14 +1104,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Crafts|Village scribe": [
     "One of the few here who can read and write. He copies letters, sets down plain contracts, and reads out documents for those who cannot. Usually the priest's helper or a layman schooled at a monastery.",
-    "Literate where most are not — copying correspondence, drawing up simple contracts, and reading papers aloud for the unlettered. As often as not the priest's assistant or a monastery-taught layman.",
+    "Literate where most are not: copying correspondence, drawing up simple contracts, and reading papers aloud for the unlettered. As often as not the priest's assistant or a monastery-taught layman.",
   ],
   "village|Crafts|Wildfowler": [
     "Takes waterfowl and game birds with nets, traps, and trained hunting birds, bringing ducks, geese, and pigeons to market.",
-    "Catches wildfowl — using snares, nets, and trained birds — to stock the market with duck, goose, and pigeon.",
+    "Catches wildfowl (using snares, nets, and trained birds) to stock the market with duck, goose, and pigeon.",
   ],
   "village|Crafts|Woodcarver": [
-    "Works wood into the useful and the ornamental alike — tool handles, holy figures, inlay for furniture — and makes the sacred images and reliquaries the church requires.",
+    "Works wood into the useful and the ornamental alike (tool handles, holy figures, inlay for furniture) and makes the sacred images and reliquaries the church requires.",
     "Carves both plain and decorative pieces from wood: handles for tools, religious figures, furniture inlay. For the church he shapes sacred images and reliquaries.",
   ],
   "village|Criminal|Fence (word of mouth)": [
@@ -1143,7 +1143,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "A household trade. Women brew the ale and sell it.",
   ],
   "village|Economy|Caravanserai": [
-    "A large walled compound built for desert traders — camel stabling, storage under lock, a well, and beds for fifty. Where caravans come, it is the desert settlement's economic heart.",
+    "A large walled compound built for desert traders: camel stabling, storage under lock, a well, and beds for fifty. Where caravans come, it is the desert settlement's economic heart.",
     "A stout walled enclosure for the desert merchant, with stabling for camels, locked stores, a well, and sleeping room for fifty. Any desert settlement on a caravan route turns about it.",
   ],
   "village|Economy|Farmland": [
@@ -1152,11 +1152,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Economy|Fish market": [
     "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.",
-    "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast — fish will not wait.",
+    "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
   ],
   "village|Economy|River boatyard": [
-    "Builds and mends flat-bottomed river craft — barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.",
-    "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand — shallow in the draft, supple in the hull, and built so parts can be swapped out.",
+    "Builds and mends flat-bottomed river craft: barges, punts, ferries, fishing boats. The work turns on river-boat knowledge: shallow draft, a hull that flexes, parts made to be replaced.",
+    "River boats, all flat-bottomed, made and repaired here: barges, punts, ferries, and fishing craft. It takes a specialist's hand. Shallow in the draft, supple in the hull, and built so parts can be swapped out.",
   ],
   "village|Economy|River ferry": [
     "A flat-bottomed ferry over the river, the crossing rights held in one family for generations. Anyone unwilling to walk the distance to the nearest bridge depends on it.",
@@ -1168,7 +1168,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Economy|Travelers' inn": [
     "The village's one inn for the traders, pilgrims, and wayfarers who pass. Beds, a stable, and a shared table.",
-    "A lone inn catering to whoever the road brings — merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.",
+    "A lone inn catering to whoever the road brings: merchants, pilgrims, travellers. It offers a room, stabling, and the common meal.",
   ],
   "village|Economy|Waystation": [
     "A fortified halt for the night, with stabling, a well, and plain provisions. It serves merchant caravans and travellers going far. Unlike the inn, it is made for beasts and loaded wagons, not for comfort.",
@@ -1184,11 +1184,11 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   ],
   "village|Government|Village elder": [
     "In the want of any formal power, the oldest or most respected villager steers the decisions. Less official than a reeve, but better than no one at all.",
-    "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides — short of a reeve in standing, yet steadier than a vacancy.",
+    "Where no formal authority exists, the eldest or best-regarded resident guides what the village decides. Short of a reeve in standing, yet steadier than a vacancy.",
   ],
   "village|Government|Village reeve": [
     "Chosen from among the peasants, he arranges the work owed, settles quarrels, and stands for the village before any outside power.",
-    "A peasant elected by his own — he parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
+    "A peasant elected by his own. He parcels out the labour dues, mediates disputes, and speaks for the village to those above it.",
   ],
   "village|Infrastructure|Dwellings (80-180)": [
     "Built of timber on stone footings.",
@@ -1203,8 +1203,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Chartered under licence, the hall sets bounties, organises monster-hunts, and answers armed emergencies for the territory about it. Found more often in frontier country.",
   ],
   "village|Magic|Druid Circle": [
-    "A circle of druids bound to the land. They keep the seasons in order, treat with wild things when they trouble men, and know which streams run clean. Most at home in forest or in isolation, they still adapt — some tend gardens in the city, or groves hidden within it.",
-    "Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance — a few keep city gardens or concealed urban groves.",
+    "A circle of druids bound to the land. They keep the seasons in order, treat with wild things when they trouble men, and know which streams run clean. Most at home in forest or in isolation, they still adapt. Some tend gardens in the city, or groves hidden within it.",
+    "Druids gathered in a circle and rooted to the country around them, ordering the seasons, mediating quarrels with wild creatures, and knowing the clean streams from the foul. Forested and remote places suit them best, yet they bend to circumstance. A few keep city gardens or concealed urban groves.",
   ],
   "village|Magic|Healer (divine, 1st level)": [
     "Simple healing prayers. Cure Wounds runs 10 GP.",
@@ -1227,7 +1227,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Says the sacraments, takes the tithe. Usually the one literate soul in the village.",
   ],
   "village|Religious|Village musician": [
-    "A singer, fiddler, or piper who lives here, playing the festivals and the weddings — and, in his songs, keeping the local history alive.",
+    "A singer, fiddler, or piper who lives here, playing the festivals and the weddings, and in his songs keeping the local history alive.",
     "The village's own singer, fiddler, or piper, heard at every festival and wedding. Through his songs the settlement's history is remembered.",
   ],
 });

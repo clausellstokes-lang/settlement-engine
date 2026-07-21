@@ -58,7 +58,8 @@ describe('AdvanceReport — populated report', () => {
   test('the year advance opens at the full pyramid (headline visible)', () => {
     render(<AdvanceReport campaign={campaign} />);
     // The scrubber header shows the span-scaled headline ("The year: ...").
-    expect(screen.getByText(/the year to tick 52/i)).toBeTruthy();
+    // Tick 52 renders as its calendar phrase (fix wave 3: no bare engine tick).
+    expect(screen.getByText(/the year to the spring of year 2/i)).toBeTruthy();
   });
 });
 

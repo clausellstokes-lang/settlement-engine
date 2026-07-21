@@ -27,7 +27,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.027,
     requiresTier: null,
     crisisHook:
-      "A grain merchant has food — enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
+      "A grain merchant has food, enough to matter. They will sell it, but their price is not money. The players can intervene in how this plays out.",
     viabilityNote: "Short-term economic viability is critically compromised. Normal income projections do not apply.",
     historyColour: "economic",
   },
@@ -38,7 +38,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.021,
     requiresTier: null,
     crisisHook:
-      "A resistance cell needs outside help — people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
+      "A resistance cell needs outside help: people who aren't known faces. The occupation's local collaborators include someone the players will recognise.",
     viabilityNote: "Revenue flows to the occupying authority. Local institutions continue under oversight.",
     historyColour: "political",
   },
@@ -49,7 +49,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.034,
     requiresTier: null,
     crisisHook:
-      "Something important — a resource, a prisoner, a decision — falls into the contested space between factions. The players can't avoid taking a side.",
+      "Something important (a resource, a prisoner, a decision) falls into the contested space between factions. The players can't avoid taking a side.",
     viabilityNote:
       "Decision-making is paralysed. Infrastructure maintenance is being neglected. Crisis is deferred, not resolved.",
     historyColour: "political",
@@ -61,7 +61,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.036,
     requiresTier: null,
     crisisHook:
-      "The creditor has sent a representative to collect — not money, but something specific. Locals are divided between compliance and resistance, and neither option is clean.",
+      "The creditor has sent a representative to collect (not money, but something specific). Locals are divided between compliance and resistance, and neither option is clean.",
     viabilityNote:
       "A significant portion of revenue is being extracted by the creditor. Capital investment has stopped.",
     historyColour: "economic",
@@ -73,7 +73,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.027,
     requiresTier: null,
     crisisHook:
-      "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them — or they are the only people who don't have a motive.",
+      "The betrayal had consequences that are still unfolding. The betrayer may still be here. The players know something that could help identify them, or they are the only people who don't have a motive.",
     viabilityNote: "Trust in institutions is low. Some key systems are not operating at full capacity as a result.",
     historyColour: "political",
   },
@@ -84,8 +84,8 @@ export const STRESS_TYPE_MAP = {
     probability: 0.023,
     requiresTier: null,
     crisisHook:
-      "Something is slightly wrong — a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
-    viabilityNote: "No economic impact yet. The infiltration is strategic, not extractive — so far.",
+      "Something is slightly wrong: a decision that doesn't make sense, a face seen in too many places, a piece of information that reached the wrong hands. The players can notice if they pay attention.",
+    viabilityNote: "No economic impact yet. The infiltration is strategic, not extractive (so far).",
     historyColour: "political",
   },
   plague_onset: {
@@ -117,7 +117,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.03,
     requiresTier: null,
     crisisHook:
-      "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this — whether a rival lord, a beast of unusual cunning, or something stranger. The evidence is there for anyone who looks carefully.",
+      "The attacks are following a pattern that suggests coordination, not desperation. Someone is directing this (whether a rival lord, a beast of unusual cunning, or something stranger). The evidence is there for anyone who looks carefully.",
     viabilityNote:
       "Trade disruption is reducing income. Defensive expenditure is increasing. Population anxiety is rising.",
     historyColour: "military",
@@ -141,7 +141,7 @@ export const STRESS_TYPE_MAP = {
     probability: 0.023,
     requiresTier: null,
     crisisHook:
-      "The contested religious authority has left a gap in the institutions that depended on it — records, oaths, property, sanctuary. Someone is about to exploit that gap.",
+      "The contested religious authority has left a gap in the institutions that depended on it: records, oaths, property, sanctuary. Someone is about to exploit that gap.",
     viabilityNote:
       "Tithing income splits or redirects. Religious market days and fairs are contested or duplicated. Properties of the old institution are in legal ambiguity. Cross-faith trade is complicated.",
     historyColour: "religious",

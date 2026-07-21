@@ -33,7 +33,10 @@ const REPO = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..'
 const rel = (p) => path.join(REPO, p);
 
 // The completeness-claim vocabulary (spec: A_PLUS_ROADMAP enforcement.1).
-const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|zero violations/;
+// "fails the build" joined in fix wave 3: VOICE_AND_TONE.md §7 claimed a
+// voiceMechanics guard "fails the build" for months before the guard existed —
+// the phantom-claim shape this pin exists to kill.
+const CLAIM_RE = /promoted (?:from warn )?to (?:ERROR|error)|burned (?:down )?to zero|0 problems|machine-enforced|the gate now (?:covers|type-checks)|fails the gate|fails the build|zero violations/;
 
 // Standing-claim corpus. Meta-docs that merely QUOTE the vocabulary
 // (CONTRIBUTING.md, docs/A_PLUS_ROADMAP.md) are deliberately absent.
@@ -41,6 +44,7 @@ const DOC_FILES = [
   'ARCHITECTURE.md',
   'docs/critique-implementation-status.md',
   'docs/COHESION_REMEDIATION_PLAN.md',
+  'docs/VOICE_AND_TONE.md',
   'eslint.config.js',
 ];
 

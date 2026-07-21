@@ -144,6 +144,7 @@ function slugify(s) {
 // mutateEntities.js / mutateWorld.js is enumerated by the predicate-parity
 // walker (tests/domain/events/predicateParity.walker.test.js): a code without a
 // matching affordance-manifest predicate fails the build.
+// @enforced-by tests/domain/events/predicateParity.walker.test.js
 
 /**
  * @typedef {Object} MutationVeto

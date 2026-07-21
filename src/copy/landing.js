@@ -135,8 +135,8 @@ export const landing = {
   map: {
     waypoint: '05 · The map',
     h2:    'The same town, drawn. Every street has a reason.',
-    body:  'The v2 map engine lays out districts, walls, and lanes from the same constraints that wrote the dossier — nothing is decorated into place. Flip the lens: one town, one memory, any style.',
-    provenance: 'This is {name} from the brief above — same seed, same town, drawn.',
+    body:  'The v2 map engine lays out districts, walls, and lanes from the same constraints that wrote the dossier. Nothing is decorated into place. Flip the lens: one town, one memory, any style.',
+    provenance: 'This is {name} from the brief above: same seed, same town, drawn.',
     tease: 'Hover a district in the app and the map answers why it is there. The map remembers what the town remembers.',
     lensLabel: 'Lens',
     lenses: [
@@ -186,10 +186,10 @@ export const landing = {
     // renders as the WALLED violet AI-channel early-access band (ruling #3),
     // not a subscription tier — it is the optional AI workshop, priced per task.
     tiers: [
-      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up — priorities rolled, the town derived from them. Up to {anonSize} size, nothing kept.' },
+      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up. Priorities rolled, the town derived from them. Up to {anonSize} size, nothing kept.' },
       { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
-      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve — it never writes canon. Bring your own key.', aiWall: true },
+      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve. It never writes canon. Bring your own key.', aiWall: true },
       { name: 'Founder',      badge: 'Premium · Lifetime', body: 'Everything Cartographer runs, forever. One payment, no clock.', seatLive: true },
     ],
     fullPricing: 'Full pricing',

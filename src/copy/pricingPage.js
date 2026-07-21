@@ -29,20 +29,20 @@ export const pricingPage = {
     heading: 'Subscriptions',
     // Cartographer as SERVICE, not unlock (the Forge frame): the fee maps to a
     // running service in one sentence.
-    serviceLine: 'Cartographer is a service, not a feature key: your realm keeps living — wars resolve, prices move, chronicles write — and every month of simulation is a month of our servers doing it.',
+    serviceLine: 'Cartographer is a service, not a feature key: your realm keeps living (wars resolve, prices move, chronicles write) and every month of simulation is a month of our servers doing it.',
     surveyor: {
       name: 'Surveyor',
       badge: 'AI · early access',
       lead: 'The optional AI workshop, priced per task.',
-      body: 'An analyst for your world, prose briefs, session interpretation, and construction from intent. Every task has a flat price below — no subscription required. It proposes; only the engine writes canon.',
-      byok: 'Bring your own key: connect your own Anthropic or OpenAI key and pay your provider directly for inference — tasks then run without touching your credit balance.',
+      body: 'An analyst for your world, prose briefs, session interpretation, and construction from intent. Every task has a flat price below. No subscription required. It proposes; only the engine writes canon.',
+      byok: 'Bring your own key: connect your own Anthropic or OpenAI key and pay your provider directly for inference. Tasks then run without touching your credit balance.',
       menuLink: 'See the task menu',
     },
     charter: {
       // The Founder band renders as a charter object, not a fourth card.
       name: 'The Founder Charter',
       lead: 'Everything Cartographer runs, forever. One payment, no clock.',
-      arithmetic: '{price} is about {months} months of Cartographer — everything after that is the charter working for you.',
+      arithmetic: '{price} is about {months} months of Cartographer. Everything after that is the charter working for you.',
       sustainability: '{seats} seats because lifetime revenue should fund the roadmap, not replace it.',
       capNote: 'When the {seats} seats are gone, the charter closes.',
       seatsRemaining: '{remaining} of {seats} seats remaining.',
@@ -54,13 +54,13 @@ export const pricingPage = {
 
   // ── Band 3 — the one-time lane ────────────────────────────────────────────
   band3: {
-    heading: 'One-time purchases — no subscription required',
+    heading: 'One-time purchases, no subscription required',
     // The $2.99 bundle LEADS the lane (the mourned a-la-carte pattern).
     bundle: {
       name: 'The settlement bundle',
       lead: '{price} buys one settlement’s complete export bundle. Pay for the thing, own the thing.',
       body: 'The artifact is yours: it downloads, it prints, and it survives cancellation. No account required.',
-      where: 'The buy lives on the settlement itself — forge a town, and the bundle is one click on its dossier.',
+      where: 'The buy lives on the settlement itself. Forge a town, and the bundle is one click on its dossier.',
       cta: 'Forge a settlement',
     },
     packs: {
@@ -69,7 +69,7 @@ export const pricingPage = {
     },
     taskMenu: {
       heading: 'The task menu',
-      intro: 'Every AI task has a flat price. The engine may take one pass or ten underneath — the price is the price.',
+      intro: 'Every AI task has a flat price. The engine may take one pass or ten underneath. The price is the price.',
       perTask: '{credits} credits · {approx}',
       // Task display names, keyed by the config's task keys (SURVEYOR_AI_COSTS
       // + the narrative schedule). Names only — costs interpolate from config.
@@ -92,7 +92,7 @@ export const pricingPage = {
       // VERIFIED at the edges (creditFlow.ts runCreditedCall; generate-narrative
       // refundPolicy.ts): a failed task refunds automatically. Partial-success
       // nuance carried in the FAQ, not silently dropped.
-      failurePolicy: 'You are never charged for a failed task — a run that produces nothing refunds its credits automatically.',
+      failurePolicy: 'You are never charged for a failed task. A run that produces nothing refunds its credits automatically.',
       workedHeading: 'What a month actually costs',
       worked: [
         { persona: 'A weekly-table DM', formula: 'interpret ×4 + brief ×2', tasks: [['interpret', 4], ['brief', 2]] },
@@ -135,7 +135,7 @@ export const pricingPage = {
       'surveyor-stages':  'The Surveyor AI stages',
     },
     included: 'Included',
-    notIncluded: '—',
+    notIncluded: 'Not included',
   },
 
   // ── Band 5 — the objection-first FAQ ─────────────────────────────────────
@@ -146,7 +146,7 @@ export const pricingPage = {
         q: 'What happens to my worlds if I cancel?',
         // The honest data-longevity answer (migration 023's actual semantics):
         // over-cap saves get a retention window, not silent survival.
-        a: 'Exports you bought are yours — downloaded artifacts survive anything we do. Your Library keeps the free tier’s {freeSaves} saves active; settlements beyond that stay retrievable for {retentionMonths} months after downgrade (export them or re-subscribe), then they are removed. Canceling stops the living simulation service, never your ownership of what you exported.',
+        a: 'Exports you bought are yours. Downloaded artifacts survive anything we do. Your Library keeps the free tier’s {freeSaves} saves active; settlements beyond that stay retrievable for {retentionMonths} months after downgrade (export them or re-subscribe), then they are removed. Canceling stops the living simulation service, never your ownership of what you exported.',
       },
       {
         q: 'Do credits expire?',
