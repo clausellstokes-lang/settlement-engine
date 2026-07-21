@@ -203,7 +203,7 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, visibility, unlisted_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
@@ -230,6 +230,13 @@ async function supabaseList() {
     gallery_member_overrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object') ? row.gallery_member_overrides : null,
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
+    // V-20 unlisted (party-link) state — read back so a reload re-seeds
+    // ShareToGallery's unlisted mode. Dropping these silently reset the owner to
+    // the non-unlisted UI, whose "Unlisted link" button re-mints a FRESH slug
+    // (share_settlement_unlisted always rotates), killing the party link already
+    // handed out. Now the reloaded entry shows the copy/rotate/stop bar instead.
+    visibility: row.visibility || 'public',
+    unlisted_slug: row.unlisted_slug || null,
     gallery_description: row.gallery_description || '',
     gallery_title: row.gallery_title || '',
     gallery_image_url: row.gallery_image_url || '',

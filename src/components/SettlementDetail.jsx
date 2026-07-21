@@ -580,8 +580,8 @@ export default function SettlementDetail({
           </div>
           <ShareToGallery
             saveId={saveId}
-            isPublic={liveSaveEntry?.is_public}
-            publicSlug={liveSaveEntry?.public_slug}
+            isPublic={liveSaveEntry?.is_public} publicSlug={liveSaveEntry?.public_slug}
+            visibility={liveSaveEntry?.visibility} unlistedSlug={liveSaveEntry?.unlisted_slug}
             settlement={detail.settlement}
             galleryDescription={liveSaveEntry?.gallery_description}
             galleryTitle={liveSaveEntry?.gallery_title}

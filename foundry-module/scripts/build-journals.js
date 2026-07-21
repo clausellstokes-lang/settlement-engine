@@ -26,13 +26,19 @@ export const MODULE_ID = 'settlementforge-world-importer';
  * @returns {string}
  */
 export function esc(value) {
+  // Order matters: backslash-escape the markdown metacharacters FIRST, then
+  // HTML-entity-encode. If the HTML pass ran first it would turn `'`→`&#39;`,
+  // whose `#` the markdown pass would then re-escape to `&\#39;` — a double-
+  // encode that mangles the stored JSON (e.g. O'Brien → O&\#39;Brien). With the
+  // markdown pass first, every entity we emit (&#39; &amp; &lt; …) is produced
+  // AFTER it, so the `#`/`&` inside those entities is left intact.
   return String(value == null ? '' : value)
+    .replace(/([\\`*_[\]()#+~|])/g, '\\$1')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/([\\`*_[\]()#+~|])/g, '\\$1');
+    .replace(/'/g, '&#39;');
 }
 
 /** @param {any} data @returns {string} */

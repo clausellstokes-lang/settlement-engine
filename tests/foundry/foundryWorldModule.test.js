@@ -90,6 +90,16 @@ describe('foundry-module — safety', () => {
     expect(esc('a *bold* [link] `tick`')).toBe('a \\*bold\\* \\[link\\] \\`tick\\`');
   });
 
+  it('esc does not double-encode an apostrophe (the &#39; # is not re-escaped)', () => {
+    // Regression pin: markdown-escape runs BEFORE HTML-entity encoding, so the
+    // `#` inside &#39; is left intact instead of becoming &\#39; (a double-encode
+    // that mangled the stored journals.json). A literal `#` is STILL escaped once
+    // (the heading-injection guard survives the reorder).
+    expect(esc("O'Brien")).toBe('O&#39;Brien');
+    expect(esc('# not a heading')).toBe('\\# not a heading');
+    expect(esc('Tom & Jerry')).toBe('Tom &amp; Jerry');
+  });
+
   it('a hostile settlement name cannot inject markup into a journal page', () => {
     const hostile = world();
     hostile.settlements[0].settlement.name = 'Ember<img src=x onerror=alert(1)>hold';

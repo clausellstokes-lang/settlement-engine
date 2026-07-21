@@ -116,6 +116,71 @@ describe('ShareToGallery — reload round-trip preserves the gallery opt-ins', (
   });
 });
 
+describe('ShareToGallery — reload preserves UNLISTED (party-link) state', () => {
+  test('a reloaded unlisted save shows the rotate/stop bar, NOT the re-mint button', async () => {
+    // The bug: saves.list() dropped visibility + unlisted_slug, so a reload
+    // re-seeded ShareToGallery in the NON-unlisted UI whose "Unlisted link"
+    // button calls share_settlement_unlisted — which ALWAYS mints a fresh slug
+    // (migration 168), killing the party link already shared. This pins that the
+    // reloaded entry carries the unlisted columns AND that the component seeds
+    // the copy/rotate/stop bar instead of the re-mint affordance.
+    vi.resetModules();
+    vi.doMock('../../src/lib/supabase.js', () => {
+      const chain = {
+        select: () => chain,
+        order: () => Promise.resolve({
+          data: [{
+            id: 'sb-u', name: 'Hollowmere', tier: 'village',
+            data: { name: 'Hollowmere', tier: 'village', npcs: [] },
+            config: { settType: 'village' },
+            access_state: 'active',
+            is_public: false, public_slug: null,
+            visibility: 'unlisted', unlisted_slug: 'party-abc',
+            campaign_state: { phase: 'canon', eventLog: [], locks: {} },
+            updated_at: new Date().toISOString(),
+          }],
+          error: null,
+        }),
+      };
+      return { supabase: { from: () => chain }, isConfigured: true };
+    });
+    const { saves } = await import('../../src/lib/saves.js');
+    const [entry] = await saves.list();
+    // The ghost-column fix: the reload envelope carries the unlisted columns.
+    expect(entry.visibility).toBe('unlisted');
+    expect(entry.unlisted_slug).toBe('party-abc');
+
+    const { default: ShareToGallery } = await import('../../src/components/ShareToGallery.jsx');
+    storeRef.current = {
+      auth: { user: { id: 'u1' } },
+      updateSavedSettlement: vi.fn(),
+      savedSettlements: [entry],
+      campaigns: [],
+    };
+
+    // Wired exactly as DossierActionBand / SettlementDetail wire the live entry.
+    render(
+      <ShareToGallery
+        saveId={entry.id}
+        isPublic={entry.is_public}
+        publicSlug={entry.public_slug}
+        visibility={entry.visibility}
+        unlistedSlug={entry.unlisted_slug}
+        campaignState={entry.campaignState}
+        settlement={entry.settlement}
+        galleryImportable={entry.gallery_importable}
+        galleryMemberOverrides={entry.gallery_member_overrides}
+      />
+    );
+
+    // The active party-link bar is shown …
+    expect(screen.getByRole('button', { name: /rotate link/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /stop sharing/i })).toBeTruthy();
+    // … and the re-mint affordance (which would rotate the slug) is absent.
+    expect(screen.queryByRole('button', { name: /^unlisted link$/i })).toBeNull();
+  });
+});
+
 // ── Mount-wiring pin ─────────────────────────────────────────────────────────
 describe('ShareToGallery — every mount wires the opt-in props', () => {
   function jsxFilesUnder(dir) {
@@ -136,6 +201,12 @@ describe('ShareToGallery — every mount wires the opt-in props', () => {
       const content = readFileSync(file, 'utf-8');
       for (const prop of ['galleryImportable=', 'galleryMemberOverrides=']) {
         expect(content.includes(prop), `${file} mounts ShareToGallery without wiring ${prop} — an unwired mount seeds false/{} and silently wipes the owner's opt-ins on save`).toBe(true);
+      }
+      // V-20 unlisted round-trip: an unwired mount re-seeds the NON-unlisted UI
+      // after reload, whose "Unlisted link" button re-mints (rotates) the slug
+      // and kills the party link already shared.
+      for (const prop of ['visibility=', 'unlistedSlug=']) {
+        expect(content.includes(prop), `${file} mounts ShareToGallery without wiring ${prop} — an unwired mount loses the unlisted party-link state on reload and offers a re-mint that rotates (kills) the shared link`).toBe(true);
       }
     }
   });

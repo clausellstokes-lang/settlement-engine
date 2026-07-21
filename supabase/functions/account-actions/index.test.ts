@@ -272,6 +272,25 @@ Deno.test('a legacy customer-only row WITH an open subscription at Stripe is lis
   assertEquals(linkageCleared(admin.updates, 'u1'), true);
 });
 
+Deno.test('a DUAL-PLAN user (recorded sub + a SECOND open sub at Stripe) has BOTH canceled — the Surveyor sub is never orphaned', async () => {
+  // Regression pin (SB3): a recorded id no longer short-circuits the customer
+  // enumeration. sub_cartographer is in profiles.stripe_subscription_id; a
+  // Surveyor sub id lives only in surveyor_entitlements but is open under the
+  // SAME customer. Canceling only the recorded id left Surveyor billing forever
+  // (clearLinkage nulls the customer id, so it could never be found again).
+  const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
+  const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_cartographer', stripe_customer_id: 'cus_dual' }]);
+  const stripe = makeStripe('ok', ['sub_cartographer', 'sub_surveyor']);   // Stripe lists BOTH open subs
+  const res = await handleAccountActions(processReq(), {
+    userClient: user.userClient, adminClient: admin.adminClient, stripeClient: stripe.stripeClient,
+  });
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).subscriptionsCanceled, 2);                 // BOTH plans stopped
+  assertEquals(stripe.canceled.sort(), ['sub_cartographer', 'sub_surveyor']); // deduped, both canceled
+  assertEquals(stripe.listedFor, ['cus_dual']);                             // enumerated EVEN WITH a recorded id
+  assertEquals(linkageCleared(admin.updates, 'u1'), true);
+});
+
 Deno.test('a subscription already gone at Stripe (resource_missing) does not abort the deletion — idempotent, ids cleared', async () => {
   const user = makeUserClient({ id: 'admin1', email: 'a@x.com' });
   const admin = makeDeletionAdmin([{ id: 'u1', stripe_subscription_id: 'sub_gone', stripe_customer_id: 'cus_1' }]);

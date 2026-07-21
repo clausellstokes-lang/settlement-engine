@@ -31,9 +31,14 @@
  * value), so a fixed input yields byte-identical output — the exporter-determinism
  * pin. Never mutates its input.
  *
- * LAZY: reached ONLY behind a dynamic import from the export surface (and by the
- * offline packages, which read the emitted JSON file, never this module) — its
- * static imports of the redactors cost zero first-paint bytes.
+ * LAZY: designed to be reached ONLY behind a dynamic import, so its static
+ * imports of the redactors cost zero first-paint bytes. NOTE (SB3 accuracy):
+ * the in-app export CONTROL that would dynamic-import this producer is a
+ * deliberate deferred follow-on — it is NOT wired yet. Today buildWorldExport
+ * is exercised only by its tests and consumed indirectly by the offline
+ * packages (foundry-module/ + mcp-server/), which read a pre-emitted world-
+ * export JSON file rather than importing this module. Wiring the export surface
+ * is an owner-scoped feature, recorded here, not dead code to re-find.
  *
  * @enforced-by tests/lib/worldExport.test.js
  */

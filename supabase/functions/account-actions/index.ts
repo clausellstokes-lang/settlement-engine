@@ -581,23 +581,33 @@ export async function handleAccountActions(
             continue;
           }
 
-          // Which subscriptions to cancel: the recorded one, else whatever
-          // Stripe still has open for the customer (list omits canceled subs).
+          // Which subscriptions to cancel: EVERY subscription Stripe still has
+          // open for the customer, UNIONED with the recorded id (list omits
+          // canceled subs). Do NOT stop at the recorded id alone: a dual-plan
+          // user holds the Cartographer sub in profiles.stripe_subscription_id
+          // AND a Surveyor sub tracked only in surveyor_entitlements — same
+          // customer, a different sub id. Canceling only the recorded one left
+          // the Surveyor sub charging every cycle forever, because clearLinkage
+          // nulls the customer id right after so it could never be found again.
+          // The recorded id is added unconditionally, so a legacy row whose list
+          // call fails still cancels the one sub we know about.
           let clearLinkage = true;
-          let subIds: string[] = [];
-          if (subId) {
-            subIds = [subId];
-          } else if (customerId) {
+          const subIdSet = new Set<string>();
+          if (subId) subIdSet.add(subId);
+          if (customerId) {
             try {
               const listed = await stripeApi.subscriptions.list({ customer: customerId, limit: 100 });
-              subIds = (listed?.data || []).map((s) => s.id);
+              for (const s of listed?.data || []) if (s?.id) subIdSet.add(s.id);
             } catch (e) {
-              // Can't PROVE the customer has no live subscription — retain the
-              // linkage so the next run re-checks rather than orphaning a sub.
+              // Can't PROVE we enumerated every live subscription for this
+              // customer — retain the linkage so the next run re-checks rather
+              // than orphaning an unlisted sub. Any recorded id already in the
+              // set is still canceled below.
               logError("account-actions", uid, `stripe list on deletion failed: ${errorMessage(e)}`);
               clearLinkage = false;
             }
           }
+          const subIds: string[] = [...subIdSet];
 
           for (const id of subIds) {
             try {
