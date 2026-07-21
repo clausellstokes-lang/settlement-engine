@@ -1255,6 +1255,29 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐ CYCLE 2 MUST-FIX TIER COMPLETE — FIX WAVE 4 @ composite-r4 84a34cfa
+(2026-07-20, checker-verified).** WAVE 4 (a11y/UX/SEO, Fable): idx7 hover fixed
+at the Button/IconButton PRIMITIVES (--sf-btn-bg/hover-bg live; a11y.css hover
+rule; complete state set) + state-set completeness enforcer · idx37 keyboard
+trap KILLED (deleted the blanket CommandPalette stopPropagation; Esc/Tab/cmd-K
+reach handlers; 3 pins RED pre-fix → GREEN, dispatched from INSIDE the dialog
+where the legacy window-pin was blind) · idx28 placement copy de-dead-ended +
+QuickInspector affordance (keyboard placement commit = scoped follow-on — WorldMap
+at sizeBaseline ceiling) · idx36 canonical stamped in lockstep with og:url at the
+injectGalleryMeta chokepoint (self-canonical all route kinds). Gate: build 0 ·
+closure 1,038,150 (Δ +66, the primitives' custom props) · strict 0 · tsc 0 ·
+lint 0 · ratchets 132/132 · dist 197/197 · NUL clean. ⭐ WITH THIS THE MUST-FIX
+TIER IS CLOSED: all 28 confirmed/partial addressed (waves 1-5 + FMG-remainder +
+instruments + wave 4); remaining must-fix items are OWNER-GATED (idx21/idx19
+tuning → ONE REGEN; idx4 COGS built-to-edge; CSP enforce-flip) or folded into the
+should-fix drive (the FMG-sink-sweep is SS1). NOW RUNNING — THE SHOULD-FIX +
+POLISH DRIVE (owner: "i want ALL the fixes done", 239 findings → 0): BATCH A of
+cluster refute-and-fix waves — SS1 FMG fork polish + sink-sweep (47, Opus,
+claude/ss1-fmg-polish) · SS2 engine-kernel polish (33, Opus, claude/ss2-engine-
+polish, golden discipline) · SS4 enforcement+correctness+claims (20, Fable,
+claude/ss4-enforce) — all off e457d923, disjoint. BATCH B/C (139, store/display/
+gallery/seo/a11y + voice/product-wide bars) queued. Then convergence → confirming
+cycle → close-out.**
 **⬛⭐⭐ CYCLE 2 FIX WAVES 3+5+FMG+INSTRUMENTS FOLDED @ composite-r4 e457d923
 (2026-07-20, checker-verified).** WAVE 3 (voice/immersion, f5132f20, ran on
 Fable): the two durable ENFORCERS built — E1 proseLeak (renders 4 composers,
