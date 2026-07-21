@@ -513,8 +513,14 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   const effDiscount = 1 - (1 - clamp(finiteNumber(commitmentDiscount01, 1), 0, 1)) * contradiction01;
   const blendW = weight * effDiscount;
   const denom = priorConf + blendW;
-  const blendedStrength = (priorConf * priorStrengthBand + blendW * obsStrengthBand) / denom;
-  const blendedReadiness = (priorConf * priorReadiness + blendW * obsReadiness) / denom;
+  // DEGENERATE ZERO-WEIGHT GUARD: a NEW belief (priorConf 0) whose fresh reports aggregate to
+  // weight 0 (a completeness-0 report reaching this exported fn directly — generosityKernel and
+  // other callers can, unlike rumorNetwork which floors completeness) makes denom 0, so the
+  // weighted blend is 0/0 = NaN and would poison the byte-pinned belief ledger. Fall back to the
+  // (well-defined) observation values. NORMAL inputs have denom > 0 ⇒ this branch is never taken
+  // ⇒ byte-identical same-seed output.
+  const blendedStrength = denom > 0 ? (priorConf * priorStrengthBand + blendW * obsStrengthBand) / denom : obsStrengthBand;
+  const blendedReadiness = denom > 0 ? (priorConf * priorReadiness + blendW * obsReadiness) / denom : obsReadiness;
   // Categorical attributes: ADOPT the current truth when the aggregate telling is
   // faithful enough; else the stale label survives.
   const adopt = accuracy >= T.CAT_ADOPT_ACCURACY;

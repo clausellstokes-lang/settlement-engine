@@ -319,10 +319,22 @@ function advanceLitCommonsVoice({ snapshot, worldState, settlementUpdates, tick,
   /** @type {Record<string, Record<string, unknown>>} */
   const sortedLedger = {};
   for (const k of ledgerKeys) sortedLedger[k] = nextLedger[k];
-  const nextWorldState = ledgerKeys.length
-    ? setSpatialLedger(worldState, 'commonsVoice', sortedLedger)
-    : dropSpatialLedger(worldState, 'commonsVoice');
-
-  const changed = newsEntries.length > 0 || nextUpdates !== settlementUpdates || ledgerKeys.length > 0 || Object.keys(priorLedger).length > 0;
+  // NO-OP GUARD (the npcLadder serialize-compare idiom): a settlement parked at a stable rung
+  // (a standing grievance that re-evaluates identically) yields a byte-IDENTICAL ledger every
+  // tick. Only rewrite worldState (a fresh reference) — and only report `changed` — when the
+  // serialized ledger actually differs from the prior. Without this a quiet-but-aggrieved layer
+  // churns worldState and forces a spurious pulse `changed` on every tick a grievance stands,
+  // defeating no-op detection (it never reaches a fixed point, unlike its drop-when-empty path).
+  const prevSerialized = JSON.stringify(Object.keys(priorLedger).length ? priorLedger : null);
+  const nextSerialized = JSON.stringify(ledgerKeys.length ? sortedLedger : null);
+  let nextWorldState = worldState;
+  let ledgerChanged = false;
+  if (prevSerialized !== nextSerialized) {
+    nextWorldState = ledgerKeys.length
+      ? setSpatialLedger(worldState, 'commonsVoice', sortedLedger)
+      : dropSpatialLedger(worldState, 'commonsVoice');
+    ledgerChanged = true;
+  }
+  const changed = newsEntries.length > 0 || nextUpdates !== settlementUpdates || ledgerChanged;
   return { changed, worldState: nextWorldState, settlementUpdates: nextUpdates, newsEntries };
 }

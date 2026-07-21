@@ -249,6 +249,10 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
     return worldState;
   }
   const merged = compactToHorizon(sortedLedger({ ...priorObj, ...fresh }));
+  // DEFENSIVE FLOOR — unreachable in practice: `fresh` is non-empty here (the early return
+  // above), so merged ⊇ fresh has ≥ 1 key and compactToHorizon only ever DROPS excess edges
+  // (floored at MAX_PROVENANCE_EDGES, never to 0). Kept as a defensive drop-when-empty, not a
+  // live self-drop path — recordProvenanceLedger never empties the ledger from a non-empty input.
   if (Object.keys(merged).length === 0) return dropSpatialLedger(worldState, 'provenance');
   return setSpatialLedger(worldState, 'provenance', merged);
 }

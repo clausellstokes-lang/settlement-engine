@@ -619,16 +619,31 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       factions[fkey] = rec;
     }
 
-    // Orphan standings (an NPC that held a rung last tick but is on none now): decay on
-    // the base clock; keep only while still meaningful, else prune (drop-when-empty).
+    // Orphan standings (an NPC that held a rung last tick but is on none now): decay on the base
+    // clock. DECAY THE MARKS TOO (stigma/grudges/bonds on their band clocks, via the ladder's own
+    // writer) — an orphan's marks must not freeze immortal — and DROP its goal: an off-ladder NPC
+    // holds no rung to pursue, so a lingering goal is neither advanceable NOR meaningful, and the
+    // mirror must stop reporting it as an active goal for an NPC on no rung. The record then
+    // survives ONLY for decaying stigma/grudge memory and finally PRUNES when that fades
+    // (drop-when-empty). Today any goal/stigma/grudge kept the record immortal (a churn/remove_npc
+    // leak) and mirrorOf emitted a stale active goal (which ladderGoalOf/roads then read).
     for (const nid of Object.keys(prior.npcs)) {
       if (activeNids.has(nid)) continue;
       const priorSt = prior.npcs[nid];
-      const decayed = decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week));
+      const decayed = round4(decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week)));
+      // Exposure-preserving stub (off-ladder ⇒ no fresh exposure; keep timesExposed/ousted so no
+      // false second-exposure fires should the NPC ever re-seat) — only the marks decay here.
+      const orphanSt = maintainMarks(
+        { ...priorSt, stock: decayed },
+        { timesExposed: num(priorSt.lastExposed, 0), ousted: priorSt.wasOusted === true },
+        bandMult, weeks, now2, null,
+      ).st;
+      // goal is written null (dropped): an off-ladder NPC holds no rung to pursue, so it must not
+      // be mirrored as an active goal, and dropping it lets the record prune once its marks fade.
       const meaningful = Math.abs(decayed - T.STAND_BASELINE) >= T.PRUNE_EPSILON
-        || priorSt.goal || priorSt.stigma || Object.keys(priorSt.grudges).length > 0;
+        || !!orphanSt.stigma || Object.keys(orphanSt.grudges).length > 0;
       if (!meaningful) continue;
-      npcs[nid] = { ...priorSt, stock: round4(decayed), week: weeks };
+      npcs[nid] = { ...orphanSt, goal: null, stock: decayed, week: weeks };
     }
 
     // ── D-4 THE SETTLEMENT-WIDE CONTEST PASS (§8) — runs AFTER the per-faction goal + challenge

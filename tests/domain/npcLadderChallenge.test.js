@@ -136,6 +136,42 @@ describe('resolution — conservation (§1), sustained margin (§11.2), the stak
   });
 });
 
+describe('SS2-F3/F22 — CONSERVATION is ADJACENT (no leapfrog) + every applied rise is COUNTED', () => {
+  // A 4-rung court where the FLOOR carries the strongest standing (perpetual upward pressure) and
+  // the faction is falling (a window always open) — the config that yields MULTIPLE adjacent
+  // challenges in one advance whose transpositions can share an index. Composing overlapping
+  // swaps on original indices produced >1-rung LEAPS (e.g. ABCD→ADBC, D up 2 rungs having beaten
+  // only the rung-2 holder), and the win's succession was swallowed by a coincident fail-drop on
+  // the same index pair (successions=0 ⇒ cooldown/realm-cap never spent). The pins fuzz over many
+  // seeds; the invariants must hold for EVERY deterministic draw.
+  const rungs4 = ['a:1', 'a:2', 'a:3', 'a:4'];
+  const churny = () => { const n = {}; rungs4.forEach((nid, i) => { n[nid] = st(2 + i * 2.5); }); return n; };
+
+  it('every rung moves AT MOST ONE position each advance (adjacency — never a >1-rung leap)', () => {
+    for (let tick = 0; tick < 4000; tick++) {
+      const plan = resolveFactionChallenges(baseArgs(rungs4, churny(), { tick, weeks: tick }));
+      for (let from = 0; from < rungs4.length; from++) {
+        const to = plan.nextRungs.indexOf(rungs4[from]);
+        expect(Math.abs(to - from), `rung ${rungs4[from]} leapt >1 (tick ${tick}: ${plan.nextRungs.join(',')})`).toBeLessThanOrEqual(1);
+      }
+    }
+  });
+
+  it('a fired RISE always spends a succession (never swallowed by a coincident fail-drop on the same pair)', () => {
+    let sawMultiChallenge = false;
+    for (let tick = 0; tick < 4000; tick++) {
+      const plan = resolveFactionChallenges(baseArgs(rungs4, churny(), { tick, weeks: tick, realmBudget: 3 }));
+      const rises = plan.events.filter((e) => e.kind === 'rise').length;
+      if (plan.events.length >= 2) sawMultiChallenge = true;
+      if (rises > 0) expect(plan.successions, `a rise fired but 0 successions (tick ${tick})`).toBeGreaterThanOrEqual(1);
+      expect(plan.successions, `successions exceed rises (tick ${tick})`).toBeLessThanOrEqual(rises);
+      // Whenever a succession is counted, a rise event MUST back it (no phantom cooldown/cap spend).
+      if (plan.successions > 0) expect(rises).toBeGreaterThanOrEqual(1);
+    }
+    expect(sawMultiChallenge, 'the config must exercise multi-challenge advances').toBe(true);
+  });
+});
+
 describe('the four brakes + the three-body ladder', () => {
   it('COOLDOWN (§11.2 brake 3): a faction inside its interregnum resolves NOTHING (any seed)', () => {
     const rungs = ['a:1', 'a:2'];

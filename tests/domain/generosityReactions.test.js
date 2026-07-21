@@ -56,6 +56,24 @@ describe('the obligation sub-ledger (§3.1) — fold, deepen, repay, prune', () 
     const repaid = foldObligations(minted, { repayments: [{ from: 'b', to: 'a', kind: 'grain_relief', amount: 1 }], now: 2 });
     expect(repaid).toBeNull(); // drained ⇒ the caller drops the sub-ledger ⇒ byte-identical-dormant
   });
+  it('SS2-F8: a same-tick FULL-REPAY of a matured credit + a fresh RE-LOAN to the same pair keeps the NEW loan', () => {
+    // The credit-maturity resolution pushes a repayment {amount:1} (full clear) while a same-tick
+    // GIVE_AS_CREDIT verdict mints a new loan to the SAME (debtor, creditor, 'credit') key. Mints
+    // ran BEFORE repayments, so the mint deepened the dead record and the {amount:1} zeroed the SUM
+    // → the fresh loan vanished (grain moved, debt gone, its future maturity/casus-belli lost).
+    // Repayments now consume FIRST + drop the drained record, so the re-loan lands as a NEW debt.
+    const key = obligationKey('b', 'a', 'credit');
+    const prior = { [key]: { from: 'b', to: 'a', kind: 'credit', magnitude: 1, mintTick: 0, lastTick: 0 } };
+    const next = foldObligations(prior, {
+      mints: [{ from: 'b', to: 'a', kind: 'credit', magnitude: 0.5, mintTick: 13, lastTick: 13 }],
+      repayments: [{ from: 'b', to: 'a', kind: 'credit', amount: 1 }],
+      now: 13,
+    });
+    expect(next).not.toBeNull();
+    expect(next && next[key]).toBeTruthy();               // the fresh loan SURVIVED (not erased)
+    expect(next && next[key].magnitude).toBeGreaterThan(0);
+    expect(next && next[key].mintTick).toBe(13);          // a NEW obligation — not the dead one's mintTick 0
+  });
   it('slow decay drains an untended obligation to null over time (the flood-year lingers, then fades)', () => {
     let led = foldObligations(null, { mints: [{ from: 'b', to: 'a', kind: 'grain_relief', magnitude: 0.2 }], now: 0 });
     let ticks = 0;

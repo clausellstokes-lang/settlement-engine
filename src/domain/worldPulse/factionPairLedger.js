@@ -132,8 +132,16 @@ export function decayFactionPairStates(worldState, weeks, bandMult = 1) {
     const trust = round4(decayScalar(clamp01(num(rec.trust, 0)), dw, bandMult));
     const resentment = round4(decayScalar(clamp01(num(rec.resentment, 0)), dw, bandMult));
     const rawInc = Array.isArray(rec.incidents) ? /** @type {Array<any>} */ (rec.incidents) : [];
+    // Decay incident severity INCREMENTALLY by `dw` (weeks elapsed since this record's last
+    // relax pass) — the SAME model as trust/resentment above — NOT by absolute age (now - i.tick).
+    // The mint `tick` is stamped in DIFFERENT clocks by different producers (factionCompetition
+    // stamps weeks; npcLadder/assize stamp pulse-ticks, the units their revanchism reader needs),
+    // so ageing sev against `now - i.tick` over-decayed the pulse-tick incidents ~interval× in
+    // non-weekly intervals (a wound pruned within ~2yr). Decaying by `dw` is clock-agnostic and
+    // leaves `i.tick` untouched for the reader. Byte-identical when tick === week (every existing
+    // pin mints at tick===week ⇒ dw === now - i.tick).
     const incidents = rawInc
-      .map((i) => ({ tick: Math.floor(num(i?.tick, 0)), type: String(i?.type || ''), sev: round4(decayScalar(clamp01(num(i?.sev, 0)), Math.max(0, now - Math.floor(num(i?.tick, now))), bandMult)) }))
+      .map((i) => ({ tick: Math.floor(num(i?.tick, 0)), type: String(i?.type || ''), sev: round4(decayScalar(clamp01(num(i?.sev, 0)), dw, bandMult)) }))
       .filter((i) => i.sev >= T.PRUNE_EPSILON);
     if (trust < T.PRUNE_EPSILON && resentment < T.PRUNE_EPSILON && incidents.length === 0) { changed = true; continue; } // drop
     next[key] = { trust, resentment, incidents, week: now };

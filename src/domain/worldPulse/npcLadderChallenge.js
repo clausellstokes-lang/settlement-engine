@@ -322,15 +322,21 @@ export function resolveFactionChallenges(a) {
   }
   if (events.length === 0) return empty;
 
-  // Apply transpositions bottom-up (deduped), bounded by the realm cap on successions.
+  // Apply transpositions as DISJOINT adjacent swaps (conservation §1: "a win SWAPS the adjacent
+  // pair", always adjacent). Each rung index may take part in AT MOST ONE swap this advance, so
+  // chained transpositions (a fail-drop and the next rung's win sharing an index, or two swaps
+  // sharing an index) never COMPOSE into a >1-rung leapfrog. WINS are applied first so a win that
+  // shares its pair with a fail is the one that lands (and is COUNTED) — the interregnum cooldown
+  // + realm-cap must spend on a real rise, not be swallowed by a coincident fail-drop's identical
+  // index pair (the old key-dedup counted such a displacement as 0 successions, skipping brake 3/4).
   const nextRungs = rungs.slice();
-  const seen = new Set();
+  const usedIdx = new Set();
   let successions = 0;
-  for (const t of [...transpositions].sort((x, y) => y.a - x.a)) {
-    const key = `${t.a}|${t.b}`;
-    if (seen.has(key)) continue;
-    if (t.win && successions >= realmBudget) continue; // realm cap on displacements
-    seen.add(key);
+  const ordered = [...transpositions].sort((x, y) => (x.win === y.win ? y.a - x.a : (x.win ? -1 : 1)));
+  for (const t of ordered) {
+    if (usedIdx.has(t.a) || usedIdx.has(t.b)) continue; // would chain into a >1-rung leap — skip
+    if (t.win && successions >= realmBudget) continue;   // (4) the realm cap on displacements
+    usedIdx.add(t.a); usedIdx.add(t.b);
     const tmp = nextRungs[t.a]; nextRungs[t.a] = nextRungs[t.b]; nextRungs[t.b] = tmp;
     if (t.win) successions += 1;
   }

@@ -70,6 +70,21 @@ describe('D-7c decayFactionPairStates — D5-band decay of both signs, drop-when
     const ws = { tick: 5 };
     expect(decayFactionPairStates(ws, 5)).toBe(ws);
   });
+  it('SS2-F18: an incident whose mint tick ≠ its record week decays by ELAPSED weeks (not absolute i.tick)', () => {
+    // npcLadder/assize stamp incident.tick in PULSE-TICK units (the clock their revanchism reader
+    // needs), while the record week is in WEEKS. Ageing sev against `now - i.tick` treated a small
+    // pulse-tick as a weeks value, over-decaying ~interval× in non-weekly intervals (a wound pruned
+    // within ~2yr). Decay is now INCREMENTAL by dw (weeks since the record's last pass) — clock-
+    // agnostic — and leaves i.tick untouched for the reader.
+    const ws = mintFactionPairIncident({ factionPairStates: {} }, { a: 'x', b: 'y', type: 'contest_loss', resentmentDelta: 0.5, sev: 0.5, tick: 10, weeks: 40 });
+    const next = decayFactionPairStates(ws, 41); // ONE week elapsed since the record week (40)
+    const rec = factionPairOf(next, 'x', 'y');
+    expect(rec.incidents.length).toBe(1); // NOT pruned by a phantom (41 - 10 = 31)-week over-age
+    const oneWeek = 0.5 * Math.pow(0.5, 1 / T.HALF_LIFE_WEEKS); // the true 1-week decay
+    expect(rec.incidents[0].sev).toBeCloseTo(oneWeek, 4);
+    expect(rec.incidents[0].sev).toBeGreaterThan(0.49); // barely moved (over-decay would be ~0.435)
+    expect(rec.incidents[0].tick).toBe(10); // i.tick untouched — the revanchism reader still reads pulse-ticks
+  });
 });
 
 describe('D-7c relaxFactionStates — the pair decay rides the same pass, dormancy-safe', () => {

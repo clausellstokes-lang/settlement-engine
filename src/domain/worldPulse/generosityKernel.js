@@ -1230,10 +1230,17 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   if (bufferSteps.length || Object.keys(bufferLedger).length) {
     /** @type {Record<string, unknown>} */
     const nextBuffer = { ...bufferLedger };
-    for (const step of bufferSteps) {
-      const k = step.receiverId; // discipline is a property of the receiver's own granary
+    // Collapse to ONE discipline step per RECEIVER this tick: discipline is a per-tick property of
+    // the receiver's own granary, so a receiver relieved by N givers must NOT decay N×BUFFER_DECAY
+    // (the moral-hazard rate would scale with donor connectivity, not the tuned per-tick rate).
+    // reliefThisTick is TRUE if ANY giver moved grain; each step is order-independent (sortedRecord
+    // re-canonicalizes below), and the Map's insertion order is itself deterministic.
+    /** @type {Map<string, boolean>} */
+    const reliefByReceiver = new Map();
+    for (const s of bufferSteps) reliefByReceiver.set(s.receiverId, reliefByReceiver.get(s.receiverId) === true || s.reliefThisTick === true);
+    for (const [k, reliefThisTick] of reliefByReceiver) {
       const prior = /** @type {Parameters<typeof bufferDisciplineStep>[0]} */ (asObject(nextBuffer[k]).discipline != null ? nextBuffer[k] : null);
-      const nextRec = bufferDisciplineStep(prior, { reliefThisTick: step.reliefThisTick, now: tick });
+      const nextRec = bufferDisciplineStep(prior, { reliefThisTick, now: tick });
       if (nextRec) nextBuffer[k] = nextRec; else delete nextBuffer[k];
     }
     const sortedBuffer = sortedRecord(nextBuffer);
