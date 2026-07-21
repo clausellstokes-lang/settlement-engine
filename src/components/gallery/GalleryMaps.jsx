@@ -20,8 +20,9 @@ import EmptyState from '../primitives/EmptyState.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
 import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
-import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters } from './galleryMapsFilters.js';
+import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS } from './galleryMapsFilters.js';
 import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
+import GalleryTopbar from './GalleryTopbar.jsx';
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
@@ -43,10 +44,25 @@ export default function GalleryMaps({ onNavigate }) {
   // this tab is pinned to blank maps at the fetch (campaign shares live on
   // the Campaigns tab), so the sidebar never offers a kind chip.
   const [filters, setFilters] = useState(emptyMapFilters);
+  // Sort + search run server-side (list_gallery_maps p_sort_key / p_search_query,
+  // migration 090), mirroring the settlements tab. `search` mirrors the input for
+  // immediate display; `debouncedSearch` is what the fetch keys on so typing a
+  // word fires one request, not one per keystroke (an empty search resets
+  // instantly — the useGalleryPageState idiom).
+  const [sort, setSort] = useState('newest');
+  const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   // The tag vocabulary comes from the UNFILTERED batch and holds sticky:
   // deriving it from a filtered batch would collapse the chips to the very
   // tags already selected.
   const [tagVocabulary, setTagVocabulary] = useState([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
+    if (search === '') { setDebouncedSearch(''); return undefined; }
+    const id = setTimeout(() => setDebouncedSearch(search), 250);
+    return () => clearTimeout(id);
+  }, [search]);
 
   useEffect(() => {
     if (!viewingSlug) { setDetail(null); return; }
@@ -64,10 +80,12 @@ export default function GalleryMaps({ onNavigate }) {
     setLoading(true); setError(null);
     // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
     // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
-    // honors every facet (normalizeMapFilters → p_filters); kind is pinned
-    // here over whatever the sidebar narrows.
-    const unfiltered = activeMapFilterCount(filters) === 0;
-    fetchGalleryMaps({ page: 0, pageSize: 36, filters: { ...filters, kind: ['map'] } })
+    // honors every facet + sort + search (normalizeMapFilters → p_filters,
+    // p_sort_key, p_search_query); kind is pinned here over whatever the sidebar
+    // narrows. The tag vocabulary refreshes ONLY from a truly unfiltered,
+    // unsearched batch so a narrowed result never collapses the chip set.
+    const unfiltered = activeMapFilterCount(filters) === 0 && debouncedSearch === '';
+    fetchGalleryMaps({ page: 0, pageSize: 36, sort, search: debouncedSearch, filters: { ...filters, kind: ['map'] } })
       .then((r) => {
         if (ignore) return;
         const list = Array.isArray(r?.items) ? r.items : [];
@@ -77,7 +95,7 @@ export default function GalleryMaps({ onNavigate }) {
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
-  }, [filters]);
+  }, [filters, sort, debouncedSearch]);
 
   const toggleArrayFilter = useCallback((key, value) => {
     setFilters((prev) => {
@@ -110,7 +128,7 @@ export default function GalleryMaps({ onNavigate }) {
     }
   }, [isPremium, importGalleryMap, importGalleryMapWithCampaign, setActiveCampaign, onNavigate]);
 
-  const isFiltered = activeMapFilterCount(filters) > 0;
+  const isFiltered = activeMapFilterCount(filters) > 0 || !!debouncedSearch.trim();
 
   return (
     <div style={{ fontFamily: sans }}>
@@ -180,6 +198,17 @@ export default function GalleryMaps({ onNavigate }) {
         onClear={clearFilters}
       />
       <main style={{ minWidth: 0 }}>
+      <GalleryTopbar
+        search={search}
+        setSearch={setSearch}
+        sort={sort}
+        setSort={setSort}
+        sortOptions={MAP_SORT_OPTIONS}
+        noun="map"
+        countQualifier="shared"
+        total={items.length}
+        loading={loading}
+      />
       {loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Unfurling the shared maps…</p>}
       {error && <p style={{ color: swatch.danger || '#9b1c1c', fontSize: FS.sm }}>Couldn’t load maps: {error}. (Needs migration 045 deployed.)</p>}
       {!loading && !error && items.length === 0 && (
@@ -187,7 +216,7 @@ export default function GalleryMaps({ onNavigate }) {
           <EmptyState
             heading="No maps match those filters."
             body="Loosen a facet, or clear them all to see every shared map."
-            action={{ label: t('gallery.clearFilters'), onClick: clearFilters, variant: 'secondary' }}
+            action={{ label: t('gallery.clearFilters'), onClick: () => { clearFilters(); setSearch(''); }, variant: 'secondary' }}
           />
         ) : (
           <EmptyState

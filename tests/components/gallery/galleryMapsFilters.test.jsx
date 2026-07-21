@@ -114,3 +114,37 @@ describe('the maps-tab filter sidebar', () => {
     expect(screen.getByRole('button', { name: 'frontier' })).toBeTruthy();
   });
 });
+
+// ── Settlements-tab PARITY: the maps tab's search + sort + result count ───────
+describe('the maps-tab topbar (search + sort + count, Settlements-tab parity)', () => {
+  afterEach(() => {
+    cleanup();
+    vi.clearAllMocks();
+    mocks.galleryApi.fetchGalleryMaps.mockResolvedValue({ items: [] });
+  });
+
+  test('the result-count chip reports the shared-map count', async () => {
+    mocks.galleryApi.fetchGalleryMaps.mockResolvedValue({ items: [MAP_TILE] });
+    render(<GalleryMaps onNavigate={vi.fn()} />);
+    expect(await screen.findByText('Salt Coast')).toBeTruthy();
+    expect(screen.getByText('1 shared map')).toBeTruthy();
+  });
+
+  test('changing the sort refetches with the server sort key (kind narrowing intact)', async () => {
+    render(<GalleryMaps onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared maps yet/i)).toBeTruthy();
+    fireEvent.change(screen.getByLabelText('Sort maps'), { target: { value: 'most_viewed' } });
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ sort: 'most_viewed', filters: expect.objectContaining({ kind: ['map'] }) }),
+    ));
+  });
+
+  test('typing a search refetches (debounced) with the query and the kind narrowing', async () => {
+    render(<GalleryMaps onNavigate={vi.fn()} />);
+    expect(await screen.findByText(/No shared maps yet/i)).toBeTruthy();
+    fireEvent.change(screen.getByLabelText('Search maps'), { target: { value: 'salt' } });
+    await waitFor(() => expect(mocks.galleryApi.fetchGalleryMaps).toHaveBeenLastCalledWith(
+      expect.objectContaining({ search: 'salt', filters: expect.objectContaining({ kind: ['map'] }) }),
+    ), { timeout: 1500 });
+  });
+});

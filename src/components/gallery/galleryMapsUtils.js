@@ -29,14 +29,11 @@ export const KIND_OPTIONS = Object.freeze([
   ['map_with_campaign', 'Map and campaign', 'The map populated with its settlements, plus the living world you choose to reveal: the in-world clock, the chronicle, the pantheon, its wars and settlement network, and the dashboard.'],
 ]);
 
-// Sort options, all applied server-side (migration 065). 'most_imported' orders
-// by the real import_count; 'most_viewed' by view_count; newest is the default
-// published_at desc order.
-export const MAP_SORT_OPTIONS = Object.freeze([
-  ['newest', 'Newest'],
-  ['most_viewed', 'Most viewed'],
-  ['most_imported', 'Most imported'],
-]);
+// The maps/campaigns sort catalog (MAP_SORT_OPTIONS) moved to the gallery-only
+// galleryMapsFilters.js — the Maps and Campaigns tabs render the sort dropdown
+// and ride the gallery chunk, so importing the catalog from THIS module (the
+// share-editor chunk's home) would re-trigger the +42 B shared-chunk rebalance
+// the split exists to prevent. See galleryMapsFilters.js's header.
 
 /**
  * Build a strict slug -> owned-campaign lookup for the gallery edit gate.

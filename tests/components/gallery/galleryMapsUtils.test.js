@@ -2,12 +2,12 @@ import { describe, it, expect } from 'vitest';
 
 import {
   KIND_OPTIONS,
-  MAP_SORT_OPTIONS,
   ownedCampaignBySlug,
   suggestedTagsForCampaign,
 } from '../../../src/components/gallery/galleryMapsUtils.js';
 import {
   BACKDROP_OPTIONS,
+  MAP_SORT_OPTIONS,
   deriveTagVocabulary,
   activeMapFilterCount,
 } from '../../../src/components/gallery/galleryMapsFilters.js';

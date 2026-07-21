@@ -24,11 +24,16 @@ import { useState, useEffect, useCallback } from 'react';
 import { Castle, Swords, Users } from 'lucide-react';
 import { useStore } from '../../store';
 import { navigate } from '../../hooks/useRoute.js';
+import { t } from '../../copy/index.js';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
 import CampaignStatePanel from './CampaignStatePanel.jsx';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
+import { GALLERY_RESPONSIVE_CSS } from './galleryUtils.js';
+import { activeMapFilterCount, deriveTagVocabulary, emptyMapFilters, MAP_SORT_OPTIONS } from './galleryMapsFilters.js';
+import GalleryMapsSidebar from './GalleryMapsSidebar.jsx';
+import GalleryTopbar from './GalleryTopbar.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, sans, serif_, SP, FS, swatch } from '../theme.js';
 
@@ -69,17 +74,61 @@ export default function GalleryCampaigns({ onNavigate }) {
   const [viewingSlug, setViewingSlug] = useState(null);
   const [detail, setDetail] = useState(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  // Full Settlements-tab parity: a filter rail + sort + search, all narrowing
+  // server-side through the SAME list_gallery_maps RPC (migration 090), with the
+  // kind facet pinned to campaign shares. The facets are the ones the RPC honors
+  // for a map_with_campaign row — backdrop / has-settlements / importable / tags;
+  // world-age, at-war and aliveness stay CARD anatomy, not filters, because the
+  // list RPC does not narrow on those columns (offering them would be dead chips).
+  const [filters, setFilters] = useState(emptyMapFilters);
+  const [sort, setSort] = useState('newest');
+  const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+  // Sticky tag vocabulary: derived from the UNFILTERED, unsearched batch so a
+  // narrowed result never collapses the chip set to the tags already selected.
+  const [tagVocabulary, setTagVocabulary] = useState([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
+    if (search === '') { setDebouncedSearch(''); return undefined; }
+    const id = setTimeout(() => setDebouncedSearch(search), 250);
+    return () => clearTimeout(id);
+  }, [search]);
 
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    // The server RPC honors the kind facet (normalizeMapFilters → p_filters).
-    fetchGalleryMaps({ page: 0, pageSize: 36, filters: { kind: ['map_with_campaign'] } })
-      .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
+    // The server RPC honors every facet + sort + search (normalizeMapFilters →
+    // p_filters, p_sort_key, p_search_query); kind is pinned to campaign shares
+    // over whatever the sidebar narrows.
+    const unfiltered = activeMapFilterCount(filters) === 0 && debouncedSearch === '';
+    fetchGalleryMaps({ page: 0, pageSize: 36, sort, search: debouncedSearch, filters: { ...filters, kind: ['map_with_campaign'] } })
+      .then((r) => {
+        if (ignore) return;
+        const list = Array.isArray(r?.items) ? r.items : [];
+        setItems(list);
+        if (unfiltered) setTagVocabulary(deriveTagVocabulary(list));
+      })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared campaigns'); })
       .finally(() => { if (!ignore) setLoading(false); });
     return () => { ignore = true; };
+  }, [filters, sort, debouncedSearch]);
+
+  const toggleArrayFilter = useCallback((key, value) => {
+    setFilters((prev) => {
+      const arr = Array.isArray(prev[key]) ? prev[key] : [];
+      const next = arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value];
+      return { ...prev, [key]: next };
+    });
   }, []);
+
+  const toggleBoolFilter = useCallback((key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: !!value }));
+  }, []);
+
+  const clearFilters = useCallback(() => { setFilters(emptyMapFilters()); }, []);
+
+  const isFiltered = activeMapFilterCount(filters) > 0 || !!debouncedSearch.trim();
 
   useEffect(() => {
     if (!viewingSlug) { setDetail(null); return; }
@@ -184,17 +233,47 @@ export default function GalleryCampaigns({ onNavigate }) {
         );
       })()}
 
-      {!viewingSlug && loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared campaigns…</p>}
-      {!viewingSlug && error && <p style={{ color: swatch.danger || RED, fontSize: FS.sm }}>Couldn’t load campaigns: {error}</p>}
-      {!viewingSlug && !loading && !error && items.length === 0 && (
-        <EmptyState
-          heading="No shared campaigns yet."
-          body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
-        />
-      )}
-
       {!viewingSlug && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: SP.md }}>
+      <>
+      <style>{GALLERY_RESPONSIVE_CSS}</style>
+      <div className="gallery-main-layout" style={{ display: 'grid', gap: SP.lg, alignItems: 'start' }}>
+        <GalleryMapsSidebar
+          filters={filters}
+          tagVocabulary={tagVocabulary}
+          onToggleArray={toggleArrayFilter}
+          onToggleBool={toggleBoolFilter}
+          onClear={clearFilters}
+          showHasSettlements
+        />
+        <main style={{ minWidth: 0 }}>
+          <GalleryTopbar
+            search={search}
+            setSearch={setSearch}
+            sort={sort}
+            setSort={setSort}
+            sortOptions={MAP_SORT_OPTIONS}
+            noun="campaign"
+            countQualifier="shared"
+            total={items.length}
+            loading={loading}
+          />
+          {loading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading shared campaigns…</p>}
+          {error && <p style={{ color: swatch.danger || RED, fontSize: FS.sm }}>Couldn’t load campaigns: {error}</p>}
+          {!loading && !error && items.length === 0 && (
+            isFiltered ? (
+              <EmptyState
+                heading="No campaigns match those filters."
+                body="Loosen a facet, or clear them all to see every shared campaign."
+                action={{ label: t('gallery.clearFilters'), onClick: () => { clearFilters(); setSearch(''); }, variant: 'secondary' }}
+              />
+            ) : (
+              <EmptyState
+                heading="No shared campaigns yet."
+                body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
+              />
+            )
+          )}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: SP.md }}>
           {items.map((m) => (
             <div key={m.slug} style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
@@ -248,7 +327,10 @@ export default function GalleryCampaigns({ onNavigate }) {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        </main>
+      </div>
+      </>
       )}
     </div>
   );
