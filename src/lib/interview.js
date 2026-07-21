@@ -27,6 +27,31 @@ function qualityBand(value) {
   return 'low';
 }
 
+/**
+ * Project the multi-hop THREAD to a target audience for the wire (secrets-seam). Under a
+ * player-safe question, a prior turn answered under the DM audience may name a secret, so
+ * it is DROPPED here — a player prompt is only ever seeded with player-audience prior
+ * exchange. A turn whose audience tag is missing or not exactly 'player' is treated as DM
+ * (FAIL CLOSED). Mirrors the server backstop (interviewCore.buildPriorExchange); the
+ * server re-enforces authoritatively, so this is defense in depth, not the only guard.
+ * Trims to the last few turns (the server caps + fences them too). Pure.
+ *
+ * @param {Array<{question?: string, answer?: string, audience?: string}>} history
+ * @param {'dm'|'player'} audience — the effective audience of THIS (follow-up) question.
+ * @returns {Array<{question: string, answer: string, audience: 'dm'|'player'}>}
+ */
+export function projectHistoryForAudience(history, audience) {
+  return (Array.isArray(history) ? history : [])
+    .filter((t) => t && (typeof t.question === 'string' || typeof t.answer === 'string'))
+    .filter((t) => audience !== 'player' || t.audience === 'player')
+    .slice(-6)
+    .map((t) => ({
+      question: String(t.question ?? ''),
+      answer: String(t.answer ?? ''),
+      audience: t.audience === 'player' ? 'player' : 'dm',
+    }));
+}
+
 /** Classify a refusal by HTTP status (mirrors the analyst refusal vocabulary). */
 function classifyRefusal(status) {
   switch (status) {
@@ -53,7 +78,7 @@ function classifyRefusal(status) {
  *
  * @param {{ question?: string, worldState?: object, settlements?: Array<object>,
  *           settlement?: object|null, tick?: number, audience?: 'dm'|'player',
- *           history?: Array<{question?: string, answer?: string}>,
+ *           history?: Array<{question?: string, answer?: string, audience?: 'dm'|'player'}>,
  *           scope?: 'settlement'|'campaign', campaignSettlements?: Array<object> }} ctx
  * @returns {Promise<{ answer?: string, segments?: Array<object>, citations?: Array<object>,
  *   confidence?: number|null, citationCoverage?: number|null, audience?: 'dm'|'player', byok?: boolean,
@@ -73,11 +98,10 @@ export async function askInterview({ question, worldState = null, settlements = 
   });
 
   // Multi-hop: the last few prior turns as CONTEXT (the server caps + fences them; we
-  // trim client-side so the wire body stays small). Each hop is still metered separately.
-  const priorTurns = (Array.isArray(history) ? history : [])
-    .filter((t) => t && (typeof t.question === 'string' || typeof t.answer === 'string'))
-    .slice(-6)
-    .map((t) => ({ question: String(t.question ?? ''), answer: String(t.answer ?? '') }));
+  // trim client-side so the wire body stays small). THE AUDIENCE GATE ACROSS HOPS: under a
+  // player-safe question, a prior DM-audience answer may name a secret, so it is dropped
+  // here against the EFFECTIVE audience (defense in depth — the server re-enforces).
+  const priorTurns = projectHistoryForAudience(history, effectiveAudience);
 
   const { data, error } = await supabase.functions.invoke('interview', {
     body: { question: q, audience: effectiveAudience, slices, history: priorTurns },

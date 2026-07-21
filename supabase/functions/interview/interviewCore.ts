@@ -243,8 +243,10 @@ function stripFences(text: string): string {
   return out;
 }
 
-/** One prior turn carried into a follow-up: the earlier question + the answer it got. */
-export interface PriorTurn { question?: unknown; answer?: unknown }
+/** One prior turn carried into a follow-up: the earlier question + the answer it got,
+ *  tagged with the AUDIENCE it was produced under so the audience gate can hold across
+ *  hops (a DM-audience answer may name a secret and must never seed a player prompt). */
+export interface PriorTurn { question?: unknown; answer?: unknown; audience?: unknown }
 
 // Multi-hop caps: at most the last few turns, each field length-bounded, so a long
 // conversation cannot balloon the prompt (the edge MAX_BODY_BYTES caps the wire too).
@@ -256,10 +258,29 @@ const MAX_HIST_ANSWER = 1200;
  * Render the PRIOR EXCHANGE block for a follow-up: the last {@link MAX_HISTORY_TURNS}
  * turns, each stripped of fence tokens and length-capped, fenced as DATA. Empty history
  * ⇒ '' (byte-identical to a first-hop prompt). Pure.
+ *
+ * THE AUDIENCE GATE ACROSS HOPS (secrets-seam): a player-audience prompt may carry ONLY
+ * prior turns that were THEMSELVES produced under a player audience. A DM turn — or any
+ * turn whose `audience` tag is missing or not exactly 'player' (FAIL CLOSED) — is dropped
+ * whole, so no DM-only answer (or DM-framed question) can seed a player prompt via
+ * history. The current audience is authoritative here: this is the server backstop that
+ * re-projects the history to the current audience, never trusting the client's own trim.
+ *
+ * CANNOT-CATCH: this gate reads the per-turn `audience` tag (fail-closed on absence). It
+ * cannot inspect free-text prose for DM-ness, so a client that ACTIVELY mislabels a DM
+ * turn as audience:'player' could still route that turn into a player prompt. That is the
+ * caller leaking its OWN session's secrets to its OWN player view — the same trust class
+ * as posting mislabelled slices (guarded structurally by bundleIsPlayerSafe). The real
+ * threat closed here is the HONEST client accidentally carrying a DM answer into the
+ * player-safe view a DM intends to share with players.
  */
-export function buildPriorExchange(history: PriorTurn[] | undefined): string {
+export function buildPriorExchange(
+  history: PriorTurn[] | undefined,
+  currentAudience: 'dm' | 'player' = 'dm',
+): string {
   const turns = (Array.isArray(history) ? history : [])
     .filter((t) => t && (typeof t.question === 'string' || typeof t.answer === 'string'))
+    .filter((t) => currentAudience !== 'player' || t.audience === 'player')
     .slice(-MAX_HISTORY_TURNS);
   if (turns.length === 0) return '';
   const lines = turns.map((t) => {
@@ -318,7 +339,10 @@ ${slicesText || '(no slices — answer that the engine does not record this)'}
 ${FENCE_CLOSE}`;
 
   // … then the VOLATILE prior exchange (if any) + question + strict JSON contract LAST.
-  const priorBlock = buildPriorExchange(history);
+  // The prior exchange is re-projected to THIS prompt's audience: under a player prompt a
+  // DM-audience prior answer (which may name a secret) is dropped — the audience gate holds
+  // across hops, not just on the current question.
+  const priorBlock = buildPriorExchange(history, audience);
   return `${prefix}
 ${priorBlock}
 QUESTION: ${q}

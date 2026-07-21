@@ -147,8 +147,10 @@ export default function InterviewPanel({ open = false, onClose, initialQuestion 
     setFeedback(null);
     const useCampaign = scope === 'campaign' && canCampaign;
     // Prior successful turns become the follow-up's context (server re-grounds each hop).
+    // Each turn carries the AUDIENCE its answer was produced under so the audience gate can
+    // hold across hops: a DM-audience answer is never sent into a player-safe follow-up.
     const history = thread
-      .map((turn) => ({ question: turn.question, answer: turn.result?.answer }))
+      .map((turn) => ({ question: turn.question, answer: turn.result?.answer, audience: turn.result?.audience }))
       .filter((h) => h.answer);
     try {
       const { askInterview } = await import('../lib/interview.js');
