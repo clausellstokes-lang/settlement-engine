@@ -1193,6 +1193,22 @@
     },
     "tests/ui/worldMapInWords.test.jsx": {
       "kind": "uncovered"
+    },
+    "tests/store/lifecycleRoundTrip.test.js": {
+      "kind": "mutation",
+      "label": "state-lifecycle/unregistered campaign family"
+    },
+    "tests/security/aiSurfaceSourceScan.test.js": {
+      "kind": "mutation",
+      "label": "ai-wall/new model-calling surface unwalled"
+    },
+    "tests/simulation/narrativeParity.test.js": {
+      "kind": "mutation",
+      "label": "narrative/letter headline drift breaks beat parity"
+    },
+    "tests/property/mechanismLitCoverage.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
     }
   },
   "meta": {

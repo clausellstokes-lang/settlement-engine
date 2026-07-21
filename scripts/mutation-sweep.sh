@@ -50,6 +50,8 @@ MUTATED_FILES=(
   supabase/config.toml
   src/App.jsx
   scripts/mutation-coverage-manifest.json
+  src/store/campaignSlice.js
+  src/domain/display/chroniclersLetter.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -258,6 +260,37 @@ check_caught "type-hygiene/any-cast in domain" src/domain/userEdits.js "npx vite
 #     totality contract's own enforcer has teeth.
 perl -0pi -e "s/faction-key\/reversed name-precedence read/zzz-phantom-label/" scripts/mutation-coverage-manifest.json
 check_caught "meta/manifest label tampered" scripts/mutation-coverage-manifest.json "npx vitest run tests/lint/mutationCoverageManifest.test.js"
+
+# 24. State-lifecycle totality — an UNREGISTERED persisted family lands in the
+#     campaign record (createCampaign gains a key absent from
+#     CAMPAIGN_RECORD_REGISTRY). The E-C round-trip walker must red: every
+#     persisted family needs registered migrate + undo policies.
+#     (Isolation-proven at fold: mutated 1-red/21-green, reverted 22/22.)
+python3 - <<'PYEOF'
+src_path = 'src/store/campaignSlice.js'
+src = open(src_path).read()
+i = src.index("createCampaign: (name) =>")
+j = src.index("pendingSync: true,", i) + len("pendingSync: true,")
+open(src_path, 'w').write(src[:j] + "\n        __mutLifecycleProbe: 1," + src[j:])
+PYEOF
+check_caught "state-lifecycle/unregistered campaign family" src/store/campaignSlice.js "npx vitest run tests/store/lifecycleRoundTrip.test.js"
+
+# 25. AI-wall census — a NEW model-calling edge function appears with no wall
+#     disposition (the N-1 sweep class: a surface added after the census).
+#     The E-D source scan must red on the undispositioned surface.
+check_caught_planted "ai-wall/new model-calling surface unwalled" \
+  supabase/functions/zzz-mutsweep-aiwall/index.ts \
+  'export const probe = "callAnthropic"; // transient mutation-sweep probe' \
+  "npx vitest run tests/security/aiSurfaceSourceScan.test.js"
+
+# 26. Narrative parity — the letter composer's headline path drifts by one
+#     character (the string-corruption class): every letter beat key stops
+#     matching the book/recorded multiset. The E-G decade walker must red on
+#     beat-set parity. (NOTE: a diff-floor off-by-one was tried first and
+#     absorbed by the fixture's tick cadence — beat-KEY drift is the proven
+#     mutation for this walker.)
+perl -i -pe "s/headline: String\(e\.headline \|\| 'A matter of the realm'\),/headline: String(e.headline || 'A matter of the realm').slice(0, -1),/" src/domain/display/chroniclersLetter.js
+check_caught "narrative/letter headline drift breaks beat parity" src/domain/display/chroniclersLetter.js "npx vitest run tests/simulation/narrativeParity.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
