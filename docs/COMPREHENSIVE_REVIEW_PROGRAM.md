@@ -1255,6 +1255,27 @@ forensics EAGER seam (keep the ratified eager-and-complete semantics, shrink the
 bytes; target −5-6K) + burn the 32 any-holes; the budget raise stays owner-gated
 and pass 3 still measures per merge and halts on breach. Veto = revert the slim
 commits. Memory: fold-pass-2-executed.md (indexed).**
+**⬛⭐⭐ SHOULD-FIX/POLISH BATCH A FOLDED @ composite-r4 084549e4 (2026-07-21,
+checker-verified).** SS4 enforcement (472f7f51 — determinism-ban coverage +
+ghost-column parity + migration-ref walker [CAUGHT a live skipped-pglite test]
++ claims gates; mutation-sweep 8→12) · SS2 engine (525e0979 — 17 kernel fixes,
+16 deferred-with-reason; NO green golden reddened) · SS1 FMG fork (e2b7abf8 — the
+whole panel-gated innerHTML sink-sweep across ~24 files, umami/OpenWidget dead
+beacons deleted, CVE versions recorded, runbook corrected; security suite 1101;
+7 owner-gated lib-upgrade/addLake deferrals). ~100 findings processed. FOLD: 3
+merges 0-conflict + fold-fixes 084549e4 = assize inline-slug CURED to kernel
+slugify (SS2's F5 introduced it; the slugify defect-class ratchet caught it at
+fold — assize dark ⇒ golden-neutral, assizeDormancyGolden byte-identical) +
+analytics edge bundle REGENERATED (SS4's EDIT_KIND change; aiGrounding spurious
+churn reverted). COMBINED GATE: build 0 · closure ratchet green · strict 0 ·
+tsc 0 · fork-validator 140 libs · mutation-sweep 12/12 · letter golden GREEN ·
+deity drift UNCHANGED (still gm-pulse-a|3 + gm-pulse-b|5) · full two-shard =
+4-parked-only (all extras isolation-proven contention). OWNER-SURFACE from SS2:
+obligations-ledger has no unconditional decay owner (F6+F19) · dual-clock .tick
+hazard (F18, fixed clock-agnostic — do NOT unify). ⚠ HAZARD: resumed agents
+(post usage-limit) had cwd SILENTLY RESET to minifold — guard the composite +
+verify own-branch commits on every resume. NEXT: BATCH B (store/display/gallery/
+seo/a11y) + BATCH C (voice + product-wide bars), ~139 findings, then convergence.**
 **⬛⭐⭐ CYCLE 2 MUST-FIX TIER COMPLETE — FIX WAVE 4 @ composite-r4 84a34cfa
 (2026-07-20, checker-verified).** WAVE 4 (a11y/UX/SEO, Fable): idx7 hover fixed
 at the Button/IconButton PRIMITIVES (--sf-btn-bg/hover-bg live; a11y.css hover
