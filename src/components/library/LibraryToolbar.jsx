@@ -163,9 +163,9 @@ export default function LibraryToolbar({
   filters, setFilters,
   totalCount,
   visibleCount,
-  campaigns = [],
   selectMode = false,
   onToggleSelectMode,
+  minimal = false,
 }) {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const isMobile = useIsMobile();
@@ -210,33 +210,55 @@ export default function LibraryToolbar({
     <>
       <Button size="sm" variant={filters?.hasPendingEdits ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasPendingEdits} onClick={() => toggleFilter('hasPendingEdits')} title="Show settlements edited since they were canonized.">Pending edits</Button>
       {/* Structure */}
-      <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Linked</Button>
+      <Button size="sm" variant={filters?.hasNeighbours ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasNeighbours} onClick={() => toggleFilter('hasNeighbours')} title="Show settlements linked to a neighbour.">Has neighbours</Button>
       {/* Living world */}
       <Button size="sm" variant={filters?.atWar ? 'danger' : 'secondary'} aria-pressed={!!filters?.atWar} onClick={() => toggleFilter('atWar')} title="Show settlements under siege or besieging a neighbour.">At war</Button>
       <Button size="sm" variant={filters?.hasDeity ? 'gold' : 'secondary'} aria-pressed={!!filters?.hasDeity} onClick={() => toggleFilter('hasDeity')} title="Show settlements with a patron deity.">Has deity</Button>
       <Button size="sm" variant={filters?.inCrisis ? 'danger' : 'secondary'} aria-pressed={!!filters?.inCrisis} onClick={() => toggleFilter('inCrisis')} title="Show settlements in a vulnerable or critical health band.">In crisis</Button>
 
-      {/* Campaign selector */}
-      {campaigns.length > 0 && (
-        <label htmlFor="library-campaign-filter" style={{ display: 'inline-flex', alignItems: 'center', gap: SP.xs, minHeight: 44, boxSizing: 'border-box', padding: '8px', background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}>
-          <span style={{ color: MUTED, fontWeight: 700 }}>Campaign:</span>
-          <select
-            id="library-campaign-filter"
-            value={filters?.campaignId || ''}
-            onChange={(e) => setFilters({ ...filters, campaignId: e.target.value || undefined })}
-            style={{ background: 'transparent', border: 'none', outline: 'none', fontFamily: sans, fontSize: FS.xs, color: INK, fontWeight: 600, cursor: 'pointer' }}
-          >
-            <option value="">All</option>
-            {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
-        </label>
-      )}
-
+      {/* The in-Filters Campaign selector was removed (legibility wave, 2026-07-22):
+          campaign folders already slice the list, so it was a second door to the
+          same slice. The `filters.campaignId` plumbing (applyLibraryFilters) is
+          kept intact for deep links. OWNER-VETOABLE control removal. */}
       {activeFilterCount > 0 && (
         <Button size="sm" variant="ghost" icon={<X size={12} />} onClick={() => setFilters({})}>Clear filters</Button>
       )}
     </>
   );
+
+  // ── Minimal face ──────────────────────────────────────────────────────────
+  // Below 5 saves the full six-control face is overkill for finding one town, so
+  // the parent renders Search alone (minimal). Sort / phase / Filters / Select
+  // return the moment the library grows past four. OWNER-VETOABLE threshold
+  // (legibility wave, 2026-07-22) — the gate lives at the SettlementsPanel render
+  // site (minimal = saves.length < 5).
+  if (minimal) {
+    return (
+      <div style={{
+        padding: SP.sm, background: PARCH, borderRadius: R.sm,
+        display: 'flex', alignItems: 'center', gap: SP.xs,
+        fontFamily: sans, fontSize: FS.xs, color: INK,
+      }}>
+        <div style={{
+          flex: 1, minWidth: 0, minHeight: 44, boxSizing: 'border-box',
+          display: 'flex', alignItems: 'center', gap: SP.xs, padding: '8px',
+          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.sm,
+        }}>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search settlements, NPCs, and factions"
+            placeholder={`Search ${totalCount} settlement${totalCount === 1 ? '' : 's'}…`}
+            style={{ flex: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontFamily: sans, fontSize: FS.sm, color: INK }}
+          />
+          {query && (
+            <IconButton Icon={X} label="Clear search" tone="ghost" size="sm" onClick={() => setQuery('')} />
+          )}
+        </div>
+      </div>
+    );
+  }
 
   // ── Mobile branch ─────────────────────────────────────────────────────────
   // The desktop toolbar packs Search · Sort · phase segment · Filters · Select ·

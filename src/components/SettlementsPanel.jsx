@@ -708,7 +708,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           sort={librarySort} setSort={setLibrarySort}
           filters={libraryFilters} setFilters={setLibraryFilters}
           totalCount={saves.length} visibleCount={filteredSaves.length}
-          campaigns={activeCampaigns}
+          minimal={saves.length < 5}
           selectMode={selectMode} onToggleSelectMode={bulk.toggleMode}
         /></div>
       )}
