@@ -1,6 +1,9 @@
 # Compendium Completion Plan
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - Continuation branch `claude/compendium-completion-2` off composite-r4 `95f57988` (A+B folded). Baseline closure now 1,039,961.
+> - Wave C2 (shipped, `def9fe8c`) — Magic Level + Magic Legality ladders (getMagicLevel + magicProfile bands); the drifted config Magic whisper corrected (Mundane/Common/High -> None/Low/Medium/High). Gate green; closure Δ0.
+> - Wave C1 (shipped, `52a4d8c1`) — the deity FOUR AXES (from DEITY_AXIS_EFFECTS, no roster) lead the arcane tab + Pantheon Rank ladder (seats, PANTHEON_TUNING-bound). +compendiumFaith pin; totality pin gains the arcane tab. Gate green; closure Δ0.
 > - Wave A (shipped, `e13a7ef8`) — the owner's four Economy examples as W6 ladders: Priority Bands, Chain Status, Coherence Check (renamed from "Viability Score"), Exports & Imports enriched. Gate green (60 focused + 282 copy/lint + build/verify:dist). Closure 1,039,961 (+5, shared-chunk rebalance, under hard cap — flagged for owner reclaim).
 > - Wave B (shipped, `140f56cd`) — the 15 empty Stress rows now render viabilityNote + crisisHook (was a bare EMPTY_VALUE dash); +1 pin (compendiumStressRows). No CD change. Gate green (21 focused, eslint/tsc 0).
 > - Plan opened + committed (`ea4b126f`) 2026-07-22 from the completeness audit (63 critic-reconciled gaps; 5 analysts + critic). Branch `claude/compendium-completion` off composite-r4 `d93f8699`. Audit ran against the OLDER tip `53d72f57`, so several gaps are already closed by the operations-legibility fold — see "Already closed".
