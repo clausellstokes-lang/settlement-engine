@@ -75,6 +75,13 @@ export function TiersTab({ _search='' }) {
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
+    <SectionHeading id="terrain" accent={INK}>Terrain</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>Terrain steers which resources are nearby, how far a settlement leans on imported food, and which calamity flavour it draws.</p>
+    {CD.terrain.map((t)=>(
+      <div key={t.id} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:INK, minWidth:110, flexShrink:0, textTransform:'capitalize' }}>{t.id}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{t.reading}</span>
+      </div>))}
   </>;
 }
 
@@ -132,8 +139,9 @@ export function PowerTab_({ search='' }) {
         </div>))}
     </div>
     )}
-    {/* How far a criminal interest has taken a seat of power: the capture ladder. */}
-    <div style={{ marginTop:16 }}>
+    {/* How far a criminal interest has taken a seat of power: the capture ladder.
+        id="power" so the glossary capture-rung lifeline lands on the ladder itself. */}
+    <div id="power" style={{ marginTop:16, scrollMarginTop:80 }}>
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
@@ -164,6 +172,12 @@ export function ArcaneTab() {
     <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
     <Card title="Religion & Governance" accent='#1a4a2a'>Religion 72+ with low Military produces Theocracy. With strong Crime produces Religious Fraud.</Card>
     <Card title="Magic & Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+    <SectionHeading id="cultures" accent={INK}>Cultures</SectionHeading>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 8px' }}>{CD.cultures.note}</p>
+    <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
+      {CD.cultures.values.map((c)=>(
+        <span key={c.id} style={{ fontSize:FS.xs, fontWeight:700, color:INK, background:`${GOLD}14`, padding:'2px 8px' }}>{c.label}</span>))}
+    </div>
   </>;
 }
 

@@ -161,6 +161,36 @@ const PRESSURE_GLOSSARY = {
   crime:      { label: 'Crime',      description: 'Strain from criminal activity the settlement cannot contain. It is the pressure behind smuggling, extortion, and the erosion of order.' },
 };
 
+// ── World-input vocabularies (Wave D): terrain + culture ──────────────────────
+// Terrain readings: what each of the seven terrains steers (resource lean, the low-
+// agriculture import bias for mountain/hills/desert, and the calamity flavour it
+// selects, cross-checked against DISASTER_TYPE_BY_TERRAIN). The terrain LIST is read
+// from DISASTER_TYPE_BY_TERRAIN keys; the build guard reds if a terrain lacks a reading.
+const TERRAIN_READINGS = {
+  plains:    'Open, arable land. Strong agriculture, and fire is its calamity.',
+  hills:     'Rolling high ground. Stone and defensible sites, though low agriculture leans on imports, and quakes are its calamity.',
+  forest:    'Wooded country. Timber and game, and fire is its calamity.',
+  riverside: 'On a river. Mills, ferries, and cheap bulk trade, and floods are its calamity.',
+  coastal:   'On the sea. Fishing, ports, and maritime trade, and storms are its calamity.',
+  mountain:  'High and rugged. Ore and strong defense, though low agriculture leans on imports, and quakes are its calamity.',
+  desert:    'Arid land. Sparse agriculture and hard travel, and storms are its calamity.',
+};
+
+// Culture values: the config picker's authorable cultures. 'mixed' is the default
+// overlay (no single culture); the rest are the generator's own CULTURES list
+// (src/generators/steps/resolveConfig.js), pinned equal by tests/ui/compendiumWorldInputs
+// so a drift reds (authored inline to avoid importing resolveConfig's registerStep side
+// effect into the build). Culture is flavour more than math (see the note).
+const CULTURE_VALUES = [
+  { id: 'mixed', label: 'Mixed' }, { id: 'germanic', label: 'Germanic' },
+  { id: 'latin', label: 'Latin' }, { id: 'celtic', label: 'Celtic' },
+  { id: 'arabic', label: 'Arabic' }, { id: 'norse', label: 'Norse' },
+  { id: 'slavic', label: 'Slavic' }, { id: 'east_asian', label: 'East Asian' },
+  { id: 'mesoamerican', label: 'Mesoamerican' }, { id: 'south_asian', label: 'South Asian' },
+  { id: 'steppe', label: 'Steppe' }, { id: 'greek', label: 'Greek' },
+];
+const CULTURE_NOTE = 'Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave.';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -209,6 +239,9 @@ export function buildCompendiumDataObject() {
     for (const v of Object.values(eff)) {
       if (!v.effect || !v.effect.trim()) throw new Error(`compendium: deity axis "${axisId}" has a value with no effect string`);
     }
+  }
+  for (const id of Object.keys(DISASTER_TYPE_BY_TERRAIN)) {
+    if (!TERRAIN_READINGS[id]) throw new Error(`compendium: terrain "${id}" has no TERRAIN_READINGS entry`);
   }
 
   // Systems: preset membership derived; wave flags validated against the universe.
@@ -356,6 +389,12 @@ export function buildCompendiumDataObject() {
         ] },
       ],
     },
+
+    // World inputs the config picker offers whose HelpPopover deep-links landed on
+    // pages that never defined them: the seven terrains (list from the calamity
+    // terrain map; readings authored) and the culture vocabulary.
+    terrain: Object.keys(DISASTER_TYPE_BY_TERRAIN).map((id) => ({ id, reading: TERRAIN_READINGS[id] })),
+    cultures: { values: [...CULTURE_VALUES], note: CULTURE_NOTE },
 
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,

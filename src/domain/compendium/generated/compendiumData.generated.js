@@ -270,6 +270,32 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"temperament","label":"Temperament","derived":true,"lines":["Warlike, and raises the realm's aggression","Peacelike, and tempers the realm's aggression"]}
     ]
   },
+  "terrain": [
+    {"id":"riverside","reading":"On a river. Mills, ferries, and cheap bulk trade, and floods are its calamity."},
+    {"id":"coastal","reading":"On the sea. Fishing, ports, and maritime trade, and storms are its calamity."},
+    {"id":"mountain","reading":"High and rugged. Ore and strong defense, though low agriculture leans on imports, and quakes are its calamity."},
+    {"id":"hills","reading":"Rolling high ground. Stone and defensible sites, though low agriculture leans on imports, and quakes are its calamity."},
+    {"id":"forest","reading":"Wooded country. Timber and game, and fire is its calamity."},
+    {"id":"plains","reading":"Open, arable land. Strong agriculture, and fire is its calamity."},
+    {"id":"desert","reading":"Arid land. Sparse agriculture and hard travel, and storms are its calamity."}
+  ],
+  "cultures": {
+    "values": [
+      {"id":"mixed","label":"Mixed"},
+      {"id":"germanic","label":"Germanic"},
+      {"id":"latin","label":"Latin"},
+      {"id":"celtic","label":"Celtic"},
+      {"id":"arabic","label":"Arabic"},
+      {"id":"norse","label":"Norse"},
+      {"id":"slavic","label":"Slavic"},
+      {"id":"east_asian","label":"East Asian"},
+      {"id":"mesoamerican","label":"Mesoamerican"},
+      {"id":"south_asian","label":"South Asian"},
+      {"id":"steppe","label":"Steppe"},
+      {"id":"greek","label":"Greek"}
+    ],
+    "note": "Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave."
+  },
   "lenses": {
     "count": 5,
     "entries": [

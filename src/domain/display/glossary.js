@@ -101,7 +101,8 @@ const MAGNITUDE_DEFS = Object.freeze({
 
 // ── The compendium deep-link map per category (?tab= + #anchor exist) ─────────
 const LINK = Object.freeze({
-  verb:            { tab: 'living', anchor: 'living' },
+  // SystemsHub stamps id="living-world" (not "living"); point the verb lifeline there.
+  verb:            { tab: 'living', anchor: 'living-world' },
   'stability-band': { tab: 'stress', anchor: 'stress' },
   'strain-band':   { tab: 'stress', anchor: 'stress' },
   'capture-rung':  { tab: 'power', anchor: 'power' },
