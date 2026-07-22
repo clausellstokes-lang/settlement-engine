@@ -1,7 +1,10 @@
 # Compendium Completion Plan
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
-> - Program opened 2026-07-22 from the completeness audit (63 critic-reconciled gaps; 5 analysts + critic). Branch `claude/compendium-completion` off composite-r4 `d93f8699`. Audit was run against the OLDER tip `53d72f57`, so several gaps are already closed by the operations-legibility fold (`22ee1ad4`/`d93f8699`) — see "Already closed" below.
+> - Wave A (shipped, `e13a7ef8`) — the owner's four Economy examples as W6 ladders: Priority Bands, Chain Status, Coherence Check (renamed from "Viability Score"), Exports & Imports enriched. Gate green (60 focused + 282 copy/lint + build/verify:dist). Closure 1,039,961 (+5, shared-chunk rebalance, under hard cap — flagged for owner reclaim).
+> - Wave B (shipped, `140f56cd`) — the 15 empty Stress rows now render viabilityNote + crisisHook (was a bare EMPTY_VALUE dash); +1 pin (compendiumStressRows). No CD change. Gate green (21 focused, eslint/tsc 0).
+> - Plan opened + committed (`ea4b126f`) 2026-07-22 from the completeness audit (63 critic-reconciled gaps; 5 analysts + critic). Branch `claude/compendium-completion` off composite-r4 `d93f8699`. Audit ran against the OLDER tip `53d72f57`, so several gaps are already closed by the operations-legibility fold — see "Already closed".
+> - REMAINING (for the successor / next session): Waves C (faith/magic/deity-axes) · D (cultures/terrain/dead-anchors) · E (presets) · F (monster-threat vocabulary lie, producer-bound + T4) · G (MED power/economy/arcane ladders) · H (LOW searchIndex drift + walker). See wave specs below; each is spec'd with truthSources.
 
 ## Sources
 - The completeness audit: `/private/tmp/.../tasks/w4twahdqu.output` (63 gaps: census + 3 truth lenses + critic; per-agent JSON in the workflow journal). Every gap carries entry / missing vocabulary / truthSource file:line / proposal / severity. Reviewer-derived — each truthSource verified at code before authoring.
@@ -65,5 +68,14 @@ Owner's explicit examples first (Wave A). Zero-authoring + authoring-free wins n
 - BandPill orphan (critic finding): display-label vocabulary (Contested/Stretched/...) is dark (zero importers). Do NOT author "shown as X" aliases while the path has no UI consumer. Own-lane decision, not a compendium edit.
 - Whether the deity roster stays rendered at all is moot (already deleted).
 
+## Judgment calls (vetoable)
+> Wave A (delegated 2026-07-22; each vetoable; all favor honest, enumerated vocabulary):
+> - Renamed "Viability Score" -> "Coherence Check" across the compendium (card, search term, SEO meta, long-tail route). Veto reverts those strings. No test pinned the old name; the dossier already renders COHERENT/NOT COHERENT.
+> - Accepted closure +5 (1,039,961) as a shared-chunk rebalance (a length-neutral SEO edit did not move it), under the 1,040,000 hard cap. Veto requires a Δ<=0 reclaim (module-split idiom) before Wave A folds.
+> - Chain Status ladder renders the DISPLAY set (what the DM sees), with captured/collapsing named in the blurb as defined-but-not-yet-emitted (critic's merged guidance; honesty gate).
+
 ## Ledger (deferrals — documented, not bugs to re-find)
-- [populated per wave]
+- Food Security ladder (economy, 6 rungs from foodGenerator.js:223-243) — deferred from Wave A to Wave G to keep Wave A on the owner's four named examples. Not a bug; the dossier StatusTag shows it, the compendium does not yet.
+- Stressor Severity + Relief Magnitude dial ladders (glossary severity/magnitude DEFS already exist) — deferred to Wave G: routing them into CD requires first removing the em-dashes in SEVERITY_DEFS/MAGNITUDE_DEFS (glossary.js:89-100), else the generated file's voice em-dash count grows past its baseline of 2. A voice-fix + LADDER_META rows; documented, not dropped.
+- The searchIndex "subsistence to affluent" phantom rung + stale tier populations (LOW, Wave H) — left in place this wave to keep Wave A's searchIndex change scoped to the Viability rename; the phantom is a known LOW gap, not undiscovered.
+- Renamed long-tail route /compendium/econ-viability-score -> econ-coherence-check: the old URL now 404s. Acceptable consequence of an honest concept rename; noted for SEO awareness.
