@@ -6,6 +6,7 @@ import Button from '../../primitives/Button.jsx';
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -68,13 +69,14 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const csd = deriveCriminalStructure(r);
   const crimStructure = csd?.key || null;
 
-  // Safety severity for UI theming
-  const isDangerous  = safetyLabel.includes('Dangerous')||safetyLabel.includes('Desperate');
-  const isUnsafe     = safetyLabel.includes('Unsafe')||safetyLabel.includes('Tense')||safetyLabel.includes('Volatile');
-  const isControlled = safetyLabel.includes('Controlled')||safetyLabel.includes('Suspicious');
-  const isModerate   = safetyLabel.includes('Moderate')||safetyLabel.includes('Safe');
-  const orderColor = isDangerous?'#8b1a1a':isUnsafe?'#8a4010':isControlled?'#5a2a6b':isModerate?'#1a5a28':'#a0762a';
-  const orderBg    = isDangerous?'#fdf4f4':isUnsafe?'#fdf0e8':isControlled?'#f8f0fc':isModerate?'#f0faf4':'#faf8ec';
+  // Safety severity for UI theming — via the shared safetySeverity chokepoint
+  // (M2), TOTAL over the producer's label vocabulary. 'Strained' (the middle
+  // stress tier) used to fall to the neutral default here; it now classifies as
+  // 'unsafe' like 'Tense'/'Volatile'. orderElevated drives the section auto-open.
+  const severity   = safetySeverityOf(safetyLabel);
+  const orderColor = severity.color;
+  const orderBg    = severity.bg;
+  const orderElevated = severity.key === 'dangerous' || severity.key === 'unsafe' || severity.key === 'controlled';
 
   // Stress military status — the shared DEFENSE_STRESS_STATUS set (pdf-4), so the
   // screen and the PDF defenseSlice raise the SAME active-military-status callouts.
@@ -176,7 +178,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
       {/* ── CRIMINAL ARCHITECTURE & PUBLIC ORDER ─────────────────────────── */}
       <Section title="Criminal Architecture & Public Order" collapsible
-        defaultOpen={isDangerous||isUnsafe||isControlled||crimStructure==='organized'}>
+        defaultOpen={orderElevated||crimStructure==='organized'}>
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
 
           {/* Public order status banner — language aligned with internal security score */}

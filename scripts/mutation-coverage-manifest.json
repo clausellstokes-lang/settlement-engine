@@ -282,6 +282,10 @@
     "tests/domain/corruptionWebPins.test.js": {
       "kind": "uncovered"
     },
+    "tests/domain/defenseStressStatusCoverage.test.js": {
+      "kind": "rationale",
+      "rationale": "Cycle-3 H3 coverage pin. The totality it asserts — DEFENSE_STRESS_STATUS keys equal the producer STRESS_TYPE_MAP set with non-empty postures — is the SAME contract tests/lint/vocabularyTotality.walker.test.js Contract B enforces (that walker is self-proving-meta, with embedded adversarial self-tests), so any source mutation dropping a status entry or blanking a posture reds the walker. This file adds only the human-readable H3 symptom (the 9 previously-dark stress types now raise a callout) and the byte-identity guard on the original 6 — behavioral documentation a synthetic source mutation cannot target beyond the coverage the walker already proves."
+    },
     "tests/domain/dispositionRatchet.integration.test.js": {
       "kind": "uncovered"
     },

@@ -5,6 +5,7 @@ import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
+import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -129,7 +130,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
-          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={sp.safetyLabel?.includes('Dangerous')||sp.safetyLabel?.includes('Desperate')?'#8b1a1a':sp.safetyLabel?.includes('Unsafe')?'#a0580a':sp.safetyLabel?.includes('Safe')?'#1a5a28':'#a0762a'}/>
+          <StatusTag label="Safety" value={sp.safetyLabel?.split('—')[0].trim()} accent={safetySeverityOf(sp.safetyLabel).color}/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
         </div>

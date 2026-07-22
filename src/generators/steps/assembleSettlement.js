@@ -35,7 +35,7 @@ import { promoteStressorsToConditions, reapplyEventConditions } from '../../doma
 // The canonical defense-readiness -> legitimacy table. This file used to carry a
 // stale local copy that LACKED 'Lightly Defended', so the real-label patch below
 // reverted that band's provisional contribution to 0 on every generated settlement.
-import { DEFENSE_CONTRIB, legitimacyDefScale, applyLegitimacyMultipliers } from '../factionDynamics.js';
+import { DEFENSE_CONTRIB, legitimacyDefScale, legitimacyBandFor, applyLegitimacyMultipliers } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
@@ -165,17 +165,24 @@ registerStep('assembleSettlement', {
       provLeg.score = newScore;
       provLeg.breakdown.defense = realDefContrib;
 
-      if      (newScore >= 75) { provLeg.label = 'Endorsed';          provLeg.color = '#1a5a28'; provLeg.govMultiplier = 1.30; provLeg.crimMultiplier = 0.75; }
-      else if (newScore >= 60) { provLeg.label = 'Approved';          provLeg.color = '#4a7a2a'; provLeg.govMultiplier = 1.15; provLeg.crimMultiplier = 0.90; }
-      else if (newScore >= 45) { provLeg.label = 'Tolerated';         provLeg.color = '#a0762a'; provLeg.govMultiplier = 1.00; provLeg.crimMultiplier = 1.00; }
-      else if (newScore >= 30) { provLeg.label = 'Contested';         provLeg.color = '#8a4010'; provLeg.govMultiplier = 0.80; provLeg.crimMultiplier = 1.15; }
-      else                     { provLeg.label = 'Legitimacy Crisis'; provLeg.color = '#8b1a1a'; provLeg.govMultiplier = 0.60; provLeg.crimMultiplier = 1.30; }
-      provLeg.isEndorsed          = newScore >= 75;
-      provLeg.isApproved          = newScore >= 60;
-      provLeg.isTolerated         = newScore >= 45 && newScore < 60;
-      provLeg.isContested         = newScore >= 30 && newScore < 45;
-      provLeg.isLegitimacyCrisis  = newScore < 30;
-      provLeg.governanceFractured = newScore < 30;
+      // M5 (cycle-3): re-stamp the WHOLE band tuple via the shared legitimacyBandFor
+      // chokepoint — label/color/BG/multipliers/flags together. The old inline arms
+      // moved label/color but left `bg` at the PROVISIONAL band's value, so a
+      // band-crossing settlement rendered a chip whose background contradicted its
+      // colour/label. Delegating to the same derivation computePublicLegitimacy uses
+      // makes drift structurally impossible; idempotent when the band didn't cross.
+      const band = legitimacyBandFor(newScore);
+      provLeg.label               = band.label;
+      provLeg.color               = band.color;
+      provLeg.bg                  = band.bg;
+      provLeg.govMultiplier       = band.govMultiplier;
+      provLeg.crimMultiplier      = band.crimMultiplier;
+      provLeg.isEndorsed          = band.isEndorsed;
+      provLeg.isApproved          = band.isApproved;
+      provLeg.isTolerated         = band.isTolerated;
+      provLeg.isContested         = band.isContested;
+      provLeg.isLegitimacyCrisis  = band.isLegitimacyCrisis;
+      provLeg.governanceFractured = band.governanceFractured;
 
       // pipeline-6: the faction powers were scaled by generatePowerStructure with
       // the PROVISIONAL gov/crim multipliers. Now that the defense-readiness patch

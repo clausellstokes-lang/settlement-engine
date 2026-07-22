@@ -9,6 +9,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
+import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 
@@ -131,11 +132,11 @@ registerStep('resolveConfig', {
   const threat = (() => {
     let mt = config.monsterThreat;
     if (mt === 'random_threat') {
-      mt = rng.pick(['heartland','heartland','frontier','frontier','frontier','plagued']);
+      mt = rng.pick([...MONSTER_THREAT_RANDOM_POOL]);
     }
-    mt = mt || 'frontier';
-    return mt === 'low' ? 'heartland' : mt === 'high' ? 'plagued'
-         : mt === 'medium' ? 'frontier' : mt;
+    // Delegate the alias→canonical resolution to the ONE normalizer (the
+    // data-contract chokepoint); byte-identical to the prior inline logic.
+    return normalizeMonsterThreat(mt);
   })();
 
   const culture = (config.culture === 'random_culture' || !config.culture)
