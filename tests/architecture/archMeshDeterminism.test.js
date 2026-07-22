@@ -28,9 +28,12 @@ const sha = (b) => createHash('sha256').update(Buffer.from(b.buffer, b.byteOffse
 const glbOf = (g, gen) => encodeGlb({ positions: g.positions, normals: g.normals, indices: g.indices, vertexCount: g.vertexCount, min: g.min, max: g.max }, { ao: g.ao, generator: gen });
 const eqF = (a, b) => a.length === b.length && Array.prototype.every.call(a, (v, i) => v === b[i]);
 
-// ── PINNED EXEMPLAR HASHES (ARCH_GEOMETRY_VERSION 1, 2026-07-21) ─────────────────────────────────
+// ── PINNED EXEMPLAR HASHES (ARCH_GEOMETRY_VERSION 2, 2026-07-22) ─────────────────────────────────
+// V2 (K-2): the evil-chapel spire is embedded below the tower top to cure the tone-gate roof-underside
+// striping (coincident spire-base / tower-top faces). ONLY K3_GLB_GOLDEN.chapel2 shifts; every hash
+// below is byte-IDENTICAL to V1 (the cathedral/buttress GLBs + all 3 cathedral plate goldens unchanged).
 const GOLDEN = {
-  geometryVersion: 1,
+  geometryVersion: 2,
   cathedralGlb: {
     0: '51c0a926ecf9058ae2981a64cdfcf3d684a49d7b84eedb953781de4a90d43cd2',
     1: 'f42685948ae9b03b0ced706a2b5e4da76f6b4a328caab553f9645a2d4704a509',
@@ -74,9 +77,11 @@ describe('SHA-256 exemplar goldens -- GLB (a hash change is a DECLARED geometry 
   });
 });
 
-// ── K-3 ORNAMENT GLB exemplar goldens (ARCH_GEOMETRY_VERSION 1, 2026-07-21). EXEMPLAR SAMPLE ONLY --
-// the milestone rose (all 3 tiers) + the signature tier of vault / tracery-families / evil-chapel;
-// NEVER the shape x skin cross product. A hash change is a DECLARED same-seed geometry shift. ─────────
+// ── K-3 ORNAMENT GLB exemplar goldens. EXEMPLAR SAMPLE ONLY -- the milestone rose (all 3 tiers) + the
+// signature tier of vault / tracery-families / evil-chapel; NEVER the shape x skin cross product. A hash
+// change is a DECLARED same-seed geometry shift. rose/vault/tracery are V1-IDENTICAL; chapel2 re-pinned
+// at ARCH_GEOMETRY_VERSION 2 (K-2, 2026-07-22): spire embedded below the tower top -- the tone-gate
+// striping cure (evilChapel.js SPIRE_EMBED). ─────────────────────────────────────────────────────────
 const K3_GLB_GOLDEN = {
   rose: {
     0: '202d310d2339d126936e24a7cb338eaf2c125129af40dfbb33c3f2387a60387d',
@@ -85,7 +90,7 @@ const K3_GLB_GOLDEN = {
   },
   vault2: 'd7542488b1ac13967f06918e3d5bc1b32e0622a9f90c500fffe01fb91311fce1',
   tracery2: '5ca68101a4e1795b6dcd2f68eb9525011e44de042881318ce1e5876cd9e2c334',
-  chapel2: 'a1b8e264b679c7a01a676549b51e4adaa06527cb04df4137b00dcb0d6b4774a7',
+  chapel2: 'c3063e77749f9012e2f620f82b7bc04c2934178bb6b8bff45cd264a225ed41b4',
 };
 describe('K-3 ornament geometry is byte-deterministic + pinned (exemplar GLB goldens)', () => {
   const rose = roseWindowRuleset();

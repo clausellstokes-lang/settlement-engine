@@ -45,8 +45,15 @@ export const ARCH_KERNEL_LAZY_SENTINEL = 'ARCH_KERNEL_LAZY_SENTINEL_k1';
  * ARCH_GEOMETRY_VERSION -- bumps when the MESH byte output can legitimately change (a primitive
  * emission order, a subdivision table, the intern discipline). A bump is a declared same-seed
  * geometry shift and reprints the exemplar hashes.
+ *
+ * VERSION 2 (K-2, 2026-07-22): the evil-chapel spire base is embedded below the tower top (evilChapel.js
+ * SPIRE_EMBED) to cure the tone-gate roof-underside striping (coincident spire-base / tower-top faces
+ * z-fighting in the shared raster). ONLY the evil-chapel geometry shifts -- every other arch golden
+ * (cathedral GLB all tiers, buttress, rose, vault, tracery, and ALL cathedral plate goldens) is
+ * byte-IDENTICAL; only K3_GLB_GOLDEN.chapel2 is re-pinned. The version number is not embedded in GLB
+ * bytes, so bumping it does not perturb any unchanged hash.
  */
-export const ARCH_GEOMETRY_VERSION = 1;
+export const ARCH_GEOMETRY_VERSION = 2;
 
 /**
  * ARCH_GRAMMAR_VERSION -- bumps when the IR/op CONTRACT changes (a new op, a changed rule shape,
