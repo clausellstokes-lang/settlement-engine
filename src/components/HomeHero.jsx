@@ -106,7 +106,7 @@ function GaugeStation({ value, label, active, onClick, onHover }) {
   );
 }
 
-export default function HomeHero({ onSignIn, onNavigate }) {
+export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
   const generate = useStore(s => s.generateSettlement);
   const updateConfig = useStore(s => s.updateConfig);
   const setWizardMode = useStore(s => s.setWizardMode);
@@ -210,10 +210,14 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       style={{
         // Deep Craft material: a FLAT parchment plate (hairline rule, no rounded
         // corners or drop shadow) framed at LANDING_MAX (master's composition).
-        maxWidth: LANDING_MAX, margin: `${SP.xl}px auto ${SP.xxl}px`,
-        padding: `${SP.xxl}px ${SP.xl}px`,
-        background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
-        border: `1px solid ${BORDER}`,
+        // `bare` (owner order 2026-07-22): drop the plate chrome so this hero can
+        // sit as the TOP SECTION of the merged Create card, which supplies the one
+        // plate + the gold divider below. Anon / standalone use keeps the plate.
+        maxWidth: bare ? 'none' : LANDING_MAX,
+        margin: bare ? 0 : `${SP.xl}px auto ${SP.xxl}px`,
+        padding: bare ? 0 : `${SP.xxl}px ${SP.xl}px`,
+        background: bare ? 'transparent' : `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
+        border: bare ? 'none' : `1px solid ${BORDER}`,
         fontFamily: sans,
         textAlign: 'center',
       }}
