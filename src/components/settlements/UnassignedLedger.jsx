@@ -1,4 +1,4 @@
-import { SECOND, BORDER, sans, FS, SP, PROSE_MAX } from '../theme.js';
+import { SECOND, BORDER, sans, FS, SP, PARCH } from '../theme.js';
 import { SettlementCard } from './SettlementCard.jsx';
 
 // ── The ledger's column heads (C3 — THE LEDGER) ───────────────────────────────
@@ -31,12 +31,17 @@ export default function UnassignedLedger({
       <h2 style={{ margin:'0 0 6px', paddingLeft:4, fontSize:FS.xs, fontWeight:700, color:SECOND, textTransform:'uppercase', letterSpacing:'0.06em', fontFamily:sans }}>
         {campaignsExist ? 'Unassigned' : 'Settlements'} ({saves.length})
       </h2>
-      {/* The ledger — a real table (a genuinely tabular comparison surface),
-          capped at PROSE_MAX so the action cluster stays near the name on a wide
-          monitor. Headers stated once; feint row rules live on the cells
-          (SettlementCard). overflow-x-in-container is the sanctioned narrow
-          behaviour for a table. */}
-      <div style={{ overflowX:'auto', maxWidth:PROSE_MAX }}>
+      {/* The ledger — a real table (a genuinely tabular comparison surface) on a
+          proper card ground. Owner order (2026-07-22): the unassigned rows had no
+          background and stopped short of the search/sort/filter toolbar above.
+          The wrapper now (a) carries the same PARCH card surface as that toolbar
+          (the named reference surface) so the rows read as a card, and (b) drops
+          the old PROSE_MAX cap so it fills the same PAGE_MAX content column as the
+          toolbar and aligns flush to its right edge. Headers stated once; feint row
+          rules live on the cells (SettlementCard). overflow-x-in-container is the
+          sanctioned narrow behaviour for a table. Flat rule-framed card (no radius,
+          no shadow) per the deep-craft ledger idiom. */}
+      <div style={{ overflowX:'auto', background:PARCH, border:`1px solid ${BORDER}`, padding:SP.sm }}>
         <table style={{ width:'100%', borderCollapse:'collapse' }}>
           <caption style={SR_ONLY}>Saved settlements</caption>
           <thead>
