@@ -23,7 +23,7 @@ import { getTierDisplayName } from '../../config/pricing.js';
 
 // The premium pitch — names the SIMULATION, not size or saves. Single source so
 // the test can assert the copy references the simulation and never a size cap.
-export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns, author your pantheon.';
+export const PREMIUM_PITCH = 'Unlock the simulation: advance time, run campaigns, create your own gods.';
 
 /**
  * @param {{

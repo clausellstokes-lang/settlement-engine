@@ -120,7 +120,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
           )}
 
           <Button variant="secondary" size="sm" disabled={disabled} icon={<Download size={12} />} onClick={bulk.exportBulk}>
-            Export
+            Export JSON
           </Button>
         </ActionGroup>
 
@@ -150,7 +150,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
       {bulk.deleteConfirm && (
         <DeleteConfirmation
           entityName={`${selectedCount} settlement${selectedCount === 1 ? '' : 's'}`}
-          details="The selected settlements will be permanently deleted, along with any neighbour links to them. Data not exported as JSON is lost."
+          details="These settlements will be gone for good, along with any neighbour links to them. Export a copy first if you want to keep one."
           onConfirm={bulk.confirmDelete}
           onCancel={() => bulk.setDeleteConfirm(false)}
         />

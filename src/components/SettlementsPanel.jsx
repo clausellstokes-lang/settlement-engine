@@ -673,9 +673,9 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // dominant band rather than another peer in an even stack.
     <Page>
      <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
-      {persistenceError && <div role="alert" style={alertStyle}>{persistenceError}</div>}
-      {reactivationError && <div role="alert" style={alertStyle}>{reactivationError}</div>}
-      {advanceError && <div role="alert" style={alertStyle}>{advanceError}</div>}
+      {persistenceError && <div role="alert" style={alertStyle}><strong>Library:</strong> {persistenceError}</div>}
+      {reactivationError && <div role="alert" style={alertStyle}><strong>Reactivation:</strong> {reactivationError}</div>}
+      {advanceError && <div role="alert" style={alertStyle}><strong>Advance:</strong> {advanceError}</div>}
 
       {/* Page header — the GM's own content owns the top of their own page; the
           SaveQuotaMeter is demoted to a slim strip below so the funnel frames
@@ -737,9 +737,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
           ) : (
-            <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>}>
-              New campaign
-            </Button>
+            <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
+              <Button variant="secondary" size="sm" onClick={() => setShowNewCampaign(true)} icon={<FolderPlus size={14}/>} style={{ alignSelf:'flex-start' }}>New campaign</Button>
+              <span style={{ fontSize:FS.xs, color:BODY, fontFamily:sans }}>Group towns into one world that advances together.</span>
+            </div>
           )}
         </div>
       )}
