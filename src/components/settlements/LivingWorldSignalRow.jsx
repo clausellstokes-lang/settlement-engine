@@ -140,9 +140,9 @@ export default function LivingWorldSignalRow({ model }) {
       {standing && (standing.wins > 0 || standing.losses > 0) && (
         <Pip
           color={standing.score > 0 ? STANDING_WIN : standing.score < 0 ? RED : SECOND}
-          title={`Cross-settlement record: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score})`}
+          title={`War record: ${standing.wins} wins, ${standing.losses} losses (net ${standing.score > 0 ? '+' : ''}${standing.score})`}
         >
-          {standing.wins}W/{standing.losses}L
+          won {standing.wins}, lost {standing.losses}
         </Pip>
       )}
     </div>

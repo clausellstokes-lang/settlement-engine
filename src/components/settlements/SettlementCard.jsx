@@ -15,10 +15,8 @@ import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
 import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import LifecycleSpine from '../primitives/LifecycleSpine.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
-import { useStore } from '../../store/index.js';
 import { emblem } from '../../design/organic/ornament/compose.js';
 
 // Relationship-type swatch for the neighbour chips (kept inline on OUR floor —
@@ -84,15 +82,6 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
       setExportBusy(false);
     }
   };
-
-  // Lifecycle spine stage — pure derivation from fields/selectors already in
-  // scope, no new store fields (mirrors OutputContainer's derivation). A library
-  // card is at least 'saved'; canonPhaseOf returns 'draft' for un-canonized
-  // saves, but the spine floor is 'saved' since the card is in the library. We
-  // surface the FURTHEST-reached stage. The clock-bound selector null-guards.
-  const isSettlementClockBound = useStore(st => st.isSettlementClockBound);
-  const simulated = typeof isSettlementClockBound === 'function' && isSettlementClockBound(s.id);
-  const lifecycleStage = s.is_public ? 'shared' : (simulated ? 'simulated' : (isCanon ? 'canon' : 'saved'));
 
   // Close the overflow menu on an outside click / Escape so it behaves like a
   // standard menu rather than a sticky panel.
@@ -229,7 +218,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             <LivingWorldSignalRow model={signals} />
             {!active && (
               <div style={{ fontSize:FS.xs, color:GOLD_TXT, background:GOLD_BG, padding:'2px 6px', display:'inline-flex', alignItems:'center', gap:4, fontWeight:700, alignSelf:'flex-start' }}>
-                Retained inactive{retentionUntil ? ` until ${retentionUntil}` : ''}
+                Frozen{retentionUntil ? ` until ${retentionUntil}` : ''}. Reactivate or export.
               </div>
             )}
             {/* AUDIT-2.2 — a failed read-only export is surfaced here (not silent). */}
@@ -275,8 +264,8 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   return <div style={{display:'flex',gap:SP.xs,flexWrap:'wrap'}}>
                     {badges.map(c => {
                       const v = m.totals[c.key]; const pos = v >= 0;
-                      return <span key={c.key} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
-                        {c.label} {fmtMod(v)}
+                      return <span key={c.key} title={`${c.label} ${fmtMod(v)}`} style={{ fontSize:FS.xs, fontWeight:500, color:pos?swatch.success:swatch.danger, background:pos?swatch.successBg:swatch.dangerBg, padding:'1px 5px', whiteSpace:'nowrap' }}>
+                        {c.label}: {pos ? 'helped' : 'hurt'}
                       </span>;
                     })}
                   </div>;
@@ -285,7 +274,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   <div style={{ display:'flex', gap:SP.xs, flexWrap:'wrap' }}>
                     {regionalCounts.queued > 0 && (
                       <span style={{ fontSize:FS.xs, fontWeight:500, color:SECOND, background:GOLD_BG, padding:'1px 6px', whiteSpace:'nowrap', display:'inline-flex', alignItems:'center', gap:2 }}>
-                        {regionalCounts.queued} queued
+                        {regionalCounts.queued} changes queued
                       </span>
                     )}
                     {regionalCounts.applied > 0 && (
@@ -303,11 +292,12 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               </div>
             )}
 
-            {/* Lifecycle at a glance — the compact 1-5 stepper. Non-interactive
-                (no onStep) so it adds no tab stops. Gated to active saves. */}
-            {active && (
-              <div><LifecycleSpine stage={lifecycleStage} compact /></div>
-            )}
+            {/* The compact 1-5 LifecycleSpine dots were removed here (legibility
+                wave, 2026-07-22): unlabeled numbered dots contradicted the Phase
+                column two cells away (a Draft save read Phase 'Draft' while the
+                spine marked stage-2 'Saved' as current). The Phase column is now
+                the single lifecycle encoding on a row. LifecycleSpine keeps its
+                labelled non-compact uses elsewhere. */}
             {/* Save metadata — the LEAST table-relevant fact, pushed below.
                 Dropped entirely when no parseable timestamp exists, so an absent
                 or malformed date never renders as "Invalid Date" (defect 7b). */}
@@ -331,10 +321,14 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             : <span style={{ fontSize:FS.sm, color:SECOND }}>Draft</span>}
         </td>
 
-        {/* ── Standing — the health-band phase glyph (dormancy-quiet: only the
-            attention bands surface a pip; a healthy town rests as a feint dash). */}
+        {/* ── Health — the worst health-band word (Stable / Strained / Vulnerable
+            / Critical), each a click-to-learn glossary term via HealthPip. The
+            bare dash previously swallowed every non-attention band (a Strained
+            town read as blank); now a settlement with derivable state always
+            carries its plain band word (legibility wave, 2026-07-22). The dash
+            remains only when no system-state can be derived. */}
         <td style={{ ...LEDGER_CELL, whiteSpace:'nowrap' }}>
-          {health && health.severity >= 2
+          {health
             ? <HealthPip pip={health}/>
             : <span aria-hidden="true" style={{ color:MUTED }}>–</span>}
         </td>
@@ -497,8 +491,8 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             <DeleteConfirmation
               entityName={s.name}
               details={(s.settlement?.neighbourNetwork||[]).length > 0
-                ? `This settlement has ${s.settlement.neighbourNetwork.length} neighbour link(s). Deleting it will remove those relationships from linked settlements. Any data not exported as JSON will be permanently lost.`
-                : 'All data not physically exported as a JSON file will be permanently lost.'}
+                ? `This settlement has ${s.settlement.neighbourNetwork.length} neighbour link(s). Deleting it will remove those relationships from linked settlements. This settlement will be gone for good. Export a copy first if you want to keep one.`
+                : 'This settlement will be gone for good. Export a copy first if you want to keep one.'}
               onConfirm={() => deleteConfirmed(s.id)}
               onCancel={() => setDeleteId(null)}
             />

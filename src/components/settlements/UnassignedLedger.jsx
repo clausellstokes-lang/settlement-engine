@@ -48,9 +48,9 @@ export default function UnassignedLedger({
             <tr>
               {selectMode && <th scope="col" style={{ ...LEDGER_TH, width:1 }}><span style={SR_ONLY}>Select</span></th>}
               <th scope="col" style={LEDGER_TH}>Settlement</th>
-              <th scope="col" style={LEDGER_TH}>Tier</th>
-              <th scope="col" style={LEDGER_TH}>Phase</th>
-              <th scope="col" style={LEDGER_TH}>Standing</th>
+              <th scope="col" style={LEDGER_TH}>Size</th>
+              <th scope="col" style={LEDGER_TH}>Status</th>
+              <th scope="col" style={LEDGER_TH}>Health</th>
               <th scope="col" style={{ ...LEDGER_TH, textAlign:'right' }}><span style={SR_ONLY}>Actions</span></th>
             </tr>
           </thead>
