@@ -54,6 +54,7 @@ MUTATED_FILES=(
   src/domain/display/chroniclersLetter.js
   src/design/townGlyphs/medieval.js
   tests/copy/.composed-prose-seams-baseline.json
+  src/domain/realm/heraldRouting.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -372,6 +373,14 @@ check_caught_planted "determinism/Math.random in pdf export" \
 #     owner's "never guess a faction" constraint (THE NEWS ADDRESS LAW, 2026-07-22).
 perl -0pi -e "s/return null; \/\/ no-fabrication: an unmatched npc DROPS the faction level, never invents one/return { id: 'zzz.fab', currentName: 'zzz_fabricated_faction', type: 'faction', tab: 'power' };/" src/domain/dossier/realmEntityWeb.js
 check_caught "address-web/fabricated faction level" src/domain/dossier/realmEntityWeb.js "npx vitest run tests/lint/realmEntityWebNoFabrication.walker.test.js"
+
+# 37. HERALD ROUTING totality (THE REALM INSPECTOR = NEWSPAPER, 2026-07-22) — a
+#     minted candidateType loses its section: drop `conquest` from EXACT_SECTION so
+#     the source-scanned literal is no longer explicitly routed (it falls to the
+#     silent events catch-all). The routing totality walker must red — a producer
+#     kind with no conscious classification is the exact no-orphan violation.
+perl -0pi -e "s/ conquest: 'war',//" src/domain/realm/heraldRouting.js
+check_caught "realm/herald routing no-orphan" src/domain/realm/heraldRouting.js "npx vitest run tests/lint/heraldRouting.walker.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
