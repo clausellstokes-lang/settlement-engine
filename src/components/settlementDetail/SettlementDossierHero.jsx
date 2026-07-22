@@ -24,6 +24,7 @@ import DetailErrorBoundary from './DetailErrorBoundary.jsx';
 import FeatureErrorBoundary from '../FeatureErrorBoundary.jsx';
 import NextActionRail from '../settlement/NextActionRail.jsx';
 import { useNextActionRailHandlers } from './useNextActionRailHandlers.js';
+import ExportUnlockDialog from '../dossier/ExportUnlockDialog.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { resolveExportSeam } from './resolveExportSeam.js';
 import { useStore } from '../../store/index.js';
@@ -41,6 +42,8 @@ export default function SettlementDossierHero({
   detail,
   editMode, canEdit, saveId, authTier, phase, narrated,
   toggleEditMode, openExportSheet, onRenameSettlement,
+  // Owner order (2026-07-22) — the header verbs relocate into the Actions rail:
+  openSessionMode, exportImage, openShare, galleryPublished = false, exportAllowed = false,
 }) {
   // NextActionRail inputs — reuse existing selectors; no new store fields.
   const canonize = useStore(s => s.canonize);
@@ -63,11 +66,18 @@ export default function SettlementDossierHero({
   // editing / canonize (pinned in nextActionRailNarrateGate.test.jsx).
   const canNarrate = !!saveId && authTier != null && authTier !== 'anon';
   const isMobile = useIsMobile();
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const [confirmCanonizeOpen, setConfirmCanonizeOpen] = useState(false);
+  // The free-tier export-unlock popup (owner order 2026-07-22) — the rail's Export
+  // rung opens it for a non-entitled owner; entitled owners open the variant sheet.
+  const [exportUnlockOpen, setExportUnlockOpen] = useState(false);
 
   const { railHandlers, confirmCanonize } = useNextActionRailHandlers({
     saveId, phase, canEdit, canNarrate, editMode, narrated,
     toggleEditMode, canonize, setConfirmCanonizeOpen, openExportSheet,
+    setPurchaseModalOpen, exportAllowed,
+    openExportUnlock: () => setExportUnlockOpen(true),
+    openSessionMode, exportImage, openShare,
   });
 
   if (!detail.settlement) return null;
@@ -122,6 +132,8 @@ export default function SettlementDossierHero({
                 save={detail.saveData || detail}
                 simulated={simulated}
                 handlers={railHandlers}
+                canEdit={canEdit}
+                galleryPublished={galleryPublished}
               />
             </aside>
           )}
@@ -139,6 +151,11 @@ export default function SettlementDossierHero({
         onConfirm={confirmCanonize}
         onCancel={() => setConfirmCanonizeOpen(false)}
       />
+
+      {/* Export-unlock popup — opened by the Actions rail's Export rung for a
+          free/unentitled owner (owner order 2026-07-22). Entitled owners never
+          open it (their Export rung goes straight to the variant sheet). */}
+      <ExportUnlockDialog open={exportUnlockOpen} saveId={saveId} onClose={() => setExportUnlockOpen(false)} />
     </>
   );
 }

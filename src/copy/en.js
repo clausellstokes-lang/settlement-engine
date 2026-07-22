@@ -1297,6 +1297,10 @@ export const en = Object.freeze({
     buySaved: {
       cta:      'Unlock all exports for this settlement · {price}',
       subline:  'A one-time purchase unlocks every export for this settlement: the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
+      // The unlock pitch is a POPUP now (owner order 2026-07-22): `checkout` is
+      // the popup's confirm CTA, `dismiss` its plain close.
+      checkout: 'Continue to checkout',
+      dismiss:  'Not now',
       busy:     'Redirecting…',
       error:    'Checkout could not start. Please try again.',
     },
@@ -1304,7 +1308,10 @@ export const en = Object.freeze({
     // honest path is to save first.
     saveFirst: {
       cta:      'Save this settlement to unlock its exports',
-      subline:  'Export rights attach to a saved settlement. Save it first, then one {price} purchase unlocks all its exports to re-download: the dossier PDF, map images, and the VTT token map.',
+      // `subline` (the static save-first export pitch) was removed per owner order
+      // (2026-07-22, order-6 extension): no static export-pitch copy renders on the
+      // dossier; the button label carries the meaning. `atCap` is a save-limit
+      // warning, not an export pitch, so it stays.
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
       error:    'Could not save this settlement. Please try again.',
     },

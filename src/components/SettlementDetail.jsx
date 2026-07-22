@@ -1,7 +1,7 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 // Drama (the theatre masks) is already in the first-paint icon set via the
 // Plot Hooks tab — reusing it for Session Mode adds no vendor-icons bytes.
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2, Image as ImageIcon, Drama} from 'lucide-react';
+import {Link2, ChevronLeft, X, RotateCcw, Edit3, Share2} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -53,7 +53,8 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 // premium = unlimited). resolveExportAccess is the same decision BuyThisDossier
 // uses; the saved-view Export button gates on it and hands non-entitled tiers the
 // purchase rung instead of a free export.
-import BuyThisDossier, { resolveExportAccess } from './BuyThisDossier.jsx';
+import { resolveExportAccess } from './BuyThisDossier.jsx';
+import SettlementDetailActions from './settlementDetail/SettlementDetailActions.jsx';
 // Modal that fires after pillar-tier KILL_NPC commits. Reads
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
@@ -439,7 +440,9 @@ export default function SettlementDetail({
             Back to list
           </Button>
           <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
-          <PhaseBadge />
+          {/* chipOnly in read mode: the Mark Canon action moved to the Actions
+              panel (owner order 2026-07-22); the header keeps only the status chip. */}
+          <PhaseBadge chipOnly={!editMode} />
           <span style={{flex:1}} />
           {/* Narrated/Raw — Tier 7.15 phased rollout: migrated to StateBadge primitive. */}
           <StateBadge
@@ -480,77 +483,32 @@ export default function SettlementDetail({
             </span>
           )}
 
-          {/* Tier 5.4 — Edit-mode toggle. Premium-gated; non-premium
-              users see a greyed-out variant that opens the pricing
-              modal so they understand it's a premium feature. */}
-          <Button
-            variant={!canEdit ? 'secondary' : 'ai'}
-            size="sm"
-            icon={!canEdit ? <Lock size={12}/> : <Edit3 size={12}/>}
-            onClick={() => {
-              if (canEdit) { toggleEditMode(); }
-              else if (setPurchaseModalOpen) { setPurchaseModalOpen(true); }
-            }}
-            title={canEdit
-              ? (editMode
-                  ? 'Stop editing. Fields return to read-only display.'
-                  : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
-              : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
-          >
-            {!canEdit
-              ? 'Edit (Premium)'
-              : (editMode ? 'Stop Editing' : 'Edit Dossier')}
-          </Button>
-          {flag('sessionMode') && (
-            <Button
-              variant="gold"
-              size="sm"
-              icon={<Drama size={12}/>}
-              onClick={() => setSessionOpen(true)}
-              title="A distraction-free run-of-play view for the table: tonight's beats, key NPCs, hooks, and the live world state."
-            >
-              Session Mode
-            </Button>
-          )}
-          {exportAccess.allowed ? (
-            <Button
-              variant="danger"
-              size="sm"
-              busy={exporting}
-              icon={<FileText size={12}/>}
-              onClick={() => setExportSheetOpen(true)}
-              title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-            >
-              {exporting ? 'Building PDF…' : 'Export Dossier'}
-            </Button>
-          ) : (
-            /* Owner ruling: a free tier without a durable right buys the PDF
-               ($2.99) rather than exporting freely. BuyThisDossier renders the
-               matching rung ('unpurchased' → $2.99 durable buy; 'unsaved' → save
-               first). Anon never reaches this saved view. */
-            <BuyThisDossier settlement={detail.settlement} saveId={saveId} />
-          )}
-          <Button
-            variant="secondary"
-            size="sm"
-            busy={imageExporting}
-            icon={<ImageIcon size={12}/>}
-            onClick={handleExportImage}
-            title={t('export.imageTitle')}
-          >
-            {imageExporting ? t('export.imageBusy') : t('export.imageCta')}
-          </Button>
-          {saveId && (
-            <Button
-              variant="info"
-              size="sm"
-              icon={<Share2 size={13}/>}
-              aria-pressed={shareOpen}
-              onClick={() => setShareOpen(v => !v)}
-              title="Publish this dossier to the public gallery, or manage its listing."
-            >
-              {shareOpen ? 'Close Gallery' : (liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery')}
-            </Button>
+          {/* Owner order (2026-07-22): the settlement's verbs (Edit, Session Mode,
+              Export, Export Image, Share) live in the Actions panel (NextActionRail)
+              in READ mode; retained in the toolbar ONLY in EDIT mode (no rail there),
+              so a premium editor still reaches them and can Stop Editing. Extracted
+              to SettlementDetailActions to keep this surface under the 600-line
+              ratchet. (JUDGMENT, vetoable: the alternative renders the rail in edit
+              mode too and deletes these entirely.) */}
+          {editMode && (
+            <SettlementDetailActions
+              settlement={detail.settlement}
+              saveId={saveId}
+              canEdit={canEdit}
+              editMode={editMode}
+              toggleEditMode={toggleEditMode}
+              setPurchaseModalOpen={setPurchaseModalOpen}
+              sessionModeEnabled={flag('sessionMode')}
+              onOpenSession={() => setSessionOpen(true)}
+              exportAllowed={exportAccess.allowed}
+              exporting={exporting}
+              onOpenExportSheet={() => setExportSheetOpen(true)}
+              imageExporting={imageExporting}
+              onExportImage={handleExportImage}
+              shareOpen={shareOpen}
+              onToggleShare={() => setShareOpen(v => !v)}
+              galleryPublished={liveSaveEntry?.is_public}
+            />
           )}
         </div>
       </div>
@@ -785,6 +743,12 @@ export default function SettlementDetail({
         toggleEditMode={toggleEditMode}
         openExportSheet={() => { setPdfError(null); setExportSheetOpen(true); }}
         onRenameSettlement={handleRenameSettlement}
+        // Owner order (2026-07-22): the relocated header verbs feed the Actions rail.
+        openSessionMode={flag('sessionMode') ? () => setSessionOpen(true) : undefined}
+        exportImage={handleExportImage}
+        openShare={saveId ? () => setShareOpen(v => !v) : undefined}
+        galleryPublished={!!liveSaveEntry?.is_public}
+        exportAllowed={exportAccess.allowed}
       />
 
       <ConfirmDialog

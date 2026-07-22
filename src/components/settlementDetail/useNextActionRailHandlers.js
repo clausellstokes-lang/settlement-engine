@@ -55,6 +55,13 @@ function scrollFocusWhenReady(selector) {
 export function useNextActionRailHandlers({
   saveId, phase, canEdit, canNarrate, editMode, narrated,
   toggleEditMode, canonize, setConfirmCanonizeOpen, openExportSheet,
+  // Owner order (2026-07-22) — the relocated header verbs + the entitlement seam:
+  setPurchaseModalOpen,           // free-tier Edit upsell target
+  exportAllowed = false,          // resolveExportAccess.allowed for this save
+  openExportUnlock,               // opens the ExportUnlockDialog popup (free tier)
+  openSessionMode,                // opens the run-of-play takeover
+  exportImage,                    // downloads the PNG share card
+  openShare,                      // toggles the Share-to-Gallery panel
 }) {
   // Shared canonize commit — the ONE place the persisted draft→canon transition
   // fires, behind the host's ConfirmDialog + the first_canonize pricing moment.
@@ -105,9 +112,17 @@ export function useNextActionRailHandlers({
     // Regenerate is the same paid invocation as the first narrate; the rail wraps
     // it in a discard-confirm (NextActionRail owns that dialog) before firing.
     onRegenerateAi: (canNarrate && narrated) ? runNarrate : undefined,
-    onExport: openExportSheet,
+    // Export: an entitled owner opens the variant sheet directly; a free/
+    // unentitled owner gets the ExportUnlockDialog popup (owner order 2026-07-22).
+    onExport: exportAllowed ? openExportSheet : (openExportUnlock || openExportSheet),
     onPlaceOnMap: () => navigate('realm'),
-    onEdit: canEdit ? toggleEditMode : undefined,
+    // Edit: premium → toggle edit mode; free → the upgrade prompt (the rung shows
+    // "Edit (Premium)" via NextActionRail's canEdit branch).
+    onEdit: canEdit ? toggleEditMode : (setPurchaseModalOpen ? () => setPurchaseModalOpen(true) : undefined),
+    // Relocated header verbs — Session Mode / Export Image / Share to Gallery.
+    onSessionMode: openSessionMode || undefined,
+    onExportImage: exportImage || undefined,
+    onShare: openShare || undefined,
   };
 
   return { railHandlers, requestCanonize, confirmCanonize };

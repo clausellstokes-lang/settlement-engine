@@ -26,7 +26,7 @@
 
 import { useState } from 'react';
 import {
-  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3,
+  Save, BookMarked, Zap, Sparkles, FileText, MapPin, Edit3, Drama, Image as ImageIcon, Share2, Lock,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getAiCost, getTierDisplayName } from '../../config/pricing.js';
@@ -48,7 +48,7 @@ import { t } from '../../copy/index.js';
  * @param {() => void} [props.handlers.onEdit]
  * @param {boolean} [props.simulated]    whether the settlement's realm is clock-bound (in the Realm)
  */
-export default function NextActionRail({ settlement, save, handlers, simulated = false }) {
+export default function NextActionRail({ settlement, save, handlers, simulated = false, canEdit = false, galleryPublished = false }) {
   const phase      = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const aiSettlement = useStore(s => s.aiSettlement);
@@ -72,11 +72,13 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
     ? { ...handlers, onRegenerateAi: () => setConfirmRegen(true) }
     : handlers;
 
-  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers });
+  const items = computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers: railHandlers, canEdit, galleryPublished });
   if (!items.length) return null;
   return (
     <>
-      <ActionRail title="Next best action" items={items} />
+      {/* Owner order (2026-07-22): the panel is renamed "Actions" and hosts the
+          settlement's verbs (relocated out of the header toolbar). */}
+      <ActionRail title="Actions" items={items} />
       <ConfirmDialog
         open={confirmRegen}
         tone="warning"
@@ -91,7 +93,7 @@ export default function NextActionRail({ settlement, save, handlers, simulated =
 }
 
 /** Pure derivation — testable without the store. */
-function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers }) {
+function computeItems({ phase, eventCount, narrated, simulated, settlement, save, handlers, canEdit = false, galleryPublished = false }) {
   // `settlement` is destructured (previously dropped as `_settlement`) so callers
   // that branch on it can. The current ladder reads phase/event/narrated facts;
   // settlement is kept available for future phase-aware rungs.
@@ -149,6 +151,34 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
   }
 
   // ── Secondaries — always offered when applicable ────────────────────
+  // Owner order (2026-07-22): the header toolbar's verbs are relocated here.
+  // Order after the primary (Mark Canon / lifecycle rung): Session Mode, Edit,
+  // then the paid narration + the export / share cluster.
+  if (handlers.onSessionMode) {
+    items.push({
+      id: 'session', Icon: Drama,
+      label: 'Session Mode',
+      hint:  'A distraction-free run-of-play view for the table.',
+      onClick: handlers.onSessionMode,
+    });
+  }
+  // Edit — premium-gated. A non-premium owner still sees the rung (labeled
+  // "Edit (Premium)" with a lock) so the upsell survives the move; the handler
+  // routes to toggleEditMode or the purchase modal in useNextActionRailHandlers.
+  if (handlers.onEdit) {
+    items.push({
+      id: 'edit', Icon: canEdit ? Edit3 : Lock,
+      label: canEdit
+        ? (phase === 'canon' ? 'Edit (correction)' : 'Edit Dossier')
+        : 'Edit (Premium)',
+      hint:  canEdit
+        ? (phase === 'canon'
+            ? 'Authorial correction outside the timeline.'
+            : 'Edit dossier prose in place. Preserved across rerolls.')
+        : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.',
+      onClick: handlers.onEdit,
+    });
+  }
   if (!narrated && handlers.onPolishAi) {
     items.push({
       id: 'polish', Icon: Sparkles,
@@ -176,6 +206,26 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
       onClick: handlers.onExport,
     });
   }
+  // Export Image — the free PNG share card (relocated from the header). Not
+  // premium-gated; sharing is the growth loop.
+  if (handlers.onExportImage) {
+    items.push({
+      id: 'export_image', Icon: ImageIcon,
+      label: t('export.imageCta'),
+      hint:  'A one-card PNG (name, tier, headline stats) for Discord or a forum.',
+      onClick: handlers.onExportImage,
+    });
+  }
+  // Share to Gallery — publish / manage the public listing (relocated from the
+  // header). Label mirrors the old button (published → manage the listing).
+  if (handlers.onShare) {
+    items.push({
+      id: 'share', Icon: Share2,
+      label: galleryPublished ? 'Edit Gallery Listing' : 'Share to Gallery',
+      hint:  'Publish this dossier to the public gallery, or manage its listing.',
+      onClick: handlers.onShare,
+    });
+  }
   // Once the settlement is in the Realm, the gold primary above is no longer the
   // realm rung, so offer "Open the Realm" as an anytime secondary to return to it.
   if (phase === 'canon' && simulated && handlers.onPlaceOnMap) {
@@ -185,16 +235,6 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
       tag:   realmTier,
       hint:  t('detail.openRealmHint'),
       onClick: handlers.onPlaceOnMap,
-    });
-  }
-  if (handlers.onEdit) {
-    items.push({
-      id: 'edit', Icon: Edit3,
-      label: phase === 'canon' ? 'Edit (correction)' : 'Edit',
-      hint:  phase === 'canon'
-        ? 'Authorial correction outside the timeline.'
-        : 'Tweak settings without rerolling identity.',
-      onClick: handlers.onEdit,
     });
   }
   return items;
