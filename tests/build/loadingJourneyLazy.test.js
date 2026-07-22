@@ -28,11 +28,13 @@ const requireDist = process.env.VERIFY_DIST === '1';
 //   journeyManifest.js       JOURNEY_FILM_FINGERPRINT   (generation film)
 //   RealmUnfurlLoading.jsx    REALM_UNFURL_FINGERPRINT   (realm/FMG loading)
 //   WelcomeJourneyBackdrop.jsx WELCOME_JOURNEY_FINGERPRINT (Slice C2 Welcome film)
+//   ProgressJourneyOverlay.jsx PROGRESS_JOURNEY_FINGERPRINT (progress-scrubbed video)
 // The Welcome film rides the lazy below-fold chunk (HomeLanding is React.lazy in
 // AppViews; LandingBelowFold is React.lazy in HomeLanding) — Slice C2 law #2,
 // ZERO EAGER JS: the scroll conductor never reaches first paint.
 const JOURNEY_FINGERPRINTS = Object.freeze([
   '::loading-journey:v1:', '::realm-unfurl:v1:', '::welcome-journey:v1:',
+  '::progress-journey:v1:',
 ]);
 
 function staticImportSpecifiers(code) {
