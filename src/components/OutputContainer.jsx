@@ -13,7 +13,6 @@ import { navigate } from '../hooks/useRoute.js';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
-import HouseColophon from './organic/HouseColophon.jsx';
 import { flag } from '../lib/flags.js';
 import { t } from '../copy/index.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
@@ -778,7 +777,14 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         {!readOnly && (
           <DossierActionBand
             narrativeEnabled={narrativeEnabled}
-            suppressNarrativePitch={welcomeCardVisible || !flag('narrativeLayerStrip')}
+            // Owner order (2026-07-21): the Narrative Layer pitch band lives ONLY in
+            // the library now — never on the wizard DRAFT dossier. The embedded
+            // generate-flow (hideHeader) is exactly that draft surface, and it is the
+            // only place this band's pitch renders (the readOnly library + public
+            // views never mount the band). Suppressing the pitch here makes the
+            // embedded band collapse to null (DossierActionBand returns null when
+            // embedded && !showNarrativePitch), removing the band from the draft.
+            suppressNarrativePitch={welcomeCardVisible || !flag('narrativeLayerStrip') || hideHeader}
             narrativeButtons={renderNarrativeButtons()}
             settlement={settlement}
             saveId={saveId}
@@ -916,12 +922,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               </div>
             </FeatureErrorBoundary>
           </Suspense>
-          {/* The dossier foot — seal and counterseal (the house device beside this
-              settlement's own seeded medallion) with the motto caption; the
-              ceremonial close of the document (owner placement, 2026-07-18).
-              H3 THE EXPORT CEREMONY (C15-b): the web dossier foot impresses the
-              seal + pulses the medallion once as the document closes. */}
-          <HouseColophon seed={activeSettlement?.name} ceremony />
+          {/* The dossier foot's house seal + counterseal (HouseColophon) was
+              removed from the dossier surface per owner order (2026-07-21): the
+              identity mark and its motto caption no longer close the on-screen
+              dossier. The seal still renders on the brand surfaces (About) and the
+              PDF export cover — those are untouched (HouseColophon remains used by
+              components/organic/samples/DossierSample + howto/AboutManifesto). */}
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>

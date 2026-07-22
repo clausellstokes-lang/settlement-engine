@@ -519,7 +519,16 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 only — content is fully in the DOM at t=0, instant under
                 reduced-motion, and it replays on any dossier re-mount, e.g.
                 returning via View Settlement — the document is re-delivered). */}
-            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', willChange: 'transform' }}>
+            {/* Flush the dossier to the sticky black toolbar (owner order,
+                2026-07-21): the post-generate column uses flex `gap: 16`, which
+                left a parchment seam between the toolbar's bottom edge and the
+                dossier's top border. A -16 top margin cancels exactly that one
+                inter-item gap so the dossier sits flush under the bar, while the
+                gap below (dossier → Save row) is preserved. The toolbar keeps its
+                own sticky box (it must NOT be wrapped), so the seam is closed from
+                the dossier side. Holds on scroll (the sticky bar reserves its flow
+                box) and on mobile (the auto-hiding bar keeps its reserved space). */}
+            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', marginTop: -16, width: '100%', willChange: 'transform' }}>
               <OutputContainer hideHeader />
             </div>
           </Suspense>
