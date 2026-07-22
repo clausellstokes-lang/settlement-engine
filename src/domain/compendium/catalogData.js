@@ -35,8 +35,8 @@ export const ARCHETYPES = [
   { cat:'Economic', name:'Merchant Army',         cond:'Economy ≥68, Military ≤38',                  desc:'Wealthy settlement replaces public guard with private security.' },
   { cat:'Economic', name:'Theocratic Economy',    cond:'Religion ≥70, Economy ≤42',                  desc:'Church dominates economic life. Sacred goods trade x1.55.' },
   { cat:'Military', name:'Military Fortress',     cond:'Military ≥72, threat: plagued',            desc:'Defense first. Civilian economy secondary to garrison supply.' },
-  { cat:'Military', name:'Frontier Outpost',      cond:'Military ≥60, tier: small, threat: frontier',desc:'Exists to hold a line. Austere, disciplined, expendable.' },
-  { cat:'Military', name:'Besieged Holdout',      cond:'Stress: Siege active',                        desc:'Under siege. Supply constrained. Morale is a resource.' },
+  { cat:'Military', name:'Frontier Outpost',      cond:'Military ≥60, tier: thorp or hamlet, threat: frontier',desc:'Exists to hold a line. Austere, disciplined, expendable.' },
+  { cat:'Military', name:'Besieged Holdout',      cond:'Stress: Under Siege active',                        desc:'Under siege. Supply constrained. Morale is a resource.' },
   { cat:'Military', name:'Secular Brutalism',     cond:'Military ≥70, Religion ≤25',                 desc:'No religious institutions. Military fills moral and legal vacuum.' },
   { cat:'Military', name:'State Crime',           cond:'Military ≥70, Economy ≤32',                  desc:'Military predates on the population. Extractions, disappearances, selective enforcement.' },
   { cat:'Religious',name:'Theocracy',             cond:'Religion ≥72, Military ≤45',                 desc:'Church is the government. Civil and religious law unified.' },
@@ -59,5 +59,5 @@ export const ARCHETYPES = [
   { cat:'Balanced', name:'Balanced',              cond:'No slider exceeds 60',                        desc:'No dominant faction. Power distributed. Politics negotiated.' },
   { cat:'Balanced', name:'Merchant Hunters Lodge',cond:'Military ≥60, threat: plagued',            desc:'Organized monster hunters are a significant institution.' },
   { cat:'Balanced', name:'Mining Colony',         cond:'Resource: ore or stone nearby, isolated',    desc:'Exists to extract a resource. Company-town dynamics.' },
-  { cat:'Balanced', name:'Plague of Beasts',      cond:'Stress: Monster Threat active',              desc:'Under active monster pressure. Civilian life constrained to fortified areas.' },
+  { cat:'Balanced', name:'Plague of Beasts',      cond:'Stress: Beast & Raider Threat active',              desc:'Under active monster pressure. Civilian life constrained to fortified areas.' },
 ];

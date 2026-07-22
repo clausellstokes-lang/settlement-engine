@@ -77,6 +77,9 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"strain","concept":"Capacity Strain","blurb":"How a single capacity such as food, defense, or healing reads against the demand on it.","tab":"stress","anchor":"stress","levels":[{"name":"Surplus","reading":"More capacity than the settlement needs. A cushion against a bad season."},{"name":"Adequate","reading":"Supply meets demand. The settlement is not straining here."},{"name":"Strained","reading":"Demand is outrunning supply; the margin is thin and a shock would bite."},{"name":"Critical","reading":"Supply is far short of demand. This capacity is close to failing."},{"name":"Collapsed","reading":"Demand dwarfs supply; the function has effectively broken down."},{"name":"Absent","reading":"Neither supplied nor demanded. The capacity does not exist here at all."}]},
     {"id":"severity","concept":"Stressor Severity","blurb":"How hard a stressor hits when the DM applies one.","tab":"stress","anchor":"stress","levels":[{"name":"Minor","reading":"A light touch. The stressor nudges the settlement without upending it."},{"name":"Moderate","reading":"A real strain the settlement must reckon with, short of a crisis."},{"name":"Severe","reading":"A heavy blow. The stressor forces the settlement toward crisis."}]},
     {"id":"magnitude","concept":"Relief Magnitude","blurb":"How much an ally gives when it sends relief.","tab":"stress","anchor":"stress","levels":[{"name":"Token","reading":"A gesture: a small share of the giver’s surplus above its own floor."},{"name":"Measured","reading":"A considered gift: a meaningful share of the surplus, kept sustainable."},{"name":"Generous","reading":"An open hand: most of the giver’s surplus above its floor goes out."}]},
+    {"id":"safety","concept":"Safety","blurb":"How safe daily life is, read from enforcement against criminal presence. A crisis stress can override the label with a compound form, such as Tense under an active siege.","tab":"stress","anchor":"stress","levels":[{"name":"Very Safe","reading":"Enforcement is at least 3.5 times the criminal presence. Fortress towns and occupations sit here."},{"name":"Safe","reading":"Enforcement is clearly dominant and criminal elements are suppressed."},{"name":"Moderate","reading":"A functional equilibrium; law is present but crime exists."},{"name":"Unsafe","reading":"Criminal activity measurably outpaces enforcement."},{"name":"Dangerous","reading":"Organized crime or a crisis has overwhelmed the watch."}]},
+    {"id":"defense-readiness","concept":"Defense Readiness","blurb":"Each of the five defense arms (beasts and monsters, invasion and war, internal security, economic survival, disasters and famine) carries a readiness badge on this scale. The settlement's overall defense reads from well defended down to undefended.","tab":"stress","anchor":"stress","levels":[{"name":"Strong","reading":"Readiness at or above 65. This pressure is well covered."},{"name":"Adequate","reading":"At or above 40. Covered, but with little margin."},{"name":"Weak","reading":"At or above 20. Thinly covered; a real threat would strain it."},{"name":"Critical","reading":"Below 20. Effectively uncovered against this pressure."}]},
+    {"id":"legitimacy","concept":"Public Legitimacy","blurb":"How far the populace accepts the ruling power, on a 0 to 100 scale built from prosperity, safety, defense, and food. It scales how well the ruling power performs and, inversely, how much room crime finds.","tab":"power","anchor":"power","levels":[{"name":"Endorsed","reading":"At or above 75. The ruling power is broadly accepted; it governs at full strength and crime finds little room."},{"name":"Approved","reading":"At or above 60. Accepted, with a modest edge in the ruling power's favour."},{"name":"Tolerated","reading":"At or above 45. The ruling power holds on sufferance, with no edge either way."},{"name":"Contested","reading":"At or above 30. Acceptance is fraying; the ruling power weakens and crime gains ground."},{"name":"Legitimacy Crisis","reading":"Below 30. The ruling power has lost the populace; governance can fracture and crime fills the vacuum."}]},
     {"id":"capture","concept":"Criminal Capture","blurb":"How far a criminal interest has taken a seat of power.","tab":"power","anchor":"power","levels":[{"name":"None","reading":"No criminal capture. The seat answers to its lawful holder."},{"name":"Adversarial","reading":"A criminal interest is pushing at the seat, and the seat is pushing back."},{"name":"Equilibrium","reading":"The lawful holder and the criminal interest have reached an uneasy standoff."},{"name":"Corrupted","reading":"The criminal interest now bends the seat to its ends more often than not."},{"name":"Capture","reading":"The seat is captured. The criminal interest owns its decisions outright."}]},
     {"id":"pantheon-rank","concept":"Pantheon Rank","blurb":"A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.","tab":"arcane","anchor":"faith","levels":[{"name":"Cult","reading":"A fringe following, with fewer than two settlement seats."},{"name":"Minor","reading":"Two or three settlement seats."},{"name":"Major","reading":"Four or more settlement seats, and only a major god can shift a realm's magic legality."}]},
     {"id":"magic-level","concept":"Magic Level","blurb":"The Magic priority slider resolves to one of these levels. None means magic is disabled in the world, not a slider position. The level sets how available magic is and feeds its legality, risk, and role.","tab":"arcane","anchor":"magic","levels":[{"name":"None","reading":"Magic is disabled in this world. There is no magical economy."},{"name":"Low","reading":"A magic priority at or below 25. Magic is rare and limited."},{"name":"Medium","reading":"A magic priority up to 65. A moderate, everyday presence."},{"name":"High","reading":"A magic priority above 65. Magic is broad and pervasive."}]},
@@ -299,21 +302,110 @@ export const COMPENDIUM_DATA = Object.freeze({
     ],
     "note": "Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave."
   },
+  "factionArchetypes": [
+    {"id":"government","label":"Government","reading":"The ruling administration and its offices."},
+    {"id":"noble","label":"Noble","reading":"Landed or hereditary elites."},
+    {"id":"military","label":"Military","reading":"The garrison, guard, or standing force."},
+    {"id":"merchant","label":"Merchant","reading":"Trade houses, guilds, and commercial interests."},
+    {"id":"religious","label":"Religious","reading":"Temples, clergy, and faith institutions."},
+    {"id":"criminal","label":"Criminal","reading":"Organized crime and the black market."},
+    {"id":"arcane","label":"Arcane","reading":"Mages, academies, and arcane orders."},
+    {"id":"craft","label":"Craft","reading":"Artisans and production guilds."},
+    {"id":"labor","label":"Labor","reading":"Workers, labourers, and their organizations."},
+    {"id":"outsider","label":"Outsider","reading":"A foreign or external power with a foothold."},
+    {"id":"occupation","label":"Occupation","reading":"An occupying force holding the settlement."},
+    {"id":"civic","label":"Civic","reading":"Civic bodies and community institutions."},
+    {"id":"other","label":"Other","reading":"A faction that fits none of the above."}
+  ],
+  "governance": {
+    "labels": [
+      {"label":"Stable","reading":"Settled governance with no dominant strain."},
+      {"label":"Ordered","reading":"Stable under a strong military presence."},
+      {"label":"Tense","reading":"Stable but under external threat or monster pressure."},
+      {"label":"Fragile","reading":"Held by private security, with no public law."},
+      {"label":"Vulnerable","reading":"Prosperous but underdefended."},
+      {"label":"Unstable","reading":"Pervasive organized crime, up to outright criminal governance."},
+      {"label":"Enforced Order","reading":"Authoritarian control."},
+      {"label":"Rigid","reading":"A militant theocracy."}
+    ],
+    "note": "An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others)."
+  },
   "lenses": {
     "count": 5,
     "entries": [
-      {"id":"parchment","label":"Parchment"},
-      {"id":"watercolor","label":"Watercolor"},
-      {"id":"darkFantasy","label":"Dark Fantasy"},
-      {"id":"vtt","label":"VTT"},
-      {"id":"accessible","label":"Accessible"}
+      {"id":"parchment","label":"Parchment","reading":"The default hand-drawn plate."},
+      {"id":"watercolor","label":"Watercolor","reading":"Soft washes and muted colour."},
+      {"id":"darkFantasy","label":"Dark Fantasy","reading":"Grim, high-contrast linework."},
+      {"id":"vtt","label":"VTT","reading":"A bare grid and scale bar for virtual tabletops."},
+      {"id":"accessible","label":"Accessible","reading":"Colourblind-safe, high-contrast linework (Okabe-Ito)."}
     ],
+    "illustratedNote": "A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.",
     "schema": {
       "furniture": ["wash","cartouche","compass","grid","scaleBar"],
       "hazardGlyphs": ["triangle","diamond","pin"],
       "anchorGlyphs": ["disc","ring","star"],
       "contrastLevels": ["soft","normal","high"]
     }
+  },
+  "districts": {
+    "wealth": [
+      {"label":"Destitute","reading":"The poorest quarter; want is the rule."},
+      {"label":"Poor","reading":"Getting by, with little to spare."},
+      {"label":"Modest","reading":"Ordinary means."},
+      {"label":"Comfortable","reading":"Reliable means and some surplus."},
+      {"label":"Wealthy","reading":"Visibly well off."},
+      {"label":"Opulent","reading":"The richest quarter; conspicuous wealth."}
+    ],
+    "safety": [
+      {"label":"Lawless","reading":"No effective law; the quarter is left to itself."},
+      {"label":"Unsafe","reading":"Crime outpaces what watch there is."},
+      {"label":"Watched","reading":"A watch is present but stretched."},
+      {"label":"Orderly","reading":"Law holds day to day."},
+      {"label":"Fortified","reading":"Heavily secured and closely held."}
+    ],
+    "categories": ["religious","merchant","military","craft","noble","civic","arcane","criminal","foreign","industrial","residential"],
+    "note": "District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy."
+  },
+  "lifecycle": {
+    "remnants": [
+      {"label":"Relic ruin","reading":"A settlement that peaked at city or larger; a privileged resettlement site."},
+      {"label":"Abandoned site","reading":"A settlement that died before it ever reached city."}
+    ],
+    "satellites": "A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the parent, and adjacent steadings converge into one. Every step moves population in conserved amounts."
+  },
+  "npcGoals": {
+    "entries": [
+      {"id":"secure_office","label":"Secure office","reading":"Win or hold a seat of power."},
+      {"id":"protect_followers","label":"Protect followers","reading":"Shield the NPC's people from harm."},
+      {"id":"expand_influence","label":"Expand influence","reading":"Grow reach and standing."},
+      {"id":"settle_rivalry","label":"Settle a rivalry","reading":"Resolve a feud, by force or otherwise."},
+      {"id":"restore_order","label":"Restore order","reading":"Put down disorder and reassert control."},
+      {"id":"profit_from_change","label":"Profit from change","reading":"Turn upheaval to advantage."},
+      {"id":"control_institution","label":"Control an institution","reading":"Capture a key body."},
+      {"id":"win_public_legitimacy","label":"Win public legitimacy","reading":"Earn the populace's acceptance."},
+      {"id":"bind_external_patron","label":"Bind an external patron","reading":"Secure a foreign backer."},
+      {"id":"survive_crisis","label":"Survive a crisis","reading":"Get through an immediate threat."}
+    ],
+    "note": "An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress."
+  },
+  "powerStructure": {
+    "transferCauses": [
+      {"id":"coup","label":"Coup","reading":"Seized by force."},
+      {"id":"election","label":"Election","reading":"Chosen by a vote."},
+      {"id":"succession","label":"Succession","reading":"Inherited or handed down."},
+      {"id":"conquest","label":"Conquest","reading":"Imposed by an outside conqueror."},
+      {"id":"appointment","label":"Appointment","reading":"Installed by a higher authority."}
+    ],
+    "note": "A settlement's government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change."
+  },
+  "corruption": {
+    "vectors": [
+      {"label":"Greed","reading":"Bought with wealth."},
+      {"label":"Hunger for status","reading":"Lured with rank and honour."},
+      {"label":"Fear","reading":"Coerced by threat."},
+      {"label":"Forbidden patron","reading":"Bound to a forbidden backer."}
+    ],
+    "note": "An institution reads compromised in two ways: covertly, as a hidden stooge homed inside it, or revealed, as a scandal-bearing impairment. It needs a corruptible flaw and a criminal institution present; organic exposure is the counter-force that can clean it up over time."
   },
   "facets": {
     "natures": ["faith","security","trade","craft","learning","vice","civic"],
@@ -380,8 +472,8 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Economic","name":"Merchant Army","cond":"Economy ≥68, Military ≤38","desc":"Wealthy settlement replaces public guard with private security."},
       {"cat":"Economic","name":"Theocratic Economy","cond":"Religion ≥70, Economy ≤42","desc":"Church dominates economic life. Sacred goods trade x1.55."},
       {"cat":"Military","name":"Military Fortress","cond":"Military ≥72, threat: plagued","desc":"Defense first. Civilian economy secondary to garrison supply."},
-      {"cat":"Military","name":"Frontier Outpost","cond":"Military ≥60, tier: small, threat: frontier","desc":"Exists to hold a line. Austere, disciplined, expendable."},
-      {"cat":"Military","name":"Besieged Holdout","cond":"Stress: Siege active","desc":"Under siege. Supply constrained. Morale is a resource."},
+      {"cat":"Military","name":"Frontier Outpost","cond":"Military ≥60, tier: thorp or hamlet, threat: frontier","desc":"Exists to hold a line. Austere, disciplined, expendable."},
+      {"cat":"Military","name":"Besieged Holdout","cond":"Stress: Under Siege active","desc":"Under siege. Supply constrained. Morale is a resource."},
       {"cat":"Military","name":"Secular Brutalism","cond":"Military ≥70, Religion ≤25","desc":"No religious institutions. Military fills moral and legal vacuum."},
       {"cat":"Military","name":"State Crime","cond":"Military ≥70, Economy ≤32","desc":"Military predates on the population. Extractions, disappearances, selective enforcement."},
       {"cat":"Religious","name":"Theocracy","cond":"Religion ≥72, Military ≤45","desc":"Church is the government. Civil and religious law unified."},
@@ -404,7 +496,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Balanced","name":"Balanced","cond":"No slider exceeds 60","desc":"No dominant faction. Power distributed. Politics negotiated."},
       {"cat":"Balanced","name":"Merchant Hunters Lodge","cond":"Military ≥60, threat: plagued","desc":"Organized monster hunters are a significant institution."},
       {"cat":"Balanced","name":"Mining Colony","cond":"Resource: ore or stone nearby, isolated","desc":"Exists to extract a resource. Company-town dynamics."},
-      {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Monster Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}
+      {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Beast & Raider Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}
     ]
   },
   "relationships": {

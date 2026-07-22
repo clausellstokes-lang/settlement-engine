@@ -146,6 +146,18 @@ export function PowerTab_({ search='' }) {
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
+    <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
+    <SectionHeading accent={INK}>Governance stability</SectionHeading>
+    {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'8px 0 0' }}>{CD.governance.note}</p>
+    <SectionHeading accent={INK}>How power changes hands</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>{CD.powerStructure.note}</p>
+    {CD.powerStructure.transferCauses.map((c)=>(<Row key={c.id} label={c.label} lw={130}>{c.reading}</Row>))}
+    <SectionHeading accent={INK}>How corruption moves</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>{CD.corruption.note}</p>
+    {CD.corruption.vectors.map((v)=>(<Row key={v.label} label={v.label} lw={130}>{v.reading}</Row>))}
   </>;
 }
 
@@ -168,7 +180,7 @@ export function ArcaneTab() {
     <SectionHeading id="magic" accent={INK}>Magic</SectionHeading>
     {laddersFor('arcane').filter((l) => l.anchor === 'magic').map((l) => (
       <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
-    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. Arcane institutions can substitute for missing production.</Card>
+    <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. When the magic dial permits, four traditions can substitute for missing production, druidic strongest, then divine, arcane, and alchemical. Magical transport carries necessities through a blockade: a teleportation circle at full strength, an airship at half.</Card>
     <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
     <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
     <Card title="Religion & Governance" accent='#1a4a2a'>Religion 72+ with low Military produces Theocracy. With strong Crime produces Religious Fraud.</Card>
@@ -273,6 +285,9 @@ export function InstitutionsTab({ _config, search }) {
       {search
         ? <><strong>{filtered.length}</strong> results</>
         : <>Showing first <strong>48</strong> of <strong>{all.length}</strong> institutions. Use search to filter.</>}
+    </p>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'-4px 0 10px' }}>
+      Each entry rolls a base chance shifted by the matching priority slider band; a Core entry always generates.
     </p>
     {filtered.length === 0 ? (
       <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:BODY }}>

@@ -48,6 +48,8 @@ import { SYSTEM_VARIABLES, CAUSAL_BANDS, VARIABLE_LABEL } from '../src/domain/ca
 import { PRESSURE_KINDS } from '../src/domain/autonomy/signalRegistry.js';
 import { DEITY_AXIS_EFFECTS } from '../src/domain/display/deityEffects.js';
 import { DEITY_RANK_AUTHORITY } from '../src/domain/deityConstants.js';
+import { FACTION_ARCHETYPES } from '../src/domain/factionArchetypes.js';
+import { RULING_POWER_CAUSES } from '../src/domain/rulingPower.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
 import {
@@ -212,6 +214,111 @@ const AUTONOMY_LABELS = {
   full:            'fully autonomous',
 };
 
+// Power family (Wave I): faction archetype readings (keyed by the FACTION_ARCHETYPES
+// values; build-guarded so a new archetype without a reading reds) + the governance-
+// stability base-label vocabulary (authored from governanceNarrative's parentheticals;
+// stresses override the base label with a compound form, stated in the note).
+const FACTION_ARCHETYPE_READINGS = {
+  government: 'The ruling administration and its offices.',
+  noble:      'Landed or hereditary elites.',
+  military:   'The garrison, guard, or standing force.',
+  merchant:   'Trade houses, guilds, and commercial interests.',
+  religious:  'Temples, clergy, and faith institutions.',
+  criminal:   'Organized crime and the black market.',
+  arcane:     'Mages, academies, and arcane orders.',
+  craft:      'Artisans and production guilds.',
+  labor:      'Workers, labourers, and their organizations.',
+  outsider:   'A foreign or external power with a foothold.',
+  occupation: 'An occupying force holding the settlement.',
+  civic:      'Civic bodies and community institutions.',
+  other:      'A faction that fits none of the above.',
+};
+const GOVERNANCE_LABELS = [
+  { label: 'Stable',         reading: 'Settled governance with no dominant strain.' },
+  { label: 'Ordered',        reading: 'Stable under a strong military presence.' },
+  { label: 'Tense',          reading: 'Stable but under external threat or monster pressure.' },
+  { label: 'Fragile',        reading: 'Held by private security, with no public law.' },
+  { label: 'Vulnerable',     reading: 'Prosperous but underdefended.' },
+  { label: 'Unstable',       reading: 'Pervasive organized crime, up to outright criminal governance.' },
+  { label: 'Enforced Order', reading: 'Authoritarian control.' },
+  { label: 'Rigid',          reading: 'A militant theocracy.' },
+];
+const GOVERNANCE_NOTE = 'An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others).';
+
+// Map + district vocabularies (Wave K). Lens readings keyed by TOWN_MAP_STYLE_IDS
+// (build-guarded); the Illustrated 6th lens is noted separately (it re-shapes geometry,
+// not a re-skin). District wealth/safety labels + the category list authored inline,
+// drift-pinned to qualitativeBands / districtProfile.
+const LENS_READINGS = {
+  parchment:   'The default hand-drawn plate.',
+  watercolor:  'Soft washes and muted colour.',
+  darkFantasy: 'Grim, high-contrast linework.',
+  vtt:         'A bare grid and scale bar for virtual tabletops.',
+  accessible:  'Colourblind-safe, high-contrast linework (Okabe-Ito).',
+};
+const ILLUSTRATED_LENS_NOTE = 'A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.';
+const DISTRICT_WEALTH = [
+  { label: 'Destitute',   reading: 'The poorest quarter; want is the rule.' },
+  { label: 'Poor',        reading: 'Getting by, with little to spare.' },
+  { label: 'Modest',      reading: 'Ordinary means.' },
+  { label: 'Comfortable', reading: 'Reliable means and some surplus.' },
+  { label: 'Wealthy',     reading: 'Visibly well off.' },
+  { label: 'Opulent',     reading: 'The richest quarter; conspicuous wealth.' },
+];
+const DISTRICT_SAFETY = [
+  { label: 'Lawless',   reading: 'No effective law; the quarter is left to itself.' },
+  { label: 'Unsafe',    reading: 'Crime outpaces what watch there is.' },
+  { label: 'Watched',   reading: 'A watch is present but stretched.' },
+  { label: 'Orderly',   reading: 'Law holds day to day.' },
+  { label: 'Fortified',  reading: 'Heavily secured and closely held.' },
+];
+const DISTRICT_CATEGORIES = [
+  'religious', 'merchant', 'military', 'craft', 'noble', 'civic',
+  'arcane', 'criminal', 'foreign', 'industrial', 'residential',
+];
+const DISTRICT_NOTE = 'District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy.';
+
+// Living-World completions (Wave L). Settlement remnant grades + satellite fates
+// (settlementLifecycleKernel), and the 10 NPC goal kinds the world pulse pursues
+// (npcAgency GOALS, authored labels; drift-pinned by tests/ui/compendiumLivingCompletions).
+const LIFECYCLE_REMNANTS = [
+  { label: 'Relic ruin',     reading: 'A settlement that peaked at city or larger; a privileged resettlement site.' },
+  { label: 'Abandoned site', reading: 'A settlement that died before it ever reached city.' },
+];
+const LIFECYCLE_SATELLITES = 'A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the parent, and adjacent steadings converge into one. Every step moves population in conserved amounts.';
+const NPC_GOALS = [
+  { id: 'secure_office',         label: 'Secure office',           reading: 'Win or hold a seat of power.' },
+  { id: 'protect_followers',     label: 'Protect followers',       reading: 'Shield the NPC\'s people from harm.' },
+  { id: 'expand_influence',      label: 'Expand influence',        reading: 'Grow reach and standing.' },
+  { id: 'settle_rivalry',        label: 'Settle a rivalry',        reading: 'Resolve a feud, by force or otherwise.' },
+  { id: 'restore_order',         label: 'Restore order',           reading: 'Put down disorder and reassert control.' },
+  { id: 'profit_from_change',    label: 'Profit from change',      reading: 'Turn upheaval to advantage.' },
+  { id: 'control_institution',   label: 'Control an institution',  reading: 'Capture a key body.' },
+  { id: 'win_public_legitimacy', label: 'Win public legitimacy',   reading: 'Earn the populace\'s acceptance.' },
+  { id: 'bind_external_patron',  label: 'Bind an external patron', reading: 'Secure a foreign backer.' },
+  { id: 'survive_crisis',        label: 'Survive a crisis',        reading: 'Get through an immediate threat.' },
+];
+const NPC_GOAL_NOTE = 'An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress.';
+
+// Power-structure completions (Wave M): the ruling-power transfer causes (from
+// RULING_POWER_CAUSES, authored readings; drift-pinned) and the corruption machinery
+// vocabulary (covert vs revealed, the four vectors, exposure as the counter-force).
+const TRANSFER_CAUSE_READINGS = {
+  coup:        'Seized by force.',
+  election:    'Chosen by a vote.',
+  succession:  'Inherited or handed down.',
+  conquest:    'Imposed by an outside conqueror.',
+  appointment: 'Installed by a higher authority.',
+};
+const POWER_STRUCTURE_NOTE = 'A settlement\'s government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change.';
+const CORRUPTION_VECTORS = [
+  { label: 'Greed',              reading: 'Bought with wealth.' },
+  { label: 'Hunger for status',  reading: 'Lured with rank and honour.' },
+  { label: 'Fear',               reading: 'Coerced by threat.' },
+  { label: 'Forbidden patron',   reading: 'Bound to a forbidden backer.' },
+];
+const CORRUPTION_NOTE = 'An institution reads compromised in two ways: covertly, as a hidden stooge homed inside it, or revealed, as a scandal-bearing impairment. It needs a corruptible flaw and a criminal institution present; organic exposure is the counter-force that can clean it up over time.';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -263,6 +370,15 @@ export function buildCompendiumDataObject() {
   }
   for (const id of Object.keys(DISASTER_TYPE_BY_TERRAIN)) {
     if (!TERRAIN_READINGS[id]) throw new Error(`compendium: terrain "${id}" has no TERRAIN_READINGS entry`);
+  }
+  for (const id of Object.values(FACTION_ARCHETYPES)) {
+    if (!FACTION_ARCHETYPE_READINGS[id]) throw new Error(`compendium: faction archetype "${id}" has no reading`);
+  }
+  for (const id of TOWN_MAP_STYLE_IDS) {
+    if (!LENS_READINGS[id]) throw new Error(`compendium: map lens "${id}" has no LENS_READINGS entry`);
+  }
+  for (const id of RULING_POWER_CAUSES) {
+    if (!TRANSFER_CAUSE_READINGS[id]) throw new Error(`compendium: transfer cause "${id}" has no reading`);
   }
 
   // Systems: preset membership derived; wave flags validated against the universe.
@@ -428,9 +544,16 @@ export function buildCompendiumDataObject() {
     terrain: Object.keys(DISASTER_TYPE_BY_TERRAIN).map((id) => ({ id, reading: TERRAIN_READINGS[id] })),
     cultures: { values: [...CULTURE_VALUES], note: CULTURE_NOTE },
 
+    // Power family (Wave I): the 13 faction archetypes (from FACTION_ARCHETYPES + authored
+    // readings) and the governance-stability base-label vocabulary. The legitimacy ladder
+    // rides CD.bandLadders (tab:'power').
+    factionArchetypes: Object.values(FACTION_ARCHETYPES).map((id) => ({ id, label: titleCase(id), reading: FACTION_ARCHETYPE_READINGS[id] })),
+    governance: { labels: GOVERNANCE_LABELS.map((g) => ({ ...g })), note: GOVERNANCE_NOTE },
+
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,
-      entries: TOWN_MAP_STYLE_IDS.map((id) => ({ id, label: resolveTownMapStyle(id).label })),
+      entries: TOWN_MAP_STYLE_IDS.map((id) => ({ id, label: resolveTownMapStyle(id).label, reading: LENS_READINGS[id] })),
+      illustratedNote: ILLUSTRATED_LENS_NOTE,
       schema: {
         furniture: [...FURNITURE_KINDS],
         hazardGlyphs: [...HAZARD_GLYPHS],
@@ -438,6 +561,27 @@ export function buildCompendiumDataObject() {
         contrastLevels: [...CONTRAST_LEVELS],
       },
     },
+
+    // District vocabularies (Wave K): the per-quarter wealth (6) + safety (5) ladders
+    // and the category list the settlement-map cards show; distinct from settlement-wide
+    // Prosperity (the note disarms the shared Poor/Comfortable/Wealthy words).
+    districts: {
+      wealth: DISTRICT_WEALTH.map((x) => ({ ...x })),
+      safety: DISTRICT_SAFETY.map((x) => ({ ...x })),
+      categories: [...DISTRICT_CATEGORIES],
+      note: DISTRICT_NOTE,
+    },
+
+    // Living-World completions (Wave L): settlement birth/death + NPC goal vocabulary.
+    lifecycle: { remnants: LIFECYCLE_REMNANTS.map((x) => ({ ...x })), satellites: LIFECYCLE_SATELLITES },
+    npcGoals: { entries: NPC_GOALS.map((x) => ({ ...x })), note: NPC_GOAL_NOTE },
+
+    // Power-structure completions (Wave M): transfer causes + corruption machinery.
+    powerStructure: {
+      transferCauses: RULING_POWER_CAUSES.map((id) => ({ id, label: titleCase(id), reading: TRANSFER_CAUSE_READINGS[id] })),
+      note: POWER_STRUCTURE_NOTE,
+    },
+    corruption: { vectors: CORRUPTION_VECTORS.map((x) => ({ ...x })), note: CORRUPTION_NOTE },
 
     // Facets: the exported interior/facet vocabulary. The 7 institution natures are
     // the interior kinds minus the 'generic' fallback. The institutionFunction axis

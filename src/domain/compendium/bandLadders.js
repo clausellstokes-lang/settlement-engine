@@ -160,6 +160,48 @@ const FOOD_SECURITY_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Public legitimacy — how far the populace accepts the ruling power (factionDynamics.js:
+ * Endorsed >=75, Approved >=60, Tolerated >=45, Contested >=30, else Legitimacy Crisis).
+ * Thresholds stated in each reading; pinned to the factionDynamics labels by
+ * tests/ui/compendiumPower.test.jsx. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const LEGITIMACY_LEVELS = Object.freeze([
+  { name: 'Endorsed',          reading: 'At or above 75. The ruling power is broadly accepted; it governs at full strength and crime finds little room.' },
+  { name: 'Approved',          reading: 'At or above 60. Accepted, with a modest edge in the ruling power\'s favour.' },
+  { name: 'Tolerated',         reading: 'At or above 45. The ruling power holds on sufferance, with no edge either way.' },
+  { name: 'Contested',         reading: 'At or above 30. Acceptance is fraying; the ruling power weakens and crime gains ground.' },
+  { name: 'Legitimacy Crisis', reading: 'Below 30. The ruling power has lost the populace; governance can fracture and crime fills the vacuum.' },
+]);
+
+/**
+ * Safety — how safe daily life is, from enforcement against criminal presence
+ * (safetyProfile.js: Very Safe >=3.5x, Safe >=2.0x, Moderate >=1.2x, Unsafe >=0.6x,
+ * else Dangerous). Pinned to the safetyProfile labels. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const SAFETY_LEVELS = Object.freeze([
+  { name: 'Very Safe', reading: 'Enforcement is at least 3.5 times the criminal presence. Fortress towns and occupations sit here.' },
+  { name: 'Safe',      reading: 'Enforcement is clearly dominant and criminal elements are suppressed.' },
+  { name: 'Moderate',  reading: 'A functional equilibrium; law is present but crime exists.' },
+  { name: 'Unsafe',    reading: 'Criminal activity measurably outpaces enforcement.' },
+  { name: 'Dangerous', reading: 'Organized crime or a crisis has overwhelmed the watch.' },
+]);
+
+/**
+ * Defense readiness — the badge each of the five defense arms carries
+ * (defenseDisplay.js readinessBadge: Strong >=65, Adequate >=40, Weak >=20, else
+ * Critical). Pinned to the readinessBadge thresholds. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const DEFENSE_READINESS_LEVELS = Object.freeze([
+  { name: 'Strong',   reading: 'Readiness at or above 65. This pressure is well covered.' },
+  { name: 'Adequate', reading: 'At or above 40. Covered, but with little margin.' },
+  { name: 'Weak',     reading: 'At or above 20. Thinly covered; a real threat would strain it.' },
+  { name: 'Critical', reading: 'Below 20. Effectively uncovered against this pressure.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -186,6 +228,12 @@ const LADDER_META = Object.freeze([
     blurb: 'How hard a stressor hits when the DM applies one.' },
   { id: 'magnitude', concept: 'Relief Magnitude', tab: 'stress', anchor: 'stress', category: 'magnitude',
     blurb: 'How much an ally gives when it sends relief.' },
+  { id: 'safety', concept: 'Safety', tab: 'stress', anchor: 'stress', levels: SAFETY_LEVELS,
+    blurb: 'How safe daily life is, read from enforcement against criminal presence. A crisis stress can override the label with a compound form, such as Tense under an active siege.' },
+  { id: 'defense-readiness', concept: 'Defense Readiness', tab: 'stress', anchor: 'stress', levels: DEFENSE_READINESS_LEVELS,
+    blurb: 'Each of the five defense arms (beasts and monsters, invasion and war, internal security, economic survival, disasters and famine) carries a readiness badge on this scale. The settlement\'s overall defense reads from well defended down to undefended.' },
+  { id: 'legitimacy', concept: 'Public Legitimacy', tab: 'power', anchor: 'power', levels: LEGITIMACY_LEVELS,
+    blurb: 'How far the populace accepts the ruling power, on a 0 to 100 scale built from prosperity, safety, defense, and food. It scales how well the ruling power performs and, inversely, how much room crime finds.' },
   { id: 'capture', concept: 'Criminal Capture', tab: 'power', anchor: 'power', category: 'capture-rung',
     blurb: 'How far a criminal interest has taken a seat of power.' },
   { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,
