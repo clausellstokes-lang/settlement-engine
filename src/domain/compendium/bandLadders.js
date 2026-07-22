@@ -104,6 +104,19 @@ const COHERENCE_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Pantheon rank — the living-world tier a deity holds, which rises and falls with
+ * its seats (a seat is a settlement whose patron is this god). Rank is EARNED through
+ * spread, not authored. Seat/tick numbers stated here are pinned to PANTHEON_TUNING by
+ * tests/ui/compendiumFaith.test.jsx, so a tuning change reds the copy. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const PANTHEON_RANK_LEVELS = Object.freeze([
+  { name: 'Cult',  reading: 'A fringe following, with fewer than two settlement seats.' },
+  { name: 'Minor', reading: 'Two or three settlement seats.' },
+  { name: 'Major', reading: 'Four or more settlement seats, and only a major god can shift a realm\'s magic legality.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -126,6 +139,8 @@ const LADDER_META = Object.freeze([
     blurb: 'How a single capacity such as food, defense, or healing reads against the demand on it.' },
   { id: 'capture', concept: 'Criminal Capture', tab: 'power', anchor: 'power', category: 'capture-rung',
     blurb: 'How far a criminal interest has taken a seat of power.' },
+  { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,
+    blurb: 'A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.' },
 ]);
 
 /**

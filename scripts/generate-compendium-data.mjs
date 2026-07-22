@@ -46,6 +46,8 @@ import { dirname, join } from 'node:path';
 
 import { SYSTEM_VARIABLES, CAUSAL_BANDS, VARIABLE_LABEL } from '../src/domain/causalState.js';
 import { PRESSURE_KINDS } from '../src/domain/autonomy/signalRegistry.js';
+import { DEITY_AXIS_EFFECTS } from '../src/domain/display/deityEffects.js';
+import { DEITY_RANK_AUTHORITY } from '../src/domain/deityConstants.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
 import {
@@ -201,6 +203,13 @@ export function buildCompendiumDataObject() {
     if (!op.label) throw new Error(`compendium: operation "${op.opType}" has no label`);
     if (!op.description) throw new Error(`compendium: operation "${op.opType}" has no description`);
   }
+  for (const axisId of ['alignment', 'law', 'rank', 'temperament']) {
+    const eff = DEITY_AXIS_EFFECTS[axisId];
+    if (!eff || Object.keys(eff).length === 0) throw new Error(`compendium: deity axis "${axisId}" missing from DEITY_AXIS_EFFECTS`);
+    for (const v of Object.values(eff)) {
+      if (!v.effect || !v.effect.trim()) throw new Error(`compendium: deity axis "${axisId}" has a value with no effect string`);
+    }
+  }
 
   // Systems: preset membership derived; wave flags validated against the universe.
   const systems = ENDGAME_SYSTEMS.map((s) => {
@@ -319,9 +328,34 @@ export function buildCompendiumDataObject() {
     },
 
     // The premade-deity roster is intentionally absent (owner ruling 2026-07-21: no
-    // premade deities; deities enter a world only via custom-content authoring). The
-    // deityPool remains for existing saves / generation (T4), but the public Compendium
-    // no longer publishes a premade roster.
+    // premade deities; deities enter a world only via custom-content authoring). What
+    // the Compendium DOES publish is the doctrine-compliant vocabulary: the four axes a
+    // custom deity is authored on, projected from the engine's DEITY_AXIS_EFFECTS single
+    // source (never re-typed, so it can never disagree with the engine), each value's
+    // effect string carrying its own name. Rank appends its authority lift (never re-typed).
+    faith: {
+      authorship: 'Deities enter a world only through custom-content authoring; there is no premade roster. You author a god on the four axes below, and the living pantheon does the rest as the faith spreads.',
+      temperNote: 'Temperament is not a dial you set. The engine derives it from the alignment and law axes: evil and chaos push a god warlike, good and law push it peacelike.',
+      axes: [
+        { id: 'alignment', label: 'Alignment', lines: [
+          DEITY_AXIS_EFFECTS.alignment.good.effect,
+          DEITY_AXIS_EFFECTS.alignment.evil.effect,
+        ] },
+        { id: 'law', label: 'Law', lines: [
+          DEITY_AXIS_EFFECTS.law.lawful.effect,
+          DEITY_AXIS_EFFECTS.law.chaotic.effect,
+        ] },
+        { id: 'rank', label: 'Rank', lines: [
+          `${DEITY_AXIS_EFFECTS.rank.major.effect} (a lift of ${DEITY_RANK_AUTHORITY.major})`,
+          `${DEITY_AXIS_EFFECTS.rank.minor.effect} (a lift of ${DEITY_RANK_AUTHORITY.minor})`,
+          `${DEITY_AXIS_EFFECTS.rank.cult.effect} (a lift of ${DEITY_RANK_AUTHORITY.cult})`,
+        ] },
+        { id: 'temperament', label: 'Temperament', derived: true, lines: [
+          DEITY_AXIS_EFFECTS.temperament.warlike.effect,
+          DEITY_AXIS_EFFECTS.temperament.peacelike.effect,
+        ] },
+      ],
+    },
 
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,
