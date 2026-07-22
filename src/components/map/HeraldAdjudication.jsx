@@ -16,12 +16,13 @@ import { BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
-import { BORDER, CARD_ALT, FS, GOLD, INK, MUTED, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans } from '../theme.js';
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { OutcomeCard, Section, SmallButton } from './WorldPulsePrimitives.jsx';
 import RealmVerbComposer from './RealmVerbComposer.jsx';
 import {
   collectSettlementIds,
+  human,
   involvedEntities,
   nameMapFromSaves,
   outcomeSubjectDescriptor,
@@ -82,6 +83,20 @@ export default function HeraldAdjudication({ campaign, focusId = null, focusName
     ? allPending.filter(p => collectSettlementIds(p).map(String).includes(String(focusId)))
     : allPending;
   const pendingGroups = groupProposalsBySettlement(pending, nameById);
+
+  // THE RESOLVED LOG (styled apart from the pending desk): manual decisions (the
+  // proposals you applied/dismissed) + autoresolve results (the latest pulse's
+  // auto-applied significant turns). Focus-scoped, capped, most-recent first.
+  const latestPulse = (worldState.pulseHistory || [])[(worldState.pulseHistory || []).length - 1] || null;
+  const touchesFocus = (record) => focusId == null || collectSettlementIds(record).map(String).includes(String(focusId));
+  const resolvedLog = [
+    ...(worldState.proposals || [])
+      .filter(p => (p.status === 'applied' || p.status === 'dismissed') && touchesFocus(p))
+      .map(p => ({ id: `prop-${p.id}`, headline: p.headline || 'A decision', by: `${p.status} by you`, tick: p.tick })),
+    ...((latestPulse?.selectedOutcomes || [])
+      .filter(o => o.applyMode !== 'proposal' && (o.significance === 'major' || (o.severity ?? 0) >= 0.72) && touchesFocus(o))
+      .map(o => ({ id: `auto-${o.id}`, headline: o.headline || human(o.candidateType) || 'A turn', by: 'by autoresolve', tick: latestPulse?.tick }))),
+  ].slice(0, 15);
   const rules = worldState.simulationRules || {};
   const autonomy = politicalAutonomyOf(rules);
   const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
@@ -248,6 +263,25 @@ export default function HeraldAdjudication({ campaign, focusId = null, focusName
 
       {/* The realm-orders forcing surface (force-as-proposal; approval applies above). */}
       <RealmVerbComposer campaign={campaign} />
+
+      {/* THE RESOLVED LOG — past decisions, styled APART from the pending desk: muted,
+          no action controls, each tagged by who resolved it (you / autoresolve). */}
+      {resolvedLog.length > 0 && (
+        <details data-testid="adjudication-resolved" style={{ border: `1px solid ${BORDER}`, background: CARD }}>
+          <summary style={{ cursor: 'pointer', padding: '6px 10px', color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
+            Resolved log
+            <span style={{ marginLeft: 'auto', color: MUTED, fontWeight: 800 }}>{resolvedLog.length}</span>
+          </summary>
+          <div style={{ display: 'grid', gap: 6, padding: 8 }}>
+            {resolvedLog.map(entry => (
+              <div key={entry.id} style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderLeft: `2px solid ${BORDER2}`, paddingLeft: 8 }}>
+                <span style={{ flex: 1, color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, overflowWrap: 'anywhere' }}>{entry.headline}</span>
+                <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, whiteSpace: 'nowrap' }}>{entry.by}</span>
+              </div>
+            ))}
+          </div>
+        </details>
+      )}
     </div>
   );
 }

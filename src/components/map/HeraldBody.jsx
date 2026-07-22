@@ -21,7 +21,9 @@ import CampaignEmptyState from './CampaignEmptyState.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { flag } from '../../lib/flags.js';
 import { needsAttentionDigest } from './heraldFilter.js';
+import { Section } from './WorldPulsePrimitives.jsx';
 import HeraldSection from './HeraldSection.jsx';
+import HeraldForecast from './HeraldForecast.jsx';
 import HeraldAdjudication from './HeraldAdjudication.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
 import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
@@ -185,21 +187,31 @@ export default function HeraldBody({ section, campaign, feed = { bySection: {}, 
   }
 
   if (section === 'divination') {
+    // THE FORECAST DOOR — not a past report. The pressure/emergence substrate read in
+    // present-progressive grammar (HeraldForecast), visually unmistakable as a weather
+    // page: a dashed frame, every entry amendable. Severity-first (the closest reckoning
+    // leads).
+    const forecasts = [...(bySection.divination || [])].sort((a, b) => (b.severity ?? 0) - (a.severity ?? 0));
     return (
-      <HeraldSection
-        items={bySection.divination}
-        worldState={campaign.worldState}
-        nameById={nameById}
-        title="Pressures building"
-        emptyLead={focusEmpty('No pressure is building that the realm can yet foresee.')}
-      >
-        <div style={{ border: `1px solid ${GOLD}`, background: CARD_ALT, padding: SP.sm }}>
+      <div style={{ display: 'grid', gap: 12 }}>
+        <div style={{ border: `1px dashed ${GOLD}`, background: CARD_ALT, padding: SP.sm }}>
           <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
             The forecast · amendable, not yet come to pass
           </div>
           <RealmDocket campaign={campaign} />
         </div>
-      </HeraldSection>
+        <Section title="Pressures building" count={forecasts.length}>
+          {forecasts.length === 0 ? (
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+              {focusEmpty('No pressure is building that the realm can yet foresee.')}
+            </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {forecasts.map(item => <HeraldForecast key={item.id} item={item} nameById={nameById} />)}
+            </div>
+          )}
+        </Section>
+      </div>
     );
   }
 
