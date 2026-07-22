@@ -19,7 +19,46 @@
  * @enforced-by tests/domain/dossier/settlementWorldChronicle.test.js
  */
 
-/** @param {unknown} v @returns {any[]} */
+/**
+ * The dynamic pulse-record boundary, typed structurally: only the fields this
+ * projection actually reads, all optional (records are legacy-tolerant).
+ * @typedef {Object} PulseRowLike
+ * @property {string|number} [targetSaveId]
+ * @property {{ affectedSettlementIds?: unknown }} [stressor]
+ * @property {unknown} [settlementIds]
+ * @property {unknown} [affectedSettlementIds]
+ * @property {unknown} [relationshipKey]
+ * @property {{ settlementId?: string|number }} [proposalPayload]
+ * @property {string} [candidateType]
+ * @property {string} [impactKind]
+ * @property {string} [type]
+ * @property {string} [kind]
+ * @property {string|number} [factionId]
+ * @property {unknown} [reasons]
+ * @property {string} [title]
+ * @property {string} [headline]
+ * @property {string} [summary]
+ * @property {string} [severity]
+ * @property {string|number} [npcId]
+ * @property {string|number} [id]
+ *
+ * @typedef {Object} PulseRecordLike
+ * @property {string|number} [id]
+ * @property {number} [tick]
+ * @property {string} [createdAt]
+ * @property {unknown} [selectedOutcomes]
+ * @property {unknown} [impactDigest]
+ *
+ * @typedef {Object} SavedSettlementLike
+ * @property {string|number} [id]
+ * @property {string} [name]
+ * @property {{ name?: string }} [settlement]
+ *
+ * @typedef {Object} WorldStateLike
+ * @property {unknown} [pulseHistory]
+ */
+
+/** @param {unknown} v @returns {unknown[]} */
 function arr(v) { return Array.isArray(v) ? v : []; }
 
 const byStr = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -34,7 +73,7 @@ function relationshipKeyParts(key) {
  *  discriminators ONLY (targetSaveId, explicit settlementIds lists,
  *  stressor.affectedSettlementIds, relationshipKey endpoints, proposal settlementId),
  *  NOT the npc/faction key union chronicleGraph.entityKeysOf mixes in.
- *  @param {any} o @returns {Set<string>} */
+ *  @param {PulseRowLike | null | undefined} o @returns {Set<string>} */
 function settlementIdsOfPulseRow(o) {
   /** @type {Set<string>} */
   const ids = new Set();
@@ -49,11 +88,11 @@ function settlementIdsOfPulseRow(o) {
 }
 
 /** saveId → display name, from the store's savedSettlements.
- *  @param {any[]} saves @returns {Map<string, string>} */
+ *  @param {SavedSettlementLike[]} saves @returns {Map<string, string>} */
 function settlementNameMap(saves) {
   /** @type {Map<string, string>} */
   const m = new Map();
-  for (const s of arr(saves)) {
+  for (const s of /** @type {SavedSettlementLike[]} */ (arr(saves))) {
     if (s?.id == null) continue;
     m.set(String(s.id), s?.settlement?.name || s?.name || String(s.id));
   }
@@ -67,22 +106,22 @@ function settlementNameMap(saves) {
  * ADDRESS LAW `address` block. Newest-first ordering is left to buildChronicleFeed
  * (it sorts by `at`); here the walk is deterministic in record → row order.
  *
- * @param {any} worldState                       campaign.worldState (raw; may be legacy)
+ * @param {WorldStateLike | null | undefined} worldState  campaign.worldState (raw; may be legacy)
  * @param {string|number|null|undefined} saveId  the settlement's save id
- * @param {{ savedSettlements?: any[] }} [opts]
- * @returns {Array<Record<string, any>>}
+ * @param {{ savedSettlements?: SavedSettlementLike[] }} [opts]
+ * @returns {Array<Record<string, unknown>>}
  */
 export function settlementWorldPulseEntries(worldState, saveId, { savedSettlements = [] } = {}) {
-  const history = arr(worldState?.pulseHistory);
+  const history = /** @type {PulseRecordLike[]} */ (arr(worldState?.pulseHistory));
   if (!history.length || saveId == null) return [];
   const sid = String(saveId);
   const nameById = settlementNameMap(savedSettlements);
-  /** @type {Array<Record<string, any>>} */
+  /** @type {Array<Record<string, unknown>>} */
   const out = [];
   for (const record of history) {
     const at = record?.createdAt || null;
     const rid = record?.id != null ? String(record.id) : `wp-${record?.tick ?? 0}`;
-    const rows = [...arr(record?.selectedOutcomes), ...arr(record?.impactDigest)];
+    const rows = /** @type {PulseRowLike[]} */ ([...arr(record?.selectedOutcomes), ...arr(record?.impactDigest)]);
     let i = 0;
     for (const o of rows) {
       i += 1;

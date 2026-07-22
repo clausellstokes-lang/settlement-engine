@@ -1250,6 +1250,14 @@
     "tests/property/mechanismLitCoverage.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"
+    },
+    "tests/lint/autoresolveTwoMount.walker.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
+    "tests/store/commitPendingEditsTotality.walker.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
     }
   },
   "meta": {
