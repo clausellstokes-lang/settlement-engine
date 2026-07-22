@@ -95,7 +95,7 @@ const ECONOMY_ENTRIES = [
   ['Priority Sliders', 'shift institutional probability economy military religion magic criminal'],
   ['Exports & Imports', 'surplus production gaps trade vulnerability dependency'],
   ['Supply Chains', 'linked production sequences broken input degrades'],
-  ['Viability Score', 'economic stress analysis fragile supporting prosperity'],
+  ['Coherence Check', 'viability score coherent marginal not coherent economic logical sense fragile supporting prosperity'],
 ].map(([term, kw]) => ({
   id: `econ-${slug(term)}`, term, category: 'Economy', tab: 'economy', anchor: 'economy', keywords: kw,
 }));

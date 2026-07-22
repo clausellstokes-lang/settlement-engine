@@ -88,12 +88,13 @@ export function EconomyTab() {
     </div>
     {/* The lead concept — prosperity is an OUTPUT, not a dial — renders its full
         ladder: every rung named with how a settlement at that rung reads (P4). */}
+    {/* Prosperity (output), Priority Bands (the slider grading), Chain Status (the
+        chain-chip vocabulary), and the Coherence Check verdicts all render as
+        ladders from CD.bandLadders. The owner's four Economy examples used to be
+        one-sentence cards that named vocabulary they never enumerated. */}
     {laddersFor('economy').map((l) => (
       <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
-    <Card title="Priority Sliders" accent='#a0762a'>Sliders shift institutional probability, not guarantee it. They interact: high Religion + low Magic triggers heresy suppression.</Card>
-    <Card title="Exports & Imports" accent='#1a5a28'>Exports are surplus production. Imports are gaps. Heavy import dependency creates trade vulnerability.</Card>
-    <Card title="Supply Chains" accent='#1a3a7a'>Linked production sequences. A broken input degrades the output. Magic can substitute for some missing material inputs.</Card>
-    <Card title="Viability Score" accent='#8b1a1a'>Economic stress analysis showing which factors are supporting prosperity and which are fragile.</Card>
+    <Card title="Exports & Imports" accent='#1a5a28'>Exports are a settlement's surplus production; imports are the gaps its own chains cannot cover. Each trade dependency is graded vulnerable (it leans on open trade routes, so a siege or blockade would impair it) or critical (already under stress or effectively isolated, running on stockpiles). Import capacity follows the trade route: highest for a port, then crossroads, river, and road, and lowest when isolated.</Card>
   </>;
 }
 

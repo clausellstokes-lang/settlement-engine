@@ -59,14 +59,67 @@ export const PROSPERITY_READINGS = Object.freeze({
 });
 
 /**
+ * Priority bands — the five-rung ladder the engine reads every priority slider
+ * through (priorityToCategory, src/generators/economy/prosperity.js). The slider
+ * values run 5 to 95 (default 50); these bands decide how strongly a domain shapes
+ * the settlement. Names + cut-points stated in each reading; authored, coverage-pinned.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const PRIORITY_LEVELS = Object.freeze([
+  { name: 'Very Low',  reading: 'At or below 15. The engine expects almost nothing of this domain; its institutions are unlikely and its mark on the settlement is faint.' },
+  { name: 'Low',       reading: 'Up to 35. A minor emphasis. A few of this domain\'s institutions may appear, but it does not steer the settlement.' },
+  { name: 'Medium',    reading: 'Up to 65. The default weight. This domain carries ordinary influence, neither driving the settlement nor absent from it.' },
+  { name: 'High',      reading: 'Up to 85. A strong emphasis. The engine expects this domain\'s institutions to be present and to leave a mark.' },
+  { name: 'Very High', reading: 'Above 85. A dominant priority. This domain\'s institutions are expected in force and can define the settlement\'s character.' },
+]);
+
+/**
+ * Supply-chain status — the states the SupplyChainsPanel shows on every chain chip
+ * (src/components/new/SupplyChainsPanel.jsx STATUS). Readings paraphrase the canonical
+ * status meanings authored as comments in src/domain/supplyChainState.js (honesty gate:
+ * lifted, not invented; em-dash-free). Two further engine states, captured and
+ * collapsing, are defined but not yet produced by the generator (stated in the blurb).
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const CHAIN_STATUS_LEVELS = Object.freeze([
+  { name: 'Running',             reading: 'The chain runs normally with all of its inputs available.' },
+  { name: 'Vulnerable',          reading: 'The chain still runs, but under stress; a shock would bite.' },
+  { name: 'Impaired',            reading: 'The chain is producing below its normal output.' },
+  { name: 'Broken',              reading: 'The chain is offline after a hard failure somewhere upstream.' },
+  { name: 'Entrepot',            reading: 'A healthy re-export hub: goods pass through the settlement rather than being made here.' },
+  { name: 'Magically Sustained', reading: 'The chain runs on a magical supplement, not on its own health.' },
+]);
+
+/**
+ * Coherence verdicts — the three verdicts the settlement's coherence check returns
+ * (src/components/new/tabs/ViabilityTab.jsx: COHERENT / MARGINAL COHERENCE / NOT
+ * COHERENT). It is NOT a numeric score; the tab checks whether the settlement makes
+ * logical sense. Authored, coverage-pinned.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const COHERENCE_LEVELS = Object.freeze([
+  { name: 'Coherent',           reading: 'The pieces fit. The settlement holds together with no survival-blocking problem.' },
+  { name: 'Marginal Coherence', reading: 'Survivable but strained. It works, yet real weaknesses show.' },
+  { name: 'Not Coherent',       reading: 'A critical issue prevents the settlement from surviving as described.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
- * and free of engine tokens). Order here is the Compendium render order.
- * @type {ReadonlyArray<{id:string, concept:string, blurb:string, tab:string, anchor:string, category?:string}>}
+ * and free of engine tokens). A `levels` field carries an authored rung list; a
+ * `category` field reads rungs from the glossary; prosperity is special-cased.
+ * Order here is the Compendium render order.
+ * @type {ReadonlyArray<{id:string, concept:string, blurb:string, tab:string, anchor:string, category?:string, levels?:ReadonlyArray<BandLevel>}>}
  */
 const LADDER_META = Object.freeze([
   { id: 'prosperity', concept: 'Prosperity', tab: 'economy', anchor: 'economy',
     blurb: 'Derived from export volume, income sources, supply chains, trade route, and safety. Not a dial you set. An output you read.' },
+  { id: 'priority', concept: 'Priority Bands', tab: 'economy', anchor: 'economy', levels: PRIORITY_LEVELS,
+    blurb: 'The five priority sliders (economy, military, magic, religion, and criminal) run from 5 to 95 and default to 50. The engine reads each slider on these five bands to decide how strongly that domain shapes the settlement. The magic slider also resolves to a separate magic level the world reads (see the Magic and Religion tab).' },
+  { id: 'chain-status', concept: 'Chain Status', tab: 'economy', anchor: 'economy', levels: CHAIN_STATUS_LEVELS,
+    blurb: 'Every supply chain the settlement runs carries a status shown as a chip on the dossier. These are the states you will see. Two further engine states, captured and collapsing, are defined but not yet produced by the generator.' },
+  { id: 'coherence', concept: 'Coherence Check', tab: 'economy', anchor: 'economy', levels: COHERENCE_LEVELS,
+    blurb: 'Not a score. The engine checks whether the settlement makes logical sense and returns one of three verdicts. The findings behind a verdict are graded critical (survival-blocking), implausible (breaks historical believability), dependency (relies on open trade), or inefficiency (waste the settlement can survive).' },
   { id: 'stability', concept: 'Settlement Stability', tab: 'stress', anchor: 'stress', category: 'stability-band',
     blurb: 'How a settlement’s overall health reads at a glance, on a 0 to 100 scale.' },
   { id: 'strain', concept: 'Capacity Strain', tab: 'stress', anchor: 'stress', category: 'strain-band',
@@ -85,7 +138,7 @@ const LADDER_META = Object.freeze([
  * Build the levels for one ladder. Prosperity reads names from PROSPERITY_TIERS and
  * pairs each with its authored reading; the glossary-backed ladders read name +
  * reading straight from the glossary derivation.
- * @param {{id:string, category?:string}} meta
+ * @param {{id:string, category?:string, levels?:ReadonlyArray<BandLevel>}} meta
  * @returns {BandLevel[]}
  */
 function levelsFor(meta) {
@@ -95,6 +148,8 @@ function levelsFor(meta) {
       reading: /** @type {Record<string, string>} */ (PROSPERITY_READINGS)[name],
     }));
   }
+  // An authored rung list (priority / chain-status / coherence) rides on the meta.
+  if (meta.levels) return meta.levels.map((l) => ({ name: l.name, reading: l.reading }));
   const entries = glossaryByCategory()[/** @type {string} */ (meta.category)] || [];
   return entries.map((e) => ({ name: e.term, reading: e.definition }));
 }
