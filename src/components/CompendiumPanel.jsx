@@ -87,7 +87,7 @@ const TAB_META = Object.freeze({
   tiers:        { title: 'Settlement tiers & trade routes: SettlementForge Compendium',
                   desc: 'Reference for thorp through metropolis tiers, trade route effects (road / crossroads / port / river / mountain pass / isolated), and monster threat levels in SettlementForge.' },
   economy:      { title: 'Economy reference: SettlementForge Compendium',
-                  desc: 'Prosperity tiers, priority sliders, exports/imports, supply chains, viability scoring. The simulator\'s economic model, documented.' },
+                  desc: 'Prosperity, priority bands, trade, supply chains, coherence. The simulator\'s economic model, documented.' },
   power:        { title: 'Power & faction archetypes: SettlementForge Compendium',
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
   arcane:       { title: 'Magic & religion reference: SettlementForge Compendium',
