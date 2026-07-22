@@ -19,6 +19,7 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
+import { settlementWorldPulseEntries } from '../domain/dossier/settlementWorldChronicle.js';
 import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
@@ -147,11 +148,19 @@ function chronicleReferenceFor(saveEntry) {
   return cs?.worldState?.canonizedAt || cs?.canonizedAt || cs?.startedAt || null;
 }
 
-export function collectChronicle(saveEntry, settlement, publicChronicle = null) {
+export function collectChronicle(saveEntry, settlement, publicChronicle = null, campaignWorldState = null, savedSettlements = []) {
   // The unified Chronicle feed (spec §8 M3c): manual events + party-caused +
   // world-pulse, merged + normalized + sorted newest-first and timed relative to
   // canonization by the shared domain helper, so screen + any future surface
   // read one source of truth.
+  //
+  // WORLD-PULSE SEAM (owner bug 2026-07-22): the world source used to read the
+  // per-save campaignState.worldPulse.events / worldState.eventLog paths, which the
+  // advance NEVER writes — so advancing time showed nothing here. The events live on
+  // the owning campaign's worldState.pulseHistory; settlementWorldPulseEntries
+  // projects that already-persisted history into per-settlement rows (a pure read).
+  // The legacy per-save paths are kept as a fallback for any save that happens to
+  // carry them.
   //
   // A PUBLIC gallery dossier has no saved campaignState — the gallery RPC
   // projects an allowlisted copy of the eventLog into its own `chronicle`
@@ -160,12 +169,24 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   // normalization. It is consulted ONLY when there is no save entry at all;
   // owner surfaces (live editor, saved view) never pass it, so the owner feed
   // is byte-for-byte what it was before.
-  return buildChronicleFeed({
+  const worldEntries = campaignWorldState
+    ? settlementWorldPulseEntries(campaignWorldState, saveEntry?.id ?? settlement?.id, { savedSettlements })
+    : [];
+  const feed = buildChronicleFeed({
     manual:     saveEntry ? saveEntry.campaignState?.eventLog : publicChronicle,
-    worldPulse: saveEntry?.campaignState?.worldPulse?.events,
+    worldPulse: worldEntries.length ? worldEntries : saveEntry?.campaignState?.worldPulse?.events,
     worldLog:   saveEntry?.campaignState?.worldState?.eventLog,
     recent:     settlement?.recentEvents,
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
+  // Re-attach THE NEWS ADDRESS LAW block to the world rows. buildChronicleFeed's
+  // normalizer keeps the byte-minimal common shape (no address passthrough — that
+  // module is first-paint-eager via the store, so it stays untouched); the address
+  // rides back on here, in the lazy dossier path, keyed by the row id.
+  if (worldEntries.length) {
+    const addressById = new Map(worldEntries.map(e => [e.id, e.address]));
+    return feed.map(e => (e.source === 'world' && addressById.has(e.id)) ? { ...e, address: addressById.get(e.id) } : e);
+  }
+  return feed;
 }
 
 export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapWorldState = null, mapRegionalGraph = null, mapCanEdit = false }) {
@@ -198,6 +219,18 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Pinned NPCs — AI-4a. The live save entry is the source of truth so the
   // pin icons stay in sync across tabs without an extra hydration hop.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
+  // WORLD-PULSE CHRONICLE SEAM (owner bug 2026-07-22). The settlement Chronicle's
+  // world events live on the OWNING campaign's worldState.pulseHistory — reached
+  // from the save via getCampaignForSettlement. Select the RAW campaign.worldState
+  // (a stable store ref): getCampaignWorldState() normalizes through ensureWorldState
+  // and would mint a new object every render (a select-loop). Null for a draft or a
+  // non-campaign save ⇒ the feed is byte-identical to before.
+  const owningWorldState = useStore(s => {
+    if (saveId == null || typeof s.getCampaignForSettlement !== 'function') return null;
+    const c = s.getCampaignForSettlement(saveId);
+    return c?.worldState || null;
+  });
+  const allSavedSettlements = useStore(s => s.savedSettlements);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
@@ -304,7 +337,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const activeSettlement = showNarrative ? aiSettlement : rawSettlement;
   const dossierNotes = liveSaveEntry?.aiData?.dossierNotes || null;
   const aiGuidance = typeof dossierNotes?.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
-  const chronicle = collectChronicle(liveSaveEntry, rawSettlement, publicChronicle);
+  const chronicle = React.useMemo(
+    () => collectChronicle(liveSaveEntry, rawSettlement, publicChronicle, owningWorldState, allSavedSettlements),
+    [liveSaveEntry, rawSettlement, publicChronicle, owningWorldState, allSavedSettlements],
+  );
   // History tab keeps a short "Recent Events" glance; the full Chronicle lives
   // under Notes (spec §8 M3c relocation).
   const recentEvents = chronicle.slice(0, 8);
