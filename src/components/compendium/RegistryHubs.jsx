@@ -183,9 +183,14 @@ export function SystemsHub() {
           <span style={{ fontSize: FS.sm, fontWeight: 700, color: p.isDefault ? GOLD_TXT : INK, minWidth: 150, flexShrink: 0 }}>
             {p.label}{p.isDefault && <span style={{ fontSize: FS.xxs, color: GOLD_TXT }}> · default</span>}
           </span>
-          <span style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5 }}>
-            {p.lights.length === 0 ? 'lights no endgame systems (quiet)' : `lights ${p.lights.length}: ${p.lights.join(', ')}`}
-          </span>
+          {/* The summary + the distinguishing axes (intensity, autonomy) give a DM a
+              basis to choose among the four otherwise-identical "quiet" presets. */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <span style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5 }}>{p.summary}</span>
+            <span style={{ fontSize: FS.xxs, color: MUT, fontFamily: sans }}>
+              intensity: {p.intensity} · autonomy: {p.autonomyLabel} · {p.lights.length === 0 ? 'no endgame systems' : `lights ${p.lights.length}`}
+            </span>
+          </div>
         </div>
       ))}
     </div>

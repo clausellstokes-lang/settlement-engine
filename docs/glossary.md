@@ -92,9 +92,9 @@ _The weight of a stressor a DM applies._
 
 | Term | Definition |
 | --- | --- |
-| Minor | A light touch — the stressor nudges the settlement without upending it. |
+| Minor | A light touch. The stressor nudges the settlement without upending it. |
 | Moderate | A real strain the settlement must reckon with, short of a crisis. |
-| Severe | A heavy blow — the stressor forces the settlement toward crisis. |
+| Severe | A heavy blow. The stressor forces the settlement toward crisis. |
 
 ## Magnitude
 
@@ -102,6 +102,6 @@ _The size of a generosity decree, as a share of the giver’s surplus._
 
 | Term | Definition |
 | --- | --- |
-| Token | A gesture — a small share of the giver’s surplus above its own floor. |
-| Measured | A considered gift — a meaningful share of the surplus, kept sustainable. |
-| Generous | An open hand — most of the giver’s surplus above its floor goes out. |
+| Token | A gesture: a small share of the giver’s surplus above its own floor. |
+| Measured | A considered gift: a meaningful share of the surplus, kept sustainable. |
+| Generous | An open hand: most of the giver’s surplus above its floor goes out. |

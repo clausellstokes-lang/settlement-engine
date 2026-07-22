@@ -72,9 +72,15 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"priority","concept":"Priority Bands","blurb":"The five priority sliders (economy, military, magic, religion, and criminal) run from 5 to 95 and default to 50. The engine reads each slider on these five bands to decide how strongly that domain shapes the settlement. The magic slider also resolves to a separate magic level the world reads (see the Magic and Religion tab).","tab":"economy","anchor":"economy","levels":[{"name":"Very Low","reading":"At or below 15. The engine expects almost nothing of this domain; its institutions are unlikely and its mark on the settlement is faint."},{"name":"Low","reading":"Up to 35. A minor emphasis. A few of this domain's institutions may appear, but it does not steer the settlement."},{"name":"Medium","reading":"Up to 65. The default weight. This domain carries ordinary influence, neither driving the settlement nor absent from it."},{"name":"High","reading":"Up to 85. A strong emphasis. The engine expects this domain's institutions to be present and to leave a mark."},{"name":"Very High","reading":"Above 85. A dominant priority. This domain's institutions are expected in force and can define the settlement's character."}]},
     {"id":"chain-status","concept":"Chain Status","blurb":"Every supply chain the settlement runs carries a status shown as a chip on the dossier. These are the states you will see. Two further engine states, captured and collapsing, are defined but not yet produced by the generator.","tab":"economy","anchor":"economy","levels":[{"name":"Running","reading":"The chain runs normally with all of its inputs available."},{"name":"Vulnerable","reading":"The chain still runs, but under stress; a shock would bite."},{"name":"Impaired","reading":"The chain is producing below its normal output."},{"name":"Broken","reading":"The chain is offline after a hard failure somewhere upstream."},{"name":"Entrepot","reading":"A healthy re-export hub: goods pass through the settlement rather than being made here."},{"name":"Magically Sustained","reading":"The chain runs on a magical supplement, not on its own health."}]},
     {"id":"coherence","concept":"Coherence Check","blurb":"Not a score. The engine checks whether the settlement makes logical sense and returns one of three verdicts. The findings behind a verdict are graded critical (survival-blocking), implausible (breaks historical believability), dependency (relies on open trade), or inefficiency (waste the settlement can survive).","tab":"economy","anchor":"economy","levels":[{"name":"Coherent","reading":"The pieces fit. The settlement holds together with no survival-blocking problem."},{"name":"Marginal Coherence","reading":"Survivable but strained. It works, yet real weaknesses show."},{"name":"Not Coherent","reading":"A critical issue prevents the settlement from surviving as described."}]},
+    {"id":"food-security","concept":"Food Security","blurb":"How well the settlement feeds itself, read from local production, imports, and any magical supplement against demand. A famine or a severe deficit caps prosperity no matter how strong the trade.","tab":"economy","anchor":"economy","levels":[{"name":"Surplus","reading":"A food surplus above 40 percent. Reserves cushion a bad season and can lift prosperity."},{"name":"Secure","reading":"The settlement feeds itself with a small margin."},{"name":"Pressured","reading":"A food deficit above 5 percent. The margin is thin and a shock would bite."},{"name":"Import-Dependent","reading":"A food deficit above 15 percent, covered by imports. A cut trade route turns it into a crisis."},{"name":"Deficit","reading":"A food deficit above 40 percent. The settlement cannot feed itself."},{"name":"Active Famine","reading":"Famine. Food has failed outright, and it caps prosperity no matter how strong the trade."}]},
     {"id":"stability","concept":"Settlement Stability","blurb":"How a settlement’s overall health reads at a glance, on a 0 to 100 scale.","tab":"stress","anchor":"stress","levels":[{"name":"Stable","reading":"Healthy. Shocks are absorbed without crisis."},{"name":"Strained","reading":"Functional but stretched. A bad season would hurt."},{"name":"Vulnerable","reading":"One real shock away from failure."},{"name":"Critical","reading":"Already failing. This is plot fuel."}]},
     {"id":"strain","concept":"Capacity Strain","blurb":"How a single capacity such as food, defense, or healing reads against the demand on it.","tab":"stress","anchor":"stress","levels":[{"name":"Surplus","reading":"More capacity than the settlement needs. A cushion against a bad season."},{"name":"Adequate","reading":"Supply meets demand. The settlement is not straining here."},{"name":"Strained","reading":"Demand is outrunning supply; the margin is thin and a shock would bite."},{"name":"Critical","reading":"Supply is far short of demand. This capacity is close to failing."},{"name":"Collapsed","reading":"Demand dwarfs supply; the function has effectively broken down."},{"name":"Absent","reading":"Neither supplied nor demanded. The capacity does not exist here at all."}]},
-    {"id":"capture","concept":"Criminal Capture","blurb":"How far a criminal interest has taken a seat of power.","tab":"power","anchor":"power","levels":[{"name":"None","reading":"No criminal capture. The seat answers to its lawful holder."},{"name":"Adversarial","reading":"A criminal interest is pushing at the seat, and the seat is pushing back."},{"name":"Equilibrium","reading":"The lawful holder and the criminal interest have reached an uneasy standoff."},{"name":"Corrupted","reading":"The criminal interest now bends the seat to its ends more often than not."},{"name":"Capture","reading":"The seat is captured. The criminal interest owns its decisions outright."}]}
+    {"id":"severity","concept":"Stressor Severity","blurb":"How hard a stressor hits when the DM applies one.","tab":"stress","anchor":"stress","levels":[{"name":"Minor","reading":"A light touch. The stressor nudges the settlement without upending it."},{"name":"Moderate","reading":"A real strain the settlement must reckon with, short of a crisis."},{"name":"Severe","reading":"A heavy blow. The stressor forces the settlement toward crisis."}]},
+    {"id":"magnitude","concept":"Relief Magnitude","blurb":"How much an ally gives when it sends relief.","tab":"stress","anchor":"stress","levels":[{"name":"Token","reading":"A gesture: a small share of the giver’s surplus above its own floor."},{"name":"Measured","reading":"A considered gift: a meaningful share of the surplus, kept sustainable."},{"name":"Generous","reading":"An open hand: most of the giver’s surplus above its floor goes out."}]},
+    {"id":"capture","concept":"Criminal Capture","blurb":"How far a criminal interest has taken a seat of power.","tab":"power","anchor":"power","levels":[{"name":"None","reading":"No criminal capture. The seat answers to its lawful holder."},{"name":"Adversarial","reading":"A criminal interest is pushing at the seat, and the seat is pushing back."},{"name":"Equilibrium","reading":"The lawful holder and the criminal interest have reached an uneasy standoff."},{"name":"Corrupted","reading":"The criminal interest now bends the seat to its ends more often than not."},{"name":"Capture","reading":"The seat is captured. The criminal interest owns its decisions outright."}]},
+    {"id":"pantheon-rank","concept":"Pantheon Rank","blurb":"A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.","tab":"arcane","anchor":"faith","levels":[{"name":"Cult","reading":"A fringe following, with fewer than two settlement seats."},{"name":"Minor","reading":"Two or three settlement seats."},{"name":"Major","reading":"Four or more settlement seats, and only a major god can shift a realm's magic legality."}]},
+    {"id":"magic-level","concept":"Magic Level","blurb":"The Magic priority slider resolves to one of these levels. None means magic is disabled in the world, not a slider position. The level sets how available magic is and feeds its legality, risk, and role.","tab":"arcane","anchor":"magic","levels":[{"name":"None","reading":"Magic is disabled in this world. There is no magical economy."},{"name":"Low","reading":"A magic priority at or below 25. Magic is rare and limited."},{"name":"Medium","reading":"A magic priority up to 65. A moderate, everyday presence."},{"name":"High","reading":"A magic priority above 65. Magic is broad and pervasive."}]},
+    {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
     "count": 169,
@@ -257,6 +263,42 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"bulkSetGoods","label":"Bulk-set trade goods","description":"Sets many trade-good choices at once.","klass":"mechanical","slice":"toggleSlice","targetScope":"global","receiptRef":null,"undoToken":null}
     ]
   },
+  "faith": {
+    "authorship": "Deities enter a world only through custom-content authoring; there is no premade roster. You author a god on the four axes below, and the living pantheon does the rest as the faith spreads.",
+    "temperNote": "Temperament is not a dial you set. The engine derives it from the alignment and law axes: evil and chaos push a god warlike, good and law push it peacelike.",
+    "axes": [
+      {"id":"alignment","label":"Alignment","lines":["Good, and purges corruption, installing incorruptible successors","Evil, and corrupts the faithful even without organized crime"]},
+      {"id":"law","label":"Law","lines":["Lawful, and strengthens law and order","Chaotic, and erodes order, tolerating corruption"]},
+      {"id":"rank","label":"Rank","lines":["Major, and anchors religious authority (a lift of 18)","Minor, and lends modest religious authority (a lift of 10)","Cult: a fringe following with little authority (a lift of 5)"]},
+      {"id":"temperament","label":"Temperament","derived":true,"lines":["Warlike, and raises the realm's aggression","Peacelike, and tempers the realm's aggression"]}
+    ]
+  },
+  "terrain": [
+    {"id":"riverside","reading":"On a river. Mills, ferries, and cheap bulk trade, and floods are its calamity."},
+    {"id":"coastal","reading":"On the sea. Fishing, ports, and maritime trade, and storms are its calamity."},
+    {"id":"mountain","reading":"High and rugged. Ore and strong defense, though low agriculture leans on imports, and quakes are its calamity."},
+    {"id":"hills","reading":"Rolling high ground. Stone and defensible sites, though low agriculture leans on imports, and quakes are its calamity."},
+    {"id":"forest","reading":"Wooded country. Timber and game, and fire is its calamity."},
+    {"id":"plains","reading":"Open, arable land. Strong agriculture, and fire is its calamity."},
+    {"id":"desert","reading":"Arid land. Sparse agriculture and hard travel, and storms are its calamity."}
+  ],
+  "cultures": {
+    "values": [
+      {"id":"mixed","label":"Mixed"},
+      {"id":"germanic","label":"Germanic"},
+      {"id":"latin","label":"Latin"},
+      {"id":"celtic","label":"Celtic"},
+      {"id":"arabic","label":"Arabic"},
+      {"id":"norse","label":"Norse"},
+      {"id":"slavic","label":"Slavic"},
+      {"id":"east_asian","label":"East Asian"},
+      {"id":"mesoamerican","label":"Mesoamerican"},
+      {"id":"south_asian","label":"South Asian"},
+      {"id":"steppe","label":"Steppe"},
+      {"id":"greek","label":"Greek"}
+    ],
+    "note": "Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave."
+  },
   "lenses": {
     "count": 5,
     "entries": [
@@ -320,13 +362,13 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"calamity","label":"The Great Calamity","flag":"disastersEnabled","blurb":"A rare seeded disaster can strike a settlement, knocking out a few of its non-essential institutions and killing a bounded share of its people. The aftermath, from severed supply chains to exodus and unrest, emerges from the other systems rather than being scripted.","presetGated":true,"dormant":false,"presets":["dramatic_campaign","full_simulation"]}
   ],
   "presets": [
-    {"id":"quiet_local","label":"Quiet Local","isDefault":false,"lights":[]},
-    {"id":"realistic_regional","label":"Realistic Regional","isDefault":true,"lights":[]},
-    {"id":"dramatic_campaign","label":"Dramatic Campaign","isDefault":false,"lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled","disastersEnabled"]},
-    {"id":"static_campaign","label":"Static Campaign","isDefault":false,"lights":[]},
-    {"id":"narrative_campaign","label":"Narrative Campaign","isDefault":false,"lights":[]},
-    {"id":"living_realm","label":"Living Realm","isDefault":false,"lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled"]},
-    {"id":"full_simulation","label":"Full Simulation","isDefault":false,"lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled","disastersEnabled"]}
+    {"id":"quiet_local","label":"Quiet Local","isDefault":false,"summary":"A quiet local game. Time passes, but the wider region stays still.","intensity":"conservative","autonomy":"routine","autonomyLabel":"routine acts run, big moves come to you","lights":[]},
+    {"id":"realistic_regional","label":"Realistic Regional","isDefault":true,"summary":"The default. The region evolves at a measured, realistic pace.","intensity":"conservative","autonomy":"routine","autonomyLabel":"routine acts run, big moves come to you","lights":[]},
+    {"id":"dramatic_campaign","label":"Dramatic Campaign","isDefault":false,"summary":"A high-drama campaign. Events land hard and the world runs itself.","intensity":"dramatic","autonomy":"full","autonomyLabel":"fully autonomous","lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled","disastersEnabled"]},
+    {"id":"static_campaign","label":"Static Campaign","isDefault":false,"summary":"Nothing moves without you. The world waits on your every decision.","intensity":"conservative","autonomy":"dm_only","autonomyLabel":"you decide everything","lights":[]},
+    {"id":"narrative_campaign","label":"Narrative Campaign","isDefault":false,"summary":"A quiet stage that proposes changes but waits for your approval.","intensity":"conservative","autonomy":"recommendations","autonomyLabel":"it proposes, you approve","lights":[]},
+    {"id":"living_realm","label":"Living Realm","isDefault":false,"summary":"A fully alive realm that runs the region on its own.","intensity":"conservative","autonomy":"routine","autonomyLabel":"routine acts run, big moves come to you","lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled"]},
+    {"id":"full_simulation","label":"Full Simulation","isDefault":false,"summary":"Everything on. The most complete and demanding simulation.","intensity":"normal","autonomy":"full","autonomyLabel":"fully autonomous","lights":["supplyWebWarfareEnabled","momentumEnabled","upswingArcsEnabled","resourceDynamicsEnabled","constructiveFlowsEnabled","peaceEngineEnabled","navalEnabled","interventionEnabled","settlementLifecycleEnabled","disastersEnabled"]}
   ],
   "archetypes": {
     "count": 30,
@@ -337,17 +379,17 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Economic","name":"Trade Crossroads","cond":"Economy ≥60, route: crossroads or port","desc":"Entreport economy. Profits from flow, not production. High service density."},
       {"cat":"Economic","name":"Merchant Army","cond":"Economy ≥68, Military ≤38","desc":"Wealthy settlement replaces public guard with private security."},
       {"cat":"Economic","name":"Theocratic Economy","cond":"Religion ≥70, Economy ≤42","desc":"Church dominates economic life. Sacred goods trade x1.55."},
-      {"cat":"Military","name":"Military Fortress","cond":"Military ≥72, threat: dangerous","desc":"Defense first. Civilian economy secondary to garrison supply."},
+      {"cat":"Military","name":"Military Fortress","cond":"Military ≥72, threat: plagued","desc":"Defense first. Civilian economy secondary to garrison supply."},
       {"cat":"Military","name":"Frontier Outpost","cond":"Military ≥60, tier: small, threat: frontier","desc":"Exists to hold a line. Austere, disciplined, expendable."},
       {"cat":"Military","name":"Besieged Holdout","cond":"Stress: Siege active","desc":"Under siege. Supply constrained. Morale is a resource."},
       {"cat":"Military","name":"Secular Brutalism","cond":"Military ≥70, Religion ≤25","desc":"No religious institutions. Military fills moral and legal vacuum."},
       {"cat":"Military","name":"State Crime","cond":"Military ≥70, Economy ≤32","desc":"Military predates on the population. Extractions, disappearances, selective enforcement."},
       {"cat":"Religious","name":"Theocracy","cond":"Religion ≥72, Military ≤45","desc":"Church is the government. Civil and religious law unified."},
-      {"cat":"Religious","name":"Holy Sanctuary","cond":"Religion ≥65, Criminal ≤30, threat: safe","desc":"Pilgrimage destination. Protected status. Trade in relics and indulgences."},
+      {"cat":"Religious","name":"Holy Sanctuary","cond":"Religion ≥65, Criminal ≤30, threat: heartland","desc":"Pilgrimage destination. Protected status. Trade in relics and indulgences."},
       {"cat":"Religious","name":"Crusader Synthesis","cond":"Military ≥68, Religion ≥68","desc":"Church and military fused. Sacred war is civic duty."},
       {"cat":"Religious","name":"Heresy Suppression","cond":"Religion ≥65, Magic ≤38","desc":"Church persecutes arcane practitioners. Magic goods suppressed x0.25."},
       {"cat":"Religious","name":"Religious Fraud","cond":"Religion ≥60, Criminal ≥55","desc":"Church hierarchy is corrupt. Indulgences, false relics, protection rackets."},
-      {"cat":"Religious","name":"Crusader Chapter","cond":"Military ≥68, Religion ≥60, threat: dangerous","desc":"Martial religious order holds the settlement against monster threat."},
+      {"cat":"Religious","name":"Crusader Chapter","cond":"Military ≥68, Religion ≥60, threat: plagued","desc":"Martial religious order holds the settlement against monster threat."},
       {"cat":"Magic","name":"Mage City","cond":"Magic ≥70, Economy ≥55","desc":"Arcane institutions dominate. Magic is commerce. High reagent import demand."},
       {"cat":"Magic","name":"Arcane Academy","cond":"Magic ≥72, Religion ≤40","desc":"Learning institution at center. Magic is scholarship, not faith."},
       {"cat":"Magic","name":"Magic Fills Void","cond":"Magic ≥68, Economy ≤35","desc":"Arcane supply substitutes for missing material infrastructure."},
@@ -358,9 +400,9 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Criminal","name":"Criminal Haven","cond":"Criminal ≥72, Military ≤42","desc":"Settlement actively shelters criminal networks. Law is performative."},
       {"cat":"Criminal","name":"Merchant-Criminal Blur","cond":"Economy ≥65, Criminal ≥58","desc":"Legitimate and criminal commerce are indistinguishable. Guilds run protection."},
       {"cat":"Criminal","name":"Lawless Frontier","cond":"Criminal ≥60, Military ≤30","desc":"Beyond the reach of law. Survival is personal."},
-      {"cat":"Balanced","name":"Safe Province Capital","cond":"All sliders 40-65, threat: safe","desc":"Stable, diverse, prosperous. The baseline of successful governance."},
+      {"cat":"Balanced","name":"Safe Province Capital","cond":"All sliders 40-65, threat: heartland","desc":"Stable, diverse, prosperous. The baseline of successful governance."},
       {"cat":"Balanced","name":"Balanced","cond":"No slider exceeds 60","desc":"No dominant faction. Power distributed. Politics negotiated."},
-      {"cat":"Balanced","name":"Merchant Hunters Lodge","cond":"Military ≥60, threat: dangerous","desc":"Organized monster hunters are a significant institution."},
+      {"cat":"Balanced","name":"Merchant Hunters Lodge","cond":"Military ≥60, threat: plagued","desc":"Organized monster hunters are a significant institution."},
       {"cat":"Balanced","name":"Mining Colony","cond":"Resource: ore or stone nearby, isolated","desc":"Exists to extract a resource. Company-town dynamics."},
       {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Monster Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}
     ]

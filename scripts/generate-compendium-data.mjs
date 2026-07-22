@@ -46,6 +46,8 @@ import { dirname, join } from 'node:path';
 
 import { SYSTEM_VARIABLES, CAUSAL_BANDS, VARIABLE_LABEL } from '../src/domain/causalState.js';
 import { PRESSURE_KINDS } from '../src/domain/autonomy/signalRegistry.js';
+import { DEITY_AXIS_EFFECTS } from '../src/domain/display/deityEffects.js';
+import { DEITY_RANK_AUTHORITY } from '../src/domain/deityConstants.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
 import {
@@ -159,6 +161,57 @@ const PRESSURE_GLOSSARY = {
   crime:      { label: 'Crime',      description: 'Strain from criminal activity the settlement cannot contain. It is the pressure behind smuggling, extortion, and the erosion of order.' },
 };
 
+// ── World-input vocabularies (Wave D): terrain + culture ──────────────────────
+// Terrain readings: what each of the seven terrains steers (resource lean, the low-
+// agriculture import bias for mountain/hills/desert, and the calamity flavour it
+// selects, cross-checked against DISASTER_TYPE_BY_TERRAIN). The terrain LIST is read
+// from DISASTER_TYPE_BY_TERRAIN keys; the build guard reds if a terrain lacks a reading.
+const TERRAIN_READINGS = {
+  plains:    'Open, arable land. Strong agriculture, and fire is its calamity.',
+  hills:     'Rolling high ground. Stone and defensible sites, though low agriculture leans on imports, and quakes are its calamity.',
+  forest:    'Wooded country. Timber and game, and fire is its calamity.',
+  riverside: 'On a river. Mills, ferries, and cheap bulk trade, and floods are its calamity.',
+  coastal:   'On the sea. Fishing, ports, and maritime trade, and storms are its calamity.',
+  mountain:  'High and rugged. Ore and strong defense, though low agriculture leans on imports, and quakes are its calamity.',
+  desert:    'Arid land. Sparse agriculture and hard travel, and storms are its calamity.',
+};
+
+// Culture values: the config picker's authorable cultures. 'mixed' is the default
+// overlay (no single culture); the rest are the generator's own CULTURES list
+// (src/generators/steps/resolveConfig.js), pinned equal by tests/ui/compendiumWorldInputs
+// so a drift reds (authored inline to avoid importing resolveConfig's registerStep side
+// effect into the build). Culture is flavour more than math (see the note).
+const CULTURE_VALUES = [
+  { id: 'mixed', label: 'Mixed' }, { id: 'germanic', label: 'Germanic' },
+  { id: 'latin', label: 'Latin' }, { id: 'celtic', label: 'Celtic' },
+  { id: 'arabic', label: 'Arabic' }, { id: 'norse', label: 'Norse' },
+  { id: 'slavic', label: 'Slavic' }, { id: 'east_asian', label: 'East Asian' },
+  { id: 'mesoamerican', label: 'Mesoamerican' }, { id: 'south_asian', label: 'South Asian' },
+  { id: 'steppe', label: 'Steppe' }, { id: 'greek', label: 'Greek' },
+];
+const CULTURE_NOTE = 'Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave.';
+
+// Preset copy (Wave E): the four quiet presets read identically ("lights no endgame
+// systems") with no basis to choose among them. A per-preset one-liner + the humanized
+// autonomy axis distinguish them. Summaries are authored per preset id (build-guarded);
+// intensity + autonomy are READ from SIMULATION_RULE_PRESETS. Keyed by preset id.
+const PRESET_SUMMARIES = {
+  quiet_local:        'A quiet local game. Time passes, but the wider region stays still.',
+  realistic_regional: 'The default. The region evolves at a measured, realistic pace.',
+  dramatic_campaign:  'A high-drama campaign. Events land hard and the world runs itself.',
+  static_campaign:    'Nothing moves without you. The world waits on your every decision.',
+  narrative_campaign: 'A quiet stage that proposes changes but waits for your approval.',
+  living_realm:       'A fully alive realm that runs the region on its own.',
+  full_simulation:    'Everything on. The most complete and demanding simulation.',
+};
+// Humanized reading of the politicalAutonomy axis (how much the world acts on its own).
+const AUTONOMY_LABELS = {
+  dm_only:         'you decide everything',
+  recommendations: 'it proposes, you approve',
+  routine:         'routine acts run, big moves come to you',
+  full:            'fully autonomous',
+};
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -201,6 +254,16 @@ export function buildCompendiumDataObject() {
     if (!op.label) throw new Error(`compendium: operation "${op.opType}" has no label`);
     if (!op.description) throw new Error(`compendium: operation "${op.opType}" has no description`);
   }
+  for (const axisId of ['alignment', 'law', 'rank', 'temperament']) {
+    const eff = DEITY_AXIS_EFFECTS[axisId];
+    if (!eff || Object.keys(eff).length === 0) throw new Error(`compendium: deity axis "${axisId}" missing from DEITY_AXIS_EFFECTS`);
+    for (const v of Object.values(eff)) {
+      if (!v.effect || !v.effect.trim()) throw new Error(`compendium: deity axis "${axisId}" has a value with no effect string`);
+    }
+  }
+  for (const id of Object.keys(DISASTER_TYPE_BY_TERRAIN)) {
+    if (!TERRAIN_READINGS[id]) throw new Error(`compendium: terrain "${id}" has no TERRAIN_READINGS entry`);
+  }
 
   // Systems: preset membership derived; wave flags validated against the universe.
   const systems = ENDGAME_SYSTEMS.map((s) => {
@@ -216,14 +279,25 @@ export function buildCompendiumDataObject() {
     };
   });
 
-  // The presets, with exactly which endgame-system flags each one lights (derived).
+  // The presets, with the distinguishing axes (intensity + autonomy, READ from the
+  // configs) + an authored summary + exactly which endgame flags each lights (derived).
   const systemFlags = ENDGAME_SYSTEMS.map((s) => s.flag);
-  const presets = presetIds.map((id) => ({
-    id,
-    label: presetLabel(id),
-    isDefault: id === DEFAULT_SIMULATION_PRESET_ID,
-    lights: systemFlags.filter((f) => (SIMULATION_RULE_PRESETS[id]?.rules || {})[f] === true),
-  }));
+  const presets = presetIds.map((id) => {
+    const rules = SIMULATION_RULE_PRESETS[id]?.rules || {};
+    if (!PRESET_SUMMARIES[id]) throw new Error(`compendium: preset "${id}" has no PRESET_SUMMARIES entry`);
+    const intensity = rules.intensity || DEFAULT_SIMULATION_RULES.intensity;
+    const autonomy = rules.politicalAutonomy || DEFAULT_SIMULATION_RULES.politicalAutonomy;
+    return {
+      id,
+      label: presetLabel(id),
+      isDefault: id === DEFAULT_SIMULATION_PRESET_ID,
+      summary: PRESET_SUMMARIES[id],
+      intensity,
+      autonomy,
+      autonomyLabel: AUTONOMY_LABELS[autonomy] || autonomy,
+      lights: systemFlags.filter((f) => rules[f] === true),
+    };
+  });
 
   // Institution counts (the InstitutionsTab renders the live catalog itself; here
   // we only publish the counts so the dashboard number can't be hand-typed).
@@ -319,9 +393,40 @@ export function buildCompendiumDataObject() {
     },
 
     // The premade-deity roster is intentionally absent (owner ruling 2026-07-21: no
-    // premade deities; deities enter a world only via custom-content authoring). The
-    // deityPool remains for existing saves / generation (T4), but the public Compendium
-    // no longer publishes a premade roster.
+    // premade deities; deities enter a world only via custom-content authoring). What
+    // the Compendium DOES publish is the doctrine-compliant vocabulary: the four axes a
+    // custom deity is authored on, projected from the engine's DEITY_AXIS_EFFECTS single
+    // source (never re-typed, so it can never disagree with the engine), each value's
+    // effect string carrying its own name. Rank appends its authority lift (never re-typed).
+    faith: {
+      authorship: 'Deities enter a world only through custom-content authoring; there is no premade roster. You author a god on the four axes below, and the living pantheon does the rest as the faith spreads.',
+      temperNote: 'Temperament is not a dial you set. The engine derives it from the alignment and law axes: evil and chaos push a god warlike, good and law push it peacelike.',
+      axes: [
+        { id: 'alignment', label: 'Alignment', lines: [
+          DEITY_AXIS_EFFECTS.alignment.good.effect,
+          DEITY_AXIS_EFFECTS.alignment.evil.effect,
+        ] },
+        { id: 'law', label: 'Law', lines: [
+          DEITY_AXIS_EFFECTS.law.lawful.effect,
+          DEITY_AXIS_EFFECTS.law.chaotic.effect,
+        ] },
+        { id: 'rank', label: 'Rank', lines: [
+          `${DEITY_AXIS_EFFECTS.rank.major.effect} (a lift of ${DEITY_RANK_AUTHORITY.major})`,
+          `${DEITY_AXIS_EFFECTS.rank.minor.effect} (a lift of ${DEITY_RANK_AUTHORITY.minor})`,
+          `${DEITY_AXIS_EFFECTS.rank.cult.effect} (a lift of ${DEITY_RANK_AUTHORITY.cult})`,
+        ] },
+        { id: 'temperament', label: 'Temperament', derived: true, lines: [
+          DEITY_AXIS_EFFECTS.temperament.warlike.effect,
+          DEITY_AXIS_EFFECTS.temperament.peacelike.effect,
+        ] },
+      ],
+    },
+
+    // World inputs the config picker offers whose HelpPopover deep-links landed on
+    // pages that never defined them: the seven terrains (list from the calamity
+    // terrain map; readings authored) and the culture vocabulary.
+    terrain: Object.keys(DISASTER_TYPE_BY_TERRAIN).map((id) => ({ id, reading: TERRAIN_READINGS[id] })),
+    cultures: { values: [...CULTURE_VALUES], note: CULTURE_NOTE },
 
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,

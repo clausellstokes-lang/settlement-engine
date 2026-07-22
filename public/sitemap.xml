@@ -283,22 +283,17 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-safe</loc>
+    <loc>https://settlementforge.com/compendium/threat-safe-heartland</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-frontier</loc>
+    <loc>https://settlementforge.com/compendium/threat-active-frontier</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-dangerous</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/threat-plagued</loc>
+    <loc>https://settlementforge.com/compendium/threat-embattled-region</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -679,6 +674,71 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/xset-delink-cleanup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-prosperity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-priority</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-chain-status</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-coherence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-food-security</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-stability</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-strain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-severity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magnitude</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-capture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-pantheon-rank</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magic-level</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magic-legality</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

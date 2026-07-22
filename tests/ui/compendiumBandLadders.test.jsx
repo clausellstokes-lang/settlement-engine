@@ -22,7 +22,7 @@ import { render, cleanup } from '@testing-library/react';
 
 import { buildBandLadders } from '../../src/domain/compendium/bandLadders.js';
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
-import { EconomyTab, StressTab, PowerTab_ } from '../../src/components/compendium/CatalogTabs.jsx';
+import { EconomyTab, StressTab, PowerTab_, ArcaneTab } from '../../src/components/compendium/CatalogTabs.jsx';
 import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { BAND_HINT } from '../../src/domain/state/bands.js';
 import { CAPACITY_BANDS } from '../../src/domain/capacityModel.js';
@@ -31,7 +31,7 @@ import { CAPTURE_LADDER } from '../../src/domain/corruption.js';
 afterEach(cleanup);
 
 // The compendium tab each ladder.tab id renders in (matches CatalogTabs wiring).
-const TAB_COMPONENT = { economy: EconomyTab, stress: StressTab, power: PowerTab_ };
+const TAB_COMPONENT = { economy: EconomyTab, stress: StressTab, power: PowerTab_, arcane: ArcaneTab };
 
 describe('compendium band ladders — the artifact mirrors the source, and is total', () => {
   test('CD.bandLadders is a fresh build of buildBandLadders() (drift contract)', () => {

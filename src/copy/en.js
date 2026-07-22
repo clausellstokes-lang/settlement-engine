@@ -673,7 +673,7 @@ export const en = Object.freeze({
       },
       magicLevel: {
         title: 'Magic Level',
-        body: 'Mundane = no magical economy. Common = magic shops in cities; everyday charms in villages. High = magic is the economy. Affects institution distribution + NPC archetypes.',
+        body: 'None = magic is disabled. Low = rare and limited. Medium = a moderate, everyday presence. High = broad and pervasive. The level shapes institution distribution and NPC archetypes.',
       },
       tier: {
         title: 'Settlement Tier',

@@ -104,6 +104,62 @@ const COHERENCE_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Pantheon rank — the living-world tier a deity holds, which rises and falls with
+ * its seats (a seat is a settlement whose patron is this god). Rank is EARNED through
+ * spread, not authored. Seat/tick numbers stated here are pinned to PANTHEON_TUNING by
+ * tests/ui/compendiumFaith.test.jsx, so a tuning change reds the copy. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const PANTHEON_RANK_LEVELS = Object.freeze([
+  { name: 'Cult',  reading: 'A fringe following, with fewer than two settlement seats.' },
+  { name: 'Minor', reading: 'Two or three settlement seats.' },
+  { name: 'Major', reading: 'Four or more settlement seats, and only a major god can shift a realm\'s magic legality.' },
+]);
+
+/**
+ * Magic level — the band the generator emits from the Magic priority slider
+ * (getMagicLevel, src/data/constants.js: 0 none, <=25 low, <=65 medium, else high).
+ * The thresholds stated here are pinned to getMagicLevel by tests/ui/compendiumFaith.test.jsx.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const MAGIC_LEVEL_LEVELS = Object.freeze([
+  { name: 'None',   reading: 'Magic is disabled in this world. There is no magical economy.' },
+  { name: 'Low',    reading: 'A magic priority at or below 25. Magic is rare and limited.' },
+  { name: 'Medium', reading: 'A magic priority up to 65. A moderate, everyday presence.' },
+  { name: 'High',   reading: 'A magic priority above 65. Magic is broad and pervasive.' },
+]);
+
+/**
+ * Magic legality — the legality facet the magic profile bands (magicLegalityBands,
+ * src/domain/magicProfile.js). The dead-magic floor 'absent' is noted in the blurb
+ * rather than laddered. Readings state the plain meaning of each legal standing.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const MAGIC_LEGALITY_LEVELS = Object.freeze([
+  { name: 'Forbidden',  reading: 'Magic is outlawed; practicing it is a crime.' },
+  { name: 'Restricted', reading: 'Magic is tightly controlled, permitted only in narrow licensed forms.' },
+  { name: 'Regulated',  reading: 'Magic is legal but overseen, with rules on who may practice and how.' },
+  { name: 'Tolerated',  reading: 'Magic is accepted as an ordinary part of life.' },
+  { name: 'Celebrated', reading: 'Magic is embraced and openly honored.' },
+]);
+
+/**
+ * Food security — the label the food generator stamps from local production, imports,
+ * and any magical supplement against demand (src/generators/foodGenerator.js: surplus
+ * >40%, deficit >5% / >15% / >40%, plus the famine floor). Thresholds stated in each
+ * reading; pinned to the foodGenerator labels by tests/ui/compendiumFoodSecurity.test.jsx.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const FOOD_SECURITY_LEVELS = Object.freeze([
+  { name: 'Surplus',          reading: 'A food surplus above 40 percent. Reserves cushion a bad season and can lift prosperity.' },
+  { name: 'Secure',           reading: 'The settlement feeds itself with a small margin.' },
+  { name: 'Pressured',        reading: 'A food deficit above 5 percent. The margin is thin and a shock would bite.' },
+  { name: 'Import-Dependent', reading: 'A food deficit above 15 percent, covered by imports. A cut trade route turns it into a crisis.' },
+  { name: 'Deficit',          reading: 'A food deficit above 40 percent. The settlement cannot feed itself.' },
+  { name: 'Active Famine',    reading: 'Famine. Food has failed outright, and it caps prosperity no matter how strong the trade.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -120,12 +176,24 @@ const LADDER_META = Object.freeze([
     blurb: 'Every supply chain the settlement runs carries a status shown as a chip on the dossier. These are the states you will see. Two further engine states, captured and collapsing, are defined but not yet produced by the generator.' },
   { id: 'coherence', concept: 'Coherence Check', tab: 'economy', anchor: 'economy', levels: COHERENCE_LEVELS,
     blurb: 'Not a score. The engine checks whether the settlement makes logical sense and returns one of three verdicts. The findings behind a verdict are graded critical (survival-blocking), implausible (breaks historical believability), dependency (relies on open trade), or inefficiency (waste the settlement can survive).' },
+  { id: 'food-security', concept: 'Food Security', tab: 'economy', anchor: 'economy', levels: FOOD_SECURITY_LEVELS,
+    blurb: 'How well the settlement feeds itself, read from local production, imports, and any magical supplement against demand. A famine or a severe deficit caps prosperity no matter how strong the trade.' },
   { id: 'stability', concept: 'Settlement Stability', tab: 'stress', anchor: 'stress', category: 'stability-band',
     blurb: 'How a settlement’s overall health reads at a glance, on a 0 to 100 scale.' },
   { id: 'strain', concept: 'Capacity Strain', tab: 'stress', anchor: 'stress', category: 'strain-band',
     blurb: 'How a single capacity such as food, defense, or healing reads against the demand on it.' },
+  { id: 'severity', concept: 'Stressor Severity', tab: 'stress', anchor: 'stress', category: 'severity',
+    blurb: 'How hard a stressor hits when the DM applies one.' },
+  { id: 'magnitude', concept: 'Relief Magnitude', tab: 'stress', anchor: 'stress', category: 'magnitude',
+    blurb: 'How much an ally gives when it sends relief.' },
   { id: 'capture', concept: 'Criminal Capture', tab: 'power', anchor: 'power', category: 'capture-rung',
     blurb: 'How far a criminal interest has taken a seat of power.' },
+  { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,
+    blurb: 'A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.' },
+  { id: 'magic-level', concept: 'Magic Level', tab: 'arcane', anchor: 'magic', levels: MAGIC_LEVEL_LEVELS,
+    blurb: 'The Magic priority slider resolves to one of these levels. None means magic is disabled in the world, not a slider position. The level sets how available magic is and feeds its legality, risk, and role.' },
+  { id: 'magic-legality', concept: 'Magic Legality', tab: 'arcane', anchor: 'magic', levels: MAGIC_LEGALITY_LEVELS,
+    blurb: 'Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm\'s legality (see the deity axes above). A world with no magic reads as absent.' },
 ]);
 
 /**

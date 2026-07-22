@@ -70,10 +70,18 @@ export function TiersTab({ _search='' }) {
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
     <SectionHeading id="threat" accent={swatch['#8B1A1A']}>Monster Threat</SectionHeading>
-    {[['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.',ECON_TXT],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].map(([name,desc,color])=>(
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>The regional threat set at generation. The engine has three arms (heartland, frontier, plagued).</p>
+    {[['Safe Heartland','Monsters are rumor. Civilian institutions dominate and the militia is law enforcement.','#1a5a28'],['Active Frontier','A managed, active threat. Walls and garrison are elevated; raids and patrols are routine.',ECON_TXT],['Embattled Region','Active war or monster pressure. The militia is the most important institution, and crisis conditions hold.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
+      </div>))}
+    <SectionHeading id="terrain" accent={INK}>Terrain</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>Terrain steers which resources are nearby, how far a settlement leans on imported food, and which calamity flavour it draws.</p>
+    {CD.terrain.map((t)=>(
+      <div key={t.id} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
+        <span style={{ fontSize:FS.xs, fontWeight:700, color:INK, minWidth:110, flexShrink:0, textTransform:'capitalize' }}>{t.id}</span>
+        <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{t.reading}</span>
       </div>))}
   </>;
 }
@@ -132,8 +140,9 @@ export function PowerTab_({ search='' }) {
         </div>))}
     </div>
     )}
-    {/* How far a criminal interest has taken a seat of power: the capture ladder. */}
-    <div style={{ marginTop:16 }}>
+    {/* How far a criminal interest has taken a seat of power: the capture ladder.
+        id="power" so the glossary capture-rung lifeline lands on the ladder itself. */}
+    <div id="power" style={{ marginTop:16, scrollMarginTop:80 }}>
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
@@ -141,13 +150,35 @@ export function PowerTab_({ search='' }) {
 }
 
 export function ArcaneTab() {
+  const faith = CD.faith;
   return <>
-    <div id="magic" />
+    {/* THE DEITY AXES lead the tab (owner doctrine: no premade roster; a custom
+        deity is authored on these four axes, projected from DEITY_AXIS_EFFECTS). */}
+    <SectionHeading id="faith" accent={INK}>Deities: the four axes</SectionHeading>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>{faith.authorship}</p>
+    {faith.axes.map((a) => (
+      <div key={a.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
+        <div style={{ fontSize:FS.md, fontWeight:700, color:INK, marginBottom:3 }}>{a.label}{a.derived ? ' (derived)' : ''}</div>
+        {a.lines.map((line, i) => (
+          <div key={i} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{line}</div>))}
+      </div>))}
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, margin:'8px 0 0' }}>{faith.temperNote}</p>
+    {laddersFor('arcane').filter((l) => l.anchor === 'faith').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
+    <SectionHeading id="magic" accent={INK}>Magic</SectionHeading>
+    {laddersFor('arcane').filter((l) => l.anchor === 'magic').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. Arcane institutions can substitute for missing production.</Card>
     <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
     <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>
     <Card title="Religion & Governance" accent='#1a4a2a'>Religion 72+ with low Military produces Theocracy. With strong Crime produces Religious Fraud.</Card>
     <Card title="Magic & Faith Unified" accent='#2a1a6a'>Magic 70+ and Religion 65+ produces Mage Theocracy. Arcane clergy governs.</Card>
+    <SectionHeading id="cultures" accent={INK}>Cultures</SectionHeading>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 8px' }}>{CD.cultures.note}</p>
+    <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
+      {CD.cultures.values.map((c)=>(
+        <span key={c.id} style={{ fontSize:FS.xs, fontWeight:700, color:INK, background:`${GOLD}14`, padding:'2px 8px' }}>{c.label}</span>))}
+    </div>
   </>;
 }
 
