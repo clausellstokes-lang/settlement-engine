@@ -2,6 +2,7 @@
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
 > - Continuation branch `claude/compendium-completion-2` off composite-r4 `95f57988` (A+B folded). Baseline closure now 1,039,961.
+> - Wave D (shipped, `07b34a89`) — Terrain section (Tiers tab, id="terrain", 7 terrains) + Cultures section (Arcane tab, id="cultures", 12 values, CULTURES drift-pinned) + dead anchors repointed (glossary verb -> living-world; power tab gains id="power"). +compendiumWorldInputs pin. Gate green; closure Δ0.
 > - Wave C2 (shipped, `def9fe8c`) — Magic Level + Magic Legality ladders (getMagicLevel + magicProfile bands); the drifted config Magic whisper corrected (Mundane/Common/High -> None/Low/Medium/High). Gate green; closure Δ0.
 > - Wave C1 (shipped, `52a4d8c1`) — the deity FOUR AXES (from DEITY_AXIS_EFFECTS, no roster) lead the arcane tab + Pantheon Rank ladder (seats, PANTHEON_TUNING-bound). +compendiumFaith pin; totality pin gains the arcane tab. Gate green; closure Δ0.
 > - Wave A (shipped, `e13a7ef8`) — the owner's four Economy examples as W6 ladders: Priority Bands, Chain Status, Coherence Check (renamed from "Viability Score"), Exports & Imports enriched. Gate green (60 focused + 282 copy/lint + build/verify:dist). Closure 1,039,961 (+5, shared-chunk rebalance, under hard cap — flagged for owner reclaim).
