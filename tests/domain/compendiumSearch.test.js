@@ -70,8 +70,11 @@ describe('searchCompendium', () => {
   it('matches tiers, routes and threats on the tiers tab', () => {
     expect(searchCompendium('metropolis')[0].term).toBe('Metropolis');
     expect(searchCompendium('port')[0].term).toBe('Port');
+    // The threat vocabulary was corrected to the engine's real display names
+    // (Safe Heartland / Active Frontier / Embattled Region); 'Frontier' alone was a
+    // phantom-adjacent label. A search for 'frontier' still routes to the real arm.
     const frontier = searchCompendium('frontier').map(r => r.term);
-    expect(frontier).toContain('Frontier');
+    expect(frontier).toContain('Active Frontier');
   });
 
   it('matches on keyword text, not just the term', () => {

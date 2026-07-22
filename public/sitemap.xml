@@ -283,22 +283,17 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-safe</loc>
+    <loc>https://settlementforge.com/compendium/threat-safe-heartland</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-frontier</loc>
+    <loc>https://settlementforge.com/compendium/threat-active-frontier</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/threat-dangerous</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/threat-plagued</loc>
+    <loc>https://settlementforge.com/compendium/threat-embattled-region</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

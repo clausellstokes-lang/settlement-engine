@@ -81,11 +81,13 @@ const ROUTE_ENTRIES = [
   id: `route-${slug(term)}`, term, category: 'Trade Route', tab: 'tiers', anchor: 'trade-routes', keywords: kw,
 }));
 
+// The engine's canonical monster-threat vocabulary is heartland/frontier/plagued
+// (config display names Safe Heartland / Active Frontier / Embattled Region). The old
+// 'Safe'/'Dangerous' were phantom rungs; keep them only as search keywords.
 const THREAT_ENTRIES = [
-  ['Safe', 'heartland monsters rumor civilian institutions'],
-  ['Frontier', 'active managed threat walls garrison patrols'],
-  ['Dangerous', 'constant threat military dominates'],
-  ['Plagued', 'monster plague crisis siege-like militia'],
+  ['Safe Heartland', 'heartland safe monsters rumor civilian institutions'],
+  ['Active Frontier', 'frontier active managed threat walls garrison patrols'],
+  ['Embattled Region', 'plagued embattled dangerous monster plague crisis siege-like militia war'],
 ].map(([term, kw]) => ({
   id: `threat-${slug(term)}`, term, category: 'Monster Threat', tab: 'tiers', anchor: 'threat', keywords: kw,
 }));

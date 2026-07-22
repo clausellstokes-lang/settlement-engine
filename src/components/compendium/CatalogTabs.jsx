@@ -70,7 +70,8 @@ export function TiersTab({ _search='' }) {
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
       </div>))}
     <SectionHeading id="threat" accent={swatch['#8B1A1A']}>Monster Threat</SectionHeading>
-    {[['Safe','Civilian institutions dominate. Military is law enforcement only.','#1a5a28'],['Frontier','Active but managed threat. Walls and garrison elevated.',ECON_TXT],['Dangerous','Constant threat. Military dominates. Civilian life constrained.','#8a5010'],['Plagued','Active monster plague. Crisis conditions. Siege-like dynamics.','#8b1a1a']].map(([name,desc,color])=>(
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>The regional threat set at generation. The engine has three arms (heartland, frontier, plagued).</p>
+    {[['Safe Heartland','Monsters are rumor. Civilian institutions dominate and the militia is law enforcement.','#1a5a28'],['Active Frontier','A managed, active threat. Walls and garrison are elevated; raids and patrols are routine.',ECON_TXT],['Embattled Region','Active war or monster pressure. The militia is the most important institution, and crisis conditions hold.','#8b1a1a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color, minWidth:110, flexShrink:0 }}>{name}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</span>
