@@ -32,6 +32,12 @@ import { buildButtressDirect } from '../src/domain/townMap/arch/rulesets/buttres
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = join(__dirname, '..', 'public', 'landing-maps', 'k1-exhibit');
+const GOVERNOR_PATH = join(__dirname, 'lib', 'adaptiveGovernor.mjs');
+
+/** inline the pure K-5 governor (scripts/lib/adaptiveGovernor.mjs) into the self-contained viewer:
+ * strip the `export ` keywords so the IDENTICAL sense->decide logic the test pins runs in the browser
+ * (ONE source of truth). The module has no imports/backticks, so it drops straight into a <script>. */
+function inlineGovernor() { return readFileSync(GOVERNOR_PATH, 'utf8').replace(/^export /gm, ''); }
 
 function bytesEqual(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
 function base64(bytes) {
@@ -64,6 +70,7 @@ function tierGlb(ruleset, tier) {
 function viewerHtml(tiers, creaseB64, stats) {
   const glbsJs = tiers.map((t) => `"${base64(t.glb)}"`).join(',');
   const creaseJs = creaseB64.map((c) => `"${c}"`).join(',');
+  const governorSrc = inlineGovernor();
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>K-1 &mdash; the grammar cathedral (deterministic mesh, 3 LOD tiers)</title>
@@ -84,26 +91,41 @@ function viewerHtml(tiers, creaseB64, stats) {
   button { font:inherit; color:#e9e2d4; background:rgba(90,78,52,.5); border:1px solid rgba(200,180,120,.35);
     border-radius:7px; padding:5px 10px; margin:2px 6px 2px 0; cursor:pointer; }
   button.on { background:rgba(150,124,70,.75); }
+  button:focus-visible { outline:2px solid #e7c98a; outline-offset:1px; }
   input[type=range] { width:220px; vertical-align:middle; }
+  input[type=range]:focus-visible { outline:2px solid #e7c98a; outline-offset:2px; }
+  .qind { margin-top:8px; }
+  .qbarwrap { height:6px; background:rgba(120,100,60,.28); border-radius:4px; overflow:hidden; }
+  #qbar { height:100%; width:100%; background:linear-gradient(90deg,#b98a4e,#e7c98a); transition:width .18s linear; }
+  #qtext { font-size:11.5px; opacity:.82; margin-top:3px; font-variant-numeric:tabular-nums; }
   .err { position:fixed; inset:0; display:none; place-items:center; text-align:center; padding:24px; color:#f2c9a0; }
 </style></head><body>
 <canvas id="c"></canvas>
 <div id="info" class="panel">
   <h1>Grammar cathedral &mdash; full 3D structure</h1>
   <p>A deterministic, byte-reproducible mesh emitted by the K-1 shape-grammar. Drag to orbit &middot; wheel to zoom. Per-vertex baked AO + engraved crease ink lines travel with the geometry, so every machine sees the same occlusion + linework; only the raw pixels are your GPU's.</p>
+  <p>The <b>K-5 adaptive fidelity governor</b> senses frame time and slides quality down a continuous ladder to a usable floor when the GPU can't keep up &mdash; then back up. It is view-only: the mesh, GLB, and plate are byte-identical at every quality. Drag &ldquo;simulate GPU load&rdquo; to watch it degrade and recover.</p>
   <p id="stats"><b>${stats.t2tri.toLocaleString()}</b> triangles (signature) &middot; GLB <b>${(stats.t2glb / 1024).toFixed(0)} kB</b> &middot; ${stats.roles} material roles</p>
 </div>
 <div class="ctl panel">
   <label>LOD tier</label>
   <div><button data-tier="2" class="on">signature</button><button data-tier="1">commons</button><button data-tier="0">glyph</button></div>
-  <label>qualityLevel (K-5 governor hook) &mdash; <span id="qv">1.00</span></label>
-  <input id="q" type="range" min="0.3" max="1" step="0.02" value="1">
+  <label id="dialLabel">quality override &mdash; auto adapts to frame-rate (&larr;/&rarr; or 1&ndash;4)</label>
+  <div id="dial" role="group" aria-labelledby="dialLabel"></div>
+  <label>simulate GPU load &mdash; <span id="loadv">0 ms</span></label>
+  <input id="load" type="range" min="0" max="60" step="1" value="0" aria-label="simulated GPU load in milliseconds per frame">
+  <div class="qind"><div class="qbarwrap"><div id="qbar"></div></div><div id="qtext">quality 100% &middot; adaptive 3D</div></div>
   <div style="margin-top:6px"><button id="spin" class="on">auto-orbit</button><button id="reset">reset</button></div>
 </div>
+<div id="aria" aria-live="polite" style="position:fixed;left:-9999px;top:0">quality 100 percent, adaptive 3D</div>
 <div id="err" class="err"></div>
 <script>
 const GLBS = [${glbsJs}];       // [tier0, tier1, tier2] base64 GLB (POSITION/NORMAL/_AO)
 const CREASE = [${creaseJs}];   // [tier0, tier1, tier2] base64 Uint32 crease-edge index
+
+// ── THE K-5 ADAPTIVE FIDELITY GOVERNOR (inlined verbatim from scripts/lib/adaptiveGovernor.mjs; view-only) ──
+${governorSrc}
+
 function b64ToBytes(s){ const bin=atob(s); const a=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i); return a; }
 function b64ToU32(s){ const b=b64ToBytes(s); return new Uint32Array(b.buffer, b.byteOffset, b.byteLength/4); }
 function parseGlb(bytes){
@@ -125,15 +147,43 @@ const canvas=document.getElementById('c'); const gl=canvas.getContext('webgl2',{
 function fail(msg){ const e=document.getElementById('err'); e.style.display='grid'; e.textContent=msg; }
 if(!gl){ fail('WebGL2 is unavailable in this browser.'); }
 
-// ── THE K-5 QUALITY HOOK: one scalar the LOD bias + optional passes READ (view-only, never geometry) ──
-let qualityLevel = 1.0;
-function lodTierFor(requested){ // qualityLevel biases the shown tier downward under load
-  if(qualityLevel < 0.5 && requested>0) return requested-1;
-  if(qualityLevel < 0.4 && requested>1) return 0;
-  return requested;
+// ── THE GOVERNOR DRIVES the K-1 qualityLevel hook: the LOD bias + optional passes READ the ladder ──
+let qualityLevel = 1.0;                        // the single view scalar (K-1 hook; default full fidelity)
+let gov = createGovernorState();               // the adaptive governor state (rAF frame-time sensor)
+let overrideMode = 'auto';                     // the manual override dial (auto/high/medium/low)
+let syntheticLoadMs = 0;                        // DEMO stressor: phantom ms added to the measured frame time
+let ladder = ladderFor(qualityLevel);           // the per-rung view settings for the current quality
+function lodTierFor(requested){ return ladder.massingOnly ? 0 : Math.max(0, Math.min(2, requested - ladder.lodBias)); }
+function inkEnabled(){ return ladder.ink; }     // the crease ink-line pass rung
+function resScale(){ return ladder.resScale; }  // the dynamic render-resolution rung
+
+// ── THE QUALITY INDICATOR + THE MANUAL OVERRIDE DIAL (E-I keyboard rules: focusable, arrows, aria-live) ──
+let lastAnnounce='';
+function announce(msg){ const el=document.getElementById('aria'); if(el && msg!==lastAnnounce){ el.textContent=msg; lastAnnounce=msg; } }
+function stateLabel(){ return gov.birdsEye ? '2D bird\\u2019s-eye fallback' : ladder.massingOnly ? 'massing floor' : 'adaptive 3D'; }
+function updateIndicator(){
+  const pct=Math.round(qualityLevel*100), span=1-GOVERNOR_TUNING.QUALITY_FLOOR;
+  const bar=document.getElementById('qbar'); if(bar) bar.style.width=Math.round(((qualityLevel-GOVERNOR_TUNING.QUALITY_FLOOR)/span)*100)+'%';
+  const txt=document.getElementById('qtext');
+  if(txt) txt.textContent='quality '+pct+'% \\u00b7 '+stateLabel()+' \\u00b7 res '+Math.round(ladder.resScale*100)+'% \\u00b7 LOD-'+ladder.lodBias+(ladder.ink?' \\u00b7 ink':'')+' \\u00b7 '+overrideMode;
+  announce('quality '+pct+' percent, '+stateLabel());
 }
-function inkEnabled(){ return qualityLevel >= 0.55; }      // the crease ink-line pass is an optional pass
-function resScale(){ return 0.6 + 0.4*qualityLevel; }       // dynamic render-resolution scale
+function setMode(mode){
+  overrideMode=mode; gov=setQualityCeiling(gov, ceilingForMode(mode));
+  const dial=document.getElementById('dial');
+  [...dial.children].forEach(x=>{const on=x.dataset.mode===mode; x.classList.toggle('on',on); x.setAttribute('aria-pressed', on?'true':'false');});
+  updateIndicator();
+}
+(function buildDial(){
+  const dial=document.getElementById('dial'); if(!dial) return;
+  OVERRIDE_MODES.forEach((mode)=>{ const b=document.createElement('button'); b.textContent=mode; b.dataset.mode=mode;
+    b.setAttribute('aria-pressed', mode==='auto'?'true':'false'); if(mode==='auto') b.classList.add('on'); b.onclick=()=>setMode(mode); dial.appendChild(b); });
+  dial.addEventListener('keydown',(e)=>{ const i=OVERRIDE_MODES.indexOf(overrideMode);
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); setMode(OVERRIDE_MODES[Math.min(OVERRIDE_MODES.length-1,i+1)]); }
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); setMode(OVERRIDE_MODES[Math.max(0,i-1)]); }
+    else if(/^[1-4]$/.test(e.key)){ e.preventDefault(); setMode(OVERRIDE_MODES[(+e.key)-1]); } });
+})();
+{ const ls=document.getElementById('load'); if(ls) ls.oninput=(e)=>{ syntheticLoadMs=+e.target.value; document.getElementById('loadv').textContent=syntheticLoadMs+' ms'; }; }
 
 function sub(a,b){return[a[0]-b[0],a[1]-b[1],a[2]-b[2]];}
 function cross(a,b){return[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];}
@@ -150,11 +200,12 @@ if(gl){
   in vec3 aPos; in vec3 aNrm; in float aAO; uniform mat4 uMVP; out vec3 vN; out float vAO;
   void main(){ vN=aNrm; vAO=aAO; gl_Position=uMVP*vec4(aPos,1.0); }\`;
   const fs=\`#version 300 es
-  precision highp float; in vec3 vN; in float vAO; out vec4 o; uniform vec3 uEye;
+  precision highp float; in vec3 vN; in float vAO; out vec4 o; uniform vec3 uEye; uniform float uContact;
   void main(){ vec3 N=normalize(vN); if(!gl_FrontFacing) N=-N;
     vec3 L1=normalize(vec3(-0.42,0.76,0.50)); vec3 L2=normalize(vec3(0.6,0.25,-0.4));
     float key=max(dot(N,L1),0.0); float fill=max(dot(N,L2),0.0)*0.30; float hemi=0.30+0.22*(N.y*0.5+0.5);
-    vec3 stone=vec3(0.84,0.79,0.69); vec3 c=stone*(hemi+0.85*key+fill)*(0.4+0.6*vAO);
+    float ao=mix(1.0, 0.4+0.6*vAO, uContact);
+    vec3 stone=vec3(0.84,0.79,0.69); vec3 c=stone*(hemi+0.85*key+fill)*ao;
     c=pow(clamp(c,0.0,1.0),vec3(1.0/2.2)); o=vec4(c,1.0); }\`;
   const lvs=\`#version 300 es
   in vec3 aPos; uniform mat4 uMVP; void main(){ gl_Position=uMVP*vec4(aPos,1.0); }\`;
@@ -183,12 +234,12 @@ if(gl){
   for(let i=0;i<m2.positions.length;i+=3)for(let k=0;k<3;k++){const v=m2.positions[i+k];if(v<mn[k])mn[k]=v;if(v>mx[k])mx[k]=v;}
   center=[(mn[0]+mx[0])/2,(mn[1]+mx[1])/2,(mn[2]+mx[2])/2]; radius=Math.hypot(mx[0]-mn[0],mx[1]-mn[1],mx[2]-mn[2])/2;
   gl.enable(gl.DEPTH_TEST);
-  const uMVP=gl.getUniformLocation(prog,'uMVP'), luMVP=gl.getUniformLocation(lineProg,'uMVP');
+  const uMVP=gl.getUniformLocation(prog,'uMVP'), luMVP=gl.getUniformLocation(lineProg,'uMVP'), uContact=gl.getUniformLocation(prog,'uContact');
 
-  let yaw=-0.55, pitch=-0.10, dist=radius*3.0, spin=true;
+  let yaw=-0.55, pitch=-0.10, dist=radius*3.0, spin=true, lastResScale=-1;
   const start={yaw:-0.55,pitch:-0.10,dist:radius*3.0};
   function resize(){const dpr=Math.min(2,(window.devicePixelRatio||1))*resScale();
-    canvas.width=Math.max(1,canvas.clientWidth*dpr); canvas.height=Math.max(1,canvas.clientHeight*dpr); gl.viewport(0,0,canvas.width,canvas.height);}
+    canvas.width=Math.max(1,canvas.clientWidth*dpr); canvas.height=Math.max(1,canvas.clientHeight*dpr); gl.viewport(0,0,canvas.width,canvas.height); lastResScale=resScale();}
   window.addEventListener('resize',resize); resize();
   let drag=false,lx=0,ly=0;
   canvas.addEventListener('pointerdown',e=>{drag=true;spin=false;document.getElementById('spin').classList.remove('on');lx=e.clientX;ly=e.clientY;canvas.setPointerCapture(e.pointerId);});
@@ -196,24 +247,30 @@ if(gl){
   canvas.addEventListener('pointermove',e=>{ if(!drag)return; yaw+=(e.clientX-lx)*0.008; pitch+=(e.clientY-ly)*0.008; pitch=Math.max(-1.4,Math.min(1.4,pitch)); lx=e.clientX; ly=e.clientY; });
   canvas.addEventListener('wheel',e=>{e.preventDefault(); dist*=Math.exp(e.deltaY*0.0011); dist=Math.max(radius*1.2,Math.min(radius*8,dist));},{passive:false});
   document.querySelectorAll('[data-tier]').forEach(b=>b.onclick=()=>{ requestedTier=+b.dataset.tier; document.querySelectorAll('[data-tier]').forEach(x=>x.classList.remove('on')); b.classList.add('on'); });
-  document.getElementById('q').oninput=(e)=>{ qualityLevel=+e.target.value; document.getElementById('qv').textContent=qualityLevel.toFixed(2); resize(); };
   document.getElementById('spin').onclick=(e)=>{spin=!spin; e.target.classList.toggle('on',spin);};
   document.getElementById('reset').onclick=()=>{yaw=start.yaw;pitch=start.pitch;dist=start.dist;spin=true;document.getElementById('spin').classList.add('on');};
 
-  function frame(){
+  let lastT=(typeof performance!=='undefined'?performance.now():Date.now()), uiTick=0;
+  function frame(now){
     if(spin) yaw+=0.0030;
+    const t=(typeof now==='number')?now:(typeof performance!=='undefined'?performance.now():Date.now());
+    const rawDt=Math.max(0,t-lastT); lastT=t;
+    gov=observeFrame(gov, rawDt+syntheticLoadMs);   // SENSE (rAF frame time) -> DECIDE (view-only)
+    qualityLevel=gov.quality; ladder=ladderFor(qualityLevel);
+    if(resScale()!==lastResScale) resize();          // the render-resolution rung changed -> resize buffer
+    if((uiTick++ % 12)===0) updateIndicator();
     const tier=lodTierFor(requestedTier);
     const eye=[center[0]+dist*Math.cos(pitch)*Math.sin(yaw), center[1]+dist*Math.sin(pitch), center[2]+dist*Math.cos(pitch)*Math.cos(yaw)];
     const proj=M.persp(0.6, canvas.width/canvas.height, radius*0.1, radius*20);
     const mvp=M.mul(proj, M.look(eye,center,[0,1,0]));
     gl.clearColor(0.055,0.05,0.043,1); gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
-    gl.useProgram(prog); gl.uniformMatrix4fv(uMVP,false,new Float32Array(mvp));
+    gl.useProgram(prog); gl.uniformMatrix4fv(uMVP,false,new Float32Array(mvp)); gl.uniform1f(uContact, ladder.contact?1.0:0.0);
     gl.bindVertexArray(vaos[tier]); gl.drawElements(gl.TRIANGLES,counts[tier],gl.UNSIGNED_INT,0);
     if(inkEnabled()){ gl.useProgram(lineProg); gl.uniformMatrix4fv(luMVP,false,new Float32Array(mvp));
       gl.bindVertexArray(lineVaos[tier]); gl.drawElements(gl.LINES,lineCounts[tier],gl.UNSIGNED_INT,0); }
     requestAnimationFrame(frame);
   }
-  frame();
+  updateIndicator(); requestAnimationFrame(frame);
 }
 </script>
 </body></html>
