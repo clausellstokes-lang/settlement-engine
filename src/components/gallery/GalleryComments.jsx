@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import { MoreVertical } from 'lucide-react';
 
 import { supabase } from '../../lib/supabase.js';
 import {
@@ -7,7 +6,6 @@ import {
 import {
   BODY, BORDER, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SP, sans, serif_ } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation.jsx';
 import { formatDate, REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
@@ -52,15 +50,19 @@ function CommentActions({ comment, canReport, onDelete, onReport }) {
 
   return (
     <div ref={rootRef} style={{ marginLeft: 'auto', position: 'relative' }}>
-      <IconButton
-        Icon={MoreVertical}
-        label="Comment options"
-        tone="ghost"
-        size="lg"
+      {/* Glyph trigger (no lucide import — a new eager icon would breach the
+          razor-thin first-paint closure budget). Button keeps a11y + focus ring. */}
+      <Button
+        variant="ghost"
+        size="sm"
+        aria-label="Comment options"
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => { setOpen(o => !o); setReporting(false); }}
-      />
+        style={{ minHeight: 44, minWidth: 44, color: MUTED, fontSize: FS.lg, lineHeight: 1, padding: 0 }}
+      >
+        <span aria-hidden="true">⋮</span>
+      </Button>
       {open && (
         <div role="menu" aria-label="Comment options" style={{ position: 'absolute', right: 0, top: '100%', zIndex: 5, background: CARD, border: `1px solid ${BORDER}`, minWidth: 150, display: 'grid' }}>
           {canReport && (
