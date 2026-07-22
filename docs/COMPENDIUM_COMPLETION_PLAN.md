@@ -2,6 +2,8 @@
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
 > - Continuation branch `claude/compendium-completion-2` off composite-r4 `95f57988` (A+B folded). Baseline closure now 1,039,961.
+> - Wave H (shipped, `bd5eac94`) — search drift closed: tier keywords derive from CD.tiers (stale bands gone), 'affluent' phantom removed, the 13 W6 ladders now indexed + deep-linkable (/compendium/ladder-*), +compendiumSearchDrift walker. Gate green; closure Δ0.
+> - Wave G (shipped, `d7db7a16`) — Food Security ladder (foodGenerator-pinned) + Stressor Severity/Relief Magnitude dial ladders; the glossary severity/magnitude DEFS de-em-dashed (voice win, glossary.js em 5->0), docs/glossary.md regenerated. +compendiumFoodSecurity pin. Gate green; closure Δ0.
 > - Wave F (shipped, `31fbd3f3`) — the Monster Threat vocabulary lie fixed: 4 phantom rows (Safe/Frontier/Dangerous/Plagued) -> the 3 real arms (Safe Heartland/Active Frontier/Embattled Region), producer-bound to the config panel (T4-safe); searchIndex + archetype conds re-worded. +compendiumMonsterThreat pin. Gate green; closure Δ0.
 > - Wave E (shipped, `5e454fc4`) — the 4 quiet presets distinguished (intensity + humanized autonomy + authored summary). +compendiumPresets pin. Gate green; closure Δ0.
 > - Wave D (shipped, `07b34a89`) — Terrain section (Tiers tab, id="terrain", 7 terrains) + Cultures section (Arcane tab, id="cultures", 12 values, CULTURES drift-pinned) + dead anchors repointed (glossary verb -> living-world; power tab gains id="power"). +compendiumWorldInputs pin. Gate green; closure Δ0.
@@ -65,6 +67,24 @@ Legitimacy ladder, governance-stability vocabulary, faction-archetypes (13), pow
 
 ### Wave H — LOW (risk: low)
 searchIndex drift (affluent phantom, stale tier pops, derive from CD, all-15 stress entries, ladder search entries) + walker; power-tab intro formula; NPC growth goal vocabulary; resources & goods pointer; the two dead-link LOW anchors.
+
+## Wave G remainder (MED, not yet done — the named G items Food Security + dials ARE shipped)
+These remaining MED ladders/sections follow the exact same W6 + pin recipe; each spec'd with truthSource in the audit:
+- Legitimacy ladder (Endorsed/Approved/Tolerated/Contested/Legitimacy Crisis; factionDynamics.js:111-131). Power tab.
+- Governance-stability vocabulary (governanceNarrative.js:108-165) + power-structure concept entry (rulingStructure.js:743-760, transfer causes rulingPower.js:246). Power tab. (Coordinate: the power-strata rework folded at d6a9cefc — verify current Power-tab state first.)
+- Faction archetypes (13-value FACTION_ARCHETYPES; factionArchetypes.js:24-38). Power tab.
+- Corruption machinery block extending the capture ladder (corruption.js:590-627 covert/revealed, vectors, exposure). Power tab.
+- Safety ladder (safetyProfile.js:224-263, five rungs + compound overrides). Stress tab.
+- Defense readiness (defenseDisplay.js badge bands + threatAssessment five arms). ⚠️ defenseDisplay is a Wave-2 fenced file — read-only; author the compendium ladder from it, do not edit it.
+- Calamity scale/kFactor plain-English lead-in (calamity.js:374-386). Calamity tab.
+- Map-lens one-liners + schema word defs + the Illustrated 6th lens (townMapStyles.js). Lenses tab.
+- District wealth/safety/category (qualitativeBands.js:79-94, districtProfile.js). Map Lenses/Facets tab. ⚠️ disarm the Prosperity-word collision.
+- Institutions selection vocabulary (nativeTier + priorityCategory tags; already in props). Institutions tab.
+- Operations klass/scope legend (always-visible KLASS_MEANING + scope defs). Operations tab (RegistryHubs).
+- Settlement lifecycle phases (remnant grade relic_ruin/abandoned_site; settlementLifecycleFirstClass.js:74-78). Living tab.
+- Archetype cond tier/stress re-word (the threat part is done in Wave F; tier 'small' + stress-name mismatches remain).
+- Magic-as-buffer substitution rules + prosperity food-cap clause (Arcane/Economy prose enrich).
+- NPC growth goal vocabulary (LOW; npcAgency.js goal kinds). Living tab.
 
 ## Sequencing rationale
 Owner's explicit examples first (Wave A). Zero-authoring + authoring-free wins next (Wave B). Then the doctrine-mandated faith/magic (C) and the broken-lifeline world inputs (D). Presets (E) and the producer-bound vocabulary lie (F) need care. MED/LOW ladders (G/H) last. Data (bandLadders/glossary) before consumers (CatalogTabs render); the searchIndex drift walker (prevention) last so it does not enshrine current drift.
