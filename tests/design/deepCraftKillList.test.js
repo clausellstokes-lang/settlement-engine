@@ -228,7 +228,12 @@ const CEILINGS = Object.freeze({
 });
 
 const PATTERNS = Object.freeze({
-  borderRadius: /borderRadius/,
+  // GUARD REFINEMENT (2026-07-22, manager): an explicit zero radius
+  // (borderRadius: 0) ENFORCES the flat idiom on a primitive that would
+  // otherwise round — it is anti-SaaS flatness, the opposite of what this
+  // ratchet hunts — so zero-values are exempt from the count. First instance:
+  // PowerStrata's holds-power marker flattening the Button primitive.
+  borderRadius: /borderRadius(?!:\s*['"`]?0['"`]?\s*[,}\s])/,
   boxShadow: /boxShadow/,
   rgbaLiterals: /rgba\(/,
   // THE RENAME COMPLETED (fold batch 2, 2026-07-19): with all six branches
