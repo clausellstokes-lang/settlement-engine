@@ -40,7 +40,9 @@ describe('CampaignFolder — accessible column heads', () => {
         toggleCollapsed={() => {}}
       />,
     );
-    for (const name of ['Settlement', 'Tier', 'Phase', 'Standing', 'Actions']) {
+    // Column heads renamed to plain words (legibility wave, 2026-07-22):
+    // Tier -> Size, Phase -> Status, Standing -> Health.
+    for (const name of ['Settlement', 'Size', 'Status', 'Health', 'Actions']) {
       expect(screen.getByRole('columnheader', { name }), `missing column head: ${name}`).toBeTruthy();
     }
   });

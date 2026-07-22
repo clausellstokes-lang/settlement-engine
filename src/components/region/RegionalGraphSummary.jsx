@@ -75,9 +75,19 @@ export default function RegionalGraphSummary({
       padding: '9px 12px',
       background: CARD,
     }}>
+      {/* Glance sentence — one plain truth, composed from the SAME channel /
+          impact counts below (legibility wave, 2026-07-22). "Regional graph" was a
+          builder term with no user definition; the door is now "Between Your
+          Towns" and the raw five-count stat is demoted to the secondary line. */}
+      <div style={{ fontSize: FS.xs, color: INK, fontWeight: 700, fontFamily: sans, marginBottom: 4 }}>
+        {confirmed.length === 0
+          ? 'No trade routes link your towns yet.'
+          : `${confirmed.length} trade route${confirmed.length === 1 ? '' : 's'} link your towns.`}
+        {availableImpacts.length > 0 && ` ${availableImpacts.length} change${availableImpacts.length === 1 ? '' : 's'} ready to apply.`}
+      </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
         <span style={{ fontSize: FS.xs, color: INK, fontWeight: 800, fontFamily: sans }}>
-          Regional graph
+          Between Your Towns
         </span>
         <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>
           {confirmed.length} confirmed · {suggested.length} suggested · {availableImpacts.length}/{queuedImpacts.length} ready · {appliedImpacts.length} applied · {resolvedImpacts.length} resolved

@@ -1,4 +1,4 @@
-import { useState, useId, lazy, Suspense } from 'react';
+import { useState, useId, useRef, useEffect, lazy, Suspense } from 'react';
 import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText, BookOpen} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
@@ -31,6 +31,28 @@ import { regionalCountsForSave } from './helpers.js';
 // painting a visible header row.
 const SR_ONLY = { position:'absolute', width:1, height:1, padding:0, margin:-1, overflow:'hidden', clip:'rect(0 0 0 0)', whiteSpace:'nowrap', border:0 };
 const HIDDEN_TH = { padding:0, border:0, height:0, lineHeight:0 };
+
+/** One row in the "Books and export" disclosure — a label over a one-line
+ *  description, so each export door's purpose reads on the surface instead of in
+ *  a code comment. A ghost menuitem Button (native focus + keyboard). */
+function ExportItem({ Icon, label, desc, disabled, onClick }) {
+  return (
+    <Button
+      variant="ghost"
+      fullWidth
+      role="menuitem"
+      disabled={disabled}
+      icon={<Icon size={13} color={GOLD} />}
+      onClick={onClick}
+      style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6 }}
+    >
+      <span style={{ display:'flex', flexDirection:'column', minWidth:0 }}>
+        <span style={{ fontSize:FS.sm, color:INK, fontWeight:600 }}>{label}</span>
+        <span style={{ fontSize:FS.xxs, color:MUTED, fontWeight:400 }}>{desc}</span>
+      </span>
+    </Button>
+  );
+}
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
 export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, onCreateCampaign, onNavigate, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
@@ -99,6 +121,22 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       setPdfBusy(false);
     }
   };
+  // "Books and export" disclosure — the four export/import doors (World Book /
+  // Player Book / Campaign PDF / Import) fold into one menu (legibility wave,
+  // 2026-07-22). Closes on Escape / outside click, mirroring the SettlementCard
+  // kebab menu grammar (tabbable items, no focus trap). zIndex sits in the local
+  // band (<=20), so no Z_LAYERS manifest entry is needed.
+  const [exportOpen, setExportOpen] = useState(false);
+  const exportMenuRef = useRef(null);
+  useEffect(() => {
+    if (!exportOpen) return;
+    const onDoc = (e) => { if (exportMenuRef.current && !exportMenuRef.current.contains(e.target)) setExportOpen(false); };
+    const onKey = (e) => { if (e.key === 'Escape') setExportOpen(false); };
+    document.addEventListener('mousedown', onDoc);
+    document.addEventListener('keydown', onKey);
+    return () => { document.removeEventListener('mousedown', onDoc); document.removeEventListener('keydown', onKey); };
+  }, [exportOpen]);
+
   const collapsed = campaign.collapsed;
   const retainedInactive = !isCampaignActive(campaign);
   const active = !retainedInactive && canManageCampaigns;
@@ -117,7 +155,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         <span style={{ flex:1, fontFamily:serif_, fontWeight:700, color:SECOND }}>{campaign.name}</span>
         <span style={{ fontSize:FS.xxs, fontWeight:700 }}>
           {retainedInactive
-            ? `Retained inactive${retainedUntil ? ` until ${retainedUntil}` : ''}`
+            ? `Frozen${retainedUntil ? ` until ${retainedUntil}` : ''}`
             : 'Available again with Premium'}
         </span>
       </div>
@@ -180,10 +218,12 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                 Auto-resolve
               </label>
             )}
-            {/* Interval picker for the advance — Week/Month/Season/Year, mirroring
-                the World Map toolbar so the DM can choose how far one step carries
-                the campaign world. Disabled in lockstep with the button; stops
-                propagation so opening the dropdown never toggles the folder. */}
+            {/* Advance by (interval) — a visible micro-label makes the dropdown's
+                purpose legible at a glance (was title=-only). The select keeps its
+                aria-label so its accessible name is unchanged. Disabled in lockstep
+                with the button; stops propagation so the dropdown never toggles the
+                folder. */}
+            <span aria-hidden="true" style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>Advance by</span>
             <select
               aria-label="Advance interval"
               value={advanceInterval}
@@ -197,9 +237,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               <option value="one_season">Season</option>
               <option value="one_year">Year</option>
             </select>
-            {/* Advance Time — a per-CAMPAIGN action. Premium gate: the whole folder
-                only renders (active) for canManageCampaigns, so free/anon never
-                reach this button. Disabled until the world is canonized. */}
+            {/* Advance Time — the folder's prominent primary verb, now the sole
+                full action button beside the collapsed export menu. Premium gate:
+                the whole folder only renders (active) for canManageCampaigns.
+                Disabled until the world is canonized. */}
             <Button
               variant="secondary"
               size="sm"
@@ -213,43 +254,52 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                   : 'Advance the campaign world and open the Realm'}>
               {advanceInFlight ? 'Advancing…' : 'Advance Time'}
             </Button>
-            {/* V-17 — bring an existing table's history into the campaign chronicle.
-                A per-CAMPAIGN action; the folder only renders active for
-                canManageCampaigns, so free/anon never reach it. */}
-            <Button
-              variant="secondary"
-              size="sm"
-              icon={<ScrollText size={10}/>}
-              onClick={(e) => { e.stopPropagation(); setImportOpen(true); }}>
-              Import
-            </Button>
-            {/* R-4 THE WORLD BOOK — the bound keepsake. Two faces: the DM's full
-                book, and a player-safe handout that leaks zero covert marks. */}
-            <Button
-              variant="secondary"
-              size="sm"
-              icon={<BookOpen size={10}/>}
-              onClick={handleWorldBook('dm')}
-              disabled={settlements.length === 0 || wbBusy}>
-              {wbBusy ? 'Binding…' : 'World Book'}
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
-              icon={<BookOpen size={10}/>}
-              onClick={handleWorldBook('player')}
-              disabled={settlements.length === 0 || wbBusy}>
-              Player Book
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              icon={<FileText size={10}/>}
-              onClick={handleExportPdf}
-              disabled={settlements.length === 0 || pdfBusy}
-              title="Export Campaign PDF">
-              {pdfBusy ? 'Exporting…' : 'PDF'}
-            </Button>
+            {/* Books and export — one disclosure folds the four sibling export/
+                import doors (World Book / Player Book / Campaign PDF / Import).
+                Each row carries a one-line description so the differences read on
+                the surface, not in code comments. The trigger stays enabled (Import
+                works on an empty campaign); the busy label mirrors an in-flight
+                export. The old red variant=danger on PDF is gone with it, so red
+                means destructive-only again on this header (Delete keeps it). */}
+            <div ref={exportMenuRef} style={{ position:'relative' }}>
+              <Button
+                variant="secondary"
+                size="sm"
+                icon={<BookOpen size={10}/>}
+                aria-haspopup="menu"
+                aria-expanded={exportOpen}
+                onClick={(e) => { e.stopPropagation(); setExportOpen(o => !o); }}>
+                {wbBusy ? 'Binding…' : pdfBusy ? 'Exporting…' : 'Books and export'} <span aria-hidden="true">{exportOpen ? '▴' : '▾'}</span>
+              </Button>
+              {exportOpen && (
+                <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:240, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
+                  <ExportItem
+                    Icon={BookOpen}
+                    label={wbBusy ? 'Binding…' : 'World Book'}
+                    desc="the full record, for your eyes"
+                    disabled={settlements.length === 0 || wbBusy}
+                    onClick={(e) => { setExportOpen(false); handleWorldBook('dm')(e); }} />
+                  <ExportItem
+                    Icon={BookOpen}
+                    label="Player Book"
+                    desc="safe to hand across the table"
+                    disabled={settlements.length === 0 || wbBusy}
+                    onClick={(e) => { setExportOpen(false); handleWorldBook('player')(e); }} />
+                  <ExportItem
+                    Icon={FileText}
+                    label={pdfBusy ? 'Exporting…' : 'Campaign PDF'}
+                    desc="a printable dossier"
+                    disabled={settlements.length === 0 || pdfBusy}
+                    onClick={(e) => { setExportOpen(false); handleExportPdf(e); }} />
+                  <ExportItem
+                    Icon={ScrollText}
+                    label="Import"
+                    desc="bring an existing chronicle in"
+                    disabled={false}
+                    onClick={(e) => { e.stopPropagation(); setExportOpen(false); setImportOpen(true); }} />
+                </div>
+              )}
+            </div>
             <IconButton Icon={Edit3} label="Rename campaign" onClick={() => { setEditing(true); setEditDraft(campaign.name); }} tone="ghost" size="sm"/>
             <IconButton Icon={X} label="Delete campaign" onClick={() => setConfirmDelete(!confirmDelete)} tone="danger" size="sm" pressed={confirmDelete}/>
           </div>
@@ -324,9 +374,9 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                 <tr>
                   {selectMode && <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Select</span></th>}
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Settlement</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Tier</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Phase</span></th>
-                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Standing</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Size</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Status</span></th>
+                  <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Health</span></th>
                   <th scope="col" style={HIDDEN_TH}><span style={SR_ONLY}>Actions</span></th>
                 </tr>
               </thead>

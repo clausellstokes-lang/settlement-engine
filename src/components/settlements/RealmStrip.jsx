@@ -179,9 +179,8 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       {pendingPropagation > 0 && (
         <Seg title="Committed member changes whose regional effects apply on the next Advance.">
           <span data-testid="pending-propagation-cue" style={{ color: GOLD_TXT, fontWeight: 700 }}>
-            {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} waiting to propagate
+            {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} will change on the next Advance
           </span>
-          <span style={{ color: BODY }}> – advance to apply</span>
         </Seg>
       )}
     </div>
