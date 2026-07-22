@@ -18,7 +18,7 @@ import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { t } from '../../copy/index.js';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
-export default function GalleryReportDialog({ dossier, auth, disabled, onReport }) {
+export default function GalleryReportDialog({ dossier, auth, disabled, onReport, label = 'settlement' }) {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState('unsafe_content');
   const [body, setBody] = useState('');
@@ -68,7 +68,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
         size="sm"
         onClick={requestOpen}
         disabled={disabled}
-        title="Report settlement"
+        title={`Report ${label}`}
         icon={<Flag size={13} />}
       >
         Report
@@ -94,7 +94,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Report settlement"
+            aria-label={`Report ${label}`}
             onSubmit={submit}
             style={{
               width: 'min(100%, 480px)',
@@ -115,7 +115,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               background: CARD_ALT,
             }}>
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
-                Report settlement
+                Report {label}
               </h2>
               <IconButton
                 Icon={X}
