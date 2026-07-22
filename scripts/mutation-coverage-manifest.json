@@ -22,6 +22,10 @@
     "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves."
   },
   "invariants": {
+    "tests/components/galleryFilterParity.test.jsx": {
+      "kind": "rationale",
+      "rationale": "A presentational STRUCTURE-parity pin (owner order 14): it asserts the three gallery tabs' filter panels render through the one shared GalleryFilterShell (bordered aside + Filters header) and that the gold-accent EmptyState renders centered. It has no domain/correctness logic to mutate; the convergence it guards is a render-structure assertion checked by querying the shared shell markers, so a planted source mutation is disproportionate for a three-assertion UI parity pin. The shell's byte-shape is separately lint-guarded (kill-list) and its consumers are compile-checked."
+    },
     "tests/build/ciCheckParity.test.js": {
       "kind": "uncovered"
     },
