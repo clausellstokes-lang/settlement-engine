@@ -123,6 +123,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
   'src/domain/display/threatAssessment.js': 'display — defenseProfile.institutions buckets',
   'src/domain/display/dossierViewModel.js': 'display — roster count for the dossier overview',
+  'src/domain/dossier/powerSupport.js': 'display/list — lists institutions aligned to each power for the Power-tab support web (a relationship/alignment display keyed on category + factionSource, NOT a live-provider capacity aggregate); each row is an InstitutionLink that surfaces the institution\'s actual state, so a ruin is shown, never credited with function',
   'src/domain/display/parityContract.js': 'display/contract — a canon-path string literal, not a roster read',
   'src/domain/display/visibilityAudit.js': 'display/audit — covert-dossier impairment read',
 });
