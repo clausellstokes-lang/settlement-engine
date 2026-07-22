@@ -235,7 +235,7 @@ export default function LibraryToolbar({
   if (minimal) {
     return (
       <div style={{
-        padding: SP.sm, background: PARCH, borderRadius: R.sm,
+        padding: SP.sm, background: PARCH,
         display: 'flex', alignItems: 'center', gap: SP.xs,
         fontFamily: sans, fontSize: FS.xs, color: INK,
       }}>

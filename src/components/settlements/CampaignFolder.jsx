@@ -272,7 +272,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                 {wbBusy ? 'Binding…' : pdfBusy ? 'Exporting…' : 'Books and export'} <span aria-hidden="true">{exportOpen ? '▴' : '▾'}</span>
               </Button>
               {exportOpen && (
-                <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, boxShadow:'0 4px 16px rgba(0,0,0,0.15)', minWidth:240, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
+                <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, minWidth:240, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
                   <ExportItem
                     Icon={BookOpen}
                     label={wbBusy ? 'Binding…' : 'World Book'}
