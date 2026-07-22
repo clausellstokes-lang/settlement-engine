@@ -723,6 +723,11 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/ladder-legitimacy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/ladder-capture</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

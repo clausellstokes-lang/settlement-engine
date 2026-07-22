@@ -77,6 +77,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"strain","concept":"Capacity Strain","blurb":"How a single capacity such as food, defense, or healing reads against the demand on it.","tab":"stress","anchor":"stress","levels":[{"name":"Surplus","reading":"More capacity than the settlement needs. A cushion against a bad season."},{"name":"Adequate","reading":"Supply meets demand. The settlement is not straining here."},{"name":"Strained","reading":"Demand is outrunning supply; the margin is thin and a shock would bite."},{"name":"Critical","reading":"Supply is far short of demand. This capacity is close to failing."},{"name":"Collapsed","reading":"Demand dwarfs supply; the function has effectively broken down."},{"name":"Absent","reading":"Neither supplied nor demanded. The capacity does not exist here at all."}]},
     {"id":"severity","concept":"Stressor Severity","blurb":"How hard a stressor hits when the DM applies one.","tab":"stress","anchor":"stress","levels":[{"name":"Minor","reading":"A light touch. The stressor nudges the settlement without upending it."},{"name":"Moderate","reading":"A real strain the settlement must reckon with, short of a crisis."},{"name":"Severe","reading":"A heavy blow. The stressor forces the settlement toward crisis."}]},
     {"id":"magnitude","concept":"Relief Magnitude","blurb":"How much an ally gives when it sends relief.","tab":"stress","anchor":"stress","levels":[{"name":"Token","reading":"A gesture: a small share of the giver’s surplus above its own floor."},{"name":"Measured","reading":"A considered gift: a meaningful share of the surplus, kept sustainable."},{"name":"Generous","reading":"An open hand: most of the giver’s surplus above its floor goes out."}]},
+    {"id":"legitimacy","concept":"Public Legitimacy","blurb":"How far the populace accepts the ruling power, on a 0 to 100 scale built from prosperity, safety, defense, and food. It scales how well the ruling power performs and, inversely, how much room crime finds.","tab":"power","anchor":"power","levels":[{"name":"Endorsed","reading":"At or above 75. The ruling power is broadly accepted; it governs at full strength and crime finds little room."},{"name":"Approved","reading":"At or above 60. Accepted, with a modest edge in the ruling power's favour."},{"name":"Tolerated","reading":"At or above 45. The ruling power holds on sufferance, with no edge either way."},{"name":"Contested","reading":"At or above 30. Acceptance is fraying; the ruling power weakens and crime gains ground."},{"name":"Legitimacy Crisis","reading":"Below 30. The ruling power has lost the populace; governance can fracture and crime fills the vacuum."}]},
     {"id":"capture","concept":"Criminal Capture","blurb":"How far a criminal interest has taken a seat of power.","tab":"power","anchor":"power","levels":[{"name":"None","reading":"No criminal capture. The seat answers to its lawful holder."},{"name":"Adversarial","reading":"A criminal interest is pushing at the seat, and the seat is pushing back."},{"name":"Equilibrium","reading":"The lawful holder and the criminal interest have reached an uneasy standoff."},{"name":"Corrupted","reading":"The criminal interest now bends the seat to its ends more often than not."},{"name":"Capture","reading":"The seat is captured. The criminal interest owns its decisions outright."}]},
     {"id":"pantheon-rank","concept":"Pantheon Rank","blurb":"A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.","tab":"arcane","anchor":"faith","levels":[{"name":"Cult","reading":"A fringe following, with fewer than two settlement seats."},{"name":"Minor","reading":"Two or three settlement seats."},{"name":"Major","reading":"Four or more settlement seats, and only a major god can shift a realm's magic legality."}]},
     {"id":"magic-level","concept":"Magic Level","blurb":"The Magic priority slider resolves to one of these levels. None means magic is disabled in the world, not a slider position. The level sets how available magic is and feeds its legality, risk, and role.","tab":"arcane","anchor":"magic","levels":[{"name":"None","reading":"Magic is disabled in this world. There is no magical economy."},{"name":"Low","reading":"A magic priority at or below 25. Magic is rare and limited."},{"name":"Medium","reading":"A magic priority up to 65. A moderate, everyday presence."},{"name":"High","reading":"A magic priority above 65. Magic is broad and pervasive."}]},
@@ -298,6 +299,34 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"id":"greek","label":"Greek"}
     ],
     "note": "Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave."
+  },
+  "factionArchetypes": [
+    {"id":"government","label":"Government","reading":"The ruling administration and its offices."},
+    {"id":"noble","label":"Noble","reading":"Landed or hereditary elites."},
+    {"id":"military","label":"Military","reading":"The garrison, guard, or standing force."},
+    {"id":"merchant","label":"Merchant","reading":"Trade houses, guilds, and commercial interests."},
+    {"id":"religious","label":"Religious","reading":"Temples, clergy, and faith institutions."},
+    {"id":"criminal","label":"Criminal","reading":"Organized crime and the black market."},
+    {"id":"arcane","label":"Arcane","reading":"Mages, academies, and arcane orders."},
+    {"id":"craft","label":"Craft","reading":"Artisans and production guilds."},
+    {"id":"labor","label":"Labor","reading":"Workers, labourers, and their organizations."},
+    {"id":"outsider","label":"Outsider","reading":"A foreign or external power with a foothold."},
+    {"id":"occupation","label":"Occupation","reading":"An occupying force holding the settlement."},
+    {"id":"civic","label":"Civic","reading":"Civic bodies and community institutions."},
+    {"id":"other","label":"Other","reading":"A faction that fits none of the above."}
+  ],
+  "governance": {
+    "labels": [
+      {"label":"Stable","reading":"Settled governance with no dominant strain."},
+      {"label":"Ordered","reading":"Stable under a strong military presence."},
+      {"label":"Tense","reading":"Stable but under external threat or monster pressure."},
+      {"label":"Fragile","reading":"Held by private security, with no public law."},
+      {"label":"Vulnerable","reading":"Prosperous but underdefended."},
+      {"label":"Unstable","reading":"Pervasive organized crime, up to outright criminal governance."},
+      {"label":"Enforced Order","reading":"Authoritarian control."},
+      {"label":"Rigid","reading":"A militant theocracy."}
+    ],
+    "note": "An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others)."
   },
   "lenses": {
     "count": 5,

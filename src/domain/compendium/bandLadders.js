@@ -160,6 +160,21 @@ const FOOD_SECURITY_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Public legitimacy — how far the populace accepts the ruling power (factionDynamics.js:
+ * Endorsed >=75, Approved >=60, Tolerated >=45, Contested >=30, else Legitimacy Crisis).
+ * Thresholds stated in each reading; pinned to the factionDynamics labels by
+ * tests/ui/compendiumPower.test.jsx. Authored.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const LEGITIMACY_LEVELS = Object.freeze([
+  { name: 'Endorsed',          reading: 'At or above 75. The ruling power is broadly accepted; it governs at full strength and crime finds little room.' },
+  { name: 'Approved',          reading: 'At or above 60. Accepted, with a modest edge in the ruling power\'s favour.' },
+  { name: 'Tolerated',         reading: 'At or above 45. The ruling power holds on sufferance, with no edge either way.' },
+  { name: 'Contested',         reading: 'At or above 30. Acceptance is fraying; the ruling power weakens and crime gains ground.' },
+  { name: 'Legitimacy Crisis', reading: 'Below 30. The ruling power has lost the populace; governance can fracture and crime fills the vacuum.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -186,6 +201,8 @@ const LADDER_META = Object.freeze([
     blurb: 'How hard a stressor hits when the DM applies one.' },
   { id: 'magnitude', concept: 'Relief Magnitude', tab: 'stress', anchor: 'stress', category: 'magnitude',
     blurb: 'How much an ally gives when it sends relief.' },
+  { id: 'legitimacy', concept: 'Public Legitimacy', tab: 'power', anchor: 'power', levels: LEGITIMACY_LEVELS,
+    blurb: 'How far the populace accepts the ruling power, on a 0 to 100 scale built from prosperity, safety, defense, and food. It scales how well the ruling power performs and, inversely, how much room crime finds.' },
   { id: 'capture', concept: 'Criminal Capture', tab: 'power', anchor: 'power', category: 'capture-rung',
     blurb: 'How far a criminal interest has taken a seat of power.' },
   { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,

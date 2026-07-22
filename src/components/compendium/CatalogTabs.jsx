@@ -146,6 +146,12 @@ export function PowerTab_({ search='' }) {
       {laddersFor('power').map((l) => (
         <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={CAT_COLORS.Criminal} />))}
     </div>
+    <SectionHeading id="factions" accent={INK}>Faction archetypes</SectionHeading>
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'0 0 8px' }}>A faction's category, not its name, decides its archetype. These drive coup logic, faction profiles, NPC roles, and event responses.</p>
+    {CD.factionArchetypes.map((f)=>(<Row key={f.id} label={f.label} lw={110}>{f.reading}</Row>))}
+    <SectionHeading accent={INK}>Governance stability</SectionHeading>
+    {CD.governance.labels.map((g)=>(<Row key={g.label} label={g.label} lw={130}>{g.reading}</Row>))}
+    <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', margin:'8px 0 0' }}>{CD.governance.note}</p>
   </>;
 }
 

@@ -48,6 +48,7 @@ import { SYSTEM_VARIABLES, CAUSAL_BANDS, VARIABLE_LABEL } from '../src/domain/ca
 import { PRESSURE_KINDS } from '../src/domain/autonomy/signalRegistry.js';
 import { DEITY_AXIS_EFFECTS } from '../src/domain/display/deityEffects.js';
 import { DEITY_RANK_AUTHORITY } from '../src/domain/deityConstants.js';
+import { FACTION_ARCHETYPES } from '../src/domain/factionArchetypes.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
 import {
@@ -212,6 +213,37 @@ const AUTONOMY_LABELS = {
   full:            'fully autonomous',
 };
 
+// Power family (Wave I): faction archetype readings (keyed by the FACTION_ARCHETYPES
+// values; build-guarded so a new archetype without a reading reds) + the governance-
+// stability base-label vocabulary (authored from governanceNarrative's parentheticals;
+// stresses override the base label with a compound form, stated in the note).
+const FACTION_ARCHETYPE_READINGS = {
+  government: 'The ruling administration and its offices.',
+  noble:      'Landed or hereditary elites.',
+  military:   'The garrison, guard, or standing force.',
+  merchant:   'Trade houses, guilds, and commercial interests.',
+  religious:  'Temples, clergy, and faith institutions.',
+  criminal:   'Organized crime and the black market.',
+  arcane:     'Mages, academies, and arcane orders.',
+  craft:      'Artisans and production guilds.',
+  labor:      'Workers, labourers, and their organizations.',
+  outsider:   'A foreign or external power with a foothold.',
+  occupation: 'An occupying force holding the settlement.',
+  civic:      'Civic bodies and community institutions.',
+  other:      'A faction that fits none of the above.',
+};
+const GOVERNANCE_LABELS = [
+  { label: 'Stable',         reading: 'Settled governance with no dominant strain.' },
+  { label: 'Ordered',        reading: 'Stable under a strong military presence.' },
+  { label: 'Tense',          reading: 'Stable but under external threat or monster pressure.' },
+  { label: 'Fragile',        reading: 'Held by private security, with no public law.' },
+  { label: 'Vulnerable',     reading: 'Prosperous but underdefended.' },
+  { label: 'Unstable',       reading: 'Pervasive organized crime, up to outright criminal governance.' },
+  { label: 'Enforced Order', reading: 'Authoritarian control.' },
+  { label: 'Rigid',          reading: 'A militant theocracy.' },
+];
+const GOVERNANCE_NOTE = 'An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others).';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -263,6 +295,9 @@ export function buildCompendiumDataObject() {
   }
   for (const id of Object.keys(DISASTER_TYPE_BY_TERRAIN)) {
     if (!TERRAIN_READINGS[id]) throw new Error(`compendium: terrain "${id}" has no TERRAIN_READINGS entry`);
+  }
+  for (const id of Object.values(FACTION_ARCHETYPES)) {
+    if (!FACTION_ARCHETYPE_READINGS[id]) throw new Error(`compendium: faction archetype "${id}" has no reading`);
   }
 
   // Systems: preset membership derived; wave flags validated against the universe.
@@ -427,6 +462,12 @@ export function buildCompendiumDataObject() {
     // terrain map; readings authored) and the culture vocabulary.
     terrain: Object.keys(DISASTER_TYPE_BY_TERRAIN).map((id) => ({ id, reading: TERRAIN_READINGS[id] })),
     cultures: { values: [...CULTURE_VALUES], note: CULTURE_NOTE },
+
+    // Power family (Wave I): the 13 faction archetypes (from FACTION_ARCHETYPES + authored
+    // readings) and the governance-stability base-label vocabulary. The legitimacy ladder
+    // rides CD.bandLadders (tab:'power').
+    factionArchetypes: Object.values(FACTION_ARCHETYPES).map((id) => ({ id, label: titleCase(id), reading: FACTION_ARCHETYPE_READINGS[id] })),
+    governance: { labels: GOVERNANCE_LABELS.map((g) => ({ ...g })), note: GOVERNANCE_NOTE },
 
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,
