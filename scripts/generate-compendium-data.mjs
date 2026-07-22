@@ -49,6 +49,7 @@ import { PRESSURE_KINDS } from '../src/domain/autonomy/signalRegistry.js';
 import { DEITY_AXIS_EFFECTS } from '../src/domain/display/deityEffects.js';
 import { DEITY_RANK_AUTHORITY } from '../src/domain/deityConstants.js';
 import { FACTION_ARCHETYPES } from '../src/domain/factionArchetypes.js';
+import { RULING_POWER_CAUSES } from '../src/domain/rulingPower.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../src/store/operationRegistry.js';
 import {
@@ -299,6 +300,25 @@ const NPC_GOALS = [
 ];
 const NPC_GOAL_NOTE = 'An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress.';
 
+// Power-structure completions (Wave M): the ruling-power transfer causes (from
+// RULING_POWER_CAUSES, authored readings; drift-pinned) and the corruption machinery
+// vocabulary (covert vs revealed, the four vectors, exposure as the counter-force).
+const TRANSFER_CAUSE_READINGS = {
+  coup:        'Seized by force.',
+  election:    'Chosen by a vote.',
+  succession:  'Inherited or handed down.',
+  conquest:    'Imposed by an outside conqueror.',
+  appointment: 'Installed by a higher authority.',
+};
+const POWER_STRUCTURE_NOTE = 'A settlement\'s government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change.';
+const CORRUPTION_VECTORS = [
+  { label: 'Greed',              reading: 'Bought with wealth.' },
+  { label: 'Hunger for status',  reading: 'Lured with rank and honour.' },
+  { label: 'Fear',               reading: 'Coerced by threat.' },
+  { label: 'Forbidden patron',   reading: 'Bound to a forbidden backer.' },
+];
+const CORRUPTION_NOTE = 'An institution reads compromised in two ways: covertly, as a hidden stooge homed inside it, or revealed, as a scandal-bearing impairment. It needs a corruptible flaw and a criminal institution present; organic exposure is the counter-force that can clean it up over time.';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -356,6 +376,9 @@ export function buildCompendiumDataObject() {
   }
   for (const id of TOWN_MAP_STYLE_IDS) {
     if (!LENS_READINGS[id]) throw new Error(`compendium: map lens "${id}" has no LENS_READINGS entry`);
+  }
+  for (const id of RULING_POWER_CAUSES) {
+    if (!TRANSFER_CAUSE_READINGS[id]) throw new Error(`compendium: transfer cause "${id}" has no reading`);
   }
 
   // Systems: preset membership derived; wave flags validated against the universe.
@@ -552,6 +575,13 @@ export function buildCompendiumDataObject() {
     // Living-World completions (Wave L): settlement birth/death + NPC goal vocabulary.
     lifecycle: { remnants: LIFECYCLE_REMNANTS.map((x) => ({ ...x })), satellites: LIFECYCLE_SATELLITES },
     npcGoals: { entries: NPC_GOALS.map((x) => ({ ...x })), note: NPC_GOAL_NOTE },
+
+    // Power-structure completions (Wave M): transfer causes + corruption machinery.
+    powerStructure: {
+      transferCauses: RULING_POWER_CAUSES.map((id) => ({ id, label: titleCase(id), reading: TRANSFER_CAUSE_READINGS[id] })),
+      note: POWER_STRUCTURE_NOTE,
+    },
+    corruption: { vectors: CORRUPTION_VECTORS.map((x) => ({ ...x })), note: CORRUPTION_NOTE },
 
     // Facets: the exported interior/facet vocabulary. The 7 institution natures are
     // the interior kinds minus the 'generic' fallback. The institutionFunction axis

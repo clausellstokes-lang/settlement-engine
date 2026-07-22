@@ -388,6 +388,25 @@ export const COMPENDIUM_DATA = Object.freeze({
     ],
     "note": "An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress."
   },
+  "powerStructure": {
+    "transferCauses": [
+      {"id":"coup","label":"Coup","reading":"Seized by force."},
+      {"id":"election","label":"Election","reading":"Chosen by a vote."},
+      {"id":"succession","label":"Succession","reading":"Inherited or handed down."},
+      {"id":"conquest","label":"Conquest","reading":"Imposed by an outside conqueror."},
+      {"id":"appointment","label":"Appointment","reading":"Installed by a higher authority."}
+    ],
+    "note": "A settlement's government type is the name of its governing faction. Power changes hands by one of these causes, which the chronicle stamps on each regime change."
+  },
+  "corruption": {
+    "vectors": [
+      {"label":"Greed","reading":"Bought with wealth."},
+      {"label":"Hunger for status","reading":"Lured with rank and honour."},
+      {"label":"Fear","reading":"Coerced by threat."},
+      {"label":"Forbidden patron","reading":"Bound to a forbidden backer."}
+    ],
+    "note": "An institution reads compromised in two ways: covertly, as a hidden stooge homed inside it, or revealed, as a scandal-bearing impairment. It needs a corruptible flaw and a criminal institution present; organic exposure is the counter-force that can clean it up over time."
+  },
   "facets": {
     "natures": ["faith","security","trade","craft","learning","vice","civic"],
     "interiorKinds": ["faith","security","trade","craft","learning","vice","civic","generic"],
@@ -453,8 +472,8 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Economic","name":"Merchant Army","cond":"Economy ≥68, Military ≤38","desc":"Wealthy settlement replaces public guard with private security."},
       {"cat":"Economic","name":"Theocratic Economy","cond":"Religion ≥70, Economy ≤42","desc":"Church dominates economic life. Sacred goods trade x1.55."},
       {"cat":"Military","name":"Military Fortress","cond":"Military ≥72, threat: plagued","desc":"Defense first. Civilian economy secondary to garrison supply."},
-      {"cat":"Military","name":"Frontier Outpost","cond":"Military ≥60, tier: small, threat: frontier","desc":"Exists to hold a line. Austere, disciplined, expendable."},
-      {"cat":"Military","name":"Besieged Holdout","cond":"Stress: Siege active","desc":"Under siege. Supply constrained. Morale is a resource."},
+      {"cat":"Military","name":"Frontier Outpost","cond":"Military ≥60, tier: thorp or hamlet, threat: frontier","desc":"Exists to hold a line. Austere, disciplined, expendable."},
+      {"cat":"Military","name":"Besieged Holdout","cond":"Stress: Under Siege active","desc":"Under siege. Supply constrained. Morale is a resource."},
       {"cat":"Military","name":"Secular Brutalism","cond":"Military ≥70, Religion ≤25","desc":"No religious institutions. Military fills moral and legal vacuum."},
       {"cat":"Military","name":"State Crime","cond":"Military ≥70, Economy ≤32","desc":"Military predates on the population. Extractions, disappearances, selective enforcement."},
       {"cat":"Religious","name":"Theocracy","cond":"Religion ≥72, Military ≤45","desc":"Church is the government. Civil and religious law unified."},
@@ -477,7 +496,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"cat":"Balanced","name":"Balanced","cond":"No slider exceeds 60","desc":"No dominant faction. Power distributed. Politics negotiated."},
       {"cat":"Balanced","name":"Merchant Hunters Lodge","cond":"Military ≥60, threat: plagued","desc":"Organized monster hunters are a significant institution."},
       {"cat":"Balanced","name":"Mining Colony","cond":"Resource: ore or stone nearby, isolated","desc":"Exists to extract a resource. Company-town dynamics."},
-      {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Monster Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}
+      {"cat":"Balanced","name":"Plague of Beasts","cond":"Stress: Beast & Raider Threat active","desc":"Under active monster pressure. Civilian life constrained to fortified areas."}
     ]
   },
   "relationships": {
