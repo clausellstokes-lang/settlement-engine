@@ -29,6 +29,14 @@ const PX0 = -PLINTH, PX1 = TW + PLINTH, PZ0 = -PLINTH, PZ1 = TD + PLINTH;
 const PLINTH_TOP = 26, TOWER_TOP = 280, SPIRE_TOP = 380;
 const FRIEZE_Y = 236, FRIEZE_H = 24;
 const GARG_Y = 250;
+// The spire seats its base BELOW the tower top (embedded, not flush). A full-footprint spire whose base
+// plane is COINCIDENT with the tower's top cap made those two abutting closed solids share a plane at
+// equal depth -- the shared raster's z-buffer then flip-flopped between the roofLead spire faces and the
+// ashlar tower-top face scanline-by-scanline, the horizontal "roof-underside striping" the K-2 tone-gate
+// investigation localized (K-3 plate-tone-gate.png). Embedding the base so the spire's near faces are
+// strictly in front of the tower-top cap removes the coincidence (double-build stays byte-deterministic;
+// declared geometry shift -> ARCH_GEOMETRY_VERSION 2 + re-pinned chapel2 GLB golden).
+const SPIRE_EMBED = 10;
 
 /** build the evil-chapel ruleset. @returns {object} */
 export function buildEvilChapelRuleset() {
@@ -66,7 +74,7 @@ export function buildEvilChapelRuleset() {
       ] } }],
       plinth: [{ op: 'emit', kind: 'box', role: 'groundStone' }],
       tower: [{ op: 'emit', kind: 'box', role: 'ashlar' }],
-      spire: [{ op: 'emit', kind: 'spire', role: 'roofLead', spire: [TW / 2, TD / 2, TW / 2, TOWER_TOP, SPIRE_TOP] }],
+      spire: [{ op: 'emit', kind: 'spire', role: 'roofLead', spire: [TW / 2, TD / 2, TW / 2, TOWER_TOP - SPIRE_EMBED, SPIRE_TOP] }],
       door: [{ op: 'emit', kind: 'box', role: 'dressedStone' }],
       skip: [],
 
