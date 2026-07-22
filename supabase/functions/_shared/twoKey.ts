@@ -57,8 +57,8 @@ export const MODERATION_ACTION_SET: ReadonlySet<string> = new Set([
   "soft_delete_map", // map/campaign soft-delete (171)
   "remove_gallery_map", // map/campaign set-private (171)
   "set_content_banned", // reversible ban across both content kinds (171)
-  // Comment moderation (moderate_comment) and report-queue resolution
-  // (resolve_gallery_report) are added in lockstep with their switch cases.
+  "moderate_comment", // hide/unhide a gallery comment → tombstone (169/172)
+  // Report-queue resolution (resolve_gallery_report) is added with its case.
 ]);
 
 /**

@@ -13,9 +13,11 @@
  *     reason/body cleanup, one-open-report-per-(comment,user) upsert, and the
  *     30/hour velocity ceiling through the SHARED 125 counter on its OWN action
  *     key (never burning the gallery_comment budget).
- *   • set_gallery_comment_hidden is the moderator write: hide stamps the triple,
- *     list_gallery_comments then EXCLUDES the comment, unhide restores it.
- *   • list_gallery_comments excludes deleted AND hidden comments.
+ *   • set_gallery_comment_hidden is the moderator write: hide stamps the triple;
+ *     list_gallery_comments (net-current from 172) then renders the comment as an
+ *     in-place TOMBSTONE (moderated=true, body/author nulled); unhide restores it.
+ *   • list_gallery_comments excludes author-DELETED comments; moderation-HIDDEN
+ *     comments survive as tombstones (172).
  *   • structural pins — RLS on + the two report policies + the grant posture
  *     (report → authenticated; set-hidden → service_role; both revoked from
  *     public) + the new definer functions' search_path pin.
@@ -33,7 +35,10 @@ import { resolve } from 'node:path';
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_169 = resolve(dir, '169_gallery_comment_moderation.sql');
 const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
-const allExist = existsSync(MIG_169) && existsSync(MIG_125);
+// 172 supersedes 169's list_gallery_comments: moderation-hidden comments now
+// render as TOMBSTONES (moderated=true, body/author nulled) instead of dropping.
+const MIG_172 = resolve(dir, '172_gallery_comment_tombstone.sql');
+const allExist = existsSync(MIG_169) && existsSync(MIG_125) && existsSync(MIG_172);
 
 /** Extract a function definition verbatim (actionVelocity idiom). */
 function extractFn(src, name) {
@@ -85,6 +90,7 @@ describe.runIf(allExist)('gallery comment moderation — execution against the r
   beforeAll(async () => {
     const src169 = readFileSync(MIG_169, 'utf-8');
     const src125 = readFileSync(MIG_125, 'utf-8');
+    const src172 = readFileSync(MIG_172, 'utf-8');
     db = new PGlite();
     await db.exec(`
       create schema if not exists auth;
@@ -129,7 +135,8 @@ describe.runIf(allExist)('gallery comment moderation — execution against the r
     await db.exec(extractFn(src125, '_consume_action_rate_limit'));
     await db.exec(extractFn(src169, 'report_gallery_comment'));
     await db.exec(extractFn(src169, 'set_gallery_comment_hidden'));
-    await db.exec(extractFn(src169, 'list_gallery_comments'));
+    // Net-current list_gallery_comments comes from 172 (the tombstone rewrite).
+    await db.exec(extractFn(src172, 'list_gallery_comments'));
   }, 30000);
 
   beforeEach(async () => {
@@ -204,13 +211,28 @@ describe.runIf(allExist)('gallery comment moderation — execution against the r
     expect(rows.map((r) => r.id)).toEqual([COMMENT]); // DELETED_COMMENT excluded
   });
 
-  it('a moderator hide stamps the triple and drops the comment from the reader list', async () => {
+  it('a moderator hide stamps the triple and renders an in-place TOMBSTONE (172)', async () => {
     await setHidden(COMMENT, true, 'abuse', OTHER);
     const c = await scalar(`select hidden_at, hidden_by, hidden_reason from public.gallery_comments where id='${COMMENT}'`);
     expect(c.hidden_at).not.toBeNull();
     expect(c.hidden_by).toBe(OTHER);
     expect(c.hidden_reason).toBe('abuse');
-    expect((await listComments()).rows).toEqual([]); // hidden → gone from readers
+    // 172: the comment stays IN the list as a tombstone — moderated=true, and the
+    // original body + author NEVER reach the reader.
+    const rows = (await listComments()).rows;
+    expect(rows.map((r) => r.id)).toEqual([COMMENT]); // still present, in place
+    const tomb = rows[0];
+    expect(tomb.moderated).toBe(true);
+    expect(tomb.body).toBeNull();          // hidden body never sent
+    expect(tomb.author_label).toBeNull();  // no author identity leaks
+    expect(tomb.can_delete).toBe(false);
+  });
+
+  it('a live (unhidden) comment is NOT a tombstone (moderated=false, body present)', async () => {
+    const rows = (await listComments()).rows;
+    const live = rows.find((r) => r.id === COMMENT);
+    expect(live.moderated).toBe(false);
+    expect(live.body).toBe('A fine dossier.');
   });
 
   it('unhide clears the triple and the comment returns to the reader list', async () => {

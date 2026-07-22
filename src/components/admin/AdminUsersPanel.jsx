@@ -592,6 +592,27 @@ export default function AdminUsersPanel() {
                 ),
               )}>Unban map</Button>
           </div>
+
+          {/* Comment moderation (hidden comments render as an in-place tombstone) */}
+          <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Comment moderation (by comment id):</span>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Remove comment', body: 'Reversible: the comment shows as a moderation tombstone in the thread.', label: 'Comment id', confirmLabel: 'Remove' },
+                (cid) => runAction(
+                  { action: 'moderate_comment', commentId: cid, reason: 'moderation' },
+                  'Comment removed (shows a tombstone).',
+                ),
+              )}>Remove comment</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Restore comment', body: 'Reversible: clears the moderation removal and restores the comment.', label: 'Comment id', confirmLabel: 'Restore' },
+                (cid) => runAction(
+                  { action: 'moderate_comment', commentId: cid, enabled: true, reason: 'moderation' },
+                  'Comment restored.',
+                ),
+              )}>Restore comment</Button>
+          </div>
         </div>
       )}
 

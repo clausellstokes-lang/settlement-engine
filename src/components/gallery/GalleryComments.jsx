@@ -131,7 +131,15 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
           <div style={{ border: `1px dashed ${BORDER}`, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No comments yet.
           </div>
-        ) : comments.map(comment => (
+        ) : comments.map(comment => (comment.moderated ? (
+          // Moderation TOMBSTONE (172): stays in place; the original body + author
+          // never reach the client. Distinct from an author delete (which is hidden).
+          <article key={comment.id} aria-label="Removed comment" style={{ border: `1px dashed ${BORDER}`, background: CARD_ALT, padding: SP.md }}>
+            <p style={{ margin: 0, color: MUTED, fontFamily: sans, fontSize: FS.sm, fontStyle: 'italic' }}>
+              This comment was removed by moderation.
+            </p>
+          </article>
+        ) : (
           <article key={comment.id} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: SP.md, display: 'grid', gap: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
@@ -166,7 +174,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
               />
             )}
           </article>
-        ))}
+        )))}
       </div>
     </section>
   );

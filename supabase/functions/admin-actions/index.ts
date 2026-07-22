@@ -314,7 +314,7 @@ export async function handleAdminActions(
       // System-mutation params (migration 041 report_* functions)
       configSignature,
       // A4 user-management params
-      severity, note, settlementId, mapId, enabled, full, emailTemplate, emailPayload,
+      severity, note, settlementId, mapId, commentId, enabled, full, emailTemplate, emailPayload,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
       // Redeem-code minting params (migration 107)
@@ -1220,6 +1220,27 @@ export async function handleAdminActions(
         });
         if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });
+      }
+
+      // Moderate a gallery comment — hide/unhide (169 columns + 172 tombstone
+      // read). The set_gallery_comment_hidden RPC is the sole hidden_* writer; it
+      // does not self-audit, so we mirror one A3 row here. HIGHEST role only.
+      case "moderate_comment": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!commentId) return json({ error: "Missing commentId" }, 400);
+        const hide = !(enabled === true); // enabled:true ⇒ unhide
+        const { error } = await adminClient.rpc("set_gallery_comment_hidden", {
+          target_comment_id: commentId, hide,
+          hidden_reason_text: auditReason, moderator_id: callingUser.id,
+        });
+        if (error) return adminFail(error, 500);
+        await writeAudit({
+          action: hide ? "moderate_comment_hide" : "moderate_comment_unhide",
+          targetType: "gallery_comment", targetId: String(commentId),
+          after: { hidden: hide },
+          destructive: hide, reversible: true,
+        });
+        return json({ success: true, hidden: hide });
       }
 
       // Diagnostic bundle — REDACTED by default (support+). full:true ⇒ a FULL

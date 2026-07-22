@@ -93,7 +93,7 @@ create or replace function public.admin_soft_delete_map(
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   before_pub boolean;
@@ -150,7 +150,7 @@ create or replace function public.admin_remove_gallery_map(
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   before_pub boolean;
@@ -203,7 +203,7 @@ create or replace function public.admin_set_content_banned(
 returns jsonb
 language plpgsql
 security definer
-set search_path = public
+set search_path = public, pg_temp
 as $$
 declare
   before_banned boolean;

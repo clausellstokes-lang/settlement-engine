@@ -640,6 +640,51 @@ Deno.test('a protected action with a matching id but NO password amr is rejected
   assertEquals(stub.rpc.length, 0);
 });
 
+// ── Content moderation (171/172) — MODERATION set: typed-item-id confirm, no
+// two-key password. Staff-gated; a non-staff caller is rejected before dispatch.
+
+Deno.test('moderate_comment (staff) dispatches set_gallery_comment_hidden with the verified moderator + audits', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'moderate_comment', commentId: 'cmt-1', reason: 'abuse' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const hide = stub.rpc.find((c) => c.fn === 'set_gallery_comment_hidden');
+  assertEquals(hide !== undefined, true);
+  const args = hide!.args as { target_comment_id: string; hide: boolean; moderator_id: string };
+  assertEquals(args.target_comment_id, 'cmt-1');
+  assertEquals(args.hide, true);
+  assertEquals(args.moderator_id, 'admin1'); // server-verified, not body-supplied
+  // One A3 audit row mirrors the hide (the RPC does not self-audit).
+  assertEquals(stub.rpc.some((c) => c.fn === 'write_audit'), true);
+});
+
+Deno.test('set_content_banned (staff) routes to admin_set_content_banned for the right kind', async () => {
+  const stub = makeAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'set_content_banned', contentKind: 'map', mapId: 'map-9', banned: true, reason: 'x' },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const ban = stub.rpc.find((c) => c.fn === 'admin_set_content_banned');
+  const args = ban!.args as { p_kind: string; p_id: string; p_ban: boolean };
+  assertEquals(args.p_kind, 'map');
+  assertEquals(args.p_id, 'map-9');
+  assertEquals(args.p_ban, true);
+});
+
+Deno.test('a SUPPORT-role caller CANNOT moderate content (highest-only)', async () => {
+  const stub = makeAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'moderate_comment', commentId: 'cmt-1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
 Deno.test('a DEVELOPER passes the SAME two-key gate as an admin (action-bound, not role-bound)', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
