@@ -9,6 +9,7 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
+import { AffectedSettlements } from './AddressChain.jsx';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
 
 function percent(value) {
@@ -74,14 +75,15 @@ function MetaPill({ children, tone = 'neutral' }) {
   );
 }
 
-function NewsEntry({ entry, compact = false, nameById }) {
+function NewsEntry({ entry, compact = false }) {
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
-  // Name the settlements this update touches so a reader knows exactly which
-  // places to look into. The ids the feed stores are save ids.
-  const settlementNames = (entry.settlementIds || [])
-    .map(id => nameById?.get(String(id)))
-    .filter(Boolean);
+  // The settlements this update touches — now LINKED (THE NEWS ADDRESS LAW's
+  // affected-settlements part): each name opens its dossier. The subject itself
+  // (the headline actor) is a record-gap here — the wizardNews entry carries no
+  // npc/faction id, only the headline prose — so it is not linked (never a prose
+  // scan). AddressChain/AffectedSettlements read the realm web from context.
+  const hasSettlements = (entry.settlementIds || []).length > 0;
   // The crier's voice: a short, in-world line a herald would proclaim about a
   // war/faith/trade beat. Pure display sidecar (domain/display/newsVoice.js);
   // null for out-of-scope news, so the quote only shows when it has something
@@ -176,11 +178,17 @@ function NewsEntry({ entry, compact = false, nameById }) {
           marginTop: 8,
           alignItems: 'center',
         }}>
-          {settlementNames.length > 0 && (
-            <MetaPill tone="major">
-              {settlementNames.length > 1 ? 'Settlements' : 'Settlement'}: {settlementNames.slice(0, 3).join(', ')}
-              {settlementNames.length > 3 ? ` +${settlementNames.length - 3}` : ''}
-            </MetaPill>
+          {hasSettlements && (
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', minHeight: 22, maxWidth: '100%',
+              padding: '2px 7px', border: `1px solid ${BORDER2}`,
+            }}>
+              <AffectedSettlements
+                ids={entry.settlementIds}
+                label={(entry.settlementIds || []).length > 1 ? 'Settlements' : 'Settlement'}
+                max={3}
+              />
+            </span>
           )}
           <MetaPill>Tick {entry.tick}</MetaPill>
           <MetaPill>{human(entry.kind)}</MetaPill>

@@ -16,6 +16,7 @@ import { Section } from './WorldPulsePrimitives.jsx';
 import { realmPolitics, hasPolitics } from '../../domain/display/politicsRead.js';
 import { realmCredibility, hasCredibility } from '../../domain/display/credibilityRead.js';
 import { BODY, BORDER2, CARD, FS, INK, MUTED, RED, GOLD, sans } from '../theme.js';
+import { AffectedSettlements } from './AddressChain.jsx';
 
 function Subhead({ label }) {
   return (
@@ -29,7 +30,7 @@ function Subhead({ label }) {
   );
 }
 
-function Row({ accent, heading, detail }) {
+function Row({ accent, heading, detail, addressIds = [] }) {
   return (
     <div style={{
       padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${accent}`,
@@ -37,6 +38,8 @@ function Row({ accent, heading, detail }) {
     }}>
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
+      {/* THE NEWS ADDRESS LAW: the settlement this bloc/standing sits in, LINKED. */}
+      {addressIds.length > 0 && <div style={{ marginTop: 2 }}><AffectedSettlements ids={addressIds} label="Settlement" /></div>}
     </div>
   );
 }
@@ -62,6 +65,7 @@ export default function RealmIntrigue({ campaign, nameById = new Map() }) {
               <Row
                 key={`${p.settlementId}-${b.id}`}
                 accent={b.covert ? RED : GOLD}
+                addressIds={[p.settlementId]}
                 heading={`${p.where}: ${b.covert ? 'a conspiracy' : 'a bloc'}${b.memberCount >= 2 ? ` of ${b.memberCount}` : ''}`}
                 detail={<>{b.presence} <span style={{ color: MUTED }}>({b.cohesion})</span></>}
               />
@@ -76,6 +80,7 @@ export default function RealmIntrigue({ campaign, nameById = new Map() }) {
               <Row
                 key={`cred-${c.settlementId}`}
                 accent={c.band <= 0 ? RED : c.band >= 2 ? GOLD : BORDER2}
+                addressIds={[c.settlementId]}
                 heading={`${c.where}: ${c.reputation}`}
                 detail={c.presence}
               />

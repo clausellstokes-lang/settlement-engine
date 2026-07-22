@@ -25,6 +25,8 @@ import {
 import { liveBlockades, hasLiveBlockades } from '../../domain/display/navalDisplay.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
 import WarCausalBrief from './WarCausalBrief.jsx';
+import { AffectedSettlements } from './AddressChain.jsx';
+import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 
 function nameFor(nameById, id) {
   return nameById.get(String(id)) || String(id);
@@ -37,7 +39,10 @@ const TONE_ICON = { danger: Swords, trade: ArrowLeftRight, neutral: Flag };
 
 // `heading` (not `title`) — a rendered heading div, never a native OS tooltip
 // (keeps these rows off the title= census the guidance walker ratchets).
-function StatusRow({ tone = 'neutral', heading, detail }) {
+// `addressIds` — the settlement save ids this row concerns (THE NEWS ADDRESS LAW):
+// rendered as LINKS below the detail so a DM can jump to each settlement's dossier.
+// The prose heading is left untouched (it stays authored copy off the voice census).
+function StatusRow({ tone = 'neutral', heading, detail, addressIds = [] }) {
   const accent = tone === 'danger' ? RED : tone === 'trade' ? BLUE : GOLD;
   const KindIcon = TONE_ICON[tone] || Flag;
   return (
@@ -52,6 +57,11 @@ function StatusRow({ tone = 'neutral', heading, detail }) {
       <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
+      {addressIds.length > 0 && (
+        <div style={{ gridColumn: 2, marginTop: 2 }}>
+          <AffectedSettlements ids={addressIds} label="Settlements" />
+        </div>
+      )}
     </div>
   );
 }
@@ -85,6 +95,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 <StatusRow
                   key={`siege-${siege.targetId}`}
                   tone="danger"
+                  addressIds={[siege.targetId, ...siege.coalition]}
                   heading={isCoalition
                     ? `The War of ${targetName}, a coalition besieging the walls`
                     : `${attackers[0] || 'An army'} lays siege to ${targetName}`}
@@ -114,6 +125,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 <StatusRow
                   key={`blockade-${b.portId}`}
                   tone="danger"
+                  addressIds={[b.portId, ...b.blockaders]}
                   heading={isCoalition
                     ? `${portName} is blockaded by a coalition fleet`
                     : `${fleets[0] || 'A hostile fleet'} blockades ${portName}`}
@@ -132,6 +144,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
             {deployments.map(dep => (
               <StatusRow
                 key={`deploy-${dep.homeId}`}
+                addressIds={[dep.homeId, dep.targetId]}
                 heading={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
                 detail={`Deployed since tick ${dep.sinceTick}; home garrison thinned, war chest bleeding.`}
               />
@@ -146,6 +159,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
               <StatusRow
                 key={`trade-${war.prizeId}`}
                 tone="trade"
+                addressIds={[war.winnerId, war.buyerId, war.incumbentId].filter(Boolean)}
                 heading={`The ${war.commodityLabel} Trade War`}
                 detail={`${nameFor(nameById, war.winnerId)} now supplies ${nameFor(nameById, war.buyerId)}${war.incumbentId ? `, displacing ${nameFor(nameById, war.incumbentId)}` : ''}.`}
               />
@@ -168,7 +182,8 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                     color: aggressor ? RED : BODY,
                     fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
                   }}>
-                    {nameFor(nameById, s.id)}: {s.wins}W / {s.losses}L
+                    <RealmEntityLink settlementSaveId={s.id} label={nameFor(nameById, s.id)} style={{ color: 'inherit' }} />
+                    <span>: {s.wins}W / {s.losses}L</span>
                   </span>
                 );
               })}

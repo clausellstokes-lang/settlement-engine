@@ -48,6 +48,25 @@ export function collectSettlementIds(item = {}) {
   return unique(ids.map(String));
 }
 
+// THE NEWS ADDRESS LAW subject descriptor for a pulse item: the TYPED ids the
+// address-chain resolver joins on (never prose). The realm web resolves npcId
+// (settlement-prefixed) to the deep settlement › power › faction › npc chain;
+// falls to a faction (factionId, or factionName scoped to the containing
+// settlement); falls to the settlement itself; resolves to nothing (subjectless,
+// e.g. a plague) when the record names no addressable actor.
+export function outcomeSubjectDescriptor(item = {}) {
+  const o = item.outcome || item;
+  const payload = o.proposalPayload || item.proposalPayload || {};
+  const ids = collectSettlementIds(item);
+  const settlementId = o.targetSaveId ?? o.settlementId ?? payload.settlementId ?? ids[0] ?? null;
+  return {
+    npcId: o.npcId || item.npcId || null,
+    factionId: o.factionId || item.factionId || null,
+    factionName: o.factionName || payload.factionName || item.factionName || null,
+    settlementId,
+  };
+}
+
 // The named entities involved in a pulse item, in reader-priority order.
 export function involvedEntities(item = {}, nameById = new Map()) {
   const o = item.outcome || item;
