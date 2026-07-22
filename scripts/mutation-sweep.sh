@@ -317,6 +317,18 @@ check_caught_planted "kernel/unwalked arch ruleset" \
   "export const orphanRuleset = () => ({ name: 'orphan', symbols: ['a'], axiom: { sym: 'a', scope: { origin: [0,0,0], frameRef: { frameIndex: 0, reflect: 0 }, size: [1,1,1] }, attrs: { materialRole: 'ashlar', params: {} } }, rules: { a: [] }, events: [] });" \
   "npx vitest run tests/lint/archLodLadder.walker.test.js"
 
+# 30. K-3 param-contract SECURITY invariant — the covert-corruption band is opened
+#     from [0,0] to allow > 0, which would let covert corruption dress the map (the
+#     dossier leak). The frozen-contract test must red: covert is EXACTLY 0, forever.
+perl -0pi -e "s/corruptionCovert: \{ kind: 'scalar', lo: 0, hi: 0 \}/corruptionCovert: { kind: 'scalar', lo: 0, hi: 1 }/" src/domain/townMap/arch/params.js
+check_caught "kernel/param-contract covert leak" src/domain/townMap/arch/params.js "npx vitest run tests/architecture/archParamContract.test.js"
+
+# 31. K-3 statuary SCOPE law — an existing abstract kit form is renamed to a named
+#     figure ('royalEffigy'), outside the allowed abstract-form vocabulary. Product
+#     scope forbids depicting a named character; the statuary census must red.
+perl -0pi -e "s/  skull: \(b, role\) =>/  royalEffigy: (b, role) =>/" src/domain/townMap/arch/kit.js
+check_caught "kernel/statuary named-figure" src/domain/townMap/arch/kit.js "npx vitest run tests/architecture/archStatuaryScopeCensus.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

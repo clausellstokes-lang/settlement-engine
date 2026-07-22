@@ -18,6 +18,10 @@ import { encodeGlb } from '../../src/domain/townMap/arch/glb.js';
 import { renderMeshPlate } from '../../src/domain/townMap/arch/plate.js';
 import { cathedralRuleset } from '../../src/domain/townMap/arch/rulesets/cathedral.js';
 import { buttressRuleset } from '../../src/domain/townMap/arch/rulesets/buttressFragment.js';
+import { roseWindowRuleset } from '../../src/domain/townMap/arch/rulesets/roseWindow.js';
+import { vaultBayRuleset } from '../../src/domain/townMap/arch/rulesets/vaultBay.js';
+import { traceryFamiliesRuleset } from '../../src/domain/townMap/arch/rulesets/traceryFamilies.js';
+import { evilChapelRuleset } from '../../src/domain/townMap/arch/rulesets/evilChapel.js';
 import { ARCH_GEOMETRY_VERSION } from '../../src/domain/townMap/arch/grammarIR.js';
 
 const sha = (b) => createHash('sha256').update(Buffer.from(b.buffer, b.byteOffset, b.byteLength)).digest('hex');
@@ -67,6 +71,39 @@ describe('SHA-256 exemplar goldens -- GLB (a hash change is a DECLARED geometry 
   it('byte-parity buttress GLB hash is pinned', () => {
     const b = emitMesh(interpret(buttressRuleset(20, 49, 1), { tier: 2 }).terminals);
     expect(sha(glbOf(b, 'k1-buttress-grammar'))).toBe(GOLDEN.buttressGlb);
+  });
+});
+
+// ── K-3 ORNAMENT GLB exemplar goldens (ARCH_GEOMETRY_VERSION 1, 2026-07-21). EXEMPLAR SAMPLE ONLY --
+// the milestone rose (all 3 tiers) + the signature tier of vault / tracery-families / evil-chapel;
+// NEVER the shape x skin cross product. A hash change is a DECLARED same-seed geometry shift. ─────────
+const K3_GLB_GOLDEN = {
+  rose: {
+    0: '202d310d2339d126936e24a7cb338eaf2c125129af40dfbb33c3f2387a60387d',
+    1: 'f549d2898c1ee03445ef537cff34078aa444f9d5fefc8cbcea0c67b3921c0dbc',
+    2: '17d8974cd95e7b69ef23bbbc2d1f82a8573741eb99ea3acfbf815a6f311bfc05',
+  },
+  vault2: 'd7542488b1ac13967f06918e3d5bc1b32e0622a9f90c500fffe01fb91311fce1',
+  tracery2: '5ca68101a4e1795b6dcd2f68eb9525011e44de042881318ce1e5876cd9e2c334',
+  chapel2: 'a1b8e264b679c7a01a676549b51e4adaa06527cb04df4137b00dcb0d6b4774a7',
+};
+describe('K-3 ornament geometry is byte-deterministic + pinned (exemplar GLB goldens)', () => {
+  const rose = roseWindowRuleset();
+  for (const tier of [0, 1, 2]) {
+    it(`rose-window tier ${tier}: double-build byte-identical + pinned GLB hash`, () => {
+      const a = buildArchMesh(rose, { seedId: 'k3', tier }), b = buildArchMesh(rose, { seedId: 'k3', tier });
+      expect(eqF(a.positions, b.positions) && eqF(a.normals, b.normals) && eqF(a.indices, b.indices) && eqF(a.ao, b.ao)).toBe(true);
+      expect(sha(glbOf(a, 'k3-rose'))).toBe(K3_GLB_GOLDEN.rose[tier]);
+    });
+  }
+  it('vault-bay signature GLB hash is pinned', () => {
+    expect(sha(glbOf(buildArchMesh(vaultBayRuleset(), { seedId: 'k3', tier: 2 }), 'k3-vault'))).toBe(K3_GLB_GOLDEN.vault2);
+  });
+  it('tracery-families signature GLB hash is pinned', () => {
+    expect(sha(glbOf(buildArchMesh(traceryFamiliesRuleset(), { seedId: 'k3', tier: 2 }), 'k3-tracery'))).toBe(K3_GLB_GOLDEN.tracery2);
+  });
+  it('evil-chapel signature GLB hash is pinned', () => {
+    expect(sha(glbOf(buildArchMesh(evilChapelRuleset(), { seedId: 'k3', tier: 2 }), 'k3-chapel'))).toBe(K3_GLB_GOLDEN.chapel2);
   });
 });
 
