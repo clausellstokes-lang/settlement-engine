@@ -67,14 +67,14 @@ function CommentActions({ comment, canReport, onDelete, onReport }) {
         <div role="menu" aria-label="Comment options" style={{ position: 'absolute', right: 0, top: '100%', zIndex: 5, background: CARD, border: `1px solid ${BORDER}`, minWidth: 150, display: 'grid' }}>
           {canReport && (
             <Button variant="ghost" size="sm" role="menuitem" fullWidth
-              style={{ justifyContent: 'flex-start', borderRadius: 0 }}
+              style={{ justifyContent: 'flex-start' }}
               onClick={() => { setOpen(false); setReporting(true); }}>
               Report
             </Button>
           )}
           {comment.canDelete && (
             <Button variant="ghost" size="sm" role="menuitem" fullWidth
-              style={{ justifyContent: 'flex-start', borderRadius: 0, color: RED }}
+              style={{ justifyContent: 'flex-start', color: RED }}
               onClick={() => { setOpen(false); onDelete(comment.id); }}>
               Delete
             </Button>

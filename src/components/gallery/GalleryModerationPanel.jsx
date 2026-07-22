@@ -100,7 +100,7 @@ function UnifiedReportQueue() {
         <Button variant="secondary" size="sm" icon={<RefreshCw size={12} />} onClick={load}>Refresh</Button>
       </div>
       {error && (
-        <div role="alert" style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>{error}</div>
+        <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
       )}
       {targets.length === 0 ? (
         <div style={{ padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>

@@ -10,7 +10,7 @@
  */
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
-import { GOLD, INK, MUTED, SP, FS, serif_ } from '../theme.js';
+import { BORDER, GOLD, INK, MUTED, SP, FS, serif_ } from '../theme.js';
 
 export default function FoundersRoll() {
   const [names, setNames] = useState(null); // null = loading/unknown, [] = none
@@ -33,7 +33,7 @@ export default function FoundersRoll() {
   if (!names || names.length === 0) return null;
 
   return (
-    <section aria-label="The founders" style={{ marginTop: SP.xl, paddingTop: SP.lg, borderTop: '1px solid rgba(201,162,76,0.25)' }}>
+    <section aria-label="The founders" style={{ marginTop: SP.xl, paddingTop: SP.lg, borderTop: `1px solid ${BORDER}` }}>
       <h3 style={{ margin: 0, fontFamily: serif_, fontWeight: 600, fontSize: FS.lg, color: GOLD, letterSpacing: '0.02em' }}>
         The founders
       </h3>
