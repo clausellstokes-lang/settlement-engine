@@ -4,7 +4,6 @@ import {Ti, serif, Section, TabIntro} from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
-import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -58,11 +57,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
   const stresses = (Array.isArray(r.stress) ? r.stress : r.stress ? [r.stress] : []).filter(Boolean);
-  // Food balance from the canonical display model — the same residual
-  // deficitPct the Economics tab and the PDF print, so every surface agrees
-  // (not the raw engine metrics.foodBalance.deficitPercent, which is pre-import
-  // and diverges on import-dependent settlements).
-  const foodBal = deriveFoodBalance(r);
 
   // Institution layout — guard `r.institutions` because sparse saves
   // (mid-migration, partial gen) can land here without an institutions
@@ -150,25 +144,27 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           <ScoreRow label="Internal Security" score={scores.internal}/>
           <ScoreRow label="Economic Resilience" score={scores.economic}/>
           <ScoreRow label="Magical Capability" score={scores.magical}/>
-          {sp.safetyRatio!==undefined&&<div style={{marginBottom:8}}>
+          {/* Owner order (2026-07-22): the Enforcement Ratio (a raw safetyRatio
+              float) is replaced by Food Security — a typed band from the food
+              generator (economicState.foodSecurity.label / .color), the same
+              banded-label grammar the sibling Safety / Defense StatusTags use. The
+              bar tracks the derived 0-100 resilienceScore; the VALUE shown is the
+              band label, never a bare number (FINITE-SEMANTICS). safetyRatio stays
+              a live derivation — it is only its display here that is retired. */}
+          {eco.foodSecurity?.label&&<div style={{marginBottom:8}}>
             <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginBottom:3}}>
-              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Enforcement Ratio</span>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}>{typeof sp.safetyRatio==='number'?`${sp.safetyRatio.toFixed(1)}×`:EMPTY_VALUE}</span>
+              <span style={{fontSize:FS.xs,color:swatch.inkMag2,fontWeight:600}}>Food Security</span>
+              <span style={{fontSize:FS.xs,fontWeight:700,color:eco.foodSecurity.color||swatch.inkMag2}}>{eco.foodSecurity.label}</span>
             </div>
             <div style={{height:6,background:swatch['#E8DCC8'],overflow:'hidden'}}>
-              <div style={{height:'100%',width:`${Math.min(100,(sp.safetyRatio||0)*25)}%`,background:sp.safetyRatio>=2?'#1a5a28':sp.safetyRatio>=1?'#a0762a':'#8b1a1a'}}/>
+              <div style={{height:'100%',width:`${Math.min(100,Math.max(0,eco.foodSecurity.resilienceScore||0))}%`,background:eco.foodSecurity.color||swatch.inkMag2}}/>
             </div>
           </div>}
         </div>
 
-        {/* Food balance if significant */}
-        {foodBal.deficitPct>0&&<div style={{marginTop:10,paddingTop:10,borderTop:'1px solid #f0e8d8',display:'flex',alignItems:'center',gap:8}}>
-          <span style={{fontSize:FS.sm,color:swatch.danger,fontWeight:700}}>Food Deficit</span>
-          <div style={{flex:1,background:swatch['#E8DCC8'],height:6,overflow:'hidden'}}>
-            <div style={{height:'100%',width:`${Math.min(100,foodBal.deficitPct)}%`,background:swatch.danger}}/>
-          </div>
-          <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,flexShrink:0}}>{foodBal.deficitPct}%</span>
-        </div>}
+        {/* Owner order (2026-07-22): the standalone Food Deficit callout is
+            removed — Food Security (above) now carries that signal, so the deficit
+            line was a duplicate. */}
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
