@@ -1,13 +1,21 @@
 import { useMemo } from 'react';
 import { getSettlementModifiers, EFFECT_CATEGORIES, fmtMod, REL_LABELS } from '../../lib/relationshipGraph.js';
+import { campaignMembershipIndex } from '../../domain/relationships/effectiveNeighbours.js';
+import { isCampaignActive } from '../../lib/campaigns.js';
+import { useStore } from '../../store/index.js';
 import { INK, MUTED, BODY, SECOND, sans, FS, swatch } from '../theme';
 
 // ── Network Effects panel — shows cascading modifiers from the relationship graph ──
 
 export default function NetworkEffectsPanel({ settlementId, saves, relColors }) {
+  // Co-campaign settlements are implicit Neutral neighbours by default (owner
+  // order 2026-07-22). Derived from ALL active campaigns so the cascade stays
+  // ungated exactly as it renders for every tier today.
+  const campaigns = useStore(s => s.campaigns);
+  const campaignOf = useMemo(() => campaignMembershipIndex((campaigns || []).filter(isCampaignActive)), [campaigns]);
   const mods = useMemo(
-    () => getSettlementModifiers(settlementId, saves),
-    [settlementId, saves]
+    () => getSettlementModifiers(settlementId, saves, { campaignOf }),
+    [settlementId, saves, campaignOf]
   );
 
   const hasEffects = mods.sources.length > 0;

@@ -329,6 +329,16 @@ check_caught "kernel/param-contract covert leak" src/domain/townMap/arch/params.
 perl -0pi -e "s/  skull: \(b, role\) =>/  royalEffigy: (b, role) =>/" src/domain/townMap/arch/kit.js
 check_caught "kernel/statuary named-figure" src/domain/townMap/arch/kit.js "npx vitest run tests/architecture/archStatuaryScopeCensus.test.js"
 
+# 32. Neutral-neighbour single-writer — a SECOND module mints an implicit neutral
+#     neighbour (owner order 2026-07-22: the default is a read-time reading, minted
+#     only in effectiveNeighbours.js). A forked minter could leak an implicit entry
+#     into neighbourNetwork → the map/road/regional-graph surfaces that read raw
+#     links, so the single-writer source scan must red on any other minter.
+check_caught_planted "neutral-neighbour/second implicit minter" \
+  src/domain/relationships/_mutsweepImplicitNeutral.js \
+  "export const evil = (id) => ({ [IMPLICIT_NEUTRAL_FLAG]: true, targetId: id, linkId: 'implicit_neutral__x__' + id });" \
+  "npx vitest run tests/lint/implicitNeutralSingleSource.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

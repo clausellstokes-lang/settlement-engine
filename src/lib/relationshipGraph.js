@@ -16,6 +16,7 @@
  */
 
 import { localPropagationType } from '../domain/relationships/canonicalRelationship.js';
+import { effectiveNeighboursOf } from '../domain/relationships/effectiveNeighbours.js';
 
 // ── Effect categories ───────────────────────────────────────────────────────
 
@@ -93,14 +94,67 @@ function getStrength(save, modifiers = null) {
 // ── Graph construction ──────────────────────────────────────────────────────
 
 /**
+ * Normalize the optional campaignOf resolver into a `(save) => campaignId|null`
+ * function. Accepts a Map<settlementIdString, campaignId> (from
+ * campaignMembershipIndex) or a bare function. Absent ⇒ null (implicit-neutral
+ * expansion disabled: buildGraph reads raw neighbourNetwork exactly as before).
+ */
+function resolveCampaignOf(campaignOf) {
+  if (!campaignOf) return null;
+  if (typeof campaignOf === 'function') return (ss) => campaignOf(ss) ?? null;
+  if (campaignOf instanceof Map) {
+    return (ss) => campaignOf.get(String(ss?.id ?? ss?.settlement?.id ?? '')) ?? null;
+  }
+  return null;
+}
+
+/**
  * Build an adjacency list from all saved settlements.
  * Returns Map<settlementId, Array<{ targetId, relType, targetName }>>
  *
  * Uses savedSettlement.id as the canonical node identifier and resolves
  * neighbours by matching linkId across all settlements' networks.
+ *
+ * @param {Array<object>} savedSettlements
+ * @param {{ campaignOf?: Map<string, any> | ((save: object) => any) }} [options]
+ *   When `campaignOf` is supplied, each settlement's neighbour list is read
+ *   through the effectiveNeighboursOf chokepoint: every co-campaign settlement
+ *   with no explicit link becomes an implicit Neutral neighbour (owner order
+ *   2026-07-22). Absent ⇒ STRICT NO-OP: raw neighbourNetwork only, byte-for-byte
+ *   identical to the pre-neutral-neighbour behaviour (all existing callers +
+ *   pins that pass no options are unchanged).
  */
-export function buildGraph(savedSettlements) {
+export function buildGraph(savedSettlements, options = {}) {
   const graph = new Map();
+  const campaignOf = resolveCampaignOf(options.campaignOf);
+
+  // Group co-campaign saves once, so effectiveNeighboursOf can expand each
+  // settlement against its own campaign's members. Only populated when
+  // campaignOf is supplied.
+  const groups = new Map();
+  if (campaignOf) {
+    for (const ss of savedSettlements) {
+      const cid = campaignOf(ss);
+      if (cid == null) continue;
+      const key = String(cid);
+      const g = groups.get(key);
+      if (g) g.push(ss);
+      else groups.set(key, [ss]);
+    }
+  }
+
+  // Per-settlement EFFECTIVE neighbour list (explicit + implicit neutrals),
+  // computed ONCE through the chokepoint and reused by both passes below. With
+  // no campaignOf this is just the raw neighbourNetwork (strict no-op).
+  const effective = new Map();
+  for (const ss of savedSettlements) {
+    let network = ss.settlement?.neighbourNetwork || [];
+    if (campaignOf) {
+      const cid = campaignOf(ss);
+      if (cid != null) network = effectiveNeighboursOf(ss, groups.get(String(cid)) || []);
+    }
+    effective.set(ss.id, network);
+  }
 
   // Build the resolution indexes ONCE instead of an O(settlements)
   // inner scan per link (the old loop was O(N^2 * links) and also kept a dead
@@ -121,7 +175,7 @@ export function buildGraph(savedSettlements) {
     graph.set(ss.id, []);
     pushByName(ss.name, ss.id);
     pushByName(ss.settlement?.name, ss.id);
-    for (const link of ss.settlement?.neighbourNetwork || []) {
+    for (const link of effective.get(ss.id)) {
       if (!link.linkId) continue;
       const owners = linkOwners.get(link.linkId);
       if (owners) owners.push(ss.id);
@@ -131,14 +185,22 @@ export function buildGraph(savedSettlements) {
 
   // Build edges: for each settlement's network entries, resolve the target by lookup.
   for (const ss of savedSettlements) {
-    const network = ss.settlement?.neighbourNetwork || [];
+    const network = effective.get(ss.id);
     for (const link of network) {
       const relType = localPropagationType(link);
       const neighbourName = link.neighbourName || link.name;
 
+      // Implicit-neutral links carry a direct target hint (their synthetic
+      // linkId is one-sided, so the shared-owner lookup below would miss). This
+      // resolves them in one step; explicit links carry no targetId and fall
+      // through to the unchanged linkId → name resolution. The hint is the RAW
+      // target id (NOT stringified) so it matches the raw `ss.id` graph/saveIndex
+      // keys exactly — a numeric id kept numeric here, matching the explicit
+      // path's `owners.find(...)` raw result.
+      let targetId = link.targetId != null ? link.targetId : null;
+
       // The OTHER settlement sharing this linkId is the target (first in order).
-      let targetId = null;
-      if (link.linkId) {
+      if (!targetId && link.linkId) {
         const owners = linkOwners.get(link.linkId) || [];
         targetId = owners.find(id => id !== ss.id) ?? null;
       }
@@ -307,8 +369,8 @@ function buildSaveIndex(savedSettlements) {
  * One-call compute: build graph + compute modifiers for a settlement.
  * Uses tier-ratio and factor-delta for asymmetric effects.
  */
-export function getSettlementModifiers(settlementId, savedSettlements) {
-  const graph = buildGraph(savedSettlements);
+export function getSettlementModifiers(settlementId, savedSettlements, options = {}) {
+  const graph = buildGraph(savedSettlements, options);
   const saveIndex = buildSaveIndex(savedSettlements);
   return computeModifiers(settlementId, graph, saveIndex);
 }
@@ -323,10 +385,10 @@ export function getSettlementModifiers(settlementId, savedSettlements) {
  *
  * Returns Map<settlementId, { totals, sources }>
  */
-export function getAllModifiers(savedSettlements, maxIterations = 4) {
+export function getAllModifiers(savedSettlements, maxIterations = 4, options = {}) {
   if (!savedSettlements?.length) return new Map();
 
-  const graph = buildGraph(savedSettlements);
+  const graph = buildGraph(savedSettlements, options);
   const saveIndex = buildSaveIndex(savedSettlements);
   let currentModifiers = null;
   let lastResult = new Map();

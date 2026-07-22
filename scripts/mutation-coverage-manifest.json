@@ -510,6 +510,10 @@
     "tests/lint/founderSeatsMigration.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/implicitNeutralSingleSource.test.js": {
+      "kind": "mutation",
+      "label": "neutral-neighbour/second implicit minter"
+    },
     "tests/lint/loadingNarrationRatchet.test.js": {
       "kind": "uncovered"
     },
