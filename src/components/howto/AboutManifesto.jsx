@@ -26,6 +26,7 @@ import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compend
 import { RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { WholeLoopSchematic, TickDiagram } from './aboutSchematics.jsx';
 import ForgeExactDemo from './ForgeExactDemo.jsx';
+import FoundersRoll from './FoundersRoll.jsx';
 import HouseColophon from '../organic/HouseColophon.jsx';
 
 // ── Presentational helpers ───────────────────────────────────────────────────
@@ -335,6 +336,8 @@ export default function AboutManifesto() {
           and you are never charged for a task that produced nothing.
         </p>
         <ForgeExactDemo />
+        {/* The promised credits roll — dormant until a founder opts in (170). */}
+        <FoundersRoll />
       </Band>
     </div>
   );
