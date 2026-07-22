@@ -41,7 +41,7 @@ import {
 import { knownEmbattlementView } from '../roads/knownWorld.js';
 import { persistEmbassySuits } from '../roads/embassyLedger.js';
 import {
-  relationshipTypeBetween, atOpenWar, atWarWith, isEmbassy, embassyEnvoyMetrics, evaluateEmbassyHazard,
+  relationshipTypeBetween, atOpenWar, isEmbassy, embassyEnvoyMetrics, evaluateEmbassyHazard,
 } from '../roads/embassyHazard.js';
 import { findVerifyPlan, boostHomeRumorFidelity } from '../roads/verification.js';
 import {
@@ -49,7 +49,11 @@ import {
 } from '../spatial/distanceRead.js';
 import { chooseRoute, embattlementLevel } from '../spatial/embattlement.js';
 import { currentRegion } from '../spatial/armyTransit.js';
-import { tradeNeighbours, RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetwork.js';
+import { RUMOR_NOTABLE_SCORE_FLOOR } from '../spatial/rumorNetwork.js';
+// H18 + M17: per-advance indices for the PASS-5 GENESIS quadratics (the war/dominion all-settlement
+// scans and the per-NPC tradeNeighbours rescan). Byte-identical drop-ins for the flagged sites; the
+// per-mission war-reads elsewhere keep the raw embassyHazard helpers.
+import { atWarWithIdx, relationshipTypeBetweenIdx, tradeNeighbourIndex, occupiedByIndex } from './tickIndices.js';
 import { seasonForTick } from './worldState.js';
 import { createPRNG } from '../../kernel/prng.js';
 import { pickLine } from './eventProse.js';
@@ -115,7 +119,8 @@ function tradeReachable(graph, homeId, maxHops) {
   for (let h = 0; h < maxHops; h += 1) {
     const next = [];
     for (const id of frontier) {
-      for (const { neighbourId } of tradeNeighbours(graph, id)) {
+      // M17: same trade-neighbour scan class — served O(1) from the per-graph index (byte-identical).
+      for (const { neighbourId } of tradeNeighbourIndex(graph).get(String(id)) || []) {
         const n = String(neighbourId);
         if (!seen.has(n)) { seen.add(n); next.push(n); out.add(n); }
       }
@@ -804,7 +809,9 @@ function advanceLitRoads(args) {
     const warTargets = [];
     for (const dest of orderedIds) {
       if (dest === sid || !idSet.has(dest)) continue;
-      if (!atWarWith(graph, worldState, sid, dest)) continue;
+      // H18: atWarWith via the per-graph war/relationship index (O(1) instead of an all-edges +
+      // all-channels scan per pair) — identical boolean, so the codepoint-first target is unchanged.
+      if (!atWarWithIdx(graph, worldState, sid, dest)) continue;
       const hw = num(hopWeeks(digest, sid, dest, season), 0);
       if (hw >= 1 && hw <= ROADS_TUNING.EMBASSY_MAX_HOP_WEEKS) warTargets.push({ dest, hopWeeksOut: hw });
     }
@@ -813,9 +820,10 @@ function advanceLitRoads(args) {
     // settlements — an occupied holding shares no trade edge), routable within range.
     /** @type {Array<{ dest: string, hopWeeksOut: number }>} */
     const dominionTargets = [];
-    for (const dest of orderedIds) {
+    // H18: iterate only THIS court's holdings (occupier→held index) instead of scanning every
+    // settlement; idSet / self / hop filters + the codepoint sort are unchanged ⇒ identical set.
+    for (const dest of occupiedByIndex(occupations).get(sid) || []) {
       if (dest === sid || !idSet.has(dest)) continue;
-      if (str(asObject(occupations[dest]).occupierId) !== sid) continue;
       const hw = num(hopWeeks(digest, sid, dest, season), 0);
       if (hw >= 1 && hw <= ROADS_TUNING.MAX_HOP_WEEKS) dominionTargets.push({ dest, hopWeeksOut: hw });
     }
@@ -866,13 +874,16 @@ function advanceLitRoads(args) {
           if (obs) { purpose = { kind: 'observance', ref: obs.id }; dest = cand.dest; hopWeeksOut = cand.hopWeeksOut; major = obs.critical; fullWeight = obs.critical; break; }
         }
         if (!purpose && TRADE_CATEGORY.test(categoryOf(npc))) {
-          const direct = new Set(tradeNeighbours(graph, sid).map((n) => String(n.neighbourId)));
+          // M17: tradeNeighbours(graph, sid) is invariant for the whole settlement — served O(1)
+          // from the per-graph index instead of a full channel rescan on every NPC.
+          const direct = new Set((tradeNeighbourIndex(graph).get(sid) || []).map((n) => String(n.neighbourId)));
           const hit = inRange.find((c) => direct.has(c.dest));
           if (hit) { purpose = { kind: 'trade', ref: hit.dest }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }
         }
         if (!purpose && DIPLO_CATEGORY.test(categoryOf(npc))) {
           const hit = inRange.find((c) => {
-            const rt = relationshipTypeBetween(graph, worldState, sid, c.dest);
+            // M17: same relationship read, edge scan served from the per-graph index.
+            const rt = relationshipTypeBetweenIdx(graph, worldState, sid, c.dest);
             return rt === 'rival' || rt === 'cold_war'; // hostile = open war ⇒ the embassy, not routine
           });
           if (hit) { purpose = { kind: 'diplomacy', ref: `${sid}~${hit.dest}` }; dest = hit.dest; hopWeeksOut = hit.hopWeeksOut; }

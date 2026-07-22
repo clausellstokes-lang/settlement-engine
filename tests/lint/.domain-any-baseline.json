@@ -1,6 +1,6 @@
 {
-  "total": 2246,
-  "totalAny": 2207,
+  "total": 2244,
+  "totalAny": 2205,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -396,7 +396,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/npcAgency.js": {
-      "any": 88,
+      "any": 87,
       "suppress": 0
     },
     "src/domain/worldPulse/occupation.js": {
@@ -512,7 +512,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/stressorDynamics.js": {
-      "any": 60,
+      "any": 59,
       "suppress": 0
     },
     "src/domain/worldPulse/stressorGates.js": {
