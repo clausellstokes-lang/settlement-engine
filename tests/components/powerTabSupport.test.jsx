@@ -4,9 +4,18 @@
  * tests/components/powerTabSupport.test.jsx
  *
  * ORDER A (owner 2026-07-22): clicking a power in the Power tab reveals the
- * institutions that stand behind it. These pins cover the disclosure end to end:
- *   - the support list is hidden until the faction row is expanded;
- *   - the row is a keyboard-operable disclosure (Enter / Space toggles it, and
+ * institutions that stand behind it.
+ *
+ * THREE-STRATA REWORK (owner order 2026-07-22, "there are powers, there are
+ * factions, and there are the relationships between several ... it needs a
+ * rework"): the institution-support disclosure now lives on THE POWERS card (the
+ * dominant stratum), not on the flat faction row — a faction's roster row carries
+ * a compact "holds power" marker instead, so the web is never duplicated. These
+ * pins were updated to target the power card accordingly. The two fixture
+ * factions carry no `isGoverning`, so both are coup contenders → both are powers.
+ * The disclosure is still keyboard-operable end to end:
+ *   - the support list is hidden until the POWER CARD is expanded;
+ *   - the card is a keyboard-operable disclosure (Enter / Space toggles it, and
  *     aria-expanded tracks state);
  *   - once open, each supporting institution renders with its typed basis line;
  *   - the institution name is itself an interactive link (per ORDER B: institutions
@@ -22,6 +31,8 @@ afterEach(cleanup);
 // A minimal settlement whose institutions map to two different powers:
 //  - Grand Market (economy)  -> aligned under Merchant Guild (top economy faction)
 //  - City Barracks (military, factionSource) -> founded under the Watch
+// Neither faction is the governing seat, so both present as coup contenders in
+// THE POWERS stratum (each gets a power card).
 function makeSettlement() {
   return {
     id: 'settlement.testburg',
@@ -44,23 +55,23 @@ const render_ = () => {
   return render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
 };
 
-describe('PowerTab — the institution-support web', () => {
-  it('hides the support list until the power is expanded', () => {
+describe('PowerTab — the institution-support web (on THE POWERS card)', () => {
+  it('hides the support list until the power card is expanded', () => {
     render_();
-    // The support heading is not present while every row is collapsed.
+    // The support heading is not present while every power card is collapsed.
     expect(screen.queryByText(/Institutions behind this power/i)).toBeNull();
     expect(screen.queryByText('Grand Market')).toBeNull();
   });
 
   it('expands on Enter and reveals the supporting institutions with their basis', () => {
     render_();
-    const row = screen.getByRole('button', { name: 'Merchant Guild faction details' });
-    expect(row.getAttribute('aria-expanded')).toBe('false');
+    const card = screen.getByRole('button', { name: 'Merchant Guild power details' });
+    expect(card.getAttribute('aria-expanded')).toBe('false');
 
-    fireEvent.keyDown(row, { key: 'Enter' });
+    fireEvent.keyDown(card, { key: 'Enter' });
 
-    expect(row.getAttribute('aria-expanded')).toBe('true');
-    const detail = document.getElementById(row.getAttribute('aria-controls'));
+    expect(card.getAttribute('aria-expanded')).toBe('true');
+    const detail = document.getElementById(card.getAttribute('aria-controls'));
     expect(detail).toBeTruthy();
     // The aligned institution + its typed basis phrase are shown.
     expect(within(detail).getByText('Grand Market')).toBeTruthy();
@@ -74,19 +85,19 @@ describe('PowerTab — the institution-support web', () => {
 
   it('toggles closed on a second Space press', () => {
     render_();
-    const row = screen.getByRole('button', { name: 'Merchant Guild faction details' });
-    fireEvent.keyDown(row, { key: ' ' });
-    expect(row.getAttribute('aria-expanded')).toBe('true');
-    fireEvent.keyDown(row, { key: ' ' });
-    expect(row.getAttribute('aria-expanded')).toBe('false');
+    const card = screen.getByRole('button', { name: 'Merchant Guild power details' });
+    fireEvent.keyDown(card, { key: ' ' });
+    expect(card.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.keyDown(card, { key: ' ' });
+    expect(card.getAttribute('aria-expanded')).toBe('false');
     expect(screen.queryByText('Grand Market')).toBeNull();
   });
 
   it('lists a founded institution under the faction that raised it', () => {
     render_();
-    const row = screen.getByRole('button', { name: 'The Watch faction details' });
-    fireEvent.click(row);
-    const detail = document.getElementById(row.getAttribute('aria-controls'));
+    const card = screen.getByRole('button', { name: 'The Watch power details' });
+    fireEvent.click(card);
+    const detail = document.getElementById(card.getAttribute('aria-controls'));
     expect(within(detail).getByText('City Barracks')).toBeTruthy();
     expect(within(detail).getByText(SUPPORT_BASIS.founded)).toBeTruthy();
   });
