@@ -129,24 +129,130 @@ function escapeRegExp(s: string): string {
 const TOKEN_OPEN = '⟦'; // ⟦
 const TOKEN_CLOSE = '⟧'; // ⟧
 // Already-emitted tokens, so a second pass / overlapping name never double-wraps.
-const EXISTING_TOKEN = /⟦entity:[^|]+\|[^⟧]+⟧/g;
+// Matches BOTH the name link (⟦entity:…⟧, server-authored) and the pronoun link
+// (⟦pronoun:…⟧, model-authored and normalized below) so name-wrapping freezes
+// either kind and never reaches inside one.
+const EXISTING_TOKEN = /⟦(?:entity|pronoun):[^|]+\|[^⟧]+⟧/g;
+
+// A model-emitted pronoun link, before normalization. The clerk anchors it by the
+// entity's NAME (or, on a re-run, its already-resolved id); normalizePronounTokens
+// rewrites the anchor to the stable id (or unwraps it when the anchor is unknown).
+const PRONOUN_TOKEN = /⟦pronoun:([^|]+)\|([^⟧]+)⟧/g;
+// Any entity/pronoun token, capturing its display text — for stripping tokens out
+// of a field that must stay raw (the editable secret.what textarea).
+const ANY_TOKEN_DISPLAY = /⟦(?:entity|pronoun):[^|]+\|([^⟧]+)⟧/g;
+
+// ── Pronoun links (the contract extension) ──────────────────────────────────
+//
+// Names are the SERVER's job (wrapProse wraps them from a fixed set). Pronouns
+// are the CLERK's job: only the model knows which "he/she/they/it" refers to
+// which entity, so — under the deploy-gated prompt contract — it emits a pronoun
+// link ⟦pronoun:<entityName>|<pronoun>⟧ anchored by the entity's NAME. The
+// server never invents a link target (THE FINITE-SEMANTICS LAW): it VALIDATES
+// each emitted anchor against the same id set the client index resolves, and
+// keeps the token ONLY when the anchor is a real entity. Everything else — an
+// unwrapped pronoun, or one the clerk tagged with an unknown anchor — stays
+// plain text (fail-open). The server never scans prose for pronouns itself.
+
+/** The stable id + name tables a pronoun anchor is validated against. */
+type PronounResolver = { nameToId: Map<string, string>; linkableIds: Set<string> };
+
+/** The settlement's own stable id (mirrors the client index's `settlement` entry:
+ *  entityLink('settlement', settlement) → id = settlement.id ?? refId ?? slug(name)). */
+function settlementIdOf(settlement: any): string | null {
+  if (!settlement || typeof settlement !== 'object') return null;
+  if (typeof settlement.id === 'string' && settlement.id) return settlement.id;
+  if (typeof settlement.refId === 'string' && settlement.refId) return settlement.refId;
+  const name = typeof settlement.name === 'string' ? settlement.name.trim() : '';
+  return name ? slugifyEntity(name) : null;
+}
 
 /**
- * Wrap known entity names inside a single prose string.
- *
- * @param prose The refined prose (may already contain tokens — never double-wrapped).
- * @param refs  Pre-sorted (longest-name-first) name→id table for this settlement.
- * @returns The prose with matched names wrapped in entity tokens.
+ * Build the (name → id) + (id set) a pronoun anchor is validated against. Mirrors
+ * what buildDossierEntityIndex registers for the pronoun-eligible antecedents:
+ * every NPC / faction / neighbour (via collectEntityNameRefs, same id helpers),
+ * each faction's rename-decoupled stable `faction.id` alias, and the settlement
+ * itself (so "it/its" can link to the settlement, per the owner order). Total on
+ * garbage — never throws. Pure.
  */
-export function wrapProse(prose: unknown, refs: NameRef[]): unknown {
-  if (typeof prose !== 'string' || !prose || !refs.length) return prose;
+export function collectPronounResolver(settlement: any): PronounResolver {
+  const nameToId = new Map<string, string>();
+  const linkableIds = new Set<string>();
+  const addName = (rawName: unknown, id: string) => {
+    linkableIds.add(id);
+    const name = typeof rawName === 'string' ? rawName.trim().toLowerCase() : '';
+    if (name.length >= 2 && !nameToId.has(name)) nameToId.set(name, id);
+  };
+
+  for (const { name, id } of collectEntityNameRefs(settlement)) addName(name, id);
+
+  // Faction stable-id aliases (buildDossierEntityIndex also registers these).
+  const factions = Array.isArray(settlement?.powerStructure?.factions)
+    ? settlement.powerStructure.factions
+    : (Array.isArray(settlement?.factions) ? settlement.factions : []);
+  for (const f of factions) {
+    if (f && typeof f.id === 'string' && f.id) linkableIds.add(f.id);
+  }
+
+  // The settlement itself.
+  const sid = settlementIdOf(settlement);
+  if (sid) addName(typeof settlement?.name === 'string' ? settlement.name : '', sid);
+
+  return { nameToId, linkableIds };
+}
+
+/**
+ * Normalize the clerk's pronoun tokens in one prose string:
+ *   - anchor already a known id (a re-run) ⇒ keep it (idempotent);
+ *   - anchor a known entity NAME ⇒ rewrite to that entity's stable id;
+ *   - anchor unknown ⇒ UNWRAP to the bare pronoun (fail-open plain text).
+ * Never throws; a string with no pronoun token is returned untouched.
+ */
+export function normalizePronounTokens(prose: unknown, resolver: PronounResolver): unknown {
+  if (typeof prose !== 'string' || prose.indexOf('⟦pronoun:') === -1) return prose;
+  return prose.replace(new RegExp(PRONOUN_TOKEN.source, 'g'), (_full, rawAnchor: string, display: string) => {
+    const anchor = String(rawAnchor);
+    let id: string | null = null;
+    if (resolver.linkableIds.has(anchor)) id = anchor;
+    else {
+      const byName = resolver.nameToId.get(anchor.trim().toLowerCase());
+      if (byName) id = byName;
+    }
+    return id ? `${TOKEN_OPEN}pronoun:${id}|${display}${TOKEN_CLOSE}` : display;
+  });
+}
+
+/** De-tokenize prose to plain text (every entity/pronoun token → its display),
+ *  for a field that must stay raw. Mirrors the client proseToPlainText. */
+export function stripTokens(prose: unknown): unknown {
+  if (typeof prose !== 'string' || !prose) return prose;
+  return prose.replace(new RegExp(ANY_TOKEN_DISPLAY.source, 'g'), '$1');
+}
+
+/**
+ * Wrap known entity names inside a single prose string, and normalize any
+ * model-emitted pronoun links first (so name-wrapping treats a kept pronoun token
+ * as a frozen span and never reaches inside it).
+ *
+ * @param prose    The refined prose (may already contain tokens — never double-wrapped).
+ * @param refs     Pre-sorted (longest-name-first) name→id table for this settlement.
+ * @param resolver Optional pronoun anchor validator; when omitted, pronoun tokens pass through.
+ * @returns The prose with matched names wrapped, pronoun anchors resolved/unwrapped.
+ */
+export function wrapProse(prose: unknown, refs: NameRef[], resolver?: PronounResolver): unknown {
+  if (typeof prose !== 'string' || !prose) return prose;
+
+  // 1) Resolve/validate the clerk's pronoun tokens up front. This can run with no
+  //    name refs at all (a settlement whose only link is its own "it/its").
+  const normalized = resolver ? String(normalizePronounTokens(prose, resolver)) : prose;
+  if (!refs.length) return normalized;
 
   // Carve the prose into spans that are either an EXISTING token (frozen) or
   // free text (eligible). We only wrap inside free text, so a name already inside
   // a token — or a name that happens to spell another entity's display text —
   // is never re-wrapped.
   type Span = { text: string; frozen: boolean };
-  let spans: Span[] = [{ text: prose, frozen: false }];
+  let spans: Span[] = [{ text: normalized, frozen: false }];
 
   const splitOutTokens = (text: string): Span[] => {
     const out: Span[] = [];
@@ -191,45 +297,55 @@ export function wrapProse(prose: unknown, refs: NameRef[]): unknown {
 
 // ── Settlement-wide application ─────────────────────────────────────────────
 
-const wrapIfString = (obj: any, key: string, refs: NameRef[]) => {
+const wrapIfString = (obj: any, key: string, refs: NameRef[], resolver?: PronounResolver) => {
   if (obj && typeof obj === 'object' && typeof obj[key] === 'string') {
-    obj[key] = wrapProse(obj[key], refs);
+    obj[key] = wrapProse(obj[key], refs, resolver);
   }
 };
 
 /**
  * Wrap entity refs across every free-form prose slice the dossier renders
  * through ProseParagraph / ProseText: the thesis, per-tab narrative notes, and
- * each NPC's goal.short. (secret.what is intentionally excluded: the web dossier
- * renders it through an inline-editable field whose textarea must hold raw,
- * token-free prose — wrapping it would leak ⟦…⟧ tokens into the editor.) Mutates
- * `settlement` in place and returns
- * it. Pure post-processing — structured mentions and non-prose fields are
- * untouched, and re-running OVERWRITES (the existing-token guard means a second
- * pass never accumulates).
+ * each NPC's goal.short. This does two things per field: wraps known entity NAMES
+ * (server-authored) and resolves/validates the clerk's pronoun links (see
+ * normalizePronounTokens — an unknown or unwrapped pronoun stays plain text).
+ *
+ * secret.what is intentionally excluded from wrapping — the web dossier renders it
+ * through an inline-editable field whose textarea must hold raw, token-free prose.
+ * Under the pronoun contract the clerk could still emit a token there, so instead
+ * of leaving it untouched we STRIP any tokens out of it (defence-in-depth), keeping
+ * the editor raw. Mutates `settlement` in place and returns it. Pure post-processing;
+ * re-running OVERWRITES (the existing-token guard + idempotent pronoun normalize
+ * mean a second pass never accumulates).
  */
 export function wrapEntityRefsInProse(settlement: any): any {
   if (!settlement || typeof settlement !== 'object') return settlement;
   const refs = collectEntityNameRefs(settlement)
     // Longest name first so "John Smith" pre-empts "John".
     .sort((a, b) => b.name.length - a.name.length);
-  if (!refs.length) return settlement;
+  const resolver = collectPronounResolver(settlement);
+  // Even with no wrappable NAMES, the clerk's pronoun links (incl. the settlement's
+  // own "it/its") still need resolving — so proceed whenever there is any link work.
+  if (!refs.length && resolver.linkableIds.size === 0) return settlement;
 
   // Thesis.
-  wrapIfString(settlement, 'thesis', refs);
+  wrapIfString(settlement, 'thesis', refs, resolver);
 
   // Per-tab narrative notes (flat string map).
   if (settlement.narrativeNotes && typeof settlement.narrativeNotes === 'object') {
     for (const k of Object.keys(settlement.narrativeNotes)) {
-      wrapIfString(settlement.narrativeNotes, k, refs);
+      wrapIfString(settlement.narrativeNotes, k, refs, resolver);
     }
   }
 
-  // NPC goal.short (pure read-only prose). secret.what is excluded — see the
-  // doc note above; it routes through an editable field that must stay raw.
+  // NPC goal.short (pure read-only prose). secret.what is NOT wrapped; it is
+  // sanitized (any clerk-emitted token stripped) so the editable field stays raw.
   if (Array.isArray(settlement.npcs)) {
     for (const npc of settlement.npcs) {
-      if (npc?.goal && typeof npc.goal === 'object') wrapIfString(npc.goal, 'short', refs);
+      if (npc?.goal && typeof npc.goal === 'object') wrapIfString(npc.goal, 'short', refs, resolver);
+      if (npc?.secret && typeof npc.secret === 'object' && typeof npc.secret.what === 'string') {
+        npc.secret.what = stripTokens(npc.secret.what);
+      }
     }
   }
 

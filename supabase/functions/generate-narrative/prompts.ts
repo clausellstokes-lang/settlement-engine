@@ -52,6 +52,20 @@ AUTHORITY LADDER for using this context:
 
 const HOUSE_STYLE = `Voice: confident, unhurried, a little wry. Prose that earns each sentence. No adjective fatigue, no "nestled," no "bustling," no "quiet dignity," no "tapestry of," no "belies," no "whispers of." No game mechanics language, no stat numbers, no parenthetical asides explaining lore. Present tense where apt. Always replace generic detail with something specific to THIS settlement's data.`;
 
+// PRONOUN-LINK CONTRACT (deploy-gated). Inert until this edge function is
+// deployed. Names are linked by the server automatically; this asks the clerk to
+// mark PRONOUNS whose antecedent it alone knows, anchored by the entity's exact
+// name. entityRefWrapper.normalizePronounTokens then validates each anchor against
+// the real entity set and rewrites it to the stable id (or unwraps it to plain
+// text when the anchor is unknown — fail-open), so a wrong or over-eager mark can
+// never mint a link to something that is not a real entity. THE FINITE-SEMANTICS
+// LAW holds: the server owns the id set; the clerk only points at a name.
+const PRONOUN_LINK_CONTRACT = `PRONOUN LINKS (mark, do not overreach):
+- When a pronoun (he, she, they, it, him, her, them, his, hers, its, their) UNAMBIGUOUSLY refers to a specific NPC, faction, or this settlement that is named in the source, wrap JUST that pronoun as ⟦pronoun:<ExactEntityName>|<theWord>⟧ — e.g. "Aldric holds the seat, and ⟦pronoun:Aldric|he⟧ answers to no one."
+- Use the entity's EXACT name from the source as the anchor. Wrap the pronoun ONLY — never wrap the surrounding words, and keep the pronoun's own casing.
+- Do NOT wrap a pronoun whose antecedent is a crowd, a pair, an unnamed group, or anything not named in the source. If in any doubt, leave the pronoun as plain text.
+- Do NOT wrap entity NAMES yourself — the system links those. Only pronouns.`;
+
 const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - Keep every proper noun from the source: names, titles, places, relationships.
 - Keep every numerical fact and categorical fact.
@@ -60,7 +74,9 @@ const PRESERVATION_RULES = `STRICT FACT PRESERVATION:
 - You MAY restructure sentences, improve rhythm, add sensory texture, and tie details to the thesis.
 - If a source string is already concrete and specific, you may lightly polish or leave it alone — a non-change is better than drift.
 - NEVER describe the settlement as self-sufficient, fully self-sustaining, or feeding itself when the context records a food deficit or critical food imports — the gap is a fact; write around it, not over it.
-- Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors) unless the context lists port or river access.`;
+- Do NOT invent water infrastructure (wharves, docks, harbours, boats, sea charts, sailors) unless the context lists port or river access.
+
+${PRONOUN_LINK_CONTRACT}`;
 
 // Tier 6.8 — settlement-specific preservation lines composed from the
 // shared aiGrounding contract. Adds explicit "MUST PRESERVE" lines for

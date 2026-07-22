@@ -29,7 +29,7 @@ export default function ProseParagraph({ text }) {
     <>
       {segments.map((seg, i) =>
         seg.type === 'ref'
-          ? <EntityLink key={i} id={seg.id} fallback={seg.value} />
+          ? <EntityLink key={i} id={seg.id} fallback={seg.value} verbatim={seg.verbatim} />
           : <span key={i}>{seg.value}</span>,
       )}
     </>

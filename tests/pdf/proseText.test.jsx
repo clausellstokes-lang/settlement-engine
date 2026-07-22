@@ -40,4 +40,11 @@ describe('proseToPlainText — token-bearing prose de-tokenizes to plain names',
     expect(out).toBe('The mayor Jon Vale rules the Guild.');
     expect(out).not.toMatch(/⟦entity:/);
   });
+
+  it('collapses a pronoun token to its bare word (verbatim), no raw literal', () => {
+    const tok = '⟦entity:npc.jon|Jon Vale⟧ rules, and ⟦pronoun:npc.jon|he⟧ answers to no one.';
+    const out = proseToPlainText(tok);
+    expect(out).toBe('Jon Vale rules, and he answers to no one.');
+    expect(out).not.toMatch(/⟦(entity|pronoun):/);
+  });
 });
