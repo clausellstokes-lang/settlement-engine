@@ -423,6 +423,10 @@
     "tests/generators/pipelineContract.test.js": {
       "kind": "uncovered"
     },
+    "tests/helpers/sourceContract.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
     "tests/kernel/clampPrimitive.parity.test.js": {
       "kind": "uncovered"
     },
@@ -459,6 +463,10 @@
     },
     "tests/lint/clampPrimitiveBaseline.test.js": {
       "kind": "uncovered"
+    },
+    "tests/lint/contractTestAntiVacuity.walker.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
     },
     "tests/lint/controlBytes.test.js": {
       "kind": "uncovered"
