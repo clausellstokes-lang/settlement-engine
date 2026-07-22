@@ -20,6 +20,7 @@ import { render, cleanup } from '@testing-library/react';
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
 import { ArcaneTab } from '../../src/components/compendium/CatalogTabs.jsx';
 import { PANTHEON_TUNING } from '../../src/domain/worldPulse/pantheon.js';
+import { getMagicLevel } from '../../src/data/constants.js';
 
 afterEach(cleanup);
 
@@ -60,5 +61,29 @@ describe('compendium faith — the deity axes are the doctrine entry (no roster)
     const rank = CD.bandLadders.find((l) => l.id === 'pantheon-rank');
     expect(rank, 'pantheon-rank ladder present').toBeTruthy();
     expect(rank.levels.map((x) => x.name)).toEqual(['Cult', 'Minor', 'Major']);
+  });
+});
+
+describe('compendium magic — the magic level + legality ladders', () => {
+  test('the Magic Level thresholds are bound to getMagicLevel (a change reds the copy)', () => {
+    // The Magic Level ladder readings state 0 none, <=25 low, <=65 medium, else high.
+    expect(getMagicLevel(0)).toBe('none');
+    expect(getMagicLevel(25)).toBe('low');
+    expect(getMagicLevel(65)).toBe('medium');
+    expect(getMagicLevel(66)).toBe('high');
+  });
+
+  test('the Magic Level + Magic Legality ladders render on the Arcane tab', () => {
+    const level = CD.bandLadders.find((l) => l.id === 'magic-level');
+    const legality = CD.bandLadders.find((l) => l.id === 'magic-legality');
+    expect(level && legality, 'both magic ladders present').toBeTruthy();
+    expect(level.levels.map((x) => x.name)).toEqual(['None', 'Low', 'Medium', 'High']);
+    expect(legality.levels.map((x) => x.name)).toEqual(['Forbidden', 'Restricted', 'Regulated', 'Tolerated', 'Celebrated']);
+    const { container } = render(<ArcaneTab />);
+    const text = container.textContent || '';
+    for (const l of [level, legality]) {
+      expect(text.includes(l.concept), `Arcane tab missing "${l.concept}"`).toBe(true);
+      for (const lvl of l.levels) expect(text.includes(lvl.name), `Arcane tab missing rung "${lvl.name}"`).toBe(true);
+    }
   });
 });

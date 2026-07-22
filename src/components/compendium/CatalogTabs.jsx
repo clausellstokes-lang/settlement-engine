@@ -154,9 +154,11 @@ export function ArcaneTab() {
           <div key={i} style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{line}</div>))}
       </div>))}
     <p style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, margin:'8px 0 0' }}>{faith.temperNote}</p>
-    {laddersFor('arcane').map((l) => (
+    {laddersFor('arcane').filter((l) => l.anchor === 'faith').map((l) => (
       <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <SectionHeading id="magic" accent={INK}>Magic</SectionHeading>
+    {laddersFor('arcane').filter((l) => l.anchor === 'magic').map((l) => (
+      <BandLadder key={l.id} concept={l.concept} blurb={l.blurb} levels={l.levels} accent={GOLD} />))}
     <Card title="Magic as Economic Buffer" accent='#3a1a7a'>High Magic acts as a buffer against deficits. Arcane institutions can substitute for missing production.</Card>
     <Card title="Magic Suppression" accent='#5a2a8a'>Religion 65+ with Magic 38 or less triggers Heresy Suppression. Magic goods suppressed.</Card>
     <Card title="Arcane-Criminal Ecosystem" accent='#4a1a4a'>Magic 52+ and Criminal 58+ creates an Arcane Black Market archetype.</Card>

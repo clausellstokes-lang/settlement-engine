@@ -117,6 +117,33 @@ const PANTHEON_RANK_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Magic level — the band the generator emits from the Magic priority slider
+ * (getMagicLevel, src/data/constants.js: 0 none, <=25 low, <=65 medium, else high).
+ * The thresholds stated here are pinned to getMagicLevel by tests/ui/compendiumFaith.test.jsx.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const MAGIC_LEVEL_LEVELS = Object.freeze([
+  { name: 'None',   reading: 'Magic is disabled in this world. There is no magical economy.' },
+  { name: 'Low',    reading: 'A magic priority at or below 25. Magic is rare and limited.' },
+  { name: 'Medium', reading: 'A magic priority up to 65. A moderate, everyday presence.' },
+  { name: 'High',   reading: 'A magic priority above 65. Magic is broad and pervasive.' },
+]);
+
+/**
+ * Magic legality — the legality facet the magic profile bands (magicLegalityBands,
+ * src/domain/magicProfile.js). The dead-magic floor 'absent' is noted in the blurb
+ * rather than laddered. Readings state the plain meaning of each legal standing.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const MAGIC_LEGALITY_LEVELS = Object.freeze([
+  { name: 'Forbidden',  reading: 'Magic is outlawed; practicing it is a crime.' },
+  { name: 'Restricted', reading: 'Magic is tightly controlled, permitted only in narrow licensed forms.' },
+  { name: 'Regulated',  reading: 'Magic is legal but overseen, with rules on who may practice and how.' },
+  { name: 'Tolerated',  reading: 'Magic is accepted as an ordinary part of life.' },
+  { name: 'Celebrated', reading: 'Magic is embraced and openly honored.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -141,6 +168,10 @@ const LADDER_META = Object.freeze([
     blurb: 'How far a criminal interest has taken a seat of power.' },
   { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,
     blurb: 'A seat is a settlement whose patron is this god. Rank rises with seats (cult to minor at two, minor to major at four) and falls back below them, but a change must hold for two ticks, and at most two ranks change across the whole realm each tick. Rank is earned through spread, so a single custom deity can rise on its own.' },
+  { id: 'magic-level', concept: 'Magic Level', tab: 'arcane', anchor: 'magic', levels: MAGIC_LEVEL_LEVELS,
+    blurb: 'The Magic priority slider resolves to one of these levels. None means magic is disabled in the world, not a slider position. The level sets how available magic is and feeds its legality, risk, and role.' },
+  { id: 'magic-legality', concept: 'Magic Legality', tab: 'arcane', anchor: 'magic', levels: MAGIC_LEGALITY_LEVELS,
+    blurb: 'Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm\'s legality (see the deity axes above). A world with no magic reads as absent.' },
 ]);
 
 /**
