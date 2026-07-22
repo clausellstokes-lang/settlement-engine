@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { serif, Section, TabIntro } from '../Primitives';
 import { NarrativeNote } from '../NarrativeNote';
@@ -6,6 +6,7 @@ import { FACTION_COLORS } from '../tabConstants';
 import InstitutionLink from '../../primitives/InstitutionLink.jsx';
 import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
+import { deriveFactionSupport } from '../../../domain/dossier/powerSupport.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
 
 export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
@@ -29,6 +30,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
     setExpandedFaction(focusIndex);
     focusedRowRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
   }, [focusedEntity?.ts, focusIndex]);
+
+  // ORDER A (owner 2026-07-22): the institution-support web. Which institutions
+  // stand behind each power, derived READ-ONLY from the settlement's own data
+  // (domain/dossier/powerSupport.js — reuses the InstitutionCard backing relation
+  // so the two never diverge). Keyed by faction display name; looked up per row.
+  const factionSupport = useMemo(() => deriveFactionSupport(s), [s]);
 
   if (!r) return <div style={{padding:32,textAlign:'center',color:MUTED}}>No power structure data.</div>;
 
@@ -198,18 +205,25 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const powerChanged = f.rawPower && f.rawPower !== f.power;
             const _mods   = (f.modifiers||[]).concat(f.modifier ? [f.modifier] : []);
             const matchedGroups = factionGroups.filter(fg => fg.powerFactionName === f.faction);
+            // ORDER A: the institutions that stand behind this power. When present
+            // they make the row a disclosure even if it carries no description.
+            const support   = factionSupport.get(f.faction) || [];
+            const hasSupport = support.length > 0;
+            const expandable = !!f.desc || hasSupport;
 
             return (
               <div key={i} ref={i === focusIndex ? focusedRowRef : null}>
                 <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',
                   background:isExp?'#f5f0e8':f.legitimacyCrisis?'#fdf4f4':'transparent',
-                  cursor:f.desc?'pointer':'default',
+                  cursor:expandable?'pointer':'default',
                   border: f.legitimacyCrisis ? '1px solid #e8c0c0' : '1px solid transparent',
                 }}
-                  {...(f.desc ? {
+                  {...(expandable ? {
                     role: 'button',
                     tabIndex: 0,
                     'aria-label': `${f.faction} faction details`,
+                    'aria-expanded': isExp,
+                    'aria-controls': `power-faction-${i}-detail`,
                     onClick: () => setExpandedFaction(isExp ? null : i),
                     onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
                   } : {})}>
@@ -234,7 +248,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                       {matchedGroups.reduce((n,g) => n+(g.members||[]).length, 0)}m
                     </span>
                   )}
-                  {f.desc && <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>}
+                  {expandable && <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{isExp?'▲':'▼'}</span>}
                 </div>
 
                 {/* Sub-faction groups */}
@@ -246,10 +260,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                   </div>
                 ))}
 
-                {/* Expanded description */}
-                {isExp && f.desc && (
-                  <div style={{padding:'6px 12px 8px 28px',background:swatch['#FAF8F4'],borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2}}>
-                    <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>
+                {/* Expanded detail: description, associated groups, and — ORDER A —
+                    the institutions that stand behind this power. */}
+                {isExp && expandable && (
+                  <div id={`power-faction-${i}-detail`} style={{padding:'6px 12px 8px 28px',background:swatch['#FAF8F4'],borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2}}>
+                    {f.desc && <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>}
                     {f.crisisNote && (
                       <p style={{fontSize: FS['11.5'],color:swatch.danger,fontStyle:'italic',margin:'6px 0 0',lineHeight:1.4}}>⚠ {f.crisisNote}</p>
                     )}
@@ -261,6 +276,23 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                             {mem.name} <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
+                      </div>
+                    )}
+                    {hasSupport && (
+                      <div data-testid="faction-support" style={{marginTop:(f.desc||f.crisisNote||matchedGroups.length>0)?10:0}}>
+                        <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:5}}>
+                          Institutions behind this power ({support.length})
+                        </div>
+                        <div style={{display:'flex',flexDirection:'column',gap:4}}>
+                          {support.map((edge,si) => (
+                            <div key={si} style={{display:'flex',alignItems:'baseline',gap:8,fontSize:FS.xs,lineHeight:1.45}}>
+                              <span style={{fontWeight:700,color:swatch.inkMag,flexShrink:0}}>
+                                <InstitutionLink name={edge.name} settlement={s} />
+                              </span>
+                              <span style={{color:MUTED,flex:1,minWidth:0}}>{edge.why}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
