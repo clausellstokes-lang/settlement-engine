@@ -6,6 +6,7 @@ import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {generateCrossSettlementConflictsDeterministic} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
+import { campaignMembershipIndex } from '../domain/relationships/effectiveNeighbours.js';
 import { INK, BODY, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
@@ -197,7 +198,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [reactivationError, setReactivationError] = useState(null);
   const [persistenceError, setPersistenceError] = useState(null);
 
-  const allModifiers = useMemo(() => getAllModifiers(saves), [saves]);
+  // Co-campaign settlements are implicit Neutral neighbours by default (owner
+  // order 2026-07-22). From ALL active campaigns (not the premium-gated
+  // `activeCampaigns`) so the Network Effects cascade stays ungated for every tier.
+  const neighbourCampaignOf = useMemo(() => campaignMembershipIndex(campaigns.filter(isCampaignActive)), [campaigns]);
+  const allModifiers = useMemo(() => getAllModifiers(saves, 4, { campaignOf: neighbourCampaignOf }), [saves, neighbourCampaignOf]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
   const inactiveRetained = useMemo(() => inactiveRetentionCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
