@@ -32,6 +32,29 @@ function spire(role, cx, cz, baseHalf, baseY, apexY, apexCx, apexCz) {
   };
 }
 
+/**
+ * SPIRE_EMBED_FRAC -- a stacked spire's base is seated this fraction of its OWN height BELOW the top
+ * plane of the primitive it rests on. A spire's downward base quad (addSpire's bottom face, -y normal)
+ * that is COINCIDENT + COPLANAR with the host's upward top quad (+y) at equal depth makes the two
+ * abutting closed solids z-fight in the shared raster: the z-buffer flip-flops between the two faces
+ * scanline-by-scanline -- the "cap-diamond" tone-gate striping the K-2 investigation localized on the
+ * grotesque / skull / crocket caps and the cathedral pinnacle-on-pier joint. Seating the base below the
+ * host's top plane (embedded, not flush) puts the spire's near faces strictly in front of that cap and
+ * removes the coincidence -- exactly the evilChapel.js SPIRE_EMBED cure, generalized kit-wide. A fraction
+ * of the spire's own span keeps the embed strictly positive and strictly less than the spire height for
+ * every asset scale. DECLARED same-seed geometry shift: ARCH_GEOMETRY_VERSION 2 -> 3; cathedral GLB tiers
+ * 1/2 (they carry the pinnacle) + all 3 cathedral plate goldens + evil-chapel (grotesque+skull) chapel2
+ * re-pinned. Cathedral tier 0 (glyph, no statuary) / buttress / rose / vault / tracery stay byte-identical.
+ * robedFigure (a box on a spire APEX = a point contact, no coplanar face) + gargoyle (side snout) + finial
+ * (a lone spire) have no coincident face and are unchanged (visually confirmed clean in the tone plates).
+ */
+const SPIRE_EMBED_FRAC = 1 / 8;
+
+/** a spire SEATED on the primitive below it, its base embedded below that top plane (the coincident-face striping cure). Same args as spire(). @param {string} role @param {number} cx @param {number} cz @param {number} baseHalf @param {number} baseY @param {number} apexY @param {number} [apexCx] @param {number} [apexCz] @returns {KitTerminal} */
+function seatedSpire(role, cx, cz, baseHalf, baseY, apexY, apexCx, apexCz) {
+  return spire(role, cx, cz, baseHalf, baseY - (apexY - baseY) * SPIRE_EMBED_FRAC, apexY, apexCx, apexCz);
+}
+
 /** a box terminal spec + its aabb. @param {string} role @param {number} x0 @param {number} x1 @param {number} y0 @param {number} y1 @param {number} z0 @param {number} z1 @returns {KitTerminal} */
 function boxT(role, x0, x1, y0, y1, z0, z1) {
   return {
@@ -60,8 +83,8 @@ export const KIT_ASSETS = Object.freeze({
     const d = dims(b);
     const capTop = b.min[1] + d.hy * 0.8;
     return [
-      spire(role, d.cx, d.cz, d.hx, b.min[1], capTop),
-      spire(role, d.cx, d.cz, d.hx * 0.45, capTop, b.max[1]),
+      seatedSpire(role, d.cx, d.cz, d.hx, b.min[1], capTop),        // lower cap seated into the pier top (was coincident with it)
+      seatedSpire(role, d.cx, d.cz, d.hx * 0.45, capTop, b.max[1]), // upper spire seated into the lower cap
     ];
   },
 
@@ -71,7 +94,7 @@ export const KIT_ASSETS = Object.freeze({
     const d = dims(b);
     return [
       boxT(role, d.cx - d.hx * 0.3, d.cx + d.hx * 0.3, b.min[1], d.cy, d.cz - d.hx * 0.3, d.cz + d.hx * 0.3),
-      spire(role, d.cx, d.cz, d.hx * 0.6, d.cy, b.max[1], d.cx + d.hx * 1.1, d.cz), // the bud curls outward (+x)
+      seatedSpire(role, d.cx, d.cz, d.hx * 0.6, d.cy, b.max[1], d.cx + d.hx * 1.1, d.cz), // the bud curls outward (+x), seated into the stem top
     ];
   },
   /** a projecting GARGOYLE waterspout: a horizontal corbel beam + a tapered snout thrown outward + down. */
@@ -90,7 +113,7 @@ export const KIT_ASSETS = Object.freeze({
     return [
       boxT(role, d.cx - d.hx * 0.7, d.cx + d.hx * 0.7, b.min[1], bodyTop, d.cz - d.hz * 0.7, d.cz + d.hz * 0.7),      // hunched body
       boxT(role, d.cx - d.hx * 0.45, d.cx + d.hx * 0.45, bodyTop, headTop, d.cz - d.hz * 0.45, d.cz + d.hz * 0.45),   // head block
-      spire(role, d.cx, d.cz, d.hx * 0.45, headTop, b.max[1]),                                                        // horn/cap
+      seatedSpire(role, d.cx, d.cz, d.hx * 0.45, headTop, b.max[1]),                                                  // horn/cap seated into the head block
     ];
   },
   /** an abstract ROBED SILHOUETTE: a wide-base tapering robe (a truncated pyramid) + a small head. NEVER a face. */
@@ -109,7 +132,7 @@ export const KIT_ASSETS = Object.freeze({
     return [
       boxT(role, d.cx - d.hx * 0.5, d.cx + d.hx * 0.5, b.min[1], jawTop, d.cz - d.hz * 0.4, d.cz + d.hz * 0.4),  // jaw
       boxT(role, d.cx - d.hx * 0.7, d.cx + d.hx * 0.7, jawTop, cranTop, d.cz - d.hz * 0.6, d.cz + d.hz * 0.6),   // cranium
-      spire(role, d.cx, d.cz, d.hx * 0.35, cranTop, b.max[1]),                                                   // crowning spike
+      seatedSpire(role, d.cx, d.cz, d.hx * 0.35, cranTop, b.max[1]),                                             // crowning spike seated into the cranium
     ];
   },
 });
