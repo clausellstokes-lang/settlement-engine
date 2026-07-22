@@ -3,7 +3,7 @@ import { Save } from 'lucide-react';
 import { useStore } from '../../../store/index.js';
 import { FS, swatch } from '../../theme.js';
 import { t } from '../../../copy/index.js';
-import { sans, TabIntro } from '../Primitives';
+import { sans } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 const BORDER = swatch['#E0D0B0'];
@@ -97,7 +97,6 @@ export default function NotesTab({ saveId, notes, section }) {
 
   return (
     <div style={{ padding: 18 }}>
-      <TabIntro tabKey="notes" />
       <div style={{ display: 'grid', gap: 14 }}>
         {showDm && (
           <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#FAF8F4'] }}>

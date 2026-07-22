@@ -573,24 +573,13 @@ export const en = Object.freeze({
 
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
   // Source: UI Redesign §18.9. These set the tone for each tab in one line.
-  tabs: {
-    // The Overview intro line was removed per owner order (2026-07-21). TabIntro
-    // (components/new/Primitives.jsx) renders nothing when a tabs.* key is absent,
-    // so the Overview tab simply drops its intro caption with no empty element.
-    summary:       'The settlement, distilled to a paragraph an NPC could speak.',
-    economics:     'Who owes whom, who eats what, and why prices wobble in spring.',
-    power:         'Who decides, who enforces, and who quietly objects.',
-    defense:       'Walls, watchmen, and the things they’d rather not face.',
-    history:       'The decisions that shaped the streets your players walk.',
-    relationships: 'The threads tying NPCs into something larger than a cast list.',
-    plotHooks:     'Things gone wrong, things going wrong, things about to.',
-    dailyLife:     'A day in the life: dawn to dusk to dusk again.',
-    services:      'Who sells what, who fixes what, and who you don’t ask.',
-    resources:     'What the land gives, what the trade brings, what runs short.',
-    viability:     'Whether this place survives a hard winter, and why.',
-    npcs:          'The faces. The names. The reasons they stay.',
-    dmCompass:     'A loose handful of arrows for where this could go.',
-  },
+  // The tab intro ledes — the poetic one-line captions under each dossier tab
+  // title — were removed as a FAMILY per owner order (2026-07-22): no static
+  // poetic lede renders on any dossier tab (order 4 removed 'overview' first; this
+  // removes the rest). The namespace is kept (empty) so the copy namespace guard
+  // still finds it, and TabIntro (components/new/Primitives.jsx) renders nothing
+  // for an absent key, so every remaining <TabIntro> call heals to no element.
+  tabs: {},
 
   // ── Onboarding Coach + Checklist (UI Redesign §18.6 / §18.7) ─────────────
   onboarding: {

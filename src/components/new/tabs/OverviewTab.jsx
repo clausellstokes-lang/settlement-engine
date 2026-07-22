@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
-import {Ti, serif, Section, TabIntro} from '../Primitives';
+import { Ti, serif, Section } from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -73,7 +73,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
 
   return (
     <div>
-      <TabIntro tabKey="overview" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit

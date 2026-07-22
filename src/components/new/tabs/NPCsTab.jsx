@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
-import { serif, Collapsible, Empty, TabIntro } from '../Primitives';
+import { serif, Collapsible, Empty } from '../Primitives';
 import {relStyle} from '../tabConstants';
 
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
@@ -49,7 +49,6 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
 
   return (
     <div>
-      <TabIntro tabKey="npcs" />
       <NarrativeNote note={narrativeNote} />
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>

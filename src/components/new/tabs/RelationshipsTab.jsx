@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import {generateCrossSettlementConflictsDeterministic} from '../../../generators/crossSettlementConflicts';
-import {serif, Section, TabIntro} from '../Primitives';
+import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 import {NPCRelCard2, ConflictCard} from '../npcComponents';
@@ -121,7 +121,6 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false }) {
 
   return (
     <div>
-      <TabIntro tabKey="relationships" />
 
       {/* Neighbour Network */}
       {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>

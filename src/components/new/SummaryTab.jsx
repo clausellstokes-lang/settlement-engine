@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FS, swatch, MUTED, EMPTY_VALUE } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS, catColor } from './design';
-import { serif, TabIntro } from './Primitives';
+import { serif } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
@@ -155,7 +155,6 @@ function SummaryTab({ settlement:r }) {
 
   return (
     <div>
-      <TabIntro tabKey="summary" />
 
       {/* ── IDENTITY HEADER ──────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 70%,#1c1409 100%)',padding:isMobile?'14px':'16px 20px',marginBottom:16}}>

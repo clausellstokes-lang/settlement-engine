@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 
-import { sans, TabIntro } from '../Primitives';
+import { sans } from '../Primitives';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
@@ -150,7 +150,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
 
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
-      <TabIntro tabKey="dailyLife" />
 
       {/* ── ANCHOR FACTS ─────────────────────────────────────────────────── */}
       <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 14 }}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
-import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
+import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
@@ -61,7 +61,6 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
-      <TabIntro tabKey="viability" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── VIABILITY VERDICT ────────────────────────────────────────────── */}
