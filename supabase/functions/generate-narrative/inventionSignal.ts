@@ -24,9 +24,10 @@
  */
 import { collectEntityNameRefs } from './entityRefWrapper.ts';
 
-// Strip the entity-ref fence tokens (⟦entity:<id>|<name>⟧) so a wrapped KNOWN name
-// reads as plain text and is correctly recognised as canon, not flagged as invented.
-const FENCE = /⟦entity:[^|]+\|([^⟧]+)⟧/g;
+// Strip the entity-ref fence tokens (⟦entity:<id>|<name>⟧ and the pronoun-link
+// ⟦pronoun:<id>|<word>⟧) so a wrapped KNOWN name reads as plain text and is
+// correctly recognised as canon, not flagged as invented.
+const FENCE = /⟦(?:entity|pronoun):[^|]+\|([^⟧]+)⟧/g;
 const stripFences = (s: string): string => s.replace(FENCE, '$1');
 
 /**

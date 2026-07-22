@@ -107,3 +107,38 @@ describe('entity-ref link path (wired W5) — ref segments render clickable link
     expect(src).toMatch(/entityIndex:\s*buildDossierEntityIndex\(/);
   });
 });
+
+describe('pronoun-link path (the contract extension) — verbatim render is wired', () => {
+  it('the tokenizer recognises pronoun tokens and marks them verbatim', () => {
+    const src = read('src/lib/entityRefTokenizer.js');
+    expect(src).toMatch(/PRONOUN_REF_PATTERN/);
+    expect(src).toMatch(/verbatim/);
+  });
+
+  it('the web renderer forwards seg.verbatim to EntityLink', () => {
+    const src = read('src/components/ProseParagraph.jsx');
+    expect(src).toMatch(/verbatim=\{seg\.verbatim\}/);
+  });
+
+  it('EntityLink shows the wrapped word (not the current name) for a verbatim link', () => {
+    const src = read('src/components/primitives/EntityLink.jsx');
+    expect(src).toMatch(/verbatim\s*\?\s*fallback/);
+  });
+
+  it('the PDF renderer forwards seg.verbatim to EntityRef', () => {
+    const src = read('src/pdf/primitives/ProseText.jsx');
+    expect(src).toMatch(/verbatim=\{seg\.verbatim\}/);
+  });
+
+  it('EntityRef shows the wrapped word (not the current name) for a verbatim link', () => {
+    const src = read('src/pdf/primitives/EntityRef.jsx');
+    expect(src).toMatch(/verbatim\s*\?\s*fallback/);
+  });
+
+  it('the server wrapper resolves + validates the clerk\'s pronoun anchors', () => {
+    const src = read('supabase/functions/generate-narrative/entityRefWrapper.ts');
+    expect(src).toMatch(/normalizePronounTokens/);
+    // fail-open: an unknown anchor unwraps to the bare word (the display group).
+    expect(src).toMatch(/collectPronounResolver/);
+  });
+});
