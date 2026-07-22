@@ -366,6 +366,28 @@ export const COMPENDIUM_DATA = Object.freeze({
     "categories": ["religious","merchant","military","craft","noble","civic","arcane","criminal","foreign","industrial","residential"],
     "note": "District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy."
   },
+  "lifecycle": {
+    "remnants": [
+      {"label":"Relic ruin","reading":"A settlement that peaked at city or larger; a privileged resettlement site."},
+      {"label":"Abandoned site","reading":"A settlement that died before it ever reached city."}
+    ],
+    "satellites": "A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the parent, and adjacent steadings converge into one. Every step moves population in conserved amounts."
+  },
+  "npcGoals": {
+    "entries": [
+      {"id":"secure_office","label":"Secure office","reading":"Win or hold a seat of power."},
+      {"id":"protect_followers","label":"Protect followers","reading":"Shield the NPC's people from harm."},
+      {"id":"expand_influence","label":"Expand influence","reading":"Grow reach and standing."},
+      {"id":"settle_rivalry","label":"Settle a rivalry","reading":"Resolve a feud, by force or otherwise."},
+      {"id":"restore_order","label":"Restore order","reading":"Put down disorder and reassert control."},
+      {"id":"profit_from_change","label":"Profit from change","reading":"Turn upheaval to advantage."},
+      {"id":"control_institution","label":"Control an institution","reading":"Capture a key body."},
+      {"id":"win_public_legitimacy","label":"Win public legitimacy","reading":"Earn the populace's acceptance."},
+      {"id":"bind_external_patron","label":"Bind an external patron","reading":"Secure a foreign backer."},
+      {"id":"survive_crisis","label":"Survive a crisis","reading":"Get through an immediate threat."}
+    ],
+    "note": "An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress."
+  },
   "facets": {
     "natures": ["faith","security","trade","craft","learning","vice","civic"],
     "interiorKinds": ["faith","security","trade","craft","learning","vice","civic","generic"],

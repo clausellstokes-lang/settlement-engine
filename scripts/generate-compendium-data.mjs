@@ -277,6 +277,28 @@ const DISTRICT_CATEGORIES = [
 ];
 const DISTRICT_NOTE = 'District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy.';
 
+// Living-World completions (Wave L). Settlement remnant grades + satellite fates
+// (settlementLifecycleKernel), and the 10 NPC goal kinds the world pulse pursues
+// (npcAgency GOALS, authored labels; drift-pinned by tests/ui/compendiumLivingCompletions).
+const LIFECYCLE_REMNANTS = [
+  { label: 'Relic ruin',     reading: 'A settlement that peaked at city or larger; a privileged resettlement site.' },
+  { label: 'Abandoned site', reading: 'A settlement that died before it ever reached city.' },
+];
+const LIFECYCLE_SATELLITES = 'A satellite thorp grows into a hamlet and can charter at village scale; a starving satellite returns its people to the parent, and adjacent steadings converge into one. Every step moves population in conserved amounts.';
+const NPC_GOALS = [
+  { id: 'secure_office',         label: 'Secure office',           reading: 'Win or hold a seat of power.' },
+  { id: 'protect_followers',     label: 'Protect followers',       reading: 'Shield the NPC\'s people from harm.' },
+  { id: 'expand_influence',      label: 'Expand influence',        reading: 'Grow reach and standing.' },
+  { id: 'settle_rivalry',        label: 'Settle a rivalry',        reading: 'Resolve a feud, by force or otherwise.' },
+  { id: 'restore_order',         label: 'Restore order',           reading: 'Put down disorder and reassert control.' },
+  { id: 'profit_from_change',    label: 'Profit from change',      reading: 'Turn upheaval to advantage.' },
+  { id: 'control_institution',   label: 'Control an institution',  reading: 'Capture a key body.' },
+  { id: 'win_public_legitimacy', label: 'Win public legitimacy',   reading: 'Earn the populace\'s acceptance.' },
+  { id: 'bind_external_patron',  label: 'Bind an external patron', reading: 'Secure a foreign backer.' },
+  { id: 'survive_crisis',        label: 'Survive a crisis',        reading: 'Get through an immediate threat.' },
+];
+const NPC_GOAL_NOTE = 'An NPC acts toward a short-term and a long-term goal; a goal culminates once it reaches high progress.';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -526,6 +548,10 @@ export function buildCompendiumDataObject() {
       categories: [...DISTRICT_CATEGORIES],
       note: DISTRICT_NOTE,
     },
+
+    // Living-World completions (Wave L): settlement birth/death + NPC goal vocabulary.
+    lifecycle: { remnants: LIFECYCLE_REMNANTS.map((x) => ({ ...x })), satellites: LIFECYCLE_SATELLITES },
+    npcGoals: { entries: NPC_GOALS.map((x) => ({ ...x })), note: NPC_GOAL_NOTE },
 
     // Facets: the exported interior/facet vocabulary. The 7 institution natures are
     // the interior kinds minus the 'generic' fallback. The institutionFunction axis

@@ -23,6 +23,11 @@ const KLASS_MEANING = {
   macro: 'orchestrates a batch of changes as one intent',
   mechanical: 'moves store or view state without touching canon',
 };
+const SCOPE_MEANING = {
+  save: 'one settlement record',
+  campaign: 'a linked campaign world',
+  global: 'account-wide state',
+};
 
 // ── THE OPERATION REGISTRY (public) ──────────────────────────────────────────
 export function OperationsHub() {
@@ -69,11 +74,18 @@ export function OperationsHub() {
           </Button>
         ))}
       </div>
-      {klass !== 'all' && (
-        <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '0 0 10px', fontFamily: sans }}>
-          {klass}: {KLASS_MEANING[klass]}.
-        </p>
-      )}
+      {/* The klass + scope legends are ALWAYS visible: the default All view stamps a
+          klass tag and a scope on every card, so the tags cannot go undefined. */}
+      <div style={{ margin: '0 0 12px' }}>
+        {['canon', 'macro', 'mechanical'].map((k) => (
+          <div key={k} style={{ fontSize: FS.xs, color: SEC, fontFamily: sans, lineHeight: 1.6 }}>
+            <Tag label={k} color={KLASS_COLOR[k] || GOLD} /> {KLASS_MEANING[k]}.
+          </div>
+        ))}
+        <div style={{ fontSize: FS.xxs, color: MUT, fontFamily: sans, marginTop: 4 }}>
+          scope: save = {SCOPE_MEANING.save} · campaign = {SCOPE_MEANING.campaign} · global = {SCOPE_MEANING.global}.
+        </div>
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 6 }}>
         {shown.map((o) => (
           <div key={o.opType} id={`op-${slug(o.opType)}`}
@@ -193,6 +205,28 @@ export function SystemsHub() {
           </div>
         </div>
       ))}
+
+      {/* Settlement birth and death (the lifecycle system) + the NPC goal vocabulary. */}
+      <div id="lifecycle" style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '18px 0 6px', scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
+        Birth and death
+      </div>
+      {CD.lifecycle.remnants.map((r) => (
+        <div key={r.label} style={{ display: 'flex', gap: 10, padding: '4px 0', borderBottom: `1px solid ${BOR}`, alignItems: 'baseline' }}>
+          <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK, minWidth: 130, flexShrink: 0 }}>{r.label}</span>
+          <span style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5, fontFamily: sans }}>{r.reading}</span>
+        </div>))}
+      <p style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5, margin: '6px 0 0', fontFamily: sans }}>{CD.lifecycle.satellites}</p>
+
+      <div id="npc-goals" style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '18px 0 6px', scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
+        NPC goals
+      </div>
+      <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '0 0 6px', fontFamily: sans }}>{CD.npcGoals.note}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(240px,1fr))', gap: 4 }}>
+        {CD.npcGoals.entries.map((g) => (
+          <div key={g.id} style={{ fontSize: FS.xxs, color: SEC, lineHeight: 1.5, fontFamily: sans }}>
+            <strong style={{ color: INK }}>{g.label}.</strong> {g.reading}
+          </div>))}
+      </div>
     </div>
   );
 }
