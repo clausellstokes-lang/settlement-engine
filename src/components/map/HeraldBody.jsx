@@ -12,15 +12,15 @@
 // old inspector minted); every NEW child is a STATIC import so it rides
 // RealmInspector's already-lazy chunk at zero first-paint cost. No new lazy() here.
 
-import { lazy, useMemo, useState } from 'react';
+import { lazy, useState } from 'react';
 import { BookOpen, LayoutList } from 'lucide-react';
 
-import { BODY, BORDER, CARD_ALT, FS, GOLD, SECOND, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { flag } from '../../lib/flags.js';
-import { buildHeraldFeed } from './heraldFeed.js';
+import { needsAttentionDigest } from './heraldFilter.js';
 import HeraldSection from './HeraldSection.jsx';
 import HeraldAdjudication from './HeraldAdjudication.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
@@ -53,11 +53,22 @@ function PeacetimeNote({ campaign }) {
 
 // The Dashboard's session-prep prose mode (absorbs the old Letter + the chronicle
 // feed + this advance's report). Toggled from the glance stats.
-function DashboardBody({ campaign, canManageCampaigns, tier, onUpgrade, nameById, emptyHandlers }) {
+function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns, tier, onUpgrade, nameById, emptyHandlers }) {
   const [prose, setProse] = useState(false);
   const nameFor = (id) => nameById?.get(String(id)) || String(id);
+  // THE FRONT-PAGE BANNER — the K most-severe live items cross-realm, severity-first
+  // (NOT alphabetical here; the sort law's urgent lens on the front page).
+  const digest = campaign ? needsAttentionDigest(feed, 4) : [];
   return (
     <div style={{ display: 'grid', gap: SP.md }}>
+      {digest.length > 0 && (
+        <div data-testid="dashboard-needs-attention" style={{ border: `1px solid ${GOLD}`, borderLeft: `3px solid ${RED}`, background: CARD_ALT, padding: SP.sm, display: 'grid', gap: 4 }}>
+          <div style={{ color: RED, fontFamily: sans, fontSize: FS.micro, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Needs attention</div>
+          {digest.map(item => (
+            <div key={item.id} style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, overflowWrap: 'anywhere' }}>{item.headline}</div>
+          ))}
+        </div>
+      )}
       {campaign && (
         <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
           <IconButton onClick={() => setProse(false)} aria-pressed={!prose} active={!prose} title="The realm at a glance">
@@ -103,14 +114,18 @@ function DashboardBody({ campaign, canManageCampaigns, tier, onUpgrade, nameById
  * @param {string} props.tier
  * @param {() => void} [props.onUpgrade]
  */
-export default function HeraldBody({ section, campaign, timeLens, nameById, emptyHandlers, canManageCampaigns, tier, onUpgrade }) {
-  const feed = useMemo(() => buildHeraldFeed(campaign, { lens: timeLens }), [campaign, timeLens]);
+export default function HeraldBody({ section, campaign, feed = { bySection: {}, counts: {} }, focusId = null, focusName = '', narrowing = false, nameById, emptyHandlers, canManageCampaigns, tier, onUpgrade }) {
   const showResolve = flag('warEconomySurfacing');
+  const bySection = feed.bySection || {};
+  // A focus/filter that empties a door reads as the local edition's "nothing here",
+  // not a broken panel — the "table of contents" the tab badges also carry.
+  const focusEmpty = (base) => (focusId != null ? `Nothing at ${focusName}.` : narrowing ? 'Nothing matches the current filter.' : base);
 
   if (section === 'dashboard') {
     return (
       <DashboardBody
         campaign={campaign}
+        feed={feed}
         canManageCampaigns={canManageCampaigns}
         tier={tier}
         onUpgrade={onUpgrade}
@@ -134,7 +149,7 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'war') {
     return (
-      <HeraldSection items={feed.bySection.war} worldState={campaign.worldState} nameById={nameById} emptyLead="No war reported since the last turning. The realm holds.">
+      <HeraldSection items={bySection.war} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No war reported since the last turning. The realm holds.')}>
         <div style={{ display: 'grid', gap: SP.sm }}>
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
@@ -148,7 +163,7 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'faith') {
     return (
-      <HeraldSection items={feed.bySection.faith} worldState={campaign.worldState} nameById={nameById} emptyLead="No faith stirred since the last turning. The altars are quiet.">
+      <HeraldSection items={bySection.faith} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No faith stirred since the last turning. The altars are quiet.')}>
         <div style={{ display: 'grid', gap: SP.md }}>
           <PantheonPanel campaign={campaign} />
           <AssignDeityFromMap campaign={campaign} />
@@ -159,24 +174,24 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'trade') {
     return (
-      <HeraldSection items={feed.bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead="No trade shifted since the last turning. The roads run as they did.">
+      <HeraldSection items={bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('No trade shifted since the last turning. The roads run as they did.')}>
         <TreatyPanel campaign={campaign} nameById={nameById} />
       </HeraldSection>
     );
   }
 
   if (section === 'events') {
-    return <HeraldSection items={feed.bySection.events} worldState={campaign.worldState} nameById={nameById} emptyLead="Little else of note since the last turning." />;
+    return <HeraldSection items={bySection.events} worldState={campaign.worldState} nameById={nameById} emptyLead={focusEmpty('Little else of note since the last turning.')} />;
   }
 
   if (section === 'divination') {
     return (
       <HeraldSection
-        items={feed.bySection.divination}
+        items={bySection.divination}
         worldState={campaign.worldState}
         nameById={nameById}
         title="Pressures building"
-        emptyLead="No pressure is building that the realm can yet foresee."
+        emptyLead={focusEmpty('No pressure is building that the realm can yet foresee.')}
       >
         <div style={{ border: `1px solid ${GOLD}`, background: CARD_ALT, padding: SP.sm }}>
           <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>
@@ -189,7 +204,7 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
   }
 
   if (section === 'adjudication') {
-    return <HeraldAdjudication campaign={campaign} />;
+    return <HeraldAdjudication campaign={campaign} focusId={focusId} focusName={focusName} />;
   }
 
   return <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.xs, border: `1px dashed ${BORDER}` }}>Unknown section.</div>;

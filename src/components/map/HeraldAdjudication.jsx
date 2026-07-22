@@ -29,7 +29,26 @@ import {
 } from './WorldPulseData.js';
 import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 
-export default function HeraldAdjudication({ campaign }) {
+// Cluster pending proposals by the settlement they touch (collectSettlementIds[0]),
+// realm-wide (no settlement) last — the uncapped wall becomes navigable at scale.
+function groupProposalsBySettlement(proposals = [], nameById = new Map()) {
+  const bySettlement = new Map();
+  const realmWide = [];
+  for (const p of proposals) {
+    const sid = collectSettlementIds(p)[0];
+    if (sid == null) { realmWide.push(p); continue; }
+    const key = String(sid);
+    const list = bySettlement.get(key) || [];
+    list.push(p);
+    bySettlement.set(key, list);
+  }
+  const groups = [];
+  for (const [key, items] of bySettlement) groups.push({ key, name: nameById.get(key) || key, items });
+  if (realmWide.length) groups.push({ key: '__realm__', name: 'Across the realm', items: realmWide });
+  return groups;
+}
+
+export default function HeraldAdjudication({ campaign, focusId = null, focusName = '' }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
@@ -55,7 +74,14 @@ export default function HeraldAdjudication({ campaign }) {
   const worldState = campaign.worldState || {};
   const paused = !!worldState.pausedAdvance;
   const pendingMajors = paused ? (worldState.pausedAdvance?.pendingMajors || []) : [];
-  const pending = (worldState.proposals || []).filter(p => p.status === 'pending');
+  const allPending = (worldState.proposals || []).filter(p => p.status === 'pending');
+  // FOCUS scopes the decisions desk too (the whole paper is the local edition): a
+  // proposal touching the focused settlement stays. Then the uncapped wall becomes
+  // collapsible group-by-settlement sections.
+  const pending = focusId != null
+    ? allPending.filter(p => collectSettlementIds(p).map(String).includes(String(focusId)))
+    : allPending;
+  const pendingGroups = groupProposalsBySettlement(pending, nameById);
   const rules = worldState.simulationRules || {};
   const autonomy = politicalAutonomyOf(rules);
   const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
@@ -178,33 +204,43 @@ export default function HeraldAdjudication({ campaign }) {
         {pending.length > 0 && proposalNote && <ClerkNote rubric="The realm's counsel">{proposalNote}</ClerkNote>}
         {pending.length === 0 ? (
           <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
-            No decision awaits you. The realm runs on its own for now.
+            {focusId != null ? `No decision awaits at ${focusName}.` : 'No decision awaits you. The realm runs on its own for now.'}
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {pending.map(proposal => (
-              <OutcomeCard
-                key={proposal.id}
-                title={proposal.headline}
-                summary={proposal.summary}
-                severity={proposal.severity}
-                reasons={proposal.reasons}
-                details={proposalDetails(proposal.outcome)}
-                involved={involvedEntities(proposal, nameById)}
-                subject={outcomeSubjectDescriptor(proposal)}
-                affectedIds={collectSettlementIds(proposal)}
-                tone="major"
-                actions={(
-                  <>
-                    <SmallButton tone="good" onClick={() => runProposalAction(proposal.id, 'apply')} title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'} disabled={!!busyProposalId || paused}>
-                      <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
-                    </SmallButton>
-                    <SmallButton tone="danger" onClick={() => runProposalAction(proposal.id, 'dismiss')} title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'} disabled={!!busyProposalId || paused}>
-                      <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
-                    </SmallButton>
-                  </>
-                )}
-              />
+            {pendingGroups.map(group => (
+              <details key={group.key} open data-testid="adjudication-group" style={{ border: `1px solid ${BORDER}`, background: CARD_ALT }}>
+                <summary style={{ cursor: 'pointer', padding: '6px 10px', color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {group.name}
+                  <span style={{ marginLeft: 'auto', color: MUTED, fontWeight: 800 }}>{group.items.length}</span>
+                </summary>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 8 }}>
+                  {group.items.map(proposal => (
+                    <OutcomeCard
+                      key={proposal.id}
+                      title={proposal.headline}
+                      summary={proposal.summary}
+                      severity={proposal.severity}
+                      reasons={proposal.reasons}
+                      details={proposalDetails(proposal.outcome)}
+                      involved={involvedEntities(proposal, nameById)}
+                      subject={outcomeSubjectDescriptor(proposal)}
+                      affectedIds={collectSettlementIds(proposal)}
+                      tone="major"
+                      actions={(
+                        <>
+                          <SmallButton tone="good" onClick={() => runProposalAction(proposal.id, 'apply')} title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'} disabled={!!busyProposalId || paused}>
+                            <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
+                          </SmallButton>
+                          <SmallButton tone="danger" onClick={() => runProposalAction(proposal.id, 'dismiss')} title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'} disabled={!!busyProposalId || paused}>
+                            <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
+                          </SmallButton>
+                        </>
+                      )}
+                    />
+                  ))}
+                </div>
+              </details>
             ))}
           </div>
         )}

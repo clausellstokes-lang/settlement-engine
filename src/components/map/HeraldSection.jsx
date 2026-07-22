@@ -13,7 +13,8 @@
 import { Section } from './WorldPulsePrimitives.jsx';
 import HeraldHeadline, { HeraldGroupHeader } from './HeraldHeadline.jsx';
 import { groupBySettlement } from './heraldGrammar.js';
-import { BORDER, CARD_ALT, FS, MUTED, sans } from '../theme.js';
+import { partitionUrgent, sortGroupsAlphabetical } from './heraldFilter.js';
+import { BORDER, CARD_ALT, FS, GOLD, MUTED, RED, sans } from '../theme.js';
 
 /** Severity-first, then most-recent, then a stable id tiebreak (codepoint). */
 function ordered(items = []) {
@@ -36,7 +37,11 @@ function ordered(items = []) {
  * @param {string} [props.title]     the feed section heading
  */
 export default function HeraldSection({ items = [], emptyLead, worldState, nameById, children, title = 'Since the last turning' }) {
-  const groups = groupBySettlement(ordered(items), nameById || new Map());
+  // THE SORT LAW: the urgent pin (true cross-realm crises) floats above the alphabet;
+  // the rest cluster by settlement, groups ordered alphabetically, severity-then-
+  // recency within.
+  const { urgent, rest } = partitionUrgent(ordered(items));
+  const groups = sortGroupsAlphabetical(groupBySettlement(rest, nameById || new Map()));
   return (
     <div style={{ display: 'grid', gap: 12 }}>
       {children}
@@ -47,6 +52,17 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {urgent.length > 0 && (
+              <div data-testid="herald-urgent-pin" style={{ display: 'grid', gap: 8, borderLeft: `3px solid ${RED}`, paddingLeft: 6 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, borderBottom: `1px solid ${GOLD}`, paddingBottom: 3 }}>
+                  <span style={{ color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.04em' }}>Needs attention now</span>
+                  <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{urgent.length}</span>
+                </div>
+                {urgent.map(item => (
+                  <HeraldHeadline key={item.id} item={item} worldState={worldState} nameById={nameById} />
+                ))}
+              </div>
+            )}
             {groups.map(group => (
               <div key={group.settlementId || '__realm__'} style={{ display: 'grid', gap: 8 }}>
                 <HeraldGroupHeader group={group} />

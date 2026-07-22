@@ -28,6 +28,9 @@ import { IconButton } from './IconButton.jsx';
 import { RealmEntityContext } from './RealmEntityContext.jsx';
 import { useRealmEntityNav } from './useRealmEntityNav.js';
 import HeraldBody from './HeraldBody.jsx';
+import HeraldStrip from './HeraldStrip.jsx';
+import { buildHeraldFeed } from './heraldFeed.js';
+import { filterFeed } from './heraldFilter.js';
 // THE DESK — the two tools, STATIC within this already-lazy chunk (FP-R class): a
 // lazy() here would mint a preload-manifest entry and tip the first-paint ratchet.
 import RoadScenePanel from './RoadScenePanel.jsx';
@@ -65,10 +68,23 @@ export function hasTreaties(campaign) {
   return !!ledger && typeof ledger === 'object' && Object.keys(ledger).length > 0;
 }
 
-function SectionTab({ active, label, Icon, onClick }) {
+function SectionTab({ active, label, Icon, count = null, onClick }) {
   return (
     <IconButton onClick={onClick} aria-pressed={active} active={active} title={label} size="lg">
       <Icon size={13} />{label}
+      {count != null && (
+        <span
+          data-testid="herald-tab-count"
+          style={{
+            marginLeft: 2, minWidth: 15, textAlign: 'center', padding: '0 4px',
+            border: `1px solid ${BORDER2}`, background: CARD,
+            color: count === 0 ? BODY : GOLD, opacity: count === 0 ? 0.55 : 1,
+            fontFamily: sans, fontSize: FS.micro, fontWeight: 900,
+          }}
+        >
+          {count}
+        </span>
+      )}
     </IconButton>
   );
 }
@@ -107,6 +123,24 @@ export default function RealmInspector({
   // the time LENS scopes every report door; the desk TOOL takes over the body.
   const [timeLens, setTimeLens] = useState('advance');
   const [deskTool, setDeskTool] = useState(/** @type {string|null} */ (null));
+  // The filter/focus strip state. FOCUS is the store-global selectedSettlementId (the
+  // local edition — round-trips with the map click); the rest is local strip state.
+  const focusId = useStore(s => s.selectedSettlementId);
+  const clearFocus = useStore(s => s.clearSelectedSettlementId);
+  const [query, setQuery] = useState('');
+  const [attentionOn, setAttentionOn] = useState(false);
+  const [filterBand, setFilterBand] = useState(/** @type {string|null} */ (null));
+  const [showFilters, setShowFilters] = useState(false);
+
+  // The section-filed feed under the current lens, then narrowed by focus ∩ search ∩
+  // attention ∩ severity. Counts feed the per-door badges.
+  const feed = useMemo(() => buildHeraldFeed(campaign, { lens: timeLens }), [campaign, timeLens]);
+  const filtered = useMemo(
+    () => filterFeed(feed, { focusId, query, attention: attentionOn, band: filterBand, nameById }),
+    [feed, focusId, query, attentionOn, filterBand, nameById],
+  );
+  const focusName = focusId != null ? (nameById.get(String(focusId)) || String(focusId)) : '';
+  const narrowing = focusId != null || !!query || attentionOn || !!filterBand;
 
   const sections = REALM_INSPECTOR_SECTIONS;
   const activeSection = sections.some(s => s.id === section) ? section : 'dashboard';
@@ -192,18 +226,40 @@ export default function RealmInspector({
 
         <div role="group" aria-label="Herald sections" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {sections.map(s => (
-            <SectionTab key={s.id} active={activeSection === s.id && !deskTool} label={s.label} Icon={s.Icon} onClick={() => { setDeskTool(null); onSection(s.id); }} />
+            <SectionTab
+              key={s.id}
+              active={activeSection === s.id && !deskTool}
+              label={s.label}
+              Icon={s.Icon}
+              count={narrowing && s.id !== 'dashboard' && s.id !== 'adjudication' ? (filtered.counts[s.id] ?? 0) : null}
+              onClick={() => { setDeskTool(null); onSection(s.id); }}
+            />
           ))}
         </div>
 
-        {/* THE TIME LENS — history is a lens, not a door. Persists across section
-            switches; scopes every report door (hidden while the desk is open). */}
+        {/* THE FILTER / FOCUS STRIP + THE TIME LENS — persist across door switches;
+            scope every report door (hidden while the desk is open). */}
         {!deskTool && (
-          <div role="group" aria-label="Time lens" style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
-            <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lens</span>
-            <LensButton active={timeLens === 'advance'} onClick={() => setTimeLens('advance')} label="This advance" />
-            <LensButton active={timeLens === 'campaign'} onClick={() => setTimeLens('campaign')} label="Whole campaign" />
-          </div>
+          <>
+            <HeraldStrip
+              query={query}
+              onQuery={setQuery}
+              focusId={focusId}
+              focusName={focusName}
+              onClearFocus={clearFocus}
+              attentionOn={attentionOn}
+              onToggleAttention={() => setAttentionOn(a => !a)}
+              band={filterBand}
+              onBand={setFilterBand}
+              showFilters={showFilters}
+              onToggleFilters={() => setShowFilters(f => !f)}
+            />
+            <div role="group" aria-label="Time lens" style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+              <span style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Lens</span>
+              <LensButton active={timeLens === 'advance'} onClick={() => setTimeLens('advance')} label="This advance" />
+              <LensButton active={timeLens === 'campaign'} onClick={() => setTimeLens('campaign')} label="Whole campaign" />
+            </div>
+          </>
         )}
       </div>
 
@@ -222,7 +278,10 @@ export default function RealmInspector({
             <HeraldBody
               section={activeSection}
               campaign={campaign}
-              timeLens={timeLens}
+              feed={filtered}
+              focusId={focusId}
+              focusName={focusName}
+              narrowing={narrowing}
               nameById={nameById}
               emptyHandlers={emptyHandlers}
               canManageCampaigns={canManageCampaigns}
