@@ -13,16 +13,13 @@
  * than the Dialog Shell's alert triangle.
  */
 
-import { useEffect, useRef } from 'react';
 import { Landmark, X } from 'lucide-react';
 import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP, sans,
 } from '../theme.js';
 import IconButton from './IconButton.jsx';
+import { useDialogFocusTrap } from './useDialogFocusTrap.js';
 import { deriveInstitutionProfile } from '../../domain/display/institutionProfile.js';
-
-const FOCUSABLE =
-  'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
 // Per-domain accent for a contribution row's tag chip.
 const DOMAIN_STYLE = {
@@ -40,32 +37,12 @@ const DOMAIN_STYLE = {
  * @param {() => void} props.onClose
  */
 export default function InstitutionCard({ open, institution, settlement, onClose }) {
-  const cardRef = useRef(null);
-  const restoreRef = useRef(null);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
-    const node = cardRef.current;
-    const focusables = () => (node ? Array.from(node.querySelectorAll(FOCUSABLE)) : []);
-    (focusables()[0] || node)?.focus?.();
-
-    const onKey = (event) => {
-      if (event.key === 'Escape') { onClose?.(); return; }
-      if (event.key !== 'Tab' || !node) return;
-      const items = focusables();
-      if (!items.length) { event.preventDefault(); node.focus?.(); return; }
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      restoreRef.current?.focus?.();
-    };
-  }, [open, onClose]);
+  // Shared focus trap: focus-in on open, Tab cycling, Escape-to-close, and
+  // focus restore on close. The hook is keyed on `open` ALONE and reads onClose
+  // through a ref, so a background re-render that mints a new onClose identity
+  // does NOT re-run the effect and yank focus out mid-read (the recorded
+  // onClose-identity bug class this popover shared with GlossaryCard).
+  const cardRef = useDialogFocusTrap(open, onClose);
 
   if (!open) return null;
 

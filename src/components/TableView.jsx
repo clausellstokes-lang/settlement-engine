@@ -29,6 +29,7 @@ import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtT
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
@@ -55,13 +56,11 @@ const KIND_ACCENT = LAMP_ACCENTS;
 const KIND_LABEL = { NPC: 'NPC', HOOK: 'HOOK', TWIST: 'TWIST', RED: 'RED' };
 
 export default function TableView({ settlement, onClose }) {
-  // Esc closes — mirrors HelpPopover. Registered unconditionally because the
-  // caller only mounts TableView when it should be open.
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  // Shared modal focus management (M12): focus-in on open, Tab/Shift+Tab cycling
+  // trapped inside the panel, Escape-to-close, and focus restore on unmount.
+  // Replaces the hand-rolled Escape-only listener — a full-screen aria-modal
+  // dialog with no trap leaked keyboard focus to the obscured app behind it.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   // FIELD MODE wake lock (Organic Craft law §7 — the cook-mode pattern): while
   // the at-table view is open the screen stays awake, where supported. The lock
@@ -97,14 +96,12 @@ export default function TableView({ settlement, onClose }) {
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
 
   return (
-    // Backdrop click/Enter/Space closes the modal; role="dialog" is required for modal semantics so it can't become a native button.
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    // Backdrop: a presentational scrim that dismisses only on a click of the
+    // scrim itself (currentTarget), the shared modal idiom. Escape + focus
+    // management live in the panel's useDialogFocusTrap.
     <div
-      role="dialog"
-      aria-modal="true"
-      aria-label={`Table view: ${settlement?.name || 'settlement'}`}
-      onClick={onClose}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
+      role="presentation"
+      onMouseDown={(e) => { if (e.target === e.currentTarget) onClose?.(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1100,
         background: 'rgba(12,8,4,0.72)',
@@ -112,11 +109,12 @@ export default function TableView({ settlement, onClose }) {
         padding: 12,
       }}
     >
-      {/* Handlers only stopPropagation to keep clicks/keys inside the panel from closing the backdrop; the panel is not itself interactive. */}
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => e.stopPropagation()}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Table view: ${settlement?.name || 'settlement'}`}
+        tabIndex={-1}
         style={{
           width: '100%', maxWidth: 380,
           height: '100%', maxHeight: 760,

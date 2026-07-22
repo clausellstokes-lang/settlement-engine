@@ -98,6 +98,10 @@ export default function PostGenCoach() {
       aria-labelledby="postgen-coach-title"
       style={{
         position: 'fixed',
+        // The COACH layer (900). The feedback panel (FeedbackWidget) sits one
+        // step above at 910 so, when both bottom-right panels are shown
+        // together, stacking is deterministic (M10). See the Z_LAYERS manifest
+        // (scripts/.ui-a11y-contract.json).
         bottom: 24, right: 24, zIndex: 900,
         width: 340, maxWidth: 'calc(100vw - 48px)',
         background: CARD,

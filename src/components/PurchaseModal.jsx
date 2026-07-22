@@ -114,7 +114,12 @@ export default function PurchaseModal({ onClose }) {
         style={{
           background: CARD,
           border: `1px solid ${BORDER}`,
-          width: '90%', maxWidth: 520, overflow: 'hidden',
+          width: '90%', maxWidth: 520,
+          // Bound to the viewport and scroll inside, matching the Dialog Shell
+          // primitive (H13). The old `overflow: hidden` with no height cap
+          // clipped the lower form fields and the close button on short
+          // (landscape-phone) viewports, leaving them unreachable.
+          maxHeight: 'min(90vh, 680px)', overflowY: 'auto',
         }}
       >
         {/* Header */}
