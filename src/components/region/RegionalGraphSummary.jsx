@@ -1,4 +1,5 @@
 import { Check, CheckCheck, CircleSlash, FastForward, RefreshCw } from 'lucide-react';
+import { useState } from 'react';
 
 import { ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
 import Button from '../primitives/Button.jsx';
@@ -32,6 +33,17 @@ export default function RegionalGraphSummary({
   onApplyAllImpacts,
   onIgnoreAllImpacts,
 }) {
+  // Discover is a TRUE TOGGLE (owner order 2026-07-22): the discovered-
+  // suggestions section opens on the first press and closes on the next.
+  // Default-open when the persisted graph already carries suggested channels so
+  // a reload never hides candidates the DM discovered in an earlier session.
+  // The lazy initializer reads the graph once and tolerates a null campaign —
+  // the guard below has not run yet, so this hook stays unconditional (Rules of
+  // Hooks): it must sit ABOVE the early return.
+  const [suggestionsOpen, setSuggestionsOpen] = useState(
+    () => ensureRegionalGraph(campaign?.regionalGraph).channels.some(c => c.status === 'suggested'),
+  );
+
   if (!campaign || settlementCount < 2) return null;
 
   const graph = ensureRegionalGraph(campaign.regionalGraph);
@@ -116,15 +128,25 @@ export default function RegionalGraphSummary({
           variant="secondary"
           size="sm"
           icon={<RefreshCw size={11} />}
-          onClick={() => onDiscover?.(campaign.id)}
-          title="Discover regional channels"
+          onClick={() => {
+            // True toggle: an open suggestions section closes on the next press;
+            // a closed one runs discovery and opens (owner order 2026-07-22).
+            if (suggestionsOpen) {
+              setSuggestionsOpen(false);
+            } else {
+              onDiscover?.(campaign.id);
+              setSuggestionsOpen(true);
+            }
+          }}
+          aria-expanded={suggestionsOpen}
+          title={suggestionsOpen ? 'Hide discovered channels' : 'Discover regional channels'}
           style={{ marginLeft: availableImpacts.length > 1 || delayedImpacts.length > 0 ? 0 : 'auto' }}
         >
           Discover
         </Button>
       </div>
 
-      {topSuggestions.length > 0 && (
+      {suggestionsOpen && topSuggestions.length > 0 && (
         // Flattened to tint-only rows (no per-row border) so the folder keeps two
         // earned elevations — the folder border + the settlement-card borders —
         // not three nested ones (P5 anti-box-soup). The tint + the SP.sm column

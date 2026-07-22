@@ -168,10 +168,14 @@ export default function HomeHero({ onSignIn, onNavigate }) {
     setBeginError(null);
     setGenerating(true);
     try {
-      // Signed-in users go to 'basic' (renamed from 'quick'); anon
-      // also uses 'basic' so the post-hero state shows them the same
-      // single-step flow if they navigate back to the wizard.
-      setWizardMode('basic');
+      // Instant generation has NO config-mode origin: the roll begins from the
+      // Create landing (wizardMode === null), so PRESERVE that null instead of
+      // stamping a mode. Back from the resulting dossier then returns to the
+      // instant-generation hero — not a config panel (owner order 2026-07-22).
+      // The old setWizardMode('basic') was the reported bug: it sent Back to the
+      // basic/advanced config stage. Config-panel entries (ModeSelector) still
+      // set their own mode, so Back from THOSE correctly returns to that config.
+      setWizardMode(null);
       updateConfig({ settType: pickedSize });
       generate();
       if (isAnon) {
