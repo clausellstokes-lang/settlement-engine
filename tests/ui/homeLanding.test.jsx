@@ -72,10 +72,13 @@ describe('HomeLanding — scrollable landing', () => {
     expect(h1s[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
   });
 
-  test('all seven section headings render from the copy registry', async () => {
+  // Owner walk orders 10/11 (2026-07-22): the Brief section was replaced by
+  // the map card in the 02 slot (retitled "The visual"), so brief.h2 renders
+  // nowhere — six sections remain.
+  test('all six section headings render from the copy registry', async () => {
     renderLanding();
     const headings = [
-      landing.forge.h2, landing.brief.h2, landing.voice.h2,
+      landing.forge.h2, landing.voice.h2,
       landing.realm.h2, landing.map.h2, landing.commons.h2, landing.closer.h2,
     ];
     for (const h2 of headings) {
@@ -83,10 +86,14 @@ describe('HomeLanding — scrollable landing', () => {
     }
   });
 
-  test('the anon ceiling string appears exactly once', async () => {
+  // Owner walk order 10 (2026-07-22): the Instant Draft widget — the ceiling
+  // string's only landing carrier — left the landing (the Cnocby card took
+  // its slot). The ceiling copy lives on the Create page's own picker now;
+  // the landing must NOT show it.
+  test('the anon ceiling string does not appear on the landing', async () => {
     renderLanding();
-    await screen.findByText(landing.forge.ceiling); // wait for below-fold
-    expect(screen.getAllByText(landing.forge.ceiling)).toHaveLength(1);
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 }); // page settled
+    expect(screen.queryAllByText(landing.forge.ceiling)).toHaveLength(0);
   });
 
   test('decorative chips stay spans; the forge-exact control is a real button', async () => {
