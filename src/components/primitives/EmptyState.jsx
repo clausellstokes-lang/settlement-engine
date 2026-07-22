@@ -20,7 +20,7 @@
  * the primitive cannot re-introduce the tooltip-census offender either.
  */
 import Button from './Button.jsx';
-import { INK, BODY, MUTED, BORDER, CARD, FS, SP, sans } from '../theme.js';
+import { INK, BODY, MUTED, GOLD, BORDER, CARD, FS, SP, sans } from '../theme.js';
 
 /**
  * @param {object}   props
@@ -29,8 +29,11 @@ import { INK, BODY, MUTED, BORDER, CARD, FS, SP, sans } from '../theme.js';
  * @param {React.ReactNode} [props.body]  one calm line of what will appear and how
  * @param {{ label: string, onClick: () => void, Icon?: React.ComponentType, variant?: string }} [props.action]  optional single CTA
  * @param {'center'|'start'} [props.align='start']  text/box alignment
+ * @param {boolean} [props.accent=false]  render the leading glyph in the gold
+ *   accent (the gallery "designed room" treatment) rather than muted ink, so the
+ *   three gallery tabs' empty states read as one polished invitation.
  */
-export default function EmptyState({ Icon, heading, body, action, align = 'start' }) {
+export default function EmptyState({ Icon, heading, body, action, align = 'start', accent = false }) {
   const items = align === 'center' ? 'center' : 'flex-start';
   return (
     <div
@@ -42,7 +45,7 @@ export default function EmptyState({ Icon, heading, body, action, align = 'start
         background: CARD, border: `1px solid ${BORDER}`,
       }}
     >
-      {Icon && <Icon size={20} color={MUTED} aria-hidden="true" />}
+      {Icon && <Icon size={accent ? 24 : 20} color={accent ? GOLD : MUTED} aria-hidden="true" />}
       {heading && (
         <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 800, lineHeight: 1.4 }}>
           {heading}

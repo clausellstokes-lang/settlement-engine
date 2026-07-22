@@ -221,7 +221,10 @@ const CEILINGS = Object.freeze({
   // widget was deleted when the Cnocby sample card took its §01 slot — its three
   // rounded chips (borderRadius 103→100) and two GOLD_BG fills (tintedCallouts
   // 165→163) fell with it. Shrink-only lock-the-win.
-  borderRadius: 100,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again 2026-07-22 (owner gallery order 14): the two gallery sidebars'
+  // inline SidebarSection (each with a rounded count badge) collapsed into ONE
+  // shared GalleryFilterShell.SidebarSection — net −1 rounded badge (100→99).
+  borderRadius: 99,     // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 163,  // the tinted callout box — replaced by rubric-headed clerk's notes
