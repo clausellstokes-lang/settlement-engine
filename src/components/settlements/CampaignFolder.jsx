@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState, useId, lazy, Suspense } from 'react';
 import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock, ScrollText, BookOpen} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
@@ -15,6 +15,7 @@ const generateWorldBook = (...args) =>
 const CampaignImportPanel = lazy(() => import('./CampaignImportPanel.jsx'));
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
+import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -44,6 +45,16 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // also no-ops a re-entrant advance, but greying the button stops the double-click
   // from queuing a second intent + gives the DM visible feedback the tick is busy.
   const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
+  // ITEM 1 (owner order 2026-07-22: "there should be an autoresolver in the library
+  // advance time as well, it should sync with the realm's"). The Library advance
+  // already routes through the SAME chokepoint as the Realm — advanceCampaignWorld →
+  // get().advanceAutoResolve — so the SETTING is one shared store value, never a
+  // forked copy. This exposes it on the Library surface too. Flag-gated identically
+  // to the Realm toggle (auto-resolve only rides the multi-tick advance path).
+  const advanceAutoResolve = useStore(s => s.advanceAutoResolve);
+  const setAdvanceAutoResolve = useStore(s => s.setAdvanceAutoResolve);
+  const multiTickOn = flag('advanceMultiTick');
+  const autoResolveId = useId();
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -142,6 +153,33 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
+            {/* ITEM 1 — the Library's auto-resolve switch. ONE shared store value with
+                the Realm toggle (advanceAutoResolve/setAdvanceAutoResolve): setting it
+                here changes the Realm advance too, and vice-versa. A real checkbox
+                styled as a switch (keyboard + screen-reader operable). Flag-gated like
+                the Realm toggle; a global preference, so it stays operable regardless
+                of this folder's advanceability. Stops propagation so it never toggles
+                the folder. */}
+            {multiTickOn && (
+              <label
+                htmlFor={`${autoResolveId}-ar`}
+                style={{ display:'inline-flex', alignItems:'center', gap:3, fontSize:FS.xs, fontFamily:sans, color:INK, padding:'0 4px', userSelect:'none', cursor:'pointer' }}>
+                <input
+                  id={`${autoResolveId}-ar`}
+                  type="checkbox"
+                  role="switch"
+                  checked={!!advanceAutoResolve}
+                  aria-checked={!!advanceAutoResolve}
+                  aria-label="Auto-resolve every change"
+                  title="Auto-resolve every change when advancing, or pause at the big forks. Shared with the Realm advance."
+                  onChange={(e) => setAdvanceAutoResolve(e.target.checked)}
+                  // stopPropagation on the INTERACTIVE input (defensive, matching the
+                  // interval select) — never on the wrapping label (a11y lint).
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ cursor:'pointer', margin:0 }}/>
+                Auto-resolve
+              </label>
+            )}
             {/* Interval picker for the advance — Week/Month/Season/Year, mirroring
                 the World Map toolbar so the DM can choose how far one step carries
                 the campaign world. Disabled in lockstep with the button; stops
