@@ -1,5 +1,6 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { traditionHook } from '../traditions/prose.js';
+import { normalizePlotHook } from '../../lib/proseSeams.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -63,10 +64,8 @@ function textForHook(hook) {
   return String(hook);
 }
 
-/** @param {unknown} text @returns {string} */
-function cleanHook(text) {
-  return String(text || '').replace(/^\s*PLOT HOOK:\s*/i, '').trim();
-}
+// Hook-prefix cleanup is the shared display chokepoint (src/lib/proseSeams.js);
+// `normalizePlotHook` here is byte-identical to the local `cleanHook` it replaced.
 
 // ── Anti-repetition: the aggregator owns final cross-tab uniqueness ───────────
 // Generators keep their OWN source varied (the settlement-scoped draw registry in
@@ -138,7 +137,7 @@ function dedupeHooks(sorted) {
  * @param {Record<string, unknown>} hook
  */
 function push(out, hook) {
-  const text = cleanHook(hook.text);
+  const text = normalizePlotHook(hook.text);
   if (!text) return;
   out.push(/** @type {PlotHook} */ ({
     ...hook,
