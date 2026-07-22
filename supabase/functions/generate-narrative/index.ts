@@ -183,9 +183,9 @@ const MODEL_PROFILES: Record<string, ModelProfile> = {
 // Opus thesis still sees prior thesis + new state + diff — the input
 // context is the actual cost driver, not the output length.
 const CREDIT_COSTS: Record<string, number> = {
-  narrative:   3,
+  narrative:   5,
   dailyLife:   4,
-  progression: 5,
+  progression: 6,
   narrative_fast:   2,
   dailyLife_fast:   3,
   progression_fast: 4,

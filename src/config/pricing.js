@@ -62,9 +62,9 @@ const LEGACY_AI_COSTS = Object.freeze({
 });
 
 const NEW_AI_COSTS = Object.freeze({
-  narrative:   3,
+  narrative:   5,
   dailyLife:   4,
-  progression: 5,
+  progression: 6,
 });
 
 const FAST_AI_COSTS = Object.freeze({

@@ -571,9 +571,9 @@ describe('migration 114 AI-pricing config is lockstep with the client + 057', ()
     expect(case114).toEqual(case057);
     // Spot-pin the money-bearing literals so a whole-map swap can't pass silently.
     expect(case114.chronicle).toBe(2);
-    expect(case114.narrative).toBe(3);
+    expect(case114.narrative).toBe(5);
     expect(case114.dailyLife).toBe(4);
-    expect(case114.progression).toBe(5);
+    expect(case114.progression).toBe(6);
     expect(case114.narrative_fast).toBe(2);
     expect(case114.dailyLife_fast).toBe(3);
     expect(case114.progression_fast).toBe(4);

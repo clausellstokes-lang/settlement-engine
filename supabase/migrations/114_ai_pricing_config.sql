@@ -85,17 +85,19 @@ on conflict (key) do nothing;
 
 -- ── 2. Seed system_config: ai_credit_costs ─────────────────────────────────
 -- Per-profile per-feature credit costs. SEED = 057 CASE values so the charge is
--- unchanged until the first resync: standard profiles 3/4/5, fast profiles 2/3/4.
+-- standard profiles 5/4/6, fast profiles 2/3/4 (NOTE: the standard narrative/
+-- progression seed here was moved 3->5 / 5->6 by migration 180 for test-parity;
+-- the live prod reprice is 180's config UPDATE — this seed is on-conflict-do-nothing).
 insert into public.system_config (key, value)
 values ('ai_credit_costs', jsonb_build_object(
   'updatedAt', to_char(now() at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'),
   'updatedBy', 'seed',
   'profiles', jsonb_build_object(
-    -- standard (opus / sonnet / gpt-5.2 / gpt-4.1): 3 / 4 / 5
-    'anthropic_claude_opus_4_8',   jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
-    'anthropic_claude_sonnet_4_6', jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
-    'openai_gpt_5_2',              jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
-    'openai_gpt_4_1',              jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
+    -- standard (opus / sonnet / gpt-5.2 / gpt-4.1): 5 / 4 / 6 (180 reprice: narrative 3->5, progression 5->6)
+    'anthropic_claude_opus_4_8',   jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
+    'anthropic_claude_sonnet_4_6', jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
+    'openai_gpt_5_2',              jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
+    'openai_gpt_4_1',              jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
     -- fast (haiku / gpt-5-mini / gpt-5-nano / gpt-4.1-mini): 2 / 3 / 4
     'anthropic_claude_haiku_4_5',  jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4),
     'openai_gpt_5_mini',           jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4),
@@ -151,16 +153,16 @@ declare
   in_price    numeric;
   out_price   numeric;
   updated_at  text;
-  -- The 8 profile keys paired with their tier defaults (standard 3/4/5, fast 2/3/4).
+  -- The 8 profile keys paired with their tier defaults (standard 5/4/6, fast 2/3/4).
   -- This literal table IS the always-complete fallback schedule.
   defaults    jsonb := jsonb_build_object(
-    'anthropic_claude_opus_4_8',   jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
-    'anthropic_claude_sonnet_4_6', jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
+    'anthropic_claude_opus_4_8',   jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
+    'anthropic_claude_sonnet_4_6', jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
     'anthropic_claude_haiku_4_5',  jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4),
-    'openai_gpt_5_2',              jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
+    'openai_gpt_5_2',              jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
     'openai_gpt_5_mini',           jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4),
     'openai_gpt_5_nano',           jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4),
-    'openai_gpt_4_1',              jsonb_build_object('narrative', 3, 'dailyLife', 4, 'progression', 5),
+    'openai_gpt_4_1',              jsonb_build_object('narrative', 5, 'dailyLife', 4, 'progression', 6),
     'openai_gpt_4_1_mini',         jsonb_build_object('narrative', 2, 'dailyLife', 3, 'progression', 4)
   );
   feat        text;
@@ -358,9 +360,9 @@ begin
     -- 057 CASE block, verbatim (the always-available fallback).
     cost := case feature
       when 'chronicle' then 2
-      when 'narrative' then 3
+      when 'narrative' then 5
       when 'dailyLife' then 4
-      when 'progression' then 5
+      when 'progression' then 6
       when 'narrative_fast' then 2
       when 'dailyLife_fast' then 3
       when 'progression_fast' then 4

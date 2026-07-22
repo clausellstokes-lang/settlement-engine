@@ -75,7 +75,7 @@ describe.runIf(allMigrationsExist)('allocation-within-grant trigger — net-curr
     await db.exec(extractFn('097', 'enforce_allocation_within_grant'));
     await db.exec(extractConstraintTriggerDdl());
     await db.exec(extractFn('098', 'enforce_allocation_within_grant'));
-  });
+  }, 30000); // PGlite WASM cold-start is ~20s under parallel/loaded runs; match the sibling harnesses.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_grant_idempotency, public.credit_ledger, public.credit_transactions cascade;');
@@ -104,8 +104,8 @@ describe.runIf(allMigrationsExist)('allocation-within-grant trigger — net-curr
   });
 
   it('spend_credits end-to-end is not blocked by the backstop (the live-path regression)', async () => {
-    await grant(UID, 5);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3
+    await grant(UID, 7); // grant bumped 5→7 so narrative (cost 5) is still a >half-headroom PARTIAL allocation (5 of 7), the exact case 097 double-counted
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5
     expect(r.ok).toBe(true);
     expect(r.balance).toBe(2);
     expect(await balanceOf(UID)).toBe(2);

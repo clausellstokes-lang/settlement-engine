@@ -89,9 +89,9 @@ begin
 
   cost := case feature
     when 'chronicle' then 2
-    when 'narrative' then 3
+    when 'narrative' then 5
     when 'dailyLife' then 4
-    when 'progression' then 5
+    when 'progression' then 6
     when 'narrative_fast' then 2
     when 'dailyLife_fast' then 3
     when 'progression_fast' then 4

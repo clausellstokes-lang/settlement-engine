@@ -65,8 +65,11 @@ const EDGE = ['index.ts', 'prompts.ts', 'promptCache.ts', 'jsonUtils.ts']
 // ─────────────────────────────────────────────────────────────────────
 
 describe('Tier 6.2 — generate-narrative summarizeSettlement covers every aiGrounding section', () => {
+  // Some user-editable prose fields are wrapped in capStr(...) for COGS input caps
+  // (see prompts.ts). The `(?:capStr\()?` in these regexes tolerates that wrapper
+  // while still pinning the SOURCE each field is read from.
   it('surfaces settlement identity (name, tier, population)', () => {
-    expect(EDGE).toMatch(/name:\s*s\.name/);
+    expect(EDGE).toMatch(/name:\s*(?:capStr\()?s\.name/);
     expect(EDGE).toMatch(/tier:\s*s\.tier/);
     expect(EDGE).toMatch(/population:\s*s\.population/);
   });
@@ -102,16 +105,16 @@ describe('Tier 6.2 — generate-narrative summarizeSettlement covers every aiGro
 
   it('surfaces signature NPCs with goal + secret (aiGrounding payload.npcs)', () => {
     expect(EDGE).toMatch(/signatureNPCs:/);
-    expect(EDGE).toMatch(/goal:\s*n\?\.goal\?\.short/);
-    expect(EDGE).toMatch(/secret:\s*n\?\.secret\?\.what/);
+    expect(EDGE).toMatch(/goal:\s*(?:capStr\()?n\?\.goal\?\.short/);
+    expect(EDGE).toMatch(/secret:\s*(?:capStr\()?n\?\.secret\?\.what/);
   });
 
   it('surfaces stressors with type + label + summary + crisisHook (aiGrounding payload.conditions/threats)', () => {
     expect(EDGE).toMatch(/stressors:\s*stressArr\.slice\(0,\s*\d+\)\.map/);
     expect(EDGE).toMatch(/type:\s*t\?\.type/);
     expect(EDGE).toMatch(/label:\s*t\?\.label/);
-    expect(EDGE).toMatch(/summary:\s*t\?\.summary/);
-    expect(EDGE).toMatch(/crisisHook:\s*t\?\.crisisHook/);
+    expect(EDGE).toMatch(/summary:\s*(?:capStr\()?t\?\.summary/);
+    expect(EDGE).toMatch(/crisisHook:\s*(?:capStr\()?t\?\.crisisHook/);
   });
 
   it('surfaces recent tensions (aiGrounding payload.history.currentTensions)', () => {
@@ -120,18 +123,18 @@ describe('Tier 6.2 — generate-narrative summarizeSettlement covers every aiGro
   });
 
   it('surfaces historical character + founding (aiGrounding payload.history)', () => {
-    expect(EDGE).toMatch(/historicalCharacter:\s*s\.history\?\.historicalCharacter/);
-    expect(EDGE).toMatch(/founding:\s*s\.history\?\.founding/);
+    expect(EDGE).toMatch(/historicalCharacter:\s*(?:capStr\()?s\.history\?\.historicalCharacter/);
+    expect(EDGE).toMatch(/founding:\s*(?:capStr\()?s\.history\?\.founding/);
   });
 
   it('surfaces arrivalScene + pressureSentence + settlementReason (aiGrounding payload.identity neighbourhood)', () => {
-    expect(EDGE).toMatch(/arrivalScene:\s*s\.arrivalScene/);
-    expect(EDGE).toMatch(/pressureSentence:\s*s\.pressureSentence/);
+    expect(EDGE).toMatch(/arrivalScene:\s*(?:capStr\()?s\.arrivalScene/);
+    expect(EDGE).toMatch(/pressureSentence:\s*(?:capStr\()?s\.pressureSentence/);
     expect(EDGE).toMatch(/settlementReason:/);
   });
 
   it('surfaces prominentRelationship (aiGrounding payload.region)', () => {
-    expect(EDGE).toMatch(/prominentRelationship:\s*s\.prominentRelationship\?\.phrasing/);
+    expect(EDGE).toMatch(/prominentRelationship:\s*(?:capStr\()?s\.prominentRelationship\?\.phrasing/);
   });
 
   it('does NOT leak private/internal fields into the prompt summary', () => {
@@ -811,16 +814,16 @@ describe('aiGrounding contract — user direction never contaminates dossier', (
 // ─────────────────────────────────────────────────────────────────────
 
 describe('Tier 6 — credit costs match the documented contract', () => {
-  it('narrative costs 3 credits', () => {
-    expect(EDGE).toMatch(/narrative:\s*3/);
+  it('narrative costs 5 credits', () => {
+    expect(EDGE).toMatch(/narrative:\s*5/);
   });
 
   it('dailyLife costs 4 credits', () => {
     expect(EDGE).toMatch(/dailyLife:\s*4/);
   });
 
-  it('progression costs 5 credits', () => {
-    expect(EDGE).toMatch(/progression:\s*5/);
+  it('progression costs 6 credits', () => {
+    expect(EDGE).toMatch(/progression:\s*6/);
   });
 
   it('progression is the most expensive (it sees prior thesis + new state + diff)', () => {

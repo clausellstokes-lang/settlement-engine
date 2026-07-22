@@ -177,6 +177,24 @@ function resolveTerrain(config: Record<string, any> | null | undefined): string 
   return type || override || legacy || null;
 }
 
+// ── COGS control: per-field prose caps ──────────────────────────────────────
+// summarizeSettlement already caps ARRAY COUNTS (slice(0, N)), but individual
+// user-editable prose STRINGS (faction desc, NPC secret, arrivalScene, …) were
+// uncapped — and the same summary is re-sent on every one of a run's ~20 model
+// calls, so one oversized field inflates INPUT tokens on every call. capStr
+// ellipsis-truncates a string field to a generous ceiling (non-strings pass
+// through untouched); the array count caps stay. Generous by design — these
+// bounds sit well above any normal authored field, so quality is unaffected and
+// only pathological/oversized input is trimmed.
+const CAP_NAME  = 160;
+const CAP_SHORT = 280;   // goal, secret, personality, conflict issue/stakes, tension
+const CAP_DESC  = 480;   // faction / institution descriptions, crisis hooks
+const CAP_PROSE = 900;   // scene / founding / historical narrative fields
+function capStr(v: unknown, maxLen: number): unknown {
+  if (typeof v !== 'string') return v;
+  return v.length > maxLen ? `${v.slice(0, maxLen).trimEnd()}…` : v;
+}
+
 function summarizeSettlement(settlement: Record<string, unknown>): Record<string, unknown> {
   const s = settlement as Record<string, any>;
   const ps = s.powerStructure || {};
@@ -185,7 +203,7 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
   const stressArr = Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : [];
 
   return stripFencesDeep({
-    name: s.name,
+    name: capStr(s.name, CAP_NAME),
     tier: s.tier,
     population: s.population,
     terrain: resolveTerrain(s.config),
@@ -206,49 +224,49 @@ function summarizeSettlement(settlement: Record<string, unknown>): Record<string
       governingFaction: governing?.faction || governing?.name || null,
     },
     factions: factions.slice(0, 6).map((f: any) => ({
-      name: f?.faction || f?.name,
+      name: capStr(f?.faction || f?.name, CAP_NAME),
       isGoverning: !!f?.isGoverning,
-      desc: f?.desc,
+      desc: capStr(f?.desc, CAP_DESC),
       power: f?.power || f?.powerLabel,
     })),
     conflicts: (ps.conflicts || []).slice(0, 4).map((c: any) => ({
-      issue: c?.issue,
-      stakes: c?.stakes,
+      issue: capStr(c?.issue, CAP_SHORT),
+      stakes: capStr(c?.stakes, CAP_SHORT),
       factions: c?.factions,
     })),
     institutions: (s.institutions || []).slice(0, 12).map((i: any) => ({
-      name: i?.name,
+      name: capStr(i?.name, CAP_NAME),
       category: i?.category,
-      desc: i?.desc,
+      desc: capStr(i?.desc, CAP_DESC),
     })),
     signatureNPCs: (s.npcs || []).slice(0, 6).map((n: any) => ({
-      name: n?.name,
+      name: capStr(n?.name, CAP_NAME),
       role: n?.role,
-      goal: n?.goal?.short,
-      secret: n?.secret?.what,
-      personality: n?.personality,
+      goal: capStr(n?.goal?.short, CAP_SHORT),
+      secret: capStr(n?.secret?.what, CAP_SHORT),
+      personality: capStr(n?.personality, CAP_SHORT),
     })),
     stressors: stressArr.slice(0, 3).map((t: any) => ({
       type: t?.type,
       label: t?.label,
-      summary: t?.summary,
-      crisisHook: t?.crisisHook,
+      summary: capStr(t?.summary, CAP_DESC),
+      crisisHook: capStr(t?.crisisHook, CAP_DESC),
     })),
     recentTensions: (s.history?.currentTensions || []).slice(0, 4).map((t: any) => ({
       type: t?.type,
-      description: t?.description,
+      description: capStr(t?.description, CAP_SHORT),
       severity: t?.severity,
     })),
-    historicalCharacter: s.history?.historicalCharacter,
-    founding: s.history?.founding,
-    arrivalScene: s.arrivalScene,
-    pressureSentence: s.pressureSentence,
-    settlementReason: (
+    historicalCharacter: capStr(s.history?.historicalCharacter, CAP_PROSE),
+    founding: capStr(s.history?.founding, CAP_PROSE),
+    arrivalScene: capStr(s.arrivalScene, CAP_PROSE),
+    pressureSentence: capStr(s.pressureSentence, CAP_DESC),
+    settlementReason: capStr((
       typeof s.settlementReason === 'string' ? s.settlementReason :
       Array.isArray(s.settlementReason) ? s.settlementReason.filter((x: unknown) => typeof x === 'string').join(' ') :
       s.settlementReason?.primary || null
-    ),
-    prominentRelationship: s.prominentRelationship?.phrasing,
+    ), CAP_DESC),
+    prominentRelationship: capStr(s.prominentRelationship?.phrasing, CAP_DESC),
   });
 }
 
@@ -1133,6 +1151,36 @@ No preamble, no markdown.`,
   },
 };
 
+// ── COGS control: prompt-cache activation ───────────────────────────────────
+// Anthropic caches a prefix only when it meets the model's minimum cacheable
+// size: 4096 tokens on Opus 4.8 (the default profile) AND Haiku 4.5 (the fast
+// profile), 2048 on Sonnet. A run re-sends the SAME stable prefix (role + thesis
+// + settlement summary) on every one of its ~19 post-thesis calls, but a typical
+// few-KB prefix falls BELOW 4096 tokens — so the cache_control:ephemeral block is
+// SILENTLY a no-op on the default and fast paths and full input is billed on every
+// call. Padding the stable prefix past 4096 tokens turns caching on: ~19 cached
+// reads at 0.1x input decisively beat the single 1.25x cache write (a run's
+// prefix-input cost drops ~2-3x).
+//
+// The filler is DETERMINISTIC and byte-stable across a run's calls (the thesis +
+// summary are fixed within a run, so the padded prefix is byte-identical on every
+// call → a real cache prefix match), content-neutral, and clearly labeled so the
+// narrator ignores it. It is engine-internal (never surfaced to a reader), so it
+// does not touch the finite-semantics truth surface. The token estimate is chars/4
+// (the same heuristic index.ts uses); it UNDER-counts the JSON-dense summary, so
+// the true prefix token count is >= the estimate — keeping us safely above the floor.
+const CACHE_MIN_PREFIX_TOKENS = 4096;
+const CACHE_PAD_TARGET_TOKENS = 4400; // margin above the 4096 floor
+const CACHE_PAD_SENTENCE =
+  'Ignore this line; it is content-neutral filler present only to keep the cached prompt prefix at a stable, cacheable size. ';
+function cachePadding(prefixText: string): string {
+  const estTokens = Math.ceil(prefixText.length / 4);
+  if (estTokens >= CACHE_MIN_PREFIX_TOKENS) return '';
+  const neededChars = (CACHE_PAD_TARGET_TOKENS - estTokens) * 4;
+  const reps = Math.max(1, Math.ceil(neededChars / CACHE_PAD_SENTENCE.length));
+  return `\n\n[CACHE-STABILIZER — ignore this block; it is not settlement data]\n${CACHE_PAD_SENTENCE.repeat(reps)}\n[END CACHE-STABILIZER]`;
+}
+
 function buildRefinementPrompt(
   instruction: string,
   thesis: string,
@@ -1172,7 +1220,7 @@ ${stripGuidanceFences(dynamicPreservationBlock).split('\n').filter(l => l.starts
 
   // `payload` is extracted from the RAW settlement (not the fence-stripped
   // summary), so user-edited prose reaches this builder live — strip it here.
-  return `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
+  const cachePrefix = `You are a worldbuilding narrator for tabletop RPGs. You wrote the thesis below. Now you are REFINING prose in-place for specific data fields.${dynamicBlock}
 
 THESIS (inherit this voice; reference its themes subtly; do not repeat it):
 """
@@ -1180,7 +1228,8 @@ ${stripGuidanceFences(thesis)}
 """
 
 SETTLEMENT CONTEXT (for grounding only — do not repeat):
-${JSON.stringify(stripFencesDeep(summary), null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
+  return `${cachePrefix}${cachePadding(cachePrefix)}
 ${CACHE_BREAKPOINT}
 TASK:
 ${instruction}
@@ -1525,12 +1574,13 @@ function buildDailyLifePrompt(
   relationshipMemoryContext: Record<string, unknown> | null = null,
   chronicleContext: Record<string, unknown> | null = null,
 ): string {
-  return `You are a worldbuilding narrator for tabletop RPGs.
+  const cachePrefix = `You are a worldbuilding narrator for tabletop RPGs.
 ${relationshipMemoryBlock(relationshipMemoryContext)}
 ${chronicleBlock(chronicleContext)}
 
 Settlement context:
-${JSON.stringify(stripFencesDeep(summary), null, 2)}
+${JSON.stringify(stripFencesDeep(summary), null, 2)}`;
+  return `${cachePrefix}${cachePadding(cachePrefix)}
 ${CACHE_BREAKPOINT}
 ${instruction}
 ${guidanceBlock(aiGuidance)}
