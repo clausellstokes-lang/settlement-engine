@@ -71,13 +71,17 @@ function basis(v) {
 /**
  * Render a golden mesh (with AO + crease edges + per-triangle roles) to a plate from a canonical view.
  * @param {{ positions: Float32Array, normals: Float32Array, indices: Uint32Array, vertexCount: number, ao: Float32Array, creaseEdges: Uint32Array, triRole: Uint8Array, min: V3, max: V3 }} mesh
- * @param {{ view?: string, width?: number, height?: number, ss?: number, margin?: number }} [opts]
+ * @param {{ view?: string, width?: number, height?: number, ss?: number, margin?: number, roleAlbedo?: Readonly<Record<string, RGB>> }} [opts]
  * @returns {{ width: number, height: number, rgb: Uint8Array }}
  */
 export function renderMeshPlate(mesh, opts) {
   const viewName = (opts && opts.view) || 'axonNW';
   const view = CANONICAL_VIEWS[viewName];
   if (!view) throw new Error(`arch/plate: canonical view "${viewName}" unknown (axonNW|westFront|southElev)`);
+  // The role -> albedo read: default the K-1 all-stone table; a K-3 SKIN passes its own map (skins.js
+  // skinRoleAlbedo) to re-dress ANY mesh without touching geometry. Absent opts -> byte-identical to
+  // the pinned K-1 plate goldens.
+  const roleAlbedo = (opts && opts.roleAlbedo) || ROLE_ALBEDO;
   const W = (opts && opts.width) || 900, H = (opts && opts.height) || 720;
   const ss = (opts && opts.ss) || 2, margin = (opts && opts.margin) || 48;
   const bw = W * ss, bh = H * ss;
@@ -126,7 +130,7 @@ export function renderMeshPlate(mesh, opts) {
     let ndl = nx * L[0] + ny * L[1] + nz * L[2]; if (ndl < 0) ndl = 0;
     const lit = AMBIENT + DIFFUSE * ndl;
     const role = MATERIAL_ROLES[mesh.triRole[t / 3]] || 'ashlar';
-    const alb = ROLE_ALBEDO[role] || ROLE_ALBEDO.ashlar;
+    const alb = roleAlbedo[role] || roleAlbedo.ashlar || ROLE_ALBEDO.ashlar;
     const aoA = ao[ia], aoB = ao[ib], aoC = ao[ic];
     const minPX = Math.max(0, Math.floor(Math.min(ax, bx, ccx))), maxPX = Math.min(bw - 1, Math.ceil(Math.max(ax, bx, ccx)));
     const minPY = Math.max(0, Math.floor(Math.min(ay, by, ccy))), maxPY = Math.min(bh - 1, Math.ceil(Math.max(ay, by, ccy)));

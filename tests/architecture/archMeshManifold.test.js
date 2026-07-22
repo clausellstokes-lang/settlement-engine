@@ -12,6 +12,10 @@ import { emitMesh, buildArchMesh } from '../../src/domain/townMap/arch/emitter.j
 import { interpret } from '../../src/domain/townMap/arch/interpreter.js';
 import { cathedralRuleset } from '../../src/domain/townMap/arch/rulesets/cathedral.js';
 import { buttressRuleset } from '../../src/domain/townMap/arch/rulesets/buttressFragment.js';
+import { roseWindowRuleset } from '../../src/domain/townMap/arch/rulesets/roseWindow.js';
+import { vaultBayRuleset } from '../../src/domain/townMap/arch/rulesets/vaultBay.js';
+import { traceryFamiliesRuleset } from '../../src/domain/townMap/arch/rulesets/traceryFamilies.js';
+import { evilChapelRuleset } from '../../src/domain/townMap/arch/rulesets/evilChapel.js';
 
 /** odd-multiplicity (boundary) edge count over quantized positions. */
 function boundaryOdd(geo) {
@@ -52,4 +56,31 @@ describe('the byte-parity buttress is watertight', () => {
   const g = emitMesh(interpret(buttressRuleset(20, 49, 1), { tier: 2 }).terminals);
   it('zero boundary edges', () => expect(boundaryOdd(g).odd).toBe(0));
   it('AO is bounded in [0,1]', () => { let ok = true; for (const v of g.ao) if (v < 0 || v > 1) ok = false; expect(ok).toBe(true); });
+});
+
+// ── K-3 ORNAMENT rulesets: every element is a closed primitive (sweep / extrudeConvex / box / spire /
+// prism), so each assembly is watertight at every tier -- the instanced statuary + swept tracery + rib
+// tubes never open a boundary edge. ─────────────────────────────────────────────────────────────────
+const K3_RULESETS = [
+  { name: 'rose-window', rs: roseWindowRuleset() },
+  { name: 'vault-bay', rs: vaultBayRuleset() },
+  { name: 'tracery-families', rs: traceryFamiliesRuleset() },
+  { name: 'evil-chapel', rs: evilChapelRuleset() },
+];
+describe('the K-3 ornament rulesets are watertight, non-degenerate solids at every tier', () => {
+  for (const { name, rs } of K3_RULESETS) {
+    for (const tier of [0, 1, 2]) {
+      const g = buildArchMesh(rs, { seedId: 'k3', tier });
+      it(`${name} tier ${tier}: zero boundary edges (watertight)`, () => {
+        const { odd, total } = boundaryOdd(g);
+        expect(total).toBeGreaterThan(10);
+        expect(odd).toBe(0);
+      });
+      it(`${name} tier ${tier}: no NaN, no degenerate triangles, AO bounded`, () => {
+        expect(anyNaN(g.positions) || anyNaN(g.normals) || anyNaN(g.ao)).toBe(false);
+        expect(degenerate(g)).toBe(0);
+        let ok = true; for (const v of g.ao) if (v < 0 || v > 1) ok = false; expect(ok).toBe(true);
+      });
+    }
+  }
 });

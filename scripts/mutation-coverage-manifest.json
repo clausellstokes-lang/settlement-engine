@@ -550,6 +550,14 @@
     "tests/lint/swatchResolves.test.js": {
       "kind": "uncovered"
     },
+    "tests/architecture/archParamContract.test.js": {
+      "kind": "mutation",
+      "label": "kernel/param-contract covert leak"
+    },
+    "tests/architecture/archStatuaryScopeCensus.test.js": {
+      "kind": "mutation",
+      "label": "kernel/statuary named-figure"
+    },
     "tests/lint/archLodLadder.walker.test.js": {
       "kind": "mutation",
       "label": "kernel/unwalked arch ruleset"
