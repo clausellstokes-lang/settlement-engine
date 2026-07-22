@@ -72,22 +72,26 @@ describe('HomeLanding — scrollable landing', () => {
     expect(h1s[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
   });
 
-  test('all seven section headings render from the copy registry', async () => {
+  test('all six section headings render from the copy registry', async () => {
     renderLanding();
+    // Owner order 11 (2026-07-22): §02 was rebuilt from "The brief" (brief.h2) into
+    // "The visual", which renders map.h2. brief.h2 is therefore no longer a rendered
+    // section heading — the landing now shows SIX section headings (Forge, The
+    // visual, The voice, The Realm, The commons, Set out).
     const headings = [
-      landing.forge.h2, landing.brief.h2, landing.voice.h2,
-      landing.realm.h2, landing.map.h2, landing.commons.h2, landing.closer.h2,
+      landing.forge.h2, landing.voice.h2, landing.realm.h2,
+      landing.map.h2, landing.commons.h2, landing.closer.h2,
     ];
     for (const h2 of headings) {
       expect(await screen.findByText(h2)).toBeTruthy();
     }
   });
 
-  test('the anon ceiling string appears exactly once', async () => {
-    renderLanding();
-    await screen.findByText(landing.forge.ceiling); // wait for below-fold
-    expect(screen.getAllByText(landing.forge.ceiling)).toHaveLength(1);
-  });
+  // The "anon ceiling appears exactly once" test was removed: the anon size-cap
+  // disclosure (landing.forge.ceiling, "Without an account, forge up to a Town…")
+  // lived in the Instant Draft widget, which owner order 10 (2026-07-22) replaced
+  // with the Cnocby sample card. The disclosure left the landing with that widget.
+  // The copy key survives (inert) and is flagged for the owner to re-home if wanted.
 
   test('decorative chips stay spans; the forge-exact control is a real button', async () => {
     renderLanding();
