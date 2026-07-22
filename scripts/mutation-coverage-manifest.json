@@ -1315,6 +1315,10 @@
     "tests/store/commitPendingEditsTotality.walker.test.js": {
       "kind": "rationale",
       "ref": "self-proving-meta"
+    },
+    "tests/lint/heraldRouting.walker.test.js": {
+      "kind": "mutation",
+      "label": "realm/herald routing no-orphan"
     }
   },
   "meta": {

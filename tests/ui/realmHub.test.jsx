@@ -152,7 +152,11 @@ describe('RealmInspector — overlay structure', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  test('Pantheon section self-hides while religion is dormant', () => {
+  test('Faith folds the Pantheon in — always present, graceful when dormant', () => {
+    // THE HERALD (2026-07-22): the old self-hiding Pantheon door folds into Faith,
+    // which — unlike the old tab — is ALWAYS present. A deity-free realm's Faith door
+    // shows its own empty state (the spread mechanics), never a broken pantheon block
+    // or a vanished door. There is no standalone 'Pantheon' door any longer.
     const dormant = { ...simulatedCampaign, worldState: { ...simulatedCampaign.worldState, pantheon: {} } };
     render(
       <RealmInspector
@@ -165,10 +169,12 @@ describe('RealmInspector — overlay structure', () => {
         tier="premium"
       />,
     );
-    // The Pantheon tab button is absent when the ledger is empty.
+    // No standalone Pantheon door (folded into Faith).
     expect(screen.queryByRole('button', { name: 'Pantheon' })).toBeNull();
-    // …but War and Diplomacy and Chronicle remain.
-    expect(screen.getByRole('button', { name: 'War and Diplomacy' })).toBeTruthy();
+    // Faith is present even with an empty pantheon ledger (it no longer self-hides).
+    expect(screen.getByRole('button', { name: 'Faith' })).toBeTruthy();
+    // War remains a door too.
+    expect(screen.getByRole('button', { name: 'War' })).toBeTruthy();
   });
 });
 
