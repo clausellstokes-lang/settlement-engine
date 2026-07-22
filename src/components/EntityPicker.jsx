@@ -20,7 +20,7 @@
  *   maxSuggestions  - how many suggestions to show (default 12)
  */
 
-import { useMemo, useState } from 'react';
+import { useId, useMemo, useState } from 'react';
 import { X, Search, AlertTriangle } from 'lucide-react';
 import { useStore } from '../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
@@ -47,6 +47,9 @@ export default function EntityPicker({
   const registry = useMemo(() => buildRegistry(customContent), [customContent]);
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
+  // Roving active index for the aria-combobox: arrows move it, Enter adds it.
+  const [active, setActive] = useState(0);
+  const listId = useId();
 
   // Normalize value -> array for internal handling
   const refIds = useMemo(() => {
@@ -106,6 +109,23 @@ export default function EntityPicker({
 
   const removeRef = (refId) => {
     emit(refIds.filter(r => r !== refId));
+  };
+
+  // The active row CLAMPED into the live suggestion range every render — the
+  // list shrinks as the query narrows, so raw `active` can point past the end
+  // (the CommandPalette activeIdx idiom).
+  const activeIdx = suggestions.length === 0 ? -1 : Math.min(Math.max(active, 0), suggestions.length - 1);
+  const activeOptionId = activeIdx >= 0 ? `${listId}-opt-${activeIdx}` : undefined;
+
+  // Keyboard operation of the suggestion listbox (H12): arrows move the active
+  // option, Enter adds it through the SAME addRef gate the pointer path uses —
+  // no second commit path. Escape is left to bubble so a hosting modal can
+  // still close.
+  const onInputKeyDown = (e) => {
+    if (!suggestions.length) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, suggestions.length - 1)); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); addRef(suggestions[activeIdx].refId); }
   };
 
   return (
@@ -174,11 +194,17 @@ export default function EntityPicker({
           <input
             type="text"
             value={query}
-            onChange={e => setQuery(e.target.value)}
+            onChange={e => { setQuery(e.target.value); setActive(0); }}
             onFocus={() => setFocused(true)}
             onBlur={() => setTimeout(() => setFocused(false), 150)}
+            onKeyDown={onInputKeyDown}
             placeholder={placeholder}
             aria-label={placeholder}
+            role="combobox"
+            aria-expanded={focused && suggestions.length > 0}
+            aria-controls={listId}
+            aria-activedescendant={focused ? activeOptionId : undefined}
+            autoComplete="off"
             style={{
               flex: 1, border: 'none', outline: 'none', background: 'transparent',
               fontFamily: sans, fontSize: FS.sm, color: INK,
@@ -187,27 +213,40 @@ export default function EntityPicker({
         </div>
       )}
 
-      {/* Suggestion dropdown */}
+      {/* Suggestion dropdown — an aria-combobox listbox. The input keeps focus
+          and owns the keyboard (arrows + Enter via aria-activedescendant); each
+          option is role="option" with tabIndex -1 (not a tab stop), operated by
+          the input, so it is keyboard-reachable without becoming its own focus
+          target. */}
       {focused && suggestions.length > 0 && (
-        <div style={{
-          marginTop: 4,
-          border: `1px solid ${BORDER}`,
-          background: swatch.white,
-          maxHeight: 220, overflowY: 'auto',
-        }}>
-          {suggestions.map(s => (
+        <div
+          id={listId}
+          role="listbox"
+          aria-label={`${cats.join(' / ') || 'catalog'} suggestions`}
+          style={{
+            marginTop: 4,
+            border: `1px solid ${BORDER}`,
+            background: swatch.white,
+            maxHeight: 220, overflowY: 'auto',
+          }}
+        >
+          {suggestions.map((s, i) => (
             <button
               key={s.refId}
+              id={`${listId}-opt-${i}`}
               type="button"
+              role="option"
+              aria-selected={i === activeIdx}
+              tabIndex={-1}
               onMouseDown={e => { e.preventDefault(); addRef(s.refId); }}
               style={{
                 display: 'flex', alignItems: 'center', gap: 6, width: '100%',
-                padding: '5px 8px', border: 'none', background: 'transparent',
+                padding: '5px 8px', border: 'none',
+                background: i === activeIdx ? '#faf6ef' : 'transparent',
                 cursor: 'pointer', textAlign: 'left',
                 borderBottom: `1px solid ${BORDER}33`,
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+              onMouseEnter={() => setActive(i)}
             >
               <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, flex: 1 }}>
                 {s.name}

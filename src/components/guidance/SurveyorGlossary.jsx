@@ -20,40 +20,22 @@
  * fails if it ever reaches the entry closure.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, SP, sans, swatch } from '../theme.js';
 import { glossaryEntryFor } from '../../domain/display/glossary.js';
 
-const FOCUSABLE =
-  'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
-
 /** The in-place glossary card (InstitutionCard grammar; neutral ✦ glyph header). */
 function GlossaryCard({ open, entry, onClose }) {
-  const cardRef = useRef(null);
-  const restoreRef = useRef(null);
-
-  useEffect(() => {
-    if (!open) return undefined;
-    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
-    const node = cardRef.current;
-    const focusables = () => (node ? Array.from(node.querySelectorAll(FOCUSABLE)) : []);
-    (focusables()[0] || node)?.focus?.();
-    const onKey = (event) => {
-      if (event.key === 'Escape') { onClose?.(); return; }
-      if (event.key !== 'Tab' || !node) return;
-      const items = focusables();
-      if (!items.length) { event.preventDefault(); node.focus?.(); return; }
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => { window.removeEventListener('keydown', onKey); restoreRef.current?.focus?.(); };
-  }, [open, onClose]);
+  // Shared focus trap keyed on `open` ALONE (onClose read through a ref inside
+  // the hook). SurveyorGlossary passes a fresh `() => setOpen(false)` on every
+  // render; keying on that identity — as the old hand-rolled effect did — made a
+  // background re-render re-run the trap and yank focus back to the first
+  // control mid-read. Routing through the primitive retires that bug class.
+  const cardRef = useDialogFocusTrap(open, onClose);
 
   if (!open || !entry) return null;
   const href = `/compendium?tab=${encodeURIComponent(entry.tab)}#${encodeURIComponent(entry.anchor)}`;
