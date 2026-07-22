@@ -1,6 +1,8 @@
 # Compendium Completion Plan
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - PROGRAM COMPLETE (2026-07-22). The 63-gap audit is closed across 13 waves (A-M). Final leg on `claude/compendium-completion-3` off composite-r4 `bd796559` (C-H folded): Wave I (power: legitimacy ladder + 13 faction archetypes + governance stability, `e3c93c36`) · J (safety + defense-readiness ladders, `66d65c93`) · K (map lens readings + Illustrated 6th + district bands + calamity scale/kFactor, `f581838a`) · L (settlement lifecycle + NPC goals + always-visible ops klass/scope legend, `e97eaf3f`) · M (power-structure transfer causes + corruption machinery + archetype cond re-words + magic-buffer/institutions prose, `4b645cd0`). Every wave closure 1,039,961 = Δ0.
+> - ⚠️ PRE-EXISTING REDS on the base composite-r4 `bd796559` (NOT this program's; a temp-worktree run of the clean base fails identically): `tests/lint/domainAnyCastBaseline` flags `src/domain/dossier/settlementWorldChronicle.js` (7 any-holes) + `tests/lint/mutationCoverageManifest` flags `tests/lint/autoresolveTwoMount.walker.test.js` + `tests/store/commitPendingEditsTotality.walker.test.js` (unregistered). From a parallel-lane fold; flagged for the owner. Every compendium-family test is green.
 > - Continuation branch `claude/compendium-completion-2` off composite-r4 `95f57988` (A+B folded). Baseline closure now 1,039,961.
 > - Wave H (shipped, `bd5eac94`) — search drift closed: tier keywords derive from CD.tiers (stale bands gone), 'affluent' phantom removed, the 13 W6 ladders now indexed + deep-linkable (/compendium/ladder-*), +compendiumSearchDrift walker. Gate green; closure Δ0.
 > - Wave G (shipped, `d7db7a16`) — Food Security ladder (foodGenerator-pinned) + Stressor Severity/Relief Magnitude dial ladders; the glossary severity/magnitude DEFS de-em-dashed (voice win, glossary.js em 5->0), docs/glossary.md regenerated. +compendiumFoodSecurity pin. Gate green; closure Δ0.
@@ -68,7 +70,7 @@ Legitimacy ladder, governance-stability vocabulary, faction-archetypes (13), pow
 ### Wave H — LOW (risk: low)
 searchIndex drift (affluent phantom, stale tier pops, derive from CD, all-15 stress entries, ladder search entries) + walker; power-tab intro formula; NPC growth goal vocabulary; resources & goods pointer; the two dead-link LOW anchors.
 
-## Wave G remainder (MED, not yet done — the named G items Food Security + dials ARE shipped)
+## Wave G remainder — ALL SHIPPED (waves I-M). The list below is historical.
 These remaining MED ladders/sections follow the exact same W6 + pin recipe; each spec'd with truthSource in the audit:
 - Legitimacy ladder (Endorsed/Approved/Tolerated/Contested/Legitimacy Crisis; factionDynamics.js:111-131). Power tab.
 - Governance-stability vocabulary (governanceNarrative.js:108-165) + power-structure concept entry (rulingStructure.js:743-760, transfer causes rulingPower.js:246). Power tab. (Coordinate: the power-strata rework folded at d6a9cefc — verify current Power-tab state first.)
