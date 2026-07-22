@@ -41,9 +41,15 @@ export function classifyTuningProposal(proposal, registry = AUTO_TUNABLE) {
   const reasons = [];
   const p = proposal && typeof proposal === 'object' ? proposal : /** @type {TuningProposal} */ ({});
 
-  // GOLDEN LAW — a golden/same-seed shift is ALWAYS lane B, no exceptions.
-  if (p.soak && p.soak.shiftsGolden === true) {
-    return { lane: LANE_B, reasons: ['golden/same-seed-shifting → owner-signed forever (GOLDEN LAW)'] };
+  // GOLDEN LAW (fail-CLOSED) — a golden/same-seed shift is ALWAYS lane B. M16: the
+  // guard used strict `=== true`, so a truthy-but-non-boolean shiftsGolden (a string
+  // 'yes', a 1, a truthy object) — or a soak that RAN but omitted the field — slipped
+  // through as "not golden-shifting" and could auto-apply. The GOLDEN-LAW gate now
+  // fails closed: it trusts ONLY an explicit `shiftsGolden === false` (an affirmative
+  // proof the change is golden-safe). Anything else on a present soak is not disproven
+  // → owner-signed. (An absent soak is caught by the green check below.)
+  if (p.soak && p.soak.shiftsGolden !== false) {
+    return { lane: LANE_B, reasons: ['golden/same-seed shift not disproven → owner-signed forever (GOLDEN LAW, fail-closed)'] };
   }
 
   const entry = Array.isArray(registry) ? registry.find(e => e && e.id === p.id) : undefined;

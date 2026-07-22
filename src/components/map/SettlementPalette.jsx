@@ -13,7 +13,7 @@ import { formatCount } from '../../domain/formatNumber.js';
 import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
-import { threatDisplay } from './settlementThreat.js';
+import { threatDisplay, isCalmThreat } from './settlementThreat.js';
 
 // S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
 // was orphaned when the owner's create-page walk fix unmounted its only card
@@ -239,8 +239,9 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
   const tier = save.tier || settlement.tier || EMPTY_VALUE;
   const pop  = settlement.population || 0;
   const threat = settlement.config?.monsterThreat;
-  // 'frontier' is the calm baseline both surfaces suppress; threatDisplay
-  // returns its tones but the pill below self-gates on threat !== 'frontier'.
+  // 'frontier' and 'heartland' are the calm baselines both surfaces suppress
+  // (isCalmThreat); threatDisplay returns tones but the pill below self-gates
+  // via !isCalmThreat so neither calm tier renders a chip.
   const threatTone = threatDisplay(threat);
   // Stress can be an array (stressors[]) or a single object — both
   // shapes surface a label.
@@ -333,7 +334,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
             display: 'flex', alignItems: 'center', gap: 4,
             marginTop: 3, flexWrap: 'wrap',
           }}>
-            {threatTone && threat !== 'frontier' && (
+            {threatTone && !isCalmThreat(threat) && (
               <span style={{
                 // Fill/border use the lighter hue; the LABEL uses the audited
                 // -text step so the word clears 4.5:1 on the card (P7) — the

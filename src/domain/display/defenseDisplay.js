@@ -12,25 +12,59 @@
  */
 
 import { buildThreatAssessment } from './threatAssessment.js';
+import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+
+// The active-military-status POSTURE per stress type. This DISPLAY text lives in
+// this lazy display module — NOT in data/stressTypes.js, which sits in the eager
+// first-paint `data` chunk (the constitutional closure ratchet forbids growing it,
+// prior art: galleryMapsFilters.js). The COLOUR stays single-sourced from the
+// producer (each stress type's own `colour`). The two walkers below pin this map
+// to the producer's exact stress vocabulary so it can never fall behind again.
+/** @type {Readonly<Record<string, string>>} */
+const MILITARY_POSTURE = Object.freeze({
+  under_siege:           'ACTIVE SIEGE',
+  famine:                'INTERNAL PRESSURE',
+  occupied:              'UNDER OCCUPATION',
+  politically_fractured: 'COMMAND SPLIT',
+  indebted:              'UNDER TRIBUTE',
+  recently_betrayed:     'SECURITY COMPROMISED',
+  infiltrated:           'INFILTRATION ACTIVE',
+  plague_onset:          'QUARANTINE ACTIVE',
+  succession_void:       'SUCCESSION CONTESTED',
+  monster_pressure:      'BEAST PRESSURE',
+  insurgency:            'INSURGENCY ACTIVE',
+  religious_conversion:  'RELIGIOUS UPHEAVAL',
+  slave_revolt:          'REVOLT ACTIVE',
+  wartime:               'WAR FOOTING',
+  mass_migration:        'MIGRATION SURGE',
+});
 
 /**
  * The ACTIVE-MILITARY-STATUS stress set (pdf-4) — the single source of truth for
  * which stressor types raise a military-status callout, and the posture + colour
  * shown for each. Consumed by BOTH the web DefenseTab and the PDF defenseSlice so
- * the printed dossier and the screen can never drift (they used to disagree in
- * BOTH directions: the PDF showed wartime/insurgency the screen never did, and
- * missed famine/politically_fractured/recently_betrayed/plague_onset the screen
- * shows — the last most visible now that M11a pestilence lands `plague_onset`).
- * Keyed by the stressor TYPE the engine emits (not an icon/key sentinel).
+ * the printed dossier and the screen can never drift.
+ *
+ * Cycle-3 H3: this used to be a hand-maintained literal covering only 6 of the 15
+ * stress types the generator emits, so a settlement under insurgency/slave_revolt/
+ * wartime/monster_pressure/mass_migration/religious_conversion/indebted/
+ * succession_void/infiltrated raised NO callout. It is now DERIVED over the
+ * producer table (data/stressTypes.js STRESS_TYPE_MAP) — one entry per registered
+ * stress type, colour from the producer, posture from MILITARY_POSTURE above — so
+ * it covers EVERY type. The vocabularyTotality walker
+ * (tests/lint/vocabularyTotality.walker.test.js) pins the key-set correspondence
+ * and non-empty postures; the stress-type registration walker asserts full
+ * coverage. Keyed by the stressor TYPE the engine emits (not an icon/key sentinel).
+ * @type {Readonly<Record<string, { posture: string, colour: string }>>}
  */
-export const DEFENSE_STRESS_STATUS = Object.freeze({
-  under_siege:           { posture: 'ACTIVE SIEGE',         colour: '#8b1a1a' },
-  famine:                { posture: 'INTERNAL PRESSURE',    colour: '#8b5a1a' },
-  occupied:              { posture: 'UNDER OCCUPATION',     colour: '#4a3a6b' },
-  politically_fractured: { posture: 'COMMAND SPLIT',        colour: '#5a4a1a' },
-  recently_betrayed:     { posture: 'SECURITY COMPROMISED', colour: '#6b1a2a' },
-  plague_onset:          { posture: 'QUARANTINE ACTIVE',    colour: '#2a5a2a' },
-});
+export const DEFENSE_STRESS_STATUS = Object.freeze(
+  Object.fromEntries(
+    Object.entries(STRESS_TYPE_MAP).map(([type, data]) => [
+      type,
+      { posture: MILITARY_POSTURE[type], colour: data.colour },
+    ]),
+  ),
+);
 
 /**
  * One named force entry from defenseProfile.institutions.

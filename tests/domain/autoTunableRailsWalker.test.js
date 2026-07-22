@@ -129,6 +129,30 @@ describe('lane classifier', () => {
     expect(classifyTuningProposal({ id: GOOD_ENTRY.id, currentValue: 0.50, proposedValue: 0.48, soak: greenSoak }, upOnly).lane).toBe(LANE_B);
     expect(classifyTuningProposal({ id: GOOD_ENTRY.id, currentValue: 0.50, proposedValue: 0.52, soak: greenSoak }, upOnly).lane).toBe(LANE_A);
   });
+
+  // ── M16 (cycle-3): the GOLDEN-LAW gate fails CLOSED ──────────────────────────
+  // An otherwise-perfect proposal (registered, in-range, in-step) whose soak did NOT
+  // affirmatively prove golden-safety must NOT auto-apply. The old `=== true` guard
+  // let a truthy-but-non-boolean shiftsGolden — or an omitted field — slip through.
+  it('a TRUTHY-but-non-boolean shiftsGolden is lane B (fail-closed, was fail-open)', () => {
+    for (const bad of ['yes', 1, {}, 'true']) {
+      const r = classifyTuningProposal(
+        { id: GOOD_ENTRY.id, currentValue: 0.50, proposedValue: 0.52, soak: { green: true, shiftsGolden: bad } }, registry);
+      expect(r.lane, `shiftsGolden=${JSON.stringify(bad)} must be lane B`).toBe(LANE_B);
+      expect(r.reasons.join(' ')).toMatch(/GOLDEN LAW/);
+    }
+  });
+  it('a green + in-range soak that OMITS shiftsGolden is lane B (not proven golden-safe)', () => {
+    const r = classifyTuningProposal(
+      { id: GOOD_ENTRY.id, currentValue: 0.50, proposedValue: 0.52, soak: { green: true } }, registry);
+    expect(r.lane).toBe(LANE_B);
+    expect(r.reasons.join(' ')).toMatch(/GOLDEN LAW/);
+  });
+  it('ONLY an explicit shiftsGolden === false is trusted as golden-safe (negative control)', () => {
+    expect(classifyTuningProposal(
+      { id: GOOD_ENTRY.id, currentValue: 0.50, proposedValue: 0.52, soak: { green: true, shiftsGolden: false } }, registry).lane)
+      .toBe(LANE_A);
+  });
 });
 
 describe('the weekly tuning job (pure; applies nothing)', () => {

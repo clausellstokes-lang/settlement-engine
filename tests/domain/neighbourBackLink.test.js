@@ -131,6 +131,30 @@ describe('buildNeighbourBackLink', () => {
     expect(ownLink.relationshipType).toBe('neutral');
   });
 
+  // ── M15 (cycle-3): role-perspective symmetry ──────────────────────────────
+  // The partner-side entry DESCRIBES the new settlement, so its description must
+  // name the new settlement's OWN role (sourceRole), not the partner's role
+  // (targetRole). For an asymmetric link (overlord/vassal) the two roles differ,
+  // so the old targetRole inverted the standing — an overlord read as a vassal.
+  test('the partner-side description names the NEW settlement\'s role, not the partner\'s (asymmetric)', () => {
+    const entry = newEntry({ name: 'Eastgate', tier: 'town', relationshipType: 'overlord' });
+    const result = buildNeighbourBackLink(entry, [partner]);
+    expect(result).toBeTruthy();
+
+    // The new settlement (Westford) is the OVERLORD; the partner (Eastgate) is the vassal.
+    const ownLink = result.settlement.neighbourNetwork.find((n) => n.id === 'partner-1');
+    const partnerLink = result.partner.settlement.neighbourNetwork.find((n) => n.id === 'new-1');
+    expect(ownLink.localRelationshipRole).toBe('overlord');   // new settlement's role
+    expect(partnerLink.localRelationshipRole).toBe('vassal');  // partner's own role (metadata)
+
+    // Both descriptions narrate the NEW settlement's standing → both say 'overlord'.
+    expect(ownLink.description).toContain('overlord');
+    expect(partnerLink.description).toContain('overlord');       // the M15 fix
+    // …and the partner-side description must NOT mislabel the overlord as a vassal.
+    expect(partnerLink.description).not.toContain('vassal');
+    expect(partnerLink.description).toBe('Westford has overlord standing toward this settlement.');
+  });
+
   test('throws a clear invariant error when the partner save carries no id anywhere', () => {
     // Degenerate shape unreachable in production (every persisted save row has a
     // primary key): the partner has neither a top-level id nor a settlement id,

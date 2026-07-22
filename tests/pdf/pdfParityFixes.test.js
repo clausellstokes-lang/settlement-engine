@@ -7,12 +7,16 @@
  *         (their real home) and are EXCLUDED from the violations list, so authored
  *         plot seeds stop printing as garbled STRUCTURAL VIOLATIONS.
  *  pdf-4  The PDF defense military-status set matches the web DefenseTab exactly
- *         (via the shared DEFENSE_STRESS_STATUS) — incl. plague_onset, excl. wartime.
+ *         (via the shared DEFENSE_STRESS_STATUS). Cycle-3 H3: that shared set is now
+ *         DERIVED from the producer STRESS_TYPE_MAP and covers EVERY registered stress
+ *         type (was 6 of 15) — so wartime/insurgency/etc now raise a callout on BOTH
+ *         surfaces, where the earlier pdf-4 fix had instead shrunk the PDF to 6.
  */
 import { describe, test, expect } from 'vitest';
 import { noteText, label } from '../../src/pdf/lib/format.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 
 describe('pdf-2 — noteText coerces object-shaped notes to prose', () => {
   test('a coherence note { type, severity, note } prints its note, not "Power Economic"', () => {
@@ -81,14 +85,16 @@ describe('pdf-4 — defense military-status set matches the web DefenseTab', () 
     expect(vm.defense.militaryStress.type).toBe('plague_onset');
   });
 
-  test('wartime / insurgency no longer raise a callout the screen never showed', () => {
+  test('wartime / insurgency NOW raise a callout on both surfaces (H3 — was dark)', () => {
     const vmWar = buildViewModel({ settlement: settlementWith({ stress: [{ type: 'wartime', label: 'War' }] }) });
-    expect(vmWar.defense.militaryStress).toBeFalsy();
+    expect(vmWar.defense.militaryStress).toBeTruthy();
+    expect(vmWar.defense.militaryStress.type).toBe('wartime');
+    const vmIns = buildViewModel({ settlement: settlementWith({ stress: [{ type: 'insurgency', label: 'Uprising' }] }) });
+    expect(vmIns.defense.militaryStress).toBeTruthy();
+    expect(vmIns.defense.militaryStress.type).toBe('insurgency');
   });
 
-  test('the shared constant carries exactly the DefenseTab set', () => {
-    expect(Object.keys(DEFENSE_STRESS_STATUS).sort()).toEqual(
-      ['famine', 'occupied', 'plague_onset', 'politically_fractured', 'recently_betrayed', 'under_siege'],
-    );
+  test('the shared constant covers EVERY registered stress type (H3 — derived from the producer)', () => {
+    expect(Object.keys(DEFENSE_STRESS_STATUS).sort()).toEqual(Object.keys(STRESS_TYPE_MAP).sort());
   });
 });

@@ -125,7 +125,13 @@ export function buildNeighbourBackLink(entry, existingSaves) {
     id: saveId, linkId, name: entry.name, neighbourName: entry.name,
     neighbourTier: entry.tier, tier: entry.tier,
     ...relationshipLinkMetadata(definition, roles.targetRole),
-    description: `${entry.name} has ${roles.targetRole.replace(/_/g, ' ')} standing toward this settlement.`,
+    // M15: the SUBJECT of this description is the NEW settlement (entry.name), so it
+    // must name the NEW settlement's role — roles.sourceRole — not the partner's
+    // (roles.targetRole). For asymmetric links (overlord/vassal, patron/client)
+    // sourceRole !== targetRole, so the old targetRole INVERTED the described
+    // standing (an overlord read as "has vassal standing"). The link metadata still
+    // carries targetRole — that is the PARTNER's own local role in its network.
+    description: `${entry.name} has ${roles.sourceRole.replace(/_/g, ' ')} standing toward this settlement.`,
     bidirectional: true,
   };
 

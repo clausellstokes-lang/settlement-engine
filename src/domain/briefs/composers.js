@@ -285,12 +285,27 @@ export function dramaticIronyBrief({ settlement, worldState = null } = {}) {
     });
   }
 
-  // Rumors the town believes that the ground truth contradicts.
+  // Rumors whose ground truth diverges from what the town believes. H14: the old
+  // read looked for sibling scalars `r.belief` / `r.truth` and compared them, but
+  // settlementRumors returns the belief AS the projection itself (headline/detail/
+  // whereId/…) with a nested `truth` OBJECT and NO `belief` key — so `r.belief`
+  // was always undefined and the ENTIRE rumor-irony branch was dead. Read the real
+  // shape: the projection's rendered `headline` is what the town believes; the
+  // `truth` block carries the true headline (when the DM feed joins) plus the
+  // `divergence` reasons. An irony exists wherever the telling diverges from truth.
   const rumorsTruth = settlementRumors({ worldState, settlementId: sid, includeGroundTruth: true });
-  for (const r of rumorsTruth) {
-    if (r && r.truth != null && r.belief != null && r.truth !== r.belief) {
-      ironies.push({ kind: 'rumor', believed: r.belief, truth: r.truth, subject: r.subject ?? null });
-    }
+  for (const raw of rumorsTruth) {
+    const r = /** @type {{ headline?: unknown, whereId?: unknown, truth?: { divergence?: unknown, trueHeadline?: unknown } | null }} */ (raw);
+    const truth = r.truth && typeof r.truth === 'object' ? r.truth : null;
+    const divergence = truth && Array.isArray(truth.divergence) ? truth.divergence : [];
+    if (divergence.length === 0) continue;
+    ironies.push({
+      kind: 'rumor',
+      believed: typeof r.headline === 'string' ? r.headline : null,
+      truth: truth && typeof truth.trueHeadline === 'string' ? truth.trueHeadline : null,
+      divergence,
+      whereId: r.whereId ?? null,
+    });
   }
 
   return assembleBrief({

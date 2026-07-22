@@ -23,6 +23,7 @@ import { resolve } from 'node:path';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { STRESS_TYPE_META } from '../../src/data/stressTypesMeta.js';
+import { DEFENSE_STRESS_STATUS } from '../../src/domain/display/defenseDisplay.js';
 import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
 import { STRESS_SEVERITY_WEIGHT } from '../../src/generators/stressGenerator.js';
 import { STRESS_FLAVOR } from '../../src/generators/power/settlementNarrative.js';
@@ -40,11 +41,10 @@ const EXEMPTIONS = {
   // (and the 5 new types, whose institution couplings are BOOSTS not suppressors)
   // legitimately have no entry. (src/generators/steps/stressConfirmPass.js)
   SUPPRESSOR_KEYWORDS: 'institution-suppressed types only',
-  // UI display posture table with a graceful fallback; partial by design and outside
-  // the generation surface. pdf-4 (main) extracted it from DefenseTab into the shared
-  // display module as DEFENSE_STRESS_STATUS (DefenseTab now aliases it), so print and
-  // screen can't drift. (src/domain/display/defenseDisplay.js)
-  DEFENSE_STRESS_STATUS: 'UI display, partial by design',
+  // NOTE: DEFENSE_STRESS_STATUS was exempted here as "UI display, partial by design"
+  // when it hand-mapped only 6 of the 15 stress types (cycle-3 H3). It is now DERIVED
+  // from STRESS_TYPE_MAP (posture = each type's `militaryPosture`), so it covers EVERY
+  // registered type — it graduated to the full-coverage `importedTables` set below.
   // Deliberately the 5 newer types only (an override layer). (npcGenerator.js)
   STRESS_GOAL_OVERRIDES: 'new-types override layer by design',
 };
@@ -80,8 +80,6 @@ describe('stress-type registration manifest (structural prevention)', () => {
     // renamed/deleted table cannot leave a stale silent exemption behind.
     const srcAll =
       read('src/generators/steps/stressConfirmPass.js') +
-      read('src/components/new/tabs/DefenseTab.jsx') +
-      read('src/domain/display/defenseDisplay.js') +
       read('src/generators/npcGenerator.js');
     for (const name of Object.keys(EXEMPTIONS)) {
       // Accept both a plain object literal and an Object.freeze()-wrapped table
@@ -99,6 +97,9 @@ describe('stress-type registration manifest (structural prevention)', () => {
     STRESS_SEVERITY_WEIGHT,
     STRESS_FLAVOR,
     STRESS_TO_TENSION,
+    // Cycle-3 H3: the active-military-status posture table, now DERIVED from
+    // STRESS_TYPE_MAP, must cover every registered stress type (was 6 of 15).
+    DEFENSE_STRESS_STATUS,
   };
   for (const [name, table] of Object.entries(importedTables)) {
     it(`${name} covers every registered stress type`, () => {

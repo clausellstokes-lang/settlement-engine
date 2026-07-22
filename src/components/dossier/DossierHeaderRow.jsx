@@ -3,7 +3,7 @@ import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
-import { threatDisplay } from '../map/settlementThreat.js';
+import { threatDisplay, isCalmThreat } from '../map/settlementThreat.js';
 import { emblem } from '../../design/organic/ornament/compose.js';
 
 // Persistent at-the-table header facts (tier / population / trade route) read
@@ -77,7 +77,7 @@ export default function DossierHeaderRow({
                     parchment-toned for the dark header bar; only the label is
                     unified. The text label carries the threat alongside the
                     tone, so the state is never color-only. */}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
+                {settlement.config?.monsterThreat && !isCalmThreat(settlement.config.monsterThreat) && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
                 {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
               </div>
             </div>
