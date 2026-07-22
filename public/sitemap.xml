@@ -678,6 +678,71 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/ladder-prosperity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-priority</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-chain-status</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-coherence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-food-security</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-stability</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-strain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-severity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magnitude</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-capture</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-pantheon-rank</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magic-level</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/ladder-magic-legality</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-applyevent</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

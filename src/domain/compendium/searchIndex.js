@@ -59,15 +59,21 @@ function slug(s) {
 // tabs render. They're concise on purpose — enough to match a query and
 // route the reader, not a second copy of the prose.
 
-const TIER_ENTRIES = [
-  ['Thorp', 'smallest hamlet 20-80 single institution subsistence'],
-  ['Hamlet', '80-400 local subsistence minimal trade'],
-  ['Village', '400-900 surplus weekly market guilds begin'],
-  ['Town', '900-4000 specialization guilds form'],
-  ['City', '4000-25000 institutional diversity factional politics'],
-  ['Metropolis', '25000+ largest all systems active complex factions'],
-].map(([term, kw]) => ({
-  id: `tier-${slug(term)}`, term, category: 'Tier', tab: 'tiers', anchor: 'tiers', keywords: kw,
+// Tier keywords DERIVE their population range from CD.tiers (the engine
+// POPULATION_RANGES), so the old stale bands ('Thorp 20-80', 'Town 900-4000') can
+// never resurrect in the search surface. Only the qualitative keywords are authored.
+/** @type {Record<string, string>} */
+const TIER_KW = {
+  thorp: 'smallest single institution subsistence',
+  hamlet: 'local subsistence minimal trade',
+  village: 'surplus weekly market guilds begin',
+  town: 'specialization guilds form',
+  city: 'institutional diversity factional politics',
+  metropolis: 'largest all systems active complex factions',
+};
+const TIER_ENTRIES = CD.tiers.map((t) => ({
+  id: `tier-${slug(t.label)}`, term: t.label, category: 'Tier', tab: 'tiers', anchor: 'tiers',
+  keywords: `${TIER_KW[t.id] || ''} ${t.min}-${t.max}`,
 }));
 
 const ROUTE_ENTRIES = [
@@ -93,7 +99,7 @@ const THREAT_ENTRIES = [
 }));
 
 const ECONOMY_ENTRIES = [
-  ['Prosperity Tiers', 'subsistence to affluent derived output wealth'],
+  ['Prosperity Tiers', 'subsistence to wealthy derived output wealth'],
   ['Priority Sliders', 'shift institutional probability economy military religion magic criminal'],
   ['Exports & Imports', 'surplus production gaps trade vulnerability dependency'],
   ['Supply Chains', 'linked production sequences broken input degrades'],
@@ -208,6 +214,20 @@ const CALAMITY_ENTRIES = CD.calamity.flavors.map((f) => ({
   keywords: `${f.key} disaster great calamity`,
 }));
 
+// The W6 band ladders (prosperity, priority, chain status, coherence, food security,
+// stability, strain, severity, magnitude, capture, pantheon rank, magic level/legality)
+// were unreachable via the search box. Derive one entry per ladder from CD.bandLadders
+// (registry-derived, zero-drift), so searching a rung name ('Struggling', 'Capture',
+// 'Forbidden') routes to the ladder's tab.
+const LADDER_ENTRIES = CD.bandLadders.map((l) => ({
+  id: `ladder-${slug(l.id)}`,
+  term: l.concept,
+  category: 'Concept',
+  tab: l.tab,
+  anchor: l.anchor,
+  keywords: `${l.levels.map((x) => x.name).join(' ')} ${l.blurb}`,
+}));
+
 /**
  * The flat, frozen index. Order here is the stable tiebreak order when
  * two entries score equally (after term-length).
@@ -225,6 +245,7 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
+  ...LADDER_ENTRIES,
   ...OPERATION_ENTRIES,
   ...LENS_ENTRIES,
   ...CALAMITY_ENTRIES,
