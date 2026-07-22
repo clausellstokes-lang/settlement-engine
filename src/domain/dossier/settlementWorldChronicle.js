@@ -132,7 +132,9 @@ export function settlementWorldPulseEntries(worldState, saveId, { savedSettlemen
       // a filter+map, which strict TS widens to (string|undefined)[]).
       /** @type {string[]} */
       const affected = [];
-      for (const id of touched) { const nm = nameById.get(id); if (nm) affected.push(nm); }
+      /** @type {string[]} */
+      const affectedIds = [];
+      for (const id of touched) { const nm = nameById.get(id); if (nm) { affected.push(nm); affectedIds.push(id); } }
       const containingId = o?.targetSaveId ? String(o.targetSaveId) : sid;
       out.push({
         id: `${rid}::${o?.id ?? `row${i}`}`,
@@ -152,6 +154,10 @@ export function settlementWorldPulseEntries(worldState, saveId, { savedSettlemen
             factionId: o?.factionId || null,
           },
           affectedSettlements: [...new Set(affected)].sort(byStr),
+          // The affected settlement SAVE IDS beside their names, so the Chronicle
+          // can LINK each affected settlement to its dossier (the address chain's
+          // navigable affected-settlements part) without a name→id round-trip.
+          affectedSettlementIds: [...new Set(affectedIds)].sort(byStr),
           reason: (Array.isArray(o?.reasons) && o.reasons.length) ? String(o.reasons[0]) : null,
           eventKind: o?.candidateType || o?.impactKind || o?.type || o?.kind || null,
         },

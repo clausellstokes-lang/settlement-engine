@@ -9,6 +9,7 @@ import { ShieldAlert } from 'lucide-react';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
 import { human, percent } from './WorldPulseData.js';
 import Button from '../primitives/Button.jsx';
+import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 
 export function Pill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
@@ -79,7 +80,7 @@ export function NameAttackerControl({ stressor, onName, busy }) {
   );
 }
 
-export function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [] }) {
+export function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [], subject = null, affectedIds = [] }) {
   const major = tone === 'major' || severity >= 0.7;
   return (
     <article style={{
@@ -116,8 +117,16 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
               {summary}
             </p>
           )}
+          {/* THE NEWS ADDRESS LAW: the subject's linked address chain
+              (settlement › power › faction › npc), as deep as the record
+              identifies. Renders nothing when the outcome names no addressable
+              subject (a subjectless event) — no fabrication. */}
+          {subject && <AddressChain descriptor={subject} style={{ marginTop: 6 }} />}
         </div>
       </div>
+      {affectedIds.length > 0 && (
+        <AffectedSettlements ids={affectedIds} />
+      )}
       {involved.length > 0 && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {involved.map((entity, index) => <EntityPill key={`${entity.label}-${index}`} label={entity.label} value={entity.value} />)}

@@ -34,6 +34,8 @@ import { hasPantheon } from './PantheonPanel.jsx';
 import { BODY, BORDER, CARD, CARD_ALT, FS, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
+import { RealmEntityContext } from './RealmEntityContext.jsx';
+import { useRealmEntityNav } from './useRealmEntityNav.js';
 
 const RealmDashboard = lazy(() => import('./RealmDashboard.jsx'));
 const LiveWarStatus  = lazy(() => import('./LiveWarStatus.jsx'));
@@ -131,6 +133,11 @@ export default function RealmInspector({
 }) {
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
+  // THE NEWS ADDRESS LAW (owner 2026-07-22): every inspector surface names entities
+  // that live in some settlement of the realm. This provides the realm-wide entity
+  // web + cross-settlement navigator to ALL section bodies below, so a named entity
+  // renders as a link that opens its card in its own dossier.
+  const realmNav = useRealmEntityNav();
   const showPantheon = hasPantheon(campaign);
   const showResolve = flag('warEconomySurfacing');
   const showTreaty = hasTreaties(campaign);
@@ -286,6 +293,7 @@ export default function RealmInspector({
       </div>
 
       <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.md }}>
+       <RealmEntityContext.Provider value={realmNav}>
         <Suspense fallback={<div style={{ color: BODY, fontFamily: sans, fontSize: FS.sm }}>Loading…</div>}>
           {activeSection === 'dashboard' && (
             <RealmDashboard
@@ -343,6 +351,7 @@ export default function RealmInspector({
               : <CampaignEmptyState lead="The chronicler's letter sums a live campaign's news for your next session." {...emptyHandlers} />
           )}
         </Suspense>
+       </RealmEntityContext.Provider>
       </div>
       </>
       )}

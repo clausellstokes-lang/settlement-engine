@@ -365,6 +365,14 @@ check_caught_planted "determinism/Math.random in pdf export" \
   "export const _m = Math.random();" \
   "npx vitest run tests/lint/pdfEntropyGuard.test.js"
 
+# 36. INSPECTOR-ADDRESS-WEB no-fabrication — the address-chain resolver's degrade
+#     path is made to INVENT a faction for an unmatched npc (in place of dropping
+#     the level). The no-fabrication walker must red: a fabricated faction/power
+#     level naming no real faction of the settlement is the exact violation of the
+#     owner's "never guess a faction" constraint (THE NEWS ADDRESS LAW, 2026-07-22).
+perl -0pi -e "s/return null; \/\/ no-fabrication: an unmatched npc DROPS the faction level, never invents one/return { id: 'zzz.fab', currentName: 'zzz_fabricated_faction', type: 'faction', tab: 'power' };/" src/domain/dossier/realmEntityWeb.js
+check_caught "address-web/fabricated faction level" src/domain/dossier/realmEntityWeb.js "npx vitest run tests/lint/realmEntityWebNoFabrication.walker.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

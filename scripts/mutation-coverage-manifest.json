@@ -551,6 +551,10 @@
     "tests/lint/rawButtonBaseline.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/realmEntityWebNoFabrication.walker.test.js": {
+      "kind": "mutation",
+      "label": "address-web/fabricated faction level"
+    },
     "tests/lint/rawColorLiteral.test.js": {
       "kind": "uncovered"
     },

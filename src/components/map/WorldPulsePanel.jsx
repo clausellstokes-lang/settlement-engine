@@ -8,11 +8,13 @@ import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
   attackerEntity,
+  collectSettlementIds,
   digestDetails,
   human,
   involvedEntities,
   nameMapFromSaves,
   outcomeDetails,
+  outcomeSubjectDescriptor,
   percent,
   proposalDetails,
   rollIsDeterministic,
@@ -339,6 +341,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                     reasons={major.reasons || major.outcome?.reasons || []}
                     details={proposalDetails(major.outcome || major)}
                     involved={involvedEntities(major, nameById)}
+                    subject={outcomeSubjectDescriptor(major)}
+                    affectedIds={collectSettlementIds(major)}
                     tone={dismissed ? 'normal' : 'major'}
                     actions={(
                       <SmallButton
@@ -385,6 +389,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   reasons={proposal.reasons}
                   details={proposalDetails(proposal.outcome)}
                   involved={involvedEntities(proposal, nameById)}
+                  subject={outcomeSubjectDescriptor(proposal)}
+                  affectedIds={collectSettlementIds(proposal)}
                   tone="major"
                   actions={(
                     <>
@@ -499,6 +505,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   reasons={outcome.reasons}
                   details={outcomeDetails(outcome, nameById)}
                   involved={involvedEntities(outcome, nameById)}
+                  subject={outcomeSubjectDescriptor(outcome)}
+                  affectedIds={collectSettlementIds(outcome)}
                   tone={outcome.applyMode === 'proposal' ? 'major' : 'normal'}
                 />
               ))}
@@ -510,6 +518,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
                   involved={involvedEntities(stressor, nameById)}
+                  affectedIds={collectSettlementIds(stressor)}
                 />
               ))}
             </div>
@@ -536,6 +545,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                   reasons={entry.reasons}
                   details={digestDetails(entry, nameById)}
                   involved={involvedEntities(entry, nameById)}
+                  subject={outcomeSubjectDescriptor(entry)}
+                  affectedIds={collectSettlementIds(entry)}
                   tone={entry.significance === 'major' ? 'major' : 'normal'}
                 />
               ))}

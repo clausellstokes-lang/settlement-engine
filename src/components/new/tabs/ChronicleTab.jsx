@@ -15,6 +15,7 @@ import { FS } from '../../theme.js';
 import { INK as OINK } from '../../../design/organic/ink.js';
 import { RUBRIC } from '../../../design/organic/rubrication.js';
 import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { AddressChain, AffectedSettlements } from '../../map/AddressChain.jsx';
 
 // The Chronicle reads as ANNALS (Deep Craft — the dossier's register voice): a
 // ruled chronological column on parchment, not cool rounded cards. Each entry's
@@ -81,20 +82,31 @@ export default function ChronicleTab({ entries = [] }) {
                 </div>
                 {event.summary && <p style={{ fontSize: FS.sm, color: OINK.body, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
                 {/* THE NEWS ADDRESS LAW (2026-07-22): a world entry states, beside its
-                    verbatim headline (subject + action), the AFFECTED SETTLEMENTS by
-                    name and the recorded REASON. Only rendered when the address block
-                    carries one, so manual/party/recent rows are unchanged. */}
+                    verbatim headline (subject + action), the subject's LINKED address
+                    chain (settlement › power › faction › npc — INSPECTOR-ADDRESS-WEB
+                    follow-on), the AFFECTED SETTLEMENTS by name (now LINKED) and the
+                    recorded REASON. Only rendered when the address block carries one,
+                    so manual/party/recent rows are unchanged. Levels the record does
+                    not identify are dropped — never fabricated. */}
+                {event.address?.subject && (
+                  <div style={{ marginTop: 5 }}>
+                    <AddressChain descriptor={event.address.subject} />
+                  </div>
+                )}
                 {event.address && (
+                  (Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0) ||
                   (Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0) ||
                   event.address.reason
                 ) && (
                   <div style={{ marginTop: 5, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    {Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 && (
+                    {Array.isArray(event.address.affectedSettlementIds) && event.address.affectedSettlementIds.length > 0 ? (
+                      <AffectedSettlements ids={event.address.affectedSettlementIds} />
+                    ) : Array.isArray(event.address.affectedSettlements) && event.address.affectedSettlements.length > 0 ? (
                       <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
                         <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Affects </span>
                         {event.address.affectedSettlements.join(', ')}
                       </div>
-                    )}
+                    ) : null}
                     {event.address.reason && (
                       <div style={{ fontSize: FS.micro, color: WORLD, lineHeight: 1.4 }}>
                         <span style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Because </span>

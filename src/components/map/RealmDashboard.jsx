@@ -38,6 +38,7 @@ import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import RealmEntityLink from '../primitives/RealmEntityLink.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 // V-10 THE CERTIFICATE — trust as a visible feature. STATIC within this already-
 // lazy dashboard chunk (the FP-R idiom: a lazy() would mint a preload entry and
@@ -473,7 +474,8 @@ export default function RealmDashboard({
           </div>
           {hegemony.spheres.map((s) => (
             <div key={String(s.centerId)} style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
-              <span style={{ fontWeight: 700, color: INK }}>{s.label}</span>
+              {/* THE NEWS ADDRESS LAW: the sphere's center settlement, LINKED. */}
+              <RealmEntityLink settlementSaveId={s.centerId} label={s.label} style={{ fontWeight: 700, color: INK }} />
               {': '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
             </div>
           ))}
