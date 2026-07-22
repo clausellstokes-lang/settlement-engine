@@ -21,7 +21,7 @@
  */
 
 import { describe, test, expect } from 'vitest';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const read = (rel) => readFileSync(resolve(process.cwd(), rel), 'utf8');
@@ -540,5 +540,227 @@ describe('SS1 layer C — supply-chain: dead beacon removed, remote chat disable
 
   test('sf-bridge readiness poll is bounded (cannot spin forever on an upstream rename)', () => {
     expect(read('public/map/sf-bridge.js')).toContain('readyPollAttempts');
+  });
+});
+
+// ── Wave 7 — the FMG-fork sink closers (H9 tip escaping · H10 seed source ·
+//    H11 shared-origin storage/cache clear) + the phantom-globals sweep + the
+//    shrink-only sink-inventory ratchet. The fork sits OUTSIDE every lint/tsc/
+//    build gate, so these tests are the only gate it has. ───────────────────────
+
+const SFBRIDGE_SRC = read('public/map/sf-bridge.js');
+const VERSIONING_SRC = read('public/map/versioning.js');
+
+// sf-bridge/versioning helpers live indented inside an IIFE / at module scope, so
+// the evalBlock "\n}" terminator above can't bound them. Extract by matching braces.
+function sliceBalanced(source, startMarker) {
+  const from = source.indexOf(startMarker);
+  if (from < 0) throw new Error(`marker not found: ${startMarker}`);
+  const open = source.indexOf('{', from);
+  let depth = 0;
+  let i = open;
+  for (; i < source.length; i++) {
+    if (source[i] === '{') depth++;
+    else if (source[i] === '}' && --depth === 0) { i++; break; }
+  }
+  return source.slice(from, i);
+}
+// Slice from `startMarker` through the balanced end of the function named by
+// `endFnSignature` (used to grab a contiguous const-block + function together).
+function sliceThrough(source, startMarker, endFnSignature) {
+  const from = source.indexOf(startMarker);
+  const sig = source.indexOf(endFnSignature, from);
+  if (from < 0 || sig < 0) throw new Error(`markers not found: ${startMarker} / ${endFnSignature}`);
+  const open = source.indexOf('{', sig);
+  let depth = 0;
+  let i = open;
+  for (; i < source.length; i++) {
+    if (source[i] === '{') depth++;
+    else if (source[i] === '}' && --depth === 0) { i++; break; }
+  }
+  return source.slice(from, i);
+}
+
+describe('wave-7 H9 — tip() escapes untrusted map-derived names at the chokepoint', () => {
+  test('both tip() innerHTML sinks route through escapeHtml (raw forms gone)', () => {
+    expect(GENERAL_SRC).toContain('tooltip.innerHTML = escapeHtml(tip)');
+    expect(GENERAL_SRC).toContain('tooltip.innerHTML = escapeHtml(tooltip.dataset.main)');
+    expect(GENERAL_SRC).not.toMatch(/tooltip\.innerHTML = tip;/);
+    expect(GENERAL_SRC).not.toMatch(/tooltip\.innerHTML = tooltip\.dataset\.main;/);
+  });
+
+  test('a crafted burg/river name cannot inject through the live tip() sink', () => {
+    document.body.innerHTML = '<div id="tooltip"></div>';
+    window.tooltip = document.getElementById('tooltip');
+    window.tipBackgroundMap = { info: 'bg', success: 'bg', warn: 'bg', error: 'bg' };
+    window.clearMainTip = () => {};
+    evalBlock(GENERAL_SRC, 'function escapeHtml', 'escapeHtml'); // defines global escapeHtml
+    const tip = evalBlock(GENERAL_SRC, 'function tip(', 'tip');  // defines global tip
+    delete window.__pwned;
+    tip('<img src=x onerror="window.__pwned = 1">Rivermouth');
+    expect(window.tooltip.querySelector('img')).toBe(null);      // no live element parsed
+    expect(window.__pwned).toBeUndefined();                       // handler never armed
+    expect(window.tooltip.innerHTML).toContain('&lt;img');        // rendered as text
+    expect(window.tooltip.textContent).toContain('Rivermouth');   // legit name survives
+  });
+});
+
+describe('wave-7 H10 — the map seed is read from the real global, not the phantom pack.seed', () => {
+  test('currentSeed() returns the global seed and degrades to null (no ReferenceError)', () => {
+    window.seed = 'SEED-123456789';
+    window.eval(sliceBalanced(SFBRIDGE_SRC, 'function currentSeed()') + '\nwindow.__currentSeed = currentSeed;');
+    expect(window.__currentSeed()).toBe('SEED-123456789');
+    delete window.seed; // simulate an upstream rename / not-yet-bound global
+    expect(window.__currentSeed()).toBe(null);
+  });
+
+  test('every seed-report site uses currentSeed(); pack.seed is gone from the code', () => {
+    // fix comments still mention pack.seed — strip them so the scan sees code only
+    const code = SFBRIDGE_SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+    expect(code).not.toMatch(/pack\??\.seed/);
+    expect((code.match(/currentSeed\(\)/g) || []).length).toBeGreaterThanOrEqual(3);
+    expect(code).not.toMatch(/seed: pack\??\.seed/);
+  });
+});
+
+describe('wave-7 H11 — cleanupData scopes the clear to fork keys (host session survives)', () => {
+  test('the Supabase auth token + other host keys survive; fork keys are removed', () => {
+    window.eval(
+      sliceThrough(VERSIONING_SRC, 'const FORK_LS_KEYS', 'function clearMapLocalStorage(') +
+      '\nwindow.__clearMap = clearMapLocalStorage; window.__isForkLsKey = isForkLsKey;',
+    );
+    localStorage.clear();
+    localStorage.setItem('sb-abcdef-auth-token', 'HOST_SESSION');  // the H11 target
+    localStorage.setItem('sb-abcdef-auth-token.0', 'chunk');        // chunked host token
+    localStorage.setItem('flag.newUi', '1');                        // host app state
+    localStorage.setItem('sf_view_token', 'HOST');                  // host
+    localStorage.setItem('version', '1.114.2');                     // fork exact key
+    localStorage.setItem('preset', 'default');                      // fork exact key
+    localStorage.setItem('fmgStyle_MyRealm', '{}');                 // fork prefix (custom preset)
+    localStorage.setItem('fmg-ai-kl-openai', 'SECRET_APIKEY');      // fork prefix (AI key)
+
+    window.__clearMap();
+
+    expect(localStorage.getItem('sb-abcdef-auth-token')).toBe('HOST_SESSION');
+    expect(localStorage.getItem('sb-abcdef-auth-token.0')).toBe('chunk');
+    expect(localStorage.getItem('flag.newUi')).toBe('1');
+    expect(localStorage.getItem('sf_view_token')).toBe('HOST');
+    expect(localStorage.getItem('version')).toBe(null);
+    expect(localStorage.getItem('preset')).toBe(null);
+    expect(localStorage.getItem('fmgStyle_MyRealm')).toBe(null);
+    expect(localStorage.getItem('fmg-ai-kl-openai')).toBe(null);
+  });
+
+  test('isForkLsKey never claims a host key and always claims a fork key', () => {
+    window.eval(
+      sliceThrough(VERSIONING_SRC, 'const FORK_LS_KEYS', 'function clearMapLocalStorage(') +
+      '\nwindow.__isForkLsKey = isForkLsKey;',
+    );
+    for (const k of ['sb-x-auth-token', 'flag.a', 'sf_view_token', 'sf-anything', 'random-host-key'])
+      expect(window.__isForkLsKey(k), k).toBe(false);
+    for (const k of ['version', 'preset', 'fmgStyle_X', 'fmg-ai-kl-openai', 'military', 'winds'])
+      expect(window.__isForkLsKey(k), k).toBe(true);
+  });
+
+  test('clearCache scopes to fork cache names — host caches never match', () => {
+    window.eval(sliceBalanced(VERSIONING_SRC, 'function isForkCacheName(') + '\nwindow.__isForkCacheName = isForkCacheName;');
+    expect(window.__isForkCacheName('fmg-precache-v1')).toBe(true);
+    expect(window.__isForkCacheName('workbox-precache-v2-https://host/')).toBe(false);
+    expect(window.__isForkCacheName('sb-runtime')).toBe(false);
+    expect(window.__isForkCacheName('host-app-cache')).toBe(false);
+  });
+
+  test('the origin-wide localStorage.clear() and unscoped caches.delete are gone', () => {
+    // strip comments — the fix comment documents the old localStorage.clear() call
+    const vcode = VERSIONING_SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+    expect(vcode).not.toMatch(/localStorage\.clear\(\)/);
+    expect(vcode).toContain('clearMapLocalStorage()');
+    expect(vcode).toContain('cacheNames.filter(isForkCacheName)');
+  });
+});
+
+describe('wave-7 phantom-globals — the dead window.* FMG-global refs are swept from sf-bridge', () => {
+  // strip comments so the scan sees CODE only (the fix comments cite the old forms)
+  const CODE = SFBRIDGE_SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+
+  test('no active code reads window.svg / window.zoom / window.seed', () => {
+    expect(CODE).not.toMatch(/window\.svg\b/);
+    expect(CODE).not.toMatch(/window\.zoom\b/);   // window.zoomTo (a real global) is excluded by \b
+    expect(CODE).not.toMatch(/window\.seed\b/);
+    // the exact dead shapes the sweep removed
+    expect(CODE).not.toContain('const svgSel = window.svg');
+    expect(CODE).not.toContain("window.zoom.on('zoom.sfBridge'");
+    expect(CODE).not.toMatch(/if \(window\.zoom && window\.svg\)/);
+  });
+
+  test('the FMG globals are reached as guarded bare identifiers (the one convention)', () => {
+    expect(CODE).toMatch(/typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg/);
+    expect(CODE).toMatch(/typeof svg !== 'undefined'/);
+    expect(CODE).toMatch(/typeof seed !== 'undefined'/);
+  });
+
+  test('the viewport-broadcast hook attaches when svg/zoom are bound (behavior activation)', () => {
+    const calls = [];
+    window.zoom = { on: (name, fn) => { calls.push([name, fn]); } };
+    window.svg = {}; // truthy stand-in for the d3 selection
+    window.scheduleViewportBroadcast = function scheduleViewportBroadcast() {};
+    window.viewportRafHandle = 0;
+    window.viewportRafTick = () => {};
+    window.requestAnimationFrame = () => 1;
+    window.eval(sliceBalanced(SFBRIDGE_SRC, 'function installViewportBroadcaster()') + '\nwindow.__install = installViewportBroadcaster;');
+    window.__install();
+    const hook = calls.find(([name]) => name === 'zoom.sfBridge');
+    expect(hook, 'zoom.sfBridge hook attached').toBeTruthy();
+    expect(hook[1]).toBe(window.scheduleViewportBroadcast); // wired to the broadcaster
+  });
+
+  test('the guard holds and never throws when a FMG global is unbound', () => {
+    const calls = [];
+    window.zoom = { on: (name) => { calls.push(name); } };
+    delete window.svg; // only zoom bound → guard must refuse to half-wire
+    window.scheduleViewportBroadcast = () => {};
+    window.viewportRafHandle = 0;
+    window.viewportRafTick = () => {};
+    window.requestAnimationFrame = () => 1;
+    window.eval(sliceBalanced(SFBRIDGE_SRC, 'function installViewportBroadcaster()') + '\nwindow.__install2 = installViewportBroadcaster;');
+    expect(() => window.__install2()).not.toThrow();
+    expect(calls).toEqual([]);
+  });
+});
+
+describe('wave-7 sink inventory — shrink-only ratchet over the fork injection surface', () => {
+  const inv = JSON.parse(read('tests/security/mapForkSinkInventory.json'));
+  const SINK_RE = /\.(inner|outer)HTML\s*\+?=|insertAdjacentHTML\s*\(/g;
+  const ROOT = process.cwd();
+  const KIND =
+    '\n\n>> mapForkSinkInventory.json ratchet tripped: a fork file gained an ' +
+    'innerHTML/outerHTML/insertAdjacentHTML sink. Escape it at source ' +
+    '(escapeHtml/sanitize) or use textContent — do NOT just raise the number. ' +
+    'See tests/security/mapForkSinkInventory.json _howToUpdate.';
+
+  function scan(dir, acc) {
+    for (const name of readdirSync(dir)) {
+      const p = resolve(dir, name);
+      const st = statSync(p);
+      if (st.isDirectory()) { scan(p, acc); continue; }
+      if (!name.endsWith('.js') || /^index-.*\.js$/.test(name)) continue;
+      if (p.includes('/public/map/libs/')) continue; // hash-pinned third-party deps
+      const n = (readFileSync(p, 'utf8').match(SINK_RE) || []).length;
+      if (n > 0) acc[p.slice(ROOT.length + 1)] = n;
+    }
+    return acc;
+  }
+  const current = scan(resolve(ROOT, 'public/map'), {});
+
+  test('no fork file exceeds its recorded sink count (new raw sinks blocked)', () => {
+    for (const [rel, n] of Object.entries(current)) {
+      const recorded = inv.files[rel] ?? 0;
+      expect(n, `${rel}: ${n} sinks now vs ${recorded} recorded${KIND}`).toBeLessThanOrEqual(recorded);
+    }
+  });
+
+  test('the total fork injection surface has not grown', () => {
+    const total = Object.values(current).reduce((a, b) => a + b, 0);
+    expect(total, `total ${total} vs recorded ${inv.total}${KIND}`).toBeLessThanOrEqual(inv.total);
   });
 });
