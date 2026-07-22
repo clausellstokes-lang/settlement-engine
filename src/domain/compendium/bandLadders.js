@@ -144,6 +144,22 @@ const MAGIC_LEGALITY_LEVELS = Object.freeze([
 ]);
 
 /**
+ * Food security — the label the food generator stamps from local production, imports,
+ * and any magical supplement against demand (src/generators/foodGenerator.js: surplus
+ * >40%, deficit >5% / >15% / >40%, plus the famine floor). Thresholds stated in each
+ * reading; pinned to the foodGenerator labels by tests/ui/compendiumFoodSecurity.test.jsx.
+ * @type {ReadonlyArray<BandLevel>}
+ */
+const FOOD_SECURITY_LEVELS = Object.freeze([
+  { name: 'Surplus',          reading: 'A food surplus above 40 percent. Reserves cushion a bad season and can lift prosperity.' },
+  { name: 'Secure',           reading: 'The settlement feeds itself with a small margin.' },
+  { name: 'Pressured',        reading: 'A food deficit above 5 percent. The margin is thin and a shock would bite.' },
+  { name: 'Import-Dependent', reading: 'A food deficit above 15 percent, covered by imports. A cut trade route turns it into a crisis.' },
+  { name: 'Deficit',          reading: 'A food deficit above 40 percent. The settlement cannot feed itself.' },
+  { name: 'Active Famine',    reading: 'Famine. Food has failed outright, and it caps prosperity no matter how strong the trade.' },
+]);
+
+/**
  * Authored per-ladder framing: the concept name, the tab it renders in (mirrors the
  * glossary LINK map), and a one-line blurb of what the concept IS (kept em-dash-free
  * and free of engine tokens). A `levels` field carries an authored rung list; a
@@ -160,10 +176,16 @@ const LADDER_META = Object.freeze([
     blurb: 'Every supply chain the settlement runs carries a status shown as a chip on the dossier. These are the states you will see. Two further engine states, captured and collapsing, are defined but not yet produced by the generator.' },
   { id: 'coherence', concept: 'Coherence Check', tab: 'economy', anchor: 'economy', levels: COHERENCE_LEVELS,
     blurb: 'Not a score. The engine checks whether the settlement makes logical sense and returns one of three verdicts. The findings behind a verdict are graded critical (survival-blocking), implausible (breaks historical believability), dependency (relies on open trade), or inefficiency (waste the settlement can survive).' },
+  { id: 'food-security', concept: 'Food Security', tab: 'economy', anchor: 'economy', levels: FOOD_SECURITY_LEVELS,
+    blurb: 'How well the settlement feeds itself, read from local production, imports, and any magical supplement against demand. A famine or a severe deficit caps prosperity no matter how strong the trade.' },
   { id: 'stability', concept: 'Settlement Stability', tab: 'stress', anchor: 'stress', category: 'stability-band',
     blurb: 'How a settlement’s overall health reads at a glance, on a 0 to 100 scale.' },
   { id: 'strain', concept: 'Capacity Strain', tab: 'stress', anchor: 'stress', category: 'strain-band',
     blurb: 'How a single capacity such as food, defense, or healing reads against the demand on it.' },
+  { id: 'severity', concept: 'Stressor Severity', tab: 'stress', anchor: 'stress', category: 'severity',
+    blurb: 'How hard a stressor hits when the DM applies one.' },
+  { id: 'magnitude', concept: 'Relief Magnitude', tab: 'stress', anchor: 'stress', category: 'magnitude',
+    blurb: 'How much an ally gives when it sends relief.' },
   { id: 'capture', concept: 'Criminal Capture', tab: 'power', anchor: 'power', category: 'capture-rung',
     blurb: 'How far a criminal interest has taken a seat of power.' },
   { id: 'pantheon-rank', concept: 'Pantheon Rank', tab: 'arcane', anchor: 'faith', levels: PANTHEON_RANK_LEVELS,

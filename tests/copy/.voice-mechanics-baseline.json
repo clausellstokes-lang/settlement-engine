@@ -107,10 +107,6 @@
   "em": 2,
   "bang": 0
  },
- "src/domain/display/glossary.js": {
-  "em": 5,
-  "bang": 0
- },
  "src/domain/display/marketPrices.js": {
   "em": 6,
   "bang": 0

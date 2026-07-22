@@ -87,16 +87,16 @@ const CAPTURE_DEFS = Object.freeze({
 
 /** affordanceManifest STRESSOR_SEVERITY_VALUES — the severity dial. */
 const SEVERITY_DEFS = Object.freeze({
-  minor:    'A light touch — the stressor nudges the settlement without upending it.',
+  minor:    'A light touch. The stressor nudges the settlement without upending it.',
   moderate: 'A real strain the settlement must reckon with, short of a crisis.',
-  severe:   'A heavy blow — the stressor forces the settlement toward crisis.',
+  severe:   'A heavy blow. The stressor forces the settlement toward crisis.',
 });
 
 /** affordanceManifest RELIEF_MAGNITUDE_VALUES — the generosity magnitude dial. */
 const MAGNITUDE_DEFS = Object.freeze({
-  token:    'A gesture — a small share of the giver’s surplus above its own floor.',
-  measured: 'A considered gift — a meaningful share of the surplus, kept sustainable.',
-  generous: 'An open hand — most of the giver’s surplus above its floor goes out.',
+  token:    'A gesture: a small share of the giver’s surplus above its own floor.',
+  measured: 'A considered gift: a meaningful share of the surplus, kept sustainable.',
+  generous: 'An open hand: most of the giver’s surplus above its floor goes out.',
 });
 
 // ── The compendium deep-link map per category (?tab= + #anchor exist) ─────────
