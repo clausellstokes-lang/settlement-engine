@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
+import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { useStore } from '../../../store/index.js';
@@ -480,7 +481,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       {via?.plotHooks?.length>0&&<Section title={`Economic Plot Hooks (${via.plotHooks.length})`} collapsible defaultOpen={false} accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {via.plotHooks.map((h,i)=>{
-            const text=typeof h==='object'?h.hook||Ti(h):String(h);
+            // H2: strip the authored ' PLOT HOOK: ' marker foodBalance.js bakes
+            // into each economic hook (shared chokepoint, src/lib/proseSeams.js).
+            const text=normalizePlotHook(typeof h==='object'?h.hook||Ti(h):String(h));
             const cat=typeof h==='object'?h.category:null;
             return <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
               <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>

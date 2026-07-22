@@ -2,6 +2,7 @@ import React from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { flag } from '../../../lib/flags.js';
+import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
@@ -51,11 +52,10 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
     isViabilityItem(i)
   )].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
 
-  // Clean plot hook text (strip embedded " PLOT HOOK: " prefix)
-  const _cleanHook = h => {
-    const t = typeof h==='object' ? h.hook||Ti(h) : String(h);
-    return t.replace(/^\s*PLOT HOOK:\s*/i, '').trim();
-  };
+  // Clean plot hook text (strip the embedded " PLOT HOOK: " prefix). Extraction
+  // stays local (the Ti object fallback); the strip routes through the shared
+  // display chokepoint (src/lib/proseSeams.js) so no surface can drift.
+  const _cleanHook = h => normalizePlotHook(typeof h==='object' ? h.hook||Ti(h) : String(h));
 
   const viable = v.viable;
 

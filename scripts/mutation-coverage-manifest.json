@@ -46,6 +46,10 @@
     "tests/config/tierFacts.contract.test.js": {
       "kind": "uncovered"
     },
+    "tests/copy/composedProseSeams.test.js": {
+      "kind": "mutation",
+      "label": "copy/composed-prose-seam baseline drift"
+    },
     "tests/copy/copy.test.js": {
       "kind": "uncovered"
     },
