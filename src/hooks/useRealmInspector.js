@@ -34,8 +34,11 @@ export const ADVANCE_ERROR_TEXT = Object.freeze({
 // pendingMapWorkspace store signal (e.g. the Library Advance-Time CTA requesting
 // 'news') is translated to an Inspector section so the post-advance "what changed"
 // surface lands without a body-swap.
+// The Herald has no Pulse / Chronicle door — the post-advance "what changed"
+// surface is the Dashboard (front page, this-advance lens). Pantheon folds into
+// Faith. (THE REALM INSPECTOR = NEWSPAPER, 2026-07-22.)
 const WORKSPACE_TO_SECTION = Object.freeze({
-  map: 'dashboard', pulse: 'pulse', news: 'chronicle', pantheon: 'pantheon',
+  map: 'dashboard', pulse: 'dashboard', news: 'dashboard', pantheon: 'faith',
 });
 
 // The Inspector's three size states (plan §1). 'default' is today's 420px dock;

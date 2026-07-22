@@ -85,7 +85,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
     // ticksTotal is the interval's real week-count on the multi-tick path (1 on the
     // legacy single-tick path), so the progress bar reads N of Y.
     setAdvanceSession({ phase: 'running', ticksDone: 0, ticksTotal: ADVANCE_TICKS[worldPulseInterval] || 1 });
-    openInspectorAt('pulse');
+    openInspectorAt('dashboard');
     // Per-tick progress beats from the orchestrator drive the determinate bar
     // ("Advancing N of Y"); unsubscribed in the finally so a later advance's
     // events cannot leak into a stale closure.
@@ -125,7 +125,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
         showToast(
           'error',
           ADVANCE_ERROR_TEXT[result?.reason] || 'The realm could not advance. Try again in a moment.',
-          result?.reason === 'world_not_canonized' ? { label: 'Canonize the world', onClick: () => openInspectorAt('pulse') } : null,
+          result?.reason === 'world_not_canonized' ? { label: 'Canonize the world', onClick: () => openInspectorAt('adjudication') } : null,
         );
       }
     } catch (err) {
@@ -144,7 +144,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
   const handleResumeAdvance = useCallback(async (decisions = {}) => {
     if (!activeCampaignId) return;
     setAdvanceSession(s => ({ ...s, phase: 'running' }));
-    openInspectorAt('pulse');
+    openInspectorAt('dashboard');
     // Resumed segments report a RUNNING ticksDone (the orchestrator counts from
     // the pause cursor), so the bar picks up where the pause left it.
     const unsubscribeProgress = subscribeAdvanceProgress(
