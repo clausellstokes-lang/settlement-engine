@@ -64,6 +64,7 @@ export function ProseText({ text, index, style, linkStyle }) {
             id={seg.id}
             index={index}
             fallback={seg.displayText}
+            verbatim={seg.verbatim}
             style={linkStyle}
           />
         ) : (

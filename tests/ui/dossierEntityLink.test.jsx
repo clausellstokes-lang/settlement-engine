@@ -126,6 +126,39 @@ describe('EntityLink', () => {
   });
 });
 
+describe('EntityLink — verbatim (pronoun) links', () => {
+  it('renders the wrapped WORD, not the entity name, and still links to the entity', () => {
+    const settlement = makeSettlement();
+    const setActiveTab = vi.fn();
+    const id = factionIdFromName('Iron Guild');
+
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={setActiveTab}>
+        <EntityLink id={id} type="faction" fallback="they" verbatim />
+      </Harness>
+    );
+    // A resolved pronoun link shows "they" (the word), never "Iron Guild"…
+    const btn = screen.getByRole('button', { name: 'Go to Iron Guild' });
+    expect(btn.textContent).toBe('they');
+    expect(screen.queryByText('Iron Guild')).toBeNull();
+    // …and clicking it navigates to the entity's card.
+    act(() => { fireEvent.click(btn); });
+    expect(setActiveTab).toHaveBeenCalledWith('power', 'entity_link');
+    expect(useStore.getState().focusedEntity?.id).toBe(id);
+  });
+
+  it('degrades a broken pronoun link to the bare word (plain text, no link)', () => {
+    const settlement = makeSettlement();
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <EntityLink id="faction.ghost" type="faction" fallback="it" verbatim />
+      </Harness>
+    );
+    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByText('it')).toBeTruthy();
+  });
+});
+
 describe('PILOT round-trip: NPC faction link -> Power tab opens that faction', () => {
   it('expands the focused faction row in PowerTab', () => {
     const settlement = makeSettlement();
