@@ -1,6 +1,6 @@
 {
-  "total": 2242,
-  "totalAny": 2203,
+  "total": 2246,
+  "totalAny": 2207,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -274,6 +274,14 @@
     "src/domain/timeProgression.js": {
       "any": 0,
       "suppress": 2
+    },
+    "src/domain/townMap/arch/grammarIR.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/townMap/arch/ops.js": {
+      "any": 3,
+      "suppress": 0
     },
     "src/domain/types.js": {
       "any": 1,

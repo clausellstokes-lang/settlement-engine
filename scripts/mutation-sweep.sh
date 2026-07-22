@@ -308,6 +308,15 @@ check_caught "discourse/lexicon relation-type coverage gap" src/domain/display/d
 perl -0pi -e "s/  'house-a': cottage\(\),\n/  'house-a': cottage(),\n  zzz_mutsweep_orphan: cottage(),\n/" src/design/townGlyphs/medieval.js
 check_caught "massing/silhouette totality unmapped kind" src/design/townGlyphs/medieval.js "npx vitest run tests/lint/townMapMassingSilhouette.walker.test.js"
 
+# 29. K-1 kernel LOD-ladder totality — a NEW arch grammar ruleset lands under
+#     arch/rulesets/ with no LOD-ladder + mesh-budget walker coverage. Every
+#     ruleset must be a KNOWN, LOD-checked, budgeted kind (no un-walked kind ships),
+#     so the registration totality must red on an unregistered ruleset file.
+check_caught_planted "kernel/unwalked arch ruleset" \
+  src/domain/townMap/arch/rulesets/_mutsweepOrphan.js \
+  "export const orphanRuleset = () => ({ name: 'orphan', symbols: ['a'], axiom: { sym: 'a', scope: { origin: [0,0,0], frameRef: { frameIndex: 0, reflect: 0 }, size: [1,1,1] }, attrs: { materialRole: 'ashlar', params: {} } }, rules: { a: [] }, events: [] });" \
+  "npx vitest run tests/lint/archLodLadder.walker.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

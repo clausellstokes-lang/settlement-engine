@@ -190,6 +190,10 @@
     "tests/design/townGlyphs.test.js": {
       "kind": "uncovered"
     },
+    "tests/design/archMeshBudget.test.js": {
+      "kind": "rationale",
+      "rationale": "A COUNTS-not-ms self-scoring ceiling (per-tier triangle/vertex/draw) pinned at ~1.5x the measured K-1 grammar cathedral + byte-parity buttress; like its E-F/townMapOpBudget sibling it exists to catch an explosion CLASS, so mutation-testing the generous ceiling is disproportionate, and the geometry it bounds is separately byte-golden-pinned by archMeshDeterminism."
+    },
     "tests/design/townMapOpBudget.test.js": {
       "kind": "uncovered"
     },
@@ -545,6 +549,10 @@
     },
     "tests/lint/swatchResolves.test.js": {
       "kind": "uncovered"
+    },
+    "tests/lint/archLodLadder.walker.test.js": {
+      "kind": "mutation",
+      "label": "kernel/unwalked arch ruleset"
     },
     "tests/lint/townMapMassingSilhouette.walker.test.js": {
       "kind": "mutation",
