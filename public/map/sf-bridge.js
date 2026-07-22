@@ -977,9 +977,22 @@
 
     'settlementEngine:fitMap'(data, rid) {
       try {
-        if (window.zoom && window.svg && window.d3) {
+        // The embedded build's svg/zoom are top-level let bindings in main.js
+        // (script-scoped, NOT window properties), so the old window.* guard
+        // silently no-oped while replying success. resetZoom() is a top-level
+        // function DECLARATION (thus a real global) that closes over the
+        // scoped svg/zoom and applies the identity transform -- which IS the
+        // fitted full-realm view in embedded mode. Use it; fall back to
+        // fitMapToScreen (canvas re-size only) and the legacy window.* path.
+        if (typeof resetZoom === 'function') {
+          resetZoom(600);
+        } else if (typeof fitMapToScreen === 'function') {
+          fitMapToScreen();
+        } else if (window.zoom && window.svg && window.d3) {
           window.svg.transition().duration(600)
             .call(window.zoom.transform, window.d3.zoomIdentity);
+        } else {
+          throw new Error('fitMap: no fit mechanism available in this build');
         }
         reply(rid, { type: 'fmg:viewportReply', ...getCurrentViewport() });
       } catch (err) {
