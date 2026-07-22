@@ -43,6 +43,8 @@ import { GOLD, INK_DEEP, sans, serif_, FS, SP, swatch } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { legsForTier } from '../loadingJourney/journeyManifest.js';
 import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
+import ProgressJourneyOverlay from '../loadingJourney/ProgressJourneyOverlay.jsx';
+import { pipelineStepFraction } from '../loadingJourney/journeyProgress.js';
 
 // Mono font for the step list. theme.js doesn't export one, so we
 // declare it locally — kept tight (single value, used once).
@@ -167,20 +169,28 @@ export default function PipelineReveal({ onComplete }) {
         animation: 'sf-fadeIn 0.2s ease-out',
       }}
     >
-      {/* C2L backdrop — the desk→tier growth film, scrubbed by this reveal's
-          timeline (zIndex 0, behind the card). Only when the taste-gate is on and
-          the shared clock is stamped; the stills are its own guaranteed floor. */}
-      {showFilm && filmClock && (
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-          <JourneyFilm
-            set={useBgSet ? 'bg' : 'journey'}
-            legsToPlay={legsForTier(tier)}
-            arrived={hasSettlement}
-            scriptWindowMs={filmClock.targetMs}
-            startedAtMs={filmClock.startedAt}
-          />
-        </div>
-      )}
+      {/* Backdrop (zIndex 0, behind the card) — the progress-scrubbed realm journey
+          video (owner order 2026-07-22), scrubbed by REAL pipeline-step progress
+          (played/total), holding its last frame through the dwell (this reveal owns
+          its own dismissal). When the asset is absent it falls back to the CURRENT
+          presentation: the desk→tier growth film when the taste-gate is on, else the
+          plain ink backdrop. Both keep the stills floor. */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <ProgressJourneyOverlay
+          progress={pipelineStepFraction(activeIndex, steps.length)}
+          zIndex={0}
+          holdAtEnd
+          fallback={showFilm && filmClock ? (
+            <JourneyFilm
+              set={useBgSet ? 'bg' : 'journey'}
+              legsToPlay={legsForTier(tier)}
+              arrived={hasSettlement}
+              scriptWindowMs={filmClock.targetMs}
+              startedAtMs={filmClock.startedAt}
+            />
+          ) : null}
+        />
+      </div>
       <div style={{
         position: 'relative', zIndex: 1,
         maxWidth: 460, width: '90%',

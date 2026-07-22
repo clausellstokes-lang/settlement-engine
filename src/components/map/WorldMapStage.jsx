@@ -16,6 +16,7 @@
 import { memo, Suspense, lazy, useCallback, useRef, useState } from 'react';
 import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
 import { flag } from '../../lib/flags.js';
+import { useRealmLoadProgress } from '../loadingJourney/useRealmLoadProgress.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
@@ -26,6 +27,9 @@ const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
 // C2L surface 2 — the reality-mode scroll-unfurl backdrop over the booting FMG
 // iframe. Lazy (rides this route chunk, zero eager) + taste-gated at the mount.
 const RealmUnfurlLoading = lazy(() => import('../loadingJourney/RealmUnfurlLoading.jsx'));
+// The progress-scrubbed realm journey video (owner order 2026-07-22). Lazy leaf —
+// rides this route chunk, zero eager (its fingerprint stays off first paint).
+const ProgressJourneyOverlay = lazy(() => import('../loadingJourney/ProgressJourneyOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./PlacementDetailCard.jsx'));
 const QuickInspector  = lazy(() => import('./QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./LayersPanel.jsx'));
@@ -100,6 +104,16 @@ function WorldMapStageImpl({
   // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
   // surface is byte-unchanged; the walk flips it on to compare without a rebuild).
   const showRealmFilm = flag('loadingJourneyFilm');
+  // The progress-scrubbed realm journey video (owner order 2026-07-22) — one shared
+  // overlay covering the booting FMG iframe, driven by the realm boot's REAL progress
+  // (bridgeReady/mapReady are coincident here, so a bounded time-creep travels and
+  // mapReady snaps it home). Dormant-safe: absent asset ⇒ the current presentation.
+  const journeyProgress = useRealmLoadProgress({
+    ready: mapReady,
+    bridgeReady,
+    active: !imageMode && !mapError,
+    runId: mapReloadKey,
+  });
   // The world map, in words (SB5 / bar 9): the FMG iframe is a visual,
   // pointer-driven editor with no accessible tree of its own, so an sr-only
   // summary inside the map container carries the map's factual content — which
@@ -222,14 +236,23 @@ function WorldMapStageImpl({
               }}
             />
           )}
-          {/* C2L — the scroll-unfurl loading backdrop over the booting FMG iframe
-              (reality mode: holds until the bridge is truly ready, then plays the
-              final unfurl and self-dismisses). Only the FMG boot path (not the
-              image backdrop, which skips the iframe). Taste-gated + lazy;
-              decorative — the toolbar "Loading…" status line stays the a11y floor. */}
-          {showRealmFilm && !imageMode && (
+          {/* The progress-scrubbed realm journey video over the booting FMG iframe
+              (owner order 2026-07-22), covering it from first paint so the fork's own
+              loading screen never shows through. When the asset is absent it renders
+              the CURRENT presentation — the RealmUnfurlLoading scroll-unfurl backdrop
+              when the taste-gate is on, else nothing (the "Summoning the world…"
+              loader below stays visible). Only the FMG boot path (image-backdrop mode
+              skips the iframe). Decorative — the toolbar "Loading…" line is the a11y
+              floor. Self-dismisses on mapReady (renders null once faded); the reload
+              key remounts a fresh run. */}
+          {!imageMode && !mapError && (
             <Suspense fallback={null}>
-              <RealmUnfurlLoading bridgeReady={bridgeReady} />
+              <ProgressJourneyOverlay
+                key={mapReloadKey}
+                progress={journeyProgress}
+                zIndex={4}
+                fallback={showRealmFilm ? <RealmUnfurlLoading bridgeReady={bridgeReady} /> : null}
+              />
             </Suspense>
           )}
           {(bridgeReady || imageMode) && (
