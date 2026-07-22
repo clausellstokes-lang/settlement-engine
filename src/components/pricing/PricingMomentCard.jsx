@@ -23,7 +23,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, MUTED, CHROME, bottomClearance } from '../theme.js';
+import { GOLD, INK, BORDER, sans, serif_, FS, SP, swatch, BODY, CHROME, bottomClearance } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
@@ -168,13 +168,6 @@ export default function PricingMomentCard() {
         >
           Not now
         </Button>
-        <span style={{ flex: 1 }} />
-        <span style={{
-          fontSize: FS.xxs, color: MUTED,
-          fontStyle: 'italic',
-        }}>
-          Won't ask again for 24h
-        </span>
       </div>
     </div>
   );
