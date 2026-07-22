@@ -24,6 +24,9 @@ import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
 import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
+import { useCrossSettlementFocus } from './dossier/useCrossSettlementFocus.js';
+import { RealmEntityContext } from './map/RealmEntityContext.jsx';
+import { useRealmEntityNav } from './map/useRealmEntityNav.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -231,6 +234,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     return c?.worldState || null;
   });
   const allSavedSettlements = useStore(s => s.savedSettlements);
+  // The cross-settlement inspector-link focus target (uiSlice; remount-surviving,
+  // ts-stamped). Consumed by the CROSS-SETTLEMENT FOCUS effect below to land a
+  // realm-link navigation on the right tab + card once this dossier mounts.
+  const focusedEntity = useStore(s => s.focusedEntity);
   const pinNpc = useStore(s => s.pinNpc);
   const unpinNpc = useStore(s => s.unpinNpc);
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
@@ -757,6 +764,19 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // renderable tabs are passed (not the group-filtered `tabs`) so a link can
   // reach any tab across group boundaries; setActiveTab re-derives the group.
   const entityNav = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
+  // THE NEWS ADDRESS LAW, realm-wide (owner 2026-07-22). The dossier's own
+  // Chronicle names entities that may live in OTHER settlements (cross-settlement
+  // world-pulse refs). This provides the realm entity web + cross-settlement
+  // navigator to the Chronicle tab so a subject renders as its full linked
+  // address chain — same resolver the Realm Inspector uses (one resolver, both
+  // surfaces). A same-settlement subject lands via the CROSS-SETTLEMENT FOCUS
+  // effect below without leaving the dossier.
+  const realmNav = useRealmEntityNav();
+
+  // CROSS-SETTLEMENT FOCUS (INSPECTOR-ADDRESS-WEB, owner 2026-07-22): land a Realm
+  // Inspector link on the right tab + card once this dossier mounts. Extracted to
+  // a hook (keeps this file under its line ceiling); see useCrossSettlementFocus.
+  useCrossSettlementFocus({ focusedEntity, index: entityNav.index, allTabs, saveId, activeTab, setActiveTab });
 
   // Deferred null check (see comment near the top of this component).
   // All hooks are now committed; safe to early-exit.
@@ -764,6 +784,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
 
   return (
     <DossierEntityContext.Provider value={entityNav}>
+     <RealmEntityContext.Provider value={realmNav}>
       {/* The "How this was simulated" metadata lives behind the SimulationDrawer
           trigger in the action band below, not as a top-of-page rail — so the
           dossier card itself is the default landing surface and the simulation
@@ -983,6 +1004,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         pendingRegenerate={pendingRegenerate} onConfirmRegenerate={confirmRegenerate} onCancelRegenerate={() => setPendingRegenerate(false)}
         regenerateBody={`This discards the current narrative prose and generates a new one${isConfigured ? `, spending ${getCost('narrative')} credits` : ''}. The raw simulation is unchanged.`}
       />
+     </RealmEntityContext.Provider>
     </DossierEntityContext.Provider>
   );
 }
