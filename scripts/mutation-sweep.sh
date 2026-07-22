@@ -356,6 +356,15 @@ check_caught "copy/composed-prose-seam baseline drift" tests/copy/.composed-pros
 perl -0pi -e "s/Math.round\(cv.historyMark\)/Math.round(cv.corruptionCovert)/" src/domain/townMap/arch/conditionParams.js
 check_caught "kernel/drift covert leak" src/domain/townMap/arch/conditionParams.js "npx vitest run tests/lint/archDriftTotality.walker.test.js"
 
+# 35. Determinism — a randomness draw (Math.random) lands in the same-seed PDF
+#     export (cycle-3 wave 6, the M21 class): the same viewmodel would emit a
+#     different document each render. The pdf entropy source-scan must red on any
+#     new offending artifact under src/pdf/ (the sibling of the localeCompare ban).
+check_caught_planted "determinism/Math.random in pdf export" \
+  src/pdf/_mutsweepEntropyProbe.jsx \
+  "export const _m = Math.random();" \
+  "npx vitest run tests/lint/pdfEntropyGuard.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

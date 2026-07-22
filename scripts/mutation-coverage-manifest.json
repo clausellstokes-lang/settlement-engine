@@ -528,6 +528,10 @@
     "tests/lint/localeFormatGuard.test.js": {
       "kind": "uncovered"
     },
+    "tests/lint/pdfEntropyGuard.test.js": {
+      "kind": "mutation",
+      "label": "determinism/Math.random in pdf export"
+    },
     "tests/lint/mapPaletteSingleSource.test.js": {
       "kind": "uncovered"
     },
@@ -612,6 +616,10 @@
     },
     "tests/pdf/parityContractExemptions.test.js": {
       "kind": "uncovered"
+    },
+    "tests/pdf/pdfFieldManifest.walker.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
     },
     "tests/pdf/pdfLiveWorldParity.test.js": {
       "kind": "uncovered"

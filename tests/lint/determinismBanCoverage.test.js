@@ -86,11 +86,16 @@ const LAYERS = [
     forbidden: [MATH_RANDOM, DATE_NOW], // generateSeed() mints from both BY DESIGN
   },
   {
-    name: 'pdf (collation-only; ledgered wall-clock allowance)',
+    name: 'pdf (collation + randomness; ledgered wall-clock allowance)',
     roots: ['src/pdf'], exts: /\.(js|jsx)$/,
     exempt: [],
-    required: [LOCALE_COMPARE],
-    forbidden: [NEW_DATE], // Cover/Timeline USER timestamps — TEMPORAL_AUDIT.md ledger
+    // Cycle-3 W6 added the RANDOMNESS ban (M21): Math.random must be banned in the
+    // same-seed PDF export. Collation stays banned. WALL-CLOCK stays ALLOWED — the
+    // generation-date stamp (Cover) + user event timestamps (Timeline) are the
+    // ledgered src/pdf boundary reads (TEMPORAL_AUDIT.md §1), so new Date()/Date.now()
+    // must remain UNbanned here.
+    required: [LOCALE_COMPARE, MATH_RANDOM],
+    forbidden: [NEW_DATE, DATE_NOW], // Cover/Timeline USER timestamps — TEMPORAL_AUDIT.md ledger
   },
   {
     name: 'domain/clock.js (the sanctioned wall-clock seam must STAY exempt)',
@@ -172,7 +177,7 @@ describe('determinism eslint-ban coverage (last-wins shadow guard)', () => {
   it('the walk is non-vacuous (a broken glob must not pass as full coverage)', () => {
     expect(counts.get('generators (seeded pipeline)')).toBeGreaterThan(50);
     expect(counts.get('domain kernel (pure)')).toBeGreaterThan(300);
-    expect(counts.get('pdf (collation-only; ledgered wall-clock allowance)')).toBeGreaterThan(20);
+    expect(counts.get('pdf (collation + randomness; ledgered wall-clock allowance)')).toBeGreaterThan(20);
     expect(counts.get('workers (sim path)')).toBeGreaterThan(0);
     expect(counts.get('kernel except prng (rngContext keeps unseededRandom)')).toBeGreaterThan(0);
   });

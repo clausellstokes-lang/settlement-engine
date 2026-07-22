@@ -225,13 +225,23 @@ export default [
     },
   },
 
-  // ── [determinism-pdf-locale-collation] — the paid PDF export is same-seed ──────
-  // constitutional too, but src/pdf sat OUTSIDE the sim-tree determinism blocks, so a
-  // localeCompare tie-break (the SupplyChainFlow category-group ordering) could order
-  // non-ASCII labels differently across machines/locales. Ban localeCompare here as
-  // well (use compareCodepoint from domain/deterministicSort.js). Scope is COLLATION
-  // ONLY — the ledgered wall-clock allowance for Cover/Timeline USER timestamps
-  // (TEMPORAL_AUDIT.md) stays, so no Date/Intl ban here. @enforced-by this rule block.
+  // ── [determinism-pdf-locale-collation] + [determinism-pdf-entropy] (Cycle-3 W6) ─
+  // The paid PDF export is same-seed constitutional too, but src/pdf sat OUTSIDE the
+  // sim-tree determinism blocks. Two determinism classes are banned here:
+  //   • COLLATION — a localeCompare tie-break (the SupplyChainFlow category-group
+  //     ordering) could order non-ASCII labels differently across machines/locales.
+  //   • RANDOMNESS/ENTROPY (Cycle-3 M21) — a raw entropy draw in a PDF field id or any
+  //     rendered value makes the same viewmodel emit a DIFFERENT document each render
+  //     (M21: Editable.safeName's `f_${Math.random()}` field-name fallback). Ban the
+  //     entropy class: Math.random + crypto.randomUUID/getRandomValues. Fallbacks must
+  //     be deterministic (FNV-1a over stable inputs — see Editable.safeName).
+  // SCOPE NOTE — WALL-CLOCK IS INTENTIONALLY NOT BANNED. The generation-DATE stamp
+  // (Cover) and USER event timestamps (Timeline) legitimately read wall-clock at the
+  // src/pdf boundary; that allowance is ledgered (TEMPORAL_AUDIT.md §1) and asserted
+  // by tests/lint/determinismBanCoverage.test.js (pdf layer forbids the new-Date ban),
+  // so NO Date.now()/new Date() ban here — only randomness + collation, the classes
+  // that must never leak into a same-seed document. @enforced-by this rule block +
+  // tests/lint/pdfEntropyGuard.test.js (source-scan + wiring pin).
   {
     files: ['src/pdf/**/*.{js,jsx}'],
     rules: {
@@ -239,6 +249,18 @@ export default [
         {
           selector: "CallExpression[callee.property.name='localeCompare']",
           message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism (M21): Math.random() in the same-seed PDF export makes the same viewmodel emit a different document each render. Use a deterministic FNV-1a hash of the stable inputs the call site has (see Editable.safeName / kernel/proseHash.js).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='randomUUID']",
+          message: 'Determinism: crypto.randomUUID() is a fresh random id every render — the same-seed PDF export must be reproducible. Derive a deterministic id from stable inputs (FNV-1a, see Editable.safeName).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='getRandomValues']",
+          message: 'Determinism: crypto.getRandomValues() is non-reproducible entropy — the same-seed PDF export must be byte-stable given its viewmodel. Derive deterministic values from stable inputs (FNV-1a, see Editable.safeName).',
         },
       ],
     },
