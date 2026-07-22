@@ -191,6 +191,27 @@ const CULTURE_VALUES = [
 ];
 const CULTURE_NOTE = 'Culture shapes flavour more than math: the names of settlements and NPCs, the adjectives on traditions, the demand profile, and which gods a world tends to seed at the start. Mixed is the default, with no single culture. This is distinct from the culture-distance the living world derives to measure how alike two settlements behave.';
 
+// Preset copy (Wave E): the four quiet presets read identically ("lights no endgame
+// systems") with no basis to choose among them. A per-preset one-liner + the humanized
+// autonomy axis distinguish them. Summaries are authored per preset id (build-guarded);
+// intensity + autonomy are READ from SIMULATION_RULE_PRESETS. Keyed by preset id.
+const PRESET_SUMMARIES = {
+  quiet_local:        'A quiet local game. Time passes, but the wider region stays still.',
+  realistic_regional: 'The default. The region evolves at a measured, realistic pace.',
+  dramatic_campaign:  'A high-drama campaign. Events land hard and the world runs itself.',
+  static_campaign:    'Nothing moves without you. The world waits on your every decision.',
+  narrative_campaign: 'A quiet stage that proposes changes but waits for your approval.',
+  living_realm:       'A fully alive realm that runs the region on its own.',
+  full_simulation:    'Everything on. The most complete and demanding simulation.',
+};
+// Humanized reading of the politicalAutonomy axis (how much the world acts on its own).
+const AUTONOMY_LABELS = {
+  dm_only:         'you decide everything',
+  recommendations: 'it proposes, you approve',
+  routine:         'routine acts run, big moves come to you',
+  full:            'fully autonomous',
+};
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -258,14 +279,25 @@ export function buildCompendiumDataObject() {
     };
   });
 
-  // The presets, with exactly which endgame-system flags each one lights (derived).
+  // The presets, with the distinguishing axes (intensity + autonomy, READ from the
+  // configs) + an authored summary + exactly which endgame flags each lights (derived).
   const systemFlags = ENDGAME_SYSTEMS.map((s) => s.flag);
-  const presets = presetIds.map((id) => ({
-    id,
-    label: presetLabel(id),
-    isDefault: id === DEFAULT_SIMULATION_PRESET_ID,
-    lights: systemFlags.filter((f) => (SIMULATION_RULE_PRESETS[id]?.rules || {})[f] === true),
-  }));
+  const presets = presetIds.map((id) => {
+    const rules = SIMULATION_RULE_PRESETS[id]?.rules || {};
+    if (!PRESET_SUMMARIES[id]) throw new Error(`compendium: preset "${id}" has no PRESET_SUMMARIES entry`);
+    const intensity = rules.intensity || DEFAULT_SIMULATION_RULES.intensity;
+    const autonomy = rules.politicalAutonomy || DEFAULT_SIMULATION_RULES.politicalAutonomy;
+    return {
+      id,
+      label: presetLabel(id),
+      isDefault: id === DEFAULT_SIMULATION_PRESET_ID,
+      summary: PRESET_SUMMARIES[id],
+      intensity,
+      autonomy,
+      autonomyLabel: AUTONOMY_LABELS[autonomy] || autonomy,
+      lights: systemFlags.filter((f) => rules[f] === true),
+    };
+  });
 
   // Institution counts (the InstitutionsTab renders the live catalog itself; here
   // we only publish the counts so the dashboard number can't be hand-typed).
