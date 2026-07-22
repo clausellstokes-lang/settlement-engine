@@ -116,11 +116,11 @@ const TABS = [
   { id: 'services',   label: 'Services',   Icon: Building2 },
   { id: 'defense',    label: 'Defense',    Icon: Swords },
   { id: 'resources',  label: 'Resources',  Icon: Package },
-  { id: 'viability',  label: 'Viability',  Icon: CircleCheckBig },
+  { id: 'viability',  label: 'Outlook',    Icon: CircleCheckBig },
   // Phase 5 W4e — the causal-engine + magic reads. Always available (every
   // settlement derives a substrate / magic posture); each self-handles dormancy
   // inside. Reuse already-bundled icons (Cog / Sparkles) — no new first-paint icon.
-  { id: 'substrate',  label: 'Substrate',  Icon: Cog },
+  { id: 'substrate',  label: 'Causes',     Icon: Cog },
   { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
