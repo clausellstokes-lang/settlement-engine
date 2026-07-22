@@ -134,7 +134,7 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'war') {
     return (
-      <HeraldSection items={feed.bySection.war} emptyLead="No war reported since the last turning. The realm holds.">
+      <HeraldSection items={feed.bySection.war} worldState={campaign.worldState} nameById={nameById} emptyLead="No war reported since the last turning. The realm holds.">
         <div style={{ display: 'grid', gap: SP.sm }}>
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
@@ -148,7 +148,7 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'faith') {
     return (
-      <HeraldSection items={feed.bySection.faith} emptyLead="No faith stirred since the last turning. The altars are quiet.">
+      <HeraldSection items={feed.bySection.faith} worldState={campaign.worldState} nameById={nameById} emptyLead="No faith stirred since the last turning. The altars are quiet.">
         <div style={{ display: 'grid', gap: SP.md }}>
           <PantheonPanel campaign={campaign} />
           <AssignDeityFromMap campaign={campaign} />
@@ -159,20 +159,22 @@ export default function HeraldBody({ section, campaign, timeLens, nameById, empt
 
   if (section === 'trade') {
     return (
-      <HeraldSection items={feed.bySection.trade} emptyLead="No trade shifted since the last turning. The roads run as they did.">
+      <HeraldSection items={feed.bySection.trade} worldState={campaign.worldState} nameById={nameById} emptyLead="No trade shifted since the last turning. The roads run as they did.">
         <TreatyPanel campaign={campaign} nameById={nameById} />
       </HeraldSection>
     );
   }
 
   if (section === 'events') {
-    return <HeraldSection items={feed.bySection.events} emptyLead="Little else of note since the last turning." />;
+    return <HeraldSection items={feed.bySection.events} worldState={campaign.worldState} nameById={nameById} emptyLead="Little else of note since the last turning." />;
   }
 
   if (section === 'divination') {
     return (
       <HeraldSection
         items={feed.bySection.divination}
+        worldState={campaign.worldState}
+        nameById={nameById}
         title="Pressures building"
         emptyLead="No pressure is building that the realm can yet foresee."
       >

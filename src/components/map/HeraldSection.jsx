@@ -1,14 +1,18 @@
-// HeraldSection.jsx — one report door's body (War / Faith / Trade / Events).
-// Renders the section-filed HeraldItems (from heraldFeed.buildHeraldFeed) as the
-// existing OutcomeCard, which already carries the News Address Law's linked subject
-// chain (AddressChain) + affected settlements. A live block (LiveWarStatus,
-// PantheonPanel, TreatyPanel) may be slotted above via `children`.
+// HeraldSection.jsx — one report door's body (War / Faith / Trade / Events / the
+// Divination feed). Renders the section-filed HeraldItems (heraldFeed) as the formal
+// HERALD HEADLINE grammar, grouped by settlement (presence-over-repetition: the
+// settlement name hoists to a group header, the nested headlines omit it). A live
+// block (LiveWarStatus, PantheonPanel, TreatyPanel, RealmDocket) slots above via
+// `children`.
 //
-// PRESENTATIONAL. The routing + normalization are done upstream (heraldFeed); this
-// only orders and renders. Sort: severity-first then recency within — the
-// alphabetical-by-settlement grouping + urgent pin (THE SORT LAW) land in Phase 4.
+// PRESENTATIONAL. Routing + normalization are upstream (heraldFeed); the headline
+// grammar is HeraldHeadline. Sort here is severity-then-recency WITHIN a group; the
+// alphabetical-by-settlement group order + the urgent pin (THE SORT LAW) land in
+// Phase 4.
 
-import { OutcomeCard, Pill, Section } from './WorldPulsePrimitives.jsx';
+import { Section } from './WorldPulsePrimitives.jsx';
+import HeraldHeadline, { HeraldGroupHeader } from './HeraldHeadline.jsx';
+import { groupBySettlement } from './heraldGrammar.js';
 import { BORDER, CARD_ALT, FS, MUTED, sans } from '../theme.js';
 
 /** Severity-first, then most-recent, then a stable id tiebreak (codepoint). */
@@ -22,43 +26,40 @@ function ordered(items = []) {
   });
 }
 
-/** The non-canonical provenance chip (canon/derived stay silent). */
-function ProvenanceChip({ provenance }) {
-  if (provenance === 'canon') return null;
-  return <Pill tone={provenance === 'covert' ? 'major' : 'neutral'}>{provenance}</Pill>;
-}
-
 /**
  * @param {object} props
  * @param {import('./heraldFeed.js').HeraldItem[]} props.items
  * @param {string} props.emptyLead   the calm empty-state line for this door
+ * @param {any} [props.worldState]   for the article (cause walk)
+ * @param {Map<string,string>} [props.nameById]
  * @param {import('react').ReactNode} [props.children]  a live block rendered above the feed
- * @param {string} [props.title]     the feed section heading (default "Since the last turning")
+ * @param {string} [props.title]     the feed section heading
  */
-export default function HeraldSection({ items = [], emptyLead, children, title = 'Since the last turning' }) {
-  const list = ordered(items);
+export default function HeraldSection({ items = [], emptyLead, worldState, nameById, children, title = 'Since the last turning' }) {
+  const groups = groupBySettlement(ordered(items), nameById || new Map());
   return (
     <div style={{ display: 'grid', gap: 12 }}>
       {children}
-      <Section title={title} count={list.length}>
-        {list.length === 0 ? (
+      <Section title={title} count={items.length}>
+        {items.length === 0 ? (
           <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             {emptyLead}
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {list.map(item => (
-              <OutcomeCard
-                key={item.id}
-                title={item.headline}
-                summary={item.summary}
-                severity={item.severity}
-                reasons={item.reasons}
-                subject={item.subject}
-                affectedIds={item.affectedIds}
-                tone={item.major ? 'major' : 'normal'}
-                details={item.provenance !== 'canon' ? [item.provenance] : []}
-              />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {groups.map(group => (
+              <div key={group.settlementId || '__realm__'} style={{ display: 'grid', gap: 8 }}>
+                <HeraldGroupHeader group={group} />
+                {group.items.map(item => (
+                  <HeraldHeadline
+                    key={item.id}
+                    item={item}
+                    worldState={worldState}
+                    nameById={nameById}
+                    nested={group.settlementId != null}
+                  />
+                ))}
+              </div>
             ))}
           </div>
         )}
@@ -66,5 +67,3 @@ export default function HeraldSection({ items = [], emptyLead, children, title =
     </div>
   );
 }
-
-export { ProvenanceChip };
