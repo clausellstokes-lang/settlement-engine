@@ -53,6 +53,7 @@ MUTATED_FILES=(
   src/store/campaignSlice.js
   src/domain/display/chroniclersLetter.js
   src/design/townGlyphs/medieval.js
+  tests/copy/.composed-prose-seams-baseline.json
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -338,6 +339,14 @@ check_caught_planted "neutral-neighbour/second implicit minter" \
   src/domain/relationships/_mutsweepImplicitNeutral.js \
   "export const evil = (id) => ({ [IMPLICIT_NEUTRAL_FLAG]: true, targetId: id, linkId: 'implicit_neutral__x__' + id });" \
   "npx vitest run tests/lint/implicitNeutralSingleSource.test.js"
+
+# 33. Composed prose seams (cycle-3 wave 3) — the generator-output seam baseline
+#     is tampered (a banked defect-class key is renamed), so the live scan of the
+#     generator pipeline no longer matches the committed baseline. The shrink-only
+#     ratchet must red: the T4 seam-debt counts are exact, and any drift from the
+#     banked baseline (a grown seam, or an un-banked ONE-REGEN shrink) fails.
+perl -0pi -e "s/\"braceToken\"/\"braceTokenTAMPERED\"/" tests/copy/.composed-prose-seams-baseline.json
+check_caught "copy/composed-prose-seam baseline drift" tests/copy/.composed-prose-seams-baseline.json "npx vitest run tests/copy/composedProseSeams.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
