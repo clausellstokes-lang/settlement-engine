@@ -131,7 +131,10 @@ function MoreMenu({ children }) {
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
         <div
           style={{
-            position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 30,
+            // Transient popover: must stack above the persistent map panels
+            // (QuickInspector 30, RealmInspector 40) or the open menu hides
+            // behind them.
+            position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 50,
             display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.xs,
             minWidth: 200, padding: SP.sm,
             background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`,
