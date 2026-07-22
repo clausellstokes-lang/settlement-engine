@@ -27,8 +27,22 @@ const tipBackgroundMap = {
   error: "linear-gradient(0.1turn, #ffffff00, #e11d1dcc, #ffffff00)"
 };
 
+// SECURITY (SettlementForge fork patch, H9): tip() is the ONE chokepoint every
+// tooltip flows through (~300 call sites) and it wrote its argument straight to
+// innerHTML. Several callers interpolate untrusted loaded-.map strings into that
+// argument — burg name+group, river name, the MFCG burg name pulled from
+// document.referrer — so a crafted map could inject markup into this
+// token-bearing origin on a mere hover. Escape at the chokepoint: every tip
+// renders as TEXT. escapeHtml is the fork's canonical escaper (hoisted function
+// declaration below, so it's callable here even though tip() precedes it).
+// dataset.main stores the RAW string and showMainTip() re-escapes on render, so
+// the main-tip round-trip is never a second unescaped innerHTML sink and the
+// value is never double-escaped. Trade-off: the two developer-authored
+// intentional-HTML tips (tools.js "<i>States Number</i>", military-overview.js
+// "<span…>") now show their tags literally — an accepted cosmetic loss for
+// closing every sink at one point.
 function tip(tip, main = false, type = "info", time = 0) {
-  tooltip.innerHTML = tip;
+  tooltip.innerHTML = escapeHtml(tip);
   tooltip.style.background = tipBackgroundMap[type];
 
   if (main) {
@@ -40,7 +54,7 @@ function tip(tip, main = false, type = "info", time = 0) {
 
 function showMainTip() {
   tooltip.style.background = tooltip.dataset.color;
-  tooltip.innerHTML = tooltip.dataset.main;
+  tooltip.innerHTML = escapeHtml(tooltip.dataset.main);
 }
 
 function clearMainTip() {

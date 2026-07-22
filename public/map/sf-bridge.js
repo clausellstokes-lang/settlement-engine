@@ -339,6 +339,21 @@
   // outside this bridge closure and otherwise can't see local helpers.
   window.__sfScreenToMap = screenToMap;
 
+  // ── Map seed accessor (H10) ─────────────────────────────────────────────
+  // FMG's real map seed is the top-level global `seed` (main.js: `var seed`, set
+  // from the URL seed / generateSeed() / a precreated seed, and serialized by
+  // save.js). The bridge previously reported `pack.seed`, which FMG NEVER assigns
+  // — so every fmg:ready / fmg:mapReset carried seed:null. Read the real global.
+  // It's a `var` (a genuine window property), but we reach it as a GUARDED BARE
+  // IDENTIFIER — the one convention this file uses for FMG's script-scoped globals
+  // (svg/zoom) — so an upstream rename degrades to null, not a ReferenceError.
+  function currentSeed() {
+    try {
+      if (typeof seed !== 'undefined' && seed != null && seed !== '') return String(seed);
+    } catch (_) { /* global not bound yet */ }
+    return null;
+  }
+
   // ── Viewport broadcasting ───────────────────────────────────────────────
   // Parse a transform attribute of the form "translate(tx, ty) scale(k)" or
   // "matrix(a b c d e f)". Returns { tx, ty, scale } or null.
@@ -372,7 +387,11 @@
       if (parsed) {
         tx = parsed.tx; ty = parsed.ty; scale = parsed.scale || 1;
       } else {
-        const svgSel = window.svg;
+        // PHANTOM-GLOBAL FIX: `svg` is a top-level `let` in main.js (main.js:23),
+        // a script-scoped lexical global — NEVER window.svg. window.svg was always
+        // undefined, so this d3.zoomTransform fallback never ran. Reach it as a
+        // guarded bare identifier. (d3 is a real UMD window global — left as-is.)
+        const svgSel = (typeof svg !== 'undefined') ? svg : null;
         const tf = (svgSel && window.d3?.zoomTransform) ? window.d3.zoomTransform(svgSel.node()) : null;
         scale = tf?.k || 1;
         tx = tf?.x || 0;
@@ -427,8 +446,16 @@
   }
   function installViewportBroadcaster() {
     try {
-      if (window.zoom && window.svg) {
-        window.zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
+      // PHANTOM-GLOBAL FIX (behavior activation): `zoom` (const, main.js:225) and
+      // `svg` (let, main.js:23) are script-scoped lexical globals, NEVER window
+      // properties. The old `window.zoom && window.svg` guard was `undefined &&
+      // undefined` — always false — so this d3 zoom hook NEVER attached and the
+      // React overlay's pan/zoom mirroring rode on the RAF poll alone. Reaching
+      // the bindings as guarded bare identifiers LIGHTS the zoom-driven broadcast:
+      // fmg:viewport now fires synchronously on the d3 zoom event, not only on the
+      // next animation frame.
+      if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg) {
+        zoom.on('zoom.sfBridge', scheduleViewportBroadcast);
       }
     } catch (e) { /* best-effort */ }
     // Start the RAF poll once (idempotent).
@@ -958,14 +985,16 @@
       try {
         if (typeof window.zoomTo === 'function' && cx != null && cy != null) {
           window.zoomTo(cx, cy, scale || 3, duration);
-        } else if (window.zoom && window.svg && window.d3) {
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          // PHANTOM-GLOBAL FIX: zoom/svg are lexical globals, not window props —
+          // this d3 fallback was dead. Guarded bare access makes it live.
           const w = window.graphWidth || 0;
           const h = window.graphHeight || 0;
           const s = scale || 1;
           const tx = w / 2 - cx * s;
           const ty = h / 2 - cy * s;
-          window.svg.transition().duration(duration)
-            .call(window.zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
+          svg.transition().duration(duration)
+            .call(zoom.transform, window.d3.zoomIdentity.translate(tx, ty).scale(s));
         }
         // The zoom event will fire and broadcast a new viewport; also reply
         // synchronously with the pre-transition state for the caller.
@@ -983,14 +1012,16 @@
         // function DECLARATION (thus a real global) that closes over the
         // scoped svg/zoom and applies the identity transform -- which IS the
         // fitted full-realm view in embedded mode. Use it; fall back to
-        // fitMapToScreen (canvas re-size only) and the legacy window.* path.
+        // fitMapToScreen (canvas re-size only) and the guarded bare-global path
+        // (the phantom-global sweep converted this last resort from the dead
+        // window.* form so it too is live if ever reached).
         if (typeof resetZoom === 'function') {
           resetZoom(600);
         } else if (typeof fitMapToScreen === 'function') {
           fitMapToScreen();
-        } else if (window.zoom && window.svg && window.d3) {
-          window.svg.transition().duration(600)
-            .call(window.zoom.transform, window.d3.zoomIdentity);
+        } else if (typeof zoom !== 'undefined' && zoom && typeof svg !== 'undefined' && svg && window.d3) {
+          svg.transition().duration(600)
+            .call(zoom.transform, window.d3.zoomIdentity);
         } else {
           throw new Error('fitMap: no fit mechanism available in this build');
         }
@@ -1033,8 +1064,8 @@
           installMutationObservers();
           installViewportBroadcaster();
           scheduleViewportBroadcast();
-          reply(rid, { type: 'fmg:mapResetReply', seed: pack?.seed || null });
-          postToParent({ type: 'fmg:mapReset', seed: pack?.seed || null });
+          reply(rid, { type: 'fmg:mapResetReply', seed: currentSeed() });
+          postToParent({ type: 'fmg:mapReset', seed: currentSeed() });
           notifyBurgList();
         }, 500);
       } catch (err) {
@@ -1231,7 +1262,7 @@
   function notifyReady() {
     if (readyNotified) return;
     readyNotified = true;
-    const seed = pack?.seed || null;
+    const seed = currentSeed();
     postToParent({
       type: 'fmg:ready',
       seed,
