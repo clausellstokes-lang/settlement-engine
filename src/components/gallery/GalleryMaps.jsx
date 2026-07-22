@@ -16,6 +16,7 @@ import { useStore } from '../../store';
 import { t } from '../../copy/index.js';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
+import { Image as ImageIcon } from 'lucide-react';
 import EmptyState from '../primitives/EmptyState.jsx';
 import {
   GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
@@ -214,12 +215,18 @@ export default function GalleryMaps({ onNavigate }) {
       {!loading && !error && items.length === 0 && (
         isFiltered ? (
           <EmptyState
+            Icon={ImageIcon}
+            accent
+            align="center"
             heading="No maps match those filters."
             body="Loosen a facet, or clear them all to see every shared map."
             action={{ label: t('gallery.clearFilters'), onClick: () => { clearFilters(); setSearch(''); }, variant: 'secondary' }}
           />
         ) : (
           <EmptyState
+            Icon={ImageIcon}
+            accent
+            align="center"
             heading="No shared maps yet."
             body="Premium DMs can publish a world map from the toolbar, and it lands here for anyone to browse and import."
           />

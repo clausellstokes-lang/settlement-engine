@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
-import { sans, TabIntro } from '../Primitives';
+import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
@@ -78,7 +78,6 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
 
   return (
     <div style={{...sans}}>
-      <TabIntro tabKey="services" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}

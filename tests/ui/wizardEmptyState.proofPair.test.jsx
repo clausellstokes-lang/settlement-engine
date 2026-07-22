@@ -16,7 +16,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, within, cleanup } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -62,5 +62,30 @@ describe('WizardEmptyState — Create-page demotion', () => {
 
     // The old redundant banner copy must still not render.
     expect(container.textContent).not.toMatch(/unlock Basic/i);
+  });
+
+  test('the signed-in landing merges both cards into ONE, split by a gold divider (order 15)', async () => {
+    const { WizardEmptyState } = await import(
+      '../../src/components/generate/WizardEmptyState.jsx'
+    );
+    const { container } = render(
+      <WizardEmptyState
+        showHomeHero
+        showModePicker
+        setWizardMode={() => {}}
+        onSignIn={() => {}}
+        onNavigate={() => {}}
+      />
+    );
+    // ONE card (the merged Create section) holds BOTH the instant-generator hero
+    // and the "Want full control?" mode picker where two cards used to stack.
+    const card = container.querySelector('section[aria-label="Create a settlement"]');
+    expect(card).toBeTruthy();
+    expect(within(card).getByTestId('home-hero')).toBeTruthy();
+    expect(within(card).getByText('Want full control?')).toBeTruthy();
+    // A divider sits between the two sections…
+    expect(card.querySelector('hr')).toBeTruthy();
+    // …and the old SEPARATE mode-picker card is gone.
+    expect(container.querySelector('section[aria-label="Generation modes"]')).toBeNull();
   });
 });

@@ -573,24 +573,13 @@ export const en = Object.freeze({
 
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
   // Source: UI Redesign §18.9. These set the tone for each tab in one line.
-  tabs: {
-    // The Overview intro line was removed per owner order (2026-07-21). TabIntro
-    // (components/new/Primitives.jsx) renders nothing when a tabs.* key is absent,
-    // so the Overview tab simply drops its intro caption with no empty element.
-    summary:       'The settlement, distilled to a paragraph an NPC could speak.',
-    economics:     'Who owes whom, who eats what, and why prices wobble in spring.',
-    power:         'Who decides, who enforces, and who quietly objects.',
-    defense:       'Walls, watchmen, and the things they’d rather not face.',
-    history:       'The decisions that shaped the streets your players walk.',
-    relationships: 'The threads tying NPCs into something larger than a cast list.',
-    plotHooks:     'Things gone wrong, things going wrong, things about to.',
-    dailyLife:     'A day in the life: dawn to dusk to dusk again.',
-    services:      'Who sells what, who fixes what, and who you don’t ask.',
-    resources:     'What the land gives, what the trade brings, what runs short.',
-    viability:     'Whether this place survives a hard winter, and why.',
-    npcs:          'The faces. The names. The reasons they stay.',
-    dmCompass:     'A loose handful of arrows for where this could go.',
-  },
+  // The tab intro ledes — the poetic one-line captions under each dossier tab
+  // title — were removed as a FAMILY per owner order (2026-07-22): no static
+  // poetic lede renders on any dossier tab (order 4 removed 'overview' first; this
+  // removes the rest). The namespace is kept (empty) so the copy namespace guard
+  // still finds it, and TabIntro (components/new/Primitives.jsx) renders nothing
+  // for an absent key, so every remaining <TabIntro> call heals to no element.
+  tabs: {},
 
   // ── Onboarding Coach + Checklist (UI Redesign §18.6 / §18.7) ─────────────
   onboarding: {
@@ -1297,6 +1286,10 @@ export const en = Object.freeze({
     buySaved: {
       cta:      'Unlock all exports for this settlement · {price}',
       subline:  'A one-time purchase unlocks every export for this settlement: the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
+      // The unlock pitch is a POPUP now (owner order 2026-07-22): `checkout` is
+      // the popup's confirm CTA, `dismiss` its plain close.
+      checkout: 'Continue to checkout',
+      dismiss:  'Not now',
       busy:     'Redirecting…',
       error:    'Checkout could not start. Please try again.',
     },
@@ -1304,7 +1297,10 @@ export const en = Object.freeze({
     // honest path is to save first.
     saveFirst: {
       cta:      'Save this settlement to unlock its exports',
-      subline:  'Export rights attach to a saved settlement. Save it first, then one {price} purchase unlocks all its exports to re-download: the dossier PDF, map images, and the VTT token map.',
+      // `subline` (the static save-first export pitch) was removed per owner order
+      // (2026-07-22, order-6 extension): no static export-pitch copy renders on the
+      // dossier; the button label carries the meaning. `atCap` is a save-limit
+      // warning, not an export pitch, so it stays.
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
       error:    'Could not save this settlement. Please try again.',
     },

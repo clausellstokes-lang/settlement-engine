@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
-import {serif, Section, TabIntro} from '../Primitives';
+import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
@@ -108,7 +108,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
 
   return (
     <div style={{paddingBottom:16}}>
-      <TabIntro tabKey="defense" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── DEFENSE OVERVIEW HEADER ──────────────────────────────────────── */}

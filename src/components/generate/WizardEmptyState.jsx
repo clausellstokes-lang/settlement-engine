@@ -17,7 +17,7 @@
  * Instant World premium card was earlier unmounted the same way (C1r-d).
  */
 
-import { BORDER, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
+import { BORDER, GOLD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
@@ -29,65 +29,61 @@ export function WizardEmptyState({
   onSignIn,
   onNavigate,
 }) {
-  // ONE landing frame. The Create-landing stack (hero + the signed-in heading +
-  // mode picker) shares LANDING_MAX so the column has a single edge, rather than
-  // HomeHero/WelcomeBack/mode-picker each nesting a bespoke width inside a wider parent.
+  // The signed-in Create landing is ONE card now (owner order 2026-07-22): the
+  // "Welcome back" instant-generator and the "Want full control?" mode picker were
+  // two stacked parchment plates; they merge into a single plate split by a gold
+  // rule (the SAME GOLD token the Generate button uses). Structure, not rewrite:
+  // HomeHero renders `bare` (its plate chrome dropped) as the top section, and the
+  // mode picker's content sits below the divider — both keep every behavior.
+  const merged = showHomeHero && showModePicker;
+
+  // The mode-picker content (heading + one-liner + the Basic/Advanced selector),
+  // rendered inside the merged card below the gold divider.
+  const modeSection = (
+    <>
+      <h2 style={{ margin: 0, fontFamily: serif_, fontWeight: 600, fontSize: FS.xl, color: INK, lineHeight: 1.2 }}>
+        Want full control?
+      </h2>
+      <p style={{ margin: `${SP.xs}px auto 0`, maxWidth: 480, fontFamily: serif_, fontStyle: 'italic', fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
+        Use one of the modes below.
+      </p>
+      {/* No mode is selected on this landing, so no card is active — ModeSelector
+          reads `mode` as undefined. */}
+      <ModeSelector mode={undefined} onModeChange={setWizardMode} />
+    </>
+  );
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, maxWidth: LANDING_MAX, margin: '0 auto', padding: `${SP.xl}px 0` }}>
-      {showHomeHero && (
-        <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-      )}
-      {!showHomeHero && (
-        <PageHeader
-          eyebrow="Forge a settlement"
-          title="Create a settlement"
-          subtitle="Choose a generation mode to get started."
-          size="lg"
-        />
-      )}
-      {/* The hero is the single focal point for the signed-in landing: it owns
-          the "Roll now" intent. The mode picker is a SUBORDINATE "want full
-          control?" affordance, so it renders in the quiet (non-large) variant —
-          smaller compact cards, no background image, no hover-lift — rather than
-          two large cards competing with the hero CTA for the squint-test winner. */}
-      {/* The mode picker reads as ONE parchment card matching the signed-in
-          instant-generator hero above it (same gradient, hairline, radius, and
-          soft shadow), with the two named modes as side-by-side buttons inside.
-          The heading sits a step below the hero's so the "roll now" CTA stays
-          the squint-test winner. */}
-      {showModePicker && (
+      {merged ? (
         <section
-          aria-label="Generation modes"
+          aria-label="Create a settlement"
           style={{
-            // Deep Craft material: a FLAT parchment plate (hairline rule, no
-            // rounded corners or drop shadow) — master's composition (the "one
-            // parchment section" heading + quiet ModeSelector) on the materials-
-            // bridge surface, so the kill-list ratchet does not regress.
+            // ONE flat parchment plate holding both sections (the gold rule below
+            // the instant-generator hero divides it from the mode picker).
             maxWidth: LANDING_MAX, margin: '0 auto',
-            padding: `${SP.xl}px ${SP.lg}px`,
+            padding: `${SP.xxl}px ${SP.xl}px`,
             background: 'linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)',
             border: `1px solid ${BORDER}`,
             fontFamily: sans,
             textAlign: 'center',
           }}
         >
-          <h2 style={{
-            margin: 0, fontFamily: serif_, fontWeight: 600,
-            fontSize: FS.xl, color: INK, lineHeight: 1.2,
-          }}>
-            Want full control?
-          </h2>
-          <p style={{
-            margin: `${SP.xs}px auto 0`, maxWidth: 480,
-            fontFamily: serif_, fontStyle: 'italic',
-            fontSize: FS.sm, color: BODY, lineHeight: 1.55,
-          }}>
-            Use one of the modes below.
-          </p>
-          {/* This branch only renders when no mode is selected, so no card is
-              active — ModeSelector reads `mode` as undefined. */}
-          <ModeSelector mode={undefined} onModeChange={setWizardMode} />
+          <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} bare />
+          {/* The divider — the SAME GOLD as the Generate button (the GOLD token,
+              never a new hex). */}
+          <hr aria-hidden="true" style={{ border: 0, borderTop: `2px solid ${GOLD}`, maxWidth: 480, margin: `${SP.xl}px auto` }} />
+          {modeSection}
         </section>
+      ) : showHomeHero ? (
+        <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
+      ) : (
+        <PageHeader
+          eyebrow="Forge a settlement"
+          title="Create a settlement"
+          subtitle="Choose a generation mode to get started."
+          size="lg"
+        />
       )}
     </div>
   );

@@ -24,7 +24,16 @@ const COLORS = {
   canon: { bg: '#1a3a2a', fg: '#e0d6b8', border: '#2d5a44', icon: BookMarked, label: 'Canon' },
 };
 
-export default function PhaseBadge() {
+/**
+ * @param {object} [props]
+ * @param {boolean} [props.chipOnly=false]  When true, render ONLY the Draft/Canon
+ *   status chip (and the clock-bound status), suppressing the Mark Canon / Reset
+ *   ACTION buttons. The saved-view header uses this in read mode (owner order
+ *   2026-07-22): the verbs live in the Actions panel now, so the header keeps only
+ *   nav + identity + status chips. Edit mode passes chipOnly=false to keep the
+ *   inline Mark Canon / Reset affordance where the Actions rail is not shown.
+ */
+export default function PhaseBadge({ chipOnly = false }) {
   const phase     = useStore(s => s.phase);
   const canonize  = useStore(s => s.canonize);
   const uncanonize = useStore(s => s.uncanonize);
@@ -85,7 +94,7 @@ export default function PhaseBadge() {
             <span style={{ opacity: 0.7, marginLeft: 4 }}>· {eventCount}</span>
           )}
         </span>
-        {phase === 'draft' && (
+        {!chipOnly && phase === 'draft' && (
           <Button
             variant="gold"
             size="sm"
@@ -96,7 +105,7 @@ export default function PhaseBadge() {
             {t('canon.markCanon')}
           </Button>
         )}
-        {phase === 'canon' && !clockBound && (
+        {!chipOnly && phase === 'canon' && !clockBound && (
           <Button
             variant="danger"
             size="sm"

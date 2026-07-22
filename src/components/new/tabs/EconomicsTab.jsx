@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
-import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
+import { Ti, sans, Section, Empty } from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
@@ -293,7 +293,6 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
   return (
     <div style={{...sans}}>
-      <TabIntro tabKey="economics" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}

@@ -80,22 +80,10 @@ describe('en map shape (drift guards)', () => {
     }
   });
 
-  it('has every tab name referenced by the redesign §18.9 spec', () => {
-    // 'overview' was intentionally removed from tabs.* per owner order
-    // (2026-07-21): the Overview tab no longer carries an intro line. TabIntro
-    // (components/new/Primitives.jsx) renders nothing when the key is absent, so
-    // the drop is safe; it is no longer a required tab intro.
-    const requiredTabs = [
-      'summary', 'economics', 'power', 'defense', 'history',
-      'relationships', 'plotHooks', 'dailyLife', 'services', 'resources',
-      'viability', 'npcs', 'dmCompass',
-    ];
-    for (const tab of requiredTabs) {
-      expect(en.tabs).toHaveProperty(tab);
-      expect(typeof en.tabs[tab]).toBe('string');
-      expect(en.tabs[tab].length).toBeGreaterThan(0);
-    }
-  });
+  // The 'has every tab name' drift-guard was removed with the tab intro-lede
+  // family (owner order 2026-07-22): the poetic tabs.* ledes no longer exist, so
+  // there is no required-tab list to guard. tabs stays an (empty) namespace,
+  // pinned by the namespace guard above.
 
   it('has all three pricing tiers with name + cta + features', () => {
     for (const tier of ['wanderer', 'cartographer', 'founder']) {

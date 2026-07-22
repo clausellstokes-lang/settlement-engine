@@ -38,6 +38,7 @@ import { t } from '../copy/index.js';
 import { sans, FS, RED, BODY, INK, PARCH } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
+import ExportUnlockDialog from './dossier/ExportUnlockDialog.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 /**
@@ -84,6 +85,9 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
   const [ladderOpen, setLadderOpen] = useState(false);
+  // The durable-buy pitch is a popup now (owner order 2026-07-22) — the button
+  // opens ExportUnlockDialog instead of dropping a static explainer caption.
+  const [unlockOpen, setUnlockOpen] = useState(false);
   // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
   // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
   // body. Null while the flag is off, so the checkout body is byte-identical.
@@ -176,17 +180,12 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
     }
   }
 
-  // ── The signed-in durable purchase, keyed to this saved dossier ─────────────
-  async function runSavedCheckout() {
-    setBusy(true); setError(null);
-    try {
-      await startCheckout('single_dossier', { checkoutToken: createDossierCheckoutToken(), saveId, captchaToken: captchaToken || undefined });
-      // Redirects on success.
-    } catch (e) {
-      setError(e.message || t('dossierExport.buySaved.error'));
-      setBusy(false);
-    }
-  }
+  // ── The signed-in durable purchase now lives in ExportUnlockDialog (owner
+  // order 2026-07-22): the durable single-dossier checkout runs from the popup's
+  // confirm through the same startCheckout('single_dossier', { saveId }) seam, so
+  // this component no longer holds a runSavedCheckout of its own. (Wave-D captcha
+  // is inert today; when it activates, thread its token into ExportUnlockDialog —
+  // the anon one-time path below still carries the CaptchaGate.)
 
   // ── State: ANON → the ladder popup ──────────────────────────────────────────
   if (access.reason === 'anon') {
@@ -242,6 +241,13 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
 
   // ── State: signed-in, no export gate, UNSAVED draft → save-first CTA ─────────
   if (access.reason === 'unsaved') {
+    // Owner order (2026-07-22, order-6 extension): the save-first EXPORT-pitch
+    // explainer no longer renders as a static caption. The button label already
+    // states the action ("Save this settlement to unlock its exports"), so the
+    // save-first path needs no static pitch (JUDGMENT: plain removal, not a dialog
+    // variant — the click's behavior is self-evident from its label). The at-cap
+    // WARNING (why saving is blocked) is not an export pitch and stays, surfaced
+    // only when the account is at its save limit.
     return (
       <div style={wrapStyle}>
         <Button
@@ -252,24 +258,22 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           busy={busy}
           onClick={runSaveFirst}
           style={{ minHeight: 44 }}
-          title={canSave
-            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
-            : t('dossierExport.saveFirst.atCap')}
+          title={canSave ? undefined : t('dossierExport.saveFirst.atCap')}
         >
           {t('dossierExport.saveFirst.cta')}
         </Button>
-        <span style={captionStyle}>
-          {canSave
-            ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
-            : t('dossierExport.saveFirst.atCap')}
-        </span>
+        {!canSave && <span style={captionStyle}>{t('dossierExport.saveFirst.atCap')}</span>}
         {error && <span style={errStyle}>{error}</span>}
       </div>
     );
   }
 
   // ── State: signed-in, no export gate, SAVED, not entitled → durable $2.99 ────
-  // (access.reason === 'unpurchased')
+  // (access.reason === 'unpurchased'). Owner order (2026-07-22): the explainer no
+  // longer sits as a static caption — the button opens the ExportUnlockDialog
+  // popup, which carries the same "Unlock all exports … $2.99" title + explainer
+  // and runs the durable checkout on confirm. Entitled owners never reach here
+  // (access.allowed short-circuits to null above), so the export runs directly.
   return (
     <div style={wrapStyle}>
       <Button
@@ -277,20 +281,15 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
         variant="secondary"
         size={size}
         icon={<Download size={12} />}
-        busy={busy}
         disabled={!isConfigured}
-        onClick={runSavedCheckout}
+        onClick={() => { setError(null); setUnlockOpen(true); }}
         style={{ minHeight: 44 }}
-        title={t('dossierExport.buySaved.subline')}
+        title={t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       >
-        {busy
-          ? t('dossierExport.buySaved.busy')
-          : t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
+        {t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       </Button>
-      <span style={captionStyle}>{t('dossierExport.buySaved.subline')}</span>
-      {/* Wave-D human verification (INERT until activated). Managed/invisible. */}
-      <CaptchaGate action="dossier" onToken={setCaptchaToken} />
       {error && <span style={errStyle}>{error}</span>}
+      <ExportUnlockDialog open={unlockOpen} saveId={effectiveSaveId} onClose={() => setUnlockOpen(false)} />
     </div>
   );
 }

@@ -21,7 +21,7 @@
  * actions, never rendering); importing creates a campaign and stays premium.
  */
 import { useState, useEffect, useCallback } from 'react';
-import { Castle, Swords, Users } from 'lucide-react';
+import { Castle, Image as ImageIcon, Swords, Users } from 'lucide-react';
 import { useStore } from '../../store';
 import { navigate } from '../../hooks/useRoute.js';
 import { t } from '../../copy/index.js';
@@ -262,12 +262,18 @@ export default function GalleryCampaigns({ onNavigate }) {
           {!loading && !error && items.length === 0 && (
             isFiltered ? (
               <EmptyState
+                Icon={ImageIcon}
+                accent
+                align="center"
                 heading="No campaigns match those filters."
                 body="Loosen a facet, or clear them all to see every shared campaign."
                 action={{ label: t('gallery.clearFilters'), onClick: () => { clearFilters(); setSearch(''); }, variant: 'secondary' }}
               />
             ) : (
               <EmptyState
+                Icon={ImageIcon}
+                accent
+                align="center"
                 heading="No shared campaigns yet."
                 body="Premium DMs can publish a map together with its living campaign, and it appears here for others to read and adopt."
               />

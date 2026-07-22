@@ -1,12 +1,9 @@
-import { Check, SlidersHorizontal, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useId } from 'react';
 
-import useIsMobile from '../../hooks/useIsMobile.js';
 import { TIER_LABELS } from '../new/design.js';
-import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
-import {
-  BORDER, CARD_ALT, FS, GOLD, INK, SP, sans } from '../theme.js';
+import { FS, INK, sans } from '../theme.js';
 import {
   activeFilterCount,
   CULTURE_OPTIONS,
@@ -16,46 +13,7 @@ import {
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
 } from './galleryUtils.js';
-
-function SidebarSection({ title, count = 0, children }) {
-  return (
-    <section style={{ display: 'grid', gap: 8 }}>
-      <h3 style={{
-        margin: 0,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 6,
-        color: INK,
-        fontFamily: sans,
-        fontSize: FS.xs,
-        fontWeight: 950,
-        textTransform: 'uppercase',
-        letterSpacing: 0,
-      }}>
-        {title}
-        {count > 0 && (
-          <span style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minWidth: 16,
-            height: 16,
-            padding: '0 5px',
-            borderRadius: 999,
-            background: GOLD,
-            color: INK,
-            fontFamily: sans,
-            fontSize: FS.xxs,
-            fontWeight: 950,
-          }}>
-            {count}
-          </span>
-        )}
-      </h3>
-      {children}
-    </section>
-  );
-}
+import GalleryFilterShell, { SidebarSection } from './GalleryFilterShell.jsx';
 
 function FilterChips({ options, value = [], onToggle }) {
   const selected = new Set(value);
@@ -148,68 +106,16 @@ function FilterBody({ filters, onToggleArray, onToggleBool, isSignedIn }) {
 }
 
 /**
- * Gallery settlements filter facets. On desktop this is the sticky left sidebar.
- * On mobile the full facet wall would stack above the results, so the SAME facet
- * body moves into a BottomSheet behind a single "Filters (N)" trigger — keeping
- * the results in the first viewport.
+ * Gallery settlements filter facets. The chrome (bordered aside + Filters header +
+ * Clear, or the mobile BottomSheet) is the shared GalleryFilterShell (owner order
+ * 2026-07-22 — the three gallery tabs share one filter design); this component
+ * supplies only the settlement facet body.
  */
 export default function GallerySidebar({ filters, onToggleArray, onToggleBool, onClear, isSignedIn }) {
-  const isMobile = useIsMobile();
   const active = activeFilterCount(filters);
-  const bodyProps = { filters, onToggleArray, onToggleBool, isSignedIn };
-
-  if (isMobile) {
-    // Mobile: a single Filters (N) trigger opens the sheet; the facet body and a
-    // Clear control live inside it. Button already floors the trigger at 44px.
-    return (
-      <div style={{ marginBottom: SP.md }}>
-        <BottomSheet title="Filters" triggerLabel="Filters" count={active} fullWidthTrigger>
-          <div style={{ display: 'grid', gap: SP.lg }}>
-            {active > 0 && (
-              <Button
-                variant="ghost"
-                icon={<X size={12} />}
-                onClick={onClear}
-                aria-label={`Clear all ${active} active filters`}
-                style={{ justifySelf: 'start', color: GOLD }}
-              >
-                Clear
-              </Button>
-            )}
-            <FilterBody {...bodyProps} />
-          </div>
-        </BottomSheet>
-      </div>
-    );
-  }
-
   return (
-    <aside className="gallery-sidebar-panel" style={{
-      display: 'grid',
-      gap: SP.lg,
-      alignSelf: 'start',
-      padding: SP.md,
-      border: `1px solid ${BORDER}`,
-      background: CARD_ALT,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <SlidersHorizontal size={15} color={GOLD} />
-        <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950 }}>
-          Filters
-        </h2>
-        {active > 0 && (
-          <Button
-            variant="ghost"
-            size="sm"
-            icon={<X size={12} />}
-            onClick={onClear}
-            style={{ marginLeft: 'auto', color: GOLD }}
-          >
-            Clear
-          </Button>
-        )}
-      </div>
-      <FilterBody {...bodyProps} />
-    </aside>
+    <GalleryFilterShell activeCount={active} onClear={onClear}>
+      <FilterBody filters={filters} onToggleArray={onToggleArray} onToggleBool={onToggleBool} isSignedIn={isSignedIn} />
+    </GalleryFilterShell>
   );
 }

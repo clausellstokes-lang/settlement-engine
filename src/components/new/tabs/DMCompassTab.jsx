@@ -14,7 +14,7 @@
  */
 
 import { FS, swatch, MUTED } from '../../theme.js';
-import { Section, TabIntro } from '../Primitives';
+import { Section } from '../Primitives';
 
 // ── Small helpers ────────────────────────────────────────────────────────────
 
@@ -162,7 +162,6 @@ export default function DMCompassTab({ settlement: s }) {
 
   return (
     <div style={{ padding: '14px 18px' }}>
-      <TabIntro tabKey="dmCompass" />
       <CompassPanel           compass={compass} />
       <IdentityMarkersPanel   markers={markers} />
       <FrictionPointsPanel    points={points} />

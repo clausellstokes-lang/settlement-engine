@@ -62,7 +62,9 @@ export const Ti = (v) => {
 export function Collapsible({ title, defaultOpen = true, children }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ marginBottom: 14, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
+    // marginBottom 0 (owner order 2026-07-22, flush sweep): dossier cards sit
+    // flush, no inter-card parchment gap.
+    <div style={{ marginBottom: 0, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
       <Button
         variant="secondary"
         aria-expanded={open}
@@ -92,7 +94,8 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     const headerBg   = accent ? `${accent}12` : (open ? '#f5ede0' : '#faf8f4');
     const titleColor = accent || '#1c1409';
     return (
-      <div style={{ marginBottom: 16, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
+      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards.
+      <div style={{ marginBottom: 0, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
         <Button
           variant="secondary"
           aria-expanded={open}
@@ -113,7 +116,8 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     );
   }
   return (
-    <div style={{ marginBottom: 16 }}>
+    // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier sections.
+    <div style={{ marginBottom: 0 }}>
       <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.xl, fontWeight: 600, color: swatch.inkMag, borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12 }}>
         {title}
       </div>
