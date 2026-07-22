@@ -15,6 +15,8 @@ import { resolveLeash } from '../corruptionLeash.js';
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
+// H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
+import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -302,7 +304,9 @@ function pressureScore(pressureIdx, settlementId, kinds = []) {
  * @param {any} state
  */
 function settlementForState(snapshot, state) {
-  return (snapshot?.settlements || []).find((/** @type {any} */ item) => String(item.id) === String(state.settlementId)) || null;
+  // H17: O(1) id lookup (FIRST-wins, matching the prior linear .find) instead of an O(settlements)
+  // rescan per NPC state.
+  return settlementByIdIndex(snapshot).get(String(state.settlementId)) || null;
 }
 
 /**
@@ -312,10 +316,12 @@ function settlementForState(snapshot, state) {
 function dominantRelationshipContext(snapshot, settlementId) {
   const states = snapshot?.worldState?.relationshipStates || {};
   const sid = String(settlementId);
-  for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+  // H17: iterate only the edges TOUCHING sid (edge-order preserved) instead of the whole graph per
+  // NPC state. The index keys on the normalized from/to the snapshot always carries, so every edge
+  // here satisfies the old `from === sid || to === sid` guard — it is dropped as a proven no-op.
+  for (const edge of edgeAdjacencyIndex(snapshot?.regionalGraph).get(sid) || []) {
     const from = String(edge.from || edge.source || '');
     const to = String(edge.to || edge.target || '');
-    if (from !== sid && to !== sid) continue;
     const key = edge.id || `rel.${from}.${to}`;
     const rel = states[key]?.relationshipType || edge.relationshipType || edge.type || 'neutral';
     if (rel === 'vassal') {

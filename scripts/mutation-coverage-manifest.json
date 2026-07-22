@@ -628,6 +628,10 @@
       "kind": "mutation",
       "label": "pdf/parity canonPath drift"
     },
+    "tests/perf/tickScanBudget.test.js": {
+      "kind": "rationale",
+      "rationale": "A COUNTS-not-ms asymptotic ratchet (tickIndices scanOps at S=4 vs S=8, ratio <= 2.6x, fallbacks === 0) that exists to catch a super-linear per-advance graph-scan CLASS, like its E-F/tickOpBudget sibling — so mutation-testing the generous ceiling is disproportionate. It is already self-proving: an embedded pre-index raw-scan proxy asserts the ratio ceiling discriminates the fix from the bug it replaced, and a source-scan habitat guard reds if any flagged site (npcAgency/roadsKernel/stressorDynamics) is reverted to a raw per-pair scan. Both teeth were plant-proven red-then-green. The output the indices preserve is separately byte-identity-pinned by the Wave-4 receipt and the roads/stressor goldens."
+    },
     "tests/property/ageOverlayGolden.test.js": {
       "kind": "rationale",
       "ref": "golden-byte-pin"
