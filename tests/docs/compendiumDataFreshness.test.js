@@ -24,7 +24,6 @@ import { SYSTEM_VARIABLES, CAUSAL_BANDS } from '../../src/domain/causalState.js'
 import { PRESSURE_KINDS } from '../../src/domain/autonomy/signalRegistry.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { OPERATIONS, EXEMPT_OPERATIONS } from '../../src/store/operationRegistry.js';
-import { DEITY_POOL } from '../../src/generators/data/deityPool.js';
 import { TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { ARCHETYPES, REL_TYPES } from '../../src/domain/compendium/catalogData.js';
@@ -75,13 +74,39 @@ describe('Compendium data — the drift contract', () => {
     expect(sum).toBe(registered.length);
   });
 
-  it('renders the real deity, lens, archetype and relationship counts', () => {
-    expect(COMPENDIUM_DATA.deities.count).toBe(DEITY_POOL.length);
-    expect(COMPENDIUM_DATA.deities.entries).toHaveLength(DEITY_POOL.length);
+  it('renders the real lens, archetype and relationship counts', () => {
+    // The premade-deity roster was removed by owner ruling (2026-07-21): no premade
+    // deities; they enter a world only via custom-content authoring. The compendium
+    // publishes no deity block, so there is nothing to count here.
+    expect(COMPENDIUM_DATA.deities).toBeUndefined();
     expect(COMPENDIUM_DATA.lenses.count).toBe(TOWN_MAP_STYLE_IDS.length);
     expect(COMPENDIUM_DATA.lenses.entries.map((e) => e.id)).toEqual([...TOWN_MAP_STYLE_IDS]);
     expect(COMPENDIUM_DATA.archetypes.count).toBe(ARCHETYPES.length);
     expect(COMPENDIUM_DATA.relationships.count).toBe(REL_TYPES.length);
+  });
+
+  it('every operation renders with an authored label + description (legibility lane)', () => {
+    for (const e of COMPENDIUM_DATA.operations.entries) {
+      expect(typeof e.label === 'string' && e.label.trim().length > 0, `op ${e.opType} label`).toBe(true);
+      expect(/[a-z][A-Z]/.test(e.label), `op ${e.opType} label "${e.label}" is raw camelCase`).toBe(false);
+      expect(typeof e.description === 'string' && e.description.trim().length > 0, `op ${e.opType} description`).toBe(true);
+    }
+  });
+
+  it('the Living-World vocabularies render authored labels + descriptions (legibility lane)', () => {
+    for (const s of COMPENDIUM_DATA.systems) {
+      expect(typeof s.blurb === 'string' && s.blurb.trim().length > 0, `system ${s.id} blurb`).toBe(true);
+    }
+    expect(COMPENDIUM_DATA.causal.variableEntries.map((v) => v.id)).toEqual([...SYSTEM_VARIABLES]);
+    for (const v of COMPENDIUM_DATA.causal.variableEntries) {
+      expect(v.label && v.label.trim().length > 0, `var ${v.id} label`).toBe(true);
+      expect(v.description && v.description.trim().length > 0, `var ${v.id} description`).toBe(true);
+    }
+    expect(COMPENDIUM_DATA.pressures.entries.map((p) => p.id)).toEqual([...PRESSURE_KINDS]);
+    for (const p of COMPENDIUM_DATA.pressures.entries) {
+      expect(p.label && p.label.trim().length > 0, `pressure ${p.id} label`).toBe(true);
+      expect(p.description && p.description.trim().length > 0, `pressure ${p.id} description`).toBe(true);
+    }
   });
 
   it('renders the corpus block from the OWNER-COMMITTED APPROVED_CORPUS only (V-5)', () => {

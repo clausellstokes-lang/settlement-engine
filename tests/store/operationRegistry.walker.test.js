@@ -49,12 +49,35 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 import {
+  OPERATIONS,
   registeredActionNames,
   exemptActionNames,
   EXEMPT_CEILING,
 } from '../../src/store/operationRegistry.js';
+import { buildCompendiumDataObject } from '../../scripts/generate-compendium-data.mjs';
 
 const STORE_DIR = join(dirname(fileURLToPath(import.meta.url)), '../../src/store');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
+
+// ── Compendium legibility (this lane) ────────────────────────────────────────
+// A LEGIBLE label carries a real, human, spaced name — never a raw camelCase id.
+// The [a-z][A-Z] test catches an unspaced camelCase run (generateSettlement) while
+// leaving acronyms (NPC growth) and single words (Food) alone. Every rendered
+// vocabulary entry must ALSO carry a non-empty description. The fix for a red:
+// author label + description at the source (operationRegistry.js OPERATIONS, or the
+// gen script's ENDGAME_SYSTEMS / CAUSAL_VARIABLE_DESC / PRESSURE_GLOSSARY, or the
+// engine's VARIABLE_LABEL) — never a per-surface camelCase splitter.
+/** @param {unknown} label @returns {boolean} */
+function isLegibleLabel(label) {
+  // Non-empty, no unspaced camelCase run (generateSettlement), and no raw
+  // snake_case id (food_security) leaking through as a "label".
+  return typeof label === 'string' && label.trim().length > 0
+    && !/[a-z][A-Z]/.test(label) && !label.includes('_');
+}
+/** @param {unknown} desc @returns {boolean} */
+function isNonEmptyText(desc) {
+  return typeof desc === 'string' && desc.trim().length > 0;
+}
 
 // ── The census scanner ──────────────────────────────────────────────────────
 // A comment/string-aware, brace-matched source scan. Kept self-contained here
@@ -261,5 +284,109 @@ describe('Track K COMPLETION — operation registry completeness walker', () => 
     // the ceiling is lowered with it; it is never raised without a deliberate,
     // documented reason (the clamp-ratchet monotonicity rule).
     expect(exempt.length).toBeLessThanOrEqual(EXEMPT_CEILING);
+  });
+});
+
+// ── The compendium-legibility walker (operations-legibility lane) ─────────────
+// Every registered operation must carry a legible, spaced label + a plain
+// description, and the Living-World tab's other rendered vocabularies (endgame
+// systems, causal variables, pressures) must too. No display surface may render a
+// bare camelCase/snake_case id as the primary term.
+describe('Compendium legibility — operations carry a spaced label + a description', () => {
+  const ops = Object.values(OPERATIONS);
+
+  test('every registered operation has a legible, spaced label (no raw camelCase)', () => {
+    const bad = ops
+      .filter((op) => !isLegibleLabel(op.label))
+      .map((op) => `${op.opType} → ${JSON.stringify(op.label)}`);
+    // A NEW operation shipped without a legible label lands here. Add a spaced,
+    // human `label` in src/store/operationRegistry.js OPERATIONS — never a runtime
+    // camelCase splitter (it would mangle acronyms like NPC/AI and invent names).
+    expect(bad, `\nOperations with a missing / raw-camelCase label:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('every registered operation has a non-empty description', () => {
+    const bad = ops.filter((op) => !isNonEmptyText(op.description)).map((op) => op.opType);
+    // Add a 1-2 sentence `description` of what the op does in OPERATIONS. Ground it
+    // in the real handler/engine effect (never describe an effect the code lacks).
+    expect(bad, `\nOperations with no description:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('positive control — the legibility check discriminates', () => {
+    // Raw camelCase / snake_case ids and blanks fail; real spaced labels + acronyms pass.
+    expect(isLegibleLabel('generateSettlement')).toBe(false);
+    expect(isLegibleLabel('food_security')).toBe(false);
+    expect(isLegibleLabel('')).toBe(false);
+    expect(isLegibleLabel('Generate a settlement')).toBe(true);
+    expect(isLegibleLabel('NPC growth')).toBe(true);
+    expect(isLegibleLabel('Food')).toBe(true);
+    expect(isNonEmptyText('')).toBe(false);
+    expect(isNonEmptyText('does a thing')).toBe(true);
+  });
+});
+
+describe('Compendium legibility — Living-World vocabularies carry labels + descriptions', () => {
+  // Read the freshly-built compendium object (the source the gen script bakes into
+  // the artifact) so this checks the authored copy regardless of regen state.
+  const data = buildCompendiumDataObject();
+
+  test('every endgame system has a legible label + a non-empty blurb', () => {
+    const bad = data.systems
+      .filter((s) => !isLegibleLabel(s.label) || !isNonEmptyText(s.blurb))
+      .map((s) => s.id);
+    // Author `label` + `blurb` in scripts/generate-compendium-data.mjs ENDGAME_SYSTEMS.
+    expect(bad, `\nEndgame systems missing a legible label or blurb:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('every causal variable has a legible label + a non-empty description', () => {
+    const bad = data.causal.variableEntries
+      .filter((v) => !isLegibleLabel(v.label) || !isNonEmptyText(v.description))
+      .map((v) => v.id);
+    // Label comes from src/domain/causalState.js VARIABLE_LABEL; description from the
+    // gen script's CAUSAL_VARIABLE_DESC.
+    expect(bad, `\nCausal variables missing a legible label or description:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('every pressure has a legible label + a non-empty description', () => {
+    const bad = data.pressures.entries
+      .filter((p) => !isLegibleLabel(p.label) || !isNonEmptyText(p.description))
+      .map((p) => p.id);
+    // Author label + description in the gen script's PRESSURE_GLOSSARY.
+    expect(bad, `\nPressures missing a legible label or description:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+});
+
+describe('Compendium legibility — no display surface renders a bare operation id as the term', () => {
+  // The converted display sites must read the authored label / accessor, never the
+  // raw opType, as the PRIMARY term. (OperationsHub + the Surveyor still show the
+  // opType as a SECONDARY monospace reference, which is intentional and allowed.)
+  const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
+
+  test('the A–Z index uses the operation label as its term', () => {
+    const src = read('src/components/compendium/CompendiumDashboard.jsx');
+    expect(
+      /for \(const o of CD\.operations\.entries\)[\s\S]*?term:\s*o\.label/.test(src),
+      'CompendiumDashboard A–Z must push { term: o.label } for operations (not o.opType). Use the authored label.',
+    ).toBe(true);
+    expect(
+      /for \(const o of CD\.operations\.entries\)[\s\S]*?term:\s*o\.opType/.test(src),
+      'CompendiumDashboard A–Z renders the raw o.opType as the term — use o.label.',
+    ).toBe(false);
+  });
+
+  test('the global search index uses the operation label as its term', () => {
+    const src = read('src/domain/compendium/searchIndex.js');
+    expect(
+      /OPERATION_ENTRIES[\s\S]*?term:\s*o\.label/.test(src),
+      'searchIndex OPERATION_ENTRIES must use term: o.label (raw opType stays only in keywords).',
+    ).toBe(true);
+  });
+
+  test('the Surveyor apply panel renders the operation label via the accessor', () => {
+    const src = read('src/components/surveyor/InterpretApplyPanel.jsx');
+    expect(
+      src.includes('operationLabel(op.opType)'),
+      'InterpretApplyPanel must render operationLabel(op.opType) as the op heading (not a bare {op.opType}).',
+    ).toBe(true);
   });
 });

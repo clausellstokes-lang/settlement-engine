@@ -24,7 +24,6 @@ const onLink = (e, onNavigate, tab, anchor) => { e.preventDefault(); onNavigate(
 const CATALOGS = [
   { tab:'institutions', anchor:'institutions', label:'Institutions', count:CD.institutions.distinctNames, blurb:'Every institution the engine can place, across all tiers.' },
   { tab:'power',        anchor:'archetypes',   label:'Archetypes',   count:CD.archetypes.count,    blurb:'Emergent settlement archetypes keyed to slider + threat conditions.' },
-  { tab:'deities',      anchor:'deities',      label:'Deities',      count:CD.deities.count,       blurb:'The core pantheon, by rank, alignment, and domain.' },
   { tab:'operations',   anchor:'operations',   label:'Operations',   count:CD.operations.count,    blurb:'Every operation the engine can perform, with its class and receipt.' },
   { tab:'living',       anchor:'systems',      label:'Living World',  count:CD.systems.length,     blurb:'The endgame systems, the causal substrate, and the presets that light them.' },
   { tab:'lenses',       anchor:'lenses',       label:'Map Lenses',   count:CD.lenses.count,        blurb:'The map rendering lenses and the bespoke-style schema.' },
@@ -75,8 +74,9 @@ export function CompendiumOverview({ onNavigate }) {
 function buildIndexEntries() {
   const out = [];
   for (const a of CD.archetypes.entries) out.push({ term:a.name, tab:'power', anchor:'archetypes', kind:'Archetype' });
-  for (const d of CD.deities.entries) out.push({ term:d.name, tab:'deities', anchor:`deity-${slug(d.slug)}`, kind:'Deity' });
-  for (const o of CD.operations.entries) out.push({ term:o.opType, tab:'operations', anchor:`op-${slug(o.opType)}`, kind:'Operation' });
+  // The A–Z entry shows the operation's authored, human label (not the raw camelCase
+  // opType); the anchor stays op-<slug(opType)> so existing deep-links survive.
+  for (const o of CD.operations.entries) out.push({ term:o.label, tab:'operations', anchor:`op-${slug(o.opType)}`, kind:'Operation' });
   for (const s of CD.systems) out.push({ term:s.label, tab:'living', anchor:`system-${slug(s.id)}`, kind:'System' });
   for (const l of CD.lenses.entries) out.push({ term:l.label, tab:'lenses', anchor:`lens-${slug(l.id)}`, kind:'Lens' });
   for (const r of CD.relationships.entries) out.push({ term:r.label, tab:'neighbour', anchor:'neighbours', kind:'Relationship' });

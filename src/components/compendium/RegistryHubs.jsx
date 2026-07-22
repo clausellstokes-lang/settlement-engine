@@ -79,10 +79,15 @@ export function OperationsHub() {
           <div key={o.opType} id={`op-${slug(o.opType)}`}
             style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
               borderLeft: `3px solid ${KLASS_COLOR[o.klass] || GOLD}`, padding: '8px 10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
-              <code style={{ fontFamily: 'monospace', fontSize: FS['12.5'], fontWeight: 700, color: INK, flex: 1 }}>{o.opType}</code>
+            {/* The legible, authored label headings the card; the raw camelCase
+                opType stays as a small monospace reference (the deep-link anchor
+                and the store-verb name). Then a plain description of what it does. */}
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, marginBottom: 2 }}>
+              <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, flex: 1 }}>{o.label}</span>
               <Tag label={o.klass} color={KLASS_COLOR[o.klass] || GOLD} />
             </div>
+            <code style={{ display: 'block', fontFamily: 'monospace', fontSize: FS.xxs, color: MUT, marginBottom: 4 }}>{o.opType}</code>
+            <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5, marginBottom: 6, fontFamily: sans }}>{o.description}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>
               <span style={{ background: `${GOLD}14`, padding: '1px 6px' }}>scope: {o.targetScope}</span>
               <span style={{ background: o.receiptRef ? '#1a5a2814' : swatch['#E8E2D6'],
@@ -113,17 +118,36 @@ export function SystemsHub() {
       </p>
 
       <Card title={`The causal substrate: ${causal.variableCount} variables`} accent="#1a3a7a" lead>
-        Beneath every settlement sit {causal.variableCount} live causal variables
-        ({causal.variables.slice(0, 4).map((v) => v.replace(/_/g, ' ')).join(', ')}, and the rest),
-        each with a score, a band ({causal.bands.join(' / ')}), and named contributors. They are the
-        shared state every other system reads from. Advance time and they shift together.
+        Beneath every settlement sit {causal.variableCount} live causal variables, each with a score, a
+        band ({causal.bands.join(' / ')}), and named contributors. They are the shared state every other
+        system reads from. Advance time and they shift together.
       </Card>
+      {/* Each variable with its authored label (not a split of the snake_case id)
+          and a plain reading of what its score captures. */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 6, margin: '0 0 4px' }}>
+        {causal.variableEntries.map((v) => (
+          <div key={v.id} style={{ border: `1px solid ${BOR}`, borderLeft: '3px solid #1a3a7a', padding: '8px 10px' }}>
+            <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 2 }}>{v.label}</div>
+            <code style={{ display: 'block', fontFamily: 'monospace', fontSize: FS.xxs, color: MUT, marginBottom: 4 }}>{v.id}</code>
+            <div style={{ fontSize: FS.xxs, color: SEC, lineHeight: 1.5, fontFamily: sans }}>{v.description}</div>
+          </div>
+        ))}
+      </div>
       <div id="pressures" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
         <Card title={`Pressures: ${pressures.count} axes`} accent="#a0762a">
-          Above the variables ride {pressures.count} pressures ({pressures.kinds.join(', ')}), scored
-          0&ndash;1: the directional strain on the settlement, each carrying its own reasons. Pressures
-          are how the engine turns a static state into a settlement about to do something.
+          Above the variables ride {pressures.count} pressures, scored 0&ndash;1: the directional strain on
+          the settlement, each carrying its own reasons. Pressures are how the engine turns a static state
+          into a settlement about to do something.
         </Card>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 6, margin: '6px 0 0' }}>
+          {pressures.entries.map((p) => (
+            <div key={p.id} style={{ border: `1px solid ${BOR}`, borderLeft: '3px solid #a0762a', padding: '8px 10px' }}>
+              <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 2 }}>{p.label}</div>
+              <code style={{ display: 'block', fontFamily: 'monospace', fontSize: FS.xxs, color: MUT, marginBottom: 4 }}>{p.id}</code>
+              <div style={{ fontSize: FS.xxs, color: SEC, lineHeight: 1.5, fontFamily: sans }}>{p.description}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div id="systems" style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '18px 0 4px', scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
@@ -140,6 +164,7 @@ export function SystemsHub() {
               borderLeft: `3px solid ${s.dormant ? MUT : GOLD}`, padding: '8px 10px' }}>
             <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 3 }}>{s.label}</div>
             <code style={{ fontFamily: 'monospace', fontSize: FS.xxs, color: SEC }}>{s.flag}</code>
+            <div style={{ marginTop: 5, fontSize: FS.xxs, color: SEC, lineHeight: 1.5, fontFamily: sans }}>{s.blurb}</div>
             <div style={{ marginTop: 5, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>
               {s.dormant
                 ? <span style={{ color: MUT, fontStyle: 'italic' }}>dormant: lit by no preset</span>

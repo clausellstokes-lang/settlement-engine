@@ -1411,8 +1411,14 @@ export function variablePolarity(variable) {
 // reported alongside the legacy 4-dimension delta. Mirrors the shape of
 // compareSystemState so consumers can render the two side-by-side.
 
-/** @type {Readonly<Record<string, string>>} */
-const VARIABLE_LABEL = Object.freeze({
+/**
+ * Authored, human-readable label for each substrate variable. The single source
+ * of the spaced display name (the public Compendium's Living-World tab reads this
+ * through gen:compendium-data rather than splitting the snake_case id at render
+ * time). Every SYSTEM_VARIABLES entry must have a label here.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const VARIABLE_LABEL = Object.freeze({
   food_security:           'Food security',
   labor_capacity:          'Labor capacity',
   public_legitimacy:       'Public legitimacy',
