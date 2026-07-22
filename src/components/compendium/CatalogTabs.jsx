@@ -163,10 +163,14 @@ export function StressTab({ search='' }) {
       <div style={{ fontSize:FS.xs, fontWeight:800, color:GOLD_TXT, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:4 }}>Stresses Compound</div>
       <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:0 }}>Multiple stresses compound. Famine + Political Fracture means food distribution is contested by factions.</p>
     </div>
-    {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.description||s.desc||'').toLowerCase().includes(search)).map(s => (
+    {list.filter(s=>!search||(s.label||'').toLowerCase().includes(search)||(s.viabilityNote||s.description||s.desc||'').toLowerCase().includes(search)||(s.crisisHook||'').toLowerCase().includes(search)).map(s => (
       <div key={s.label||s.id} style={{ padding:'8px 0', borderBottom:`1px solid ${BOR}` }}>
         <div style={{ fontSize:FS.md, fontWeight:700, color:swatch.danger, marginBottom:3 }}>{s.label}</div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.description||s.desc||EMPTY_VALUE}</div>
+        {/* The mechanical body is the stress type's viabilityNote (what it does to the
+            settlement); the crisisHook is the ready-at-the-table scene. Neither field
+            was rendered before, so every row showed a bare EMPTY_VALUE dash. */}
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55 }}>{s.viabilityNote||s.description||s.desc||EMPTY_VALUE}</div>
+        {s.crisisHook && <div style={{ fontSize:FS.xs, color:MUT, fontStyle:'italic', lineHeight:1.5, marginTop:4 }}>At the table: {s.crisisHook}</div>}
       </div>))}
     {/* How the resulting state reads: the settlement-stability and capacity-strain ladders. */}
     <SectionHeading accent={INK}>Reading a Settlement</SectionHeading>
