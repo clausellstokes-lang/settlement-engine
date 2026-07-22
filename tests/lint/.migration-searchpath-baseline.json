@@ -38,7 +38,6 @@
   "public.issue_warning": "053_admin_user_management.sql",
   "public.link_ticket_faq": "055_support_tickets.sql",
   "public.list_curated_dossiers": "011_gallery_curation.sql",
-  "public.list_gallery_comments": "076_gallery_resolve_author.sql",
   "public.list_gallery_dossiers": "076_gallery_resolve_author.sql",
   "public.list_gallery_more_by_creator": "076_gallery_resolve_author.sql",
   "public.list_gallery_reports": "022_gallery_report_moderation.sql",

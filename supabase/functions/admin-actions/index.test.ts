@@ -79,6 +79,23 @@ const req = (body: unknown, headers: Record<string, string> = {}) =>
     body: JSON.stringify(body),
   });
 
+// ── Two-key confirm helpers (owner-ordered 2026-07-21) ───────────────────────
+// Protected (account-destructive) actions require BOTH keys server-side: the
+// retyped target id AND a fresh GoTrue `password` amr in the caller's JWT. The
+// guard only DECODES the amr claim (getUser already verified the signature), so a
+// hand-built unsigned token with the amr claim exercises the real guard. Build a
+// Bearer whose password amr is `ageS` seconds old.
+function bearerWithPasswordAmr(ageS = 0): string {
+  const nowS = Math.floor(Date.now() / 1000);
+  const payload = { amr: [{ method: 'password', timestamp: nowS - ageS }] };
+  const b64 = btoa(JSON.stringify(payload))
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return `Bearer header.${b64}.sig`;
+}
+/** A valid two-key envelope for target `id`: fresh-password bearer + retyped id. */
+const twoKeyHeaders = () => ({ Authorization: bearerWithPasswordAmr(0) });
+const confirmFor = (id: string) => ({ confirm: { typedTargetId: id } });
+
 Deno.test('a non-privileged caller (role=user) is rejected 403 and NO RPC runs', async () => {
   const stub = makeAdminClient('user');
   const res = await handleAdminActions(
@@ -117,8 +134,8 @@ Deno.test('a valid admin update_user_credits routes to service_set_credits with 
   const res = await handleAdminActions(
     // The body smuggles actor_user='someone_else'; the handler must forward the
     // server-verified callingUser.id (admin1), never the body value.
-    req({ action: 'update_user_credits', userId: 'target1', credits: 42, actor_user: 'someone_else' },
-      { Authorization: 'Bearer jwt' }),
+    req({ action: 'update_user_credits', userId: 'target1', credits: 42, actor_user: 'someone_else', ...confirmFor('target1') },
+      twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 200);
@@ -133,8 +150,8 @@ Deno.test('a valid admin update_user_credits routes to service_set_credits with 
 Deno.test('grant_credits routes the RAW DELTA to the atomic service_adjust_credits RPC (no TS read-modify-write)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
-    req({ action: 'grant_credits', userId: 'target1', credits: -3, actor_user: 'someone_else' },
-      { Authorization: 'Bearer jwt' }),
+    req({ action: 'grant_credits', userId: 'target1', credits: -3, actor_user: 'someone_else', ...confirmFor('target1') },
+      twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 200);
@@ -157,8 +174,8 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_credits (highest-only edge g
   // reliance on the DB RPC alone.
   const stub = makeAdminClient('support');
   const res = await handleAdminActions(
-    req({ action: 'update_user_credits', userId: 'target1', credits: 9999 },
-      { Authorization: 'Bearer jwt' }),
+    req({ action: 'update_user_credits', userId: 'target1', credits: 9999, ...confirmFor('target1') },
+      twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 403);
@@ -172,8 +189,8 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge 
   // grant_credits / update_user_credits, not a reliance on the DB RPC alone.
   const stub = makeAdminClient('support');
   const res = await handleAdminActions(
-    req({ action: 'update_user_metadata', userId: 'target1', metadata: { role: 'admin' } },
-      { Authorization: 'Bearer jwt' }),
+    req({ action: 'update_user_metadata', userId: 'target1', metadata: { role: 'admin' }, ...confirmFor('target1') },
+      twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 403);
@@ -528,7 +545,7 @@ Deno.test('backfill_money_events rejects a non-highest role (403) and reads no S
 Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, audited)', async () => {
   const stub = makeAdminClient('admin');
   const res = await handleAdminActions(
-    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    req({ action: 'grant_surveyor', userId: 'u9', ...confirmFor('u9') }, twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 200);
@@ -542,7 +559,7 @@ Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, au
 Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destructive)', async () => {
   const stub = makeAdminClient('developer');
   const res = await handleAdminActions(
-    req({ action: 'revoke_surveyor', userId: 'u9', reason: 'refund' }, { Authorization: 'Bearer jwt' }),
+    req({ action: 'revoke_surveyor', userId: 'u9', reason: 'refund', ...confirmFor('u9') }, twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 200);
@@ -554,7 +571,7 @@ Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destr
 Deno.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispatched)', async () => {
   const stub = makeAdminClient('support');
   const res = await handleAdminActions(
-    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    req({ action: 'grant_surveyor', userId: 'u9', ...confirmFor('u9') }, twoKeyHeaders()),
     { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient },
   );
   assertEquals(res.status, 403);
@@ -569,4 +586,111 @@ Deno.test('grant_surveyor requires a userId', async () => {
   );
   assertEquals(res.status, 400);
   assertEquals(stub.rpc.length, 0);
+});
+
+// ── THE TWO-KEY GATE (owner-ordered 2026-07-21) ──────────────────────────────
+// A protected (account-destructive) action from a privileged caller must ALSO
+// clear the two-key gate at the top of the switch dispatch: a retyped target id
+// AND a fresh GoTrue password amr. Each rejection returns 403 and dispatches NO
+// mutating RPC. These EXECUTE the real handler so a refactor that moves the guard
+// after dispatch, or drops it, reddens here — not just in the pure unit test.
+
+Deno.test('a protected action WITHOUT confirm.typedTargetId is rejected (403, no RPC) even for an admin with a fresh password', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    // Fresh password amr but NO confirm envelope → the retype-the-id key is missing.
+    req({ action: 'set_account_banned', userId: 'target1', enabled: false }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0); // set_account_banned RPC never dispatched
+});
+
+Deno.test('a protected action with a MISMATCHED typedTargetId is rejected (403, no RPC)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'set_account_banned', userId: 'target1', enabled: false, ...confirmFor('the-wrong-id') }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
+Deno.test('a protected action with a matching id but a STALE password amr is rejected (403, no RPC)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    // amr is 400s old (> 300s window) — a refreshed-but-not-reauthed session.
+    req({ action: 'grant_credits', userId: 'target1', credits: 10, ...confirmFor('target1') },
+      { Authorization: bearerWithPasswordAmr(400) }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0); // service_adjust_credits never dispatched
+});
+
+Deno.test('a protected action with a matching id but NO password amr is rejected (403, no RPC)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    // 'Bearer jwt' has no decodable amr claim → fail closed.
+    req({ action: 'set_account_disabled', userId: 'target1', enabled: false, ...confirmFor('target1') },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
+// ── Content moderation (171/172) — MODERATION set: typed-item-id confirm, no
+// two-key password. Staff-gated; a non-staff caller is rejected before dispatch.
+
+Deno.test('moderate_comment (staff) dispatches set_gallery_comment_hidden with the verified moderator + audits', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'moderate_comment', commentId: 'cmt-1', reason: 'abuse' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const hide = stub.rpc.find((c) => c.fn === 'set_gallery_comment_hidden');
+  assertEquals(hide !== undefined, true);
+  const args = hide!.args as { target_comment_id: string; hide: boolean; moderator_id: string };
+  assertEquals(args.target_comment_id, 'cmt-1');
+  assertEquals(args.hide, true);
+  assertEquals(args.moderator_id, 'admin1'); // server-verified, not body-supplied
+  // One A3 audit row mirrors the hide (the RPC does not self-audit).
+  assertEquals(stub.rpc.some((c) => c.fn === 'write_audit'), true);
+});
+
+Deno.test('set_content_banned (staff) routes to admin_set_content_banned for the right kind', async () => {
+  const stub = makeAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'set_content_banned', contentKind: 'map', mapId: 'map-9', banned: true, reason: 'x' },
+      { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const ban = stub.rpc.find((c) => c.fn === 'admin_set_content_banned');
+  const args = ban!.args as { p_kind: string; p_id: string; p_ban: boolean };
+  assertEquals(args.p_kind, 'map');
+  assertEquals(args.p_id, 'map-9');
+  assertEquals(args.p_ban, true);
+});
+
+Deno.test('a SUPPORT-role caller CANNOT moderate content (highest-only)', async () => {
+  const stub = makeAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'moderate_comment', commentId: 'cmt-1' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
+Deno.test('a DEVELOPER passes the SAME two-key gate as an admin (action-bound, not role-bound)', async () => {
+  const stub = makeAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'set_account_banned', userId: 'target1', enabled: false, ...confirmFor('target1') }, twoKeyHeaders()),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200); // developer + valid two-key → the ban RPC runs
+  assertEquals(stub.rpc.some((c) => c.fn === 'set_account_banned'), true);
 });

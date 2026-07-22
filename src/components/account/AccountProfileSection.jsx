@@ -11,6 +11,7 @@ import { AI_MODEL_OPTIONS } from '../../config/pricing.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import FounderBadge from '../primitives/FounderBadge.jsx';
+import FounderCreditToggle from './FounderCreditToggle.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
@@ -184,6 +185,9 @@ export default function AccountProfileSection({
             ))}
           </select>
         </label>
+        {/* Founder-only: opt in to the public credits roll (170). Self-gates +
+            hides itself when the migration is undeployed. */}
+        <FounderCreditToggle />
         <Button
           variant="primary"
           size="md"

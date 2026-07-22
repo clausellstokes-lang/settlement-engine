@@ -591,11 +591,13 @@ export async function fetchGalleryComments(settlementId) {
   }
   return (data || []).map(row => ({
     id: row.id,
+    // A moderation tombstone (172) carries no body/author — the RPC nulls them.
+    moderated: !!row.moderated,
     body: String(row.body || ''),
     createdAt: row.created_at,
     updatedAt: row.updated_at,
     canDelete: !!row.can_delete,
-    authorLabel: row.author_label || 'A DM',
+    authorLabel: row.author_label || (row.moderated ? '' : 'A DM'),
   }));
 }
 

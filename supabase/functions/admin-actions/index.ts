@@ -39,6 +39,13 @@ import { logError } from "../_shared/logError.ts";
 // alongside cors.ts / logError.ts / requestMeta.ts). It's testable without
 // fetch/env/db.
 import { runPricingResync } from "../_shared/pricingResync.ts";
+// The account-level two-key rule (owner-ordered 2026-07-21): premium/tier/
+// entitlement changes + ban/disable + role changes require a retyped target id
+// AND a fresh GoTrue password amr on the caller's JWT. The frozen action manifest
+// (PROTECTED / MODERATION / UNGATED) + the pure guard core live in the shared,
+// unit-tested module so the walker (tests/edgeFunctions/adminActionTwoKeyWalker)
+// classifies every switch case against the SAME single source of truth.
+import { checkTwoKey, decodeJwtAmr, isProtectedAction } from "../_shared/twoKey.ts";
 
 // CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
 // this admin endpoint. The endpoint is independently protected by JWT auth +
@@ -307,7 +314,7 @@ export async function handleAdminActions(
       // System-mutation params (migration 041 report_* functions)
       configSignature,
       // A4 user-management params
-      severity, note, settlementId, enabled, full, emailTemplate, emailPayload,
+      severity, note, settlementId, mapId, commentId, enabled, full, emailTemplate, emailPayload,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
       // Redeem-code minting params (migration 107)
@@ -315,6 +322,11 @@ export async function handleAdminActions(
       max_uses: mintMaxUses, expires_at: mintExpiresAt, applies_to: mintAppliesTo,
       // AI pricing resync (migration 114)
       dryRun: pricingDryRun,
+      // Two-key confirmation envelope: { typedTargetId } for a protected action.
+      confirm: twoKeyConfirm,
+      // Moderation-suite params (contentKind for the map/campaign verbs; banned
+      // flag; report id for a queue resolution).
+      contentKind, banned: banFlag, reportId,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
@@ -387,6 +399,37 @@ export async function handleAdminActions(
       typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : fallback;
     const pFrom = asDate(fromDate, monthAgo);
     const pTo = asDate(toDate, today);
+
+    // ── THE TWO-KEY GATE (owner-ordered 2026-07-21) ─────────────────────────
+    // Runs at the TOP of the switch dispatch for any ACCOUNT-level destructive
+    // action (isProtectedAction): premium/tier/entitlement change, ban / disable,
+    // role change. ACTION-bound, not role-bound — an admin OR a developer invoking
+    // one passes the identical gate. Both keys are checked server-side: (1) the
+    // caller retyped the target's EXACT user id (confirm.typedTargetId), and (2)
+    // the caller's already-verified JWT carries a `password` amr fresher than the
+    // window (a token refresh preserves the ORIGINAL amr timestamp, so a stale
+    // session cannot fake freshness — the password itself never reaches us). Fail
+    // CLOSED: a rejection returns the fixed non-leaky "Admin action failed" while
+    // logging the real reason server-side only (via adminFail). The amr age rides
+    // the per-action A3 audit row as { twoKey:true, amrAgeS }.
+    let twoKeyAmrAgeS: number | null = null;
+    // Only gate when a concrete target is present: a protected action with no
+    // userId does nothing (its case returns 400), so we let that natural
+    // validation stand rather than masking it with a two-key rejection.
+    if (isProtectedAction(action) && userId) {
+      const twoKey = checkTwoKey({
+        action,
+        targetUserId: userId, // every protected action targets `userId`
+        typedTargetId: isRecord(twoKeyConfirm) ? twoKeyConfirm.typedTargetId : undefined,
+        amr: decodeJwtAmr(String(authHeader || "").replace(/^Bearer\s+/i, "")),
+        nowS: Math.floor(Date.now() / 1000),
+      });
+      if (!twoKey.ok) {
+        // Distinct audited detail (server-side only); caller sees the fixed error.
+        return adminFail(`two-key gate rejected ${String(action)}: ${twoKey.reason}`, 403);
+      }
+      twoKeyAmrAgeS = twoKey.amrAgeS;
+    }
 
     switch (action) {
       // Read-only analytics dashboards (migration 038 report_* functions). The
@@ -579,7 +622,7 @@ export async function handleAdminActions(
           targetUserId: userId,
           targetType: "profile",
           targetId: String(userId),
-          after: { keys: Object.keys(profilePatch) },
+          after: { keys: Object.keys(profilePatch), twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -710,7 +753,7 @@ export async function handleAdminActions(
           before: result && typeof result === "object" && "prev" in result
             ? { credits: (result as Record<string, unknown>).prev }
             : null,
-          after: { credits: newCredits },
+          after: { credits: newCredits, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -827,7 +870,7 @@ export async function handleAdminActions(
           action: delta > 0 ? "grant_credits" : "refund_credits",
           targetUserId: userId, targetType: "profile", targetId: String(userId),
           before: { credits: adjusted.prev ?? null },
-          after: { credits: adjusted.next ?? null },
+          after: { credits: adjusted.next ?? null, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false, reversible: true,
         });
         return json({ success: true, ...adjusted });
@@ -1138,6 +1181,68 @@ export async function handleAdminActions(
         return json({ success: true, ...(data || {}) });
       }
 
+      // ── Map / campaign moderation (171). Twins of the settlement verbs above
+      // for saved_maps (a shared campaign IS a saved_maps row). HIGHEST role only;
+      // each RPC re-checks the role and writes its own audit row. Soft-delete-first.
+      case "soft_delete_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const del = !(enabled === true); // enabled:true ⇒ restore
+        const { data, error } = await adminClient.rpc("admin_soft_delete_map", {
+          p_actor: callingUser.id, p_id: mapId, p_delete: del, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Set a map/campaign private — unpublish (reversible). HIGHEST role only.
+      case "remove_gallery_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_remove_gallery_map", {
+          p_actor: callingUser.id, p_id: mapId, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Reversible BAN across both content kinds (171). p_ban toggles; the RPC
+      // takes the item down AND blocks re-publish via the enforce_moderation_ban
+      // trigger. HIGHEST role only.
+      case "set_content_banned": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const kind = contentKind === "map" ? "map" : "settlement";
+        const cid = kind === "map" ? mapId : settlementId;
+        if (!cid) return json({ error: "Missing content id" }, 400);
+        const { data, error } = await adminClient.rpc("admin_set_content_banned", {
+          p_actor: callingUser.id, p_kind: kind, p_id: cid,
+          p_ban: banFlag === true, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Moderate a gallery comment — hide/unhide (169 columns + 172 tombstone
+      // read). The set_gallery_comment_hidden RPC is the sole hidden_* writer; it
+      // does not self-audit, so we mirror one A3 row here. HIGHEST role only.
+      case "moderate_comment": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!commentId) return json({ error: "Missing commentId" }, 400);
+        const hide = !(enabled === true); // enabled:true ⇒ unhide
+        const { error } = await adminClient.rpc("set_gallery_comment_hidden", {
+          target_comment_id: commentId, hide,
+          hidden_reason_text: auditReason, moderator_id: callingUser.id,
+        });
+        if (error) return adminFail(error, 500);
+        await writeAudit({
+          action: hide ? "moderate_comment_hide" : "moderate_comment_unhide",
+          targetType: "gallery_comment", targetId: String(commentId),
+          after: { hidden: hide },
+          destructive: hide, reversible: true,
+        });
+        return json({ success: true, hidden: hide });
+      }
+
       // Diagnostic bundle — REDACTED by default (support+). full:true ⇒ a FULL
       // debug copy: HIGHEST role + a justification (reason). The RPC enforces
       // both and audits which variant it produced.
@@ -1324,7 +1429,7 @@ export async function handleAdminActions(
         await writeAudit({
           action: "grant_surveyor",
           targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
-          after: { status: "active", source: "grant" },
+          after: { status: "active", source: "grant", twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false, reversible: true,
         });
         return json({ success: true });
@@ -1340,7 +1445,7 @@ export async function handleAdminActions(
         await writeAudit({
           action: "revoke_surveyor",
           targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
-          after: { status: "revoked" },
+          after: { status: "revoked", twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: true, reversible: true,
         });
         return json({ success: true, revoked: Boolean(revoked) });
