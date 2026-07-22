@@ -2,20 +2,18 @@
  * DmScreen.jsx — V-18 THE DM SCREEN (the table's desktop face).
  *
  * One at-the-table view that gathers the DM's tools: the Chronicler's Letter, the
- * Oracle, the dossier summary, the Session Ledger (R-1), and the Auspice (V-16) —
- * with a PLAYER-SAFE second face. The DM|Player toggle flips the whole screen: the
+ * dossier summary, the Session Ledger (R-1), and the Auspice (V-16) — with a
+ * PLAYER-SAFE second face. The DM|Player toggle flips the whole screen: the
  * player face shows only the player-safe dossier (secrets stripped via the domain
  * audience gate, which reuses toPublicSafe and FAILS CLOSED), and hides every
- * DM-only tool (the ledger, the auspice, the oracle's private reads).
+ * DM-only tool (the ledger and the auspice).
  *
  * SLOTS (fold pass 2, mounts applied): the Letter panel (V-B,
- * ChroniclersLetterPanel) and the Oracle panel (V-C, OraclePanel) are now on the
- * composite base, so this screen MOUNTS them directly. Both null-guard their
- * `campaign` prop — the Letter renders null with no active campaign, the Oracle
- * still reads the anchored settlement — so the screen stands even with nothing
- * open. The Letter shows on both faces (it is a reformatting of the public
- * wizardNews chronicle, no secret content); the Oracle stays DM-only (its reads
- * are the GM's, not the table's), alongside the ledger and the auspice.
+ * ChroniclersLetterPanel) is on the composite base, so this screen MOUNTS it
+ * directly. It null-guards its `campaign` prop — the Letter renders null with no
+ * active campaign — so the screen stands even with nothing open. The Letter shows
+ * on both faces (it is a reformatting of the public wizardNews chronicle, no
+ * secret content), alongside the DM-only ledger and auspice.
  */
 import { useState } from 'react';
 import { useStore } from '../../store/index.js';
@@ -30,7 +28,6 @@ import TableLedgerPanel from '../tableLedger/TableLedgerPanel.jsx';
 import AuspicePanel from '../auspice/AuspicePanel.jsx';
 import TemperamentPicker from '../temperament/TemperamentPicker.jsx';
 import ChroniclersLetterPanel from '../map/ChroniclersLetterPanel.jsx';
-import OraclePanel from '../map/OraclePanel.jsx';
 
 const AUDIENCE_OPTIONS = [
   { id: 'dm', label: 'DM view' },
@@ -79,7 +76,7 @@ export default function DmScreen() {
       <PageHeader
         eyebrow="At the table"
         title="The DM Screen"
-        subtitle="Your letter, your oracle, your dossier, and the two faces of the table."
+        subtitle="Your letter, your dossier, and the two faces of the table."
         actions={<Segmented options={AUDIENCE_OPTIONS} value={audience} onChange={setAudience} ariaLabel="Screen audience" />}
       />
 
@@ -102,14 +99,6 @@ export default function DmScreen() {
           <Card kicker="Session prep">
             <ChroniclersLetterPanel campaign={activeCampaign} />
           </Card>
-
-          {/* Oracle slot — V-C's OraclePanel (fold-pass-2 mount). DM-only: the
-              oracle's reads are the GM's, not the table's. */}
-          {isDm && (
-            <Card title="The Oracle" kicker="Ask the world">
-              <OraclePanel campaign={activeCampaign} />
-            </Card>
-          )}
 
           {/* DM-only tools. The player face never renders these. */}
           {isDm && <AuspicePanel campaign={activeCampaign} />}

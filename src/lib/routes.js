@@ -85,7 +85,7 @@ export const ROUTES = Object.freeze([
   // claims-parity-bound to real product capabilities (components/legal/*).
   { view: 'covenant',              path: '/covenant',              title: 'Portability Covenant' },
   { view: 'bounty',                path: '/bounty',                title: 'Contradiction Bounty' },
-  // V-18 — the DM Screen: an at-the-table DM tool (letter + oracle + dossier +
+  // V-18 — the DM Screen: an at-the-table DM tool (letter + dossier +
   // ledger + auspice) with a player-safe face. Reads the active settlement/
   // campaign; degrades to a placeholder when nothing is open. Noindex app tool
   // (in NOINDEX_VIEWS: seo.js + generate-sitemap.mjs), no guard.
