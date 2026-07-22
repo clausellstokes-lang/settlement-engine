@@ -35,6 +35,9 @@ const PROTECTED = extractSet('PROTECTED_ACTION_SET');
 const MODERATION = extractSet('MODERATION_ACTION_SET');
 const UNGATED = extractSet('UNGATED_ACTION_SET');
 
+/** Actions the AdminUsersPanel exposes (subset of each set that the panel drives). */
+const panelHas = (a) => new RegExp(`action:\\s*'${a}'`).test(panelSrc);
+
 /** Every `case "X":` label in the edge function's action switch. */
 const caseLabels = [...edgeSrc.matchAll(/case\s+"([a-z_]+)"\s*:/g)].map((m) => m[1]);
 
@@ -101,13 +104,25 @@ describe('admin-actions two-key walker — client routes protected actions throu
 
   it('every protected action literal in the panel lives inside an openTwoKey buildBody', () => {
     for (const a of PROTECTED) {
-      const litRe = new RegExp(`action:\\s*'${a}'`);
-      if (!litRe.test(panelSrc)) continue; // this action isn't exposed in the panel
+      if (!panelHas(a)) continue; // this action isn't exposed in the panel
       const inBuildBody = new RegExp(`buildBody:[\\s\\S]{0,80}?=>\\s*\\(\\{[^}]*action:\\s*'${a}'`);
       expect(
         panelSrc,
         `protected action '${a}' must be constructed inside an openTwoKey buildBody`,
       ).toMatch(inBuildBody);
+    }
+  });
+
+  it('no moderation action is invoked directly from onClick (must go through the typed-id ask confirm)', () => {
+    for (const a of MODERATION) {
+      if (!panelHas(a)) continue;
+      // The bad shape: onClick={() => runAction({ action: 'X' ... })} with no ask()
+      // wrapper — the item id would not be a deliberately retyped value.
+      const direct = new RegExp(`onClick=\\{\\(\\)\\s*=>\\s*runAction\\(\\s*\\{\\s*action:\\s*'${a}'`);
+      expect(
+        panelSrc.match(direct),
+        `moderation action '${a}' is invoked directly from onClick — wrap it in the typed-id ask() confirm.`,
+      ).toBeNull();
     }
   });
 });

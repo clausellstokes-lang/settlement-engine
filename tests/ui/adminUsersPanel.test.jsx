@@ -235,6 +235,38 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     });
   });
 
+  test('Ban settlement asks for the id then invokes set_content_banned (kind=settlement, ban=true)', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: /^ban settlement$/i }));
+    await fillDialog(/settlement id/i, 'settle-9', /^ban$/i);
+    await waitFor(() => {
+      const call = invoke.mock.calls.find(([, o]) => o?.body?.action === 'set_content_banned');
+      expect(call).toBeTruthy();
+      expect(call[1].body.contentKind).toBe('settlement');
+      expect(call[1].body.settlementId).toBe('settle-9');
+      expect(call[1].body.banned).toBe(true);
+    });
+  });
+
+  test('Soft-delete map asks for a map id then invokes soft_delete_map', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: /soft-delete map/i }));
+    await fillDialog(/map id/i, 'map-7', /soft-delete/i);
+    await waitFor(() => {
+      const call = invoke.mock.calls.find(([, o]) => o?.body?.action === 'soft_delete_map');
+      expect(call).toBeTruthy();
+      expect(call[1].body.mapId).toBe('map-7');
+    });
+  });
+
   test('Disable shows BANNED/DISABLED status + flips action when already disabled', async () => {
     invoke.mockImplementation(routeInvoke({ summary: { ...REDACTED_SUMMARY, disabled: true } }));
     const Panel = await importPanel();

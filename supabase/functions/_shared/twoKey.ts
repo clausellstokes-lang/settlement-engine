@@ -54,10 +54,11 @@ export const MODERATION_ACTION_SET: ReadonlySet<string> = new Set([
   "soft_delete_settlement",
   "remove_gallery_item",
   "revoke_share_link",
-  // The map/campaign moderation verbs (soft_delete_map, remove_gallery_map,
-  // set_content_banned), comment moderation (moderate_comment), and report-queue
-  // resolution (resolve_gallery_report) are added here in lockstep with the
-  // switch cases that introduce them (moderation-suite + report-pipeline lanes).
+  "soft_delete_map", // map/campaign soft-delete (171)
+  "remove_gallery_map", // map/campaign set-private (171)
+  "set_content_banned", // reversible ban across both content kinds (171)
+  // Comment moderation (moderate_comment) and report-queue resolution
+  // (resolve_gallery_report) are added in lockstep with their switch cases.
 ]);
 
 /**

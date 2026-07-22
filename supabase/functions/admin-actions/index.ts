@@ -314,7 +314,7 @@ export async function handleAdminActions(
       // System-mutation params (migration 041 report_* functions)
       configSignature,
       // A4 user-management params
-      severity, note, settlementId, enabled, full, emailTemplate, emailPayload,
+      severity, note, settlementId, mapId, enabled, full, emailTemplate, emailPayload,
       // A5 ticket-queue params
       ticketId, status, body: replyBody, visibility, faq,
       // Redeem-code minting params (migration 107)
@@ -1176,6 +1176,47 @@ export async function handleAdminActions(
         if (!settlementId) return json({ error: "Missing settlementId" }, 400);
         const { data, error } = await adminClient.rpc("admin_revoke_share_link", {
           p_actor: callingUser.id, p_id: settlementId, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // ── Map / campaign moderation (171). Twins of the settlement verbs above
+      // for saved_maps (a shared campaign IS a saved_maps row). HIGHEST role only;
+      // each RPC re-checks the role and writes its own audit row. Soft-delete-first.
+      case "soft_delete_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const del = !(enabled === true); // enabled:true ⇒ restore
+        const { data, error } = await adminClient.rpc("admin_soft_delete_map", {
+          p_actor: callingUser.id, p_id: mapId, p_delete: del, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Set a map/campaign private — unpublish (reversible). HIGHEST role only.
+      case "remove_gallery_map": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!mapId) return json({ error: "Missing mapId" }, 400);
+        const { data, error } = await adminClient.rpc("admin_remove_gallery_map", {
+          p_actor: callingUser.id, p_id: mapId, p_reason: auditReason,
+        });
+        if (error) return adminFail(error, 500);
+        return json({ success: true, ...(data || {}) });
+      }
+
+      // Reversible BAN across both content kinds (171). p_ban toggles; the RPC
+      // takes the item down AND blocks re-publish via the enforce_moderation_ban
+      // trigger. HIGHEST role only.
+      case "set_content_banned": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const kind = contentKind === "map" ? "map" : "settlement";
+        const cid = kind === "map" ? mapId : settlementId;
+        if (!cid) return json({ error: "Missing content id" }, 400);
+        const { data, error } = await adminClient.rpc("admin_set_content_banned", {
+          p_actor: callingUser.id, p_kind: kind, p_id: cid,
+          p_ban: banFlag === true, p_reason: auditReason,
         });
         if (error) return adminFail(error, 500);
         return json({ success: true, ...(data || {}) });

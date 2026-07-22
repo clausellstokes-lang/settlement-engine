@@ -503,9 +503,9 @@ export default function AdminUsersPanel() {
               )}>Full debug copy</Button>
           </div>
 
-          {/* Per-settlement moderation (id-driven; soft-delete-first) */}
+          {/* Settlement moderation (id-driven; soft-delete-first, reversible) */}
           <div style={{ marginTop: SP.md, paddingTop: SP.md, borderTop: `1px solid ${BORDER2}`, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
-            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Content moderation (by settlement id):</span>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Settlement moderation (by settlement id):</span>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => ask(
                 { title: 'Soft-delete settlement', body: 'Reversible: hides and unpublishes the settlement.', label: 'Settlement id', confirmLabel: 'Soft-delete' },
@@ -530,6 +530,67 @@ export default function AdminUsersPanel() {
                   'Share link revoked (reversible).',
                 ),
               )}>Revoke share link</Button>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Ban settlement', body: 'Reversible: unpublishes and blocks re-publishing until unbanned.', label: 'Settlement id', confirmLabel: 'Ban' },
+                (sid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'settlement', settlementId: sid, banned: true, reason: 'moderation' },
+                  'Settlement banned (blocks re-publish).',
+                ),
+              )}>Ban settlement</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Unban settlement', body: 'Reversible: lifts the moderation ban so the owner may re-publish.', label: 'Settlement id', confirmLabel: 'Unban' },
+                (sid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'settlement', settlementId: sid, banned: false, reason: 'moderation' },
+                  'Settlement ban lifted.',
+                ),
+              )}>Unban settlement</Button>
+          </div>
+
+          {/* Map / campaign moderation (a shared campaign is a saved_maps row) */}
+          <div style={{ marginTop: SP.sm, display: 'flex', flexWrap: 'wrap', gap: SP.sm, alignItems: 'center' }}>
+            <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Map / campaign moderation (by map id):</span>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Soft-delete map', body: 'Reversible: hides and unpublishes the map or campaign.', label: 'Map id', confirmLabel: 'Soft-delete' },
+                (mid) => runAction(
+                  { action: 'soft_delete_map', mapId: mid, reason: 'moderation' },
+                  'Map soft-deleted (reversible).',
+                ),
+              )}>Soft-delete map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Restore map', body: 'Reversible: clears the moderation soft-delete flag.', label: 'Map id', confirmLabel: 'Restore' },
+                (mid) => runAction(
+                  { action: 'soft_delete_map', mapId: mid, enabled: true, reason: 'moderation' },
+                  'Map restored.',
+                ),
+              )}>Restore map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Set map private', body: 'Reversible: unpublishes the map or campaign without deleting it.', label: 'Map id', confirmLabel: 'Set private' },
+                (mid) => runAction(
+                  { action: 'remove_gallery_map', mapId: mid, reason: 'moderation' },
+                  'Map set private (reversible).',
+                ),
+              )}>Set map private</Button>
+            <Button variant="danger" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Ban map', body: 'Reversible: unpublishes and blocks re-publishing until unbanned.', label: 'Map id', confirmLabel: 'Ban' },
+                (mid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'map', mapId: mid, banned: true, reason: 'moderation' },
+                  'Map banned (blocks re-publish).',
+                ),
+              )}>Ban map</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Unban map', body: 'Reversible: lifts the moderation ban so the owner may re-publish.', label: 'Map id', confirmLabel: 'Unban' },
+                (mid) => runAction(
+                  { action: 'set_content_banned', contentKind: 'map', mapId: mid, banned: false, reason: 'moderation' },
+                  'Map ban lifted.',
+                ),
+              )}>Unban map</Button>
           </div>
         </div>
       )}
