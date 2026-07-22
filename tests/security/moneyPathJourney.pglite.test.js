@@ -74,7 +74,7 @@ it('targeted migration(s) present (suite not vacuous)', () => {
 describe.runIf(allMigrationsExist)('money-path journey — composed revenue chain (pglite)', () => {
   beforeAll(async () => {
     db = await makeCreditLedgerDb();
-  });
+  }, 30000); // PGlite WASM cold-start is ~20s under parallel/loaded runs; match the sibling harnesses.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_grant_idempotency, public.credit_ledger, public.credit_transactions cascade;');
@@ -97,10 +97,10 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     expect(await balanceOf(UID)).toBe(25);
     expect(await grantCount()).toBe(1);
 
-    // 3. User runs an AI narrative (cost 3) → balance 22.
+    // 3. User runs an AI narrative (cost 5) → balance 20.
     const s1 = await aiSpend('narrative');
     expect(s1.ok).toBe(true);
-    expect(await balanceOf(UID)).toBe(22);
+    expect(await balanceOf(UID)).toBe(20);
 
     // 4. The AI call fails downstream → generate-narrative refunds the spend → back to 25.
     await aiRefund(s1.spend_id);
@@ -110,27 +110,27 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     await expect(aiRefund(s1.spend_id)).rejects.toThrow(/already refunded/i);
     expect(await balanceOf(UID)).toBe(25);
 
-    // 6. User retries; this AI run succeeds (cost 3) → 22, spend stands.
+    // 6. User retries; this AI run succeeds (cost 5) → 20, spend stands.
     const s2 = await aiSpend('narrative');
     expect(s2.ok).toBe(true);
-    expect(await balanceOf(UID)).toBe(22);
+    expect(await balanceOf(UID)).toBe(20);
 
-    // 7. Monthly subscription invoice pays → webhook grants the 30-credit allowance → 52.
+    // 7. Monthly subscription invoice pays → webhook grants the 30-credit allowance → 50.
     await webhookAllowance(30, 'inv_jan');
-    expect(await balanceOf(UID)).toBe(52);
+    expect(await balanceOf(UID)).toBe(50);
 
-    // 8. The invoice webhook is redelivered → still 52 (idempotent on invoice id).
+    // 8. The invoice webhook is redelivered → still 50 (idempotent on invoice id).
     await webhookAllowance(30, 'inv_jan');
-    expect(await balanceOf(UID)).toBe(52);
+    expect(await balanceOf(UID)).toBe(50);
 
-    // 9. A second AI feature (progression, cost 5) → 47.
+    // 9. A second AI feature (progression, cost 6) → 44.
     const s3 = await aiSpend('progression');
     expect(s3.ok).toBe(true);
-    expect(await balanceOf(UID)).toBe(47);
+    expect(await balanceOf(UID)).toBe(44);
 
     // Final invariant: 2 grants (pack + allowance) + 1 refund-grant; 3 spends; one
-    // refunded. Balance = 25 + 30 + 3(refund) − 3 − 3 − 5 = 47, and it ties out.
-    expect(await balanceOf(UID)).toBe(47);
+    // refunded. Balance = 25 + 30 + 5(refund) − 5 − 5 − 6 = 44, and it ties out.
+    expect(await balanceOf(UID)).toBe(44);
     expect(await grantCount()).toBe(3); // pack, allowance, refund-as-grant
     expect(await spendCount()).toBe(3); // s1 (refunded), s2, s3
     // Exactly one idempotency claim per distinct delivery key (session + invoice).
@@ -141,11 +141,11 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
 
   it('a refund cannot resurrect spend the user never paid for (cross-spend refund is rejected)', async () => {
     await webhookPurchase(10, 'cs_a');
-    const s = await aiSpend('narrative'); // balance 7
-    expect(await balanceOf(UID)).toBe(7);
+    const s = await aiSpend('narrative'); // cost 5 → balance 5
+    expect(await balanceOf(UID)).toBe(5);
     // A forged refund of a non-existent spend id must fail, leaving balance intact.
     await expect(aiRefund('33333333-3333-3333-3333-333333333333')).rejects.toThrow(/spend row not found/i);
-    expect(await balanceOf(UID)).toBe(7);
+    expect(await balanceOf(UID)).toBe(5);
     // The real refund still works exactly once.
     await aiRefund(s.spend_id);
     expect(await balanceOf(UID)).toBe(10);
@@ -153,7 +153,7 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
 
   it('the unique-index backstop blocks a duplicate refund even if it bypasses the function (087)', async () => {
     await webhookPurchase(10, 'cs_idx');
-    const s = await aiSpend('narrative'); // balance 7
+    const s = await aiSpend('narrative'); // cost 5 → balance 5
     await aiRefund(s.spend_id);           // legitimate refund → balance 10
     expect(await balanceOf(UID)).toBe(10);
     // A direct INSERT that bypasses refund_credits' check-then-insert guard (the
@@ -162,7 +162,7 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     await expect(
       db.query(
         `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
-         values ('${UID}', 'grant', 3, 'refund', jsonb_build_object('refund_of', '${s.spend_id}'))`,
+         values ('${UID}', 'grant', 5, 'refund', jsonb_build_object('refund_of', '${s.spend_id}'))`,
       ),
     ).rejects.toThrow(/duplicate key|unique|ux_credit_ledger_one_refund_per_spend/i);
     expect(await balanceOf(UID)).toBe(10); // balance unchanged — no double-credit
@@ -178,7 +178,7 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
     // which writes the row but skips the cache debit), then refund it.
     const spendId = (await scalar(
       `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
-       values ('${UID}', 'spend', 3, 'narrative', jsonb_build_object('elevated', true))
+       values ('${UID}', 'spend', 5, 'narrative', jsonb_build_object('elevated', true))
        returning id`,
     )).id;
     const before = await balanceOf(UID);
@@ -189,10 +189,10 @@ describe.runIf(allMigrationsExist)('money-path journey — composed revenue chai
   });
 
   it('an overspend mid-journey is rejected and leaves the ledger untouched', async () => {
-    await webhookPurchase(4, 'cs_small'); // 4 credits
-    const ok = await aiSpend('narrative'); // cost 3 → 1
+    await webhookPurchase(6, 'cs_small'); // 6 credits (bumped 4→6 so one narrative spend at cost 5 succeeds, leaving 1)
+    const ok = await aiSpend('narrative'); // cost 5 → 1
     expect(ok.ok).toBe(true);
-    const over = await aiSpend('narrative'); // cost 3 > 1 remaining
+    const over = await aiSpend('narrative'); // cost 5 > 1 remaining
     expect(over.ok).toBe(false);
     expect(over.reason).toBe('insufficient_funds');
     expect(await balanceOf(UID)).toBe(1);

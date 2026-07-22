@@ -175,7 +175,7 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         alignItems: 'center', gap: SP.sm,
       }}>
         <div style={{ flex: 1, fontSize: FS.xs, color: BODY }}>
-          <div>Cost: <s>3 credits</s></div>
+          <div>Cost: <s>5 credits</s></div>
           <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
         </div>
         <Button variant="ai" size="md" onClick={onNarrate}>

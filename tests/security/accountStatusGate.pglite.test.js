@@ -114,7 +114,7 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
     await db.exec(extractFn('057', 'account_is_active'));
     await db.exec(extractFn('057', 'spend_credits'));
     await db.exec(extractFn('057', 'mutate_settlement_batch'));
-  });
+  }, 30000); // PGlite WASM cold-start is ~20s under parallel/loaded runs; match the sibling harnesses.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions, public.settlements cascade;');
@@ -146,7 +146,7 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
   it('an ACTIVE account can spend (baseline — funds + gate both pass)', async () => {
     const { r } = await scalar("select public.spend_credits('narrative') as r");
     expect(r.ok).toBe(true);
-    expect(r.balance).toBe(7);
+    expect(r.balance).toBe(5); // 10-credit grant − narrative (cost 5)
   });
 
   it('a BANNED account cannot spend (despite a valid JWT and sufficient funds)', async () => {

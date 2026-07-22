@@ -188,16 +188,16 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   // ── spend_credits (024 ledger-allocation version) ────────────────────────────
   it('debits the feature cost from active grants and records an allocation', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5
     expect(r.ok).toBe(true);
-    expect(r.balance).toBe(7);
-    expect(await balanceOf(UID)).toBe(7);
+    expect(r.balance).toBe(5);
+    expect(await balanceOf(UID)).toBe(5);
     expect((await scalar(`select count(*)::int n from public.credit_spend_allocations`)).n).toBe(1);
   });
 
   it('rejects an overspend and writes no spend row', async () => {
     await grant(UID, 2);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3 > 2
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5 > 2
     expect(r.ok).toBe(false);
     expect(r.reason).toBe('insufficient_funds');
     expect(await balanceOf(UID)).toBe(2);
@@ -207,17 +207,17 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   it('cannot spend expired credits', async () => {
     await grant(UID, 5, { source: 'promo', expiresAt: '2000-01-01T00:00:00Z' }); // expired
     await grant(UID, 5, { source: 'purchase' });                                 // active
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 5 -> 2 from active
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // only 2 active left < 3
-    expect(await balanceOf(UID)).toBe(2);
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 5 -> 0 from active (narrative cost 5)
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // only 0 active left < 5
+    expect(await balanceOf(UID)).toBe(0);
   });
 
   it('sequential spends stop exactly at the balance floor (atomic guard)', async () => {
-    await grant(UID, 7);
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 7 -> 4
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 4 -> 1
-    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // 1 < 3
-    expect(await balanceOf(UID)).toBe(1);
+    await grant(UID, 12); // grant bumped 7→12 so TWO narrative spends (cost 5 each) still succeed before the floor-stop
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 12 -> 7
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(true);  // 7 -> 2
+    expect((await scalar("select public.spend_credits('narrative') as r")).r.ok).toBe(false); // 2 < 5
+    expect(await balanceOf(UID)).toBe(2);
   });
 
   it('rejects an unknown feature', async () => {
@@ -233,7 +233,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(10);
     const g = await scalar(`select * from public.credit_ledger where source='refund'`);
     expect(g.metadata.refund_of).toBe(r.spend_id);
-    expect(g.amount).toBe(3);
+    expect(g.amount).toBe(5); // refund grant equals the narrative spend cost (5)
   });
 
   it('is idempotent — a second refund of the same spend is a NO-OP (one ledger row, no double-credit)', async () => {
@@ -277,8 +277,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   //    suite lacked (it only ever refunded as the authenticated owner).
   it('refunds under the service-role client even though auth.uid() is null (F1)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // spent by UID, cost 3
-    expect(await balanceOf(UID)).toBe(7);
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // spent by UID, cost 5
+    expect(await balanceOf(UID)).toBe(5);
     await asService(); // auth.uid() null, role service_role — exactly the edge-fn context
     await db.query(`select public.refund_credits('${r.spend_id}', 'generation failed mid-stream')`);
     expect(await balanceOf(UID)).toBe(10);
@@ -293,7 +293,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await asUser('');       // auth.uid() null
     await asRole('anon');   // not service_role
     await expect(db.query(`select public.refund_credits('${r.spend_id}', null)`)).rejects.toThrow(/not authenticated/i);
-    expect(await balanceOf(UID)).toBe(7); // untouched
+    expect(await balanceOf(UID)).toBe(5); // untouched (narrative cost 5)
   });
 
   it('structural idempotency: the unique index is the real guarantee behind the no-op', async () => {
@@ -308,7 +308,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     // structural guarantee the function's exception handler relies on.
     await expect(db.query(
       `insert into public.credit_ledger (user_id, kind, amount, source, metadata)
-       values ('${UID}','grant',3,'refund', jsonb_build_object('refund_of','${r.spend_id}'))`,
+       values ('${UID}','grant',5,'refund', jsonb_build_object('refund_of','${r.spend_id}'))`,
     )).rejects.toThrow(/duplicate key|unique/i);
     expect(await balanceOf(UID)).toBe(10);
   });
@@ -319,8 +319,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   //    ledger sum after spend → refund → refund (the duplicate is a no-op).
   it('recomputes profiles.credits from the ledger after spend then refund (no drift)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 3 → counter 7
-    expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(7);
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5 → counter 5
+    expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(5);
     await asService();
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);        // → counter 10
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);        // no-op, still 10
@@ -333,11 +333,11 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   // reconciles it to the ledger rather than carrying the drift forward.
   it('a refund heals a pre-drifted profiles.credits counter (recompute, not increment)', async () => {
     await grant(UID, 10);
-    const { r } = await scalar("select public.spend_credits('narrative') as r"); // counter now 7, ledger 7
+    const { r } = await scalar("select public.spend_credits('narrative') as r"); // counter now 5, ledger 5
     await db.query(`update public.profiles set credits = 999 where id='${UID}'`); // simulate drift
     await asService();
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
-    // Incremental arithmetic would have produced 1002; recompute yields 10.
+    // Incremental arithmetic would have produced 1004 (999 + refund 5); recompute yields 10.
     expect((await scalar(`select credits from public.profiles where id='${UID}'`)).credits).toBe(10);
   });
 
@@ -354,8 +354,8 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   // ── full round-trip ──────────────────────────────────────────────────────────
   it('spend then refund returns the account to its exact starting balance', async () => {
     await grant(UID, 12);
-    const { r } = await scalar("select public.spend_credits('progression') as r"); // cost 5
-    expect(await balanceOf(UID)).toBe(7);
+    const { r } = await scalar("select public.spend_credits('progression') as r"); // cost 6
+    expect(await balanceOf(UID)).toBe(6);
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
     expect(await balanceOf(UID)).toBe(12);
   });

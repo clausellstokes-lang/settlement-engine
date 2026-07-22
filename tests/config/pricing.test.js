@@ -39,7 +39,7 @@ beforeEach(() => {
 // pricing changes, this block has to change too (and so does the
 // edge function). A grep for "CONTRACT_AI_COSTS" finds both ends.
 const CONTRACT_AI_COSTS_LEGACY = { narrative: 8, dailyLife: 10, progression: 12 };
-const CONTRACT_AI_COSTS_NEW    = { narrative: 3, dailyLife: 4,  progression: 5  };
+const CONTRACT_AI_COSTS_NEW    = { narrative: 5, dailyLife: 4,  progression: 6  };
 
 describe('AI cost server contract', () => {
   it('legacy schedule matches the server-enforced legacy costs', () => {
@@ -76,9 +76,9 @@ describe('AI cost server contract', () => {
 describe('getActiveAiCosts() / getAiCost()', () => {
   it('returns the repriced cost schedule', () => {
     expect(getActiveAiCosts()).toEqual(CONTRACT_AI_COSTS_NEW);
-    expect(getAiCost('narrative')).toBe(3);
+    expect(getAiCost('narrative')).toBe(5);
     expect(getAiCost('dailyLife')).toBe(4);
-    expect(getAiCost('progression')).toBe(5);
+    expect(getAiCost('progression')).toBe(6);
   });
 
   it('returns 0 for unknown features', () => {

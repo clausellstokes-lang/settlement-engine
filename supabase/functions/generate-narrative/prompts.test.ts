@@ -20,6 +20,7 @@ import {
   augmentSummaryWithGrounding, sanitizeChronicleContext,
   buildDailyLifePrompt, buildRefinementPrompt, buildProgressionThesisPrompt,
 } from './prompts.ts';
+import { CACHE_BREAKPOINT } from './promptCache.ts';
 
 // The literal fence tokens (kept private in prompts.ts); a break-out attempt
 // would inject these into a dossier string.
@@ -270,4 +271,79 @@ Deno.test("summarizeSettlement grounds terrain in terrainType, never the 'auto' 
     config: { terrainType: 'auto', terrain: 'auto' },
   }) as Record<string, unknown>;
   assertEquals(tampered.terrain, null);
+});
+
+// ── COGS engineering pins (see prompts.ts: capStr / cachePadding) ────────────
+
+Deno.test('summarizeSettlement caps oversized user-editable prose while keeping array-count caps (COGS control)', () => {
+  const long = 'x'.repeat(5000); // pathologically long user-edited field
+  const summary = summarizeSettlement({
+    name: 'A'.repeat(500),
+    npcs: Array.from({ length: 20 }, (_, i) => ({
+      name: `NPC ${i}`, secret: { what: long }, personality: long, goal: { short: long },
+    })),
+    institutions: Array.from({ length: 40 }, (_, i) => ({ name: `Inst ${i}`, desc: long })),
+    arrivalScene: long,
+  }) as Record<string, any>;
+
+  // Array COUNT caps still hold (npcs slice 6, institutions slice 12).
+  assertEquals(summary.signatureNPCs.length, 6);
+  assertEquals(summary.institutions.length, 12);
+
+  // Per-field prose is ellipsis-truncated far under the raw 5000 chars.
+  if ((summary.name as string).length > 200) throw new Error(`name not capped: ${(summary.name as string).length}`);
+  if ((summary.signatureNPCs[0].secret as string).length > 320) throw new Error('npc secret not capped');
+  if ((summary.signatureNPCs[0].personality as string).length > 320) throw new Error('npc personality not capped');
+  if ((summary.institutions[0].desc as string).length > 520) throw new Error('institution desc not capped');
+  if ((summary.arrivalScene as string).length > 950) throw new Error('arrivalScene not capped');
+
+  // The ellipsis marks a real truncation.
+  assertStringIncludes(summary.arrivalScene as string, '…');
+
+  // A short field is NOT altered (no gratuitous truncation).
+  const small = summarizeSettlement({ name: 'Millbrook', arrivalScene: 'A quiet dawn.' }) as Record<string, any>;
+  assertEquals(small.arrivalScene, 'A quiet dawn.');
+});
+
+Deno.test('buildRefinementPrompt pads a small stable prefix past the cache floor, byte-stable across calls (cache activation)', () => {
+  const summary = summarizeSettlement({ name: 'Millbrook', tier: 'village', population: 400 }) as Record<string, unknown>;
+  const thesis = 'A short thesis about a quiet village on a slow river.';
+
+  const p1 = buildRefinementPrompt('Refine the opening.', thesis, summary, { opening: 'x' });
+  const p2 = buildRefinementPrompt('Refine the factions.', thesis, summary, { factions: 'y' });
+
+  // The cached prefix is everything BEFORE the breakpoint marker.
+  const prefix1 = p1.slice(0, p1.indexOf(CACHE_BREAKPOINT));
+  const prefix2 = p2.slice(0, p2.indexOf(CACHE_BREAKPOINT));
+
+  // (1) The stabilizer padding is present — this small settlement's raw prefix is
+  // far below the 4096-token (~16KB) cache floor, so cache_control would be a no-op.
+  assertStringIncludes(prefix1, 'CACHE-STABILIZER');
+
+  // (2) The padded prefix clears the 4096-token minimum (chars/4 estimate — the
+  // JSON-dense summary makes the true token count >= this, so it stays above).
+  const estTokens = Math.ceil(prefix1.length / 4);
+  if (estTokens < 4096) throw new Error(`padded prefix below cache floor: ${estTokens} tokens`);
+
+  // (3) BYTE-STABLE across two calls sharing the same thesis + summary — the
+  // prerequisite for a real prompt-cache prefix HIT (only the tail after the
+  // breakpoint varies between calls).
+  assertEquals(prefix1, prefix2);
+
+  // (4) An already-large prefix is NOT padded (no gratuitous filler / write cost).
+  const bigThesis = 'word '.repeat(6000); // ~30KB, well past the floor on its own
+  const pBig = buildRefinementPrompt('Refine.', bigThesis, summary, { opening: 'x' });
+  const prefixBig = pBig.slice(0, pBig.indexOf(CACHE_BREAKPOINT));
+  if (prefixBig.includes('CACHE-STABILIZER')) throw new Error('padded an already-large prefix');
+});
+
+Deno.test('buildDailyLifePrompt pads its stable prefix and keeps it byte-stable across beats (cache activation)', () => {
+  const summary = summarizeSettlement({ name: 'Millbrook', tier: 'village', population: 400 }) as Record<string, unknown>;
+  const dawn = buildDailyLifePrompt('Write DAWN.', summary);
+  const night = buildDailyLifePrompt('Write NIGHT.', summary);
+  const prefixDawn = dawn.slice(0, dawn.indexOf(CACHE_BREAKPOINT));
+  const prefixNight = night.slice(0, night.indexOf(CACHE_BREAKPOINT));
+  assertStringIncludes(prefixDawn, 'CACHE-STABILIZER');
+  if (Math.ceil(prefixDawn.length / 4) < 4096) throw new Error('daily-life prefix below cache floor');
+  assertEquals(prefixDawn, prefixNight);
 });

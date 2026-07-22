@@ -130,7 +130,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `173_gallery_map_reports_and_queue.sql`** (this filename is kept
+**Current migration head: `174_pricing_optimal_margins.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
