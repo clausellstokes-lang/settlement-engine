@@ -21,11 +21,11 @@
  * The panel itself is rendered only for elevated users (the parent gates on
  * isElevated). The real authority is server-side; this gate is UX, not security.
  */
-import { useCallback, useState } from 'react';
+import { useCallback, useId, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
 import Button from '../primitives/Button.jsx';
 import Stat from '../primitives/Stat.jsx';
-import { TextInputDialog } from '../primitives/Dialog.jsx';
+import { TextInputDialog, ConfirmDialog } from '../primitives/Dialog.jsx';
 import {
   INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
 
@@ -73,6 +73,15 @@ export default function AdminUsersPanel() {
   const [status, setStatus] = useState(null);        // last action result message
   // The single in-app text-prompt. `prompt.onSubmit(value)` runs the action.
   const [prompt, setPrompt] = useState(null);        // { title, body, label, onSubmit } | null
+  // The TWO-KEY confirm for account-destructive actions (owner-ordered
+  // 2026-07-21): premium/tier/entitlement change, ban / disable. `tk` holds the
+  // modal config; the admin must retype the account id AND their own password.
+  const [tk, setTk] = useState(null);                // { title, body, targetId, valueLabel?, valueHint?, buildBody, successMsg } | null
+  const [tkId, setTkId] = useState('');              // retyped account id
+  const [tkPw, setTkPw] = useState('');              // the admin's own password
+  const [tkVal, setTkVal] = useState('');            // optional value field (e.g. credits delta)
+  const [tkErr, setTkErr] = useState(null);
+  const [tkBusy, setTkBusy] = useState(false);
 
   const search = useCallback(async () => {
     setSearching(true); setError(null);
@@ -185,6 +194,10 @@ export default function AdminUsersPanel() {
   }, [selected]);
 
   const id = selected?.id;
+  // Stable field ids for the two-key modal's labelled inputs (a11y association).
+  const tkValId = useId();
+  const tkIdId = useId();
+  const tkPwId = useId();
 
   /** Open the in-app prompt; on confirm, trim + hand the value to `onValue`. */
   const ask = useCallback((cfg, onValue) => {
@@ -196,6 +209,51 @@ export default function AdminUsersPanel() {
       },
     });
   }, []);
+
+  /**
+   * Open the TWO-KEY confirm for an account-destructive action. `cfg.buildBody`
+   * receives (typedTargetId, parsedValue) and returns the admin-actions body; the
+   * server re-enforces the same gate (typed id + fresh password amr) — this modal
+   * is the deliberate-confirmation UX, not the security boundary.
+   */
+  const openTwoKey = useCallback((cfg) => {
+    setTkId(''); setTkPw(''); setTkVal(''); setTkErr(null); setTkBusy(false);
+    setTk(cfg);
+  }, []);
+
+  /**
+   * Submit the two-key confirm: client-side precheck of the id, then
+   * reauthenticate with the admin's OWN password (mints a fresh password amr on
+   * the session — NEVER call the edge fn if reauth fails), then run the action
+   * with confirm:{ typedTargetId }. The fresh session carries the fresh amr the
+   * server requires.
+   */
+  const submitTwoKey = useCallback(async () => {
+    const cfg = tk;
+    if (!cfg) return;
+    const typed = tkId.trim();
+    if (typed !== cfg.targetId) { setTkErr('The account id does not match.'); return; }
+    let parsed;
+    if (cfg.parseValue) {
+      parsed = cfg.parseValue(tkVal);
+      if (parsed == null) { setTkErr(cfg.valueHint || 'Enter a valid value.'); return; }
+    }
+    setTkBusy(true); setTkErr(null);
+    try {
+      // Dynamic import: keeps the lazy account-security module out of the admin
+      // chunk's static graph (no shared-chunk rebalance against the first-paint
+      // byte budget) and defers it until an admin actually confirms.
+      const { reauthenticateWithPassword } = await import('../../lib/authSecurity.js');
+      await reauthenticateWithPassword(tkPw);
+    } catch (e) {
+      setTkErr(e?.message || 'Re-authentication failed. Please check your password.');
+      setTkBusy(false);
+      return;
+    }
+    const body = cfg.buildBody(typed, parsed);
+    setTk(null); setTkBusy(false);
+    await runAction(body, cfg.successMsg);
+  }, [tk, tkId, tkPw, tkVal, runAction]);
 
   return (
     // P5 anti-box-soup: render flat. This panel only mounts inside AdminPanel's
@@ -214,6 +272,45 @@ export default function AdminUsersPanel() {
         confirmLabel={prompt?.confirmLabel || 'Confirm'}
         onCancel={() => setPrompt(null)}
         onConfirm={(value) => { const p = prompt; setPrompt(null); p?.onSubmit?.(value); }}
+      />
+
+      {/* TWO-KEY confirm — account-destructive actions require the exact account
+          id retyped AND the admin's own password (server re-enforces both). */}
+      <ConfirmDialog
+        open={!!tk}
+        title={tk?.title || ''}
+        body={tk?.body}
+        confirmLabel="Confirm"
+        tone="danger"
+        confirmDisabled={!tk || tkBusy || tkId.trim() !== tk.targetId}
+        onCancel={() => setTk(null)}
+        onConfirm={submitTwoKey}
+        extra={tk && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginBottom: SP.md }}>
+            {tk.valueLabel && (
+              <label htmlFor={tkValId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+                {tk.valueLabel}
+                <input id={tkValId} aria-label={tk.valueLabel} value={tkVal} onChange={(e) => setTkVal(e.target.value)}
+                  style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, background: swatch.white, color: INK }} />
+              </label>
+            )}
+            <label htmlFor={tkIdId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+              Retype the account id ({tk.targetId})
+              <input id={tkIdId} aria-label="Retype the account id" value={tkId} onChange={(e) => setTkId(e.target.value)}
+                autoComplete="off"
+                // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the first confirm field when the modal opens
+                autoFocus
+                style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, background: swatch.white, color: INK }} />
+            </label>
+            <label htmlFor={tkPwId} style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: FS.xs, fontWeight: 700, color: MUTED, fontFamily: sans }}>
+              Your account password
+              <input id={tkPwId} aria-label="Your account password" type="password" autoComplete="current-password"
+                value={tkPw} onChange={(e) => setTkPw(e.target.value)}
+                style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, background: swatch.white, color: INK }} />
+            </label>
+            {tkErr && <p role="alert" style={{ margin: 0, fontSize: FS.sm, color: RED, fontFamily: sans }}>{tkErr}</p>}
+          </div>
+        )}
       />
 
       {/* Search */}
@@ -364,31 +461,37 @@ export default function AdminUsersPanel() {
               )}>Add note</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => ask(
-                { title: 'Grant / refund credits', body: 'Positive grants, negative refunds (e.g. 50 or -10).', label: 'Credits delta', confirmLabel: 'Apply' },
-                (raw) => {
-                  const delta = parseInt(raw, 10);
-                  if (Number.isFinite(delta) && delta !== 0) runAction(
-                    { action: 'grant_credits', userId: id, credits: delta, reason: 'admin adjustment' },
-                    'Credits adjusted.',
-                  );
-                },
-              )}>Grant / refund</Button>
+              onClick={() => openTwoKey({
+                title: 'Grant / refund credits',
+                body: 'Changes a paid entitlement. Retype the account id and your password to confirm.',
+                targetId: id,
+                valueLabel: 'Credits delta (positive grants, negative refunds, e.g. 50 or -10)',
+                valueHint: 'Enter a non-zero whole number.',
+                parseValue: (raw) => { const d = parseInt(raw, 10); return Number.isFinite(d) && d !== 0 ? d : null; },
+                buildBody: (typedTargetId, delta) => ({ action: 'grant_credits', userId: id, credits: delta, reason: 'admin adjustment', confirm: { typedTargetId } }),
+                successMsg: 'Credits adjusted.',
+              })}>Grant / refund</Button>
 
             <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
               Review billing</Button>
 
             <Button variant="ghost" size="sm" disabled={busy}
-              onClick={() => runAction(
-                { action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action' },
-                selected.disabled ? 'Account enabled.' : 'Account disabled.',
-              )}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
+              onClick={() => openTwoKey({
+                title: selected.disabled ? 'Enable account' : 'Disable account',
+                body: `${selected.disabled ? 'Re-enables' : 'Disables'} this account. Retype the account id and your password to confirm.`,
+                targetId: id,
+                buildBody: (typedTargetId) => ({ action: 'set_account_disabled', userId: id, enabled: !!selected.disabled, reason: 'admin action', confirm: { typedTargetId } }),
+                successMsg: selected.disabled ? 'Account enabled.' : 'Account disabled.',
+              })}>{selected.disabled ? 'Enable' : 'Disable'}</Button>
 
             <Button variant="danger" size="sm" disabled={busy}
-              onClick={() => runAction(
-                { action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', metadata: { notify: !selected.banned } },
-                selected.banned ? 'Account unbanned.' : 'Account banned.',
-              )}>{selected.banned ? 'Unban' : 'Ban'}</Button>
+              onClick={() => openTwoKey({
+                title: selected.banned ? 'Unban account' : 'Ban account',
+                body: `${selected.banned ? 'Lifts the ban on' : 'Bans'} this account. Retype the account id and your password to confirm.`,
+                targetId: id,
+                buildBody: (typedTargetId) => ({ action: 'set_account_banned', userId: id, enabled: !!selected.banned, reason: 'admin action', metadata: { notify: !selected.banned }, confirm: { typedTargetId } }),
+                successMsg: selected.banned ? 'Account unbanned.' : 'Account banned.',
+              })}>{selected.banned ? 'Unban' : 'Ban'}</Button>
 
             <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
               Export bundle</Button>

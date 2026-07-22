@@ -39,6 +39,13 @@ import { logError } from "../_shared/logError.ts";
 // alongside cors.ts / logError.ts / requestMeta.ts). It's testable without
 // fetch/env/db.
 import { runPricingResync } from "../_shared/pricingResync.ts";
+// The account-level two-key rule (owner-ordered 2026-07-21): premium/tier/
+// entitlement changes + ban/disable + role changes require a retyped target id
+// AND a fresh GoTrue password amr on the caller's JWT. The frozen action manifest
+// (PROTECTED / MODERATION / UNGATED) + the pure guard core live in the shared,
+// unit-tested module so the walker (tests/edgeFunctions/adminActionTwoKeyWalker)
+// classifies every switch case against the SAME single source of truth.
+import { checkTwoKey, decodeJwtAmr, isProtectedAction } from "../_shared/twoKey.ts";
 
 // CORS: fail CLOSED via the shared allowlist (_shared/cors.ts) — NEVER "*" for
 // this admin endpoint. The endpoint is independently protected by JWT auth +
@@ -315,6 +322,11 @@ export async function handleAdminActions(
       max_uses: mintMaxUses, expires_at: mintExpiresAt, applies_to: mintAppliesTo,
       // AI pricing resync (migration 114)
       dryRun: pricingDryRun,
+      // Two-key confirmation envelope: { typedTargetId } for a protected action.
+      confirm: twoKeyConfirm,
+      // Moderation-suite params (contentKind for the map/campaign verbs; banned
+      // flag; report id for a queue resolution).
+      contentKind, banned: banFlag, reportId,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
@@ -387,6 +399,37 @@ export async function handleAdminActions(
       typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : fallback;
     const pFrom = asDate(fromDate, monthAgo);
     const pTo = asDate(toDate, today);
+
+    // ── THE TWO-KEY GATE (owner-ordered 2026-07-21) ─────────────────────────
+    // Runs at the TOP of the switch dispatch for any ACCOUNT-level destructive
+    // action (isProtectedAction): premium/tier/entitlement change, ban / disable,
+    // role change. ACTION-bound, not role-bound — an admin OR a developer invoking
+    // one passes the identical gate. Both keys are checked server-side: (1) the
+    // caller retyped the target's EXACT user id (confirm.typedTargetId), and (2)
+    // the caller's already-verified JWT carries a `password` amr fresher than the
+    // window (a token refresh preserves the ORIGINAL amr timestamp, so a stale
+    // session cannot fake freshness — the password itself never reaches us). Fail
+    // CLOSED: a rejection returns the fixed non-leaky "Admin action failed" while
+    // logging the real reason server-side only (via adminFail). The amr age rides
+    // the per-action A3 audit row as { twoKey:true, amrAgeS }.
+    let twoKeyAmrAgeS: number | null = null;
+    // Only gate when a concrete target is present: a protected action with no
+    // userId does nothing (its case returns 400), so we let that natural
+    // validation stand rather than masking it with a two-key rejection.
+    if (isProtectedAction(action) && userId) {
+      const twoKey = checkTwoKey({
+        action,
+        targetUserId: userId, // every protected action targets `userId`
+        typedTargetId: isRecord(twoKeyConfirm) ? twoKeyConfirm.typedTargetId : undefined,
+        amr: decodeJwtAmr(String(authHeader || "").replace(/^Bearer\s+/i, "")),
+        nowS: Math.floor(Date.now() / 1000),
+      });
+      if (!twoKey.ok) {
+        // Distinct audited detail (server-side only); caller sees the fixed error.
+        return adminFail(`two-key gate rejected ${String(action)}: ${twoKey.reason}`, 403);
+      }
+      twoKeyAmrAgeS = twoKey.amrAgeS;
+    }
 
     switch (action) {
       // Read-only analytics dashboards (migration 038 report_* functions). The
@@ -579,7 +622,7 @@ export async function handleAdminActions(
           targetUserId: userId,
           targetType: "profile",
           targetId: String(userId),
-          after: { keys: Object.keys(profilePatch) },
+          after: { keys: Object.keys(profilePatch), twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -710,7 +753,7 @@ export async function handleAdminActions(
           before: result && typeof result === "object" && "prev" in result
             ? { credits: (result as Record<string, unknown>).prev }
             : null,
-          after: { credits: newCredits },
+          after: { credits: newCredits, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false,
           reversible: true,
         });
@@ -827,7 +870,7 @@ export async function handleAdminActions(
           action: delta > 0 ? "grant_credits" : "refund_credits",
           targetUserId: userId, targetType: "profile", targetId: String(userId),
           before: { credits: adjusted.prev ?? null },
-          after: { credits: adjusted.next ?? null },
+          after: { credits: adjusted.next ?? null, twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false, reversible: true,
         });
         return json({ success: true, ...adjusted });
@@ -1324,7 +1367,7 @@ export async function handleAdminActions(
         await writeAudit({
           action: "grant_surveyor",
           targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
-          after: { status: "active", source: "grant" },
+          after: { status: "active", source: "grant", twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: false, reversible: true,
         });
         return json({ success: true });
@@ -1340,7 +1383,7 @@ export async function handleAdminActions(
         await writeAudit({
           action: "revoke_surveyor",
           targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
-          after: { status: "revoked" },
+          after: { status: "revoked", twoKey: true, amrAgeS: twoKeyAmrAgeS },
           destructive: true, reversible: true,
         });
         return json({ success: true, revoked: Boolean(revoked) });

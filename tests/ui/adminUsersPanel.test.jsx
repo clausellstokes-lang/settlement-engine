@@ -23,6 +23,9 @@ afterEach(cleanup);
 const invoke = vi.fn();
 vi.mock('../../src/lib/supabase.js', () => ({
   supabase: { functions: { invoke: (...a) => invoke(...a) } },
+  // isConfigured:false routes authSecurity's reauthenticateWithPassword to its
+  // no-op MOCK (the two-key modal reauth resolves without a real backend).
+  isConfigured: false,
 }));
 
 const REDACTED_SUMMARY = {
@@ -70,6 +73,18 @@ async function fillDialog(labelRe, value, submitRe) {
   const input = within(dialog).getByLabelText(labelRe);
   fireEvent.change(input, { target: { value } });
   fireEvent.click(within(dialog).getByRole('button', { name: submitRe }));
+}
+
+/** Drive the TWO-KEY modal: (optional value), retype the account id, password,
+ *  then Confirm. Returns after the confirm click. */
+async function submitTwoKey(accountId, { value } = {}) {
+  const dialog = await screen.findByRole('dialog');
+  if (value !== undefined) {
+    fireEvent.change(within(dialog).getByLabelText(/credits delta/i), { target: { value } });
+  }
+  fireEvent.change(within(dialog).getByLabelText(/retype the account id/i), { target: { value: accountId } });
+  fireEvent.change(within(dialog).getByLabelText(/your account password/i), { target: { value: 'hunter2' } });
+  fireEvent.click(within(dialog).getByRole('button', { name: /^confirm$/i }));
 }
 
 describe('AdminUsersPanel — A4 user-management UI', () => {
@@ -123,18 +138,55 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     }));
   });
 
-  test('Ban invokes set_account_banned with enabled=false (soft-ban) + notify', async () => {
+  test('Ban opens the TWO-KEY modal and invokes set_account_banned with the typed id confirm', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    // Clicking Ban opens the two-key confirm — it does NOT fire the action yet.
+    fireEvent.click(screen.getByRole('button', { name: /^ban$/i }));
+    expect(invoke.mock.calls.find(([, o]) => o?.body?.action === 'set_account_banned')).toBeUndefined();
+
+    await submitTwoKey('user-123');
+    await waitFor(() => {
+      const call = invoke.mock.calls.find(([, opts]) => opts?.body?.action === 'set_account_banned');
+      expect(call).toBeTruthy();
+      expect(call[1].body.enabled).toBe(false);          // currently unbanned ⇒ ban
+      expect(call[1].body.metadata).toEqual({ notify: true });
+      expect(call[1].body.confirm).toEqual({ typedTargetId: 'user-123' });
+    });
+  });
+
+  test('the two-key modal Confirm stays DISABLED until the retyped account id matches', async () => {
     const Panel = await importPanel();
     render(<Panel />);
     await openAlice();
     invoke.mockClear();
 
     fireEvent.click(screen.getByRole('button', { name: /^ban$/i }));
+    const dialog = await screen.findByRole('dialog');
+    const confirm = within(dialog).getByRole('button', { name: /^confirm$/i });
+    expect(confirm.disabled).toBe(true);                 // no id typed yet
+    fireEvent.change(within(dialog).getByLabelText(/retype the account id/i), { target: { value: 'the-wrong-id' } });
+    expect(confirm.disabled).toBe(true);                 // wrong id
+    fireEvent.change(within(dialog).getByLabelText(/retype the account id/i), { target: { value: 'user-123' } });
+    expect(confirm.disabled).toBe(false);                // matches ⇒ enabled
+  });
+
+  test('Grant / refund opens the two-key modal and sends the delta + typed id confirm', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    invoke.mockClear();
+
+    fireEvent.click(screen.getByRole('button', { name: /grant \/ refund/i }));
+    await submitTwoKey('user-123', { value: '-10' });
     await waitFor(() => {
-      const call = invoke.mock.calls.find(([, opts]) => opts?.body?.action === 'set_account_banned');
+      const call = invoke.mock.calls.find(([, o]) => o?.body?.action === 'grant_credits');
       expect(call).toBeTruthy();
-      expect(call[1].body.enabled).toBe(false);          // currently unbanned ⇒ ban
-      expect(call[1].body.metadata).toEqual({ notify: true });
+      expect(call[1].body.credits).toBe(-10);
+      expect(call[1].body.confirm).toEqual({ typedTargetId: 'user-123' });
     });
   });
 
@@ -191,11 +243,14 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
     // Status badge renders.
     expect(screen.getByText(/Disabled/)).toBeTruthy();
     invoke.mockClear();
-    // The button now reads "Enable" and passes enabled:true to re-enable.
+    // The button now reads "Enable" and (through the two-key modal) passes
+    // enabled:true to re-enable.
     fireEvent.click(screen.getByRole('button', { name: /^enable$/i }));
+    await submitTwoKey('user-123');
     await waitFor(() => {
       const call = invoke.mock.calls.find(([, o]) => o?.body?.action === 'set_account_disabled');
       expect(call[1].body.enabled).toBe(true);
+      expect(call[1].body.confirm).toEqual({ typedTargetId: 'user-123' });
     });
   });
 });
