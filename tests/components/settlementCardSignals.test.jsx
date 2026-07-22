@@ -146,3 +146,31 @@ describe('SettlementCard — Advance Time CTA (no longer a dead-end)', () => {
     expect(onAdvanceTime).toHaveBeenCalledWith('camp-1');
   });
 });
+
+describe('SettlementCard — saved-on date (defect 7b: never "Invalid Date")', () => {
+  // Local/anon saves stamp only the numeric `savedAt`, never a top-level
+  // `timestamp` (saves.js localSaveEntry), so a fresh draft used to render the
+  // literal "Invalid Date". The card must fall back to `savedAt` and never render
+  // an unparseable date.
+  it('falls back to savedAt when timestamp is absent — real date, no "Invalid Date"', () => {
+    const draftNoTimestamp = {
+      id: 's-draft', name: 'Draftholm', tier: 'village',
+      savedAt: Date.parse('2026-07-01T10:00:00Z'), // valid epoch, no `timestamp`
+      settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+    };
+    render(<SettlementCard s={draftNoTimestamp} {...baseProps} currentCampaignId={null} />);
+    expect(screen.queryByText(/Invalid Date/i)).toBeNull();
+    // A real formatted date line renders from the savedAt fallback (day mon yy).
+    expect(screen.getByText(/\d{1,2}\s+\w{3}\s+\d{2}/)).toBeTruthy();
+  });
+
+  it('drops the date line entirely when neither timestamp nor savedAt is parseable', () => {
+    const noDates = {
+      id: 's-nodate', name: 'Nowhen', tier: 'hamlet',
+      settlement: { economicState: { prosperity: 'Comfortable' }, config: {} },
+    };
+    render(<SettlementCard s={noDates} {...baseProps} currentCampaignId={null} />);
+    expect(screen.getByText('Nowhen')).toBeTruthy();
+    expect(screen.queryByText(/Invalid Date/i)).toBeNull();
+  });
+});

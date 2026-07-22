@@ -574,7 +574,9 @@ export const en = Object.freeze({
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
   // Source: UI Redesign §18.9. These set the tone for each tab in one line.
   tabs: {
-    overview:      'Where you stand back and see the place whole.',
+    // The Overview intro line was removed per owner order (2026-07-21). TabIntro
+    // (components/new/Primitives.jsx) renders nothing when a tabs.* key is absent,
+    // so the Overview tab simply drops its intro caption with no empty element.
     summary:       'The settlement, distilled to a paragraph an NPC could speak.',
     economics:     'Who owes whom, who eats what, and why prices wobble in spring.',
     power:         'Who decides, who enforces, and who quietly objects.',

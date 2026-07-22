@@ -75,7 +75,7 @@ export const landing = {
   // src/components/home/landingFixture.js (the Briarhollow/Maera demo copy is
   // retired). Only connective strings live here.
   brief: {
-    waypoint: '02 · The brief',
+    waypoint: '02 · The visual',
     h2:      'Read the Summary tab. That’s your session prep.',
     body:    'Every settlement arrives as a dossier: the town in four sentences, who matters tonight, what’s about to break, and why. Systems, factions, and history sit one tab deeper, for when the party starts digging.',
     library: 'Sign in free to keep every town in your Library, organized by campaign.',

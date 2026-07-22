@@ -45,11 +45,25 @@ const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: 
 export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-  const ts = (t) => { try { return new Date(t).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; } };
+  const ts = (t) => {
+    // An absent or unparseable timestamp must NEVER render the literal "Invalid
+    // Date": new Date(undefined).toLocaleDateString() returns that string WITHOUT
+    // throwing, so the try/catch alone never fires. Guard on getTime() NaN and
+    // return '' so the caller can drop the whole line. (Owner-spotted defect 7b:
+    // local/anon saves stamp only the numeric `savedAt`, never a top-level
+    // `timestamp` — see saves.js localSaveEntry — so a fresh draft's `timestamp`
+    // is undefined. The render below falls back to `savedAt`, which IS present.)
+    const d = new Date(t);
+    if (Number.isNaN(d.getTime())) return '';
+    try { return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'2-digit',hour:'2-digit',minute:'2-digit'}); } catch { return ''; }
+  };
   const active = isSaveActive(s);
   const planInactive = isPlanInactiveSave(s);
   const isCanon = canonPhaseOf(s) === 'canon';
   const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
+  // The saved-on line: prefer the durable `timestamp` (Supabase updated_at), fall
+  // back to the numeric `savedAt` epoch that the local save path always stamps.
+  const savedWhen = ts(s.timestamp ?? s.savedAt);
 
   // AUDIT-2.2 — read-only PDF extraction for a retention-frozen save. Exports the
   // STORED settlement (never the live store, no worldState, no faith chapter, no
@@ -294,10 +308,14 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             {active && (
               <div><LifecycleSpine stage={lifecycleStage} compact /></div>
             )}
-            {/* Save metadata — the LEAST table-relevant fact, pushed below. */}
-            <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6 }}>
-              <Clock size={10}/> {ts(s.timestamp)}
-            </div>
+            {/* Save metadata — the LEAST table-relevant fact, pushed below.
+                Dropped entirely when no parseable timestamp exists, so an absent
+                or malformed date never renders as "Invalid Date" (defect 7b). */}
+            {savedWhen && (
+              <div style={{ fontSize:FS.xs, color:BODY, display:'flex', alignItems:'center', gap:6 }}>
+                <Clock size={10}/> {savedWhen}
+              </div>
+            )}
           </div>
         </td>
 

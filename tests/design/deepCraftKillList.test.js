@@ -217,10 +217,14 @@ const CEILINGS = Object.freeze({
   // left the dialog — −2 tinted, its GOLD_BG import + fill). The third orphan,
   // GalleryMapsSidebar, was WIRED into the maps tab instead (no count change —
   // its facets were already on the census).
-  borderRadius: 103,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered 2026-07-22 (owner landing order 10): the landing-only InstantDraftCard
+  // widget was deleted when the Cnocby sample card took its §01 slot — its three
+  // rounded chips (borderRadius 103→100) and two GOLD_BG fills (tintedCallouts
+  // 165→163) fell with it. Shrink-only lock-the-win.
+  borderRadius: 100,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 72,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 167,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 165,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 163,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

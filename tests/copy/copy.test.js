@@ -81,8 +81,12 @@ describe('en map shape (drift guards)', () => {
   });
 
   it('has every tab name referenced by the redesign §18.9 spec', () => {
+    // 'overview' was intentionally removed from tabs.* per owner order
+    // (2026-07-21): the Overview tab no longer carries an intro line. TabIntro
+    // (components/new/Primitives.jsx) renders nothing when the key is absent, so
+    // the drop is safe; it is no longer a required tab intro.
     const requiredTabs = [
-      'overview', 'summary', 'economics', 'power', 'defense', 'history',
+      'summary', 'economics', 'power', 'defense', 'history',
       'relationships', 'plotHooks', 'dailyLife', 'services', 'resources',
       'viability', 'npcs', 'dmCompass',
     ];

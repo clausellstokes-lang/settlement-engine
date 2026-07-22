@@ -15,7 +15,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { Lock, ChevronDown, ArrowRight, Sparkles, Map as MapIcon } from 'lucide-react';
+import { ChevronDown, ArrowRight, Sparkles, Map as MapIcon } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
@@ -43,25 +43,10 @@ const CONTENT_MAX = 1080; // spec §4 content column
 // text on the painted (01/04) sections so prose never sits on the painting (§5).
 const PANEL_BG = 'rgba(255,251,245,0.9)';
 
-// Respect the user's motion preference for the in-page smooth scroll (the
-// waypoint / "read on" anchors). a11y.css forces scroll-behavior:auto under
-// reduced-motion for CSS scrolls; scrollIntoView needs the explicit check.
-function prefersReducedMotion() {
-  return typeof window !== 'undefined'
-    && typeof window.matchMedia === 'function'
-    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-const scrollToId = (id) => (e) => {
-  e.preventDefault();
-  const el = typeof document !== 'undefined' && document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-};
-
 // ── Shared style fragments ───────────────────────────────────────────────────
 const h2Style = (isMobile) => ({ margin: `0 0 ${SP.md}px`, fontFamily: serif_, fontSize: isMobile ? FS['26'] : FS['34'], fontWeight: 600, lineHeight: 1.15, color: INK });
 const proseStyle = { margin: `0 0 ${SP.md}px`, fontFamily: serif_, fontSize: FS.xl, lineHeight: 1.65, color: BODY };
 const panelStyle = { background: PANEL_BG, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[1], padding: '28px 30px' };
-const eyebrowGold = { fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase', color: GOLD_DEEP };
 const capsLink = {
   fontFamily: sans, fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.04em',
   textTransform: 'uppercase', color: GOLD_TXT,
@@ -112,50 +97,12 @@ function Waypoint({ pill, goldPill, dark = false }) {
 // Section wrappers ------------------------------------------------------------
 const sectionPad = (isMobile) => ({ padding: isMobile ? `0 ${SP.md}px ${SP.xxl * 2}px` : `0 ${SP.xxl}px 84px` });
 
-// ── 01 · Forge — instant-draft artifact ──────────────────────────────────────
-function InstantDraftCard() {
-  const sizes = tl('forge.sizes') || [];
-  return (
-    <div style={{ ...cardStyle, padding: '22px 24px' }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, marginBottom: SP.md }}>
-        <span style={{ ...eyebrowGold, color: GOLD_DEEP }}>{tl('forge.draftTitle')}</span>
-        <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED }}>{tl('forge.draftHint')}</span>
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.lg }}>
-        {sizes.map((s) => (
-          <span key={s.name} style={{
-            display: 'inline-flex', alignItems: 'center', gap: 7,
-            border: `1px solid ${s.selected ? GOLD : BORDER}`,
-            background: s.selected ? GOLD_BG : CARD,
-            borderRadius: radius.button, padding: '8px 15px',
-            opacity: s.locked ? 0.55 : 1,
-          }}>
-            <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 800, color: INK }}>{s.name}</span>
-            <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: MUTED }}>{s.range}</span>
-            {s.locked && <Lock size={11} color={MUTED} aria-hidden="true" />}
-          </span>
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: SP.sm, flexWrap: 'wrap' }}>
-        <span style={{
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase',
-          color: INK, background: GOLD_BG, border: `1px solid ${GOLD}`, borderRadius: R.md, padding: '6px 14px',
-        }}>{tl('forge.modeBasic')}</span>
-        <span style={{
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase',
-          color: MUTED, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: '6px 14px',
-        }}>{tl('forge.modeAdvanced')}</span>
-        <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: MUTED, marginLeft: 6 }}>{tl('forge.modeDials')}</span>
-      </div>
-      <div style={{
-        borderTop: `1px solid ${BORDER}`, marginTop: SP.md, paddingTop: SP.md,
-        fontFamily: sans, fontSize: FS.sm, fontWeight: 700, lineHeight: 1.5, color: BODY,
-      }}>
-        {tl('forge.ceiling')}
-      </div>
-    </div>
-  );
-}
+// ── 01 · Forge — the Instant Draft artifact (InstantDraftCard) was removed per
+// owner order (2026-07-22): the Cnocby sample-draft card (MiniDossierCard) now
+// fills that slot in §01. The widget was landing-only (never used by the Create
+// page's own size picker), so its code is deleted as dead landing chrome. Its
+// forge.draft* / forge.sizes / forge.mode* / forge.ceiling copy keys are now
+// unreferenced on the landing (left in place as inert strings, not retyped).
 
 // ── 06 · Commons — SIX slots, fed dynamically from the community gallery (W1) ─
 // Fetched once on below-fold mount (anon-permitted public read), ranked by
@@ -281,8 +228,14 @@ function TierStrip() {
   const tiers = tl('closer.tiers') || [];
   return (
     <div style={{
-      maxWidth: 1000, margin: `${SP.xxl * 2}px auto 0`, display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: SP.md,
+      // Owner order (2026-07-22): a TWO-BY-TWO grid (Wanderer + Cartographer on
+      // row 1, Surveyor + Founder on row 2, reading order preserved) — not the
+      // 3+1 that orphaned Founder on its own row. maxWidth 680 + a 300px column
+      // min holds exactly two columns on desktop (2*300+gap fits the cap, three
+      // never do) while auto-fit still collapses to a single column on mobile —
+      // the existing responsive behaviour, preserved.
+      maxWidth: 680, margin: `${SP.xxl * 2}px auto 0`, display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: SP.md,
     }}>
       {tiers.map((tier) => (
         <div key={tier.name} style={{
@@ -391,40 +344,31 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
               <span style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>{tl('forge.micro')}</span>
             </div>
           </div>
-          <InstantDraftCard />
+          {/* Owner order (2026-07-22): the Instant Draft widget slot now hosts the
+              Cnocby sample-draft card (MiniDossierCard), relocated from §02. The
+              drawn-town map sub-block that used to sit below moved into §02, which
+              is now "The visual". */}
+          <MiniDossierCard onNavigate={onNavigate} />
         </div>
-        {/* ── The drawn town (was §05 · The map), merged in (item 9). W-DOC: THE MAP
-            WAYPOINT's frozen v2 lens plates of the same fixture town — copy verbatim. ── */}
-        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xxl}px auto 0` }}>
+      </section>
+
+        {/* leg 2 · thorp → hamlet */}
+        <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
+        {/* ══ 02 · The visual — the drawn town (owner order 2026-07-22: the old
+            "The brief" card is replaced entirely by the v2 map card content, which
+            moved here out of §01. Section id stays "brief" for anchor stability;
+            the visible title is now "The visual"). Plain parchment (stop 2 · hamlet). ══ */}
+      <section id="brief" aria-labelledby="sf-visual-title" className="sf-landing-scene-cream" style={{ ...pad }}>
+        <Waypoint pill={tl('brief.waypoint')} />
+        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-            <h2 id="sf-map-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
+            <h2 id="sf-visual-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
             <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
           </div>
           <MapPlateCard />
           <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
             {tl('map.tease')}
           </p>
-        </div>
-      </section>
-
-        {/* leg 2 · thorp → hamlet */}
-        <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
-        {/* ══ 02 · The brief — plain parchment (stop 2 · hamlet) ══ */}
-      <section id="brief" aria-labelledby="sf-brief-title" className="sf-landing-scene-cream" style={{ ...pad }}>
-        <Waypoint pill={tl('brief.waypoint')} />
-        <div style={twoColGrid(36)}>
-          <div>
-            <h2 id="sf-brief-title" style={h2Style(isMobile)}>{tl('brief.h2')}</h2>
-            <p style={proseStyle}>{tl('brief.body')}</p>
-            <p style={{ ...proseStyle, marginBottom: SP.xl }}>{tl('brief.library')}</p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
-              <Button variant="primary" onClick={() => onNavigate('generate')}>{tl('brief.cta')}</Button>
-              <a href="#voice" onClick={scrollToId('voice')} style={{ ...capsLink, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                {tl('brief.link')}<ChevronDown size={14} aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-          <MiniDossierCard onNavigate={onNavigate} />
         </div>
       </section>
 
