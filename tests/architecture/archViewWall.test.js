@@ -12,12 +12,19 @@
  *     emitter / plate / glb / interpreter) references it -- it can never touch geometry/plate/GLB.
  *   - THE WORKER SEAM: the emitter's outputs are transferable typed arrays (Float32Array/Uint32Array).
  */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { buildArchMesh } from '../../src/domain/townMap/arch/emitter.js';
+import { encodeGlb } from '../../src/domain/townMap/arch/glb.js';
 import { cathedralRuleset } from '../../src/domain/townMap/arch/rulesets/cathedral.js';
+import { GOVERNOR_TUNING, createGovernorState, observeFrame, ladderFor } from '../../scripts/lib/adaptiveGovernor.mjs';
+
+/** byte-equal two Uint8Arrays. @param {Uint8Array} a @param {Uint8Array} b @returns {boolean} */
+function bytesEqual(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
+/** the K-5 governor's whole export vocabulary -- NONE of it may appear in a golden arch/ file. */
+const GOVERNOR_VOCAB = ['qualityLevel', 'createGovernorState', 'observeFrame', 'ladderFor', 'GOVERNOR_TUNING', 'setQualityCeiling', 'ceilingForMode'];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ARCH_DIR = join(ROOT, 'src/domain/townMap/arch');
@@ -75,18 +82,122 @@ describe('the view wall: arch/ imports only arch/ + kernel (no view, no three.js
   });
 });
 
-describe('the qualityLevel hook is view-only', () => {
-  const viewerSrc = readFileSync(join(ROOT, 'scripts/generate-k1.mjs'), 'utf8');
-  it('the generated viewer declares the qualityLevel scalar hook (default 1.0) read by LOD + passes', () => {
-    expect(viewerSrc).toMatch(/let qualityLevel\s*=\s*1\.0/);
-    expect(viewerSrc).toMatch(/lodTierFor/);   // LOD selector reads it
-    expect(viewerSrc).toMatch(/inkEnabled/);   // the crease ink-line pass reads it
-    expect(viewerSrc).toMatch(/resScale/);     // render-resolution scale reads it
+describe('the qualityLevel hook + K-5 governor are wired into the viewers (view-only)', () => {
+  const k1 = readFileSync(join(ROOT, 'scripts/generate-k1.mjs'), 'utf8');
+  const k4 = readFileSync(join(ROOT, 'scripts/generate-k4.mjs'), 'utf8');
+  it('K-1 declares the qualityLevel scalar hook (default 1.0) read by the LOD bias + passes', () => {
+    expect(k1).toMatch(/let qualityLevel\s*=\s*1\.0/);
+    expect(k1).toMatch(/lodTierFor/);   // LOD selector reads it
+    expect(k1).toMatch(/inkEnabled/);   // the crease ink-line pass reads it
+    expect(k1).toMatch(/resScale/);     // render-resolution scale reads it
   });
-  it('NO golden arch/ file references qualityLevel (it can never touch geometry/plate/GLB)', () => {
-    for (const p of FILES) {
-      expect(readFileSync(p, 'utf8'), `${p} references qualityLevel -- the governor hook must stay in the view`).not.toMatch(/qualityLevel/);
+  it('BOTH exhibit generators drive the hook from the governor (createGovernorState/observeFrame/ladderFor)', () => {
+    for (const s of [k1, k4]) {
+      expect(s).toMatch(/createGovernorState/);
+      expect(s).toMatch(/observeFrame/);
+      expect(s).toMatch(/ladderFor/);
+      expect(s).toMatch(/setQualityCeiling/);
     }
+  });
+  it('both inline the governor by stripping exports from scripts/lib/adaptiveGovernor.mjs (ONE source of truth)', () => {
+    for (const s of [k1, k4]) {
+      expect(s).toMatch(/inlineGovernor/);
+      expect(s).toMatch(/adaptiveGovernor\.mjs/);
+      expect(s).toMatch(/replace\(\/\^export \/gm/); // the export-stripping inliner
+    }
+  });
+  it('the COMMITTED exhibit HTML actually contains the inlined governor functions (end-to-end)', () => {
+    for (const rel of ['public/landing-maps/k1-exhibit/index.html', 'public/landing-maps/k4-exhibit/index.html']) {
+      const html = readFileSync(join(ROOT, rel), 'utf8');
+      expect(html, `${rel} missing inlined governor`).toMatch(/function observeFrame/);
+      expect(html).toMatch(/function createGovernorState/);
+      expect(html).toMatch(/function ladderFor/);
+    }
+  });
+  it('a quality indicator + a keyboard-operable override dial are present (E-I discipline)', () => {
+    for (const s of [k1, k4]) {
+      expect(s).toMatch(/aria-live/);      // the indicator announces politely
+      expect(s).toMatch(/aria-pressed/);   // the dial buttons expose pressed state
+      expect(s).toMatch(/ArrowRight|ArrowLeft/); // arrow-key operable
+      expect(s).toMatch(/id="qbar"/);      // the quality bar
+    }
+  });
+  it('NO golden arch/ file references the governor vocabulary (it can never touch geometry/plate/GLB)', () => {
+    for (const p of FILES) {
+      const src = readFileSync(p, 'utf8');
+      const rel = p.replace(ARCH_DIR + '/', '');
+      for (const sym of GOVERNOR_VOCAB) {
+        expect(src, `${rel} references ${sym} -- the governor must stay in the view`).not.toMatch(new RegExp(sym));
+      }
+    }
+  });
+});
+
+describe('K-5 the byte-independence pin: geometry/GLB are identical at every qualityLevel', () => {
+  // Sweep the REAL governor across a synthetic overload->recovery ramp to a set of distinct qualities in
+  // [FLOOR, 1.0], then prove the deterministic build path is oblivious to every one of them -- the mesh,
+  // AO, indices, and GLB bytes are identical. The governor decides how much the GPU DRAWS; it never
+  // changes what the kernel BUILDS (docs/THE_ARCHITECTURE_KERNEL_3D.md: view-only adaptation never
+  // touches geometry bytes).
+  const qualities = (() => {
+    let s = createGovernorState();
+    const set = new Set([s.quality]);
+    const ramp = Array.from({ length: 2400 }, (_, i) => (i < 1200 ? 33 : 6)); // overload then headroom
+    for (const f of ramp) { s = observeFrame(s, f); set.add(s.quality); }
+    return [...set];
+  })();
+
+  it('the governor actually swept a range including the floor and full quality', () => {
+    expect(qualities.length).toBeGreaterThan(3);
+    expect(Math.min(...qualities)).toBeCloseTo(GOVERNOR_TUNING.QUALITY_FLOOR, 6);
+    expect(Math.max(...qualities)).toBeCloseTo(1.0, 6);
+  });
+
+  it('buildArchMesh + GLB bytes are byte-IDENTICAL at every swept qualityLevel', () => {
+    const ref = buildArchMesh(cathedralRuleset(), { seedId: 'k5', tier: 2 });
+    const geo = { positions: ref.positions, normals: ref.normals, indices: ref.indices, vertexCount: ref.vertexCount, min: ref.min, max: ref.max };
+    const refGlb = encodeGlb(geo, { ao: ref.ao, generator: 'k5' });
+    for (const q of qualities) {
+      const L = ladderFor(q); // the ladder maps q -> VIEW rungs; the build path takes none of them
+      expect(Object.keys(L).sort()).toEqual(['contact', 'cullScale', 'ink', 'lodBias', 'massingOnly', 'resScale']);
+      const m = buildArchMesh(cathedralRuleset(), { seedId: 'k5', tier: 2 }); // same inputs, no q anywhere
+      const glb = encodeGlb({ positions: m.positions, normals: m.normals, indices: m.indices, vertexCount: m.vertexCount, min: m.min, max: m.max }, { ao: m.ao, generator: 'k5' });
+      expect(Array.from(m.positions)).toEqual(Array.from(ref.positions));
+      expect(Array.from(m.normals)).toEqual(Array.from(ref.normals));
+      expect(Array.from(m.indices)).toEqual(Array.from(ref.indices));
+      expect(Array.from(m.ao)).toEqual(Array.from(ref.ao));
+      expect(bytesEqual(glb, refGlb), `GLB drifted at qualityLevel=${q}`).toBe(true);
+    }
+  });
+});
+
+describe('the K-5 governor module is view-only (import-wall pin: reads no golden, writes no model state)', () => {
+  const govPath = join(ROOT, 'scripts/lib/adaptiveGovernor.mjs');
+  const govSrc = readFileSync(govPath, 'utf8');
+  const govCode = code(govSrc);
+  it('lives OUTSIDE the arch/ determinism perimeter (in the exhibit toolchain, never src/domain)', () => {
+    expect(existsSync(govPath)).toBe(true);
+    expect(govPath.includes('/arch/')).toBe(false);
+    expect(govPath.includes('/src/')).toBe(false);
+  });
+  it('imports NOTHING and requires nothing (pure: no golden read, no kernel/view coupling)', () => {
+    expect([...govCode.matchAll(/\bfrom\s+['"]([^'"]+)['"]/g)].map((m) => m[1])).toEqual([]);
+    expect([...govCode.matchAll(/\brequire\s*\(/g)]).toEqual([]);
+    expect([...govCode.matchAll(/\bimport\s*\(/g)]).toEqual([]);
+  });
+  it('is transcendental-free (browser-inlinable + cross-engine-safe numbers)', () => {
+    expect(govCode).not.toMatch(/Math\s*\.\s*(cos|sin|tan|acos|asin|atan|atan2|pow|exp|log|log2|log10|hypot|cbrt|sinh|cosh|tanh)\b/);
+    expect(govCode).not.toMatch(/\*\*/);
+  });
+  it('touches no clock/timing/DOM in its core -- the caller injects the rAF frame delta', () => {
+    expect(govCode).not.toMatch(/\bDate\s*\.\s*now\b/);
+    expect(govCode).not.toMatch(/\bperformance\b/);
+    expect(govCode).not.toMatch(/requestAnimationFrame/);
+    expect(govCode).not.toMatch(/\bdocument\b/);
+    expect(govCode).not.toMatch(/\bwindow\b/);
+  });
+  it('never writes model/persisted state (no store/save/localStorage/fetch)', () => {
+    expect(govCode).not.toMatch(/localStorage|sessionStorage|fetch\s*\(|useStore|setState|writeFileSync/);
   });
 });
 
