@@ -348,6 +348,14 @@ check_caught_planted "neutral-neighbour/second implicit minter" \
 perl -0pi -e "s/\"braceToken\"/\"braceTokenTAMPERED\"/" tests/copy/.composed-prose-seams-baseline.json
 check_caught "copy/composed-prose-seam baseline drift" tests/copy/.composed-prose-seams-baseline.json "npx vitest run tests/copy/composedProseSeams.test.js"
 
+# 34. K-4 drift covert-security — the single geometry writer (conditionParams.js) is
+#     made to read cv.corruptionCovert (in place of the recorded history mark), which
+#     would let covert corruption drive the map's STRUCTURE — the dossier leak the
+#     covert negative control forbids. The drift-totality walker's covert source scan
+#     must red: no drift module ever reads corruptionCovert.
+perl -0pi -e "s/Math.round\(cv.historyMark\)/Math.round(cv.corruptionCovert)/" src/domain/townMap/arch/conditionParams.js
+check_caught "kernel/drift covert leak" src/domain/townMap/arch/conditionParams.js "npx vitest run tests/lint/archDriftTotality.walker.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

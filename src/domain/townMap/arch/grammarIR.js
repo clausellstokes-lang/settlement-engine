@@ -46,14 +46,21 @@ export const ARCH_KERNEL_LAZY_SENTINEL = 'ARCH_KERNEL_LAZY_SENTINEL_k1';
  * emission order, a subdivision table, the intern discipline). A bump is a declared same-seed
  * geometry shift and reprints the exemplar hashes.
  *
- * VERSION 2 (K-2, 2026-07-22): the evil-chapel spire base is embedded below the tower top (evilChapel.js
+ * VERSION 2 (K-2, 2026-07-22): the evil-chapel spire base was embedded below the tower top (evilChapel.js
  * SPIRE_EMBED) to cure the tone-gate roof-underside striping (coincident spire-base / tower-top faces
- * z-fighting in the shared raster). ONLY the evil-chapel geometry shifts -- every other arch golden
- * (cathedral GLB all tiers, buttress, rose, vault, tracery, and ALL cathedral plate goldens) is
- * byte-IDENTICAL; only K3_GLB_GOLDEN.chapel2 is re-pinned. The version number is not embedded in GLB
- * bytes, so bumping it does not perturb any unchanged hash.
+ * z-fighting in the shared raster). ONLY the evil-chapel geometry shifted.
+ *
+ * VERSION 3 (K-4, 2026-07-22): THE GENERAL STRIPING CURE -- the same coincident-face z-fight was cured
+ * kit-wide (kit.js SPIRE_EMBED_FRAC / seatedSpire): every stacked spire cap whose base plane was
+ * coincident with the top of the primitive below it (the crocket / grotesque / skull caps + the cathedral
+ * pinnacle-on-pier joint) is now seated below that plane, eliminating the "cap-diamond" striping the K-2
+ * tone plates showed. Same-seed geometry shift -> re-pinned goldens: cathedral GLB tiers 1 + 2 (they carry
+ * the pinnacle kit asset via coarse/ornament), all 3 cathedral plate goldens (rendered from tier 2), and
+ * K3_GLB_GOLDEN.chapel2 (the evil-chapel's grotesque + skull). Cathedral GLB tier 0 (glyph -- no statuary),
+ * the byte-parity buttress, rose, vault, and tracery are byte-IDENTICAL (they stack no coincident cap).
+ * The version number is not embedded in GLB bytes, so bumping it does not by itself perturb any hash.
  */
-export const ARCH_GEOMETRY_VERSION = 2;
+export const ARCH_GEOMETRY_VERSION = 3;
 
 /**
  * ARCH_GRAMMAR_VERSION -- bumps when the IR/op CONTRACT changes (a new op, a changed rule shape,

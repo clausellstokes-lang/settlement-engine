@@ -574,6 +574,10 @@
       "kind": "mutation",
       "label": "kernel/statuary named-figure"
     },
+    "tests/lint/archDriftTotality.walker.test.js": {
+      "kind": "mutation",
+      "label": "kernel/drift covert leak"
+    },
     "tests/lint/archLodLadder.walker.test.js": {
       "kind": "mutation",
       "label": "kernel/unwalked arch ruleset"
