@@ -26,14 +26,23 @@ export function LensesHub() {
       </p>
       {lenses.entries.map((l) => (
         <div key={l.id} id={`lens-${slug(l.id)}`} style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
-          <Row label={l.label} lw={130}><code style={{ fontFamily: 'monospace', fontSize: FS.xs, color: MUT }}>{l.id}</code></Row>
+          <Row label={l.label} lw={130}>{l.reading} <code style={{ fontFamily: 'monospace', fontSize: FS.xs, color: MUT }}>{l.id}</code></Row>
         </div>
       ))}
+      <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '6px 0 0', fontFamily: sans }}>{lenses.illustratedNote}</p>
       <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '16px 0 8px' }}>The style schema</div>
       <Card title="Furniture" accent="#a0762a">{lenses.schema.furniture.join(' · ')}</Card>
       <Card title="Hazard glyphs" accent="#8b1a1a">{lenses.schema.hazardGlyphs.join(' · ')}</Card>
       <Card title="Anchor glyphs" accent="#1a3a7a">{lenses.schema.anchorGlyphs.join(' · ')}</Card>
       <Card title="Contrast levels" accent="#1a5a28">{lenses.schema.contrastLevels.join(' · ')}</Card>
+      {/* Districts — the per-quarter map vocabulary (distinct from settlement-wide Prosperity). */}
+      <div id="districts" style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '18px 0 6px', scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>District bands</div>
+      <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '0 0 8px', fontFamily: sans }}>{CD.districts.note}</p>
+      <div style={{ fontFamily: serif_, fontSize: FS.sm, fontWeight: 700, color: INK, margin: '6px 0 2px' }}>Wealth</div>
+      {CD.districts.wealth.map((d) => (<Row key={d.label} label={d.label} lw={120}>{d.reading}</Row>))}
+      <div style={{ fontFamily: serif_, fontSize: FS.sm, fontWeight: 700, color: INK, margin: '10px 0 2px' }}>Safety</div>
+      {CD.districts.safety.map((d) => (<Row key={d.label} label={d.label} lw={120}>{d.reading}</Row>))}
+      <Card title={`District categories: ${CD.districts.categories.length}`} accent="#6b5340">{CD.districts.categories.join(' · ')}</Card>
     </div>
   );
 }
@@ -81,6 +90,7 @@ export function CalamityHub() {
         </div>
       ))}
       <div style={{ fontFamily: serif_, fontSize: FS['14'], fontWeight: 600, color: INK, margin: '16px 0 8px' }}>Severity bands</div>
+      <p style={{ fontSize: FS.xs, color: MUT, fontStyle: 'italic', margin: '0 0 8px', fontFamily: sans, maxWidth: '40em' }}>Scale multiplies the deaths and exodus a calamity rolls; k-factor caps how far the settlement can rebuild afterward. The moderate band is exactly 1 and 1, so a forced strike is identical to a natural one.</p>
       {calamity.severityBands.map((b) => (
         <Row key={b.key} label={b.key} lw={140}>scale ×{b.scale} · k-factor {b.kFactor}</Row>
       ))}

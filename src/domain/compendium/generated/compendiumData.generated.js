@@ -333,18 +333,38 @@ export const COMPENDIUM_DATA = Object.freeze({
   "lenses": {
     "count": 5,
     "entries": [
-      {"id":"parchment","label":"Parchment"},
-      {"id":"watercolor","label":"Watercolor"},
-      {"id":"darkFantasy","label":"Dark Fantasy"},
-      {"id":"vtt","label":"VTT"},
-      {"id":"accessible","label":"Accessible"}
+      {"id":"parchment","label":"Parchment","reading":"The default hand-drawn plate."},
+      {"id":"watercolor","label":"Watercolor","reading":"Soft washes and muted colour."},
+      {"id":"darkFantasy","label":"Dark Fantasy","reading":"Grim, high-contrast linework."},
+      {"id":"vtt","label":"VTT","reading":"A bare grid and scale bar for virtual tabletops."},
+      {"id":"accessible","label":"Accessible","reading":"Colourblind-safe, high-contrast linework (Okabe-Ito)."}
     ],
+    "illustratedNote": "A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.",
     "schema": {
       "furniture": ["wash","cartouche","compass","grid","scaleBar"],
       "hazardGlyphs": ["triangle","diamond","pin"],
       "anchorGlyphs": ["disc","ring","star"],
       "contrastLevels": ["soft","normal","high"]
     }
+  },
+  "districts": {
+    "wealth": [
+      {"label":"Destitute","reading":"The poorest quarter; want is the rule."},
+      {"label":"Poor","reading":"Getting by, with little to spare."},
+      {"label":"Modest","reading":"Ordinary means."},
+      {"label":"Comfortable","reading":"Reliable means and some surplus."},
+      {"label":"Wealthy","reading":"Visibly well off."},
+      {"label":"Opulent","reading":"The richest quarter; conspicuous wealth."}
+    ],
+    "safety": [
+      {"label":"Lawless","reading":"No effective law; the quarter is left to itself."},
+      {"label":"Unsafe","reading":"Crime outpaces what watch there is."},
+      {"label":"Watched","reading":"A watch is present but stretched."},
+      {"label":"Orderly","reading":"Law holds day to day."},
+      {"label":"Fortified","reading":"Heavily secured and closely held."}
+    ],
+    "categories": ["religious","merchant","military","craft","noble","civic","arcane","criminal","foreign","industrial","residential"],
+    "note": "District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy."
   },
   "facets": {
     "natures": ["faith","security","trade","craft","learning","vice","civic"],

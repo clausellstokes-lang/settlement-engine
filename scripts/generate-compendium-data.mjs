@@ -244,6 +244,39 @@ const GOVERNANCE_LABELS = [
 ];
 const GOVERNANCE_NOTE = 'An active stress overrides the base label with a compound form (for example Critical under an active siege, Suppressed under occupation, or Fractured, Shaken, and Desperate under others).';
 
+// Map + district vocabularies (Wave K). Lens readings keyed by TOWN_MAP_STYLE_IDS
+// (build-guarded); the Illustrated 6th lens is noted separately (it re-shapes geometry,
+// not a re-skin). District wealth/safety labels + the category list authored inline,
+// drift-pinned to qualitativeBands / districtProfile.
+const LENS_READINGS = {
+  parchment:   'The default hand-drawn plate.',
+  watercolor:  'Soft washes and muted colour.',
+  darkFantasy: 'Grim, high-contrast linework.',
+  vtt:         'A bare grid and scale bar for virtual tabletops.',
+  accessible:  'Colourblind-safe, high-contrast linework (Okabe-Ito).',
+};
+const ILLUSTRATED_LENS_NOTE = 'A sixth lens, Illustrated, re-shapes the map geometry rather than re-skinning it, so it sits outside the five-lens re-skin family above.';
+const DISTRICT_WEALTH = [
+  { label: 'Destitute',   reading: 'The poorest quarter; want is the rule.' },
+  { label: 'Poor',        reading: 'Getting by, with little to spare.' },
+  { label: 'Modest',      reading: 'Ordinary means.' },
+  { label: 'Comfortable', reading: 'Reliable means and some surplus.' },
+  { label: 'Wealthy',     reading: 'Visibly well off.' },
+  { label: 'Opulent',     reading: 'The richest quarter; conspicuous wealth.' },
+];
+const DISTRICT_SAFETY = [
+  { label: 'Lawless',   reading: 'No effective law; the quarter is left to itself.' },
+  { label: 'Unsafe',    reading: 'Crime outpaces what watch there is.' },
+  { label: 'Watched',   reading: 'A watch is present but stretched.' },
+  { label: 'Orderly',   reading: 'Law holds day to day.' },
+  { label: 'Fortified',  reading: 'Heavily secured and closely held.' },
+];
+const DISTRICT_CATEGORIES = [
+  'religious', 'merchant', 'military', 'craft', 'noble', 'civic',
+  'arcane', 'criminal', 'foreign', 'industrial', 'residential',
+];
+const DISTRICT_NOTE = 'District wealth grades one quarter of a town; the settlement-wide economy is graded by Prosperity, which happens to share the words Poor, Comfortable, and Wealthy.';
+
 // Title-case a snake/lower identifier for a human label (deterministic).
 function titleCase(id) {
   return String(id).replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
@@ -298,6 +331,9 @@ export function buildCompendiumDataObject() {
   }
   for (const id of Object.values(FACTION_ARCHETYPES)) {
     if (!FACTION_ARCHETYPE_READINGS[id]) throw new Error(`compendium: faction archetype "${id}" has no reading`);
+  }
+  for (const id of TOWN_MAP_STYLE_IDS) {
+    if (!LENS_READINGS[id]) throw new Error(`compendium: map lens "${id}" has no LENS_READINGS entry`);
   }
 
   // Systems: preset membership derived; wave flags validated against the universe.
@@ -471,13 +507,24 @@ export function buildCompendiumDataObject() {
 
     lenses: {
       count: TOWN_MAP_STYLE_IDS.length,
-      entries: TOWN_MAP_STYLE_IDS.map((id) => ({ id, label: resolveTownMapStyle(id).label })),
+      entries: TOWN_MAP_STYLE_IDS.map((id) => ({ id, label: resolveTownMapStyle(id).label, reading: LENS_READINGS[id] })),
+      illustratedNote: ILLUSTRATED_LENS_NOTE,
       schema: {
         furniture: [...FURNITURE_KINDS],
         hazardGlyphs: [...HAZARD_GLYPHS],
         anchorGlyphs: [...ANCHOR_GLYPHS],
         contrastLevels: [...CONTRAST_LEVELS],
       },
+    },
+
+    // District vocabularies (Wave K): the per-quarter wealth (6) + safety (5) ladders
+    // and the category list the settlement-map cards show; distinct from settlement-wide
+    // Prosperity (the note disarms the shared Poor/Comfortable/Wealthy words).
+    districts: {
+      wealth: DISTRICT_WEALTH.map((x) => ({ ...x })),
+      safety: DISTRICT_SAFETY.map((x) => ({ ...x })),
+      categories: [...DISTRICT_CATEGORIES],
+      note: DISTRICT_NOTE,
     },
 
     // Facets: the exported interior/facet vocabulary. The 7 institution natures are
