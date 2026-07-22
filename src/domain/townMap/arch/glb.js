@@ -27,15 +27,37 @@ function pad4(n) {
 
 /**
  * The glTF JSON tree for a mesh (the single source of truth the encoder + the validator share).
- * Fixed key order + fixed content -> JSON.stringify is deterministic.
- * @param {Geo} geo @param {[number, number, number, number]} baseColor @param {string} generator
+ * Fixed key order + fixed content -> JSON.stringify is deterministic. When `ao` is supplied it is
+ * appended AFTER the indices in the buffer and exposed as a custom `_AO` SCALAR attribute, so the
+ * NO-AO path is byte-identical to the K-0b golden (the K-1 additions never touch the old bytes).
+ * @param {Geo} geo @param {[number, number, number, number]} baseColor @param {string} generator @param {Float32Array|null} [ao]
  * @returns {object}
  */
-function gltfTree(geo, baseColor, generator) {
+function gltfTree(geo, baseColor, generator, ao) {
   const V = geo.vertexCount;
   const posBytes = geo.positions.length * 4;
   const nrmBytes = geo.normals.length * 4;
   const idxBytes = geo.indices.length * 4;
+  /** @type {Record<string, number>} */
+  const primAttrs = { POSITION: 0, NORMAL: 1 };
+  const accessors = [
+    { bufferView: 0, componentType: FLOAT, count: V, type: 'VEC3', min: [geo.min[0], geo.min[1], geo.min[2]], max: [geo.max[0], geo.max[1], geo.max[2]] },
+    { bufferView: 1, componentType: FLOAT, count: V, type: 'VEC3' },
+    { bufferView: 2, componentType: UINT, count: geo.indices.length, type: 'SCALAR' },
+  ];
+  const bufferViews = [
+    { buffer: 0, byteOffset: 0, byteLength: posBytes, target: ARRAY_BUFFER },
+    { buffer: 0, byteOffset: posBytes, byteLength: nrmBytes, target: ARRAY_BUFFER },
+    { buffer: 0, byteOffset: posBytes + nrmBytes, byteLength: idxBytes, target: ELEMENT_ARRAY_BUFFER },
+  ];
+  let bufLen = posBytes + nrmBytes + idxBytes;
+  if (ao) {
+    const aoBytes = ao.length * 4;
+    bufferViews.push({ buffer: 0, byteOffset: bufLen, byteLength: aoBytes, target: ARRAY_BUFFER });
+    accessors.push({ bufferView: 3, componentType: FLOAT, count: V, type: 'SCALAR' });
+    primAttrs._AO = 3;
+    bufLen += aoBytes;
+  }
   return {
     asset: { version: '2.0', generator },
     scene: 0,
@@ -43,43 +65,39 @@ function gltfTree(geo, baseColor, generator) {
     nodes: [{ mesh: 0, name: 'gothic-nave-bay' }],
     meshes: [{
       name: 'gothic-nave-bay',
-      primitives: [{ attributes: { POSITION: 0, NORMAL: 1 }, indices: 2, material: 0, mode: TRIANGLES }],
+      primitives: [{ attributes: primAttrs, indices: 2, material: 0, mode: TRIANGLES }],
     }],
     materials: [{
       name: 'ashlar-stone',
       pbrMetallicRoughness: { baseColorFactor: baseColor, metallicFactor: 0, roughnessFactor: 0.85 },
       doubleSided: true,
     }],
-    accessors: [
-      { bufferView: 0, componentType: FLOAT, count: V, type: 'VEC3', min: [geo.min[0], geo.min[1], geo.min[2]], max: [geo.max[0], geo.max[1], geo.max[2]] },
-      { bufferView: 1, componentType: FLOAT, count: V, type: 'VEC3' },
-      { bufferView: 2, componentType: UINT, count: geo.indices.length, type: 'SCALAR' },
-    ],
-    bufferViews: [
-      { buffer: 0, byteOffset: 0, byteLength: posBytes, target: ARRAY_BUFFER },
-      { buffer: 0, byteOffset: posBytes, byteLength: nrmBytes, target: ARRAY_BUFFER },
-      { buffer: 0, byteOffset: posBytes + nrmBytes, byteLength: idxBytes, target: ELEMENT_ARRAY_BUFFER },
-    ],
-    buffers: [{ byteLength: posBytes + nrmBytes + idxBytes }],
+    accessors,
+    bufferViews,
+    buffers: [{ byteLength: bufLen }],
   };
 }
 
-/** The exact glTF JSON chunk string (for JSON-validation in the gate, no GLB re-parse). @param {Geo} geo @returns {string} */
-export function glbJsonString(geo) {
-  return JSON.stringify(gltfTree(geo, [0.82, 0.77, 0.67, 1], 'k0b-arch-spike'));
+/** The exact glTF JSON chunk string (for JSON-validation in the gate, no GLB re-parse). @param {Geo} geo @param {Float32Array|null} [ao] @returns {string} */
+export function glbJsonString(geo, ao) {
+  return JSON.stringify(gltfTree(geo, [0.82, 0.77, 0.67, 1], 'k0b-arch-spike', ao || null));
 }
 
 /**
- * Encode a finalized mesh to GLB bytes. Single node, single stone PBR material.
+ * Encode a finalized mesh to GLB bytes. Single node, single stone PBR material. When `opts.ao` is a
+ * per-vertex Float32Array it is embedded as a `_AO` SCALAR attribute (the shading-identity channel);
+ * omitting it reproduces the K-0b GLB byte-for-byte.
  * @param {Geo} geo
- * @param {{ baseColor?: [number, number, number, number], generator?: string }} [opts]
+ * @param {{ baseColor?: [number, number, number, number], generator?: string, ao?: Float32Array|null }} [opts]
  * @returns {Uint8Array}
  */
 export function encodeGlb(geo, opts) {
+  const ao = (opts && opts.ao) || null;
   const posBytes = geo.positions.length * 4;
   const nrmBytes = geo.normals.length * 4;
   const idxBytes = geo.indices.length * 4;
-  const binLen = posBytes + nrmBytes + idxBytes;              // all 3 lengths are multiples of 4
+  const aoBytes = ao ? ao.length * 4 : 0;
+  const binLen = posBytes + nrmBytes + idxBytes + aoBytes;    // all lengths are multiples of 4
   const baseColor = (opts && opts.baseColor) || [0.82, 0.77, 0.67, 1];
 
   // ── BIN payload (little-endian via DataView) ──────────────────────────────
@@ -89,9 +107,10 @@ export function encodeGlb(geo, opts) {
   for (let i = 0; i < geo.positions.length; i++, o += 4) dv.setFloat32(o, geo.positions[i], true);
   for (let i = 0; i < geo.normals.length; i++, o += 4) dv.setFloat32(o, geo.normals[i], true);
   for (let i = 0; i < geo.indices.length; i++, o += 4) dv.setUint32(o, geo.indices[i], true);
+  if (ao) for (let i = 0; i < ao.length; i++, o += 4) dv.setFloat32(o, ao[i], true);
 
   // ── JSON chunk (space-padded to 4) ────────────────────────────────────────
-  const jsonStr = JSON.stringify(gltfTree(geo, baseColor, (opts && opts.generator) || 'k0b-arch-spike'));
+  const jsonStr = JSON.stringify(gltfTree(geo, baseColor, (opts && opts.generator) || 'k0b-arch-spike', ao));
   const jsonBytes = new Uint8Array(pad4(jsonStr.length));
   for (let i = 0; i < jsonStr.length; i++) jsonBytes[i] = jsonStr.charCodeAt(i) & 0xff;
   for (let i = jsonStr.length; i < jsonBytes.length; i++) jsonBytes[i] = 0x20;

@@ -58,6 +58,46 @@ export const HEPTA_DIRS = Object.freeze([
 ]);
 
 /**
+ * N_GON_DIRS -- the K-1 generalization of HEPTA_DIRS into a pinned RADIAL-DIRECTION
+ * REGISTRY. For each supported gon count n, the n unit directions of a regular n-gon
+ * (k * 2pi/n, k = 0..n-1) as fixed integer literals scaled by 1e4 ([cos*1e4, sin*1e4]).
+ * Every entry was computed ONCE, BY HAND, off-engine (the townMapModel.js:18 COMPASS +
+ * HEPTA_DIRS precedent) -- the engine NEVER calls cos/sin at runtime, so the radial
+ * n-gon PRISM op (interpreter's curved-massing owner: apse, chevet, round towers, rose
+ * spoke rings) is byte-deterministic cross-engine even for the NON-constructible counts
+ * (7, 9 -- not Fermat-constructible, so cos(2pi/n) is outside the {+,-,*,/,sqrt} closure
+ * and CANNOT be derived at runtime without trig; kernel doc CORRECTION 1 + 2b).
+ * N_GON_DIRS[7] === the HEPTA_DIRS ring (kept as the named septfoil alias above).
+ * @type {Readonly<Record<number, ReadonlyArray<ReadonlyArray<number>>>>}
+ */
+export const N_GON_DIRS = /** @type {Readonly<Record<number, ReadonlyArray<ReadonlyArray<number>>>>} */ (Object.freeze({
+  3: Object.freeze([[10000, 0], [-5000, 8660], [-5000, -8660]]),
+  4: Object.freeze([[10000, 0], [0, 10000], [-10000, 0], [0, -10000]]),
+  5: Object.freeze([[10000, 0], [3090, 9511], [-8090, 5878], [-8090, -5878], [3090, -9511]]),
+  6: Object.freeze([[10000, 0], [5000, 8660], [-5000, 8660], [-10000, 0], [-5000, -8660], [5000, -8660]]),
+  7: HEPTA_DIRS,
+  8: Object.freeze([[10000, 0], [7071, 7071], [0, 10000], [-7071, 7071], [-10000, 0], [-7071, -7071], [0, -10000], [7071, -7071]]),
+  9: Object.freeze([[10000, 0], [7660, 6428], [1736, 9848], [-5000, 8660], [-9397, 3420], [-9397, -3420], [-5000, -8660], [1736, -9848], [7660, -6428]]),
+  12: Object.freeze([[10000, 0], [8660, 5000], [5000, 8660], [0, 10000], [-5000, 8660], [-8660, 5000], [-10000, 0], [-8660, -5000], [-5000, -8660], [0, -10000], [5000, -8660], [8660, -5000]]),
+  16: Object.freeze([[10000, 0], [9239, 3827], [7071, 7071], [3827, 9239], [0, 10000], [-3827, 9239], [-7071, 7071], [-9239, 3827], [-10000, 0], [-9239, -3827], [-7071, -7071], [-3827, -9239], [0, -10000], [3827, -9239], [7071, -7071], [9239, -3827]]),
+}));
+
+/** The supported n-gon counts (the pinned N_GON_DIRS keys), ascending. @type {ReadonlyArray<number>} */
+export const N_GON_COUNTS = Object.freeze([3, 4, 5, 6, 7, 8, 9, 12, 16]);
+
+/**
+ * The pinned unit directions for a supported n-gon, as float unit vectors (each scaled
+ * down from the 1e4 integer literals). Throws for an unregistered count -- the FAIL-CLOSED
+ * discipline (an unpinned gon count MUST NOT silently fall back to a trig computation).
+ * @param {number} n @returns {ReadonlyArray<readonly [number, number]>}
+ */
+export function ngonUnitDirs(n) {
+  const table = N_GON_DIRS[n];
+  if (!table) throw new Error(`arch: n-gon count ${n} is not in the pinned N_GON_DIRS registry (add a hand-computed row)`);
+  return table.map((d) => /** @type {readonly [number, number]} */ ([d[0] / 10000, d[1] / 10000]));
+}
+
+/**
  * TONE_LUT -- a hand-authored filmic tone/transfer curve, pinned as 17 integer literals
  * mapping a linear-luminance bucket (0..16, i.e. 0.0..1.0 in 1/16 steps) to a display byte
  * (0..255). It bakes gamma + a gentle contrast S (a shadow toe, a mid boost, a highlight
