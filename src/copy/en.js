@@ -1475,7 +1475,7 @@ export const en = Object.freeze({
   accountFaq: {
     creditGrant: {
       q: 'How does the free first Narrative work?',
-      a: "Every account gets one free Narrative. It refines a saved settlement into prose, and it costs you nothing the first time. After that, AI actions spend credits: a Narrative is 3, Daily Life is 4, and a Progression pass is 5. Buy more from the Subscription panel.",
+      a: "Every account gets one free Narrative. It refines a saved settlement into prose, and it costs you nothing the first time. After that, AI actions spend credits: a Narrative is 5, Daily Life is 4, and a Progression pass is 6. Choosing a faster model costs less: a Narrative is 2, Daily Life 3, and a Progression pass 4. Buy more from the Subscription panel.",
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',

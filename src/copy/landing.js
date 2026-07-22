@@ -109,7 +109,7 @@ export const landing = {
     // policy). The promise is true of the Narrative Layer and every AI surface.
     aiNote: 'The Narrative Layer is powered by AI. Every AI feature here reads and proposes; only the deterministic engine writes canon.',
     rawTag: 'what the engine derived',
-    credit:      '1 credit',
+    credit:      '5 credits',
     cta:         'Narrate',
     pricingLink: 'Credit pricing',
   },
