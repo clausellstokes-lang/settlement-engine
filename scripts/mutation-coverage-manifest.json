@@ -590,6 +590,10 @@
       "kind": "mutation",
       "label": "determinism/transcendental Math.pow in domain"
     },
+    "tests/lint/uiA11yContract.walker.test.js": {
+      "kind": "rationale",
+      "ref": "self-proving-meta"
+    },
     "tests/lint/visionKCohesionLaw.test.js": {
       "kind": "uncovered"
     },
