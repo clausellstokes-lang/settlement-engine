@@ -14,7 +14,7 @@ import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
-import { DeitiesHub, LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
+import { LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
 import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
 import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } from './compendium/CustomContent.jsx';
 // The flat per-entry index (already in the compendium chunk via the global
@@ -36,7 +36,6 @@ const TABS = [
   { id:'institutions',label:'Institutions',       Icon: Building2 },
   { id:'operations',  label:'Operations',         Icon: Shield },
   { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
-  { id:'deities',     label:'Deities',            Icon: Sparkles },
   { id:'living',      label:'Living World',       Icon: Globe },
   { id:'lenses',      label:'Map Lenses',         Icon: Globe },
   { id:'facets',      label:'Facets',             Icon: Building2 },
@@ -68,7 +67,6 @@ const ANCHOR_TO_TAB = Object.freeze({
   'pressures':    'living',
   'presets':      'living',
   'operations':   'operations',
-  'deities':      'deities',
   'lenses':       'lenses',
   'facets':       'facets',
   'calamity':     'calamity',
@@ -103,11 +101,9 @@ const TAB_META = Object.freeze({
   institutions: { title: 'Institutional catalog: SettlementForge Compendium',
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
   overview:     { title: 'The SettlementForge Compendium',
-                  desc: 'Every catalog the deterministic engine renders from its own registries: tiers, institutions, archetypes, deities, the operation registry, map lenses, facets, calamity, and the Living World systems.' },
+                  desc: 'Every catalog the deterministic engine renders from its own registries: tiers, institutions, archetypes, the operation registry, map lenses, facets, calamity, and the Living World systems.' },
   operations:   { title: 'The operation registry: SettlementForge Compendium',
                   desc: 'Every operation the engine can perform, with its class (canon / macro / mechanical), scope, the receipt it leaves, and whether it can be undone. The AI never appears as an author.' },
-  deities:      { title: 'Deities & pantheon: SettlementForge Compendium',
-                  desc: 'The core pantheon: each deity\'s portfolio, alignment, temperament, rank, and domain. The vocabulary for authoring your own gods.' },
   lenses:       { title: 'Map lenses & style schema: SettlementForge Compendium',
                   desc: 'The map rendering lenses (parchment, watercolor, dark fantasy, VTT, accessible) and the style-schema vocabulary a bespoke lens must stay inside.' },
   facets:       { title: 'Facets & interior grammar: SettlementForge Compendium',
@@ -115,7 +111,7 @@ const TAB_META = Object.freeze({
   calamity:     { title: 'Calamity reference: SettlementForge Compendium',
                   desc: 'The one unified calamity mechanic, its cosmetic terrain flavours, and its severity bands. Honest by design: a flood and a fire differ in the telling, not the maths.' },
   az:           { title: 'A–Z index: SettlementForge Compendium',
-                  desc: 'Every named Compendium entry in one alphabetical index: archetypes, deities, operations, systems, and more, each a stable deep-link.' },
+                  desc: 'Every named Compendium entry in one alphabetical index: archetypes, operations, systems, and more, each a stable deep-link.' },
 });
 
 export default function CompendiumPanel({ config, standalone=false, routeEntry }) {
@@ -253,7 +249,6 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
       case 'institutions': return <InstitutionsTab config={config} search={search}/>;
       case 'operations':   return <OperationsHub/>;
       case 'arcane':       return <ArcaneTab/>;
-      case 'deities':      return <DeitiesHub/>;
       case 'living':       return <SystemsHub/>;
       case 'lenses':       return <LensesHub/>;
       case 'facets':       return <FacetsHub/>;
@@ -290,7 +285,7 @@ export default function CompendiumPanel({ config, standalone=false, routeEntry }
   // tabs keep a comfortable reading measure so lines don't sprawl.
   // The grid/wide hubs fill the frame (flow into more columns); the prose tabs keep
   // a comfortable reading measure so lines don't sprawl.
-  const WIDE_TABS = new Set(['overview', 'power', 'institutions', 'operations', 'deities', 'living', 'lenses', 'facets', 'calamity', 'az']);
+  const WIDE_TABS = new Set(['overview', 'power', 'institutions', 'operations', 'living', 'lenses', 'facets', 'calamity', 'az']);
   const gridTab = WIDE_TABS.has(activeTab);
   const contentColumn = standalone
     ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }

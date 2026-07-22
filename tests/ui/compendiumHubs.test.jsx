@@ -33,10 +33,11 @@ describe('Compendium — dashboard + registry hubs', () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { container } = render(<CompendiumPanel standalone />);
     const text = container.textContent;
-    // The demo world + at least the operations and deities counts, from the artifact.
+    // The demo world + the operations count, from the artifact. (The premade-deity
+    // roster was removed by owner ruling 2026-07-21; no deity count is published.)
     expect(text).toContain(CD.meta.demoWorld.name);
     expect(text).toContain(String(CD.operations.count));
-    expect(text).toContain(String(CD.deities.count));
+    expect(CD.deities).toBeUndefined();
   });
 
   it('the Operations hub is the op registry public (read/propose/write, every class)', async () => {
@@ -74,11 +75,10 @@ describe('Compendium — dashboard + registry hubs', () => {
     expect(text).not.toContain('20-80'); // the old, wrong, hand-typed band
   });
 
-  it('Deities, Lenses, Facets, Calamity, and the A–Z index all render', async () => {
+  it('Lenses, Facets, Calamity, and the A–Z index all render', async () => {
     const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
     const { container } = render(<CompendiumPanel standalone />);
-    clickTab(container, 'Deities');
-    expect(container.textContent).toContain(CD.deities.entries[0].name);
+    // (No Deities tab: the premade-deity roster was removed by owner ruling 2026-07-21.)
     clickTab(container, 'Map Lenses');
     expect(container.textContent).toContain(CD.lenses.entries[0].label);
     clickTab(container, 'Facets');

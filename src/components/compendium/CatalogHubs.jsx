@@ -1,63 +1,19 @@
 /**
- * compendium/CatalogHubs.jsx — the Deities, Lenses, Facets and Calamity hubs.
+ * compendium/CatalogHubs.jsx — the Lenses, Facets and Calamity hubs.
  *
  * All render from the generated drift-contract artifact. Each entry carries a stable
- * slug anchor (id="deity-<slug>" etc.) so a shared deep-link survives regeneration.
+ * slug anchor (id="lens-<slug>" etc.) so a shared deep-link survives regeneration.
+ *
+ * The premade-deity roster is intentionally absent (owner ruling 2026-07-21: no
+ * premade deities; deities enter a world only via custom-content authoring). The
+ * deity roster hub, its generated data block, and its index rows were removed with
+ * that ruling; custom-deity authoring lives in the My Custom Content workspace.
  */
 
-import { useState, useMemo } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, sans, FS } from '../theme.js';
+import { INK, MUTED as MUT, SECOND as SEC, serif_, sans, FS } from '../theme.js';
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { slug, ANCHOR_SCROLL_MARGIN } from './registrySlug.js';
-import { Tag, Card, Row } from './primitives.jsx';
-import Button from '../primitives/Button.jsx';
-
-const ALIGN_COLOR = { good: '#1a5a28', neutral: '#6b5340', evil: '#8b1a1a' };
-const RANK_LABEL = { major: 'Major', minor: 'Minor', cult: 'Cult' };
-const RANK_ORDER = ['major', 'minor', 'cult'];
-
-// ── DEITIES — the core pantheon bank ─────────────────────────────────────────
-export function DeitiesHub() {
-  const [rank, setRank] = useState('all');
-  const filters = ['all', ...RANK_ORDER];
-  const shown = useMemo(
-    () => CD.deities.entries.filter((d) => rank === 'all' || d.rank === rank),
-    [rank],
-  );
-  return (
-    <div id="deities" style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN }}>
-      <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 12px', fontFamily: sans, maxWidth: '40em' }}>
-        The {CD.deities.count} deities of the core pantheon. Assign one and the living pantheon
-        contests converts, seats, and the axes each god steers. Author your own under My Custom
-        Content. The same alignment / temperament / rank vocabulary applies.
-      </p>
-      <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap', marginBottom: 12 }}>
-        {filters.map((f) => (
-          <Button key={f} onClick={() => setRank(f)} variant={rank === f ? 'primary' : 'ghost'} size="sm" aria-pressed={rank === f}>
-            {f === 'all' ? 'All' : RANK_LABEL[f]}
-          </Button>
-        ))}
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(260px,1fr))', gap: 8 }}>
-        {shown.map((d) => (
-          <div key={d.slug} id={`deity-${slug(d.slug)}`}
-            style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
-              borderLeft: `3px solid ${ALIGN_COLOR[d.alignment] || GOLD}`, padding: '10px 12px' }}>
-            <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, marginBottom: 3 }}>{d.name}</div>
-            <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5, marginBottom: 6, maxWidth: '32em' }}>{d.portfolio}</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-              <Tag label={d.rank} color={GOLD} />
-              <Tag label={d.alignment} color={ALIGN_COLOR[d.alignment] || GOLD} />
-              <Tag label={d.law} color="#3a1a7a" />
-              <Tag label={d.temperament} color="#6b5340" />
-              <Tag label={d.domain} color="#1a3a7a" />
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+import { Card, Row } from './primitives.jsx';
 
 // ── LENSES — the map styles + the style-schema wall ──────────────────────────
 export function LensesHub() {

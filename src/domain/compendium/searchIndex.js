@@ -32,7 +32,7 @@ import { compareCodepoint } from '../deterministicSort.js';
 // never route to it) reds this until it is added (domain-region-dossier-guidance-5).
 export const COMPENDIUM_TABS = Object.freeze([
   'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
-  'deities', 'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
+  'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
 ]);
 
 /**
@@ -163,22 +163,20 @@ const REL_ENTRIES = CD.relationships.entries.map((r) => ({
 }));
 
 // ── New registry hubs — derived from the generated artifact (zero-drift) ────
-const DEITY_ENTRIES = CD.deities.entries.map((d) => ({
-  id: `deity-${slug(d.slug)}`,
-  term: d.name,
-  category: 'Deity',
-  tab: 'deities',
-  anchor: `deity-${slug(d.slug)}`,
-  keywords: `${d.portfolio} ${d.alignment} ${d.law} ${d.temperament} ${d.rank} ${d.domain}`,
-}));
+// The premade-deity roster was removed (owner ruling 2026-07-21: no premade
+// deities; they enter a world only via custom-content authoring), so there is no
+// deity index entry — custom-deity authoring lives in the My Custom Content workspace.
 
+// The operation entry's display term is the authored, human label; the raw
+// camelCase opType stays searchable via keywords, and the anchor keeps the
+// op-<slug(opType)> form so existing deep-links survive.
 const OPERATION_ENTRIES = CD.operations.entries.map((o) => ({
   id: `op-${slug(o.opType)}`,
-  term: o.opType,
+  term: o.label,
   category: 'Operation',
   tab: 'operations',
   anchor: `op-${slug(o.opType)}`,
-  keywords: `${o.klass} ${o.targetScope} ${o.receiptRef || ''} ${o.undoToken ? 'undo reversible' : 'one-way'}`,
+  keywords: `${o.opType} ${o.klass} ${o.targetScope} ${o.receiptRef || ''} ${o.undoToken ? 'undo reversible' : 'one-way'}`,
 }));
 
 const SYSTEM_ENTRIES = CD.systems.map((s) => ({
@@ -225,7 +223,6 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
-  ...DEITY_ENTRIES,
   ...OPERATION_ENTRIES,
   ...LENS_ENTRIES,
   ...CALAMITY_ENTRIES,

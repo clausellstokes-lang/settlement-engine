@@ -12,6 +12,7 @@
 import { useState, useCallback } from 'react';
 import { Check, Pencil, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
+import { operationLabel } from '../../store/operationRegistry.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, RED, SLATE, sans, SP, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -41,7 +42,11 @@ function OpCard({ op, index, decision, onDecide }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: FS.sm, color: INK, fontFamily: sans, fontWeight: 700 }}>{op.opType}</span>
+        {/* The authored, human label for the proposed verb (falls back to the raw
+            opType for an unregistered/edited verb); the opType stays as a small
+            monospace reference since it is the verb actually dispatched. */}
+        <span style={{ fontSize: FS.sm, color: INK, fontFamily: sans, fontWeight: 700 }}>{operationLabel(op.opType)}</span>
+        <code style={{ fontSize: FS.xxs, color: MUTED, fontFamily: 'monospace' }}>{op.opType}</code>
         {op.label && <Badge tone={OP_LABEL_TONE[op.label] || 'muted'} size="sm">{op.label}</Badge>}
         {isProtected && <Badge tone="danger" size="sm">protected</Badge>}
         <span style={{ flex: 1 }} />
@@ -80,7 +85,7 @@ function OpCard({ op, index, decision, onDecide }) {
             type="checkbox"
             checked={decision?.consented === true}
             onChange={(e) => onDecide(index, { ...decision, consented: e.target.checked })}
-            aria-label={`Consent to the protected op ${op.opType}`}
+            aria-label={`Consent to the protected op ${operationLabel(op.opType)}`}
           />
           This op touches a protected constraint. Tick to consent, or it will not apply.
         </label>
@@ -187,12 +192,12 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
               </div>
               {applyResult.unroutable?.length > 0 && (
                 <div data-testid="apply-unroutable" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                  Unroutable (no verb, surfaced not dropped): {applyResult.unroutable.map((u) => u.opType).join(', ')}
+                  Unroutable (no verb, surfaced not dropped): {applyResult.unroutable.map((u) => operationLabel(u.opType)).join(', ')}
                 </div>
               )}
               {applyResult.failed?.length > 0 && (
                 <div style={{ fontSize: FS.xs, color: RED, fontFamily: sans }}>
-                  Failed: {applyResult.failed.map((f) => `${f.opType} (${f.reason})`).join(', ')}
+                  Failed: {applyResult.failed.map((f) => `${operationLabel(f.opType)} (${f.reason})`).join(', ')}
                 </div>
               )}
               <ReceiptLine engineVersion={applyResult.log?.engineVersion} seed={applyResult.log?.seed} applied={applyResult.log?.appliedCount} />
