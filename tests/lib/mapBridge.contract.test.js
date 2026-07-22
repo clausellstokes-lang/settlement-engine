@@ -14,38 +14,37 @@
  * its message-type prefix break this test loudly.
  */
 
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createMapBridge } from '../../src/lib/mapBridge.js';
+import { mustExtract } from '../helpers/sourceContract.js';
 
-// ── Canonical command catalog. Every entry MUST exist on the bridge,
-// and calling it MUST emit the matching message type. ─────────────────
-
+// ── Canonical command catalog — DERIVED from the bridge SOURCE, not a hand-maintained
+// literal (the M6 fix). The old inline CANONICAL_COMMANDS array had silently drifted from
+// the real surface — it was missing `getSpatialPack` and `exportThumb` — and the drift was
+// never caught because the completeness tests below skipped their only assertion whenever
+// nothing had been sent (`if (!msg) continue`), so an all-empty run counted green having
+// asserted nothing. Deriving the catalog from the `call('settlementEngine:*')` sites makes
+// the test track the real command surface, and a non-vacuous floor + a per-command
+// "did it send" assertion make it impossible to pass on emptiness. ────────────────────
+const BRIDGE_SRC = readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../../src/lib/mapBridge.js'),
+  'utf8',
+);
+// Fail-closed anchor: the typed api surface must exist, or the derivation below is
+// meaningless (mustExtract throws rather than yielding an empty catalog).
+mustExtract(BRIDGE_SRC, 'const api = {', 'mapBridge typed api surface');
+// Every typed command is `<method>: (...) => call('settlementEngine:<type>', ...)`.
 const CANONICAL_COMMANDS = [
-  // settlement placement
-  { method: 'placeSettlement',     type: 'settlementEngine:placeSettlement' },
-  { method: 'removePlacement',     type: 'settlementEngine:removePlacement' },
-  { method: 'clearAllPlacements',  type: 'settlementEngine:clearAllPlacements' },
-  { method: 'restorePlacements',   type: 'settlementEngine:restorePlacements' },
-  // viewport / geometry
-  { method: 'getViewport',         type: 'settlementEngine:getViewport' },
-  { method: 'setViewport',         type: 'settlementEngine:setViewport' },
-  { method: 'fitMap',              type: 'settlementEngine:fitMap' },
-  // snapshot
-  { method: 'saveSnapshot',        type: 'settlementEngine:saveSnapshot' },
-  { method: 'loadSnapshot',        type: 'settlementEngine:loadSnapshot' },
-  { method: 'resetMap',            type: 'settlementEngine:resetMap' },
-  // terrain
-  { method: 'activateTool',        type: 'settlementEngine:activateTool' },
-  { method: 'deactivateTool',      type: 'settlementEngine:deactivateTool' },
-  { method: 'terrainUndo',         type: 'settlementEngine:terrainUndo' },
-  { method: 'terrainRedo',         type: 'settlementEngine:terrainRedo' },
-  // template
-  { method: 'setTemplate',         type: 'settlementEngine:setTemplate' },
-  { method: 'getTemplates',        type: 'settlementEngine:getTemplates' },
-  // misc
-  { method: 'requestBurgList',     type: 'settlementEngine:requestBurgList' },
-  { method: 'setEmbeddedMode',     type: 'settlementEngine:setEmbeddedMode' },
-];
+  ...BRIDGE_SRC.matchAll(/(\w+)\s*:\s*\([^)]*\)\s*=>\s*call\('settlementEngine:(\w+)'/g),
+].map(([, method, suffix]) => ({ method, type: `settlementEngine:${suffix}` }));
+
+// Non-vacuous floor: the real bridge exposes 20 typed `settlementEngine:*` commands. If the
+// derivation ever yields fewer (the api surface reshaped past the pattern), fail loud
+// instead of iterating a short/empty catalog — the exact vacuity this wave closes.
+const COMMAND_FLOOR = 20;
 
 // ── Push events the bridge MUST allow listeners to subscribe to.
 // (No central registry on the bridge — pulled from real usage.) ────────
@@ -99,6 +98,21 @@ afterEach(() => {
 // ── Catalog completeness ──────────────────────────────────────────────
 
 describe('Tier 3.6 — map bridge command catalog', () => {
+  test('the derived catalog meets the non-vacuous command floor and is unique', () => {
+    // The set is DERIVED from source; assert it is non-empty and at least the real count,
+    // so a derivation that silently yields nothing cannot make the loops below vacuous.
+    expect(
+      CANONICAL_COMMANDS.length,
+      `derived ${CANONICAL_COMMANDS.length} settlementEngine commands; expected >= ${COMMAND_FLOOR}`,
+    ).toBeGreaterThanOrEqual(COMMAND_FLOOR);
+    const types = CANONICAL_COMMANDS.map((c) => c.type);
+    expect(new Set(types).size, 'command types must be unique').toBe(types.length);
+    // Regression pin for the exact drift the vacuity hid: these two were absent from the
+    // old hand-maintained literal.
+    expect(types).toContain('settlementEngine:getSpatialPack');
+    expect(types).toContain('settlementEngine:exportThumb');
+  });
+
   test('every canonical command method exists on the bridge', () => {
     for (const { method } of CANONICAL_COMMANDS) {
       expect(typeof rig.bridge[method], `method ${method}`).toBe('function');
@@ -106,19 +120,24 @@ describe('Tier 3.6 — map bridge command catalog', () => {
   });
 
   test('every canonical command emits the matching message type', () => {
+    let sentCount = 0;
     for (const { method, type } of CANONICAL_COMMANDS) {
       rig.sent.length = 0;
       // Empty object satisfies both destructuring and positional commands.
       // Each call returns a pending RPC promise we won't fulfill; swallow
       // the rejection so it doesn't surface during teardown.
-      try {
-        const p = rig.bridge[method]({});
-        if (p && typeof p.catch === 'function') p.catch(() => {});
-      } catch { /* skip strict-validator commands */ }
+      const p = rig.bridge[method]({});
+      if (p && typeof p.catch === 'function') p.catch(() => {});
       const msg = rig.sent[rig.sent.length - 1];
-      if (!msg) continue;
+      // NO skip-guard (the M6 fix): a command that fails to post is a real defect, not a
+      // reason to assert nothing. Every command dispatches synchronously after fmg:ready.
+      expect(msg, `${method} posted no message — the bridge dropped a canonical command`).toBeTruthy();
       expect(msg.type, `${method} sent type ${msg.type} (expected ${type})`).toBe(type);
+      sentCount += 1;
     }
+    // Belt-and-braces: the number of commands actually exercised equals the whole catalog,
+    // so this test can never pass having checked a subset.
+    expect(sentCount).toBe(CANONICAL_COMMANDS.length);
   });
 });
 
@@ -126,18 +145,20 @@ describe('Tier 3.6 — map bridge command catalog', () => {
 
 describe('Tier 3.6 — outgoing envelope shape', () => {
   test('every command attaches a _rid string to the payload', () => {
+    let checked = 0;
     for (const { method } of CANONICAL_COMMANDS) {
       rig.sent.length = 0;
-      try {
-        const p = rig.bridge[method]({});
-        if (p && typeof p.catch === 'function') p.catch(() => {});
-      } catch { /* skip commands that strictly validate args */ }
+      const p = rig.bridge[method]({});
+      if (p && typeof p.catch === 'function') p.catch(() => {});
       const msg = rig.sent[rig.sent.length - 1];
-      if (!msg) continue;
+      // NO skip-guard (the M6 fix): assert the command posted, then check the envelope.
+      expect(msg, `${method} posted no message`).toBeTruthy();
       expect(msg).toHaveProperty('_rid');
       expect(typeof msg._rid).toBe('string');
       expect(msg._rid).toMatch(/^rpc_\d+_\d+$/);
+      checked += 1;
     }
+    expect(checked).toBe(CANONICAL_COMMANDS.length);
   });
 
   test('two consecutive commands carry distinct _rid values', () => {

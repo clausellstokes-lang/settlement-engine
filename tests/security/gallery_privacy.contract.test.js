@@ -10,6 +10,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { functionBody, sqlFunctionBody } from '../helpers/sourceContract.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
@@ -21,21 +22,10 @@ const GALLERY_JS = join(ROOT, 'src', 'lib', 'gallery.js');
 const OUTPUT_CONTAINER_JSX = join(ROOT, 'src', 'components', 'OutputContainer.jsx');
 const SHARE_TO_GALLERY_JSX = join(ROOT, 'src', 'components', 'ShareToGallery.jsx');
 
-function functionBody(source, name) {
-  const start = source.indexOf(`function ${name}`);
-  if (start < 0) return '';
-  const nextExport = source.indexOf('\nexport ', start + 1);
-  return source.slice(start, nextExport < 0 ? source.length : nextExport);
-}
-
-// A SQL function definition: from `create or replace function <name>` to the
-// closing `$$;` of its dollar-quoted body.
-function sqlFunctionBody(source, name) {
-  const start = source.indexOf(`create or replace function ${name}`);
-  if (start < 0) return '';
-  const end = source.indexOf('$$;', start);
-  return source.slice(start, end < 0 ? source.length : end);
-}
+// functionBody / sqlFunctionBody now come from tests/helpers/sourceContract.js — they
+// THROW when the target function is absent instead of returning '' (the M7 fix). The old
+// local versions returned '' on a rename/removal, after which the `.not.toMatch(...)`
+// privacy assertions below passed vacuously (an empty string trivially "does not match").
 
 describe('gallery public privacy migration', () => {
   it('commits the privacy boundary migration', () => {
@@ -74,7 +64,10 @@ describe('gallery client privacy contract', () => {
 
   it('does not select settlement table data inside public detail fetches', () => {
     const js = readFileSync(GALLERY_JS, 'utf8');
+    // functionBody throws if fetchPublicDossier is gone; assert non-empty too, so the
+    // `.not.toMatch` guards below can never run against emptiness (the M7 vacuity).
     const detail = functionBody(js, 'fetchPublicDossier');
+    expect(detail, 'fetchPublicDossier body located').toBeTruthy();
     expect(detail).not.toMatch(/\.from\('settlements'\)/);
     expect(detail).not.toMatch(/\.select\([^)]*data/);
   });

@@ -21,8 +21,17 @@
  * Deno gate instead of silently changing what users are charged.
  */
 
+/**
+ * The stages at which a generation failure can occur — the SINGLE runtime source of the
+ * union. `FailureStage` is DERIVED from this array, so adding a new pipeline stage means
+ * adding it here (and only here). refundPolicy.test.ts derives its exhaustiveness check
+ * from FAILURE_STAGES, so a stage added without an explicit refund verdict fails the Deno
+ * gate instead of silently defaulting.
+ */
+export const FAILURE_STAGES = ["thesis", "dailyLifeField", "refinement"] as const;
+
 /** The point in the generation pipeline at which a failure occurred. */
-export type FailureStage = "thesis" | "dailyLifeField" | "refinement";
+export type FailureStage = (typeof FAILURE_STAGES)[number];
 
 /** True iff a failure at `stage` should refund the up-front credit spend. */
 export function shouldRefundOnFailure(stage: FailureStage): boolean {
