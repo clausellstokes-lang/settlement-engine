@@ -18,7 +18,10 @@
  * cordial refusal and the MANUAL bucket picker (which needs no AI) is unaffected.
  *
  * DYNAMIC-IMPORTED by the lazy TableLedgerPanel only, so this module + its graph
- * (tableLedger) contribute ZERO first-paint bytes — pinned via TABLE_CLERK_FINGERPRINT.
+ * (tableLedger) contribute ZERO first-paint bytes. ENFORCED by
+ * tests/build/tableClerkLazy.test.js: always-on source scans (no eager static edge
+ * reaches here; exactly one dynamic parent) plus a dist-closure absence keyed on
+ * TABLE_CLERK_FINGERPRINT below, which `npm run verify:dist` runs post-build.
  */
 
 import { supabase, isConfigured } from './supabase.js';
@@ -26,7 +29,12 @@ import {
   TABLE_EVENT_KINDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES, reviewClerkProposals,
 } from '../domain/tableLedger.js';
 
-/** Minifier-stable literal proving this graph stays off first paint. */
+/**
+ * Minifier-stable literal proving this graph stays off first paint. Consumed by
+ * tests/build/tableClerkLazy.test.js — it must survive into the lazy chunk (the
+ * anti-vacuity check) and appear in no first-paint chunk (the absence check), so
+ * do not inline, rename, or "clean up" this export without moving the pin.
+ */
 export const TABLE_CLERK_FINGERPRINT = '::table-clerk:v1';
 
 /**
