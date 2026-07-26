@@ -11,12 +11,13 @@
  * THE CENSUS (the wall against an N-1 sweep) is TWO-SIDED, because an AI surface has two
  * halves and either one can exist without the other:
  *   - the EDGE side — every supabase/functions/<fn> whose code calls the model;
- *   - the CLIENT side — every edge slug the browser actually invokes (see the client
- *     transport census below).
- * Both are DISCOVERED from source; neither is a hand-list that can silently drift. A NEW
- * model-calling edge surface, or a NEW client transport, that appears without a disposition
- * in AI_SURFACE_WALLS reds THIS test loudly (census completeness), rather than shipping an
- * un-walled surface a green suite would hide.
+ *   - the CLIENT side — every edge slug the browser actually invokes.
+ * Both are DISCOVERED from source by the SHARED census module, ./aiSurfaceCensus.js —
+ * imported here and by E-D part 2 (tests/domain/aiFallbackTotality.test.js) so the two
+ * walls can never again answer to different denominators. Neither side is a hand-list that
+ * can silently drift. A NEW model-calling edge surface, or a NEW client transport, that
+ * appears without a disposition in AI_SURFACE_WALLS reds THIS test loudly (census
+ * completeness), rather than shipping an un-walled surface a green suite would hide.
  *
  * WHY THE CLIENT SIDE IS NOT REDUNDANT: an edge-directory walk cannot see a transport whose
  * edge half is not in the tree. `src/lib/tableClerk.js` invokes 'table-clerk', a live AI
@@ -44,104 +45,21 @@
  * @enforced-by this test
  */
 import { describe, it, expect } from 'vitest';
-import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { resolve, join, relative, sep } from 'node:path';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
 
-const ROOT = resolve(process.cwd());
-const FN_DIR = join(ROOT, 'supabase', 'functions');
+// THE CENSUS ITSELF LIVES IN ONE PLACE — tests/security/aiSurfaceCensus.js — and is
+// imported by BOTH halves of E-D (this scan and tests/domain/aiFallbackTotality.test.js).
+// It used to be a verbatim copy in each file, and the copies drifted: this file grew the
+// client pass and found 'table-clerk' while part 2 kept walking only supabase/functions/*.
+// One census, imported twice, is the structural cure for that class.
+import {
+  ROOT, MODEL_CALL, EDGE_DIRS, AI_SURFACES,
+  DIRECT_INVOKE, INDIRECT_INVOKE, KEBAB_LITERAL, WORD_LITERAL,
+  CLIENT_TRANSPORTS, NON_AI_CLIENT_TRANSPORTS, invokersOf, CENSUS_FLOORS,
+} from './aiSurfaceCensus.js';
+
 const readSrc = (rel) => (existsSync(join(ROOT, rel)) ? readFileSync(join(ROOT, rel), 'utf8') : '');
-
-// ── The DISCOVERED roster: every edge function that calls the model ──────────
-// Walk each function's whole .ts tree (a call may live in a *Core.ts, not index.ts —
-// parley's does). The token set names the provider seam without over-fitting one call
-// shape; guard-the-guard below fails if it ever collapses to a vacuous set.
-const MODEL_CALL = /anthropic|runCreditedCall|callAnthropic|messages\.create|createMessage|ANTHROPIC_CLAUDE|resolveModel|providerKey/i;
-
-function tsFilesUnder(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) return tsFilesUnder(p);
-    return /\.ts$/.test(name) && !/\.test\.ts$/.test(name) ? [p] : [];
-  });
-}
-
-function callsModel(fnName) {
-  const dir = join(FN_DIR, fnName);
-  if (!existsSync(dir) || !statSync(dir).isDirectory()) return false;
-  return tsFilesUnder(dir).some((f) => MODEL_CALL.test(readFileSync(f, 'utf8')));
-}
-
-const AI_SURFACES = readdirSync(FN_DIR, { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name !== '_shared')
-  .map((d) => d.name)
-  .filter(callsModel)
-  .sort();
-
-/** Every edge directory present in the tree (model-calling or not) — the deploy denominator. */
-const EDGE_DIRS = new Set(
-  readdirSync(FN_DIR, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && d.name !== '_shared')
-    .map((d) => d.name),
-);
-
-// ── The DISCOVERED client transports: every edge slug the BROWSER invokes ────
-// Discovery here is INDEPENDENT of supabase/functions/ presence — that independence IS
-// the point (see the header): a directory walk is blind to a transport whose edge half
-// is not in the tree.
-//
-//   PASS A (direct) — the slug is a literal at the call site: `invoke('slug')`, or a
-//     `functions/v1/<slug>` URL for the streaming surfaces. Precise, so single-word
-//     slugs ('interview') are included.
-//   PASS B (indirect) — a file that calls `functions.invoke(<variable>)` demonstrably
-//     routes slugs through a helper, a const, or a ternary; lib/surveyorWrite.js posts
-//     six AI surfaces that way. In THOSE FILES ONLY, every kebab-shaped string literal
-//     is taken as a candidate slug, plus any single-word literal naming a real edge
-//     directory. Restricting Pass B to indirect routers is what keeps it noise-free.
-//
-// ACCEPTED GAPS of a regex gate (hand-audited 2026-07-26 — all 23 slugs discovered today
-// are real edge targets; zero false positives):
-//   - a slug ASSEMBLED from fragments (`'construct-' + scope`) is invisible to both
-//     passes. Write the slug as a whole literal, or add the surface to a manifest by hand.
-//   - inside an indirect-router file, a single-word slug that has no edge directory is
-//     missed — the kebab shape is what keeps Pass B from harvesting ordinary prose.
-// Both gaps fail SAFE toward review, never toward a silently-unwalled surface: the
-// manifests below are exact-set checked, so a hand-added entry cannot go stale either.
-const SLUG = '[a-z][a-z0-9]*(?:-[a-z0-9]+)*';
-const DIRECT_INVOKE = new RegExp(`(?:functions\\s*\\.\\s*invoke\\s*\\(\\s*['"\`]|functions/v1/)(${SLUG})`, 'g');
-const INDIRECT_INVOKE = /functions\s*\.\s*invoke\s*\(\s*[A-Za-z_$]/;
-const KEBAB_LITERAL = /['"`]([a-z][a-z0-9]*(?:-[a-z0-9]+)+)['"`]/g;
-const WORD_LITERAL = /['"`]([a-z][a-z0-9]*)['"`]/g;
-
-function clientFilesUnder(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) return clientFilesUnder(p);
-    return /\.(js|jsx|ts|tsx)$/.test(name) ? [p] : [];
-  });
-}
-
-/** slug → the set of client files that invoke it (forward-slashed, so CI agrees on any OS). */
-function discoverClientTransports() {
-  const found = new Map();
-  const add = (slug, rel) => {
-    if (!found.has(slug)) found.set(slug, new Set());
-    found.get(slug).add(rel);
-  };
-  const SRC = join(ROOT, 'src');
-  if (!existsSync(SRC)) return found;
-  for (const abs of clientFilesUnder(SRC)) {
-    const src = readFileSync(abs, 'utf8');
-    const rel = relative(ROOT, abs).split(sep).join('/');
-    for (const m of src.matchAll(DIRECT_INVOKE)) add(m[1], rel);
-    if (INDIRECT_INVOKE.test(src)) {
-      for (const m of src.matchAll(KEBAB_LITERAL)) add(m[1], rel);
-      for (const m of src.matchAll(WORD_LITERAL)) if (EDGE_DIRS.has(m[1])) add(m[1], rel);
-    }
-  }
-  return found;
-}
-
-const CLIENT_TRANSPORTS = discoverClientTransports();
 
 // ── The per-surface disposition manifest ─────────────────────────────────────
 // Each rostered surface MUST have an entry. `seam` is the client-side module where the
@@ -182,31 +100,16 @@ const AI_SURFACE_WALLS = Object.freeze({
   'surveyor-byok':       { disposition: 'byok', seam: 'src/lib/surveyorByok.js' },
 });
 
-// ── The non-AI client transports (the explicit allowlist, each with its reason) ───
-// Every client-invoked edge that is NOT an AI surface is named here, so that "this slug
-// carries no model output" is a RECORDED claim rather than an absence. A new transport is
-// undeclared until someone writes the line — and the reverse check below deletes the line
-// when the transport goes away, so the allowlist cannot rot into blanket permission.
-// A slug may never appear here AND in AI_SURFACE_WALLS; the honesty test enforces that.
-const NON_AI_CLIENT_TRANSPORTS = Object.freeze({
-  'account-actions':         'the account/support desk RPC bus — tickets, preferences, retro-claims. No model call.',
-  'admin-actions':           'the operator console RPC bus — rollups, moderation and health rows. No model call.',
-  'auth-recovery':           'security-question account recovery. No model call.',
-  'create-checkout':         'Stripe checkout session creation. No model call.',
-  'create-customer-portal':  'Stripe billing portal link minting. No model call.',
-  'founder-transfer':        'the founder-seat transfer/buyback state machine. No model call.',
-  'ingest-events':           'the analytics event sink. No model call.',
-  'og-image':                'the social share-card renderer. No model call.',
-  'send-email':              'transactional lifecycle email dispatch. No model call.',
-  'verify-checkout-session': 'post-checkout entitlement verification. No model call.',
-  'verify-single-dossier':   'single-dossier purchase verification. No model call.',
-});
+// NON_AI_CLIENT_TRANSPORTS — the explicit allowlist of client-invoked edges that carry no
+// model output, each with its reason — now lives in the shared census module (both halves
+// of E-D classify against it). Its honesty is enforced here: no stale row, and no
+// model-calling surface smuggled through it.
 
 describe('AI-surface source scan — census completeness (the wall against an N-1 sweep)', () => {
   it('the discovered roster is non-empty (guard-the-guard: not a vacuous pass)', () => {
     // If this collapses, the MODEL_CALL detector broke and every per-surface check below
     // would vacuously pass. Today the roster is the ~12 model-calling edge surfaces.
-    expect(AI_SURFACES.length).toBeGreaterThanOrEqual(11);
+    expect(AI_SURFACES.length).toBeGreaterThanOrEqual(CENSUS_FLOORS.edgeSurfaces);
   });
 
   it('every discovered AI surface has a wall disposition (a NEW surface reds here)', () => {
@@ -237,7 +140,7 @@ describe('AI-surface source scan — the CLIENT transport census (an edge direct
   it('client discovery is non-vacuous, and keeps the three hard cases (guard-the-guard)', () => {
     // If discovery collapses, every check below passes vacuously. These three are the
     // shapes that broke earlier drafts of the scanner — keep them pinned by name.
-    expect(CLIENT_TRANSPORTS.size).toBeGreaterThanOrEqual(20);
+    expect(CLIENT_TRANSPORTS.size).toBeGreaterThanOrEqual(CENSUS_FLOORS.clientTransports);
     for (const [slug, why] of [
       ['table-clerk', 'pass A; an AI transport with NO edge directory at all — the whole reason this pass exists'],
       ['construct-realm', 'pass B; assigned by a ternary and posted through a helper, never a literal at the call'],
@@ -258,7 +161,7 @@ describe('AI-surface source scan — the CLIENT transport census (an edge direct
       + `in this tree. Either give the surface an AI_SURFACE_WALLS entry (shadow/walled/`
       + `display/none/byok — plus edge:'absent' if no directory exists yet), or record it in `
       + `NON_AI_CLIENT_TRANSPORTS with the reason it carries no model output: `
-      + undeclared.map((s) => `${s} (invoked by ${[...CLIENT_TRANSPORTS.get(s)].join(', ')})`).join('; '),
+      + undeclared.map((s) => `${s} (invoked by ${invokersOf(s)})`).join('; '),
     ).toEqual([]);
   });
 
@@ -363,7 +266,7 @@ describe('AI-surface source scan — the wall proven per surface', () => {
     // or a const is caught too, not only a literal at the call site.
     const wired = Object.entries(AI_SURFACE_WALLS)
       .filter(([name, m]) => m.disposition === 'none' && CLIENT_TRANSPORTS.has(name))
-      .map(([name]) => `${name} (invoked by ${[...CLIENT_TRANSPORTS.get(name)].join(', ')})`);
+      .map(([name]) => `${name} (invoked by ${invokersOf(name)})`);
     expect(
       wired,
       `a client seam now invokes an edge declared 'none' — declare its finite-semantics `

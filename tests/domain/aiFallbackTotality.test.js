@@ -11,15 +11,22 @@
  * configured, so `isConfigured` is false and every client transport takes its no-AI path
  * — which is exactly what the deployed product does for a signed-out or offline user.
  *
- * THE CENSUS (the same wall as aiSurfaceSourceScan): the surfaces driven here are checked
- * against the DISCOVERED model-calling edge roster. A new AI surface that ships without a
- * fallback driver reds the coverage test — no surface may become load-bearing unnoticed.
+ * THE CENSUS (literally the same census as aiSurfaceSourceScan — one module, imported by
+ * both halves of E-D): the surfaces driven here are checked against the DISCOVERED ROSTER,
+ * the UNION of every model-calling edge surface and every client-invoked AI transport. A
+ * new AI surface that ships without a fallback driver reds the coverage test — no surface
+ * may become load-bearing unnoticed.
+ *
+ * WHY A UNION, NOT AN EDGE WALK: this file used to build its denominator by walking
+ * supabase/functions/* for MODEL_CALL — a copy of part 1's discovery, made before part 1
+ * grew its client pass. That copy was blind to 'table-clerk', a live AI transport
+ * (src/lib/tableClerk.js) whose edge half has never existed in this tree: it had no driver
+ * here, AND the census could never demand one. A surface must be visible to this wall
+ * whichever side of the wire it lives on, so the denominator is the union.
  *
  * @enforced-by this test
  */
 import { describe, it, expect } from 'vitest';
-import { readdirSync, readFileSync, statSync, existsSync } from 'node:fs';
-import { resolve, join } from 'node:path';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { runTemplateNarrative } from '../../src/generators/aiLayer.js';
@@ -34,9 +41,12 @@ import {
   compileInterpretation, composeAutonomy,
 } from '../../src/lib/surveyorWrite.js';
 import { getByokStatus } from '../../src/lib/surveyorByok.js';
+import { compileTableClerk } from '../../src/lib/tableClerk.js';
+import { TABLE_EVENT_KINDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES } from '../../src/domain/tableLedger.js';
+import {
+  AI_SURFACES, AI_CLIENT_TRANSPORTS, AI_SURFACE_ROSTER, CLIENT_TRANSPORTS, CENSUS_FLOORS,
+} from '../security/aiSurfaceCensus.js';
 
-const ROOT = resolve(process.cwd());
-const FN_DIR = join(ROOT, 'supabase', 'functions');
 const SEED = 'ai-off-2026-07-21';
 
 // ── The AI-off world (typed truth, generated with zero AI) ───────────────────
@@ -46,20 +56,8 @@ const settlement = generateSettlementPipeline(
   { seed: SEED, customContent: {} },
 );
 
-// ── The discovered model-calling roster (the coverage denominator) ───────────
-const MODEL_CALL = /anthropic|runCreditedCall|callAnthropic|messages\.create|createMessage|ANTHROPIC_CLAUDE|resolveModel|providerKey/i;
-function tsFilesUnder(dir) {
-  return readdirSync(dir).flatMap((name) => {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) return tsFilesUnder(p);
-    return /\.ts$/.test(name) && !/\.test\.ts$/.test(name) ? [p] : [];
-  });
-}
-const AI_SURFACES = readdirSync(FN_DIR, { withFileTypes: true })
-  .filter((d) => d.isDirectory() && d.name !== '_shared')
-  .map((d) => d.name)
-  .filter((n) => existsSync(join(FN_DIR, n)) && tsFilesUnder(join(FN_DIR, n)).some((f) => MODEL_CALL.test(readFileSync(f, 'utf8'))))
-  .sort();
+// The coverage denominator is AI_SURFACE_ROSTER, imported above — see the header. It is
+// built once, in tests/security/aiSurfaceCensus.js, and shared with E-D part 1.
 
 // ── A coherent-fallback predicate: no crash, no empty, no raw error ──────────
 function hasNoRawLeak(value, seen = new Set()) {
@@ -91,9 +89,24 @@ const SURFACE_FALLBACK = {
     },
   },
   // Read-only answer surfaces: a friendly refusal, never a crash or a blank.
+  // TWO client modules post this one slug, and each has its own AI-off branch: the analyst
+  // lane (aiAnalyst.js) and the road-scene dressing (roadSceneAi.js). The roster is keyed by
+  // SURFACE, so the census can only ever demand ONE driver here — drive both transports so
+  // the second module's refusal is proven rather than assumed.
   'ai-analyst': {
-    drive: () => askAnalyst({ question: 'Who governs this settlement?', settlement }),
-    check: (r) => expect(isFriendlyMessage(r?.error), 'analyst returns a friendly AI-off refusal').toBe(true),
+    async drive() {
+      const analyst = await askAnalyst({ question: 'Who governs this settlement?', settlement });
+      const roadScene = await dressRoadScene({
+        brief: { sections: [{ id: 'roads', source: 'ROADS_TRUTH', title: 'The road', items: ['a ford'] }] },
+      });
+      return { analyst, roadScene };
+    },
+    check: ({ analyst, roadScene }) => {
+      expect(isFriendlyMessage(analyst?.error), 'analyst returns a friendly AI-off refusal').toBe(true);
+      expect(isFriendlyMessage(roadScene?.error), 'road-scene dressing returns a friendly AI-off refusal').toBe(true);
+      // Additive-only: the un-dressed bundle stands alone, so the refusal carries no prose.
+      expect(roadScene?.answer, 'no AI prose is fabricated for the road scene AI-off').toBeUndefined();
+    },
   },
   'interview': {
     drive: () => askInterview({ question: 'Who governs this settlement?', settlement }),
@@ -132,6 +145,33 @@ const SURFACE_FALLBACK = {
   'surveyor-autonomy': {
     drive: () => composeAutonomy({ intent: 'run ten weeks, stop if population falls', settlement, savedSettlements: [settlement] }),
     check: (r) => expectWriteRefusal(r),
+  },
+  // The Session Ledger's bucketing clerk — a CLIENT-ONLY AI transport: no
+  // supabase/functions/table-clerk exists in this tree (the server half is an owner-gated
+  // fold), so an edge-directory walk is blind to it and only the client census sees it.
+  // The DM's ledger must not depend on the clerk: AI-off it refuses in the TIER register
+  // and hands the DM back the manual bucket picker, which needs no AI at all.
+  'table-clerk': {
+    drive: () => compileTableClerk({
+      text: 'The party burned the granary and the reeve fled town.',
+      targets: { stressors: [], npcs: [] },
+    }),
+    check: (r) => {
+      expectWriteRefusal(r);
+      // The refusal must be the AI-OFF one. `refusalKind` is what separates it from the
+      // empty-input refusal ('input'), which satisfies expectWriteRefusal without ever
+      // reaching the isConfigured branch — a green check proving nothing.
+      expect(r.refusalKind, 'the clerk refuses in the TIER register AI-off, not the input register').toBe('tier');
+      // Nothing is proposed, accepted or rejected AI-off — the transport never fabricates
+      // buckets to fill the silence.
+      expect(r.accepted, 'no buckets are accepted AI-off').toBeUndefined();
+      expect(r.rejected, 'no buckets are produced AI-off').toBeUndefined();
+      // "record it by hand below" has to be a real offer: the closed vocabulary the MANUAL
+      // picker runs on is fully present with zero AI, so the refusal points somewhere.
+      expect(TABLE_EVENT_KINDS.length, 'the manual event-kind vocabulary stands AI-off').toBeGreaterThan(0);
+      expect(MAGNITUDE_BAND_IDS.length, 'the manual magnitude bands stand AI-off').toBeGreaterThan(0);
+      expect(OBLIGATION_TYPES.length, 'the manual obligation types stand AI-off').toBeGreaterThan(0);
+    },
   },
   // A key/health management transport: a coherent empty status AI-off.
   'surveyor-byok': {
@@ -194,13 +234,57 @@ describe('no load-bearing AI — every AI surface has a coherent AI-off fallback
 
   it('the fallback drivers cover the full discovered AI-surface roster (a new surface reds)', () => {
     const covered = new Set(Object.keys(SURFACE_FALLBACK));
-    const uncovered = AI_SURFACES.filter((s) => !covered.has(s));
+    const uncovered = AI_SURFACE_ROSTER.filter((s) => !covered.has(s));
     expect(
       uncovered,
-      `these model-calling edge surfaces have NO AI-off fallback driver — every AI surface `
-      + `must degrade to a deterministic fallback (AI is dressing, never load-bearing): ${uncovered.join(', ')}`,
+      `THE RULE: no load-bearing AI — every AI surface, edge-side or client-side, must `
+      + `degrade to a coherent deterministic fallback with AI off (AI is dressing, never the `
+      + `truth). These rostered surfaces have NO AI-off fallback driver: ${uncovered.join(', ')}.\n`
+      + `THE FIX: add a SURFACE_FALLBACK entry that DRIVES the surface's real client path `
+      + `with Supabase unconfigured and asserts what the user actually gets — a full local `
+      + `result, or a friendly typed refusal (expectWriteRefusal). If the slug carries no `
+      + `model output at all, it belongs in NON_AI_CLIENT_TRANSPORTS in `
+      + `tests/security/aiSurfaceCensus.js with the reason written down, not here.\n`
+      + `THE LEGAL SHRINK: the roster shrinks only by RETIRING the surface — delete the edge `
+      + `function and/or the client transport. Deleting the driver while the surface still `
+      + `ships is the one move this test exists to forbid.`,
     ).toEqual([]);
-    // Guard-the-guard: the roster discovery actually found the surfaces.
-    expect(AI_SURFACES.length).toBeGreaterThanOrEqual(11);
+  });
+
+  it('no fallback driver outlives its surface (the roster is an EXACT set, not a floor)', () => {
+    // The reverse direction. A driver for a surface discovered on NEITHER side is fiction,
+    // and fiction in a census reads as coverage — it makes the wall look wider than it is.
+    const orphaned = Object.keys(SURFACE_FALLBACK).filter((s) => !AI_SURFACE_ROSTER.includes(s)).sort();
+    expect(
+      orphaned,
+      `SURFACE_FALLBACK drives surfaces that exist on NEITHER side of the census — no `
+      + `model-calling edge directory AND no client invocation: ${orphaned.join(', ')}. `
+      + `If the surface was retired, delete its driver here (and its AI_SURFACE_WALLS entry `
+      + `in the E-D part 1 scan). If it still ships, the census lost it — fix the discovery `
+      + `in tests/security/aiSurfaceCensus.js rather than the manifest.`,
+    ).toEqual([]);
+  });
+
+  it('the roster discovery is non-vacuous and genuinely two-sided (guard-the-guard)', () => {
+    // If discovery collapses, both checks above pass on an empty denominator.
+    expect(AI_SURFACES.length, 'the edge-side census found the model-calling functions').toBeGreaterThanOrEqual(CENSUS_FLOORS.edgeSurfaces);
+    expect(CLIENT_TRANSPORTS.size, 'the client-side census found the invoked slugs').toBeGreaterThanOrEqual(CENSUS_FLOORS.clientTransports);
+    expect(AI_SURFACE_ROSTER.length, 'the union roster is intact').toBeGreaterThanOrEqual(CENSUS_FLOORS.roster);
+
+    // The denominator is a real UNION: neither side may be quietly dropped from it.
+    const missingEdge = AI_SURFACES.filter((s) => !AI_SURFACE_ROSTER.includes(s));
+    expect(missingEdge, 'the roster lost model-calling edge surfaces').toEqual([]);
+    const missingClient = AI_CLIENT_TRANSPORTS.filter((s) => !AI_SURFACE_ROSTER.includes(s));
+    expect(missingClient, 'the roster lost client-side AI transports').toEqual([]);
+
+    // The pinned hard case: 'table-clerk' is rostered whichever side finds it. Today only
+    // the client side can — it has no supabase/functions/table-clerk directory — which is
+    // exactly the blind spot an edge-only denominator had, and the reason for the union.
+    expect(
+      AI_SURFACE_ROSTER.includes('table-clerk'),
+      "the roster lost 'table-clerk' — a live AI transport (src/lib/tableClerk.js) whose "
+      + 'edge half is not in this tree. If the client census stopped seeing it, this wall '
+      + 'has gone back to being blind to out-of-band surfaces.',
+    ).toBe(true);
   });
 });
