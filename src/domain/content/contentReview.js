@@ -1,100 +1,119 @@
 /**
- * domain/content/contentReview.js — the REVIEW side of the S4 custom-content compiler
- * (DESIGN_AI_CONTROL_SURFACE §2 stage 4 / DESIGN_CONTENT_PLANE §3).
+ * Closed review boundary for Surveyor-authored custom content.
  *
- * The edge returns a validated ContentDraft (bucket-registered, field-labelled entries +
- * an honest unsupported list). The DM reviews PER ENTRY — approve / edit / reject each — and
- * only accepted entries are minted through the EXISTING addCustomItem verb (never bypassed;
- * no content type = no landing). The mint carries only the wall-cleaned entry (mechanical +
- * flavor fields), so a hallucinated mechanic can never reach the account registry.
- *
- * PURE, headless, lazy-only (rides the custom-content panel chunk); emits only enum strings +
- * counts — zero eager bytes, no field values in the correction signal.
+ * Edge validation is necessary but not sufficient: a draft can be stale, locally
+ * mutated, or edited after it arrives. Approval therefore revalidates the complete
+ * base definition, and edit approval revalidates the complete merged definition,
+ * against the same generated client manifest. Nothing bypasses the existing
+ * immutable application-command boundary after this review.
  */
 
-import { classifyField } from './contentVocabulary.js';
+import { admitCustomContentDefinition } from './customContentManifest.js';
 
-/** The per-entry review actions. `pending` = not yet decided. */
-export const CONTENT_REVIEW_ACTIONS = Object.freeze(['approve', 'edit', 'reject', 'pending']);
-const _actionSet = new Set(CONTENT_REVIEW_ACTIONS);
+export const CONTENT_REVIEW_ACTIONS = Object.freeze([
+  'approve',
+  'edit',
+  'reject',
+  'pending',
+]);
+
+const ACTION_SET = new Set(CONTENT_REVIEW_ACTIONS);
 
 /**
- * A drafted entry as the review consumes it (the edge's DraftEntry shape, structurally).
- * @typedef {{ bucket: string, entry: Record<string, unknown>, fieldLabels?: Array<{ field: string, kind: string }>,
- *            label: string, edited?: boolean }} ReviewEntry
- * A per-entry DM decision.
- * @typedef {{ action?: string, editedFields?: Record<string, unknown> }} ContentDecision
+ * @typedef {'approve'|'edit'|'reject'|'pending'} ContentReviewAction
+ * @typedef {{ action?:ContentReviewAction, editedFields?:object }} ContentReviewDecision
+ * @typedef {{
+ *   bucket?:unknown,
+ *   entry?:unknown,
+ *   fieldLabels?:Array<{effectKind?:unknown, kind?:unknown}>,
+ * }} ContentReviewDraftEntry
+ * @typedef {{ entries?:ContentReviewDraftEntry[] }} ContentReviewDraft
  */
 
-/**
- * Re-clean an edited entry against the schema wall — only mechanical/flavor fields survive an
- * edit, so a DM (or a UI bug) can never smuggle an unsupported field into the mint. Pure.
- * @param {Record<string, unknown>} fields
- * @param {import('./contentVocabulary.js').ContentVocabulary|null} [vocab]
- * @returns {Record<string, unknown>}
- */
-function cleanEditedFields(fields, vocab) {
-  /** @type {Record<string, unknown>} */
-  const out = {};
-  for (const [field, value] of Object.entries(fields || {})) {
-    // When a vocabulary is supplied, honour the wall; without one, keep the field (the edge
-    // already wall-cleaned the base entry; a bare edit path stays permissive by design).
-    if (!vocab) { out[field] = value; continue; }
-    const c = classifyField(field, value);
-    if (c.kind === 'mechanical' || c.kind === 'flavor') out[field] = value;
-  }
-  return out;
+/** @param {unknown} value @returns {Record<string, unknown>} */
+function recordValue(value) {
+  return value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : {};
 }
 
 /**
- * Apply the DM's per-entry decisions to a draft. Pure. Each accepted entry carries its
- * bucket + the wall-cleaned fields ready for addCustomItem(bucket, entry).
- * @param {{ entries?: ReviewEntry[] }|null|undefined} draft
- * @param {Record<string|number, ContentDecision>} [decisions]
- * @returns {{
- *   accepted: Array<{ index: number, bucket: string, entry: Record<string, unknown> }>,
- *   rejected: Array<{ index: number }>,
- * }}
+ * Apply per-entry review decisions.
+ *
+ * Explicit rejection retains the historical `{ index }` receipt. An attempted
+ * approval that fails current admission is also rejected, with controlled errors so
+ * the caller can explain why without ever minting the unsafe definition.
+ *
+ * @param {ContentReviewDraft|null|undefined} draft
+ * @param {Record<string, ContentReviewDecision>} [decisions]
  */
 export function reviewContentDraft(draft, decisions = {}) {
-  const entries = (draft && Array.isArray(draft.entries)) ? draft.entries : [];
-  /** @type {Array<{ index: number, bucket: string, entry: Record<string, unknown> }>} */
+  const entries = draft && Array.isArray(draft.entries) ? draft.entries : [];
+  /** @type {Array<{
+   *   index:number,
+   *   bucket:string,
+   *   entry:Record<string, unknown>,
+   *   fieldLabels:unknown[],
+   * }>} */
   const accepted = [];
-  /** @type {Array<{ index: number }>} */
+  /** @type {Array<{index:number, reason?:string, errors?:unknown[]}>} */
   const rejected = [];
-  entries.forEach((e, i) => {
-    const raw = decisions[i] ?? decisions[String(i)] ?? { action: 'pending' };
-    const action = raw.action != null && _actionSet.has(raw.action) ? raw.action : 'pending';
-    if (action === 'approve' || action === 'edit') {
-      const base = (e.entry && typeof e.entry === 'object' && !Array.isArray(e.entry)) ? e.entry : {};
-      const entry = (action === 'edit' && raw.editedFields && typeof raw.editedFields === 'object' && !Array.isArray(raw.editedFields))
-        ? { ...base, ...cleanEditedFields(raw.editedFields, null) }
-        : base;
-      accepted.push({ index: i, bucket: e.bucket, entry });
-    } else if (action === 'reject') {
-      rejected.push({ index: i });
+
+  entries.forEach((draftEntry, index) => {
+    const decision = decisions[String(index)] ?? { action: 'pending' };
+    const rawAction = decision.action;
+    const action = typeof rawAction === 'string' && ACTION_SET.has(rawAction)
+      ? rawAction
+      : 'pending';
+
+    if (action === 'reject') {
+      rejected.push({ index });
+      return;
     }
-    // 'pending' → contributes nothing
+    if (action !== 'approve' && action !== 'edit') return;
+
+    const base = recordValue(draftEntry?.entry);
+    const edits = action === 'edit' ? recordValue(decision?.editedFields) : {};
+    const candidate = action === 'edit' ? { ...base, ...edits } : { ...base };
+    const admission = admitCustomContentDefinition(draftEntry?.bucket, candidate);
+
+    if (!admission.ok) {
+      rejected.push({
+        index,
+        reason: 'invalid_entry',
+        errors: admission.errors,
+      });
+      return;
+    }
+
+    accepted.push({
+      index,
+      bucket: admission.bucket,
+      entry: /** @type {Record<string, unknown>} */ (admission.definition),
+      fieldLabels: admission.fieldLabels,
+    });
   });
+
   return { accepted, rejected };
 }
 
 /**
- * The mechanical-mapping RATE: the fraction of a draft's proposed fields that mapped to a real
- * engine mechanic (vs flavor/unsupported) — the §5 "how much of what they asked for is real"
- * signal. 0 for a fieldless draft. Pure.
- * @param {{ entries?: Array<{ fieldLabels?: Array<{ kind?: string }> }> }|null|undefined} draft
- * @returns {number} 0..1
+ * Fraction of proposed fields with a real mechanical consumer. Conditional fields
+ * count as mechanical because activation, not effect kind, is what is deferred.
+ *
+ * @param {ContentReviewDraft|null|undefined} draft
  */
 export function mechanicalMappingRate(draft) {
-  const entries = (draft && Array.isArray(draft.entries)) ? draft.entries : [];
+  const entries = draft && Array.isArray(draft.entries) ? draft.entries : [];
   let mechanical = 0;
   let total = 0;
-  for (const e of entries) {
-    for (const f of (Array.isArray(e.fieldLabels) ? e.fieldLabels : [])) {
+
+  for (const entry of entries) {
+    for (const field of (Array.isArray(entry.fieldLabels) ? entry.fieldLabels : [])) {
       total += 1;
-      if (f.kind === 'mechanical') mechanical += 1;
+      if (field.effectKind === 'mechanical' || field.kind === 'mechanical') mechanical += 1;
     }
   }
+
   return total === 0 ? 0 : mechanical / total;
 }

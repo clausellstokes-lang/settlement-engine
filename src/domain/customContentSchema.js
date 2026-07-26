@@ -1,22 +1,17 @@
 /**
- * domain/customContentSchema.js — the shared backbone for homebrew custom
- * content (§14 P1). One source of truth for the cross-type taxonomies every
- * custom entity (institution, service, resource, trade good, faction, supply
- * chain) shares — the domain GROUP it belongs to, its TAGS (magical / criminal
- * / …), how much it reinforces the economy, how critical it is, and its tier
- * gate — consumed by BOTH the management UI and the structural classifier so
- * they never drift.
+ * Legacy custom-content labels and compatibility helpers.
  *
- * Pure data + tiny helpers; no store / React. Generation phases (P2–P4) read
- * the helpers here (tier gates, effective tags, criticality) so homebrew flows
- * through the same simulation rails as built-in content.
+ * `schema/custom-content.manifest.json` owns category admission, valid values,
+ * and effect claims. The arrays here retain established display copy for those
+ * values and support older readers that have not moved to the manifest adapter.
+ * The pure helpers remain useful to generation, but this module must not be
+ * treated as a second semantic schema.
  */
 
 import { compareCodepoint } from './deterministicSort.js';
 
-// Domain groups. Beyond categorizing, the group decides WHERE an entity surfaces
-// in the dossier (government → Power, economic → Economics, religious/arcane →
-// Services, etc.), so placement stays coherent.
+// Established labels for the category presentation taxonomy. Category-specific
+// consumers may use the admitted value for dossier placement.
 export const CONTENT_GROUPS = Object.freeze([
   { key: 'government',     label: 'Government & Law' },
   { key: 'infrastructure', label: 'Infrastructure' },
@@ -29,9 +24,9 @@ export const CONTENT_GROUPS = Object.freeze([
 ]);
 export const CONTENT_GROUP_KEYS = Object.freeze(CONTENT_GROUPS.map((g) => g.key));
 
-// How critical a good / resource / service is. Drives consequence weight when
-// its supply is disrupted (P4 wires this into stressors + viability): a broken
-// CRITICAL chain (food, timber) is a crisis; a luxury one is a minor dip.
+// Criticality labels. Manifest-registered resource and service consumers treat
+// `critical` as an inclusion signal; the same field is presentation-only where
+// no category-specific consumer is registered.
 export const CRITICALITY = Object.freeze([
   { key: 'critical',      label: 'Critical — food, water, timber' },
   { key: 'important',     label: 'Important' },
@@ -39,7 +34,8 @@ export const CRITICALITY = Object.freeze([
 ]);
 export const CRITICALITY_KEYS = Object.freeze(CRITICALITY.map((c) => c.key));
 
-// How much a good / service reinforces the local economy.
+// Economic-weight labels. Institutions and trade goods use this value in the
+// finished-goods supply path; services currently display it without mechanics.
 export const ECONOMIC_WEIGHT = Object.freeze([
   { key: 'minor',    label: 'Minor' },
   { key: 'moderate', label: 'Moderate' },
@@ -48,9 +44,8 @@ export const ECONOMIC_WEIGHT = Object.freeze([
 ]);
 export const ECONOMIC_WEIGHT_KEYS = Object.freeze(ECONOMIC_WEIGHT.map((w) => w.key));
 
-// How (if at all) an entity contributes to the settlement's defense. Feeds the
-// Defense readiness model in generation (P2): garrisons/militia raise standing
-// forces, fortifications raise the wall rating, arcane wards add magical defense.
+// Reserved defense-role vocabulary. Custom-content records currently display
+// this authorial classification; no defense-readiness mechanic consumes it.
 export const DEFENSE_ROLES = Object.freeze([
   { key: 'none',          label: 'Does not contribute to defense' },
   { key: 'fortification', label: 'Fortification — walls, towers' },
@@ -63,9 +58,8 @@ export const DEFENSE_ROLES = Object.freeze([
 ]);
 export const DEFENSE_ROLE_KEYS = Object.freeze(DEFENSE_ROLES.map((d) => d.key));
 
-// Which authority an entity feeds in the power structure (e.g. a temple →
-// religious authority, a garrison → martial). Feeds legitimacy/power generation
-// (P2) so homebrew shifts who actually holds sway.
+// Reserved power-authority vocabulary. It describes an author's intent in the
+// Compendium but does not currently alter legitimacy or faction power.
 export const POWER_AUTHORITIES = Object.freeze([
   { key: 'religious', label: 'Religious authority' },
   { key: 'martial',   label: 'Martial authority' },
@@ -150,12 +144,10 @@ export const SATISFIES_CATEGORIES = Object.freeze(TRADE_CATEGORIES.filter((c) =>
 export const SATISFIES_KEYS = Object.freeze(SATISFIES_CATEGORIES.map((c) => c.key));
 
 // ── Deities ─────────────────────────────────────────────────────────────────
-// A homebrew deity is authored content under the `religious` group. It is INERT
-// (dormant) until a DM assigns it as a settlement's primary deity — only then
-// does a resolved snapshot embed on the settlement record (the embed bridge) and
-// feed the religion substrate. Four frozen tag axes describe the god; the first
-// three are required at author time (the DB CHECK in 049/056 mirrors these enums
-// exactly), the fourth (lawAxis) is back-compat tolerant.
+// A homebrew deity is inert until assignment embeds a resolved snapshot on a
+// settlement. Alignment, law, and rank then affect the religion substrate.
+// `temperamentAxis` remains required compatibility metadata, but authoring
+// derives it and engine reads derive temperament from alignment plus law.
 
 // Moral alignment — good / evil / neutral. Feeds the good↔evil NPC substrate
 // and the contest's alignment-direction match.
@@ -166,8 +158,8 @@ export const DEITY_ALIGNMENT = Object.freeze([
 ]);
 export const DEITY_ALIGNMENT_KEYS = Object.freeze(DEITY_ALIGNMENT.map((a) => a.key));
 
-// Temperament — warlike / peacelike / neutral. A warlike-evil god is a casus belli;
-// feeds the warlike-posture term of the contest.
+// Compatibility labels for the persisted temperament mirror. The engine does
+// not read this stored value; deityAxes derives temperament from alignment/law.
 export const DEITY_TEMPER = Object.freeze([
   { key: 'warlike',   label: 'Warlike' },
   { key: 'peacelike', label: 'Peacelike' },
@@ -206,12 +198,9 @@ export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
 export const DEITY_PORTFOLIO_MAX_LENGTH = 500;
 
 /**
- * Validate an authored deity record. Returns { ok, errors } — mirrors the
- * write-time validation the other buckets perform implicitly (a name is
- * required; the first three axes must each be one of their frozen enums). Pure;
- * no store/React. The store slice rejects a write whose `errors` is non-empty so
- * a bad axis never reaches the cloud (where the 049/056 CHECK would hard-reject
- * it).
+ * Validate the historical deity shape for compatibility callers. Canonical
+ * custom-content writes use `admitCustomContentDefinition`; this helper remains
+ * for old imports and focused enum diagnostics.
  *
  * The 4th axis `lawAxis` is BACK-COMPAT TOLERANT: a NEW deity should set it (the
  * authoring UI always does), but a deity authored before the axis existed carries
@@ -269,15 +258,15 @@ export function validateDeity(deity = {}) {
 // NAME plus an OPTIONAL typed motif (element × act) drawn from the same vocabulary the
 // derived founding traditions use, plus an optional free-text epithet.
 //
-// The two key arrays are DUPLICATED as frozen literals from src/data/traditionCorpus.js
-// (TRADITION_ELEMENTS / TRADITION_ACTS ids) rather than IMPORTED. Original reason (T5-c):
+// The two key arrays mirror src/data/traditionCorpus.js
+// (TRADITION_ELEMENTS / TRADITION_ACTS ids) rather than importing it. Original reason (T5-c):
 // this module was EAGER (the store slice imported it statically) and importing the corpus
 // would have dragged its tables into first paint. Since the de-eager lane (2026-07-19) the
 // module rides the lazy 'custom-schema' chunk (the store reaches it only by dynamic import
 // at the validation chokepoint) — the duplication STAYS, now so the small validation chunk
-// never hauls the corpus prose tables along to validate two enum axes. The drift-guard test
-// (tests/domain/customContentTraditions.test.js) pins these equal to the corpus so they can
-// never silently diverge; the mirror and its guard move together.
+// never hauls the corpus prose tables into compatibility readers. Canonical
+// admission comes from the manifest; a drift-guard pins this display/legacy
+// mirror to both vocabularies so it cannot silently diverge.
 export const TRADITION_ELEMENT_KEYS = Object.freeze([
   'founding', 'first-landing', 'charter', 'hearth', 'harvest', 'river', 'stone', 'the-dead',
   'field', 'forge', 'market', 'hunt', 'long-sun', 'tide', 'greening', 'stars',
@@ -286,12 +275,9 @@ export const TRADITION_ACT_KEYS = Object.freeze(['feast', 'procession', 'vigil',
 export const TRADITION_EPITHET_MAX_LENGTH = 300;
 
 /**
- * Validate an authored tradition record (the validateDeity template). Returns { ok, errors };
- * the store slice rejects a write whose `errors` is non-empty so a bad motif never reaches the
- * cloud. A tradition needs a NAME; the motif fields are OPTIONAL-TOLERANT (a bare-name tradition
- * claims a genesis slot and lets genesis supply the motif) — a PRESENT motifElement/motifAct
- * must be a valid corpus key, an ABSENT one is admitted; a present epithet must be free text
- * within the cap. Pure; no store/React. DESIGN_TRADITIONS §11.
+ * Validate the historical tradition shape for compatibility callers. Canonical
+ * writes use manifest admission. A bare-name tradition remains valid; present
+ * motif fields must use the mirrored corpus keys and epithet stays bounded.
  * @param {{ name?: unknown, motifElement?: unknown, motifAct?: unknown, epithet?: unknown }} [tradition]
  * @returns {{ ok: boolean, errors: string[] }}
  */

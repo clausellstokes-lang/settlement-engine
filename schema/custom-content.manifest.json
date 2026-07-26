@@ -1,0 +1,1372 @@
+{
+  "manifestVersion": "2026-07-25.5",
+  "purpose": "The icon-free, category-aware authority for custom-content authoring, compiler admission, and effect truth.",
+  "effectKinds": [
+    "mechanical",
+    "presentation"
+  ],
+  "activationKinds": [
+    "always",
+    "conditional"
+  ],
+  "authorableBuckets": [
+    "institutions",
+    "services",
+    "resources",
+    "stressors",
+    "tradeGoods",
+    "factions",
+    "deities",
+    "traditions"
+  ],
+  "schemas": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "shortText": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "stringList": {
+      "type": "string-or-string-list",
+      "maxItems": 40,
+      "itemMaxLength": 160
+    },
+    "reference": {
+      "type": "string-or-string-list",
+      "maxItems": 80,
+      "itemMaxLength": 240
+    },
+    "boolean": {
+      "type": "boolean"
+    },
+    "tier": {
+      "type": "enum",
+      "values": [
+        "thorp",
+        "hamlet",
+        "village",
+        "town",
+        "city",
+        "metropolis"
+      ]
+    },
+    "authority": {
+      "type": "enum",
+      "values": [
+        "religious",
+        "martial",
+        "economic",
+        "arcane",
+        "civic",
+        "popular",
+        "noble",
+        "criminal"
+      ]
+    },
+    "defenseRole": {
+      "type": "enum",
+      "values": [
+        "none",
+        "fortification",
+        "garrison",
+        "militia",
+        "watch",
+        "arcane_ward",
+        "logistics",
+        "intelligence"
+      ]
+    },
+    "foodImpact": {
+      "type": "enum",
+      "values": [
+        "none",
+        "produces",
+        "consumes"
+      ]
+    },
+    "criticality": {
+      "type": "enum",
+      "values": [
+        "critical",
+        "important",
+        "discretionary"
+      ]
+    },
+    "economicWeight": {
+      "type": "enum",
+      "values": [
+        "minor",
+        "moderate",
+        "major",
+        "backbone"
+      ]
+    },
+    "severity": {
+      "type": "enum",
+      "values": [
+        "minor",
+        "moderate",
+        "severe",
+        "catastrophic"
+      ]
+    },
+    "stressorChannels": {
+      "type": "string-or-string-list",
+      "values": [
+        "economy",
+        "safety",
+        "supply chains",
+        "military",
+        "religion",
+        "magic",
+        "criminal",
+        "governance",
+        "population",
+        "morale"
+      ],
+      "maxItems": 10,
+      "itemMaxLength": 40
+    },
+    "factionScale": {
+      "type": "enum",
+      "values": [
+        "cell",
+        "minor",
+        "significant",
+        "dominant"
+      ]
+    },
+    "sceneProfileId": {
+      "type": "enum",
+      "values": [
+        "agrarian-farmstead",
+        "agrarian-mill",
+        "civic-archive",
+        "civic-hall",
+        "domestic-house",
+        "exotic-tower",
+        "industrial-forge",
+        "industrial-workshop",
+        "martial-barracks",
+        "martial-keep",
+        "martial-watchtower",
+        "mercantile-guildhall",
+        "mercantile-inn",
+        "mercantile-market",
+        "ruined-landmark",
+        "sacred-sanctuary",
+        "sacred-shrine"
+      ]
+    },
+    "landmarkLevel": {
+      "type": "enum",
+      "values": [
+        "standard",
+        "landmark"
+      ]
+    },
+    "materialFamily": {
+      "type": "enum",
+      "values": [
+        "brick",
+        "marble",
+        "ruined-stone",
+        "steel",
+        "stone",
+        "timber"
+      ]
+    },
+    "townSceneGlyph": {
+      "type": "enum",
+      "values": [
+        "archive-hall",
+        "barracks",
+        "farmstead",
+        "forge",
+        "guildhall",
+        "house-a",
+        "house-b",
+        "house-c",
+        "mage-tower",
+        "moot-hall",
+        "ruin-shell",
+        "signpost-house",
+        "small-spire",
+        "spire",
+        "stall-rows",
+        "towered-keep",
+        "watchtower",
+        "wheelhouse",
+        "workshop"
+      ]
+    },
+    "alignmentAxis": {
+      "type": "enum",
+      "values": [
+        "good",
+        "evil",
+        "neutral"
+      ]
+    },
+    "temperamentAxis": {
+      "type": "enum",
+      "values": [
+        "warlike",
+        "peacelike",
+        "neutral"
+      ]
+    },
+    "rankAxis": {
+      "type": "enum",
+      "values": [
+        "major",
+        "minor",
+        "cult"
+      ]
+    },
+    "lawAxis": {
+      "type": "enum",
+      "values": [
+        "lawful",
+        "chaotic",
+        "neutral"
+      ]
+    },
+    "deityPortfolio": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "traditionElement": {
+      "type": "enum",
+      "values": [
+        "founding",
+        "first-landing",
+        "charter",
+        "hearth",
+        "harvest",
+        "river",
+        "stone",
+        "the-dead",
+        "field",
+        "forge",
+        "market",
+        "hunt",
+        "long-sun",
+        "tide",
+        "greening",
+        "stars"
+      ]
+    },
+    "traditionAct": {
+      "type": "enum",
+      "values": [
+        "feast",
+        "procession",
+        "vigil",
+        "contest",
+        "fair",
+        "offering"
+      ]
+    }
+  },
+  "lanes": [
+    {
+      "key": "settlement",
+      "label": "Settlement Content",
+      "blurb": "Institutions, services, resources, trade goods, and the supply chains they form: the static building blocks a generation draws on.",
+      "buckets": [
+        "institutions",
+        "services",
+        "resources",
+        "tradeGoods",
+        "stressors",
+        "supplyChains"
+      ]
+    },
+    {
+      "key": "living",
+      "label": "Living World Content",
+      "blurb": "Deities, traditions, and factions. Deities gain mechanics after assignment; factions enter through authored events; traditions currently shape founding and dossier presentation.",
+      "buckets": [
+        "deities",
+        "traditions",
+        "factions"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "key": "institutions",
+      "label": "Institutions",
+      "singular": "Institution",
+      "lane": "settlement",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "dossier"
+          ]
+        },
+        {
+          "key": "category",
+          "schema": "category",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "assembleInstitutions.dossierPlacement"
+          ]
+        },
+        {
+          "key": "authority",
+          "schema": "authority",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "tags",
+          "schema": "stringList",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "dossier"
+          ]
+        },
+        {
+          "key": "essential",
+          "schema": "boolean",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When a settlement is generated.",
+          "consumers": [
+            "assembleInstitutions"
+          ]
+        },
+        {
+          "key": "magical",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "criminal",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "defenseRole",
+          "schema": "defenseRole",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "foodImpact",
+          "schema": "foodImpact",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while the institution is present in a settlement.",
+          "consumers": [
+            "dependencyEngine.foodImpactTally",
+            "foodGenerator.generateFoodSecurity"
+          ]
+        },
+        {
+          "key": "economicWeight",
+          "schema": "economicWeight",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while the institution is present and satisfies a live trade demand.",
+          "consumers": [
+            "dependencyEngine.finishedGoodsSupply"
+          ]
+        },
+        {
+          "key": "satisfies",
+          "schema": "category",
+          "effect": "mechanical",
+          "mechanicalValues": [
+            "military",
+            "religious",
+            "maritime",
+            "luxury",
+            "alchemical"
+          ],
+          "fallbackEffect": "presentation",
+          "activation": "conditional",
+          "condition": "Only a registered live demand key changes local supply; other values organize presentation.",
+          "consumers": [
+            "dependencyEngine.finishedGoodsSupply"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dossier",
+            "compendium"
+          ]
+        },
+        {
+          "key": "sceneProfileId",
+          "schema": "sceneProfileId",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "townScene.customBuildingPresentation"
+          ]
+        },
+        {
+          "key": "landmarkLevel",
+          "schema": "landmarkLevel",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "townScene.customBuildingPresentation"
+          ]
+        },
+        {
+          "key": "materialFamily",
+          "schema": "materialFamily",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "townScene.customBuildingPresentation"
+          ]
+        },
+        {
+          "key": "glyph",
+          "schema": "townSceneGlyph",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "townMap.glyphAssign",
+            "townScene.customBuildingPresentation"
+          ]
+        },
+        {
+          "key": "tierMin",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "assembleInstitutions",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "tierMax",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "assembleInstitutions",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "produces",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Produces (goods/services)",
+          "categories": [
+            "tradeGoods",
+            "services"
+          ],
+          "hint": "Trade goods or services this institution generates when present.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while the institution is present.",
+          "consumers": [
+            "institutionServices",
+            "inferSupplyChains"
+          ]
+        },
+        {
+          "key": "requires",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Requires (inputs)",
+          "categories": [
+            "resources",
+            "tradeGoods",
+            "services"
+          ],
+          "hint": "Resources, goods, or services this institution consumes.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only when the author confirms a reviewed supply chain that uses this dependency.",
+          "consumers": [
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "subsumes",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Subsumes (absorbs)",
+          "category": "institutions",
+          "hint": "Institutions this one represents. When present, smaller institutions are not listed separately.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only when both institutions are present during generation.",
+          "consumers": [
+            "assembleInstitutions"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "services",
+      "label": "Services",
+      "singular": "Service",
+      "lane": "settlement",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "dossier"
+          ]
+        },
+        {
+          "key": "category",
+          "schema": "category",
+          "effect": "mechanical",
+          "mechanicalValues": [
+            "lodging",
+            "food",
+            "equipment",
+            "magic",
+            "information",
+            "healing",
+            "transport",
+            "legal",
+            "employment",
+            "entertainment",
+            "criminal"
+          ],
+          "mechanicalValueAliases": {
+            "lodging": "lodging",
+            "food": "food",
+            "food & drink": "food",
+            "equipment": "equipment",
+            "magic": "magic",
+            "magical services": "magic",
+            "information": "information",
+            "healing": "healing",
+            "transport": "transport",
+            "transportation": "transport",
+            "legal": "legal",
+            "legal & financial": "legal",
+            "employment": "employment",
+            "entertainment": "entertainment",
+            "criminal": "criminal",
+            "criminal services": "criminal"
+          },
+          "fallbackEffect": "presentation",
+          "activation": "conditional",
+          "condition": "While the service is present, a registered service category selects the canonical availability and capacity bucket. Other labels remain presentation-only.",
+          "consumers": [
+            "servicesGenerator",
+            "capacityModel"
+          ]
+        },
+        {
+          "key": "authority",
+          "schema": "authority",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "criticality",
+          "schema": "criticality",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation decides whether the service is mandatory.",
+          "consumers": [
+            "economyReconcilePass"
+          ]
+        },
+        {
+          "key": "economicWeight",
+          "schema": "economicWeight",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "magical",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "criminal",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "foodImpact",
+          "schema": "foodImpact",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while the service is tier-eligible and its provider institution is present.",
+          "consumers": [
+            "dependencyEngine.foodImpactTally",
+            "foodGenerator.generateFoodSecurity"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dossier",
+            "compendium"
+          ]
+        },
+        {
+          "key": "tierMin",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "institutionServices",
+            "economyReconcilePass",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "tierMax",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "institutionServices",
+            "economyReconcilePass",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "providedBy",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Provided by (institution)",
+          "category": "institutions",
+          "single": true,
+          "hint": "The institution that offers this service.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "The service activates only while its provider is present.",
+          "consumers": [
+            "economyReconcilePass",
+            "dependencyEngine.foodImpactTally",
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "requires",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Requires (inputs)",
+          "categories": [
+            "resources",
+            "tradeGoods",
+            "services"
+          ],
+          "hint": "Resources, goods, or services this service consumes.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only when the author confirms a reviewed supply chain that uses this dependency.",
+          "consumers": [
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "resources",
+      "label": "Resources",
+      "singular": "Resource",
+      "lane": "settlement",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "dossier"
+          ]
+        },
+        {
+          "key": "category",
+          "schema": "category",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry"
+          ]
+        },
+        {
+          "key": "criticality",
+          "schema": "criticality",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Critical resources are forced into eligible generated settlements.",
+          "consumers": [
+            "resolveResources"
+          ]
+        },
+        {
+          "key": "essential",
+          "schema": "boolean",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When a settlement is generated.",
+          "consumers": [
+            "resolveResources"
+          ]
+        },
+        {
+          "key": "foodImpact",
+          "schema": "foodImpact",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while the resource is present.",
+          "consumers": [
+            "dependencyEngine.foodImpactTally",
+            "foodGenerator.generateFoodSecurity"
+          ]
+        },
+        {
+          "key": "commodities",
+          "schema": "stringList",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only after the author confirms a reviewed supply chain whose graph uses these output tokens.",
+          "consumers": [
+            "inferSupplyChains",
+            "customSupplyChainReview",
+            "customSupplyChainActivation",
+            "compendium"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dossier",
+            "compendium"
+          ]
+        },
+        {
+          "key": "tierMin",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "resolveResources",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "tierMax",
+          "schema": "tier",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "When generation evaluates settlement tier eligibility.",
+          "consumers": [
+            "eligibleCustomContent",
+            "resolveResources",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "yields",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Output (goods/services)",
+          "categories": [
+            "tradeGoods",
+            "services"
+          ],
+          "hint": "Goods or services this resource yields once worked.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only when the author confirms a reviewed supply chain that uses this relationship.",
+          "consumers": [
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "enables",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Enables institutions",
+          "category": "institutions",
+          "hint": "Institutions whose viability is associated with this resource.",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "inferSupplyChains"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "stressors",
+      "label": "Stressors",
+      "singular": "Stressor",
+      "lane": "settlement",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "compendium"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "severity",
+          "schema": "severity",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "affects",
+          "schema": "stressorChannels",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "disablesInstitutions",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Disables institutions",
+          "category": "institutions",
+          "hint": "Institutions associated with this stressor. Current simulation does not automatically apply the disablement.",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dependencyEngine.relationshipRead"
+          ]
+        },
+        {
+          "key": "disablesGoods",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Disables trade goods",
+          "category": "tradeGoods",
+          "hint": "Goods associated with this stressor. Current simulation does not automatically halt production.",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dependencyEngine.relationshipRead"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "tradeGoods",
+      "label": "Trade Goods",
+      "singular": "Trade Good",
+      "lane": "settlement",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry",
+            "dossier"
+          ]
+        },
+        {
+          "key": "category",
+          "schema": "category",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customRegistry"
+          ]
+        },
+        {
+          "key": "criticality",
+          "schema": "criticality",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "economicWeight",
+          "schema": "economicWeight",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while this good satisfies live demand and its required institution is present.",
+          "consumers": [
+            "dependencyEngine.finishedGoodsSupply"
+          ]
+        },
+        {
+          "key": "foodImpact",
+          "schema": "foodImpact",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only while its required institution is present.",
+          "consumers": [
+            "dependencyEngine.foodImpactTally",
+            "foodGenerator.generateFoodSecurity"
+          ]
+        },
+        {
+          "key": "satisfies",
+          "schema": "category",
+          "effect": "mechanical",
+          "mechanicalValues": [
+            "military",
+            "religious",
+            "maritime",
+            "luxury",
+            "alchemical"
+          ],
+          "fallbackEffect": "presentation",
+          "activation": "conditional",
+          "condition": "Only a registered live demand key changes local supply; other values organize presentation.",
+          "consumers": [
+            "dependencyEngine.finishedGoodsSupply"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "dossier",
+            "compendium"
+          ]
+        },
+        {
+          "key": "requiredInstitution",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Required institution",
+          "category": "institutions",
+          "single": true,
+          "hint": "The institution that must be present for this good to be produced.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Production and supply activate only while the institution is present.",
+          "consumers": [
+            "tradeGoods",
+            "dependencyEngine.finishedGoodsSupply",
+            "dependencyEngine.foodImpactTally",
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        },
+        {
+          "key": "requiredResources",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Required resources",
+          "categories": [
+            "resources",
+            "tradeGoods",
+            "services"
+          ],
+          "hint": "Resources, intermediate goods, or services associated with producing this good.",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only when the author confirms a reviewed supply chain that uses this dependency.",
+          "consumers": [
+            "inferSupplyChains",
+            "customSupplyChainActivation"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "deities",
+      "label": "Deities",
+      "singular": "Deity",
+      "lane": "living",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "pantheon",
+            "dossier"
+          ]
+        },
+        {
+          "key": "alignmentAxis",
+          "schema": "alignmentAxis",
+          "required": true,
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only after the deity is assigned or introduced into a settlement.",
+          "consumers": [
+            "deitySnapshot",
+            "religiousContest",
+            "worldPulse.piety"
+          ]
+        },
+        {
+          "key": "temperamentAxis",
+          "schema": "temperamentAxis",
+          "required": true,
+          "ui": false,
+          "derived": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "deitySnapshot"
+          ]
+        },
+        {
+          "key": "lawAxis",
+          "schema": "lawAxis",
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only after the deity is assigned or introduced into a settlement.",
+          "consumers": [
+            "deitySnapshot",
+            "religiousContest",
+            "causalState"
+          ]
+        },
+        {
+          "key": "rankAxis",
+          "schema": "rankAxis",
+          "required": true,
+          "effect": "mechanical",
+          "activation": "conditional",
+          "condition": "Only after the deity is assigned or introduced into a settlement.",
+          "consumers": [
+            "deitySnapshot",
+            "religiousContest",
+            "magicProfile",
+            "causalState"
+          ]
+        },
+        {
+          "key": "portfolio",
+          "schema": "deityPortfolio",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "pantheon",
+            "dossier"
+          ]
+        },
+        {
+          "key": "domain",
+          "schema": "shortText",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "pantheon",
+            "dossier"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "traditions",
+      "label": "Traditions",
+      "singular": "Tradition",
+      "lane": "living",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customFounding",
+            "dossier"
+          ]
+        },
+        {
+          "key": "motifElement",
+          "schema": "traditionElement",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customFounding",
+            "dossier"
+          ]
+        },
+        {
+          "key": "motifAct",
+          "schema": "traditionAct",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customFounding",
+            "dossier"
+          ]
+        },
+        {
+          "key": "epithet",
+          "schema": "shortText",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "customFounding",
+            "dossier"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "factions",
+      "label": "Factions",
+      "singular": "Faction",
+      "lane": "living",
+      "authorable": true,
+      "fields": [
+        {
+          "key": "name",
+          "schema": "name",
+          "required": true,
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium",
+            "eventComposer"
+          ]
+        },
+        {
+          "key": "authority",
+          "schema": "authority",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "archetype",
+          "schema": "shortText",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "agenda",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "scale",
+          "schema": "factionScale",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "methods",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium"
+          ]
+        },
+        {
+          "key": "magical",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "criminal",
+          "schema": "boolean",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "defenseRole",
+          "schema": "defenseRole",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "description",
+          "schema": "text",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium",
+            "eventComposer"
+          ]
+        },
+        {
+          "key": "tierMin",
+          "schema": "tier",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.attributes"
+          ]
+        },
+        {
+          "key": "controls",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Controls institutions",
+          "category": "institutions",
+          "hint": "Institutions this faction is associated with controlling. Current simulation does not apply control automatically.",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.dependencies"
+          ]
+        },
+        {
+          "key": "rivals",
+          "schema": "reference",
+          "placement": "dependency",
+          "label": "Rivals (conflicts with)",
+          "category": "factions",
+          "hint": "Factions associated as rivals. Current simulation does not create conflict automatically.",
+          "effect": "presentation",
+          "activation": "always",
+          "consumers": [
+            "compendium.dependencies"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "supplyChains",
+      "label": "Supply Chains",
+      "singular": "Supply Chain",
+      "lane": "settlement",
+      "authorable": false,
+      "discovered": true,
+      "fields": []
+    }
+  ]
+}

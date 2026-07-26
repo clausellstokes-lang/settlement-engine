@@ -1,202 +1,473 @@
 /**
- * components/surveyor/CustomContentPanel.jsx — S4 CUSTOM CONTENT (DESIGN_AI_CONTROL_SURFACE
- * §2 stage 4). A lazy write-stage body: a homebrew request compiles (server-side, schema-
- * walled) into a validated ContentDraft; the DM reviews PER ENTRY — approve / edit / reject —
- * and only accepted entries mint through the EXISTING addCustomItem verb. Each field wears its
- * honest §9 label (MECHANICAL / FLAVOR / UNSUPPORTED); an unsupported answer renders honestly
- * — the label IS the answer, never a fake mechanic. The transport is dynamic-imported, so this
- * body's graph stays off first paint.
+ * Surveyor Content Studio — controlled compilation of homebrew intent.
+ *
+ * The provider proposes; the canonical manifest interprets; the deterministic
+ * engine previews; the application-command boundary lands immutable revisions.
+ * Those authorities stay visibly separate throughout:
+ *
+ *   Describe → Inspect → Effects → Sample → Revise → Approve → Receipt
+ *
+ * The transport, preview worker, and command implementation are all reached
+ * lazily from this already-lazy panel. Nothing here grants the provider a field,
+ * simulation rule, or persistence capability.
  */
 
-import { useState, useCallback } from 'react';
-import { Check, Pencil, X } from 'lucide-react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, FS } from '../theme.js';
+import {
+  CONTENT_STUDIO_STAGE,
+  CONTENT_STUDIO_STATUS,
+  contentDraftProgress,
+  createContentDraftSession,
+  reduceContentDraftSession,
+} from '../../domain/content/contentDraftSession.js';
+import { projectContentEffects } from '../../domain/content/contentEffectProjection.js';
+import { reviewContentDraft } from '../../domain/content/contentReview.js';
+import { fingerprintContent } from '../../domain/content/contentFingerprint.js';
+import { BORDER, MUTED, GREEN, FS, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import IconButton from '../primitives/IconButton.jsx';
-import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import {
-  MoneyLine, RefusalNote, MusingsBlock, FieldLabelBadge, Eyebrow, PromptArea, ProposalSlipLine,
+  MoneyLine,
+  RefusalNote,
+  MusingsBlock,
+  FieldLabelBadge,
+  Eyebrow,
+  PromptArea,
+  ProposalSlipLine,
 } from './surveyorPanelKit.jsx';
-
-const BUCKET_LABEL = {
-  institutions: 'Institution', services: 'Service', resources: 'Resource', stressors: 'Stressor',
-  tradeGoods: 'Trade good', factions: 'Faction', deities: 'Deity',
-};
-const ENTRY_LABEL_TONE = { required: 'gold', inferred: 'info', optional: 'muted', uncertain: 'warning' };
+import ContentDraftEntry from '../contentStudio/ContentDraftEntry.jsx';
+import ContentInterpretation from '../contentStudio/ContentInterpretation.jsx';
+import ContentSampleReceipt from '../contentStudio/ContentSampleReceipt.jsx';
 
 const cost = getSurveyorAiCost('customContent');
 
-/** A single drafted entry's review row (approve / edit / reject + the labelled fields). */
-function DraftEntryCard({ entry: e, index, decision, onDecide }) {
-  const action = decision?.action || 'pending';
-  const labelMap = {};
-  for (const fl of (Array.isArray(e.fieldLabels) ? e.fieldLabels : [])) labelMap[fl.field] = fl.kind;
-  const baseEntry = (e.entry && typeof e.entry === 'object') ? e.entry : {};
-  const edited = decision?.editedFields || {};
-  const fieldKeys = Object.keys(baseEntry);
-
-  const setField = (field, value) => onDecide(index, { action: 'edit', editedFields: { ...edited, [field]: value } });
-
-  return (
-    <div
-      data-testid={`content-entry-${index}`}
-      style={{
-        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : SLATE}`,
-        padding: SP.sm, background: action === 'reject' ? CARD_ALT : '#fff',
-        opacity: action === 'reject' ? 0.6 : 1, display: 'flex', flexDirection: 'column', gap: 6,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-        <Badge tone="neutral" size="sm">{BUCKET_LABEL[e.bucket] || e.bucket}</Badge>
-        {e.label && <Badge tone={ENTRY_LABEL_TONE[e.label] || 'muted'} size="sm">{e.label}</Badge>}
-        {e.sourced
-          ? <span style={{ fontSize: FS.xs, color: GOLD }}>◆ grounded</span>
-          : <span style={{ fontSize: FS.xs, color: MUTED }}>◇ the engine does not record this</span>}
-        <span style={{ flex: 1 }} />
-        <IconButton Icon={Check} label="Approve this entry" size="sm" tone={action === 'approve' ? 'active' : 'default'}
-          pressed={action === 'approve'} onClick={() => onDecide(index, { action: 'approve' })} />
-        <IconButton Icon={Pencil} label="Edit this entry" size="sm" tone={action === 'edit' ? 'active' : 'default'}
-          pressed={action === 'edit'} onClick={() => onDecide(index, { action: 'edit', editedFields: edited })} />
-        <IconButton Icon={X} label="Reject this entry" size="sm" tone={action === 'reject' ? 'active' : 'default'}
-          pressed={action === 'reject'} onClick={() => onDecide(index, { action: 'reject' })} />
-      </div>
-
-      {e.rationale && <p style={{ margin: 0, fontSize: FS.xs, color: MUTED, lineHeight: 1.45 }}>{e.rationale}</p>}
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        {fieldKeys.map((field) => {
-          const kind = labelMap[field] || 'flavor';
-          const val = action === 'edit' && field in edited ? edited[field] : baseEntry[field];
-          const editable = action === 'edit' && (kind === 'mechanical' || kind === 'flavor');
-          return (
-            <div key={field} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
-              <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, minWidth: 78 }}>{field}</span>
-              <FieldLabelBadge kind={kind} />
-              {editable ? (
-                <input
-                  aria-label={`Edit ${field}`}
-                  value={typeof val === 'object' ? JSON.stringify(val) : String(val ?? '')}
-                  onChange={(ev) => setField(field, ev.target.value)}
-                  style={{ flex: 1, minWidth: 96, fontSize: FS.xs, fontFamily: sans, color: INK,
-                    border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px` }}
-                />
-              ) : (
-                <span style={{ fontSize: FS.xs, color: kind === 'unsupported' ? MUTED : BODY, fontFamily: sans }}>
-                  {typeof val === 'object' ? JSON.stringify(val) : String(val ?? '–')}
-                </span>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+function progressLabel(session) {
+  const progress = contentDraftProgress(session);
+  return `Content Studio step ${progress.current} of ${progress.total}: ${progress.stage}`;
 }
 
 export default function CustomContentPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx } = useSurveyorContext();
-  const addCustomItem = useStore((s) => s.addCustomItem);
+  // Preview the content actually active in the current environment. The author
+  // library can contain newer heads or definitions deliberately excluded from
+  // a pinned campaign, so using it here would misstate the sample's baseline.
+  const previewBaseContent = useStore((state) => (
+    state.activeContentEnvironmentContent ?? state.customContent ?? {}
+  ));
+  const previewBaselineFingerprint = useMemo(
+    () => fingerprintContent(previewBaseContent),
+    [previewBaseContent],
+  );
+  const applyCustomContentCommand = useStore((state) => state.applyCustomContentCommand);
 
-  const [intent, setIntent] = useState(initialPrompt);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState(null); // { draft, musings, byok, earlyAccess } | { error, ... }
-  const [decisions, setDecisions] = useState({});
-  const [applied, setApplied] = useState(null); // { landed, failed, rejected }
+  const [session, dispatch] = useReducer(
+    reduceContentDraftSession,
+    { intent: initialPrompt, source: 'surveyor' },
+    createContentDraftSession,
+  );
+  const [responseMeta, setResponseMeta] = useState(null);
+  const resultRef = useRef(null);
+  const receiptRef = useRef(null);
+  const previewAbortRef = useRef(null);
+  const previewBaselineRef = useRef(previewBaselineFingerprint);
+
+  const draft = session.draft;
+  const entries = Array.isArray(draft?.entries) ? draft.entries : [];
+  const unsupported = Array.isArray(draft?.unsupported) ? draft.unsupported : [];
+  const review = useMemo(
+    () => reviewContentDraft(draft, session.decisions),
+    [draft, session.decisions],
+  );
+  const invalidReviewed = review.rejected.filter(
+    (entry) => entry.reason === 'invalid_entry',
+  );
+  const anyApproved = review.accepted.length > 0;
+  const interpretation = useMemo(
+    () => (draft ? projectContentEffects(draft, session.decisions) : null),
+    [draft, session.decisions],
+  );
+
+  useEffect(() => () => previewAbortRef.current?.abort(), []);
+  useEffect(() => {
+    if (previewBaselineRef.current === previewBaselineFingerprint) return;
+    previewBaselineRef.current = previewBaselineFingerprint;
+    previewAbortRef.current?.abort();
+    dispatch({ type: 'baseline.changed' });
+  }, [previewBaselineFingerprint]);
+  useEffect(() => {
+    if (session.stage === CONTENT_STUDIO_STAGE.INSPECT) resultRef.current?.focus();
+    if (session.stage === CONTENT_STUDIO_STAGE.RECEIPT) receiptRef.current?.focus();
+  }, [session.stage]);
 
   const compile = useCallback(async () => {
-    const q = intent.trim();
-    if (!q || loading) return;
-    setLoading(true); setResult(null); setDecisions({}); setApplied(null);
+    const intent = session.intent.trim();
+    if (!intent || session.status === CONTENT_STUDIO_STATUS.WORKING) return;
+    previewAbortRef.current?.abort();
+    dispatch({ type: 'compile.started' });
+    setResponseMeta(null);
     try {
       const { compileCustomContent } = await import('../../lib/surveyorWrite.js');
-      const res = await compileCustomContent({ ...ctx, intent: q });
-      setResult(res.ok ? res : { error: res.error, refusalClass: res.refusalClass, doors: res.doors });
+      const result = await compileCustomContent({ ...ctx, intent });
+      if (!result.ok) {
+        setResponseMeta(result);
+        dispatch({ type: 'compile.failed', error: result.error });
+        return;
+      }
+      setResponseMeta(result);
+      dispatch({ type: 'compile.succeeded', draft: result.draft });
     } catch {
-      setResult({ error: 'The Surveyor is unavailable right now.' });
-    } finally {
-      setLoading(false);
+      dispatch({
+        type: 'compile.failed',
+        error: 'The Surveyor is unavailable right now.',
+      });
     }
-  }, [intent, loading, ctx]);
+  }, [ctx, session.intent, session.status]);
 
   const decide = useCallback((index, decision) => {
-    setDecisions((d) => ({ ...d, [index]: decision }));
+    dispatch({ type: 'decision.changed', index, decision });
+  }, []);
+
+  const inspectEffects = useCallback(() => {
+    if (!interpretation) return;
+    dispatch({ type: 'effects.viewed', interpretation });
+  }, [interpretation]);
+
+  const forgeSample = useCallback(async () => {
+    const canStartSample = session.stage === CONTENT_STUDIO_STAGE.EFFECTS
+      || (
+        session.stage === CONTENT_STUDIO_STAGE.SAMPLE
+        && session.status === CONTENT_STUDIO_STATUS.FAILED
+      );
+    if (
+      !draft
+      || !interpretation
+      || !session.interpretation
+      || !canStartSample
+    ) {
+      return;
+    }
+    const controller = new AbortController();
+    previewAbortRef.current?.abort();
+    previewAbortRef.current = controller;
+    dispatch({ type: 'sample.started' });
+    try {
+      const { runCustomContentPreview } = await import('../../lib/customContentPreviewClient.js');
+      const sample = await runCustomContentPreview({
+        seed: 'custom-content-taste-gate-v1',
+        baseContent: previewBaseContent,
+        accepted: review.accepted,
+      }, { signal: controller.signal });
+      dispatch({ type: 'sample.succeeded', sample });
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      dispatch({
+        type: 'sample.failed',
+        error: error instanceof Error
+          ? error.message
+          : 'The sample settlement could not be forged.',
+      });
+    } finally {
+      if (previewAbortRef.current === controller) previewAbortRef.current = null;
+    }
+  }, [
+    draft,
+    interpretation,
+    previewBaseContent,
+    review,
+    session.interpretation,
+    session.stage,
+    session.status,
+  ]);
+
+  const reviewApproval = useCallback(() => {
+    dispatch({ type: 'approval.reviewed' });
   }, []);
 
   const applyApproved = useCallback(async () => {
-    const draft = result?.draft;
-    if (!draft) return;
-    const { reviewContentDraft } = await import('../../domain/content/contentReview.js');
-    const { accepted, rejected } = reviewContentDraft(draft, decisions);
-    let landed = 0; let failed = 0;
-    for (const a of accepted) {
-      // addCustomItem is ASYNC since the de-eager lane (the axis-bearing
-      // buckets await the lazily-loaded schema); it still resolves null only
-      // on a validation-rejected write, so the landed/failed tally is exact.
-      const r = await addCustomItem(a.bucket, a.entry);
-      if (r === null) failed += 1; else landed += 1;
+    if (
+      !draft
+      || !interpretation
+      || session.stage !== CONTENT_STUDIO_STAGE.APPROVE
+      || session.status === CONTENT_STUDIO_STATUS.WORKING
+    ) {
+      return;
     }
-    setApplied({ landed, failed, rejected: rejected.length });
-  }, [result, decisions, addCustomItem]);
+    const { accepted } = review;
+    if (accepted.length === 0) return;
+    dispatch({ type: 'approval.started' });
 
-  const draft = result?.draft;
-  const entries = Array.isArray(draft?.entries) ? draft.entries : [];
-  const unsupported = Array.isArray(draft?.unsupported) ? draft.unsupported : [];
-  const anyApproved = Object.values(decisions).some((d) => d?.action === 'approve' || d?.action === 'edit');
+    let receipt;
+    if (typeof applyCustomContentCommand !== 'function') {
+      receipt = {
+        ok: false,
+        status: 'failed',
+        persistence: { state: 'not-required' },
+        reason: 'The immutable content writer is unavailable. Nothing was changed.',
+      };
+    } else {
+      try {
+        receipt = await applyCustomContentCommand({
+          kind: 'content.definition.create-revision',
+          entries: accepted.map((candidate) => ({
+            category: candidate.bucket,
+            item: candidate.entry,
+          })),
+          source: {
+            type: 'surveyor',
+            ref: responseMeta?.summary?.requestId || null,
+            pack: null,
+          },
+          expected: {},
+        });
+      } catch (error) {
+        // Once a command crosses the writer boundary, a transport exception
+        // cannot prove whether the authority applied it. Preserve that
+        // ambiguity and direct the author toward reconciliation instead of
+        // retrying a mutation that may already exist.
+        receipt = {
+          ok: false,
+          status: 'reconcile-required',
+          persistence: { state: 'unconfirmed' },
+          reason: error instanceof Error
+            ? error.message
+            : 'Command confirmation was interrupted.',
+        };
+      }
+    }
+    dispatch({ type: 'approval.received', receipt });
+  }, [
+    applyCustomContentCommand,
+    draft,
+    interpretation,
+    review,
+    responseMeta,
+    session.stage,
+    session.status,
+  ]);
+
+  const applied = session.receipt;
+  const appliedConfirmed = applied?.ok === true
+    && applied.status === 'applied'
+    && applied.persistence?.state === 'confirmed';
+  const landed = Number(
+    applied?.result?.landed
+    ?? applied?.result?.created
+    ?? applied?.perEntry?.filter?.((entry) => entry.ok !== false).length
+    ?? 0,
+  );
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+      <div
+        role="status"
+        aria-live="polite"
+        style={{ fontSize: FS.micro, color: MUTED, fontFamily: sans }}
+      >
+        {progressLabel(session)}
+      </div>
+
       <Eyebrow>Homebrew content: describe what you want</Eyebrow>
       <PromptArea
-        value={intent}
-        onChange={setIntent}
+        value={session.intent}
+        onChange={(intent) => dispatch({ type: 'intent.changed', intent })}
         label="Describe the custom content you want the Surveyor to draft"
-        placeholder="e.g. a smugglers' guild that fences stolen relics, criminal, medium economic weight…"
-        disabled={loading}
+        placeholder="e.g. a haunted glassworks controlled by a forbidden guild…"
+        disabled={session.status === CONTENT_STUDIO_STATUS.WORKING}
       />
-      <MoneyLine cost={cost} creditBalance={creditBalance} busy={loading} disabled={!intent.trim()} onSubmit={compile}
-        submitLabel="Draft it" busyLabel="Drafting…" />
+      <MoneyLine
+        cost={cost}
+        creditBalance={creditBalance}
+        busy={session.stage === CONTENT_STUDIO_STAGE.DESCRIBE
+          && session.status === CONTENT_STUDIO_STATUS.WORKING}
+        disabled={!session.intent.trim()}
+        onSubmit={compile}
+        submitLabel={draft ? 'Compile revision' : 'Draft it'}
+        busyLabel="Drafting…"
+      />
 
-      {result?.error && <RefusalNote error={result.error} refusalClass={result.refusalClass} doors={result.doors} />}
-      <MusingsBlock musings={result?.musings} />
+      {session.error && session.stage === CONTENT_STUDIO_STAGE.DESCRIBE && (
+        <RefusalNote
+          error={session.error}
+          refusalClass={responseMeta?.refusalClass}
+          doors={responseMeta?.doors}
+        />
+      )}
+      {responseMeta?.usageWarning && (
+        <div role="status" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+          {String(responseMeta.usageWarning)}
+        </div>
+      )}
+      <MusingsBlock musings={responseMeta?.musings} />
 
       {draft && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
-          <Eyebrow>Review each entry · approve, edit, or reject</Eyebrow>
+        <section
+          ref={resultRef}
+          tabIndex={-1}
+          aria-labelledby="content-review-title"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: SP.sm,
+            borderTop: `1px solid ${BORDER}`,
+            paddingTop: SP.sm,
+            outline: 'none',
+          }}
+        >
+          <Eyebrow>
+            <span id="content-review-title">Inspect each entry · approve, edit, or reject</span>
+          </Eyebrow>
           <ProposalSlipLine />
-          {entries.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>Nothing landed in a registered content type.</p>}
-          {entries.map((e, i) => (
-            <DraftEntryCard key={i} entry={e} index={i} decision={decisions[i]} onDecide={decide} />
+          {entries.length === 0 && (
+            <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>
+              Nothing mapped to a registered content type.
+            </p>
+          )}
+          {entries.map((entry, index) => (
+            <ContentDraftEntry
+              key={`${entry.bucket || 'entry'}:${index}`}
+              entry={entry}
+              index={index}
+              decision={session.decisions[index]}
+              onDecide={decide}
+            />
           ))}
 
+          {invalidReviewed.length > 0 && (
+            <div
+              role="alert"
+              data-testid="content-invalid-reviewed"
+              style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.45 }}
+            >
+              {invalidReviewed.length === 1 ? 'One reviewed entry no longer' : `${invalidReviewed.length} reviewed entries no longer`}{' '}
+              pass the registered content schema. Correct or reject
+              {invalidReviewed.length === 1 ? ' it' : ' them'} before approval;
+              invalid entries will not enter the sample or writer command.
+            </div>
+          )}
+
           {unsupported.length > 0 && (
-            <div data-testid="content-unsupported" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <Eyebrow>Asked for, but the engine has no rule</Eyebrow>
-              {unsupported.map((u, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
+            <div
+              data-testid="content-unsupported"
+              style={{ display: 'flex', flexDirection: 'column', gap: 4 }}
+            >
+              <Eyebrow>Asked for, but the engine has no registered rule</Eyebrow>
+              {unsupported.map((entry, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' }}>
                   <FieldLabelBadge kind="unsupported" />
                   <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
-                    {String(u.requested ?? u.field ?? u.key ?? 'unknown')}{u.reason ? `: ${u.reason}` : ''}
+                    {String(entry.requested ?? entry.field ?? entry.key ?? 'unknown')}
+                    {entry.reason ? `: ${entry.reason}` : ''}
                   </span>
                 </div>
               ))}
             </div>
           )}
 
-          <Button variant="primary" size="sm" disabled={!anyApproved} onClick={applyApproved}>
-            Add approved to my content
-          </Button>
+          <ContentInterpretation interpretation={interpretation} />
 
-          {applied && (
-            <div data-testid="content-applied" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
-              <span style={{ color: GREEN }}>◆</span> Added {applied.landed} to your custom content
-              {applied.failed > 0 && <span> · {applied.failed} failed validation</span>}
-              {applied.rejected > 0 && <span> · {applied.rejected} rejected</span>}
+          <div style={{ display: 'flex', gap: SP.xs, flexWrap: 'wrap' }}>
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={!anyApproved}
+              onClick={inspectEffects}
+            >
+              Inspect effect map
+            </Button>
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={
+                !anyApproved
+                || !session.interpretation
+                || !(
+                  session.stage === CONTENT_STUDIO_STAGE.EFFECTS
+                  || (
+                    session.stage === CONTENT_STUDIO_STAGE.SAMPLE
+                    && session.status === CONTENT_STUDIO_STATUS.FAILED
+                  )
+                )
+                || session.status === CONTENT_STUDIO_STATUS.WORKING
+              }
+              busy={session.stage === CONTENT_STUDIO_STAGE.SAMPLE
+                && session.status === CONTENT_STUDIO_STATUS.WORKING}
+              onClick={forgeSample}
+            >
+              Forge unsaved sample
+            </Button>
+          </div>
+
+          {session.error && session.stage === CONTENT_STUDIO_STAGE.SAMPLE && (
+            <div role="alert" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+              {session.error}
             </div>
           )}
-        </div>
+          <ContentSampleReceipt sample={session.sample} />
+
+          {session.stage !== CONTENT_STUDIO_STAGE.APPROVE
+            && session.stage !== CONTENT_STUDIO_STAGE.RECEIPT && (
+            <Button
+              variant="primary"
+              size="sm"
+              disabled={
+                !anyApproved
+                || session.stage !== CONTENT_STUDIO_STAGE.REVISE
+                || !session.sample
+              }
+              onClick={reviewApproval}
+            >
+              Review approval
+            </Button>
+          )}
+          {session.stage === CONTENT_STUDIO_STAGE.APPROVE && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
+              <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.45 }}>
+                Approval creates immutable definition revisions. Future edits create
+                new revisions; pinned campaigns keep the version they reviewed.
+              </div>
+              <Button
+                variant="primary"
+                size="sm"
+                busy={session.status === CONTENT_STUDIO_STATUS.WORKING}
+                disabled={!anyApproved || session.status === CONTENT_STUDIO_STATUS.WORKING}
+                onClick={applyApproved}
+              >
+                Add approved to my content
+              </Button>
+            </div>
+          )}
+
+          {applied && (
+            <div
+              ref={receiptRef}
+              tabIndex={-1}
+              role={appliedConfirmed ? 'status' : 'alert'}
+              aria-live="polite"
+              data-testid="content-applied"
+              style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5, outline: 'none' }}
+            >
+              <span style={{ color: appliedConfirmed ? GREEN : MUTED }}>◆</span>{' '}
+              {!appliedConfirmed
+                ? applied.status === 'reconcile-required'
+                  ? `Commit confirmation was interrupted: ${
+                    applied.reason || 'reconcile before retrying'
+                  }`
+                  : `Content was not committed: ${applied.reason || applied.status}`
+                : `Added ${landed} immutable revision${landed === 1 ? '' : 's'} to your content`}
+              {applied.commandId && <span> · command {applied.commandId}</span>}
+              {applied.persistence?.state && <span> · {applied.persistence.state}</span>}
+            </div>
+          )}
+        </section>
       )}
     </div>
   );

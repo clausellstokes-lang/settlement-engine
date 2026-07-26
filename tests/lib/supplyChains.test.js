@@ -70,6 +70,35 @@ describe('buildChainEdges()', () => {
     expect(edges.some(e => e.chainId === 'stone')).toBe(true);
   });
 
+  test('custom-only native-key spelling cannot activate a built-in chain', () => {
+    const producer = {
+      name: 'Namesake',
+      config: {
+        nearbyResources: ['iron_ore'],
+        nearbyResourcesNative: [],
+        nearbyResourcesCustom: ['iron_ore'],
+      },
+      institutions: [],
+    };
+    const consumer = {
+      name: 'Forgehome',
+      config: { nearbyResources: [] },
+      institutions: [{ name: 'Smithy' }],
+    };
+
+    expect(buildChainEdges(producer, consumer)).toEqual([]);
+
+    const dualOwner = {
+      ...producer,
+      config: {
+        ...producer.config,
+        nearbyResourcesNative: ['iron_ore'],
+      },
+    };
+    expect(buildChainEdges(dualOwner, consumer))
+      .toContainEqual(expect.objectContaining({ chainId: 'iron' }));
+  });
+
   test('handles nullish settlements without throwing', () => {
     expect(() => buildChainEdges(null, null)).not.toThrow();
     expect(() => buildChainEdges({ name: 'A' }, null)).not.toThrow();

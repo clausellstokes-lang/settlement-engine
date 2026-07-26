@@ -5,6 +5,8 @@
  * The WorldMap component uses these to draw overlay lines between linked burgs.
  */
 
+import { nativeSemanticResourceKeys } from '../domain/content/customContentSemanticAuthority.js';
+
 export const CHAIN_DEFS = [
   {
     id: 'iron',
@@ -57,6 +59,31 @@ export const CHAIN_DEFS = [
 ];
 
 /**
+ * Resolve the resource roster that is allowed to activate built-in map chains.
+ *
+ * Current settlements keep native/custom provenance in config sidecars. The
+ * flat roster remains useful for display, but cannot answer whether a
+ * same-label custom definition owns native iron, grain, or timber semantics.
+ * Legacy top-level resource shapes remain supported when config has no roster.
+ *
+ * @param {any} settlement
+ * @returns {unknown[]}
+ */
+export function nativeChainResourceList(settlement) {
+  const config = settlement?.config || {};
+  if (
+    Array.isArray(config.nearbyResources)
+    || Array.isArray(config.nearbyResourcesNative)
+  ) {
+    const values = Array.isArray(config.nearbyResources)
+      ? config.nearbyResources
+      : config.nearbyResourcesNative;
+    return nativeSemanticResourceKeys(config, values);
+  }
+  return settlement?.nearbyResources || settlement?.resources || [];
+}
+
+/**
  * Build supply chain edges between two linked settlements.
  * Returns an array of { chainId, from, to, resources } for chains
  * where one settlement produces and the other consumes.
@@ -72,16 +99,8 @@ export function buildChainEdges(settlementA, settlementB) {
     if (r && typeof r === 'object') return (r.id || r.name || '').toLowerCase();
     return '';
   };
-  // The canonical location is `settlement.config.nearbyResources`. Fall back
-  // to a handful of other shapes for custom-edited or imported saves.
-  const resListA = settlementA?.config?.nearbyResources
-    || settlementA?.nearbyResources
-    || settlementA?.resources
-    || [];
-  const resListB = settlementB?.config?.nearbyResources
-    || settlementB?.nearbyResources
-    || settlementB?.resources
-    || [];
+  const resListA = nativeChainResourceList(settlementA);
+  const resListB = nativeChainResourceList(settlementB);
   const resourcesA = new Set(resListA.map(normRes).filter(Boolean));
   const resourcesB = new Set(resListB.map(normRes).filter(Boolean));
 

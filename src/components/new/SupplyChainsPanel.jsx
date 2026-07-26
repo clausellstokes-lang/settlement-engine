@@ -13,6 +13,11 @@ Object.values(SUPPLY_CHAIN_NEEDS || {}).forEach(cat => {
 
 // ── Status config ─────────────────────────────────────────────────────────────
 export const STATUS = {
+  active:      { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Active',      dot: '●' },
+  confirmed:   { color: '#6b5340', bg: '#f8f5f0', border: '#c8b898', label: 'Reviewed',    dot: '✓' },
+  stale:       { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Needs Review', dot: '◐' },
+  blocked:     { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Blocked',     dot: '◐' },
+  ineligible:  { color: '#6b5340', bg: '#f8f5f0', border: '#c8b898', label: 'Ineligible',  dot: '○' },
   running:     { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
   operational: { color: '#1a5a28', bg: '#f0faf2', border: '#a8d8b0', label: 'Running',     dot: '●' },
   vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',  dot: '◐' },

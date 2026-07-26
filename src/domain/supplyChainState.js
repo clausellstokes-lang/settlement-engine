@@ -60,6 +60,11 @@ import { deriveAllActiveConditions } from './activeConditions.js';
  * @property {string[]} [outputs]
  * @property {string[]} [services]
  * @property {string} [resource]
+ * @property {string|null} [resourceKey]
+ * @property {'available'|'depleted'|'absent'} [resourceCondition]
+ * @property {string|null} [resourceInputKey]
+ * @property {'available'|'depleted'|'absent'} [resourceInputCondition]
+ * @property {boolean} [resourceInputAvailable]
  * @property {boolean} [exportable]
  * @property {boolean} [entrepot]
  * @property {boolean|string} [activatedByResource]
@@ -116,6 +121,11 @@ import { deriveAllActiveConditions } from './activeConditions.js';
  * @property {string[]|undefined} outputs
  * @property {string[]|undefined} services
  * @property {string|undefined} resource
+ * @property {string|null|undefined} resourceKey
+ * @property {'available'|'depleted'|'absent'|undefined} resourceCondition
+ * @property {string|null|undefined} resourceInputKey
+ * @property {'available'|'depleted'|'absent'|undefined} resourceInputCondition
+ * @property {boolean|undefined} resourceInputAvailable
  * @property {boolean|undefined} exportable
  * @property {boolean|undefined} entrepot
  * @property {boolean|string|undefined} activatedByResource
@@ -566,6 +576,11 @@ export function deriveSupplyChainState(chain, settlement) {
     outputs:                chain.outputs,
     services:               chain.services,
     resource:               chain.resource,
+    resourceKey:            chain.resourceKey,
+    resourceCondition:      chain.resourceCondition,
+    resourceInputKey:       chain.resourceInputKey,
+    resourceInputCondition: chain.resourceInputCondition,
+    resourceInputAvailable: chain.resourceInputAvailable,
     exportable:             chain.exportable,
     entrepot:               chain.entrepot,
     activatedByResource:    chain.activatedByResource,

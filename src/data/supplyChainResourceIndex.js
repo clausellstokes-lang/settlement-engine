@@ -20,6 +20,7 @@ export const RESOURCE_TO_CHAINS = {
     'food_security.livestock',
     'food_security.brewing',
     'food_security.animal_husbandry',
+    'manufacturing.food_processing',
     'raw_extraction.floodplain_agriculture',
   ],
   grazing_land: [
@@ -43,16 +44,22 @@ export const RESOURCE_TO_CHAINS = {
     'raw_extraction.fuel',
     'raw_extraction.shipbuilding',
     'manufacturing.bowyer_fletcher',
-    'raw_extraction.petty_mining',
   ],
-  shipbuilding_timber: ['raw_extraction.timber', 'raw_extraction.coastal_shipbuilding'],
+  shipbuilding_timber: [
+    'raw_extraction.timber',
+    'raw_extraction.shipbuilding',
+    'raw_extraction.coastal_shipbuilding',
+  ],
   // data-tables-5: fishing_grounds/river_fish each mapped to BOTH the thin 'fish'
   // chain AND the richer 'fishing'/'river_fishing' chain, so a coastal town showed
   // two near-identical fishing industries. Map each resource to its ONE richer
   // chain; the retired 'fish' chain id survives on pre-fix persisted saves and is
   // resolved by RETIRED_CHAIN_ALIASES (below) — the reconcile drops the orphan.
   fishing_grounds: ['food_security.fishing'],
-  river_fish: ['food_security.river_fishing'],
+  river_fish: [
+    'food_security.river_fishing',
+    'food_security.fishing',
+  ],
   river_mills: [
     'raw_extraction.river_milling',
     'manufacturing.food_processing',
@@ -73,7 +80,7 @@ export const RESOURCE_TO_CHAINS = {
     'manufacturing.weapons_armor',
   ],
   coal_deposits: ['raw_extraction.fuel', 'raw_extraction.smelting', 'raw_extraction.petty_mining'],
-  salt_flats: ['food_security.salt', 'food_security.fishing'],
+  salt_flats: ['food_security.salt'],
   precious_metals: [
     'manufacturing.luxury_goods',
     'raw_extraction.precious_metals_mining',
@@ -135,12 +142,14 @@ export const RESOURCE_TO_CHAINS = {
     'trade_entrepot.camel_caravan',
     'trade_entrepot.caravan_trade',
     'food_security.livestock',
+    'food_security.animal_husbandry',
   ],
 
   // ── Mountain resources ─────────────────────────────────────────────
   alpine_pasture: [
     'raw_extraction.alpine_wool',
     'food_security.livestock',
+    'food_security.animal_husbandry',
     'manufacturing.textiles',
   ],
   mountain_timber: [

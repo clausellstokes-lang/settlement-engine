@@ -1,73 +1,146 @@
 /**
- * tests/store/customContentSlice.deeager.test.js — the DE-EAGER LANE's
- * lifecycle round-trip pins (2026-07-19).
+ * customContentSlice — lazy admission, durable projection, and registry seam.
  *
- * The schema validators load LAZILY at the slice's validation chokepoint
- * (validationErrorsFor: an axis-bearing write AWAITS the import — never skips),
- * and the registry cache is invalidated through the eager seam
- * (lib/customContentSource.js). Each persisted-path lifecycle leg the
- * conversion touched gets an executed proof here:
- *
- *   1. AUTHOR → PERSIST → REHYDRATE → EDIT → VALIDATE (deities + traditions).
- *   2. THE RACE — writes issued back-to-back without awaiting, while the
- *      schema may still be loading: the invalid write NEVER lands (not even
- *      transiently — no optimistic insert precedes validation), the valid
- *      writes land in call order.
- *   3. IMPORT → VALIDATE — the content-pack lane (prepareImport → the async
- *      addCustomItem commit loop, invalid deity refused at BOTH walls).
- *   4. THE SEAM — invalidate-before-load is a safe no-op; a source re-wire
- *      AFTER the registry loaded rebuilds the registry from the new source
- *      (the stale-cache hazard the old direct customDeps.invalidate covered).
- *
- * NOT covered here, deliberately: canonize — no canonize path writes or
- * validates custom content (verified 2026-07-19: canonizeWorldState /
- * canonizeSavedSettlement / campaignSpatialCanonize operate on worldState and
- * saves only); hydration-time validation — loadAll() never validated and still
- * does not (migrateCustomContent is shape-healing, import-free, synchronous).
+ * The manifest and immutable command stack are intentionally absent from the
+ * eager store closure. Every authored entry awaits that lazy admission wall,
+ * then the slice projects only a confirmed writer receipt. The compatibility
+ * local cache remains an owner-scoped offline mirror, never write authority.
  */
 
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  test,
+  vi,
+} from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
-// A configured-but-OFFLINE cloud service: add/update/delete resolve benignly
-// (echoing a cloud id), list() REJECTS — which forces loadCustomContentFromCloud
-// down the owner-scoped LOCAL MIRROR restore branch, the real premium
-// rehydration leg this lane touched (its registry invalidate now rides the
-// seam). Slice creation itself hydrates the ANON bucket by design; a signed-in
-// owner's content comes back through this path.
+const h = vi.hoisted(() => {
+  let calls = 0;
+  let revisionSequence = 0;
+  const definitions = new Map();
+
+  function confirmed(commandId, items, perEntry) {
+    return {
+      ok: true,
+      status: 'applied',
+      commandId,
+      reason: null,
+      persistence: {
+        state: 'confirmed',
+        authority: 'test-transaction',
+      },
+      result: { items },
+      perEntry,
+    };
+  }
+
+  return {
+    service: {
+      isConfigured: true,
+      executeCommand: async (preview, options) => {
+        calls += 1;
+        const items = [];
+        const perEntry = [];
+        for (const entry of preview.plan.entries) {
+          const existing = definitions.get(entry.definitionId);
+          if (
+            existing
+            && entry.expectedHeadRevisionId !== existing.revisionId
+          ) {
+            return {
+              ok: false,
+              status: 'stale',
+              commandId: options.commandId,
+              reason: 'definition_head_changed',
+              persistence: {
+                state: 'not-required',
+                authority: 'test-transaction',
+              },
+              result: null,
+              perEntry: [],
+            };
+          }
+          const revisionId = `revision_${++revisionSequence}`;
+          const projected = {
+            ...entry.data,
+            id: entry.definitionId,
+            definitionId: entry.definitionId,
+            revisionId,
+            revisionNumber: (existing?.revisionNumber || 0) + 1,
+            localUid: entry.data.localUid || existing?.localUid
+              || `lu_test_${revisionSequence}`,
+            isCustom: true,
+          };
+          definitions.set(entry.definitionId, {
+            ...projected,
+            category: entry.category,
+          });
+          items.push(projected);
+          perEntry.push({
+            definitionId: entry.definitionId,
+            revisionId,
+            status: existing ? 'updated' : 'created',
+            category: entry.category,
+          });
+        }
+        return confirmed(options.commandId, items, perEntry);
+      },
+      list: () => Promise.reject(new Error('offline')),
+      listContentEnvironmentRevisions: () => Promise.resolve([]),
+      loadActiveContentEnvironment: () => Promise.resolve(null),
+      resolveContentEnvironment: () => Promise.resolve({
+        ok: true,
+        customContent: {},
+      }),
+    },
+    callCount() {
+      return calls;
+    },
+    reset() {
+      calls = 0;
+      revisionSequence = 0;
+      definitions.clear();
+    },
+  };
+});
+
 vi.mock('../../src/lib/customContent.js', () => ({
-  customContentService: {
-    isConfigured: true,
-    add: (_category, entry) => Promise.resolve({ ...entry, id: `cloud_${entry.localUid || 'x'}` }),
-    update: () => Promise.resolve({}),
-    delete: () => Promise.resolve(),
-    list: () => Promise.reject(new Error('offline')),
-  },
+  customContentService: h.service,
 }));
 
-const { createCustomContentSlice } = await import('../../src/store/customContentSlice.js');
+const { createCustomContentSlice } = await import(
+  '../../src/store/customContentSlice.js'
+);
 import {
-  setCustomContentSource,
   invalidateCustomDepsIfLoaded,
+  setCustomContentSource,
 } from '../../src/lib/customContentSource.js';
-import { prepareImport } from '../../src/lib/contentPacks.js';
 
 function installLocalStorage() {
   const data = new Map();
   globalThis.localStorage = {
     getItem: key => data.get(String(key)) ?? null,
-    setItem: (key, value) => { data.set(String(key), String(value)); },
-    removeItem: key => { data.delete(String(key)); },
-    clear: () => { data.clear(); },
+    setItem: (key, value) => {
+      data.set(String(key), String(value));
+    },
+    removeItem: key => {
+      data.delete(String(key));
+    },
+    clear: () => {
+      data.clear();
+    },
   };
 }
 
 function makeStore(userId = 'user_rt') {
-  return create(immer((...a) => ({
+  return create(immer((...args) => ({
     auth: { user: { id: userId }, tier: 'premium' },
     canUseCustomContent: () => true,
-    ...createCustomContentSlice(...a),
+    ...createCustomContentSlice(...args),
   })));
 }
 
@@ -85,162 +158,249 @@ const VALID_TRADITION = {
   motifAct: 'vigil',
 };
 
-describe('de-eager round trip — author → persist → rehydrate → edit → validate', () => {
-  beforeEach(() => installLocalStorage());
-
-  test('a deity authored on store A rehydrates on store B and still validates edits', async () => {
-    const a = makeStore();
-    await a.getState().addCustomItem('deities', VALID_DEITY);
-    expect(a.getState().getCustomItems('deities')).toHaveLength(1);
-
-    // PERSIST: the optimistic write reached the owner-scoped local mirror.
-    const persisted = JSON.parse(localStorage.getItem('sf_custom_content:user_rt'));
-    expect(persisted.deities[0].name).toBe(VALID_DEITY.name);
-    expect(persisted.deities[0].localUid).toBeTruthy();
-
-    // REHYDRATE: a fresh signed-in store starts from the (empty) anon bucket,
-    // then loadCustomContentFromCloud finds the cloud unreachable and restores
-    // the owner-scoped mirror — the premium offline path, whose registry
-    // invalidate now goes through the seam (no eager registry import). No data
-    // loss, no error surfaced (stale-but-available contract).
-    const b = makeStore();
-    await b.getState().loadCustomContentFromCloud();
-    const hydrated = b.getState().getCustomItems('deities');
-    expect(hydrated).toHaveLength(1);
-    expect(hydrated[0].localUid).toBe(persisted.deities[0].localUid);
-    expect(b.getState().customContentError).toBeNull();
-
-    // EDIT → VALIDATE on the rehydrated row: bad axis refused, row intact…
-    const bad = await b.getState().updateCustomItem('deities', hydrated[0].id, { rankAxis: 'archgod' });
-    expect(bad).toBeNull();
-    expect(b.getState().getCustomItems('deities')[0].rankAxis).toBe('minor');
-    expect(b.getState().customContentError).toMatch(/rankAxis/);
-    // …valid edit applied and re-persisted.
-    await b.getState().updateCustomItem('deities', hydrated[0].id, { rankAxis: 'cult' });
-    expect(b.getState().getCustomItems('deities')[0].rankAxis).toBe('cult');
-    expect(JSON.parse(localStorage.getItem('sf_custom_content:user_rt')).deities[0].rankAxis).toBe('cult');
+describe('lazy authoring round trip and offline owner mirror', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    h.reset();
+    vi.spyOn(console, 'error').mockImplementation(() => {});
   });
 
-  test('the ANON lane hydrates synchronously at store creation (validation-free by design)', async () => {
-    const anon = create(immer((...a) => ({
-      auth: { user: null, tier: 'anon' },
-      canUseCustomContent: () => false,
-      ...createCustomContentSlice(...a),
-    })));
-    await anon.getState().addCustomItem('deities', VALID_DEITY);
-    // Fresh anon store: creation-time loadAll('anon') reads it straight back —
-    // the synchronous hydration leg, deliberately untouched by the conversion
-    // (loadAll never validated; migrateCustomContent is import-free healing).
-    const anon2 = create(immer((...a) => ({
-      auth: { user: null, tier: 'anon' },
-      canUseCustomContent: () => false,
-      ...createCustomContentSlice(...a),
-    })));
-    expect(anon2.getState().getCustomItems('deities')[0].name).toBe(VALID_DEITY.name);
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
-  test('a tradition round-trips the same lane; a bad motif is refused at the chokepoint', async () => {
-    const a = makeStore();
-    await a.getState().addCustomItem('traditions', VALID_TRADITION);
-    const b = makeStore();
-    await b.getState().loadCustomContentFromCloud();
-    const [row] = b.getState().getCustomItems('traditions');
+  test('rehydrates a confirmed deity from the owner mirror and validates revisions', async () => {
+    const firstStore = makeStore();
+    const created = await firstStore.getState().addCustomItem(
+      'deities',
+      VALID_DEITY,
+    );
+
+    expect(created).toMatchObject({
+      name: VALID_DEITY.name,
+      revisionNumber: 1,
+    });
+    expect(
+      firstStore.getState().customContentLastCommandReceipt.persistence.state,
+    ).toBe('confirmed');
+
+    const persisted = JSON.parse(
+      localStorage.getItem('sf_custom_content:user_rt'),
+    );
+    expect(persisted.deities[0]).toMatchObject({
+      name: VALID_DEITY.name,
+      definitionId: created.definitionId,
+      revisionId: created.revisionId,
+    });
+
+    // A signed-in store deliberately starts from the anonymous bucket. When
+    // the cloud is unreachable, load restores only this owner's confirmed
+    // projection and reports stale-but-available state without an error.
+    const offlineStore = makeStore();
+    expect(offlineStore.getState().getCustomItems('deities')).toEqual([]);
+    await offlineStore.getState().loadCustomContentFromCloud();
+    const [hydrated] = offlineStore.getState().getCustomItems('deities');
+    expect(hydrated).toMatchObject({
+      definitionId: created.definitionId,
+      revisionId: created.revisionId,
+      name: VALID_DEITY.name,
+    });
+    expect(offlineStore.getState().customContentError).toBeNull();
+
+    const callsBeforeInvalidEdit = h.callCount();
+    const rejected = await offlineStore.getState().updateCustomItem(
+      'deities',
+      hydrated.definitionId,
+      { rankAxis: 'archgod' },
+    );
+    expect(rejected).toBeNull();
+    expect(h.callCount()).toBe(callsBeforeInvalidEdit);
+    expect(
+      offlineStore.getState().getCustomItems('deities')[0],
+    ).toMatchObject({
+      rankAxis: 'minor',
+      revisionId: created.revisionId,
+    });
+    expect(offlineStore.getState().customContentError).toMatch(/rankAxis/);
+
+    const revised = await offlineStore.getState().updateCustomItem(
+      'deities',
+      hydrated.definitionId,
+      { rankAxis: 'cult' },
+    );
+    expect(revised).toMatchObject({
+      rankAxis: 'cult',
+      revisionNumber: 2,
+    });
+    expect(revised.revisionId).not.toBe(created.revisionId);
+    expect(
+      JSON.parse(localStorage.getItem('sf_custom_content:user_rt'))
+        .deities[0].rankAxis,
+    ).toBe('cult');
+  });
+
+  test('hydrates the anonymous confirmed projection synchronously on store creation', async () => {
+    const makeAnonStore = () => create(immer((...args) => ({
+      auth: { user: null, tier: 'anon' },
+      canUseCustomContent: () => false,
+      ...createCustomContentSlice(...args),
+    })));
+    const firstStore = makeAnonStore();
+    await firstStore.getState().addCustomItem('deities', VALID_DEITY);
+
+    const freshStore = makeAnonStore();
+    expect(freshStore.getState().getCustomItems('deities')[0]).toMatchObject({
+      name: VALID_DEITY.name,
+      revisionNumber: 1,
+    });
+  });
+
+  test('round-trips traditions through the same manifest and command walls', async () => {
+    const firstStore = makeStore();
+    await firstStore.getState().addCustomItem(
+      'traditions',
+      VALID_TRADITION,
+    );
+
+    const offlineStore = makeStore();
+    await offlineStore.getState().loadCustomContentFromCloud();
+    const [row] = offlineStore.getState().getCustomItems('traditions');
     expect(row.motifElement).toBe('greening');
 
-    expect(await b.getState().updateCustomItem('traditions', row.id, { motifAct: 'sacrifice' })).toBeNull();
-    expect(b.getState().getCustomItems('traditions')[0].motifAct).toBe('vigil');
-    expect(await b.getState().addCustomItem('traditions', { name: 'X', motifElement: 'not-a-key' })).toBeNull();
-    expect(b.getState().getCustomItems('traditions')).toHaveLength(1);
+    const callsBeforeRejections = h.callCount();
+    expect(
+      await offlineStore.getState().updateCustomItem(
+        'traditions',
+        row.definitionId,
+        { motifAct: 'sacrifice' },
+      ),
+    ).toBeNull();
+    expect(
+      await offlineStore.getState().addCustomItem(
+        'traditions',
+        { name: 'Unknown Rite', motifElement: 'not-a-key' },
+      ),
+    ).toBeNull();
+    expect(h.callCount()).toBe(callsBeforeRejections);
+    expect(offlineStore.getState().getCustomItems('traditions')).toHaveLength(1);
   });
 });
 
-describe('de-eager race — validate-before-schema-loaded resolves correctly', () => {
-  beforeEach(() => installLocalStorage());
+describe('lazy admission is atomic before command persistence', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    h.reset();
+  });
 
-  test('an invalid write racing the schema load never lands, not even transiently', async () => {
+  test('an invalid write never reaches the writer or appears transiently', async () => {
     const store = makeStore();
-    // Fire WITHOUT awaiting — the schema import may still be in flight.
-    const pending = store.getState().addCustomItem('deities', { ...VALID_DEITY, alignmentAxis: 'zesty' });
-    // BEFORE the promise settles: nothing was optimistically inserted — the
-    // write happens strictly AFTER validation resolves (the chokepoint law).
-    expect(store.getState().getCustomItems('deities')).toHaveLength(0);
+    const pending = store.getState().addCustomItem('deities', {
+      ...VALID_DEITY,
+      alignmentAxis: 'zesty',
+    });
+
+    expect(store.getState().getCustomItems('deities')).toEqual([]);
     expect(await pending).toBeNull();
-    expect(store.getState().getCustomItems('deities')).toHaveLength(0);
+    expect(store.getState().getCustomItems('deities')).toEqual([]);
     expect(store.getState().customContentError).toMatch(/alignmentAxis/);
+    expect(h.callCount()).toBe(0);
   });
 
-  test('back-to-back un-awaited writes apply in call order (FIFO through the lazy load)', async () => {
+  test('back-to-back valid writes commit while a rejected peer remains absent', async () => {
     const store = makeStore();
-    const p1 = store.getState().addCustomItem('deities', { ...VALID_DEITY, name: 'First God' });
-    const p2 = store.getState().addCustomItem('deities', { ...VALID_DEITY, name: 'Second God' });
-    const p3 = store.getState().addCustomItem('deities', { ...VALID_DEITY, name: 'Bad God', rankAxis: 'nope' });
-    await Promise.all([p1, p2, p3]);
-    const names = store.getState().getCustomItems('deities').map(d => d.name);
-    // unshift ⇒ newest first; the invalid third write is absent.
-    expect(names).toEqual(['Second God', 'First God']);
-    expect(await p3).toBeNull();
+    const first = store.getState().addCustomItem('deities', {
+      ...VALID_DEITY,
+      name: 'First God',
+    });
+    const second = store.getState().addCustomItem('deities', {
+      ...VALID_DEITY,
+      name: 'Second God',
+    });
+    const rejected = store.getState().addCustomItem('deities', {
+      ...VALID_DEITY,
+      name: 'Broken God',
+      rankAxis: 'nope',
+    });
+
+    expect(store.getState().getCustomItems('deities')).toEqual([]);
+    await Promise.all([first, second, rejected]);
+
+    expect(
+      store.getState().getCustomItems('deities').map(item => item.name),
+    ).toEqual(['Second God', 'First God']);
+    expect(await rejected).toBeNull();
+    expect(h.callCount()).toBe(2);
   });
 
-  test('non-axis buckets never touch the schema and still write atomically', async () => {
+  test('rejects a mixed batch before persisting any entry', async () => {
     const store = makeStore();
-    const pending = store.getState().addCustomItem('institutions', { name: 'Quick Hall' });
-    await pending;
-    expect(store.getState().getCustomItems('institutions')[0].name).toBe('Quick Hall');
+    const receipt = await store.getState().applyCustomContentCommand({
+      kind: 'content.definition.mass-update',
+      entries: [
+        {
+          category: 'deities',
+          item: { ...VALID_DEITY, name: 'Admissible God' },
+        },
+        {
+          category: 'deities',
+          item: { ...VALID_DEITY, name: 'Broken God', rankAxis: 'nope' },
+        },
+      ],
+      source: { type: 'manual', ref: 'mixed-batch-test' },
+    });
+
+    expect(receipt).toMatchObject({
+      ok: false,
+      status: 'failed',
+      persistence: { state: 'not-required' },
+    });
+    expect(receipt.reason).toMatch(/rankAxis/);
+    expect(h.callCount()).toBe(0);
+    expect(store.getState().getCustomItems('deities')).toEqual([]);
+    expect(localStorage.getItem('sf_custom_content:user_rt')).toBeNull();
+  });
+
+  test('non-axis categories use the same lazy manifest wall and confirmed receipt', async () => {
+    const store = makeStore();
+    const pending = store.getState().addCustomItem(
+      'institutions',
+      { name: 'Quick Hall' },
+    );
+    expect(store.getState().getCustomItems('institutions')).toEqual([]);
+
+    const item = await pending;
+    expect(item.name).toBe('Quick Hall');
+    expect(store.getState().getCustomItems('institutions')[0].name)
+      .toBe('Quick Hall');
+    expect(h.callCount()).toBe(1);
   });
 });
 
-describe('de-eager import lane — prepareImport → async addCustomItem commit', () => {
+describe('lazy dependency-registry invalidation seam', () => {
   beforeEach(() => installLocalStorage());
 
-  test('a pack with one valid and one invalid deity lands exactly the valid one', async () => {
-    const pack = {
-      format: 'settlementforge.content-pack',
-      version: 1,
-      name: 't',
-      content: {
-        deities: [
-          { ...VALID_DEITY, localUid: 'lu_pack_1' },
-          { name: 'Broken God', alignmentAxis: 'sideways', temperamentAxis: 'warlike', rankAxis: 'major', localUid: 'lu_pack_2' },
-        ],
-      },
-    };
-    // Wall 1: prepareImport re-validates deities (sync, pure — lazy chunk in app).
-    const { items, rejected } = prepareImport(pack);
-    expect(items).toHaveLength(1);
-    expect(rejected).toHaveLength(1);
-
-    // Wall 2 (belt-and-suspenders): the async store commit re-validates.
-    const store = makeStore();
-    let added = 0;
-    for (const { bucket, item } of items) {
-      if ((await store.getState().addCustomItem(bucket, item)) !== null) added += 1;
-    }
-    expect(added).toBe(1);
-    expect(store.getState().getCustomItems('deities')).toHaveLength(1);
-    // And pushing the rejected shape straight at the store is refused too.
-    expect(await store.getState().addCustomItem('deities', { ...VALID_DEITY, alignmentAxis: 'sideways' })).toBeNull();
-  });
-});
-
-describe('de-eager seam — invalidation without an eager registry import', () => {
-  beforeEach(() => installLocalStorage());
-
-  test('invalidateCustomDepsIfLoaded before the registry ever loads is a safe no-op', () => {
+  test('invalidation before registry load is a safe no-op', () => {
     expect(() => invalidateCustomDepsIfLoaded()).not.toThrow();
   });
 
-  test('a source re-wire AFTER the registry loaded rebuilds it from the new source', async () => {
-    // Load the (lazy-in-app) registry module for real — it self-registers its
-    // invalidator on the seam at module load.
+  test('rewiring a loaded source rebuilds equal-sized registry content', async () => {
     const { customDeps } = await import('../../src/lib/dependencyEngine.js');
-    setCustomContentSource(() => ({ deities: [{ localUid: 'lu_seam_a', name: 'Seam God A' }] }));
-    expect(customDeps.registry().listCustom('deities').map(e => e.name)).toEqual(['Seam God A']);
-    // Re-wire to a DIFFERENT source with the SAME count and no updatedAt — the
-    // exact swap the (count:latest) cache key cannot see. The seam's re-wire
-    // invalidation is what forces the rebuild.
-    setCustomContentSource(() => ({ deities: [{ localUid: 'lu_seam_b', name: 'Seam God B' }] }));
-    expect(customDeps.registry().listCustom('deities').map(e => e.name)).toEqual(['Seam God B']);
-    // Restore the default empty source so no other test observes this wiring.
+    setCustomContentSource(() => ({
+      deities: [{ localUid: 'lu_seam_a', name: 'Seam God A' }],
+    }));
+    expect(
+      customDeps.registry().listCustom('deities').map(entry => entry.name),
+    ).toEqual(['Seam God A']);
+
+    // Count and update timestamps are intentionally identical. The eager seam,
+    // rather than the registry's shape cache, must make this replacement live.
+    setCustomContentSource(() => ({
+      deities: [{ localUid: 'lu_seam_b', name: 'Seam God B' }],
+    }));
+    expect(
+      customDeps.registry().listCustom('deities').map(entry => entry.name),
+    ).toEqual(['Seam God B']);
+
     setCustomContentSource(null);
     invalidateCustomDepsIfLoaded();
   });

@@ -2,8 +2,8 @@
  * customContentTraditions.test.js — THE TRADITIONS wave (T-5). The `traditions`
  * custom-content bucket: the validator (validateTradition, the validateDeity template),
  * the motif-key drift guard (the eager frozen literals must equal the lazy corpus), and
- * the AI schema-wall registration (CONTENT_BUCKETS + the motif mechanical fields + the
- * epithet flavor field).
+ * the AI schema-wall registration. Motif values are bounded presentation vocabulary:
+ * they shape the dossier but do not falsely claim a simulation consumer.
  */
 import { describe, it, expect } from 'vitest';
 import {
@@ -11,6 +11,9 @@ import {
 } from '../../src/domain/customContentSchema.js';
 import { TRADITION_ELEMENTS, TRADITION_ACTS } from '../../src/data/traditionCorpus.js';
 import { CONTENT_BUCKETS, classifyField, isRegisteredBucket } from '../../src/domain/content/contentVocabulary.js';
+import {
+  getCustomContentField,
+} from '../../src/domain/content/customContentManifest.js';
 
 describe('validateTradition — the write-time gate (validateDeity template)', () => {
   it('requires a name', () => {
@@ -34,9 +37,18 @@ describe('validateTradition — the write-time gate (validateDeity template)', (
 });
 
 describe('customContentSchema — tradition motif-key drift guard', () => {
-  it('the eager frozen literals equal the (lazy) corpus ids', () => {
+  it('the compatibility literals equal the manifest and corpus ids', () => {
     expect([...TRADITION_ELEMENT_KEYS]).toEqual(TRADITION_ELEMENTS.map((e) => e.id));
     expect([...TRADITION_ACT_KEYS]).toEqual(TRADITION_ACTS.map((a) => a.id));
+    expect([...TRADITION_ELEMENT_KEYS]).toEqual(
+      getCustomContentField('traditions', 'motifElement')?.values,
+    );
+    expect([...TRADITION_ACT_KEYS]).toEqual(
+      getCustomContentField('traditions', 'motifAct')?.values,
+    );
+    expect(TRADITION_EPITHET_MAX_LENGTH).toBe(
+      getCustomContentField('traditions', 'epithet')?.maxLength,
+    );
   });
 });
 
@@ -45,10 +57,22 @@ describe('contentVocabulary — the AI schema wall admits traditions', () => {
     expect(CONTENT_BUCKETS).toContain('traditions');
     expect(isRegisteredBucket('traditions')).toBe(true);
   });
-  it('the motif fields are mechanical (bounded) and epithet is flavor', () => {
-    expect(classifyField('motifElement', 'harvest').kind).toBe('mechanical');
-    expect(classifyField('motifElement', 'volcano')).toEqual({ kind: 'unsupported', reason: 'invalid_value' });
-    expect(classifyField('motifAct', 'feast').kind).toBe('mechanical');
-    expect(classifyField('epithet', 'kept since the first stone was laid').kind).toBe('flavor');
+  it('the motif fields are bounded presentation and invalid values fail closed', () => {
+    expect(classifyField('traditions', 'motifElement', 'harvest')).toMatchObject({
+      kind: 'flavor',
+      displayKind: 'presentation',
+    });
+    expect(classifyField('traditions', 'motifElement', 'volcano')).toMatchObject({
+      kind: 'unsupported',
+      reason: 'invalid_value',
+    });
+    expect(classifyField('traditions', 'motifAct', 'feast')).toMatchObject({
+      kind: 'flavor',
+      displayKind: 'presentation',
+    });
+    expect(classifyField('traditions', 'epithet', 'kept since the first stone was laid')).toMatchObject({
+      kind: 'flavor',
+      displayKind: 'presentation',
+    });
   });
 });

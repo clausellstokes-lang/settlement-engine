@@ -28,6 +28,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'thorp',
+        resourceSubstitutes: ['Fertile Floodplain'],
       },
       {
         id: 'livestock',
@@ -51,6 +52,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'hamlet',
+        // These are different husbandry ecologies, not different commodities:
+        // river cattle, camel herds, and alpine flocks all provide livestock.
+        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
       },
       // data-tables-5: the thin 'fish' chain was a duplicate authoring pass of the
       // richer 'fishing' chain (both keyed resource 'Fishing grounds'), so a coastal
@@ -70,6 +74,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: true, // salt moves everywhere; crossroads/port settlements re-export it
         minTier: 'hamlet',
+        resourceSubstitutes: ['Salt Pans'],
         entrepotNote:
           'Salt is among the most-traded commodities. Port and crossroads settlements profit from redistribution.',
       },
@@ -89,6 +94,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: false,
         entrepot: false,
         minTier: 'thorp',
+        resourceSubstitutes: ['Ancient Grove', 'Marshlands'],
       },
       {
         id: 'fishing',
@@ -160,6 +166,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['food'],
         exportable: true,
         minTier: 'hamlet',
+        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
       },
       {
         id: 'animal_husbandry',
@@ -183,6 +190,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['transport', 'employment'],
         exportable: true,
         minTier: 'hamlet',
+        resourceSubstitutes: ['Fertile Floodplain', 'Camel Herds', 'Alpine Pastures'],
       },
     ],
   },
@@ -214,6 +222,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'hamlet',
+        resourceSubstitutes: ['Coastal Timber', 'Mountain Timber'],
       },
       {
         id: 'iron',
@@ -284,7 +293,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['equipment'],
         exportable: true,
         minTier: 'town',
-        resourceSubstitutes: ['Coal or peat deposits'],
       },
       {
         id: 'reed_marsh',
@@ -313,13 +321,13 @@ export const SUPPLY_CHAIN_NEEDS = {
       },
       {
         id: 'shipbuilding',
-        label: 'Shipbuilding & Boatwright',
+        label: 'Boatbuilding & River Transport',
         resource: 'Managed woodland',
         resourceIcon: '',
-        rawInputs: ['Shipbuilding timber', 'Milled lumber', 'Rope and cordage'],
+        rawInputs: ['Boatbuilding timber', 'Milled lumber', 'Rope and cordage'],
         processingInstitutions: ['Barge and river transport company', 'River boatyard', 'River ferry', 'Boatyard'],
-        intermediateGoods: ['Planks and beams', 'Ship components'],
-        outputs: ['River craft', 'Merchant vessels', 'Fishing boats', 'Naval vessels'],
+        intermediateGoods: ['Planks and beams', 'Boat components'],
+        outputs: ['River craft', 'Cargo barges', 'Fishing boats', 'Ferries'],
         services: ['transport'],
         exportable: true,
         minTier: 'village',
@@ -338,6 +346,17 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         minTier: 'town',
         resourceSubstitutes: ['Gemstone deposits'],
+        processingInstitutionsByResource: {
+          precious_metals: ['Specialized metalworkers', 'Jeweller'],
+          gemstone_deposits: ['Jeweller'],
+        },
+        labelsByResource: {
+          gemstone_deposits: 'Gem Mining & Lapidary',
+        },
+        outputsByResource: {
+          precious_metals: ['Precious metals', 'Coin minting', 'Refined ingots', 'Assay certificates'],
+          gemstone_deposits: ['Raw gemstones', 'Cut gemstones', 'Gem appraisal'],
+        },
       },
       {
         id: 'petty_mining',
@@ -352,6 +371,16 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         minTier: 'hamlet',
         resourceSubstitutes: ['Stone quarry', 'Coal or peat deposits'],
+        processingInstitutionsByResource: {
+          iron_deposits: ['Mine (open cast)'],
+          stone_quarry: ['Stone quarry'],
+          coal_deposits: ['Peat cutter', 'Charcoal burner'],
+        },
+        outputsByResource: {
+          iron_deposits: ['Iron ore'],
+          stone_quarry: ['Quarried stone', 'Building materials'],
+          coal_deposits: ['Coal'],
+        },
       },
       {
         id: 'harbour_trade',
@@ -509,6 +538,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'village',
+        resourceSubstitutes: ['Alpine Pastures'],
       },
       {
         id: 'leather',
@@ -542,7 +572,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         exportable: true,
         entrepot: false,
         minTier: 'village',
-        resourceSubstitutes: ['Grazing land', 'River fish', 'Fishing grounds'],
+        resourceSubstitutes: ['Fertile Floodplain', 'Date Palms and Orchards'],
       },
       {
         id: 'weapons_armor',
@@ -630,7 +660,6 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['equipment'],
         exportable: true,
         minTier: 'village',
-        resourceSubstitutes: ['Mill sites'],
       },
       {
         id: 'leather_goods',

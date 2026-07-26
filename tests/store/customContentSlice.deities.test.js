@@ -1,11 +1,10 @@
 /**
  * customContentSlice — deity bucket authoring (Feature D / R1).
  *
- * Pins: the deities bucket round-trips (create → list → delete); schema
- * validation rejects bad/missing axes (mirroring the 049 DB CHECK); and the
- * premium gate governs cloud sync exactly as it does for every other bucket
- * (a non-premium store keeps deities local-only — it can never reach the cloud,
- * which is the D.0 client gate).
+ * Pins: the deities bucket creates immutable revisions and archives without
+ * deleting history; manifest validation rejects bad/missing axes before the
+ * command writer; and the local immutable ledger remains an honest offline
+ * authority when cloud persistence is not configured.
  */
 
 import { beforeEach, describe, expect, test } from 'vitest';
@@ -49,10 +48,13 @@ describe('customContentSlice — deities bucket', () => {
     expect(store.getState().customContent.deities).toEqual([]);
   });
 
-  test('create → list → delete round-trips a valid deity', async () => {
+  test('create → list → archive keeps immutable history', async () => {
     const store = makeStore();
 
-    await store.getState().addCustomItem('deities', VALID_DEITY);
+    const created = await store.getState().addCustomItem(
+      'deities',
+      VALID_DEITY,
+    );
     const listed = store.getState().getCustomItems('deities');
     expect(listed).toHaveLength(1);
     expect(listed[0]).toMatchObject({
@@ -60,13 +62,42 @@ describe('customContentSlice — deities bucket', () => {
       alignmentAxis: 'good',
       temperamentAxis: 'warlike',
       rankAxis: 'major',
+      definitionId: created.definitionId,
+      revisionId: created.revisionId,
+      revisionNumber: 1,
     });
-    // It got a stable cross-cloud ref id.
     expect(listed[0].localUid).toBeTruthy();
     expect(listed[0].isCustom).toBe(true);
+    expect(
+      store.getState().customContentLastCommandReceipt.persistence.state,
+    ).toBe('confirmed');
 
-    store.getState().deleteCustomItem('deities', listed[0].id);
+    const archiveReceipt = await store.getState().deleteCustomItem(
+      'deities',
+      listed[0].definitionId,
+    );
+    expect(archiveReceipt).toMatchObject({
+      ok: true,
+      status: 'applied',
+      persistence: { state: 'confirmed' },
+    });
     expect(store.getState().getCustomItems('deities')).toHaveLength(0);
+
+    const archived = await store.getState().loadArchivedCustomContent();
+    expect(archived.deities[0]).toMatchObject({
+      definitionId: created.definitionId,
+      revisionId: created.revisionId,
+      name: VALID_DEITY.name,
+    });
+    const history = await store.getState().listCustomContentRevisions(
+      created.definitionId,
+    );
+    expect(history).toHaveLength(1);
+    expect(history[0]).toMatchObject({
+      id: created.revisionId,
+      revisionNumber: 1,
+      isHead: true,
+    });
   });
 
   test('validation rejects a bad alignment axis', async () => {
@@ -105,25 +136,128 @@ describe('customContentSlice — deities bucket', () => {
 
   test('a valid update is applied', async () => {
     const store = makeStore();
-    await store.getState().addCustomItem('deities', VALID_DEITY);
-    const { id } = store.getState().getCustomItems('deities')[0];
+    const created = await store.getState().addCustomItem(
+      'deities',
+      VALID_DEITY,
+    );
 
-    await store.getState().updateCustomItem('deities', id, { rankAxis: 'cult' });
-    expect(store.getState().getCustomItems('deities')[0].rankAxis).toBe('cult');
+    const revised = await store.getState().updateCustomItem(
+      'deities',
+      created.definitionId,
+      { rankAxis: 'cult' },
+    );
+    expect(revised).toMatchObject({
+      definitionId: created.definitionId,
+      rankAxis: 'cult',
+      revisionNumber: 2,
+    });
+    expect(revised.revisionId).not.toBe(created.revisionId);
+    const history = await store.getState().listCustomContentRevisions(
+      created.definitionId,
+    );
+    expect(history.map(revision => revision.revisionNumber)).toEqual([2, 1]);
+    expect(history.map(revision => revision.isHead)).toEqual([true, false]);
   });
 
-  test('premium gate: a non-premium store keeps deities local-only (no cloud)', async () => {
-    // customContentService.isConfigured is false in tests, so cloud sync never
-    // runs regardless; the gate we assert here is the canUseCustomContent
-    // predicate the slice consults before any cloud op. A non-premium store
-    // still writes locally (grandfathering), but the gate is false so the cloud
-    // branch is skipped — proving the D.0 client gate is wired to this bucket.
+  test('rollback appends forward, and archive → restore preserves every revision', async () => {
+    const store = makeStore();
+    const created = await store.getState().addCustomItem(
+      'deities',
+      VALID_DEITY,
+    );
+    const revised = await store.getState().updateCustomItem(
+      'deities',
+      created.definitionId,
+      { rankAxis: 'cult' },
+    );
+
+    const rollback = await store.getState().rollbackCustomItem(
+      'deities',
+      created.definitionId,
+      created.revisionId,
+      revised.revisionId,
+    );
+    expect(rollback).toMatchObject({
+      ok: true,
+      status: 'applied',
+      persistence: { state: 'confirmed' },
+    });
+    const rolledBackHead = store.getState().getCustomItems('deities')[0];
+    expect(rolledBackHead).toMatchObject({
+      definitionId: created.definitionId,
+      revisionNumber: 3,
+      rankAxis: 'major',
+    });
+    expect(rolledBackHead.revisionId).not.toBe(created.revisionId);
+    expect(rolledBackHead.revisionId).not.toBe(revised.revisionId);
+
+    let history = await store.getState().listCustomContentRevisions(
+      created.definitionId,
+    );
+    expect(history.map(revision => revision.revisionNumber)).toEqual([3, 2, 1]);
+    expect(history.map(revision => revision.isHead)).toEqual(
+      [true, false, false],
+    );
+
+    const archived = await store.getState().deleteCustomItem(
+      'deities',
+      created.definitionId,
+    );
+    expect(archived).toMatchObject({ ok: true, status: 'applied' });
+    expect(store.getState().getCustomItems('deities')).toEqual([]);
+    expect(
+      (await store.getState().loadArchivedCustomContent()).deities[0],
+    ).toMatchObject({
+      definitionId: created.definitionId,
+      revisionId: rolledBackHead.revisionId,
+      rankAxis: 'major',
+    });
+
+    const restored = await store.getState().restoreCustomItem(
+      'deities',
+      created.definitionId,
+      rolledBackHead.revisionId,
+    );
+    expect(restored).toMatchObject({
+      ok: true,
+      status: 'applied',
+      persistence: { state: 'confirmed' },
+    });
+    expect(store.getState().getCustomItems('deities')[0]).toMatchObject({
+      definitionId: created.definitionId,
+      revisionId: rolledBackHead.revisionId,
+      revisionNumber: 3,
+    });
+    expect(
+      (await store.getState().loadArchivedCustomContent()).deities,
+    ).toEqual([]);
+
+    history = await store.getState().listCustomContentRevisions(
+      created.definitionId,
+    );
+    expect(history.map(revision => revision.revisionNumber)).toEqual([3, 2, 1]);
+    expect(history[0]).toMatchObject({
+      id: rolledBackHead.revisionId,
+      isHead: true,
+      definitionArchivedAt: null,
+    });
+  });
+
+  test('a non-premium owner never claims cloud sync for its offline revision', async () => {
+    // The normal unit environment has no Supabase authority. Grandfathered
+    // authoring can still produce a local immutable revision, while the
+    // entitlement predicate prevents cloud hydration or migration.
     const free = makeStore({ premium: false });
     expect(free.getState().canUseCustomContent()).toBe(false);
-    await free.getState().addCustomItem('deities', VALID_DEITY);
-    // Local write still happens (read-only-on-reload is enforced elsewhere);
-    // the important guarantee is the gate value the cloud branch reads.
+    const created = await free.getState().addCustomItem(
+      'deities',
+      VALID_DEITY,
+    );
+    expect(created.revisionNumber).toBe(1);
     expect(free.getState().getCustomItems('deities')).toHaveLength(1);
+    expect(free.getState().customContentSyncedAt).toBeNull();
+    await free.getState().loadCustomContentFromCloud();
+    expect(free.getState().customContentSyncedAt).toBeNull();
 
     const premium = makeStore({ premium: true });
     expect(premium.getState().canUseCustomContent()).toBe(true);

@@ -1,435 +1,260 @@
 /**
- * customContentSlice — User-created custom content persistence.
+ * customContentSlice — First-paint custom-content state and action facade.
  *
- * Stores custom institutions, resources, stressors, trade goods,
- * trade routes, power presets, and defense presets.
+ * Boot needs the owner-local projection, immutable vanilla environment, and a
+ * handful of synchronous reads. Authoring, archive transfer, environment
+ * resolution, and cloud hydration are all asynchronous workflows; their
+ * implementation lives in customContentSliceRuntime.js and loads on first use.
  *
- * Storage rules:
- *   - Premium users: cloud-synced via Supabase (custom_content table).
- *   - Free / anon users: read-only of grandfathered localStorage items
- *     (any items they created before the gate landed). Cannot create new.
- *   - Developers / admins: full CRUD access (cloud).
- *
- * On sign-in as premium, any local items are migrated to the cloud once,
- * tagged via a user-scoped migrated flag in localStorage so the push only
- * happens once per account/device.
+ * This boundary is behavioral, not merely a bundler hint:
+ *   - every public action exists synchronously when the Zustand store is built;
+ *   - asynchronous actions keep their existing Promise contract;
+ *   - one memoized runtime action set preserves per-store coordinators;
+ *   - synchronous generation reads only already-admitted environment state.
  */
 
-import { customContentService } from '../lib/customContent.js';
 import { migrateCustomContent } from '../domain/customContentMigrations.js';
-import { invalidateCustomDepsIfLoaded } from '../lib/customContentSource.js';
-
-// ── The validation chokepoint (de-eager lane, 2026-07-19) ────────────────────
-// validateDeity/validateTradition used to be STATIC imports, which made this
-// EAGER slice drag customContentSchema into the first-paint closure. The schema
-// now loads lazily AT the chokepoint: every axis-bearing write AWAITS it here —
-// a submit racing the lazy load is still validated (the write proceeds only
-// after the validator ran), never skipped. Non-axis buckets resolve without
-// touching the schema, so their writes stay one microtask from synchronous.
-// Returns null when valid / not-validated; a joined error string when invalid.
-async function validationErrorsFor(category, item) {
-  if (category !== 'deities' && category !== 'traditions') return null;
-  const { validateDeity, validateTradition } = await import('../domain/customContentSchema.js');
-  const { ok, errors } = category === 'deities' ? validateDeity(item) : validateTradition(item);
-  return ok ? null : errors.join(' ');
-}
+import {
+  CONTENT_ENVIRONMENT_SCHEMA_VERSION,
+  VANILLA_CONTENT_ENVIRONMENT,
+  VANILLA_ENVIRONMENT_REVISION_ID,
+} from '../domain/content/contentEnvironmentDefaults.js';
 
 const LOCAL_KEY = 'sf_custom_content';
 const LOCAL_KEY_PREFIX = 'sf_custom_content:';
-const MIGRATED_FLAG_PREFIX = 'sf_custom_content_migrated:';
 
+const EMPTY = Object.freeze({
+  institutions: Object.freeze([]),
+  services: Object.freeze([]),
+  resources: Object.freeze([]),
+  stressors: Object.freeze([]),
+  tradeGoods: Object.freeze([]),
+  deities: Object.freeze([]),
+  factions: Object.freeze([]),
+  traditions: Object.freeze([]),
+  supplyChains: Object.freeze([]),
+  tradeRoutes: Object.freeze([]),
+  powerPresets: Object.freeze([]),
+  defensePresets: Object.freeze([]),
+});
+
+/** @param {string} ownerId */
 function scopedLocalKey(ownerId = 'anon') {
   const owner = String(ownerId || 'anon');
   if (owner === 'anon') return LOCAL_KEY;
   return `${LOCAL_KEY_PREFIX}${owner.replace(/[^a-zA-Z0-9_-]/g, '_')}`;
 }
 
-function migrationFlag(ownerId = 'anon') {
-  return `${MIGRATED_FLAG_PREFIX}${String(ownerId || 'anon').replace(/[^a-zA-Z0-9_-]/g, '_')}`;
-}
-
-function ownerIdFromState(state) {
-  return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
-}
-
+/** @param {string} ownerId */
 function localLoad(ownerId = 'anon') {
   try {
     return JSON.parse(localStorage.getItem(scopedLocalKey(ownerId)) || '{}');
-  } catch { return {}; }
-}
-
-function localWrite(content, ownerId = 'anon') {
-  localStorage.setItem(scopedLocalKey(ownerId), JSON.stringify(content));
-}
-
-function flattenLocalContent(ownerId = 'anon') {
-  const raw = localLoad(ownerId);
-  const out = [];
-  for (const [category, items] of Object.entries(raw)) {
-    if (!Array.isArray(items)) continue;
-    for (const item of items) out.push({ category, item });
+  } catch {
+    return {};
   }
-  return out;
 }
-
-const EMPTY = {
-  institutions: [],
-  services: [],
-  resources: [],
-  stressors: [],
-  tradeGoods: [],
-  deities: [],
-  factions: [],
-  traditions: [],
-  supplyChains: [],
-  tradeRoutes: [],
-  powerPresets: [],
-  defensePresets: [],
-};
 
 /**
- * Ensure every item in a category bucket has a stable `localUid`. Mutates
- * in place. Called when hydrating from local or cloud so older rows get a
- * deterministic ref id derived from their existing `id`.
+ * Older local rows predate stable dependency identifiers. Backfill those
+ * identifiers deterministically when possible, matching the deferred runtime.
+ *
+ * @param {Record<string, unknown>} grouped
  */
 function backfillLocalUids(grouped) {
   if (!grouped || typeof grouped !== 'object') return grouped;
-  for (const cat of Object.keys(grouped)) {
-    const arr = grouped[cat];
-    if (!Array.isArray(arr)) continue;
-    for (const item of arr) {
-      if (item && !item.localUid) {
-        // Derive from id when present so the same row gets the same uid on
-        // subsequent loads. Prefix with `bf_` to distinguish from fresh uids.
-        item.localUid = item.id ? `bf_${item.id}` : `lu_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
-      }
+  for (const [category, value] of Object.entries(grouped)) {
+    if (!Array.isArray(value)) continue;
+    if (category === 'supplyChains') {
+      // Reviewed-derived artifacts are rehydrated from the deferred immutable
+      // ledger. First paint must never trust the historical flat mirror.
+      grouped[category] = [];
+      continue;
     }
+    for (const item of value) {
+      if (!item || item.localUid) continue;
+      item.localUid = item.id
+        ? `bf_${item.id}`
+        : `lu_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+    }
+    grouped[category] = value;
   }
   return grouped;
 }
 
+/** @param {string} ownerId */
 function loadAll(ownerId = 'anon') {
   const raw = localLoad(ownerId);
-  return backfillLocalUids(migrateCustomContent({ ...EMPTY, ...raw }));
+  return backfillLocalUids(migrateCustomContent({
+    ...emptyContent(),
+    ...raw,
+  }));
 }
 
-function makeId(prefix) {
-  return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+function emptyContent() {
+  return Object.fromEntries(
+    Object.keys(EMPTY).map(category => [category, []]),
+  );
+}
+
+/** @type {Promise<typeof import('./customContentSliceRuntime.js')>|null} */
+let runtimePromise = null;
+
+function loadRuntime() {
+  if (!runtimePromise) {
+    runtimePromise = import('./customContentSliceRuntime.js');
+  }
+  return runtimePromise;
 }
 
 /**
- * Stable uid that survives Supabase round-trip.
+ * Invoke one deferred action through the memoized per-module runtime.
  *
- * The Supabase row's `id` column is rewritten from a local string to a cloud
- * UUID after `add()` resolves — that breaks any dependency reference stored
- * by `id`. `localUid` lives inside the JSONB body, so it stays put. Used by
- * the customRegistry resolver as the canonical reference for custom items.
+ * @param {string} actionName
+ * @param {Function} set
+ * @param {Function} get
+ * @param {unknown[]} args
  */
-function makeLocalUid() {
-  return `lu_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+function invokeDeferredAction(actionName, set, get, args) {
+  return loadRuntime().then(module => (
+    module.invokeCustomContentRuntimeAction(actionName, set, get, args)
+  ));
 }
 
+/**
+ * These compatibility actions delegate to another registered mutation or
+ * perform a read/preview/export. They do not form new primitive mutation
+ * boundaries, so the operation census intentionally excludes them.
+ */
+const DEFERRED_DELEGATING_ACTIONS = Object.freeze([
+  'addCustomItem',
+  'updateCustomItem',
+  'deleteCustomItem',
+  'saveReviewedSupplyChain',
+  'removeReviewedSupplyChain',
+  'restoreCustomItem',
+  'rollbackCustomItem',
+  'getInstalledContentPackState',
+  'previewCustomContentEnvironmentMigration',
+  'migrateCustomContentEnvironment',
+  'resetCustomContentEnvironmentToVanilla',
+  'exportCustomContentArchive',
+]);
+
 export const createCustomContentSlice = (set, get) => {
-  // localId → Promise<cloudId|null>. add() round-trips to the cloud to mint the
-  // real uuid; an update/delete issued before that resolves must wait for the
-  // id instead of targeting the throwaway local id — otherwise the cloud op
-  // silently no-ops (the row has a different id) and the item resurrects on the
-  // next cloud load. The map is per-store (closed over here, not module-global)
-  // so concurrent stores in tests don't share pending state.
-  const pendingAdds = new Map();
+  const deferredDelegatingActions = Object.fromEntries(
+    DEFERRED_DELEGATING_ACTIONS.map(actionName => [
+      actionName,
+      (...args) => invokeDeferredAction(actionName, set, get, args),
+    ]),
+  );
 
   return {
-  // ── State ──────────────────────────────────────────────────────────────────
-  customContent: loadAll('anon'),
-  customContentLoading: false,
-  customContentError: null,
-  customContentSyncedAt: null,    // timestamp of last successful cloud load
+    customContent: loadAll('anon'),
+    customContentLoading: false,
+    customContentError: null,
+    customContentSyncedAt: null,
+    customContentLastCommandReceipt: null,
+    customContentArchived: emptyContent(),
+    customContentArchivedLoading: false,
+    customContentRevisionHistory: {},
+    activeContentEnvironment: VANILLA_CONTENT_ENVIRONMENT,
+    activeContentEnvironmentContent: emptyContent(),
+    customContentEnvironmentHistory: [],
+    customContentEnvironmentHydrated: false,
+    customContentEnvironmentError: null,
 
-  // ── Generic CRUD ──────────────────────────────────────────────────────────
-  // These run optimistically against local state and fire-and-forget the cloud
-  // sync when premium. UI surfaces errors via customContentError.
+    ...deferredDelegatingActions,
 
-  /** Add a custom item to a category.
-   *  ASYNC (de-eager lane): the axis-bearing buckets await the lazily-loaded
-   *  schema at the validation chokepoint; other buckets resolve immediately.
-   *  Resolves to the same values the old sync form returned — null when the
-   *  write was rejected by validation, undefined when the insert landed. */
-  addCustomItem: async (category, item) => {
-    // Schema validation for buckets that declare frozen enum axes. The deities
-    // bucket's axes mirror the 049/056 DB CHECK exactly — reject a bad axis here
-    // so it never reaches the cloud (where the CHECK would hard-reject it).
-    // Traditions (T-5): a name is required; a present motif must be a valid
-    // corpus key — the 155 category CHECK admits the bucket; the client
-    // validator is the field gate, as factions/deities are.
-    const validationError = await validationErrorsFor(category, item);
-    if (validationError != null) {
-      set(state => { state.customContentError = validationError; });
-      return null;
-    }
-    // Optimistic local insert
-    const entry = {
-      ...item,
-      id: makeId(category.slice(0, 4)),
-      // Stable cross-cloud reference id — never reassigned. Preserved if the
-      // caller already supplied one (unlikely outside of test fixtures).
-      localUid: item?.localUid || makeLocalUid(),
-      isCustom: true,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    set(state => {
-      // Guard an unknown category (typo / cloud row with an unexpected bucket /
-      // a UI bucket added before EMPTY): without this the bucket is undefined and
-      // .unshift throws INSIDE the producer, aborting the action. Mirror EMPTY.
-      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
-      state.customContent[category].unshift(entry);
-      localWrite(state.customContent, ownerIdFromState(state));
-    });
-    // Cloud write (premium / elevated only)
-    if (get().canUseCustomContent?.() && customContentService.isConfigured) {
-      const localId = entry.id;
-      const addPromise = customContentService.add(category, entry).then(saved => {
-        // Adopt the cloud id + server timestamps but PRESERVE any field edits
-        // made locally while add() was in flight (an updateCustomItem chained
-        // on this promise pushes those to the cloud). A wholesale replace with
-        // `saved` would clobber them, both locally and on the chained update.
-        set(state => {
-          const idx = state.customContent[category].findIndex(x => x.id === localId);
-          if (idx !== -1) {
-            const local = state.customContent[category][idx];
-            state.customContent[category][idx] = {
-              ...local,
-              id: saved.id,
-              createdAt: saved.createdAt ?? local.createdAt,
-              updatedAt: saved.updatedAt ?? local.updatedAt,
-            };
-            localWrite(state.customContent, ownerIdFromState(state));
-          }
-        });
-        return saved.id;
-      }).catch(err => {
-        console.error('customContent.add failed:', err);
-        set(state => { state.customContentError = err.message; });
-        return null;
-      }).finally(() => {
-        pendingAdds.delete(localId);
+    // Keep primitive mutation boundaries explicit in this facade. Besides
+    // making the public surface readable, the structural operation census can
+    // still prove that every deferred writer is registered after its heavy
+    // implementation moves behind import().
+    applyCustomContentCommand: (...args) => (
+      invokeDeferredAction('applyCustomContentCommand', set, get, args)
+    ),
+    applyReviewedSupplyChainCommand: (...args) => (
+      invokeDeferredAction(
+        'applyReviewedSupplyChainCommand',
+        set,
+        get,
+        args,
+      )
+    ),
+    listCustomContentRevisions: (...args) => (
+      invokeDeferredAction('listCustomContentRevisions', set, get, args)
+    ),
+    loadArchivedCustomContent: (...args) => (
+      invokeDeferredAction('loadArchivedCustomContent', set, get, args)
+    ),
+    rollbackCustomContentEnvironment: (...args) => (
+      invokeDeferredAction('rollbackCustomContentEnvironment', set, get, args)
+    ),
+    loadCustomContentEnvironments: (...args) => (
+      invokeDeferredAction('loadCustomContentEnvironments', set, get, args)
+    ),
+    importCustomContentArchive: (...args) => (
+      invokeDeferredAction('importCustomContentArchive', set, get, args)
+    ),
+    migrateLocalCustomContentToCloud: (...args) => (
+      invokeDeferredAction('migrateLocalCustomContentToCloud', set, get, args)
+    ),
+    loadCustomContentFromCloud: (...args) => (
+      invokeDeferredAction('loadCustomContentFromCloud', set, get, args)
+    ),
+
+    getActiveCustomContentRuntime: () => {
+      const state = get();
+      const environment = state.activeContentEnvironment
+        || VANILLA_CONTENT_ENVIRONMENT;
+      const vanilla = environment.environmentRevisionId
+        === VANILLA_ENVIRONMENT_REVISION_ID;
+      return Object.freeze({
+        schemaVersion: CONTENT_ENVIRONMENT_SCHEMA_VERSION,
+        environment,
+        customContent: vanilla
+          ? emptyContent()
+          : state.activeContentEnvironmentContent || emptyContent(),
+        tunables: environment.tunables || {},
+        visualSelection: environment.visualSelection || {},
+        resolution: Object.freeze({
+          ok: true,
+          mode: vanilla ? 'vanilla' : 'reviewed',
+          reason: null,
+          failures: Object.freeze([]),
+        }),
       });
-      pendingAdds.set(localId, addPromise);
-    }
-  },
+    },
 
-  /** Update a custom item.
-   *  ASYNC (de-eager lane): same chokepoint contract as addCustomItem —
-   *  resolves null when the merged result fails validation, else applies. */
-  updateCustomItem: async (category, id, partial) => {
-    // Validate the merged result for axis-bearing buckets so an edit can't demote
-    // a valid deity to a bad axis (which the cloud CHECK would reject). The merge
-    // target is read at call time; the apply below re-finds the row by id, so a
-    // row deleted during the schema await simply no-ops (idx === -1), exactly as
-    // an unknown id always has.
-    const existing = (category === 'deities' || category === 'traditions')
-      ? (get().customContent[category] || []).find(x => x.id === id) || {}
-      : null;
-    const validationError = await validationErrorsFor(category, { ...existing, ...partial });
-    if (validationError != null) {
-      set(state => { state.customContentError = validationError; });
-      return null;
-    }
-    set(state => {
-      // Guard an unknown category so .findIndex doesn't throw on undefined.
-      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
-      const list = state.customContent[category];
-      const idx = list.findIndex(x => x.id === id);
-      if (idx !== -1) {
-        Object.assign(list[idx], partial, { updatedAt: new Date().toISOString() });
-        localWrite(state.customContent, ownerIdFromState(state));
-      }
-    });
-    if (!(get().canUseCustomContent?.() && customContentService.isConfigured)) return;
+    getCustomItems: category => get().customContent[category] || [],
 
-    const pending = pendingAdds.get(id);
-    if (pending) {
-      // add() hasn't resolved — chain on the real cloud id and send whatever
-      // the body looks like by then (the local id will have been swapped to
-      // the cloud id). If the row was deleted meanwhile, the delete chain owns
-      // removal, so skip.
-      pending.then(cloudId => {
-        if (!cloudId) return;
-        const latest = get().customContent[category].find(x => x.id === cloudId);
-        if (!latest) return;
-        return customContentService.update(cloudId, latest);
-      }).catch(err => {
-        console.error('customContent.update failed:', err);
-        set(state => { state.customContentError = err.message; });
-      });
-      return;
-    }
+    getCustomContentCount: () => Object.values(get().customContent)
+      .reduce((sum, items) => sum + (items?.length || 0), 0),
 
-    // Send the updated full item (cloud stores the whole jsonb body)
-    const updated = get().customContent[category].find(x => x.id === id);
-    if (updated) {
-      customContentService.update(id, updated).catch(err => {
-        console.error('customContent.update failed:', err);
-        set(state => { state.customContentError = err.message; });
-      });
-    }
-  },
-
-  /** Delete a custom item. */
-  deleteCustomItem: (category, id) => {
-    set(state => {
-      // Guard an unknown category so .filter doesn't throw on undefined.
-      if (!Array.isArray(state.customContent[category])) state.customContent[category] = [];
-      state.customContent[category] = state.customContent[category].filter(x => x.id !== id);
-      localWrite(state.customContent, ownerIdFromState(state));
-    });
-    if (!(get().canUseCustomContent?.() && customContentService.isConfigured)) return;
-
-    const pending = pendingAdds.get(id);
-    if (pending) {
-      // add() hasn't resolved — defer the cloud delete until it returns the
-      // real id, then delete THAT row. Deleting the local id would no-op and
-      // leave the freshly-added cloud row to resurrect on the next load.
-      pending.then(cloudId => {
-        if (!cloudId) return;
-        return customContentService.delete(cloudId);
-      }).catch(err => {
-        console.error('customContent.delete failed:', err);
-        set(state => { state.customContentError = err.message; });
-      });
-      return;
-    }
-
-    customContentService.delete(id).catch(err => {
-      console.error('customContent.delete failed:', err);
-      set(state => { state.customContentError = err.message; });
-    });
-  },
-
-  /** Get all items in a category. */
-  getCustomItems: (category) => {
-    return get().customContent[category] || [];
-  },
-
-  /** Count items across all categories. */
-  getCustomContentCount: () => {
-    const cc = get().customContent;
-    return Object.values(cc).reduce((sum, arr) => sum + (arr?.length || 0), 0);
-  },
-
-  // ── Cloud sync ─────────────────────────────────────────────────────────────
-
-  /**
-   * Hydrate customContent from the cloud (premium / elevated only).
-   * Call this after auth state resolves to a premium user.
-   */
-  loadCustomContentFromCloud: async () => {
-    if (!customContentService.isConfigured) return;
-    if (!get().canUseCustomContent?.()) return;
-    const ownerId = ownerIdFromState(get());
-    set(state => { state.customContentLoading = true; state.customContentError = null; });
-    try {
-      const grouped = await customContentService.list();
-      const merged = backfillLocalUids(migrateCustomContent({ ...EMPTY, ...grouped }));
-      if (ownerIdFromState(get()) !== ownerId) return;
+    clearCloudCustomContent: () => {
       set(state => {
-        state.customContent = merged;
+        state.customContent = loadAll();
         state.customContentLoading = false;
-        state.customContentSyncedAt = new Date().toISOString();
+        state.customContentSyncedAt = null;
+        state.customContentError = null;
+        state.customContentArchived = emptyContent();
+        state.customContentRevisionHistory = {};
+        state.activeContentEnvironment = VANILLA_CONTENT_ENVIRONMENT;
+        state.activeContentEnvironmentContent = emptyContent();
+        state.customContentEnvironmentHistory = [];
+        state.customContentEnvironmentHydrated = false;
+        state.customContentEnvironmentError = null;
       });
-      // Force the generator's custom-content registry to re-read. The registry
-      // caches by a (count : latest-updatedAt) key, which can't detect a cloud
-      // sync that swaps items WITHOUT changing the count or bumping the latest
-      // updatedAt — the next generation would otherwise use a stale registry.
-      // Via the seam (de-eager): a no-op while the lazy registry module hasn't
-      // loaded — exact, because its FIRST build always reads the live source.
-      invalidateCustomDepsIfLoaded();
-      // Mirror to local for offline read-only access on this device
-      localWrite(get().customContent, ownerId);
-    } catch (err) {
-      console.error('loadCustomContentFromCloud failed:', err);
-      // Offline / cloud-unreachable: fall back to the owner-scoped local mirror
-      // written on a prior successful sync, so a signed-in user keeps their
-      // custom content offline instead of seeing nothing. Guard on the same
-      // owner; show the stale-but-available content with no error.
-      let restored = false;
-      try {
-        if (ownerIdFromState(get()) === ownerId) {
-          const mirror = localLoad(ownerId);
-          if (mirror && Object.keys(mirror).length > 0) {
-            const merged = backfillLocalUids(migrateCustomContent({ ...EMPTY, ...mirror }));
-            set(state => {
-              state.customContent = merged;
-              state.customContentLoading = false;
-              state.customContentError = null;
-            });
-            // Same wholesale-replace stale-key concern as the cloud path above.
-            invalidateCustomDepsIfLoaded();
-            restored = true;
-          }
-        }
-      } catch (mirrorErr) {
-        console.warn('custom-content local mirror restore failed:', mirrorErr);
-      }
-      if (!restored) {
-        set(state => {
-          state.customContentLoading = false;
-          state.customContentError = err.message;
+      // Resolution entries are owner-keyed and immutable. The deferred runtime
+      // clears its memo only if it was loaded; no eager import is needed.
+      runtimePromise
+        ?.then(module => {
+          module.clearCustomContentRuntimeCaches?.();
+        })
+        .catch(() => {
+          // The initiating action already owns/report its chunk-load failure.
+          // Account reset must remain synchronous and cannot create a second
+          // unhandled rejection while clearing optional runtime caches.
         });
-      }
-    }
-  },
-
-  /**
-   * Migrate localStorage items to the cloud once when a user upgrades to premium.
-   * Idempotent — checks the migrated flag first.
-   */
-  migrateLocalCustomContentToCloud: async () => {
-    if (!customContentService.isConfigured) return;
-    if (!get().canUseCustomContent?.()) return;
-    const ownerId = ownerIdFromState(get());
-    const flag = migrationFlag(ownerId);
-    if (localStorage.getItem(flag) === '1') return;
-
-    // Grandfathered custom content lives in the ANON bucket (created before sign-in);
-    // content authored while signed-in-but-pre-cloud lives in the owner bucket.
-    // Read both so grandfathered items actually reach the cloud.
-    const anonItems = flattenLocalContent('anon');
-    const ownerItems = ownerId === 'anon' ? [] : flattenLocalContent(ownerId);
-    const items = [...anonItems, ...ownerItems];
-    if (!items.length) {
-      localStorage.setItem(flag, '1');
-      return;
-    }
-
-    try {
-      if (customContentService.bulkInsert) {
-        const inserted = await customContentService.bulkInsert(items);
-        // Reload from cloud to get the canonical state (includes the new uuid ids)
-        await get().loadCustomContentFromCloud();
-        console.info(`Migrated ${inserted.length} custom items to the cloud.`);
-      } else {
-        // Service has no bulk method — fall back to per-item add
-        for (const { category, item } of items) {
-          await customContentService.add(category, item);
-        }
-        await get().loadCustomContentFromCloud();
-      }
-      localStorage.setItem(flag, '1');
-    } catch (err) {
-      console.error('migrateLocalCustomContentToCloud failed:', err);
-      set(state => { state.customContentError = err.message; });
-    }
-  },
-
-  /** Reset slice to local-only state on sign-out. */
-  clearCloudCustomContent: () => {
-    set(state => {
-      state.customContent = loadAll();
-      state.customContentLoading = false;
-      state.customContentSyncedAt = null;
-      state.customContentError = null;
-    });
-  },
+    },
   };
 };
