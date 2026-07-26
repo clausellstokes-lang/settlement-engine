@@ -3,6 +3,10 @@
 // the strings the World Pulse cards read. No JSX, no state — pure functions and
 // the small constant Sets the panel filters stressors against.
 import { formatCount } from '../../domain/formatNumber.js';
+import {
+  humanizeToken,
+  settlementSizeLabel,
+} from '../../domain/display/humanizeEngineTokens.js';
 
 export function percent(value) {
   return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
@@ -93,33 +97,47 @@ export function involvedEntities(item = {}, nameById = new Map()) {
 export function proposalDetails(outcome = {}) {
   const payload = outcome.proposalPayload || {};
   if (payload.kind === 'tier_change') {
-    return [`${human(payload.fromTier)} -> ${human(payload.toTier)}`, human(payload.direction)];
+    return [
+      `Size ${settlementSizeLabel(payload.fromTier, 'unknown')} → ${settlementSizeLabel(payload.toTier, 'unknown')}`,
+      humanizeToken(payload.direction),
+    ].filter(Boolean);
   }
   if (payload.kind === 'relationship_label_change') {
-    return [`${human(payload.fromType)} -> ${human(payload.toType)}`, human(outcome.ruleId || outcome.ruleFamily)];
+    return [`${humanizeToken(payload.fromType)} → ${humanizeToken(payload.toType)}`];
   }
   if (payload.kind === 'npc_action') {
     return [
-      human(payload.actionFamily),
-      payload.dotRankBefore && payload.dotRankAfter ? `${payload.dotRankBefore} dot -> ${payload.dotRankAfter} dot` : human(payload.roleArchetype),
+      humanizeToken(payload.actionFamily),
+      payload.dotRankBefore && payload.dotRankAfter
+        ? `${payload.dotRankBefore} dot → ${payload.dotRankAfter} dot`
+        : humanizeToken(payload.roleArchetype),
     ].filter(Boolean);
   }
   if (payload.kind === 'government_change') {
-    return [human(payload.governmentPreference), human(payload.legitimacyBand), 'preserve institutions'];
+    return [
+      humanizeToken(payload.governmentPreference),
+      humanizeToken(payload.legitimacyBand),
+      'preserve institutions',
+    ];
   }
   if (payload.kind === 'institution_suppression' || payload.kind === 'institution_capture') {
-    return [human(payload.kind), payload.institutionName].filter(Boolean);
+    return [humanizeToken(payload.kind), payload.institutionName].filter(Boolean);
   }
   if (payload.kind === 'faction_power_shift') {
-    return [human(payload.kind), human(payload.cause)].filter(Boolean);
+    return [humanizeToken(payload.kind), humanizeToken(payload.cause)].filter(Boolean);
   }
-  return [human(outcome.ruleFamily), human(outcome.ruleId)].filter(Boolean).slice(0, 2);
+  // ruleFamily/ruleId are implementation addresses, not reader facts. When a
+  // proposal carries no typed display payload, the card's authored headline and
+  // summary remain the honest detail rather than laundering an internal id.
+  return [];
 }
 
 export function outcomeDetails(outcome = {}, nameById = new Map()) {
   const details = [...proposalDetails(outcome)];
   if (outcome.tierChange) {
-    details.push(`${human(outcome.tierChange.fromTier)} -> ${human(outcome.tierChange.toTier)}`);
+    details.push(
+      `Size ${settlementSizeLabel(outcome.tierChange.fromTier, 'unknown')} → ${settlementSizeLabel(outcome.tierChange.toTier, 'unknown')}`,
+    );
   }
   if (outcome.populationDeltas?.length) {
     details.push(...outcome.populationDeltas.slice(0, 3).map(delta => `${nameById.get(String(delta.saveId)) || 'Settlement'}: ${signedNumber(delta.delta)}`));

@@ -23,6 +23,7 @@ import { Pill } from './WorldPulsePrimitives.jsx';
 import { IconButton } from './IconButton.jsx';
 import CauseWalkPanel from './CauseWalkPanel.jsx';
 import { headlineSlotsOf } from './heraldGrammar.js';
+import { severityBand } from './heraldFilter.js';
 
 /** The non-canonical provenance chip; canon/derived stay silent (the spec's rule). */
 function ProvenanceChip({ provenance }) {
@@ -41,6 +42,7 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
   const [open, setOpen] = useState(false);
   const slots = headlineSlotsOf(item);
   const major = item.major;
+  const severityLabel = severityBand(item);
   const canTrace = !!(worldState && item.rootId);
   const nameFor = (id) => nameById?.get(String(id)) || String(id);
 
@@ -66,6 +68,9 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
           {slots.glance}
         </span>
         <ProvenanceChip provenance={slots.provenance} />
+        <Pill tone={severityLabel === 'critical' ? 'major' : 'neutral'}>
+          {severityLabel}
+        </Pill>
       </div>
 
       {/* AFFECTED · REASON — the settlements touched, then the recorded reason behind
@@ -86,7 +91,7 @@ export default function HeraldHeadline({ item, worldState, nameById, nested = fa
       {/* THE ARTICLE — click to trace the recorded cause chain off this item's rootId. */}
       {canTrace && (
         <div>
-          <IconButton onClick={() => setOpen(o => !o)} aria-expanded={open} size="sm" title="Trace the recorded causes">
+          <IconButton onClick={() => setOpen(o => !o)} aria-expanded={open} size="sm">
             {open ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
             {open ? 'Hide the causes' : 'Trace the causes'}
           </IconButton>

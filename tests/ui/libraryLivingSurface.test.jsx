@@ -15,7 +15,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, cleanup, renderHook, act } from '@testing-library/react';
+import { render, screen, cleanup, renderHook, act, fireEvent } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -107,6 +107,56 @@ describe('useLibraryBulkSelect — canonize gates to active drafts', () => {
     // clear() ran after the bulk op.
     expect(result.current.selectedIds.size).toBe(0);
   });
+
+  test('bulk re-home preflights every selected id and refuses without a partial move', async () => {
+    const { useLibraryBulkSelect } = await import('../../src/hooks/useLibraryBulkSelect.js');
+    const addToCampaign = vi.fn();
+    const getCampaignMembershipBlock = vi.fn((_campaignId, saveId) =>
+      saveId === 'busy' ? { ok: false, reason: 'advance_in_flight' } : null);
+    const { result } = renderHook(() => useLibraryBulkSelect({
+      saves: [{ id: 'safe' }, { id: 'busy' }],
+      addToCampaign,
+      canonizeSavedSettlement: vi.fn(),
+      bulkDeleteConfirmed: vi.fn(),
+      getCampaignMembershipBlock,
+      isActive: () => true,
+      isDraft: () => true,
+    }));
+    act(() => {
+      result.current.toggleSelect('safe');
+      result.current.toggleSelect('busy');
+    });
+
+    let refusal;
+    act(() => {
+      refusal = result.current.addToCampaignBulk('camp-1');
+    });
+    expect(refusal).toEqual({ ok: false, reason: 'advance_in_flight' });
+    expect(addToCampaign).not.toHaveBeenCalled();
+    expect(result.current.selectedIds.size).toBe(2);
+  });
+
+  test('selection keys normalize numeric save ids at the hook boundary', async () => {
+    const { useLibraryBulkSelect } = await import('../../src/hooks/useLibraryBulkSelect.js');
+    const canonizeSavedSettlement = vi.fn();
+    const { result } = renderHook(() => useLibraryBulkSelect({
+      saves: [{ id: 7 }],
+      addToCampaign: vi.fn(),
+      canonizeSavedSettlement,
+      bulkDeleteConfirmed: vi.fn(),
+      isActive: () => true,
+      isDraft: () => true,
+    }));
+
+    act(() => {
+      result.current.toggleSelect(7);
+    });
+    expect([...result.current.selectedIds]).toEqual(['7']);
+    act(() => {
+      result.current.canonizeBulk();
+    });
+    expect(canonizeSavedSettlement).toHaveBeenCalledWith('7');
+  });
 });
 
 describe('BulkActionBar — free tier hides the campaign actions', () => {
@@ -133,6 +183,14 @@ describe('BulkActionBar — free tier hides the campaign actions', () => {
     render(<BulkActionBar bulk={makeBulk()} campaigns={[{ id: 'c1', name: 'Reach' }]} canManageCampaigns />);
     expect(screen.getByRole('button', { name: /add to campaign/i })).toBeTruthy();
     expect(screen.getByRole('button', { name: /canonize/i })).toBeTruthy();
+  });
+
+  test('a blocked bulk target is visibly disabled', async () => {
+    const BulkActionBar = (await import('../../src/components/settlements/BulkActionBar.jsx')).default;
+    const bulk = { ...makeBulk(), getAddToCampaignBlock: () => ({ reason: 'advance_in_flight' }) };
+    render(<BulkActionBar bulk={bulk} campaigns={[{ id: 'c1', name: 'Reach' }]} canManageCampaigns />);
+    fireEvent.click(screen.getByRole('button', { name: /add to campaign/i }));
+    expect(screen.getByRole('menuitem', { name: /Reach/i }).disabled).toBe(true);
   });
 });
 

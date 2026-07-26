@@ -78,7 +78,8 @@ const BASE_CFG = {
 
 // Probed shapes, shared with the sibling harnesses: ec-rt-1 rolls NO
 // stressors and NO activeConditions (eventConditions.test.js); re-rt-1
-// rolls river_fish open and defended_pass depleted (resourceEdits.test.js).
+// rolls [marshlands, ancient_grove, coal_deposits, hunting_grounds] with
+// marshlands open and ancient_grove depleted (resourceEdits.test.js).
 const SEED = 'ec-rt-1';
 const RESOURCE_SEED = 're-rt-1';
 
@@ -276,14 +277,14 @@ describe('join: undo of RESOLVE_STRESSOR un-eases — the resolution is taken ba
 describe('join: undo restores the provenance-free records from the log-entry snapshot', () => {
   test('DEPLETE_RESOURCE → undo: the resourceEdits record and the live depletion both revert', () => {
     const before = gen(BASE_CFG, RESOURCE_SEED);
-    expect(before.config.nearbyResources).toContain('river_fish');
-    expect(before.config.nearbyResourcesDepleted).not.toContain('river_fish');
+    expect(before.config.nearbyResources).toContain('marshlands');
+    expect(before.config.nearbyResourcesDepleted).not.toContain('marshlands');
     const store = bootCanonStore(before);
 
-    store.getState().applyEvent(ev('DEPLETE_RESOURCE', { id: 'ev-deplete', targetId: 'river_fish' }));
+    store.getState().applyEvent(ev('DEPLETE_RESOURCE', { id: 'ev-deplete', targetId: 'marshlands' }));
     const depleted = store.getState().settlement;
-    expect(depleted.config.resourceEdits.depleted).toEqual(['river_fish']);
-    expect(depleted.config.nearbyResourcesDepleted).toContain('river_fish');
+    expect(depleted.config.resourceEdits.depleted).toEqual(['marshlands']);
+    expect(depleted.config.nearbyResourcesDepleted).toContain('marshlands');
 
     store.getState().undoLastEvent();
     const undone = store.getState().settlement;
@@ -296,26 +297,33 @@ describe('join: undo restores the provenance-free records from the log-entry sna
     expect(undone.config.nearbyResourcesDepleted).toEqual(before.config.nearbyResourcesDepleted);
 
     const s2 = gen(buildNextConfig(undone), RESOURCE_SEED);
-    expect(s2.config.nearbyResourcesDepleted).not.toContain('river_fish');
+    expect(s2.config.nearbyResourcesDepleted).not.toContain('marshlands');
   });
 
   test('RECOVERED_RESOURCE → undo: the generator’s own rolled depletion comes back', () => {
     const before = gen(BASE_CFG, RESOURCE_SEED);
-    // defended_pass was rolled depleted by the generator itself.
-    expect(before.config.nearbyResourcesDepleted).toContain('defended_pass');
+    // Resource-semantics expansion intentionally changed which canonical
+    // resource owns this draw. The contract is provenance, not a particular
+    // resource key: recover one generator-depleted resource and undo it.
+    const depletedResource = before.config.nearbyResourcesDepleted?.[0];
+    expect(depletedResource).toBeTruthy();
     const store = bootCanonStore(before);
 
-    store.getState().applyEvent(ev('RECOVERED_RESOURCE', { id: 'ev-recover', targetId: 'defended_pass' }));
-    expect(store.getState().settlement.config.nearbyResourcesDepleted).not.toContain('defended_pass');
+    store.getState().applyEvent(ev('RECOVERED_RESOURCE', {
+      id: 'ev-recover',
+      targetId: depletedResource,
+    }));
+    expect(store.getState().settlement.config.nearbyResourcesDepleted)
+      .not.toContain(depletedResource);
 
     store.getState().undoLastEvent();
     const undone = store.getState().settlement;
-    expect(undone.config.nearbyResourcesDepleted).toContain('defended_pass');
+    expect(undone.config.nearbyResourcesDepleted).toContain(depletedResource);
     expect(undone.config.resourceEdits).toEqual(before.config.resourceEdits);
     // Without the recovered record, the same-seed regen re-rolls the
     // original depletion — exactly the pre-event world.
     const s2 = gen(buildNextConfig(undone), RESOURCE_SEED);
-    expect(s2.config.nearbyResourcesDepleted).toContain('defended_pass');
+    expect(s2.config.nearbyResourcesDepleted).toContain(depletedResource);
   });
 
   test('REMOVE_TRADE_GOOD → undo: the suppression entry and the live strip both revert', () => {

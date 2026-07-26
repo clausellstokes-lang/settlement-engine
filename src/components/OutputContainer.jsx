@@ -27,6 +27,7 @@ import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
 import { useCrossSettlementFocus } from './dossier/useCrossSettlementFocus.js';
 import { RealmEntityContext } from './map/RealmEntityContext.jsx';
 import { useRealmEntityNav } from './map/useRealmEntityNav.js';
+import SettlementWorkbenchMount from './dossier/SettlementWorkbenchMount.jsx';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -192,7 +193,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null, 
   return feed;
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapWorldState = null, mapRegionalGraph = null, mapCanEdit = false }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null, mapWorldState = null, mapRegionalGraph = null, mapCanEdit = false, canAuthorNpc = false }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -407,7 +408,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     const arr = liveSaveEntry?.aiData?.pinnedNpcs;
     return Array.isArray(arr) ? new Set(arr.map(String)) : new Set();
   }, [liveSaveEntry?.aiData?.pinnedNpcs]);
-  const onTogglePin = (!readOnly && saveId) ? ((npcId) => {
+  const onTogglePin = (!readOnly && !playerView && saveId) ? ((npcId) => {
     const key = String(npcId);
     if (pinnedIds.has(key)) unpinNpc(saveId, key);
     else pinNpc(saveId, key);
@@ -434,6 +435,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // is stripped from the payload unless the owner opted into shareDm, so this can
   // never reveal more than is already shared.
   const publicDossier = readOnly && !saveId;
+  // NPC authoring is an explicit owner capability supplied by SettlementDetail,
+  // not an inference from the process-wide editMode flag. Intersect it again
+  // with this surface's identity so a stale flag or an accidentally permissive
+  // caller cannot expose writers in a public/player projection.
+  const npcAuthoringAllowed = !publicDossier && !playerView && (!readOnly || (canAuthorNpc && saveId != null));
   const compassSource = hasCompass(aiSettlement)
     ? aiSettlement
     : (publicDossier && hasCompass(rawSettlement) ? rawSettlement : null);
@@ -686,7 +692,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // worldState / regionalGraph arrive as props: the wizard draft passes none
       // (view-only base map — the dormancy law), the saved view threads the owner's
       // edit gate + season/siege seam. Covered by the outer Suspense in the render.
-      case 'map':        return <SettlementMapPane settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} />;
+      case 'map':        return <SettlementMapPane settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} audience={playerView ? 'player' : 'dm'} />;
       case 'magic':      return <MagicTab settlement={s} />;
       // War & Faith — OUR gated FaithSection + a war half from OUR light
       // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,
@@ -698,7 +704,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // public dossier — the includeGroundTruth convention).
       case 'rumors':     return <RumorsTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
-      case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
+      case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} narrativeNote={null}
+        onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
+        onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;
@@ -859,10 +867,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         )}
         {/* P106 / E-2 — Pending changes bar + cascade preview. Self-gates
             inside; renders nothing when no edits are queued. */}
-        {!readOnly && (
-          <Suspense fallback={null}>
-            <PendingChangesBar />
-          </Suspense>
+        {!flag('settlementWorkbench') && !publicDossier && !playerView && (
+          <Suspense fallback={null}><PendingChangesBar /></Suspense>
         )}
         {/* P130 / O-2 — First-dossier teaching callouts now render INSIDE the
             Summary tab (the DM summary), not as a banner above every tab — see
@@ -988,6 +994,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>
+      <SettlementWorkbenchMount enabled={flag('settlementWorkbench') && !publicDossier && !playerView}
+        readOnly={readOnly && (!mapCanEdit || !npcAuthoringAllowed)} />
       {/* P142 / D-6 — Table View overlay. Rendered as a sibling of the dossier
           card so it takes over the full viewport. Gated on flag + the
           tableViewOpen pref so the lazy chunk only loads when actually opened. */}

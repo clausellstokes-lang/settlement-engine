@@ -23,7 +23,7 @@ import {
 } from './EventComposerConstants.js';
 
 export function EventComposerTargetField({
-  type, target, setTarget, spec, settlement,
+  type, target, setTarget, setDesc, spec, settlement,
   setAddCategory, setStressorPick, stressorPick,
   setCustomResourceName, customResourceName,
   setSwapWithNpcId, swapWithNpcId,
@@ -94,9 +94,20 @@ export function EventComposerTargetField({
     );
   }
   if (type === 'ADD_FACTION') {
+    // Picking a CUSTOM faction prefills the editable Description with its
+    // authored compendium description — that is the only channel by which the
+    // authored text reaches the created faction (event.description →
+    // addFaction → faction.description). Built-in picks leave Description
+    // alone (descriptors carry no prose, and the DM may have typed their own).
+    const pickFaction = (name) => {
+      setTarget(name);
+      const custom = factionGroups.find(g => g.category === 'custom')
+        ?.options.find(o => o.name === name);
+      if (custom?.description) setDesc(custom.description);
+    };
     return (
       <Field label="Faction" hint="Choose a faction that isn't here yet">
-        <select value={target} onChange={e => setTarget(e.target.value)} style={selectStyle}>
+        <select value={target} onChange={e => pickFaction(e.target.value)} aria-label="Faction" style={selectStyle}>
           <option value="">Select a faction</option>
           {factionGroups.map(g => (
             <optgroup key={g.category} label={g.label}>
@@ -106,7 +117,7 @@ export function EventComposerTargetField({
         </select>
         {factionGroups.length === 0 && (
           <span style={{ fontSize: FS.xxs, fontStyle: 'italic', color: MUTED, opacity: 0.8 }}>
-            Every catalogued faction is already present. Name a new one in Description.
+            Every catalogued faction is already present. Author a new one in your Compendium and it appears here.
           </span>
         )}
       </Field>

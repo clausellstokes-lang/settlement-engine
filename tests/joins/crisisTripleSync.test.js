@@ -572,6 +572,11 @@ const ENTRY_WRITERS = Object.freeze([
 const STRESSOR_EDITS_FILES = Object.freeze([
   'domain/crisisLifecycle.js',             // the ONLY writer (onset record / resolve suppression)
   'domain/events/undoEvent.js',            // pre-event snapshot restore (logEntry.undo)
+  // The coherence receipt reconstructs the AUTHORED stress intent so it can
+  // certify that generation preserved it. It reads `added`/`resolved` exactly
+  // as the two generator consumers below do, and writes nothing — verified by
+  // scanning the file for `stressorEdits` assignment/property-literal forms.
+  'generators/generationReceiptJudgments.js', // authored-intent certification (consumer)
   'generators/steps/resolveStress.js',     // the regeneration overlay (consumer)
   'generators/steps/stressConfirmPass.js', // forced-set guard (consumer)
 ]);

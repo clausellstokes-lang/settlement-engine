@@ -6,21 +6,38 @@ SettlementForge embeds a fork of [Azgaar's Fantasy Map Generator](https://github
 
 | Side | File | Role |
 |---|---|---|
-| Parent (app) | `src/lib/mapBridge.js` | `createMapBridge(getIframe)` — typed RPC client. Every command returns a Promise; commands issued before the iframe is ready are queued and drained in order. Push events fan out through a small emitter (`bridge.on(...)`). |
-| Child (iframe) | `public/map/sf-bridge.js` | Runs inside the forked FMG page. Overrides generation to geography-only, and handles the `settlementEngine:*` command surface. |
+| Runtime config | `src/lib/mapRuntimeConfig.js` | Resolves the iframe URL, exact map origin, cache revision, and parent-origin handshake. Production is pinned to the CSP-approved separate origin. |
+| Parent (app) | `src/lib/mapBridge.js` | `createMapBridge(getIframe, { targetOrigin })` — typed RPC client. Every command returns a Promise; commands issued before the iframe is ready are queued and drained in order. Push events fan out through a small emitter (`bridge.on(...)`). |
+| Child origin | `public/map/sf-origin.js` | Resolves the explicit `parentOrigin` once and owns every child → parent send target. Missing configuration fails closed off loopback. |
+| Child RPC | `public/map/sf-bridge.js` | Runs inside the forked FMG page. Overrides generation to geography-only, and handles the `settlementEngine:*` command surface. |
 
-The forked FMG (`public/map/*`) is served from **the same origin** as the app, under `/map/`. `src/components/WorldMap.jsx` mounts the iframe and holds the bridge instance.
+Production serves the fork at
+`https://map.settlementforge.com/map/index.html`. The app-host `/map/*` paths
+redirect there, so the fork's relaxed script surface cannot execute with the
+app origin's Supabase session. Local Vite development may still use the
+same-origin `/map/` copy on loopback.
 
-## Same-origin, validated messaging
+## Separate-origin, source-validated messaging
 
-Because `/map/` is same-origin and holds the Supabase auth token, and because the command surface is destructive (`resetMap`, `loadSnapshot`, `clearAllPlacements`, terrain edits), **both** ends validate every message on two axes and never use a `'*'` target:
+The command surface is destructive (`resetMap`, `loadSnapshot`,
+`clearAllPlacements`, terrain edits), so **both** ends validate every message on
+two axes and never use a `'*'` target:
 
-- **Parent** (`mapBridge.js`): ignores any message whose `event.origin !== window.location.origin`, and any whose `event.source` is not the iframe it created. Sends with `iframe.contentWindow.postMessage(msg, window.location.origin)`.
-- **Child** (`sf-bridge.js`): ignores any `settlementEngine:*` message whose `event.origin !== window.location.origin` or whose `event.source !== window.parent`. Replies with `window.parent.postMessage(msg, window.location.origin)`.
+- **Parent** (`mapBridge.js`): ignores any message whose `event.origin` is not
+  the runtime-configured map origin, or whose `event.source` is not the iframe
+  it created. It sends only to that exact map origin.
+- **Child** (`sf-origin.js` + `sf-bridge.js`): ignores any
+  `settlementEngine:*` message whose `event.origin` is not the explicit
+  `parentOrigin`, or whose `event.source !== window.parent`. Replies use the
+  same closed-over parent origin.
 
 Every command carries an opaque `_rid` (request id); replies echo it, errors come back as `{ _rid, _error }`, and push events carry no `_rid`.
 
-> Do **not** relax framing headers to allow cross-origin embedding. Serving the map same-origin is what makes the origin/source checks meaningful. In particular, never set `Content-Security-Policy: frame-ancestors *` or `X-Frame-Options: ALLOWALL` — that reopens the clickjacking / hostile-parent surface the checks above exist to close. Keep `frame-ancestors 'self'`.
+> Do not use `frame-ancestors *` or a wildcard postMessage target. The map
+> policy lists only the two production app origins.
+> `X-Frame-Options` is intentionally absent from map responses because
+> `SAMEORIGIN` would contradict the cross-origin embed; enforced
+> `frame-ancestors` owns clickjacking protection there.
 
 ## Command surface (parent → iframe)
 

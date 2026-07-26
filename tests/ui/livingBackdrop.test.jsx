@@ -80,6 +80,22 @@ describe('THE LIVING BACKDROP — persistence round-trip (pane writes → hero r
     const expected = buildTownMapPanoramaSvg(model, { style: 'accessible', width: WASH_SIZE, height: WASH_SIZE });
     expect(decodedSvg(img)).toBe(expected);
   });
+
+  test('a remembered 3D portrait uses the deterministic panorama wash, never WebGL', () => {
+    const fx = drawable();
+    writeLastMapView(SAVE_ID, { view: 'portrait3d', lens: 'illustrated' });
+    const { container } = render(<SettlementDossierBackdrop settlement={fx} saveId={SAVE_ID} />);
+    const img = container.querySelector('img');
+    const model = buildTownMapModel(fx, readMapEdits(fx));
+    const expected = buildTownMapPanoramaSvg(model, {
+      style: 'illustrated',
+      width: WASH_SIZE,
+      height: WASH_SIZE,
+    });
+
+    expect(decodedSvg(img)).toBe(expected);
+    expect(container.querySelector('canvas')).toBeNull();
+  });
 });
 
 describe('THE LIVING BACKDROP — graceful degradation', () => {

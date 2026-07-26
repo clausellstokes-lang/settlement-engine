@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { MUTED as MUT, SECOND as SEC, BORDER as BOR, FS, swatch } from '../theme.js';
 import { useStore } from '../../store/index.js';
-import EntityPicker from '../EntityPicker.jsx';
+import EntityPicker, { missingReferenceLabel } from '../EntityPicker.jsx';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
 import { CUSTOM_CATEGORIES } from './customCategories.js';
 
@@ -79,7 +79,12 @@ export function DependencySummary({ deps, item }) {
     if (refIds.length === 0) return null;
     const entries = refIds.map(r => {
       const e = registry.resolve(r);
-      return { refId: r, name: e?.name || '(missing)', missing: !e, source: e?.source };
+      return {
+        refId: r,
+        name: e?.name || missingReferenceLabel(r),
+        missing: !e,
+        source: e?.source,
+      };
     });
     return { dep, entries };
   }).filter(Boolean);
@@ -102,7 +107,7 @@ export function DependencySummary({ deps, item }) {
             {entries.map((e, i) => (
               <span
                 key={`${e.refId}-${i}`}
-                title={e.missing ? `Reference missing: ${e.refId}` : ''}
+                title={e.missing ? 'This linked item no longer exists.' : ''}
                 style={{
                   fontSize:FS.micro, fontWeight:700,
                   color: e.missing ? '#8b1a1a' : (e.source==='custom' ? '#7c3aed' : SEC),
@@ -122,7 +127,7 @@ export function DependencySummary({ deps, item }) {
           marginTop:4, fontSize:FS.xxs, color:swatch.danger,
           fontStyle:'italic',
         }}>
-          {totalMissing} dangling reference{totalMissing===1?'':'s'}. Edit this item to fix.
+          {totalMissing} linked item{totalMissing===1?' could':'s could'} not be found. Edit this item to repair the link{totalMissing===1?'':'s'}.
         </div>
       )}
       {reverseLinks.length > 0 && (

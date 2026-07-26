@@ -69,6 +69,9 @@ describe('WarFaithMapOverlay — glyphs', () => {
     });
     const { container } = render(<svg><WarFaithMapOverlay /></svg>);
     expect(container.querySelector('.sf-occupation')).toBeTruthy();
+    const title = container.querySelector('.sf-occupation title')?.textContent || '';
+    expect(title).toContain('since the spring of year 1');
+    expect(title).not.toMatch(/\btick\b/i);
   });
 
   test('a trade-war prize glyph appears on the contested buyer', () => {

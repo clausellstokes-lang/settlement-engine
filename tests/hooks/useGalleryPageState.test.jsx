@@ -18,14 +18,20 @@ const mocks = vi.hoisted(() => ({
     fetchPublicGallery: vi.fn(),
     fetchPublicDossier: vi.fn(),
     fetchMyGallery: vi.fn(),
+    fetchMyUnlistedDossiers: vi.fn(),
+    fetchFeaturedGallery: vi.fn(),
+    fetchUnlistedCampaign: vi.fn(),
     reportGalleryDossier: vi.fn(),
     toggleGalleryVote: vi.fn(),
+    toggleGalleryReaction: vi.fn(),
   },
   saves: { list: vi.fn() },
   nav: { navigate: vi.fn() },
   storeState: {
     auth: { user: { id: 'user-1' } },
     savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: 'user-1',
+    savedSettlementsHydrationGeneration: 0,
     setSavedSettlements: vi.fn(),
   },
 }));
@@ -34,7 +40,10 @@ vi.mock('../../src/lib/gallery.js', () => mocks.gallery);
 vi.mock('../../src/lib/saves.js', () => ({ saves: mocks.saves }));
 vi.mock('../../src/hooks/useRoute.js', () => mocks.nav);
 vi.mock('../../src/store/index.js', () => ({
-  useStore: selector => selector(mocks.storeState),
+  useStore: Object.assign(
+    selector => selector(mocks.storeState),
+    { getState: () => mocks.storeState },
+  ),
 }));
 
 import { useGalleryPageState } from '../../src/hooks/useGalleryPageState.js';
@@ -43,6 +52,7 @@ beforeEach(() => {
   vi.useFakeTimers();
   mocks.gallery.fetchPublicGallery.mockResolvedValue({ items: [], total: 0, hasMore: false });
   mocks.gallery.fetchPublicDossier.mockResolvedValue({ id: 'd-1', slug: 'fen-hollow' });
+  mocks.gallery.fetchUnlistedCampaign.mockResolvedValue(null);
   mocks.gallery.fetchGalleryMap.mockResolvedValue(null);
 });
 
@@ -92,6 +102,26 @@ describe('useGalleryPageState — search debounce', () => {
 });
 
 describe('useGalleryPageState — card click does not double-fetch the dossier', () => {
+  test('an initial hard deep link fetches its dossier exactly once', async () => {
+    const dossier = { id: 'd-deep', slug: 'fen-hollow' };
+    mocks.gallery.fetchPublicDossier.mockResolvedValue(dossier);
+
+    const { result } = renderHook(() => useGalleryPageState('fen-hollow'));
+    expect(result.current.activeSlug).toBe('fen-hollow');
+    expect(result.current.dossierLoading).toBe(true);
+
+    await act(async () => {
+      await Promise.resolve();
+      await Promise.resolve();
+      await Promise.resolve();
+    });
+
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(1);
+    expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledWith('fen-hollow');
+    expect(result.current.dossier).toEqual(dossier);
+    expect(result.current.dossierLoading).toBe(false);
+  });
+
   test('openDossier + the route-sync rerender fetch the dossier exactly once', async () => {
     // A card click calls openDossier(slug) (fetch #1) and navigate(); the real
     // router then re-renders Gallery with routeSlug=slug, re-running the
@@ -129,6 +159,89 @@ describe('useGalleryPageState — card click does not double-fetch the dossier',
 
     expect(mocks.gallery.fetchPublicDossier).toHaveBeenCalledTimes(2);
     expect(mocks.gallery.fetchPublicDossier).toHaveBeenLastCalledWith('salt-marsh');
+  });
+
+  test('a stale success and finally cannot overwrite or unlock a newer request', async () => {
+    let resolveA;
+    let resolveB;
+    const pendingA = new Promise(resolve => {
+      resolveA = resolve;
+    });
+    const pendingB = new Promise(resolve => {
+      resolveB = resolve;
+    });
+    mocks.gallery.fetchPublicDossier.mockImplementation(slug =>
+      slug === 'fen-hollow' ? pendingA : pendingB);
+
+    const { result } = renderHook(() => useGalleryPageState());
+    let openA;
+    let openB;
+    act(() => {
+      openA = result.current.openDossier('fen-hollow');
+    });
+    act(() => {
+      openB = result.current.openDossier('salt-marsh');
+    });
+
+    await act(async () => {
+      resolveA({ id: 'd-a', slug: 'fen-hollow' });
+      await openA;
+    });
+
+    expect(result.current.activeSlug).toBe('salt-marsh');
+    expect(result.current.dossier).toBeNull();
+    expect(result.current.dossierLoading).toBe(true);
+
+    const dossierB = { id: 'd-b', slug: 'salt-marsh' };
+    await act(async () => {
+      resolveB(dossierB);
+      await openB;
+    });
+
+    expect(result.current.dossier).toEqual(dossierB);
+    expect(result.current.dossierError).toBeNull();
+    expect(result.current.dossierLoading).toBe(false);
+  });
+
+  test('a stale rejection and finally cannot error or unlock a newer request', async () => {
+    let rejectA;
+    let resolveB;
+    const pendingA = new Promise((_resolve, reject) => {
+      rejectA = reject;
+    });
+    const pendingB = new Promise(resolve => {
+      resolveB = resolve;
+    });
+    mocks.gallery.fetchPublicDossier.mockImplementation(slug =>
+      slug === 'fen-hollow' ? pendingA : pendingB);
+
+    const { result } = renderHook(() => useGalleryPageState());
+    let openA;
+    let openB;
+    act(() => {
+      openA = result.current.openDossier('fen-hollow');
+    });
+    act(() => {
+      openB = result.current.openDossier('salt-marsh');
+    });
+
+    await act(async () => {
+      rejectA(new Error('stale network failure'));
+      await openA;
+    });
+
+    expect(result.current.dossierError).toBeNull();
+    expect(result.current.dossierLoading).toBe(true);
+
+    const dossierB = { id: 'd-b', slug: 'salt-marsh' };
+    await act(async () => {
+      resolveB(dossierB);
+      await openB;
+    });
+
+    expect(result.current.dossier).toEqual(dossierB);
+    expect(result.current.dossierError).toBeNull();
+    expect(result.current.dossierLoading).toBe(false);
   });
 });
 

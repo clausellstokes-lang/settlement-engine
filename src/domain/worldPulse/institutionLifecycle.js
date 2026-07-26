@@ -37,6 +37,7 @@ import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
+import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
@@ -56,6 +57,10 @@ import { martialEmergenceTilt } from './moralInstitutionPressure.js';
 import { conquestProsperityFor } from './conquestFeeds.js';
 import { mercProsperityCostOf } from './mercenaryMarket.js';
 import { tollProsperityFor } from '../spatial/entrepots.js';
+import {
+  nativeLifecycleDepletedResources,
+  nativeLifecycleResourceList,
+} from './institutionLifecycleResourceRead.js';
 
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
 
@@ -150,23 +155,6 @@ function activeInstitutions(/** @type {any} */ settlement) {
   );
 }
 
-function resourceList(/** @type {any} */ settlement) {
-  return [
-    ...(settlement?.config?.nearbyResources || []),
-    ...(settlement?.nearbyResources || []),
-  ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
-}
-
-function depletedResources(/** @type {any} */ settlement) {
-  const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
-  const states = settlement?.config?.nearbyResourcesState || {};
-  for (const [key, state] of Object.entries(states)) {
-    if (state === 'depleted') depleted.add(key);
-    else depleted.delete(key);
-  }
-  return [...depleted];
-}
-
 function settlementTier(/** @type {any} */ settlement) {
   return TIER_ORDER.includes(settlement?.tier) ? settlement.tier : 'village';
 }
@@ -182,11 +170,11 @@ export function deriveLifecycleChains(/** @type {any} */ settlement) {
   const insts = activeInstitutions(settlement);
   return computeActiveChains(
     insts,
-    resourceList(settlement),
+    nativeLifecycleResourceList(settlement),
     tier,
     tradeAccess(settlement),
     [],
-    depletedResources(settlement),
+    nativeLifecycleDepletedResources(settlement),
     Number.isFinite(settlement?.config?.priorityMagic) ? settlement.config.priorityMagic : 50,
   );
 }
@@ -316,8 +304,10 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
   const underwaysFoundingLit = options && options.underwaysFoundingLit === true;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const existingNames = existingInstitutionNames(settlement);
-  const localResources = resourceList(settlement);
-  const depletedSet = new Set(depletedResources(settlement));
+  const localResources = nativeLifecycleResourceList(settlement);
+  const depletedSet = new Set(
+    nativeLifecycleDepletedResources(settlement),
+  );
   const tier = settlementTier(settlement);
   const affinityOf = /** @type {any} */ (INSTITUTION_LIFECYCLE_TUNING.gapAffinity);
   const found = new Map();
@@ -543,7 +533,7 @@ export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} *
   if (!inst || !inst.name) return false;
   if (inst.status === 'removed' || inst.status === 'destroyed' || inst._worldPulseInactive) return false;
   if (inst.required || inst.requiredForTier) return false;
-  if (inst.isCustom || inst.source === 'custom') return false;
+  if (isMaterializedCustomContent(inst)) return false;
   if (/criminal/i.test(String(inst.category || '')) || institutionHasTag(inst, TAG.CRIMINAL)) return false;
   const tags = Array.isArray(inst.tags) ? inst.tags : [];
   if (tags.includes('essential')) return false;
@@ -862,7 +852,14 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
   if (!settlement || !patch?.name) return settlement;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];
   const needle = String(patch.name).toLowerCase();
-  const index = institutions.findIndex((/** @type {any} */ inst) => String(inst?.name || '').toLowerCase() === needle);
+  // Lifecycle patches are built-in simulation actions. Current custom
+  // definitions are exact owners, not name aliases: a custom "Smelter" cannot
+  // block, receive, or be reopened by the native Smelter patch. Unstamped
+  // legacy rows intentionally retain the historical name-only behavior.
+  const index = institutions.findIndex((/** @type {any} */ inst) => (
+    !isMaterializedCustomContent(inst)
+    && String(inst?.name || '').toLowerCase() === needle
+  ));
 
   if (patch.action === 'build') {
     if (index >= 0) {

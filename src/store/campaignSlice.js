@@ -41,20 +41,22 @@ import { tableEventToNewsEntry } from '../domain/tableEvents.js';
 // can't ride into first paint via the barrel. ensureWorldState is a light,
 // synchronous default-shape helper used on read paths.
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
-import { saves as savesService } from '../lib/saves.js';
-import { scrubImportedConfig } from '../lib/importScrub.js';
+import {
+  legacyCampaignContentBinding,
+  normalizeCampaignContentBinding,
+} from './campaignContentBindingModel.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
-  mergeCampaignLists,
-  primeCampaignSync,
-  reconcileTombstones,
-  syncCampaignChanges,
-} from '../lib/campaignSync.js';
+  buildNewCampaign,
+  createImportedCampaignWithReceipt,
+} from './campaignImportedCreation.js';
 // WS4 decomposition — pure utils + persistence helpers extracted to a sibling.
 import {
-  cloneJson, campaignCacheOwner, localWrite, persistCampaignState,
+  cloneJson, campaignCacheOwner,
+  captureCampaignSession, isCurrentCampaignSession, localWrite, persistCampaignState,
   deletePersistedCampaignState,
-  clearCampaignSyncBookkeeping,
+  clearCampaignSyncBookkeeping, syncCampaignSnapshot,
+  initCampaignSessionReader, loadCampaignSyncTools,
   initPersistFailureReporter,
   retryOutboxPersist,
   newCampaignId, isUuid, uuidFromLegacyId, findActiveCampaign,
@@ -63,6 +65,169 @@ import { initOutboxStatusReporter, getStatus as outboxStatus } from './outbox.js
 import { track, EVENTS } from '../lib/analytics.js';
 
 const SCHEMA_VERSION = 2;
+let settlementDeletionLockSequence = 0;
+let campaignDeletionLockSequence = 0;
+
+/**
+ * @typedef {{
+ *   token: string,
+ *   campaignIds: Array<string|number>,
+ *   settlementIds: string[],
+ *   reason: string,
+ *   ownerId: string,
+ *   generation: number,
+ * }} CampaignMutationLock
+ */
+
+function idIn(ids, value) {
+  return (ids || []).some(id => String(id) === String(value));
+}
+
+function settlementMutationBlock(state, settlementIds, mutationToken = null) {
+  for (const settlementId of settlementIds || []) {
+    const locked = (state.campaignMutationLocks || []).find(
+      lock => lock.token !== mutationToken && idIn(lock.settlementIds, settlementId),
+    );
+    if (locked) {
+      return {
+        ok: false,
+        reason: locked.reason || 'settlement_deletion_in_flight',
+        settlementId,
+      };
+    }
+  }
+  return null;
+}
+
+function campaignMutationBlock(state, campaignIds, mutationToken = null) {
+  for (const campaignId of campaignIds || []) {
+    const inFlight = typeof state.isAdvanceInFlight === 'function'
+      ? state.isAdvanceInFlight(campaignId)
+      : idIn(state.advanceInFlight, campaignId);
+    if (inFlight) return { ok: false, reason: 'advance_in_flight', campaignId };
+    const campaign = (state.campaigns || []).find(c => isCampaignActive(c) && String(c.id) === String(campaignId));
+    const paused = typeof state.getPausedAdvance === 'function'
+      ? state.getPausedAdvance(campaignId)
+      : campaign?.worldState?.pausedAdvance;
+    if (paused) return { ok: false, reason: 'advance_paused', campaignId };
+    const locked = (state.campaignMutationLocks || []).find(
+      lock => lock.token !== mutationToken && idIn(lock.campaignIds, campaignId),
+    );
+    if (locked) {
+      return {
+        ok: false,
+        reason: locked.reason || 'settlement_deletion_in_flight',
+        campaignId,
+      };
+    }
+  }
+  return null;
+}
+
+function campaignsHoldingSettlements(state, settlementIds) {
+  const ids = new Set((Array.isArray(settlementIds) ? settlementIds : [settlementIds]).map(String));
+  return (state.campaigns || []).filter(c => {
+    if (!isCampaignActive(c)) return false;
+    const holdsMember = (c.settlementIds || []).some(id => ids.has(String(id)));
+    const holdsQueued = (c.worldState?.pendingEvents || []).some(event => ids.has(String(event.saveId)));
+    return holdsMember || holdsQueued;
+  }).map(c => c.id);
+}
+
+function membershipCampaignIds(state, targetCampaignId, settlementId) {
+  return [...new Set([targetCampaignId, ...campaignsHoldingSettlements(state, [settlementId])])];
+}
+
+function clearTransientCampaignWork(state) {
+  state.campaignMutationLocks = [];
+  state.advanceInFlight = [];
+  state.pulseUndoStack = [];
+}
+
+/**
+ * Build one complete campaign envelope before any persistence begins.
+ *
+ * Account import uses the optional initial state so its remapped settlement
+ * membership and immutable content cutoff are present on the first insert.
+ * Ordinary creation still receives the active account environment.
+ */
+/**
+ * Start a confirmed campaign delete without yielding between validation, session
+ * capture, and reservation.
+ *
+ * The remote/finalization body remains lazy, but its authority is immutable before
+ * import() begins. A same-id campaign loaded for a replacement owner can therefore
+ * never become the target of the older operation, and synchronous mutations see
+ * the deletion lock even while the cold module is still loading.
+ */
+function deleteCampaignWithConfirmedPersistence({
+  campaignId,
+  get,
+  set,
+}) {
+  const state = get();
+  const session = captureCampaignSession(state);
+  const campaign = (state.campaigns || []).find(
+    candidate => String(candidate?.id) === String(campaignId),
+  );
+  if (!campaign) {
+    return Promise.resolve({ ok: true, campaignId, alreadyAbsent: true });
+  }
+
+  const blocked = state.getCampaignMutationBlock?.(campaign.id);
+  if (blocked) {
+    return Promise.reject(Object.assign(
+      new Error('Wait for the current campaign operation to finish before deleting this campaign.'),
+      {
+        code: blocked.reason || 'campaign_mutation_in_flight',
+        campaignId: campaign.id,
+      },
+    ));
+  }
+
+  const token = `campaign-delete-${++campaignDeletionLockSequence}`;
+  set(draft => {
+    draft.campaignMutationLocks = [
+      ...(draft.campaignMutationLocks || []),
+      {
+        token,
+        campaignIds: [campaign.id],
+        settlementIds: [],
+        reason: 'campaign_deletion_in_flight',
+        ownerId: session.ownerId,
+        generation: session.generation,
+      },
+    ];
+  });
+  campaignService.reserveDelete?.(campaign.id, session.ownerId);
+
+  let remoteDeleted = false;
+  return import('./campaignDeletionSession.js')
+    .then(({ finishConfirmedCampaignDelete }) => (
+      finishConfirmedCampaignDelete({
+        campaign,
+        campaignService,
+        get,
+        markRemoteDeleted: () => {
+          remoteDeleted = true;
+        },
+        session,
+        set,
+      })
+    ))
+    .catch(error => {
+      if (!remoteDeleted) {
+        campaignService.releaseDelete?.(campaign.id, session.ownerId);
+      }
+      throw error;
+    })
+    .finally(() => {
+      set(draft => {
+        draft.campaignMutationLocks = (draft.campaignMutationLocks || [])
+          .filter(lock => lock.token !== token);
+      });
+    });
+}
 
 /**
  * Coarse, behavior-free analytics derivations for this slice. Each is a small
@@ -72,31 +237,25 @@ const SCHEMA_VERSION = 2;
  * track() itself never throws.
  */
 
-/**
- * Scheme guard for an imported backdrop image URL (ported master fix). Gallery
- * rows are untrusted shared input and the URL is later rendered as an SVG
- * <image href> (see MapOverlay.jsx), so only http(s) URLs may be stored — never
- * javascript:/data: or other schemes. Mirrors gallery.js's isSafePublicImageUrl
- * (kept local to avoid widening that module's surface for one consumer).
- */
-function isSafeBackdropUrl(value) {
-  if (!value) return false;
-  try {
-    const { protocol } = new URL(value);
-    return protocol === 'http:' || protocol === 'https:';
-  } catch {
-    return false;
-  }
-}
-
-function localLoad(ownerId = 'anon') {
-  return campaignService.loadCached(ownerId).map(migrateCampaign);
+function localLoad(ownerId = 'anon', inferredCustomContent = undefined) {
+  return campaignService.loadCached(ownerId)
+    .map(campaign => migrateCampaign(campaign, inferredCustomContent));
 }
 
 /** Migrate a single campaign object to the current schema.
  *  Exported for the correctness-1 regression pin (settlementIds normalization). */
-export function migrateCampaign(camp) {
+export function migrateCampaign(camp, inferredCustomContent = undefined) {
   if (!camp || typeof camp !== 'object') return camp;
+  // Array.prototype.map passes the numeric index as argument two. Treat only a
+  // real grouped-content object as an inference request so
+  // `.map(migrateCampaign)` remains a safe, longstanding public call pattern.
+  const inferenceSource = (
+    inferredCustomContent
+    && typeof inferredCustomContent === 'object'
+    && !Array.isArray(inferredCustomContent)
+  )
+    ? inferredCustomContent
+    : undefined;
   const next = { ...camp };
   // Remint a non-UUID legacy id DETERMINISTICALLY from the id itself, so the local
   // cache copy and the remote list copy of the same campaign converge on one id and
@@ -123,7 +282,7 @@ export function migrateCampaign(camp) {
   // ⇒ the deepened section stays DARK; an array ⇒ a flag delta lights it. A non-array
   // (absent/legacy) normalizes to null, so the R-16 path is dormant by default.
   next.flagsSeen = Array.isArray(next.flagsSeen) ? next.flagsSeen.map(String) : null;
-  return next;
+  return normalizeCampaignContentBinding(next, inferenceSource);
 }
 
 /** Migrate a single campaign mapState to v2 */
@@ -203,6 +362,7 @@ function migrateMapState(ms) {
 // Persistence/pure utils live in campaignSliceShared.js; pulse/state-application
 // helpers in campaignPulseHelpers.js.
 export const createCampaignSlice = (set, get) => {
+  initCampaignSessionReader(get);
   // Route module-scoped persist failures (in campaignSliceShared) into store
   // state so the UI can warn the user instead of silently losing a cloud save.
   initPersistFailureReporter(() => set(state => {
@@ -221,11 +381,15 @@ export const createCampaignSlice = (set, get) => {
   // ── State ──────────────────────────────────────────────────────────────────
   campaigns: [],
   campaignsLoaded: false,
+  /** Monotonic auth/cache boundary for every async campaign operation. */
+  campaignSessionGeneration: 0,
   /** The currently-loaded campaign id (null if none) — used by WorldMap */
   activeCampaignId: null,
   /** Set when a cloud save of campaign/save state fails; surfaced as a banner.
    *  null when the last persist succeeded (or was cleared by the user). */
   campaignSyncError: null,
+  /** Session-only locks held while settlement deletion awaits its cloud batch. */
+  campaignMutationLocks: [],
   /** Dismiss the cloud-sync warning banner. */
   clearCampaignSyncError: () => set(state => { state.campaignSyncError = null; }),
   /** Durable-outbox status for the sync chip: pending + parked op counts. */
@@ -238,21 +402,120 @@ export const createCampaignSlice = (set, get) => {
 
   // ── Actions ────────────────────────────────────────────────────────────────
 
+  isCampaignMutationLocked: (campaignId) =>
+    (get().campaignMutationLocks || []).some(lock => idIn(lock.campaignIds, campaignId)),
+
+  getCampaignMutationBlock: (campaignId, mutationToken = null) =>
+    campaignMutationBlock(get(), [campaignId], mutationToken),
+
+  getCampaignMembershipBlock: (campaignId, settlementId, mutationToken = null) => {
+    const state = get();
+    return settlementMutationBlock(state, [settlementId], mutationToken)
+      || campaignMutationBlock(
+        state,
+        membershipCampaignIds(state, campaignId, settlementId),
+        mutationToken,
+      );
+  },
+
+  getSettlementDeletionBlock: (settlementIds, mutationToken = null) => {
+    const state = get();
+    return settlementMutationBlock(
+      state,
+      Array.isArray(settlementIds) ? settlementIds : [settlementIds],
+      mutationToken,
+    ) || campaignMutationBlock(
+      state,
+      campaignsHoldingSettlements(state, settlementIds),
+      mutationToken,
+    );
+  },
+
+  /**
+   * Hold a session-scoped lock while a settlement delete persists.
+   *
+   * The lock covers every campaign that references the target through membership
+   * or queued events. It is installed before the first await and always released;
+   * a late completion may return its own result only while the captured campaign
+   * session remains current.
+   */
+  withSettlementDeletionLock: async (settlementIds, operation) => {
+    const state = get();
+    const session = captureCampaignSession(state);
+    const lockedSettlementIds = (
+      Array.isArray(settlementIds) ? settlementIds : [settlementIds]
+    ).filter(id => id != null).map(String);
+    const campaignIds = campaignsHoldingSettlements(state, settlementIds);
+    const blocked = settlementMutationBlock(state, lockedSettlementIds)
+      || campaignMutationBlock(state, campaignIds);
+    if (blocked) return blocked;
+    const token = `settlement-delete-${++settlementDeletionLockSequence}`;
+    set(draft => {
+      draft.campaignMutationLocks = [
+        ...(draft.campaignMutationLocks || []),
+        {
+          token,
+          campaignIds,
+          settlementIds: lockedSettlementIds,
+          reason: 'settlement_deletion_in_flight',
+          ownerId: session.ownerId,
+          generation: session.generation,
+        },
+      ];
+    });
+    try {
+      const result = await operation({ mutationToken: token, campaignIds, session });
+      if (!isCurrentCampaignSession(get(), session)) {
+        return { ok: false, reason: 'auth_session_changed' };
+      }
+      return result;
+    } finally {
+      set(draft => {
+        draft.campaignMutationLocks = (draft.campaignMutationLocks || [])
+          .filter(lock => lock.token !== token);
+      });
+    }
+  },
+
+  /**
+   * Execute one reviewed structured-import draft through the lazy application
+   * command plane. Validation, lock installation, and transaction imports all
+   * live behind this boundary so the existing-campaign tool does not increase
+   * the first-paint closure.
+   */
+  executeImportReconciliationDraft: (draft, options = {}) => import(
+    './importReconciliationCommandEntry.js'
+  ).then(({ executeImportReconciliationDraftFromStore }) => (
+    executeImportReconciliationDraftFromStore({ set, get, draft, options })
+  )),
+
   loadCampaigns: () => {
-    const ownerId = campaignCacheOwner(get());
-    const cached = localLoad(ownerId);
+    const session = captureCampaignSession(get());
+    const ownerId = session?.ownerId || campaignCacheOwner(get());
+    const customContentReady = ownerId === 'anon'
+      || get().customContentSyncedAt != null;
+    const inferredCustomContent = customContentReady
+      ? (get().customContent || {})
+      : undefined;
+    const cached = localLoad(ownerId, inferredCustomContent);
     set(state => {
       state.campaigns = cached;
       state.campaignsLoaded = !campaignService.isConfigured;
     });
     if (!campaignService.isConfigured) return Promise.resolve(cached);
-    return campaignService.list()
-      .then(remote => {
+    return Promise.all([campaignService.list(), loadCampaignSyncTools()])
+      .then(([remote, {
+        mergeCampaignLists,
+        primeCampaignSync,
+        reconcileTombstones,
+      }]) => {
         // Stale-owner guard: a sign-out/sign-in completing mid-flight would
         // otherwise write the previous user's campaigns into state/cache.
-        if (campaignCacheOwner(get()) !== ownerId) return get().campaigns;
-        const migratedRemote = remote.map(migrateCampaign);
-        primeCampaignSync(migratedRemote);
+        if (!isCurrentCampaignSession(get(), session)) return get().campaigns;
+        const migratedRemote = remote.map(campaign => (
+          migrateCampaign(campaign, inferredCustomContent)
+        ));
+        primeCampaignSync(migratedRemote, ownerId, session.generation);
         // Read tombstones HERE (at list()-resolve), not at load start: a delete
         // that ran while list() was in flight has by now written its tombstone,
         // and that is exactly the same-device race we must not lose to.
@@ -271,12 +534,15 @@ export const createCampaignSlice = (set, get) => {
           state.campaignsLoaded = true;
         });
         localWrite(merged, ownerId);
-        syncCampaignChanges(merged, { service: campaignService }).catch(e => {
+        syncCampaignSnapshot(
+          merged, null, session, () => isCurrentCampaignSession(get(), session),
+        ).catch(e => {
           console.warn('[campaignSlice] campaign cloud backfill failed', e);
         });
         return merged;
       })
       .catch(error => {
+        if (!isCurrentCampaignSession(get(), session)) return get().campaigns;
         console.warn('[campaignSlice] campaign cloud load failed', error);
         set(state => { state.campaignsLoaded = true; });
         return cached;
@@ -288,43 +554,107 @@ export const createCampaignSlice = (set, get) => {
       state.campaigns = [];
       state.campaignsLoaded = false;
       state.activeCampaignId = null;
+      state.campaignSessionGeneration = (Number(state.campaignSessionGeneration) || 0) + 1;
+      clearTransientCampaignWork(state);
       clearCampaignSyncBookkeeping();
     }),
+
+  // Same-owner SIGNED_IN is still a new credential boundary. Keep the already
+  // loaded campaign cache, but invalidate every async continuation and transient
+  // lock before auth publishes the replacement session. TOKEN_REFRESHED does not
+  // call this action because it remains the same logical Supabase session.
+  invalidateCampaignSession: () =>
+    set(state => {
+      state.campaignSessionGeneration = (Number(state.campaignSessionGeneration) || 0) + 1;
+      clearTransientCampaignWork(state);
+    }),
+
+  /**
+   * Finalize the immutable cutoff for campaigns created before content
+   * bindings existed. Called only after the correct owner's custom library is
+   * available; the resulting resolved definitions are then persisted in the
+   * campaign envelope and never follow later account-library edits.
+   */
+  pinLegacyCampaignContentBindings: (customContent) => {
+    let changed = false;
+    set(state => {
+      for (const campaign of state.campaigns || []) {
+        if (campaign.contentBinding) continue;
+        campaign.contentBinding = legacyCampaignContentBinding(
+          customContent,
+          state.activeContentEnvironment,
+        );
+        campaign.contentBindingHistory = [];
+        campaign.contentBindingStatus = 'pinned';
+        campaign.updatedAt = new Date().toISOString();
+        campaign.pendingSync = true;
+        changed = true;
+      }
+      if (changed) persistCampaignState(state);
+    });
+    return changed;
+  },
 
   createCampaign: (name) => {
     const current = get();
     const role = current.auth?.role;
     const canCreate = current.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
     if (!canCreate) return null;
-    const id = newCampaignId();
+    const campaign = buildNewCampaign(current, name);
     set(state => {
-      const campaign = {
-        id,
-        name: String(name || '').trim() || 'Untitled Campaign',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        settlementIds: [],
-        mapState: null,
-        regionalGraph: ensureRegionalGraph(),
-        wizardNews: ensureWizardNewsFeed(),
-        worldState: ensureWorldState(null, { id, name }),
-        collapsed: false,
-        accessState: 'active',
-        // V-2 / R-16: the letter read floor + the flags-seen baseline (see
-        // migrateCampaign). A fresh campaign has read nothing (0) and recorded no
-        // flags baseline (null ⇒ the deepened section is dark until first read).
-        lastReadTick: 0,
-        flagsSeen: null,
-        // Never-synced marker: this campaign lives only on this device until a
-        // cloud upsert confirms it. mergeCampaignLists keeps a local-only
-        // campaign (absent from remote) only while this is truthy, and clears
-        // it to false once the cloud confirms the row — see campaignSync.js.
-        pendingSync: true,
-      };
       state.campaigns.unshift(campaign);
-      persistCampaignState(state, id);
+      persistCampaignState(state, campaign.id);
     });
-    return id;
+    return campaign.id;
+  },
+
+  /**
+   * Persist an imported campaign's final envelope exactly once before exposing
+   * it in the live cache. This avoids inserting the account's current binding
+   * and then attempting a blind rewrite that the campaign binding CAS trigger
+   * must reject.
+   */
+  createImportedCampaign: async (name, initial = {}) => {
+    return createImportedCampaignWithReceipt({
+      get,
+      set,
+      name,
+      initial,
+    });
+  },
+
+  previewCampaignContentBindingMigration: (campaignId, options = {}) => {
+    const session = captureCampaignSession(get());
+    return import('./campaignContentBindingSession.js').then(module => (
+      module.previewCampaignContentBindingMigrationSession({
+        get, campaignId, options, session,
+      })
+    ));
+  },
+
+  previewCampaignContentBindingRollback: (campaignId, targetBindingHash) => {
+    const session = captureCampaignSession(get());
+    return import('./campaignContentBindingSession.js').then(module => (
+      module.previewCampaignContentBindingRollbackSession({
+        get, campaignId, targetBindingHash, session,
+      })
+    ));
+  },
+
+  applyCampaignContentBindingMigration: (campaignId, preview) => {
+    const session = captureCampaignSession(get());
+    return import('./campaignContentBindingSession.js').then(module => (
+      module.applyCampaignContentBindingMigrationSession({
+        get,
+        set,
+        campaignId,
+        preview,
+        session,
+        mutationBlockForState: (state, id) => (
+          campaignMutationBlock(state, [id])
+        ),
+      })
+    ));
   },
 
   // Project 2: import a shared MAP from the gallery into a NEW premium campaign.
@@ -332,56 +662,8 @@ export const createCampaignSlice = (set, get) => {
   // are no settlement ids to remap. The backdrop image is COPIED into the
   // importer's own storage so it survives the sharer deleting theirs.
   importGalleryMap: async (slug) => {
-    const st = get();
-    const role = st.auth?.role;
-    const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
-    if (!canCreate) throw new Error('Importing maps is a premium feature.');
-
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const shared = await fetchGalleryMap(slug);
-    if (!shared) throw new Error('That shared map is no longer available.');
-    const backdrop = shared.backdrop || {};
-
-    const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
-    if (backdrop.customBackdrop?.imageUrl) {
-      let imageUrl = backdrop.customBackdrop.imageUrl;
-      // SECURITY (ported master fix): the shared row's URL is untrusted input —
-      // refuse non-http(s) schemes BEFORE any fetch/persist, so a javascript:/
-      // data: backdrop can never be stored (the fetch-failure fallback below
-      // would otherwise keep the original string verbatim).
-      if (!isSafeBackdropUrl(imageUrl)) throw new Error('That shared map has no importable backdrop.');
-      const ownerId = st.auth?.user?.id;
-      try {
-        const { uploadMapBackdrop } = await import('../lib/imageUpload.js');
-        const resp = await fetch(imageUrl);
-        const blob = await resp.blob();
-        if (ownerId && blob?.size) {
-          const up = await uploadMapBackdrop(blob, { ownerId, campaignId: 'imported', contentType: blob.type });
-          imageUrl = up.url;
-        }
-      } catch { /* fall back to referencing the shared public URL */ }
-      mapState.customBackdrop = {
-        imageUrl,
-        w: Number(backdrop.customBackdrop.w) || 0,
-        h: Number(backdrop.customBackdrop.h) || 0,
-      };
-    } else if (backdrop.fmgSnapshot) {
-      // SECURITY (finding F6): do NOT import another user's raw FMG snapshot.
-      // It is a serialized SVG blob the map iframe loads via
-      // document.body.insertAdjacentHTML on our own (Supabase-token-bearing)
-      // origin — a cross-user stored-XSS / account-takeover sink. Carry only the
-      // seed so the local map can regenerate comparable geography (identical to
-      // the importGalleryMapWithCampaign treatment below).
-      mapState.seed = backdrop.seed ?? null;
-    } else {
-      throw new Error('That shared map has no backdrop to import.');
-    }
-
-    const newId = get().createCampaign(shared.name ? `${shared.name} (imported)` : 'Imported map');
-    if (!newId) throw new Error('Could not create a campaign for the imported map.');
-    get().saveCampaignMap(newId, mapState);
-    try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map' }); } catch { /* analytics never affects import */ }
-    return newId;
+    const { importGalleryMapImpl } = await import('./galleryImportMap.js');
+    return importGalleryMapImpl(get, slug);
   },
 
   // Project 2, Phase 2: import a shared MAP + CAMPAIGN. Clones each member
@@ -391,123 +673,8 @@ export const createCampaignSlice = (set, get) => {
   // so the importer's campaign starts with a fresh world; the only id-remap
   // surface is settlementIds + placements[].settlementId.
   importGalleryMapWithCampaign: async (slug) => {
-    const st = get();
-    const role = st.auth?.role;
-    const canCreate = st.auth?.tier === 'premium' || role === 'developer' || role === 'admin';
-    if (!canCreate) throw new Error('Importing campaigns is a premium feature.');
-
-    const { fetchGalleryMap } = await import('../lib/gallery.js');
-    const payload = await fetchGalleryMap(slug);
-    if (!payload) throw new Error('That shared campaign is no longer available.');
-    if (payload.kind !== 'map_with_campaign') return get().importGalleryMap(slug); // not a campaign share
-
-    const members = Array.isArray(payload.members) ? payload.members : [];
-    const sharedMap = (payload.mapState && typeof payload.mapState === 'object') ? payload.mapState : {};
-
-    // Slot pre-flight (premium = unlimited in practice; defensive for future tiers).
-    const max = (typeof st.maxSaves === 'function') ? st.maxSaves() : Infinity;
-    const activeNow = (st.savedSettlements || []).length;
-    if (Number.isFinite(max) && activeNow + members.length > max) {
-      throw new Error(`Not enough save slots: this campaign needs ${members.length} settlement slot(s).`);
-    }
-
-    // Parity with importGallerySettlement + accountImport: canonicalize each
-    // member clone through the migration chain so a legacy-shape shared member
-    // arrives with the same backfilled fields a standalone import of it would get
-    // (downstream dossier / deriveSystemState otherwise read undefined for fields
-    // the chain fills). Dynamic import keeps normalizeSettlement's transitive
-    // closure off the eager first-paint entry — this action is import-click-only.
-    const { normalizeSettlement } = await import('../domain/normalizeSettlement.js');
-    // Clone each member into the importer's cloud saves; build oldId → newId.
-    const idMap = {};
-    const newEntries = [];
-    try {
-      for (const m of members) {
-        const src = (m.settlement && typeof m.settlement === 'object') ? m.settlement : {};
-        const entry = {
-          name: m.name || src.name || 'Imported settlement',
-          tier: m.tier || src.tier,
-          // Strip ALL cross-settlement refs from the clone: neighbourNetwork AND
-          // neighborRelationship/interSettlementRelationships — the latter would
-          // re-trigger supabaseSave's bidirectional back-link path (keyed on
-          // settlement.neighborRelationship.name), wiring the clone into the
-          // IMPORTER's unrelated saves. Forcing the simple-insert path is correct.
-          settlement: normalizeSettlement({ ...src, neighbourNetwork: [], neighborRelationship: null, interSettlementRelationships: [] }),
-          // DORMANCY SCRUB (cycle-3 security fix): route the cloned member config
-          // through the single-writer import scrub — matches galleryImportSettlement
-          // and accountImport. Without it a shared map's member could carry the
-          // author's primaryDeitySnapshot / cultDeitySnapshots / faithProfile, live-
-          // activating the importer's premium religion subsystem with a foreign
-          // pantheon. The imported copy must arrive DORMANT.
-          config: scrubImportedConfig(src.config) || null,
-          seed: src._seed || src.config?._seed || null,
-          aiData: {},
-          campaignState: { phase: 'canon', eventLog: [] },
-          versionHistory: [],
-        };
-         
-        // save-limit trigger + id assignment stay deterministic.
-        const newSaveId = await savesService.save(entry);
-        idMap[String(m.old_id)] = newSaveId;
-        newEntries.push({ ...entry, id: newSaveId, savedAt: Date.now() });
-      }
-    } catch (err) {
-      // Roll back clones already inserted so a partial import doesn't orphan saves.
-      for (const oid of Object.values(idMap)) {
-        try { await savesService.delete(oid); } catch { /* best-effort cleanup */ }
-      }
-      throw new Error('Import failed while copying settlements; partial copies were rolled back.', { cause: err });
-    }
-    set(state => { for (const e of newEntries) state.savedSettlements.push(e); });
-
-    // Build the imported map: backdrop (copy image) + REMAPPED placements only.
-    const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
-    const sb = sharedMap.customBackdrop;
-    if (sb?.imageUrl) {
-      let imageUrl = sb.imageUrl;
-      const ownerId = st.auth?.user?.id;
-      try {
-        const { uploadMapBackdrop } = await import('../lib/imageUpload.js');
-        const resp = await fetch(imageUrl); const blob = await resp.blob();
-        if (ownerId && blob?.size) {
-          const up = await uploadMapBackdrop(blob, { ownerId, campaignId: 'imported', contentType: blob.type });
-          imageUrl = up.url;
-        }
-      } catch { /* fall back to the shared public URL */ }
-      // SECURITY (ported master fix): only http(s) backdrops persist; a refused
-      // scheme stores an explicit null so the campaign imports WITHOUT the
-      // backdrop rather than carrying a javascript:/data: payload.
-      mapState.customBackdrop = isSafeBackdropUrl(imageUrl)
-        ? { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 }
-        : null;
-    } else if (sharedMap.fmgSnapshot) {
-      // SECURITY (finding F6): do NOT import another user's raw FMG snapshot.
-      // It is a serialized SVG blob that the map iframe loads via
-      // insertAdjacentHTML on our own (Supabase-token-bearing) origin — a
-      // cross-user stored-XSS / account-takeover sink. Carry only the seed so
-      // the local map can regenerate comparable geography; placements (remapped
-      // below) and any IMAGE backdrop (sanitized re-upload above) still import.
-      mapState.seed = sharedMap.seed ?? null;
-    }
-    const srcPlacements = (sharedMap.placements && typeof sharedMap.placements === 'object') ? sharedMap.placements : {};
-    for (const [burgId, p] of Object.entries(srcPlacements)) {
-      const newSid = idMap[String(p?.settlementId)];
-      if (!newSid) continue; // drop placements whose member wasn't imported
-      mapState.placements[burgId] = { ...p, settlementId: newSid };
-    }
-    mapState.labels = Array.isArray(sharedMap.labels) ? sharedMap.labels : [];
-    mapState.markers = Array.isArray(sharedMap.markers) ? sharedMap.markers : [];
-    mapState.forests = Array.isArray(sharedMap.forests) ? sharedMap.forests : [];
-
-    const campaignId = get().createCampaign(payload.name ? `${payload.name} (imported)` : 'Imported campaign');
-    if (!campaignId) throw new Error('Could not create the imported campaign.');
-    set(state => {
-      const c = state.campaigns.find(x => x.id === campaignId);
-      if (c) c.settlementIds = Object.values(idMap);
-    });
-    get().saveCampaignMap(campaignId, mapState);
-    try { track(EVENTS.GALLERY_IMPORTED, { kind: 'map_with_campaign', member_count: members.length }); } catch { /* analytics never affects import */ }
-    return campaignId;
+    const { importGalleryMapWithCampaignImpl } = await import('./galleryImportMap.js');
+    return importGalleryMapWithCampaignImpl(get, set, slug);
   },
 
   /**
@@ -523,23 +690,44 @@ export const createCampaignSlice = (set, get) => {
     return importGallerySettlementImpl(get, set, slug);
   },
 
-  renameCampaign: (id, name) =>
+  renameCampaign: (id, name) => {
+    const blocked = get().getCampaignMutationBlock(id);
+    if (blocked) return blocked;
     set(state => {
       const c = findActiveCampaign(state.campaigns, id);
       if (!c) return;
       c.name = String(name || '').trim() || c.name;
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, id);
-    }),
+    });
+    return { ok: true, campaignId: id };
+  },
 
-  deleteCampaign: (id) =>
+  deleteCampaign: (id, options = {}) => {
+    // Data & Privacy needs a confirmed delete: keep the row visible until the
+    // actual cloud/local service delete succeeds, so a failed subset remains
+    // retryable and cannot be presented as a clean wipe. Ordinary library
+    // deletes retain the existing optimistic, synchronous behavior.
+    if (options.awaitPersistence) {
+      return deleteCampaignWithConfirmedPersistence({
+        campaignId: id,
+        get,
+        set,
+      });
+    }
+
+    let deletion = Promise.resolve();
     set(state => {
       const campaign = findActiveCampaign(state.campaigns, id);
       if (!campaign) return;
-      state.campaigns = state.campaigns.filter(c => c.id !== id);
-      if (state.activeCampaignId === id) state.activeCampaignId = null;
-      deletePersistedCampaignState(state, id);
-    }),
+      state.campaigns = state.campaigns.filter(c => String(c.id) !== String(id));
+      if (String(state.activeCampaignId) === String(id)) state.activeCampaignId = null;
+      state.pulseUndoStack = (state.pulseUndoStack || [])
+        .filter(snapshot => String(snapshot.campaignId) !== String(id));
+      deletion = deletePersistedCampaignState(state, id);
+    });
+    return deletion;
+  },
 
   toggleCampaignCollapsed: (id) =>
     set(state => {
@@ -549,7 +737,12 @@ export const createCampaignSlice = (set, get) => {
       persistCampaignState(state, id);
     }),
 
-  addToCampaign: (campaignId, settlementId) =>
+  addToCampaign: (campaignId, settlementId) => {
+    if (!findActiveCampaign(get().campaigns, campaignId)) {
+      return { ok: false, reason: 'campaign_not_found', campaignId };
+    }
+    const blocked = get().getCampaignMembershipBlock(campaignId, settlementId);
+    if (blocked) return blocked;
     set(state => {
       const target = findActiveCampaign(state.campaigns, campaignId);
       if (!target) return;
@@ -587,9 +780,16 @@ export const createCampaignSlice = (set, get) => {
       target.updatedAt = now;
       changedIds.add(target.id);
       persistCampaignState(state, Array.from(changedIds));
-    }),
+    });
+    return { ok: true, campaignId, settlementId };
+  },
 
-  removeFromCampaign: (campaignId, settlementId) =>
+  removeFromCampaign: (campaignId, settlementId, { mutationToken = null } = {}) => {
+    if (!findActiveCampaign(get().campaigns, campaignId)) {
+      return { ok: false, reason: 'campaign_not_found', campaignId };
+    }
+    const blocked = get().getCampaignMutationBlock(campaignId, mutationToken);
+    if (blocked) return blocked;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -611,7 +811,9 @@ export const createCampaignSlice = (set, get) => {
       }
       c.updatedAt = new Date().toISOString();
       persistCampaignState(state, campaignId);
-    }),
+    });
+    return { ok: true, campaignId, settlementId };
+  },
 
   /**
    * Save the current map slice's state into a campaign.

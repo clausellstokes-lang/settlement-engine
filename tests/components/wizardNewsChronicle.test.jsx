@@ -14,19 +14,22 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup, fireEvent, waitFor } from '@testing-library/react';
 
 const requestSpy = vi.fn();
+const analyticsSpy = vi.fn();
+const storeState = vi.hoisted(() => ({ savedSettlements: [] }));
 vi.mock('../../src/lib/campaignChronicle.js', () => ({
   requestCampaignChronicle: (...a) => requestSpy(...a),
+}));
+vi.mock('../../src/lib/analytics.js', () => ({
+  EVENTS: { WIZARD_NEWS_PANEL_OPENED: 'wizard_news_panel_opened' },
+  track: (...args) => analyticsSpy(...args),
 }));
 
 const appendSpy = vi.fn();
 const setCreditSpy = vi.fn();
 vi.mock('../../src/store/index.js', () => {
-  const state = {
-    savedSettlements: [],
-    appendCampaignChronicle: (...a) => appendSpy(...a),
-    setCreditBalance: (...a) => setCreditSpy(...a),
-  };
-  return { useStore: (selector) => selector(state) };
+  storeState.appendCampaignChronicle = (...a) => appendSpy(...a);
+  storeState.setCreditBalance = (...a) => setCreditSpy(...a);
+  return { useStore: (selector) => selector(storeState) };
 });
 
 import WizardNewsPanel from '../../src/components/map/WizardNewsPanel.jsx';
@@ -46,8 +49,10 @@ const SKEWED_FEED = {
 describe('WizardNewsPanel chronicle', () => {
   beforeEach(() => {
     requestSpy.mockReset();
+    analyticsSpy.mockReset();
     appendSpy.mockReset();
     setCreditSpy.mockReset();
+    storeState.savedSettlements = [];
   });
 
   afterEach(() => {
@@ -58,6 +63,15 @@ describe('WizardNewsPanel chronicle', () => {
     render(<WizardNewsPanel campaign={campaignWith({ currentTick: 5, entries: [] })} />);
     const button = screen.getByRole('button', { name: /chronicle/i });
     expect(button.disabled).toBe(true);
+  });
+
+  it('addresses the panel-open event to the campaign subject', async () => {
+    render(<WizardNewsPanel campaign={campaignWith({ currentTick: 5, entries: [] })} />);
+    await waitFor(() => expect(analyticsSpy).toHaveBeenCalledWith(
+      'wizard_news_panel_opened',
+      { unread_count: 0, current_tick: 5 },
+      { subjectId: 'camp-1' },
+    ));
   });
 
   it('grounds the chronicle on the latest entry tick, not the skewed feed clock', async () => {
@@ -72,6 +86,26 @@ describe('WizardNewsPanel chronicle', () => {
     expect(requestSpy.mock.calls[0][0].tick).toBe(4);
     expect(appendSpy).toHaveBeenCalledWith('camp-1', { tick: 4, prose: 'A season of hunger.' });
     expect(setCreditSpy).toHaveBeenCalledWith(3);
+  });
+
+  it('includes a string-id save when campaign membership stores the numeric equivalent', async () => {
+    storeState.savedSettlements = [{
+      id: '7',
+      name: 'Aldermoor',
+      settlement: { name: 'Aldermoor' },
+    }];
+    requestSpy.mockResolvedValue({ chronicle: 'Aldermoor endures.', creditsRemaining: 2 });
+    const campaign = { ...campaignWith(SKEWED_FEED), settlementIds: [7] };
+    render(<WizardNewsPanel campaign={campaign} />);
+
+    fireEvent.click(screen.getByRole('button', { name: /chronicle/i }));
+    await waitFor(() => expect(requestSpy).toHaveBeenCalled());
+
+    expect(requestSpy.mock.calls[0][0].snapshot.settlements).toEqual([{
+      id: '7',
+      name: 'Aldermoor',
+      settlement: { name: 'Aldermoor' },
+    }]);
   });
 
   // correctness-2: the paid Chronicle button must never stick busy forever.

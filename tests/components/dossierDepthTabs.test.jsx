@@ -89,8 +89,15 @@ describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
     const { container } = render(<SubstrateTab settlement={{ name: 'Testburg', config: { size: 'town' } }} />);
     expect(screen.getByTestId('substrate-tab')).toBeTruthy();
     // The read-model yields the 16 system variables as rows.
-    expect(container.querySelectorAll('[data-substrate-row]').length).toBeGreaterThan(0);
+    const rows = [...container.querySelectorAll('[data-substrate-row]')];
+    expect(rows.length).toBeGreaterThan(0);
     expect(screen.getByTestId('substrate-pressures')).toBeTruthy();
+    expect(screen.getByText('What is holding, what is strained')).toBeTruthy();
+    expect(screen.getByText('Settlement foundations')).toBeTruthy();
+    expect(container.textContent).not.toMatch(/causal substrate|engine simulates|system|variable/i);
+    for (const row of rows) {
+      expect(row.textContent).not.toMatch(/\b(?:100|[1-9]?\d)\b/);
+    }
   });
 });
 

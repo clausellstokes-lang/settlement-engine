@@ -219,19 +219,54 @@ export function mergeCampaignLists(localCampaigns = [], remoteCampaigns = [], { 
     });
 }
 
-const lastSyncedSignatures = new Map();
+// Dirty-check state is scoped to the auth/cache session that produced it.
+// Otherwise a late A completion can mark a same-id B campaign as synced.
+const lastSyncedSignaturesBySession = new Map();
 
-export function primeCampaignSync(campaigns = []) {
-  lastSyncedSignatures.clear();
+function campaignSyncSessionKey(ownerId = 'anon', sessionGeneration = 0) {
+  return `${String(ownerId || 'anon')}\u0000${Number(sessionGeneration) || 0}`;
+}
+
+function campaignSyncSignatures(ownerId = 'anon', sessionGeneration = 0, create = true) {
+  const key = campaignSyncSessionKey(ownerId, sessionGeneration);
+  let signatures = lastSyncedSignaturesBySession.get(key);
+  if (!signatures && create) {
+    signatures = new Map();
+    lastSyncedSignaturesBySession.set(key, signatures);
+  }
+  return signatures;
+}
+
+export function primeCampaignSync(campaigns = [], ownerId = 'anon', sessionGeneration = 0) {
+  const signatures = new Map();
   for (const campaign of campaigns || []) {
     if (!campaign?.id) continue;
-    lastSyncedSignatures.set(String(campaign.id), campaignSignature(campaign));
+    signatures.set(String(campaign.id), campaignSignature(campaign));
+  }
+  lastSyncedSignaturesBySession.set(
+    campaignSyncSessionKey(ownerId, sessionGeneration),
+    signatures,
+  );
+}
+
+export function clearCampaignSync(ownerId = null, sessionGeneration = null) {
+  if (ownerId == null) {
+    lastSyncedSignaturesBySession.clear();
+    return;
+  }
+  if (sessionGeneration != null) {
+    lastSyncedSignaturesBySession.delete(campaignSyncSessionKey(ownerId, sessionGeneration));
+    return;
+  }
+  const ownerPrefix = `${String(ownerId || 'anon')}\u0000`;
+  for (const key of lastSyncedSignaturesBySession.keys()) {
+    if (key.startsWith(ownerPrefix)) lastSyncedSignaturesBySession.delete(key);
   }
 }
 
-export function forgetCampaignSync(id) {
+export function forgetCampaignSync(id, ownerId = 'anon', sessionGeneration = 0) {
   if (id == null) return;
-  lastSyncedSignatures.delete(String(id));
+  campaignSyncSignatures(ownerId, sessionGeneration, false)?.delete(String(id));
 }
 
 function changedIdSet(changedId) {
@@ -240,25 +275,82 @@ function changedIdSet(changedId) {
   return new Set(ids.filter(id => id != null).map(id => String(id)));
 }
 
-export function getCampaignsNeedingSync(campaigns = [], changedId = null) {
+/**
+ * @typedef {{
+ *   service?: any,
+ *   changedId?: string|string[]|null,
+ *   ownerId?: string|null,
+ *   sessionGeneration?: number,
+ *   isSessionCurrent?: (() => boolean)|null,
+ * }} CampaignSyncOptions
+ */
+
+export function getCampaignsNeedingSync(
+  campaigns = [],
+  changedId = null,
+  ownerId = 'anon',
+  sessionGeneration = 0,
+) {
   const ids = changedIdSet(changedId);
+  const signatures = campaignSyncSignatures(ownerId, sessionGeneration);
   return (campaigns || []).filter(campaign => {
     if (!campaign?.id) return false;
     if ((campaign.accessState || 'active') !== 'active') return false;
     const id = String(campaign.id);
     if (ids && !ids.has(id)) return false;
-    return lastSyncedSignatures.get(id) !== campaignSignature(campaign);
+    return signatures.get(id) !== campaignSignature(campaign);
   });
 }
 
-export async function syncCampaignChanges(campaigns = [], { service, changedId = null } = /** @type {{ service?: any, changedId?: string|null }} */ ({})) {
+function buildAuthSessionChangedError() {
+  return Object.assign(
+    new Error('Campaign auth session changed while persistence was pending.'),
+    { code: 'auth_session_changed' },
+  );
+}
+
+/**
+ * Persist only campaigns whose current signature differs from the signature
+ * confirmed for this owner/session generation.
+ *
+ * The session predicate is checked on both sides of each await. That symmetry is
+ * deliberate: checking only before the request protects who starts the write,
+ * but cannot stop a late completion from certifying the next session's cache.
+ *
+ * @param {any[]} campaigns
+ * @param {CampaignSyncOptions} options
+ * @returns {Promise<any[]>}
+ */
+export async function syncCampaignChanges(
+  campaigns = [],
+  {
+    service,
+    changedId = null,
+    ownerId = 'anon',
+    sessionGeneration = 0,
+    isSessionCurrent = null,
+  } = {},
+) {
   if (!service?.isConfigured || typeof service.upsert !== 'function') return [];
-  const changed = getCampaignsNeedingSync(campaigns, changedId);
+  const changed = getCampaignsNeedingSync(campaigns, changedId, ownerId, sessionGeneration);
   if (!changed.length) return [];
 
   const results = await Promise.allSettled(changed.map(async campaign => {
-    await service.upsert(campaign);
-    lastSyncedSignatures.set(String(campaign.id), campaignSignature(campaign));
+    if (isSessionCurrent && !isSessionCurrent()) {
+      throw buildAuthSessionChangedError();
+    }
+    if (isSessionCurrent) {
+      await service.upsert(campaign, ownerId, isSessionCurrent);
+    } else {
+      await service.upsert(campaign, ownerId);
+    }
+    if (isSessionCurrent && !isSessionCurrent()) {
+      throw buildAuthSessionChangedError();
+    }
+    campaignSyncSignatures(ownerId, sessionGeneration).set(
+      String(campaign.id),
+      campaignSignature(campaign),
+    );
     return campaign.id;
   }));
 

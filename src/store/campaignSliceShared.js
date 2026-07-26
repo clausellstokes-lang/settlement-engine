@@ -11,21 +11,39 @@ import { deepClone } from '../domain/clone.js';
 import { saves as savesService } from '../lib/saves.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
-  forgetCampaignSync,
-  primeCampaignSync,
-  syncCampaignChanges,
-} from '../lib/campaignSync.js';
-import {
   enqueue as outboxEnqueue,
   enqueueBarrier,
   attemptOps,
   resolveBarrier,
   drainReady,
   reviveAllPending,
-  loadMirror,
+  activateOutboxOwner,
+  getActiveOutboxOwner,
   setOutboxScheduler,
   OP_KIND_BARRIER,
 } from './outbox.js';
+
+// Campaign merge/signature bookkeeping is only exercised after an authenticated
+// campaign load or a persistence action. Keep it behind the same async boundary
+// as those operations instead of charging anonymous first paint for it.
+let campaignSyncToolsPromise = null;
+let campaignSessionReader = null;
+
+export function initCampaignSessionReader(reader) {
+  campaignSessionReader = typeof reader === 'function' ? reader : null;
+}
+
+function liveCampaignSessionCheck(session) {
+  if (!session || !campaignSessionReader) return null;
+  return () => isCurrentCampaignSession(campaignSessionReader(), session);
+}
+
+export function loadCampaignSyncTools() {
+  if (!campaignSyncToolsPromise) {
+    campaignSyncToolsPromise = import('../lib/campaignSync.js');
+  }
+  return campaignSyncToolsPromise;
+}
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
@@ -109,7 +127,9 @@ export function uuidFromLegacyId(source) {
 }
 
 export function findActiveCampaign(campaigns, campaignId) {
-  const campaign = campaigns.find(item => item.id === campaignId);
+  if (campaignId == null) return null;
+  const key = String(campaignId);
+  const campaign = (campaigns || []).find(item => item?.id != null && String(item.id) === key);
   return isCampaignActive(campaign) ? campaign : null;
 }
 
@@ -130,6 +150,32 @@ export function campaignCacheOwner(state) {
   return state?.auth?.user?.id ? String(state.auth.user.id) : 'anon';
 }
 
+/** Capture the owner + monotonic campaign-cache session for an async mutation. */
+export function captureCampaignSession(state, expectedOwnerId = campaignCacheOwner(state)) {
+  const ownerId = String(expectedOwnerId || 'anon');
+  if (campaignCacheOwner(state) !== ownerId) return null;
+  return {
+    ownerId,
+    generation: Number(state?.campaignSessionGeneration) || 0,
+  };
+}
+
+/** True only while the exact auth/cache session that started an operation lives. */
+export function isCurrentCampaignSession(state, session) {
+  if (!session) return false;
+  return (
+    campaignCacheOwner(state) === String(session.ownerId || 'anon')
+    && (Number(state?.campaignSessionGeneration) || 0) === (Number(session.generation) || 0)
+  );
+}
+
+export function campaignSessionChangedError(campaignId = null) {
+  return Object.assign(
+    new Error('Campaign account session changed while this operation was pending.'),
+    { code: 'auth_session_changed', campaignId },
+  );
+}
+
 export function localWrite(campaigns, ownerId = 'anon') {
   try {
     campaignService.cache(campaigns, ownerId);
@@ -143,7 +189,14 @@ export function localWrite(campaigns, ownerId = 'anon') {
 export function persistCampaigns(campaigns, changedId = null, ownerId = 'anon', options = {}) {
   const snapshot = cloneJson(campaigns) || [];
   localWrite(snapshot, ownerId);
-  const sync = syncCampaignChanges(snapshot, { service: campaignService, changedId });
+  const sync = loadCampaignSyncTools().then(({ syncCampaignChanges }) =>
+    syncCampaignChanges(snapshot, {
+      service: campaignService,
+      changedId,
+      ownerId,
+      sessionGeneration: options.sessionGeneration,
+      isSessionCurrent: options.isSessionCurrent,
+    }));
   if (options.strict) return sync;
   sync.catch(e => {
     console.warn('[campaignSlice] campaign cloud sync failed', e);
@@ -152,40 +205,72 @@ export function persistCampaigns(campaigns, changedId = null, ownerId = 'anon', 
 }
 
 export function persistCampaignState(state, changedId = null, options = {}) {
-  return persistCampaigns(state.campaigns, changedId, campaignCacheOwner(state), options);
-}
-
-export function cacheCampaignState(state) {
-  const ownerId = campaignCacheOwner(state);
-  const snapshot = cloneJson(state.campaigns) || [];
-  localWrite(snapshot, ownerId);
-  return { ownerId, snapshot };
-}
-
-export function syncCampaignSnapshot(snapshot, changedId) {
-  return syncCampaignChanges(snapshot, { service: campaignService, changedId });
-}
-
-export function deletePersistedCampaign(id, campaigns, ownerId = 'anon') {
-  const snapshot = cloneJson(campaigns) || [];
-  localWrite(snapshot, ownerId);
-  forgetCampaignSync(id);
-  if (!campaignService.isConfigured) return;
-  // Record a deletion tombstone BEFORE the async cloud delete. mergeCampaignLists
-  // reads it (at list()-resolve time) so an in-flight load or a stale cache copy
-  // can't resurrect the campaign while the cloud delete is still propagating.
-  campaignService.recordTombstone(id, ownerId);
-  campaignService.delete(id).catch(e => {
-    console.warn('[campaignSlice] campaign cloud delete failed', e);
+  const session = captureCampaignSession(state);
+  return persistCampaigns(state.campaigns, changedId, session?.ownerId, {
+    ...options,
+    sessionGeneration: session?.generation,
+    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(session),
   });
 }
 
-export function deletePersistedCampaignState(state, id) {
-  return deletePersistedCampaign(id, state.campaigns, campaignCacheOwner(state));
+export function cacheCampaignState(state) {
+  const session = captureCampaignSession(state);
+  const ownerId = session?.ownerId || campaignCacheOwner(state);
+  const snapshot = cloneJson(state.campaigns) || [];
+  localWrite(snapshot, ownerId);
+  return { ownerId, generation: session?.generation || 0, snapshot };
+}
+
+export function syncCampaignSnapshot(snapshot, changedId, session = null, isSessionCurrent = null) {
+  const sessionCheck = isSessionCurrent || liveCampaignSessionCheck(session);
+  return loadCampaignSyncTools().then(({ syncCampaignChanges }) =>
+    syncCampaignChanges(snapshot, {
+      service: campaignService,
+      changedId,
+      ownerId: session?.ownerId || 'anon',
+      sessionGeneration: session?.generation || 0,
+      isSessionCurrent: sessionCheck,
+    }));
+}
+
+export function deletePersistedCampaign(id, campaigns, ownerId = 'anon', options = {}) {
+  const snapshot = cloneJson(campaigns) || [];
+  localWrite(snapshot, ownerId);
+  // Record a deletion tombstone BEFORE the async cloud delete. mergeCampaignLists
+  // reads it (at list()-resolve time) so an in-flight load or a stale cache copy
+  // can't resurrect the campaign while the cloud delete is still propagating.
+  if (campaignService.isConfigured) campaignService.recordTombstone(id, ownerId);
+  const deletion = loadCampaignSyncTools().then(({ forgetCampaignSync }) => {
+    forgetCampaignSync(id, ownerId, options.sessionGeneration);
+    if (!campaignService.isConfigured || options.skipRemote) return undefined;
+    return campaignService.delete(id, ownerId, options.isSessionCurrent);
+  });
+  // Attach a logging handler so legacy fire-and-forget callers never create an
+  // unhandled rejection. Return the original promise as well: privacy-sensitive
+  // callers can await it and report a partial delete instead of false success.
+  deletion.catch(e => {
+    console.warn('[campaignSlice] campaign cloud delete failed', e);
+  });
+  return deletion;
+}
+
+export function deletePersistedCampaignState(state, id, options = {}) {
+  const session = captureCampaignSession(state);
+  return deletePersistedCampaign(id, state.campaigns, session?.ownerId, {
+    ...options,
+    sessionGeneration: session?.generation,
+    isSessionCurrent: options.isSessionCurrent || liveCampaignSessionCheck(session),
+  });
 }
 
 export function clearCampaignSyncBookkeeping() {
-  primeCampaignSync([]);
+  loadCampaignSyncTools()
+    .then(({ clearCampaignSync }) => clearCampaignSync())
+    .catch(() => {
+      // Bookkeeping is an optimization, and session-keyed signatures are already
+      // unable to certify the replacement session. A chunk-load failure during
+      // sign-out must not become an unhandled rejection.
+    });
 }
 
 // Set by campaignSlice via initPersistFailureReporter so this module-scoped
@@ -235,14 +320,16 @@ function kindForPartial(partial) {
  * every drain path (first attempt, background retry, Retry affordance, boot
  * replay) so all four behave identically.
  *
- * @param {{ saveId: string, kind: string, payloadFingerprint: string|null, differential: boolean }} op
+ * @param {{ saveId: string, kind?: string, payloadFingerprint?: string|null, differential?: boolean, ownerId?: string|null }} op
  * @param {any} payload
  */
 async function outboxRunner(op, payload) {
   if (op.kind === OP_KIND_BARRIER) return true;
   let ok;
   try {
-    await savesService.update(op.saveId, payload);
+    await savesService.update(op.saveId, payload, {
+      expectedOwnerId: op.ownerId,
+    });
     ok = true;
   } catch (e) {
     // Never rethrow — callers fire-and-forget, and the pool must not reject.
@@ -254,7 +341,8 @@ async function outboxRunner(op, payload) {
   // Differential cache: record ONLY on success, so an identical next flush skips
   // the upload and a FAILED one re-uploads (never differential-skips a retry).
   if (ok && op.differential && op.payloadFingerprint != null) {
-    lastPersistedFingerprints.set(op.saveId, op.payloadFingerprint);
+    const ownerId = op.ownerId;
+    if (ownerId) lastPersistedFingerprints.set(`${ownerId}:${op.saveId}`, op.payloadFingerprint);
   }
   return ok;
 }
@@ -271,6 +359,12 @@ async function outboxRunner(op, payload) {
  */
 export function persistSaveUpdate(saveId, partial) {
   if (!saveId || !partial) return Promise.resolve(true);
+  // The durable outbox is owner-scoped cloud machinery. In an unconfigured
+  // build, savesService writes the anonymous/local library directly; routing
+  // that write through an authenticated-owner queue would park it forever.
+  if (!savesService.isConfigured) {
+    return outboxRunner({ saveId }, partial);
+  }
   const op = outboxEnqueue({
     saveId,
     kind: kindForPartial(partial),
@@ -297,8 +391,8 @@ function hashText(text) {
   return `${text.length}:${(h >>> 0).toString(36)}`;
 }
 
-// saveId → fingerprint of the LAST SUCCESSFULLY-PERSISTED payload. Session-scoped
-// and correct as such: a MISS (empty after reload, or first write) just costs one
+// ownerId:saveId → fingerprint of the LAST SUCCESSFULLY-PERSISTED payload.
+// Session-scoped and owner-isolated: a MISS (empty after reload, or first write) just costs one
 // redundant upload; a STALE HIT is impossible because the fingerprint is taken over
 // the exact {settlement, campaignState, versionHistory} bytes we hand to the cloud —
 // if any bit of the payload changed (including a lone campaignState.worldTick stamp
@@ -336,7 +430,19 @@ function fingerprintPersistPartial(partial) {
  */
 export async function persistSaveUpdates(updates = []) {
   const summary = { attempted: 0, skipped: 0, failed: 0 };
+  if (!savesService.isConfigured) {
+    const localResults = await Promise.all(updates.map(update =>
+      persistSaveUpdate(update?.saveId, {
+        settlement: update.settlement,
+        campaignState: update.campaignState,
+        versionHistory: update.versionHistory,
+      })));
+    summary.attempted = localResults.length;
+    summary.failed = localResults.filter(ok => !ok).length;
+    return summary;
+  }
   const enqueued = [];
+  const ownerId = getActiveOutboxOwner();
   for (const update of updates) {
     const partial = {
       settlement: update.settlement,
@@ -346,7 +452,8 @@ export async function persistSaveUpdates(updates = []) {
     const saveId = update.saveId;
     const fingerprint = saveId ? fingerprintPersistPartial(partial) : null;
     // Differential skip: the exact payload already reached the cloud this session.
-    if (fingerprint != null && lastPersistedFingerprints.get(saveId) === fingerprint) {
+    if (ownerId && fingerprint != null
+      && lastPersistedFingerprints.get(`${ownerId}:${saveId}`) === fingerprint) {
       summary.skipped += 1;
       continue;
     }
@@ -383,10 +490,23 @@ export async function persistSaveUpdates(updates = []) {
  * state. persistSaveUpdates settles every member's first attempt (past the
  * barrier) before this returns, so the snapshot never jumps ahead of the members.
  */
-export async function flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId }) {
+export async function flushWorldPulsePersist({
+  result,
+  campaignPersist,
+  persistUpdates,
+  campaignId,
+  isSessionCurrent = null,
+}) {
   if (!(result && campaignPersist)) return;
+  if (isSessionCurrent && !isSessionCurrent()) return;
   await persistSaveUpdates(persistUpdates);
-  await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+  if (isSessionCurrent && !isSessionCurrent()) return;
+  await syncCampaignSnapshot(
+    campaignPersist.snapshot,
+    campaignId,
+    campaignPersist,
+    isSessionCurrent,
+  );
 }
 
 /**
@@ -399,11 +519,11 @@ export function retryOutboxPersist() {
 }
 
 /**
- * Boot replay: wire the background retry scheduler and re-drain whatever the
- * localStorage mirror survived from a prior (possibly dead) tab against the
- * local payload cache. Called once at store init (alongside initAuth).
+ * Auth-scoped boot replay: wire the background retry scheduler, activate only
+ * the authenticated owner's mirror, and re-drain that owner's durable payloads.
+ * A null owner is an explicit signed-out state: it detaches without replay.
  */
-export function initOutbox() {
+export function initOutbox(ownerId) {
   // Production backoff scheduler. Tests leave this unset, so no stray timer
   // fires — parked ops are re-attempted only on explicit Retry / boot replay.
   setOutboxScheduler((fn, delayMs) => {
@@ -411,6 +531,7 @@ export function initOutbox() {
       if (typeof setTimeout === 'function') setTimeout(fn, delayMs);
     } catch { /* no timer host */ }
   });
-  loadMirror();
+  activateOutboxOwner(ownerId);
+  if (!ownerId) return Promise.resolve([]);
   return drainReady(outboxRunner).catch(() => []);
 }

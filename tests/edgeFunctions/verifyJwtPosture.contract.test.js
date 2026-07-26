@@ -48,6 +48,8 @@ const INTENDED_ANON = new Set([
   'analytics-export',      // cron pg_net; x-export-secret shared secret, not a JWT
   'pricing-resync-cron',   // cron pg_net; x-cron-secret shared secret, not a JWT
   'retention-warning-cron',// cron pg_net; x-cron-secret shared secret, not a JWT (WBF-d, migration 166)
+  'account-deletion-worker', // cron pg_net; x-cron-secret, durable deletion queue (migration 175)
+  'payment-refund-worker', // cron pg_net; x-cron-secret, durable refund recovery (migration 180)
   'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
   'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards

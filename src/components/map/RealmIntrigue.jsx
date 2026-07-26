@@ -56,7 +56,7 @@ export default function RealmIntrigue({ campaign, nameById = new Map() }) {
   const count = politics.reduce((n, p) => n + p.blocs.length, 0) + credibility.length;
 
   return (
-    <Section title="Court & Standing" count={count}>
+    <Section heading="Court & Standing" count={count}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {politics.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>

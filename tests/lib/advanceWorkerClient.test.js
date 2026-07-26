@@ -39,6 +39,22 @@ describe('runAdvanceInterval — fallback', () => {
     expect(result).toBe('sync-result');
     expect(fallback).toHaveBeenCalledOnce();
   });
+
+  it('applies an explicit pinned content projection to the in-thread path', async () => {
+    delete globalThis.Worker;
+    const payload = { interval: 'one_month' };
+    const customContent = { services: [{ id: 'service-a' }] };
+    const fallback = vi.fn(p => p);
+
+    const result = await runAdvanceInterval(payload, {
+      fallback,
+      customContent,
+    });
+
+    expect(result).toEqual({ ...payload, customContent });
+    expect(fallback).toHaveBeenCalledWith({ ...payload, customContent });
+    expect(payload).not.toHaveProperty('customContent');
+  });
 });
 
 describe('runAdvanceInterval — worker protocol', () => {

@@ -75,15 +75,48 @@ describe('latent pool — terrain-legal, only known keys, conserved', () => {
     }
   });
 
-  it('the current roster + custom nodes are excluded (never re-mint a held node)', () => {
-    const config = { terrainType: 'plains', tradeRouteAccess: 'road', nearbyResources: ['iron_deposits'], nearbyResourcesCustom: ['Moonpetal grove'] };
+  it('the current native roster is excluded (never re-mint a held node)', () => {
+    const config = {
+      terrainType: 'plains',
+      tradeRouteAccess: 'road',
+      nearbyResources: ['iron_deposits', 'Moonpetal grove'],
+      nearbyResourcesNative: ['iron_deposits'],
+      nearbyResourcesCustom: ['Moonpetal grove'],
+    };
     const pool = latentResourcePool(config, { tradeRoute: 'road', config });
     expect(pool).not.toContain('iron_deposits');
+  });
+
+  it('a custom-only namesake does not block native catalog discovery', () => {
+    const config = {
+      terrainType: 'plains',
+      tradeRouteAccess: 'road',
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: [],
+      nearbyResourcesCustom: ['iron_deposits'],
+    };
+    const pool = latentResourcePool(config, { tradeRoute: 'road', config });
+
+    expect(pool).toContain('iron_deposits');
   });
 
   it('previously-removed keys never re-mint (conservation — a worked-out vein does not return)', () => {
     const config = { terrainType: 'plains', tradeRouteAccess: 'road', nearbyResources: [], resourceEdits: { removed: ['iron_deposits'] } };
     const pool = latentResourcePool(config, { tradeRoute: 'road', config });
+    expect(pool).not.toContain('iron_deposits');
+  });
+
+  it('native-only removal receipts also prevent re-minting', () => {
+    const config = {
+      terrainType: 'plains',
+      tradeRouteAccess: 'road',
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: [],
+      nearbyResourcesCustom: ['iron_deposits'],
+      resourceEdits: { removedNative: ['iron_deposits'] },
+    };
+    const pool = latentResourcePool(config, { tradeRoute: 'road', config });
+
     expect(pool).not.toContain('iron_deposits');
   });
 });
@@ -129,6 +162,43 @@ describe('discovery integrator — cap-held, floor-gated, golden-safe', () => {
     expect(discovery, 'a discovery armed under sustained max drive').toBeTruthy();
     expect(discovery.resourceMembership.op).toBe('add');
     expect(pool.has(discovery.resourceMembership.resource), 'the struck node is in the latent pool').toBe(true);
+  });
+
+  it('a custom institution named Mine grants no native prospecting bonus', () => {
+    const config = {
+      terrainType: 'plains',
+      tradeRouteAccess: 'road',
+      nearbyResources: [],
+    };
+    const baseline = town({ config, institutions: [] });
+    const customMine = town({
+      config,
+      institutions: [{
+        id: 'custom.mine',
+        name: 'Mine',
+        source: 'custom',
+        isCustom: true,
+        customDefinitionId: 'definition:institutions:mine',
+      }],
+    });
+    const nativeMine = town({
+      config,
+      institutions: [{ id: 'institution.mine', name: 'Mine' }],
+    });
+    const worldState = {
+      tick: 1,
+      simulationRules: { resourceDynamicsEnabled: true },
+      settlementTickStates: {},
+    };
+    const accumulator = settlement => evaluateResourceDynamics(
+      worldState,
+      snapshotWith(settlement),
+      pIndexWith(),
+      { tick: 1, rng: rngStub },
+    ).worldState.settlementTickStates.s1.resourceDynamics.discoveryAcc;
+
+    expect(accumulator(customMine)).toBe(accumulator(baseline));
+    expect(accumulator(nativeMine)).toBeGreaterThan(accumulator(customMine));
   });
 
   it('MOVERS SKIP REMNANTS (r2 economy-upswing-1): a terminal-dead settlement never discovers', () => {
@@ -177,6 +247,63 @@ describe('removal — nonrenewable-only, dwell-gated, catch-up-robust', () => {
     expect(removal, 'the vein gives out at the dwell wall').toBeTruthy();
     expect(removal.resourceMembership).toEqual({ saveId: 's1', resource: 'iron_deposits', op: 'remove' });
     expect(removal.metadata.dwell).toBe(T.REMOVAL_DWELL);
+  });
+
+  it('custom-only depletion cannot mint a built-in removal, while dual ownership can', () => {
+    const now = T.REMOVAL_DWELL;
+    const state = {
+      tick: now,
+      simulationRules: { resourceDynamicsEnabled: true },
+      settlementTickStates: {
+        s1: {
+          resourceDynamics: {
+            depletedSince: { iron_deposits: 0 },
+          },
+        },
+      },
+    };
+    const customOnly = {
+      config: {
+        terrainType: 'mountain',
+        tradeRouteAccess: 'road',
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: [],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesDepleted: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+      },
+    };
+    const dualOwner = {
+      config: {
+        ...customOnly.config,
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: ['iron_deposits'],
+      },
+    };
+
+    const customResult = evaluateResourceDynamics(
+      state,
+      snapshotWith(customOnly),
+      pIndexWith(),
+      { tick: now, rng: rngStub },
+    );
+    const dualResult = evaluateResourceDynamics(
+      state,
+      snapshotWith(dualOwner),
+      pIndexWith(),
+      { tick: now, rng: rngStub },
+    );
+
+    expect(
+      customResult.candidates.some(
+        candidate => candidate.candidateType === 'resource_removal',
+      ),
+    ).toBe(false);
+    expect(
+      dualResult.candidates.some(
+        candidate => candidate.candidateType === 'resource_removal',
+      ),
+    ).toBe(true);
   });
 
   it('a RENEWABLE at max dwell NEVER mints removal', () => {

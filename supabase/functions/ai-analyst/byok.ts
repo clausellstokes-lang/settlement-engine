@@ -18,6 +18,13 @@ export interface ResolvedKey {
   byok: boolean;
 }
 
+type ProviderKeyAdmin = {
+  rpc: (
+    fn: string,
+    args: Record<string, unknown>,
+  ) => PromiseLike<{ data: unknown; error: unknown }>;
+};
+
 /**
  * Resolve the provider API key for a request: the user's decrypted BYOK key if they
  * have one, else the shared server key. On ANY error, falls back to the server key —
@@ -31,7 +38,7 @@ export interface ResolvedKey {
  * @param onLookupError optional keyless error note — MUST NOT be passed the key
  */
 export async function resolveProviderKey(
-  admin: { rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }> },
+  admin: ProviderKeyAdmin,
   userId: string,
   provider: string,
   serverKey: string,

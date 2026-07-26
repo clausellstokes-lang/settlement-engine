@@ -23,7 +23,14 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import {
-  enqueue, resetOutbox, peekOps, peekPayloads, setOutboxClock, setOutboxScheduler, OP_KIND_BARRIER,
+  OP_KIND_BARRIER,
+  activateOutboxOwner,
+  enqueue,
+  peekOps,
+  peekPayloads,
+  resetOutbox,
+  setOutboxClock,
+  setOutboxScheduler,
 } from '../../src/store/outbox.js';
 import { persistSaveUpdate } from '../../src/store/campaignSliceShared.js';
 
@@ -43,6 +50,7 @@ beforeEach(() => {
   setOutboxClock(() => 1_000_000);
   setOutboxScheduler(null);
   resetOutbox();
+  activateOutboxOwner('test-owner');
   updateBehavior = () => Promise.resolve();
 });
 
@@ -85,6 +93,16 @@ describe('persistSaveUpdate maps partial keys to COLUMNS (timestamp stripped)', 
     const ops = liveOps();
     expect(ops).toHaveLength(1);
     expect(ops[0].kind).toBe('data'); // NOT 'data+timestamp' / 'settlement+timestamp'
+  });
+
+  test('the cloud update carries the outbox owner into the saves boundary', async () => {
+    const calls = [];
+    updateBehavior = (...args) => {
+      calls.push(args);
+      return Promise.resolve();
+    };
+    await persistSaveUpdate('s1', { settlement: { x: 1 } });
+    expect(calls[0][2]).toEqual({ expectedOwnerId: 'test-owner' });
   });
 
   test('a {campaignState, settlement, timestamp} destroy and a {campaignState, settlement} applyEvent share the "campaign_state+data" kind', async () => {

@@ -418,7 +418,9 @@ export const createMapSlice = (set, get) => ({
     // canonized, placed settlements can no longer be moved. Adding new ones is
     // still allowed (addPlacement is ungated). The UI also disables the drag
     // affordance; this is the authoritative backstop (incl. autosave paths).
-    const camp = state.campaigns?.find(c => c.id === state.activeCampaignId);
+    const camp = state.campaigns?.find(
+      c => c?.id != null && String(c.id) === String(state.activeCampaignId),
+    );
     if (camp?.worldState?.canonizedAt) return;
     const p = state.mapState.placements[burgId];
     if (!p) return;
@@ -646,7 +648,9 @@ export const createMapSlice = (set, get) => ({
   getSettlementForBurg: (burgId) => {
     const p = get().mapState.placements[burgId];
     if (!p) return null;
-    return (get().savedSettlements || []).find(s => s.id === p.settlementId) || null;
+    return (get().savedSettlements || []).find(
+      s => s?.id != null && String(s.id) === String(p.settlementId),
+    ) || null;
   },
 
   // ── Burg→config conversion (used to derive settlement from a clicked burg) ──

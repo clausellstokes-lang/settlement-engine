@@ -20,7 +20,14 @@
  * changing a site's params changes its persisted ids.
  *
  * @param {unknown} value
- * @param {{ sep?: string, max?: number, fallback?: string, empty?: string, raw?: boolean }} [opts]
+ * @param {{
+ *   sep?: string,
+ *   max?: number,
+ *   fallback?: string,
+ *   empty?: string,
+ *   raw?: boolean,
+ *   asciiLower?: boolean,
+ * }} [opts]
  *   - sep:      the separator that replaces runs of non-alphanumerics (default '-')
  *   - max:      cap the slug to this many chars (0 = no cap; applied AFTER edge-trim)
  *   - fallback: returned when the slug is empty after processing (default '')
@@ -28,13 +35,30 @@
  *               String(value || empty) (default '' — matches the String(x||'') sites)
  *   - raw:      when true, coerce with String(value) directly (no `|| empty`) —
  *               matches slugifyInstitutionName's String(name)
+ *   - asciiLower: lower only ASCII A-Z before stripping. Use for identities
+ *                 that must match PostgreSQL byte-for-byte without depending
+ *                 on JavaScript/Unicode case-table behavior.
  * @returns {string}
  */
-export function slugify(value, { sep = '-', max = 0, fallback = '', empty = '', raw = false } = {}) {
+export function slugify(
+  value,
+  {
+    sep = '-',
+    max = 0,
+    fallback = '',
+    empty = '',
+    raw = false,
+    asciiLower = false,
+  } = {},
+) {
   const base = raw ? String(value) : String(value || empty);
   const escSep = sep.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  let out = base
-    .toLowerCase()
+  const normalizedCase = asciiLower
+    ? base.replace(/[A-Z]/g, character => (
+        String.fromCharCode(character.charCodeAt(0) + 32)
+      ))
+    : base.toLowerCase();
+  let out = normalizedCase
     .replace(/[^a-z0-9]+/g, sep)
     .replace(new RegExp(`^${escSep}+|${escSep}+$`, 'g'), '');
   if (max > 0) out = out.slice(0, max);

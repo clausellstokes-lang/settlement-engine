@@ -107,11 +107,16 @@ async function postWrite(slug, body) {
 
 /** Common pass-through fields every write stage surfaces (S1 money path + §2b). */
 function commonFields(data) {
+  const usageWarning = typeof data?.usageWarning === 'string'
+    ? data.usageWarning
+    : data?.usageWarning === true
+      ? 'This request used substantially more provider capacity than the usual custom-content draft.'
+      : null;
   return {
     byok: !!data?.byok,
     creditsRemaining: data?.creditsRemaining ?? null,
     earlyAccess: data?.earlyAccess !== false, // §2b: honest until live metrics mature
-    usageWarning: typeof data?.usageWarning === 'string' ? data.usageWarning : null,
+    usageWarning,
   };
 }
 

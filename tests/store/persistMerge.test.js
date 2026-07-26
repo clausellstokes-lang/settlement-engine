@@ -34,8 +34,29 @@ describe('store-6 — mergePersistedState deep-merges config over defaults', () 
     // Concrete newer keys a pre-version blob wouldn't carry.
     expect(merged.config.settlementAgeMode).toBe(DEFAULT_CONFIG.settlementAgeMode);
     expect(merged.config.powerDynamicsConfig).toBe(DEFAULT_CONFIG.powerDynamicsConfig);
+    // Old blobs prove intent only where their value differs from the old
+    // materialized default. The untouched 50-valued fields remain eligible for
+    // an active content environment.
+    expect(merged.configExplicitFields).toEqual({ magicExists: true });
     // The top-level spread still restores every other slice's state/methods.
     expect(merged.someSliceMethod()).toBe('alive');
+  });
+
+  it('normalizes a persisted field-intent record through the closed registry', () => {
+    const persisted = {
+      config: { priorityEconomy: 50 },
+      configExplicitFields: {
+        priorityEconomy: true,
+        priorityMagic: false,
+        internalAutoTuningGain: true,
+      },
+    };
+    const current = {
+      config: { ...DEFAULT_CONFIG },
+      configExplicitFields: {},
+    };
+    const merged = mergePersistedState(persisted, current);
+    expect(merged.configExplicitFields).toEqual({ priorityEconomy: true });
   });
 
   it('merges the four toggle maps over their (empty) defaults', () => {
@@ -52,5 +73,6 @@ describe('store-6 — mergePersistedState deep-merges config over defaults', () 
     const current = { config: { ...DEFAULT_CONFIG }, institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {} };
     const merged = mergePersistedState(null, current);
     expect(merged.config).toEqual(DEFAULT_CONFIG);
+    expect(merged.configExplicitFields).toEqual({});
   });
 });

@@ -17,6 +17,7 @@ import {
   reviveAllPending,
   getStatus,
   loadMirror,
+  activateOutboxOwner,
   resetOutbox,
   peekOps,
   peekPayloads,
@@ -26,8 +27,8 @@ import {
   OP_KIND_BARRIER,
 } from '../../src/store/outbox.js';
 
-const MIRROR_KEY = 'sf_outbox_v1';
-const PAYLOAD_KEY = 'sf_outbox_payloads_v1';
+const MIRROR_KEY = 'sf_outbox_v2:test-owner';
+const PAYLOAD_KEY = 'sf_outbox_payloads_v2:test-owner';
 
 function installLocalStorage() {
   const data = new Map();
@@ -53,6 +54,7 @@ beforeEach(() => {
   setOutboxClock(clock);
   setOutboxScheduler(null);
   resetOutbox();
+  activateOutboxOwner('test-owner');
   okRunner.mockClear();
   failRunner.mockClear();
 });
@@ -75,6 +77,7 @@ describe('op identity + enqueue', () => {
     expect(b.id).toBe('s2::settlement::1');
     // Reset rewinds the counter — a fresh run reproduces the same ids.
     resetOutbox();
+    activateOutboxOwner('test-owner');
     expect(enq('s1').id).toBe('s1::settlement::0');
   });
 
@@ -82,13 +85,15 @@ describe('op identity + enqueue', () => {
     enq('s1', 'settlement', { blob: 'x' });
     const mirror = JSON.parse(localStorage.getItem(MIRROR_KEY));
     const payloads = JSON.parse(localStorage.getItem(PAYLOAD_KEY));
-    expect(mirror.version).toBe(1);
+    expect(mirror.version).toBe(2);
+    expect(mirror.ownerId).toBe('test-owner');
     expect(mirror.ops).toHaveLength(1);
     // The op carries a payload REFERENCE (key), never the blob inline.
     expect(mirror.ops[0].payloadKey).toBe('s1:settlement');
     expect(mirror.ops[0]).not.toHaveProperty('payload');
     // The blob lives once, in the payload cache under that key.
-    expect(payloads.version).toBe(1);
+    expect(payloads.version).toBe(2);
+    expect(payloads.ownerId).toBe('test-owner');
     expect(payloads.payloads['s1:settlement']).toEqual({ blob: 'x' });
   });
 });
@@ -248,6 +253,132 @@ describe('per-key ordering (the "runs after" guarantee)', () => {
     expect(finished).toEqual([a.id, b.id]);
   });
 
+  test('a newer overlapping kind waits for an older in-flight same-save write', async () => {
+    const started = [];
+    const landed = [];
+    const gates = new Map();
+    const runner = vi.fn((op, payload) => {
+      started.push(payload.v);
+      return new Promise(resolve => {
+        gates.set(op.id, () => {
+          landed.push(payload.v);
+          resolve(true);
+        });
+      });
+    });
+
+    const older = enq('s1', 'data', { v: 1 });
+    const olderAttempt = attemptOps([older], runner);
+    await flush();
+    expect(started).toEqual([1]);
+
+    // The newer write uses a different payload key but overlaps `data`.
+    const newer = enq('s1', 'campaign_state+data', { v: 2 });
+    const newerAttempt = attemptOps([newer], runner);
+    await flush();
+    expect(started).toEqual([1]);
+
+    gates.get(older.id)();
+    await olderAttempt;
+    await flush();
+    expect(started).toEqual([1, 2]);
+    expect(landed).toEqual([1]);
+
+    gates.get(newer.id)();
+    await newerAttempt;
+    expect(landed).toEqual([1, 2]);
+    expect(peekOps()).toHaveLength(0);
+  });
+
+  test('a waiting newer op stays blocked when its in-flight predecessor backs off', async () => {
+    const started = [];
+    let resolveOlder;
+    const older = enq('s1', 'campaign_state+data', { v: 1 });
+    const olderAttempt = attemptOps([older], async (_op, payload) => {
+      started.push(payload.v);
+      return new Promise(resolve => {
+        resolveOlder = resolve;
+      });
+    });
+    await flush();
+
+    const newer = enq('s1', 'data', { v: 2 });
+    const newerAttempt = attemptOps([newer], async (_op, payload) => {
+      started.push(payload.v);
+      return true;
+    });
+    await flush();
+    expect(started).toEqual([1]);
+
+    resolveOlder(false);
+    await olderAttempt;
+    const result = await newerAttempt;
+    expect(result[0]).toMatchObject({
+      ok: false,
+      blockedByPredecessor: true,
+    });
+    expect(started).toEqual([1]);
+    expect(older.status).toBe('queued');
+    expect(peekOps()).toHaveLength(2);
+  });
+
+  test('two callers cannot consume two retry steps for the same failing op', async () => {
+    let resolveAttempt;
+    const op = enq('s1', 'data', { v: 1 });
+    const runner = vi.fn(() => new Promise(resolve => {
+      resolveAttempt = resolve;
+    }));
+
+    const first = attemptOps([op], runner);
+    await flush();
+    const duplicate = attemptOps([op], runner);
+    await flush();
+    expect(runner).toHaveBeenCalledTimes(1);
+
+    resolveAttempt(false);
+    await first;
+    const duplicateResult = await duplicate;
+
+    expect(duplicateResult[0]).toMatchObject({
+      ok: false,
+      blockedByBackoff: true,
+    });
+    expect(runner).toHaveBeenCalledTimes(1);
+    expect(op.attempts).toBe(1);
+    expect(op.status).toBe('queued');
+    expect(op.nextAttemptAt).toBe(now + 1000);
+  });
+
+  test('a newer partial overlap cannot overtake an older write in backoff', async () => {
+    const landed = [];
+    const older = enq('s1', 'campaign_state+data', { v: 1 });
+    await attemptOps([older], async () => false);
+    expect(older.status).toBe('queued');
+    expect(older.nextAttemptAt).toBeGreaterThan(now);
+
+    const newer = enq('s1', 'data', { v: 2 });
+    const blocked = await attemptOps([newer], async (_op, payload) => {
+      landed.push(payload.v);
+      return true;
+    });
+    expect(blocked[0]).toMatchObject({ ok: false, blockedByPredecessor: true });
+    expect(landed).toEqual([]);
+
+    now = older.nextAttemptAt;
+    await drainReady(async (_op, payload) => {
+      landed.push(payload.v);
+      return true;
+    });
+    expect(landed).toEqual([1]);
+
+    await drainReady(async (_op, payload) => {
+      landed.push(payload.v);
+      return true;
+    });
+    expect(landed).toEqual([1, 2]);
+    expect(peekOps()).toHaveLength(0);
+  });
+
   test('a same-key op superseded while it waits is skipped (the newer write takes over)', async () => {
     const started = [];
     const gates = new Map();
@@ -340,6 +471,7 @@ describe('mirror: tolerant + bounded', () => {
   test('missing localStorage is tolerated (in-memory queue still works)', async () => {
     delete globalThis.localStorage;
     resetOutbox();
+    activateOutboxOwner('test-owner');
     enq('s1');
     expect(peekOps().filter(o => o.kind !== OP_KIND_BARRIER)).toHaveLength(1);
     await drainReady(okRunner);
@@ -366,8 +498,10 @@ describe('boot replay from the mirror (dead-tab crash-safety)', () => {
     enq('s1', 'settlement', { blob: 'unsynced' });
     expect(JSON.parse(localStorage.getItem(MIRROR_KEY)).ops).toHaveLength(1);
 
-    // Fresh boot: in-memory state is gone; loadMirror repopulates from disk.
-    loadMirror();
+    // Fresh owner activation: in-memory state is detached, then restored from
+    // only this owner's mirror.
+    activateOutboxOwner(null);
+    activateOutboxOwner('test-owner');
     const [op] = peekOps();
     expect(op.saveId).toBe('s1');
     expect(op.nextAttemptAt).toBe(0);       // parked-on-disk ops boot immediately ready
@@ -383,7 +517,8 @@ describe('boot replay from the mirror (dead-tab crash-safety)', () => {
   test('barriers are not replayed (intra-session ordering markers only)', () => {
     enq('s1');
     enqueueBarrier();
-    loadMirror();
+    activateOutboxOwner(null);
+    activateOutboxOwner('test-owner');
     expect(peekOps().some(o => o.kind === OP_KIND_BARRIER)).toBe(false);
     expect(peekOps().filter(o => o.kind !== OP_KIND_BARRIER)).toHaveLength(1);
   });

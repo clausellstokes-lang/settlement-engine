@@ -43,11 +43,6 @@ const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 // composite first-paint margin is ~25 B; nothing new may ride the entry).
 const KeyboardPlacementControl = lazy(() => import('./KeyboardPlacementControl.jsx'));
 
-// Cachebuster bumped whenever public/map/* changes so browsers don't serve
-// a stale iframe bundle (e.g. old drop handler missing the settlementforge
-// path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop13';
-
 function WorldMapStageImpl({
   showingWizardNews,
   showingWorldPulse,
@@ -59,6 +54,7 @@ function WorldMapStageImpl({
   handleDragLeave,
   handleDrop,
   iframeRef,
+  mapFrameUrl = null,
   bridgeReady,
   bridgeRef,
   overlayTransformRef,
@@ -185,20 +181,14 @@ function WorldMapStageImpl({
         >
           {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
               the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
-          {/* SECURITY — same-origin FMG fork (public/map, vendored libs). This iframe
-              runs on the app origin and can therefore read the Supabase session in
-              localStorage. Containment that IS in place: (1) the bridge validates
-              event.origin === our origin AND event.source === this iframe, and posts
-              with an explicit origin target, never '*' (lib/mapBridge.js); (2) the
-              vercel.json CSP scopes connect-src for /map/ so a compromised lib can't
-              freely exfiltrate. Deliberately NOT sandboxed: an iframe with BOTH
-              allow-scripts and allow-same-origin (which FMG needs for its localStorage
-              /IndexedDB) can remove its own sandbox, so a same-origin sandbox is theater
-              against a compromised-script threat while risking the paid map; dropping
-              allow-same-origin instead denies FMG storage and breaks it. The real
-              isolation is serving /map/ from a SEPARATE ORIGIN (an infra change): the
-              bridge already speaks postMessage, so that is a src + origin-config swap,
-              not a rewrite. Tracked as the follow-up; do not add a same-origin sandbox. */}
+          {/* SECURITY — the production FMG fork is served from the dedicated map
+              origin resolved by mapRuntimeConfig. That keeps its deliberately
+              relaxed script policy and browser storage away from the app origin's
+              Supabase session. Both postMessage directions pin the exact opposite
+              origin AND WindowProxy; neither side uses '*'. Local Vite development
+              may still use /map/ on localhost. Deliberately not sandboxed: the fork
+              needs its own origin's storage and full editor runtime, while the
+              separate-origin boundary supplies the meaningful containment. */}
           {/* Text equivalent of the map's spatial content for screen readers.
               Rendered before the iframe so it is the first thing an SR reads
               inside the map container. */}
@@ -207,14 +197,14 @@ function WorldMapStageImpl({
               ? `World map: ${placedNames.length} settlement${placedNames.length === 1 ? '' : 's'} placed (${placedNames.join(', ')}). The map canvas is a visual editor; use the settlement palette beside it to select a settlement, and Settlements for its full dossier.`
               : 'World map: no settlements placed yet. Settlements are placed by dragging a card from the palette onto the map, or by pressing Enter on a palette card and steering with the arrow keys; each placed settlement will be listed here.'}
           </div>
-          {!imageMode && (
+          {!imageMode && mapFrameUrl && (
             <iframe
               // Keyed on mapReloadKey so the "Reload map" recovery action drops
               // the dead iframe and mounts a fresh one (P10).
               key={mapReloadKey}
               ref={iframeRef}
               data-tour="map"
-              src={FMG_URL}
+              src={mapFrameUrl}
               title="Fantasy Map"
               // a11y (SB5, bar 9): the FMG editor is a third-party visual tool —
               // tabbing into it strands a keyboard user inside an unmanaged

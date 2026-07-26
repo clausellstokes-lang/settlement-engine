@@ -111,6 +111,9 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/aiOverlayVerifier.js': 'ai-verify — before/after entity-array diff',
   'src/domain/townMap/townLayoutV2.js': 'display — town-map district placement',
   'src/domain/townMap/townMapModel.js': 'display — town-map district placement',
+  'src/domain/content/contentSamplePreview.js': 'preview/display — reports which custom institutions materialized in a fresh unsaved sample; it does not credit their functional capacity',
+  'src/domain/content/customContentUsage.js': 'provenance/read-model — name evidence must retain ruined historical references instead of treating them as live provider capacity',
+  'src/domain/content/settlementContentProvenance.js': 'provenance/audit — stamps immutable identity for every materialized custom institution, including a later-ruined retained row',
   // ── owner-deferred: owner-designed spatial connectivity mechanic ─────────────────
   // spatialDigest feeds buildSeaLanes/buildTeleportEdges (the owner's PORT §4j /
   // TELEPORT §4e/§4f rules). Their explicit siege model is NODE-STARVATION, not

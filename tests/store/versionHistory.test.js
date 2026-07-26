@@ -224,21 +224,37 @@ describe('version history mutations', () => {
     expect(useStore.getState().revertToSnapshot({ snapshotId: 'any' })).toBe(false);
   });
 
-  it('commitPendingEdits auto-snapshots after applying the queue', () => {
+  it('commitPendingEdits checkpoints before apply and exposes a working undo token', async () => {
     // Queue a rename-settlement edit
-    useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
+    await useStore.getState().queueEdit('rename-settlement', { newName: 'New Name' });
     expect(useStore.getState().pendingEditsQueue).toHaveLength(1);
-    useStore.getState().commitPendingEdits();
+    await useStore.getState().commitPendingEdits();
     // Queue is empty
     expect(useStore.getState().pendingEditsQueue).toHaveLength(0);
     // Settlement renamed
     expect(useStore.getState().settlement.name).toBe('New Name');
-    // Auto-snapshot exists in the sibling draft timeline (no active save).
+    // Auto-snapshot exists in the sibling draft timeline (no active save) and
+    // contains the PRE-COMMIT value, not the already-renamed value.
     const history = useStore.getState().draftVersionHistory || [];
     const autoSnap = history.find(s => s.kind === 'auto-commit');
     expect(autoSnap).toBeTruthy();
-    expect(autoSnap.label).toContain('rename-settlement');
+    expect(autoSnap.settlement.name).toBe('Hightower\'s Reach');
+    // Version labels are user-facing; internal operation tokens must not leak
+    // into the dossier timeline.
+    expect(autoSnap.label).toBe('Dossier change');
     // The commit's auto-snapshot never nests a timeline into its payload.
     expect(autoSnap.settlement.versionHistory).toBeUndefined();
+
+    const receipt = useStore.getState().pendingEditReceipts.at(-1);
+    expect(receipt.undoToken).toEqual({
+      kind: 'snapshot',
+      snapshotId: autoSnap.id,
+      saveId: null,
+    });
+    const reverted = useStore.getState().revertToSnapshot({
+      snapshotId: receipt.undoToken.snapshotId,
+    });
+    expect(reverted.ok).toBe(true);
+    expect(useStore.getState().settlement.name).toBe('Hightower\'s Reach');
   });
 });

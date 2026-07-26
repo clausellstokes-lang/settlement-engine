@@ -104,6 +104,48 @@ describe('deriveMilitaryCapacity — structured decomposition', () => {
     const cap = deriveMilitaryCapacity(city);
     expect(militaryCapacityScalar(city)).toBeCloseTo(cap.theoreticalCapacity / 100, 6);
   });
+
+  it('does not grant native military or materiel strength from current custom display names', () => {
+    const base = {
+      settlement: {
+        ...thorpe.settlement,
+        institutions: [],
+        economicState: {
+          ...thorpe.settlement.economicState,
+          primaryExports: [],
+        },
+      },
+    };
+    const namesakes = [
+      { name: 'Royal Garrison' },
+      { name: 'Master Weaponsmiths Forge' },
+    ];
+    const currentCustom = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes.map((institution, index) => ({
+          ...institution,
+          source: 'custom',
+          customDefinitionId: `definition:institutions:military-collision-${index}`,
+        })),
+      },
+    };
+    const legacyUnstamped = {
+      settlement: {
+        ...base.settlement,
+        institutions: namesakes,
+      },
+    };
+
+    const baseline = deriveMilitaryCapacity(base);
+    const custom = deriveMilitaryCapacity(currentCustom);
+    const legacy = deriveMilitaryCapacity(legacyUnstamped);
+
+    expect(custom.facets.institutions).toBe(baseline.facets.institutions);
+    expect(custom.facets.materiel).toBe(baseline.facets.materiel);
+    expect(legacy.facets.institutions).toBeGreaterThan(baseline.facets.institutions);
+    expect(legacy.facets.materiel).toBeGreaterThan(baseline.facets.materiel);
+  });
 });
 
 describe('war erosion — current vs theoretical', () => {

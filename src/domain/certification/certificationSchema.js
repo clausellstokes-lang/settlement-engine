@@ -13,8 +13,9 @@
  * THE LAWS (enforced by validateCertificationManifest + the claims-parity pin):
  *  1. CLOSED PROPERTY VOCABULARY: a soak may only claim a property from
  *     SOAK_PROPERTY_KEYS — the panel renders a proof line only for a listed key.
- *  2. STATUS↔SOAK LOCKSTEP: a 'certified' band MUST carry a soak result; a
- *     'pending' band MUST carry soak:null. No claim can exist without its receipt.
+ *  2. STATUS↔SOAK LOCKSTEP: pending carries no receipt, measured carries a
+ *     partial receipt, and certified carries a receipt proving every required
+ *     property. Passing a narrower harness can never mint a broad certificate.
  *  3. VERSIONED + TOTAL ON GARBAGE: the validator never throws; it returns
  *     { ok, errors } (the customContentSchema idiom) and tolerates absence of
  *     optional fields, rejecting only present-but-invalid ones.
@@ -30,9 +31,10 @@
 /** The manifest schema version (bumped only on a breaking shape change). @type {number} */
 export const CERTIFICATION_MANIFEST_VERSION = 1;
 
-/** A band is either proven by a soak or awaiting one. @type {ReadonlyArray<{ key: string, label: string }>} */
+/** @type {ReadonlyArray<{ key: string, label: string }>} */
 export const CERTIFICATION_STATUS = Object.freeze([
   { key: 'certified', label: 'Certified' },
+  { key: 'measured', label: 'Measured' },
   { key: 'pending', label: 'Pending' },
 ]);
 /** @type {ReadonlyArray<string>} */
@@ -56,6 +58,13 @@ export const SOAK_PROPERTIES = Object.freeze([
 /** @type {ReadonlyArray<string>} */
 export const SOAK_PROPERTY_KEYS = Object.freeze(SOAK_PROPERTIES.map((p) => p.key));
 
+/**
+ * Certification is a conjunction, not a synonym for "some checks passed."
+ * Measurement receipts may prove a subset; a certified band must prove all of
+ * these properties in the same band receipt.
+ */
+export const CERTIFICATION_REQUIRED_PROPERTY_KEYS = SOAK_PROPERTY_KEYS;
+
 /** The human label for a soak property key ('' for an unknown key). Pure, total.
  *  @param {string} key @returns {string} */
 export function soakPropertyLabel(key) {
@@ -71,7 +80,7 @@ export function soakPropertyLabel(key) {
  * @property {number} years          calendar years advanced (e.g. 100)
  * @property {number} seedsTested    distinct seeds run in the band
  * @property {number} ticksAdvanced  total ticks advanced across the run
- * @property {string[]} properties   a subset of SOAK_PROPERTY_KEYS the run held
+ * @property {string[]} properties   the SOAK_PROPERTY_KEYS this run held
  * @property {string} runAt          ISO timestamp the soak completed
  * @property {string} [buildHash]    the build the soak ran against (optional)
  */
@@ -82,7 +91,7 @@ export function soakPropertyLabel(key) {
  * @property {string} bandId     the seed-independent grouping key (config signature or preset id)
  * @property {string} presetId   the human-facing preset label the band covers
  * @property {string} status     one of CERTIFICATION_STATUS_KEYS
- * @property {SoakResult|null} soak  the proof (present iff status==='certified')
+ * @property {SoakResult|null} soak  absent when pending; present when measured/certified
  */
 
 /**
@@ -117,10 +126,13 @@ export function validateSoakResult(raw) {
   if (!Array.isArray(props)) {
     errors.push('properties must be an array of proven-property keys.');
   } else {
+    const seen = new Set();
     for (const p of props) {
       if (!SOAK_PROPERTY_KEYS.includes(/** @type {string} */ (p))) {
         errors.push(`unknown soak property: ${String(p)} (must be one of: ${SOAK_PROPERTY_KEYS.join(', ')}).`);
       }
+      if (seen.has(p)) errors.push(`duplicate soak property: ${String(p)}.`);
+      seen.add(p);
     }
   }
   if (typeof r.runAt !== 'string' || r.runAt.trim() === '') {
@@ -148,11 +160,24 @@ export function validateCertificationBand(raw) {
   if (!CERTIFICATION_STATUS_KEYS.includes(/** @type {string} */ (b.status))) {
     errors.push(`status must be one of: ${CERTIFICATION_STATUS_KEYS.join(', ')}.`);
   }
-  // THE STATUS↔SOAK LOCKSTEP (the claims-parity wall at the schema level): a
-  // certified band MUST prove itself; a pending band MUST claim nothing.
+  // The status is itself a claim. Keep partial evidence visible as "measured"
+  // without allowing it to inherit the stronger "certified" label.
   if (b.status === 'certified') {
     if (b.soak == null) {
       errors.push('a certified band must carry a soak result (no claim without a receipt).');
+    } else {
+      const s = validateSoakResult(b.soak);
+      if (!s.ok) errors.push(...s.errors.map((e) => `soak: ${e}`));
+      const soak = /** @type {Record<string, unknown>} */ (b.soak);
+      const properties = Array.isArray(soak.properties) ? soak.properties : [];
+      const missing = CERTIFICATION_REQUIRED_PROPERTY_KEYS.filter((key) => !properties.includes(key));
+      if (missing.length) {
+        errors.push(`a certified band is missing required properties: ${missing.join(', ')}.`);
+      }
+    }
+  } else if (b.status === 'measured') {
+    if (b.soak == null) {
+      errors.push('a measured band must carry a soak result.');
     } else {
       const s = validateSoakResult(b.soak);
       if (!s.ok) errors.push(...s.errors.map((e) => `soak: ${e}`));

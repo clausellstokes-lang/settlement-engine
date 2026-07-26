@@ -21,6 +21,7 @@ import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
 import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
+import AdminOperationalHealthPanel from './admin/AdminOperationalHealthPanel.jsx';
 import Button from './primitives/Button.jsx';
 import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import Page from './primitives/Page.jsx';
@@ -33,7 +34,7 @@ import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP,
 // spacing that sets the read-only Insights cluster farther out from the action
 // tools (P5), so the page still reads as a hierarchy rather than co-equal cards
 // (P4).
-function Section({ title, children, actions }) {
+function Section({ heading, children, actions }) {
   return (
     <div style={{
       border: `1px solid ${BORDER}`, overflow: 'hidden',
@@ -45,7 +46,7 @@ function Section({ title, children, actions }) {
         background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <h2 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, flex: 1 }}>
-          {title}
+          {heading}
         </h2>
         {actions}
       </div>
@@ -168,24 +169,31 @@ export default function AdminPanel({ onBack }) {
       {/* Action tools — the high-frequency operator surfaces (user console,
           moderation, support, pricing). No raw profiles read: the only user
           source is the audited list_users / get_user_* edge actions. */}
-      <Section title="User Management">
+      <Section heading="User Management">
         <AdminUsersPanel />
       </Section>
 
-      <Section title="Gallery Reports">
+      <Section heading="Gallery Reports">
         <GalleryModerationPanel />
       </Section>
 
       {/* Support queue — claim / transition / reply / internal-note / link-FAQ,
           all through the audited admin-actions ticket handlers. */}
-      <Section title="Support Queue">
+      <Section heading="Support Queue">
         <SupportQueuePanel />
+      </Section>
+
+      {/* Durable privacy/money/webhook obligations — unlike a generic status
+          dashboard, this is a work surface: exceptional rows remain visible
+          after acknowledgement until their authoritative worker completes. */}
+      <Section heading="Operational Obligations">
+        <AdminOperationalHealthPanel />
       </Section>
 
       {/* AI pricing — operator resync cockpit for the shared pricingResync module
           (admin-actions ai_pricing_resync), plus the nightly cron status/toggle.
           Dry-run is the checkbox default, so mounting never risks a stray write. */}
-      <Section title="AI Pricing">
+      <Section heading="AI Pricing">
         <AiPricingResyncPanel />
       </Section>
 
@@ -194,7 +202,7 @@ export default function AdminPanel({ onBack }) {
           squint now separates "tools I act in" from "dashboards I read", so the
           page reads as a hierarchy instead of co-equal cards. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
-        <Section title="Usage Trends">
+        <Section heading="Usage Trends">
           <AdminTrendsPanel />
         </Section>
 
@@ -205,7 +213,7 @@ export default function AdminPanel({ onBack }) {
             a second "Client Errors" Section) so the admin view adds no native
             title= to the shrink-only guidance-walker census; the errors panel
             carries its own <h3> delimiter. Read-only, service-role-gated. */}
-        <Section title="Analytics & errors">
+        <Section heading="Analytics & errors">
           <AdminAnalyticsPanel />
           <AdminClientErrorsPanel />
         </Section>
@@ -213,7 +221,7 @@ export default function AdminPanel({ onBack }) {
         {/* Simulation tuning — read-only diagnostics over the live campaigns'
             worldState ledgers through the SAME pure display read-models the DM
             surfaces + PDF consume. No engine mutation, no rng, no wall clock. */}
-        <Section title="Sim Tuning">
+        <Section heading="Sim Tuning">
           <AdminSimTuningPanel />
         </Section>
       </div>

@@ -25,7 +25,11 @@ import {
 
 import { useStore } from '../../store/index.js';
 import { advanceEntries } from '../../domain/display/chronicleGraph.js';
-import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
+import {
+  humanizeToken,
+  settlementSizeLabel,
+  tickCalendarLabel,
+} from '../../domain/display/humanizeEngineTokens.js';
 import { chronicleForAdvance, hasChronicle } from '../../domain/display/chronicleReadModel.js';
 import { decreesForAdvance } from '../../domain/display/decreeTracker.js';
 import {
@@ -36,8 +40,6 @@ import Button from '../primitives/Button.jsx';
 // V-4 THE CAUSE-WALK — STATIC within this already-lazy chunk (the FP-R idiom:
 // a lazy() would mint a preload entry). @enforced-by tests/build/vendorPdfLazy.test.js
 import CauseWalkPanel from './CauseWalkPanel.jsx';
-
-const human = (v) => String(v || '').replace(/_/g, ' ');
 
 const CLASS_LABEL = {
   war: 'War', succession_coup: 'Succession', plague: 'Plague', calamity: 'Calamity',
@@ -142,10 +144,14 @@ function DeltaLead({ delta, resolveName }) {
           <Chip tone={RED} bg={CARD_ALT}><TrendingDown size={10} /> {population.fell.slice(0, 3).map(resolveName).join(', ')}{population.fell.length > 3 ? ` +${population.fell.length - 3}` : ''} declined</Chip>
         )}
         {tiers.map((t, i) => (
-          <Chip key={`t${i}`} tone={SECOND}>{resolveName(t.id)}: tier {String(t.from)} → {String(t.to)}</Chip>
+          <Chip key={`t${i}`} tone={SECOND}>
+            {resolveName(t.id)}: Size {settlementSizeLabel(t.from, 'Unknown')} → {settlementSizeLabel(t.to, 'Unknown')}
+          </Chip>
         ))}
         {relationships.map((r, i) => (
-          <Chip key={`r${i}`} tone={r.kind === 'war-declared' ? RED : r.kind === 'alliance-formed' ? GREEN : SECOND}>{human(r.kind)}</Chip>
+          <Chip key={`r${i}`} tone={r.kind === 'war-declared' ? RED : r.kind === 'alliance-formed' ? GREEN : SECOND}>
+            {humanizeToken(r.kind)}
+          </Chip>
         ))}
       </div>
     </div>
@@ -236,14 +242,14 @@ function DeputyDiary({ diary }) {
 // ── THE DECREE TRACKER (§5 / §5b) ────────────────────────────────────────────
 
 function StandingBadge({ standing }) {
-  return <Chip tone={STANDING_TONE[standing] || MUTED}>{human(standing === 'null' ? 'no effect' : standing)}</Chip>;
+  return <Chip tone={STANDING_TONE[standing] || MUTED}>{humanizeToken(standing === 'null' ? 'no effect' : standing)}</Chip>;
 }
 
 function DecreeCard({ decree, within }) {
   return (
     <div data-testid="chronicle-decree" style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '7px 9px', display: 'grid', gap: 4 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-        <Chip tone={AMBER} bg={AMBER_BG}><Landmark size={10} /> {human(decree.kind)}</Chip>
+        <Chip tone={AMBER} bg={AMBER_BG}><Landmark size={10} /> {humanizeToken(decree.kind)}</Chip>
         <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{decree.landing.label}</span>
         <span style={{ flex: 1 }} />
         <StandingBadge standing={within || decree.standing} />
@@ -268,7 +274,7 @@ function DecreeCluster({ cluster }) {
       background: AMBER_BG, padding: '8px 10px', display: 'grid', gap: 5,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-        <Chip tone={cluster.selfConflict ? RED : AMBER} bg={CARD}>{human(cluster.relation)}</Chip>
+        <Chip tone={cluster.selfConflict ? RED : AMBER} bg={CARD}>{humanizeToken(cluster.relation)}</Chip>
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>{cluster.jointStory}</span>
       </div>
       <div style={{ display: 'grid', gap: 4 }}>

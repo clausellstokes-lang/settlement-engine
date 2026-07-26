@@ -70,7 +70,7 @@ export default function UnassignedLedger({
                 onNavigate={onNavigate}
                 canManageCampaigns={canManageCampaigns}
                 selectMode={selectMode}
-                selected={selectedIds.has(s.id)}
+                selected={selectedIds.has(String(s.id))}
                 onToggleSelect={onToggleSelect}/>
             ))}
           </tbody>

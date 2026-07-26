@@ -41,6 +41,23 @@ describe('W-F8 moral lean table', () => {
     expect(institutionMoralLean({ name: 'Tavern' })).toBeNull();
   });
 
+  it('does not derive moral or martial mechanics from current custom presentation names', () => {
+    const custom = name => ({
+      name,
+      status: 'active',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: `definition:institutions:${name}`,
+    });
+
+    expect(institutionMoralLean(custom('Slave market'))).toBeNull();
+    expect(institutionMartialLean(custom('Garrison'))).toBeNull();
+    expect(settlementMoralConductLean({
+      institutions: [custom('Slave market')],
+    })).toEqual({ cruelty: 0, disorder: 0 });
+  });
+
   it('the abolition/retention geometry produces the owner cases (no special-casing)', () => {
     const bleed = 0.6;
     // CG abolishes the slave market (+cruelty) but tolerates the gambling house (+disorder)

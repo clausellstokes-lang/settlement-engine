@@ -66,6 +66,25 @@ describe('slugify primitive — every migrated site is byte-identical (id-join s
     const old = (s) => String(s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
     proveParity(old, { sep: '_' });
   });
+
+  test('reviewed supply-chain ids — ASCII-only lowercasing matches PostgreSQL', () => {
+    const old = (value) => String(value || '')
+      .replace(/[A-Z]/g, character => (
+        String.fromCharCode(character.charCodeAt(0) + 32)
+      ))
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+    const databaseBoundary = [
+      ...BATTERY,
+      'İstanbul',
+      'Kelvin',
+      'ſeed',
+      'ASCII-I-K-İ',
+    ];
+    for (const input of databaseBoundary) {
+      expect(slugify(input, { asciiLower: true })).toBe(old(input));
+    }
+  });
 });
 
 describe('fold-triage migrations (2026-07-18): the three post-review inliners', () => {

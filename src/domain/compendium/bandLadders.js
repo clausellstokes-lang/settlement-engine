@@ -37,6 +37,7 @@
 
 import { PROSPERITY_TIERS } from '../../data/constants.js';
 import { glossaryByCategory } from '../display/glossary.js';
+import { PRIORITY_BANDS } from '../priorityBands.js';
 
 /**
  * Authored one-line readings for the prosperity rungs. PROSPERITY_TIERS carries
@@ -60,18 +61,23 @@ export const PROSPERITY_READINGS = Object.freeze({
 
 /**
  * Priority bands — the five-rung ladder the engine reads every priority slider
- * through (priorityToCategory, src/generators/economy/prosperity.js). The slider
+ * through (priorityBand, src/domain/priorityBands.js). The slider
  * values run 5 to 95 (default 50); these bands decide how strongly a domain shapes
  * the settlement. Names + cut-points stated in each reading; authored, coverage-pinned.
- * @type {ReadonlyArray<BandLevel>}
+ * @type {Readonly<Record<string, string>>}
  */
-const PRIORITY_LEVELS = Object.freeze([
-  { name: 'Very Low',  reading: 'At or below 15. The engine expects almost nothing of this domain; its institutions are unlikely and its mark on the settlement is faint.' },
-  { name: 'Low',       reading: 'Up to 35. A minor emphasis. A few of this domain\'s institutions may appear, but it does not steer the settlement.' },
-  { name: 'Medium',    reading: 'Up to 65. The default weight. This domain carries ordinary influence, neither driving the settlement nor absent from it.' },
-  { name: 'High',      reading: 'Up to 85. A strong emphasis. The engine expects this domain\'s institutions to be present and to leave a mark.' },
-  { name: 'Very High', reading: 'Above 85. A dominant priority. This domain\'s institutions are expected in force and can define the settlement\'s character.' },
-]);
+const PRIORITY_READING_BY_KEY = Object.freeze({
+  very_low: 'At or below 15. The engine expects almost nothing of this domain; its institutions are unlikely and its mark on the settlement is faint.',
+  low: 'Up to 35. A minor emphasis. A few of this domain\'s institutions may appear, but it does not steer the settlement.',
+  medium: 'Up to 65. The default weight. This domain carries ordinary influence, neither driving the settlement nor absent from it.',
+  high: 'Up to 85. A strong emphasis. The engine expects this domain\'s institutions to be present and to leave a mark.',
+  very_high: 'Above 85. A dominant priority. This domain\'s institutions are expected in force and can define the settlement\'s character.',
+});
+/** @type {ReadonlyArray<BandLevel>} */
+const PRIORITY_LEVELS = Object.freeze(PRIORITY_BANDS.map((band) => Object.freeze({
+  name: band.label,
+  reading: PRIORITY_READING_BY_KEY[band.key],
+})));
 
 /**
  * Supply-chain status — the states the SupplyChainsPanel shows on every chain chip

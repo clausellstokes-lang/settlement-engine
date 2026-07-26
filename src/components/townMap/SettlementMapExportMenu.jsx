@@ -35,12 +35,30 @@ import {
 } from '../../lib/townMapExport.js';
 
 /**
- * @param {{ settlement: any, saveId?: string|number|null, style?: string, dress?: import('../../domain/townMap/groundDress.js').MapDress | null }} props
+ * @param {{
+ *   settlement: any,
+ *   saveId?: string|number|null,
+ *   style?: string,
+ *   dress?: import('../../domain/townMap/groundDress.js').MapDress | null,
+ *   mapEdits?: any,
+ *   worldState?: any,
+ *   regionalGraph?: any,
+ *   audience?: 'dm'|'player'|'public',
+ * }} props
  *   `style` is the pane's active lens — the export honors it. `dress` (IT-3, OPTIONAL) is the
  *   resolved season/state portrait so the exported file matches the on-screen season (WYSIWYG);
  *   absent ⇒ seasonless base bytes.
  */
-export default function SettlementMapExportMenu({ settlement, saveId = null, style, dress = null }) {
+export default function SettlementMapExportMenu({
+  settlement,
+  saveId = null,
+  style,
+  dress = null,
+  mapEdits = null,
+  worldState = null,
+  regionalGraph = null,
+  audience = 'dm',
+}) {
   const [open, setOpen] = useState(false);
   const [resolution, setResolution] = useState(DEFAULT_EXPORT_RESOLUTION);
   const [busy, setBusy] = useState(null);   // which action id is running
@@ -101,6 +119,21 @@ export default function SettlementMapExportMenu({ settlement, saveId = null, sty
     const { generateTownMapPdf } = await import('../../utils/townMapPdfExport.js');
     await generateTownMapPdf(settlement, { style, dress });
   });
+  const doPortrait = (format) => run(`portrait-${format}`, async () => {
+    // Complete-scene expansion, CPU rasterization, and GLB encoding remain in a
+    // nested lazy worker. Merely opening Map or this menu downloads none of it.
+    const { downloadTownSceneArtifact } = await import(
+      '../../lib/townScene/townSceneExport.js'
+    );
+    await downloadTownSceneArtifact({
+      settlement,
+      mapEdits,
+      worldState,
+      regionalGraph,
+      audience,
+      format,
+    });
+  });
 
   return (
     <div ref={wrapRef} data-town-export style={wrapStyle}>
@@ -155,6 +188,34 @@ export default function SettlementMapExportMenu({ settlement, saveId = null, sty
                     <option key={r} value={r}>{`${r} px`}</option>
                   ))}
                 </select>
+              </div>
+
+              <span style={headerStyle}>Dimensional portrait</span>
+              <div style={rowStyle}>
+                <Button
+                  data-town-export-portrait-png
+                  variant="ghost"
+                  size="sm"
+                  busy={busy === 'portrait-png'}
+                  disabled={!!busy}
+                  onClick={doPortrait('png')}
+                  aria-label="Download a deterministic illustrated three-dimensional settlement portrait PNG"
+                  style={{ minHeight: 0, padding: '2px 8px' }}
+                >
+                  Portrait PNG
+                </Button>
+                <Button
+                  data-town-export-scene-glb
+                  variant="ghost"
+                  size="sm"
+                  busy={busy === 'portrait-glb'}
+                  disabled={!!busy}
+                  onClick={doPortrait('glb')}
+                  aria-label="Download the complete portable three-dimensional settlement scene as GLB"
+                  style={{ minHeight: 0, padding: '2px 8px' }}
+                >
+                  Scene GLB
+                </Button>
               </div>
 
               <span style={headerStyle}>Tabletop</span>

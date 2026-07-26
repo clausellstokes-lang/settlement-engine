@@ -15,6 +15,7 @@ import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/re
 
 // ── Shared mocks ─────────────────────────────────────────────────────────────
 const flagMock = vi.fn(() => false);
+const warResolveCapture = vi.hoisted(() => ({ props: null }));
 vi.mock('../../src/lib/flags.js', () => ({ flag: (...args) => flagMock(...args) }));
 
 let storeState = {};
@@ -33,7 +34,12 @@ vi.mock('../../src/components/map/PantheonPanel.jsx', () => ({ default: () => nu
 vi.mock('../../src/components/map/LiveWarStatus.jsx', () => ({ default: () => null }));
 vi.mock('../../src/components/map/RealmIntrigue.jsx', () => ({ default: () => null }));
 vi.mock('../../src/components/map/BeliefDivergenceBand.jsx', () => ({ default: () => null }));
-vi.mock('../../src/components/map/WarResolveSection.jsx', () => ({ default: () => 'war-resolve-mounted' }));
+vi.mock('../../src/components/map/WarResolveSection.jsx', () => ({
+  default: (props) => {
+    warResolveCapture.props = props;
+    return 'war-resolve-mounted';
+  },
+}));
 
 import RealmInspector from '../../src/components/map/RealmInspector.jsx';
 import WarFaithMapOverlay from '../../src/components/map/WarFaithMapOverlay.jsx';
@@ -43,6 +49,7 @@ afterEach(() => {
   cleanup();
   vi.clearAllMocks();
   flagMock.mockReturnValue(false);
+  warResolveCapture.props = null;
 });
 
 // ── 1. War & Resolve fold-in — flag + campaign gating ────────────────────────
@@ -69,13 +76,16 @@ describe('RealmInspector War door — War & Resolve fold-in', () => {
   });
 
   test('flag ON ⇒ War & Resolve folds into the War door', async () => {
-    flagMock.mockReturnValue(true);
+    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
+    const saves = [{ id: 's1', settlement: { name: 'Marchwall' } }];
+    storeState = { savedSettlements: saves };
     render(<RealmInspector {...baseProps} section="war" campaign={{ id: 'c1', name: 'Realm' }} />);
     await waitFor(() => expect(screen.getByText('war-resolve-mounted')).toBeTruthy());
+    expect(warResolveCapture.props.saves).toBe(saves);
   });
 
   test('flag ON + no campaign ⇒ the War door shows the empty state, never war data (premium gate)', async () => {
-    flagMock.mockReturnValue(true);
+    flagMock.mockImplementation(name => name === 'warEconomySurfacing');
     render(<RealmInspector {...baseProps} section="war" campaign={null} />);
     await waitFor(() => expect(screen.getByText(/fills once a campaign is live/i)).toBeTruthy());
     expect(screen.queryByText('war-resolve-mounted')).toBeNull();

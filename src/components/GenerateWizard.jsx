@@ -95,6 +95,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
+  const [generating, setGenerating] = useState(false);
+  // State disables the visible controls; the ref closes the same-tick window
+  // before React can render that disabled state.
+  const generatingRef = useRef(false);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
   // Recoverable unsaved dossier. If a save stalled and the user reloaded to
   // recover, the generated settlement is gone from the store (never persisted)
@@ -103,8 +107,8 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [restorableDraft, setRestorableDraft] = useState(() => readDraft());
 
   // ── Analytics: wizard-funnel session bookkeeping ─────────────────────────
-  // Plain refs so they never trigger renders. `generatedThisSession` flips
-  // true the first time the user fires Generate, suppressing wizard_abandoned.
+  // Plain refs so they never trigger renders. `generatedThisSession` flips only
+  // after Generate resolves with a settlement, suppressing wizard_abandoned.
   // `visitedSteps` accumulates the distinct step ids seen; `wizardMountAt`
   // anchors the dwell band for abandonment. All fire-and-forget, additive.
   const generatedThisSession = useRef(false);
@@ -170,7 +174,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     };
   }, []);
 
-  const handleGenerate = useCallback(() => {
+  const handleGenerate = useCallback(async () => {
     // Tier 7.2 — anonymous daily cap. Regeneration counts against the same
     // 3/day allowance as the first generation (enforced in the store), so
     // when an anon is already at cap, route to the sign-in/unlock flow
@@ -179,12 +183,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       if (typeof onSignIn === 'function') onSignIn();
       return;
     }
+    if (generatingRef.current) return;
+    generatingRef.current = true;
+    setGenerating(true);
     setGenerateError(null);
     // Analytics (additive, fire-and-forget): generation_started. Read coarse
     // config enums + toggle counts from a fresh store snapshot so we never
-    // add a render-triggering subscription. Mark the session as having
-    // generated so wizard_abandoned won't fire on unmount.
-    generatedThisSession.current = true;
+    // add a render-triggering subscription.
     try {
       const st = useStore.getState();
       const cfg = st.config || {};
@@ -207,12 +212,17 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       });
     } catch { /* analytics must never affect generation */ }
     try {
-      generate();
+      const generated = await generate();
+      if (!generated) throw new Error('Generation completed without a settlement.');
+      generatedThisSession.current = true;
       clearLoadedFromSave();
       setShowOutput(true); // show output after generation
     } catch (e) {
       console.error('GENERATE ERROR:', e);
       setGenerateError(t('errors.generateFail'));
+    } finally {
+      generatingRef.current = false;
+      setGenerating(false);
     }
   }, [generate, clearLoadedFromSave, authTier, onSignIn]);
 
@@ -448,9 +458,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           variant="primary"
           fullWidth
           onClick={handleGenerate}
+          disabled={generating}
+          busy={generating}
           data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
         >
-          Generate Draft
+          {generating ? 'Generating draft…' : 'Generate Draft'}
         </Button>
         <p className="sf-readable-strip" style={{
           alignSelf: 'center',
@@ -506,6 +518,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             isMobile={isMobile}
             handleBack={handleBack}
             handleGenerate={handleGenerate}
+            generating={generating}
             handleNewSettlement={handleNewSettlement}
             maxWidth={PAGE_MAX}
           />

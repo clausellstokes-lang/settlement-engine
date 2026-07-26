@@ -14,7 +14,7 @@ import { viewToPath } from '../lib/routes.js';
 import { saves as savesService } from '../lib/saves.js';
 import { t } from '../copy/index.js';
 import { isCampaignActive } from '../lib/campaigns.js';
-import { activeSaveCount, inactiveRetentionCount, isSaveActive } from '../lib/saveAccess.js';
+import { activeSaveCount, isSaveActive } from '../lib/saveAccess.js';
 import {
   relationshipDefinition,
   relationshipLinkMetadata,
@@ -25,12 +25,21 @@ import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
-import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
+import {
+  migrateConfig, findSaveById, saveCountBand, dayGapBand,
+  canonPhaseOf, lastEditedMs, hasAiData,
+  renameInterSettlementReference, withSettlementChanges,
+} from './settlements/helpers.js';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
+import {
+  createLibraryBatchPersister,
+  createLibraryDeleteHandlers,
+} from './settlements/libraryDeleteHandlers.js';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
 import BulkActionBar from './settlements/BulkActionBar.jsx';
 import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
+import { useOwnerScopedSaves } from '../hooks/useOwnerScopedSaves.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -51,7 +60,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const authTier = useStore(s => s.auth.tier);
   const isElevated = useStore(s => s.isElevated());
   const authUser = useStore(s => s.auth.user);
-  const setSavedSettlements = useStore(s => s.setSavedSettlements);
   const applyCosmeticRename = useStore(s => s.applyCosmeticRename);
   const generateSettlement = useStore(s => s.generateSettlement);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -70,6 +78,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const toggleCampaignCollapsed = useStore(s => s.toggleCampaignCollapsed);
   const addToCampaign = useStore(s => s.addToCampaign);
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
+  const getCampaignMembershipBlock = useStore(s => s.getCampaignMembershipBlock);
+  const getSettlementDeletionBlock = useStore(s => s.getSettlementDeletionBlock);
   // W4a — Library living surface: canonize-from-list, per-campaign advance-time.
   const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
   const setActiveCampaign = useStore(s => s.setActiveCampaign);
@@ -174,19 +184,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     clearLoadedFromSave, onNavigate, setPurchaseModalOpen, forkingId,
   ]);
 
-  const [saves, _setSavesLocal] = useState([]);
-  // Wrapper: update local state + Zustand store so WorldMap palette stays in sync
-  const setSaves = useCallback((newSaves) => {
-    _setSavesLocal(newSaves);
-    setSavedSettlements(newSaves);
-  }, [setSavedSettlements]);
-  useEffect(() => {
-    return useStore.subscribe(
-      state => state.savedSettlements,
-      nextSaves => { _setSavesLocal(nextSaves || []); },
-    );
-  }, []);
-  const [savesLoading, setSavesLoading] = useState(true);
   const [deleteId, setDeleteId] = useState(null);
   const [detail, setDetail] = useState(null);
   const [linking, setLinking] = useState(false);
@@ -197,6 +194,19 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [reactivatingId, setReactivatingId] = useState(null);
   const [reactivationError, setReactivationError] = useState(null);
   const [persistenceError, setPersistenceError] = useState(null);
+  const resetOwnerView = useCallback(() => {
+    setDetail(null);
+    setDeleteId(null);
+    setPersistenceError(null);
+  }, []);
+  const reportLibraryLoadError = useCallback(error => {
+    console.error('Failed to load saves:', error);
+    setPersistenceError(t('errors.libraryLoadFail'));
+  }, []);
+  const { reloadSaves, saves, savesLoading, setSaves } = useOwnerScopedSaves(
+    authUser?.id,
+    { onOwnerBoundary: resetOwnerView, onLoadError: reportLibraryLoadError },
+  );
 
   // Co-campaign settlements are implicit Neutral neighbours by default (owner
   // order 2026-07-22). From ALL active campaigns (not the premium-gated
@@ -204,42 +214,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const neighbourCampaignOf = useMemo(() => campaignMembershipIndex(campaigns.filter(isCampaignActive)), [campaigns]);
   const allModifiers = useMemo(() => getAllModifiers(saves, 4, { campaignOf: neighbourCampaignOf }), [saves, neighbourCampaignOf]);
   const activeSlotsUsed = useMemo(() => activeSaveCount(saves), [saves]);
-  const inactiveRetained = useMemo(() => inactiveRetentionCount(saves), [saves]);
   const canReactivateInactive = authTier === 'free' && activeSlotsUsed < Math.min(maxSaves || 0, 3);
-
-  // Owner-keyed cancel latch: a ref that holds the LIVE owner id, so a mount-once
-  // load (or an in-flight reload) can tell whether the account was switched while
-  // savesService.list() was resolving and discard a stale result — otherwise a
-  // slow load can paint the previous owner's library over the new one. Kept
-  // current in an effect (commits before any async list() resolves).
-  const ownerIdRef = useRef(authUser?.id ?? 'anon');
-  useEffect(() => { ownerIdRef.current = authUser?.id ?? 'anon'; }, [authUser?.id]);
-
-  const reloadSaves = useCallback(async () => {
-    const ownerAtRequest = ownerIdRef.current;
-    const loaded = await savesService.list();
-    // Discard a stale reload if the owner switched mid-flight.
-    if (ownerIdRef.current !== ownerAtRequest) return loaded;
-    setSaves(loaded);
-    return loaded;
-  }, [setSaves]);
-
-  useEffect(() => {
-    const ownerAtRequest = ownerIdRef.current;
-    let cancelled = false;
-    const stale = () => cancelled || ownerIdRef.current !== ownerAtRequest;
-    savesService.list()
-      .then(loaded => { if (stale()) return; setSaves(loaded); setSavesLoading(false); })
-      .catch(e => {
-        if (stale()) return;
-        // FAIL-VISIBLE, never fail-silent: a failed library load must not read
-        // as an empty library. Route it into the shared trust-surface alert.
-        console.error('Failed to load saves:', e);
-        setPersistenceError(t('errors.libraryLoadFail'));
-        setSavesLoading(false);
-      });
-    return () => { cancelled = true; };
-  }, [setSaves]);
 
   // LIBRARY_VIEWED — once per session, after saves have loaded so the count
   // band is accurate. useFunnelEvent fires on the false→true transition and
@@ -290,8 +265,8 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // focus request changes, not when `detail` becomes truthy (we early-
   // return for that).
   useEffect(() => {
-    if (!pendingFocusId || savesLoading || !saves.length || detail) return;
-    const match = saves.find(s => s.id === pendingFocusId);
+    if (pendingFocusId == null || savesLoading || !saves.length || detail) return;
+    const match = saves.find(s => String(s.id) === String(pendingFocusId));
     if (match && isSaveActive(match)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setDetail({ ...match, saveData: match });
@@ -347,27 +322,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     else navigate('settlements');
   }, [detail]);
 
-  const persistBatch = async (updatedSaves, modifiedIds, options = {}) => {
-    const previousSaves = saves;
-    try {
-      setPersistenceError(null);
-      const updates = modifiedIds
-        .map(id => updatedSaves.find(entry => String(entry.id) === String(id)))
-        .filter(Boolean);
-      await savesService.mutateBatch({
-        updates,
-        deletes: options.deletes || [],
-        creates: options.creates || [],
-      });
-    } catch (e) {
-      console.error('Persist failed:', e);
-      setSaves(previousSaves);
-      const openId = detail?.saveData?.id;
-      const previousDetail = previousSaves.find(entry => String(entry.id) === String(openId));
-      if (openId) setDetail(previousDetail ? { ...previousDetail, saveData: previousDetail } : null);
-      setPersistenceError(t('errors.persistFail'));
-    }
-  };
+  const persistBatch = createLibraryBatchPersister({
+    ownerId: authUser?.id ?? null, previousSaves: saves,
+    detail, setDetail, setSaves, setPersistenceError,
+  });
 
   // ── Rename ──────────────────────────────────────────────────────────────
   const applyRename = (type, id, oldName, newName) => {
@@ -380,26 +338,50 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
     const trimmed = newName.trim();
     const saveId = detail?.saveData?.id;
-    let updatedSaves = saves.map(s => {
-      if (s.id !== saveId) {
-        const needsUpdate = (s.settlement?.interSettlementRelationships||[]).some(r => r.partnerSettlement === detail.settlement.name && (r.partnerName === oldName || r.npcName === oldName || r.partnerFactionName === oldName || r.factionName === oldName));
-        if (!needsUpdate) return s;
-        return { ...s, settlement: { ...s.settlement, interSettlementRelationships: (s.settlement.interSettlementRelationships||[]).map(r => {
-          if (r.partnerSettlement !== detail.settlement.name) return r;
-          return { ...r, partnerName: r.partnerName === oldName ? trimmed : r.partnerName, partnerFactionName: r.partnerFactionName === oldName ? trimmed : r.partnerFactionName, npcName: r.npcName === oldName ? trimmed : r.npcName, factionName: r.factionName === oldName ? trimmed : r.factionName };
-        }) } };
+    const updatedSaves = saves.map(save => {
+      const settlement = save.settlement;
+      if (String(save.id) !== String(saveId)) {
+        const relationships = settlement?.interSettlementRelationships || [];
+        const referencesEntity = relationships.some(relationship => {
+          const names = [
+            relationship.partnerName, relationship.npcName, relationship.partnerFactionName,
+            relationship.factionName,
+          ];
+          return relationship.partnerSettlement === detail.settlement.name
+            && names.includes(oldName);
+        });
+        if (!referencesEntity) return save;
+        return withSettlementChanges(save, {
+          interSettlementRelationships: relationships.map(relationship => (
+            relationship.partnerSettlement === detail.settlement.name
+              ? renameInterSettlementReference(relationship, oldName, trimmed) : relationship
+          )),
+        });
       }
-      const sett = s.settlement;
-      const updatedNpcs = type === 'npc' ? (sett.npcs||[]).map(n => n.id === id ? {...n, name:trimmed} : n) : sett.npcs;
-      const updatedFactions = type === 'faction' ? (sett.factions||[]).map(f => f.name === oldName ? {...f, name:trimmed} : f) : sett.factions;
-      const updatedRels = (sett.relationships||[]).map(r => ({ ...r, npc1Name: r.npc1Name === oldName ? trimmed : r.npc1Name, npc2Name: r.npc2Name === oldName ? trimmed : r.npc2Name }));
-      const updatedISR = (sett.interSettlementRelationships||[]).map(r => ({ ...r, npcName: r.npcName === oldName ? trimmed : r.npcName, partnerName: r.partnerName === oldName ? trimmed : r.partnerName, factionName: r.factionName === oldName ? trimmed : r.factionName, partnerFactionName: r.partnerFactionName === oldName ? trimmed : r.partnerFactionName }));
-      return { ...s, settlement: { ...sett, npcs: updatedNpcs, factions: updatedFactions, relationships: updatedRels, interSettlementRelationships: updatedISR } };
+
+      const npcs = type === 'npc'
+        ? (settlement.npcs || []).map(npc =>
+            String(npc.id) === String(id) ? { ...npc, name: trimmed } : npc)
+        : settlement.npcs;
+      const factions = type === 'faction'
+        ? (settlement.factions || []).map(faction =>
+            faction.name === oldName ? { ...faction, name: trimmed } : faction)
+        : settlement.factions;
+      const relationships = (settlement.relationships || []).map(relationship => ({
+        ...relationship,
+        npc1Name: relationship.npc1Name === oldName ? trimmed : relationship.npc1Name,
+        npc2Name: relationship.npc2Name === oldName ? trimmed : relationship.npc2Name,
+      }));
+      const interSettlementRelationships = (settlement.interSettlementRelationships || [])
+        .map(relationship => renameInterSettlementReference(relationship, oldName, trimmed));
+      return withSettlementChanges(
+        save, { npcs, factions, relationships, interSettlementRelationships },
+      );
     });
     setSaves(updatedSaves);
     const modifiedIds = updatedSaves.filter((s, i) => s !== saves[i]).map(s => s.id);
     persistBatch(updatedSaves, modifiedIds);
-    const updatedDetailSave = updatedSaves.find(s => s.id === saveId);
+    const updatedDetailSave = findSaveById(updatedSaves, saveId);
     if (updatedDetailSave) setDetail(d => ({ ...d, ...updatedDetailSave, saveData: updatedDetailSave }));
 
     // AI-2: cosmetic-tier change — cascade the rename into every touched
@@ -410,119 +392,104 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     }
   };
 
-  // ── Delete ──────────────────────────────────────────────────────────────
-  const deleteConfirmed = (id) => {
-    const deletedSave = saves.find(s => s.id === id);
-    // SETTLEMENT_DELETED — fired at the confirmed delete, before the save
-    // leaves local state. Coarse enums/bands/booleans only.
-    if (deletedSave) {
-      track(EVENTS.SETTLEMENT_DELETED, {
-        canon_phase: canonPhaseOf(deletedSave),
-        age_days_band: dayGapBand(lastEditedMs(deletedSave)),
-        had_ai_data: hasAiData(deletedSave),
-        was_published: !!deletedSave.is_public,
-      });
-    }
-    // Survivors computed ONCE (was recomputed per-row inside the map and again
-    // in the modifiedIds filter — O(n²)). `updated` is index-aligned to it, so
-    // the changed-row diff below is a cheap per-index identity compare.
-    // Clean only a survivor whose OWN network genuinely references the deleted
-    // save — by neighbour id OR matching name (top-level or settlement name).
-    // The previous `|| n.linkId` predicate matched ANY entry carrying a linkId,
-    // flagging (and re-scanning) every unrelated survivor.
-    const survivors = saves.filter(s => s.id !== id);
-    const names = new Set([deletedSave?.name, deletedSave?.settlement?.name].filter(Boolean));
-    const refsDeleted = n => n.id === id || names.has(n.name);
-    const updated = survivors.map(s => {
-      const net = s.settlement?.neighbourNetwork || [], isr = s.settlement?.interSettlementRelationships || [];
-      if (!net.some(refsDeleted)) return s;
-      const cleanNet = net.filter(n => !refsDeleted(n)), cleanISR = isr.filter(r => !names.has(r.partnerSettlement));
-      if (cleanNet.length === net.length && cleanISR.length === isr.length) return s;
-      return { ...s, settlement: { ...s.settlement, neighbourNetwork: cleanNet, interSettlementRelationships: cleanISR } };
-    });
-    setSaves(updated); setDeleteId(null);
-    if (detail?.saveData?.id === id) setDetail(null);
-    const modifiedIds = updated.filter((s, i) => s !== survivors[i]).map(s => s.id);
-    persistBatch(updated, modifiedIds, { deletes: [id] });
-  };
-
-  // ── Bulk delete ───────────────────────────────────────────────────────────
-  // Remove every selected id in ONE batch (so neighbour cleanup + persistence run
-  // against a single coherent snapshot, not N racing closures over a stale list).
-  // The pure array work lives in computeBulkDelete; this owns the side effects.
-  const bulkDeleteConfirmed = (ids) => {
-    const idSet = new Set(ids.map(String));
-    for (const ds of saves.filter(s => idSet.has(String(s.id)))) {
-      track(EVENTS.SETTLEMENT_DELETED, {
-        canon_phase: canonPhaseOf(ds), age_days_band: dayGapBand(lastEditedMs(ds)),
-        had_ai_data: hasAiData(ds), was_published: !!ds.is_public,
-      });
-    }
-    const { remaining, modifiedIds } = computeBulkDelete(saves, ids);
-    setSaves(remaining);
-    if (detail?.saveData?.id && idSet.has(String(detail.saveData.id))) setDetail(null);
-    persistBatch(remaining, modifiedIds, { deletes: ids });
-  };
+  const { deleteConfirmed, bulkDeleteConfirmed } = createLibraryDeleteHandlers({
+    ownerId: authUser?.id ?? null, saves, detail, setDetail, setDeleteId,
+    setSaves, setPersistenceError, persistBatch,
+  });
 
   // ── Link ────────────────────────────────────────────────────────────────
   const handleLink = (linkedSave, relType) => {
-    const definition = relationshipDefinition(
-      relType || 'neutral',
-      detail.saveData.id,
-      linkedSave.id,
-    );
+    const definition = relationshipDefinition(relType || 'neutral', detail.saveData.id, linkedSave.id);
     const resolvedRelType = definition.relationshipType;
     const linkId = `link_${detail.saveData.id}_${linkedSave.id}`;
-    const entryForCurrent = {
-      id:linkedSave.id, linkId, name:linkedSave.name, neighbourName:linkedSave.name,
-      neighbourTier:linkedSave.tier, tier:linkedSave.tier,
+    const currentNeighbourEntry = {
+      id: linkedSave.id, linkId,
+      name: linkedSave.name, neighbourName: linkedSave.name,
+      neighbourTier: linkedSave.tier, tier: linkedSave.tier,
       ...relationshipLinkMetadata(definition, definition.sourceRole),
-      description:`Manually linked as ${definition.sourceRole.replace(/_/g,' ')}.`, bidirectional:true,
+      description: `Manually linked as ${definition.sourceRole.replace(/_/g, ' ')}.`,
+      bidirectional: true,
     };
-    const entryForPartner = {
-      id:detail.saveData.id, linkId, name:detail.settlement.name,
-      neighbourName:detail.settlement.name,
-      neighbourTier:detail.settlement.tier||detail.saveData.tier, tier:detail.saveData.tier,
+    const partnerNeighbourEntry = {
+      id: detail.saveData.id, linkId,
+      name: detail.settlement.name, neighbourName: detail.settlement.name,
+      neighbourTier: detail.settlement.tier || detail.saveData.tier,
+      tier: detail.saveData.tier,
       ...relationshipLinkMetadata(definition, definition.targetRole),
-      description:`${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g,' ')}.`, bidirectional:true,
+      description: `${detail.settlement.name} is linked as ${definition.targetRole.replace(/_/g, ' ')}.`,
+      bidirectional: true,
     };
-    const { forA: npcForA, forB: npcForB } = buildInterSettlementNPCs(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
-    const { forA: conflictForA, forB: conflictForB } = generateCrossSettlementConflictsDeterministic(detail.settlement, linkedSave.settlement, resolvedRelType, linkId);
-    const network = [...(detail.settlement.neighbourNetwork||[]), entryForCurrent];
-    const ownISR = [...(detail.settlement.interSettlementRelationships||[]), ...npcForA, ...conflictForA];
-    let updatedSaves = saves.map(s => {
-      if (s.id === detail?.saveData?.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
-      if (s.id === linkedSave.id) return { ...s, settlement: { ...s.settlement, neighbourNetwork: [entryForPartner, ...(s.settlement?.neighbourNetwork||[]).filter(n => n.id !== detail.saveData.id)], interSettlementRelationships: [...(s.settlement?.interSettlementRelationships||[]).filter(r => r.linkId !== linkId), ...npcForB, ...conflictForB] } };
-      return s;
+    const { forA: currentNpcs, forB: partnerNpcs } = buildInterSettlementNPCs(
+      detail.settlement, linkedSave.settlement, resolvedRelType, linkId,
+    );
+    const { forA: currentConflicts, forB: partnerConflicts } =
+      generateCrossSettlementConflictsDeterministic(
+        detail.settlement, linkedSave.settlement, resolvedRelType, linkId,
+      );
+    const currentNetwork = [...(detail.settlement.neighbourNetwork || []), currentNeighbourEntry];
+    const currentRelationships = [
+      ...(detail.settlement.interSettlementRelationships || []), ...currentNpcs, ...currentConflicts,
+    ];
+    const currentChanges = { neighbourNetwork: currentNetwork, interSettlementRelationships: currentRelationships };
+    const currentSaveId = detail?.saveData?.id;
+    const updatedSaves = saves.map(save => {
+      if (String(save.id) === String(currentSaveId)) {
+        return withSettlementChanges(save, currentChanges);
+      }
+      if (String(save.id) === String(linkedSave.id)) {
+        const existingNetwork = save.settlement?.neighbourNetwork || [];
+        const partnerNetwork = [partnerNeighbourEntry, ...existingNetwork
+          .filter(neighbour => String(neighbour.id) !== String(currentSaveId))];
+        const existingRelationships = save.settlement?.interSettlementRelationships || [];
+        const partnerRelationships = [...existingRelationships
+          .filter(relationship => relationship.linkId !== linkId), ...partnerNpcs, ...partnerConflicts];
+        return withSettlementChanges(
+          save, { neighbourNetwork: partnerNetwork, interSettlementRelationships: partnerRelationships },
+        );
+      }
+      return save;
     });
     setSaves(updatedSaves);
-    setDetail(d => ({ ...d, settlement: { ...d.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } }));
-    setNetworkVersion(v => v + 1); setLinking(false);
+    setDetail(currentDetail => withSettlementChanges(currentDetail, currentChanges));
+    setNetworkVersion(version => version + 1);
+    setLinking(false);
     persistBatch(updatedSaves, [detail.saveData.id, linkedSave.id]);
   };
 
-  const removeNeighbour = (idx) => {
-    const removedEntry = detail.settlement.neighbourNetwork[idx];
+  const removeNeighbour = (index) => {
+    const removedEntry = detail.settlement.neighbourNetwork[index];
     const linkId = removedEntry?.linkId;
-    const network = detail.settlement.neighbourNetwork.filter((_, i) => i !== idx);
-    const ownISR = (detail.settlement.interSettlementRelationships||[]).filter(r => !linkId || r.linkId !== linkId);
-    let updatedSaves = saves.map(s => {
-      if (s.id !== detail?.saveData?.id) return s;
-      return { ...s, settlement: { ...s.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } };
+    const currentNetwork = detail.settlement.neighbourNetwork
+      .filter((_, neighbourIndex) => neighbourIndex !== index);
+    const currentRelationships = (detail.settlement.interSettlementRelationships || [])
+      .filter(relationship => !linkId || relationship.linkId !== linkId);
+    const currentChanges = { neighbourNetwork: currentNetwork, interSettlementRelationships: currentRelationships };
+    let updatedSaves = saves.map(save => {
+      if (String(save.id) !== String(detail?.saveData?.id)) return save;
+      return withSettlementChanges(save, currentChanges);
     });
     if (linkId || removedEntry?.id) {
       const partnerId = removedEntry?.id;
       const partnerSave = partnerId ? findSaveById(updatedSaves, partnerId) : null;
       if (partnerSave) {
-        updatedSaves = updatedSaves.map(s => {
-          if (s.id !== partnerId) return s;
-          return { ...s, settlement: { ...s.settlement, neighbourNetwork: (s.settlement?.neighbourNetwork||[]).filter(n => linkId ? n.linkId !== linkId : n.id !== detail?.saveData?.id), interSettlementRelationships: (s.settlement?.interSettlementRelationships||[]).filter(r => !linkId || r.linkId !== linkId) } };
+        updatedSaves = updatedSaves.map(save => {
+          if (String(save.id) !== String(partnerId)) return save;
+          const partnerNetwork = (save.settlement?.neighbourNetwork || []).filter(
+            neighbour => linkId
+              ? neighbour.linkId !== linkId
+              : String(neighbour.id) !== String(detail?.saveData?.id),
+          );
+          const partnerRelationships = (save.settlement?.interSettlementRelationships || [])
+            .filter(relationship => !linkId || relationship.linkId !== linkId);
+          return withSettlementChanges(save, {
+            neighbourNetwork: partnerNetwork, interSettlementRelationships: partnerRelationships,
+          });
         });
       }
     }
     setSaves(updatedSaves);
-    setDetail(d => ({ ...d, settlement: { ...d.settlement, neighbourNetwork: network, interSettlementRelationships: ownISR } }));
-    setNetworkVersion(v => v + 1);
+    setDetail(currentDetail => withSettlementChanges(currentDetail, currentChanges));
+    setNetworkVersion(version => version + 1);
     const modifiedIds = [detail.saveData.id];
     if (removedEntry?.id) modifiedIds.push(removedEntry.id);
     persistBatch(updatedSaves, modifiedIds);
@@ -613,25 +580,23 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     addToCampaign,
     canonizeSavedSettlement,
     bulkDeleteConfirmed,
+    getCampaignMembershipBlock,
+    getSettlementDeletionBlock,
     isActive: isSaveActive,
     isDraft: (sv) => canonPhaseOf(sv) === 'draft',
   });
   const { selectMode, selectedIds, toggleSelect } = bulk;
 
-  // Set of save ids surviving the active query/filter — the rendered collections
-  // below intersect with this so the toolbar isn't inert.
-  const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
-
   // Derive assigned/unassigned settlement grouping (from the FILTERED set so the
   // search/sort/filter UI actually changes what renders).
   const assignedIds = useMemo(() => {
     const ids = new Set();
-    for (const c of activeCampaigns) for (const id of c.settlementIds || []) ids.add(id);
+    for (const c of activeCampaigns) for (const id of c.settlementIds || []) ids.add(String(id));
     return ids;
   }, [activeCampaigns]);
 
   const unassignedSaves = useMemo(
-    () => filteredSaves.filter(s => !assignedIds.has(s.id)),
+    () => filteredSaves.filter(s => !assignedIds.has(String(s.id))),
     [filteredSaves, assignedIds],
   );
 
@@ -645,7 +610,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       has_ai_data: hasAiData(s),
       save_count_band: saveCountBand(saves.length),
       via: 'library',
-    });
+    }, { subjectId: s.id });
     setDetail({ ...s, saveData: s });
   };
 
@@ -778,13 +743,12 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         <div style={{ display:'flex', flexDirection:'column', gap:SP.lg }}>
           {/* Campaign folders */}
           {campaigns.map(campaign => {
+            const campaignIds = new Set((campaign.settlementIds || []).map(String));
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
-              // String()-normalized member lookup (Owner Ruling #5, same model
-              // as campaignSettlements): a number/string-mismatched member now
-              // ADVANCES, so it must also be visible in its campaign folder —
-              // otherwise it could never be removed from the campaign.
-              ? (campaign.settlementIds || []).map(id => saves.find(s => String(s.id) === String(id)))
-                  .filter(Boolean).filter(s => filteredIds.has(s.id))
+              // Filter the already-sorted Library sequence by normalized
+              // membership, so folders honor the selected sort and mixed
+              // numeric/string ids cannot duplicate into "Unassigned".
+              ? filteredSaves.filter(s => campaignIds.has(String(s.id)))
               : [];
             return (
               <CampaignFolder key={campaign.id} campaign={campaign} settlements={campSaves}

@@ -18,6 +18,9 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
 import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';
+import {
+  nativeSemanticDepletedResourceKeys,
+} from '../content/customContentSemanticAuthority.js';
 // The generosity STRUCTURAL GATE (a zero-import leaf — the SAME qualifiesForGenerosity
 // the organic mover runs; generosityEV.js re-exports it). Eager-safe by construction:
 // importing the gate from the lazy generosityEV kernel would drag the whole decision
@@ -77,6 +80,27 @@ function slugEq(/** @type {MutEntity} */ a, /** @type {MutEntity} */ b) {
   return !!sa && sa === slugify(b);
 }
 
+function resourceDefinitionKey(/** @type {MutEntity} */ definition) {
+  return String(
+    definition?.customDefinitionId
+    || definition?.localUid
+    || definition?.refId
+    || '',
+  );
+}
+
+function matchingResourceDefinitions(
+  /** @type {MutEntity} */ config,
+  /** @type {MutEntity} */ key,
+) {
+  const definitions = Array.isArray(config.nearbyResourceDefinitions)
+    ? config.nearbyResourceDefinitions
+    : [];
+  return definitions.filter(
+    (/** @type {MutEntity} */ definition) => slugEq(definition?.name, key),
+  );
+}
+
 /**
  * Normalized view of config.resourceEdits — the EDITOR-authored resource
  * roster deltas the generation re-applies (resolveResources' edit overlay):
@@ -84,26 +108,50 @@ function slugEq(/** @type {MutEntity} */ a, /** @type {MutEntity} */ b) {
  *                 verbatim name, re-tinted gold on regeneration);
  *   { removed }   keys struck by REMOVE_RESOURCE — a suppression list, so
  *                 removing a GENERATOR-rolled node stays gone across regens;
+ *   { removedNative } catalog keys removed by the organic resource lifecycle
+ *                 while a same-name custom definition may remain present;
  *   { depleted }  keys DEPLETE_RESOURCE forces into the depleted set;
+ *   { depletedCustomDefinitionIds } exact custom owners that remain depleted
+ *                 when a same-name native resource is discovered or removed;
  *   { recovered } keys RECOVERED_RESOURCE forces OUT of it — without this a
  *                 same-seed regen re-rolls the original depletion right back.
- * The handlers keep the four lists mutually agreeing (an ADD clears the
- * key's removed/depleted records, a DEPLETE clears its recovered record, …).
+ * The handlers keep these records mutually agreeing: an ADD clears the
+ * relevant removed/depleted records, a DEPLETE clears recovery, and exact
+ * custom depletion survives an independent native transition.
  */
 function resourceEditsOf(/** @type {MutEntity} */ config) {
   const re = config?.resourceEdits || {};
+  const depletedCustomDefinitionIds = Array.isArray(
+    re.depletedCustomDefinitionIds,
+  )
+    ? re.depletedCustomDefinitionIds
+    : [];
   return {
     added: Array.isArray(re.added) ? re.added : [],
     removed: Array.isArray(re.removed) ? re.removed : [],
+    removedNative: Array.isArray(re.removedNative) ? re.removedNative : [],
     depleted: Array.isArray(re.depleted) ? re.depleted : [],
+    ...(depletedCustomDefinitionIds.length > 0
+      ? { depletedCustomDefinitionIds }
+      : {}),
     recovered: Array.isArray(re.recovered) ? re.recovered : [],
   };
 }
 
+function withDepletedCustomDefinitionIds(
+  /** @type {MutEntity} */ edits,
+  /** @type {string[]} */ ids,
+) {
+  const { depletedCustomDefinitionIds: _prior, ...withoutPrior } = edits;
+  return ids.length > 0
+    ? { ...withoutPrior, depletedCustomDefinitionIds: ids }
+    : withoutPrior;
+}
+
 /**
- * Write a resource event's two formats: the LIVE keys (nearbyResources /
- * nearbyResourcesState / nearbyResourcesDepleted / nearbyResourcesCustom —
- * the resolved snapshot every consumer reads NOW) go to config only, and the
+ * Write a resource event's two formats: the LIVE keys (nearbyResources plus
+ * native/custom provenance sidecars, state, and depletion — the resolved
+ * snapshot every consumer reads NOW) go to config only, and the
  * authored resourceEdits delta record goes to BOTH config and _config when
  * present — withCustomTradeGoods' discipline. applyChange regenerates from
  * the raw _config first, and resolveResources re-applies the deltas there;
@@ -129,15 +177,52 @@ function depleteResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
   if (!key) return vetoMutation('empty_target');
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  const exactDepleted = Array.isArray(
+    config.nearbyResourceDefinitionsDepleted,
+  )
+    ? config.nearbyResourceDefinitionsDepleted
+    : [];
+  const exactKeys = new Set(exactDepleted.map(resourceDefinitionKey));
+  const matchingDefinitions = matchingResourceDefinitions(config, key);
+  const matchingDefinitionIds = matchingDefinitions
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config);
+  const nativeKey = (config.nearbyResourcesNative || [])
+    .find((/** @type {MutEntity} */ candidate) => slugEq(candidate, key));
   const edits = resourceEditsOf(config);
+  const depletedCustomDefinitionIds = [
+    ...(edits.depletedCustomDefinitionIds || []),
+    ...matchingDefinitionIds.filter(
+      (/** @type {string} */ id) => (
+        !(edits.depletedCustomDefinitionIds || []).includes(id)
+      ),
+    ),
+  ];
   return withResourceEdits(s, {
     nearbyResourcesState: { ...state, [key]: 'depleted' },
     nearbyResourcesDepleted: depleted.includes(key) ? depleted : [...depleted, key],
-  }, {
+    nearbyResourcesNativeDepleted: (
+      nativeKey
+      && !nativeDepleted.some(
+        (/** @type {MutEntity} */ candidate) => slugEq(candidate, nativeKey),
+      )
+        ? [...nativeDepleted, nativeKey]
+        : nativeDepleted
+    ),
+    nearbyResourceDefinitionsDepleted: [
+      ...exactDepleted,
+      ...matchingDefinitions.filter(
+        (/** @type {MutEntity} */ definition) => (
+          !exactKeys.has(resourceDefinitionKey(definition))
+        ),
+      ),
+    ],
+  }, withDepletedCustomDefinitionIds({
     ...edits,
     depleted: edits.depleted.some((/** @type {MutEntity} */ k) => slugEq(k, key)) ? edits.depleted : [...edits.depleted, key],
     recovered: edits.recovered.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
-  });
+  }, depletedCustomDefinitionIds));
 }
 
 // RECOVERED_RESOURCE — the inverse: clear BOTH depletion formats so chains, exports,
@@ -163,15 +248,29 @@ function recoveredResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ 
     if (state[k] === 'depleted' && (keys.has(k) || slugEq(k, key))) state[k] = 'allow';
   }
   const depleted = (config.nearbyResourcesDepleted || []).filter((/** @type {MutEntity} */ k) => !keys.has(k) && !slugEq(k, key));
+  const exactDepleted = (
+    config.nearbyResourceDefinitionsDepleted || []
+  ).filter(
+    (/** @type {MutEntity} */ definition) => !slugEq(definition?.name, key),
+  );
+  const matchingDefinitionIds = matchingResourceDefinitions(config, key)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config)
+    .filter((/** @type {MutEntity} */ candidate) => !slugEq(candidate, key));
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
     nearbyResourcesState: state,
     nearbyResourcesDepleted: depleted,
-  }, {
+    nearbyResourcesNativeDepleted: nativeDepleted,
+    nearbyResourceDefinitionsDepleted: exactDepleted,
+  }, withDepletedCustomDefinitionIds({
     ...edits,
     depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
     recovered: edits.recovered.some((/** @type {MutEntity} */ k) => slugEq(k, key)) ? edits.recovered : [...edits.recovered, key],
-  });
+  }, (edits.depletedCustomDefinitionIds || []).filter(
+    (/** @type {string} */ id) => !matchingDefinitionIds.includes(id),
+  )));
 }
 
 // REMOVED_THREAT — the party neutralized an active threat. Removes the matching
@@ -808,53 +907,107 @@ function removeTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
 
 /**
  * ADD_RESOURCE — open a new resource node. Mirrors depleteResource's
- * dual-format discipline: write BOTH config.nearbyResources (the roster the
- * generators and the target picker read) and config.nearbyResourcesState
- * (the manual-mode map). Catalog targets store the canonical underscore key;
- * names with no catalog entry are custom resources — stored verbatim (the
- * resolveResources convention) and also recorded in nearbyResourcesCustom so
- * the dossier gold-tints them. Re-adding a depleted node clears the
- * depletion record — the two formats must keep agreeing.
+ * dual-format discipline: write the flat roster, its native/custom provenance
+ * sidecars, and the manual-mode state map together. Catalog targets store the
+ * canonical underscore key. Explicit custom targets—or names with no catalog
+ * entry—remain verbatim and are recorded in nearbyResourcesCustom so the
+ * dossier gold-tints them. Re-adding a depleted node clears the depletion
+ * record; every representation must keep agreeing.
  */
 function addResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
   if (!raw) return vetoMutation('empty_target');
   const slug = slugify(raw);
-  const catalogKey = /** @type {MutEntity} */ (RESOURCE_DATA)[raw] ? raw : (/** @type {MutEntity} */ (RESOURCE_DATA)[slug] ? slug : null);
+  const explicitCustom = event.payload?.isCustom === true;
+  const catalogKey = explicitCustom
+    ? null
+    : (/** @type {MutEntity} */ (RESOURCE_DATA)[raw]
+        ? raw
+        : (/** @type {MutEntity} */ (RESOURCE_DATA)[slug] ? slug : null));
   const key = catalogKey || raw;
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
   const custom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
+  const customSlugs = new Set(custom.map((/** @type {MutEntity} */ value) => slugify(value)));
+  const native = Array.isArray(config.nearbyResourcesNative)
+    ? config.nearbyResourcesNative
+    : nearby.filter((/** @type {MutEntity} */ value) => !customSlugs.has(slugify(value)));
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config);
+  const exactDepleted = Array.isArray(
+    config.nearbyResourceDefinitionsDepleted,
+  )
+    ? config.nearbyResourceDefinitionsDepleted
+    : [];
+  const matchingDefinitionIds = matchingResourceDefinitions(config, key)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
+  const customRemainsDepleted = Boolean(
+    catalogKey
+    && exactDepleted.some(
+      (/** @type {MutEntity} */ definition) => slugEq(definition?.name, key),
+    ),
+  );
+  const nextFlatDepleted = depleted.filter(
+    (/** @type {MutEntity} */ candidate) => !slugEq(candidate, key),
+  );
+  if (customRemainsDepleted) nextFlatDepleted.push(key);
   const edits = resourceEditsOf(config);
+  const nextCustomDepletionIds = catalogKey
+    ? (edits.depletedCustomDefinitionIds || [])
+    : (edits.depletedCustomDefinitionIds || []).filter(
+        (/** @type {string} */ id) => !matchingDefinitionIds.includes(id),
+      );
   return withResourceEdits(s, {
     nearbyResources: nearby.includes(key) ? nearby : [...nearby, key],
-    nearbyResourcesState: { ...state, [key]: 'allow' },
+    nearbyResourcesNative: (
+      catalogKey && !native.includes(key)
+        ? [...native, key]
+        : native
+    ),
+    nearbyResourcesNativeDepleted: nativeDepleted.filter(
+      (/** @type {MutEntity} */ candidate) => !slugEq(candidate, key),
+    ),
+    nearbyResourcesState: {
+      ...state,
+      [key]: customRemainsDepleted ? 'depleted' : 'allow',
+    },
     // Slug-equivalent filter: also clears the legacy slug-form record the
     // old depleteResource wrote for custom resources ('moonpetal_grove').
-    nearbyResourcesDepleted: depleted.filter((/** @type {MutEntity} */ k) => k !== key && slugify(k) !== slug),
+    nearbyResourcesDepleted: nextFlatDepleted,
+    nearbyResourceDefinitionsDepleted: catalogKey
+      ? exactDepleted
+      : exactDepleted.filter(
+          (/** @type {MutEntity} */ definition) => !slugEq(definition?.name, key),
+        ),
     ...(catalogKey
       ? {}
       : { nearbyResourcesCustom: custom.includes(key) ? custom : [...custom, key] }),
-  }, {
+  }, withDepletedCustomDefinitionIds({
     ...edits,
     // An opened node starts open: clear the key's removed suppression AND
     // its depleted record (mirrors the live nearbyResourcesDepleted filter).
-    added: edits.added.some((/** @type {MutEntity} */ e) => slugEq(String(e?.key || ''), key))
+    added: edits.added.some((/** @type {MutEntity} */ e) => (
+      slugEq(String(e?.key || ''), key)
+      && Boolean(e?.custom) === !catalogKey
+    ))
       ? edits.added
       : [...edits.added, { key, custom: !catalogKey }],
     removed: edits.removed.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
+    removedNative: catalogKey
+      ? edits.removedNative.filter((/** @type {MutEntity} */ k) => !slugEq(k, key))
+      : edits.removedNative,
     depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !slugEq(k, key)),
-  });
+  }, nextCustomDepletionIds));
 }
 
 /**
  * REMOVE_RESOURCE — strike a resource node from the roster entirely (the
  * harsher cousin of DEPLETE_RESOURCE: nothing left to recover). Clears every
- * config surface that names it — nearbyResources, nearbyResourcesCustom, the
- * nearbyResourcesState entry, and nearbyResourcesDepleted — matching raw,
- * slugified, and de-slugged forms the way recoveredResource does.
+ * config surface that names it — flat/native/custom rosters, state, and
+ * depletion — matching raw, slugified, and de-slugged forms the way
+ * recoveredResource does.
  */
 function removeResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
@@ -869,19 +1022,41 @@ function removeResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ eve
   // so a regenerated roster (same key forms) drops them again.
   const struckKeys = nearby.filter((/** @type {MutEntity} */ k) => keys.has(k));
   const hitsStruck = (/** @type {MutEntity} */ k) => struckKeys.some((/** @type {MutEntity} */ sk) => slugEq(k, sk));
+  const struckDefinitionIds = matchingResourceDefinitions(config, raw)
+    .map(resourceDefinitionKey)
+    .filter(Boolean);
   const edits = resourceEditsOf(config);
   return withResourceEdits(s, {
     nearbyResources: nearby.filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourcesNative: (config.nearbyResourcesNative || [])
+      .filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourcesNativeDepleted: nativeSemanticDepletedResourceKeys(config)
+      .filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
     nearbyResourcesCustom: (config.nearbyResourcesCustom || []).filter((/** @type {MutEntity} */ k) => !keys.has(k)),
+    nearbyResourceDefinitions: (
+      config.nearbyResourceDefinitions || []
+    ).filter(
+      (/** @type {MutEntity} */ definition) => !keys.has(definition?.name),
+    ),
+    nearbyResourceDefinitionsDepleted: (
+      config.nearbyResourceDefinitionsDepleted || []
+    ).filter(
+      (/** @type {MutEntity} */ definition) => !keys.has(definition?.name),
+    ),
     nearbyResourcesState: state,
     nearbyResourcesDepleted: (config.nearbyResourcesDepleted || []).filter((/** @type {MutEntity} */ k) => !keys.has(k)),
-  }, {
+  }, withDepletedCustomDefinitionIds({
     ...edits,
     added: edits.added.filter((/** @type {MutEntity} */ e) => !hitsStruck(String(e?.key || ''))),
     removed: [...edits.removed, ...struckKeys.filter((/** @type {MutEntity} */ k) => !edits.removed.some((/** @type {MutEntity} */ r) => slugEq(r, k)))],
+    removedNative: edits.removedNative.filter(
+      (/** @type {MutEntity} */ k) => !hitsStruck(k),
+    ),
     depleted: edits.depleted.filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
     recovered: edits.recovered.filter((/** @type {MutEntity} */ k) => !hitsStruck(k)),
-  });
+  }, (edits.depletedCustomDefinitionIds || []).filter(
+    (/** @type {string} */ id) => !struckDefinitionIds.includes(id),
+  )));
 }
 
 // ── The generosity counterpart verbs (FP-G3 — the Counterpart Criterion) ────

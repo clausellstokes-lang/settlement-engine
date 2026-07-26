@@ -14,6 +14,7 @@ import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
+import { settlementSizeLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -30,12 +31,12 @@ export default function PlacementDetailCard({ onOpenDetail }) {
 
   // Resolve the placement + save entry for the current selection
   const { settlement, placementBurgId } = useMemo(() => {
-    if (!selectedSettlementId) return { settlement: null, placementBurgId: null };
-    const save = (saves || []).find(s => s.id === selectedSettlementId) || null;
+    if (selectedSettlementId == null) return { settlement: null, placementBurgId: null };
+    const save = (saves || []).find(s => String(s.id) === String(selectedSettlementId)) || null;
     // Also locate which burgId corresponds to this settlement for removal
     let burgId = null;
     for (const [bid, p] of Object.entries(placements || {})) {
-      if (p?.settlementId && String(p.settlementId) === String(selectedSettlementId)) {
+      if (p?.settlementId != null && String(p.settlementId) === String(selectedSettlementId)) {
         burgId = bid;
         break;
       }
@@ -43,11 +44,11 @@ export default function PlacementDetailCard({ onOpenDetail }) {
     return { settlement: save, placementBurgId: burgId };
   }, [selectedSettlementId, saves, placements]);
 
-  if (!selectedSettlementId || !settlement) return null;
+  if (selectedSettlementId == null || !settlement) return null;
 
   const s = settlement.settlement || settlement;
   const name  = s.name || settlement.name || 'Untitled';
-  const tier  = s.tier || settlement.tier || EMPTY_VALUE;
+  const size  = settlementSizeLabel(s.tier || settlement.tier, EMPTY_VALUE);
   const pop   = s.population || 0;
   const culture = s.culture || s.cultureName || '';
   const terrain = s.terrain || '';
@@ -105,7 +106,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
           {name}
         </div>
         <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
-          {tier}{pop ? ` · ${formatCount(pop)} pop` : ''}
+          {size}{pop ? ` · ${formatCount(pop)} pop` : ''}
         </div>
 
         {(culture || terrain) && (

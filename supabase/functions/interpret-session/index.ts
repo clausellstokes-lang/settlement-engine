@@ -28,7 +28,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
@@ -286,7 +286,10 @@ export async function handleInterpretSession(
           input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
           output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null,
         };
-        if (data?.stop_reason === 'refusal') { capturedRefused = true; return { ok: false, answerText: '' }; }
+        if (data?.stop_reason === 'refusal') {
+          capturedRefused = true;
+          return { ok: false, answerText: '' };
+        }
         capturedAnswerText = (data?.content?.[0]?.text || '').trim();
         const compiled = compileInterpretation(capturedAnswerText, vocab, protectedCtx);
         capturedInterp = compiled.interpretation;
@@ -331,7 +334,9 @@ export async function handleInterpretSession(
         p_retrieval_slice_ids: rec.retrieval_slice_ids, p_retrieval_sources: rec.retrieval_sources,
         p_model: rec.model, p_model_version: rec.model_version, p_provider: INTERPRET_PROVIDER,
         p_byok: providerKey.byok, p_citation_coverage: outcome.outcome === 'ok' ? rec.citation_coverage : null,
-        p_claim_count: rec.op_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
+        p_claim_count: rec.op_count,
+        p_refused: capturedRefused,
+        p_spend_id: capturedSpendId,
         p_meta_probe: rec.meta_probe, p_canary: rec.canary, p_refusal_class: capturedRefusalClass,
       });
       if (error) logError('interpret-session', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
@@ -349,7 +354,9 @@ export async function handleInterpretSession(
             opCount: s.total, requiredCount: s.byLabel.required, inferredCount: s.byLabel.inferred,
             optionalCount: s.byLabel.optional, uncertainCount: s.byLabel.uncertain,
             protectedCount: s.protectedCount, unsupportedCount: s.unsupportedCount,
-            coverageBand: band(s.total === 0 ? 1 : sourced / s.total), byok: providerKey.byok, refused: capturedRefused,
+            coverageBand: band(s.total === 0 ? 1 : sourced / s.total),
+            byok: providerKey.byok,
+            refused: capturedRefused,
           },
           batch_id: crypto.randomUUID(), seq: 0,
         });
@@ -357,11 +364,20 @@ export async function handleInterpretSession(
       } catch (e) { logError('interpret-session', user.id, e, { stage: 'eval' }); }
     }
     try {
-      if (capturedRider) {
+      const rider = capturedRider as EnrichmentRider | null;
+      if (rider) {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_INTERPRET_RIDER,
           actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
-          props: { intent: capturedRider.intent, themes: capturedRider.themes, refusal_reason: capturedRider.refusalReason, action_drafted: capturedRider.actionDrafted, oov: capturedRider.oov, byok: providerKey.byok, refused: capturedRefused },
+          props: {
+            intent: rider.intent,
+            themes: rider.themes,
+            refusal_reason: rider.refusalReason,
+            action_drafted: rider.actionDrafted,
+            oov: rider.oov,
+            byok: providerKey.byok,
+            refused: capturedRefused,
+          },
           batch_id: crypto.randomUUID(), seq: 0,
         });
         if (error) logError('interpret-session', user.id, `interpret rider event failed: ${error.message}`, { stage: 'rider' });
@@ -373,9 +389,17 @@ export async function handleInterpretSession(
       case 'rate_limited': return json({ error: "You have reached today's AI limit. Please try again tomorrow. No credits were charged." }, 429, cors);
       case 'insufficient': return json({ error: outcome.reason === 'spend_failed' ? 'Credit spend failed — no credits were charged.' : 'Insufficient credits', balance: outcome.balance }, 402, cors);
       case 'model_failed':
-        return json({ error: capturedRefused ? 'The interpreter declined this request.' : (capturedRefusalMessage || 'Interpretation failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
+        return json({
+          error: capturedRefused
+            ? 'The interpreter declined this request.'
+            : (capturedRefusalMessage || 'Interpretation failed. Your credits were refunded.'),
+          refused: capturedRefused,
+          refunded: outcome.refunded,
+          refusalClass: capturedRefusalClass,
+          doors: capturedRefusalDoors,
+        }, 502, cors);
       case 'ok':
-        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+        scheduleAutoReload(supabaseAdmin, user.id);
         return json({
           interpretation: capturedInterp,     // { ops:[labelled, protection-flagged], unsupported:[] }
           musings: capturedMusings,           // §3b the conversation register (uncited, op-free)

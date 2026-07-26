@@ -7,7 +7,13 @@
  * house-voice words with no camelCase or snake_case residue.
  */
 import { describe, expect, it } from 'vitest';
-import { humanizeFlagKey, humanizeToken, tickCalendarLabel } from '../../src/domain/display/humanizeEngineTokens.js';
+import {
+  humanizeFlagKey,
+  humanizeToken,
+  tickCalendarDetailLabel,
+  settlementSizeLabel,
+  tickCalendarLabel,
+} from '../../src/domain/display/humanizeEngineTokens.js';
 import { seasonForTick } from '../../src/domain/worldPulse/worldState.js';
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 
@@ -30,15 +36,39 @@ describe('tickCalendarLabel — the calendar phrase', () => {
   });
 });
 
+describe('tickCalendarDetailLabel — Chronicle-scale calendar precision', () => {
+  it('distinguishes adjacent weeks without exposing the engine counter', () => {
+    expect(tickCalendarDetailLabel(5)).toBe('week 6 of spring, year 1');
+    expect(tickCalendarDetailLabel(7)).toBe('week 8 of spring, year 1');
+    expect(tickCalendarDetailLabel(13)).toBe('week 1 of summer, year 1');
+    expect(tickCalendarDetailLabel(52)).toBe('week 1 of spring, year 2');
+    expect(tickCalendarDetailLabel(5)).not.toMatch(/\btick\b/i);
+  });
+});
+
 describe('humanizeToken — schema tokens to words', () => {
-  it('spaces snake_case and camelCase, lowercased', () => {
+  it('spaces snake_case, kebab-case, and camelCase, lowercased', () => {
     expect(humanizeToken('succession_coup')).toBe('succession coup');
+    expect(humanizeToken('war-declared')).toBe('war declared');
     expect(humanizeToken('goalProgress')).toBe('goal progress');
     expect(humanizeToken('npc_goal_culmination')).toBe('npc goal culmination');
   });
   it('is total on garbage', () => {
     expect(humanizeToken(null)).toBe('');
     expect(humanizeToken(42)).toBe('42');
+  });
+});
+
+describe('settlementSizeLabel — one reader-facing size vocabulary', () => {
+  it('resolves canonical, legacy, and imported multiword size tokens', () => {
+    expect(settlementSizeLabel('town')).toBe('Town');
+    expect(settlementSizeLabel('capital')).toBe('Metropolis');
+    expect(settlementSizeLabel('large_town')).toBe('Large town');
+    expect(settlementSizeLabel('river-port')).toBe('River port');
+  });
+
+  it('uses the explicit fallback only when the stored value is absent', () => {
+    expect(settlementSizeLabel(null, 'Unknown size')).toBe('Unknown size');
   });
 });
 

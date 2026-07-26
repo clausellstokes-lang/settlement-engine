@@ -11,7 +11,13 @@ import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 
 let mockState;
-vi.mock('../../src/store/index.js', () => ({ useStore: (sel) => sel(mockState) }));
+vi.mock('../../src/store/index.js', () => {
+  function useStore(sel) {
+    return sel(mockState);
+  }
+  useStore.getState = () => mockState;
+  return { useStore };
+});
 vi.mock('../../src/hooks/useRoute.js', () => ({ navigate: vi.fn() }));
 vi.mock('../../src/lib/saves.js', () => ({ saves: { list: vi.fn().mockResolvedValue([]) } }));
 
@@ -28,6 +34,9 @@ beforeEach(() => {
       { id: 's2', settlement: { name: 'Elmspire', npcs: [] } },
     ],
     savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: null,
+    savedSettlementsHydrationGeneration: 0,
+    auth: { user: null },
     setSavedSettlements: vi.fn(),
   };
 });

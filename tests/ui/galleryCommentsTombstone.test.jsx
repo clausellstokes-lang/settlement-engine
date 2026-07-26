@@ -17,7 +17,10 @@ vi.mock('../../src/lib/gallery.js', () => ({
   deleteGalleryComment: vi.fn(),
 }));
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  vi.clearAllMocks();
+});
 
 async function importComments() {
   return (await import('../../src/components/gallery/GalleryComments.jsx')).default;
@@ -45,6 +48,15 @@ describe('GalleryComments — moderation tombstone', () => {
     render(<GalleryComments dossier={{ id: 'd1' }} auth={null} />);
     await screen.findByText(/no comments yet/i);
     expect(screen.queryByText(/removed by moderation/i)).toBeNull();
+  });
+
+  test('an initial load rejection renders an error instead of an empty thread', async () => {
+    fetchGalleryComments.mockRejectedValue(new Error('Comments are temporarily unavailable.'));
+    const GalleryComments = await importComments();
+    render(<GalleryComments dossier={{ id: 'd1' }} auth={null} />);
+
+    expect((await screen.findByRole('alert')).textContent).toMatch(/temporarily unavailable/i);
+    expect(screen.queryByText(/no comments yet/i)).toBeNull();
   });
 
   test('a signed-in reader can report a comment via the kebab menu', async () => {

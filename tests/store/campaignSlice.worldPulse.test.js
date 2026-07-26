@@ -31,6 +31,7 @@ import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { saves } from '../../src/lib/saves.js';
+import { activateOutboxOwner, resetOutbox } from '../../src/store/outbox.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -43,6 +44,10 @@ function installLocalStorage() {
 }
 
 const stubSlice = () => ({
+  auth: {
+    user: { id: 'test-owner' },
+    session: { session_id: 'test-session' },
+  },
   savedSettlements: [],
   settlement: null,
   activeSaveId: null,
@@ -80,6 +85,8 @@ function settlement(name) {
 describe('campaignSlice world pulse', () => {
   beforeEach(() => {
     installLocalStorage();
+    resetOutbox();
+    activateOutboxOwner('test-owner');
     localStorage.removeItem('sf_campaigns');
   });
 
@@ -264,6 +271,71 @@ describe('campaignSlice world pulse', () => {
 
     const dismissed = await store.getState().dismissWorldPulseProposal('camp-1', 'world_proposal.dismiss');
     expect(dismissed.status).toBe('dismissed');
+  });
+
+  test('concurrent proposal dismissals record exactly one terminal decision', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Realm',
+        settlementIds: [],
+        worldState: {
+          tick: 2,
+          proposals: [{
+            id: 'proposal-exact-once',
+            status: 'pending',
+            headline: 'One ruling awaits',
+          }],
+        },
+      }];
+    });
+
+    const results = await Promise.all([
+      store.getState().dismissWorldPulseProposal('camp-1', 'proposal-exact-once'),
+      store.getState().dismissWorldPulseProposal('camp-1', 'proposal-exact-once'),
+    ]);
+
+    expect(results.filter(Boolean)).toHaveLength(1);
+    expect(results.filter(Boolean)[0]).toMatchObject({
+      id: 'proposal-exact-once',
+      status: 'dismissed',
+    });
+    expect(store.getState().campaigns[0].worldState.proposals).toEqual([
+      expect.objectContaining({
+        id: 'proposal-exact-once',
+        status: 'dismissed',
+      }),
+    ]);
+  });
+
+  test('a stale dismissal cannot overwrite an already-terminal proposal', async () => {
+    const store = makeStore();
+    const terminal = {
+      id: 'proposal-already-applied',
+      status: 'applied',
+      appliedAt: '2026-01-02T00:00:00.000Z',
+      updatedAt: '2026-01-02T00:00:00.000Z',
+    };
+    store.setState(state => {
+      state.campaigns = [{
+        id: 'camp-1',
+        name: 'Realm',
+        settlementIds: [],
+        updatedAt: '2026-01-02T00:00:00.000Z',
+        worldState: { tick: 2, proposals: [terminal] },
+      }];
+    });
+
+    await expect(
+      store.getState().dismissWorldPulseProposal('camp-1', terminal.id),
+    ).resolves.toBeNull();
+    expect(store.getState().campaigns[0]).toMatchObject({
+      updatedAt: '2026-01-02T00:00:00.000Z',
+      worldState: { proposals: [terminal] },
+    });
+    expect(store.getState().campaigns[0].worldState.proposals[0])
+      .not.toHaveProperty('dismissedAt');
   });
 
   test('a failed cloud save surfaces campaignSyncError instead of swallowing it', async () => {

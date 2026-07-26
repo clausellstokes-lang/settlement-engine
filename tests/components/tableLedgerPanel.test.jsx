@@ -78,3 +78,71 @@ describe('TableLedgerPanel — exposure offers only the compromised roster', () 
     expect(optionLabels()).toEqual(['Nothing here to name yet']);
   });
 });
+
+describe('TableLedgerPanel — queue ownership', () => {
+  test('commit and discard name only the visible table-event intents', () => {
+    STORE = storeFor({ name: 'Ash' });
+    STORE.pendingEditsQueue = [
+      {
+        id: 'edit.rename',
+        kind: 'rename-settlement',
+        payload: { newName: 'Emberfall' },
+      },
+      {
+        id: 'edit.table',
+        kind: 'table-event',
+        ownerRef: { id: 'draft:current-draft' },
+        payload: { record: { kind: 'incident', flavor: 'The bell cracked.' } },
+      },
+      {
+        id: 'edit.reverted-table',
+        kind: 'table-event',
+        ownerRef: { id: 'draft:current-draft' },
+        reverted: true,
+        payload: { record: { kind: 'incident', flavor: 'Withdrawn.' } },
+      },
+    ];
+
+    render(<TableLedgerPanel />);
+    fireEvent.click(screen.getByRole('button', { name: 'Let the world feel it' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Discard' }));
+
+    const selection = { intentIds: ['edit.table'] };
+    expect(STORE.commitPendingEdits).toHaveBeenCalledWith(selection);
+    expect(STORE.revertPendingEdits).toHaveBeenCalledWith(selection);
+  });
+
+  test('a save switch shows and selects only that save’s table intents', () => {
+    STORE = storeFor({ id: 'town-b', name: 'B' });
+    STORE.activeSaveId = 'save-b';
+    STORE.pendingEditsQueue = [
+      {
+        id: 'table-a',
+        kind: 'table-event',
+        ownerRef: { id: 'save:save-a' },
+        payload: { record: { kind: 'incident', flavor: 'Only A remembers this.' } },
+      },
+      {
+        id: 'table-b',
+        kind: 'table-event',
+        ownerRef: { id: 'save:save-b' },
+        payload: { record: { kind: 'incident', flavor: 'Only B remembers this.' } },
+      },
+    ];
+    render(<TableLedgerPanel />);
+
+    expect(screen.queryByText('Only A remembers this.')).toBeNull();
+    expect(screen.getByText('Only B remembers this.')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Let the world feel it' }));
+    expect(STORE.commitPendingEdits).toHaveBeenCalledWith({
+      intentIds: ['table-b'],
+    });
+
+    cleanup();
+    STORE.activeSaveId = 'save-a';
+    STORE.settlement = { id: 'town-a', name: 'A' };
+    render(<TableLedgerPanel />);
+    expect(screen.getByText('Only A remembers this.')).toBeTruthy();
+    expect(screen.queryByText('Only B remembers this.')).toBeNull();
+  });
+});

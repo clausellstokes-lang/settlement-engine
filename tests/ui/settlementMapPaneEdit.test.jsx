@@ -167,6 +167,17 @@ describe('SettlementMapPane — edit affordances commit to the blob', () => {
 });
 
 describe('SettlementMapPane — MAP STYLES lens switcher', () => {
+  test('view and lens controls occupy separate clickable toolbar rows', () => {
+    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={null} />);
+    const viewSwitch = container.querySelector('[data-town-view-toggle]');
+    const lensSwitch = container.querySelector('[data-town-lens-switcher]');
+
+    expect(viewSwitch).toBeTruthy();
+    expect(lensSwitch).toBeTruthy();
+    expect(Number.parseFloat(lensSwitch.style.top))
+      .toBeGreaterThan(Number.parseFloat(viewSwitch.style.top) + 32);
+  });
+
   test('the switcher (all four lenses) is shown for EVERY viewer, even read-only', () => {
     const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={null} />);
     expect(container.querySelector('[data-town-lens-switcher]')).toBeTruthy();

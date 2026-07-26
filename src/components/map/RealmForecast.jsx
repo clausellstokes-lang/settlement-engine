@@ -10,25 +10,45 @@
  * visibly. THE HONEST LABEL is printed verbatim. NO-COMMIT: the run happens on
  * clones inside the domain module; this component holds only local state.
  */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Telescope } from 'lucide-react';
 import { useStore } from '../../store/index.js';
+import { forecastFingerprint } from '../../domain/worldPulse/forecastFingerprint.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
-const INTERVALS = [
+const INTERVALS = Object.freeze([
   ['one_week', 'Week'], ['one_month', 'Month'], ['one_season', 'Season'], ['one_year', 'Year'],
-];
+]);
+
+/** @param {unknown} value @returns {string} */
+function human(value) {
+  return String(value || 'order').replace(/[_-]+/g, ' ').trim().toLowerCase();
+}
+
+/** @param {string} interval @returns {string} */
+function intervalLabel(interval) {
+  return INTERVALS.find(([key]) => key === interval)?.[1] || 'Selected interval';
+}
 
 export default function RealmForecast({ campaign }) {
   const saves = useStore(s => s.savedSettlements);
   const [interval, setSpan] = useState('one_month');
   const [running, setRunning] = useState(false);
-  const [view, setView] = useState(null); // { digest, refusals, fingerprint }
+  const [view, setView] = useState(null); // { digest, refusals, interval }
   const [fp, setFp] = useState('');
 
-  const memberIds = new Set((campaign?.settlementIds || []).map(String));
-  const memberSaves = (saves || []).filter(s => memberIds.has(String(s.id)));
+  const memberSaves = useMemo(() => {
+    const memberIds = new Set((campaign?.settlementIds || []).map(String));
+    return (saves || []).filter(save => memberIds.has(String(save.id)));
+  }, [campaign?.settlementIds, saves]);
+  const settlementNameById = useMemo(
+    () => new Map(memberSaves.map(save => [
+      String(save.id),
+      String(save?.settlement?.name || save?.name || 'A campaign settlement'),
+    ])),
+    [memberSaves],
+  );
 
   // composer-realm-verbs-3 — CANDIDATE LANE DEFERRAL (deliberate, recorded — not
   // a gap to re-find): the marginal with-vs-without view (runRealmForecast's
@@ -42,19 +62,26 @@ export default function RealmForecast({ campaign }) {
   async function run() {
     setRunning(true);
     try {
-      const { simulatePendingFuture, forecastDigest, forecastFingerprint } =
+      const { simulatePendingFuture, forecastDigest } =
         await import('../../domain/worldPulse/forecastRun.js');
       const now = new Date().toISOString();
       const runOut = await simulatePendingFuture({ campaign, saves: memberSaves, interval, now });
-      setView({ digest: forecastDigest(runOut, memberSaves), refusals: runOut.refusals });
-      setFp(forecastFingerprint(campaign, interval));
+      setView({
+        digest: forecastDigest(runOut, memberSaves),
+        refusals: runOut.refusals,
+        interval,
+      });
+      setFp(forecastFingerprint(campaign, interval, memberSaves));
     } finally {
       setRunning(false);
     }
   }
 
   // Staleness: recompute the live fingerprint cheaply on render (string build).
-  const liveFp = view ? liveFingerprint(campaign, interval) : '';
+  const liveFp = useMemo(
+    () => view ? forecastFingerprint(campaign, interval, memberSaves) : '',
+    [view, campaign, interval, memberSaves],
+  );
   const stale = view && liveFp !== fp;
 
   return (
@@ -69,7 +96,13 @@ export default function RealmForecast({ campaign }) {
         </span>
         <span style={{ display: 'inline-flex', gap: 4 }}>
           {INTERVALS.map(([key, label]) => (
-            <Button key={key} size="sm" variant={interval === key ? 'primary' : 'ghost'} onClick={() => setSpan(key)}>
+            <Button
+              key={key}
+              size="sm"
+              variant={interval === key ? 'primary' : 'ghost'}
+              aria-pressed={interval === key}
+              onClick={() => setSpan(key)}
+            >
               {label}
             </Button>
           ))}
@@ -81,6 +114,18 @@ export default function RealmForecast({ campaign }) {
 
       {view && (
         <div style={{ marginTop: SP.sm }}>
+          <div
+            data-testid="realm-forecast-boundary"
+            style={{
+              marginBottom: SP.sm,
+              color: INK,
+              fontFamily: sans,
+              fontSize: FS.xs,
+              fontWeight: 800,
+            }}
+          >
+            Projected interval: {intervalLabel(view.interval)}
+          </div>
           {stale && (
             <div style={{
               padding: SP.sm, marginBottom: SP.sm, border: `1px dashed ${BORDER}`,
@@ -90,9 +135,23 @@ export default function RealmForecast({ campaign }) {
             </div>
           )}
           {(view.refusals || []).length > 0 && (
-            <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginBottom: SP.xs }}>
-              {view.refusals.length} queued {view.refusals.length === 1 ? 'order' : 'orders'} would be REFUSED at the tick (lapsed against the current world).
-            </div>
+            <section
+              aria-labelledby="realm-forecast-refusals"
+              style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginBottom: SP.sm }}
+            >
+              <div id="realm-forecast-refusals" style={{ color: INK, fontWeight: 850 }}>
+                Orders currently expected to be refused
+              </div>
+              <ul style={{ margin: '4px 0 0', paddingLeft: 18 }}>
+                {view.refusals.map(refusal => (
+                  <li key={refusal.queueId || `${refusal.saveId}:${refusal.eventType}`}>
+                    {settlementNameById.get(String(refusal.saveId)) || 'A campaign settlement'}:{' '}
+                    {human(refusal.eventType)}. Reason: {human(refusal.code)}
+                    {refusal.detail ? `: ${String(refusal.detail)}` : ''}
+                  </li>
+                ))}
+              </ul>
+            </section>
           )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
             {view.digest.members.map(m => (
@@ -137,8 +196,10 @@ export default function RealmForecast({ campaign }) {
             </div>
           )}
           <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>
-            The ceteris-paribus future: exact if nothing else changes (no party actions, no further orders,
-            and assuming defaults where the world would await your word). Barring further edits, this IS the next tick.
+            This is a deterministic, bounded projection from the recorded snapshot through the selected interval.
+            It includes the current docket and organic realm changes, assumes no later edits or party actions, and
+            uses defaults where the world would await your word. A queued party action&apos;s wider realm ripple is
+            not included, so this is guidance rather than a guaranteed outcome.
           </p>
         </div>
       )}
@@ -146,16 +207,7 @@ export default function RealmForecast({ campaign }) {
   );
 }
 
-/** The same fingerprint derivation as the domain module, inlined so render
- * never imports the engine chunk. Drift-pinned by
- * tests/domain/forecastRun.test.js (string parity with forecastFingerprint).
- * composer-realm-verbs-2: the `revision` fold (rulesetLog + decided-count +
- * stressors) mirrors the domain twin verbatim on the drift-guarded substrings. */
-export function liveFingerprint(campaign, interval) {
-  const ws = campaign?.worldState || {};
-  const queue = (ws.pendingEvents || []).map(q => `${q.queueId}@${q.queuedAt}`).join('|');
-  const proposals = (ws.proposals || []).filter(p => p && p.status === 'pending').map(p => p.id).join('|');
-  const decided = (ws.proposals || []).filter(p => p && p.status !== 'pending').length;
-  const revision = `${Object.keys(ws.rulesetLog || {}).length}.${decided}.${(ws.stressors || []).length}`;
-  return `${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`;
+/** Compatibility export for focused UI tests and external callers. */
+export function liveFingerprint(campaign, interval, saves = []) {
+  return forecastFingerprint(campaign, interval, saves);
 }

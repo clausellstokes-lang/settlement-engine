@@ -22,13 +22,23 @@ vi.mock('../../src/store/campaignSliceShared.js', async (orig) => {
 import { runInstantWorld } from '../../src/store/instantWorldBody.js';
 import { isCanonSave } from '../../src/domain/campaign/canon.js';
 
-function makeHarness({ maxSaves = Infinity } = {}) {
+function makeHarness({
+  maxSaves = Infinity,
+  ownerId = 'owner-a',
+  contentRuntime = null,
+} = {}) {
   const state = {
+    auth: { user: ownerId ? { id: ownerId } : null },
+    campaignSessionGeneration: 0,
     savedSettlements: [],
     campaigns: [],
     activeCampaignId: null,
+    configExplicitFields: {},
     maxSaves: () => maxSaves,
     setActiveCampaign: (id) => { state.activeCampaignId = id; },
+    ...(contentRuntime
+      ? { getActiveCustomContentRuntime: () => contentRuntime }
+      : {}),
   };
   // The body uses immer-style producers, but plain in-place mutation is
   // observationally identical for this harness.
@@ -38,7 +48,12 @@ function makeHarness({ maxSaves = Infinity } = {}) {
 }
 
 describe('runInstantWorld — store binding', () => {
-  beforeEach(() => { saveMock.mockClear(); deleteMock.mockClear(); });
+  beforeEach(() => {
+    saveMock.mockReset();
+    saveMock.mockImplementation(async () => `svc-${saveMock.mock.calls.length}`);
+    deleteMock.mockReset();
+    deleteMock.mockResolvedValue();
+  });
 
   test('composes, persists each member, and lands the user in an active realm', async () => {
     const h = makeHarness();
@@ -77,5 +92,75 @@ describe('runInstantWorld — store binding', () => {
     expect(res).toEqual({ ok: false, reason: 'not_enough_slots', settlementCount: 5 });
     expect(saveMock).not.toHaveBeenCalled();
     expect(h.state.campaigns).toHaveLength(0);
+  });
+
+  test('mints members and campaign binding from the same reviewed runtime', async () => {
+    const h = makeHarness({
+      contentRuntime: {
+        environment: null,
+        customContent: {},
+        tunables: { magicExists: false },
+        visualSelection: {},
+        resolution: { ok: true },
+      },
+    });
+    const result = await runInstantWorld({
+      set: h.set,
+      get: h.get,
+      basicConfig: { realmSize: 'small' },
+      options: { seed: 'content-cutoff' },
+    });
+
+    expect(result.ok).toBe(true);
+    const campaign = h.state.campaigns[0];
+    expect(campaign.contentBinding.environment.tunables).toEqual({
+      magicExists: false,
+    });
+    expect(campaign.contentBindingStatus).toBe('pinned');
+    for (const save of h.state.savedSettlements) {
+      expect(save.settlement.config.magicExists).toBe(false);
+      expect(save.settlement.customContentProvenance).toMatchObject({
+        scope: 'campaign',
+        bindingHash: campaign.contentBinding.bindingHash,
+      });
+    }
+  });
+
+  test('an A to B switch mid-persist cannot split the world across owners', async () => {
+    let resolveFirst;
+    saveMock.mockImplementationOnce(() => new Promise(resolve => {
+      resolveFirst = resolve;
+    }));
+    deleteMock.mockRejectedValueOnce(
+      Object.assign(new Error('owner mismatch'), { code: 'auth_session_changed' }),
+    );
+    const h = makeHarness({ ownerId: 'owner-a' });
+    const creating = runInstantWorld({
+      set: h.set,
+      get: h.get,
+      basicConfig: { realmSize: 'small' },
+      options: { seed: 'owner-fence' },
+    });
+
+    await vi.waitFor(() => expect(saveMock).toHaveBeenCalledTimes(1));
+    const [, saveOptions] = saveMock.mock.calls[0];
+    expect(saveOptions.expectedOwnerId).toBe('owner-a');
+
+    h.state.auth = { user: { id: 'owner-b' } };
+    h.state.campaignSessionGeneration += 1;
+    expect(saveOptions.isSessionCurrent()).toBe(false);
+    resolveFirst('owner-a-save');
+
+    await expect(creating).resolves.toMatchObject({
+      ok: false,
+      reason: 'auth_session_changed',
+      previousAccountSaveCount: 1,
+      message: expect.stringMatching(/remains? in the previous account/i),
+    });
+    expect(saveMock).toHaveBeenCalledTimes(1);
+    expect(deleteMock).not.toHaveBeenCalled();
+    expect(h.state.savedSettlements).toEqual([]);
+    expect(h.state.campaigns).toEqual([]);
+    expect(h.state.activeCampaignId).toBeNull();
   });
 });

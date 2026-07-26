@@ -90,6 +90,25 @@ describe('EntityLink', () => {
     expect(screen.getByText('a vanished cabal')).toBeTruthy();
   });
 
+  it('renders an ambiguous legacy identity as plain text instead of choosing a sibling', () => {
+    const settlement = {
+      ...makeSettlement(),
+      npcs: [
+        { id: 'npc_shared', name: 'First survivor' },
+        { id: 'npc_shared', name: 'Second survivor' },
+      ],
+    };
+    render(
+      <Harness settlement={settlement} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <EntityLink id="npc_shared" type="npc" fallback="a surviving witness" />
+      </Harness>
+    );
+
+    expect(screen.queryByRole('button')).toBeNull();
+    expect(screen.getByText('a surviving witness')
+      .getAttribute('data-entity-identity')).toBe('degraded_collision');
+  });
+
   it('navigateToEntity switches to the target tab and sets focusedEntity', () => {
     const settlement = makeSettlement();
     const setActiveTab = vi.fn();

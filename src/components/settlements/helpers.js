@@ -11,7 +11,34 @@ export function migrateConfig(config) {
 // from domain/relationships/neighbourBackLink.js. The manual-link and
 // remove-neighbour handlers below still build links by hand, so they keep this
 // small lookup.
-export function findSaveById(saves, id) { return saves.find(s => s.id === id) || null; }
+export function findSaveById(saves, id) {
+  return id == null
+    ? null
+    : saves.find(save => save?.id != null && String(save.id) === String(id)) || null;
+}
+
+/** Rename every supported settlement reference field on one relationship. */
+export function renameInterSettlementReference(relationship, oldName, newName) {
+  const rename = value => value === oldName ? newName : value;
+  return {
+    ...relationship,
+    partnerName: rename(relationship.partnerName),
+    partnerFactionName: rename(relationship.partnerFactionName),
+    npcName: rename(relationship.npcName),
+    factionName: rename(relationship.factionName),
+  };
+}
+
+/** Apply settlement fields without disturbing save-level persistence metadata. */
+export function withSettlementChanges(save, changes) {
+  return {
+    ...save,
+    settlement: {
+      ...save.settlement,
+      ...changes,
+    },
+  };
+}
 
 // ── Analytics banding (coarse, privacy-safe) ─────────────────────────────────
 // Counts → buckets so library/revisit events never carry raw cardinality.

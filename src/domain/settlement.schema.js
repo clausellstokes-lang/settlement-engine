@@ -76,6 +76,118 @@ export const FIELD_ALIASES = Object.freeze({
 // the adapter when adding fields.
 
 /**
+ * The seed-stable local expression of a selected culture profile.
+ *
+ * @typedef {Object} CulturalIdentity
+ * @property {string} key
+ * @property {string} label
+ * @property {string} scope
+ * @property {string[]} [sourceKeys]
+ *   Present only for a mixed identity.
+ * @property {string} builtForm
+ * @property {string} civicPattern
+ * @property {string} exchangePattern
+ * @property {string} foodways
+ * @property {string} sacredLife
+ * @property {string} defensePattern
+ * @property {string} socialTexture
+ * @property {string} architecturalDetail
+ */
+
+/**
+ * The effective, persisted generation config. Resource membership and
+ * condition live here because `resourceAnalysis.availableResources` is a
+ * derived chain-matching vocabulary, not a second resource roster.
+ *
+ * @typedef {{
+ *   tradeRouteAccess?: string,
+ *   monsterThreat?: string,
+ *   magicLevel?: string,
+ *   priorityMagic?: number,
+ *   magicExists?: boolean,
+ *   government?: unknown,
+ *   primaryDeitySnapshot?: Record<string, unknown>,
+ *   contentProfile?: 'heroic'|'grounded'|'grim'|'custom',
+ *   contentBoundaries?: Record<string, boolean>|null,
+ *   nearbyResources?: string[],
+ *   nearbyResourcesState?: Record<string, string>,
+ *   nearbyResourcesNative?: string[],
+ *   nearbyResourcesCustom?: string[],
+ *   nearbyResourcesDepleted?: string[],
+ *   nearbyResourcesNativeDepleted?: string[],
+ *   nearbyResourceDefinitions?: Array<Record<string, unknown>>,
+ *   nearbyResourceDefinitionsDepleted?: Array<Record<string, unknown>>
+ * } & Record<string, unknown>} GenerationResolvedConfig
+ */
+
+/**
+ * @typedef {Object} IsolationSupportPath
+ * @property {'local_foodshed'|'hinterland'|'reserves'|'seasonal_access'|'patronage'|'magical_transit'} type
+ * @property {number} capacity
+ * @property {'durable'|'seasonal'|'conditional'|'fragile'} stability
+ * @property {string[]} evidence
+ */
+
+/**
+ * @typedef {Object} IsolationSupportReceipt
+ * @property {1} version
+ * @property {boolean} applicable
+ * @property {string} tier
+ * @property {number} requiredCapacity
+ * @property {number} capacity
+ * @property {number} deficit
+ * @property {'connected'|'resilient'|'viable'|'precarious'|'untenable'|'magic_supported'|'magic_dependent'} status
+ * @property {IsolationSupportPath[]} paths
+ * @property {boolean} magicDependent
+ */
+
+/**
+ * @typedef {Object} GenerationCoherenceFinding
+ * @property {string} path
+ * @property {string} detail
+ * @property {string} [evidence]
+ */
+
+/**
+ * @typedef {Object} GenerationCoherenceCheck
+ * @property {'template_tokens'|'narrative_quality'|'world_law_magic'|'content_boundaries'|'resource_truth'|'structural'|'food_verdict'|'npc_identity'|'isolation_support'|'final_graph'|'chronology'|'conservation'|'user_intent'|'narrative_realization'|'dramatic_tension'|'roster_repetition'|'provenance'} id
+ * @property {string} label
+ * @property {'pass'|'fail'} status
+ * @property {GenerationCoherenceFinding[]} findings
+ */
+
+/**
+ * One of the seven owner-facing judgments over the final dossier. Confidence
+ * is categorical and supported by `evidence`; it is never a synthetic score.
+ *
+ * @typedef {Object} GenerationCoherenceJudgment
+ * @property {'hard_structural_validity'|'cross_system_semantic_agreement'|'user_intent_fulfillment'|'narrative_realization'|'dramatic_tension'|'diversity_and_repetition'|'confidence_and_provenance'} id
+ * @property {string} label
+ * @property {'pass'|'pass_with_tension'|'needs_review'|'not_applicable'} status
+ * @property {'single_settlement'} scope
+ * @property {string} summary
+ * @property {GenerationCoherenceFinding[]} findings
+ * @property {GenerationCoherenceFinding[]} evidence
+ */
+
+/**
+ * The post-repair audit of the final assembled settlement. It reports
+ * coherence; it never repairs the settlement itself.
+ *
+ * @typedef {Object} GenerationCoherenceReceipt
+ * @property {1} version
+ * @property {'coherent'|'coherent_with_authored_tensions'|'needs_review'} status
+ * @property {string} seed
+ * @property {number|null} worldLawVersion
+ * @property {string|null} cultureProfile
+ * @property {'heroic'|'grounded'|'grim'|'custom'} contentProfile
+ * @property {GenerationCoherenceCheck[]} checks
+ * @property {GenerationCoherenceJudgment[]} [judgments]
+ * @property {Array<Record<string, unknown>>} repairs
+ * @property {Array<{type:string, subject:string|null, reason:string}>} authoredTensions
+ */
+
+/**
  * @typedef {Object} CanonicalSettlement
  *
  * @property {string} id
@@ -93,6 +205,14 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {SettlementIdentity} identity
  *   Display-facing facts: name, tier, dominant culture, magic level, genre.
  *
+ * @property {GenerationResolvedConfig} [config]
+ *   Resolved generation facts. The raw, user-authored regeneration input may
+ *   also be retained separately as `_config` by the current flat shape.
+ *
+ * @property {CulturalIdentity} [culturalIdentity]
+ *   Structured local expression of the selected culture. `culturalNotes` is
+ *   its legacy prose projection, not a second cultural authority.
+ *
  * @property {Object} [geography]
  *   Terrain, climate, biome, river/road access, region. Today this is
  *   spread across `config.terrain`, `resourceAnalysis.terrain`, etc.; the
@@ -100,7 +220,9 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * @property {ResourceEntry[]} [resources]
  *   Local + imported resources. Each entry has `id`, `name`, `tags`,
- *   `flow` (produced / imported / scarce / blocked).
+ *   `flow` (produced / imported / scarce / blocked). Until this future nested
+ *   projection is native, the effective `config.nearbyResources*` sidecars are
+ *   the authoritative current flat-shape roster.
  *
  * @property {StressorEntry[]} [stressors]
  *   Active stressors (plague, drought, raid pressure, etc.) that shape
@@ -133,6 +255,13 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {Object} [history]
  * @property {Neighbor[]} [neighbors]
  * @property {Object} [trade]
+ * @property {IsolationSupportReceipt} [isolationSupport]
+ *   Explainable capacity receipt for isolated settlements; connected
+ *   settlements retain a non-applicable `connected` record.
+ *
+ * @property {GenerationCoherenceReceipt} [generationCoherenceReceipt]
+ *   Final post-repair audit. A missing receipt means “not recorded,” not
+ *   “coherent.”
  *
  * @property {Object} [userCanon]
  *   User-pinned or user-authored facts. These survive reruns; the generator
@@ -147,6 +276,9 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * @property {Object[]} [aiOverlays]
  *   Optional AI-generated prose layers. Distinct from canon facts.
+ *
+ * `GenerationContext.worldLaw` is intentionally absent from this persisted
+ * shape: it is an immutable, function-bearing policy object scoped to one run.
  */
 
 // ── Simulation flat-shape typedef ────────────────────────────────────────────
@@ -190,7 +322,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   population?: number,
  *   economicViability?: any,
  *   thievesGuildStrength?: number,
- *   nearbyResourcesDepleted?: boolean,
+ *   nearbyResourcesDepleted?: boolean|string[],
  *   factions?: SimFaction[],
  *   npcs?: SimNpc[],
  *   institutions?: SimInstitution[],
@@ -209,6 +341,10 @@ export const FIELD_ALIASES = Object.freeze({
  *   interSettlementRelationships?: any[],
  *   config?: Record<string, any>,
  *   _config?: Record<string, any>,
+ *   culturalIdentity?: CulturalIdentity,
+ *   culturalNotes?: string|null,
+ *   isolationSupport?: IsolationSupportReceipt,
+ *   generationCoherenceReceipt?: GenerationCoherenceReceipt,
  *   powerStructure?: SimPowerStructure,
  *   economicState?: SimEconomicState,
  *   systemState?: Record<string, any>,
@@ -413,6 +549,11 @@ export const FIELD_ALIASES = Object.freeze({
  *   controller?: string,
  *   resource?: string,
  *   rawResource?: string,
+ *   resourceKey?: string|null,
+ *   resourceCondition?: 'available'|'depleted'|'absent',
+ *   resourceInputKey?: string|null,
+ *   resourceInputCondition?: 'available'|'depleted'|'absent',
+ *   resourceInputAvailable?: boolean,
  *   entrepot?: boolean,
  *   exportable?: boolean,
  *   resourceDepleted?: boolean,
@@ -462,6 +603,8 @@ export const FIELD_ALIASES = Object.freeze({
  *   activeChains?: SimSupplyChain[],
  *   customChains?: any[],
  *   customTradeLabels?: Record<string, any>,
+ *   nativeTradeLabels?: Record<string, string[]>,
+ *   customTradeEndpoints?: Record<string, Array<Record<string, unknown>>>,
  *   customCategoryExports?: any,
  *   customCategoryImports?: any
  * } & Record<string, any>} SimEconomicState
@@ -1305,7 +1448,8 @@ export const FIELD_ALIASES = Object.freeze({
  *
  * @property {CanonSource} source
  * @property {CanonStatus} canonStatus
- * @property {boolean} locked       Will survive a reroll (user-pinned / event-committed).
+ * @property {boolean} locked       Survives an NPC reroll (user-pinned / event-committed).
+ *                                  Other sections have no preservation tail yet.
  */
 
 /**

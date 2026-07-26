@@ -21,7 +21,18 @@
 //
 // `createPRNG` was previously imported here but is only used by the
 // store test (which imports it directly). Removed from this chunk.
-/** @type {?{ generateSettlementPipeline:Function, regenNPCsPipeline:Function, regenHistoryPipeline:Function, generateSeed:Function }} */
+/**
+ * The generation-time module bag. Pipeline metadata belongs here because its
+ * summaries are computed only while a generation runs; keeping it in the
+ * top-level store graph made every visitor download that presentation leaf.
+ * @type {?{
+ *   generateSettlementPipeline:Function,
+ *   regenNPCsPipeline:Function,
+ *   regenHistoryPipeline:Function,
+ *   generateSeed:Function,
+ *   metaForStep:Function,
+ * }}
+ */
 let _engineModule = null;
 /** @type {?Promise<NonNullable<typeof _engineModule>>} */
 let _enginePromise = null;
@@ -31,12 +42,14 @@ function loadEngine() {
   _enginePromise = Promise.all([
     import('../generators/generateSettlementPipeline.js'),
     import('../kernel/prng.js'),
-  ]).then(([pipe, prng]) => {
+    import('../generators/steps/stepMetadata.js'),
+  ]).then(([pipe, prng, metadata]) => {
     _engineModule = {
       generateSettlementPipeline: pipe.generateSettlementPipeline,
       regenNPCsPipeline:          pipe.regenNPCsPipeline,
       regenHistoryPipeline:       pipe.regenHistoryPipeline,
       generateSeed:               prng.generateSeed,
+      metaForStep:                 metadata.metaForStep,
     };
     return _engineModule;
   });
@@ -45,16 +58,10 @@ function loadEngine() {
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import { activateLatentPantheon } from '../domain/worldPulse/latentPantheon.js';
-import {
-  buildEdit as _pe_buildEdit,
-  appendEdit as _pe_appendEdit,
-  revertEdit as _pe_revertEdit,
-  activeEdits as _pe_activeEdits,
-  COMMITTABLE_EDIT_KINDS as _pe_COMMITTABLE,
-} from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { eventStalenessKey } from '../domain/events/stalenessKey.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
+import { isAuthoritativeCanonEventType } from '../domain/events/authoritativeCanonEventTypes.js';
 import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
 import { makeReceipt } from '../domain/trace.js';
@@ -76,7 +83,6 @@ import {
 } from '../domain/crisisLifecycle.js';
 import { propagateRegionalEvent } from '../domain/region/index.js';
 import { reconcileSettlementChange } from '../domain/settlementReconciliation.js';
-import { metaForStep }       from '../generators/steps/stepMetadata.js';
 import { validateBatch, applyEventBatch as computeEventBatch } from '../domain/events/batch.js';
 import {
   applyUserEdit as domainApplyUserEdit,
@@ -93,13 +99,26 @@ import { anonAtCap, incrementAnonFull, incrementAnonReroll } from '../lib/anonGe
 import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
-  stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement,
+  stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
 } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
 // for the per-action before/after mapping and the C2/C3 loose-field TODOs.
 import { makeActionResult } from './actionResult.js';
+import { clearSavedSettlementsCache, commitSavedSettlementsHydration } from './savedSettlementsHydration.js';
+import {
+  appendEventNarrativeSnapshot,
+  MAX_EVENT_NARRATIVE_SNAPSHOTS,
+} from './eventNarrativeSnapshots.js';
+import {
+  commitPendingEditsAction,
+  discardPendingEditsAction,
+  queuePendingEditAction,
+  refreshPendingEditsAction,
+  revertSinglePendingEditAction,
+} from './settlementPendingEditActions.js';
+import { runAuthoritativeCanonEventFromSlice } from './canonEventCommandEntry.js';
 // Wave 4a store composition — the god-slice + identity-edit action bodies adopted
 // from the reference tree's helper split (§2B). setPrimaryDeity/imposeCult are the
 // STORE half of the embed-on-assign bridge that flips the religion subsystem gate
@@ -108,7 +127,7 @@ import { makeActionResult } from './actionResult.js';
 // Settlements-list + change-queue affordances consume. See each helper's header.
 import {
   renameSettlementImpl, syncActiveNeighbourFieldsImpl,
-  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl, applyEditOp,
+  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -136,27 +155,10 @@ function _dimsSummary(ss) {
 // archive (the least-invasive DURABLE home — already persisted, semantically the
 // AI layer, and NOT the golden settlement object). Never balloons: the narrative
 // is cloned ONCE per event and the archive is FIFO-capped.
-export const MAX_EVENT_NARRATIVE_SNAPSHOTS = 10;
-
-/**
- * Return the next aiData with an event-keyed narrative snapshot appended (FIFO,
- * capped, deduped by eventId). Pure — clones the narrative once; leaves aiData
- * untouched when there is nothing to snapshot.
- * @param {Object|null} aiData          the save's existing aiData blob
- * @param {Object} [entry]
- * @param {string} [entry.eventId]      the keying event id (no-op if absent)
- * @param {Object} [entry.aiSettlement] the narrative valid at this event (no-op if absent)
- * @param {string} [entry.ts]
- */
-export function appendEventNarrativeSnapshot(aiData, { eventId, aiSettlement, ts } = {}) {
-  if (!eventId || !aiSettlement) return aiData;
-  const prev = (aiData && typeof aiData === 'object') ? aiData : {};
-  const existing = Array.isArray(prev.eventNarrativeSnapshots) ? prev.eventNarrativeSnapshots : [];
-  // Dedupe: a re-applied event id replaces its prior snapshot rather than doubling.
-  const kept = existing.filter(s => s?.eventId !== eventId);
-  kept.push({ eventId, ts: ts || new Date().toISOString(), aiSettlement: cloneJson(aiSettlement) });
-  return { ...prev, eventNarrativeSnapshots: kept.slice(-MAX_EVENT_NARRATIVE_SNAPSHOTS) };
-}
+export {
+  appendEventNarrativeSnapshot,
+  MAX_EVENT_NARRATIVE_SNAPSHOTS,
+};
 
 // ── Derived-config strip ────────────────────────────────────────────────
 // settlement.config is the RESOLVED effectiveConfig snapshot: pipeline steps
@@ -325,11 +327,13 @@ function activateFaithIfEntitled(settlement, get) {
  * resetSettlementIdentity — THE single chokepoint for clearing a settlement's
  * session-only identity residue on ANY active-settlement swap: generateSettlement,
  * hydrateFromSave (open a save), setSettlement, clearSettlement. Every field reset
- * here is session-scoped (never persisted) and must NOT survive an identity change,
- * or the new settlement inherits the previous one's in-flight state — the exact
- * cross-identity leak class the slice documents (F17/F19):
- *   • a queued rename commits against the wrong town (pending edits address NPCs by
- *     INDEX, so save B's index-N is a different NPC than A's);
+ * here is session-scoped (never persisted). Save-scoped pending intents are the
+ * one optional exception: their stable owner/target envelopes can remain in the
+ * session while projections hide them from every other save, so returning to the
+ * original save recovers reviewed work. Fresh generation/set/clear paths still
+ * discard them. Every other field must NOT survive an identity change, or the new
+ * settlement inherits the previous one's in-flight state — the exact cross-
+ * identity leak class the slice documents (F17/F19):
  *   • a stale successor prompt fires on the wrong lineage;
  *   • B renders A's draft version timeline;
  *   • the pipeline rail renders A's "how this was simulated" receipts against B's
@@ -346,11 +350,25 @@ function activateFaithIfEntitled(settlement, get) {
  * set / clear to their own DRAFT defaults.
  *
  * @param {*} state the Immer store draft
+ * @param {{ preservePendingEdits?:boolean }} [options]
  */
-function resetSettlementIdentity(state) {
-  state.pendingEditsQueue     = [];
-  state.pendingEditsClock     = 0;
+function resetSettlementIdentity(state, { preservePendingEdits = false } = {}) {
+  if (!preservePendingEdits) {
+    state.pendingEditsQueue   = [];
+    state.pendingEditsClock   = 0;
+    state.pendingEditReceipts = [];
+  } else {
+    // Only save-owned work is recoverable by later navigation. Draft-owned and
+    // ownerless legacy records cannot prove a durable destination; drop them at
+    // the saved-identity boundary rather than projecting them into the next save.
+    state.pendingEditsQueue = (state.pendingEditsQueue || [])
+      .filter((intent) => intent?.ownerRef?.scope === 'save');
+    state.pendingEditReceipts = (state.pendingEditReceipts || [])
+      .filter((receipt) => receipt?.ownerRef?.scope === 'save');
+    if (state.pendingEditsQueue.length === 0) state.pendingEditsClock = 0;
+  }
   state.pendingSuccession     = null;
+  state.canonEventCommandFence = null;
   state.draftVersionHistory   = [];
   // The generation-id spine is per-generation identity: a loaded/new settlement
   // must never inherit the prior generation's id (a save re-derives its own from
@@ -372,6 +390,8 @@ export const createSettlementSlice = (set, get) => ({
   settlement:    null,   // current generated settlement object
   savedSettlements: [],  // persisted to Supabase (or localStorage for anon)
   savedSettlementsLoaded: false, // true once hydrated from savesService
+  savedSettlementsOwnerId: null,
+  savedSettlementsHydrationGeneration: 0,
   activeSaveId:  null,   // save id backing the currently-open detail view
   lastSeed:      null,   // seed from last generation (for replay/determinism)
   // Wave E1 — the generation-id SPINE. A pseudonymous, per-generation telemetry
@@ -425,206 +445,27 @@ export const createSettlementSlice = (set, get) => ({
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
   }),
 
-  // P105 / E-2 — Pending edits queue. Each edit is a frozen object
-  // produced by domain/pendingEdits.buildEdit(). The PendingChangesBar
-  // reads this; commitPendingEdits applies the queue to the live
-  // settlement; revertPendingEdits drops it.
+  // P105 / E-2 — Pending edits queue. Each accepted item is an immutable,
+  // owner-scoped intent produced by the lazy transaction contract. The
+  // PendingChangesBar projects the current owner only; commit/discard actions
+  // receive exact ids and cannot reach retained work from another save.
   pendingEditsQueue: [],
   pendingEditsClock: 0,
+  // Session correlation only. Authoritative event/snapshot receipts remain in
+  // their existing stores; this capped list prevents a repeated queue submit
+  // from applying the same intent twice.
+  pendingEditReceipts: [],
+  // One reviewed server-authoritative event may own the active save's immediate
+  // apply lane while its revision CAS is in flight. Identity reset clears it.
+  canonEventCommandFence: null,
 
-  /** Add an edit to the queue. Returns the edit so the caller can
-   *  reference its id (e.g. for an undo-this-edit affordance). */
-  queueEdit: (kind, payload) => {
-    // No-silent-drop contract: only kinds with a live commit dispatcher may enter
-    // the queue. Anything else would fall through commitPendingEdits' default
-    // branch and be discarded when the queue clears all-or-nothing — so refuse it
-    // here, where the caller gets an immediate null, instead of losing it at
-    // commit. No UI enqueues an un-dispatched kind today; this makes the drop
-    // structurally impossible if one is ever wired up before its dispatcher lands.
-    if (!_pe_COMMITTABLE.includes(kind)) return null;
-    // Campaign-clock identity lock: NPC names freeze once the settlement is
-    // canonized (settlement renames stay allowed post-canon).
-    if (get().phase === 'canon' && kind === 'rename-npc') return null;
-    // No-silent-drop PRECONDITION leg: a 'flavor' table directive (an incident
-    // chronicle line) records ONLY in canon — recordCanonFlavorEntryImpl no-ops
-    // off-canon, so admitting one on a draft would clear the queue with a success
-    // indication while writing nothing (the moment lost). Refuse it here (immediate
-    // null), the same contract the dispatcher-existence check above enforces, now
-    // for the dispatcher's precondition. 'applyEvent' table directives are unaffected
-    // (applyEvent handles draft + canon), so only the canon-gated leg is gated.
-    if (kind === 'table-event' && payload?.directive?.dispatch === 'flavor' && get().phase !== 'canon') return null;
-    const clock = (get().pendingEditsClock || 0) + 1;
-    const edit = _pe_buildEdit(kind, payload, clock);
-    set(state => {
-      state.pendingEditsClock = clock;
-      state.pendingEditsQueue = _pe_appendEdit(state.pendingEditsQueue || [], edit);
-    });
-    // Analytics — once per queued edit. Read coarse context AFTER the append so
-    // queue_depth_after reflects the new active depth. Fire-and-forget.
-    const canonPhase = get().phase;
-    const queueDepthAfter = _pe_activeEdits(get().pendingEditsQueue || []).length;
-    import('../lib/analytics.js').then(({ Funnel, EVENTS }) => {
-      Funnel.track(EVENTS.EDIT_PENDING_QUEUED, {
-        kind,
-        canon_phase: canonPhase,
-        queue_depth_after: queueDepthAfter,
-      });
-    }).catch(() => {});
-    return edit;
-  },
-
-  /** Mark an edit as reverted (kept in history for undo). */
-  revertSingleEdit: (editId) => {
-    set(state => {
-      state.pendingEditsQueue = _pe_revertEdit(state.pendingEditsQueue || [], editId);
-    });
-    // Analytics — fire-and-forget; reverting one queued edit.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_REVERTED, { count: 1, scope: 'single' });
-    }).catch(() => {});
-  },
-
-  /** Discard the entire queue without applying. */
-  revertPendingEdits: () => {
-    // Count the active edits being discarded BEFORE clearing, for analytics.
-    const droppedCount = _pe_activeEdits(get().pendingEditsQueue || []).length;
-    set(state => {
-      state.pendingEditsQueue = [];
-    });
-    // Analytics — fire-and-forget; whole-queue discard.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_REVERTED, { count: droppedCount, scope: 'all' });
-    }).catch(() => {});
-  },
-
-  /** Apply the queue against the live settlement. Each edit dispatches to an
-   *  existing mutation (renameNPC, etc.) by `kind`. Only committable kinds ever
-   *  reach here — queueEdit refuses the rest at the enqueue seam
-   *  (COMMITTABLE_EDIT_KINDS), so nothing is silently dropped when the queue
-   *  clears all-or-nothing on commit. */
-  commitPendingEdits: () => {
-    const state = get();
-    const queue = state.pendingEditsQueue || [];
-    const active = _pe_activeEdits(queue);
-    if (active.length === 0) return;
-
-    for (const edit of active) {
-      try {
-        switch (edit.kind) {
-          case 'rename-npc': {
-            const p = edit.payload || {}; // accepts {npcIndex} or the documented {npcId}
-            const idx = p.npcIndex ?? (state.settlement?.npcs || []).findIndex(n => n?.id === p.npcId);
-            if (typeof state.renameNPC === 'function' && idx != null && idx >= 0) state.renameNPC(idx, p.newName);
-            break;
-          }
-          case 'rename-settlement': {
-            // §10.4 + state-lifecycle-1 / store-hooks-state-5: route through the
-            // ONE town-rename writer (renameSettlementImpl). The old inline path
-            // mutated only the live blob and persisted {settlement, campaignState}
-            // via persistActiveSaveEdit — it never wrote the row `name` COLUMN, so
-            // the renamed name ghosted on the library list, campaign folders, and
-            // the blob-less meta list (settlement:null — no fallback) after reload,
-            // and broke supabaseListActiveByName partner resolution. renameSettlement
-            // now persists {settlement, name, ...}, so one writer keeps the blob AND
-            // the envelope in lockstep. (On a SAVED active settlement only — an
-            // unsaved draft has no cloud row, so it just renames the live blob.)
-            const activeId = get().activeSaveId;
-            const newName = edit.payload?.newName;
-            if (activeId != null) {
-              state.renameSettlement(activeId, newName);
-            } else if (newName) {
-              set(s => { if (s.settlement) s.settlement.name = String(newName); });
-            }
-            break;
-          }
-          // The remaining committable kinds route through applyEditOp (delegated
-          // to settlementRenameHelpers so this at-ceiling slice stays net-zero):
-          // the DESIGN_NPC_LIFECYCLE §2 typed NPC ops (edit / reassign / stasis+
-          // return), and R-1 THE SESSION LEDGER's 'table-event' (a table-authored,
-          // schema-walled directive committed via applyEvent / a canon flavor line).
-          // A truly-uncommittable kind never reaches here — queueEdit admits only
-          // COMMITTABLE_EDIT_KINDS, pinned in editActionPersist.test.js +
-          // pendingEdits.test.js.
-          default:
-            applyEditOp(get, set, edit); break;
-        }
-      } catch (e) {
-        console.warn(`[commitPendingEdits] ${edit.kind} failed:`, e);
-      }
-    }
-
-    // Clear the queue. Failed-commit retry is a future-tier feature;
-    // for now, all-or-nothing matches the cascade-preview UX.
-    set(s => { s.pendingEditsQueue = []; });
-    // P133 / E-5 — Snapshot the post-commit state so the version
-    // timeline records this as a discrete edit checkpoint. The
-    // snapshot label summarises what edits were applied; the user
-    // can revert to before this batch from VersionsTab.
-    try {
-      const labels = active.map(e => e.kind).join(', ');
-      const fn = get().recordSnapshot;
-      if (typeof fn === 'function') {
-        fn({ kind: 'auto-commit', label: `Edits: ${labels}` });
-      }
-    } catch (_e) { /* silent — snapshot failure shouldn't undo the commit */ }
-
-    // Analytics — fire-and-forget. Band the committed edits into coarse
-    // structural / rename / prose counts (same kind groupings as previewCascade).
-    let structuralCount = 0;
-    let renameCount = 0;
-    let proseCount = 0;
-    for (const e of active) {
-      switch (e.kind) {
-        case 'add-institution':
-        case 'remove-institution':
-        case 'add-resource':
-        case 'remove-resource':
-        case 'add-stressor':
-        case 'remove-stressor':
-          structuralCount += 1;
-          break;
-        case 'rename-npc':
-        case 'rename-faction':
-        case 'rename-settlement':
-          renameCount += 1;
-          break;
-        case 'edit-prose':
-          proseCount += 1;
-          break;
-        default:
-          break;
-      }
-    }
-    const canonPhase = get().phase;
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.EDIT_COMMITTED, {
-        count: active.length,
-        structural_count: structuralCount,
-        rename_count: renameCount,
-        prose_count: proseCount,
-        canon_phase: canonPhase,
-      });
-    }).catch(() => {});
-
-    // Research plane (edit_events) — feed the long-built but previously-unfed
-    // edit ledger. Saved settlements only (a stable uuid is required), research
-    // consent gated, payloads redacted to enum/count only (never edit prose).
-    const editUuid = state.activeSaveId;
-    if (editUuid) {
-      const preSettlement = state.settlement; // Immer-immutable pre-commit ref
-      Promise.all([
-        import('../lib/consent.js'),
-        import('../lib/analyticsQueue.js'),
-        import('../lib/editFingerprint.js'),
-        import('../domain/pendingEdits.js'),
-      ]).then(([{ getConsent }, { enqueueEdit }, { extractEditRows }, { previewCascade }]) => {
-        if (!getConsent().research) return;
-        let cascade = null;
-        try { cascade = previewCascade(preSettlement, queue); } catch { /* coarse cascade is best-effort */ }
-        for (const row of extractEditRows(active, { settlementUuid: editUuid, cascade })) enqueueEdit(row);
-      }).catch(() => {});
-    }
-  },
+  // Explicit facades keep these mutating actions visible to the operation
+  // registry's source census. Their authoring-only implementations stay lazy.
+  queueEdit: (kind, payload) => queuePendingEditAction(set, get, kind, payload),
+  revertSingleEdit: (editId) => revertSinglePendingEditAction(set, get, editId),
+  revertPendingEdits: (selection) => discardPendingEditsAction(set, get, selection),
+  commitPendingEdits: (selection) => commitPendingEditsAction(set, get, selection),
+  refreshPendingEdits: (selection) => refreshPendingEditsAction(set, get, selection),
 
   // ── P133 / E-5 · Version history mutations ──────────────────────────
   //
@@ -891,9 +732,10 @@ export const createSettlementSlice = (set, get) => ({
       ...(neighbor ? { _importedNeighbor: neighbor } : {}),
     };
 
-    const eng = await loadEngine();
-    // De-eager: the tier-gate filter loads with the generation it serves.
-    const { eligibleCustomContent } = await import('../domain/customContentSchema.js');
+    const generationModules = await Promise.all([
+      loadEngine(), loadSettlementContentRuntimeOptions(state),
+    ]);
+    const [eng, contentRuntimeOptions] = generationModules;
 
     const seed = seedOverride || eng.generateSeed();
       // Capture the full pipeline context (lastCtx) so the pipeline-rail
@@ -914,12 +756,10 @@ export const createSettlementSlice = (set, get) => ({
         // §14 P2 — only expose homebrew that passes its tier gate to this
         // settlement's tier. Fail-open for random/custom/unknown types, so it
         // can correctly gate but never silently drop eligible content.
-        customContent: state.config?.useCustomContent === false
-          ? {}
-          : eligibleCustomContent(state.customContent, { tier: state.config?.settType }),
+        ...contentRuntimeOptions,
         onComplete: (ctx) => { capturedCtx = ctx; },
         onStep: (name, ctx /*, patch */) => {
-          const meta = metaForStep(name);
+          const meta = eng.metaForStep(name);
           let summary;
           try { summary = meta.summary ? meta.summary(ctx) : null; }
           catch { summary = null; }
@@ -1200,6 +1040,30 @@ export const createSettlementSlice = (set, get) => ({
       const parts = eng.regenNPCsPipeline(settlement, cfg);
       set(s => { Object.assign(s.settlement, parts); });
     } else if (section === 'history') {
+      // This branch still assigns the whole history object, but the pipeline now
+      // carries the parts a reroll has no business discarding, so the assignment
+      // is no longer lossy in the ways recorded here before:
+      //   • the campaignEra entries worldPulse appended are carried by
+      //     campaignEventId (domain/historyPreservation.js),
+      //   • the coherence tail assembly runs now runs here too, so
+      //     siegeNarrative / legacyAnnotations are minted and
+      //     historicalCharacter is real prose rather than the generator's stub
+      //     (generators/narrative/historyCoherence.js), and
+      //   • authored settlement-root `history.*` paths are re-applied, so the
+      //     "Edited" badge no longer sits over regenerated text.
+      // All three live in the pipeline rather than here: this file is size-
+      // baselined at tolerance-0, and the pipeline already holds the settlement
+      // it needs to read the previous history from.
+      //
+      // DELIBERATELY DEFERRED — documented, not a bug to re-find. Authored
+      // ENTRIES inside historicalEvents[] / currentTensions[] still reroll away.
+      // The NPC fix does not transfer to them: they carry no id and no
+      // provenance marker, so there is nothing to preserve them BY
+      // (regenerationMode's `history_beat` rule covers the seven DERIVED
+      // summaries in explanation.js, not these arrays, and lookupTagForEntity
+      // has no branch for them, so it tags every one 'generated'/'draft' and
+      // both canon-aware modes preserve nothing). Curing that needs an identity
+      // scheme minted for the purpose — an owner decision, not oversight.
       const history = eng.regenHistoryPipeline(settlement, cfg);
       set(s => { s.settlement.history = history; });
     }
@@ -1256,21 +1120,17 @@ export const createSettlementSlice = (set, get) => ({
   // recordSaveMomentForActiveSave) and are now invoked from the real save
   // chokepoints. The dead action was removed rather than kept as a decoy.
 
-  /** Bulk-replace the savedSettlements array (used for hydration from savesService). */
-  setSavedSettlements: (settlements) =>
-    set(state => {
-      state.savedSettlements = settlements || [];
-      state.savedSettlementsLoaded = true;
-    }),
+  /** Bulk-replace the cache; async callers pass an owner/generation token. */
+  setSavedSettlements: (settlements, hydration = null) =>
+    commitSavedSettlementsHydration(set, settlements, hydration),
 
-  clearSavedSettlements: () =>
-    set(state => {
-      state.savedSettlements = [];
-      state.savedSettlementsLoaded = false;
-      state.activeSaveId = null;
-    }),
+  /** Clear/invalidate; an explicit owner establishes a new auth boundary. */
+  clearSavedSettlements: (nextOwnerId = undefined) =>
+    clearSavedSettlementsCache(set, nextOwnerId),
 
-  removeSavedSettlement: (id) => {
+  removeSavedSettlement: (id, { mutationToken = null } = {}) => {
+    const blocked = get().getSettlementDeletionBlock?.([id], mutationToken);
+    if (blocked) return blocked;
     // state-lifecycle-2: a deleted member must also LEAVE every campaign that
     // held it — otherwise its id lingers in campaign.settlementIds (+ mapState
     // placements) forever (every reader is defensively filtered, so it is an
@@ -1284,12 +1144,13 @@ export const createSettlementSlice = (set, get) => ({
       for (const c of get().campaigns || []) {
         const holdsMember = (c.settlementIds || []).some(sid => String(sid) === String(id));
         const holdsQueued = (c.worldState?.pendingEvents || []).some(e => String(e.saveId) === String(id));
-        if (holdsMember || holdsQueued) remove(c.id, id);
+        if (holdsMember || holdsQueued) remove(c.id, id, { mutationToken });
       }
     }
     set(state => {
-      state.savedSettlements = state.savedSettlements.filter(s => s.id !== id);
+      state.savedSettlements = state.savedSettlements.filter(s => String(s.id) !== String(id));
     });
+    return { ok: true, settlementId: id };
   },
 
   updateSavedSettlement: (id, partial) =>
@@ -1719,10 +1580,42 @@ export const createSettlementSlice = (set, get) => ({
    * a blocking refusal: nothing commits, nothing logs, the envelope carries
    * ok:false + veto.
    */
-  applyEvent: (event) => {
+  applyEvent: (event, options = {}) => {
     const state = get();
     if (!state.settlement) return null;
     const activeSaveId = state.activeSaveId || null;
+    const command = options?.applicationCommand || null;
+    const fence = state.canonEventCommandFence;
+    const bypassesOwnFence = (
+      options?.bypassCommandFence
+      && options.bypassCommandFence === fence?.commandId
+    );
+    if (fence && !bypassesOwnFence) {
+      return {
+        ...makeActionResult('applyEvent', {
+          ok: false,
+          before: {
+            eventType: event?.type ?? null,
+            targetId: event?.targetId ?? null,
+            phase: state.phase,
+            activeSaveId,
+            reason: 'canon_command_in_flight',
+          },
+          after: null,
+        }),
+        reason: 'canon_command_in_flight',
+      };
+    }
+    if (command && isAuthoritativeCanonEventType(event?.type)) {
+      return runAuthoritativeCanonEventFromSlice({
+        get,
+        set,
+        event,
+        command,
+        activeSaveId,
+        rippleEventThroughWorld,
+      });
+    }
     // Campaign-clock (Phase C1): a settlement bound to a CANONIZED campaign
     // world surrenders its independent timeline. Its events don't resolve now —
     // they queue as pending intentions and resolve simultaneously with every
@@ -1851,7 +1744,11 @@ export const createSettlementSlice = (set, get) => ({
     set(s => {
       s.settlement     = nextSettlement;
       s.systemState    = nextSystemState;
-      s.editedAt       = new Date().toISOString();
+      // One commit has one timestamp. Reusing the domain boundary's appliedAt
+      // keeps the event log, cached save revision, narrative snapshot, and
+      // command-chain receipt byte-identical instead of minting adjacent
+      // millisecond values for the same mutation.
+      s.editedAt       = logEntry.appliedAt || new Date().toISOString();
       s.pendingPreview = null;
       if (pendingSuccession) s.pendingSuccession = pendingSuccession;
       // Only canon-mode events go into the timeline. Draft edits
@@ -2215,15 +2112,14 @@ export const createSettlementSlice = (set, get) => ({
     state.canonizedAt    = cs.canonizedAt || null;
     state.lastExportAt   = cs.lastExportAt || null;
     // Identity-leak audit (same class as the phase/eventLog hydration fix above):
-    // reset ALL session-only, non-persisted UI residue through the single chokepoint
-    // so opening save B never inherits save A's in-flight state — a rename queued
-    // against A committing against B (cross-identity mutation), a stale successor
-    // prompt firing on the wrong town, B inheriting A's draft timeline, and (the
-    // components-dossier-5 add) the pipeline rail showing A's receipts against B.
+    // Reset identity-local UI residue through the single chokepoint. Owner-scoped
+    // pending intents/receipts remain in session so returning to save A recovers
+    // them, while the shared owner selector makes them invisible and unselectable
+    // on save B. Successor, draft-timeline, and pipeline residue still clear.
     // draftVersionHistory is a sibling to the DRAFT settlement only — a loaded save
     // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
     // stable generation id from the save's seed + generatedAt.
-    resetSettlementIdentity(state);
+    resetSettlementIdentity(state, { preservePendingEdits: true });
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),

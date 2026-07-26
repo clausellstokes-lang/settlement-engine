@@ -36,6 +36,14 @@ export const FLAG_DEFAULTS = Object.freeze({
   imFellDisplayFace: false,
   dossierFiveTabs: true,
   inlineEdit: true,
+  settlementWorkbench: false,
+  heraldCommandBrief: false,
+  realmItemShadowDiagnostics: false,
+  // Availability and promotion are deliberately separate. The scene may ship as
+  // an opt-in portrait while the established 2D plan remains the default until
+  // the machine, device, accessibility, and lived-evaluation contract is green.
+  settlementScene3d: true,
+  settlementScene3dDefault: false,
   workshopNav: true,
   canonicalViewModel: true,
   pdfVisualChains: true,

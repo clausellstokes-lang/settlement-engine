@@ -17,6 +17,7 @@ import {
   viewToPath,
   titleForView,
   guardForView,
+  allowsFloatingFeedback,
   isKnownView,
   isSafeNextPath,
 } from '../../src/lib/routes.js';
@@ -194,6 +195,22 @@ describe('routes — titles + guards', () => {
     expect(guardForView('admin')).toBe('elevated');
     expect(guardForView('generate')).toBeUndefined();
     expect(guardForView('workshop')).toBeUndefined(); // component self-locks
+  });
+
+  it('owns floating-feedback chrome policy in the route table', () => {
+    for (const view of [
+      'signin',
+      'register',
+      'reset-password',
+      'set-new-password',
+      'verify-email',
+      'confirm-email',
+      'dossier-success',
+    ]) {
+      expect(allowsFloatingFeedback(view)).toBe(false);
+    }
+    expect(allowsFloatingFeedback('generate')).toBe(true);
+    expect(allowsFloatingFeedback('does-not-exist')).toBe(true);
   });
 
   it('isKnownView distinguishes declared views', () => {

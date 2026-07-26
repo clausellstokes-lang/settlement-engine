@@ -42,6 +42,8 @@ export const CONFIGURED_URL = `http://localhost:${CONFIGURED_PORT}`;
 
 export default defineConfig({
   testDir: './e2e',
+  // Performance evidence has its own production-build server and configuration.
+  testIgnore: '**/performance/**',
 
   // Each spec gets up to 30s; per-test action default is 10s.
   timeout: 30_000,

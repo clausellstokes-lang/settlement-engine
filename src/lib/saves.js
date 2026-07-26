@@ -12,9 +12,56 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { ACTIVE_SAVE_STATE, activeSaveCount, isSaveActive } from './saveAccess.js';
-import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLink.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
+
+let _neighbourBackLinkPromise = null;
+
+/**
+ * Reciprocal neighbour linking generates deterministic NPC contacts and
+ * conflicts only while a save is being written. Keep that domain branch behind
+ * the already-async persistence operation so reading the initial application
+ * shell does not load save-time relationship generation.
+ */
+function loadNeighbourBackLink() {
+  if (!_neighbourBackLinkPromise) {
+    _neighbourBackLinkPromise = import(
+      '../domain/relationships/neighbourBackLink.js'
+    );
+  }
+  return _neighbourBackLinkPromise;
+}
+
+/**
+ * The service keeps admission accounting beside the boundary that produced it.
+ * It is intentionally diagnostic-only: rejected payloads are not retained in
+ * memory, logged, or copied to a second browser key.
+ *
+ * @typedef {Readonly<{
+ *   source:string,
+ *   current:number,
+ *   migrated:number,
+ *   rejected:number,
+ *   entries:ReadonlyArray<Record<string, any>>,
+ * }>} SaveAdmissionDiagnostics
+ */
+/** @type {SaveAdmissionDiagnostics} */
+let lastSaveAdmissionDiagnostics = Object.freeze({
+  source: 'not-read',
+  current: 0,
+  migrated: 0,
+  rejected: 0,
+  entries: Object.freeze([]),
+});
+let _settlementSchemaVersion = null;
+let _saveAdmissionPromise = null;
+
+function loadSaveAdmission() {
+  if (!_saveAdmissionPromise) {
+    _saveAdmissionPromise = import('./saveAdmission.js');
+  }
+  return _saveAdmissionPromise;
+}
 
 /**
  * normalizeSettlement wraps the ~30 kB settlement-migration closure. It's only
@@ -30,7 +77,12 @@ const LOCAL_KEY = 'dnd_settlement_saves';
 let _normalize = null;
 async function loadNormalize() {
   if (!_normalize) {
-    _normalize = (await import('../domain/normalizeSettlement.js')).normalizeSettlement;
+    const [normalizer, schema] = await Promise.all([
+      import('../domain/normalizeSettlement.js'),
+      import('../domain/settlement.schema.js'),
+    ]);
+    _normalize = normalizer.normalizeSettlement;
+    _settlementSchemaVersion = schema.SCHEMA_VERSION;
   }
   return _normalize;
 }
@@ -44,13 +96,29 @@ function newSaveId() {
 
 // ── Local storage helpers ───────────────────────────────────────────────────
 
-function localLoad() {
-  // Non-array stored value (drifted/corrupt row) yields [] rather than letting
-  // a later .map/.filter crash (ported master fix).
+async function localLoad() {
+  const {
+    admitSavedSettlementEntries,
+    saveAdmissionDiagnostics,
+  } = await loadSaveAdmission();
   try {
-    const v = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
-    return Array.isArray(v) ? v : [];
-  } catch { return []; }
+    const parsed = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
+    const admitted = admitSavedSettlementEntries(parsed, {
+      source: 'local-cache',
+      requireSettlement: true,
+      targetSchemaVersion: _settlementSchemaVersion,
+    });
+    lastSaveAdmissionDiagnostics = admitted.diagnostics;
+    return admitted.entries;
+  } catch {
+    lastSaveAdmissionDiagnostics = saveAdmissionDiagnostics('local-cache', [{
+      status: 'rejected',
+      index: null,
+      id: null,
+      code: 'cache_json_invalid',
+    }]);
+    return [];
+  }
 }
 
 function localWrite(saves) {
@@ -200,17 +268,10 @@ function migrateSettlementShape(entry) {
 
 // ── Supabase methods ────────────────────────────────────────────────────────
 
-async function supabaseList() {
-  const { data, error } = await supabase
-    .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, visibility, unlisted_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
-    .order('updated_at', { ascending: false });
-  if (error) throw error;
-  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
-  return data.map(row => {
-    const accessState = row.access_state || ACTIVE_SAVE_STATE;
-    const usable = accessState === ACTIVE_SAVE_STATE;
-    return migrateSettlementShape(migrateSaveToV2({
+function saveEntryFromSupabaseRow(row) {
+  const accessState = row.access_state || ACTIVE_SAVE_STATE;
+  const usable = accessState === ACTIVE_SAVE_STATE;
+  return {
     id:        row.id,
     name:      row.name,
     tier:      row.tier,
@@ -227,7 +288,7 @@ async function supabaseList() {
     // on every "Save gallery details" — dropping them here silently cleared
     // the import opt-in + per-member overrides after a reload.
     gallery_importable: row.gallery_importable || false,
-    gallery_member_overrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object') ? row.gallery_member_overrides : null,
+    gallery_member_overrides: row.gallery_member_overrides || null,
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
     // V-20 unlisted (party-link) state — read back so a reload re-seeds
@@ -241,16 +302,47 @@ async function supabaseList() {
     gallery_title: row.gallery_title || '',
     gallery_image_url: row.gallery_image_url || '',
     gallery_image_alt: row.gallery_image_alt || '',
-    gallery_tags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    gallery_tags: row.gallery_tags || [],
     campaignState: row.campaign_state || null,
-    versionHistory: Array.isArray(row.version_history) ? row.version_history : [],
+    versionHistory: row.version_history || [],
     accessState,
     inactiveReason: row.inactive_reason || null,
     inactiveSince: row.inactive_since || null,
     retentionExpiresAt: row.retention_expires_at || null,
     reactivatedFreeAt: row.reactivated_free_at || null,
-  }));
+  };
+}
+
+/**
+ * Parse the owner-visible Supabase row set as a sibling-isolated unit.
+ * JSONB column checks happen before defaults can hide a bad wire value.
+ *
+ * @param {unknown} value
+ */
+export async function admitSupabaseSavedSettlementRows(value) {
+  await loadNormalize();
+  const { admitSupabaseSaveRows } = await loadSaveAdmission();
+  const admitted = admitSupabaseSaveRows(value, {
+    mapRow: saveEntryFromSupabaseRow,
+    targetSchemaVersion: _settlementSchemaVersion,
   });
+  return {
+    entries: admitted.entries
+      .map(migrateSaveToV2)
+      .map(migrateSettlementShape),
+    diagnostics: admitted.diagnostics,
+  };
+}
+
+async function supabaseList() {
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, visibility, unlisted_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .order('updated_at', { ascending: false });
+  if (error) throw error;
+  const admitted = await admitSupabaseSavedSettlementRows(data || []);
+  lastSaveAdmissionDiagnostics = admitted.diagnostics;
+  return admitted.entries;
 }
 
 /**
@@ -328,19 +420,25 @@ async function supabaseListActiveByName(name) {
     .select('id, name, tier, data, access_state')
     .eq('name', name);
   if (error) throw error;
-  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
-  return (data || []).map(row => migrateSettlementShape(migrateSaveToV2({
-    id:         row.id,
-    name:       row.name,
-    tier:       row.tier,
-    settlement: row.data,
-    accessState: row.access_state || ACTIVE_SAVE_STATE,
-  }))).filter(isSaveActive);
+  const admitted = await admitSupabaseSavedSettlementRows(
+    (data || []).map((row) => ({
+      ...row,
+      // The targeted projection intentionally omits optional JSONB columns.
+      version_history: null,
+      gallery_tags: null,
+    })),
+  );
+  return admitted.entries.filter(isSaveActive);
 }
 
-async function supabaseSave(entry) {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error('Not authenticated');
+async function supabaseSave(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
 
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
@@ -352,6 +450,7 @@ async function supabaseSave(entry) {
   // generated neighbour or no matching active partner. F42: resolve the partner
   // with a targeted name query, not a full-library refetch.
   if (settlement?.neighborRelationship?.name) {
+    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
     const saveId = newSaveId();
     const existing = await supabaseListActiveByName(settlement.neighborRelationship.name);
     const link = buildNeighbourBackLink({ ...v2, id: saveId, settlement }, existing);
@@ -359,13 +458,13 @@ async function supabaseSave(entry) {
       await supabaseMutateBatch({
         creates: [{ ...v2, id: saveId, settlement: link.settlement }],
         updates: [{ id: link.partner.id, settlement: link.partner.settlement }],
-      });
+      }, { expectedOwnerId: ownerId, isSessionCurrent });
       return saveId;
     }
   }
 
   const row = {
-    user_id:         user.id,
+    user_id:         ownerId,
     name:            v2.name,
     tier:            v2.tier,
     data:            settlement,
@@ -378,6 +477,7 @@ async function supabaseSave(entry) {
     version_history: Array.isArray(v2.versionHistory) ? v2.versionHistory : null,
   };
 
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
   const { data, error } = await supabase
     .from('settlements')
     .insert(row)
@@ -387,7 +487,15 @@ async function supabaseSave(entry) {
   return data.id;
 }
 
-async function supabaseUpdate(id, partial) {
+async function supabaseUpdate(
+  id,
+  partial,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(
+    expectedOwnerId,
+    isSessionCurrent,
+  );
   const updates = {};
   if (partial.name       !== undefined) updates.name = partial.name;
   if (partial.tier       !== undefined) updates.tier = partial.tier;
@@ -405,13 +513,110 @@ async function supabaseUpdate(id, partial) {
   if (toggles) updates.toggles = toggles;
 
   if (Object.keys(updates).length === 0) return;
-  const { error } = await supabase.from('settlements').update(updates).eq('id', id);
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, ownerId);
+  const { data, error } = await supabase
+    .from('settlements')
+    .update(updates)
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .select('id');
   if (error) throw error;
+  const updated = (Array.isArray(data) ? data : data ? [data] : [])
+    .some(row => String(row?.id) === String(id));
+  if (updated) return id;
+
+  // PostgREST may report a clean zero-row update when auth rotated and RLS
+  // filtered the expected owner's row. Recheck the owner, then distinguish an
+  // intentionally absent/deleted save from a still-visible uncommitted write.
+  await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+  const { data: remaining, error: confirmError } = await supabase
+    .from('settlements')
+    .select('id')
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .maybeSingle();
+  if (confirmError) throw confirmError;
+  if (remaining?.id != null) {
+    throw Object.assign(
+      new Error('Settlement update did not confirm the requested row.'),
+      { code: 'settlement_update_unconfirmed' },
+    );
+  }
+  return null;
 }
 
-async function supabaseDelete(id) {
-  const { error } = await supabase.from('settlements').delete().eq('id', id);
+// ── Save persistence owner/session fence ─────────────────────────────────────
+//
+// Keep this error contract local to the save service: callers branch on its
+// stable code while the service supplies save-specific context. Campaign
+// persistence uses the same capture/recheck discipline but owns a separate
+// domain message and coordinator lifecycle.
+
+function saveAuthSessionChangedError(expectedOwnerId, actualOwnerId = null) {
+  return Object.assign(
+    new Error('Settlement persistence belongs to a different authenticated account.'),
+    {
+      code: 'auth_session_changed',
+      expectedOwnerId: expectedOwnerId == null ? null : String(expectedOwnerId),
+      actualOwnerId: actualOwnerId == null ? null : String(actualOwnerId),
+    },
+  );
+}
+
+function assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, actualOwnerId = null) {
+  if (isSessionCurrent && !isSessionCurrent()) {
+    throw saveAuthSessionChangedError(expectedOwnerId, actualOwnerId);
+  }
+}
+
+/**
+ * Resolve and verify the authenticated owner immediately around an async seam.
+ *
+ * The second generation check matters even when the user id is unchanged:
+ * signing out and back into the same account still starts a new persistence
+ * session, and work retained by the old session must fail closed.
+ */
+async function assertExpectedSupabaseOwner(expectedOwnerId = null, isSessionCurrent = null) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent);
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error('Not authenticated');
+  const ownerId = expectedOwnerId == null ? String(user.id) : String(expectedOwnerId);
+  if (String(user.id) !== ownerId) throw saveAuthSessionChangedError(ownerId, user.id);
+  assertSaveSessionCurrent(ownerId, isSessionCurrent, user.id);
+  return ownerId;
+}
+
+async function supabaseDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
+  const ownerId = await assertExpectedSupabaseOwner(expectedOwnerId, isSessionCurrent);
+  const { data, error } = await supabase
+    .from('settlements')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .select('id');
   if (error) throw error;
+  const deleted = (Array.isArray(data) ? data : data ? [data] : [])
+    .some(row => String(row?.id) === String(id));
+  // A returned row proves A's delete committed. The caller owns the stale-session
+  // cleanup and must not reinterpret that commit merely because auth rotated.
+  if (deleted) return id;
+  // Zero rows are ambiguous: already absent, or a request that ran after auth
+  // rotation. Re-read owner + generation before granting idempotent success.
+  await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+  const { data: remaining, error: confirmError } = await supabase
+    .from('settlements')
+    .select('id')
+    .eq('id', id)
+    .eq('user_id', ownerId)
+    .maybeSingle();
+  if (confirmError) throw confirmError;
+  if (remaining?.id != null) {
+    throw Object.assign(
+      new Error('Settlement delete did not confirm the requested row.'),
+      { code: 'settlement_delete_unconfirmed' },
+    );
+  }
+  return null;
 }
 
 async function supabaseCount() {
@@ -431,13 +636,31 @@ async function supabaseReactivateFreeSettlement(id) {
   return data;
 }
 
-async function supabaseMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
+async function supabaseMutateBatch(
+  { updates = [], deletes = [], creates = [] } = {},
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  const ownerId = await assertExpectedSupabaseOwner(expectedOwnerId, isSessionCurrent);
   const { data, error } = await supabase.rpc('mutate_settlement_batch', {
+    p_expected_user: ownerId,
     updates: updates.map(entry => mutationRow(entry)),
     delete_ids: deletes,
     creates: creates.map(entry => mutationRow(migrateSaveToV2(entry))),
   });
   if (error) throw error;
+  if (deletes.length > 0) {
+    const expectedAffected = updates.length + deletes.length + creates.length;
+    if (Number(data) !== expectedAffected) {
+      // The RPC normally proves its atomic commit with an exact affected count.
+      // An ambiguous zero/short result gets the same owner/session recheck as a
+      // direct delete and is never allowed to certify optimistic local removal.
+      await assertExpectedSupabaseOwner(ownerId, isSessionCurrent);
+      throw Object.assign(
+        new Error('Settlement batch delete did not confirm every requested mutation.'),
+        { code: 'settlement_delete_unconfirmed' },
+      );
+    }
+  }
   return data;
 }
 
@@ -451,7 +674,7 @@ async function localList() {
   // pure object spreads — and it makes the rest of the app symmetric
   // with the Supabase path.
   await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
-  return localLoad().map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
+  return (await localLoad()).map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
 }
 
 /**
@@ -472,16 +695,25 @@ async function localListMeta() {
   }));
 }
 
-async function localSaveEntry(entry) {
+async function localSaveEntry(
+  entry,
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(
+    expectedOwnerId,
+    isSessionCurrent,
+    expectedOwnerId,
+  );
   const v2 = migrateSaveToV2(entry);
   const settlement = withNeighbourNetworkFromRelationship(v2.settlement);
-  const saves = localLoad();
+  const saves = await localLoad();
   const id = v2.id || Date.now();
 
   // Bidirectional neighbour link (see supabaseSave): when the named neighbour
   // already exists as an active save, write the reciprocal back-link onto the
   // partner row alongside the new save.
   if (settlement?.neighborRelationship?.name) {
+    const { buildNeighbourBackLink } = await loadNeighbourBackLink();
     const existing = saves.filter(isSaveActive);
     const link = buildNeighbourBackLink({ ...v2, id, settlement }, existing);
     if (link) {
@@ -500,7 +732,7 @@ async function localSaveEntry(entry) {
 }
 
 async function localUpdate(id, partial) {
-  const saves = localLoad();
+  const saves = await localLoad();
   // String() both sides (ported master fix): a numeric id passed as a string
   // must still match — the module's other id compares already coerce.
   const idx = saves.findIndex(s => String(s.id) === String(id));
@@ -510,16 +742,20 @@ async function localUpdate(id, partial) {
   }
 }
 
-async function localDelete(id) {
-  localWrite(localLoad().filter(s => String(s.id) !== String(id)));
+async function localDelete(id, expectedOwnerId = null, isSessionCurrent = null) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
+  const saves = await localLoad();
+  const existed = saves.some(save => String(save.id) === String(id));
+  localWrite(saves.filter(save => String(save.id) !== String(id)));
+  return existed ? id : null;
 }
 
 async function localCount() {
-  return activeSaveCount(localLoad());
+  return activeSaveCount(await localLoad());
 }
 
 async function localReactivateFreeSettlement(id) {
-  const saves = localLoad();
+  const saves = await localLoad();
   const idx = saves.findIndex(save => String(save.id) === String(id));
   if (idx === -1) return { ok: false, reason: 'not_found' };
   saves[idx] = {
@@ -539,10 +775,14 @@ async function localWriteAll(entries) {
   localWrite(entries);
 }
 
-async function localMutateBatch({ updates = [], deletes = [], creates = [] } = {}) {
+async function localMutateBatch(
+  { updates = [], deletes = [], creates = [] } = {},
+  { expectedOwnerId = null, isSessionCurrent = null } = {},
+) {
+  assertSaveSessionCurrent(expectedOwnerId, isSessionCurrent, expectedOwnerId);
   const deleted = new Set(deletes.map(String));
   const updateMap = new Map(updates.map(entry => [String(entry.id), entry]));
-  const next = localLoad()
+  const next = (await localLoad())
     .filter(entry => !deleted.has(String(entry.id)))
     .map(entry => {
       const patch = updateMap.get(String(entry.id));
@@ -567,5 +807,7 @@ export const saves = {
   mutateBatch: isConfigured ? supabaseMutateBatch : localMutateBatch,
   /** Write entire saves array — only available in local mode. */
   writeAll: isConfigured ? null             : localWriteAll,
+  /** Last owner-visible boundary accounting; contains no persisted payloads. */
+  getAdmissionDiagnostics: () => lastSaveAdmissionDiagnostics,
   isConfigured,
 };

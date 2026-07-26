@@ -150,7 +150,7 @@ function corsHeaders(req: Request) {
 // localStorage, and stamp the claim. Returns null when the service env is unset —
 // the caller then returns settlement:null and the client falls back to its own
 // stash, so a missing service key never blocks a verified purchase.
-function defaultAdminClient(): ReturnType<typeof createClient> | null {
+function defaultAdminClient() {
   const url = Deno.env.get('SUPABASE_URL');
   const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
   if (!url || !serviceKey) return null;
@@ -169,7 +169,7 @@ export async function handleVerifyDossier(
     rateLimit?: (req: Request) => Promise<boolean>;
     // Service-role seam for the delivery-stash read (122). Production passes
     // nothing → defaultAdminClient (null when the service env is unset).
-    adminClient?: () => ReturnType<typeof createClient> | null;
+    adminClient?: typeof defaultAdminClient;
   } = {},
 ): Promise<Response> {
   const stripeApi = deps.stripeClient ?? stripe;

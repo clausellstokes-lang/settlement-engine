@@ -9,14 +9,25 @@
  * EXISTING save is byte-identical because it never re-enters this path with no container).
  */
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, cleanup, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, cleanup, waitFor, act } from '@testing-library/react';
 
-const { saveRef } = vi.hoisted(() => ({ saveRef: { fn: null } }));
+const { saveRef, intentRef } = vi.hoisted(() => ({
+  saveRef: { fn: null },
+  intentRef: { fn: null },
+}));
 
 vi.mock('../../src/store/index.js', () => ({ useStore: (selector) => selector({ setActiveSaveId: vi.fn() }) }));
 vi.mock('../../src/lib/saves.js', () => ({ saves: { save: (...a) => saveRef.fn(...a) } }));
 vi.mock('../../src/lib/pendingSaveDraft.js', () => ({ writeDraft: vi.fn(), clearDraft: vi.fn() }));
 vi.mock('../../src/store/saveMoments.js', () => ({ recordSaveMomentForActiveSave: vi.fn() }));
+vi.mock('../../src/lib/authIntents.js', () => ({
+  INTENTS: { SAVE_SETTLEMENT: 'save-settlement' },
+  setPending: (...args) => intentRef.fn(...args),
+}));
+vi.mock('../../src/lib/analytics.js', () => ({
+  EVENTS: { SAVE_BUTTON_CLICKED: 'save_clicked', SAVE_SIGNUP_INTENT_OPENED: 'save_signup' },
+  Funnel: { track: vi.fn() },
+}));
 
 import { SaveToLibraryButton } from '../../src/components/generate/SaveToLibraryButton.jsx';
 
@@ -43,5 +54,58 @@ describe('SaveToLibraryButton — v2 default-mint', () => {
     // The existing container is untouched — no forced v2 over a settlement that already edited.
     expect(captured.settlement.mapEdits).toBe(existing);
     expect(captured.settlement.mapEdits).toEqual({ styleLens: 'vtt' });
+  });
+
+  test('a same-tick repeat click cannot create two saved rows', async () => {
+    let resolveSave;
+    const pending = new Promise(resolve => {
+      resolveSave = resolve;
+    });
+    saveRef.fn = vi.fn(() => pending);
+    render(
+      <SaveToLibraryButton
+        settlement={{ name: 'Once', tier: 'town' }}
+        canSave
+        isMobile={false}
+        onSignIn={() => {}}
+      />,
+    );
+
+    const button = screen.getByRole('button', { name: /save to library/i });
+    fireEvent.click(button);
+    fireEvent.click(button);
+    await waitFor(() => expect(saveRef.fn).toHaveBeenCalledTimes(1));
+
+    await act(async () => {
+      resolveSave('save-once');
+      await pending;
+    });
+    expect(saveRef.fn).toHaveBeenCalledTimes(1);
+  });
+
+  test('arms the save intent before opening auth and ignores a same-tick repeat click', async () => {
+    const order = [];
+    intentRef.fn = vi.fn((type, payload) => {
+      order.push('intent');
+      expect(type).toBe('save-settlement');
+      expect(payload.settlement.mapEdits).toEqual({ layoutLawVersion: 2 });
+    });
+    const onSignIn = vi.fn(() => order.push('auth'));
+    render(
+      <SaveToLibraryButton
+        settlement={{ name: 'Awaiting Account', tier: 'town' }}
+        canSave={false}
+        isMobile={false}
+        onSignIn={onSignIn}
+      />,
+    );
+
+    const button = screen.getByRole('button', { name: /save this town/i });
+    fireEvent.click(button);
+    fireEvent.click(button);
+
+    await waitFor(() => expect(onSignIn).toHaveBeenCalledTimes(1));
+    expect(intentRef.fn).toHaveBeenCalledTimes(1);
+    expect(order).toEqual(['intent', 'auth']);
   });
 });

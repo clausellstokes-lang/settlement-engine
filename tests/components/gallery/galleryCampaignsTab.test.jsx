@@ -35,6 +35,10 @@ const mocks = vi.hoisted(() => ({
   },
   storeState: {
     auth: null, // ANON by default — rendering must not gate on sign-in.
+    savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: null,
+    savedSettlementsHydrationGeneration: 0,
+    setSavedSettlements: vi.fn(),
     importGalleryMap: vi.fn(),
     importGalleryMapWithCampaign: vi.fn(),
     setActiveCampaign: vi.fn(),
@@ -43,8 +47,20 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock('../../../src/lib/gallery.js', () => mocks.galleryApi);
-vi.mock('../../../src/store/index.js', () => ({ useStore: selector => selector(mocks.storeState) }));
-vi.mock('../../../src/store', () => ({ useStore: selector => selector(mocks.storeState) }));
+vi.mock('../../../src/store/index.js', () => {
+  function useStore(selector) {
+    return selector(mocks.storeState);
+  }
+  useStore.getState = () => mocks.storeState;
+  return { useStore };
+});
+vi.mock('../../../src/store', () => {
+  function useStore(selector) {
+    return selector(mocks.storeState);
+  }
+  useStore.getState = () => mocks.storeState;
+  return { useStore };
+});
 vi.mock('../../../src/hooks/useRoute.js', () => mocks.nav);
 
 const CAMPAIGN_TILE = {

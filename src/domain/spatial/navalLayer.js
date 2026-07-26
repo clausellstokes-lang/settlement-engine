@@ -46,6 +46,9 @@ import { chooseRoute, riskToleranceFromAlignment } from './embattlement.js';
 import { ARMY_ROLES, armyRecordOf } from './armyTransit.js';
 import { facetOf } from './cohesionWeave.js';
 import { clamp01 } from '../../kernel/math.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 
 // ── Tuning (documented here; retuned in the W-NAVY + checkpoint soaks) ──────────
 export const NAVAL_TUNING = Object.freeze({
@@ -142,6 +145,20 @@ function hasShipbuildingTag(inst) {
 }
 
 /**
+ * Boolean-only wrapper around the shared type guard.
+ *
+ * `InstLike` deliberately models a compatibility record rather than the full
+ * materialized-content type. Keeping this boundary boolean prevents TypeScript
+ * from incorrectly narrowing the native compatibility lane to `never`.
+ *
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+function hasCustomContentProvenance(value) {
+  return isMaterializedCustomContent(value);
+}
+
+/**
  * Is an institution row a WAR-CAPABLE maritime institution — the Facet Law: a DECLARED
  * `naval` institutionFunction facet (a custom "Drydock Guild" declaring naval-capable
  * COUNTS, whatever its English), OR the catalog `shipbuilding` tag, OR the naval name/tag
@@ -155,6 +172,9 @@ export function isNavalInstitution(raw) {
   const inst = /** @type {InstLike} */ (raw);
   if (!isStanding(inst)) return false;
   if (facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (inst), 'institutionFunction') === 'naval') return true;
+  // Catalog tags and name patterns are the native/unstamped compatibility
+  // lane. Current custom presentation fields cannot mint a war navy.
+  if (hasCustomContentProvenance(inst)) return false;
   if (hasShipbuildingTag(inst)) return true;
   const tags = Array.isArray(inst.tags) ? inst.tags.join(' ') : '';
   const hay = `${String(inst.name || '')} ${String(inst.category || '')} ${String(inst.priorityCategory || '')} ${tags}`;

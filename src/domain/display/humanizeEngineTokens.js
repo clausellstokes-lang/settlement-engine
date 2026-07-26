@@ -21,6 +21,16 @@
 const WEEKS_PER_YEAR = 52;
 const WEEKS_PER_SEASON = 13;
 const SEASONS = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
+/** @type {Readonly<Record<string, string>>} */
+const SETTLEMENT_SIZE_LABELS = Object.freeze({
+  thorp: 'Thorp',
+  hamlet: 'Hamlet',
+  village: 'Village',
+  town: 'Town',
+  city: 'City',
+  capital: 'Metropolis',
+  metropolis: 'Metropolis',
+});
 
 /**
  * A tick (elapsed weeks) as a calendar phrase the reader can live inside:
@@ -36,8 +46,27 @@ export function tickCalendarLabel(tick) {
 }
 
 /**
- * A schema token (snake_case or camelCase) as plain lowercase words:
- * `succession_coup` → `succession coup`, `goalProgress` → `goal progress`.
+ * A calendar label precise enough to distinguish adjacent Chronicle entries:
+ * `week 8 of spring, year 1`.
+ *
+ * The Chronicle is weekly, so the season-only label above is intentionally too
+ * coarse for its scrubber. This detail form delegates the durable season/year
+ * wording to `tickCalendarLabel`; it adds only the week within that season.
+ *
+ * @param {number} tick
+ * @returns {string}
+ */
+export function tickCalendarDetailLabel(tick) {
+  const w = Math.max(0, Math.floor(Number(tick) || 0));
+  const seasonAndYear = tickCalendarLabel(w)
+    .replace(/^the /, '')
+    .replace(' of year ', ', year ');
+  return `week ${(w % WEEKS_PER_SEASON) + 1} of ${seasonAndYear}`;
+}
+
+/**
+ * A schema token (snake_case, kebab-case, or camelCase) as plain lowercase
+ * words: `succession_coup` → `succession coup`, `goalProgress` → `goal progress`.
  * Total on garbage (non-string ⇒ '').
  * @param {unknown} token
  * @returns {string}
@@ -45,10 +74,31 @@ export function tickCalendarLabel(tick) {
 export function humanizeToken(token) {
   return String(token ?? '')
     .replace(/_/g, ' ')
+    .replace(/-/g, ' ')
     .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
     .toLowerCase()
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/**
+ * A stored settlement-size token as the product's reader-facing size name.
+ *
+ * The canonical six sizes have authored labels; the legacy `capital` token
+ * resolves to the same final rung as `metropolis`. Unknown future or imported
+ * tokens remain legible through the general token humanizer rather than leaking
+ * underscores or silently disappearing.
+ *
+ * @param {unknown} value
+ * @param {string} [fallback]
+ * @returns {string}
+ */
+export function settlementSizeLabel(value, fallback = '') {
+  const key = String(value ?? '').trim().toLowerCase();
+  if (!key) return fallback;
+  if (SETTLEMENT_SIZE_LABELS[key]) return SETTLEMENT_SIZE_LABELS[key];
+  const words = humanizeToken(value);
+  return words ? `${words.charAt(0).toUpperCase()}${words.slice(1)}` : fallback;
 }
 
 /**

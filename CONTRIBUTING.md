@@ -7,8 +7,8 @@
 
 ## The gate
 
-Everything runs through `npm run check` — the full 13-step chain: `validate:data` →
-`validate:migration-head` → `validate:edge` → `validate:map` →
+Everything runs through `npm run check` — the full 14-step chain: `validate:data` →
+`validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
 `validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck` →
 `typecheck:domain:strict` → `lint` → `test` (the full Vitest suite, ~9,800 tests) →
 `build` → `verify:dist` (the first-paint ratchet) — plus the Playwright `e2e` job.

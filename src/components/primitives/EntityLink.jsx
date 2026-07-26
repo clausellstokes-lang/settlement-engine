@@ -38,10 +38,18 @@ export default function EntityLink({ id, type, fallback = '', verbatim = false, 
   const { index, navigateToEntity } = useDossierEntities();
   const entry = id ? index?.resolve?.(id) : null;
 
-  // Broken / unresolved link -> plain text, never a link that goes nowhere.
-  if (!entry) {
+  // Broken, unresolved, or identity-ambiguous references stay plain text. An
+  // imported collision must never turn "first record wins" into navigation.
+  if (!entry || entry?.identity?.interactive === false) {
     const text = fallback || '';
-    return text ? <span data-entity-type={type}>{text}</span> : null;
+    return text ? (
+      <span
+        data-entity-type={type}
+        data-entity-identity={entry?.identity?.state || undefined}
+      >
+        {text}
+      </span>
+    ) : null;
   }
 
   // A pronoun link keeps the wrapped word; a name link resolves the live name.

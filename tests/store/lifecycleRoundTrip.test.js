@@ -104,7 +104,8 @@ import { deepClone } from '../../src/domain/clone.js';
 
 /** Substrate A — zustand persist partialize keys (src/store/index.js). */
 const ZUSTAND_PERSIST_KEYS = Object.freeze([
-  'config', 'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
+  'config', 'configExplicitFields',
+  'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
 ]);
 
 /**
@@ -132,6 +133,18 @@ const CAMPAIGN_RECORD_REGISTRY = Object.freeze({
   lastReadTick:  { migrate: 'backfilled', undo: 'untouched' },
   flagsSeen:     { migrate: 'backfilled', undo: 'untouched' },
   pendingSync:   { migrate: 'preserved',  undo: 'untouched' },
+  contentBinding: {
+    migrate: 'preserved',
+    undo: 'untouched',
+  },
+  contentBindingHistory: {
+    migrate: 'backfilled',
+    undo: 'untouched',
+  },
+  contentBindingStatus: {
+    migrate: 'backfilled',
+    undo: 'untouched',
+  },
 });
 
 /** Nested family — worldState BASE keys (createDefaultWorldState, always present). */
@@ -205,6 +218,7 @@ const WRITER_ONLY_EXEMPT = Object.freeze({
 const SESSION_ONLY_FAMILIES = Object.freeze({
   pendingEditsQueue: 'session-only by design — drains into committed edits (src/domain/pendingEdits.js)',
   pendingEditsClock: 'session-only companion cursor to pendingEditsQueue (src/store/settlementSlice.js)',
+  pendingEditReceipts: 'session-only idempotency/correlation receipts; authoritative receipts live in snapshots and event logs',
   pulseUndoStack: 'session-scoped pulse undo stack — a reload clears it (src/store/campaignWorldPulseSlice.js)',
 });
 
@@ -713,6 +727,7 @@ describe('E-C saves envelope — the local substrate: save, import (list), fixpo
 describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-trip', () => {
   const currentStub = () => ({
     config: { ...DEFAULT_CONFIG },
+    configExplicitFields: {},
     institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
     someSliceMethod: () => {},
   });
@@ -720,6 +735,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
   test('a current-shape persisted blob survives the rehydrate merge byte-exact', () => {
     const blob = {
       config: { ...DEFAULT_CONFIG, settType: 'city' },
+      configExplicitFields: { priorityEconomy: true },
       institutionToggles: { temple: true }, categoryToggles: { economy: false },
       goodsToggles: { grain: true }, servicesToggles: { svc_smith: true },
     };

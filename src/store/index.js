@@ -89,11 +89,11 @@ export const useStore = create(
           name: 'settlementforge',
           // store-6: an explicit persist version + a migrate hook, so a future
           // persisted-shape change has a real upgrade seam instead of silently
-          // forking returning users. v1 is the first stamped version; migrate is a
-          // no-op passthrough for the pre-version blob (there is no shape change to
-          // apply — the config-key backfill is handled structurally by `merge` below,
-          // which runs on every rehydrate regardless of version).
-          version: 1,
+          // forking returning users. v2 adds the JSON-safe, field-level config
+          // intent record used by content-environment defaults. Its legacy
+          // inference and config-key backfill are handled structurally by
+          // `merge` below, which runs on every rehydrate regardless of version.
+          version: 2,
           migrate: (persistedState /* , fromVersion */) => persistedState,
           // store-6: zustand's DEFAULT merge is a SHALLOW top-level spread
           // ({ ...current, ...persisted }), so a returning user's persisted `config`
@@ -111,6 +111,7 @@ export const useStore = create(
             // expect to land on the mode picker on every visit, not get
             // dumped straight into whatever flow they used last session.
             config: state.config,
+            configExplicitFields: state.configExplicitFields,
             institutionToggles: state.institutionToggles,
             categoryToggles:    state.categoryToggles,
             goodsToggles:       state.goodsToggles,

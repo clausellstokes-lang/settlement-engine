@@ -14,18 +14,9 @@
  *      it on first paint.
  *   3. settlementSlice reaches the heavy generators via dynamic import()
  *      (loadEngine), not a top-level static import.
- *
- * KNOWN GAP (NOT yet pinned — deliberate): the entry chunk STILL carries one
- * static `import … from "./engine-*.js"` because ~11 leaf utilities in
- * src/generators/ (prng, terrainHelpers, priorityHelpers, helpers, aiLayer,
- * defenseGenerator, structuralValidator, computeActiveChains, servicesGenerator,
- * crossSettlementConflicts, steps/stepMetadata) are imported statically by the
- * domain/store/component layers. Because circular imports keep all of
- * src/generators/* in ONE chunk, pulling any leaf drags the whole engine eagerly
- * — defeating loadEngine's intent. Severing that needs relocating those leaves
- * out of the engine chunk (a data↔engine restructure). Until then we do NOT
- * assert engine-absence from the entry's static graph (it would fail); we lock in
- * the mitigations above so the situation can only improve, not regress.
+ *   4. Pipeline receipt metadata is a small independent lazy chunk. Generation
+ *      acquires it through the same memoized loader, and the lazy PipelineRail
+ *      can read it without fetching the complete generation engine.
  *
  * Anti-vacuity (mirrors vendorPdfLazy): the dist/ suite is runIf(distExists) and
  * silently no-ops pre-build; CI re-runs with VERIFY_DIST=1, where a missing dist/
@@ -46,6 +37,9 @@ const assetsDir = join(distDir, 'assets');
 // happens to sort after "core" — a latent flake, independent of any real size
 // change. Selecting on identity (not hash order) is the fix.
 const ENGINE_CHUNK_RE = /^engine-(?!core-)[A-Za-z0-9_-]+\.js$/;
+const ENGINE_CORE_LAZY_CHUNK_RE =
+  /^engine-core-lazy-[A-Za-z0-9_-]+\.js$/;
+const PIPELINE_METADATA_CHUNK_RE = /^pipeline-metadata-[A-Za-z0-9_-]+\.js$/;
 const distExists = existsSync(distDir) && existsSync(assetsDir);
 const requireDist = process.env.VERIFY_DIST === '1';
 
@@ -74,6 +68,29 @@ describe.runIf(distExists)('engine chunk — first-paint contract', () => {
     const preloadRe = /<link\s+rel="modulepreload"[^>]*href="[^"]*engine-[^"]*"/g;
     expect(html.match(preloadRe) || []).toHaveLength(0);
   });
+
+  it('pipeline metadata is an independent lazy chunk, not a first-paint preload', () => {
+    const metadata = readdirSync(assetsDir).filter(f => PIPELINE_METADATA_CHUNK_RE.test(f));
+    expect(metadata).toHaveLength(1);
+    const size = statSync(join(assetsDir, metadata[0])).size;
+    expect(size).toBeGreaterThan(1_000);
+    expect(size).toBeLessThan(20_000);
+
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(html).not.toMatch(/modulepreload[^>]*pipeline-metadata-/);
+  });
+
+  it('lazy-only shared presentation vocabulary stays outside eager engine-core', () => {
+    const chunks = readdirSync(assetsDir)
+      .filter(file => ENGINE_CORE_LAZY_CHUNK_RE.test(file));
+    expect(chunks).toHaveLength(1);
+    const size = statSync(join(assetsDir, chunks[0])).size;
+    expect(size).toBeGreaterThan(5_000);
+    expect(size).toBeLessThan(50_000);
+
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    expect(html).not.toMatch(/modulepreload[^>]*engine-core-lazy-/);
+  });
 });
 
 describe('engine chunk — source uses dynamic import for the heavy generators', () => {
@@ -81,5 +98,13 @@ describe('engine chunk — source uses dynamic import for the heavy generators',
     const src = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
     expect(src).toMatch(/import\(['"][^'"]*generateSettlementPipeline[^'"]*['"]\)/);
     expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*generators\/generateSettlementPipeline[^'"]*['"]/m);
+  });
+
+  it('settlementSlice loads pipeline metadata on generation, never through its eager imports', () => {
+    const src = readFileSync(resolve(process.cwd(), 'src/store/settlementSlice.js'), 'utf-8');
+    expect(src).toMatch(/import\(['"][^'"]*steps\/stepMetadata\.js['"]\)/);
+    expect(src).not.toMatch(/^import\s.*from\s+['"][^'"]*steps\/stepMetadata\.js['"]/m);
+    expect(src).toMatch(/metaForStep:\s+metadata\.metaForStep/);
+    expect(src).toMatch(/eng\.metaForStep\(name\)/);
   });
 });

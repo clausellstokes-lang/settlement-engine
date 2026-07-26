@@ -40,7 +40,9 @@ const SettlementDossierBackdrop = lazy(() => import('./SettlementDossierBackdrop
 
 export default function SettlementDossierHero({
   detail,
+  settlement = detail?.settlement,
   editMode, canEdit, saveId, authTier, phase, narrated,
+  canAuthorNpc = false,
   toggleEditMode, openExportSheet, onRenameSettlement,
   // Owner order (2026-07-22) — the header verbs relocate into the Actions rail:
   openSessionMode, exportImage, openShare, galleryPublished = false, exportAllowed = false,
@@ -80,7 +82,7 @@ export default function SettlementDossierHero({
     openSessionMode, exportImage, openShare,
   });
 
-  if (!detail.settlement) return null;
+  if (!settlement) return null;
 
   // W2-c — the [Dossier | Map] segmented toggle is RETIRED: the town map is now a
   // first-class tab inside OutputContainer (Summary / Systems / World / Map / Notes),
@@ -95,7 +97,8 @@ export default function SettlementDossierHero({
       <DetailErrorBoundary>
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
           <OutputContainer
-            settlement={detail.settlement} readOnly saveId={saveId}
+            settlement={settlement} readOnly saveId={saveId}
+            canAuthorNpc={canAuthorNpc}
             suppressNarrativeCta={!editMode} onRenameSettlement={onRenameSettlement}
             mapWorldState={mapWorldState} mapRegionalGraph={mapRegionalGraph} mapCanEdit={canEdit}
           />
@@ -118,7 +121,7 @@ export default function SettlementDossierHero({
           {saveId && (
             <FeatureErrorBoundary label="settlement-backdrop" fallback={() => null}>
               <Suspense fallback={null}>
-                <SettlementDossierBackdrop settlement={detail.settlement} saveId={saveId} />
+                <SettlementDossierBackdrop settlement={settlement} saveId={saveId} />
               </Suspense>
             </FeatureErrorBoundary>
           )}
@@ -128,7 +131,7 @@ export default function SettlementDossierHero({
           {saveId && (
             <aside style={{ flex: '0 1 248px', minWidth: 0, position: 'sticky', top: isMobile ? CHROME.headerMobile + CHROME.stickyTop : CHROME.stickyTop, alignSelf: 'flex-start', zIndex: 1 }}>
               <NextActionRail
-                settlement={detail.settlement}
+                settlement={settlement}
                 save={detail.saveData || detail}
                 simulated={simulated}
                 handlers={railHandlers}

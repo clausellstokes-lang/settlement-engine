@@ -6,8 +6,10 @@
  * the SAME pure `simulateCampaignWorldInterval` the in-thread fallback runs, so the
  * COMPUTE is identical by shared import. The one thing the worker adds that the
  * sync path does not is the postMessage transport — which serializes inputs and
- * results through the STRUCTURED CLONE ALGORITHM. `structuredClone()` IS that exact
- * algorithm, so it is a faithful model of the boundary.
+ * results through the STRUCTURED CLONE ALGORITHM. `structuredClone()` exercises
+ * those serialization semantics, but is not evidence of an actual isolated
+ * execution, worker scheduling, or duration. The real Node-isolate measurement
+ * lives in tests/ops/advanceWorkerEvidence.test.js and retains that boundary.
  *
  * This pin proves the two things that boundary could break, over a real multi-tick
  * advance with a pinned seed + pinned `now`:
@@ -133,17 +135,17 @@ describe('V-8 byte-identity — the thread boundary preserves the world', () => 
   test('end-to-end: runAdvanceInterval (real client) over a real-sim Worker double === sync fallback', async () => {
     const ORIG_WORKER = globalThis.Worker;
     // A Worker double that mirrors advanceInterval.worker.js EXACTLY: it clones the
-    // inbound message (as postMessage does), re-points the custom-content seam, runs
-    // the REAL sim, and clones progress + result back out. The only fiction is that
+    // inbound message (as postMessage does), passes the pinned custom-content
+    // projection into the REAL sim, and clones progress + result back out. The only fiction is that
     // it runs on this thread — the byte-boundary (structuredClone) is authentic.
     globalThis.Worker = class RealSimWorker {
       constructor() { this.onmessage = null; this.onerror = null; this.onmessageerror = null; }
       postMessage(message) {
         const { payload, customContent } = structuredClone(message);
-        setCustomContentSource(() => customContent || {});
         Promise.resolve()
           .then(() => simulateCampaignWorldInterval({
             ...payload,
+            customContent: customContent || {},
             onProgress: (detail) => this.onmessage?.({ data: { type: 'progress', detail: structuredClone(detail) } }),
           }))
           .then((result) => this.onmessage?.({ data: { type: 'result', result: structuredClone(result) } }))

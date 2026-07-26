@@ -39,6 +39,7 @@ import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { anchorForInstitution, anchorForDistrict } from './anchors.js';
 import { assignInstitutionsToDistricts } from './institutionAssignment.js';
 import { buildTownLayoutV2 } from './townLayoutV2.js';
+import { projectCustomInstitutionSceneFields } from '../townScene/customBuildingPresentation.js';
 
 /** @typedef {ReturnType<typeof createPRNG>} Rng */
 
@@ -110,6 +111,16 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {string} [category]
  * @property {string[]} [tags]
  * @property {string} [id]
+ * @property {boolean} [isCustom]
+ * @property {string} [customDefinitionId]
+ * @property {string} [customDefinitionRevisionId]
+ * @property {string} [customDefinitionContentHash]
+ * @property {number|string} [customDefinitionVersion]
+ * @property {string} [customDefinitionFingerprint]
+ * @property {string} [sceneProfileId]
+ * @property {'standard'|'landmark'} [landmarkLevel]
+ * @property {'brick'|'marble'|'ruined-stone'|'steel'|'stone'|'timber'} [materialFamily]
+ * @property {string} [glyph]
  */
 
 /**
@@ -160,6 +171,16 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {string} name
  * @property {string|null} catalogId
  * @property {string|null} localUid
+ * @property {string} [category]
+ * @property {string} [customDefinitionId]
+ * @property {string} [customDefinitionRevisionId]
+ * @property {string} [customDefinitionContentHash]
+ * @property {number|string} [customDefinitionVersion]
+ * @property {string} [customDefinitionFingerprint]
+ * @property {string} [sceneProfileId]
+ * @property {'standard'|'landmark'} [landmarkLevel]
+ * @property {'brick'|'marble'|'ruined-stone'|'steel'|'stone'|'timber'} [materialFamily]
+ * @property {string} [glyph]
  * @property {string} districtId
  * @property {'landmark'|'fill'} kind
  * @property {Point} position
@@ -251,6 +272,61 @@ function reservedSlots() {
 }
 
 /**
+ * Retain only bounded custom-definition presentation fields. This projection is
+ * attached after placement, so it can never influence district assignment or
+ * any 2D plan coordinate.
+ *
+ * @param {TownInstitution | null | undefined} institution
+ * @returns {Record<string, unknown>}
+ */
+function customInstitutionSceneFields(institution) {
+  if (!institution || (institution.isCustom !== true && !institution.localUid)) {
+    return {};
+  }
+  const projected = projectCustomInstitutionSceneFields(institution);
+  const category = typeof institution.category === 'string'
+    ? institution.category.trim().slice(0, 80)
+    : '';
+  return category ? { category, ...projected } : projected;
+}
+
+/**
+ * Layout v2 owns placement and returns the canonical TownMapModel shape. Enrich
+ * its building records only after that work is complete. Anchor-key queues keep
+ * the existing duplicate-fallback-anchor behavior total and positional.
+ *
+ * @param {TownMapModel} model
+ * @param {TownInstitution[]} institutions
+ * @returns {TownMapModel}
+ */
+function attachCustomInstitutionSceneFields(model, institutions) {
+  const anchored = institutions
+    .map((institution) => ({
+      anchorKey: anchorForInstitution(institution),
+      institution,
+    }))
+    .sort((a, b) => compareCodepoint(a.anchorKey, b.anchorKey));
+  /** @type {Map<string, TownInstitution[]>} */
+  const byAnchor = new Map();
+  for (const row of anchored) {
+    const queue = byAnchor.get(row.anchorKey) || [];
+    queue.push(row.institution);
+    byAnchor.set(row.anchorKey, queue);
+  }
+
+  let changed = false;
+  const buildings = model.buildings.map((building) => {
+    const queue = byAnchor.get(building.anchorKey) || [];
+    const institution = queue.shift();
+    const fields = customInstitutionSceneFields(institution);
+    if (Object.keys(fields).length === 0) return building;
+    changed = true;
+    return { ...building, ...fields };
+  });
+  return changed ? { ...model, buildings } : model;
+}
+
+/**
  * Build the deterministic town-map render model. Pure function of its inputs;
  * never mutates them.
  * @param {TownMapSettlement | null | undefined} settlement
@@ -259,6 +335,8 @@ function reservedSlots() {
  */
 export function buildTownMapModel(settlement, mapEdits = null) {
   const s = settlement || /** @type {TownMapSettlement} */ ({});
+  /** @type {TownInstitution[]} */
+  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
 
   // ── VERSIONING LAW (task #38) ───────────────────────────────────────────────
   // An explicit `mapEdits.layoutLawVersion === 2` selects the v2 semantic urban-
@@ -268,7 +346,11 @@ export function buildTownMapModel(settlement, mapEdits = null) {
   // pre-v2 settlement and every v1 golden stays identical (the lane lands free). New
   // settlements mint v2 by carrying the marker; existing ones never do.
   if (mapEdits && Number(mapEdits.layoutLawVersion) === 2) {
-    return buildTownLayoutV2(/** @type {import('./townLayoutV2.js').TownV2Settlement} */ (s), mapEdits);
+    const model = buildTownLayoutV2(
+      /** @type {import('./townLayoutV2.js').TownV2Settlement} */ (s),
+      mapEdits,
+    );
+    return attachCustomInstitutionSceneFields(model, institutions);
   }
 
   // ── rng, derived internally (never ambient). layoutVariant salts the fork; a
@@ -294,9 +376,6 @@ export function buildTownMapModel(settlement, mapEdits = null) {
     ? s.tier
     : popToTier(typeof s.population === 'number' ? s.population : 0);
   const tierIndex = Math.max(0, TIER_ORDER.indexOf(tier));
-
-  /** @type {TownInstitution[]} */
-  const institutions = Array.isArray(s.institutions) ? s.institutions : [];
 
   // ── total institution→district assignment ──────────────────────────────────
   const assignment = assignInstitutionsToDistricts(institutions, derivedDistricts, assignRng);
@@ -446,6 +525,7 @@ export function buildTownMapModel(settlement, mapEdits = null) {
       districtId,
       kind,
       position: { x: bx, y: by },
+      ...customInstitutionSceneFields(inst),
     };
   });
 

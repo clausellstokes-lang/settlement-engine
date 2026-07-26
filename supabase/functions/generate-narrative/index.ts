@@ -52,7 +52,7 @@ import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 
 import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } from './jsonUtils.ts';
 import { CACHE_BREAKPOINT, buildAnthropicUserContent, stripCacheBreakpoint } from './promptCache.ts';
@@ -1621,7 +1621,7 @@ export async function handleGenerateNarrative(
             } else {
               const aiUsage = aggregateAiUsage(usageTelemetry);
               console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-              void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+              scheduleAutoReload(supabaseAdmin, user.id);
               send({
                 done: true,
                 result: results,
@@ -1757,7 +1757,7 @@ export async function handleGenerateNarrative(
 
             const aiUsage = aggregateAiUsage(usageTelemetry);
             console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-            void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+            scheduleAutoReload(supabaseAdmin, user.id);
             send({
               done: true,
               result: aiClone,
@@ -1929,7 +1929,7 @@ export async function handleGenerateNarrative(
 
           const aiUsage = aggregateAiUsage(usageTelemetry);
           console.info('[generate-narrative] ai_usage', JSON.stringify(aiUsage));
-          void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+          scheduleAutoReload(supabaseAdmin, user.id);
           send({
             done: true,
             result: aiClone,

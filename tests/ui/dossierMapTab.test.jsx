@@ -33,6 +33,9 @@ vi.mock('../../src/components/new/tabs/OverviewTab', () => ({
 vi.mock('../../src/components/townMap/SettlementMapPane.jsx', () => ({
   default: () => <div data-testid="map-pane-stub">MAP_PANE</div>,
 }));
+vi.mock('../../src/components/dossier/PendingChangesBar.jsx', () => ({
+  default: () => <div data-testid="pending-changes-stub" />,
+}));
 
 import OutputContainer from '../../src/components/OutputContainer.jsx';
 
@@ -46,6 +49,10 @@ describe('OutputContainer — Map as the fifth tab (W2-c)', () => {
     // an owner surface where the map tab shows. (The wizard draft — not readOnly,
     // no saveId — is likewise not a publicDossier, so it too surfaces the tab.)
     render(<OutputContainer settlement={settlement} readOnly saveId="save-1" />);
+
+    // A saved owner dossier is read-only until the DM chooses an action, but
+    // queued decisions must still have a visible review/commit destination.
+    expect(await screen.findByTestId('pending-changes-stub')).toBeTruthy();
 
     // The Map group tab is reachable in the group strip.
     const mapGroup = await screen.findByText('Map');
@@ -63,5 +70,6 @@ describe('OutputContainer — Map as the fifth tab (W2-c)', () => {
     // No Map group in the strip for the public viewer.
     expect(screen.queryByText('Map')).toBeNull();
     expect(screen.queryByTestId('map-pane-stub')).toBeNull();
+    expect(screen.queryByTestId('pending-changes-stub')).toBeNull();
   });
 });

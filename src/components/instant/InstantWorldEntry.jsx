@@ -66,7 +66,7 @@ export default function InstantWorldEntry({ isMobile, onNavigate }) {
     } else if (result?.reason === 'not_enough_slots') {
       setError(t('errors.realmSlots'));
     } else if (result && result.ok === false && result.reason !== 'in_flight') {
-      setError(t('errors.realmBuild'));
+      setError(result.message || t('errors.realmBuild'));
     }
   };
 

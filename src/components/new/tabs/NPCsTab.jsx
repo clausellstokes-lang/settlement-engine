@@ -10,7 +10,15 @@ import {NarrativeNote} from '../NarrativeNote';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 
-export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedIds, onTogglePin}) {
+export function NPCsTab({
+  npcs,
+  onRerollNPCs,
+  settlement,
+  narrativeNote,
+  pinnedIds,
+  onTogglePin,
+  canAuthorNpc = false,
+}) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
@@ -60,7 +68,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         </div>
         {pinnedCount > 0 && (
           <span
-            title="Pinned NPCs are preserved across regenerate/progress. Their goal and secret won't be rewritten."
+            title="Pinned NPCs are protected from AI rewrites. Their goal and secret won't be rewritten."
             style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
             ⚲ {pinnedCount} PINNED
           </span>
@@ -101,9 +109,10 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           group={byFaction[factionName]}
           impFilter={impFilter}
           search={q}
-          relationships={settlement?.relationships||[]}
+          relationships={settlement?.relationships || []}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
+          canAuthorNpc={canAuthorNpc}
         />
       ))}
 

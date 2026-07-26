@@ -24,6 +24,7 @@ import { inferImportance } from '../domain/entities/npcs.js';
 // campaignSyncError (the CampaignSyncBanner) instead of silently console.warn-ing
 // and drifting from Supabase. There must be exactly ONE persistSaveUpdate definition.
 export { persistSaveUpdate } from './campaignSliceShared.js';
+export { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
 
 const MAX_VERSION_HISTORY = 50;
 
@@ -111,14 +112,14 @@ export function _resolveEntity(settlement, kind, entityIndex) {
  * (save → reload → hydrateFromSave) is symmetric and a single edit
  * keeps both sides in step.
  */
-export function pickleCampaignState(state) {
+export function pickleCampaignState(state, { now = null } = {}) {
   return {
     phase:         state.phase || 'draft',
     eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
     systemState:   state.systemState ? deepClone(state.systemState) : null,
     locks:         state.locks ? { ...state.locks } : {},
     generatedAt:   state.generatedAt || null,
-    editedAt:      new Date().toISOString(),
+    editedAt:      now || new Date().toISOString(),
     canonizedAt:   state.canonizedAt || null,
     lastExportAt:  state.lastExportAt || null,
     narrativeDrift: null,

@@ -1,61 +1,106 @@
-# THE SOAK PLAN — the owner's charter, operationalized (runs INSIDE this program per the 2026-07-16 re-sequencing ruling)
-## Launches the moment W-R2-DEPTH merges (the engine's final state). Background compute, gate-on harnesses, concurrent with the SM-4/GUIDE-2b/Surveyor builds. Longest probes first.
+# Realm endurance and scale evidence
 
-## 0. What the soak adjudicates (the charter, made falsifiable)
-The engine's behavioral promises are proofs-of-construction until these runs convert them to
-observations. Every claim below has a PASS criterion a script can evaluate; anything failing
-becomes either a TUNING item (weights — batched into the one regen) or a MISSING-MOVER report
-(owner decision, per the charter).
+This is the operating plan for long-horizon simulation evidence. It distinguishes
+three things that were previously conflated:
 
-## 1. The run matrix (in launch order — longest first)
-| Run | Config | Horizon | Seeds | What it proves |
-|---|---|---|---|---|
-| CENTURY-300 | full_simulation, all nine gates + spatial, 12 settlements | 300 yr | 3 | Attractor-lock hunt at maximum span; sub-century → certified-horizon conversion evidence |
-| CENTURY-100 | same | 100 yr | 5 | The mid-horizon certification the charter names |
-| CERT-30 | full_simulation | 30 yr | 8 | The headline certification: the advertised horizon, full stack |
-| CAP-CURVE | full_simulation | 10 yr | 3 × N ∈ {10, 20, 50, 100} | The settlement-cap study: tick-cost knee + drama-per-settlement distribution (the D2 panel) |
-| NEIGHBOR-DIV | paired seeds differing in one settlement | 200 yr | 3 pairs | Divergence still GROWING at year 200 (chaos health — no convergence to shared attractor) |
-| DARK-CONTROL | default preset (engine dark) | 30 yr | 2 | The negative control: dormancy byte-identity at horizon (nothing drifts when off) |
+1. a regression soak, which proves specific mechanical properties on one run;
+2. a scale matrix, which repeats those proofs across realm sizes and horizons;
+3. product certification, which may be published only after every property in the
+   certification contract has evidence.
 
-## 2. PASS criteria (per the charter + the round-2 additions)
-1. **No stasis onset:** every mover family's activity rate in the final decade ≥ 30% of its
-   peak-decade rate (no family falls silent).
-2. **No cacophony:** realm-wide major-event rate stays within the tempo governor's design band;
-   drama-class distribution spread (no single class > 45% of majors in any decade).
-3. **Both signs live:** ≥ 1 boom/golden-age arc AND ≥ 1 major conflict arc per decade per
-   ~10 settlements (the owner's quotable promise, measured).
-4. **No attractor lock:** population, prosperity-band distribution, and power-topology entropy
-   all show continued motion in the final third (variance floor, not trend requirement).
-5. **Divergence health:** NEIGHBOR-DIV pairs' world-state distance monotonically grows through
-   year 200 (sampled per decade).
-6. **Succession at volume:** turnover events resolve cleanly at century scale (no orphaned
-   courts, no leaderless-forever states).
-7. **Bounded growth:** serialized world-state bytes sub-linear in ticks (the existing envelope
-   gate's law, held at horizon); tick cost trend within the cost envelope.
-8. **Chronicle legibility at 300:** the year-300 chronicle/news sample reads as history, not
-   noise (manual sample + the register guards run over it).
-9. **Drama-per-settlement fairness (D2):** at N=50/100, per-settlement beat share ≥ the
-   starvation-weight design floor (no permanently silent member).
-10. **DARK-CONTROL:** byte-identical, full stop.
+A passing process is not automatically a certification. The current composed soak
+proves finite arithmetic, same-seed replay, different-seed divergence, bounded
+population, a generous serialized-state envelope, and execution in a real isolated
+Node worker thread. It reports stressor rhythm and stasis but does not yet prove
+their desired behavior. Its aggregate receipt therefore sets
+`certificationWritten: false`.
 
-## 3. Mechanics
-- Harness: `scripts/audit/whole-world-soak.mjs` (already assert-and-exit-1 shaped) extended
-  with: the gate-matrix param (all-nine-on), horizon/seed params, per-decade metric emission
-  (JSONL), and the PASS evaluators above. The century runs checkpoint every 25 game-years
-  (resumable; the machine will be shared).
-- Launch: background processes, niced, one at a time per core budget — CENTURY-300 first.
-  Progress lands in docs/review-r2/soak/ as committed JSONL snapshots (window-cut-proof).
-- Analysis: Fable reads the metric JSONL per completed run; verdicts + tuning proposals recorded
-  in this doc's Progress section; weight changes batched to THE ONE REGEN.
-- The engine is FROZEN for the soak's duration (post-DEPTH): any engine change invalidates
-  running certs — display/AI lanes only while soaking (the re-sequenced order guarantees this).
+## Profiles
 
-## 4. Outcomes routing
-- ALL PASS → certification recorded; sub-century converts to conservative promise (owner
-  ruling per charter); deploy becomes soaked-by-default.
-- Tuning-class failures → weight adjustments, re-run the affected cert, shifts join the regen.
-- Missing-mover verdicts → the owner decision (charter: "missing movers = owner decision") with
-  the specific flattened loop named + the weights-vs-mover analysis.
+| Profile | Matrix | Purpose | Product claim |
+|---|---|---|---|
+| `smoke` | 1 year × 4 and 30 settlements × 1 primary seed | Fast harness and scale-shape check | None |
+| `weekly` | 30 years × 4, 12, 24, and 30 settlements × 1 primary seed | Useful-horizon regression evidence | None by itself |
+| `release` | 1, 30, and 100 years × every scale band × 3 primary seeds | Complete pre-launch performance and endurance matrix | Eligible only after the missing behavioral evaluators pass |
+| `research` | 300 years × 12 settlements × 3 primary seeds | Attractor and very-long-horizon study | Research evidence, not a launch promise |
 
-> **Progress** (append per run)
-> - (pending DEPTH merge)
+Every matrix cell also performs a byte-identical replay and a divergent-seed run.
+The `seedsPerCell` column therefore counts primary seed families, not total child
+processes.
+
+Run the profiles with:
+
+```sh
+npm run soak:smoke
+npm run soak:weekly
+npm run soak:release
+npm run soak:research
+```
+
+`--output <path>` changes the aggregate receipt location. `--dry-run` writes the
+source-bound plan without executing the simulation.
+
+## Evidence contract
+
+`whole-world-soak.mjs` emits a receipt for one cell. The realm-scale runner:
+
+- executes cells sequentially so CPU contention does not corrupt timing trends;
+- stops on the first failed, malformed, or vacuous child receipt;
+- records raw yearly timings, full-realm bytes, a same-thread structured-clone
+  observation, and observed peak heap use;
+- runs one additional one-year advance in an actual `node:worker_threads` isolate
+  per matrix cell, importing `src/workers/advanceInterval.worker.js` and requiring
+  its output hash to equal the direct domain run;
+- reports the worker's cold request-to-result round trip and its in-isolate handler
+  duration separately;
+- calculates transparent p50/p95/max summaries;
+- binds the aggregate to Git HEAD and to a content fingerprint that includes
+  uncommitted and untracked simulation inputs;
+- rechecks that identity before and after every child and at aggregate
+  finalization, failing the matrix instead of combining mixed-source evidence;
+- writes atomically and never mutates the committed certification manifest.
+
+Wall time, clone time, worker duration, and heap use are host-sensitive
+observations. Deterministic state hashes, finite-number scans, tick arithmetic,
+population bounds, worker/direct output equality, and the serialized byte ceiling
+are gates.
+
+The isolated-worker measurement is actual execution, not a structured-clone
+approximation: the receipt carries distinct parent/worker thread IDs, progress
+messages, input/output hashes, and timings from both sides of the boundary. Its
+transport is nevertheless Node `worker_threads`, not a browser Web Worker.
+`boundaryAndBootstrapResidual` includes module bootstrap, scheduling, structured
+clone, and message delivery; it is an arithmetic remainder, not exact transport
+time. Browser startup and device-specific worker duration remain unmeasured until
+the production browser journey can exercise a representative saved realm without
+adding a test-only product API or a second simulation path.
+
+## Remaining certification evaluators
+
+Before a band can be called certified, the long soak must also evaluate:
+
+- final-decade activity floors for each mover family;
+- major-event tempo and class diversity;
+- both constructive and destructive arc presence;
+- continued population, prosperity, and power-topology motion;
+- neighbor-perturbation divergence rather than only unrelated-seed divergence;
+- succession integrity at volume;
+- per-settlement attention fairness;
+- chronicle legibility, with the manual sample identified as human evidence.
+
+Those are behavioral additions to the maintained harness, not permission to create
+a second simulation engine. Until they exist and pass, successful receipts remain
+measurement evidence.
+
+## Evidence retention and invalidation
+
+The weekly workflow uploads receipts for 90 days. Release receipts belong in the
+release evidence bundle. Any change under `src/`, `scripts/audit/`, or the dependency
+manifests changes the source fingerprint and invalidates earlier certification for
+that source state. Display-only changes can be judged separately only when their
+fingerprint scope is explicitly narrowed in a future schema version.
+
+The 30-year profile is the useful product horizon, 100 years is the strong
+pre-launch endurance horizon, and 300 years is research. A 300-year run is valuable
+only if it diagnoses behavior the 100-year matrix cannot; it is not a substitute
+for breadth across supported realm sizes.

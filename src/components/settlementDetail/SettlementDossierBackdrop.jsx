@@ -45,7 +45,10 @@ export default function SettlementDossierBackdrop({ settlement, saveId }) {
     // A stale/unknown lens id resolves to the default lens inside resolveTownMapStyle,
     // so an undefined style is the default parchment — no throw, no special-casing.
     const opts = { style: last?.lens || undefined, width: WASH_SIZE, height: WASH_SIZE };
-    return last?.view === 'panorama'
+    // A remembered 3D portrait uses the panorama's dimensional ink wash. The
+    // backdrop is decorative and must never initialize WebGL behind the dossier;
+    // the canonical plan remains the fallback when no dimensional view was used.
+    return last?.view === 'panorama' || last?.view === 'portrait3d'
       ? buildTownMapPanoramaSvg(model, opts)
       : buildTownMapSvg(model, opts);
   }, [settlement, saveId]);

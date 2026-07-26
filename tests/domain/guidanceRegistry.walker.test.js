@@ -283,7 +283,19 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // title=), Auspice + Temperament (Card title=), and the Covenant/Bounty pages
   // (PageHeader title= + subtitle=). Every one verified a component prop, no native
   // title=. 494 → 510.
-  const TITLE_BASELINE = 510;
+  //
+  // HERALD FOLD: 16 presentational `title` props on OutcomeCard/Section/
+  // SmallButton were renamed to the semantic `heading`/`hint` APIs. The two
+  // actual Button tooltips remain at the primitive boundary, so behavior and
+  // accessible naming are unchanged while the census can distinguish headings
+  // from native OS tooltips. 510 → 494.
+  //
+  // ADMIN OBLIGATIONS FOLD: AdminPanel's eight internal Section headings now
+  // use the semantic `heading` prop. The new Operational Obligations surface
+  // exposed that this local presentation API still looked like native tooltip
+  // syntax to the census; migrating the complete internal API keeps the source
+  // distinction honest instead of exempting one new title. 494 → 487.
+  const TITLE_BASELINE = 487;
 
   function countTitles() {
     let n = 0;

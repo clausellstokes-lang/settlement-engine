@@ -197,6 +197,123 @@ Deno.test('a SUPPORT-role caller CANNOT update_user_metadata (highest-only edge 
   assertEquals(stub.rpc.length, 0); // no service_update_profile_metadata dispatched
 });
 
+// ── Operational obligation health (migration 182) ───────────────────────────
+
+function makeOperationalAdminClient(callerRole: string) {
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_table: string) => ({
+      select: () => ({
+        eq: () => ({
+          single: () => Promise.resolve({
+            data: { role: callerRole, email: 'operator@x.com' },
+            error: null,
+          }),
+        }),
+      }),
+    }),
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'report_operational_obligation_health') {
+        return Promise.resolve({
+          data: { schemaVersion: 1, severity: 'warning', healthy: false },
+          error: null,
+        });
+      }
+      if (fn === 'list_operational_obligation_attention') {
+        return Promise.resolve({
+          data: [{
+            source: 'payment_refund',
+            obligation_key: 'pi_attention',
+            reason: 'requires_action',
+          }],
+          error: null,
+        });
+      }
+      if (fn === 'acknowledge_operational_obligation') {
+        return Promise.resolve({ data: true, error: null });
+      }
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, adminClient: () => client };
+}
+
+Deno.test('get_operational_health returns aggregate + bounded attention through the two fixed RPCs', async () => {
+  const stub = makeOperationalAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'get_operational_health' }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }),
+      adminClient: stub.adminClient,
+    },
+  );
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.health.severity, 'warning');
+  assertEquals(body.attention[0].obligation_key, 'pi_attention');
+  assertEquals(stub.rpc.map((call) => call.fn), [
+    'report_operational_obligation_health',
+    'list_operational_obligation_attention',
+  ]);
+});
+
+Deno.test('operational acknowledgement forwards the verified actor and cannot masquerade as resolution', async () => {
+  const stub = makeOperationalAdminClient('developer');
+  const res = await handleAdminActions(
+    req({
+      action: 'acknowledge_operational_obligation',
+      obligationSource: 'payment_refund',
+      obligationKey: 'pi_attention',
+      note: 'Stripe support case opened',
+      clear: false,
+      actor_user: 'smuggled-actor',
+    }, { Authorization: 'Bearer jwt' }),
+    {
+      userClient: makeUserClient({ id: 'developer1', email: 'dev@x.com' }),
+      adminClient: stub.adminClient,
+    },
+  );
+  assertEquals(res.status, 200);
+  const call = stub.rpc.find(
+    (entry) => entry.fn === 'acknowledge_operational_obligation',
+  );
+  assertEquals(call !== undefined, true);
+  assertEquals(call!.args, {
+    p_source: 'payment_refund',
+    p_obligation_key: 'pi_attention',
+    p_actor: 'developer1',
+    p_note: 'Stripe support case opened',
+    p_clear: false,
+  });
+  // The edge invokes no lifecycle claim/release/finalize RPC.
+  assertEquals(stub.rpc.length, 1);
+});
+
+Deno.test('support cannot inspect or acknowledge operational obligations', async () => {
+  for (const body of [
+    { action: 'get_operational_health' },
+    {
+      action: 'acknowledge_operational_obligation',
+      obligationSource: 'stripe_webhook',
+      obligationKey: 'evt_1',
+    },
+  ]) {
+    const stub = makeOperationalAdminClient('support');
+    const res = await handleAdminActions(
+      req(body, { Authorization: 'Bearer jwt' }),
+      {
+        userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }),
+        adminClient: stub.adminClient,
+      },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stub.rpc.length, 0);
+  }
+});
+
 // ── mint_redeem_code (migration 107) ─────────────────────────────────────────
 // Minting a redeem code is deferred money (a free month or a credit grant), so
 // it is HIGHEST-role gated like grant_credits, the code is generated

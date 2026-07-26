@@ -69,6 +69,16 @@ describe('newsBody — reasons recast into fiction', () => {
     expect(newsReasonPhrases(entry)).toEqual(['The sponsoring relationship de-escalated.']);
   });
 
+  it('uses authored phrases for known reason tokens and never leaks token punctuation', () => {
+    expect(newsReasonPhrases({
+      reasons: ['border_raid', 'critical_impact_type', 'unmapped-reason'],
+    })).toEqual([
+      'a raid across the border',
+      'a matter that cuts deep',
+      'unmapped reason',
+    ]);
+  });
+
   it('is inert on absent reasons', () => {
     expect(newsReasonPhrases(null)).toEqual([]);
     expect(newsReasonPhrases({})).toEqual([]);

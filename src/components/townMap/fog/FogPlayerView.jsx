@@ -11,6 +11,12 @@
  * players see live is byte-for-byte what a downloaded handout would show. The audience:'player'
  * split drops DM-only markers (fail-closed); fogReveal masks the unrevealed quarters.
  *
+ * This surface intentionally remains the canonical 2D projection. A 3D fog
+ * view may replace it only after reveal geometry clips the player-safe model
+ * before manifest compilation. Mounting the ordinary DM portrait here and
+ * hiding objects in the renderer would send unrevealed facts across the
+ * privacy boundary.
+ *
  * LAZY: imported by NOTHING eager — the DM pane React.lazy()-loads it — so the fog + export
  * fingerprint stays off first paint (the townMapLazy posture).
  */

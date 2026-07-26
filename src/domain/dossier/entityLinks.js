@@ -1,5 +1,6 @@
 import { factionIdFromName } from '../../lib/entities.js';
 import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 
 /**
  * @typedef {{ id?: string, refId?: string, name?: string, label?: string, faction?: string, [key: string]: unknown }} EntityLike
@@ -234,11 +235,18 @@ function readCurrentName(type, raw, fallback) {
  */
 function decorateEntry(type, base, raw) {
   const fallbackLabel = base.label;
+  const authoredIdentity = typeof raw?.id === 'string' && raw.id.trim()
+    || typeof raw?.refId === 'string' && raw.refId.trim();
   return {
     ...base,
     type,
     tab: TYPE_TO_TAB[type] || 'overview',
     raw,
+    identity: {
+      state: authoredIdentity ? 'authored' : 'derived_legacy',
+      interactive: true,
+      reason: null,
+    },
     get currentName() {
       return readCurrentName(type, raw, fallbackLabel);
     },
@@ -268,15 +276,59 @@ export function neighbourIdFor(entry) {
  * is missing.
  *
  * @param {Record<string, any> | null | undefined} event
- * @param {number} index
+ * @param {number} [_index] retained for call-site compatibility; never identity
  * @returns {string|null}
  */
-export function eventIdFor(event, index) {
+export function eventIdFor(event, _index) {
   if (!event || typeof event !== 'object') return null;
   if (typeof event.id === 'string' && event.id) return event.id;
   const name = event.name || event.title || event.label;
   if (name) return `event.${slugifyEntity(name)}`;
-  return `event.index-${index}`;
+  // The former `event.index-N` fallback relinked an old event when an unrelated
+  // sibling was inserted or reordered. Canonical key ordering makes this
+  // surrogate stable across JSON export/import and object-key insertion order.
+  // Byte-identical anonymous events intentionally collide; the index marks that
+  // ambiguity non-interactive below rather than smuggling array position back
+  // into durable-looking identity.
+  const canonical = JSON.stringify(stableEntityClone(event)) || '{}';
+  return `event.legacy-${fnv1a32(canonical).toString(36)}`;
+}
+
+/**
+ * Build a JSON-safe, key-sorted value for deterministic legacy identity.
+ *
+ * @param {unknown} value
+ * @param {WeakSet<object>} [ancestors]
+ * @returns {unknown}
+ */
+function stableEntityClone(value, ancestors = new WeakSet()) {
+  if (value == null || typeof value === 'string' || typeof value === 'boolean') return value;
+  if (typeof value === 'number') return Number.isFinite(value) ? value : String(value);
+  if (typeof value === 'bigint') return String(value);
+  if (typeof value === 'undefined' || typeof value === 'function' || typeof value === 'symbol') {
+    return null;
+  }
+  if (value instanceof Date) {
+    return Number.isNaN(value.getTime()) ? 'Invalid Date' : value.toISOString();
+  }
+  if (typeof value !== 'object') return String(value);
+  if (ancestors.has(value)) return '[Circular]';
+  ancestors.add(value);
+
+  let clone;
+  if (Array.isArray(value)) {
+    clone = value.map(entry => stableEntityClone(entry, ancestors));
+  } else {
+    /** @type {Record<string, unknown>} */
+    const objectClone = {};
+    const record = /** @type {Record<string, unknown>} */ (value);
+    for (const key of Object.keys(record).sort()) {
+      objectClone[key] = stableEntityClone(record[key], ancestors);
+    }
+    clone = objectClone;
+  }
+  ancestors.delete(value);
+  return clone;
 }
 
 /**
@@ -414,6 +466,24 @@ export function buildDossierEntityIndex(settlement = {}) {
     ...resources, ...neighbourEntries, ...eventEntries,
     ...deities, ...settlementEntries,
   ];
+
+  // Same-family identity reuse is ambiguous. Preserve every readable entry in
+  // its family array, but make the shared reference non-interactive so no link
+  // can silently choose the first sibling. Cross-family collisions keep the
+  // historical richer-kind precedence because callers also carry a type.
+  const identityCounts = new Map();
+  for (const entry of all) {
+    const key = `${entry.type}:${entry.id}`;
+    identityCounts.set(key, (identityCounts.get(key) || 0) + 1);
+  }
+  for (const entry of all) {
+    if ((identityCounts.get(`${entry.type}:${entry.id}`) || 0) <= 1) continue;
+    entry.identity = {
+      state: 'degraded_collision',
+      interactive: false,
+      reason: 'More than one legacy record resolves to this identity.',
+    };
+  }
   /** @type {Map<string, Record<string, any>>} */
   const byId = new Map();
   for (const entry of all) {

@@ -38,10 +38,15 @@ function snakeCase(s) {
   return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
 }
 import { tagEntityCanon } from './canonStatus.js';
+import { REGENERATION_MODES, normalizeMode, ruleFor, shouldPreserve } from './regenerationPolicy.js';
 
 // ── Catalog ──────────────────────────────────────────────────────────────
 
-export const REGENERATION_MODES = Object.freeze(['nudge', 'rebalance', 'reforge']);
+// The mode vocabulary and the preservation rules live in the leaf so the
+// generator's reroll tail can read them without dragging entityCatalog's
+// dependency fan into the first-paint closure. Re-exported here because this
+// module is the long-standing public face of regeneration modes.
+export { REGENERATION_MODES, preservesEntity } from './regenerationPolicy.js';
 
 // Hard anchors that even a Reforge keeps.
 const HARD_ANCHOR_FIELDS = Object.freeze([
@@ -65,74 +70,6 @@ const MODE_SUBSYSTEM_REROLLS = Object.freeze({
   ],
 });
 
-// ── Per-entity-type preservation rules per mode ─────────────────────────
-//
-// 'always' — preserve unconditionally
-// 'canon'  — preserve if canonStatus === 'canon' or locked
-// 'locked' — preserve only if locked
-// 'never'  — always reroll
-
-const PRESERVATION_RULES = Object.freeze({
-  nudge: {
-    institution:      'always',
-    faction:          'always',
-    npc:              'always',
-    chain:            'always',
-    hook:             'canon',
-    condition:        'always',
-    clock:            'always',
-    history_beat:     'always',
-    system_variable:  'always',
-    threat:           'always',
-    capacity:         'always',
-    district:         'always',
-  },
-  rebalance: {
-    institution:      'canon',
-    faction:          'canon',
-    npc:              'canon',
-    chain:            'canon',
-    hook:             'locked',
-    condition:        'canon',
-    clock:            'canon',
-    history_beat:     'canon',
-    system_variable:  'always',  // derived; cheap to recompute
-    threat:           'canon',
-    capacity:         'always',
-    district:         'canon',
-  },
-  reforge: {
-    institution:      'locked',
-    faction:          'locked',
-    npc:              'locked',
-    chain:            'never',
-    hook:             'never',
-    condition:        'locked',
-    clock:            'never',
-    history_beat:     'locked',
-    system_variable:  'always',
-    threat:           'never',
-    capacity:         'always',
-    district:         'never',
-  },
-});
-
-/**
- * @typedef {'always'|'never'|'canon'|'locked'} PreservationRule
- */
-/**
- * @param {PreservationRule|string} rule
- * @param {import('./canonStatus.js').CanonTag} tag
- * @returns {boolean}
- */
-function shouldPreserve(rule, tag) {
-  if (rule === 'always') return true;
-  if (rule === 'never')  return false;
-  if (rule === 'canon')  return tag.canonStatus === 'canon' || tag.locked === true;
-  if (rule === 'locked') return tag.locked === true;
-  return false;
-}
-
 // ── Composer ─────────────────────────────────────────────────────────────
 
 /**
@@ -146,9 +83,7 @@ function shouldPreserve(rule, tag) {
  * @returns {Object} RegenerationPlan
  */
 export function buildRegenerationPlan(settlement, options = {}) {
-  const mode = /** @type {'nudge'|'rebalance'|'reforge'} */ (
-    REGENERATION_MODES.includes(/** @type {string} */ (options.mode)) ? options.mode : 'rebalance'
-  );
+  const mode = normalizeMode(options.mode);
   const contributors = [];
   if (!REGENERATION_MODES.includes(/** @type {string} */ (options.mode))) {
     contributors.push({
@@ -182,7 +117,7 @@ export function buildRegenerationPlan(settlement, options = {}) {
   const rerollEntities = [];
 
   for (const e of cat) {
-    const rule = PRESERVATION_RULES[mode]?.[/** @type {keyof (typeof PRESERVATION_RULES)['nudge']} */ (e.type)] || 'always';
+    const rule = ruleFor(mode, e.type);
     // Look up the entity on the settlement to get its tag. The
     // catalog entry only has { type, id, label }, so for tagging we
     // re-fetch from the appropriate settlement array.

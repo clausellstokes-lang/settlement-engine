@@ -26,7 +26,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
@@ -263,7 +263,10 @@ export async function handleSurveyorAutonomy(
           input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
           output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null,
         };
-        if (data?.stop_reason === 'refusal') { capturedRefused = true; return { ok: false, answerText: '' }; }
+        if (data?.stop_reason === 'refusal') {
+          capturedRefused = true;
+          return { ok: false, answerText: '' };
+        }
         capturedAnswerText = (data?.content?.[0]?.text || '').trim();
         const compiled = compileAutonomy(capturedAnswerText, vocab);
         capturedComposition = compiled.composition;
@@ -309,7 +312,9 @@ export async function handleSurveyorAutonomy(
         p_retrieval_slice_ids: rec.retrieval_slice_ids, p_retrieval_sources: rec.retrieval_sources,
         p_model: rec.model, p_model_version: rec.model_version, p_provider: AUTONOMY_PROVIDER,
         p_byok: providerKey.byok, p_citation_coverage: null,
-        p_claim_count: rec.op_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
+        p_claim_count: rec.op_count,
+        p_refused: capturedRefused,
+        p_spend_id: capturedSpendId,
         p_meta_probe: rec.meta_probe, p_canary: rec.canary, p_refusal_class: capturedRefusalClass,
       });
       if (error) logError('surveyor-autonomy', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
@@ -325,8 +330,11 @@ export async function handleSurveyorAutonomy(
           props: {
             feature: AUTONOMY_FEATURE, stage: AUTONOMY_STAGE, total: s.testCount + s.nudgeCount,
             mechanicalCount: s.testCount, flavorCount: s.nudgeCount, unsupportedCount: s.unsupportedCount,
-            coverageBand: s.hasCondition ? 'full' : 'none', byok: providerKey.byok, refused: capturedRefused,
-            earlyAccess: true, overBudget: capturedOverBudget,
+            coverageBand: s.hasCondition ? 'full' : 'none',
+            byok: providerKey.byok,
+            refused: capturedRefused,
+            earlyAccess: true,
+            overBudget: capturedOverBudget,
           },
           batch_id: crypto.randomUUID(), seq: 0,
         });
@@ -334,11 +342,21 @@ export async function handleSurveyorAutonomy(
       } catch (e) { logError('surveyor-autonomy', user.id, e, { stage: 'eval' }); }
     }
     try {
-      if (capturedRider) {
+      const rider = capturedRider as EnrichmentRider | null;
+      if (rider) {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_STAGE_RIDER,
           actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
-          props: { feature: AUTONOMY_FEATURE, intent: capturedRider.intent, themes: capturedRider.themes, refusal_reason: capturedRider.refusalReason, action_drafted: capturedRider.actionDrafted, oov: capturedRider.oov, byok: providerKey.byok, refused: capturedRefused },
+          props: {
+            feature: AUTONOMY_FEATURE,
+            intent: rider.intent,
+            themes: rider.themes,
+            refusal_reason: rider.refusalReason,
+            action_drafted: rider.actionDrafted,
+            oov: rider.oov,
+            byok: providerKey.byok,
+            refused: capturedRefused,
+          },
           batch_id: crypto.randomUUID(), seq: 0,
         });
         if (error) logError('surveyor-autonomy', user.id, `autonomy rider event failed: ${error.message}`, { stage: 'rider' });
@@ -350,9 +368,17 @@ export async function handleSurveyorAutonomy(
       case 'rate_limited': return json({ error: "You have reached today's AI limit. Please try again tomorrow. No credits were charged." }, 429, cors);
       case 'insufficient': return json({ error: outcome.reason === 'spend_failed' ? 'Credit spend failed — no credits were charged.' : 'Insufficient credits', balance: outcome.balance }, 402, cors);
       case 'model_failed':
-        return json({ error: capturedRefused ? 'The autonomy composer declined this request.' : (capturedRefusalMessage || 'Composition failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
+        return json({
+          error: capturedRefused
+            ? 'The autonomy composer declined this request.'
+            : (capturedRefusalMessage || 'Composition failed. Your credits were refunded.'),
+          refused: capturedRefused,
+          refunded: outcome.refunded,
+          refusalClass: capturedRefusalClass,
+          doors: capturedRefusalDoors,
+        }, 502, cors);
       case 'ok':
-        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+        scheduleAutoReload(supabaseAdmin, user.id);
         return json({
           composition: capturedComposition,    // { stopCondition (walled) | null, maxWeeks, nudges[], unsupported[] }
           musings: capturedMusings,             // §3b the conversation register

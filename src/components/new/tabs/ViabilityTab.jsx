@@ -1,5 +1,5 @@
 import React from 'react';
-import { FS, swatch, MUTED } from '../../theme.js';
+import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
@@ -33,10 +33,34 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   const sevBg    = sev => sev==='critical'?'#fdf4f4':sev==='high'?'#fdf0e8':sev==='dependency'||sev==='warning'?'#fdf8e8':'#f7f4f0';
 
   // Structural violations from root
-  const structViolations = s.structuralViolations || [];
+  const structuralReceiptItems = s.structuralViolations || [];
+  const structViolations = structuralReceiptItems.filter(item => item?.severity !== 'by_design');
+  const structuralByDesign = structuralReceiptItems.filter(item => item?.severity === 'by_design');
+  const generationReceipt = s.generationCoherenceReceipt || null;
+  const generationJudgments = Array.isArray(generationReceipt?.judgments)
+    ? generationReceipt.judgments
+    : [];
+  const supportedGenerationJudgments = generationJudgments.filter(
+    judgment => (
+      judgment?.status === 'pass'
+      || judgment?.status === 'pass_with_tension'
+    ),
+  );
+  const reviewGenerationJudgments = generationJudgments.filter(
+    judgment => judgment?.status === 'needs_review',
+  );
 
   // Critical issues vs lower-severity
-  const byDesignIssues = [...(v.issues||[]).filter(i => i.severity==='by_design')].sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
+  const byDesignIssues = [
+    ...(v.issues||[]).filter(i => i.severity==='by_design'),
+    ...structuralByDesign,
+  ].filter((item, index, all) => (
+    all.findIndex(candidate => (
+      candidate?.type === item?.type
+      && candidate?.institution === item?.institution
+      && candidate?.reason === item?.reason
+    )) === index
+  )).sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
   const criticalIssues = [...(v.issues||[]).filter(i => i.severity==='critical' && i.type !== 'stress_consequence')].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
   // Strip dependency/resource chain issues — those are in Economics & Resources tabs
   // Viability only shows logic violations, structural conflicts, and by-design
@@ -95,6 +119,54 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         
       </div>
 
+      {/* The final generation receipt is deliberately separate from the broad
+          viability verdict above. Viability asks whether the settlement can
+          function; this receipt proves that the generated dossier agrees with
+          its own world law and canonical ledgers. */}
+      {generationReceipt&&(
+        <div style={{
+          background:generationReceipt.status==='needs_review'?'#fdf4f4':'#f4faf5',
+          border:`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,
+          borderLeft:`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`,
+          padding:'10px 14px',
+          marginBottom:12,
+        }}>
+          <div style={{display:'flex',gap:8,alignItems:'baseline',flexWrap:'wrap'}}>
+            <span style={{fontSize:FS.sm,fontWeight:800,color:generationReceipt.status==='needs_review'?RED:GREEN_DEEP}}>
+              {generationReceipt.status==='needs_review'
+                ? 'Generation receipt: needs review'
+                : generationReceipt.status==='coherent_with_authored_tensions'
+                  ? 'Generation receipt: coherent, with authored tensions'
+                  : 'Generation receipt: coherent'}
+            </span>
+            <span style={{fontSize:FS.xxs,color:MUTED}}>
+              culture {generationReceipt.cultureProfile} · themes {generationReceipt.contentProfile}
+            </span>
+          </div>
+          <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
+            {(generationReceipt.checks||[]).filter(item=>item.status==='pass').length}/{(generationReceipt.checks||[]).length} checks passed
+            {(generationReceipt.repairs||[]).length>0&&` · ${(generationReceipt.repairs||[]).length} deterministic repair${generationReceipt.repairs.length===1?'':'s'} recorded`}
+            {(generationReceipt.authoredTensions||[]).length>0&&` · ${(generationReceipt.authoredTensions||[]).length} explicit tension${generationReceipt.authoredTensions.length===1?'':'s'} preserved`}
+          </div>
+          {generationJudgments.length>0&&(
+            <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
+              Formal judgments: {supportedGenerationJudgments.length}/{generationJudgments.length} supported
+              {reviewGenerationJudgments.length>0&&` · ${reviewGenerationJudgments.length} need${reviewGenerationJudgments.length===1?'s':''} review`}
+            </div>
+          )}
+          {(generationReceipt.checks||[]).filter(item=>item.status==='fail').map(item=>(
+            <div key={item.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+              {item.label}: {item.findings.length} finding{item.findings.length===1?'':'s'}
+            </div>
+          ))}
+          {reviewGenerationJudgments.map(judgment=>(
+            <div key={judgment.id} style={{fontSize:FS.xxs,color:RED,marginTop:3}}>
+              {judgment.label}: {judgment.summary||'Formal judgment needs review.'}
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* ── MAGIC DEPENDENCY WARNING ───────────────────────────────────────── */}
       {s?.defenseProfile?.magicDependency&&(
         <div style={{background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderLeft:'4px solid #7a3a9a',
@@ -105,8 +177,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
             chains are magically sustained, or stress conditions are being offset by arcane, divine,
-            or druidic intervention. Loss of magical practitioners. Through conflict, plague, or
-            political disruption. Would immediately expose critical vulnerabilities.
+            or druidic intervention. Losing those practitioners through conflict, plague, or
+            political disruption would immediately expose critical vulnerabilities.
           </div>
           {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
             <div key={i} style={{fontSize:FS.xxs,color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,

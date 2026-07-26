@@ -32,8 +32,15 @@ import { BORDER, CARD, FS, INK, INK_DEEP, MUTED, PAGE_MAX, SECOND, SP, sans, ser
 const PAGE_SIZE = 24;
 
 export default function GalleryHubPage({ routeHub }) {
-  const auth = useStore(s => s.auth);
   const hub = resolveHub(routeHub);
+  // A client-side sibling-hub navigation reuses GalleryHubPage. Key the actual
+  // listing owner by hub identity so page/items from one collection can never
+  // be appended to another collection before an effect-driven reset lands.
+  return <GalleryHubContent key={hub?.id || 'unknown'} hub={hub} />;
+}
+
+function GalleryHubContent({ hub }) {
+  const auth = useStore(s => s.auth);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(false);
@@ -50,6 +57,7 @@ export default function GalleryHubPage({ routeHub }) {
   useEffect(() => {
     if (!hub) return undefined;
     let ignore = false;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- page/hub fetch begins a new loading phase
     setLoading(true); setError(null);
     fetchPublicGallery({
       page,

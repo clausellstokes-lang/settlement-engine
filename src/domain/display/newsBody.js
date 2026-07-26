@@ -33,6 +33,8 @@
  * first-paint byte — only which (equally valid) line a given card shows.
  */
 
+import { humanizeToken } from './humanizeEngineTokens.js';
+
 /** FNV-1a 32-bit — the pure variant-selection hash (no rng, no Date). A LOCAL copy
  *  of the 8-line helper (the newsVoice.js precedent — a display sidecar keeps its
  *  own copy rather than dragging a sibling's content tables into this chunk).
@@ -197,6 +199,9 @@ const REASON_PHRASES = Object.freeze({
   'major pressure resolved': 'a great pressure lifted',
   'threat window closed': 'the danger has passed',
   'routine regional update': 'a quiet matter',
+  border_raid: 'a raid across the border',
+  food_pressure: 'food stores under strain',
+  population_pressure: 'people leaving under pressure',
 });
 
 /**
@@ -212,7 +217,10 @@ export function newsReasonPhrases(entry) {
   for (const raw of reasons) {
     const key = String(raw || '').trim();
     if (!key) continue;
-    const phrase = REASON_PHRASES[key.toLowerCase()] || key;
+    const normalizedKey = humanizeToken(key);
+    const phrase = REASON_PHRASES[key.toLowerCase()]
+      || REASON_PHRASES[normalizedKey]
+      || (/^[a-z][a-z0-9_-]*$/.test(key) ? humanizeToken(key) : key);
     if (seen.has(phrase)) continue;
     seen.add(phrase);
     out.push(phrase);

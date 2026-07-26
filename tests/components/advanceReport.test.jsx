@@ -61,6 +61,48 @@ describe('AdvanceReport — populated report', () => {
     // Tick 52 renders as its calendar phrase (fix wave 3: no bare engine tick).
     expect(screen.getByText(/the year to the spring of year 2/i)).toBeTruthy();
   });
+
+  test('translates size and relationship deltas without tier or kebab tokens', () => {
+    const translatedCampaign = {
+      id: 'c-translation',
+      settlementIds: ['A', 'B'],
+      worldState: {
+        pulseHistory: [{
+          tick: 1,
+          selectedOutcomes: [
+            {
+              id: 'size-change',
+              headline: 'A grew beyond its old bounds',
+              targetSaveId: 'A',
+              tierChange: { from: 'large_town', to: 'city' },
+            },
+            {
+              id: 'relationship-change',
+              headline: 'A and B went to war',
+              targetSaveId: 'A',
+              relationshipKey: 'A:B',
+              proposalPayload: {
+                kind: 'relationship_label_change',
+                relationshipKey: 'A:B',
+                toType: 'hostile',
+              },
+            },
+          ],
+          impactDigest: [],
+        }],
+      },
+    };
+
+    const { container } = render(
+      <AdvanceReport campaign={translatedCampaign} nameFor={(id) => (
+        id === 'A' ? 'Aldermoor' : 'Briarwatch'
+      )} />,
+    );
+
+    expect(screen.getByText('Aldermoor: Size Large town → City')).toBeTruthy();
+    expect(screen.getByText('war declared')).toBeTruthy();
+    expect(container.textContent).not.toMatch(/\btier\b|large_town|war-declared/i);
+  });
 });
 
 describe('AdvanceReport — decree section (§5 / §5b)', () => {

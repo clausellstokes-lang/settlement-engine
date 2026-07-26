@@ -41,9 +41,11 @@ import {
   clearPersistFingerprintCache,
   clearCampaignSyncBookkeeping,
   initPersistFailureReporter,
+  initCampaignSessionReader,
+  persistCampaignState,
   retryOutboxPersist,
 } from '../../src/store/campaignSliceShared.js';
-import { resetOutbox, peekOps, getStatus } from '../../src/store/outbox.js';
+import { activateOutboxOwner, resetOutbox, peekOps, getStatus } from '../../src/store/outbox.js';
 
 function makeUpdate(saveId, { tick = 1, blob = 'x'.repeat(200) } = {}) {
   return {
@@ -61,7 +63,34 @@ beforeEach(() => {
   clearPersistFingerprintCache();
   clearCampaignSyncBookkeeping();
   initPersistFailureReporter(null);
+  initCampaignSessionReader(null);
   resetOutbox();
+  activateOutboxOwner('test-owner');
+});
+
+describe('campaign-session persistence fence', () => {
+  test('same-owner generation rotation aborts a state persist before cloud upsert', async () => {
+    let liveState = {
+      auth: { user: { id: 'owner-a' } },
+      campaignSessionGeneration: 73,
+    };
+    initCampaignSessionReader(() => liveState);
+    const sourceState = {
+      ...liveState,
+      campaigns: [{
+        id: 'camp-session-fence',
+        name: 'Old session snapshot',
+        accessState: 'active',
+        updatedAt: '2026-07-24T00:00:00.000Z',
+      }],
+    };
+
+    const pending = persistCampaignState(sourceState, 'camp-session-fence', { strict: true });
+    liveState = { ...liveState, campaignSessionGeneration: 74 };
+
+    await expect(pending).rejects.toMatchObject({ code: 'auth_session_changed' });
+    expect(campaigns.upsert).not.toHaveBeenCalled();
+  });
 });
 
 describe('parallel-flush contract', () => {
@@ -194,6 +223,18 @@ describe('differential persistence', () => {
     // is a genuine change and the fingerprint catches it without special-casing.
     await persistSaveUpdates([makeUpdate('a', { tick: 2 })]);
     expect(saves.update).toHaveBeenCalledTimes(2);
+  });
+
+  test('a fingerprint from one account never suppresses another account write', async () => {
+    const updates = [makeUpdate('same-save-id')];
+    await persistSaveUpdates(updates);
+    expect(saves.update).toHaveBeenCalledTimes(1);
+
+    activateOutboxOwner('different-owner');
+    const second = await persistSaveUpdates(updates);
+
+    expect(saves.update).toHaveBeenCalledTimes(2);
+    expect(second).toMatchObject({ attempted: 1, skipped: 0 });
   });
 
   test('a FAILED persist does not record the fingerprint — the retry re-uploads', async () => {

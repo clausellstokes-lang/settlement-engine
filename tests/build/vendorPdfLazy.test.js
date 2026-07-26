@@ -34,6 +34,11 @@
 import { describe, it, expect } from 'vitest';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { resolve, join } from 'node:path';
+import {
+  brotliCompressSync,
+  constants as zlibConstants,
+  gzipSync,
+} from 'node:zlib';
 
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
@@ -419,6 +424,13 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // treat eager Δ as HARD-ZERO for every remaining lane. Monotone-down unchanged;
 // raises stay owner-signed.
 const CLOSURE_BUDGET_BYTES = 1_040_000;
+// Transfer budgets measure each fetched chunk independently, matching CDN
+// compression rather than compressing an artificial concatenation. Recorded
+// 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
+// Brotli 269,548. The ~5% platform margin absorbs zlib-version variance while
+// still catching a payload that is raw-small but compression-hostile.
+const CLOSURE_GZIP_BUDGET_BYTES = 337_000;
+const CLOSURE_BROTLI_BUDGET_BYTES = 283_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -547,9 +559,16 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     const size = statSync(join(assetsDir, engine)).size;
     // It should stay meaningfully large (the generation pipeline lives here).
     // If it collapses, generation code leaked into a hot chunk; if it balloons
-    // past the old ~660 kB, something eager re-merged into it.
+    // past this ceiling, something eager re-merged into it.
+    // CEILING RAISE 660_000 -> 673_000 (owner-ratified 2026-07-26): measured
+    // 670,719 after the three lazy-leaf pins in vite.config.js
+    // (crossSettlementConflicts, aiLayer, formatNumber), plus ~2.3 kB of
+    // cross-environment Rollup margin. NOTHING EAGER RE-MERGED — the
+    // first-paint closure IMPROVED over this lane, and the closure budget
+    // above is the guard that proves it. The growth is the 26 new
+    // generation-critical-path modules the generation remediation added.
     expect(size).toBeGreaterThan(300_000);
-    expect(size).toBeLessThan(660_000);
+    expect(size).toBeLessThan(673_000);
   });
 
   // ── The affordance manifest stays a LAZY LEAF (Composer V2 §2) ───────────
@@ -669,6 +688,39 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
       `first-paint static closure = ${total} bytes (budget ${CLOSURE_BUDGET_BYTES}):\n${lines.join('\n')}`,
     ).toBeLessThanOrEqual(CLOSURE_BUDGET_BYTES);
   });
+
+  it.skipIf(!requireDistRead)(
+    `entry static closure transfer bytes stay under gzip ${CLOSURE_GZIP_BUDGET_BYTES} and Brotli ${CLOSURE_BROTLI_BUDGET_BYTES}`,
+    () => {
+      const { files } = entryStaticClosure();
+      let gzipTotal = 0;
+      let brotliTotal = 0;
+      const lines = [];
+      for (const file of files.sort()) {
+        const bytes = readFileSync(join(assetsDir, file));
+        const gzip = gzipSync(bytes, { level: 9 }).length;
+        const brotli = brotliCompressSync(bytes, {
+          params: {
+            [zlibConstants.BROTLI_PARAM_QUALITY]: 11,
+          },
+        }).length;
+        gzipTotal += gzip;
+        brotliTotal += brotli;
+        lines.push(
+          `  gzip ${String(gzip).padStart(7)}  br ${String(brotli).padStart(7)}  ${file}`,
+        );
+      }
+      const breakdown = lines.join('\n');
+      expect(
+        gzipTotal,
+        `first-paint gzip transfer = ${gzipTotal} B (budget ${CLOSURE_GZIP_BUDGET_BYTES}):\n${breakdown}`,
+      ).toBeLessThanOrEqual(CLOSURE_GZIP_BUDGET_BYTES);
+      expect(
+        brotliTotal,
+        `first-paint Brotli transfer = ${brotliTotal} B (budget ${CLOSURE_BROTLI_BUDGET_BYTES}):\n${breakdown}`,
+      ).toBeLessThanOrEqual(CLOSURE_BROTLI_BUDGET_BYTES);
+    },
+  );
 
   // ── modulePreload hint (secondary check) ─────────────────────────────────
   it('index.html does NOT preload vendor-pdf', () => {

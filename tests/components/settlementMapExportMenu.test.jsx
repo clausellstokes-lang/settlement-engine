@@ -42,6 +42,8 @@ describe('SettlementMapExportMenu — the export-bundle gate', () => {
       /download this map as png/i,
       /download this map as jpeg/i,
       /download this map as webp/i,
+      /three-dimensional settlement portrait png/i,
+      /three-dimensional settlement scene as glb/i,
       /token-resolution battlemap/i,   // the VTT token PNG
       /single-page pdf/i,
     ]) {
@@ -74,5 +76,6 @@ describe('SettlementMapExportMenu — the export-bundle gate', () => {
     openMenu();
     expect(screen.getByRole('button', { name: /unlock all exports for this settlement/i })).toBeTruthy();
     expect(screen.queryByRole('button', { name: /download this map as svg/i })).toBeNull();
+    expect(screen.queryByRole('button', { name: /settlement scene as glb/i })).toBeNull();
   });
 });

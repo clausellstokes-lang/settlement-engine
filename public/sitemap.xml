@@ -818,6 +818,11 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-refreshpendingedits</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-importgallerymapwithcampaign</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -893,6 +898,21 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-applycustomcontentcommand</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-applyreviewedsupplychaincommand</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-importcustomcontentarchive</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-loadcustomcontentfromcloud</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -939,6 +959,11 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-catchupcampaignworld</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-applycampaigncontentbindingmigration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1123,7 +1148,17 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-invalidatecampaignsession</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-createcampaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-createimportedcampaign</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1149,6 +1184,16 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-removefromcampaign</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-withsettlementdeletionlock</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-executeimportreconciliationdraft</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1308,17 +1353,27 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-addcustomitem</loc>
+    <loc>https://settlementforge.com/compendium/op-listcustomcontentrevisions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-updatecustomitem</loc>
+    <loc>https://settlementforge.com/compendium/op-loadarchivedcustomcontent</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-deletecustomitem</loc>
+    <loc>https://settlementforge.com/compendium/op-loadcustomcontentenvironments</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-rollbackcustomcontentenvironment</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-pinlegacycampaigncontentbindings</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

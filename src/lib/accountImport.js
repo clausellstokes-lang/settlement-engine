@@ -25,18 +25,34 @@
  *     re-wire into the importer's unrelated saves or resurrect foreign content.
  */
 
-import { ACCOUNT_EXPORT_VERSION } from './accountData.js';
 import { scrubImportedConfig } from './importScrub.js';
+import {
+  validateCustomContentArchive,
+} from './customContentArchive.js';
+import {
+  parseContentJson,
+} from '../domain/content/contentFingerprint.js';
+import {
+  ACCOUNT_EXPORT_VERSION,
+  MAX_IMPORT_BYTES,
+  MAX_IMPORT_CAMPAIGNS,
+  MAX_IMPORT_SETTLEMENTS,
+  accountTransferByteLength,
+} from './accountTransferContract.js';
+
+export {
+  MAX_IMPORT_BYTES,
+  MAX_IMPORT_CAMPAIGNS,
+  MAX_IMPORT_SETTLEMENTS,
+};
 
 /**
  * normalizeSettlement wraps the ~30 kB settlement-migration closure — only ever
- * exercised once the user is actively importing (well past first paint). This
- * module is eagerly reached at first paint via store → accountImportSlice, so a
- * static import edge from here dragged that closure into the first-paint bundle
- * non-deterministically (build-determinism + first-paint budget regression).
- * Lazy-load it instead: prepareSettlementEntry stays a SYNCHRONOUS pure function
- * reading the memoized ref, and the async importAccountData caller awaits
- * ensureNormalizeLoaded() ONCE before the per-record loop (mirrors saves.js).
+ * exercised once the user is actively importing. The store action now loads
+ * the whole import body lazily; this second boundary keeps the migration graph
+ * deferred within that body until validation has accepted an import attempt.
+ * prepareSettlementEntry stays a SYNCHRONOUS pure function reading the memoized
+ * ref, and the async caller awaits ensureNormalizeLoaded() once before its loop.
  */
 let _normalize = null;
 export async function ensureNormalizeLoaded() {
@@ -47,57 +63,151 @@ export async function ensureNormalizeLoaded() {
 }
 
 /**
- * Hard read cap (bytes). Well above any legitimate export — a free user holds 3
- * settlements; even a large premium library is far under this. Anything bigger
- * is rejected before parse to bound DoS surface.
+ * The shared hard read cap is large enough for the independently bounded
+ * 16 MiB constitutional archive plus ordinary settlement/campaign data.
+ * Anything larger is rejected before parse to bound memory and validation work.
  */
-export const MAX_IMPORT_BYTES = 5 * 1024 * 1024; // 5 MB
-
-/** Upper bound on record counts, to bound work before the pipeline runs. */
-export const MAX_IMPORT_SETTLEMENTS = 1000;
-export const MAX_IMPORT_CAMPAIGNS = 1000;
-
 /**
  * Parse + validate the import envelope, fail-closed. Returns a discriminated
  * result rather than throwing, so the UI can surface the specific message in a
  * role="alert" block.
  *
  * @param {string} text raw file contents (already size-checked by the caller)
- * @returns {{ ok: true, value: { version: number, settlements: any[], campaigns: any[] } }
- *          | { ok: false, error: string }}
+ * @returns {{ ok: true, value: {
+ *   version: number,
+ *   settlements: any[],
+ *   campaigns: any[],
+ *   customContentArchive: object|null,
+ *   customContentPack: object|null,
+ * } }
+ *          | {
+ *              ok: false,
+ *              error: string,
+ *              failureKind?: 'json_boundary_invalid',
+ *            }}
  */
 export function validateAccountImport(text) {
   if (typeof text !== 'string' || text.length === 0) {
     return { ok: false, error: 'This file is empty.' };
   }
+  if (accountTransferByteLength(text) > MAX_IMPORT_BYTES) {
+    return {
+      ok: false,
+      error: 'This file is too large to import safely.',
+    };
+  }
 
   let parsed;
   try {
-    parsed = JSON.parse(text);
-  } catch {
-    return { ok: false, error: "This file isn't valid JSON. Choose an export file downloaded from SettlementForge." };
+    parsed = parseContentJson(text);
+  } catch (error) {
+    if (
+      error instanceof Error
+      && error.message.includes('ambiguous object keys')
+    ) {
+      return {
+        ok: false,
+        error:
+          'This file contains ambiguous duplicate fields and cannot be imported safely.',
+        failureKind: 'json_boundary_invalid',
+      };
+    }
+    return {
+      ok: false,
+      error: "This file isn't valid JSON. Choose an export file downloaded from SettlementForge.",
+      failureKind: 'json_boundary_invalid',
+    };
   }
 
   // Top-level must be a plain object (not an array / primitive / null).
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
     return { ok: false, error: "This file isn't a SettlementForge export." };
   }
+  const envelope = /** @type {Record<string, any>} */ (parsed);
 
   // Version must be a finite number; a newer envelope has NO down-migration, so
   // reject it rather than guess at a shape this build can't read.
-  if (!Number.isFinite(parsed.version)) {
+  if (
+    !Number.isInteger(envelope.version)
+    || envelope.version < 1
+  ) {
     return { ok: false, error: "This file is missing its version and may not be a SettlementForge export." };
   }
-  if (parsed.version > ACCOUNT_EXPORT_VERSION) {
+  if (envelope.version > ACCOUNT_EXPORT_VERSION) {
     return { ok: false, error: 'This file is from a newer version of SettlementForge. Update the app to import it.' };
   }
 
   // settlements / campaigns must be arrays; missing defaults to empty. Any other
   // shape (object, string) is rejected — we never coerce unknown shapes.
-  const settlements = parsed.settlements === undefined ? [] : parsed.settlements;
-  const campaigns = parsed.campaigns === undefined ? [] : parsed.campaigns;
+  const settlements = envelope.settlements === undefined
+    ? []
+    : envelope.settlements;
+  const campaigns = envelope.campaigns === undefined
+    ? []
+    : envelope.campaigns;
   if (!Array.isArray(settlements) || !Array.isArray(campaigns)) {
     return { ok: false, error: "This file's contents are not in the expected shape." };
+  }
+  const customContentPack = envelope.customContentPack == null
+    ? null
+    : envelope.customContentPack;
+  const customContentArchive = envelope.customContentArchive == null
+    ? null
+    : envelope.customContentArchive;
+  if (
+    customContentPack != null
+    && (
+      typeof customContentPack !== 'object'
+      || Array.isArray(customContentPack)
+    )
+  ) {
+    return {
+      ok: false,
+      error: "This file's custom content is not in the expected shape.",
+    };
+  }
+  if (
+    customContentArchive != null
+    && (
+      typeof customContentArchive !== 'object'
+      || Array.isArray(customContentArchive)
+    )
+  ) {
+    return {
+      ok: false,
+      error: "This file's custom-content archive is not in the expected shape.",
+    };
+  }
+  if (customContentArchive && customContentPack) {
+    return {
+      ok: false,
+      error: 'This file carries two competing custom-content sources.',
+    };
+  }
+  if (customContentArchive && envelope.version < 3) {
+    return {
+      ok: false,
+      error: 'This older account-export version cannot carry a custom-content archive.',
+    };
+  }
+  if (customContentPack && envelope.version >= 3) {
+    return {
+      ok: false,
+      error: 'This account-export version requires the full custom-content archive format.',
+    };
+  }
+  let admittedCustomContentArchive = null;
+  if (customContentArchive) {
+    const archiveAdmission = validateCustomContentArchive(customContentArchive);
+    if (archiveAdmission.ok === false) {
+      return {
+        ok: false,
+        error: `This file's custom-content archive is invalid: ${
+          archiveAdmission.message || archiveAdmission.reason
+        }`,
+      };
+    }
+    admittedCustomContentArchive = archiveAdmission.archive;
   }
 
   // Bound the work before anything downstream touches the records.
@@ -110,7 +220,16 @@ export function validateAccountImport(text) {
 
   // NOTE: `profile` is intentionally NOT trusted or returned. It is display-only
   // in the export and must never set tier / role / identity on import.
-  return { ok: true, value: { version: parsed.version, settlements, campaigns } };
+  return {
+    ok: true,
+    value: {
+      version: envelope.version,
+      settlements,
+      campaigns,
+      customContentArchive: admittedCustomContentArchive,
+      customContentPack,
+    },
+  };
 }
 
 /**
@@ -124,7 +243,12 @@ export function validateAccountImport(text) {
  * owner / publication field — the server stamps the owner and mints the id.
  *
  * @param {any} rawEntry one element of the export's `settlements` array
- * @param {{ sourceName?: string|null, importedAt?: string }} [meta]
+ * @param {{
+ *   sourceName?: string|null,
+ *   importedAt?: string|null,
+ *   sourceChecksum?: string|null,
+ *   sourceId?: string|null,
+ * }} [meta]
  * @returns {{ ok: true, entry: object } | { ok: false, reason: string }}
  */
 export function prepareSettlementEntry(rawEntry, meta = {}) {
@@ -149,7 +273,12 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
     return { ok: false, reason: 'Could not read this settlement (unsupported shape).' };
   }
 
-  const importedAt = meta.importedAt || new Date().toISOString();
+  // Reconciliation sessions pass an explicit null so their normalized command
+  // input is deterministic across re-runs. The existing direct-account import
+  // path omits the field and keeps its historical "time of import" stamp.
+  const importedAt = Object.hasOwn(meta, 'importedAt')
+    ? (meta.importedAt || null)
+    : new Date().toISOString();
   const sourceName = meta.sourceName || null;
   const displayName = (typeof rawEntry.name === 'string' && rawEntry.name.trim())
     || (typeof rawSettlement.name === 'string' && rawSettlement.name.trim())
@@ -170,7 +299,13 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
     interSettlementRelationships: [],
     _seed: undefined,
     config,
-    importedFrom: { source: 'account-export', sourceName, importedAt },
+    importedFrom: {
+      source: 'account-export',
+      sourceName,
+      importedAt,
+      ...(meta.sourceChecksum ? { sourceChecksum: meta.sourceChecksum } : {}),
+      ...(meta.sourceId ? { sourceId: String(meta.sourceId) } : {}),
+    },
   };
 
   // The entry handed to savesService.save. NO id / user_id / owner / public_slug

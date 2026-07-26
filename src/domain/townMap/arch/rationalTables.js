@@ -18,6 +18,12 @@
  * (the massing.js SHADOW_MAG precedent).
  */
 
+import { TONE_LUT, tone } from '../../../kernel/toneCurve.js';
+
+// Preserve the architecture-kernel API while keeping the display transfer
+// neutral and reusable by every deterministic CPU renderer.
+export { TONE_LUT, tone };
+
 /** Root two, correctly-rounded (Math.sqrt is spec-exact -- the sanctioned exception). */
 export const SQRT2 = Math.sqrt(2);
 /** Root three, correctly-rounded. Drives the equilateral pointed arch (below). */
@@ -98,20 +104,6 @@ export function ngonUnitDirs(n) {
 }
 
 /**
- * TONE_LUT -- a hand-authored filmic tone/transfer curve, pinned as 17 integer literals
- * mapping a linear-luminance bucket (0..16, i.e. 0.0..1.0 in 1/16 steps) to a display byte
- * (0..255). It bakes gamma + a gentle contrast S (a shadow toe, a mid boost, a highlight
- * shoulder) into ONE table. This is the pinned-rational-table mechanism the kernel doc
- * mandates for the raster's non-linear tone step (CORRECTION 3): a transfer curve is a
- * transcendental (pow) in closed form, so it is TABULATED, never evaluated at runtime.
- * Monotonic non-decreasing, anchored 0 -> 0 and 16 -> 255 (asserted by the unit test).
- * @type {ReadonlyArray<number>}
- */
-export const TONE_LUT = Object.freeze([
-  0, 10, 26, 46, 68, 90, 112, 132, 151, 168, 184, 198, 211, 222, 232, 244, 255,
-]);
-
-/**
  * THE ONE FIXED LIGHT, as a 3D unit vector in the render frame (x = screen-right,
  * y = screen-down, z = out of the screen toward the viewer). It points up-left-and-out
  * (NW and toward the camera) -- the same NW key light the massing / ground-dress layers
@@ -139,20 +131,3 @@ const _MX = -0.42, _MY = 0.50, _MZ = 0.76;
 const _MMAG = Math.sqrt(_MX * _MX + _MY * _MY + _MZ * _MZ) || 1;
 /** @type {readonly [number, number, number]} */
 export const LIGHT_MODEL = Object.freeze([_MX / _MMAG, _MY / _MMAG, _MZ / _MMAG]);
-
-/**
- * Sample the pinned tone curve at a linear luminance t in [0, 1] and return a display byte
- * (0..255). Linear interpolation between the two straddling LUT buckets -- pure {+,-,*,/}
- * plus Math.round/min/max, no transcendental.
- * @param {number} t linear luminance, clamped to [0, 1]
- * @returns {number} display byte in [0, 255]
- */
-export function tone(t) {
-  const c = t < 0 ? 0 : t > 1 ? 1 : t;
-  const f = c * (TONE_LUT.length - 1);
-  const i = Math.floor(f);
-  if (i >= TONE_LUT.length - 1) return TONE_LUT[TONE_LUT.length - 1];
-  const frac = f - i;
-  const a = TONE_LUT[i], b = TONE_LUT[i + 1];
-  return Math.round(a + (b - a) * frac);
-}

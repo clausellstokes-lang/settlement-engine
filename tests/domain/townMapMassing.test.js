@@ -92,6 +92,18 @@ describe('massing substrate — recognition shapes (the silhouette law)', () => 
     expect(silhouetteForKind('forge').feat.some((f) => f.t === 'smoke')).toBe(true);
     expect(silhouetteForKind('towered-keep').parts.length).toBeGreaterThanOrEqual(5);
   });
+  test('civic, military, rural, temporary, and ruined roles keep distinct massing', () => {
+    expect(silhouetteForKind('guildhall').parts.length).toBeGreaterThanOrEqual(4);
+    expect(silhouetteForKind('barracks').parts.length).toBeGreaterThanOrEqual(3);
+    expect(silhouetteForKind('watchtower').parts[0].hMul).toBeGreaterThan(1.5);
+    expect(silhouetteForKind('farmstead').parts.length).toBeGreaterThanOrEqual(2);
+    expect(silhouetteForKind('encampment').parts.every(
+      (part) => part.roof === 'spire',
+    )).toBe(true);
+    expect(silhouetteForKind('ruin-shell').parts.every(
+      (part) => part.roof === 'flat',
+    )).toBe(true);
+  });
   test('the generic commons stay single-volume', () => {
     expect(silhouetteForKind('house-a').parts.length).toBe(1);
   });

@@ -418,6 +418,82 @@ describe('Tier 3.6 — origin / source filtering (security)', () => {
   });
 });
 
+describe('Tier 3.6 — explicit cross-origin transport contract', () => {
+  const MAP_ORIGIN = 'https://map.settlementforge.com';
+
+  test('accepts the configured map origin and sends only to that origin', () => {
+    const postMessage = vi.fn();
+    const fakeIframe = { contentWindow: { postMessage } };
+    const bridge = createMapBridge(
+      () => fakeIframe,
+      { targetOrigin: MAP_ORIGIN },
+    );
+    bridge.start();
+
+    window.dispatchEvent(new MessageEvent('message', {
+      data: { type: 'fmg:ready' },
+      origin: MAP_ORIGIN,
+      source: fakeIframe.contentWindow,
+    }));
+
+    expect(bridge.isReady).toBe(true);
+    expect(bridge.targetOrigin).toBe(MAP_ORIGIN);
+    expect(bridge.notify('settlementEngine:viewportSync', { cx: 1 })).toBe(true);
+    expect(postMessage).toHaveBeenCalledWith(
+      { type: 'settlementEngine:viewportSync', cx: 1 },
+      MAP_ORIGIN,
+    );
+    bridge.destroy();
+  });
+
+  test('rejects the app origin even when the iframe WindowProxy is correct', () => {
+    const fakeIframe = { contentWindow: { postMessage: vi.fn() } };
+    const bridge = createMapBridge(
+      () => fakeIframe,
+      { targetOrigin: MAP_ORIGIN },
+    );
+    bridge.start();
+
+    window.dispatchEvent(new MessageEvent('message', {
+      data: { type: 'fmg:ready' },
+      origin: window.location.origin,
+      source: fakeIframe.contentWindow,
+    }));
+
+    expect(bridge.isReady).toBe(false);
+    bridge.destroy();
+  });
+
+  test('rejects an exact-origin message from any other window', () => {
+    const fakeIframe = { contentWindow: { postMessage: vi.fn() } };
+    const bridge = createMapBridge(
+      () => fakeIframe,
+      { targetOrigin: MAP_ORIGIN },
+    );
+    bridge.start();
+
+    window.dispatchEvent(new MessageEvent('message', {
+      data: { type: 'fmg:ready' },
+      origin: MAP_ORIGIN,
+      source: { postMessage: vi.fn() },
+    }));
+
+    expect(bridge.isReady).toBe(false);
+    bridge.destroy();
+  });
+
+  test.each([
+    'ftp://map.settlementforge.com',
+    'not a URL',
+    'https://user:secret@map.settlementforge.com',
+  ])('rejects an invalid targetOrigin %j before installing a listener', (targetOrigin) => {
+    expect(() => createMapBridge(
+      () => null,
+      { targetOrigin },
+    )).toThrow(/targetOrigin/);
+  });
+});
+
 // ── Lifecycle: destroy ────────────────────────────────────────────────
 
 describe('Tier 3.6 — destroy()', () => {

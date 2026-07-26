@@ -85,6 +85,25 @@ afterEach(() => {
 });
 
 describe('EventComposer — Apply without a preview', () => {
+  test('a clock-bound preview names its isolated scope and intervening-world boundary', () => {
+    state = baseState({
+      isSettlementClockBound: () => true,
+      pendingPreview: {
+        event: { id: 'ev_clock', type: 'ADD_NPC', targetId: 'Mira' },
+        deltas: [],
+        factionResponses: [],
+        warnings: [],
+        narrativeSummary: 'Mira arrives.',
+      },
+    });
+
+    render(<EventComposer />);
+
+    expect(screen.getAllByText(/applying this change stages it for the next World Pulse/i)).toHaveLength(2);
+    expect(screen.getByText(/Isolated-scope review/i)).toBeTruthy();
+    expect(screen.getAllByText(/earlier queued orders.*intervening world changes/i)).toHaveLength(2);
+  });
+
   test('Apply renders with no pending preview, honors canSubmit, and commits the built event', () => {
     state = baseState();
     const { container } = render(<EventComposer />);
@@ -300,5 +319,44 @@ describe('EventComposer — post-apply staleness modal', () => {
 
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(screen.getByText('Staged changes (1)')).toBeTruthy();
+  });
+});
+
+describe('EventComposer — ADD_FACTION offers Compendium factions (the FactionEventBanner promise)', () => {
+  // Guards the manifest's factions.name + factions.description "eventComposer"
+  // consumer evidence: a Compendium faction must be PICKABLE here, and its
+  // authored description must prefill the editable Description field (the only
+  // channel to the created faction — event.description → addFaction). If this
+  // flow is ever removed, prune those consumers rather than deleting this test.
+  test('a Compendium faction is pickable under Custom and prefills Description', () => {
+    state = baseState({
+      customContent: {
+        factions: [{ id: 'cf1', name: 'The Gilded Quill', description: 'Scribes with sharp knives.' }],
+      },
+    });
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_FACTION');
+    const factionSelect = screen.getByLabelText('Faction');
+    // The Custom optgroup carries the authored faction.
+    const customGroup = within(factionSelect).getByRole('group', { name: 'Custom' });
+    expect(within(customGroup).getByRole('option', { name: 'The Gilded Quill' })).toBeTruthy();
+
+    fireEvent.change(factionSelect, { target: { value: 'The Gilded Quill' } });
+    // Description prefilled (still editable), and the event is stageable.
+    expect(screen.getByLabelText('Description').value).toBe('Scribes with sharp knives.');
+    expect(screen.getByRole('button', { name: /Apply to Timeline/ }).disabled).toBe(false);
+  });
+
+  test('a built-in pick leaves a typed Description alone', () => {
+    state = baseState({
+      customContent: { factions: [{ id: 'cf1', name: 'The Gilded Quill', description: 'Scribes.' }] },
+    });
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_FACTION');
+    fireEvent.change(screen.getByLabelText('Description'), { target: { value: 'my own note' } });
+    fireEvent.change(screen.getByLabelText('Faction'), { target: { value: 'The Trade Compact' } });
+    expect(screen.getByLabelText('Description').value).toBe('my own note');
   });
 });

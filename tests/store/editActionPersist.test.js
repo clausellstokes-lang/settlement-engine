@@ -157,8 +157,8 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
   test('queued rename-settlement commits, persists, and survives reload — incl. the row `name` COLUMN', async () => {
-    store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
-    store.getState().commitPendingEdits();
+    await store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
+    await store.getState().commitPendingEdits();
 
     expect(store.getState().settlement.name).toBe('Newhaven');       // live
     expect(persistedEntry(store).settlement.name).toBe('Newhaven');  // in-memory entry blob synced
@@ -182,8 +182,8 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
   // AND reverts the ledger, dropping backedBy — both live in the one atomic undo snapshot). ──
   test('champion-npc (D-4e) commits, stamps the contestBacking marker, persists, survives reload', async () => {
     const cid = 'contest.save-1.ruling_authority.10';
-    store.getState().queueEdit('champion-npc', { npcIndex: 0, contestId: cid });
-    store.getState().commitPendingEdits();
+    await store.getState().queueEdit('champion-npc', { npcIndex: 0, contestId: cid });
+    await store.getState().commitPendingEdits();
 
     expect(store.getState().settlement.npcs[0].contestBacking).toBe(cid);       // live marker
     expect(persistedEntry(store).settlement.npcs[0].contestBacking).toBe(cid);  // entry synced
@@ -192,9 +192,9 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
     expect(persistedEntry(store).campaignState.eventLog).toEqual([]);           // a content edit, not an event
   });
 
-  test('champion-npc is a byte-safe no-op without a contestId (the light dispatcher guard)', () => {
-    store.getState().queueEdit('champion-npc', { npcIndex: 0 });
-    store.getState().commitPendingEdits();
+  test('champion-npc is refused at admission without a contestId', async () => {
+    expect(await store.getState().queueEdit('champion-npc', { npcIndex: 0 })).toBeNull();
+    expect(store.getState().pendingEditsQueue).toEqual([]);
     expect(store.getState().settlement.npcs[0].contestBacking).toBeUndefined();
   });
 
@@ -211,8 +211,8 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
       const idx = s.savedSettlements.findIndex(x => x.id === SAVE_ID);
       s.savedSettlements[idx].settlement.npcs[0].whereabouts = { ...wa };
     });
-    store.getState().queueEdit('recall-npc', { npcIndex: 0 });
-    store.getState().commitPendingEdits();
+    await store.getState().queueEdit('recall-npc', { npcIndex: 0 });
+    await store.getState().commitPendingEdits();
 
     expect(store.getState().settlement.npcs[0].whereabouts.recall).toBe(true);       // live marker
     expect(persistedEntry(store).settlement.npcs[0].whereabouts.recall).toBe(true);  // entry synced
@@ -221,10 +221,10 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
     expect(persistedEntry(store).campaignState.eventLog).toEqual([]);                // a content edit, not an event
   });
 
-  test('recall-npc is a byte-safe no-op on a non-traveller (the light dispatcher guard)', () => {
-    // npcs[0] (Aldis) has no whereabouts — the recall dispatcher refuses it, no marker appears.
-    store.getState().queueEdit('recall-npc', { npcIndex: 0 });
-    store.getState().commitPendingEdits();
+  test('recall-npc is refused at admission for a non-traveller', async () => {
+    // npcs[0] (Aldis) has no whereabouts, so no uncommittable intent enters.
+    expect(await store.getState().queueEdit('recall-npc', { npcIndex: 0 })).toBeNull();
+    expect(store.getState().pendingEditsQueue).toEqual([]);
     expect(store.getState().settlement.npcs[0].whereabouts).toBeUndefined();
   });
 
@@ -242,8 +242,8 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
       };
     });
 
-    store.getState().queueEdit('rename-settlement', { newName: 'Kingsford' });
-    store.getState().commitPendingEdits();
+    await store.getState().queueEdit('rename-settlement', { newName: 'Kingsford' });
+    await store.getState().commitPendingEdits();
 
     expect(persistedEntry(store).name).toBe('Kingsford');
     expect(persistedEntry(store).settlement.name).toBe('Kingsford');
@@ -256,9 +256,9 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
   });
 
   test('parity: a queued NPC rename AND town rename in one commit both survive', async () => {
-    store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' });
-    store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
-    store.getState().commitPendingEdits();
+    await store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' });
+    await store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
+    await store.getState().commitPendingEdits();
 
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
     const reloaded = reloadInto(persistedEntry(store));
@@ -269,8 +269,8 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
   test('an unsaved-draft queued town rename still updates live memory (no cloud write)', async () => {
     const draft = makeStore();
     draft.setState(s => { s.settlement = fixture(); }); // no activeSaveId
-    draft.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
-    draft.getState().commitPendingEdits();
+    await draft.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
+    await draft.getState().commitPendingEdits();
 
     expect(draft.getState().settlement.name).toBe('Newhaven'); // live rename preserved
     await new Promise(r => setTimeout(r, 0));
@@ -282,21 +282,24 @@ describe('queueEdit no-silent-drop contract: only committable kinds enter the qu
   let store;
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
-  test('every EDIT_KIND without a commit dispatcher is refused at enqueue (null, queue stays empty)', () => {
+  test('every EDIT_KIND without a commit dispatcher is refused at enqueue (null, queue stays empty)', async () => {
     const uncommittable = EDIT_KINDS.filter(k => !COMMITTABLE_EDIT_KINDS.includes(k));
     expect(uncommittable.length).toBeGreaterThan(0); // the scaffolding kinds still exist
 
     for (const kind of uncommittable) {
       // Pass a fat payload so refusal is by kind, not by a missing field.
-      const result = store.getState().queueEdit(kind, { label: 'x', newName: 'x', npcIndex: 0 });
+      const result = await store.getState().queueEdit(
+        kind,
+        { label: 'x', newName: 'x', npcIndex: 0 },
+      );
       expect(result).toBeNull();
     }
     expect(store.getState().pendingEditsQueue).toEqual([]); // nothing was queued-then-droppable
   });
 
-  test('committable kinds are admitted (non-null) and enqueued in order', () => {
-    const npc = store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' });
-    const town = store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
+  test('committable kinds are admitted (non-null) and enqueued in order', async () => {
+    const npc = await store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' });
+    const town = await store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
 
     expect(npc).not.toBeNull();
     expect(town).not.toBeNull();
@@ -304,11 +307,11 @@ describe('queueEdit no-silent-drop contract: only committable kinds enter the qu
   });
 
   test('commit after refused enqueues has nothing to drop and triggers no phantom persist', async () => {
-    store.getState().queueEdit('add-institution', { label: 'Tavern' });
-    store.getState().queueEdit('edit-prose', { text: 'x' });
+    await store.getState().queueEdit('add-institution', { label: 'Tavern' });
+    await store.getState().queueEdit('edit-prose', { text: 'x' });
     expect(store.getState().pendingEditsQueue).toEqual([]); // both refused
 
-    store.getState().commitPendingEdits(); // no active edits → no-op
+    await store.getState().commitPendingEdits(); // no active edits → no-op
     await new Promise(r => setTimeout(r, 0));
     expect(saves.update).not.toHaveBeenCalled();
   });
@@ -324,23 +327,23 @@ describe('rename-npc commit payload contract (SS4: JSDoc {npcId} vs dispatcher {
   let store;
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
-  test('a rename-npc queued with {npcIndex} commits the rename', () => {
-    expect(store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' })).not.toBeNull();
-    store.getState().commitPendingEdits();
+  test('a rename-npc queued with {npcIndex} commits the rename', async () => {
+    expect(await store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' })).not.toBeNull();
+    await store.getState().commitPendingEdits();
     expect(store.getState().settlement.npcs[0].name).toBe('Aldric');
     expect(store.getState().pendingEditsQueue).toEqual([]);
   });
 
-  test('a rename-npc queued with the DOCUMENTED {npcId} shape also commits (no silent drop)', () => {
-    expect(store.getState().queueEdit('rename-npc', { npcId: 'npc.aldis', newName: 'Aldwyn' })).not.toBeNull();
-    store.getState().commitPendingEdits();
+  test('a rename-npc queued with the DOCUMENTED {npcId} shape also commits (no silent drop)', async () => {
+    expect(await store.getState().queueEdit('rename-npc', { npcId: 'npc.aldis', newName: 'Aldwyn' })).not.toBeNull();
+    await store.getState().commitPendingEdits();
     expect(store.getState().settlement.npcs[0].name).toBe('Aldwyn');
     expect(store.getState().pendingEditsQueue).toEqual([]);
   });
 
-  test('a rename-npc naming a MISSING npcId drops the edit without renaming anyone else', () => {
-    expect(store.getState().queueEdit('rename-npc', { npcId: 'npc.ghost', newName: 'Nobody' })).not.toBeNull();
-    store.getState().commitPendingEdits();
+  test('a rename-npc naming a MISSING npcId is refused before it can enter the queue', async () => {
+    expect(await store.getState().queueEdit('rename-npc', { npcId: 'npc.ghost', newName: 'Nobody' })).toBeNull();
+    expect(store.getState().pendingEditsQueue).toEqual([]);
     expect(store.getState().settlement.npcs[0].name).toBe('Aldis'); // untouched
   });
 });

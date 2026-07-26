@@ -4,10 +4,10 @@
  * Tier 5.3 of the roadmap. Every entity on a settlement comes from
  * one of four sources: the procedural generator, the user's own
  * additions, an applied event, or an AI overlay polish. The
- * canonStatus tag tells downstream consumers (AI overlay, reroll
- * dialog, PDF) which entities are "real canon" (preserved across
- * rerolls), which are still draft, and which are optional flavor
- * the user has chosen to keep separate.
+ * canonStatus tag tells downstream consumers (AI overlay, the NPC
+ * reroll's preservation tail, PDF) which entities are "real canon",
+ * which are still draft, and which are optional flavor the user has
+ * chosen to keep separate.
  *
  *   tagEntityCanon(entity, settlement?) -> {
  *     source: 'generated' | 'user' | 'event' | 'ai_overlay'
@@ -41,6 +41,7 @@
  * @property {boolean} [userAuthored]
  * @property {string} [appliedAt]
  * @property {string} [causeEventId]
+ * @property {string} [createdByEventId]
  * @property {boolean} [_aiPolished]
  * @property {boolean} [_aiOverlay]
  */
@@ -96,7 +97,11 @@ function inferSource(entity) {
     return entity._source;
   }
   if (entity._authored === true || entity.userAuthored === true) return 'user';
-  if (typeof entity.appliedAt === 'string' || entity.causeEventId) return 'event';
+  // createdByEventId is what ADD_NPC / ADD_INSTITUTION / ADD_FACTION actually
+  // stamp (and what undo keys deletion off). Omitting it tagged an entity the
+  // user invented through the event system as 'generated', so a reroll destroyed
+  // it — the most explicit canon an entity can carry, unprotected.
+  if (typeof entity.appliedAt === 'string' || entity.causeEventId || entity.createdByEventId) return 'event';
   if (entity._aiPolished === true || entity._aiOverlay === true) return 'ai_overlay';
   return 'generated';
 }

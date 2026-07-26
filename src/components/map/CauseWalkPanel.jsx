@@ -15,6 +15,7 @@ import { useMemo } from 'react';
 import { X } from 'lucide-react';
 import { buildCauseWalk } from '../../domain/display/causeWalk.js';
 import { discourseProseActive, realizeCauseWalk } from '../../domain/display/discourseKernel.js';
+import { tickCalendarLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
 
@@ -100,7 +101,9 @@ export default function CauseWalkPanel({ worldState, rootId, resolveName, seesSe
                         {hop.headline}
                       </span>
                       {hop.tick != null && (
-                        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>· tick {hop.tick}</span>
+                        <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro }}>
+                          · {tickCalendarLabel(hop.tick)}
+                        </span>
                       )}
                     </div>
                     {names.length > 0 && (

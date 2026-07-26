@@ -71,6 +71,7 @@ export const MODERATION_ACTION_SET: ReadonlySet<string> = new Set([
 export const UNGATED_ACTION_SET: ReadonlySet<string> = new Set([
   "get_analytics_dashboard",
   "get_client_error_dashboard",
+  "get_operational_health",
   "get_analytics_trend",
   "get_analytics_distribution",
   "get_analytics_summary",
@@ -107,6 +108,10 @@ export const UNGATED_ACTION_SET: ReadonlySet<string> = new Set([
   "post_ticket_reply",
   "link_ticket_faq",
   "backfill_money_events",
+  // Acknowledgement is an audited note over an obligation that remains visible
+  // and retryable. It moves no money, erases no privacy work, and changes no
+  // account entitlement, so the ordinary highest-role gate is sufficient.
+  "acknowledge_operational_obligation",
   // list_gallery_reports is added with the report-pipeline lane's switch case.
 ]);
 

@@ -39,6 +39,12 @@ export default function WorldCertificationPanel({ presetId: presetIdProp } = {})
 
   const view = buildWorldCertification({ manifest: WORLD_CERTIFICATION_MANIFEST, presetId });
   const certified = view.status === 'certified';
+  const measured = view.status === 'measured';
+  const statusColor = certified
+    ? swatch.success
+    : measured
+      ? swatch['#8A5A1A']
+      : swatch.inkMag3;
 
   return (
     <Card kicker="World Certification" compact>
@@ -56,13 +62,13 @@ export default function WorldCertificationPanel({ presetId: presetIdProp } = {})
             padding: '2px 8px',
             // Tokens only (no raw hue, square corners — the map-palette / raw-color /
             // kill-list ratchets): the certified state reads green, pending neutral.
-            color: certified ? swatch.success : swatch.inkMag3,
+            color: statusColor,
             background: CARD_ALT,
-            border: `1px solid ${certified ? swatch.success : BORDER}`,
+            border: `1px solid ${certified || measured ? statusColor : BORDER}`,
           }}
           data-testid="certification-status"
         >
-          {certified ? 'Certified' : 'Pending'}
+          {certified ? 'Certified' : measured ? 'Measured' : 'Pending'}
         </div>
 
         <div style={{ fontSize: FS.sm, fontWeight: 600, color: swatch.inkMag }}>

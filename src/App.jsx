@@ -21,11 +21,12 @@ import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Zap, Shield, X } from 'lucide-react';
 import HouseDevice from './components/brand/HouseDevice.jsx';
 import useIsMobile from './hooks/useIsMobile';
+import useCustomContentCloudSync from './hooks/useCustomContentCloudSync.js';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
 import { useRoute, navigate, replacePath } from './hooks/useRoute.js';
 import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
-import { guardForView, viewToPath, NAV } from './lib/routes.js';
+import { allowsFloatingFeedback, guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 // The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
 // namespace with an identical t(). Importing copy/index.js here would drag the
@@ -50,7 +51,8 @@ const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
 // The cloud-sync banner renders null unless a persist actually fails, so it is
 // never first-paint critical — lazy so its code + icons stay off the entry's
 // static closure (first-paint byte budget).
-const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx')), SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx')); // combined: App.jsx at max-lines ceiling
+const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
+const SessionEvictedBanner = lazy(() => import('./components/SessionEvictedBanner.jsx'));
 
 // The post-generate coach hosts the guidance registry's single wizard-postgen
 // whisper (the "what's next" moves). Self-gates on a settlement + the unified
@@ -71,13 +73,6 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // The global floating-widget cluster (feedback widget + Surveyor S1 analyst panel),
 // lazy so both stay off first paint; each self-gates on `visible`.
 const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
-
-// Auth + checkout chrome the floating feedback widget stays off (its own
-// contract): the sign-in door, recovery, and the single-dossier landing.
-const AUTH_ROUTE_VIEWS = new Set([
-  'signin', 'register', 'reset-password', 'set-new-password',
-  'verify-email', 'confirm-email', 'dossier-success',
-]);
 
 // Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
 // NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
@@ -120,8 +115,8 @@ export default function App() {
   const [showScrollBottom, setShowScrollBottom] = useState(false);
   // Auth-modal visibility lives on the store's uiSlice (restoration #16) so the
   // signup/unlock PricingMomentCard can open sign-in, not the buy-credits wall.
-  // (Value + setter grouped on one line to hold App.jsx at its max-lines ceiling.)
-  const authModalOpen = useStore(s => s.authModalOpen), setAuthModalOpen = useStore(s => s.setAuthModalOpen);
+  const authModalOpen = useStore(s => s.authModalOpen);
+  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
 
   const authTier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
@@ -136,10 +131,12 @@ export default function App() {
   // pulse writeback / AI overlay mutation. Subscribe to the boolean instead so
   // the shell only re-renders when the settlement toggles absent↔present.
   const hasSettlement = useStore(s => !!s.settlement);
-  const initAuth = useStore(s => s.initAuth), initOnboarding = useStore(s => s.initOnboarding); // grouped: hold App.jsx at its max-lines ceiling (see the command-palette host addition)
+  const initAuth = useStore(s => s.initAuth);
+  const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
-  const purchaseModalOpen = useStore(s => s.purchaseModalOpen), setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen); // grouped: hold App.jsx at its max-lines ceiling
+  const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
   const setCreditBalance = useStore(s => s.setCreditBalance);
   const creditBalance = useStore(s => s.creditBalance);
   const loadCampaigns = useStore(s => s.loadCampaigns);
@@ -172,13 +169,13 @@ export default function App() {
       // anonymous one-shot buyer's PAID dossier. The handler consumes + cleans the
       // params, after which a later run of this effect redirects normally.
       if (window.location.search.includes('checkout=')) return;
-      const path = window.location.pathname;
-      const atRoot = path === '/' || path === '';
-      if (atRoot) replacePath(authTier === 'anon' ? '/home' : '/create');
+      if (window.location.pathname === '/' || window.location.pathname === '') {
+        replacePath(authTier === 'anon' ? '/home' : '/create');
+      }
     } catch { /* private mode → fall through to the default */ }
   }, [authLoading, authTier, view]);
 
-  // ── Initialize auth + reconcile post-checkout + boot the outbox ────────────
+  // ── Initialize auth + reconcile post-checkout ─────────────────────────────
   // F23: we NEVER declare success from the ?checkout=success URL alone (spoofable
   // + races the webhook). For account-bound products we verify the session
   // server-side, then poll the real entitlement (credit balance / profile tier)
@@ -187,9 +184,6 @@ export default function App() {
   useEffect(() => {
     initAuth();
     initOnboarding();
-    // Track K C3 — replay the durable persistence outbox from a prior (possibly
-    // dead) tab against the local payload cache, and arm background backoff.
-    initOutbox();
     let cancelled = false;
     import('./lib/stripe.js').then(async (stripeLib) => {
       const { checkCheckoutResult, fetchCreditBalance } = stripeLib;
@@ -304,9 +298,11 @@ export default function App() {
   }, [dossierClaimToast, setDossierClaimToast]);
 
   useEffect(() => {
-    if (!authLoading && authTier !== 'anon') {
-      loadCampaigns();
-    }
+    if (authLoading) return;
+    // Replay only after auth resolves; initOutbox also detaches synchronously on
+    // sign-out/account changes so one owner's payload can never drain as another.
+    initOutbox(authUserId);
+    if (authTier !== 'anon') loadCampaigns();
   }, [authLoading, authTier, authUserId, loadCampaigns]);
 
   // Refresh the credit balance on auth transitions (in-session sign-in/out). The
@@ -427,27 +423,15 @@ export default function App() {
     link.href = href;
   }, [view, wizardMode, hasSettlement]);
 
-  // ── Cloud sync custom content when user enters premium / elevated state ─────
-  // Triggers once per tier transition. Migrates local items on first premium
-  // sign-in (tracked via a user-scoped localStorage migration flag).
-  useEffect(() => {
-    if (authLoading) return;
-    // Cancellation guard: rapid tier transitions / remounts can start a second
-    // migrate→load chain before the first resolves, interleaving them so the
-    // displayed custom content reflects a stale snapshot. On cleanup we set
-    // ignore=true so a superseded chain bails before its load call.
-    let ignore = false;
-    const canSyncCloud = authTier === 'premium' || isElevated;
-    if (canSyncCloud) {
-      migrateLocalCustomContentToCloud()
-        .then(() => { if (!ignore) return loadCustomContentFromCloud(); })
-        .catch(err => { if (!ignore) console.error('Custom content cloud sync failed:', err); });
-    } else if (authTier === 'anon') {
-      // Sign-out: drop cloud cache, fall back to local (grandfathered) items
-      clearCloudCustomContent();
-    }
-    return () => { ignore = true; };
-  }, [authTier, authUserId, isElevated, authLoading, loadCustomContentFromCloud, migrateLocalCustomContentToCloud, clearCloudCustomContent]);
+  useCustomContentCloudSync({
+    authTier,
+    authUserId,
+    authLoading,
+    isElevated,
+    migrateLocalCustomContentToCloud,
+    loadCustomContentFromCloud,
+    clearCloudCustomContent,
+  });
 
   // Auto-dismiss onboarding nudge after 8s
   useEffect(() => {
@@ -490,9 +474,8 @@ export default function App() {
 
   // Nav is derived wholesale from routes.js (each ROUTES entry with a `nav` block).
   // Adding / relabelling / reordering a tab is a one-place edit in routes.js.
-  const visibleNav = NAV;
   const mobileNav = MOBILE_NAV_PRIORITY
-    .map(id => visibleNav.find(item => item.id === id))
+    .map(id => NAV.find(item => item.id === id))
     .filter(Boolean)
     .slice(0, 5);
 
@@ -587,7 +570,7 @@ export default function App() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                {visibleNav.map(({ id, label }) => {
+                {NAV.map(({ id, label }) => {
                   const active = view === id;
                   return (
                     <button
@@ -693,7 +676,7 @@ export default function App() {
             `position: sticky` for descendants (e.g. the wizard toolbar). Default
             `visible` keeps the window as the sole scroller and lets descendant
             sticky bars pin. */}
-        <main id="main-content" ref={mainRef} tabIndex={-1} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
+        <main id="main-content" ref={mainRef} tabIndex={-1} className={isMobile ? 'app-route-main app-route-main--mobile' : 'app-route-main'} style={{ flex: 1, outline: 'none', padding: isMobile ? `${SP.md}px ${SP.md}px 100px` : `${SP.lg}px ${SP.xxl}px` }}>
           {/* A lazy chunk-load failure (stale deploy, dropped connection) throws
               from inside Suspense. Without a boundary here that throw escapes to the
               root and white-screens the whole app. The boundary sits OUTSIDE
@@ -894,7 +877,7 @@ export default function App() {
       <CommandPaletteHost />
 
       <Suspense fallback={null}>
-        <FloatingAffordances visible={!AUTH_ROUTE_VIEWS.has(view)} />
+        <FloatingAffordances visible={allowsFloatingFeedback(view)} />
       </Suspense>
 
       {/* ── Checkout result notice ────────────────────────────────

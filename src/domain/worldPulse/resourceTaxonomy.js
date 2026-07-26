@@ -1,4 +1,21 @@
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import {
+  resourceKeyForLabel,
+  resourceSemanticsFor,
+} from '../resourceSemantics.js';
+
+/**
+ * @typedef {{
+ *   label?: string,
+ *   desc?: string,
+ *   category?: string,
+ *   commodities?: string[],
+ *   tradeGoods?: string[]
+ * }} TaxonomyResourceSpec
+ */
+const RESOURCE_CATALOG = /** @type {Record<string, TaxonomyResourceSpec>} */ (
+  RESOURCE_DATA
+);
 
 const RENEWABLE_PATTERNS = [
   /fish|fishing|river_fish/,
@@ -47,7 +64,38 @@ function magicLevelScore(settlement = {}) {
 /** @param {any} resource */
 export function classifyResource(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
+  const canonicalKey = resourceKeyForLabel(resource);
+  const spec = RESOURCE_CATALOG[canonicalKey || key] || {};
+  const semantics = resourceSemanticsFor(resource);
+  if (canonicalKey && semantics) {
+    const kind = semantics.type === 'renewable'
+      ? (spec.category === 'land' || spec.category === 'water' ? 'managed' : 'renewable')
+      : semantics.type === 'exhaustible'
+        ? (spec.category === 'special' ? 'strategic' : 'nonrenewable')
+        : semantics.type === 'magical'
+          ? 'magical'
+          : semantics.type === 'infrastructure'
+            ? 'infrastructure'
+            : 'strategic';
+    const renewability = semantics.type === 'renewable'
+      ? 'renewable'
+      : semantics.type === 'exhaustible'
+        ? 'exhaustible'
+        : semantics.type === 'magical'
+          ? 'conditional'
+          : semantics.type === 'infrastructure'
+            ? 'maintained'
+            : 'fixed';
+    return {
+      key: canonicalKey,
+      type: semantics.type,
+      kind,
+      renewability,
+      recoveryMode: semantics.recoveryMode,
+      randomDepletionEligible: semantics.randomDepletionEligible,
+      label: spec.label || String(resource || '').replace(/_/g, ' '),
+    };
+  }
   const text = textFor(resource);
   const magical = MAGICAL_PATTERNS.some(pattern => pattern.test(text));
   const nonrenewable = NONRENEWABLE_PATTERNS.some(pattern => pattern.test(text));
@@ -61,35 +109,43 @@ export function classifyResource(resource) {
   if (magical) {
     return {
       key,
+      type: 'magical',
       kind: 'magical',
       renewability: 'conditional',
       recoveryMode: 'requires_high_magic',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   if (nonrenewable && !renewable) {
     return {
       key,
+      type: 'exhaustible',
       kind: spec.category === 'special' ? 'strategic' : 'nonrenewable',
       renewability: 'exhaustible',
       recoveryMode: 'manual',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   if (spec.category === 'special' && !renewable) {
     return {
       key,
+      type: 'positional',
       kind: 'strategic',
       renewability: 'limited',
       recoveryMode: 'manual',
+      randomDepletionEligible: true,
       label: spec.label || String(resource || '').replace(/_/g, ' '),
     };
   }
   return {
     key,
+    type: 'renewable',
     kind: spec.category === 'land' || spec.category === 'water' ? 'managed' : 'renewable',
     renewability: 'renewable',
     recoveryMode: 'natural',
+    randomDepletionEligible: true,
     label: spec.label || String(resource || '').replace(/_/g, ' '),
   };
 }
@@ -113,6 +169,13 @@ export function canRecoverResource(resource, settlement, context = {}) {
       reason: canRecover
         ? 'High magic can re-stabilize this magical resource.'
         : 'Magical resource recovery requires high or pervasive magic.',
+    };
+  }
+  if (taxonomy.recoveryMode === 'not_applicable') {
+    return {
+      canRecover: false,
+      taxonomy,
+      reason: 'Positional resources and infrastructure do not organically deplete or recover.',
     };
   }
   // E4-2b: exhaustible / strategic resources ('manual' recoveryMode) have no

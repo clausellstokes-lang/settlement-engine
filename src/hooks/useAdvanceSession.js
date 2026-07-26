@@ -107,6 +107,11 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
       if (result && result.status === 'paused') {
         paused = true;
         setAdvanceSession({ phase: 'paused', ticksDone: result.ticksDone || 0, ticksTotal: result.ticksTotal || 0 });
+        // A parked interval is a decision, not a generic result. The established
+        // semantic address works in both Herald shells: legacy opens
+        // Adjudication, while the command brief maps it to Decisions and focuses
+        // the blocking workflow.
+        openInspectorAt('adjudication');
         return;
       }
       if (result && result.ok !== false) {
@@ -156,6 +161,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
       if (result && result.status === 'paused') {
         paused = true;
         setAdvanceSession({ phase: 'paused', ticksDone: result.ticksDone || 0, ticksTotal: result.ticksTotal || 0 });
+        openInspectorAt('adjudication');
         return;
       }
       if (result && result.ok === false) {

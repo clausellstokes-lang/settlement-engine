@@ -59,6 +59,43 @@ describe('storageCapacityMonths()', () => {
     expect(storageCapacityMonths(settlementWith({ institutions: [], tier: 'town' }))).toBe(2);
     expect(storageCapacityMonths(settlementWith({ institutions: [GRANARY, { name: 'Grist Mill' }], tier: 'town' }))).toBeCloseTo(6.3, 5);
   });
+
+  test('a current custom display name cannot acquire granary physics on a tick', () => {
+    const customInstitution = {
+      isCustom: true,
+      source: 'custom',
+      customDefinitionId: 'definition:institutions:pleasant-hall',
+      customDefinitionCategory: 'institutions',
+    };
+    const makeSettlement = name => settlementWith({
+      institutions: [{ ...customInstitution, name }],
+      foodSecurity: {
+        deficitPct: 0,
+        surplusPct: 40,
+        storageMonths: 1.95,
+        importDependency: 0,
+      },
+    });
+    const control = makeSettlement('Pleasant Hall');
+    const adversarial = makeSettlement('State Granary Mill');
+
+    expect(storageCapacityMonths(adversarial)).toBe(
+      storageCapacityMonths(control),
+    );
+
+    const controlTick = advanceFoodStockpile(control, {
+      interval: 'one_month',
+      tick: 1,
+    });
+    const adversarialTick = advanceFoodStockpile(adversarial, {
+      interval: 'one_month',
+      tick: 1,
+    });
+    expect(adversarialTick.summary).toEqual(controlTick.summary);
+    expect(adversarialTick.settlement.economicState.foodSecurity).toEqual(
+      controlTick.settlement.economicState.foodSecurity,
+    );
+  });
 });
 
 describe('advanceFoodStockpile()', () => {

@@ -144,28 +144,43 @@ describe('THE FORECAST — the realm\'s pending future (§10)', () => {
     const partyImpacted = campaignOf([]);
     partyImpacted.worldState.stressors = [{ id: 's1', type: 'under_siege', severity: 0.5 }];
     expect(forecastFingerprint(partyImpacted, 'one_month')).not.toBe(fp0);              // party impact (stressor add)
+
+    const severityChanged = campaignOf([]);
+    severityChanged.worldState.stressors = [{ id: 's1', type: 'under_siege', severity: 0.7 }];
+    const lowerSeverity = campaignOf([]);
+    lowerSeverity.worldState.stressors = [{ id: 's1', type: 'under_siege', severity: 0.2 }];
+    expect(forecastFingerprint(severityChanged, 'one_month'))
+      .not.toBe(forecastFingerprint(lowerSeverity, 'one_month'));                       // same-count content edit
+
+    const members = SAVES();
+    const editedMembers = SAVES();
+    editedMembers[0].settlement.population += 1;
+    expect(forecastFingerprint(base, 'one_month', editedMembers))
+      .not.toBe(forecastFingerprint(base, 'one_month', members));                       // member settlement edit
+    expect(forecastFingerprint(base, 'one_month', [...members].reverse()))
+      .toBe(forecastFingerprint(base, 'one_month', members));                           // save-array order is not state
   });
 
-  it('DRIFT GUARD: the component\'s inlined fingerprint twin is byte-identical source to the domain\'s', () => {
-    const domainSrc = readFileSync(join(process.cwd(), 'src/domain/worldPulse/forecastRun.js'), 'utf-8');
+  it('DRIFT GUARD: the component and simulator share one canonical fingerprint owner', () => {
+    const domainSrc = readFileSync(
+      join(process.cwd(), 'src/domain/worldPulse/forecastFingerprint.js'),
+      'utf-8',
+    );
+    const runnerSrc = readFileSync(
+      join(process.cwd(), 'src/domain/worldPulse/forecastRun.js'),
+      'utf-8',
+    );
     const uiSrc = readFileSync(join(process.cwd(), 'src/components/map/RealmForecast.jsx'), 'utf-8');
-    // The UI-form derivation expressions must appear verbatim in the UI twin.
-    for (const line of [
-      '`${q.queueId}@${q.queuedAt}`',
-      ".filter(p => p && p.status === 'pending').map(p => p.id).join('|')",
-      '`${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`',
-    ]) {
-      expect(uiSrc.includes(line), `UI twin missing: ${line}`).toBe(true);
-    }
-    // The world-revision fold (composer-realm-verbs-2) + the return template must
-    // appear VERBATIM in BOTH files — the twin cannot drift on the new fold.
-    for (const line of [
-      'Object.keys(ws.rulesetLog || {}).length',
-      '(ws.stressors || []).length',
-      '`${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`',
-    ]) {
-      expect(uiSrc.includes(line) && domainSrc.includes(line), `fingerprint twin drift on: ${line}`).toBe(true);
-    }
+
+    expect(uiSrc).toContain(
+      "import { forecastFingerprint } from '../../domain/worldPulse/forecastFingerprint.js';",
+    );
+    expect(runnerSrc).toContain(
+      "import { forecastFingerprint } from './forecastFingerprint.js';",
+    );
+    expect(domainSrc).toContain('export function forecastFingerprint(campaign, interval, saves = [])');
+    expect(uiSrc).not.toContain('const revision =');
+    expect(runnerSrc).not.toContain('const revision =');
   });
 
   it('THE DIGEST renders per-member, time-resolved, with pause markers', async () => {

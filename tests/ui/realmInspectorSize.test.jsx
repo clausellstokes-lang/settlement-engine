@@ -10,7 +10,14 @@
  *   - the hook persists + restores inspectorSize via sessionStorage.
  */
 import { describe, test, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, screen, cleanup, fireEvent, act } from '@testing-library/react';
+import {
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -24,6 +31,10 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import RealmInspector from '../../src/components/map/RealmInspector.jsx';
+import {
+  readHeraldCommandSession,
+  writeHeraldCommandSession,
+} from '../../src/components/map/heraldCommandSession.js';
 import { useRealmInspector } from '../../src/hooks/useRealmInspector.js';
 
 const baseProps = {
@@ -127,6 +138,53 @@ describe('RealmInspector — Esc', () => {
   });
 });
 
+describe('RealmInspector — settlement portrait handoff', () => {
+  test('restores exact scene context and clears it only when the GM dismisses it', async () => {
+    const campaign = { id: 'campaign-scene-context', worldState: {} };
+    writeHeraldCommandSession(campaign.id, {
+      open: true,
+      section: 'events',
+      sceneContext: {
+        action: 'inspect-scene-provenance',
+        settlementId: 'save-1',
+        sceneId: 'building:market',
+        entityKind: 'building',
+        label: 'The Covered Market',
+        canonicalRef: { kind: 'institution', id: 'market' },
+        provenanceRefs: ['provenance:region'],
+        provenance: [{
+          id: 'provenance:region',
+          effect: 'regional-grain',
+          family: 'region',
+          sourceRef: 'river terrace',
+        }],
+      },
+    });
+
+    render(
+      <RealmInspector
+        {...baseProps}
+        campaign={campaign}
+        canManageCampaigns
+        tier="premium"
+        section="events"
+        inspectorSize="default"
+        onSetSize={() => {}}
+      />,
+    );
+
+    expect(screen.getByRole('heading', { name: 'The Covered Market' })).toBeTruthy();
+    expect(screen.getByText('institution: market')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', {
+      name: 'Dismiss settlement portrait context',
+    }));
+    expect(screen.queryByTestId('herald-scene-context')).toBeNull();
+    await waitFor(() => {
+      expect(readHeraldCommandSession(campaign.id)?.sceneContext).toBeNull();
+    });
+  });
+});
+
 describe('useRealmInspector — size persistence', () => {
   const hookArgs = {
     canManageCampaigns: true,
@@ -174,5 +232,21 @@ describe('useRealmInspector — size persistence', () => {
     let hook;
     act(() => { render(<Probe onState={(h) => { hook = h; }} />); });
     expect(hook.inspectorSize).toBe('default');
+  });
+
+  test('restores the campaign-scoped open section after a route remount', () => {
+    let hook;
+    const first = render(<Probe onState={(h) => { hook = h; }} />);
+
+    act(() => {
+      hook.setInspectorOpen(true);
+      hook.setInspectorSection('trade');
+    });
+    first.unmount();
+
+    let restored;
+    render(<Probe onState={(h) => { restored = h; }} />);
+    expect(restored.inspectorOpen).toBe(true);
+    expect(restored.inspectorSection).toBe('trade');
   });
 });

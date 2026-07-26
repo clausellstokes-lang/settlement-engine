@@ -58,7 +58,24 @@ const storeState = {
   generateSettlement: vi.fn(),
   setPurchaseModalOpen: vi.fn(),
   applyCosmeticRename: vi.fn(),
-  setSavedSettlements: vi.fn(),
+  setSavedSettlements: vi.fn((rows, hydration = null) => {
+    if (
+      hydration
+      && (
+        storeState.savedSettlementsOwnerId !== hydration.ownerId
+        || storeState.savedSettlementsHydrationGeneration !== hydration.generation
+      )
+    ) return false;
+    storeState.savedSettlements = rows;
+    storeState.savedSettlementsLoaded = true;
+    return true;
+  }),
+  clearSavedSettlements: vi.fn((nextOwnerId = undefined) => {
+    storeState.savedSettlements = [];
+    storeState.savedSettlementsLoaded = false;
+    if (nextOwnerId !== undefined) storeState.savedSettlementsOwnerId = nextOwnerId;
+    storeState.savedSettlementsHydrationGeneration += 1;
+  }),
   // auth / gating (signed-out defaults, matching the real store)
   maxSaves: () => 0,
   canSave: () => false,
@@ -66,6 +83,9 @@ const storeState = {
   auth: { tier: 'anon', user: null },
   // library state
   savedSettlements: [],
+  savedSettlementsLoaded: false,
+  savedSettlementsOwnerId: null,
+  savedSettlementsHydrationGeneration: 0,
   selectedSettlementId: null,
   clearSelectedSettlementId: vi.fn(),
   // campaign slice

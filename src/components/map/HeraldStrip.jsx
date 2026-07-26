@@ -54,10 +54,10 @@ export default function HeraldStrip({ query, onQuery, focusId, focusName, onClea
             <IconButton onClick={() => onQuery('')} aria-label="Clear search" size="sm"><X size={12} /></IconButton>
           )}
         </div>
-        <IconButton onClick={onToggleAttention} aria-pressed={attentionOn} active={attentionOn} title="Only what needs a decision now" size="sm">
+        <IconButton onClick={onToggleAttention} aria-pressed={attentionOn} aria-label="Only what needs a decision now" active={attentionOn} size="sm">
           <AlertTriangle size={12} /> Attention
         </IconButton>
-        <IconButton onClick={onToggleFilters} aria-pressed={showFilters} active={showFilters} title="Facet filters" size="sm">
+        <IconButton onClick={onToggleFilters} aria-pressed={showFilters} aria-label="Facet filters" active={showFilters} size="sm">
           <SlidersHorizontal size={12} /> Filters{activeFilterCount ? ` (${activeFilterCount})` : ''}
         </IconButton>
       </div>

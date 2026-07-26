@@ -28,16 +28,15 @@ afterEach(() => cleanup());
 const PROOF_VOCAB = /\b(certified|proven|proof|guaranteed|soaked|byte-for-byte|endur\w*)\b/i;
 
 describe('WorldCertificationPanel — inert-honest pending', () => {
-  it('renders the Pending badge and the scheduled headline', () => {
+  it('renders the Pending badge and the incomplete headline', () => {
     render(<WorldCertificationPanel />);
     expect(screen.getByTestId('certification-status').textContent).toBe('Pending');
-    expect(screen.getByText(/hundred-year proving is scheduled/i)).toBeTruthy();
+    expect(screen.getByText(/long-horizon proving is not yet complete/i)).toBeTruthy();
   });
 
   it('the rendered DOM states no number and no proof vocabulary', () => {
     const { container } = render(<WorldCertificationPanel />);
     const text = container.textContent || '';
-    // "hundred-year" is a word, not a numeral; assert no DIGITS reach the DOM.
     expect(/\d/.test(text), `pending panel rendered a number: "${text}"`).toBe(false);
     expect(PROOF_VOCAB.test(text), `pending panel used proof vocabulary: "${text}"`).toBe(false);
   });

@@ -27,11 +27,10 @@
  * function as `fallback`, so the store slice keeps its "no top-level worldPulse
  * edge" invariant (the sim still enters only via the slice's lazy loadWorldPulse).
  *
- * One worker per advance, terminated on completion. Reusing a singleton would let
- * two concurrent advances of different campaigns (the advanceInFlight guard is
- * per-campaign) race on the worker's setCustomContentSource global; a fresh
- * worker per request isolates each advance's custom-content snapshot. Its spin-up
- * cost is off the main thread.
+ * One worker per advance, terminated on completion. The pinned custom-content
+ * projection is passed as request data and scoped around each synchronous kernel
+ * tick; it is never installed as mutable worker-global library state. A fresh
+ * worker still gives each interval an isolated liveness/error lifecycle.
  */
 
 // Mirror of ADVANCE_PROGRESS_EVENT (src/domain/worldPulse/advanceInterval.js) —
@@ -45,17 +44,41 @@ const TICK_WATCHDOG_MS = 30000;
 
 /**
  * Run a multi-tick advance in a Web Worker, or fall back to the in-thread function.
- * @param {any} payload - {campaign, saves, interval, commit, now, autoResolve, resume}
+ * @param {any} payload - {campaign, saves, interval, commit, now,
+ *   autoResolve, resume, customContent?}
  * @param {{ fallback:(p:any)=>(Promise<any>|any), customContent?:any, onProgress?:(d:any)=>void }} opts
  * @returns {Promise<any>} the composed advance result (same shape either path)
  */
 export async function runAdvanceInterval(payload, { fallback, customContent, onProgress }) {
-  if (typeof Worker === 'undefined') return fallback(payload); // Node / vitest / SSR
+  // `customContent` has a dedicated worker-protocol field so it cannot be
+  // installed as mutable worker-global state. The in-thread function has no
+  // transport envelope, however: preserve its established payload object
+  // exactly unless the caller supplied an explicit projection that the payload
+  // does not already carry. This keeps Node/SSR and transport-recovery calls
+  // byte-equivalent to a direct domain invocation.
+  const payloadCustomContent = payload != null && typeof payload === 'object'
+    ? payload.customContent
+    : undefined;
+  const hasCustomContentOverride = customContent !== undefined;
+  const pinnedCustomContent = hasCustomContentOverride
+    ? customContent
+    : payloadCustomContent;
+  const fallbackPayload = (
+    !hasCustomContentOverride
+    || payloadCustomContent === customContent
+  )
+    ? payload
+    : { ...(payload || {}), customContent };
+  const workerPayload = { ...(payload || {}) };
+  delete workerPayload.customContent;
+  if (typeof Worker === 'undefined') {
+    return fallback(fallbackPayload); // Node / vitest / SSR
+  }
   let worker;
   try {
     worker = new Worker(new URL('../workers/advanceInterval.worker.js', import.meta.url), { type: 'module' });
   } catch {
-    return fallback(payload); // worker construction blocked (CSP / unsupported) → sync
+    return fallback(fallbackPayload); // worker construction blocked (CSP / unsupported) → sync
   }
   return new Promise((resolve, reject) => {
     let watchdog;
@@ -84,7 +107,7 @@ export async function runAdvanceInterval(payload, { fallback, customContent, onP
       if (settled) return;
       settled = true;
       cleanup();
-      Promise.resolve().then(() => fallback(payload)).then(resolve, reject);
+      Promise.resolve().then(() => fallback(fallbackPayload)).then(resolve, reject);
     };
     const arm = () => {
       clearTimeout(watchdog);
@@ -107,6 +130,9 @@ export async function runAdvanceInterval(payload, { fallback, customContent, onP
     worker.onerror = failTransport;
     worker.onmessageerror = failTransport;
     arm();
-    worker.postMessage({ payload, customContent });
+    worker.postMessage({
+      payload: workerPayload,
+      customContent: pinnedCustomContent,
+    });
   });
 }

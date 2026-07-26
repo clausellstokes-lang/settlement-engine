@@ -14,14 +14,14 @@
  * world is byte-identical (dormancy: no ops used ⇒ no declared facets ⇒ every
  * read falls through to today's inference).
  *
- * ── WHY A ZERO-DRIFT MIRROR (not a re-export) ───────────────────────────────
+ * ── WHY A SHARED ZERO-IMPORT CONTRACT ──────────────────────────────────────
  * The engine's native vocabularies (ALIGNMENTS/GOALS in worldPulse/npcAgency.js;
- * the positive-trait TEMPERAMENT pool in data/npcData.js; the role archetypes)
- * are module-private or eager. The bank MIRRORS them as its own frozen lists so
- * it stays a lazy, zero-import-except-the-chokepoint leaf — the guidanceRegistry
- * pattern. The mirror is kept honest by pins in tests/domain/npc/npcBank.test.js
- * (the temperament pool is asserted === data/npcData's positive traits; the
- * alignment/goal vocab is asserted to COVER every value the engine can seed).
+ * the positive-trait TEMPERAMENT pool in data/npcData.js; and role archetypes)
+ * are module-private or heavy. `npcFacetContract.js` owns the frozen transport
+ * vocabulary and membership checks without importing npcOps, PRNG, or inference
+ * machinery. This richer bank re-exports that one source and layers facet-law
+ * reads, transition edges, and role compatibility over it. Parity pins still
+ * assert that the shared vocabulary covers every value the engine can seed.
  *
  * ── OWNER CORRECTION (§1, binding) ──────────────────────────────────────────
  * Goal EVOLUTION already exists for engine NPCs (achieve = npcGoalCulmination
@@ -37,92 +37,25 @@
  */
 
 import { facetOf } from '../spatial/cohesionWeave.js';
+import {
+  NPC_GOAL_CATALOG,
+  isBankValid,
+} from './npcFacetContract.js';
+export {
+  NPC_ALIGNMENTS,
+  NPC_FACET_KINDS,
+  NPC_GOAL_CATALOG,
+  NPC_GOALS,
+  NPC_ROLE_ARCHETYPES,
+  NPC_TEMPERAMENTS,
+  bankVocabulary,
+  isBankValid,
+  validateNpcFacet,
+} from './npcFacetContract.js';
 
 /** The NPC fields the bank reads (only these — declared over inferred).
  * @typedef {{ personality?: Record<string, unknown>, role?: string, category?: string,
  *   goal?: Record<string, unknown>, facets?: unknown, tags?: unknown }} BankNpc */
-
-// ── §1.1 The bounded attribute vocabularies (mirrors of the engine's native words) ──
-
-/** Alignment axes — mirrors worldPulse/npcAgency.js ALIGNMENTS (the law×good grid).
- *  @type {readonly string[]} */
-export const NPC_ALIGNMENTS = Object.freeze([
-  'lawful_good', 'neutral_good', 'lawful_neutral', 'true_neutral',
-  'chaotic_neutral', 'lawful_evil', 'neutral_evil', 'chaotic_evil',
-]);
-
-/** Temperament — the steady positive-trait disposition (npc.personality.dominant).
- *  Mirrors data/npcData.js NPC_PERSONALITY_TRAITS.positive; pinned === that pool so
- *  an instant NPC's temperament is drawn from the exact same vocabulary a generated
- *  one is (the counterpart criterion). @type {readonly string[]} */
-export const NPC_TEMPERAMENTS = Object.freeze([
-  'honest', 'brave', 'compassionate', 'wise', 'loyal', 'generous', 'patient',
-  'humble', 'diligent', 'fair-minded', 'optimistic', 'charismatic', 'clever',
-  'principled', 'protective', 'diplomatic', 'resourceful', 'scholarly', 'pious',
-  'merciful', 'tenacious', 'methodical', 'intuitive', 'perceptive', 'steadfast',
-  'magnanimous', 'incorruptible', 'warm-hearted', 'level-headed', 'forthright',
-  // CONTENT-GT-FINAL (Charge 3): +15, the EXACT lockstep mirror of the
-  // NPC_PERSONALITY_TRAITS.positive growth (same entries, same order) — the
-  // counterpart pin in tests/domain/npc/npcBank.test.js enforces equality.
-  'prudent', 'candid', 'gracious', 'stalwart', 'discerning', 'equitable',
-  'temperate', 'courteous', 'dependable', 'astute', 'conscientious',
-  'good-humoured', 'unflappable', 'plain-dealing', 'hospitable',
-]);
-
-/** Role archetype — the 12 agency archetypes (worldPulse/npcAgency inferRoleArchetype
- *  maps an NPC's role/label/title text to one of these). The bank's role facet is the
- *  archetype so an edited role re-flows through inferRoleArchetype on the next tick.
- *  @type {readonly string[]} */
-export const NPC_ROLE_ARCHETYPES = Object.freeze([
-  'ruler', 'heir', 'military', 'merchant', 'religious', 'criminal', 'arcane',
-  'civic', 'healer', 'labor_resource', 'diplomat_outsider', 'dissident',
-]);
-
-// ── §1.2 THE TYPED GOAL CATALOG WITH TRANSITION SEMANTICS ────────────────────
-//
-// Each goal carries its on-ACHIEVE successor candidates and on-FAIL fallbacks,
-// all bank-bounded. This is the declarative articulation of the engine's evolution:
-//   • ACHIEVE mirrors npcGoalCulmination (a long ambition pays off; the NPC is
-//     promoted) → a higher-reach successor.
-//   • FAIL mirrors the demotion/crisis arm of branchedGoals (a setback) → a
-//     defensive fallback.
-// Every value below is in the engine's own goal vocabulary (GOALS ∪ the
-// branchedGoals targets), so a chain declared here is one the engine can seed,
-// read (settlementPolitics deriveEnd's GOAL_END_HINT), and evolve.
-
-/** @typedef {{ onAchieve: readonly string[], onFail: readonly string[], drive: string }} GoalTransitions */
-
-/** @type {Readonly<Record<string, GoalTransitions>>} */
-export const NPC_GOAL_CATALOG = Object.freeze({
-  // ── The base ten (npcAgency GOALS) ──
-  secure_office:          { onAchieve: ['control_institution', 'expand_influence'], onFail: ['win_public_legitimacy', 'survive_crisis'], drive: 'political' },
-  protect_followers:      { onAchieve: ['restore_order', 'win_public_legitimacy'],  onFail: ['survive_crisis', 'protect_followers'],       drive: 'protection' },
-  expand_influence:       { onAchieve: ['control_institution', 'bind_external_patron'], onFail: ['settle_rivalry', 'survive_crisis'],       drive: 'power' },
-  settle_rivalry:         { onAchieve: ['consolidate_power', 'expand_influence'],    onFail: ['mobilize_defenses', 'survive_crisis'],       drive: 'political' },
-  restore_order:          { onAchieve: ['win_public_legitimacy', 'secure_office'],   onFail: ['protect_followers', 'survive_crisis'],       drive: 'reform' },
-  profit_from_change:     { onAchieve: ['expand_trade_house', 'expand_influence'],   onFail: ['survive_tribute', 'survive_crisis'],         drive: 'wealth' },
-  control_institution:    { onAchieve: ['consolidate_power', 'secure_office'],       onFail: ['expand_influence', 'settle_rivalry'],        drive: 'power' },
-  win_public_legitimacy:  { onAchieve: ['secure_office', 'formalize_new_charter'],   onFail: ['protect_followers', 'restore_order'],        drive: 'political' },
-  bind_external_patron:   { onAchieve: ['secure_tribute', 'expand_influence'],       onFail: ['survive_tribute', 'organize_autonomy'],      drive: 'political' },
-  survive_crisis:         { onAchieve: ['restore_order', 'protect_followers'],       onFail: ['survive_crisis', 'survive_tribute'],         drive: 'protection' },
-  // ── Context/branch targets (branchedGoals) — bank-bounded, engine-evolvable ──
-  organize_autonomy:      { onAchieve: ['break_vassalage', 'win_public_legitimacy'], onFail: ['survive_tribute', 'protect_followers'],      drive: 'political' },
-  break_vassalage:        { onAchieve: ['secure_office', 'consolidate_power'],       onFail: ['survive_tribute', 'organize_autonomy'],      drive: 'political' },
-  survive_tribute:        { onAchieve: ['bind_external_patron', 'organize_autonomy'], onFail: ['survive_crisis', 'survive_tribute'],        drive: 'protection' },
-  secure_tribute:         { onAchieve: ['expand_influence', 'consolidate_power'],    onFail: ['settle_rivalry', 'survive_crisis'],          drive: 'wealth' },
-  exploit_desperation:    { onAchieve: ['expand_influence', 'consolidate_power'],    onFail: ['punish_rivals', 'survive_crisis'],           drive: 'power' },
-  join_guild:             { onAchieve: ['expand_trade_house', 'profit_from_change'], onFail: ['profit_from_change', 'survive_tribute'],     drive: 'wealth' },
-  expand_trade_house:     { onAchieve: ['consolidate_power', 'expand_influence'],    onFail: ['profit_from_change', 'survive_crisis'],      drive: 'wealth' },
-  secure_new_garrison:    { onAchieve: ['professionalize_guard', 'restore_order'],   onFail: ['mobilize_defenses', 'survive_crisis'],       drive: 'military' },
-  professionalize_guard:  { onAchieve: ['restore_order', 'consolidate_power'],       onFail: ['mobilize_defenses', 'protect_followers'],    drive: 'military' },
-  formalize_new_charter:  { onAchieve: ['secure_office', 'control_institution'],     onFail: ['win_public_legitimacy', 'restore_order'],    drive: 'political' },
-  punish_rivals:          { onAchieve: ['consolidate_power', 'settle_rivalry'],      onFail: ['exploit_desperation', 'survive_crisis'],     drive: 'political' },
-  mobilize_defenses:      { onAchieve: ['settle_rivalry', 'professionalize_guard'],  onFail: ['survive_crisis', 'protect_followers'],       drive: 'military' },
-  consolidate_power:      { onAchieve: ['control_institution', 'secure_office'],     onFail: ['settle_rivalry', 'survive_crisis'],          drive: 'power' },
-});
-
-/** The bounded goal vocabulary (the catalog's keys). @type {readonly string[]} */
-export const NPC_GOALS = Object.freeze(Object.keys(NPC_GOAL_CATALOG));
 
 /** The goals the base engine seeds from (worldPulse/npcAgency GOALS). Instant/added
  *  NPCs default their chain from these so their prose goal reads like a generated one.
@@ -177,24 +110,6 @@ export const ROLE_INSTITUTION_NATURE = Object.freeze({
 
 // ── §1.5 THE FACET-LAW READ for NPCs ────────────────────────────────────────
 //
-// The bounded facet kinds a bank op may set. Each resolves through the ONE
-// facet-law chokepoint (declared over inferred).
-
-/** The bank facet kinds. @type {readonly string[]} */
-export const NPC_FACET_KINDS = Object.freeze(['alignment', 'temperament', 'role', 'goal']);
-
-/** The bounded vocabulary for a facet kind, or null for a free-shape kind.
- *  @param {string} facetKind @returns {readonly string[]|null} */
-export function bankVocabulary(facetKind) {
-  switch (facetKind) {
-    case 'alignment':   return NPC_ALIGNMENTS;
-    case 'temperament': return NPC_TEMPERAMENTS;
-    case 'role':        return NPC_ROLE_ARCHETYPES;
-    case 'goal':        return NPC_GOALS;
-    default:            return null;
-  }
-}
-
 /** Keyword-inference fallback for an NPC facet, reading the NPC's own native fields
  *  (the "absent declaration ⇒ generated/inferred value" arm). Pure, total.
  *  @param {BankNpc} npc @param {string} facetKind @returns {string|null} */
@@ -235,32 +150,6 @@ export function npcFacetOf(npc, facetKind) {
   const declared = facetOf(npc, facetKind);
   if (declared != null) return declared;
   return inferNpcFacet(npc, facetKind);
-}
-
-// ── §1.6 Validation (the bank is the validation source; free-text is rejected) ──
-
-/** Is `value` a legal member of the bank vocabulary for `facetKind`? Free-text and
- *  unknown kinds are rejected. @param {string} facetKind @param {unknown} value */
-export function isBankValid(facetKind, value) {
-  const vocab = bankVocabulary(facetKind);
-  if (!vocab) return false;
-  return typeof value === 'string' && vocab.includes(value);
-}
-
-/**
- * Validate a proposed NPC facet edit. Returns { ok, reason } — the op layer refuses
- * anything not ok, so a hand-typed string can never enter the queue.
- * @param {string} facetKind @param {unknown} value
- * @returns {{ ok: boolean, reason: string|null }}
- */
-export function validateNpcFacet(facetKind, value) {
-  if (!NPC_FACET_KINDS.includes(facetKind)) {
-    return { ok: false, reason: `unknown facet kind "${String(facetKind)}"` };
-  }
-  if (!isBankValid(facetKind, value)) {
-    return { ok: false, reason: `"${String(value)}" is not a bank-valid ${facetKind}` };
-  }
-  return { ok: true, reason: null };
 }
 
 // ── §1.7 Goal-chain helpers (creation + transition articulation) ─────────────

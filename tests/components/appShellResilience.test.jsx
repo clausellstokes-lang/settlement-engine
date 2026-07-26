@@ -19,6 +19,8 @@
  */
 
 import React from 'react';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
@@ -216,5 +218,24 @@ describe('(3) onboarding nudge dismiss prevents default on Space', () => {
     const enterNotPrevented = fireEvent.keyDown(toast, { key: 'Enter', code: 'Enter' });
     expect(clearOnboardingNudge).toHaveBeenCalledTimes(1);
     expect(enterNotPrevented).toBe(false);
+  });
+});
+
+describe('(4) lazy route loading keeps the footer outside the first viewport', () => {
+  test('the route main wires the shell reserve and its CSS has vh + svh floors', () => {
+    const { container } = render(<App />);
+    const main = container.querySelector('main#main-content');
+    expect(main?.classList.contains('app-route-main')).toBe(true);
+
+    const css = readFileSync(join(process.cwd(), 'src/index.css'), 'utf8');
+    expect(css).toMatch(
+      /\.app-route-main\s*\{[^}]*--app-shell-header-reserve:\s*72px;[^}]*min-height:\s*calc\(100vh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
+    );
+    expect(css).toMatch(
+      /\.app-route-main--mobile\s*\{[^}]*--app-shell-header-reserve:\s*56px/s,
+    );
+    expect(css).toMatch(
+      /@supports\s*\(height:\s*100svh\)[\s\S]*?\.app-route-main\s*\{[^}]*min-height:\s*calc\(100svh\s*-\s*var\(--app-shell-header-reserve,\s*72px\)\)/s,
+    );
   });
 });

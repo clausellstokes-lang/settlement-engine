@@ -9,14 +9,13 @@
  * there is nothing to over-claim.
  *
  * ── HOW THE OWNER LIGHTS IT (the write path) ──────────────────────────────────
- * When a soak (scripts/audit/whole-world-soak.mjs, run --json over a config band
- * across seeds) completes, it appends a validated band here:
+ * When the maintained realm-scale runner completes, an operator may append a
+ * validated band here:
  *   { bandId, presetId, status: 'certified', soak: { years, seedsTested,
- *     ticksAdvanced, properties: [<subset of SOAK_PROPERTY_KEYS>], runAt, buildHash } }
+ *     ticksAdvanced, properties: [<all required property keys>], runAt, buildHash } }
  * and sets generatedAt. validateCertificationManifest MUST pass before commit
- * (the schema wall). A 'pending' band (soak:null) records a scheduled-but-unproven
- * config band explicitly. This module is a pure data leaf: adding a band is the
- * only edit; no consumer code changes.
+ * (the schema wall). A `measured` band records an honest partial result; a
+ * `pending` band (soak:null) records an unproven config band explicitly.
  *
  * Pure data. Imported ONLY by the lazy certification read/panel — never eager.
  */

@@ -160,7 +160,7 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
       </div>
 
       {atWar.length > 0 && (
-        <Section title="At war" count={atWar.length}>
+        <Section heading="At war" count={atWar.length}>
           <div style={{ display: 'grid', gap: 8 }}>
             {atWar.map(sig => <SettlementCard key={sig.id} sig={sig} nameById={nameById} />)}
           </div>
@@ -168,7 +168,7 @@ export default function WarResolveSection({ campaign, saves = [], nameById }) {
       )}
 
       {atPeace.length > 0 && (
-        <Section title="At peace" count={atPeace.length}>
+        <Section heading="At peace" count={atPeace.length}>
           <div style={{ display: 'grid', gap: 6 }}>
             {atPeace.map(sig => (
               <div key={sig.id} style={{

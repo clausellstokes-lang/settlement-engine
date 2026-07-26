@@ -72,10 +72,10 @@ const FAMINE_CFG = {
 // ONE GENERATION-stamped famine condition (severity 0.65, expires at 10).
 const FAMINE_SEED = 'ec-famine-1';
 
-// Probed: BASE_CFG + this seed ORGANICALLY rolls monster_pressure (bare
+// Re-probed after named generation substreams: BASE_CFG + this seed ORGANICALLY rolls monster_pressure (bare
 // object container) and promotes the war_pressure condition — the hardest
 // resolution case: the same seed re-rolls that exact stressor back.
-const ORG_SEED = 'org-7';
+const ORG_SEED = 'org-28';
 
 const SIEGE_CFG = {
   ...BASE_CFG,

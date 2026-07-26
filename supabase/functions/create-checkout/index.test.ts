@@ -39,11 +39,16 @@ const { handleCreateCheckout } = await import('./index.ts');
 function makeStripe() {
   const created: Array<Record<string, unknown>> = [];
   const customers: Array<Record<string, unknown>> = [];
+  const deletedCustomers: string[] = [];
   const stripeClient = {
     customers: {
       create: (params: Record<string, unknown>) => {
         customers.push(params);
         return Promise.resolve({ id: 'cus_stub' });
+      },
+      del: (id: string) => {
+        deletedCustomers.push(id);
+        return Promise.resolve({ id, deleted: true });
       },
     },
     checkout: {
@@ -56,7 +61,7 @@ function makeStripe() {
     },
   };
   // deno-lint-ignore no-explicit-any
-  return { created, customers, stripeClient: stripeClient as any };
+  return { created, customers, deletedCustomers, stripeClient: stripeClient as any };
 }
 
 /** supabase user-client stub: getUser() returns the given user (the verified JWT). */
@@ -74,11 +79,23 @@ function makeUserClient(user: { id: string; email?: string | null } | null, auth
 
 /** Admin stub: profile read returns an existing stripe_customer_id by default;
  *  rpc('founder_seats_taken') resolves the given seat count (default: plenty free). */
-function makeAdminClient(customerId: string | null = 'cus_existing', seatsTaken: number | null = 0) {
+function makeAdminClient(
+  customerId: string | null = 'cus_existing',
+  seatsTaken: number | null = 0,
+  inactive = false,
+) {
   // deno-lint-ignore no-explicit-any
   return (): any => ({
     from: (_t: string) => ({
-      select: () => ({ eq: () => ({ single: () => Promise.resolve({ data: { stripe_customer_id: customerId }, error: null }) }) }),
+      select: () => ({ eq: () => ({ single: () => Promise.resolve({
+        data: {
+          stripe_customer_id: customerId,
+          banned_at: null,
+          disabled_at: null,
+          deleted_at: inactive ? '2026-07-24T00:00:00.000Z' : null,
+        },
+        error: null,
+      }) }) }),
       update: () => ({ eq: () => Promise.resolve({ error: null }) }),
     }),
     rpc: (fn: string) => Promise.resolve(
@@ -140,6 +157,22 @@ Deno.test('a non-anonymous product with NO auth header is rejected (400) before 
     { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1' }), adminClient: makeAdminClient() },
   );
   assertEquals(res.status, 400);
+  assertEquals(stripe.created.length, 0);
+});
+
+Deno.test('an inactive account is rejected before any Stripe billing side effect', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }),
+      adminClient: makeAdminClient('cus_existing', 0, true),
+    },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(await res.json(), { error: 'account_inactive' });
+  assertEquals(stripe.customers.length, 0);
   assertEquals(stripe.created.length, 0);
 });
 
@@ -609,6 +642,10 @@ Deno.test('savePaymentMethod is ignored on a SUBSCRIPTION product (payment_inten
   );
   assertEquals(stripe.created[0].mode, 'subscription');
   assertEquals('payment_intent_data' in stripe.created[0], false);
+  assertEquals(
+    stripe.created[0].subscription_data,
+    { metadata: { supabase_user_id: 'u1', product: 'premium' } },
+  );
 });
 
 Deno.test('savePaymentMethod is ignored for an ANONYMOUS buyer (no signed-in user)', async () => {
@@ -642,6 +679,10 @@ Deno.test('surveyor creates a SUBSCRIPTION-mode checkout session for a signed-in
   assertEquals(stripe.created[0].mode, 'subscription');
   assertEquals((stripe.created[0].metadata as Record<string, string>).product, 'surveyor');
   assertEquals((stripe.created[0].metadata as Record<string, string>).credits, '0');
+  assertEquals(
+    stripe.created[0].subscription_data,
+    { metadata: { supabase_user_id: 'u1', product: 'surveyor' } },
+  );
   // subscription mode never attaches payment_intent_data (savePaymentMethod ignored).
   assertEquals('payment_intent_data' in stripe.created[0], false);
 });

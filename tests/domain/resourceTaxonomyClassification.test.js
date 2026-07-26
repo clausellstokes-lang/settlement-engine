@@ -1,14 +1,13 @@
 /**
  * resourceTaxonomyClassification.test.js — the classification pin.
  *
- * classifyResource() sorts every RESOURCE_DATA entry into a fiction kind and a
- * recoveryMode by regex over its key + label + desc + category + trade goods.
- * recoveryMode is load-bearing: the lit resource_depletion/recovery drift
+ * classifyResource() projects every RESOURCE_DATA entry from the explicit
+ * RESOURCE_SEMANTICS catalog. The fallback regex remains only for legacy/custom
+ * unknown values. recoveryMode is load-bearing: the lit resource drift
  * (tierResourceDynamics, rules.resourceDriftEnabled) and W-DISCOVERY's permanent
  * removal (resourceDynamicsKernel — removal fires only on recoveryMode 'manual')
- * both key off it. A substring collision in the regexes therefore mis-drives the
- * engine: it was mis-classifying grain fields (magical, via "bar[ley]") and coal
- * seams (renewable, via a stray 'timber' commodity) until 2026-07-15.
+ * both key off it. randomDepletionEligible separately prevents fixed positions
+ * and infrastructure from being consumed by settlement-size pressure.
  *
  * EXPECTED is hand-checked against each resource's real-world fiction and is the
  * pin: every catalog key must classify to its entry, and a NEW resource must
@@ -21,62 +20,101 @@ import { describe, it, expect } from 'vitest';
 import { classifyResource } from '../../src/domain/worldPulse/resourceTaxonomy.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
 
-/** @type {Record<string, { kind: string, renewability: string, recoveryMode: string }>} */
+const MANAGED_RENEWABLE = Object.freeze({
+  type: 'renewable',
+  kind: 'managed',
+  renewability: 'renewable',
+  recoveryMode: 'natural',
+  randomDepletionEligible: true,
+});
+const SPECIAL_RENEWABLE = Object.freeze({
+  ...MANAGED_RENEWABLE,
+  kind: 'renewable',
+});
+const EXHAUSTIBLE = Object.freeze({
+  type: 'exhaustible',
+  kind: 'nonrenewable',
+  renewability: 'exhaustible',
+  recoveryMode: 'manual',
+  randomDepletionEligible: true,
+});
+const EXHAUSTIBLE_SITE = Object.freeze({
+  ...EXHAUSTIBLE,
+  kind: 'strategic',
+});
+const POSITIONAL = Object.freeze({
+  type: 'positional',
+  kind: 'strategic',
+  renewability: 'fixed',
+  recoveryMode: 'not_applicable',
+  randomDepletionEligible: false,
+});
+const INFRASTRUCTURE = Object.freeze({
+  type: 'infrastructure',
+  kind: 'infrastructure',
+  renewability: 'maintained',
+  recoveryMode: 'not_applicable',
+  randomDepletionEligible: false,
+});
+const MAGICAL = Object.freeze({
+  type: 'magical',
+  kind: 'magical',
+  renewability: 'conditional',
+  recoveryMode: 'requires_high_magic',
+  randomDepletionEligible: true,
+});
+
+/** @type {Record<string, typeof MANAGED_RENEWABLE>} */
 const EXPECTED = {
-  // Water/land renewables that recover naturally when pressure drops.
-  fishing_grounds: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  deep_harbour: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  shipbuilding_timber: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  river_mills: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  fertile_floodplain: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  river_fish: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  hunting_grounds: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  managed_forest: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  foraging_areas: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  grazing_land: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  marshlands: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  date_palms: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  camel_herds: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  alpine_pasture: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  mountain_timber: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
-  // FIXED (2026-07-15): open farmland recovers naturally. Was 'magical' because the
-  // desc "wheat, barley, and oats" tripped the unanchored 'ley' magical pattern.
-  grain_fields: { kind: 'managed', renewability: 'renewable', recoveryMode: 'natural' },
+  fishing_grounds: MANAGED_RENEWABLE,
+  shipbuilding_timber: MANAGED_RENEWABLE,
+  fertile_floodplain: MANAGED_RENEWABLE,
+  river_fish: MANAGED_RENEWABLE,
+  hunting_grounds: MANAGED_RENEWABLE,
+  managed_forest: MANAGED_RENEWABLE,
+  foraging_areas: MANAGED_RENEWABLE,
+  grain_fields: MANAGED_RENEWABLE,
+  grazing_land: MANAGED_RENEWABLE,
+  marshlands: MANAGED_RENEWABLE,
+  date_palms: MANAGED_RENEWABLE,
+  camel_herds: MANAGED_RENEWABLE,
+  alpine_pasture: MANAGED_RENEWABLE,
+  mountain_timber: MANAGED_RENEWABLE,
+  ancient_grove: SPECIAL_RENEWABLE,
 
-  // 'special'/other renewables — kept 'renewable' (not 'managed') by category.
-  ancient_grove: { kind: 'renewable', renewability: 'renewable', recoveryMode: 'natural' },
-  hot_springs: { kind: 'renewable', renewability: 'renewable', recoveryMode: 'natural' },
-  oasis_water: { kind: 'renewable', renewability: 'renewable', recoveryMode: 'natural' },
-  hot_springs_mineral: { kind: 'renewable', renewability: 'renewable', recoveryMode: 'natural' },
+  salt_flats: EXHAUSTIBLE,
+  river_clay: EXHAUSTIBLE,
+  iron_deposits: EXHAUSTIBLE,
+  stone_quarry: EXHAUSTIBLE,
+  precious_metals: EXHAUSTIBLE,
+  gemstone_deposits: EXHAUSTIBLE,
+  coal_deposits: EXHAUSTIBLE,
+  glass_sand: EXHAUSTIBLE,
+  desert_salt: EXHAUSTIBLE,
+  ancient_ruins: EXHAUSTIBLE_SITE,
 
-  // Exhaustible seams — manual recovery, and removable once dwelled depleted.
-  salt_flats: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  river_clay: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  iron_deposits: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  stone_quarry: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  precious_metals: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  gemstone_deposits: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  glass_sand: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  desert_salt: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
-  // FIXED (2026-07-15): a coal/peat seam is exhaustible. Was 'renewable' because its
-  // stray 'timber' commodity tripped the renewable pattern; the subterranean category
-  // now suppresses that incidental match.
-  coal_deposits: { kind: 'nonrenewable', renewability: 'exhaustible', recoveryMode: 'manual' },
+  deep_harbour: POSITIONAL,
+  crossroads_position: POSITIONAL,
+  hot_springs: POSITIONAL,
+  defended_pass: POSITIONAL,
+  oasis_water: POSITIONAL,
+  hot_springs_mineral: POSITIONAL,
+  river_mills: INFRASTRUCTURE,
 
-  // Strategic sites — finite, manual recovery.
-  crossroads_position: { kind: 'strategic', renewability: 'limited', recoveryMode: 'manual' },
-  ancient_ruins: { kind: 'strategic', renewability: 'exhaustible', recoveryMode: 'manual' },
-  defended_pass: { kind: 'strategic', renewability: 'limited', recoveryMode: 'manual' },
-
-  // Magical — recovers only under high magic.
-  magical_node: { kind: 'magical', renewability: 'conditional', recoveryMode: 'requires_high_magic' },
+  magical_node: MAGICAL,
 };
 
 describe('resource taxonomy classification pin', () => {
   it('every catalog resource classifies to its hand-checked table entry', () => {
     for (const [key, want] of Object.entries(EXPECTED)) {
       const got = classifyResource(key);
-      expect({ kind: got.kind, renewability: got.renewability, recoveryMode: got.recoveryMode },
+      expect({
+        type: got.type,
+        kind: got.kind,
+        renewability: got.renewability,
+        recoveryMode: got.recoveryMode,
+        randomDepletionEligible: got.randomDepletionEligible,
+      },
         `classifyResource('${key}')`).toEqual(want);
     }
   });

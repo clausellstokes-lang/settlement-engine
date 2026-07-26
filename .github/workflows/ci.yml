@@ -20,6 +20,24 @@ jobs:
     name: Validate, test, build
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      # The PGlite security matrix is single-backend by design. This disposable
+      # service enables the one lock-order receipt that must exercise two real
+      # PostgreSQL sessions to prove a cross-lane 40P01 cannot recur.
+      CUSTOM_CONTENT_CONCURRENCY_DATABASE_URL: >-
+        postgresql://postgres:postgres@127.0.0.1:5432/postgres
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
 
@@ -52,6 +70,12 @@ jobs:
       # quietly distort the simulation outputs without breaking the build.
       - name: Validate data
         run: npm run validate:data
+
+      # The authored manifest is the sole custom-content vocabulary authority.
+      # Its generated browser, edge, and SQL projections must remain byte-current
+      # with the schema committed in this checkout.
+      - name: Validate custom-content manifest projections
+        run: npm run validate:custom-content-manifest
 
       # Migration-chain ledger: contiguity + the applied-head marker
       # (supabase/applied-head.json). Catches double-booked or gapped
@@ -186,6 +210,52 @@ jobs:
       - name: Guard mobile e2e executed (runtime)
         run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
 
+  performance:
+    name: Production-build browser performance
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the local-data production artifact
+        run: npm run build -- --mode e2e
+
+      - name: Guard performance discovery is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --config playwright.perf.config.js --projects performance-chromium,performance-mobile-chromium
+
+      - name: Measure desktop and lower-end mobile production profiles
+        run: npx playwright test --config playwright.perf.config.js --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-performance.json
+          SF_PERFORMANCE_RECEIPT: artifacts/performance/browser-synthetic.json
+
+      - name: Guard performance execution is not vacuous
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-performance.json
+
+      - name: Retain browser-performance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-performance-evidence
+          path: |
+            artifacts/performance/browser-synthetic.*.json
+            playwright-performance.json
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
+
   # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
   # The money-path trust boundaries (stripe-webhook signature verification; later
   # the generate-narrative refund decision) are RUN here against forged vs. signed
@@ -219,9 +289,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Deno resolves npm:@types/node from the repository's manual node_modules
+      # tree. Keep this an npm-ci install from the committed lockfile: relying on
+      # an incidental/transitive package or a developer's parent node_modules
+      # made the production type gate fail before it could check any source.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install locked Node type dependencies
+        run: npm ci --ignore-scripts
+
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+
+      # This must remain a blocking step BEFORE the --no-check execution suite.
+      # test:edge's deliberately structural mocks cannot stand in for checking
+      # the production auth/money entrypoints and their transitive imports.
+      - name: Type-check edge-function production sources
+        run: deno task check:edge
 
       - name: Run edge-function Deno tests
         run: deno task test:edge
@@ -343,35 +431,16 @@ jobs:
       - name: Divine-mandate → coup coupling soak
         run: node scripts/audit/religion-coup-soak.mjs --seeds 10 --ticks 100
 
-  # ── Whole-world soak lane (opt-in) — the composed-kernel PASS/FAIL watchdog ──
-  # scripts-build-ci-3: whole-world-soak.mjs is constitution law 1 (same-seed byte-
-  # identity) verified at the COMPOSED-kernel level — it generates a real 4-settlement
-  # region with the seeded generator, turns FULL_SIMULATION on (war stack at depth),
-  # advances 30 years through the production orchestrator, and ASSERTS: no crash /
-  # no NaN, byte-identical same-seed re-run (run B == run A every year), seed
-  # divergence (run C forks), bounded population, and the perf-scale-6 serialized-byte
-  # cost envelope. It `process.exit(failures.length ? 1 : 0)`, so it is a real PASS/
-  # FAIL step — a composed-engine determinism/cost regression REDS this job. Before
-  # this lane it ran only when an agent remembered to; after 15 engine waves the
-  # composed regression surface had outgrown the religion-only recurring soak.
-  #
-  # The five wave soaks (cause-lifecycle / conquest-market / war-cluster /
-  # institution-ecology / religion-plane) run alongside as DIAGNOSTIC log-artifact
-  # steps — they have no process.exit, only log distribution tables for human review
-  # (same contract as the religion probes above), so they never gate this job; only
-  # the whole-world watchdog does. Kept OFF the per-push/PR hot path — weekly cron +
-  # manual workflow_dispatch only, like the mutation sweep and religion lanes.
-  #
-  # Approx runtime (ubuntu-latest, in-memory, no I/O):
-  #   whole-world-soak     (--years 30, 4 settlements × 3 runs)  ~1-2 min  (PASS/FAIL)
-  #   cause-lifecycle-soak (--cohort 4000)                       ~seconds  (pure fns)
-  #   conquest-market-soak (--cohort 4000)                       ~seconds  (pure fns)
-  #   war-cluster-soak     (--cohort 4000)                       ~seconds  (pure fns)
-  #   institution-ecology-soak                                   ~seconds  (pure fns)
-  #   religion-plane-soak  (--seeds 24 --ticks 120)              ~10-30s
-  # The 20-minute timeout is generous headroom over the total.
-  world-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
-    name: Whole-world soak (weekly / manual)
+  # ── Generation semantic certification (opt-in, assertive) ───────────────────
+  # The ordinary test suite keeps a small named generation cohort on the hot
+  # path. This weekly/manual lane crosses the complete live tier, culture,
+  # terrain, route, threat, content-profile, and magic vocabularies at larger
+  # scale. It fails on `needs_review`, receipt findings, broken final-dossier
+  # references, percentage-conservation errors, non-finite values, missing
+  # dimension coverage, or same-seed replay drift. Unlike the exploratory
+  # simulate-generations report, this is a real pass/fail contract.
+  generation-certification:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Generation semantic certification (weekly / manual)
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -386,10 +455,56 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # PASS/FAIL: the composed-kernel same-seed byte-identity + cost watchdog.
-      # A nonzero exit (a determinism or cost-envelope regression) REDS this job.
-      - name: Whole-world composed-kernel soak (PASS/FAIL)
-        run: node scripts/audit/whole-world-soak.mjs --years 30
+      - name: Certify 1,200 generated settlements
+        run: >
+          npm run certify:generation --
+          --count 1200
+          --output artifacts/generation/certification.json
+
+      - name: Upload generation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-certification-${{ github.sha }}
+          path: artifacts/generation/certification.json
+          if-no-files-found: error
+          retention-days: 90
+
+  # ── Whole-world soak lane (opt-in) — composed-kernel + scale evidence ────────
+  # The weekly profile runs the same assertive composed soak at 4, 12, 24, and
+  # 30 settlements for 30 years. Each cell repeats the primary seed byte-for-byte
+  # and also runs a divergent seed. The wrapper binds receipts to both HEAD and a
+  # working-tree source fingerprint, so evidence from a dirty manual run cannot
+  # masquerade as evidence for the commit alone.
+  #
+  # The five wave soaks (cause-lifecycle / conquest-market / war-cluster /
+  # institution-ecology / religion-plane) run alongside as DIAGNOSTIC log-artifact
+  # steps — they have no process.exit, only log distribution tables for human review
+  # (same contract as the religion probes above), so they never gate this job; only
+  # the whole-world watchdog does. Kept OFF the per-push/PR hot path — weekly cron +
+  # manual workflow_dispatch only, like the mutation sweep and religion lanes.
+  #
+  # This is intentionally not a deploy gate. Release certification uses the
+  # larger manual `npm run soak:release` matrix; the 300-year attractor study is
+  # a separate research profile. See docs/SOAK_PLAN_R2.md.
+  world-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Whole-world soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Thirty-year realm-scale matrix (PASS/FAIL)
+        run: npm run soak:weekly -- --output artifacts/soak/weekly.json
 
       # DIAGNOSTIC log-artifact steps (no process.exit — they only print tables).
       - name: Cause-lifecycle soak surfaces
@@ -407,16 +522,26 @@ jobs:
       - name: Religion-plane soak surfaces
         run: node scripts/audit/religion-plane-soak.mjs --seeds 24 --ticks 120
 
+      - name: Upload commit-bound soak evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: realm-scale-evidence-${{ github.sha }}
+          path: artifacts/soak/
+          if-no-files-found: warn
+          retention-days: 90
+
   # ── Production deploy gated on the full green gate (finding F35) ─────────────
   # "The gate is the product": production must advance only through CI. This job
-  # runs ONLY after check + e2e + deno-tests pass, ONLY on master. It is a safe
+  # runs ONLY after every required code/browser/performance/Deno gate passes,
+  # ONLY on master. It is a safe
   # no-op until the operator finishes the dashboard half — set the VERCEL_TOKEN
   # secret AND turn OFF Vercel's push auto-deploy (see docs/DEPLOY.md). Until
   # then it logs and skips (green), so adding it can't break the current flow;
   # once configured, CI becomes the ONLY path to production.
   deploy:  # deploy-gate: optional — this job IS the deploy action, not a gate on it
     name: Deploy to production (gated)
-    needs: [check, e2e, deno-tests, coverage-floors, determinism-hostile-locale]
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -452,7 +577,7 @@ jobs:
   # half — defense-in-depth, and either can ship once its secret is configured.
   redeploy:  # deploy-gate: optional — the retrigger runs AFTER the gates; it must not gate itself
     name: Retrigger Vercel deploy (post-CI)
-    needs: [check, e2e, deno-tests, coverage-floors, determinism-hostile-locale]
+    needs: [check, e2e, performance, deno-tests, coverage-floors, determinism-hostile-locale]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 5

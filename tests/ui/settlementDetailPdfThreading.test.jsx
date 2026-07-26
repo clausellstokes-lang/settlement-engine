@@ -175,6 +175,38 @@ function findFunctionPaths(value, path = 'options', out = [], seen = new Set()) 
 }
 
 describe('SettlementDetail handlePdfExport — W4f campaign/faith threading', () => {
+  test('a matching active save exports the live settlement, not the opening detail snapshot', async () => {
+    storeState.auth = { tier: 'premium', user: { id: 'u1' } };
+    storeState.activeSaveId = 'save-1';
+    storeState.settlement = {
+      ...detail.settlement,
+      name: 'Stoneford After Commit',
+      npcs: [{ id: 'npc-1', name: 'Mara', goal: { short: 'restore_order' } }],
+    };
+
+    const [settlementArg] = await mountAndExport();
+
+    expect(settlementArg).toBe(storeState.settlement);
+    expect(settlementArg.name).toBe('Stoneford After Commit');
+  });
+
+  test('a different active save cannot bleed its working settlement into this dossier', async () => {
+    storeState.auth = { tier: 'premium', user: { id: 'u1' } };
+    storeState.activeSaveId = 'save-9';
+    storeState.settlement = {
+      id: 'save-9',
+      name: 'Farhold Working Copy',
+      npcs: [],
+      factions: [],
+      neighbourNetwork: [],
+    };
+
+    const [settlementArg] = await mountAndExport();
+
+    expect(settlementArg).toBe(detail.settlement);
+    expect(settlementArg.name).toBe('Stoneford');
+  });
+
   test('premium + campaign membership threads faithUnlocked:true and a plain-data campaign (nameById, never nameFor)', async () => {
     storeState.auth = { tier: 'premium', user: { id: 'u1' } };
     const [settlementArg, options] = await mountAndExport();

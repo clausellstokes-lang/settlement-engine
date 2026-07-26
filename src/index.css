@@ -182,8 +182,48 @@ button {
 #root {
   background: transparent !important;
 }
+
+/* The last-resort render fallback belongs to the global shell, so its visual
+   contract lives here rather than as an inline object in main.jsx. It remains
+   readable even if token emission fails during boot. */
+.root-error-boundary {
+  margin: 16px;
+  padding: 24px;
+  border: 2px solid var(--sem-destructive, #8b1a1a);
+  border-radius: 8px;
+  background: var(--sem-destructive-bg, #fdf4f4);
+  font-family: monospace;
+}
+.root-error-boundary pre {
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+
 .parchment-bg {
   min-height: 100vh;
+}
+
+/*
+ * Keep the footer below the first viewport while a lazy route chunk resolves.
+ *
+ * The shell renders its real header, footer, and mobile navigation around the
+ * Suspense fallback. Without a route-height floor, the short Loading card lets
+ * the footer enter the viewport; the resolved page then pushes that entire
+ * footer away and produces a large mobile layout shift. The per-layout reserve
+ * is supplied by App so this remains one shell contract rather than a
+ * generator-specific skeleton height.
+ */
+.app-route-main {
+  --app-shell-header-reserve: 72px;
+  min-height: calc(100vh - var(--app-shell-header-reserve, 72px));
+}
+.app-route-main--mobile {
+  --app-shell-header-reserve: 56px;
+}
+@supports (height: 100svh) {
+  .app-route-main {
+    min-height: calc(100svh - var(--app-shell-header-reserve, 72px));
+  }
 }
 
 /* Per-view page background. App.jsx sets the image via the --page-bg custom

@@ -41,7 +41,14 @@ function forkRng() {
 const DOCK = { name: 'Docks/port facilities', tags: ['port', 'trade'] };
 const SHIPYARD = { name: 'Shipyard', tags: ['transport', 'shipbuilding', 'port'] };
 // A custom, genre-blind institution declaring naval capability through the facet chokepoint.
-const DRYDOCK_GUILD = { name: 'The Tidewater Compact', facets: { institutionFunction: 'naval' } };
+const DRYDOCK_GUILD = {
+  name: 'The Tidewater Compact',
+  source: 'custom',
+  isCustom: true,
+  customDefinitionCategory: 'institutions',
+  customDefinitionId: 'definition:institutions:tidewater-compact',
+  facets: { institutionFunction: 'naval' },
+};
 
 /** An island digest whose 'main' and 'isle' seats are both ports. */
 function portDigest() {
@@ -69,6 +76,17 @@ describe('W-NAVY Stage 1 — isNavalInstitution (the Facet Law: declared ?? tag 
     expect(isNavalInstitution({ name: 'Royal Dockyard' })).toBe(true);
     expect(isNavalInstitution('Admiralty House')).toBe(true);
     expect(isNavalInstitution('Docks/port facilities')).toBe(false);
+  });
+  it('does not infer a war navy from a current custom presentation name', () => {
+    const namesake = {
+      name: 'Shipyard',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:shipyard-namesake',
+    };
+    expect(isNavalInstitution(namesake)).toBe(false);
+    expect(navalCapability01([namesake])).toBe(0);
   });
   it('an inactive/destroyed naval institution does NOT count (standing only)', () => {
     expect(isNavalInstitution({ ...SHIPYARD, status: 'destroyed' })).toBe(false);

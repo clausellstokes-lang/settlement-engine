@@ -47,16 +47,20 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **29** edge functions under `supabase/functions/` (excluding
+There are **31** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
-**Bot guard (baseline, all functions except `stripe-webhook`).**
+**Bot guard (baseline on user-facing and mutating functions).**
 `_shared/requestMeta.ts#botGuard` rejects obvious scrapers (curl /
-python-requests / headless browsers / bot UAs) with 403 before any
-other work. Real users are never blocked; the bot pattern list is
-deliberately conservative. `stripe-webhook` skips it because Stripe's
-own signed POST is the trust anchor there, not the UA.
+python-requests / headless browsers / bot UAs) with 403 before expensive
+work. Real users are never blocked; the bot pattern list is deliberately
+conservative. `stripe-webhook` skips it because Stripe's own signed POST
+is the trust anchor, `health` admits monitoring clients, and the internal
+`account-deletion-worker` and `payment-refund-worker` use high-entropy,
+constant-time cron secrets as their complete trust anchors. Those
+infrastructure endpoints do not make authorization depend on a mutable
+client UA.
 
 - **Allow-list.** Stripe's own UA, monitoring services (UptimeRobot,
   Pingdom, BetterStack), Supabase health checks bypass the bot
@@ -127,6 +131,16 @@ flip intent):
 - `retention-warning-cron` — nightly pg_net cron (migration 166)
   authenticated by the `x-cron-secret` shared secret; fail-closed on a
   wrong/missing secret (403) and refuses to run unconfigured (503).
+- `account-deletion-worker` — hourly pg_net worker (migration 175) for
+  the durable account-erasure queue. It refuses an unset
+  `ACCOUNT_DELETION_CRON_SECRET` (503), compares `x-cron-secret`
+  constant-time, re-checks the private database kill switch, and only
+  then claims service-role-only leased jobs.
+- `payment-refund-worker` — five-minute pg_net worker (migration 180)
+  for durable Stripe refund recovery. It refuses an unset
+  `PAYMENT_REFUND_CRON_SECRET` (503), compares `x-cron-secret`
+  constant-time, re-checks the private database kill switch, and only
+  then claims service-role-only leased refund obligations.
 
 ### Database (Postgres + RLS)
 

@@ -1,7 +1,7 @@
 {
-  "total": 2244,
-  "totalAny": 2205,
-  "totalSuppress": 39,
+  "total": 2237,
+  "totalAny": 2199,
+  "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
       "any": 22,
@@ -193,7 +193,7 @@
     },
     "src/domain/inferSupplyChains.js": {
       "any": 0,
-      "suppress": 4
+      "suppress": 3
     },
     "src/domain/institutions/institutionRoster.js": {
       "any": 1,
@@ -212,7 +212,7 @@
       "suppress": 0
     },
     "src/domain/pendingEdits.js": {
-      "any": 13,
+      "any": 11,
       "suppress": 0
     },
     "src/domain/region/contestOverThirdParty.js": {
@@ -372,11 +372,11 @@
       "suppress": 0
     },
     "src/domain/worldPulse/foodStockpile.js": {
-      "any": 15,
+      "any": 14,
       "suppress": 0
     },
     "src/domain/worldPulse/institutionLifecycle.js": {
-      "any": 80,
+      "any": 78,
       "suppress": 0
     },
     "src/domain/worldPulse/militaryStrength.js": {
@@ -492,7 +492,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/resourceTaxonomy.js": {
-      "any": 6,
+      "any": 5,
       "suppress": 0
     },
     "src/domain/worldPulse/settlementStrategy.js": {

@@ -6,11 +6,20 @@
  * The wizard UI mutates this slice; generateSettlement() consumes it.
  */
 
+import {
+  userContentTunableIntentForPatch,
+} from '../domain/content/userContentTunableIntent.js';
+
 export const DEFAULT_CONFIG = {
   settType:                'random',       // 'random' | 'custom' | tier name
   population:              1500,
   tradeRouteAccess:        'random_trade',
   culture:                 'random_culture',
+  // Generated-theme boundary. Grounded keeps serious political/criminal
+  // pressure while requiring an explicit opt-in for trafficking, slavery, and
+  // torture. Existing saves without the field resolve to the same default.
+  contentProfile:          'grounded',
+  contentBoundaries:       null,
   settlementAgeMode:       'auto',
   settlementAgeYears:      0,
   monsterThreat:           'random_threat',
@@ -53,18 +62,32 @@ export const createConfigSlice = (set, get) => ({
   // intent — deliberately NOT persisted (not in partialize).
   customSlidersExplicit: false,
 
+  // Field-level authored intent for the small public content-tunable registry.
+  // DEFAULT_CONFIG must contain concrete values for rendering, but materialized
+  // defaults are not user choices. Keeping intent beside (not inside) config
+  // lets a ContentEnvironmentRevision supply defaults without polluting the
+  // simulation snapshot or treating every default as an override.
+  configExplicitFields: {},
+
   // Loaded-from-save indicator
   loadedFromSave: null,            // { name, tier } or null
 
   // ── Actions ────────────────────────────────────────────────────────────────
-  updateConfig: (partial) =>
+  updateConfig: (partial, options = {}) =>
     set(state => {
       Object.assign(state.config, partial);
+      if (options.recordIntent !== false) {
+        state.configExplicitFields = userContentTunableIntentForPatch(
+          partial,
+          state.configExplicitFields,
+        );
+      }
     }),
 
   resetConfig: () =>
     set(state => {
       state.config = { ...DEFAULT_CONFIG };
+      state.configExplicitFields = {};
     }),
 
   setWizardStep: (step) =>

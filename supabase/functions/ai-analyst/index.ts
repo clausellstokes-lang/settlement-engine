@@ -23,7 +23,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from './creditFlow.ts';
 import { resolveProviderKey } from './byok.ts';
@@ -442,6 +442,10 @@ export async function handleAiAnalyst(
     // metrics (citation coverage, register purity) are computed independently above and
     // are NEVER sourced from this rider. Content-grade capture stays consent-gated (§3).
     try {
+      // The credited-call callback mutates this capture, but Deno's control-flow
+      // analysis cannot see through that callback boundary. Re-widen the flow type
+      // before reading it while preserving the source-pinned rider contract below.
+      capturedRider = capturedRider as EnrichmentRider | null;
       if (capturedRider) {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_ANALYST_RIDER,
@@ -483,7 +487,7 @@ export async function handleAiAnalyst(
           refusalClass: capturedRefusalClass, doors: capturedRefusalDoors,
         }, 502, cors);
       case 'ok':
-        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+        scheduleAutoReload(supabaseAdmin, user.id);
         return json({
           answer: outcome.answerText,
           claims: capturedValidated,

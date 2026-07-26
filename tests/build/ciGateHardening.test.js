@@ -33,6 +33,44 @@ import { readAppliedHeadLedger } from '../../scripts/check-migration-head.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
+// ── The Deno edge gate installs + type-checks before execution ────────────────
+describe('Deno edge-function CI gate is reproducible and fail-closed', () => {
+  const ci = readFileSync(join(ROOT, '.github/workflows/ci.yml'), 'utf8');
+  const denoJobStart = ci.search(/^ {2}deno-tests:\s*$/m);
+  const denoJobTail = denoJobStart >= 0 ? ci.slice(denoJobStart) : '';
+  const nextJobOffset = denoJobTail.slice(1).search(/\n {2}[A-Za-z0-9_-]+:\s*(?:#.*)?$/m);
+  const denoJob = nextJobOffset >= 0
+    ? denoJobTail.slice(0, nextJobOffset + 1)
+    : denoJobTail;
+
+  it('pins @types/node as a direct exact dependency in both npm manifests', () => {
+    const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
+    const lock = JSON.parse(readFileSync(join(ROOT, 'package-lock.json'), 'utf8'));
+    const denoConfig = JSON.parse(readFileSync(join(ROOT, 'deno.json'), 'utf8'));
+    const denoLock = JSON.parse(readFileSync(join(ROOT, 'deno.lock'), 'utf8'));
+    expect(pkg.devDependencies['@types/node']).toBe('25.6.0');
+    expect(lock.packages[''].devDependencies['@types/node']).toBe('25.6.0');
+    expect(lock.packages['node_modules/@types/node'].version).toBe('25.6.0');
+    expect(denoConfig.nodeModulesDir).toBe('manual');
+    expect(denoLock.workspace.packageJson.dependencies).toContain('npm:@types/node@25.6.0');
+  });
+
+  it('installs the lockfile and blocks on the production type-check before tests', () => {
+    expect(denoJobStart, 'ci.yml must declare a deno-tests job').toBeGreaterThanOrEqual(0);
+    expect(denoJob).toMatch(/actions\/setup-node@v4/);
+    expect(denoJob).toMatch(/run:\s*npm ci --ignore-scripts/);
+    const installAt = denoJob.indexOf('run: npm ci --ignore-scripts');
+    const checkAt = denoJob.indexOf('run: deno task check:edge');
+    const testAt = denoJob.indexOf('run: deno task test:edge');
+    expect(installAt, 'deno-tests must install the locked dependency tree').toBeGreaterThanOrEqual(0);
+    expect(checkAt, 'deno-tests must run the production type-check').toBeGreaterThanOrEqual(0);
+    expect(testAt, 'deno-tests must run the execution suite').toBeGreaterThanOrEqual(0);
+    expect(installAt, 'locked dependencies must be installed before type-checking').toBeLessThan(checkAt);
+    expect(checkAt, 'production type-check must block before edge tests').toBeLessThan(testAt);
+    expect(denoJob.slice(checkAt, testAt)).not.toMatch(/continue-on-error:\s*true/);
+  });
+});
+
 // ── The Vercel ignore-build gate is ARMED (fail-closed) ────────────────────────
 // These exercise the REAL decideDeploy() decision (skip vs proceed), not just the
 // presence of wiring strings — a regression to fail-OPEN flips an assertion.

@@ -45,6 +45,10 @@ import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
+import {
+  nativeSemanticName,
+  nativeSemanticNames,
+} from '../content/customContentSemanticAuthority.js';
 
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
@@ -126,7 +130,7 @@ const transportIsDown = (/** @type {any} */ inst) =>
 
 /** @param {import('../settlement.schema.js').SimInstitution} inst */
 function transportChannelOf(inst) {
-  const n = String(inst?.name || '').toLowerCase();
+  const n = nativeSemanticName(inst).toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
   if (n.includes('airship')) return 'airship';
   return null;
@@ -179,7 +183,8 @@ function resilienceStorageComponent(months) {
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function storageCapacityMonths(settlement) {
-  const names = (settlement?.institutions || []).map((/** @type {any} */ i) => String(i?.name || '').toLowerCase());
+  const names = nativeSemanticNames(settlement?.institutions)
+    .map((/** @type {string} */ name) => name.toLowerCase());
   const has = (/** @type {string[]} */ ...fragments) => names.some((/** @type {string} */ n) => fragments.some(f => n.includes(f)));
   const tier = String(settlement?.tier || 'village');
   const base = has('state granary') ? (tier === 'metropolis' ? 12 : 8)

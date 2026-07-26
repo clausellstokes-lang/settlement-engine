@@ -10,12 +10,12 @@ import { useStore } from '../store/index.js';
  * shared module) so this Realm-only convenience stays in the lazy map chunk and
  * off the first-paint closure.
  */
-function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
+export function resumeCampaignTarget(activeCampaigns, lastActiveCampaignId) {
   if (!Array.isArray(activeCampaigns) || activeCampaigns.length === 0) return null;
-  if (lastActiveCampaignId && activeCampaigns.some(c => c?.id === lastActiveCampaignId)) {
-    return lastActiveCampaignId;
-  }
-  return activeCampaigns[0]?.id || null;
+  const remembered = lastActiveCampaignId != null
+    ? activeCampaigns.find(c => String(c?.id) === String(lastActiveCampaignId))
+    : null;
+  return remembered?.id ?? activeCampaigns[0]?.id ?? null;
 }
 
 /**

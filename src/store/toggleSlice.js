@@ -8,7 +8,11 @@
  *   Good:        "tier_good_name"        →  { allow, force, forceExclude }
  */
 
-import { INSTITUTION_SERVICES } from '../data/tradeGoodsData';
+import {
+  INSTITUTION_SERVICE_KEYS,
+} from '../data/institutionServiceKeys.generated.js';
+
+const INSTITUTION_SERVICE_KEY_SET = new Set(INSTITUTION_SERVICE_KEYS);
 
 // ── Service-key normalization ────────────────────────────────────────────────
 // The Stage-2b ServicesTogglePanel fix moved the servicesToggles WRITE key from
@@ -23,7 +27,7 @@ import { INSTITUTION_SERVICES } from '../data/tradeGoodsData';
 function matchServiceName(instName) {
   const lower = instName.toLowerCase().split(/[\s'(),\-/]+/).filter(w => w.length > 2);
   let best = null, bestScore = 0;
-  for (const key of Object.keys(INSTITUTION_SERVICES)) {
+  for (const key of INSTITUTION_SERVICE_KEYS) {
     const kw = key.toLowerCase().split(/[\s'(),\-/]+/).filter(w => w.length > 2);
     let score = 0;
     for (const kp of kw) for (const lp of lower) {
@@ -68,7 +72,7 @@ export function normalizeServicesToggles(bag) {
     const instName = key.slice(0, sep);
     const svcName  = key.slice(sep + '_service_'.length);
     // Already new-format (leading segment is a real service key) → passthrough.
-    if (Object.prototype.hasOwnProperty.call(INSTITUTION_SERVICES, instName)) {
+    if (INSTITUTION_SERVICE_KEY_SET.has(instName)) {
       out[key] = val;
       continue;
     }

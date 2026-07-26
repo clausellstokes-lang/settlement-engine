@@ -24,6 +24,9 @@
  */
 
 import { TAG, TAG_GROUPS } from '../data/entityTags.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
 
 // Re-exports so consumers can `import { hasTag, TAG } from '@/lib/entities'`
 // without two imports.
@@ -146,12 +149,13 @@ export function factionIdFromName(name) {
 // ── Institution tag resolution (keyword backfill) ───────────────────────────
 // The migration target is "mechanics query institution tags, not names." But
 // `tagsOf` only reads an entity's DECLARED tags — and catalog tags are coarse
-// ('civic', 'religious', 'food') while custom/legacy institutions may carry none.
-// So a name-keyword backfill makes tag dispatch RELIABLE for every institution
-// (generated, legacy, custom) — the prerequisite for converting the scattered
-// `name.includes(...)` sites to `institutionHasTag(...)`. This CENTRALIZES the
-// name-matching into one canonical map instead of 46 ad-hoc call sites; as the
-// catalog gains richer declared tags, the keyword fallback simply stops firing.
+// ('civic', 'religious', 'food') while legacy institutions may carry none. So a
+// name-keyword backfill makes tag dispatch RELIABLE for native and genuinely
+// unstamped legacy institutions — the prerequisite for converting scattered
+// `name.includes(...)` sites to `institutionHasTag(...)`. Current custom names
+// and tags are presentation-only and stop at the provenance boundary below.
+// This CENTRALIZES the remaining native/legacy name match into one canonical map;
+// as the catalog gains richer declared tags, that fallback simply stops firing.
 //
 // Each rule maps a name-keyword pattern to the canonical TAG.* values it implies.
 // Exported so the tag-vocabulary coverage pin (dataVocabularyCoverage.test.js)
@@ -175,18 +179,28 @@ export const INSTITUTION_KEYWORD_TAGS = Object.freeze([
 ]);
 
 /**
- * The canonical tags for an institution: its DECLARED `tags` unioned with any
- * implied by its name (keyword backfill). Tolerant of string (name only) or
- * object inputs. Declared tags come first so existing data is authoritative.
+ * The canonical native-mechanical tags for an institution: its DECLARED `tags`
+ * unioned with any implied by its name (keyword backfill). Tolerant of string
+ * (name only) or object inputs. Current custom presentation fields return no
+ * mechanical tags; callers that render them can use tagsOf().
  *
  * @param {unknown} inst
  * @returns {string[]}
  */
 export function institutionTags(inst) {
+  // Authored custom tags are presentation metadata under the custom-content
+  // manifest. They remain available through tagsOf(), but neither those tags
+  // nor the display name may enter this native mechanical classifier. Legacy
+  // unstamped rows retain the historical declared-tag and keyword behavior.
+  if (isMaterializedCustomContent(inst)) return [];
   const declared = tagsOf(inst);
   const name = typeof inst === 'string'
     ? inst
-    : (inst && typeof inst === 'object' ? String(/** @type {any} */(inst).name || '') : '');
+    : (
+      inst && typeof inst === 'object'
+        ? String(/** @type {any} */(inst).name || '')
+        : ''
+    );
   if (!name) return declared;
   const out = [...declared];
   for (const { re, tags } of INSTITUTION_KEYWORD_TAGS) {
@@ -198,8 +212,9 @@ export function institutionTags(inst) {
 }
 
 /**
- * Reliable institution tag check: declared tags OR name-keyword backfill. This
- * is the dispatch primitive the `name.includes(...)` sites should migrate to.
+ * Reliable native/legacy institution tag check: declared tags OR name-keyword
+ * backfill, bounded by current custom provenance. This is the dispatch primitive
+ * the remaining `name.includes(...)` sites should migrate to.
  * @param {unknown} inst
  * @param {string} tag  Use a TAG.* constant.
  * @returns {boolean}

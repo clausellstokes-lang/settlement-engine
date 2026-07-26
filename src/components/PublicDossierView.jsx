@@ -144,7 +144,7 @@ export default function PublicDossierView({ dossier, onForge, showHeader = true 
         // A sibling of OutputContainer — never inside it (design §4).
         <DetailErrorBoundary>
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm }}>Loading map...</div>}>
-            <SettlementMapPane settlement={settlement} canEdit={false} saveId={null} />
+            <SettlementMapPane settlement={settlement} canEdit={false} saveId={null} audience="public" />
           </Suspense>
         </DetailErrorBoundary>
       ) : (

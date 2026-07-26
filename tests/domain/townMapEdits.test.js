@@ -22,6 +22,8 @@ import {
   normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
   readAnnotations, withAnnotation, withoutAnnotationAt, readBespokeStyles, withBespokeStyles,
   readSeasonOverride, withSeasonOverride, SEASON_OVERRIDE_IDS,
+  readSceneOverrides, sceneOverrideFor, withSceneOverride, withoutSceneOverride,
+  SCENE_OVERRIDE_SKIN_IDS, SCENE_OVERRIDE_VARIANT_IDS,
 } from '../../src/domain/townMap/mapEdits.js';
 import { addBespokeStyle, removeBespokeStyle, resolveActiveStyle } from '../../src/domain/townMap/bespokeStyles.js';
 import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
@@ -46,7 +48,7 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
     // its value is an opaque wall-validated collection, so its dynamic ids + role fields are
     // not a fixed vocabulary and cannot join the list). Every listed key ∉ PRIVATE_KEY_RE above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'annotations', 'audience', 'bespokeStyles', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'seasonOverride', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
+      ['anchor', 'annotations', 'audience', 'bespokeStyles', 'dx', 'dy', 'headingOffsetStep', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'sceneOverrides', 'seasonOverride', 'showLabels', 'showLegend', 'skinId', 'styleLens', 'variantId', 'x', 'y'],
     );
   });
 });
@@ -118,6 +120,72 @@ describe('mapEdits — withPinNudge (accumulate; drag-back-to-zero drops)', () =
     let e = withPinNudge(null, 'a', 5, 5);
     e = withPinNudge(e, 'b', 7, 7);
     expect(e.pins).toEqual([{ anchor: 'a', dx: 5, dy: 5 }, { anchor: 'b', dx: 7, dy: 7 }]);
+  });
+});
+
+describe('mapEdits — sceneOverrides (3D presentation without a second layout truth)', () => {
+  it('canonicalizes by anchor, last-writer-wins, and wraps heading to -8..7', () => {
+    const edits = normalizeMapEdits({
+      sceneOverrides: [
+        { anchor: 'z', variantId: 'mirror', headingOffsetStep: 17 },
+        { anchor: 'a', skinId: 'brickGuild', headingOffsetStep: -9 },
+        { anchor: 'z', variantId: 'mirror', headingOffsetStep: 8 },
+      ],
+    });
+    expect(readSceneOverrides(edits)).toEqual([
+      { anchor: 'a', skinId: 'brickGuild', headingOffsetStep: 7 },
+      { anchor: 'z', variantId: 'mirror', headingOffsetStep: -8 },
+    ]);
+  });
+
+  it('fails closed on arbitrary variants/skins and drops a no-op record', () => {
+    expect(normalizeMapEdits({
+      sceneOverrides: [{
+        anchor: 'cat:tavern',
+        variantId: 'Not A Slug',
+        skinId: 'secret-material',
+        headingOffsetStep: 0,
+        x: 999,
+        elevation: 9000,
+        scale: 12,
+      }],
+    })).toBeNull();
+    expect(SCENE_OVERRIDE_SKIN_IDS).toEqual([
+      'brickGuild', 'marbleTemple', 'ruinedGothic', 'steelModern', 'stoneAshlar', 'timberVillage',
+    ]);
+    expect(SCENE_OVERRIDE_VARIANT_IDS).toEqual(['mirror']);
+    expect(normalizeMapEdits({
+      sceneOverrides: [{ anchor: 'cat:tavern', variantId: 'duplicate-template-slug' }],
+    })).toBeNull();
+  });
+
+  it('merges one field at a time; clearing the last field restores dormancy', () => {
+    let edits = withSceneOverride(null, 'cat:tavern', { variantId: 'mirror' });
+    edits = withSceneOverride(edits, 'cat:tavern', { skinId: 'timberVillage' });
+    expect(sceneOverrideFor(edits, 'cat:tavern')).toEqual({
+      anchor: 'cat:tavern',
+      variantId: 'mirror',
+      skinId: 'timberVillage',
+    });
+    edits = withSceneOverride(edits, 'cat:tavern', { variantId: null });
+    expect(sceneOverrideFor(edits, 'cat:tavern')).toEqual({
+      anchor: 'cat:tavern',
+      skinId: 'timberVillage',
+    });
+    edits = withSceneOverride(edits, 'cat:tavern', { skinId: null });
+    expect(edits).toBeNull();
+  });
+
+  it('coexists with authoritative plan pins and removes only the requested anchor', () => {
+    let edits = withPinNudge(null, 'cat:tavern', 12, -4);
+    edits = withSceneOverride(edits, 'cat:tavern', { headingOffsetStep: 2 });
+    edits = withSceneOverride(edits, 'cat:temple', { skinId: 'marbleTemple' });
+    expect(edits.pins).toEqual([{ anchor: 'cat:tavern', dx: 12, dy: -4 }]);
+    const withoutTemple = withoutSceneOverride(edits, 'cat:temple');
+    expect(readSceneOverrides(withoutTemple)).toEqual([
+      { anchor: 'cat:tavern', headingOffsetStep: 2 },
+    ]);
+    expect(withoutTemple.pins).toEqual([{ anchor: 'cat:tavern', dx: 12, dy: -4 }]);
   });
 });
 

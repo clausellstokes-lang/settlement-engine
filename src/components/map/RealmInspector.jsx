@@ -18,7 +18,7 @@
  * HeraldBody; this file is the chrome. The overlay never body-swaps the map.
  */
 
-import { Suspense, useMemo, useEffect, useState } from 'react';
+import { Suspense, useCallback, useMemo, useEffect, useRef, useState } from 'react';
 import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -28,9 +28,29 @@ import { IconButton } from './IconButton.jsx';
 import { RealmEntityContext } from './RealmEntityContext.jsx';
 import { useRealmEntityNav } from './useRealmEntityNav.js';
 import HeraldBody from './HeraldBody.jsx';
+import HeraldCommandBody from './HeraldCommandBody.jsx';
+import HeraldSceneContext from './HeraldSceneContext.jsx';
 import HeraldStrip from './HeraldStrip.jsx';
 import { buildHeraldFeed } from './heraldFeed.js';
 import { filterFeed } from './heraldFilter.js';
+import {
+  commandViewCounts,
+  filterRealmItems,
+} from './heraldCommandSelectors.js';
+import {
+  COMMAND_VIEW_IDS,
+  STORY_TOPICS,
+  commandLocationOf,
+  legacyAddressForCommandView,
+  legacyAddressForStoryTopic,
+} from './heraldCommandNavigation.js';
+import {
+  readHeraldCommandSession,
+  writeHeraldCommandSession,
+} from './heraldCommandSession.js';
+import { buildRealmItemReadModel } from '../../domain/realm/realmItemReadModel.js';
+import { flag } from '../../lib/flags.js';
+import RealmItemShadowDiagnostics from './RealmItemShadowDiagnostics.jsx';
 // THE DESK — the two tools, STATIC within this already-lazy chunk (FP-R class): a
 // lazy() here would mint a preload-manifest entry and tip the first-paint ratchet.
 import RoadScenePanel from './RoadScenePanel.jsx';
@@ -56,6 +76,15 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'adjudication', label: 'Adjudication', Icon: Gavel },
 ]);
 
+/** G-4a's task-oriented doors. Their IDs are accepted only while the internal
+ *  migration flag is active; every established section ID remains an alias. */
+export const HERALD_COMMAND_SECTIONS = Object.freeze([
+  { id: 'briefing',  label: 'Briefing',  Icon: LayoutDashboard },
+  { id: 'stories',   label: 'Stories',    Icon: CalendarClock },
+  { id: 'plans',     label: 'Plans',      Icon: Eye },
+  { id: 'decisions', label: 'Decisions',  Icon: Gavel },
+]);
+
 /** The desk tools (kept out of the paper). */
 const DESK_TOOLS = Object.freeze([
   { id: 'road', label: 'Stage the Road', Icon: Route },
@@ -70,7 +99,13 @@ export function hasTreaties(campaign) {
 
 function SectionTab({ active, label, Icon, count = null, onClick }) {
   return (
-    <IconButton onClick={onClick} aria-pressed={active} active={active} title={label} size="lg">
+    <IconButton
+      onClick={onClick}
+      aria-pressed={active}
+      aria-label={count == null ? label : `${label}, ${count}`}
+      active={active}
+      size="lg"
+    >
       <Icon size={13} />{label}
       {count != null && (
         <span
@@ -114,23 +149,49 @@ export default function RealmInspector({
   inspectorSize = 'default', onSetSize,
 }) {
   const saves = useStore(s => s.savedSettlements);
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
   // THE NEWS ADDRESS LAW: the realm-wide entity web + cross-settlement navigator,
   // provided to every section body so a named entity renders as a live link.
   const realmNav = useRealmEntityNav();
+  const campaignSessionId = campaign?.id == null ? null : String(campaign.id);
+  const [initialSession] = useState(
+    () => readHeraldCommandSession(campaignSessionId),
+  );
 
-  // View state (not persisted; survives section switches while the rail is mounted):
-  // the time LENS scopes every report door; the desk TOOL takes over the body.
-  const [timeLens, setTimeLens] = useState('advance');
+  // View state: the time LENS scopes every report door; the desk TOOL takes over
+  // the body. Reading/filter state is session-persisted so a dossier round trip
+  // can return to the same edition. Desk tools remain deliberately transient.
+  const [timeLens, setTimeLens] = useState(initialSession?.timeLens || 'advance');
   const [deskTool, setDeskTool] = useState(/** @type {string|null} */ (null));
   // The filter/focus strip state. FOCUS is the store-global selectedSettlementId (the
   // local edition — round-trips with the map click); the rest is local strip state.
   const focusId = useStore(s => s.selectedSettlementId);
   const clearFocus = useStore(s => s.clearSelectedSettlementId);
-  const [query, setQuery] = useState('');
-  const [attentionOn, setAttentionOn] = useState(false);
-  const [filterBand, setFilterBand] = useState(/** @type {string|null} */ (null));
-  const [showFilters, setShowFilters] = useState(false);
+  const [query, setQuery] = useState(initialSession?.query || '');
+  const [attentionOn, setAttentionOn] = useState(initialSession?.attentionOn === true);
+  const [filterBand, setFilterBand] = useState(
+    /** @type {string|null} */ (initialSession?.filterBand || null),
+  );
+  const [showFilters, setShowFilters] = useState(initialSession?.showFilters === true);
+  // A task-view jump may temporarily replace the originating story/brief item
+  // with Decisions. Keep only the return address in shell state: the canonical
+  // RealmItem and the authoritative decision remain owned elsewhere.
+  const [commandReturn, setCommandReturn] = useState(initialSession?.commandReturn || null);
+  // A portrait handoff is exact presentation context, not a selected RealmItem.
+  // Keep it until the GM dismisses it so changing Herald doors cannot drop the
+  // selected scene/canonical/provenance references mid-investigation.
+  const [sceneContext, setSceneContext] = useState(initialSession?.sceneContext || null);
+  const commandBodyRef = useRef(null);
+  const pendingFocusRestoreRef = useRef(null);
+  const routeRestoreRef = useRef(initialSession ? {
+    scrollTop: initialSession.scrollTop,
+    focusKey: initialSession.focusKey,
+  } : null);
+  const sessionCampaignRef = useRef(campaignSessionId);
+  const skipSessionPersistRef = useRef(false);
+  const commandBriefOn = flag('heraldCommandBrief');
+  const realmItemShadowDiagnosticsOn = flag('realmItemShadowDiagnostics');
 
   // The section-filed feed under the current lens, then narrowed by focus ∩ search ∩
   // attention ∩ severity. Counts feed the per-door badges.
@@ -142,22 +203,187 @@ export default function RealmInspector({
   const focusName = focusId != null ? (nameById.get(String(focusId)) || String(focusId)) : '';
   const narrowing = focusId != null || !!query || attentionOn || !!filterBand;
 
-  const sections = REALM_INSPECTOR_SECTIONS;
-  const activeSection = sections.some(s => s.id === section) ? section : 'dashboard';
+  // G-3's read model remains derived and flag-inert. The legacy Herald does not
+  // pay derivation work while both the command proof shell and its independent
+  // shadow-accounting seam are dark. Shadow mode never changes the active doors.
+  const shouldDeriveRealmModel = commandBriefOn || realmItemShadowDiagnosticsOn;
+  const realmModel = useMemo(
+    () => shouldDeriveRealmModel
+      ? buildRealmItemReadModel(campaign, { saves, canUseCustom })
+      : null,
+    [shouldDeriveRealmModel, campaign, saves, canUseCustom],
+  );
+  const visibleRealmItems = useMemo(
+    () => commandBriefOn
+      ? filterRealmItems(realmModel?.items || [], {
+        focusId, query, attention: attentionOn, band: filterBand, timeLens, nameById,
+      })
+      : [],
+    [commandBriefOn, realmModel, focusId, query, attentionOn, filterBand, timeLens, nameById],
+  );
+  const commandCounts = useMemo(() => commandViewCounts(visibleRealmItems), [visibleRealmItems]);
+
+  const commandLocation = commandLocationOf(section);
+  const sections = commandBriefOn ? HERALD_COMMAND_SECTIONS : REALM_INSPECTOR_SECTIONS;
+  const legacySectionKnown = REALM_INSPECTOR_SECTIONS.some(candidate => candidate.id === section);
+  const commandSectionKnown = COMMAND_VIEW_IDS.includes(section);
+  const sectionKnown = commandBriefOn ? legacySectionKnown || commandSectionKnown : legacySectionKnown;
+  const activeSection = commandBriefOn
+    ? commandLocation.view
+    : legacySectionKnown ? section : 'dashboard';
+
+  // A campaign switch is a namespace switch, not a continuation of the prior
+  // paper. Restore only that campaign's session record; absent state gets the
+  // calm defaults. The identity guard makes this a one-shot synchronization.
+  useEffect(() => {
+    if (!campaignSessionId || sessionCampaignRef.current === campaignSessionId) return;
+    sessionCampaignRef.current = campaignSessionId;
+    // This render still carries the prior campaign's local state. Do not let its
+    // persistence effect overwrite the new namespace before restoration commits.
+    skipSessionPersistRef.current = true;
+    const restored = readHeraldCommandSession(campaignSessionId);
+    routeRestoreRef.current = restored ? {
+      scrollTop: restored.scrollTop,
+      focusKey: restored.focusKey,
+    } : null;
+    setTimeLens(restored?.timeLens || 'advance');
+    setQuery(restored?.query || '');
+    setAttentionOn(restored?.attentionOn === true);
+    setFilterBand(restored?.filterBand || null);
+    setShowFilters(restored?.showFilters === true);
+    setCommandReturn(restored?.commandReturn || null);
+    setSceneContext(restored?.sceneContext || null);
+  }, [campaignSessionId]);
+
+  const persistCommandSession = useCallback((patch = {}) => {
+    if (!campaignSessionId) return null;
+    return writeHeraldCommandSession(campaignSessionId, {
+      open,
+      section,
+      timeLens,
+      query,
+      attentionOn,
+      filterBand,
+      showFilters,
+      scrollTop: commandBodyRef.current?.scrollTop || 0,
+      commandReturn,
+      sceneContext,
+      ...patch,
+    });
+  }, [
+    campaignSessionId,
+    open,
+    section,
+    timeLens,
+    query,
+    attentionOn,
+    filterBand,
+    showFilters,
+    commandReturn,
+    sceneContext,
+  ]);
+
+  // Persist only presentation state. A decision writer remains authoritative in
+  // the campaign store; this record merely lets a dossier round trip reopen the
+  // same edition instead of dropping the reader at the front door.
+  useEffect(() => {
+    if (skipSessionPersistRef.current) {
+      skipSessionPersistRef.current = false;
+      return;
+    }
+    persistCommandSession();
+  }, [persistCommandSession]);
+
+  const sessionRealmNav = useMemo(() => ({
+    ...realmNav,
+    navigateToRealmEntity: (target) => {
+      const active = globalThis.document?.activeElement;
+      const focusKey = globalThis.HTMLElement && active instanceof globalThis.HTMLElement
+        ? active.dataset.realmEntityKey || null
+        : null;
+      persistCommandSession({ focusKey });
+      realmNav.navigateToRealmEntity(target);
+    },
+  }), [realmNav, persistCommandSession]);
+
+  const openCommandDestination = useCallback((nextSection, item, _trigger) => {
+    const itemId = String(item?.presentationKey || item?.id || '').trim();
+    setCommandReturn({
+      section,
+      label: commandLocationOf(section).view === 'briefing' ? 'Briefing' : 'Stories',
+      itemId: itemId || null,
+      scrollTop: commandBodyRef.current?.scrollTop || 0,
+    });
+    onSection?.(nextSection);
+  }, [section, onSection]);
+
+  const returnToCommandOrigin = useCallback(() => {
+    if (!commandReturn) return;
+    pendingFocusRestoreRef.current = commandReturn;
+    const originSection = commandReturn.section;
+    setCommandReturn(null);
+    onSection?.(originSection);
+  }, [commandReturn, onSection]);
+
+  // Restore both reading position and keyboard focus after the originating view
+  // has rendered again. Dataset equality avoids selector escaping for imported IDs.
+  useEffect(() => {
+    const restore = pendingFocusRestoreRef.current;
+    if (!restore || commandLocationOf(section).view !== commandLocationOf(restore.section).view) return;
+    const body = commandBodyRef.current;
+    if (!body) return;
+    body.scrollTop = Number(restore.scrollTop) || 0;
+    const candidates = body.querySelectorAll('[data-herald-command-origin]');
+    const trigger = [...candidates].find(node => (
+      node.getAttribute('data-herald-command-origin') === restore.itemId
+    ));
+    if (trigger) trigger.focus();
+    else body.focus();
+    pendingFocusRestoreRef.current = null;
+  }, [section]);
+
+  // A dossier route unmounts the entire Inspector. Restore the session-scoped
+  // scroll position after remount, then return keyboard focus to the entity link
+  // that initiated the route. If its source item vanished after a real decision
+  // or remote refresh, focus the body rather than targeting a different record.
+  useEffect(() => {
+    const restore = routeRestoreRef.current;
+    const body = commandBodyRef.current;
+    if (!restore || !body || !open) return;
+    body.scrollTop = Number(restore.scrollTop) || 0;
+    if (restore.focusKey) {
+      const candidates = body.querySelectorAll('[data-realm-entity-key]');
+      const trigger = [...candidates].find(node => (
+        node.getAttribute('data-realm-entity-key') === restore.focusKey
+      ));
+      if (trigger) trigger.focus();
+      else body.focus();
+    }
+    routeRestoreRef.current = null;
+    persistCommandSession({ focusKey: null, scrollTop: body.scrollTop });
+  }, [open, section, realmModel, persistCommandSession]);
 
   // Reconcile a fallen-back section with the container's stored selection (P10/P2).
   useEffect(() => {
-    if (section !== activeSection) onSection?.(activeSection);
-  }, [section, activeSection, onSection]);
+    if (!sectionKnown) onSection?.('dashboard');
+  }, [sectionKnown, onSection]);
 
   const expanded = inspectorSize === 'expanded';
   const minimized = inspectorSize === 'min';
   useEffect(() => {
-    if (!expanded) return undefined;
-    const onKeyDown = (e) => { if (e.key === 'Escape') onSetSize?.('default'); };
+    if (!expanded && !(commandBriefOn && commandReturn)) return undefined;
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      if (commandBriefOn && commandReturn) {
+        e.preventDefault();
+        returnToCommandOrigin();
+      } else if (expanded) {
+        onSetSize?.('default');
+      }
+    };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [expanded, onSetSize]);
+  }, [expanded, commandBriefOn, commandReturn, onSetSize, returnToCommandOrigin]);
 
   if (!open) return null;
 
@@ -193,7 +419,17 @@ export default function RealmInspector({
           </h2>
           <div role="group" aria-label="Herald sections" style={{ display: 'flex', gap: 4, flex: 1, minWidth: 0, overflow: 'hidden' }}>
             {sections.map(s => (
-              <IconButton key={s.id} onClick={() => onSection(s.id)} aria-pressed={activeSection === s.id} active={activeSection === s.id} title={s.label} size="md">
+              <IconButton
+                key={s.id}
+                onClick={() => {
+                  setCommandReturn(null);
+                  onSection(commandBriefOn ? legacyAddressForCommandView(s.id) : s.id);
+                }}
+                aria-pressed={activeSection === s.id}
+                active={activeSection === s.id}
+                title={s.label}
+                size="md"
+              >
                 <s.Icon size={14} />
               </IconButton>
             ))}
@@ -212,7 +448,10 @@ export default function RealmInspector({
             {DESK_TOOLS.map(tool => (
               <IconButton
                 key={tool.id}
-                onClick={() => setDeskTool(deskTool === tool.id ? null : tool.id)}
+                onClick={() => {
+                  setCommandReturn(null);
+                  setDeskTool(deskTool === tool.id ? null : tool.id);
+                }}
                 aria-pressed={deskTool === tool.id}
                 active={deskTool === tool.id}
                 title={tool.label}
@@ -231,11 +470,43 @@ export default function RealmInspector({
               active={activeSection === s.id && !deskTool}
               label={s.label}
               Icon={s.Icon}
-              count={narrowing && s.id !== 'dashboard' && s.id !== 'adjudication' ? (filtered.counts[s.id] ?? 0) : null}
-              onClick={() => { setDeskTool(null); onSection(s.id); }}
+              count={commandBriefOn
+                ? (commandCounts[s.id] ?? 0)
+                : narrowing && s.id !== 'dashboard' && s.id !== 'adjudication'
+                  ? (filtered.counts[s.id] ?? 0)
+                  : null}
+              onClick={() => {
+                setDeskTool(null);
+                setCommandReturn(null);
+                onSection(commandBriefOn ? legacyAddressForCommandView(s.id) : s.id);
+              }}
             />
           ))}
         </div>
+
+        {commandBriefOn && activeSection === 'stories' && !deskTool && (
+          <div role="group" aria-label="Story topics" style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <LensButton
+              active={commandLocation.topic == null}
+              onClick={() => {
+                setCommandReturn(null);
+                onSection(legacyAddressForCommandView('stories'));
+              }}
+              label="All stories"
+            />
+            {STORY_TOPICS.map(topic => (
+              <LensButton
+                key={topic.id}
+                active={commandLocation.topic === topic.id}
+                onClick={() => {
+                  setCommandReturn(null);
+                  onSection(legacyAddressForStoryTopic(topic.id));
+                }}
+                label={topic.label}
+              />
+            ))}
+          </div>
+        )}
 
         {/* THE FILTER / FOCUS STRIP + THE TIME LENS — persist across door switches;
             scope every report door (hidden while the desk is open). */}
@@ -269,11 +540,51 @@ export default function RealmInspector({
         </div>
       )}
 
-      <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.md }}>
-       <RealmEntityContext.Provider value={realmNav}>
+      {realmItemShadowDiagnosticsOn && realmModel && (
+        <RealmItemShadowDiagnostics model={realmModel} />
+      )}
+
+      <div
+        ref={commandBodyRef}
+        data-testid="realm-inspector-body"
+        tabIndex={-1}
+        onScroll={() => persistCommandSession()}
+        style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: SP.md }}
+      >
+       {canManageCampaigns && sceneContext && (
+         <HeraldSceneContext
+           context={sceneContext}
+           onDismiss={() => setSceneContext(null)}
+         />
+       )}
+       <RealmEntityContext.Provider value={sessionRealmNav}>
         <Suspense fallback={<div style={{ color: BODY, fontFamily: sans, fontSize: FS.sm }}>Loading…</div>}>
           {activeDeskTool ? (
             <DeskPanel tool={activeDeskTool} campaign={campaign} nameById={nameById} onClose={() => setDeskTool(null)} emptyHandlers={emptyHandlers} />
+          ) : commandBriefOn ? (
+            <HeraldCommandBody
+              view={activeSection}
+              topic={commandLocation.topic}
+              realmModel={realmModel}
+              onSection={openCommandDestination}
+              campaign={campaign}
+              feed={filtered}
+              focusId={focusId}
+              focusName={focusName}
+              narrowing={narrowing}
+              query={query}
+              attentionOn={attentionOn}
+              filterBand={filterBand}
+              timeLens={timeLens}
+              nameById={nameById}
+              saves={saves}
+              emptyHandlers={emptyHandlers}
+              canManageCampaigns={canManageCampaigns}
+              tier={tier}
+              onUpgrade={onUpgrade}
+              returnToOrigin={commandReturn}
+              onReturnToOrigin={returnToCommandOrigin}
+            />
           ) : (
             <HeraldBody
               section={activeSection}
@@ -283,6 +594,7 @@ export default function RealmInspector({
               focusName={focusName}
               narrowing={narrowing}
               nameById={nameById}
+              saves={saves}
               emptyHandlers={emptyHandlers}
               canManageCampaigns={canManageCampaigns}
               tier={tier}

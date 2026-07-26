@@ -174,7 +174,7 @@ function computeItems({ phase, eventCount, narrated, simulated, settlement, save
       hint:  canEdit
         ? (phase === 'canon'
             ? 'Authorial correction outside the timeline.'
-            : 'Edit dossier prose in place. Preserved across rerolls.')
+            : 'Edit dossier prose. Edited NPCs survive a reroll.')
         : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.',
       onClick: handlers.onEdit,
     });

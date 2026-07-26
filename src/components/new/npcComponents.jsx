@@ -4,14 +4,21 @@ import { Pin } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
+import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
 import { useStore } from '../../store/index.js';
+import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
-import NpcLifecycleControls from './NpcLifecycleControls.jsx';
+import {
+  NPC_GOALS, NPC_ROLE_ARCHETYPES, npcFacetOf,
+} from '../../domain/npc/npcBank.js';
+import NpcLifecycleControls, {
+  hasNpcLifecycleAction, humanizeNpcFacet,
+} from './NpcLifecycleControls.jsx';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -24,7 +31,33 @@ function npcPinKey(npc) {
   return null;
 }
 
-export function NPCCategoryGroup({category, label, group, impFilter, search, relationships=[], pinnedIds, onTogglePin}) {
+function durableNpcId(npc) {
+  const id = npc?.id == null ? '' : String(npc.id).trim();
+  return id || null;
+}
+
+function uniqueNpcIndex(npcs, npcId) {
+  if (!Array.isArray(npcs) || !npcId) return -1;
+  let match = -1;
+  for (let index = 0; index < npcs.length; index += 1) {
+    if (durableNpcId(npcs[index]) !== npcId) continue;
+    if (match >= 0) return -1;
+    match = index;
+  }
+  return match;
+}
+
+export function NPCCategoryGroup({
+  category,
+  label,
+  group,
+  impFilter,
+  search,
+  relationships = [],
+  pinnedIds,
+  onTogglePin,
+  canAuthorNpc = false,
+}) {
   const [open, setOpen] = useState(true);
   const color = catColor(category);
   const displayLabel = label || (category.charAt(0).toUpperCase() + category.slice(1));
@@ -58,7 +91,16 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
-      {open && sorted.map(npc => <NPCInlineCard key={npc.id||npc.name} npc={npc} relationships={relationships} pinnedIds={pinnedIds} onTogglePin={onTogglePin}/>)}
+      {open && sorted.map((npc, index) => (
+        <NPCInlineCard
+          key={durableNpcId(npc) || `legacy-presentation-${index}`}
+          npc={npc}
+          relationships={relationships}
+          pinnedIds={pinnedIds}
+          onTogglePin={onTogglePin}
+          canAuthorNpc={canAuthorNpc}
+        />
+      ))}
     </div>
   );
 }
@@ -111,16 +153,22 @@ export function ConflictCard({conflict:c}) {
 
 
 // Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
-  // Tier 5.4 — manual prose editing. editMode is the global toggle on
-  // the dossier header. The save/revert handlers look up the NPC's
-  // index by id at edit time so the action targets the right entity
-  // even if the npcs array has been re-sorted upstream.
+function NPCInlineCard({
+  npc,
+  _relationships = [],
+  pinnedIds,
+  onTogglePin,
+  canAuthorNpc = false,
+}) {
+  // Tier 5.4 — manual prose editing. The save/revert handlers resolve only a
+  // unique durable id at edit time, so duplicate legacy names and roster
+  // reordering cannot redirect a secret edit to another person.
   const editMode             = useStore(s => s.editMode);
   const applyUserEditAction  = useStore(s => s.applyUserEditAction);
   const revertUserEditAction = useStore(s => s.revertUserEditAction);
   const settlement           = useStore(s => s.settlement);
   const savedSettlements     = useStore(s => s.savedSettlements);
+  const focusEntity          = useStore(s => s.focusEntity);
   // DESIGN_THE_ROADS §12 — the ONE dossier whereabouts line + short badge (display-read only;
   // DM-SECRET by construction — npc.whereabouts never ships, §15). Resolves place ids to names
   // from the saved roster so "Held in Dulwich" reads over a raw id.
@@ -130,14 +178,13 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   }, [savedSettlements]);
   const wLine = whereaboutsLine(npc.whereabouts, resolvePlaceName);
   const wBadge = whereaboutsBadge(npc.whereabouts);
-  const npcKey               = npc?.id != null ? String(npc.id) : (npc?.name != null ? String(npc.name) : null);
-  const resolveNpcIndex = () => {
-    if (!settlement?.npcs || !npcKey) return -1;
-    return settlement.npcs.findIndex(n => {
-      const k = n?.id != null ? String(n.id) : (n?.name != null ? String(n.name) : null);
-      return k === npcKey;
-    });
-  };
+  const npcId = durableNpcId(npc);
+  const resolveNpcIndex = () => uniqueNpcIndex(settlement?.npcs, npcId);
+  const authorEditMode = canAuthorNpc && editMode;
+  const canEditSecret = authorEditMode && resolveNpcIndex() >= 0;
+  const secretText = typeof npc.secret === 'string'
+    ? npc.secret
+    : (npc.secret?.what || '');
   const secretIsEdited = isEdited(npc, 'secret.what');
   const secretOriginal = getOriginalValue(npc, 'secret.what');
   const onSaveSecret = (value) => {
@@ -154,11 +201,31 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   const publicTraits = traits.filter(t => t.visibility !== 'gm');
+  // Bank edits declare a role archetype and goal facet. Preserve the NPC's richer
+  // authored office/title while making the declared archetype visible, and only
+  // humanize values that are known engine vocabulary so free-authored prose is
+  // never rewritten at the presentation boundary.
+  const roleFacet = npcFacetOf(npc, 'role');
+  const roleArchetype = NPC_ROLE_ARCHETYPES.includes(roleFacet)
+    ? humanizeNpcFacet(roleFacet)
+    : '';
+  const nativeRole = NPC_ROLE_ARCHETYPES.includes(npc.role)
+    ? humanizeNpcFacet(npc.role)
+    : (npc.role || '');
+  const showRoleArchetype = roleArchetype
+    && String(roleFacet) !== String(npc.role || '');
+  const goalFacet = npcFacetOf(npc, 'goal');
+  const goalText = NPC_GOALS.includes(goalFacet)
+    ? humanizeNpcFacet(goalFacet)
+    : (npc.goal?.short || goalFacet || '');
   // DESIGN_VISION_WAVE V-24c — INTERIORITY-LITE: the composed "disposition & wants" read-model
   // (a pure display projection over existing state; no new store, no writes). Player-safe here —
   // the DM-truth block (bonds/grudges/credibility) is gated in the leaf and left for a
   // worldState-bearing surface; this card reads the mirror-safe view (secrets seam honoured).
   const interiority = npcInteriority({ npc });
+  const interiorityWants = (interiority?.wants || []).map(value => (
+    NPC_GOALS.includes(value) ? humanizeNpcFacet(value) : value
+  ));
   // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
   // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
   // floor). Null unless the world pulse touched this compromise. The npc pin key
@@ -188,7 +255,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             <span style={{fontSize:FS.xxs,color:MUTED}}>{npc.title}</span>
             <span style={{fontSize:FS.xs,fontWeight:700,color:infColor,marginLeft:'auto',flexShrink:0}}>{infDots}</span>
           </div>
-          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>{npc.role}{npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}</div>
+          <div style={{fontSize:FS.xs,color:swatch.inkMag3}}>
+            {nativeRole}
+            {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
+            {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
+          </div>
         </div>
         {pinAvailable && (
           <span
@@ -197,8 +268,8 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             onClick={(e)=>{ e.stopPropagation(); onTogglePin(pinKey); }}
             onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); onTogglePin(pinKey); } }}
             title={isPinned
-              ? 'Pinned. This NPC will not be rewritten by regenerate/progress.'
-              : 'Pin this NPC so regenerate/progress leaves it unchanged.'}
+              ? 'Pinned. The AI will not rewrite this NPC.'
+              : 'Pin this NPC so the AI leaves it unchanged.'}
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
@@ -216,6 +287,13 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       </button>
       {open && (
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
+          {flag('settlementWorkbench') && canAuthorNpc && npc?.id != null && (
+            <div style={{display:'flex',justifyContent:'flex-end',marginTop:6}}>
+              <Button variant="ghost" size="sm" onClick={() => focusEntity?.(String(npc.id))}>
+                Inspect person
+              </Button>
+            </div>
+          )}
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
               {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
@@ -267,9 +345,9 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>{wLine}</span>
             </div>
           )}
-          {npc.goal?.short && (
+          {goalText && (
             <p style={{fontSize:FS.sm,color:swatch.inkMag2,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={npc.goal.short} />
+              <span style={{color:swatch['#A0762A'],fontWeight:700}}>→ </span><ProseParagraph text={goalText} />
             </p>
           )}
           {npc.structuralPosition && (
@@ -280,11 +358,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
             </p>
           )}
-          {interiority && (interiority.wants.length > 0 || interiority.disposition.length > 0) && (
+          {interiority && (interiorityWants.length > 0 || interiority.disposition.length > 0) && (
             <div style={{margin:'6px 0',display:'flex',flexDirection:'column',gap:2}}>
-              {interiority.wants.length > 0 && (
+              {interiorityWants.length > 0 && (
                 <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4}}>
-                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiority.wants.join(' · ')}
+                  <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>{interiorityWants.join(' · ')}
                 </div>
               )}
               {interiority.disposition.length > 0 && (
@@ -294,24 +372,36 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               )}
             </div>
           )}
-          {(npc.secret || editMode) && (
+          {(npc.secret || authorEditMode) && (
             <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
               <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
-              <EditableText
-                value={typeof npc.secret === 'string' ? npc.secret : (npc.secret?.what || '')}
-                originalValue={secretOriginal}
-                isEdited={secretIsEdited}
-                editMode={editMode}
-                onSave={onSaveSecret}
-                onRevert={onRevertSecret}
-                placeholder="Add a secret…"
-                ariaLabel={`Secret for ${npc.name}`}
-                textStyle={{fontSize:FS.xs,color:'#3d2b1a'}}
-              />
+              {canAuthorNpc ? (
+                <EditableText
+                  value={secretText}
+                  originalValue={secretOriginal}
+                  isEdited={secretIsEdited}
+                  editMode={canEditSecret}
+                  onSave={canEditSecret ? onSaveSecret : undefined}
+                  onRevert={canEditSecret ? onRevertSecret : undefined}
+                  placeholder="Add a secret…"
+                  ariaLabel={`Secret for ${npc.name}`}
+                  textStyle={{fontSize:FS.xs,color:swatch.inkMag2}}
+                />
+              ) : (
+                <span style={{fontSize:FS.xs,color:swatch.inkMag2}}>{secretText}</span>
+              )}
             </div>
           )}
-          {/* DESIGN_NPC_LIFECYCLE §2 — the bank-bounded lifecycle editor (edit-mode only). */}
-          {editMode && <NpcLifecycleControls npc={npc} resolveNpcIndex={resolveNpcIndex} />}
+          {/* Bank-bounded editing stays behind edit mode. Party decisions that
+              cannot wait (hostage/road actions) also appear on an owner's normal
+              saved-dossier view, never on a public/player dossier. */}
+          {canAuthorNpc && (authorEditMode || hasNpcLifecycleAction(npc)) && (
+            <NpcLifecycleControls
+              npc={npc}
+              canAuthorNpc={canAuthorNpc}
+              showEditor={authorEditMode}
+            />
+          )}
         </div>
       )}
     </div>

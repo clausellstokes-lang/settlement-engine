@@ -27,171 +27,6 @@
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 
-// R-1 THE SESSION LEDGER — the eager commit dispatcher for table-authored
-// events. THE FINITE-SEMANTICS LAW is enforced by the SCHEMA WALL in
-// domain/tableLedger.js (validateTableEvent + buildTableEffect), which runs in
-// the LAZY TableLedgerPanel at QUEUE time — so this eager dispatcher never
-// imports tableLedger.js (keeping the finite-semantics core OFF the first-paint
-// closure, the applyNpcOp precedent). The queued payload carries the ALREADY-
-// VALIDATED, ALREADY-BUILT directive; this dispatcher light-guards it (source
-// stamp + closed event-type set) and executes it through EXISTING store actions
-// (applyEvent / recordCanonFlavorEntry) — never a bypass. The string 'table'
-// mirrors TABLE_EVENT_SOURCE in domain/tableLedger.js (pinned equal in
-// tests/store/tableEventCommit.test.js so the two can never drift).
-const TABLE_SOURCE = 'table';
-// The closed set of engine event types a table event may commit — the eager
-// twin of tableLedger.KIND_SPEC's eventTypes (pinned equal). A directive naming
-// any other type is refused here, so even a corrupted queue can only reach the
-// existing, bounded table-authorable effects.
-const TABLE_AUTHORABLE_EVENT_TYPES = new Set(['RESOLVE_STRESSOR', 'APPLY_STRESSOR', 'EXPOSE_CORRUPTION']);
-
-// ── DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (delegated bodies) ─────────
-// commitPendingEdits' default case routes the NPC-lifecycle committable kinds here
-// (settlementSlice is AT its max-lines ceiling, so the bodies live in this delegated-
-// impl helper — the renameSettlementImpl precedent). CANON-TOLERANT: NPC lifecycle
-// edits change the FUTURE, never the past (no rename-style identity lock). Each writes
-// a DECLARED facet (npc.facets) so it is a permanent citizen of THE FACET LAW. Kept
-// eager-cheap for the tight first-paint budget: NO lazy-npcOps import (which would
-// pull the bank + PRNG into first paint), and the covenant UI resolves the seat
-// patch — the pure/canonical bodies + propagation model + all pins live in
-// domain/npc/npcOps.js, kept in lockstep with this thin dispatcher. The full bank
-// validation (facet vocab, stasis reasons) lives in that lazy spec + the covenant UI;
-// this eager dispatcher trusts the covenant payload (light presence guards only).
-
-/**
- * Apply one typed NPC op to the live settlement (edit-npc / reassign-npc / stasis-npc
- * / return-npc). Mutates through the slice's Immer set(); persists so the op survives
- * reload. No-op-safe on a missing NPC / bad payload.
- * @param {Function} get @param {Function} set @param {{ kind?: string, payload?: any }} edit
- */
-export function applyNpcOp(get, set, edit) {
-  const k = edit?.kind;
-  const p = edit?.payload || {};
-  let changed = false;
-  // DESIGN_THE_ROADS §11 — a rescue also worsens the captor↔home edge; captured here (the
-  // captor id read inside set()) and fired AFTER the sync commit, since recordPartyImpact is
-  // async + campaign-scoped. Null unless a rescue landed on a live hostage.
-  let rescueCaptorId = null;
-  set(state => {
-    const npc = state.settlement?.npcs?.[p.npcIndex];
-    if (!npc) return;
-    if (k === 'edit-npc') {
-      if (!['alignment', 'temperament', 'role', 'goal'].includes(p.facetKind)) return;
-      npc.facets = { ...(npc.facets || {}), [p.facetKind]: p.value };
-      // Sync the live native field the engine/display reads (npcOps PROPAGATION MODEL).
-      if (p.facetKind === 'temperament') npc.personality = { ...(npc.personality || {}), dominant: p.value };
-      else if (p.facetKind === 'goal') npc.goal = { ...(npc.goal || {}), short: p.value };
-    } else if (k === 'reassign-npc' && p.target && typeof p.target === 'object') {
-      // Seat-held ties move to the new posting (the covenant UI passes ONLY seat
-      // fields); people-held relationship edges keyed by npc id travel untouched.
-      Object.assign(npc, p.target);
-    } else if (k === 'stasis-npc') {
-      if (!p.reason) return;
-      npc.stasis = { reason: p.reason };
-    } else if (k === 'return-npc') {
-      delete npc.stasis;
-    } else if (k === 'ransom-npc' || k === 'rescue-npc') {
-      // DESIGN_THE_ROADS §11 — THE PARTY'S HAND. Stamp the release marker the roads mover
-      // consumes on its next tick (the §3 stasis-collision precedent: the DM writes the npc,
-      // the mover reacts). Only a LIVE HOSTAGE can be intervened on. The pure body + all pins
-      // live in domain/roads/ops.js, kept in lockstep with this thin eager dispatcher.
-      const wa = npc.whereabouts;
-      if (!wa || wa.state !== 'hostage') return;
-      npc.whereabouts = { ...wa, partyRelease: k === 'ransom-npc' ? 'ransom' : 'rescue' };
-      if (k === 'rescue-npc') rescueCaptorId = String(wa.placeId || '');
-    } else if (k === 'champion-npc') {
-      // DESIGN_DEEP_COUPLINGS §8 D-4e — THE PLAYER SIDING. Stamp the contestBacking marker the
-      // ladder-contest pass folds into ContestRec.backedBy on its next advance (the roads
-      // whereabouts.partyRelease precedent: the DM writes the npc, the mover reacts). The marker
-      // is scoped to a SPECIFIC contest id, so a stale mark never re-fires on a later contest.
-      // The op writes NO ladder ledger directly; the pure marker contract (contestBackingMark)
-      // and its consume (the carry-forward fold in advanceContests) live in
-      // domain/worldPulse/npcLadderContest.js. The consume VALIDATES (a bogus id with no matching
-      // live contest is a byte-safe no-op), so
-      // this eager dispatcher stamps trustingly (the covenant UI offers it only to contestants).
-      if (!p.contestId || typeof p.contestId !== 'string') return;
-      npc.contestBacking = p.contestId;
-    } else if (k === 'recall-npc') {
-      // DESIGN_VISION_WAVE V-24a — THE RECALL RIDER. Stamp the recall marker the roads mover
-      // consumes on its next tick (the whereabouts.partyRelease precedent: the DM writes the
-      // npc, the mover reacts by engaging the return leg early). Only a currently-traveling NPC
-      // (mirror state 'traveling' = outbound, or 'visiting') can be recalled — a 'returning'
-      // traveller is already homeward, a hostage uses the party-release ops, and a non-traveller
-      // has nowhere to be recalled from (the graceful no-op). The pure body + pins live in
-      // domain/roads/ops.js (applyRoadsRecall / RECALLABLE_STATES), kept in lockstep with this
-      // thin dispatcher. Self-clearing: the mover rewrites whereabouts from the ledger each tick.
-      const wa = npc.whereabouts;
-      if (!wa || (wa.state !== 'traveling' && wa.state !== 'visiting')) return;
-      npc.whereabouts = { ...wa, recall: true };
-    } else { return; }
-    changed = true;
-  });
-  if (changed) get().persistActiveSaveEdit?.();
-  // The rescue's inflame rides the EXISTING inflame_relationship party impact (no new
-  // relationship writer). It lives in a LAZY leaf (roadsRescueInflame) dynamic-imported ONLY
-  // when a rescue lands — the cold path stays OFF the eager first-paint store closure (§16).
-  // Same undo semantics as every manual party impact (undoLastEvent/persist for the marker;
-  // the impact reverts by its own path).
-  if (changed && rescueCaptorId) {
-    import('./roadsRescueInflame.js').then(m => m.fireRescueInflame(get, rescueCaptorId)).catch(() => {});
-  }
-}
-
-/**
- * R-1 THE SESSION LEDGER — commit ONE table-authored event to the live
- * settlement. The payload carries a directive already built + validated by the
- * schema wall (domain/tableLedger.buildTableEffect) in the lazy panel. This
- * eager dispatcher LIGHT-GUARDS (the source stamp + the closed event-type set)
- * and executes through EXISTING store actions:
- *   • dispatch:'flavor'     → recordCanonFlavorEntry (a canon chronicle line,
- *                             the DM's verbatim words as history; no delta).
- *   • dispatch:'applyEvent' → the canonical applyEvent action (a typed, bounded
- *                             RESOLVE/APPLY_STRESSOR or EXPOSE_CORRUPTION event),
- *                             which logs the source:'table' receipt + persists.
- * Free text lives ONLY on the directive's narrativeSummary / tableFlavor — never
- * a mechanical field — so a table event can never smuggle prose into mechanics.
- * @param {Function} get @param {Function} set @param {{ payload?: any }} edit
- */
-export function applyTableEvent(get, set, edit) {
-  const directive = edit?.payload?.directive;
-  if (!directive || typeof directive !== 'object') return;
-  if (directive.dispatch === 'flavor') {
-    const e = directive.entry || {};
-    if (e.source !== TABLE_SOURCE) return; // provenance is mandatory (fail closed)
-    const recorded = recordCanonFlavorEntryImpl(get, set, {
-      type: typeof e.type === 'string' ? e.type : 'TABLE_INCIDENT',
-      narrativeSummary: typeof e.narrativeSummary === 'string' ? e.narrativeSummary : '',
-      source: TABLE_SOURCE,
-    });
-    // recordCanonFlavorEntry mutates the live eventLog but does not persist on
-    // its own (the flush owns that); the table ledger has no flush, so persist
-    // here so the incident survives reload (state-lifecycle).
-    if (recorded) get().persistActiveSaveEdit?.();
-    return;
-  }
-  if (directive.dispatch === 'applyEvent') {
-    const ev = directive.event || {};
-    if (ev.source !== TABLE_SOURCE) return;               // provenance mandatory
-    if (!TABLE_AUTHORABLE_EVENT_TYPES.has(ev.type)) return; // closed-vocab guard
-    // The canonical committer persists + logs the receipt (with ev.source:'table'
-    // preserved on logEntry.event) + threads the campaign clock (a clock-bound
-    // canon settlement queues it as a pending intention, exactly like any event).
-    get().applyEvent?.(ev);
-  }
-}
-
-/**
- * The commit-dispatch router for commitPendingEdits' default arm: a table event
- * routes to applyTableEvent; every other committable kind is an NPC-lifecycle op
- * (applyNpcOp). Keeps the at-ceiling settlementSlice net-zero — the routing lives
- * here, not in a grown switch.
- * @param {Function} get @param {Function} set @param {{ kind?: string, payload?: any }} edit
- */
-export function applyEditOp(get, set, edit) {
-  if (edit?.kind === 'table-event') return applyTableEvent(get, set, edit);
-  return applyNpcOp(get, set, edit);
-}
-
 /**
  * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
  * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
@@ -314,10 +149,17 @@ export function renameSettlementImpl(get, set, id, newName) {
  *
  * @param {Function} get  the slice's get()
  * @param {Function} set  the slice's set() (Immer producer)
- * @param {{ type: string, narrativeSummary: string, targetId?: string|null, source?: string|null }} entry
+ * @param {{ type: string, narrativeSummary: string, targetId?: string|null,
+ *   source?: string|null, sourceIntentId?: string|null }} entry
  * @returns {boolean} true when an entry was appended.
  */
-export function recordCanonFlavorEntryImpl(get, set, { type, narrativeSummary, targetId = null, source = null }) {
+export function recordCanonFlavorEntryImpl(get, set, {
+  type,
+  narrativeSummary,
+  targetId = null,
+  source = null,
+  sourceIntentId = null,
+}) {
   if (get().phase !== 'canon') return false;
   const now = new Date().toISOString();
   let recorded = false;
@@ -333,6 +175,9 @@ export function recordCanonFlavorEntryImpl(get, set, { type, narrativeSummary, t
       // excludes 'table'). Additive — omitted when null, so every existing
       // caller's entry is byte-identical.
       ...(source ? { source } : {}),
+      // Optional queue correlation. Existing non-queue flavor entries retain
+      // their byte-for-byte shape.
+      ...(sourceIntentId ? { sourceIntentId } : {}),
       // Flavor only — a recorded line of in-world history, no afterState delta.
       narrativeSummary,
       // R3 undo-safety: a flavor entry carries no real state transition. Stamp

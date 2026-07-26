@@ -7,9 +7,11 @@ import { useState } from 'react';
 import { ShieldAlert } from 'lucide-react';
 
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
-import { human, percent } from './WorldPulseData.js';
+import { human } from './WorldPulseData.js';
+import { newsReasonPhrases } from '../../domain/display/newsBody.js';
 import Button from '../primitives/Button.jsx';
 import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
+import { severityBand } from './heraldFilter.js';
 
 export function Pill({ children, tone = 'neutral' }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
@@ -70,7 +72,7 @@ export function NameAttackerControl({ stressor, onName, busy }) {
       />
       <SmallButton
         tone="good"
-        title="Name attacker"
+        hint="Name attacker"
         disabled={busy || !value.trim()}
         onClick={() => onName(value.trim())}
       >
@@ -80,8 +82,21 @@ export function NameAttackerControl({ stressor, onName, busy }) {
   );
 }
 
-export function OutcomeCard({ title, summary, severity, reasons = [], actions = null, tone = 'normal', details = [], involved = [], subject = null, affectedIds = [] }) {
+export function OutcomeCard({
+  heading,
+  summary,
+  severity,
+  reasons = [],
+  actions = null,
+  tone = 'normal',
+  details = [],
+  involved = [],
+  subject = null,
+  affectedIds = [],
+}) {
   const major = tone === 'major' || severity >= 0.7;
+  const severityLabel = severityBand({ severity });
+  const reasonPhrases = newsReasonPhrases({ reasons });
   return (
     <article style={{
       border: `1px solid ${major ? GOLD : BORDER}`,
@@ -103,7 +118,7 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
             lineHeight: 1.25,
             overflowWrap: 'anywhere',
           }}>
-            {title}
+            {heading}
           </h4>
           {summary && (
             <p style={{
@@ -133,9 +148,9 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
         </div>
       )}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-        <Pill tone={major ? 'major' : 'neutral'}>Severity {percent(severity)}</Pill>
+        <Pill tone={major ? 'major' : 'neutral'}>{severityLabel}</Pill>
         {details.slice(0, 5).map((detail, index) => <Pill key={`${detail}-${index}`}>{detail}</Pill>)}
-        {reasons.slice(0, 3).map((reason, index) => <Pill key={`${reason}-${index}`}>{reason}</Pill>)}
+        {reasonPhrases.slice(0, 3).map((reason, index) => <Pill key={`${reason}-${index}`}>{reason}</Pill>)}
       </div>
       {actions && (
         <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
@@ -146,14 +161,20 @@ export function OutcomeCard({ title, summary, severity, reasons = [], actions = 
   );
 }
 
-export function SmallButton({ children, onClick, tone = 'neutral', title, disabled = false }) {
+export function SmallButton({
+  children,
+  onClick,
+  tone = 'neutral',
+  hint,
+  disabled = false,
+}) {
   const variant = tone === 'good' ? 'success' : tone === 'danger' ? 'danger' : 'secondary';
   return (
     <Button
       variant={variant}
       size="sm"
       onClick={onClick}
-      title={title}
+      title={hint}
       disabled={disabled}
     >
       {children}
@@ -161,12 +182,12 @@ export function SmallButton({ children, onClick, tone = 'neutral', title, disabl
   );
 }
 
-export function Section({ title, count, children }) {
+export function Section({ heading, count, children }) {
   return (
     <section style={{ minWidth: 0 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
         <h3 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>
-          {title}
+          {heading}
         </h3>
         <span style={{ marginLeft: 'auto', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
           {count}

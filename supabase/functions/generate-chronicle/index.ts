@@ -23,7 +23,7 @@ import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
@@ -406,7 +406,7 @@ export async function handleGenerateChronicle(
     }
 
     await releaseReservation();   // success: COGS metered, reservation no longer needed
-    void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+    scheduleAutoReload(supabaseAdmin, user.id);
     return json({ chronicle: prose, creditsRemaining: balanceAfter }, 200, cors);
   } catch (e) {
     // Release a reservation taken before this throw (086). supabaseAdmin is

@@ -1,14 +1,13 @@
 /**
- * tests/data/depletedImportRegistry.test.js — the depleted-resource import map
+ * tests/data/depletedImportRegistry.test.js — the depleted-resource shortage contract
  * and the income-gate resource needles must name REAL catalog keys.
  *
- * Regression pin for the dead-literal class: economicState's
- * DEPLETED_IMPORT_MAP once keyed 'clay_pits' (real key: 'river_clay') and the
+ * Regression pin for the dead-literal class: economicState's former local
+ * depletion map once keyed 'clay_pits' (real key: 'river_clay') and the
  * timber income gate probed 'forest_access'/'timber_rights' (no such keys) —
- * each dead literal silently disabled a whole terrain's economics. The map is
- * function-local, so this pin scans the module source (the repo's established
- * source-scan pattern) and asserts:
- *   1. every DEPLETED_IMPORT_MAP key is an EXACT RESOURCE_DATA key;
+ * each dead literal silently disabled a whole terrain's economics. Shortage
+ * prose now lives beside the canonical resource condition, so this pin asserts:
+ *   1. every RESOURCE_SEMANTICS entry has a non-empty shortage import;
  *   2. every hasNearbyResource(...) needle substring-matches at least one
  *      RESOURCE_DATA key (hasNearbyResource is a substring test).
  */
@@ -16,6 +15,10 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
+import {
+  RESOURCE_SEMANTICS,
+  resourceShortageImport,
+} from '../../src/domain/resourceSemantics.js';
 
 const SRC = readFileSync(
   resolve(process.cwd(), 'src', 'generators', 'economy', 'economicState.js'),
@@ -23,19 +26,18 @@ const SRC = readFileSync(
 );
 const CATALOG_KEYS = Object.keys(RESOURCE_DATA);
 
-describe('DEPLETED_IMPORT_MAP keys are real resource-catalog keys', () => {
-  // Extract the object literal after "const DEPLETED_IMPORT_MAP = {".
-  const start = SRC.indexOf('DEPLETED_IMPORT_MAP = {');
-  expect(start, 'DEPLETED_IMPORT_MAP must exist in economicState.js').toBeGreaterThan(-1);
-  const body = SRC.slice(start, SRC.indexOf('};', start));
-  const keys = [...body.matchAll(/^\s*([a-z_]+):\s*'/gm)].map((m) => m[1]);
+describe('canonical depleted-resource shortage prose', () => {
+  it.each(Object.keys(RESOURCE_SEMANTICS).map((key) => [key]))(
+    '%s resolves through the canonical semantics table',
+    (key) => {
+      const label = resourceShortageImport(key);
+      expect(typeof label).toBe('string');
+      expect(label.length).toBeGreaterThan(10);
+    },
+  );
 
-  it('extracts a non-trivial key set (scan is not vacuous)', () => {
-    expect(keys.length).toBeGreaterThanOrEqual(8);
-  });
-
-  it.each(keys.map((k) => [k]))('%s is an exact RESOURCE_DATA key', (key) => {
-    expect(CATALOG_KEYS, `dead map key '${key}' can never receive a depleted resource`).toContain(key);
+  it('covers exactly the native resource catalog', () => {
+    expect(Object.keys(RESOURCE_SEMANTICS).sort()).toEqual(CATALOG_KEYS.sort());
   });
 });
 

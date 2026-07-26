@@ -192,8 +192,18 @@ describe('applySubsumption matcher guards', () => {
 // ── Golden seeded generations ───────────────────────────────────────────────
 
 describe('golden settlements: DM-visible truths survive the full pipeline', () => {
-  test('seeded city keeps its required Multiple courthouses and parish network beside a Cathedral', () => {
-    const city = gen({ settType: 'city', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' });
+  test('pipeline city keeps its required Multiple courthouses and parish network beside a forced Cathedral', () => {
+    // Cathedral is optional. Force the greater into the integration fixture so
+    // this test exercises subsumption, not a seed-specific probability roll.
+    const city = gen({
+      settType: 'city',
+      culture: 'germanic',
+      terrain: 'grassland',
+      tradeRouteAccess: 'road',
+      _institutionToggles: {
+        'city::Religious::Cathedral (10,000+ only)': { allow: true, require: true },
+      },
+    });
     const n = names(city);
     expect(n.some(x => x.toLowerCase().includes('cathedral'))).toBe(true);
     expect(n).toContain('Multiple courthouses');
@@ -212,8 +222,18 @@ describe('golden settlements: DM-visible truths survive the full pipeline', () =
     }
   });
 
-  test('seeded town with a brewery KEEPS it', () => {
-    const town = gen({ settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' });
+  test('pipeline town keeps an explicitly required Brewery', () => {
+    // Brewery is optional. The explicit toggle makes the producer the invariant
+    // under test and keeps culture-weighting changes from invalidating the setup.
+    const town = gen({
+      settType: 'town',
+      culture: 'germanic',
+      terrain: 'grassland',
+      tradeRouteAccess: 'road',
+      _institutionToggles: {
+        'town::Crafts::Brewery': { allow: true, require: true },
+      },
+    });
     expect(names(town)).toContain('Brewery');
   });
 
@@ -225,11 +245,14 @@ describe('golden settlements: DM-visible truths survive the full pipeline', () =
   });
 
   test('a force-toggled institution survives subsumption by its greater', () => {
-    // Brewer is a subsumption lesser of Brewery; this town rolls a Brewery
-    // on this seed, so an unprotected Brewer would be absorbed.
+    // Brewer is a subsumption lesser of Brewery. Force both sides of the
+    // relationship so this tests the protection rule directly.
     const town = gen({
       settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road',
-      _institutionToggles: { 'town::Crafts::Brewer': { allow: true, require: true } },
+      _institutionToggles: {
+        'town::Crafts::Brewery': { allow: true, require: true },
+        'town::Crafts::Brewer': { allow: true, require: true },
+      },
     });
     const n = names(town);
     expect(n).toContain('Brewery');

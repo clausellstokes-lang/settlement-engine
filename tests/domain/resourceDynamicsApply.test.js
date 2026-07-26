@@ -28,7 +28,13 @@ const SMITHS = [
 /** A town wired to smelt iron IF it has the ore (the raw_extraction.smelting chain). */
 const smithTown = (nearbyResources, over = {}) => ({
   name: 'Ashford', tier: 'town', population: 1500, tradeRoute: 'road',
-  config: { terrainType: 'plains', tradeRouteAccess: 'road', nearbyResources: [...nearbyResources] },
+  config: {
+    terrainType: 'plains',
+    tradeRouteAccess: 'road',
+    nearbyResources: [...nearbyResources],
+    nearbyResourcesNative: [...nearbyResources],
+    nearbyResourcesCustom: [],
+  },
   _config: { terrainType: 'plains', tradeRouteAccess: 'road' },
   institutions: SMITHS,
   economicState: { prosperity: 'Comfortable', activeChains: [], primaryExports: [], primaryImports: [] },
@@ -53,6 +59,7 @@ describe('the writer — discovery', () => {
 
   it('appends membership + marks it abundant', () => {
     expect(applied.config.nearbyResources).toContain('iron_deposits');
+    expect(applied.config.nearbyResourcesNative).toContain('iron_deposits');
     expect(applied.config.nearbyResourcesState.iron_deposits).toBe('abundant');
   });
   it('records the regen-surviving resourceEdits delta, dual-written to _config', () => {
@@ -84,8 +91,12 @@ describe('the writer — removal', () => {
 
   it('strikes membership + records the removed suppression (dual-written)', () => {
     expect(applied.config.nearbyResources).not.toContain('iron_deposits');
-    expect(applied.config.resourceEdits.removed).toContain('iron_deposits');
-    expect(applied._config.resourceEdits.removed).toContain('iron_deposits');
+    expect(applied.config.nearbyResourcesNative)
+      .not.toContain('iron_deposits');
+    expect(applied.config.resourceEdits.removedNative)
+      .toContain('iron_deposits');
+    expect(applied._config.resourceEdits.removedNative)
+      .toContain('iron_deposits');
   });
   it('plants the negative vein_exhausted condition (bounded)', () => {
     const c = applied.activeConditions.find((x) => x.archetype === 'vein_exhausted');
@@ -101,16 +112,19 @@ describe('the writer — removal', () => {
 
 // ── 3. Reconcile is a no-op when the change activates/deactivates nothing ───────
 describe('reconcile — identity when nothing moves', () => {
-  it('adding a resource that feeds no runnable chain leaves economicState untouched (same ref)', () => {
+  it('refreshes terrain production even when no runnable chain changes', () => {
     const s = smithTown(['grain_fields']);
     const eco = s.economicState;
-    // gemstone_deposits with no lapidary institution activates nothing here.
+    // gemstone_deposits with no lapidary institution activates no chain, but
+    // its terrain commodity is still a canonical regional-production change.
     const out = reconcileProductionAfterResourceChange(eco, {
       settlement: { ...s, config: { ...s.config, nearbyResources: ['grain_fields', 'gemstone_deposits'] } },
       oldResources: ['grain_fields'], newResources: ['grain_fields', 'gemstone_deposits'],
       oldDepleted: [], newDepleted: [],
     });
-    expect(out).toBe(eco);
+    expect(out).not.toBe(eco);
+    expect(out.activeChains).toEqual([]);
+    expect(out.localProduction).toEqual(['grain', 'flour', 'luxury']);
   });
 });
 
@@ -121,10 +135,107 @@ describe('force ≡ organic — same downstream shape, differing only in provena
     const organic = applyResourceMembershipOutcomeToSettlement(base, discoverOutcome('iron_deposits'));
     const forced = addResource(smithTown(['grain_fields']), { type: 'ADD_RESOURCE', targetId: 'iron_deposits', id: 'dm1' });
     expect(organic.config.nearbyResources).toEqual(forced.config.nearbyResources);
+    expect(organic.config.nearbyResourcesNative)
+      .toEqual(forced.config.nearbyResourcesNative);
     expect(organic.config.resourceEdits.added).toEqual(forced.config.resourceEdits.added);
     // Provenance differs: only the organic path plants a condition.
     expect(organic.activeConditions.some((c) => c.archetype === 'resource_strike')).toBe(true);
     expect((forced.activeConditions || []).some((c) => c.archetype === 'resource_strike')).toBe(false);
+  });
+});
+
+describe('native/custom same-name membership', () => {
+  it('organic native exhaustion preserves the exact custom namesake', () => {
+    const collision = smithTown(['iron_deposits']);
+    collision.config.nearbyResourcesCustom = ['iron_deposits'];
+    collision.config.nearbyResourceDefinitions = [{
+      name: 'iron_deposits',
+      customDefinitionId: 'definition:resources:custom-iron',
+    }];
+    collision.config.nearbyResourceDefinitionsDepleted = [{
+      name: 'iron_deposits',
+      customDefinitionId: 'definition:resources:custom-iron',
+    }];
+    collision.config.nearbyResourcesNativeDepleted = [];
+    collision.config.nearbyResourcesDepleted = ['iron_deposits'];
+    collision.config.resourceEdits = {
+      depletedCustomDefinitionIds: ['definition:resources:custom-iron'],
+    };
+    const applied = applyResourceMembershipOutcomeToSettlement(
+      collision,
+      removeOutcome('iron_deposits', 'out.collision'),
+    );
+
+    expect(applied.config.nearbyResources).toEqual(['iron_deposits']);
+    expect(applied.config.nearbyResourcesNative).toEqual([]);
+    expect(applied.config.nearbyResourcesCustom).toEqual(['iron_deposits']);
+    expect(applied.config.resourceEdits.removed).toEqual([]);
+    expect(applied.config.resourceEdits.removedNative)
+      .toEqual(['iron_deposits']);
+    expect(applied.config.nearbyResourceDefinitionsDepleted)
+      .toEqual(collision.config.nearbyResourceDefinitionsDepleted);
+    expect(applied.config.nearbyResourcesDepleted)
+      .toEqual(['iron_deposits']);
+    expect(applied.config.resourceEdits.depletedCustomDefinitionIds)
+      .toEqual(['definition:resources:custom-iron']);
+  });
+
+  it('native discovery does not recover an exact depleted custom namesake', () => {
+    const customOnly = smithTown([]);
+    customOnly.config.nearbyResources = ['iron_deposits'];
+    customOnly.config.nearbyResourcesNative = [];
+    customOnly.config.nearbyResourcesCustom = ['iron_deposits'];
+    customOnly.config.nearbyResourcesNativeDepleted = [];
+    customOnly.config.nearbyResourcesDepleted = ['iron_deposits'];
+    customOnly.config.nearbyResourceDefinitionsDepleted = [{
+      name: 'iron_deposits',
+      customDefinitionId: 'definition:resources:custom-iron',
+    }];
+    customOnly.config.resourceEdits = {
+      depletedCustomDefinitionIds: ['definition:resources:custom-iron'],
+    };
+
+    const applied = applyResourceMembershipOutcomeToSettlement(
+      customOnly,
+      discoverOutcome('iron_deposits', 'out.collision-discovery'),
+    );
+
+    expect(applied.config.nearbyResourcesNative).toEqual(['iron_deposits']);
+    expect(applied.config.nearbyResourcesNativeDepleted).toEqual([]);
+    expect(applied.config.nearbyResourcesDepleted).toEqual(['iron_deposits']);
+    expect(applied.config.nearbyResourceDefinitionsDepleted)
+      .toEqual(customOnly.config.nearbyResourceDefinitionsDepleted);
+    expect(applied.config.resourceEdits.depletedCustomDefinitionIds)
+      .toEqual(['definition:resources:custom-iron']);
+  });
+
+  it('native discovery/removal preserves a same-name custom add receipt', () => {
+    const customOnly = smithTown([]);
+    customOnly.config.nearbyResources = ['iron_deposits'];
+    customOnly.config.nearbyResourcesNative = [];
+    customOnly.config.nearbyResourcesCustom = ['iron_deposits'];
+    customOnly.config.resourceEdits = {
+      added: [{ key: 'iron_deposits', custom: true }],
+    };
+
+    const discovered = applyResourceMembershipOutcomeToSettlement(
+      customOnly,
+      discoverOutcome('iron_deposits', 'out.native-discovery'),
+    );
+    expect(discovered.config.resourceEdits.added).toEqual([
+      { key: 'iron_deposits', custom: true },
+      { key: 'iron_deposits', custom: false },
+    ]);
+
+    const exhausted = applyResourceMembershipOutcomeToSettlement(
+      discovered,
+      removeOutcome('iron_deposits', 'out.native-removal'),
+    );
+    expect(exhausted.config.resourceEdits.added).toEqual([
+      { key: 'iron_deposits', custom: true },
+    ]);
+    expect(exhausted.config.resourceEdits.removedNative)
+      .toEqual(['iron_deposits']);
   });
 });
 

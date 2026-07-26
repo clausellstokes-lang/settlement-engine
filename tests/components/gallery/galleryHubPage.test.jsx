@@ -109,4 +109,38 @@ describe('GalleryHubPage', () => {
     expect(mocks.nav.navigate).toHaveBeenCalledWith('gallery');
     expect(mocks.galleryApi.fetchPublicGallery).not.toHaveBeenCalled();
   });
+
+  test('pagination state is isolated when client navigation switches to a sibling hub', async () => {
+    const forestPageTwo = { ...TILE, id: 'settlement-2', slug: 'pinewatch', name: 'Pinewatch' };
+    const coastalTile = {
+      ...TILE,
+      id: 'settlement-3',
+      slug: 'salt-harbor',
+      name: 'Salt Harbor',
+      terrain: 'coastal',
+    };
+    mocks.galleryApi.fetchPublicGallery.mockImplementation(({ page, filters }) => {
+      const terrain = filters?.terrain?.[0];
+      if (terrain === 'forest' && page === 0) {
+        return Promise.resolve({ items: [TILE], total: 2, hasMore: true });
+      }
+      if (terrain === 'forest' && page === 1) {
+        return Promise.resolve({ items: [forestPageTwo], total: 2, hasMore: false });
+      }
+      return Promise.resolve({ items: [coastalTile], total: 1, hasMore: false });
+    });
+
+    const { rerender } = render(<GalleryHubPage routeHub={{ facet: 'terrain', value: 'forest' }} />);
+    await screen.findByText('Thornwick');
+    fireEvent.click(screen.getByRole('button', { name: /load more/i }));
+    await screen.findByText('Pinewatch');
+
+    rerender(<GalleryHubPage routeHub={{ facet: 'terrain', value: 'coastal' }} />);
+    expect(await screen.findByText('Salt Harbor')).toBeTruthy();
+    expect(screen.queryByText('Thornwick')).toBeNull();
+    expect(screen.queryByText('Pinewatch')).toBeNull();
+    expect(mocks.galleryApi.fetchPublicGallery).toHaveBeenLastCalledWith(
+      expect.objectContaining({ page: 0, filters: { terrain: ['coastal'] } }),
+    );
+  });
 });

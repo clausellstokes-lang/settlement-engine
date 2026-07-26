@@ -31,6 +31,7 @@ import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from '../magicLedger.js';
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { coupContenders } from '../rulingPowerCoup.js';
 import { resolveBlockadeBypassChannel } from './foodStockpile.js';
 import {
@@ -51,6 +52,26 @@ function clampMult(value) {
 }
 
 const NEUTRAL = Object.freeze({ probabilityMult: 1, reasons: [] });
+
+/**
+ * Preserve the legacy institution-class fallback for native and genuinely
+ * unstamped rows without treating a current custom display name as a class key.
+ *
+ * `institutionClassValue` remains the canonical classifier. The projection here
+ * is local because this module is the consumer deciding whether those native
+ * class mechanics may affect stressor birth.
+ *
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {string} className
+ */
+function nativeInstitutionClassValue(settlement, className) {
+  const institutions = Array.isArray(settlement?.institutions)
+    ? settlement.institutions.filter(institution => (
+      nativeSemanticName(institution)
+    ))
+    : settlement?.institutions;
+  return institutionClassValue({ ...settlement, institutions }, className);
+}
 
 /**
  * Compose fired factors into a gate result.
@@ -213,7 +234,9 @@ export function magicDependenceSignals(settlement) {
   const ledger = magicLedger(settlement);
   if (!ledger.magicExists) return signals;
   const institutions = settlement?.institutions || [];
-  if (institutions.some((/** @type {any} */ inst) => ARCANE_INSTITUTION_PATTERN.test(String(inst?.name || '')))) {
+  if (institutions.some((/** @type {any} */ inst) => (
+    ARCANE_INSTITUTION_PATTERN.test(nativeSemanticName(inst))
+  ))) {
     signals.push('arcane institutions anchor daily life');
   }
   if (settlement?.defenseProfile?.magicDependency === true) {
@@ -229,7 +252,11 @@ export function magicDependenceSignals(settlement) {
   // at all marks magic-borne trade as load-bearing for the deadzone story.
   const magicTrade = !!resolveBlockadeBypassChannel(settlement)
     || settlement?.config?._magicTradeOnly === true
-    || institutions.some((/** @type {any} */ inst) => /teleportation|planar|extradimensional|airship/i.test(String(inst?.name || '')));
+    || institutions.some((/** @type {any} */ inst) => (
+      /teleportation|planar|extradimensional|airship/i.test(
+        nativeSemanticName(inst),
+      )
+    ));
   if (magicTrade) signals.push('trade arrives by teleport or airship');
   if (['medium', 'high'].includes(ledger.magicLevel)) {
     signals.push(`ambient magic runs ${ledger.magicLevel}`);
@@ -304,7 +331,7 @@ function famineGate(snapshot, pressure) {
   if (!entry) return NEUTRAL;
   const sid = String(pressure.settlementId);
   const ledger = foodLedger(entry.settlement);
-  const foodInst = institutionClassValue(entry.settlement, 'food');
+  const foodInst = nativeInstitutionClassValue(entry.settlement, 'food');
   const besieged = activeTypesAt(snapshot, sid).has('siege');
   return gateResult([
     besieged && { mult: 1.6, reason: 'The blockade is starving the granaries.' },
@@ -357,7 +384,7 @@ function politicalFractureGate(snapshot, pressure) {
       : legitimacy < 45 && { mult: 1.3, reason: 'The rulers are merely tolerated, and barely that.' },
     here.has('succession_void') && { mult: 1.4, reason: 'An empty seat invites rival claims to law itself.' },
     coupEcho > 0.15 && { mult: 1.3, reason: 'The recent coup left the constitution in splinters.' },
-    institutionClassValue(entry.settlement, 'admin') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'admin') >= 1
       && { mult: 0.7, reason: 'Working courts and councils absorb constitutional shocks.' },
     legitimacy >= 70 && { mult: 0.4, reason: 'A trusted government leaves fracture little to grip.' },
   ]);
@@ -427,7 +454,7 @@ function infiltrationGate(snapshot, pressure) {
     causalScore(entry, 'criminal_opportunity') >= 60
       && { mult: 1.4, reason: 'Open criminal ground gives a network room to root.' },
     hostileFactor(snapshot, sid, { hostileMult: 1.3, coldWarMult: 1.3 }),
-    institutionClassValue(entry.settlement, 'security') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'security') >= 1
       && { mult: 0.7, reason: 'A practised watch makes infiltration slow, expensive work.' },
   ]);
 }
@@ -496,7 +523,7 @@ function monsterRaiderGate(snapshot, pressure) {
     warNearby && { mult: 1.3, reason: 'War next door, and raiders follow armies like crows.' },
     causalScore(entry, 'defense_readiness') >= 70
       && { mult: 0.7, reason: 'A hard target; raiders prefer easier prey.' },
-    institutionClassValue(entry.settlement, 'defense') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'defense') >= 1
       && { mult: 0.85, reason: 'Standing defenses patrol the approaches.' },
   ]);
 }
@@ -528,7 +555,7 @@ function religiousConversionGate(snapshot, pressure) {
   if (!entry) return NEUTRAL;
   const sid = String(pressure.settlementId);
   const authority = causalScore(entry, 'religious_authority');
-  const religious = institutionClassValue(entry.settlement, 'religious');
+  const religious = nativeInstitutionClassValue(entry.settlement, 'religious');
   const occupied = activeTypesAt(snapshot, sid).has('occupation');
   return gateResult([
     occupied && { mult: 1.6, reason: "The occupier's faith arrives with its garrison." },
@@ -622,7 +649,7 @@ function marketShockGate(snapshot, pressure) {
     isEntrepot(entry.settlement) && { mult: 1.3, reason: 'An entrepôt lives and dies by the flow of goods.' },
     near.has('market_shock') && { mult: 1.4, reason: 'The panic is already spreading along the trade roads.' },
     here.has('indebtedness') && { mult: 1.3, reason: 'Leveraged ledgers amplify every tremor.' },
-    institutionClassValue(entry.settlement, 'finance') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'finance') >= 1
       && { mult: 0.8, reason: 'Established finance houses can absorb a run.' },
   ]);
 }
@@ -648,7 +675,7 @@ function criminalCorridorGate(snapshot, pressure) {
       && { mult: 1.25, reason: 'Embedded agents keep the route open.' },
     governanceLedger(entry.settlement).legitimacyScore < 40
       && { mult: 1.2, reason: 'Nobody trusts the authorities enough to inform.' },
-    institutionClassValue(entry.settlement, 'security') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'security') >= 1
       && { mult: 0.75, reason: 'A practised watch chokes smuggling at the gates.' },
   ]);
 }
@@ -663,7 +690,7 @@ function magicalInstabilityGate(snapshot, pressure) {
   const sid = String(pressure.settlementId);
   const ledger = magicLedger(entry.settlement);
   if (!ledger.magicExists) return null; // low magic is not wild magic
-  const arcane = institutionClassValue(entry.settlement, 'arcane');
+  const arcane = nativeInstitutionClassValue(entry.settlement, 'arcane');
   if (arcane === 0 && !['medium', 'high'].includes(ledger.magicLevel)) return null;
   // Dead ground and wild surges cannot share a sky.
   if (activeTypesAt(snapshot, sid).has('magic_deadzone')) return null;
@@ -693,7 +720,7 @@ function magicDeadzoneGate(snapshot, pressure) {
       && { mult: 1.5, reason: 'The burned-out surge left dead ground behind it.' },
     signals.length >= 2
       && { mult: 1.3, reason: `Magic is load-bearing here: ${signals.slice(0, 2).join('; ')}.` },
-    institutionClassValue(entry.settlement, 'arcane') >= 1
+    nativeInstitutionClassValue(entry.settlement, 'arcane') >= 1
       && { mult: 0.8, reason: 'Standing wards resist the silence, for now.' },
   ], [
     `Why it matters here: ${signals[0]}.`,

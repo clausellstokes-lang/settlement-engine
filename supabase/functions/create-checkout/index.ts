@@ -486,11 +486,27 @@ export async function handleCreateCheckout(
 
     if (user) {
       const admin = adminClient();
-      const { data: profile } = await admin
+      const { data: profile, error: profileError } = await admin
         .from('profiles')
-        .select('stripe_customer_id')
+        .select('stripe_customer_id, banned_at, disabled_at, deleted_at')
         .eq('id', user.id)
         .single();
+      if (profileError || !profile) {
+        throw new Error(`Checkout profile lookup failed: ${profileError?.message ?? 'profile missing'}`);
+      }
+      // A still-valid JWT must not reopen billing after moderation or account
+      // deletion. This service-role read happens before any Stripe customer or
+      // Checkout side effect; migration 178's profile trigger is the independent
+      // race backstop if deletion commits while this handler is in flight.
+      if (
+        !isAnonymousProduct
+        && (profile.banned_at != null || profile.disabled_at != null || profile.deleted_at != null)
+      ) {
+        return new Response(
+          JSON.stringify({ error: 'account_inactive' }),
+          { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+        );
+      }
 
       stripeCustomerId = typeof profile?.stripe_customer_id === 'string'
         ? profile.stripe_customer_id
@@ -502,10 +518,23 @@ export async function handleCreateCheckout(
           metadata: { supabase_user_id: user.id },
         });
         stripeCustomerId = customer.id;
-        await admin
+        const { error: bindError } = await admin
           .from('profiles')
           .update({ stripe_customer_id: stripeCustomerId })
           .eq('id', user.id);
+        if (bindError) {
+          // Do not strand an external customer that the deletion worker cannot
+          // discover because the profile binding lost the race.
+          try {
+            await stripeApi.customers.del(stripeCustomerId);
+          } catch (cleanupError) {
+            logError('create-checkout', user.id, cleanupError, {
+              stage: 'cleanup_unbound_stripe_customer',
+              stripe_customer_id: stripeCustomerId,
+            });
+          }
+          throw new Error(`Stripe customer binding failed: ${bindError.message}`);
+        }
       }
     }
 
@@ -589,6 +618,18 @@ export async function handleCreateCheckout(
       sessionParams.customer = stripeCustomerId;
     } else if (user?.email) {
       sessionParams.customer_email = user.email;
+    }
+    if (mode === 'subscription' && user) {
+      // The subscription survives independently of its Checkout Session. Carry
+      // the verified owner onto the subscription itself so a late invoice or
+      // lifecycle event remains attributable after account deletion clears the
+      // profile's live Stripe ids.
+      sessionParams.subscription_data = {
+        metadata: {
+          supabase_user_id: user.id,
+          product,
+        },
+      };
     }
     if (redeemCoupon) {
       // Server-attached discount ONLY. NEVER allow_promotion_codes: the

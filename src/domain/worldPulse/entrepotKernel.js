@@ -27,6 +27,9 @@
 
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { advanceEntrepots, entrepotActive, TRANSSHIPMENT_INSTITUTIONS } from '../spatial/entrepots.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './stablePart.js';
 
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -43,6 +46,9 @@ function asObject(v) {
  *  @param {EntrepotSettlement} settlement @returns {{ name: string, category: string, tags: string[] }|null} */
 function nextTransshipment(settlement) {
   const names = new Set((Array.isArray(settlement?.institutions) ? settlement.institutions : [])
+    // A custom namesake is a distinct authored identity. Its presentation
+    // label cannot satisfy a native entrepôt infrastructure obligation.
+    .filter((/** @type {InstLike} */ i) => !isMaterializedCustomContent(i))
     .map((/** @type {InstLike} */ i) => String(i?.name || '').toLowerCase()));
   for (const spec of TRANSSHIPMENT_INSTITUTIONS) {
     if (!names.has(spec.name.toLowerCase())) return { name: spec.name, category: spec.category, tags: [...spec.tags] };

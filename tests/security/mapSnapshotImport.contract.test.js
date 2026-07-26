@@ -18,11 +18,11 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const SRC = readFileSync(resolve(process.cwd(), 'src', 'store', 'campaignSlice.js'), 'utf-8');
+const SRC = readFileSync(resolve(process.cwd(), 'src', 'store', 'galleryImportMap.js'), 'utf-8');
 
 /** Slice out the importGalleryMapWithCampaign action body. */
 function importActionBody() {
-  const start = SRC.indexOf('importGalleryMapWithCampaign');
+  const start = SRC.indexOf('importGalleryMapWithCampaignImpl');
   expect(start, 'importGalleryMapWithCampaign not found — rename?').toBeGreaterThan(-1);
   // Grab a generous window; the action is well under this size.
   return SRC.slice(start, start + 6000);
@@ -36,11 +36,11 @@ function importActionBody() {
  * fix — so this guard would have failed against the pre-wave-1 code.
  */
 function singleImportActionBody() {
-  const start = SRC.indexOf('importGalleryMap: async');
+  const start = SRC.indexOf('importGalleryMapImpl');
   expect(start, 'importGalleryMap not found — rename?').toBeGreaterThan(-1);
   // End at the sibling's DEFINITION, not the first textual mention (comments in
   // importGalleryMap reference the sibling by name).
-  const end = SRC.indexOf('importGalleryMapWithCampaign: async');
+  const end = SRC.indexOf('importGalleryMapWithCampaignImpl');
   expect(end, 'importGalleryMapWithCampaign not found — rename?').toBeGreaterThan(start);
   return SRC.slice(start, end);
 }

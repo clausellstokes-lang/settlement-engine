@@ -20,6 +20,13 @@ const mocks = vi.hoisted(() => ({
   },
   storeState: {
     auth: { user: { id: 'user-1' } },
+    // GalleryPage's owner-card hydration reads the same owner-scoped cache
+    // contract as the Library. These tests start from an already-hydrated cache
+    // because they exercise gallery behavior, not the hydration seam itself.
+    savedSettlementsLoaded: true,
+    savedSettlementsOwnerId: 'user-1',
+    savedSettlementsHydrationGeneration: 0,
+    setSavedSettlements: vi.fn(),
   },
   nav: {
     navigate: vi.fn(),
@@ -27,9 +34,13 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock('../../src/lib/gallery.js', () => mocks.galleryApi);
-vi.mock('../../src/store/index.js', () => ({
-  useStore: selector => selector(mocks.storeState),
-}));
+vi.mock('../../src/store/index.js', () => {
+  function useStore(selector) {
+    return selector(mocks.storeState);
+  }
+  useStore.getState = () => mocks.storeState;
+  return { useStore };
+});
 vi.mock('../../src/hooks/useRoute.js', () => mocks.nav);
 vi.mock('../../src/components/PublicDossierView.jsx', () => ({
   default: ({ dossier }) => <div data-testid="public-dossier">{dossier?.settlement?.name}</div>,

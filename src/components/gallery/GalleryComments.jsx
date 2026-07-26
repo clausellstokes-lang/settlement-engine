@@ -102,15 +102,17 @@ function CommentActions({ comment, canReport, onDelete, onReport }) {
 }
 
 export default function GalleryComments({ dossier, auth, onCountChange }) {
+  const dossierId = dossier?.id || null;
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+  const [commentsLoading, setCommentsLoading] = useState(() => !!dossierId);
+  const [loadError, setLoadError] = useState(null);
   // Which comment's inline delete-confirmation is open. A one-click danger
   // button on an irreversible action is the exact case DeleteConfirmation guards
   // everywhere else in the app (P10 / P11 cross-surface consistency).
   const [confirmingId, setConfirmingId] = useState(null);
-  const dossierId = dossier?.id || null;
 
   const applyRows = useCallback((rows) => {
     setComments(rows);
@@ -120,15 +122,26 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
   const reload = useCallback(async () => {
     if (!dossierId) return;
     const rows = await fetchGalleryComments(dossierId);
+    setLoadError(null);
     applyRows(rows);
   }, [applyRows, dossierId]);
 
   useEffect(() => {
     let cancelled = false;
     if (!dossierId) return () => {};
-    fetchGalleryComments(dossierId).then(rows => {
-      if (!cancelled) applyRows(rows);
-    });
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- dossier identity begins a new request
+    setCommentsLoading(true);
+    setLoadError(null);
+    fetchGalleryComments(dossierId)
+      .then(rows => {
+        if (!cancelled) applyRows(rows);
+      })
+      .catch(err => {
+        if (!cancelled) setLoadError(err?.message || 'Comments could not be loaded.');
+      })
+      .finally(() => {
+        if (!cancelled) setCommentsLoading(false);
+      });
     return () => { cancelled = true; };
   }, [applyRows, dossierId]);
 
@@ -222,13 +235,29 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
           Sign in to comment. Anyone can read the discussion.
         </div>
       )}
-      {error && (
-        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
-          {error}
+      {(error || loadError) && (
+        <div
+          role="alert"
+          style={{
+            border: `1px solid ${RED}`,
+            background: RED_BG,
+            color: RED,
+            padding: SP.sm,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            fontWeight: 850,
+          }}
+        >
+          {[error, loadError].filter(Boolean).join(' ')}
+        </div>
+      )}
+      {commentsLoading && (
+        <div role="status" style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
+          Loading comments…
         </div>
       )}
       <div style={{ display: 'grid', gap: 8 }}>
-        {comments.length === 0 ? (
+        {!commentsLoading && !loadError && (comments.length === 0 ? (
           <div style={{ border: `1px dashed ${BORDER}`, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No comments yet.
           </div>
@@ -272,7 +301,7 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
               />
             )}
           </article>
-        )))}
+        ))))}
       </div>
     </section>
   );

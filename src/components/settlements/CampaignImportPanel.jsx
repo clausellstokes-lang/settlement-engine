@@ -13,8 +13,10 @@
  * The mechanics live in the schema wall (domain/tableEvents.js) and the resumable
  * session (lib/campaignImport.js); this component is presentation + the confirm gate.
  */
-import { useState, useRef } from 'react';
-import { Upload, Check, X, Plus, Trash2, ScrollText } from 'lucide-react';
+import {
+  lazy, Suspense, useState, useRef,
+} from 'react';
+import { Upload, Check, X, Plus, Trash2, ScrollText, FileJson } from 'lucide-react';
 import {
   INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, GREEN,
   sans, serif_, FS, SP,
@@ -31,6 +33,13 @@ import {
   createImportSession, addBlankRow, updateRow, setRowConfirmed, setRowSkipped,
   confirmedRecords, importSummary,
 } from '../../lib/campaignImport.js';
+
+// Structured reconciliation pulls in hostile JSON admission and the settlement
+// migration seam. Keep that graph behind its own user action; opening the notes
+// importer should not pay for a workflow the user did not choose.
+const StructuredCampaignReconciliation = lazy(
+  () => import('./StructuredCampaignReconciliation.jsx'),
+);
 
 // Rule-framed, not rounded (the house plate idiom): no radius, no tint fills.
 const fieldStyle = {
@@ -121,7 +130,10 @@ function ReviewRow({ row, settlements, onPatch, onConfirm, onSkip }) {
 
 export default function CampaignImportPanel({ campaign, settlements = [], onClose }) {
   const importTableEvents = useStore(s => s.importTableEvents);
-  const [step, setStep] = useState('paste'); // 'paste' | 'review' | 'done'
+  // Notes and structured exports share the same campaign entry point but keep
+  // separate trust models: notes propose table events; reconciliation admits
+  // only a structured SettlementForge export and never infers prose mechanics.
+  const [step, setStep] = useState('paste'); // paste | review | done | reconcile
   const [notes, setNotes] = useState('');
   const [session, setSession] = useState(null);
   const [committed, setCommitted] = useState(0);
@@ -208,7 +220,50 @@ export default function CampaignImportPanel({ campaign, settlements = [], onClos
                   Or add events by hand
                 </Button>
               </div>
+              <div style={{
+                borderTop: `1px solid ${BORDER}`,
+                paddingTop: SP.md,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                gap: SP.sm,
+              }}>
+                <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+                  Already have a SettlementForge export?
+                </span>
+                <span style={{
+                  color: MUTED,
+                  fontFamily: sans,
+                  fontSize: FS.xxs,
+                  lineHeight: 1.45,
+                }}>
+                  Compare its structured settlements with this campaign before anything is
+                  created or attached.
+                </span>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  icon={<FileJson size={12} />}
+                  onClick={() => setStep('reconcile')}
+                >
+                  Reconcile a SettlementForge export
+                </Button>
+              </div>
             </div>
+          )}
+
+          {step === 'reconcile' && (
+            <Suspense fallback={(
+              <div role="status" style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs }}>
+                Opening structured reconciliation…
+              </div>
+            )}>
+              <StructuredCampaignReconciliation
+                campaign={campaign}
+                existingSettlements={members}
+                onBack={() => setStep('paste')}
+              />
+            </Suspense>
           )}
 
           {step === 'review' && session && (

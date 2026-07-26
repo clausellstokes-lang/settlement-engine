@@ -13,7 +13,7 @@ import {
 } from '../lib/gallery.js';
 import { navigate } from './useRoute.js';
 import { useStore } from '../store/index.js';
-import { saves as savesService } from '../lib/saves.js';
+import { useEnsureSavedSettlementsLoaded } from './useOwnerScopedSaves.js';
 
 export const EMPTY_GALLERY_FILTERS = Object.freeze({
   tier: [],
@@ -48,8 +48,7 @@ const PAGE_SIZE = 24;
 
 export function useGalleryPageState(routeSlug = null) {
   const auth = useStore(s => s.auth);
-  const savedSettlementsLoaded = useStore(s => s.savedSettlementsLoaded);
-  const setSavedSettlements = useStore(s => s.setSavedSettlements);
+  useEnsureSavedSettlementsLoaded(auth?.user?.id);
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [hasMore, setHasMore] = useState(false);
@@ -65,7 +64,7 @@ export function useGalleryPageState(routeSlug = null) {
   const [filters, setFilters] = useState(() => ({ ...EMPTY_GALLERY_FILTERS }));
   const [activeSlug, setActiveSlug] = useState(routeSlug || null);
   const [dossier, setDossier] = useState(null);
-  const [dossierLoading, setDossierLoading] = useState(false);
+  const [dossierLoading, setDossierLoading] = useState(() => !!routeSlug);
   const [dossierError, setDossierError] = useState(null);
   // V-25b — an unlisted party link may resolve to a CAMPAIGN (map_with_campaign)
   // rather than a settlement dossier; when it does, the detail area renders the
@@ -134,32 +133,20 @@ export function useGalleryPageState(routeSlug = null) {
     return () => { cancelled = true; };
   }, [galleryQuery]);
 
-  // Hydrate the viewer's own saved settlements so the gallery owner card can
-  // resolve ownership (GalleryDetail matches a save's public_slug to the open
-  // dossier). Otherwise only WorldMap / SettlementsPanel hydrate them, so a
-  // deep-link, refresh, or post-save reload that lands straight on a gallery URL
-  // would leave savedSettlements empty and hide the "Your gallery listing" card
-  // until the user bounced through another page. Idempotent — gated on the
-  // savedSettlementsLoaded flag (same source savesService the other pages use).
-  useEffect(() => {
-    if (savedSettlementsLoaded) return;
-    let cancelled = false;
-    savesService.list()
-      .then(loaded => { if (!cancelled) setSavedSettlements(loaded); })
-      .catch(err => console.error('[gallery] Failed to hydrate saves:', err));
-    return () => { cancelled = true; };
-  }, [savedSettlementsLoaded, setSavedSettlements]);
-
   // The slug whose dossier is currently open or in-flight. The route-sync
   // effect reads this to avoid re-fetching a dossier openDossier just opened:
   // a card click calls openDossier (one fetch) AND navigate(), and that navigate
   // bumps routeSlug → re-runs the effect, which would otherwise fire a second
   // identical fetch. Kept in a ref so it's current synchronously, without
   // re-triggering the effect.
-  const openSlugRef = useRef(routeSlug || null);
+  const openSlugRef = useRef(null);
+  // Every open owns a generation. A superseded request may settle, reject, or
+  // run its finally block, but none may write over the newer detail view.
+  const dossierRequestGenRef = useRef(0);
 
   const openDossier = useCallback(async (slug, options = {}) => {
     if (!slug) return;
+    const requestGen = ++dossierRequestGenRef.current;
     openSlugRef.current = slug;
     setActiveSlug(slug);
     setDossierLoading(true);
@@ -170,21 +157,23 @@ export function useGalleryPageState(routeSlug = null) {
     if (!options.replace) navigate('gallery', { params: { slug } });
     try {
       const next = await fetchPublicDossier(slug);
+      if (dossierRequestGenRef.current !== requestGen) return;
       // V-25b — a settlement miss may be an unlisted CAMPAIGN party link. Resolve it
       // to its read-only player face before declaring the slug unavailable.
       if (!next) {
         const campaign = await fetchUnlistedCampaign(slug);
-        if (openSlugRef.current !== slug) return; // a newer open superseded this one
+        if (dossierRequestGenRef.current !== requestGen) return;
         if (campaign) { setUnlistedCampaign(campaign); setDossier(null); }
         else { setDossier(null); setDossierError('This settlement is not available.'); }
       } else {
         setDossier(next);
       }
     } catch (err) {
+      if (dossierRequestGenRef.current !== requestGen) return;
       setDossierError(err?.message || 'This settlement could not be opened.');
       setDossier(null);
     } finally {
-      setDossierLoading(false);
+      if (dossierRequestGenRef.current === requestGen) setDossierLoading(false);
     }
   }, []);
 
@@ -193,7 +182,12 @@ export function useGalleryPageState(routeSlug = null) {
       // Already open (or loading) for this slug — e.g. openDossier just
       // navigate()'d here. Don't fire a duplicate fetch for what's on screen.
       if (openSlugRef.current === routeSlug) return;
-      void Promise.resolve().then(() => openDossier(routeSlug, { replace: true }));
+      void Promise.resolve().then(() => {
+        if (openSlugRef.current !== routeSlug) {
+          return openDossier(routeSlug, { replace: true });
+        }
+        return undefined;
+      });
       return;
     }
     if (typeof window === 'undefined') return;
@@ -201,15 +195,22 @@ export function useGalleryPageState(routeSlug = null) {
     const slug = params.get('slug');
     if (slug) {
       if (openSlugRef.current === slug) return;
-      void Promise.resolve().then(() => openDossier(slug, { replace: true }));
+      void Promise.resolve().then(() => {
+        if (openSlugRef.current !== slug) {
+          return openDossier(slug, { replace: true });
+        }
+        return undefined;
+      });
       return;
     }
     // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
     // close the open dossier so the view matches the URL.
+    dossierRequestGenRef.current += 1;
     openSlugRef.current = null;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- route-sync: close dossier to match URL
     setActiveSlug(null);
     setDossier(null);
+    setDossierLoading(false);
     setDossierError(null);
     setUnlistedCampaign(null);
   }, [routeSlug, openDossier]);
@@ -236,8 +237,11 @@ export function useGalleryPageState(routeSlug = null) {
   }, [galleryQuery, page, total]);
 
   const backToList = useCallback(() => {
+    dossierRequestGenRef.current += 1;
+    openSlugRef.current = null;
     setActiveSlug(null);
     setDossier(null);
+    setDossierLoading(false);
     setDossierError(null);
     setUnlistedCampaign(null);
     setActionError(null);

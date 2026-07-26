@@ -101,9 +101,12 @@ describe('the annotation derivation stays tier-blind (source scan)', () => {
     expect(src).not.toMatch(FORBIDDEN);
   });
 
-  test('the pane wires the gate from its OWN canEdit / saveId (the cosmetic-edit predicate)', () => {
+  test('the pane wires the gate from its owner-authorized edit identity', () => {
     const src = readFileSync(join(ROOT, 'src/components/townMap/SettlementMapPane.jsx'), 'utf8');
     expect(src).toMatch(/entitled=\{!!canEdit\}/);
-    expect(src).toMatch(/savedMap=\{saveId != null\}/);
+    // `authoringSaveId` is `saveId` only for the DM projection. Player/public
+    // views must not see an owner-only purchase/edit affordance merely because
+    // the underlying settlement happens to be saved.
+    expect(src).toMatch(/savedMap=\{authoringSaveId != null\}/);
   });
 });

@@ -1,14 +1,18 @@
 /**
  * townMapGlyphAssign.test.js — THE ILLUSTRATED TOWN (IT-1): institution/building → glyph.
  *
- * Pins the glyphKindFor waterfall (fill-mass → exact-name → category-default → seeded
- * house), the PINNED category vocabulary (equal to DISTRICT_CATEGORIES, never imported),
- * determinism + anchor-stability, and library completeness (every kind it can emit is a
- * real glyph in the medieval set).
+ * Pins the glyphKindFor waterfall (fill-mass → admitted glyph → exact-name →
+ * category-default → seeded house), the PINNED category vocabulary (equal to
+ * DISTRICT_CATEGORIES, never imported), determinism + anchor-stability, and
+ * library completeness (every kind it can emit is a real medieval glyph).
  */
 import { describe, expect, it } from 'vitest';
 
-import { glyphKindFor, CATEGORY_GLYPH_DEFAULT } from '../../src/domain/townMap/glyphAssign.js';
+import {
+  CATEGORY_GLYPH_DEFAULT,
+  CUSTOM_SETTLEMENT_GLYPH_IDS,
+  glyphKindFor,
+} from '../../src/domain/townMap/glyphAssign.js';
 import { DISTRICT_CATEGORIES } from '../../src/domain/districtProfile.js';
 import { MEDIEVAL_GLYPHS } from '../../src/design/townGlyphs/medieval.js';
 
@@ -28,12 +32,41 @@ describe('glyphAssign — the PINNED category vocabulary', () => {
       }
     }
   });
+
+  it('every authorable custom glyph resolves to a real glyph in the medieval set', () => {
+    for (const kind of CUSTOM_SETTLEMENT_GLYPH_IDS) {
+      expect(MEDIEVAL_GLYPHS[kind], `${kind} missing`).toBeTruthy();
+    }
+  });
 });
 
 describe('glyphAssign — the waterfall', () => {
   it('fill mass renders as simplified massing rows, regardless of name', () => {
-    expect(glyphKindFor({ anchorKey: 'b.1', name: 'Old Mill', kind: 'fill' }, 'craft').kind).toBe('massing');
+    expect(glyphKindFor({
+      anchorKey: 'b.1',
+      name: 'Old Mill',
+      kind: 'fill',
+      glyph: 'watchtower',
+    }, 'craft').kind).toBe('massing');
     expect(glyphKindFor({ anchorKey: 'b.2', name: 'Anything', kind: 'fill' }, 'residential').kind).toBe('massing');
+  });
+
+  it('a registered authored glyph wins before exact-name and category inference', () => {
+    expect(glyphKindFor({
+      anchorKey: 'b.custom',
+      name: 'The Ordinary Smithy',
+      kind: 'landmark',
+      glyph: 'mage-tower',
+    }, 'religious').kind).toBe('mage-tower');
+  });
+
+  it('an unknown authored glyph fails closed into the existing inference waterfall', () => {
+    expect(glyphKindFor({
+      anchorKey: 'b.invalid',
+      name: 'The Ordinary Smithy',
+      kind: 'landmark',
+      glyph: 'uploaded-mesh',
+    }, 'religious').kind).toBe('forge');
   });
 
   it('exact institution-name matches win over the category default', () => {
@@ -47,6 +80,15 @@ describe('glyphAssign — the waterfall', () => {
       ['Grand Bazaar', 'stall-rows'],
       ['Town Granary', 'gambrel-store'],
       ['The West Docks', 'quay-shed'],
+      ['Redbank Tannery', 'kiln-yard'],
+      ['North Gate Barracks', 'barracks'],
+      ['Old Signal Tower', 'watchtower'],
+      ['Weavers Guildhall', 'guildhall'],
+      ['Royal Archive', 'archive-hall'],
+      ['Willow Farmstead', 'farmstead'],
+      ['Saints Graveyard', 'graveyard-chapel'],
+      ['Eastern Army Camp', 'encampment'],
+      ['Ruined Palace', 'ruin-shell'],
     ];
     for (const [name, kind] of cases) {
       // Put each in a MISMATCHED district so the exact rule is what fires.

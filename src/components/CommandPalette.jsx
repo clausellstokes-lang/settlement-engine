@@ -21,6 +21,7 @@ import { t } from '../copy/index.js';
 import Button from './primitives/Button.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from './theme.js';
+import { captureSavedSettlementsHydration } from '../store/savedSettlementsHydration.js';
 
 // Routes surfaced as jump targets: the primary nav plus a few deep pages a DM
 // reaches often. Elevated-only (admin) is withheld; navigation's own guards still
@@ -54,6 +55,7 @@ export default function CommandPalette({ onClose }) {
   const savedSettlements = useStore((s) => s.savedSettlements);
   const savedSettlementsLoaded = useStore((s) => s.savedSettlementsLoaded);
   const setSavedSettlements = useStore((s) => s.setSavedSettlements);
+  const authUserId = useStore((s) => s.auth?.user?.id ?? null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const listId = 'cmdk-results';
@@ -64,9 +66,21 @@ export default function CommandPalette({ onClose }) {
   useEffect(() => {
     if (savedSettlementsLoaded) return undefined;
     let cancelled = false;
-    savesService.list().then((list) => { if (!cancelled) setSavedSettlements(list || []); }).catch(() => {});
-    return () => { cancelled = true; };
-  }, [savedSettlementsLoaded, setSavedSettlements]);
+    const hydration = captureSavedSettlementsHydration(useStore.getState(), authUserId);
+    if (!hydration) return undefined;
+    savesService.list()
+      .then((list) => {
+        if (cancelled) return;
+        setSavedSettlements(list || [], hydration);
+      })
+      .catch(() => {
+        // The palette is optional navigation chrome. The Library owns visible
+        // load errors, so a failed background warm-up leaves current results alone.
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [authUserId, savedSettlementsLoaded, setSavedSettlements]);
 
   const items = useMemo(() => buildItems(savedSettlements), [savedSettlements]);
   const q = query.trim().toLowerCase();

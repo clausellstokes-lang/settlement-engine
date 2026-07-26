@@ -30,6 +30,7 @@ import { foodLedger } from '../foodLedger.js';
 import { deriveSystemVariable } from '../causalState.js';
 import { canonImports, canonExports } from '../canonicalAccessors.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { deityTemper } from './deityAxes.js';
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
@@ -184,7 +185,9 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   // fighting force (ruin-filter class): milInstCount + materielInstHits below both
   // read this filtered list, so a destroyed military institution contributes zero.
   const institutions = liveInstitutions(s);
-  const milInstCount = institutions.filter((/** @type {any} */ i) => MILITARY_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const milInstCount = institutions.filter((/** @type {any} */ i) => (
+    MILITARY_INSTITUTION_PATTERN.test(nativeSemanticName(i))
+  )).length;
   const led = defenseLedger(s);
   // The defense ledger's military score (walls + garrison) is the conserved
   // defensive-force quantity; blend it with the raw military-institution count.
@@ -203,7 +206,9 @@ export function deriveMilitaryCapacity(itemOrSettlement, ctx = {}) {
   // law-order institution patterns use), never a fuzzy name-collection join.
   const exportNames = namesFrom(canonExports(s));
   const importNames = namesFrom(canonImports(s));
-  const materielInstHits = institutions.filter((/** @type {any} */ i) => MATERIEL_PATTERN.test(String(i?.name || ''))).length;
+  const materielInstHits = institutions.filter((/** @type {any} */ i) => (
+    MATERIEL_PATTERN.test(nativeSemanticName(i))
+  )).length;
   const materielHits =
     exportNames.filter((/** @type {string} */ n) => MATERIEL_PATTERN.test(n)).length
     + materielInstHits;

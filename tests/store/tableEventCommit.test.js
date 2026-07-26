@@ -8,7 +8,7 @@
  *   • the free-text flavor rides a non-mechanical field and survives verbatim,
  *   • the effect + receipt PERSIST (survive a fresh reload — state-lifecycle),
  *   • a directive missing the source stamp or naming a non-table event type is a
- *     safe no-op (the eager dispatcher fails closed).
+ *     safe no-op (the lazy authoring dispatcher fails closed).
  */
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { create } from 'zustand';
@@ -74,7 +74,7 @@ function reloadInto(entry) {
 }
 
 /** Queue a validated table event exactly as the lazy panel would. */
-function queueTableEvent(store, input) {
+async function queueTableEvent(store, input) {
   const { ok, record } = validateTableEvent(input);
   expect(ok).toBe(true);
   return store.getState().queueEdit('table-event', { directive: buildTableEffect(record), record });
@@ -86,19 +86,19 @@ describe('R-1 the session ledger commits typed, bounded, source:table effects', 
   let store;
   beforeEach(() => { store = makeStore(); withCanonSave(store); });
 
-  test('TABLE_EVENT_SOURCE is the literal the eager dispatcher stamps', () => {
-    // The helper (settlementRenameHelpers) hard-codes 'table' to avoid pulling
-    // tableLedger into first paint; this pin keeps the two in lockstep.
+  test('TABLE_EVENT_SOURCE is the literal the lazy dispatcher stamps', () => {
+    // The writer hard-codes 'table' rather than importing the richer Session
+    // Ledger schema; this pin keeps those two closed vocabularies in lockstep.
     expect(TABLE_EVENT_SOURCE).toBe('table');
   });
 
   test('an obligation commits an APPLY_STRESSOR receipt tagged source:table, persists, survives reload', async () => {
     const FLAVOR = "the party pledged the baron's ransom, and the debt fell on the town";
-    const edit = queueTableEvent(store, {
+    const edit = await queueTableEvent(store, {
       kind: 'obligation', magnitude: 'major', targets: { ref: 'debt', label: 'debt' }, flavor: FLAVOR,
     });
     expect(edit).not.toBeNull();
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
 
     // The receipt (an eventLog entry) carries the table provenance + verbatim flavor.
     const log = store.getState().eventLog;
@@ -120,9 +120,9 @@ describe('R-1 the session ledger commits typed, bounded, source:table effects', 
 
   test('an incident commits a canon flavor line tagged source:table (no mechanical delta), survives reload', async () => {
     const FLAVOR = 'The party drank the Guildmaster under the table.';
-    queueTableEvent(store, { kind: 'incident', flavor: FLAVOR });
+    await queueTableEvent(store, { kind: 'incident', flavor: FLAVOR });
     const before = store.getState().systemState;
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
 
     const line = store.getState().eventLog.find(e => e.type === 'TABLE_INCIDENT');
     expect(line).toBeTruthy();
@@ -137,21 +137,21 @@ describe('R-1 the session ledger commits typed, bounded, source:table effects', 
     expect(reloaded.eventLog.some(e => e.type === 'TABLE_INCIDENT' && e.source === 'table')).toBe(true);
   });
 
-  test('the eager dispatcher FAILS CLOSED on a directive missing the table source', () => {
+  test('the lazy dispatcher FAILS CLOSED on a directive missing the table source', async () => {
     // A hand-crafted directive without the source stamp must be a no-op — no
     // receipt, no mutation. (Fabricates the payload to bypass the schema wall.)
-    store.getState().queueEdit('table-event', {
+    await store.getState().queueEdit('table-event', {
       directive: { dispatch: 'applyEvent', event: { type: 'APPLY_STRESSOR', targetId: 'debt', payload: { severity: 0.8 } } },
     });
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
     expect(store.getState().eventLog.some(e => e.event?.type === 'APPLY_STRESSOR')).toBe(false);
   });
 
-  test('the eager dispatcher FAILS CLOSED on a non-table event type', () => {
-    store.getState().queueEdit('table-event', {
+  test('the lazy dispatcher FAILS CLOSED on a non-table event type', async () => {
+    await store.getState().queueEdit('table-event', {
       directive: { dispatch: 'applyEvent', event: { type: 'DESTROY_SETTLEMENT', targetId: 'x', source: 'table' } },
     });
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
     expect(store.getState().eventLog.some(e => e.event?.type === 'DESTROY_SETTLEMENT')).toBe(false);
   });
 });
@@ -178,31 +178,31 @@ describe('R-1 the session ledger — an incident on a DRAFT settlement is refuse
     });
   }
 
-  test('queueEdit refuses the incident (null) and NEVER queues it — no false success on commit', () => {
+  test('queueEdit refuses the incident (null) and NEVER queues it — no false success on commit', async () => {
     const store = makeStore();
     withDraftSave(store);
-    const res = queueTableEvent(store, { kind: 'incident', flavor: 'The tavern burned down.' });
+    const res = await queueTableEvent(store, { kind: 'incident', flavor: 'The tavern burned down.' });
     expect(res).toBeNull();
     // Nothing entered the queue, so commit is a no-op and no line is written.
     expect(store.getState().pendingEditsQueue.filter(e => !e.revertedAt)).toHaveLength(0);
-    store.getState().commitPendingEdits();
+    await store.getState().commitPendingEdits();
     expect(store.getState().eventLog.some(e => e.type === 'TABLE_INCIDENT')).toBe(false);
   });
 
-  test('an OBLIGATION (dispatch applyEvent) is NOT over-refused on a draft — it still queues', () => {
+  test('an OBLIGATION (dispatch applyEvent) is NOT over-refused on a draft — it still queues', async () => {
     const store = makeStore();
     withDraftSave(store);
-    const res = queueTableEvent(store, {
+    const res = await queueTableEvent(store, {
       kind: 'obligation', magnitude: 'major', targets: { ref: 'debt', label: 'debt' }, flavor: 'a debt fell due',
     });
     expect(res).not.toBeNull();
     expect(store.getState().pendingEditsQueue.filter(e => !e.revertedAt)).toHaveLength(1);
   });
 
-  test('the same incident on a CANON settlement is admitted (the gate is the phase, not a wedge)', () => {
+  test('the same incident on a CANON settlement is admitted (the gate is the phase, not a wedge)', async () => {
     const store = makeStore();
     withCanonSave(store);
-    const res = queueTableEvent(store, { kind: 'incident', flavor: 'A festival was held.' });
+    const res = await queueTableEvent(store, { kind: 'incident', flavor: 'A festival was held.' });
     expect(res).not.toBeNull();
   });
 });

@@ -53,8 +53,17 @@ MUTATED_FILES=(
   src/store/campaignSlice.js
   src/domain/display/chroniclersLetter.js
   src/design/townGlyphs/medieval.js
+  src/lib/flagRegistry.js
   tests/copy/.composed-prose-seams-baseline.json
   src/domain/realm/heraldRouting.js
+  src/domain/townMap/audienceProjection.js
+  src/domain/townScene/sceneProjection.js
+  src/components/townMap/fog/FogPlayerView.jsx
+  src/components/townMap/scene3d/SettlementScene3D.jsx
+  src/components/townMap/scene3d/TownSceneCanvas.jsx
+  supabase/migrations/182_operational_obligation_health.sql
+  supabase/migrations/183_application_command_journal.sql
+  supabase/migrations/184_import_reconciliation_commands.sql
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -381,6 +390,62 @@ check_caught "address-web/fabricated faction level" src/domain/dossier/realmEnti
 #     kind with no conscious classification is the exact no-orphan violation.
 perl -0pi -e "s/ conquest: 'war',//" src/domain/realm/heraldRouting.js
 check_caught "realm/herald routing no-orphan" src/domain/realm/heraldRouting.js "npx vitest run tests/lint/heraldRouting.walker.test.js"
+
+# 38. Game Grade promotion safety — a proof-only workbench is flipped on in the
+#     shipped flag defaults. The promotion contract must keep incomplete surfaces
+#     behind their proof flag until every named acceptance blocker is closed.
+perl -0pi -e "s/  settlementWorkbench: false,/  settlementWorkbench: true,/" src/lib/flagRegistry.js
+check_caught "game-grade/proof-only flag promoted" src/lib/flagRegistry.js "npx vitest run tests/domain/gameGradePromotionContract.test.js"
+
+# 39. Application-command identity — disable the fingerprint-conflict guard so
+#     the journal treats same-id/different-behavior input as an ordinary replay.
+#     The executed migration suite must reject that divergent identity and prove
+#     the original save projection is not replaced.
+perl -0pi -e "s/if v_row\\.fingerprint <> p_fingerprint then/if false then -- mutation-sweep: bypass fingerprint conflict/" supabase/migrations/183_application_command_journal.sql
+check_caught "commands/journal conflict contract drift" supabase/migrations/183_application_command_journal.sql "npx vitest run tests/security/applicationCommandJournal.pglite.test.js"
+
+# 40. Import reconciliation — disable the reviewed-vs-current membership
+#     comparison so a stale topology is admitted into the rehome transaction.
+#     The executed migration suite must catch the resulting write, not merely a
+#     drift in the reason string returned by the stale branch.
+perl -0pi -e "s/if v_actual_ids is distinct from v_expected_ids then/if false then -- mutation-sweep: admit stale membership topology/" supabase/migrations/184_import_reconciliation_commands.sql
+check_caught "commands/import topology-stale drift" supabase/migrations/184_import_reconciliation_commands.sql "npx vitest run tests/security/importReconciliationCommands.pglite.test.js"
+
+# 41. Obligation objectives — move the webhook critical boundary from 60 to 61
+#     minutes in both report/list functions. The exact-boundary executed SQL test
+#     must red rather than allowing a one-minute false-warning window.
+perl -0pi -e "s/v_webhook_critical_age constant interval := interval '60 minutes';/v_webhook_critical_age constant interval := interval '61 minutes';/g" supabase/migrations/182_operational_obligation_health.sql
+check_caught "obligations/webhook critical-age boundary drift" supabase/migrations/182_operational_obligation_health.sql "npx vitest run tests/security/operationalObligationHealth.pglite.test.js"
+
+# 42. Town-map audience wall — admit an explicitly hidden hazard to the
+#     player-visible vocabulary. The projection invariant must catch the hidden
+#     derived fact before any 2D handout, fog view, or 3D compiler can consume it.
+perl -0pi -e "s/visibility === 'player';/visibility === 'player' || visibility === 'hidden';/" src/domain/townMap/audienceProjection.js
+check_caught "town-map/player projection admits hidden hazard" src/domain/townMap/audienceProjection.js "npx vitest run tests/security/townMapPlayerProjection.test.js"
+
+# 43. Town-scene audience wall — make an unknown audience fail open to the DM
+#     projection. The scene security suite's negative control carries a real
+#     covert sentinel, so this mutation must expose it and red the gate.
+perl -0pi -e "s/  return 'public';/  return 'dm';/" src/domain/townScene/sceneProjection.js
+check_caught "town-scene/unknown audience fails open to dm" src/domain/townScene/sceneProjection.js "npx vitest run tests/security/townScenePlayerSafe.test.js"
+
+# 44. Fog authorization — compile a shared fog surface with the DM audience
+#     instead of the player audience. The fail-closed boundary test must red
+#     before any unrevealed fact could reach a live player window or handout.
+perl -0pi -e "s/audience: 'player',/audience: 'dm',/" src/components/townMap/fog/FogPlayerView.jsx
+check_caught "town-scene/fog player surface uses dm audience" src/components/townMap/fog/FogPlayerView.jsx "npx vitest run tests/security/townSceneFogFailClosed.test.js"
+
+# 45. Accessible companion layout — remove the responsive layout hook from the
+#     scene root. The local accessibility contract must catch the loss before
+#     high-zoom and narrow-screen CSS silently stop stacking the companion.
+perl -0pi -e "s/data-town-scene-layout/data-scene-layout/" src/components/townMap/scene3d/SettlementScene3D.jsx
+check_caught "town-scene/accessibility layout hook removed" src/components/townMap/scene3d/SettlementScene3D.jsx "npx vitest run tests/ui/townSceneAccessibility.contract.test.jsx"
+
+# 46. WebGL recovery — detach the listener from the real context-loss event.
+#     The canvas browser contract must prove context loss is prevented, paused,
+#     announced, and delegated to recovery.
+perl -0pi -e "s/webglcontextlost/webglcontextlost-disabled/g" src/components/townMap/scene3d/TownSceneCanvas.jsx
+check_caught "town-scene/canvas context-loss listener detached" src/components/townMap/scene3d/TownSceneCanvas.jsx "npx vitest run tests/ui/townSceneCanvas.contract.test.jsx"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

@@ -92,7 +92,7 @@ describe('PendingChangesBar — mobile write-action gate', () => {
     render(<PendingChangesBar />);
 
     expect(screen.getByRole('button', { name: /commit/i })).toBeTruthy();
-    expect(screen.getByRole('button', { name: /revert/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /discard/i })).toBeTruthy();
     expect(screen.getByRole('button', { name: /preview cascade/i })).toBeTruthy();
     expect(screen.queryByText(/larger screen/i)).toBeNull();
   });

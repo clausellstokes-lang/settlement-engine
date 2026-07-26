@@ -116,6 +116,12 @@ function seedStore(store) {
 }
 
 const NOW = '2026-01-01T00:00:00.000Z';
+// This reload proof deliberately executes two independent 52-tick pause/resume
+// paths and compares their terminal worlds. Under the full repository's
+// parallel Vitest load it can cross the generic 20-second ceiling while still
+// completing in roughly 21 seconds; keep a narrow, bounded integration timeout
+// rather than weakening the global hang detector.
+const RELOAD_RESUME_TIMEOUT_MS = 30_000;
 
 describe('advance pause/resume store path (Stage 3)', () => {
   beforeEach(() => {
@@ -200,7 +206,7 @@ describe('advance pause/resume store path (Stage 3)', () => {
     let g2 = 0; let dr;
     do { if (g2++ > 60) throw new Error('loop'); dr = await direct.getState().resolveIntervalMajors('camp-1', {}, { now: NOW }); } while (dr && dr.status === 'paused');
     expect(reloaded.getState().campaigns[0].worldState.worldState).toEqual(direct.getState().campaigns[0].worldState.worldState);
-  });
+  }, RELOAD_RESUME_TIMEOUT_MS);
 
   test('UNDO of a paused interval reverts to pre-tick-0 and drops the cursor', async () => {
     const store = makeStore();

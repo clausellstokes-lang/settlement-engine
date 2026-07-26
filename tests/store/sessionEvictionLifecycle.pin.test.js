@@ -3,21 +3,21 @@
  * sessionEvictionLifecycle.pin.test.js — THE LIFECYCLE PIN (§7.3, M-9d).
  *
  * The owner's most-bitten bug class: a write that survives one path and ghosts
- * another. Here the invariant is inverted — an EVICTION must NOT destroy unsaved
- * local work. This pin is the regression wall:
+ * another. This pin covers the SYNCHRONOUS eviction-initiation step, before the
+ * auth service emits SIGNED_OUT:
  *
  *   1. localStorage's persist key ('settlementforge') is BYTE-IDENTICAL through
- *      eviction — the partialize (config + toggles) is the user's unsaved work,
- *      and evictSession only touches the transient sessionEvicted flag (excluded
- *      from the partialize), so the persisted blob must not move a byte.
- *   2. NO store-RESET action fires during eviction (an operationRegistry-driven
- *      spy over the reset/clear family) — eviction is a banner + a LOCAL sign-out,
- *      never a wipe.
+ *      initiation — the partialize (config + toggles) is the user's unsaved work,
+ *      and evictSession only raises the transient sessionEvicted flag (excluded
+ *      from the partialize) before requesting local sign-out.
+ *   2. NO store-reset action fires synchronously from evictSession. The real
+ *      SIGNED_OUT listener subsequently calls clearAuth, which intentionally
+ *      clears owner-scoped caches but still leaves the partialized draft intact.
  *   3. Supersession DEDUPES: the first eviction wins; a second one is a no-op (no
  *      error-toast storm from N in-flight paid calls all returning 401).
  *
- * It drives the REAL store (src/store/index.js) with its REAL persist middleware,
- * so the partialize + localStorage write path is exercised end-to-end, not stubbed.
+ * It drives the REAL store with its REAL persist middleware. Only the auth-service
+ * transition is stubbed, deliberately stopping before the SIGNED_OUT listener.
  */
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { useStore } from '../../src/store/index.js';
@@ -26,36 +26,36 @@ import { EXEMPT_OPERATIONS, OPERATIONS } from '../../src/store/operationRegistry
 
 const PERSIST_KEY = 'settlementforge';
 
-// The state-destroying action family, read from the registry (not hand-listed) so a
-// future reset action is automatically included in the wall.
-const RESET_ACTIONS = [...Object.keys(OPERATIONS), ...Object.keys(EXEMPT_OPERATIONS)]
+// The clear/reset family that evictSession must not invoke synchronously. These
+// actions may legitimately run later when the auth listener handles SIGNED_OUT.
+const SYNCHRONOUS_CLEAR_ACTIONS = [...Object.keys(OPERATIONS), ...Object.keys(EXEMPT_OPERATIONS)]
   .filter((n) => /^(clear|reset)/.test(n) && n !== 'clearSessionEviction')
   .filter((n) => typeof useStore.getState()[n] === 'function');
 
-describe('THE LIFECYCLE PIN — single-session eviction never destroys unsaved work (§7.3, M-9d)', () => {
+describe('THE LIFECYCLE PIN — synchronous single-session eviction initiation (§7.3, M-9d)', () => {
   beforeEach(() => {
     localStorage.clear();
     useStore.setState({ sessionEvicted: false });
   });
 
   test('the reset family is non-empty (the wall would be vacuous otherwise)', () => {
-    expect(RESET_ACTIONS).toContain('clearSavedSettlements');
-    expect(RESET_ACTIONS).toContain('clearCampaigns');
-    expect(RESET_ACTIONS.length).toBeGreaterThan(3);
+    expect(SYNCHRONOUS_CLEAR_ACTIONS).toContain('clearSavedSettlements');
+    expect(SYNCHRONOUS_CLEAR_ACTIONS).toContain('clearCampaigns');
+    expect(SYNCHRONOUS_CLEAR_ACTIONS.length).toBeGreaterThan(3);
   });
 
-  test('eviction: persist key byte-identical, no reset action, banner up, dedup', async () => {
+  test('initiation: persist key byte-identical, no synchronous clear, banner up, dedup', async () => {
     // Sign in + seed some persisted "unsaved work" into a partialized field (config).
     useStore.setState((s) => { s.auth = { ...s.auth, user: { id: 'u1' }, tier: 'premium', loading: false }; });
     useStore.setState((s) => { s.config = { ...s.config, __pinSeed: 'UNSAVED-WORK-XYZ' }; });
     const before = localStorage.getItem(PERSIST_KEY);
     expect(before, 'the persist middleware wrote the seeded config').toContain('UNSAVED-WORK-XYZ');
 
-    // Spy on the whole reset/clear family — the wall.
+    // Spy on the whole reset/clear family for this synchronous step.
     const st = useStore.getState();
-    const resetSpies = RESET_ACTIONS.map((n) => ({ n, spy: vi.spyOn(st, n) }));
-    // A LOCAL sign-out is expected exactly once; stub it so the test stays hermetic
-    // (no dynamic import, no mock-auth localStorage write to a different key).
+    const resetSpies = SYNCHRONOUS_CLEAR_ACTIONS.map((n) => ({ n, spy: vi.spyOn(st, n) }));
+    // Stub the auth service so SIGNED_OUT is not emitted: that later listener
+    // intentionally clears owner caches and is outside this synchronous wall.
     const signOutSpy = vi.spyOn(authService, 'signOutLocalSession').mockResolvedValue(undefined);
 
     // ── Drive the eviction ──
@@ -65,8 +65,10 @@ describe('THE LIFECYCLE PIN — single-session eviction never destroys unsaved w
     expect(useStore.getState().sessionEvicted).toBe(true);
     // (2) the persist key is BYTE-IDENTICAL — the unsaved work is untouched.
     expect(localStorage.getItem(PERSIST_KEY)).toBe(before);
-    // (3) NO store-reset/clear action fired.
-    resetSpies.forEach(({ n, spy }) => expect(spy, `${n} must NOT fire during eviction`).not.toHaveBeenCalled());
+    // (3) NO store-reset/clear action fired synchronously.
+    resetSpies.forEach(({ n, spy }) => {
+      expect(spy, `${n} must NOT fire during eviction initiation`).not.toHaveBeenCalled();
+    });
     // (4) a LOCAL sign-out fired exactly once.
     expect(signOutSpy).toHaveBeenCalledTimes(1);
 

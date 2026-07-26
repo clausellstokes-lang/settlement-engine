@@ -10,9 +10,10 @@
 import { describe, it, expect } from 'vitest';
 import {
   buildEdit, appendEdit, revertEdit, dropEdit,
-  activeEdits, hasPending, previewCascade, EDIT_KINDS,
+  activeEdits, hasPending, EDIT_KINDS,
   COMMITTABLE_EDIT_KINDS,
 } from '../../src/domain/pendingEdits.js';
+import { previewCascade } from '../../src/domain/pendingEditsPreview.js';
 
 describe('pendingEdits — construction', () => {
   it('builds a frozen edit with id + kind + payload + ts', () => {
@@ -131,6 +132,11 @@ describe('pendingEdits — cascade preview', () => {
 
   it('empty queue → empty preview', () => {
     const p = previewCascade(baseSettlement, []);
+    expect(p.epistemic).toEqual({
+      class: 'bounded_projection',
+      basis: 'queued_intents_and_current_read_model',
+      simulatesCommit: false,
+    });
     expect(p.summaryLines).toEqual([]);
     expect(p.narrativeImpact).toBe('none');
     expect(p.warnings).toEqual([]);
@@ -144,6 +150,104 @@ describe('pendingEdits — cascade preview', () => {
     ];
     const p = previewCascade(baseSettlement, q);
     expect(p.summaryLines).toContain('+1 institution');
+  });
+
+  it('preserves balanced structural intents as exact directional changes', () => {
+    const q = [
+      buildEdit('add-institution', { id: 'new-guild', label: 'New Guild' }, 1),
+      buildEdit('remove-institution', { id: 'old-abbey', label: 'Old Abbey' }, 2),
+    ];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability).toEqual({ status: 'available', reason: null });
+    expect(p.scope).toEqual({
+      kind: 'intent-set',
+      count: 2,
+      intentIds: q.map(edit => edit.id),
+    });
+    expect(p.structural.status).toBe('balanced');
+    expect(p.structural.deltas).toEqual([
+      {
+        intentId: q[0].id,
+        kind: 'add-institution',
+        subject: 'institution',
+        direction: 'add',
+        amount: 1,
+        targetLabel: 'New Guild',
+      },
+      {
+        intentId: q[1].id,
+        kind: 'remove-institution',
+        subject: 'institution',
+        direction: 'remove',
+        amount: 1,
+        targetLabel: 'Old Abbey',
+      },
+    ]);
+    expect(p.summaryLines).toContain(
+      '2 structural changes balance to no net count change',
+    );
+  });
+
+  it('names preview unavailability instead of reporting no structural effect', () => {
+    const q = [buildEdit('add-institution', { id: 'new-guild' }, 1)];
+    const p = previewCascade(null, q);
+
+    expect(p.availability.status).toBe('unavailable');
+    expect(p.epistemic.class).toBe('unavailable');
+    expect(p.availability.reason).toMatch(/settlement is unavailable/i);
+    expect(p.structural.status).toBe('unavailable');
+    // The queued direction remains inspectable even though downstream evaluation
+    // could not run.
+    expect(p.structural.deltas).toMatchObject([
+      { direction: 'add', subject: 'institution', targetLabel: 'new-guild' },
+    ]);
+    expect(p.summaryLines).toEqual([]);
+  });
+
+  it('marks table-event consequences unassessed instead of claiming zero effect', () => {
+    const q = [buildEdit('table-event', {
+      record: {
+        kind: 'obligation',
+        targets: { ref: 'debt', label: 'A debt' },
+      },
+      directive: {
+        dispatch: 'applyEvent',
+        event: { type: 'APPLY_STRESSOR', payload: { type: 'debt', severity: 0.5 } },
+      },
+    }, 1)];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability.status).toBe('partial');
+    expect(p.epistemic.class).toBe('partial_projection');
+    expect(p.availability.reason).toMatch(/typed consequences.*does not simulate/i);
+    expect(p.structural.status).toBe('unassessed');
+    expect(p.summaryLines).toContain(
+      '1 table event queued; downstream effect unassessed',
+    );
+  });
+
+  it('keeps known directional rows when a mixed table-event review is partial', () => {
+    const q = [
+      buildEdit('add-institution', { id: 'new-guild', label: 'New Guild' }, 1),
+      buildEdit('remove-institution', { id: 'old-abbey', label: 'Old Abbey' }, 2),
+      buildEdit('table-event', {
+        record: { kind: 'stressor-relief' },
+        directive: {
+          dispatch: 'applyEvent',
+          event: { type: 'RESOLVE_STRESSOR', payload: { type: 'debt', magnitude: 0.5 } },
+        },
+      }, 3),
+    ];
+    const p = previewCascade(baseSettlement, q);
+
+    expect(p.availability.status).toBe('partial');
+    expect(p.structural.status).toBe('unassessed');
+    expect(p.structural.deltas).toMatchObject([
+      { direction: 'add', targetLabel: 'New Guild' },
+      { direction: 'remove', targetLabel: 'Old Abbey' },
+    ]);
+    expect(p.summaryLines).not.toContain('No structural effect');
   });
 
   it('reverted edits don\'t count', () => {
@@ -190,5 +294,18 @@ describe('pendingEdits — cascade preview', () => {
     ];
     const p = previewCascade(baseSettlement, q);
     expect(p.warnings.some(w => /Removing multiple institutions/.test(w))).toBe(true);
+  });
+
+  it('previews NPC lifecycle decisions by name and flags narrated prose for follow-up', () => {
+    const narrated = { ...baseSettlement, _narrative: { thesis: '...' } };
+    const q = [
+      buildEdit('stasis-npc', { npcIndex: 0, reason: 'journey' }, 1),
+      buildEdit('recall-npc', { npcIndex: 1 }, 2),
+    ];
+    const p = previewCascade(narrated, q);
+    expect(p.summaryLines).toContain('A: would be set aside (journey)');
+    expect(p.summaryLines).toContain('B: would be recalled home');
+    expect(p.downstreamCounts.npcChanges).toBe(2);
+    expect(p.narrativeImpact).toBe('progression-suggested');
   });
 });

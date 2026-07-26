@@ -29,6 +29,7 @@ const DEFAULT_VIEW = 'generate';
 // `path`  — public URL.
 // `title` — document.title fragment (DEFAULT_VIEW renders bare SITE_NAME).
 // `guard` — 'auth' (signed-in) | 'elevated' (developer/admin) | undefined.
+// `feedback` — false when route chrome must suppress the floating support widget.
 // `nav`   — top-nav metadata `{ label, order }` for the views that appear in the
 //           primary navigation. The single source of truth for the nav bar:
 //           App derives its NAV array from these (see the NAV export below), so
@@ -100,16 +101,16 @@ export const ROUTES = Object.freeze([
   { view: 'compare-chatgpt',       path: '/compare/chatgpt',       title: 'About' },
   { view: 'compare-worldographer', path: '/compare/worldographer', title: 'About' },
   { view: 'compare-kanka',         path: '/compare/kanka',         title: 'About' },
-  { view: 'signin',                path: '/signin',                title: 'Sign In' },
-  { view: 'register',              path: '/register',              title: 'Create Your Account' },
-  { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password' },
+  { view: 'signin',                path: '/signin',                title: 'Sign In',             feedback: false },
+  { view: 'register',              path: '/register',              title: 'Create Your Account', feedback: false },
+  { view: 'reset-password',        path: '/reset-password',        title: 'Reset Password',      feedback: false },
   // The recovery-link landing: completes a forgot-password reset. The auth-
   // recovery edge function redirects its emailed link here; the page detects the
   // recovery session and shows the set-new-password form.
-  { view: 'set-new-password',      path: '/set-new-password',      title: 'Set a New Password' },
-  { view: 'verify-email',          path: '/verify-email',          title: 'Verify Your Email' },
-  { view: 'confirm-email',         path: '/confirm-email',         title: 'Email Confirmed' },
-  { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete' },
+  { view: 'set-new-password',      path: '/set-new-password',      title: 'Set a New Password',  feedback: false },
+  { view: 'verify-email',          path: '/verify-email',          title: 'Verify Your Email',   feedback: false },
+  { view: 'confirm-email',         path: '/confirm-email',         title: 'Email Confirmed',     feedback: false },
+  { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete',   feedback: false },
 ]);
 
 // Param routes — matched after exact paths, IN ORDER. Each declares a matcher
@@ -261,6 +262,16 @@ export function titleForView(view) {
 /** Guard requirement for a view ('auth' | 'elevated' | undefined). */
 export function guardForView(view) {
   return VIEW_TO_ROUTE[view] ? VIEW_TO_ROUTE[view].guard : undefined;
+}
+
+/**
+ * Whether route chrome may show the global floating support affordance.
+ *
+ * Auth, recovery, and purchase-completion routes opt out in the canonical
+ * route table so App does not maintain a parallel list that can drift.
+ */
+export function allowsFloatingFeedback(view) {
+  return VIEW_TO_ROUTE[view]?.feedback !== false;
 }
 
 /**

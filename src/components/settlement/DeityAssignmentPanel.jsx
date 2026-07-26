@@ -26,7 +26,20 @@
 import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry, mintDeityRef } from '../../lib/customRegistry.js';
+import {
+  customContentForActiveContext,
+} from '../../store/activeCustomContentContext.js';
+import {
+  DEITY_ALIGNMENT,
+  DEITY_LAW,
+  DEITY_TIER,
+} from '../../domain/customContentSchema.js';
 import { capacityForTier } from '../../domain/worldPulse/cultImpositionApply.js';
+// MANIFEST PARITY (atlas Gap #14 cure): the panel lane runs the SAME availability
+// predicates the composer runs. Legal import: this panel rides the lazy dossier
+// chunk (dossierLazyTabs), and the manifest's lazy-leaf law only forbids EAGER /
+// store importers (vendorPdfLazy sentinel guards it).
+import { AFFORDANCE_MANIFEST } from '../../domain/events/affordanceManifest.js';
 import { td } from '../../copy/deityAuthoring.js';
 import { BORDER, CARD, FS, INK, MUTED, SECOND, sans } from '../theme.js';
 import { RUBRIC } from '../../design/organic/rubrication.js';
@@ -52,18 +65,34 @@ const headingStyle = {
   fontSize: FS.xs, fontWeight: 700, color: DEITY_ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em',
 };
 
+/**
+ * Resolve an enum through its canonical authoring vocabulary. Longer labels
+ * carry an explanatory clause after an em dash; the register needs only the
+ * canonical leading name. Unknown legacy values are omitted rather than
+ * exposing a stored enum token.
+ */
+function compactAxisLabel(options, value) {
+  const label = options.find((option) => option.key === value)?.label;
+  return label ? label.split(/\s+—\s+/)[0] : null;
+}
+
 /** The one-line axis summary of an embedded snapshot (never invents a name). */
 function snapLine(snap) {
   if (!snap) return '';
-  const parts = [snap.alignmentAxis, snap.rankAxis].filter(Boolean);
-  if (snap.lawAxis && snap.lawAxis !== 'neutral') parts.push(snap.lawAxis);
+  const parts = [
+    compactAxisLabel(DEITY_ALIGNMENT, snap.alignmentAxis),
+    compactAxisLabel(DEITY_TIER, snap.rankAxis),
+  ].filter(Boolean);
+  if (snap.lawAxis && snap.lawAxis !== 'neutral') {
+    parts.push(compactAxisLabel(DEITY_LAW, snap.lawAxis));
+  }
   if (snap.domain) parts.push(snap.domain);
-  return parts.join(' · ');
+  return parts.filter(Boolean).join(' · ');
 }
 
 export default function DeityAssignmentPanel() {
   const settlement = useStore((s) => s.settlement);
-  const customContent = useStore((s) => s.customContent);
+  const customContent = useStore(customContentForActiveContext);
   const setPrimaryDeity = useStore((s) => s.setPrimaryDeity);
   const imposeCult = useStore((s) => s.imposeCult);
   const canUseCustom = useStore((s) => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -140,6 +169,14 @@ export default function DeityAssignmentPanel() {
   const cultRefSet = new Set(cults.map((c) => String(c._deityRef || c.name || '')));
   const cultOptions = options.filter((d) => d.minted !== (selectedPatron?.minted) && !cultRefSet.has(d.minted));
 
+  // MANIFEST PARITY (Gap #14): evaluate the SAME availability predicates the
+  // composer evaluates, with the composer's ctx shape, BEFORE offering a write.
+  // Unavailability grays-with-reason in the manifest's own sentences (the
+  // composer's `[...reasons, ...unlocks].join(' ')` idiom) — never a silent no-op.
+  const verbCtx = { canUseCustom };
+  const patronVerb = AFFORDANCE_MANIFEST.SET_PRIMARY_DEITY.predicate(settlement, verbCtx);
+  const cultVerb = AFFORDANCE_MANIFEST.IMPOSE_CULT.predicate(settlement, verbCtx);
+
   return (
     <div data-testid="deity-assignment-panel" style={wrapStyle}>
       {/* Patron */}
@@ -153,11 +190,17 @@ export default function DeityAssignmentPanel() {
             aria-label={td('assign.patronHeading')}
             value={selectedPatron?.refId || ''}
             onChange={(e) => setPrimaryDeity?.(e.target.value || null)}
+            disabled={!patronVerb.available}
             style={selectStyle}
           >
             <option value="">{td('assign.noPatron')}</option>
             {options.map((d) => <option key={d.refId} value={d.refId}>{d.name}</option>)}
           </select>
+          {!patronVerb.available && (
+            <div data-testid="patron-verb-unavailable" style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
+              {[...patronVerb.reasons, ...patronVerb.unlocks].join(' ')}
+            </div>
+          )}
           {currentSnap && (
             <div style={{ fontSize: FS.micro, color: SECOND, marginTop: 6, lineHeight: 1.4 }}>
               <strong style={{ color: INK }}>{currentSnap.name}</strong>
@@ -186,8 +229,13 @@ export default function DeityAssignmentPanel() {
               ))}
             </div>
           )}
-          {cultCapacity === 0 ? (
-            <div style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5 }}>{td('assign.tooSmall')}</div>
+          {!cultVerb.available ? (
+            // Grayed-with-reason: the manifest's own refusal sentences (parity
+            // with the composer's unavailable-verb line), replacing the panel's
+            // former hand-derived capacity note.
+            <div data-testid="cult-verb-unavailable" style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5 }}>
+              {[...cultVerb.reasons, ...cultVerb.unlocks].join(' ')}
+            </div>
           ) : (
             <>
               <select

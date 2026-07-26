@@ -58,7 +58,9 @@ const fingerprint = mapDirtyFingerprint;
 export default function AutoSaveChip({ saving = false }) {
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const campaign = useStore(s =>
-    activeCampaignId ? (s.campaigns || []).find(c => c.id === activeCampaignId) : null,
+    activeCampaignId != null
+      ? (s.campaigns || []).find(c => String(c.id) === String(activeCampaignId))
+      : null,
   );
   const liveMapState = useStore(s => s.mapState);
 
@@ -75,7 +77,7 @@ export default function AutoSaveChip({ saving = false }) {
     return fingerprint(liveMapState) !== fingerprint(campaign.mapState);
   }, [liveMapState, campaign?.mapState]);
 
-  if (!activeCampaignId || !campaign) return null;
+  if (activeCampaignId == null || !campaign) return null;
 
   let dotColor = GOLD;
   let label = 'Saved';

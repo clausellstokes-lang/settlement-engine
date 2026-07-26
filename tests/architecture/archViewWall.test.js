@@ -19,15 +19,30 @@ import { describe, it, expect } from 'vitest';
 import { buildArchMesh } from '../../src/domain/townMap/arch/emitter.js';
 import { encodeGlb } from '../../src/domain/townMap/arch/glb.js';
 import { cathedralRuleset } from '../../src/domain/townMap/arch/rulesets/cathedral.js';
-import { GOVERNOR_TUNING, createGovernorState, observeFrame, ladderFor } from '../../scripts/lib/adaptiveGovernor.mjs';
+import {
+  GOVERNOR_TUNING,
+  createGovernorState,
+  observeFrame,
+  ladderFor,
+} from '../../src/lib/townScene/adaptiveQuality.js';
 
 /** byte-equal two Uint8Arrays. @param {Uint8Array} a @param {Uint8Array} b @returns {boolean} */
 function bytesEqual(a, b) { if (a.length !== b.length) return false; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false; return true; }
 /** the K-5 governor's whole export vocabulary -- NONE of it may appear in a golden arch/ file. */
-const GOVERNOR_VOCAB = ['qualityLevel', 'createGovernorState', 'observeFrame', 'ladderFor', 'GOVERNOR_TUNING', 'setQualityCeiling', 'ceilingForMode'];
+const GOVERNOR_VOCAB = [
+  'qualityLevel',
+  'createGovernorState',
+  'observeFrame',
+  'ladderFor',
+  'actuationPlanFor',
+  'GOVERNOR_TUNING',
+  'setQualityCeiling',
+  'ceilingForMode',
+];
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ARCH_DIR = join(ROOT, 'src/domain/townMap/arch');
+const SRC_DIR = join(ROOT, 'src');
 
 /** recursively collect every arch/*.js source path. */
 function archFiles(dir = ARCH_DIR, out = []) {
@@ -35,6 +50,15 @@ function archFiles(dir = ARCH_DIR, out = []) {
     const p = join(dir, f);
     if (statSync(p).isDirectory()) archFiles(p, out);
     else if (f.endsWith('.js')) out.push(p);
+  }
+  return out;
+}
+/** recursively collect shipped JavaScript source outside node_modules/build output. */
+function shippedSourceFiles(dir = SRC_DIR, out = []) {
+  for (const f of readdirSync(dir)) {
+    const p = join(dir, f);
+    if (statSync(p).isDirectory()) shippedSourceFiles(p, out);
+    else if (/\.(js|jsx|mjs)$/.test(f)) out.push(p);
   }
   return out;
 }
@@ -76,9 +100,27 @@ describe('the view wall: arch/ imports only arch/ + kernel (no view, no three.js
       }
     }
   });
-  it('package.json does not depend on three', () => {
-    const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-    expect({ ...pkg.dependencies, ...pkg.devDependencies }.three).toBeUndefined();
+  it('Three.js imports are confined to the lazy settlement-scene view layer', () => {
+    const users = [];
+    for (const path of shippedSourceFiles()) {
+      const source = code(readFileSync(path, 'utf8'));
+      const importsThree = (
+        /\bfrom\s+['"]three(?:\/[^'"]*)?['"]/.test(source)
+        || /\bimport\s*\(\s*['"]three(?:\/[^'"]*)?['"]\s*\)/.test(source)
+      );
+      if (importsThree) users.push(path.replace(`${ROOT}/`, ''));
+    }
+
+    expect(
+      users.length,
+      'Three is installed for the production portrait but no shipped lazy view imports it.',
+    ).toBeGreaterThan(0);
+    for (const path of users) {
+      expect(
+        path,
+        `${path} imports Three outside the lazy settlement-scene view boundary`,
+      ).toMatch(/^src\/components\/townMap\/scene3d\//);
+    }
   });
 });
 
@@ -99,7 +141,7 @@ describe('the qualityLevel hook + K-5 governor are wired into the viewers (view-
       expect(s).toMatch(/setQualityCeiling/);
     }
   });
-  it('both inline the governor by stripping exports from scripts/lib/adaptiveGovernor.mjs (ONE source of truth)', () => {
+  it('both inline the import-free exhibit compatibility mirror by stripping exports', () => {
     for (const s of [k1, k4]) {
       expect(s).toMatch(/inlineGovernor/);
       expect(s).toMatch(/adaptiveGovernor\.mjs/);
@@ -172,18 +214,28 @@ describe('K-5 the byte-independence pin: geometry/GLB are identical at every qua
 });
 
 describe('the K-5 governor module is view-only (import-wall pin: reads no golden, writes no model state)', () => {
-  const govPath = join(ROOT, 'scripts/lib/adaptiveGovernor.mjs');
+  const govPath = join(ROOT, 'src/lib/townScene/adaptiveQuality.js');
+  const exhibitMirrorPath = join(ROOT, 'scripts/lib/adaptiveGovernor.mjs');
   const govSrc = readFileSync(govPath, 'utf8');
   const govCode = code(govSrc);
-  it('lives OUTSIDE the arch/ determinism perimeter (in the exhibit toolchain, never src/domain)', () => {
+  const exhibitMirrorCode = code(readFileSync(exhibitMirrorPath, 'utf8'));
+  it('lives outside the arch/ determinism perimeter in the view-policy layer', () => {
     expect(existsSync(govPath)).toBe(true);
     expect(govPath.includes('/arch/')).toBe(false);
-    expect(govPath.includes('/src/')).toBe(false);
+    expect(govPath).toContain('/src/lib/townScene/');
   });
-  it('imports NOTHING and requires nothing (pure: no golden read, no kernel/view coupling)', () => {
-    expect([...govCode.matchAll(/\bfrom\s+['"]([^'"]+)['"]/g)].map((m) => m[1])).toEqual([]);
+  it('imports only the pure math kernel and has no golden or renderer coupling', () => {
+    expect([...govCode.matchAll(/\bfrom\s+['"]([^'"]+)['"]/g)].map((m) => m[1])).toEqual([
+      '../../kernel/math.js',
+    ]);
     expect([...govCode.matchAll(/\brequire\s*\(/g)]).toEqual([]);
     expect([...govCode.matchAll(/\bimport\s*\(/g)]).toEqual([]);
+  });
+  it('keeps the exhibit mirror import-free so generated file:// viewers remain self-contained', () => {
+    expect(existsSync(exhibitMirrorPath)).toBe(true);
+    expect([...exhibitMirrorCode.matchAll(/\bfrom\s+['"]([^'"]+)['"]/g)].map((m) => m[1])).toEqual([]);
+    expect([...exhibitMirrorCode.matchAll(/\brequire\s*\(/g)]).toEqual([]);
+    expect([...exhibitMirrorCode.matchAll(/\bimport\s*\(/g)]).toEqual([]);
   });
   it('is transcendental-free (browser-inlinable + cross-engine-safe numbers)', () => {
     expect(govCode).not.toMatch(/Math\s*\.\s*(cos|sin|tan|acos|asin|atan|atan2|pow|exp|log|log2|log10|hypot|cbrt|sinh|cosh|tanh)\b/);

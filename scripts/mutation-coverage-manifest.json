@@ -17,9 +17,11 @@
   "uncoveredBaseline": 199,
   "rationales": {
     "pglite-executed": "Executed-SQL boundary test: it loads the real migration SQL into pglite and asserts behavior by EXECUTION — the stronger form of proof this sweep approximates for source-scan invariants. Its mutation target is committed migration SQL; transiently mutating shared migration files risks discarding parallel-session work, and each pglite boot is heavy, so standing family-level mutation proof lives in the sweep areas security/runIf migration renumber, security/verify_jwt platform gate loosened, and security/public table without RLS. Per-suite mutation proofs were executed at build time (each suite’s Done-when in docs/A_PLUS_ROADMAP.md).",
+    "postgres-concurrency-executed": "Executed two-backend PostgreSQL concurrency contract: CI provisions a real PostgreSQL service and the test coordinates independent client sessions to observe the owner-lock wait before exercising the shared command row. That live wait-for graph and the explicit 40P01 failure assertion are stronger than a source-scan mutation. Transiently rewriting shared migration SQL inside the mutation sweep would risk parallel work and still could not reproduce the required concurrent backend schedule more faithfully.",
     "golden-byte-pin": "Same-seed golden byte/structure pin over the full seeded pipeline. Its catching power is exercised operationally: legitimate behavior shifts redden the affected goldens and are recorded in the golden-shift ledgers (docs/GOLDEN_SHIFT_LEDGER*.md). A synthetic planted mutation would need a hand-crafted behavior-changing kernel edit per golden plus two full pipeline runs each in the sweep — redundant proof at disproportionate cost.",
     "self-proving-meta": "Guard-the-guard meta-test that injects its own broken fixtures (a fake failing tsc, a temp baseline) and asserts the enforcer reds — the mutation proof is embedded in the test body and executes on every suite run.",
     "walker-totality-executed": "Source-scan totality walker (E-D family) for the admin-actions two-key rule: its catching power is the exact-partition classification (every switch case in exactly one of PROTECTED / MODERATION / UNGATED) plus the client routing scan. BOTH mutation plants were executed at build time and proven red-then-green (drop a protected action from the manifest -> the unclassified-case assertion reds; route a protected action via a bare onClick runAction -> the client-scan reds). A standing sweep plant would duplicate that build-time proof at the cost of transiently mutating the shared edge-fn source each sweep.",
+    "edge-lifecycle-double-pin": "Cross-file edge lifecycle contract test whose source-level assertions are paired with execution of the same production paths in the full Deno edge suite. A transient sweep mutation would duplicate both layers while editing shared payment or deletion source during the sweep.",
     "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves."
   },
   "invariants": {
@@ -291,9 +293,21 @@
     "tests/domain/corruptionWebPins.test.js": {
       "kind": "uncovered"
     },
+    "tests/domain/customContentManifest.contract.test.js": {
+      "kind": "rationale",
+      "rationale": "Generated-authority convergence test: it executes the checked-in generator in --check mode, compares client and edge artifacts semantically, proves the canonical source has no UI decoration, and parses the frozen SQL projection. A standing sweep mutation would transiently rewrite shared generated and migration artifacts while duplicating the four independent drift detectors this suite executes on every gate."
+    },
+    "tests/domain/customContentPromotionContract.test.js": {
+      "kind": "rationale",
+      "rationale": "Proof-boundary governance test rather than runtime behavior: it enumerates implemented, open, deferred, and prohibited claims; joins every claim to the living architecture and evidence paths; and positively asserts that production deployment remains unproved. Its value is contract totality and anti-overclaiming, which a synthetic source mutation cannot strengthen without merely restating one of its explicit negative assertions."
+    },
     "tests/domain/defenseStressStatusCoverage.test.js": {
       "kind": "rationale",
       "rationale": "Cycle-3 H3 coverage pin. The totality it asserts — DEFENSE_STRESS_STATUS keys equal the producer STRESS_TYPE_MAP set with non-empty postures — is the SAME contract tests/lint/vocabularyTotality.walker.test.js Contract B enforces (that walker is self-proving-meta, with embedded adversarial self-tests), so any source mutation dropping a status entry or blanking a posture reds the walker. This file adds only the human-readable H3 symptom (the 9 previously-dark stress types now raise a callout) and the byte-identity guard on the original 6 — behavioral documentation a synthetic source mutation cannot target beyond the coverage the walker already proves."
+    },
+    "tests/domain/gameGradePromotionContract.test.js": {
+      "kind": "mutation",
+      "label": "game-grade/proof-only flag promoted"
     },
     "tests/domain/dispositionRatchet.integration.test.js": {
       "kind": "uncovered"
@@ -352,6 +366,30 @@
     },
     "tests/domain/trendLensClaimsParity.test.js": {
       "kind": "uncovered"
+    },
+    "tests/edgeFunctions/accountDeletionDurableWorker.test.js": {
+      "kind": "rationale",
+      "ref": "edge-lifecycle-double-pin"
+    },
+    "tests/edgeFunctions/autoReloadLifetime.test.js": {
+      "kind": "rationale",
+      "ref": "edge-lifecycle-double-pin"
+    },
+    "tests/edgeFunctions/autoReloadWebhookRace.test.js": {
+      "kind": "rationale",
+      "ref": "edge-lifecycle-double-pin"
+    },
+    "tests/edgeFunctions/checkoutAsyncPaymentFailure.test.js": {
+      "kind": "rationale",
+      "ref": "edge-lifecycle-double-pin"
+    },
+    "tests/edgeFunctions/customContentManifestAuthority.test.js": {
+      "kind": "rationale",
+      "rationale": "Thin HTTP-shell authority pin paired with executed admission behavior in the custom-content domain and PGlite suites. This source test forbids client-posted vocabulary reconstruction and requires the generated server-version handshake; planting the same textual regression in the standing sweep would duplicate its direct positive and negative source assertions while mutating a shared edge entrypoint."
+    },
+    "tests/edgeFunctions/paymentRefundDurableWorker.test.js": {
+      "kind": "rationale",
+      "ref": "edge-lifecycle-double-pin"
     },
     "tests/edgeFunctions/aiGroundingBundle.freshness.test.js": {
       "kind": "uncovered"
@@ -429,6 +467,10 @@
     },
     "tests/generators/dataFlowContract.test.js": {
       "kind": "uncovered"
+    },
+    "tests/generators/generationContracts.test.js": {
+      "kind": "rationale",
+      "rationale": "Whole-pipeline integration contract for the persisted generation envelope. It asserts exact world-law, culture, resource, content-profile, isolation, and coherence-receipt joins whose owning predicates and schema projections each have focused positive and negative suites; planting a broad pipeline mutation here would duplicate those proofs while requiring another expensive full-generation run."
     },
     "tests/generators/governanceNarrative.test.js": {
       "kind": "rationale",
@@ -635,6 +677,10 @@
     "tests/pdf/goldenViewModel.test.js": {
       "kind": "rationale",
       "ref": "golden-byte-pin"
+    },
+    "tests/pdf/generationContractsViewModel.test.jsx": {
+      "kind": "rationale",
+      "rationale": "Cross-surface projection contract over the persisted generation receipt and cultural identity. It renders the real PDF view-model boundary and asserts exact owner-facing fields; the underlying schema, profile resolution, and generator receipt are independently exercised by focused semantic suites, so a second transient source mutation here would duplicate those proofs at disproportionate rendered-test cost."
     },
     "tests/pdf/liveWorldBTrack.parity.test.js": {
       "kind": "uncovered"
@@ -857,6 +903,10 @@
       "kind": "rationale",
       "ref": "golden-byte-pin"
     },
+    "tests/security/accountDeletionCleanupQueue.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/accountDeletionProcessing.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -880,6 +930,10 @@
     "tests/security/accountStatusSupportTickets.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
+    },
+    "tests/security/applicationCommandJournal.pglite.test.js": {
+      "kind": "mutation",
+      "label": "commands/journal conflict contract drift"
     },
     "tests/security/actionVelocity.pglite.test.js": {
       "kind": "rationale",
@@ -971,7 +1025,39 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/campaignContentBindingCas.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/customContentAdmissionAdversarial.test.js": {
+      "kind": "rationale",
+      "rationale": "Executable hostile-input corpus that supplies its own mutants at the public boundary: dangerous keys, cycles, excessive depth and size, duplicate identities, hash tampering, unsupported execution fields, stale fingerprints, invalid tunables, and unknown environment shapes. A standing source rewrite would be weaker than these committed input mutations and would risk shared authority files for no additional failure class."
+    },
+    "tests/security/customContentArchiveTransfer.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/customContentArchive188Upgrade.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/customContentBackfill.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/customContentLockOrder.postgres.test.js": {
+      "kind": "rationale",
+      "ref": "postgres-concurrency-executed"
+    },
+    "tests/security/customContentVersions.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/denyAllRlsCensus.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/deletionBillingRace.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },
@@ -994,6 +1080,26 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/ownerConfirmedPrivacyDeletes.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/importReconciliationCommands.pglite.test.js": {
+      "kind": "mutation",
+      "label": "commands/import topology-stale drift"
+    },
+    "tests/security/operationalObligationHealth.pglite.test.js": {
+      "kind": "mutation",
+      "label": "obligations/webhook critical-age boundary drift"
+    },
+    "tests/security/paymentRefundObligations.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/paymentRefundRecovery.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/founderSeats.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -1011,6 +1117,10 @@
       "ref": "pglite-executed"
     },
     "tests/security/fraudCharterSession.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/stripeWebhookLease.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
     },
@@ -1192,6 +1302,14 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/reviewedQuarantineConflict.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
+    "tests/security/reviewedSupplyChainPersistence.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/roadsSecretsProbe.test.js": {
       "kind": "uncovered"
     },
@@ -1262,6 +1380,18 @@
     "tests/security/townMapGalleryOptIn.test.js": {
       "kind": "uncovered"
     },
+    "tests/security/townMapPlayerProjection.test.js": {
+      "kind": "mutation",
+      "label": "town-map/player projection admits hidden hazard"
+    },
+    "tests/security/townScenePlayerSafe.test.js": {
+      "kind": "mutation",
+      "label": "town-scene/unknown audience fails open to dm"
+    },
+    "tests/security/townSceneFogFailClosed.test.js": {
+      "kind": "mutation",
+      "label": "town-scene/fog player surface uses dm audience"
+    },
     "tests/security/worldPulseAtomicPersist.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
@@ -1286,6 +1416,14 @@
     },
     "tests/ui/settlementMapHoverParity.test.jsx": {
       "kind": "uncovered"
+    },
+    "tests/ui/townSceneAccessibility.contract.test.jsx": {
+      "kind": "mutation",
+      "label": "town-scene/accessibility layout hook removed"
+    },
+    "tests/ui/townSceneCanvas.contract.test.jsx": {
+      "kind": "mutation",
+      "label": "town-scene/canvas context-loss listener detached"
     },
     "tests/ui/settlementMapIllustratedCensus.test.jsx": {
       "kind": "uncovered"

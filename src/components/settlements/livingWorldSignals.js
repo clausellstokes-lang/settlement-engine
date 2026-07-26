@@ -214,7 +214,7 @@ export function settlementSignals({ settlement, settlementId, worldState = null,
   let warFresh = false;
   if (war && currentTick != null && id && worldState) {
     const onsets = activeDeployments(worldState)
-      .filter(d => d.targetId === id || d.homeId === id)
+      .filter(d => String(d.targetId) === id || String(d.homeId) === id)
       .map(d => d.sinceTick);
     warFresh = onsets.length > 0 && Math.max(...onsets) >= currentTick;
   }
@@ -228,7 +228,7 @@ export function settlementSignals({ settlement, settlementId, worldState = null,
     : null;
 
   const standing = id && worldState
-    ? dispositionStandings(worldState).find(s => s.id === id) || null
+    ? dispositionStandings(worldState).find(s => String(s.id) === id) || null
     : null;
 
   // ── Settlement-local + deity (meaningful even without a campaign) ──────────

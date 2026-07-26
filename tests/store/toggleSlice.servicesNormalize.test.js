@@ -24,6 +24,9 @@ import { describe, expect, test } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { INSTITUTION_SERVICES } from '../../src/data/tradeGoodsData';
+import {
+  INSTITUTION_SERVICE_KEYS,
+} from '../../src/data/institutionServiceKeys.generated.js';
 import { createToggleSlice, normalizeServicesToggles } from '../../src/store/toggleSlice.js';
 
 const FORCE   = { allow: true,  force: true,  forceExclude: false };
@@ -50,6 +53,12 @@ function matchServiceName(instName) {
 }
 
 describe('normalizeServicesToggles', () => {
+  test('compact boot projection preserves every catalog key and its order', () => {
+    expect(INSTITUTION_SERVICE_KEYS).toEqual(
+      Object.keys(INSTITUTION_SERVICES),
+    );
+  });
+
   test('remaps old display-name keys to the svcKey form the panel reads', () => {
     // "Grand Market" and "Village Chapel" are generated display names, not
     // INSTITUTION_SERVICES keys — the old bug keyed toggles under them.

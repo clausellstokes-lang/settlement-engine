@@ -18,7 +18,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
@@ -330,13 +330,14 @@ export async function handleStyleOverhaul(
       } catch (e) { logError('style-overhaul', user.id, e, { stage: 'eval' }); }
     }
     try {
-      if (capturedRider) {
+      const rider = capturedRider as EnrichmentRider | null;
+      if (rider) {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_STAGE_RIDER,
           actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
           props: {
-            feature: STYLE_FEATURE, intent: capturedRider.intent, themes: capturedRider.themes,
-            refusal_reason: capturedRider.refusalReason, action_drafted: capturedRider.actionDrafted, oov: capturedRider.oov,
+            feature: STYLE_FEATURE, intent: rider.intent, themes: rider.themes,
+            refusal_reason: rider.refusalReason, action_drafted: rider.actionDrafted, oov: rider.oov,
             baseLens: capturedTags.baseLens, paletteFamily: capturedTags.paletteFamily, motifClass: capturedTags.motifClass,
             byok: providerKey.byok, refused: capturedRefused,
           },
@@ -353,7 +354,7 @@ export async function handleStyleOverhaul(
       case 'model_failed':
         return json({ error: capturedRefused ? 'The style composer declined this request.' : (capturedRefusalMessage || 'Style composition failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
       case 'ok':
-        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+        scheduleAutoReload(supabaseAdmin, user.id);
         return json({
           style: capturedCandidate,           // the bounded candidate — the CLIENT wall validates before it lands
           styleTags: capturedTags,             // { baseLens, paletteFamily, motifClass } (the lens radar)

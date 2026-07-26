@@ -46,6 +46,10 @@ import { deepClone } from '../clone.js';
 const RESOURCE_CONFIG_KEYS = Object.freeze([
   'resourceEdits',
   'nearbyResources',
+  'nearbyResourcesNative',
+  'nearbyResourcesNativeDepleted',
+  'nearbyResourceDefinitions',
+  'nearbyResourceDefinitionsDepleted',
   'nearbyResourcesState',
   'nearbyResourcesDepleted',
   'nearbyResourcesCustom',

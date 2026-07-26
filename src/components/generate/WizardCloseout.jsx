@@ -113,10 +113,13 @@ export function buildCloseoutSummary(config = {}, toggles = {}) {
   // the simulator roll them, so they count as deliberate steering.
   const nonDefaultEnums = [
     ['Tier',        config.settType],
-    ['Culture',     config.culture],
+    ['Tradition',   config.culture],
     ['Trade route', config.tradeRouteAccess],
     ['Threat',      config.monsterThreat],
   ].filter(([, v]) => !isDefaultEnum(v));
+  if (config.contentProfile && config.contentProfile !== 'grounded') {
+    nonDefaultEnums.push(['Themes', config.contentProfile]);
+  }
   const magicOff = config.magicExists === false;
 
   const procedural =
@@ -126,7 +129,8 @@ export function buildCloseoutSummary(config = {}, toggles = {}) {
   return {
     facts: [
       { label: 'Tier',        value: humanize(config.settType) },
-      { label: 'Culture',     value: humanize(config.culture) },
+      { label: 'Tradition',   value: humanize(config.culture) },
+      { label: 'Themes',      value: humanize(config.contentProfile || 'grounded') },
       { label: 'Trade route', value: humanize(config.tradeRouteAccess) },
       { label: 'Threat',      value: humanize(config.monsterThreat) },
       { label: 'Magic',       value: magicOff ? 'Off' : 'On' },

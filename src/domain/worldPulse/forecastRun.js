@@ -11,11 +11,12 @@
  * implementation, so preview ≡ apply BY CONSTRUCTION. Interactions between
  * queued events are never analyzed, only RUN.
  *
- * THE HONEST LABEL: the ceteris-paribus future — exact if nothing else
- * changes; the clone runs auto-resolve ("assuming defaults where the world
- * would await your word"). Deterministic: same world + queue + interval ⇒ the
- * identical forecast, forever. NO-COMMIT DISCIPLINE: clone-and-discard — this
- * module never persists, never stamps cursors, never emits analytics.
+ * THE HONEST LABEL: a bounded ceteris-paribus projection over the selected
+ * interval. The clone runs auto-resolve ("assuming defaults where the world
+ * would await your word"), and the UI names the party-ripple omission.
+ * Deterministic: same world + queue + interval ⇒ the identical forecast,
+ * forever. NO-COMMIT DISCIPLINE: clone-and-discard — this module never persists,
+ * never stamps cursors, never emits analytics.
  *
  * KNOWN DIVERGENCE (documented, not a gap to re-find): party-caused queued
  * events replay their world-side party ripple through the STORE
@@ -31,42 +32,9 @@ import { deepClone } from '../clone.js';
  * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Mut */
 import { drainQueuedEvents, applyTwinDirectivesToWorld } from '../events/drainQueuedEvents.js';
 import { simulateCampaignWorldInterval } from './advanceInterval.js';
+import { forecastFingerprint } from './forecastFingerprint.js';
 
-/**
- * REALM-WIDE STALENESS (§10): the forecast fingerprint = world-STATE × FULL
- * queue hash × pending-proposal set × interval. ANY queue mutation from any
- * member's composer, any advance, any proposal decision changes it — the
- * bidirectional invalidation, by key design. Pure string derivation.
- *
- * composer-realm-verbs-2: the §10 law says "world-STATE", not "world clock".
- * The tick-NEUTRAL world mutations — a rules edit (updateCampaignSimulationRules
- * folds an rc_<tick>_<seq> receipt into worldState.rulesetLog), a proposal
- * DECIDED between the run and the view (a mint-and-decide leaves the pending set
- * net-unchanged yet the world moved), and a party impact (recordPartyImpact
- * rewrites worldState.stressors) — all left an open forecast falsely asserting
- * "this IS the next tick". They now fold into a `revision` component.
- *
- * KNOWN RESIDUE (deliberately deferred — the brief scopes this fold to
- * rulesetLog + decided-count + stressors LENGTH): a party impact that only
- * adjusts a stressor's SEVERITY (length unchanged), and a plain member-save
- * settlement edit, are still invisible. The stronger shape — hashing the member
- * saves — is recorded in the finding's fix-shape as the broadest instance and
- * is not built here.
- * @param {Mut} campaign @param {string} interval
- */
-export function forecastFingerprint(campaign, interval) {
-  const ws = campaign?.worldState || {};
-  const queue = (ws.pendingEvents || [])
-    .map((/** @type {Mut} */ q) => `${q.queueId}@${q.queuedAt}`)
-    .join('|');
-  const proposals = (ws.proposals || [])
-    .filter((/** @type {Mut} */ p) => p && p.status === 'pending')
-    .map((/** @type {Mut} */ p) => p.id)
-    .join('|');
-  const decided = (ws.proposals || []).filter((/** @type {Mut} */ p) => p && p.status !== 'pending').length;
-  const revision = `${Object.keys(ws.rulesetLog || {}).length}.${decided}.${(ws.stressors || []).length}`;
-  return `${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`;
-}
+export { forecastFingerprint } from './forecastFingerprint.js';
 
 /**
  * Run the realm's pending future once: clone, drain the REAL queue in REAL
@@ -131,7 +99,11 @@ export async function runRealmForecast({ campaign, saves, interval = 'one_month'
   const withCandidate = candidate
     ? await simulatePendingFuture({ campaign, saves, interval, weeks, now, candidate })
     : null;
-  return { baseline, withCandidate, fingerprint: forecastFingerprint(campaign, interval) };
+  return {
+    baseline,
+    withCandidate,
+    fingerprint: forecastFingerprint(campaign, interval, saves),
+  };
 }
 
 /**

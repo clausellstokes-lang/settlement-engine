@@ -65,12 +65,39 @@ export function tradeRouteTier(value) {
 }
 
 /**
- * True when the route is isolated/none (no real regional connection).
+ * True when the route is isolated/none (no dependable regional connection).
+ *
+ * Prefer this name in new code: it describes the operational fact consumers
+ * need without forcing them to know that both the authored `none` value and the
+ * generated `isolated` value occupy the same canonical tier.
+ *
+ * @param {string|null|undefined} value raw trade-route value
+ * @returns {boolean}
+ */
+export function isTradeRouteDisconnected(value) {
+  return tradeRouteTier(value) === 'isolated';
+}
+
+/**
+ * Compatibility name retained for existing domain consumers.
+ *
  * @param {string|null|undefined} value raw trade-route value
  * @returns {boolean}
  */
 export function isIsolatedRoute(value) {
-  return tradeRouteTier(value) === 'isolated';
+  return isTradeRouteDisconnected(value);
+}
+
+/**
+ * True only when a recognized route provides a physical regional connection.
+ * Unknown values stay fail-closed: they must not fabricate import capacity.
+ *
+ * @param {string|null|undefined} value raw trade-route value
+ * @returns {boolean}
+ */
+export function hasTradeRouteConnection(value) {
+  const tier = tradeRouteTier(value);
+  return tier === 'major' || tier === 'standard';
 }
 
 /**

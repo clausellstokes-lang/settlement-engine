@@ -35,10 +35,10 @@
  *      is the sum of the registered sub-ops it invokes — covered transitively,
  *      not a new primitive verb. Such compositions are intentionally out of the
  *      registry (registering them would break the exact-match invariant below).
- *   2. A mutation performed by an action defined OUTSIDE a *Slice.js and spread
- *      in. No slice does this today (verified: every `...spread` inside a slice
- *      is an in-body object spread, never an action-object spread); if one is
- *      added, this scan will not see it — covered by code review.
+ *   2. A mutation hidden behind a computed or nested spread. Direct
+ *      `...create*Actions(...)` calls imported by a composed slice ARE followed
+ *      into the factory's returned object. A computed spread or a factory that
+ *      returns another spread still requires code review.
  *   3. A `set` reference hidden by aliasing (`const s = set; s(...)`). None
  *      exists; the convention is to call `set` directly or pass it by name.
  *
@@ -155,8 +155,8 @@ function referencesSet(valText) {
 
 /**
  * Enumerate the slice object's DEPTH-1 properties. Returns
- * { key, isFn, usesSet } per property. `...spread` elements are skipped (no
- * slice spreads an action object; see CANNOT-CATCH #2).
+ * { key, isFn, usesSet, spreadFactory? } per property. A direct factory-call
+ * spread records its callee so the census can follow the imported action module.
  */
 function scanProps(code, objStart) {
   const props = [];
@@ -169,15 +169,29 @@ function scanProps(code, objStart) {
     if (/\s/.test(c)) { i++; continue; }
     if (expectKey && depth === 1) {
       if (code.startsWith('...', i)) {
-        i += 3;
-        while (i < n && depth >= 1) {
-          const cc = code[i];
-          if (cc === '{' || cc === '(' || cc === '[') depth++;
-          else if (cc === '}' || cc === ')' || cc === ']') { depth--; if (depth === 0) break; }
-          else if (cc === ',' && depth === 1) break;
-          i++;
+        const valueStart = i + 3;
+        let k = valueStart;
+        let valueDepth = 0;
+        while (k < n) {
+          const cc = code[k];
+          if (cc === '{' || cc === '(' || cc === '[') valueDepth++;
+          else if (cc === '}' || cc === ')' || cc === ']') {
+            if (valueDepth === 0) break;
+            valueDepth--;
+          } else if (cc === ',' && valueDepth === 0) {
+            break;
+          }
+          k++;
         }
-        if (code[i] === ',') i++;
+        const spreadValue = code.slice(valueStart, k);
+        const factory = /^\s*([A-Za-z_$][\w$]*)\s*\(/.exec(spreadValue);
+        props.push({
+          key: null,
+          isFn: false,
+          usesSet: false,
+          spreadFactory: factory?.[1] || null,
+        });
+        i = code[k] === ',' ? k + 1 : k;
         continue;
       }
       const km = /^(?:(['"])([^'"]+)\1|([A-Za-z_$][\w$]*))/.exec(code.slice(i));
@@ -219,6 +233,76 @@ function scanProps(code, objStart) {
   return props;
 }
 
+/**
+ * Map named imports to their sibling store modules. The operation factories are
+ * deliberately local modules; following only relative named imports keeps the
+ * walker deterministic and prevents it from executing application code.
+ */
+function importedStoreModules(rawCode) {
+  const modules = new Map();
+  const importPattern =
+    /import\s*\{([^}]*)\}\s*from\s*['"]([^'"]+)['"]/g;
+  let match;
+  while ((match = importPattern.exec(rawCode)) !== null) {
+    if (!match[2].startsWith('./')) continue;
+    const relativeSource = match[2].slice(2);
+    const sourceFile = relativeSource.endsWith('.js')
+      ? relativeSource
+      : `${relativeSource}.js`;
+    for (const specifier of match[1].split(',')) {
+      const parts = specifier.trim().split(/\s+as\s+/);
+      if (!parts[0]) continue;
+      modules.set(parts[1] || parts[0], sourceFile);
+    }
+  }
+  return modules;
+}
+
+/**
+ * Locate the object returned by an exported function declaration without
+ * importing or executing the module. Action factories currently use this
+ * explicit form so their structural surface remains auditable.
+ */
+function findActionFactoryObjectStart(code, factoryName) {
+  const escapedName = factoryName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const declaration = new RegExp(
+    `export\\s+function\\s+${escapedName}\\s*\\(`,
+  ).exec(code);
+  if (!declaration) return -1;
+
+  let i = declaration.index + declaration[0].length - 1;
+  let parameterDepth = 0;
+  for (; i < code.length; i++) {
+    if (code[i] === '(') parameterDepth++;
+    else if (code[i] === ')') {
+      parameterDepth--;
+      if (parameterDepth === 0) {
+        i++;
+        break;
+      }
+    }
+  }
+  while (/\s/.test(code[i])) i++;
+  if (code[i] !== '{') return -1;
+
+  let bodyDepth = 0;
+  for (let j = i; j < code.length; j++) {
+    if (code[j] === '{') bodyDepth++;
+    else if (code[j] === '}') bodyDepth--;
+    else if (
+      bodyDepth === 1
+      && code.startsWith('return', j)
+      && /[^\w$]/.test(code[j - 1] || ' ')
+      && /[^\w$]/.test(code[j + 6] || ' ')
+    ) {
+      let k = j + 6;
+      while (/\s/.test(code[k])) k++;
+      if (code[k] === '{') return k;
+    }
+  }
+  return -1;
+}
+
 /** The slice files the store actually composes — derived from index.js so the
  *  census scans exactly the live surface even if a slice is renamed. */
 function composedSliceFiles() {
@@ -234,11 +318,40 @@ function composedSliceFiles() {
 function censusMutatingActions() {
   const out = new Map();
   for (const file of composedSliceFiles()) {
-    const code = stripCode(readFileSync(join(STORE_DIR, file), 'utf8'));
+    const rawCode = readFileSync(join(STORE_DIR, file), 'utf8');
+    const code = stripCode(rawCode);
     const objStart = findSliceObjectStart(code);
     if (objStart === -1) throw new Error(`walker: could not locate slice object in ${file}`);
-    for (const p of scanProps(code, objStart)) {
+    const sliceProps = scanProps(code, objStart);
+    for (const p of sliceProps) {
       if (p.isFn && p.usesSet) out.set(p.key, file);
+    }
+    const importedModules = importedStoreModules(rawCode);
+    for (const { spreadFactory } of sliceProps) {
+      if (!spreadFactory) continue;
+      const factoryFile = importedModules.get(spreadFactory);
+      if (!factoryFile) {
+        throw new Error(
+          `walker: action factory ${spreadFactory} in ${file} is not a relative named import`,
+        );
+      }
+      const factoryCode = stripCode(
+        readFileSync(join(STORE_DIR, factoryFile), 'utf8'),
+      );
+      const factoryStart = findActionFactoryObjectStart(
+        factoryCode,
+        spreadFactory,
+      );
+      if (factoryStart === -1) {
+        throw new Error(
+          `walker: could not locate returned object for ${spreadFactory} in ${factoryFile}`,
+        );
+      }
+      for (const property of scanProps(factoryCode, factoryStart)) {
+        if (property.isFn && property.usesSet) {
+          out.set(property.key, factoryFile);
+        }
+      }
     }
   }
   return out;

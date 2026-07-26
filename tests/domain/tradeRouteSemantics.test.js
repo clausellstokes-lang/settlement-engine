@@ -11,7 +11,12 @@
 
 import { describe, it, expect } from 'vitest';
 import {
-  tradeRouteSemantics, tradeRouteTier, isIsolatedRoute, GENERATED_ROUTE_VALUES,
+  tradeRouteSemantics,
+  tradeRouteTier,
+  hasTradeRouteConnection,
+  isIsolatedRoute,
+  isTradeRouteDisconnected,
+  GENERATED_ROUTE_VALUES,
 } from '../../src/domain/tradeRouteSemantics.js';
 import { deriveCausalState } from '../../src/domain/causalState.js';
 
@@ -50,6 +55,22 @@ describe('tradeRouteSemantics — canonical mapping', () => {
     expect(iso.isolated).toBe(true);
     expect(isIsolatedRoute('isolated')).toBe(true);
     expect(isIsolatedRoute('road')).toBe(false);
+  });
+
+  it('exposes one fail-closed connection predicate for import consumers', () => {
+    for (const route of ['road', 'river', 'crossroads', 'port', 'major', 'minor', 'standard']) {
+      expect(hasTradeRouteConnection(route), route).toBe(true);
+      expect(isTradeRouteDisconnected(route), route).toBe(false);
+    }
+    for (const route of ['isolated', 'none']) {
+      expect(hasTradeRouteConnection(route), route).toBe(false);
+      expect(isTradeRouteDisconnected(route), route).toBe(true);
+    }
+
+    // An unrecognized route must not silently create physical import capacity.
+    expect(hasTradeRouteConnection('teleport_circle')).toBe(false);
+    expect(hasTradeRouteConnection(undefined)).toBe(false);
+    expect(isTradeRouteDisconnected('teleport_circle')).toBe(false);
   });
 
   it('major-tier routes outrank standard-tier on connectivity', () => {

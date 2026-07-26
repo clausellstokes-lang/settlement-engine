@@ -1,5 +1,4 @@
-import React from 'react';
-import { FS, swatch } from './components/theme.js';
+import { Component } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
@@ -125,25 +124,23 @@ if (import.meta.env.DEV) {
   window.__store = useStore;
 }
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends Component {
   constructor(props) { super(props); this.state = { error: null }; }
   static getDerivedStateFromError(e) { return { error: e }; }
   componentDidCatch(e, info) {
-    console.error('=== RENDER ERROR ===');
-    console.error('Error:', e.message);
-    console.error('Stack:', e.stack);
-    console.error('Component stack:', info.componentStack);
+    // reportError always logs locally before forwarding the structured crash
+    // envelope. A second console dump here duplicated the same failure four
+    // times without adding evidence.
     reportError(e, { kind: 'react.render', componentStack: info?.componentStack });
   }
   render() {
-    if (this.state.error) {
-      return React.createElement('div', {
-        style: { padding: 24, fontFamily: 'monospace', background: swatch.dangerBg, border: `2px solid ${swatch.danger}`, margin: 16, borderRadius: 8 }
-      },
-        React.createElement('h2', null, 'Render Error'),
-        React.createElement('pre', { style: { whiteSpace: 'pre-wrap', fontSize: FS.sm } },
-          this.state.error.message + '\n\n' + this.state.error.stack
-        )
+    const { error } = this.state;
+    if (error) {
+      return (
+        <div className="root-error-boundary">
+          <h2>Render Error</h2>
+          <pre>{error.stack || error.message}</pre>
+        </div>
       );
     }
     return this.props.children;
@@ -151,7 +148,7 @@ class ErrorBoundary extends React.Component {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  React.createElement(ErrorBoundary, null,
-    React.createElement(App)
-  )
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>,
 );

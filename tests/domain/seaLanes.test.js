@@ -89,6 +89,21 @@ describe('M8 — PORT ELIGIBILITY = geography ∧ institutions (pure, derived)',
     expect(hasWaterAccessInstitution(null)).toBe(false);
   });
 
+  it('does not derive water access from a current custom presentation name', () => {
+    const customDock = {
+      name: 'Docks/port facilities',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:dock-namesake',
+    };
+
+    expect(hasWaterAccessInstitution([customDock])).toBe(false);
+    // A provenance-free legacy row keeps the historical name fallback.
+    expect(hasWaterAccessInstitution([{ name: 'Docks/port facilities' }]))
+      .toBe(true);
+  });
+
   it('geography helpers read the frozen pack: coast = ocean neighbour, river = r!=0', () => {
     const pack = makeGridPack({ cols: 24, rows: 18 });
     const cells = { ...pack.cells, cellCount: pack.cells.h.length };

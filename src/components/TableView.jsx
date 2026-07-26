@@ -7,9 +7,9 @@
  * you'll voice tonight, the hook you'll drop, the twist you're holding, and
  * the one thing NOT to mention.
  *
- * Content reuses the same pure composer the magazine Summary uses
- * (`domain/summary/tonightAtTheTable`) so the cheat sheet here and the right
- * column there can never drift apart.
+ * Content reuses the same compact guide as Summary, Session Mode, and PDF for
+ * identity, defining truths, and pressure. The richer table-entry composer
+ * remains underneath for twists and red flags that are valuable during play.
  *
  * Presentational + a close affordance:
  *   props.settlement — the settlement to run (raw or AI-refined; caller picks)
@@ -26,6 +26,7 @@ import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { composeSettlementQuickGuide } from '../domain/summary/settlementQuickGuide.js';
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
@@ -88,9 +89,13 @@ export default function TableView({ settlement, onClose }) {
     };
   }, []);
 
+  const guide = useMemo(
+    () => composeSettlementQuickGuide(settlement),
+    [settlement],
+  );
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const stressors = Array.isArray(settlement?.stressors) ? settlement.stressors : [];
-  const pressure = settlement?.pressureSentence || '';
+  const pressure = guide.immediatePressure.text;
   // components-dossier-library-3: prosperity is a STRING label, not a { tier }
   // object — the tolerant read is the SummaryTabV2 sibling.
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
@@ -169,6 +174,40 @@ export default function TableView({ settlement, onClose }) {
           padding: '14px 16px',
           display: 'flex', flexDirection: 'column', gap: 14,
         }}>
+          {/* Canonical first glance — the same facts lead every compact surface. */}
+          <div>
+            <div style={{
+              fontFamily: serif, fontSize: FS.md,
+              color: CREAM, lineHeight: 1.5,
+            }}>
+              {guide.identitySentence}
+            </div>
+            <div style={{
+              display: 'flex', flexDirection: 'column',
+              gap: 5, marginTop: 8,
+            }}>
+              {guide.definingTruths.map((truth) => (
+                <div key={truth.id} style={{
+                  paddingLeft: 8,
+                  borderLeft: `2px solid ${FIELD_RULE}`,
+                }}>
+                  <span style={{
+                    fontSize: FS.nano, fontWeight: 800,
+                    letterSpacing: '0.07em', textTransform: 'uppercase',
+                    color: CREAM_FAINT, marginRight: 5,
+                  }}>
+                    {truth.label}
+                  </span>
+                  <span style={{
+                    fontSize: FS.xs, color: CREAM_BODY, lineHeight: 1.45,
+                  }}>
+                    {truth.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Tension line */}
           {pressure && (
             <div style={{

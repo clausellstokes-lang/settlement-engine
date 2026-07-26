@@ -31,11 +31,18 @@ export default function RealmEntityLink({ settlementSaveId, entityId = null, lab
   }
 
   const activate = () => navigateToRealmEntity({ settlementSaveId, entityId });
+  // Presentation-only return address. RealmInspector records this key immediately
+  // before routing and matches it after browser-back; it is never used as entity
+  // identity or writer authority.
+  const returnKey = [settlementSaveId, entityId || '']
+    .map(value => encodeURIComponent(String(value)))
+    .join(':');
 
   return (
     <button
       type="button"
       aria-label={`Go to ${text}`}
+      data-realm-entity-key={returnKey}
       onClick={activate}
       style={{
         display: 'inline',

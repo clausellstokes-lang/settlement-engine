@@ -125,6 +125,9 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
 
   const [pickedSize, setPickedSize] = useState(defaultSize);
   const [generating, setGenerating] = useState(false);
+  // The button's disabled state arrives on the next render; this ref guards the
+  // same-tick double-click window synchronously.
+  const generatingRef = useRef(false);
   // First-click failures must not be silent (P10). The catch below stores a
   // plain-language message; a retry strip renders beneath the CTA pointing back
   // at handleBegin — this is the most fragile point in the funnel.
@@ -164,7 +167,8 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
 
   const handleBegin = async () => {
     if (isAnon && atCap) return;
-    if (generating) return;
+    if (generatingRef.current) return;
+    generatingRef.current = true;
     setBeginError(null);
     setGenerating(true);
     try {
@@ -177,7 +181,8 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       // set their own mode, so Back from THOSE correctly returns to that config.
       setWizardMode(null);
       updateConfig({ settType: pickedSize });
-      generate();
+      const generated = await generate();
+      if (!generated) throw new Error('Generation completed without a settlement.');
       if (isAnon) {
         // Counting the generation against the daily cap is owned by
         // generateSettlement now (so wizard "Regenerate Draft" and the
@@ -191,6 +196,7 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       console.error('[HomeHero] generate failed:', e);
       setBeginError(t('errors.forgeStart'));
     } finally {
+      generatingRef.current = false;
       setGenerating(false);
     }
   };

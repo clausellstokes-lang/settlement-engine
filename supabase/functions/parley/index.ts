@@ -24,7 +24,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
-import { maybeAutoReload } from '../_shared/autoReload.ts';
+import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
@@ -228,7 +228,10 @@ export async function handleParley(
         }
         const data = await resp.json();
         capturedUsage = { input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null, output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null };
-        if (data?.stop_reason === 'refusal') { capturedRefused = true; return { ok: false, answerText: '' }; }
+        if (data?.stop_reason === 'refusal') {
+          capturedRefused = true;
+          return { ok: false, answerText: '' };
+        }
         capturedAnswerText = (data?.content?.[0]?.text || '').trim();
         const out = compileParley(capturedAnswerText, slice);
         capturedSpeech = out.speech; capturedMusings = out.musings; capturedRider = out.rider;
@@ -266,7 +269,9 @@ export async function handleParley(
         p_retrieval_slice_ids: rec.retrieval_slice_ids, p_retrieval_sources: rec.retrieval_sources,
         p_model: rec.model, p_model_version: rec.model_version, p_provider: PARLEY_PROVIDER,
         p_byok: providerKey.byok, p_citation_coverage: outcome.outcome === 'ok' ? rec.citation_coverage : null,
-        p_claim_count: rec.claim_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
+        p_claim_count: rec.claim_count,
+        p_refused: capturedRefused,
+        p_spend_id: capturedSpendId,
         p_meta_probe: rec.meta_probe, p_canary: rec.canary, p_refusal_class: capturedRefusalClass,
       });
       if (error) logError('parley', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
@@ -277,18 +282,34 @@ export async function handleParley(
       try {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_PARLEY_ANSWER, actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
-          props: { entityClass: slice.entityClass, voice: slice.voice, groundingCoverageBand: band(capturedGrounding), leaked: capturedLeaked, byok: providerKey.byok, refused: capturedRefused },
+          props: {
+            entityClass: slice.entityClass,
+            voice: slice.voice,
+            groundingCoverageBand: band(capturedGrounding),
+            leaked: capturedLeaked,
+            byok: providerKey.byok,
+            refused: capturedRefused,
+          },
           batch_id: crypto.randomUUID(), seq: 0,
         });
         if (error) logError('parley', user.id, `parley answer event failed: ${error.message}`, { stage: 'eval' });
       } catch (e) { logError('parley', user.id, e, { stage: 'eval' }); }
     }
     try {
-      if (capturedRider) {
+      const rider = capturedRider as EnrichmentRider | null;
+      if (rider) {
         const { error } = await supabaseAdmin.from('analytics_events').insert({
           event: ANALYTICS_EVENTS.AI_PARLEY_RIDER, actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
           // the rider tags entity-class + topic (themes) so the atlas learns what tables rehearse
-          props: { intent: capturedRider.intent, themes: capturedRider.themes, refusal_reason: capturedRider.refusalReason, oov: capturedRider.oov, entity_class: slice.entityClass, byok: providerKey.byok, refused: capturedRefused },
+          props: {
+            intent: rider.intent,
+            themes: rider.themes,
+            refusal_reason: rider.refusalReason,
+            oov: rider.oov,
+            entity_class: slice.entityClass,
+            byok: providerKey.byok,
+            refused: capturedRefused,
+          },
           batch_id: crypto.randomUUID(), seq: 0,
         });
         if (error) logError('parley', user.id, `parley rider event failed: ${error.message}`, { stage: 'rider' });
@@ -300,9 +321,17 @@ export async function handleParley(
       case 'rate_limited': return json({ error: "You have reached today's AI limit. Please try again tomorrow. No credits were charged." }, 429, cors);
       case 'insufficient': return json({ error: outcome.reason === 'spend_failed' ? 'Credit spend failed — no credits were charged.' : 'Insufficient credits', balance: outcome.balance }, 402, cors);
       case 'model_failed':
-        return json({ error: capturedRefused ? 'The character declined to speak on this.' : (capturedRefusalMessage || 'The parley failed. Your credits were refunded.'), refused: capturedRefused, refunded: outcome.refunded, refusalClass: capturedRefusalClass, doors: capturedRefusalDoors }, 502, cors);
+        return json({
+          error: capturedRefused
+            ? 'The character declined to speak on this.'
+            : (capturedRefusalMessage || 'The parley failed. Your credits were refunded.'),
+          refused: capturedRefused,
+          refunded: outcome.refunded,
+          refusalClass: capturedRefusalClass,
+          doors: capturedRefusalDoors,
+        }, 502, cors);
       case 'ok':
-        void maybeAutoReload(supabaseAdmin, user.id).catch(() => {});
+        scheduleAutoReload(supabaseAdmin, user.id);
         return json({
           speech: capturedSpeech,        // the persona's in-character lines, each grounding-cited
           musings: capturedMusings,      // asides FOR THE DM (op-free — nothing commits)

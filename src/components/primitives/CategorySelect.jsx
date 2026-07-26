@@ -24,10 +24,13 @@ const sans = '"Nunito", system-ui, sans-serif';
 
 export default function CategorySelect({
   type, value = '', onChange, customContent, style = {},
+  id = undefined,
+  ariaLabelledBy = undefined,
   // Optional overrides so the same picker drives non-`category` fields (e.g.
   // `satisfies`). `options` supplies the lists directly; builtins may be plain
   // strings (value===label) or { value, label } pairs (e.g. a key-stored field).
   options = null, placeholder = 'Select category…', newLabel = '+ New category…',
+  maxLength = undefined,
 }) {
   const [adding, setAdding] = useState(false);
   const [text, setText] = useState('');
@@ -41,10 +44,13 @@ export default function CategorySelect({
     return (
       <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
         <input
+          id={id}
+          aria-labelledby={ariaLabelledBy}
           // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the just-revealed inline name field
           autoFocus
           aria-label="New category name"
           value={text}
+          maxLength={maxLength}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); commit(); } if (e.key === 'Escape') { setAdding(false); setText(''); } }}
           placeholder="New category name…"
@@ -62,6 +68,8 @@ export default function CategorySelect({
 
   return (
     <select
+      id={id}
+      aria-labelledby={ariaLabelledBy}
       value={value || ''}
       onChange={(e) => { const v = e.target.value; if (v === NEW) setAdding(true); else onChange?.(v); }}
       style={{ color: INK, ...style }}

@@ -13,6 +13,10 @@ import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
+import {
+  customSupplyChainPresentation,
+} from '../../../domain/content/customSupplyChainPresentation.js';
+import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 
@@ -275,6 +279,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const _sp = eco.safetyProfile || {};
   const ecoScore = Math.round(eco.compound?.economyOutput || 0);
   const tradeLabel = (eco.tradeAccess || 'road').replace(/_/g,' ');
+  const customChainViews = (eco.customChains || []).map(chain => ({
+    chain,
+    presentation: customSupplyChainPresentation(chain),
+  }));
+  const activeCustomChains = customChainViews.filter(
+    item => item.presentation.state === 'active',
+  ).length;
 
   // Safety tile color
 
@@ -366,9 +377,17 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.success,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:6}}>Exports</div>
             {eco.primaryExports?.length>0
               ?<div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                {eco.primaryExports.map((e,i)=>{const t=e.includes('(transit)');const isCust=(eco.customTradeLabels?.exports||[]).some(x=>x.toLowerCase()===e.toLowerCase());const incl=isCust?(eco.customCategoryExports?.[e]||null):null;return isCust
-                  ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                  : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color:t?'#2a3a7a':'#1a5a28',background:t?'#eaecf8':'#e8f5ec',border:`1px solid ${t?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px'}}>{e}</span>;})}
+                {eco.primaryExports.map((e,i)=>{
+                  const transit=e.includes('(transit)');
+                  const ownership=tradeLabelOwnership(eco,'exports',e);
+                  const title=ownership.members.length
+                    ? `incl. ${ownership.members.join(', ')}`
+                    : ownership.mixed
+                      ? 'Also an exact custom endpoint'
+                      : undefined;
+                  if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                  return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color:transit?'#2a3a7a':'#1a5a28',background:transit?'#eaecf8':'#e8f5ec',border:`1px solid ${transit?'#a8b8e8':'#a8d8b0'}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{e}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
+                })}
                 {eco.isEntrepot&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.info,fontStyle:'italic',marginTop:4}}>Blue = re-exported transit goods</div>}
               </div>
               :<p style={{fontSize:FS.sm,color:MUTED,fontStyle:'italic',margin:0}}>No significant exports.</p>
@@ -385,11 +404,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                     const color = t?'#7a0a0a':n?'#8b1a1a':'#7a5010';
                     const bg    = t?'#fdf0f0':n?'#fdf4f4':'#faf4e8';
                     const bdr   = t?'#e08080':n?'#e8b0b0':'#d8c090';
-                    const isCust=(eco.customTradeLabels?.imports||[]).some(x=>x.toLowerCase()===imp.toLowerCase());
-                    const incl=isCust?(eco.customCategoryImports?.[imp]||null):null;
-                    return isCust
-                      ? <span key={i} title={incl&&incl.length?`incl. ${incl.join(', ')}`:undefined} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{incl&&incl.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {incl.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>
-                      : <span key={i} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px'}}>{imp}</span>;
+                    const ownership=tradeLabelOwnership(eco,'imports',imp);
+                    const title=ownership.members.length
+                      ? `incl. ${ownership.members.join(', ')}`
+                      : ownership.mixed
+                        ? 'Also an exact custom endpoint'
+                        : undefined;
+                    if(ownership.customOnly) return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:700,color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.members.length?<span style={{fontWeight:600,opacity:0.8}}> · incl. {ownership.members.length}</span>:null}<span style={{fontWeight:800}}>✦</span></span>;
+                    return <span key={i} title={title} style={{fontSize:FS.xs,fontWeight:600,color,background:bg,border:`1px solid ${bdr}`,padding:'3px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{imp}{ownership.mixed?<span style={{fontWeight:700,color:GOLD_DEEP}}>{ownership.members.length?` · incl. ${ownership.members.length} ✦`:' · also custom ✦'}</span>:null}</span>;
                   })}
                 {(eco.necessityImports?.length>0||terrainCriticals.length>0)&&<div style={{width:'100%',fontSize:FS.xxs,color:swatch.inkMag3,fontStyle:'italic',marginTop:4}}>
                   {terrainCriticals.length>0&&<span style={{color:swatch['#7A0A0A']}}>Terrain cannot produce</span>}
@@ -503,19 +525,27 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
       )}
 
       {/* ── CUSTOM SUPPLY CHAINS (§14 — user-confirmed in the Compendium) ──────── */}
-      {eco?.customChains?.length > 0 && (
-        <Section title={`Custom Supply Chains (${eco.customChains.length})`} collapsible defaultOpen={false}>
+      {customChainViews.length > 0 && (
+        <Section
+          title={`Custom Supply Chains (${activeCustomChains} active · ${customChainViews.length - activeCustomChains} unavailable)`}
+          collapsible
+          defaultOpen={false}
+        >
           <div style={{display:'flex',flexDirection:'column',gap:6}}>
-            {eco.customChains.map((c,i)=>{
+            {customChainViews.map(({chain:c,presentation},i)=>{
               const nodes = [c.resource, ...(c.processingInstitutions||[]), ...((c.outputs||[]).slice(0,3))].filter(Boolean);
+              const visibleReasons = presentation.reasons.slice(0,3);
               return (
-                <div key={i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', padding:'8px 12px'}}>
+                <div key={c.chainId||i} style={{...GOLD_TINT, borderWidth:1, borderStyle:'solid', borderColor:presentation.border, padding:'8px 12px'}}>
                   <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:nodes.length?4:0,flexWrap:'wrap'}}>
                     <span style={{fontSize:FS.sm,fontWeight:800,color:swatch.inkMag}}>{c.label}</span>
                     <span style={{fontSize:FS.micro,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
+                    <span style={{fontSize:FS.micro,fontWeight:800,color:presentation.color,background:presentation.background,border:`1px solid ${presentation.border}`,padding:'1px 6px',letterSpacing:'0.03em',textTransform:'uppercase'}}>
+                      {presentation.label}
+                    </span>
                   </div>
                   {nodes.length>0 && (
-                    <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
+                    <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',opacity:presentation.state==='active'?1:0.68}}>
                       {nodes.map((n,j)=>(
                         <React.Fragment key={j}>
                           {j>0 && <span style={{fontSize:FS.xxs,color:MUTED}}>→</span>}
@@ -524,6 +554,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
                       ))}
                     </div>
                   )}
+                  <div style={{fontSize:FS.xxs,color:presentation.color,lineHeight:1.45,marginTop:5}}>
+                    {visibleReasons.length
+                      ? visibleReasons.join(' ')
+                      : presentation.summary}
+                    {presentation.reasons.length>visibleReasons.length
+                      ? ` +${presentation.reasons.length-visibleReasons.length} more.`
+                      : ''}
+                  </div>
                 </div>
               );
             })}

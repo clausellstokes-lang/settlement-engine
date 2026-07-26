@@ -62,7 +62,7 @@ export const NPC_FACET_REGISTRY = Object.freeze({
     },
     consumers: [
       { file: 'src/domain/worldPulse/npcAgency.js', token: 'inferRoleArchetype', read: 'agency maps role → archetype → the verbs the NPC will consider' },
-      { file: 'src/components/new/npcComponents.jsx', token: 'npc.role', read: 'the NPC card renders the role line' },
+      { file: 'src/components/new/npcComponents.jsx', token: 'roleFacet', read: 'the NPC card reads the declared role archetype while preserving the authored office/title' },
     ],
   },
   goal: {
@@ -73,7 +73,7 @@ export const NPC_FACET_REGISTRY = Object.freeze({
     },
     consumers: [
       { file: 'src/domain/worldPulse/settlementPolitics.js', token: 'longGoal', read: 'deriveEnd/GOAL_END_HINT colors a bloc end from the leader goal' },
-      { file: 'src/components/new/npcComponents.jsx', token: 'npc.goal', read: 'the NPC card renders the goal line' },
+      { file: 'src/components/new/npcComponents.jsx', token: 'goalFacet', read: 'the NPC card reads and translates the declared goal facet' },
     ],
   },
 });

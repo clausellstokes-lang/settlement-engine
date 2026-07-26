@@ -1,9 +1,10 @@
 /**
  * @vitest-environment jsdom
  *
- * Security regression — the vendored /map/ fork ships same-origin with the
- * auth SPA, so an XSS anywhere in it is an XSS against the session-token
- * origin. The historical chain: a crafted .map file delivered via the
+ * Security regression — the vendored /map/ fork historically shipped
+ * same-origin with the auth SPA; production now isolates it on the dedicated
+ * map host, but the in-fork defenses remain required. The historical chain: a
+ * crafted .map file delivered via the
  * unrestricted '?maplink=' fetch landed attacker HTML in note.legend, which
  * modules/ui/general.js piped raw into innerHTML on hover. These tests pin
  * every layer of the fix (each one independently breaks the chain):
@@ -130,12 +131,8 @@ describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', ()
   test('the /map/ CSP script-src trusts no CDN and pins navigations', () => {
     const vercel = JSON.parse(read('vercel.json'));
     const mapHeaders = vercel.headers.find((h) => h.source.startsWith('/map/'));
-    // Accept the enforced key AND the Report-Only key: this lineage ships the
-    // policy as Content-Security-Policy-Report-Only (documented rollout posture,
-    // api/csp-report.js — flip-to-enforce is on the owner punch list). The
-    // no-CDN / pinned-navigation invariants are identical under either key.
     const csp = mapHeaders.headers.find(
-      (h) => /^content-security-policy(-report-only)?$/.test(h.key.toLowerCase()),
+      (h) => h.key.toLowerCase() === 'content-security-policy',
     ).value;
     const scriptSrc = csp.split(';').find((d) => d.trim().startsWith('script-src'));
     expect(scriptSrc).not.toMatch(/unpkg|cdn|googleapis|https:\/\//);
@@ -188,8 +185,8 @@ describe('wave-1 layer A — the uploaded .map SVG segment is scrubbed before in
   });
 
   // cycle-3 hardening: the weak version stripped only <script>/on*/javascript:,
-  // leaving these token-exfiltration vectors. Each is an independent XSS on the
-  // same-origin, auth-token-bearing /map/ frame.
+  // leaving these exfiltration vectors. Each is an independent XSS in the map
+  // frame even though production now limits its blast radius by origin.
   test('strips the HTML-embedding vectors the weak version missed', () => {
     const out = sanitizeMapSvg(
       '<svg id="map"></svg>' +

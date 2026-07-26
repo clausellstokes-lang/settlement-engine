@@ -55,7 +55,41 @@ function ExportItem({ Icon, label, desc, disabled, onClick }) {
 }
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, onCreateCampaign, onNavigate, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
+export function CampaignFolder({
+  campaign,
+  settlements,
+  allModifiers,
+  onViewSettlement,
+  deleteId,
+  setDeleteId,
+  deleteConfirmed,
+  campaigns,
+  addToCampaign,
+  removeFromCampaign,
+  onDeleteCampaign,
+  onRenameCampaign,
+  toggleCollapsed,
+  onDiscoverRegional,
+  onConfirmRegionalChannel,
+  onApplyRegionalImpact,
+  onIgnoreRegionalImpact,
+  onResolveRegionalImpact,
+  onAdvanceRegionalImpacts,
+  onApplyAllRegionalImpacts,
+  onIgnoreAllRegionalImpacts,
+  onReactivate,
+  canReactivate,
+  reactivatingId,
+  canManageCampaigns,
+  onCanonize,
+  onAdvanceTime,
+  onCreateCampaign,
+  onNavigate,
+  worldCanonized,
+  selectMode = false,
+  selectedIds,
+  onToggleSelect,
+}) {
   const worldState = campaign?.worldState || null;
   const regionalGraph = campaign?.regionalGraph || campaign?.worldState?.regionalGraph || null;
   const nameFor = (id) => {
@@ -67,6 +101,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // also no-ops a re-entrant advance, but greying the button stops the double-click
   // from queuing a second intent + gives the DM visible feedback the tick is busy.
   const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
+  const settlementDeletionInFlight = useStore(
+    s => s.isCampaignMutationLocked?.(campaign?.id) || false,
+  );
+  const advanceBlocked = advanceInFlight || settlementDeletionInFlight;
   // ITEM 1 (owner order 2026-07-22: "there should be an autoresolver in the library
   // advance time as well, it should sync with the realm's"). The Library advance
   // already routes through the SAME chokepoint as the Realm — advanceCampaignWorld →
@@ -108,6 +146,19 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
   // the same default the store's advanceCampaignWorld uses.
   const [advanceInterval, setAdvanceInterval] = useState('one_month');
+  const advanceTitle = !worldCanonized
+    ? 'Canonize this campaign world on the World Map before advancing time'
+    : advanceInFlight
+      ? 'Advancing the world…'
+      : settlementDeletionInFlight
+        ? 'Finishing a settlement deletion…'
+        : 'Advance the campaign world and open the Realm';
+  const handleAdvance = (event) => {
+    event.stopPropagation();
+    if (!advanceBlocked) {
+      onAdvanceTime?.(campaign.id, advanceInterval);
+    }
+  };
   const handleExportPdf = async (e) => {
     e.stopPropagation();
     if (pdfBusy) return;
@@ -229,9 +280,18 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               value={advanceInterval}
               onChange={(e) => setAdvanceInterval(e.target.value)}
               onClick={(e) => e.stopPropagation()}
-              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
+              disabled={settlements.length === 0 || !worldCanonized || advanceBlocked}
               title="How far one Advance Time step carries the campaign world"
-              style={{ fontSize:FS.xs, fontFamily:sans, color:INK, background:CARD, border:`1px solid ${BORDER}`, padding:'4px 6px', cursor: advanceInFlight ? 'default' : 'pointer' }}>
+              style={{
+                fontSize: FS.xs,
+                fontFamily: sans,
+                color: INK,
+                background: CARD,
+                border: `1px solid ${BORDER}`,
+                padding: '4px 6px',
+                cursor: advanceBlocked ? 'default' : 'pointer',
+              }}
+            >
               <option value="one_week">Week</option>
               <option value="one_month">Month</option>
               <option value="one_season">Season</option>
@@ -245,13 +305,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               variant="secondary"
               size="sm"
               icon={<Clock size={10}/>}
-              onClick={(e) => { e.stopPropagation(); if (!advanceInFlight) onAdvanceTime?.(campaign.id, advanceInterval); }}
-              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
-              title={!worldCanonized
-                ? 'Canonize this campaign world on the World Map before advancing time'
-                : advanceInFlight
-                  ? 'Advancing the world…'
-                  : 'Advance the campaign world and open the Realm'}>
+              onClick={handleAdvance}
+              disabled={settlements.length === 0 || !worldCanonized || advanceBlocked}
+              title={advanceTitle}
+            >
               {advanceInFlight ? 'Advancing…' : 'Advance Time'}
             </Button>
             {/* Books and export — one disclosure folds the four sibling export/
@@ -381,13 +438,20 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
                 </tr>
               </thead>
               <tbody>
-          {settlements.map(s => (
-            <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
-              onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
-              deleteConfirmed={deleteConfirmed} campaigns={campaigns}
-              addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
+          {settlements.map(settlement => (
+            <SettlementCard
+              key={settlement.id}
+              s={settlement}
+              allModifiers={allModifiers}
+              onView={onViewSettlement}
+              deleteId={deleteId}
+              setDeleteId={setDeleteId}
+              deleteConfirmed={deleteConfirmed}
+              campaigns={campaigns}
+              addToCampaign={addToCampaign}
+              removeFromCampaign={removeFromCampaign}
               currentCampaignId={campaign.id}
-              regionalCounts={regionalCountsForSave(campaign, s.id)}
+              regionalCounts={regionalCountsForSave(campaign, settlement.id)}
               onReactivate={onReactivate}
               canReactivate={canReactivate}
               reactivatingId={reactivatingId}
@@ -400,8 +464,9 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               regionalGraph={regionalGraph}
               nameFor={nameFor}
               selectMode={selectMode}
-              selected={!!selectedIds?.has?.(s.id)}
-              onToggleSelect={onToggleSelect}/>
+              selected={!!selectedIds?.has?.(String(settlement.id))}
+              onToggleSelect={onToggleSelect}
+            />
           ))}
               </tbody>
             </table>

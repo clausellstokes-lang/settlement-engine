@@ -109,7 +109,10 @@ describe('behavior: governing faction engages the legitimacy consumers', () => {
   });
 
   test('ruling_authority gains a governing_power contributor from the governing faction', () => {
-    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-town');
+    // The original seed now lands exactly on neutral governing power (30),
+    // correctly producing no zero-delta contributor. This re-probed seed keeps
+    // the behavioral join observable with a non-neutral governing faction.
+    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-0');
     const ra = deriveCausalState(s).variables.ruling_authority;
     const govContrib = (ra.contributors || []).find((c) => c.effect === 'governing_power');
     expect(govContrib, 'deriveRulingAuthority must engage the governing faction').toBeTruthy();

@@ -74,6 +74,12 @@ beforeEach(() => {
   // Shared state object — reset selection between tests.
   ctx.state.selectedBurgId = null;
   ctx.state.selectedSettlementId = null;
+  ctx.state.mapState.placements = {
+    b1: { settlementId: 's1', x: 100, y: 100, name: 'Springhaven' },
+  };
+  ctx.state.savedSettlements = [
+    { id: 's1', name: 'Springhaven', tier: 'town', population: 1200 },
+  ];
 });
 
 afterEach(() => {
@@ -82,6 +88,20 @@ afterEach(() => {
 });
 
 describe('PlacementsLayer — QuickInspector hover-peek emission', () => {
+  test('a numeric placement resolves the equivalent string-id save for its label', () => {
+    ctx.state.mapState.placements = {
+      b7: { settlementId: 7, x: 100, y: 100, name: 'Stale fallback' },
+    };
+    ctx.state.savedSettlements = [
+      { id: '7', name: 'Aldermoor', tier: 'town', population: 1200 },
+    ];
+
+    const { container } = renderLayer();
+    expect(container.querySelector('[data-hover-settlement-id="7"]')).toBeTruthy();
+    expect(container.textContent).toContain('Aldermoor');
+    expect(container.textContent).not.toContain('Stale fallback');
+  });
+
   test('a mouse pointer entering a placement icon emits the hover-peek', () => {
     const { container } = renderLayer();
     const icon = container.querySelector('[data-hover-settlement-id="s1"]');

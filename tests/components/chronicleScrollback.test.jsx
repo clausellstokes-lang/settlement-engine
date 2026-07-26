@@ -60,8 +60,8 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     STORE = { setSelectedSettlementId };
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
     expect(screen.getByTestId('chronicle-scrollback')).toBeTruthy();
-    // Newest tick (7) is selected by default — its prose + headline show.
-    expect(screen.getByText(/Tick 7/)).toBeTruthy();
+    // The newest entry is selected by default — its prose + headline show.
+    expect(screen.getAllByText('week 8 of spring, year 1').length).toBeGreaterThan(0);
     expect(screen.getByText(/The siege of Bram broke/)).toBeTruthy();
     expect(screen.getByText('Bram falls')).toBeTruthy();
     // The older tick (5) is on the rail but not the selected body.
@@ -71,8 +71,8 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
   test('scrubbing to an older tick selects it', () => {
     STORE = { setSelectedSettlementId };
     render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
-    // Click the tick-5 rail button (role=group + aria-pressed toggle, not a tab).
-    fireEvent.click(screen.getByRole('button', { name: 'Tick 5' }));
+    // Click the older entry's calendar-labelled rail button.
+    fireEvent.click(screen.getByRole('button', { name: 'week 6 of spring, year 1' }));
     expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
     expect(screen.queryByText('Bram falls')).toBeNull();
   });
@@ -88,7 +88,7 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
     STORE = { setSelectedSettlementId };
     const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
     // The DM scrubs back to tick 5…
-    fireEvent.click(screen.getByRole('button', { name: 'Tick 5' }));
+    fireEvent.click(screen.getByRole('button', { name: 'week 6 of spring, year 1' }));
     expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
     // …then an advance lands while the panel is open: the newest-first timeline
     // grows at the FRONT (tick 9 prepends). A positional index would now point
@@ -103,7 +103,7 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
       },
     };
     rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
-    expect(screen.getByText(/Tick 5/)).toBeTruthy();
+    expect(screen.getAllByText('week 6 of spring, year 1').length).toBeGreaterThan(0);
     expect(screen.getByText('Ashford marches on Bram')).toBeTruthy();
     expect(screen.queryByText('Bram falls')).toBeNull();
   });
@@ -111,7 +111,7 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
   test('parked at the newest, the view FOLLOWS a new advance (the default keeps live)', () => {
     STORE = { setSelectedSettlementId };
     const { rerender } = render(<ChronicleScrollback campaign={campaign} nameFor={nameFor} />);
-    expect(screen.getByText(/Tick 7/)).toBeTruthy();
+    expect(screen.getAllByText('week 8 of spring, year 1').length).toBeGreaterThan(0);
     const grown = {
       ...campaign,
       worldState: {
@@ -122,7 +122,7 @@ describe('ChronicleScrollback — scrubbable timeline', () => {
       },
     };
     rerender(<ChronicleScrollback campaign={grown} nameFor={nameFor} />);
-    expect(screen.getByText(/Tick 9/)).toBeTruthy();
+    expect(screen.getAllByText('week 10 of spring, year 1').length).toBeGreaterThan(0);
     expect(screen.getByText('A new dawn')).toBeTruthy();
   });
 });

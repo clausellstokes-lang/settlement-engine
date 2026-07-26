@@ -14,12 +14,13 @@ import { describe, expect, test } from 'vitest';
 import { DEITY_POOL, DEITY_CORE_REF_PREFIX, deityCoreRef } from '../../src/generators/data/deityPool.js';
 import { deriveTemper, evil01, chaos01 } from '../../src/domain/worldPulse/deityAxes.js';
 import { nicheOf } from '../../src/domain/worldPulse/cultImpositionApply.js';
+import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
 import {
   validateDeity, DEITY_ALIGNMENT_KEYS, DEITY_LAW_KEYS, DEITY_TIER_KEYS, DEITY_PORTFOLIO_MAX_LENGTH,
 } from '../../src/domain/customContentSchema.js';
 
 const TERRAINS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
-const CULTURES = ['germanic', 'celtic', 'norse', 'mediterranean'];
+const CULTURES = CULTURE_PROFILE_KEYS;
 const GOV_CLASSES = ['theocratic', 'martial', 'monarchic', 'civic'];
 
 describe('deityPool — governed content pins', () => {
@@ -71,6 +72,18 @@ describe('deityPool — governed content pins', () => {
       for (const t of d.affinity.terrain) expect(TERRAINS, `${d.slug} terrain ${t}`).toContain(t);
       for (const c of d.affinity.culture) expect(CULTURES, `${d.slug} culture ${c}`).toContain(c);
       for (const g of d.affinity.government) expect(GOV_CLASSES, `${d.slug} government ${g}`).toContain(g);
+    }
+  });
+
+  test('every canonical culture profile has real pantheon affinity coverage', () => {
+    for (const culture of CULTURES) {
+      const matching = DEITY_POOL.filter(deity => (
+        deity.affinity.culture.includes(culture)
+      ));
+      expect(
+        matching.length,
+        `${culture} falls back to the unweighted generic deity pool`,
+      ).toBeGreaterThanOrEqual(3);
     }
   });
 

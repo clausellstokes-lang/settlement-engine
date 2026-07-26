@@ -7,25 +7,22 @@
  * visibly, and pending writes survive a tab close.
  *
  * ORDERING GUARANTEE (enforced, not merely hoped): the `kind` is a save row's
- * COLUMN set (campaignSliceShared.kindForPartial), so writes to the SAME columns
- * are serialized (attemptOps' per-key gate) AND a newer op supersedes an older
+ * COLUMN set (campaignSliceShared.kindForPartial), so every write to the SAME save
+ * is serialized (attemptOps' per-save gate) AND a newer op supersedes an older
  * non-inflight op whose columns it fully COVERS (enqueue's subset-supersede) — so
- * a backed-off stale retry can neither race nor revert a fresher write to the same
- * columns (store-hooks-state-2: the destroy-resurrection + map-edit-revert class).
- * Writes to DIFFERENT (disjoint) columns never contend and drain concurrently up
- * to DRAIN_CAP. (Deliberately NOT a single global FIFO — cross-save concurrency is
- * the whole point of the pool.)
+ * an in-flight stale write can neither race nor land after a fresher overlapping
+ * write (store-hooks-state-2: the destroy-resurrection + map-edit-revert class).
+ * Different saves still drain concurrently up to DRAIN_CAP. Same-save disjoint
+ * columns serialize too: the small availability cost is preferable to attempting
+ * an overlap graph that can miss a future multi-column writer.
  *
- * KNOWN RESIDUAL (store-hooks-state-2, deliberately deferred — documented, not a
- * bug to re-find): a backed-off older op whose columns are NOT fully covered by a
- * newer PARTIALLY-overlapping op (e.g. an older {campaign_state,data} applyEvent
- * vs a newer {data}-only edit) is neither superseded nor gated once it has left the
- * in-flight window, so its late retry could still revert the shared column. Closing
- * that needs STRICT per-saveId FIFO through the backoff lifecycle (a parked op then
- * blocks later same-save writes) — an ordering-vs-availability tradeoff that is
- * owner-gated. Also deferred: routing aiSlice's 9 direct ai_data writes through
- * persistSaveUpdate (changes their local-catch error handling to the outbox failure
- * reporter across a large tested surface) so ONE lane owns the ai_data column.
+ * FIFO continues through retry backoff: a newer same-save op remains queued behind
+ * an older backing-off or parked op. That intentionally favors correctness over
+ * availability for one save; the visible Retry affordance revives the blocked head
+ * and its successors. Cross-save writes remain independent. Still deferred:
+ * routing aiSlice's direct ai_data writes through persistSaveUpdate (changes their
+ * local-catch error handling across a large tested surface) so one lane owns that
+ * column.
  *
  * WHAT THIS MODULE OWNS (and what it does NOT):
  *   • The op list (intent) and the payload cache (data), each mirrored to a
@@ -49,9 +46,11 @@
 
 // ── Schema + bounds ──────────────────────────────────────────────────────────
 
-const MIRROR_KEY = 'sf_outbox_v1';
-const PAYLOAD_KEY = 'sf_outbox_payloads_v1';
-const SCHEMA_VERSION = 1;
+const LEGACY_MIRROR_KEY = 'sf_outbox_v1';
+const LEGACY_PAYLOAD_KEY = 'sf_outbox_payloads_v1';
+const MIRROR_KEY_PREFIX = 'sf_outbox_v2:';
+const PAYLOAD_KEY_PREFIX = 'sf_outbox_payloads_v2:';
+const SCHEMA_VERSION = 2;
 
 /**
  * Op-list bound. The queue drains continuously, so this is a backstop against a
@@ -110,6 +109,8 @@ export function setOutboxScheduler(fn) {
  * @property {number} enqueuedAt
  * @property {number} nextAttemptAt      // clock() threshold; 0 = ready now, Infinity = parked
  * @property {boolean} differential      // whether a success records the session differential fingerprint
+ * @property {string|null} ownerId        // authenticated mirror owner; null before auth resolution
+ * @property {boolean} ownerPending       // true only for a same-session enqueue that raced initial auth
  */
 
 /** @type {PersistenceOp[]} */
@@ -117,13 +118,20 @@ let _ops = [];
 /** @type {Record<string, any>} */
 let _payloads = {};
 let _counter = 0;
+// null is used both before auth resolves and for a known signed-out session;
+// _ownerKnown distinguishes those states. Only an authenticated owner receives a
+// durable mirror or may replay one.
+let _activeOwnerId = null;
+let _ownerKnown = false;
+let _ownerEpoch = 0;
+/** Same-tab fallback when localStorage is unavailable/full. Never cross-drained. */
+const _memoryByOwner = new Map();
 
 /**
- * Per-(saveId,kind) serialization gates. While an op for a key is mid-attempt,
- * its entry here is a promise that resolves when it settles; a newer op for the
- * SAME key awaits that before it starts, so same-column writes land in enqueue
- * order (the durable "runs after" guarantee). Distinct keys never appear here at
- * once, so cross-save writes stay fully concurrent.
+ * Per-(owner,saveId) serialization gates. Owner scoping lets B use the same
+ * save id without waiting for A, while retaining A's gate across detach/reattach
+ * so A cannot replay or supersede an older write before its original request
+ * settles. Every same-owner write for one save therefore lands in enqueue order.
  * @type {Map<string, Promise<void>>}
  */
 let _inflightByKey = new Map();
@@ -146,10 +154,34 @@ function safeLocalStorage() {
   }
 }
 
+function normalizeOwnerId(ownerId) {
+  if (ownerId == null || ownerId === '') return null;
+  return String(ownerId);
+}
+
+function mirrorKeys(ownerId = _activeOwnerId) {
+  if (!ownerId) return null;
+  const suffix = encodeURIComponent(ownerId);
+  return {
+    ops: `${MIRROR_KEY_PREFIX}${suffix}`,
+    payloads: `${PAYLOAD_KEY_PREFIX}${suffix}`,
+  };
+}
+
+function scrubLegacyMirror(ls) {
+  try {
+    // V1 had no owner marker, so assigning it to whichever account happens to
+    // sign in next would be a cross-account write. It cannot be migrated safely.
+    ls.removeItem(LEGACY_MIRROR_KEY);
+    ls.removeItem(LEGACY_PAYLOAD_KEY);
+  } catch { /* ignore */ }
+}
+
 /** Persist the op list + payload cache to localStorage. Never throws. */
 function persistMirror() {
   const ls = safeLocalStorage();
-  if (!ls) return;
+  const keys = mirrorKeys();
+  if (!ls || !keys || !_ownerKnown) return;
   try {
     // Normalise on write: an inflight op that a crash interrupts must replay,
     // so it is mirrored as a ready 'queued' op (a half-sent write is retried;
@@ -159,8 +191,16 @@ function persistMirror() {
       .map(op => op.status === 'inflight'
         ? { ...op, status: 'queued', nextAttemptAt: 0 }
         : op);
-    ls.setItem(MIRROR_KEY, JSON.stringify({ version: SCHEMA_VERSION, ops }));
-    ls.setItem(PAYLOAD_KEY, JSON.stringify({ version: SCHEMA_VERSION, payloads: _payloads }));
+    ls.setItem(keys.ops, JSON.stringify({
+      version: SCHEMA_VERSION,
+      ownerId: _activeOwnerId,
+      ops,
+    }));
+    ls.setItem(keys.payloads, JSON.stringify({
+      version: SCHEMA_VERSION,
+      ownerId: _activeOwnerId,
+      payloads: _payloads,
+    }));
   } catch (e) {
     // Quota or serialization failure — the in-memory queue still drives this
     // session; we simply lose crash-durability. Warn, never crash a save.
@@ -169,62 +209,153 @@ function persistMirror() {
 }
 
 /**
- * Read the mirror back into memory. Tolerant: a corrupt/incompatible envelope
- * is discarded (warn + fresh queue), never a crash. Returns the number of
- * replayable ops loaded.
+ * Read the ACTIVE OWNER'S mirror into memory. Loading merges with, rather than
+ * resets, same-session work so an auth-resolution race cannot erase an enqueue
+ * that landed just before initialization. A corrupt/incompatible envelope is
+ * scrubbed without touching the live queue. Returns the number of disk ops added.
  */
 export function loadMirror() {
   const ls = safeLocalStorage();
-  _ops = [];
-  _payloads = {};
-  _inflightByKey = new Map(); // a fresh boot has no in-flight writes to serialize against
-  if (!ls) return 0;
+  const keys = mirrorKeys();
+  if (!ls || !keys || !_ownerKnown) return 0;
+  scrubLegacyMirror(ls);
   let rawOps;
   let rawPayloads;
   try {
-    rawOps = ls.getItem(MIRROR_KEY);
-    rawPayloads = ls.getItem(PAYLOAD_KEY);
+    rawOps = ls.getItem(keys.ops);
+    rawPayloads = ls.getItem(keys.payloads);
   } catch {
     return 0;
   }
   if (!rawOps) return 0;
   try {
     const envelope = JSON.parse(rawOps);
-    if (!envelope || envelope.version !== SCHEMA_VERSION || !Array.isArray(envelope.ops)) {
+    if (!envelope
+      || envelope.version !== SCHEMA_VERSION
+      || envelope.ownerId !== _activeOwnerId
+      || !Array.isArray(envelope.ops)) {
       throw new Error('unrecognized outbox envelope');
     }
     const payloadEnv = rawPayloads ? JSON.parse(rawPayloads) : null;
-    const payloads = (payloadEnv && payloadEnv.version === SCHEMA_VERSION && payloadEnv.payloads)
+    const payloads = (payloadEnv
+      && payloadEnv.version === SCHEMA_VERSION
+      && payloadEnv.ownerId === _activeOwnerId
+      && payloadEnv.payloads)
       ? payloadEnv.payloads
       : {};
     // Drop barriers (intra-session ordering markers; their partner snapshot is
     // re-synced by loadCampaigns on boot) and any op whose payload is missing.
-    _ops = envelope.ops.filter(op =>
+    const loadedOps = envelope.ops.filter(op =>
       op && op.kind !== OP_KIND_BARRIER && op.payloadKey && payloads[op.payloadKey] !== undefined,
     ).map(op => ({
       ...op,
+      ownerId: _activeOwnerId,
+      ownerPending: false,
       status: op.status === 'failed' ? 'failed' : 'queued',
       // Parked-on-disk ops become immediately retryable on a fresh boot.
       nextAttemptAt: 0,
       attempts: op.status === 'failed' ? op.attempts : 0,
     }));
     // Keep only payloads still referenced by a surviving op.
-    const live = new Set(_ops.map(op => op.payloadKey));
-    _payloads = Object.fromEntries(Object.entries(payloads).filter(([k]) => live.has(k)));
-    return _ops.length;
+    const existingKeys = new Set(_ops.map(op => op.payloadKey).filter(Boolean));
+    const additions = loadedOps.filter(op => !existingKeys.has(op.payloadKey));
+    const live = new Set(additions.map(op => op.payloadKey));
+    const loadedPayloads = Object.fromEntries(
+      Object.entries(payloads).filter(([k]) => live.has(k)),
+    );
+    // Disk work predates this session's enqueues. Keep it first while ensuring a
+    // same-key session payload wins and remains the last write.
+    _ops = [...additions, ..._ops];
+    _payloads = { ...loadedPayloads, ..._payloads };
+    for (const op of _ops) {
+      const match = /::(\d+)$/.exec(String(op.id || ''));
+      if (match) _counter = Math.max(_counter, Number(match[1]) + 1);
+    }
+    return additions.length;
   } catch (e) {
-    console.warn('[outbox] mirror corrupt — starting a fresh queue', e);
-    _ops = [];
-    _payloads = {};
-    // Best-effort scrub of the poisoned envelope so it can't re-trip next boot.
-    try { ls.removeItem(MIRROR_KEY); ls.removeItem(PAYLOAD_KEY); } catch { /* ignore */ }
+    console.warn('[outbox] owner mirror corrupt — keeping the live queue', e);
+    // Best-effort scrub of only this owner's poisoned envelope. Same-session
+    // work and every other account's mirror remain untouched.
+    try {
+      ls.removeItem(keys.ops);
+      ls.removeItem(keys.payloads);
+    } catch {
+      // Cleanup is best-effort; the live in-memory queue is still usable.
+    }
     return 0;
   }
 }
 
-// Prime the in-memory queue from the mirror at module load (guarded — a no-op
-// in a node test env with no localStorage). Boot replay (initOutbox) re-drains.
-loadMirror();
+function rememberDetachedOwner(ownerId) {
+  // Keep a same-tab copy in addition to the durable mirror. This preserves the
+  // old owner's pending writes when localStorage is unavailable or quota-bound.
+  const ops = _ops
+    .filter(op => op.status !== 'done' && op.kind !== OP_KIND_BARRIER)
+    .map(op => op.status === 'failed'
+      ? { ...op }
+      : { ...op, status: 'queued', nextAttemptAt: 0 });
+  if (ops.length === 0) {
+    _memoryByOwner.delete(ownerId);
+    return;
+  }
+
+  const payloadKeys = new Set(ops.map(op => op.payloadKey).filter(Boolean));
+  _memoryByOwner.set(ownerId, {
+    ops,
+    payloads: Object.fromEntries(
+      Object.entries(_payloads).filter(([key]) => payloadKeys.has(key)),
+    ),
+  });
+}
+
+/**
+ * Move the in-memory queue to an authenticated owner (or detach it on sign-out).
+ * Switching owners persists the old owner's queue, clears it from memory, then
+ * loads only the new owner's mirror. On the FIRST auth resolution, enqueues that
+ * raced initialization are claimed by that authenticated owner and merged with
+ * its disk queue instead of being discarded.
+ */
+export function activateOutboxOwner(ownerId) {
+  const nextOwnerId = normalizeOwnerId(ownerId);
+  if (_ownerKnown && nextOwnerId === _activeOwnerId) return 0;
+
+  const wasKnown = _ownerKnown;
+  const previousOwnerId = _activeOwnerId;
+  if (wasKnown && previousOwnerId) {
+    persistMirror();
+    rememberDetachedOwner(previousOwnerId);
+  }
+
+  const pendingAuthOps = !wasKnown && nextOwnerId
+    ? _ops.filter(op => op.ownerPending === true)
+    : [];
+  const pendingPayloadKeys = new Set(pendingAuthOps.map(op => op.payloadKey).filter(Boolean));
+  const pendingAuthPayloads = Object.fromEntries(
+    Object.entries(_payloads).filter(([key]) => pendingPayloadKeys.has(key)),
+  );
+
+  _ownerEpoch += 1;
+  _ownerKnown = true;
+  _activeOwnerId = nextOwnerId;
+  const remembered = nextOwnerId ? _memoryByOwner.get(nextOwnerId) : null;
+  if (nextOwnerId) _memoryByOwner.delete(nextOwnerId);
+  _ops = remembered ? remembered.ops : pendingAuthOps;
+  _payloads = remembered ? remembered.payloads : pendingAuthPayloads;
+  for (const op of _ops) {
+    op.ownerId = nextOwnerId;
+    op.ownerPending = false;
+  }
+
+  const loaded = nextOwnerId ? loadMirror() : 0;
+  if (nextOwnerId) persistMirror();
+  notify();
+  return loaded;
+}
+
+/** Current authenticated owner, or null while unresolved/signed out. */
+export function getActiveOutboxOwner() {
+  return _ownerKnown ? _activeOwnerId : null;
+}
 
 // ── Status / notification ────────────────────────────────────────────────────
 
@@ -258,6 +389,21 @@ function payloadKeyFor(saveId, kind) {
   return `${saveId}:${kind}`;
 }
 
+function inflightKeyFor(op) {
+  return op?.ownerId && op?.saveId != null
+    ? `${op.ownerId}\u0000${op.saveId}`
+    : null;
+}
+
+function earlierOpForSameOwnerAndSave(op, opIndex = _ops.indexOf(op)) {
+  if (opIndex <= 0) return null;
+  return _ops.slice(0, opIndex).find(candidate => (
+    candidate.kind !== OP_KIND_BARRIER
+    && candidate.ownerId === op.ownerId
+    && candidate.saveId === op.saveId
+  )) || null;
+}
+
 // A kind is a '+'-joined sorted COLUMN set (campaignSliceShared.kindForPartial).
 // `newKind` COVERS `oldKind` when every column oldKind writes is also written by
 // newKind (oldKind ⊆ newKind) — so a newer op with newKind fully overwrites the
@@ -285,7 +431,7 @@ export function enqueue({ saveId, kind, payload, fingerprint, differential = fal
   // (the un-delete / map-edit-revert ghost class). The same-key case is the equal-
   // set special case. An op touching a column this one does NOT write (version_history
   // vs data) is NOT covered, so it correctly COEXISTS. An in-flight op can't be
-  // recalled — attemptOps' per-key gate makes a same-key newer op WAIT for it, so
+  // recalled — attemptOps' per-save gate makes every same-save newer op WAIT, so
   // last-write-wins holds in enqueue order (the module-header ORDERING GUARANTEE).
   const superseded = _ops.filter(op =>
     op.kind !== OP_KIND_BARRIER && op.saveId === saveId && op.status !== 'inflight' && kindCovers(kind, op.kind));
@@ -313,6 +459,8 @@ export function enqueue({ saveId, kind, payload, fingerprint, differential = fal
     enqueuedAt: _clock(),
     nextAttemptAt: 0,
     differential,
+    ownerId: _activeOwnerId,
+    ownerPending: !_ownerKnown,
   });
   _ops.push(op);
   enforceBound();
@@ -333,6 +481,8 @@ export function enqueueBarrier(saveId = '*') {
     enqueuedAt: _clock(),
     nextAttemptAt: 0,
     differential: false,
+    ownerId: _activeOwnerId,
+    ownerPending: !_ownerKnown,
   });
   _ops.push(op);
   commit();
@@ -407,41 +557,82 @@ function scheduleRetry(op, runner, delayMs) {
 export async function attemptOps(ops, runner) {
   const results = await runWithConcurrency(ops, DRAIN_CAP, async (op) => {
     if (op.status === 'done') return { op, ok: true };
+    // A known signed-out session never writes, and an op from an owner that has
+    // since been detached never starts under the next account's credentials.
+    const ownerCanRun = () => _ownerKnown
+      && _activeOwnerId != null
+      && op.ownerPending !== true
+      && op.ownerId === _activeOwnerId;
+    if (!ownerCanRun() || !_ops.includes(op)) return { op, ok: false, ownerMismatch: true };
+    const predecessor = earlierOpForSameOwnerAndSave(op);
+    // A queued/failed predecessor is in retry backoff (or deliberately parked).
+    // Do not let this newer op overtake it. An inflight predecessor is handled by
+    // the promise gate below, which waits and then runs this op in the same call.
+    if (predecessor && predecessor.status !== 'inflight') {
+      return { op, ok: false, blockedByPredecessor: true };
+    }
     const key = op.payloadKey;
+    const inflightKey = inflightKeyFor(op);
 
-    // ── Per-key serialization (the durable "runs after" guarantee) ──────────
-    // Wait out any op currently mid-attempt for the same (saveId, kind) so this
-    // newer write to the same columns lands AFTER the older one. Distinct keys
-    // never share a gate, so cross-save concurrency (up to DRAIN_CAP) is intact.
-    if (key != null) {
-      while (_inflightByKey.has(key)) {
-        try { await _inflightByKey.get(key); } catch { /* settle either way */ }
+    // ── Per-save serialization (the durable "runs after" guarantee) ─────────
+    // Wait out any op currently mid-attempt for this owner's same save so a
+    // newer partially-overlapping write lands AFTER the older one. Distinct
+    // saves never share a gate, so cross-save concurrency remains intact.
+    if (inflightKey != null) {
+      while (_inflightByKey.has(inflightKey)) {
+        try {
+          await _inflightByKey.get(inflightKey);
+        } catch {
+          // Gates normally resolve. A rejected test double still counts as
+          // settled, so the successor may re-evaluate ownership and ordering.
+        }
       }
       // The op may have been superseded (and pruned) while it waited — a still-
-      // newer write for the same key took over; treat as persisted (that write
+      // newer covering write took over; treat as persisted (that write
       // carries the newest payload and will land).
       if (!_ops.includes(op)) return { op, ok: true };
+      if (!ownerCanRun()) return { op, ok: false, ownerMismatch: true };
+      // A second caller can be waiting on the very same op. If the first
+      // attempt failed, it has already advanced that op onto its retry ladder.
+      // Honor that backoff instead of immediately consuming another attempt.
+      if (op.status !== 'queued' || op.nextAttemptAt > _clock()) {
+        return { op, ok: false, blockedByBackoff: true };
+      }
+      const survivingPredecessor = earlierOpForSameOwnerAndSave(op);
+      // The predecessor may have failed into backoff while this op waited on its
+      // in-flight gate. It still owns FIFO priority; do not overtake it.
+      if (survivingPredecessor) {
+        return { op, ok: false, blockedByPredecessor: true };
+      }
     }
 
     let settleGate = () => {};
-    if (key != null) {
+    if (inflightKey != null) {
       let resolveGate;
       const gate = new Promise(res => { resolveGate = res; });
-      _inflightByKey.set(key, gate);
+      _inflightByKey.set(inflightKey, gate);
       settleGate = () => {
-        if (_inflightByKey.get(key) === gate) _inflightByKey.delete(key);
+        if (_inflightByKey.get(inflightKey) === gate) _inflightByKey.delete(inflightKey);
         resolveGate();
       };
     }
 
     try {
+      const attemptEpoch = _ownerEpoch;
       op.status = 'inflight';
       op.attempts += 1;
+      const payload = key != null ? _payloads[key] : undefined;
       let ok;
       try {
-        ok = await runner(op, key != null ? _payloads[key] : undefined);
+        ok = await runner(op, payload);
       } catch {
         ok = false; // runner should be boolean-safe, but never let it reject the pool
+      }
+      // The request began under the old owner. Its old-owner mirror was already
+      // snapshotted as queued during the switch; never prune or rewrite the new
+      // owner's in-memory queue when this stale request settles.
+      if (attemptEpoch !== _ownerEpoch || !ownerCanRun() || !_ops.includes(op)) {
+        return { op, ok: false, ownerMismatch: true };
       }
       if (ok) {
         op.status = 'done';
@@ -459,20 +650,36 @@ export async function attemptOps(ops, runner) {
       }
       return { op, ok };
     } finally {
-      // Release the key gate LAST — only once this op is fully settled (pruned or
-      // parked) may the next same-key op start, so ordering is exact.
+      // Release the save gate LAST — only once this op is fully settled (pruned
+      // or parked) may the next same-save op start, so in-flight ordering is exact.
       settleGate();
     }
   });
   commit();
+  // A same-save successor may have returned early while its predecessor was
+  // inflight. Once this batch settles, schedule the newly-unblocked queue head.
+  // Tests without an injected scheduler retain explicit control via drainReady.
+  if (_scheduler && readyOps().length > 0) {
+    _scheduler(() => {
+      drainReady(runner).catch(() => { /* runner is boolean-safe */ });
+    }, 0);
+  }
   return results;
 }
 
 /** Ops eligible for a drain right now (ready, still queued, non-barrier). */
 export function readyOps() {
   const now = _clock();
-  return _ops.filter(op =>
-    op.kind !== OP_KIND_BARRIER && op.status === 'queued' && op.nextAttemptAt <= now,
+  return _ops.filter((op, index) =>
+    op.kind !== OP_KIND_BARRIER
+      && op.status === 'queued'
+      && op.nextAttemptAt <= now
+      && _ownerKnown
+      && _activeOwnerId != null
+      && op.ownerId === _activeOwnerId
+      && op.ownerPending !== true
+      // Strict per-owner/save FIFO includes backoff and parked predecessors.
+      && !earlierOpForSameOwnerAndSave(op, index),
   );
 }
 
@@ -526,15 +733,28 @@ export function reviveAllPending() {
 
 // ── Lifecycle / test hooks ───────────────────────────────────────────────────
 
-/** Wipe the queue, payload cache, mirror, counter, and key gates (boot/test reset). */
+/** Wipe the active queue/mirror and return ownership to unresolved (test reset). */
 export function resetOutbox() {
+  const keys = mirrorKeys();
   _ops = [];
   _payloads = {};
   _counter = 0;
   _inflightByKey = new Map();
+  _activeOwnerId = null;
+  _ownerKnown = false;
+  _ownerEpoch += 1;
+  _memoryByOwner.clear();
   const ls = safeLocalStorage();
   if (ls) {
-    try { ls.removeItem(MIRROR_KEY); ls.removeItem(PAYLOAD_KEY); } catch { /* ignore */ }
+    try {
+      if (keys) {
+        ls.removeItem(keys.ops);
+        ls.removeItem(keys.payloads);
+      }
+      scrubLegacyMirror(ls);
+    } catch {
+      // Reset is also used in storage-hostile tests; memory is already clean.
+    }
   }
   notify();
 }

@@ -79,6 +79,9 @@ import { proposalIdFor, upsertProposal } from './worldState.js';
 // a force deployed FROM its settlement. Detection rides the ONE facet chokepoint (declared
 // facet) OR the established hireable-force name/tag pattern.
 import { facetOf } from '../spatial/cohesionWeave.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 import { MERCENARY_MARKET_PATTERN } from './mercenaryMarket.js';
 // D4 (DESIGN_SIM_DEPTH_R2): fear of a rival AS A HEGEMON amplifies the DENIAL motive. One-
 // directional (hegemonyFear never imports convergence); 0 when no sphere ⇒ byte-identical.
@@ -878,7 +881,9 @@ export function mercenaryReinforcementOf(snapshot, settlementId) {
     const declared = facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (inst), 'institutionFunction') === 'mercenary';
     const tags = Array.isArray(inst.tags) ? inst.tags.join(' ') : '';
     const hay = `${String(inst.name || '')} ${String(inst.category || '')} ${String(inst.priorityCategory || '')} ${tags}`;
-    if (declared || MERCENARY_MARKET_PATTERN.test(hay)) count += 1;
+    const inferred = !isMaterializedCustomContent(inst)
+      && MERCENARY_MARKET_PATTERN.test(hay);
+    if (declared || inferred) count += 1;
   }
   const prosperity01 = patronStrength01Of(snapshot, settlementId);
   return { factor: mercenaryReinforcement({ count, prosperity01 }), count, settlementName: nameOf(snapshot, settlementId) };
@@ -1362,4 +1367,3 @@ export function interceptVerbFactory() {
     note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }
-

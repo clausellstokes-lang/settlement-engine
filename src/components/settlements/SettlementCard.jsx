@@ -18,6 +18,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
 import { emblem } from '../../design/organic/ornament/compose.js';
+import { useStore } from '../../store/index.js';
 
 // Relationship-type swatch for the neighbour chips (kept inline on OUR floor —
 // the shared cross-surface palette adoption is a separate cosmetic dedupe).
@@ -62,6 +63,22 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   // The saved-on line: prefer the durable `timestamp` (Supabase updated_at), fall
   // back to the numeric `savedAt` epoch that the local save path always stamps.
   const savedWhen = ts(s.timestamp ?? s.savedAt);
+  const campaignMutationVersion = useStore(state => {
+    const advances = (state.advanceInFlight || []).map(String).join(',');
+    const deletions = (state.campaignMutationLocks || []).map(lock => lock.token).join(',');
+    return `${advances}|${deletions}`;
+  });
+  const mutationBlocks = useMemo(() => {
+    // The version string is a cheap subscription trigger; the actual guarded
+    // actions are read fresh so this card never closes over stale store methods.
+    void campaignMutationVersion;
+    const state = useStore.getState();
+    return {
+      deletion: !!state.getSettlementDeletionBlock?.([s.id]),
+      removal: !!(currentCampaignId && state.getCampaignMutationBlock?.(currentCampaignId)),
+      target: campaignId => !!state.getCampaignMembershipBlock?.(campaignId, s.id),
+    };
+  }, [campaignMutationVersion, currentCampaignId, s.id]);
 
   // AUDIT-2.2 — read-only PDF extraction for a retention-frozen save. Exports the
   // STORED settlement (never the live store, no worldState, no faith chapter, no
@@ -430,7 +447,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
 
                           {/* Constructive campaign membership — add / move. */}
                           {campaigns.map(c => c.id === currentCampaignId ? null : (
-                            <Button variant="ghost" fullWidth key={c.id} onClick={() => { addToCampaign(c.id, s.id); setMenuOpen(false); }}
+                            <Button variant="ghost" fullWidth key={c.id} disabled={mutationBlocks.target(c.id)} onClick={() => {
+                              const result = addToCampaign(c.id, s.id);
+                              if (result?.ok !== false) setMenuOpen(false);
+                            }}
                               icon={<FolderOpen size={13} color={GOLD}/>}
                               title={currentCampaignId ? `Move to ${c.name}` : `Add to ${c.name}`}
                               style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:INK, fontWeight:500 }}>
@@ -454,7 +474,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                       {currentCampaignId && (
                         <>
                           <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
-                          <Button variant="ghost" fullWidth onClick={() => { removeFromCampaign(currentCampaignId, s.id); setMenuOpen(false); }}
+                          <Button variant="ghost" fullWidth disabled={mutationBlocks.removal} onClick={() => {
+                            const result = removeFromCampaign(currentCampaignId, s.id);
+                            if (result?.ok !== false) setMenuOpen(false);
+                          }}
                             style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', fontSize:FS.sm, color:swatch.danger, fontWeight:500 }}>
                             Remove from campaign
                           </Button>
@@ -472,7 +495,7 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                   label={`Delete ${s.name}`}
                   tone="danger"
                   size="md"
-                  disabled={!active}
+                  disabled={!active || mutationBlocks.deletion}
                   pressed={deleteId === s.id}
                   onClick={() => active && setDeleteId(deleteId === s.id ? null : s.id)}
                 />

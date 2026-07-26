@@ -155,7 +155,7 @@ export const en = Object.freeze({
   // ── Pipeline rail ("How this was simulated") ──────────────────────────────
   pipeline: {
     title:    'How this was simulated',
-    subtitle: 'Fourteen procedural steps. Tap any one to see what it decided and why.',
+    subtitle: 'Every stage leaves a record. Open one to see what it decided and why.',
     cogLabel:    'Procedural step',
     quillLabel:  'Narrative refinement',
     stepRunning: 'Running…',
@@ -571,6 +571,25 @@ export const en = Object.freeze({
     youAsked:     'You asked',
   },
 
+  // ── Durable canon-command recovery ───────────────────────────────────────
+  // The transport may fail after durable authority commits. These messages
+  // distinguish a recovered commit, a proved-absent retry, an unresolved
+  // journal, and a terminal no-commit result without asking the user to infer
+  // persistence from a network error.
+  canonRecovery: {
+    applied:          'Durable authority confirmed the original commit. Its saved projection and receipt are restored.',
+    provedAbsent:     'Durable authority proved there was no earlier commit. The exact idempotent command was retried and confirmed.',
+    terminalNoCommit: 'Durable authority confirmed that this command did not commit. Start a fresh review before trying the change again.',
+    unresolved:       'The durable journal still has no final outcome. Nothing was retried.',
+    unavailable:      'The durable journal could not be checked. Nothing was retried.',
+    stale:            'The owner, save, or reviewed revision changed during recovery. Nothing was projected here.',
+    unconfirmed:      'The durable recovery attempt did not produce a confirmed projection. Nothing is being reported as applied.',
+    ambiguous:        'The network answer was ambiguous. Check durable authority before retrying this canon change.',
+    receiptLabel:     'Durable receipt',
+    eventFallback:    'canon event',
+    checkOutcome:     'Check durable outcome',
+  },
+
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
   // Source: UI Redesign §18.9. These set the tone for each tab in one line.
   // The tab intro ledes — the poetic one-line captions under each dossier tab
@@ -926,8 +945,14 @@ export const en = Object.freeze({
     mapSaveFail:         'The map could not be saved. Try once more.',
     mapRegenFail:        'The map could not be regenerated. Try once more.',
     mapRender:           'The map could not be displayed.',
-    importTooLarge:      'That file is too large to be a SettlementForge export.',
+    importTooLarge:      'That file is too large to import safely.',
     importUnreadable:    'That file could not be read. Try downloading a fresh export.',
+    importReconcileFail: 'This export could not be reconciled.',
+    importUnsupported:   'That file is not a supported SettlementForge export.',
+    importDecisionsOpen: 'Choose an action for every settlement before previewing.',
+    importApplyFail:     'The reconciliation could not be applied.',
+    importCommandFail:   'The reconciliation stopped before it returned a command receipt.',
+    importRecoveryFail:  'This browser could not prepare the private recovery receipt.',
     deleteConfirmPhrase: 'Type {phrase} to confirm.',
     seatCodeSent:        'We emailed you a confirmation code.',
     seatSoldBack:        'Your seat has been sold back. Your payout will follow.',
@@ -945,11 +970,32 @@ export const en = Object.freeze({
     realmContinueFail:   'The realm could not continue. Try again in a moment.',
     resumeFail:          'The realm could not resume. Try again in a moment.',
     proposalUpdateFail:  'That proposal could not be updated.',
+    proposalReceiptMissing: 'The realm returned without an exact terminal receipt for that proposal.',
+    canonRecoveryOpenFail: 'The recovery check could not be opened. No command was retried.',
     worldClockStartFail: 'The world clock could not be started. Try again in a moment.',
     namingFail:          'That name could not be saved. Try again in a moment.',
     notesSaveFail:       'Those notes could not be saved. Your text is still here. Try again.',
     snapshotRestoreUnavailable: 'Snapshot restore is unavailable.',
     snapshotRestoreFail: 'Snapshot could not be restored.',
+    customContentSampleFail: 'The sample settlement could not be forged. Nothing was saved.',
+    customContentWriterSaveUnavailable: 'The immutable content writer is unavailable. Nothing was saved.',
+    customContentRevisionUnconfirmed: 'The revision was not durably confirmed, so nothing changed.',
+    customContentRevisionSaveFail: 'The revision could not be saved. Nothing changed.',
+    customContentRevisionSaveDetail: 'The revision could not be saved: {detail}',
+    customContentWriterArchiveUnavailable: 'The immutable content writer is unavailable. Nothing was archived.',
+    customContentArchiveUnconfirmed: 'The archive was not durably confirmed, so nothing changed.',
+    customContentArchiveFail: 'The definition could not be archived. Nothing changed.',
+    customContentArchiveDetail: 'The definition could not be archived: {detail}',
+    customContentArchiveInvalid: 'The archived-definition service returned an invalid response.',
+    customContentArchiveLoadFail: 'Archived definitions could not be loaded.',
+    customContentRestoreUnconfirmed: 'The definition was not restored.',
+    customContentRestoreRefreshFail: 'The restore is confirmed, but the archived list could not be refreshed.',
+    customContentRestoreFail: 'The definition could not be restored.',
+    customContentHistoryInvalid: 'The version-history service returned an invalid response.',
+    customContentHistoryLoadFail: 'Version history could not be loaded.',
+    customContentRevisionRestoreUnconfirmed: 'The forward revision was not confirmed.',
+    customContentHistoryRefreshFail: 'The new revision is confirmed, but the refreshed history could not be loaded.',
+    customContentRevisionRestoreFail: 'The forward revision could not be created.',
   },
 
   // ── Command palette (V-H R-20; SB5 routed its strings off inline literals) ──
@@ -1047,7 +1093,7 @@ export const en = Object.freeze({
       canon:    'Live campaign truth. Changes are logged as events.',
       narrated: 'Narrative refinement layer is present.',
       raw:      'Raw simulation output. No narrative layer.',
-      locked:   'Locked. Preserved through regeneration.',
+      locked:   'Locked. Survives an NPC reroll.',
     },
   },
 

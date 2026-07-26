@@ -217,7 +217,7 @@ export function EditableText({
 export function EditedBadge({ count = null, style = {} }) {
   return (
     <span
-      title="This dossier contains user-edited prose. The engine will preserve these edits across rerolls; the AI overlay will pass them through verbatim."
+      title="This dossier contains user-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         fontSize: FS.xxs, fontWeight: 700, color: COLORS.edited,

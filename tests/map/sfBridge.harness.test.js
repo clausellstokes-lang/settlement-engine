@@ -24,14 +24,22 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const SRC = readFileSync(resolve(process.cwd(), 'public/map/sf-bridge.js'), 'utf-8');
+const ORIGIN_SRC = readFileSync(resolve(process.cwd(), 'public/map/sf-origin.js'), 'utf-8');
+const EMBEDDER_ORIGIN = 'https://settlementforge.com';
 
 /** Messages the bridge posts to the parent (rid-correlated replies + push events). */
 let posted = [];
-const fakeParent = { postMessage: (msg /*, targetOrigin */) => { posted.push(msg); } };
+let postedTargets = [];
+const fakeParent = {
+  postMessage: (msg, targetOrigin) => {
+    posted.push(msg);
+    postedTargets.push(targetOrigin);
+  },
+};
 
 /** Dispatch a settlementEngine:* command as the embedding parent would, and return
  *  the rid-correlated reply the bridge posts back (or undefined if it stayed silent). */
-function sendCommand(type, data = {}, { origin = window.location.origin, source = window.parent } = {}) {
+function sendCommand(type, data = {}, { origin = EMBEDDER_ORIGIN, source = window.parent } = {}) {
   posted = [];
   const rid = `rid-${Math.random().toString(36).slice(2)}`;
   const ev = new MessageEvent('message', { data: { type, _rid: rid, ...data }, origin, source });
@@ -45,14 +53,24 @@ beforeAll(() => {
   // target is captured. Fake timers neutralize the 500ms ready-poll setInterval.
   vi.useFakeTimers();
   Object.defineProperty(window, 'parent', { value: fakeParent, configurable: true, writable: true });
+  window.history.replaceState(
+    {},
+    '',
+    `/map/index.html?parentOrigin=${encodeURIComponent(EMBEDDER_ORIGIN)}`,
+  );
   // Indirect eval runs in GLOBAL scope, so the IIFE's bare FMG-global reads (`pack`,
   // `window.*`, `document.*`) resolve against the jsdom globalThis.
+  (0, eval)(ORIGIN_SRC);
   (0, eval)(SRC);
 });
 
 afterAll(() => { vi.useRealTimers(); });
 
-beforeEach(() => { posted = []; globalThis.pack = undefined; });
+beforeEach(() => {
+  posted = [];
+  postedTargets = [];
+  globalThis.pack = undefined;
+});
 
 describe('sf-bridge.js harness', () => {
   it('loads + initializes in an embedded document without throwing (beyond the acorn parse)', () => {
@@ -110,10 +128,11 @@ describe('sf-bridge.js harness', () => {
   });
 
   describe('receive-side trust boundary — ORIGIN + SOURCE fail-closed', () => {
-    it('runs the handler only for our own origin AND the embedding parent', () => {
+    it('runs the handler only for the configured parent origin AND the embedding parent', () => {
       globalThis.pack = { cells: { i: [0], h: new Float32Array([0.5]), biome: new Uint8Array([1]), r: new Uint8Array([0]), p: [[1, 2]], c: [[0]] } };
-      // Baseline: a same-origin, parent-sourced command IS handled.
+      // Baseline: a cross-origin, parent-sourced command IS handled.
       expect(sendCommand('settlementEngine:getSpatialPack')).toBeTruthy();
+      expect(new Set(postedTargets)).toEqual(new Set([EMBEDDER_ORIGIN]));
     });
 
     it('rejects a command from a FOREIGN origin (no reply)', () => {

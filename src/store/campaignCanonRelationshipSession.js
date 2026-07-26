@@ -59,7 +59,7 @@ export async function runRecordCanonRelationshipRipple({ set, campaignId, event,
     campaignPersist = cacheCampaignState(state);
   });
   if (result && campaignPersist) {
-    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId, campaignPersist);
   }
   return result;
 }
@@ -89,7 +89,7 @@ export async function runReverseCanonRelationshipRipple({ set, campaignId, snaps
     campaignPersist = cacheCampaignState(state);
   });
   if (result && campaignPersist) {
-    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
+    await syncCampaignSnapshot(campaignPersist.snapshot, campaignId, campaignPersist);
   }
   return result;
 }

@@ -300,6 +300,7 @@
         "npm:@supabase/supabase-js@^2.103.0",
         "npm:@testing-library/dom@^10.4.1",
         "npm:@testing-library/react@^16.3.2",
+        "npm:@types/node@25.6.0",
         "npm:@vitejs/plugin-react@^4.7.0",
         "npm:@vitest/coverage-v8@^4.1.8",
         "npm:acorn-walk@^8.3.5",

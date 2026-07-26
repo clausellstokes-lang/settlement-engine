@@ -22,6 +22,8 @@
 
 import { auth as authService } from '../lib/auth.js';
 import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
+import { activateOutboxOwner } from './outbox.js';
+import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
@@ -75,6 +77,27 @@ let authUnsubscribe = null;
 // M-9d — teardown for the single-session validation loop (focus/visibility + interval).
 let sessionValidationCleanup = null;
 
+function alignSavedSettlementsOwner(get, nextOwnerId, { invalidate = false } = {}) {
+  const state = get();
+  const next = normalizeSavedSettlementsOwnerId(nextOwnerId);
+  const authOwner = normalizeSavedSettlementsOwnerId(state.auth?.user?.id);
+  const cacheOwner = normalizeSavedSettlementsOwnerId(state.savedSettlementsOwnerId);
+  if (invalidate || authOwner !== next || cacheOwner !== next) {
+    state.clearSavedSettlements?.(next);
+  }
+}
+
+function alignCampaignAuthBoundary(get, user, session, { forceSession = false } = {}) {
+  const state = get();
+  const previousOwnerId = state.auth?.user?.id ?? null;
+  const nextOwnerId = user?.id ?? null;
+  if (String(previousOwnerId || '') !== String(nextOwnerId || '')) {
+    state.clearCampaigns?.();
+  } else if (forceSession || state.auth?.session !== session) {
+    state.invalidateCampaignSession?.();
+  }
+}
+
 export const createAuthSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   auth: {
@@ -105,10 +128,24 @@ export const createAuthSlice = (set, get) => ({
   sessionEvicted: false,
 
   // ── Core setters ──────────────────────────────────────────────────────────
-  setAuth: (user, session, tier, role, displayName, isFounder = false, avatarUrl = null, emailNotifications = true, modelPreference = DEFAULT_MODEL_PREFERENCE) =>
+  setAuth: (
+    user,
+    session,
+    tier,
+    role,
+    displayName,
+    isFounder = false,
+    avatarUrl = null,
+    emailNotifications = true,
+    modelPreference = DEFAULT_MODEL_PREFERENCE,
+  ) => {
+    alignCampaignAuthBoundary(get, user, session);
+    alignSavedSettlementsOwner(get, user?.id);
+    activateOutboxOwner(user?.id);
     set(state => {
       state.auth = {
-        user, session,
+        user,
+        session,
         tier: resolveTier(tier, role),
         role: role || 'user',
         displayName: displayName || null,
@@ -116,11 +153,19 @@ export const createAuthSlice = (set, get) => ({
         avatarUrl: avatarUrl || null,
         emailNotifications: emailNotifications !== false,
         modelPreference: modelPreference || DEFAULT_MODEL_PREFERENCE,
-        loading: false, error: null,
+        loading: false,
+        error: null,
       };
-    }),
+    });
+  },
 
   clearAuth: () => {
+    // Detach synchronously so no scheduled retry can cross an account boundary.
+    // The old owner's pending writes remain in that owner's durable mirror.
+    activateOutboxOwner(null);
+    // Always invalidate on sign-out, even if the same account signs straight
+    // back in: a response from the prior session must not certify the new cache.
+    alignSavedSettlementsOwner(get, null, { invalidate: true });
     set(state => {
       state.auth = { user: null, session: null, tier: 'anon', role: 'user', displayName: null, isFounder: false, avatarUrl: null, emailNotifications: true, modelPreference: DEFAULT_MODEL_PREFERENCE, loading: false, error: null };
       // Durable-rights cache is per-user — drop it on sign-out so a later user on
@@ -129,7 +174,6 @@ export const createAuthSlice = (set, get) => ({
     });
     try {
       get().clearCampaigns?.();
-      get().clearSavedSettlements?.();
       get().clearCloudCustomContent?.();
     } catch {
       // Other slices may not be present in isolated unit tests.
@@ -143,11 +187,13 @@ export const createAuthSlice = (set, get) => ({
    *   (1) raise the banner flag (sessionEvicted — top-level, survives clearAuth),
    *   (2) sign out ONLY this device's session (LOCAL scope; the other device is the
    *       legitimate winner). The SIGNED_OUT event then transitions auth to anon
-   *       exactly as a normal sign-out does; the persist partialize (config +
-   *       toggles) is NEVER touched, so unsaved edits survive to re-auth rehydration.
-   * It NEVER calls a store-reset (clearSavedSettlements / resetConfig / …) — that is
-   * the wall THE LIFECYCLE PIN guards. Supersession DEDUPES: the first eviction wins,
-   * later ones no-op (no error-toast storm from N in-flight paid calls all 401-ing).
+   *       exactly as a normal sign-out does. That later SIGNED_OUT handler
+   *       intentionally clears owner-scoped caches, while the persist partialize
+   *       (config + toggles) remains untouched so unsaved edits survive re-auth.
+   * evictSession itself never calls reset/clear actions synchronously — that is the
+   * narrower wall THE LIFECYCLE PIN guards. Supersession DEDUPES: the first eviction
+   * wins; later ones no-op (no error-toast storm from N in-flight paid calls all
+   * 401-ing).
    */
   evictSession: () => {
     if (get().sessionEvicted) return;                 // dedupe — first supersession wins
@@ -218,6 +264,9 @@ export const createAuthSlice = (set, get) => ({
     try {
       const result = await authService.getSession();
       if (result) {
+        alignCampaignAuthBoundary(get, result.user, result.session);
+        alignSavedSettlementsOwner(get, result.user?.id);
+        activateOutboxOwner(result.user?.id);
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
@@ -231,6 +280,9 @@ export const createAuthSlice = (set, get) => ({
           };
         });
       } else {
+        alignCampaignAuthBoundary(get, null, null);
+        alignSavedSettlementsOwner(get, null);
+        activateOutboxOwner(null);
         set(state => { state.auth.loading = false; });
       }
     } catch (e) {
@@ -249,10 +301,13 @@ export const createAuthSlice = (set, get) => ({
       if (event === 'SIGNED_OUT') {
         get().clearAuth();
       } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        activateOutboxOwner(user?.id);
         const previousUserId = get().auth?.user?.id;
+        alignSavedSettlementsOwner(get, user?.id);
+        if (event === 'SIGNED_IN') {
+          alignCampaignAuthBoundary(get, user, session, { forceSession: true });
+        }
         if (previousUserId && user?.id && previousUserId !== user.id) {
-          get().clearCampaigns?.();
-          get().clearSavedSettlements?.();
           get().clearCloudCustomContent?.();
         }
         set(state => {
@@ -345,6 +400,9 @@ export const createAuthSlice = (set, get) => ({
       const result = /** @type {any} */ (await authService.signUp(email, password, captchaToken));
       if (result.session) {
         // Auto-confirmed (dev mode or mock)
+        alignCampaignAuthBoundary(get, result.user, result.session);
+        alignSavedSettlementsOwner(get, result.user?.id);
+        activateOutboxOwner(result.user?.id);
         set(state => {
           state.auth = {
             user: result.user, session: result.session,
@@ -372,6 +430,9 @@ export const createAuthSlice = (set, get) => ({
     set(state => { state.auth.loading = true; state.auth.error = null; });
     try {
       const result = await authService.signIn(email, password, rememberMe, captchaToken);
+      alignCampaignAuthBoundary(get, result.user, result.session);
+      alignSavedSettlementsOwner(get, result.user?.id);
+      activateOutboxOwner(result.user?.id);
       set(state => {
         state.auth = {
           user: result.user, session: result.session,

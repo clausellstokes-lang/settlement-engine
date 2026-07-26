@@ -313,7 +313,7 @@ export async function handleOgImage(req: Request, deps: OgDeps = {}): Promise<Re
   }
 
   if (req.method === 'HEAD') return new Response(null, { status: 200, headers: imageHeaders() });
-  return new Response(png, { status: 200, headers: imageHeaders() });
+  return new Response(png as unknown as BodyInit, { status: 200, headers: imageHeaders() });
 }
 
 if (import.meta.main) {

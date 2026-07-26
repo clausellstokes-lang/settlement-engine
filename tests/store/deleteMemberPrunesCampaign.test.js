@@ -108,6 +108,22 @@ describe('state-lifecycle-2 — deleting a member prunes it from every holding c
     expect(campaignOf(store).worldState.pendingEvents.find(e => e.queueId === 'q2')).toBeTruthy();
   });
 
+  test('the save row itself is removed when its id type differs from the caller', () => {
+    const store = makeStore();
+    seed(store);
+    store.setState(state => {
+      state.savedSettlements[0].id = 7;
+      state.campaigns[0].settlementIds[0] = '7';
+      state.campaigns[0].worldState.pendingEvents[0].saveId = '7';
+    });
+
+    store.getState().removeSavedSettlement('7');
+
+    expect(store.getState().savedSettlements.map(s => s.id)).toEqual(['bram']);
+    expect(campaignOf(store).settlementIds).toEqual(['bram']);
+    expect(campaignOf(store).worldState.pendingEvents.map(e => e.saveId)).toEqual(['bram']);
+  });
+
   test('deleting a member that is in NO campaign is a plain save removal (no throw, no campaign churn)', () => {
     const store = makeStore();
     seed(store);
@@ -116,5 +132,41 @@ describe('state-lifecycle-2 — deleting a member prunes it from every holding c
     store.getState().removeSavedSettlement('lone');
     expect(store.getState().savedSettlements.some(s => s.id === 'lone')).toBe(false);
     expect(JSON.stringify(campaignOf(store))).toBe(before); // campaign untouched
+  });
+
+  test('an advancing campaign refuses before either the save or membership changes', () => {
+    const store = makeStore();
+    seed(store);
+    store.setState(state => {
+      state.advanceInFlight = ['camp-1'];
+    });
+    const beforeSaves = JSON.stringify(store.getState().savedSettlements);
+    const beforeCampaign = JSON.stringify(campaignOf(store));
+
+    expect(store.getState().removeSavedSettlement('ash')).toEqual({
+      ok: false,
+      reason: 'advance_in_flight',
+      campaignId: 'camp-1',
+    });
+    expect(JSON.stringify(store.getState().savedSettlements)).toBe(beforeSaves);
+    expect(JSON.stringify(campaignOf(store))).toBe(beforeCampaign);
+  });
+
+  test('a paused campaign refuses before either the save or membership changes', () => {
+    const store = makeStore();
+    seed(store);
+    store.setState(state => {
+      state.campaigns[0].worldState.pausedAdvance = { remaining: 2 };
+    });
+    const beforeSaves = JSON.stringify(store.getState().savedSettlements);
+    const beforeCampaign = JSON.stringify(campaignOf(store));
+
+    expect(store.getState().removeSavedSettlement('ash')).toEqual({
+      ok: false,
+      reason: 'advance_paused',
+      campaignId: 'camp-1',
+    });
+    expect(JSON.stringify(store.getState().savedSettlements)).toBe(beforeSaves);
+    expect(JSON.stringify(campaignOf(store))).toBe(beforeCampaign);
   });
 });

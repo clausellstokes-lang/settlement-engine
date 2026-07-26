@@ -13,6 +13,10 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store/index.js';
+import {
+  captureSavedSettlementsHydration,
+  isCurrentSavedSettlementsHydration,
+} from '../store/savedSettlementsHydration.js';
 import { navigate } from '../hooks/useRoute.js';
 import { auth as authService } from '../lib/auth.js';
 import { saves as savesService } from '../lib/saves.js';
@@ -55,6 +59,7 @@ export default function AccountPage({ onNavigateAdmin }) {
   const authSignOut = useStore(s => s.authSignOut);
   const removeSavedSettlement = useStore(s => s.removeSavedSettlement);
   const clearSavedSettlements = useStore(s => s.clearSavedSettlements);
+  const withSettlementDeletionLock = useStore(s => s.withSettlementDeletionLock);
   const deleteCampaign = useStore(s => s.deleteCampaign);
   const importAccountData = useStore(s => s.importAccountData);
   const canSave = useStore(s => s.canSave());
@@ -214,30 +219,66 @@ export default function AccountPage({ onNavigateAdmin }) {
   // happen — this is a privacy surface; false success is the worst outcome.
   const handleDeleteAllSettlements = async () => {
     const ids = (savedSettlements || []).map(s => s.id);
-    const results = await Promise.allSettled(ids.map(id => savesService.delete?.(id)));
-    const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
-    if (failedIds.length === 0) {
-      if (typeof clearSavedSettlements === 'function') clearSavedSettlements();
-      else ids.forEach(id => removeSavedSettlement?.(id));
-      return;
+    const hydration = captureSavedSettlementsHydration(useStore.getState(), auth.user?.id);
+    if (!hydration) {
+      throw new Error('Your account changed before deletion could start. Review the current library and try again.');
     }
-    const failed = new Set(failedIds);
-    ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id));
-    throw new Error(
-      `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `
-      + 'They remain in your library. Try again.'
-    );
+    if (typeof withSettlementDeletionLock !== 'function') {
+      throw new Error('Settlement deletion is temporarily unavailable. Reload and try again.');
+    }
+    const result = await withSettlementDeletionLock(ids, async ({ mutationToken }) => {
+      const isSessionCurrent = () =>
+        isCurrentSavedSettlementsHydration(useStore.getState(), hydration);
+      const results = await Promise.allSettled(ids.map(id =>
+        savesService.delete?.(id, hydration.ownerId, isSessionCurrent)));
+      // A delete request may finish after sign-out/sign-in. The remote requests
+      // already belonged to A; never apply their success or failure to B's cache
+      // (removeSavedSettlement also prunes campaign membership).
+      if (!isCurrentSavedSettlementsHydration(useStore.getState(), hydration)) {
+        return { ok: false, reason: 'auth_session_changed' };
+      }
+      const failedIds = ids.filter((_, i) => results[i].status === 'rejected');
+      const failed = new Set(failedIds);
+      ids.filter(id => !failed.has(id)).forEach(id => removeSavedSettlement?.(id, { mutationToken }));
+      if (failedIds.length === 0) {
+        clearSavedSettlements?.();
+        return;
+      }
+      throw new Error(
+        `${failedIds.length} of ${ids.length} settlements could not be deleted from the server. `
+        + 'They remain in your library. Try again.'
+      );
+    });
+    if (result?.ok === false) {
+      if (result.reason === 'auth_session_changed') {
+        throw new Error('Your account changed while deletion was running. Review the current library before trying again.');
+      }
+      const paused = result.reason === 'advance_paused';
+      throw new Error(paused
+        ? 'Resume or undo the paused campaign advance before deleting its settlements.'
+        : 'Wait for the campaign update to finish before deleting its settlements.');
+    }
   };
 
-  // Campaign wipe reuses OUR canonical deleteCampaign action (the same seam the
-  // per-campaign delete uses): it removes the campaign locally and fires the
-  // cloud delete + tombstone via deletePersistedCampaignState. deleteCampaign is
-  // synchronous/fire-and-forget for the cloud leg, so — unlike settlements — a
-  // failed cloud delete is not surfaced here (it matches OUR single-campaign
-  // delete behavior).
+  // Campaign wipe uses the canonical action's confirmed-persistence mode. Each
+  // campaign stays visible until its actual cloud/local service delete resolves;
+  // a failed subset therefore remains retryable, and the confirm UI receives an
+  // aggregated rejection instead of claiming that fire-and-forget work succeeded.
   const handleDeleteAllCampaigns = async () => {
     const ids = (campaigns || []).map(c => c.id);
-    ids.forEach(id => deleteCampaign?.(id));
+    if (typeof deleteCampaign !== 'function') {
+      throw new Error('Campaign deletion is temporarily unavailable. Reload and try again.');
+    }
+    const results = await Promise.allSettled(
+      ids.map(id => deleteCampaign(id, { awaitPersistence: true })),
+    );
+    const failedIds = ids.filter((_, index) => results[index].status === 'rejected');
+    if (failedIds.length > 0) {
+      throw new Error(
+        `${failedIds.length} of ${ids.length} campaigns could not be deleted from the server. `
+        + 'They remain in your account. Try again.'
+      );
+    }
   };
 
   if (!auth.user) {

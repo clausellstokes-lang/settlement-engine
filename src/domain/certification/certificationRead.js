@@ -8,7 +8,7 @@
  *  · PENDING ⇒ `lines` is [] and no field states a proven claim (no numbers, no
  *    "certified/proven/guaranteed" vocabulary). The world says only that the
  *    proving is scheduled.
- *  · CERTIFIED ⇒ every proof line is built from the soak result: each numeric
+ *  · MEASURED/CERTIFIED ⇒ every evidence line is built from the soak result: each numeric
  *    token comes from soak.years / seedsTested / ticksAdvanced, and each property
  *    clause comes from a key in soak.properties (⊆ SOAK_PROPERTY_KEYS). No line
  *    exists without a manifest receipt behind it.
@@ -21,13 +21,13 @@ import { certificationForBand, soakPropertyLabel } from './certificationSchema.j
 /** The one honest thing an uncertified world says — STATIC, no claim, no number.
  *  Deliberately free of completed-claim vocabulary (certified/proven/…): the
  *  world states only that its trial is SCHEDULED, never that it has held. */
-export const PENDING_HEADLINE = 'The hundred-year proving is scheduled.';
+export const PENDING_HEADLINE = 'Long-horizon proving is not yet complete.';
 export const PENDING_DETAIL =
-  'This world has not yet stood the long soak. When it has, the tally of how it held appears here — and never a claim before.';
+  'This world has not yet earned the full certificate. Measured results appear here only when a source-bound receipt exists.';
 
 /**
  * @typedef {Object} WorldCertificationView
- * @property {'certified'|'pending'} status
+ * @property {'certified'|'measured'|'pending'} status
  * @property {string} headline          the panel's lead line
  * @property {string} detail            a supporting sentence
  * @property {string[]} lines           certified: one proof line per proven property; [] when pending
@@ -45,7 +45,7 @@ export const PENDING_DETAIL =
  */
 export function buildWorldCertification({ manifest, bandId = null, presetId = null }) {
   const band = certificationForBand(manifest, { bandId, presetId });
-  if (!band || band.status !== 'certified' || !band.soak) {
+  if (!band || band.status === 'pending' || !band.soak) {
     return {
       status: 'pending',
       headline: PENDING_HEADLINE,
@@ -59,17 +59,20 @@ export function buildWorldCertification({ manifest, bandId = null, presetId = nu
   /** @type {string[]} */
   const lines = [];
   // The lead proof line: the span + breadth, both interpolated from the soak.
-  lines.push(
-    `Soaked ${soak.years} years across ${soak.seedsTested} seeds (${soak.ticksAdvanced} ticks advanced), this world:`,
-  );
+  const measured = band.status === 'measured';
+  lines.push(measured
+    ? `Measured for ${soak.years} years across ${soak.seedsTested} seeds (${soak.ticksAdvanced} ticks advanced):`
+    : `Soaked ${soak.years} years across ${soak.seedsTested} seeds (${soak.ticksAdvanced} ticks advanced), this world:`);
   for (const key of soak.properties) {
     const label = soakPropertyLabel(key);
-    if (label) lines.push(`— ${label}`);
+    if (label) lines.push(`• ${label}`);
   }
   return {
-    status: 'certified',
-    headline: 'Certified by the long soak.',
-    detail: `Proven for the ${band.presetId} band.`,
+    status: measured ? 'measured' : 'certified',
+    headline: measured ? 'A measured soak is on record.' : 'Certified by the long soak.',
+    detail: measured
+      ? `Partial evidence for the ${band.presetId} band; this is not full certification.`
+      : `Proven for the ${band.presetId} band.`,
     lines,
     soak,
     presetId: band.presetId,

@@ -248,12 +248,17 @@ describe('golden: seeded port settlements across tiers', () => {
   });
 
   test('river-route city with a barge company does not read as a port', () => {
-    // Seed chosen so the roster carries the barge company and none of the
-    // real port institutions — the transport company must not register as
-    // harbour infrastructure anywhere downstream.
+    // Re-probed after culture weighting changed institution draws. The roster
+    // carries the barge company and none of the real port institutions — the
+    // transport company itself must not register as harbour infrastructure.
     const s = gen(
-      { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'river' },
-      'ports-wave4a-3',
+      {
+        settType: 'city',
+        culture: 'germanic',
+        terrainOverride: 'riverside',
+        tradeRouteAccess: 'river',
+      },
+      'ports-river-60',
     );
     const names = s.institutions.map((i) => i.name);
     expect(names).toContain('Barge and river transport company');

@@ -31,3 +31,32 @@ export const compareCodepoint = (a, b) => {
 // Convenience comparator for the common `{ name }` shape.
 /** @type {(a: {name?: unknown} | null | undefined, b: {name?: unknown} | null | undefined) => number} */
 export const byNameCodepoint = (a, b) => compareCodepoint(a?.name, b?.name);
+
+/**
+ * Stable order for custom-registry entries whose display name is explicitly
+ * presentation-only. Current entries carry `refId`; older projections may
+ * expose only one of the raw persistence identities. Name is the final legacy
+ * fallback because an unstamped row has no stronger rename-stable key.
+ *
+ * This comparator is required anywhere iteration order feeds seeded draws. A
+ * name sort would make a cosmetic rename move the row to another RNG slot and
+ * thereby change unrelated native institutions, services, or resources.
+ *
+ * @param {{refId?:unknown,name?:unknown,raw?:Record<string,unknown>} | null | undefined} value
+ * @returns {unknown}
+ */
+function customIdentityKey(value) {
+  return value?.refId
+    ?? value?.raw?.definitionId
+    ?? value?.raw?.localUid
+    ?? value?.raw?.id
+    ?? value?.name;
+}
+
+/** @type {(
+ *   a: Parameters<typeof customIdentityKey>[0],
+ *   b: Parameters<typeof customIdentityKey>[0],
+ * ) => number} */
+export const byCustomIdentityCodepoint = (a, b) => (
+  compareCodepoint(customIdentityKey(a), customIdentityKey(b))
+);

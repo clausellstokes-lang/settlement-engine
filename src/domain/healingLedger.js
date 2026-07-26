@@ -17,6 +17,7 @@
  */
 
 import { liveInstitutions } from './institutions/institutionRoster.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 
 /**
  * Canonical healing-institution classifier. Single source of truth for "what name reads as a
@@ -52,7 +53,10 @@ export function healingLedger(settlement) {
   // LIVE roster only — a calamity-ruined temple/hospital/infirmary is not a live healer
   // (ruin-filter class). `present` below still reads the raw roster (existence, not liveness).
   const inst = liveInstitutions(settlement);
-  const healerCount = inst.filter(i => HEALING_INSTITUTION_PATTERN.test(String(i?.name || ''))).length;
+  const healerCount = inst
+    .map(nativeSemanticName)
+    .filter(name => name && HEALING_INSTITUTION_PATTERN.test(name))
+    .length;
   const svc = settlement?.economicState?.availableServices?.healing
            ?? settlement?.availableServices?.healing;
   return {

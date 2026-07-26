@@ -33,6 +33,12 @@ import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
 import { simulationSpineRows } from '../domain/simulationSpine.js';
+import {
+  traceEffectLabel,
+  traceResultLabel,
+  traceTargetLabel,
+  traceTokenLabel,
+} from '../domain/display/tracePresentation.js';
 import { t } from '../copy/index.js';
 
 // Visual grammar — kept here so the rail's identity is one read.
@@ -44,7 +50,7 @@ const INK = swatch['#1B1408'];
 const BODY = swatch['#4A3B22'];           // ink-600 (WCAG-passing)
 const MUTED = swatch['#6B5340'];
 
-function StepRow({ entry, isLast, traces }) {
+export function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
   const meta = metaForStep(entry.id);
   const isAi = entry.kind === 'ai';
@@ -124,14 +130,17 @@ function StepRow({ entry, isLast, traces }) {
                 fontSize: FS.xs, color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
-                  {trace.targetId} <span style={{ color: MUTED, fontWeight: 400 }}>{trace.result}</span>
+                  {traceTargetLabel(trace)}{' '}
+                  <span style={{ color: MUTED, fontWeight: 400 }}>
+                    ({traceResultLabel(trace.result)})
+                  </span>
                 </div>
                 {Array.isArray(trace.causes) && trace.causes.length > 0 && (
                   <ul style={{ margin: '3px 0 0', paddingLeft: 14, listStyle: 'square' }}>
                     {trace.causes.map((c, j) => (
                       <li key={j} style={{ marginTop: 2 }}>
-                        <span style={{ color: INK }}>{c.source}</span>
-                        {c.effect ? <span style={{ color: MUTED }}> · {c.effect}</span> : null}
+                        <span style={{ color: INK }}>Because of {traceTokenLabel(c.source)}</span>
+                        {c.effect ? <span style={{ color: MUTED }}> · {traceEffectLabel(c.effect)}</span> : null}
                         {c.reason ? (
                           <div style={{
                             fontSize: FS['10.5'], fontStyle: 'italic',
@@ -147,11 +156,14 @@ function StepRow({ entry, isLast, traces }) {
                 )}
                 {Array.isArray(trace.downstreamEffects) && trace.downstreamEffects.length > 0 && (
                   <div style={{ marginTop: 4, fontSize: FS.xxs, color: MUTED }}>
-                    Downstream:{' '}
+                    What this shaped:{' '}
                     {trace.downstreamEffects.map((d, k) => (
                       <span key={k}>
                         {k > 0 ? ', ' : ''}
-                        <span style={{ color: INK }}>{d.target}</span> {d.effect}
+                        <span style={{ color: INK }}>
+                          {traceTargetLabel({ targetId: d.target })}
+                        </span>
+                        {d.effect ? ` (${traceEffectLabel(d.effect)})` : ''}
                       </span>
                     ))}
                   </div>

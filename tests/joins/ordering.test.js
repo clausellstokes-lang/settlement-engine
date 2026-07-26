@@ -35,14 +35,14 @@ function gen(config, seed) {
 // ── 1. Faction-pulled institutions join the economy ─────────────────────────
 
 describe('faction-pulled institutions join services / chains / income', () => {
-  // Seeds empirically verified to produce a faction_boost addition with the
-  // current generation tables. Deterministic per seed; if the institution
-  // catalog or faction thresholds are retuned these seeds may need refreshing
-  // — the scan test below guards that at least some seeds still fire.
+  // Seeds re-probed after culture profiles and named generation substreams
+  // deliberately changed draw placement. Each currently produces a surviving
+  // faction_boost addition; the assertions below still test semantic joins,
+  // never hashes or an exact institution roster.
   const FB_CASES = [
-    { seed: 'ord-1',  config: { settType: 'town',       culture: 'germanic', tradeRouteAccess: 'road' } },
-    { seed: 'ord-7',  config: { settType: 'city',       culture: 'germanic', tradeRouteAccess: 'road' } },
-    { seed: 'ord-13', config: { settType: 'metropolis', culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-town-0',       config: { settType: 'town',       culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-city-2',       config: { settType: 'city',       culture: 'germanic', tradeRouteAccess: 'road' } },
+    { seed: 'ord-new-metropolis-71', config: { settType: 'metropolis', culture: 'germanic', tradeRouteAccess: 'road' } },
   ];
 
   it('known seeds still produce faction_boost institutions (full catalog defs, traced)', () => {

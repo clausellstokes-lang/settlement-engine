@@ -466,9 +466,13 @@ describe('settlementSlice — resetSettlementIdentity is the single writer (stru
   test('exactly ONE definition and FOUR call sites — every identity swap routes through it', () => {
     // A new load path that hand-maintains its own inline reset list (the leak habitat)
     // would NOT bump this count; a new path that correctly routes through the chokepoint
-    // makes it 5 and trips this pin, forcing a deliberate update.
+    // makes it 5 and trips this pin, forcing a deliberate update. Hydration is
+    // the one call allowed to preserve save-owned pending work across navigation.
     expect((src.match(/function resetSettlementIdentity/g) || []).length).toBe(1);
-    expect((src.match(/resetSettlementIdentity\(state\);/g) || []).length).toBe(4);
+    const calls = src.match(
+      /resetSettlementIdentity\(state(?:,\s*\{\s*preservePendingEdits:\s*true\s*\})?\);/g,
+    ) || [];
+    expect(calls).toHaveLength(4);
   });
 });
 

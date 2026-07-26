@@ -12,6 +12,10 @@ import {
   isClosableInstitution,
   applyInstitutionLifecycleOutcome,
 } from '../../src/domain/worldPulse/institutionLifecycle.js';
+import {
+  nativeLifecycleDepletedResources,
+  nativeLifecycleResourceList,
+} from '../../src/domain/worldPulse/institutionLifecycleResourceRead.js';
 import { catalogEntryByName } from '../../src/domain/worldPulse/tierResourceDynamics.js';
 
 // A town with a working smithy and iron deposits but no mine — the canonical
@@ -107,6 +111,46 @@ describe('institutionLifecycle — damped build/close chances', () => {
 });
 
 describe('institutionLifecycle — supply-chain gap detection', () => {
+  it('reads native lifecycle resources from exact ownership and depletion sidecars', () => {
+    const mixedNamesake = {
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: ['iron_deposits'],
+      nearbyResourcesCustom: ['iron_deposits'],
+      nearbyResourcesDepleted: ['iron_deposits'],
+      nearbyResourcesNativeDepleted: [],
+    };
+    const settlement = {
+      config: mixedNamesake,
+      nearbyResources: ['legacy_top_level_should_not_join'],
+      nearbyResourcesDepleted: ['legacy_top_level_should_not_join'],
+    };
+
+    expect(nativeLifecycleResourceList(settlement)).toEqual(['iron_deposits']);
+    expect(nativeLifecycleDepletedResources(settlement)).toEqual([]);
+    expect(nativeLifecycleDepletedResources({
+      ...settlement,
+      config: {
+        ...mixedNamesake,
+        nearbyResourcesNativeDepleted: ['iron_deposits'],
+      },
+    })).toEqual(['iron_deposits']);
+  });
+
+  it('does not promote a custom-only namesake into native lifecycle mechanics', () => {
+    const settlement = {
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: [],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesDepleted: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+      },
+    };
+
+    expect(nativeLifecycleResourceList(settlement)).toEqual([]);
+    expect(nativeLifecycleDepletedResources(settlement)).toEqual([]);
+  });
+
   it('finds the missing mine for a smithy town with iron deposits (extraction first)', () => {
     const gaps = detectInstitutionGaps(smithyTown());
     expect(gaps.length).toBeGreaterThan(0);
@@ -144,6 +188,37 @@ describe('institutionLifecycle — supply-chain gap detection', () => {
     const names = detectInstitutionGaps(town).map(g => g.name.toLowerCase());
     expect(names.some(n => n.includes('mine'))).toBe(false);
     expect(names.some(n => n.includes('smelter'))).toBe(false);
+  });
+
+  it('a current custom namesake does not satisfy a native institution gap', () => {
+    const customSmelter = {
+      name: 'Smelter',
+      category: 'Crafts',
+      status: 'active',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:smelter-namesake',
+    };
+    const withCustom = smithyTown({
+      institutions: [
+        ...smithyTown().institutions,
+        customSmelter,
+      ],
+    });
+    const withLegacy = smithyTown({
+      institutions: [
+        ...smithyTown().institutions,
+        { name: 'Smelter', category: 'Crafts', status: 'active' },
+      ],
+    });
+
+    expect(
+      detectInstitutionGaps(withCustom).map(gap => gap.name),
+    ).toContain('Smelter');
+    expect(
+      detectInstitutionGaps(withLegacy).map(gap => gap.name),
+    ).not.toContain('Smelter');
   });
 
   it('never proposes criminal or arcane economy steps (the corruption loop owns those)', () => {
@@ -223,6 +298,17 @@ describe('institutionLifecycle — necessity ordering inputs', () => {
 
 describe('institutionLifecycle — outcome application', () => {
   const outcome = (patch) => ({ id: 'outcome.test.1', institutionPatch: patch });
+  const customInstitution = (name, patch = {}) => ({
+    id: `custom.${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    name,
+    category: 'Custom',
+    status: 'active',
+    source: 'custom',
+    isCustom: true,
+    customDefinitionCategory: 'institutions',
+    customDefinitionId: `definition:institutions:${name}`,
+    ...patch,
+  });
 
   it('build appends a catalog-shaped institution with lifecycle provenance + history', () => {
     const town = smithyTown();
@@ -253,6 +339,28 @@ describe('institutionLifecycle — outcome application', () => {
     expect(next.institutionHistory.at(-1)).toMatchObject({ name: 'Mine', fate: 'reopened' });
   });
 
+  it('build appends a native institution beside a current custom namesake', () => {
+    const customMine = customInstitution('Mine');
+    const town = smithyTown({ institutions: [customMine] });
+    const next = applyInstitutionLifecycleOutcome(
+      town,
+      outcome({
+        saveId: 'a',
+        action: 'build',
+        name: 'Mine',
+        category: 'Crafts',
+      }),
+    );
+    const mines = next.institutions.filter(inst => inst.name === 'Mine');
+
+    expect(mines).toHaveLength(2);
+    expect(mines[0]).toBe(customMine);
+    expect(mines[1]).toMatchObject({
+      id: 'institution.mine',
+      _worldPulseEconomyBuilt: true,
+    });
+  });
+
   it('close flips status to remnant with a fate, never splicing the array', () => {
     const town = smithyTown({
       institutions: [
@@ -266,6 +374,74 @@ describe('institutionLifecycle — outcome application', () => {
     expect(bath).toMatchObject({ status: 'remnant', _worldPulseInactive: true, _worldPulseEconomyClosed: true });
     expect(bath.worldPulseFate).toBeTruthy();
     expect(next.institutionHistory.at(-1)).toMatchObject({ name: 'Bathhouse' });
+  });
+
+  it('close targets the native namesake and never the current custom owner', () => {
+    const customBathhouse = customInstitution('Bathhouse');
+    const nativeBathhouse = {
+      name: 'Bathhouse',
+      category: 'Services',
+      status: 'active',
+    };
+    const town = smithyTown({
+      institutions: [customBathhouse, nativeBathhouse],
+    });
+    const next = applyInstitutionLifecycleOutcome(
+      town,
+      outcome({ action: 'close', name: 'Bathhouse' }),
+    );
+
+    expect(next.institutions[0]).toBe(customBathhouse);
+    expect(next.institutions[1]).toMatchObject({
+      status: 'remnant',
+      _worldPulseEconomyClosed: true,
+    });
+    expect(
+      applyInstitutionLifecycleOutcome(
+        smithyTown({ institutions: [customBathhouse] }),
+        outcome({ action: 'close', name: 'Bathhouse' }),
+      ).institutions[0],
+    ).toBe(customBathhouse);
+  });
+
+  it('abolish and found respect the same exact custom boundary', () => {
+    const customMarket = customInstitution('Slave market');
+    const nativeMarket = {
+      name: 'Slave market',
+      category: 'criminal_economy',
+      status: 'active',
+    };
+    const abolished = applyInstitutionLifecycleOutcome(
+      smithyTown({ institutions: [customMarket, nativeMarket] }),
+      outcome({
+        action: 'abolish',
+        name: 'Slave market',
+        fate: 'abolished',
+      }),
+    );
+    expect(abolished.institutions[0]).toBe(customMarket);
+    expect(abolished.institutions[1]).toMatchObject({
+      status: 'remnant',
+      _worldPulseMorallyAbolished: true,
+    });
+
+    const customHospice = customInstitution('Hospice');
+    const founded = applyInstitutionLifecycleOutcome(
+      smithyTown({ institutions: [customHospice] }),
+      outcome({
+        action: 'found',
+        name: 'Hospice',
+        category: 'Services',
+        moralLean: { cruelty: -0.8, disorder: -0.1 },
+        set: 'benevolent',
+      }),
+    );
+    expect(founded.institutions).toHaveLength(2);
+    expect(founded.institutions[0]).toBe(customHospice);
+    expect(founded.institutions[1]).toMatchObject({
+      id: 'institution.hospice',
+      _worldPulseFounded: true,
+    });
   });
 
   it('close re-verifies guards at apply time: required/criminal targets are refused', () => {

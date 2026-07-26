@@ -103,6 +103,50 @@ describe('DeityAssignmentPanel — tier matrix', () => {
     expect(screen.queryByTestId('deity-assignment-upsell')).toBeNull();
   });
 
+  it('translates embedded deity axes through the canonical authored labels', () => {
+    useStore.__set({
+      settlement: {
+        tier: 'town',
+        config: {
+          primaryDeityRef: 'deity:lu_aur:aurelion',
+          primaryDeitySnapshot: {
+            name: 'Aurelion',
+            alignmentAxis: 'good',
+            rankAxis: 'major',
+            lawAxis: 'lawful',
+            domain: 'sun',
+          },
+        },
+      },
+      canUseCustomContent: () => false,
+    });
+
+    const { container } = render(<DeityAssignmentPanel />);
+    expect(container.textContent).toContain('Good · Major · Lawful · sun');
+    expect(container.textContent).not.toContain('good · major · lawful');
+  });
+
+  it('omits an unknown legacy axis instead of exposing its stored enum key', () => {
+    useStore.__set({
+      settlement: {
+        tier: 'town',
+        config: {
+          primaryDeitySnapshot: {
+            name: 'Old Star',
+            alignmentAxis: 'legacy_moral_key',
+            rankAxis: 'minor',
+            lawAxis: 'neutral',
+          },
+        },
+      },
+      canUseCustomContent: () => false,
+    });
+
+    const { container } = render(<DeityAssignmentPanel />);
+    expect(container.textContent).toContain('Old Star · Minor');
+    expect(container.textContent).not.toContain('legacy_moral_key');
+  });
+
   it('NO-LIVE-FAITH-FOR-FREE: a free viewer of a latent-only settlement never sees a deity name', () => {
     useStore.__set({
       settlement: { config: { latentPantheon: { patron: { name: LATENT_NAME } } } },

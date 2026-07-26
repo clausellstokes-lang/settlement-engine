@@ -17,6 +17,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Zap } from 'lucide-react';
 import { useStore } from '../../store/index.js';
+import { customContentForActiveContext } from '../../store/activeCustomContentContext.js';
 import { AFFORDANCE_MANIFEST, authorableVerbs, criminalOrgOptions, vetoProse } from '../../domain/events/affordanceManifest.js';
 import { eventStalenessKey } from '../../domain/events/stalenessKey.js';
 // registryFull = registry + composer prose (description/targetPrompt) — see
@@ -33,7 +34,7 @@ import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { MUTED, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
 import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
-import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
+import { CLOCK_BOUND_SCOPE_NOTICE, PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
 import { Field } from './eventComposer/Field.jsx';
 import { EventComposerTargetField } from './eventComposer/EventComposerTargetField.jsx';
@@ -82,7 +83,7 @@ export default function EventComposer({ onLink = null }) {
   // Boolean selector — the narrative blobs are large and we only need "is
   // there one". Nothing can go stale on a raw (never-narrated) save.
   const narrated = useStore(s => !!(s.aiSettlement || s.aiDailyLife));
-  const customContent = useStore(s => s.customContent);
+  const customContent = useStore(customContentForActiveContext);
   // Faith seam — premium custom-content entitlement gates the deity field; the
   // pricing-moment seam opens the purchase modal for a free/anon upsell.
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -169,7 +170,9 @@ export default function EventComposer({ onLink = null }) {
     () => [...new Set(institutionCatalogItems.map(i => i.category).filter(Boolean))].sort(),
     [institutionCatalogItems],
   );
-  const factionGroups = useMemo(() => factionCompendium(settlement), [settlement]);
+  // Factions: descriptor database + the user's Compendium factions ('Custom'
+  // group) — the merge FactionEventBanner's arrives-through-an-event copy sells.
+  const factionGroups = useMemo(() => factionCompendium(settlement, customContent?.factions || []), [settlement, customContent?.factions]);
   // APPLY_STRESSOR — the FULL stressor vocabulary: generation types +
   // campaign-only types (rebellion, market shock, criminal corridor, magical
   // instability, coup d'état) + the user's custom stressors, deduped.
@@ -479,8 +482,8 @@ export default function EventComposer({ onLink = null }) {
         {!isDeityEvent && type !== 'SHIFT_TIER' && !isLinkNeighbour && (
           <EventComposerTargetField
             type={type}
-            target={target}
-            setTarget={setTarget}
+            target={target} setTarget={setTarget}
+            setDesc={setDesc}
             spec={spec}
             settlement={settlement}
             setAddCategory={setAddCategory}
@@ -743,7 +746,7 @@ export default function EventComposer({ onLink = null }) {
       {/* Queued-vs-now (§5): plainly said, never silent. */}
       {queuesToNextAdvance && (
         <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
-          Clock-bound campaign: applied changes queue and resolve at the next World Pulse advance.
+          {CLOCK_BOUND_SCOPE_NOTICE}
         </div>
       )}
 

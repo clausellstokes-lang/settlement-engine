@@ -1,9 +1,11 @@
 /**
  * adaptiveGovernor.test.js -- K-5 THE ADAPTIVE FIDELITY GOVERNOR spine (the pure sense->decide ladder).
  *
- * The governor lives in the non-golden VIEW (scripts/lib/adaptiveGovernor.mjs -- imported by the
- * exhibit generators + inlined into the viewers, imported by NOTHING in src/). This pins its PURE
- * ladder logic deterministically with SYNTHETIC frame-time sequences (NO real timing anywhere):
+ * The canonical governor lives in the non-golden VIEW policy at
+ * src/lib/townScene/adaptiveQuality.js. The file:// exhibits require an
+ * import-free compatibility mirror in scripts/lib/adaptiveGovernor.mjs. This
+ * pins the canonical logic with SYNTHETIC frame-time sequences and proves the
+ * compatibility artifact cannot drift:
  *   - monotone degradation under sustained overload (quality only drops while over budget);
  *   - THE FLOOR is never crossed and is always reachable (the usable massing-only floor);
  *   - recovery with hysteresis -- headroom lifts quality, and a boundary/dead-band signal never
@@ -13,10 +15,14 @@
  *   - E-A FLOOR PLANT (isolation-proven): a mutant step without the floor clamp DROPS below the floor
  *     on the exact sequence the real step holds -- proving the floor assertion is not vacuous.
  *
- * The byte-independence of geometry/GLB from qualityLevel is pinned separately in archViewWall.test.js.
+ * The byte-independence of geometry/GLB from qualityLevel is pinned separately
+ * in archViewWall.test.js.
  */
 import { describe, it, expect } from 'vitest';
-import {
+import * as canonicalGovernor from '../../src/lib/townScene/adaptiveQuality.js';
+import * as exhibitGovernor from '../../scripts/lib/adaptiveGovernor.mjs';
+
+const {
   GOVERNOR_TUNING,
   QUALITY_CEILINGS,
   OVERRIDE_MODES,
@@ -25,7 +31,8 @@ import {
   setQualityCeiling,
   ceilingForMode,
   ladderFor,
-} from '../../scripts/lib/adaptiveGovernor.mjs';
+  actuationPlanFor,
+} = canonicalGovernor;
 
 const T = GOVERNOR_TUNING;
 
@@ -200,12 +207,120 @@ describe('K-5 governor: the continuous fidelity ladder (best-value-retained-firs
   });
 });
 
+describe('settlement-scene governor: renderer actuation is explicit', () => {
+  it('maps every ladder rung into concrete renderer vocabulary', () => {
+    expect(actuationPlanFor(1.0)).toEqual({
+      quality: 1.0,
+      renderScale: 1.0,
+      lodBias: 0,
+      contactShadows: true,
+      creaseInk: true,
+      cullScale: 1.0,
+      massingOnly: false,
+      fallback: 'scene3d',
+    });
+
+    const floor = actuationPlanFor(T.QUALITY_FLOOR);
+    expect(floor).toMatchObject({
+      quality: T.QUALITY_FLOOR,
+      lodBias: 2,
+      contactShadows: false,
+      creaseInk: false,
+      cullScale: 0,
+      massingOnly: true,
+      fallback: 'scene3d',
+    });
+  });
+
+  it('turns sustained floor overload into an actual plan2d presentation instruction', () => {
+    const tripped = runSeq(flat(4000, 60)).state;
+    const plan = actuationPlanFor(tripped);
+    expect(tripped.birdsEye).toBe(true);
+    expect(plan.fallback).toBe('plan2d');
+    expect(Object.isFrozen(plan)).toBe(true);
+  });
+
+  it('fails neutral on malformed sensor values instead of poisoning state with NaN', () => {
+    let state = createGovernorState();
+    for (const frame of [Number.NaN, Number.POSITIVE_INFINITY, 0, -10]) {
+      state = observeFrame(state, frame);
+    }
+    expect(Number.isFinite(state.ema)).toBe(true);
+    expect(state.quality).toBe(1);
+    expect(ladderFor(Number.NaN)).toEqual(ladderFor(1));
+    expect(actuationPlanFor({
+      ...state,
+      quality: Number.NaN,
+      ceiling: QUALITY_CEILINGS.low,
+    }).quality).toBe(QUALITY_CEILINGS.low);
+  });
+});
+
 describe('K-5 governor: determinism (pure sense->decide, no clock/rng)', () => {
   it('the same synthetic sequence yields the identical trajectory every run', () => {
     const seq = [12, 40, 9, 33, 33, 7, 50, 16, 16, 60, 6, 6, 6];
     const a = runSeq(seq).trace;
     const b = runSeq(seq).trace;
     expect(a).toEqual(b);
+  });
+});
+
+describe('the import-free exhibit mirror stays behaviorally identical to the canonical governor', () => {
+  it('exports the exact same public vocabulary and tuning data', () => {
+    expect(Object.keys(exhibitGovernor).sort()).toEqual(
+      Object.keys(canonicalGovernor).sort(),
+    );
+    expect(exhibitGovernor.GOVERNOR_TUNING).toEqual(GOVERNOR_TUNING);
+    expect(exhibitGovernor.QUALITY_CEILINGS).toEqual(QUALITY_CEILINGS);
+    expect(exhibitGovernor.OVERRIDE_MODES).toEqual(OVERRIDE_MODES);
+  });
+
+  it('produces identical states, ladders, ceilings, and actuation plans', () => {
+    const frames = [
+      ...flat(500, 60),
+      ...flat(120, 16.7),
+      Number.NaN,
+      Number.POSITIVE_INFINITY,
+      0,
+      -10,
+      ...flat(800, 6),
+    ];
+    let canonical = canonicalGovernor.createGovernorState();
+    let exhibit = exhibitGovernor.createGovernorState();
+
+    canonical = canonicalGovernor.setQualityCeiling(
+      canonical,
+      canonicalGovernor.ceilingForMode('medium'),
+    );
+    exhibit = exhibitGovernor.setQualityCeiling(
+      exhibit,
+      exhibitGovernor.ceilingForMode('medium'),
+    );
+    for (const frame of frames) {
+      canonical = canonicalGovernor.observeFrame(canonical, frame);
+      exhibit = exhibitGovernor.observeFrame(exhibit, frame);
+      expect(exhibit).toEqual(canonical);
+      expect(exhibitGovernor.ladderFor(exhibit.quality)).toEqual(
+        canonicalGovernor.ladderFor(canonical.quality),
+      );
+      expect(exhibitGovernor.actuationPlanFor(exhibit)).toEqual(
+        canonicalGovernor.actuationPlanFor(canonical),
+      );
+    }
+
+    for (let quality = -0.25; quality <= 1.25; quality += 0.01) {
+      expect(exhibitGovernor.ladderFor(quality)).toEqual(
+        canonicalGovernor.ladderFor(quality),
+      );
+      expect(exhibitGovernor.actuationPlanFor(quality)).toEqual(
+        canonicalGovernor.actuationPlanFor(quality),
+      );
+    }
+    for (const mode of [...OVERRIDE_MODES, 'unknown']) {
+      expect(exhibitGovernor.ceilingForMode(mode)).toBe(
+        canonicalGovernor.ceilingForMode(mode),
+      );
+    }
   });
 });
 

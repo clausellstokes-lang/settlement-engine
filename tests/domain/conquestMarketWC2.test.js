@@ -172,6 +172,19 @@ describe('W-C2 item 2 — mercenary market', () => {
     expect(mercPresenceOf(many)).toBe(MERCENARY_MARKET_TUNING.PRESENCE_CAP);
   });
 
+  it('does not derive mercenary supply from a current custom presentation name', () => {
+    const namesake = inst('Mercenary quarter', {
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:mercenary-namesake',
+    });
+
+    expect(mercPresenceOf(settlement({
+      institutions: [namesake],
+    }))).toBe(0);
+  });
+
   it('exposure and capability are monotone; shortfall = exposure − capability', () => {
     expect(warExposure01(0, false)).toBe(0);
     expect(warExposure01(1, false)).toBeGreaterThan(0);

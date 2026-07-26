@@ -157,6 +157,31 @@ describe('the founding lane raises institutions by plane', () => {
     }
     expect(ws.settlementTickStates.s1?.moralFounding?.acc?.almshouse).toBeUndefined();
   });
+
+  it('a current custom namesake does not suppress native founding pressure', () => {
+    const customAlmshouse = {
+      name: 'Almshouse',
+      status: 'active',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:almshouse-namesake',
+    };
+    const settlement = settlementWith(
+      GOOD_LAWFUL,
+      DEVOUT,
+      [customAlmshouse],
+    );
+    const out = evaluateMoralInstitutionFounding(
+      { tick: 1, simulationRules: {}, settlementTickStates: {} },
+      snapshotWith(settlement),
+      { tick: 1 },
+    );
+
+    expect(
+      out.worldState.settlementTickStates.s1?.moralFounding?.acc?.almshouse,
+    ).toBeGreaterThan(0);
+  });
 });
 
 // ── 4. the 'found' apply path ──────────────────────────────────────────────────

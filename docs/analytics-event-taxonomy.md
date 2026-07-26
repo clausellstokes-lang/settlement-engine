@@ -146,7 +146,7 @@ Intervals: `one_week | one_month | one_season | one_year`. Stressor statuses:
 | `WORLD_PULSE_PROPOSAL_APPLIED` | `world_pulse_proposal_applied` | essential | `applyWorldPulseProposal` | `{ proposal_type, party_sourced }` | which proposed consequences DMs accept |
 | `PARTY_IMPACT_RECORDED` | `party_impact_recorded` | essential | `recordPartyImpact` | `{ action_type, target_kind }` | party-as-actor adoption |
 | `WORLD_STRESSOR_TRANSITIONS` | `world_stressor_transitions` | **research** | inside pulse-result application, diff stressor statuses before/after | `{ interval, transitions:[{type, from_status, to_status, severity, memory_strength_band}] }` (cap 20) | stressor-lifecycle dataset (echo ladder, counterforces in practice) |
-| `WIZARD_NEWS_PANEL_OPENED` | `wizard_news_panel_opened` | essential | `src/components/map/WizardNewsPanel.jsx` open | `{ unread_count, current_tick }` | is the news feed read |
+| `WIZARD_NEWS_PANEL_OPENED` | `wizard_news_panel_opened` | essential | `src/components/map/WizardNewsPanel.jsx` open | `{ unread_count, current_tick }`, campaign `subject_id` | is the news feed read |
 | `SIMULATION_RULES_UPDATED` | `simulation_rules_updated` | essential | `updateCampaignSimulationRules` | `{ changed_keys:[rule key names only] }` | which sim knobs DMs touch |
 | `CHRONICLE_GENERATED` | `chronicle_generated` | essential | chronicle generation success (`generate-chronicle` path) | `{ entry_count_after, tick }` | chronicle adoption |
 

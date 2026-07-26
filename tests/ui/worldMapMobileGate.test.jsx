@@ -35,14 +35,23 @@ vi.mock('../../src/hooks/useIsMobile.js', () => ({
   getIsMobile: () => mobileFlag,
 }));
 
-// Bridge lifecycle runs on mount; stub it so no postMessage/iframe wiring loads.
-vi.mock('../../src/lib/mapBridge.js', () => ({
-  createBridgeSingleton: () => ({
+const bridgeMocks = vi.hoisted(() => ({
+  createBridgeSingleton: vi.fn(() => ({
     on: () => () => {},
     call: () => Promise.resolve(),
     destroy: () => {},
     isReady: false,
-  }),
+  })),
+}));
+
+// Bridge lifecycle runs on desktop only; the spy proves the mobile gate never
+// constructs it (and therefore never arms its 15-second watchdog).
+vi.mock('../../src/lib/mapBridge.js', () => bridgeMocks);
+
+// Keep the mobile read-path assertion focused and deterministic; the dashboard
+// component has its own behavior tests and is lazy in production.
+vi.mock('../../src/components/map/RealmDashboard.jsx', () => ({
+  default: () => <div data-testid="realm-dashboard-locked">Locked dashboard</div>,
 }));
 
 vi.mock('../../src/lib/analytics.js', () => ({
@@ -144,6 +153,8 @@ describe('WorldMap — Realm defer-to-desktop (mobile)', () => {
     // The desktop editing workspace is gone: no campaign <select>, no map iframe.
     expect(container.querySelector('iframe')).toBeNull();
     expect(container.querySelector('select')).toBeNull();
+    expect(bridgeMocks.createBridgeSingleton).not.toHaveBeenCalled();
+    expect(storeState.setMapError).not.toHaveBeenCalled();
   });
 
   test('desktop: the mobile gate does NOT render and the desktop workspace mounts', async () => {
@@ -153,5 +164,6 @@ describe('WorldMap — Realm defer-to-desktop (mobile)', () => {
     expect(screen.queryByTestId('realm-mobile-gate')).toBeNull();
     // Desktop renders the toolbar (synchronous), so buttons exist.
     expect(container.querySelectorAll('button').length).toBeGreaterThan(0);
+    expect(bridgeMocks.createBridgeSingleton).toHaveBeenCalledTimes(1);
   });
 });

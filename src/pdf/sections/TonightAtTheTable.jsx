@@ -2,14 +2,13 @@
  * TonightAtTheTable — chapter 02. The single page a DM can pull up at the
  * table when running this settlement on the fly.
  *
- * Picks the most useful three of each: hooks (top by source priority), NPCs
- * (top by power), active crises (all of them, capped at 4). Each item is one
- * actionable line, editable so the DM can rewrite as the session unfolds.
+ * Uses the shared 1 / 3 / 1 / 3 / 1 quick guide: one identity sentence, three
+ * defining truths, one pressure, three faces, and one entry point. The deeper
+ * hook and crisis chapters remain available elsewhere in the dossier; this page
+ * is deliberately the five-minute brief instead of another exhaustive index.
  *
  * Editable fields:
- *   - tonight.hook.<i>
  *   - tonight.npc.<i>.note
- *   - tonight.crisis.<i>.followup
  *   - tonight.scratch
  */
 import { View, Text } from '@react-pdf/renderer';
@@ -18,32 +17,13 @@ import { ChapterBand, ChapterHeadline, GoldRule, HairRule, Tag } from '../primit
 import { Pill } from '../primitives/Pill.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { hookText, humanize } from '../lib/format.js';
-
-// Source rank: which hook source category to prefer when picking the top 3.
-const SOURCE_RANK = ['crisis', 'tension', 'conflict', 'crime', 'npc', 'relationship', 'history'];
-
-function rankHook(h) {
-  const idx = SOURCE_RANK.indexOf(h?.source || 'other');
-  return idx === -1 ? SOURCE_RANK.length : idx;
-}
+import { humanize } from '../lib/format.js';
+import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 
 export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
-  const all = vm?.hooks?.all || [];
-  // Pick three best hooks: ordered by source rank, then preserving listed order
-  const hooks = all
-    .map((h, i) => ({ h, i }))
-    .sort((a, b) => {
-      const r = rankHook(a.h) - rankHook(b.h);
-      if (r !== 0) return r;
-      return a.i - b.i;
-    })
-    .map(x => x.h)
-    .filter(h => hookText(h?.hook).trim().length > 0)
-    .slice(0, 3);
-
+  const guide = composeSettlementQuickGuide(settlement);
   const npcs = (vm?.npcs?.sorted || []).slice(0, 3);
-  const crises = (vm?.summary?.crisis?.chips || []).slice(0, 4);
+  const hasEntryPoint = !guide.entryPoint.text.startsWith('No immediate entry point');
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -55,66 +35,128 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
       />
 
       <ChapterHeadline tone="gold">
-        {crises.length > 0
-          ? 'Three hooks, three faces, the active pressures. Use this page if you only have five minutes.'
-          : 'Three hooks, three faces. Use this page if you only have five minutes.'}
+        One place, three truths, one pressure, three faces, one way into play.
       </ChapterHeadline>
 
-      {/* ── Hooks ─────────────────────────────────────────────── */}
+      {/* ── Identity and three defining truths ───────────────── */}
+      <View style={{ marginBottom: space.sm }}>
+        <Text style={{
+          ...type.body_em,
+          color: palette.ink,
+          fontSize: pt['10.5'],
+          lineHeight: 1.35,
+          marginBottom: 5,
+        }}>
+          {guide.identitySentence}
+        </Text>
+        {guide.definingTruths.map((truth) => (
+          <View
+            key={truth.id}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              marginBottom: 3,
+              paddingLeft: 6,
+              borderLeft: `1.5pt solid ${palette.border}`,
+            }}
+            wrap={false}
+          >
+            <Text style={{
+              ...type.label,
+              color: palette.muted,
+              fontSize: pt['7.5'],
+              width: 76,
+              marginRight: 5,
+              paddingTop: 1,
+            }}>
+              {truth.label.toUpperCase()}
+            </Text>
+            <Text style={{
+              ...type.body,
+              color: palette.second,
+              fontSize: pt['8.5'],
+              lineHeight: 1.3,
+              flex: 1,
+            }}>
+              {truth.text}
+            </Text>
+          </View>
+        ))}
+      </View>
+
+      <View style={{
+        marginBottom: space.sm,
+        padding: 6,
+        backgroundColor: palette.badBg,
+        borderLeft: `2pt solid ${palette.bad}`,
+      }} wrap={false}>
+        <Text style={{
+          ...type.label,
+          color: palette.bad,
+          fontSize: pt['7.5'],
+          marginBottom: 2,
+        }}>
+          WHAT IS URGENT
+        </Text>
+        <Text style={{
+          ...type.italic,
+          color: palette.ink,
+          fontSize: pt['9'],
+          lineHeight: 1.35,
+        }}>
+          {guide.immediatePressure.text}
+        </Text>
+      </View>
+
+      {/* ── One entry point ────────────────────────────────────── */}
       <View style={{ marginBottom: space.sm }}>
         <Text style={{ ...type.label, color: palette.gold, fontSize: pt['9'], marginBottom: 4 }}>
-          USE TONIGHT: HOOKS
+          START HERE
         </Text>
-        {hooks.length === 0 && (
+        {!hasEntryPoint && (
           <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
-            No hooks surfaced. Improvise from the active crises below.
+            {guide.entryPoint.text}
           </Text>
         )}
-        {hooks.map((h, i) => {
-          const text = hookText(h?.hook);
-          const sourceLabel = humanize(h?.source || 'other');
-          const sourceNameLabel = h?.sourceName ? humanize(h.sourceName) : '';
-          return (
-            <View
-              key={`th-${i}`}
+        {hasEntryPoint && (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'flex-start',
+              paddingLeft: 8,
+              borderLeft: `2pt solid ${palette.gold}`,
+              paddingTop: 2,
+              paddingBottom: 2,
+            }}
+            wrap={false}
+          >
+            <Text
               style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                marginBottom: 7,
-                paddingLeft: 8,
-                borderLeft: `2pt solid ${palette.gold}`,
-                paddingTop: 2,
-                paddingBottom: 2,
+                fontFamily: 'Lora',
+                fontWeight: 700,
+                color: palette.gold,
+                fontSize: pt['14'],
+                width: 18,
+                paddingTop: 1,
               }}
-              wrap={false}
             >
-              <Text
-                style={{
-                  fontFamily: 'Lora',
-                  fontWeight: 700,
-                  color: palette.gold,
-                  fontSize: pt['14'],
-                  width: 18,
-                  paddingTop: 1,
-                }}
-              >
-                {i + 1}
+              1
+            </Text>
+            <View style={{ flex: 1 }}>
+              <Text style={{
+                ...type.body,
+                fontSize: pt['10.5'],
+                color: palette.ink,
+                lineHeight: 1.35,
+              }}>
+                {guide.entryPoint.text}
               </Text>
-              <View style={{ flex: 1 }}>
-                {/* Hook text leads — large, scannable. Plain Text so the
-                    prose extracts cleanly from the PDF. */}
-                <Text style={{ ...type.body, fontSize: pt['10.5'], color: palette.ink, lineHeight: 1.35 }}>
-                  {text}
-                </Text>
-                {/* Source demoted to a small tag underneath */}
-                <View style={{ flexDirection: 'row', marginTop: 2 }}>
-                  <Tag tone="gold">{sourceLabel}</Tag>
-                  {sourceNameLabel && <Tag tone="muted">{sourceNameLabel}</Tag>}
-                </View>
+              <View style={{ flexDirection: 'row', marginTop: 2 }}>
+                <Tag tone="gold">{humanize(guide.entryPoint.label)}</Tag>
               </View>
             </View>
-          );
-        })}
+          </View>
+        )}
       </View>
 
       <HairRule />
@@ -179,45 +221,6 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
           </View>
         ))}
       </View>
-
-      {/* ── Active crises (only when present — no contradiction with the "active pressures" headline) ── */}
-      {crises.length > 0 && (
-        <>
-          <HairRule />
-          <View style={{ marginBottom: space.sm }}>
-            <Text style={{ ...type.label, color: palette.bad, fontSize: pt['9'], marginBottom: 4 }}>
-              ACTIVE CRISES: KEEP IN MIND
-            </Text>
-            {crises.map((c, i) => (
-              <View
-                key={`tc-${i}`}
-                style={{
-                  marginBottom: 4,
-                  paddingLeft: 6,
-                  borderLeft: `2pt solid ${palette.bad}`,
-                }}
-                wrap={false}
-              >
-                <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 1 }}>
-                  <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'], marginRight: 4 }}>
-                    {humanize(c.label || c.icon || 'Crisis')}
-                  </Text>
-                  {c.summary && (
-                    <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9'], flex: 1 }}>
-                      {c.summary}
-                    </Text>
-                  )}
-                </View>
-                {hookText(c.hook) && (
-                  <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.muted, fontStyle: 'italic' }}>
-                    {hookText(c.hook)}
-                  </Text>
-                )}
-              </View>
-            ))}
-          </View>
-        </>
-      )}
 
       <GoldRule />
 

@@ -266,6 +266,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // strip), and pins which pause/dismiss equivalence test covers each site. A NEW
   // layer that banks residue must add a strip + its marker + a registry entry, or the
   // gate blocks. All strips are byte-neutral when nothing is suppressed.
+  // @pulse-stage: bootstrap
   const startingWorldState = ensureWorldState(campaign?.worldState, campaign);
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
@@ -282,6 +283,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   worldState = expireStaleActorMajors(worldState, worldState.tick, now, intervalStartTick);
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
+  // @pulse-stage: actor_memory
   worldState = ensureAllRelationshipStates(worldState, snapshot);
   worldState = ensureNpcStates(worldState, snapshot, rng.fork('npc-state'));
   worldState = ensureFactionStates(worldState, snapshot, rng.fork('faction-state'));
@@ -368,6 +370,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // they were superseded in the same pulse.
   snapshot = buildWorldSnapshot({ campaign: { ...campaign, worldState }, saves, worldState });
 
+  // @pulse-stage: condition_aging
   const agedStressors = simulationRules.stressorsEnabled
     ? ageRoamingStressors(worldState.stressors, snapshot, rng.fork('stressors'), { tick: worldState.tick, now })
     : { stressors: worldState.stressors || [], resolved: [], residualOutcomes: [], graduated: [] };
@@ -400,6 +403,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       })
     : [];
 
+  // @pulse-stage: settlement_clock
   const localSettlements = new Map();
   const settlementTickStates = { ...(worldState.settlementTickStates || {}) };
   const timeTicks = [];
@@ -635,6 +639,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (pruned) worldState = { ...worldState, npcStates };
   }
 
+  // @pulse-stage: mover_planes
   // Phase 5.5 mover M2 — CARAVANS / SUPPLY-STARVATION. Before the war layer (so a
   // supply-starved besieged town's weakened hold feeds THIS tick's siege verdict via
   // M2b): advance the AGGREGATE in-transit shipment ledger over the active consuming
@@ -1241,6 +1246,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const tradeSalienceResult = simulationRules.warLayerEnabled
     ? computeTradeSalienceMap(postTimeSnapshot, worldState, { tick: worldState.tick })
     : { factors: {}, salience: {} };
+  // @pulse-stage: candidate_selection
   const candidates = evaluateWorldPulseRules(postTimeSnapshot, {
     pressures,
     pressureIndex: pIndex,
@@ -1296,6 +1302,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // returned on `deferredMajors` for the orchestrator to resolve (autoresolve ON)
   // or park (autoresolve OFF). When OFF, the partition is inert — the full set
   // applies in one pass, byte-identical to today.
+  // @pulse-stage: permission_and_apply
   const deferredMajors = deferMajors ? selectedForApply.filter(o => deriveDecisionTier(o) === 'major') : [];
   // RESUME re-run filter: when the DM dismissed specific majors, drop them from the
   // apply set on the re-run (deferMajors OFF). Empty/null ⇒ no exclusion ⇒
@@ -1336,6 +1343,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
+  // @pulse-stage: consequence_fold
   let memoryState = applied.worldState;
   // E0 NARRATIVE TEMPO GOVERNOR — WRITE hook (design §7.2). Fold this tick's landed
   // spontaneous major births + the seam's deferrals into the next narrativeTempo
@@ -2494,6 +2502,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
+  // @pulse-stage: finalize_receipt
   const finalWorldState = appendPulseHistoryWithProvenance(memoryState, pulseRecord, applied);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to

@@ -56,7 +56,11 @@ function read(rel) {
 // Extract a `NAME = { ... }` object literal block via brace matching (robust to
 // nested objects/arrays), so a per-key scan cannot leak past the table.
 function tableBlock(src, tableName) {
-  const start = src.indexOf(`${tableName} = {`);
+  // Tables may be plain literals or wrapped in Object.freeze after extraction
+  // into a data/helper module. Start at the assignment and brace-match the
+  // first literal so the walker follows architecture changes without relaxing
+  // its per-key coverage requirement.
+  const start = src.indexOf(`${tableName} =`);
   if (start === -1) return null;
   const open = src.indexOf('{', start);
   let depth = 0;
@@ -114,7 +118,7 @@ describe('stress-type registration manifest (structural prevention)', () => {
     // the max-lines leaf rule); the walker follows the table to its home.
     ['src/data/narrativeData.js', 'STRESS_NOTES'],
     ['src/generators/npcGenerator.js', 'STRESS_BOOSTS'],
-    ['src/generators/npcGenerator.js', 'STRESS_SECRET_BOOSTS'],
+    ['src/generators/npc/factionLeaderSecret.js', 'STRESS_SECRET_BOOSTS'],
     ['src/generators/npcGenerator.js', 'STRESS_TO_CATEGORY'],
     ['src/generators/npcGenerator.js', 'STRESS_MANDATORY_ROLES'],
     ['src/generators/npcGenerator.js', 'STRESS_GOALS'],

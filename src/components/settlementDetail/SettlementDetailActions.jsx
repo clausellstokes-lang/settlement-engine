@@ -38,7 +38,7 @@ export default function SettlementDetailActions({
         title={canEdit
           ? (editMode
               ? 'Stop editing. Fields return to read-only display.'
-              : 'Edit dossier prose in place. Edits are preserved across rerolls and respected by the AI overlay.')
+              : 'Edit dossier prose in place. Edited NPCs survive a reroll; the AI overlay passes them through.')
           : 'Manual editing is a Cartographer (premium) feature. Click to upgrade.'}
       >
         {!canEdit ? 'Edit (Premium)' : (editMode ? 'Stop Editing' : 'Edit Dossier')}

@@ -59,3 +59,45 @@ describe('ViabilityTab routes issues through the shared adjudicator', () => {
     expect(screen.queryByText('Routed Warning')).toBeNull();
   });
 });
+
+describe('ViabilityTab generation receipt projection', () => {
+  it('surfaces formal judgment support and review evidence', () => {
+    const settlement = settlementWith({
+      viable: true,
+      summary: 'VIABLE: test',
+      issues: [],
+      warnings: [],
+    });
+    settlement.generationCoherenceReceipt = {
+      status: 'needs_review',
+      cultureProfile: 'germanic',
+      contentProfile: 'grounded',
+      checks: [],
+      repairs: [],
+      authoredTensions: [],
+      judgments: [
+        {
+          id: 'hard_structural_validity',
+          label: 'Hard structural validity',
+          status: 'pass',
+          summary: 'Final references resolve.',
+        },
+        {
+          id: 'cross_system_semantic_agreement',
+          label: 'Cross-system semantic agreement',
+          status: 'needs_review',
+          summary: 'Faction power is not conserved.',
+        },
+      ],
+    };
+
+    render(<ViabilityTab settlement={settlement} />);
+
+    expect(screen.getByText(
+      'Formal judgments: 1/2 supported · 1 needs review',
+    )).toBeTruthy();
+    expect(screen.getByText(
+      /Cross-system semantic agreement: Faction power is not conserved/,
+    )).toBeTruthy();
+  });
+});

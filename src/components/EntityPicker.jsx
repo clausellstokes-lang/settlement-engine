@@ -29,6 +29,20 @@ import IconButton from './primitives/IconButton.jsx';
 
 const PURPLE = swatch['#7C3AED'];
 
+/**
+ * Reader-facing identity for an unresolved registry reference.
+ *
+ * The prefix is enough to explain what disappeared; the durable ref id remains
+ * stored and continues to power repair/removal, but never reaches visible copy
+ * or hover text.
+ */
+export function missingReferenceLabel(refId) {
+  const value = String(refId || '');
+  if (value.startsWith('custom:')) return 'Deleted custom item';
+  if (value.startsWith('prebuilt:')) return 'Missing catalog item';
+  return 'Missing linked item';
+}
+
 export default function EntityPicker({
   category,
   categories,          // optional: list across several registry categories (e.g. goods + services)
@@ -140,16 +154,12 @@ export default function EntityPicker({
             const missing = !entry;
             const isCustom = entry?.source === 'custom';
             const accent = missing ? '#8b1a1a' : (isCustom ? PURPLE : GOLD);
-            const label = entry?.name || (refId.startsWith('custom:')
-              ? '(deleted custom)'
-              : refId.startsWith('prebuilt:')
-                ? `(missing: ${refId.split(':').slice(2).join(':')})`
-                : refId);
+            const label = entry?.name || missingReferenceLabel(refId);
             return (
               <span
                 key={refId}
                 title={missing
-                  ? `Reference no longer exists: ${refId}`
+                  ? 'This linked item no longer exists.'
                   : `${entry.source === 'custom' ? 'Custom · ' : ''}${entry.subcategory || ''}`}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 4,

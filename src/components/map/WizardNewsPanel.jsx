@@ -1,10 +1,11 @@
 import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { newsBodyText, newsReasonPhrases } from '../../domain/display/newsBody.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
+import { EVENTS, track } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
@@ -320,6 +321,15 @@ export default function WizardNewsPanel({ campaign }) {
     [elsewhereThreads],
   );
   const total = summary.feed.entries.length;
+
+  useEffect(() => {
+    if (!campaign?.id) return;
+    track(EVENTS.WIZARD_NEWS_PANEL_OPENED, {
+      unread_count: summary.feed.unreadCount ?? 0,
+      current_tick: summary.feed.currentTick ?? 0,
+    }, { subjectId: campaign.id });
+  }, [campaign?.id, summary.feed.currentTick, summary.feed.unreadCount]);
+
   const saves = useStore(state => state.savedSettlements);
   const appendCampaignChronicle = useStore(state => state.appendCampaignChronicle);
   const setCreditBalance = useStore(state => state.setCreditBalance);
@@ -353,10 +363,10 @@ export default function WizardNewsPanel({ campaign }) {
     // request helper, appendCampaignChronicle, or setCreditBalance) must never
     // leave the paid Chronicle button stuck spinning forever (correctness-2).
     try {
-      const ids = new Set(campaign?.settlementIds || []);
+      const ids = new Set((campaign?.settlementIds || []).map(String));
       const snapshot = {
         settlements: saves
-          .filter(save => ids.has(save.id))
+          .filter(save => ids.has(String(save.id)))
           .map(save => ({ id: save.id, name: save.name, settlement: save.settlement })),
       };
       const result = await requestCampaignChronicle({

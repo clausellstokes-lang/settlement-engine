@@ -10,6 +10,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   CERTIFICATION_MANIFEST_VERSION,
+  CERTIFICATION_REQUIRED_PROPERTY_KEYS,
   SOAK_PROPERTY_KEYS,
   validateSoakResult,
   validateCertificationBand,
@@ -23,11 +24,17 @@ const goodSoak = {
   years: 100,
   seedsTested: 8,
   ticksAdvanced: 4800,
-  properties: ['no_crash', 'rerun_identical', 'population_bounded'],
+  properties: [...CERTIFICATION_REQUIRED_PROPERTY_KEYS],
   runAt: '2026-07-20T00:00:00.000Z',
   buildHash: 'abc1234',
 };
 const certifiedBand = { bandId: 'sig_deadbeef', presetId: 'full_simulation', status: 'certified', soak: goodSoak };
+const measuredBand = {
+  bandId: 'sig_measured',
+  presetId: 'full_simulation',
+  status: 'measured',
+  soak: { ...goodSoak, properties: ['no_crash', 'rerun_identical'] },
+};
 const pendingBand = { bandId: 'sig_cafef00d', presetId: 'realistic_regional', status: 'pending', soak: null };
 
 describe('V-10 — the shipped manifest is valid and inert-honest', () => {
@@ -50,6 +57,17 @@ describe('V-10 — status↔soak lockstep (the claims-parity wall at the schema)
   it('a pending band with soak:null is valid', () => {
     expect(validateCertificationBand(pendingBand)).toEqual({ ok: true, errors: [] });
   });
+  it('a measured band carries partial evidence without claiming certification', () => {
+    expect(validateCertificationBand(measuredBand)).toEqual({ ok: true, errors: [] });
+  });
+  it('REJECTS a certified band missing any required property', () => {
+    const res = validateCertificationBand({
+      ...certifiedBand,
+      soak: { ...goodSoak, properties: ['no_crash'] },
+    });
+    expect(res.ok).toBe(false);
+    expect(res.errors.join(' ')).toMatch(/missing required properties/);
+  });
   it('REJECTS a certified band with no soak (a claim without a receipt)', () => {
     const res = validateCertificationBand({ ...certifiedBand, soak: null });
     expect(res.ok).toBe(false);
@@ -63,6 +81,9 @@ describe('V-10 — status↔soak lockstep (the claims-parity wall at the schema)
   it('REJECTS an unknown status', () => {
     expect(validateCertificationBand({ ...pendingBand, status: 'gold-star' }).ok).toBe(false);
   });
+  it('REJECTS a measured band without a receipt', () => {
+    expect(validateCertificationBand({ ...measuredBand, soak: null }).ok).toBe(false);
+  });
 });
 
 describe('V-10 — the closed property vocabulary', () => {
@@ -74,6 +95,11 @@ describe('V-10 — the closed property vocabulary', () => {
   it('REJECTS a negative or non-finite metric', () => {
     expect(validateSoakResult({ ...goodSoak, years: -1 }).ok).toBe(false);
     expect(validateSoakResult({ ...goodSoak, ticksAdvanced: Infinity }).ok).toBe(false);
+  });
+  it('REJECTS duplicate property claims', () => {
+    const res = validateSoakResult({ ...goodSoak, properties: ['no_crash', 'no_crash'] });
+    expect(res.ok).toBe(false);
+    expect(res.errors.join(' ')).toMatch(/duplicate soak property/);
   });
   it('every vocabulary key is a valid single-property soak', () => {
     for (const key of SOAK_PROPERTY_KEYS) {

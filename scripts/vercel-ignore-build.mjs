@@ -18,10 +18,10 @@
  * gate travels with the code instead of living only in the Vercel dashboard.
  *
  * It checks the GitHub Commit Status / Checks API for the `CI / Validate, test,
- * build` (the `check` job), `CI / Chromium end-to-end` (`e2e`), and
- * `CI / Edge function execution tests (Deno)` (`deno-tests`) conclusions on the
- * exact commit being deployed. The build proceeds ONLY when all required checks
- * have concluded successfully.
+ * build` (the `check` job), functional/browser performance E2E, Deno execution,
+ * security coverage, and hostile-locale determinism conclusions on the exact
+ * commit being deployed. The build proceeds ONLY when all required checks have
+ * concluded successfully.
  *
  * Required environment (set in Vercel → Project → Settings → Environment
  * Variables; the first three Vercel injects automatically):
@@ -99,6 +99,7 @@ export function defaultReadMigrationState() {
 export const REQUIRED_CHECKS = [
   'Validate, test, build', // the `check` job (job name shown in the Checks API)
   'Chromium end-to-end', // the `e2e` job
+  'Production-build browser performance', // the `performance` job
   'Edge function execution tests (Deno)', // the `deno-tests` job
   'Coverage floors (money / security)', // the `coverage-floors` job
   'Golden master under tr_TR + Chatham TZ', // the `determinism-hostile-locale` job

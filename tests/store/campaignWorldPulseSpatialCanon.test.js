@@ -185,6 +185,39 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws2.spatialDigest.settlementIds.length).toBe(9);
   });
 
+  test('an advance that starts during capture wins; the stale spatial digest is not committed', async () => {
+    const store = makeStore();
+    seedStore(store);
+    const before = JSON.stringify(store.getState().campaigns[0].worldState);
+    let releaseCapture;
+    let markCaptureEntered;
+    const captureBlocked = new Promise((resolve) => {
+      releaseCapture = resolve;
+    });
+    const captureEntered = new Promise((resolve) => {
+      markCaptureEntered = resolve;
+    });
+    const pack = makeGridPack({ cols: 18, rows: 14 });
+    const placements = placeSettlements(pack, 6);
+    const canonizing = store.getState().canonizeCampaignWorldSpatial('camp-1', {
+      captureSpatialPack: async () => {
+        markCaptureEntered();
+        await captureBlocked;
+        return { pack, placements };
+      },
+    });
+
+    // Simulate the advance's synchronous reservation while the capture awaits.
+    await captureEntered;
+    store.setState((state) => {
+      state.advanceInFlight = ['camp-1'];
+    });
+    releaseCapture();
+
+    await expect(canonizing).resolves.toEqual({ ok: false, reason: 'advance_in_flight' });
+    expect(JSON.stringify(store.getState().campaigns[0].worldState)).toBe(before);
+  });
+
   test('BIOME TRUTH (V-6): the virtual biomeTruthEnabled flag LIGHTS the biomes sub-digest; absent ⇒ no key', async () => {
     const store = makeStore();
     seedStore(store);

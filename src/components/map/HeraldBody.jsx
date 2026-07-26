@@ -28,7 +28,6 @@ import HeraldAdjudication from './HeraldAdjudication.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
 import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
 import RealmDocket from './RealmDocket.jsx';
-import WhileYouWereAway from './WhileYouWereAway.jsx';
 import AdvanceReport from './AdvanceReport.jsx';
 import TreatyPanel from './TreatyPanel.jsx';
 import ChroniclersLetterPanel from './ChroniclersLetterPanel.jsx';
@@ -73,10 +72,10 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
       )}
       {campaign && (
         <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
-          <IconButton onClick={() => setProse(false)} aria-pressed={!prose} active={!prose} title="The realm at a glance">
+          <IconButton onClick={() => setProse(false)} aria-pressed={!prose} aria-label="The realm at a glance" active={!prose}>
             <LayoutList size={13} /> Glance
           </IconButton>
-          <IconButton onClick={() => setProse(true)} aria-pressed={prose} active={prose} title="Prose session-prep">
+          <IconButton onClick={() => setProse(true)} aria-pressed={prose} aria-label="Prose session-prep" active={prose}>
             <BookOpen size={13} /> Session prep
           </IconButton>
         </div>
@@ -91,7 +90,6 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
             nameById={nameById}
             {...emptyHandlers}
           />
-          {campaign && <WhileYouWereAway campaignId={campaign.id} />}
         </>
       )}
       {prose && campaign && (
@@ -111,12 +109,30 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
  * @param {any} props.campaign
  * @param {'advance'|'campaign'} props.timeLens
  * @param {Map<string,string>} props.nameById
+ * @param {Array<any>} props.saves
  * @param {object} props.emptyHandlers
  * @param {boolean} props.canManageCampaigns
  * @param {string} props.tier
  * @param {() => void} [props.onUpgrade]
+ * @param {ReadonlyArray<Record<string, unknown>>} [props.realmDecisionItems]
+ * @param {string|null} [props.activeDecisionItemId]
  */
-export default function HeraldBody({ section, campaign, feed = { bySection: {}, counts: {} }, focusId = null, focusName = '', narrowing = false, nameById, emptyHandlers, canManageCampaigns, tier, onUpgrade }) {
+export default function HeraldBody({
+  section,
+  campaign,
+  feed = { bySection: {}, counts: {} },
+  focusId = null,
+  focusName = '',
+  narrowing = false,
+  nameById,
+  saves = [],
+  emptyHandlers,
+  canManageCampaigns,
+  tier,
+  onUpgrade,
+  realmDecisionItems,
+  activeDecisionItemId = null,
+}) {
   const showResolve = flag('warEconomySurfacing');
   const bySection = feed.bySection || {};
   // A focus/filter that empties a door reads as the local edition's "nothing here",
@@ -156,7 +172,13 @@ export default function HeraldBody({ section, campaign, feed = { bySection: {}, 
           <LiveWarStatus campaign={campaign} nameById={nameById} />
           <RealmIntrigue campaign={campaign} nameById={nameById} />
           <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
-          {showResolve && <WarResolveSection campaign={campaign} saves={[]} nameById={nameById} />}
+          {showResolve && (
+            <WarResolveSection
+              campaign={campaign}
+              saves={saves}
+              nameById={nameById}
+            />
+          )}
           <PeacetimeNote campaign={campaign} />
         </div>
       </HeraldSection>
@@ -200,7 +222,7 @@ export default function HeraldBody({ section, campaign, feed = { bySection: {}, 
           </div>
           <RealmDocket campaign={campaign} />
         </div>
-        <Section title="Pressures building" count={forecasts.length}>
+        <Section heading="Pressures building" count={forecasts.length}>
           {forecasts.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               {focusEmpty('No pressure is building that the realm can yet foresee.')}
@@ -216,7 +238,15 @@ export default function HeraldBody({ section, campaign, feed = { bySection: {}, 
   }
 
   if (section === 'adjudication') {
-    return <HeraldAdjudication campaign={campaign} focusId={focusId} focusName={focusName} />;
+    return (
+      <HeraldAdjudication
+        campaign={campaign}
+        focusId={focusId}
+        focusName={focusName}
+        realmDecisionItems={realmDecisionItems}
+        activeDecisionItemId={activeDecisionItemId}
+      />
+    );
   }
 
   return <div style={{ padding: SP.sm, color: BODY, fontFamily: sans, fontSize: FS.xs, border: `1px dashed ${BORDER}` }}>Unknown section.</div>;

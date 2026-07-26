@@ -223,7 +223,7 @@ describe('E2 voiceMechanics — src/data + src/domain string-literal ratchet (sh
     // files; src/domain remains the debt). LOWER these as the pools burn down
     // (eventProse/roadsProse/traditionProse are the bulk — canonical-at-zero
     // contracts defer them to their own wave); NEVER raise them.
-    const EM_BUDGET = 672;
+    const EM_BUDGET = 670;
     const BANG_BUDGET = 15;
     const totals = Object.values(current).reduce(
       (t, c) => ({ em: t.em + c.em, bang: t.bang + c.bang }),

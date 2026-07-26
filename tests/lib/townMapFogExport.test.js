@@ -45,14 +45,20 @@ describe('the UNFOGGED export stays byte-identical (fogReveal absent ⇒ no-op)'
 
 describe('the FOGGED handout overlays the mask through the existing matrix', () => {
   it('a reveal set injects a fog <g>/<mask> and is longer than the unfogged export', () => {
-    const unfogged = townMapExportSvg(baseV2, { style: 'parchment', resolution: 1024 });
+    const unfogged = townMapExportSvg(baseV2, {
+      style: 'parchment',
+      resolution: 1024,
+      audience: 'player',
+    });
     const fogged = townMapExportSvg(baseV2, { style: 'parchment', resolution: 1024, audience: 'player', fogReveal: reveal });
     expect(fogged).toContain('data-town-fog');
     expect(fogged).toContain('<mask id="sf-fog"');
     expect(fogged.length).toBeGreaterThan(unfogged.length);
     expect(fogged.startsWith('<svg')).toBe(true);
-    // the base body is preserved verbatim (append-only): the unfogged SVG minus its closing
-    // tag is a prefix-region of the fogged one (the fog is spliced before </svg>).
+    // Compare like-for-like player projections. The audience wall may remove
+    // owner-only provenance before drawing, so a DM export is not a valid base
+    // for this append-only assertion. Within the player projection, the fog is
+    // still inserted immediately before the closing </svg>.
     expect(fogged).toContain(unfogged.slice(0, unfogged.lastIndexOf('</svg>')));
   });
 

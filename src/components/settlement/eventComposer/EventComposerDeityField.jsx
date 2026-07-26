@@ -8,8 +8,9 @@
  * FAITH SEAM: the premium gate returns FIRST (UpsellOrEmpty). No deity name — no
  * options, no cult list, no capacity hint — renders while canUseCustom is false;
  * anon/free users see only the upsell copy and the pricing-moment CTA. Deity data
- * comes from the user's OWN custom registry (buildRegistry(customContent)) plus the
- * settlement's embedded snapshots — never config.latentPantheon.
+ * comes from the active execution context (the campaign's pinned binding when
+ * one is active, otherwise the user's own library) plus the settlement's embedded
+ * snapshots — never config.latentPantheon.
  *
  * OUR-floor identity: the shared resolveDeityForEvent() mints the account-scoped
  * identity ref (deity:<scope>:<slug>) via mintDeityRef and keeps lawAxis in the
@@ -22,7 +23,7 @@
 import { useMemo } from 'react';
 import { buildRegistry, customRefIdFromItem, mintDeityRef } from '../../../lib/customRegistry.js';
 import { reconcileCultImposition, capacityForTier } from '../../../domain/worldPulse/religionState.js';
-import { deitySnapshotFrom } from '../../../store/deitySnapshot.js';
+import { deitySnapshotFrom } from '../../../domain/deitySnapshot.js';
 import { MUTED, sans, FS } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
 import { navigate } from '../../../hooks/useRoute.js';

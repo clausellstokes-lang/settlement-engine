@@ -17,6 +17,7 @@
 
 import { useMemo } from 'react';
 import { deriveCausalState } from '../../../domain/causalState.js';
+import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
@@ -73,7 +74,7 @@ export default function SubstrateTab({ settlement }) {
     return Object.entries(model.variables)
       .map(([key, v]) => ({
         key,
-        label: VAR_LABEL[key] || key,
+        label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
         band: v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
@@ -87,7 +88,7 @@ export default function SubstrateTab({ settlement }) {
   if (!model || rows.length === 0) {
     return (
       <div data-testid="substrate-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: FS.sm }}>
-        The causal substrate has not been assessed for this settlement.
+        The settlement&apos;s underlying conditions have not been assessed.
       </div>
     );
   }
@@ -97,15 +98,16 @@ export default function SubstrateTab({ settlement }) {
     ...(summary.collapsed || []),
     ...(summary.critical || []),
     ...(summary.strained || []),
-  ].map(k => VAR_LABEL[k] || k);
+  ].map(k => VAR_LABEL[k] || humanizeToken(k) || 'Recorded condition');
 
   return (
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>Causal substrate</div>
+      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
+        What is holding, what is strained
+      </div>
       <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        The sixteen forces the engine simulates: food, legitimacy, defense, trade, and the rest.
-        Bands read the settlement&apos;s own conditions; a live siege, drawdown, or outbreak is already
-        pressed into the scores below.
+        Food, authority, defense, trade, and the other foundations that keep this settlement standing.
+        Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
       </p>
 
       {/* Pressures callout — the systems the model flags strained-or-worse. */}
@@ -121,7 +123,7 @@ export default function SubstrateTab({ settlement }) {
           </div>
         ) : (
           <div style={{ fontSize: FS.sm, color: GREEN, lineHeight: 1.5 }}>
-            <strong>All systems holding.</strong> No variable reads strained or worse.
+            <strong>All foundations holding.</strong> No condition reads strained or worse.
           </div>
         )}
       </div>
@@ -131,7 +133,7 @@ export default function SubstrateTab({ settlement }) {
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
           background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
-        }}>System variables</div>
+        }}>Settlement foundations</div>
         <div style={{ padding: `0 ${SP.md}px` }}>
           {rows.map(row => (
             <div key={row.key} data-substrate-row style={{
@@ -139,9 +141,6 @@ export default function SubstrateTab({ settlement }) {
               padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
             }}>
               <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
-              {row.score != null && (
-                <span style={{ fontSize: FS.xs, fontWeight: 700, color: MUTED, minWidth: 26, textAlign: 'right' }}>{row.score}</span>
-              )}
               <BandPill band={row.band} />
             </div>
           ))}

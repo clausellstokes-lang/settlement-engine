@@ -16,22 +16,18 @@ const SRC = resolve(ROOT, 'src');
 // generators and domain are mutually-dependent PEER engine layers: the
 // generators import a slice of domain (trace, magicFilter, goodsCatalog,
 // customContentSchema, the settlement schema/migrations, deterministicSort,
-// clock, corruption, faction* …). Those same domain modules are ALSO reached
-// eagerly by the store/domain code that runs on first paint. Left unassigned,
-// Rollup co-locates them into the big lazy `engine` chunk (they're pulled by
-// the generators there), and because first-paint code needs them the ENTRY is
-// forced to statically import `engine` — dragging the whole 656 kB engine chunk
-// into first paint through a back door that has nothing to do with generation.
+// clock, corruption, faction* …). Left unassigned, Rollup can co-locate that
+// shared vocabulary into the big lazy `engine` chunk, making any focused lazy
+// consumer fetch the whole generator.
 //
-// So we route that shared domain slice into the small first-paint `engine-core`
+// Route the shared slice into an independently cacheable `engine-core`
 // chunk instead. This set is DERIVED from the import graph — the transitive
 // closure, within src/domain, of every domain module any src/generators module
-// imports — not hand-curated, so it can't silently drift and re-drag the engine
-// into first paint. (None of these modules import a generator, so engine-core
-// stays closed over {engine-core, kernel, data} and never points back at
-// `engine`; the generators only ever reach the lazy worldPulse sim via dynamic
-// import, never statically, so that heavy graph never enters this set.)
-// @enforced-by tests/build/vendorPdfLazy.test.js (engine-absent-from-closure).
+// imports — not hand-curated. Small authorities with distinct load boundaries
+// are explicitly excised and pinned by semantic responsibility below; growth
+// in the remaining eager overlap is caught by the byte ratchet.
+// @enforced-by tests/build/contentIdentityLazy.test.js +
+//              tests/build/vendorPdfLazy.test.js.
 function computeEngineSharedDomain() {
   const walk = (d, out = []) => {
     for (const e of readdirSync(d)) {
@@ -115,6 +111,27 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // excision convention). Its TRADITION_*_KEYS mirror of the corpus stays
 // deliberately duplicated — now to keep the corpus tables out of the small
 // validation chunk — with the customContentTraditions drift guard unchanged.
+// FP-G13 (2026-07-25): userContentTunables.js lost its final true eager edge
+// when config/persistence moved field intent into a tiny zero-import leaf and
+// strict environment admission moved to the compact admission authority.
+// contentFingerprint remains legitimately eager for strict synchronous
+// campaign admission, but is the only engine-shared identity module first
+// paint needs; pinning it to content-identity below keeps strict persistence
+// admission independent of the broader engine-core grouping. Every full
+// tunable consumer remains generator- or custom-content-lazy.
+// FP-G14 (2026-07-25): four more derived members have no static path from
+// main.jsx: content provenance, priority presentation, 2D glyph assignment,
+// and custom 3D building presentation. They are shared by multiple lazy
+// surfaces, so pin them together below instead of allowing the conservative
+// generator-domain derivation to co-locate them with genuinely eager
+// simulation vocabulary. This is placement-only: their source graph was
+// already lazy, and their outward edges point to eager or lazy-safe leaves.
+// FP-G15 (2026-07-26): reviewed-chain activation and exact trade-endpoint
+// projection are also generator-only. Both legitimately import the lazy custom
+// schema, so leaving them in conservative engine-core created an
+// engine-core -> custom-schema edge and returned all custom tunables to first
+// paint. Their only runtime callers are the lazy generation economy; pin them
+// with the other lazy shared engine leaves below.
 for (const frag of [
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
@@ -122,7 +139,16 @@ for (const frag of [
   '/src/domain/region/foldTradeCategories.js',
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',
+  '/src/domain/deterministicSort.js',
   '/src/domain/customContentSchema.js',
+  '/src/domain/content/contentFingerprint.js',
+  '/src/domain/content/userContentTunables.js',
+  '/src/domain/content/settlementContentProvenance.js',
+  '/src/domain/content/customSupplyChainActivation.js',
+  '/src/domain/content/customTradeEndpointProjection.js',
+  '/src/domain/priorityBands.js',
+  '/src/domain/townMap/glyphAssign.js',
+  '/src/domain/townScene/customBuildingPresentation.js',
 ]) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
@@ -137,7 +163,6 @@ const isEngineSharedDomain = (id) => {
 // statically reaches it. CHUNK-level, not entry-module-level: the seeds are
 // every module the manualChunks rules route into an eager chunk —
 //   • the src/main.jsx static graph            (the entry chunk itself),
-//   • the engine-core generator spine + ENGINE_SHARED_DOMAIN (engine-core),
 //   • src/kernel/**                            (kernel),
 //   • lookups.js                               (routed to 'data') —
 //     (customRegistry + dependencyEngine were seeds until the de-eager lane,
@@ -179,17 +204,6 @@ function computeEagerModuleGraph() {
   };
   const seeds = [
     join(SRC, 'main.jsx'),
-    // engine-core generator spine (the explicit pins in manualChunks below).
-    // FP-G8 (2026-07-16): only these TWO are genuinely eager-reached now — the
-    // neighbour backlink (via eager neighbourBackLink.js) and the pipeline-rail
-    // labels (via eager settlementSlice.js). The former five (structuralValidator/
-    // helpers/priorityHelpers/institutionProbability/neighbourGenerator) lost their
-    // last eager consumer when the coherence draft-check went lazy, so they are no
-    // longer seeded here — they ride the lazy `engine` chunk (and spatialData, only
-    // structuralValidator reaches it, drops to data-lazy). Both routing and this
-    // classifier agree, per the FP-G7 excision convention.
-    join(SRC, 'generators/crossSettlementConflicts.js'),
-    join(SRC, 'generators/steps/stepMetadata.js'),
     // libs routed into the eager 'data' chunk below
     // DE-EAGER LANE (2026-07-19): customRegistry.js + dependencyEngine.js are
     // NO LONGER seeded here — the store now reaches them only through the
@@ -201,7 +215,7 @@ function computeEagerModuleGraph() {
     join(SRC, 'generators/lookups.js'),
     // kernel chunk
     ...walk(join(SRC, 'kernel')),
-    // engine-core's shared-domain members (fragments → absolute paths)
+    // engine-core is still reached by true eager simulation consumers.
     ...[...ENGINE_SHARED_DOMAIN].map((frag) => join(ROOT, frag.slice(1))),
   ].filter((p) => existsSync(p));
   const seen = new Set(seeds);
@@ -344,6 +358,12 @@ export default defineConfig({
       open: false,
     }),
   ].filter(Boolean),
+  // Every production worker is constructed with `{ type: 'module' }`. ES
+  // output lets the TownScene worker code-split its canonical-map vocabulary
+  // instead of parsing that graph before the first compile request.
+  worker: {
+    format: 'es',
+  },
   build: {
     outDir: 'dist',
     // The only chunks above Vite's default 500 kB warning line are deliberate
@@ -502,53 +522,96 @@ export default defineConfig({
               id.includes('/src/domain/settlement.schema.js'))
             return 'settlement-normalize';
 
-          // ── Engine-core (the first-paint slice of the {generators,domain} ──
-          // engine layers). Two kinds of module live here:
-          //
-          //  (a) The GENERATOR SPINE the entry ACTUALLY reaches eagerly — just
-          //      two tiny modules: the neighbour backlink (crossSettlementConflicts,
-          //      the deterministic wrapper — imported by the eager
-          //      domain/relationships/neighbourBackLink.js; it pulls only kernel/
-          //      prng), and the pipeline-rail labels (stepMetadata, metaForStep —
-          //      imported by the eager store/settlementSlice.js; zero imports).
-          //  (b) The DOMAIN VOCABULARY the engine leans on (ENGINE_SHARED_DOMAIN,
-          //      computed above) — the src/domain modules generators import,
-          //      which first-paint store/domain code needs too.
-          //
-          // FP-G8 OVER-PIN TRIM (2026-07-16): this pin USED to also force
-          // structuralValidator + helpers + priorityHelpers + institutionProbability
-          // + neighbourGenerator into engine-core, on the premise the entry reached
-          // the coherence draft-check (checkStructuralValidity) eagerly. That premise
-          // went STALE — checkDraftEdit (its sole first-paint consumer) is now lazy
-          // (rides the SettlementsPanel chunk), so NO eager module reaches those five
-          // anymore (verified: every real importer is the lazy `engine` chunk or a
-          // lazy component chunk; crossSettlementConflicts + stepMetadata reach none
-          // of them — the former imports only kernel/prng, the latter nothing). They
-          // are pure over-inclusions paying ~first-paint bytes for a coherence check
-          // that no longer runs on first paint. Un-pinned here (and dropped from the
-          // eager-graph seeds above) so they ride the lazy `engine` chunk with the
-          // generators. spatialData.js (structuralValidator's exclusive data table)
-          // follows them out of the eager `data` chunk.
-          //
-          // Under the blanket /src/generators/ → 'engine' rule below (and
-          // Rollup's default co-location of the shared domain into that chunk),
-          // the retained edges would drag the WHOLE 656 kB engine chunk into the
-          // first-paint static closure. Splitting them into this small chunk
-          // keeps their transitive imports within {engine-core, kernel, data} —
-          // never a heavy generator (economy/power/npc/history/narrative/
-          // faction/services/steps) — so 'engine-core' never pulls 'engine'.
-          // The big engine chunk imports engine-core, but that edge points the
-          // safe way: engine (lazy) → engine-core (first-paint), never the
-          // reverse. This is what keeps the 656 kB engine chunk OUT of first
-          // paint. Must match BEFORE /src/generators/ and BEFORE the /src/data/
-          // rule (some domain here re-exports data).
-          // @enforced-by tests/build/vendorPdfLazy.test.js (engine-absent-from-
-          // closure contract + first-paint byte budget).
+          // ── Pipeline receipt presentation (LAZY) ──────────────────
+          // stepMetadata has two consumers, and neither belongs to first paint:
+          // settlementSlice reads it through the memoized generation loader only
+          // after the user starts Generate, while PipelineRail itself is lazy UI.
+          // Pinning the leaf separately avoids the blanket generators rule below
+          // co-locating it with the full engine: a saved settlement can therefore
+          // render its rail without fetching the generation engine. This rule must
+          // stay before both engine-core and /src/generators/.
+          // @enforced-by tests/build/engineChunkLazy.test.js.
+          if (id.includes('/src/generators/steps/stepMetadata.js'))
+            return 'pipeline-metadata';
+
+          // ── Cross-settlement conflict projection (LAZY LEAF) ──────
+          // Owner-ratified 2026-07-26. NO generator imports this module; every
+          // consumer is display-side (SettlementsPanel, RelationshipsTab, and
+          // domain/relationships/neighbourBackLink, which save persistence loads
+          // at action time). It sat under the blanket /src/generators/ rule only
+          // because it fell out of the eager seed list, so three relationship
+          // surfaces had to fetch the whole generation engine to draw a conflict
+          // list. Its own chunk cuts that edge. Must stay before /src/generators/.
+          // @enforced-by tests/build/vendorPdfLazy.test.js (the engine size
+          //   ceiling — a re-merge of this leaf shows up there first).
+          if (id.includes('/src/generators/crossSettlementConflicts.js'))
+            return 'cross-settlement-conflicts';
+
+          // ── Template narrative layer (LAZY LEAF) ──────────────────
+          // Owner-ratified 2026-07-26. NO generator imports aiLayer; its single
+          // consumer is components/OutputContainer.jsx (runTemplateNarrative).
+          // Same shape as the pin above — the blanket generators rule co-located
+          // it with the engine, so the output surface paid the whole engine to
+          // render template prose. Must stay before /src/generators/.
+          // @enforced-by tests/build/vendorPdfLazy.test.js (the engine size
+          //   ceiling — a re-merge of this leaf shows up there first).
+          if (id.includes('/src/generators/aiLayer.js'))
+            return 'ai-layer';
+
+          // ── Strict content identity (small, legitimately EAGER) ───
+          // Campaign rows are synchronously hash-checked before entering state.
+          // Isolate that authority from the conservative generator-shared
+          // domain grouping so persistence admission is not coupled to its
+          // placement. Lazy engine/content modules safely import this eager
+          // authority in the opposite direction.
           if (
-            id.includes('/src/generators/crossSettlementConflicts.js') ||
-            id.includes('/src/generators/steps/stepMetadata.js') ||
-            isEngineSharedDomain(id)
+            id.includes('/src/domain/content/contentFingerprint.js')
+            || id.includes('/src/domain/deterministicSort.js')
           )
+            return 'content-identity';
+
+          // ── Lazy engine-shared presentation vocabulary ───────────
+          // These modules are imported by the generator and at least one lazy
+          // product surface, but never by the entry's static source graph.
+          // Keeping a small shared lazy chunk avoids duplicating them while
+          // preventing conservative engine-domain grouping from charging
+          // their implementation to first paint.
+          if (
+            id.includes('/src/domain/content/settlementContentProvenance.js')
+            || id.includes('/src/domain/content/customSupplyChainActivation.js')
+            || id.includes('/src/domain/content/customTradeEndpointProjection.js')
+            || id.includes('/src/domain/priorityBands.js')
+            || id.includes('/src/domain/townMap/glyphAssign.js')
+            || id.includes('/src/domain/townScene/customBuildingPresentation.js')
+          )
+            return 'engine-core-lazy';
+
+          // ── The number formatter (LAZY LEAF, ~343 B) ──────────────
+          // Owner-ratified 2026-07-26. FP-G11 excised formatNumber.js from
+          // ENGINE_SHARED_DOMAIN (the .delete list above) so it would stop
+          // paying first-paint bytes — but it then matched NO rule at all, and
+          // Rollup co-located the orphan into the big lazy `engine` chunk (its
+          // largest importer). formatCount has ~19 consumers spread across
+          // gallery, map, dossier, session and worldPulse surfaces, so that
+          // placement made every one of those UI chunks statically import the
+          // whole generation engine for a 343-byte formatter — the single
+          // largest anchor on the engine's static-importer set. Its own tiny
+          // chunk cuts 22 UI surfaces off the engine. Pure deterministic
+          // formatter ⇒ placement is behaviorally invisible.
+          // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte
+          //   budget + the engine size ceiling).
+          if (id.includes('/src/domain/formatNumber.js'))
+            return 'format-number';
+
+          // ── Engine-core (generator-shared domain vocabulary) ──────
+          // This derived grouping prevents Rollup from folding shared domain
+          // modules into the monolithic engine chunk. Its former eager anchors
+          // are gone: save persistence loads neighbourBackLink at action time,
+          // and strict content identity has the dedicated pin above. True eager
+          // simulation consumers still reach part of this vocabulary; the
+          // derived grouping and byte ratchet keep that cost visible. Keep this
+          // rule before /src/generators/.
+          if (isEngineSharedDomain(id))
             return 'engine-core';
 
           // ── The custom-content source seam (EAGER, pinned to kernel) ──
@@ -595,9 +658,12 @@ export default defineConfig({
           // slice's validation chokepoint (await import at add/update) and the
           // gallery's TIER_ORDER read fetch the schema alone, not the 41 kB
           // registry; the engine + compendium chunks statically import it the
-          // safe lazy→lazy way. Its only outward edge is deterministicSort
-          // (eager engine-core) — lazy→eager, safe.
-          if (id.includes('/src/domain/customContentSchema.js'))
+          // safe lazy→lazy way. Its only outward edge is deterministicSort in
+          // lazy engine-core, so the direction remains lazy→lazy.
+          if (
+            id.includes('/src/domain/customContentSchema.js')
+            || id.includes('/src/domain/content/userContentTunables.js')
+          )
             return 'custom-schema';
 
           // ── Generator engine (all generators together — they have ──

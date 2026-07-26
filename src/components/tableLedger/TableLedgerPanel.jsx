@@ -26,6 +26,10 @@ import {
 // picker and the clerk must see the SAME hardships every domain reader sees —
 // `stressors` / `stress` / `stresses` aliases and the bare-object legacy shape.
 import { canonStressors } from '../../domain/canonicalAccessors.js';
+import {
+  pendingEditOwnerScope,
+  selectPendingEditOwnerScope,
+} from '../../domain/pendingEditIntents.js';
 import Card from '../primitives/Card.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import Button from '../primitives/Button.jsx';
@@ -65,6 +69,7 @@ export default function TableLedgerPanel() {
   const settlement = useStore((s) => s.settlement);
   const phase = useStore((s) => s.phase);
   const queue = useStore((s) => s.pendingEditsQueue || []);
+  const ownerKey = useStore((s) => pendingEditOwnerScope(s).ownerKey);
   const queueEdit = useStore((s) => s.queueEdit);
   const commit = useStore((s) => s.commitPendingEdits);
   const revertAll = useStore((s) => s.revertPendingEdits);
@@ -93,7 +98,26 @@ export default function TableLedgerPanel() {
     return [];
   }, [kind, settlement]);
 
-  const tableEvents = queue.filter((e) => e.kind === 'table-event' && !e.reverted);
+  const scopedQueue = selectPendingEditOwnerScope(queue, ownerKey);
+  const tableEvents = scopedQueue
+    .filter((e) => e.kind === 'table-event' && !e.reverted);
+  const tableEventIds = tableEvents.map((event) => event.id);
+
+  async function commitTableEvents() {
+    const result = await commit({ intentIds: tableEventIds });
+    if (result?.status === 'partial') {
+      setNote(`${result.applied.length} entries reached the world; ${result.failed.length} remain for review.`);
+    } else if (result?.status === 'failed') {
+      setNote('Those entries could not be applied. They remain here for review.');
+    } else {
+      setNote('');
+    }
+  }
+
+  async function discardTableEvents() {
+    await revertAll({ intentIds: tableEventIds });
+    setNote('');
+  }
 
   if (!settlement) {
     return (
@@ -110,7 +134,7 @@ export default function TableLedgerPanel() {
   const targetChosen = !spec.needsTarget || !!targetRef;
   const canRecord = targetChosen && !incidentNeedsCanon;
 
-  function record() {
+  async function record() {
     const input = {
       kind, flavor,
       ...(spec.needsMagnitude ? { magnitude: band } : {}),
@@ -118,7 +142,10 @@ export default function TableLedgerPanel() {
     };
     const { ok, errors, record: rec } = validateTableEvent(input);
     if (!ok) { setNote(errors[0] || 'That entry could not be recorded.'); return; }
-    const queued = queueEdit('table-event', { directive: buildTableEffect(rec), record: rec });
+    const queued = await queueEdit(
+      'table-event',
+      { directive: buildTableEffect(rec), record: rec },
+    );
     if (!queued) { setNote('That entry could not be queued.'); return; }
     setFlavor(''); setTargetRef(''); setNote('');
   }
@@ -184,7 +211,10 @@ export default function TableLedgerPanel() {
             stressors: canonStressors(settlement).map((s) => String(s.type || s.name || '')).filter(Boolean),
             npcs: exposureTargets(settlement).map((t) => ({ id: t.ref, name: t.label })),
           }}
-          onAccept={(rec) => queueEdit('table-event', { directive: buildTableEffect(rec), record: rec })}
+          onAccept={async (rec) => queueEdit(
+            'table-event',
+            { directive: buildTableEffect(rec), record: rec },
+          )}
         />
       </div>
 
@@ -202,8 +232,8 @@ export default function TableLedgerPanel() {
             ))}
           </ul>
           <div style={{ display: 'flex', gap: SP.sm }}>
-            <Button variant="primary" size="sm" onClick={commit}>Let the world feel it</Button>
-            <Button variant="ghost" size="sm" onClick={revertAll} style={{ color: SLATE }}>Discard</Button>
+            <Button variant="primary" size="sm" onClick={commitTableEvents}>Let the world feel it</Button>
+            <Button variant="ghost" size="sm" onClick={discardTableEvents} style={{ color: SLATE }}>Discard</Button>
           </div>
         </div>
       )}

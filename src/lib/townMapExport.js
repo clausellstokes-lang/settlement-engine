@@ -51,6 +51,11 @@ import {
   buildTownMapDrawList, drawListToSvg, annotationDrawOps, readAnnotations,
 } from '../domain/townMap/index.js';
 import { fogMaskFragment, injectFog } from '../domain/townMap/fogGeometry.js';
+import {
+  projectSettlementForTownMapAudience,
+  projectTownMapDressForAudience,
+  projectTownMapModelForAudience,
+} from '../domain/townMap/audienceProjection.js';
 import { renderTownMapTokenRaster } from './townMapThumb.js';
 import { slugify } from '../kernel/slugify.js';
 
@@ -77,14 +82,16 @@ export const TOWN_MAP_EXPORT_FORMAT_LABELS = Object.freeze({
 });
 
 /**
- * The owner's town-map render model (honoring cosmetic mapEdits), or `null` when
- * there is nothing drawable (a degenerate map-less settlement). Pure.
+ * An already audience-projected town-map render model (honoring cosmetic
+ * mapEdits), or `null` when there is nothing drawable. Pure.
  * @param {any} settlement
+ * @param {'dm'|'player'|'public'} audience
  * @returns {import('../domain/townMap/townMapModel.js').TownMapModel | null}
  */
-function exportModel(settlement) {
+function exportModel(settlement, audience) {
   const model = buildTownMapModel(settlement, readMapEdits(settlement));
-  return hasDrawableMap(model) ? model : null;
+  if (!hasDrawableMap(model)) return null;
+  return projectTownMapModelForAudience(model, audience);
 }
 
 /**
@@ -131,16 +138,18 @@ export function exportLens(settlement, styleOverride) {
  * @returns {string | null}
  */
 export function townMapExportSvg(settlement, opts = {}) {
-  const model = exportModel(settlement);
+  const audience = opts.audience || 'dm';
+  const projectedSettlement = projectSettlementForTownMapAudience(settlement, audience);
+  const model = exportModel(projectedSettlement, audience);
   if (!model) return null;
   // THE SKIN REGISTRY (IT-4): resolve the ACTIVE style OBJECT through the saved bespoke collection
   // and DRAW with it, so a worn skin exports in lockstep with the pane (WYSIWYG). A base lens id and
   // a stale/absent bespoke id both resolve parchment-safe; every draw surface below reads ONE style.
-  const styleId = exportLens(settlement, opts.style);
-  const style = resolveActiveStyle(styleId, readBespokeStyles(readMapEdits(settlement)));
+  const styleId = exportLens(projectedSettlement, opts.style);
+  const style = resolveActiveStyle(styleId, readBespokeStyles(readMapEdits(projectedSettlement)));
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
-  const dress = opts.dress || null;
-  const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);
+  const dress = projectTownMapDressForAudience(opts.dress || null, audience);
+  const markers = annotationDrawOps(readAnnotations(readMapEdits(projectedSettlement)), audience, style);
   const base = markers.length === 0
     ? buildTownMapSvg(model, { style, width: size, height: size, dress })
     : drawListToSvg(buildTownMapDrawList(model, style, dress).concat(markers), { style, width: size, height: size });

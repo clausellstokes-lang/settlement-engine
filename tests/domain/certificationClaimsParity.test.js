@@ -10,7 +10,10 @@
  */
 import { describe, expect, it } from 'vitest';
 import { buildWorldCertification } from '../../src/domain/certification/certificationRead.js';
-import { soakPropertyLabel } from '../../src/domain/certification/certificationSchema.js';
+import {
+  CERTIFICATION_REQUIRED_PROPERTY_KEYS,
+  soakPropertyLabel,
+} from '../../src/domain/certification/certificationSchema.js';
 import { WORLD_CERTIFICATION_MANIFEST } from '../../src/domain/certification/certificationManifest.js';
 
 /** Collect every string in a view (headline/detail/lines). */
@@ -48,7 +51,7 @@ describe('V-10 claims-parity — a certified view claims ONLY what the soak reco
     years: 100,
     seedsTested: 8,
     ticksAdvanced: 4800,
-    properties: ['no_crash', 'rerun_identical', 'population_bounded'],
+    properties: [...CERTIFICATION_REQUIRED_PROPERTY_KEYS],
     runAt: '2026-07-20T00:00:00.000Z',
   };
   const manifest = {
@@ -78,8 +81,33 @@ describe('V-10 claims-parity — a certified view claims ONLY what the soak reco
     }
   });
 
-  it('never renders a proof line for a property the soak did NOT record', () => {
-    const omitted = soakPropertyLabel('no_stasis'); // not in soak.properties
-    for (const s of view.lines) expect(s.includes(omitted)).toBe(false);
+  it('does not render unknown evidence outside the closed property vocabulary', () => {
+    for (const line of view.lines.slice(1)) {
+      expect(CERTIFICATION_REQUIRED_PROPERTY_KEYS.some((key) =>
+        line.includes(soakPropertyLabel(key)))).toBe(true);
+    }
+  });
+});
+
+describe('V-10 claims-parity — measured evidence remains visibly partial', () => {
+  const soak = {
+    years: 30,
+    seedsTested: 2,
+    ticksAdvanced: 3120,
+    properties: ['no_crash', 'rerun_identical'],
+    runAt: '2026-07-20T00:00:00.000Z',
+  };
+  const manifest = {
+    manifestVersion: 1,
+    generatedAt: soak.runAt,
+    bands: [{ bandId: 'sig_measure', presetId: 'full_simulation', status: 'measured', soak }],
+  };
+
+  it('shows only receipt-backed checks and explicitly withholds certification', () => {
+    const view = buildWorldCertification({ manifest, presetId: 'full_simulation' });
+    expect(view.status).toBe('measured');
+    expect(view.detail).toMatch(/not full certification/i);
+    expect(view.lines).toHaveLength(1 + soak.properties.length);
+    expect(view.lines.join(' ')).not.toContain(soakPropertyLabel('no_stasis'));
   });
 });

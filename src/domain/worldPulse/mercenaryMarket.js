@@ -34,6 +34,9 @@
 
 import { readinessOf } from './martialReadiness.js';
 import { deployedQualityMult, SUPPLY_QUALITY_TUNING } from './supplyQuality.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 
 export const MERCENARY_MARKET_TUNING = Object.freeze({
   // ── war EXPOSURE (0..1) — how much force the standing situation demands ───────
@@ -90,9 +93,27 @@ function isStanding(inst) {
   return s !== 'removed' && s !== 'destroyed' && s !== 'remnant' && s !== 'ruined';
 }
 
+/**
+ * Boolean-only wrapper around the shared type guard.
+ *
+ * `InstLike` is intentionally a narrow compatibility shape. Exposing only a
+ * boolean here keeps TypeScript from treating its non-custom branch as
+ * impossible after the richer materialized-content guard runs.
+ *
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+function hasCustomContentProvenance(value) {
+  return isMaterializedCustomContent(value);
+}
+
 /** @param {InstLike|null|undefined} inst @returns {boolean} */
 function isMercenaryInstitution(inst) {
   if (!inst) return false;
+  // This regex is a native/unstamped compatibility vocabulary. A current
+  // custom definition cannot acquire rented-force mechanics from presentation
+  // text alone.
+  if (hasCustomContentProvenance(inst)) return false;
   const tags = Array.isArray(inst.tags) ? inst.tags.join(' ') : '';
   const hay = `${String(inst.name || '')} ${String(inst.category || '')} ${String(inst.priorityCategory || '')} ${tags}`;
   return MERCENARY_MARKET_PATTERN.test(hay);

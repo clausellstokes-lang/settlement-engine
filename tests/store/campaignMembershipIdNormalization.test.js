@@ -54,7 +54,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
   };
 });
 
-import { campaignSettlements } from '../../src/store/campaignSliceShared.js';
+import { campaignSettlements, findActiveCampaign } from '../../src/store/campaignSliceShared.js';
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 
 const makeStore = () => create(immer((set, get, api) => ({ ...createCampaignSlice(set, get, api) })));
@@ -67,6 +67,12 @@ const campaign = (id, settlementIds) => ({
 });
 
 describe('campaignSettlements — id normalization', () => {
+  test('the central campaign lookup normalizes number/string campaign ids', () => {
+    const campaigns = [campaign(42, [])];
+    expect(findActiveCampaign(campaigns, '42')).toBe(campaigns[0]);
+    expect(findActiveCampaign(campaigns, null)).toBeNull();
+  });
+
   test('string-stored id resolves a number-id save, and vice versa', () => {
     const state = {
       campaigns: [campaign('camp-1', ['alpha', '7', 9])],
@@ -142,5 +148,52 @@ describe('membership writers — the same String() model (no advancing-but-unrem
     const byId = Object.fromEntries(store.getState().campaigns.map(c => [c.id, c.settlementIds]));
     expect(byId['camp-a']).toEqual(['other']);
     expect(byId['camp-b']).toEqual([7]);
+  });
+
+  test('re-homing refuses atomically when the source campaign is advancing', () => {
+    const store = makeStore();
+    store.setState(s => {
+      s.campaigns = [campaign('camp-a', ['7', 'other']), campaign('camp-b', [])];
+      s.advanceInFlight = ['camp-a'];
+    });
+    const before = JSON.stringify(store.getState().campaigns);
+    expect(store.getState().addToCampaign('camp-b', 7)).toEqual({
+      ok: false,
+      reason: 'advance_in_flight',
+      campaignId: 'camp-a',
+    });
+    expect(JSON.stringify(store.getState().campaigns)).toBe(before);
+  });
+
+  test('adding refuses atomically when the target campaign is advancing', () => {
+    const store = makeStore();
+    store.setState(s => {
+      s.campaigns = [campaign('camp-a', ['7']), campaign('camp-b', [])];
+      s.advanceInFlight = ['camp-b'];
+    });
+    const before = JSON.stringify(store.getState().campaigns);
+    expect(store.getState().addToCampaign('camp-b', 'new')).toEqual({
+      ok: false,
+      reason: 'advance_in_flight',
+      campaignId: 'camp-b',
+    });
+    expect(JSON.stringify(store.getState().campaigns)).toBe(before);
+  });
+
+  test('removing refuses atomically while the campaign has a paused advance', () => {
+    const store = makeStore();
+    store.setState(s => {
+      s.campaigns = [{
+        ...campaign('camp-a', ['7', 'other']),
+        worldState: { pausedAdvance: { remaining: 2 } },
+      }];
+    });
+    const before = JSON.stringify(store.getState().campaigns);
+    expect(store.getState().removeFromCampaign('camp-a', 7)).toEqual({
+      ok: false,
+      reason: 'advance_paused',
+      campaignId: 'camp-a',
+    });
+    expect(JSON.stringify(store.getState().campaigns)).toBe(before);
   });
 });

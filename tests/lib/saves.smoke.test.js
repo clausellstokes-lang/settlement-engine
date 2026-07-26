@@ -201,20 +201,47 @@ describe('saves — supabase backend round-trip (mocked)', () => {
               select: () => ({ single: () => Promise.resolve({ data: { id }, error: null }) }),
             };
           },
-          update: (partial) => ({
-            eq: (_col, id) => {
-              mockState.lastUpdate = { id, partial };
-              const row = mockState.rows.find(r => r.id === id);
-              if (row) Object.assign(row, partial);
-              return Promise.resolve({ error: null });
-            },
-          }),
-          delete: () => ({
-            eq: (_col, id) => {
-              mockState.rows = mockState.rows.filter(r => r.id !== id);
-              return Promise.resolve({ error: null });
-            },
-          }),
+          update: (partial) => {
+            const filters = {};
+            const execute = () => {
+              const updated = mockState.rows.filter(row =>
+                Object.entries(filters).every(([col, value]) => row[col] === value));
+              for (const row of updated) Object.assign(row, partial);
+              mockState.lastUpdate = { id: filters.id, partial };
+              return Promise.resolve({
+                data: updated.map(row => ({ id: row.id })),
+                error: null,
+              });
+            };
+            const mutation = {
+              eq: (col, value) => {
+                filters[col] = value;
+                return mutation;
+              },
+              select: () => execute(),
+              then: (resolve, reject) => execute().then(resolve, reject),
+            };
+            return mutation;
+          },
+          delete: () => {
+            const filters = {};
+            const deletion = {
+              eq: (col, value) => {
+                filters[col] = value;
+                return deletion;
+              },
+              select: () => {
+                const deleted = mockState.rows.filter(row =>
+                  Object.entries(filters).every(([col, value]) => row[col] === value));
+                mockState.rows = mockState.rows.filter(row => !deleted.includes(row));
+                return Promise.resolve({
+                  data: deleted.map(row => ({ id: row.id })),
+                  error: null,
+                });
+              },
+            };
+            return deletion;
+          },
         };
         return chain;
       };
@@ -363,7 +390,8 @@ describe('saves — supabase backend round-trip (mocked)', () => {
 
   test('update sends only the partial fields that changed', async () => {
     mockState.rows.push({
-      id: 'upd-1', name: 'Original', tier: 'town', data: { name: 'Original' },
+      id: 'upd-1', user_id: 'test-user-id',
+      name: 'Original', tier: 'town', data: { name: 'Original' },
       toggles: null, campaign_state: { phase: 'draft' },
       updated_at: '2026-01-01T00:00:00Z',
     });

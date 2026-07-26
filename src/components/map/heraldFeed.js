@@ -22,7 +22,6 @@ import {
   ACTIVE_UI_STAGES,
   collectSettlementIds,
   outcomeSubjectDescriptor,
-  human,
 } from './WorldPulseData.js';
 
 /**
@@ -46,6 +45,26 @@ import {
 
 /** @param {unknown} v @returns {number} */
 function num(v) { return typeof v === 'number' && Number.isFinite(v) ? v : 0; }
+
+const FALLBACK_HEADLINE_BY_SECTION = Object.freeze({
+  war: 'A military report from the realm',
+  faith: 'A matter of faith in the realm',
+  trade: 'A change in the realm’s trade',
+  events: 'A matter of the realm',
+  divination: 'A possible turn ahead',
+  adjudication: 'A decision awaits review',
+});
+
+/** A section-level truth, never a prettified implementation identifier. */
+function fallbackHeadline(section) {
+  return FALLBACK_HEADLINE_BY_SECTION[section] || FALLBACK_HEADLINE_BY_SECTION.events;
+}
+
+/** An authored display label when the source actually carries one. */
+function labelOf(record) {
+  const label = record?.label;
+  return typeof label === 'string' && label.trim() ? label.trim() : null;
+}
 
 /** The provenance chip a record carries (non-canonical only shows). */
 function provenanceOf(record) {
@@ -76,10 +95,11 @@ export function toHeraldItem(record, forced) {
   const major = record.significance === 'major' || o.significance === 'major' || severity >= 0.72;
   const kind = String(o.impactKind || o.candidateType || record.impactKind || record.candidateType
     || (o.stressor && o.stressor.type) || record.type || o.type || '');
+  const authoredHeadline = record.headline || o.headline || labelOf(record) || labelOf(o);
   return {
     id: String(record.id ?? o.id ?? `${section}-${kind}-${record.tick ?? ''}`),
     section,
-    headline: String(record.headline || o.headline || human(kind) || 'A matter of the realm'),
+    headline: String(authoredHeadline || fallbackHeadline(section)),
     summary: String(record.summary || o.summary || ''),
     severity,
     major,
@@ -128,7 +148,11 @@ export function buildHeraldFeed(campaign, opts = {}) {
     for (const outcome of (pulse?.selectedOutcomes || [])) file(toHeraldItem(outcome));
     for (const entry of (pulse?.impactDigest || [])) file(toHeraldItem(entry));
     for (const stressor of (pulse?.resolvedStressors || [])) {
-      file(toHeraldItem({ ...stressor, headline: `${stressor.label || human(stressor.type)} resolved` }));
+      const label = labelOf(stressor);
+      file(toHeraldItem({
+        ...stressor,
+        headline: label ? `${label} has lifted` : 'A recorded pressure has lifted',
+      }));
     }
   }
 
@@ -138,9 +162,21 @@ export function buildHeraldFeed(campaign, opts = {}) {
   for (const stressor of (worldState.stressors || [])) {
     const stage = stressor.lifecycleStage || 'active';
     if (stressor.status === 'residual') {
-      file(toHeraldItem({ id: `echo-${stressor.id}`, ...stressor, stressor, headline: `${stressor.label || human(stressor.type)}, in living memory` }));
+      const label = labelOf(stressor);
+      file(toHeraldItem({
+        id: `echo-${stressor.id}`,
+        ...stressor,
+        stressor,
+        headline: label
+          ? `${label}, in living memory`
+          : 'A past pressure remains in living memory',
+      }));
     } else if (ACTIVE_UI_STAGES.has(stage)) {
-      file(toHeraldItem({ ...stressor, stressor, headline: stressor.label || human(stressor.type) }));
+      file(toHeraldItem({
+        ...stressor,
+        stressor,
+        headline: labelOf(stressor) || 'A strain on the realm',
+      }));
     }
   }
 

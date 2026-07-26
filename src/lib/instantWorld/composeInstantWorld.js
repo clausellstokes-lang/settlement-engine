@@ -75,9 +75,15 @@ const EPOCH_ISO = '1970-01-01T00:00:00.000Z';
  * until it passes the dossier trust gate (or the retry budget is spent).
  * @param {{ generateSettlementPipeline: Function }} engine
  * @param {{ slot:number, tier:string, seed:string, x:number, y:number, burgId:string }} site
+ * @param {{
+ *   customContent?: object,
+ *   tunables?: object,
+ *   explicitConfigFields?: object,
+ *   provenance?: object,
+ * } | null} contentRuntime
  * @returns {{ settlement:any, seed:string, retries:number }}
  */
-function mintSettlement(engine, site) {
+function mintSettlement(engine, site, contentRuntime) {
   let settlement = null;
   let usedSeed = site.seed;
   let retries = 0;
@@ -91,9 +97,24 @@ function mintSettlement(engine, site) {
       // (random_trade / random_culture / random_threat) resolve per-seed too.
       _randomizePriorities: true,
     };
-    // customContent {} pins a clean, headless, store-free generation (the
-    // determinism-test idiom) — no app custom institutions leak in.
-    settlement = engine.generateSettlementPipeline(config, null, { seed: usedSeed, customContent: {} });
+    // An omitted runtime preserves the composer's headless, vanilla contract.
+    // The store binding supplies one exact reviewed snapshot so an Instant
+    // World's initial members and its campaign cutoff are born from the same
+    // content constitution; the composer still never consults mutable app state.
+    const generationOptions = contentRuntime
+      ? {
+          seed: usedSeed,
+          customContent: contentRuntime.customContent || {},
+          contentTunables: contentRuntime.tunables || {},
+          explicitConfigFields: contentRuntime.explicitConfigFields || {},
+          contentProvenance: contentRuntime.provenance || null,
+        }
+      : { seed: usedSeed, customContent: {} };
+    settlement = engine.generateSettlementPipeline(
+      config,
+      null,
+      generationOptions,
+    );
     retries = attempt;
     const { blocking } = validateDossier(settlement);
     if (!blocking || blocking.length === 0) break;
@@ -109,6 +130,12 @@ function mintSettlement(engine, site) {
  * @param {{ realmSize?:string, tone?:string, mapKind?:string }} [args.basicConfig]
  * @param {string} [args.name]                       campaign name (default derived)
  * @param {{ generateSettlementPipeline:Function }} [args.engine]  injectable generator
+ * @param {{
+ *   customContent?:object,
+ *   tunables?:object,
+ *   explicitConfigFields?:object,
+ *   provenance?:object,
+ * }} [args.contentRuntime] exact reviewed runtime; omission means vanilla
  * @param {() => string} [args.idFactory]            injectable id source (determinism)
  * @param {() => string} [args.clock]                injectable ISO clock (determinism)
  * @returns {{
@@ -123,6 +150,7 @@ export function composeInstantWorld({
   basicConfig,
   name,
   engine = { generateSettlementPipeline },
+  contentRuntime,
   idFactory,
   clock,
 } = {}) {
@@ -139,7 +167,11 @@ export function composeInstantWorld({
 
   // ── Mint + wrap the tier-mixed members as CANON saves ──────────────────────
   const settlements = plan.sites.map((site) => {
-    const { settlement, seed: usedSeed, retries } = mintSettlement(engine, site);
+    const { settlement, seed: usedSeed, retries } = mintSettlement(
+      engine,
+      site,
+      contentRuntime || null,
+    );
     return {
       id: mkId(),
       name: settlement?.name || 'Settlement',

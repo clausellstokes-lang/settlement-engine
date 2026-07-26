@@ -60,6 +60,7 @@ import { defenseLedger } from './defenseLedger.js';
 import { governanceLedger } from './governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -265,7 +266,9 @@ function institutionNamesMatching(settlement, pattern) {
   // LIVE roster only — a calamity-ruined institution supplies no capacity in any of the
   // SUPPLY derivers this feeds (admin/food/transport/welfare/craft/magical) (ruin-filter class).
   const inst = liveInstitutions(settlement);
-  return inst.filter(i => pattern.test(String(i?.name || ''))).map(i => i?.name || '');
+  return inst
+    .map(nativeSemanticName)
+    .filter(name => name && pattern.test(name));
 }
 
 /**

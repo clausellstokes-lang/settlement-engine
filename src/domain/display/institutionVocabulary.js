@@ -146,6 +146,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   'Underground city': 'Repurposed tunnels and catacombs sheltering criminals, refugees, and everything that needs to stay out of daylight.',
   "Assassins' guild": 'A professional order of killers working through cut-outs and cover, acknowledged by no one and used by many.',
   'Citizen militia': 'Ordinary residents who drill and muster against local threats. Part-time soldiers with their own tools and no pay.',
+  'Household levy': 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.',
   'Palisade or earthworks': 'A wooden palisade or earthen bank thrown up to slow raiders and beasts. Rough defence for a place that cannot afford stone.',
   "Veteran's lodge": 'A drinking hall for old soldiers and mercenaries. Informal muscle, tall tales, and the occasional job for a band that needs swords.',
   'Town walls': 'Stone walls and gates ringing a town. Costly to raise and costly to keep, but they decide who gets in.',
@@ -217,7 +218,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   'Apothecary district': 'A cluster of competing apothecaries whose rivalry breeds specialists in surgery, herbs, and imported medicine.',
   'Mint (official)': 'A chartered mint striking standard coin for a region, and a steady source of revenue for the authority behind it.',
   'Auction house': 'A formal venue for selling high-value goods: estates, ships, art, livestock, and occasionally people, all on a premium.',
-  "Harbour master's office": 'The office that governs a port: berths, anchorage fees, and the enforcement of maritime law.',
+  "Harbour master's office": 'The office that governs navigable-water traffic: berths, anchorage fees, manifests, and port law.',
   "Furrier's district": 'A quarter of fur processors and traders dealing in a high-value luxury good.',
   'District markets (5-10)': 'Several specialized market districts, each given over to one thing: grain, cloth, metals, livestock, or exotica.',
   'Merchant guilds (50-100+)': 'Dozens of merchant guilds forming, in effect, a parliament of trade.',
@@ -664,4 +665,3 @@ export function badgeForInstitution(inst) {
   };
   return byPc[pc] || 'Institution';
 }
-

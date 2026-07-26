@@ -5,6 +5,9 @@
  * THE CONTAINER (design §5, Class A — cosmetic, map-native):
  *   { layoutVariant?: number,               // integer reroll salt (0/absent ⇒ base)
  *     pins?: { anchor, dx, dy }[],           // anchor-keyed position nudges
+ *     sceneOverrides?: {                     // anchor-keyed 3D presentation only
+ *       anchor, variantId?, skinId?, headingOffsetStep?
+ *     }[],
  *     legendPrefs?: { showLabels?, showLegend? } }  // view preferences
  *
  * LAWS enforced here (the constitutional ones for this file):
@@ -36,7 +39,8 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
 /** @typedef {{ x: number, y: number, label: string, audience: 'dm'|'player' }} MapAnnotation */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[], bespokeStyles?: Record<string, unknown>, seasonOverride?: string }} MapEdits */
+/** @typedef {{ anchor: string, variantId?: string, skinId?: string, headingOffsetStep?: number }} SceneOverride */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], sceneOverrides?: SceneOverride[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[], bespokeStyles?: Record<string, unknown>, seasonOverride?: string }} MapEdits */
 
 /** IT-3 SEASON OVERRIDE — the bounded season a DM can PIN on a map ("this is the winter map"),
  *  independent of the live world clock. The 4-4-5 calendar's four quarters; null (absent) is the
@@ -44,6 +48,33 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
  *  cosmetic-class key (checked ∉ PRIVATE_KEY_RE by the naming-trap test), the exact styleLens shape.
  *  @type {ReadonlyArray<'spring'|'summer'|'autumn'|'winter'>} */
 export const SEASON_OVERRIDE_IDS = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
+
+/**
+ * The architecture-kernel skins a scene override may request. The map-edit wall
+ * owns this small compatibility list because persisted state must be validated
+ * without importing the otherwise-dark architecture kernel. The town-scene
+ * compiler consumes the same ids and falls back to its settlement-coherent skin
+ * when an override is absent.
+ */
+export const SCENE_OVERRIDE_SKIN_IDS = Object.freeze([
+  'brickGuild',
+  'marbleTemple',
+  'ruinedGothic',
+  'steelModern',
+  'stoneAshlar',
+  'timberVillage',
+]);
+
+/**
+ * Finite visual variants with an implemented geometry meaning. Persisted scene
+ * edits may never mint arbitrary template identities: every admitted value must
+ * be understood by the scene compiler and covered by its unique-mesh budget.
+ * `default` remains represented by an absent field so unedited saves stay
+ * byte-identical.
+ *
+ * @type {ReadonlyArray<'mirror'>}
+ */
+export const SCENE_OVERRIDE_VARIANT_IDS = Object.freeze(['mirror']);
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
@@ -75,8 +106,9 @@ export const SEASON_OVERRIDE_IDS = Object.freeze(['spring', 'summer', 'autumn', 
 // reach a public projection. This is why only the CONTAINER key joins the schema list below (the
 // collection's dynamic ids + role fields are not — and cannot be — a fixed vocabulary).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', 'bespokeStyles', 'seasonOverride', // container
+  'layoutVariant', 'pins', 'sceneOverrides', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', 'bespokeStyles', 'seasonOverride', // container
   'anchor', 'dx', 'dy',                    // pin
+  'variantId', 'skinId', 'headingOffsetStep', // scene override
   'showLabels', 'showLegend',              // legendPrefs
   'x', 'y', 'label', 'audience',           // annotation
 ]);
@@ -107,6 +139,15 @@ const LEGEND_PREF_KEYS = Object.freeze(['showLabels', 'showLegend']);
 // clamps the FINAL position to the 0..1000 viewBox, so this only bounds the stored
 // value, never the render.
 const PIN_BOUND = 1000;
+
+// A scene override is deliberately much smaller than a transform. Horizontal
+// position remains the existing plan-space pin; elevation and scale remain
+// compiler-owned. The override can choose a bounded visual variant/skin and add
+// one of sixteen relative heading steps. This keeps 3D cosmetic editing from
+// becoming a second settlement layout.
+const MAX_SCENE_OVERRIDES = 500;
+const SCENE_OVERRIDE_ANCHOR_MAX = 180;
+const HEADING_STEP_COUNT = 16;
 
 // SM-5 DM annotations: coordinates live in the 0..1000 view space; labels are bounded
 // (a marker note, not prose); the count is capped so the blob can't grow unbounded.
@@ -196,6 +237,69 @@ export function readSeasonOverride(edits) {
 }
 
 /**
+ * Read the anchor-keyed 3D presentation overrides in canonical order. Malformed
+ * records and no-op records are dropped; duplicate anchors are last-writer-wins.
+ * A heading is a RELATIVE sixteenth-turn, canonicalized to -8..7. Position is
+ * intentionally absent: existing `pins` remain the sole plan-space authority.
+ * @param {MapEdits | null | undefined} edits
+ * @returns {SceneOverride[]}
+ */
+export function readSceneOverrides(edits) {
+  const raw = edits && Array.isArray(edits.sceneOverrides) ? edits.sceneOverrides : [];
+  /** @type {Map<string, SceneOverride>} */
+  const byAnchor = new Map();
+  for (const value of raw) {
+    if (!value || typeof value !== 'object') continue;
+    const anchor = typeof value.anchor === 'string'
+      ? value.anchor.trim().slice(0, SCENE_OVERRIDE_ANCHOR_MAX)
+      : '';
+    if (!anchor) continue;
+
+    const variantId = typeof value.variantId === 'string'
+      && /** @type {ReadonlyArray<string>} */ (SCENE_OVERRIDE_VARIANT_IDS)
+        .includes(value.variantId)
+      ? value.variantId
+      : undefined;
+    const skinId = typeof value.skinId === 'string' && SCENE_OVERRIDE_SKIN_IDS.includes(value.skinId)
+      ? value.skinId
+      : undefined;
+
+    let headingOffsetStep;
+    if (Number.isFinite(value.headingOffsetStep)) {
+      const rounded = Math.round(Number(value.headingOffsetStep));
+      headingOffsetStep = ((rounded + 8) % HEADING_STEP_COUNT + HEADING_STEP_COUNT) % HEADING_STEP_COUNT - 8;
+      if (headingOffsetStep === 0) headingOffsetStep = undefined;
+    }
+
+    if (!variantId && !skinId && headingOffsetStep == null) {
+      byAnchor.delete(anchor);
+      continue;
+    }
+    /** @type {SceneOverride} */
+    const normalized = { anchor };
+    if (variantId) normalized.variantId = variantId;
+    if (skinId) normalized.skinId = skinId;
+    if (headingOffsetStep != null) normalized.headingOffsetStep = headingOffsetStep;
+    byAnchor.set(anchor, normalized);
+  }
+  return [...byAnchor.values()]
+    .sort((a, b) => (a.anchor < b.anchor ? -1 : a.anchor > b.anchor ? 1 : 0))
+    .slice(0, MAX_SCENE_OVERRIDES);
+}
+
+/**
+ * Resolve one building's presentation override by stable anchor.
+ * @param {MapEdits | null | undefined} edits
+ * @param {string} anchor
+ * @returns {SceneOverride|null}
+ */
+export function sceneOverrideFor(edits, anchor) {
+  const key = typeof anchor === 'string' ? anchor : '';
+  if (!key) return null;
+  return readSceneOverrides(edits).find((entry) => entry.anchor === key) || null;
+}
+
+/**
  * The DM annotation markers, validated + canonicalized: each carries a whole-unit
  * in-bounds (x, y), a bounded non-empty label, and a fail-closed audience ('dm'
  * unless explicitly 'player'). Malformed / label-less entries are dropped; the list
@@ -277,6 +381,9 @@ export function normalizeMapEdits(edits) {
     out.pins = pins;
   }
 
+  const sceneOverrides = readSceneOverrides(edits);
+  if (sceneOverrides.length > 0) out.sceneOverrides = sceneOverrides;
+
   const lp = readLegendPrefs(edits);
   /** @type {MapEditLegendPrefs} */
   const legendPrefs = {};
@@ -336,6 +443,58 @@ export function withPinNudge(edits, anchor, ddx, ddy) {
   const nextPins = pins.filter((p) => p.anchor !== key);
   nextPins.push({ anchor: key, dx, dy });
   return normalizeMapEdits({ ...base, pins: nextPins });
+}
+
+/**
+ * Merge one anchor's 3D presentation override. `undefined` preserves a field;
+ * `null`, an empty string, or a default zero heading clears that field. When all
+ * fields clear, the record disappears and the whole edit container can collapse
+ * to null. Pure; never mutates the input.
+ * @param {MapEdits | null | undefined} edits
+ * @param {string} anchor
+ * @param {{ variantId?: string|null, skinId?: string|null, headingOffsetStep?: number|null }} patch
+ * @returns {MapEdits|null}
+ */
+export function withSceneOverride(edits, anchor, patch = {}) {
+  const key = typeof anchor === 'string'
+    ? anchor.trim().slice(0, SCENE_OVERRIDE_ANCHOR_MAX)
+    : '';
+  if (!key) return normalizeMapEdits(edits);
+  const base = normalizeMapEdits(edits) || {};
+  const list = readSceneOverrides(base).filter((entry) => entry.anchor !== key);
+  const current = sceneOverrideFor(base, key) || { anchor: key };
+  /** @type {SceneOverride} */
+  const next = { ...current, anchor: key };
+  if (Object.prototype.hasOwnProperty.call(patch, 'variantId')) {
+    if (typeof patch.variantId === 'string' && patch.variantId) next.variantId = patch.variantId;
+    else delete next.variantId;
+  }
+  if (Object.prototype.hasOwnProperty.call(patch, 'skinId')) {
+    if (typeof patch.skinId === 'string' && patch.skinId) next.skinId = patch.skinId;
+    else delete next.skinId;
+  }
+  if (Object.prototype.hasOwnProperty.call(patch, 'headingOffsetStep')) {
+    if (Number.isFinite(patch.headingOffsetStep)) next.headingOffsetStep = Number(patch.headingOffsetStep);
+    else delete next.headingOffsetStep;
+  }
+  list.push(next);
+  return normalizeMapEdits({ ...base, sceneOverrides: list });
+}
+
+/**
+ * Remove one anchor's complete scene override.
+ * @param {MapEdits | null | undefined} edits
+ * @param {string} anchor
+ * @returns {MapEdits|null}
+ */
+export function withoutSceneOverride(edits, anchor) {
+  const key = typeof anchor === 'string' ? anchor : '';
+  const base = normalizeMapEdits(edits) || {};
+  if (!key) return normalizeMapEdits(base);
+  return normalizeMapEdits({
+    ...base,
+    sceneOverrides: readSceneOverrides(base).filter((entry) => entry.anchor !== key),
+  });
 }
 
 /** ADD a DM annotation marker at (x, y) with a label + audience. Returns a NEW

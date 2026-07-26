@@ -135,7 +135,7 @@ export default function TreatyPanel({ campaign, nameById }) {
 
   return (
     <div data-testid="treaty-panel" style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
-      <Section title="Treaties" count={`${treaties.length}`}>
+      <Section heading="Treaties" count={`${treaties.length}`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
           {treaties.map((doc) => <TreatyCard key={doc.pairKey} doc={doc} nameById={nameById} worldState={worldState} />)}
         </div>

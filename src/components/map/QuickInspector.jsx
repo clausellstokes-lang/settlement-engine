@@ -34,6 +34,7 @@ import { useMemo } from 'react';
 import { FS, SLATE, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
+import { settlementSizeLabel } from '../../domain/display/humanizeEngineTokens.js';
 
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
@@ -50,17 +51,17 @@ export default function QuickInspector() {
   const saves = useStore(s => s.savedSettlements);
 
   const save = useMemo(() => {
-    if (!hoveredId) return null;
-    return (saves || []).find(s => s.id === hoveredId) || null;
+    if (hoveredId == null) return null;
+    return (saves || []).find(s => String(s.id) === String(hoveredId)) || null;
   }, [hoveredId, saves]);
 
-  if (!hoveredId) return null;
-  if (selectedId) return null;  // click-selection takes the slot
+  if (hoveredId == null) return null;
+  if (selectedId != null) return null;  // click-selection takes the slot
   if (!save) return null;
 
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
-  const tier = s.tier || save.tier || EMPTY_VALUE;
+  const size = settlementSizeLabel(s.tier || save.tier, EMPTY_VALUE);
   const pop = formatCount(s.population || 0);
   const pressure = s.pressureSentence || '';
   const topHook = (() => {
@@ -114,7 +115,7 @@ export default function QuickInspector() {
       <div style={{
         fontSize: FS.xxs, color: MUTED, marginTop: 1,
       }}>
-        {String(tier).toUpperCase()} · {pop} pop
+        {size} · {pop} pop
       </div>
       {pressure && (
         <div style={{

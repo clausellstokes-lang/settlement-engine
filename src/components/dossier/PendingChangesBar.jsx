@@ -1,12 +1,13 @@
 /**
  * PendingChangesBar.jsx — pending-changes floating drawer.
  *
- * Renders below the dossier title whenever the store has unapplied
- * edits in `pendingEditsQueue`. Lists count + categories, with three
- * actions:
+ * Renders below the dossier title whenever the current save/draft namespace has
+ * unapplied edits in `pendingEditsQueue`. Lists count + categories, with four
+ * exact-scope actions:
  *   - Preview cascade → opens the side panel showing structured deltas
- *   - Commit          → flushes the queue against the live settlement
- *   - Revert          → drops the queue (no changes applied)
+ *   - Review again    → refreshes retained stale/failed work before retry
+ *   - Commit          → applies only the visible intent ids
+ *   - Discard         → removes only the visible staged intents
  *
  * Self-gates inside on `flag('inlineEdit')` and `hasPending(queue)`.
  *
@@ -19,6 +20,10 @@ import { useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { hasPending, activeEdits } from '../../domain/pendingEdits.js';
+import {
+  pendingEditOwnerScope,
+  selectPendingEditOwnerScope,
+} from '../../domain/pendingEditIntents.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { sans, FS, SP, swatch } from '../theme.js';
 import CascadePreviewPanel from './CascadePreviewPanel.jsx';
@@ -29,51 +34,115 @@ const AMBER = swatch['#D08020'];
 const AMBER_BG = swatch['#FBEAD0'];
 const INK = swatch['#1B1408'];
 
+function npcName(settlement, payload) {
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  if (payload?.npcId != null) {
+    const byId = npcs.find((npc) => String(npc?.id) === String(payload.npcId));
+    if (byId?.name) return byId.name;
+  }
+  // Legacy previews may still contain an index-only primitive. New queue
+  // envelopes retain only npcId, so reordering cannot mislabel reviewed work.
+  const index = Number(payload?.npcIndex);
+  const byIndex = Number.isInteger(index) ? npcs[index] : null;
+  if (byIndex?.name) return byIndex.name;
+  return 'NPC';
+}
+
+function words(value) {
+  return String(value || '').replace(/[_-]+/g, ' ').trim();
+}
+
+/** Turn internal edit operations into table-facing language. */
+export function describePendingEdit(edit, settlement) {
+  const name = npcName(settlement, edit?.payload);
+  switch (edit?.kind) {
+    case 'rename-npc':         return `renamed ${edit.payload?.newName || name}`;
+    case 'rename-faction':     return `renamed ${edit.payload?.newName || 'faction'}`;
+    case 'rename-settlement':  return 'renamed settlement';
+    case 'add-institution':    return `added ${edit.payload?.label || 'institution'}`;
+    case 'remove-institution': return `removed ${edit.payload?.label || 'institution'}`;
+    case 'add-resource':       return 'added resource';
+    case 'remove-resource':    return 'removed resource';
+    case 'add-stressor':       return 'added stressor';
+    case 'remove-stressor':    return 'removed stressor';
+    case 'edit-prose':         return 'edited prose';
+    case 'edit-npc':           return `changed ${name}'s ${words(edit.payload?.facetKind) || 'details'}`;
+    case 'reassign-npc':       return `reassigned ${name}`;
+    case 'stasis-npc':         return `set ${name} aside (${words(edit.payload?.reason) || 'stasis'})`;
+    case 'return-npc':         return `returned ${name} to active duty`;
+    case 'ransom-npc':         return `authorized ransom for ${name}`;
+    case 'rescue-npc':         return `planned rescue for ${name}`;
+    case 'champion-npc':       return `backed ${name}`;
+    case 'recall-npc':         return `recalled ${name}`;
+    case 'table-event':        return 'recorded a table event';
+    default:                   return 'queued dossier change';
+  }
+}
+
 export default function PendingChangesBar() {
   const enabled = flag('inlineEdit');
   const queue = useStore(s => s.pendingEditsQueue || []);
+  const ownerKey = useStore(s => pendingEditOwnerScope(s).ownerKey);
+  const settlement = useStore(s => s.settlement);
   const commit = useStore(s => s.commitPendingEdits);
   const revert = useStore(s => s.revertPendingEdits);
+  const refresh = useStore(s => s.refreshPendingEdits);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [resultNote, setResultNote] = useState('');
   // Staging and committing changes is a heavy-authoring write surface; the
   // locked mobile policy keeps it on desktop (mobile writes = rename + save).
   // On a narrow viewport we still surface the unsaved-count read so the user
   // knows a desktop session is mid-edit, but withhold the Commit/Revert/Preview
   // actions behind a calm note rather than rendering four write buttons inline.
   const mobile = useIsMobile();
+  const scopedQueue = selectPendingEditOwnerScope(queue, ownerKey);
 
   if (!enabled) return null;
-  if (!hasPending(queue)) return null;
+  if (!hasPending(scopedQueue)) return null;
 
-  const active = activeEdits(queue);
+  const active = activeEdits(scopedQueue);
   const count = active.length;
+  const failedCount = active.filter((intent) =>
+    intent.status === 'failed' || intent.status === 'stale').length;
   const noun = count === 1 ? 'change' : 'changes';
+  const intentIds = active.map((intent) => intent.id);
+  const attentionIds = active
+    .filter((intent) => intent.status === 'failed' || intent.status === 'stale')
+    .map((intent) => intent.id);
 
   // Short categorical summary: "renamed Captain · added Tavern".
   // Pull the first 2-3 distinctive edits and label them.
-  const summary = active.slice(0, 3).map(e => {
-    switch (e.kind) {
-      case 'rename-npc':         return `renamed ${e.payload?.newName || 'NPC'}`;
-      case 'rename-faction':     return `renamed ${e.payload?.newName || 'faction'}`;
-      case 'rename-settlement':  return `renamed settlement`;
-      case 'add-institution':    return `added ${e.payload?.label || 'institution'}`;
-      case 'remove-institution': return `removed ${e.payload?.label || 'institution'}`;
-      case 'add-resource':       return `added resource`;
-      case 'remove-resource':    return `removed resource`;
-      case 'add-stressor':       return `added stressor`;
-      case 'remove-stressor':    return `removed stressor`;
-      case 'edit-prose':         return `edited prose`;
-      default:                   return e.kind;
-    }
-  }).join(' · ');
+  const summary = active.slice(0, 3)
+    .map((edit) => describePendingEdit(edit, settlement))
+    .join(' · ');
 
-  const onCommit = () => {
+  const onCommit = async () => {
     Funnel.track(EVENTS.EDIT_COMMITTED, { count });
-    if (typeof commit === 'function') commit();
+    if (typeof commit !== 'function') return;
+    const result = await commit({ intentIds });
+    if (result?.status === 'partial') {
+      setResultNote(`${result.applied.length} applied; ${result.failed.length} still need attention.`);
+    } else if (result?.status === 'failed') {
+      setResultNote('Nothing was applied. The changes remain here for review.');
+    } else {
+      setResultNote('');
+    }
   };
-  const onRevert = () => {
+  const onDiscard = async () => {
     Funnel.track(EVENTS.EDIT_REVERTED, { count });
-    if (typeof revert === 'function') revert();
+    if (typeof revert === 'function') await revert({ intentIds });
+    setResultNote('');
+  };
+  const onRefresh = async () => {
+    if (typeof refresh !== 'function') return;
+    const result = await refresh({ intentIds: attentionIds });
+    if (result?.status === 'refreshed') {
+      setResultNote('Reviewed against the current world. Preview again, then commit.');
+    } else if (result?.status === 'partial') {
+      setResultNote(`${result.refreshed.length} reviewed; ${result.failed.length} still need attention.`);
+    } else {
+      setResultNote('These changes still cannot be applied. They remain here for review.');
+    }
   };
   const onPreview = () => {
     Funnel.track(EVENTS.EDIT_CASCADE_PREVIEWED, { count });
@@ -98,7 +167,9 @@ export default function PendingChangesBar() {
         }}
       >
         <span style={{ fontWeight: 700, color: AMBER }}>
-          {count} unsaved {noun}
+          {failedCount > 0
+            ? `${failedCount} ${failedCount === 1 ? 'change needs' : 'changes need'} attention`
+            : `${count} unsaved ${noun}`}
         </span>
         {summary && (
           <span style={{ color: swatch['#3A2F18'], flex: 1, minWidth: 0 }}>
@@ -111,16 +182,26 @@ export default function PendingChangesBar() {
           </span>
         ) : (
           <>
+            {attentionIds.length > 0 && (
+              <Button variant="secondary" size="sm" onClick={onRefresh}>
+                Review again
+              </Button>
+            )}
             <Button variant="ghost" size="sm" onClick={onPreview}>
               Preview cascade →
             </Button>
             <Button variant="primary" size="sm" onClick={onCommit}>
               Commit
             </Button>
-            <Button variant="ghost" size="sm" onClick={onRevert}>
-              Revert
+            <Button variant="ghost" size="sm" onClick={onDiscard}>
+              Discard
             </Button>
           </>
+        )}
+        {resultNote && (
+          <span role="alert" style={{ flexBasis: '100%', color: swatch.danger, lineHeight: 1.5 }}>
+            {resultNote}
+          </span>
         )}
       </div>
 

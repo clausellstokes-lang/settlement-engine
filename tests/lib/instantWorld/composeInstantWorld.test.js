@@ -57,6 +57,69 @@ describe('composeInstantWorld — determinism', () => {
   });
 });
 
+describe('composeInstantWorld — reviewed content runtime', () => {
+  test('threads one exact runtime snapshot through every member mint and retry', () => {
+    const calls = [];
+    const runtime = {
+      customContent: { institutions: [{ name: 'Charter Hall' }] },
+      tunables: { priorityEconomy: 73 },
+      explicitConfigFields: {},
+      provenance: {
+        scope: 'campaign',
+        bindingHash: 'a'.repeat(64),
+      },
+    };
+    const engine = {
+      generateSettlementPipeline: (config, neighbour, options) => {
+        calls.push({ config, neighbour, options });
+        return { name: 'Runtime Pin', tier: config.settType };
+      },
+    };
+
+    const { settlements } = composeInstantWorld({
+      seed: 'runtime-pin',
+      basicConfig: { realmSize: 'small' },
+      engine,
+      contentRuntime: runtime,
+    });
+
+    expect(calls).toHaveLength(settlements.length);
+    for (const call of calls) {
+      expect(call.neighbour).toBeNull();
+      expect(call.options).toMatchObject({
+        customContent: runtime.customContent,
+        contentTunables: runtime.tunables,
+        explicitConfigFields: runtime.explicitConfigFields,
+        contentProvenance: runtime.provenance,
+      });
+      expect(call.options.seed).toEqual(expect.any(String));
+    }
+  });
+
+  test('omission retains the explicit headless vanilla generator contract', () => {
+    const calls = [];
+    const engine = {
+      generateSettlementPipeline: (_config, _neighbour, options) => {
+        calls.push(options);
+        return { name: 'Vanilla Pin' };
+      },
+    };
+
+    composeInstantWorld({
+      seed: 'vanilla-contract',
+      basicConfig: { realmSize: 'small' },
+      engine,
+    });
+
+    for (const options of calls) {
+      expect(options).toEqual({
+        seed: expect.any(String),
+        customContent: {},
+      });
+    }
+  });
+});
+
 describe('composeInstantWorld — appropriate-N mapping (tier-mixed)', () => {
   test.each([['small', 5], ['medium', 9], ['large', 14]])('%s realm → %i settlements', (realmSize, n) => {
     const { settlements, campaign } = composeInstantWorld({ seed: `n-${realmSize}`, basicConfig: { realmSize } });

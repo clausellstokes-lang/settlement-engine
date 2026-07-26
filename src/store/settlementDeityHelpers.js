@@ -18,10 +18,11 @@
  * byte-identical. They dispatch via applyEvent and never touch the cloud-write
  * suppression / flush invariant themselves.
  *
- * Wave 4f composition note: deity-ref RESOLUTION runs through
- * buildRegistryFromStore → the customRegistry, which now carries the `deities`
- * category — so an authored deity ref resolves and the embed path is LIVE (the
- * dormant-but-correct 4a state is closed).
+ * Wave 4f composition note: deity-ref RESOLUTION runs through a customRegistry
+ * built from the active execution context. Standalone work uses the editable
+ * account library; campaign work uses its pinned content binding. The registry
+ * carries the `deities` category, so authored deity refs resolve without letting
+ * a later account edit rewrite established campaign canon.
  *
  * Identity minting (the cross-account collision fix): the ref we EMBED is NOT the
  * `custom:<localUid>` we resolve with — it is a stable, account-scoped identity
@@ -33,16 +34,50 @@
  * accepts the incoming `custom:<localUid>`; only the embedded identity changed.
  */
 
-import { buildRegistryFromStore, mintDeityRef } from '../lib/customRegistry.js';
+import { buildRegistry, mintDeityRef } from '../lib/customRegistry.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
-import { deitySnapshotFrom } from './deitySnapshot.js';
+import { deitySnapshotFrom } from '../domain/deitySnapshot.js';
+import { customContentForActiveContext } from './activeCustomContentContext.js';
 
-// deitySnapshotFrom lives in the zero-import ./deitySnapshot.js leaf since the
-// de-eager lane (2026-07-19): this module is now loaded ONLY via dynamic import
-// (the async store actions), and the composer field's static need for the
-// snapshot builder must not re-anchor the whole registry graph. Re-exported
-// verbatim so existing importers keep the single source of truth.
-export { deitySnapshotFrom } from './deitySnapshot.js';
+// The zero-import authority lives in domain so headless preview/event paths and
+// store intent paths share one source without reversing the engine dependency.
+// This module remains dynamically loaded; re-exporting the leaf preserves the
+// established helper API without re-anchoring the registry graph.
+export { deitySnapshotFrom } from '../domain/deitySnapshot.js';
+
+// ── THE ONE premium gate for deity writes (owner-queue #27, Wave R-0 Lane D) ──
+// The frozen typed refusal the gate returns. `code` is the machine handle;
+// reasons/unlocks carry the SAME translated sentences the affordance manifest's
+// SET_PRIMARY_DEITY / IMPOSE_CULT predicates speak (the manifest is a lazy leaf
+// the store must not import, so the sentences are pinned equal by test instead
+// of by import — tests/store/deityWriteGate.test.js).
+export const DEITY_WRITE_REFUSAL = Object.freeze({
+  refused: true,
+  code: 'custom_content_required',
+  reasons: Object.freeze(['Deities come from your custom Compendium.']),
+  unlocks: Object.freeze(['Requires premium custom content.']),
+});
+
+/**
+ * The single-source premium/tier gate every deity WRITE consults at the store
+ * seam. It wraps the authoritative entitlement selector — authSlice's
+ * `canUseCustomContent()` (elevated roles or a tier whose TIER_GATE grants
+ * customContent) — the exact selector every UI mirror (composer ctx, panel
+ * branches, manifest predicate) already reads. FAIL-CLOSED: a state without
+ * the selector refuses, exactly like the UI spelling
+ * `typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false`.
+ *
+ * Returns null when the write may proceed, else the frozen typed refusal
+ * (never a log entry — callers can distinguish it from an applyEvent envelope
+ * by `refused: true`).
+ * @param {any} state  the store state (a slice `get()` result)
+ * @returns {typeof DEITY_WRITE_REFUSAL | null}
+ */
+export function deityWriteGate(state) {
+  const entitled = typeof state?.canUseCustomContent === 'function'
+    && state.canUseCustomContent() === true;
+  return entitled ? null : DEITY_WRITE_REFUSAL;
+}
 
 /**
  * Assign (or clear) the current settlement's primary deity — the STORE half of
@@ -52,16 +87,24 @@ export { deitySnapshotFrom } from './deitySnapshot.js';
  * payload. The pure mutate.js handler commits it.
  *
  * Pass a falsy `deityRefId` to clear the assignment (returns to dormant). Premium
- * gating is enforced at the UI (canUseCustomContent); a free user who somehow
- * dispatched this still can't advance time, so the assignment is inert (D.0).
+ * gating is ENFORCED HERE at the store seam (deityWriteGate → the authoritative
+ * canUseCustomContent selector, fail-closed): an unentitled dispatch is refused
+ * with the typed DEITY_WRITE_REFUSAL before any event is built — the documented
+ * D.0 fail-open ("enforced at the UI only") is closed (owner-queue #27).
  *
  * @param {() => any} get           the slice's store getter
  * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to clear
- * @returns the resulting log entry, or null if nothing happened
+ * @returns the resulting log entry, the typed refusal, or null if nothing happened
  */
 export function setPrimaryDeityImpl(get, deityRefId) {
   const state = get();
   if (!state.settlement) return null;
+
+  // FAIL-CLOSED premium gate (the single source) — refused BEFORE any dispatch,
+  // clear path included: a lapsed account is read-only, so even shedding the
+  // patron is a write it may not make.
+  const refusal = deityWriteGate(state);
+  if (refusal) return refusal;
 
   if (!deityRefId) {
     return state.applyEvent({
@@ -73,7 +116,7 @@ export function setPrimaryDeityImpl(get, deityRefId) {
 
   // Resolve the ref → authored deity → frozen snapshot. Resolution happens HERE
   // (intent time, store layer), never inside the pulse.
-  const registry = buildRegistryFromStore(get);
+  const registry = buildRegistry(customContentForActiveContext(state));
   const entry = registry.resolve(deityRefId);
   const raw = entry?.raw;
   if (!raw) return null;                              // unknown ref — refuse.
@@ -98,14 +141,23 @@ export function setPrimaryDeityImpl(get, deityRefId) {
  * cult can't be seated — so a full small settlement or a patron-niche clash never
  * logs a no-op.
  *
+ * Premium gating is ENFORCED HERE at the store seam, exactly as in
+ * setPrimaryDeityImpl: deityWriteGate refuses an unentitled dispatch (typed,
+ * fail-closed) before the remove path, the resolution, or the placement probe run.
+ *
  * @param {() => any} get            the slice's store getter
  * @param {string|null} deityRefId   a `custom:<localUid>` ref, or null to remove
  * @param {string|null} [removeRef]  when clearing, the specific cult ref to drop
- * @returns the resulting log entry, or null if nothing happened
+ * @returns the resulting log entry, the typed refusal, or null if nothing happened
  */
 export function imposeCultImpl(get, deityRefId, removeRef = null) {
   const state = get();
   if (!state.settlement) return null;
+
+  // FAIL-CLOSED premium gate (the single source) — same seam as setPrimaryDeity.
+  const refusal = deityWriteGate(state);
+  if (refusal) return refusal;
+
   const config = state.settlement.config || {};
 
   if (!deityRefId) {
@@ -121,7 +173,7 @@ export function imposeCultImpl(get, deityRefId, removeRef = null) {
   }
 
   // Resolve the ref → authored deity → frozen snapshot (intent time, store layer).
-  const registry = buildRegistryFromStore(get);
+  const registry = buildRegistry(customContentForActiveContext(state));
   const entry = registry.resolve(deityRefId);
   const raw = entry?.raw;
   if (!raw) return null;                              // unknown ref — refuse.

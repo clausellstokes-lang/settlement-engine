@@ -195,7 +195,13 @@ function MapLensSwitcher({ styleIds, bespokeSkins, activeLens, persisted, onPick
     <div
       data-town-lens-switcher
       style={{
-        position: 'absolute', top: SP.sm, left: SP.sm, zIndex: 4,
+        // The projection switch occupies the first toolbar row at the same
+        // corner. Reserve its measured small-control height plus one spacing
+        // unit so both controls remain visible and independently clickable.
+        // This is deliberately a fixed chrome lane: using DOM order or z-index
+        // to resolve the collision leaves one accessible button tree painted
+        // underneath the other.
+        position: 'absolute', top: SP.sm + 44, left: SP.sm, zIndex: 4,
         display: 'flex', flexWrap: 'wrap', gap: 2, maxWidth: 'calc(100% - 24px)',
         padding: 2, background: CARD, border: `1px solid ${BORDER}`,
         boxShadow: ELEV[1],

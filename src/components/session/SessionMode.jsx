@@ -35,6 +35,7 @@ import { formatCount } from '../../domain/formatNumber.js';
 import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
+import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -180,6 +181,10 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
 
+  const guide = useMemo(
+    () => composeSettlementQuickGuide(settlement),
+    [settlement],
+  );
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
   const npcs = useMemo(() => (settlement?.npcs || [])
@@ -210,7 +215,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // which keeps render free of ref reads.
   const nav = [
     entries.length ? ["Tonight", "sf-session-tonight"] : null,
-    (dims.length || recent.length || settlement?.pressureSentence) ? ["State", "sf-session-state"] : null,
+    (dims.length || recent.length || guide.immediatePressure.text) ? ["State", "sf-session-state"] : null,
     war ? ["War", "sf-session-war"] : null,
     faithVisible ? ["Faith", "sf-session-faith"] : null,
     npcs.length ? ["NPCs", "sf-session-npcs"] : null,
@@ -284,15 +289,57 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           display: 'flex', flexDirection: 'column', gap: 26,
           scrollPaddingTop: 12,
         }}>
+          {/* Shared first glance: identity + three canonical defining truths. */}
+          <section aria-label="Settlement quick guide">
+            <SectionTitle>Settlement quick guide</SectionTitle>
+            <div style={{
+              padding: '12px 16px', background: swatch.white,
+              border: `1px solid ${BORDER}`,
+            }}>
+              <div style={{
+                fontFamily: serif, fontSize: FS.lg,
+                color: INK_DEEP, lineHeight: 1.5,
+              }}>
+                {guide.identitySentence}
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                gap: 10, marginTop: 10,
+              }}>
+                {guide.definingTruths.map((truth) => (
+                  <div key={truth.id} style={{
+                    paddingLeft: 9,
+                    borderLeft: `2px solid ${BORDER}`,
+                  }}>
+                    <div style={{
+                      fontSize: FS.nano, fontWeight: 800,
+                      letterSpacing: '0.07em', textTransform: 'uppercase',
+                      color: MUTED,
+                    }}>
+                      {truth.label}
+                    </div>
+                    <div style={{
+                      marginTop: 2,
+                      fontSize: FS.sm, color: BODY, lineHeight: 1.45,
+                    }}>
+                      {truth.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Pressure line — the one-sentence tension, front and center. */}
-          {settlement?.pressureSentence && (
+          {guide.immediatePressure.text && (
             <div style={{
               padding: '12px 16px', background: swatch.white,
               border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD_ACCENT}`,
               fontFamily: serif, fontSize: FS.xl,
               fontStyle: 'italic', color: INK_DEEP, lineHeight: 1.5,
             }}>
-              {settlement.pressureSentence}
+              {guide.immediatePressure.text}
             </div>
           )}
 

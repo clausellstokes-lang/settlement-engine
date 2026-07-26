@@ -17,6 +17,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useStore } from '../store/index.js';
+import {
+  readHeraldCommandSession,
+  writeHeraldCommandSession,
+} from '../components/map/heraldCommandSession.js';
 
 // Plain-language, GM-facing text for the engine's known advance-failure reasons
 // (P10/P11): the raw reason code goes to console.warn, never the toast.
@@ -98,8 +102,17 @@ export function useRealmInspector({
         && advanceInFlightList.some(id => String(id) === String(activeCampaignId))))
   );
 
-  const [inspectorOpen, setInspectorOpen] = useState(false);
-  const [inspectorSection, setInspectorSection] = useState('dashboard');
+  const initialHeraldSession = readHeraldCommandSession(activeCampaignId);
+  const [inspectorOpen, setInspectorOpen] = useState(
+    () => initialHeraldSession?.open === true,
+  );
+  const [inspectorSection, setInspectorSection] = useState(
+    () => initialHeraldSession?.section || 'dashboard',
+  );
+  const heraldSessionCampaignRef = useRef(
+    activeCampaignId == null ? null : String(activeCampaignId),
+  );
+  const skipHeraldPersistRef = useRef(false);
   // The dock's three-state size (plan §1). Starts at 'default' (today's 420px)
   // and is restored from sessionStorage once on mount below.
   const [inspectorSize, setInspectorSizeState] = useState('default');
@@ -141,6 +154,36 @@ export function useRealmInspector({
   // one-shot deep-link consumption below can drive it the way the workspace request
   // drives the Inspector section.
   const [showSimulationRules, setShowSimulationRules] = useState(false);
+
+  // The Realm route unmounts when a linked dossier opens. Restore the same
+  // campaign's dock/section on browser-back, and keep campaign switches isolated
+  // so one realm never inherits another realm's reading position.
+  useEffect(() => {
+    if (activeCampaignId == null) return;
+    const campaignKey = String(activeCampaignId);
+    if (heraldSessionCampaignRef.current === campaignKey) return;
+    heraldSessionCampaignRef.current = campaignKey;
+    skipHeraldPersistRef.current = true;
+    const restored = readHeraldCommandSession(campaignKey);
+    // Sync a session-owned presentation record into local UI state. The campaign
+    // identity guard makes this a one-shot transition, not a render feedback loop.
+    setInspectorOpen(restored?.open === true);
+    setInspectorSection(restored?.section || 'dashboard');
+  }, [activeCampaignId]);
+
+  useEffect(() => {
+    if (activeCampaignId == null) return;
+    const campaignKey = String(activeCampaignId);
+    if (heraldSessionCampaignRef.current !== campaignKey) return;
+    if (skipHeraldPersistRef.current) {
+      skipHeraldPersistRef.current = false;
+      return;
+    }
+    writeHeraldCommandSession(campaignKey, {
+      open: inspectorOpen,
+      section: inspectorSection,
+    });
+  }, [activeCampaignId, inspectorOpen, inspectorSection]);
 
   // Open the locked Dashboard teaser for anon/free on entry (reachable, not hidden).
   const lockedPreviewShownRef = useRef(false);

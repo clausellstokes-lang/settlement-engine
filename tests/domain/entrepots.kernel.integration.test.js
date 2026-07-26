@@ -184,6 +184,30 @@ describe('M6b entrepôts — the transshipment-institution UNLOCK (the W-C3 foun
     expect(local.get('hub').institutionHistory.some((h) => h.name === 'Warehouse' && h.fate === 'built')).toBe(true);
   });
 
+  it('founds a native warehouse beside a current custom namesake', () => {
+    const customWarehouse = {
+      name: 'Warehouse',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:warehouse-namesake',
+    };
+    const { local, out } = foundOn([
+      { name: 'The Works' },
+      customWarehouse,
+    ]);
+    const warehouses = local.get('hub').institutions
+      .filter((institution) => institution.name === 'Warehouse');
+
+    expect(out.foundings).toHaveLength(1);
+    expect(warehouses).toHaveLength(2);
+    expect(warehouses).toContain(customWarehouse);
+    expect(warehouses).toContainEqual(expect.objectContaining({
+      name: 'Warehouse',
+      _worldPulseEconomyBuilt: true,
+    }));
+  });
+
   it('unlocks the CUSTOMS HOUSE next, then the CARRIERS\' GUILD (in order)', () => {
     const withWarehouse = foundOn([{ name: 'The Works' }, { name: 'Warehouse' }]);
     expect(withWarehouse.local.get('hub').institutions.map((i) => i.name)).toContain('Customs House');

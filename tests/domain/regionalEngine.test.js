@@ -94,6 +94,66 @@ describe('deriveRegionalState()', () => {
     expect(state.route.open).toBe(true);
     expect(state.depletedGoods.map(g => g.id)).toContain('grain');
   });
+
+  it('projects built-in goods only from native resource ownership', () => {
+    const customOnly = save('custom', 'Namesake', {
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: [],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesDepleted: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+        nearbyResourcesState: { iron_deposits: 'depleted' },
+      },
+    });
+    const dualOwner = save('dual', 'Dual Namesake', {
+      config: {
+        ...customOnly.settlement.config,
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: ['iron_deposits'],
+      },
+    });
+
+    const customState = deriveRegionalState(customOnly);
+    const dualState = deriveRegionalState(dualOwner);
+
+    expect(customState.localProduction.map(good => good.id))
+      .not.toContain('iron');
+    expect(customState.depletedGoods.map(good => good.id))
+      .not.toContain('iron');
+    expect(dualState.localProduction.map(good => good.id))
+      .toContain('iron');
+    expect(dualState.depletedGoods.map(good => good.id))
+      .toContain('iron');
+  });
+
+  it('detects native production loss when a custom namesake remains visible', () => {
+    const before = save('dual', 'Dual Namesake', {
+      config: {
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: ['iron_deposits'],
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: [],
+      },
+    });
+    const after = save('dual', 'Dual Namesake', {
+      config: {
+        ...before.settlement.config,
+        nearbyResourcesNative: [],
+      },
+    });
+
+    const delta = deriveLocalDelta(before, after, {
+      event: {
+        id: 'event.native-exhaustion',
+        type: 'resource_removal',
+      },
+    });
+    expect(delta.changes).toContainEqual(expect.objectContaining({
+      kind: 'local_production_lost',
+      good: expect.objectContaining({ id: 'iron' }),
+    }));
+  });
 });
 
 describe('dependency discovery', () => {

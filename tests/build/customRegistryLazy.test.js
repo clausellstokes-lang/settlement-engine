@@ -3,10 +3,11 @@
  * (2026-07-19).
  *
  * The custom-content registry (lib/customRegistry.js + lib/dependencyEngine.js
- * + data/stressTypesMeta.js) and the schema (domain/customContentSchema.js)
- * left the first-paint static closure: the store wires the registry through the
- * tiny eager seam (lib/customContentSource.js) and reaches schema/registry code
- * only via dynamic import at the validation chokepoints. This file pins that
+ * + data/stressTypesMeta.js), the legacy generation schema, and the persistence
+ * runtime left the first-paint static closure. The store wires the registry
+ * through the tiny eager seam (lib/customContentSource.js) and reaches
+ * persistence code only via dynamic imports at its service chokepoint. This
+ * file pins that
  * architecture the same way the affordance-manifest/guidance guards do:
  *
  *   1. CHUNK ABSENCE — no custom-registry-* / custom-schema-* chunk is in the
@@ -74,6 +75,8 @@ function entryStaticClosure() {
 // exported customDeps object, and validator error PROSE the schema emits.
 const REGISTRY_FINGERPRINT = 'servicesProducedBy';
 const SCHEMA_FINGERPRINT = 'motifElement must be one of';
+const SERVICE_RUNTIME_FINGERPRINT = 'Custom-content definition is unavailable.';
+const SLICE_RUNTIME_FINGERPRINT = 'Unknown custom-content runtime action';
 
 describe.runIf(distExists)('de-eager — the custom-content registry/schema stay OUT of first paint', () => {
   it('no custom-registry / custom-schema chunk is in the entry static closure', () => {
@@ -92,7 +95,12 @@ describe.runIf(distExists)('de-eager — the custom-content registry/schema stay
     const { files } = entryStaticClosure();
     const carriers = files.filter(f => {
       const code = readFileSync(join(assetsDir, f), 'utf-8');
-      return code.includes(REGISTRY_FINGERPRINT) || code.includes(SCHEMA_FINGERPRINT);
+      return (
+        code.includes(REGISTRY_FINGERPRINT)
+        || code.includes(SCHEMA_FINGERPRINT)
+        || code.includes(SERVICE_RUNTIME_FINGERPRINT)
+        || code.includes(SLICE_RUNTIME_FINGERPRINT)
+      );
     });
     expect(
       carriers,
@@ -120,6 +128,30 @@ describe.runIf(distExists)('de-eager — the custom-content registry/schema stay
       'validateTradition was tree-shaken out of every chunk — the absence guards above would be vacuous.',
     ).toBeGreaterThan(0);
   });
+
+  it.skipIf(!requireDistRead)('the persistence runtime is PRESENT in some lazy chunk (non-vacuity)', () => {
+    const carriers = readdirSync(assetsDir)
+      .filter(f => f.endsWith('.js'))
+      .filter(f => readFileSync(join(assetsDir, f), 'utf-8').includes(SERVICE_RUNTIME_FINGERPRINT));
+    expect(
+      carriers.length,
+      'the custom-content persistence runtime was tree-shaken out of every chunk — the absence guard above would be vacuous.',
+    ).toBeGreaterThan(0);
+  });
+
+  it.skipIf(!requireDistRead)('the store orchestration runtime is PRESENT in a lazy chunk', () => {
+    const carriers = readdirSync(assetsDir)
+      .filter(f => f.endsWith('.js'))
+      .filter(f => (
+        readFileSync(join(assetsDir, f), 'utf-8')
+          .includes(SLICE_RUNTIME_FINGERPRINT)
+      ));
+    expect(
+      carriers,
+      'the deferred store runtime was tree-shaken out, so its closure absence would be vacuous',
+    ).toHaveLength(1);
+    expect(carriers[0]).toMatch(/^customContentSliceRuntime-/);
+  });
 });
 
 // ── Source-level contracts (run without dist/) ──────────────────────────────
@@ -128,20 +160,35 @@ describe('de-eager — store source reaches the registry/schema only lazily', ()
   // Strip comments so prose mentioning the module names can't false-positive.
   const strip = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
 
-  it('customContentSlice: NO static schema/dependencyEngine import; dynamic schema at the chokepoint; seam invalidate', () => {
+  it('customContentSlice: lazy runtime reaches compact admission and invalidation seam', () => {
     const src = strip(read('src/store/customContentSlice.js'));
+    const runtime = strip(read('src/store/customContentSliceRuntime.js'));
     expect(src).not.toMatch(/^import\s[^;]*customContentSchema\.js/m);
+    expect(src).not.toMatch(/^import\s[^;]*customContentManifest\.js/m);
     expect(src).not.toMatch(/^import\s[^;]*dependencyEngine\.js/m);
-    expect(src).toMatch(/import\(['"]\.\.\/domain\/customContentSchema\.js['"]\)/);
-    expect(src).toMatch(/invalidateCustomDepsIfLoaded/);
+    expect(src).toMatch(/import\(['"]\.\/customContentSliceRuntime\.js['"]\)/);
+    expect(runtime).not.toMatch(/^import\s[^;]*customContentManifest\.js/m);
+    expect(runtime).toMatch(
+      /import\(['"]\.\.\/domain\/content\/customContentAdmission\.js['"]\)/,
+    );
+    expect(runtime).toMatch(/invalidateCustomDepsIfLoaded/);
   });
 
-  it('settlementSlice: NO static schema/deity-helpers import; dynamic imports at the actions', () => {
+  it('settlement generation: NO static schema/deity-helpers import; both remain action-time lazy', () => {
     const src = strip(read('src/store/settlementSlice.js'));
+    const runtime = strip(read('src/store/settlementContentRuntime.js'));
     expect(src).not.toMatch(/^import\s[^;]*customContentSchema\.js/m);
     expect(src).not.toMatch(/^import\s[^;]*settlementDeityHelpers\.js/m);
     expect(src).toMatch(/import\(['"]\.\/settlementDeityHelpers\.js['"]\)/);
-    expect(src).toMatch(/import\(['"]\.\.\/domain\/customContentSchema\.js['"]\)/);
+    expect(runtime).not.toMatch(/^import\s[^;]*customContentSchema\.js/m);
+    expect(runtime).toMatch(/import\(['"]\.\.\/domain\/customContentSchema\.js['"]\)/);
+  });
+
+  it('the persistence facade is eager-safe and dynamically loads its domain runtime', () => {
+    const facade = strip(read('src/lib/customContent.js'));
+    expect(facade).not.toMatch(/^import\s[^;]*customContentServiceRuntime\.js/m);
+    expect(facade).not.toMatch(/^import\s[^;]*customContentManifest\.js/m);
+    expect(facade).toMatch(/import\(['"]\.\/customContentServiceRuntime\.js['"]\)/);
   });
 
   it('store/index wires the source through the SEAM, never dependencyEngine', () => {

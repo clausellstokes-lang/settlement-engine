@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import {
   campaignSignature,
@@ -227,5 +227,33 @@ describe('campaign sync policy', () => {
     ], { service, changedId: 'camp-b' });
 
     expect(upserted).toEqual(['camp-b']);
+  });
+
+  test('sync threads the expected owner and an A completion cannot certify B', async () => {
+    const campaignA = { id: 'shared-id', name: 'A realm', updatedAt: '2026-01-01T00:00:00Z' };
+    const campaignB = { id: 'shared-id', name: 'B realm', updatedAt: '2026-01-02T00:00:00Z' };
+    let release;
+    const pending = new Promise(resolve => {
+      release = resolve;
+    });
+    const service = {
+      isConfigured: true,
+      upsert: vi.fn(() => pending),
+    };
+    primeCampaignSync([], 'owner-a', 4);
+    primeCampaignSync([], 'owner-b', 9);
+
+    const syncingA = syncCampaignChanges([campaignA], {
+      service,
+      ownerId: 'owner-a',
+      sessionGeneration: 4,
+    });
+    await Promise.resolve();
+    expect(service.upsert).toHaveBeenCalledWith(campaignA, 'owner-a');
+    release('shared-id');
+    await syncingA;
+
+    expect(getCampaignsNeedingSync([campaignB], null, 'owner-b', 9)).toEqual([campaignB]);
+    expect(getCampaignsNeedingSync([campaignA], null, 'owner-a', 4)).toEqual([]);
   });
 });

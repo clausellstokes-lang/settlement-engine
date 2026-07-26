@@ -42,6 +42,7 @@ const stageProps = (over = {}) => ({
   handleDragLeave: vi.fn(),
   handleDrop: vi.fn(),
   iframeRef: createRef(),
+  mapFrameUrl: 'http://localhost/map/index.html?parentOrigin=http%3A%2F%2Flocalhost',
   bridgeReady: false,
   bridgeRef: { current: null },
   overlayTransformRef: { current: null },
@@ -64,6 +65,17 @@ describe('world map, in words (SB5 — bar 9 equivalence)', () => {
     expect(iframe).not.toBeNull();
     expect(iframe.getAttribute('tabindex')).toBe('-1');
     expect(iframe.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('loads the exact runtime-resolved cross-origin frame URL', () => {
+    mockState = baseState();
+    const mapFrameUrl = 'https://map.settlementforge.com/map/index.html'
+      + '?v=sfdrop16&parentOrigin=https%3A%2F%2Fsettlementforge.com';
+    const { container } = render(
+      <WorldMapStage {...stageProps({ mapFrameUrl })} />,
+    );
+
+    expect(container.querySelector('iframe[title="Fantasy Map"]').src).toBe(mapFrameUrl);
   });
 
   it('the sr-only summary lists the placed settlements by name', () => {

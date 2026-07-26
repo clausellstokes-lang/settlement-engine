@@ -125,7 +125,7 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
         const res = await instantWorld?.(result.config, { seed });
         setCommitted(res?.ok
           ? { kind: 'realm', detail: `Placed ${res.settlementCount ?? ''} settlements. The realm’s map is not yet frozen. Canonize it when you’re ready.` }
-          : { kind: 'error', detail: res?.reason ? `Could not place the realm (${res.reason}).` : 'Could not place the realm.' });
+          : { kind: 'error', detail: res?.message || (res?.reason ? `Could not place the realm (${res.reason}).` : 'Could not place the realm.') });
       } else {
         const { saves } = await import('../../lib/saves.js');
         const dossier = generated?.dossier;

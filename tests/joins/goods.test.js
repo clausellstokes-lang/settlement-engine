@@ -145,7 +145,7 @@ describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export 
 describe('behavior: repaired joins produce DM-visible output', () => {
   afterEach(() => clearActiveRng());
 
-  test("hamlet with a Fisher's landing gains fish exports and maritime income", () => {
+  test("inland hamlet with a Fisher's landing gains fish exports without claiming maritime trade", () => {
     // rng pinned to 0 → every probability roll passes; output is fully
     // deterministic and the institution gate is the only variable under test.
     setActiveRng({ random: () => 0 });
@@ -157,12 +157,31 @@ describe('behavior: repaired joins produce DM-visible output', () => {
       { nearbyResources: [] }
     );
     const incomeSources = withLanding.incomeSources.map((i) => i.source);
-    expect(incomeSources).toContain('Fish & Maritime Produce');
+    expect(incomeSources).toContain('Fish & Preserved Produce');
+    expect(incomeSources).not.toContain('Fish & Maritime Produce');
 
     // Without the landing the good's institution gate must block the roll.
     setActiveRng({ random: () => 0 });
     const without = generateEconomicState('hamlet', [], 'road', {}, { nearbyResources: [] });
-    expect(without.incomeSources.map((i) => i.source)).not.toContain('Fish & Maritime Produce');
+    expect(without.incomeSources.map((i) => i.source)).not.toContain('Fish & Preserved Produce');
+  });
+
+  test("coastal port with a Fisher's landing retains the maritime income label", () => {
+    setActiveRng({ random: () => 0 });
+    const coastalPort = generateEconomicState(
+      'hamlet',
+      [{ name: "Fisher's landing", category: 'Crafts' }],
+      'port',
+      {},
+      {
+        nearbyResources: [],
+        tradeRouteAccess: 'port',
+        terrainType: 'coastal',
+      },
+    );
+
+    expect(coastalPort.incomeSources.map((income) => income.source))
+      .toContain('Fish & Maritime Produce');
   });
 
   test('Free company hall without local iron/grain reports a trade dependency', () => {

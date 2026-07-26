@@ -43,3 +43,12 @@ Every new migration SHOULD carry a `-- @rollback:` line stating how to reverse i
 checks the recent money/PII migrations either ship a `.down.sql` here or carry that
 annotation, so reversibility is a tracked property, not an afterthought discovered
 mid-incident.
+
+The attended release train adds a totality layer over this convention:
+`scripts/ops/migration-rehearsal.mjs` gives every pending migration exactly one
+rollback classification. A matching `.down.sql` is `data-safe-down-script`; a
+migration-local annotation is preserved as its documented manual posture; an
+older omission inherits its reviewed wave's explicit `forward-only` policy.
+`docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md` defines the bounded waves and the
+production-shaped-clone proof. The classification records a recovery decision;
+it never executes a reversal automatically.

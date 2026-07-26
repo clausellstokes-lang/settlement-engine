@@ -29,9 +29,9 @@ const EPS = 1e-9;
 
 describe('massing silhouette totality (the institution silhouette law)', () => {
   test('guard-the-guard: the live vocabulary and the form set are not vacuous', () => {
-    // The medieval library ships 18 kinds today; the roof-form set is the fixed five. If either
+    // The medieval library ships 27 kinds today; the roof-form set is the fixed five. If either
     // silently emptied, the totality assertion below would pass on nothing.
-    expect(LIVE_KINDS.length).toBeGreaterThanOrEqual(18);
+    expect(LIVE_KINDS.length).toBeGreaterThanOrEqual(27);
     expect(ROOF_SET.size).toBe(5);
   });
 

@@ -24,6 +24,7 @@ import { computeActiveChains, processorPatternIdSet } from '../../src/generators
 import { healingLedger, HEALING_INSTITUTION_PATTERN } from '../../src/domain/healingLedger.js';
 import { deriveSystemVariable } from '../../src/domain/causalState.js';
 import { NEED_HEURISTICS } from '../../src/domain/supplyChainState.js';
+import { resourceKeyForLabel } from '../../src/domain/resourceSemantics.js';
 
 const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
@@ -86,21 +87,6 @@ const resolvesAtOwnMinTier = (chain) => {
   return (chain.processingInstitutions || []).some(p => pool.some(n => processorMatches(n, p)));
 };
 
-// Replica of the private resourceLabelToKey in computeActiveChains.js:13-23
-// (fuzzy word overlap from chain.resource label to RESOURCE_DATA key). Used to
-// assert the reverse index agrees with runnability's label resolution.
-function resourceLabelToKey(label) {
-  if (!label) return null;
-  const words = label.toLowerCase().split(/\s+/).filter(w => w.length > 3);
-  let bestKey = null, bestScore = 0;
-  Object.keys(RESOURCE_DATA).forEach(key => {
-    const keyWords = key.toLowerCase().split('_');
-    const score = words.filter(w => keyWords.some(kw => kw.startsWith(w) || w.startsWith(kw))).length;
-    if (score > bestScore) { bestScore = score; bestKey = key; }
-  });
-  return bestScore > 0 ? bestKey : null;
-}
-
 describe('RESOURCE_TO_CHAINS joins', () => {
   it('every key is a real RESOURCE_DATA resource key', () => {
     const orphanKeys = Object.keys(RESOURCE_TO_CHAINS).filter(rk => !RESOURCE_DATA[rk]);
@@ -123,7 +109,7 @@ describe('RESOURCE_TO_CHAINS joins', () => {
     const unindexed = [];
     for (const chain of allChains) {
       if (!chain.resource) continue; // institution-only chains have no reverse-index slot
-      const key = resourceLabelToKey(chain.resource);
+      const key = resourceKeyForLabel(chain.resource);
       if (!key) { unindexed.push(`${chain.fullId}: label "${chain.resource}" resolves to no key`); continue; }
       if (!(RESOURCE_TO_CHAINS[key] || []).includes(chain.fullId)) {
         unindexed.push(`${chain.fullId}: missing from RESOURCE_TO_CHAINS.${key}`);
@@ -131,6 +117,33 @@ describe('RESOURCE_TO_CHAINS joins', () => {
     }
     // Without this, the chain runs but never reaches 'running'/activatedByResource,
     // and deriveLocalProductionFromChains skips its outputs.
+    expect(unindexed).toEqual([]);
+  });
+
+  it('every primary and substitute label resolves through the exact resource vocabulary', () => {
+    const unresolved = [];
+    for (const chain of allChains) {
+      const labels = [chain.resource, ...(chain.resourceSubstitutes || [])]
+        .filter(Boolean);
+      for (const label of labels) {
+        if (!resourceKeyForLabel(label)) {
+          unresolved.push(`${chain.fullId}: "${label}"`);
+        }
+      }
+    }
+    expect(unresolved).toEqual([]);
+  });
+
+  it('every declared substitute indexes the chain it can activate', () => {
+    const unindexed = [];
+    for (const chain of allChains) {
+      for (const label of chain.resourceSubstitutes || []) {
+        const key = resourceKeyForLabel(label);
+        if (!key || !(RESOURCE_TO_CHAINS[key] || []).includes(chain.fullId)) {
+          unindexed.push(`${chain.fullId}: substitute "${label}" via ${key || 'unresolved'}`);
+        }
+      }
+    }
     expect(unindexed).toEqual([]);
   });
 

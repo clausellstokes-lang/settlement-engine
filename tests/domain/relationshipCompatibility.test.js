@@ -190,6 +190,10 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       // S7 signal registry: READ-ONLY vocabulary import (PRIMARY_RELATIONSHIP_TYPES
       // as a signal-source enum) — no rule evaluation, no parallel ruleset.
       'src/domain/autonomy/signalRegistry.js',
+      // Herald routing walker: READ-ONLY vocabulary import used to verify that
+      // every relationship signal has a semantic Herald destination. It never
+      // evaluates compatibility or introduces a second relationship ruleset.
+      'tests/lint/heraldRouting.walker.test.js',
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);

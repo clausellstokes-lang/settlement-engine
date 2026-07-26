@@ -327,6 +327,10 @@ export async function handleAdminActions(
       // Moderation-suite params (contentKind for the map/campaign verbs; banned
       // flag; report id for a queue resolution).
       contentKind, banned: banFlag, reportId,
+      // Durable external-obligation operations (migration 182). Keys are opaque
+      // job/payment/event identities; the edge never receives user or payment
+      // details from the report RPC.
+      obligationSource, obligationKey, clear: clearAcknowledgement,
     } = await req.json();
     const auditReason = typeof reason === "string" && reason.trim()
       ? reason.trim()
@@ -495,6 +499,63 @@ export async function handleAdminActions(
         const { data, error } = await adminClient.rpc("report_summary", { p_from: pFrom, p_to: pTo });
         if (error) return adminFail(error, 500);
         return json({ success: true, rows: data || [], refreshedAt: new Date().toISOString() });
+      }
+
+      // One read surface over durable account-deletion, payment-refund, and
+      // Stripe-webhook obligations (migration 182). Keep it highest-role even
+      // though the RPC returns no PII: these lifecycle facts belong to the
+      // production operator, not the support queue.
+      case "get_operational_health": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        const { data: health, error: healthError } = await adminClient.rpc(
+          "report_operational_obligation_health",
+          { p_stale_minutes: 30 },
+        );
+        if (healthError) return adminFail(healthError, 500);
+        const { data: attention, error: attentionError } = await adminClient.rpc(
+          "list_operational_obligation_attention",
+          { p_limit: 100, p_stale_minutes: 30 },
+        );
+        if (attentionError) return adminFail(attentionError, 500);
+        return json({
+          success: true,
+          health: health || null,
+          attention: Array.isArray(attention) ? attention : [],
+          refreshedAt: new Date().toISOString(),
+        });
+      }
+
+      // An acknowledgement is explicitly NOT resolution: the database overlay
+      // cannot change, retry, hide, or complete the obligation. The RPC verifies
+      // the opaque key still names exceptional work and writes its own audit row.
+      case "acknowledge_operational_obligation": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (
+          typeof obligationSource !== "string" ||
+          typeof obligationKey !== "string" ||
+          !obligationKey.trim()
+        ) {
+          return json({ error: "Missing operational obligation identity" }, 400);
+        }
+        const { data, error } = await adminClient.rpc(
+          "acknowledge_operational_obligation",
+          {
+            p_source: obligationSource,
+            p_obligation_key: obligationKey,
+            p_actor: callingUser.id,
+            p_note: typeof note === "string" ? note : null,
+            p_clear: clearAcknowledgement === true,
+          },
+        );
+        if (error) return adminFail(error, 500);
+        if (data !== true) {
+          return json({ error: "Operational obligation is no longer active" }, 409);
+        }
+        return json({
+          success: true,
+          acknowledged: clearAcknowledgement !== true,
+          refreshedAt: new Date().toISOString(),
+        });
       }
 
       case "get_analytics_crosstab": {

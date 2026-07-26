@@ -33,6 +33,7 @@ export function WizardOutputToolbar({
   isMobile,
   handleBack,
   handleGenerate,
+  generating = false,
   handleNewSettlement,
   maxWidth,
 }) {
@@ -89,11 +90,17 @@ export function WizardOutputToolbar({
       <Button
         variant="secondary"
         size="md"
-        onClick={() => { setMenuOpen(false); handleGenerate(); }}
+        onClick={() => {
+          setMenuOpen(false);
+          void handleGenerate();
+        }}
+        disabled={generating}
+        busy={generating}
         aria-label="Regenerate draft"
         title="Roll a fresh draft from the same configuration. The current draft is discarded."
       >
-        <span aria-hidden="true">↻ </span>Regenerate draft
+        {!generating && <span aria-hidden="true">↻ </span>}
+        {generating ? 'Regenerating draft…' : 'Regenerate draft'}
       </Button>
       {/* "New Draft" restarts from the Create landing with a clean slate — a quiet
           outline. Save (below the dossier) is the one primary. */}

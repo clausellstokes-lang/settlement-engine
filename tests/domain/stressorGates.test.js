@@ -148,6 +148,59 @@ describe('organic birth gates', () => {
     expect(signals.length).toBeGreaterThanOrEqual(3);
   });
 
+  test('current custom display names do not create native arcane or transport dependence', () => {
+    const base = {
+      config: { magicExists: true, priorityMagic: 10 },
+      institutions: [],
+    };
+    const namesakes = [
+      { name: 'Arcane College' },
+      { name: 'Airship Terminal' },
+    ];
+    const currentCustom = namesakes.map((institution, index) => ({
+      ...institution,
+      source: 'custom',
+      customDefinitionId: `definition:institutions:magic-dependence-${index}`,
+    }));
+
+    expect(magicDependenceSignals({
+      ...base,
+      institutions: currentCustom,
+    })).toEqual([]);
+    expect(magicDependenceSignals({
+      ...base,
+      institutions: namesakes,
+    })).toEqual([
+      'arcane institutions anchor daily life',
+      'trade arrives by teleport or airship',
+    ]);
+  });
+
+  test('current custom display names do not satisfy native stressor institution classes', () => {
+    const gate = STRESSOR_SPAWN_GATES.famine;
+    const pressure = pressureRow('oak', 'food', 0.7);
+    const namesakes = [{ name: 'Granary' }, { name: 'Orchard' }];
+    const currentCustom = namesakes.map((institution, index) => ({
+      ...institution,
+      source: 'custom',
+      customDefinitionId: `definition:institutions:food-class-${index}`,
+    }));
+
+    const baseline = gate(snapshotWith(), pressure);
+    const custom = gate(snapshotWith({
+      settlement: { institutions: currentCustom },
+    }), pressure);
+    const legacy = gate(snapshotWith({
+      settlement: { institutions: namesakes },
+    }), pressure);
+
+    expect(custom).toEqual(baseline);
+    expect(legacy.probabilityMult).toBeLessThan(baseline.probabilityMult);
+    expect(legacy.reasons).toContain(
+      'Redundant food institutions blunt a bad season.',
+    );
+  });
+
   test('the trade signal derives the channel LIVE-FIRST (the field-manifest contract), verdict as no-signal fallback', () => {
     // A custom-renamed circle sniffs as nothing — the generation verdict
     // still speaks for it through resolveBlockadeBypassChannel, never as a

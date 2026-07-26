@@ -4,13 +4,9 @@
  * Pins the shape of the security-header block in vercel.json. Two properties the
  * header block MUST hold:
  *
- *   1. Report-only rollout. The Content-Security-Policy ships as
- *      `Content-Security-Policy-Report-Only` — it REPORTS violations to the
- *      /api/csp-report sink but does NOT block, so it cannot break the live app on
- *      day one. This test asserts the report-only key is present on every rule AND
- *      that the ENFORCING `Content-Security-Policy` key is absent (so a careless
- *      edit can't silently flip the whole site into enforcement). The enforce flip
- *      is a deliberate future rename (see api/csp-report.js § ROLLOUT).
+ *   1. Enforced policy. Both origins ship `Content-Security-Policy`; violations
+ *      are blocked and still reported to /api/csp-report. Report-only headers are
+ *      forbidden so a configuration edit cannot silently demote the boundary.
  *
  *   2. Fork isolation — app-strict vs /map/-relaxed, ONE policy per path. The
  *      relaxed policy (unsafe-inline + unsafe-eval, needed by the vendored ~1.4k-line
@@ -27,20 +23,19 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { PRODUCTION_MAP_ORIGIN } from '../../src/lib/mapRuntimeConfig.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 
-// We ship report-only first; the enforce flip renames this key to
-// 'content-security-policy'. The whole test keys off the report-only header.
-const CSP_KEY = 'content-security-policy-report-only';
-const CSP_ENFORCE_KEY = 'content-security-policy';
+const CSP_KEY = 'content-security-policy';
+const CSP_REPORT_ONLY_KEY = 'content-security-policy-report-only';
 
 /** All header rules whose `source` regex matches `path`. */
 const matchingRules = (path) =>
   vercel.headers.filter((rule) => new RegExp('^' + rule.source + '$').test(path));
 
-/** Every report-only CSP value emitted for `path` (Vercel emits one per rule). */
+/** Every enforcing CSP value emitted for `path` (Vercel emits one per rule). */
 const cspHeadersFor = (path) =>
   matchingRules(path).flatMap((rule) =>
     rule.headers
@@ -53,23 +48,23 @@ const directive = (csp, name) => {
   return m ? m[1].trim() : '';
 };
 
-describe('CSP ships REPORT-ONLY, not enforcing (safe rollout)', () => {
-  it('every header rule uses Content-Security-Policy-Report-Only', () => {
+describe('CSP is enforced and continues reporting violations', () => {
+  it('every header rule uses the enforcing Content-Security-Policy header', () => {
     expect(vercel.headers.length).toBeGreaterThan(0);
     for (const rule of vercel.headers) {
       const keys = rule.headers.map((h) => h.key.toLowerCase());
-      expect(keys, `${rule.source} must carry a report-only CSP`).toContain(CSP_KEY);
+      expect(keys, `${rule.source} must carry an enforcing CSP`).toContain(CSP_KEY);
     }
   });
 
-  it('no rule enforces a Content-Security-Policy (the enforce flip is deliberate + future)', () => {
+  it('no rule can silently demote the policy back to report-only', () => {
     for (const rule of vercel.headers) {
       const keys = rule.headers.map((h) => h.key.toLowerCase());
-      expect(keys, `${rule.source} must NOT enforce CSP yet`).not.toContain(CSP_ENFORCE_KEY);
+      expect(keys, `${rule.source} must not ship report-only CSP`).not.toContain(CSP_REPORT_ONLY_KEY);
     }
   });
 
-  it('the report-only CSP wires the /api/csp-report sink (report-uri + report-to)', () => {
+  it('the enforcing CSP wires the /api/csp-report sink (report-uri + report-to)', () => {
     for (const path of ['/index.html', '/map/index.html']) {
       const [csp] = cspHeadersFor(path);
       expect(csp).toMatch(/report-uri \/api\/csp-report/);
@@ -132,18 +127,52 @@ describe('CSP fork isolation — app-strict vs /map/-relaxed, one header per pat
     expect(new RegExp('^' + appRule.source + '$').test('/map/index.html')).toBe(false);
   });
 
-  it('the /map/ rule still carries the shared security headers (HSTS, nosniff, etc.)', () => {
+  it('the /map/ rule keeps shared hardening but omits same-origin X-Frame-Options', () => {
     const [mapRule] = matchingRules('/map/index.html');
     const keys = mapRule.headers.map((h) => h.key.toLowerCase());
     for (const required of [
       'strict-transport-security',
       'x-content-type-options',
-      'x-frame-options',
       'referrer-policy',
       'permissions-policy',
     ]) {
       expect(keys, `/map/ rule must set ${required}`).toContain(required);
     }
+    // X-Frame-Options has no syntax for an explicit cross-origin allowlist.
+    // The enforced frame-ancestors directive is the map host's sole authority.
+    expect(keys).not.toContain('x-frame-options');
+  });
+});
+
+describe('CSP permits exactly the intended cross-origin map topology', () => {
+  it('the app frame-src contains the same production map origin as runtime config', () => {
+    const [appCsp] = cspHeadersFor('/index.html');
+    expect(directive(appCsp, 'frame-src').split(/\s+/)).toContain(PRODUCTION_MAP_ORIGIN);
+  });
+
+  it('the map may be framed only by the two production app hosts', () => {
+    const [mapCsp] = cspHeadersFor('/map/index.html');
+    const ancestors = directive(mapCsp, 'frame-ancestors').split(/\s+/);
+    expect(ancestors).toEqual([
+      'https://settlementforge.com',
+      'https://www.settlementforge.com',
+    ]);
+  });
+
+  it('production app hosts cannot execute the fork from their own /map/ path', () => {
+    const productionHosts = new Set(['settlementforge.com', 'www.settlementforge.com']);
+    const redirects = (vercel.redirects || []).filter(
+      (rule) => rule.source === '/map/:path*'
+        && rule.destination === `${PRODUCTION_MAP_ORIGIN}/map/:path*`,
+    );
+    const redirectedHosts = new Set(
+      redirects.flatMap((rule) => rule.has || [])
+        .filter((condition) => condition.type === 'host')
+        .map((condition) => condition.value),
+    );
+
+    expect(redirectedHosts).toEqual(productionHosts);
+    expect(redirects.every((rule) => rule.permanent === false)).toBe(true);
   });
 });
 

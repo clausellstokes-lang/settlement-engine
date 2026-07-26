@@ -1,10 +1,15 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+  applyResourceOutcomeToSettlement,
   applyTierOutcomeToSettlement,
   evaluateTierResourceDynamics,
   resourceEconomicRole,
 } from '../../src/domain/worldPulse/tierResourceDynamics.js';
+import {
+  computeActiveChains,
+  deriveLocalProductionFromChains,
+} from '../../src/generators/computeActiveChains.js';
 
 // Pin: resource keys and chain-output export labels share no vocabulary
 // ('fishing_grounds' vs 'River fish'), so classification must resolve the
@@ -116,6 +121,236 @@ describe('evaluateTierResourceDynamics — economic role feeds the drift logic',
   });
 });
 
+describe('evaluateTierResourceDynamics — depletion eligibility', () => {
+  it('high pressure depletes material resources, never positions or infrastructure', () => {
+    const pressured = item('pressured', settlement('Stonebridge', {
+      tier: 'city',
+      config: {
+        tradeRouteAccess: 'crossroads',
+        nearbyResources: [
+          'deep_harbour',
+          'river_mills',
+          'crossroads_position',
+          'defended_pass',
+          'hot_springs',
+          'oasis_water',
+          'iron_deposits',
+        ],
+        nearbyResourcesState: {},
+      },
+      economicState: { primaryExports: [], primaryImports: [] },
+    }), 100);
+
+    const result = evaluateTierResourceDynamics(
+      {},
+      { settlements: [pressured] },
+      undefined,
+      { tick: 7 },
+    );
+    const depleted = result.candidates
+      .filter(candidate => candidate.candidateType === 'resource_depletion')
+      .map(candidate => candidate.resourcePatch.resource);
+
+    expect(depleted).toContain('iron_deposits');
+    expect(depleted).not.toContain('deep_harbour');
+    expect(depleted).not.toContain('river_mills');
+    expect(depleted).not.toContain('crossroads_position');
+    expect(depleted).not.toContain('defended_pass');
+    expect(depleted).not.toContain('hot_springs');
+    expect(depleted).not.toContain('oasis_water');
+  });
+
+  it('applies depletion and recovery to the live economy atomically', () => {
+    const institutions = [{ name: 'Mine (open cast)' }];
+    const resources = ['iron_deposits'];
+    const activeChains = computeActiveChains(
+      institutions,
+      resources,
+      'town',
+      'road',
+      [],
+      [],
+      0,
+    );
+    const live = settlement('Ironford', {
+      config: {
+        tradeRouteAccess: 'road',
+        nearbyResources: resources,
+        nearbyResourcesNative: resources,
+        nearbyResourcesDepleted: [],
+        nearbyResourcesNativeDepleted: [],
+        nearbyResourcesState: {},
+        magicExists: false,
+      },
+      institutions,
+      economicState: {
+        activeChains,
+        primaryExports: ['Iron ore'],
+        localProduction: deriveLocalProductionFromChains(
+          activeChains,
+          resources,
+        ),
+      },
+    });
+
+    const depleted = applyResourceOutcomeToSettlement(live, {
+      id: 'outcome.deplete-iron',
+      candidateType: 'resource_depletion',
+      resourcePatch: { resource: 'iron_deposits', state: 'depleted' },
+    });
+    const depletedIron = depleted.economicState.activeChains.find(
+      chain => chain.chainId === 'iron',
+    );
+
+    expect(depletedIron).toMatchObject({
+      resourceCondition: 'depleted',
+      resourceInputCondition: 'depleted',
+      status: 'impaired',
+    });
+    expect(depleted.economicState.localProduction).not.toContain('iron');
+    expect(depleted.economicState.primaryExports).not.toContain('Iron ore');
+
+    const recovered = applyResourceOutcomeToSettlement(depleted, {
+      id: 'outcome.recover-iron',
+      candidateType: 'resource_recovery',
+      resourcePatch: { resource: 'iron_deposits', state: 'allow' },
+    });
+    const recoveredIron = recovered.economicState.activeChains.find(
+      chain => chain.chainId === 'iron',
+    );
+
+    expect(recoveredIron).toMatchObject({
+      resourceCondition: 'available',
+      resourceInputCondition: 'available',
+      status: 'running',
+    });
+    expect(recovered.economicState.localProduction).toContain('iron');
+    expect(recovered.economicState.primaryExports).toContain('Iron ore');
+  });
+
+  it('does not invent organic recovery for an explicitly unavailable position', () => {
+    const quiet = item('quiet', settlement('Closed Pass', {
+      config: {
+        tradeRouteAccess: 'mountain_pass',
+        nearbyResources: ['defended_pass'],
+        nearbyResourcesState: { defended_pass: 'depleted' },
+      },
+      economicState: { primaryExports: [], primaryImports: [] },
+    }), 0);
+
+    const result = evaluateTierResourceDynamics(
+      {},
+      { settlements: [quiet] },
+      undefined,
+      { tick: 8 },
+    );
+
+    expect(
+      result.candidates.some(candidate => (
+        candidate.candidateType === 'resource_recovery'
+        && candidate.resourcePatch.resource === 'defended_pass'
+      )),
+    ).toBe(false);
+  });
+});
+
+describe('tier resource drift — native/custom resource identity', () => {
+  function collisionSettlement(nativeResources, nativeDepleted = []) {
+    return settlement('Namesake', {
+      config: {
+        tradeRouteAccess: 'road',
+        nearbyResources: ['iron_deposits'],
+        nearbyResourcesNative: nativeResources,
+        nearbyResourcesCustom: ['iron_deposits'],
+        nearbyResourcesDepleted: ['iron_deposits'],
+        nearbyResourcesNativeDepleted: nativeDepleted,
+        nearbyResourcesState: { iron_deposits: 'depleted' },
+        nearbyResourceDefinitionsDepleted: [{
+          name: 'iron_deposits',
+          customDefinitionId: 'definition:resources:custom-iron',
+        }],
+      },
+      economicState: { primaryExports: [], primaryImports: [] },
+    });
+  }
+
+  it('custom-only native-key spelling emits no built-in depletion or recovery', () => {
+    const customOnly = item(
+      'custom-only',
+      collisionSettlement([]),
+      100,
+    );
+    const result = evaluateTierResourceDynamics(
+      {},
+      { settlements: [customOnly] },
+      undefined,
+      { tick: 1 },
+    );
+
+    expect(
+      result.candidates.some(candidate => (
+        candidate.candidateType === 'resource_depletion'
+        || candidate.candidateType === 'resource_recovery'
+      )),
+    ).toBe(false);
+  });
+
+  it('dual ownership retains built-in drift through the native sidecar', () => {
+    const dualOwner = item(
+      'dual-owner',
+      collisionSettlement(['iron_deposits']),
+      100,
+    );
+    const result = evaluateTierResourceDynamics(
+      {},
+      { settlements: [dualOwner] },
+      undefined,
+      { tick: 1 },
+    );
+
+    expect(
+      result.candidates.some(
+        candidate => candidate.candidateType === 'resource_depletion',
+      ),
+    ).toBe(true);
+    expect(
+      result.candidates.some(
+        candidate => candidate.candidateType === 'resource_recovery',
+      ),
+    ).toBe(false);
+  });
+
+  it('native depletion and recovery preserve exact custom depletion', () => {
+    const customDepleted = collisionSettlement(['iron_deposits']);
+    const depleted = applyResourceOutcomeToSettlement(customDepleted, {
+      id: 'outcome.native-deplete',
+      candidateType: 'resource_depletion',
+      resourcePatch: {
+        resource: 'iron_deposits',
+        state: 'depleted',
+      },
+    });
+    const recovered = applyResourceOutcomeToSettlement(depleted, {
+      id: 'outcome.native-recover',
+      candidateType: 'resource_recovery',
+      resourcePatch: {
+        resource: 'iron_deposits',
+        state: 'allow',
+      },
+    });
+
+    expect(depleted.config.nearbyResourcesNativeDepleted)
+      .toEqual(['iron_deposits']);
+    expect(recovered.config.nearbyResourcesNativeDepleted).toEqual([]);
+    expect(recovered.config.nearbyResourcesDepleted)
+      .toEqual(['iron_deposits']);
+    expect(recovered.config.nearbyResourcesState.iron_deposits)
+      .toBe('depleted');
+    expect(recovered.config.nearbyResourceDefinitionsDepleted)
+      .toEqual(customDepleted.config.nearbyResourceDefinitionsDepleted);
+  });
+});
+
 // Pin: tier candidates re-emit every eligible tick with tick-suffixed ids, so
 // worldState.proposals can hold a tier proposal whose fromTier the settlement
 // has since left. Accepting it must not rewind the tier (wrong-direction
@@ -192,6 +427,75 @@ describe('applyTierOutcomeToSettlement — apply-time tier re-verify', () => {
     const bigNext = applyTierOutcomeToSettlement(big, tierOutcome('town', 'city', 'promotion'));
     expect(bigNext.population).toBe(6000);
     expect(bigNext.populationHistory).toBeUndefined();
+  });
+});
+
+describe('applyTierOutcomeToSettlement — native/custom institution identity', () => {
+  function tierOutcome(fromTier, toTier, direction) {
+    return {
+      id: `candidate.tier.${direction}.identity.4`,
+      tierChange: {
+        saveId: 'identity',
+        fromTier,
+        toTier,
+        direction,
+      },
+    };
+  }
+
+  function customInstitution(name) {
+    return {
+      name,
+      category: 'Custom',
+      status: 'active',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: `definition:institutions:${name}`,
+    };
+  }
+
+  it('adds a required native institution beside a custom namesake on promotion', () => {
+    const customGranary = customInstitution('Town granary');
+    const village = settlement('Namesake', {
+      tier: 'village',
+      population: 950,
+      institutions: [customGranary],
+    });
+
+    const next = applyTierOutcomeToSettlement(
+      village,
+      tierOutcome('village', 'town', 'promotion'),
+    );
+    const granaries = next.institutions.filter(
+      institution => institution.name === 'Town granary',
+    );
+
+    expect(granaries).toHaveLength(2);
+    expect(granaries).toContain(customGranary);
+    expect(granaries).toContainEqual(expect.objectContaining({
+      name: 'Town granary',
+      required: true,
+      requiredForTier: 'town',
+      _worldPulseTierAdded: true,
+    }));
+  });
+
+  it('does not apply a native demotion fate to a custom namesake', () => {
+    const customGarrison = customInstitution('Garrison');
+    const city = settlement('Namesake', {
+      tier: 'city',
+      population: 7000,
+      institutions: [customGarrison],
+    });
+
+    const next = applyTierOutcomeToSettlement(
+      city,
+      tierOutcome('city', 'town', 'demotion'),
+    );
+
+    expect(next.institutions).toContain(customGarrison);
+    expect(next.institutions[0]).toEqual(customGarrison);
   });
 });
 

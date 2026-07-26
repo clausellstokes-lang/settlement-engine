@@ -46,8 +46,17 @@
  *
  * Sparse — omit a key entirely to mean "not locked". Lock targets are
  * either booleans (whole sections) or arrays of stable IDs (specific
- * items). The locks engine consults this before any reroll or
- * destructive edit; locked items survive verbatim.
+ * items).
+ *
+ * NOT IMPLEMENTED — there is no locks engine. setLock/clearLocks write this
+ * map and the store persists and rehydrates it, but no reroll, generator, or
+ * edit path reads it, so nothing listed here survives anything. The property
+ * descriptions below state an intent, not a behavior.
+ *
+ * Entity-level protection is a SEPARATE, working mechanism: the `_authored` /
+ * `locked` / `pinned` fields carried ON an entity, which
+ * domain/regenerationPreservation.js honors when NPCs are rerolled. Wiring
+ * this map into that seam, or retiring it, is an open owner decision.
  *
  *  @property {boolean=} identity      name, founding lore
  *  @property {boolean=} geography     terrain, trade access, regional placement

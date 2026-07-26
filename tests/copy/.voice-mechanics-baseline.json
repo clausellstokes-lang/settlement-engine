@@ -47,10 +47,6 @@
   "em": 3,
   "bang": 0
  },
- "src/domain/certification/certificationRead.js": {
-  "em": 2,
-  "bang": 0
- },
  "src/domain/clock.js": {
   "em": 1,
   "bang": 0
@@ -213,10 +209,6 @@
  },
  "src/domain/npcProfile.js": {
   "em": 3,
-  "bang": 0
- },
- "src/domain/pendingEdits.js": {
-  "em": 1,
   "bang": 0
  },
  "src/domain/region/propagation.js": {

@@ -9,20 +9,36 @@
  *
  * This module mirrors the id-first pattern already used for the chain-processor /
  * keyword / export-gate joins (institutionMatches* in generators/computeActiveChains),
- * but is deliberately LIGHT — it depends ONLY on `data/` (the catalog + the stable
- * `catalogIdForName` slug index), so a pure derivation module like domain/causalState
- * can use it without pulling the heavy chain engine (and its transitive src/lib
- * dependency) into its import graph.
+ * but is deliberately LIGHT — it depends only on `data/` (the catalog + the stable
+ * `catalogIdForName` slug index) and the zero-dependency custom-authority boundary,
+ * so a pure derivation module like domain/causalState can use it without pulling
+ * the heavy chain engine (and its transitive src/lib dependency) into its graph.
  *
  * The id-set is built from the SAME predicate as the name rule, so id-match ===
  * name-match for every UNRENAMED catalog institution — generation + event output
  * stay byte-identical (proven by tests/domain/institutionClassify.parity.test.js).
- * The win is purely additive: a DM-renamed-but-STAMPED institution keeps its
- * generation-time `catalogId` and stays classified; an unstamped custom institution
- * falls to the same name predicate as before.
+ * The win is additive for native/legacy data: a DM-renamed-but-STAMPED institution
+ * keeps its generation-time `catalogId` and stays classified; a genuinely
+ * provenance-free legacy/custom row falls to the same name predicate as before.
+ * Current custom presentation names stop at their provenance boundary.
  */
 
 import { institutionalCatalog, catalogIdForName } from '../data/institutionalCatalog.js';
+import {
+  isMaterializedCustomContent,
+} from './content/customContentSemanticAuthority.js';
+
+/**
+ * Boolean-only adapter for the deliberately narrow compatibility-record types
+ * accepted by this module. It preserves runtime authority without letting the
+ * richer shared type guard narrow the native branch to `never`.
+ *
+ * @param {unknown} institution
+ * @returns {boolean}
+ */
+function hasCustomContentProvenance(institution) {
+  return isMaterializedCustomContent(institution);
+}
 
 // Flat list of every canonical catalog institution name (across tiers/groups).
 const ALL_CATALOG_NAMES = (() => {
@@ -67,12 +83,38 @@ function regexIdSet(re) {
   }
   return set;
 }
-/** Does this institution's name match a regex? Id-first for stamped, regex fallback.
+/** Does this institution match a native regex? Custom-boundary first, then id/name compatibility.
  * @param {{ catalogId?: string, name?: string } | null | undefined} inst @param {RegExp} re @returns {boolean} */
 export function institutionMatchesRegex(inst, re) {
+  // Current custom presentation labels are not native capability keys. Keep
+  // the historical regex fallback only for genuinely unstamped legacy rows.
+  if (hasCustomContentProvenance(inst)) return false;
   if (inst?.catalogId) return regexIdSet(re).has(inst.catalogId);
   re.lastIndex = 0;
   return re.test(String(inst?.name || ''));
+}
+
+/**
+ * Match one canonical native institution by catalog identity.
+ *
+ * Stamped rows compare their immutable catalog ids, so a DM rename cannot
+ * break the join. Genuinely unstamped legacy rows retain the historical exact
+ * display-name fallback. Current custom rows stop at the provenance boundary:
+ * spelling a custom institution like a native one never grants native
+ * mechanics.
+ *
+ * @param {{ catalogId?: string, name?: string } | null | undefined} inst
+ * @param {string} canonicalName
+ * @returns {boolean}
+ */
+export function institutionMatchesNativeName(inst, canonicalName) {
+  if (hasCustomContentProvenance(inst)) return false;
+  const expectedId = catalogIdForName(canonicalName);
+  if (inst?.catalogId) {
+    return Boolean(expectedId) && inst.catalogId === expectedId;
+  }
+  return String(inst?.name || '').toLowerCase()
+    === String(canonicalName || '').toLowerCase();
 }
 
 // ── Food anchor: a settlement-level food PRODUCER (granary / silo / fishery /
@@ -100,16 +142,18 @@ let _foodAnchorIds = null;
 /** @type {Set<string>|null} */
 let _lawOrderIds = null;
 
-/** Is this institution a settlement-level food anchor? Id-first for stamped, name fallback.
+/** Is this a native/legacy food anchor? Custom-boundary first, then id/name compatibility.
  * @param {{ catalogId?: string, name?: string } | null | undefined} inst @returns {boolean} */
 export function institutionIsFoodAnchor(inst) {
+  if (hasCustomContentProvenance(inst)) return false;
   if (inst?.catalogId) return (_foodAnchorIds ??= idSetFor(foodAnchorPredicate)).has(inst.catalogId);
   return foodAnchorPredicate(inst?.name || '');
 }
 
-/** Does this institution embody law & order? Id-first for stamped, name fallback.
+/** Does this native/legacy institution embody law & order? Custom-boundary first, then id/name compatibility.
  * @param {{ catalogId?: string, name?: string } | null | undefined} inst @returns {boolean} */
 export function institutionIsLawOrder(inst) {
+  if (hasCustomContentProvenance(inst)) return false;
   if (inst?.catalogId) return (_lawOrderIds ??= idSetFor(lawOrderPredicate)).has(inst.catalogId);
   return lawOrderPredicate(inst?.name || '');
 }

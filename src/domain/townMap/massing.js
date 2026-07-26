@@ -153,6 +153,56 @@ export const SILHOUETTE_BY_KIND = Object.freeze({
     { dx: -0.16, dy: 0, hw: 0.5, hd: 0.6, hMul: 0.7, roof: 'flat' },
     { dx: 0.56, dy: -0.36, hw: 0.13, hd: 0.13, hMul: 1.5, roof: 'flat' }, // 1 chimney
   ], feat: [{ t: 'smoke', c: 1 }] },
+  // KILN / TANNERY — a low work yard with a broad kiln stack.
+  'kiln-yard': { foot: 1.25, parts: [
+    { dx: -0.22, dy: 0.08, hw: 0.5, hd: 0.62, hMul: 0.62, roof: 'gable' },
+    { dx: 0.62, dy: -0.28, hw: 0.18, hd: 0.18, hMul: 1.25, roof: 'flat' },
+  ], feat: [{ t: 'smoke', c: 1 }] },
+  // BARRACKS / GUARDHOUSE — a long hall bracketed by two squat watch blocks.
+  barracks: { foot: 1.45, parts: [
+    { dx: 0, dy: 0, hw: 0.82, hd: 0.48, hMul: 0.68, roof: 'gable' },
+    { dx: -0.7, dy: -0.5, hw: 0.2, hd: 0.28, hMul: 1.0, roof: 'flat' },
+    { dx: 0.7, dy: -0.5, hw: 0.2, hd: 0.28, hMul: 1.0, roof: 'flat' },
+  ], feat: [] },
+  // WATCHTOWER — one unmistakable tall shaft with an attached guard room.
+  watchtower: { foot: 1.05, parts: [
+    { dx: -0.18, dy: 0, hw: 0.34, hd: 0.34, hMul: 1.6, roof: 'hip' },
+    { dx: 0.55, dy: 0.26, hw: 0.3, hd: 0.38, hMul: 0.52, roof: 'gable' },
+  ], feat: [] },
+  // GUILDHALL — a broad public hall, paired wings, and a modest bell turret.
+  guildhall: { foot: 1.5, parts: [
+    { dx: 0, dy: 0.12, hw: 0.78, hd: 0.58, hMul: 0.82, roof: 'hip' },
+    { dx: -0.66, dy: -0.4, hw: 0.22, hd: 0.32, hMul: 0.7, roof: 'gable' },
+    { dx: 0.66, dy: -0.4, hw: 0.22, hd: 0.32, hMul: 0.7, roof: 'gable' },
+    { dx: 0, dy: -0.38, hw: 0.16, hd: 0.16, hMul: 1.2, roof: 'spire' },
+  ], feat: [] },
+  // ARCHIVE / COURTHOUSE — a long sober hall with a raised records tower.
+  'archive-hall': { foot: 1.35, parts: [
+    { dx: -0.12, dy: 0.08, hw: 0.68, hd: 0.56, hMul: 0.78, roof: 'hip' },
+    { dx: 0.62, dy: -0.3, hw: 0.22, hd: 0.3, hMul: 1.12, roof: 'flat' },
+  ], feat: [] },
+  // FARMSTEAD — a large barn and smaller dwelling read as one rural compound.
+  farmstead: { foot: 1.45, parts: [
+    { dx: -0.25, dy: 0.06, hw: 0.48, hd: 0.72, hMul: 0.82, roof: 'gable' },
+    { dx: 0.5, dy: 0.28, hw: 0.3, hd: 0.42, hMul: 0.58, roof: 'hip' },
+  ], feat: [] },
+  // GRAVEYARD / OSSUARY — a small chapel and low charnel house, cross-crowned.
+  'graveyard-chapel': { foot: 1.2, parts: [
+    { dx: -0.2, dy: 0, hw: 0.38, hd: 0.62, hMul: 0.92, roof: 'gable' },
+    { dx: 0.5, dy: 0.32, hw: 0.28, hd: 0.34, hMul: 0.4, roof: 'flat' },
+  ], feat: [{ t: 'cross', c: 0 }] },
+  // TEMPORARY CAMP — three bounded tent masses around a small central lane.
+  encampment: { foot: 1.4, parts: [
+    { dx: -0.5, dy: -0.3, hw: 0.32, hd: 0.4, hMul: 0.5, roof: 'spire' },
+    { dx: 0.48, dy: -0.24, hw: 0.34, hd: 0.42, hMul: 0.54, roof: 'spire' },
+    { dx: 0, dy: 0.5, hw: 0.38, hd: 0.32, hMul: 0.46, roof: 'spire' },
+  ], feat: [] },
+  // NAMED RUIN — broken-height shells, intentionally roofless and asymmetric.
+  'ruin-shell': { foot: 1.35, parts: [
+    { dx: -0.34, dy: 0, hw: 0.46, hd: 0.66, hMul: 0.72, roof: 'flat' },
+    { dx: 0.5, dy: -0.28, hw: 0.28, hd: 0.34, hMul: 1.0, roof: 'flat' },
+    { dx: 0.42, dy: 0.46, hw: 0.3, hd: 0.28, hMul: 0.42, roof: 'flat' },
+  ], feat: [] },
   // GENERIC COMMONS — the residential houses + the fill LOD (explicit generic default).
   'house-a': GENERIC,
   'house-b': { foot: 0.9, parts: [{ dx: 0, dy: 0, hw: 0.82, hd: 0.8, hMul: 0.95, roof: 'gable' }], feat: [] },

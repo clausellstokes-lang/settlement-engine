@@ -58,8 +58,16 @@ vi.mock('../../src/lib/emailPreferences.js', () => ({
   setMyEmailPreference: vi.fn().mockResolvedValue(undefined),
 }));
 
-// Store — only AccountDataPrivacySection reads it (savedSettlements + getState).
-const storeState = { savedSettlements: [], campaigns: [], auth: { user: { email: 'x@y.z' } } };
+// Store — AccountDataPrivacySection reads the live account projection and the
+// constitutional custom-content archive. The archive is intentionally opaque
+// here because this wiring test mocks the downstream download boundary.
+const storeState = {
+  savedSettlements: [],
+  campaigns: [],
+  customContent: {},
+  exportCustomContentArchive: vi.fn().mockResolvedValue({ archive: {} }),
+  auth: { user: { email: 'x@y.z' } },
+};
 vi.mock('../../src/store/index.js', () => {
   function useStore(selector) { return selector(storeState); }
   useStore.getState = () => storeState;
@@ -117,7 +125,7 @@ describe('W4d — Data & Privacy export + import wiring', () => {
       />
     );
     fireEvent.click(screen.getByRole('button', { name: /download json/i }));
-    expect(downloadAccountExport).toHaveBeenCalled();
+    await waitFor(() => expect(downloadAccountExport).toHaveBeenCalled());
   });
 
   test('import trigger is gated by canSave', async () => {

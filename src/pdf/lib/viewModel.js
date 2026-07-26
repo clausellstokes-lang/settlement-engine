@@ -24,10 +24,8 @@
 import { flag } from '../../lib/flags.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
-import {
-  criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
-  deriveDefenseReadiness, deriveArmedForces, DEFENSE_STRESS_STATUS,
-} from '../../domain/display/defenseDisplay.js';
+import { criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
+  deriveDefenseReadiness, deriveArmedForces, DEFENSE_STRESS_STATUS } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
@@ -36,6 +34,8 @@ import { buildPdfLiveWorld } from './liveWorld.js';
 import { directionalRelationshipLabel } from '../../domain/relationships/canonicalRelationship.js';
 import { buildDossierEntityIndex, entityIdFor, slugifyEntity } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { customSupplyChainViewModel } from './customSupplyChains.js';
+import { ownerGenerationContracts } from './generationContracts.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -209,7 +209,10 @@ export function buildViewModel({
     entityIndex:   buildDossierEntityIndex(raw),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
-    identity:      identitySlice(active),
+    // Identity prose may follow the selected raw/AI presentation, but generation
+    // contracts are owner facts from the canonical save. Passing both prevents a
+    // partial AI overlay from hiding or rewriting the culture/coherence receipt.
+    identity:      identitySlice(active, raw),
     overview:      overviewSlice(active, ai, useAi),
     daily:         dailySlice(active, aiDailyLife),
     power:         powerSlice(active),
@@ -313,7 +316,7 @@ function summarySlice(active, ai, useAi, aiDailyLife) {
   };
 }
 
-function identitySlice(s) {
+function identitySlice(s, canonical = s) {
   const ec = s?.economicState || {};
   const dp = s?.defenseProfile || {};
   const sp = ec?.safetyProfile || {};
@@ -334,6 +337,7 @@ function identitySlice(s) {
     tradeAccess:    s?.config?.tradeRouteAccess || null,
     governmentType: s?.powerStructure?.governmentType || s?.governmentType || null,
     founding:       s?.history?.founding || null,
+    ...ownerGenerationContracts(canonical, s),
     quarters:       (s?.spatialLayout?.quarters || []).map(q => ({
       name: q?.name || 'Quarter',
       // engine field is `desc`; the old `description`-only read printed nothing.
@@ -348,7 +352,7 @@ function identitySlice(s) {
       safety:         sp?.safetyLabel || null,
       foodDeficit:    food.deficit ?? null,
       foodSurplus:    food.surplus ?? null,
-      culturalNotes:  s?.culturalNotes || null,
+      culturalNotes:  canonical?.culturalNotes ?? s?.culturalNotes ?? null,
       magicDependency: !!dp?.magicDependency,
       magicalCapability: dp?.magicalCapability || null,
       defenseLabel:   dp?.readiness?.label || null,
@@ -608,12 +612,7 @@ function economicsSlice(active) {
 
   // §14 — confirmed custom supply chains (display-only; separate from the
   // simulated activeChains so they never feed impairment math).
-  const customChains = (ec?.customChains || []).map(c => ({
-    name: c?.label || c?.name || c?.chainId || 'Custom chain',
-    resource: c?.resource || null,
-    processingInstitutions: c?.processingInstitutions || [],
-    outputs: c?.outputs || [],
-  }));
+  const customChains = (ec?.customChains || []).map(customSupplyChainViewModel);
 
   // Shadow economy
   const shadow = sp?.shadowEconomy || s?.shadowEconomy || {};
@@ -624,9 +623,9 @@ function economicsSlice(active) {
     economyOutput:      ec.compound?.economyOutput ?? null,
     tradeAccess:        ec.tradeAccess || s?.config?.tradeRouteAccess || null,
     incomeSources:      normalizeIncomeSources(ec.incomeSources || []),
-    primaryExports:     ec.primaryExports || [],
-    primaryImports:     ec.primaryImports || [],
+    primaryExports:     ec.primaryExports || [], primaryImports: ec.primaryImports || [],
     customTradeLabels:  ec.customTradeLabels || { exports: [], imports: [] },  // §14 — mark these custom
+    tradeLabelSources:  { native: ec.nativeTradeLabels || {}, custom: ec.customTradeEndpoints || {} },
     customCategoryExports: ec.customCategoryExports || {},  // §14 — folded category → [member good names]
     customCategoryImports: ec.customCategoryImports || {},
     tradeLinks:         ec.tradeLinks || [],   // §14 Phase 3b — good-level neighbour trade

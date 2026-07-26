@@ -12,7 +12,8 @@ import { deriveAnchor } from '../../domain/ai/contextAnchor.js';
 
 /**
  * @returns {{
- *   creditBalance: number, activeCampaignId: string|null, activeCampaign: object|null,
+ *   creditBalance: number, ownerId: string|null,
+ *   activeCampaignId: string|null, activeCampaign: object|null,
  *   activeSaveId: string|null, selectedSettlementId: string|null, settlement: object|null,
  *   savedSettlements: Array<object>, worldState: object|null, anchorLabel: string,
  *   ctx: { view: string, params: object, selectedSettlementId: string|null, settlement: object|null,
@@ -20,6 +21,7 @@ import { deriveAnchor } from '../../domain/ai/contextAnchor.js';
  * }}
  */
 export function useSurveyorContext() {
+  const ownerId = useStore((s) => s.auth?.user?.id || null);
   const settlement = useStore((s) => s.settlement);
   const savedSettlements = useStore((s) => s.savedSettlements);
   const campaigns = useStore((s) => s.campaigns);
@@ -51,6 +53,7 @@ export function useSurveyorContext() {
 
   return {
     creditBalance: Number.isFinite(creditBalance) ? creditBalance : 0,
+    ownerId: ownerId != null ? String(ownerId) : null,
     activeCampaignId: activeCampaignId != null ? String(activeCampaignId) : null,
     activeCampaign, activeSaveId: activeSaveId != null ? String(activeSaveId) : null,
     selectedSettlementId, settlement, savedSettlements: saved, worldState, anchorLabel, ctx,

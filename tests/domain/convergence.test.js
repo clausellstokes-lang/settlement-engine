@@ -437,10 +437,30 @@ describe('W-CONVERGENCE §4 — THE MERCENARY CLAUSE (a bounded reinforcement mo
   it('a DECLARED-facet custom institution counts (the facet law — name need not match)', () => {
     // "The Iron Charter" matches no name pattern, but declares the mercenary facet.
     const custom = mercenaryReinforcementOf(snapWith([
-      { name: 'The Iron Charter', facets: { institutionFunction: 'mercenary' } },
+      {
+        name: 'The Iron Charter',
+        source: 'custom',
+        isCustom: true,
+        customDefinitionCategory: 'institutions',
+        customDefinitionId: 'definition:institutions:iron-charter',
+        facets: { institutionFunction: 'mercenary' },
+      },
     ], 80), 'thornwall');
     expect(custom.count).toBe(1);
     expect(custom.factor).toBeGreaterThan(0);
+  });
+
+  it('does not infer mercenary reinforcement from a current custom name', () => {
+    const namesake = mercenaryReinforcementOf(snapWith([{
+      name: 'Mercenary Company',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: 'definition:institutions:mercenary-namesake',
+    }], 80), 'thornwall');
+
+    expect(namesake.count).toBe(0);
+    expect(namesake.factor).toBe(0);
   });
 
   it('affordability-scaled: a poor town reinforces LESS than a wealthy one', () => {

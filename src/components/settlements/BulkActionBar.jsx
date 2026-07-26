@@ -51,6 +51,9 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
   const isMobile = useIsMobile();
   const selectedCount = bulk.selectedIds.size;
   const disabled = selectedCount === 0;
+  const isCampaignTargetBlocked = campaignId =>
+    !!bulk.getAddToCampaignBlock?.(campaignId);
+  const deleteBlocked = !!bulk.getDeleteBlock?.();
 
   // On mobile the single flexWrap row collapses into a ragged stack and the
   // `marginLeft:auto` right-anchor on Delete breaks once it wraps to its own
@@ -102,9 +105,27 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                     // No minHeight override: menu items inherit Button's sm floor so
                     // these (the only path to bulk add-to-campaign) aren't the
                     // smallest targets on the surface (P7).
-                    <Button key={c.id} variant="ghost" fullWidth role="menuitem" icon={<FolderOpen size={10} color={GOLD} />}
-                      onClick={() => { bulk.addToCampaignBulk(c.id); setMoveOpen(false); }}
-                      style={{ justifyContent: 'flex-start', textAlign: 'left', padding: '6px 8px', gap: 4, fontSize: FS.xs, color: INK, fontWeight: 400 }}>
+                    <Button
+                      key={c.id}
+                      variant="ghost"
+                      fullWidth
+                      role="menuitem"
+                      icon={<FolderOpen size={10} color={GOLD} />}
+                      disabled={isCampaignTargetBlocked(c.id)}
+                      onClick={() => {
+                        bulk.addToCampaignBulk(c.id);
+                        setMoveOpen(false);
+                      }}
+                      style={{
+                        justifyContent: 'flex-start',
+                        textAlign: 'left',
+                        padding: '6px 8px',
+                        gap: 4,
+                        fontSize: FS.xs,
+                        color: INK,
+                        fontWeight: 400,
+                      }}
+                    >
                       {c.name}
                     </Button>
                   ))}
@@ -129,7 +150,14 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
             margin is dropped and the pair sits on its own trailing row, with
             Delete pushed to the right within that row instead. */}
         <ActionGroup isMobile={isMobile} mobileTrailing>
-          <Button variant="ghost" size="sm" disabled={disabled} icon={<Trash2 size={12} />} onClick={() => bulk.setDeleteConfirm(true)} style={{ marginLeft: 'auto' }}>
+          <Button
+            variant="ghost"
+            size="sm"
+            disabled={disabled || deleteBlocked}
+            icon={<Trash2 size={12} />}
+            onClick={() => bulk.setDeleteConfirm(true)}
+            style={{ marginLeft: 'auto' }}
+          >
             Delete
           </Button>
 

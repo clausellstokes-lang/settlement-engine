@@ -218,12 +218,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </ClerkNote>
           )}
           <OutcomeCard
-            title="Start the campaign's World Clock first"
+            heading="Start the campaign's World Clock first"
             summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions and start the world clock."
             severity={0.45}
             details={['required before advancement']}
             actions={(
-              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Start the campaign's world clock">
+              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} hint="Start the campaign's world clock">
                 <BookMarked size={13} /> {canonBusy ? 'Starting…' : t('canon.startWorldClock')}
               </SmallButton>
             )}
@@ -316,7 +316,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div style={{ gridColumn: '1 / -1' }}>
           <RealmVerbComposer campaign={campaign} />
         </div>
-        <Section title="Pending Proposals" count={pending.length}>
+        <Section heading="Pending Proposals" count={pending.length}>
           {actionError && (
             <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
               {actionError}
@@ -335,7 +335,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={id}
-                    title={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
+                    heading={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
                     summary={major.summary || major.outcome?.summary || ''}
                     severity={typeof major.severity === 'number' ? major.severity : 0.8}
                     reasons={major.reasons || major.outcome?.reasons || []}
@@ -383,7 +383,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {pending.map(proposal => (
                 <OutcomeCard
                   key={proposal.id}
-                  title={proposal.headline}
+                  heading={proposal.headline}
                   summary={proposal.summary}
                   severity={proposal.severity}
                   reasons={proposal.reasons}
@@ -397,7 +397,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       <SmallButton
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
-                        title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'}
+                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Apply proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
@@ -405,7 +405,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                       <SmallButton
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
-                        title={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'}
+                        hint={paused ? 'The realm is mid-advance. Resume or undo first' : 'Dismiss proposal'}
                         disabled={!!busyProposalId || paused}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
@@ -418,7 +418,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
+        <Section heading="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No active stressors. The realm is quiet, for now.
@@ -450,7 +450,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 return (
                   <OutcomeCard
                     key={stressor.id}
-                    title={stressor.label || human(stressor.type)}
+                    heading={stressor.label || human(stressor.type)}
                     summary={stressorSummary(stressor)}
                     severity={stressor.severity}
                     details={stressorDetails(stressor)}
@@ -472,7 +472,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {echoes.map(stressor => (
                 <OutcomeCard
                   key={`echo-${stressor.id}`}
-                  title={`${stressor.label || human(stressor.type)}, in living memory`}
+                  heading={`${stressor.label || human(stressor.type)}, in living memory`}
                   summary="Resolved, not forgotten: this echo still colors new events and can re-ignite while warm."
                   severity={stressor.memoryStrength ?? 0}
                   details={[`memory ${percent(stressor.memoryStrength ?? 0)}`, 'fading', human(stressor.type)]}
@@ -483,7 +483,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Latest Pulse" count={latestPulse ? selected : 0}>
+        <Section heading="Latest Pulse" count={latestPulse ? selected : 0}>
           {!latestPulse ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
@@ -491,7 +491,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <OutcomeCard
-                title={`Tick ${latestPulse.tick} advanced`}
+                heading={`Tick ${latestPulse.tick} advanced`}
                 summary={`${latestPulse.autoAppliedCount || 0} drift item(s), ${latestPulse.proposalCount || 0} proposal(s), ${latestPulse.candidateCount || 0} candidate(s).`}
                 severity={Math.min(1, selected / 8)}
                 reasons={[latestPulse.interval, latestPulse.calendar?.season, `${rolls.length} rolls`].filter(Boolean)}
@@ -499,7 +499,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {appliedOutcomes.slice(0, 10).map(outcome => (
                 <OutcomeCard
                   key={outcome.id}
-                  title={outcome.headline || human(outcome.candidateType)}
+                  heading={outcome.headline || human(outcome.candidateType)}
                   summary={outcome.summary}
                   severity={outcome.severity}
                   reasons={outcome.reasons}
@@ -513,7 +513,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {resolved.map(stressor => (
                 <OutcomeCard
                   key={stressor.id}
-                  title={`${stressor.label} resolved`}
+                  heading={`${stressor.label} resolved`}
                   summary={`Resolution roll ${percent(stressor.resolutionRoll)} against ${percent(stressor.resolutionChance)} chance.`}
                   severity={stressor.resolutionChance}
                   reasons={['time bounded stressor', human(stressor.type)]}
@@ -525,7 +525,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Impact Digest" count={impactDigest.length}>
+        <Section heading="Impact Digest" count={impactDigest.length}>
           {!latestPulse ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
@@ -539,7 +539,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
               {impactDigest.slice(0, 12).map(entry => (
                 <OutcomeCard
                   key={entry.id}
-                  title={entry.headline}
+                  heading={entry.headline}
                   summary={entry.summary}
                   severity={entry.severity ?? Math.min(1, (entry.score || 0) / 100)}
                   reasons={entry.reasons}
@@ -554,7 +554,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           )}
         </Section>
 
-        <Section title="Roll Explanations" count={rolls.length}>
+        <Section heading="Roll Explanations" count={rolls.length}>
           {rolls.length === 0 ? (
             <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No rolls recorded.

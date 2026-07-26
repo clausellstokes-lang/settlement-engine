@@ -1,30 +1,33 @@
 /**
- * domain/intent/applyDispatch.js — the ACCEPT→MINT DISPATCHER (Surveyor S3→S4 seam,
- * DESIGN_AI_CONTROL_SURFACE §2 stage 3 "every apply writes the aiOperationLog").
+ * domain/intent/applyDispatch.js — the ACCEPT→MINT DISPATCHER
+ * (Surveyor S3→S4 seam).
  *
  * S3 built both ends of the interpret write-path — the edge COMPILER (interpret-session:
  * session text → validated Interpretation) and the REVIEW side (interpretReview.js:
  * reviewInterpretation → `accepted` ops after per-item approve/edit). This module is the
  * SLICE BETWEEN THEM the S3 fold recorded as "the designed next slice (both ends exist)":
- * it maps each ACCEPTED op onto the EXISTING store verb that lands it — never a new apply
- * primitive, never a bypass of the standing proposal/approval machinery:
+ * it maps each ACCEPTED op onto the EXISTING application capability that lands
+ * it — never a new mutation primitive or a bypass of proposal/approval:
  *
  *   • family 'party_impact' → recordPartyImpact(campaignId, action)   — the campaign
  *     world-pulse party-input lane (worldState-scoped; action.kind ∈ PARTY_IMPACT_KINDS).
  *   • family 'canon_event'  → applyEvent(event)                        — the settlement
  *     canon-event lane (save-scoped; event.type ∈ EVENT_TYPES, preview≡apply).
  *
- * The DISPATCH is PURE DATA (no store, no side effects) — it produces typed ApplyIntent[]
- * a thin store-importing executor (src/lib/intent/interpretApply.js) then performs. Keeping
- * it here (headless, no store import, no `any`) is what lets the mapping be pinned without
- * a store, and keeps the engine spine clean (tests/architecture/layerBoundaries.test.js).
+ * The DISPATCH is PURE DATA (no store, no side effects): it produces typed
+ * ApplyIntent[] that src/lib/intent/interpretApply.js converts to serializable
+ * commands. Keeping it here (headless, no store import, no `any`) lets the
+ * mapping be pinned without a store and keeps the engine spine clean
+ * (tests/architecture/layerBoundaries.test.js).
  *
- * THE APPLY-SIDE aiOperationLog (§3 determinism): every apply carries the record that makes
- * the AI change reproducible — ENGINE VERSION + SEED + a reference to the compile that
- * proposed it + the op counts (approved/edited/rejected/blocked). Built here as pure DATA
- * (interpretApplyLogRecord) — hashes/counts/ids only, NEVER params, prose, or PII — so it
- * rides the EXISTING session/outbox surfaces per DESIGN_TRACK_K_COMPLETION §1 (no new
- * owner-gated persisted shape; the audit-spine table stays edge-written).
+ * THE APPLY-SIDE SESSION SUMMARY (§3 determinism): every run carries ENGINE VERSION + SEED
+ * + a reference to the compile that proposed it + the op counts
+ * (approved/edited/rejected/blocked). Built here as pure DATA
+ * (interpretApplyLogRecord) — hashes/counts/ids only, NEVER params, prose, or PII. It is
+ * intentionally distinct from the edge-written `ai_operation_log`: application-command
+ * receipts own per-proposal apply correlation. A migrated adapter may also retain a durable
+ * server receipt (the CUT_TRADE_ROUTE vertical does); this aggregate never pretends every
+ * legacy proposal has that stronger audit.
  *
  * PURE, lazy-only (rides the interpret panel chunk), emits only enum strings + counts —
  * zero eager bytes.
@@ -35,8 +38,8 @@ import { GENERATOR_VERSION, SIMULATION_VERSION } from '../settlement.schema.js';
 /** The op families the S3 compiler emits (mirrors interpretCore INTERPRET_FAMILIES). */
 export const APPLY_FAMILIES = Object.freeze(['canon_event', 'party_impact']);
 
-/** The engine-version fingerprint stamped on every AI apply (for §3 replay: the op log +
- *  seed + THIS version reproduce the world). A stable string, not a live clock. */
+/** Engine-version fingerprint carried by the apply-side reproducibility summary.
+ * A stable string, not a live clock. */
 export const ENGINE_VERSION = `gen-${GENERATOR_VERSION}/sim-${SIMULATION_VERSION}`;
 
 /**
@@ -47,14 +50,16 @@ export const ENGINE_VERSION = `gen-${GENERATOR_VERSION}/sim-${SIMULATION_VERSION
  */
 
 /**
- * A typed, store-agnostic apply command. The executor reads `target` to pick the store verb
- * and passes `action` (party) or `event` (canon) straight through. `saveId` is required for
- * a canon_event (it addresses a settlement); `campaignId` for a party_impact.
+ * A typed, store-agnostic routing intent. The application layer reads `target`
+ * to choose a command adapter and passes `action` (party) or `event` (canon)
+ * through that adapter. `saveId` addresses a canon event; `campaignId`
+ * addresses a party impact.
  * @typedef {{
  *   family: 'canon_event'|'party_impact',
  *   target: 'applyEvent'|'recordPartyImpact',
  *   opType: string,
  *   label: string,
+ *   proposalIndex: number,
  *   campaignId: string|null,
  *   saveId: string|null,
  *   event?: { type: string, [k: string]: unknown },
@@ -76,19 +81,27 @@ function isDispatchable(op) {
  * shapes the manual UI already feeds those verbs (the op registry is one vocabulary for
  * manual + AI, DESIGN_TRACK_K_COMPLETION §0).
  * @param {AcceptedOp} op
- * @param {{ campaignId?: string|null, saveId?: string|null }} [ctx]
+ * @param {{ campaignId?: string|null, saveId?: string|null,
+ *   proposalIndex?: number }} [ctx]
  * @returns {ApplyIntent|null} null when the op names no dispatchable family
  */
-export function intentForOp(op, { campaignId = null, saveId = null } = {}) {
+export function intentForOp(
+  op,
+  { campaignId = null, saveId = null, proposalIndex = 0 } = {},
+) {
   if (!isDispatchable(op)) return null;
   const params = (op.params && typeof op.params === 'object' && !Array.isArray(op.params)) ? op.params : {};
   const label = typeof op.label === 'string' ? op.label : 'uncertain';
+  const exactProposalIndex = Number.isInteger(proposalIndex) && proposalIndex >= 0
+    ? proposalIndex
+    : 0;
   if (op.family === 'party_impact') {
     return {
       family: 'party_impact',
       target: 'recordPartyImpact',
       opType: op.opType,
       label,
+      proposalIndex: exactProposalIndex,
       campaignId: campaignId != null ? String(campaignId) : null,
       saveId: null,
       action: { kind: op.opType, ...params },
@@ -99,6 +112,7 @@ export function intentForOp(op, { campaignId = null, saveId = null } = {}) {
     target: 'applyEvent',
     opType: op.opType,
     label,
+    proposalIndex: exactProposalIndex,
     campaignId: campaignId != null ? String(campaignId) : null,
     saveId: saveId != null ? String(saveId) : null,
     event: { type: op.opType, ...params },
@@ -119,9 +133,19 @@ export function dispatchAcceptedOps(accepted, ctx = {}) {
   const intents = [];
   /** @type {Array<{ opType: string }>} */
   const unroutable = [];
-  for (const entry of Array.isArray(accepted) ? accepted : []) {
+  const entries = Array.isArray(accepted) ? accepted : [];
+  for (let position = 0; position < entries.length; position++) {
+    const entry = entries[position];
     const op = /** @type {AcceptedOp} */ (entry && typeof entry === 'object' && 'op' in entry ? entry.op : entry);
-    const intent = intentForOp(op, ctx);
+    const reviewIndex = (
+      entry
+      && typeof entry === 'object'
+      && 'index' in entry
+      && typeof entry.index === 'number'
+      && Number.isInteger(entry.index)
+      && entry.index >= 0
+    ) ? entry.index : position;
+    const intent = intentForOp(op, { ...ctx, proposalIndex: reviewIndex });
     if (intent) intents.push(intent);
     else if (op && typeof op === 'object' && typeof op.opType === 'string' && op.opType) {
       unroutable.push({ opType: op.opType });
@@ -131,12 +155,11 @@ export function dispatchAcceptedOps(accepted, ctx = {}) {
 }
 
 /**
- * The APPLY-SIDE aiOperationLog record (§3 determinism/audit). Pure DATA — ENGINE VERSION +
- * SEED + a reference to the compile that proposed the ops + the per-decision counts. Carries
- * NO params, NO prose, NO PII: only the counts, the enum labels, the seed, and the compile's
- * prompt-hash reference (interpretRef). This is the reproducibility receipt every AI apply
- * writes; it rides the EXISTING session/outbox surfaces (no new persisted shape — the
- * dedicated audit-spine table stays edge-written, its extension owner-gated per §1).
+ * The apply-side session summary (§3 determinism/audit). Pure DATA — ENGINE VERSION + SEED
+ * + a reference to the compile that proposed the ops + the per-decision counts. Carries NO
+ * params, NO prose, NO PII: only counts, enum labels, seed, and the compile prompt-hash
+ * reference. Command receipts carry exact per-proposal outcomes; this aggregate is display
+ * and evaluation data, not a claim that the edge-written audit table recorded the apply.
  * @param {{
  *   intents?: ApplyIntent[],
  *   corrections?: Array<{ class?: string }>,

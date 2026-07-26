@@ -408,6 +408,7 @@ function enumerateCustom(category, customContent) {
  * @property {string} name
  * @property {string} category
  * @property {string} [subcategory]
+ * @property {string} [key]
  * @property {string} source - 'prebuilt' | 'custom'
  * @property {string[]} [tags]
  * @property {string} [desc]

@@ -51,21 +51,41 @@ export default function TimelapseLayer() {
     const track = buildTimelineTrack({ worldState });
     const frame = frameAtTick(track, timelapseTick);
     if (!frame) return null;
-    const xy = new Map();
-    for (const p of Object.values(placements)) {
-      if (p?.settlementId && Number.isFinite(p.x) && Number.isFinite(p.y)) xy.set(String(p.settlementId), { x: p.x, y: p.y });
+    const coordinatesBySettlementId = new Map();
+    for (const placement of Object.values(placements)) {
+      const hasCoordinates = Number.isFinite(placement?.x)
+        && Number.isFinite(placement?.y);
+      if (placement?.settlementId != null && hasCoordinates) {
+        coordinatesBySettlementId.set(
+          String(placement.settlementId),
+          { x: placement.x, y: placement.y },
+        );
+      }
     }
     // Tint halos (population grew/declined this frame) render UNDER the pulses.
     const tints = [];
-    for (const [id, dir] of Object.entries(frame.deltas)) {
-      const pt = xy.get(id); if (!pt) continue;
-      tints.push({ id, x: pt.x, y: pt.y, color: dir === 'up' ? GREW : FELL });
+    for (const [id, direction] of Object.entries(frame.deltas)) {
+      const coordinates = coordinatesBySettlementId.get(id);
+      if (!coordinates) continue;
+      tints.push({
+        id,
+        x: coordinates.x,
+        y: coordinates.y,
+        color: direction === 'up' ? GREW : FELL,
+      });
     }
     const pulses = [];
     for (const pulse of frame.pulses) {
-      const pt = xy.get(pulse.settlementId); if (!pt) continue;
-      const sev = Math.max(0, Math.min(1, pulse.severity));
-      pulses.push({ id: pulse.settlementId, x: pt.x, y: pt.y, r: 4 + sev * 7, opacity: 0.35 + sev * 0.45 });
+      const coordinates = coordinatesBySettlementId.get(String(pulse.settlementId));
+      if (!coordinates) continue;
+      const severity = Math.max(0, Math.min(1, pulse.severity));
+      pulses.push({
+        id: pulse.settlementId,
+        x: coordinates.x,
+        y: coordinates.y,
+        r: 4 + severity * 7,
+        opacity: 0.35 + severity * 0.45,
+      });
     }
     return { tints, pulses, tick: frame.tick };
     // geometryVersion is a deliberate recompute trigger (geography can shift under

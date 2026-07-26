@@ -2,7 +2,8 @@
  * domain/worldPulse/moralMartialLean.js — the W-F8 moral/martial LEAN-TABLE leaf.
  *
  * Two small, governed, content-reviewable tables + their readers, homed in one
- * dependency-free leaf (imports NOTHING) so every W-F8 consumer — the institution
+ * dependency-light leaf (its only import is the zero-dependency custom-content
+ * authority boundary) so every W-F8 consumer — the institution
  * lifecycle (moral viability pressure + martial emergence), the endogenous conduct
  * plane (religionLegitimacy), the development value-ranking (tierResourceDynamics),
  * and the readiness module — reads ONE mapping without an import cycle.
@@ -28,15 +29,20 @@
  * institutions reads {0,0} ⇒ the endogenous-conduct term is 0 ⇒ byte-identical.
  *
  * PHASE 5 SPLIT (2026-07-11). This leaf stays CANONICAL for the leans generation
- * reads — it is frozen here, imports NOTHING, and is NOT extended to new catalog
+ * reads — it is frozen here and is NOT extended to new catalog
  * institutions (that would flip settlements the golden manifest already pins from
  * {0,0} to a live lean). Phase 5's fuller per-institution coding lives in the
  * generation-inert side-car domain/display/institutionVocabulary.js (INSTITUTION_MORAL_LEAN
  * is a SUPERSET; INSTITUTION_MARTIAL_ROLE carries role tags while the lawful/
  * chaotic FORM stays here). tests/data/institutionVocabulary.test.js is the DRIFT
  * PIN: it asserts the side-car agrees with this leaf on every seed-overlap value.
- * Keep this leaf import-free; the pin lives in the test, never a cross-import.
+ * Keep this leaf free of simulation-layer imports; the pin lives in the test,
+ * never a cross-import.
  */
+
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 
 /** @typedef {{ cruelty: number, disorder: number }} PlaneLean signed −1..+1 on each axis */
 /** @typedef {{ name?: string, id?: string|number, category?: string, priorityCategory?: string, tags?: string[], status?: unknown, required?: boolean, requiredForTier?: boolean, _worldPulseInactive?: boolean }} InstLike a loosely-typed institution record */
@@ -114,6 +120,9 @@ export function isStandingInstitution(inst) {
  */
 export function institutionMoralLean(inst) {
   if (!inst) return null;
+  // Current custom names, categories, and tags are presentation fields.
+  // Native and unstamped legacy rows retain the historical keyword fallback.
+  if (isMaterializedCustomContent(inst)) return null;
   const hay = nameKindTags(inst);
   for (const [re, lean] of MORAL_INSTITUTION_LEANS) if (re.test(hay)) return lean;
   return null;
@@ -125,6 +134,7 @@ export function institutionMoralLean(inst) {
  */
 export function institutionMartialLean(inst) {
   if (!inst) return null;
+  if (isMaterializedCustomContent(inst)) return null;
   const hay = nameKindTags(inst);
   for (const [re, lean] of MARTIAL_INSTITUTION_LEANS) if (re.test(hay)) return lean;
   return null;

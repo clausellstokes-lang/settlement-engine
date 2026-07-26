@@ -5,6 +5,10 @@ import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
 import { RESOURCE_TO_CHAINS } from '../../data/supplyChainResourceIndex.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
+import {
+  nativeSemanticDepletedResourceKeys,
+  nativeSemanticResourceKeys,
+} from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 // CL-0: every candidate family consults the per-domain change-authority policy.
@@ -14,6 +18,7 @@ import { intensityMultiplier, normalizeSimulationRules } from './simulationRules
 // the evaluateWorldPulseRules choke point, so they consult the policy here.
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
+import { reconcileProductionAfterResourceChange } from './resourceDynamicsKernel.js';
 // Phase 4 W-F4b (item 2b) — development fidelity: a chaotic-devout economy mis-RANKS
 // its value chains, acting on a NOISY ESTIMATE of resource pressure (suboptimal
 // expansions, late pivots, lingering on saturated chains). chaosPull 0 (lawful/neutral/
@@ -25,6 +30,7 @@ import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
 // readinessOf 0 (no martial record) ⇒ both factors 1 ⇒ byte-identical.
 import { readinessOf, readinessValueTilt, readinessUpkeepDrag } from './martialReadiness.js';
 import { isWarSupplyResource } from './moralMartialLean.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -190,12 +196,28 @@ function tierCandidate(item, drift, tick, rules) {
   };
 }
 
-/** @param {import('../settlement.schema.js').SimSettlement} settlement */
+/**
+ * Native resources eligible for the built-in depletion/recovery taxonomy.
+ *
+ * The top-level roster is a legacy save shape. Once config owns either roster
+ * sidecar, unioning that legacy field back in would let a custom namesake
+ * masquerade as its built-in counterpart.
+ *
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @returns {string[]}
+ */
 function resourceList(settlement) {
-  return [
-    ...(settlement?.config?.nearbyResources || []),
-    ...(settlement?.nearbyResources || []),
-  ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
+  const config = settlement?.config || {};
+  const source = (
+    Array.isArray(config.nearbyResources)
+    || Array.isArray(config.nearbyResourcesNative)
+  )
+    ? nativeSemanticResourceKeys(config)
+    : /** @type {unknown[]} */ (settlement?.nearbyResources || []);
+  return source
+    .filter(Boolean)
+    .map(value => String(value))
+    .filter((value, index, values) => values.indexOf(value) === index);
 }
 
 /**
@@ -203,10 +225,33 @@ function resourceList(settlement) {
  * @param {any} resource
  */
 function resourceState(settlement, resource) {
-  const explicit = settlement?.config?.nearbyResourcesState?.[resource];
+  const config = settlement?.config || {};
+  const wanted = String(resource).toLowerCase();
+  const nativeDepleted = nativeSemanticDepletedResourceKeys(config)
+    .some(key => String(key).toLowerCase() === wanted);
+  // Current settlements carry exact native-depletion authority. The mixed
+  // state map can truthfully remain "depleted" for an exact custom namesake
+  // while the native resource is abundant, so native simulation must not read
+  // it once this sidecar exists.
+  if (Array.isArray(config.nearbyResourcesNativeDepleted)) {
+    return nativeDepleted ? 'depleted' : 'allow';
+  }
+  const explicit = config.nearbyResourcesState?.[resource];
   if (explicit) return explicit;
-  const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
-  return depleted.has(resource) ? 'depleted' : 'allow';
+  if (
+    !Array.isArray(config.nearbyResources)
+    && !Array.isArray(config.nearbyResourcesNative)
+  ) {
+    return /** @type {unknown[]} */ (
+      Array.isArray(settlement?.nearbyResourcesDepleted)
+        ? settlement.nearbyResourcesDepleted
+        : []
+    )
+      .some(key => String(key).toLowerCase() === wanted)
+      ? 'depleted'
+      : 'allow';
+  }
+  return nativeDepleted ? 'depleted' : 'allow';
 }
 
 /**
@@ -365,7 +410,17 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
     // The same noisy estimate governs the RECOVERY decision (a chaotic economy is late
     // to reopen a saturated chain). Equals pressureScore exactly when chaosPull ≤ 0.
     const perceivedPressureScore = clamp01(pressureScore * perceivedNoise * readinessTilt);
-    if (state !== 'depleted' && (effectivePressure >= 0.64 || (rank >= tierRank('city') && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE))) {
+    if (
+      taxonomy.randomDepletionEligible !== false
+      && state !== 'depleted'
+      && (
+        effectivePressure >= 0.64
+        || (
+          rank >= tierRank('city')
+          && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE
+        )
+      )
+    ) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({
         id: `candidate.resource.deplete.${stablePart(item.id)}.${stablePart(resource)}.${tick}`,
@@ -508,18 +563,75 @@ export function applyResourceOutcomeToSettlement(settlement, outcome) {
   if (!settlement || !outcome?.resourcePatch) return settlement;
   const { resource, state } = outcome.resourcePatch;
   const config = settlement.config || {};
+  const normalizedResource = String(resource).toLowerCase();
   const resourceStateMap = { ...(config.nearbyResourcesState || {}) };
-  resourceStateMap[resource] = state;
-  const depletedSet = new Set(config.nearbyResourcesDepleted || settlement.nearbyResourcesDepleted || []);
-  if (state === 'depleted') depletedSet.add(resource);
-  else depletedSet.delete(resource);
+  const customDepletedNames = (
+    config.nearbyResourceDefinitionsDepleted || []
+  )
+    .map((
+      /** @type {Record<string, unknown>} */ definition,
+    ) => String(definition?.name || ''))
+    .filter(Boolean);
+  const customNamesakeRemainsDepleted = customDepletedNames.some(
+    (/** @type {string} */ name) => (
+      name.toLowerCase() === normalizedResource
+    ),
+  );
+  resourceStateMap[resource] = (
+    state === 'depleted'
+    || customNamesakeRemainsDepleted
+  )
+    ? 'depleted'
+    : state;
+
+  const nativeDepleted = new Map(
+    nativeSemanticDepletedResourceKeys(config)
+      .map(key => [String(key).toLowerCase(), String(key)]),
+  );
+  if (state === 'depleted') nativeDepleted.set(normalizedResource, resource);
+  else nativeDepleted.delete(normalizedResource);
+
+  // nearbyResourcesDepleted is the compatibility/display union. Rebuild it
+  // from the two exact owners instead of mutating the ambiguous flat label.
+  const flatDepleted = new Map(nativeDepleted);
+  for (const name of customDepletedNames) {
+    const key = name.toLowerCase();
+    if (!flatDepleted.has(key)) flatDepleted.set(key, name);
+  }
+  const nextConfig = {
+    ...config,
+    nearbyResourcesState: resourceStateMap,
+    nearbyResourcesNativeDepleted: [...nativeDepleted.values()],
+    nearbyResourcesDepleted: [...flatDepleted.values()],
+  };
+  const nativeResources = nativeSemanticResourceKeys(config);
+  const nextEconomicState = reconcileProductionAfterResourceChange(
+    settlement.economicState,
+    {
+      // The reconcile reads only the live economic roster and route context.
+      // Pass that narrow projection instead of widening its local kernel type
+      // to every historical SimSettlement field.
+      settlement: {
+        config: nextConfig,
+        institutions: liveInstitutions(settlement),
+        activeConditions: settlement.activeConditions,
+        tier: settlement.tier,
+        tradeRoute: settlement.tradeRoute,
+        name: settlement.name,
+        economicState: settlement.economicState,
+      },
+      oldResources: nativeResources,
+      newResources: nativeResources,
+      oldDepleted: nativeSemanticDepletedResourceKeys(config),
+      newDepleted: [...nativeDepleted.values()],
+    },
+  );
   return {
     ...settlement,
-    config: {
-      ...config,
-      nearbyResourcesState: resourceStateMap,
-      nearbyResourcesDepleted: [...depletedSet],
-    },
+    config: nextConfig,
+    ...(settlement.economicState
+      ? { economicState: nextEconomicState }
+      : {}),
     resourceHistory: [
       ...(Array.isArray(settlement.resourceHistory) ? settlement.resourceHistory.slice(-11) : []),
       {

@@ -185,7 +185,6 @@ export default function SettlementDetail({
   handleLink, removeNeighbour, applyRename,
   onLoad,
 }) {
-  const network=detail.settlement.neighbourNetwork||[];
   const [editingName, setEditingName] = useState(null);  // {type,id,oldName}
   const [editDraft,   setEditDraft]   = useState('');
   const [_saved,       _setSaved]      = useState(false);
@@ -255,7 +254,36 @@ export default function SettlementDetail({
 
   // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
-  const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
+  const liveSaveEntry = useStore(s => saveId != null
+    ? s.savedSettlements.find(x => String(x.id) === String(saveId)) || null
+    : null);
+  const authenticatedOwnerId = useStore(s => s.auth?.user?.id ?? null);
+  const savedLibraryOwnerId = useStore(s => s.savedSettlementsOwnerId ?? null);
+  // Authoring authority comes from the authenticated, owner-scoped Library
+  // cache that supplied this detail record. `editMode` is session-global UI
+  // state and is intentionally absent from this decision: it may be stale, and
+  // it can only choose whether an already-authorized owner sees editors.
+  const canAuthorNpc = canEdit
+    && saveId != null
+    && liveSaveEntry != null
+    && authenticatedOwnerId != null
+    && savedLibraryOwnerId != null
+    && String(authenticatedOwnerId) === String(savedLibraryOwnerId);
+  // The Library opens a snapshot (`detail`) and then hydrates the selected save
+  // into the live settlement slice. Every editor writer mutates that live slice;
+  // continuing to render the opening snapshot makes a successful commit look as
+  // though it did nothing until the dossier is reopened. Scope this selector to
+  // the active save identity so another surface's working settlement can never
+  // bleed into the open dossier while routing or hydration is in flight.
+  const liveSettlement = useStore(s => (
+    saveId != null
+    && s.activeSaveId != null
+    && String(s.activeSaveId) === String(saveId)
+      ? s.settlement
+      : null
+  ));
+  const currentSettlement = liveSettlement || detail.settlement;
+  const network = currentSettlement?.neighbourNetwork || [];
   const chronicleEntries = liveSaveEntry?.aiData?.chronicle;
 
   useEffect(() => {
@@ -280,6 +308,17 @@ export default function SettlementDetail({
     return () => { clearAiSettlement(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveId]);
+
+  // An account/cache-owner transition can happen without changing saveId (two
+  // accounts may each own a row with the same UUID in an imported/local test
+  // fixture). SettlementDetail is the one surface that owns this edit session,
+  // so it is safe to clear its global UI bit when authoritative owner scope is
+  // lost. Reusable reader components merely ignore the bit; they never mutate it.
+  useEffect(() => {
+    if (!canAuthorNpc && editMode) {
+      useStore.getState().setEditMode?.(false);
+    }
+  }, [canAuthorNpc, editMode]);
 
   // Fetch the durable-right flag once when the saved dossier is not export-capable
   // and nothing is cached yet — mirrors BuyThisDossier so a held right lights the
@@ -362,7 +401,7 @@ export default function SettlementDetail({
     // debugging. Export is the user's own private doc, so we surface — never
     // block — on issues (publishing to the public gallery is the hard gate).
     try {
-      const { blocking } = validateDossier(detail.settlement);
+      const { blocking } = validateDossier(currentSettlement);
       if (blocking.length > 0) {
         console.warn(`[dossier consistency] exporting with ${blocking.length} unresolved issue(s):`,
           blocking.map(b => b.description));
@@ -381,9 +420,9 @@ export default function SettlementDetail({
         variant,
       };
       if (kind === 'foundry') {
-        await generateFoundryModule(detail.settlement, exportOpts);
+        await generateFoundryModule(currentSettlement, exportOpts);
       } else {
-        await generateSettlementPDF(detail.settlement, {
+        await generateSettlementPDF(currentSettlement, {
           ...exportOpts,
           isFounder: liveStore.isFounder?.() ?? false,
         });
@@ -419,7 +458,7 @@ export default function SettlementDetail({
     setImageExporting(true);
     setPdfError(null);
     try {
-      const summary = settlementToShareSummary(detail.settlement);
+      const summary = settlementToShareSummary(currentSettlement);
       await downloadShareCard(summary);
       useStore.getState().markExported?.();
     } catch (err) {
@@ -439,7 +478,7 @@ export default function SettlementDetail({
           <Button variant="secondary" size="sm" icon={<ChevronLeft size={13}/>} onClick={()=>{setDetail(null);setLinking(false);}}>
             Back to list
           </Button>
-          <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{detail.name}</span>
+          <span style={{fontFamily:serif_,fontSize:FS.lg,fontWeight:600,color:INK}}>{currentSettlement?.name || detail.name}</span>
           {/* chipOnly in read mode: the Mark Canon action moved to the Actions
               panel (owner order 2026-07-22); the header keeps only the status chip. */}
           <PhaseBadge chipOnly={!editMode} />
@@ -465,11 +504,11 @@ export default function SettlementDetail({
           )}
 
           {/* Tier 5.4 — Edited badge surfaces when ANY field on this
-              settlement has been hand-authored. Tooltip explains the
-              guarantees (engine preserves on reroll, AI passes through). */}
+              settlement has been hand-authored. Tooltip SCOPES the guarantee:
+              NPC edits survive a reroll; other sections have no such tail. */}
           {editedCount > 0 && (
             <span
-              title="This dossier contains hand-edited prose. The engine preserves these fields across rerolls; the AI overlay passes them through verbatim."
+              title="This dossier contains hand-edited prose. An edited NPC survives an NPC reroll; the AI overlay passes edits through verbatim."
               style={{
                 display:'inline-flex',alignItems:'center',gap:4,
                 padding:'3px 9px',fontSize:FS.xxs,fontWeight:800,
@@ -492,7 +531,7 @@ export default function SettlementDetail({
               mode too and deletes these entirely.) */}
           {editMode && (
             <SettlementDetailActions
-              settlement={detail.settlement}
+              settlement={currentSettlement}
               saveId={saveId}
               canEdit={canEdit}
               editMode={editMode}
@@ -519,7 +558,7 @@ export default function SettlementDetail({
       {sessionOpen && flag('sessionMode') && (
         <Suspense fallback={null}>
           <SessionMode
-            settlement={detail.settlement}
+            settlement={currentSettlement}
             saveId={saveId}
             onClose={() => setSessionOpen(false)}
           />
@@ -540,7 +579,7 @@ export default function SettlementDetail({
             saveId={saveId}
             isPublic={liveSaveEntry?.is_public} publicSlug={liveSaveEntry?.public_slug}
             visibility={liveSaveEntry?.visibility} unlistedSlug={liveSaveEntry?.unlisted_slug}
-            settlement={detail.settlement}
+            settlement={currentSettlement}
             galleryDescription={liveSaveEntry?.gallery_description}
             galleryTitle={liveSaveEntry?.gallery_title}
             galleryImageUrl={liveSaveEntry?.gallery_image_url}
@@ -562,7 +601,7 @@ export default function SettlementDetail({
           clean dossier. */}
       {editMode && (<>
       <div style={{display:'flex',gap:8,marginBottom:12,alignItems:'center',flexWrap:'wrap'}}>
-        <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
+        <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:currentSettlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
         </Button>
         <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',border:`1px solid ${BORDER}`}}>
@@ -581,7 +620,7 @@ export default function SettlementDetail({
             canon log. */}
       <SystemStateBar />
       <AIInlineCard
-        settlement={detail.settlement}
+        settlement={currentSettlement}
         onPolish={() => {
           // The AI slice's actual handler is `requestNarrative(saveId)` —
           // there's no `runAiLayer` action. Fixed 2026-04 after the audit
@@ -678,7 +717,7 @@ export default function SettlementDetail({
       {/* ── Full settlement output ──────────────────────────────────────────── */}
       {/* ── Edit Names ─────────────────────────────────────────────────────── */}
       <SettlementDetailEditNames
-        settlement={detail.settlement}
+        settlement={currentSettlement}
         editNamesOpen={editNamesOpen}
         setEditNamesOpen={setEditNamesOpen}
         editingName={editingName}
@@ -694,7 +733,7 @@ export default function SettlementDetail({
              a prior causal snapshot, so a fresh/never-advanced town shows nothing
              extra. Sits above the Chronicle annals (the correction slip precedes
              the log). ── */}
-      <WhatChangedPanel settlement={detail.settlement} />
+      <WhatChangedPanel settlement={currentSettlement} />
 
       {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
       {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
@@ -732,10 +771,12 @@ export default function SettlementDetail({
           live inside — as do the IT-3 season-portrait selectors the map pane reads. */}
       <SettlementDossierHero
         detail={detail}
+        settlement={currentSettlement}
         detailView={detailView}
         setDetailView={setDetailView}
         editMode={editMode}
         canEdit={canEdit}
+        canAuthorNpc={canAuthorNpc}
         saveId={saveId}
         authTier={authTier}
         phase={phase}

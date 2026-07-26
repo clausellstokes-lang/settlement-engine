@@ -45,14 +45,18 @@ export default function PlacementsLayer({ transformRef }) {
   // settlements are frozen in place (adding is still allowed elsewhere). We
   // disable drag-to-move here; updatePlacement is the store-level backstop.
   const mapCanonized = useStore(s => {
-    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    const camp = s.activeCampaignId != null
+      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
+      : null;
     return !!camp?.worldState?.canonizedAt;
   });
   // W-LIFECYCLE: the active campaign's satellite-steading ledger (keyed by
   // parent settlement id). null for every world without the lifecycle layer —
   // the orbit render below is then a no-op (zero footprint).
   const satellitesLedger = useStore(s => {
-    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    const camp = s.activeCampaignId != null
+      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
+      : null;
     return camp?.worldState?.spatialLedgers?.satellites || null;
   });
   // H2 · THE FIRST ADVANCE — the active campaign's living-world state, read so
@@ -60,7 +64,9 @@ export default function PlacementsLayer({ transformRef }) {
   // advance off the EXISTING advance counter (worldState.pulseHistory grows by
   // one record per advance). null for every world without a campaign.
   const advanceWorldState = useStore(s => {
-    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    const camp = s.activeCampaignId != null
+      ? s.campaigns?.find(c => String(c.id) === String(s.activeCampaignId))
+      : null;
     return camp?.worldState || null;
   });
 
@@ -83,7 +89,7 @@ export default function PlacementsLayer({ transformRef }) {
 
   const saveById = useMemo(() => {
     const m = new Map();
-    for (const s of saves || []) m.set(s.id, s);
+    for (const s of saves || []) m.set(String(s.id), s);
     return m;
   }, [saves]);
 
@@ -91,7 +97,7 @@ export default function PlacementsLayer({ transformRef }) {
     const out = [];
     for (const [burgId, p] of Object.entries(placements || {})) {
       if (typeof p?.x !== 'number' || typeof p?.y !== 'number') continue;
-      const settlement = saveById.get(p.settlementId) || null;
+      const settlement = p.settlementId != null ? saveById.get(String(p.settlementId)) || null : null;
       const tier = tierFor(settlement || { population: p.population });
       // W-LIFECYCLE: a dead settlement KEEPS its cell — drawn as ruins, never
       // removed (geometry survives death). Tolerant read across save shapes.
@@ -111,7 +117,7 @@ export default function PlacementsLayer({ transformRef }) {
         : [];
       out.push({
         burgId,
-        settlementId: p.settlementId || null,
+        settlementId: p.settlementId ?? null,
         x: p.x, y: p.y,
         tier,
         name: settlement?.name || p.name || '',
@@ -200,7 +206,7 @@ export default function PlacementsLayer({ transformRef }) {
     // click on a non-selected icon (which should just select it).
     const isSelected =
       String(selectedBurgId) === String(it.burgId) ||
-      (it.settlementId && String(selectedSettlementId) === String(it.settlementId));
+      (it.settlementId != null && String(selectedSettlementId) === String(it.settlementId));
     if (!isSelected) return;
     if (e.button !== undefined && e.button !== 0) return;
     const pt = screenToMap(e);
@@ -249,7 +255,7 @@ export default function PlacementsLayer({ transformRef }) {
       {items.map(it => {
         const isSelected =
           String(selectedBurgId) === String(it.burgId) ||
-          (it.settlementId && String(selectedSettlementId) === String(it.settlementId));
+          (it.settlementId != null && String(selectedSettlementId) === String(it.settlementId));
         const preview = (dragPreview && dragPreview.burgId === it.burgId) ? dragPreview : null;
         const x = preview ? preview.x : it.x;
         const y = preview ? preview.y : it.y;
@@ -264,7 +270,7 @@ export default function PlacementsLayer({ transformRef }) {
             style={pulsing
               ? { pointerEvents: 'auto', animationDelay: `calc(var(--oc-motion-ink) * ${pulseDelay} / 2)` }
               : { pointerEvents: 'auto' }}
-            data-hover-settlement-id={it.settlementId || undefined}
+            data-hover-settlement-id={it.settlementId ?? undefined}
             onPointerEnter={(e) => {
               // Hover-peek is a fine-pointer affordance. On touch a tap fires
               // pointerenter with no paired pointerleave, which would leave the
@@ -274,7 +280,7 @@ export default function PlacementsLayer({ transformRef }) {
               // QuickInspector's own selection gate suppresses the peek while a
               // settlement is selected, so no selection check is needed here.
               if (e.pointerType === 'touch') return;
-              if (!it.settlementId) return;
+              if (it.settlementId == null) return;
               setHovered?.(it.settlementId);
             }}
             onPointerLeave={() => clearHovered?.()}

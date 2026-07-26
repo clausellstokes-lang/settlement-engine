@@ -70,7 +70,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
         variant={toolbar ? 'secondary' : 'ghost'}
         size={toolbar ? 'md' : 'sm'}
         onClick={() => setOpen(true)}
-        title="See the 17-step simulation pipeline that built this settlement"
+        title="See the stages and decisions that built this settlement"
         icon={toolbar ? undefined : <span style={{ color: GOLD }}>✦</span>}
         style={toolbar ? undefined : {
           border: `1px solid ${BORDER}`,
@@ -140,8 +140,8 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   marginTop: 4, fontSize: FS['11.5'], color: BODY,
                   lineHeight: 1.5, fontFamily: sans,
                 }}>
-                  Seventeen pure-functional steps, deterministic per seed.
-                  Tap a step to see what it decided and why.
+                  The same choices and seed rebuild the same settlement.
+                  Open a stage to see what it decided and why.
                 </div>
               </div>
               <IconButton
@@ -160,7 +160,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
                   padding: 16, color: MUTED, fontSize: FS.sm,
                   fontFamily: sans, textAlign: 'center',
                 }}>
-                  Loading pipeline…
+                  Loading simulation record…
                 </div>
               }>
                 <PipelineRail compact={false} />

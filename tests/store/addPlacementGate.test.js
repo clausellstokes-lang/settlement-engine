@@ -92,4 +92,28 @@ describe('addPlacement authoritative gate (store-hooks-state-7)', () => {
     store.getState().addPlacement({ burgId: 'b1', settlementId: 'ash', x: 1, y: 2 });
     expect(store.getState().mapUndoStack || []).toHaveLength(0);
   });
+
+  test('the canon move-lock treats numeric and string campaign ids as the same campaign', () => {
+    const store = makeStore();
+    store.setState(s => {
+      s.activeCampaignId = '42';
+      s.campaigns = [{ id: 42, worldState: { canonizedAt: '2026-01-01T00:00:00.000Z' } }];
+      s.mapState.placements.b1 = { settlementId: 'ash', x: 1, y: 2 };
+    });
+
+    store.getState().updatePlacement('b1', { x: 99, y: 100 });
+
+    expect(placements(store).b1).toMatchObject({ x: 1, y: 2 });
+  });
+
+  test('burg lookup resolves a numeric placement id to the equivalent string save id', () => {
+    const store = makeStore();
+    const save = { id: '7', name: 'Aldermoor' };
+    store.setState(s => {
+      s.savedSettlements = [save];
+      s.mapState.placements.b1 = { settlementId: 7, x: 1, y: 2 };
+    });
+
+    expect(store.getState().getSettlementForBurg('b1')).toBe(save);
+  });
 });

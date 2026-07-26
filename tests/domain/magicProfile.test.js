@@ -118,6 +118,43 @@ describe('institutionalControl', () => {
     });
     expect(m.institutionalControl).toBe('unregulated');
   });
+
+  it('keeps current custom arcane and healing display names presentation-only', () => {
+    const base = {
+      config: { magicLevel: 'moderate' },
+      institutions: [],
+      powerStructure: { factions: [] },
+    };
+    const namesakes = [
+      { name: "Mage's Tower" },
+      { name: 'Hospital of the Dawn' },
+    ];
+    const currentCustom = namesakes.map((institution, index) => ({
+      ...institution,
+      source: 'custom',
+      customDefinitionId: `definition:institutions:magic-profile-${index}`,
+    }));
+
+    const baseline = deriveMagicProfile(base);
+    const custom = deriveMagicProfile({
+      ...base,
+      institutions: currentCustom,
+    });
+    const legacy = deriveMagicProfile({
+      ...base,
+      institutions: namesakes,
+    });
+
+    expect(custom.availability).toBe(baseline.availability);
+    expect(custom.institutionalControl).toBe(baseline.institutionalControl);
+    expect(custom.roles.infrastructure).toBe(baseline.roles.infrastructure);
+    expect(custom.roles.medical).toBe(baseline.roles.medical);
+
+    expect(legacy.availability).not.toBe(baseline.availability);
+    expect(legacy.institutionalControl).toBe('fragmented');
+    expect(legacy.roles.infrastructure).toBe('common');
+    expect(legacy.roles.medical).toBe('common');
+  });
 });
 
 describe('cost scales inversely with availability', () => {

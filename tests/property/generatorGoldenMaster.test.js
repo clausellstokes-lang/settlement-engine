@@ -20,9 +20,14 @@ import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { CULTURE_PROFILE_KEYS } from '../../src/domain/cultureProfiles.js';
 
 const TIERS    = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const CULTURES = ['germanic', 'celtic', 'norse', 'mediterranean'];
+// Every selectable tradition is now mechanically meaningful, so stability
+// coverage must include the complete canonical vocabulary. Keep the legacy
+// mediterranean alias as an explicit compatibility row rather than allowing it
+// to dominate a corpus that omitted most current choices.
+const CULTURES = [...CULTURE_PROFILE_KEYS, 'mediterranean'];
 // The pipeline's REAL terrain vocabulary. terrainOverride is the live key the
 // pipeline reads (terrainHelpers.getTerrainType, resolveConfig, resolveResources);
 // a bare `terrain` key is dead. These seven tokens are the ones getTerrainType
@@ -105,7 +110,7 @@ describe('generator golden master (cross-build output stability)', () => {
   const rows = corpus();
 
   if (process.env.UPDATE_GOLDEN) {
-    // ~190 full-pipeline generations overrun the root 20s testTimeout on
+    // 523 full-pipeline generations overrun the root 20s testTimeout on
     // slow/parallel runners — a wall-clock false positive, not drift. Precedent:
     // worldMapMobileGate + pglite override blocks.
     it('captures the golden manifest', () => {

@@ -25,6 +25,19 @@ import { isRealmSize, isTone, isMapKind, REALM_SIZES, TONES, MAP_KINDS } from '.
 export const SETT_TYPES = Object.freeze(['random', 'custom', 'thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
 /**
+ * Generated-theme profiles the primitive construct wall can express completely.
+ * `custom` deliberately stays out: it requires the companion
+ * `contentBoundaries` object, while FieldSpec currently admits only scalar
+ * values. Emitting the label alone would imply control the compiler cannot
+ * specify.
+ */
+export const CONSTRUCT_CONTENT_PROFILES = Object.freeze([
+  'heroic',
+  'grounded',
+  'grim',
+]);
+
+/**
  * The SETTLEMENT config fields the compiler may emit — a curated subset of DEFAULT_CONFIG,
  * every key read by the generator pipeline (walker-pinned). Each: a `type` + bounds.
  *   enum  → value ∈ `values`
@@ -43,6 +56,7 @@ export const SETTLEMENT_CONFIG_FIELDS = Object.freeze({
   priorityCriminal:      { type: 'number', min: 0, max: 100 },
   magicExists:           { type: 'bool' },
   culture:               { type: 'string', max_len: 40 },
+  contentProfile:        { type: 'enum', values: CONSTRUCT_CONTENT_PROFILES },
   tradeRouteAccess:      { type: 'string', max_len: 40 },
   monsterThreat:         { type: 'string', max_len: 40 },
   settlementAgeMode:     { type: 'enum', values: ['auto', 'custom'] },

@@ -44,7 +44,9 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
   }, [bridgeRef]);
 
   const activeCampaign = useMemo(
-    () => (campaigns || []).find(c => c.id === activeCampaignId) || null,
+    () => activeCampaignId != null
+      ? (campaigns || []).find(c => String(c.id) === String(activeCampaignId)) || null
+      : null,
     [campaigns, activeCampaignId],
   );
 
@@ -54,9 +56,9 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
   // member list matches what the campaign map actually deploys.
   const members = useMemo(() => {
     if (!activeCampaign) return [];
-    const ids = new Set(activeCampaign.settlementIds || []);
+    const ids = new Set((activeCampaign.settlementIds || []).map(String));
     return (saves || [])
-      .filter(s => ids.has(s.id) && isCanonSave(s))
+      .filter(s => ids.has(String(s.id)) && isCanonSave(s))
       .map(s => ({ name: s.name, tier: s.tier, settlement: s.settlement }));
   }, [activeCampaign, saves]);
 

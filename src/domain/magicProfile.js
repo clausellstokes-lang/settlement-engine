@@ -25,6 +25,7 @@ import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
 import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
+import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 // Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
 // alignment axes — never read off the stored temperamentAxis field — so the
 // regulatory-orthodoxy read can no longer disagree with the niche/warbound/
@@ -97,7 +98,7 @@ function institutionsByPattern(s, pattern) {
   // LIVE roster only — a calamity-ruined mage-tower/temple confers no magic capability
   // (availability / institutional control / roles) (ruin-filter class).
   const inst = liveInstitutions(s);
-  return inst.filter(i => pattern.test(String(i?.name || '')));
+  return inst.filter(i => pattern.test(nativeSemanticName(i)));
 }
 
 // ── Derivers ─────────────────────────────────────────────────────────────

@@ -19,7 +19,22 @@
 
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './stablePart.js';
+
+/**
+ * Boolean wrapper around the shared type guard. SimInstitution is already an
+ * open record, so using the guard directly in a negative branch would narrow
+ * the remaining native record to `never` under strict checking.
+ *
+ * @param {unknown} institution
+ * @returns {boolean}
+ */
+function hasCustomContentProvenance(institution) {
+  return isMaterializedCustomContent(institution);
+}
 
 /** @param {any} tier */
 export function entriesForTier(tier) {
@@ -48,10 +63,22 @@ export function catalogEntryByName(name) {
   return null;
 }
 
-/** @param {import('../settlement.schema.js').SimSettlement} settlement */
+/**
+ * Standing institutions that may satisfy native catalog obligations.
+ *
+ * Unstamped legacy rows retain their historical name semantics. Current
+ * custom definitions carry exact provenance and must satisfy only their
+ * authored mechanics, never a built-in requirement with the same label.
+ *
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ */
 export function existingInstitutionNames(settlement) {
   return new Set((settlement?.institutions || [])
-    .filter((/** @type {any} */ inst) => inst?.status !== 'removed' && !inst?._worldPulseInactive)
+    .filter((/** @type {any} */ inst) => (
+      inst?.status !== 'removed'
+      && !inst?._worldPulseInactive
+      && !hasCustomContentProvenance(inst)
+    ))
     .map((/** @type {any} */ inst) => String(inst.name || '').toLowerCase()));
 }
 
@@ -95,6 +122,10 @@ function promotionAdditions(settlement, toTier) {
  */
 function shouldRemoveForDemotion(inst, toTier) {
   if (!inst || inst.status === 'removed' || inst._worldPulseInactive) return false;
+  // Custom definitions obey their own reviewed tier contract. A presentation
+  // label equal to a catalog institution must never inherit that native
+  // institution's demotion fate.
+  if (hasCustomContentProvenance(inst)) return false;
   if (inst._worldPulseTierAdded && inst.requiredForTier && !tierAtLeast(toTier, inst.requiredForTier)) return true;
   const entry = catalogEntryByName(inst.name);
   if (!entry) return false;
@@ -163,6 +194,7 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
     const additions = promotionAdditions(settlement, toTier);
     const reactivated = new Set();
     institutions = institutions.map(inst => {
+      if (hasCustomContentProvenance(inst)) return inst;
       const match = additions.find(entry => entry.name.toLowerCase() === String(inst?.name || '').toLowerCase());
       if (!match || !(inst.status === 'removed' || inst._worldPulseInactive)) return inst;
       reactivated.add(match.name.toLowerCase());

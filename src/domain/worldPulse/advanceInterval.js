@@ -9,6 +9,7 @@ import { ensureWorldState, INTERVAL_WEEKS } from './worldState.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
+import { withCustomContent } from '../../lib/dependencyEngine.js';
 
 // Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
 // (a one_year advance is 52 synchronous one-week ticks — 4-week months, 13-week seasons, a 52-week year) does not freeze the UI:
@@ -233,6 +234,8 @@ function foldUpdatesOntoSaves(saves, updates) {
  *   resumed segment continues from its cursor, so ticksDone picks up where the
  *   pause left off). Observational only — see reportAdvanceProgress; the same
  *   detail is also dispatched as ADVANCE_PROGRESS_EVENT on globalThis.
+ * @param {Record<string, unknown>|null} [args.customContent] Immutable projection
+ *   resolved from the campaign's pinned content binding.
  *
  * ASYNC: the orchestrator is async + yields to the event loop every
  * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 52
@@ -247,6 +250,7 @@ function foldUpdatesOntoSaves(saves, updates) {
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
   autoResolve = true, resume = null, onProgress = null, weeks = null,
+  customContent = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
   // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
@@ -339,7 +343,7 @@ export async function simulateCampaignWorldInterval({
     // DM's dismissals filtered out); every other tick under autoresolve OFF defers
     // its majors so the loop can pause on the first that surfaces them.
     const isResumeTick = resuming && i === startTick;
-    const tickResult = simulateCampaignWorldPulse({
+    const tickArgs = {
       campaign: runningCampaign,
       saves: runningSaves,
       interval: 'one_week',
@@ -348,7 +352,16 @@ export async function simulateCampaignWorldInterval({
       deferMajors: !autoResolve && !isResumeTick,
       dismissMajorIds: isResumeTick ? dismissMajorIds : null,
       intervalStartTick,
-    });
+    };
+    // Scope only the synchronous kernel call. The orchestrator may yield between
+    // batches, so retaining a module-global override across awaits would allow
+    // concurrent campaign advances to observe one another's content.
+    const tickResult = customContent == null
+      ? simulateCampaignWorldPulse(tickArgs)
+      : withCustomContent(
+          customContent,
+          () => simulateCampaignWorldPulse(tickArgs),
+        );
 
     for (const update of tickResult.settlementUpdates || []) {
       updatesById.set(String(update.saveId), update);

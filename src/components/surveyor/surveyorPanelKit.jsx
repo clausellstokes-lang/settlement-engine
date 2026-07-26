@@ -14,12 +14,28 @@ import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, SLATE_DEEP, sans,
 import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
 
-/** The §9 per-field honesty label. mechanical = real engine effect · flavor = kept, no
- *  mechanic · unsupported = a field the schema has no primitive for (surfaced, never invented).
- *  The label TEXT is the honest signal (no native title tooltip — the a11y-poor kind the
- *  title= census discourages). */
-const LABEL_TONE = { mechanical: 'success', flavor: 'info', unsupported: 'warning' };
-const LABEL_TEXT = { mechanical: 'Mechanical', flavor: 'Flavor', unsupported: 'Unsupported' };
+/**
+ * The per-field truth label. `flavor` remains an accepted compatibility alias
+ * for older compiled drafts, but new manifests call that class Presentation.
+ * Conditional means the field has a real registered consumer only after an
+ * assignment, generated presence, world event, or other named activation.
+ *
+ * Text carries the meaning; color is only reinforcement.
+ */
+const LABEL_TONE = {
+  mechanical: 'success',
+  conditional: 'gold',
+  presentation: 'info',
+  flavor: 'info',
+  unsupported: 'warning',
+};
+const LABEL_TEXT = {
+  mechanical: 'Mechanical',
+  conditional: 'Conditional',
+  presentation: 'Presentation',
+  flavor: 'Presentation',
+  unsupported: 'Unsupported',
+};
 export function FieldLabelBadge({ kind }) {
   const k = LABEL_TONE[kind] ? kind : 'unsupported';
   return <Badge tone={LABEL_TONE[k]} size="sm">{LABEL_TEXT[k]}</Badge>;

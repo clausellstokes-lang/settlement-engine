@@ -59,6 +59,9 @@
  */
 
 import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
+import {
+  isMaterializedCustomContent,
+} from '../content/customContentSemanticAuthority.js';
 import { LAND_HEIGHT } from './spatialCost.js';
 
 // The self-describing slot version. Bumping it is a DISCRETE re-canonize event
@@ -107,15 +110,27 @@ function num(v) {
   return typeof v === 'number' && Number.isFinite(v) ? v : 0;
 }
 
+/**
+ * Boolean-only custom-provenance adapter for the compact roster shape below.
+ *
+ * @param {unknown} institution
+ * @returns {boolean}
+ */
+function hasCustomContentProvenance(institution) {
+  return isMaterializedCustomContent(institution);
+}
+
 // ── CAPABILITY: the water-access institution set, enumerated from the catalog ──
 // A settlement HAS water access when it carries an institution the catalog marks
 // maritime: its def declares a 'port' or 'shipbuilding' tag, OR its
 // `tradeRouteRequired` lists 'port' (docks, shipyards, boatyards, ferries, fishing
 // communities — whatever the ACTUAL catalog holds, no authored flag). Built once
 // (a pure derivation of the frozen catalog) and matched id-FIRST (a DM-renamed but
-// catalog-stamped institution keeps its capability) with a name fallback (an
-// unstamped custom institution matches by canonical name). NB: no `tier`/`auth`/
-// `premium` identifier appears here — the domain stays tier-blind (invariant test).
+// catalog-stamped institution keeps its capability) with a name fallback (a
+// genuinely unstamped legacy/custom row matches by canonical name). Current
+// provenance-stamped custom presentation names stop at the authority boundary.
+// NB: no `tier`/`auth`/`premium` identifier appears here — the domain stays
+// tier-blind (invariant test).
 const WATER_ACCESS = (() => {
   /** @type {Set<string>} */
   const names = new Set();
@@ -148,7 +163,8 @@ export function waterAccessInstitutionNames() {
 /**
  * Does an institution roster grant water access? Each row may be a string name or a
  * `{ name, catalogId? }` object (the settlement roster shape). Matches id-first
- * (a catalog-stamped renamed institution keeps capability) then by canonical name.
+ * (a catalog-stamped renamed institution keeps capability) then by canonical
+ * name for native/unstamped legacy rows.
  * @param {Array<string | { name?: unknown, catalogId?: unknown, id?: unknown }> | null | undefined} institutions
  * @returns {boolean}
  */
@@ -160,6 +176,9 @@ export function hasWaterAccessInstitution(institutions) {
       if (WATER_ACCESS.names.has(row) || (catalogIdForName(row) && WATER_ACCESS.ids.has(/** @type {string} */ (catalogIdForName(row))))) return true;
       continue;
     }
+    // Current custom names are presentation-only. String rows and provenance-
+    // free objects retain the historical fallback for legacy saves.
+    if (hasCustomContentProvenance(row)) continue;
     const stampedId = row.catalogId != null ? String(row.catalogId) : null;
     if (stampedId && WATER_ACCESS.ids.has(stampedId)) return true;
     const name = row.name != null ? String(row.name) : (row.id != null ? String(row.id) : '');

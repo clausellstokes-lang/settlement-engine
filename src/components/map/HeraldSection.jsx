@@ -45,7 +45,7 @@ export default function HeraldSection({ items = [], emptyLead, worldState, nameB
   return (
     <div style={{ display: 'grid', gap: 12 }}>
       {children}
-      <Section title={title} count={items.length}>
+      <Section heading={title} count={items.length}>
         {items.length === 0 ? (
           <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             {emptyLead}

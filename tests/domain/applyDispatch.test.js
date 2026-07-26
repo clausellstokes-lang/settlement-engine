@@ -8,8 +8,8 @@
  *   PIN B (HONEST UNROUTABLE): an op naming no dispatchable family is collected in `unroutable`,
  *     never silently dropped (the schema-wall discipline at the apply mouth).
  *   PIN C (SHAPE TOLERANCE): both the reviewInterpretation {index,op} entries and bare ops route.
- *   PIN D (APPLY-SIDE aiOperationLog): the record carries ENGINE VERSION + SEED + counts +
- *     the compile ref — and NEVER params, prose, or PII (§3 determinism/audit, no-content law).
+ *   PIN D (APPLY-SIDE SUMMARY): the record carries ENGINE VERSION + SEED + counts +
+ *     the compile ref — and NEVER params, prose, or PII (§3 determinism, no-content law).
  */
 import { describe, it, expect } from 'vitest';
 import {
@@ -72,7 +72,7 @@ describe('applyDispatch — shape tolerance (PIN C)', () => {
   });
 });
 
-describe('applyDispatch — apply-side aiOperationLog (PIN D)', () => {
+describe('applyDispatch — apply-side reproducibility summary (PIN D)', () => {
   it('ENGINE_VERSION is a stable string derived from the schema versions', () => {
     expect(ENGINE_VERSION).toBe(`gen-${GENERATOR_VERSION}/sim-${SIMULATION_VERSION}`);
     expect(typeof ENGINE_VERSION).toBe('string');

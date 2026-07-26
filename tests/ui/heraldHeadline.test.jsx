@@ -59,6 +59,13 @@ describe('HeraldHeadline — the shared grammar line', () => {
     expect(screen.getByText('Bram besieges Ashford')).toBeTruthy();
   });
 
+  test('renders the named severity band, never a raw severity percentage', () => {
+    const { container } = renderHeadline(warItem);
+    expect(screen.getByText('critical')).toBeTruthy();
+    expect(container.textContent).not.toContain('80%');
+    expect(container.textContent).not.toContain('Severity');
+  });
+
   test('renders the SUBJECT-ADDRESS chain resolved through the realm web (linked)', () => {
     renderHeadline(warItem);
     // settlement › power, both linked by the web.
@@ -68,7 +75,7 @@ describe('HeraldHeadline — the shared grammar line', () => {
   test('renders the recorded REASON behind its typed section label (Casus for war), humanized', () => {
     renderHeadline(warItem);
     expect(screen.getByText('Casus')).toBeTruthy();
-    expect(screen.getByText('border raid')).toBeTruthy();
+    expect(screen.getByText('a raid across the border')).toBeTruthy();
   });
 
   test('the separator is a STYLED layout element — no literal em-dash in the rendered text', () => {
@@ -116,7 +123,7 @@ describe('heraldGrammar — typed slots + grouping (pure)', () => {
   test('headlineSlotsOf reads the record, never composes', () => {
     const slots = headlineSlotsOf(warItem);
     expect(slots.glance).toBe('Bram besieges Ashford');
-    expect(slots.reason).toBe('border raid');
+    expect(slots.reason).toBe('a raid across the border');
     expect(slots.reasonLabel).toBe('Casus');
     expect(slots.provenance).toBe('canon');
   });

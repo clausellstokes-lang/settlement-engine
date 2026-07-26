@@ -1,11 +1,11 @@
 /**
  * RealmDocket — THE DOCKET (W-COMPOSER-2 §10): the realm's staged future as a
  * first-class surface. Every queued event across every campaign member, in
- * REAL DRAIN ORDER (the order the next tick consumes them), with per-settlement
- * chips, per-entry cancel, and the §10 LAPSED marking (the entry's verb
- * predicate no longer holds against the CURRENT member state — it will be
- * refused visibly at the drain). Editing reopens the entry in its settlement's
- * composer (the docket law's edit affordance lives where composition lives).
+ * recorded drain order, with per-settlement chips, per-entry cancel, and the
+ * §10 LAPSED marking (the entry's verb predicate no longer holds against the
+ * CURRENT member state). An earlier order may still change a later order's
+ * preconditions, so the Docket names current risk without promising the future
+ * drain result. Editing reopens the entry in its settlement's composer.
  *
  * The FORECAST (the pending future's clone-run) attaches to THIS surface —
  * "the forecast button attached to IT" (§10 THE DOCKET).
@@ -61,7 +61,7 @@ export default function RealmDocket({ campaign }) {
         marginBottom: SP.sm,
       }}>
         <CalendarClock size={12} />
-        The Docket: staged for the next tick
+        The Docket: staged for the next advance
         <span style={{ color: MUTED, opacity: 0.7, marginLeft: 6, textTransform: 'none', fontWeight: 400 }}>
           {queue.length} queued
         </span>
@@ -84,14 +84,14 @@ export default function RealmDocket({ campaign }) {
 
       {queue.length === 0 ? (
         <p style={{ fontSize: FS.xxs, color: MUTED, margin: 0, fontStyle: 'italic' }}>
-          Nothing is staged. Orders queued on member settlements appear here in the order the tick will consume them.
+          Nothing is staged. Orders queued on member settlements appear here in their recorded queue order.
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           {queue.map(item => {
             const sid = String(item.saveId);
             const settlement = settlementById.get(sid);
-            const name = settlement?.name || sid;
+            const name = settlement?.name || 'A campaign settlement';
             // experience-product-fit-3: the composer's real ctx (peer count
             // EXCLUDES this entry's own save), never the empty {} that cried wolf.
             const lapsed = lapseOf(item.event, settlement, {
@@ -122,7 +122,8 @@ export default function RealmDocket({ campaign }) {
                         LAPSED: needs your attention
                       </span>
                       <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
-                        {lapsed} Left as-is, the tick will refuse it visibly. Edit it from {name}&apos;s dossier, or cancel it here.
+                        {lapsed} This order is currently expected to be refused. An earlier order can still change its
+                        preconditions. Edit it from {name}&apos;s dossier, or cancel it here.
                       </span>
                     </>
                   )}

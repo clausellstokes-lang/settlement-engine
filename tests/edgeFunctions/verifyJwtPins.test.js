@@ -48,6 +48,12 @@ const SELF_AUTH_FALSE = new Set([
   // migration 166 — cron-invoked (pg_net) retention-expiry warning, authenticated
   // by the x-cron-secret shared secret, not a JWT. Same posture as pricing-resync-cron.
   'retention-warning-cron',
+  // migration 175 — cron-invoked durable account erasure, authenticated by
+  // ACCOUNT_DELETION_CRON_SECRET rather than a user JWT.
+  'account-deletion-worker',
+  // migration 180 — cron-invoked durable payment-refund recovery, authenticated
+  // by PAYMENT_REFUND_CRON_SECRET rather than a user JWT.
+  'payment-refund-worker',
   // og-image — the callers ARE unfurl bots (no JWT); it reads only already-public
   // gallery data and takes no write path. The platform gate would 401 every social
   // preview. See supabase/functions/og-image/index.ts.

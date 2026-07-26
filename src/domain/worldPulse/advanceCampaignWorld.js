@@ -7,11 +7,33 @@
 export { simulateCampaignWorldPulse } from './pulseKernel.js';
 export { weeksPerInterval, ticksForInterval, simulateCampaignWorldInterval } from './advanceInterval.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
+import { withCustomContent } from '../../lib/dependencyEngine.js';
 
-export function previewCampaignWorldPulse(args = {}) {
-  return simulateCampaignWorldPulse({ ...args, commit: false });
+/**
+ * @typedef {NonNullable<Parameters<typeof simulateCampaignWorldPulse>[0]> & {
+ *   customContent?:Record<string, unknown>|null,
+ * }} PinnedPulseArgs
+ */
+
+/**
+ * @param {PinnedPulseArgs} args
+ * @param {boolean} commit
+ * @returns {ReturnType<typeof simulateCampaignWorldPulse>}
+ */
+function runWithPinnedContent(args, commit) {
+  const { customContent = null, ...pulseArgs } = args || {};
+  const run = () => simulateCampaignWorldPulse({ ...pulseArgs, commit });
+  return customContent == null
+    ? run()
+    : withCustomContent(customContent, run);
 }
 
+/** @param {PinnedPulseArgs} [args] */
+export function previewCampaignWorldPulse(args = {}) {
+  return runWithPinnedContent(args, false);
+}
+
+/** @param {PinnedPulseArgs} [args] */
 export function advanceCampaignWorld(args = {}) {
-  return simulateCampaignWorldPulse({ ...args, commit: true });
+  return runWithPinnedContent(args, true);
 }

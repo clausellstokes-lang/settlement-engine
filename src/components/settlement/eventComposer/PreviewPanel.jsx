@@ -9,6 +9,11 @@ import { SP, CARD, GOLD, FS, sans, INK, MUTED, SECOND, swatch } from '../../them
 import { vetoProse } from '../../../domain/events/affordanceManifest.js';
 import { PARTY, PARTY_BG } from './helpers.js';
 
+export const CLOCK_BOUND_SCOPE_NOTICE = [
+  'Clock-bound campaign: applying this change stages it for the next World Pulse.',
+  'Any preview uses the settlement as it stands now; earlier queued orders and intervening world changes may alter the eventual result.',
+].join(' ');
+
 export function PreviewPanel({ preview, stale = false, queued = false }) {
   if (!preview) return null;
   const { deltas, factionResponses, narrativeSummary, warnings } = preview;
@@ -59,10 +64,12 @@ export function PreviewPanel({ preview, stale = false, queued = false }) {
           {deltas.map((d, i) => <DeltaRow key={i} d={d} />)}
         </div>
       )}
-      {/* Queued-vs-now (§5): the pane says it plainly. */}
+      {/* Queued-vs-now (§5): this preview evaluates one event against the
+          current settlement. It does not simulate the queue entries or realm
+          evolution that will precede a clock-bound application. */}
       {queued && !vetoed && (
         <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
-          Applies at the next World Pulse advance (clock-bound campaign).
+          Isolated-scope review. {CLOCK_BOUND_SCOPE_NOTICE}
         </div>
       )}
       {factionResponses?.length > 0 && (

@@ -24,7 +24,7 @@
 //
 // PURE display selector. No store, no React, no Date/rng.
 
-import { human } from './WorldPulseData.js';
+import { newsReasonPhrases } from '../../domain/display/newsBody.js';
 
 /**
  * @typedef {import('./heraldFeed.js').HeraldItem} HeraldItem
@@ -50,20 +50,14 @@ export const HEADLINE_TEMPLATES = Object.freeze(/** @type {Record<HeraldSection,
 function str(v) { return v == null ? '' : String(v); }
 
 /**
- * The recorded reason for the headline: the first recorded reason string (humanized
- * for the underscore vocabulary), or null when the record holds no reason (degrade —
- * the REASON slot then renders nothing). Never a fabricated cause.
+ * The recorded reason for the headline, translated through the same fiction-register
+ * vocabulary as Wizard News. The REASON slot renders nothing when the source holds
+ * no reason; it never fabricates a cause.
  * @param {HeraldItem} item
  * @returns {string|null}
  */
 export function reasonOf(item) {
-  const reasons = Array.isArray(item?.reasons) ? item.reasons.filter(Boolean) : [];
-  if (reasons.length === 0) return null;
-  const first = str(reasons[0]).trim();
-  if (!first) return null;
-  // A recorded reason may be a typed token (jargon) — humanize the underscores, never
-  // invent words. If it already reads as prose, humanize is a no-op.
-  return /^[a-z][a-z0-9_]*$/.test(first) ? human(first) : first;
+  return newsReasonPhrases(item)[0] || null;
 }
 
 /**

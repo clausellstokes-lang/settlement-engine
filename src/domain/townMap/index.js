@@ -61,9 +61,14 @@ export {
   readAnnotations,
   readBespokeStyles,
   readSeasonOverride,
+  readSceneOverrides,
+  sceneOverrideFor,
   SEASON_OVERRIDE_IDS,
+  SCENE_OVERRIDE_SKIN_IDS,
   normalizeMapEdits,
   withPinNudge,
+  withSceneOverride,
+  withoutSceneOverride,
   withLayoutVariant,
   nextLayoutVariant,
   withLegendPref,
@@ -75,6 +80,23 @@ export {
   withSeasonOverride,
   newSettlementMapEdits,
 } from './mapEdits.js';
+// DEFAULT-3D SETTLEMENT PORTRAIT — the renderer-neutral semantic manifest +
+// transfer-ready geometry compiler. TownMapModel remains the plan authority;
+// this is only its deterministic dimensional projection.
+export {
+  compileTownSceneManifest,
+  validateTownSceneManifest,
+  assertTownSceneManifest,
+  stableSceneStringify,
+  sceneDigest,
+  stableSceneDigest,
+  stableSceneDigests,
+  compileTownSceneGeometry,
+  townSceneGeometryTransferList,
+  TOWN_SCENE_SCHEMA_VERSION,
+  TOWN_SCENE_COMPILER_VERSION,
+  TOWN_SCENE_GEOMETRY_BUNDLE_VERSION,
+} from '../townScene/index.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
 // shared by the PDF plate + the library-card thumbnail. Imported ONLY by those
 // lazy export surfaces + tests, so it stays out of the first-paint static closure.

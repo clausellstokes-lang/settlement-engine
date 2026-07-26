@@ -82,7 +82,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
   const count = sieges.length + blockades.length + deployments.length + tradeWars.length + standings.length;
 
   return (
-    <Section title="War, Trade and Faith" count={count}>
+    <Section heading="War, Trade and Faith" count={count}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         {sieges.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>

@@ -14,7 +14,7 @@ through a multi-step pipeline that produces an internally-coherent settlement �
 economy, factions, institutions, NPCs, stressors, history — rendered as an
 on-screen dossier and an exportable PDF, with an optional AI prose layer.
 
-Stack: **React 19 + Zustand 5 + Vite 7 5 (oxc transform / Rollup build)**, JS with
+Stack: **React 19 + Zustand 5 + Vite 7 (oxc transform / Rollup build)**, JS with
 **JSDoc types** (no `.ts` in app code), **Supabase** (auth, Postgres + RLS, edge
 functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 
@@ -31,7 +31,7 @@ kernel/      Determinism primitives — the seeded-PRNG seam (prng.js) and its
              both build on. Its own first-paint chunk (`kernel`), so the
              createPRNG seam never drags the lazy engine chunk into first paint.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 20-step pipeline; the rest are domain generators
+             steps/ holds the 23-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
              Bundled as the ~514 kB lazy `engine` chunk — fetched on first
              Generate (settlementSlice's loadEngine dynamic import), NOT on
@@ -41,7 +41,9 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
-             the **campaign world-pulse simulation** (`worldPulse/` — ~126 modules
+             the renderer-neutral settlement-scene projection and manifest
+             compiler (`townScene/`; one canonical truth for 2D and 3D),
+             the **campaign world-pulse simulation** (`worldPulse/` — ~157 modules
              that age a canonized region tick-by-tick: proposals, party impacts,
              the multi-tick interval orchestrator, PLUS the geopolitical
              subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
@@ -49,17 +51,21 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              `tradeSalience`), religion (`religionState`/`pantheon`/`religiousContest`/
              divine mandate), coups & faction competition, and NPC agency; the
              shared sim-shape typedefs live in `pulseShapes.js`), the **spatial-canon
-             engine** (`spatial/` — the Phase 5.5 KEYSTONE, ~26 modules that make the
+             engine** (`spatial/` — the Phase 5.5 KEYSTONE, 30 modules that make the
              realm map a first-class engine input; see "The spatial engine" below),
              regional causality (`region/`), and the fail-closed public-safe display
              projection (`display/`). Every roll forks a seeded, injected RNG (determinism is
              sacred — no Date.now/Math.random). Was the only gate-typechecked layer;
-             the gate now covers the full tree, and `worldPulse/` also carries a
+             the gate now covers the non-JSX logic tree, and `worldPulse/` also carries a
              strict-typecheck ratchet + an any-cast burn-down ratchet
              (scripts/count-domain-any.mjs). <!-- @enforced-by tsconfig.full.json + tsconfig.domain-strict.json + tests/lint/domainAnyCastBaseline.test.js -->
-store/       Zustand slices (15) — the single client state container, incl. the
+application/ Application-command lifecycle: admitted envelopes, owner/target/
+             revision context, legal command specifications, replay-safe receipts,
+             and bounded server-authoritative command adapters. This is a
+             vertical migration seam, not a second store or a universal event bus.
+store/       Zustand slices (18) — the single client state container, incl. the
              campaign world-pulse, regional, and account-import slices.
-components/   React UI. Inline-styled, token-driven. Large feature panels +
+components/  React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
              @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
@@ -68,13 +74,22 @@ components/   React UI. Inline-styled, token-driven. Large feature panels +
              new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ (World
              Map + Realm hub) + auth/ + account/ + admin/ + pricing/ + purchase/ +
              home/ (landing) + region/ + legal/ (terms/privacy/refunds).
+workers/     Bounded off-main-thread transforms. The TownScene workers lower an
+             already audience-projected manifest into live transferable geometry
+             or nested-lazy deterministic PNG/GLB exports; neither receives raw
+             canonical or DM-only state.
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
-             routes, authIntents, customRegistry, dependencyEngine.
+             routes, authIntents, customRegistry, dependencyEngine, and the
+             settlement-scene worker client/cache/adaptive-quality policy.
 hooks/ copy/ design/ config/   Cross-cutting: tokens, copy strings, pricing.
 ```
 
-**The real layer map: `data → kernel → { generators, domain } → store → components/pdf`.**
+**The main read/data-flow map is
+`data → kernel → { generators, domain } → store → components/pdf`.** Durable
+write paths are migrating vertically through
+`components → application command → domain operation → transactional service/store
+projection`; unchanged legacy writers still use the established store/service path.
 `generators` and `domain` are mutually-dependent PEER engine layers by design —
 generators reuse domain vocabulary (trace, magicFilter, goodsCatalog,
 customContentSchema, factionArchetypes) and domain reuses engine derivations
@@ -100,15 +115,16 @@ module calls `registerStep()` on import. The runner lives in
 (`kernel/rngContext.js`, `kernel/prng.js`) plus an `onStep` callback (used by
 the UI "pipeline reveal").
 
-Order (20 steps): `resolveConfig → resolveResources → resolveStress →
-resolveNeighbour → assembleInstitutions → subsumptionPass → cascadePass →
-isolationPass → stressConfirmPass → generateEconomy → generatePower →
-neighbourFactions → factionCorrelationPass → economyReconcilePass →
-structuralValidationPass → generatePopulation → corruptionPass →
-seedStartingPantheon → generateNarratives → assembleSettlement`.
+Order (23 steps): `resolveConfig → buildGenerationContext → resolveResources →
+resolveStress → resolveNeighbour → assembleInstitutions → subsumptionPass →
+cascadePass → isolationPass → stressConfirmPass → generateEconomy →
+generatePower → neighbourFactions → factionCorrelationPass →
+coherenceRepairPass → economyReconcilePass → powerEconomyReconcilePass →
+structuralValidationPass → generatePopulation → corruptionPass → seedStartingPantheon →
+generateNarratives → assembleSettlement`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (derived from steps/index.js) -->
 
-Determinism matters: same seed ⇒ same settlement — pinned by a 155-config
+Determinism matters: same seed ⇒ same settlement — pinned by a 523-config
 golden-master hash manifest and enforced by construction (seeded per-step PRNG
 forks; Math.random/Date/localeCompare banned by lint in the engine + domain).
 The **Strangler-Fig** migration is COMPLETE: legacy `generateSettlement.js` is
@@ -124,7 +140,7 @@ saves when the shape changes.
 
 ## The spatial engine + the engine-wave stack
 
-Phase 5.5 added a **spatial-canon engine** (`src/domain/spatial/`, ~26 modules)
+Phase 5.5 added a **spatial-canon engine** (`src/domain/spatial/`, 30 modules)
 that promotes the realm map to a first-class engine input: settlements carry
 positions, neighbours, and travel costs, and an M1–M11 "mover ladder" ages the
 realm tick-by-tick (migration, trade lanes, war fronts, discovery, calamity,
@@ -145,6 +161,29 @@ section is only the entry pointer to it.
 
 ---
 
+## Settlement scene: one truth, two presentations
+
+`src/domain/townScene/` derives a versioned, audience-safe
+`TownSceneManifest` from canonical settlement state. The 2D plan and illustrated
+3D portrait consume that derived truth; neither is a second mutable settlement
+model. Player filtering happens before scene compilation or worker transport, and
+Three.js is confined to the lazy
+`src/components/townMap/scene3d/` presentation boundary.
+
+The 3D portrait is currently available as an opt-in view through
+`settlementScene3d`, while `settlementScene3dDefault` remains off. Promotion to
+the default requires current local, rendered, device, accessibility, human, and
+field evidence. The 2D plan remains the permanent precision, accessibility,
+export, and performance fallback after any future promotion.
+
+The full ownership, determinism, privacy, worker, lifecycle, adaptive-quality,
+editing, and accessibility design lives in
+[`docs/TOWN_SCENE_3D_ARCHITECTURE.md`](docs/TOWN_SCENE_3D_ARCHITECTURE.md).
+Its machine-readable evidence and promotion rules live in
+[`docs/TOWN_SCENE_PROMOTION_CONTRACT.json`](docs/TOWN_SCENE_PROMOTION_CONTRACT.json).
+
+---
+
 ## State (`store/index.js`)
 
 One Zustand store composed from 18 slices, with `immer + persist +
@@ -158,6 +197,42 @@ queued, then replayed with real credentials after the user authenticates.
 Auth is **two orthogonal axes**: `tier` (anon / free / premium) × `role`
 (user / developer / admin). Permission selectors (`canSave`, `canExport`,
 `isElevated`, …) live on the store.
+
+---
+
+## Application commands, journals, and transport
+
+`src/application/commands/` is the application boundary for reviewed mutations.
+It admits a target-addressed envelope, checks owner and expected state, resolves a
+small command specification, executes the existing domain/store verb, and emits a
+typed receipt. Its memory journal provides in-session duplicate suppression and
+replay; it is not described as durable.
+
+The three similarly named mechanisms have intentionally different jobs:
+
+- `store/operationRegistry.js` is the mutation census and governance vocabulary.
+  It tells reviewers which store verbs exist; it does not dynamically dispatch
+  every mutation.
+- `store/outbox.js` is eventual transport for legacy persistence work. Delivery
+  completion is not command authority.
+- `application_command_journal` (migration 183) is durable command identity,
+  outcome, and reconciliation evidence. The first bounded transaction is
+  `CUT_TRADE_ROUTE`: pure client preparation plus one owner-scoped PostgreSQL
+  compare-and-set that mutates the save and finalizes the receipt atomically.
+  Its initiating Surveyor review exposes an explicit same-session recovery
+  action: it reads the exact owner-scoped journal row, replays a confirmed
+  commit to project its row/receipt, retries the unchanged command only when no
+  durable row exists, and never retries an unresolved claim.
+- Migration 184 extends that same authority to reviewed structured imports:
+  create-and-attach or exclusive rehome, exact pre-command membership topology,
+  campaign-envelope preservation, and final command receipt share one
+  transaction. Configured clients do not dual-write through legacy save,
+  campaign, or outbox paths.
+
+The migration rule is vertical: move one complete command family without dual
+writing, prove replay/stale/offline/owner-race behavior, then migrate the next.
+There is no flag-day Zustand rewrite and no generic server executor that accepts
+arbitrary mutation names.
 
 ---
 
@@ -181,7 +256,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (174) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (188) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
@@ -191,7 +266,7 @@ shows all visible items.
   atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
   consent + velocity guards, and gallery view-dedup — up to the current head. RLS
   is the security spine.
-- **functions/** (29 Deno edge functions) (Deno edge):
+- **functions/** (31 Deno edge functions) (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
@@ -224,12 +299,16 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 
 ## The gate
 
-`npm run check` = `validate:data && validate:migration-head && validate:edge &&
-validate:map && validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
+`npm run check` = `validate:data && validate:custom-content-manifest &&
+validate:migration-head && validate:edge && validate:map &&
+validate:tuning-bands && validate:foundry-module && validate:mcp-server &&
 typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
+- **validate:custom-content-manifest** — regenerates the canonical custom-content
+  authority in check mode and fails if any generated client, edge, or SQL
+  projection has drifted from `schema/custom-content.manifest.json`.
 - **validate:migration-head** — migration numbering is contiguous and the
   checked-in applied-head ledger is well-formed (see `docs/DEPLOY.md`).
 - **validate:edge** — the edge-function contracts (config + `verify_jwt` posture,
@@ -245,17 +324,23 @@ typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
 - **validate:mcp-server** — the standalone `mcp-server/` package (the local Truth
   Server) is dependency-free, parses, has no write/network path, and its tool
   manifest is read-only by construction (no mutating tool exists).
-- **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
-  tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
-  punch-list reached zero, so the gate was switched to full coverage;
-  `typecheck:domain` keeps the fast domain-only check.
+- **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **non-JSX src
+  logic tree** (domain/store/lib/hooks/generators plus `.js` PDF/foundry
+  modules). It deliberately does not claim `src/components/**/*.jsx` or
+  `src/pdf/**/*.jsx`; those remain covered by ESLint, rendered tests, and the
+  Vite build. `typecheck:domain` keeps the fast domain-only check.
 - **typecheck:domain:strict** — the `src/domain/` strict ratchet
   (`scripts/check-domain-strict.mjs`): the any-cast burn-down that may only shrink.
+- **typecheck:ui-boundaries** — an opt-in, baseline-free strict manifest for
+  dependency-light Game Grade UI read-model modules. It grows only when a
+  module reaches zero strict errors; it is not presented as whole-JSX coverage.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~15,100 tests / ~1572 files (unit, property-based, domain/
-  store/lib integration, component/UI smoke, a11y, security, edge-function).
+- **test** — Vitest, ~17,000 tests / ~1767 files: unit, property-based,
+  domain/store/lib integration, component/UI smoke, accessibility, security, and
+  edge-function contracts. Counts are approximate; executable output remains the
+  authority.
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
 - **verify:dist** — the constitutional **first-paint ratchet**: the built entry
@@ -276,9 +361,11 @@ separate (`npm run test:e2e`), not in the default gate.
   bare `import { _Foo }`. Bare `_Foo` requests a *non-existent* export: it
   renders `undefined` in prod and crashes dev ESM. The build now catches this
   (onwarn → error), but write the alias form to begin with.
-- **The gate type-checks the full src logic tree** (it was domain-only; the
-  punch-list hit zero and the gate switched to `tsconfig.full.json`). `src/data`,
-  `src/utils`, and `tests` stay out of scope — lean on tests + the build guard there.
+- **The gate type-checks the non-JSX src logic tree** (it was domain-only; the
+  punch-list hit zero and the gate switched to `tsconfig.full.json`).
+  `src/components/**/*.jsx`, `src/pdf/**/*.jsx`, `src/data`, `src/utils`, and
+  tests stay out of this tsc scope — lean on ESLint, rendered tests, and the
+  build guard there. Do not describe this as full JSX coverage.
 - **`OutputContainer.jsx`** (the dossier renderer) is the densest,
   highest-stakes view — full JSX (the historical createElement form was
   converted in Track C), guarded by the visual-budget + jsx-hygiene error

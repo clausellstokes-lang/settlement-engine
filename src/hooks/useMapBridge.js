@@ -10,12 +10,14 @@
  * it to tear down the dead bridge, mount a fresh iframe (keyed on the same value
  * in WorldMapStage), and re-arm the watchdog.
  *
- * Side-effect hook: returns nothing. All store reads/writes are passed in as
- * stable setters so the hook stays a pure wiring layer.
+ * Side-effect hook: returns only the runtime-resolved iframe URL. All store
+ * reads/writes are passed in as stable setters so the hook stays a wiring
+ * layer; mapRuntimeConfig remains the sole URL/origin authority.
  */
 
 import { useEffect } from 'react';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
+import { readMapRuntimeConfig } from '../lib/mapRuntimeConfig.js';
 import { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } from '../lib/spatialCaptureRegistry.js';
 
 const LOAD_TIMEOUT_MS = 15000;
@@ -32,14 +34,46 @@ export const PLACEMENT_REJECT_COPY = {
 };
 
 export function useMapBridge({
+  enabled = true,
   iframeRef, bridgeRef, reloadKey,
   setMapReady, setMapLoading, setMapError, setBridgeReady,
   setMapSnapshot, setMapTemplates, setSelectedBurgId,
   addPlacement, removePlacementLocal, clearAllPlacementsLocal,
   showToast,
 }) {
+  const {
+    frameUrl,
+    frameOrigin: targetOrigin,
+    configurationError,
+  } = readMapRuntimeConfig();
+
   useEffect(() => {
-    const bridge = createBridgeSingleton(() => iframeRef.current);
+    if (!enabled) return undefined;
+    if (!targetOrigin) {
+      setMapReady(false);
+      setBridgeReady(false);
+      setMapLoading(false);
+      setMapError(configurationError || 'The terrain engine is not securely configured.');
+      return undefined;
+    }
+
+    setMapReady(false);
+    setBridgeReady(false);
+    setMapError(null);
+    setMapLoading(true);
+    let bridge;
+    try {
+      bridge = createBridgeSingleton(
+        () => iframeRef.current,
+        { targetOrigin },
+      );
+    } catch (error) {
+      setMapReady(false);
+      setBridgeReady(false);
+      setMapLoading(false);
+      setMapError(error instanceof Error ? error.message : String(error));
+      return undefined;
+    }
     bridgeRef.current = bridge;
     // Expose the live bridge to the (lazy) spatial-canonize path, which lives in a
     // different subtree than the World Map and so can't receive it via props.
@@ -105,5 +139,7 @@ export function useMapBridge({
       bridgeRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reloadKey]);
+  }, [enabled, reloadKey, frameUrl, targetOrigin, configurationError]);
+
+  return frameUrl;
 }
