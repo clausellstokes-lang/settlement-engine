@@ -143,7 +143,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
       <div style={{marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
-        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat. Higher is better.</div>
+        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({icon,label,color,assess},i)=>{
             const sc = threatScores[label]||0;
@@ -192,7 +192,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               <div style={{background:orderBg,border:`1px solid ${orderColor}30`,borderLeft:`4px solid ${orderColor}`,padding:'10px 14px'}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
                   <div style={{flexShrink:0,minWidth:130}}>
-                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Internal Security</div>
+                    <div style={{fontSize:FS.micro,fontWeight:700,color:orderColor,textTransform:'uppercase',letterSpacing:'0.08em',marginBottom:2}}>Internal Security · First Survey</div>
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
                       <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px',letterSpacing:'0.04em'}}>{orderBadge}</span>

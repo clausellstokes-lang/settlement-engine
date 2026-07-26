@@ -57,6 +57,10 @@ describe('active custom-content execution context', () => {
       customContent: { deities: [moving] },
       settlement: { config: {} },
       applyEvent,
+      // The scenario is an ENTITLED canon edit; the store seam now enforces the
+      // premium gate fail-closed (deityWriteGate, owner-queue #27), so the stub
+      // must declare the entitlement it always assumed.
+      canUseCustomContent: () => true,
     };
     const get = () => state;
 
