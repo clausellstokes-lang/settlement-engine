@@ -23,6 +23,30 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
    + THE_BASE_RESTORATION_LEDGER.md (Phase-D gate: zero PENDING rows),
    DESIGN_DEEP_CRAFT_PAGES.md, C1FIN_CONTROL_CENSUS.md (briefs/).
 
+## 3c. ⭐⭐ SNAPSHOT REFRESH 2026-07-26 (~17:00 EDT — supersedes §3b and §3; git wins)
+- **THE BANKING FOLD**: claude/composite-r4 @ 7a6603de now carries EVERYTHING the
+  2026-07-20→26 era built — 12 lane commits (b503fe05..7a6603de, ~175k insertions):
+  migrations contiguous to 188, the T5 launch surface (obligation webhook, cron
+  workers, 4 ops runbooks, release identity, CSP enforce-flip pending owner
+  ratification), the application-command spine, import reconciliation, the
+  custom-content platform, TownScene 3D (opt-in), and the game-grade proof slices
+  (all flags dark). Pushed to origin as backup under standing authorization —
+  verify with `git ls-remote origin claude/composite-r4`.
+- **GOVERNANCE**: decisions live in ONE surface now — docs/OWNER_DECISION_QUEUE.md
+  (this branch). The 2026-07-26 ledger rows carry four rulings: 07-24 pivot
+  ratified-by-banking (PRODUCT_COMPLETION_ARCHITECTURE's 10-step order = the
+  governing frame; ⛔ tail acts unchanged) · golden-regen adjudicated (in-tree
+  regens = documented corrections; THE ONE REGEN still owed, singular) · WAVE 8
+  CONFIRMED NEVER RUN (money-code items missing; respec migs from 189; issue NO
+  partial refunds until the webhook train deploys) · queue consolidated.
+- **LIVE LANE**: a capability-remediation session (CAPABILITY_REMEDIATION_PLAN.md,
+  waves R-0..R-5, minifold) was actively writing through the fold — fresh dirty
+  state in minifold is ITS work; never clean/reset; its reds (mutation-manifest
+  totality, distribution depth measurements) are expected until it closes.
+- **Successor chain**: this file → COMPREHENSIVE_REVIEW_PROGRAM.md newest rows →
+  OWNER_DECISION_QUEUE.md → minifold docs/CURRENT_STATE.md +
+  PRODUCT_COMPLETION_ARCHITECTURE.md → lane docs.
+
 ## 3b. ⭐ SNAPSHOT REFRESH 2026-07-19 (~05:45 EDT — supersedes §3 below; git wins)
 - The NIGHT RUN landed the ENTIRE deep-craft build: C1–C16 all complete;
   traditions lane complete (T-1..T-5, tip 80b8ad71); illustrated-town complete

@@ -1315,6 +1315,58 @@ families; closure 31/31 VERIFY_DIST green (Δ0); domain-strict 0; tsc 0; docs
 (23+3 mutation-proven / 125 rationaled / 199 uncovered shrink-only burn-down).
 NEXT = TRANCHE 3 (spell-break + error-copy + non-taste kill-list) → close-out →
 HALT per owner stop line.**
+**⬛⭐⭐⭐ GOVERNANCE REUNIFIED + THE OWNER QUEUE CONSOLIDATED (2026-07-26, owner
+order: "re-unify governance in one sitting").** Four rulings, each vetoable:
+(1) THE 07-24 PIVOT RATIFIED-BY-BANKING — PRODUCT_COMPLETION_ARCHITECTURE's
+10-step order is the governing endgame FRAME; THE_REMAINING_ARCHITECTURE's ⛔
+tail acts stay binding and embed at their steps; the GAME_GRADE 07-24
+re-architecture supersedes the 8033ddbe wave plan; the command/import/custom-
+content verticals are in-scope (the 07-19 scope freeze is amended that far).
+(2) GOLDEN-REGEN ADJUDICATED — the 07-24/26 in-tree regens of the 4 families
+are documented defect-correction shifts of the remediation lane (evidence:
+GOLDEN_SHIFT_LEDGER.md), NOT the SS7 ONE REGEN; THE ONE REGEN remains OWED,
+singular, owner-signed (flags + humanization batch); law amended: "never an
+UNDECLARED regen." (3) WAVE 8 CONFIRMED NEVER RUN — all four items MISSING
+with live defect sites: amount-blind clawback arm (stripe-webhook:3021 —
+partial refund still claws back the whole seat; the operator rule stands),
+mig-142/publicSafe npcs-only allowlist vs factions[].members[], verify-
+checkout-session = the sole money endpoint without rateLimit, M11 mount-time
+verify race (SingleDossierSuccessPage:89-131). Respec before dispatch: mig
+numbers 170→189 (consumed). (4) THE QUEUE IS ONE SURFACE —
+docs/OWNER_DECISION_QUEUE.md consolidates all six feeder lists (~95 items,
+deduped, blocking points named); the feeders are frozen historical. Successor
+chain declared: START_HERE §3c → this ledger's newest rows →
+OWNER_DECISION_QUEUE → minifold CURRENT_STATE + PRODUCT_COMPLETION_
+ARCHITECTURE → lane docs.**
+**⬛⭐⭐⭐ THE BANKING FOLD @ composite-r4 2e037f62 (2026-07-26, owner order:
+"carefully and comprehensively and cohesively commit it all" + the standing
+backup authorization).** The week's ~1,046 uncommitted entries (~175k
+insertions incl. ALL migrations 175-188) banked as 13 commits: b503fe05
+perf-gate · 8c99d7a1 ops layer (4 runbooks + release identity + CSP
+enforce-flip, D1 ratification OPEN) · 74aec26e billing hardening (migs
+175-182 + the webhook obligation rewrite; NOT deployed) · 32264eb1 command
+spine (mig 183) · b8398fb1 import reconciliation (mig 184) · 29412d4e
+custom-content platform (migs 185-188, 64k lines) · d108d43e TownScene 3D
+(opt-in; default withheld by evidence) · 7372d067 game-grade proof slices
+(flags dark) · c1ea091f generation remediation LIVE-LANE SNAPSHOT · a88be4f1
+composite integration (596 files) · 5f213e4f sweep · 7a6603de tsc repair
+(the pre-push gate's first real catch; 1-line JSDoc cure, tsc=0) · 2e037f62
+close-out (E-A rationale entry for the live lane's new parity pin +
+CURRENT_STATE governance banner). Method: explicit pathspec lanes,
+staged-set audits, post-commit untracked-survival checks (ALL PASS),
+secret/NUL/oversize scans (0 hits). DISCLOSED: per-lane commits are not
+individually gate-green; the live capability-remediation session
+(CAPABILITY_REMEDIATION_PLAN.md R-0..R-5) kept writing through the fold —
+its deltas land as its own commits. PUSH VERDICT: origin push REJECTED by
+the pre-push full gate AS DESIGNED — 6 reds = 4 PROVEN LOAD-FLAKES
+(isolated single-threaded re-run: 5 files 52 passed/3 skipped in 45.7s) +
+1 manifest-totality gap (cured @ 2e037f62) + 1 GENUINE: generatorGoldenMaster's
+declared 84-city-key drift, the remediation lane's own close-out debt
+(re-capture from a QUIET tree — this tree is still live). THE COMPOSITE PUSH
+IS DEFERRED to that lane's close: re-capture → gate → push. Interim
+off-machine backup: Desktop bundle settlementforge-banking-7a6603de.bundle
+(139MB, tip 2e037f62). HEAD-truth restored: E-A no-stale-entries and both
+tip walkers now collect at HEAD.**
 **⬛⭐⭐⭐ TRANCHE 3 COMPLETE + PROGRAM HALT @ composite-r4 bff01718 (2026-07-21,
 per the owner's stop line — no cold cycle 3 / convergence / confirming cycle).**
 T3-A ERROR-COPY 48→0, NO remainder @ cb096d92: all 48 raw literals across 17
