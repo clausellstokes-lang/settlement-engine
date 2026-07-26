@@ -1,0 +1,69 @@
+/*
+ * Accessibility rules owned by the lazy TownScene presentation.
+ *
+ * Keeping these rules beside their only consumer preserves the global
+ * render-blocking CSS budget: Vite loads this stylesheet with the Portrait
+ * chunk, before the scene is presented.
+ */
+
+/* Browser zoom reduces the CSS viewport. Stack the semantic companion below
+ * the image and remove implicit grid minimums so neither column clips.
+ * !important is deliberate: the wide layout is an inline token-derived style. */
+[data-town-scene-layout] > * {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  [data-town-scene-layout] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  [data-town-scene-3d] input,
+  [data-town-scene-3d] select,
+  [data-town-scene-3d] button {
+    max-width: 100%;
+  }
+}
+
+/* Canvas gestures always have named button/list alternatives. Coarse pointers
+ * receive the stronger 44 CSS-pixel target used by the touch journeys. */
+@media (pointer: coarse) {
+  [data-town-scene-3d] button,
+  [data-town-scene-3d] select,
+  [data-town-scene-3d] input {
+    min-height: 44px;
+  }
+}
+
+/* GPU pixels retain their authored image in forced-colors mode. The canvas gets
+ * a system border and its fully operable semantic companion uses system colors. */
+@media (forced-colors: active) {
+  [data-town-scene-3d] {
+    color: CanvasText;
+  }
+
+  [data-town-scene-3d] canvas {
+    forced-color-adjust: none;
+    border: 1px solid CanvasText;
+  }
+
+  [data-town-scene-3d] button,
+  [data-town-scene-3d] select,
+  [data-town-scene-3d] input {
+    forced-color-adjust: auto;
+    color: ButtonText !important;
+    background: ButtonFace !important;
+    border: 1px solid ButtonText !important;
+  }
+
+  [data-town-scene-3d] [aria-current="true"],
+  [data-town-scene-3d] [aria-pressed="true"] {
+    border-color: Highlight !important;
+    outline: 2px solid Highlight;
+    outline-offset: 1px;
+  }
+
+  [data-town-scene-3d] :focus-visible {
+    outline-color: Highlight !important;
+  }
+}
