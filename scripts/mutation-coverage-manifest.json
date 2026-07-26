@@ -1327,6 +1327,14 @@
     "tests/lint/heraldRouting.walker.test.js": {
       "kind": "mutation",
       "label": "realm/herald routing no-orphan"
+    },
+    "tests/application/commands/commandRegistry.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "Command-registration walker: its catching power is the makeCommandEnvelope kind census (literal / constant / declared-dynamic-vocabulary resolution) plus the frozen dispatch surface and single-executor scans. FIVE mutation plants were executed at build time and proven red-then-green: a new adapter minting an unregistered literal kind reds the registration assertion; a new adapter whose kind is dynamic and undeclared reds the site-totality assertion; a seventh value added to CUSTOM_CONTENT_COMMAND_KIND reds the registration assertion; a spec registered for a capability nothing builds reds the ghost-spec assertion; and renaming a shared kind constant reds the positive control. A standing sweep plant is additionally unsound today because every mutation target under src/application/commands/ is UNTRACKED work-in-progress, so the sweep's git-checkout revert could not restore it."
+    },
+    "tests/domain/customContentConsumerEvidence.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "Consumer-evidence walker: its catching power is exact-set resolution of every declared consumer name to a real file plus a per-field content scan proving a declared consumer literally mentions the field key. FOUR mutation plants were executed at build time and proven red-then-green: a field declaring a non-existent consumer reds both resolution and evidence; a field whose declared consumer never reads it reds the evidence assertion; a consumer row pointing at a renamed file reds the existence assertion; and a stale exempt row reds the honesty assertion. A standing sweep plant would transiently rewrite schema/custom-content.manifest.json, the shared authority compiled into three generated artifacts and the frozen migration-185 SQL snapshot, duplicating that build-time proof at the same cost the customContentManifest.contract sibling already declines."
     }
   },
   "meta": {
