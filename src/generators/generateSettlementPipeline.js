@@ -156,6 +156,7 @@ function refreshRelationshipProjections(relationships, npcs) {
     const first  = byId.get(/** @type {string} */ (rel?.npc1Id));
     const second = byId.get(/** @type {string} */ (rel?.npc2Id));
     if (!first && !second) return rel;
+    /** @type {Record<string, unknown>} */
     const next = {
       ...rel,
       npc1Name: first?.name  ?? rel.npc1Name,
