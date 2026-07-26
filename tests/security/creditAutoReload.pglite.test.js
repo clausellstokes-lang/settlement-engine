@@ -1,12 +1,13 @@
 /**
  * creditAutoReload.pglite.test.js — the auto-reload claim/settings RPCs (M-3a, §4).
  *
- * Loads the REAL 158 migration into an in-process Postgres (pglite) over a minimal
+ * Loads the REAL 158 + 176 migrations into an in-process Postgres (pglite) over a minimal
  * scaffold (auth stubs + a GUC-controlled get_credit_balance) and exercises the
  * atomic money decision: below-threshold gating, delta/amount math from the
  * edge-supplied Stripe rate, the 10-minute cooldown, the monthly cap, and the
  * one-open-attempt claim (the concurrency guard's observable effect). Also the
- * settings-validation RPC and the 72h expiry sweep.
+ * settings-validation RPC, the 72h expiry sweep, and the atomic null-or-same
+ * PaymentIntent identity claim that prevents distinct-PI double grants.
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -14,6 +15,12 @@ import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '158_credit_auto_reload.sql');
+const MIG_PI_CLAIM = resolve(
+  process.cwd(),
+  'supabase',
+  'migrations',
+  '176_auto_reload_payment_intent_claim.sql',
+);
 const U = '11111111-1111-1111-1111-111111111111';
 
 async function makeDb() {
@@ -37,6 +44,7 @@ async function makeDb() {
       select coalesce((select balance from public._test_bal where user_id = target_user), 0) $fn$;
   `);
   await db.exec(readFileSync(MIG, 'utf-8'));
+  await db.exec(readFileSync(MIG_PI_CLAIM, 'utf-8'));
   return db;
 }
 
@@ -61,6 +69,19 @@ async function seed(db, { balance = 2, enabled = true, threshold = 5, target = 2
 async function claim(db, { unit = 499, per = 25 } = {}) {
   await asService(db);
   const res = await db.query(`select public.claim_auto_reload_attempt('${U}'::uuid, ${unit}, ${per}) as r`);
+  return res.rows[0].r;
+}
+
+async function bindPaymentIntent(
+  db,
+  attemptId,
+  paymentIntentId,
+  { user = U, amount = 459, credits = 23 } = {},
+) {
+  const res = await db.query(
+    'select public.claim_auto_reload_payment_intent($1::uuid,$2::uuid,$3,$4,$5) as r',
+    [attemptId, user, paymentIntentId, amount, credits],
+  );
   return res.rows[0].r;
 }
 
@@ -146,6 +167,87 @@ describe('claim_auto_reload_attempt', () => {
     await seed(db, { balance: 2 });
     await asUser(db);
     await expect(db.query(`select public.claim_auto_reload_attempt('${U}'::uuid, 499, 25)`)).rejects.toThrow(/service-role only/);
+  });
+});
+
+describe('claim_auto_reload_payment_intent', () => {
+  it('concurrent distinct PIs racing from null produce exactly one identity winner', async () => {
+    await seed(db, { balance: 2, threshold: 5, target: 25, cap: 4000 });
+    const attempt = await claim(db);
+    const [a, b] = await Promise.all([
+      bindPaymentIntent(db, attempt.attempt_id, 'pi_race_a'),
+      bindPaymentIntent(db, attempt.attempt_id, 'pi_race_b'),
+    ]);
+    expect([a, b].filter((r) => r.ok)).toHaveLength(1);
+    expect([a, b].filter((r) => !r.ok)).toHaveLength(1);
+    const row = await db.query(
+      'select stripe_payment_intent_id from public.credit_auto_reload_attempts where id=$1',
+      [attempt.attempt_id],
+    );
+    const winner = row.rows[0].stripe_payment_intent_id;
+    expect(['pi_race_a', 'pi_race_b']).toContain(winner);
+    expect([a, b].find((r) => r.ok).state).toBe('pending');
+  });
+
+  it('is idempotent for the same PI and rejects every later distinct PI', async () => {
+    await seed(db);
+    const attempt = await claim(db);
+    expect((await bindPaymentIntent(db, attempt.attempt_id, 'pi_one')).ok).toBe(true);
+    expect((await bindPaymentIntent(db, attempt.attempt_id, 'pi_one')).ok).toBe(true);
+    expect(await bindPaymentIntent(db, attempt.attempt_id, 'pi_two')).toMatchObject({
+      ok: false,
+      reason: 'not_claimed',
+    });
+    await db.query(
+      "update public.credit_auto_reload_attempts set state='succeeded' where id=$1",
+      [attempt.attempt_id],
+    );
+    // confirm=true can return to the trigger after the webhook has completed.
+    // The same PI remains an idempotent success; a distinct PI still cannot bind.
+    expect((await bindPaymentIntent(db, attempt.attempt_id, 'pi_one')).ok).toBe(true);
+    expect((await bindPaymentIntent(db, attempt.attempt_id, 'pi_two')).ok).toBe(false);
+    const row = await db.query(
+      'select stripe_payment_intent_id from public.credit_auto_reload_attempts where id=$1',
+      [attempt.attempt_id],
+    );
+    expect(row.rows[0].stripe_payment_intent_id).toBe('pi_one');
+  });
+
+  it('reasserts user, amount, and credit delta in the atomic update', async () => {
+    await seed(db);
+    const attempt = await claim(db);
+    expect((await bindPaymentIntent(
+      db,
+      attempt.attempt_id,
+      'pi_wrong_amount',
+      { amount: 458 },
+    )).ok).toBe(false);
+    expect((await bindPaymentIntent(
+      db,
+      attempt.attempt_id,
+      'pi_wrong_credits',
+      { credits: 24 },
+    )).ok).toBe(false);
+    const row = await db.query(
+      'select stripe_payment_intent_id from public.credit_auto_reload_attempts where id=$1',
+      [attempt.attempt_id],
+    );
+    expect(row.rows[0].stripe_payment_intent_id).toBeNull();
+  });
+
+  it('refuses a caller that is not service_role', async () => {
+    await seed(db);
+    const attempt = await claim(db);
+    await asUser(db);
+    await expect(db.query(
+      `select public.claim_auto_reload_payment_intent(
+        '${attempt.attempt_id}'::uuid,
+        '${U}'::uuid,
+        'pi_forbidden',
+        459,
+        23
+      )`,
+    )).rejects.toThrow(/service-role only/);
   });
 });
 

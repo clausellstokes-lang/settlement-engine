@@ -446,6 +446,20 @@ verify_jwt = false
 [functions.retention-warning-cron]
 verify_jwt = false
 
+# Cron-invoked durable account-deletion worker (migration 175, pg_net). It
+# authenticates the x-cron-secret header against ACCOUNT_DELETION_CRON_SECRET,
+# constant-time, refuses an unset secret, and re-checks the private database kill
+# switch. There is no user JWT on a pg_net dispatch.
+[functions.account-deletion-worker]
+verify_jwt = false
+
+# Cron-invoked durable payment-refund recovery (migration 180, pg_net). It
+# authenticates x-cron-secret against PAYMENT_REFUND_CRON_SECRET, constant-time,
+# refuses an unset/mismatched secret, and re-checks the private database kill
+# switch. There is no user JWT on a pg_net dispatch.
+[functions.payment-refund-worker]
+verify_jwt = false
+
 # Per-template self-auth: authenticated templates read the recipient from
 # auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
