@@ -646,19 +646,12 @@ void (function addDragToUpload() {
                 y: mapPt.y,
                 cellId: cellId,
               };
-              // Same-origin parent (the React app serves /map/ from itself).
-              // FAIL-CLOSED: post only to our own concrete http(s) origin. If it
-              // can't be resolved (opaque/sandboxed/file:// iframe → "null"),
-              // REFUSE to post rather than broadcast to '*' — a wildcard target
-              // would leak placement events (settlement id/name/coords) to any
-              // origin holding a reference to this window (F6).
-              if (window.parent) {
-                var __origin = window.location.origin;
-                if (__origin && __origin !== 'null' && /^https?:\/\//.test(__origin)) {
-                  try {
-                    window.parent.postMessage(msg, __origin);
-                  } catch (e) { /* cross-origin / detached parent — drop */ }
-                }
+              // sf-origin.js owns the exact parent-origin handshake. Route this
+              // one FMG-native drop path through the same closure as sf-bridge;
+              // if the contract did not initialize, fail closed.
+              var __sfOriginContract = window.__sfBridgeOrigin;
+              if (__sfOriginContract && typeof __sfOriginContract.postToParent === 'function') {
+                __sfOriginContract.postToParent(msg);
               }
             } catch (err) {
               console.warn('[sfBridge] postMessage failed:', err);

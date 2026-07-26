@@ -106,6 +106,13 @@ in lexical order; there is no built-in `down`. This is documented in
 3. New money/PII migrations must ship a reversal or a `-- @rollback:` note
    (enforced by `tests/docs/migrationRollbackDiscipline.test.js`).
 
+Before a production push, the bounded clone rehearsal in
+`docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md` classifies every pending migration.
+An existing `.down.sql` or migration-local `@rollback` note is preserved;
+otherwise the enclosing wave records an explicit forward-only posture. That
+receipt is the incident-time map from a failed subsystem wave to its reviewed
+recovery rule—it is not permission to reverse data or RLS automatically.
+
 **Applied-head caveat.** `supabase/applied-head.json` records the migration live in
 prod. It can lag the repo head — that is the *documented-normal* commit→push window
 (`tests/docs/migrationAppliedHead.test.js` treats "pending" as OK). Before any
@@ -141,6 +148,9 @@ wire alerting there.
 
 ## See also
 - `docs/DEPLOY.md` — the canonical forward-deploy runbook (client / DB / edge / Stripe).
+- `docs/ops/MIGRATION_REHEARSAL_RUNBOOK.md` — bounded production-clone migration proof.
+- `docs/ops/POST_DEPLOY_VERIFICATION_RUNBOOK.md` — source/CSP/head/obligation release receipt.
+- `docs/ops/SERVICE_OBJECTIVES.md` — launch objectives and complete release-evidence policy.
 - `supabase/rollback/README.md` — the forward-only law + the partial down-migrations.
 - `docs/ops/DATA_BACKUP_RUNBOOK.md` — PITR + restore drill (the data-loss recovery path).
 - `docs/ops/PRODUCTION_EMAIL_RUNBOOK.md` — auth SMTP + the transactional mail seam.

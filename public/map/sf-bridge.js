@@ -51,6 +51,15 @@
   const isEmbedded = window.parent !== window;
   if (!isEmbedded) return;
 
+  // sf-origin.js loads immediately before this bridge and owns the one allowed
+  // parent origin. Deployed hosts have no same-origin fallback: if the explicit
+  // parentOrigin handshake is absent or malformed, install no command surface
+  // and emit no map/campaign data.
+  const originContract = window.__sfBridgeOrigin;
+  const parentOrigin = originContract?.parentOrigin || null;
+  const postToParent = originContract?.postToParent;
+  if (!parentOrigin || typeof postToParent !== 'function') return;
+
   // Apply SettlementForge chrome palette class
   document.body.classList.add('sf-embedded');
 
@@ -243,33 +252,8 @@
   }
 
   // ── postMessage plumbing ────────────────────────────────────────────────
-  // Target our own origin (the parent serves /map/ from the same host). The
-  // target origin is FAIL-CLOSED: if it can't be resolved to a concrete http(s)
-  // origin (opaque/sandboxed iframe → "null", file:// scheme → empty/"null"),
-  // we REFUSE to post rather than broadcast to '*'. A '*' target would leak the
-  // bridge's replies (which can carry map/campaign data) to any origin that
-  // happens to hold a reference to this window — so a failed origin computation
-  // must never fall back to broadcasting (F6).
-  function resolveParentOrigin() {
-    let origin;
-    try { origin = window.location.origin; } catch (_) { return null; }
-    // Opaque/file origins serialize to "null" (the string) or an empty value;
-    // neither is a safe postMessage target — treat both as unresolved.
-    if (!origin || origin === 'null') return null;
-    if (!/^https?:\/\//.test(origin)) return null;
-    return origin;
-  }
-
-  function postToParent(msg) {
-    const targetOrigin = resolveParentOrigin();
-    if (!targetOrigin) {
-      // Fail closed: no trustworthy target origin → do not post at all.
-      return;
-    }
-    try {
-      window.parent.postMessage(msg, targetOrigin);
-    } catch (_) { /* cross-origin / detached parent — drop silently */ }
-  }
+  // postToParent closes over the exact origin resolved by sf-origin.js. It
+  // never recomputes from this child window and never falls back to '*'.
 
   function reply(rid, payload) {
     if (!rid) return;
@@ -1236,14 +1220,10 @@
     const { type, _rid } = data;
     if (typeof type !== 'string' || !type.startsWith('settlementEngine:')) return;
 
-    // Trust boundary (finding F6): the settlementEngine:* handlers dispatch
-    // destructive commands (resetMap, loadSnapshot, clearAllPlacements, terrain
-    // edits) and this /map/ document is served same-origin, holding the Supabase
-    // auth token in localStorage. Mirror the parent bridge's discipline
-    // (src/lib/mapBridge.js): only accept commands from our own origin AND from
-    // the frame that embedded us (window.parent). Without this, any sibling
-    // frame or popup could drive the map's destructive command surface.
-    if (event.origin !== window.location.origin) return;
+    // Trust boundary: only the configured parent origin AND the WindowProxy
+    // that embedded us may drive destructive map commands. The map's own origin
+    // is intentionally different in production.
+    if (event.origin !== parentOrigin) return;
     if (event.source !== window.parent) return;
 
     const handler = handlers[type];

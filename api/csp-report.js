@@ -1,29 +1,22 @@
 /**
  * api/csp-report.js — Vercel serverless sink for CSP violation reports.
  *
- * The Content-Security-Policy-Report-Only headers in vercel.json declare
+ * The enforcing Content-Security-Policy headers in vercel.json declare
  *   report-uri /api/csp-report
  *   report-to  csp-endpoint  (Reporting-Endpoints: csp-endpoint="/api/csp-report")
- * so the browser POSTs a report for anything the policy WOULD block — without
- * blocking it. This function makes the sink REAL: it accepts the violation POST
+ * so the browser blocks a violation and POSTs a report. This function makes the
+ * sink REAL: it accepts the violation POST
  * and emits ONE structured `[csp-report]` JSON line to stdout, so violations are
  * collected and searchable in Vercel's Function Logs (filter on "csp-report"). It
  * is a passive collector — it never blocks, mutates, or returns data; it records.
  *
- * ── ROLLOUT: report-only first, then flip to enforce (OWNER PUNCH LIST) ─────────
- * The policy ships as `Content-Security-Policy-Report-Only` so it CANNOT break the
- * live app on day one — it only reports. To promote to enforcement once the report
- * stream is clean:
- *   1. Deploy, then watch Vercel Function Logs (filter "csp-report") for a few days
- *      of real traffic. Each line names the `blocked-uri` + `violated-directive`.
- *   2. For every legitimate resource that reports, widen the matching directive in
- *      vercel.json (e.g. add the real analytics/CDN origin to script-src/connect-src).
- *      Repeat until the stream is quiet under normal use.
- *   3. Rename BOTH header keys in vercel.json from
- *      `Content-Security-Policy-Report-Only` → `Content-Security-Policy`. That single
- *      rename is the enforce flip; the report-uri/report-to stay (enforcing CSP still
- *      reports what it blocks). Keep the map block's looser policy — the vendored FMG
- *      surface needs 'unsafe-eval' + the watabou/deorum/dropbox origins.
+ * ── OPERATIONS ────────────────────────────────────────────────────────────────
+ * Watch Vercel Function Logs (filter "csp-report") after every resource or
+ * origin change. Each line names the blocked URI and violated directive. Widen
+ * only the matching directive for a verified, load-bearing resource; never
+ * respond to a violation by demoting the policy to Report-Only. Keep the map
+ * block's separately scoped policy — the vendored FMG surface needs
+ * 'unsafe-eval' plus the watabou/deorum/dropbox origins.
  *
  * Two wire formats must be handled (a browser sends one or the other):
  *   - report-uri:  Content-Type application/csp-report, body { "csp-report": {…} }
