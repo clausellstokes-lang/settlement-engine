@@ -25,6 +25,10 @@
     "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves."
   },
   "invariants": {
+    "tests/components/deityPanelManifestParity.test.jsx": {
+      "kind": "rationale",
+      "rationale": "Deity-panel<->manifest parity pin authored 2026-07-26 by the live deity/capability lane and banked mid-flight at THE BANKING FOLD. Its catching power is the parity diff itself (panel fields vs manifest declarations, both directions). A mutation plant is deferred to that lane's close per the E-A amendment (b0fc33e1): the subject surface is under active edit in this shared tree, and a plant against a moving surface proves nothing durable. Upgrade to kind:mutation at the deity lane's close."
+    },
     "tests/components/galleryFilterParity.test.jsx": {
       "kind": "rationale",
       "rationale": "A presentational STRUCTURE-parity pin (owner order 14): it asserts the three gallery tabs' filter panels render through the one shared GalleryFilterShell (bordered aside + Filters header) and that the gold-accent EmptyState renders centered. It has no domain/correctness logic to mutate; the convergence it guards is a render-structure assertion checked by querying the shared shell markers, so a planted source mutation is disproportionate for a three-assertion UI parity pin. The shell's byte-shape is separately lint-guarded (kill-list) and its consumers are compile-checked."

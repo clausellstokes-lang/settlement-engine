@@ -1,5 +1,14 @@
 # Current state
 
+> **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
+> "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 188 at
+> HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
+> decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
+> 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
+> adjudication, and the Wave-8 confirmation. This file remains the honest
+> program-state entry point for the code branch.
+
 **Status date:** 2026-07-24  
 **Code of record:** the active integration worktree; verify with `git worktree list`  
 **Audience:** contributors, operators, and reviewers who need the shortest honest
