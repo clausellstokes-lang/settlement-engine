@@ -16,6 +16,7 @@ import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { realmVerbs, realmVetoProse } from '../../domain/events/realmManifest.js';
+import { humanizeToken } from '../../domain/display/humanizeEngineTokens.js';
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 
@@ -34,6 +35,18 @@ const selectStyle = {
  * severity band) submit the table word the kernel expects. */
 function bandValue(dial, word) {
   return dial.key.endsWith('01') ? (dial.bandWords[word] ?? 0.5) : word;
+}
+
+/** An authored dial label wins; imported or future schema keys remain legible. */
+function dialDisplayLabel(dial) {
+  return String(dial?.label || '').trim()
+    || humanizeToken(dial?.key)
+    || 'Order detail';
+}
+
+/** Enum values remain unchanged in `<option value>`; only their visible copy changes. */
+function optionDisplayLabel(option) {
+  return humanizeToken(option) || String(option ?? '');
 }
 
 export default function RealmVerbComposer({ campaign }) {
@@ -144,11 +157,11 @@ export default function RealmVerbComposer({ campaign }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           {(active.entry.dials || []).map(d => (
             <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: FS.xs, fontFamily: sans, color: INK }}>
-              <span style={{ minWidth: 160, color: MUTED }}>{d.label || d.key}</span>
+              <span style={{ minWidth: 160, color: MUTED }}>{dialDisplayLabel(d)}</span>
               {d.kind === 'target' && (
                 <select
                   id={`realm-dial-${d.key}`}
-                  aria-label={d.label || d.key}
+                  aria-label={dialDisplayLabel(d)}
                   style={selectStyle}
                   value={dialState[d.key] || ''}
                   onChange={e => setDialState(s => ({ ...s, [d.key]: e.target.value }))}
@@ -159,28 +172,37 @@ export default function RealmVerbComposer({ campaign }) {
                   ))}
                   {/* Members always listable (the manifest's options narrow the
                       primary target; the apply-time gates stay the law). */}
-                  {memberOptions.filter(o => !(active.entry.targetOptions?.(worldState, ctx) || []).some(x => x.id === o.id)).map(o => (
-                    <option key={`m-${o.id}`} value={o.id}>{o.name}</option>
-                  ))}
+                  {memberOptions
+                    .filter(member => {
+                      const listedTargets = active.entry.targetOptions?.(worldState, ctx) || [];
+                      return !listedTargets.some(
+                        target => String(target.id) === String(member.id),
+                      );
+                    })
+                    .map(member => (
+                      <option key={`m-${member.id}`} value={member.id}>
+                        {member.name}
+                      </option>
+                    ))}
                 </select>
               )}
               {(d.kind === 'enum' || d.kind === 'band') && (
                 <select
                   id={`realm-dial-${d.key}`}
-                  aria-label={d.label || d.key}
+                  aria-label={dialDisplayLabel(d)}
                   style={selectStyle}
                   value={dialState[d.key] ?? String(d.default ?? '')}
                   onChange={e => setDialState(s => ({ ...s, [d.key]: e.target.value }))}
                 >
                   {(d.kind === 'enum' ? d.options : Object.keys(d.bandWords)).map(o => (
-                    <option key={String(o)} value={String(o)}>{String(o)}</option>
+                    <option key={String(o)} value={String(o)}>{optionDisplayLabel(o)}</option>
                   ))}
                 </select>
               )}
               {d.kind === 'toggle' && (
                 <input
                   id={`realm-dial-${d.key}`}
-                  aria-label={d.label || d.key}
+                  aria-label={dialDisplayLabel(d)}
                   type="checkbox"
                   checked={!!dialState[d.key]}
                   onChange={e => setDialState(s => ({ ...s, [d.key]: e.target.checked }))}
@@ -189,10 +211,10 @@ export default function RealmVerbComposer({ campaign }) {
               {d.kind === 'text' && (
                 <input
                   id={`realm-dial-${d.key}`}
-                  aria-label={d.label || d.key}
+                  aria-label={dialDisplayLabel(d)}
                   style={{ ...selectStyle, flex: 1 }}
                   value={dialState[d.key] || ''}
-                  placeholder={d.label}
+                  placeholder={dialDisplayLabel(d)}
                   onChange={e => setDialState(s => ({ ...s, [d.key]: e.target.value }))}
                 />
               )}

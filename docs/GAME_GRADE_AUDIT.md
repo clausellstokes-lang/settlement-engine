@@ -1,15 +1,32 @@
-# THE GAME-GRADE AUDIT — six surfaces vs the bar (2026-07-22)
+# THE GAME-GRADE AUDIT — evidence ledger
 
-> Commissioned under the GAME-GRADE UX DOCTRINE (owner-ratified 2026-07-22): the generator, settlement
-> editor, map editor, realm, custom content, and the Herald must reach the legibility / UX / navigability
-> grade of The Sims, SimCity, Civilization, Mount & Blade, and Total War: Warhammer. THE TRANSLATION
-> PRINCIPLE governs: deterministic formulas are never shown — they are translated to plain language.
-> Method: six parallel adversarial scorers over composite-r4 @ 69b7a8d3 (post-Herald, post-legibility-wave),
-> seven machinery points each (WHY_ON_DEMAND, NAMED_STATES, QUERY_WEB, FORECAST_BEFORE_COMMIT, LENSES,
-> ORIENTATION, VERBS_ON_ENTITIES), rated ABSENT/PARTIAL/PRESENT/GAME_GRADE with file:line evidence.
-> Violations are numbered V-<surface><n>, quick wins Q-<surface><n>; the fix program is docs/GAME_GRADE_PROGRAM.md.
+> **Audit state, 2026-07-24**
+> - The original six-surface audit was performed 2026-07-22 against `composite-r4 @ 69b7a8d3`.
+> - The live code-of-record worktree is now `claude/composite-r4 @ 8033ddbe` with substantial uncommitted
+>   work from concurrent efforts. A line visible in the working tree is current evidence, but it is not
+>   called shipped until committed and gated.
+> - The Settlement Editor and the Herald were re-read at code level on 2026-07-24 because the new
+>   goal-first program starts there. Their replacement assessments appear below, followed by the
+>   implementation checkpoint now present in the live tree.
+> - Generator, Map Editor, Realm, and Custom Content retain their detailed
+>   2026-07-22 scores. Their concrete translation findings were reverified and the
+>   confirmed leaks were repaired on 2026-07-24; their broader surface scores were
+>   not silently upgraded.
+> - Ratings are applicability-based, not quotas. `N/A` or an intentional defer is valid when a machinery
+>   point does not improve the surface's real task.
+> - The four previously parked golden families were deliberately adjudicated,
+>   owner-approved, regenerated, and reverified. The generated Compendium
+>   operation artifact was also refreshed from the final live registry.
+> - Repository-wide test, build, distribution, and performance evidence belongs
+>   to the executable gate and `docs/CURRENT_STATE.md`; this historical ledger no
+>   longer republishes a transient dirty-tree count as current truth.
+> - The implementation program is `docs/GAME_GRADE_PROGRAM.md`.
+> - Default promotion was re-audited against the live implementations. The machine-readable result is
+>   `docs/GAME_GRADE_PROMOTION_CONTRACT.json`: `settlementWorkbench` and `heraldCommandBrief` remain
+>   proof-only and default-off; `realmItemShadowDiagnostics` remains default-off by design because it is
+>   internal accounting rather than a user product surface.
 
-## Scoreboard
+## Historical six-surface scoreboard — 2026-07-22, not current truth
 
 | | Why | Named | Query | Forecast | Lenses | Orient | Verbs |
 |---|---|---|---|---|---|---|---|
@@ -20,13 +37,73 @@
 | Settlement editor | partial | partial | partial | partial | absent | partial | PRESENT |
 | Custom content | partial | PRESENT | partial | partial | partial | partial | partial |
 
-What is solid (verified — keep it this way): the map lens/layer system (game-grade); the cause-walk +
+What was solid in that snapshot: the map lens/layer system (game-grade); the cause-walk +
 address web on reading surfaces; the RealmForecast clone-run projection (benchmark-shaped); the deity
 effect preview and the editor cascade preview (the two proven forecast patterns); band-word discipline on
 read displays; the draft action toolbar. The three weak columns are FORECAST (weakest), ORIENTATION at
 scale, and VERBS in place. 30 translation violations catalogued below — all display-only.
 
-## THE GENERATOR
+## Current proof-slice scoreboard — 2026-07-24 live working tree
+
+| | Why | Named | Query | Review / forecast | Task views | Orient | Verbs |
+|---|---|---|---|---|---|---|---|
+| Settlement Workbench proof | PRESENT for recorded evidence; honest unavailable state | partial | PRESENT for indexed NPC proof | PRESENT for supported staged edits | PRESENT: Inspector + Change Dock | partial | PRESENT for NPC proof |
+| Herald command-brief proof | PRESENT where a source carries a cause; honest degraded routes | partial | PRESENT for canonical proof items | partial; pilot proposal action only | PRESENT: Briefing / Stories / Plans / Decisions | PRESENT for ranked proof items | partial; proposal decision only |
+
+`Review / forecast` is the applicability-aware reading of `FORECAST_BEFORE_COMMIT`; `Task views` is the
+same rubric slot as `LENSES`. `PRESENT` here means the named proof slice satisfies the behavior; it does
+not claim G-2b or G-4b parity across every entity, source, action, role, or history size.
+
+The editor's unsafe queue contract is now replaced for the supported local proof by a typed,
+owner-scoped transaction spine. A rendered NPC edit completed the full
+stage → preview → apply → receipt → undo path; switching to mobile made authoring read-only without
+hiding the dossier. The remaining editor problem is breadth and durability: other entity families,
+offline/cloud ownership, persisted receipts, cross-save behavior, reopen evidence, and cutover are not
+complete.
+
+The Herald now has one canonical derived item model and a routeable, attention-aware four-task shell for
+the proof sources. The legacy seven sections remain unchanged when the flag is off, and an unauthenticated
+mobile user still receives the established locked Realm path rather than a false decision surface. The
+remaining Herald problem is breadth and operational proof: the pilot proposal decision is not the whole
+action matrix, receipts are session-local, and complete post-advance, share-redaction, device,
+browser-timing, and lived-triage evidence remains G-4b work.
+
+### Implementation evidence
+
+- **Transaction spine:** validated intent kinds and payloads; stable owner/save scope; explicit
+  preconditions, policies, and receipts; successful-only queue removal; typed retained failures; stale,
+  pulse, remote-write, save-switch, pause, and advance fences; pre-apply snapshot undo.
+- **Preview honesty:** cascade summaries distinguish available, partial, unavailable, changed, balanced,
+  unassessed, and no-change states. Missing computation is not presented as “no structural effect.”
+- **Settlement Workbench:** lazy default-off mount; existing dossier entity index; contextual Story and
+  state / Why / Connections / Actions; save-scoped Change Dock; desktop authoring and mobile/read-only
+  capability gates; no permanent empty shell.
+- **Canonical `RealmItem`:** eight source classes; source-specific payload preservation; independent
+  dimensions; deterministic ranking and read state; immutable snapshots; collision/exclusion/error
+  diagnostics; no second canonical store.
+- **Herald proof:** Briefing/Stories/Plans/Decisions; time lens; exact item focus; campaign-scoped,
+  bounded route restoration; cause and entity routes; mobile companion; proposal action revalidation and
+  terminal-writer receipt; one canonical six-class attention vocabulary; a deterministic, non-cycling
+  lead; operation-census linkage for command actions; paused-advance routing to Decisions; one front-page
+  catch-up projection owner; deterministic recorded chronology for terminal proposals; one executable
+  specialist-source parity inventory; named peaceful and 24-settlement/640-record fixtures; 40-card
+  archive reveal batches; player/share shell fail-closed proof; canonical full-input forecast
+  invalidation; named refusal rows; and bounded, omission-explicit forecast copy.
+- **Translation floor:** shared priority bands, trace presentation, calendar
+  labels, settlement sizes, Herald severity/reasons, and conservative legacy
+  fallbacks replace confirmed raw engine tokens without changing the stored or
+  staged values.
+- **Focused verification:** component, read-model, fixture, compatibility,
+  accessibility, semantic-translation, and golden-adjacent suites pass together
+  with full/strict/UI-boundary types, scoped lint, registry freshness, and diff
+  hygiene. Repository-wide release evidence remains the job of `npm run check`.
+
+---
+
+> **Historical sections:** Generator, Map Editor, Realm, and Custom Content below retain their
+> 2026-07-22 evidence and line references. Reverify before closing or implementing those findings.
+
+## THE GENERATOR — historical baseline, not reverified
 OVERALL: The Generator has best-in-class INPUT legibility (named size/threat/resource bands with sentences, a translated pipeline receipt) but never shows a projected RESULT before forging and leaks one raw engine axis (priority 0-95), leaving it one clear tier below the Sims/Civ bar on forecast and cross-linking.
 ### Scores
 - WHY_ON_DEMAND: PARTIAL — Post-gen 'How this was simulated' drawer (SimulationDrawer.jsx:46-185) mounts PipelineRail.jsx which narrates each of ~17 steps with a factual one-line summary (stepMetadata.js:23-177, e.g. '5 institutions placed', 'Prosperity: <band>', '3 factions formed') + an expandable plain-language description; StepRow (PipelineRail.jsx:117-167) renders structured cause→effect→reason traces (source/effect/reason bullets + downstream). Genuine recorded-cause depth exists but is 2 hops ONLY for assembleInstitutions — PipelineRail.jsx:113-114 states 'today only assembleInstitutions emits these; the rest will adopt incrementally', so the other 16 steps give a summary, not causes. It is also gated behind a trigger button (WizardOutputToolbar.jsx:84-86), not ambient, and there is NO per-field 'why is population 1,240 / prosperity Modest' from any displayed dossier number on this surface.
@@ -43,7 +120,7 @@ OVERALL: The Generator has best-in-class INPUT legibility (named size/threat/res
   GAP: No 'this still needs attention' signal on the config; orientation is a linear reading order plus a post-gen coach, not a prioritized attention map.
 - VERBS_ON_ENTITIES: PRESENT — The just-forged draft carries its full legal action set in place: the sticky WizardOutputToolbar mounts Back / Regenerate draft / New Draft / How-this-was-simulated (WizardOutputToolbar.jsx:79-153) and the action row carries Save to Library / Buy this Dossier / Export PDF (GenerateWizard.jsx:540-553). FoundingWorlds cards carry 'Fork this sample' in place (FoundingWorlds.jsx:94-96); archetype chips apply in one tap (CharacterPresetCard.jsx:196-206); PlaceInRegionCard carries Upgrade for the gated act (PlaceInRegionCard.jsx:65-66). Not GAME_GRADE: the entities INSIDE the config (resources, forced institutions) carry only toggle-cycle, no richer contextual verbs, and ambient world-motion (M&B 'Count X besieging Y') does not apply to a pre-motion creation surface.
   GAP: Draft-level verbs are strong; config-internal entities have only toggles, and there is no ambient world-state to surface (expected on a creation surface).
-### Translation violations
+### Historical translation violations — reverified and repaired in the current tree
 - **V-GEN1** src/components/generate/PrioritySliders.jsx:65,72-74 — Priority value shown as a bare integer on the raw 0-95 engine axis ('{val}' at 72-74; aria-valuetext 'priority 50 of 95' at 65) with no translated band word — the internal modifier scale surfaced directly to the user.
 - **V-GEN2** src/components/ConfigurationPanel.jsx:184-190,214,219-221 (and 55) — Resource depletion PROBABILITY surfaced as raw arithmetic: '~{tierPct}% chance of depleted at generation' and the legend chip 'Allow (~35% depleted)', driven by the DEPLETION_PROB map (line 73); stress panel similarly shows '~40% chance' (line 55). Exposes the formula's probability rather than a plain-language likelihood band.
 - **V-GEN3** src/components/dossier/SimulationDrawer.jsx:143 (and PipelineRail.jsx subtitle via en.js pipeline.subtitle) — Engineering jargon to a wide audience: 'Seventeen pure-functional steps, deterministic per seed.' 'pure-functional' is implementation vocabulary; 'deterministic per seed' is only half-translated.
@@ -57,36 +134,101 @@ OVERALL: The Generator has best-in-class INPUT legibility (named size/threat/res
 - **Q-GEN5** Reword SimulationDrawer subtitle (SimulationDrawer.jsx:143) to drop 'pure-functional' — e.g. 'Seventeen steps that run the same way every time for a given seed.'
 - **Q-GEN6** Convert the resource depletion '~35% chance' probability (ConfigurationPanel.jsx:184-221) to a plain likelihood band ('often depleted' / 'sometimes depleted') to stop leaking the DEPLETION_PROB arithmetic.
 
-## THE SETTLEMENT EDITOR
-OVERALL: The editor has three genuinely benchmark-worthy instruments — a reversible per-field prose authoring flow with clear provenance, a translated cascade-preview forecast, and Mount&Blade-style state-gated verbs on NPC cards — but they are undermined by a CONFIRMED structural wiring gap (queued NPC edits have no commit affordance on the surface that shows them) and raw snake_case engine tokens leaking through the very controls a user edits with; the read/translation layer is close to the bar, the editor's own controls and its commit loop are the shortfall.
-### Scores
-- VERBS_ON_ENTITIES: PRESENT — NPC cards carry state-gated legal actions in place: Pin (npcComponents.jsx:193-213); and NpcLifecycleControls renders four bank-facet edits + a stasis shelf, plus Pay ransom/Rescue gated on isHostage (NpcLifecycleControls.jsx:62,111-140) and Recall home gated on isTraveling (:72,143-160). World motion surfaces ambiently through the whereabouts line 'Held in Dulwich' / badge (npcComponents.jsx:131,260-268) — Mount&Blade-grade in intent.
-  GAP: Docked from GAME_GRADE by the commit dead-end (see top gap #1): every verb here dispatches queueEdit (NpcLifecycleControls.jsx:46,53-54,65,75) into a bar that does not render on this surface, so the actions are shown where they cannot be completed. Verbs also live only on NPCs — factions/institutions/hooks carry no in-place actions.
-- FORECAST_BEFORE_COMMIT: PARTIAL — CascadePreviewPanel is a genuinely strong translated forecast: structural summary lines, 'N NPCs, N factions, N hooks tie to this town', narrative-impact sentences, and oxblood Warning rows (CascadePreviewPanel.jsx:173-219; previewCascade pendingEdits.js:254-311). NpcLifecycleControls adds inline consequence whispers for ransom/recall in plain language (NpcLifecycleControls.jsx:116-122,148-151).
-  GAP: Reach is thin: prose edits apply INSTANTLY with no forecast (applyUserEditAction settlementSlice.js:1477-1487); NPC-lifecycle kinds fall through previewCascade's switch UNCOUNTED (pendingEdits.js:245-251) so the panel would read 'No structural changes' for them even if reachable; and the whole panel never mounts on the saved-view NPC-edit path (top gap #1). The excellent instrument does not cover the edits users actually make.
-- ORIENTATION: PARTIAL — Edited-state orientation is good: an 'Edited · N' provenance badge (SettlementDetail.jsx:470-484; EditedBadge EditableText.jsx:217-233), per-field dashed border + inline Revert chip on touched fields (EditableText.jsx:127-128,149-155), and an aria-live 'N unsaved changes · <summary>' bar (PendingChangesBar.jsx:86-107).
-  GAP: Nothing flags WHICH fields deserve attention (no needs-attention/thin/stale markers on editable fields); the unsaved-count bar is suppressed in the saved editor where most structured edits are made; and there is no roster-scale orientation for editing across 20+ settlements.
-- WHY_ON_DEMAND: PARTIAL — At an edited field the Revert affordance shows the pre-edit generated value as a tooltip ('Revert to: "<original>"', EditableText.jsx:201,240; getOriginalValue userEdits.js:266-269), a real one-hop provenance read; surrounding read cards inherit cause prose (compromiseLc.phrase npcComponents.jsx:250-252).
-  GAP: The edit controls answer no 'why is this value what it is' — a bank dropdown or a secret textarea offers no causal hop to the recorded reason before the user overwrites it. Provenance is limited to 'what the prior string was', not 'why the engine chose it'.
-- NAMED_STATES: PARTIAL — Read display bands states into named words with tone: compromise badge Longstanding/Exposed/Compromised (npcComponents.jsx:230-238), Held/away whereabouts badge (:264-266), threat word via shared threatDisplay (DossierHeaderRow.jsx:80).
-  GAP: The EDIT controls that SET these states render raw snake_case engine tokens as their option labels — lawful_good, secure_office, labor_resource (NpcLifecycleControls.jsx:94). The one place a user picks a state shows it untranslated — a direct inversion of the named-band rule.
-- QUERY_WEB: PARTIAL — The dossier the editor sits inside carries the ambient entity-link web: NPC anchor ids (entityAnchor npcComponents.jsx:178) and EntityLinked prose via ProseParagraph (:272). RumorsTab resolves ids to settlement names and shows the relay chain (RumorsTab.jsx:74-79).
-  GAP: The editor adds nothing to the web and severs it at the controls: bank dropdowns and the secret textarea are isolated pickers with no link back to the entity's story, and no Compendium deep-link explains a term (e.g. what 'labor_resource' or 'bind_external_patron' means) at the point of choosing it.
-- LENSES: ABSENT — The editor is a single binary mode — editMode on/off (settlementSlice.js:1451-1453), toggled by one 'Edit Dossier / Stop Editing' button (SettlementDetailActions.jsx:33-45).
-  GAP: No switchable lenses/filters over the edit surface itself (e.g. show-only-edited, group-by-provenance, diff-vs-generated). The dossier tab strip is the READ surface, not an editing lens.
-### Translation violations
-- **V-SED1** src/components/new/NpcLifecycleControls.jsx:94 (options from NPC_ALIGNMENTS/NPC_ROLE_ARCHETYPES/NPC_GOALS, npcBank.js:49-124) — Bank facet dropdowns render raw snake_case engine tokens verbatim as the user-facing option labels: alignment 'lawful_good'/'neutral_evil', role 'labor_resource'/'diplomat_outsider'/'arcane', goal 'secure_office'/'win_public_legitimacy'/'bind_external_patron'/'expand_trade_house'. A DM picks 'win_public_legitimacy' instead of 'Win Public Legitimacy'. The single most visible translation-principle violation on the surface.
-- **V-SED2** src/components/dossier/PendingChangesBar.jsx:66 (switch default arm) — The unsaved-changes summary switch handles only rename/add/remove/prose; every NPC-lifecycle and table kind hits `default: return e.kind`, so the bar reads 'N unsaved changes · edit-npc' / '· stasis-npc' / '· recall-npc' — raw EditKind tokens.
-- **V-SED3** src/store/settlementSlice.js:564,567 (recordSnapshot label) — Version-history checkpoint label is built as `Edits: ${active.map(e => e.kind).join(', ')}` → 'Edits: edit-npc, stasis-npc' surfaces raw kind tokens into the VersionsTab timeline the user browses to revert.
-- **V-SED4** src/components/new/NpcLifecycleControls.jsx:81 — Section heading 'Edit (bank): queues a reviewable change' exposes internal vocabulary — 'bank' is the engine's THE BANK concept, meaningless to a DM.
-- **V-SED5** src/components/new/NpcLifecycleControls.jsx:106-107 (STASIS_REASONS, npcOps.js:116) — Stasis dropdown shows engine reason tokens 'sequestered'/'imprisoned'/'missing'/'journey' unmapped — real words but presented as a bare state list with no plain-language framing of what putting an NPC in each does. Minor.
-### Quick wins
-- **Q-SED1** Add a display-only token→label map for the alignment/role/goal options in NpcLifecycleControls.jsx:94 (Title-Case + humanize snake_case, e.g. 'win_public_legitimacy' → 'Win Public Legitimacy'); temperaments are already clean English so leave them. No engine change — the value= stays the raw token.
-- **Q-SED2** Extend PendingChangesBar's summary switch (PendingChangesBar.jsx:54-68) and the version-snapshot label (settlementSlice.js:564) to translate NPC/table kinds — 'edit-npc' → 'edited <NPC name>', 'stasis-npc' → 'shelved <NPC>', 'recall-npc' → 'recalled <NPC>' — so no raw EditKind reaches the user.
-- **Q-SED3** Reword the 'Edit (bank): queues a reviewable change' heading (NpcLifecycleControls.jsx:81) to drop the internal 'bank' word, e.g. 'Change traits (choose from the roster) — queued for review'.
-- **Q-SED4** Give the STASIS_REASONS dropdown plain-language labels (NpcLifecycleControls.jsx:106-107): 'journey'→'Away on a journey', 'imprisoned'→'Imprisoned', 'missing'→'Missing', 'sequestered'→'Sequestered / in seclusion'.
+## THE SETTLEMENT EDITOR — current rebaseline, 2026-07-24
 
-## THE MAP EDITOR
+**OVERALL:** The old audit's queue-safety and visible-completion defects are stale in the live tree.
+The supported pending-edit proof now admits complete kind-specific payloads, resolves NPCs to durable
+IDs, captures owner/save/revision/source identity, commits or discards exact intent IDs, retains
+failures, emits receipts, and provides snapshot undo. Table Ledger actions are scoped to the table
+intents they display. Mobile mutation controls fail closed before enqueue. A committed edit is read
+back through the active-save-scoped live settlement rather than the opening dossier snapshot.
+
+The remaining problem is breadth and durable product completion. Editing still spans prose authoring,
+pending mechanical/world intents, Event Composer operations, and other specialized writers with
+different timing and recovery contracts. The flagged Workbench proves a settlement-centered Inspector
+and Change Dock for the NPC vertical, but the legacy shell remains the default and the proof does not
+yet cover every entity family, cloud/offline receipt recovery, or cross-save atomicity.
+
+### Scores
+
+- **WHY_ON_DEMAND: PARTIAL** — Edited prose retains generated-value provenance and surrounding dossier
+  content carries recorded cause language. The current controls still do not answer why an NPC facet,
+  relationship, institution, or pressure has its present value before the GM changes it. "What it was"
+  is available more often than "why it became this."
+- **NAMED_STATES: PARTIAL** — The live controls humanize NPC facet values, map stasis reasons to
+  table-facing availability labels, translate pending-edit summaries, and use generic human snapshot
+  labels. Goal and role archetype values now remain typed in storage while rendering through the NPC
+  facet vocabulary; the prior raw-goal and invisible-role-result defects are closed. Broader domain
+  labels can still be understandable without yet explaining why the state exists.
+- **QUERY_WEB: PARTIAL** — The dossier retains entity anchors, linked prose, settlement references, and
+  relationship context. The flagged Workbench exposes Story, State, Why, Connections, and Actions for
+  indexed NPCs. Other entity families and the legacy default shell do not yet share that complete web.
+- **REVIEW / FORECAST: PRESENT FOR THE SUPPORTED PROOF; PARTIAL OVERALL** — Exact-scope pending-edit
+  preview, apply, receipt, retained failure, and snapshot undo now share one transaction vocabulary.
+  Cascade summaries explicitly distinguish exact changes, affected scope, directional outlook, and
+  unavailable computation. Event Composer remains its own exact operation path, while clock-bound work
+  still cannot promise the result of intervening queued world state.
+- **TASK VIEWS: PRESENT IN THE FLAGGED PROOF** — Settlement Workbench supplies Inspector and Change Dock
+  views over the dossier. The legacy edit prelude remains the rollback/default owner until entity,
+  persistence, device, and lived-orientation parity closes.
+- **ORIENTATION: PARTIAL** — Edited badges, per-field revert styling, pending counts, and queue summaries
+  make local work visible, and retained failure/stale receipts no longer disappear as success. The full
+  authored/staged/canon-queued/pulse-queued/reopen history is not yet one durable cross-session ledger.
+- **VERBS_ON_ENTITIES: PRESENT FOR THE NPC PROOF; PARTIAL OVERALL** — NPC cards carry legal,
+  state-gated lifecycle actions and ambient whereabouts; desktop reaches exact-scope review and mobile
+  disables unsupported writes before enqueue. Other entity families and full device journeys remain
+  open. The earlier audit incorrectly counted Pin on this path: saved dossiers force the read-only
+  condition that suppresses it.
+
+### Resolved or superseded findings
+
+| Prior ID | Live-tree state | Evidence |
+|---|---|---|
+| V-SED1 | resolved in working tree | `NpcLifecycleControls.jsx:46-49,148-151` humanizes facet labels |
+| V-SED2 | resolved in working tree | `PendingChangesBar.jsx:48-72` translates lifecycle and table kinds |
+| V-SED3 | resolved in working tree | `settlementSlice.js:566-570` records a human dossier-change label |
+| V-SED4 | resolved in working tree | `NpcLifecycleControls.jsx:126` uses reader-facing copy |
+| V-SED5 | resolved in working tree | `NpcLifecycleControls.jsx:39-44,163-175` names availability states |
+| Old "bar never mounts" premise | stale | `OutputContainer.jsx:863-868` mounts it for non-public, non-player dossiers |
+| Old "NPC kinds are uncounted" premise | stale | `pendingEditsPreview.js:180-197,224-240` includes them |
+| C-SED1 | resolved for the supported proof | `pendingEditIntents.js` admits complete payloads; `settlementPendingEdits.js` retains failed/stale intents and receipts |
+| C-SED2 | resolved | `TableLedgerPanel.jsx` submits exact visible table-intent IDs |
+| C-SED3 | resolved at the capability boundary | `NpcLifecycleControls.jsx` disables and guards mobile enqueue |
+| C-SED6 | resolved for the supported proof | intents carry durable NPC IDs, owner/save scope, revision, and source fingerprint |
+| C-SED7 | resolved | NPC cards translate goal facets and distinguish role archetype from the authored office/title |
+| C-SED8 | resolved | `SettlementDetail.jsx` selects the active-save-scoped live settlement; `settlementDossierHeroLiveState.test.jsx` pins it |
+| C-SED10 | resolved for the proof vocabulary | previews distinguish exact change, affected scope, directional outlook, and unavailable computation |
+
+These are working-tree observations, not a claim that the changes have shipped.
+
+### Rebaseline findings that remain
+
+- **C-SED4 — Mutation semantics remain broader than the proof contract.** Prose uses immediate
+  `applyUserEditAction`; header
+  rename may call a writer directly or enter a queue depending on context; structural and NPC changes use
+  the pending transaction; Event Composer intentions use their own exact operation path; link and
+  cross-save work have still other persistence seams. The pending-edit family now shares a small change
+  contract, but the complete editor does not yet have one durable timing/recovery model.
+- **C-SED5 — The apparent prose system is much wider than its live reach.** The edit registry names many
+  field types, but the live JSX consumer of `applyUserEditAction` is the NPC secret. Faction,
+  institution, hook, history, and settlement prose entries are currently latent and must not be counted
+  as completed authoring flows.
+- **C-SED9 — The Workbench proves the better information architecture but has not cut over.** The
+  flagged shell is settlement-centered; the legacy prelude remains available and default until feature,
+  device, persistence, and lived-orientation parity is demonstrated.
+
+### Immediate safety rulings
+
+1. Preserve the now-proven validation, exact scope, failure retention, and stale-source contracts while
+   expanding entity coverage.
+2. Do not promise cross-save atomicity. Preflight all affected saves and show saga/outbox-style status
+   when the persistence layer cannot commit them atomically.
+3. Keep unsupported mobile enqueue affordances disabled until the same device can review, commit,
+   discard, and recover.
+4. Keep the existing editor available until entity, persistence, keyboard/touch, and reopen parity are
+   demonstrated for the Workbench.
+
+## THE MAP EDITOR — historical baseline, not reverified
 OVERALL: The Map Editor is manipulation-rich (drag/keyboard placement, terrain editing, drag-nudge, reroll) with a genuinely game-grade lens/layer system and a standout town-map 'why it sits here' translation, but it misses the bar on placement-time forecasting (absent), on-map entity cross-linking and in-place verbs (partial), and scalable attention-orientation on the canvas (partial) — one benchmark strength surrounded by three fixable shortfalls.
 ### Scores
 - LENSES: GAME_GRADE — World map: 4 modes (View/Terrain/Annotate/Routes, ModeSwitch.jsx:24-29) + LayersPanel.jsx:134-298 exposes ~15 toggleable layers, several with sub-filters (relationship types 146-154, regional channel types 178-186, impact statuses + a severity slider 196-231, traveler sub-layers 255-263) + native FMG state-borders/cultures/biomes 284-298 + RoutesToolbar.jsx:102-170 chip filters. Town map: named lens switcher parchment/watercolor/dark-fantasy/VTT + bespoke AI skins (SettlementMapEditControls.jsx:191-252), Plan/Panorama projection (SettlementMapPane.jsx:714-724), Show-the-years aging (EditControls 80-86), fog-of-war layer. One view genuinely answers many questions via switchable lenses — depth exceeds most benchmark map filters.
@@ -103,7 +245,7 @@ OVERALL: The Map Editor is manipulation-rich (drag/keyboard placement, terrain e
   GAP: Entity cards carry almost no in-place verbs: DistrictCard has ZERO actions besides Close (SettlementMapCards.jsx:77-81 confirmed), InstitutionCard only Close (InstitutionCard.jsx:95), QuickInspector is pointer-events:none. The placement card offers only Open/Remove — no 'advance just this settlement', 'propose', 'canonize', 'link route'. Legal actions on an entity are not surfaced at the entity.
 - QUERY_WEB: PARTIAL — Peek-and-open is ambient: hovering any palette card OR any map marker fires the QuickInspector peek through one shared setHoveredSettlementId path (PlacementsLayer.jsx:268-280, SettlementPalette.jsx:201-205); clicking a marker → PlacementDetailCard → Open navigates to the full dossier; town-map clicks open cause/profile cards; edge annotations label exits to named neighbours (SettlementMapPane.jsx:666-668).
   GAP: The cross-link WEB is not realized on the map. grep confirms NO EntityLink and no deep-links in any map/townMap card. Named entities inside cards are dead text: DistrictCard 'Dominant faction: {name}' (SettlementMapCards.jsx:86), the neighbour names in edge annotations (names-only by design), and building institutions are not clickable to their own stories. The map connects to the settlement dossier via one 'Open' hop but is not a hub into the broader entity/Compendium web — cards are terminal.
-### Translation violations
+### Historical translation violations — reverified and repaired in the current tree
 - **V-MAP1** src/components/map/LayersPanel.jsx:229 — Regional-impact severity filter renders a raw threshold percentage — `{Math.round(regionalMinSeverity * 100)}%` (e.g. '40%'). The impact magnitude itself is banded low→high in the legend, but this filter knob exposes the underlying 0..0.8 scalar as a bare percent.
 - **V-MAP2** src/components/map/LayersPanel.jsx:196-202 (and RoutesToolbar chains/roads) — Regional-impact status chips render engine workflow tokens via human() — 'queued', 'applied', 'resolved', 'ignored', 'expired' — system-vocabulary words rather than in-world phrasing shown directly to the user.
 - **V-MAP3** src/components/map/ChronicleScrollback.jsx:241,267,277,290 — Raw engine tick integers shown to the user — 'Tick {selected.tick}', 'Tick {t.tick}', 'Chronicle, tick {c.tick}'. A tickCalendarLabel() translator already exists (used in AdvanceReport.jsx:387) but is not applied here. (This is the chronicle timeline living under components/map/; primarily an Inspector/Herald surface, flagged as adjacent.)
@@ -115,7 +257,7 @@ OVERALL: The Map Editor is manipulation-rich (drag/keyboard placement, terrain e
 - **Q-MAP4** Relabel/soften the drop-preview copy in WorldMapStage.jsx:365-375 (or gate the 'auto-link within 2 days' claim behind a real computation) so the surface stops presenting fixed copy as a computed forecast.
 - **Q-MAP5** Label the LayersPanel severity slider output (line 229) as 'Min. impact severity' band-word or add a caption so the bare '40%' reads as a threshold, not exposed engine scalar.
 
-## THE REALM
+## THE REALM — historical baseline, not reverified
 OVERALL: Strong translation discipline with two standout strengths — a genuine multi-hop, sentence-based cause-walk and a live cross-settlement address web — plus real ambient war motion and Civ-caliber map layers; but it falls short of the benchmark on scale-orientation (no needs-attention roster for 20+ towns) and pre-commit forecast, and a handful of raw tick/score leaks (all quick, display-only fixes) are the only outright translation violations.
 ### Scores
 - WHY_ON_DEMAND: PRESENT — AdvanceReport.jsx:81-90,438,447-449 wire a 'Trace the causes' button on every event receipt that opens CauseWalkPanel.jsx — a genuine backward provenance chain (buildCauseWalk), multi-hop down to roots, rendered as plain '← because {headline}' sentences (CauseWalkPanel.jsx:96-101) and, when the discourse flag is lit, one connected prose passage (CauseWalkPanel.jsx:41-50,70-73), ending on a graceful 'no deeper memory' line (:119-123). The dossier answers why in sentences too: Causes/Substrate pressures ('Under pressure: X, Y', SubstrateTab.jsx:118-121) and Chronicle 'Because {reason}' (ChronicleTab.jsx:110-114).
@@ -132,7 +274,7 @@ OVERALL: Strong translation discipline with two standout strengths — a genuine
   GAP: No scalable needs-attention ordering outside the inspector. The SettlementPalette is name-search only (SettlementPalette.jsx:65-72,91-107) — there is no sort/filter by unrest/siege/needs-you, and the per-card pills don't aggregate into 'these 3 need you.' At 20+ settlements you scroll and eyeball; the map glyphs and the single inspector badge are the only aggregate cues. Scales poorly.
 - VERBS_ON_ENTITIES: PARTIAL — World motion genuinely surfaces ambiently on the map — deployment arrows home→target, siege rings + coalition-count badge, occupation shading, mobilization arcs, trade-war prizes, all from live read-models (WarFaithMapOverlay.jsx:92-225). The dossier carries in-place verbs: narrate/simulation drawer (DossierActionBand, OutputContainer.jsx:834-851), assign patron deity under Power (DeityAssignmentPanel, :680), inline rename, pending-edits, PDF export.
   GAP: The map's own committed entity card is verb-thin — PlacementDetailCard offers only Open and Remove-from-map (PlacementDetailCard.jsx:118-138), and it is actually THINNER than the hover QuickInspector, which alone carries the pressure sentence + top hook (QuickInspector.jsx:119-150). World-verbs (besiege, ally, decree) are not issuable in place on this surface (inspector-bound), and the ambient motion's legibility is hover-`<title>`-only — no persistent 'Rivermouth besieges Cnocby' sentence on the map, and touch users get nothing (PlacementsLayer.jsx:276 ignores touch; QuickInspector pointerEvents:none :92).
-### Translation violations
+### Historical translation violations — reverified and repaired in the current tree
 - **V-RLM1** WarFaithMapOverlay.jsx:160 — Occupation glyph tooltip: `Occupied by ${occupier} since tick ${sinceTick}` — the raw engine tick counter is shown to the user instead of a calendar phrase (the codebase already has tickCalendarLabel for exactly this).
 - **V-RLM2** CauseWalkPanel.jsx:103 — The why-on-demand cause-walk hop fallback renders `· tick {hop.tick}` — a bare engine tick number inside the primary 'trace the causes' surface (only avoided when the discourse-prose flag is lit).
 - **V-RLM3** SubstrateTab.jsx:143 (Causes tab) — Raw 0–100 engine score `{row.score}` printed beside every health band — a bare number where the bar mandates bands over bare numbers; the band already carries the signal.
@@ -147,7 +289,7 @@ OVERALL: Strong translation discipline with two standout strengths — a genuine
 - **Q-RLM4** Retitle the Causes/Substrate engine framing (SubstrateTab.jsx:104-106,134) from 'Causal substrate / the engine simulates / System variables' to reader language (e.g. 'What's holding, what's strained') — pure copy.
 - **Q-RLM5** Add a lightweight sort/filter to SettlementPalette (SettlementPalette.jsx:65-72) — e.g. sort by threat/stress severity so the settlements that need attention float to the top — a display-only ordering over data the cards already read.
 
-## CUSTOM CONTENT
+## CUSTOM CONTENT — historical baseline, not reverified
 OVERALL: The custom-content authoring workspace is well-built and legible on the INPUT side — self-documenting fields, named-band states, a real derived dependency web, and a genuinely game-grade deity forecast — but falls a moderate distance short on the OUTPUT/integration side: authored content is not yet a first-class citizen of the query web (no dossier<->compendium round-trip, no Herald presence, no usage echo), consequence-forecasting is deity-only, and the sole generated-item 'why' is inconsistent and leaks raw engine tokens.
 ### Scores
 - WHY_ON_DEMAND: PARTIAL — Deity authoring has a live 'This god will…' forecast reading the engine's own single source (DeityEffectPreview.jsx:30-31 -> deityDraftPreview.js:46-66 -> describeDeityEffects), rendering plain sentences + a dormancy note — this one bucket approaches game-grade. For GENERATED custom content the only recorded why is a trace: custom RESOURCES emit causes:[{source:'custom',effect:'authored by you',reason:'"X" is a custom resource you added…'}] (resolveResources.js:169-177), but custom INSTITUTIONS/services/goods emit NO recordTrace (assembleInstitutions.js:423-442; PipelineRail.jsx:113 confirms only catalog paths trace). The trace that exists is buried in the lazy SimulationDrawer->PipelineRail (SimulationDrawer.jsx:166), not on the entity chip. Depth = 1 hop, resources only.
@@ -164,7 +306,7 @@ OVERALL: The custom-content authoring workspace is well-built and legible on the
   GAP: No aggregated cross-bucket needs-attention view; problem signals are buried per-card and don't surface at the workspace glance.
 - VERBS_ON_ENTITIES: PARTIAL — Saved-item cards carry legal actions in place: Edit + Delete with a consequence-explaining confirm (CustomContent.jsx:637-643); workspace Add / clone 'Start from a built-in' / 'Test in a generation' (CustomContent.jsx:522-536); pack Export/Import (ContentPackBar.jsx:93-104); deity Assign-patron / Impose-cult / Remove (DeityAssignmentPanel.jsx:151-206). Strong on the actions clause. But the world-motion clause is absent: no authored card echoes the living world (a deity card never says 'worshipped in 3 settlements'; an authored Mill never says 'appears in 5 towns'). PantheonActivationStrip is aggregate + name-free, not a per-entity usage/motion echo.
   GAP: In-place verbs are solid, but authored entities carry no ambient world-motion / usage back-reference — cards are inert catalog rows with no live-world echo.
-### Translation violations
+### Historical translation violations — reverified and repaired in the current tree
 - **V-CUS1** src/components/PipelineRail.jsx:127,133 (the only recorded-why surface for generated custom content, e.g. custom resources) — Renders trace.targetId raw ('resource.Dragonbone Greatswords'), trace.result raw ('present'/'present_but_depleted'), and c.source raw ('custom') — engine tokens shown verbatim instead of a translated sentence.
 - **V-CUS2** src/components/compendium/CustomItemAttributes.jsx:36 — `Food · ${item.foodImpact}` prints the raw stored key (e.g. 'surplus'/'drain') rather than keyLabel(FOOD_IMPACT, …); every other chip on the card resolves its label, this one leaks the token.
 - **V-CUS3** src/components/settlement/DeityAssignmentPanel.jsx:56-62 (snapLine, in the patron/cult summary and lapsed read-only view) — Joins raw axis keys with ' · ' (snap.alignmentAxis/rankAxis/lawAxis/domain -> e.g. 'evil · greater · lawful'); stored enum keys surfaced instead of DEITY_ALIGNMENT/DEITY_TIER/DEITY_LAW labels.
@@ -176,33 +318,148 @@ OVERALL: The custom-content authoring workspace is well-built and legible on the
 - **Q-CUS4** Dependencies.jsx:95-118 — render resolved dependency names as buttons that setActiveCat + focus the target item, converting the static reverse-link web into a navigable one.
 - **Q-CUS5** Add a static usage count to saved deity/institution cards ('Assigned in N settlements' / 'Appears in N saved worlds') by scanning savedSettlements the way computePantheonActivation already does — a cheap first step toward the missing ambient world-motion echo.
 
-## THE HERALD
-OVERALL: A strong, coherent newspaper that clears the translation bar on its reportage spine (deep one-click cause-walk, an ambient linked address web, a genuinely game-grade pending-future forecast, and composable time/severity/focus lenses) but falls short of benchmark on legibility-at-a-glance — countless tabs with no pending-decisions badge, severity never named on items, verbs siloed in one desk instead of on the event cards, and a handful of de-underscored engine tokens (ruleId, tick, human(kind) fallbacks) still leaking through.
-### Scores
-- WHY_ON_DEMAND: PRESENT — HeraldHeadline.jsx:44,87-99 gates a 'Trace the causes' toggle on any report-door item with a rootId+worldState; CauseWalkPanel.jsx:30-124 renders the full backward recorded cause DAG (multi-hop 'click the coup, find the famine', arbitrary depth, one click) and realizes connected prose when the discourse flag is lit (CauseWalkPanel.jsx:41-50,70-73). heraldFeed.rootIdOf (heraldFeed.js:59-63) supplies the receipt id.
-  GAP: Coverage is uneven, not universal: HeraldForecast.jsx (Divination) has NO trace toggle and HeraldAdjudication.jsx OutcomeCards have NO cause-walk, so forecast + decision items answer 'why' only via inline reason pills, not the DAG. Dashboard glance numbers (RealmDashboard, lazy) are outside this trace. The article itself leaks a bare 'tick {n}' (CauseWalkPanel.jsx:103). Trace also silently absent when a record carries no id.
-- NAMED_STATES: PARTIAL — Forecast state is named + framed ('Pressure builds toward' FORECAST_LEAD + forced 'amendable' chip, HeraldForecast.jsx:19,43-46); triage states named ('Needs attention' HeraldBody.jsx:68, 'Needs attention now' HeraldSection.jsx:58, 'LAPSED: needs your attention' RealmDocket.jsx:122); provenance named (amendable/covert/decreed, HeraldHeadline.jsx:28-31). Forecast deltas are worded ('pop 4,120 → 3,980', tier band→band, RealmForecast.jsx:102-105).
-  GAP: Severity — the dominant internal state driving sort, the urgent pin, and the major border — is NEVER rendered as a named band word on an item; it is a color (HeraldHeadline.jsx:52), a sort key, and a filter facet only (heraldFilter.severityBand:20-25 computes Critical/Strained/Routine but no item displays it). Headlines degrade to de-underscored engine tokens via human() (heraldFeed.js:82,143) and reasons via reasonOf humanize (heraldGrammar.js:66), so unrecorded states surface as 'flow trade scarcity' / 'npc goal rebranch' rather than a translated band.
-- QUERY_WEB: PRESENT — AddressChain.jsx:31-63 resolves settlement›power›faction›npc and links every level via RealmEntityLink (primitives/RealmEntityLink.jsx:23-60, real <button> nav to the entity's dossier card cross-settlement). Ambient across the whole surface: every headline (HeraldHeadline.jsx:61), forecast (HeraldForecast.jsx:50), affected-settlement row (AddressChain.jsx:79-125), group header (HeraldHeadline.jsx:106-118) and adjudication card (WorldPulsePrimitives OutcomeCard:124) carries the linked web. Focus round-trips with the map click (RealmInspector.jsx:128-129, store selectedSettlementId).
-  GAP: Links flow one way — OUT to dossiers; no Compendium deep-link from a Herald item to a concept explainer. Depth is capped in practice by the recorded record-gap (memory: wizardNews carries no npc/faction id, so most subjects degrade to a settlement-only link), and RealmEntityLink degrades unlinked levels to plain text (RealmEntityLink.jsx:29-31). So the 'address web' is usually 1 level (settlement), not the full 4.
-- FORECAST_BEFORE_COMMIT: PRESENT — RealmForecast.jsx runs two clone-runs of the shared pipeline over the pending future and renders a genuinely benchmark-shaped projection: per-settlement population + tier deltas (102-105), dated beats (107-111), realm-wide beats (119-133), queued-order refusal warnings (92-96), pause markers (134-138), staleness invalidation keyed to a fingerprint (56-58,84-91) and an honest ceteris-paribus label (139-142). Interval lenses week/month/season/year (19-21). Reached via Divination→RealmDocket→RealmForecast.
-  GAP: Buried three levels deep inside Divination, not surfaced at the advance control (the advance button lives outside the Herald). The marginal per-ORDER forecast (with-vs-without a staged realm verb) is DELIBERATELY deferred/owner-gated (RealmForecast.jsx:33-41), so staging a Realm Order (RealmVerbComposer.jsx:75-94) shows the baseline future but NO projected consequence of that specific order before commit.
-- LENSES: PRESENT — Multiple composable lenses over one view: time lens This-advance/Whole-campaign scoping every door (RealmInspector.jsx:257-261, heraldFeed.js:111-133); severity facet Critical/Strained/Routine (HeraldStrip.jsx:19-23,73-87); needs-attention triage toggle (HeraldStrip.jsx:57-59, heraldFilter.needsAttention:37-45); focus/local-edition scoping (heraldFilter.matchesFocus:48-53); structured search over resolved names+headline+kind (heraldFilter.matchesQuery:60-72); Dashboard Glance-vs-Session-prep prose toggle (HeraldBody.jsx:74-83); forecast intervals. All narrow together (filterFeed:80-97).
-  GAP: The facet sheet exposes exactly ONE axis (severity, HeraldStrip.jsx:19) — no section/kind/provenance/time-window facets, so it is a functional filter set rather than an exploratory multi-facet lens rack. Counts recompute per lens but the lenses do not persist across sessions.
-- ORIENTATION: PARTIAL — Dashboard 'Needs attention' banner shows the top-4 cross-realm severity-first (HeraldBody.jsx:63-73, needsAttentionDigest:131-143); per-door urgent pin 'Needs attention now' (HeraldSection.jsx:55-65, URGENT_SEVERITY 0.85); group-by-settlement clustering keeps 20+ settlements navigable (heraldGrammar.groupBySettlement:120-139, HeraldAdjudication group-by:35-50); advancing status banner (RealmInspector.jsx:266-270); LAPSED order markers (RealmDocket.jsx:115-127).
-  GAP: The section TAB STRIP is countless at rest — counts render ONLY when narrowing (RealmInspector.jsx:234: count={narrowing && ... ? filtered.counts : null}), so at a glance the reader cannot see which doors hold news or how much. ADJUDICATION — the one door that DEMANDS action — is explicitly excluded from the badge (same line, s.id !== 'adjudication'), so pending decisions never surface a count on the tab. No per-door 'N new since last advance' indicator; orientation depends on opening each door or reading the single Dashboard banner.
-- VERBS_ON_ENTITIES: PARTIAL — Adjudication is a genuine action desk: per-proposal Apply/Dismiss (HeraldAdjudication.jsx:245-254), paused-verdict Keep/Dismiss + Resume (200-215), Start World Clock gate (166-170), and RealmVerbComposer stages any predicate-gated realm order with grayed-WITH-REASON teaching (RealmVerbComposer.jsx:121-141). Docket carries Cancel + edit-affordance per queued order (RealmDocket.jsx:130-138). Ambient world-motion surfaces via LiveWarStatus/RealmIntrigue/BeliefDivergenceBand slotted above the War feed (HeraldBody.jsx:156-158).
-  GAP: Verbs are POOLED in the Adjudication desk, not carried on the entity/event cards where the news appears. A War headline about a siege (HeraldHeadline.jsx) offers only 'Trace the causes' (a read action) + entity links — no in-place 'intervene/reinforce'; the reader must leave the report door, open Adjudication, and reconstruct the order in the Composer. M&B's act-on-the-besieging-count affordance is half-met: the motion surfaces ambiently but the verb to act on it is a separate door.
-### Translation violations
-- **V-HER1** CauseWalkPanel.jsx:103 (the article / why-chain, in surface) — Bare tick integer rendered verbatim: '· tick {hop.tick}' — the bar explicitly flags bare tick numbers; a reader sees 'tick 148' instead of an in-world date/relative time.
-- **V-HER2** WorldPulseData.proposalDetails, WorldPulseData.js:99,116 → rendered as Pills by OutcomeCard (WorldPulsePrimitives.jsx:137) in HeraldAdjudication.jsx:240 — human(outcome.ruleId) / human(outcome.ruleFamily) surface raw engine rule identifiers (e.g. 'tier promotion rule') de-underscored, not translated, on pending-decision cards.
-- **V-HER3** heraldFeed.js:82 and :143 (toHeraldItem headline fallback) — When no recorded headline/label exists, headline = human(kind) — a de-underscored engine token reaches the reader as the glance (e.g. 'flow trade scarcity', 'npc goal rebranch', 'cold war supply sanctions').
-- **V-HER4** heraldGrammar.reasonOf, heraldGrammar.js:66 (report-door REASON slot + HeraldForecast Drivers, HeraldForecast.jsx:60-64) — A recorded reason that is a typed token is only human()-de-underscored, never translated — jargon like 'war_exhaustion' surfaces as 'war exhaustion' behind the Casus/Driver/Origin/Drivers labels.
-- **V-HER5** RealmVerbComposer.jsx:147,176 (order dials) — Dial label falls back to the raw d.key, and enum/band option values render String(o) verbatim — untranslated schema tokens can reach the composer UI when a dial lacks a label.
-### Quick wins
-- **Q-HER1** Drop the `narrowing &&` guard on the tab count for at least Adjudication (RealmInspector.jsx:234) and badge the Adjudication tab with worldState.proposals pending length — a persistent 'you have N decisions' cue, display-only.
-- **Q-HER2** Render a named severity band word (Critical/Strained/Routine) on each HeraldHeadline — severityBand() already exists (heraldFilter.js:20-25); it just needs to be displayed, translating the hidden number into a named state.
-- **Q-HER3** Replace the bare 'tick {n}' in CauseWalkPanel.jsx:103 with a worded/relative form (or drop it) so the article stops leaking a raw engine tick.
-- **Q-HER4** Add a friendly-label lookup for the human(kind) headline fallback (heraldFeed.js:82,143) and the token-reason path (heraldGrammar.js:66) so unrecorded items read as plain phrases instead of de-underscored tokens like 'npc goal rebranch'.
-- **Q-HER5** Add the 'Trace the causes' toggle to HeraldForecast entries and Adjudication OutcomeCards (CauseWalkPanel is already static in this chunk), extending why-on-demand to all six doors at near-zero cost.
+## THE HERALD — current rebaseline, 2026-07-24
 
+**OVERALL:** The Herald is not a failed surface. Its best organs are unusually strong: typed editorial
+routing, a multi-hop recorded cause walk, linked address chains, specialized War/Faith/Trade bodies,
+Wizard News arcs, a deterministic pending-future outlook, a docket, adjudication, and honest empty states.
+
+The old audit nevertheless overstates how integrated those organs are. The normalized feed currently
+reads pulse history and live stressors, while Wizard News, proposals, paused major verdicts, docket orders,
+and forecast records enter through separate components. Search, time, focus, counts, deduplication, and
+attention therefore do not govern "the realm's news" as one system. The seven peer doors also mix topic,
+time, workflow, and summary as if they were the same navigation axis. The product has enough machinery;
+the problem is editorial and semantic routing.
+
+### Scores
+
+- **WHY_ON_DEMAND: PARTIAL** — Headline records with root IDs can open the multi-hop `CauseWalkPanel`,
+  which remains a benchmark-grade local instrument when the root is indexed in pulse history. The button
+  currently appears for any root ID, including unindexed live-stressor IDs that can open an empty chain
+  headed by the raw ID. Forecast, Dashboard, and adjudication projections do not consistently carry the
+  same receipt. The surface-wide rating is therefore partial, not a downgrade of the indexed cause walk
+  itself.
+- **NAMED_STATES: PARTIAL** — Forecast, lapse, provenance, and attention states are named. Severity still
+  drives sorting and visual emphasis without appearing as a word on the item. Fallback headlines and
+  reasons continue to humanize typed tokens rather than translate them through authored vocabulary.
+- **QUERY_WEB: PARTIAL** — Address chains resolve settlement, faction, power, and NPC references into
+  dossier routes, and focus round-trips through the map. Many source records lack deeper subject IDs, so
+  links commonly stop at settlement. The Dashboard attention digest, docket settlement chips, and
+  resolved-decision log remain plain text, so the linked web does not cover the whole Herald.
+- **REVIEW / FORECAST: PARTIAL OVERALL; OUTLOOK INSTRUMENT PRESENT** — `RealmForecast` runs the shared
+  pending-future simulation on a clone and provides dated deltas, warnings, pauses, and a ceteris-paribus
+  boundary. The old claim that the UI runs two clone simulations is incorrect; the marginal comparison
+  helper remains deliberately unwired and owner-gated. The forecast is also buried under Divination and
+  not presented in the same context as Advance Realm or a specific staged order. Its staleness fingerprint
+  does not cover every stressor-content or member-settlement change, and refused orders are summarized as
+  a count rather than named with their reasons. More seriously, party-caused queued events omit the real
+  store-side party-impact ripple, while the UI claims the forecast is exact and "the next tick"; that copy
+  is false for the omitted ripple and for month/season/year intervals.
+- **TASK VIEWS: PARTIAL** — Time, focus, search, attention, severity, dashboard prose, and forecast
+  intervals are useful lenses over the report feed. They do not govern the separately read adjudication,
+  Wizard News, and docket sources, and their local state is not routeable or restorable.
+- **ORIENTATION: PARTIAL** — Needs-attention digest, urgent pins, settlement grouping, lapsed markers, and
+  advance status provide real triage. Counts appear only while narrowing and explicitly exclude
+  Adjudication (`RealmInspector.jsx:227-235`), so resting navigation hides the workflow that most demands
+  the GM's word. One boolean predicate also conflates significance, severity, amendment, covert status,
+  and decision state.
+- **VERBS_ON_ENTITIES: PARTIAL** — Adjudication, the Realm Verb Composer, and the docket provide genuine
+  gated actions with refusal reasons. Report cards mainly route or explain; they do not carry a
+  contextual handoff into a prefilled legal action, so the reader leaves the story and reconstructs the
+  order in a separate desk.
+
+### Translation finding disposition
+
+- **V-HER1 — resolved.** Cause hops use `tickCalendarLabel`.
+- **V-HER2 / V-HER3 — resolved at the conservative fallback boundary.** Missing authored labels use
+  section-level reader copy rather than exposing rule families, kinds, or types.
+- **V-HER4 — resolved.** Recorded reasons pass through `newsReasonPhrases`; absent reasons remain absent.
+- **V-HER5 — resolved.** Realm Verb Composer routes unknown dial/option tokens through the shared
+  presentation-boundary humanizer.
+- **V-HER6 — resolved.** Herald headlines render the shared named severity band as text.
+- **V-HER7 / V-HER8 — resolved.** Outcome cards render a named severity state and translated reason
+  phrases rather than raw arithmetic or underscore tokens.
+- **V-HER9 — raw-ID portion resolved.** An unresolved save becomes “A campaign settlement,” and an
+  unresolved event target is omitted. Event kinds retain a conservative word fallback; richer authored
+  vocabulary remains voice polish rather than an engine-token leak.
+
+These closures establish the translation floor; they do not by themselves complete the Herald
+overhaul or justify default promotion.
+
+### Current blocking findings
+
+- **C-HER1 — The navigation mixes incompatible dimensions.** Dashboard, four editorial topics,
+  Divination, and Adjudication are seven peer tabs even though they represent summary, topic, temporal
+  planning, and workflow. Stage the Road and Timelapse add two more local modes in the same shell.
+- **C-HER2 — RESOLVED IN THE FLAGGED COMMAND SHELL.** `buildHeraldFeed` consumes pulse selected outcomes, impact
+  digest, resolved stressors, and live stressors (`heraldFeed.js:111-150`). It does not adapt
+  `wizardNews`, pending proposals, paused major verdicts, docket orders, or forecast items. Those records
+  could not participate consistently in counts, filters, attention, search, identity, or read state. The
+  canonical `RealmItem` model accounts for the eight named record families, and
+  `heraldCommandSourceParity.js` now explicitly maps Dashboard, Wizard News, War, Faith, Trade, archive,
+  forecast, docket, and adjudication owners into the four task views. Rendered parity tests pin every
+  retained specialist mount. The legacy feed remains the rollback owner while the flag is off.
+- **C-HER3 — RESOLVED IN THE CANONICAL PROOF.** `toHeraldItem` falls back to
+  `${section}-${kind}-${tick}` and `buildHeraldFeed` deduplicates by that ID
+  (`heraldFeed.js:72-94,115-120`). Two records of the same kind and section in one tick can collapse.
+  `RealmItem` now supplies source-specific origin keys, retains same-kind/same-tick records, and visibly
+  degrades irresolvable collisions. The legacy feed remains unchanged behind the rollback path.
+- **C-HER4 — RESOLVED IN THE CANONICAL PROOF.** `HeraldAdjudication` rereads proposals and paused
+  majors directly. The Herald strip's focus, query, time, attention, and severity selectors therefore do
+  not reliably govern decisions. The flagged Decisions view now receives the filtered canonical cases
+  and its resting badge counts unresolved cases only.
+- **C-HER5 — RESOLVED IN THE CANONICAL PROOF.** The strip promises "Only what
+  needs a decision now," while `heraldFilter.needsAttention` combines major, severity, amendable, covert,
+  and adjudication into one boolean (`heraldFilter.js:31-44`). Whole-campaign pulse entries are already
+  applied historical outcomes, yet a past major or covert record can be presented as if it needs a
+  present decision. The canonical model now carries one six-class vocabulary, explicit promotion
+  reasons, and a deterministic non-cycling lead.
+- **C-HER6 — RESOLVED.** `WhileYouWereAway` rendered in both `HeraldBody` and `RealmDashboard`.
+  `RealmDashboard` is now the single front-page owner, pinned by a rendered ownership test.
+- **C-HER7 — RESOLVED FOR THE PROOF ROUTES.** Time lens, desk tool, query, attention toggle, severity
+  filter, and filter-sheet state are local to `RealmInspector`. A story cannot be addressed with its
+  active view and restored context, and opening/back can discard the edition the GM was reading. The
+  command shell now retains campaign-scoped section, item, query, time lens, filters, scroll, and focus
+  return; desk-tool persistence remains intentionally transient.
+- **C-HER8 — PARTIAL; RENDERED CUTOVER PROOF REMAINS.** `useAdvanceSession.js` opens
+  Dashboard before the initial advance and before a resumed segment. Neither completion nor pause performs
+  result-aware routing; a paused result formerly returned while Dashboard remained selected. A parked
+  initial or resumed interval now routes through `adjudication`, which becomes Decisions under the
+  command shell. The complete changed/resolved/new journey remains a rendered and lived requirement.
+- **C-HER9 — RESOLVED FOR THE PILOT DECISION; BREADTH REMAINS.** `RealmMobileGate` exposed only the
+  read-only Dashboard beneath a desktop wall. Map manipulation may reasonably stay desktop-only, but
+  reading Stories, reviewing the docket, and completing a decision are separate tasks. The command
+  companion now supports those pilot journeys; the full action and accessibility matrix remains open.
+- **C-HER10 — RESOLVED IN THE CANONICAL MODEL.** Current `section` is an editorial
+  home. A realm record also needs independent temporal and workflow states. Reusing `section` as the new
+  navigation axis would destroy the existing typed routing instead of extending it. `RealmItem` now
+  carries independent topic, temporal, workflow, epistemic, resolution, operation, and attention facts.
+- **C-HER11 — RESOLVED AT THE CLAIM BOUNDARY.** One canonical fingerprint now hashes the complete campaign
+  world/graph and member-save inputs, including same-count stressor edits and settlement edits. Refused
+  orders are named with settlement, operation, code, and detail. The result names its selected interval,
+  calls itself a bounded deterministic projection, and explicitly discloses the party-ripple omission;
+  it no longer says "exact" or "this is the next tick."
+- **C-HER12 — RESOLVED AT THE DOCKET BOUNDARY.** `lapseOf` still evaluates each order independently against
+  current settlement state, which is the truth it actually owns. The Docket now calls that state
+  "currently expected to be refused" and warns that an earlier order can change later preconditions.
+- **C-HER13 — RESOLVED FOR RECORDED DECISION SOURCES.** The resolved log concatenated proposal order
+  with the latest pulse and sliced the first 15 without sorting. Both shells now sort terminal proposals
+  by recorded resolution time, then in-world tick and stable identity; terminally refused proposals are
+  history rather than being offered for a second decision.
+
+### Architecture ruling
+
+Preserve the Herald's voice and specialist bodies. First derive a non-persisted, source-specific
+`RealmItem` envelope in shadow and prove identity, coverage, counts, routing, and resolution behavior.
+Then test four task-oriented views as reversible selectors over existing bodies:
+
+- **Briefing** — what needs the GM, what changed, what is active, what is building;
+- **Stories** — the archive, with War/Faith/Trade/Civic as filters and aliases;
+- **Plans** — outlook, docket, staged orders, and advance context;
+- **Decisions** — proposals, paused verdicts, lapsed orders, and resolved history.
+
+Compatibility is mandatory: Dashboard maps to Briefing; topic doors map to filtered Stories; Divination
+maps to Plans; Adjudication maps to Decisions. Existing section IDs, `openInspectorAt(...)` callers,
+focus, search, time lens, size, Escape/back behavior, and deep links stay supported. Legacy render bodies
+may retire after parity and rollback proof; cheap semantic aliases remain unless a future conflict is
+separately justified.

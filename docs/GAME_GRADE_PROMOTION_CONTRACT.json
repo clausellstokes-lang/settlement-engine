@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "evaluatedAt": "2026-07-24",
+  "program": "docs/GAME_GRADE_PROGRAM.md",
+  "policy": "A user-facing overhaul may become the shipped default only when its blocker list is empty and its automated, rendered, lived, and environment evidence requirements are satisfied. Internal diagnostics are not promotion candidates.",
+  "attentionVocabulary": [
+    "blocking_decision",
+    "lapsed_order",
+    "critical_condition",
+    "major_change",
+    "emerging_pressure",
+    "routine_record"
+  ],
+  "flags": {
+    "settlementWorkbench": {
+      "state": "proof_only",
+      "shippedDefault": false,
+      "promotionPolicy": "all_blockers_must_close",
+      "satisfiedNow": [
+        "SED-02",
+        "SED-03",
+        "SED-05",
+        "SED-06",
+        "SED-07",
+        "SED-08",
+        "SED-09",
+        "SED-11",
+        "SED-13",
+        "SED-15",
+        "SED-16"
+      ],
+      "blockers": [
+        {
+          "id": "SED-01",
+          "evidence": "lived",
+          "reason": "The five-second orientation protocol has not been run with representative non-owner GMs."
+        },
+        {
+          "id": "SED-04",
+          "evidence": "rendered",
+          "reason": "The complete entity and lifecycle capability matrix has not reached supported-device parity."
+        },
+        {
+          "id": "SED-10",
+          "evidence": "integration",
+          "reason": "The pending-edit proof does not yet have durable ambiguous-network idempotency and offline retry ownership."
+        },
+        {
+          "id": "SED-12",
+          "evidence": "rendered",
+          "reason": "NPC is the proven inspector family; all other mapped entity and writer families remain a G-2b inventory."
+        },
+        {
+          "id": "SED-14",
+          "evidence": "accessibility",
+          "reason": "Inspector entry, Escape dismissal, focus return, and the mobile touch floor are automated; the full capability matrix still lacks completed screen-reader, touch, and recovery journeys."
+        },
+        {
+          "id": "SED-17",
+          "evidence": "old_save",
+          "reason": "Anonymous historical events now use content identity and ambiguous duplicates degrade non-interactively, but export, import, reopen, and every remaining legacy entity family are not yet proven."
+        }
+      ]
+    },
+    "heraldCommandBrief": {
+      "state": "proof_only",
+      "shippedDefault": false,
+      "promotionPolicy": "all_blockers_must_close",
+      "satisfiedNow": [
+        "HER-02",
+        "HER-03",
+        "HER-04",
+        "HER-05",
+        "HER-06",
+        "HER-07",
+        "HER-10",
+        "HER-11",
+        "HER-12",
+        "HER-13",
+        "HER-17",
+        "HER-18",
+        "HER-19",
+        "HER-20",
+        "HER-SOURCE-PARITY"
+      ],
+      "blockers": [
+        {
+          "id": "HER-01",
+          "evidence": "lived",
+          "reason": "The named 24-settlement rendered top-three oracle is deterministic; the timed representative-GM triage protocol is not complete."
+        },
+        {
+          "id": "HER-08",
+          "evidence": "rendered",
+          "reason": "Paused advances now route to Decisions, but the complete post-advance changed/resolved/new result journey is not rendered and lived."
+        },
+        {
+          "id": "HER-09",
+          "evidence": "rendered",
+          "reason": "Forecast interval, refused-order identity, lapse uncertainty, and epistemic limits are explicit; complete pre-advance scope and auto-resolving-decision composition remains open."
+        },
+        {
+          "id": "HER-14",
+          "evidence": "security",
+          "reason": "Locked command-shell mounts fail closed before GM-only items render; every share serializer and player projection still needs a complete redaction matrix."
+        },
+        {
+          "id": "HER-15",
+          "evidence": "accessibility",
+          "reason": "Keyboard and touch completion are proven for the pilot decision, not the full supported action set."
+        },
+        {
+          "id": "HER-16",
+          "evidence": "performance",
+          "reason": "The named 640-record fixture caps initial DOM work at 40 cards with deterministic reveal batches; browser render and interaction timing budgets remain to be recorded."
+        },
+        {
+          "id": "HER-RECEIPT-DURABILITY",
+          "evidence": "integration",
+          "reason": "Pilot decision receipts are exact but session-local; durable reopen and reconciliation proof is incomplete."
+        }
+      ]
+    },
+    "realmItemShadowDiagnostics": {
+      "state": "internal_diagnostic",
+      "shippedDefault": false,
+      "promotionPolicy": "never_user_default",
+      "satisfiedNow": [
+        "source_accounting",
+        "collision_visibility",
+        "exclusion_visibility",
+        "legacy_render_inertness"
+      ],
+      "blockers": []
+    }
+  }
+}
