@@ -430,6 +430,14 @@
     "tests/generators/dataFlowContract.test.js": {
       "kind": "uncovered"
     },
+    "tests/generators/governanceNarrative.test.js": {
+      "kind": "rationale",
+      "rationale": "Direct characterization pin over buildGovernanceLabels — a zero-import leaf module — asserting nine byte-exact label/vignette strings for primary-stress precedence, monster-threat annotation, institution-aware substitution, and the canonical adversarial-relationship tokens. Its catching power was PROVEN by a build-time plant, executed red-then-green with the sweep's own attribution discipline: reordering PRIMARY_STRESS_PRECEDENCE so 'infiltrated' outranks 'famine' reds the canonical-priority case (mutated 1-red/7-green; unmutated module 8/8 green). A STANDING sweep plant is disproportionate: every MUTATED_FILES member is reverted with 'git checkout -- <file>' and gated by the dirty-tree refusal guard, so enlisting a hot generator source risks discarding parallel uncommitted work and blocks the whole sweep whenever such work exists. The labels also land verbatim on settlement.powerStructure.stability/recentConflict, inside the sha256 tests/property/generatorGoldenMaster.test.js pins across its full corpus, so drift on the config-reachable branches already reds a golden; this suite's distinct value is the synthetic multi-stress precedence that corpus does not construct."
+    },
+    "tests/generators/powerEconomyFreshness.test.js": {
+      "kind": "rationale",
+      "rationale": "Self-proving bounded-reconciliation contract: its third case IS the mutation, executed on every run — it hands assertPowerEconomyFreshness a perturbed prosperity and a fingerprint-stripped powerStructure and requires both to throw, which is precisely the regression a planted sweep mutation would inject. The remaining cases are whole-pipeline: a 24-config tier x culture x terrain cohort generated twice each (48 generateSettlementPipeline runs) with onStep instrumentation proving the powerEconomyReconcilePass closeout runs exactly once, reopens no institution writer, preserves neighbour rolls, and stamps the exact economy fingerprint the projection consumed. A standing plant would double that already expensive run for the attribution control while duplicating the embedded proof. Sweep-safety also forbids it today: the mutation target src/generators/power/economyReconciliation.js is a new module not yet committed, and check_caught reverts with 'git checkout -- <file>', which cannot restore an uncommitted file — the mutation would persist and the area would report GATE-BROKEN rather than CAUGHT."
+    },
     "tests/generators/factionStructuralOfficeCoverage.test.js": {
       "kind": "uncovered"
     },
