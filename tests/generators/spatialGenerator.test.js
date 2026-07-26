@@ -29,6 +29,30 @@ describe('waterfront district gate', () => {
     expect(quarterNames(layout)).toContain('Waterfront District');
   });
 
+  it('renders a riverside port as a barge-and-wharf district, not a seaport', () => {
+    const layout = generateSpatialLayout(
+      'city',
+      inst('Docks/port facilities'),
+      'port',
+      'riverside',
+    );
+    const waterfront = layout.quarters.find(
+      quarter => quarter.name === 'Waterfront District',
+    );
+
+    expect(layout.tradeAccess).toBe(
+      'Inland river port (wharves and barge docks)',
+    );
+    expect(waterfront).toMatchObject({
+      location: 'Along the river',
+      desc: 'Warehouses, wharves, barges, dockworkers, and river traffic',
+      landmarks: ['Barge Wharf', 'Warehouse Row', 'River Landing'],
+    });
+    expect(JSON.stringify(layout)).not.toMatch(
+      /\b(?:coastal port|harbour|shipyards?|sailors?)\b/i,
+    );
+  });
+
   it("a river city with a Harbour master's office gets a waterfront district", () => {
     const layout = generateSpatialLayout('city', inst("Harbour master's office"), 'river');
     expect(quarterNames(layout)).toContain('Waterfront District');

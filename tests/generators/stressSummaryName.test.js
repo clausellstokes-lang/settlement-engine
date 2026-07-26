@@ -24,8 +24,19 @@ import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 
 const BASE = { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
 
-const mk = (over = {}, seed = 'f8') =>
-  generateSettlementPipeline({ ...BASE, ...over }, null, { seed, customContent: {} });
+const mk = (over = {}, seed = 'f8') => {
+  // slave_revolt is deliberately outside the grounded default boundary. This
+  // suite exercises every registered renderer, so opt into grim only for that
+  // sensitive authored case while leaving every ordinary probe at the default.
+  const contentProfile = over.stressType === 'slave_revolt'
+    ? 'grim'
+    : 'grounded';
+  return generateSettlementPipeline(
+    { ...BASE, contentProfile, ...over },
+    null,
+    { seed, customContent: {} },
+  );
+};
 
 /** Normalize the stress container (null / bare object / array) to an entry array. */
 const entriesOf = (s) => {

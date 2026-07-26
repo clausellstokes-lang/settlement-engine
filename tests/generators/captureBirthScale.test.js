@@ -15,10 +15,22 @@
  *      generation says it already is (otherwise the first pulse's rollup
  *      would silently reset criminalCaptureState to 'none').
  *
- * Sweep thresholds are calibrated against measurement (2026-06-11, N=60-120
- * per config): ordinary town/city/village read 0% corrupted and 0% capture;
- * 90-criminal-priority fixtures read ~60% corrupted and 1.7-3.3% capture.
- * Bounds below leave drift margin without letting the rates become dishonest.
+ * Sweep thresholds were RECALIBRATED 2026-07-26 (owner-ratified) after the
+ * final-economy -> power reconciliation. Power is now projected against the
+ * settlement's FINAL economy and its real defense label rather than a
+ * provisional one, so computePublicLegitimacy reads actual prosperity/safety/
+ * food and legitimacy multipliers redistribute faction power accordingly. That
+ * legitimately raised the criminal-capture rate; the new rate is the accepted
+ * tuning truth, not drift. Measured in this tree at N=400: ordinary towns read
+ * ~2.25% corrupted and 0% capture; 90-criminal-priority fixtures read full
+ * capture at ~6.75% (towns) / ~4.0% (cities).
+ *
+ * N was raised 40 -> 400 because the capture rate is front-loaded across the
+ * seed space (much denser over the first 100 seeds than over seeds 200-400), so
+ * a 40-seed instrument carries a +/-4% standard error — wider than the margin it
+ * was being asked to judge. The full analysis, including the base-vs-tree
+ * measurement table and the owner ruling, is in docs/GOLDEN_SHIFT_LEDGER.md
+ * under "2026-07-26 — criminal-capture distribution shift".
  * Deterministic: seeds derive from index, same numbers every run.
  */
 
@@ -26,7 +38,7 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { computeCriminalCaptureState } from '../../src/generators/factionDynamics.js';
 
-const N = 40;
+const N = 400;
 const LADDER = ['none', 'adversarial', 'equilibrium', 'corrupted', 'capture'];
 
 const CRIMINAL_HEAVY = {
@@ -84,10 +96,16 @@ describe('birth-scale distribution sweep', () => {
   const criminalCities = sweep({ settType: 'city', culture: 'germanic', ...CRIMINAL_HEAVY }, 'cap-crim-city');
 
   it('ordinary settlements essentially never read influenced (corrupted) at birth', () => {
-    // Measured 0% — the ≤1/40 bound (2.5%) is drift margin, not an expectation.
-    expect(countAtLeast(ordinaryTowns, 'corrupted')).toBeLessThanOrEqual(1);
-    expect(countAtLeast(ordinaryCities, 'corrupted')).toBeLessThanOrEqual(1);
-    expect(countAtLeast(ordinaryVillages, 'corrupted')).toBeLessThanOrEqual(1);
+    // The 2.5% bound is now a REAL bound with thin margin, not idle drift room.
+    // Under final-economy legitimacy, ordinary towns measure ~2.25% corrupted at
+    // N=400 (9/400; cities 1/400, villages 0/400) — so 9 against a bound of 10.
+    // The bound is the proportion this assertion's author always documented
+    // (2.5%); it was written as an absolute `1`, which only read as generous
+    // because N was 40. Do not raise it to make a red go away: at this margin a
+    // failure means the ordinary-settlement rate genuinely moved.
+    expect(countAtLeast(ordinaryTowns, 'corrupted')).toBeLessThanOrEqual(Math.round(N * 0.025));
+    expect(countAtLeast(ordinaryCities, 'corrupted')).toBeLessThanOrEqual(Math.round(N * 0.025));
+    expect(countAtLeast(ordinaryVillages, 'corrupted')).toBeLessThanOrEqual(Math.round(N * 0.025));
   });
 
   it('ordinary settlements never read full capture at birth', () => {
@@ -111,7 +129,8 @@ describe('birth-scale distribution sweep', () => {
   });
 
   it('full capture stays extraordinary even at the criminal extreme', () => {
-    // Measured 1.7-3.3% — bound at 10% of the sweep.
+    // Measured at N=400 under final-economy legitimacy: towns 27/400 (6.75%),
+    // cities 16/400 (4.00%) — bound at 10% of the sweep.
     expect(countAtLeast(criminalTowns, 'capture')).toBeLessThanOrEqual(Math.round(N * 0.1));
     expect(countAtLeast(criminalCities, 'capture')).toBeLessThanOrEqual(Math.round(N * 0.1));
   });

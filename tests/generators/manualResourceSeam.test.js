@@ -83,3 +83,28 @@ describe('[generators-pipeline-2] manual mode honours the terrain override', () 
     expect(roster(s).has('mountain_timber')).toBe(true);
   });
 });
+
+describe('manual resource condition remains authoritative for fixed sites', () => {
+  test('an explicitly blocked mountain pass remains depleted even though it cannot randomly deplete', () => {
+    const s = gen({
+      settType: 'metropolis',
+      culture: 'germanic',
+      terrainOverride: 'mountain',
+      tradeRouteAccess: 'mountain_pass',
+      nearbyResourcesRandom: false,
+      nearbyResources: ['defended_pass'],
+      nearbyResourcesState: { defended_pass: 'depleted' },
+    }, 'fixed-site-explicit-depletion');
+
+    expect(s.config.nearbyResources).toContain('defended_pass');
+    expect(s.config.nearbyResourcesDepleted).toContain('defended_pass');
+    expect(s.resourceAnalysis.resourceConditions).toContainEqual(
+      expect.objectContaining({
+        key: 'defended_pass',
+        type: 'positional',
+        condition: 'depleted',
+        randomDepletionEligible: false,
+      }),
+    );
+  });
+});

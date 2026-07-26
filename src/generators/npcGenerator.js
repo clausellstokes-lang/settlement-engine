@@ -5,10 +5,21 @@
 
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
-import { roleToCategory, roleTakesMerchantStress, institutionCategoryFlags } from './roleCategory.js';
+import {
+  isCommerceGuild,
+  roleToCategory,
+  roleTakesMerchantStress,
+} from './roleCategory.js';
+import { nativeSemanticName, nativeSemanticNames } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
+import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
+import { resolveGenerationWorldLaw } from './generationContext.js';
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
+import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
+import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
+import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
@@ -26,7 +37,6 @@ import {
   NPC_FEATURES,
   NPC_WANTS,
   NPC_FACTION_GOALS,
-  NPC_CRIMINAL_SECRETS,
   FACTION_CONFLICT_TYPES,
   NPC_FACTION_LOYALTY,
   NPC_SECRETS,
@@ -64,16 +74,37 @@ const generateNPCGoal = role => {
 // generateNPCs() call and threaded to every NPC so no two NPCs emit the same
 // loyalty hook. title1 and title2 are drawn against the SAME registry (title2 is
 // therefore always distinct from title1 without the old guard needing to prove it).
-const generateSingleNPC = (role, namingTier, category, culture, tier, config = {}, institutions = [], usedTitles) => {
+const generateSingleNPC = (
+  role,
+  namingTier,
+  category,
+  culture,
+  tier,
+  config = {},
+  institutions = [],
+  usedTitles,
+  generationContext = null,
+) => {
   const gender = _rng() > 0.5 ? 'male' : 'female';
   const fullName = pickFirst(culture, gender, true, tier);
-  const lastName = pickLast(culture, namingTier || culture);
+  const worldLaw = resolveGenerationWorldLaw(generationContext, config);
+  const culturalTitle = pickLast(culture, namingTier || culture);
+  const title = resolveGeneratedNpcTitle({
+    role,
+    culturalTitle,
+    category,
+    worldLaw,
+  });
   const religion = generateReligionType();
   const appearance = generateNPCAppearance(category);
   const goal = generateNPCRelType(role, category, config);
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
-  const secret = generateFactionLeader(category, config, institutions);
+  const secret = generateFactionLeaderSecret(
+    config,
+    institutions,
+    worldLaw,
+  );
   const title1 = generateCharacterTitle(category, config, usedTitles);
   const title2 = _rng() > 0.5 ? generateCharacterTitle(category, config, usedTitles) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
@@ -83,7 +114,7 @@ const generateSingleNPC = (role, namingTier, category, culture, tier, config = {
     name: fullName,
     gender,
     role,
-    title: lastName,
+    title,
     category,
     personality: {
       dominant: religion.dominant,
@@ -219,15 +250,29 @@ const pickLast = (r = 'germanic', s = 'mayor') => {
   return s.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 };
 
-const filterByGuild = (institutions, culture, tier, config = {}, usedTitles) => {
-  const guildInsts = institutions.filter(i => {
-    const n = (i.name || '').toLowerCase();
-    return (i.tags?.includes('guild') || n.includes('guild')) && !n.includes('thieves');
-  });
+const filterByGuild = (
+  institutions,
+  culture,
+  tier,
+  config = {},
+  usedTitles,
+  generationContext = null,
+) => {
+  const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
   const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
-  const npc = generateSingleNPC('Guild Master', culture, 'economy', culture, tier, config, institutions, usedTitles);
+  const npc = generateSingleNPC(
+    'Guild Master',
+    culture,
+    'economy',
+    culture,
+    tier,
+    config,
+    institutions,
+    usedTitles,
+    generationContext,
+  );
   npc.title = `${pickLast(culture, 'guild_master')} of ${guildName}`;
   npc.institution = guild.name;
   return npc;
@@ -551,78 +596,6 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
   return pickFromArray(NPC_SECRETS[category] || NPC_SECRETS.other);
 };
 
-// generateFactionLeader
-const generateFactionLeader = (_category = 'other', config = {}, institutions = []) => {
-  const pri = {
-    economy: config.priorityEconomy ?? 50,
-    military: config.priorityMilitary ?? 50,
-    religion: config.priorityReligion ?? 50,
-    magic: config.priorityMagic ?? 50,
-    criminal: config.priorityCriminal ?? 50,
-  };
-  // Metadata-first category flags (roleCategory.js): catalog group + tags with
-  // name-keyword fallback for unstamped institutions — the old name-substring
-  // triple missed renamed/consolidated criminal/magic/religious institutions.
-  const { hasCriminal, hasMagic, hasReligion } = institutionCategoryFlags(institutions);
-  const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-
-  // Secret type weights driven by institution presence and priorities
-  const weights = {
-    criminal: (hasCriminal ? 1.4 : 0.8) * (1 + pri.criminal / 100),
-    personal: 1.5,
-    political: 1 + pri.military / 100,
-    magical: (hasMagic ? 1.3 : 0.6) * (1 + pri.magic / 100),
-    religious: (hasReligion ? 1.3 : 0.6) * (1 + pri.religion / 100),
-    family: 1.2,
-    historical: 0.8,
-    military: pri.military > 50 ? 1.2 : 0.6,
-    economic_betrayal: pri.economy > 50 ? 1.1 : 0.7,
-    identity: 0.9,
-  };
-
-  // Stress-specific weight boosts
-  if (stresses.length > 0) {
-    const STRESS_SECRET_BOOSTS = {
-      under_siege: { military: 3, political: 2, personal: 1.5, criminal: 0.5 },
-      famine: { economic_betrayal: 3, criminal: 2, personal: 2, political: 1.5 },
-      occupied: { political: 3, military: 2.5, identity: 2.5, historical: 1.8, criminal: 1.5 },
-      politically_fractured: { political: 3, criminal: 2, family: 1.8, historical: 1.5 },
-      indebted: { economic_betrayal: 3, criminal: 2, political: 1.8, personal: 1.5 },
-      recently_betrayed: { political: 3, military: 2.5, criminal: 2, historical: 2, identity: 1.5 },
-      infiltrated: { political: 2.5, military: 2.5, criminal: 2.5, identity: 2 },
-      plague_onset: { personal: 2.5, religious: 2, criminal: 2, economic_betrayal: 1.5 },
-      succession_void: { political: 3, family: 2.5, criminal: 1.8, historical: 1.5 },
-      monster_pressure: { military: 2.5, personal: 2, historical: 1.5, magical: 1.3 },
-      insurgency: { political: 3, military: 2, criminal: 2, identity: 1.8 },
-      mass_migration: { identity: 2.5, personal: 2, criminal: 1.8, historical: 1.5 },
-      wartime: { military: 3, political: 2, economic_betrayal: 1.8, personal: 1.5 },
-      religious_conversion: { religious: 3, political: 2, historical: 1.8, family: 1.5 },
-      slave_revolt: { political: 2.5, military: 2.5, criminal: 2, identity: 2 },
-    };
-    stresses.forEach(stress => {
-      const boosts = STRESS_SECRET_BOOSTS[stress] || {};
-      Object.entries(boosts).forEach(([key, mult]) => {
-        if (weights[key] !== undefined) weights[key] *= mult;
-      });
-    });
-  }
-
-  // Weighted random secret type selection
-  const secretTypes = Object.keys(weights);
-  const total = secretTypes.reduce((sum, k) => sum + weights[k], 0);
-  let roll = _rng() * total;
-  let chosenType = secretTypes[0];
-  for (const type of secretTypes) {
-    roll -= weights[type];
-    if (roll <= 0) {
-      chosenType = type;
-      break;
-    }
-  }
-
-  return pickFromArray(NPC_CRIMINAL_SECRETS[chosenType] || NPC_CRIMINAL_SECRETS.personal);
-};
-
 // generateCharacterTitle
 // `usedTitles` is the settlement-scoped anti-repetition draw registry (a Set of
 // hook strings already emitted by any NPC in this population). Each authored
@@ -917,7 +890,8 @@ const _pickFactionName = r => {
 export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   if (!npcs || !factions || npcs.length === 0 || factions.length === 0) return npcs;
 
-  const instNames = (institutions || []).map(i => (i.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const hasInst = kw => instNames.some(n => n.includes(kw));
 
   // Find key faction references — category-first so generic names like "Religious Authorities" still match
@@ -1416,18 +1390,25 @@ const _sortNPCsByPriority = function (historicalEvents, currentTensions, _tier) 
 // ─────────────────────────────────────────────────────────
 
 // generateNPCs
-export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
+export const generateNPCs = (
+  settlement,
+  culture = 'germanic',
+  config = {},
+  generationContext = null,
+) => {
   const { tier, institutions } = settlement;
+  const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const weights = { ...computeNPCWeights(config, institutions), tradeRouteAccess: config?.tradeRouteAccess || 'road' };
   const { min, max } = getNPCCountRange(tier);
-  const targetCount = randInt(min, max);
+  const targetCount = Math.max(randInt(min, max), Number(config?._minNpcCount) || 0);
   const npcs = [];
   // Settlement-scoped anti-repetition draw registry: shared across EVERY NPC in
   // this population so the same loyalty hook is never emitted twice (drawUnique
   // prefers an unused pool variant). This is the machinery behind the hook
   // repeat-rate envelope; see hookVariety.js.
   const usedTitles = new Set();
-  const candidates = getUpgradeOpportunities(institutions, tier, weights);
+  const candidates = getUpgradeOpportunities(institutions, tier, weights)
+    .filter(worldLaw.allowsRole);
 
   // ── Inject faction-gated NPC roles ────────────────────────────────────────
   // Noble and crafts roles only appear when those faction types exist in the
@@ -1437,188 +1418,30 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   const tierIdx = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].indexOf(tier);
   const tierOk = minTier => tierIdx >= ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].indexOf(minTier);
 
-  const NOBLE_ROLES = [
-    {
-      role: 'Lord/Lady of the Manor',
-      title: 'noble',
-      priority: 8,
-      minTier: 'village',
-      category: 'noble',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Baron/Baroness',
-      title: 'noble',
-      priority: 9,
-      minTier: 'town',
-      category: 'noble',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Court Advisor',
-      title: 'advisor',
-      priority: 7,
-      minTier: 'town',
-      category: 'noble',
-      goalCategories: ['power', 'knowledge'],
-    },
-    {
-      role: 'House Steward',
-      title: 'steward',
-      priority: 6,
-      minTier: 'village',
-      category: 'noble',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Noble Heir',
-      title: 'noble',
-      priority: 5,
-      minTier: 'hamlet',
-      category: 'noble',
-      goalCategories: ['personal', 'power'],
-    },
-    {
-      role: 'Land Agent',
-      title: 'agent',
-      priority: 5,
-      minTier: 'village',
-      category: 'noble',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Knight/Dame',
-      title: 'knight',
-      priority: 7,
-      minTier: 'village',
-      category: 'noble',
-      goalCategories: ['protection', 'personal'],
-    },
-    {
-      role: 'Duke/Duchess',
-      title: 'noble',
-      priority: 10,
-      minTier: 'metropolis',
-      category: 'noble',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Royal Chamberlain',
-      title: 'noble',
-      priority: 8,
-      minTier: 'city',
-      category: 'noble',
-      goalCategories: ['power', 'personal'],
-    },
-  ];
-  const CRAFTS_ROLES = [
-    {
-      role: 'Master Blacksmith',
-      title: 'master',
-      priority: 7,
-      minTier: 'hamlet',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Master Carpenter',
-      title: 'master',
-      priority: 6,
-      minTier: 'hamlet',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Master Weaver',
-      title: 'master',
-      priority: 6,
-      minTier: 'village',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Master Tanner',
-      title: 'master',
-      priority: 5,
-      minTier: 'village',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Head Brewer',
-      title: 'guild',
-      priority: 5,
-      minTier: 'hamlet',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Guild Warden',
-      title: 'guild',
-      priority: 7,
-      minTier: 'town',
-      category: 'crafts',
-      goalCategories: ['power', 'wealth'],
-      requiresGuild: true,
-    },
-    {
-      role: 'Journeyman Overseer',
-      title: 'overseer',
-      priority: 5,
-      minTier: 'town',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Craft Guild Representative',
-      title: 'guild',
-      priority: 6,
-      minTier: 'city',
-      category: 'crafts',
-      goalCategories: ['power', 'wealth'],
-      requiresGuild: true,
-    },
-    {
-      role: 'Master Potter',
-      title: 'master',
-      priority: 4,
-      minTier: 'village',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Master Glassblower',
-      title: 'master',
-      priority: 5,
-      minTier: 'town',
-      category: 'crafts',
-      goalCategories: ['wealth', 'personal'],
-    },
-  ];
-
   if (powerFactionCats.has('noble')) {
     const existingRoles = new Set(candidates.map(c => c.role));
-    NOBLE_ROLES.filter(r => tierOk(r.minTier) && !existingRoles.has(r.role)).forEach(r =>
-      candidates.push({ ...r, effectivePriority: r.priority }),
-    );
+    NOBLE_ROLES
+      .filter(role => worldLaw.allowsRole(role))
+      .filter(role => tierOk(role.minTier) && !existingRoles.has(role.role))
+      .forEach(role => candidates.push({
+        ...role,
+        effectivePriority: role.priority,
+      }));
   }
   if (powerFactionCats.has('crafts') || powerFactionCats.has('economy')) {
     // Inject crafts-specific roles when a crafts OR economy faction exists (Craft Guilds have category=economy)
     const existingRoles = new Set(candidates.map(c => c.role));
-    const hasGuild = institutions.some(
-      i => i.tags?.includes('guild') || (i.name || '').toLowerCase().includes('guild'),
-    );
+    const hasGuild = institutions.some(isCommerceGuild);
     const waterRoute = ['port', 'river', 'coastal'].includes(config?.tradeRouteAccess);
     const hasPort =
       waterRoute ||
       institutions.some(
         i =>
-          i.tags?.includes('port') ||
-          (i.name || '').toLowerCase().includes('port') ||
-          (i.name || '').toLowerCase().includes('harbour') ||
-          (i.name || '').toLowerCase().includes('harbor'),
+          /port|harbou?r/.test(nativeSemanticName(i).toLowerCase()),
       );
-    CRAFTS_ROLES.filter(r => tierOk(r.minTier) && !existingRoles.has(r.role))
+    CRAFTS_ROLES
+      .filter(role => worldLaw.allowsRole(role))
+      .filter(r => tierOk(r.minTier) && !existingRoles.has(r.role))
       .filter(r => !r.requiresGuild || hasGuild)
       .filter(r => !r.requiresPort || hasPort)
       .forEach(r => candidates.push({ ...r, effectivePriority: r.priority }));
@@ -1627,21 +1450,8 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const primaryStress = stresses[0] || null;
 
-  // Tier-appropriate mandatory roles
-  // Derive terrain-appropriate second role for thorps
-  const thorpSecondRole = (() => {
-    const route = config.tradeRouteAccess || 'road';
-    const terrain = config.terrainType || 'plains';
-    const insts = (settlement.institutions || []).map(i => (i.name || '').toLowerCase());
-    if (insts.some(n => n.includes('fishing'))) return 'Fisherman';
-    if (insts.some(n => n.includes('woodcutter'))) return 'Woodcutter';
-    if (insts.some(n => n.includes('shepherd'))) return 'Shepherd';
-    if (route === 'port' || terrain === 'coastal') return 'Fisherman';
-    if (terrain === 'forest' || route === 'isolated') return 'Woodcutter';
-    if (terrain === 'plains' || terrain === 'hills') return 'Shepherd';
-    if (route === 'river' || terrain === 'riverside') return 'Fisherman';
-    return 'Miller';
-  })();
+  // Tier-appropriate mandatory roles.
+  const thorpSecondRole = deriveThorpSecondRole(settlement, config);
 
   const TIER_MANDATORY_ROLES = {
     thorp: ['Elder', thorpSecondRole],
@@ -1680,7 +1490,8 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   const tierRolesU = [...new Set(tierRoles)];
   const tierRoleSet = new Set(tierRolesU);
   const stressContribution = stressRoles.filter(r => !tierRoleSet.has(r));
-  const mandatoryRoles = [...tierRolesU, ...stressContribution];
+  const mandatoryRoles = [...tierRolesU, ...stressContribution]
+    .filter(worldLaw.allowsRole);
 
   // Build config context for NPC generation
   const npcConfig = {
@@ -1694,13 +1505,30 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   mandatoryRoles.forEach(role => {
     const candidate = candidates.find(c => c.role === role);
     if (candidate && npcs.length < targetCount) {
-      npcs.push(generateSingleNPC(candidate.role, candidate.title, candidate.category, culture, tier, npcConfig, institutions, usedTitles));
+      npcs.push(generateSingleNPC(
+        candidate.role,
+        candidate.title,
+        candidate.category,
+        culture,
+        tier,
+        npcConfig,
+        institutions,
+        usedTitles,
+        worldLaw,
+      ));
     }
   });
 
   // Add a guild-master NPC if we have room
   if (npcs.length < targetCount) {
-    const guildNPC = filterByGuild(institutions, culture, tier, npcConfig, usedTitles);
+    const guildNPC = filterByGuild(
+      institutions,
+      culture,
+      tier,
+      npcConfig,
+      usedTitles,
+      worldLaw,
+    );
     if (guildNPC) npcs.push(guildNPC);
   }
 
@@ -1722,7 +1550,17 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     }
     if (!chosen) chosen = remainingCandidates[0];
 
-    npcs.push(generateSingleNPC(chosen.role, chosen.title, chosen.category, culture, tier, npcConfig, institutions, usedTitles));
+    npcs.push(generateSingleNPC(
+      chosen.role,
+      chosen.title,
+      chosen.category,
+      culture,
+      tier,
+      npcConfig,
+      institutions,
+      usedTitles,
+      worldLaw,
+    ));
     usedRoles.add(chosen.role);
     remainingCandidates.splice(remainingCandidates.indexOf(chosen), 1);
   }
@@ -1731,7 +1569,10 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   npcs.forEach((npc, idx) => {
     npc.id = `npc_${idx + 1}`;
   });
-  return npcs;
+
+  // Resolve the display layer before relationships copy names out of the NPC
+  // records. This is draw-free, so it preserves all downstream RNG ordering.
+  return disambiguateNPCDisplayNames(npcs);
 };
 
 // generateRelationships

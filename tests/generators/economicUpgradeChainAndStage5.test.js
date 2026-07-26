@@ -104,7 +104,16 @@ describe('Stage 5 exports survive the Stage 7 chain override', () => {
 
   it('the slave-trade export and paired enslaved-labour import are preserved when the draw fires', () => {
     setActiveRng({ random: () => 0 }); // forces the chance-gated slave-trade draw
-    const state = generateEconomicState('city', CITY_INSTS, 'road', {}, CITY_CONFIG);
+    // Coercive trade is outside the grounded default. This characterization
+    // intentionally exercises the opted-in mature economy, so its premise must
+    // select a profile that allows the content.
+    const state = generateEconomicState(
+      'city',
+      CITY_INSTS,
+      'road',
+      {},
+      { ...CITY_CONFIG, contentProfile: 'grim' },
+    );
     expect(state.primaryExports.some((e) => SLAVE_EXPORT.test(e))).toBe(true);
     expect(
       state.primaryImports.some((i) => i.toLowerCase().startsWith('enslaved labour'))

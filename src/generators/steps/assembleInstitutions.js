@@ -20,8 +20,21 @@ import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
-import { byNameCodepoint } from '../../domain/deterministicSort.js';
+import { byCustomIdentityCodepoint } from '../../domain/deterministicSort.js';
+import { projectCustomInstitutionSceneFields } from '../../domain/townScene/customBuildingPresentation.js';
+import {
+  projectCustomDefinitionIdentity,
+} from '../../domain/content/customDefinitionIdentityProjection.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticResourceKeys,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import {
+  isProtectedFromCustomSubsumption,
+  isProtectedGenerationEntity,
+} from '../../domain/generationOwnership.js';
 import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleReader.js';
+import { threatDefensePlan } from '../threatDefensePolicy.js';
 
 // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
@@ -70,6 +83,28 @@ function tagsToDownstream(tags) {
   if (has('criminal') || has('smuggling') || has('illicit'))
     effects.push({ target: 'publicOrder', effect: 'eroded' });
   return effects;
+}
+
+function matchesSubsumptionTarget(institution, target) {
+  if (target.source === 'custom') {
+    if (!isMaterializedCustomContent(institution)) return false;
+    const expected = projectCustomDefinitionIdentity(target.raw);
+    const actual = projectCustomDefinitionIdentity(institution);
+    if (expected.customDefinitionId) {
+      return actual.customDefinitionId === expected.customDefinitionId;
+    }
+    return Boolean(
+      target.raw?.localUid
+      && institution.localUid === target.raw.localUid,
+    );
+  }
+  if (target.source === 'prebuilt') {
+    return (
+      !isMaterializedCustomContent(institution)
+      && institution.name === target.name
+    );
+  }
+  return institution.name === target.name;
 }
 
 // Merge city+metropolis catalogs
@@ -172,18 +207,27 @@ export const UPGRADE_CHAINS = [
 
 /**
  * Collapse upgrade ladders in place: when both members of an UPGRADE_CHAINS pair
- * are present, the lesser is removed (required institutions protected). Used by
- * the main assembly AND by cascadePass after cascade additions — both rosters
- * must obey the same ladder or the dossier lists contradictory scale tiers.
+ * are present, the lesser is removed when generation owns it. Required,
+ * forced, custom, event-authored, locked, and pinned institutions are protected
+ * by the shared generation-ownership law. Used by the main assembly AND by
+ * every later addition pass so all rosters obey the same rule.
  *
  * @returns {string[]} the names removed (for trace emission by callers that trace).
  */
 export function collapseUpgradeChains(institutions) {
   const removed = [];
-  const presentNames = new Set(institutions.map(i => i.name));
+  const presentNames = new Set(
+    institutions
+      .filter(institution => !isMaterializedCustomContent(institution))
+      .map(institution => institution.name),
+  );
   UPGRADE_CHAINS.forEach(([lesser, greater]) => {
     if (presentNames.has(lesser) && presentNames.has(greater)) {
-      const idx = institutions.findIndex(i => i.name === lesser && i.source !== 'required');
+      const idx = institutions.findIndex(institution => (
+        !isMaterializedCustomContent(institution)
+        && institution.name === lesser
+        && !isProtectedGenerationEntity(institution)
+      ));
       if (idx >= 0) {
         institutions.splice(idx, 1);
         presentNames.delete(lesser);
@@ -195,18 +239,27 @@ export function collapseUpgradeChains(institutions) {
 }
 
 registerStep('assembleInstitutions', {
-  deps: ['resolveConfig', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
-  reads: ['categoryToggles', 'effectiveConfig', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
-  provides: ['institutions', 'catalogForTier'],
+  deps: ['buildGenerationContext', 'resolveResources', 'resolveStress', 'resolveNeighbour'],
+  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'nearbyResources', 'neighbourProfile', 'threat', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  provides: ['institutions', 'catalogForTier', 'generationRepairs'],
   phase: 'institutions',
 }, (ctx, rng) => {
   const {
     tier, tradeRoute, effectiveConfig, nearbyResources,
     institutionToggles, categoryToggles, goodsToggles,
-    neighbourProfile,
+    neighbourProfile, generationContext,
   } = ctx;
+  const { worldLaw } = generationContext;
   const config = ctx.config || {};
   const importedNeighbor = ctx.importedNeighbour || null;
+  // The resolved roster intentionally mixes native keys with custom display
+  // labels for dossier and explicit custom-mechanics consumers. Native catalog
+  // selection must see only proven native keys; otherwise naming a custom
+  // resource `iron_deposits` silently grants smelter and mine probabilities.
+  const nativeNearbyResources = nativeSemanticResourceKeys(
+    effectiveConfig,
+    nearbyResources,
+  );
 
   // pipeline-4: read the SAME keys the wizard writes. The old reader keyed off the
   // raw settType sentinel ('random::cat'/'custom::cat'), which no writer produces,
@@ -220,6 +273,7 @@ registerStep('assembleInstitutions', {
     : institutionalCatalog[tier] || {};
 
   const institutions = [];
+  const generationRepairs = [];
   const exclusiveGroups = {};
   const tierIndex = TIER_ORDER.indexOf(tier);
   const terrainType = getTerrainType(tradeRoute, effectiveConfig.terrainOverride || null);
@@ -229,12 +283,28 @@ registerStep('assembleInstitutions', {
   Object.entries(catalogForTier).forEach(([category, categoryInsts]) => {
     Object.entries(categoryInsts).forEach(([name, inst]) => {
       if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return;
-
       const toggle = institutionToggles[`${tier}::${category}::${name}`]
                   || institutionToggles[`${tier}_${category}_${name}`]
                   || institutionToggles[`all::${category}::${name}`]
                   || institutionToggles[`all_${category}_${name}`]
                   || { allow: true, require: false };
+      // World law precedes required/forced/probability handling. A stale
+      // priority, second-chance roll, or toggle is never authority to create an
+      // institution whose defining function does not exist in this world.
+      // The theme-profile half of WorldLaw needs the toggle provenance at this
+      // seam: an explicit requirement is authored content, not a generated
+      // suggestion. Hard no-magic law is still evaluated by the same predicate.
+      if (!worldLaw.allowsInstitution({
+        category,
+        name,
+        ...inst,
+        ...(toggle.require
+          ? {
+              source: 'forced',
+              forcedByToggle: true,
+            }
+          : {}),
+      })) return;
 
       const catEnabled = isCategoryEnabled(category);
       const forceExclude = inst.required && toggle.forceExclude === true;
@@ -244,23 +314,23 @@ registerStep('assembleInstitutions', {
         if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) {
           const existingName = exclusiveGroups[inst.exclusiveGroup];
           const existingIdx = institutions.findIndex(i => i.name === existingName);
-          if (existingIdx >= 0 && institutions[existingIdx].source !== 'required') {
+          if (
+            existingIdx >= 0
+            && !isProtectedGenerationEntity(institutions[existingIdx])
+          ) {
             institutions.splice(existingIdx, 1);
-          } else if (existingIdx >= 0) {
-            return;
-          }
-        }
-        if (toggle.require && !inst.required && inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) {
-          const existingName = exclusiveGroups[inst.exclusiveGroup];
-          const existingIdx = institutions.findIndex(i => i.name === existingName);
-          if (existingIdx >= 0 && institutions[existingIdx].source !== 'required') {
-            institutions.splice(existingIdx, 1);
-          } else if (existingIdx >= 0) {
-            return;
           }
         }
         if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
-        institutions.push({ category, name, ...inst, source: inst.required ? 'required' : 'forced' });
+        institutions.push({
+          category,
+          name,
+          ...inst,
+          source: inst.required ? 'required' : 'forced',
+          ...(!inst.required && toggle.require
+            ? { forcedByToggle: true }
+            : {}),
+        });
 
         // Trace: required / forced selections still warrant a receipt so
         // the rail can answer "why does this town have a watch?" even
@@ -293,13 +363,21 @@ registerStep('assembleInstitutions', {
         // itself where a named nearby resource makes it physically impossible — the underways
         // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op,
         // byte-identical for every existing institution.
-        if (inst.forbiddenResources && Array.isArray(nearbyResources)
-            && inst.forbiddenResources.some(r => nearbyResources.includes(r))) return;
+        if (inst.forbiddenResources
+            && inst.forbiddenResources.some(
+              resource => nativeNearbyResources.includes(resource),
+            )) return;
 
         const baseChance = getBaseChance(
           inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles
         );
-        const resourceMult = getResourceMultiplier(inst.tags || [], name, nearbyResources, instModifiers, tier);
+        const resourceMult = getResourceMultiplier(
+          inst.tags || [],
+          name,
+          nativeNearbyResources,
+          instModifiers,
+          tier,
+        );
 
         if (rng.chance(baseChance * resourceMult)) {
           if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = name;
@@ -311,11 +389,11 @@ registerStep('assembleInstitutions', {
           // reader can see why it was likely. Downstream records what
           // subsystems this institution feeds back into.
           const causes = [chanceCause(baseChance, resourceMult)];
-          if (Array.isArray(nearbyResources) && nearbyResources.length && resourceMult > 1) {
+          if (nativeNearbyResources.length && resourceMult > 1) {
             causes.push({
               source: 'nearbyResources',
               effect: `×${resourceMult.toFixed(2)}`,
-              reason: `Nearby resources (${nearbyResources.slice(0, 3).join(', ')}${nearbyResources.length > 3 ? '…' : ''}) shifted the selection odds.`,
+              reason: `Nearby resources (${nativeNearbyResources.slice(0, 3).join(', ')}${nativeNearbyResources.length > 3 ? '…' : ''}) shifted the selection odds.`,
             });
           }
           if (terrainType && terrainType !== 'plains') {
@@ -344,19 +422,44 @@ registerStep('assembleInstitutions', {
     const parts = key.split('_');
     if (parts.length < 3) return;
     const instName = parts.slice(2).join('_');
-    if (institutions.some(i => i.name === instName)) return;
+    const existing = institutions.find(i => i.name === instName);
+    if (existing) {
+      // A naturally rolled entity can still be explicitly required. Upgrade
+      // its provenance before any collapse pass so the toggle is not lost just
+      // because the same seed happened to roll the institution independently.
+      if (existing.source !== 'required') {
+        existing.source = 'forced';
+        existing.forcedByToggle = true;
+      }
+      return;
+    }
     for (const [cat, catInsts] of Object.entries(catalogForTier)) {
       if (catInsts[instName]) {
         const inst = catInsts[instName];
+        if (!worldLaw.allowsInstitution({
+          category: cat,
+          name: instName,
+          ...inst,
+          source: 'forced',
+          forcedByToggle: true,
+        })) return;
         if (inst.exclusiveGroup) {
           if (exclusiveGroups[inst.exclusiveGroup]) {
             const existIdx = institutions.findIndex(i => i.name === exclusiveGroups[inst.exclusiveGroup]);
-            if (existIdx >= 0 && institutions[existIdx].source !== 'required') institutions.splice(existIdx, 1);
-            else if (existIdx >= 0) return;
+            if (
+              existIdx >= 0
+              && !isProtectedGenerationEntity(institutions[existIdx])
+            ) institutions.splice(existIdx, 1);
           }
           exclusiveGroups[inst.exclusiveGroup] = instName;
         }
-        institutions.push({ category: cat, name: instName, ...inst, source: 'forced' });
+        institutions.push({
+          category: cat,
+          name: instName,
+          ...inst,
+          source: 'forced',
+          forcedByToggle: true,
+        });
         break;
       }
     }
@@ -385,25 +488,59 @@ registerStep('assembleInstitutions', {
     const parts = key.split('::');
     if (parts.length < 3) return;
     const [, category, instName] = parts;
-    if (institutions.some(i => i.name === instName)) return;
-    const catInsts = fullCatalogAllTiers[category];
+    const existing = institutions.find(i => i.name === instName);
+    if (existing) {
+      if (existing.source !== 'required') {
+        existing.source = 'forced';
+        existing.forcedByToggle = true;
+      }
+      return;
+    }
+    // Toggle category labels are persisted UI vocabulary and may outlive a
+    // catalog section rename (for example, legacy "Military" now maps to the
+    // "Defense" catalog section). The institution name is the stable authored
+    // choice, so fall back to an all-category exact-name lookup.
+    const resolvedCategory = fullCatalogAllTiers[category]?.[instName]
+      ? category
+      : Object.keys(fullCatalogAllTiers).find(
+          candidate => fullCatalogAllTiers[candidate]?.[instName],
+        );
+    const catInsts = resolvedCategory
+      ? fullCatalogAllTiers[resolvedCategory]
+      : null;
     if (!catInsts || !catInsts[instName]) return;
     const inst = catInsts[instName];
-    const isInTier = !!((catalogForTier[category] || {})[instName]);
-    if (isInTier) return;
+    if (!worldLaw.allowsInstitution({
+      category: resolvedCategory,
+      name: instName,
+      ...inst,
+      source: 'forced',
+      forcedByToggle: true,
+    })) return;
+    const isInTier = !!((catalogForTier[resolvedCategory] || {})[instName]);
 
     if (inst.exclusiveGroup && exclusiveGroups[inst.exclusiveGroup]) {
       const existIdx = institutions.findIndex(i => i.name === exclusiveGroups[inst.exclusiveGroup]);
-      if (existIdx >= 0 && institutions[existIdx].source === 'required') {
-        // Both co-exist
-      } else if (existIdx >= 0) {
+      if (
+        existIdx >= 0
+        && !isProtectedGenerationEntity(institutions[existIdx])
+      ) {
         institutions.splice(existIdx, 1);
       }
     }
     if (inst.exclusiveGroup) exclusiveGroups[inst.exclusiveGroup] = instName;
     institutions.push({
-      category, name: instName, ...inst, source: 'forced',
-      outOfTier: true, nativeTier: inst.nativeTier || 'unknown',
+      category: resolvedCategory,
+      name: instName,
+      ...inst,
+      source: 'forced',
+      forcedByToggle: true,
+      ...(!isInTier
+        ? {
+            outOfTier: true,
+            nativeTier: inst.nativeTier || 'unknown',
+          }
+        : {}),
     });
   });
 
@@ -412,19 +549,36 @@ registerStep('assembleInstitutions', {
   // gate again defensively. Essential ones always appear; the rest roll a modest
   // chance. Marked source:'custom' (the dossier tints these gold) and carrying the
   // real `category` so they land in the right dossier section. Iterated in
-  // CODEPOINT name order (NOT localeCompare) so the rng rolls replay byte-identical
-  // across devices/locales — this sort feeds rng.chance() below, so locale-collated
-  // order would break same-seed replay for non-ASCII custom names. When the user
-  // has no custom institutions this loop is a no-op and consumes no rng (zero
-  // change to existing generation).
+  // stable definition-identity order: display names are presentation-only and
+  // must not move a definition onto another RNG draw when renamed. The
+  // codepoint comparator remains cross-device deterministic. When the user has
+  // no custom institutions this loop is a no-op and consumes no rng.
   const customInstitutions = (customDeps.registry().listCustom?.('institutions') || [])
     .slice()
-    .sort(byNameCodepoint);
+    .sort(byCustomIdentityCodepoint);
   for (const entry of customInstitutions) {
     const item = entry.raw || {};
     const name = entry.name;
-    if (!name || institutions.some(i => i.name === name)) continue;
+    const identity = projectCustomDefinitionIdentity(item);
+    const localUid = item.localUid || entry.refId;
+    const alreadyMaterialized = institutions.some(institution => (
+      isMaterializedCustomContent(institution)
+      && (
+        identity.customDefinitionId
+          ? projectCustomDefinitionIdentity(institution).customDefinitionId
+            === identity.customDefinitionId
+          : institution.localUid === localUid
+      )
+    ));
+    if (!name || alreadyMaterialized) continue;
     if (!passesTierGate(item, tier)) continue;
+    if (!worldLaw.allowsInstitution({
+      ...item,
+      category: item.category || entry.category || 'Other',
+      name,
+      source: 'custom',
+      isCustom: true,
+    })) continue;
     const essential = item.essential === true;
     if (!essential && !rng.chance(0.3)) continue;
     institutions.push({
@@ -437,21 +591,37 @@ registerStep('assembleInstitutions', {
         ? item.tags
         : (typeof item.tags === 'string' ? item.tags.split(',').map(s => s.trim()).filter(Boolean) : []),
       description: item.description || '',
-      localUid: item.localUid || entry.refId,
+      localUid,
+      customDefinitionCategory: 'institutions',
+      ...identity,
+      // Presentation is retained as bounded semantic intent, not raw geometry.
+      // TownMap places the institution first; TownScene resolves these registered
+      // tokens afterward, so custom visuals cannot perturb the canonical plan.
+      ...projectCustomInstitutionSceneFields(item),
     });
   }
 
   // Dedup upgrade chains
   collapseUpgradeChains(institutions);
-  const presentNames = new Set(institutions.map(i => i.name));
 
   // §14 — custom subsumption: a custom institution can declare it `subsumes`
   // others; when both are present the absorbed one isn't listed separately
   // (mirrors the UPGRADE_CHAINS de-dup; required institutions are protected).
   for (const inst of [...institutions]) {
-    for (const absorbedName of customDeps.subsumedBy?.(inst.name) || []) {
-      const idx = institutions.findIndex(i => i.name === absorbedName && i.source !== 'required');
-      if (idx >= 0) { institutions.splice(idx, 1); presentNames.delete(absorbedName); }
+    const targets = customDeps.subsumptionTargetsFor?.(inst, tier) || [];
+    for (const target of targets) {
+      const matches = institutions
+        .map((candidate, index) => ({ candidate, index }))
+        .filter(({ candidate }) => (
+          !isProtectedFromCustomSubsumption(candidate, {
+            exactTarget: Boolean(target.refId),
+          })
+          && matchesSubsumptionTarget(candidate, target)
+        ));
+      // A bare legacy name is not enough authority to choose among multiple
+      // identity-distinct entities. Structured targets remain exact.
+      if (target.source == null && matches.length !== 1) continue;
+      if (matches.length > 0) institutions.splice(matches[0].index, 1);
     }
   }
 
@@ -466,6 +636,74 @@ registerStep('assembleInstitutions', {
     if (toggle.forceExclude === true || (toggle.allow === false && !inst.required && !toggle.require && inst.source !== 'forced')) {
       institutions.splice(i, 1);
     }
+  }
+
+  // Threat defenses are structural inputs to governance, legitimacy, and the
+  // economy, not a cosmetic patch. Materialize their deterministic minimum
+  // before generatePower reads the institution roster. The final coherence
+  // pass applies this same policy again as an idempotent safety net after later
+  // faction additions, so both boundaries share one policy table.
+  const catalogEntries = Object.entries(catalogForTier)
+    .flatMap(([category, group]) => Object.entries(group || {}).map(
+      ([name, definition]) => ({ category, name, ...definition }),
+    ));
+  for (const requirement of threatDefensePlan({
+    tier,
+    threat: ctx.threat,
+    institutions,
+  })) {
+    const candidate = requirement.names
+      .map(name => catalogEntries.find(entry => entry.name === name))
+      .find((entry) => {
+        if (!entry || !isCategoryEnabled(entry.category)) return false;
+        const toggle = institutionToggles[`${tier}::${entry.category}::${entry.name}`]
+          || institutionToggles[`${tier}_${entry.category}_${entry.name}`]
+          || institutionToggles[`all::${entry.category}::${entry.name}`]
+          || institutionToggles[`all_${entry.category}_${entry.name}`];
+        if (
+          toggle
+          && toggle.require !== true
+          && (toggle.forceExclude === true || toggle.allow === false)
+        ) return false;
+        if (entry.tradeRouteRequired?.length) {
+          const routeOk = entry.tradeRouteRequired.includes(tradeRoute);
+          const terrainOk = entry.terrainAccess?.includes(terrainType);
+          if (!routeOk && !terrainOk) return false;
+        }
+        if (entry.forbiddenTradeRoutes?.includes(tradeRoute)) return false;
+        if (
+          entry.terrainRequired?.length
+          && !entry.terrainRequired.includes(terrainType)
+        ) return false;
+        return worldLaw.allowsInstitution(entry);
+      });
+    if (!candidate) continue;
+
+    institutions.push({
+      ...candidate,
+      source: 'coherence_repair',
+      coherenceRepair: requirement.type,
+    });
+    const repair = Object.freeze({
+      id: `repair.${generationRepairs.length + 1}`,
+      type: requirement.type,
+      action: 'added',
+      subject: candidate.name,
+      reason: requirement.reason,
+    });
+    generationRepairs.push(repair);
+    recordTrace(ctx, {
+      targetType: 'institution',
+      targetId: instId(candidate.name),
+      step: 'assembleInstitutions',
+      result: 'added',
+      causes: [{
+        source: `coherence.${requirement.type}`,
+        effect: 'added',
+        reason: requirement.reason,
+      }],
+      downstreamEffects: tagsToDownstream(candidate.tags),
+    });
   }
 
   // Wave 8 — stamp catalog identity on every catalog-derived institution.
@@ -499,5 +737,5 @@ registerStep('assembleInstitutions', {
   // must run AFTER the last roster mutation (subsumption / cascade /
   // isolation / factionCorrelation) or the coherence receipt describes a
   // roster that no longer exists.
-  return { institutions, catalogForTier };
+  return { institutions, catalogForTier, generationRepairs };
 });

@@ -31,10 +31,13 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
 
   activeChains.forEach(chain => {
     const cid = chain.chainId;
+    const lacksAvailableInput = chain.resourceInputCondition
+      ? chain.resourceInputCondition === 'depleted'
+      : chain.resourceDepleted;
 
     // ── Food chains ─────────────────────────────────────────────────────────
     if (FOOD_CHAIN_IDS.includes(cid) && tierIdxMC >= 1 &&
-        (chain.status === 'impaired' || chain.resourceDepleted)) {
+        (chain.status === 'impaired' || lacksAvailableInput)) {
       const isFishing = cid === 'fishing' || cid === 'river_fishing';
       const isBrewing = cid === 'brewing';
       const isHunting = cid === 'hunting';
@@ -74,7 +77,7 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
 
     // ── Timber chains ───────────────────────────────────────────────────────
     if (TIMBER_CHAIN_IDS.includes(cid) && tierIdxMC >= 1 &&
-        (chain.status === 'impaired' || chain.resourceDepleted)) {
+        (chain.status === 'impaired' || lacksAvailableInput)) {
       let recovery = 0, note = '';
       if (traditions.druid) {
         recovery = Math.max(recovery, 0.55);
@@ -104,7 +107,7 @@ export function applyMagicSubstitution(activeChains, traditions, magicPriority, 
 
     // ── Extraction chains ───────────────────────────────────────────────────
     if (EXTRACT_CHAIN_IDS.includes(cid) && tierIdxMC >= 3 &&
-        (chain.status === 'impaired' || chain.resourceDepleted) &&
+        (chain.status === 'impaired' || lacksAvailableInput) &&
         traditions.arcane && magicPriority >= 65) {
       chain.status      = 'vulnerable';
       chain.magicNote   = 'Arcane Fabricate and Transmute Rock partially offset depleted extraction';

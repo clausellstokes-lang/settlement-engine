@@ -1393,7 +1393,7 @@ export const HISTORICAL_EVENTS_DATA = [
   // ~8 events) and to deepen the thin disaster/religious/magical categories.
   // Same voice/shape as the arcs above: one-line setup, three factions, three
   // present-tense hooks, a severity band. Tokens ({resource}, {location}, etc.)
-  // resolve in generateEventNarrative's defaultTokens.
+  // resolve through the history renderer for both timelines and current tensions.
   {
     type: 'market_crash',
     description: 'A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation',
@@ -1440,7 +1440,7 @@ export const HISTORICAL_EVENTS_DATA = [
   },
   {
     type: 'great_flood',
-    description: 'Waters rose with little warning and reshaped the {location}, drowning livelihoods and redrawing who owned what',
+    description: 'Waters rose with little warning and reshaped {location}, drowning livelihoods and redrawing who owned what',
     factions: ['Displaced families', 'Landowners pressing newly-convenient claims', 'Those who profited from the redrawing'],
     plotHooks: [
       'The old property boundaries washed away, and the new map favours whoever drew it',

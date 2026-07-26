@@ -4,13 +4,21 @@
  * institution-to-narrative text adaptation.
  */
 
-import {getTradeRouteFeatures, hasTeleportationInfra, pickRandom, tierAtLeast} from './helpers.js';
+import {getTradeRouteFeatures, pickRandom, tierAtLeast} from './helpers.js';
 export { getBaseChance } from './institutionProbability.js';
 
 import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
+import {
+  nativeSemanticNames,
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
+import {
+  isAuthoredGenerationEntity,
+} from '../domain/generationOwnership.js';
 import { TIER_ORDER } from '../data/constants.js';
+import { deriveIsolationSupport } from './isolationSupport.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
@@ -257,7 +265,12 @@ const _getTierConstraints = (text, instNames, tier, govOverride) => {
  * @param {number} _magicPriority
  */
 export const checkInstCompat = (institutions, tier, _magicPriority) => {
-  const names = institutions.map(i => (i.name || '').toLowerCase());
+  // These landmarks are native catalog implications. A current custom
+  // institution may render its own authored scene vocabulary elsewhere, but
+  // its presentation-only display name cannot impersonate a cathedral,
+  // citadel, guild, or other built-in landmark here.
+  const names = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const has   = (...keywords) => keywords.some(k => names.some(n => n.includes(k)));
 
   if (has('great cathedral')) {
@@ -336,6 +349,18 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   const instNames    = institutions.map(i => i.name);
   const expandedSet  = [...expandInstitutionSet(instNames)];
+  const authoredInstitutionNamed = name => institutions.find(institution => (
+    String(institution?.name || '').toLowerCase() === String(name || '').toLowerCase()
+    && isAuthoredGenerationEntity(institution)
+  ));
+  const authoredSeverity = (name, fallback) => (
+    authoredInstitutionNamed(name) ? 'by_design' : fallback
+  );
+  const authoredReason = (name, reason) => (
+    authoredInstitutionNamed(name)
+      ? `${reason} The institution was explicitly authored or required by the player, so the generator preserves this as an intentional premise.`
+      : reason
+  );
   // Institutions the DM deliberately overrode above their native tier carry
   // `outOfTier`. For those, the GATE_FEATURES minTier check is the SAME fact as
   // the by-design out-of-tier contradiction surfaced below, so firing both would
@@ -366,8 +391,11 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       violations.push({
         type:        'tier_violation',
         institution: instName,
-        reason:      `${instName} requires ${gate.minTier} tier minimum. ${gate.reason}`,
-        severity:    'warning',
+        reason:      authoredReason(
+          instName,
+          `${instName} requires ${gate.minTier} tier minimum. ${gate.reason}`,
+        ),
+        severity:    authoredSeverity(instName, 'warning'),
       });
     }
 
@@ -385,8 +413,8 @@ export const checkStructuralValidity = (institutions, config = {}) => {
           type:        'dependency_violation',
           institution: instName,
           missing:     gate.requires,
-          reason:      gate.reason,
-          severity:    'error',
+          reason:      authoredReason(instName, gate.reason),
+          severity:    authoredSeverity(instName, 'error'),
         });
       }
     }
@@ -396,8 +424,8 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         type:        'dependency_violation',
         institution: instName,
         missing:     gate.requiresAny,
-        reason:      gate.reason,
-        severity:    'warning',
+        reason:      authoredReason(instName, gate.reason),
+        severity:    authoredSeverity(instName, 'warning'),
       });
     }
 
@@ -408,8 +436,11 @@ export const checkStructuralValidity = (institutions, config = {}) => {
           type:        'exclusion_violation',
           institution: instName,
           blockedBy:   blocker,
-          reason:      `${instName} cannot coexist with ${blocker}.`,
-          severity:    'error',
+          reason:      authoredReason(
+            instName,
+            `${instName} cannot coexist with ${blocker}.`,
+          ),
+          severity:    authoredSeverity(instName, 'error'),
         });
       }
     }
@@ -427,9 +458,9 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       institution:    entry.institution,
       requiredAccess: entry.requiredAccess,
       actualAccess:   route,
-      reason:         entry.reason,
+      reason:         authoredReason(entry.institution, entry.reason),
       note:           entry.note || null,
-      severity:       'error',
+      severity:       authoredSeverity(entry.institution, 'error'),
     });
   });
 
@@ -446,8 +477,11 @@ export const checkStructuralValidity = (institutions, config = {}) => {
         violations.push({
           type:        'context_warning',
           institution: instName,
-          reason:      `Magic level is set to Low — ${instName} would be exceptionally rare and likely controversial in this setting.`,
-          severity:    'warning',
+          reason:      authoredReason(
+            instName,
+            `Magic level is set to Low — ${instName} would be exceptionally rare and likely controversial in this setting.`,
+          ),
+          severity:    authoredSeverity(instName, 'warning'),
         });
       }
     });
@@ -457,13 +491,16 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   Object.entries(GOVERNMENT_INSTITUTIONS).forEach(([group, options]) => {
     const present = options.filter(opt => instNames.includes(opt));
     if (present.length > 1) {
+      const hasAuthoredOption = present.some(authoredInstitutionNamed);
       violations.push({
         type:        'exclusivity_violation',
         institution: present.join(' / '),
         group,
         conflicting: present,
-        reason:      `Only one ${group} option should be selected: ${present.join(', ')} are mutually exclusive.`,
-        severity:    'warning',
+        reason:      hasAuthoredOption
+          ? `Only one ${group} option would normally be selected, but the player explicitly preserved ${present.join(', ')}. Their coexistence is an intentional political premise.`
+          : `Only one ${group} option should be selected: ${present.join(', ')} are mutually exclusive.`,
+        severity:    hasAuthoredOption ? 'by_design' : 'warning',
       });
     }
   });
@@ -474,7 +511,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     n.includes('wall') || n.includes('citadel') || n.includes('garrison') ||
     n.includes('barracks') || n.includes('palisade') || n.includes('earthwork'));
   const hasMilForce = lowerNames.some(n =>
-    n.includes('garrison') || n.includes('guard') || n.includes('militia') ||
+    n.includes('garrison') || n.includes('guard') || n.includes('militia') || n.includes('levy') ||
     n.includes('barracks') || n.includes('mercenary') || n.includes('watch'));
 
   const resolvedMilPriority = milPriority ?? 50;
@@ -576,7 +613,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     violations.push({
       type:        'subsistence_struggle',
       institution: `${tier.charAt(0).toUpperCase()+tier.slice(1)} Settlement`,
-      reason:      `This isolated ${tier} exists on the edge of survival. No trade, no outside medicine, no grain reserves. A bad harvest, a harsh winter, or a disease outbreak could collapse it entirely.`,
+      reason:      `This isolated ${tier} depends on a narrow local support base and irregular outside contact. A bad harvest, harsh winter, or disease outbreak can exhaust that margin quickly.`,
       severity:    'warning',
       suggestedFixes: [
         'Consider a food or medicine cache as a plot element',
@@ -595,25 +632,42 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   }
 
   if (getTradeRouteFeatures(tier) && route === 'isolated') {
-    const hasMagicTrade = hasTeleportationInfra(instNames.map(n => ({ name: n })), config);
+    const support = config?._isolationSupport || deriveIsolationSupport({
+      tier,
+      tradeRoute: route,
+      institutions,
+      config,
+    });
     const tierLabel = tier.charAt(0).toUpperCase() + tier.slice(1);
 
-    if (hasMagicTrade) {
+    if (support.magicDependent) {
       suggestions.push({
         type:        'suggestion',
         institution: `${tierLabel} Settlement`,
-        reason:      `${tierLabel} sustains itself in isolation via magical infrastructure. Trade flows through teleportation or planar channels. If magic fails, the settlement has no physical trade fallback.`,
+        reason:      `${tierLabel} closes its isolation-support gap through magical transit (${support.capacity}/${support.requiredCapacity} capacity). If magic fails, its mundane support paths are insufficient.`,
         suggested:   ['Add a road, river, or port trade route as redundancy'],
       });
+    } else if (support.deficit === 0) {
+      suggestions.push({
+        type:        'suggestion',
+        institution: `${tierLabel} Settlement`,
+        reason:      `${tierLabel} is viable in isolation through ${support.paths.map(path => path.type.replace(/_/g, ' ')).join(', ')} (${support.capacity}/${support.requiredCapacity} support capacity).`,
+        suggested:   ['Protect the support paths that make isolation viable'],
+      });
     } else {
+      const explicitIsolation = config?._routeIntent === 'explicit';
       violations.push({
         type:        'isolation_violation',
         institution: `${tierLabel} Settlement`,
-        reason:      `A ${tier} cannot realistically exist in isolation without a trade route or magical infrastructure. Only thorps, hamlets, and villages can be isolated.`,
-        severity:    'critical',
+        reason:      `${tierLabel} has only ${support.capacity}/${support.requiredCapacity} isolation-support capacity. Local food, reserves, seasonal access, patronage, and any functional magical transit do not cover the settlement's needs.`,
+        // A direct player choice remains playable and visible as a deliberate
+        // premise. Random generation has no such exemption: an unresolved gap
+        // is a hard coherence failure for the certification pass to repair.
+        severity:    explicitIsolation ? 'by_design' : 'critical',
         suggestedFixes: [
           'Add a road, river, crossroads, or port trade route',
-          'Add teleportation circle or planar infrastructure (requires high magic)',
+          'Strengthen the local foodshed, hinterland, or reserve institutions',
+          'Use magical transit only in a functional high-magic setting',
         ],
       });
     }
@@ -627,7 +681,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     suggestions.push({
       type:      'suggestion',
       reason:    threat === 'plagued'
-        ? "A garrison without walls is untenable in a embattled region — defenders have nowhere to make a stand."
+        ? "A garrison without walls is untenable in an embattled region — defenders have nowhere to make a stand."
         : "Military forces shelter behind walls. A garrison without a perimeter is a vulnerability on the frontier.",
       suggested: ['Town walls', 'City walls and gates'],
     });
@@ -686,7 +740,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   }
 
   // ── Resource access violations ────────────────────────────────────────────
-  (config?.nearbyResources || []).forEach(resourceKey => {
+  nativeSemanticResourceKeys(config).forEach(resourceKey => {
     const data = RESOURCE_DATA[resourceKey];
     if (data?.forbidden?.includes(route)) {
       violations.push({
@@ -739,13 +793,22 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     }
   });
 
-  // ── Magic-only trade dependency (isolated town+ with teleportation) ────────
+  // ── Load-bearing magical isolation support ────────────────────────────────
   if (config?._magicTradeOnly) {
+    const support = config?._isolationSupport;
+    const capacity = Number(support?.capacity);
+    const requiredCapacity = Number(support?.requiredCapacity);
+    const capacityEvidence = (
+      Number.isFinite(capacity)
+      && Number.isFinite(requiredCapacity)
+    )
+      ? ` Current support capacity is ${capacity}/${requiredCapacity}.`
+      : '';
     suggestions.push({
       type:        'suggestion',
       institution: 'Magical Trade Infrastructure',
-      reason:      `This ${tier} exists in isolation through magical infrastructure alone. Every import and export flows through the teleportation circle. If the magic fails, the settlement cannot survive without physical trade routes.`,
-      suggested:   ['Redundant arcane institution', 'Physical road or river route'],
+      reason:      `This isolated ${tier} depends on magical transit to meet its support requirement.${capacityEvidence} If that transit fails, the settlement falls below the capacity its population needs; mundane local support still contributes but cannot close the gap alone.`,
+      suggested:   ['Additional mundane reserves or local production', 'Physical road or river route'],
     });
   }
 

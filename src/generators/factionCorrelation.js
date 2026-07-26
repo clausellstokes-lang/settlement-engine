@@ -7,6 +7,9 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
 import { isCategoryEnabled } from './categoryToggleReader.js';
 
 // Faction category → catalog category keys
@@ -102,13 +105,18 @@ export function applyFactionInstitutionBoosts(
   const cap      = TIER_BOOST_CAPS[tier] || 0;
   if (cap === 0 || boosts.length === 0) return [];
 
+  const nativeInstitutions = existingInstitutions.filter(
+    institution => !isMaterializedCustomContent(institution),
+  );
   const existingNames = new Set(
-    existingInstitutions.map(i => (i.name || '').toLowerCase())
+    nativeInstitutions.map(i => (i.name || '').toLowerCase()),
   );
   // Exact names + exclusive groups already seated — a faction pull must not
   // seat a second member of an exclusive group (same contract as cascade).
-  const existingExact = new Set(existingInstitutions.map(i => i.name));
-  const takenGroups   = new Set(existingInstitutions.map(i => i.exclusiveGroup).filter(Boolean));
+  const existingExact = new Set(nativeInstitutions.map(i => i.name));
+  const takenGroups   = new Set(
+    nativeInstitutions.map(i => i.exclusiveGroup).filter(Boolean),
+  );
   const TIER_ORD      = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const tierIdx       = TIER_ORD.indexOf(tier);
   const tradeRoute    = config?.tradeRouteAccess || null;

@@ -129,6 +129,18 @@ export const RESOURCE_CHAINS = {
     exportValue: "medium",
     dependsOn: ["quarry site"],
   },
+  clay: {
+    rawResource: "clay",
+    // Potter and Brickmaker currently share the catalog's broad trade tag, so
+    // capability-tag matching would admit unrelated merchants. Exact native
+    // names are the honest transitional join until a ceramics tag exists.
+    processingTags: [],
+    processingInstitutions: ["Potter", "Brickmaker"],
+    intermediateGoods: ["fired clay", "ceramic blanks"],
+    finalProducts: ["pottery", "bricks", "roof tiles"],
+    exportValue: "medium",
+    dependsOn: ["clay deposits", "fuel"],
+  },
   hides: {
     rawResource: "animal hides",
     processingTags: [TAG.LEATHER],

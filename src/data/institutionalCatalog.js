@@ -94,6 +94,13 @@ export const institutionalCatalog = {
         tags: ['defense', 'fortification'],
         priorityCategory: 'defense',
       },
+      'Household levy': {
+        required: false,
+        baseChance: 0.18,
+        desc: 'One able-bodied adult from each household musters with hunting bows, spears, and farm tools when danger reaches the fields.',
+        tags: ['defense', 'military'],
+        priorityCategory: 'military',
+      },
       'Communal root cellar': {
         required: false,
         baseChance: 0.25,
@@ -243,7 +250,7 @@ export const institutionalCatalog = {
       'Salt works': {
         required: false,
         baseChance: 0.2,
-        desc: 'Evaporates salt from coastal water or brine springs. Produces the raw salt used for preservation. Only viable near salt flats or coastal access.',
+        desc: 'Evaporates naturally saline brine into the raw salt used for preservation. Viable only where salt flats, springs, or other workable brine deposits provide a local supply.',
         tags: ['trade'],
         priorityCategory: 'economy',
       },
@@ -674,6 +681,7 @@ export const institutionalCatalog = {
       Fishmonger: {
         required: false,
         baseChance: 0.35,
+        forbiddenTradeRoutes: ['isolated'],
         desc: 'Buys, salts, and sells fish. The link between fishing and consumption. Near water: fresh. Inland: dried or salted.',
         tags: ['trade'],
         priorityCategory: 'government',
@@ -1640,7 +1648,7 @@ export const institutionalCatalog = {
         required: false,
         baseChance: 0.4,
         tradeRouteRequired: ['port', 'river'],
-        desc: 'Regulates port traffic, collects anchorage fees, assigns berths, and enforces maritime law. Port cities only.',
+        desc: 'Regulates harbour and river-port traffic, collects anchorage fees, assigns berths, and enforces port law. Navigable-water cities only.',
         tags: ['law_enforcement', 'port'],
         priorityCategory: 'military',
       },

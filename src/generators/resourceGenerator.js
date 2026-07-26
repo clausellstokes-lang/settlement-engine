@@ -9,6 +9,15 @@ import {TERRAIN_DATA} from '../data/geographyData.js';
 import {RESOURCE_DATA, SPECIAL_RESOURCES} from '../data/resourceData.js';
 import {RESOURCE_CHAINS} from '../data/resourceChains.js';
 import {institutionHasAnyTag} from '../lib/entities.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticNames,
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
+import {
+  availableNativeResourceKeys,
+  nativeResourceConditionRecords,
+} from '../domain/resourceSemantics.js';
 
 // ─── resolveNearbyCommodities ─────────────────────────────────────────────────
 // Turn the settlement's ACTUALLY-rolled nearby resources into the commodity/
@@ -29,25 +38,33 @@ import {institutionHasAnyTag} from '../lib/entities.js';
 // rolled an explicit roster.
 
 export const resolveNearbyCommodities = (config = {}, terrainType) => {
-  const keys = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
-  const stateMap = config.nearbyResourcesState || {};
-  const depletedList = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
-  // A resource is depleted per the resolved roster (nearbyResourcesDepleted, the
-  // canonical output of resolveResources) OR the raw manual state map.
-  const depleted = new Set([
-    ...depletedList,
-    ...Object.keys(stateMap).filter(k => stateMap[k] === 'depleted'),
-  ]);
+  // RESOURCE_CHAINS is the native engine vocabulary. A current custom
+  // resource's display name may resemble that vocabulary, but its name is
+  // presentation—not permission to activate native mineral, food, or magical
+  // production. Keep legacy unstamped keys working while filtering the
+  // identity-bearing custom roster through the shared authority boundary.
+  const keys = nativeSemanticResourceKeys(config);
+  const available = new Set(availableNativeResourceKeys(config));
 
   const out = new Set();
+  let recognizedNativeKey = false;
   for (const key of keys) {
-    if (depleted.has(key)) continue;
     const meta = RESOURCE_DATA[key];
     if (!meta) continue;
+    recognizedNativeKey = true;
+    if (!available.has(key)) continue;
     out.add(key); // terrain-specific chains match on the resource key
     for (const c of (meta.commodities || [])) out.add(c); // generic chains match on the commodity token
   }
   if (out.size > 0) return [...out];
+  // An explicit native roster — including an intentionally empty one — is
+  // canonical. Likewise, a known roster whose every node is depleted should
+  // resolve to no commodities. Falling back to the terrain in either case
+  // would recreate absent native resources and let custom-only labels acquire
+  // built-in production.
+  if (Array.isArray(config.nearbyResourcesNative) || recognizedNativeKey) {
+    return [];
+  }
   return TERRAIN_DATA[terrainType]?.allowedResources?.slice() || [];
 };
 
@@ -88,15 +105,21 @@ export const terrainAllowsResource = (allowedResources, rawResource) => {
 // ─── evaluateEconomicActivity ─────────────────────────────────────────────────
 // Return resource chains that are active given the terrain and present resources.
 
-// Normalized symmetric substring test: a nearby token 'iron' reconciles with a
-// chain rawResource 'iron ore', and the resource key 'alpine_pasture' reconciles
-// with rawResource 'alpine_pasture' — bridging the commodity- and key-keyed chain
-// families. Underscores/whitespace collapse so 'stone_quarry' matches 'stone'.
+// Whole-token containment: a nearby token 'iron' reconciles with 'iron ore',
+// and 'mountain_timber' reconciles with 'timber'. Character substrings do not:
+// 'stone' must never activate 'gemstones'. Underscores and whitespace share one
+// canonical boundary so commodity- and key-keyed chain families still join.
 const normalizeToken = (s) => String(s || '').toLowerCase().replace(/[_\s]+/g, ' ').trim();
 const tokensReconcile = (a, b) => {
   const na = normalizeToken(a), nb = normalizeToken(b);
   if (!na || !nb) return false;
-  return na === nb || na.includes(nb) || nb.includes(na);
+  const paddedA = ` ${na} `;
+  const paddedB = ` ${nb} `;
+  return (
+    na === nb
+    || paddedA.includes(` ${nb} `)
+    || paddedB.includes(` ${na} `)
+  );
 };
 
 const evaluateEconomicActivity = (terrainType, nearbyResources) => {
@@ -129,9 +152,13 @@ const evaluateEconomicActivity = (terrainType, nearbyResources) => {
 // masonry, desert salt), matched against real catalog names — never the old
 // phantom labels ('granar' etc.) that could match nothing.
 
-export const institutionSupportsChain = (inst, chain) =>
-  institutionHasAnyTag(inst, chain.processingTags || []) ||
-  (chain.processingInstitutions || []).some(name => name === inst.name);
+export const institutionSupportsChain = (inst, chain) => (
+  !isMaterializedCustomContent(inst)
+  && (
+    institutionHasAnyTag(inst, chain.processingTags || [])
+    || (chain.processingInstitutions || []).some(name => name === inst.name)
+  )
+);
 
 // ─── evaluateInstitutions ─────────────────────────────────────────────────────
 // Classify each active resource chain by how well it is institutionally supported.
@@ -156,7 +183,68 @@ const evaluateInstitutions = (institutions, activeChains) => {
 // ─── buildViabilityReport ─────────────────────────────────────────────────────
 // Identify critical imports (things terrain cannot produce) and institution-resource mismatches.
 
-const buildViabilityReport = (terrainType, institutions) => {
+const REQUIREMENT_NOISE = new Set([
+  'and',
+  'bulk',
+  'fine',
+  'for',
+  'goods',
+  'large',
+  'luxury',
+  'major',
+  'quality',
+]);
+
+function availableResourceSatisfies(requirement, availableResources) {
+  const requirementText = String(requirement || '')
+    .toLowerCase()
+    .replace(/\([^)]*\)/g, ' ');
+  const terms = requirementText
+    .split(/[^a-z0-9]+/)
+    .filter(term => term.length > 3 && !REQUIREMENT_NOISE.has(term));
+  return (availableResources || []).some(resource => (
+    terms.some(term => tokensReconcile(resource, term))
+  ));
+}
+
+const LOCAL_REQUIREMENT_PRODUCERS = Object.freeze([
+  {
+    requirement: /\b(?:grain|foodstuffs?|provisions?)\b/i,
+    institution: /\b(?:farm|farmland|subsistence|grain fields?|managed farmland|common fields?)\b/i,
+  },
+  {
+    requirement: /\b(?:timber|lumber|wood)\b/i,
+    institution: /\b(?:woodcutter|logging camp|managed forest)\b/i,
+  },
+  {
+    requirement: /\bstone\b/i,
+    institution: /\b(?:stone quarry|quarry)\b/i,
+  },
+  {
+    requirement: /\b(?:charcoal|fuel)\b/i,
+    institution: /\b(?:charcoal burner|peat cutter|coal mine)\b/i,
+  },
+  {
+    requirement: /\bsalt\b/i,
+    institution: /\b(?:salt works|salt pans?|brine works?)\b/i,
+  },
+]);
+
+function localInstitutionSupplies(requirement, institutions) {
+  const rule = LOCAL_REQUIREMENT_PRODUCERS.find(candidate => (
+    candidate.requirement.test(String(requirement || ''))
+  ));
+  if (!rule) return false;
+  return nativeSemanticNames(institutions).some(name => (
+    rule.institution.test(name)
+  ));
+}
+
+const buildViabilityReport = (
+  terrainType,
+  institutions,
+  availableResources = [],
+) => {
   const terrain = TERRAIN_DATA[terrainType];
   if (!terrain) return { critical: [], recommended: [], reasons: {} };
 
@@ -164,6 +252,14 @@ const buildViabilityReport = (terrainType, institutions) => {
 
   // Terrain hard constraints: things this terrain type must import
   terrain.mustImport?.forEach(resource => {
+    // `mustImport` describes terrain potential, not an override of the rolled
+    // settlement. An explicit live quarry/field/forest is stronger evidence:
+    // when the canonical available roster supplies the named material, do not
+    // simultaneously call it a critical import.
+    if (
+      availableResourceSatisfies(resource, availableResources)
+      || localInstitutionSupplies(resource, institutions)
+    ) return;
     report.critical.push(resource);
     report.reasons[resource] = `${terrain.name} terrain cannot produce this locally`;
   });
@@ -172,7 +268,16 @@ const buildViabilityReport = (terrainType, institutions) => {
   Object.entries(RESOURCE_CHAINS).forEach(([, chain]) => {
     const hasProcessingInst = chain.processingInstitutions.some(name =>
       institutions.some(i => i.name === name));
-    const terrainHasResource = terrainAllowsResource(terrain.allowedResources, chain.rawResource);
+    const terrainHasResource = (
+      terrainAllowsResource(terrain.allowedResources, chain.rawResource)
+      || localInstitutionSupplies(chain.rawResource, institutions)
+      || availableResources.some(resource => (
+        tokensReconcile(resource, chain.rawResource)
+        || terrainSynonymsFor(chain.rawResource).some(
+          synonym => tokensReconcile(resource, synonym),
+        )
+      ))
+    );
 
     if (hasProcessingInst && !terrainHasResource) {
       report.critical.push(chain.rawResource);
@@ -187,7 +292,7 @@ const buildViabilityReport = (terrainType, institutions) => {
 // ─── evaluateInstitutionDeps ──────────────────────────────────────────────────
 // Build the list of export products based on exploitation level.
 
-const evaluateInstitutionDeps = (exploitation, terrain) => {
+const evaluateInstitutionDeps = (exploitation) => {
   const exports = [];
 
   exploitation.fullyExploited?.forEach(chain => {
@@ -206,18 +311,6 @@ const evaluateInstitutionDeps = (exploitation, terrain) => {
       value:   'medium',
       reason:  'Partial processing - exports semi-finished goods',
     });
-  });
-
-  // Add terrain-specific economic strengths
-  terrain.economicStrengths?.forEach(strength => {
-    if (!exports.some(e => e.product.toLowerCase().includes(strength.toLowerCase()))) {
-      exports.push({
-        product: strength,
-        chain:   'terrain-based',
-        value:   'medium',
-        reason:  `${terrain.name} terrain specialty`,
-      });
-    }
   });
 
   return exports;
@@ -324,18 +417,38 @@ export const generateResourceAnalysis = (
       exploitation:       {},
       imports:            {},
       exports:            [],
+      resourceConditions: [],
+      conditionNotes:     [],
     };
   }
 
+  // Native resource-chain physics predates custom definitions and keys on
+  // catalog tags/names. Custom tags and labels are presentation vocabulary;
+  // their mechanical lanes are registered food effects and reviewed chains.
+  const nativeInstitutions = institutions.filter(
+    institution => !isMaterializedCustomContent(institution),
+  );
   const activeChains   = evaluateEconomicActivity(terrainType, nearbyResources);
-  const exploitation   = evaluateInstitutions(institutions, activeChains);
-  const imports        = buildViabilityReport(terrainType, institutions);
-  const exports        = evaluateInstitutionDeps(exploitation, terrain);
-  const gaps           = evaluateInstitutionChain(exploitation, institutions);
+  const exploitation   = evaluateInstitutions(nativeInstitutions, activeChains);
+  const imports        = buildViabilityReport(
+    terrainType,
+    nativeInstitutions,
+    nearbyResources,
+  );
+  const exports        = evaluateInstitutionDeps(exploitation);
+  const gaps           = evaluateInstitutionChain(
+    exploitation,
+    nativeInstitutions,
+  );
   const featureEffects = evaluateResourceChain(specialResources);
 
   const pri            = getPriorities(config);
   const priorityNotes  = [];
+  const resourceConditions = nativeResourceConditionRecords(config);
+  const conditionNotes = resourceConditions
+    .filter(record => record.condition === 'depleted')
+    .map(record => record.conditionDescription)
+    .filter(Boolean);
 
   // High economy priority + unexploited resources = trade opportunity note
   if (priorityToCategory(pri.economy) === 'very_high' || priorityToCategory(pri.economy) === 'high') {
@@ -357,12 +470,17 @@ export const generateResourceAnalysis = (
 
   // High military + missing strategic resources = vulnerability note
   if (priorityToCategory(pri.military) === 'high' || priorityToCategory(pri.military) === 'very_high') {
+    const gapResource = gap => String(
+      gap?.rawResource || gap?.chain || '',
+    ).toLowerCase();
     const strategicGaps = (gaps || []).filter(g =>
-      ['iron ore', 'timber', 'stone'].some(kw => g.rawResource?.toLowerCase().includes(kw))
+      ['iron ore', 'timber', 'stone'].some(kw => (
+        gapResource(g).includes(kw)
+      ))
     );
     if (strategicGaps.length > 0) {
       priorityNotes.push(
-        `Military focus highlights gap: ${strategicGaps[0].rawResource} processing is incomplete — strategic vulnerability.`
+        `Military focus highlights gap: ${gapResource(strategicGaps[0])} processing is incomplete — strategic vulnerability.`
       );
     }
   }
@@ -370,6 +488,8 @@ export const generateResourceAnalysis = (
   return {
     terrain:          terrain.name,
     availableResources: nearbyResources,
+    resourceConditions,
+    conditionNotes,
     resourceChains:   activeChains,
     exploitation,
     imports,

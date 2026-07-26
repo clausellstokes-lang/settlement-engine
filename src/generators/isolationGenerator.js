@@ -1,55 +1,92 @@
 /**
  * isolationGenerator.js
- * Design principle: ANY isolated town+ MUST have magical trade infrastructure.
- * Magic priority affects WHICH infrastructure and how capable the maintainer is
- * but the infrastructure itself is always mandatory.
+ *
+ * Isolated settlements are evaluated through an explainable support model.
+ * Local food, hinterland production, reserves, seasonal access, and patronage
+ * are considered first. Functional high magic may close a remaining gap, but
+ * teleportation is no longer fabricated merely because the tier says "town".
  */
 
 import { ARCANE_INST_KW as _ARCANE_KW } from '../domain/magicFilter.js';
 import { buildStressEntry } from './stressGenerator.js';
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
+import {
+  nativeSemanticName,
+} from '../domain/content/customContentSemanticAuthority.js';
+import {
+  isProtectedGenerationEntity,
+} from '../domain/generationOwnership.js';
+import {
+  deriveIsolationSupport,
+  shouldAddMagicalSubstitution,
+} from './isolationSupport.js';
+import { TIER_ORDER } from '../data/constants.js';
 
 const MAINTAINER_DESC = {
-  town:       'A hedge wizard maintains the teleportation circle — the settlement\'s only trade lifeline. Without them, the circle fails.',
-  city:       'A resident wizard maintains the teleportation infrastructure. Their role is civic, not merely commercial.',
-  metropolis: 'A tower of wizards maintains the teleportation circle. As critical to the settlement as a harbour master\'s office is to a port.',
+  town:       'A hedge wizard maintains the settlement\'s load-bearing magical transit. Local production and irregular tracks carry part of the burden, but the support plan falls short without their work.',
+  city:       'A resident wizard maintains the settlement\'s load-bearing magical transit. Their role is civic, not merely commercial, because the city falls below its support requirement without it.',
+  metropolis: 'A tower of wizards maintains the settlement\'s load-bearing magical transit. Local systems carry much of the burden, but they cannot support the whole metropolis alone.',
 };
 
-// ─── 1. Force magic infrastructure for ANY isolated town+ ─────────────────────
+// ─── 1. Evaluate support; add magical substitution only for a real gap ────────
 export function applyTeleportationInfrastructure(
   institutions, tier, tradeRoute, effectiveConfig, catalogForTier, TOWN_PLUS_TIERS, _chance
 ) {
-  if (!TOWN_PLUS_TIERS.includes(tier) || tradeRoute !== 'isolated') return;
+  let support = deriveIsolationSupport({
+    tier,
+    tradeRoute,
+    institutions,
+    config: effectiveConfig,
+  });
+  effectiveConfig._isolationSupport = support;
+  delete effectiveConfig._magicTradeOnly;
+  delete effectiveConfig._isolationInfraType;
 
-  const magicPriority = effectiveConfig.priorityMagic || 50;
-  // Airship preferred at very high magic for city/metropolis; circle for town or lower magic
-  const preferAirship = magicPriority >= 80 && ['city', 'metropolis'].includes(tier);
+  if (
+    !TOWN_PLUS_TIERS.includes(tier)
+    || tradeRoute !== 'isolated'
+    || !shouldAddMagicalSubstitution(support, effectiveConfig)
+  ) {
+    return support;
+  }
+
+  const magicPriority = effectiveConfig.priorityMagic ?? 50;
+  // Airship infrastructure is a metropolis-scale institution. Cities and
+  // towns use a circle even at very high magic; bypassing the catalog's
+  // min-tier gate here used to create an airship dock that the final validator
+  // correctly rejected.
+  const preferAirship = magicPriority >= 80 && tier === 'metropolis';
 
   // ── 1a. Force primary trade infrastructure ────────────────────────────────
   const hasTeleport = institutions.some(i =>
-    /teleportation circle|airship/i.test(i.name)
+    /teleportation circle|airship/i.test(nativeSemanticName(i))
   );
 
   if (!hasTeleport) {
     const allMagic = { ...(catalogForTier?.Magic || {}), ...(catalogForTier?.Exotic || {}) };
+    const tierIndex = TIER_ORDER.indexOf(tier);
+    const eligibleTransit = Object.entries(allMagic).filter(([, definition]) => (
+      !definition?.minTier
+      || tierIndex >= TIER_ORDER.indexOf(definition.minTier)
+    ));
     const infraEntry = preferAirship
-      ? (Object.entries(allMagic).find(([n]) => /airship/i.test(n))
-         || Object.entries(allMagic).find(([n]) => /teleportation circle/i.test(n)))
-      : (Object.entries(allMagic).find(([n]) => /teleportation circle/i.test(n))
-         || Object.entries(allMagic).find(([n]) => /airship/i.test(n)));
+      ? (eligibleTransit.find(([name]) => /airship/i.test(name))
+         || eligibleTransit.find(([name]) => /teleportation circle/i.test(name)))
+      : (eligibleTransit.find(([name]) => /teleportation circle/i.test(name))
+         || eligibleTransit.find(([name]) => /airship/i.test(name)));
 
     if (infraEntry) {
       const [infraName, infraDef] = infraEntry;
       institutions.push({
         name: infraName, category: 'Magic',
-        desc: infraDef.desc || `${infraName} — the settlement's only connection to the outside world.`,
+        desc: infraDef.desc || `${infraName} provides load-bearing capacity where physical access is unreliable.`,
         tags: infraDef.tags || ['arcane', 'planar'],
         forcedByIsolation: true, source: 'forced',
       });
     } else {
       institutions.push({
         name: 'Teleportation circle', category: 'Magic',
-        desc: "A permanent teleportation circle is this settlement's only connection to the outside world. All trade, supplies, and communication flow through it. If it fails, the settlement dies.",
+        desc: 'A permanent teleportation circle provides load-bearing capacity where physical access is unreliable. Local production and irregular routes still contribute, but cannot carry the settlement alone.',
         tags: ['arcane', 'planar'], forcedByIsolation: true, source: 'forced',
       });
     }
@@ -57,7 +94,9 @@ export function applyTeleportationInfrastructure(
 
   // ── 1b. Force arcane maintainer ───────────────────────────────────────────
   const hasMaintainer = institutions.some(i =>
-    /wizard|mage|hedge wizard|alchemist|academy/i.test(i.name)
+    /wizard|mage|hedge wizard|alchemist|academy/i.test(
+      nativeSemanticName(i),
+    )
   );
 
   if (!hasMaintainer) {
@@ -88,9 +127,19 @@ export function applyTeleportationInfrastructure(
     }
   }
 
-  // ── 1c. Flag downstream systems ───────────────────────────────────────────
-  effectiveConfig._magicTradeOnly = true;
-  effectiveConfig._isolationInfraType = preferAirship ? 'airship' : 'teleportation';
+  // ── 1c. Re-evaluate and flag downstream systems ───────────────────────────
+  // Persist the whole receipt, not merely a boolean. A magical path can be
+  // redundant (mundane support is now enough after another rule adds capacity)
+  // or truly load-bearing; only the latter earns _magicTradeOnly.
+  support = deriveIsolationSupport({
+    tier,
+    tradeRoute,
+    institutions,
+    config: effectiveConfig,
+  });
+  effectiveConfig._isolationSupport = support;
+  effectiveConfig._magicTradeOnly = support.magicDependent === true;
+  return support;
 }
 
 // ─── 2. Subsistence mode (isolated thorp/hamlet) ──────────────────────────────
@@ -118,7 +167,7 @@ export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveCo
                                 'jeweller', 'fletcher', 'bowyer', 'apothecary'];
 
   const isTradeInst = (inst) => {
-    if (inst.required || inst.source === 'forced') return false;
+    if (isProtectedGenerationEntity(inst)) return false;
     const tags = inst.tags || [];
     const name = (inst.name || '').toLowerCase();
     if (tags.some(t => TRADE_TAGS.includes(t))) return true;
@@ -156,7 +205,9 @@ export function applySubsistenceMode(institutions, tier, tradeRoute, effectiveCo
 // spared — the validator flags those instead of deleting them.
 export function cullPlanarWithoutCircle(institutions) {
   const hasCircle = institutions.some(
-    (inst) => (inst.name || '').toLowerCase().includes('teleportation circle')
+    (inst) => nativeSemanticName(inst)
+      .toLowerCase()
+      .includes('teleportation circle')
   );
   if (hasCircle) return [];
   const removed = [];
@@ -164,7 +215,7 @@ export function cullPlanarWithoutCircle(institutions) {
     const inst = institutions[i];
     const n = (inst.name || '').toLowerCase();
     if (!n.includes('planar trader') && !n.includes('planar embassy')) continue;
-    if (inst.required === true || inst.source === 'forced' || inst.source === 'custom' || inst.forcedByIsolation) continue;
+    if (isProtectedGenerationEntity(inst) || inst.forcedByIsolation) continue;
     removed.push(inst.name);
     institutions.splice(i, 1);
   }
@@ -178,8 +229,11 @@ export function stripArcaneInstitutions(institutions, effectiveConfig) {
     const ARCANE_KW   = _ARCANE_KW;
     for (let _i = institutions.length - 1; _i >= 0; _i--) {
       const _inst = institutions[_i];
-      if (_inst.source === 'forced' || _inst.forcedByIsolation) continue;
-      const _n = (_inst.name || '').toLowerCase();
+      if (
+        isProtectedGenerationEntity(_inst)
+        || _inst.forcedByIsolation
+      ) continue;
+      const _n = nativeSemanticName(_inst).toLowerCase();
       const _cat = _inst.category || '';
       const _tags = _inst.tags || [];
       const _isArcane = _cat === 'Magic'

@@ -11,6 +11,13 @@ import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWa
 import { priorityToCategory } from './prosperity.js';
 import { deriveFoodBalanceAnalysis, deriveSupplyRiskAnalysis } from './foodBalance.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { deriveIsolationSupport } from '../isolationSupport.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticName,
+  nativeSemanticNames,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -69,15 +76,31 @@ const MAX_CHAIN_SUGGESTIONS = 3;
 
 
 // buildViabilitySummary
-const buildViabilitySummary = (isViable, issues, warnings, plotHooks) => {
+const buildViabilitySummary = (isViable, issues, warnings, plotHooks, foodBalance) => {
   const criticalCount = issues.filter((i) => i.severity === SEVERITY.CRITICAL).length;
   const implausibleCount = issues.filter((i) => i.severity === SEVERITY.IMPLAUSIBLE).length;
   const dependencyCount = [...issues, ...warnings].filter((i) => i.severity === SEVERITY.DEPENDENCY).length;
-  if (criticalCount > 0)
-    return `✗ NOT VIABLE: ${criticalCount} critical issue${criticalCount > 1 ? 's' : ''} prevent settlement survival.`;
+  const dailyNeed = Number(foodBalance?.dailyNeed) || 0;
+  const uncoveredDeficit = Math.max(0, Number(foodBalance?.deficit) || 0);
+  const rawDeficit = Math.max(uncoveredDeficit, Number(foodBalance?.rawDeficit) || 0);
+  const deficitPercent = dailyNeed > 0
+    ? Math.round((uncoveredDeficit / dailyNeed) * 100)
+    : Math.max(0, Math.round(Number(foodBalance?.deficitPercent) || 0));
+  const rawDeficitPercent = dailyNeed > 0
+    ? Math.round((rawDeficit / dailyNeed) * 100)
+    : deficitPercent;
+  if (criticalCount > 0) {
+    const issueLabel = criticalCount === 1 ? 'issue' : 'issues';
+    const verb = criticalCount === 1 ? 'prevents' : 'prevent';
+    return `✗ NOT VIABLE: ${criticalCount} critical ${issueLabel} ${verb} settlement survival.`;
+  }
   if (implausibleCount > 3) return ` IMPLAUSIBLE: ${implausibleCount} historical inconsistencies break believability.`;
   if (dependencyCount > 0)
-    return `✓ VIABLE: Settlement can survive but has ${dependencyCount} trade dependenc${dependencyCount > 1 ? 'ies' : 'y'}. ${plotHooks.length} plot hooks available.`;
+    return `✓ VIABLE: Settlement can survive but has ${dependencyCount} operational dependenc${dependencyCount > 1 ? 'ies' : 'y'} that require active management. ${plotHooks.length} plot hooks available.`;
+  if (uncoveredDeficit > 0)
+    return `△ VIABLE WITH PROVISIONING STRAIN: ${deficitPercent}% of daily food need remains uncovered.`;
+  if (rawDeficit > 0)
+    return `✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${rawDeficitPercent}% of daily food need.`;
   return '✓ VIABLE: Settlement is economically self-sufficient and historically plausible.';
 };
 
@@ -114,7 +137,9 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
     // Presence via the SAME matcher the activation gate uses — an institution
     // the gate counts as a live processor must never be suggested as missing.
     const processingInsts = institutions.filter((i) =>
-      allProcessors.some((name) => matchesProcessor(i.name, name))
+      allProcessors.some((name) => (
+        matchesProcessor(nativeSemanticName(i), name)
+      ))
     );
 
     if (processingInsts.length === 0 && reachable.length > 0) {
@@ -125,7 +150,9 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
       });
     } else if (processingInsts.length > 0) {
       const missing = reachable
-        .filter((name) => !institutions.some((i) => matchesProcessor(i.name, name)))
+        .filter((name) => !institutions.some((i) => (
+          matchesProcessor(nativeSemanticName(i), name)
+        )))
         .slice(0, MAX_CHAIN_SUGGESTIONS);
       if (missing.length === 0) return; // complete for its tier — no junk gap
       const outputs = [...new Set(matchingChains.flatMap((c) => c.outputs || []))].slice(0, 4);
@@ -139,96 +166,15 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
     }
   });
 
-  // Institution-as-producer map: if the settlement has an institution that IS the
-  // production source for a resource, that counts as local infrastructure —
-  // even if the terrain resource isn't explicitly listed in nearbyResources.
-  // Principle: trade access (non-isolated) = valid infrastructure for any import.
-  // For isolated settlements: only flag if there's genuinely NO local institution
-  // that could plausibly cover the need.
-  const RESOURCE_LOCAL_PRODUCERS = {
-    // Grain / agriculture — any farming institution covers grain needs
-    'Grain fields': ['farm', 'farmland', 'subsistence', 'grain', 'agriculture', 'mill', 'common graz'],
-    'Fertile Floodplain': ['farm', 'farmland', 'subsistence', 'grain', 'agriculture', 'mill'],
-    'Oasis and Water Rights': ['farm', 'farmland', 'subsistence', 'agriculture', 'well', 'water'],
-    'Date Palms and Orchards': ['farm', 'farmland', 'subsistence', 'agriculture', 'orchard'],
-    // Livestock / grazing — any animal husbandry institution
-    'Grazing land': ['shepherd', 'grazing', 'dairy', 'livestock', 'cattle', 'common graz', 'stable', 'farmer'],
-    'Alpine Pastures': ['shepherd', 'grazing', 'dairy', 'livestock', 'cattle', 'common graz'],
-    // Fishing — any water access institution
-    'Fishing grounds': ['fisher', 'fish market', 'fish', 'dock', 'port', 'river', 'barge', 'cooper', 'barrel'],
-    'River fisheries': ['fisher', 'fish', 'river', 'barge', 'ferry', 'dock', 'port', 'landing', 'cooper', 'barrel'],
-    Marshlands: ['fisher', 'fish', 'river', 'barge', 'marsh', 'chan', 'dock', 'cooper'],
-    // Timber / woodland
-    'Managed woodland': ['woodcutter', 'sawmill', 'carpenter', 'forest', 'lumber'],
-    'Coastal Timber': ['shipyard', 'sawmill', 'carpenter', 'woodcutter', 'lumber'],
-    'Mountain Timber': ['woodcutter', 'sawmill', 'charcoal'],
-    // Mineral / earth resources
-    'Iron ore deposits': ['mine', 'smith', 'smelter', 'metal', 'blacksmith', 'iron'],
-    'Stone quarry': ['quarry', 'stone', 'brick', 'mine'],
-    'Clay deposits': ['potter', 'brick', 'clay', 'tile', 'quarry'],
-    'Coal or peat deposits': ['charcoal', 'peat', 'mine', 'coal', 'fuel'],
-    'Fine Glass Sand': ['glass', 'sand', 'beach', 'quarry'],
-    // Precious / exotic
-    'Precious metal veins': ['mine', 'assay', 'mint', 'jewel', 'smith'],
-    'Deep Natural Harbour': ['port', 'dock', 'harbour', 'harbor', 'shipyard'],
-    // Mill infrastructure
-    'Mill Sites': ['mill', 'farmland', 'farm', 'water', 'stream'],
-    // Wild resources — any settlement with outdoors access
-    'Foraging areas': ['druid', 'elder grove', 'apothecary', 'healer', 'warden', 'hedge', 'forest'],
-    'Hunting grounds': ['hunter', 'warden', 'wildfowl', 'tanner', 'trapper', 'lodge'],
-    'Wild foraging areas': ['druid', 'elder grove', 'apothecary', 'healer', 'warden'],
-    // Salt
-    'Salt flats': ['salt works', 'salt', 'brine', 'mine'],
-  };
-
-  const instNames = institutions.map((i) => (i.name || '').toLowerCase());
-
-  institutions.forEach((inst) => {
-    SUPPLY_CHAIN_GROUPS
-      .flatMap((need) => need.chains)
-      .filter(
-        (chain) =>
-          chain.processingInstitutions.length > 0 &&
-          chain.processingInstitutions.some((name) => inst.name.includes(name))
-      )
-      .forEach((chain) => {
-        const resource = chain.resource || '';
-        const isIsolated = config?.tradeRouteAccess === 'isolated';
-
-        // Check terrain-based resource presence
-        const hasTerrainResource = nearbyResources.some(
-          (r) =>
-            resource.toLowerCase().includes(r.toLowerCase().slice(0, 6)) ||
-            r.toLowerCase().includes(resource.toLowerCase().slice(0, 6))
-        );
-
-        // Check if the settlement has an institution that IS the production source.
-        // Imports on any trade route also count as valid infrastructure.
-        const localProducerKws = RESOURCE_LOCAL_PRODUCERS[resource] || [];
-        const hasProducingInstitution = localProducerKws.some((kw) => instNames.some((n) => n.includes(kw)));
-        // Teleportation infrastructure counts as trade access — magical supply chains replace roads
-        const hasMagicTrade = isIsolated && hasTeleportationInfra(institutions, config);
-        const hasTradeAccess = !isIsolated || hasMagicTrade; // trade route OR magic = imports available
-
-        const hasInfrastructure = hasTerrainResource || hasProducingInstitution || hasTradeAccess;
-
-        // Only flag if there is genuinely NO infrastructure covering this need.
-        // Trade access and local production institutions both count as infrastructure.
-        if (!hasInfrastructure) {
-          issues.push({
-            severity: SEVERITY.IMPLAUSIBLE,
-            category: 'Resource Access',
-            title: `${inst.name} — no viable resource supply`,
-            description: `${inst.name} requires ${resource} to function but the settlement has no local production, no nearby deposits, and no trade access to import it.`,
-            impact: 'Institution cannot function without a supply source.',
-            suggestedFixes: [
-              `Add a trade route so ${resource} can be imported`,
-              `Or add a resource-producing institution locally`,
-            ],
-          });
-        }
-      });
-  });
+  // Processing catalogs describe optional opportunities, not hard operating
+  // dependencies. A parish church can participate in a hot-springs pilgrimage
+  // chain when one exists; it does not require hot springs merely to function.
+  // Likewise, a quarry listed beside an iron mine in a heterogeneous mining
+  // chain does not consume iron ore. Actual operating dependencies are already
+  // carried by `economicState.tradeDependencies`; elevating every dormant
+  // optional chain into an IMPLAUSIBLE institution failure produced hundreds
+  // of false diagnoses. Keep the useful active-resource suggestions above and
+  // leave hard requirements to explicit dependency metadata.
 
   return { issues, warnings, suggestions };
 };
@@ -243,6 +189,11 @@ const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
   const hasWater = terrain ? WATER_ROUTES.includes(terrain.name.toLowerCase()) : route === 'river' || route === 'port';
 
   institutions.forEach((inst) => {
+    if (isMaterializedCustomContent(inst)) return;
+    // This record is access to somebody else's mill, not a local water-powered
+    // industry. Its water source belongs at the remote site; evaluating it as
+    // an on-site mill invented a local river dependency.
+    if (/^access to external mill\b/i.test(nativeSemanticName(inst))) return;
     const waterNeed = Object.entries(INDUSTRY_WATER_NEEDS).find(
       ([key]) =>
         inst.name.toLowerCase().includes(key.toLowerCase()) ||
@@ -250,7 +201,11 @@ const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
     )?.[1];
 
     if (waterNeed?.required) {
-      const hasAlternative = waterNeed.alternatives.some((alt) => institutions.some((i) => i.name.includes(alt)));
+      const hasAlternative = waterNeed.alternatives.some(
+        alternative => institutions.some(institution => (
+          nativeSemanticName(institution).includes(alternative)
+        )),
+      );
       if (!hasWater && !hasAlternative) {
         const alternatives = waterNeed.alternatives.map((alt) => `Add ${alt}`);
         warnings.push({
@@ -275,7 +230,8 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   const warnings = [];
   const suggestions = [];
   const pri = getPriorities(config);
-  const instNames = institutions.map((i) => (i.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const hasInst = (...kws) => kws.some((kw) => instNames.some((n) => n.includes(kw)));
 
   // City+ without markets
@@ -324,31 +280,58 @@ const generatePowerDynamics = (population, institutions, economicState, config =
 
   // Isolation viability check
   const route = config?.tradeRouteAccess || economicState?.tradeAccess || 'road';
-  if (route === 'isolated') {
+  if (isTradeRouteDisconnected(route)) {
     const tierLabel = config?.tier || 'village';
     const isTownPlus = getTradeRouteFeatures(tierLabel);
-    const hasMagic = hasTeleportationInfra(institutions || [], config);
-    if (isTownPlus && !hasMagic) {
+    const support = config?._isolationSupport || deriveIsolationSupport({
+      tier: tierLabel,
+      tradeRoute: route,
+      institutions,
+      config,
+    });
+    const supportPaths = (support.paths || [])
+      .map(path => path.type.replace(/_/g, ' '))
+      .join(', ');
+
+    if (isTownPlus && support.deficit > 0) {
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Economic Isolation',
-        title: 'Structural Isolation — Economic Impact',
-        description: `A ${tierLabel} in isolation cannot source specialist goods, process surpluses, or pay for skilled labour. Economy is permanently stunted regardless of slider values.`,
-        impact: 'Income sources, trade goods, and services are all compromised. Prosperity capped at Poor.',
-        suggestedFixes: ['Add a trade route', 'Add teleportation infrastructure (high magic)'],
+        title: 'Isolation Support Gap',
+        description: `This ${tierLabel} has ${support.capacity}/${support.requiredCapacity} support capacity. Its ${supportPaths || 'local support'} does not yet cover the full cost of isolation.`,
+        impact: 'Specialist goods and bad-season reserves remain vulnerable until the gap is closed.',
+        suggestedFixes: [
+          'Strengthen the local foodshed, reserves, seasonal access, or patronage',
+          'Add a physical trade route',
+          ...(
+            config?.magicExists !== false
+            && Number(config?.priorityMagic ?? 50) >= 66
+              ? ['Add magical transit as a last-resort substitution']
+              : []
+          ),
+        ],
       });
-    } else if (isTownPlus && hasMagic) {
+    } else if (isTownPlus && support.magicDependent) {
       warnings.push({
         severity: SEVERITY.DEPENDENCY,
         category: 'Economic Isolation',
         title: 'Magically-Sustained Isolation',
-        description: `${tierLabel.charAt(0).toUpperCase() + tierLabel.slice(1)} sustains itself in isolation via magical infrastructure. Trade flows through teleportation or planar channels rather than roads.`,
+        description: `${tierLabel.charAt(0).toUpperCase() + tierLabel.slice(1)} closes its isolation-support gap through magical transit (${support.capacity}/${support.requiredCapacity} capacity).`,
         impact:
-          'Entirely dependent on magical infrastructure. If magic fails or is disrupted, the settlement collapses without physical trade routes to fall back on.',
+          'Its mundane support paths are insufficient. Disrupted magic would reopen the gap without a physical route or stronger local base.',
         suggestedFixes: [
           'Maintain magical infrastructure at all costs',
-          'Consider adding a physical trade route as redundancy',
+          'Add a physical route or stronger local support as redundancy',
         ],
+      });
+    } else if (isTownPlus) {
+      warnings.push({
+        severity: 'note',
+        category: 'Economic Isolation',
+        title: 'Locally Sustained Isolation',
+        description: `${tierLabel.charAt(0).toUpperCase() + tierLabel.slice(1)} remains viable through ${supportPaths || 'its local support base'} (${support.capacity}/${support.requiredCapacity} capacity).`,
+        impact: 'The settlement is isolated, not inexplicably disconnected from the means of survival.',
+        suggestedFixes: ['Protect the support paths that make isolation viable'],
       });
     }
   }
@@ -394,8 +377,10 @@ const generatePowerDynamics = (population, institutions, economicState, config =
     }
   }
 
-  // Magic priority checks
-  if (getTradeRouteFeatures(config?.tier || 'village') && priorityToCategory(pri.magic) === 'very_high') {
+  // Magic priority checks. Small tiers may be unable to support an academy or
+  // tower, but a very-high player dial must still leave an explicit receipt
+  // instead of disappearing behind tier gates.
+  if (priorityToCategory(pri.magic) === 'very_high') {
     const hasMagicInst = instNames.some(
       (n) =>
         n.includes('wizard') ||
@@ -405,14 +390,27 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         n.includes('enchant')
     );
     if (!hasMagicInst) {
+      const smallSettlement = !getTradeRouteFeatures(config?.tier || 'village');
       warnings.push({
         severity: SEVERITY.INEFFICIENCY,
         category: 'Magical Priorities',
-        title: 'High Magic Priority Without Arcane Institutions',
-        description: 'Magic slider is high but no arcane institution is present.',
-        impact: 'Magical potential is unrealised — adventurers will find no magical services.',
-        suggestedFixes: ["Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"],
-        priorityNote: `Magic priority is ${pri.magic} — an arcane institution is expected.`,
+        title: smallSettlement
+          ? 'High Magic Priority — Informal Practice'
+          : 'High Magic Priority Without Arcane Institutions',
+        description: smallSettlement
+          ? `Magic priority is high, but ${config?.tier || 'village'} scale limits formal arcane infrastructure. Practice is local, itinerant, or domestic rather than institutional.`
+          : 'Magic priority is high but no arcane institution is present.',
+        impact: smallSettlement
+          ? 'The setting choice is present, but reliable commercial magical services remain scarce.'
+          : 'Magical potential is unrealised — adventurers will find no magical services.',
+        suggestedFixes: smallSettlement
+          ? ['Add a tier-plausible hedge practitioner or alchemical workshop']
+          : ["Add Hedge Wizard, Alchemist Shop, or Wizard's Tower"],
+        priorityNote: `Magic priority is ${pri.magic}; ${
+          smallSettlement
+            ? 'settlement scale constrains its institutional expression'
+            : 'an arcane institution is expected'
+        }.`,
       });
     }
   }
@@ -526,7 +524,8 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
       stresses.includes('under_siege') ||
       (insts || []).some(
         (i) =>
-          (i.name || '').toLowerCase().includes('war council') || (i.name || '').toLowerCase().includes('rationing')
+          nativeSemanticName(i).toLowerCase().includes('war council')
+          || nativeSemanticName(i).toLowerCase().includes('rationing')
       );
     const critical = tradeDeps.filter((d) => d.severity === 'critical');
     const vulnerable = tradeDeps.filter((d) => d.severity === 'vulnerable');
@@ -569,7 +568,17 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
     dependencies: sortBySeverity(dependencyWarnings), // supply chain notes (informational)
     suggestions,
     plotHooks,
-    summary: buildViabilitySummary(isViable, issues, structuralWarnings, plotHooks),
+    // The summary sees ALL warnings, including dependency warnings that are
+    // presented in their own collection below. Otherwise a food-import
+    // dependency can be correctly itemized and then contradicted one line
+    // later by an "economically self-sufficient" headline.
+    summary: buildViabilitySummary(
+      isViable,
+      issues,
+      warnings,
+      plotHooks,
+      foodAnalysis.foodBalance,
+    ),
     metrics: {
       foodBalance: foodAnalysis.foodBalance,
       tradeAccess: cfg?.tradeRouteAccess || 'unknown',

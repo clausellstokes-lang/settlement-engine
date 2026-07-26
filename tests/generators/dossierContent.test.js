@@ -214,8 +214,8 @@ describe('HISTORY_DESC_VARIANTS — Charge 1: banked history-event descriptions'
         expect(v, `${type} no leak`).not.toMatch(/\bundefined\b|\[object|\bNaN\b| {2,}/);
         const toks = v.match(/\{[a-z_]+\}/g) || [];
         for (const t of toks) expect(KNOWN_TOKENS.has(t), `${type}: unknown token ${t}`).toBe(true);
-        // String.replace substitutes only the first occurrence — a token must not repeat.
-        expect(new Set(toks).size, `${type}: a token repeats`).toBe(toks.length);
+        // Repeated known tokens are valid: renderHistoryTemplate resolves every
+        // occurrence. This gate owns vocabulary parity, not template phrasing.
       }
     }
   });

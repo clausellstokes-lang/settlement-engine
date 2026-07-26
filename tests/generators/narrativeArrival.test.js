@@ -2,7 +2,7 @@
  * Arrival-scene grounding — regression for the cross-wired arrival tables
  * (Wave 6 #1, GENERATION_COHERENCE_AUDIT high).
  *
- * ARRIVAL_SCENES is keyed by SCENE (market/river/smoke/guild/ordinary) but was
+ * ARRIVAL_SCENES is keyed by SCENE (market/port/river/smoke/guild/ordinary) but was
  * indexed by the raw trade ROUTE — only 'river' ever hit; every other
  * settlement opened on the bare '… comes into view.' fallback. ARRIVAL_ADDONS
  * is keyed by ROUTE but was indexed by economicState.tradeCommodity — a field
@@ -18,10 +18,12 @@
 import { afterEach, beforeEach, describe, test, expect } from 'vitest';
 import {
   generateArrivalScene,
+  generateSettlementReason,
   generateSiegeCapability,
   ROUTE_TO_SCENE,
 } from '../../src/generators/narrativeGenerator.js';
 import { ARRIVAL_SCENES, ARRIVAL_ADDONS } from '../../src/data/narrativeData.js';
+import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 
@@ -94,6 +96,79 @@ describe('arrival addons fire keyed by route (tradeCommodity was never written)'
   });
 });
 
+describe('port and cultural arrival vocabulary remain semantically grounded', () => {
+  test('port arrivals never inherit the inland-river scene vocabulary', () => {
+    const inlandRiverTerms = /\b(?:river|upriver|downriver|riverbank|ford|willows?|mill wheel)\b/i;
+    const maritimeTerms = /\b(?:harbou?r|sea|salt|masts?|gulls?|quays?|coast|port)\b/i;
+
+    for (let i = 0; i < 32; i++) {
+      setActiveRng(createPRNG(`port-not-river-${i}`));
+      const scene = generateArrivalScene(settlementFor('port'));
+      expect(scene, `seed ${i} used inland-river language`).not.toMatch(inlandRiverTerms);
+      expect(scene, `seed ${i} lacked maritime grounding`).toMatch(maritimeTerms);
+    }
+  });
+
+  test('materialized cultural identity is the architectural source of truth', () => {
+    const scene = generateArrivalScene({
+      ...settlementFor('road'),
+      culturalIdentity: {
+        architecturalDetail: 'blue-glazed brick courts step down toward the civic square',
+      },
+    });
+    expect(scene).toContain('blue-glazed brick courts step down toward the civic square');
+  });
+
+  test('legacy saves use the requested culture profile, never the Germanic fallback', () => {
+    setActiveRng(createPRNG('legacy-east-asian-arrival'));
+    const scene = generateArrivalScene({
+      ...settlementFor('road'),
+      config: {
+        ...settlementFor('road').config,
+        culture: 'east_asian',
+      },
+    });
+    expect(
+      CULTURE_PROFILES.east_asian.architecturalDetails.some(detail => scene.includes(detail)),
+    ).toBe(true);
+    expect(
+      CULTURE_PROFILES.germanic.architecturalDetails.some(detail => scene.includes(detail)),
+    ).toBe(false);
+  });
+
+  test('metropolis scale reads above an ordinary city', () => {
+    setActiveRng(createPRNG('metropolis-scale'));
+    const scene = generateArrivalScene({
+      ...settlementFor('road'),
+      tier: 'metropolis',
+    });
+    expect(scene).toContain("region's great urban centre");
+    expect(scene).not.toContain('It is a city in its own right');
+  });
+
+  test('a riverside port is described as an inland river port, never a seaport', () => {
+    const [reason] = generateSettlementReason(
+      'town',
+      'port',
+      null,
+      { terrainType: 'riverside' },
+    );
+    expect(reason).toMatch(/\briver port\b/i);
+    expect(reason).not.toMatch(/\bcoastal\b|\bsea\b/i);
+
+    setActiveRng(createPRNG('riverside-port-arrival'));
+    const scene = generateArrivalScene({
+      ...settlementFor('port'),
+      config: {
+        ...settlementFor('port').config,
+        terrainType: 'riverside',
+      },
+    });
+    expect(scene).toMatch(/\briver|barge|waterfront|quay|dock\b/i);
+    expect(scene).not.toMatch(/\bsea|coastal|gulls?\b/i);
+  });
+});
+
 describe('generateSiegeCapability joins the tensions array honestly', () => {
   const recentEvents = [{ name: 'Sack of the Granary', type: 'political', yearsAgo: 5 }];
 
@@ -118,6 +193,25 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
   test('plain-string tensions (legacy) pass through the join', () => {
     const out = generateSiegeCapability(recentEvents, ['old debts to the crown'], 100);
     expect(out).toContain('— old debts to the crown.');
+  });
+
+  test('normalizes event articles and preserves existing terminal punctuation', () => {
+    const out = generateSiegeCapability(
+      [{
+        name: 'The Succession Crisis',
+        type: 'political',
+        yearsAgo: 5,
+      }],
+      [{
+        type: 'resource_scarcity',
+        description: 'The supply of grain is under pressure.',
+      }],
+      100,
+    );
+    expect(out).toBe(
+      'The Succession Crisis is still present in living memory — The supply of grain is under pressure.',
+    );
+    expect(out).not.toMatch(/\bThe The\b|\.\.$/);
   });
 
   test('no recent events → array pass-through (caller nulls non-strings)', () => {

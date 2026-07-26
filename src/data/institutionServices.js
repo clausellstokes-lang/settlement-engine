@@ -468,7 +468,7 @@ export const INSTITUTION_SERVICES = {
           "Harbour Master's Office": {
     "Berth assignment": { on: true, p: 1.0, desc: "Register vessel and be assigned a berth." },
     "Pilotage": { on: true, p: 0.9, desc: "Pilot to guide through harbour approaches." },
-    "Maritime clearance": { on: true, p: 0.9, desc: "Departure clearance. Duty paid, manifest checked." },
+    "Vessel clearance": { on: true, p: 0.9, desc: "Departure clearance. Duty paid, manifest checked." },
     "Ship chandlery": { on: false, p: 0.6, desc: "Rope, pitch, sailcloth, provisions at the quayside." }
   },
   "Furrier's District": {

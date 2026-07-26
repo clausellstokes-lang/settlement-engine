@@ -5,22 +5,38 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra } from '../helpers.js';
 import { generateFoodSecurity } from '../foodGenerator.js';
+import { priorityBand } from '../../domain/priorityBands.js';
+import {
+  isMaterializedCustomContent,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import { institutionMatchesRegex } from '../../domain/institutionClassify.js';
+import {
+  hasTradeRouteConnection,
+  isTradeRouteDisconnected,
+} from '../../domain/tradeRouteSemantics.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js';
 
 
-export const priorityToCategory = (priority = 50) => {
-  const value = priority ?? 50;
-  return value <= 15 ? 'very_low' : value <= 35 ? 'low' : value <= 65 ? 'medium' : value <= 85 ? 'high' : 'very_high';
-};
+// Public compatibility name retained for every generator caller. The vocabulary
+// now lives in a dependency-free domain leaf so presentation can read the exact
+// same bands without importing the economy generator and its transitive graph.
+export const priorityToCategory = priorityBand;
 
 
 // deriveEconomicSituationDesc
-export const deriveEconomicSituationDesc = (config = {}, _tier = 'town', institutions = []) => {
+export const deriveEconomicSituationDesc = (
+  config = {},
+  _tier = 'town',
+  institutions = [],
+  foodSecurity = null,
+) => {
   const flags = getInstFlags(config, institutions);
   const stress = getStressFlags(config, institutions);
   const econCat = priorityToCategory(flags.economyOutput);
   const crimeCat = priorityToCategory(flags.criminalEffective);
   const route = config?.tradeRouteAccess || 'road';
-  const isolated = route === 'isolated';
+  const worldLaw = resolveGenerationWorldLaw(null, config);
+  const isolated = isTradeRouteDisconnected(route);
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const primaryStress = stresses.length
     ? [
@@ -46,14 +62,25 @@ export const deriveEconomicSituationDesc = (config = {}, _tier = 'town', institu
     return 'All normal economic activity is suspended. Markets are closed, merchant caravans have stopped arriving, and whatever currency existed is being redirected toward survival. The only economic question is the arithmetic of remaining supplies.';
   if (primaryStress === 'famine')
     return 'The economy is structured around food scarcity. Those with grain have power. Those without are making increasingly desperate decisions. Normal market activity continues in a technical sense — prices are simply at levels that exclude most of the population.';
-  if (primaryStress === 'occupied')
-    return `Revenue flows outward to the occupying authority via ${route === 'port' ? 'maritime levies' : 'road tolls and seizure powers'} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
+  if (primaryStress === 'occupied') {
+    const extractionChannel = worldLaw.supportsMaritime()
+      ? 'maritime levies'
+      : worldLaw.supportsRiverTrade()
+        ? 'river tolls and cargo seizures'
+        : 'road tolls and seizure powers';
+    return `Revenue flows outward to the occupying authority via ${extractionChannel} and compulsory assessment. Local commerce continues under supervision. The officially stated economic situation differs from the experienced one.`;
+  }
   if (primaryStress === 'indebted')
     return "Debt service obligations consume a meaningful share of revenue before any local investment is possible. The creditor's representative has effective veto power over fiscal decisions. Economic activity continues but its fruits are partly spoken for before they are earned.";
   if (primaryStress === 'plague_onset')
     return "Market activity is reduced by fear and quarantine measures. Supply chains for common goods are disrupted. The economic situation would be manageable if it weren't compounded by the medical crisis — as it is, each problem is making the other worse.";
   if (primaryStress === 'politically_fractured')
     return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
+
+  const foodDeficitPct = Number(foodSecurity?.deficitPct) || 0;
+  if (foodDeficitPct > 25) {
+    return `Local food production leaves ${Math.round(foodDeficitPct)}% of daily need uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap.`;
+  }
 
   if (isolated) {
     const isTownPlus = getTradeRouteFeatures(config?.tier || config?.settType || 'village');
@@ -115,8 +142,10 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
   // Derive tier from config — settType may be 'random' in random mode, so check config.tier too
   const _tier = config.tier || config.settType || '';
   const isSmallTier = _tier === 'thorp' || _tier === 'hamlet';
-  const isIsolatedSmall = isSmallTier && config.tradeRouteAccess === 'isolated';
-  const isConnectedSmall = isSmallTier && config.tradeRouteAccess !== 'isolated';
+  const isIsolatedSmall =
+    isSmallTier && isTradeRouteDisconnected(config.tradeRouteAccess);
+  const isConnectedSmall =
+    isSmallTier && hasTradeRouteConnection(config.tradeRouteAccess);
   if (isIsolatedSmall) idx = Math.max(0, Math.min(idx, 1)); // cap at Poor for isolated subsistence
   if (isConnectedSmall) idx = Math.max(1, idx); // floor at Poor — connected small settlement can't be Struggling
   // High crime drags down perceived prosperity
@@ -143,7 +172,7 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
 };
 
 // computeBaseProsperity — base prosperity index + food-security modifier (extracted from generateEconomicState)
-export const computeBaseProsperity = (tier, tradeRoute, institutions, config, instNames, incomeNormalized) => {
+export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _instNames, incomeNormalized) => {
   // ── Base prosperity model ───────────────────────────────────────────────
   // Inputs: route (channel), tier (capacity), economy slider (investment),
   //         magic (tier-scaled production), threat (drag), military (dual effect),
@@ -154,7 +183,7 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, in
   const _routeBase =
     tradeRoute === 'crossroads' || tradeRoute === 'port'
       ? 3 // Comfortable
-      : tradeRoute === 'isolated'
+      : isTradeRouteDisconnected(tradeRoute)
         ? ['thorp', 'hamlet'].includes(tier)
           ? 0
           : hasTeleportationInfra(institutions, config) && config.magicExists !== false
@@ -182,13 +211,12 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, in
   // 6. Military effects — heavy spending diverts capital; but security enables trade
   const _priMil = config.priorityMilitary ?? 50;
   const _milDrain = _priMil > 75 ? -0.3 : 0; // garrison costs crowd out investment
-  const _hasWalls = instNames.some(
-    (n) =>
-      n.toLowerCase().includes('wall') || n.toLowerCase().includes('palisade') || n.toLowerCase().includes('citadel')
-  );
-  const _hasGarrison = instNames.some(
-    (n) => n.toLowerCase().includes('garrison') || n.toLowerCase().includes('barracks')
-  );
+  const _hasWalls = institutions.some(institution => (
+    institutionMatchesRegex(institution, /wall|palisade|citadel/i)
+  ));
+  const _hasGarrison = institutions.some(institution => (
+    institutionMatchesRegex(institution, /garrison|barracks/i)
+  ));
   const _defPremium = _hasWalls && _hasGarrison && (tradeRoute === 'crossroads' || tradeRoute === 'port') ? 0.3 : 0;
 
   // Food security modifier — computed here so it can cap/floor base prosperity
@@ -198,7 +226,10 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, in
   // 7. Institutional depth — count of Economy+Crafts institutions weighted vs tier expectation
   // A city with 12 economy institutions is richer than one with 4, regardless of slider.
   // Expectations calibrated to actual generator output averages per tier.
-  const _econInstCount = institutions.filter((i) => i.category === 'Economy' || i.category === 'Crafts').length;
+  const _econInstCount = institutions.filter(i => (
+    !isMaterializedCustomContent(i)
+    && (i.category === 'Economy' || i.category === 'Crafts')
+  )).length;
   const _tierExpectedEco = { thorp: 3, hamlet: 8, village: 13, town: 22, city: 13, metropolis: 14 }[tier] || 8;
   // Bonus: +1 if well above expectation, -1 if well below. Bounded ±1 to avoid dominating.
   const _depthBonus = _econInstCount >= _tierExpectedEco * 1.3 ? 1 : _econInstCount >= _tierExpectedEco * 0.75 ? 0 : -1;
@@ -234,21 +265,12 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, in
   // Thorp/hamlet prosperity floor: subsistence communities with required institutions
   // functioning normally should never label below Poor — they're not in crisis, they're
   // just small. Struggling is reserved for active stress/famine on top of structural poverty.
-  const _hasRequiredEco = institutions.some((i) => {
-    const n = (i.name || '').toLowerCase();
-    return [
-      'subsistence farming',
-      'access to external mill',
-      'farmland',
-      'town granary',
-      'weekly market',
-      'city granari',
-      'market square',
-      'district markets',
-      'state granary',
-      'inns and taverns (district)',
-    ].some((k) => n.includes(k));
-  });
+  const _hasRequiredEco = institutions.some(institution => (
+    institutionMatchesRegex(
+      institution,
+      /subsistence farming|access to external mill|farmland|town granary|weekly market|city granari|market square|district markets|state granary|inns and taverns \(district\)/i,
+    )
+  ));
   if (
     ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].includes(tier) &&
     _hasRequiredEco &&
@@ -258,7 +280,12 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, in
   }
 
   let Z = _PLABELS[_baseIdx];
-  if (tradeRoute === 'isolated' && ['thorp', 'hamlet'].includes(tier)) Z = 'Subsistence';
+  if (
+    isTradeRouteDisconnected(tradeRoute)
+    && ['thorp', 'hamlet'].includes(tier)
+  ) {
+    Z = 'Subsistence';
+  }
   return { label: Z, foodSecurity: _foodSec };
 };
 

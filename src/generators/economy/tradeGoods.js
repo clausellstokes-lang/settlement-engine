@@ -8,11 +8,17 @@ import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } fro
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER } from '../../data/constants.js';
 import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js';
+import {
+  nativeSemanticName,
+  nativeSemanticNames,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 
 
 // deriveLocalCommodities
 const deriveLocalCommodities = (nearbyResources = [], institutions = []) => {
-  const instNames = institutions.map((i) => (i.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const commodities = new Set();
   getCommoditiesForResources(nearbyResources).forEach((commodity) => {
     const mapped = COMMODITY_CATEGORY_MAP[commodity];
@@ -49,7 +55,8 @@ const deriveNecessityImports = (tier, route, localProduction, institutions = [],
   // Return empty to avoid showing imports that contradict the "no external trade" description.
   if (route === 'isolated') return [];
 
-  const instNames = institutions.map((i) => (i.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const needed = [];
   const isPort = route === 'port';
   const isRiver = route === 'river';
@@ -81,7 +88,8 @@ const deriveNecessityImports = (tier, route, localProduction, institutions = [],
 
 // deriveIsEntrepot
 const deriveIsEntrepot = (route, institutions = []) => {
-  const instNames = institutions.map((inst) => (inst.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   return (
     route === 'crossroads' ||
     (route === 'port' && instNames.some((name) => name.includes('international trade') || name.includes('warehouse district')))
@@ -102,13 +110,14 @@ const SALT_PRESERVATIVES = ['preserv', 'salted', 'pickled', 'cured', 'smoked', '
 
 // generateTradeIncomeStreams
 export const generateTradeIncomeStreams = (tier, institutions = [], route = 'road', goodsToggles = {}, config = {}) => {
-  const localProduction = deriveLocalCommodities(config.nearbyResources || [], institutions);
+  const nativeResources = availableNativeResourceKeys(config);
+  const localProduction = deriveLocalCommodities(nativeResources, institutions);
   const necessityImports = deriveNecessityImports(
     tier,
     route,
     localProduction,
     institutions,
-    config.nearbyResources || []
+    nativeResources,
   );
   const isEntrepot = deriveIsEntrepot(route, institutions);
   const hasSaltLocal = necessityImports.some((i) => i.toLowerCase() === 'salt');
@@ -133,7 +142,14 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
       percentage: tier === 'metropolis' ? 25 : tier === 'city' ? 20 : 18,
       desc: 'Transit duties, warehouse fees, and re-export premiums from goods passing through the crossroads position.',
     });
-  if (route === 'port' && institutions.some((i) => i.name.toLowerCase().includes('international trade')))
+  if (
+    route === 'port'
+    && institutions.some(
+      institution => nativeSemanticName(institution)
+        .toLowerCase()
+        .includes('international trade'),
+    )
+  )
     bonuses.push({
       source: 'International Commerce',
       percentage: 25,
@@ -155,6 +171,10 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
 const getGoodsModifiers = (tier, institutions = [], goodsToggles = {}) => {
   const tierData = GOODS_MODIFIERS_BY_TIER[tier] || {};
   const exports = [];
+  // Static catalog requirements are native semantic keys. A current custom
+  // entity may share the same display label, but its mechanics must come from
+  // admitted dependency fields rather than inheriting a built-in export.
+  const nativeInstitutionNames = nativeSemanticNames(institutions);
   Object.entries(tierData).forEach(([goodName, spec]) => {
     const toggleKey = `${tier}_good_${goodName}`;
     // Custom-content extension: resolve `requiredInstitution` refIds
@@ -163,7 +183,9 @@ const getGoodsModifiers = (tier, institutions = [], goodsToggles = {}) => {
       : '';
     (goodsToggles[toggleKey] !== void 0 ? goodsToggles[toggleKey] : spec.on) &&
       ((reqInst &&
-        !institutions.some((inst) => inst.name === reqInst || inst.name.includes(reqInst))) ||
+        !nativeInstitutionNames.some(
+          name => name === reqInst || name.includes(reqInst),
+        )) ||
         (_rng() < spec.p && exports.push(goodName)));
   });
   return exports;

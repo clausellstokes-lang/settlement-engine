@@ -143,7 +143,7 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries.",
   ],
   "city|Economy|Harbour master's office": [
-    "It orders port traffic, gathers anchorage fees, assigns the berths, and holds the maritime law. Port cities only.",
+    "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law. Navigable-water cities only.",
     "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced. Found only in port cities.",
   ],
   "city|Economy|Inns and taverns (district)": [
@@ -395,8 +395,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Tool repair and horseshoeing. Farms on the side.",
   ],
   "hamlet|Crafts|Salt works": [
-    "Boils or dries salt out of seawater or brine springs, yielding the raw salt that preserves food. It works only where there are salt flats or a way to the coast.",
-    "Evaporates coastal water or brine to leave salt behind. The raw salt everything is preserved with. Nowhere but by salt flats or the sea can it be done.",
+    "Boils or dries naturally saline brine, yielding the raw salt that preserves food. It works only where salt flats, springs, or other workable deposits provide a local supply.",
+    "Evaporates brine to leave salt behind: the raw mineral used to preserve nearly everything. The works can operate only where a strong local brine source supports it.",
   ],
   "hamlet|Crafts|Shepherd": [
     "Keeps flocks of sheep for wool and mutton, driving them by season between the low winter pastures and the high summer grazing. He is a mainstay of the cloth trade.",
@@ -649,6 +649,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "thorp|Infrastructure|Dwellings (4-16)": [
     "Wattle-and-daub or timber, one or two rooms to a household.",
     "Timber or wattle-and-daub houses, each of a room or two.",
+  ],
+  "thorp|Infrastructure|Household levy": [
+    "When danger reaches the fields, each household sends one able-bodied adult with a hunting bow, spear, or whatever farm tool can serve as a weapon.",
+    "One fit adult musters from every household when the alarm is raised. Their arms are hunting bows, spears, and sharpened tools rather than a soldier's kit.",
   ],
   "thorp|Infrastructure|Palisade": [
     "A ring of sharpened stakes around the settlement. Little real defence, but enough to turn away an idle raider.",
@@ -1075,8 +1079,8 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Domestic ware thrown on the wheel: plates, jugs, and storage jars, all fired in a modest kiln.",
   ],
   "village|Crafts|Salt works": [
-    "Evaporation pans or brine-works set along the coast or the riverbank. By weight, salt is the most traded thing the settlement produces. No household does without it.",
-    "Salt won from brine or evaporation pans by the shore or river. It is the settlement's most-traded good by weight, wanted in every home.",
+    "Evaporation pans and brine-works turn the local saline source into salt. By weight, it is the settlement's most traded product, and no household does without it.",
+    "Salt is won from local brine in broad evaporation pans. It is the settlement's most-traded good by weight and a necessity in every home.",
   ],
   "village|Crafts|Sawmill": [
     "A saw driven by water or ox, cutting raw logs into planks and beams. It lifts what building and furniture-making the village can do.",

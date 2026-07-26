@@ -465,7 +465,7 @@ export const SERVICE_CATEGORY_MAP = {
   'Letters of credit': 'legal',
   Loans: 'legal',
   'Loans (secured)': 'legal',
-  'Maritime clearance': 'legal',
+  'Vessel clearance': 'legal',
   'Metal purity testing': 'legal',
   'Money changing': 'legal',
   'Nature arbitration': 'legal',

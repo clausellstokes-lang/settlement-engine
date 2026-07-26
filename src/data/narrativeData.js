@@ -28,6 +28,16 @@ export const ARRIVAL_SCENES = {
     (r) =>
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
+  port: [
+    (r) =>
+      `The harbour at ${r} announces itself beyond the last rise: masts above the roofs, gulls wheeling over the quays, and salt bright in the air.`,
+    (r) =>
+      `${r} faces the sea as deliberately as a fortress faces its enemy. Warehouses and chandlers crowd the waterfront, with the older streets climbing behind them.`,
+    (r) =>
+      `You hear ${r}'s harbour before you see it: rigging knocking against masts, dock crews calling cargo tallies, and surf working against the outer wall.`,
+    (r) =>
+      `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`,
+  ],
   smoke: [
     (r) =>
       `The cookfire smoke of ${r} drifts on the wind in your direction: a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`,

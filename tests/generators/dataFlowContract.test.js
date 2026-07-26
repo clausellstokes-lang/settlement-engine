@@ -16,12 +16,13 @@
  *
  * SCOPE NOTE (why the run order is still derived from deps, not replaced by a
  * computed data-flow order): `economicState` is produced TWICE — generateEconomy
- * provides it, generatePower reads THAT value, then economyReconcilePass
- * re-derives it. A pure data-flow order ("reader after every producer of K")
- * would force generatePower after economyReconcilePass and cycle. Resolving
- * which production each reader consumes needs versioned keys; until then deps
- * remains the authoritative (golden-stable) order, now CROSS-CHECKED by this
- * contract. That is the sound, valuable core of generators.3.
+ * provides the provisional value generatePower needs to establish political
+ * intent, then economyReconcilePass re-derives the final value consumed by
+ * powerEconomyReconcilePass. A pure data-flow order ("reader after every
+ * producer of K") would still force the intent-producing generatePower after
+ * economyReconcilePass and cycle. Resolving which production each reader
+ * consumes needs versioned keys; until then deps remains the authoritative
+ * (golden-stable) order, now CROSS-CHECKED by this contract.
  */
 import { describe, it, expect } from 'vitest';
 import '../../src/generators/generateSettlementPipeline.js'; // registers all steps
@@ -81,6 +82,11 @@ describe('pipeline reads/produces data-flow contract (A+ generators.3)', () => {
       const m = META.get(n);
       return m.reads.some((k) => m.provides.includes(k));
     });
-    expect(rederivers.sort()).toEqual(['economyReconcilePass', 'isolationPass', 'stressConfirmPass']);
+    expect(rederivers.sort()).toEqual([
+      'coherenceRepairPass',
+      'economyReconcilePass',
+      'isolationPass',
+      'stressConfirmPass',
+    ]);
   });
 });

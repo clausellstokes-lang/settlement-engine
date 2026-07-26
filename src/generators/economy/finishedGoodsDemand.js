@@ -4,6 +4,9 @@
 
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { INSTITUTION_FINISHED_GOODS_DEMAND } from '../../data/economicData.js';
+import {
+  nativeSemanticNames,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 
 // ── Finished goods demand-gap computation ────────────────────────────────────
@@ -11,18 +14,23 @@ import { INSTITUTION_FINISHED_GOODS_DEMAND } from '../../data/economicData.js';
 // institutions consume and what local supply chains produce.
 // Pushes import labels when demand exceeds supply; export bonus when surplus.
 // Builds on top of TRADE_DEPENDENCY_NEEDS (raw resources) without replacing it.
+// Returns source additions so the flat-list caller can retain exact ownership.
 export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearbyResources, chainExports, chainImports) {
+  const projection = {
+    customTradeEndpoints: [],
+    nativeExportsAdded: [],
+    nativeImportsAdded: [],
+  };
   const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
   const tierIdx = TIER_ORDER.indexOf(tier);
-  const instNames = (institutions || []).map((i) => (i.name || '').toLowerCase());
+  const instNames = nativeSemanticNames(institutions)
+    .map(name => name.toLowerCase());
   const resKeys = nearbyResources || [];
 
   const hasInst = (keyword) => instNames.some((n) => n.includes(keyword.toLowerCase()));
   const hasRes = (key) => resKeys.some((r) => r === key || r.includes(key));
   const alreadyImporting = (label) => chainImports.some((i) => i.toLowerCase().includes(label.toLowerCase()));
   const alreadyExporting = (label) => chainExports.some((e) => e.toLowerCase().includes(label.toLowerCase()));
-
-  const presentInst = new Set(instNames);
 
   for (const [category, cfg] of Object.entries(INSTITUTION_FINISHED_GOODS_DEMAND)) {
     // Tier gate
@@ -44,7 +52,12 @@ export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearb
     // Dragonbone Greatswords); named goods export once local demand is covered.
     // Empty + inert when the user has no satisfying custom content, so existing
     // generations stay byte-identical.
-    const customSupply = _customDeps.finishedGoodsSupply?.(category, presentInst) || { supply: 0, goods: [] };
+    const customSupply = _customDeps.finishedGoodsSupply?.(
+      category,
+      institutions,
+      tier,
+      { includeTradeGoodOwners: true },
+    ) || { supply: 0, goods: [], tradeGoodOwners: [] };
 
     if (totalDemand === 0 && customSupply.goods.length === 0) continue; // nothing to resolve
 
@@ -68,6 +81,7 @@ export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearb
       const label = cfg.importLabels[Math.min(labelIdx, cfg.importLabels.length - 1)];
       if (label && !alreadyImporting(label.split(' ')[0])) {
         chainImports.push(label);
+        projection.nativeImportsAdded.push(label);
       }
     }
 
@@ -77,11 +91,16 @@ export function computeFinishedGoodsDemand(tier, tradeRoute, institutions, nearb
       for (const g of customSupply.goods) {
         if (!alreadyExporting(g)) chainExports.push(g);
       }
+      projection.customTradeEndpoints.push(
+        ...(customSupply.tradeGoodOwners || []),
+      );
     }
 
     // ── Export bonus: supply substantially exceeds demand ─────────────────
     if (gap < -2 && cfg.exportBonus && !alreadyExporting(cfg.exportBonus)) {
       chainExports.push(cfg.exportBonus);
+      projection.nativeExportsAdded.push(cfg.exportBonus);
     }
   }
+  return projection;
 }

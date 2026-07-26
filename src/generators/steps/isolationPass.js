@@ -1,8 +1,9 @@
 /**
  * Step 8: isolationPass
  *
- * Applies teleportation infrastructure for isolated town+ settlements,
- * subsistence mode stripping, and arcane institution safety-net.
+ * Derives the isolation-support receipt, adds magical substitution only when
+ * mundane supports leave a real gap, applies small-tier subsistence mode, and
+ * enforces planar prerequisites.
  *
  * Isolation pass for the settlement generation pipeline.
  */
@@ -27,7 +28,7 @@ function instId(name) {
 registerStep('isolationPass', {
   deps: ['cascadePass'],
   reads: ['catalogForTier', 'effectiveConfig', 'stress', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
-  provides: ['stress'], // applySubsistenceMode may append an isolation famine to the stress container
+  provides: ['stress', 'isolationSupport'], // applySubsistenceMode may append an isolation famine to the stress container
   mutates: ['institutions', 'effectiveConfig'], // prunes the roster + stamps isolation flags on effectiveConfig in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
@@ -38,7 +39,7 @@ registerStep('isolationPass', {
 
   // Snapshot before each operation so we can trace what changed.
   const beforeTeleport = new Set(institutions.map(i => i.name));
-  applyTeleportationInfrastructure(
+  const isolationSupport = applyTeleportationInfrastructure(
     institutions, tier, tradeRoute, effectiveConfig, catalogForTier, TOWN_PLUS_TIERS, chanceWrapper
   );
   // Trace any teleport-infrastructure institutions that were added.
@@ -59,6 +60,26 @@ registerStep('isolationPass', {
         ],
       });
     }
+  }
+  if (isolationSupport?.applicable) {
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: 'isolationSupport',
+      step: 'isolationPass',
+      result: isolationSupport.status,
+      causes: isolationSupport.paths.map(path => ({
+        source: `isolationSupport.${path.type}`,
+        effect: `capacity +${path.capacity}`,
+        reason: path.evidence.join(', '),
+      })),
+      downstreamEffects: [{
+        target: 'structuralValidationPass',
+        effect: isolationSupport.deficit > 0
+          ? `support deficit ${isolationSupport.deficit}`
+          : 'support requirement met',
+        reason: `Capacity ${isolationSupport.capacity}/${isolationSupport.requiredCapacity}.`,
+      }],
+    });
   }
 
   const beforeSubsistence = institutions.map(i => i.name);
@@ -126,5 +147,5 @@ registerStep('isolationPass', {
 
   // Write the stress container back (unchanged unless an isolation famine was
   // appended above). stressConfirmPass (the next step) reads ctx.stress.
-  return { stress: nextStress };
+  return { stress: nextStress, isolationSupport };
 });

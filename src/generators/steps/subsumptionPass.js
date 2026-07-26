@@ -9,6 +9,12 @@
 
 import { registerStep } from '../pipeline.js';
 import { recordTrace } from '../../domain/trace.js';
+import {
+  nativeSemanticName,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import {
+  isProtectedGenerationEntity,
+} from '../../domain/generationOwnership.js';
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
@@ -71,21 +77,19 @@ const SUBSUMPTION_RULES = [
 // Exported for re-use in cascadePass
 export { SUBSUMPTION_RULES };
 
-// Institutions a subsumption rule may never delete. Tier-required entries,
-// DM force-toggles, and user-authored customs are contract with the DM —
-// subsumption only collapses redundancy among *generated* institutions.
-const PROTECTED_SOURCES = new Set(['required', 'forced', 'custom']);
-
-function isProtectedInstitution(inst) {
-  return inst?.required === true || PROTECTED_SOURCES.has(inst?.source);
-}
+// Backwards-compatible domain-specific name for callers that operate on
+// institution rosters. The actual provenance law is shared with upgrade
+// collapse, repair, theme filtering, validation, and certification.
+const isProtectedInstitution = isProtectedGenerationEntity;
 
 // `trace` lets re-subsumption sites (cascadePass) keep their own step/result
 // labels while sharing this one guarded matcher — the rules table must never
 // be applied through a second matcher with different protection semantics.
 function applySubsumption(institutions, ctx = null, trace = {}) {
   const { step: traceStep = 'subsumptionPass', result: traceResult = 'subsumed' } = trace;
-  const names = institutions.map(i => i.name.toLowerCase());
+  const names = institutions.map(
+    institution => nativeSemanticName(institution).toLowerCase(),
+  );
   const toRemove = new Set();
   // Track which `greater` triggered each removal so the trace can name
   // the actual reason ("subsumed by Banking District") rather than just

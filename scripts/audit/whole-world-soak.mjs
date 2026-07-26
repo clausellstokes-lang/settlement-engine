@@ -23,6 +23,11 @@
  *      known EQUILIBRIUM TENDENCY (the composed world winding down to stasis
  *      under autoresolve — the strategic argument FOR the spatial engine) is
  *      DOCUMENTED rather than failed: a frozen tail prints as a finding.
+ *   6. ISOLATED WORKER EXECUTION — one real Node worker_threads isolate imports
+ *      the product Web Worker module, advances the same initial realm through
+ *      the same domain entry, and must return the same output hash as run A.
+ *      Its timings are real for that Node host, but explicitly NOT represented
+ *      as browser Web Worker or field-device measurements.
  *
  * Deterministic: seeded generation (options THIRD — the second argument is
  * importedNeighbour and now fail-closes on an options bag), pinned `now`,
@@ -39,6 +44,10 @@
  */
 
 import { createHash } from 'node:crypto';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { performance } from 'node:perf_hooks';
+import { measureIsolatedAdvanceWorker } from './advance-worker-evidence.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -52,6 +61,7 @@ const YEARS = Math.max(1, Number(arg('years', 30)));
 const SEED = String(arg('seed', 'w0-soak'));
 const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-years', 5))));
 const AS_JSON = process.argv.includes('--json');
+const RECEIPT_PATH = arg('receipt', '');
 const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
 // performance-scale-6: parameterize the fixture up to the 30-settlement envelope so
 // the soak can exercise the cost axis at the product's headline scale. Default stays
@@ -177,7 +187,10 @@ async function runYears(seed, years, label) {
   // performance-scale-6: the cost axis — serialized worldState+regionalGraph bytes and
   // per-year wall-time, so a size/cost regression trends visibly and can be asserted.
   const yearlyBytes = [];
+  const yearlyRealmBytes = [];
   const yearlyMs = [];
+  let firstResultSha256 = null;
+  let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
 
   for (let year = 1; year <= years; year++) {
@@ -190,6 +203,7 @@ async function runYears(seed, years, label) {
       now: NOW,
       autoResolve: true,
     });
+    if (year === 1) firstResultSha256 = sha(result);
     yearlyMs.push(Date.now() - y0);
     if (result.status === 'paused') {
       throw new Error(`[soak:${label}] year ${year} PAUSED under autoResolve:true — orchestrator contract broken`);
@@ -225,7 +239,24 @@ async function runYears(seed, years, label) {
     yearlyStressorCounts.push(stressors.length);
     yearlyPopulations.push(runningSaves.map((s) => Number(s.settlement?.population) || 0));
     yearlyBytes.push(JSON.stringify(result.worldState).length + JSON.stringify(result.regionalGraph).length);
+    yearlyRealmBytes.push(JSON.stringify({
+      worldState: result.worldState,
+      regionalGraph: result.regionalGraph,
+      settlements: runningSaves.map((save) => save.settlement),
+    }).length);
+    peakHeapUsedBytes = Math.max(peakHeapUsedBytes, process.memoryUsage().heapUsed);
   }
+
+  // This isolated structuredClone call measures only cloning the final realm on
+  // the current Node thread. It is NOT worker duration or exact postMessage cost;
+  // the actual worker_threads round trip below supplies separate evidence for
+  // those combined effects. Clone and heap timings remain observational because
+  // they vary by host, while the deterministic byte envelope is the regression
+  // wall.
+  const finalRealm = { campaign: runningCampaign, saves: runningSaves };
+  const cloneStartedAt = performance.now();
+  structuredClone(finalRealm);
+  const structuredCloneMs = performance.now() - cloneStartedAt;
 
   return {
     label,
@@ -237,7 +268,13 @@ async function runYears(seed, years, label) {
     yearlyStressorCounts,
     yearlyPopulations,
     yearlyBytes,
+    yearlyRealmBytes,
     yearlyMs,
+    finalRealmBytes: JSON.stringify(finalRealm).length,
+    structuredCloneMs,
+    firstResultSha256,
+    heapUsedBytes: process.memoryUsage().heapUsed,
+    peakHeapUsedBytes,
     startPopulations: buildFixture(seed).saves.map((s) => Number(s.settlement?.population) || 0),
   };
 }
@@ -256,8 +293,59 @@ console.log('## run A (primary)');
 const runA = await runYears(SEED, YEARS, 'A');
 console.log(`  ${runA.years} years in ${(runA.ms / 1000).toFixed(1)}s — final tick ${runA.finalTick} (${runA.years * 52} expected)\n`);
 
+console.log('## isolated worker evidence (actual Node worker_threads; not browser timing)');
+let isolatedWorker = null;
+let isolatedWorkerError = null;
+try {
+  const fixture = buildFixture(SEED);
+  const measured = await measureIsolatedAdvanceWorker({
+    campaign: fixture.campaign,
+    saves: fixture.saves,
+    interval: 'one_year',
+    commit: true,
+    now: NOW,
+    autoResolve: true,
+  }, { customContent: {} });
+  isolatedWorker = measured.evidence;
+  console.log(
+    `  cold ${isolatedWorker.timingsMs.coldStartToTerminal}ms · `
+    + `request ${isolatedWorker.timingsMs.requestToTerminal}ms · `
+    + `worker handler ${isolatedWorker.timingsMs.workerHandlerToTerminalPost}ms`,
+  );
+  console.log(
+    `  transport ${isolatedWorker.runtime.transport} · `
+    + `thread ${isolatedWorker.runtime.workerThreadId} · `
+    + `${isolatedWorker.response.progressMessages} progress messages\n`,
+  );
+} catch (error) {
+  isolatedWorkerError = error instanceof Error ? error.message : String(error);
+  console.log(`  FAILED — ${isolatedWorkerError}\n`);
+}
+
 console.log('## assertions');
 check(runA.finalTick === runA.years * 52, 'tick arithmetic', `finalTick ${runA.finalTick} == years×52`);
+check(
+  isolatedWorker?.nonVacuous === true,
+  'actual isolated Node worker execution',
+  isolatedWorker
+    ? `worker thread ${isolatedWorker.runtime.workerThreadId} != main thread ${isolatedWorker.runtime.parentThreadId}`
+    : isolatedWorkerError,
+);
+check(
+  isolatedWorker?.response?.jsonSha256 === runA.firstResultSha256,
+  'isolated worker output equals the direct domain path',
+  isolatedWorker
+    ? `${String(isolatedWorker.response.jsonSha256).slice(0, 12)} == ${String(runA.firstResultSha256).slice(0, 12)}`
+    : 'no isolated-worker result',
+);
+check(
+  isolatedWorker?.response?.progressMessages === 52
+    && isolatedWorker?.response?.lastProgress?.ticksDone === 52,
+  'isolated worker completed a non-vacuous one-year advance',
+  isolatedWorker
+    ? `${isolatedWorker.response.progressMessages} progress messages; final tick ${isolatedWorker.response.lastProgress?.ticksDone}/52`
+    : 'no isolated-worker progress',
+);
 
 // 2. Byte-identical re-run (every year, not just the end state).
 const runB = await runYears(SEED, YEARS, 'B');
@@ -339,19 +427,60 @@ REGION.forEach((r, i) => {
   console.log(`  ${r.id} (${r.settType}): ${runA.startPopulations[i]} → ${series[series.length - 1]} (min ${Math.min(...series)}, max ${Math.max(...series)})`);
 });
 
+const receipt = {
+  schemaVersion: 3,
+  kind: 'whole_world_soak',
+  seed: SEED,
+  years: YEARS,
+  settlements: SETTLEMENTS,
+  now: NOW,
+  passed: failures.length === 0,
+  properties: failures.length === 0
+    ? [
+        'no_crash',
+        'rerun_identical',
+        'seed_divergent',
+        'population_bounded',
+        'isolated_worker_executed',
+        'isolated_worker_output_identical',
+      ]
+    : [],
+  finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
+  directFirstResultSha256: runA.firstResultSha256,
+  stressorCounts: counts,
+  startPopulations: runA.startPopulations,
+  finalPopulations: finalPops,
+  // performance-scale-6 cost series (the sim-report artifact for the tick axis).
+  yearlyBytes: runA.yearlyBytes,
+  yearlyRealmBytes: runA.yearlyRealmBytes,
+  yearlyMs: runA.yearlyMs,
+  finalRealmBytes: runA.finalRealmBytes,
+  structuredCloneMs: runA.structuredCloneMs,
+  isolatedWorker,
+  isolatedWorkerError,
+  heapUsedBytes: runA.heapUsedBytes,
+  peakHeapUsedBytes: runA.peakHeapUsedBytes,
+  realmScalingExercised: SETTLEMENTS === 30,
+  runDurationsMs: {
+    primary: runA.ms,
+    replay: runB.ms,
+    divergent: runC.ms,
+  },
+  ticksAdvanced: ((YEARS * 2) + DIVERGENCE_YEARS) * 52,
+  frozenTail,
+  failures,
+  completedAt: new Date().toISOString(),
+};
+
+if (RECEIPT_PATH) {
+  const file = resolve(String(RECEIPT_PATH));
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`\nreceipt: ${file}`);
+}
+
 if (AS_JSON) {
-  console.log(`\n${JSON.stringify({
-    seed: SEED, years: YEARS, settlements: SETTLEMENTS, now: NOW,
-    finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
-    stressorCounts: counts,
-    startPopulations: runA.startPopulations,
-    finalPopulations: finalPops,
-    // performance-scale-6 cost series (the sim-report artifact for the tick axis).
-    yearlyBytes: runA.yearlyBytes,
-    yearlyMs: runA.yearlyMs,
-    frozenTail,
-    failures,
-  }, null, 2)}`);
+  console.log(`\n${JSON.stringify(receipt, null, 2)}`);
 }
 
 console.log(`\n${failures.length ? `FAILED: ${failures.join(', ')}` : `OK — all assertions green (${YEARS}y × 3 runs)`}`);

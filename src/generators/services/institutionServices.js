@@ -3,6 +3,13 @@ import { INSTITUTION_SERVICES } from '../../data/tradeGoodsData.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 // Custom-content dependency surface — institution.produces declarations.
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
+import {
+  projectCustomDefinitionIdentity,
+} from '../../domain/content/customDefinitionIdentityProjection.js';
+import { passesTierGate } from '../../domain/customContentSchema.js';
+import {
+  isMaterializedCustomContent,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 /**
  * institutionServices.js — resolve an institution to the concrete list of
@@ -18,29 +25,67 @@ const SERVICE_TIER_CHANCE = { thorp: 0.25, hamlet: 0.35, village: 0.5, town: 0.6
 
 /**
  * Build a synthetic services array from a custom institution's `produces`
- * refIds. Each produced trade-good NAME becomes a service entry with a
- * tier-scaled probability roll. Returns [] if the institution is not a
- * custom one or has no `produces` declarations.
+ * references. Each declared service or trade-good output becomes a service
+ * entry with a tier-scaled probability roll. Returns [] if the institution is
+ * not custom or has no `produces` declarations.
  */
-function _customProducedServices(institutionName, tier, opts = {}) {
-  const produced = _customDeps.servicesProducedBy(institutionName);
+function _customProducedServices(institution, tier, opts = {}) {
+  const institutionName = typeof institution === 'string'
+    ? institution
+    : String(institution?.name || '');
+  const produced = _customDeps.contentProducedBy(institution, tier);
   if (!produced.length) return [];
   const tierChance = SERVICE_TIER_CHANCE[tier] || 0.5;
   const out = [];
-  for (const goodName of produced) {
-    const overrideKey = `${institutionName}_service_${goodName}`;
+  for (const producedEntry of produced) {
+    const producedName = producedEntry.name;
+    // `settType` can still be the random/custom sentinel when the store builds
+    // its coarse eligible library. Re-check the resolved generator tier here
+    // so a present institution cannot smuggle a city-only service into a
+    // hamlet through its `produces` relationship.
+    if (
+      producedEntry.source === 'custom'
+      && !passesTierGate(producedEntry.raw || {}, tier)
+    ) continue;
+    const target = producedEntry.raw || {};
+    const activationRef = producedEntry.category === 'services'
+      ? target.providedBy
+      : producedEntry.category === 'tradeGoods'
+        ? target.requiredInstitution
+        : null;
+    if (
+      activationRef
+      && !_customDeps.institutionRequirementIsPresent(
+        activationRef,
+        [institution],
+        tier,
+      )
+    ) continue;
+    const overrideKey = `${institutionName}_service_${producedName}`;
     const allow = opts[overrideKey];
     const enabled = allow !== undefined ? allow : true;
     if (!enabled) continue;
     // Custom-declared production fires more reliably than a random match.
     if (_rng() < Math.max(0.6, tierChance)) {
       out.push({
-        name: goodName,
-        desc: `${institutionName} produces ${goodName}`,
+        name: producedName,
+        desc: `${institutionName} produces ${producedName}`,
         p: 0.7,
         institution: institutionName,
         svcKey: institutionName,
+        category: target.category,
         custom: true,
+        source: 'custom',
+        // Internal compatibility address used only while the service
+        // orchestrator deduplicates exact projections. The persisted entity
+        // receives `localUid` below and never exposes this private key.
+        _customServiceLocalUid: target.localUid || producedEntry.refId,
+        ...(producedEntry.source === 'custom'
+          ? {
+              customDefinitionCategory: producedEntry.category,
+              ...projectCustomDefinitionIdentity(producedEntry.raw),
+            }
+          : {}),
       });
     }
   }
@@ -54,12 +99,28 @@ function _customProducedServices(institutionName, tier, opts = {}) {
 // last resort. All paths share one roll block so toggle objects (allow/force),
 // guaranteed p>=1 services, and requiredTradeRoute gates apply uniformly
 // regardless of how the key was resolved.
-export const getServicesForInstitution = (instName, tier, overrides = {}) => {
+export const getServicesForInstitution = (
+  institution,
+  tier,
+  overrides = {},
+) => {
+  const instName = typeof institution === 'string'
+    ? institution
+    : String(institution?.name || '');
   const serviceCatalogKeys = Object.keys(INSTITUTION_SERVICES),
     localeKey = LOCALE_SERVICE_OVERRIDES[instName.toLowerCase()];
   // Custom-content extension: any services declared via `produces` augment
   // (or, for unknown custom institutions, replace) the prebuilt service set.
-  const _customServices = _customProducedServices(instName, tier, overrides);
+  const _customServices = _customProducedServices(
+    institution,
+    tier,
+    overrides,
+  );
+  // A current custom institution has an explicit dependency vocabulary.
+  // Never let its presentation label fuzzy-match a native service catalog
+  // entry; authored `produces` is its sole service authority. Unstamped legacy
+  // string callers retain the historical compatibility matcher below.
+  if (isMaterializedCustomContent(institution)) return _customServices;
   const _exactKey = serviceCatalogKeys.find((k) => k.toLowerCase() === instName.toLowerCase());
   let resolvedKey = _exactKey || (localeKey && INSTITUTION_SERVICES[localeKey] ? localeKey : null);
   if (!resolvedKey) {
@@ -138,9 +199,10 @@ export const getServicesForInstitution = (instName, tier, overrides = {}) => {
         svcKey: resolvedKey,
       });
   }
-  // Augment matched results with custom-declared produced services
-  for (const cs of _customServices) {
-    if (!results.some((existing) => existing.name === cs.name)) results.push(cs);
-  }
+  // A display label is never an identity join. A native catalog service and an
+  // authored service with the same name are two real entities, as are two
+  // authored definitions that intentionally share a name. The orchestrator
+  // deduplicates repeated projections by immutable definition identity.
+  results.push(..._customServices);
   return results;
 };

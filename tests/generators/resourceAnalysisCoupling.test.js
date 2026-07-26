@@ -17,6 +17,8 @@ import {
   generateResourceAnalysis,
   resolveNearbyCommodities,
 } from '../../src/generators/resourceGenerator.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { getCompatibleResources } from '../../src/generators/terrainHelpers.js';
 
 const TERRAIN = 'mountain'; // allows stone_quarry, mountain_timber, iron_deposits, …
 
@@ -42,8 +44,9 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
 
     // The tautology this kills: identical terrain used to force identical chains.
     expect(stoneChains).not.toEqual(timberChains);
-    expect(stoneChains).toContain('stone');
+    expect(stoneChains).toEqual(['stone']);
     expect(stoneChains).not.toContain('timber');
+    expect(stoneChains).not.toContain('gemstones');
     expect(timberChains).toContain('timber');
     expect(timberChains).not.toContain('stone');
   });
@@ -56,6 +59,108 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     expect(commodities).toContain('iron');
     expect(commodities).toContain('iron_deposits');
     expect(commodities).not.toContain('stone');
+  });
+
+  it('river clay activates ceramics, never the stone-quarry chain', () => {
+    const config = { nearbyResources: ['river_clay'] };
+    const commodities = resolveNearbyCommodities(config, 'riverside');
+    const analysis = generateResourceAnalysis(
+      'riverside',
+      commodities,
+      [],
+      [{ name: 'Potter', tags: ['trade'] }],
+      config,
+    );
+
+    expect(commodities).toContain('clay');
+    expect(commodities).not.toContain('stone');
+    expect(activeKeys(analysis)).toContain('clay');
+    expect(activeKeys(analysis)).not.toContain('stone');
+  });
+
+  it('treats a riverside port as river geography for resource eligibility', () => {
+    const compatibility = Object.fromEntries(
+      getCompatibleResources('port', 'riverside')
+        .map(resource => [resource.key, resource.compatible]),
+    );
+
+    expect(compatibility.river_fish).toBe(true);
+    expect(compatibility.river_mills).toBe(true);
+    expect(compatibility.fishing_grounds).toBe(false);
+    expect(compatibility.deep_harbour).toBe(false);
+    expect(compatibility.shipbuilding_timber).toBe(false);
+  });
+
+  it('does not report local quarry stone as a critical import', () => {
+    const settlement = generateSettlementPipeline(
+      {
+        settType: 'town',
+        culture: 'germanic',
+        terrainOverride: 'riverside',
+        tradeRouteAccess: 'river',
+        nearbyResourcesRandom: false,
+        nearbyResources: ['stone_quarry'],
+        nearbyResourcesNative: ['stone_quarry'],
+        nearbyResourcesNativeDepleted: [],
+        resourceState: { stone_quarry: 'allow' },
+      },
+      null,
+      { seed: 'riverside-stone-audit', customContent: {} },
+    );
+
+    expect(activeKeys(settlement.resourceAnalysis)).toEqual(['stone']);
+    expect(
+      settlement.resourceAnalysis.imports.critical.join(' '),
+    ).not.toMatch(/\bstone\b/i);
+    expect(
+      settlement.generationCoherenceReceipt.checks.find(
+        check => check.id === 'resource_truth',
+      ),
+    ).toMatchObject({
+      status: 'pass',
+      findings: [],
+    });
+  });
+
+  it('does not turn optional chain opportunities into hard resource dependencies', () => {
+    const settlement = generateSettlementPipeline(
+      {
+        settType: 'village',
+        culture: 'slavic',
+        terrainOverride: 'plains',
+        tradeRouteAccess: 'isolated',
+        monsterThreat: 'plagued',
+        contentProfile: 'grim',
+        magicExists: true,
+        priorityMagic: 90,
+        priorityEconomy: 19,
+        priorityMilitary: 18,
+        priorityReligion: 98,
+        priorityCriminal: 95,
+      },
+      null,
+      { seed: 'intent-20', customContent: {} },
+    );
+    const diagnostics = [
+      ...(settlement.economicViability.issues || []),
+      ...(settlement.economicViability.warnings || []),
+      ...(settlement.economicViability.suggestions || []),
+    ];
+    const prose = JSON.stringify(diagnostics);
+
+    expect(prose).not.toMatch(/stone quarry[^.]*requires iron ore/i);
+    expect(prose).not.toMatch(/parish church[^.]*requires hot springs/i);
+    expect(
+      diagnostics.filter(item => item.category === 'Resource Access'),
+    ).toEqual([]);
+    expect(
+      settlement.generationCoherenceReceipt.checks.find(
+        check => check.id === 'resource_truth',
+      ),
+    ).toMatchObject({
+      status: 'pass',
+      findings: [],
+    });
   });
 });
 
@@ -72,6 +177,23 @@ describe('F32 — depleted resources are excluded from the analysis', () => {
     // Worked-out quarry ⇒ no stone chain; the timber sibling is untouched.
     expect(activeKeys(stoneDepleted)).not.toContain('stone');
     expect(activeKeys(stoneDepleted)).toContain('timber');
+    expect(stoneDepleted.resourceConditions).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: 'stone_quarry',
+          type: 'exhaustible',
+          condition: 'depleted',
+          randomDepletionEligible: true,
+        }),
+        expect.objectContaining({
+          key: 'mountain_timber',
+          type: 'renewable',
+          condition: 'available',
+          randomDepletionEligible: true,
+        }),
+      ]),
+    );
+    expect(stoneDepleted.conditionNotes.join(' ')).toMatch(/quarry face is exhausted/i);
   });
 
   it('the manual state map is honoured too (nearbyResourcesState: depleted)', () => {
@@ -81,6 +203,39 @@ describe('F32 — depleted resources are excluded from the analysis', () => {
     });
     expect(activeKeys(depletedViaState)).not.toContain('stone');
     expect(activeKeys(depletedViaState)).toContain('timber');
+  });
+
+  it('keeps native and exact custom depletion separate behind one label', () => {
+    const customOnly = resolveNearbyCommodities({
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: [],
+      nearbyResourcesNativeDepleted: [],
+      nearbyResourcesCustom: ['iron_deposits'],
+      nearbyResourcesDepleted: ['iron_deposits'],
+    }, TERRAIN);
+    expect(customOnly).toEqual([]);
+
+    const nativeBesideDepletedCustom = resolveNearbyCommodities({
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: ['iron_deposits'],
+      nearbyResourcesNativeDepleted: [],
+      nearbyResourcesCustom: ['iron_deposits'],
+      nearbyResourcesDepleted: ['iron_deposits'],
+    }, TERRAIN);
+    expect(nativeBesideDepletedCustom).toEqual(
+      expect.arrayContaining(['iron_deposits', 'iron']),
+    );
+  });
+
+  it('does not replace an all-depleted native roster with terrain defaults', () => {
+    const commodities = resolveNearbyCommodities({
+      nearbyResources: ['iron_deposits'],
+      nearbyResourcesNative: ['iron_deposits'],
+      nearbyResourcesNativeDepleted: ['iron_deposits'],
+      nearbyResourcesDepleted: ['iron_deposits'],
+    }, TERRAIN);
+
+    expect(commodities).toEqual([]);
   });
 
   it('falls back to the terrain default only when the roster is empty/unresolvable', () => {

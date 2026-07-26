@@ -15,8 +15,25 @@ import { buildStressContext } from '../../src/generators/stressGenerator.js';
 import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
 
 const NEW = ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt'];
-const gen = (extra, seed) =>
-  generateSettlementPipeline({ settType: 'town', terrainOverride: 'plains', ...extra }, null, { seed, customContent: {} });
+const gen = (extra, seed) => {
+  // A slave revolt is intentionally outside the grounded default profile.
+  // These tests exercise its opted-in content wave, so select the grim profile
+  // rather than weakening the production boundary merely to keep a legacy
+  // fixture implicit.
+  const contentProfile = extra.stressType === 'slave_revolt'
+    ? 'grim'
+    : 'grounded';
+  return generateSettlementPipeline(
+    {
+      settType: 'town',
+      terrainOverride: 'plains',
+      contentProfile,
+      ...extra,
+    },
+    null,
+    { seed, customContent: {} },
+  );
+};
 
 describe('generators-domain-1 + data-tables-3 — stress-type content wave', () => {
   it('every new type forces a coherent settlement (NPCs, history, and its own stress)', () => {

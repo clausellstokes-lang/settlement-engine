@@ -12,27 +12,39 @@ import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
+import {
+  nativeSemanticName,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
 }
 
 registerStep('cascadePass', {
-  deps: ['subsumptionPass'],
-  reads: ['institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  deps: ['subsumptionPass', 'buildGenerationContext'],
+  reads: ['generationContext', 'institutionToggles', 'institutions', 'terrainType', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'], // re-rolls/adds catalog entries on the roster in place (A+ P1.7)
   phase: 'institutions',
 }, (ctx, rng) => {
   // terrainType comes from resolveConfig — the cascade re-rolls catalog
   // entries, so it must honour the same geography gates as assemble.
-  const { institutions, tier, tradeRoute, terrainType, institutionToggles } = ctx;
+  const {
+    institutions,
+    tier,
+    tradeRoute,
+    terrainType,
+    institutionToggles,
+    generationContext,
+  } = ctx;
+  const { worldLaw } = generationContext;
 
-  // Snapshot the pre-cascade name set so we can identify what the
-  // cascade added (and therefore needs traces explaining why).
-  const preCascadeNames = new Set(institutions.map(i => (i.name || '').toLowerCase()));
-
-  const cascadeAdditions = applyCascadeInstitutions(institutions, tier, { tradeRoute, terrainType, institutionToggles });
+  const cascadeAdditions = applyCascadeInstitutions(institutions, tier, {
+    tradeRoute,
+    terrainType,
+    institutionToggles,
+    worldLaw,
+  });
   if (cascadeAdditions.length > 0) {
     institutions.push(...cascadeAdditions);
 
@@ -93,7 +105,8 @@ registerStep('cascadePass', {
   // master's office are complementary infrastructure, not a scale ladder; no
   // subsumption rule may collapse one into the other.
   const hasAirship = institutions.some(i =>
-    (i.name || '').toLowerCase().includes('airship')
+    worldLaw.allowsInstitution(i)
+    && nativeSemanticName(i).toLowerCase().includes('airship')
   );
   if (hasAirship && tradeRoute !== 'port' && tradeRoute !== 'river') {
     const MARITIME_INSTS = [
@@ -104,8 +117,11 @@ registerStep('cascadePass', {
         desc: 'Regulates port and airship traffic, assigns berths, collects anchorage fees.',
         tags: ['law_enforcement','port'], priorityCategory: 'military', baseChance: 0.65 },
     ];
-    const existingNames = new Set(institutions.map(i => i.name));
+    const existingNames = new Set(
+      institutions.map(nativeSemanticName).filter(Boolean),
+    );
     MARITIME_INSTS.forEach(inst => {
+      if (!worldLaw.allowsInstitution(inst)) return;
       if (!existingNames.has(inst.name) && rng.chance(inst.baseChance)) {
         institutions.push({ ...inst, source: 'generated' });
         // Trace the airship-triggered maritime additions.
@@ -122,12 +138,6 @@ registerStep('cascadePass', {
       }
     });
   }
-
-  // Silence unused — the pre-cascade snapshot is currently used only
-  // by future delta-trace work (e.g. tagging which adds were genuinely
-  // new vs upgrades). Kept here so a follow-up pass can use it without
-  // re-snapshotting.
-  void preCascadeNames;
 
   return {};
 });

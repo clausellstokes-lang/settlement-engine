@@ -13,17 +13,23 @@
  */
 
 import { registerStep } from '../pipeline.js';
-import { generatePowerStructure } from '../powerGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
 import { isAdversarialRelationship } from '../../domain/relationships/canonicalRelationship.js';
+import {
+  createPowerGenerationIntent,
+  projectPowerGenerationIntent,
+} from '../power/economyReconciliation.js';
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
   reads: ['economicState', 'effectiveConfig', 'institutions', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
-  provides: ['powerStructure'],
+  // powerIntent is transient pipeline state. It retains the original power
+  // inputs + named RNG stream so the final economy can re-project scores
+  // without regenerating political identities or reopening institution pulls.
+  provides: ['powerIntent', 'powerStructure'],
   phase: 'power',
-}, (ctx) => {
+}, (ctx, rng) => {
   const {
     tier, economicState, effectiveConfig, institutions,
   } = ctx;
@@ -47,10 +53,16 @@ registerStep('generatePower', {
   const tradeRouteArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
-  const powerStructure = generatePowerStructure(
-    tier, economicState, tradeRouteArg,
-    { ...effectiveConfig },
-    institutions
+  const powerIntent = createPowerGenerationIntent({
+    stepRng: rng,
+    tier,
+    tradeRoute: tradeRouteArg,
+    config: effectiveConfig,
+    institutions,
+  });
+  const powerStructure = projectPowerGenerationIntent(
+    powerIntent,
+    economicState,
   );
 
   // ── Trace recording (Tier 4.1) ───────────────────────────────────────
@@ -140,5 +152,5 @@ registerStep('generatePower', {
     });
   }
 
-  return { powerStructure };
+  return { powerIntent, powerStructure };
 });

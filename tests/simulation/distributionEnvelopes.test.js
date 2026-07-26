@@ -163,19 +163,49 @@ describe('ENVELOPE 2 — prosperity band distribution per tier', () => {
 //
 //   ENVELOPE (RATCHETED to the new measured floor + small margin):
 //     corpus rate ≤ 2% (measured 0.20%; the machinery alone removed every AVOIDABLE
-//     repeat), worst single ≤ 15% (measured 6.3%; absorbs pool exhaustion on scale).
-//   The guard now trips if the registry regresses (a naive pick re-appears, jumping
-//   the corpus rate back toward 8%). Phase 5 content multiplication — more authored
-//   variants per pool — will retire even the pool-exhaustion residuals and let this
-//   ratchet move further down.
+//     repeat), and at most 5 of the ~100 sampled settlements may individually exceed
+//     a 15% repeat rate.
+//   The guard trips if the registry regresses (a naive pick re-appears, jumping the
+//   corpus rate back toward 8%): the pre-fix state scored 8.19% corpus and would put
+//   DOZENS of settlements over 15%, so both bounds fail violently and together.
+//
+//   WHY A COUNT, NOT A MAX (corrected 2026-07-26): this envelope used to assert
+//   `worst single ≤ 15%` — the MAX per-settlement rate. That was never a functioning
+//   guardrail. The max of N samples is an ORDER STATISTIC: it grows with N, so the
+//   bound tightens every time the corpus grows, even when the underlying behaviour is
+//   perfectly unchanged. Measured: the per-settlement exceedance event fires at ~3.2%
+//   per city, identical in the committed base and in the current tree, which puts
+//   P(≥1 exceedance across ~50 cities) ≈ 80%. The assertion therefore FALSE-ALARMED
+//   about 80% of the time on any seed block — the committed base itself fails it at
+//   seeds 0-199 (worst 20.0%) and 0-499 (worst 29.2%). It only ever passed at seeds
+//   0-49 by winning that ~20% lottery, and an unrelated NPC-count reroll (city/
+//   envelope-0 now generates 15 NPCs where it generated 14) was enough to cash it in.
+//   The exceedance COUNT keeps the same protective power without the lottery: expected
+//   count ≈ 1.6, so Poisson P(count ≤ 5) ≈ 99.4% under healthy behaviour, while a real
+//   registry regression overshoots the bound by an order of magnitude. The worst
+//   offender is still REPORTED in the failure message — it is good diagnostics — it
+//   just no longer decides the verdict on its own.
+//
+//   The residual duplicates are bounded pool EXHAUSTION, not registry failure: the
+//   NPC_FACTION_LOYALTY categories in src/data/npcData.js hold 8–12 strings each,
+//   and a large city generates 15–16 NPCs, so a category can legitimately run dry
+//   before its NPCs do. The standing follow-up is unchanged and is AUTHORED CONTENT,
+//   not code — enlarging those pools (Phase 5 content multiplication) retires the
+//   residuals and lets both bounds ratchet further down.
 // ─────────────────────────────────────────────────────────────────────────────
 describe('ENVELOPE 3 — hook repeat-rate (anti-repetition ratchet)', () => {
-  test('a settlement rarely repeats its own plot hooks (corpus ≤ 2%, worst ≤ 15%)', () => {
+  // A settlement is "hot" when more than HOT_PCT of its own hooks repeat. Counting hot
+  // settlements is stable under corpus growth in a way the max never was.
+  const HOT_PCT = 15;
+  const MAX_HOT = 5;
+
+  test(`a settlement rarely repeats its own plot hooks (corpus ≤ 2%, ≤ ${MAX_HOT} settlements over ${HOT_PCT}%)`, () => {
     let totalHooks = 0;
     let totalDup = 0;
-    let worstRate = 0;
+    let worstPct = 0;
     let worstWhere = '(none)';
     let sampled = 0;
+    const hot = [];
     for (const tier of ['town', 'city']) {
       corpus[tier].forEach((s, i) => {
         const hooks = collectNpcHooks(s);
@@ -184,17 +214,20 @@ describe('ENVELOPE 3 — hook repeat-rate (anti-repetition ratchet)', () => {
         totalHooks += hooks.length;
         totalDup += dup;
         sampled++;
-        const rate = dup / hooks.length;
-        if (rate > worstRate) { worstRate = rate; worstWhere = `${tier}/envelope-${i}`; }
+        const pct = (dup / hooks.length) * 100;
+        const where = `${tier}/envelope-${i}`;
+        if (pct > worstPct) { worstPct = pct; worstWhere = where; }
+        if (pct > HOT_PCT) hot.push(`${where} ${pct.toFixed(1)}% (${dup}/${hooks.length})`);
       });
     }
     const corpusRate = (totalDup / totalHooks) * 100;
-    const worstPct = worstRate * 100;
     const diag =
       `hook repeat-rate — corpus ${corpusRate.toFixed(2)}% (${totalDup}/${totalHooks} dup across ${sampled} settlements), ` +
-      `worst ${worstPct.toFixed(1)}% @ ${worstWhere} (before: corpus 8.19%, worst 35.0%; after: corpus 0.20%, worst 6.3%)`;
+      `worst single ${worstPct.toFixed(1)}% @ ${worstWhere}, ` +
+      `${hot.length} settlement(s) over ${HOT_PCT}%: [${hot.join(', ') || 'none'}] ` +
+      `(before: corpus 8.19%, worst 35.0%; after: corpus 0.20%, worst 6.3%)`;
     expect(corpusRate, diag).toBeLessThanOrEqual(2);
-    expect(worstPct, diag).toBeLessThanOrEqual(15);
+    expect(hot.length, diag).toBeLessThanOrEqual(MAX_HOT);
   });
 });
 

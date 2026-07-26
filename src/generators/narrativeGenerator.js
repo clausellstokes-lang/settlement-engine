@@ -16,16 +16,31 @@
  *  - genCoherence              — coherence note array
  *  - getSettReason             — safety label → flavour sentence
  *  - buildTradeNarrative       — culture-appropriate architectural detail
- *  - buildStressProfile        — history-pattern → character string
  *  - generateSiegeCapability   — history → tension string
+ *
+ * Shared with the history REROLL path, so they live in ./narrative/historyCoherence.js
+ * rather than here (see that module's header):
+ *  - buildStressProfile        — history-pattern → character string
+ *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
-import { random as _rng } from '../kernel/rngContext.js';
+import {
+  clearActiveRng,
+  random as _rng,
+  setActiveRng,
+} from '../kernel/rngContext.js';
 import { pickVariant } from '../kernel/proseHash.js';
 import { resolvePrimaryStress } from './stressPriority.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
+import {
+  sentenceCase,
+} from './narrativeProse.js';
+import {
+  CULTURE_PROFILES,
+  resolveCultureProfileKey,
+} from '../data/cultureProfiles.js';
 
 import {
   ARRIVAL_SCENES,
@@ -40,12 +55,26 @@ import {
 export { STRESS_DESCS };
 // PRESSURE_SENTENCES + POLITICAL_FLAVOR hold render-time rng/pickRandom2 closures,
 // so they live in the generators layer (A+ Track H data-schema.3), not src/data.
-import { PRESSURE_SENTENCES, POLITICAL_FLAVOR } from './narrativeText.js';
+// POLITICAL_FLAVOR is read by the history-coherence leaf now, not here.
+import { PRESSURE_SENTENCES } from './narrativeText.js';
 import { checkInstCompat } from './structuralValidator.js';
 import { genRelNarrative, genSuccessionNarr } from './powerGenerator.js';
 import { mergeNPCLists } from './npcGenerator.js';
 import { enrichNPCsWithStructure } from './npcStructure.js';
 import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
+import { generateSiegeCapability } from './narrative/siegeCapability.js';
+// The history half of the coherence tail. Extracted so the history REROLL runs
+// the same derivations assembly runs instead of shipping generateHistory's raw
+// shape — the enrichNpcCoherence precedent [generators-domain-3]. This module
+// is the single source; generateCoherence below reads it rather than owning a
+// second copy.
+import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
+import { resolveGenerationWorldLaw } from './generationContext.js';
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js';
+
+// Keep the established public import path while the implementation lives with
+// the other extracted narrative policies.
+export { generateSiegeCapability };
 
 // ─── buildTradeNarrative ─────────────────────────────────────────────────────
 /**
@@ -54,50 +83,32 @@ import { generateCrimeLevel, getStressHistory } from './npcGenerator.js';
  * @param {string} tier
  * @param {string} culture
  * @param {number} magicPriority - 0–100
+ * @param {string|null} materializedDetail - Seed-stable cultural identity detail
  */
-const buildTradeNarrative = (tier, culture, magicPriority) => {
-  const CULTURAL_DETAILS = {
-    germanic: [
-      'half-timbered upper floors overhang the street',
-      'steeply pitched roofs catch the rain',
-      'carved lintels above the better doorways',
-    ],
-    latin: [
-      'stone colonnades along the market facing',
-      'terracotta tiles warmer than the local stone',
-      'a forum-style open square at the centre',
-    ],
-    celtic: [
-      'thatched roofs on the older buildings',
-      'carved knotwork on the standing stones at the crossroads',
-      'roundhouses in the oldest quarter',
-    ],
-    arabic: [
-      'latticed stonework on the upper windows',
-      'a shaded courtyard visible through an open gate',
-      'domed rooftops in the merchant quarter',
-    ],
-    norse: [
-      'carved dragon-head beams on the hall',
-      'turf roofing on the older structures',
-      "ships visible at the water's edge",
-    ],
-    slavic: [
-      'painted facades in the guild district',
-      'an onion-dome tower above the temple',
-      'timber construction that looks like it was built to last and has',
-    ],
-  };
-
-  const detail = pick(CULTURAL_DETAILS[culture] || CULTURAL_DETAILS.germanic);
+const buildTradeNarrative = (tier, culture, magicPriority, materializedDetail = null) => {
+  // New settlements carry the exact detail chosen while resolving their
+  // cultural identity. Legacy saves do not, so fall back to the complete
+  // canonical profile vocabulary rather than silently presenting newer or
+  // unknown culture keys as Germanic.
+  const profileKey = resolveCultureProfileKey(culture);
+  const legacyDetails = CULTURE_PROFILES[profileKey]?.architecturalDetails || [
+    'local materials and inherited building methods distinguish the older wards',
+    'workshops, homes, and civic buildings follow a practical regional grammar',
+    'the settlement has grown in layers around its busiest public ground',
+  ];
+  const detail =
+    typeof materializedDetail === 'string' && materializedDetail.trim()
+      ? materializedDetail.trim()
+      : pick(legacyDetails);
+  const sentenceDetail = sentenceCase(detail);
 
   const TIER_BASE = {
     thorp: `The settlement is small enough that you can see all of it from the road: ${detail}.`,
-    hamlet: `A dozen buildings around a central green, most of them old. ${detail}.`,
+    hamlet: `A dozen buildings around a central green, most of them old. ${sentenceDetail}.`,
     village: `A proper village, large enough to have a market and small enough that strangers are noticed — ${detail}.`,
     town: `A market town of substance: multiple streets, a visible guild quarter, ${detail}.`,
-    city: `A city, properly speaking — dense, layered, too large to take in at once. ${detail}.`,
-    metropolis: `The scale of the place takes a moment to register. This is not a large settlement. It is a city in its own right. ${detail}.`,
+    city: `A city, properly speaking — dense, layered, too large to take in at once. ${sentenceDetail}.`,
+    metropolis: `The scale of the place takes a moment to register. This is not one city so much as several districts, markets, and old settlements grown together into the region's great urban centre. ${sentenceDetail}.`,
   };
 
   const magicSuffix =
@@ -111,84 +122,10 @@ const buildTradeNarrative = (tier, culture, magicPriority) => {
 };
 
 // ─── buildStressProfile ───────────────────────────────────────────────────────
-/**
- * Return a one-sentence historical character description driven by the pattern
- * of event types in the settlement's history. Uses POLITICAL_FLAVOR templates.
- */
-const buildStressProfile = (events, _tier, _config) => {
-  if (!events || events.length === 0) return 'recently established and still finding its character';
-
-  const disasters = events.filter(e => e.type === 'disaster').length;
-  const political = events.filter(e => e.type === 'political').length;
-  const economic = events.filter(e => e.type === 'economic').length;
-  const religious = events.filter(e => e.type === 'religious').length;
-  const magical = events.filter(e => e.type === 'magical').length;
-  const catastrophic = events.some(e => e.severity === 'catastrophic');
-
-  if (random01(0.15)) return pickRandom2(POLITICAL_FLAVOR.stable)(events);
-
-  let pattern;
-  if (catastrophic) pattern = 'catastrophic';
-  else if (political >= 2) pattern = 'political_heavy';
-  else if (disasters >= 2) pattern = 'disaster_heavy';
-  else if (economic >= 2) pattern = 'economic_heavy';
-  else if (religious >= 1 && random01(0.6)) pattern = 'religious_heavy';
-  else if (magical >= 1 && random01(0.5)) pattern = 'magical_heavy';
-  else if (events.length >= 4 && random01(0.65)) pattern = 'layered_history';
-  else pattern = 'stable';
-
-  const subset = {
-    political_heavy: events.filter(e => e.type === 'political'),
-    disaster_heavy: events.filter(e => e.type === 'disaster'),
-    economic_heavy: events.filter(e => e.type === 'economic'),
-    religious_heavy: events.filter(e => e.type === 'religious'),
-    magical_heavy: events.filter(e => e.type === 'magical'),
-    catastrophic: events.filter(e => e.severity === 'catastrophic'),
-    layered_history: events,
-    stable: events,
-  }[pattern];
-
-  const flavors = POLITICAL_FLAVOR[pattern];
-  if (!flavors || !subset || subset.length === 0) return pickRandom2(POLITICAL_FLAVOR.stable)(events);
-
-  return pickRandom2(flavors)(subset)
-    .replace(/\bthe\s+(the|a|an)\s+/gi, 'the ')
-    .replace(/\bthe\s+(The|A|An)\s+/g, 'the ');
-};
-
-// ─── generateSiegeCapability ──────────────────────────────────────────────────
-/**
- * Return a string describing the current state of tensions, possibly informed
- * by the settlement's historical events.
- *
- * Exported for the grounding pin tests; production access stays via
- * generateCoherence (which nulls the non-string pass-through returns).
- */
-export const generateSiegeCapability = (historicalEvents, currentTensions, age) => {
-  if (!historicalEvents || historicalEvents.length === 0) return currentTensions;
-
-  const recentEvents = historicalEvents.slice(0, 3).filter(e => e.yearsAgo < Math.max(30, age * 0.3));
-
-  if (!recentEvents.length) return currentTensions;
-
-  const hasMilitary = recentEvents.some(e => e.type === 'political' || e.type === 'disaster');
-  if (!hasMilitary) return currentTensions;
-
-  const recent = recentEvents[0];
-  if (!recent?.name) return currentTensions;
-
-  // currentTensions is an ARRAY of tension objects ({ type, description, … },
-  // historyGenerator) — interpolating it raw printed '[object Object]' (or a
-  // comma-spliced blob), and the `|| fallback` never fired because an empty
-  // array is truthy. Use the PRIMARY (first) tension's prose; fall back when
-  // the array is empty.
-  const tensionList = Array.isArray(currentTensions) ? currentTensions : [currentTensions];
-  const primaryTension = tensionList
-    .map(t => (typeof t === 'string' ? t : t?.title || t?.description || t?.type))
-    .find(Boolean);
-
-  return `The ${recent.name} is still present in living memory — ${primaryTension || 'its effects shape current decisions'}.`;
-};
+// Moved to ./narrative/historyCoherence.js (max-lines leaf rule, the STRESS_DESCS
+// precedent below) so the reroll path can read the SAME derivation instead of a
+// second copy. Imported above; still reached through this module by its existing
+// consumers.
 
 // ─── STRESS_DESCS ─────────────────────────────────────────────────────────────
 /**
@@ -295,8 +232,13 @@ const genSettSummary = settlement => {
  * Build the full founding + arrival context object.
  * Used by historyGenerator (genArrivalDetail import) and internally.
  */
-export const genArrivalDetail = (config, economicContext = null) => {
+export const genArrivalDetail = (
+  config,
+  economicContext = null,
+  generationContext = null,
+) => {
   const route = config?.tradeRouteAccess || 'road';
+  const worldLaw = resolveGenerationWorldLaw(generationContext, config);
   const commodity = economicContext?.tradeCommodity || null;
   const prosperity = economicContext?.prosperity || 'Moderate';
   const stresses = config?.stressTypes?.length ? config.stressTypes : config?.stressType ? [config.stressType] : [];
@@ -311,7 +253,14 @@ export const genArrivalDetail = (config, economicContext = null) => {
   // "rich mineral deposits" / "strategic pass" ones). Prefer the settlement's resolved
   // terrain, fall back to route, then isolated.
   const terrain = resolveTerrain(config);
-  let reasonPool = TERRAIN_NARRATIVE_HOOKS[terrain] || TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
+  const terrainHookKey = terrain === 'riverside'
+    ? 'river'
+    : terrain === 'coastal'
+      ? 'port'
+      : terrain;
+  let reasonPool = TERRAIN_NARRATIVE_HOOKS[terrainHookKey]
+    || TERRAIN_NARRATIVE_HOOKS[route]
+    || TERRAIN_NARRATIVE_HOOKS.isolated;
 
   // Add commodity-specific reasons
   if (commodity) {
@@ -324,10 +273,15 @@ export const genArrivalDetail = (config, economicContext = null) => {
         'began when a failed soldier received a land grant and discovered the soil was worth more than any battlefield',
         'was established on farmland that three generations of the same family refused to sell, and eventually others settled around them',
       ],
-      fish: [
-        'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons',
-        'grew around a natural harbour that fish seemed to prefer — nobody knows why, and nobody questions it',
-      ],
+      fish: terrain === 'riverside'
+        ? [
+            'started as a seasonal camp beside a dependable river fishery and became permanent when traders began stopping there',
+            'grew around fishing weirs and a sheltered barge landing where the river catch could be salted and sold',
+          ]
+        : [
+            'started as a seasonal camp for deep-water fishers who stopped bothering to go home between seasons',
+            'grew around a natural harbour that fish seemed to prefer — nobody knows why, and nobody questions it',
+          ],
       iron: [
         'was founded the week someone hit iron three feet below the surface and word reached the nearest city',
         'grew around a smithing operation that discovered the local ore was unusually pure and refused to share the location',
@@ -440,6 +394,7 @@ export const genArrivalDetail = (config, economicContext = null) => {
       'disease and hardship in the early winters',
     ],
   };
+  const challengeRoute = deriveHistoryChallengeRoute(route, worldLaw);
 
   // How it was overcome
   const OVERCOMING_BY_PROSPERITY = {
@@ -477,7 +432,9 @@ export const genArrivalDetail = (config, economicContext = null) => {
     age: null, // filled in by historyGenerator
     reason: pick(reasonPool),
     foundedBy: pick(FOUNDERS_BY_TIER[tier] || FOUNDERS_BY_TIER.village),
-    initialChallenge: pick(CHALLENGES_BY_ROUTE[route] || CHALLENGES_BY_ROUTE.road),
+    initialChallenge: pick(
+      CHALLENGES_BY_ROUTE[challengeRoute] || CHALLENGES_BY_ROUTE.road,
+    ),
     overcoming: pick(OVERCOMING_BY_PROSPERITY[prosperity] || OVERCOMING_BY_PROSPERITY.Moderate),
     stressNote: primaryStress
       ? pickVariant(
@@ -806,12 +763,22 @@ export const generateSettlementReason = (tier, route, neighbor, _config = {}, fo
   if (route === 'crossroads') {
     reason = 'Positioned at a major crossroads — trade flows through here by geography, not by choice.';
   } else if (route === 'port') {
-    reason = 'A coastal settlement whose existence is inseparable from the sea.';
+    reason = _config.terrainType === 'riverside'
+      ? 'A river port built around navigable inland water; barges, wharves, and seasonal river traffic shape its economy.'
+      : _config.terrainType === 'coastal'
+        ? 'A coastal seaport whose existence is inseparable from the sea.'
+        : 'A port settlement whose wharves and navigable water define its trade.';
   } else if (route === 'river') {
     reason = 'Built along the river — water access shapes every economic decision.';
   } else if (route === 'isolated') {
+    const supportChannels = (
+      _config.magicExists !== false
+      && Number(_config.priorityMagic ?? 50) > 0
+    )
+      ? 'magical transport, sanctioned caravans, seasonal access, or patronage'
+      : 'sanctioned caravans, seasonal access, patronage, or emergency rationing';
     reason = hasFoodDeficit
-      ? 'Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through magical transport, sanctioned caravans, and minor routes — or not at all.'
+      ? `Isolated from major trade routes. The settlement cannot fully feed itself; what the land does not give arrives expensively — through ${supportChannels} — or not at all.`
       : 'Isolated from major trade routes. Self-sufficiency is not an aspiration here; it is a constraint.';
   } else {
     reason = 'Established along a road route — trade flows in, goods flow out, people pass through.';
@@ -893,12 +860,13 @@ export const generatePressureSentence = settlement => {
 
 // ─── generateArrivalScene ─────────────────────────────────────────────────────
 /**
- * ARRIVAL_SCENES is keyed by SCENE (market/river/smoke/guild/ordinary), not
+ * ARRIVAL_SCENES is keyed by SCENE (market/port/river/smoke/guild/ordinary), not
  * by route — indexing it with the raw route meant only 'river' ever hit and
  * every other settlement opened on the bare '… comes into view.' fallback.
  * Deterministic route → scene mapping:
  *   crossroads             → market  (roads converge on the market square)
- *   port / river           → river   (working-waterfront approach)
+ *   port                   → port    (coastal harbour approach)
+ *   river                  → river   (inland working-waterfront approach)
  *   isolated/mountain_pass → smoke   (you see the smoke long before the buildings)
  *   road + anything else   → ordinary (the default in generateArrivalScene)
  * 'guild' has no route that implies it; it stays reserved for a future
@@ -907,7 +875,7 @@ export const generatePressureSentence = settlement => {
  */
 export const ROUTE_TO_SCENE = Object.freeze({
   crossroads: 'market',
-  port: 'river',
+  port: 'port',
   river: 'river',
   isolated: 'smoke',
   mountain_pass: 'smoke',
@@ -921,7 +889,14 @@ export const ROUTE_TO_SCENE = Object.freeze({
 export const generateArrivalScene = settlement => {
   if (!settlement) return null;
 
-  const { name, tier, config = {}, institutions = [], stress } = settlement;
+  const {
+    name,
+    tier,
+    config = {},
+    institutions = [],
+    stress,
+    culturalIdentity = null,
+  } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
   const primaryStress = resolvePrimaryStress(stresses);
@@ -932,7 +907,12 @@ export const generateArrivalScene = settlement => {
 
   // Try stress-specific vignette first
   let openingLine;
-  const sceneKey = ROUTE_TO_SCENE[route] || 'ordinary';
+  // `port` describes infrastructure/connectivity, while terrain describes
+  // geography. A port on explicitly riverside terrain is an inland river port,
+  // not a seaport; route-only defaults remain coastal for backwards
+  // compatibility because getTerrainType('port') resolves to coastal.
+  const riverPort = route === 'port' && config.terrainType === 'riverside';
+  const sceneKey = riverPort ? 'river' : (ROUTE_TO_SCENE[route] || 'ordinary');
   if (primaryStress && STRESS_DESCS[primaryStress]) {
     openingLine = pickRandom2(STRESS_DESCS[primaryStress])(name);
   } else if (ARRIVAL_SCENES[sceneKey]) {
@@ -944,7 +924,12 @@ export const generateArrivalScene = settlement => {
   }
 
   // Culture-specific architectural detail
-  const architecturalNote = buildTradeNarrative(tier, culture, magicPriority);
+  const architecturalNote = buildTradeNarrative(
+    tier,
+    culture,
+    magicPriority,
+    culturalIdentity?.architecturalDetail,
+  );
 
   // Landmark from institution presence
   const landmarkNote = checkInstCompat(institutions, tier, magicPriority);
@@ -956,7 +941,7 @@ export const generateArrivalScene = settlement => {
   // by route; templates take (name, tier). mountain_pass has no addon pool
   // yet — the ?.length guard keeps that honest.
   let addon = null;
-  const addonPool = ARRIVAL_ADDONS?.[route];
+  const addonPool = ARRIVAL_ADDONS?.[riverPort ? 'river' : route];
   if (addonPool?.length) addon = pickRandom2(addonPool)(name, tier);
 
   const parts = [openingLine, architecturalNote, landmarkNote, addon].filter(Boolean);
@@ -1025,31 +1010,75 @@ export const relinkFactionMembers = (factions, enrichedNpcs) => {
   });
 };
 
-export const generateCoherence = settlement => {
+/**
+ * Run one coherence concern on a stable child stream when the caller provides
+ * the pipeline's coherence RNG. Direct legacy callers keep the historical
+ * shared-stream behaviour.
+ *
+ * @template T
+ * @param {{fork:(label:string)=>any}|null} rng
+ * @param {string} label
+ * @param {() => T} operation
+ * @returns {T}
+ */
+function inCoherenceSubstream(rng, label, operation) {
+  if (!rng?.fork) return operation();
+  const previousRng = setActiveRng(rng.fork(label));
+  try {
+    return operation();
+  } finally {
+    clearActiveRng(previousRng);
+  }
+}
+
+export const generateCoherence = (settlement, coherenceRng = null) => {
   if (!settlement) return settlement;
 
-  // NPC coherence enrichment (shared with regenNPCsPipeline via enrichNpcCoherence).
-  const mergedNpcs = enrichNpcCoherence(settlement);
+  // Each output owns a stable draw budget. Conditional work in NPC enrichment
+  // (for example a stress overlay) cannot move the prominent-relationship
+  // selection, and narrative-only work cannot rewrite canonical NPC state.
+  const mergedNpcs = inCoherenceSubstream(
+    coherenceRng,
+    'npc-enrichment',
+    () => enrichNpcCoherence(settlement),
+  );
 
   const history = settlement.history || {};
 
   // Historical character string
-  const historicalCharacter = buildStressProfile(history.historicalEvents || [], settlement.tier, settlement.config);
+  const historicalCharacter = inCoherenceSubstream(
+    coherenceRng,
+    'historical-character',
+    () => buildStressProfile(
+      history.historicalEvents || [],
+      settlement.tier,
+      settlement.config,
+    ),
+  );
 
   // Prominent relationship narrative
-  const prominentRelationship = genRelNarrative(settlement);
+  const prominentRelationship = inCoherenceSubstream(
+    coherenceRng,
+    'prominent-relationship',
+    () => genRelNarrative(settlement),
+  );
 
   // Coherence contradiction notes
-  const coherenceNotes = genCoherence(settlement);
-
-  // Siege narrative (separate from currentTensions array)
-  const siegeNarrative = generateSiegeCapability(
-    history.historicalEvents || [],
-    history.currentTensions || [],
-    history.age || 100,
+  const coherenceNotes = inCoherenceSubstream(
+    coherenceRng,
+    'coherence-notes',
+    () => genCoherence(settlement),
   );
-  // Only use siege narrative if it's a string (not the original array pass-through)
-  const siegeNarrativeStr = typeof siegeNarrative === 'string' ? siegeNarrative : null;
+
+  // Siege narrative (separate from currentTensions array). The producer AND the
+  // "strings only" filter live together in the history-coherence leaf, so the
+  // reroll path stores the field under exactly this rule rather than a
+  // re-implemented one.
+  const siegeNarrativeStr = inCoherenceSubstream(
+    coherenceRng,
+    'siege-capability',
+    () => historySiegeNarrative(history),
+  );
 
   return {
     ...settlement,

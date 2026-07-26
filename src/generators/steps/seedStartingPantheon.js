@@ -112,9 +112,11 @@ const ORDERED_POOL = Object.freeze(
 );
 
 registerStep('seedStartingPantheon', {
-  // generatePower: the affinity read wants the governing faction (government
-  // class). resolveConfig gives tier/terrain/culture/effectiveConfig.
-  deps: ['resolveConfig', 'generatePower'],
+  // The affinity read wants the FINAL governing projection. The bounded power
+  // reconcile preserves government identity today, but depending on its
+  // boundary keeps this reader correct if a later economy projection gains a
+  // legitimate government-class effect.
+  deps: ['resolveConfig', 'powerEconomyReconcilePass'],
   reads: ['tier', 'terrainType', 'culture', 'effectiveConfig', 'powerStructure'],
   provides: [],
   mutates: ['effectiveConfig'], // the LATENT record lands on the resolved config snapshot (→ settlement.config.latentPantheon)

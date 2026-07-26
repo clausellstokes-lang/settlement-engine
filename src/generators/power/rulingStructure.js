@@ -17,6 +17,12 @@ import { inferFactionCategory } from './factionCategories.js';
 import { applyStressEventFactions } from './stressFactions.js';
 import { annotateFactionStanding } from './factionStanding.js';
 import { buildGovernanceLabels } from './governanceNarrative.js';
+import {
+  isMaterializedCustomContent,
+  nativeSemanticName,
+  nativeSemanticNames,
+} from '../../domain/content/customContentSemanticAuthority.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js';
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -70,8 +76,36 @@ export const normalizeAndAnnotateFactions = (factions) => {
   return factions;
 };
 
-export const generatePowerStructure = (tier, economicState, tradeRoute, config, institutions = []) => {
-  const instNames = (institutions || []).map((inst) => (inst.name || '').toLowerCase()),
+export const generatePowerStructure = (
+  tier,
+  economicState,
+  // MISNAMED, and load-bearingly so: this is NOT a route. Every call site passes
+  // a neighbour RELATIONSHIP — { neighborName, relationshipType } — or null
+  // (steps/generatePower.js passes tradeRouteArg; economyReconciliation replays
+  // it as intent.tradeRoute). Its only consumer is buildGovernanceLabels, which
+  // reads `.relationshipType` and `.neighborName` off it. See the world-law note.
+  tradeRoute,
+  config,
+  institutions = [],
+  projection = {},
+) => {
+  // `config` is deliberately the sole route authority here. Unlike sibling
+  // producers that receive their resolved route positionally, this generator
+  // holds none: the parameter named `tradeRoute` above is a neighbour
+  // relationship, and the pipeline writes the resolved route to
+  // effectiveConfig.tradeRouteAccess (steps/resolveConfig.js) precisely so this
+  // read is the resolved one. Do NOT "repair" this into
+  // resolveGenerationWorldLaw(null, config, { tradeRoute }) — that stringifies a
+  // relationship OBJECT into the law's route slot ('[object Object]'), and a
+  // non-coastal seaport with a hostile neighbour silently loses its maritime
+  // standing (verified: the merchant description falls back from "International
+  // merchant houses controlling port licences" to the generic commercial line).
+  const generationWorldLaw = resolveGenerationWorldLaw(null, config);
+  const nativeInstitutions = (institutions || []).filter(
+      institution => !isMaterializedCustomContent(institution),
+    ),
+    instNames = nativeSemanticNames(nativeInstitutions)
+      .map(name => name.toLowerCase()),
     priorities = getPriorities(config),
     instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
@@ -93,14 +127,14 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
         ? Math.round(14 * priorityToMultiplier(instFlags.magicInfluence))
         : instFlags.magicInfluence > 55 &&
             tier === 'town' &&
-            (institutions || []).some(function (inst) {
-              var nameLower = (inst.name || '').toLowerCase();
+            nativeInstitutions.some(function (inst) {
+              var nameLower = nativeSemanticName(inst).toLowerCase();
               return nameLower.includes('mage') || nameLower.includes('wizard') || nameLower.includes('alchemist') || nameLower.includes('arcane');
             })
           ? Math.round(9 * priorityToMultiplier(instFlags.magicInfluence))
           : 0,
-    hasNobleInst = (institutions || []).some((inst) => {
-      var nameLower = (inst.name || '').toLowerCase();
+    hasNobleInst = nativeInstitutions.some((inst) => {
+      var nameLower = nativeSemanticName(inst).toLowerCase();
       return (
         nameLower.includes('lord') ||
         nameLower.includes('noble') ||
@@ -110,8 +144,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
       );
     }),
     economyDisplacesNobles = priorities.economy > 70 && !hasNobleInst,
-    hasRoyalSeat = (institutions || []).some(function (inst) {
-      return (inst.name || '').toLowerCase().includes('royal seat');
+    hasRoyalSeat = nativeInstitutions.some(function (inst) {
+      return nativeSemanticName(inst).toLowerCase().includes('royal seat');
     }),
     nobleBasePower = Math.round(22 * priorityToMultiplier(instFlags.militaryEffective * 0.65 + instFlags.economyOutput * 0.1)),
     nobleInstMultiplier = hasNobleInst ? (hasRoyalSeat ? 1.9 : 1.7) : 1,
@@ -125,7 +159,7 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
               ? nobleBasePower * nobleInstMultiplier * nobleEconomyPenalty * 0.75
               : nobleBasePower * nobleInstMultiplier * nobleEconomyPenalty * nobleTownAdjust
           ),
-    lowerInstNames = institutions.map((inst) => (inst.name || '').toLowerCase()),
+    lowerInstNames = instNames,
     governanceLabelMap = {
       'head-of-household consensus': tier === 'hamlet' ? 'Elder Consensus' : 'Household Council',
       'informal elder consensus': tier === 'hamlet' ? 'Free Elder Council' : 'Elder Council',
@@ -431,8 +465,8 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     merchantPower > 5 &&
       !(tier === 'thorp' && merchantPower < 12) &&
       (!['thorp', 'hamlet', 'village'].includes(tier) ||
-        (institutions || []).some(function (inst) {
-          var nameLower = (inst.name || '').toLowerCase();
+        nativeInstitutions.some(function (inst) {
+          var nameLower = nativeSemanticName(inst).toLowerCase();
           return nameLower.includes('market') || inst.category === 'Economy';
         })))
   ) {
@@ -442,19 +476,19 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
           governingFaction.includes('Merchant Guild Council') ||
           governingFaction.includes('Merchant Council')),
       merchantAdjPower = Math.round(merchantPower * (merchantGoverns ? 1.25 : 1)),
-      isPort = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'port',
+      supportsMaritimeTrade = generationWorldLaw.supportsMaritime(),
       isCrossroads = ((config == null ? void 0 : config.tradeRouteAccess) || 'road') === 'crossroads',
       merchantDesc =
         merchantGoverns && merchantAdjPower >= 12
           ? 'The ruling class and the merchant class are the same people; commercial decisions are political decisions and civic access is purchased.'
           : merchantAdjPower >= 26
-            ? isPort
+            ? supportsMaritimeTrade
               ? 'International merchant houses controlling port licences and import flows; their political leverage is structural, not merely financial.'
               : isCrossroads
                 ? 'Dominant commercial class at a trade nexus; they set prices, control warehousing, and fund the council.'
                 : 'Dominant commercial class; their capital and networks give them leverage even formal institutions must respect.'
             : merchantAdjPower >= 18
-              ? isPort
+              ? supportsMaritimeTrade
                 ? 'Maritime traders and factor houses controlling import and export flows; prosperous, well-connected, and aware of both.'
                 : isCrossroads
                   ? "Market merchants who profit from the settlement's position; buy from one direction, sell to another, lobby for both."
@@ -676,24 +710,27 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
     instNames,
     priorities,
     tier,
-    P: governingFaction,
-    S: hasNobleInst,
-    ge: stressTypes,
-    fe: stressType,
+    governingFaction,
+    hasNobleInstitution: hasNobleInst,
+    stressTypes,
+    fallbackStressType: stressType,
   });
   // ── Public legitimacy & faction dynamics ────────────────────────────────
   // At this point defenseProfile isn't computed yet — we use a provisional
   // defense label derived from institution presence for the legitimacy score,
   // and the actual defenseProfile will be added by generateSettlement after.
-  const _hasWalls = (institutions || []).some(
+  const _hasWalls = nativeInstitutions.some(
     (i) =>
-      (i.name || '').toLowerCase().includes('wall') ||
-      (i.name || '').toLowerCase().includes('palisade') ||
-      (i.name || '').toLowerCase().includes('citadel')
+      nativeSemanticName(i).toLowerCase().includes('wall') ||
+      nativeSemanticName(i).toLowerCase().includes('palisade') ||
+      nativeSemanticName(i).toLowerCase().includes('citadel')
   );
-  const _hasGarrison = (institutions || []).some((i) => (i.name || '').toLowerCase().includes('garrison'));
-  const _hasMilitia = (institutions || []).some(
-    (i) => (i.name || '').toLowerCase().includes('militia') || (i.name || '').toLowerCase().includes('watch')
+  const _hasGarrison = nativeInstitutions.some(
+    i => nativeSemanticName(i).toLowerCase().includes('garrison'),
+  );
+  const _hasMilitia = nativeInstitutions.some(
+    (i) => nativeSemanticName(i).toLowerCase().includes('militia')
+      || nativeSemanticName(i).toLowerCase().includes('watch')
   );
   const _provDefLabel =
     _hasWalls && _hasGarrison
@@ -706,7 +743,12 @@ export const generatePowerStructure = (tier, economicState, tradeRoute, config, 
             ? 'Vulnerable'
             : 'Undefended';
 
-  const publicLegitimacy = computePublicLegitimacy(economicState, _provDefLabel, tier);
+  const legitimacyDefenseLabel = projection.defenseLabel || _provDefLabel;
+  const publicLegitimacy = computePublicLegitimacy(
+    economicState,
+    legitimacyDefenseLabel,
+    tier,
+  );
 
   // Apply multipliers before relationship computation (relationships use final powers)
   applyLegitimacyMultipliers(factions, publicLegitimacy, tier);

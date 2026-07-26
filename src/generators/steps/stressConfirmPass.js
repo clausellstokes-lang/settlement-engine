@@ -35,6 +35,9 @@ import { registerStep } from '../pipeline.js';
 import { buildStressContext } from '../stressGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+import {
+  nativeSemanticName,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 // Per-type suppressor keywords mirroring buildStressContext's institution
 // flags — used ONLY to name the suppressing institutions in the trace.
@@ -49,11 +52,15 @@ const SUPPRESSOR_KEYWORDS = {
 function suppressorNames(stressType, institutions) {
   const kws = SUPPRESSOR_KEYWORDS[stressType] || [];
   return institutions
-    .filter(i => {
-      const n = (i.name || '').toLowerCase();
+    .map(institution => ({
+      institution,
+      semanticName: nativeSemanticName(institution),
+    }))
+    .filter(({ semanticName }) => {
+      const n = semanticName.toLowerCase();
       return kws.some(kw => n.includes(kw));
     })
-    .map(i => i.name)
+    .map(({ institution }) => institution.name)
     .slice(0, 3);
 }
 

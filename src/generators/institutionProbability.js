@@ -5,6 +5,10 @@
 import {TIER_ORDER} from '../data/constants.js';
 import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {ECONOMY_MODE_MARKET_MULT} from './neighbourGenerator.js';
+import {
+  nativeSemanticResourceKeys,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { cultureInstitutionMultiplier } from '../domain/cultureProfiles.js';
 
 const getPriorityModifiers = (tier, goodsToggles = {}) => {
   const tierGoods = GOODS_MODIFIERS_BY_TIER[tier] || {};
@@ -97,7 +101,8 @@ export const getBaseChance = (
                         inst.includes('elder grove');
     if (isDruidInst) {
       const route = config.tradeRouteAccess || 'road';
-      const hasMagicalNode = (config.nearbyResources || []).includes('magical_node');
+      const hasMagicalNode = nativeSemanticResourceKeys(config)
+        .includes('magical_node');
       const routeBoost = { isolated: 1.8, road: 1.4, river: 1.5, crossroads: 0.9, port: 0.8 }[route] ?? 1.0;
       const nodeBoost = hasMagicalNode ? 1.5 : 1.0;
       chance *= routeBoost * nodeBoost;
@@ -273,6 +278,13 @@ export const getBaseChance = (
   Object.entries(modifiers).forEach(([keyword, multiplier]) => {
     if (inst.includes(keyword)) chance *= multiplier;
   });
+
+  // Culture is a bounded probability influence, never an eligibility rule.
+  // This is the mechanical half of the cultural-identity contract: a profile
+  // can make locally characteristic institutions somewhat more common, while
+  // tier, world law, route, resources, and explicit toggles still decide what
+  // is possible. The helper clamps even stacked matches to a narrow band.
+  chance *= cultureInstitutionMultiplier(config.culture, category, name);
 
   return Math.min(Math.max(chance, 0), 1);
 };

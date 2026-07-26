@@ -99,7 +99,7 @@ says so explicitly rather than implying influence that didn't happen.
 
 ## SECTION 2 — THE PIPELINE: how a settlement is actually built
 
-Generation runs as a **pipeline of roughly twenty-one steps in a fixed, topologically-sorted
+Generation runs as a **pipeline of roughly twenty-two steps in a fixed, topologically-sorted
 order** (each step declaring what it needs from the steps before it). Every step: takes its
 named fork of the dice; declares, under a machine-checked contract, exactly which parts of the
 settlement it *provides*, *mutates*, or uses as *scratch* (so no step can secretly write where
@@ -123,14 +123,19 @@ subsumption merges overlapping functions, and isolation/subsistence rules strip 
 cut-off hamlet couldn't sustain. One law binds every pruning pass: institutions marked
 **required, forced, or custom are contracts with the user** and are never silently deleted.
 
-**3. The economy, solved as a loop.** Economy, power, and factions depend on each other — so
-the pipeline runs a *damped fixpoint*: a provisional economy is rolled, the power structure
-forms against it, factions pull on both, and then a reconciliation pass re-solves the economy
-against the final roster so the books balance. Food security gets a single authoritative
-writer (one function owns the food answer; every other surface *threads* it rather than
-recomputing it — the design cure for two parts of the dossier disagreeing about whether the
-town is starving). Defense scores, prosperity bands, services, and trade goods follow, each
-reading the settled roster.
+**3. The economy, solved as a bounded loop.** Economy, power, and factions depend on each
+other. The pipeline therefore rolls a provisional economy, forms a political *intent* against
+it, permits one faction-to-institution pull, and then re-solves the economy against the final
+roster. One final power pass replays the original political intent on the original named dice
+stream, refreshing only the prosperity-, safety-, food-, and defense-dependent projection. It
+does **not** pull institutions again. This is a one-iteration closeout, not an open-ended
+fixpoint: identities and neighbour-faction rolls survive, while stale economic power cannot.
+The finished power structure carries a versioned fingerprint of the exact economic inputs it
+consumed, and assembly fails closed if that fingerprint disagrees with the dossier's final
+economy. Food security likewise has a single authoritative writer (one function owns the food
+answer; every other surface *threads* it rather than recomputing it — the design cure for two
+parts of the dossier disagreeing about whether the town is starving). Defense scores,
+prosperity bands, services, and trade goods follow, each reading the settled roster.
 
 **4. The people.** The NPC generator mints the named cast: office-holders resolved against the
 power structure (with an office-equivalence resolver so the "Guildmaster" and the "Master of
@@ -273,6 +278,10 @@ Every claim in this document is enforced by test machinery, not good intentions:
   never a casual refresh. This is the replay promise, mechanized.
 - **The strict data-flow contract:** every pipeline step's declared reads/writes are
   cross-checked against its actual behavior.
+- **The economy-to-power freshness proof:** the final power projection persists a versioned
+  fingerprint over the exact tier, prosperity, safety, and food inputs it consumed. Final
+  assembly recomputes and asserts that fingerprint, so a future reorder cannot quietly persist
+  a power structure derived from an earlier economy.
 - **Reachability tests:** every catalog entry must be reachable by some legal configuration
   (dead content that can never roll is a test failure, not a surprise).
 - **Registration walkers:** adding a new stress type, resource, or institution without wiring

@@ -18,6 +18,10 @@ import {customDeps} from '../lib/dependencyEngine.js';
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
+import {
+  isMaterializedCustomContent,
+} from '../domain/content/customContentSemanticAuthority.js';
+import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
 // chain.processingInstitutions patterns are static data written for the fuzzy
@@ -71,6 +75,7 @@ export function processorPatternIdSet(pattern) {
  */
 export function institutionMatchesProcessor(inst, pattern) {
   if (inst?.catalogId) return processorPatternIdSet(pattern).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
   return fuzzyProcessorMatch(String(inst?.name || '').toLowerCase(), pattern);
 }
 
@@ -102,6 +107,7 @@ function keywordIdSet(keyword) {
 /** Does this institution match a keyword? Id-first for stamped, substring fallback. */
 export function institutionMatchesKeyword(inst, keyword) {
   if (inst?.catalogId) return keywordIdSet(keyword).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
   return String(inst?.name || '').toLowerCase().includes(String(keyword).toLowerCase());
 }
 
@@ -139,21 +145,8 @@ function gateKeywordIdSet(kw) {
 export function institutionMatchesGate(inst, keyword) {
   const kw = String(keyword || '').toLowerCase();
   if (inst?.catalogId) return gateKeywordIdSet(kw).has(inst.catalogId);
+  if (isMaterializedCustomContent(inst)) return false;
   return gateKeywordPredicate(kw)(String(inst?.name || '').toLowerCase());
-}
-
-// Map resource labels → RESOURCE_DATA keys for matching
-// Uses fuzzy word overlap: 'Grain fields' matches 'grain_fields' key via shared words
-function resourceLabelToKey(label) {
-  if (!label) return null;
-  const words = label.toLowerCase().split(/\s+/).filter(w => w.length > 3);
-  let bestKey = null, bestScore = 0;
-  Object.keys(RESOURCE_DATA).forEach(key => {
-    const keyWords = key.toLowerCase().split('_');
-    const score = words.filter(w => keyWords.some(kw => kw.startsWith(w) || w.startsWith(kw))).length;
-    if (score > bestScore) { bestScore = score; bestKey = key; }
-  });
-  return bestScore > 0 ? bestKey : null;
 }
 
 /**
@@ -189,12 +182,24 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     insts.some(i => institutionMatchesKeyword(i, p))
   );
 
-  // Active resource keys
-  const activeResourceKeys   = new Set(resources);
-  const depletedResourceKeys = new Set(depletedResources);
+  // A resource can be present without being available. Keep both sets so a
+  // depleted primary input remains visible as an impaired chain instead of
+  // disappearing, while substitutes and local production consult only the
+  // available subset.
+  const presentResourceKeys = new Set(
+    resources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const depletedResourceKeys = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const availableResourceKeys = new Set(
+    [...presentResourceKeys].filter(key => !depletedResourceKeys.has(key)),
+  );
 
-  // Internal helper — checks if a resource key is in the depleted set
-  const isResourceDepleted = (key) => !!key && depletedResourceKeys.has(key);
+  const resourceCondition = (key) => {
+    if (!key || !presentResourceKeys.has(key)) return 'absent';
+    return depletedResourceKeys.has(key) ? 'depleted' : 'available';
+  };
 
   // Tradition detection — which magical traditions are present?
   // Id-first for stamped institutions (a renamed-but-stamped "Mages' guild"
@@ -219,7 +224,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
   // Depleted: resource is present but over-exploited — chains run locally but cannot 
   // Which resource keys activate which chains (reverse lookup)
   const chainActivatedByResource = new Set();
-  activeResourceKeys.forEach(rk => {
+  presentResourceKeys.forEach(rk => {
     (RESOURCE_TO_CHAINS[rk] || []).forEach(c => chainActivatedByResource.add(c));
   });
 
@@ -253,17 +258,43 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         (chain.label || '').toLowerCase().includes('spell');
       if (isArcaneChain && magicPriority === 0) return;
 
-      // Check institution presence — chain is active if settlement has ≥1 processor
-      // (id-first for stamped institutions, legacy fuzzy match for the rest)
-      const matchedInsts = chain.processingInstitutions.filter(p =>
-        insts.some(i => institutionMatchesProcessor(i, p))
+      // Check resource availability
+      const resourceKey = resourceKeyForLabel(chain.resource);
+      const primaryCondition = chain.resource
+        ? resourceCondition(resourceKey)
+        : 'available';
+      const resourceActive = primaryCondition === 'available';
+      const resourceAvailable = !chain.resource;
+
+      // Substitution is condition-aware: a present-but-depleted primary needs a
+      // live substitute just as an absent primary does. Resolve only exact
+      // catalog labels/aliases; unknown prose cannot acquire mechanics through
+      // RESOURCE_DATA insertion order or word overlap.
+      const substitutes = chain.resourceSubstitutes || [];
+      const activeSubstituteKey = !resourceActive
+        ? substitutes
+          .map(resourceKeyForLabel)
+          .find(subKey => subKey && availableResourceKeys.has(subKey)) || null
+        : null;
+      const substituteActive = Boolean(activeSubstituteKey);
+      const resourceInputKey = resourceActive
+        ? resourceKey
+        : activeSubstituteKey || resourceKey;
+
+      // Most alternatives share processors and outputs. Heterogeneous chains
+      // (the compact mining families) declare resource-specific variants so a
+      // stone quarry cannot emit iron and a jeweller working gemstones cannot
+      // emit precious-metal coinage.
+      const processingPatterns = (
+        chain.processingInstitutionsByResource?.[resourceInputKey]
+        || chain.processingInstitutions
+      );
+      const matchedInsts = processingPatterns.filter(pattern =>
+        insts.some(institution => (
+          institutionMatchesProcessor(institution, pattern)
+        ))
       );
       if (matchedInsts.length === 0) return;
-
-      // Check resource availability
-      const resourceKey = resourceLabelToKey(chain.resource);
-      const resourceActive = !chain.resource || activeResourceKeys.has(resourceKey);
-      const resourceAvailable = !chain.resource; // chains without a resource requirement are always available
 
       // Entrepôt boost: crossroads/port settlements can run entrepôt chains
       // even without local resource, as long as they have the logistics institutions.
@@ -274,7 +305,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       // A chain's own processors cannot vouch for its transit: 'Planar traders'
       // match /planar/, so without this exclusion the planar chain kept itself
       // running after the settlement lost its Teleportation circle mid-campaign.
-      const isOwnProcessor = (i) => chain.processingInstitutions.some(p =>
+      const isOwnProcessor = (i) => processingPatterns.some(p =>
         institutionMatchesProcessor(i, p));
       const hasMagicTransit = insts.some(i =>
         (institutionMatchesKeyword(i, 'teleportation')
@@ -284,20 +315,12 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const isEntrepotRoute = ['crossroads', 'port', 'river'].includes(tradeRoute)
         || (isArcaneChain && hasMagicTransit);
 
-      // Substitution: if primary resource missing, check if a substitute covers the gap
-      const substitutes = chain.resourceSubstitutes || [];
-      const substituteActive = !resourceActive && substitutes.length > 0 && substitutes.some(sub => {
-        const subKey = resourceLabelToKey(sub);
-        return activeResourceKeys.has(subKey);
-      });
-      const runnableViaSubstitute = substituteActive;
-
       // Entrepôt-only chains (entrepot:true, resource:null) are pure transit goods —
       // they REQUIRE a trade hub route (crossroads/port/river). They do NOT fire on road/isolated.
       const isEntrepotOnly = chain.entrepot && !chain.resource;
       const runnable = isEntrepotOnly
         ? (isEntrepotRoute && matchedInsts.length > 0)
-        : (resourceActive || resourceAvailable || substituteActive ||
+        : (primaryCondition === 'depleted' || resourceActive || resourceAvailable || substituteActive ||
            (chain.entrepot && isEntrepotRoute && matchedInsts.length > 0));
 
       if (!runnable) return;
@@ -330,6 +353,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
           'Local food security is maintained but surplus flour cannot be exported — ' +
           'the mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
+      const outputs = (
+        chain.outputsByResource?.[resourceInputKey]
+        || chain.outputs
+      );
+      const label = (
+        chain.labelsByResource?.[resourceInputKey]
+        || chain.label
+      );
 
       activeChains.push({
         needKey,
@@ -337,21 +368,26 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
         needIcon: need.icon,
         needColor: need.color,
         chainId: chain.id,
-        label: chain.label,
+        label,
         upstreamChains: chain.upstreamChains || [],
         resourceIcon: chain.resourceIcon,
         resource: chain.resource,
-        resourceActive: activeResourceKeys.has(resourceKey),
+        resourceKey,
+        resourceCondition: primaryCondition,
+        resourceActive,
+        resourceInputKey,
+        resourceInputCondition: substituteActive ? 'available' : primaryCondition,
+        resourceInputAvailable: resourceAvailable || resourceActive || substituteActive,
         processingInstitutions: matchedInsts,
-        outputs: chain.outputs.slice(0, 4),
+        outputs: outputs.slice(0, 4),
         services: chain.services,
         exportable: effectiveExportable,
         entrepot: chain.entrepot,
         entrepotNote: chain.entrepotNote || null,
         externalMillNote,
         activatedByResource: chainActivatedByResource.has(chainId),
-        substituteActive: runnableViaSubstitute || false,
-        resourceDepleted: isResourceDepleted(resourceLabelToKey(chain.resource)),
+        substituteActive,
+        resourceDepleted: primaryCondition === 'depleted',
       });
     });
   });
@@ -386,11 +422,14 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
           impact: dep.impact,
           affectedServices: dep.affectedServices || [],
         };
-        chain.status = dep.severity === 'critical' ? 'impaired'
+        chain.status = chain.resourceInputCondition === 'depleted'
+          ? 'impaired'
+          : dep.severity === 'critical' ? 'impaired'
           : dep.severity === 'high' ? 'vulnerable'
           : 'vulnerable';
       } else {
-        chain.status = chain.substituteActive ? 'vulnerable'
+        chain.status = chain.resourceInputCondition === 'depleted' ? 'impaired'
+          : chain.substituteActive ? 'vulnerable'
           : chain.activatedByResource ? 'running'
           : chain.entrepot ? 'entrepot'
           : 'operational';
@@ -398,7 +437,8 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     });
   } else {
     activeChains.forEach(chain => {
-      chain.status = chain.substituteActive ? 'vulnerable'
+      chain.status = chain.resourceInputCondition === 'depleted' ? 'impaired'
+        : chain.substituteActive ? 'vulnerable'
         : chain.activatedByResource ? 'running'
         : chain.entrepot ? 'entrepot'
         : 'operational';
@@ -443,7 +483,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
     if (!downstream) return;
     const impaired = upstreamIds.some(uid => {
       const up = chainById[uid];
-      return up && (up.status === 'impaired' || up.resourceDepleted);
+      return up && (up.status === 'impaired' || up.resourceInputCondition === 'depleted');
     });
     const vulnerable = !impaired && upstreamIds.some(uid => {
       const up = chainById[uid];
@@ -627,7 +667,17 @@ const CHAIN_OUTPUT_INST_GATES = {
 };
 
 
-export function deriveExportsFromChains(activeChains, nearbyResources, tier, route, stressTypes = [], goodsToggles = {}, depletedResources = [], institutions = []) {
+export function deriveExportsFromChains(
+  activeChains,
+  nearbyResources,
+  tier,
+  route,
+  stressTypes = [],
+  goodsToggles = {},
+  depletedResources = [],
+  institutions = [],
+  worldLaw = null,
+) {
   // Isolated low-tier settlements are subsistence only — nothing leaves, no trade route exists
   const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
   if (route === 'isolated' && SUBSISTENCE_TIERS.includes(tier)) {
@@ -638,9 +688,18 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   const isOccupied = stressTypes.includes('occupied');
   const exports    = new Set();
 
-  const depletedKeys = new Set(depletedResources);
-  const chainIsDepleted = (chain) =>
-    chain.resourceDepleted || (chain.resource && depletedKeys.has(resourceLabelToKey(chain.resource)));
+  const depletedKeys = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
+  const chainIsDepleted = (chain) => {
+    if (chain.resourceInputCondition) {
+      return chain.resourceInputCondition === 'depleted';
+    }
+    return (
+      chain.resourceDepleted
+      || (chain.resource && depletedKeys.has(resourceKeyForLabel(chain.resource)))
+    );
+  };
 
   // 1. Raw material exports from nearby resources (what the land provides directly)
   // Skip depleted resources — they're consumed locally, nothing available to export
@@ -694,7 +753,10 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
   // Apply stress: siege collapses exports, occupation taxes them
   let list = [...exports];
   if (isSieged) {
-    list = route === 'port'
+    const maritimeSupply =
+      worldLaw?.supportsMaritime?.()
+      ?? route === 'port';
+    list = maritimeSupply
       ? list.slice(0, 3).map(e => `${e} (naval route only)`)
       : [];
   } else if (isOccupied) {
@@ -735,7 +797,16 @@ export function deriveExportsFromChains(activeChains, nearbyResources, tier, rou
 export function deriveImportsFromChains(activeChains, nearbyResources, tier, route, necessityImports = [], hasMagicTrade = false) {
   // Isolated low-tier settlements have no trade route — nothing comes in
   const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
-  if (route === 'isolated' && SUBSISTENCE_TIERS.includes(tier)) {
+  if (
+    !hasMagicTrade
+    && (
+      route === 'none'
+      || (
+        route === 'isolated'
+        && SUBSISTENCE_TIERS.includes(tier)
+      )
+    )
+  ) {
     return []; // no imports — self-sufficient or going without
   }
 
@@ -774,7 +845,7 @@ export function deriveImportsFromChains(activeChains, nearbyResources, tier, rou
   };
   activeChains.forEach(chain => {
     if (!chain.upstreamMissing || chain.upstreamMissing.length === 0) return;
-    if (route === 'isolated' && !hasMagicTrade) return; // isolated can't import (unless magic trade)
+    if (['isolated', 'none'].includes(route) && !hasMagicTrade) return;
     chain.upstreamMissing.forEach(missingId => {
       const label = UPSTREAM_IMPORT_LABELS[missingId];
       if (label) imports.add(label);
@@ -806,20 +877,36 @@ export function deriveImportsFromChains(activeChains, nearbyResources, tier, rou
 }
 
 /**
- * Derive localProduction from nearby resource commodities + locally-run chains.
+ * Derive localProduction from available resource commodities + locally-run chains.
  */
-export function deriveLocalProductionFromChains(activeChains, nearbyResources) {
+export function deriveLocalProductionFromChains(
+  activeChains,
+  nearbyResources,
+  depletedResources = [],
+) {
   const local = new Set();
+  const depleted = new Set(
+    depletedResources.map(resource => resourceKeyForLabel(resource) || resource),
+  );
 
   // 1. Terrain commodities — what the land intrinsically provides
   nearbyResources.forEach(rk => {
-    const rd = RESOURCE_DATA[rk];
+    const key = resourceKeyForLabel(rk) || rk;
+    if (depleted.has(key)) return;
+    const rd = RESOURCE_DATA[key];
     if (rd?.commodities) rd.commodities.forEach(c => local.add(c.replace(/_/g, ' ')));
   });
 
-  // 2. Outputs from chains activated by a local resource
+  // 2. Outputs from chains activated by an available local input. A depleted
+  // primary can still be listed as an impaired chain for diagnosis, but it
+  // cannot quietly contribute goods to the production ledger.
   activeChains
-    .filter(c => c.activatedByResource && c.status !== 'impaired')
+    .filter(c => (
+      c.activatedByResource
+      && c.status !== 'impaired'
+      && c.resourceInputCondition !== 'depleted'
+      && c.resourceInputAvailable !== false
+    ))
     .forEach(chain => chain.outputs.slice(0, 2).forEach(o => local.add(o)));
 
   return [...local];
@@ -862,10 +949,14 @@ const INSTITUTIONAL_SERVICE_MAP = [
   { patterns:['colosseum','arena','bardic college','opera house','multiple theater'],
     output:'Entertainment & cultural tourism', exportLabel:'Cultural tourism revenue',
     incomeLabel:'Entertainment & Culture', exportable:true, icon:'', color:'#7a3a1a' },
-  // Port / Maritime
-  { patterns:['docks/port','major port','navy'],
-    output:'Port & maritime services', exportLabel:'Maritime services (cargo, pilotage)',
-    incomeLabel:'Port Revenue', exportable:true, icon:'', color:'#1a4a6a' },
+  // Waterborne trade. A dock is valid on a river and therefore cannot, by
+  // itself, prove ocean-going commerce. The projection below promotes this to
+  // maritime wording only when an explicitly maritime institution survives
+  // the canonical world-law filter.
+  { patterns:['docks/port','major port','navy','shipyard'],
+    output:'Waterborne freight services', exportLabel:'Waterborne freight services (cargo, pilotage)',
+    incomeLabel:'Port Revenue', exportable:true, icon:'', color:'#1a4a6a',
+    waterborne:true },
   // Library / Knowledge
   { patterns:['great library','sage'],
     output:'Research & scholarly services', exportLabel:'Scholarly services (research access, rare texts)',
@@ -901,14 +992,19 @@ export function deriveInstitutionalServices(institutions = []) {
     if (matched.length === 0) return;
     if (usedLabels.has(def.incomeLabel)) return;
     usedLabels.add(def.incomeLabel);
+    const maritime = def.waterborne === true && matched.some(name => (
+      /\b(?:major port|navy|shipyard)\b/i.test(name)
+    ));
 
     services.push({
       type: 'institutional_service',
       label: def.incomeLabel,
       icon: def.icon,
       color: def.color,
-      output: def.output,
-      exportLabel: def.exportLabel,
+      output: maritime ? 'Port & maritime services' : def.output,
+      exportLabel: maritime
+        ? 'Maritime services (cargo, pilotage)'
+        : def.exportLabel,
       exportable: def.exportable,
       institutions: matched.slice(0, 2),
       status: 'operational', // services don't impair unless institution itself is gone

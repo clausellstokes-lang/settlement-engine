@@ -45,8 +45,18 @@ const WATER_TERRAIN = new Set(['coastal', 'riverside']);
  */
 export const getCompatibleResources = (route, terrain = null) =>
   Object.entries(RESOURCE_DATA).map(([key, r]) => {
-    const routeBlocked = (r.forbidden || []).includes(route);
+    // `port` describes connectivity, not water body. Riverside disambiguates
+    // it as a river port, so resource eligibility must use the river rules:
+    // fishing weirs and mill sites are valid; reefs and deep harbours are not.
+    const resourceRoute =
+      route === 'port' && terrain === 'riverside'
+        ? 'river'
+        : route;
+    const routeBlocked = (r.forbidden || []).includes(resourceRoute);
     const resTerrain = r.terrain || null; // desert, mountain, or null (universal)
+    const requiredTerrains = Array.isArray(r.terrainRequired)
+      ? r.terrainRequired
+      : null;
 
     // Water terrain override: if settlement terrain is coastal/riverside, water resources
     // are compatible regardless of trade route (a coastal road hamlet can still fish).
@@ -57,7 +67,14 @@ export const getCompatibleResources = (route, terrain = null) =>
 
     let compatible, incompatibleReason;
 
-    if (resTerrain) {
+    if (
+      requiredTerrains
+      && (!terrain || !requiredTerrains.includes(terrain))
+    ) {
+      compatible = false;
+      incompatibleReason =
+        `Only available in ${requiredTerrains.join(' or ')} terrain`;
+    } else if (resTerrain) {
       // Terrain-specific resource: only show when that terrain is selected
       if (!terrain) {
         compatible = false;

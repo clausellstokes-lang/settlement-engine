@@ -20,13 +20,24 @@ import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelp
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 
-function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, priorityReligion = 30, stressTypes = [], magicExists = false, institutions } = {}) {
+function town({
+  priorityEconomy = 50,
+  priorityCriminal = 20,
+  priorityMagic = 0,
+  priorityReligion = 30,
+  stressTypes = [],
+  magicExists = false,
+  institutions,
+  tradeRouteAccess = 'crossroads',
+  terrainType = 'plains',
+} = {}) {
   return {
     name: 'Gatewatch',
     tier: 'town',
     population: 2400,
     config: {
-      tradeRouteAccess: 'crossroads',
+      tradeRouteAccess,
+      terrainType,
       monsterThreat: 'frontier',
       magicExists,
       priorityEconomy,
@@ -82,6 +93,24 @@ describe('economic survival respects the actual economy', () => {
     for (let i = 1; i < scores.length; i++) {
       expect(scores[i]).toBeGreaterThanOrEqual(scores[i - 1]);
     }
+  });
+
+  test('only a maritime port receives the sea-supply resilience bonus', () => {
+    const institutions = [{ name: 'Granary' }];
+    const riverPort = generateDefenseProfile(town({
+      institutions,
+      tradeRouteAccess: 'port',
+      terrainType: 'riverside',
+    }));
+    const coastalPort = generateDefenseProfile(town({
+      institutions,
+      tradeRouteAccess: 'port',
+      terrainType: 'coastal',
+    }));
+
+    expect(coastalPort.scores.economic).toBeGreaterThan(
+      riverPort.scores.economic,
+    );
   });
 });
 

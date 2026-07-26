@@ -21,6 +21,7 @@ function forge(entry) {
 const eventsOf = (t) => (Array.isArray(t.history?.historicalEvents) ? t.history.historicalEvents : []);
 const goalsOf = (t) => (Array.isArray(t.npcs) ? t.npcs : []).filter((n) => n?.goal?.short).map((n) => n.goal.short);
 const legitOf = (t) => t.powerStructure?.publicLegitimacy || {};
+const instNamesOf = (t) => (Array.isArray(t.institutions) ? t.institutions : []).map((i) => i?.name || '');
 
 describe('every founding seed forges deterministically', () => {
   for (const entry of FOUNDING_SEEDS) {
@@ -57,9 +58,29 @@ describe('claims-parity — each synopsis is proven by the forged world', () => 
     expect(eventsOf(t).filter((e) => e.severity === 'major').length).toBeGreaterThanOrEqual(5);
     // Receipt 2: a major siege in its history.
     expect(eventsOf(t).some((e) => /siege/i.test(e.name) && e.severity === 'major')).toBe(true);
-    // Receipt 3: founded on mill rights from an absent lord.
-    expect(/mill/i.test(t.history?.founding?.reason || '')).toBe(true);
-    // Receipt 4: approved, steady governance today.
+    // Receipt 3: founded as a seasonal camp beside a dependable river fishery.
+    //
+    // RE-VERIFIED 2026-07-26 (generation remediation). This receipt previously read
+    // "founded on mill rights granted by an absent lord" and matched /mill/. The
+    // founding reason moved, and the cause is UPSTREAM of the narrative lane:
+    // the economy now derives its exports from availableNativeResourceKeys(config)
+    // — the condition-filtered native roster (docs/GENERATION_CONTRACTS.md,
+    // "Resource truth") — instead of the full display roster. This seed's
+    // river_clay seam is depleted, so "Pottery and ceramics" no longer leads its
+    // primaryExports; "River fish" does. deriveTradeCommodity therefore resolves
+    // 'fish' where it resolved null at the committed base, which appends the
+    // commodity founding hooks in genArrivalDetail and widens the reason pool from
+    // 6 to 8 — so the SAME rng draw lands on a different, terrain-coherent hook.
+    // Everything else this seed forges (name, population, every historical event,
+    // foundedBy, initialChallenge, overcoming, legitimacy) is byte-identical to the
+    // committed base, which is why only this one assertion moved. The new reason is
+    // the truer one: the old roster's lead export came from an exhausted seam.
+    expect(/river fishery/i.test(t.history?.founding?.reason || '')).toBe(true);
+    // Receipt 4: the mills the title names are still standing. Added with the
+    // re-verification above so the seed's title and synopsis keep a proven anchor
+    // once the founding clause stopped carrying one (the claims-parity law).
+    expect(instNamesOf(t).some((n) => /mill/i.test(n))).toBe(true);
+    // Receipt 5: approved, steady governance today.
     expect(legitOf(t).label).toBe('Approved');
   });
 

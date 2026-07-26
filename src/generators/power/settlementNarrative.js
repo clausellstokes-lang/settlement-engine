@@ -35,7 +35,7 @@ const STRESS_RUMORS = [
     `${rel.npc1Name}'s relationship with ${rel.npc2Name} is more complicated than their public roles suggest. ${rel.tension}`,
   (rel) => {
     var typeName;
-    return `There is a ${((typeName = rel.typeName) == null ? void 0 : typeName.toLowerCase()) || 'significant'} between ${rel.npc1Name} and ${rel.npc2Name}. ${rel.tension}`;
+    return `The relationship between ${rel.npc1Name} and ${rel.npc2Name} is best understood as ${((typeName = rel.typeName) == null ? void 0 : typeName.toLowerCase()) || 'significant'}. ${rel.tension}`;
   },
   (rel) => rel.tension,
 ];
@@ -51,6 +51,14 @@ const resolvePartyPair = (a, fallbackA, b, fallbackB) => {
   const second = b || fallbackB;
   const samePlace = (first || '').trim().toLowerCase() === (second || '').trim().toLowerCase();
   return samePlace ? [first, null] : [first, second];
+};
+
+// Values such as "the town council" are intentionally lower-case when used
+// mid-sentence elsewhere. Capitalise only at the interpolation sites that open
+// a new sentence, preserving the canonical display name in every other context.
+const sentenceStart = value => {
+  const text = String(value || '').trim();
+  return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
 };
 
 // genSuccessionNarr — build a list of narrative sentences from a settlement
@@ -131,19 +139,19 @@ export const genSuccessionNarr = (ctx) => {
   }
   if (ctx.topTension === 'religious_tension')
     narratives.push(
-      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${ctx.govFaction || 'The council'} has avoided taking sides so far, which means both factions resent it equally.`
+      `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${sentenceStart(ctx.govFaction || 'The council')} has avoided taking sides so far, which means both factions resent it equally.`
     );
   if (ctx.topTension === 'guild_conflict')
     narratives.push(
-      `The guild dispute in ${ctx.name} is not about craft standards — it is about who controls access to the market. ${ctx.topFaction || 'The dominant guild'} has held the advantage long enough that the challengers have stopped playing by guild rules.`
+      `The guild dispute in ${ctx.name} is not about craft standards — it is about who controls access to the market. ${sentenceStart(ctx.topFaction || 'The dominant guild')} has held the advantage long enough that the challengers have stopped playing by guild rules.`
     );
   if (ctx.topTension === 'external_threat' && ctx.neighbor)
     narratives.push(
-      `${ctx.name} is watching ${ctx.neighbor} and does not like what it sees. ${ctx.govFaction || 'The council'} and ${ctx.milForce || 'the garrison'} disagree about what to do about it, and that disagreement is now public.`
+      `${ctx.name} is watching ${ctx.neighbor} and does not like what it sees. ${sentenceStart(ctx.govFaction || 'The council')} and ${ctx.milForce || 'the garrison'} disagree about what to do about it, and that disagreement is now public.`
     );
   if (ctx.topTension === 'external_threat' && !ctx.neighbor)
     narratives.push(
-      `The threat approaching ${ctx.name} is not yet visible to most residents. ${ctx.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
+      `The threat approaching ${ctx.name} is not yet visible to most residents. ${sentenceStart(ctx.topNPCName || 'The most senior figure')} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
     );
   if (ctx.topTension === 'resource_scarcity' && ctx.commodity) {
     const [numbersTop, numbersGov] = resolvePartyPair(
@@ -151,13 +159,13 @@ export const genSuccessionNarr = (ctx) => {
     );
     narratives.push(
       numbersGov
-        ? `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${numbersTop} knows the real numbers. ${numbersGov} has been told a different version.`
-        : `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${numbersTop} knows the real numbers and has kept them close.`
+        ? `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${sentenceStart(numbersTop)} knows the real numbers. ${sentenceStart(numbersGov)} has been told a different version.`
+        : `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${sentenceStart(numbersTop)} knows the real numbers and has kept them close.`
     );
   }
   if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
     narratives.push(
-      `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${ctx.govFaction || 'The council'} controls the allocation.`
+      `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${sentenceStart(ctx.govFaction || 'The council')} controls the allocation.`
     );
   if (ctx.topTension === 'crime_wave')
     narratives.push(
@@ -165,7 +173,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'magical_controversy')
     narratives.push(
-      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${ctx.govFaction || 'The council'} is being pressured to regulate — by people who disagree about what regulation means.`
+      `Magic in ${ctx.name} has done something recently that people cannot agree on how to interpret. ${sentenceStart(ctx.govFaction || 'The council')} is being pressured to regulate — by people who disagree about what regulation means.`
     );
   if (ctx.topTension === 'generational_divide')
     narratives.push(
@@ -177,7 +185,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.topTension === 'disputed_land')
     narratives.push(
-      `A land dispute in ${ctx.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${ctx.govFaction || 'The council'} has delayed ruling because there is no outcome that does not cost them something.`
+      `A land dispute in ${ctx.name} that was dormant is now active — someone filed a claim, or found a document, or simply started pressing. ${sentenceStart(ctx.govFaction || 'The council')} has delayed ruling because there is no outcome that does not cost them something.`
     );
   if (ctx.topTension === 'population_friction')
     narratives.push(

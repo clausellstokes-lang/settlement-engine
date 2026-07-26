@@ -48,6 +48,10 @@ const GENERATORS_DIR = path.resolve(HERE, '../../src/generators');
 
 const FLAT_CFG = {
   settType: 'town',
+  // Mixed is intentionally neutral in cultureInstitutionMultiplier. These
+  // pure probability assertions isolate relationship dynamics from the new,
+  // independently tested cultural institution weighting.
+  culture: 'mixed',
   priorityEconomy: 50,
   priorityMilitary: 50,
   priorityReligion: 50,

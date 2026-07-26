@@ -97,8 +97,8 @@ export const HISTORY_DESC_VARIANTS = Object.freeze({
     "The pestilence lingered {duration} seasons, thinning the families it reached and pushing every institution to the edge of what it could bear",
   ],
   "great_flood": [
-    "The water came up with almost no warning and remade the {location}, drowning livelihoods and unsettling every question of who owned what",
-    "A flood rose fast over the {location}, carrying off livelihoods and leaving the ownership of half the ground in doubt",
+    "The water came up with almost no warning and remade {location}, drowning livelihoods and unsettling every question of who owned what",
+    "A flood rose fast across {location}, carrying off livelihoods and leaving the ownership of half the ground in doubt",
   ],
   "heresy_trial": [
     "A charge of heresy laid against a well-known figure divided the faithful and pulled the secular powers in on either side of it",
