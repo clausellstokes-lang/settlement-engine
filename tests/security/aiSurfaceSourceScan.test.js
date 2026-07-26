@@ -8,11 +8,21 @@
  * "AI is a bucketing clerk, never a writer; free text is flavor/receipt ONLY; typed
  * buckets alone touch the engine" — must hold per surface, not just at the one wall.
  *
- * THE CENSUS (the wall against an N-1 sweep): the AI-surface roster is DISCOVERED from
- * source — every supabase/functions/<fn> whose code calls the model. It is NEVER a
- * hand-list that can silently drift. A NEW model-calling edge surface that appears
- * without a disposition in AI_SURFACE_WALLS reds THIS test loudly (census completeness),
- * rather than shipping an un-walled surface a green suite would hide.
+ * THE CENSUS (the wall against an N-1 sweep) is TWO-SIDED, because an AI surface has two
+ * halves and either one can exist without the other:
+ *   - the EDGE side — every supabase/functions/<fn> whose code calls the model;
+ *   - the CLIENT side — every edge slug the browser actually invokes (see the client
+ *     transport census below).
+ * Both are DISCOVERED from source; neither is a hand-list that can silently drift. A NEW
+ * model-calling edge surface, or a NEW client transport, that appears without a disposition
+ * in AI_SURFACE_WALLS reds THIS test loudly (census completeness), rather than shipping an
+ * un-walled surface a green suite would hide.
+ *
+ * WHY THE CLIENT SIDE IS NOT REDUNDANT: an edge-directory walk cannot see a transport whose
+ * edge half is not in the tree. `src/lib/tableClerk.js` invokes 'table-clerk', a live AI
+ * transport whose edge function has never existed here — so before the client pass, the
+ * census asserted NOTHING about it and no disposition was ever required. A surface deployed
+ * out-of-band must fail the census, not hide from it.
  *
  * THE PER-SURFACE PROOF (the disposition manifest): each surface declares HOW its model
  * output is kept off typed engine state:
@@ -26,12 +36,16 @@
  *                 census tripwire fires if a future seam is wired without a disposition.
  *   - 'byok'    → a key/health management transport; returns status, never engine state.
  * The scan then reads each surface's seam and asserts the declared guard is present.
+ * An entry may also carry `edge: 'absent'` — the client transport is live but no edge
+ * directory exists here (the server half is an owner-gated fold). The marker is checked
+ * both ways: an un-declared dir-less AI surface reds, and so does an 'absent' marker on a
+ * surface whose directory has since landed (the fold must re-enter the edge census).
  *
  * @enforced-by this test
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
-import { resolve, join } from 'node:path';
+import { resolve, join, relative, sep } from 'node:path';
 
 const ROOT = resolve(process.cwd());
 const FN_DIR = join(ROOT, 'supabase', 'functions');
@@ -63,6 +77,72 @@ const AI_SURFACES = readdirSync(FN_DIR, { withFileTypes: true })
   .filter(callsModel)
   .sort();
 
+/** Every edge directory present in the tree (model-calling or not) — the deploy denominator. */
+const EDGE_DIRS = new Set(
+  readdirSync(FN_DIR, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && d.name !== '_shared')
+    .map((d) => d.name),
+);
+
+// ── The DISCOVERED client transports: every edge slug the BROWSER invokes ────
+// Discovery here is INDEPENDENT of supabase/functions/ presence — that independence IS
+// the point (see the header): a directory walk is blind to a transport whose edge half
+// is not in the tree.
+//
+//   PASS A (direct) — the slug is a literal at the call site: `invoke('slug')`, or a
+//     `functions/v1/<slug>` URL for the streaming surfaces. Precise, so single-word
+//     slugs ('interview') are included.
+//   PASS B (indirect) — a file that calls `functions.invoke(<variable>)` demonstrably
+//     routes slugs through a helper, a const, or a ternary; lib/surveyorWrite.js posts
+//     six AI surfaces that way. In THOSE FILES ONLY, every kebab-shaped string literal
+//     is taken as a candidate slug, plus any single-word literal naming a real edge
+//     directory. Restricting Pass B to indirect routers is what keeps it noise-free.
+//
+// ACCEPTED GAPS of a regex gate (hand-audited 2026-07-26 — all 23 slugs discovered today
+// are real edge targets; zero false positives):
+//   - a slug ASSEMBLED from fragments (`'construct-' + scope`) is invisible to both
+//     passes. Write the slug as a whole literal, or add the surface to a manifest by hand.
+//   - inside an indirect-router file, a single-word slug that has no edge directory is
+//     missed — the kebab shape is what keeps Pass B from harvesting ordinary prose.
+// Both gaps fail SAFE toward review, never toward a silently-unwalled surface: the
+// manifests below are exact-set checked, so a hand-added entry cannot go stale either.
+const SLUG = '[a-z][a-z0-9]*(?:-[a-z0-9]+)*';
+const DIRECT_INVOKE = new RegExp(`(?:functions\\s*\\.\\s*invoke\\s*\\(\\s*['"\`]|functions/v1/)(${SLUG})`, 'g');
+const INDIRECT_INVOKE = /functions\s*\.\s*invoke\s*\(\s*[A-Za-z_$]/;
+const KEBAB_LITERAL = /['"`]([a-z][a-z0-9]*(?:-[a-z0-9]+)+)['"`]/g;
+const WORD_LITERAL = /['"`]([a-z][a-z0-9]*)['"`]/g;
+
+function clientFilesUnder(dir) {
+  return readdirSync(dir).flatMap((name) => {
+    const p = join(dir, name);
+    if (statSync(p).isDirectory()) return clientFilesUnder(p);
+    return /\.(js|jsx|ts|tsx)$/.test(name) ? [p] : [];
+  });
+}
+
+/** slug → the set of client files that invoke it (forward-slashed, so CI agrees on any OS). */
+function discoverClientTransports() {
+  const found = new Map();
+  const add = (slug, rel) => {
+    if (!found.has(slug)) found.set(slug, new Set());
+    found.get(slug).add(rel);
+  };
+  const SRC = join(ROOT, 'src');
+  if (!existsSync(SRC)) return found;
+  for (const abs of clientFilesUnder(SRC)) {
+    const src = readFileSync(abs, 'utf8');
+    const rel = relative(ROOT, abs).split(sep).join('/');
+    for (const m of src.matchAll(DIRECT_INVOKE)) add(m[1], rel);
+    if (INDIRECT_INVOKE.test(src)) {
+      for (const m of src.matchAll(KEBAB_LITERAL)) add(m[1], rel);
+      for (const m of src.matchAll(WORD_LITERAL)) if (EDGE_DIRS.has(m[1])) add(m[1], rel);
+    }
+  }
+  return found;
+}
+
+const CLIENT_TRANSPORTS = discoverClientTransports();
+
 // ── The per-surface disposition manifest ─────────────────────────────────────
 // Each rostered surface MUST have an entry. `seam` is the client-side module where the
 // model output is consumed; `walls` are the deterministic symbols that must appear in
@@ -84,6 +164,13 @@ const AI_SURFACE_WALLS = Object.freeze({
   'construct-realm':     { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildConstructVocabulary'] },
   'interpret-session':   { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['buildOpVocabulary'] },
   'surveyor-autonomy':   { disposition: 'walled', seam: 'src/lib/surveyorWrite.js', walls: ['validateStopCondition', 'validateNudge'] },
+  // The Session Ledger's bucketing clerk. The edge returns RAW proposals; the pure client
+  // schema wall (domain/tableLedger.reviewClerkProposals) re-validates every bucket against
+  // the closed vocabulary, so an off-vocabulary bucket lands in `rejected`, never `accepted`
+  // — the wall holds even against a compromised edge. Discovered by the CLIENT pass only:
+  // no supabase/functions/table-clerk exists in this tree (owner-gated fold), which is
+  // exactly the blind spot the client census closes.
+  'table-clerk':         { disposition: 'walled', seam: 'src/lib/tableClerk.js', walls: ['reviewClerkProposals'], edge: 'absent' },
   // Read-only prose ANSWERS — never reach typed state (the grounding they read is typed).
   'ai-analyst':          { disposition: 'display', seam: 'src/lib/aiAnalyst.js',       answerField: 'answer' },
   'interview':           { disposition: 'display', seam: 'src/lib/interview.js',        answerField: 'answer' },
@@ -93,6 +180,26 @@ const AI_SURFACE_WALLS = Object.freeze({
   'parley':              { disposition: 'none' },
   // A key/health management transport — returns status rows, never engine state.
   'surveyor-byok':       { disposition: 'byok', seam: 'src/lib/surveyorByok.js' },
+});
+
+// ── The non-AI client transports (the explicit allowlist, each with its reason) ───
+// Every client-invoked edge that is NOT an AI surface is named here, so that "this slug
+// carries no model output" is a RECORDED claim rather than an absence. A new transport is
+// undeclared until someone writes the line — and the reverse check below deletes the line
+// when the transport goes away, so the allowlist cannot rot into blanket permission.
+// A slug may never appear here AND in AI_SURFACE_WALLS; the honesty test enforces that.
+const NON_AI_CLIENT_TRANSPORTS = Object.freeze({
+  'account-actions':         'the account/support desk RPC bus — tickets, preferences, retro-claims. No model call.',
+  'admin-actions':           'the operator console RPC bus — rollups, moderation and health rows. No model call.',
+  'auth-recovery':           'security-question account recovery. No model call.',
+  'create-checkout':         'Stripe checkout session creation. No model call.',
+  'create-customer-portal':  'Stripe billing portal link minting. No model call.',
+  'founder-transfer':        'the founder-seat transfer/buyback state machine. No model call.',
+  'ingest-events':           'the analytics event sink. No model call.',
+  'og-image':                'the social share-card renderer. No model call.',
+  'send-email':              'transactional lifecycle email dispatch. No model call.',
+  'verify-checkout-session': 'post-checkout entitlement verification. No model call.',
+  'verify-single-dossier':   'single-dossier purchase verification. No model call.',
 });
 
 describe('AI-surface source scan — census completeness (the wall against an N-1 sweep)', () => {
@@ -113,8 +220,86 @@ describe('AI-surface source scan — census completeness (the wall against an N-
   });
 
   it('the manifest carries no stale entry (every disposition maps to a live surface)', () => {
-    const stale = Object.keys(AI_SURFACE_WALLS).filter((s) => !AI_SURFACES.includes(s));
-    expect(stale, `AI_SURFACE_WALLS names surfaces not in the discovered roster: ${stale.join(', ')}`).toEqual([]);
+    // A manifest entry is REAL if it was discovered on either side — a model-calling edge
+    // directory, or a client transport that invokes it. An entry backed by neither is
+    // fiction, and fiction in a census is how a retired surface leaves ghost headroom.
+    const stale = Object.keys(AI_SURFACE_WALLS)
+      .filter((s) => !AI_SURFACES.includes(s) && !CLIENT_TRANSPORTS.has(s));
+    expect(
+      stale,
+      `AI_SURFACE_WALLS names surfaces discovered on NEITHER side — no model-calling edge `
+      + `directory AND no client invocation. Delete the dead entry: ${stale.join(', ')}`,
+    ).toEqual([]);
+  });
+});
+
+describe('AI-surface source scan — the CLIENT transport census (an edge directory is not required)', () => {
+  it('client discovery is non-vacuous, and keeps the three hard cases (guard-the-guard)', () => {
+    // If discovery collapses, every check below passes vacuously. These three are the
+    // shapes that broke earlier drafts of the scanner — keep them pinned by name.
+    expect(CLIENT_TRANSPORTS.size).toBeGreaterThanOrEqual(20);
+    for (const [slug, why] of [
+      ['table-clerk', 'pass A; an AI transport with NO edge directory at all — the whole reason this pass exists'],
+      ['construct-realm', 'pass B; assigned by a ternary and posted through a helper, never a literal at the call'],
+      ['interview', 'pass A; a single-word slug, which a kebab-only pattern silently drops'],
+    ]) {
+      expect(CLIENT_TRANSPORTS.has(slug), `client discovery lost '${slug}' (${why})`).toBe(true);
+    }
+  });
+
+  it('every client-invoked edge is dispositioned (an AI wall, or a named non-AI transport)', () => {
+    const undeclared = [...CLIENT_TRANSPORTS.keys()]
+      .filter((s) => !(s in AI_SURFACE_WALLS) && !(s in NON_AI_CLIENT_TRANSPORTS))
+      .sort();
+    expect(
+      undeclared,
+      `these edge functions are invoked from client code with NO disposition. The browser `
+      + `talks to them, so the finite-semantics law applies whether or not the edge half is `
+      + `in this tree. Either give the surface an AI_SURFACE_WALLS entry (shadow/walled/`
+      + `display/none/byok — plus edge:'absent' if no directory exists yet), or record it in `
+      + `NON_AI_CLIENT_TRANSPORTS with the reason it carries no model output: `
+      + undeclared.map((s) => `${s} (invoked by ${[...CLIENT_TRANSPORTS.get(s)].join(', ')})`).join('; '),
+    ).toEqual([]);
+  });
+
+  it('the non-AI allowlist stays honest (no stale row, and no AI surface hiding in it)', () => {
+    const stale = Object.keys(NON_AI_CLIENT_TRANSPORTS).filter((s) => !CLIENT_TRANSPORTS.has(s));
+    expect(
+      stale,
+      `NON_AI_CLIENT_TRANSPORTS names transports no client invokes any more — delete the row `
+      + `rather than leaving standing permission for a slug nothing uses: ${stale.join(', ')}`,
+    ).toEqual([]);
+
+    const smuggled = Object.keys(NON_AI_CLIENT_TRANSPORTS)
+      .filter((s) => AI_SURFACES.includes(s) || s in AI_SURFACE_WALLS);
+    expect(
+      smuggled,
+      `these are declared non-AI but DO call the model (or already carry an AI disposition) — `
+      + `a model-calling surface may never be waved through the non-AI allowlist: ${smuggled.join(', ')}`,
+    ).toEqual([]);
+  });
+
+  it("an AI surface with no edge directory is declared out-of-band (edge: 'absent')", () => {
+    const undeclaredOutOfBand = Object.entries(AI_SURFACE_WALLS)
+      .filter(([name, m]) => !EDGE_DIRS.has(name) && m.edge !== 'absent')
+      .map(([name]) => name);
+    expect(
+      undeclaredOutOfBand,
+      `these AI surfaces have a client transport but NO supabase/functions/<name> directory. `
+      + `That is a surface deployed out-of-band: mark it edge:'absent' so the gap is recorded, `
+      + `or land the edge half: ${undeclaredOutOfBand.join(', ')}`,
+    ).toEqual([]);
+
+    // The marker cannot rot: once the edge lands, the surface must re-enter the EDGE census
+    // (where MODEL_CALL scans its real server code) instead of coasting on a stale claim.
+    const rotted = Object.entries(AI_SURFACE_WALLS)
+      .filter(([name, m]) => m.edge === 'absent' && EDGE_DIRS.has(name))
+      .map(([name]) => name);
+    expect(
+      rotted,
+      `these carry edge:'absent' but their edge directory now EXISTS — drop the marker so the `
+      + `edge-side census scans the newly-landed server half: ${rotted.join(', ')}`,
+    ).toEqual([]);
   });
 });
 
@@ -171,14 +356,19 @@ describe('AI-surface source scan — the wall proven per surface', () => {
     },
   );
 
-  it('parley (none): no client invocation seam is wired (nothing to breach)', () => {
+  it("a 'none' surface has no client invocation seam (nothing to breach)", () => {
     // parley is a live server-side surface with no client apply path in the tree. If one is
-    // ever wired, this reds — forcing the maintainer to declare its disposition + wall.
-    const offenders = clientFilesInvoking('parley');
+    // ever wired, this reds — forcing the maintainer to declare its disposition + wall. The
+    // check now rides the shared client census, so a slug reaching invoke() through a helper
+    // or a const is caught too, not only a literal at the call site.
+    const wired = Object.entries(AI_SURFACE_WALLS)
+      .filter(([name, m]) => m.disposition === 'none' && CLIENT_TRANSPORTS.has(name))
+      .map(([name]) => `${name} (invoked by ${[...CLIENT_TRANSPORTS.get(name)].join(', ')})`);
     expect(
-      offenders,
-      `a client seam now invokes the 'parley' edge — declare its finite-semantics disposition `
-      + `in AI_SURFACE_WALLS (walled/display) and wall its output before it can ship: ${offenders.join(', ')}`,
+      wired,
+      `a client seam now invokes an edge declared 'none' — declare its finite-semantics `
+      + `disposition in AI_SURFACE_WALLS (walled/display) and wall its output before it can `
+      + `ship: ${wired.join('; ')}`,
     ).toEqual([]);
   });
 
@@ -219,6 +409,31 @@ describe('AI-surface source scan — self-checks (the detectors mean what they c
     expect(MODEL_CALL.test("await supabaseAdmin.from('gallery').select('*')")).toBe(false);
   });
 
+  it('the direct-invoke detector reads a literal slug and a functions/v1 URL', () => {
+    const slugs = (s) => [...s.matchAll(DIRECT_INVOKE)].map((m) => m[1]);
+    expect(slugs("await supabase.functions.invoke('table-clerk', { body })")).toEqual(['table-clerk']);
+    expect(slugs('fetch(`${base}/functions/v1/generate-narrative`, init)')).toEqual(['generate-narrative']);
+    expect(slugs("await supabase.functions.invoke('interview', { body })")).toEqual(['interview']);
+    expect(slugs("await supabase.from('gallery').select('*')")).toEqual([]);
+  });
+
+  it('the indirect-router detector separates a variable slug from a literal one', () => {
+    // Pass B only harvests inside files that route a slug through a variable — this is the
+    // predicate that keeps the harvest from running over the whole of src/.
+    expect(INDIRECT_INVOKE.test('supabase.functions.invoke(slug, { body })')).toBe(true);
+    expect(INDIRECT_INVOKE.test('supabase.functions.invoke(FN_NAME, { body })')).toBe(true);
+    expect(INDIRECT_INVOKE.test("supabase.functions.invoke('admin-actions', { body })")).toBe(false);
+  });
+
+  it('the kebab harvest reads a ternary-assigned slug and skips a bare word', () => {
+    const harvest = (s) => [...s.matchAll(KEBAB_LITERAL)].map((m) => m[1]);
+    expect(harvest("const slug = scope === 'realm' ? 'construct-realm' : 'construct-settlement';"))
+      .toEqual(['construct-realm', 'construct-settlement']);
+    // The documented Pass B gap: a single word is NOT harvested unless it names an edge dir.
+    expect(harvest("const FN = 'parley';")).toEqual([]);
+    expect([..."const FN = 'parley';".matchAll(WORD_LITERAL)].map((m) => m[1])).toEqual(['parley']);
+  });
+
   it('the typed-write detector flags an AI text write into typed state', () => {
     // Prove the wall would RED a regression that routed model text into the engine.
     const bad = 'set(state => { state.settlement = aiData; });';
@@ -255,15 +470,5 @@ function braceBody(src, open) {
   return '';
 }
 
-/** Every client (src/) file that invokes the given edge slug. */
-function clientFilesInvoking(slug) {
-  const SRC = join(ROOT, 'src');
-  const re = new RegExp(`invoke\\(\\s*['"\`]${slug}['"\`]|functions/v1/${slug}\\b`);
-  const walk = (dir) => readdirSync(dir).flatMap((name) => {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) return walk(p);
-    if (!/\.(js|jsx|ts|tsx)$/.test(name)) return [];
-    return re.test(readFileSync(p, 'utf8')) ? [p.replace(ROOT + '/', '')] : [];
-  });
-  return existsSync(SRC) ? walk(SRC) : [];
-}
+// (`clientFilesInvoking` was retired here: the 'none'-disposition tripwire now rides the
+//  shared CLIENT_TRANSPORTS census, which also catches helper- and const-routed slugs.)
