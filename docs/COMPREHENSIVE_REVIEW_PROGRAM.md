@@ -1315,6 +1315,46 @@ families; closure 31/31 VERIFY_DIST green (Δ0); domain-strict 0; tsc 0; docs
 (23+3 mutation-proven / 125 rationaled / 199 uncovered shrink-only burn-down).
 NEXT = TRANCHE 3 (spell-break + error-copy + non-taste kill-list) → close-out →
 HALT per owner stop line.**
+**⬛⭐⭐⭐ THE DEPLOY-SAFETY SITTING: 12 RULINGS RECORDED + WAVE 8 LANDED (2026-07-26
+evening, owner order: "do all of these" over queue items 6-17).** RULINGS (all
+vetoable, recorded in-place in OWNER_DECISION_QUEUE.md): D1 CSP enforce-at-deploy
+(no pre-launch traffic to soak; zero-violation browse at deploy; one-line
+rollback) · M1 Wave 8 as its own respec'd wave WITH the policy amendment (CRIT-1
+full-clawback stands for every reversal class; goodwill = credit grants; the
+leniency half of H20 retired) · M2 pack refunds claw back in full, balance may go
+NEGATIVE · T9 rehearsal-first sequencing · D4 admin-actions after client release
+(amr machinery CONFIRMED WIRED: checkTwoKey+decodeJwtAmr @ admin-actions:48,
+enforcement ~424-435) · D7 Connect at PUSH#3 before founder-transfer activation ·
+T8 merge authorized-in-advance at THE VERY END · M35 reclaim-first (FP-2b/2c +
+92973282) · M31 keep-NUL-with-allowlist · M32 RF-shape-canonical → CLOSED EMPTY
+by measurement · M33 recovery-redirect checked at merge · M34 paid-surface
+re-affirmed · T11 no code flip exists (VITE_SUPPORT_EMAIL is the mechanism).
+WAVE 8 LANDED @ 2725780e/02ae1d6f/91ec7c22: limiter (fail-closed 30/h user +
+90/h IP), M11 token-or-deadline gate (4s), mig 189 member-privacy parity (leak
+was goal/gender/power; two-direction mutation proofs EXECUTED), mig 190
+credit-pack clawback RPC (negative-balance netting proven in pglite). Checker
+runs: vitest 246/246 · webhook deno 115/115 · validate:edge 69. THE OWNER'S DESK
+@ 478e8e13: OWNER_CONSOLE_RUNSHEET (every owner-physical act, in order) +
+LEGAL_CONSULT_PACKET (T10 packet; 4 repo copy-defects queued as M41) +
+MASTER_MERGE_PLAN re-survey addendum, both copies. ⭐⭐ THE RE-SURVEY HEADLINE:
+THE MASTER MERGE ALREADY EXECUTED 2026-07-15 @ 0168e287 (568 conflicts, W2-W6
+verified in history); master is an ANCESTOR of composite-r4; the remaining acts
+are W7 gate evidence + W8 owner FAST-FORWARD PR of ~1,577 commits. RF is a
+ledger/marketing lane — NEVER merge it toward master (M39). New queue items
+M38-M41 (historical-mig in-place edits 024/057 · RF disposition · orphan
+cherry-picks · refund-copy contradictions). COMPOSITE PUSH: still origin-less
+BY THE GATE'S OWN HONEST HAND — attempt 3 wedged when the live lane ran npm
+install (pg/three) UNDER the running test stage (546 worker crashes, killed at
+1h20m/0% CPU; new hazard class: gates and installers cannot share a tree);
+attempt 4 rejected in seconds by a fresh tsc red at settlementSlice.js:1195 —
+the live writer's comment-prose contains a literal /** @type example that tsc
+parses as a nested type comment (THEIR active hunk; not repaired, per the
+foreign-WIP law). The golden itself is now GREEN in-tree (the live lane
+re-captured it; 3/3 verified). VERDICT AFFIRMED: the push belongs to the
+remediation lane's CLOSE from a quiet tree — everything code-side is ready;
+AND THE CLOSE HAS VISIBLY BEGUN: the live lane landed its first commit
+(9201597f, tier-shift required-contract + parity ratchet) minutes after the
+tsc red. Interim backup = the Desktop bundle refreshed THROUGH 9201597f.**
 **⬛⭐⭐⭐ GOVERNANCE REUNIFIED + THE OWNER QUEUE CONSOLIDATED (2026-07-26, owner
 order: "re-unify governance in one sitting").** Four rulings, each vetoable:
 (1) THE 07-24 PIVOT RATIFIED-BY-BANKING — PRODUCT_COMPLETION_ARCHITECTURE's

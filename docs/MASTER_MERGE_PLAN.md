@@ -645,3 +645,250 @@ adversarially re-verified against git before this document was committed. Episte
 statements marked CONFIRMED carry executed git evidence from this survey; PLAUSIBLE items
 (614f6509 auth redirect, 780edc10 export-shape hole, cherry-pick cleanliness of ab1c30ba/
 ccd0d670) are flagged at their sites with the exact experiment that settles each.
+
+
+---
+
+# APPENDED 2026-07-26 — RE-SURVEY ADDENDUM (measured; supersedes the plan above at execution level)
+
+> Appended identically to BOTH checkouts' copies per the one-truth law. The plan
+> above is retained as the historical record; THIS section is the live state.
+> HEADLINE: the merge ALREADY EXECUTED 2026-07-15 (W1 @ 0168e287, 568 conflicts,
+> W2-W6 verified in history); master is an ANCESTOR of claude/composite-r4;
+> master->composite is a zero-conflict fast-forward of 1,573 commits. Remaining:
+> W7 full-gate evidence on the composite tip + W8 owner PR/merge button.
+
+# RE-SURVEY ADDENDUM — docs/MASTER_MERGE_PLAN.md
+
+**Measured 2026-07-26 23:11–23:16 EDT, read-only, from `/Users/cstokes/Desktop/settlement-engine` (on `review-fixes-2026-07-08` @ 16f92435).**
+Plan written 2026-07-14 @ 209e8aa2. Plan file is byte-identical across both checkouts (`shasum -a 256` → `a3a8d0a7…16a7e075` in `/Users/cstokes/Desktop/settlement-engine/docs/MASTER_MERGE_PLAN.md` and `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold/docs/MASTER_MERGE_PLAN.md`).
+
+---
+
+## §A0 THE HEADLINE — THE PLAN WAS EXECUTED; THE RE-SURVEY IS AN AFTER-ACTION REPORT
+
+```
+git merge-base --is-ancestor d024286e claude/composite-r4   # exit 0 → YES
+git merge-base d024286e claude/composite-r4                 # d024286ee2  (= master itself)
+git rev-list --count master..claude/composite-r4            # 1573
+```
+
+**`master` @ d024286e is already an ancestor of `claude/composite-r4`.** All 308 master commits past BASE are inside the composite. `master → claude/composite-r4` is a **pure fast-forward, zero conflicts, 1573 commits**.
+
+The absorption point, and the wave chain, from `git log --format='%h %ad %s' --date=short d024286e..claude/composite-r4 | grep -iE 'MASTER MERGE'`:
+
+| Commit | Date | Wave |
+|---|---|---|
+| `0168e287` | 2026-07-15 | **W1 — the merge commit: 568 conflicts resolved per MASTER_MERGE_PLAN §4/§5** (parents `8c430c5b` + `d024286e`) |
+| `de9b0361` | 2026-07-15 | W2 — fence + screening sweep |
+| `c89a5372` | 2026-07-15 | W3a — behavior ports (seven fixes) |
+| `76c28e45` | 2026-07-16 | W4 — byte-integrity (F24), controlBytes pin lands |
+| `30ff6b6a` | 2026-07-16 | W5 — guard-port + entity-link consumer layer wired end to end |
+| `f79d5cf1` … `830e2b23` | 2026-07-16 | W6 parts 1–8 (test estate; security batch 70 files / 774 tests green) |
+| `22bec368` | 2026-07-16 16:02 | `Merge branch 'review-fixes-2026-07-08' into claude/master-merge-r1` |
+
+`claude/master-merge-r1` still exists @ `22bec368`. **W7/W8 (full constitutional gate, owner push + PR into master) show no wave commit** — that is the open tail.
+
+**Plan's C1 prediction 554 → actual resolved 568.** Within 2.5%; the plan's sizing held.
+
+---
+
+## §A1 FRESH TIPS vs PINNED TIPS
+
+```
+git rev-parse --short master review-fixes-2026-07-08 claude/composite-r4
+git rev-list --count acf59a00..<ref>
+```
+
+| Lineage | Plan pinned (2026-07-14) | FRESH (2026-07-26 23:11) | Δ commits past BASE `acf59a00` |
+|---|---|---|---|
+| **master** | `d024286e` (2026-07-05 14:02) | **`d024286e` — UNMOVED** | 308 → **308** (0) |
+| **RF** `review-fixes-2026-07-08` | `5a78af5a` (343 past BASE) | **`16f92435`** (2026-07-26 16:51) | 343 → **1109** (+766) |
+| **composite** `claude/composite-r4` | *(did not exist)* | **`2e037f62`** (2026-07-26 16:50) | — → **1881** |
+
+Composite tip re-checked at 23:15 EDT: still `2e037f62` (no live-session drift during this survey). The minifold worktree has 10 modified tracked files uncommitted (`git -C .../minifold status --short`) — an in-flight lane, not new history.
+
+**Topology correction the plan cannot have known:** RF and composite are **no longer linear**.
+```
+git merge-base 16f92435 claude/composite-r4      # 185cb8d2
+git rev-list --count 16f92435..claude/composite-r4   # 1279
+git rev-list --count claude/composite-r4..16f92435   # 507
+```
+Fork point `185cb8d2` (2026-07-16 15:56, "Ledger: W6 COMPLETE … the fold-in executes"). Composite absorbed RF there via `22bec368`; RF then ran on for **507 commits**. Master commits inside each lineage: **composite 308/308, RF 0/308**.
+
+**RF's 507 unique commits are almost entirely non-code.** `git diff --name-only 185cb8d2 review-fixes-2026-07-08` → 57 paths: 33 `docs/`, 22 `marketing/`, 2 skill files. RF is now the **ledger/marketing branch**; the composite is the code.
+
+---
+
+## §A2 CONFLICT CENSUS REFRESH (file-set overlaps, not merge-tree)
+
+```
+BASE=acf59a00
+M=$(git diff --name-only $BASE master | sort)
+C=$(git diff --name-only $BASE claude/composite-r4 | sort)
+R=$(git diff --name-only $BASE review-fixes-2026-07-08 | sort)
+comm -12 / -23 / -13  on those sets
+MADDS=$(git diff --diff-filter=A --name-only $BASE master | sort)   # C2/C3 split
+```
+
+| Axis | Paths changed | Intersection (C1 candidates) | master-only | other-only |
+|---|---|---|---|---|
+| **master ↔ composite-r4** | 1576 / 4335 | **1400** | **176** | 2935 |
+| master ↔ RF | 1576 / 1934 | 919 | 657 | 1015 |
+| RF ↔ composite-r4 | 1934 / 4335 | 1878 | 56 | 2457 |
+
+Channel refresh (master-only split by `--diff-filter=A`):
+
+| Channel | Plan (vs RF, 2026-07-14) | Fresh vs RF | **Fresh vs composite** | Meaning |
+|---|---|---|---|---|
+| C1 conflicts | 554 | *(overlap 919)* | *(overlap 1400)* | **moot — resolved at `0168e287`, 568 actual** |
+| C2 silent adds | 433 | 435 | **144** | 289 master adds **deliberately deleted** by W2/W6 |
+| C3 silent mods | 241 | 222 | **32** | 190 master mods absorbed; 32 reverted to BASE |
+
+The 176 master-only paths vs composite are **not un-merged work** — they are the executed fence. `git diff --diff-filter=D --name-only master claude/composite-r4 | wc -l` → **163 files master has that the composite deliberately deleted** (24 `tests/store`, 22 `tests/components`, 14 `src/components`, 13 `src/domain`, 13 `tests/lib`, 6 `public/backgrounds`, …).
+
+**Fence verification — `git cat-file -e <ref>:<path>` matrix (master / RF / composite):**
+
+| File | master | RF | composite | Plan disposition | Honored? |
+|---|---|---|---|---|---|
+| `src/components/settlement/WarFaithSection.jsx` | YES | – | **–** | §4.2 fence 2: `git rm` | ✅ |
+| `src/components/settlement/Workshop.jsx` | – | – | – | drop-or-quarantine | ✅ (already gone) |
+| `src/components/settlement/PrimaryDeityPicker.jsx` | YES | – | **–** | drop | ✅ |
+| `src/hooks/useDossierExportAccess.js` | YES | – | **–** | drop-or-quarantine | ✅ |
+| `src/lib/tierBackdrop.js` + `public/backgrounds/tiers/*.jpg` | YES | – | **–** | adapt-or-drop (metropolis vocab) | ✅ dropped |
+| `src/components/gallery/MapGalleryDetail.jsx` | YES | – | **–** | drop-or-adapt (dangling import) | ✅ |
+| `src/lib/copyGuard.js` | YES | – | **YES** | ruling #5: keep, default OFF | ✅ carried |
+| `src/components/primitives/EntityLink.jsx` | YES | – | **YES** | §5.3 W5 wiring | ✅ carried + wired @ `30ff6b6a` |
+| `src/pdf/primitives/EntityRef.jsx` | YES | – | **YES** | §5.3 | ✅ |
+
+### The 20 highest-risk intersecting paths (master ∩ composite), ranked by master↔composite churn
+
+Filtered to money/schema/store/migrations/edge-money; churn = `git diff --numstat master claude/composite-r4 -- <path>` added+deleted. **All 20 are already resolved inside `0168e287`+; this is the audit surface, not a merge queue.**
+
+| # | Path | Churn |
+|---|---|---|
+| 1 | `src/store/settlementSlice.js` | 2161 |
+| 2 | `supabase/functions/stripe-webhook/index.ts` | 2003 |
+| 3 | `supabase/functions/stripe-webhook/index.test.ts` | 1789 |
+| 4 | `src/store/campaignWorldPulseSlice.js` | 1636 |
+| 5 | `src/store/campaignSlice.js` | 1356 |
+| 6 | `src/store/aiSlice.js` | 922 |
+| 7 | `src/store/campaignSliceShared.js` | 664 |
+| 8 | `src/store/customContentSlice.js` | 553 |
+| 9 | `supabase/functions/admin-actions/index.test.ts` | 526 |
+| 10 | `supabase/functions/admin-actions/index.ts` | 512 |
+| 11 | `src/components/PricingPage.jsx` | 433 |
+| 12 | **`src/domain/settlement.schema.js`** | 412 |
+| 13 | **`src/store/authSlice.js`** (TIER_GATE) | 380 |
+| 14 | `supabase/functions/create-checkout/index.test.ts` | 313 |
+| 15 | `supabase/functions/account-actions/index.test.ts` | 304 |
+| 16 | `supabase/functions/create-checkout/index.ts` | 258 |
+| 17 | `supabase/functions/account-actions/index.ts` | 256 |
+| 18 | `src/domain/customContentSchema.js` | 250 |
+| 19 | `src/store/mapSlice.js` | 240 |
+| 20 | `src/store/campaignPulseHelpers.js` | 237 |
+
+(Full high-risk intersection under that regex: **228 paths**.)
+
+---
+
+## §A3 MIGRATION COLLISION — THE PREDICTION WAS WRONG IN THE SAFE DIRECTION
+
+```
+git ls-tree -r --name-only <ref> -- supabase/migrations | wc -l
+git diff --name-status master claude/composite-r4 -- supabase/migrations
+join -j1 <(… master numbers) <(… composite numbers) | awk '$2!=$3'   # filename collisions
+```
+
+| Branch | Chain length | Head | `supabase/applied-head.json` | Pending |
+|---|---|---|---|---|
+| master | 112 | 112 | **112** (appliedAt 2026-07-05) | none |
+| RF | 136 | 136 | **117** (2026-07-08) | 118–136 |
+| composite-r4 | **188** | 188 | **117** (2026-07-08) | **118–188 (71 undeployed)** |
+
+**Number collisions master ↔ composite: ZERO.** The `join`+`awk` filename-collision probe returns empty. Composite's 113–188 are all `A` (pure adds) against master. **The plan's predicted "118–131 zone + third-lineage religion-arc collision" did not materialize** — wave 1 `1713c37c`'s renumber-onto-master's-chain held, and every later lane renumbered into free space (e.g. RF ledger `267265ca`: "migration renumbered 180→174").
+
+**Exact content collisions — same number, same filename, DIFFERENT content (4 files, master vs composite):**
+
+| Migration | master vs comp | RF vs comp | Verdict |
+|---|---|---|---|
+| `015_welcome_credit.sql` | **identical** | differs | composite took **master's** copy (plan §4.1 predicted auto-merge-to-master) ✅ |
+| `018_account_billing_models_credits.sql` | **differs** | identical | composite took **RF's** PII scrub (`e9db663d`) ✅ |
+| `101_drop_privileged_email_backdoor.sql` | **differs** | identical | composite took **RF's** OWNER_EMAIL seam ✅ |
+| `024_billing_retention_and_atomic_mutations.sql` | **differs** | **differs** | ⚠️ **NEW — composite-only in-place edit** |
+| `057_enforce_account_status_writes.sql` | **differs** | **differs** | ⚠️ **NEW — composite-only in-place edit** |
+
+**The new collision class the plan never saw** — composite retro-edited two long-applied historical migrations:
+```
+git diff master claude/composite-r4 -- supabase/migrations/024_billing_retention_and_atomic_mutations.sql
+-    when 'narrative' then 3        +    when 'narrative' then 5
+-    when 'progression' then 5      +    when 'progression' then 6
+```
+Identical two-line edit in `057`. Both are the `spend_credits` fallback CASE ladder. Provenance is documented and deliberate — `supabase/migrations/174_pricing_optimal_margins.sql` header lines 34–44 state the three-surface repricing (`ai_credit_costs` UPDATE, the 161 `spend_credits` bodies, the `defaults` fallback) and lines 60–62 give the rollback recipe. **But 024 and 057 are already applied in prod (appliedHead 117); editing them changes replay-from-scratch semantics only.** This is a money-path divergence between the repo's historical record and prod's actual applied bytes — an owner-queue item, not a defect.
+
+---
+
+## §A4 THE PLAN'S STALE CONSTANTS
+
+| Plan claim (2026-07-14) | Fresh value | Status |
+|---|---|---|
+| Budget const `1,216,350` @ `d33c8ff8`; `1,215,520` @ drift tip `9fe425a7` | **composite `CLOSURE_BUDGET_BYTES = 1_040_000`** (`tests/build/vendorPdfLazy.test.js:426`); **RF `1_066_400`** (`:389`, last touched `5a560d4b` RATCHET #10, 2026-07-16) | **STALE by 175,520 B.** Ratchet ran ≥10 times since. RF's copy is now itself stale by 26,400 B vs composite. |
+| "margin 77 B" | composite `docs/KERNEL_K1_BUDGET_SHEET.md:73`: **entry static closure = 1,039,995 B, Δ0** → **margin 5 B**; `docs/GOLDEN_SHIFT_LEDGER.md:1055` records a later lane at **1,030,661 B (9,339 B under)** | tighter than ever; the "1,039,977 / margin 23 B" figure in your brief survives only in **RF docs** (`COMPREHENSIVE_REVIEW_PROGRAM.md:1385`, `KERNEL_MAX_PROGRAM.md:22`) — superseded on the composite. |
+| "master's `vendorPdfLazy.test.js` has NO closure ratchet" (§5.5) | confirmed — `git show master:tests/build/vendorPdfLazy.test.js \| grep BUDGET` → empty | ✅ still true |
+| applied-head: master 112 vs RF 117 | **master 112, RF 117, composite 117** | ✅ unchanged; §8 queue item #4 **still open** (prod-DB verification never recorded) |
+| any-cast ceiling `2252` | **`const CEILING = 2252` on both RF and composite** (`tests/lint/domainAnyCastBaseline.test.js:63`) | ✅ held exactly; `GOLDEN_SHIFT_LEDGER` shows "2252 holes (2213 any + 39 suppress) — EXACT" at 6 separate wave checkpoints |
+| §3-4/§4.4 `TIER_GATE.free.export` must resolve RF | master `export: true`, RF `false`, **composite `false`**; `maxTier` master `metropolis`, RF/composite **`capital`** | ✅ **both paid-surface rulings survived the merge** |
+| pinned tips `5a78af5a` / `d024286e` | see §A1 | RF moved +766; master unmoved |
+
+---
+
+## §A5 SCHEMA FIELD DELTA — THE OWNER-GATED ITEM (§8 queue 3b) IS RESOLVED
+
+```
+git show <ref>:src/domain/settlement.schema.js | wc -l
+git diff --numstat acf59a00 <ref> -- src/domain/settlement.schema.js
+comm -23 <(… master @property names) <(… composite @property names)
+```
+
+| Ref | Lines | Added vs BASE |
+|---|---|---|
+| BASE `acf59a00` | 1220 | — |
+| master | 1656 | **+542 / −106** (plan's figure ✅) |
+| RF | 1623 | **+407 / −4** (plan's figure ✅) |
+| **composite-r4** | **1768** | **+555 / −7** |
+
+master ↔ composite diff: **262 insertions / 150 deletions**.
+
+**Field-level (`@property` names): master-only = 0. composite-only = 43.** master 181 props, composite 224. Exported surface identical (`diff` of `^export (const|function)` → empty); `SCHEMA_VERSION = 1`, `SIMULATION_VERSION = 1`, `GENERATOR_VERSION = '0.9.0'` identical across all three.
+
+**Verdict: the composite is a strict superset of master's persistence shape. §8 queue item 3b — "enumerate and adjudicate which master-only schema fields the merged shape keeps" — has an empty answer set. Close it.** (Sample of master-only field names requested: none exist.)
+
+---
+
+## §A6 W0–W8 WAVE LIST — WHAT TODAY MADE MOOT vs HARDER
+
+**MOOT (executed, verified):**
+- **W0–W6** — all landed `0168e287`…`830e2b23`. W2 fence verified file-by-file (§A2 matrix). W4's controlBytes pin landed (`76c28e45`). W5's entity-link wiring landed (`30ff6b6a`). W6's security batch: 70 files / 774 tests green (`c9231292`).
+- **§8 queue 3b** (schema delta) — empty answer set (§A5).
+- **§4.1 migration renumbering fear** — zero number collisions at 188 files (§A3).
+- **§6 satellite `151a8ee3`** (persist-gap): `git merge-base --is-ancestor 151a8ee3 <ref>` → **in composite AND in RF**. Landed.
+- **§4.3 `ec6120e3`** ("the ONE confirmed un-ported master fix"): **in composite, NOT in RF** — arrived with the merge, exactly as designed.
+
+**STILL OPEN (`--is-ancestor` = NOT on either tip):** `ab1c30ba` (mapOverlayThumbContract), `ccd0d670` (QuickInspector docstring + mapChains flag), `c0600f8c` (master-side F24 NUL fixes), `263e53e0` (controlBytes source commit), `92973282` (perf first-paint). W4/W5 landed the *intent* of `c0600f8c`/`263e53e0` by hand-reapplication as the plan directed; `ab1c30ba`/`ccd0d670` have no visible landing.
+
+**HARDER now than the plan assumed:**
+1. **W8's target changed shape.** Plan: "open the PR into master" from `claude/master-merge-r1` @ RF-tip+merge. Reality: the PR head must be **`claude/composite-r4` @ 2e037f62** — 1573 commits, fast-forward. `claude/master-merge-r1` @ `22bec368` is 10 days and ~1550 commits stale.
+2. **RF ≠ the code branch anymore.** The plan's whole vocabulary ("RF wins") is obsolete: RF's 507 post-fold commits touch 33 docs + 22 marketing files and **two source files** — `src/components/generate/WizardCommitBand.jsx` and `tests/ui/adminPanel.mobileGate.smoke.test.jsx` — both **deliberately removed on the composite** (`c722c99b` "C1r-a: config stage restored to master's single-surface panel"; `151f8ac3` W6 part 6). Nothing in RF needs merging into master. Merging RF into master would *regress* the tree.
+3. **RF's budget const is now a stale fork** (1,066,400 vs composite 1,040,000). Any doc quoting RF's number — `START_HERE.md:102`, `THE_APLUS_EXECUTION_ARCHITECTURE.md:219,260`, `KERNEL_MAX_PROGRAM.md:22` — is 26,400 B loose. Divergent copies of a constitutional invariant across two live branches is the §4.5 "one enforcement point per contract" law violated at the branch level.
+4. **Migration deploy grew 3.7×.** Plan: sequence 118–131 (14). Now: **118–188 (71)**, applied-head still 117, and **the 024/057 in-place repricing edits** are a new prod-vs-repo reconciliation item the plan's §8-4 never contemplated.
+5. **W7 never got a wave commit.** No "MASTER MERGE W7" in the log. The full constitutional gate on the *merged* tree — the thing that licenses W8 — is unevidenced; 1573 commits of subsequent lane work sit on top of an ungated merge.
+
+---
+
+## §A7 VERDICT — 5 LINES
+
+1. **The merge is done.** `master` is an ancestor of `claude/composite-r4`; 568 conflicts were resolved on 2026-07-15 per this plan's own §4/§5 dispositions, and W2–W6 executed verifiably (fences held, both paid-surface rulings survived, schema is a strict superset, any-cast at 2252 exact). This document is an after-action report, not a merge plan.
+2. **Sequencing collapses to one step.** `master → claude/composite-r4` is a **fast-forward, zero conflicts, 1573 commits**. There is nothing to resolve, nothing to re-survey per-file, and no reason to re-run §9's censuses as a merge-prep exercise — the 176 "master-only" paths are the fence you already built, not work you owe.
+3. **Retire `review-fixes-2026-07-08` as a code branch.** It carries 0/308 master commits, has diverged 507 commits since fold-in `185cb8d2`, and holds exactly two source files the composite deliberately deleted. Its live budget const (1,066,400) is a stale fork of a constitutional invariant. Keep it as the ledger/marketing lane or reconcile it onto the composite — but do not merge it toward master.
+4. **The real remaining gate is W7, not W1–W6.** Run `npm run check` (build-backed: closure ≤ 1,040,000, verify:dist, goldens, edge bundles regenerated with sourceHash parity, e2e) on `2e037f62` and quote every number. 1573 commits of lane work sit on top of a merge whose full-gate evidence was never committed.
+5. **Two owner items the plan couldn't have queued, both money-shaped.** (a) `024`/`057` were edited in place to reprice narrative 3→5 / progression 5→6 — deliberate per `174_pricing_optimal_margins.sql`, but it desynchronizes repo history from prod's applied bytes. (b) `applied-head.json` is 117 against a 188-file chain — **71 pending migrations** vs the plan's 14, still never verified against the live prod DB (§8-4, open since 2026-07-14). Everything else in §8 is closed or moot.
