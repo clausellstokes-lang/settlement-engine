@@ -1153,3 +1153,212 @@ honest capture is possible from this tree right now.
 | `tests/data/foundingSeeds.probe.test.js` | 6 passed |
 | `tests/generators/generationCertificationCorpus.test.js` | 12 passed |
 | `tests/property/generatorGoldenMaster.test.js` | 84 city keys drifted — 60 owned here, 24 pre-existing (above) |
+
+## 2026-07-26 — cascade seats carry `required:false` (owner-ratified producer fix)
+
+`src/generators/cascadeGenerator.js`, at the cascade seat (~line 197): the pushed
+record now writes **`required: false`** *after* the `...data` spread, so the
+override wins over the borrowed catalog value. One line of code; the rest of the
+change is comment and pins.
+
+### The immunity lie
+
+The cascade's job is to seat a BORROWED lower-tier catalog def at a higher tier —
+a hamlet's `Subsistence farming` inside a village, a town's `Town watch` inside a
+city. It carried the whole def forward (`{ name, category, tier, ...data, source:
+'cascade', … }`), and `...data` dragged the SOURCE tier's `required: true` onto a
+record that nothing at the seating tier requires. `required` is scoped to the tier
+whose catalog declares it; a cascade addition is a probabilistic second chance,
+never this tier's contract. The assemble pass already seats everything the tier
+genuinely requires, and the cascade skips whatever is already on the roster — so a
+cascade record's `required` is *always* borrowed, never earned.
+
+### The two reader sites that believed it
+
+The roster-side half of this fix already shipped and is KEPT — `hasOwnRequiredContract`
+in `src/domain/generationOwnership.js` scopes the flag's authority for the generator
+cleanup path (`isProtectedGenerationEntity`). But that guard is roster-local, and
+three non-roster predicates read `record.required` straight off the object:
+
+| site | expression | effect of the borrowed flag |
+| --- | --- | --- |
+| `src/domain/worldPulse/institutionLifecycle.js` (`isClosableInstitution`) | `if (inst.required \|\| inst.requiredForTier) return false;` | immune to economic closure |
+| `src/domain/worldPulse/institutionLifecycle.js` (the `abolish` apply-time guard) | `if (target.required \|\| target.requiredForTier) return settlement;` | immune to moral/martial abolition |
+| `src/domain/spatial/calamity.js` (`isStrikeTarget`) | `if (inst.required === true) return false;` | immune to calamity strikes |
+
+A cascade-added `Subsistence farming` or `Access to external mill` was therefore
+**immortal** — never declines, never closes, never burns.
+
+### Executed proof (read-only probe, 48 settlements across four tier configs)
+
+256 cascade-added records, **0** with `required !== false`; 68 of them borrowed from a
+catalog def that declares `required: true`. On those 68, evaluating the site
+expressions against the post-fix record and against the reconstructed pre-fix record
+(same record, borrowed flag re-attached):
+
+| predicate | PRE (borrowed `required:true`) | POST (`required:false`) |
+| --- | --- | --- |
+| `abolish` guard refuses | `true` (immune) | `false` (eligible) |
+| `calamity.isStrikeTarget` | `false` (immune) | `true` (eligible) |
+| `isClosableInstitution` | `false` | `false` — see the residual below |
+
+**Residual, deliberately not touched.** `isClosableInstitution` has a SECOND,
+name-keyed gate after the flag check: `catalogEntryByName(inst.name)` →
+`if (entry.spec.required) return false`. For all 68 borrowed records the lowest-tier
+catalog spec also says `required`, so closure immunity survives the flag flip on that
+path. That gate is a deliberate legacy/imported-roster backstop (its own comment says
+so) and changing it is a separate reader-side ruling with a much wider blast radius.
+Abolition and calamity immunity ARE removed. Recorded, not a bug to re-find.
+
+### Pins
+
+- `tests/joins/cascade.test.js` — generation side: "a cascade seat never carries the
+  source tier's `required` contract". Forces `rng → 0` across all four tiers × every
+  multi-processor chain, asserts `add.required === false` on every seat, and asserts
+  the check is **not vacuous** (`borrowed > 0`: real catalog defs on those seats do
+  declare `required: true`).
+- `tests/domain/institutionLifecycle.test.js` — reader side: a
+  `{ cascadeAdded: true, required: false }` record is abolished normally, while the
+  same record carrying the borrowed `required: true` is refused (same-reference no-op).
+  Plus one line on the existing closable test.
+- No new test FILE — both are in-style additions to existing files, so no manifest or
+  ratchet obligation is created.
+
+### Golden impact — MEASURED, FIXTURE NOT WRITTEN
+
+Measured by replicating `generatorGoldenMaster.test.js`'s 523-row corpus and
+`sha256(JSON.stringify(settlement))` in a read-only probe, hashed twice: once against
+the live tree, once against an **off-tree copy of `src/`** with only this override
+removed (the live worktree was never reverted — concurrent sessions are writing it).
+
+| corpus state | drifted keys | by tier |
+| --- | --- | --- |
+| without this fix (the tree's prior state) | **84** | `city 84` |
+| with this fix | **187** | `city 84`, `village 84`, `town 19` |
+| **attributable to this fix** | **+103, −0** | `village 84`, `town 19` |
+
+The 84 pre-existing city keys are unchanged in COUNT (they were already drifting for
+the depletion tuning + foreign generator edits ledgered above; this fix moves bytes
+inside some of them too, invisibly). The new keys are **every** village grid row
+(84/84 = 12 cultures × 7 terrains) and 19 of the 103 town rows — 12 of those 19 are
+`forest|isolated` (every culture), i.e. the isolated towns whose rosters leave the
+required-flagged hamlet entries open for the cascade to fill. `thorp`, `hamlet` and
+`metropolis` do not move at all. `UPDATE_GOLDEN=1` was **not** run: the manifest is
+still contaminated by other lanes' in-flight edits, and the standing rule holds — ONE
+re-capture from a quiet tree at lane close.
+
+### Persisted settlements are NOT migrated (deliberate deferral)
+
+Settlements generated before this fix keep their borrowed `required: true` on disk.
+For them the lifecycle and calamity immunity **persists until regeneration**;
+`hasOwnRequiredContract` covers only their generator-cleanup path, because it reads
+`cascadeAdded` and is roster-local. A data migration was considered and **NOT done** —
+it would rewrite persisted world state to change a live simulation's behaviour, which
+is owner-gated. Deliberately deferred, documented, not a bug to re-find; the owner can
+order the migration (walk `institutions[]`, force `required: false` where
+`cascadeAdded === true`) whenever they want the existing corpus healed.
+
+### Regression gate after the change (all single-threaded)
+
+| suite | result |
+| --- | --- |
+| `cascade` + `institutionLifecycle` + `customContentReferencePack.matrix` + `coherenceRepairPass` | **4 files / 60 tests passed** |
+| `tests/domain/distribution.test.js` + `tests/simulation/distributionEnvelopes.test.js` | **2 files / 40 tests passed** — ENVELOPE 3 hot-count **1 of the ≤5 bound** (corpus 0.53%, worst single 16.7% @ `city/envelope-0`). The restated exceedance-count bound absorbs the reroll; the retired max statistic would have tripped on that 16.7%. |
+| `resourceEdits` + `resourceDynamicsLifecycle` + `undoLastEvent` + `ports` + `foundingSeeds.probe` | **5 files / 70 tests passed** |
+| `tests/generators/captureBirthScale.test.js` | **8 passed** (43 s) |
+| `tests/generators/generationCertificationCorpus.test.js` | **12 passed** |
+| no-chain-pair invariant sweep, 600 settlements (6 tiers × 100 seeds, 43 `UPGRADE_CHAINS` pairs each) | **0 violations** — the invariant the roster-side fix bought is preserved |
+
+## 2026-07-26 — THE ONE-PASS GOLDEN RE-CAPTURE (generation lane close)
+
+`UPDATE_GOLDEN=1 npx vitest run tests/property/generatorGoldenMaster.test.js --no-file-parallelism`
+was run **once**, at the close of the generation-remediation lane, discharging the
+re-capture the two entries above deliberately left owed. **187 of the 523 keys changed
+value; the key SET is unchanged (523 → 523, identical membership) and all 523 hashes
+remain distinct.** `git diff --stat` on the fixture reads `187 insertions(+), 187
+deletions(-)` — every changed line is a re-hashed value, no key added or removed.
+Fixture sha256 `6a9abf14…f215f` → `ef3c8931…6140d`. The capture run itself:
+
+```
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Duration  9.63s
+```
+
+### The drift, by tier — exactly the shape the two prior entries predicted
+
+| tier | rows in corpus | keys changed |
+| --- | --- | --- |
+| `city` | 84 | **84** (all) |
+| `village` | 84 | **84** (all) |
+| `town` | 103 | **19** |
+| `thorp` / `hamlet` / `metropolis` | 84 each | **0** |
+
+The 19 town rows are 12 × `forest|isolated` (one per culture, the `mediterranean`
+compatibility alias included), `germanic|plains|isolated`, and the six `gm-seed-b` /
+`gm-seed-c` rows (`plains|road`, `auto|random_trade`, `mountain|random_trade`) — the
+isolated towns whose rosters leave required-flagged hamlet entries open for the
+cascade to fill, plus the seed-sensitivity rows that land on the same seat.
+
+### The four attributed causes
+
+| # | cause | measured keys | its entry |
+| --- | --- | --- | --- |
+| (a) | `DEPLETION_PROB.city` **0.55 → 0.35**, owner-ratified tuning | **60**, all `city` | "city resource-depletion tuning (OWNER RULING…)" above |
+| (b) | roster-side borrowed-`required` fix (`hasOwnRequiredContract`) — the OLD goldens encoded rosters **violating** the no-chain-pair invariant | part of the residual **24** `city` | the same entry, plus the producer-fix entry above |
+| (c) | producer fix — cascade seats write `required: false` | **+103** = `village` 84 + `town` 19 | "cascade seats carry `required:false` (owner-ratified producer fix)" above |
+| (d) | concurrent sessions' generator edits (`historyGenerator.js`, `narrative/historyCoherence.js`, `src/data/foundingSeeds.js`, `generationContext.js`, `cascadeGenerator.js`) | the rest of the residual **24** `city` | not this lane's work — recorded so this capture is not silently credited to (a)–(c) |
+
+(a) was measured at **exactly 60 city keys** by an off-tree probe *before* this
+capture, while the 84-key city block was already drifting. The residual **24** city
+keys therefore belong jointly to (b) and (d) and were **never separated by
+measurement**; they are reported as a joint residual, not attributed to either alone.
+(c) additionally moves bytes *inside* some of the 84 city keys invisibly — their
+count did not change, their hashes did.
+
+### The frozen double-run proof
+
+After the capture the same file was run **twice** with no flag, single-threaded, both
+fully green — the manifest is frozen against the tree it was captured from:
+
+```
+=== RUN 1 ===
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  23:22:10
+   Duration  10.03s (transform 938ms, setup 33ms, import 1.30s, tests 8.60s, environment 0ms)
+
+=== RUN 2 ===
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  23:22:24
+   Duration  10.27s (transform 720ms, setup 25ms, import 991ms, tests 9.15s, environment 0ms)
+```
+
+The three tests are the manifest-exists check, the corpus-membership check ("no keys
+added/removed without a manifest update"), and the 523-row byte-identity check. The
+fixture's sha256 was identical after both runs (`ef3c8931…6140d`) — the no-flag path
+writes nothing.
+
+### PDF golden — GREEN AS-WAS, nothing rewritten
+
+`npx vitest run tests/pdf/goldenViewModel.test.js --no-file-parallelism` → **4 passed**
+on the first try. No update flag was used and no snapshot was rewritten
+(`tests/pdf/__snapshots__` is clean in `git status`). Its fixed seed
+(`parity-town-2026`, a `town`) is not one of the 19 town rows this capture moved, and
+its snapshot covers `SHARED_FIELDS` canon values, which a cascade seat's `required`
+flag does not reach.
+
+### Standing conditions on this manifest
+
+- **This is a LIVE integration branch.** The capture is honest only for the tree as of
+  **2026-07-26 23:21 EDT**. Any later generator edit — from this lane or a concurrent
+  one — will legitimately re-red this manifest; that is the guard working, not a
+  regression. Whoever re-captures **must bring their own ledger entry** naming the
+  cause and its measured key count, exactly as (a)–(d) above. Never run
+  `UPDATE_GOLDEN=1` merely to make a red go away.
+- **Persisted settlements are NOT migrated.** Worlds generated before the producer fix
+  still carry the borrowed `required: true` on their cascade-added institutions and
+  keep their abolition/calamity immunity until regeneration. The data migration was
+  considered and deliberately deferred as **owner-gated** — documented, not a bug to
+  re-find (see the producer-fix entry's own deferral note for the exact walk).

@@ -293,6 +293,11 @@ describe('institutionLifecycle — necessity ordering inputs', () => {
     expect(isClosableInstitution({ name: 'Old mill', status: 'removed' })).toBe(false);
     expect(isClosableInstitution({ name: 'Old mill', _worldPulseInactive: true })).toBe(false);
     expect(isClosableInstitution({ name: 'Bathhouse', category: 'Services' })).toBe(true);
+    // A cascade seat is a probabilistic second chance, never this tier's contract:
+    // it arrives with required:false and stays exposed like any other filler.
+    expect(isClosableInstitution({
+      name: 'Bathhouse', category: 'Services', source: 'cascade', cascadeAdded: true, required: false,
+    })).toBe(true);
   });
 });
 
@@ -454,6 +459,28 @@ describe('institutionLifecycle — outcome application', () => {
     expect(applyInstitutionLifecycleOutcome(town, outcome({ saveId: 'a', action: 'close', name: 'Town granary' }))).toBe(town);
     expect(applyInstitutionLifecycleOutcome(town, outcome({ saveId: 'a', action: 'close', name: "Thieves' Guild" }))).toBe(town);
     expect(applyInstitutionLifecycleOutcome(town, outcome({ saveId: 'a', action: 'close', name: 'Never Existed' }))).toBe(town);
+  });
+
+  it('a cascade-added record is not required-immune (the borrowed flag no longer shields it)', () => {
+    // The cascade seats borrowed lower-tier catalog defs at a higher tier. That
+    // def's `required` belongs to the tier that declares it, so the seat now
+    // writes required:false — and this guard, which reads the flag straight off
+    // the record, must let the record through (owner-ratified 2026-07-26).
+    const cascaded = (patch = {}) => ({
+      name: 'Slave market', category: 'criminal_economy', status: 'active',
+      source: 'cascade', cascadeAdded: true, cascadeBoost: 1.4, ...patch,
+    });
+    const abolish = outcome({ action: 'abolish', name: 'Slave market', fate: 'abolished' });
+
+    const honest = applyInstitutionLifecycleOutcome(
+      smithyTown({ institutions: [cascaded({ required: false })] }), abolish,
+    );
+    expect(honest.institutions[0]).toMatchObject({ status: 'remnant', _worldPulseMorallyAbolished: true });
+
+    // The pre-fix shape — the same record carrying the SOURCE tier's borrowed
+    // flag — was immune: the guard refused and returned the settlement unchanged.
+    const borrowed = smithyTown({ institutions: [cascaded({ required: true })] });
+    expect(applyInstitutionLifecycleOutcome(borrowed, abolish)).toBe(borrowed);
   });
 
   it('no-ops on malformed outcomes with the same reference', () => {

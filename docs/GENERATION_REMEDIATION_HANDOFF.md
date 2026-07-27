@@ -462,14 +462,22 @@ As of 2026-07-26 evening, `tests/property/generatorGoldenMaster.test.js` is RED
 with exactly **84 drifted keys, all `city|…`**, attributed by read-only probe
 (no fixture write):
 
-- **60 keys** — the owner-ratified `DEPLETION_PROB.city` 0.55 → 0.35 tuning
-  (ledger entry "2026-07-26 — city resource-depletion tuning" has the full
-  candidate table and the rejected-0.30 rationale; the flat town↔city step at
-  0.35 is the recorded owner-veto surface: "go lower" = city 0.30 + town 0.25).
-- **24 keys** — FOREIGN drift from concurrent sessions' generator edits landed
-  after the manifest's 04:23 capture (`cascadeGenerator.js`,
-  `generationContext.js`, `historyGenerator.js`,
-  `narrative/historyCoherence.js`, `src/data/foundingSeeds.js`).
+Three overlapping legitimate causes (each measured independently; the per-key
+split overlaps and is not exactly recoverable from a moving tree — what
+matters is that every cause is known and ledgered):
+
+- **The owner-ratified `DEPLETION_PROB.city` 0.55 → 0.35 tuning** — measured
+  alone at 60 city keys (ledger entry "2026-07-26 — city resource-depletion
+  tuning" has the candidate table; the flat town↔city step at 0.35 is the
+  recorded owner-veto surface: "go lower" = city 0.30 + town 0.25).
+- **The cascade borrowed-`required` invariant fix** (`hasOwnRequiredContract`
+  in `generationOwnership.js`) — measured alone at 84 city keys, exactly the
+  corpus configs whose old goldens encode rosters that VIOLATE the
+  no-chain-pair invariant (83 violations per 600 settlements before; 0 after).
+  Those goldens were pinning a bug.
+- **Concurrent sessions' generator edits** after the manifest's 04:23 capture
+  (`historyGenerator.js`, `narrative/historyCoherence.js`,
+  `src/data/foundingSeeds.js`, `generationContext.js`).
 
 `UPDATE_GOLDEN=1` was deliberately NOT run: capturing mid-flight would bank the
 foreign 24 under this lane's name and silently green another lane's gate — the
@@ -492,9 +500,49 @@ proof and a ledger note attributing the foreign 24 to their own commits.
 | edge-shared hash (1) | regenerated |
 | plot hooks (1) | mis-specified max → exceedance-count (manager authority; base failed it too) |
 | chain stability (1) | owner "tune depletion down": DEPLETION_PROB.city 0.55→0.35; test green with margin |
-| cascade pair (1) | cascade-borrowed `required` scoped via hasOwnRequiredContract (agent report pending at write time) |
+| cascade pair (1) | REAL invariant breach (83/600 settlements): cascade-borrowed `required` read as protection, freezing ladder collapse; authority scoped via hasOwnRequiredContract; producer-side alternative measured (187 vs 84 golden keys + envelope trip) and rejected — "veto" flips it |
 | verify:dist vendorPdfLazy | owner "pins + 673,000": engine 694,344→670,707, importers 68→46; tests/build 285/285 |
 
 Remaining red at write time: generatorGoldenMaster (84 keys, above) — by design
 until lane close. A claimed rulingStructure "sibling" of the ports defect was
 REFUTED by execution (see the defect-class note in section A above).
+
+## Owner-decision queue left open by the fix wave (recorded, not blocking)
+
+1. ~~Cascade-borrowed `required` beyond the roster~~ — **RULED 2026-07-26
+   evening: "fix producer now"** — cascade seats carry `required: false`;
+   implemented same evening (see the ledger entry "cascade seats carry
+   required:false"); hasOwnRequiredContract kept as defense-in-depth for
+   persisted pre-fix settlements.
+2. ~~Flat town↔city depletion step~~ — **RULED 2026-07-26 evening: "keep
+   flat step"** (city 0.35 stands; pressure plateaus at city scale).
+3. **Founding-seeds receipt prose** — the-enduring-mill synopsis/receipt edits
+   (registry has no src importer; tests only).
+4. **`tradeRoute` → `neighbourRelationship` rename** in generatePowerStructure
+   — crosses the POWER_INTENT_VERSION frozen snapshot shape.
+5. **`isProtectedFromCustomSubsumption` exact-target branch** still reads bare
+   `required === true` (conservative; a custom `subsumes` cannot absorb a
+   cascade-borrowed institution) — harmless asymmetry, align or leave.
+
+---
+
+# LANE CLOSED — 2026-07-26 ~23:40 (every gate green)
+
+Final state, each item independently re-verified by the managing session:
+
+| Gate | State |
+| --- | --- |
+| Generator goldens | **GREEN** — one-pass re-capture done: 187/523 keys re-hashed (city 84, village 84, town 19 — exactly as ledgered), frozen double-run + a third green bracketing concurrent writes; fixture diff 187↔187; ledger entry "THE ONE-PASS GOLDEN RE-CAPTURE (generation lane close)" |
+| PDF golden | **GREEN as-was** (seed `parity-town-2026` not among the 19 moved town rows; no snapshot rewritten) |
+| Convergence (all 16 ever-red files) | **GREEN** (the transient mutation-manifest reds were live concurrent sessions racing their own new tests' entries — both self-resolved; check the MISSING list before acting on a TOTALITY red) |
+| `npm run check:edge-behavior` | **GREEN, EXIT=0 — first time ever in this lane**: 32 functions typecheck, 546 behavioral tests, 0 failed. Unblocked by two fixes to PRE-EXISTING committed defects: `customContentCore.ts` `AUTHORABLE_BUCKETS` widened to `ReadonlySet<string>` (type-only; the set exists to test untrusted strings) and `deno.lock` +2 workspace entries (pg, three — drift from integration commit a88be4f1). ⚠️ `deno install --frozen=false` is NOT lockfile-only in this repo — it rewrote node_modules off the npm pins (repaired via `npm ci`, pins verified); refresh the lock with `deno check --frozen=false` instead. Owner-vetoable judgment: the 3,971-line npm resolution graph deno wanted to add to deno.lock was rejected in favor of the 2-line fix. |
+
+Owner rulings taken this session (all implemented + ledgered): capture
+"recalibrate" · chain stability "tune depletion down" (city 0.35) · chunk
+"pins + 673,000" · borrowed-required "fix producer now" · ladder "keep flat
+step". Still open for the owner (recorded, non-blocking): queue items 3-5
+above (founding-seeds prose · tradeRoute rename · subsumption asymmetry), the
+name-keyed closure backstop (reader-side ruling), and the persisted pre-fix
+borrowed-flag migration. Nothing was staged or committed by this program's
+sessions; a concurrent banking session is folding the tree (HEAD moved
+2e037f62 → 478e8e13 during close-out).

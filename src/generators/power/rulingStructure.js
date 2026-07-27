@@ -89,17 +89,15 @@ export const generatePowerStructure = (
   institutions = [],
   projection = {},
 ) => {
-  // `config` is deliberately the sole route authority here. Unlike sibling
-  // producers that receive their resolved route positionally, this generator
-  // holds none: the parameter named `tradeRoute` above is a neighbour
-  // relationship, and the pipeline writes the resolved route to
-  // effectiveConfig.tradeRouteAccess (steps/resolveConfig.js) precisely so this
-  // read is the resolved one. Do NOT "repair" this into
-  // resolveGenerationWorldLaw(null, config, { tradeRoute }) — that stringifies a
-  // relationship OBJECT into the law's route slot ('[object Object]'), and a
-  // non-coastal seaport with a hostile neighbour silently loses its maritime
-  // standing (verified: the merchant description falls back from "International
-  // merchant houses controlling port licences" to the generic commercial line).
+  // `config` is deliberately the sole route authority: this generator holds no
+  // positional route (the `tradeRoute` param above is a neighbour relationship)
+  // and the pipeline writes the resolved route to
+  // effectiveConfig.tradeRouteAccess (steps/resolveConfig.js). Do NOT "repair"
+  // this into resolveGenerationWorldLaw(null, config, { tradeRoute }) — that
+  // stringifies a relationship OBJECT into the route slot, and a non-coastal
+  // seaport with a hostile neighbour silently loses its maritime standing
+  // (verified: merchant prose falls back from "International merchant houses
+  // controlling port licences" to the generic commercial line).
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
       institution => !isMaterializedCustomContent(institution),

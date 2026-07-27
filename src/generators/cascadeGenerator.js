@@ -196,6 +196,13 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
           // the subsistence strip treats untagged institutions as trade.
           added.push({
             name, category: cat, tier: t, ...data,
+            // The source catalog's `required` is scoped to the tier that declares
+            // it; a cascade addition is a probabilistic second chance, never THIS
+            // tier's contract (owner-ratified 2026-07-26). Non-roster readers
+            // (institution lifecycle, calamity) read the flag straight off the
+            // record, so the record must carry the truth — the override sits
+            // after `...data` so it wins over the borrowed value.
+            required: false,
             source: 'cascade', cascadeAdded: true, cascadeBoost: boost,
           });
           existingMKs.add(nameMK); // prevent re-rolling the same target

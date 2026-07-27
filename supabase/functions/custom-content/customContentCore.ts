@@ -96,7 +96,10 @@ export const SERVER_CONTENT_VOCABULARY = Object.freeze({
   ),
 });
 
-const AUTHORABLE_BUCKETS = new Set(SERVER_CONTENT_VOCABULARY.buckets);
+// Widened to `string` on purpose: the generated vocabulary is `as const`, so an
+// unannotated Set narrows to the literal union and rejects `.has(untrustedString)` —
+// but this set exists precisely to test arbitrary caller-supplied bucket names.
+const AUTHORABLE_BUCKETS: ReadonlySet<string> = new Set(SERVER_CONTENT_VOCABULARY.buckets);
 
 export const CONTENT_LABELS = Object.freeze([
   'required',

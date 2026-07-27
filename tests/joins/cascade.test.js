@@ -146,6 +146,29 @@ describe('join: applyCascadeInstitutions resolves the adjacency', () => {
     }
   });
 
+  test("a cascade seat never carries the source tier's `required` contract", () => {
+    // `required` is scoped to the tier whose catalog declares it. The cascade
+    // seats a BORROWED lower-tier def at a higher tier, so the flag would arrive
+    // attached to something nothing at this tier requires. The non-roster readers
+    // (institution lifecycle, calamity) read the flag straight off the record, so
+    // the seat writes the truth: required: false (owner-ratified 2026-07-26).
+    setActiveRng({ random: () => 0 });
+    let borrowed = 0;
+    for (const tier of TIERS) {
+      for (const chain of multiProcessorChains()) {
+        const adds = applyCascadeInstitutions([{ name: chain.processingInstitutions[0] }], tier);
+        for (const add of adds) {
+          expect(add.required, `${add.name} cascaded into ${tier} carrying a borrowed required flag`)
+            .toBe(false);
+          if (institutionalCatalog[add.tier]?.[add.category]?.[add.name]?.required === true) borrowed++;
+        }
+      }
+    }
+    // Not vacuous: real catalog defs do declare `required`, and the override is
+    // what stops them arriving immune to decline, abolition, and calamity.
+    expect(borrowed).toBeGreaterThan(0);
+  });
+
   test('the 0.45 dampening cap holds: no addition can beat a 0.45 roll', () => {
     // cascadeChance = min(baseChance * boost, 0.45), so a roll of 0.5 must
     // never pass — cascades supplement generation, they cannot dominate it.
