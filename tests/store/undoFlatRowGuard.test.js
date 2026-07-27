@@ -18,7 +18,7 @@
  *
  * The cure for the jam is the in-repo flavor precedent, not a weaker guard:
  * renameSettlement now stamps the settlement's OWN systemState as
- * beforeState/afterState (as recordCanonFlavorEntry already did), so the row
+ * beforeState/afterState (as recordCanonFlavorEntryImpl already did), so the row
  * pops as a no-op and the refusal class shrinks to destroy-only. This file
  * pins both halves — the no-op pop, the un-jammed stack beneath it, the
  * per-lane stamp source (live vs saved-row snapshot), and the destroy row's
@@ -33,6 +33,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+import { recordCanonFlavorEntryImpl } from '../../src/store/settlementRenameHelpers.js';
 
 const stubSlice = () => ({
   auth: { user: null, tier: 'free', loading: false },
@@ -105,8 +106,15 @@ describe('undoLastEvent refuses flat library-row entries (VI.10 #148)', () => {
     expect(row.campaignState.eventLog).toHaveLength(1);
   });
 
-  test('registry-advertised flavor undo keeps working (beforeState is stamped)', () => {
-    const recorded = store.getState().recordCanonFlavorEntry({
+  test('Impl-written flavor rows still undo (beforeState is stamped)', () => {
+    // R-5b (owner queue #21) retired the recordCanonFlavorEntry STORE SURFACE —
+    // a second, dead door onto a live Impl. The one live writer is
+    // settlementPendingEditWriters → recordCanonFlavorEntryImpl, so the guard
+    // exercises the Impl directly with the store's own get/set (the immer
+    // producer, exactly what the writers pass). The guarded behavior is
+    // unchanged: an Impl-written flavor row is beforeState-stamped, so undo
+    // pops it ok:true as a state no-op instead of refusing.
+    const recorded = recordCanonFlavorEntryImpl(store.getState, store.setState, {
       type: 'OMEN', narrativeSummary: 'A comet crosses the night sky.',
     });
     expect(recorded).toBe(true);
