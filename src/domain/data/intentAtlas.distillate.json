@@ -1,0 +1,942 @@
+{
+  "atlasVersion": "0.2.0",
+  "generatedFrom": {
+    "kind": "soak-prior",
+    "label": "soak-prior",
+    "seedCount": 400,
+    "seedPrefix": "atlas-soak",
+    "generatorVersion": "0.9.0"
+  },
+  "evidence": {
+    "fdrQ": 0.05,
+    "minN": 30,
+    "weightFloor": 0.25,
+    "soakWeightCap": 0.5,
+    "cellsTested": 213,
+    "cellsKept": 92,
+    "cellsUntestable": 33,
+    "cellsUnderSampled": 0
+  },
+  "cells": [
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "frontier",
+      "coBucket": "low",
+      "n": 133,
+      "effect": -0.46,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "frontier",
+      "coBucket": "moderate",
+      "n": 133,
+      "effect": 0.48,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "heartland",
+      "coBucket": "low",
+      "n": 127,
+      "effect": 0.97,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "heartland",
+      "coBucket": "moderate",
+      "n": 127,
+      "effect": -0.93,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "plagued",
+      "coBucket": "high",
+      "n": 140,
+      "effect": 0.17,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "plagued",
+      "coBucket": "low",
+      "n": 140,
+      "effect": -0.48,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.externalThreat",
+      "bucket": "plagued",
+      "coBucket": "moderate",
+      "n": 140,
+      "effect": 0.43,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "city",
+      "coBucket": "moderate",
+      "n": 56,
+      "effect": -0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "hamlet",
+      "coBucket": "high",
+      "n": 72,
+      "effect": -0.16,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "metropolis",
+      "coBucket": "high",
+      "n": 63,
+      "effect": 0.12,
+      "weight": 0.37,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "metropolis",
+      "coBucket": "low",
+      "n": 63,
+      "effect": -0.18,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "thorp",
+      "coBucket": "high",
+      "n": 61,
+      "effect": -0.19,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "thorp",
+      "coBucket": "low",
+      "n": 61,
+      "effect": 0.18,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resilience",
+      "bucket": "town",
+      "coBucket": "high",
+      "n": 81,
+      "effect": 0.21,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "city",
+      "coBucket": "low",
+      "n": 56,
+      "effect": -0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "city",
+      "coBucket": "moderate",
+      "n": 56,
+      "effect": 0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "hamlet",
+      "coBucket": "low",
+      "n": 72,
+      "effect": 0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "hamlet",
+      "coBucket": "moderate",
+      "n": 72,
+      "effect": -0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "metropolis",
+      "coBucket": "low",
+      "n": 63,
+      "effect": -0.26,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "metropolis",
+      "coBucket": "moderate",
+      "n": 63,
+      "effect": 0.26,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "thorp",
+      "coBucket": "low",
+      "n": 61,
+      "effect": 0.31,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.resourcePressure",
+      "bucket": "thorp",
+      "coBucket": "moderate",
+      "n": 61,
+      "effect": -0.31,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "city",
+      "coBucket": "low",
+      "n": 56,
+      "effect": -0.12,
+      "weight": 0.45,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "hamlet",
+      "coBucket": "low",
+      "n": 72,
+      "effect": 0.3,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "hamlet",
+      "coBucket": "moderate",
+      "n": 72,
+      "effect": -0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "metropolis",
+      "coBucket": "low",
+      "n": 63,
+      "effect": -0.16,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "metropolis",
+      "coBucket": "moderate",
+      "n": 63,
+      "effect": 0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "thorp",
+      "coBucket": "low",
+      "n": 61,
+      "effect": 0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "thorp",
+      "coBucket": "moderate",
+      "n": 61,
+      "effect": -0.26,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "town",
+      "coBucket": "low",
+      "n": 81,
+      "effect": -0.12,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "village",
+      "coBucket": "low",
+      "n": 67,
+      "effect": -0.18,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "village",
+      "coBucket": "moderate",
+      "n": 67,
+      "effect": 0.19,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.externalThreat",
+      "bucket": "mountain_pass",
+      "coBucket": "high",
+      "n": 62,
+      "effect": 0.12,
+      "weight": 0.35,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "crossroads",
+      "coBucket": "high",
+      "n": 61,
+      "effect": 0.48,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "crossroads",
+      "coBucket": "low",
+      "n": 61,
+      "effect": -0.3,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "isolated",
+      "coBucket": "high",
+      "n": 69,
+      "effect": -0.2,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "isolated",
+      "coBucket": "low",
+      "n": 69,
+      "effect": 0.51,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "isolated",
+      "coBucket": "moderate",
+      "n": 69,
+      "effect": -0.33,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "mountain_pass",
+      "coBucket": "high",
+      "n": 62,
+      "effect": -0.19,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "mountain_pass",
+      "coBucket": "low",
+      "n": 62,
+      "effect": 0.56,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "mountain_pass",
+      "coBucket": "moderate",
+      "n": 62,
+      "effect": -0.38,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "port",
+      "coBucket": "high",
+      "n": 65,
+      "effect": -0.12,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "port",
+      "coBucket": "low",
+      "n": 65,
+      "effect": -0.21,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "port",
+      "coBucket": "moderate",
+      "n": 65,
+      "effect": 0.3,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "river",
+      "coBucket": "low",
+      "n": 68,
+      "effect": -0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "river",
+      "coBucket": "moderate",
+      "n": 68,
+      "effect": 0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "road",
+      "coBucket": "low",
+      "n": 75,
+      "effect": -0.26,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "road",
+      "coBucket": "moderate",
+      "n": 75,
+      "effect": 0.19,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "port",
+      "coBucket": "low",
+      "n": 65,
+      "effect": 0.46,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "port",
+      "coBucket": "moderate",
+      "n": 65,
+      "effect": -0.46,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "river",
+      "coBucket": "low",
+      "n": 68,
+      "effect": -0.23,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resourcePressure",
+      "bucket": "river",
+      "coBucket": "moderate",
+      "n": 68,
+      "effect": 0.23,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.volatility",
+      "bucket": "isolated",
+      "coBucket": "low",
+      "n": 69,
+      "effect": -0.15,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.volatility",
+      "bucket": "isolated",
+      "coBucket": "moderate",
+      "n": 69,
+      "effect": 0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.volatility",
+      "bucket": "mountain_pass",
+      "coBucket": "high",
+      "n": 62,
+      "effect": 0.17,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.volatility",
+      "bucket": "road",
+      "coBucket": "low",
+      "n": 75,
+      "effect": 0.13,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.volatility",
+      "bucket": "road",
+      "coBucket": "moderate",
+      "n": 75,
+      "effect": -0.12,
+      "weight": 0.29,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Adventuring",
+      "n": 56,
+      "effect": 0.41,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Crafts",
+      "n": 56,
+      "effect": 0.17,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Criminal",
+      "n": 56,
+      "effect": 0.33,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Defense",
+      "n": 56,
+      "effect": 0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Entertainment",
+      "n": 56,
+      "effect": 0.41,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "city",
+      "coBucket": "Magic",
+      "n": 56,
+      "effect": 0.18,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "hamlet",
+      "coBucket": "Adventuring",
+      "n": 72,
+      "effect": -0.46,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "hamlet",
+      "coBucket": "Criminal",
+      "n": 72,
+      "effect": -0.28,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "hamlet",
+      "coBucket": "Defense",
+      "n": 72,
+      "effect": -0.21,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "hamlet",
+      "coBucket": "Entertainment",
+      "n": 72,
+      "effect": -0.46,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "hamlet",
+      "coBucket": "Magic",
+      "n": 72,
+      "effect": -0.32,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Adventuring",
+      "n": 63,
+      "effect": 0.42,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Crafts",
+      "n": 63,
+      "effect": 0.2,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Criminal",
+      "n": 63,
+      "effect": 0.36,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Defense",
+      "n": 63,
+      "effect": 0.3,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Entertainment",
+      "n": 63,
+      "effect": 0.44,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Exotic",
+      "n": 63,
+      "effect": 0.33,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "metropolis",
+      "coBucket": "Magic",
+      "n": 63,
+      "effect": 0.42,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Adventuring",
+      "n": 61,
+      "effect": -0.42,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Crafts",
+      "n": 61,
+      "effect": -0.91,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Criminal",
+      "n": 61,
+      "effect": -0.39,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Defense",
+      "n": 61,
+      "effect": -0.62,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Entertainment",
+      "n": 61,
+      "effect": -0.42,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Magic",
+      "n": 61,
+      "effect": -0.43,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "thorp",
+      "coBucket": "Religious",
+      "n": 61,
+      "effect": -0.2,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Adventuring",
+      "n": 81,
+      "effect": 0.5,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Crafts",
+      "n": 81,
+      "effect": 0.24,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Criminal",
+      "n": 81,
+      "effect": 0.3,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Defense",
+      "n": 81,
+      "effect": 0.35,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Entertainment",
+      "n": 81,
+      "effect": 0.48,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "town",
+      "coBucket": "Magic",
+      "n": 81,
+      "effect": 0.13,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "village",
+      "coBucket": "Adventuring",
+      "n": 67,
+      "effect": -0.44,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "village",
+      "coBucket": "Crafts",
+      "n": 67,
+      "effect": 0.21,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "village",
+      "coBucket": "Criminal",
+      "n": 67,
+      "effect": -0.33,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "customContent",
+      "dimension": "settType.institutionShelf",
+      "bucket": "village",
+      "coBucket": "Entertainment",
+      "n": 67,
+      "effect": -0.44,
+      "weight": 0.5,
+      "source": "soak"
+    }
+  ]
+}
