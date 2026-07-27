@@ -24,7 +24,6 @@ import { identityConsentNote } from '../../domain/intent/opVocabulary.js';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
-const cost = getSurveyorAiCost('interpret');
 const OP_LABEL_TONE = { required: 'gold', inferred: 'info', optional: 'muted', uncertain: 'warning' };
 let reviewSequence = 0;
 
@@ -195,6 +194,10 @@ function OpCard({ op, index, decision, onDecide }) {
 }
 
 export default function InterpretApplyPanel({ initialPrompt = '' }) {
+  // Resolved per render, not once at import: the price becomes per-user the moment
+  // the owner activates the capability-tier multiplier (config/pricing.js). A plain
+  // number, so re-resolving costs nothing and cannot churn a memo.
+  const cost = getSurveyorAiCost('interpret');
   const {
     creditBalance,
     ownerId,

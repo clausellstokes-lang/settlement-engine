@@ -40,7 +40,7 @@ describe.runIf(have)('096 merge_neighbour_backlink — atomic additive merge (pg
     (await db.query(`select data from public.settlements where id = '${PARTNER}'`)).rows[0].data;
   const linkIds = async () => (await partnerData()).neighbourNetwork.map((/** @type {any} */ e) => e.linkId);
 
-  beforeAll(async () => { db = new PGlite(); });
+  beforeAll(async () => { db = new PGlite(); }, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
 
   beforeEach(async () => {
     await db.exec(`
@@ -57,7 +57,7 @@ describe.runIf(have)('096 merge_neighbour_backlink — atomic additive merge (pg
          '{"name":"Partner","neighbourNetwork":[],"interSettlementRelationships":[]}'::jsonb, '[]'::jsonb);
     `);
     await db.exec(SRC); // the real 096 function + grants
-  });
+  }, 180_000 /* same deadlock-guard as the beforeAll: first exec pays pglite's cold WASM boot */);
 
   it('applies a back-link entry to the partner’s CURRENT data + mirrors neighbour_links', async () => {
     await merge('link_A', SAVE_A, { id: SAVE_A, linkId: 'link_A', name: 'A' });

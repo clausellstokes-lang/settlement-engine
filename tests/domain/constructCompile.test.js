@@ -26,6 +26,10 @@ import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import {
   validateConstructConfig, compileConstruct, constructStaticPrefix, buildConstructPrompt, constructLogRecord,
 } from '../../supabase/functions/_shared/constructCore.ts';
+import {
+  CACHE_MARKER, CACHE_MIN_PREFIX_TOKENS, estimateTokens,
+} from '../../supabase/functions/_shared/anthropicCache.ts';
+import { buildSurfaceCharter } from '../../supabase/functions/_shared/aiCharterBundle.js';
 import { buildRetrievalBundle } from '../../supabase/functions/ai-analyst/analystCore.ts';
 import { GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
@@ -152,6 +156,23 @@ describe('construct — compile + static-first (PIN 5)', () => {
     expect(p1.slice(prefix.length)).not.toBe(p2.slice(prefix.length));
     expect(prefix).toContain('CONFIG VOCABULARY');
     expect(prefix).toContain('settType:');
+  });
+
+  // WAVE L-4 (docs/DESIGN_AI_CAPABILITY_LADDER.md): the prefix TEACHES and CACHES. ONE
+  // charter serves BOTH construct surfaces, so this pin also proves the settlement shell
+  // is taught the realm keys under their own heading rather than as its own.
+  it('leads with the construct charter and clears the provider cache floor', () => {
+    const prefix = constructStaticPrefix(VOCAB);
+    const charter = buildSurfaceCharter('construct');
+    expect(prefix.startsWith(charter.split('\n')[0])).toBe(true);
+    expect(prefix).toContain(charter);
+    expect(prefix.split(CACHE_MARKER).length - 1).toBe(1);
+    expect(prefix.endsWith(CACHE_MARKER)).toBe(true);
+    const cached = prefix.slice(0, -CACHE_MARKER.length);
+    expect(estimateTokens(cached)).toBeGreaterThanOrEqual(CACHE_MIN_PREFIX_TOKENS);
+    expect(cached).toContain('SETTLEMENT config keys (construct-settlement)');
+    expect(cached).toContain('REALM config keys (construct-realm)');
+    expect(constructStaticPrefix(VOCAB)).toBe(prefix);
   });
 
   it('the aiOperationLog record carries counts, not config values / prompt', () => {

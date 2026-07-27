@@ -28,6 +28,7 @@ import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
+import { resolveCapturedModel } from '../ai-analyst/modelResolver.ts';
 import {
   registerProviderAdapter, routeWorldDataAdapter,
   accountCanary, detectMetaProbe, extractRider, fnv1a32,
@@ -189,7 +190,9 @@ export async function handleParley(
       capturedModelPref = mp && typeof mp[PARLEY_FEATURE] === 'string' ? String(mp[PARLEY_FEATURE]) : null;
     } catch (e) { logError('parley', user.id, e, { stage: 'governor' }); }
 
-    capturedModel = (providerKey.byok && capturedModelPref && ANTHROPIC_SUPPORTED_MODELS.includes(capturedModelPref)) ? capturedModelPref : PARLEY_MODEL;
+    capturedModel = resolveCapturedModel({
+      byok: providerKey.byok, modelPref: capturedModelPref, surfaceDefault: PARLEY_MODEL,
+    }).model;
 
     const outcome = await runCreditedCall({
       async reserve() {

@@ -24,6 +24,12 @@ import {
   validateDraftEntries,
 } from '../../supabase/functions/custom-content/customContentCore.ts';
 import {
+  CACHE_MARKER,
+  CACHE_MIN_PREFIX_TOKENS,
+  estimateTokens,
+} from '../../supabase/functions/_shared/anthropicCache.ts';
+import { buildSurfaceCharter } from '../../supabase/functions/_shared/aiCharterBundle.js';
+import {
   AUTHORABLE_CONTENT_BUCKETS,
   CUSTOM_CONTENT_MANIFEST_VERSION,
   admitCustomContentDefinition,
@@ -370,6 +376,22 @@ describe('server-owned static prompt', () => {
     expect(first.startsWith(prefix)).toBe(true);
     expect(second.startsWith(prefix)).toBe(true);
     expect(first.slice(prefix.length)).not.toBe(second.slice(prefix.length));
+  });
+
+  // WAVE L-4 (docs/DESIGN_AI_CAPABILITY_LADDER.md): the prefix TEACHES and CACHES.
+  it('leads with the customContent charter and clears the provider cache floor', () => {
+    const prefix = contentStaticPrefix(CLIENT_DESCRIPTOR);
+    const charter = buildSurfaceCharter('customContent');
+    expect(prefix.startsWith(charter.split('\n')[0])).toBe(true);
+    expect(prefix).toContain(charter);
+    // Exactly one cache breakpoint, at the static/dynamic boundary.
+    expect(prefix.split(CACHE_MARKER).length - 1).toBe(1);
+    expect(prefix.endsWith(CACHE_MARKER)).toBe(true);
+    // THE FLOOR, MEASURED: a cached prefix below it is a SILENT no-op, not an error.
+    const cached = prefix.slice(0, -CACHE_MARKER.length);
+    expect(estimateTokens(cached)).toBeGreaterThanOrEqual(CACHE_MIN_PREFIX_TOKENS);
+    // This surface's charter is large enough to clear the floor unaided: no filler.
+    expect(cached).not.toContain('[CACHE-STABILIZER');
   });
 });
 

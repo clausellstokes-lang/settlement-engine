@@ -10,6 +10,9 @@
  * Entries (add one line to ENTRIES to bundle another module):
  *   - aiGrounding      (src/domain/aiGrounding.js)      → aiGroundingBundle.js
  *   - analyticsEvents  (src/lib/analyticsEvents.js)     → analyticsEventsBundle.js
+ *   - aiCharter        (src/domain/aiCharter.js)        → aiCharterBundle.js
+ *   - intentAtlas      (src/domain/intentAtlas.js)      → intentAtlasBundle.js
+ *   - aiOutputSchema   (src/domain/aiOutputSchema.js)   → aiOutputSchemaBundle.js
  *
  * Freshness contract: re-run after editing any module a bundle transitively
  * imports. The per-bundle *.freshness.test.js tests fail on stale bundles.
@@ -30,6 +33,9 @@ const OUT_DIR = join(ROOT, 'supabase', 'functions', '_shared');
 const ENTRIES = [
   { label: 'aiGrounding',     entry: 'src/domain/aiGrounding.js',  out: 'aiGroundingBundle.js',     meta: 'aiGroundingBundle.meta.json' },
   { label: 'analyticsEvents', entry: 'src/lib/analyticsEvents.js', out: 'analyticsEventsBundle.js', meta: 'analyticsEventsBundle.meta.json' },
+  { label: 'aiCharter',       entry: 'src/domain/aiCharter.js',    out: 'aiCharterBundle.js',       meta: 'aiCharterBundle.meta.json' },
+  { label: 'intentAtlas',     entry: 'src/domain/intentAtlas.js',  out: 'intentAtlasBundle.js',     meta: 'intentAtlasBundle.meta.json' },
+  { label: 'aiOutputSchema',  entry: 'src/domain/aiOutputSchema.js', out: 'aiOutputSchemaBundle.js', meta: 'aiOutputSchemaBundle.meta.json' },
 ];
 
 function banner(entryRel) {

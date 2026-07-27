@@ -5,7 +5,9 @@
  * The transport (../../src/lib/surveyorByok.js) is mocked so no network is touched; this
  * pins the flow: save→verify surfaces key-health + the model picker (never healthy until a
  * real verify), retention class shows per model, caps + pause persist, and the honest
- * boundary is stated in-UI.
+ * boundary is stated in-UI. Wave L-3b adds the COMPETENCY PROBE half: the measured tier
+ * reads as a chip plus one plain sentence, "never probed" stays distinct from the lowest
+ * tier, an unverified key cannot be probed, and a refusal records nothing.
  */
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup, waitFor } from '@testing-library/react';
@@ -24,17 +26,26 @@ const api = vi.hoisted(() => ({
   settings: { model_prefs: {}, daily_token_cap: null, weekly_token_cap: null, daily_usd_cap: null, weekly_usd_cap: null, warn_pct: 80, paused: false },
   verifyResult: null,
   setByokKey: null, verifyByokKey: null, setSurveyorSettings: null, clearByokKey: null,
+  probeByokKey: null,
 }));
 
-vi.mock('../../src/lib/surveyorByok.js', () => ({
-  keyPrefixHint: (p, k) => (k && !String(k).startsWith('sk-ant-') ? 'looks off' : null),
-  getByokStatus: vi.fn(async () => api.status),
-  setByokKey: (...a) => api.setByokKey(...a),
-  clearByokKey: (...a) => api.clearByokKey(...a),
-  verifyByokKey: (...a) => api.verifyByokKey(...a),
-  getSurveyorSettings: vi.fn(async () => api.settings),
-  setSurveyorSettings: (...a) => api.setSurveyorSettings(...a),
-}));
+// The tier vocabulary + its two pure readings are NOT mocked away: the sentence a user
+// reads is part of this surface's contract, and a stubbed sentence would pin nothing.
+// Only the transports are faked.
+vi.mock('../../src/lib/surveyorByok.js', async (importOriginal) => {
+  const real = await importOriginal();
+  return {
+    ...real,
+    keyPrefixHint: (p, k) => (k && !String(k).startsWith('sk-ant-') ? 'looks off' : null),
+    getByokStatus: vi.fn(async () => api.status),
+    setByokKey: (...a) => api.setByokKey(...a),
+    clearByokKey: (...a) => api.clearByokKey(...a),
+    verifyByokKey: (...a) => api.verifyByokKey(...a),
+    probeByokKey: (...a) => api.probeByokKey(...a),
+    getSurveyorSettings: vi.fn(async () => api.settings),
+    setSurveyorSettings: (...a) => api.setSurveyorSettings(...a),
+  };
+});
 
 import AccountAiKeysSection from '../../src/components/account/AccountAiKeysSection.jsx';
 
@@ -116,5 +127,67 @@ describe('AccountAiKeysSection — BYOK management surface (#29)', () => {
     render(<AccountAiKeysSection />);
     await waitFor(() => screen.getByText(/enforced at the edge/i));
     expect(screen.getByText(/nothing is charged/i)).toBeTruthy();
+  });
+
+  // ── THE COMPETENCY PROBE (wave L-3b) ──────────────────────────────────────
+  // What this surface owes the reader: the measured tier as a PLAIN SENTENCE, the
+  // honest difference between "never probed" and the lowest tier, and no arithmetic.
+
+  const healthyRow = (extra = {}) => ([{
+    provider: 'anthropic', has_key: true, health: 'healthy',
+    last_verified_at: new Date().toISOString(), last_checked_at: new Date().toISOString(),
+    last_error_class: null, probe_tier: null, probe_checked_at: null, probe_model: null,
+    ...extra,
+  }]);
+
+  it('an unprobed healthy key invites the check and says so without scoring anything', async () => {
+    api.status = healthyRow();
+    render(<AccountAiKeysSection />);
+    await waitFor(() => screen.getByText(/Model capability/));
+    const button = screen.getByRole('button', { name: /run capability probe/i });
+    expect(button.disabled).toBe(false);
+    expect(screen.getByText(/has not run a capability check yet/i)).toBeTruthy();
+    // the honest boundary: no credits, but the provider does charge
+    expect(screen.getByText(/costs no credits/i)).toBeTruthy();
+  });
+
+  it('a probe run persists a tier, which reads as a chip plus one plain sentence', async () => {
+    api.status = healthyRow();
+    api.probeByokKey = vi.fn(async () => {
+      api.status = healthyRow({
+        probe_tier: 'journeyman', probe_checked_at: new Date().toISOString(), probe_model: 'claude-haiku-4-5',
+      });
+      return { ok: true, tier: 'journeyman', passes: 2, model: 'claude-haiku-4-5', tasks: [] };
+    });
+    render(<AccountAiKeysSection />);
+    fireEvent.click(await screen.findByRole('button', { name: /run capability probe/i }));
+
+    await waitFor(() => expect(api.probeByokKey).toHaveBeenCalledWith('anthropic'));
+    await waitFor(() => screen.getByText('Journeyman'));
+    expect(screen.getByText(/filed two of the three sample requests correctly/i)).toBeTruthy();
+    expect(screen.getByText(/using claude-haiku-4-5/)).toBeTruthy();
+    // and the button becomes a re-run rather than an invitation
+    expect(screen.getByRole('button', { name: /check again/i })).toBeTruthy();
+  });
+
+  it('an unverified key cannot be probed, and the surface says which step comes first', async () => {
+    api.status = [{ provider: 'anthropic', has_key: true, health: 'unverified', last_verified_at: null, last_checked_at: null, last_error_class: null }];
+    render(<AccountAiKeysSection />);
+    await waitFor(() => screen.getByText(/Model capability/));
+    expect(screen.getByRole('button', { name: /run capability probe/i }).disabled).toBe(true);
+    expect(screen.getByText(/Verify this key first/i)).toBeTruthy();
+  });
+
+  it('a refused probe states the boundary and records no tier', async () => {
+    api.status = healthyRow();
+    api.probeByokKey = vi.fn(async () => ({
+      ok: false, tier: null, refusalClass: 'out_of_credit',
+      message: 'Your provider key is out of credit, so nothing was charged.',
+    }));
+    render(<AccountAiKeysSection />);
+    fireEvent.click(await screen.findByRole('button', { name: /run capability probe/i }));
+    await waitFor(() => screen.getByText(/out of credit, so nothing was charged/i));
+    expect(screen.queryByText('Journeyman')).toBeNull();
+    expect(screen.queryByText('Scout')).toBeNull();
   });
 });

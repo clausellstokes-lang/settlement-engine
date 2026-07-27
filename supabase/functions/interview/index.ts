@@ -35,6 +35,7 @@ import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
+import { resolveCapturedModel } from '../ai-analyst/modelResolver.ts';
 import {
   registerProviderAdapter, routeWorldDataAdapter,
   ANTHROPIC_SUPPORTED_MODELS, ANTHROPIC_RETENTION_CLASS,
@@ -243,8 +244,9 @@ export async function handleInterview(
       capturedModelPref = mp && typeof mp[INTERVIEW_FEATURE] === 'string' ? String(mp[INTERVIEW_FEATURE]) : null;
     } catch (e) { logError('interview', user.id, e, { stage: 'governor' }); }
 
-    capturedModel = (providerKey.byok && capturedModelPref && ANTHROPIC_SUPPORTED_MODELS.includes(capturedModelPref))
-      ? capturedModelPref : INTERVIEW_MODEL;
+    capturedModel = resolveCapturedModel({
+      byok: providerKey.byok, modelPref: capturedModelPref, surfaceDefault: INTERVIEW_MODEL,
+    }).model;
 
     const outcome = await runCreditedCall({
       async reserve() {

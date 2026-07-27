@@ -89,7 +89,9 @@ describe.runIf(haveMigration)('surveyor BYOK key-health — real SQL (pglite)', 
     await db.exec(extractFn(src, 'surveyor_byok_set_health'));
     await db.exec(extractFn(src, 'surveyor_byok_status'));
     await db.exec(extractFn(src, 'write_ai_operation_log'));
-  });
+  }, 30000); // PGlite WASM cold-start exceeds the 10s default hook timeout on a loaded
+  // machine (measured 2026-07-27: ~10.1s standalone, so the suite reported 8 SKIPPED and
+  // one green vacuity guard). Matched to the sibling pglite harnesses, which all pass 30000.
 
   beforeEach(async () => {
     await db.exec('truncate public.surveyor_byok_keys; truncate public.ai_operation_log;');

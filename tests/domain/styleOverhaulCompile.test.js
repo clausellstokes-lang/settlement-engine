@@ -15,7 +15,12 @@ import { describe, it, expect } from 'vitest';
 import {
   STYLE_FIELDS, styleStaticPrefix, buildStylePrompt, parseStyleAnswer,
   coerceStyleCandidate, styleRiderTags, compileStyleOverhaul, styleLogRecord,
+  styleUnsupportedFields,
 } from '../../supabase/functions/style-overhaul/styleOverhaulCore.ts';
+import {
+  CACHE_MARKER, CACHE_MIN_PREFIX_TOKENS, estimateTokens,
+} from '../../supabase/functions/_shared/anthropicCache.ts';
+import { buildSurfaceCharter } from '../../supabase/functions/_shared/aiCharterBundle.js';
 import { buildRetrievalBundle } from '../../supabase/functions/ai-analyst/analystCore.ts';
 import { validateBespokeStyle, buildStyleVocabulary } from '../../src/design/townMapStyleWall.js';
 import {
@@ -44,6 +49,24 @@ describe('style overhaul — static-first prompt (PIN 1)', () => {
     // the truth law is stated in the static prefix
     expect(prefix).toContain('skins the DISPLAY, never the substance');
   });
+
+  // WAVE L-4 (docs/DESIGN_AI_CAPABILITY_LADDER.md): the prefix TEACHES and CACHES. The
+  // vocabulary here is the REAL buildStyleVocabulary the client posts, so this floor
+  // assertion is measured against the production prefix, not a fixture.
+  it('leads with the styleOverhaul charter and clears the provider cache floor', () => {
+    const prefix = styleStaticPrefix(VOCAB);
+    const charter = buildSurfaceCharter('styleOverhaul');
+    expect(prefix.startsWith(charter.split('\n')[0])).toBe(true);
+    expect(prefix).toContain(charter);
+    expect(prefix.split(CACHE_MARKER).length - 1).toBe(1);
+    expect(prefix.endsWith(CACHE_MARKER)).toBe(true);
+    const cached = prefix.slice(0, -CACHE_MARKER.length);
+    expect(estimateTokens(cached)).toBeGreaterThanOrEqual(CACHE_MIN_PREFIX_TOKENS);
+    // This charter is the smallest of the five, so the deterministic stabilizer pays the
+    // rest of the way to the floor. Byte-stable filler: the same prefix on every request.
+    expect(cached).toContain('[CACHE-STABILIZER');
+    expect(styleStaticPrefix(VOCAB)).toBe(prefix);
+  });
 });
 
 describe('style overhaul — coerce keeps only style fields (PIN 2)', () => {
@@ -52,6 +75,73 @@ describe('style overhaul — coerce keeps only style fields (PIN 2)', () => {
     expect(Object.keys(c).sort()).toEqual(['background', 'palette']);
     expect(STYLE_FIELDS).toContain('palette');
     expect(STYLE_FIELDS).not.toContain('svg');
+  });
+
+  // FINDING F-A (DESIGN_AI_CAPABILITY_LADDER.md): the edge contract and the client wall are two
+  // separately-authored lists of the same field set, so they can silently drift apart. When they
+  // do, EVERY contract-conforming response shows the user a spurious rejected row. This pin binds
+  // the two lists behaviourally, so a field added to STYLE_FIELDS cannot ship unrecognized.
+  it('every STYLE_FIELDS name the compiler may emit is RECOGNIZED by the client wall', () => {
+    const unknownToWall = STYLE_FIELDS.filter((f) => validateBespokeStyle({ [f]: 'probe' })
+      .violations.some((v) => v.field === f && v.reason === 'unsupported_field'));
+    expect(
+      unknownToWall,
+      `\nedge contract fields the client wall drops as unknown: ${unknownToWall.join(', ')}\n`,
+    ).toEqual([]);
+    // negative control: the probe genuinely detects an unrecognized field
+    expect(validateBespokeStyle({ svg: 'probe' }).violations)
+      .toContainEqual({ field: 'svg', reason: 'unsupported_field' });
+  });
+
+  // FINDING F-C (DESIGN_AI_CAPABILITY_LADDER.md §4c, closed in wave L-WIRE): the subset
+  // relation above was satisfied by a list that was simply too SMALL. glyphSet and seasonBias
+  // are posted by buildStyleVocabulary, taught by the charter, and accepted by the wall, yet
+  // STYLE_FIELDS omitted them, so coerceStyleCandidate stripped exactly the fields the prompt
+  // had asked for and the genre door was unreachable through the AI path. The subset pin
+  // cannot see a missing field by construction, so the two are named here directly and then
+  // exercised end to end.
+  it('THE GENRE DOOR: glyphSet + seasonBias survive the edge coercion and pass the wall (F-C)', () => {
+    expect(STYLE_FIELDS).toContain('glyphSet');
+    expect(STYLE_FIELDS).toContain('seasonBias');
+
+    // Real values, taken from the live vocabulary rather than hand-typed, so a genre pack
+    // renaming a glyph set id reds here instead of shipping a schema nobody can satisfy.
+    const glyphSet = VOCAB.glyphSets[0];
+    const seasonBias = 'autumn';
+    expect(typeof glyphSet).toBe('string');
+
+    // 1. the edge no longer strips them
+    const candidate = coerceStyleCandidate({ background: '#101820', glyphSet, seasonBias });
+    expect(candidate.glyphSet).toBe(glyphSet);
+    expect(candidate.seasonBias).toBe(seasonBias);
+    // 2. and the edge raises no verdict about them (L-6 would otherwise spend a repair round
+    //    asking the model to withdraw a field the charter told it to use)
+    expect(styleUnsupportedFields({ background: '#101820', glyphSet, seasonBias })).toEqual([]);
+    // 3. and the client wall accepts what the edge forwarded, with no violation
+    const walled = validateBespokeStyle(candidate, { id: 'bespoke:genre' });
+    expect(walled.violations).toEqual([]);
+    expect(walled.style.glyphSet).toBe(glyphSet);
+    expect(walled.style.seasonBias).toBe(seasonBias);
+
+    // negative controls, both directions: an out-of-vocabulary value is still refused by the
+    // wall (SELECT-only, never generative), and the dormancy law still holds when neither
+    // field is named.
+    expect(validateBespokeStyle({ glyphSet: 'not-a-glyph-set' }).violations)
+      .toContainEqual({ field: 'glyphSet', reason: 'not_in_vocab' });
+    expect(validateBespokeStyle({ seasonBias: 'harvest' }).violations)
+      .toContainEqual({ field: 'seasonBias', reason: 'not_in_vocab' });
+    const plain = validateBespokeStyle({ background: '#101820' }).style;
+    expect('glyphSet' in plain).toBe(false);
+    expect('seasonBias' in plain).toBe(false);
+  });
+
+  // styleRiderTags reads baseLens / background / furniture and nothing else, so widening
+  // STYLE_FIELDS cannot move the LENS ROADMAP RADAR. Pinned rather than reasoned, because a
+  // silent radar shift would be read later as a change in what users ask for.
+  it('the lens-radar tags are UNMOVED by the two new fields', () => {
+    const base = { baseLens: 'darkFantasy', background: '#0a0a12', furniture: ['grid', 'scaleBar'] };
+    expect(styleRiderTags({ ...base, glyphSet: VOCAB.glyphSets[0], seasonBias: 'winter' }, VOCAB))
+      .toEqual(styleRiderTags(base, VOCAB));
   });
 
   it('parseStyleAnswer degrades non-JSON to no style + a musing (never a throw)', () => {

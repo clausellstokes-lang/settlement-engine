@@ -22,12 +22,87 @@ export function keyPrefixHint(provider, key) {
   return null;
 }
 
-/** The caller's OWN key-health rows (never the key). [] when unconfigured. */
+/**
+ * The measured capability tiers, weakest first. MIRRORS the edge's PROBE_TIERS
+ * (supabase/functions/surveyor-byok/probeCore.ts) and migration 191's check
+ * constraint. Working names; the owner has not made the taste pick yet.
+ */
+export const PROBE_TIERS = Object.freeze(['scout', 'journeyman', 'master']);
+
+/** The short chip label for a measured tier, or null when a key was never probed. */
+export function probeTierLabel(tier) {
+  switch (tier) {
+    case 'master': return 'Master';
+    case 'journeyman': return 'Journeyman';
+    case 'scout': return 'Scout';
+    default: return null;
+  }
+}
+
+/**
+ * ONE PLAIN SENTENCE for what a key demonstrated (the legibility law: a reader gets a
+ * sentence, never a score formula). Derived only from the stored tier, which is itself
+ * the pass count of three sample filing tasks, so the sentence can state what happened
+ * without quoting arithmetic at anybody.
+ * @param {{ probe_tier?: string|null }|null|undefined} row a surveyor_byok_status row
+ */
+export function probeTierSentence(row) {
+  switch (row?.probe_tier) {
+    case 'master':
+      return 'This model filed all three sample requests correctly, so Surveyor can hand it the longer, more involved work.';
+    case 'journeyman':
+      return 'This model filed two of the three sample requests correctly, so Surveyor will give it ordinary work and keep the most involved requests simple.';
+    case 'scout':
+      return 'This model filed at most one of the three sample requests correctly, so Surveyor will keep what it asks for short and simple.';
+    default:
+      return 'This key has not run a capability check yet, so Surveyor treats it cautiously.';
+  }
+}
+
+/** A probe version is a semver triple and nothing else (migration 191's column check).
+ *  Anything else reads as "no version recorded" rather than as a label to show. */
+const PROBE_VERSION_RE = /^\d+\.\d+\.\d+$/;
+
+/**
+ * Normalize one status row so the probe fields are always present and typed, even when
+ * the deployed database predates migration 191 (an older schema simply returns no such
+ * columns, and an absent column must read as "never probed", not as undefined).
+ *
+ * TWO GENERATIONS OF ABSENCE are handled here, not one. A pre-191 database returns none
+ * of the probe columns; a database carrying an EARLIER DRAFT of 191 returns the tier trio
+ * but not the wave L-7a pair (probe_version, probe_profile). Both must read as honest
+ * absence, because the settings surface and the coaching lane alike have to tell "not
+ * recorded" apart from "recorded as nothing".
+ *
+ * The profile is shape-screened rather than trusted: the client never renders it as prose
+ * and only ever counts verdicts, so a blob that is not a verdict list reads as absent.
+ * @param {Record<string, unknown>|null|undefined} row
+ */
+export function normalizeByokRow(row) {
+  if (!row || typeof row !== 'object') return null;
+  const tier = typeof row.probe_tier === 'string' && PROBE_TIERS.includes(row.probe_tier)
+    ? row.probe_tier : null;
+  const profile = /** @type {{tasks?: unknown}|null|undefined} */ (row.probe_profile);
+  const usableProfile = profile && typeof profile === 'object' && !Array.isArray(profile)
+    && Array.isArray(profile.tasks) ? profile : null;
+  return {
+    ...row,
+    probe_tier: tier,
+    probe_checked_at: typeof row.probe_checked_at === 'string' ? row.probe_checked_at : null,
+    probe_model: typeof row.probe_model === 'string' && row.probe_model ? row.probe_model : null,
+    probe_version: typeof row.probe_version === 'string' && PROBE_VERSION_RE.test(row.probe_version)
+      ? row.probe_version : null,
+    probe_profile: usableProfile,
+  };
+}
+
+/** The caller's OWN key-health + measured-tier rows (never the key). [] when unconfigured. */
 export async function getByokStatus(provider = null) {
   if (!isConfigured) return [];
   const { data, error } = await supabase.rpc('surveyor_byok_status', { p_provider: provider });
   if (error) throw new Error(error.message || 'Could not read key status.');
-  return Array.isArray(data) ? data : (data ? [data] : []);
+  const rows = Array.isArray(data) ? data : (data ? [data] : []);
+  return rows.map(normalizeByokRow).filter(Boolean);
 }
 
 /** Store / rotate the user's key. Resets health to 'unverified' server-side. */
@@ -61,6 +136,26 @@ export async function verifyByokKey(provider = 'anthropic') {
     return { ok: false, health: 'unverified', message };
   }
   return data || { ok: false, health: 'unverified', message: 'Verification failed.' };
+}
+
+/**
+ * THE COMPETENCY PROBE: run three sample filing tasks on the stored key and record the
+ * tier they demonstrate. Costs no credits (it does spend the user's own provider
+ * tokens), takes a rate-limit unit per task, and grades by the engine's own schema
+ * walls, never by anything the model says about itself. The result shape mirrors the
+ * edge: { ok, tier, passes?, model?, probeVersion?, tasks?, message?, doors? }. The same
+ * per-task verdicts the answer carries as `tasks` are also persisted as the key's
+ * probe_profile (wave L-7a), which is what later reads back as deterministic coaching.
+ */
+export async function probeByokKey(provider = 'anthropic') {
+  if (!isConfigured) throw new Error('Sign in first.');
+  const { data, error } = await supabase.functions.invoke('surveyor-byok', { body: { action: 'probe', provider } });
+  if (error) {
+    let message = error.message || 'The capability check could not run.';
+    try { const ctx = await error.context?.json?.(); if (ctx?.error) message = ctx.error; } catch { /* keep generic */ }
+    return { ok: false, tier: null, message };
+  }
+  return data || { ok: false, tier: null, message: 'The capability check could not run.' };
 }
 
 /** The caller's governor settings (model prefs + caps + warn + pause), or defaults. */

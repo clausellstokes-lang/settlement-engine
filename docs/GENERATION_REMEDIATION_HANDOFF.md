@@ -394,6 +394,11 @@ prose changed, though the registry is unrendered (see the header note in
   current source tree matches the recorded hash". Fix is mechanical:
   `npm run build:edge-shared`. Left alone because it regenerates edge-shared
   artifacts while a concurrent session is editing this tree.
+- **RESOLVED 2026-07-27 (owner order)** — rationale above is stale; the lane has
+  wound down. `npm run build:edge-shared` ran: `aiGroundingBundle.js` regenerated
+  byte-identical to HEAD (`.meta.json` restored from HEAD — only `generatedAt` moved),
+  `analyticsEventsBundle.{js,meta.json}` KEPT (stale against the now-committed
+  `pendingEdits.js` `edit-prose` kind). All four freshness suites green.
 
 ### E. Also fixed this session (by a concurrent session, verified here)
 

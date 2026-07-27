@@ -355,17 +355,25 @@ identical verdict shape continuously as a FREE byproduct (zero marginal tokens).
    elegance.
 
 ## 4c. KNOWN SUBOPTIMALITIES (recorded 2026-07-27 at the owner's "is this the best?")
-> ↻ SAME SITTING: the owner ordered all three FIXED comprehensively. Statuses: (1) L-9a
-> schema substrate DISPATCHED (new-files-only; edge wiring rides L-WIRE). (2) Escalation
-> design SIMPLIFIED while implementing: thinking room is a TIER PROPERTY (budget per rung,
-> applied every call, provider bills only actual thinking tokens) — the two-pass
-> "model flags itself deep" shape is REJECTED (spends a probe call, flirts with
-> self-assessment); ships inert (all budgets 0) on the same activation switch as pricing +
-> repair; lands in L-WIRE. (3) The quantization law below is now LAW; enforced in L-WIRE's
-> coaching wiring. **L-WIRE = one consolidated pass over the surface files after L-6 + L-7a
-> land:** tool-schema calls + parse-from-tool_use w/ fallback · thinking budgets ·
-> coaching block + atlas block into prefixes (quantized) · surveyor-byok exemption
-> retirement. One sweep, not three.
+> ↻ SAME SITTING: the owner ordered all three FIXED comprehensively — and ✅✅ **L-WIRE
+> LANDED 2026-07-27**, with a recovery worth recording: the implementer was killed by the
+> account SESSION LIMIT mid-verification (the recorded 529-class hazard, new variant). The
+> survey-then-complete protocol held: ALL NINE task areas' edits were complete in-tree
+> (schema bundle + freshness suite · tools+forced tool_choice on all six surfaces w/
+> free-text fallback · THINKING_BUDGET_BY_TIER inert in modelResolver · mig-191 part-2
+> (surveyor_byok_get carries the profile — coaching costs ZERO extra roundtrips) · coaching
+> wired in all six shells under the quantization law · atlas block wired (92 soak cells
+> reach construct/customContent briefings; interpret/autonomy provably inert) · exemption
+> retired, census at zero exemptions · F-C genre door OPEN (glyphSet/seasonBias accepted
+> end-to-end, schema updated) · manifest kindNote completed); the manager executed the
+> verification tail directly: check:edge 0 · test:edge 619/0 · edgeFunctions 866-suite with
+> ONLY the foreign grounding-bundle red · high-risk suites 244/244 (byokNeverLogged HELD
+> through the profile threading) · lint/copy/config green except three FOREIGN reds
+> (deitySnapshot/locksPreservation any-casts + ruinFilter walker = a fourth lane's in-flight
+> work, attributed). One residue found+fixed inline (escalation clause, recorded): the L-3b
+> probe DB-read pin greppped the retired allowlist spelling — updated to the census-enforced
+> `isSupportedModelPref` form, 139/139 after. REMAINING: the integration-skeptic pass,
+> scheduled at the session-limit reset.
 
 ✅✅ **L-9a LANDED 2026-07-27 (Opus built, Fable validated 112/112):** `src/domain/aiOutputSchema.js`
 (452 lines, 5 surfaces, every enum rendered from the live builders, deeply frozen) + 78-test
@@ -401,6 +409,69 @@ sources fail-closed; edge-side parity pins belong to L-WIRE.
 4. Standing caveat outranking all three: the layer is proven in vitro; cache economics,
    probe discrimination across real frontier models, and repair fix-rates are predictions
    until post-deploy receipts land (the runbook items recorded at L-4/L-3).
+
+## 4d. THE INTEGRATION-SKEPTIC PASS (2026-07-27, adversarial, read-only) — 4 FINDINGS, ALL FIXED
+
+Six of ten seams SURVIVED with executed evidence (repair×tools preserves tools/tool_choice/
+split-content on every round · fallback precedence deterministic, tool wins · thinking@0
+contributes no key · probe→profile→coaching SHAPES agree at all three hops · census at zero
+exemptions · narrative isolation byte-proven · one spend + one usage insert per surface ·
+fold-coupling complete · every inert dial frozen with no env/config escape). Four findings,
+each dispatched for fix the same sitting:
+- **F1 (prompt quality):** `sealStaticPrefix` pads AFTER the coaching block, so on the four
+  padded surfaces the per-model teaching sat 7-9k chars behind [CACHE-STABILIZER] filler —
+  and the pin that "proved" placement was VACUOUS (`indexOf(coach) > indexOf(OUTPUT
+  CONTRACT)` is satisfied with filler between). Fix: explicit seal tail + a bounded-distance
+  pin with a negative control.
+- **F2 (ACTIVATION BLOCKER, inert today):** repairLoop's docblock claims a round "can only
+  shrink the rejected set" — false: each core's merge UNIONS unsupported ledgers, so a failed
+  repair attempt's rejects APPEND to the original's (executed: 1 violation → 3). Fix at the
+  merge layer, keyed by subject; new invariant pinned |final| <= |initial| and subjects ⊆.
+- **F3 (correctness):** coaching was bound to neither the model that earned it (surveyor_byok_get
+  omits probe_model, and the probe measures a different pref key than a surface may resolve —
+  a model could be coached on ANOTHER model's failures) nor the surface (construct sentences
+  rendered into styleOverhaul prefixes, making the block's own header false). Fix: mig-191
+  part-3 carries probe_model through get → byok → shells gate on model equality; and
+  renderCoachingBlock takes a surface key.
+- **F4 (gate defect):** the pglite suites inherit vitest's 10s hookTimeout and SKIP 13 of 15
+  tests while redding — L-5's inertness proof does not execute on the default gate. Fix:
+  explicit hook timeouts, proven green on a plain run.
+✅✅ **ALL FOUR FIXED same sitting (Opus, executed negative controls on every fix; Fable
+validated 109/109 + 81 Deno):** F1 fixed AT THE SEAL (`sealStaticPrefix(body, {tail})` —
+and the negative control found a FIFTH affected surface, autonomy under small vocabularies,
+proving the class-fix shape right; floor deliberately measured on the body so managed-key
+users can't fall under it); the vacuous pin replaced by a bounded-distance assertion
+(slack 16, true distance now 0). F2 fixed per-core at the merges (ledger sourced from the
+accepted state, keyed by subject, original verdict kept; |final| ≤ |initial| pinned over the
+REAL validators on all five surfaces, hostile-repair 1→2 growth reproduced pre-fix on every
+one). F3: mig-191 part-3 (get returns probe_model) + one exported chokepoint
+`renderCoachingFor({profile, probeModel, capturedModel, surface})` — six shells gate on
+exact model equality (dated id ≠ family), surface-filtered sentences, pglite carry-all now
+derived from information_schema so the next column can't be left behind. F4: explicit
+180s hook timeouts, proven under 40-busy-loop load ×3 (the uninstrumented copy reproduced
+the skip-13-red exactly; the fixed files 15/15 + 37/37 under identical load). BONUS finds:
+a raw NUL byte in customContentCore's entry-key separator (the grep-blinding class) rewritten as the backslash-u0000 escape, runtime-identical; the same hook-timeout class in FIVE more pglite siblings — cured by the manager
+same sitting (neighbourBacklinkMerge, refundDedup, paymentRefundObligations,
+paymentRefundRecovery, surveyorProvisioning — all at the 180s deadlock-guard standard).
+Recorded as durable: a vacuous placement pin is worse than none; a merge that unions two
+ledgers is not a shrink; and skipIf/hook-timeout classes make a red look like a pass.
+
+## 4e. FOREIGN REDS IN THE TREE AT PROGRAM CLOSE (attributed, executed evidence, NOT ours)
+- `aiGroundingBundle.freshness` — inputs are the band-polarity lane's dirty worldPulse/deity files.
+- `domainAnyCastBaseline` + `locksPreservation` typecheck — the deity/locks lane (2 any-holes each).
+- `ruinFilterRoster.walker` — the ruin-filter lane.
+- `townScene3dLazy` ×8 under VERIFY_DIST — the promotion contract fingerprints the TRANSITIVE
+  closure, which reaches display files the band-polarity lane is editing: **the live
+  fingerprint moved 645d42c1 → ded586cf within four minutes while our lane touched nothing in
+  that closure.** Self-resolving when that lane settles; re-certification is owner/evidence
+  gated anyway (M23).
+- `operationRegistry.walker` COLLECTION ERROR — a lane renamed configSlice's `get` → `_get`,
+  so the walker cannot locate the slice; chip raised to that lane (a collection error reads as
+  a broken file, not a failed invariant — the nastiest shape).
+- `joins/ordering` siege suppression + `advancePauseResume` — engine-state lanes (ordering is
+  the recorded G7 measurement item).
+- `compendiumDataFreshness`/`fullDocByteRender` batch reds did NOT reproduce standalone
+  (10/10 green) — transient, foreign mid-run writes.
 
 ## 5. Owner-gated (never self-ruled)
 

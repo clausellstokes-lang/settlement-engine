@@ -45,7 +45,7 @@ it('migration 087 is present (suite is not vacuous)', () => {
 });
 
 describe.runIf(have)('087 refund pre-dedup makes the unique index deploy-safe (pglite)', () => {
-  beforeAll(async () => { db = await new PGlite(); });
+  beforeAll(async () => { db = await new PGlite(); }, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
   beforeEach(async () => {
     await db.exec(`
       drop table if exists public.credit_ledger;
@@ -57,7 +57,7 @@ describe.runIf(have)('087 refund pre-dedup makes the unique index deploy-safe (p
         metadata jsonb not null default '{}'::jsonb, created_at timestamptz not null default now()
       );
     `);
-  });
+  }, 180_000 /* same deadlock-guard as the beforeAll: first exec pays pglite's cold WASM boot */);
 
   it('dedups a pre-existing double-refund and reverses the phantom credit, THEN the index creates', async () => {
     // A spend that was refunded TWICE (the race 087 closes): two refund grants of

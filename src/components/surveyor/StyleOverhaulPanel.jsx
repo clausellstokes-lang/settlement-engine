@@ -26,7 +26,6 @@ import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
-const cost = getSurveyorAiCost('styleOverhaul');
 const CANDIDATE_LENS = '__candidate__';
 const DEFAULT_LENS_IDS = ['parchment', 'watercolor', 'darkFantasy', 'vtt'];
 const LENS_LABEL = { parchment: 'Parchment', watercolor: 'Watercolor', darkFantasy: 'Dark', vtt: 'VTT' };
@@ -35,6 +34,10 @@ const LENS_LABEL = { parchment: 'Parchment', watercolor: 'Watercolor', darkFanta
 const styleSlug = (s) => slugify(s, { max: 40, fallback: 'bespoke-style' });
 
 export default function StyleOverhaulPanel({ initialPrompt = '' }) {
+  // Resolved per render, not once at import: the price becomes per-user the moment
+  // the owner activates the capability-tier multiplier (config/pricing.js). A plain
+  // number, so re-resolving costs nothing and cannot churn a memo.
+  const cost = getSurveyorAiCost('styleOverhaul');
   const { creditBalance, ctx, settlement, savedSettlements, activeSaveId } = useSurveyorContext();
   const applyMapEdit = useStore((s) => s.applyMapEdit);
   const previewSettlement = settlement || savedSettlements[0] || null;

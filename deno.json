@@ -11,7 +11,10 @@
     "include": ["supabase/functions/"],
     "exclude": [
       "supabase/functions/_shared/aiGroundingBundle.js",
-      "supabase/functions/_shared/analyticsEventsBundle.js"
+      "supabase/functions/_shared/analyticsEventsBundle.js",
+      "supabase/functions/_shared/aiCharterBundle.js",
+      "supabase/functions/_shared/intentAtlasBundle.js",
+      "supabase/functions/_shared/aiOutputSchemaBundle.js"
     ]
   },
   "fmt": { "exclude": ["**/*"] }

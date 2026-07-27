@@ -48,14 +48,16 @@ import ContentDraftEntry from '../contentStudio/ContentDraftEntry.jsx';
 import ContentInterpretation from '../contentStudio/ContentInterpretation.jsx';
 import ContentSampleReceipt from '../contentStudio/ContentSampleReceipt.jsx';
 
-const cost = getSurveyorAiCost('customContent');
-
 function progressLabel(session) {
   const progress = contentDraftProgress(session);
   return `Content Studio step ${progress.current} of ${progress.total}: ${progress.stage}`;
 }
 
 export default function CustomContentPanel({ initialPrompt = '' }) {
+  // Resolved per render, not once at import: the price becomes per-user the moment
+  // the owner activates the capability-tier multiplier (config/pricing.js). A plain
+  // number, so re-resolving costs nothing and cannot churn a memo.
+  const cost = getSurveyorAiCost('customContent');
   const { creditBalance, ctx } = useSurveyorContext();
   // Preview the content actually active in the current environment. The author
   // library can contain newer heads or definitions deliberately excluded from

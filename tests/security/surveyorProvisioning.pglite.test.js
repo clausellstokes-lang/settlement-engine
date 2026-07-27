@@ -43,7 +43,7 @@ async function asUser(db, uid) {
 }
 
 let db;
-beforeEach(async () => { db = await makeDb(); });
+beforeEach(async () => { db = await makeDb(); }, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
 
 describe('grant / revoke round-trip', () => {
   it('grants an active entitlement recording the sub id, and re-grant reactivates a revoked row', async () => {

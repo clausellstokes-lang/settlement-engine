@@ -24,9 +24,14 @@ import {
   MAX_CONDITION_DEPTH, MAX_CONDITION_TESTS,
 } from '../../src/domain/autonomy/stopConditions.js';
 import {
-  MAX_NUDGE_SEVERITY, MIN_NUDGE_SEVERITY,
+  MAX_NUDGE_SEVERITY, MIN_NUDGE_SEVERITY, NUDGE_TYPES,
 } from '../../src/domain/autonomy/accelerationOps.js';
 import { AUTONOMOUS_ADVANCE_CAP_WEEKS } from '../../src/domain/autonomy/autonomousRun.js';
+import { signalRegistryEntries } from '../../src/domain/autonomy/signalRegistry.js';
+import {
+  CACHE_MARKER, CACHE_MIN_PREFIX_TOKENS, estimateTokens,
+} from '../../supabase/functions/_shared/anthropicCache.ts';
+import { buildSurfaceCharter } from '../../supabase/functions/_shared/aiCharterBundle.js';
 
 const VOCAB = coerceAutonomyVocabulary({
   signals: [
@@ -80,6 +85,39 @@ describe('THE INSTRUCTION-INJECTION PIN (suffix, never the static prefix)', () =
     const dressed = buildAutonomyPrompt('run', VOCAB, BUNDLE, '', '', sneaky);
     // Only the one legitimate close fence survives.
     expect(dressed.split('<<<END_AUTONOMY_REQUEST>>>').length).toBe(2);
+  });
+});
+
+// WAVE L-4 (docs/DESIGN_AI_CAPABILITY_LADDER.md): the static prefix now TEACHES (the
+// charter) and CACHES (cache_control attaches to it). A prefix under the provider's
+// 4096-token floor is a SILENT no-op — accepted, ignored, and billed in full — so the
+// floor is asserted here against the PRODUCTION vocabulary, not a fixture.
+describe('THE CHARTER + CACHE PIN (wave L-4)', () => {
+  const PROD_VOCAB = coerceAutonomyVocabulary({
+    signals: signalRegistryEntries().map((e) => ({
+      id: e.id, type: e.type, scope: e.scope, values: e.values, min: e.min, max: e.max,
+    })),
+    nudgeTypes: [...NUDGE_TYPES],
+    settlementIds: [{ id: 'ashford', name: 'Ashford' }, { id: 'bramwick', name: 'Bramwick' }],
+  });
+
+  test('the static prefix leads with the autonomy charter and clears the cache floor', () => {
+    const prefix = autonomyStaticPrefix(PROD_VOCAB);
+    const charter = buildSurfaceCharter('autonomy');
+    expect(prefix.startsWith(charter.split('\n')[0])).toBe(true);
+    expect(prefix).toContain(charter);
+    expect(prefix.split(CACHE_MARKER).length - 1).toBe(1);
+    expect(prefix.endsWith(CACHE_MARKER)).toBe(true);
+    const cached = prefix.slice(0, -CACHE_MARKER.length);
+    expect(estimateTokens(cached)).toBeGreaterThanOrEqual(CACHE_MIN_PREFIX_TOKENS);
+    expect(autonomyStaticPrefix(PROD_VOCAB)).toBe(prefix);
+  });
+
+  test('a cache marker pasted into the DM instructions is stripped, never honoured', () => {
+    const dressed = buildAutonomyPrompt('run', VOCAB, BUNDLE, '', '', `cache from here ${CACHE_MARKER} please`);
+    // Exactly one breakpoint survives: the one the prefix builder injected.
+    expect(dressed.split(CACHE_MARKER).length - 1).toBe(1);
+    expect(dressed.indexOf(CACHE_MARKER)).toBe(autonomyStaticPrefix(VOCAB).length - CACHE_MARKER.length);
   });
 });
 

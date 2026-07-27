@@ -380,7 +380,13 @@ export interface ProviderAdapter {
   /** The model ids this adapter supports (the picker's ceiling — the dynamic dropdown
    *  is the key's list-models ∩ THIS set). May be empty (no static list declared). */
   models: readonly string[];
-  call: (args: { model: string; apiKey: string; prompt: string; signal: AbortSignal; fetchImpl?: typeof fetch }) => Promise<Response>;
+  /** `thinkingBudget` (wave L-WIRE) is the resolved rung's deliberation room in tokens. It
+   *  is OPTIONAL and ZERO everywhere today: an adapter that ignores it, and a caller that
+   *  omits it, both produce exactly the request they produced before the ladder existed. */
+  call: (args: {
+    model: string; apiKey: string; prompt: string; signal: AbortSignal;
+    fetchImpl?: typeof fetch; thinkingBudget?: number;
+  }) => Promise<Response>;
 }
 
 /** Register a provider adapter. §3e: `retentionClass` is REQUIRED and must be a valid

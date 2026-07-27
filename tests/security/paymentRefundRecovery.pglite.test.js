@@ -128,7 +128,7 @@ async function claim(limit = 10, leaseSeconds = 120) {
 
 beforeEach(async () => {
   db = await makeDb();
-}, 60_000);
+}, 180_000 /* was 60s tuned-to-a-measurement; class law: a hook timeout is a deadlock guard, not a perf budget */);
 
 describe('migration 180 payment refund recovery', () => {
   it('seeds an inert dispatcher and stores the original producer idempotency keys', async () => {

@@ -72,10 +72,20 @@ export function validateBespokeStyle(candidate, meta = {}) {
   // The known top-level fields — anything else is dropped (arbitrary SVG/geometry/substance).
   // IT-4 adds `glyphSet` (select a registered glyph library) + `seasonBias` (a bounded default
   // season) — the genre-door + dress-character reskin fields.
+  //
+  // `baseLens` is RECOGNIZED AND STRIPPED (finding F-A, DESIGN_AI_CAPABILITY_LADDER.md; manager
+  // ruling 2026-07-27, VETOABLE): the style-overhaul edge contract requires the compiler to name
+  // the base lens it composed from (styleOverhaulCore.ts STYLE_FIELDS) and derives the lens
+  // roadmap radar from it edge-side (styleRiderTags), but it is an EDGE SIGNAL, not a client
+  // style property. Listing it here keeps a contract-conforming response from showing the user a
+  // spurious "rejected" row, while omitting it from the resolved style below keeps it strictly
+  // non-renderable: the wall always resolves onto the parchment base, so no named lens can steer
+  // the client defaults. The alternative ruling (HONOR it as the resolution base) would change
+  // what every existing bespoke style resolves to, so it stays owner territory.
   const KNOWN = new Set([
     'id', 'label', 'background', 'contrast', 'hazardGlyph', 'anchorGlyph',
     'furniture', 'functional', 'rasterScale', 'palette', 'district', 'stroke', 'opacity',
-    'glyphSet', 'seasonBias',
+    'glyphSet', 'seasonBias', 'baseLens',
   ]);
   for (const k of Object.keys(c)) {
     if (!KNOWN.has(k)) violations.push({ field: k, reason: 'unsupported_field' });

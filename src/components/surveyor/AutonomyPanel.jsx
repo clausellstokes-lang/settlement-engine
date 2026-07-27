@@ -37,8 +37,6 @@ import {
   AUTONOMOUS_ADVANCE_CAP_WEEKS, clampAutonomousWeeks, MAX_CONDITION_TESTS,
 } from '../../domain/autonomy/index.js';
 
-const cost = getSurveyorAiCost('autonomy');
-
 const inputStyle = {
   fontSize: FS.xs, fontFamily: sans, color: INK, background: '#fff',
   border: `1px solid ${BORDER}`, padding: `2px ${SP.xs}px`,
@@ -118,6 +116,10 @@ function conditionFromRows(rows, combinator) {
 }
 
 export default function AutonomyPanel({ initialPrompt = '' }) {
+  // Resolved per render, not once at import: the price becomes per-user the moment
+  // the owner activates the capability-tier multiplier (config/pricing.js). A plain
+  // number, so re-resolving costs nothing and cannot churn a memo.
+  const cost = getSurveyorAiCost('autonomy');
   const { creditBalance, ctx, activeCampaignId, activeCampaign, savedSettlements } = useSurveyorContext();
   const advanceCampaignWorld = useStore((s) => s.advanceCampaignWorld);
   const injectCampaignStressor = useStore((s) => s.injectCampaignStressor);

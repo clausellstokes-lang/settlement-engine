@@ -17,8 +17,8 @@ import { useAccountSurveyorGate } from './useAccountSurveyorGate.js';
 import { INK, BODY, MUTED, BORDER, CARD, GOLD, GREEN, RED, AMBER, CARD_ALT, SP, R, FS, sans, serif_, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import {
-  keyPrefixHint, getByokStatus, setByokKey, clearByokKey, verifyByokKey,
-  getSurveyorSettings, setSurveyorSettings,
+  keyPrefixHint, getByokStatus, setByokKey, clearByokKey, verifyByokKey, probeByokKey,
+  probeTierLabel, probeTierSentence, getSurveyorSettings, setSurveyorSettings,
 } from '../../lib/surveyorByok.js';
 
 const AiUsageDashboard = lazy(() => import('./AiUsageDashboard.jsx'));
@@ -54,8 +54,9 @@ export default function AccountAiKeysSection() {
   const [statusRow, setStatusRow] = useState(null); // the anthropic byok status row, or null
   const [settings, setSettings] = useState(null);
   const [keyInput, setKeyInput] = useState('');
-  const [busy, setBusy] = useState(null);           // 'save' | 'verify' | 'remove' | 'model' | 'caps' | 'pause'
+  const [busy, setBusy] = useState(null);           // 'save' | 'verify' | 'probe' | 'remove' | 'model' | 'caps' | 'pause'
   const [verify, setVerify] = useState(null);       // last verify result { ok, health, models?, message? }
+  const [probe, setProbe] = useState(null);         // last probe result { ok, tier, message? }
   const [error, setError] = useState(null);
   const [showUsage, setShowUsage] = useState(false);
   const [caps, setCaps] = useState({ daily_token_cap: '', weekly_token_cap: '', daily_usd_cap: '', weekly_usd_cap: '', warn_pct: '80' });
@@ -89,6 +90,15 @@ export default function AccountAiKeysSection() {
   const hasKey = !!statusRow?.has_key || !!keyInput;
   const models = verify?.models || [];
   const modelPrefs = settings?.model_prefs || {};
+  // The measured tier reads from the PERSISTED row, so it survives a reload; the live
+  // probe result only supplies the refusal message when a run could not finish.
+  const tierLabel = probeTierLabel(statusRow?.probe_tier);
+  const probeSentence = health === 'healthy'
+    ? probeTierSentence(statusRow)
+    : 'Verify this key first, then the capability check can run.';
+  const probeMeta = statusRow?.probe_checked_at
+    ? `Last checked ${fmtDate(statusRow.probe_checked_at)}${statusRow.probe_model ? ` using ${statusRow.probe_model}` : ''}.`
+    : null;
 
   const run = async (name, fn) => {
     setBusy(name); setError(null);
@@ -111,9 +121,20 @@ export default function AccountAiKeysSection() {
     await refreshStatus();
   });
 
+  // THE COMPETENCY PROBE (docs/DESIGN_AI_CAPABILITY_LADDER.md): the step after verify.
+  // Kept as its own button rather than folded into save-and-verify, because it runs
+  // three real requests on the user's own provider account: verifying is a courtesy the
+  // surface owes them, spending their tokens is a thing they should choose.
+  const handleProbe = () => run('probe', async () => {
+    const res = await probeByokKey(PROVIDER);
+    setProbe(res);
+    await refreshStatus();
+  });
+
   const handleRemove = () => run('remove', async () => {
     await clearByokKey(PROVIDER);
     setVerify(null);
+    setProbe(null);
     await refreshStatus();
   });
 
@@ -200,6 +221,34 @@ export default function AccountAiKeysSection() {
             {verify && !verify.ok && verify.message && (
               <div style={{ flexBasis: '100%', fontSize: FS.xs, color: BODY }}>{verify.message}</div>
             )}
+          </div>
+        )}
+
+        {/* ── Measured model capability (the competency probe) ─────────────────── */}
+        {statusRow?.has_key && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
+              <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Model capability</div>
+              {tierLabel && (
+                <span style={{ padding: `2px ${SP.sm}px`, borderRadius: R.pill || R.md, fontSize: FS.xs, fontWeight: 700, color: GOLD, border: `1px solid ${GOLD}` }}>{tierLabel}</span>
+              )}
+              <div style={{ marginLeft: 'auto' }}>
+                <Button variant="ghost" size="sm" disabled={busy === 'probe' || health !== 'healthy'} onClick={handleProbe}>
+                  {busy === 'probe' ? 'Checking…' : (tierLabel ? 'Check again' : 'Run capability probe')}
+                </Button>
+              </div>
+            </div>
+            <div style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.5 }}>{probeSentence}</div>
+            {probeMeta && <div style={{ fontSize: FS.xs, color: MUTED }}>{probeMeta}</div>}
+            {probe && !probe.ok && probe.message && (
+              <div style={{ fontSize: FS.xs, color: BODY }}>{probe.message}</div>
+            )}
+            <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+              The check files three sample requests through your key and reads the result against
+              the same rules the app itself enforces, so what it reports is what your model did,
+              not what it says about itself. It costs no credits, though your provider does charge
+              you for the three requests.
+            </div>
           </div>
         )}
 

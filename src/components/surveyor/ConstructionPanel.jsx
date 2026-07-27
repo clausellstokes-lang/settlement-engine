@@ -27,7 +27,6 @@ const DIMENSION_LABEL = {
 const BAND_TONE = { low: 'muted', moderate: 'info', high: 'warning' };
 const MAX_REVISE_ROUNDS = 2;
 
-const costFor = (scope) => getSurveyorAiCost(scope === 'realm' ? 'constructRealm' : 'constructSettlement');
 const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`;
 
 export default function ConstructionPanel({ initialPrompt = '', initialScope }) {
@@ -140,7 +139,10 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
     }
   }, [scope, result, generated, seed, instantWorld, setActiveSaveId]);
 
-  const cost = costFor(scope);
+  // Resolved per render (and per scope), not once at import: the price becomes
+  // per-user the moment the owner activates the capability-tier multiplier
+  // (config/pricing.js). A plain number, so re-resolving cannot churn a memo.
+  const cost = getSurveyorAiCost(scope === 'realm' ? 'constructRealm' : 'constructSettlement');
   const config = result?.config;
   const configKeys = config ? Object.keys(config) : [];
   const unsupported = result?.unsupported || [];

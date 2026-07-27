@@ -181,3 +181,50 @@ describe('townMapStyleWall — IT-4 reskin fields (glyphSet + seasonBias + dress
     expect(Object.keys(style)).not.toContain('seasonBias');
   });
 });
+
+describe('townMapStyleWall — the edge OUTPUT CONTRACT validates clean (finding F-A)', () => {
+  // The style-overhaul edge names `baseLens` in STYLE_FIELDS and in its OUTPUT CONTRACT
+  // (supabase/functions/style-overhaul/styleOverhaulCore.ts), and styleRiderTags derives the
+  // lens roadmap radar from it. The payload below is the charter exemplar verbatim
+  // (src/domain/aiCharter.js), i.e. exactly what a contract-conforming model response carries.
+  // The wall must RECOGNIZE every contracted field, or StyleOverhaulPanel shows the user a
+  // "rejected" row on a response that did nothing wrong.
+  it('a contract-conforming payload (baseLens included) yields ZERO violations', () => {
+    const { ok, style, violations } = validateBespokeStyle({
+      baseLens: 'watercolor',
+      label: 'Rain-Soaked Chart',
+      background: '#dfe6ea',
+      contrast: 'soft',
+      hazardGlyph: 'diamond',
+      anchorGlyph: 'ring',
+      furniture: ['compass', 'scaleBar', 'wash'],
+      functional: { grid: false, gridStep: 50, scaleBar: true, tokenPx: 40 },
+      rasterScale: 2,
+      palette: { water: '#7fa8bd', road: '#8b8375' },
+      district: { merchant: '#9fb4a7' },
+      stroke: { river: 2, roadBase: 3 },
+      opacity: { districtFill: 0.35, waterFill: 0.55 },
+    }, { id: 'bespoke:rain', label: 'Rain-Soaked Chart' });
+    expect(ok).toBe(true);
+    expect(violations).toEqual([]);
+    // the contracted values actually landed (the pin is not green by dropping everything)
+    expect(style.background).toBe('#dfe6ea');
+    expect(style.contrast).toBe('soft');
+    expect(style.anchorGlyph).toBe('ring');
+    expect(style.palette.water).toBe('#7fa8bd');
+    expect(style.opacity.districtFill).toBe(0.35);
+  });
+
+  it('baseLens is RECOGNIZED AND STRIPPED: it never becomes a client style property', () => {
+    // It is the edge rider-tag signal (which base lens the composer worked from), not a
+    // renderer input. The wall always resolves onto the parchment base, so naming a lens can
+    // never steer the client defaults.
+    const { style, violations } = validateBespokeStyle({ baseLens: 'darkFantasy', background: '#0a0a12' });
+    expect(violations).toEqual([]);
+    expect(style.baseLens).toBeUndefined();
+    expect(Object.keys(style)).not.toContain('baseLens');
+    const base = resolveTownMapStyle(DEFAULT_STYLE_ID);
+    expect(style.palette.ink).toBe(base.palette.ink);
+    expect(style.contrast).toBe(base.contrast);
+  });
+});

@@ -23,6 +23,7 @@ import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
 import { resolveProviderKey } from '../ai-analyst/byok.ts';
+import { resolveCapturedModel } from '../ai-analyst/modelResolver.ts';
 import {
   buildRetrievalBundle, registerProviderAdapter, routeWorldDataAdapter,
   accountCanary, detectMetaProbe, fnv1a32,
@@ -34,9 +35,23 @@ import {
 } from '../ai-analyst/providerErrors.ts';
 import type { RefusalClass, ProviderErrorClass } from '../ai-analyst/providerErrors.ts';
 import { isStageEnabled, killSwitchRefusal } from '../_shared/surveyorStage.ts';
+import { splitForAnthropic } from '../_shared/anthropicCache.ts';
+// THE CONSTRAINED-OUTPUT SEAM (wave L-WIRE): the surface's output schema rides the request
+// as a forced tool, so an unregistered value stops being something the model emits and the
+// wall rejects. The free-text parse stays as the fallback.
+import {
+  answerTextFromResponse, buildOutputTool, forceOutputTool, thinkingClause,
+} from '../_shared/aiOutputTool.ts';
+import { newRepairUsage, repairRoundsForTierClass, runWithRepair } from '../_shared/repairLoop.ts';
+import { thinkingBudgetForTierClass } from '../ai-analyst/modelResolver.ts';
+// THE COACHING BLOCK (wave L-WIRE): the exam's own verdicts, rendered as frozen house
+// sentences and shown to the model that sat the exam. Empty for a managed key, an unprobed
+// key, or a clean sweep, and the profile arrives on the SAME RPC that decrypted the key.
+import { renderCoachingFor } from '../_shared/modelCoaching.ts';
 import { overTokenBudget } from '../_shared/promptEfficiency.ts';
 import {
   buildConstructPrompt, compileConstruct, constructLogRecord,
+  constructRepairViolations, mergeConstructCompiled,
 } from '../_shared/constructCore.ts';
 import type { ConstructVocabulary, ConstructResult, FieldSpec } from '../_shared/constructCore.ts';
 import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
@@ -88,17 +103,26 @@ function defaultAdminClient() {
   return createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
 }
 
-async function callAnthropic(apiKey: string, model: string, prompt: string, providerFetch: typeof fetch, signal: AbortSignal): Promise<Response> {
+/** The forced output tool (wave L-WIRE). Built ONCE at module scope, because the schema is
+ *  byte-stable and the tools array is the first thing in the provider's cacheable prefix:
+ *  rebuilding it per request would cost nothing in tokens and everything in cache hits. */
+const CONSTRUCT_TOOL = buildOutputTool(
+  'construct',
+  'Submit the realm generator config drawn from the construction vocabulary, plus the coarse constraint bands the result should satisfy.',
+);
+const CONSTRUCT_TOOL_CHOICE = forceOutputTool(CONSTRUCT_TOOL);
+
+async function callAnthropic(apiKey: string, model: string, prompt: string, providerFetch: typeof fetch, signal: AbortSignal, thinkingBudget = 0): Promise<Response> {
   return providerFetch('https://api.anthropic.com/v1/messages', {
     method: 'POST', signal,
     headers: { 'x-api-key': apiKey, 'anthropic-version': ANTHROPIC_VERSION, 'content-type': 'application/json' },
-    body: JSON.stringify({ model, max_tokens: MAX_OUTPUT_TOKENS, messages: [{ role: 'user', content: prompt }] }),
+    body: JSON.stringify({ model, max_tokens: MAX_OUTPUT_TOKENS, tools: [CONSTRUCT_TOOL], tool_choice: CONSTRUCT_TOOL_CHOICE, ...thinkingClause(thinkingBudget), messages: [{ role: 'user', content: splitForAnthropic(prompt) }] }),
   });
 }
 
 const anthropicAdapter = registerProviderAdapter({
   id: 'anthropic', retentionClass: ANTHROPIC_RETENTION_CLASS, models: ANTHROPIC_SUPPORTED_MODELS,
-  call: ({ model, apiKey, prompt, signal, fetchImpl }) => callAnthropic(apiKey, model, prompt, fetchImpl ?? fetch, signal),
+  call: ({ model, apiKey, prompt, signal, fetchImpl, thinkingBudget }) => callAnthropic(apiKey, model, prompt, fetchImpl ?? fetch, signal, thinkingBudget ?? 0),
 });
 
 export async function handleConstructRealm(
@@ -179,7 +203,10 @@ export async function handleConstructRealm(
     let capturedMusings: Array<{ text: string }> = [];
     let capturedRider: EnrichmentRider | null = null;
     let capturedRefused = false;
-    let capturedUsage: { input: number | null; output: number | null } = { input: null, output: null };
+    // THE PER-CALL TOKEN LEDGER (wave L-6). Owned here, mutated by the repair loop, so a
+    // provider error on a later round cannot erase an earlier round's tokens from the
+    // COGS row below. With zero repair rounds it holds exactly one round's numbers.
+    const repairUsage = newRepairUsage();
     let capturedRefusalClass: RefusalClass | null = null;
     let capturedRefusalMessage: string | null = null;
     let capturedRefusalDoors: string[] = [];
@@ -225,7 +252,17 @@ export async function handleConstructRealm(
       capturedModelPref = mp && typeof mp[CONSTRUCT_FEATURE] === 'string' ? String(mp[CONSTRUCT_FEATURE]) : null;
     } catch (e) { logError('construct-realm', user.id, e, { stage: 'governor' }); }
 
-    capturedModel = (providerKey.byok && capturedModelPref && ANTHROPIC_SUPPORTED_MODELS.includes(capturedModelPref)) ? capturedModelPref : CONSTRUCT_MODEL;
+    const resolvedModel = resolveCapturedModel({
+      byok: providerKey.byok, modelPref: capturedModelPref, surfaceDefault: CONSTRUCT_MODEL,
+    });
+    capturedModel = resolvedModel.model;
+    // THE TIER DIAL (wave L-6): how many validator-fed repair rounds this rung may spend
+    // inside the single credited call. Every rung is 0 today, so this is exactly one call.
+    const repairRounds = repairRoundsForTierClass(resolvedModel.tierClass);
+    // THE SECOND TIER DIAL (wave L-WIRE): the rung's deliberation room. Every rung is 0
+    // today, and at 0 thinkingClause contributes NO key, so the request body is
+    // byte-identical to the pre-L-WIRE one.
+    const thinkingBudget = thinkingBudgetForTierClass(resolvedModel.tierClass);
 
     const outcome = await runCreditedCall({
       async reserve() {
@@ -246,34 +283,67 @@ export async function handleConstructRealm(
         return { ok: !!res?.ok, spendId: capturedSpendId, elevated: !!res?.elevated, balance: res?.balance ?? null, reason: res?.reason ?? null };
       },
       async callModel() {
-        capturedPrompt = buildConstructPrompt(intent, vocab, bundle, anchorLabel, canary, SLICE_BUDGET);
-        const ac = new AbortController();
-        const timer = setTimeout(() => ac.abort(), CONSTRUCT_TIMEOUT_MS);
-        let resp: Response;
-        try {
-          const adapter = routeWorldDataAdapter(anthropicAdapter);
-          resp = await adapter.call({ model: capturedModel, apiKey: providerKey.key, prompt: capturedPrompt, signal: ac.signal, fetchImpl: providerFetch });
-        } catch (fetchErr) {
-          await applyProviderError(classifyProviderThrow(fetchErr));
-          if (fetchErr instanceof Error && fetchErr.name === 'AbortError') throw new Error(`Anthropic request timed out after ${CONSTRUCT_TIMEOUT_MS}ms`);
-          throw fetchErr;
-        } finally { clearTimeout(timer); }
-        if (!resp.ok) {
-          const bodyText = await resp.text().catch(() => '');
-          await applyProviderError(classifyProviderError(resp.status, bodyText.slice(0, 2000)));
-          throw new Error(`Anthropic ${resp.status}`);
-        }
-        const data = await resp.json();
-        capturedUsage = {
-          input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
-          output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null,
+        capturedPrompt = buildConstructPrompt(intent, vocab, bundle, anchorLabel, canary, SLICE_BUDGET, renderCoachingFor({
+          profile: providerKey.probeProfile, probeModel: providerKey.probeModel,
+          capturedModel, surface: 'construct',
+        }));
+        /** ONE provider round-trip, exactly as this surface has always made it. The outer
+         *  signal is the repair loop's round budget; the inner controller is this
+         *  surface's own per-call timeout. Both abort the same fetch, so a round can never
+         *  outlive either bound, and with zero repair rounds the outer one is armed at the
+         *  same instant as the inner one and changes nothing. */
+        const draftOnce = async (prompt: string, outer: AbortSignal) => {
+          const ac = new AbortController();
+          const timer = setTimeout(() => ac.abort(), CONSTRUCT_TIMEOUT_MS);
+          const relay = () => ac.abort();
+          if (outer.aborted) relay(); else outer.addEventListener('abort', relay, { once: true });
+          let resp: Response;
+          try {
+            const adapter = routeWorldDataAdapter(anthropicAdapter);
+            resp = await adapter.call({ model: capturedModel, apiKey: providerKey.key, prompt, signal: ac.signal, fetchImpl: providerFetch, thinkingBudget });
+          } catch (fetchErr) {
+            await applyProviderError(classifyProviderThrow(fetchErr));
+            if (fetchErr instanceof Error && fetchErr.name === 'AbortError') throw new Error(`Anthropic request timed out after ${CONSTRUCT_TIMEOUT_MS}ms`);
+            throw fetchErr;
+          } finally { clearTimeout(timer); outer.removeEventListener('abort', relay); }
+          if (!resp.ok) {
+            const bodyText = await resp.text().catch(() => '');
+            await applyProviderError(classifyProviderError(resp.status, bodyText.slice(0, 2000)));
+            throw new Error(`Anthropic ${resp.status}`);
+          }
+          const data = await resp.json();
+          const usage = {
+            input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
+            output: typeof data?.usage?.output_tokens === 'number' ? data.usage.output_tokens : null,
+          };
+          // A provider REFUSAL is not a validation failure: the model declined, and
+          // re-prompting it would be both rude and paid. Halt the loop, keep the shape.
+          if (data?.stop_reason === 'refusal') { capturedRefused = true; return { answerText: '', halt: true, usage }; }
+          // WAVE L-WIRE: the forced tool's input IS the answer, re-serialized so the core's
+          // existing parse consumes it unchanged. With no tool_use block this reduces to
+          // the pre-L-WIRE expression verbatim, so an unsupporting model degrades exactly
+          // as it did before rather than to an empty answer.
+          return { answerText: answerTextFromResponse(data).trim(), usage };
         };
-        if (data?.stop_reason === 'refusal') {
-          capturedRefused = true;
-          return { ok: false, answerText: '' };
-        }
-        capturedAnswerText = (data?.content?.[0]?.text || '').trim();
-        const compiled = compileConstruct(capturedAnswerText, vocab);
+
+        // THE FORMATIVE LOOP (wave L-6) — INSIDE this one credited call. Reserve, spend,
+        // refund and release are untouched: the loop only decides how many provider
+        // round-trips the single call is worth, and every round reuses the sealed cache
+        // prefix, so only the repair tail is new input.
+        const loop = await runWithRepair({
+          basePrompt: capturedPrompt,
+          maxRounds: repairRounds,
+          roundTimeoutMs: CONSTRUCT_TIMEOUT_MS,
+          deadline: Date.now() + CONSTRUCT_TIMEOUT_MS * (repairRounds + 1),
+          usage: repairUsage,
+          callModel: ({ prompt, signal }) => draftOnce(prompt, signal),
+          parse: (text) => compileConstruct(text, vocab),
+          validate: (compiled) => constructRepairViolations(compiled.result),
+          merge: ({ accepted, repaired }) => mergeConstructCompiled(accepted, repaired),
+        });
+        const compiled = loop.parsed;
+        if (!compiled) return { ok: false, answerText: '' };
+        capturedAnswerText = loop.answerText;
         capturedResult = compiled.result;
         capturedMusings = compiled.musings;
         capturedRider = compiled.rider;
@@ -288,15 +358,17 @@ export async function handleConstructRealm(
       async release(id) { if (!id) return; try { await supabaseAdmin.rpc('release_ai_spend_reservation', { p_id: id }); } catch (e) { logError('construct-realm', user.id, `release failed: ${e instanceof Error ? e.message : String(e)}`, { stage: 'spend-cap' }); } },
       async meter(ok) {
         try {
-          const inTok = capturedUsage.input ?? estTokens(capturedPrompt);
-          const outTok = capturedUsage.output ?? estTokens(capturedAnswerText);
+          // TOKENS ARE SUMMED ACROSS REPAIR ROUNDS (wave L-6); with one round the sum IS
+          // the round, so these are the pre-wave numbers exactly.
+          const inTok = repairUsage.inputTokens ?? Math.max(repairUsage.promptEstTokens, estTokens(capturedPrompt));
+          const outTok = repairUsage.outputTokens ?? Math.max(repairUsage.answerEstTokens, estTokens(capturedAnswerText));
           capturedOverBudget = overTokenBudget(inTok + outTok, TOKEN_BUDGET);
           if (capturedOverBudget) logError('construct-realm', user.id, `token budget exceeded: ${inTok + outTok} > ${TOKEN_BUDGET}`, { stage: 'budget' });
           const costUsd = providerKey.byok ? 0 : Number((((inTok / 1_000_000) * 3) + ((outTok / 1_000_000) * 15)).toFixed(6));
           const { error } = await supabaseAdmin.from('ai_usage_events').insert({
             user_id: user.id, feature: CONSTRUCT_FEATURE, phase: null, provider: CONSTRUCT_PROVIDER,
             model: capturedModel, model_preference: capturedModelPref, input_tokens: inTok, output_tokens: outTok,
-            tokens_estimated: capturedUsage.input == null || capturedUsage.output == null,
+            tokens_estimated: repairUsage.inputTokens == null || repairUsage.outputTokens == null,
             estimated_cost_usd: costUsd, ok, fellback: false, duration_ms: 0, spend_id: capturedSpendId,
           });
           if (error) logError('construct-realm', user.id, `ai_usage_events insert failed: ${error.message}`, { stage: 'metering' });

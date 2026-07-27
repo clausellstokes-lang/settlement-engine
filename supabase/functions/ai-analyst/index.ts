@@ -27,6 +27,7 @@ import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from './creditFlow.ts';
 import { resolveProviderKey } from './byok.ts';
+import { resolveCapturedModel } from './modelResolver.ts';
 import {
   buildRetrievalBundle, validateClaims, citationCoverage, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
@@ -311,8 +312,9 @@ export async function handleAiAnalyst(
 
     // Resolve the model actually called: a BYOK user's valid per-task override wins;
     // an unknown/invalid pref or a managed (server-key) request uses the server default.
-    capturedModel = (providerKey.byok && capturedModelPref && ANTHROPIC_SUPPORTED_MODELS.includes(capturedModelPref))
-      ? capturedModelPref : ANALYST_MODEL;
+    capturedModel = resolveCapturedModel({
+      byok: providerKey.byok, modelPref: capturedModelPref, surfaceDefault: ANALYST_MODEL,
+    }).model;
 
     const outcome = await runCreditedCall({
       async reserve() {

@@ -122,7 +122,7 @@ async function read(paymentIntentId = 'pi_auto_reload') {
 
 beforeEach(async () => {
   db = await makeDb();
-});
+}, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
 
 describe('migration 177 durable payment refund obligations', () => {
   it('applies the full schema with RLS and an RPC-only service-role mutation posture', async () => {
