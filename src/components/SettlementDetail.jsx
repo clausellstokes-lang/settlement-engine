@@ -20,6 +20,7 @@ import { flag } from '../lib/flags.js';
 // The shared export seam (campaign assembly + faith premium gate) — one
 // resolver for BOTH export formats so PDF and Foundry can never drift.
 import { resolveExportSeam } from './settlementDetail/resolveExportSeam.js';
+import { viewerCanAuthor } from '../lib/viewerAuthority.js';
 import { useStore } from '../store/index.js';
 
 // W-Session — the distraction-free run-of-play takeover. Lazy like TableView:
@@ -34,6 +35,9 @@ import SettlementDossierHero from './settlementDetail/SettlementDossierHero.jsx'
 import { renameDetailSettlement } from './settlements/helpers.js';
 import ChroniclePanel from './ChroniclePanel.jsx';
 import WhatChangedPanel from './settlement/WhatChangedPanel.jsx';
+// Wave R-2 (atlas A20): the event-keyed pre-event narrative archive, read side.
+// Lazy leaf — its chunk loads only when a narrated/stamped save opens edit mode.
+const NarrativeArchivePanel = lazy(() => import('./settlement/NarrativeArchivePanel.jsx'));
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
 // (Timeline only shows in canon, CoherencePanel only in draft).
@@ -231,9 +235,11 @@ export default function SettlementDetail({
   // header's inline rename for the saved-dossier editor (C3 / C4 Panel A handoff).
   const renameSettlement     = useStore(s => s.renameSettlement);
   const authTier             = useStore(s => s.auth?.tier);
-  const isElevated           = useStore(s => typeof s.isElevated === 'function' ? s.isElevated() : false);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
-  const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
+  // R-4 premium-gate single source: the authoring authority (premium / founder /
+  // elevated, fail-closed) is spelled ONCE, in src/lib/viewerAuthority.js, and
+  // shared with the Create-flow Workbench mount. Behaviour-identical extraction.
+  const canEdit              = useStore(viewerCanAuthor);
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
   // ── PDF-export access seam ─────────────────────────────────────────────────
@@ -738,6 +744,19 @@ export default function SettlementDetail({
       {/* ── Chronicle: collapsible history log, only surfaced when a save has entries ── */}
       {saveId && Array.isArray(chronicleEntries) && chronicleEntries.length > 0 && (
         <ChroniclePanel entries={chronicleEntries} />
+      )}
+
+      {/* ── Narrative Archive (Wave R-2, atlas A20): the event-keyed stamps of the
+             narrative that stood BEFORE each canon event — the read side of the
+             archive both canon writers fill. Mount condition mirrors the writers'
+             own gate (the save carries a settlement narrative), plus any save
+             already holding stamps, so the honest empty state is reachable the
+             moment stamps become possible. ── */}
+      {saveId && (liveSaveEntry?.aiData?.aiSettlement
+        || (Array.isArray(liveSaveEntry?.aiData?.eventNarrativeSnapshots) && liveSaveEntry.aiData.eventNarrativeSnapshots.length > 0)) && (
+        <Suspense fallback={<span role="status">Opening the narrative archive…</span>}>
+          <NarrativeArchivePanel save={liveSaveEntry} />
+        </Suspense>
       )}
       </>)}
 

@@ -400,6 +400,92 @@ describe('Track K COMPLETION — operation registry completeness walker', () => 
   });
 });
 
+// ── R-0 undo-truth: the undoState walker (atlas VI.3 #62) ─────────────────────
+// undoToken:null used to conflate three meanings (honest-irreversible /
+// recovery-exists-elsewhere / not-built). Every op now declares which, in ONE
+// flat field, fail-closed: a NEW op shipped without undoState (or with a value
+// outside the grammar) lands here. The grammar mirrors the registry typedef:
+//   action | action-partial | irreversible | none | not-applicable
+//   | undetermined | external:<ref> | partial:<ref>
+// 'action-partial' is the PARTIAL variant of the armed state: undoToken names a
+// real registered inverse, but the inverse restores the primary state only
+// (canonize/uncanonize: phase + canonizedAt round-trip, the event log does not).
+describe('R-0 undo-truth — every operation declares an explicit undoState', () => {
+  const ops = Object.values(OPERATIONS);
+  const VALID_UNDO_STATE =
+    /^(action|action-partial|irreversible|none|not-applicable|undetermined|external:\S+|partial:\S+)$/;
+  // Non-null undoToken ⇔ an ARMED undoState ('action' = full restore,
+  // 'action-partial' = partial restore). A token-carrying row MAY declare partial
+  // restoration but may NEVER claim a null-state such as 'none'; a token-less row
+  // may never claim an armed state.
+  const ARMED_STATES = new Set(['action', 'action-partial']);
+  const tokenStateAgree = (op) =>
+    (op.undoToken != null) === ARMED_STATES.has(op.undoState);
+
+  test('every registered operation carries a valid undoState (fail-closed enumeration)', () => {
+    const bad = ops
+      .filter((op) => !VALID_UNDO_STATE.test(String(op.undoState)))
+      .map((op) => `${op.opType} → ${JSON.stringify(op.undoState)}`);
+    // A NEW operation shipped without an undoState lands here. Classify it in
+    // src/store/operationRegistry.js: 'action' iff it declares an undoToken;
+    // otherwise say WHICH null-meaning applies (see the OperationSpec typedef) —
+    // and use 'undetermined' rather than guessing.
+    expect(bad, `\nOperations missing a valid undoState:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('undoToken and undoState agree in BOTH directions (non-null undoToken ⇔ armed state)', () => {
+    // The advertised-undo field and its classification can never contradict:
+    // an op that names an undo action is 'action' or 'action-partial'; an op
+    // classified as armed must name one. This is the fail-closed half of the
+    // queue-#5 cure — a row cannot re-grow a token while claiming a null-state,
+    // or vice versa.
+    const bad = ops
+      .filter((op) => !tokenStateAgree(op))
+      .map((op) => `${op.opType} (undoToken:${JSON.stringify(op.undoToken)}, undoState:${JSON.stringify(op.undoState)})`);
+    expect(bad, `\nundoToken/undoState contradictions:\n  ${bad.join('\n  ')}\n`).toEqual([]);
+  });
+
+  test('a token-carrying row MAY be partial — and STILL fails claiming "none" (discrimination pin)', () => {
+    // The relaxation is exactly one state wide: partial arming is expressible,
+    // the old false binary ('action' or token-less) is not re-imposed, and the
+    // walker still rejects a token row that denies its own undo.
+    expect(tokenStateAgree({ undoToken: 'x', undoState: 'action' })).toBe(true);
+    expect(tokenStateAgree({ undoToken: 'x', undoState: 'action-partial' })).toBe(true);
+    expect(tokenStateAgree({ undoToken: 'x', undoState: 'none' })).toBe(false);
+    expect(tokenStateAgree({ undoToken: 'x', undoState: 'external:uncanonize' })).toBe(false);
+    expect(tokenStateAgree({ undoToken: null, undoState: 'action' })).toBe(false);
+    expect(tokenStateAgree({ undoToken: null, undoState: 'action-partial' })).toBe(false);
+  });
+
+  test('canonize-family truth pins: the live pair IS partial; saved-by-id has NO inverse', () => {
+    // canonize/uncanonize each reset eventLog to [] and the inverse resets it
+    // again — phase + canonizedAt round-trip, the event log does not. And
+    // uncanonize() takes no id and mutates only the LIVE slice, so a saved-by-id
+    // canonization is unreachable by it: 'external:uncanonize' was a false
+    // truth-field value; the honest no-inverse value is 'none'.
+    expect(OPERATIONS.canonize.undoToken).toBe('uncanonize');
+    expect(OPERATIONS.canonize.undoState).toBe('action-partial');
+    expect(OPERATIONS.uncanonize.undoToken).toBe('canonize');
+    expect(OPERATIONS.uncanonize.undoState).toBe('action-partial');
+    expect(OPERATIONS.canonizeSavedSettlement.undoToken).toBeNull();
+    expect(OPERATIONS.canonizeSavedSettlement.undoState).toBe('none');
+  });
+
+  test('positive control — the undoState grammar discriminates', () => {
+    expect(VALID_UNDO_STATE.test('action')).toBe(true);
+    expect(VALID_UNDO_STATE.test('action-partial')).toBe(true);
+    expect(VALID_UNDO_STATE.test('irreversible')).toBe(true);
+    expect(VALID_UNDO_STATE.test('external:cancelQueuedEvent')).toBe(true);
+    expect(VALID_UNDO_STATE.test('partial:pushMapUndo')).toBe(true);
+    expect(VALID_UNDO_STATE.test('undetermined')).toBe(true);
+    expect(VALID_UNDO_STATE.test('external:')).toBe(false);
+    expect(VALID_UNDO_STATE.test('partial:')).toBe(false);
+    expect(VALID_UNDO_STATE.test('maybe')).toBe(false);
+    expect(VALID_UNDO_STATE.test('')).toBe(false);
+    expect(VALID_UNDO_STATE.test('undefined')).toBe(false);
+  });
+});
+
 // ── The compendium-legibility walker (operations-legibility lane) ─────────────
 // Every registered operation must carry a legible, spaced label + a plain
 // description, and the Living-World tab's other rendered vocabularies (endgame

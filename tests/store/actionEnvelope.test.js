@@ -147,7 +147,9 @@ const INVOKERS = {
     store.setState(s => {
       s.savedSettlements = [{ id: 'save-x', name: 'Doomed', settlement: fixture() }];
     });
-    return store.getState().destroySavedSettlement('save-x', 'meteor');
+    // Wave R-1 confirm-gate parity: destruction now demands type-the-name at the
+    // action boundary (the settlement's name, matching the composer's §9c gate).
+    return store.getState().destroySavedSettlement('save-x', 'meteor', { confirmName: 'Testford' });
   },
 };
 

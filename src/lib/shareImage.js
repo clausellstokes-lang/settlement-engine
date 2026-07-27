@@ -25,6 +25,8 @@
  * is handed and XML-escapes them.
  */
 
+import { resolveSettlementTerrain } from '../domain/resolveTerrain.js';
+
 const CARD_W = 1200;
 const CARD_H = 630;
 
@@ -50,6 +52,15 @@ function fitName(name) {
  * Map a settlement (as SettlementDetail holds it) to the coarse share summary.
  * Mirrors gallery.js sanitizeTile's fallback chain so the card matches what the
  * public gallery would show — but reads only coarse, display-safe fields.
+ * Terrain goes through THE ONE terrain read (domain/resolveTerrain.js), the same
+ * call sanitizeTile makes, so the shared card and the gallery tile can never
+ * disagree about the same settlement (R-4 lane P-6).
+ * DECLARED DISPLAY SHIFT (measured, vetoable by restoring the old chain on the
+ * terrain line): the old chain led with the never-written config.terrain, so this
+ * card printed NO terrain for any wizard-generated settlement — the tier/terrain
+ * subtitle silently degraded to the tier alone, while the SERVER-rendered OG card
+ * for the same settlement (supabase/functions/og-image, which reads the
+ * terrainType-first facet column) printed one. The card now matches the OG twin.
  * @param {object} s the settlement object
  * @returns {{name:string,tier:string,terrain:string,population:(number|null),
  *            governmentType:string,magicLevel:string,stability:string}}
@@ -68,7 +79,7 @@ export function settlementToShareSummary(s) {
   return {
     name: d.name || '',
     tier: d.tier || d.config?.tier || '',
-    terrain: d.config?.terrain || d.geography?.terrain || d.terrain || '',
+    terrain: resolveSettlementTerrain(d) || '',
     population: Number.isFinite(population) && population > 0 ? Math.round(population) : null,
     governmentType,
     magicLevel: d.config?.magicLevel || d.magicLevel || '',

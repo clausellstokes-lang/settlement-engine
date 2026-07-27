@@ -36,6 +36,7 @@ import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
+import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -328,6 +329,18 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                   </div>
                 ))}
               </div>
+              {/* ECONOMY FRESHNESS (Wave R-4) — JUDGMENT, vetoable: this surface
+                  IS wired rather than frozen-deferred. The register argument
+                  ("session play should stay in-fiction") does not separate it
+                  from TableView, which is equally a run-of-play takeover and is
+                  covered; and the audience of both is the DM, for whom a
+                  staleness caveat is accuracy, not narration. It renders the
+                  identical "How it lives" truth (composeMaterialTruth over the
+                  generation-time economicState), and sessionMode ships TRUE in
+                  flagRegistry, so the obligation is live. Conditional and inside
+                  the guide card, so an un-shifted session renders byte-identically
+                  and the distraction-free promise is kept in the normal case. */}
+              <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
             </div>
           </section>
 

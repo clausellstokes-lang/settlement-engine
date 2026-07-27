@@ -5,12 +5,20 @@
  * session 3 and session 8 — and roll back if a player retconned
  * themselves out of an event. The save's `campaignState` already tracks
  * `editedAt / canonizedAt / lastExportAt`; this tab surfaces them as a
- * timeline + offers manual snapshot + side-by-side diff + revert.
+ * timeline + offers revert.
  *
  * Snapshots live in `save.versionHistory: [{ id, ts, label, snapshot }]`
- * — appended on canonize, on demand, and on every Nth commit. Reverting
- * creates a *new* snapshot from the old state (never destructive — the
- * critique was explicit about that).
+ * — appended automatically before every committed dossier change
+ * (settlementPendingEdits commit checkpoint) and before every revert.
+ * Reverting creates a *new* snapshot from the old state (never
+ * destructive — the critique was explicit about that).
+ *
+ * HONESTY NOTE (Wave R-1, atlas queue #18): there is NO manual
+ * take-a-snapshot lever and NO side-by-side diff view — `recordSnapshot`
+ * has no UI caller, and no diff component exists. The locked-state pitch
+ * below sells only what ships. Whether to BUILD manual snapshot + diff
+ * (vs. this copy fix standing) is an OPEN OWNER-QUEUE decision (Wave R-5,
+ * queue #18) — do not re-promise those features here before that ruling.
  *
  * Cartographer-gated. Wanderer/Free users see a locked-state preview
  * with a Cartographer upgrade pitch.
@@ -180,7 +188,7 @@ export default function VersionsTab({ save }) {
         feature="Version history"
         eyebrow="Cartographer · Version history"
         headline="Every change, on a timeline you can roll back."
-        body="Auto-snapshot on canonize, manual snapshot on demand. Side-by-side diff for any two points. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
+        body="Auto-snapshot before every committed change and every revert, on a timeline with your canonize, export, and save milestones. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
         ctaLabel="See Cartographer"
         trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
       />

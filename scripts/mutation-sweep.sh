@@ -447,6 +447,14 @@ check_caught "town-scene/accessibility layout hook removed" src/components/townM
 perl -0pi -e "s/webglcontextlost/webglcontextlost-disabled/g" src/components/townMap/scene3d/TownSceneCanvas.jsx
 check_caught "town-scene/canvas context-loss listener detached" src/components/townMap/scene3d/TownSceneCanvas.jsx "npx vitest run tests/ui/townSceneCanvas.contract.test.jsx"
 
+# 47. R-2 edit-prose queue spine — a NEW registered prose path lands in
+#     EDITABLE_FIELDS (settlement) with no explicit queue-wiring decision. The
+#     wired-subset lockstep pin must red: for the three queue-wired kinds the
+#     wired set EQUALS the registry, so a registered path can never silently
+#     ship lever-less (or worse, wired without a lifecycle trace).
+perl -0pi -e "s/    'arrivalScene',\n/    'arrivalScene',\n    'zzzMutsweepProsePath',\n/" src/domain/userEdits.js
+check_caught "edit-prose/wired-subset lockstep drift" src/domain/userEdits.js "npx vitest run tests/store/editProseQueueSpine.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done

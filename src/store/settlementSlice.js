@@ -64,6 +64,10 @@ import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.
 import { isAuthoritativeCanonEventType } from '../domain/events/authoritativeCanonEventTypes.js';
 import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
+// R-3 writer convergence: destroySavedSettlement delegates its destruction WRITE
+// to the same domain handler the composer DESTROY_SETTLEMENT pipeline runs.
+// mutateEntities is already in this chunk via mutate.js — zero eager delta.
+import { destroySettlement as domainDestroySettlement } from '../domain/events/mutateEntities.js';
 import { makeReceipt } from '../domain/trace.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
@@ -100,6 +104,7 @@ import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
+  uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
 } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
@@ -110,6 +115,7 @@ import { clearSavedSettlementsCache, commitSavedSettlementsHydration } from './s
 import {
   appendEventNarrativeSnapshot,
   MAX_EVENT_NARRATIVE_SNAPSHOTS,
+  stampPreEventNarrative,
 } from './eventNarrativeSnapshots.js';
 import {
   commitPendingEditsAction,
@@ -686,6 +692,10 @@ export const createSettlementSlice = (set, get) => ({
   editedAt:       null,
   canonizedAt:    null,
   lastExportAt:   null,
+  // SESSION-ONLY (Wave R-1, atlas queue #25): the uncanonize eventLog tombstone —
+  // { key, log } or null. In NO persistence whitelist (partialize, pickleCampaignState),
+  // so it never serializes; see uncanonizeTombstoneKey in settlementSliceHelpers.js.
+  _uncanonizeTombstone: null,
 
   // ── Generation ─────────────────────────────────────────────────────────────
   // Async because the generator engine chunk is lazy-loaded (see
@@ -1153,11 +1163,18 @@ export const createSettlementSlice = (set, get) => ({
     return { ok: true, settlementId: id };
   },
 
-  updateSavedSettlement: (id, partial) =>
-    set(state => {
+  // Shapeless-patch cure (R-3, atlas VI.12 #163b): the patchable surface is the
+  // CENSUS of real call sites, frozen as SAVED_SETTLEMENT_PATCH_KEYS in
+  // settlementSliceHelpers.js. An unlisted key is a typed refusal (+ dev-mode
+  // error in the helper), never a silent row widening.
+  updateSavedSettlement: (id, partial) => {
+    const unknown = unknownSavedSettlementPatchKeys(partial);
+    if (unknown) return makeActionResult('updateSavedSettlement', { ok: false, before: { id: String(id), reason: 'unknown_patch_keys', unknownKeys: unknown } });
+    return set(state => {
       const idx = state.savedSettlements.findIndex(s => s.id === id);
       if (idx !== -1) Object.assign(state.savedSettlements[idx], partial);
-    }),
+    });
+  },
 
   /**
    * Stamp the active save id for a freshly-persisted wizard save (finding
@@ -1185,7 +1202,25 @@ export const createSettlementSlice = (set, get) => ({
   setActiveSaveId: (saveId) =>
     set(state => { if (saveId != null) state.activeSaveId = saveId; }),
 
-  destroySavedSettlement: (id, reason = 'destroyed') => {
+  /**
+   * The third param stays a PLAIN identifier (`opts`, read at its use site):
+   * a destructured default carrying an inline doc-cast of `({})` puts nested
+   * parens in the parameter list, which defeats the walker's isFn scan
+   * (tests/store/operationRegistry.walker.test.js scanProps), silently dropping
+   * this action from the census denominator and flagging its registry entry stale.
+   * (Keep tag-shaped tokens out of this prose — tsc parses them inside JSDoc.)
+   * (Inline `opts.confirmName` rather than a body destructure: this file sits
+   * exactly at its frozen max-lines ceiling — net-zero effective lines.)
+   * @param {string|number} id the saved settlement's id
+   * @param {string} [reason] the recorded destruction reason
+   * @param {{ confirmName?: string }} [opts] `confirmName` = the type-the-name confirm token
+   */
+  destroySavedSettlement: (id, reason = 'destroyed', opts = {}) => {
+    // Wave R-1 (atlas queue #4 / VI.10 #148): confirm-gate parity across the three
+    // settlement-terminal-death lanes — this registry-reachable lane now demands
+    // type-the-name like the composer's §9c gate. Details on the helper.
+    const refusal = destroySettlementConfirmRefusal(get(), { id, reason, confirmName: opts.confirmName });
+    if (refusal) return refusal;
     const now = new Date().toISOString();
     // Annotated so tsc keeps the shape across the immer `set` closure assignment
     // below (otherwise it infers `null` and the C1 envelope's persist.campaignState
@@ -1196,23 +1231,23 @@ export const createSettlementSlice = (set, get) => ({
       const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
       if (idx === -1) return;
       const save = state.savedSettlements[idx];
-      const eventId = `destroy.${id}.${Date.now()}`;
-      const nextSettlement = {
-        ...(save.settlement || {}),
-        status: 'destroyed',
-        destroyedAt: now,
-        destroyedReason: reason,
-        destroyedByEventId: eventId,
-      };
+      // R-3 writer convergence (atlas VI.10 #4/#148): the destruction WRITE is
+      // the domain DESTROY_SETTLEMENT handler — the single writer the composer
+      // pipeline also runs — so the stamped fields (status / destroyedAt /
+      // destroyedCause / config._destroyed*) can never drift between the two
+      // lanes again. Only the log-ROW shape stays this lane's flat
+      // "library-row flavor" (pinned by timelineEntryShapes; a full
+      // applyEvent-shaped row would be a persistence-shape AND undo-capability
+      // change — owner-gated). `destroyedReason` is kept for row-shape
+      // stability; undoEvent.js's revival strip drops it either way.
+      const destroyEvent = { id: `destroy.${id}.${Date.now()}`, type: 'DESTROY_SETTLEMENT', targetId: reason, timestamp: now };
+      const nextSettlement = { ...domainDestroySettlement(save.settlement || {}, destroyEvent), destroyedReason: reason };
       const currentCampaignState = save.campaignState || {};
       const eventLog = Array.isArray(currentCampaignState.eventLog)
         ? [...currentCampaignState.eventLog]
         : [];
       eventLog.push({
-        id: eventId,
-        type: 'DESTROY_SETTLEMENT',
-        targetId: reason,
-        timestamp: now,
+        ...destroyEvent,
         narrativeSummary: `${nextSettlement.name || save.name || 'Settlement'} was destroyed${reason ? `: ${reason}` : ''}.`,
       });
       const campaignState = {
@@ -1389,53 +1424,53 @@ export const createSettlementSlice = (set, get) => ({
     const fromPhase = get().phase;
     set(state => {
       state.phase = 'canon';
-      state.eventLog = [];
+      // Wave R-1 (atlas queue #25): if THIS session's uncanonize tombstoned the log
+      // for the SAME world, canonize — its registered inverse — resumes that
+      // timeline instead of resetting it. Identity is key-matched (save + name +
+      // generation stamp), never "latest"; a foreign or stale tombstone is left
+      // in place untouched. A fresh session has no tombstone, so across reload
+      // the pair stays honestly 'action-partial'.
+      const tomb = state._uncanonizeTombstone;
+      if (tomb && tomb.key === uncanonizeTombstoneKey(state) && Array.isArray(tomb.log)) {
+        state.eventLog = tomb.log;
+        state._uncanonizeTombstone = null;
+      } else {
+        state.eventLog = [];
+      }
       state.canonizedAt = new Date().toISOString();
     });
     // Persist so canon sticks across reload and the library reflects it.
     get().persistActiveSaveLifecycle?.();
-    // Analytics — fire-and-forget. CANON_PHASE_CHANGED records the transition;
-    // captureFingerprint('canonized') snapshots the structural shape at canon
-    // (skips silently without a stable settlement uuid / consent).
-    const after = get();
-    const activeSaveId = after.activeSaveId || null;
-    const save = activeSaveId
-      ? after.savedSettlements.find(s => String(s.id) === String(activeSaveId))
-      : null;
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'canon' });
-    }).catch(() => {});
-    if (after.settlement && activeSaveId) {
-      import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
-        captureFingerprint('canonized', after.settlement, { save, settlementUuid: activeSaveId });
-      }).catch(() => {});
-    }
-    // Wave E1 — 'canonize' milestone on the generation-id spine. generationId is
-    // held in-store (reset on hydrate), so re-derive from the save's seed+stamp
-    // when a reloaded save has no live id.
-    if (after.settlement) {
-      import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
-        recordGenerationMilestone('canonize', after.settlement, {
-          generationId: after.generationId, seed: after.lastSeed, stampIso: after.generatedAt,
-        });
-      }).catch(() => {});
-    }
+    // Analytics/telemetry — fire-and-forget cold path, kept OFF the eager chunk
+    // (lazy leaf): CANON_PHASE_CHANGED + fingerprint + generation milestone.
+    import('./canonLifecycleTelemetry.js')
+      .then(m => m.fireCanonLifecycleTelemetry(get(), { fromPhase, toPhase: 'canon' }))
+      .catch(() => {});
   },
 
   /** Drop back to draft. Useful if the DM wants to keep tinkering before
-   *  the campaign actually starts. Discards any prior event log. */
+   *  the campaign actually starts. The canon event log is cleared, but is
+   *  tombstoned IN-SESSION so canonize can restore it (Wave R-1); across a
+   *  reload the discard is permanent, as the operation registry says. */
   uncanonize: () => {
     const fromPhase = get().phase;
     set(state => {
+      // Tombstone the canon timeline BEFORE wiping (session-only), so the
+      // registered inverse can restore it. Only a real canon→draft transition
+      // stashes — a draft-phase no-op must not overwrite a live tombstone
+      // with an already-empty log.
+      if (fromPhase === 'canon') {
+        state._uncanonizeTombstone = { key: uncanonizeTombstoneKey(state), log: state.eventLog };
+      }
       state.phase = 'draft';
       state.eventLog = [];
       state.canonizedAt = null;
     });
     get().persistActiveSaveLifecycle?.();
-    // Analytics — fire-and-forget; the canon→draft transition.
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.CANON_PHASE_CHANGED, { from_phase: fromPhase, to_phase: 'draft' });
-    }).catch(() => {});
+    // Analytics — fire-and-forget; the canon→draft transition (same lazy leaf).
+    import('./canonLifecycleTelemetry.js')
+      .then(m => m.fireCanonLifecycleTelemetry(get(), { fromPhase, toPhase: 'draft' }))
+      .catch(() => {});
   },
 
   /**
@@ -1768,13 +1803,9 @@ export const createSettlementSlice = (set, get) => ({
       // AI narrative, preserve the prose that described the PRE-event canon state,
       // keyed by this event's id, so the narrative lineage isn't lost as events
       // accrue. Clones once, FIFO-capped; stored in the durable aiData archive.
-      const eventId = event?.id || logEntry?.event?.id;
-      const priorNarrative = beforeSave?.aiData?.aiSettlement;
-      const nextAiData = (priorNarrative && eventId)
-        ? appendEventNarrativeSnapshot(beforeSave.aiData, {
-            eventId: String(eventId), aiSettlement: priorNarrative, ts: afterState.editedAt,
-          })
-        : null;
+      // R-3: the stamp CONDITION lives in the shared helper — one writer with the
+      // server-authoritative command lane (parity pinned; do not inline it back).
+      const nextAiData = stampPreEventNarrative(beforeSave, { event, logEntry, appliedAt: afterState.editedAt });
       const savePartial = {
         settlement: cloneJson(afterState.settlement),
         campaignState: afterCampaignState,
@@ -1961,6 +1992,27 @@ export const createSettlementSlice = (set, get) => ({
     // Read the entry about to be popped while it is still in state — the
     // roaming-twin reconcile below needs its event + undo snapshot.
     const undoneEntry = get().eventLog[get().eventLog.length - 1];
+    // R-3 (atlas VI.10 #148): a flat library-row entry carrying no `beforeState`
+    // and no nested `.event` used to pop anyway — assigning systemState =
+    // undefined, dropping the record while the blob kept its effect, and
+    // PERSISTING the corruption. Refuse typed instead.
+    //
+    // Read this as a REFUSAL, not a skip: undo only ever inspects the NEWEST
+    // entry, so any refused row parked on top of the log blocks every real event
+    // beneath it for good. Both flavor writers therefore stamp `beforeState` on
+    // purpose so their rows pop as harmless no-ops — recordCanonFlavorEntry and
+    // renameSettlement (both in settlementRenameHelpers.js; the rename stamp
+    // closed exactly that jam). Only the flat destroySavedSettlement row still
+    // refuses, which is correct — the destruction is not reversible from the log
+    // — but Timeline still renders its Undo button when that row is newest, so
+    // the click returns ok:false and nothing visibly happens. Surfacing the
+    // refusal, or hiding the affordance on a non-undoable newest entry, is an
+    // open component-lane deferral (documented, not a bug to re-find).
+    if (undoneEntry?.beforeState === undefined) {
+      return makeActionResult('undoLastEvent', {
+        ok: false, before: { reason: 'entry_not_undoable', entryType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null, eventLogLength: eventLogLengthBefore },
+      });
+    }
     set(state => {
       const popped = state.eventLog.pop();
       state.systemState = popped.beforeState;
@@ -2044,11 +2096,15 @@ export const createSettlementSlice = (set, get) => ({
     }
     // Track K §C1 — ActionResult envelope. The undo REVERSES the popped event,
     // so `receipts` is empty this step (C2 may surface the reversed entry).
+    // `poppedEventType` falls back to the FLAT row's own `type` exactly as the
+    // refusal envelope above does, so a stamped flavor pop reports what it
+    // popped instead of a bare null. `poppedEventId` keeps its narrow meaning —
+    // the EVENT's id, which a flat row genuinely does not have.
     const persistedToSave = Boolean(afterState.activeSaveId && afterState.settlement);
     return makeActionResult('undoLastEvent', {
       before: {
         poppedEventId: undoneEntry?.event?.id ?? null,
-        poppedEventType: undoneEntry?.event?.type ?? null,
+        poppedEventType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null,
         eventLogLength: eventLogLengthBefore,
       },
       after: {

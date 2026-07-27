@@ -27,6 +27,7 @@ import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
 import { composeSettlementQuickGuide } from '../domain/summary/settlementQuickGuide.js';
+import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
@@ -206,6 +207,20 @@ export default function TableView({ settlement, onClose }) {
                 </div>
               ))}
             </div>
+            {/* ECONOMY FRESHNESS (Wave R-4) — this surface makes TWO economy
+                claims from the generation-time read-model: the identity strip's
+                prosperity label, and the "How it lives" defining truth
+                (composeMaterialTruth's prosperity / food security / exports
+                fold). Neither is re-derived when an event lands, so the shared
+                note qualifies them here. CREAM_FAINT, not the parchment MUTED:
+                this is the lantern-table dark ramp. Conditional, so an
+                un-shifted settlement renders byte-identically. */}
+            <EconomyFreshnessNote
+              settlement={settlement}
+              variant="tallies"
+              margin="10px 0 0"
+              color={CREAM_FAINT}
+            />
           </div>
 
           {/* Tension line */}

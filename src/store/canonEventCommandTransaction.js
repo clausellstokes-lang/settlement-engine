@@ -25,7 +25,7 @@ import {
   commitCutTradeRouteCommand,
 } from '../lib/canonEventCommandPersistence.js';
 import { makeActionResult } from './actionResult.js';
-import { appendEventNarrativeSnapshot } from './eventNarrativeSnapshots.js';
+import { stampPreEventNarrative } from './eventNarrativeSnapshots.js';
 import { OP_KIND_BARRIER, peekOps } from './outbox.js';
 import { pickleCampaignState } from './settlementSliceHelpers.js';
 
@@ -140,15 +140,16 @@ function liveMatchesCachedBase(state, save) {
   ));
 }
 
-/** Preserve the pre-event narrative as a history snapshot when one exists. */
+/**
+ * Preserve the pre-event narrative as a history snapshot when one exists.
+ * R-3: ONE writer with the legacy applyEvent lane — the shared helper owns the
+ * stamp condition (parity pinned in tests/store/narrativeStampParity.test.js).
+ */
 function nextAiData(beforeSave, prepared) {
-  const eventId = prepared.event?.id || prepared.logEntry?.event?.id;
-  const narrative = beforeSave?.aiData?.aiSettlement;
-  if (!eventId || !narrative) return null;
-  return appendEventNarrativeSnapshot(beforeSave.aiData, {
-    eventId: String(eventId),
-    aiSettlement: narrative,
-    ts: prepared.appliedAt,
+  return stampPreEventNarrative(beforeSave, {
+    event: prepared.event,
+    logEntry: prepared.logEntry,
+    appliedAt: prepared.appliedAt,
   });
 }
 

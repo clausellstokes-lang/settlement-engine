@@ -439,6 +439,18 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // not an inference from the process-wide editMode flag. Intersect it again
   // with this surface's identity so a stale flag or an accidentally permissive
   // caller cannot expose writers in a public/player projection.
+  //
+  // R-4 DELIBERATE DIVERGENCE (documented, NOT a drift escape — pinned as an
+  // exemption in tests/lint/premiumGateSingleSource.test.js): this does NOT
+  // consult src/lib/viewerAuthority.js `viewerCanAuthor`, the premium/founder/
+  // elevated authoring authority the Library dossier (SettlementDetail canEdit)
+  // and the Create-flow Workbench mount now share. On the Create flow
+  // (readOnly=false) the `!readOnly` arm admits EVERY tier, so a free or anon
+  // viewer keeps the NPC authoring levers here while the Workbench withholds
+  // them. Aligning the two would change which users see those levers — paid-
+  // surface behaviour, hence OWNER-GATED (docs/CAPABILITY_REMEDIATION_PLAN.md
+  // owner-decision queue: "npcAuthoringAllowed <-> viewerCanAuthor alignment").
+  // The R-4 lane documents the divergence and changes no behaviour.
   const npcAuthoringAllowed = !publicDossier && !playerView && (!readOnly || (canAuthorNpc && saveId != null));
   const compassSource = hasCompass(aiSettlement)
     ? aiSettlement

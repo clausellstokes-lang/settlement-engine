@@ -122,6 +122,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       {/* ── SYSTEMS HEALTH DASHBOARD ─────────────────────────────────────── */}
       <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a">
 
+        {/* First-survey framing (G5 / FROZEN_VS_LIVE): the five score bars and
+            the Viability + Defense statuses are generation verdicts with no
+            pulse writeback; Food Security is the declared-live exception,
+            re-graded every tick — same carve-out grammar as DefenseTab's
+            Threat Assessment caption (Wave R-0). */}
+        <div style={{fontSize:FS.xxs,color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
+
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
           <StatusTag label="Prosperity" value={eco.prosperity} accent={PROSPERITY_COLORS[eco.prosperity]}/>
@@ -266,9 +273,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
+        {/* Coherence notes (G5): sole web render site of the generation-frozen
+            coherenceNotes record — the header carries the survey vintage. */}
+        {r.coherenceNotes?.length>0&&<div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{fontSize: FS['12.5'],color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
@@ -281,7 +291,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           </div>
         ))}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
+          <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
           {r.structuralSuggestions.map((v,i)=><div key={i} style={{fontSize:FS.sm,color:swatch['#1A2A5A'],marginBottom:3}}>{v.reason}{v.suggested&&<span style={{color:swatch.inkMag3,fontStyle:'italic'}}>. Consider{v.suggested.join(', ')}</span>}</div>)}
         </div>}
       </div>}

@@ -177,7 +177,8 @@ function frozenFor(get, campaignId) {
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. This slice's contract:
 //
-// OWNS state:   pulseUndoStack (session-scoped; not persisted).
+// OWNS state:   pulseUndoStack + proposalUndoStack + advanceSeqByCampaign
+//               (all session-scoped; not persisted).
 // PROVIDES (read via get() by other slices): recordPartyImpact — called by
 //   settlementSlice.rippleEventThroughWorld on a party-caused canon event.
 //   (advanceCampaignWorld → get().recordPartyImpact is a SAME-slice call.)
@@ -190,6 +191,22 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // Campaign-clock (Phase C2): session-scoped stack of pre-pulse snapshots, one
   // per advance, capped PER campaign. NOT persisted — a reload clears it.
   pulseUndoStack: [],
+
+  // R-1 (queue #5): session-scoped ring of pre-APPLY snapshots, one per applied
+  // world-pulse proposal, capped PER campaign (PROPOSAL_UNDO_CAP in the deferred
+  // module). A SEPARATE array from pulseUndoStack BY CONSTRUCTION so proposal
+  // traffic can never evict a pre-advance snapshot (the R-0 cap-flood finding).
+  // NOT persisted — a reload clears it, exactly like pulseUndoStack.
+  proposalUndoStack: [],
+
+  // R-1 MUST-FIX (ring-guard saturation): { [campaignId]: int } — the campaign's
+  // LOGICAL advance depth. The advance push site increments it; undoLastPulse
+  // decrements it as it pops; pulseUndoStack cap-EVICTION never touches it. The
+  // proposal ring's coherence guard stamps/compares THIS, never a count of
+  // retained advance snapshots (which saturates at PULSE_UNDO_CAP and fails
+  // open to stale restores). NOT persisted — a reload clears it, exactly like
+  // both undo stacks; clearTransientCampaignWork resets it at the auth boundary.
+  advanceSeqByCampaign: {},
 
   // In-flight guard: campaignIds with an advanceCampaignWorld (or resume) currently
   // running. Multi-tick advance is async — it awaits the interval orchestrator,
@@ -815,6 +832,31 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // session fence around both the atomic store write and its flush.
     const { runUndoLastPulse } = await loadDeferredPulseMutations();
     return runUndoLastPulse({
+      set,
+      get,
+      campaignId,
+      isSessionCurrent: () => isPulseSessionCurrent(get, sessionFence),
+    });
+  },
+
+  /**
+   * R-1 (queue #5): reverse the most recent APPLIED world-pulse proposal,
+   * restoring the campaign world + member saves + the live view from the
+   * pre-apply snapshot on the session proposal-undo ring. Distinct from
+   * undoLastPulse: it pops the PROPOSAL ring only and never touches advance
+   * snapshots. Returns true only when a snapshot was restored and persisted.
+   *
+   * @param {string} campaignId
+   * @returns {Promise<boolean>}
+   */
+  undoLastProposalApply: async (campaignId) => {
+    const sessionFence = capturePulseSession(get);
+    // Same exclusivity story as undoLastPulse; the deferred body repeats the
+    // guards (plus the parked-pause refusal and ring-coherence checks) after
+    // its lazy import resolves.
+    if (get().isAdvanceInFlight(campaignId)) return false;
+    const { runUndoLastProposalApply } = await loadDeferredPulseMutations();
+    return runUndoLastProposalApply({
       set,
       get,
       campaignId,

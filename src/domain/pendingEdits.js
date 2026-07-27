@@ -86,6 +86,13 @@ export const COMMITTABLE_EDIT_KINDS = Object.freeze([
   // stamping whereabouts.recall on a traveling NPC (the roads whereabouts.partyRelease
   // precedent). The roads mover engages the return leg early. No dedicated operationRegistry op.
   'recall-npc',
+  // R-2 (capability remediation) — AUTHORED PROSE reaches its contract. Dispatched
+  // via the EXISTING registered Tier-5.4 writer applyUserEditAction (strict
+  // EDITABLE_FIELDS gate re-checked inside the writer). Rides commitPendingEdits
+  // (the roads-op precedent). Which registered paths the QUEUE admits is narrower
+  // than EDITABLE_FIELDS — see QUEUE_WIRED_PROSE_PATHS in settlementPendingEdits.js
+  // for the wired subset and the per-path lifecycle hazards that keep the rest out.
+  'edit-prose',
 ]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the

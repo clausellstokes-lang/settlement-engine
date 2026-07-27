@@ -32,8 +32,9 @@ import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
 
 const AutoSaveChip = lazy(() => import('./AutoSaveChip.jsx'));
-// Vision V-H (R-21): the visible advance-undo history — lazy overlay reading the
-// session pulseUndoStack, restoring through the existing undoLastPulse walk-back.
+// Vision V-H (R-21): the visible session undo history — lazy overlay reading the
+// session pulseUndoStack AND (R-1) the proposalUndoStack ring, restoring through
+// the existing undoLastPulse / undoLastProposalApply walk-back, one verb per row.
 const UndoHistoryPanel = lazy(() => import('../UndoHistoryPanel.jsx'));
 
 /** Advance-scaling Stage 5 — the human interval label the Undo affordance folds in
@@ -348,6 +349,13 @@ function WorldMapToolbarImpl({
   const mapLoading = useStore(s => s.mapLoading);
   const mapError   = useStore(s => s.mapError);
   const imageMode  = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+  // R-1: does the session proposal-undo ring hold an entry for this campaign?
+  // Gates the History chip alongside canUndoPulse (advance-only), so an applied
+  // proposal is undoable from here even before the first advance of the session.
+  const hasProposalUndo = useStore(s => (
+    activeCampaignId != null
+    && (s.proposalUndoStack || []).some(e => e && String(e.campaignId) === String(activeCampaignId))
+  ));
 
   // The in-theme control reference (the "?" affordance). Replaces the native
   // title= OS tooltips that used to carry each control's teaching.
@@ -475,12 +483,13 @@ function WorldMapToolbarImpl({
                 </IconButton>
               )}
               {/* Vision V-H (R-21): the walk-back affordance beside the single Undo —
-                  opens the full session advance history for a return-to-any-point. */}
-              {canUndoPulse && (
+                  opens the full session undo history (advances AND applied
+                  proposals, R-1) for a return-to-any-point. */}
+              {(canUndoPulse || hasProposalUndo) && (
                 <IconButton
                   data-tour="history"
                   onClick={() => setShowHistory(true)}
-                  aria-label="Open advance history"
+                  aria-label="Open undo history"
                   disabled={worldPulseBusy}
                 >
                   <History size={13} /> History

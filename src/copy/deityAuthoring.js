@@ -75,6 +75,8 @@ export const deityAuthoring = {
     imposePlaceholder: 'Impose a cult…',
     noneToImpose:   'No more deities to impose',
     remove:         'Remove',
+    // Wave R-2 (atlas Gap 2b): the clear-ALL-cults door. One string, vetoable.
+    clearAll:       'Remove all cults',
     noneAuthored:   'No deities authored yet. Author one in the Compendium under Custom Content, then assign it here.',
     tooSmall:       'This settlement is too small to sustain a cult beneath its patron. Larger settlements hold more faiths.',
     cultHint:       'One faith per moral × order niche, except the patron’s own: impose a cult there to spark a contest for the seat. A full settlement displaces its weakest cult to make room.',

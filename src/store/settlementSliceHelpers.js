@@ -16,6 +16,7 @@
 import { deepClone } from '../domain/clone.js';
 import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
+import { makeActionResult } from './actionResult.js';
 
 // A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
@@ -157,6 +158,90 @@ export const stripImpairmentsForEvent = (eventId) => (entity) => {
  * for "who was alive and linked to whom"; the post-mutation copy already shows
  * the NPC as removed/dead). Returns null when no prompt is warranted.
  */
+/**
+ * The SESSION-ONLY uncanonize-tombstone identity key (Wave R-1, atlas queue #25).
+ * uncanonize() irreversibly wiped the canon eventLog while the registry advertises
+ * canonize as its inverse; the tombstone lets canonize restore the log WITHIN the
+ * session when — and only when — it is the same world: same active save (or the
+ * same unsaved draft), same settlement name, same generation stamp. The tombstone
+ * lives in store state OUTSIDE every persistence whitelist (persist partialize +
+ * pickleCampaignState), so it dies with the session by construction — across
+ * reload the pair honestly stays 'action-partial', exactly what the operation
+ * registry claims.
+ * @param {{ activeSaveId?: unknown, settlement?: { name?: string }|null, generatedAt?: string|null }} state
+ * @returns {string}
+ */
+export function uncanonizeTombstoneKey(state) {
+  return [
+    state.activeSaveId != null ? String(state.activeSaveId) : '',
+    state.settlement?.name || '',
+    state.generatedAt || '',
+  ].join('::');
+}
+
+/**
+ * Wave R-1 (atlas queue #4 / VI.10 #148): the type-the-name confirm gate for the
+ * registry-reachable settlement-death lane. The composer lane demands typing the
+ * settlement's name (ApplyControls §9c) and the realm lane demands staged-proposal
+ * review; `destroySavedSettlement` demanded nothing. Returns a refusal ActionResult
+ * when the confirm is missing or wrong, or null to proceed. An unknown save id
+ * returns null so the action's existing not-found envelope stays the answer there.
+ * Nameless saves fall back to the save id, so the gate never fails open. The gate
+ * sits at the action boundary because the operations/command registry is that
+ * lane's only surface (no component calls it).
+ * @param {{ savedSettlements?: Array<{ id?: unknown, name?: string, settlement?: { name?: string } }> }} state
+ * @param {{ id: string|number, reason: string, confirmName?: string }} args
+ * @returns {ReturnType<typeof makeActionResult>|null}
+ */
+export function destroySettlementConfirmRefusal(state, { id, reason, confirmName }) {
+  const doomed = (state.savedSettlements || []).find(s => String(s.id) === String(id));
+  if (!doomed) return null;
+  const expectedName = String(doomed.settlement?.name || doomed.name || '').trim() || String(id);
+  if (String(confirmName ?? '').trim() === expectedName) return null;
+  return makeActionResult('destroySavedSettlement', {
+    ok: false,
+    before: { id: String(id), reason },
+    userMessage: 'Destroying a settlement is a one-way canon act: pass its exact name as confirmName to confirm. Nothing was changed.',
+  });
+}
+
+/**
+ * updateSavedSettlement patch-key allowlist — Wave R-3 (atlas VI.12 #163b).
+ * THE CENSUS IS THE CONTRACT: exactly the top-level keys the writer's 21 real
+ * call sites patch today — settlementSlice lifecycle folds x6 (settlement /
+ * campaignState / timestamp / aiData), aiSlice narrative writes x9 (aiData),
+ * ShareToGallery share metadata x6 (the is_public / slug / visibility /
+ * gallery_* family). A NEW patch key must be added here deliberately; an
+ * unlisted key is a typed refusal at the writer plus a dev-mode error, never a
+ * silent save-row widening. (Sibling writers updateSavedCampaign/updateConfig
+ * get the same cure in their own slices — the R-3 three-member class.)
+ */
+export const SAVED_SETTLEMENT_PATCH_KEYS = Object.freeze([
+  'settlement', 'campaignState', 'timestamp', 'aiData',
+  'is_public', 'public_slug', 'visibility', 'unlisted_slug',
+  'gallery_description', 'gallery_title', 'gallery_image_url', 'gallery_image_alt',
+  'gallery_tags', 'gallery_share_dm', 'gallery_share_narrated', 'gallery_importable',
+  'gallery_member_overrides',
+]);
+
+/**
+ * Non-empty array of refused patch keys, or null when the patch is clean.
+ * The dev-mode error lives here so every refusal is loud in development while
+ * production stays a silent typed refusal (the envelope carries the keys).
+ * @param {Object|null|undefined} partial
+ * @returns {string[]|null}
+ */
+export function unknownSavedSettlementPatchKeys(partial) {
+  const unknown = Object.keys(partial || {}).filter(
+    key => !SAVED_SETTLEMENT_PATCH_KEYS.includes(key),
+  );
+  if (unknown.length === 0) return null;
+  if (import.meta.env?.DEV) {
+    console.error('[settlementSlice] updateSavedSettlement refused unknown patch keys:', unknown);
+  }
+  return unknown;
+}
+
 export function computePendingSuccession(settlement, event) {
   if (event?.type !== 'KILL_NPC') return null;
   const outgoing = (settlement.npcs || []).find(n =>

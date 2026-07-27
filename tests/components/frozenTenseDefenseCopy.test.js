@@ -12,15 +12,27 @@
  * Internal Security banner (its headline is minted from frozen
  * scores.internal) carries the survey vintage.
  *
- * They also pin the NPC pin-toggle tooltip honesty (the regen-edit-loss R2
- * rescope): pins ride the AI channel (aiData.pinnedNpcs) only, so the tooltip
- * must never again promise survival across regenerate/reroll — no lock/pin
- * engine covers those paths (state.locks is unimplemented; see the Locks
- * typedef in src/domain/types.js).
+ * The same framing is pinned on BOTH surfaces of the screen↔PDF parity
+ * discipline (tests/pdf/screenParitySource.test.js): the PDF twin's Threat
+ * Assessment caption (src/pdf/sections/DefenseSecurity.jsx) carried the exact
+ * bare present-tense caption the negative pin below bans on-screen, over the
+ * same threatReadiness bars.
+ *
+ * The Vulnerabilities section renders structuralViolations — one of the five
+ * generation-frozen G5 records (SETTLEMENT_CAPABILITY_ATLAS, owner-queue
+ * #28) — so its title and empty state carry the survey vintage too. Whether
+ * the G5 five get FROZEN_VS_LIVE manifest rows is that open owner ruling,
+ * deliberately NOT decided here.
+ *
+ * OWNERSHIP NOTE (Wave R-0 verifier finding #1): the NPC pin-toggle tooltip
+ * strings in src/components/new/npcComponents.jsx are deliberately NOT pinned
+ * here. The regen-edit-loss R2 rescope lane owns that fix and its pinning; an
+ * earlier revision of this file pinned those strings cross-lane and the block
+ * was removed.
  *
  * Copy is one-string vetoable: a deliberate reword should update the POSITIVE
  * pins here in the same change; the NEGATIVE pins are the invariant (the bare
- * present-tense claim and the regen-survival over-promise stay dead).
+ * present-tense claims stay dead).
  *
  * Idiom: comment-stripped source scans (tests/joins/fieldManifest.test.js).
  */
@@ -39,7 +51,7 @@ function stripComments(source) {
 const read = (file) => stripComments(fs.readFileSync(path.join(ROOT, file), 'utf8'));
 
 const DEFENSE_TAB = 'src/components/new/tabs/DefenseTab.jsx';
-const NPC_COMPONENTS = 'src/components/new/npcComponents.jsx';
+const DEFENSE_PDF = 'src/pdf/sections/DefenseSecurity.jsx';
 
 describe('frozen-tense display honesty — DefenseTab (FROZEN_VS_LIVE snapshot family)', () => {
   test('the Threat Assessment caption frames the frozen bars as first-survey verdicts', () => {
@@ -49,26 +61,28 @@ describe('frozen-tense display honesty — DefenseTab (FROZEN_VS_LIVE snapshot f
     expect(src).toMatch(/Disasters & Famine is re-judged as the campaign advances/);
   });
 
-  test('the bare present-tense caption cannot return', () => {
-    const src = read(DEFENSE_TAB);
-    expect(src).not.toMatch(/defense readiness against each threat\. Higher is better/);
+  test('the PDF twin caption carries the same first-survey framing (screen↔PDF parity)', () => {
+    const pdf = read(DEFENSE_PDF);
+    expect(pdf).toMatch(/as judged at the first survey/);
+    expect(pdf).toMatch(/Disasters & Famine is re-judged as the campaign advances/);
+  });
+
+  test('the bare present-tense caption cannot return on either surface', () => {
+    for (const file of [DEFENSE_TAB, DEFENSE_PDF]) {
+      expect(read(file)).not.toMatch(/defense readiness against each threat\. Higher is better/);
+    }
   });
 
   test('the Internal Security banner (frozen scores.internal) carries the survey vintage', () => {
     expect(read(DEFENSE_TAB)).toMatch(/Internal Security · First Survey/);
   });
-});
 
-describe('NPC pin-toggle tooltip honesty (regen-edit-loss R2 rescope)', () => {
-  test('the pin tooltip promises only the AI channel, never regen/reroll survival', () => {
-    const src = read(NPC_COMPONENTS);
-    // Positive: the rescoped AI-scoped copy is present.
-    expect(src).toMatch(/The AI will not rewrite this NPC/);
-    expect(src).toMatch(/Pin this NPC so the AI leaves it unchanged/);
-    // Negative: the committed-lineage over-promise stays dead. No pin or lock
-    // engine covers the regenerate or reroll paths.
-    expect(src).not.toMatch(/rewritten by regenerate/);
-    expect(src).not.toMatch(/regenerate\/progress/);
-    expect(src).not.toMatch(/surviv\w+\s+(a\s|an\s|the\s)?(NPC\s)?(reroll|regenerat)/i);
+  test('the Vulnerabilities section (frozen structuralViolations, G5) reads as first-survey verdicts', () => {
+    const src = read(DEFENSE_TAB);
+    expect(src).toMatch(/Vulnerabilities · First Survey/);
+    expect(src).toMatch(/No critical defense vulnerabilities identified at the first survey/);
+    // Negative: the bare present-tense empty state stays dead ('identified.'
+    // with a terminal stop — the reworded string continues 'identified at').
+    expect(src).not.toMatch(/vulnerabilities identified\./);
   });
 });

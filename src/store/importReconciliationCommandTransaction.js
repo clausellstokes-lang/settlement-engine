@@ -123,6 +123,31 @@ function affectedCampaignsAreCurrent(campaigns, transitions) {
   });
 }
 
+/**
+ * R-3 (R-1 deferral): an import rewrites campaign content (membership rehome,
+ * pending-event prune), so pulse/proposal undo snapshots captured BEFORE it
+ * hold pre-import worlds — restoring one would resurrect the old membership.
+ * Drop both stacks' entries for exactly the campaigns this command changed,
+ * the campaign-delete sweep pattern (campaignDeletionSession.js). The
+ * advance-depth counter is deliberately untouched: the campaigns still exist
+ * and their logical advance history is unchanged.
+ *
+ * @param {Object} state       the store draft inside set()
+ * @param {Map<string, *>} changedById campaign ids the import rewrote
+ */
+function dropUndoSnapshotsForCampaigns(state, changedById) {
+  if (state.pulseUndoStack?.length) {
+    state.pulseUndoStack = state.pulseUndoStack.filter(
+      snapshot => !changedById.has(id(snapshot.campaignId)),
+    );
+  }
+  if (state.proposalUndoStack?.length) {
+    state.proposalUndoStack = state.proposalUndoStack.filter(
+      snapshot => !changedById.has(id(snapshot.campaignId)),
+    );
+  }
+}
+
 function commandRefusal(reason, status = 'failed', result = null) {
   return {
     ok: false,
@@ -230,6 +255,7 @@ function applyRemoteProjection(set, get, snapshot, projection, command) {
     state.campaigns = state.campaigns.map(campaign => (
       byCampaignId.get(id(campaign.id)) || campaign
     ));
+    dropUndoSnapshotsForCampaigns(state, byCampaignId);
     if (
       projection.save
       && !state.savedSettlements.some(
@@ -447,6 +473,7 @@ async function runLocalTransaction(set, get, snapshot, command) {
     draft.campaigns = draft.campaigns.map(campaign => (
       changedCampaignsById.get(id(campaign?.id)) || campaign
     ));
+    dropUndoSnapshotsForCampaigns(draft, changedCampaignsById);
     if (command.kind === CREATE_KIND && !existingSave) {
       draft.savedSettlements.unshift({
         ...cloneJson(command.params.entry),

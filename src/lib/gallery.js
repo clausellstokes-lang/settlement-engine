@@ -20,6 +20,7 @@ import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
 import { REACTION_KEYS } from '../data/galleryReactionVocab.js';
 import { AGE_BAND_IDS } from '../domain/ageBands.js';
+import { resolveSettlementTerrain, terrainOrNull } from '../domain/resolveTerrain.js';
 import { clampAliveness } from './galleryAliveness.js';
 
 const LIST_PAGE_SIZE = 24;
@@ -688,7 +689,20 @@ function sanitizeTile(row) {
     imageAlt:     row.gallery_image_alt || '',
     tags:         sanitizeGalleryTags(row.gallery_tags), // read-path clamp (ported master fix)
     population:   Number(row.population ?? data.population) || null,
-    terrain:      row.terrain || data?.config?.terrain || data?.geography?.terrain || data?.terrain || '',
+    // Terrain goes through THE ONE terrain read (domain/resolveTerrain.js).
+    // The facet column (row.terrain) stays FIRST because it is the server's own
+    // snapshot, but it coalesces config.terrainOverride verbatim (migrations
+    // 063/071/147), so a legacy row can store the 'auto' UI sentinel; terrainOrNull
+    // is the guard resolveTerrain.js documents for exactly this column.
+    // R-4 lane P-6, DECLARED DISPLAY SHIFT (two effects, measured, each vetoable by
+    // restoring the old chain on this line):
+    //   1. a legacy blob whose stale config.terrain contradicted its rolled
+    //      config.terrainType now reads as the engine value, not the stale one;
+    //   2. when the server facet column is null/blank (mocks, older local DBs, the
+    //      defense-in-depth path this sanitizer exists for) the fallback previously
+    //      read the NEVER-WRITTEN config.terrain and so showed nothing for every
+    //      wizard-generated settlement; it now shows the real terrain.
+    terrain:      terrainOrNull(row.terrain) || resolveSettlementTerrain(data) || '',
     governmentType: row.government_type || readGovernmentType(data),
     magicLevel:   row.magic_level || data?.config?.magicLevel || data?.magicLevel || '',
     stability:    row.stability || data?.viability?.stability || data?.systemState?.stability || data?.stability || '',

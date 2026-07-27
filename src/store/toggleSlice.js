@@ -6,6 +6,33 @@
  *   Category:    "tier::category"        →  boolean
  *   Service:     "svcKey_service_name"   →  { allow, force, forceExclude }
  *   Good:        "tier_good_name"        →  { allow, force, forceExclude }
+ *
+ * SCOPE CONTRACT — store-GLOBAL, and that is INTENDED (Wave R-3 Lane C
+ * investigation of owner-queue #9; verdict recorded 2026-07-27, vetoable).
+ * The four bags are GENERATION SETTINGS, the same class as `config`: they
+ * shape the NEXT settlement generated, not any existing one. Four layers
+ * already agree on that semantics, and the scope pin test walks them:
+ *
+ *   1. operationRegistry declares every toggle op targetScope:'global'
+ *      with "…in the generation settings" descriptions.
+ *   2. Persistence: the zustand partialize (store/index.js) persists the
+ *      bags beside `config` as user preferences, deep-merge-healed on
+ *      rehydrate (persistMerge.js).
+ *   3. Per-settlement capture: generateSettlement snapshots the live bags
+ *      into the pipeline config as _institutionToggles/_categoryToggles/
+ *      _goodsToggles/_servicesToggles (consumed by resolveConfig), so each
+ *      settlement's generation inputs are immutable provenance — changing
+ *      a global bag NEVER rewrites an existing settlement.
+ *   4. Round-trip: save entries carry copies of the bags (saves.js
+ *      `toggles` bundling) and the Library load path restores them into
+ *      the global bags (SettlementsPanel onLoad), so re-generation from a
+ *      loaded save reproduces its settings.
+ *
+ * Cross-settlement carry-over between generations is therefore the same
+ * behavior config sliders have, not a scoping bug. Per-save LIVE scoping
+ * would require reshaping persisted state (persistence-shape change) and
+ * is owner-gated if ever wanted.
+ * @enforced-by tests/store/toggleSlice.scope.test.js
  */
 
 import {

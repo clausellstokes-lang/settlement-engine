@@ -24,9 +24,65 @@ import {
   updatePendingEditIntent,
 } from '../domain/pendingEditIntents.js';
 import { applyEditOp } from './settlementPendingEditWriters.js';
+import { getEffectiveValue, isEditablePath } from '../domain/userEdits.js';
+import { _resolveEntity } from './settlementSliceHelpers.js';
 
 const RECEIPT_LIMIT = 100;
 const WORLD_NPC_KINDS = new Set(['ransom-npc', 'rescue-npc', 'champion-npc', 'recall-npc']);
+
+// ── edit-prose: the QUEUE-wired subset of EDITABLE_FIELDS (R-2, 2026-07-27) ──
+//
+// EDITABLE_FIELDS (domain/userEdits.js) registers 25 prose paths across 7
+// entity kinds. The queue admits exactly the 16 whose full lifecycle holds
+// (edit → commit → persist → REGEN survival → snapshot undo). The other 8 are
+// DELIBERATELY NOT WIRED — documented breakers, not oversights:
+//
+//   npc 'personality'      — generated personality is an OBJECT; a string edit
+//                            replaces it and a later edit-npc temperament facet
+//                            spreads the string into indexed-char garbage
+//                            (settlementPendingEditWriters.js applyNpcOp).
+//   npc 'goal.short'       — the edit-npc goal facet writes npc.goal.short
+//                            directly, bypassing the _userEdits record: the
+//                            edit record goes stale and Revert lies.
+//   npc 'role'             — reassign-npc SEAT_FIELDS includes 'role' and
+//                            Object.assigns over an authored value with no
+//                            record sync (same stale-record seam).
+//   hook '*'               — no generator produces settlement.hooks and no
+//                            display reads it; the registry rows point at a
+//                            phantom array on pipeline data.
+//   historicalEvent '*',
+//   currentTension '*'     — regenSection('history') rerolls the entry arrays
+//                            and authored ENTRIES carry no identity to be
+//                            preserved by (settlementSlice regenSection +
+//                            historyPreservation deferral A; owner-parked).
+//
+// npc 'secret.what' keeps its existing inline card path (npcComponents.jsx) —
+// the direct applyUserEditAction mount predates the queue and stays as-is.
+// Every wired settlement 'history.*' path survives a history reroll because
+// restoreAuthoredHistory re-applies authored root history prose; the other
+// root paths and powerStructure.factions / institutions are replaced by no
+// regen branch. Kept in lockstep with EDITABLE_FIELDS by
+// tests/store/editProseQueueSpine.test.js.
+export const QUEUE_WIRED_PROSE_PATHS = Object.freeze({
+  faction: Object.freeze(['desc']),
+  institution: Object.freeze(['desc']),
+  settlement: Object.freeze([
+    'arrivalScene',
+    'pressureSentence',
+    'settlementReason',
+    'prominentRelationship.phrasing',
+    'history.historicalCharacter',
+    'history.founding.reason',
+    'history.founding.initialChallenge',
+    'history.founding.overcoming',
+    'history.founding.stressNote',
+    'history.founding.foundedBy',
+    'economicViability.summary',
+    'economicState.safetyProfile.safetyDesc',
+    'economicState.safetyProfile.guardEffectivenessDesc',
+    'economicState.safetyProfile.economicDragDesc',
+  ]),
+});
 
 /**
  * Produce the serializable source context captured by every staged intent.
@@ -108,6 +164,25 @@ function availability(kind, payload, state) {
   if (kind === 'table-event') {
     if (payload.directive?.dispatch === 'flavor' && state.phase !== 'canon') {
       return { ok: false, reason: 'canon_required' };
+    }
+    return { ok: true };
+  }
+
+  if (kind === 'edit-prose') {
+    // Registry gate first (the writer re-checks it), then the queue-wired
+    // subset — a registered-but-hazardous path is refused with its own typed
+    // reason so a future wiring decision is visible in the refusal, not lost.
+    if (!isEditablePath(payload.entityKind, payload.path)) {
+      return { ok: false, reason: 'prose_path_not_editable' };
+    }
+    const wired = QUEUE_WIRED_PROSE_PATHS[payload.entityKind];
+    if (!wired || !wired.includes(payload.path)) {
+      return { ok: false, reason: 'prose_path_deferred' };
+    }
+    const entity = _resolveEntity(settlement, payload.entityKind, payload.entityIndex);
+    if (!entity) return { ok: false, reason: 'prose_target_missing' };
+    if (getEffectiveValue(entity, payload.path) === payload.value) {
+      return { ok: false, reason: 'no_effect' };
     }
     return { ok: true };
   }
@@ -241,10 +316,32 @@ function applyRename(get, set, intent) {
     : { ok: false, status: 'failed', reason: 'rename_not_applied' };
 }
 
+/**
+ * Route a reviewed prose intent through the EXISTING registered writer.
+ * applyUserEditAction owns the strict EDITABLE_FIELDS gate, the _userEdits /
+ * _authored record, and the durable persist; this dispatcher only verifies the
+ * write landed so the receipt never claims an apply the writer refused.
+ */
+function applyProse(get, intent) {
+  const payload = intent.payload || {};
+  const write = get().applyUserEditAction;
+  if (typeof write !== 'function') {
+    return { ok: false, status: 'failed', reason: 'writer_missing' };
+  }
+  write(payload.entityKind, payload.entityIndex, payload.path, payload.value);
+  const entity = _resolveEntity(get().settlement, payload.entityKind, payload.entityIndex);
+  return entity && getEffectiveValue(entity, payload.path) === payload.value
+    ? { ok: true, status: 'applied', reason: null }
+    : { ok: false, status: 'failed', reason: 'prose_not_applied' };
+}
+
 function applyOne(get, set, intent) {
   try {
     if (intent.kind === 'rename-npc' || intent.kind === 'rename-settlement') {
       return applyRename(get, set, intent);
+    }
+    if (intent.kind === 'edit-prose') {
+      return applyProse(get, intent);
     }
     const result = /** @type {any} */ (applyEditOp(get, set, intent));
     if (result?.ok) return result;
@@ -349,10 +446,12 @@ function targetKey(intent) {
 
 function classifyCounts(intents) {
   let rename = 0;
+  let prose = 0;
   for (const intent of intents) {
     if (intent.kind === 'rename-npc' || intent.kind === 'rename-settlement') rename += 1;
+    if (intent.kind === 'edit-prose') prose += 1;
   }
-  return { structural: 0, rename, prose: 0 };
+  return { structural: 0, rename, prose };
 }
 
 function trackCommit(intents, phase) {

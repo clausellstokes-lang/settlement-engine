@@ -113,7 +113,20 @@ const EDIT_POLICY = Object.freeze({
   'champion-npc':      ['world', 'next-pulse', 'contest.champion'],
   'recall-npc':        ['world', 'next-pulse', 'roads.recall'],
   'table-event':       ['mechanical', 'canon-queue', 'table-ledger.apply'],
+  'edit-prose':        ['authoring', 'immediate', 'settlement.edit-prose'],
 });
+
+// edit-prose transport: the entity kinds the QUEUE accepts prose for. Narrower
+// than domain/userEdits.js EDITABLE_ENTITY_TYPES on purpose — npc prose rides
+// its own inline card path (secret.what) and the npc/hook/history-entry paths
+// have recorded lifecycle hazards (see QUEUE_WIRED_PROSE_PATHS in
+// settlementPendingEdits.js). Kept local so this module stays dependency-light;
+// the registry itself is re-gated at availability AND inside the writer.
+const PROSE_ENTITY_KINDS = new Set(['settlement', 'faction', 'institution']);
+// Transport bound only (queue hygiene, not editorial policy): generated prose
+// for these fields runs well under this; the cap stops a runaway paste from
+// bloating the session queue. The writer itself accepts any string.
+const PROSE_VALUE_MAX = 4000;
 
 /**
  * @param {unknown} value
@@ -597,16 +610,60 @@ export function normalizePendingEditPayload(kind, rawPayload, context) {
     const table = validateTablePayload(input);
     if (table.ok === false) return { ok: false, reason: table.reason };
     payload = table.payload;
+  } else if (kind === 'edit-prose') {
+    // Shape admission only. Which (kind, path) pairs are actually writable is
+    // live-capability, answered by availability() against QUEUE_WIRED_PROSE_PATHS
+    // and re-gated by the writer's own EDITABLE_FIELDS check.
+    const entityKind = text(input.entityKind);
+    if (!PROSE_ENTITY_KINDS.has(entityKind)) {
+      return { ok: false, reason: 'prose_entity_kind_invalid' };
+    }
+    const path = text(input.path);
+    if (!path) return { ok: false, reason: 'prose_path_required' };
+    const value = typeof input.value === 'string' ? input.value : null;
+    if (value === null || !value.trim()) {
+      return { ok: false, reason: 'prose_value_required' };
+    }
+    if (value.length > PROSE_VALUE_MAX) {
+      return { ok: false, reason: 'prose_value_too_long' };
+    }
+    // Settlement-root prose has no enclosing entity; the writer ignores the
+    // index there. Array kinds need a concrete position — staleness of that
+    // position between review and commit is caught by the source fingerprint,
+    // which any settlement mutation (including reorders) invalidates.
+    let entityIndex = -1;
+    if (entityKind !== 'settlement') {
+      if (typeof input.entityIndex !== 'number'
+        || !Number.isInteger(input.entityIndex)
+        || input.entityIndex < 0) {
+        return { ok: false, reason: 'prose_target_missing' };
+      }
+      entityIndex = input.entityIndex;
+    }
+    payload = { entityKind, entityIndex, path, value };
   } else {
     return { ok: false, reason: 'kind_not_committable' };
   }
 
   const recordTargetRef = text(recordOf(input.record)?.targetRef);
+  // edit-prose on an array entity targets that entity (position-addressed;
+  // the fingerprint guards staleness) so disjoint-target rebase after a partial
+  // commit treats two different factions as independent work. Settlement-root
+  // prose shares the settlement target with renames — conservative on purpose.
+  const proseEntityTarget = kind === 'edit-prose'
+    && payload.entityKind !== 'settlement'
+    ? {
+        type: String(payload.entityKind),
+        id: String(payload.entityIndex),
+        ownerKey: context.ownerKey,
+      }
+    : null;
   const targetRef = NPC_KINDS.has(kind)
     ? { type: 'npc', id: npcId, ownerKey: context.ownerKey }
-    : kind === 'table-event' && recordTargetRef
-      ? { type: 'table-subject', id: recordTargetRef, ownerKey: context.ownerKey }
-      : { type: 'settlement', id: context.settlementRef, ownerKey: context.ownerKey };
+    : proseEntityTarget
+      || (kind === 'table-event' && recordTargetRef
+        ? { type: 'table-subject', id: recordTargetRef, ownerKey: context.ownerKey }
+        : { type: 'settlement', id: context.settlementRef, ownerKey: context.ownerKey });
 
   try {
     return {

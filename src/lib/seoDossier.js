@@ -12,6 +12,7 @@
  * already renders reach the head. No seed, DM note, or raw settlement blob.
  */
 import { ORIGIN, SITE_NAME, upsertMeta, upsertJsonLd, setSocialImage, galleryCardImage } from './seo.js';
+import { resolveSettlementTerrain, terrainOrNull } from '../domain/resolveTerrain.js';
 
 /** Minimal humanizer for slug/enum values (river_valley → River Valley). */
 function humanize(v) {
@@ -34,8 +35,19 @@ export function setSharedDossierMeta(dossier) {
 
   const slug = dossier.slug;
   const tier = humanize(dossier.tier);
+  // THE ONE terrain read (domain/resolveTerrain.js). The dossier-level facet stays
+  // first (callers may hand one in; sanitizeDossier does not set it today), guarded
+  // against the 'auto' UI sentinel the server facet column can carry.
+  // R-4 lane P-6, DECLARED COPY SHIFT (measured, vetoable by restoring the old
+  // chain here): the old chain led with the never-written config.terrain, so the
+  // "on <terrain> terrain" clause was dropped from the description of every
+  // wizard-generated share — the sentence read "Ashford, a town, with about 2,400
+  // people." It now reads "Ashford, a town, on riverside terrain, with about 2,400
+  // people." This is a CRAWLED surface (og/twitter/meta description + CreativeWork
+  // JSON-LD); no prerendered document is affected (scripts/prerender-routes.mjs
+  // bakes only route/hub heads, never a per-dossier one).
   const terrain = humanize(
-    dossier.terrain || dossier.settlement?.config?.terrain || dossier.settlement?.terrain,
+    terrainOrNull(dossier.terrain) || resolveSettlementTerrain(dossier.settlement),
   );
   const population = Number(dossier.settlement?.population) || null;
 

@@ -51,23 +51,26 @@ describe('pendingEdits — committable-kinds contract (no silent drop)', () => {
     }
   });
 
-  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle + roads ops + player siding + the table event + recall)', () => {
+  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle + roads ops + player siding + the table event + recall + prose)', () => {
     // DESIGN_NPC_LIFECYCLE §2 added live dispatchers for the three typed NPC ops
     // (edit / reassign / stasis+return); DESIGN_THE_ROADS §11 added the two party-hand
     // roads ops (ransom / rescue); DESIGN_DEEP_COUPLINGS §8 D-4e added the player-siding op
     // (champion); R-1 THE SESSION LEDGER added 'table-event' (via applyTableEvent);
     // DESIGN_VISION_WAVE V-24a added the recall rider (recall) — all route through
-    // applyEditOp/applyNpcOp (commitPendingEdits' default arm). Kept in lockstep with the
-    // commitPendingEdits switch.
+    // applyEditOp/applyNpcOp (commitPendingEdits' default arm). R-2 (capability
+    // remediation, 2026-07-27) added 'edit-prose' (via applyProse → the registered
+    // applyUserEditAction writer). Kept in lockstep with the commitPendingEdits switch.
     expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual([
-      'champion-npc', 'edit-npc', 'ransom-npc', 'reassign-npc', 'recall-npc', 'rename-npc',
-      'rename-settlement', 'rescue-npc', 'return-npc', 'stasis-npc', 'table-event',
+      'champion-npc', 'edit-npc', 'edit-prose', 'ransom-npc', 'reassign-npc', 'recall-npc',
+      'rename-npc', 'rename-settlement', 'rescue-npc', 'return-npc', 'stasis-npc',
+      'table-event',
     ]);
   });
 
   it('the un-dispatched scaffolding kinds are explicitly NOT committable', () => {
+    // 'edit-prose' left this list in R-2 when it gained its dispatcher.
     for (const k of ['rename-faction', 'add-institution', 'remove-institution',
-      'add-resource', 'remove-resource', 'add-stressor', 'remove-stressor', 'edit-prose']) {
+      'add-resource', 'remove-resource', 'add-stressor', 'remove-stressor']) {
       expect(EDIT_KINDS).toContain(k);                    // still a declared kind…
       expect(COMMITTABLE_EDIT_KINDS).not.toContain(k);    // …but has no committer
     }

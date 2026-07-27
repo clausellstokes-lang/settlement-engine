@@ -6,6 +6,7 @@ import { sans } from '../Primitives';
 import {Ts, J0} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {computeChainSets, computeChainDepthMap} from '../tabHelpers';
+import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import {ServiceItem} from '../serviceComponents';
 import {NarrativeNote} from '../NarrativeNote';
 
@@ -79,6 +80,13 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
   return (
     <div style={{...sans}}>
       <NarrativeNote note={narrativeNote} />
+
+      {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest
+          stale-window note: applied events are not re-derived into this catalog
+          until the next full survey. Conditional on the reconciliationLog detector;
+          absent trail ⇒ byte-identical tab. 'catalog' is the services wording of
+          the one shared sentence pair (domain/display/economyFreshness.js). */}
+      <EconomyFreshnessNote settlement={settlement} variant="catalog" />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>

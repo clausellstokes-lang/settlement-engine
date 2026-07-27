@@ -12,7 +12,8 @@
  * per-settlement card, and the browser still boots the app normally.
  *
  * This module is the PURE, deploy-independent half: no fetch, no fs, no env —
- * just string transforms — so it is unit-testable in isolation
+ * string transforms plus one pure domain import (resolveTerrain, itself
+ * import-free) — so it is unit-testable in isolation
  * (tests/build/injectGalleryMeta.test.js). The `_` filename prefix keeps Vercel
  * from treating it as its own function route.
  *
@@ -22,6 +23,8 @@
  * get_gallery_dossier RPC row; a nameless/absent row degrades to a generic
  * (still per-slug URL + image) card rather than leaking anything.
  */
+
+import { resolveSettlementTerrain, terrainOrNull } from '../src/domain/resolveTerrain.js';
 
 export const ORIGIN = 'https://settlementforge.com';
 export const SITE_NAME = 'SettlementForge';
@@ -81,8 +84,14 @@ export function buildGalleryMeta(slug, dossier, opts = {}) {
   }
 
   const tier = humanize(dossier.tier);
+  // THE ONE terrain read (domain/resolveTerrain.js) — the crawler-head TWIN of
+  // src/lib/seoDossier.js, same expression shape (twin parity pinned in
+  // tests/build/injectGalleryMeta.test.js). R-4 lane P-6 follow-up: the old
+  // chain led with the never-written config.terrain and had no 'auto' guard,
+  // so this crawler head could disagree with the routed client head (or print
+  // "on auto terrain") for the very same shared dossier.
   const terrain = humanize(
-    dossier.terrain || dossier.settlement?.config?.terrain || dossier.settlement?.terrain,
+    terrainOrNull(dossier.terrain) || resolveSettlementTerrain(dossier.settlement),
   );
   const population = Number(dossier.settlement?.population) || null;
   const facts = [

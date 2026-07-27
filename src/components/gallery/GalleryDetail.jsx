@@ -8,6 +8,7 @@ import {
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import { resolveSettlementTerrain } from '../../domain/resolveTerrain.js';
 import { setSharedDossierMeta } from '../../lib/seoDossier.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import AlivenessBadge from './AlivenessBadge.jsx';
@@ -120,7 +121,12 @@ export default function GalleryDetail({
   const meta = [
     TIER_LABELS[dossier.tier] || human(dossier.tier),
     dossier.settlement?.population ? `${formatNumber(dossier.settlement.population)} population` : null,
-    dossier.settlement?.config?.terrain || dossier.settlement?.terrain,
+    // THE ONE terrain read (domain/resolveTerrain.js). R-4 lane P-6, DECLARED
+    // DISPLAY SHIFT (measured, vetoable by restoring the old chain on this line):
+    // the old chain led with the never-written config.terrain, so this meta line
+    // showed NO terrain for any wizard-generated dossier, and showed a stale one
+    // for a legacy save whose config.terrain contradicted its rolled terrainType.
+    resolveSettlementTerrain(dossier.settlement),
     dossier.publishedAt ? `shared ${formatDate(dossier.publishedAt)}` : null,
   ].filter(Boolean);
 

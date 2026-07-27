@@ -854,9 +854,26 @@ export const en = Object.freeze({
   // Fires AFTER an event or batch has committed on a narrated save. The
   // change is already applied and stays applied — there is no cancel, only
   // "re-run the narrative now" or "carry on with the raw simulation".
+  //
+  // The body's archive sentence is the eventNarrativeSnapshots cap
+  // disclosure (Wave R-1, atlas A20): applying an event stamps the
+  // pre-event settlement narrative into the save's aiData archive, which
+  // keeps only the last MAX_EVENT_NARRATIVE_SNAPSHOTS (10) entries — this
+  // surface is the user-facing moment of that stamp. The archive has no
+  // reader surface yet; Wave R-2 mounts the reader and carries this
+  // disclosure to it. tests/copy/narrativeArchiveDisclosure.test.js pins
+  // the sentence to the real cap constant.
+  //
+  // The archive sentence is CONDITIONAL on purpose (R-1 must-fix): the modal
+  // fires for any narrated save (aiSettlement OR aiDailyLife), but both stamp
+  // writers (settlementSlice applyEvent tail + canonEventCommandTransaction)
+  // archive only the SETTLEMENT narrative on the save row. A daily-life-only
+  // save shows this modal and archives nothing, so the claim keys on exactly
+  // the writers' condition — "carries a settlement narrative" — and stays
+  // true in every reachable state. Same pin file covers the state truths.
   staleNarrative: {
     heading:         'The narrative is now out of date.',
-    body:            'Your change is applied. The prose on this save was written against the previous state, so it does not yet know what just happened.',
+    body:            'Your change is applied. The prose on this save was written against the previous state, so it does not yet know what just happened. If this save carries a settlement narrative, the version that stood before each event is stamped into the save’s archive, which holds only the last 10.',
     regenerateTitle: 'Regenerate narrative',
     regenerateBody:  'Re-run the narrative against the new state. Spends {cost} credits.',
     continueTitle:   'Continue with raw simulation',

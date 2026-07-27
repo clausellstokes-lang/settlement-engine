@@ -142,6 +142,12 @@ function clearTransientCampaignWork(state) {
   state.campaignMutationLocks = [];
   state.advanceInFlight = [];
   state.pulseUndoStack = [];
+  // R-1 MUST-FIX: the proposal-undo ring and its advance-depth counter are the
+  // same class of owner-scoped transient work as the advance stack. Left alone,
+  // a same-owner re-auth kept the ring alive while the advance stack cleared —
+  // the History chip advertised a dead undo into the replacement session.
+  state.proposalUndoStack = [];
+  state.advanceSeqByCampaign = {};
 }
 
 /**
@@ -361,6 +367,21 @@ function migrateMapState(ms) {
 // CONSUMES shared state: savedSettlements — owned by settlementSlice.
 // Persistence/pure utils live in campaignSliceShared.js; pulse/state-application
 // helpers in campaignPulseHelpers.js.
+// ── Shapeless-patch validation (Wave R-3, atlas VI.12 #163b) ────────────────
+// The CLOSED patch surface of updateSavedCampaign, from the R-3 caller census:
+// AutonomyPanel's standing instructions plus MapShareEditor's gallery cache
+// stamps. Every OTHER field on a campaign row (id, settlementIds, worldState,
+// mapState, wizardNews, chronicles, contentBinding, ...) has a dedicated
+// writer; a patch reaching for one of those is a programming error and is
+// refused WHOLE (atomic, typed) — unlike updateConfig's filtering validator,
+// no caller here passes persisted blobs, so atomicity breaks nothing.
+// Exported for the validation pins.
+export const SAVED_CAMPAIGN_PATCH_KEYS = new Set([
+  'surveyorInstructions', // AutonomyPanel (domain/autonomy STANDING_INSTRUCTIONS_KEY)
+  'shareKind', 'galleryDescription', 'galleryTags', // MapShareEditor cachePatch
+  'isPublic', 'publicSlug', // MapShareEditor publish/unshare stamps
+]);
+
 export const createCampaignSlice = (set, get) => {
   initCampaignSessionReader(get);
   // Route module-scoped persist failures (in campaignSliceShared) into store
@@ -724,6 +745,12 @@ export const createCampaignSlice = (set, get) => {
       if (String(state.activeCampaignId) === String(id)) state.activeCampaignId = null;
       state.pulseUndoStack = (state.pulseUndoStack || [])
         .filter(snapshot => String(snapshot.campaignId) !== String(id));
+      // R-1 MUST-FIX hygiene: the proposal ring and the advance-depth counter
+      // follow the campaign out, exactly like the advance stack above — no
+      // orphan snapshot may keep a deleted (or recreated same-id) world alive.
+      state.proposalUndoStack = (state.proposalUndoStack || [])
+        .filter(snapshot => String(snapshot.campaignId) !== String(id));
+      if (state.advanceSeqByCampaign) delete state.advanceSeqByCampaign[String(id)];
       deletion = deletePersistedCampaignState(state, id);
     });
     return deletion;
@@ -857,21 +884,40 @@ export const createCampaignSlice = (set, get) => {
    * Patch a cached campaign row IN PLACE (mirrors settlementSlice's
    * updateSavedSettlement). The maps editor re-renders off the cached campaign
    * after a publish/edit without a refetch — e.g. stamping the gallery share
-   * kind/description or the just-captured thumbnail back onto the row so the
-   * tile reflects the edit immediately. Only patches an ACTIVE campaign; a
-   * missing/destroyed id is a no-op. Persists so the patch survives a reload.
+   * kind/description back onto the row so the tile reflects the edit at once.
+   * Patch keys are validated against SAVED_CAMPAIGN_PATCH_KEYS (the R-3 caller
+   * census): ANY unknown key refuses the whole patch, typed, with a dev error.
+   * Only patches an ACTIVE campaign; a missing/destroyed id is a typed no-op.
+   * Persists so the patch survives a reload.
    * @param {string} campaignId
-   * @param {object} patch shallow keys to assign onto the campaign row
+   * @param {object} patch shallow allowlisted keys to assign onto the row
+   * @returns {{ ok: true, campaignId: string }
+   *   | { ok: false, reason: string, campaignId: string, unknownKeys?: string[] }}
    */
-  updateSavedCampaign: (campaignId, patch) =>
+  updateSavedCampaign: (campaignId, patch) => {
+    if (!patch || typeof patch !== 'object' || Array.isArray(patch)) {
+      return { ok: false, reason: 'invalid_campaign_patch', campaignId };
+    }
+    const unknownKeys = Object.keys(patch).filter(key => !SAVED_CAMPAIGN_PATCH_KEYS.has(key));
+    if (unknownKeys.length) {
+      if (import.meta.env.DEV) {
+        console.error('[campaignSlice] updateSavedCampaign refused unknown patch keys:', unknownKeys);
+      }
+      return { ok: false, reason: 'unknown_campaign_patch_keys', unknownKeys, campaignId };
+    }
+    let patched = false;
     set(state => {
-      if (!patch || typeof patch !== 'object') return;
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       Object.assign(c, patch);
       c.updatedAt = new Date().toISOString();
+      patched = true;
       persistCampaignState(state, campaignId);
-    }),
+    });
+    return patched
+      ? { ok: true, campaignId }
+      : { ok: false, reason: 'campaign_not_found', campaignId };
+  },
 
   getCampaignWizardNews: (campaignId) => {
     const c = findActiveCampaign(get().campaigns, campaignId);

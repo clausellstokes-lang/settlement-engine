@@ -1,22 +1,33 @@
 /**
- * UndoHistoryPanel — the visible face of the campaign's advance-undo history.
+ * UndoHistoryPanel — the visible face of the campaign's session undo history.
  *
- * The engine already keeps a byte-exact, session-scoped stack of pre-advance
- * snapshots (store `pulseUndoStack`; the toolbar's "Undo Advance" chip pops the
- * top). This panel SURFACES that stack as a readable list and lets the DM walk
- * back to any point through the EXISTING undo path — it builds NO new undo
- * machinery. "Return here" on the k-th row (0 = most recent) simply calls the
- * existing `undoLastPulse` (k + 1) times, which IS the documented multi-step
- * walk-back: each call pops one snapshot and restores its world.
+ * The engine keeps TWO byte-exact, session-scoped snapshot stores: the
+ * pre-advance stack (store `pulseUndoStack`; the toolbar's "Undo Advance" chip
+ * pops the top) and, since R-1, the pre-apply proposal ring (store
+ * `proposalUndoStack`, popped by `undoLastProposalApply`). This panel SURFACES
+ * both as ONE readable, newest-first list and lets the DM walk back to any
+ * point through the EXISTING undo paths — it builds NO new undo machinery.
+ * Each row names WHICH act it reverts (an advance vs a proposal apply); a
+ * proposal apply does not move the calendar, so its row leads with the act,
+ * never with a date that would read as a new calendar step. "Return here" on
+ * the k-th row calls the matching undo verb once per row above it, newest
+ * first — the documented multi-step walk-back, now across both stores.
+ *
+ * ORDERING: the two stores share no clock, so rows interleave on the
+ * structural happens-before the ring records — each proposal entry stamps the
+ * campaign's advance-stack depth at push (`advanceDepth`), placing it after
+ * the advance that depth counts and before the next one. Ties inside one
+ * store keep push order.
  *
  * SECRETS-SAFE: each snapshot deep-clones the full pre-pulse worldState, which
  * carries covert marks (conspiracies, foreign assets, corruption). The rows
- * therefore read ONLY the non-covert scalars — the calendar date it returns to,
- * the interval one undo reverts, and the capture time — and NEVER summarize what
- * changed from the snapshot body. No covert field is read here.
+ * therefore read ONLY the non-covert scalars — the calendar date an advance
+ * returns to, the interval one undo reverts, the capture time, and a proposal's
+ * public desk headline — and NEVER summarize what changed from the snapshot
+ * body. No covert field is read here.
  *
- * Session-scoped + in-memory: a reload clears the stack, so an empty panel after
- * a reload is correct (the empty copy says so), not a lost history.
+ * Session-scoped + in-memory: a reload clears both stores, so an empty panel
+ * after a reload is correct (the empty copy says so), not a lost history.
  */
 import { useState } from 'react';
 import { X } from 'lucide-react';
@@ -58,25 +69,44 @@ function pointLabel(entry) {
   return `Tick ${entry?.tick ?? 0}`;
 }
 
+/** Merge one campaign's advance + proposal snapshots into a single newest-first
+ *  row list. Total order key: advance i (stack order) → (i+1, 0); a proposal
+ *  stamped advanceDepth k sits after advance k and before advance k+1 → (k, 1),
+ *  push order breaking ties within the ring. */
+function mergedRows(advStack, propStack, campaignId) {
+  const mine = (stack) => (stack || [])
+    .filter((e) => e && String(e.campaignId) === String(campaignId));
+  const items = [
+    ...mine(advStack).map((entry, i) => ({ entry, kind: 'advance', key: [i + 1, 0, i] })),
+    ...mine(propStack).map((entry, j) => ({ entry, kind: 'proposal', key: [entry.advanceDepth ?? 0, 1, j] })),
+  ];
+  items.sort((a, b) => (b.key[0] - a.key[0]) || (b.key[1] - a.key[1]) || (b.key[2] - a.key[2]));
+  return items;
+}
+
 export default function UndoHistoryPanel({ campaignId, onClose }) {
   const dialogRef = useDialogFocusTrap(true, onClose);
-  const stack = useStore((s) => s.pulseUndoStack);
+  const advStack = useStore((s) => s.pulseUndoStack);
+  const propStack = useStore((s) => s.proposalUndoStack);
   const undoLastPulse = useStore((s) => s.undoLastPulse);
+  const undoLastProposalApply = useStore((s) => s.undoLastProposalApply);
   const [busy, setBusy] = useState(false);
 
-  // The campaign's own snapshots, oldest→newest in the stack; displayed most
-  // recent first. Row index k therefore needs (k + 1) pops to return to it.
-  const mine = (stack || []).filter((e) => e && e.campaignId === campaignId);
-  const rows = mine.slice().reverse();
+  // Both stores merged, most recent first. Row index k therefore needs one
+  // matching-verb pop per row 0..k to return to it.
+  const rows = mergedRows(advStack, propStack, campaignId);
 
   const restoreTo = async (k) => {
     if (busy) return;
     setBusy(true);
     try {
       for (let i = 0; i <= k; i += 1) {
-        // The EXISTING mechanism: pops one snapshot, restores its world. Refuses
-        // mid-advance (returns false) — stop the walk-back if it does.
-        const ok = await undoLastPulse(campaignId);
+        // The EXISTING mechanisms, chosen per row: each pops ONE snapshot from
+        // its own store and restores that world. Both refuse mid-advance
+        // (returning false) — stop the walk-back if either does.
+        const ok = rows[i].kind === 'proposal'
+          ? await undoLastProposalApply(campaignId)
+          : await undoLastPulse(campaignId);
         if (!ok) break;
       }
     } finally {
@@ -117,26 +147,26 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`, color: GOLD,
         }}>
           <h2 id="undo-history-title" style={{ margin: 0, fontSize: FS.lg, fontFamily: serif_, fontWeight: 600 }}>
-            Advance history
+            Undo history
           </h2>
-          <IconButton Icon={X} label="Close advance history" onClick={onClose} tone="ghost" size="lg" />
+          <IconButton Icon={X} label="Close undo history" onClick={onClose} tone="ghost" size="lg" />
         </div>
 
         <div style={{ padding: SP.md, overflowY: 'auto' }}>
           {rows.length === 0 ? (
             <EmptyState
-              heading="No advances to undo yet."
-              body="Advance the realm and each step is kept here for the session, so you can return to any point before it. A page reload makes the advances permanent."
+              heading="Nothing to undo yet."
+              body="Advance the realm or apply a proposal and each step is kept here for the session, so you can return to any point before it. A page reload makes the changes permanent."
             />
           ) : (
             <>
               <p style={{ margin: `0 0 ${SP.sm}px`, color: MUTED, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-                Return the realm to any point below. Later advances are undone with it. Kept for this session only.
+                Return the realm to any point below. Later steps are undone with it. Kept for this session only.
               </p>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column' }}>
-                {rows.map((entry, k) => (
+                {rows.map(({ entry, kind }, k) => (
                   <li
-                    key={`${entry.tick}-${entry.now}-${k}`}
+                    key={`${kind}-${entry.tick}-${entry.now}-${k}`}
                     style={{
                       display: 'flex', alignItems: 'center', gap: SP.sm,
                       padding: `${SP.sm}px 0`,
@@ -145,11 +175,24 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
                   >
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800 }}>
-                        {pointLabel(entry)}
+                        {/* A proposal apply does not move the calendar, so its
+                            row leads with the ACT — never a date that would
+                            read as a new calendar step. */}
+                        {kind === 'proposal' ? 'Proposal applied' : pointLabel(entry)}
                       </div>
                       <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-                        Undoes {INTERVAL_LABEL[entry.interval] || 'one advance'}
-                        {entry.now ? ` · captured ${ago(entry.now)}` : ''}
+                        {kind === 'proposal' ? (
+                          <>
+                            {entry.headline ? `${entry.headline} · ` : ''}
+                            Undoes one proposal apply
+                            {entry.now ? ` · captured ${ago(entry.now)}` : ''}
+                          </>
+                        ) : (
+                          <>
+                            Undoes {INTERVAL_LABEL[entry.interval] || 'one advance'}
+                            {entry.now ? ` · captured ${ago(entry.now)}` : ''}
+                          </>
+                        )}
                       </div>
                     </div>
                     <Button variant="gold" size="sm" disabled={busy} onClick={() => restoreTo(k)}>

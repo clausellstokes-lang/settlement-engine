@@ -13,6 +13,7 @@ import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
+import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in economyFreshness.js
 import {
   customSupplyChainPresentation,
 } from '../../../domain/content/customSupplyChainPresentation.js';
@@ -298,13 +299,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // SEASONS-A: the seasonal granary read (available only on campaigns whose
   // pulse runs with seasons on — the stockpile record carries the season).
   const granary = deriveGranaryOutlook(s);
-  const granaryColor = granary.available
-    ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28')
-    : '#a0762a';
+  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a';
 
   return (
     <div style={{...sans}}>
       <NarrativeNote note={narrativeNote} />
+
+      <EconomyFreshnessNote settlement={s} variant="tallies" />
 
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',marginBottom:14}}>

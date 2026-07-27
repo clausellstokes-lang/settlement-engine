@@ -220,6 +220,7 @@ const SESSION_ONLY_FAMILIES = Object.freeze({
   pendingEditsClock: 'session-only companion cursor to pendingEditsQueue (src/store/settlementSlice.js)',
   pendingEditReceipts: 'session-only idempotency/correlation receipts; authoritative receipts live in snapshots and event logs',
   pulseUndoStack: 'session-scoped pulse undo stack — a reload clears it (src/store/campaignWorldPulseSlice.js)',
+  proposalUndoStack: 'session-scoped proposal-apply undo ring, separate from pulseUndoStack by construction — a reload clears it (src/store/campaignWorldPulseSlice.js)',
 });
 
 // ═══════════════════════════════════════════════════════════════════════════

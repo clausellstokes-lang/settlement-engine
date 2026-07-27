@@ -410,6 +410,15 @@ export async function runAdvanceCampaignWorld({
             if (oldestIdx !== -1) next.splice(oldestIdx, 1);
           }
           state.pulseUndoStack = next;
+          // R-1 MUST-FIX (ring-guard saturation): every snapshot push raises the
+          // campaign's LOGICAL advance depth (`advanceSeqByCampaign`, session-only;
+          // undoLastPulse decrements as it pops). The cap-eviction above never
+          // touches it — counting RETAINED entries saturated at PULSE_UNDO_CAP and
+          // let the proposal-ring coherence guard pass STALE pre-apply snapshots
+          // after the cap-th advance (see advanceDepthOf, campaignWorldPulseDeferred).
+          if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
+          state.advanceSeqByCampaign[String(campaignId)] =
+            (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) + 1;
         }
         persistUpdates = applyWorldPulseResultToState(state, c, result, now, authoredEventBySave);
         // Advance-scaling Stage 3 PAUSE: a paused interval committed its minors

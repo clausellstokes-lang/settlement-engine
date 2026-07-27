@@ -7,6 +7,9 @@
  * a scraper actually consumes.
  */
 import { describe, test, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   buildGalleryMeta,
   injectGalleryMeta,
@@ -179,5 +182,53 @@ describe('injectGalleryMeta', () => {
     // Public path (no noindex) leaves the reservation untouched.
     const publicOut = injectGalleryMeta(withRobots, meta);
     expect(publicOut).toContain('<meta name="robots" content="noai, noimageai" />');
+  });
+});
+
+// R-4 lane P-6 follow-up (verify finding): the crawler head must agree with the
+// routed client head (src/lib/seoDossier.js) about terrain — same domain read,
+// same 'auto' guard, no dead config.terrain-first leg.
+describe('terrain twin routing (crawler head = client head)', () => {
+  const REPO = join(dirname(fileURLToPath(import.meta.url)), '../..');
+  const stripped = (rel) => readFileSync(join(REPO, rel), 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1 ');
+
+  test('terrainType wins over the legacy config.terrain leg', () => {
+    const meta = buildGalleryMeta(
+      'oakmere',
+      { name: 'Oakmere', tier: 'town', settlement: { config: { terrainType: 'riverside', terrain: 'coastal' } } },
+      { origin: ORIGIN },
+    );
+    expect(meta.description).toContain('on riverside terrain');
+    expect(meta.description).not.toContain('coastal');
+  });
+
+  test("the 'auto' facet sentinel never reaches a crawler description", () => {
+    const meta = buildGalleryMeta(
+      'oakmere',
+      { name: 'Oakmere', tier: 'town', terrain: 'auto', settlement: { config: { terrainType: 'hills' } } },
+      { origin: ORIGIN },
+    );
+    expect(meta.description).toContain('on hills terrain');
+    expect(meta.description).not.toContain('auto');
+  });
+
+  test('legacy fixture-only config.terrain still resolves (the leg lives inside resolveTerrain)', () => {
+    const meta = buildGalleryMeta(
+      'oakmere',
+      { name: 'Oakmere', tier: 'town', settlement: { config: { terrain: 'river_valley' } } },
+      { origin: ORIGIN },
+    );
+    expect(meta.description).toContain('river valley');
+  });
+
+  test('TWIN PARITY: both heads spell the identical routed expression, neither reads config.terrain', () => {
+    const EXPRESSION = 'terrainOrNull(dossier.terrain) || resolveSettlementTerrain(dossier.settlement)';
+    for (const rel of ['api/_galleryMeta.js', 'src/lib/seoDossier.js']) {
+      const code = stripped(rel);
+      expect(code.includes(EXPRESSION), `${rel} no longer spells the shared routed terrain expression`).toBe(true);
+      expect(/config\s*\??\.\s*terrain\b/.test(code), `${rel} re-grew the dead config.terrain leg`).toBe(false);
+    }
   });
 });

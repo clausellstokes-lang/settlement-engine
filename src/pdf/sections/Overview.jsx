@@ -125,8 +125,16 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {/* ── Systems Health Dashboard ─────────────────────────────── */}
       {hasSystemsHealth(o) && (
         <>
-      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3, marginTop: 4 }}>
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 1, marginTop: 4 }}>
         SYSTEMS HEALTH
+      </Text>
+      {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder): the
+          score bars, Viability and Defense statuses are generation-frozen; the
+          caption is the byte-for-byte twin of OverviewTab's Systems Health
+          caption, with the same declared-live Food Security carve-out
+          (FROZEN_VS_LIVE grammar). One string, vetoable. */}
+      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
+        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
@@ -406,8 +414,12 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
+          {/* G5 first-survey framing (Wave R-2): all three merged sources —
+              warnings, coherenceNotes, structuralSuggestions — are
+              generation-frozen records; the vintage mirrors the web twins
+              (OverviewTab's "Coherence Notes / Suggestions · First Survey"). */}
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            WARNINGS & NOTES
+            WARNINGS & NOTES · FIRST SURVEY
           </Text>
           <BulletList
             items={[

@@ -103,7 +103,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
             </div>
             {summaryClean&&<p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
             <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
-              This tab checks whether your settlement makes logical sense. Not whether it&apos;s economically optimised.
+              This tab checks whether your settlement makes logical sense, as judged at the first survey; later
+              events and edits do not re-run this check. Not whether it&apos;s economically optimised.
               A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
               pieces fit together plausibly.
             </p>
@@ -172,7 +173,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
         <div style={{background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderLeft:'4px solid #7a3a9a',
           padding:'10px 14px',marginBottom:12}}>
           <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
-            ✦ Magic Dependency Detected
+            ✦ Magic Dependency · First Survey
           </div>
           <div style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.5}}>
             This settlement's resilience relies on active magical infrastructure. One or more supply
@@ -206,7 +207,7 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
       </Section>}
 
       {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
-      {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
+      {structViolations.length>0&&<Section title={`Structural Crises · First Survey (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
           <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
             <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.danger,marginBottom:3}}>

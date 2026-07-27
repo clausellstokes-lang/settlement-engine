@@ -25,6 +25,7 @@ import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
+import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
 import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
@@ -151,6 +152,15 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
               </div>
             ))}
           </div>
+
+          {/* ECONOMY FRESHNESS (Wave R-4) — the third defining truth ("How it
+              lives") is composeMaterialTruth's fold of economicState prosperity /
+              food security / primary exports, the same generation-time read-model
+              EconomicsTab tallies. It is not re-derived when an event lands, so
+              this surface carries the same one shared sentence. Anchored under the
+              truths so it qualifies THEM, not the pressure line or the cheat sheet.
+              Conditional: a fresh settlement renders byte-identically. */}
+          <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
 
           <div style={{
             marginTop: 13,

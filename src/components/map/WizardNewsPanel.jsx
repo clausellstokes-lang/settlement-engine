@@ -1,4 +1,4 @@
-import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { newsBodyText, newsReasonPhrases } from '../../domain/display/newsBody.js';
@@ -11,6 +11,10 @@ import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
 import { AffectedSettlements } from './AddressChain.jsx';
+// Wave R-2 (atlas queue #19 / gap 13): the FULL chronicle reader. This panel is
+// only ever loaded through lazy() (HeraldBody + WorldMapStage), so the static
+// import rides the same already-lazy chunk — zero first-paint bytes.
+import ChronicleScrollback from './ChronicleScrollback.jsx';
 import { BORDER, BORDER2, BODY, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, sans, swatch } from '../theme.js';
 
 function percent(value) {
@@ -335,7 +339,6 @@ export default function WizardNewsPanel({ campaign }) {
   const setCreditBalance = useStore(state => state.setCreditBalance);
   const [chronicleBusy, setChronicleBusy] = useState(false);
   const [chronicleError, setChronicleError] = useState('');
-  const chronicles = Array.isArray(campaign?.chronicles) ? campaign.chronicles : [];
   // Ground the chronicle on the latest tick that HAS entries: the feed clock
   // (currentTick) can sit ahead of the newest entry after manual impact
   // advances, and a paid generation must never run on an empty window.
@@ -354,6 +357,9 @@ export default function WizardNewsPanel({ campaign }) {
     }
     return map;
   }, [saves]);
+  // Stable resolver for the Chronicle region (memoized so the scrollback's
+  // interval-summary memo doesn't recompute every render).
+  const nameFor = useMemo(() => ((id) => nameById.get(String(id)) || String(id)), [nameById]);
 
   async function generateChronicle() {
     if (chronicleBusy || total === 0) return;
@@ -463,28 +469,22 @@ export default function WizardNewsPanel({ campaign }) {
         </Button>
       </header>
 
-      {(chronicles.length > 0 || chronicleError) && (
-        <div style={{ padding:'12px 16px 0' }}>
-          {chronicleError && (
-            <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
-              {chronicleError}
-            </div>
-          )}
-          {chronicles[0] && (
-            <article style={{
-              border:`1px solid ${BORDER2}`, borderLeft:`3px solid ${GOLD}`,
-              background:CARD_ALT, padding:'10px 12px',
-            }}>
-              <div style={{ display:'flex', alignItems:'center', gap:6, color:GOLD, fontFamily:sans, fontSize:FS.xs, fontWeight:900 }}>
-                <BookOpen size={13}/> Chronicle, tick {chronicles[0].tick}
-              </div>
-              <p style={{ margin:'6px 0 0', color:BODY, fontFamily:sans, fontSize:FS.sm, lineHeight:1.55 }}>
-                {chronicles[0].prose}
-              </p>
-            </article>
-          )}
-        </div>
-      )}
+      {/* ── The Chronicle region (Wave R-2, atlas queue #19 / gap 13) ────────
+          ChronicleScrollback REPLACES the chronicles[0]-only article that stood
+          here: every retained chronicle entry (the record caps at 24) and the
+          pulse history are now scrubbable, not just the newest. Gating parity:
+          the read is gated exactly as the records are — writes require sign-in
+          + server-side credits, and the records exist only on this campaign —
+          so the reader adds NO tier wall of its own and self-gates to an honest
+          empty state on a fresh campaign. */}
+      <div style={{ padding: '12px 16px 0' }}>
+        {chronicleError && (
+          <div role="alert" style={{ color:RED, fontFamily:sans, fontSize:FS.xs, marginBottom:8 }}>
+            {chronicleError}
+          </div>
+        )}
+        <ChronicleScrollback campaign={campaign} nameFor={nameFor} />
+      </div>
 
       <div style={{
         flex: 1,

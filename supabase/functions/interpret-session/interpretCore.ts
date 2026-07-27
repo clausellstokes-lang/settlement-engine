@@ -75,6 +75,19 @@ export const PROTECTED_FLAGS = Object.freeze({
 } as const);
 
 /**
+ * Identity event types whose CANON_IDENTITY consent is NOT phase-gated (Wave R-1
+ * MUST-FIX): these canon verbs DELETE their named target — EXPOSE_CORRUPTION ousts
+ * the corrupt NPC and seats a generated successor (client mutateEntities.js) in
+ * DRAFT exactly as in canon — so the draft-is-authorial theory behind the phase
+ * gate does not hold for them (the same argument as the party arm's remove_npc).
+ * Hardcoded rather than read from the posted vocabulary so a stale client cannot
+ * un-gate it. MIRRORS opVocabulary.js PHASE_INDEPENDENT_IDENTITY_EVENT_TYPES.
+ * NOTE: the edge DEPLOY is T5 owner-gated; until it ships, the client-side union
+ * (applyIdentityConsentFlags) alone carries this branch of the barrier.
+ */
+const PHASE_INDEPENDENT_IDENTITY_EVENT_TYPES: ReadonlySet<string> = new Set(['EXPOSE_CORRUPTION']);
+
+/**
  * The op VOCABULARY descriptor the client posts (built from src/domain/events/registry.js
  * EVENT_TYPES + src/domain/worldPulse/partyImpactKinds.js). The edge validates the model's
  * ops against THIS — a type outside it is UNSUPPORTED. Mirrors S1's client-posted retrieval
@@ -85,6 +98,11 @@ export interface OpVocabulary {
   partyImpactKinds: readonly string[];  // the 12 PARTY_IMPACT_KINDS
   /** Identity-mutating canon-event types (for the CANON_IDENTITY protected flag). */
   identityEventTypes?: readonly string[];
+  /** Identity-mutating PARTY-IMPACT kinds (Wave R-1, named-fate consent): party-arm ops
+   *  that delete a named character (e.g. remove_npc drops the roster row). Flagged
+   *  CANON_IDENTITY regardless of phase — party impacts always address a canonized
+   *  campaign world. */
+  identityPartyKinds?: readonly string[];
 }
 
 /** The protection CONTEXT the client supplies (built from `_authored`/`locked` + phase). */
@@ -159,6 +177,18 @@ export function flagProtected(
   if (ctx?.identityLockedPhase && family === 'canon_event') {
     const identity = new Set((vocab?.identityEventTypes || []).filter((s) => typeof s === 'string'));
     if (identity.has(opType)) flags.add(PROTECTED_FLAGS.CANON_IDENTITY);
+  }
+  // Wave R-1 MUST-FIX: deleting canon verbs need consent regardless of phase — the
+  // phase-INDEPENDENT branch (see PHASE_INDEPENDENT_IDENTITY_EVENT_TYPES above).
+  if (family === 'canon_event' && PHASE_INDEPENDENT_IDENTITY_EVENT_TYPES.has(opType)) {
+    flags.add(PROTECTED_FLAGS.CANON_IDENTITY);
+  }
+  // Wave R-1 (named-fate consent, atlas queue #2): the party arm's identity kinds.
+  // NOT phase-gated — a party impact always mutates a canonized campaign world, and
+  // its deleting kind (remove_npc) is strictly more destructive than KILL_NPC.
+  if (family === 'party_impact') {
+    const identityParty = new Set((vocab?.identityPartyKinds || []).filter((s) => typeof s === 'string'));
+    if (identityParty.has(opType)) flags.add(PROTECTED_FLAGS.CANON_IDENTITY);
   }
   return [...flags];
 }

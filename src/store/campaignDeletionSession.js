@@ -59,6 +59,11 @@ export async function finishConfirmedCampaignDelete({
     }
     state.pulseUndoStack = (state.pulseUndoStack || [])
       .filter(snapshot => String(snapshot.campaignId) !== String(campaign.id));
+    // R-1 MUST-FIX hygiene: same sweep as the optimistic deleteCampaign path —
+    // the proposal ring and advance-depth counter leave with the campaign.
+    state.proposalUndoStack = (state.proposalUndoStack || [])
+      .filter(snapshot => String(snapshot.campaignId) !== String(campaign.id));
+    if (state.advanceSeqByCampaign) delete state.advanceSeqByCampaign[String(campaign.id)];
 
     // The service delete already succeeded. Finalize cache/tombstone/signature
     // bookkeeping without issuing a duplicate remote delete.

@@ -6,10 +6,16 @@
  * mounts of <DeityAssignmentPanel /> keep working for entitled users.
  *
  * Pins:
- *   • MANIFEST PARITY — a premium user on a settlement whose tier holds no cult
- *     slot gets the manifest's OWN grayed-with-reason sentences (computed from
- *     the live predicate, never a hand-copied string) instead of the former
- *     hand-derived capacity note; a slotted tier still gets the write control.
+ *   • HARD CAPACITY GUARD (Wave R-0 verifier fix #1) — a capacity-0 settlement
+ *     hides the cult write control and shows td('assign.tooSmall')
+ *     UNCONDITIONALLY, regardless of what the IMPOSE_CULT probe predicate says
+ *     (the probe's niche-neutral test deity reports 'replaced' — available —
+ *     when a stale cult sits in its neutral:neutral niche, which would re-open
+ *     the silent no-op the guard closes).
+ *   • MANIFEST PARITY — above zero capacity, an unavailable verb gets the
+ *     manifest's OWN grayed-with-reason sentences (computed from the live
+ *     predicate, never a hand-copied string); a slotted tier still gets the
+ *     write control.
  *   • SECOND MOUNT (AssignDeityFromMap ← HeraldBody) — the map/Herald mount
  *     hydrates a save into the live slot and mounts the same panel: entitled
  *     users get the working write picker (dispatch reaches setPrimaryDeity),
@@ -44,6 +50,7 @@ import DeityAssignmentPanel from '../../src/components/settlement/DeityAssignmen
 import AssignDeityFromMap from '../../src/components/map/AssignDeityFromMap.jsx';
 import { AFFORDANCE_MANIFEST } from '../../src/domain/events/affordanceManifest.js';
 import { mintDeityRef } from '../../src/lib/customRegistry.js';
+import { td } from '../../src/copy/deityAuthoring.js';
 
 const DEITY = { name: 'Aurelion', localUid: 'lu_aur', alignmentAxis: 'good', rankAxis: 'major', lawAxis: 'lawful', domain: 'sun' };
 const DEITY_TWO = { name: 'Vaelith', localUid: 'lu_vae', alignmentAxis: 'evil', rankAxis: 'cult', lawAxis: 'chaotic', domain: 'rot' };
@@ -62,8 +69,8 @@ const withPatron = (tier) => ({
 beforeEach(() => useStore.__reset());
 afterEach(() => cleanup());
 
-describe('DeityAssignmentPanel — manifest parity (grayed-with-reason, never a silent no-op)', () => {
-  it('a slotless tier (thorp + patron) shows the manifest predicate\'s own sentences, no cult control', () => {
+describe('DeityAssignmentPanel — hard capacity guard + manifest parity (never a silent no-op)', () => {
+  it('a slotless tier (thorp + patron) hides the cult control behind the HARD guard (tooSmall copy)', () => {
     const settlement = withPatron('thorp'); // thorp holds 1 slot; the patron takes it.
     useStore.__set({
       settlement,
@@ -72,15 +79,43 @@ describe('DeityAssignmentPanel — manifest parity (grayed-with-reason, never a 
     });
     render(<DeityAssignmentPanel />);
 
-    // The EXACT sentences the composer would show for this verb, computed from
-    // the live manifest predicate — parity by construction, not by copy.
+    // Non-vacuity: the manifest predicate agrees no slot exists here — but the
+    // capacity-0 guard is what hides the control, checked BEFORE the predicate.
     const p = AFFORDANCE_MANIFEST.IMPOSE_CULT.predicate(settlement, { canUseCustom: true });
     expect(p.available).toBe(false);
-    const expected = [...p.reasons, ...p.unlocks].join(' ');
-    expect(expected).toContain('No cult slot'); // non-vacuity: the predicate really refused
 
-    expect(screen.getByTestId('cult-verb-unavailable').textContent).toBe(expected);
+    expect(screen.getByTestId('cult-too-small').textContent).toBe(td('assign.tooSmall'));
     expect(screen.queryByTestId('cult-deity-select')).toBeNull();
+    expect(screen.queryByTestId('cult-verb-unavailable')).toBeNull();
+  });
+
+  it('capacity-0 hides the cult control REGARDLESS of the probe predicate (stale cult in the probe niche)', () => {
+    // A thorp (1 slot, patron seated ⇒ 0 cult slots) carrying a STALE cult —
+    // e.g. left behind by a tier demotion — whose niche is the probe deity's
+    // own neutral:neutral. reconcileCultImposition answers 'replaced' for the
+    // probe, so the manifest predicate reports AVAILABLE at zero capacity; a
+    // real same-different-niche imposition would then silently no-op at the
+    // store seam. The hard guard must win.
+    const settlement = withPatron('thorp');
+    settlement.config.cultDeitySnapshots = [
+      { _deityRef: 'deity:lu_stale:old_way', name: 'Old Way', alignmentAxis: 'neutral', lawAxis: 'neutral', rankAxis: 'cult' },
+    ];
+    useStore.__set({
+      settlement,
+      customContent: { deities: [DEITY, DEITY_TWO] },
+      canUseCustomContent: () => true,
+    });
+    render(<DeityAssignmentPanel />);
+
+    // Non-vacuity: the probe predicate really WOULD have offered the write.
+    const p = AFFORDANCE_MANIFEST.IMPOSE_CULT.predicate(settlement, { canUseCustom: true });
+    expect(p.available).toBe(true);
+
+    expect(screen.getByTestId('cult-too-small').textContent).toBe(td('assign.tooSmall'));
+    expect(screen.queryByTestId('cult-deity-select')).toBeNull();
+    expect(screen.queryByTestId('cult-verb-unavailable')).toBeNull();
+    // The stale cult keeps its Remove affordance (the shed direction stays open).
+    expect(screen.getByLabelText('Remove Old Way')).toBeTruthy();
   });
 
   it('a slotted tier (town + patron) keeps the cult write control — no reason note', () => {

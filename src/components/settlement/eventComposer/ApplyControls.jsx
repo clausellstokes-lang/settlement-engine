@@ -33,7 +33,10 @@ export function ApplyControls({
       {isDestroy && (
         <div style={{ width: '100%', marginTop: 6, padding: '8px 10px', border: `1px solid ${swatch.danger}`, background: swatch.dangerBg }}>
           <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch.danger, marginBottom: 5, lineHeight: 1.4 }}>
-            ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable, but only by deliberate action.
+            {/* Wave R-1 (atlas queue #4): the recovery claim names the ACTUAL model —
+                undo from the Timeline, latest entry only — instead of the vague
+                "deliberate action". One string, vetoable. */}
+            ⚠ This destroys {settlement?.name || 'the settlement'}. Services go dark, institutions are impaired, and partner relationships sour. Recoverable only by Undo on the Timeline, and only while this remains the latest event.
           </div>
           <input
             value={destroyConfirm}

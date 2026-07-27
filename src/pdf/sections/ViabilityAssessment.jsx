@@ -73,8 +73,12 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           }}
           wrap={false}
         >
+          {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder):
+              magicDependency is generation-frozen; the header carries the
+              vintage exactly like its web twin (ViabilityTab's Magic
+              Dependency banner). One string, vetoable. */}
           <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 2 }}>
-            MAGIC DEPENDENCY
+            MAGIC DEPENDENCY · FIRST SURVEY
           </Text>
           <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
             This settlement leans on arcane infrastructure. If magic-supporting institutions
@@ -176,8 +180,11 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           )}
           {violations.length > 0 && (
             <View style={{ flex: 1 }}>
+              {/* G5 first-survey framing (Wave R-2): structuralViolations is
+                  generation-frozen; the vintage mirrors the web twin
+                  (ViabilityTab's "Structural Crises · First Survey"). */}
               <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 2 }}>
-                STRUCTURAL VIOLATIONS
+                STRUCTURAL VIOLATIONS · FIRST SURVEY
               </Text>
               <BulletList
                 items={violations}

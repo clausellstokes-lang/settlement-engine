@@ -16,6 +16,8 @@
  */
 
 import {
+  lazy,
+  Suspense,
   useEffect,
   useMemo,
   useRef,
@@ -43,6 +45,11 @@ import {
 
 const PAPER = swatch['#FFFBF5'];
 const MUTED = swatch.inkMag3;
+
+// R-2: the authoring panel is a lazy sub-leaf so the queue-wired prose surface
+// adds nothing to the workbench chunk until an authorable entity is inspected.
+const WorkbenchProseEditor = lazy(() => import('./WorkbenchProseEditor.jsx'));
+const PROSE_AUTHORABLE_TYPES = new Set(['faction', 'institution', 'settlement']);
 
 function words(value) {
   const text = String(value || '').replace(/[_-]+/g, ' ').trim();
@@ -402,7 +409,28 @@ function EntityInspector({ readOnly = false }) {
               NPC authoring remains available from this dossier on desktop.
             </p>
           )}
+          {interactive && !readOnly && !mobile && entry.type === 'npc' && (
+            // R-2 capability-with-hazard record: goal / personality / role are
+            // registered as editable prose but deliberately NOT hand-editable —
+            // the engine's own NPC controls (goal and temperament edits,
+            // reassignment) write those same fields and would overwrite
+            // hand-written text without warning. See QUEUE_WIRED_PROSE_PATHS.
+            <p
+              role="note"
+              style={{ margin: `${SP.sm}px 0 0`, color: MUTED, fontSize: FS.xxs, lineHeight: 1.45 }}
+            >
+              A character&rsquo;s secret can be hand-written on their card. Goal,
+              personality, and role stay engine-managed for now. The NPC
+              controls rewrite them, which would silently overwrite your text.
+            </p>
+          )}
         </section>
+
+        {interactive && !readOnly && !mobile && PROSE_AUTHORABLE_TYPES.has(entry.type) && (
+          <Suspense fallback={<span role="status">Opening authoring…</span>}>
+            <WorkbenchProseEditor entry={entry} />
+          </Suspense>
+        )}
       </div>
     </aside>
   );

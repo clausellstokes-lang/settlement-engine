@@ -74,6 +74,7 @@ function coerceVocabulary(raw: unknown): OpVocabulary {
     canonEventTypes: strArr(r.canonEventTypes),
     partyImpactKinds: strArr(r.partyImpactKinds),
     identityEventTypes: strArr(r.identityEventTypes),
+    identityPartyKinds: strArr(r.identityPartyKinds),
   };
 }
 function coerceProtectedContext(raw: unknown): ProtectedContext {

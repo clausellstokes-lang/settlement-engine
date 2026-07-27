@@ -210,12 +210,30 @@ export default function DeityAssignmentPanel() {
         </>
       )}
 
-      {/* Cults — only once a patron is assigned and the tier can sustain one */}
-      {deities.length > 0 && currentSnap && (
+      {/* Cults — once a patron is assigned (the impose direction), OR whenever
+          the settlement already owns cults (the SHED direction, Wave R-2 atlas
+          Gap 2b): clearing the patron or emptying the authored library must
+          never strand owned cults out of reach of their Remove / Remove-all
+          controls. */}
+      {(cults.length > 0 || (deities.length > 0 && currentSnap)) && (
         <div style={{ marginTop: 12, borderTop: `1px solid ${BORDER}`, paddingTop: 10 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginBottom: 6 }}>
             <span style={headingStyle}>{td('assign.cultHeading')}</span>
-            <span style={{ fontSize: FS.micro, color: MUTED }}>{cults.length} / {cultCapacity}</span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontSize: FS.micro, color: MUTED }}>{cults.length} / {cultCapacity}</span>
+              {/* The clear-ALL-cults door (Wave R-2, atlas Gap 2b: the
+                  imposeCult(null) path had no UI). Shed-direction write: the
+                  store seam's deityWriteGate allows it for premium AND for a
+                  lapsed account owning the embeds (this branch renders for
+                  premium only — surfacing shed controls to lapsed users is the
+                  owner-parked product call from Wave R-0). Hidden when no cults
+                  exist (honest empty state — nothing to clear). */}
+              {cults.length > 0 && (
+                <Button variant="ghost" size="sm" data-testid="cult-clear-all" aria-label={td('assign.clearAll')} onClick={() => imposeCult?.(null)} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
+                  {td('assign.clearAll')}
+                </Button>
+              )}
+            </span>
           </div>
           {cults.length > 0 && (
             <div style={{ display: 'grid', gap: 4, marginBottom: 8 }}>
@@ -229,7 +247,18 @@ export default function DeityAssignmentPanel() {
               ))}
             </div>
           )}
-          {!cultVerb.available ? (
+          {cultCapacity === 0 ? (
+            // HARD capacity guard (Wave R-0 verifier fix #1) — unconditional,
+            // checked BEFORE the manifest predicate. The IMPOSE_CULT probe's
+            // niche-neutral test deity can report AVAILABLE at zero capacity
+            // (a stale cult left in the probe's neutral:neutral niche — e.g.
+            // after a tier demotion — makes reconcileCultImposition answer
+            // 'replaced' before the no_cult_slots branch), which would re-open
+            // the silent no-op this guard has always closed. Belt and braces
+            // with the manifest-parity line below; existing cults keep their
+            // Remove buttons above (removal is the shed direction).
+            <div data-testid="cult-too-small" style={{ fontSize: FS.micro, color: MUTED, lineHeight: 1.5 }}>{td('assign.tooSmall')}</div>
+          ) : !cultVerb.available ? (
             // Grayed-with-reason: the manifest's own refusal sentences (parity
             // with the composer's unavailable-verb line), replacing the panel's
             // former hand-derived capacity note.

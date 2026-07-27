@@ -20,6 +20,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { t } from '../../copy/index.js';
+import { identityConsentNote } from '../../domain/intent/opVocabulary.js';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
@@ -178,7 +179,15 @@ function OpCard({ op, index, decision, onDecide }) {
             onChange={(e) => onDecide(index, { ...decision, consented: e.target.checked })}
             aria-label={`Consent to the protected op ${operationLabel(op.opType)}`}
           />
-          This op touches a protected constraint. Tick to consent, or it will not apply.
+          {/* Wave R-1 (named-fate consent): a verb that DELETES a named character says so
+              before the tick — consent to a party-caused kill is informed consent to the
+              roster deletion its world-pulse linkage triggers. Generic copy is unchanged
+              for every other protected op. */}
+          {(() => {
+            const note = identityConsentNote(op);
+            const base = 'This op touches a protected constraint. Tick to consent, or it will not apply.';
+            return note ? `${note} ${base}` : base;
+          })()}
         </label>
       )}
     </div>
@@ -197,6 +206,9 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
   } = useSurveyorContext();
   const applyEvent = useStore((s) => s.applyEvent);
   const recordPartyImpact = useStore((s) => s.recordPartyImpact);
+  // Wave R-1 (named-fate consent): the lifecycle phase feeds the protected context the
+  // compile POSTs and the client-side identity-flag hardening below.
+  const phase = useStore((s) => s.phase);
   const readLiveCommandContext = useCallback(() => currentCommandContext(), []);
   const liveCommandContext = useMemo(() => commandContextSnapshot({
     ownerId,
@@ -230,14 +242,29 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
     setApplyResult(null);
     setRecoveryError(null);
     try {
-      const { compileInterpretation } = await import('../../lib/surveyorWrite.js');
-      const res = await compileInterpretation({ ...ctx, sessionText: q });
+      const [{ compileInterpretation }, { buildProtectedContext, applyIdentityConsentFlags }] = await Promise.all([
+        import('../../lib/surveyorWrite.js'),
+        import('../../domain/intent/opVocabulary.js'),
+      ]);
+      // Wave R-1 (named-fate consent, atlas queue #2): POST the protected context the
+      // edge's flagProtected needs. Without it NO op was ever flagged — the consent
+      // barrier existed at both ends but the live lane never carried the context.
+      const res = await compileInterpretation({
+        ...ctx, sessionText: q,
+        protectedContext: buildProtectedContext(ctx.settlement, phase),
+      });
       // Capture the addressed owner/save/campaign at compile time. If the user
       // navigates or the source revision changes during review, the command
       // executor refuses the stale proposal instead of applying it elsewhere.
       setResult(res.ok
         ? {
             ...res,
+            // Client-side hardening: union the CANON_IDENTITY flag locally so the
+            // barrier holds even against a deployed edge that predates the party-arm
+            // rule. Union-only — edge-computed flags are never removed.
+            interpretation: applyIdentityConsentFlags(res.interpretation, {
+              identityLockedPhase: phase === 'canon',
+            }),
             commandTarget: liveCommandContext,
             reviewRef: mintReviewRef(),
           }
@@ -247,7 +274,7 @@ export default function InterpretApplyPanel({ initialPrompt = '' }) {
     } finally {
       setLoading(false);
     }
-  }, [sessionText, loading, ctx, liveCommandContext]);
+  }, [sessionText, loading, ctx, phase, liveCommandContext]);
 
   const decide = useCallback((index, decision) => setDecisions((d) => ({ ...d, [index]: decision })), []);
 

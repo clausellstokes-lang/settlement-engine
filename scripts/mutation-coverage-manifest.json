@@ -22,12 +22,21 @@
     "self-proving-meta": "Guard-the-guard meta-test that injects its own broken fixtures (a fake failing tsc, a temp baseline) and asserts the enforcer reds — the mutation proof is embedded in the test body and executes on every suite run.",
     "walker-totality-executed": "Source-scan totality walker (E-D family) for the admin-actions two-key rule: its catching power is the exact-partition classification (every switch case in exactly one of PROTECTED / MODERATION / UNGATED) plus the client routing scan. BOTH mutation plants were executed at build time and proven red-then-green (drop a protected action from the manifest -> the unclassified-case assertion reds; route a protected action via a bare onClick runAction -> the client-scan reds). A standing sweep plant would duplicate that build-time proof at the cost of transiently mutating the shared edge-fn source each sweep.",
     "edge-lifecycle-double-pin": "Cross-file edge lifecycle contract test whose source-level assertions are paired with execution of the same production paths in the full Deno edge suite. A transient sweep mutation would duplicate both layers while editing shared payment or deletion source during the sweep.",
-    "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves."
+    "discourse-parity-variant": "Cross-surface lit-decade variant (tranche 3c) driving the discourse realizer over a real recorded DAG to prove its connected prose introduces zero unrecorded claims and zero contradictions vs the chronicle. The realizer's PRODUCT correctness is mutation-covered by tests/lint/discourseLexiconCoverage.test.js (the planted 'discourse/lexicon relation-type coverage gap' regression) plus the clause-provenance composition pin in tests/domain/discourseKernel.test.js; a second planted mutation here would duplicate that at the cost of a full sim drive per sweep. Its distinct value is the real-drive claims/direction/spell-break census, which a synthetic source mutation cannot target beyond the coverage the totality walker already proves.",
+    "live-constant-coupling": "Executed coupling pin: the test imports BOTH sides of the contract live — the cap constant (e.g. MAX_EVENT_NARRATIVE_SNAPSHOTS) and the copy table — and asserts the user-facing disclosure string contains the constant's current value. Each mutation direction (changing the constant without the copy, or dropping/weakening the disclosure sentence) reds the assertion by construction on every ordinary suite run; a planted sed of either side would re-execute that identical check at sweep cost, adding no catching power."
   },
   "invariants": {
     "tests/security/creditPackClawback.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
+    },
+    "tests/store/advertisedUndoArming.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "R-4 advertised-undo invariant walker (owner queue #5 class guard): maps every advertising registry row to its hand-audited arming site, both directions (advertising-but-unarmed reds; arming-but-de-advertised reds). kind:mutation ineligible — its targets (src/store/operationRegistry.js, src/store/mapSlice.js, src/store/campaignWorldPulseDeferred.js) are tracked-but-dirty in this live shared tree and mutation-sweep's git-checkout revert would destroy concurrent uncommitted work (E-A amendment b0fc33e1). Catching power EXECUTED red-then-green by the R-4 Opus verify pass, four plants, all reverted: (1) re-advertising updatePlacement (undoToken:'mapUndo', undoState:'action') -> 2 red; (2) adding snapshotForUndo() to mapSlice updatePlacement's body -> 3 red; (3) a rogue pulseUndoStack push inside runCanonizeCampaignWorld -> 2 red; (4) an unconsumed registry row probeOrphanOp -> red here and in deadOperationRatchet. Upgrade to kind:mutation at fold."
+    },
+    "tests/store/deadOperationRatchet.test.js": {
+      "kind": "rationale",
+      "rationale": "R-4 only-shrinks dead-operation ratchet answering to owner queue #21 (retire-vs-wire, parked): freezes the measured 36-member dead-op list (the atlas's 31 mechanical members, all still dead, plus 5 canon/macro extras outside the atlas's mechanical-only slice); an op may LEAVE by gaining a consumer or being retired, none may JOIN. kind:mutation ineligible — target src/store/operationRegistry.js is tracked-but-dirty in this live shared tree (E-A amendment b0fc33e1). Catching power EXECUTED by the R-4 Opus verify pass: planting an unconsumed registry row probeOrphanOp reds 'no registered operation JOINS the dead list' (and the advertised-undo walker); reverted, tests/store re-run green after. Upgrade to kind:mutation at fold."
     },
     "tests/components/deityPanelManifestParity.test.jsx": {
       "kind": "rationale",
@@ -73,6 +82,10 @@
     },
     "tests/copy/localeParity.test.js": {
       "kind": "uncovered"
+    },
+    "tests/copy/narrativeArchiveDisclosure.test.js": {
+      "kind": "rationale",
+      "ref": "live-constant-coupling"
     },
     "tests/copy/noGmailCopy.test.js": {
       "kind": "uncovered"
@@ -469,6 +482,10 @@
     },
     "tests/generators/adversarialNeighbourGovernance.test.js": {
       "kind": "uncovered"
+    },
+    "tests/generators/configPatchAllowlistWalker.test.js": {
+      "kind": "rationale",
+      "rationale": "Live-coupling walker (R-3 lane B): it re-derives the config read/write census from source at run time (the configSeamContract alias vocabulary over src/generators plus every literal updateConfig key across src/components) and asserts the IMPORTED runtime predicate isAllowedConfigKey admits every censused key. Both sides of the contract are computed live on every ordinary suite run, so each mutation direction — dropping an allowlist entry the scan still finds, or growing a reader/writer key the predicate refuses — reds by construction (the live-constant-coupling pattern). A planted sweep mutation would re-execute the identical live check at sweep cost, and its natural target (the CONFIG_PATCH_EXTRA_KEYS literal in the hot, uncommitted-in-tree src/store/configSlice.js) is unsafe to transiently rewrite under the sweep's git-checkout revert discipline."
     },
     "tests/generators/configSeamContract.test.js": {
       "kind": "uncovered"
@@ -1414,6 +1431,14 @@
     "tests/store/operationRegistry.walker.test.js": {
       "kind": "uncovered"
     },
+    "tests/store/savedSettlementPatchKeysWalker.test.js": {
+      "kind": "rationale",
+      "rationale": "Live-coupling walker (R-4 lane P-4) with EXECUTED red-then-green plants and embedded adversarial self-tests. It re-derives the updateSavedSettlement patch-key census from src on every run (21 call sites: settlementSlice x6, aiSlice x9, ShareToGallery x6) and asserts both directions against the IMPORTED runtime SAVED_SETTLEMENT_PATCH_KEYS: admission (a censused key the allowlist refuses reds) and liveness (an allowlist member nothing writes reds unless listed as an INERT_CARRY). Both sides are computed live, so each mutation direction reds by construction (the live-constant-coupling pattern), and two of the suite's own tests drive synthetic sources through the same extractor so its catching power executes on every ordinary run (the self-proving-meta pattern). The build-time plants were executed 2026-07-27 through the shipped extractor against real, in-memory-mutated source, red-then-green each way: add aiRevisionCount to aiSlice.js:1036's literal -> refused=['aiRevisionCount'] (unmutated aiSlice: 9 sites, keys=['aiData'], refused=[]); add editedBy to settlementSlice.js:1809's savePartial -> refused=['editedBy']; drop unlisted_slug from the allowlist -> the ShareToGallery census reports it dead. A STANDING sweep plant is unsafe here per the E-A amendment: both natural targets (src/store/settlementSliceHelpers.js, src/store/settlementSlice.js) are tracked-but-DIRTY in this shared tree, and the sweep reverts MUTATED_FILES with 'git checkout -- <file>', which would discard concurrent uncommitted work."
+    },
+    "tests/store/configDirectWriterExemptions.scan.test.js": {
+      "kind": "rationale",
+      "rationale": "Exact-set source scan (R-4 lane P-4) carrying the exemptions for R-3's one-validated-door claim on state.config. It asserts the direct config-draft writers in src are EXACTLY updateConfig (the door) plus four reviewed exemptions (configSlice resetConfig + setSettlementType, neighbourSlice setNeighbourRelType + handleImportDirect), that each exemption's key is admitted by the IMPORTED isAllowedConfigKey, and that no draft-named config assignment lives outside src/store. A fifth direct writer reds by construction, both by the exact-set diff and, if unadmitted, by the key check. Catching power was EXECUTED 2026-07-27 through the shipped scanner against real, in-memory-mutated source, red-then-green: unmutated neighbourSlice.js yields exactly ['setNeighbourRelType._neighbourRelType','handleImportDirect._neighbourRelType'] and unmutated configSlice.js exactly ['updateConfig[key]','resetConfig(whole)','setSettlementType.settType']; planting 'state.config.rogueKey = 1' into clearNeighbour adds 'clearNeighbour.rogueKey' to the scan and isAllowedConfigKey('rogueKey') is false. An equivalent plant runs as one of the suite's own tests on every ordinary run. A standing sweep plant is unsafe per the E-A amendment: src/store/configSlice.js is tracked-but-DIRTY in this shared tree and the sweep's 'git checkout --' revert would discard concurrent uncommitted work."
+    },
     "tests/store/sessionEvictionLifecycle.pin.test.js": {
       "kind": "uncovered"
     },
@@ -1485,6 +1510,36 @@
     "tests/domain/customContentConsumerEvidence.walker.test.js": {
       "kind": "rationale",
       "rationale": "Consumer-evidence walker: its catching power is exact-set resolution of every declared consumer name to a real file plus a per-field content scan proving a declared consumer literally mentions the field key. FOUR mutation plants were executed at build time and proven red-then-green: a field declaring a non-existent consumer reds both resolution and evidence; a field whose declared consumer never reads it reds the evidence assertion; a consumer row pointing at a renamed file reds the existence assertion; and a stale exempt row reds the honesty assertion. A standing sweep plant would transiently rewrite schema/custom-content.manifest.json, the shared authority compiled into three generated artifacts and the frozen migration-185 SQL snapshot, duplicating that build-time proof at the same cost the customContentManifest.contract sibling already declines."
+    },
+    "tests/store/editProseQueueSpine.test.js": {
+      "kind": "mutation",
+      "label": "edit-prose/wired-subset lockstep drift"
+    },
+    "tests/store/narrativeStampParity.test.js": {
+      "kind": "rationale",
+      "rationale": "R-3 narrative-stamp single-writer parity (helper contract + two-lane source scan). TWO mutation plants were executed at build time (2026-07-27) and proven red-then-green: re-inlining a direct appendEventNarrativeSnapshot call in canonEventCommandTransaction.js reds the single-writer source scan, and weakening the helper's stamp guard from OR to AND in eventNarrativeSnapshots.js reds the stamps-nothing contract test. A standing sweep plant is unsound today because both mutation targets carry uncommitted Wave R-3 work in the live shared tree, so check_caught's git-checkout revert would destroy the wave instead of restoring the plant; add the standing plant when the wave folds."
+    },
+    "tests/domain/economyFreshness.test.js": {
+      "kind": "rationale",
+      "rationale": "R-3 economy stale-window detector (atlas economy gap 2). ONE mutation plant was executed at build time (2026-07-27) and proven red-then-green: emptying REBUILD_SOURCES in src/domain/display/economyFreshness.js (the 'regenerate' boundary removed) reds 2 of 13 pins (the boundary-clears-the-shift and re-flag-after-boundary tests). A standing sweep plant is unsound today because the mutation target is an UNTRACKED Wave R-3 file in the live shared tree, so check_caught's git-checkout revert cannot restore it; add the standing plant when the wave folds."
+    },
+    "tests/components/economyFreshnessNote.test.jsx": {
+      "kind": "rationale",
+      "rationale": "R-3 economy stale-window display notes, EXTENDED by R-4 to all six covered surfaces. THREE mutation plants were executed at build time and proven red-then-green: silencing the EconomicsTab note conditional (2026-07-27) reds the EconomicsTab shows-the-note pin; silencing the ServicesTab conditional identically reds the ServicesTab pin; and replacing SessionMode's <EconomyFreshnessNote> with an inert <span /> (2026-07-27, R-4) reds 3 pins (the SessionMode shows-the-note pin, its byte-identity negative control, and the five-surface one-copy-unit pin) with the un-planted tree green immediately before and after. A standing sweep plant is unsound today because the note leaf and detector are UNTRACKED Wave R-3/R-4 files and the tab/takeover files carry uncommitted work in the live shared tree, so check_caught's git-checkout revert would destroy the wave instead of restoring the plant; add the standing plant when the wave folds.",
+      "kindNote": "R-4 wired SummaryTabV2 / TableView / SessionMode and collapsed the three hand-copies into one leaf."
+    },
+    "tests/lint/economyReadModelCoverage.walker.test.js": {
+      "kind": "rationale",
+      "rationale": "R-4 economy read-model census walker (the structural prevention for the stale-window class: every reader under src/components + src/pdf must be classified covered / framed / print-deferred / frozen-deferred, and the sentence and the paragraph must each have exactly one home). TWO mutation plants were executed at build time (2026-07-27) and proven red-then-green: adding a new unclassified economy reader (src/components/__plantProbe.jsx rendering settlement.economicState.prosperity) reds the EXACT SET assertion naming the file, and adding a fourth hand-copied freshness sentence in a second src file reds the single-home assertion; a third plant (removing SessionMode's note render) reds the COVERED-really-renders assertion. A standing sweep plant is unsound today because the walker's subjects are UNTRACKED Wave R-3/R-4 files (src/domain/display/economyFreshness.js, src/components/new/EconomyFreshnessNote.jsx) plus uncommitted edits to six tracked surfaces, so check_caught's git-checkout revert cannot restore the planted state; add the standing plant when the wave folds."
+    },
+    "tests/lint/premiumGateSingleSource.test.js": {
+      "kind": "rationale",
+      "rationale": "R-4 premium-gate single source (the R-0 deity cure generalized; closes the R-2/R-3 spelling-drift class). FIVE mutation plants were executed at build time (2026-07-27) and proven red-then-green: (1) re-inlining the authoring authority in SettlementWorkbenchMount.jsx (tier === 'premium' || tier === 'founder') reds the no-other-file-spells-the-authority assertion, the consumers-read-the-single-source assertion, and the census; (2) a new src/lib file spelling a bare auth?.tier === 'premium' comparison reds the census undeclared direction; (3) dropping the dead 'founder' disjunct from src/lib/viewerAuthority.js reds the owner-gated verbatim pin; (4) deleting one EXEMPTIONS row (src/store/settlementSlice.js) reds the census undeclared direction; (5) adding an EXEMPTIONS row for a file that spells nothing (src/lib/saveAccess.js) reds the census stale direction. A standing sweep plant is unsound today because every mutation target is either the UNTRACKED new module src/lib/viewerAuthority.js or a tracked file carrying uncommitted Wave R-2/R-4 work (SettlementDetail.jsx, SettlementWorkbenchMount.jsx) in the live shared tree, so check_caught's git-checkout revert would destroy the wave instead of restoring the plant; add the standing plant when the wave folds."
+    },
+    "tests/lint/terrainReadSingleSource.test.js": {
+      "kind": "rationale",
+      "rationale": "R-4 lane P-6 terrain single-source scan (the display-side completion of R-3's declared legacy-'terrain' shift: four display readers led with the never-written config.terrain and so swallowed the engine-written config.terrainType). Its catching power is the per-file dead-leg ban plus the enumerated-receiver ratchet plus a tree-wide denominator assertion (ZERO config.terrain readers under src/). ONE four-site mutation plant was executed at build time (2026-07-27) and proven red-then-green: restoring the pre-fix chain at all four routed sites (src/lib/gallery.js sanitizeTile, src/lib/shareImage.js settlementToShareSummary, src/lib/seoDossier.js setSharedDossierMeta, src/components/gallery/GalleryDetail.jsx meta line) reds 9 of this file's 15 assertions (4 dead-leg bans, 4 receiver ratchets, the denominator) and 11 of the 13 behavior pins in tests/lib/terrainReaderRouting.test.jsx, with the un-planted tree green immediately before and after (28/28). A standing sweep plant is unsound today because all four mutation targets are tracked files carrying uncommitted Wave R-4 work in the live shared tree, so check_caught's git-checkout revert would destroy the wave instead of restoring the plant; add the standing plant when the wave folds.",
+      "kindNote": "Behavior half (13 pins) lives at tests/lib/terrainReaderRouting.test.jsx, which the E-A enumeration rule does not pick up (tests/lib, no invariant token in the basename) — deliberate: the structural half is the enforcer and carries this entry."
     }
   },
   "meta": {

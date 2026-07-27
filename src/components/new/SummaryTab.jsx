@@ -6,6 +6,7 @@ import { serif } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -208,6 +209,15 @@ function SummaryTab({ settlement:r }) {
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
         <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
       </div>
+
+      {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest
+          stale-window note for the Economy tile above: applied events are not
+          re-derived into prosperity / food balance until the next full survey.
+          Anchored HERE rather than at the top of the tab so it qualifies the one
+          stale tile instead of reading as an ambient caveat over the whole
+          dossier; the tighter margin pulls it under the tile row. Conditional on
+          the reconciliationLog detector; absent trail ⇒ byte-identical tab. */}
+      <EconomyFreshnessNote settlement={r} variant="tallies" margin="-6px 0 12px" />
 
       {/* ── POWER + CONFLICTS ────────────────────────────────────────────── */}
       <div style={{background:swatch['#F4F6FD'],border:'1px solid #b8c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:12}}>

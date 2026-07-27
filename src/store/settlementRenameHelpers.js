@@ -56,7 +56,9 @@ export function syncActiveNeighbourFieldsImpl(get, set, neighbourFields) {
  * Rename a saved settlement (town). Unlike NPC/faction names, a settlement's own
  * name is NEVER canon-locked. Before canon it is a plain name edit; after canon
  * the rename is ALSO appended to the timeline as a RENAME_SETTLEMENT flavor entry
- * (flavor only — no systemState delta, no entity mutation, no PRNG draw).
+ * (flavor only — no systemState delta, no entity mutation, no PRNG draw); that
+ * row stamps the settlement's own systemState so undoLastEvent pops it as a
+ * no-op rather than jamming on it (see the per-lane note at the push site).
  * Honours the flush-suppression invariant: a change-queue flush owns the single
  * atomic commit, so the row's cloud write is deferred while suppressed.
  *
@@ -86,6 +88,24 @@ export function renameSettlementImpl(get, set, id, newName) {
     const eventLog = Array.isArray(currentCampaignState.eventLog)
       ? [...currentCampaignState.eventLog]
       : [];
+    // R-3 undo-safety (atlas VI.10 #148 follow-on). undoLastEvent inspects ONLY
+    // the newest eventLog entry and refuses typed (`entry_not_undoable`) when it
+    // carries no `beforeState`. An unstamped rename row parked on top of the log
+    // therefore JAMMED undo for every real event beneath it, permanently — the
+    // rename row can never be popped, so nothing below it can ever surface.
+    // Stamp this settlement's own systemState as beforeState/afterState exactly
+    // as recordCanonFlavorEntryImpl does below, and the row pops as a no-op
+    // instead of blocking the stack.
+    //
+    // The stamp is chosen PER LANE because this one push feeds two destinations:
+    // the live `state.eventLog` (when this save is the active one) and the saved
+    // row's `campaignState.eventLog`. hydrateFromSave restores `cs.systemState`
+    // alongside `cs.eventLog`, so a row written into a NON-ACTIVE save's log must
+    // carry THAT save's snapshot; stamping the live one would swap a different
+    // settlement's state in the moment that save is opened and the row undone.
+    // When neither snapshot exists the field is omitted deliberately and the
+    // `entry_not_undoable` refusal keeps guarding the row.
+    const rowSystemState = (isActive ? state.systemState : currentCampaignState.systemState) || null;
     if (isCanon) {
       eventLog.push({
         id: `rename.${id}.${Date.now()}`,
@@ -96,6 +116,10 @@ export function renameSettlementImpl(get, set, id, newName) {
         narrativeSummary: oldName
           ? `${oldName} is now known as ${trimmed}.`
           : `The settlement is now known as ${trimmed}.`,
+        // The same marker recordCanonFlavorEntryImpl sets, so a future undo
+        // refinement can skip both flavor shapes through one predicate.
+        flavor: true,
+        ...(rowSystemState ? { beforeState: rowSystemState, afterState: rowSystemState } : {}),
       });
       recorded = true;
     }

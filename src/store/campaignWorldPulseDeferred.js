@@ -40,8 +40,13 @@ import {
   flushWorldPulsePersist,
   findActiveCampaign,
   campaignSettlements,
+  captureCampaignSession,
+  isCurrentCampaignSession,
 } from './campaignSliceShared.js';
-import { applyWorldPulseResultToState } from './campaignPulseHelpers.js';
+import {
+  applyWorldPulseResultToState,
+  capturePulseSnapshot,
+} from './campaignPulseHelpers.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractRegionalGraphSnapshot } from '../lib/regionalFingerprint.js';
 
@@ -418,6 +423,102 @@ export async function runUpdateCampaignSimulationRules({
 
 // ── Session-scoped pulse undo ──────────────────────────────────────────────
 
+// R-1 proposal-undo ring (carried from R-0, queue #5): the per-campaign cap on
+// retained pre-APPLY snapshots. Deliberately its own small constant, NOT the
+// advance stack's PULSE_UNDO_CAP: proposal snapshots live in the SEPARATE
+// `proposalUndoStack` array, so proposal traffic is structurally incapable of
+// evicting a pre-advance snapshot (the R-0 cap-flood finding). 5 because the
+// ring covers the adjudication desk's "wrong click" window — applies land in
+// bursts (up to 80 pending proposals), each snapshot deep-clones the campaign
+// world + every member save, and deeper time travel is the advance ring's job.
+export const PROPOSAL_UNDO_CAP = 5;
+
+/** Per-campaign LOGICAL advance depth — the clock-independent happens-before
+ *  between the two undo rings. A proposal entry stamps this at push; it is
+ *  restorable only while the campaign's advance depth still EQUALS its stamp
+ *  (an advance landing after the apply raises the depth; undoing the advance
+ *  either restores the stamp's depth or prunes the entry as a stale future).
+ *
+ *  R-1 MUST-FIX (ring-guard saturation): this MUST read the session counter
+ *  `advanceSeqByCampaign`, never a count of RETAINED pulseUndoStack entries.
+ *  The advance body caps retention at PULSE_UNDO_CAP with oldest-eviction, so a
+ *  retained-entry count saturates at the cap: after the cap-th advance every
+ *  further advance left the "depth" unchanged and the coherence guard below
+ *  passed STALE proposal snapshots (a pre-apply world restored over newer
+ *  advances). The counter is incremented by the advance push site itself and is
+ *  untouched by eviction; runUndoLastPulse decrements it as it pops, so the
+ *  legitimate newest-act-first walk (undo the advance, then the apply) keeps
+ *  working. Pre-saturation the two definitions agree exactly. */
+function advanceDepthOf(state, campaignId) {
+  return Number(state.advanceSeqByCampaign?.[String(campaignId)]) || 0;
+}
+
+/**
+ * Restore one full pre-pulse/pre-apply snapshot onto the Immer draft: the
+ * campaign world unit (worldState + regionalGraph + wizardNews), every member
+ * save the snapshot carries, and the live active view when it belongs to this
+ * campaign. Shared chokepoint for BOTH undo verbs (advance + proposal) so their
+ * restore semantics can never drift. Mutates `state`/`campaign`, appends the
+ * save writes to `persistUpdates`, returns nothing.
+ */
+function restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates) {
+  // Campaign world, topology, and news are one undo unit.
+  campaign.worldState = ensureWorldState(snapshot.worldState, campaign);
+  campaign.regionalGraph = ensureRegionalGraph(snapshot.regionalGraph, { now: stamp });
+  campaign.wizardNews = ensureWizardNewsFeed(snapshot.wizardNews, { now: stamp });
+  campaign.updatedAt = stamp;
+
+  const memberIds = new Set((campaign.settlementIds || []).map(String));
+  // Membership is read at undo time. A save detached since the snapshot must
+  // not be silently rewound by an older campaign snapshot.
+  for (const saved of snapshot.saves || []) {
+    if (!memberIds.has(String(saved.id))) continue;
+    const savedIndex = state.savedSettlements
+      .findIndex(item => String(item.id) === String(saved.id));
+    if (savedIndex === -1) continue;
+    const restoredSettlement = cloneJson(saved.settlement);
+    const restoredCampaignState = cloneJson(saved.campaignState);
+    state.savedSettlements[savedIndex] = {
+      ...state.savedSettlements[savedIndex],
+      settlement: restoredSettlement,
+      campaignState: restoredCampaignState,
+      timestamp: stamp,
+    };
+    persistUpdates.push({
+      saveId: saved.id,
+      settlement: cloneJson(restoredSettlement),
+      campaignState: cloneJson(restoredCampaignState),
+    });
+  }
+
+  if (state.activeSaveId != null) {
+    // Rehydrate only a live view that belongs to this campaign, including a
+    // different member opened after the snapshot was taken.
+    if (snapshot.active && String(state.activeSaveId) === snapshot.active.saveId) {
+      state.settlement = cloneJson(snapshot.active.settlement);
+      state.systemState = cloneJson(snapshot.active.systemState);
+      state.eventLog = cloneJson(snapshot.active.eventLog);
+      state.phase = snapshot.active.phase;
+      state.editedAt = stamp;
+    } else {
+      const activeSnapshot = (snapshot.saves || [])
+        .find(saved => String(saved.id) === String(state.activeSaveId));
+      if (activeSnapshot && memberIds.has(String(activeSnapshot.id))) {
+        const campaignState = activeSnapshot.campaignState || {};
+        state.settlement = cloneJson(activeSnapshot.settlement);
+        state.systemState = campaignState.systemState != null
+          ? cloneJson(campaignState.systemState)
+          : null;
+        state.eventLog = Array.isArray(campaignState.eventLog)
+          ? cloneJson(campaignState.eventLog)
+          : [];
+        state.phase = campaignState.phase || state.phase;
+        state.editedAt = stamp;
+      }
+    }
+  }
+}
+
 /**
  * Restore the newest pre-pulse snapshot for one campaign, including its world,
  * member saves, and whichever member is currently projected into the live view.
@@ -457,70 +558,116 @@ export async function runUndoLastPulse({
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return;
     const stamp = new Date().toISOString();
-    // Campaign world, topology, and news are one undo unit.
-    campaign.worldState = ensureWorldState(snapshot.worldState, campaign);
-    campaign.regionalGraph = ensureRegionalGraph(snapshot.regionalGraph, { now: stamp });
-    campaign.wizardNews = ensureWizardNewsFeed(snapshot.wizardNews, { now: stamp });
-    campaign.updatedAt = stamp;
-
-    const memberIds = new Set((campaign.settlementIds || []).map(String));
-    // Membership is read at undo time. A save detached since the advance must
-    // not be silently rewound by an older campaign snapshot.
-    for (const saved of snapshot.saves || []) {
-      if (!memberIds.has(String(saved.id))) continue;
-      const savedIndex = state.savedSettlements
-        .findIndex(item => String(item.id) === String(saved.id));
-      if (savedIndex === -1) continue;
-      const restoredSettlement = cloneJson(saved.settlement);
-      const restoredCampaignState = cloneJson(saved.campaignState);
-      state.savedSettlements[savedIndex] = {
-        ...state.savedSettlements[savedIndex],
-        settlement: restoredSettlement,
-        campaignState: restoredCampaignState,
-        timestamp: stamp,
-      };
-      persistUpdates.push({
-        saveId: saved.id,
-        settlement: cloneJson(restoredSettlement),
-        campaignState: cloneJson(restoredCampaignState),
-      });
-    }
-
-    if (state.activeSaveId != null) {
-      // Rehydrate only a live view that belongs to this campaign, including a
-      // different member opened after the advance.
-      if (snapshot.active && String(state.activeSaveId) === snapshot.active.saveId) {
-        state.settlement = cloneJson(snapshot.active.settlement);
-        state.systemState = cloneJson(snapshot.active.systemState);
-        state.eventLog = cloneJson(snapshot.active.eventLog);
-        state.phase = snapshot.active.phase;
-        state.editedAt = stamp;
-      } else {
-        const activeSnapshot = (snapshot.saves || [])
-          .find(saved => String(saved.id) === String(state.activeSaveId));
-        if (activeSnapshot && memberIds.has(String(activeSnapshot.id))) {
-          const campaignState = activeSnapshot.campaignState || {};
-          state.settlement = cloneJson(activeSnapshot.settlement);
-          state.systemState = campaignState.systemState != null
-            ? cloneJson(campaignState.systemState)
-            : null;
-          state.eventLog = Array.isArray(campaignState.eventLog)
-            ? cloneJson(campaignState.eventLog)
-            : [];
-          state.phase = campaignState.phase || state.phase;
-          state.editedAt = stamp;
-        }
-      }
-    }
+    restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates);
 
     // Pop exactly the restored entry; older snapshots remain for stepwise undo.
     state.pulseUndoStack = stack.filter((_, i) => i !== index);
+    // R-1 MUST-FIX: the pop lowers the campaign's LOGICAL advance depth by one
+    // (the push site raised it by one). Floor at 0 defensively; production
+    // pairing is exact because only retained entries are poppable and every
+    // retained entry incremented the counter when it was pushed.
+    if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
+    state.advanceSeqByCampaign[String(campaignId)] = Math.max(
+      0,
+      (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) - 1,
+    );
+    // R-1 ring coherence: proposal snapshots captured AFTER this restore point
+    // (their stamped advance depth exceeds the depth left by the pop) describe
+    // futures that no longer exist — restoring one later would fast-forward the
+    // world. Drop them; entries captured before the popped advance stay valid.
+    // This same-producer prune is also what makes the depth counter ABA-safe:
+    // nothing stamped deeper than the restored depth survives to see a later
+    // re-advance land on the same number.
+    if (state.proposalUndoStack?.length) {
+      const depth = advanceDepthOf(state, campaignId);
+      state.proposalUndoStack = state.proposalUndoStack.filter(entry =>
+        String(entry.campaignId) !== String(campaignId)
+        || (entry.advanceDepth ?? 0) <= depth);
+    }
     campaignPersist = cacheCampaignState(state);
     didUndo = true;
   });
 
   // Campaign and settlement writes are flushed as one persistence operation.
   // The shared helper checks the owner fence around its awaited work.
+  await flushWorldPulsePersist({
+    result: didUndo,
+    campaignPersist,
+    persistUpdates,
+    campaignId,
+    isSessionCurrent,
+  });
+  return isSessionCurrent() ? didUndo : false;
+}
+
+/**
+ * R-1 (queue #5): reverse the most recent APPLIED world-pulse proposal for this
+ * campaign, restoring the campaign world + member saves + the live view from
+ * the pre-apply snapshot on the session proposal-undo ring. The restored world
+ * carries the proposal back in `pending`, so it returns to the adjudication
+ * desk. The advance stack is never read for restore and never written here.
+ *
+ * @param {{
+ *   set: Function,
+ *   get: Function,
+ *   campaignId: string,
+ *   isSessionCurrent: () => boolean,
+ * }} args
+ * @returns {Promise<boolean>} True only when a snapshot was restored and persisted.
+ */
+export async function runUndoLastProposalApply({
+  set,
+  get,
+  campaignId,
+  isSessionCurrent,
+}) {
+  if (!isSessionCurrent() || get().isAdvanceInFlight(campaignId)) return false;
+  // A parked interval recommits worldState wholesale on resume, so a proposal
+  // restore written into the parked window would be silently replaced.
+  // (undoLastPulse stays the documented abandon path for a pause; this is not.)
+  if (get().getPausedAdvance(campaignId)) return false;
+  const persistUpdates = [];
+  let campaignPersist = null;
+  let didUndo = false;
+  // Same one-producer discipline as runUndoLastPulse: every coupled projection
+  // restores atomically or not at all.
+  set(state => {
+    const ring = state.proposalUndoStack || [];
+    let index = -1;
+    for (let i = ring.length - 1; i >= 0; i -= 1) {
+      if (String(ring[i].campaignId) === String(campaignId)) {
+        index = i;
+        break;
+      }
+    }
+    if (index === -1) return;
+    const snapshot = ring[index];
+    // Owner fence, stamped at push time: an entry minted under another
+    // account/session (same-UUID campaigns exist across accounts) must never
+    // restore here. The advance stack gets this from clearTransientCampaignWork
+    // at the auth boundary; the ring carries its own stamp so the defense is
+    // structural rather than dependent on an out-of-slice cleanup.
+    if (!isCurrentCampaignSession(state, snapshot.session)) return;
+    // Ring coherence: this snapshot is restorable only while the campaign's
+    // advance depth still equals its stamp. A deeper stack means an advance
+    // landed after the apply — restoring the pre-apply world under it would
+    // silently rewind that advance while leaving its own undo entry behind.
+    // Undo the advance first (which restores the stamp's depth) and this
+    // entry becomes poppable again; newest-act-first is the only coherent walk.
+    if (advanceDepthOf(state, campaignId) !== (snapshot.advanceDepth ?? 0)) return;
+    const campaign = findActiveCampaign(state.campaigns, campaignId);
+    if (!campaign) return;
+    const stamp = new Date().toISOString();
+    restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates);
+
+    // Pop exactly the restored entry; older proposal snapshots remain for a
+    // stepwise walk-back. pulseUndoStack is untouched by construction.
+    state.proposalUndoStack = ring.filter((_, i) => i !== index);
+    campaignPersist = cacheCampaignState(state);
+    didUndo = true;
+  });
+
+  // Campaign and settlement writes are flushed as one persistence operation.
   await flushWorldPulsePersist({
     result: didUndo,
     campaignPersist,
@@ -588,7 +735,32 @@ export async function runApplyWorldPulseProposal({
       now,
     });
     if (!result) return;
+    // R-1 REAL ARMING (queue #5): capture the pre-APPLY world before the
+    // effects land on the draft, for the SEPARATE session proposal-undo ring.
+    // The entry stamps the campaign's current advance depth (the cross-ring
+    // happens-before) and the owner/session fence (a snapshot minted under one
+    // account must never restore into a same-UUID campaign of another).
+    // A refused apply returned above, so a no-op never mints a phantom entry.
+    const undoEntry = {
+      ...capturePulseSnapshot(state, campaign, now),
+      kind: 'proposal',
+      proposalId,
+      headline: proposal?.headline || null,
+      advanceDepth: advanceDepthOf(state, campaignId),
+      session: captureCampaignSession(state),
+    };
     persistUpdates = applyWorldPulseResultToState(state, campaign, result, now);
+    // Push onto the ring, capped PER campaign: drop only this campaign's
+    // oldest PROPOSAL snapshot. The advance stack is a different array and is
+    // never written here — separation by construction, not by discipline.
+    const ring = [...(state.proposalUndoStack || []), undoEntry];
+    const mine = ring.reduce(
+      (n, s) => n + (String(s.campaignId) === String(campaignId) ? 1 : 0), 0);
+    if (mine > PROPOSAL_UNDO_CAP) {
+      const oldest = ring.findIndex(s => String(s.campaignId) === String(campaignId));
+      if (oldest !== -1) ring.splice(oldest, 1);
+    }
+    state.proposalUndoStack = ring;
     campaignPersist = cacheCampaignState(state);
   });
 
