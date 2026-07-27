@@ -115,13 +115,20 @@ function stripCode(src) {
 
 /**
  * Locate the opening `{` of the object a slice factory contributes to the store.
- * Handles both `(set, get) => ({ … })` and `(set, get) => { …; return { … } }`
+ * Handles both `(set, …) => ({ … })` and `(set, …) => { …; return { … } }`
  * (the two forms in use). For a block body, the returned object is the FIRST
  * top-level `return {` — the module-init `set(...)` reporters some slices call
  * before `return` are correctly outside it.
+ *
+ * Parameter tolerance is DELIBERATELY asymmetric: the first parameter must be
+ * literally `set` — the census keys on that identifier (referencesSet), so a
+ * renamed `set` would silently empty a slice's share of the denominator — while
+ * later parameters (get, _get, api, or none) may carry any name: the walker
+ * never reads them, so renaming an unused `get` must not break the census.
+ * The shape pins at the bottom of this file hold both halves.
  */
 function findSliceObjectStart(code) {
-  const sig = /export const create[A-Za-z]+Slice\s*=\s*\(set,\s*get\)\s*=>\s*/g;
+  const sig = /export const create[A-Za-z]+Slice\s*=\s*\(\s*set\s*(?:,\s*[A-Za-z_$][\w$]*\s*)*\)\s*=>\s*/g;
   const m = sig.exec(code);
   if (!m) return -1;
   let i = m.index + m[0].length;
@@ -314,14 +321,32 @@ function composedSliceFiles() {
   return files;
 }
 
-/** The census: { name → sliceFile } for every mutating action across the store. */
+/**
+ * The census: { census: Map(name → sliceFile), failures: string[] } across the
+ * store. Shape drift the walker cannot parse is COLLECTED per file and asserted
+ * by a dedicated test — never thrown. A collection-time throw is the worst
+ * failure mode a guard has: it reads as a broken test file rather than a failed
+ * invariant, reports only the first offender, and takes every other assertion
+ * in this file down with it (2026-07-27: a `(set, get)` → `(set, _get)` rename
+ * in configSlice.js did exactly that).
+ */
 function censusMutatingActions() {
   const out = new Map();
+  const failures = [];
   for (const file of composedSliceFiles()) {
     const rawCode = readFileSync(join(STORE_DIR, file), 'utf8');
     const code = stripCode(rawCode);
     const objStart = findSliceObjectStart(code);
-    if (objStart === -1) throw new Error(`walker: could not locate slice object in ${file}`);
+    if (objStart === -1) {
+      failures.push(
+        `${file}: could not locate the slice object. The walker matches ` +
+        '`export const create*Slice = (set, …) => …` where the FIRST parameter ' +
+        'is literally `set` (the census keys on that identifier); later ' +
+        'parameters may carry any name or be absent. Restore the convention, ' +
+        'or extend findSliceObjectStart AND its shape pins in this file.',
+      );
+      continue;
+    }
     const sliceProps = scanProps(code, objStart);
     for (const p of sliceProps) {
       if (p.isFn && p.usesSet) out.set(p.key, file);
@@ -331,9 +356,12 @@ function censusMutatingActions() {
       if (!spreadFactory) continue;
       const factoryFile = importedModules.get(spreadFactory);
       if (!factoryFile) {
-        throw new Error(
-          `walker: action factory ${spreadFactory} in ${file} is not a relative named import`,
+        failures.push(
+          `${file}: action factory ${spreadFactory} is not a relative named ` +
+          'import — the walker follows only relative named imports of sibling ' +
+          'store modules.',
         );
+        continue;
       }
       const factoryCode = stripCode(
         readFileSync(join(STORE_DIR, factoryFile), 'utf8'),
@@ -343,9 +371,12 @@ function censusMutatingActions() {
         spreadFactory,
       );
       if (factoryStart === -1) {
-        throw new Error(
-          `walker: could not locate returned object for ${spreadFactory} in ${factoryFile}`,
+        failures.push(
+          `${factoryFile}: could not locate the object returned by ` +
+          `${spreadFactory} — action factories must keep the explicit ` +
+          '`export function name(…) { … return { … } }` form.',
         );
+        continue;
       }
       for (const property of scanProps(factoryCode, factoryStart)) {
         if (property.isFn && property.usesSet) {
@@ -354,15 +385,23 @@ function censusMutatingActions() {
       }
     }
   }
-  return out;
+  return { census: out, failures };
 }
 
 describe('Track K COMPLETION — operation registry completeness walker', () => {
-  const census = censusMutatingActions();
+  const { census, failures: walkerFailures } = censusMutatingActions();
   const denominator = [...census.keys()].sort();
   const registered = registeredActionNames();
   const exempt = exemptActionNames();
   const covered = new Set([...registered, ...exempt]);
+
+  test('the walker parsed every composed slice (shape drift fails HERE, not at collection)', () => {
+    // A slice-factory signature or action-factory form the walker cannot parse
+    // lands here with a per-file message telling you the accepted shapes. When
+    // this test is red, the census below is missing that file's actions — treat
+    // any other failure in this describe as downstream of this one.
+    expect(walkerFailures).toEqual([]);
+  });
 
   test('the census finds a non-trivial denominator (scanner did not silently break)', () => {
     // A floor guard: if a refactor breaks findSliceObjectStart the census would
@@ -397,6 +436,41 @@ describe('Track K COMPLETION — operation registry completeness walker', () => 
     // the ceiling is lowered with it; it is never raised without a deliberate,
     // documented reason (the clamp-ratchet monotonicity rule).
     expect(exempt.length).toBeLessThanOrEqual(EXEMPT_CEILING);
+  });
+});
+
+// ── Locator shape pins (parameter-rename regression, 2026-07-27) ─────────────
+// configSlice renamed its unused second parameter — `(set, get)` → `(set, _get)`
+// — and the old locator regex stopped matching, erroring the whole file at
+// COLLECTION. These pins hold the locator's tolerance contract directly, so a
+// locator regression or a new factory shape is caught here without waiting for
+// a live slice to drift onto it.
+describe('walker locator — slice-factory shape pins', () => {
+  const arrow = (params) =>
+    stripCode(`export const createFooSlice = ${params} => ({ bump: () => set({ n: 1 }) })`);
+
+  test('tolerates any later-parameter naming or arity (the walker never reads them)', () => {
+    expect(findSliceObjectStart(arrow('(set, get)'))).not.toBe(-1);
+    expect(findSliceObjectStart(arrow('(set, _get)'))).not.toBe(-1);
+    expect(findSliceObjectStart(arrow('(set)'))).not.toBe(-1);
+    expect(findSliceObjectStart(arrow('(set, get, api)'))).not.toBe(-1);
+  });
+
+  test('block-body factories still resolve to their top-level return object', () => {
+    const code = stripCode(
+      'export const createFooSlice = (set, _get) => { const seed = 1; return { seed }; }',
+    );
+    expect(findSliceObjectStart(code)).not.toBe(-1);
+  });
+
+  test('a renamed FIRST parameter is rejected — pinned as a decision, not a gap', () => {
+    // The census keys on the literal identifier `set` (referencesSet): if `set`
+    // were renamed, every action in that slice would silently drop out of the
+    // denominator and an unregistered mutating action could ship unseen. So a
+    // `set` rename must fail loudly (via the parsed-every-slice test above),
+    // never tolerate-and-miscount.
+    expect(findSliceObjectStart(arrow('(_set, get)'))).toBe(-1);
+    expect(findSliceObjectStart(arrow('(store, get)'))).toBe(-1);
   });
 });
 
