@@ -1043,6 +1043,41 @@ async function resolveChargeClawbackKeys(
   return sessionId ? [sessionId] : [];
 }
 
+/** The named reversal classes a charge-level event can carry (Wave 8 H20/M22). */
+export type ChargeReversalClass = 'full_refund' | 'partial_refund' | 'dispute';
+
+/**
+ * Name the reversal class of a charge.refunded / charge.dispute.created event:
+ * 'dispute' for dispute events; for refunds, amount_refunded vs amount decides
+ * 'partial_refund' (walked back in part) vs 'full_refund'. Classification is
+ * OBSERVATIONAL ONLY — BY POLICY (red-team CRIT-1, ruling 2026-07-26) every
+ * class routes to the SAME full clawback lattice; goodwill flows are credit
+ * GRANTS, never partial refunds, so no partial-clawback path exists. NEVER
+ * throws: any ambiguity (missing/odd amounts, unexpected shape) defaults to
+ * 'full_refund' semantics — which is what every class receives anyway.
+ *
+ * The optional `charge` lets a caller that already retrieved the dispute's
+ * charge refine a future class without a second fetch; the default reads the
+ * event's own object (for charge.refunded, that IS the charge).
+ */
+export function classifyChargeReversal(
+  event: Stripe.Event,
+  charge?: Stripe.Charge | null,
+): ChargeReversalClass {
+  try {
+    if (event.type === 'charge.dispute.created') return 'dispute';
+    const c = charge ?? (event.data.object as Stripe.Charge);
+    const refunded = typeof c?.amount_refunded === 'number' ? c.amount_refunded : null;
+    const total = typeof c?.amount === 'number' ? c.amount : null;
+    if (refunded !== null && total !== null && refunded > 0 && refunded < total) {
+      return 'partial_refund';
+    }
+    return 'full_refund';
+  } catch {
+    return 'full_refund';
+  }
+}
+
 // ── Redeem codes (migration 107) ─────────────────────────────────────────────
 //
 // create-checkout reserved the seat (reserve_redemption) and stamped the
@@ -1410,6 +1445,38 @@ async function clawbackDossierEntitlementForSession(
   }
   if (claw?.ok && claw.entitlement_id) {
     console.log(`[stripe-webhook] dossier entitlement ${claw.entitlement_id} clawed back on session ${sessionId}`);
+  }
+}
+
+/**
+ * CREDIT-PACK clawback (Wave 8 M2): a refunded/disputed credit-pack charge
+ * reverses the FULL granted amount through the narrow system_clawback_credits
+ * RPC (migration 190) — one atomic transaction that claims once per session key
+ * (mirroring the grant's own delivery claim), writes the reversal ledger row,
+ * and refreshes the cache. The balance MAY go negative: the debt nets against
+ * future grants (ruling 2026-07-26; goodwill flows are credit GRANTS, never
+ * partial refunds). Run for EVERY candidate key like the dossier clawback —
+ * a key that never granted a pack reads no_pack_grant and no-ops; a redelivery
+ * reads already_clawed_back and no-ops. A transport failure THROWS so Stripe
+ * redelivers: the RPC is one transaction, so an error means nothing committed
+ * and the retry loses no claim (the dossier/referral posture, NOT the
+ * flipMoneyEventStatus never-throw — this step moves real money).
+ */
+async function clawbackCreditPackForSession(
+  supabase: ReturnType<typeof adminClient>,
+  sessionId: string,
+  reversalClass: ChargeReversalClass,
+): Promise<void> {
+  const { data: claw, error: clawErr } = await supabase.rpc('system_clawback_credits', {
+    p_session_id: sessionId,
+    p_reason: reversalClass,
+  });
+  if (clawErr) {
+    logError('stripe-webhook', null, clawErr.message, { stage: 'clawback_credit_pack', session_id: sessionId });
+    throw new Error(`system_clawback_credits failed: ${clawErr.message}`);
+  }
+  if (claw?.ok) {
+    console.log(`[stripe-webhook] credit pack clawed back on session ${sessionId}: ${claw.amount} credits reversed for user ${claw.user_id} (balance ${claw.prev} -> ${claw.next})`);
   }
 }
 
@@ -3020,6 +3087,15 @@ async function dispatchStripeEvent(
     // clawback_referral answers no_granted_referral and the case no-ops.
     case 'charge.refunded':
     case 'charge.dispute.created': {
+      // POLICY (CRIT-1; Wave 8 H20/M22 ruling 2026-07-26): the class is named and
+      // recorded so the routing is EXPLICIT, and ALL classes — full_refund,
+      // partial_refund, dispute — route to the SAME full clawback lattice below.
+      // A partial refund is a payment the customer walked back; goodwill flows
+      // are credit GRANTS, never partial refunds, so no partial-clawback path
+      // exists BY POLICY. classifyChargeReversal never throws (ambiguity reads
+      // as full_refund semantics — which every class receives anyway).
+      const reversalClass = classifyChargeReversal(event);
+      console.log(`[stripe-webhook] ${event.type} (${event.id}) classified '${reversalClass}' — routing to the full clawback lattice (all reversal classes claw back fully by policy)`);
       const keys = await resolveChargeClawbackKeys(event, stripeApi);
       let referralClawed = false;
       for (const key of keys) {
@@ -3048,6 +3124,11 @@ async function dispatchStripeEvent(
         // TRANSFER clawback (§6.7): a refunded/disputed transfer charge's key is the
         // case's checkout SESSION id — reverse the transfer by its case state.
         await clawbackTransferForSession(supabase, key);
+        // CREDIT-PACK clawback (Wave 8 M2): a refunded/disputed pack charge's key
+        // is the checkout SESSION id — the same id its 'purchase' grant keyed on.
+        // Reverses the FULL granted amount (balance may go negative; the debt nets
+        // against future grants). No-ops for every key that never granted a pack.
+        await clawbackCreditPackForSession(supabase, key, reversalClass);
       }
       // MONEY LEDGER (156): flip the mirrored row's status (refund → 'refunded',
       // dispute → 'disputed') on the SAME candidate keys. The one sanctioned

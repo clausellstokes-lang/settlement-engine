@@ -14,7 +14,7 @@
  * machine. The unsigned/bad-signature cases need no crypto and are the core boundary
  * proof; the signed cases use a SubtleCrypto HMAC signer matching Stripe's v1 scheme.
  */
-import { assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
+import { assertEquals, assertRejects } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 
 const SECRET = 'whsec_test_secret_for_unit_tests';
 const AUTO_RELOAD_ATTEMPT_ID = '11111111-1111-4111-8111-111111111111';
@@ -27,7 +27,7 @@ Deno.env.set('SUPABASE_SERVICE_ROLE_KEY', 'service_role_dummy');
 Deno.env.set('RESEND_API_KEY', 're_test_dummy');
 Deno.env.set('RESEND_FROM_EMAIL', 'SettlementForge <hello@test.invalid>');
 
-const { handleStripeWebhook } = await import('./index.ts');
+const { handleStripeWebhook, classifyChargeReversal } = await import('./index.ts');
 
 /** processed_webhook_events stub, shared by every admin-client stub below.
  *  The handler claims each event id here (INSERT, PK = event_id) before running
@@ -3342,4 +3342,167 @@ Deno.test('subscription.deleted for a Surveyor sub revokes + breaks BEFORE the C
   // Broke before the Cartographer path — no downgrade, no auth write.
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
   assertEquals(stub.calls.authUpdates.length, 0);
+});
+
+// ── Charge-reversal classification (Wave 8 H20/M22) + credit-pack clawback (M2) ──
+// classifyChargeReversal NAMES the class; BY POLICY (CRIT-1, ruling 2026-07-26)
+// every class — full_refund, partial_refund, dispute — routes to the SAME full
+// clawback lattice (goodwill flows are credit GRANTS, never partial refunds).
+// The pack clawback reverses the FULL 'purchase' grant through the atomic
+// system_clawback_credits RPC (migration 190), keyed on the same session id.
+
+Deno.test('classifyChargeReversal names dispute / full / partial, and NEVER throws on ambiguity', () => {
+  // deno-lint-ignore no-explicit-any
+  const refundEvt = (amount?: number, amount_refunded?: number): any => ({
+    type: 'charge.refunded', data: { object: { id: 'ch_c', amount, amount_refunded } },
+  });
+  // deno-lint-ignore no-explicit-any
+  const disputeEvt: any = { type: 'charge.dispute.created', data: { object: { id: 'dp_1', charge: 'ch_c' } } };
+  assertEquals(classifyChargeReversal(disputeEvt), 'dispute');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 1000)), 'full_refund');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 250)), 'partial_refund');
+  // Ambiguity (missing amounts / zero refunded) defaults to full_refund
+  // semantics — which is what every class receives anyway.
+  assertEquals(classifyChargeReversal(refundEvt(undefined, undefined)), 'full_refund');
+  assertEquals(classifyChargeReversal(refundEvt(1000, 0)), 'full_refund');
+});
+
+Deno.test('a PARTIAL refund (amount_refunded < amount) still runs the FULL clawback lattice', async () => {
+  // The founder stub is the richest lattice observer: if the partial refund
+  // routed anywhere but the full path, the is_founder flip and the FULL −30
+  // bonus reversal below would not happen.
+  const stub = makeFounderStub();
+  const body = JSON.stringify({
+    id: 'evt_partial_refund', type: 'charge.refunded',
+    data: { object: { id: 'ch_f', invoice: null, payment_intent: 'pi_f', amount: 9900, amount_refunded: 1000 } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                       // seat freed — full lattice ran
+  const adj = stub.rpc.find((c) => c.fn === 'service_adjust_credits');
+  assertEquals(adj!.args.delta, -30);                              // FULL bonus reversal, never scaled
+  // The pack clawback ran on the same key and RECORDED the class as its reason.
+  const pack = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals(pack !== undefined, true);
+  assertEquals((pack!.args as { p_session_id: string }).p_session_id, 'cs_founder');
+  assertEquals((pack!.args as { p_reason: string }).p_reason, 'partial_refund');
+});
+
+/** Minimal stub for the credit-pack clawback arm: records RPCs, resolves no
+ *  referral/dossier/founder/transfer state (every sibling clawback no-ops). */
+function makePackStub(cfg: { rpcResult?: Record<string, unknown>; rpcError?: { message: string } | null } = {}) {
+  const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
+  const claim = makeClaimTable('track');
+  // deno-lint-ignore no-explicit-any
+  const from = (table: string): any => {
+    if (table === 'processed_webhook_events') return claim.builder();
+    // deno-lint-ignore no-explicit-any
+    const q: any = {
+      select() { return q; }, update() { return q; }, eq() { return q; }, in() { return q; },
+      order() { return q; }, limit() { return q; },
+      maybeSingle() { return Promise.resolve({ data: null, error: null }); },
+      // deno-lint-ignore no-explicit-any
+      then(resolve: any, reject: any) { return Promise.resolve({ data: [], error: null }).then(resolve, reject); },
+    };
+    return q;
+  };
+  const client = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from,
+    rpc: (fn: string, args: Record<string, unknown>) => {
+      rpc.push({ fn, args });
+      if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false, reason: 'no_granted_referral' }, error: null });
+      if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
+      if (fn === 'system_clawback_credits') {
+        return Promise.resolve({
+          data: cfg.rpcError ? null : (cfg.rpcResult ?? { ok: true, user_id: 'pack_u', amount: 50, prev: 50, next: 0 }),
+          error: cfg.rpcError ?? null,
+        });
+      }
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, claim, adminClient: () => client };
+}
+// deno-lint-ignore no-explicit-any
+const packStripe = (sessionId = 'cs_pack'): any => ({
+  charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_p' }) },
+  checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }) } },
+});
+const packRefund = (eventId: string) => JSON.stringify({
+  id: eventId, type: 'charge.refunded',
+  data: { object: { id: 'ch_p', invoice: null, payment_intent: 'pi_p', amount: 999, amount_refunded: 999 } },
+});
+
+Deno.test('a refunded pack charge routes its session key through system_clawback_credits', async () => {
+  const stub = makePackStub();
+  const body = packRefund('evt_pack_refund_1');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claw = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals(claw !== undefined, true);
+  assertEquals((claw!.args as { p_session_id: string }).p_session_id, 'cs_pack');
+  assertEquals((claw!.args as { p_reason: string }).p_reason, 'full_refund');
+});
+
+Deno.test('a DISPUTE also routes to the pack clawback, recorded as class dispute', async () => {
+  const stub = makePackStub();
+  const body = JSON.stringify({
+    id: 'evt_pack_dispute_1', type: 'charge.dispute.created',
+    data: { object: { id: 'dp_p', charge: 'ch_p' } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claw = stub.rpc.find((c) => c.fn === 'system_clawback_credits');
+  assertEquals((claw!.args as { p_session_id: string }).p_session_id, 'cs_pack');
+  assertEquals((claw!.args as { p_reason: string }).p_reason, 'dispute');
+});
+
+Deno.test('a refund of a NON-pack session no-ops through the RPC (no throw, 200)', async () => {
+  const stub = makePackStub({ rpcResult: { ok: false, reason: 'no_pack_grant' } });
+  const body = packRefund('evt_pack_refund_nonpack');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: packStripe('cs_never_granted') },
+  );
+  assertEquals(res.status, 200);   // business no-op is silent — the arm completes
+  assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 1);
+});
+
+Deno.test('a redelivered pack refund re-asks the RPC; the claim-once lives in the RPC (already_clawed_back)', async () => {
+  // Webhook side: each delivery calls the RPC (the dossier posture); the pglite
+  // suite pins that the SECOND call deducts nothing (already_clawed_back).
+  const stub = makePackStub();
+  const first = packRefund('evt_pack_redeliver_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: packStripe() });
+  const second = packRefund('evt_pack_redeliver_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: packStripe() });
+  assertEquals(stub.rpc.filter((c) => c.fn === 'system_clawback_credits').length, 2);
+});
+
+Deno.test('a pack-clawback TRANSPORT failure throws (non-2xx → Stripe redelivers) and releases the event claim', async () => {
+  // The RPC is one atomic transaction: an error means nothing committed, so the
+  // throw posture loses no claim — the redelivery re-runs the whole reversal.
+  const stub = makePackStub({ rpcError: { message: 'transient rpc boom' } });
+  const body = packRefund('evt_pack_refund_fail');
+  const signature = await sign(body, SECRET);
+  await assertRejects(
+    () => handleStripeWebhook(
+      req(body, { 'stripe-signature': signature }),
+      { adminClient: stub.adminClient, stripeClient: packStripe() },
+    ),
+    Error,
+    'system_clawback_credits failed',
+  );
+  // The event lease was released so Stripe's redelivery is not read as [duplicate].
+  assertEquals(stub.claim.releases.includes('evt_pack_refund_fail'), true);
 });

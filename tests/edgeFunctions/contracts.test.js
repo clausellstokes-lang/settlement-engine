@@ -266,6 +266,27 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
     expect(src).toMatch(/founder_clawback:/);
   });
 
+  it('every charge-reversal class is NAMED and routes to the full clawback (Wave 8 H20/M22 policy)', () => {
+    // classifyChargeReversal makes the amount-blind arm EXPLICIT: full_refund,
+    // partial_refund, and dispute are named, recorded, and ALL route to the same
+    // full clawback lattice BY POLICY (CRIT-1: goodwill = credit grants, never
+    // partial refunds). A future "partial refunds keep credits" regression must
+    // rip this pin out in daylight.
+    expect(src).toMatch(/classifyChargeReversal\s*\(/);
+    expect(src).toMatch(/'partial_refund'/);
+    expect(src).toMatch(/'dispute'/);
+    expect(src).toMatch(/full clawback lattice/i);
+  });
+
+  it('a refunded/disputed credit-pack charge reverses the granted credits (Wave 8 M2)', () => {
+    // The pack grant (source 'purchase', session-keyed) must have a reversal
+    // wired into the same charge.refunded / charge.dispute.created arm; the
+    // atomic RPC (migration 190) owns the claim-once and the may-go-negative
+    // ledger math.
+    expect(src).toMatch(/clawbackCreditPackForSession\s*\(/);
+    expect(src).toMatch(/system_clawback_credits/);
+  });
+
   it('downgrades through the retention RPC, not a bare profile tier write', () => {
     expect(src).toMatch(/handle_premium_downgrade/);
     expect(src).toMatch(/Premium downgrade failed/);
