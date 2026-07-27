@@ -33,12 +33,19 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { FREE_SAVE_LIMIT } from '../config/tierFacts.js';
 import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
+import { flag } from '../lib/flags.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
+
+// M11: with Turnstile active, how long the INITIAL verify holds for the widget's
+// token before firing without one. The tokenless fire is the pre-gate fallback —
+// the server never blocks a paid buyer on a missing token — so the deadline only
+// bounds how long we wait for the stronger call, never whether delivery happens.
+const CAPTCHA_TOKEN_DEADLINE_MS = 4000;
 
 /** Resolve the returning purchase: URL (session_id + dt) first, then the stash. */
 function resolveReturn() {
@@ -86,7 +93,14 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
   // held in a ref so it rides the verify call WITHOUT re-running the mount-time
   // verification. This is a POST-PAYMENT step — verify-single-dossier verifies the
   // token ONLY IF present and NEVER blocks a paid buyer on a missing/blocked one.
+  // M11: the widget mints that token ASYNCHRONOUSLY, so with Turnstile active the
+  // INITIAL verify is gated (see the mount effect): it waits for the token — firing
+  // the moment it lands — or for CAPTCHA_TOKEN_DEADLINE_MS, whichever comes first.
   const captchaTokenRef = useRef(null);
+  // The M11 gate lives in refs (not state) so the widget's onToken callback can
+  // release it without re-rendering or re-running the mount effect. `fire` is
+  // installed by the mount effect while Turnstile is active and nulled once used.
+  const initialGateRef = useRef({ timer: null, fire: null });
 
   // The async verification. Kept free of any SYNCHRONOUS setState so it is safe
   // to invoke directly from the mount effect (results land only in .then/.catch).
@@ -126,9 +140,34 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     doVerify();
   }, [doVerify]);
 
+  // Token (or null on degradation) from the managed widget: stash it for the
+  // verify call, and release a still-waiting initial verify at once — a null
+  // means no token is coming, so waiting out the deadline would be pure delay.
+  const handleCaptchaToken = useCallback((tok) => {
+    captchaTokenRef.current = tok;
+    if (initialGateRef.current.fire) initialGateRef.current.fire();
+  }, []);
+
   useEffect(() => {
-    const cancel = doVerify();
-    return cancel;
+    // Flag off (the default) or nothing to attempt: fire synchronously — the
+    // exact pre-gate behavior, no timer (doVerify no-ops when !canAttempt).
+    if (!flag('perimeterCaptcha') || !canAttempt) return doVerify();
+    // Turnstile active (M11): hold the initial verify for the minted token or
+    // the deadline, whichever lands first. Both release paths funnel through
+    // gate.fire, which disarms itself so a token/timer race cannot double-fire.
+    let cancelVerify = null;
+    const gate = initialGateRef.current;
+    gate.fire = () => {
+      gate.fire = null;
+      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
+      cancelVerify = doVerify();
+    };
+    gate.timer = setTimeout(() => { if (gate.fire) gate.fire(); }, CAPTCHA_TOKEN_DEADLINE_MS);
+    return () => {
+      gate.fire = null;
+      if (gate.timer) { clearTimeout(gate.timer); gate.timer = null; }
+      if (cancelVerify) cancelVerify();
+    };
     // Run once on mount; Retry re-invokes doVerify imperatively.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -264,10 +303,11 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
         <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
         <p style={{ margin: `${SP.sm}px 0 0`, color: BODY }}>Checking the paid Stripe session before preparing the PDF.</p>
         {/* Wave-D human verification (INERT until activated). Managed/invisible;
-            mints a best-effort token for the verify call. This is post-payment, so
-            the server never blocks delivery on a missing token — renders nothing
-            while the perimeterCaptcha flag is off. */}
-        <CaptchaGate action="verify" onToken={(tok) => { captchaTokenRef.current = tok; }} />
+            mints a best-effort token for the verify call and releases the M11
+            initial-verify gate. This is post-payment, so the server never blocks
+            delivery on a missing token — renders nothing while the
+            perimeterCaptcha flag is off. */}
+        <CaptchaGate action="verify" onToken={handleCaptchaToken} />
       </div>
     );
   }
