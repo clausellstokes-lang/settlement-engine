@@ -96,6 +96,21 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // private key from coverage.
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|tabNotes|\bnotes?\b|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
 
+// ── Public NPC field allowlist ──────────────────────────────────────────────
+// Character-identical (order-independent) to the SQL npc_allowed array in
+// _gallery_sanitize_public_json (033, recreated net-current through 189) and to
+// the publicNpc() object literal below. KEEP publicNpc a plain object literal —
+// tests/security/gallerySanitizer.pglite.test.js parses that literal by regex
+// and pins it to the SQL npc_allowed; this constant is behaviourally pinned to
+// both by tests/security/factionMemberPublicParity.pglite.test.js (same input
+// record must project to the same key set as npcs[] members, client == server).
+// Used by sanitizePublicValue to reduce FACTION-ROSTER member records — see the
+// faction-member gate there (migration 189 twin).
+export const NPC_PUBLIC_KEYS = Object.freeze([
+  'id', 'name', 'role', 'title', 'category', 'personality', 'physical',
+  'factionAffiliation', 'secondaryAffiliation', 'presentation', 'influence',
+]);
+
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.
  * This is the DEEP denylist (defense-in-depth). The top-level ALLOWLIST gate lives
@@ -128,12 +143,28 @@ export function sanitizePublicValue(value, path = []) {
   // gallery_share_dm full mode keeps its own DM content — see toPublicSafe.)
   if (/** @type {Record<string, unknown>} */ (value).covert === true) return undefined;
 
+  // FACTION-MEMBER ALLOWLIST (migration 189 twin): factions[].members[] embed the
+  // SAME full NPC records as npcs[] (factionGrouping pushes roster references;
+  // relinkFactionMembers re-points them at the enriched roster), but a member's
+  // path never contains an 'npcs' segment, so the npcs-path strip below missed
+  // them — `goal` (the NPC's DM motivation) and every non-allowlisted NPC field
+  // (gender, power, …) rode through to public / anon / preview projections
+  // (secret/plotHooks were already caught at depth by PRIVATE_KEY_RE). Reduce
+  // member objects to the public NPC allowlist, exactly as the server's
+  // is_npc_obj gate does for paths ending in 'members' under a 'factions'
+  // ancestor. The ancestor rule deliberately also covers deeper rosters (e.g. a
+  // powerStructure.factions[].members) — fail-closed, hiding more.
+  const isFactionMember = path.length > 0
+    && path[path.length - 1] === 'members'
+    && path.includes('factions');
+
   /** @type {Record<string, unknown>} */
   const out = {};
   for (const [key, child] of Object.entries(value)) {
     const childPath = [...path, key];
     if (PRIVATE_KEY_RE.test(key)) continue;
     if (childPath.includes('npcs') && ['goal', 'secret', 'plotHooks', 'relationships'].includes(key)) continue;
+    if (isFactionMember && !NPC_PUBLIC_KEYS.includes(key)) continue;
     if (childPath.includes('history') && key === 'currentTensions') {
       out[key] = sanitizePublicValue(child, childPath);
       continue;

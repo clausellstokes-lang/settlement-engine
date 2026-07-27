@@ -1080,6 +1080,10 @@
       "kind": "rationale",
       "ref": "pglite-executed"
     },
+    "tests/security/factionMemberPublicParity.pglite.test.js": {
+      "kind": "rationale",
+      "ref": "pglite-executed"
+    },
     "tests/security/feeSchedule.pglite.test.js": {
       "kind": "rationale",
       "ref": "pglite-executed"
