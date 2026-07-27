@@ -75,8 +75,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(117);
-    expect(plan.repoHead).toBe(188);
-    expect(plan.pendingCount).toBe(71);
+    expect(plan.repoHead).toBe(190);
+    expect(plan.pendingCount).toBe(73);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [118, 136],
       [137, 156],
@@ -87,23 +87,27 @@ describe('bounded migration rehearsal plan', () => {
       [186, 186],
       [187, 187],
       [188, 188],
+      [189, 190],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 71 }, (_, index) => 118 + index),
+      Array.from({ length: 73 }, (_, index) => 118 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
     expect(plan.waves.at(-1)).toMatchObject({
-      id: 'reviewed-supply-chain-persistence',
-      from: 188,
-      to: 188,
+      id: 'wave8-reversal-safety',
+      from: 189,
+      to: 190,
       expectedObjects: [{
         kind: 'function',
-        name: 'apply_reviewed_supply_chain_command',
+        name: '_gallery_sanitize_public_json',
+      }, {
+        kind: 'function',
+        name: 'system_clawback_credits',
       }],
     });
   });
@@ -163,8 +167,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 188,
-      migrationCount: 188,
+      repoHead: 190,
+      migrationCount: 190,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -282,7 +286,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: 117,
-      repoHead: 188,
+      repoHead: 190,
     });
   });
 });
