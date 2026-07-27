@@ -8,10 +8,48 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
 import Button from '../../primitives/Button.jsx';
+
+// ── The institution provenance badge (R-5b item #10) ───────────────────
+// The pill used to badge only the GENERATION source tag, so a forge the living
+// world grew during an advance and one the DM added by event BOTH rendered with
+// the fallback tint and no badge at all — indistinguishable from a building
+// nobody had ever touched. The badge now reads the ONE derived provenance record
+// (domain/provenance/rosterProvenance.js), which joins the composer's
+// *ByEventId stamps and the world-pulse's *ByWorldPulseOutcomeId stamps into a
+// single answer to "who put this here". Nothing is persisted: the record is
+// derived per render from stamps both lanes already write.
+//
+// The old map also gave 'forced' an EMPTY glyph, which is falsy at the render
+// guard — the legend promised a badge that could never appear. 'forced' means
+// the player force-added it at generation, so it now wears the same YOU mark as
+// a DM event, and the legend row says "Added by you" once for both.
+const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
+
+function institutionBadge(inst) {
+  const { created } = institutionProvenanceOf(inst);
+  // A DM realm order (SHIFT_TIER) reaches the roster through the world-pulse
+  // apply path, but the hand on it is still the player's.
+  if (created.origin === 'dm-event' || created.origin === 'dm-realm-order') {
+    return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  }
+  if (created.origin === 'world-pulse') {
+    return {
+      label:'WORLD', color:PROVENANCE_TONE.world,
+      title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
+    };
+  }
+  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
+  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
+  if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
+  // Unstamped legacy rows stay unbadged rather than being guessed at. Custom
+  // rows are skinned gold by the caller's own ✦ branch, which is unchanged.
+  return { label:null, color:PROVENANCE_TONE.none, title:undefined };
+}
 
 // ── Module-scope helper components ─────────────────────────────────────
 // React Hooks plugin v7 flags components defined inside render functions
@@ -335,17 +373,16 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
                 <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
                   {insts.sort((a,b)=>a.name.localeCompare(b.name)).map((inst,i)=>{
                     const isCustom = inst.source==='custom' || inst.isCustom===true;
-                    const srcColor={required:'#a0762a',forced:'#2d7a44','auto-resolved':'#2a3a7a'}[inst.source]||'#6b5340';
-                    const srcLabel={required:'REQ',forced:'','auto-resolved':'→'}[inst.source];
+                    const badge = institutionBadge(inst);
                     const base = {fontSize:FS.xs,padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
                     const skin = isCustom
                       ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
-                      : {background:`${srcColor}10`,border:`1px solid ${srcColor}30`};
-                    return <span key={i} title={isCustom?'Your custom content':undefined} style={{...base,...skin}}>
+                      : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
+                    return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
                       {inst.name}
                       {isCustom
                         ? <span style={{fontSize:FS.nano,fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
-                        : (srcLabel&&<span style={{fontSize:FS.nano,fontWeight:800,color:srcColor,letterSpacing:'0.04em'}}>{srcLabel}</span>)}
+                        : (badge.label&&<span style={{fontSize:FS.nano,fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
                     </span>;
                   })}
                 </div>
@@ -354,7 +391,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
           </div>
           {/* Legend */}
           <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:FS.xxs,color:MUTED,flexWrap:'wrap'}}>
-            {[['REQ','#a0762a','Historically required'],['','#2d7a44','Force-added by you'],['→','#2a3a7a','Auto-resolved dependency'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
+            {[['REQ',PROVENANCE_TONE.required,'Historically required'],['YOU',PROVENANCE_TONE.you,'Added by you'],['→',PROVENANCE_TONE.auto,'Auto-resolved dependency'],['WORLD',PROVENANCE_TONE.world,'Grown by the living world'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
               <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
             ))}
           </div>
