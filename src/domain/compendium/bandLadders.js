@@ -196,8 +196,8 @@ const SAFETY_LEVELS = Object.freeze([
 
 /**
  * Defense readiness — the badge each of the five defense arms carries
- * (defenseDisplay.js readinessBadge: Strong >=65, Adequate >=40, Weak >=20, else
- * Critical). Pinned to the readinessBadge thresholds. Authored.
+ * (display/defenseScoreBands.js scoreBand: Strong >=65, Adequate >=40, Weak >=20,
+ * else Critical). Pinned to the scoreBand thresholds. Authored.
  * @type {ReadonlyArray<BandLevel>}
  */
 const DEFENSE_READINESS_LEVELS = Object.freeze([

@@ -218,7 +218,26 @@ const ARMING = Object.freeze({
   // ── session rings ──────────────────────────────────────────────────────────
   advanceCampaignWorld: { kind: 'ring', ring: 'pulseUndoStack' },
   applyWorldPulseProposal: { kind: 'ring', ring: 'proposalUndoStack' },
-  resolveIntervalMajors: { kind: 'ring-transaction', ring: 'pulseUndoStack', armedBy: 'advanceCampaignWorld' },
+  // R-5b re-audit 2026-07-27: still transaction-armed in the normal case (the
+  // paused advance's Phase-2 push covers the whole interval), but the row gained a
+  // SECOND, narrow push site and the manifest records it rather than letting the
+  // scan surprise a successor. `alsoPushes`: when a RELOAD-into-paused interval is
+  // resumed to COMPLETION, the pre-interval snapshot lived only on the cursor being
+  // cleared, so the resume adopts it onto pulseUndoStack — the advance's own push,
+  // arriving late in a session that never ran the advance. It is guarded on the
+  // campaign having NO stack entry, so the in-session path still pushes exactly
+  // once (pinned in pulseUndoAdvertising.test.js). This does NOT reopen the R-0
+  // mislabel the direction-2 assertion guards: the entry IS a pre-advance snapshot
+  // and this op DOES advertise undoLastPulse, which the assertion re-checks below.
+  resolveIntervalMajors: {
+    kind: 'ring-transaction', ring: 'pulseUndoStack', armedBy: 'advanceCampaignWorld',
+    alsoPushes: 'pulseUndoStack',
+  },
+  // R-5b re-audit 2026-07-27: the row was PROMOTED from the referential
+  // `external:undoLastPulse` to a first-class `undoToken:'undoLastPulse'` /
+  // `undoState:'action'`. The arming kind is unchanged and still exact — the site,
+  // the function, and the delegated call were re-derived at the source, and the
+  // delegation assertion below already fails closed if that call disappears.
   catchUpCampaignWorld: { kind: 'delegates', armedBy: 'advanceCampaignWorld', site: 'campaignAdvanceSession.js', fn: 'runCatchUpCampaignWorld' },
   // ── the map annotation ring ────────────────────────────────────────────────
   addPlacement: { kind: 'map-snapshot' },
@@ -408,19 +427,27 @@ describe('R-4 advertised-undo invariant — every claim resolves to an arming', 
 });
 
 describe('R-4 advertised-undo invariant — the session rings, BOTH directions', () => {
+  /** Every op DECLARED to push `ring`: its primary ring owner, plus any row that
+   *  declares a secondary `alsoPushes` site (R-5b). Both kinds are audited entries
+   *  with a written mechanism; an UNdeclared site still reds. */
   const declaredFor = (ring) => Object.entries(ARMING)
-    .filter(([, a]) => a.kind === 'ring' && a.ring === ring)
+    .filter(([, a]) => (a.kind === 'ring' && a.ring === ring) || a.alsoPushes === ring)
     .map(([name]) => name)
     .sort();
 
-  test('pulseUndoStack: exactly the declared op pushes, and it is the advertised one', () => {
+  test('pulseUndoStack: exactly the declared ops push, and each one advertises it', () => {
     const owners = ringPushOwners('pulseUndoStack');
-    // Direction 1 (declared ⊆ found): a row claiming its own pulse-ring push must
-    // really push. Direction 2 (found ⊆ declared): a NEW push site whose op does
-    // not advertise would silently re-create the R-0 mislabel — a snapshot popped
+    // Direction 1 (declared ⊆ found): a row claiming a pulse-ring push must really
+    // push. Direction 2 (found ⊆ declared): a NEW push site whose op does not
+    // advertise would silently re-create the R-0 mislabel — a snapshot popped
     // through "Undo Advance" that was never an advance.
     expect(owners).toEqual(declaredFor('pulseUndoStack'));
-    expect(owners).toEqual(['advanceCampaignWorld']);
+    // Named explicitly so a failure reads as "the push-site roster changed", not
+    // "an unknown op appeared". advanceCampaignWorld is the primary arming site;
+    // resolveIntervalMajors adopts the SAME advance's snapshot off a cleared
+    // reload-into-paused cursor (see its ARMING entry for why that is not a
+    // second kind of undo).
+    expect(owners).toEqual(['advanceCampaignWorld', 'resolveIntervalMajors']);
     for (const name of owners) {
       expect(OPERATIONS[name].undoToken, `${name} pushes the pulse ring but advertises nothing`)
         .toBe('undoLastPulse');

@@ -99,6 +99,12 @@ const surfaceStyle = {
  * - onUndo() / onRedo() use the parent-owned, persist-through commit history.
  * - onOpenWorkbench({ sceneId, semantic, canonicalRef })
  * - onOpenHerald({ sceneId, semantic, canonicalRef, provenanceRefs, provenance })
+ * - initialQualityMode / onQualityModeChange(mode) — the DEVICE quality ceiling,
+ *   owned above this seam (store `displayPrefs.sceneQualityMode`, persisted) so a
+ *   user on a weak machine clamps once instead of on every portrait open. The
+ *   viewer stays store-free: it SEEDS its local mode from the prop and reports
+ *   each pick upward. Both are optional — with neither supplied the control is a
+ *   plain session-local ceiling, exactly as before.
  */
 export default function SettlementScene3D({
   settlement,
@@ -118,6 +124,8 @@ export default function SettlementScene3D({
   onUndo,
   onRedo,
   capabilityOverride = null,
+  initialQualityMode = null,
+  onQualityModeChange = null,
 }) {
   const isMobile = useIsMobile();
   const reducedMotion = useReducedMotion();
@@ -133,7 +141,13 @@ export default function SettlementScene3D({
   const [localSelection, setLocalSelection] = useState(null);
   const [cameraRequest, setCameraRequest] = useState(null);
   const [selectedCameraId, setSelectedCameraId] = useState(null);
-  const [qualityMode, setQualityMode] = useState('auto');
+  // Seeded once from the persisted device preference, then owned locally. The
+  // clamp lives HERE because OVERRIDE_MODES is this lane's frozen vocabulary: the
+  // eager store holds an opaque string, so an unknown or corrupted persisted value
+  // renders as 'auto' rather than reaching the renderer.
+  const [qualityMode, setQualityMode] = useState(() => (
+    adaptiveQuality.OVERRIDE_MODES.includes(initialQualityMode) ? initialQualityMode : 'auto'
+  ));
   const [contextEpoch, setContextEpoch] = useState(0);
   const [contextLost, setContextLost] = useState(false);
   const fallbackReasons = useRef(new Set());
@@ -399,11 +413,14 @@ export default function SettlementScene3D({
   const selectQualityMode = useCallback((nextMode) => {
     if (!adaptiveQuality.OVERRIDE_MODES.includes(nextMode)) return;
     setQualityMode(nextMode);
+    // Report upward so the choice outlives this mount (and this session). Only
+    // validated members of the frozen vocabulary get here.
+    onQualityModeChange?.(nextMode);
     const label = nextMode === 'auto'
       ? 'Automatic'
       : `${nextMode[0].toUpperCase()}${nextMode.slice(1)} ceiling`;
     setStatus(`${label} rendering quality selected.`);
-  }, []);
+  }, [onQualityModeChange]);
 
   const handleContextLost = useCallback(() => {
     contextLosses.current += 1;

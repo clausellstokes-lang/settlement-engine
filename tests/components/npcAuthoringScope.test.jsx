@@ -208,3 +208,107 @@ describe('OutputContainer NPC authoring scope', () => {
     expect(screen.getByRole('button', { name: /inspect person/i })).toBeTruthy();
   });
 });
+
+/**
+ * WAVE R-5b — npcAuthoringAllowed reads viewerCanAuthor (owner-authorized
+ * 2026-07-27; docs/CAPABILITY_REMEDIATION_PLAN.md Wave R-5b).
+ *
+ * DECLARED BEHAVIOUR SHIFT: on the Create flow (readOnly=false) the gate used to
+ * admit EVERY tier, so a free or anon viewer saw NpcLifecycleControls and could
+ * queueEdit intents the Workbench Change Dock — gated on the same authority —
+ * would never let them review or commit. They now see the reader surface only.
+ *
+ * These are the per-tier pins. The entitled half is NOT redundant with the tests
+ * above: without it, a gate that denied everyone would pass just as happily.
+ */
+describe('R-5b — Create-flow NPC authoring follows the viewerCanAuthor authority', () => {
+  function renderCreateFlow(auth, isElevated = () => false) {
+    mocks.store.auth = auth;
+    mocks.store.isElevated = isElevated;
+    render(<OutputContainer settlement={settlement} />);
+  }
+
+  const DENIED = [
+    ['an anonymous viewer', { tier: 'anon' }],
+    ['a free tier', { tier: 'free' }],
+    // Fail-closed input: the predicate refuses anything short of an explicit
+    // entitled tier or a live elevated role.
+    ['a viewer with no tier', {}],
+    // A wholly absent `auth` is NOT pinned here on purpose. authSlice.js:103
+    // always seeds `auth` as an object, and sibling dossier components rely on
+    // that (WelcomeCreditCard.jsx:54 reads `s.auth.tier` unguarded and throws on
+    // null), so the fixture would assert against an unreachable store shape and
+    // fail inside an unrelated component. viewerCanAuthor's own null-state
+    // fail-closed behaviour is pinned at the chokepoint instead.
+  ];
+
+  for (const [label, auth] of DENIED) {
+    test(`${label} gets the reader surface, no authoring levers`, async () => {
+      renderCreateFlow(auth);
+      await openMara();
+      expectNoNpcWriters();
+    });
+  }
+
+  test('an unentitled tier is denied even with a truthy non-boolean isElevated', async () => {
+    // The chokepoint demands `isElevated() === true`; a truthy non-boolean
+    // cannot widen the gate, and that must hold through this consumer too.
+    renderCreateFlow({ tier: 'free' }, () => 'yes');
+    await openMara();
+    expectNoNpcWriters();
+  });
+
+  const ALLOWED = [
+    ['premium', { tier: 'premium' }, () => false],
+    ['founder', { tier: 'founder' }, () => false],
+    ['an elevated role on a free tier', { tier: 'free' }, () => true],
+  ];
+
+  for (const [label, auth, isElevated] of ALLOWED) {
+    test(`${label} keeps the Create-flow authoring levers`, async () => {
+      renderCreateFlow(auth, isElevated);
+      await openMara();
+      expect(screen.getByRole('combobox', { name: /set goal/i })).toBeTruthy();
+      expect(screen.getByRole('button', { name: /inspect person/i })).toBeTruthy();
+    });
+  }
+});
+
+/**
+ * The Library (saved, readOnly) mount is UNCHANGED by the alignment. Not an
+ * assumption: `canAuthorNpc` is computed in SettlementDetail as `canEdit && …`
+ * where `canEdit = useStore(viewerCanAuthor)`, so it is a strict narrowing of
+ * the new conjunct and cannot subtract from it. These pin that for every tier
+ * that can actually produce canAuthorNpc=true.
+ */
+describe('R-5b — the Library authoring arm is unchanged', () => {
+  for (const [label, auth, isElevated] of [
+    ['premium', { tier: 'premium' }, () => false],
+    ['founder', { tier: 'founder' }, () => false],
+    ['an elevated role on a free tier', { tier: 'free' }, () => true],
+  ]) {
+    test(`${label}: an authorized saved owner still authors`, async () => {
+      mocks.store.auth = auth;
+      mocks.store.isElevated = isElevated;
+      render(
+        <OutputContainer settlement={settlement} readOnly saveId="save-1" mapCanEdit canAuthorNpc />,
+      );
+
+      await openMara();
+      expect(screen.getByTestId('workbench-mode').textContent).toBe('authoring');
+      expect(screen.getByRole('combobox', { name: /set goal/i })).toBeTruthy();
+      expect(screen.getByLabelText('Secret for Mara')).toBeTruthy();
+    });
+  }
+
+  test('a saved read-only dossier is still fail-closed without owner scope', async () => {
+    // The unentitled combination cannot arise upstream (canAuthorNpc implies the
+    // authority), so this arm only ever loses cases that were already denied.
+    mocks.store.auth = { tier: 'free' };
+    render(<OutputContainer settlement={settlement} readOnly saveId="save-1" mapCanEdit />);
+
+    await openMara();
+    expect(screen.getByTestId('workbench-mode').textContent).toBe('read-only');
+    expectNoNpcWriters();
+  });
+});

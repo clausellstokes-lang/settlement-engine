@@ -28,6 +28,7 @@ import { useCrossSettlementFocus } from './dossier/useCrossSettlementFocus.js';
 import { RealmEntityContext } from './map/RealmEntityContext.jsx';
 import { useRealmEntityNav } from './map/useRealmEntityNav.js';
 import SettlementWorkbenchMount from './dossier/SettlementWorkbenchMount.jsx';
+import { viewerCanAuthor } from '../lib/viewerAuthority.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -60,12 +61,13 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 // Extracted VERBATIM to the sibling registry (the DossierGroupTabStrip idiom)
 // so this file stays under the max-lines ratchet as tabs accrue; chunking is
 // unchanged (same per-tab dynamic imports, now declared one hop away).
+// Re-flowed (R-5b, same 24 specifiers in the same order) to fund the two
+// effective lines the viewerCanAuthor alignment below costs — this file sits
+// EXACTLY at the 600-line components ceiling, so additions must be net-zero.
 import {
-  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel,
-  EconomicsTab, HistoryTab, MagicTab, NPCsTab, NotesTab, OverviewTab,
-  PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab,
-  ViabilityTab, WarFaithTab,
+  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, HistoryTab, MagicTab,
+  NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab, ServicesTab,
+  SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab, ViabilityTab, WarFaithTab,
 } from './dossier/dossierLazyTabs.js';
 
 
@@ -252,6 +254,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // anything to show. These gate PRESENCE, not content — they never read the live
   // pantheon; faith content stays behind FaithSection's premium seam.
   const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
+  // The AUTHORING authority (premium / founder / elevated), read from the ONE
+  // spelling in src/lib/viewerAuthority.js — see npcAuthoringAllowed below. A
+  // DIFFERENT question from viewerIsPremium above, which gates War & Faith tab
+  // PRESENCE and deliberately omits the founder tier.
+  const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
   // Phase 5.5 STEP 3.5 — Rumors & News tab presence: the owning campaign's
   // world carries a rumor ledger (the conditionally-materialized rumorLedgers
@@ -440,18 +447,26 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // with this surface's identity so a stale flag or an accidentally permissive
   // caller cannot expose writers in a public/player projection.
   //
-  // R-4 DELIBERATE DIVERGENCE (documented, NOT a drift escape — pinned as an
-  // exemption in tests/lint/premiumGateSingleSource.test.js): this does NOT
-  // consult src/lib/viewerAuthority.js `viewerCanAuthor`, the premium/founder/
-  // elevated authoring authority the Library dossier (SettlementDetail canEdit)
-  // and the Create-flow Workbench mount now share. On the Create flow
-  // (readOnly=false) the `!readOnly` arm admits EVERY tier, so a free or anon
-  // viewer keeps the NPC authoring levers here while the Workbench withholds
-  // them. Aligning the two would change which users see those levers — paid-
-  // surface behaviour, hence OWNER-GATED (docs/CAPABILITY_REMEDIATION_PLAN.md
-  // owner-decision queue: "npcAuthoringAllowed <-> viewerCanAuthor alignment").
-  // The R-4 lane documents the divergence and changes no behaviour.
-  const npcAuthoringAllowed = !publicDossier && !playerView && (!readOnly || (canAuthorNpc && saveId != null));
+  // R-5b ALIGNMENT (owner-authorized 2026-07-27; the R-4 divergence is CLOSED).
+  // This now consults src/lib/viewerAuthority.js `viewerCanAuthor` — the ONE
+  // premium/founder/elevated authoring spelling the Library dossier
+  // (SettlementDetail `canEdit`) and the Create-flow Workbench mount already
+  // share. Before the alignment the `!readOnly` arm admitted EVERY tier, so a
+  // free or anon viewer kept the NPC authoring levers on the Create flow while
+  // the Workbench withheld the Change Dock from the same viewer — levers with
+  // nothing to commit through. DECLARED BEHAVIOUR SHIFT: free/anon lose
+  // NpcLifecycleControls in the Create flow.
+  //
+  // The Library arm is UNCHANGED by construction: `canAuthorNpc` is already a
+  // strict narrowing of the same predicate (SettlementDetail.jsx:272 — canEdit
+  // = useStore(viewerCanAuthor), plus save/owner-scope conjuncts), so the new
+  // conjunct cannot subtract from it. The public/player arms are untouched.
+  //
+  // This also NARROWS the parked flag-on review-blackout class: the users the
+  // Workbench gate leaves without a review surface no longer hold live
+  // queueEdit levers here (docs/CAPABILITY_REMEDIATION_PLAN.md, Deferred #26 —
+  // the full cure still rides G-2b promotion). Veto = drop `viewerMayAuthor &&`.
+  const npcAuthoringAllowed = !publicDossier && !playerView && viewerMayAuthor && (!readOnly || (canAuthorNpc && saveId != null));
   const compassSource = hasCompass(aiSettlement)
     ? aiSettlement
     : (publicDossier && hasCompass(rawSettlement) ? rawSettlement : null);

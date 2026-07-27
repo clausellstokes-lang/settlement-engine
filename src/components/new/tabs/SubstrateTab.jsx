@@ -16,7 +16,7 @@
  */
 
 import { useMemo } from 'react';
-import { deriveCausalState } from '../../../domain/causalState.js';
+import { causalBandWord, deriveCausalState } from '../../../domain/causalState.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 
@@ -52,14 +52,23 @@ const BAND_TONE = {
 };
 const BAND_RANK = { collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 };
 
-function BandPill({ band }) {
+/**
+ * `band` is the MODEL band (the machine value, kept on data-band so tests and
+ * tooling still read one vocabulary); `word` is what a human sees. They differ
+ * for the lone lower-is-better variable: criminal_opportunity bands off the
+ * INVERTED score, so maximal crime carries band 'collapsed' and this pill used to
+ * print "COLLAPSED" beside it, which reads as "the crime is gone". causalBandWord
+ * is the function that already existed to fix precisely this, and had no caller.
+ */
+function BandPill({ variable, band }) {
   const tone = BAND_TONE[band] || MUTED;
+  const word = causalBandWord(variable, band);
   return (
     <span data-band={band} style={{
-      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px', 
+      display: 'inline-block', minWidth: 66, textAlign: 'center', padding: '1px 7px',
       fontSize: FS.pico, fontWeight: 800, letterSpacing: '0.04em', textTransform: 'uppercase',
       color: swatch.white, background: tone,
-    }}>{band}</span>
+    }}>{word}</span>
   );
 }
 
@@ -141,7 +150,7 @@ export default function SubstrateTab({ settlement }) {
               padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}`,
             }}>
               <span style={{ flex: 1, fontSize: FS.sm, fontWeight: 600, color: INK }}>{row.label}</span>
-              <BandPill band={row.band} />
+              <BandPill variable={row.key} band={row.band} />
             </div>
           ))}
         </div>

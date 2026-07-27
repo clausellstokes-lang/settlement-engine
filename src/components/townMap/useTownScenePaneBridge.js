@@ -40,6 +40,12 @@ export function useTownScenePaneBridge({
   redoEdits,
 }) {
   const { navigateToEntity } = useDossierEntities();
+  // R-5b (owner queue #17): the portrait's quality CEILING is a device preference,
+  // not settlement state, so it lives in the persisted displayPrefs bag and reaches
+  // the renderer as props from this bridge. That keeps the viewer store-free (its
+  // stated contract) while ending the re-clamp-every-open cost on weak machines.
+  const sceneQualityMode = useStore((state) => state.displayPrefs?.sceneQualityMode ?? null);
+  const setSceneQualityMode = useStore((state) => state.setSceneQualityMode);
   const heraldCampaignId = useStore((state) => (
     authoringSaveId == null
       ? null
@@ -138,6 +144,8 @@ export function useTownScenePaneBridge({
       canRedo: canRedoEdits,
       onUndo: undoEdits,
       onRedo: redoEdits,
+      initialQualityMode: sceneQualityMode,
+      onQualityModeChange: setSceneQualityMode,
     },
   };
 }

@@ -48,18 +48,24 @@ const ALIGNMENT_STYLE = Object.freeze({
   neutral: { color: BAND_COLOR.Strained, glyph: '✦' },   // #8a5e10 (AA-vetted)
 });
 
-/** The bands that mean "this settlement needs a DM's attention". Resilience is
- *  higher-is-better, so a low-resilience band is bad; volatility / externalThreat
- *  / resourcePressure are lower-is-better, so a HIGH band on those is bad. We map
- *  every dimension to a single "worst band" so the sort + dot read one scale. */
+/** The bands that mean "this settlement needs a DM's attention". Every dimension
+ *  is banded on ONE health scale by deriveSystemState (bands.js DIM_POLARITY
+ *  orients the three lower-is-better dims at band time), so "Vulnerable" and
+ *  "Critical" mean the same thing on all four and the sort + dot read one scale. */
 const ATTENTION_BANDS = new Set(['Vulnerable', 'Critical']);
 
 /**
  * The worst (most-attention-needing) health band across the 4 dimensions, with a
  * numeric severity so the "Needs attention" sort can order strained-vs-critical.
- * For lower-is-better dims a HIGH value is the threat; deriveSystemState already
- * bands each dim on its own polarity-naive 0..100 score, so we invert the band for
- * the three "lower is better" dims before ranking.
+ *
+ * NO polarity work happens here, deliberately. This file used to declare a
+ * per-dimension `higherIsBetter` flag, assert in one comment that it inverted the
+ * band before ranking and in the next that no inversion was needed, and do
+ * neither — while deriveSystemState handed it polarity-blind bands. The result:
+ * a calm town and a crisis town returned the BYTE-IDENTICAL pip, so the Library's
+ * "Needs attention" sort had no ordering information at all. The bands arriving
+ * here are now oriented at the source, so ranking them directly is correct, and
+ * the flag that was never read is gone rather than left as a trap.
  *
  * @param {any} settlement
  * @returns {{ band: string, color: string, severity: number, label: string } | null}
@@ -73,28 +79,19 @@ export function healthPip(settlement) {
   }
   if (!systemState) return null;
 
-  // Polarity-aware: resilience is good-when-high; the other three are
-  // bad-when-high. We translate each into a shared "health badness" 0..3 rank so
-  // one dot + one sort key cover the card.
   const dims = [
-    { key: 'resilience', higherIsBetter: true, dim: systemState.resilience },
-    { key: 'volatility', higherIsBetter: false, dim: systemState.volatility },
-    { key: 'externalThreat', higherIsBetter: false, dim: systemState.externalThreat },
-    { key: 'resourcePressure', higherIsBetter: false, dim: systemState.resourcePressure },
+    { key: 'resilience', dim: systemState.resilience },
+    { key: 'volatility', dim: systemState.volatility },
+    { key: 'externalThreat', dim: systemState.externalThreat },
+    { key: 'resourcePressure', dim: systemState.resourcePressure },
   ];
 
-  // Rank: Stable(0) < Strained(1) < Vulnerable(2) < Critical(3). For a
-  // lower-is-better dim, a Stable band actually means LOW pressure = good, so the
-  // band already reads correctly off bandFor (a low score → Critical band there
-  // would mean "low pressure" which is GOOD). To avoid double-negation we instead
-  // read each dim's own band but FLIP the badness for lower-is-better dims.
+  // Rank: Stable(0) < Strained(1) < Vulnerable(2) < Critical(3) — badness, on the
+  // one health scale every dimension is already banded to.
   const BAND_RANK = { Stable: 0, Strained: 1, Vulnerable: 2, Critical: 3 };
   let worst = null;
   for (const d of dims) {
     if (!d.dim || typeof d.dim.band !== 'string') continue;
-    // deriveSystemState bands resilience so high score = Stable (good). For the
-    // lower-is-better dims, a high score = Critical band already means "high
-    // pressure = bad", so the band is the correct badness for ALL four dims.
     const rank = BAND_RANK[d.dim.band] ?? 1;
     if (!worst || rank > worst.rank) {
       worst = { rank, band: d.dim.band, key: d.key };

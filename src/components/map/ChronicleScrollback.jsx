@@ -22,6 +22,7 @@ import { BookOpen, ChevronLeft, ChevronRight, MapPin, ScrollText, Sparkles } fro
 import { useStore } from '../../store/index.js';
 import {
   chronicleTimeline, hasTimeline, tickCausalDiff, } from '../../domain/display/chronicleTimeline.js';
+import { causalBandWord } from '../../domain/causalState.js';
 import { buildChronicleGrounding } from '../../domain/worldPulse/chronicle.js';
 import { tickCalendarDetailLabel } from '../../domain/display/humanizeEngineTokens.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
@@ -145,8 +146,12 @@ function DiffRow({ diff }) {
     <li style={{ fontSize: FS.xxs, color: BODY, marginBottom: 3, lineHeight: 1.4, listStyle: 'none' }}>
       <span style={{ color, fontWeight: 900 }}>{up ? '▲' : '▼'}</span>{' '}
       <strong style={{ color: INK }}>{human(diff.variable)}</strong>{' '}
+      {/* Polarity-correct words, not the raw model bands: a lower-is-better
+          variable bands off the inverted score, so the raw pair prints backwards
+          (crime at its worst reads "collapsed"). causalBandWord is the single
+          re-phrasing source; the other fifteen variables are unchanged. */}
       <span style={{ color: MUTED }}>
-        {diff.bandBefore} → {diff.bandAfter}
+        {causalBandWord(diff.variable, diff.bandBefore).toLowerCase()} → {causalBandWord(diff.variable, diff.bandAfter).toLowerCase()}
       </span>
       {diff.explanation && <span style={{ color: SECOND }}> ({diff.explanation})</span>}
     </li>

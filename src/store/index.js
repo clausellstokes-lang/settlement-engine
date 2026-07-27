@@ -20,6 +20,8 @@
  *   instantWorld      – the instant-world (one-click realm) flow state
  *   onboarding        – first-run coaching + nudge state
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
+ *   displayPrefs      – PERSISTED device-scoped display preferences (uiSlice's
+ *                       persisted counterpart; see that slice's header)
  *   accountImport     – the "Import my data" write pipeline (batch + rollback)
  *   fogEdit           – map fog-of-war editing state
  *
@@ -53,6 +55,7 @@ import { createCorpusFactorySlice } from './corpusFactorySlice.js';
 import { createInstantWorldSlice }  from './instantWorldSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
+import { createDisplayPrefsSlice }  from './displayPrefsSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
 import { createFogEditSlice }       from './fogEditSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
@@ -82,6 +85,7 @@ export const useStore = create(
           ...createInstantWorldSlice(set, get),
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),
+          ...createDisplayPrefsSlice(set, get),
           ...createAccountImportSlice(set, get),
           ...createFogEditSlice(set, get),
         })),
@@ -116,6 +120,13 @@ export const useStore = create(
             categoryToggles:    state.categoryToggles,
             goodsToggles:       state.goodsToggles,
             servicesToggles:    state.servicesToggles,
+            // R-5b (owner queue #17): device-scoped DISPLAY preferences — the 3D
+            // portrait's quality ceiling today. Persistence CONTENT, not a schema
+            // change: an additive top-level key whose absence rehydrates to the
+            // slice defaults (mergePersistedState deep-merges it over them), so no
+            // persist `version` bump and no migrate branch is owed. Deliberately
+            // NOT uiSlice's userPrefs, which is the session-only bag by contract.
+            displayPrefs:       state.displayPrefs,
           }),
           // On rehydrate: always start the Create page at the mode picker.
           // (Also wipes any stale wizardMode persisted by older builds.) AND heal

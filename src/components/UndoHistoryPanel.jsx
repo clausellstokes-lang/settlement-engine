@@ -27,11 +27,15 @@
  * body. No covert field is read here.
  *
  * Session-scoped + in-memory: a reload clears both stores, so an empty panel
- * after a reload is correct (the empty copy says so), not a lost history.
+ * after a reload is correct (the empty copy says so), not a lost history. ONE
+ * exception since R-5b: an advance still PAUSED for the DM's verdicts parks its
+ * pre-interval return point on the campaign record, which does survive a reload,
+ * so a reloaded paused campaign shows that single row and the copy says why.
  */
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
+import { parkedIntervalUndoSnapshot } from '../store/campaignSliceShared.js';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import IconButton from './primitives/IconButton.jsx';
 import Button from './primitives/Button.jsx';
@@ -72,12 +76,24 @@ function pointLabel(entry) {
 /** Merge one campaign's advance + proposal snapshots into a single newest-first
  *  row list. Total order key: advance i (stack order) → (i+1, 0); a proposal
  *  stamped advanceDepth k sits after advance k and before advance k+1 → (k, 1),
- *  push order breaking ties within the ring. */
-function mergedRows(advStack, propStack, campaignId) {
+ *  push order breaking ties within the ring.
+ *
+ *  R-5b: `parkedAdvance` is the pre-INTERVAL snapshot a PAUSED advance parked on
+ *  its cursor. It is used ONLY when the session advance stack holds nothing for
+ *  this campaign — the reload-into-paused case, where undoLastPulse restores from
+ *  the cursor. Listing it keeps this panel and the toolbar chip telling the same
+ *  story; an empty panel beside an enabled "Undo Advance" chip would be the worse
+ *  lie. In-session it is a duplicate of the stack's newest entry, so it is
+ *  deliberately NOT appended then. */
+function mergedRows(advStack, propStack, campaignId, parkedAdvance) {
   const mine = (stack) => (stack || [])
     .filter((e) => e && String(e.campaignId) === String(campaignId));
+  const advances = mine(advStack);
+  const rowsFromAdvances = advances.length === 0 && parkedAdvance
+    ? [parkedAdvance]
+    : advances;
   const items = [
-    ...mine(advStack).map((entry, i) => ({ entry, kind: 'advance', key: [i + 1, 0, i] })),
+    ...rowsFromAdvances.map((entry, i) => ({ entry, kind: 'advance', key: [i + 1, 0, i] })),
     ...mine(propStack).map((entry, j) => ({ entry, kind: 'proposal', key: [entry.advanceDepth ?? 0, 1, j] })),
   ];
   items.sort((a, b) => (b.key[0] - a.key[0]) || (b.key[1] - a.key[1]) || (b.key[2] - a.key[2]));
@@ -88,13 +104,24 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
   const dialogRef = useDialogFocusTrap(true, onClose);
   const advStack = useStore((s) => s.pulseUndoStack);
   const propStack = useStore((s) => s.proposalUndoStack);
+  // Subscribed by a STABLE path into stored state (the parked snapshot object is
+  // written once at the pause and never re-created per render), so this selector
+  // cannot loop the store's snapshot check the way a derived array would.
+  const parkedAdvance = useStore((s) => parkedIntervalUndoSnapshot(
+    (s.campaigns || []).find((c) => c && String(c.id) === String(campaignId)),
+  ));
   const undoLastPulse = useStore((s) => s.undoLastPulse);
   const undoLastProposalApply = useStore((s) => s.undoLastProposalApply);
   const [busy, setBusy] = useState(false);
 
   // Both stores merged, most recent first. Row index k therefore needs one
   // matching-verb pop per row 0..k to return to it.
-  const rows = mergedRows(advStack, propStack, campaignId);
+  const rows = mergedRows(advStack, propStack, campaignId, parkedAdvance);
+  // True only on the reload-into-paused path (a parked snapshot standing in for an
+  // empty session stack), which is the one case where a return point outlives the
+  // session and the copy below must say so instead of "this session only".
+  const parkedRowShown = Boolean(parkedAdvance)
+    && !(advStack || []).some((e) => e && String(e.campaignId) === String(campaignId));
 
   const restoreTo = async (k) => {
     if (busy) return;
@@ -156,12 +183,16 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
           {rows.length === 0 ? (
             <EmptyState
               heading="Nothing to undo yet."
-              body="Advance the realm or apply a proposal and each step is kept here for the session, so you can return to any point before it. A page reload makes the changes permanent."
+              body="Advance the realm or apply a proposal and each step is kept here for the session, so you can return to any point before it. A page reload makes the changes permanent, except for an advance still paused for your verdicts, which keeps its return point."
             />
           ) : (
             <>
               <p style={{ margin: `0 0 ${SP.sm}px`, color: MUTED, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
-                Return the realm to any point below. Later steps are undone with it. Kept for this session only.
+                Return the realm to any point below. Later steps are undone with it.
+                {' '}
+                {parkedRowShown
+                  ? 'This advance is paused for your verdicts, so its return point survived the reload.'
+                  : 'Kept for this session only.'}
               </p>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column' }}>
                 {rows.map(({ entry, kind }, k) => (

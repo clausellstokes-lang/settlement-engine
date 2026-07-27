@@ -19,6 +19,7 @@
  * @returns {any} the merged state the store adopts on rehydrate
  */
 import { DEFAULT_CONFIG } from './configSlice.js';
+import { DEFAULT_DISPLAY_PREFS } from './displayPrefsSlice.js';
 import {
   inferLegacyUserContentTunableIntent,
   normalizeUserContentTunableIntent,
@@ -47,5 +48,10 @@ export function mergePersistedState(persistedState, currentState) {
     categoryToggles:    { ...(current.categoryToggles || {}),    ...(persisted.categoryToggles || {}) },
     goodsToggles:       { ...(current.goodsToggles || {}),       ...(persisted.goodsToggles || {}) },
     servicesToggles:    { ...(current.servicesToggles || {}),    ...(persisted.servicesToggles || {}) },
+    // Same cohort-fork cure as `config`, for the persisted display-preference bag
+    // (R-5b): a blob written before a preference existed — including one written
+    // before the bag itself existed — backfills to the shipped default instead of
+    // reading undefined at the consumer.
+    displayPrefs:       { ...DEFAULT_DISPLAY_PREFS, ...(persisted.displayPrefs || {}) },
   };
 }

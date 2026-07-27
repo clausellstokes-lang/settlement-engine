@@ -22,7 +22,7 @@
  * with neutral defaults. Never throws.
  */
 
-import { bandFor, clamp01 } from './bands.js';
+import { bandForDimension, clamp01 } from './bands.js';
 // Import the posture LEAF, not dossierViewModel — this module is EAGER
 // (store → event pipeline), and the full display model would drag ~35 kB
 // (dossierViewModel + magicProfile) into the first-paint entry closure
@@ -174,7 +174,7 @@ function deriveResilience(s) {
     risks.push(`${impaired} impaired institution${impaired === 1 ? '' : 's'}`);
   }
 
-  return finalize(value, drivers, risks);
+  return finalize('resilience', value, drivers, risks);
 }
 
 // ── Volatility ─────────────────────────────────────────────────────────────
@@ -252,7 +252,7 @@ function deriveVolatility(s) {
     risks.push(`${stresses.length} active stressors`);
   }
 
-  return finalize(value, drivers, risks);
+  return finalize('volatility', value, drivers, risks);
 }
 
 // ── External Threat ────────────────────────────────────────────────────────
@@ -304,7 +304,7 @@ function deriveExternalThreat(s) {
     risks.push(`Active threat: ${threatStresses.map(t => t.name || t.type).join(', ')}`);
   }
 
-  return finalize(value, drivers, risks);
+  return finalize('externalThreat', value, drivers, risks);
 }
 
 // ── Resource Pressure ──────────────────────────────────────────────────────
@@ -352,7 +352,7 @@ function deriveResourcePressure(s) {
     drivers.push(`${imports} imports via ${tradeAccess}`);
   }
 
-  return finalize(value, drivers, risks);
+  return finalize('resourcePressure', value, drivers, risks);
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -386,16 +386,22 @@ function countByStatus(items, statuses, { excludeCovertOnly = false } = {}) {
  * label and clamped value. Centralizing this means every dimension comes
  * out of derivation in the same shape — no surprises for the UI consumer.
  *
+ * The band is ORIENTED by the dimension's polarity (bands.js DIM_POLARITY).
+ * Three of these four dimensions are lower-is-better; banding them through the
+ * bare higher-is-better ladder printed the opposite of the truth on every
+ * surface that reads `dim.band`. The `value` is unchanged — only the word.
+ *
+ * @param {string} key  the dimension key, which carries its polarity
  * @param {number} rawValue
  * @param {string[]} drivers
  * @param {string[]} risks
  * @returns {StateDimension}
  */
-function finalize(rawValue, drivers, risks) {
+function finalize(key, rawValue, drivers, risks) {
   const value = Math.round(clamp01(rawValue));
   return {
     value,
-    band: bandFor(value),
+    band: bandForDimension(key, value),
     drivers: drivers.length ? drivers : ['No notable factors'],
     risks,
   };

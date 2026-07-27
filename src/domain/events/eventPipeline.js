@@ -39,7 +39,7 @@ import { mutateSettlementChecked } from './mutate.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { generateFactionResponses } from './factionResponses.js';
-import { clamp01, bandFor } from '../state/bands.js';
+import { clamp01, bandForDimension } from '../state/bands.js';
 import { deriveCausalState, compareCausalState } from '../causalState.js';
 import { recalculateFactionRelationships } from '../factionRelationshipUpdate.js';
 
@@ -98,8 +98,12 @@ function applyAuthoredStateDeltas(state, deltas) {
     const change = deltas?.[key] ?? 0;
     const value = Math.round(clamp01((dim?.value ?? 50) + change));
     next[key] = {
+      // Polarity-ORIENTED, exactly as deriveSystemState's finalize() bands: this
+      // authored layer is what PERSISTS as campaignState.systemState, so banding
+      // it through the bare higher-is-better ladder wrote the inverted word into
+      // the save for the three lower-is-better dimensions.
       value,
-      band: bandFor(value),
+      band: bandForDimension(key, value),
       drivers: dim?.drivers || [],
       risks:   dim?.risks || [],
     };

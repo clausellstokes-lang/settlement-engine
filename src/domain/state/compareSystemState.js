@@ -14,7 +14,7 @@
  * narrative summary the user reads.
  */
 
-import { severityFor, bandFor } from './bands.js';
+import { severityFor, bandForDimension, dimensionPolarity } from './bands.js';
 
 /** @typedef {import('../types.js').SystemState} SystemState */
 /** @typedef {import('../types.js').Delta} Delta */
@@ -28,18 +28,13 @@ const LABEL = {
   resourcePressure: 'Resource Pressure',
 };
 
-/**
- * For each dimension, polarity describes which direction is "bad."
- * Resilience drops are bad (less ability to absorb shocks). Volatility
- * rises are bad (more conflict pressure). This drives the severity
- * wording and the +/- arrow choice in the UI.
- */
-const POLARITY = {
-  resilience:       'higher_is_better',
-  volatility:       'lower_is_better',
-  externalThreat:   'lower_is_better',
-  resourcePressure: 'lower_is_better',
-};
+// Polarity — which direction is "bad" per dimension — is read from bands.js
+// (DIM_POLARITY), the SINGLE source. It used to be re-declared here, and the
+// duplicate was the tell for the defect this file carried: `better` below was
+// polarity-correct while the band pair beside it was not, so a volatility rise
+// from 70 to 80 rendered the self-contradicting sentence "Volatility rose
+// noticeably (Strained → Stable) — pressure increased". Both halves now read
+// the same source.
 
 /**
  * @param {SystemState} before
@@ -79,7 +74,7 @@ export function compareSystemState(before, after) {
  */
 function explain(key, before, after, change) {
   const label  = LABEL[key];
-  const polar  = POLARITY[key];
+  const polar  = dimensionPolarity(key);
   const dir    = change > 0 ? 'rose' : 'fell';
   const mag    = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
   const better = (polar === 'higher_is_better' && change > 0) ||
@@ -87,9 +82,9 @@ function explain(key, before, after, change) {
 
   // Band crossings deserve their own callout — moving from Strained to
   // Vulnerable is a real qualitative shift even with the same numeric
-  // delta.
-  const bandBefore = bandFor(before);
-  const bandAfter  = bandFor(after);
+  // delta. Oriented by polarity, so the band pair and `better` agree.
+  const bandBefore = bandForDimension(key, before);
+  const bandAfter  = bandForDimension(key, after);
   if (bandBefore !== bandAfter) {
     return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
   }

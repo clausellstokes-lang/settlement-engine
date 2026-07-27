@@ -33,14 +33,21 @@ describe('compendium safety + defense — bound to their producers', () => {
     }
   });
 
-  test('the Defense Readiness badges are the real defenseDisplay bands', () => {
+  // R-5b item #20 re-pointed this scan: the four badge words moved out of
+  // defenseDisplay.js into display/defenseScoreBands.js, THE ONE ladder every
+  // score surface (OverviewTab, DefenseTab, SummaryTab, the PDF readiness rows)
+  // now reads. The contract is unchanged — the compendium ladder must still name
+  // exactly what the producer stamps — only the producer's address moved.
+  test('the Defense Readiness badges are the real defenseScoreBands bands', () => {
     const ladder = CD.bandLadders.find((l) => l.id === 'defense-readiness');
     expect(ladder, 'defense-readiness ladder present').toBeTruthy();
     expect(ladder.levels.map((x) => x.name)).toEqual(['Strong', 'Adequate', 'Weak', 'Critical']);
-    const src = read('src/domain/display/defenseDisplay.js');
+    const src = read('src/domain/display/defenseScoreBands.js');
     for (const { name } of ladder.levels) {
-      expect(src.includes(`'${name.toUpperCase()}'`), `defenseDisplay no longer stamps badge "${name.toUpperCase()}"`).toBe(true);
+      expect(src.includes(`'${name.toUpperCase()}'`), `defenseScoreBands no longer stamps badge "${name.toUpperCase()}"`).toBe(true);
     }
+    // ...and defenseDisplay must reach it through the shared leaf, never a twin.
+    expect(read('src/domain/display/defenseDisplay.js')).toContain("from './defenseScoreBands.js'");
   });
 
   test('the Stress tab renders both ladders', () => {

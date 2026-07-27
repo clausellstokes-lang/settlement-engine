@@ -1210,6 +1210,19 @@ const DERIVERS = Object.freeze({
 });
 
 /**
+ * Orient a raw 0-100 variable score onto the BAND axis. The band ladder is
+ * higher-is-better; a lower_is_better variable therefore walks it from the other
+ * end. The single source for that flip, so finalizeVariable and every fallback
+ * band computed elsewhere in this file cannot drift apart.
+ * @param {string} name
+ * @param {number} score
+ * @returns {number}
+ */
+function orientCausalScore(name, score) {
+  return variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
+}
+
+/**
  * @param {string} name
  * @param {number} raw
  * @param {CausalContributor[]} contributors
@@ -1225,7 +1238,7 @@ function finalizeVariable(name, raw, contributors) {
   // as a problem band (strained/critical), not "surplus"/Abundant. The raw score
   // is kept as-is — pressureModel and the delta renderers handle polarity via
   // variablePolarity() themselves; only the qualitative band flips here.
-  const banded = variablePolarity(name) === 'lower_is_better' ? 100 - score : score;
+  const banded = orientCausalScore(name, score);
   return {
     variable: name,
     score,
@@ -1453,8 +1466,18 @@ function explainCausalDelta(variable, before, after, change, bandBefore, bandAft
   const mag = Math.abs(change) >= 15 ? 'sharply' : Math.abs(change) >= 7 ? 'noticeably' : 'slightly';
   const better = (polar === 'higher_is_better' && change > 0) ||
                  (polar === 'lower_is_better'  && change < 0);
+  // Band WORDS, not raw bands: a lower_is_better variable's band is computed off
+  // the inverted score, so the raw pair reads backwards in a sentence ("Criminal
+  // opportunity rose sharply (adequate → collapsed)" says crime collapsed while
+  // it in fact became rampant). causalBandWord is the one place that re-phrasing
+  // lives; the other 15 variables are byte-unchanged.
+  // Lower-cased for sentence context: the raw band vocabulary is already
+  // lower-case, so this only touches the three problem terms and leaves the
+  // fifteen higher-is-better variables byte-identical.
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '. Pressure increased'}`;
+    const wordBefore = causalBandWord(variable, bandBefore).toLowerCase();
+    const wordAfter  = causalBandWord(variable, bandAfter).toLowerCase();
+    return `${label} ${dir} ${mag} (${wordBefore} → ${wordAfter})${better ? '' : '. Pressure increased'}`;
   }
   return `${label} ${dir} ${mag}${better ? '' : '. Pressure increased'}`;
 }
@@ -1481,8 +1504,11 @@ export function compareCausalState(before, after) {
     if (typeof b !== 'number' || typeof a !== 'number') continue;
     const change = a - b;
     if (change === 0) continue;
-    const bandBefore = before.bands?.[name] || causalBand(b);
-    const bandAfter  = after.bands?.[name]  || causalBand(a);
+    // The fallbacks orient the score exactly as finalizeVariable does; banding a
+    // lower_is_better score raw here would have produced the inverse of the band
+    // the model itself carries whenever a snapshot arrived without `bands`.
+    const bandBefore = before.bands?.[name] || causalBand(orientCausalScore(name, b));
+    const bandAfter  = after.bands?.[name]  || causalBand(orientCausalScore(name, a));
     out.push({
       variable: name,
       before: b,

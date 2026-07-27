@@ -26,6 +26,7 @@
  */
 
 import { useState } from 'react';
+import { causalBandWord } from '../../domain/causalState.js';
 import { FS, swatch } from '../theme.js';
 
 const COLORS = Object.freeze({
@@ -138,12 +139,21 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
           />
           {/* Ripple entries (compareCausalState) carry bandBefore/bandAfter;
               capacity entries (compareCapacityStates) nest the band under
-              before/after objects. Fall back across spellings either way. */}
+              before/after objects. Fall back across spellings either way.
+              The ripple bands print through causalBandWord: a lower-is-better
+              variable bands off the INVERTED score, so its raw band says the
+              opposite of what happened (crime at its worst reads "collapsed").
+              Only that one variable's words move; the other fifteen are
+              byte-identical, and the capacity ladder below is a different
+              vocabulary and stays raw. */}
           <Section title="Ripple effects"
             items={delta.rippleEffects}
             color={COLORS.ripple}
             describe={d => d.variable || d.label}
-            detail={d => formatBandChange(d.bandBefore ?? d.beforeBand, d.bandAfter ?? d.afterBand)}
+            detail={d => formatBandChange(
+              rippleWord(d, d.bandBefore ?? d.beforeBand),
+              rippleWord(d, d.bandAfter ?? d.afterBand),
+            )}
           />
           <Section title="Capacity shifts"
             items={delta.capacityShifts}
@@ -271,6 +281,17 @@ function summarizeCounts(delta) {
   if (delta.removedEntities?.length)    parts.push(`−${delta.removedEntities.length}`);
   if (delta.brokenDependencies?.length) parts.push(`${delta.brokenDependencies.length} broken`);
   return parts.join(' · ');
+}
+
+/**
+ * Display word for one side of a causal ripple's band transition. Falls back to
+ * the raw band when the entry carries no variable name (a capacity or legacy
+ * entry routed here by the spelling fallbacks above).
+ * @param {any} entry @param {string|undefined} band
+ */
+function rippleWord(entry, band) {
+  if (!band || !entry?.variable) return band;
+  return causalBandWord(entry.variable, band).toLowerCase();
 }
 
 function formatBandChange(before, after) {

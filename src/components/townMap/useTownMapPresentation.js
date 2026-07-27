@@ -4,8 +4,15 @@
  * This hook is the product seam between canonical settlement truth and its
  * replaceable views. It authorizes the audience before deriving a model,
  * manages device-local view memory, gates authoring, and supplies one durable
- * map-edit writer. WebGL quality/camera state deliberately lives below this
- * seam because none of it belongs in settlement persistence.
+ * map-edit writer. WebGL camera state deliberately lives below this seam because
+ * none of it belongs in settlement persistence.
+ *
+ * The quality CEILING is the one calibrated exception (R-5b, owner queue #17): it
+ * still does not belong in settlement persistence, and it is not written here — it
+ * is a DEVICE preference in the store's persisted `displayPrefs` bag, threaded to
+ * the renderer as props by useTownScenePaneBridge. The rule the original sentence
+ * protects is unchanged: nothing about how a machine renders ever reaches a save,
+ * a campaign record, or the generator.
  */
 
 import {

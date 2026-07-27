@@ -93,6 +93,7 @@ import {
 import { mergePersistedState } from '../../src/store/persistMerge.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { normalizeServicesToggles } from '../../src/store/toggleSlice.js';
+import { createDisplayPrefsSlice, DEFAULT_DISPLAY_PREFS } from '../../src/store/displayPrefsSlice.js';
 import { deepClone } from '../../src/domain/clone.js';
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -102,10 +103,22 @@ import { deepClone } from '../../src/domain/clone.js';
 // Frozen 2026-07-21, hand-audited against src. SHRINK/EDIT ONLY WITH A POLICY.
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** Substrate A — zustand persist partialize keys (src/store/index.js). */
+/** Substrate A — zustand persist partialize keys (src/store/index.js).
+ *
+ *  `displayPrefs` joined this list in R-5b (owner queue #17 / atlas
+ *  presentation-scene gap 11) with a written reason, per the header's rule 3. It
+ *  is NOT a family moved out of SESSION_ONLY_FAMILIES: the 3D portrait's quality
+ *  ceiling had no store home at all before, only component useState, so nothing
+ *  that was registered as deliberately-session-only became persisted. The reason
+ *  it may persist: it is a DEVICE preference (how much detail this machine is
+ *  allowed to render), never world state — no domain module reads it, it is
+ *  absent from `config` so it cannot reach the generator, and it is covered by
+ *  mergePersistedState so a returning user missing a later-added key backfills to
+ *  the shipped default instead of forking shapes. */
 const ZUSTAND_PERSIST_KEYS = Object.freeze([
   'config', 'configExplicitFields',
   'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
+  'displayPrefs',
 ]);
 
 /**
@@ -279,6 +292,18 @@ const stubSlice = () => ({
   canonizedAt: null,
   lastExportAt: null,
 });
+
+/** The settings substrate composed alone (the display-preference family needs no
+ *  campaign machinery). Mirrors makeStore's composition idiom. */
+function makeSettingsStore() {
+  return create(immer((...a) => ({ ...createDisplayPrefsSlice(...a) })));
+}
+
+/** The REAL partialize, derived from the registry the source scan above proves is
+ *  identical to src/store/index.js — so this cannot drift from what ships. */
+function partializeOf(state) {
+  return Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, state[k]]));
+}
 
 function makeStore() {
   return create(immer((...a) => ({
@@ -730,6 +755,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     config: { ...DEFAULT_CONFIG },
     configExplicitFields: {},
     institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+    displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
     someSliceMethod: () => {},
   });
 
@@ -739,10 +765,45 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       configExplicitFields: { priorityEconomy: true },
       institutionToggles: { temple: true }, categoryToggles: { economy: false },
       goodsToggles: { grain: true }, servicesToggles: { svc_smith: true },
+      displayPrefs: { sceneQualityMode: 'low' },
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
     const rePartialized = Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, merged[k]]));
     expectByteEqual(rePartialized, blob);
+  });
+
+  // ── R-5b: the display-preference family, both directions ───────────────────
+  // The whole point of owner queue #17 is that a clamped ceiling SURVIVES; the
+  // whole point of it being safe is that its ABSENCE is indistinguishable from a
+  // fresh install. Both are pinned through the REAL partialize + merge pair.
+
+  test('a set quality ceiling survives the persist → rehydrate round trip', () => {
+    const store = makeSettingsStore();
+    store.getState().setSceneQualityMode('low');
+    // The persist hop, exactly as the store performs it: partialize → JSON → merge.
+    const blob = JSON.parse(JSON.stringify(partializeOf(store.getState())));
+    expect(blob.displayPrefs).toEqual({ sceneQualityMode: 'low' });
+    const merged = mergePersistedState(blob, currentStub());
+    expect(merged.displayPrefs.sceneQualityMode).toBe('low');
+  });
+
+  test('a blob with NO displayPrefs (every save written before R-5b) rehydrates to the default', () => {
+    const legacy = { config: { ...DEFAULT_CONFIG } };
+    const merged = mergePersistedState(legacy, currentStub());
+    expect(merged.displayPrefs).toEqual({ ...DEFAULT_DISPLAY_PREFS });
+    expect(merged.displayPrefs.sceneQualityMode).toBe('auto');
+    // And a bag present but missing a future key still backfills that key, which
+    // is the cohort-fork cure this family inherited from `config`.
+    const partial = mergePersistedState({ displayPrefs: {} }, currentStub());
+    expect(partial.displayPrefs.sceneQualityMode).toBe('auto');
+  });
+
+  test('the setter refuses a non-string rather than persisting junk', () => {
+    const store = makeSettingsStore();
+    store.getState().setSceneQualityMode(null);
+    expect(store.getState().displayPrefs.sceneQualityMode).toBe('auto');
+    store.getState().setSceneQualityMode(7);
+    expect(store.getState().displayPrefs.sceneQualityMode).toBe('auto');
   });
 
   test('a legacy blob missing a config key backfills the default instead of forking shapes', () => {

@@ -189,4 +189,43 @@ describe('UndoHistoryPanel — the visible walk-back', () => {
     // focus never walks out from under aria-modal.
     expect(document.activeElement).toBe(close);
   });
+
+  // ── R-5b: the reload-into-paused row ───────────────────────────────────────
+  // A paused advance parks its pre-interval return point on the campaign record,
+  // so it OUTLIVES the session the toolbar chip is armed from. The panel has to
+  // show that one row, or the DM sees an enabled "Undo Advance" beside a panel
+  // that says there is nothing to undo.
+  const parkedCampaign = (campaignId, year, interval) => ({
+    id: campaignId,
+    worldState: {
+      pausedAdvance: { interval, preIntervalUndo: entry(campaignId, year, interval) },
+    },
+  });
+
+  it('after a reload into a paused advance, the parked return point is listed and the copy says it survived', () => {
+    mockState.campaigns = [parkedCampaign('c1', 6, 'one_year')];
+    render(<UndoHistoryPanel campaignId="c1" onClose={() => {}} />);
+    expect(screen.getAllByRole('button', { name: 'Return here' })).toHaveLength(1);
+    expect(screen.getByText('Year 6, Spring')).toBeTruthy();
+    expect(screen.getByText(/its return point survived the reload/)).toBeTruthy();
+    // Not the session-only line, which would now be false for this row.
+    expect(screen.queryByText(/Kept for this session only/)).toBeNull();
+  });
+
+  it('IN SESSION the parked copy never doubles the row it duplicates', () => {
+    // Same campaign, same advance: the session stack already holds the snapshot.
+    mockState.pulseUndoStack = [entry('c1', 6, 'one_year')];
+    mockState.campaigns = [parkedCampaign('c1', 6, 'one_year')];
+    render(<UndoHistoryPanel campaignId="c1" onClose={() => {}} />);
+    expect(screen.getAllByRole('button', { name: 'Return here' })).toHaveLength(1);
+    // And the session-only line is back, because this return point IS session-scoped.
+    expect(screen.getByText(/Kept for this session only/)).toBeTruthy();
+  });
+
+  it('a parked cursor with NO snapshot (a save written before R-5b) lists nothing', () => {
+    mockState.campaigns = [{ id: 'c1', worldState: { pausedAdvance: { interval: 'one_year' } } }];
+    render(<UndoHistoryPanel campaignId="c1" onClose={() => {}} />);
+    expect(screen.queryAllByRole('button', { name: 'Return here' })).toHaveLength(0);
+    expect(screen.getByText('Nothing to undo yet.')).toBeTruthy();
+  });
 });

@@ -63,8 +63,9 @@ application/ Application-command lifecycle: admitted envelopes, owner/target/
              revision context, legal command specifications, replay-safe receipts,
              and bounded server-authoritative command adapters. This is a
              vertical migration seam, not a second store or a universal event bus.
-store/       Zustand slices (18) — the single client state container, incl. the
-             campaign world-pulse, regional, and account-import slices.
+store/       Zustand slices (19) — the single client state container, incl. the
+             campaign world-pulse, regional, account-import, and persisted
+             display-preference slices.
 components/  React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
@@ -186,10 +187,10 @@ Its machine-readable evidence and promotion rules live in
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 18 slices, with `immer + persist +
+One Zustand store composed from 19 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
-only lightweight, user-owned data (config + toggles)** — never the large
-generated settlement object. `onRehydrate` resets the wizard to the mode picker.
+only lightweight, user-owned data (config + toggles + device display
+preferences)** — never the large generated settlement object. `onRehydrate` resets the wizard to the mode picker.
 
 `authIntents` (registered here) powers "save-as-signup": an anonymous action is
 queued, then replayed with real credentials after the user authenticates.
@@ -256,7 +257,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (190) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (192) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —

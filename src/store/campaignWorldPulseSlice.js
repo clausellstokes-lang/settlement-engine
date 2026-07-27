@@ -27,6 +27,7 @@ import { worldProgressionOf, advancesOnOpen } from '../domain/worldPulse/simulat
 import {
   findActiveCampaign,
   captureCampaignSession, isCurrentCampaignSession,
+  parkedIntervalUndoSnapshot,
 } from './campaignSliceShared.js';
 // The advance/resume BODY (with its advance-only fingerprint/analytics/consent
 // imports) lives in the lazily-loaded ./campaignAdvanceSession.js so it stays out
@@ -808,9 +809,18 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   },
 
   /** Campaign-clock (Phase C2): is there a pre-pulse snapshot to undo for this
-   *  campaign this session? Drives the "Undo last advance" affordance. */
+   *  campaign? Drives the "Undo last advance" affordance.
+   *
+   *  Two sources, in precedence order. (1) The session pulseUndoStack — every
+   *  advance this session pushed one, and popping it keeps the multi-step
+   *  walk-back working. (2) R-5b: the pre-INTERVAL snapshot parked on a PAUSED
+   *  advance's cursor, which survives a reload with the campaign record. Source 2
+   *  is what makes a reload-into-paused interval genuinely undoable instead of
+   *  honestly-but-uselessly refusing; it can only be reached when source 1 is
+   *  empty for this campaign, so an in-session advance behaves exactly as before. */
   canUndoLastPulse: (campaignId) =>
-    (get().pulseUndoStack || []).some(s => s.campaignId === campaignId),
+    (get().pulseUndoStack || []).some(s => s.campaignId === campaignId)
+    || Boolean(parkedIntervalUndoSnapshot(findActiveCampaign(get().campaigns, campaignId))),
 
   /**
    * Campaign-clock (Phase C2): reverse the most recent world-pulse advance for

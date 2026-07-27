@@ -20,9 +20,9 @@
  *
  * The Vulnerabilities section renders structuralViolations — one of the five
  * generation-frozen G5 records (SETTLEMENT_CAPABILITY_ATLAS, owner-queue
- * #28) — so its title and empty state carry the survey vintage too. Whether
- * the G5 five get FROZEN_VS_LIVE manifest rows is that open owner ruling,
- * deliberately NOT decided here.
+ * #28) — so its title and empty state carry the survey vintage too. [RULED —
+ * owner 2026-07-27, landed Wave R-5b] the G5 five ARE now declared mode
+ * 'snapshot' rows in FROZEN_VS_LIVE, walked by tests/joins/fieldManifest.test.js.
  *
  * OWNERSHIP NOTE (Wave R-0 verifier finding #1): the NPC pin-toggle tooltip
  * strings in src/components/new/npcComponents.jsx are deliberately NOT pinned

@@ -34,6 +34,7 @@ import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domai
 import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import {
   cloneJson, cacheCampaignState, flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
+  parkedIntervalUndoSnapshot,
 } from './campaignSliceShared.js';
 import {
   capturePulseSnapshot, applyWorldPulseResultToState, drainCampaignQueueIntoState,
@@ -100,11 +101,35 @@ function ensureCampaignContentCutoff(get, campaignId) {
  * park an identically-shaped cursor. The PRE-tick fields are already plain deep
  * clones (threaded off the sim inputs through the kernel), so they are parked by
  * reference — a second clone would only re-copy the whole pre-tick world for no gain.
+ * THE CURSOR SHAPE (persisted inside campaign.worldState.pausedAdvance, so every
+ * field here rides the campaign record into localStorage + the cloud snapshot):
+ *   interval, ticksTotal, ticksDone, atTick, resumeTick, autoResolve, startedAt,
+ *   now, preIntervalHistoryLen, pendingMajors — the resume orchestrator's inputs.
+ *   preSnapshot { worldState, regionalGraph, wizardNews, saves } — the PRE-TICK
+ *     clones the PAUSED TICK re-derives from. These describe a mid-interval
+ *     position, NOT a committed world: restoring them would mint a state the
+ *     campaign was never in, so they are resume fuel only, never undo fuel.
+ *   preIntervalUndo — OPTIONAL. The PRE-INTERVAL pulse-undo snapshot
+ *     (capturePulseSnapshot output: campaign world + every member save + the
+ *     live active view) that the advance also pushed onto the session
+ *     pulseUndoStack. Parked here so a RELOAD into a paused interval can still
+ *     arm Undo: the session stack is gone after a reload while this cursor
+ *     rehydrates with the campaign. ADDITIVE + ABSENT-TOLERANT — a cursor
+ *     written by an older build simply omits the key, and every reader treats
+ *     its absence as "no parked undo", i.e. exactly the pre-change behaviour.
+ *     No migration: the key materializes on the next pause and disappears with
+ *     the cursor when the interval finishes or is undone.
+ *
  * @param {any} result - a { status:'paused', … } interval result.
  * @param {string} now - the ORIGINAL advance wall-clock, re-threaded so a resume
  *   replays from the same clock the pause was computed from.
+ * @param {any} [preIntervalUndo] - the pre-INTERVAL undo snapshot to park (see
+ *   above). The advance path passes its own Phase-1 capture; the resume path
+ *   passes the OUTGOING cursor's value VERBATIM, so a re-pause keeps pointing at
+ *   where the interval BEGAN rather than at the segment just resumed — undo must
+ *   return the DM to the pre-advance world, never to a mid-interval one.
  */
-export function buildPausedAdvanceCursor(result, now) {
+export function buildPausedAdvanceCursor(result, now, preIntervalUndo = null) {
   return {
     interval: result.interval,
     ticksTotal: result.ticksTotal,
@@ -122,6 +147,10 @@ export function buildPausedAdvanceCursor(result, now) {
       wizardNews: result.preWizardNews,
       saves: result.preSaves || [],
     },
+    // Parked by REFERENCE (the snapshot is already a plain deep clone, and the
+    // resume path hands back a plain lift), keeping the cursor bounded at one
+    // pre-interval copy no matter how many times the interval re-pauses.
+    ...(preIntervalUndo ? { preIntervalUndo } : {}),
   };
 }
 
@@ -426,8 +455,18 @@ export async function runAdvanceCampaignWorld({
         // Park the resume cursor on c.worldState.pausedAdvance so the partial interval
         // + the cursor land in the SAME atomic persist. Only the multi-tick path
         // produces status:'paused', so this is inert when the flag is OFF.
+        // R-5b reload-into-paused arming: the SAME pre-interval snapshot just pushed
+        // onto the session pulseUndoStack is parked on the cursor (by reference — one
+        // object, two homes, neither mutated after capture), so a reload that clears
+        // the session stack can still offer the honest pre-advance undo. `preSnapshot`
+        // was captured in Phase 1, BEFORE the drain, and the advance refuses to start
+        // while a pause is parked, so its worldState provably carries no pausedAdvance
+        // — restoring it is also what CLEARS the pause (the documented abandon path).
         if (result.status === 'paused') {
-          c.worldState = { ...c.worldState, pausedAdvance: buildPausedAdvanceCursor(result, now) };
+          c.worldState = {
+            ...c.worldState,
+            pausedAdvance: buildPausedAdvanceCursor(result, now, preSnapshot),
+          };
         } else if (c.worldState && 'pausedAdvance' in c.worldState) {
           // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
           const { pausedAdvance: _drop, ...rest } = c.worldState;
@@ -596,12 +635,22 @@ export async function runResolveIntervalMajors({
   /** @type {any} */ let simCampaign = null;
   /** @type {any} */ let simSaves = null;
   /** @type {any} */ let cursor = null;
+  // R-5b: the parked pre-INTERVAL undo snapshot, read off the CURRENT (non-draft)
+  // state so it can be re-parked BY REFERENCE below. Deliberately NOT part of the
+  // `cursor` clone: it is the largest thing on the cursor and the resume kernel
+  // never reads it, so deep-copying it on every resume would charge a full extra
+  // pre-interval world per DM verdict for nothing. Same read window as the lift
+  // below (the advance-in-flight guard serializes both against any other writer).
+  const parkedUndo = parkedIntervalUndoSnapshot(
+    findActiveCampaign(get().campaigns, campaignId),
+  );
   set(state => {
     const c = findActiveCampaign(state.campaigns, campaignId);
     if (!c) return;
     const worldState = ensureWorldState(c.worldState, c);
-    cursor = worldState.pausedAdvance ? cloneJson(worldState.pausedAdvance) : null;
-    if (!cursor) { result = { ok: false, reason: 'no_paused_advance' }; return; }
+    if (!worldState.pausedAdvance) { result = { ok: false, reason: 'no_paused_advance' }; return; }
+    const { preIntervalUndo: _parked, ...resumeInputs } = worldState.pausedAdvance;
+    cursor = cloneJson(resumeInputs);
     simCampaign = cloneJson(c);
     simSaves = cloneJson(campaignSettlements(state, campaignId));
   });
@@ -676,12 +725,36 @@ export async function runResolveIntervalMajors({
       if (!c) return;
       persistUpdates = applyWorldPulseResultToState(state, c, result, now);
       // Park a FRESH cursor if the resumed segment paused again; else CLEAR the
-      // cursor back to byte-neutral (the interval finished).
+      // cursor back to byte-neutral (the interval finished). The pre-INTERVAL undo
+      // snapshot rides across verbatim (R-5b): a re-pause is still the SAME advance,
+      // so undo must keep returning to where that advance began. An interval that
+      // finishes drops the cursor and its parked snapshot together — the session
+      // stack (when this session ran the advance) remains the undo source there.
       if (result.status === 'paused') {
-        c.worldState = { ...c.worldState, pausedAdvance: buildPausedAdvanceCursor(result, now) };
+        c.worldState = {
+          ...c.worldState,
+          pausedAdvance: buildPausedAdvanceCursor(result, now, parkedUndo),
+        };
       } else if (c.worldState && 'pausedAdvance' in c.worldState) {
         const { pausedAdvance: _drop, ...rest } = c.worldState;
         c.worldState = rest;
+      }
+      // R-5b continuity: the interval just FINISHED, so the cursor (and the
+      // pre-interval snapshot parked on it) is gone. In the session that RAN the
+      // advance that snapshot is already on pulseUndoStack and nothing is owed. After
+      // a RELOAD it lived ONLY on that cursor, and the DM has been looking at an
+      // offered "Undo Advance" the whole time they resolved verdicts — dropping it at
+      // the moment they finish would retract a capability mid-flow. Adopt it onto the
+      // session stack instead, exactly as the advance's own push would have. Guarded
+      // on the campaign having NO stack entry, so the in-session path never
+      // double-pushes; a paused interval blocks further advances on its own campaign,
+      // so this campaign's entry cannot have been cap-evicted while it was parked.
+      if (result.status !== 'paused' && parkedUndo
+          && !(state.pulseUndoStack || []).some(s => String(s.campaignId) === String(campaignId))) {
+        state.pulseUndoStack = [...(state.pulseUndoStack || []), parkedUndo];
+        if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
+        state.advanceSeqByCampaign[String(campaignId)] =
+          (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) + 1;
       }
       // M10b re-stamp on RESUME (state-lifecycle-1 / performance-scale-4): the resume
       // RE-DERIVES worldState wholesale from the cursor's PRE-interval snapshot, which

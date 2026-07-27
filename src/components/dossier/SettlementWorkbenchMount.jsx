@@ -30,13 +30,18 @@ export default function SettlementWorkbenchMount({ enabled, readOnly }) {
   // closure is untouched. The single source is enforced by
   // tests/lint/premiumGateSingleSource.test.js.
   //
-  // FLAG-ON COUPLING (recorded 2026-07-27, R-3 verify pass): OutputContainer
-  // renders the standalone PendingChangesBar only when the settlementWorkbench
-  // flag is OFF, so at flag-ON this gate leaves free/anon Create-flow users
-  // with live queueEdit levers (NpcLifecycleControls via npcAuthoringAllowed)
-  // but NO review/commit surface — a widening of the parked "flag-on review
-  // blackout" class. Cure is owner-gated (R-5 / G-2b promotion); tracked in
-  // the plan's Deferred ledger.
+  // FLAG-ON COUPLING (recorded 2026-07-27, R-3 verify pass; NARROWED by the
+  // R-5b alignment): OutputContainer renders the standalone PendingChangesBar
+  // only when the settlementWorkbench flag is OFF, so at flag-ON the Change
+  // Dock is the sole review/commit surface. This gate used to leave free/anon
+  // Create-flow users holding live queueEdit levers (NpcLifecycleControls via
+  // npcAuthoringAllowed) with nowhere to review them — a widening of the parked
+  // "flag-on review blackout" class. Since the owner-authorized R-5b alignment
+  // (2026-07-27) `npcAuthoringAllowed` reads the SAME viewerCanAuthor predicate,
+  // so those levers close in lockstep with this Dock and the widening is gone.
+  // The RESIDUAL blackout — an entitled owner whose saved dossier arrives
+  // readOnly with mapCanEdit=false — is unchanged and still owner-gated (rides
+  // G-2b promotion); tracked in the plan's Deferred ledger.
   const canAuthor = useStore(viewerCanAuthor);
   if (!enabled) return null;
   return (

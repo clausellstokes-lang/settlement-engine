@@ -7,6 +7,27 @@ import { INK, MUTED, BODY, SECOND, sans, FS, swatch } from '../theme';
 
 // ── Network Effects panel — shows cascading modifiers from the relationship graph ──
 
+/**
+ * THE ADVISORY LABEL (owner ruling 2026-07-27, atlas owner-queue #8 /
+ * economy-family gap 1).
+ *
+ * `getSettlementModifiers` totals are consumed by DISPLAY SURFACES ONLY — this
+ * panel, the read-only View echo, the settlements-list badge, and the two PDF
+ * builders. No generator, pulse, event handler, or other engine path reads
+ * them, so the word "modifiers" promises a simulation consequence that does not
+ * exist. The owner picked the honest LABEL over engine wiring: wiring the
+ * cascade in as a declared engine input would shift every same-seed golden, so
+ * it stays a RECORDED FUTURE TUNING CANDIDATE requiring an owner-signed,
+ * versioned tuning change under THE PROMISE. It is not lost and not a bug to
+ * re-find; do not wire it here without that signature.
+ *
+ * Single-home: this constant is the ONLY copy of the string. The sibling
+ * display surfaces deliberately do not carry it (each has its own scope), which
+ * tests/ui/networkEffectsAdvisoryPin.test.jsx pins in both directions.
+ */
+export const NETWORK_EFFECTS_ADVISORY =
+  'These figures inform your reading. The simulation does not apply them.';
+
 export default function NetworkEffectsPanel({ settlementId, saves, relColors }) {
   // Co-campaign settlements are implicit Neutral neighbours by default (owner
   // order 2026-07-22). Derived from ALL active campaigns so the cascade stays
@@ -38,7 +59,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
     // three relationship pieces, grouped by the parent's gap, not a standalone
     // bordered card (P5 anti-box-soup; the self-margin double-counted the parent
     // flex gap and broke the spacing rhythm).
-    <div role="group" aria-labelledby="network-effects-heading" style={{ background: swatch['#F8F4EE'], padding: '12px 14px' }}>
+    <div role="group" aria-labelledby="network-effects-heading" aria-describedby="network-effects-advisory" style={{ background: swatch['#F8F4EE'], padding: '12px 14px' }}>
       {/* Level-1 panel keyword + the dominant signal as the headline fact. */}
       <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 10px', marginBottom: 10 }}>
         <h3 id="network-effects-heading" style={{ fontSize: FS.sm, fontWeight: 700, color: swatch['#5A3A1A'], textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
@@ -51,6 +72,12 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           </span>
         )}
       </div>
+
+      {/* The honest advisory: the caveat reads BEFORE the numbers it qualifies,
+          and describes the whole group for assistive tech. */}
+      <p id="network-effects-advisory" style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, margin: '0 0 10px' }}>
+        {NETWORK_EFFECTS_ADVISORY}
+      </p>
 
       {/* Category bars — the drill-down behind the headline fact above. */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: 12 }}>

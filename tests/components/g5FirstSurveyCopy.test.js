@@ -17,9 +17,13 @@
  *   • PDF DefenseSecurity: the VULNERABILITIES list header (the last
  *     unframed frozen-record header in that chapter after R-0's caption).
  *
- * Whether the G5 five get FROZEN_VS_LIVE manifest rows is an OPEN owner
- * ruling (atlas queue #28) — deliberately NOT decided here; these are
- * display-honesty pins only. PDF twins of the Viability/Overview sections
+ * [RULED — owner 2026-07-27, landed Wave R-5b] The G5 five DO get
+ * FROZEN_VS_LIVE manifest rows: all five are now declared mode 'snapshot' in
+ * src/domain/fieldManifest.js with displayRules in the scores-precedent voice,
+ * walked by tests/joins/fieldManifest.test.js (which also pins that no
+ * worldPulse writer has quietly started keeping one of them live). The rows
+ * DECLARE what these pins already enforce; the pins below stay the display
+ * half of that contract. PDF twins of the Viability/Overview sections
  * (ViabilityAssessment.jsx, Overview.jsx) are OUT of this lane and recorded
  * as a Wave R-1 deferral, not pinned here.
  *

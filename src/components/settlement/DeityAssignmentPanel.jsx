@@ -13,8 +13,11 @@
  *
  * TIER MATRIX (constitutional walls, verified in-component + tests):
  *   • PREMIUM / elevated (canUseCustomContent) — the full write picker.
- *   • LAPSED premium (not premium, but this settlement OWNS a live embed) —
- *     READ-ONLY view of the owned patron/cults, no write control, a renew prompt.
+ *   • LAPSED premium (not premium, but this settlement OWNS a live embed) — the
+ *     owned patron/cults with SHED-ONLY controls (Remove patron, Remove cult,
+ *     Remove all cults) and a renew prompt. Never an assign or change control:
+ *     that direction the store seam refuses, so offering it would be a dead
+ *     control. R-5b, owner-ratified 2026-07-27.
  *   • FREE / ANON with no embed — the in-place UPSELL (never a dead control),
  *     naming NO deity (it reads config.primaryDeitySnapshot only, never
  *     config.latentPantheon, so a latent seed is never named to a free viewer).
@@ -110,23 +113,47 @@ export default function DeityAssignmentPanel() {
   const currentRef = config.primaryDeityRef || (currentSnap?._deityRef) || '';
   const cults = Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [];
 
-  // ── LAPSED read-only: not premium, but this settlement owns a live embed ────
-  // Show the owned faith read-only (never a dead write control); no upsell that
-  // implies they can write here — a renew prompt instead.
+  // ── LAPSED: not premium, but this settlement owns a live embed ──────────────
+  // Read-only for the ASSIGN direction (no picker, ever) and WRITABLE for the SHED
+  // direction (Wave R-5b, owner-ratified 2026-07-27). The store seam has always
+  // allowed it: deityWriteGate({ shed: true }) passes for an unentitled account that
+  // owns a live embed, on exactly the ownership test this branch condition runs — so
+  // panel and seam agree by construction, and neither Remove control can ever be a
+  // dead one. Hiding them was the last piece of the defect the seam already cured:
+  // a lapsed subscriber was locked INTO deity content they could no longer take out.
+  // Free tier (unentitled, no embed) never reaches here and stays refused both ways.
   if (!canUseCustom && (currentSnap || cults.length)) {
     return (
       <div data-testid="deity-assignment-panel" style={wrapStyle}>
         <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
         {currentSnap && (
-          <div data-testid="deity-assignment-readonly" style={{ fontSize: FS.sm, color: INK, lineHeight: 1.5 }}>
-            <strong>{currentSnap.name}</strong>
-            {snapLine(currentSnap) ? <span style={{ color: SECOND }}>{` · ${snapLine(currentSnap)}`}</span> : null}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 }}>
+            <div data-testid="deity-assignment-readonly" style={{ fontSize: FS.sm, color: INK, lineHeight: 1.5 }}>
+              <strong>{currentSnap.name}</strong>
+              {snapLine(currentSnap) ? <span style={{ color: SECOND }}>{` · ${snapLine(currentSnap)}`}</span> : null}
+            </div>
+            {/* Clear the patron back to latent — the same setPrimaryDeity(null) shed
+                write the premium picker's "No patron (latent)" option dispatches. */}
+            <Button variant="ghost" size="sm" data-testid="lapsed-clear-patron" aria-label={`${td('assign.remove')} ${currentSnap.name}`} onClick={() => setPrimaryDeity?.(null)} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
+              {td('assign.remove')}
+            </Button>
           </div>
         )}
         {cults.length > 0 && (
-          <div style={{ fontSize: FS.xs, color: SECOND, marginTop: 4, lineHeight: 1.4 }}>
-            {td('assign.cultHeading')}: {cults.map((c, i) => (
-              <span key={String(c._deityRef || c.name || i)}>{i > 0 ? ', ' : ''}<strong style={{ color: INK }}>{c.name}</strong></span>
+          <div style={{ marginTop: 6 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6, marginBottom: 4 }}>
+              <span style={{ fontSize: FS.xs, color: SECOND }}>{td('assign.cultHeading')}</span>
+              <Button variant="ghost" size="sm" data-testid="cult-clear-all" aria-label={td('assign.clearAll')} onClick={() => imposeCult?.(null)} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
+                {td('assign.clearAll')}
+              </Button>
+            </div>
+            {cults.map((c) => (
+              <div key={String(c._deityRef || c.name)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, fontSize: FS.micro, color: SECOND, lineHeight: 1.4 }}>
+                <span><strong style={{ color: INK }}>{c.name}</strong>{snapLine(c) ? ` · ${snapLine(c)}` : ''}</span>
+                <Button variant="ghost" size="sm" aria-label={`${td('assign.remove')} ${c.name}`} onClick={() => imposeCult?.(null, String(c._deityRef || c.name || ''))} style={{ minHeight: 0, padding: '0 6px', color: DEITY_ACCENT }}>
+                  {td('assign.remove')}
+                </Button>
+              </div>
             ))}
           </div>
         )}

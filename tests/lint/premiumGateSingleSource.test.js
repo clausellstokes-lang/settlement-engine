@@ -22,7 +22,19 @@
  *      import the single source or record why its question is a different one.
  *      The set is EXACT in both directions: a stale entry (the file stopped
  *      spelling it) also reds, so the census can never rot into a permissive
- *      allowlist.
+ *      allowlist. The reason CLASSES are exact in both directions too — a class
+ *      no row claims reds (R-5b, when the alignment emptied one).
+ *
+ * WAVE R-5b — THE DIVERGENCE CLOSED (owner-authorized 2026-07-27). R-4 recorded
+ * `npcAuthoringAllowed` (OutputContainer) as a deliberate divergence: on the
+ * Create flow it admitted EVERY tier while the Workbench mount withheld the
+ * Change Dock below the authoring authority, so free/anon users held queueEdit
+ * levers with no review surface. The owner authorized alignment; OutputContainer
+ * is now asserted as the THIRD consumer of the single source, and the
+ * 'documented-divergence' reason class retired with it. Its census row stays,
+ * reclassified to 'content-visibility', because the file still spells one raw
+ * comparison — `viewerIsPremium`, the War & Faith tab-PRESENCE gate, which asks a
+ * different question and omits the founder tier.
  *
  * WHY THE CENSUS IS NOT JUST "CONVERGE THEM ALL". These surfaces ask genuinely
  * different questions of the same field. Converging them would be a behaviour
@@ -95,9 +107,6 @@ const REASON_CLASSES = {
     'Campaign management, gallery import, or cloud sync entitlement — spelled with the '
     + 'ROLE literals (developer/admin) rather than isElevated(). A separate convergence '
     + 'candidate with its own owner queue entry; not this lane.',
-  'documented-divergence':
-    'Deliberately NOT the authoring authority, documented in code beside the read. '
-    + 'Alignment is owner-gated (docs/CAPABILITY_REMEDIATION_PLAN.md owner queue).',
 };
 
 /**
@@ -108,7 +117,13 @@ const REASON_CLASSES = {
 const EXEMPTIONS = {
   'src/App.jsx': 'route-guard',
   'src/AppViews.jsx': 'route-guard',
-  'src/components/OutputContainer.jsx': 'documented-divergence',
+  // R-5b: was 'documented-divergence' (npcAuthoringAllowed). That divergence is
+  // CLOSED — npcAuthoringAllowed now reads viewerCanAuthor, and the file is
+  // asserted below as a consumer of the single source. The row does NOT retire
+  // outright, because one raw comparison remains and asks a DIFFERENT question:
+  // `viewerIsPremium` (OutputContainer.jsx) gates War & Faith tab PRESENCE and
+  // deliberately omits the founder tier.
+  'src/components/OutputContainer.jsx': 'content-visibility',
   'src/components/PricingPage.jsx': 'sell-to-the-tier',
   'src/components/PurchaseModal.jsx': 'sell-to-the-tier',
   'src/components/SettlementsPanel.jsx': 'campaign-or-import-entitlement',
@@ -203,10 +218,16 @@ describe('premium authoring gate — one spelling (src/lib/viewerAuthority.js)',
     ).toEqual([]);
   });
 
-  it('both authoring consumers read the single source', () => {
+  it('every authoring consumer reads the single source', () => {
     for (const consumer of [
       'src/components/SettlementDetail.jsx',
       'src/components/dossier/SettlementWorkbenchMount.jsx',
+      // R-5b: the third consumer. `npcAuthoringAllowed` was the documented
+      // divergence; the owner-authorized alignment made it a consumer, so the
+      // Create flow's NPC levers and the Workbench Change Dock open and close
+      // on the SAME predicate. Behaviour pins: tests/components/
+      // npcAuthoringScope.test.jsx (per-tier matrix).
+      'src/components/OutputContainer.jsx',
     ]) {
       const src = bodyOf(consumer);
       expect(src, `${consumer} imports the single source`)
@@ -218,11 +239,22 @@ describe('premium authoring gate — one spelling (src/lib/viewerAuthority.js)',
 });
 
 describe('premium-tier comparison census — exact frozen exemption set', () => {
-  it('every reason class named by the census is defined', () => {
+  it('reason classes and census rows match in BOTH directions', () => {
     for (const [file, reason] of Object.entries(EXEMPTIONS)) {
       expect(Object.keys(REASON_CLASSES), `${file} names a defined reason class`)
         .toContain(reason);
     }
+    // The reverse direction (added R-5b, when the alignment emptied the
+    // 'documented-divergence' class): a class no row claims is a rationale that
+    // outlived its subject, and a stale rationale is exactly how a census rots
+    // into a permissive allowlist. Retire it with its last tenant.
+    const claimed = new Set(Object.values(EXEMPTIONS));
+    const orphans = Object.keys(REASON_CLASSES).filter((r) => !claimed.has(r));
+    expect(
+      orphans,
+      'these reason classes are claimed by no census row — delete them, or the '
+        + `census keeps a rationale with no subject:\n  ${orphans.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   it('the census equals the set of src files spelling a raw premium comparison', () => {

@@ -7,6 +7,7 @@ import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
+import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -29,9 +30,9 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const stressTypes = stresses.map(s=>s?.type).filter(Boolean);
   const crimCapture = r.powerStructure?.criminalCaptureState || 'none';
 
-  // Score color helper
-  const scoreColor = n => n>=65?'#1a5a28':n>=40?'#a0762a':n>=20?'#8a4010':'#8b1a1a';
-  const scoreBadge = n => n>=65?'STRONG':n>=40?'ADEQUATE':n>=20?'WEAK':'CRITICAL';
+  // Score colour + band word come from the shared defenseScoreBands ladder
+  // (R-5b item #20). The local twins that used to live here are deleted, so
+  // OverviewTab, SummaryTab, this tab and the PDF cannot drift apart.
 
   // Threat assessment with expandable rows
   const threats = buildThreatAssessment(r);
@@ -61,7 +62,13 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const crimInsts  = sp.criminalInstitutions || [];
   const crimeTypes = sp.crimeTypes || [];
   const crimFaction = r.powerStructure?.factions?.find(f=>f.category==='criminal');
-  const ratio       = typeof sp.safetyRatio === 'number' ? sp.safetyRatio : null;
+  // R-5b item #20: the raw `safetyRatio` float ("ratio 1.23×") that used to sit
+  // in the Internal Security banner is RETIRED here, extending the owner's
+  // 2026-07-22 retirement of the identical Enforcement Ratio display on
+  // OverviewTab to this sibling. The banner already carries the same fact three
+  // times in typed form (the orderStatus headline, the orderBadge band word and
+  // the safetyLabel beneath), so the digit added a formula and no meaning.
+  // safetyRatio stays a live derivation — only this display of it is retired.
   const safetyLabel = sp.safetyLabel || '';
   const _bmc         = sp.blackMarketCapture || 0;
 
@@ -147,7 +154,7 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {threats.map(({icon,label,color,assess},i)=>{
             const sc = threatScores[label]||0;
-            const badge = scoreBadge(sc);
+            const badge = scoreBand(sc);
             const badgeColor = scoreColor(sc);
             const isExp = expandedThreat===i;
             return (
@@ -196,9 +203,6 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                     <div style={{fontSize:FS.lg,fontWeight:800,color:orderColor,lineHeight:1.15,marginBottom:4}}>{orderStatus}</div>
                     <div style={{display:'flex',alignItems:'center',gap:7}}>
                       <span style={{fontSize:FS.micro,fontWeight:800,color:orderColor,background:`${orderColor}15`,border:`1px solid ${orderColor}40`,padding:'1px 5px',letterSpacing:'0.04em'}}>{orderBadge}</span>
-                      {ratio!==null&&<span style={{fontSize:FS.xxs,color:swatch.inkMag3}}>
-                        ratio{' '}<span style={{fontWeight:700,color:orderColor}}>{ratio.toFixed(2)}×</span>
-                      </span>}
                     </div>
                     {safetyLabel&&!safetyLabel.includes('Moderate')&&<div style={{fontSize:FS.xxs,color:MUTED,marginTop:5,fontStyle:'italic'}}>{safetyLabel}</div>}
                   </div>
@@ -333,11 +337,16 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
                 <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:2}}>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag2}}>{cap.label}</span>
                   <span style={{fontSize:FS.xs,fontWeight:700,color:cap.color}}>{cap.status}</span>
+                  {/* R-5b item #20: the bare 0-100 digit beside this bar is now
+                      the score's band word from the shared ladder. Magical
+                      Capability's status ("Arcane support" / "None") is a
+                      presence read, not a grade, so the band is the only word
+                      that told the reader how good the bar actually is. */}
                   {cap.score!==null&&<div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6}}>
                     <div style={{width:50,height:5,background:swatch['#E8DCC8'],overflow:'hidden'}}>
                       <div style={{height:'100%',width:`${Math.min(100,cap.score)}%`,background:cap.color}}/>
                     </div>
-                    <span style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{Math.round(cap.score)}</span>
+                    <span style={{fontSize:FS.xxs,color:cap.color,fontWeight:700}}>{scoreBand(cap.score)}</span>
                   </div>}
                 </div>
                 <div style={{fontSize: FS['11.5'],color:swatch.inkMag3,lineHeight:1.4}}>{cap.note}</div>

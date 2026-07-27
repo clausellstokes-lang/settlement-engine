@@ -14,10 +14,11 @@
  *     reachable (previously the section required a seated patron, stranding
  *     owned cults invisibly).
  *   • FREE: the upsell branch — no clear control, ever.
- *   • LAPSED: the read-only branch shows the owned cults but NO clear control —
- *     surfacing shed controls to lapsed users is the owner-parked product call
- *     from Wave R-0; the STORE seam still allows the lapsed clear (pinned in
- *     tests/store/deityClearCults.test.js).
+ *   • LAPSED: the shed controls ARE surfaced (Wave R-5b, owner-ratified
+ *     2026-07-27, reversing the R-0 park): per-cult Remove and clear-all both
+ *     dispatch, while the impose direction stays absent. The STORE seam always
+ *     allowed the lapsed clear (pinned in tests/store/deityClearCults.test.js);
+ *     these were the missing doors, not a new capability.
  *
  * Store-mock idiom: tests/components/deityPanelManifestParity.test.jsx.
  */
@@ -114,15 +115,41 @@ describe('the clear-all-cults door — unentitled branches never render it', () 
     expect(screen.queryByTestId('cult-clear-all')).toBeNull();
   });
 
-  it('LAPSED (owns cults): read-only branch names the cults but offers NO clear control (owner-parked product call)', () => {
+  it('LAPSED (owns cults): the shed controls ARE surfaced (R-5b) — per-cult Remove and clear-all both dispatch', () => {
+    // The owner-parked product call was RATIFIED 2026-07-27: surface the shed
+    // controls for lapsed owners. The store seam already allowed the write
+    // (tests/store/deityClearCults.test.js), so these were the missing doors.
+    const imposeCult = vi.fn();
+    useStore.__set({
+      settlement: { tier: 'town', config: { primaryDeitySnapshot: PATRON_SNAP, cultDeitySnapshots: [CULT_A] } },
+      customContent: { deities: [DEITY] },
+      canUseCustomContent: () => false,
+      imposeCult,
+    });
+    const { container } = render(<DeityAssignmentPanel />);
+    expect(screen.getByTestId('deity-assignment-readonly')).toBeTruthy();
+    expect(container.textContent).toContain(CULT_A.name);
+
+    // Per-cult Remove — the named-ref arity.
+    fireEvent.click(screen.getByLabelText(`${td('assign.remove')} ${CULT_A.name}`));
+    expect(imposeCult).toHaveBeenLastCalledWith(null, CULT_A._deityRef);
+
+    // Clear-all — the no-removeRef arity, same as the entitled branch.
+    fireEvent.click(screen.getByTestId('cult-clear-all'));
+    expect(imposeCult).toHaveBeenLastCalledWith(null);
+    expect(imposeCult).toHaveBeenCalledTimes(2);
+  });
+
+  it('LAPSED: the shed doors never come with an IMPOSE door (the assign direction stays refused)', () => {
+    // The seam refuses an unentitled ADD in both impls, so an impose control here
+    // would be a dead control — the exact failure the manifest-parity work closed.
     useStore.__set({
       settlement: { tier: 'town', config: { primaryDeitySnapshot: PATRON_SNAP, cultDeitySnapshots: [CULT_A] } },
       customContent: { deities: [DEITY] },
       canUseCustomContent: () => false,
     });
-    const { container } = render(<DeityAssignmentPanel />);
-    expect(screen.getByTestId('deity-assignment-readonly')).toBeTruthy();
-    expect(container.textContent).toContain(CULT_A.name);
-    expect(screen.queryByTestId('cult-clear-all')).toBeNull();
+    render(<DeityAssignmentPanel />);
+    expect(screen.queryByTestId('cult-deity-select')).toBeNull();
+    expect(screen.queryByTestId('patron-deity-select')).toBeNull();
   });
 });

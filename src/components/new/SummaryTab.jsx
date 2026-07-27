@@ -6,6 +6,7 @@ import { serif } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { deriveFoodBalance } from '../../domain/display/dossierViewModel.js';
+import { scoreBand, scoreColor } from '../../domain/display/defenseScoreBands.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx'; // R-4: the ONE stale-window note leaf; taxonomy in domain/display/economyFreshness.js
 import { collectPlotHooks, countPlotHookCategories, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import Button from '../primitives/Button.jsx';
@@ -146,9 +147,13 @@ function SummaryTab({ settlement:r }) {
   const ecoTileColor=eco.prosperity==='Thriving'||eco.prosperity==='Prosperous'?'#1a5a28':eco.prosperity==='Struggling'||eco.prosperity==='Poor'||eco.prosperity==='Impoverished'?'#8b1a1a':'#a0762a';
   const ecoSub=foodCanon.deficit>0?`Food deficit ${foodCanon.deficitPct}%`:foodCanon.surplus>0?'Food surplus':'';
 
-  // Defense tile
+  // Defense tile. R-5b item #20: the sub-line was "Avg. score N/100" — the raw
+  // mean of the same five scores OverviewTab now bands, and the least legible
+  // number on the surface. It reads as the band word instead, off the shared
+  // defenseScoreBands ladder (which also takes over the local 70/45/25 colour
+  // twin, so the tile's colour and its word can never disagree).
   const defScore=dp.scores?Math.round((dp.scores.military+dp.scores.monster+dp.scores.internal+dp.scores.economic+dp.scores.magical)/5):null;
-  const defColor=defScore>=70?'#1a5a28':defScore>=45?'#a0762a':defScore>=25?'#8a4010':'#8b1a1a';
+  const defColor=scoreColor(defScore);
 
   // Power stability color
   const powStab=ps?.stability||'';
@@ -207,7 +212,7 @@ function SummaryTab({ settlement:r }) {
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         <SitTile label="Power" value={powStab.split(';')[0].split('(')[0].split('—')[0].trim()} color={powColor} sub={allFactions[0]?.faction}/>
         <SitTile label="Economy" value={eco.prosperity||EMPTY_VALUE} color={ecoTileColor} sub={ecoSub||eco.economicComplexity?.split('—')[0].trim()}/>
-        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Avg. score ${defScore}/100`:undefined}/>
+        <SitTile label="Defense" value={dp.readiness?.label||EMPTY_VALUE} color={defColor} sub={defScore?`Systems average: ${scoreBand(defScore)}`:undefined}/>
       </div>
 
       {/* ── ECONOMY FRESHNESS (R-3 declaration, R-4 shared leaf) — the honest

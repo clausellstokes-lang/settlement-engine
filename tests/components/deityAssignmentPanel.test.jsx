@@ -6,7 +6,8 @@
  *   • PREMIUM        — the write picker: assign a patron, "No patron (latent)"
  *                      clears back to dormant (setPrimaryDeity(null)).
  *   • FREE / ANON    — the in-place upsell (never a dead control), naming NO deity.
- *   • LAPSED premium — read-only view of the OWNED embed, no write control.
+ *   • LAPSED premium — the OWNED embed with SHED-ONLY controls (R-5b): Remove
+ *                      dispatches setPrimaryDeity(null); no assign control exists.
  *   • NO-LIVE-FAITH-FOR-FREE — a free viewer of a latent-only settlement never
  *                      sees a deity name (the panel reads primaryDeitySnapshot
  *                      only, never config.latentPantheon).
@@ -88,18 +89,32 @@ describe('DeityAssignmentPanel — tier matrix', () => {
     expect(setPurchaseModalOpen).toHaveBeenCalledWith(true);
   });
 
-  it('LAPSED premium (not premium, but owns a live embed) is read-only — no write control', () => {
+  it('LAPSED premium (not premium, but owns a live embed) is SHED-ONLY: the patron can be removed, never assigned', () => {
+    // R-5b (owner-ratified 2026-07-27): the shed controls are SURFACED. The store
+    // seam always allowed them (deityWriteGate({shed:true}) passes for an
+    // unentitled owner of a live embed — tests/store/deityWriteGate.test.js); the
+    // panel used to hide them, locking a lapsed subscriber INTO deity content.
+    const setPrimaryDeity = vi.fn();
     useStore.__set({
       settlement: { tier: 'town', config: { primaryDeityRef: 'deity:lu_aur:aurelion', primaryDeitySnapshot: { name: 'Aurelion', alignmentAxis: 'good', rankAxis: 'major', lawAxis: 'lawful', domain: 'sun' } } },
       canUseCustomContent: () => false,
+      setPrimaryDeity,
     });
     const { container } = render(<DeityAssignmentPanel />);
     expect(screen.getByTestId('deity-assignment-readonly')).toBeTruthy();
-    // The owned embed IS shown read-only (lapsed keeps its data).
+    // The owned embed IS still shown (lapsed keeps its data) with the renew note.
     expect(container.textContent).toMatch(/Aurelion/);
     expect(container.textContent).toMatch(/premium has lapsed/i);
-    // But there is NO write control.
+    // The SHED direction is live and really dispatches the clear.
+    const clear = screen.getByTestId('lapsed-clear-patron');
+    expect(clear.getAttribute('aria-label')).toBe('Remove Aurelion');
+    fireEvent.click(clear);
+    expect(setPrimaryDeity).toHaveBeenCalledTimes(1);
+    expect(setPrimaryDeity).toHaveBeenCalledWith(null);
+    // The ASSIGN direction stays closed: no picker of any kind, and no upsell
+    // branch (a lapsed owner gets the renew prompt, not the free-tier pitch).
     expect(screen.queryByTestId('patron-deity-select')).toBeNull();
+    expect(screen.queryByTestId('cult-deity-select')).toBeNull();
     expect(screen.queryByTestId('deity-assignment-upsell')).toBeNull();
   });
 

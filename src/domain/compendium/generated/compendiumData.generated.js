@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 181,
+    "count": 182,
     "exemptCount": 72,
     "byKlass": {
       "canon": 5,
       "macro": 46,
-      "mechanical": 130
+      "mechanical": 131
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -135,7 +135,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"canonizeCampaignWorldSpatial","label":"Canonize the spatial world","description":"Commits the campaign's spatial map world state as canon and records a spatial digest.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"spatialDigest","undoToken":null},
       {"opType":"updateCampaignSimulationRules","label":"Update the simulation rules","description":"Changes which living-world systems are enabled for the campaign and records the change in the ruleset log.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"rulesetLog","undoToken":null},
       {"opType":"advanceCampaignWorld","label":"Advance the world","description":"Runs the world pulse forward, advancing the campaign's region by the chosen span and recording a pulse record. It can be undone with Undo last pulse.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"pulse-record","undoToken":"undoLastPulse"},
-      {"opType":"catchUpCampaignWorld","label":"Catch the world up","description":"Advances the campaign's world through any elapsed time it had fallen behind, without a manual pulse.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
+      {"opType":"catchUpCampaignWorld","label":"Catch the world up","description":"Advances the campaign's world through any elapsed time it had fallen behind, without a manual pulse. The whole caught-up span is one step, and it can be undone with Undo last pulse.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":"undoLastPulse"},
       {"opType":"applyCampaignContentBindingMigration","label":"Apply a campaign content migration","description":"Applies one reviewed immutable content-binding migration or rollback through compare-and-swap persistence, preserving the campaign's prior binding in history.","klass":"macro","slice":"campaignSlice","targetScope":"campaign","receiptRef":"campaign-content-binding-receipt","undoToken":null},
       {"opType":"resolveIntervalMajors","label":"Resolve interval majors","description":"Resolves the major events queued for a world-pulse interval and records them in the pulse record. It can be undone with Undo last pulse.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"pulse-record","undoToken":"undoLastPulse"},
       {"opType":"applyWorldPulseProposal","label":"Apply a world-pulse proposal","description":"Applies a proposed world-pulse change to campaign canon and records it in the pulse record. It can be undone with Undo a proposal apply for the current session.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"pulse-record","undoToken":"undoLastProposalApply"},
@@ -146,6 +146,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"stageRealmVerb","label":"Stage a realm action","description":"Mints a realm-level action as a pending world-pulse proposal for review. Applying or dismissing it uses the pulse-proposal verbs.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":"realm-proposal","undoToken":null},
       {"opType":"undoLastPulse","label":"Undo last pulse","description":"Reverses the most recent world pulse on the campaign, rolling the living world back.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"undoLastProposalApply","label":"Undo a proposal apply","description":"Reverses the most recent applied world-pulse proposal on the campaign, restoring the world and its settlements to just before the apply. The proposal returns to pending review.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
+      {"opType":"setSceneQualityMode","label":"Set the portrait quality ceiling","description":"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.","klass":"mechanical","slice":"displayPrefsSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"queueEdit","label":"Queue an edit","description":"Adds a single pending edit to the settlement, to be committed later. The edit can be reverted on its own.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"revertSingleEdit"},
       {"opType":"revertSingleEdit","label":"Revert a single edit","description":"Removes one queued pending edit from the settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"revertPendingEdits","label":"Revert all pending edits","description":"Discards every queued pending edit on the settlement without committing them.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},

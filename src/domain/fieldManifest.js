@@ -193,6 +193,89 @@ export const FROZEN_VS_LIVE = Object.freeze([
       + 're-verify-current-state apply guard (C2).',
     guards: [],
   },
+
+  // ── The G5 generation-frozen record family (atlas owner-queue #28) ─────────
+  // Owner-ratified 2026-07-27 ("do all of these" over the recorded queue), and
+  // landed here in Wave R-5b. These five records are written ONCE, during
+  // generation, and no event, edit, or pulse path recomputes them — the atlas
+  // gap G5 (docs/SETTLEMENT_CAPABILITY_ATLAS.md Part VII #28) is exactly this
+  // family. The DISPLAY side already shipped in Waves R-0/R-2 (first-survey
+  // framing on every render site, pinned in
+  // tests/components/frozenTenseDefenseCopy.test.js,
+  // tests/components/g5FirstSurveyCopy.test.js and
+  // tests/components/g5FirstSurveyPdfTwins.test.js). These rows DECLARE that
+  // contract as manifest data so the next package that gives any of them a
+  // pulse writeback has to flip its row and name its writer.
+  //
+  // `guards: []` follows the defenseProfile.scores precedent above: a snapshot
+  // guard exists to stop a frozen field being PREFERRED over a declared-live
+  // sibling, and none of these five has a live sibling to be preferred over
+  // (the two near-twins are named per row and are re-derivations, not
+  // writebacks). The display copy is one-string vetoable and already pinned in
+  // the three copy suites above; re-pinning it here would turn a deliberate
+  // reword into a four-file edit. The mechanical half of the contract — that
+  // no worldPulse writer has quietly started keeping one of them live — is
+  // walked in tests/joins/fieldManifest.test.js.
+  {
+    path: 'economicViability',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and every render site says so (first-survey framing). deriveViability reconciles the '
+      + 'SUMMARY SENTENCE only; the coherence badge, the critical-issue pill and the issue lists '
+      + 'all read this frozen record. Whichever package gives it a pulse writeback must flip this '
+      + 'row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'structuralViolations',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. The draft-phase checkDraftEdit twin is a '
+      + 'LIVE re-derivation, not a writeback, and the two are allowed to disagree after edits by '
+      + 'design. Whichever package gives this record a pulse writeback must flip this row to live '
+      + 'and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'structuralSuggestions',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Same producer pass as structuralViolations '
+      + 'and it must travel with it; the checkDraftEdit twin re-derives the same suggestions live '
+      + 'in draft phase without writing them back. Whichever package gives this record a pulse '
+      + 'writeback must flip this row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'coherenceNotes',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Narrative-age record, stamped once by the '
+      + 'canonical-coherence substream and read back by the generation receipt; nothing re-runs '
+      + 'the narrative-vs-mechanical agreement check afterwards. Whichever package gives it a '
+      + 'pulse writeback must flip this row to live and name the writer.',
+    guards: [],
+  },
+  {
+    path: 'defenseProfile.magicDependency',
+    field: null,
+    mode: 'snapshot',
+    pulseWriter: null,
+    displayRule: 'Generation verdict with NO live sibling: display-as-generated is honest today, '
+      + 'and its render sites carry the survey vintage. Widest blast radius of the five, because '
+      + 'it is not display-only: worldPulse/stressorGates.js gates a live stressor on this frozen '
+      + 'flag, so a campaign that loses its magical supply chains keeps the gate. Whichever '
+      + 'package gives it a pulse writeback must flip this row to live and name the writer.',
+    guards: [],
+  },
 ]);
 
 // ── Manifest 2: producer/consumer registry (dead-field CI) ────────────────

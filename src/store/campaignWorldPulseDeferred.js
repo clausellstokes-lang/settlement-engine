@@ -42,6 +42,7 @@ import {
   campaignSettlements,
   captureCampaignSession,
   isCurrentCampaignSession,
+  parkedIntervalUndoSnapshot,
 } from './campaignSliceShared.js';
 import {
   applyWorldPulseResultToState,
@@ -524,6 +525,22 @@ function restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUp
  * member saves, and whichever member is currently projected into the live view.
  * Detached saves and an active view from another campaign remain untouched.
  *
+ * TWO SNAPSHOT SOURCES (R-5b), in precedence order:
+ *   1. the session `pulseUndoStack` — the normal path, unchanged: pop the newest
+ *      entry for this campaign so repeated calls walk back tick by tick.
+ *   2. the pre-INTERVAL snapshot parked on a PAUSED advance's cursor
+ *      (`worldState.pausedAdvance.preIntervalUndo`), used ONLY when the stack
+ *      holds nothing for this campaign — i.e. after a reload into a paused
+ *      interval, where the session stack is gone but the campaign record (and so
+ *      the cursor) rehydrated. Restoring it is the documented ABANDON path: the
+ *      parked snapshot predates the interval, and an advance cannot start while a
+ *      pause is parked, so its worldState carries no pausedAdvance — writing it
+ *      back is exactly what clears the pause. Nothing is popped on this path
+ *      (there is no stack entry) and the session advance-depth counter is left
+ *      alone (a reloaded session starts it at 0).
+ * An old-shape cursor with no parked snapshot yields null and this returns false,
+ * which is the pre-change behaviour, typed honestly rather than half-restored.
+ *
  * @param {{
  *   set: Function,
  *   get: Function,
@@ -553,24 +570,32 @@ export async function runUndoLastPulse({
         break;
       }
     }
-    if (index === -1) return;
-    const snapshot = stack[index];
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return;
+    // Source 2 (R-5b) only when the session stack has nothing for this campaign.
+    // cloneJson FIRST: the parked snapshot is an Immer draft proxy of a sub-tree of
+    // campaign.worldState, and restorePulseSnapshotOnDraft REPLACES that worldState
+    // — reading the source through the proxy afterwards would be reading the tree it
+    // just overwrote (and the proxy is revoked when this producer returns).
+    const parked = index === -1 ? parkedIntervalUndoSnapshot(campaign) : null;
+    const snapshot = index === -1 ? (parked ? cloneJson(parked) : null) : stack[index];
+    if (!snapshot) return;
     const stamp = new Date().toISOString();
     restorePulseSnapshotOnDraft(state, campaign, snapshot, stamp, persistUpdates);
 
-    // Pop exactly the restored entry; older snapshots remain for stepwise undo.
-    state.pulseUndoStack = stack.filter((_, i) => i !== index);
-    // R-1 MUST-FIX: the pop lowers the campaign's LOGICAL advance depth by one
-    // (the push site raised it by one). Floor at 0 defensively; production
-    // pairing is exact because only retained entries are poppable and every
-    // retained entry incremented the counter when it was pushed.
-    if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
-    state.advanceSeqByCampaign[String(campaignId)] = Math.max(
-      0,
-      (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) - 1,
-    );
+    if (index !== -1) {
+      // Pop exactly the restored entry; older snapshots remain for stepwise undo.
+      state.pulseUndoStack = stack.filter((_, i) => i !== index);
+      // R-1 MUST-FIX: the pop lowers the campaign's LOGICAL advance depth by one
+      // (the push site raised it by one). Floor at 0 defensively; production
+      // pairing is exact because only retained entries are poppable and every
+      // retained entry incremented the counter when it was pushed.
+      if (!state.advanceSeqByCampaign) state.advanceSeqByCampaign = {};
+      state.advanceSeqByCampaign[String(campaignId)] = Math.max(
+        0,
+        (Number(state.advanceSeqByCampaign[String(campaignId)]) || 0) - 1,
+      );
+    }
     // R-1 ring coherence: proposal snapshots captured AFTER this restore point
     // (their stamped advance depth exceeds the depth left by the pop) describe
     // futures that no longer exist — restoring one later would fast-forward the

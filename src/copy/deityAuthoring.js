@@ -84,8 +84,11 @@ export const deityAuthoring = {
     upsellPatron:   'Assign a patron god to awaken the settlement’s religion layer.',
     upsellCta:      'Upgrade to premium',
     upsellTail:     'to author and assign deities.',
-    // Lapsed premium: read-only view of the owned embed, no writes.
-    lapsedNote:     'Your premium has lapsed. This settlement keeps its assigned faith, read-only. Renew to reassign.',
+    // Lapsed premium: the owned embed stays, and the SHED direction stays open
+    // (Wave R-5b, owner-ratified 2026-07-27 — the store seam's deityWriteGate has
+    // always allowed a lapsed clear/remove; the panel used to hide the controls).
+    // One string, vetoable. It must not promise assigning, which stays refused.
+    lapsedNote:     'Your premium has lapsed. This settlement keeps its assigned faith, and you can still remove what it holds. Renew to assign again.',
   },
 
   // ── The pantheon-activation strip (OUR four milestones) ─────────────────────

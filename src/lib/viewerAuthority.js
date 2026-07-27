@@ -14,7 +14,10 @@
  *   SettlementDetail.jsx  `canEdit`          — the Library dossier editor
  *   SettlementWorkbenchMount.jsx `viewerCanAuthor` — the Create-flow Workbench
  * They must never drift again: a third copy is what let the Create flow ship
- * un-gated in the first place (the gap Wave R-2 closed).
+ * un-gated in the first place (the gap Wave R-2 closed). Wave R-5b added the
+ * THIRD consumer under owner authorization:
+ *   OutputContainer.jsx `npcAuthoringAllowed` — the dossier's NPC authoring
+ *   levers, which R-4 had to leave diverged (see below).
  *
  * FAIL-CLOSED: a missing `auth`, a missing `tier`, or a state without a callable
  * `isElevated` selector all read as NOT entitled. Anything short of an explicit
@@ -29,15 +32,12 @@
  * (docs/CAPABILITY_REMEDIATION_PLAN.md owner-decision queue, added by R-3).
  * Extraction here is behaviour-identical by construction.
  *
- * DELIBERATELY NOT THIS AUTHORITY (each a different question). Two families are
- * pinned as EXEMPTIONS in tests/lint/premiumGateSingleSource.test.js (they spell
+ * DELIBERATELY NOT THIS AUTHORITY (each a different question). One family is
+ * pinned as an EXEMPTION in tests/lint/premiumGateSingleSource.test.js (it spells
  * a tier literal the exact-set census can see); the other two spell their gates
  * through TIER_GATE / entitlement helpers with NO tier literal, so they sit
  * outside the census's reach BY CONSTRUCTION — nothing to pin, and adding them
  * to EXEMPTIONS would red the census's stale-entry assertion:
- *   - `npcAuthoringAllowed` (OutputContainer.jsx) — PINNED ('documented-divergence'):
- *     aligning it changes which users see NPC authoring levers, a paid-surface
- *     behaviour change that is owner-gated.
  *   - purchase / pricing / account routing — PINNED ('sell-to-the-tier'): surfaces
  *     that ASK the tier in order to sell to it; converging them would gate the
  *     upgrade path on being upgraded.
@@ -47,6 +47,14 @@
  *   - `canExport()` / resolveExportAccess — the EXPORT ladder, which a free tier
  *     can also satisfy with a purchased durable per-dossier right. No tier
  *     literal; outside the census.
+ *
+ * FORMERLY NOT THIS AUTHORITY, NOW ALIGNED (Wave R-5b, owner-authorized
+ * 2026-07-27): `npcAuthoringAllowed` (OutputContainer.jsx). R-4 could only
+ * DOCUMENT the divergence because closing it changes which users see the NPC
+ * authoring levers — paid-surface behaviour. With the owner's word it consults
+ * this predicate, so the Create flow's levers and the Workbench Change Dock now
+ * open and close together. OutputContainer keeps a census row for a SEPARATE
+ * read (`viewerIsPremium`, War & Faith tab presence) under 'content-visibility'.
  */
 
 /** The account tiers that hold dossier-authoring authority on their own. */

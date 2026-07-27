@@ -12,6 +12,7 @@
  */
 
 import { buildThreatAssessment } from './threatAssessment.js';
+import { scoreBand, scoreColor } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
@@ -82,9 +83,9 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @property {{ tradeRouteAccess?: string }} [config]
  */
 
-/** @type {(n: number) => string} */
-const scoreColor = (n) =>
-  n >= 65 ? '#1a5a28' : n >= 40 ? '#a0762a' : n >= 20 ? '#8a4010' : '#8b1a1a';
+// scoreColor + scoreBand moved to display/defenseScoreBands.js (R-5b item #20)
+// so OverviewTab / SummaryTab can read the SAME ladder without importing this
+// module (and its threatAssessment dependency) into their chunks.
 
 /**
  * Per-criminal-operation enforcement note (Defense-tab voice), keyed off the
@@ -248,10 +249,6 @@ export function deriveSupportingCapabilities(settlement) {
   return caps;
 }
 
-/** @type {(n: number) => string} */
-const readinessBadge = (n) =>
-  n >= 65 ? 'STRONG' : n >= 40 ? 'ADEQUATE' : n >= 20 ? 'WEAK' : 'CRITICAL';
-
 // Which defenseProfile.economicGates key funds each readiness row, and what
 // the underfunded expense is called in the funding note.
 /** @type {Readonly<Record<string, [string, string]>>} */
@@ -302,7 +299,7 @@ export function deriveDefenseReadiness(settlement) {
     return {
       label: row.label,
       score,
-      status: readinessBadge(score),
+      status: scoreBand(score),
       statusColor: scoreColor(score),
       barColor: row.color,
       assess: row.assess,

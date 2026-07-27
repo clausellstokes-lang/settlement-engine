@@ -147,19 +147,44 @@ export const OPERATIONS = Object.freeze({
   canonizeCampaignWorldSpatial: { opType:'canonizeCampaignWorldSpatial', label:"Canonize the spatial world", description:"Commits the campaign's spatial map world state as canon and records a spatial digest.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'spatialDigest', undoToken:null, undoState:'irreversible' },
   updateCampaignSimulationRules: { opType:'updateCampaignSimulationRules', label:"Update the simulation rules", description:"Changes which living-world systems are enabled for the campaign and records the change in the ruleset log.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'rulesetLog', undoToken:null, undoState:'external:inverse-call' },
   advanceCampaignWorld: { opType:'advanceCampaignWorld', label:"Advance the world", description:"Runs the world pulse forward, advancing the campaign's region by the chosen span and recording a pulse record. It can be undone with Undo last pulse.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'pulse-record', undoToken:'undoLastPulse', undoState:'action' },
-  catchUpCampaignWorld: { opType:'catchUpCampaignWorld', label:"Catch the world up", description:"Advances the campaign's world through any elapsed time it had fallen behind, without a manual pulse.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'external:undoLastPulse' },
+  // R-5b (queue: "catchUp-promotion", R-0 recommendation ratified 2026-07-27):
+  // PROMOTED from the referential `external:undoLastPulse` to a first-class
+  // `undoToken:'undoLastPulse' / undoState:'action'`. The arming was re-derived at
+  // the op site rather than inherited: runCatchUpCampaignWorld does not push a ring
+  // entry of its own — it routes the WHOLE caught-up span through ONE delegated
+  // `get().advanceCampaignWorld(campaignId, 'one_week', { now, autoResolve, weeks: n })`
+  // (campaignAdvanceSession.js), and that advance's Phase-2 commit pushes exactly one
+  // pre-catch-up snapshot onto pulseUndoStack. So every catch-up that moves the world
+  // leaves exactly ONE armed undo step covering the whole span, and the paths that
+  // move nothing (no cursor yet ⇒ seeded, cursor under a week old ⇒ up_to_date, a
+  // refused/blocked advance) push nothing and offer nothing. That is 'action', not a
+  // weaker claim: the pop restores the world, the member saves, AND the M10b cursor
+  // (lastLivingAdvanceAt), so the undone span is honestly owed again on the next open
+  // rather than silently swallowed. Behaviour pinned in
+  // tests/store/catchUpCampaignWorld.test.js ("UNDO over a caught-up span is ONE
+  // step", "UNDO restores the prior catch-up cursor"); the metadata/behaviour
+  // agreement is pinned in tests/store/pulseUndoAdvertising.test.js, and the arming
+  // entry is hand-audited in tests/store/advertisedUndoArming.walker.test.js
+  // (kind:'delegates', armedBy advanceCampaignWorld). Session-scoped like every pulse
+  // undo: a reload clears the stack and canUndoLastPulse is honestly false.
+  catchUpCampaignWorld: { opType:'catchUpCampaignWorld', label:"Catch the world up", description:"Advances the campaign's world through any elapsed time it had fallen behind, without a manual pulse. The whole caught-up span is one step, and it can be undone with Undo last pulse.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:'undoLastPulse', undoState:'action' },
   applyCampaignContentBindingMigration: { opType:'applyCampaignContentBindingMigration', label:"Apply a campaign content migration", description:"Applies one reviewed immutable content-binding migration or rollback through compare-and-swap persistence, preserving the campaign's prior binding in history.", klass:'macro', slice:'campaignSlice', targetScope:'campaign', receiptRef:'campaign-content-binding-receipt', undoToken:null, undoState:'external:rollback-migration' },
   // R-0 undo-truth (queue #5): KEPT, armed at the TRANSACTION level. The paused
   // advance pushes the pre-INTERVAL snapshot in its Phase-2 commit, so a resume
   // of any interval begun this session is genuinely undoable (pinned: resume to
-  // completion, undoLastPulse restores tick 0). The one gap is reload-into-paused:
-  // the session stack is cleared while the cursor still resumes, and the
-  // pre-interval state is UNRECOVERABLE (the cursor's preSnapshot holds only the
-  // pre-PAUSED-TICK clones — restoring those would mint a never-committed
-  // mid-interval state, failing the same-restore-semantics bar). On that corner
-  // canUndoLastPulse is false, so the UI never offers the missing undo. Arming
-  // the reload corner would take persisting the pre-interval snapshot into the
-  // cursor itself — a persistence-shape change, owner-gated.
+  // completion, undoLastPulse restores tick 0).
+  // R-5b CLOSES R-0's one remaining gap, reload-into-paused, under the owner's
+  // authorization for the shape change R-0 identified: the SAME pre-INTERVAL
+  // snapshot is now also parked on the resume cursor
+  // (worldState.pausedAdvance.preIntervalUndo), so it rehydrates with the campaign
+  // when the session stack does not. undoLastPulse restores from the cursor only
+  // when the stack holds nothing for the campaign, and the restore clears the
+  // pause (the parked snapshot predates the interval), making it the documented
+  // ABANDON path. NOT restored: the cursor's `preSnapshot`, which still holds only
+  // pre-PAUSED-TICK clones and would mint a never-committed mid-interval state —
+  // that remains resume fuel, never undo fuel. Absent-tolerant: a cursor written
+  // before this field existed parks nothing, canUndoLastPulse stays honestly false
+  // there, and no migration runs.
   resolveIntervalMajors: { opType:'resolveIntervalMajors', label:"Resolve interval majors", description:"Resolves the major events queued for a world-pulse interval and records them in the pulse record. It can be undone with Undo last pulse.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'pulse-record', undoToken:'undoLastPulse', undoState:'action' },
   // R-1 (queue #5): ARMED FOR REAL — the honest cure R-0's revert pointed at.
   // R-0 had de-advertised this row after its first arming was reverted for
@@ -198,6 +223,14 @@ export const OPERATIONS = Object.freeze({
   // ── K-B MECHANICAL — simple setters/updaters of durable/domain state ──
   // (No count in this header: the old "(118)" rotted to 124 unnoticed. Census
   //  the live number with `grep -c "klass:'mechanical'"` — never transcribe it.)
+  // R-5b (owner queue #17): REGISTERED, not EXEMPT. Every K-D exempt row earns its
+  // exemption with "excluded from the persist partialize" — this setter's whole
+  // point is that it IS persisted (displayPrefs rides the allowlist), so it is a
+  // real setter of durable state and belongs in the census proper. targetScope
+  // 'global' because the preference is a property of the device, not of any save or
+  // campaign; undoState 'not-applicable' because re-picking a ceiling IS the
+  // inverse, and the value is outside canon entirely.
+  setSceneQualityMode: { opType:'setSceneQualityMode', label:"Set the portrait quality ceiling", description:"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   queueEdit: { opType:'queueEdit', label:"Queue an edit", description:"Adds a single pending edit to the settlement, to be committed later. The edit can be reverted on its own.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertSingleEdit', undoState:'action' },
   revertSingleEdit: { opType:'revertSingleEdit', label:"Revert a single edit", description:"Removes one queued pending edit from the settlement.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   revertPendingEdits: { opType:'revertPendingEdits', label:"Revert all pending edits", description:"Discards every queued pending edit on the settlement without committing them.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },

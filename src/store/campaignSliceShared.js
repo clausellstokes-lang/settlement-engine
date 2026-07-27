@@ -133,6 +133,30 @@ export function findActiveCampaign(campaigns, campaignId) {
   return isCampaignActive(campaign) ? campaign : null;
 }
 
+/**
+ * R-5b reload-into-paused arming — the ONE reader of the pre-INTERVAL pulse-undo
+ * snapshot parked on a campaign's pausedAdvance cursor (the cursor's full shape is
+ * documented on buildPausedAdvanceCursor in campaignAdvanceSession.js).
+ *
+ * It lives here, in the shared leaf, rather than in any one slice because FOUR
+ * surfaces have to agree on what "there is an advance to undo" means: the store
+ * predicate (canUndoLastPulse), the restore body (runUndoLastPulse), the world-map
+ * toolbar's undo gate, and the undo-history panel. Four hand-rolled optional chains
+ * would be four chances to drift apart — the parity-fork class this program exists
+ * to close.
+ *
+ * ABSENT-TOLERANT BY CONSTRUCTION: no cursor, and an OLD-SHAPE cursor written
+ * before this field existed, both read null. Every caller treats null as "nothing
+ * parked", which is exactly the pre-change behaviour — so old saves degrade to it
+ * without a migration.
+ *
+ * @param {any} campaign a campaign record (or null/undefined)
+ * @returns {any|null} the parked pre-interval pulse-undo snapshot, or null
+ */
+export function parkedIntervalUndoSnapshot(campaign) {
+  return campaign?.worldState?.pausedAdvance?.preIntervalUndo || null;
+}
+
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];

@@ -7,6 +7,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 // Wave-2 M2: safety severity delegated to the total chokepoint. deriveFoodBalance
 // is NOT re-imported — the walk-lane fold removed the Food Deficit line that used it.
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
+import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -21,14 +22,22 @@ import Button from '../../primitives/Button.jsx';
 // and have no closure dependency on OverviewTab state beyond their
 // props, so the lift is mechanical.
 
+// R-5b item #20 (stat-bars: BANDS over raw numbers). The value beside each bar
+// was a bare 0-100 digit; it is now the score's BAND WORD, read from the shared
+// defenseScoreBands ladder — the same word DefenseTab's Threat Assessment badge
+// and the PDF readiness rows already print for that same score, so one number
+// can no longer read as two verdicts. This mirrors the Food Security row below,
+// the sanctioned precedent: label left, band right, bar carries the magnitude.
+// The colour ladder moves with it (was a local 70/45/25 twin, now the shared
+// 65/40/20 the PDF prints) so the word and the colour can never disagree.
 function ScoreRow({ label, score }) {
   const n = Math.min(100, Math.max(0, score || 0));
-  const c = n >= 70 ? '#1a5a28' : n >= 45 ? '#a0762a' : n >= 25 ? '#8a4010' : '#8b1a1a';
+  const c = scoreColor(n);
   return (
     <div style={{ marginBottom: 8 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 }}>
         <span style={{ fontSize: FS.xs, color: swatch.inkMag2, fontWeight: 600 }}>{label}</span>
-        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{Math.round(n)}</span>
+        <span style={{ fontSize: FS.xs, fontWeight: 700, color: c }}>{scoreBand(n)}</span>
       </div>
       <div style={{ height: 6, background: swatch['#E8DCC8'], overflow: 'hidden' }}>
         <div style={{ height: '100%', width: `${n}%`, background: c, transition: 'width 0.4s' }} />
