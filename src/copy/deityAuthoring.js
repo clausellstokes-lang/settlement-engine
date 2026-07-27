@@ -78,6 +78,12 @@ export const deityAuthoring = {
     // Wave R-2 (atlas Gap 2b): the clear-ALL-cults door. One string, vetoable.
     clearAll:       'Remove all cults',
     noneAuthored:   'No deities authored yet. Author one in the Compendium under Custom Content, then assign it here.',
+    // Wave R-5b (item 13b): the restore-from-world lane. When the living world
+    // converts a settlement away from its patron, that god survives only in the
+    // campaign record, and the pickers above list authored deities only. These
+    // two strings are the door back. One string each, vetoable.
+    worldFaithsGroup: 'Faiths this settlement has known',
+    worldFaithsHint: 'Gods this settlement already worships or once worshipped, kept in the campaign record. Choose one to hand it the patron seat back.',
     tooSmall:       'This settlement is too small to sustain a cult beneath its patron. Larger settlements hold more faiths.',
     cultHint:       'One faith per moral × order niche, except the patron’s own: impose a cult there to spark a contest for the seat. A full settlement displaces its weakest cult to make room.',
     // Non-premium (free / anon): the in-place upsell (never a dead control).

@@ -12,6 +12,7 @@ import {
   stablePart,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
+import { deityIdOf } from './pantheon.js';
 import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
@@ -571,12 +572,23 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
  * Re-picks the exact embed field set (mirrors mutate.setPrimaryDeity) so a
  * conversion is structurally identical to a DM assign — never leaking a foreign
  * field or wall-clock stamp into the embedded record.
+ *
+ * IDENTITY: the committed ref is `deityIdOf(snapshot)` — the SAME id the pantheon
+ * ledger keys the same snapshot by (pantheon.collectFaithDeltas), so config and
+ * ledger can never split identity. Two rots were removed here (R-5b item 13c):
+ * the old chain fell back to `config.primaryDeityRef` (the OUSTED patron's ref,
+ * stamped onto the WINNER's snapshot) and then to a `converted:<slug>` namespace
+ * that neither the account mint (`deity:<scope>:<slug>`) nor the pool namespace
+ * (`deity:core:`) recognized. Both fallbacks were unreachable for every
+ * disciplined writer (all stamp `_deityRef`); the only behavior delta is on a
+ * pre-discipline legacy local save, whose ref-less snapshot now keys by
+ * `deity:<name>` or, name-less, refuses the commit rather than inventing an
+ * identity.
  */
 function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ snapshot) {
-  if (!settlement || !snapshot) return settlement;
-  const config = { ...(settlement.config || {}) };
-  const ref = snapshot._deityRef || config.primaryDeityRef || `converted:${stablePart(snapshot.name || 'deity')}`;
-  config.primaryDeityRef = ref;
+  const ref = settlement && snapshot ? deityIdOf(snapshot) : null;
+  if (!ref) return settlement;
+  const config = { ...(settlement.config || {}), primaryDeityRef: ref };
   config.primaryDeitySnapshot = Object.freeze({
     _deityRef: ref,
     name: String(snapshot.name || ''),

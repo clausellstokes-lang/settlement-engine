@@ -2265,7 +2265,7 @@ export const createSettlementSlice = (set, get) => ({
   // persisted event-log OUTPUT is byte-identical; only the API shape moved. The
   // chunk is warm in practice: the deity panel/composer field statically import
   // customRegistry, so assigning from either surface awaits a fetched module.
-  setPrimaryDeity: async (deityRefId) => (await import('./settlementDeityHelpers.js')).setPrimaryDeityImpl(get, deityRefId),
+  setPrimaryDeity: async (deityRefId, opts = {}) => (await import('./settlementDeityHelpers.js')).setPrimaryDeityImpl(get, deityRefId, opts),
   imposeCult: async (deityRefId, removeRef = null) => (await import('./settlementDeityHelpers.js')).imposeCultImpl(get, deityRefId, removeRef),
 
   // ── Identity edits + canon-by-id (Wave 4a) ────────────────────────────────

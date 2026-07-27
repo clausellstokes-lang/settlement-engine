@@ -38,6 +38,7 @@ import {
   DEITY_TIER,
 } from '../../domain/customContentSchema.js';
 import { capacityForTier } from '../../domain/worldPulse/cultImpositionApply.js';
+import { worldFaithsForSave } from '../../domain/deitySnapshot.js';
 // MANIFEST PARITY (atlas Gap #14 cure): the panel lane runs the SAME availability
 // predicates the composer runs. Legal import: this panel rides the lazy dossier
 // chunk (dossierLazyTabs), and the manifest's lazy-leaf law only forbids EAGER /
@@ -55,6 +56,12 @@ import Button from '../primitives/Button.jsx';
 // parchment (tests/design/contrast.test.js); the SaaS violet #7C3AED it replaces
 // read below AA as a heading label on the light card.
 const DEITY_ACCENT = RUBRIC.entry;
+
+// The option-value prefix that marks a RESTORE-FROM-WORLD pick (Wave R-5b, item
+// 13b). Authoring options carry `custom:<localUid>` refs and world options carry
+// religion-state keys; the prefix keeps the two namespaces from ever colliding
+// in one select, and the handler strips it before dispatching the key verbatim.
+const WORLD_OPT = 'world::';
 
 const wrapStyle = {
   border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`,
@@ -100,11 +107,23 @@ export default function DeityAssignmentPanel() {
   const imposeCult = useStore((s) => s.imposeCult);
   const canUseCustom = useStore((s) => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
   const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
+  const campaigns = useStore((s) => s.campaigns);
+  const activeSaveId = useStore((s) => s.activeSaveId);
 
   const deities = useMemo(() => {
     const registry = buildRegistry(customContent || {});
     return registry.listCustom('deities');
   }, [customContent]);
+
+  // RESTORE FROM WORLD (Wave R-5b, item 13b): the faiths this settlement's own
+  // campaign record still carries. Read through the SAME pure reader the store
+  // seam resolves with, so the panel can never offer a choice the seam refuses.
+  // A standalone settlement has no campaign record and gets an empty list, which
+  // renders no group at all.
+  const worldFaiths = useMemo(
+    () => worldFaithsForSave(campaigns, activeSaveId),
+    [campaigns, activeSaveId],
+  );
 
   if (!settlement) return null;
 
@@ -196,6 +215,18 @@ export default function DeityAssignmentPanel() {
   const cultRefSet = new Set(cults.map((c) => String(c._deityRef || c.name || '')));
   const cultOptions = options.filter((d) => d.minted !== (selectedPatron?.minted) && !cultRefSet.has(d.minted));
 
+  // The restore-from-world group: every recorded faith EXCEPT the one already
+  // seated. Option values carry a prefix so the change handler can never confuse
+  // a world state key with an authoring `custom:` ref, whatever either namespace
+  // grows into.
+  const worldOptions = worldFaiths.filter((f) => f.deityRef !== String(currentRef));
+
+  /** Dispatch a patron pick down whichever resolution lane its value names. */
+  const onPatronPick = (value) => {
+    if (value.startsWith(WORLD_OPT)) setPrimaryDeity?.(value.slice(WORLD_OPT.length), { fromWorld: true });
+    else setPrimaryDeity?.(value || null);
+  };
+
   // MANIFEST PARITY (Gap #14): evaluate the SAME availability predicates the
   // composer evaluates, with the composer's ctx shape, BEFORE offering a write.
   // Unavailability grays-with-reason in the manifest's own sentences (the
@@ -208,7 +239,7 @@ export default function DeityAssignmentPanel() {
     <div data-testid="deity-assignment-panel" style={wrapStyle}>
       {/* Patron */}
       <div style={{ ...headingStyle, marginBottom: 6 }}>{td('assign.patronHeading')}</div>
-      {deities.length === 0 ? (
+      {deities.length === 0 && worldOptions.length === 0 ? (
         <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>{td('assign.noneAuthored')}</div>
       ) : (
         <>
@@ -216,13 +247,25 @@ export default function DeityAssignmentPanel() {
             data-testid="patron-deity-select"
             aria-label={td('assign.patronHeading')}
             value={selectedPatron?.refId || ''}
-            onChange={(e) => setPrimaryDeity?.(e.target.value || null)}
+            onChange={(e) => onPatronPick(e.target.value)}
             disabled={!patronVerb.available}
             style={selectStyle}
           >
             <option value="">{td('assign.noPatron')}</option>
             {options.map((d) => <option key={d.refId} value={d.refId}>{d.name}</option>)}
+            {worldOptions.length > 0 && (
+              <optgroup data-testid="world-faiths-group" label={td('assign.worldFaithsGroup')}>
+                {worldOptions.map((f) => (
+                  <option key={f.deityRef} value={`${WORLD_OPT}${f.deityRef}`}>{f.snapshot.name}</option>
+                ))}
+              </optgroup>
+            )}
           </select>
+          {worldOptions.length > 0 && (
+            <div data-testid="world-faiths-hint" style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
+              {td('assign.worldFaithsHint')}
+            </div>
+          )}
           {!patronVerb.available && (
             <div data-testid="patron-verb-unavailable" style={{ fontSize: FS.micro, color: MUTED, marginTop: 6, lineHeight: 1.4 }}>
               {[...patronVerb.reasons, ...patronVerb.unlocks].join(' ')}

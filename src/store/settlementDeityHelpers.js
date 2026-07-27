@@ -36,7 +36,7 @@
 
 import { buildRegistry, mintDeityRef } from '../lib/customRegistry.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
-import { deitySnapshotFrom } from '../domain/deitySnapshot.js';
+import { deitySnapshotFrom, worldFaithsForSave } from '../domain/deitySnapshot.js';
 import { customContentForActiveContext } from './activeCustomContentContext.js';
 
 // The zero-import authority lives in domain so headless preview/event paths and
@@ -125,11 +125,25 @@ export function deityWriteGate(state, { shed = false } = {}) {
  * CLEAR path is a `shed` write: allowed for a lapsed account that owns a live
  * embed (the recorded deityWriteGate JUDGMENT), refused for free tier.
  *
+ * RESTORE-FROM-WORLD (`opts.fromWorld`, R-5b item 13b) is the second, EXPLICIT
+ * source: the ref names a faith the campaign's own `worldState.religionStates`
+ * still records for this settlement, and the snapshot comes from that record
+ * rather than the authoring registry. It exists because the living world can
+ * convert a settlement away from a patron the DM can never re-pick — the pickers
+ * list custom-authored deities only, so a pool-seeded or foreign-account god,
+ * once ousted, was unrestorable by any lever. The flag is explicit rather than a
+ * fallback-after-registry-miss so a mistyped custom ref still refuses instead of
+ * silently resolving somewhere else. Gating is unchanged: a restore ASSIGNS, so
+ * it takes the entitled-only direction (a lapsed account may still only shed).
+ *
  * @param {() => any} get           the slice's store getter
- * @param {string|null} deityRefId  a `custom:<localUid>` ref, or null to clear
+ * @param {string|null} deityRefId  a `custom:<localUid>` ref, a recorded world
+ *   faith's state key when `opts.fromWorld` is set, or null to clear
+ * @param {{ fromWorld?: boolean }} [opts]  fromWorld: resolve the ref against the
+ *   campaign's recorded faiths for this settlement instead of the registry
  * @returns the resulting log entry, the typed refusal, or null if nothing happened
  */
-export function setPrimaryDeityImpl(get, deityRefId) {
+export function setPrimaryDeityImpl(get, deityRefId, opts = {}) {
   const state = get();
   if (!state.settlement) return null;
 
@@ -145,6 +159,27 @@ export function setPrimaryDeityImpl(get, deityRefId) {
       type: 'SET_PRIMARY_DEITY',
       targetId: null,
       payload: { deityRef: null, snapshot: null },
+    });
+  }
+
+  // RESTORE-FROM-WORLD: resolve against the campaign's own recorded faiths for
+  // this settlement, not the authoring registry. The dispatched ref is the
+  // surviving STATE KEY verbatim — never re-minted — because the pantheon ledger
+  // and the religion state both key by it, and a re-mint would fork the deity
+  // into a duplicate entry. The snapshot is re-picked through the same
+  // deitySnapshotFrom builder every assign uses (never spread), so the handler
+  // commits a structurally identical embed. An unrecorded ref refuses, exactly
+  // like an unknown registry ref. A snapshot that lost its law axis to a
+  // pre-fix conversion embed restores as law-neutral: that axis is already gone
+  // from the record, and inventing one here would be a different god.
+  if (opts?.fromWorld) {
+    const faith = worldFaithsForSave(state.campaigns, state.activeSaveId)
+      .find((f) => f.deityRef === String(deityRefId));
+    if (!faith) return null;                          // unrecorded ref — refuse.
+    return state.applyEvent({
+      type: 'SET_PRIMARY_DEITY',
+      targetId: faith.deityRef,
+      payload: { deityRef: faith.deityRef, snapshot: deitySnapshotFrom(faith.snapshot) },
     });
   }
 
