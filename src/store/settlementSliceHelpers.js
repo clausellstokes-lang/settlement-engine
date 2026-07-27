@@ -17,6 +17,8 @@ import { deepClone } from '../domain/clone.js';
 import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
 import { makeActionResult } from './actionResult.js';
+import { remapNpcLocks, locksAfterFullGenerate } from '../domain/locksPreservation.js';
+import { persistSaveUpdate } from './campaignSliceShared.js';
 
 // A+ P0.1: persistSaveUpdate is UNIFIED. The canon settlement path (applyEvent,
 // undoLastEvent, recordSnapshot, revertToSnapshot, destroySavedSettlement) imports
@@ -26,6 +28,10 @@ import { makeActionResult } from './actionResult.js';
 // and drifting from Supabase. There must be exactly ONE persistSaveUpdate definition.
 export { persistSaveUpdate } from './campaignSliceShared.js';
 export { loadSettlementContentRuntimeOptions } from './settlementContentRuntime.js';
+// The LOCKS ENGINE read side (domain/locksPreservation.js), re-exported through this
+// leaf so settlementSlice keeps its single helper import home and gains no new static
+// import of its own — the eager-closure rule the lock leaf's header explains.
+export { sectionLocked, carryLockedSections, geographyLockedConfig } from '../domain/locksPreservation.js';
 
 const MAX_VERSION_HISTORY = 50;
 
@@ -240,6 +246,69 @@ export function unknownSavedSettlementPatchKeys(partial) {
     console.error('[settlementSlice] updateSavedSettlement refused unknown patch keys:', unknown);
   }
   return unknown;
+}
+
+/**
+ * THE LOCK-SURVIVES-ITS-OWN-REGEN STEP (locks engine Phase A, lifecycle: REGEN).
+ *
+ * regenNPCsPipeline reports which keepers survived and which ids they inherited.
+ * A locked `npc_3` that took over slot `npc_7` leaves the lock naming whoever the
+ * roll put in `npc_3` — a stranger. Rewriting the map here, inside the same `set()`
+ * that folds the new roster in, is what stops the lock ghosting on the second
+ * reroll. Dormant by construction: no report, or nothing moved, and the draft is
+ * not written at all.
+ *
+ * @param {{ locks?: Record<string, any> }} state  the Immer draft
+ * @param {{ preserved?: Array<{id?: string, fromId?: string}> }|null|undefined} preservation
+ */
+export function remapLocksAfterRegen(state, preservation) {
+  const current = state.locks || {};
+  const next = remapNpcLocks(current, preservation?.preserved);
+  if (next !== current) state.locks = next;
+}
+
+/**
+ * The FULL-GENERATE lock tail: drop the id arrays, keep the booleans.
+ * Phase A does not carry rosters through a full generate, so an id array would
+ * name members of a roster that no longer exists — see domain/locksPreservation.js.
+ * Dormant: an untouched map is not written back.
+ * @param {{ locks?: Record<string, any> }} state  the Immer draft
+ */
+export function resetRosterLocksAfterGenerate(state) {
+  const current = state.locks || {};
+  const next = locksAfterFullGenerate(current);
+  if (next !== current) state.locks = next;
+}
+
+/**
+ * THE LOCK PERSIST (locks engine Phase A, lifecycle: PERSIST).
+ *
+ * Before this, `state.locks` was durable ONLY BY PIGGYBACK: it rides inside
+ * `campaignState`, so it reached the cloud whenever some OTHER canon-path write
+ * happened to pickle the slice, and a session that set a lock and then reloaded
+ * lost it. setLock/clearLocks now adopt regenSection's own persist pattern
+ * (settlementSlice regenSection tail): stamp editedAt, update the in-memory save
+ * entry, and durably write the re-derived campaignState.
+ *
+ * `campaignState` and `timestamp` are already in SAVED_SETTLEMENT_PATCH_KEYS above,
+ * so this widens no allowlist. No settlement blob is written — a lock is intent
+ * ABOUT the settlement, not a change to it.
+ *
+ * @param {() => any} get
+ * @param {(fn: (draft: any) => void) => void} set
+ * @returns {Promise<boolean>|undefined} the persist promise when there was a save to write
+ */
+export function persistLocksToActiveSave(get, set) {
+  const saveId = get().activeSaveId;
+  if (!saveId) return undefined;
+  const now = new Date().toISOString();
+  set(s => { s.editedAt = now; });
+  const after = get();
+  const campaignState = pickleCampaignState(after, { now });
+  if (typeof after.updateSavedSettlement === 'function') {
+    after.updateSavedSettlement(saveId, { campaignState, timestamp: now });
+  }
+  return persistSaveUpdate(saveId, { campaignState });
 }
 
 export function computePendingSuccession(settlement, event) {

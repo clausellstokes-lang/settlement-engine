@@ -230,9 +230,12 @@ function refreshRosterProse(npcs, displacements, keeperIds) {
  *
  * @param {Object} settlement
  * @param {Object} config
- * @param {{ seed?: string, mode?: string }} [options] `mode` selects the
- *   preservation policy (nudge / rebalance / reforge); it defaults to
- *   'rebalance', which keeps user canon and locked entities.
+ * @param {{ seed?: string, mode?: string, locks?: Record<string, unknown>|null }} [options]
+ *   `mode` selects the preservation policy (nudge / rebalance / reforge); it
+ *   defaults to 'rebalance', which keeps user canon and locked entities.
+ *   `locks` is the settlement's lock map (domain/locksPreservation.js); the ids it
+ *   names survive on top of whatever the mode already carries. Absent or empty ⇒
+ *   the dormant path, byte-identical to a call that never passed it.
  */
 export function regenNPCsPipeline(settlement, config, options = {}) {
   const seed = options.seed || generateSeed();
@@ -262,7 +265,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // The dormant path must hand over the SAME config object, not a spread copy
     // carrying a zero floor — anything downstream that fingerprints config keys
     // would see a shape change where nothing changed.
-    const preservedCount = countPreservedNpcs(settlement.npcs, { mode: options.mode });
+    const preservedCount = countPreservedNpcs(settlement.npcs, { mode: options.mode, locks: options.locks });
     const rollConfig = preservedCount > 0 ? { ...config, _minNpcCount: preservedCount } : config;
     const npcs = generateNPCs({
       tier: settlement.tier,
@@ -308,10 +311,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // rewrites goal.short for its top-ranked NPCs, and goal.short is itself a
     // user-editable field — enriching a preserved character would undo the very
     // edit being preserved.
-    const { npcs: merged, preserved, displacements } = mergePreservedNpcs(
+    const { npcs: merged, preserved, displacements, overflow } = mergePreservedNpcs(
       /** @type {{npcs?: Array<Record<string, unknown>>}} */ (settlement).npcs,
       enrichedNpcs,
-      { mode: options.mode },
+      { mode: options.mode, locks: options.locks },
     );
 
     // Write the displaced characters out of the prose BEFORE relinking, so the
@@ -333,6 +336,13 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       factions: relinkFactionMembers(factions, roster),
       conflicts,
       _regenSeed: seed,
+      // The preservation REPORT, out of band of the settlement parts. A keeper
+      // inherits its slot's id, so a caller holding id-keyed state (the lock map)
+      // must be told fromId -> id or its lock silently follows the stranger who
+      // took the old slot. Omitted entirely when nothing was preserved, so the
+      // dormant path returns the exact key set it always returned; the store
+      // destructures it OFF before folding the parts into the settlement blob.
+      ...(preserved.length ? { _preservation: { preserved, overflow } } : {}),
     };
   } finally {
     clearActiveRng(prevRng);

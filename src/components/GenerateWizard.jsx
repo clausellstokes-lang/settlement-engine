@@ -44,6 +44,11 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
+// LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
+// only meaningful once a settlement exists. The dossier tabs import the same leaf
+// statically from inside their own lazy chunks, so this costs a shared chunk, not
+// first-paint bytes.
+const LockControls = lazy(() => import('./dossier/LockControls.jsx'));
 
 // ── Step definitions ─────────────────────────────────────────────────────────
 // The linear step wizard collapsed into LayeredConfigurationPanel (UX overhaul
@@ -483,6 +488,12 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // ── Post-generation: the dossier view (and the navigated-back recall). ──────
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+      {/* LOCKS ENGINE Phase A — what a new roll keeps. This sits with the full
+          generate rather than in a tab because identity and ground are exactly
+          what a whole new roll would otherwise take away; the per-section locks
+          live beside their own Reroll buttons. */}
+      {settlement && <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Setting out what a new roll keeps…</div>}><LockControls scope="world" /></Suspense>}
 
       {/* Regenerate moved into the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the

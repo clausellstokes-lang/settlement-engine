@@ -199,8 +199,11 @@ export const createAiSlice = (set, get) => ({
   clearAiViolations: () =>
     set(state => { state.aiViolations = null; }),
 
-  setAiDailyLife: (prose) =>
-    set(state => { state.aiDailyLife = prose; }),
+  // RETIRED (R-5b, owner queue #21): `setAiDailyLife`. A redundant setter with no
+  // caller — the daily-life generation path writes `state.aiDailyLife` directly
+  // (both the streamed per-field write and the final assignment below), and the
+  // identity-hygiene clears null it. A second public writer onto a field that
+  // already has one is how a single-writer invariant rots.
 
   setAiLoading: (loading) =>
     set(state => { state.aiLoading = loading; }),

@@ -9,6 +9,7 @@ import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 import {NarrativeNote} from '../NarrativeNote';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
+import LockControls from '../../dossier/LockControls.jsx';
 
 export function NPCsTab({
   npcs,
@@ -73,7 +74,14 @@ export function NPCsTab({
             ⚲ {pinnedCount} PINNED
           </span>
         )}
-        {onRerollNPCs&&<Button variant="gold" size="sm" onClick={onRerollNPCs} style={{flexShrink:0}}>↺ Reroll</Button>}
+        {/* The Reroll button now lives INSIDE LockControls: a locked roster must
+            never render an armed Reroll, and the only way to guarantee that is to
+            let the lock own the button. Per-CHARACTER locks are supported by the
+            engine (domain/locksPreservation.js reads an id array under the same
+            key) but have no per-row control yet — deliberately deferred so the
+            roster row does not grow a second toggle next to Pin, which makes a
+            DIFFERENT promise (pinning guards prose from the AI, not from dice). */}
+        <LockControls scope="npcs" onReroll={onRerollNPCs} style={{flexShrink:0}} />
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}

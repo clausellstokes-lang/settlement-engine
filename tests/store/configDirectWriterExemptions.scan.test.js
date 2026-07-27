@@ -72,13 +72,14 @@ const EXPECTED_WRITERS = [
     role: 'exemption',
     why: 'Whole-object reset to DEFAULT_CONFIG. It writes no caller-supplied key at all, so there is nothing for the door to validate; every key it lands is admitted by construction (Object.hasOwn(DEFAULT_CONFIG, key)).',
   },
-  {
-    file: 'src/store/configSlice.js',
-    action: 'setSettlementType',
-    key: 'settType',
-    role: 'exemption',
-    why: 'Tier gate: it must clamp the requested type to maxAllowedTier() before it lands, so it computes the value itself rather than forwarding a patch. settType is a DEFAULT_CONFIG key, so routing it through updateConfig would change nothing but the call depth.',
-  },
+  // EXEMPTION RETIRED (R-5b, owner queue #21): `setSettlementType`. Its exemption
+  // was earned by the tier clamp in its body — and the op turned out to have no
+  // caller anywhere, so that clamp had never run. Retiring the op shrinks this
+  // exact-set by one, which is the direction this scan is meant to move: fewer
+  // doors onto the config draft, not more. The tier gate itself is unaffected and
+  // was proven to live at the generation commit (settlementSlice.generateSettlement
+  // refuses an over-cap settType and re-gates the resolved tier) before the op was
+  // removed — see the retirement note in configSlice.js.
   {
     file: 'src/store/neighbourSlice.js',
     action: 'setNeighbourRelType',
@@ -182,7 +183,11 @@ const signature = w => `${w.file}::${w.action}::${w.key ?? (w.computed ? '[compu
 describe('R-4 — the config draft has ONE validated door plus enumerated exemptions', () => {
   it('self-check: the scan finds writers (not vacuous)', () => {
     const found = scanDirectWriters();
-    expect(found.length, JSON.stringify(found, null, 2)).toBeGreaterThanOrEqual(5);
+    // Floor lowered 5 → 4 with the R-5b retirement of setSettlementType, whose
+    // exemption left this set. This number guards against the scan silently
+    // collapsing to nothing; it tracks the enumeration DOWNWARD as exemptions are
+    // retired, which is the direction the R-4 single-door law wants.
+    expect(found.length, JSON.stringify(found, null, 2)).toBeGreaterThanOrEqual(4);
   });
 
   it('the direct-writer set is EXACTLY the door plus its enumerated exemptions', () => {

@@ -68,6 +68,9 @@ import { deepClone } from './clone.js';
 // through the plan builder pulls entityCatalog's dependency fan into the lazy
 // engine chunk, which the bundler then re-parents into the first-paint closure.
 import { preservesEntity } from './regenerationPolicy.js';
+// The LOCKS leaf, for the same reason: a frozen read over a sparse map, reachable
+// without dragging anything behind it.
+import { lockedNpcIdSet } from './locksPreservation.js';
 
 /**
  * @typedef {import('./canonStatus.js').CanonTaggable & {
@@ -81,7 +84,11 @@ import { preservesEntity } from './regenerationPolicy.js';
 /**
  * @typedef {Object} PreservationResult
  * @property {RosterMember[]} npcs        The merged roster.
- * @property {Array<{id: string, name: string}>} preserved  What survived, for the caller's trace.
+ * @property {Array<{id: string, name: string, fromId: string}>} preserved  What
+ *   survived, for the caller's trace. `id` is the slot id the keeper INHERITED;
+ *   `fromId` is the id it arrived with. The pair is what lets a caller holding
+ *   id-keyed state — the lock map is the one that exists — follow its subject
+ *   through the substitution instead of pointing at whoever took the old slot.
  * @property {Array<{from: string, to: string}>} displacements  Who each keeper
  *   replaced. The caller needs these to rewrite prose that names the departed.
  * @property {Array<{id: string, name: string}>} overflow  Keepers appended
@@ -160,13 +167,20 @@ function chooseSlot(fresh, keeper, claimed) {
 /**
  * The entities of `previousNpcs` this mode carries forward, in roster order.
  *
+ * Two independent grounds for survival, unioned: the MODE's policy (canon /
+ * locked-on-the-entity), and the settlement's own lock map naming this id. The
+ * union is why an unlocked settlement is unaffected — an empty id set adds
+ * nobody, so the filter returns exactly what it returned before locks existed.
+ *
  * @param {RosterMember[]|null|undefined} previousNpcs
  * @param {string|undefined} mode
+ * @param {Set<string>} lockedIds  ids the settlement's lock map names; may be empty
  * @returns {RosterMember[]}
  */
-function keepersOf(previousNpcs, mode) {
+function keepersOf(previousNpcs, mode, lockedIds) {
   if (!Array.isArray(previousNpcs)) return [];
-  return previousNpcs.filter(npc => npc && preservesEntity(mode, 'npc', npc));
+  return previousNpcs.filter(npc => npc
+    && (preservesEntity(mode, 'npc', npc) || lockedIds.has(String(npc.id ?? ''))));
 }
 
 /**
@@ -180,11 +194,11 @@ function keepersOf(previousNpcs, mode) {
  * characters it was added to protect.
  *
  * @param {RosterMember[]|null|undefined} previousNpcs
- * @param {{ mode?: string }} [options]
+ * @param {{ mode?: string, locks?: Record<string, unknown>|null }} [options]
  * @returns {number}
  */
 export function countPreservedNpcs(previousNpcs, options = {}) {
-  return keepersOf(previousNpcs, options.mode).length;
+  return keepersOf(previousNpcs, options.mode, lockedNpcIdSet(options.locks)).length;
 }
 
 /**
@@ -199,12 +213,13 @@ export function countPreservedNpcs(previousNpcs, options = {}) {
  *
  * @param {RosterMember[]|null|undefined} previousNpcs  Roster being replaced.
  * @param {RosterMember[]|null|undefined} freshNpcs     Roster the generators just produced.
- * @param {{ mode?: string }} [options]  Regeneration mode; defaults to 'rebalance'.
+ * @param {{ mode?: string, locks?: Record<string, unknown>|null }} [options]
+ *   Regeneration mode (defaults to 'rebalance') and the settlement's lock map.
  * @returns {PreservationResult}
  */
 export function mergePreservedNpcs(previousNpcs, freshNpcs, options = {}) {
   const fresh = Array.isArray(freshNpcs) ? freshNpcs : [];
-  const keepers = keepersOf(previousNpcs, options.mode);
+  const keepers = keepersOf(previousNpcs, options.mode, lockedNpcIdSet(options.locks));
   if (keepers.length === 0) {
     return { npcs: fresh, preserved: [], displacements: [], overflow: [] };
   }
@@ -212,7 +227,7 @@ export function mergePreservedNpcs(previousNpcs, freshNpcs, options = {}) {
   const merged = fresh.slice();
   /** @type {Set<number>} */
   const claimed = new Set();
-  /** @type {Array<{id: string, name: string}>} */
+  /** @type {Array<{id: string, name: string, fromId: string}>} */
   const preserved = [];
   /** @type {Array<{from: string, to: string}>} */
   const displacements = [];
@@ -222,7 +237,10 @@ export function mergePreservedNpcs(previousNpcs, freshNpcs, options = {}) {
   for (const keeper of keepers) {
     const clone = /** @type {RosterMember} */ (deepClone(keeper));
     const slot = chooseSlot(fresh, keeper, claimed);
-    const entry = { id: '', name: String(clone.name || '') };
+    // fromId is the id the keeper ARRIVED with, recorded before the substitution
+    // overwrites it. Additive: existing consumers read .id / .length and are
+    // untouched; the lock map is the consumer that needs the pair.
+    const entry = { id: '', name: String(clone.name || ''), fromId: String(keeper.id ?? '') };
 
     if (slot === -1) {
       clone.id = mintUnusedId(merged);

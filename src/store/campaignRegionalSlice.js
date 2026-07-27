@@ -22,7 +22,6 @@ import {
   deriveRegionalGraphFromSaves,
   ensureRegionalGraph,
   isRegionalImpactAvailable,
-  queueRegionalImpacts,
   setRegionalChannelStatus as domainSetRegionalChannelStatus,
   setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
   setRegionalImpactStatus as domainSetRegionalImpactStatus,
@@ -49,7 +48,7 @@ import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
 import {
   cloneJson, persistCampaignState, persistSaveUpdate,
-  channelTypesFromImpacts, findActiveCampaign, campaignSettlements,
+  findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
 import {
   campaignStateForRegionalImpact, appendWizardNewsForGraphChange,
@@ -85,20 +84,13 @@ import { extractRegionalImpactDecision, extractRegionalChannelChange } from '../
 // Intra-slice fan-out (ignore/applyAll → get().setRegionalImpactStatus etc.) is
 // SAME-slice. Graph/news mechanics live in campaignPulseHelpers.js + domain/region.
 export const createCampaignRegionalSlice = (set, get) => ({
-  /** Ensure a campaign has the current regional graph envelope. */
-  ensureCampaignRegionalGraph: (campaignId) => {
-    let graph = null;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      c.regionalGraph = ensureRegionalGraph(c.regionalGraph);
-      ensureCampaignWizardNews(c);
-      c.updatedAt = new Date().toISOString();
-      graph = c.regionalGraph;
-      persistCampaignState(state, campaignId);
-    });
-    return graph;
-  },
+  // RETIRED (R-5b, owner queue #21): `ensureCampaignRegionalGraph`. It was a
+  // registered operation with no caller anywhere. The envelope it "ensured" is
+  // ensured on every live path already — rebuildCampaignRegionalGraph, the impact
+  // verbs and the pulse helpers each call `ensureRegionalGraph(c.regionalGraph)`
+  // themselves before touching it, which is the single-source shape the R-4 law
+  // asks for. A separate public verb that only did the same thing first was a
+  // second door onto one room.
 
   /**
    * Rebuild the structural graph from campaign settlements. Existing channel
@@ -397,29 +389,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
     return graph;
   },
 
-  queueCampaignRegionalImpacts: (campaignId, impacts = []) => {
-    let graph = null;
-    let queued = false;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const now = new Date().toISOString();
-      const beforeGraph = ensureRegionalGraph(c.regionalGraph);
-      c.regionalGraph = queueRegionalImpacts(beforeGraph, impacts, { now });
-      appendWizardNewsForGraphChange(c, beforeGraph, c.regionalGraph, { createdAt: now });
-      c.updatedAt = now;
-      graph = c.regionalGraph;
-      queued = true;
-      persistCampaignState(state, campaignId);
-    });
-    if (queued) {
-      track(EVENTS.REGIONAL_IMPACT_QUEUED, {
-        count: Array.isArray(impacts) ? impacts.length : 0,
-        channel_types: channelTypesFromImpacts(impacts),
-      });
-    }
-    return graph;
-  },
+  // RETIRED (R-5b, owner queue #21): `queueCampaignRegionalImpacts`. Registered,
+  // described, and called by nothing. The live regional lane queues its impacts
+  // INTERNALLY — the pulse path writes them through campaignPulseHelpers and the
+  // DM curates them through setRegionalImpactStatus — so this public verb was a
+  // second entry point that would have bypassed the advance-in-flight guards its
+  // siblings carry. Retiring it removes the bypass along with the dead code.
 
   setRegionalImpactStatus: (campaignId, impactId, status, patch = {}, opts = {}) => {
     // Advance-in-flight guard (store-2): a status flip on the regional graph during a

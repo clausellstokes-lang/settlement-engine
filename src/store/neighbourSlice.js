@@ -6,7 +6,15 @@
  * relationship type, and cross-settlement link data.
  */
 
-import { track, EVENTS } from '../lib/analytics.js';
+// R-5b (owner queue #21) — RETIRED FROM THIS SLICE: `neighbourNetwork` and its
+// three verbs (addNeighbourLink / removeNeighbourLink / setNeighbourNetwork).
+// The array was written by nobody and read by nobody: three registered operations
+// and a piece of session state maintaining a link list the product never showed.
+// It was session-only (absent from the persist partialize), so nothing durable
+// referred to it and no migration is owed. The analytics import went with them —
+// NEIGHBOUR_LINKED was fired only by those three verbs, so the event has no
+// remaining producer either. The LIVE neighbour surface is the relationship graph
+// (domain/relationships/*), which never touched this array.
 
 export const RELATIONSHIP_TYPES = [
   { id: 'neutral',       label: 'Neutral',       color: '#888' },
@@ -24,14 +32,15 @@ export const createNeighbourSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   importedNeighbour:  null,          // settlement JSON to feed into next generation
   neighbourRelType:   'neutral',     // relationship type for next link
-  neighbourNetwork:   [],            // array of { settlementId, relType, npcContacts[] }
 
   // ── Actions ────────────────────────────────────────────────────────────────
-  importNeighbour: (settlement) => {
-    if (!get().canUseNeighbour()) return false;
-    set(state => { state.importedNeighbour = settlement; });
-    return true;
-  },
+  // RETIRED (R-5b, owner queue #21): `importNeighbour`. It was the premium
+  // "feed this settlement into the next generation" verb and no surface ever
+  // called it. The SEAM it fed is untouched and still live — generateSettlement
+  // reads `state.importedNeighbour`, the pipeline takes a `neighbor` argument,
+  // and `canUseNeighbour` still gates — so re-exposing the feature is a matter of
+  // writing that one field from a real control, not of rebuilding anything.
+  // Recorded as a G-2b feature spec rather than kept as a decoy verb.
 
   clearNeighbour: () =>
     set(state => { state.importedNeighbour = null; }),
@@ -42,31 +51,6 @@ export const createNeighbourSlice = (set, get) => ({
       // Also sync to config for the generator
       state.config._neighbourRelType = relType;
     }),
-
-  addNeighbourLink: (link) => {
-    set(state => { state.neighbourNetwork.push(link); });
-    // Non-personal: relationship enum + network size + a contacts-present flag.
-    track(EVENTS.NEIGHBOUR_LINKED, {
-      action: 'add',
-      relationship_type: typeof link?.relType === 'string' ? link.relType : 'unknown',
-      network_size_after: get().neighbourNetwork.length,
-      has_npc_contacts: Array.isArray(link?.npcContacts) && link.npcContacts.length > 0,
-    });
-  },
-
-  removeNeighbourLink: (settlementId) => {
-    set(state => {
-      state.neighbourNetwork = state.neighbourNetwork.filter(
-        l => l.settlementId !== settlementId
-      );
-    });
-    track(EVENTS.NEIGHBOUR_LINKED, { action: 'remove', network_size_after: get().neighbourNetwork.length });
-  },
-
-  setNeighbourNetwork: (network) => {
-    set(state => { state.neighbourNetwork = network; });
-    track(EVENTS.NEIGHBOUR_LINKED, { action: 'set', network_size_after: get().neighbourNetwork.length });
-  },
 
   /** Import a neighbour from direct JSON (for the Neighbour System tab). */
   handleImportDirect: (json) => {

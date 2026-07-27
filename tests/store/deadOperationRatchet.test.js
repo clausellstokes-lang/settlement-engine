@@ -173,26 +173,18 @@ const DEAD_OPERATIONS = Object.freeze([
   // canon / macro class (outside the atlas's mechanical-only slice)
   'destroySavedSettlement',
   'handleImportDirect',
-  'importNeighbour',
   'requestProgression',
   // the atlas's separately-recorded dead op (owner queue #14)
   'renameFaction',
-  // the atlas's 31 registered mechanical ops with zero callers
+  // the atlas's registered mechanical ops with zero callers
   'addCredits',
-  'addNeighbourLink',
   'bulkSetGoods',
   'bulkSetServices',
   'clearCampaignWizardNews',
-  'clearLocks',
   'completeOnboarding',
-  'ensureCampaignRegionalGraph',
   'markFeatureUsed',
   'mergeInstitutionToggles',
-  'queueCampaignRegionalImpacts',
-  'recordCanonFlavorEntry',
   'refreshSystemState',
-  'removeNeighbourLink',
-  'reorderCampaignSettlements',
   'replaceAllPlacements',
   'resetAllToggles',
   'resetConfig',
@@ -200,15 +192,9 @@ const DEAD_OPERATIONS = Object.freeze([
   'resetOnboarding',
   'resetToggles',
   'revertSingleEdit',
-  'setAiDailyLife',
-  'setDossierEntitlement',
-  'setLock',
-  'setNeighbourNetwork',
   'setNeighbourRelType',
   'setRegionalChannelVisibility',
-  'setSettlementType',
   'spendCredits',
-  'syncActiveNeighbourFields',
 ]);
 
 /**
@@ -219,11 +205,12 @@ const DEAD_OPERATIONS = Object.freeze([
  * whose inverse gets wired up must be deleted from here.
  */
 const UNREACHABLE_INVERSE = Object.freeze([
-  'addNeighbourLink',   // → removeNeighbourLink (dead)
   'completeOnboarding', // → resetOnboarding (dead)
   'markFeatureUsed',    // → resetOnboarding (dead)
   'queueEdit',          // → revertSingleEdit (dead)
-  'removeNeighbourLink', // → addNeighbourLink (dead)
+  // addNeighbourLink / removeNeighbourLink pointed at each other and BOTH left
+  // the registry in the R-5b retirement below, so their rows go with them — the
+  // no-ghost-rows rule applied to this ledger.
 ]);
 
 /** The recovery verb a row points at: its undoToken, or a verb-shaped ref. */
@@ -307,7 +294,21 @@ describe('R-4 dead-op ratchet — the list only shrinks (owner queue #21)', () =
 
   test('the frozen list is sorted and free of duplicates (a reviewable ledger)', () => {
     expect(DEAD_OPERATIONS.length).toBe(new Set(DEAD_OPERATIONS).size);
-    expect(DEAD_OPERATIONS.length).toBe(36);
+    // 36 at freezing (2026-07-27) → 22 after R-5b Batch 2 answered owner queue
+    // #21 for sixteen of them: TWO were WIRED (setLock + clearLocks — the locks
+    // engine got its read side and its controls, so they gained real consumers)
+    // and TWELVE were RETIRED out of the registry entirely (importNeighbour,
+    // addNeighbourLink, removeNeighbourLink, setNeighbourNetwork,
+    // ensureCampaignRegionalGraph, queueCampaignRegionalImpacts,
+    // reorderCampaignSettlements, setAiDailyLife, setDossierEntitlement,
+    // syncActiveNeighbourFields, recordCanonFlavorEntry's store surface, and
+    // setSettlementType — the last only after its tier clamp was PROVEN redundant
+    // against the live generation gate). The remaining twenty-two are still open:
+    // some await a wiring lane (revertSingleEdit, destroySavedSettlement,
+    // resetAllToggles), some belong to another program (renameFaction #14,
+    // requestProgression), and some are entangled with an unadjudicated finding
+    // (the onboarding coach's missing exit path). Shrink-only, as ever.
+    expect(DEAD_OPERATIONS.length).toBe(22);
   });
 });
 

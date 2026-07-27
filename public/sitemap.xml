@@ -928,11 +928,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-importneighbour</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-handleimportdirect</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1009,6 +1004,11 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-undolastproposalapply</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-setscenequalitymode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1124,16 +1124,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-applyfogedit</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-syncactiveneighbourfields</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-recordcanonflavorentry</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1263,16 +1253,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-reordercampaignsettlements</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-ensurecampaignregionalgraph</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-setregionalchannelstatus</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1284,11 +1264,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-setcampaignregionalgraph</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-queuecampaignregionalimpacts</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1308,11 +1283,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-setaidailylife</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-hydrateaifromsave</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1324,11 +1294,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-clearauth</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-setdossierentitlement</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1528,21 +1493,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-addneighbourlink</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-removeneighbourlink</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-setneighbournetwork</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-completeonboarding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1579,11 +1529,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-resetconfig</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-setsettlementtype</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

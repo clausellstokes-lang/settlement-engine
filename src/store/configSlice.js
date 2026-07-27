@@ -102,6 +102,13 @@ export function isAllowedConfigKey(key) {
     || CONFIG_PATCH_EXTRA_KEYS.has(key);
 }
 
+// The `(set, get)` signature is LOAD-BEARING as written: the operation-registry
+// walker locates a slice's action object by matching `create<Name>Slice = (set, get) =>`
+// literally, and renaming the unused second parameter to `_get` made it fail to find
+// this file's slice at all. `get`'s only reader was setSettlementType's tier clamp,
+// retired below; the parameter stays under its real name (and its warning stays
+// visible) rather than breaking the census that keeps this registry honest.
+// eslint-disable-next-line no-unused-vars
 export const createConfigSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   config: { ...DEFAULT_CONFIG },
@@ -222,13 +229,14 @@ export const createConfigSlice = (set, get) => ({
   clearLoadedFromSave: () =>
     set(state => { state.loadedFromSave = null; }),
 
-  /**
-   * Enforce tier gate: if the user selects a tier above their permission,
-   * clamp to their maxAllowedTier.
-   */
-  setSettlementType: (settType) =>
-    set(state => {
-      const allowed = get().isTierAllowed(settType);
-      state.config.settType = allowed ? settType : get().maxAllowedTier();
-    }),
+  // RETIRED (R-5b, owner queue #21): `setSettlementType`. Its body was a tier
+  // clamp, which made retiring it a paid-surface question — so the gate was
+  // PROVEN to live elsewhere before this line was deleted, not assumed:
+  // settlementSlice.generateSettlement refuses an over-cap `settType` outright
+  // (`if (!state.isTierAllowed(settType)) return null`) and re-gates the RESOLVED
+  // tier after generation for the 'random'/'custom' sentinels. Both run on every
+  // generation. This clamp had no caller, so config already reached those gates
+  // unclamped today; removing it changes no behavior and removes no gate. The
+  // premium boundary stays exactly where the R-4 single-source law put it — at
+  // the commit, not at the picker.
 });

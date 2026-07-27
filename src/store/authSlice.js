@@ -218,13 +218,14 @@ export const createAuthSlice = (set, get) => ({
     return get().dossierEntitlements[saveId] === true;
   },
 
-  /** Optimistically mark a save's durable right as held (e.g. right after a
-   *  successful retro auto-upgrade) without waiting for a refetch. */
-  setDossierEntitlement: (saveId, held) =>
-    set(state => {
-      if (!saveId) return;
-      state.dossierEntitlements[saveId] = held === true;
-    }),
+  // RETIRED (R-5b, owner queue #21): `setDossierEntitlement`. Its docstring named
+  // a caller — "right after a successful retro auto-upgrade" — that never
+  // materialized. The live shape is the opposite and is the right one for a PAID
+  // right: purchases INVALIDATE the cache (clearDossierEntitlements below) and the
+  // authority re-reads it from the server (refreshDossierEntitlement), so the
+  // client never optimistically grants itself a durable entitlement it has not
+  // been told it holds. Removing the optimistic writer removes the only way that
+  // invariant could have been broken.
 
   /** Drop the whole durable-rights read cache so every saved dossier refetches
    *  its right on next view. Called after a durable purchase completes (the

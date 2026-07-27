@@ -1185,13 +1185,12 @@ export const createCampaignSlice = (set, get) => {
     return replaced;
   },
 
-  reorderCampaignSettlements: (campaignId, settlementIds) =>
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      c.settlementIds = settlementIds;
-      c.updatedAt = new Date().toISOString();
-      persistCampaignState(state, campaignId);
-    }),
+  // RETIRED (R-5b, owner queue #21): `reorderCampaignSettlements`. A registered
+  // operation for a drag-to-reorder affordance that was never built — no caller
+  // in the product's whole history. It wrote `c.settlementIds` wholesale, which
+  // is trivially rebuildable if the affordance is ever designed; keeping an
+  // unguarded public verb that replaces a campaign's membership list on the
+  // chance somebody later wants it is a bigger liability than the six lines.
+  // Recorded as a G-2b design note rather than lost.
   };
 };

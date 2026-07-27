@@ -211,7 +211,13 @@ const ARMING = Object.freeze({
   // `entry_not_undoable`, so arming is per-row-class, not global.
   applyEvent: { kind: 'record', record: 'eventLog', reader: 'undoLastEvent', conditional: 'destroy rows refuse (entry_not_undoable)' },
   applyEventBatch: { kind: 'record', record: 'eventLog', reader: 'undoLastEvent', conditional: 'destroy rows refuse (entry_not_undoable)' },
-  recordCanonFlavorEntry: { kind: 'record', record: 'eventLog', reader: 'undoLastEvent', conditional: 'flavour rows pop as ok:true no-ops (R-3 jam cure)' },
+  // ROW RETIRED (R-5b, owner queue #21): `recordCanonFlavorEntry`'s registry entry
+  // was removed with its dead STORE surface, so it no longer advertises undo and a
+  // row here would be stale by this manifest's own honesty rule. The CAPABILITY is
+  // untouched — settlementPendingEditWriters still calls recordCanonFlavorEntryImpl
+  // directly, the flavour row still lands in the eventLog, and undoLastEvent still
+  // pops it as an ok:true no-op (the R-3 jam cure). What disappeared is the second,
+  // never-called door onto it, not the behaviour this row described.
   // ── versionHistory record → revertToSnapshot ───────────────────────────────
   recordSnapshot: { kind: 'record', record: 'versionHistory', reader: 'revertToSnapshot' },
   commitPendingEdits: { kind: 'record', record: 'versionHistory', reader: 'revertToSnapshot' },

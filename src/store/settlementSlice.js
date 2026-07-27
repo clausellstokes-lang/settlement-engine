@@ -105,7 +105,7 @@ import {
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-} from './settlementSliceHelpers.js';
+  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, resetRosterLocksAfterGenerate, persistLocksToActiveSave } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -132,8 +132,7 @@ import { runAuthoritativeCanonEventFromSlice } from './canonEventCommandEntry.js
 // the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
 // Settlements-list + change-queue affordances consume. See each helper's header.
 import {
-  renameSettlementImpl, syncActiveNeighbourFieldsImpl,
-  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl,
+  renameSettlementImpl, canonizeSavedSettlementImpl,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -729,7 +728,14 @@ export const createSettlementSlice = (set, get) => ({
       return null;
     }
 
-    const fullConfig = {
+    // LOCKS ENGINE Phase A — GEOGRAPHY is the one lock that is a generation INPUT
+    // rather than a post-hoc carry: terrain and trade access are drawn early and
+    // everything downstream is conditioned on them, so "keep the ground" can only
+    // mean "roll the same ground again". Dormant (same config reference) when
+    // geography is unlocked, so an unlocked generation is byte-identical to one
+    // taken before locks existed. Under THE PROMISE this stays deterministic —
+    // same seed + same config + same locks is the same world.
+    const fullConfig = geographyLockedConfig(state.locks, state.settlement, {
       ...config,
       _institutionToggles: institutionToggles,
       _categoryToggles:    categoryToggles,
@@ -740,7 +746,7 @@ export const createSettlementSlice = (set, get) => ({
       // flat 50s — and never writes the rolls back into the stored config.
       ...(state.randomSliderMode === true ? { _randomizePriorities: true } : {}),
       ...(neighbor ? { _importedNeighbor: neighbor } : {}),
-    };
+    });
 
     const generationModules = await Promise.all([
       loadEngine(), loadSettlementContentRuntimeOptions(state),
@@ -809,12 +815,17 @@ export const createSettlementSlice = (set, get) => ({
       // below; the save keeps its own settlement and crises) — carrying the
       // old save's world/party conditions onto the new identity would clone
       // the campaign layer onto an unrelated town.
+      // LOCKS ENGINE Phase A — the POST-HOC half: identity (the name) and history
+      // (the whole section the user froze) are carried over the finished roll. The
+      // draw already happened, so this cannot perturb a seeded run; an unlocked
+      // settlement gets `result` back unchanged, same reference.
+    const locked = carryLockedSections(state.locks, state.settlement, result);
     const reconciled = state.activeSaveId
-      ? result
-      : reconcileSettlementChange(result, state.settlement, {
+      ? locked
+      : reconcileSettlementChange(locked, state.settlement, {
           source: 'regenerate',
           changeType: 'GENERATE_SETTLEMENT',
-          changeLabel: result?.name,
+          changeLabel: locked?.name,
         });
       // W-F6 THE PREMIUM GATE — turn the key at generation-complete. A premium
       // account activates the seed's latent starting pantheon into live embeds
@@ -840,6 +851,13 @@ export const createSettlementSlice = (set, get) => ({
         // run's own lifecycle fields below. Without this, the prior settlement's
         // queued edits / successor prompt / draft timeline survived onto the new town.
         resetSettlementIdentity(state);
+        // LOCKS ENGINE Phase A — the id arrays named members of a roster that no
+        // longer exists; the booleans are statements about the settlement and
+        // survive. Keeping the arrays would leave the map advertising a protection
+        // nothing performs, which is the exact defect this engine closes. Phase B
+        // (carrying locked characters THROUGH a full generate) is deferred and
+        // documented in domain/locksPreservation.js — not a bug to re-find.
+        resetRosterLocksAfterGenerate(state);
         state.settlement = withFaith;
         state.activeSaveId = null;
         state.lastSeed = seed;
@@ -1012,8 +1030,14 @@ export const createSettlementSlice = (set, get) => ({
   // domain modules out of the cold-start chunk.
   regenSection: async (section) => {
     const state = get();
-    const { settlement, config } = state;
+    const { settlement, config, locks } = state;
     if (!settlement) return;
+    // LOCKS ENGINE Phase A — a whole-section lock is the user's standing "do not
+    // reroll this". The UI disables the button and says why; this is the typed
+    // refusal behind it, so a caller that bypassed the button gets a reason
+    // instead of a silent reroll. Refusal-only envelope, the updateSavedSettlement
+    // shape (this action's success path is unconverted and stays so).
+    if (sectionLocked(locks, section)) return makeActionResult('regenSection', { ok: false, before: { reason: 'section_locked', section } });
     // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
     // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
     // or history on a canon settlement would silently invalidate campaign canon with
@@ -1047,8 +1071,13 @@ export const createSettlementSlice = (set, get) => ({
     const before = cloneJson(settlement);
 
     if (section === 'npcs') {
-      const parts = eng.regenNPCsPipeline(settlement, cfg);
-      set(s => { Object.assign(s.settlement, parts); });
+      // `_preservation` is the pipeline's report, carried OUT OF BAND of the parts
+      // (it must never land in the settlement blob) and destructured off here. A
+      // locked keeper INHERITS the id of the slot it took over, so the lock map is
+      // rewritten inside the same set() that folds the roster in — otherwise the
+      // lock silently follows the stranger who got the old id on the next reroll.
+      const { _preservation, ...parts } = eng.regenNPCsPipeline(settlement, cfg, { locks });
+      set(s => { Object.assign(s.settlement, parts); remapLocksAfterRegen(s, _preservation); });
     } else if (section === 'history') {
       // This branch still assigns the whole history object, but the pipeline now
       // carries the parts a reroll has no business discarding, so the assignment
@@ -1568,15 +1597,28 @@ export const createSettlementSlice = (set, get) => ({
     }
   },
 
-  setLock: (key, value) => set(state => {
-    if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) {
-      delete state.locks[key];
-    } else {
-      state.locks[key] = value;
-    }
-  }),
+  /**
+   * Set (or, with a falsy/empty value, remove) one lock — the user's standing
+   * "do not reroll this". `key` is a section name ('npcs', 'history') or an
+   * identity/geography flag; the value is `true`, or an array of entity ids.
+   *
+   * THE PERSIST (atlas store-ops-a gap 10): the lock map rides inside
+   * campaignState, so before this it reached the cloud only by PIGGYBACK — when
+   * some OTHER canon-path write happened to pickle the slice. Set a lock, reload
+   * without touching anything else, and it was gone. Both verbs now write through
+   * the same path regenSection uses; see persistLocksToActiveSave.
+   */
+  setLock: (key, value) => {
+    // Flat rather than braced: this file sits exactly at its frozen max-lines
+    // ceiling, so the persist below is funded from the branch's own bytes.
+    set(state => {
+      if (value === false || value === undefined || (Array.isArray(value) && value.length === 0)) delete state.locks[key];
+      else state.locks[key] = value;
+    });
+    return persistLocksToActiveSave(get, set);
+  },
 
-  clearLocks: () => set(state => { state.locks = {}; }),
+  clearLocks: () => { set(state => { state.locks = {}; }); return persistLocksToActiveSave(get, set); },
 
   /**
    * Run the event preview without committing. UI shows the result as a
@@ -2229,9 +2271,13 @@ export const createSettlementSlice = (set, get) => ({
   // ── Identity edits + canon-by-id (Wave 4a) ────────────────────────────────
   // The always-allowed town rename, the Settlements-list canonize-by-id, and the
   // change-queue flavor/neighbour companions. Delegated to settlementRenameHelpers.
+  // RETIRED (R-5b, owner queue #21): `syncActiveNeighbourFields` (dead in BOTH
+  // halves — see settlementRenameHelpers) and the `recordCanonFlavorEntry` STORE
+  // SURFACE. The flavor Impl is very much alive; it is called directly by
+  // settlementPendingEditWriters, which is the only path that records one. What
+  // was dead was this second, registered door onto it — a live Impl with a dead
+  // store surface, the same shape the atlas found at setRegionalChannelVisibility.
   renameSettlement: (id, newName) => renameSettlementImpl(get, set, id, newName),
-  syncActiveNeighbourFields: (neighbourFields) => syncActiveNeighbourFieldsImpl(get, set, neighbourFields),
-  recordCanonFlavorEntry: (entry) => recordCanonFlavorEntryImpl(get, set, entry),
   canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
 
   /**

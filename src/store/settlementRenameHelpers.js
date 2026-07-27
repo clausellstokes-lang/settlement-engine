@@ -27,30 +27,14 @@
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 
-/**
- * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
- * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
- * result, so an event order replayed AFTER a link/unlink in the same commit
- * builds on the link's network (and vice-versa). No-op unless a flush is in
- * progress (get().flushSuppressPersist truthy).
- *
- * @param {Function} get  the slice's get()
- * @param {Function} set  the slice's set() (Immer producer)
- * @param {{ neighbourNetwork?: any[], interSettlementRelationships?: any[] }} neighbourFields
- * @returns {void}
- */
-export function syncActiveNeighbourFieldsImpl(get, set, neighbourFields) {
-  if (!get().flushSuppressPersist) return;
-  set(state => {
-    if (!state.settlement || !neighbourFields) return;
-    if (Array.isArray(neighbourFields.neighbourNetwork)) {
-      state.settlement.neighbourNetwork = neighbourFields.neighbourNetwork;
-    }
-    if (Array.isArray(neighbourFields.interSettlementRelationships)) {
-      state.settlement.interSettlementRelationships = neighbourFields.interSettlementRelationships;
-    }
-  });
-}
+// RETIRED (R-5b, owner queue #21): `syncActiveNeighbourFieldsImpl` and its store
+// wrapper `syncActiveNeighbourFields`. DEAD IN BOTH HALVES — neither the Impl nor
+// the registered action had a caller anywhere in src. It was also unreachable by
+// construction: its first line returned unless `get().flushSuppressPersist` was
+// truthy, and the change-queue flush that would set that flag was never mounted
+// (see the composition note above). A permanent no-op behind an unmounted flag,
+// registered as a real operation. If the change-queue flush lands and needs this
+// reconcile, it is six lines written against a live caller instead of ahead of one.
 
 /**
  * Rename a saved settlement (town). Unlike NPC/faction names, a settlement's own

@@ -86,6 +86,14 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/entities/propagate.js': 'name-lookup + mutation — impairment propagation graph',
   'src/domain/regenerationMode.js': 'name-lookup — single institution by id for canon-tag preservation',
   'src/domain/districtProfile.js': 'display/list — name-overlap match to a quarter',
+  // ── lock-map id-set: the roster word names a LOCK KEY, not a settlement roster ───
+  // locksPreservation reads `l.institutions` off the USER LOCK MAP (the ids the user
+  // froze), never off a settlement — there is no roster here to filter. It is also
+  // ruin-agnostic on purpose: a lock is a standing do-not-reroll instruction that must
+  // OUTLIVE its subject being ruined, so liveness-filtering it would silently discard
+  // the very edit-preservation it exists to perform the moment a calamity flattened
+  // the locked institution.
+  'src/domain/locksPreservation.js': 'lock-map id-set — `l.institutions` names the ids the USER froze, not a settlement roster; a lock must outlive its subject being ruined, so ruin-filtering here would discard the preservation it exists to perform',
   // ── facet-scalar: reads a precomputed number, not the roster ─────────────────────
   'src/domain/worldPulse/attrition.js': 'facet-scalar — reads precomputed facets.institutions, not the roster',
   'src/domain/worldPulse/warDeployment.js': 'facet-scalar — reads precomputed facets.institutions (commandQuality)',
