@@ -10,6 +10,7 @@ import {
   computeActiveChains,
   deriveLocalProductionFromChains,
 } from '../../src/generators/computeActiveChains.js';
+import { hasOwnRequiredContract } from '../../src/domain/generationOwnership.js';
 
 // Pin: resource keys and chain-output export labels share no vocabulary
 // ('fishing_grounds' vs 'River fish'), so classification must resolve the
@@ -496,6 +497,107 @@ describe('applyTierOutcomeToSettlement — native/custom institution identity', 
 
     expect(next.institutions).toContain(customGarrison);
     expect(next.institutions[0]).toEqual(customGarrison);
+  });
+});
+
+// Pin: A TIER SHIFT ADOPTS (manager ruling 2026-07-27). `required` is scoped to
+// the tier whose catalog declares it, so when the settlement's tier moves the
+// surviving roster must be restamped against the NEW catalog. Before this, a
+// demoted city's cascade-seated 'Town watch' (required:false, cascadeAdded:true)
+// survived into a town that genuinely requires that name: closure-protected by
+// isClosableInstitution's settlement-tier backstop, but strike/collapse/upgrade
+// eligible, because the flag-based readers cannot see the settlement's tier.
+describe('applyTierOutcomeToSettlement — a tier shift ADOPTS the required contract', () => {
+  function tierOutcome(fromTier, toTier, direction) {
+    return {
+      id: `candidate.tier.${direction}.adopt.4`,
+      tierChange: { saveId: 'adopt', fromTier, toTier, direction },
+    };
+  }
+
+  function authoredNamesake(name) {
+    return {
+      name,
+      category: 'Custom',
+      status: 'active',
+      source: 'custom',
+      isCustom: true,
+      customDefinitionCategory: 'institutions',
+      customDefinitionId: `definition:institutions:${name}`,
+    };
+  }
+
+  function cascadeSeat(name, patch = {}) {
+    return {
+      id: `institution.${name.toLowerCase().replace(/\s+/g, '_')}`,
+      name,
+      category: 'Defense',
+      status: 'active',
+      source: 'cascade',
+      cascadeAdded: true,
+      required: false,
+      ...patch,
+    };
+  }
+
+  it('a demoted city adopts the cascade seat the new tier genuinely requires', () => {
+    const city = settlement('Adoption', {
+      tier: 'city',
+      population: 7000,
+      institutions: [cascadeSeat('Town watch')],
+    });
+
+    const next = applyTierOutcomeToSettlement(city, tierOutcome('city', 'town', 'demotion'));
+    const watch = next.institutions.find(inst => inst.name === 'Town watch');
+
+    expect(watch.required).toBe(true);
+    expect('cascadeAdded' in watch).toBe(false);          // the borrowed stamp is cleared by ABSENCE
+    expect(watch.source).toBe('cascade');                 // the historical record survives untouched
+    expect(hasOwnRequiredContract(watch)).toBe(true);     // the law now agrees it owes the contract
+    expect(watch.status).toBe('active');                  // adoption is not a demotion fate
+  });
+
+  it('adopts on PROMOTION too — the rule is tier-keyed, not direction-keyed', () => {
+    const village = settlement('Adoption', {
+      tier: 'village',
+      population: 900,
+      institutions: [cascadeSeat('Town watch')],
+    });
+
+    const next = applyTierOutcomeToSettlement(village, tierOutcome('village', 'town', 'promotion'));
+    const watches = next.institutions.filter(inst => inst.name === 'Town watch');
+
+    expect(watches).toHaveLength(1);                      // adopted in place, not duplicated
+    expect(hasOwnRequiredContract(watches[0])).toBe(true);
+  });
+
+  it('leaves a record the new tier does not require exactly as it found it', () => {
+    const seat = cascadeSeat('Curio stall', { category: 'Trade' });
+    const city = settlement('Adoption', {
+      tier: 'city',
+      population: 7000,
+      institutions: [seat],
+    });
+
+    const next = applyTierOutcomeToSettlement(city, tierOutcome('city', 'town', 'demotion'));
+
+    expect(next.institutions[0]).toBe(seat);              // object identity — no gratuitous rewrite
+    expect(next.institutions[0].required).toBe(false);
+    expect(next.institutions[0].cascadeAdded).toBe(true);
+  });
+
+  it('never restamps custom content — an authored namesake keeps its own contract', () => {
+    const customWatch = authoredNamesake('Town watch');
+    const city = settlement('Adoption', {
+      tier: 'city',
+      population: 7000,
+      institutions: [customWatch],
+    });
+
+    const next = applyTierOutcomeToSettlement(city, tierOutcome('city', 'town', 'demotion'));
+
+    expect(next.institutions[0]).toBe(customWatch);
+    expect(next.institutions[0].required).toBeUndefined();
   });
 });
 

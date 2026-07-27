@@ -1506,3 +1506,151 @@ npx eslint <5 source files + 4 test files>   EXIT=0
 `institutionLifecycle.js` sits at ~784 effective lines against the 800 domain
 `max-lines` ceiling after the one added import — the change was kept to a single
 effective line there deliberately; comments are free, code is not.
+
+---
+
+## 2026-07-27 — tier shifts adopt the required contract; the parity ratchet becomes a generated product
+
+**No golden moved.** `worldpulseSpatialGolden` and `generatorGoldenMaster` are
+**byte-identical** after this change — measured, not assumed (summary below). The
+adoption restamp only fires when a golden scenario runs a tier outcome over a
+surviving record whose name the NEW tier requires and whose flags are not already
+conformant; no scenario in either golden does. This entry is in the ledger anyway
+because, like the 07-26 reader-side scoping entry above, it changes **simulated
+behavior on already-saved worlds**, which is the same class of disclosure a golden
+shift is.
+
+Two manager rulings, both dated 2026-07-27, both implemented here.
+
+### RULING 1 — A TIER SHIFT ADOPTS
+
+`required` is scoped to the tier whose catalog declares it. `isClosableInstitution`
+already asserts that at READ time (its docstring, plus the settlement-tier backstop
+that rescues a name the settlement's CURRENT tier requires). The gap the ruling
+closes is on the WRITE side: **demotion never restamped the roster**, so a demoted
+city's cascade-seated `'Town watch'` (`required: false`, `cascadeAdded: true`) fell
+into a town whose catalog genuinely requires that exact name. Closure was covered by
+the tier backstop — but the **flag-based** readers (calamity strikes, scale-ladder
+collapse, upgrade chains) cannot see the settlement's tier, so the town's own watch
+stayed strike-, collapse- and upgrade-eligible.
+
+The ruling: **at the tier that declares the name required, the institution IS the
+tier's contract regardless of how it arrived.**
+
+| decision | disposition |
+| --- | --- |
+| where | `src/domain/worldPulse/tierOutcomeApply.js` — the SINGLE tier-transition applier; new private `adoptRequiredContractsForTier(institutions, toTier)` |
+| when | AFTER the roster has settled — after demotion removals/deactivations and after promotion additions/reactivations — and BEFORE the population floor bump |
+| direction | **BOTH.** The rule is tier-keyed, not direction-keyed: promotion adopts too |
+| what it writes | `required: true`, and clears `cascadeAdded` **by absence** (`true` is the only form `cascadeGenerator` ever writes, so absent is what "not borrowed" looks like everywhere else) |
+| what it does NOT touch | `source: 'cascade'` — the historical record of where the institution came from; `hasCascadeProvenance` deliberately ignores it |
+| who is skipped | custom-content provenance (`isMaterializedCustomContent`, via the file's existing `hasCustomContentProvenance`); `status` of `removed`/`remnant`/`ruined`; `_worldPulseInactive`; any name the new tier's catalog does not declare `required` |
+| identity | a record already its own contract is returned as the **same object** — no gratuitous rewrite, so nothing that compares by reference moves |
+
+The name match uses `requiredInstitutionsForTier(toTier)` (built on the file's own
+`entriesForTier`) and is case-insensitive, matching the module's existing idiom.
+
+**Deliberately deferred — documented, not a bug to re-find.** The symmetric
+**RELEASE** is NOT implemented: a promoted settlement's now-stale `required: true`
+(a town's `'Town watch'` riding into a city that requires `'Professional city
+watch'` instead) still reads as its own contract. That is pre-existing behavior and
+a separate, un-asked ruling; the adoption comment in the source says so in one
+sentence. **Open for the manager/owner.** The read-time tier backstop in
+`isClosableInstitution` remains the net for saves that never pass through a tier
+shift at all.
+
+### RULING 2 — THE PARITY RATCHET BECOMES A GENERATED PRODUCT
+
+`spatial/calamity.js` stays a **ZERO-IMPORT pure leaf** (asserted: `grep -cE
+'^import ' src/domain/spatial/calamity.js` → `0`) carrying the inline mirror of the
+law. What changed is the guard over it. The old ratchet compared mirror to law over
+a **curated 10-shape list** — and a curated list rots: the law grows a clause,
+nobody remembers to add the rows that would expose it, and the ratchet passes over a
+real drift.
+
+The matrix is now **generated from the law's own exported key list**:
+
+```js
+// src/domain/generationOwnership.js
+export const REQUIRED_CONTRACT_FLAG_KEYS = Object.freeze(['required', 'cascadeAdded']);
+```
+
+Its docstring carries the rule — *any new clause in the law MUST extend this list; a
+key the law reads but this list omits is a mirror drift the ratchet cannot see* —
+and `hasOwnRequiredContract`'s docstring now points at it. The rewritten ratchet in
+`tests/domain/calamity.test.js` takes the **full cartesian product** of those keys
+against the value domain `[absent, true, false, 'yes', 0]` (5ⁿ = 25 today), each
+crossed with `source` absent/`'cascade'` — the label the law deliberately ignores —
+for **50 shapes**, and asserts `isStrikeTarget(probe) === !hasOwnRequiredContract(probe)`
+on every one. Adding a clause to the law and its key multiplies the proof by 5 with
+**no edit to the test**.
+
+Anti-vacuity is pinned three ways: product size ≥ 50; at least one shape yields
+protection and at least one yields eligibility (measured: **8 protected / 42
+eligible**); and a *guard the guard* case pins `REQUIRED_CONTRACT_FLAG_KEYS.length
+>= 2` and its two members, so the list cannot be emptied into a silently-passing
+zero-shape ratchet.
+
+An out-of-tree probe over the same product confirmed it is not merely decorative —
+three plausible mirror drifts were each caught, while the real mirror agreed on all
+50 shapes:
+
+| simulated drift | disagreeing shapes | first witness |
+| --- | --- | --- |
+| drops the cascade clause | 2 | `{"required":true,"cascadeAdded":true}` |
+| reads truthiness instead of `=== true` | 8 | `{"required":"yes"}` |
+| keys on `source` instead of the stamp | 5 | `{"required":true,"source":"cascade"}` |
+| the ACTUAL mirror | **0** | — (agrees, as it must) |
+
+### The pins
+
+| pin | file | what it proves |
+| --- | --- | --- |
+| demotion adopts | `tests/domain/tierResourceDynamics.test.js` | city→town over `{required:false, cascadeAdded:true, source:'cascade'}` → `required:true`, `'cascadeAdded' in rec === false`, `source` intact, `hasOwnRequiredContract` true, still `active` |
+| promotion adopts | `tests/domain/tierResourceDynamics.test.js` | village→town adopts the same seat **in place** (one record, not a duplicate) — the rule is tier-keyed |
+| non-required is untouched | `tests/domain/tierResourceDynamics.test.js` | a name the new tier does not require survives by **object identity**, flags unchanged |
+| custom content is never restamped | `tests/domain/tierResourceDynamics.test.js` | an authored `'Town watch'` namesake survives by object identity with `required` still `undefined` |
+| PARITY RATCHET (generated) | `tests/domain/calamity.test.js` | the import-free mirror ≡ the law over the **50-shape generated product**, both verdicts occurring |
+| GUARD THE GUARD | `tests/domain/calamity.test.js` | the law's exported key list is ≥ 2 and contains `required` + `cascadeAdded` |
+
+### Measured gates (all single-threaded, `--no-file-parallelism`)
+
+```
+BOTH GOLDENS — tests/property/worldpulseSpatialGolden.test.js
+               tests/property/generatorGoldenMaster.test.js
+ Test Files  2 passed (2)
+      Tests  9 passed (9)          ← spatial golden BYTE-IDENTICAL, no re-capture
+
+TIER + LIFECYCLE + CALAMITY + UPSWING + CASCADE (9 files:
+  tierResourceDynamics, institutionLifecycle, calamity, calamity.kernel.integration,
+  upswingKernel, joins/cascade, worldPulseExpansion, shiftTier,
+  evaluateInstitutionLifecycle)
+ Test Files  9 passed (9)
+      Tests  191 passed (191)
+
+GOLDENS + RATCHETS (sizeBaseline, domainGeneratorsBoundary, domainAnyCastBaseline,
+  domainStrictBaseline, mutationCoverageManifest, contractTestAntiVacuity.walker,
+  generationAuthoredIntent + both goldens)
+ Test Files  9 passed (9)
+      Tests  52 passed (52)
+
+npm run typecheck:domain:strict
+[domain-strict] ✓ no strict-type regressions (0 errors, ceiling 0).
+
+npx eslint <2 source files + 2 test files>   EXIT=0
+grep -cE '^import ' src/domain/spatial/calamity.js   →  0
+```
+
+⚠️ **The any-cast ratchet bit first and was obeyed, not widened.** The adoption
+helper's first draft used `@param {any[]}` / `@param {any}` / `@type {any}` and
+`tests/lint/domainAnyCastBaseline.test.js` red at `tierOutcomeApply.js: any 20 → 23`.
+That baseline is monotone-DOWN by law — *fix the types, do not widen the baseline* —
+so the helper was retyped against `import('../settlement.schema.js').SimInstitution[]`
+and `string`. Debt returned to **20**, strict stayed at **0**, and no `.domain-any-baseline.json`
+entry moved.
+
+⚠️ **One transient red, attributed to the LIVE TREE, not to this change.**
+`tests/lint/sizeBaseline.test.js` failed once inside a group run and passed on both
+the isolated run before it and every run after. `find -mmin` showed a concurrent
+session writing `src/store/settlementSlice.js` (baselined at 1261) and `src/copy/en.js`
+during the window. No file this change touches is in `scripts/.size-baseline.json`.

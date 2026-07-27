@@ -37,11 +37,42 @@ import {
   CALAMITY_SEVERITY_BANDS,
 } from '../../src/domain/spatial/calamity.js';
 import { strikeCapForTier } from '../../src/domain/worldPulse/calamityKernel.js';
-import { hasOwnRequiredContract } from '../../src/domain/generationOwnership.js';
+import {
+  REQUIRED_CONTRACT_FLAG_KEYS,
+  hasOwnRequiredContract,
+} from '../../src/domain/generationOwnership.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 
 const T = CALAMITY_TUNING;
 const constRng = (v) => ({ random: () => v });
+
+// ── The PARITY RATCHET's generated shape product ─────────────────────────────
+// The full cartesian product of the law's OWN exported flag keys against a value
+// domain that covers every way a persisted record can carry (or fail to carry) a
+// flag: absent, the two booleans, a truthy non-boolean, a falsy non-boolean.
+// Each flag shape is then crossed with the cascade `source` label — the one the
+// law deliberately IGNORES — so the product also proves the mirror does not
+// quietly start reading it. 5^2 x 2 = 50 shapes today; a new clause in the law
+// (and its key) multiplies this by 5 with no edit here.
+const ABSENT = Symbol('absent');
+const FLAG_VALUE_DOMAIN = [ABSENT, true, false, 'yes', 0];
+const SOURCE_VARIANTS = [{}, { source: 'cascade' }];
+
+function flagShapeProduct(keys) {
+  let shapes = [{}];
+  for (const key of keys) {
+    shapes = shapes.flatMap((shape) => FLAG_VALUE_DOMAIN.map(
+      (value) => (value === ABSENT ? { ...shape } : { ...shape, [key]: value }),
+    ));
+  }
+  return shapes;
+}
+
+const PARITY_SHAPES = flagShapeProduct(REQUIRED_CONTRACT_FLAG_KEYS)
+  .flatMap((flags) => SOURCE_VARIANTS.map((source) => ({ ...flags, ...source })));
+
+/** Failure label that survives absent keys (JSON.stringify drops nothing here). */
+const describeShape = (shape) => JSON.stringify(shape);
 
 describe('M11b calamity — the gate (byte-identity seam)', () => {
   it('calamityEnabled reads ONLY the flag, tolerant + total on garbage', () => {
@@ -265,24 +296,43 @@ describe('M11b calamity — the strike (bounded, required-never, subsumption)', 
     })).toEqual(['Inn', 'Town watch']);
   });
 
-  it('PARITY RATCHET: the import-free mirror agrees with generationOwnership over the shape matrix', () => {
+  it('PARITY RATCHET: the import-free mirror agrees with the law over the GENERATED shape product', () => {
     // calamity.js is an IMPORT-FREE PURE LEAF (display/realmManifest reach it from
     // outside the pulse chunk), so it MIRRORS hasOwnRequiredContract inline rather
     // than importing it. This ratchet is what keeps the mirror honest: if the law
     // gains a clause the mirror does not, the two disagree here and this reds.
-    const shapes = [
-      {}, { required: true }, { required: false }, { required: 'yes' },
-      { cascadeAdded: true }, { cascadeAdded: true, required: true },
-      { cascadeAdded: true, required: false }, { cascadeAdded: false, required: true },
-      { source: 'cascade', required: true }, { source: 'cascade', cascadeAdded: true, required: true },
-    ];
-    for (const shape of shapes) {
+    //
+    // The matrix is GENERATED, not curated. A hand-written shape list rots — the
+    // law grows a clause, nobody remembers to add the rows that would expose it,
+    // and the ratchet passes over a real drift. Instead the product is driven by
+    // the law's OWN exported key list (REQUIRED_CONTRACT_FLAG_KEYS): every key it
+    // publishes is crossed against the full value domain, so adding a clause to
+    // the law and its key together AUTOMATICALLY widens this proof.
+    expect(PARITY_SHAPES.length).toBeGreaterThanOrEqual(50);
+    let protectedShapes = 0;
+    let eligibleShapes = 0;
+    for (const shape of PARITY_SHAPES) {
       const inst = { name: 'Probe', status: 'active', ...shape };
+      const ownContract = hasOwnRequiredContract(inst);
       // isStrikeTarget rejects EXACTLY when the law says the contract is its own
       // (every probe here is a live, named institution, so nothing else can reject it).
-      expect(isStrikeTarget(inst), JSON.stringify(shape))
-        .toBe(!hasOwnRequiredContract(inst));
+      expect(isStrikeTarget(inst), describeShape(shape)).toBe(!ownContract);
+      if (ownContract) protectedShapes += 1;
+      else eligibleShapes += 1;
     }
+    // ANTI-VACUITY: a product that landed on one side of the law would agree with
+    // any mirror at all. Both verdicts must actually occur.
+    expect(protectedShapes).toBeGreaterThan(0);
+    expect(eligibleShapes).toBeGreaterThan(0);
+  });
+
+  it('GUARD THE GUARD: the law publishes the exact keys the product enumerates', () => {
+    // The generated matrix is only as wide as the law's key list. If that list is
+    // emptied or trimmed, the ratchet above would silently shrink to nothing while
+    // still passing — so pin the list itself.
+    expect(REQUIRED_CONTRACT_FLAG_KEYS.length).toBeGreaterThanOrEqual(2);
+    expect(REQUIRED_CONTRACT_FLAG_KEYS).toContain('required');
+    expect(REQUIRED_CONTRACT_FLAG_KEYS).toContain('cascadeAdded');
   });
 
   it('THE HARD BOUND: a required institution is NEVER selected, over EVERY seed', () => {

@@ -170,6 +170,58 @@ function deactivateForDemotion(inst, outcome, toTier) {
 }
 
 /**
+ * ADOPTION — a settled tier shift restamps the roster's required contracts.
+ *
+ * At the tier that declares the name required, the institution IS the tier's
+ * contract regardless of how it arrived (manager ruling 2026-07-27). `required`
+ * is scoped to the tier whose catalog declares it, and a tier shift moves the
+ * settlement to a NEW catalog — so a surviving record the new tier genuinely
+ * requires owes that contract from this moment on, whatever its provenance.
+ *
+ * The bite this closes: a demoted city's cascade-seated 'Town watch'
+ * (`required: false`, `cascadeAdded: true`) lands in a town whose catalog
+ * requires that exact name. Closure was already covered by
+ * isClosableInstitution's settlement-tier backstop, but the FLAG-based readers
+ * (calamity strikes, scale-ladder collapse, upgrade chains) cannot see the
+ * settlement's tier and would still have struck the town's own watch.
+ *
+ * `source: 'cascade'` is left untouched — it is the historical record of where
+ * the institution came from, and hasCascadeProvenance deliberately ignores it.
+ * The symmetric RELEASE (a promoted settlement's now-stale `required: true`, a
+ * town's 'Town watch' riding into a city) is deliberately NOT done here: that is
+ * pre-existing behavior and a separate, un-asked ruling. The read-time tier
+ * backstop in isClosableInstitution remains the net for saves that never pass
+ * through a tier shift.
+ *
+ * @param {import('../settlement.schema.js').SimInstitution[]} institutions
+ *   the roster AFTER demotion/promotion surgery
+ * @param {string} toTier
+ * @returns {import('../settlement.schema.js').SimInstitution[]}
+ */
+function adoptRequiredContractsForTier(institutions, toTier) {
+  const requiredNames = new Set(
+    requiredInstitutionsForTier(toTier).map(entry => entry.name.toLowerCase()),
+  );
+  return institutions.map((inst) => {
+    if (!inst || typeof inst !== 'object') return inst;
+    // Custom definitions answer to their own reviewed contract, never a native
+    // tier requirement that happens to share their presentation label.
+    if (hasCustomContentProvenance(inst)) return inst;
+    const status = String(inst.status || 'active');
+    if (status === 'removed' || status === 'remnant' || status === 'ruined') return inst;
+    if (inst._worldPulseInactive) return inst;
+    if (!requiredNames.has(String(inst.name || '').toLowerCase())) return inst;
+    // Already its own contract — return the SAME object (no gratuitous rewrite).
+    if (inst.required === true && inst.cascadeAdded !== true) return inst;
+    // Clear the borrowed-seat stamp by ABSENCE: `cascadeAdded: true` is the only
+    // form the cascade producer ever writes, so absent is what "not borrowed"
+    // looks like everywhere else in the tree.
+    const { cascadeAdded: _borrowedSeatStamp, ...adopted } = inst;
+    return { ...adopted, required: true };
+  });
+}
+
+/**
  * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} outcome
  */
@@ -241,6 +293,11 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
       return deactivateForDemotion(inst, outcome, toTier);
     });
   }
+
+  // The roster has settled (demotion removals/deactivations, promotion additions
+  // and reactivations are all in) — now it answers to the NEW tier's catalog.
+  // Applied on BOTH directions: the rule is tier-keyed, not direction-keyed.
+  institutions = adoptRequiredContractsForTier(institutions, toTier);
 
   // Promotion nudges population to at least the new tier's floor. Eligibility
   // promotes at pop >= nextTier.min * 0.92, so without this a just-promoted

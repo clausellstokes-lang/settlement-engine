@@ -114,6 +114,22 @@ export function hasCascadeProvenance(record) {
 }
 
 /**
+ * The exact record keys `hasOwnRequiredContract` reads.
+ *
+ * Any new clause in the law MUST extend this list. The calamity parity ratchet
+ * (tests/domain/calamity.test.js) enumerates the FULL value-product over these
+ * keys — absent / true / false / truthy-non-boolean / falsy-non-boolean, crossed
+ * with the cascade `source` label — and asserts the import-free mirror in
+ * spatial/calamity.js agrees with the law on every shape. A key the law reads
+ * but this list omits is therefore a mirror drift the ratchet CANNOT see: the
+ * product would never vary that key, and the two implementations could disagree
+ * in silence. Extending the law and extending this list are one edit.
+ *
+ * @type {readonly string[]}
+ */
+export const REQUIRED_CONTRACT_FLAG_KEYS = Object.freeze(['required', 'cascadeAdded']);
+
+/**
  * True when a record's `required` flag is this settlement's own contract.
  *
  * `required` is scoped to the tier whose catalog declares it. The supply-chain
@@ -135,6 +151,10 @@ export function hasCascadeProvenance(record) {
  * fix still carry `required: true` on cascade records. Scoping the judgment at
  * every read is what retro-covers that saved data — there is no migration and
  * none is needed, because the flag is never trusted bare again.
+ *
+ * The exact record keys this reads are published as REQUIRED_CONTRACT_FLAG_KEYS
+ * above; a new clause here MUST extend that list, or the calamity parity ratchet
+ * goes blind to the drift.
  *
  * @param {unknown} record
  * @returns {boolean}
