@@ -24,7 +24,17 @@
  */
 export function definedObjects(sql) {
   const names = [];
-  const re = /create\s+(?:or\s+replace\s+)?(?:function|materialized\s+view|table|type|view|sequence|domain)(?:\s+if\s+not\s+exists)?\s+(?:public\.)?([a-z_][a-z0-9_]*)/gi;
+  // ⚠ ANCHORED AT LINE START (`^[ \t]*` + m) — a `--` header quoting a create
+  // statement in prose must not mint a name: 098's @rollback wrap used to
+  // yield the phantom `enforce_allocation_` and 101's quoted
+  // current_user_is_privileged, so classifyApplyError could blame or excuse
+  // the wrong band file. Leading whitespace stays legal (unlike the strict
+  // `^create` extractor form) because this classifier must see real
+  // definitions wherever they sit — unit fixtures and DO-block DDL indent —
+  // while comment prose can never match: `--` precedes any embedded create on
+  // a comment line. Canonical class writeup:
+  // tests/security/moneyRpcNetCurrentGuards.test.js.
+  const re = /^[ \t]*create\s+(?:or\s+replace\s+)?(?:function|materialized\s+view|table|type|view|sequence|domain)(?:\s+if\s+not\s+exists)?\s+(?:public\.)?([a-z_][a-z0-9_]*)/gim;
   let m;
   while ((m = re.exec(sql)) !== null) names.push(m[1].toLowerCase());
   return names;

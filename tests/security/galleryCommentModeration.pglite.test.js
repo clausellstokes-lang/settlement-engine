@@ -42,7 +42,7 @@ const allExist = existsSync(MIG_169) && existsSync(MIG_125) && existsSync(MIG_17
 
 /** Extract a function definition verbatim (actionVelocity idiom). */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
@@ -276,7 +276,7 @@ describe.runIf(allExist)('gallery comment moderation — RLS + grant posture pin
 
   it('the new definer functions pin search_path = public, pg_temp (131 convention)', () => {
     for (const name of ['report_gallery_comment', 'set_gallery_comment_hidden']) {
-      const fn = sql.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'))?.[0] || '';
+      const fn = sql.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'))?.[0] || '';
       expect(fn, `${name} missing`).toBeTruthy();
       expect(fn).toMatch(/security definer/i);
       expect(fn).toMatch(/set search_path = public, pg_temp/i);

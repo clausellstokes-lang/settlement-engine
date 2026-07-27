@@ -30,7 +30,7 @@ const src163 = readFileSync(MIG_163, 'utf-8');
 
 /** Extract a `create or replace function public.<name> … $$;` block from 163. */
 function extractFn(name) {
-  const m = src163.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src163.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration 163`);
   return m[0];
 }

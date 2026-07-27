@@ -1324,11 +1324,11 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   });
 
   it('provisions spend_credits RPC (atomic decrement)', () => {
-    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?spend_credits/i);
+    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?spend_credits/im);
   });
 
   it('provisions refund_credits RPC (ledger-consistent refund)', () => {
-    expect(migrations).toMatch(/(create|create or replace)\s+function\s+(public\.)?refund_credits/i);
+    expect(migrations).toMatch(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits/im);
   });
 
   it('provisions admin_actions audit table', () => {
@@ -1342,20 +1342,20 @@ describe('Tier 3.3 — Phase 5 migration 009 invariants', () => {
   it('refund_credits writes a "grant" row (never modifies a spend row)', () => {
     // Look at the refund_credits function body. The function is ~50
     // lines so we need a generous window.
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock, 'refund_credits function body not found').toBeTruthy();
     expect(refundBlock[0]).toMatch(/insert\s+into[\s\S]{0,500}credit_ledger/i);
     expect(refundBlock[0]).toMatch(/['"]grant['"]/);
   });
 
   it('refund_credits is idempotent (rejects double-refunds of the same spend row)', () => {
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/already refunded/i);
   });
 
   it('refund_credits checks that the target row is actually a spend (not another grant)', () => {
-    const refundBlock = migrations.match(/function\s+(public\.)?refund_credits[\s\S]{0,4000}/i);
+    const refundBlock = migrations.match(/^create(?:\s+or\s+replace)?\s+function\s+(public\.)?refund_credits[\s\S]{0,4000}/im);
     expect(refundBlock).toBeTruthy();
     expect(refundBlock[0]).toMatch(/kind\s*<>\s*['"]spend['"]/);
   });

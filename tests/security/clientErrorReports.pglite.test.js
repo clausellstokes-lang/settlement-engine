@@ -27,7 +27,7 @@ const src = exists ? readFileSync(MIG_167, 'utf8') : '';
 
 /** Extract a `create or replace function … $$;` block verbatim (harness idiom). */
 function extractFn(text, name) {
-  const m = text.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = text.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }

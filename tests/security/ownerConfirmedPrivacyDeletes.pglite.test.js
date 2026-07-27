@@ -23,8 +23,8 @@ const migration179 = readFileSync(
 
 function extractFunction(source, name) {
   const match = source.match(new RegExp(
-    `create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`,
-    'i',
+    `^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`,
+    'im',
   ));
   if (!match) throw new Error(`missing function ${name}`);
   return match[0];

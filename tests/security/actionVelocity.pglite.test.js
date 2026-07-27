@@ -39,7 +39,7 @@ const allExist = existsSync(MIG_125);
 /** Extract a function definition verbatim: from `create or replace function
  *  public.<name>` to the first `$$;`. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration 125`);
   return m[0];
 }
@@ -51,7 +51,7 @@ function netCurrentFn(name) {
   let last = null;
   for (const f of files) {
     const src = readFileSync(resolve(dir, f), 'utf-8');
-    const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+    const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
     let m;
     while ((m = re.exec(src)) !== null) last = m[0];
   }

@@ -105,7 +105,7 @@ describe('Tier 7.6 — migration 010 contract', () => {
     const path = join(__dirname, '..', '..', 'supabase', 'migrations', '010_founder_seat_counter.sql');
     expect(existsSync(path)).toBe(true);
     const sql = readFileSync(path, 'utf8');
-    expect(sql).toMatch(/create or replace function public\.founder_seats_taken/);
+    expect(sql).toMatch(/^create or replace function public\.founder_seats_taken/m);
     expect(sql).toMatch(/security definer/);
     expect(sql).toMatch(/grant execute on function public\.founder_seats_taken/);
     expect(sql).toMatch(/is_founder is true/);

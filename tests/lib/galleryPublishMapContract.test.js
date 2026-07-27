@@ -30,7 +30,7 @@ const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..',
  * client is measured against — the whole point of the guard.
  */
 function latestPublishMapSignatureParams() {
-  const defRe = /create\s+or\s+replace\s+function\s+public\.publish_map\s*\(/i;
+  const defRe = /^create\s+or\s+replace\s+function\s+public\.publish_map\s*\(/im;
   const files = readdirSync(MIGRATIONS_DIR)
     .filter(f => f.endsWith('.sql'))
     .sort(); // numeric zero-padded prefixes sort lexicographically in order

@@ -28,7 +28,7 @@ const UID2 = '22222222-2222-2222-2222-222222222222';
 
 /** Extract a `create or replace function public.<name>` body verbatim. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }

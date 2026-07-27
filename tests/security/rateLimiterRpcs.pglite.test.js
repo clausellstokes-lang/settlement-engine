@@ -23,7 +23,7 @@ const M_RECOVERY = MIG('066', 'security_questions_and_recovery');
 const have = [M_EMAIL, M_DOSSIER, M_RECOVERY].every(existsSync);
 
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }

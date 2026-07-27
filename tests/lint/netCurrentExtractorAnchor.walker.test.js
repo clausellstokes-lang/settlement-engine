@@ -24,9 +24,15 @@
  * and line. Surviving pre-fix offenders are frozen below, SHRINK-ONLY.
  *
  * CANNOT-CATCH (accepted costs of a regex gate, hand-audited 2026-07-27):
- *   - reformulations that drop or reshape the create prefix, e.g. contracts
- *     .test.js's `(create|create or replace)\s+function` alternation and its
- *     bare `function\s+refund_credits` block matches;
+ *   - bare `function\s+<name>` block matches with no create prefix at all
+ *     (none exist since the shrink wave rewrote contracts.test.js's onto the
+ *     optional-group spelling, which detector 5 now guards);
+ *   - substring-search extractors (an indexOf with a create-or-replace
+ *     needle) carry no regex to scan — sourceContract.sqlFunctionBody was
+ *     converted to the anchored idiom; a future indexOf spelling is invisible
+ *     here and is caught only by review;
+ *   - sibling statement families (create trigger / create policy extractors,
+ *     e.g. enforceSaveLimit's extractTrigger) — a different spelling class;
  *   - `\s*`-spelled or split-across-concatenation patterns (none exist today);
  *   - shell-side patterns in scripts/*.sh (grep/sed syntax; none exist today);
  *   - regexes built from variables where the create prefix lives elsewhere.
@@ -58,6 +64,12 @@ const DETECTORS = [
   { name: 'escaped', re: /(\^)?create\\{1,2}s\+or\\{1,2}s\+replace\\{1,2}s\+function/gi },
   { name: 'literal', re: /\/(\^)?create or replace function/gi },
   { name: 'constructed', re: /RegExp\(\s*[`'"](\^)?create or replace function/gi },
+  { name: 'alternation', re: /(\^)?\(create\|create or replace\)\\{1,2}s\+function/gi },
+  { name: 'optional-group', re: /(\^)?create\(\?:\\{1,2}s\+or\\{1,2}s\+replace\)\?\\{1,2}s\+function/gi },
+  // The classifier spelling (migration-ordering.mjs): `create\s+(?:or\s+replace\s+)?<kind>`.
+  // Its sanctioned anchor is `^[ \t]*create…` (indented DDL is legal there), so
+  // the exemption capture accepts `^` optionally followed by a `[…]*` class.
+  { name: 'kind-group', re: /(\^(?:\[[^\]]*\]\*)?)?create\\{1,2}s\+\(\?:or\\{1,2}s\+replace\\{1,2}s\+\)\?/gi },
 ];
 
 /** { 'relative/file.js': { count, lines: [n, …] } } for UNANCHORED occurrences. */
@@ -86,70 +98,27 @@ function scanForUnanchored() {
 }
 
 /**
- * FROZEN 2026-07-27 (hand-audited against the fix-wave census). SHRINK-ONLY.
- * Every entry is a pre-existing unanchored site that survives this wave —
- * single-file pglite extractors (loud: Postgres refuses prose) and a handful of
- * text-asserting contract files queued for a follow-up shrink wave.
- * DELIBERATE PIN: moneyRpcNetCurrentGuards.test.js's 3 are its NEGATIVE
- * CONTROLS — the pre-fix extractor and the prose-discovery scan kept on purpose
- * to prove the old form takes prose; they are never "fixed", only moved with
- * that file.
- *
- * To fix a site: spell the regex `^create…` with the m flag (see
- * tests/security/moneyRpcNetCurrentGuards.test.js), prove parity old-vs-new on
- * its inputs, then LOWER that file's number here (delete the row at 0).
+ * FROZEN 2026-07-27, post-shrink-wave. SHRINK-ONLY, and every remaining row is
+ * a DELIBERATE decision, not debt:
+ *   - moneyRpcNetCurrentGuards.test.js (3): its NEGATIVE CONTROLS — the
+ *     pre-fix extractor and the prose-discovery scan kept on purpose to prove
+ *     the old form takes prose; they move only with that file.
+ *   - dossierEntitlements.pglite.test.js (3: the not-reintroduced pins around
+ *     lines 424/425 and the nameless enumerator feeding the not.toMatch at
+ *     ~441) and gallery_privacy.contract.test.js (2: the "leaves the
+ *     sanitizers untouched" pins at ~128/129): NEGATIVE-PRESENCE guards. Their
+ *     job is to catch a FUTURE re-creation at ANY indentation, so anchoring
+ *     would WEAKEN them; each carries an inline comment at the site.
+ * Everything else was anchored by the 2026-07-27 shrink wave, with per-site
+ * old-vs-new parity executed against each site's real inputs before the edit.
+ * To fix a remaining site (only with its polarity understood): spell it
+ * `^create…` + m, prove parity, then LOWER the row (delete at 0).
  * Never raise a number; never add a file.
  */
 const FROZEN_UNANCHORED = Object.freeze({
-  'tests/lib/founderSeats.test.js': 1,
-  'tests/lib/galleryPublishMapContract.test.js': 1,
-  'tests/security/accountDeletionProcessing.pglite.test.js': 1,
-  'tests/security/accountIdentity.pglite.test.js': 1,
-  'tests/security/accountStatusDirectWrites.pglite.test.js': 1,
-  'tests/security/accountStatusGate.pglite.test.js': 1,
-  'tests/security/accountStatusProfilesCustomContent.pglite.test.js': 1,
-  'tests/security/accountStatusSupportTickets.pglite.test.js': 1,
-  'tests/security/actionVelocity.pglite.test.js': 2,
-  'tests/security/adminLeastPrivilege.pglite.test.js': 1,
-  'tests/security/adminUserManagement.pglite.test.js': 1,
-  'tests/security/aiRequestIdempotency.pglite.test.js': 1,
-  'tests/security/aiSpendReservation.pglite.test.js': 1,
-  'tests/security/clientErrorReports.pglite.test.js': 1,
-  'tests/security/creditBalanceIdorGuard.pglite.test.js': 1,
-  'tests/security/creditLedger.pglite.test.js': 1,
-  'tests/security/creditLedgerHarness.js': 1,
-  'tests/security/dossierEntitlements.pglite.test.js': 6,
-  'tests/security/enforceSaveLimit.pglite.test.js': 1,
-  'tests/security/feeSchedule.pglite.test.js': 1,
-  'tests/security/founderTransferPayout.pglite.test.js': 1,
-  'tests/security/galleryCommentModeration.pglite.test.js': 2,
-  'tests/security/galleryReactions.pglite.test.js': 2,
-  'tests/security/gallerySanitizer.pglite.test.js': 1,
-  'tests/security/gallerySeedLeak.pglite.test.js': 1,
-  'tests/security/galleryUnlisted.pglite.test.js': 1,
-  'tests/security/galleryWorldSnapshotScanner.pglite.test.js': 1,
-  'tests/security/gallery_privacy.contract.test.js': 7,
-  'tests/security/ingestCheckRate.pglite.test.js': 1,
-  'tests/security/migrations100to102AccessGates.pglite.test.js': 1,
-  'tests/security/migrations104to106LowFixes.pglite.test.js': 1,
+  'tests/security/dossierEntitlements.pglite.test.js': 3, // DELIBERATE: negative-presence guards
+  'tests/security/gallery_privacy.contract.test.js': 2, // DELIBERATE: negative-presence guards
   'tests/security/moneyRpcNetCurrentGuards.test.js': 3, // DELIBERATE: negative controls
-  'tests/security/ownerConfirmedPrivacyDeletes.pglite.test.js': 1,
-  'tests/security/profileModerationColumnLock.pglite.test.js': 1,
-  'tests/security/rateLimitConfig.pglite.test.js': 1,
-  'tests/security/rateLimiterRpcs.pglite.test.js': 1,
-  'tests/security/recoveryLockout.pglite.test.js': 1,
-  'tests/security/recoveryLockoutSelfheal.pglite.test.js': 1,
-  'tests/security/referralRedeem.pglite.test.js': 2,
-  'tests/security/refundServiceRole.pglite.test.js': 1,
-  'tests/security/savedMapsSnapshotTrigger.pglite.test.js': 1,
-  'tests/security/securityAnswers.pglite.test.js': 1,
-  'tests/security/securityQuestions.test.js': 1,
-  'tests/security/serviceAdjustCredits.pglite.test.js': 1,
-  'tests/security/supportTickets.pglite.test.js': 1,
-  'tests/security/surveyorByokHealth.pglite.test.js': 1,
-  'tests/security/surveyorUsageGovernors.pglite.test.js': 1,
-  'tests/security/tokenBucket.pglite.test.js': 1,
-  'tests/security/worldPulseAtomicPersist.pglite.test.js': 1,
 });
 
 describe('unanchored net-current extractor walker (habitat removal)', () => {
@@ -199,17 +168,47 @@ describe('unanchored net-current extractor walker (habitat removal)', () => {
     return n + [...text.matchAll(re)].filter((m) => !m[1]).length;
   }, 0);
 
-  test('detectors fire on all three unanchored spellings', () => {
+  test('detectors fire on every unanchored spelling', () => {
     expect(hits('src.match(/create\\s+or\\s+replace\\s+function\\s+public\\.foo\\b/i)'), 'regex literal, escaped').toBe(1);
     expect(hits('new RegExp(`create\\\\s+or\\\\s+replace\\\\s+function\\\\s+public\\\\.${name}\\\\b`, "i")'), 'RegExp string, escaped').toBe(1);
     expect(hits('sql.match(/create or replace function[\\s\\S]*?\\$\\$;/gi)'), 'regex literal, plain-space').toBe(1);
     expect(hits('new RegExp(`create or replace function public\\\\.${name}\\\\b`, "i")'), 'RegExp string, plain-space').toBe(1);
+    expect(hits('expect(migrations).toMatch(/(create|create or replace)\\s+function\\s+(public\\.)?refund_credits/i)'), 'alternation spelling').toBe(1);
+    expect(hits('migrations.match(/create(?:\\s+or\\s+replace)?\\s+function\\s+(public\\.)?refund_credits[\\s\\S]{0,4000}/i)'), 'optional-group spelling').toBe(1);
+    expect(hits('const re = /create\\s+(?:or\\s+replace\\s+)?(?:function|table)\\s+(?:public\\.)?([a-z_][a-z0-9_]*)/gi'), 'kind-group spelling').toBe(1);
   });
 
   test('detectors stay silent on the anchored house form', () => {
     expect(hits('src.match(/^create\\s+or\\s+replace\\s+function\\s+public\\.foo\\b/im)'), 'anchored regex literal').toBe(0);
     expect(hits('new RegExp(`^create\\\\s+or\\\\s+replace\\\\s+function\\\\s+public\\\\.${name}\\\\b`, "im")'), 'anchored RegExp string').toBe(0);
     expect(hits('sql.match(/^create or replace function public\\\\.foo/m)'), 'anchored plain-space literal').toBe(0);
+    expect(hits('expect(migrations).toMatch(/^(create|create or replace)\\s+function/im)'), 'anchored alternation').toBe(0);
+    expect(hits('migrations.match(/^create(?:\\s+or\\s+replace)?\\s+function/im)'), 'anchored optional-group').toBe(0);
+    expect(hits('const re = /^[ \\t]*create\\s+(?:or\\s+replace\\s+)?(?:function|table)/gim'), 'anchored kind-group (classifier form)').toBe(0);
+  });
+
+  test('the migrations corpus itself keeps every create-or-replace-function at column 0', () => {
+    // The anchored extractors are COMPLETE only while no real definition is
+    // indented. Machine-close that assumption at the source: an indented
+    // definition (e.g. inside a DO block) must fail here, never silently
+    // vanish from net-current extraction. Comment prose is immune — `--`
+    // precedes any embedded create on a comment line, so it cannot match.
+    const MIG_DIR = join(ROOT, 'supabase', 'migrations');
+    const offenders = [];
+    for (const f of readdirSync(MIG_DIR).filter((n) => n.endsWith('.sql'))) {
+      const src = readFileSync(join(MIG_DIR, f), 'utf8');
+      for (const m of src.matchAll(/^[ \t]+create\s+or\s+replace\s+function/gim)) {
+        offenders.push(
+          `supabase/migrations/${f}: INDENTED create-or-replace-function at line `
+          + `${src.slice(0, m.index).split('\n').length}. The house extractors anchor on `
+          + `column-0 definitions; either dedent this statement, or — if it is genuinely `
+          + `dynamic SQL — rework the extractors that pin this function before landing it.`,
+        );
+      }
+    }
+    expect(offenders).toEqual([]);
+    // Guard-the-guard: the scan fires on an indented fixture.
+    expect([...'  create or replace function public.x()'.matchAll(/^[ \t]+create\s+or\s+replace\s+function/gim)].length).toBe(1);
   });
 
   test('detectors stay silent on plain SQL fixture text (not a regex context)', () => {

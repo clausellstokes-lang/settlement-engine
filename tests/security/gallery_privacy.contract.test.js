@@ -40,8 +40,8 @@ describe('gallery public privacy migration', () => {
 
   it('exposes a sanitized public dossier RPC to anonymous readers', () => {
     const sql = readFileSync(MIGRATION, 'utf8');
-    expect(sql).toMatch(/create or replace function public\._gallery_sanitize_public_json/);
-    expect(sql).toMatch(/create or replace function public\.get_gallery_dossier/);
+    expect(sql).toMatch(/^create or replace function public\._gallery_sanitize_public_json/m);
+    expect(sql).toMatch(/^create or replace function public\.get_gallery_dossier/m);
     expect(sql).toMatch(/public\._gallery_sanitize_public_json\(s\.data\) as data/);
     expect(sql).toMatch(/grant execute on function public\.get_gallery_dossier\(text\) to authenticated, anon/);
   });
@@ -125,6 +125,9 @@ describe('gallery public chronicle contract (migration 032)', () => {
 
   it('leaves the existing data sanitizers untouched (denylists only grow)', () => {
     const s = sql();
+    // DELIBERATELY UNANCHORED (negative-presence): these catch a future
+    // re-creation at ANY indentation; a `^` anchor would weaken them. Pinned
+    // in netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
     expect(s).not.toMatch(/create or replace function public\._gallery_dm_full_json/);
     // The data column still routes through them, unchanged from migration 030.
@@ -176,7 +179,7 @@ describe('gallery report moderation contract', () => {
 
   it('exposes only the authenticated report RPC', () => {
     const sql = readFileSync(REPORTS_MIGRATION, 'utf8');
-    expect(sql).toMatch(/create or replace function public\.report_gallery_dossier/);
+    expect(sql).toMatch(/^create or replace function public\.report_gallery_dossier/m);
     expect(sql).toMatch(/grant execute on function public\.report_gallery_dossier\(uuid, text, text\) to authenticated/);
     expect(sql).not.toMatch(/grant execute on function public\.report_gallery_dossier\(uuid, text, text\) to authenticated, anon/);
   });
@@ -184,8 +187,8 @@ describe('gallery report moderation contract', () => {
   it('commits elevated-only moderation review RPCs', () => {
     expect(existsSync(REPORT_MODERATION_MIGRATION)).toBe(true);
     const sql = readFileSync(REPORT_MODERATION_MIGRATION, 'utf8');
-    expect(sql).toMatch(/create or replace function public\.list_gallery_reports/);
-    expect(sql).toMatch(/create or replace function public\.resolve_gallery_report/);
+    expect(sql).toMatch(/^create or replace function public\.list_gallery_reports/m);
+    expect(sql).toMatch(/^create or replace function public\.resolve_gallery_report/m);
     expect(sql).toMatch(/public\.current_user_is_privileged\(\)/);
     expect(sql).toMatch(/Only admins can resolve gallery reports/);
     expect(sql).toMatch(/grant execute on function public\.list_gallery_reports\(text, integer\) to authenticated/);

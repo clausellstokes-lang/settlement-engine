@@ -33,7 +33,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  behaviour, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   let lastFile = null;
   for (const f of files) {

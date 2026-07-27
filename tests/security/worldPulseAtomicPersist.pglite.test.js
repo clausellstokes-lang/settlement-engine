@@ -41,7 +41,7 @@ describe('084 pglite target exists (guards against silent vacuous skip)', () => 
 /** Extract the `create or replace function public.<name>` body verbatim through its first `$$;`. */
 function extractFn(name) {
   const src = readFileSync(MIG, 'utf8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from 084`);
   return m[0];
 }

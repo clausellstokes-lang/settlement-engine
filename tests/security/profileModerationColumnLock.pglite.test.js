@@ -40,7 +40,7 @@ const allExist = Object.values(MIG).every(existsSync);
 
 function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create or replace function public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract function ${name} from ${migKey}`);
   return m[0];
 }

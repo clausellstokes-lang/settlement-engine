@@ -29,7 +29,7 @@ const have = existsSync(MIG_156);
 /** Extract a single `create or replace function ... $$;` block by name. */
 function extractFn(src, name) {
   const m = src.match(
-    new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'),
+    new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'),
   );
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];

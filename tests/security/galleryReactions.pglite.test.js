@@ -33,7 +33,7 @@ const allExist = existsSync(MIG_145) && existsSync(MIG_125);
 
 /** Extract a function definition verbatim (actionVelocity idiom). */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }
@@ -224,7 +224,7 @@ describe.runIf(allExist)('gallery reactions — RLS + grant posture pins (migrat
   });
 
   it('both SECURITY DEFINER functions pin search_path = public, pg_temp (131 convention)', () => {
-    const fns = sql.match(/create or replace function[\s\S]*?\$\$;/gi) || [];
+    const fns = sql.match(/^create or replace function[\s\S]*?\$\$;/gim) || [];
     expect(fns.length).toBeGreaterThanOrEqual(2);
     for (const fn of fns) {
       expect(fn).toMatch(/security definer/i);

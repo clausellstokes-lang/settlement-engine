@@ -42,7 +42,7 @@ export const allMigrationsExist = Object.values(MIG).every(existsSync);
  *  public.<name>` to the first `$$;`. */
 export function extractFn(migKey, name) {
   const src = readFileSync(MIG[migKey], 'utf-8');
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name} from migration ${migKey}`);
   return m[0];
 }

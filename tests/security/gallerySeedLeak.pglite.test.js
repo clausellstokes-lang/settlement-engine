@@ -49,7 +49,7 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  seed strip fails here, not in production. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   for (const f of files) {
     const src = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8');

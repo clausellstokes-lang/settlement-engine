@@ -83,9 +83,18 @@ export function functionBody(src, fnName) {
  */
 export function sqlFunctionBody(src, fnName) {
   if (typeof src !== 'string') throw new Error(`sourceContract.sqlFunctionBody: source is not a string (${fnName})`);
-  const anchor = `create or replace function ${fnName}`;
-  const start = src.indexOf(anchor);
-  if (start < 0) throw new Error(`sourceContract.sqlFunctionBody: "${anchor}" not found in source`);
+  // ⚠ ANCHORED AT LINE START (`^` + m) and NET-CURRENT (the LAST definition
+  // wins), matching the house extractor idiom: the old indexOf substring
+  // search took the FIRST occurrence anywhere, so a header quoting the
+  // statement in prose became the "definition" and a later re-creation of the
+  // same function was never seen. Canonical writeup:
+  // tests/security/moneyRpcNetCurrentGuards.test.js.
+  const nameEsc = fnName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+${nameEsc}\\b`, 'gim');
+  let m;
+  let start = -1;
+  while ((m = re.exec(src)) !== null) start = m.index;
+  if (start < 0) throw new Error(`sourceContract.sqlFunctionBody: "create or replace function ${fnName}" not found in source`);
   const end = src.indexOf('$$;', start);
   return src.slice(start, end < 0 ? src.length : end);
 }
