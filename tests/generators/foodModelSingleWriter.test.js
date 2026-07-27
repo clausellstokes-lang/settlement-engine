@@ -17,6 +17,7 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveFoodBalanceAnalysis } from '../../src/generators/economy/foodBalance.js';
 import { generateEconomicViability } from '../../src/generators/economicGenerator.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -40,7 +41,7 @@ describe('generators-domain-4 — single-writer food model', () => {
       expect(fb.dailyNeed).toBe(fs.dailyNeed);
     }
     expect(compared).toBeGreaterThan(200);
-  });
+  }, 120_000);
 
   it('attribution sums exactly to the canonical gap (importCoverage + magicFoodOffset === rawDeficit − deficit)', () => {
     const tiers = ['village', 'town', 'city', 'metropolis'];
@@ -106,6 +107,8 @@ describe('generators-domain-4 — single-writer food model', () => {
 
     expect(result.viable).toBe(false);
     expect(result.summary).toMatch(/NOT VIABLE: 1 critical issue prevents settlement survival/);
+    // A missing or empty summary reds on the positive pin above, never here.
+    // anchored: the positive toMatch above pins this same summary string.
     expect(result.summary).not.toMatch(/self-sufficient/i);
     expect(result.issues).toEqual(expect.arrayContaining([
       expect.objectContaining({
@@ -135,6 +138,9 @@ describe('generators-domain-4 — single-writer food model', () => {
     expect(settlement.economicState.situationDesc).toMatch(
       /rationing and outside supply/i,
     );
+    // The 48%-uncovered figure and the rationing clause are both pinned on this
+    // same string above, so this exclusion measures wording, not absence.
+    // anchored: two positive toMatch pins on this same situationDesc above.
     expect(settlement.economicState.situationDesc).not.toMatch(
       /self-sufficient/i,
     );
@@ -171,12 +177,19 @@ describe('generators-domain-4 — single-writer food model', () => {
     expect(balance.importCoverage).toBeUndefined();
     expect(balance.importChannel).toBeUndefined();
     expect(balance.deficitPercent).toBeGreaterThan(50);
-    expect(
-      settlement.resourceAnalysis.imports.critical,
-    ).not.toContain('grain');
+    // 'salt' is the anchor: a route-less thorp cannot produce it, so the critical
+    // list is demonstrably still being computed. Without it, a critical list that
+    // stopped being populated would pass the grain exclusion forever.
+    expectAbsentWithAnchor(
+      settlement.resourceAnalysis.imports.critical, 'grain', 'salt',
+      'a route-less thorp still names its critical imports',
+    );
+    // A settlement with tradeRouteAccess:'none' must never render 'via none'.
+    // Liveness: `balance` above is read out of this very object and its
+    // deficitPercent is pinned above 50, so this payload cannot be empty.
     expect(
       JSON.stringify(settlement.economicViability),
-    ).not.toMatch(/\bvia none\b/i);
+    ).not.toMatch(/\bvia none\b/i); // anchored: `balance` is read out of this object above
     expect(
       settlement.generationCoherenceReceipt.checks.find(
         check => check.id === 'food_verdict',

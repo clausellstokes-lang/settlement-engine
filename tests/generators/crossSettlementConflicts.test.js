@@ -19,6 +19,7 @@ import {
   generateCrossSettlementConflictsDeterministic,
   stableIdOf,
 } from '../../src/generators/crossSettlementConflicts.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // Two settlements with matching-category NPCs and factions so the generator
 // has real material to draw from (a conflict + a faction engagement).
@@ -121,8 +122,20 @@ describe('crossSettlementConflicts — no ambient RNG (source pin)', () => {
     // Strip block + line comments so the docstring (which names both, on purpose)
     // does not trip the scan — we assert on executable code only.
     const code = raw.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
-    expect(code).not.toMatch(/rngContext/);
-    expect(code).not.toMatch(/Math\.random/);
+    // The strip is the vacuity risk: an over-greedy comment regex that emptied
+    // `code` would pass every scan below forever. Anchor each scan on a function
+    // header that must survive stripping.
+    expectAbsentWithAnchor(
+      code, 'rngContext', 'export function generateCrossSettlementConflicts',
+      'no ambient rng module reference in executable code',
+    );
+    expectAbsentWithAnchor(
+      code, 'Math.random', 'export function stableIdOf',
+      'no Math.random draw in executable code',
+    );
+    // This narrower import-form pin rides the same liveness evidence as the two
+    // anchored scans above, which prove `code` still holds executable body.
+    // anchored: the two expectAbsentWithAnchor scans above pin `code` as live.
     expect(code).not.toMatch(/from\s+['"][^'"]*rngContext/);
   });
 });

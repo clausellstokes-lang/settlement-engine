@@ -23,6 +23,7 @@
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 function gen(config, seed) {
   return generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -74,6 +75,9 @@ describe('desert terrain — terrain-gated resources present, mountain resources
   // resource, and never a mountain one (getCompatibleResources gates each
   // terrain-specific resource to its own terrain).
   const SEEDS = ['d0', 'd1', 'd2', 'd3', 'd4', 'd5'];
+  // seed-loop: collected — this loop REGISTERS one test() per seed rather than
+  // asserting inside one, so vitest reports the true per-seed count itself (the
+  // it.each shape). No early exit is possible: a failing seed is its own red.
   for (const seed of SEEDS) {
     test(`desert town (${seed}) has a desert resource and no mountain resource`, () => {
       const s = gen({ settType: 'town', culture: 'arabic', terrainOverride: 'desert', tradeRouteAccess: 'road' }, seed);
@@ -86,6 +90,7 @@ describe('desert terrain — terrain-gated resources present, mountain resources
 
 describe('mountain terrain — terrain-gated resources present, desert resources absent', () => {
   const SEEDS = ['m0', 'm1', 'm2', 'm3', 'm4', 'm5'];
+  // seed-loop: collected — registers one test() per seed (see the desert block above).
   for (const seed of SEEDS) {
     test(`mountain town (${seed}) has a mountain resource and no desert resource`, () => {
       const s = gen({ settType: 'town', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road' }, seed);
@@ -107,11 +112,12 @@ describe('non-terrain-specific terrains never borrow another terrain’s resourc
   ];
   for (const [terrain, route] of CASES) {
     test(`${terrain} town borders no desert- or mountain-specific resource`, () => {
-      for (const seed of ['n0', 'n1', 'n2', 'n3']) {
+      const failures = collectSeedFailures(['n0', 'n1', 'n2', 'n3'], (seed) => {
         const s = gen({ settType: 'town', culture: 'germanic', terrainOverride: terrain, tradeRouteAccess: route }, seed);
         const avail = availableOf(s);
-        expect(ALL_TERRAIN_RESOURCES.some((r) => avail.has(r))).toBe(false);
-      }
+        expect(ALL_TERRAIN_RESOURCES.some((r) => avail.has(r)), `seed ${seed}`).toBe(false);
+      });
+      expectNoSeedFailures(failures, `${terrain} borrows no terrain-specific resource`);
     });
   }
 });

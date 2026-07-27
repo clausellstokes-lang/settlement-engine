@@ -17,6 +17,7 @@
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { applyLegitimacyMultipliers } from '../../src/generators/factionDynamics.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -40,16 +41,17 @@ describe('[generators-pipeline-6] faction powers agree with the patched legitima
 
   test('every settlement is self-consistent (powers == re-derived from final legitimacy)', () => {
     let checked = 0;
-    for (const { tier, seed } of CASES) {
+    const failures = collectSeedFailures(CASES, ({ tier, seed }) => {
       const s = gen({ settType: tier, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' }, seed);
       const ps = s.powerStructure;
-      if (!ps?.factions?.length || !ps.publicLegitimacy) continue;
+      if (!ps?.factions?.length || !ps.publicLegitimacy) return;
       checked++;
       const actual = {};
       for (const f of ps.factions) actual[f.faction] = f.power;
-      expect(actual).toEqual(rederivePowers(ps.factions, ps.publicLegitimacy, s.config.tier));
-    }
+      expect(actual, `${tier}/${seed} powers vs re-derivation`).toEqual(rederivePowers(ps.factions, ps.publicLegitimacy, s.config.tier));
+    });
     expect(checked).toBeGreaterThan(0); // non-vacuous
+    expectNoSeedFailures(failures, 'every settlement is self-consistent with its final legitimacy multipliers');
   });
 
   // Non-corpus terrains/routes with weaker defense readiness (isolated/none) are

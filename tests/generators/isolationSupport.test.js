@@ -5,6 +5,7 @@ import {
 } from '../../src/generators/isolationSupport.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('isolation support model', () => {
   it('recognizes a mundane foodshed, reserves, and seasonal access', () => {
@@ -91,6 +92,9 @@ describe('isolation support model', () => {
 
     expect(magicalDependency.reason).toContain('76/70');
     expect(magicalDependency.reason).toContain('mundane local support still contributes');
+    // The two toContain assertions above prove this reason is the live magic-dependency
+    // prose, so the exclusion below measures WORDING rather than an absent string.
+    // anchored: reason is pinned live by the '76/70' and mundane-contribution assertions
     expect(magicalDependency.reason).not.toMatch(
       /every import and export|teleportation circle/i,
     );
@@ -116,11 +120,15 @@ describe('isolation support model', () => {
       ...(settlement.economicViability?.dependencies || []),
     ].find(item => item.category === 'Economic Isolation');
     expect(isolationAnalysis).toBeTruthy();
-    expect(isolationAnalysis.description).not.toMatch(
-      /permanently stunted regardless of slider values/i,
-    );
+    // Asserted BEFORE the exclusion: the description must name this settlement's live
+    // capacity ratio, so the "no fatalism" assertion below cannot pass on an empty or
+    // re-shaped description.
     expect(isolationAnalysis.description).toContain(
       `${settlement.isolationSupport.capacity}/${settlement.isolationSupport.requiredCapacity}`,
+    );
+    // anchored: the capacity-ratio toContain above proves the description is live prose
+    expect(isolationAnalysis.description).not.toMatch(
+      /permanently stunted regardless of slider values/i,
     );
     if (settlement.isolationSupport.deficit > 0) {
       expect(isolationAnalysis.title).toBe('Isolation Support Gap');
@@ -185,8 +193,15 @@ describe('isolation support model', () => {
       expect(settlement.isolationSupport.deficit).toBe(0);
       expect(settlement.generationCoherenceReceipt.status).not.toBe('needs_review');
     }
-    expect(city.institutions.map(institution => institution.name)).not.toContain(
+    // The city DOES repair its gap with magical transit — a teleportation circle, the
+    // tier-valid option — so that sibling is the anchor proving this roster is live and
+    // travelled the isolation-repair path. 'Airship docking (high magic)' is the
+    // metropolis-only option and must not appear on a city.
+    expectAbsentWithAnchor(
+      city.institutions.map(institution => institution.name),
       'Airship docking (high magic)',
+      'Teleportation circle',
+      'city isolation repair uses tier-valid transit',
     );
   });
 });

@@ -16,6 +16,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { DEITY_POOL, DEITY_CORE_REF_PREFIX } from '../../src/generators/data/deityPool.js';
 import { capacityForTier, nicheOf } from '../../src/domain/worldPulse/cultImpositionApply.js';
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
@@ -26,25 +27,28 @@ const CONFIGS = [
   { settType: 'metropolis', culture: 'mediterranean', terrainOverride: 'riverside', tradeRouteAccess: 'river', monsterThreat: 'safe' },
 ];
 const SEEDS = ['latent-a', 'latent-b', 'latent-c'];
+/** Every (config, seed) pair the sweeps below exercise, config-major as before. */
+const CONFIG_SEED_CASES = CONFIGS.flatMap(
+  (config) => SEEDS.map((seed) => ({ config, seed })),
+);
 
 describe('seedStartingPantheon — latent bake through the live pipeline', () => {
   it('bakes a latent pantheon for EVERY default-path generation — and ZERO live embeds', () => {
-    for (const config of CONFIGS) {
-      for (const seed of SEEDS) {
-        const s = gen(config, seed);
-        const latent = s.config?.latentPantheon;
-        // Latent data present for every generation (the ratified default).
-        expect(latent?.patron, `${config.settType}|${seed}`).toBeTruthy();
-        expect(String(latent.patron._deityRef)).toMatch(new RegExp(`^${DEITY_CORE_REF_PREFIX}`));
-        expect(s.config.faith).toBe('pantheon');
-        // ZERO embeds without activation — the neutrality-theorem ground state.
-        expect(s.config.primaryDeitySnapshot).toBeUndefined();
-        expect(s.config.primaryDeityRef).toBeUndefined();
-        expect(s.config.cultDeitySnapshots).toBeUndefined();
-        // The religion subsystem gate stays CLOSED on the latent record.
-        expect(isSubsystemActive({ settlements: [{ id: 's0', name: s.name, settlement: s }] }, 'religion')).toBe(false);
-      }
-    }
+    const failures = collectSeedFailures(CONFIG_SEED_CASES, ({ config, seed }) => {
+      const s = gen(config, seed);
+      const latent = s.config?.latentPantheon;
+      // Latent data present for every generation (the ratified default).
+      expect(latent?.patron, `${config.settType}|${seed}`).toBeTruthy();
+      expect(String(latent.patron._deityRef)).toMatch(new RegExp(`^${DEITY_CORE_REF_PREFIX}`));
+      expect(s.config.faith).toBe('pantheon');
+      // ZERO embeds without activation — the neutrality-theorem ground state.
+      expect(s.config.primaryDeitySnapshot).toBeUndefined();
+      expect(s.config.primaryDeityRef).toBeUndefined();
+      expect(s.config.cultDeitySnapshots).toBeUndefined();
+      // The religion subsystem gate stays CLOSED on the latent record.
+      expect(isSubsystemActive({ settlements: [{ id: 's0', name: s.name, settlement: s }] }, 'religion')).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'every default-path generation bakes a latent pantheon with zero live embeds');
   }, 60_000);
 
   it('the latent draw is bounded and niche-disciplined (capacity ceiling, distinct niches, pool refs only)', () => {
@@ -98,19 +102,18 @@ describe('seedStartingPantheon — latent bake through the live pipeline', () =>
   }, 30_000);
 
   it('LATENCY DISCIPLINE: no generation surface outside the latent record names a latent deity', () => {
-    for (const config of CONFIGS) {
-      for (const seed of SEEDS) {
-        const s = gen(config, seed);
-        const latent = s.config.latentPantheon;
-        const latentNames = [latent.patron, ...(latent.cults || [])].map((d) => d.name);
-        const clone = JSON.parse(JSON.stringify(s));
-        delete clone.config.latentPantheon;             // the sole sanctioned address
-        const everythingElse = JSON.stringify(clone);
-        for (const name of latentNames) {
-          expect(everythingElse.includes(name), `${name} leaked outside latentPantheon (${config.settType}|${seed})`).toBe(false);
-        }
+    const failures = collectSeedFailures(CONFIG_SEED_CASES, ({ config, seed }) => {
+      const s = gen(config, seed);
+      const latent = s.config.latentPantheon;
+      const latentNames = [latent.patron, ...(latent.cults || [])].map((d) => d.name);
+      const clone = JSON.parse(JSON.stringify(s));
+      delete clone.config.latentPantheon;             // the sole sanctioned address
+      const everythingElse = JSON.stringify(clone);
+      for (const name of latentNames) {
+        expect(everythingElse.includes(name), `${name} leaked outside latentPantheon (${config.settType}|${seed})`).toBe(false);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'no generation surface outside the latent record names a latent deity');
   }, 60_000);
 
   it('an explicit live deity in the input config is respected — no latent record baked beneath it', () => {

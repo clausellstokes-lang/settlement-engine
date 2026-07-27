@@ -229,3 +229,38 @@ metadata.
 - The integration contract tests must fail when a transient world law is
   serialized, when resource projections drift from their authority, or when the
   persisted profile/identity/receipt metadata disagree.
+
+## Test epistemics (EPISTEMIC PREVENTION program, 2026-07-27)
+
+The three hazard classes discovered at the generation-lane close are now machine
+law, not lore. Full program record: `docs/EPISTEMIC_PREVENTION_PLAN.md`.
+
+- **Anchored negatives.** A negative assertion (`not.toContain` and kin) must
+  prove its subject is live: `expectPresentThenAbsent` for removals,
+  `expectAbsentWithAnchor` for exclusions (`tests/helpers/anchoredNegatives.js`),
+  or a reviewed `// anchored: <reason>` on the line above. Enforced shrink-only by
+  `tests/lint/negativeAssertionAnchor.walker.test.js` (habitat swept 181 → 2; the
+  two survivors are recorded owner-queue findings).
+- **Seed-loop totality.** A corpus loop must report the TRUE failure count, never
+  first-hit: `collectSeedFailures` + `expectNoSeedFailures`
+  (`tests/helpers/seedFailures.js`) or `it.each`. Enforced by
+  `tests/lint/seedLoopTotality.walker.test.js` (habitat swept 32 → 0).
+- **Powered distribution bounds.** A stochastic bound is derived, never
+  hand-picked: exact binomial envelopes (`tests/helpers/distributionEnvelope.js`)
+  from a measured base rate (N ≥ 400, provenance recorded) registered in
+  `tests/fixtures/distribution-envelopes.manifest.json`, margin ≥ 2σ, validated by
+  `tests/lint/distributionEnvelopePower.test.js`. Bounds are never loosened
+  without an owner ruling (`loosenPending` keeps the tighter live bound in force).
+  Two laws from the migration: a base rate must be measured on the corpus the
+  test actually runs (the `envelope-${'{'}i{'}'}` prefix corner: 4/50 on the real corpus
+  vs 89/400 on the wider family), and degenerate rates (0/N, N/N) are not
+  envelope-able — rule-of-three reasoning applies, or restate as a totality
+  invariant.
+- **Effect reachability.** Every authored generation effect (subsumption,
+  cascade, isolation substitution, repair kinds, magic substitution, faction
+  pull) must fire at least once across a pinned corpus, with receipt-level
+  detectors and an anti-vacuity control:
+  `tests/generators/effectReachability.coverage.test.js`. Three repair strata are
+  recorded there as UNREACHABLE with evidence (`repair.mutual_exclusion`,
+  `repair.access_compatibility`, `repair.hard_dependency`) — re-registering one
+  without fixing its producer reds the gate.

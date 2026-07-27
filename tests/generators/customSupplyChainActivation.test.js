@@ -381,6 +381,13 @@ describe('custom supply-chain activation across real generation tiers', () => {
         }),
       }),
     ]);
+    // LIVENESS ANCHOR: the town's own export list is real and populated, so the
+    // exclusion below measures "the fail-closed legacy chain did not promote its
+    // output", not "this settlement exports nothing at all". No individual vanilla
+    // export is structurally guaranteed here (they follow the seeded resource
+    // roll), so non-emptiness is the honest anchor.
+    expect(settlement.economicState.primaryExports.length).toBeGreaterThan(0);
+    // anchored: populated-export-list pin directly above.
     expect(settlement.economicState.primaryExports).not.toContain('Phantom Silk');
   });
 
@@ -569,6 +576,11 @@ describe('custom supply-chain activation across real generation tiers', () => {
         && reason.component === 'Twin Forge'
       ))
     ))).toBe(true);
+    // LIVENESS ANCHOR: same reasoning as the fail-closed case — the vanilla export
+    // list is seed-rolled, so non-emptiness is the honest proof that the blocked
+    // ambiguous chain was excluded from a list that actually exists.
+    expect(settlement.economicState.primaryExports.length).toBeGreaterThan(0);
+    // anchored: populated-export-list pin directly above.
     expect(settlement.economicState.primaryExports).not.toContain('Aster Blade');
   });
 
@@ -650,6 +662,14 @@ describe('custom supply-chain activation across real generation tiers', () => {
     expect(evaluated.processingInstitutions).toEqual([]);
     expect(evaluated.outputs).toEqual(['clear glass']);
     expect(evaluated.tradeEndpoints.exports).toEqual(['clear glass']);
+    // The tampered `upstreamMissing` alias must not become an import. Measured
+    // 2026-07-27: this projection's imports list is EXACTLY [] here, so a bare
+    // exclusion could never distinguish "alias rejected" from "key missing".
+    // The exact pin is strictly stronger and cannot go vacuous.
+    expect(evaluated.tradeEndpoints.imports).toEqual([]);
+    // The exports pin and the exact-emptiness pin above fix this projection's
+    // shape before the alias exclusion below is asserted.
+    // anchored: the exact-emptiness pin on the imports list sits directly above.
     expect(evaluated.tradeEndpoints.imports).not.toContain('Unreviewed Import');
 
     const [strippedEndpoints] = evaluateConfirmedCustomSupplyChains(

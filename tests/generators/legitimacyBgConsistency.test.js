@@ -20,6 +20,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 // The canonical legitimacy band → background, mirrored from
 // src/generators/factionDynamics.js computePublicLegitimacy (the producer of the
@@ -52,18 +53,19 @@ describe('M5 — publicLegitimacy.bg stays consistent with its band after the de
   it('every generated settlement has bg matching the canonical bg for its legitimacy label', () => {
     const mismatches = [];
     let observed = 0;
-    for (const { cfg, seed } of corpus()) {
+    const failures = collectSeedFailures(corpus(), ({ cfg, seed }) => {
       const s = generateSettlementPipeline(cfg, null, { seed, customContent: {} });
       const leg = s?.powerStructure?.publicLegitimacy;
-      if (!leg || !leg.label) continue;
+      if (!leg || !leg.label) return;
       observed += 1;
       const expectedBg = LABEL_TO_BG[leg.label];
       expect(expectedBg, `unknown legitimacy label "${leg.label}" (${cfg.settType}/${cfg.monsterThreat}/${seed})`).toBeTruthy();
       if (leg.bg !== expectedBg) {
         mismatches.push(`${cfg.settType}/${cfg.monsterThreat}/${seed}: label=${leg.label} color=${leg.color} bg=${leg.bg} (expected ${expectedBg})`);
       }
-    }
+    });
     expect(observed, 'the corpus produced settlements with a public legitimacy').toBeGreaterThan(0);
+    expectNoSeedFailures(failures, 'every corpus settlement carries a legitimacy label this map knows');
     expect(mismatches, `bg/band mismatch (the M5 stale-bg symptom):\n  ${mismatches.join('\n  ')}`).toEqual([]);
-  });
+  }, 120_000);
 });

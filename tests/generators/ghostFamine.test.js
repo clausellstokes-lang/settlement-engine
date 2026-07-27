@@ -23,6 +23,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const entriesOf = (s) => {
   const c = s.stress;
@@ -57,18 +58,19 @@ describe('F9 — ghost famine is killed (economics ⟺ entry ⟺ condition)', ()
       if (hasFamineEconomics(s) && !hasFamineEntry(s)) ghosts.push(`${settType}/${terrain}/${seed}`);
     }
     expect(ghosts, `ghost famine (economics with no stress entry) on: ${ghosts.slice(0, 8).join(', ')}`).toEqual([]);
-  });
+  }, 150_000);
 
   it('famine channels are fully coupled — economics ⟺ entry ⟺ condition on every seed', () => {
-    for (const { settType, terrain, seed } of SWEEP) {
+    const failures = collectSeedFailures(SWEEP, ({ settType, terrain, seed }) => {
       const s = isolated({ settType, terrain }, seed);
       const eco = hasFamineEconomics(s);
       const entry = hasFamineEntry(s);
       const cond = hasFamineCondition(s);
       expect(eco, `[${settType}/${terrain}/${seed}] economics⟺entry`).toBe(entry);
       expect(entry, `[${settType}/${terrain}/${seed}] entry⟺condition`).toBe(cond);
-    }
-  });
+    });
+    expectNoSeedFailures(failures, 'famine economics ⟺ entry ⟺ condition across the isolation sweep');
+  }, 150_000);
 
   it('exercises BOTH the famine-fires and famine-misses paths across the sweep', () => {
     let fired = 0;
@@ -79,30 +81,37 @@ describe('F9 — ghost famine is killed (economics ⟺ entry ⟺ condition)', ()
     }
     expect(fired, 'the isolation famine roll should fire on some seeds').toBeGreaterThan(0);
     expect(missed, 'and miss on others (it is not unconditional)').toBeGreaterThan(0);
-  });
+  }, 150_000);
 
   it('the isolation famine entry renders with the real name and drops its summaryRoll (F8 contract)', () => {
-    // Find a seed that produced the isolation famine and check its entry shape.
+    // NOT a per-seed invariant, so deliberately NOT collectSeedFailures: this is a
+    // FIND-FIRST search for one seed that produced the isolation famine, and it
+    // asserts the entry SHAPE on that single specimen ("one is enough"). The loop
+    // carries no lower-bound defect — it never suppresses a sibling seed's failure,
+    // because only one seed is ever asserted against. Widening it to the whole sweep
+    // would be a different (stricter) test, not a truthfulness repair.
     for (const { settType, terrain, seed } of SWEEP) {
       const s = isolated({ settType, terrain }, seed);
       const fam = entriesOf(s).find((e) => e?.type === 'famine');
       if (!fam) continue;
       expect(typeof fam.summary).toBe('string');
       expect(fam.summary, 'summary embeds the real settlement name').toContain(s.name);
+      // anchored: the assertions above pin fam.summary as a live string that already CONTAINS the generated name, so this cannot pass on an empty summary.
       expect(fam.summary, 'no empty-name leading-space artifact').not.toMatch(/^\s/);
       expect(Object.prototype.hasOwnProperty.call(fam, 'summaryRoll'),
         'transient summaryRoll must be deleted at assembly').toBe(false);
       return; // one is enough
     }
     throw new Error('sweep produced no isolation famine — cannot check entry shape');
-  });
+  }, 150_000);
 
   it('is deterministic — same config+seed reproduces the same famine outcome', () => {
-    for (const seed of ['ghost-det-1', 'ghost-det-2', 'ghost-det-3']) {
+    const failures = collectSeedFailures(['ghost-det-1', 'ghost-det-2', 'ghost-det-3'], (seed) => {
       const a = isolated({}, seed);
       const b = isolated({}, seed);
       expect(hasFamineEntry(b)).toBe(hasFamineEntry(a));
       expect(entriesOf(b).map((e) => e.type)).toEqual(entriesOf(a).map((e) => e.type));
-    }
+    });
+    expectNoSeedFailures(failures, 'same config+seed reproduces the same famine outcome');
   });
 });

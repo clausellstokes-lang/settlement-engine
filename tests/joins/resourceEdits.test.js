@@ -27,9 +27,25 @@
  * — withCustomTradeGoods' discipline) and resolveResources re-applies the
  * deltas as a post-roll overlay consuming NO rng, so a config without edits
  * generates byte-identically and the key must NOT be in DERIVED_CONFIG_KEYS.
+ *
+ * ANCHORING CONVENTION (epistemic prevention, wave EP-2). This file is the
+ * `re-rt-1` roster case — the one where a bare `not.toContain` was found passing
+ * against a collection that had drifted away entirely. Every negative here is
+ * therefore paired with a POSITIVE that can only hold while the roster is live:
+ *   • a removal/recovery is written as expectPresentThenAbsent(before, after, key)
+ *     so the before-state proves the pipeline still produces the key at all;
+ *   • a selection is written as expectAbsentWithAnchor(roster, key, sibling) with a
+ *     sibling this seed demonstrably rolls (marshlands / ancient_grove /
+ *     coal_deposits / hunting_grounds), so an emptied roster reds on the anchor.
+ * A bare negative on a roster is not acceptable in this file — if no anchor exists,
+ * that absence is itself the finding.
  */
 
 import { describe, test, expect } from 'vitest';
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import {
@@ -102,7 +118,12 @@ describe('join: DEPLETE_RESOURCE survives a full regeneration (the reported bug)
   test('deplete → regenerate → still depleted; the delta lives in BOTH config formats', () => {
     const s1 = gen(BASE_CFG, SEED);
     expect(s1.config.nearbyResources).toContain('marshlands');
-    expect(s1.config.nearbyResourcesDepleted).not.toContain('marshlands');
+    // ancient_grove is this seed's OWN rolled depletion — the live sibling that
+    // proves the depletion set exists and is correctly keyed before the event.
+    expectAbsentWithAnchor(
+      s1.config.nearbyResourcesDepleted, 'marshlands', 'ancient_grove',
+      'pre-event depletion set',
+    );
 
     const depleted = mutate(s1, ev('DEPLETE_RESOURCE', { targetId: 'marshlands' }));
     // Live write + the authored delta in BOTH config and _config.
@@ -130,7 +151,10 @@ describe('join: DEPLETE_RESOURCE survives a full regeneration (the reported bug)
 
     const s3 = gen(buildNextConfig(recovered), SEED);
     expect(s3.config.nearbyResources).toContain('marshlands');
-    expect(effectiveDepleted(s3)).not.toContain('marshlands');
+    expectPresentThenAbsent(
+      effectiveDepleted(s2), effectiveDepleted(s3), 'marshlands',
+      'RECOVERED_RESOURCE on a regenerated settlement, through another regeneration',
+    );
   });
 });
 
@@ -147,19 +171,29 @@ describe('join: RECOVERED_RESOURCE survives against the same-seed re-roll', () =
       .toBe(true);
 
     const recovered = mutate(s1, ev('RECOVERED_RESOURCE', { targetId: 'ancient_grove' }));
-    expect(recovered.config.nearbyResourcesDepleted).not.toContain('ancient_grove');
+    expectPresentThenAbsent(
+      s1.config.nearbyResourcesDepleted, recovered.config.nearbyResourcesDepleted,
+      'ancient_grove', 'RECOVERED_RESOURCE clears the live depletion',
+    );
     expect(recovered._config.resourceEdits.recovered).toEqual(['ancient_grove']);
 
     const s2 = gen(buildNextConfig(recovered), SEED);
     expect(s2.config.nearbyResources).toContain('ancient_grove');
-    expect(effectiveDepleted(s2)).not.toContain('ancient_grove');
+    expectPresentThenAbsent(
+      effectiveDepleted(s1), effectiveDepleted(s2), 'ancient_grove',
+      'the recovery beats the same-seed re-roll of the original depletion',
+    );
   });
 });
 
 describe('join: ADD_RESOURCE survives a full regeneration', () => {
   test('a catalog node joins the re-rolled roster, open and untinted', () => {
     const s1 = gen(BASE_CFG, SEED);
-    expect(s1.config.nearbyResources).not.toContain('grain_fields');
+    // marshlands is one of this seed's four rolled nodes — the live sibling that
+    // proves the roster exists before the ADD.
+    expectAbsentWithAnchor(
+      s1.config.nearbyResources, 'grain_fields', 'marshlands', 'the pre-ADD roster',
+    );
 
     const added = mutate(s1, ev('ADD_RESOURCE', { targetId: 'grain_fields' }));
     expect(added.config.resourceEdits.added).toEqual([{ key: 'grain_fields', custom: false }]);
@@ -168,7 +202,13 @@ describe('join: ADD_RESOURCE survives a full regeneration', () => {
     const s2 = gen(buildNextConfig(added), SEED);
     expect(s2.config.nearbyResources).toContain('grain_fields');
     expect(s2.config.nearbyResourcesNative).toContain('grain_fields');
-    expect(effectiveDepleted(s2)).not.toContain('grain_fields');
+    // ancient_grove stays this seed's rolled depletion across the ADD, so it is the
+    // live sibling proving the depletion set is still populated and correctly keyed.
+    expectAbsentWithAnchor(
+      effectiveDepleted(s2), 'grain_fields', 'ancient_grove', 'an ADDed node arrives open',
+    );
+    // The native/custom provenance split: the custom sidecar is empty here by design.
+    // anchored: the same key is asserted PRESENT in nearbyResourcesNative above.
     expect(s2.config.nearbyResourcesCustom || []).not.toContain('grain_fields');
   });
 
@@ -179,8 +219,12 @@ describe('join: ADD_RESOURCE survives a full regeneration', () => {
 
     const s2 = gen(buildNextConfig(added), SEED);
     expect(s2.config.nearbyResources).toContain('Moonpetal grove');
-    expect(s2.config.nearbyResourcesNative)
-      .not.toContain('Moonpetal grove');
+    // The native list still carries this seed's rolled nodes; marshlands anchors it,
+    // so the exclusion measures the custom tint rather than an emptied native list.
+    expectAbsentWithAnchor(
+      s2.config.nearbyResourcesNative, 'Moonpetal grove', 'marshlands',
+      'a custom node never joins the native provenance list',
+    );
     expect(s2.config.nearbyResourcesCustom).toContain('Moonpetal grove');
   });
 
@@ -264,12 +308,23 @@ describe('join: REMOVE_RESOURCE suppression survives a full regeneration', () =>
     expect(s1.config.nearbyResources).toContain('hunting_grounds');
 
     const removed = mutate(s1, ev('REMOVE_RESOURCE', { targetId: 'hunting_grounds' }));
-    expect(removed.config.nearbyResources).not.toContain('hunting_grounds');
+    expectPresentThenAbsent(
+      s1.config.nearbyResources, removed.config.nearbyResources, 'hunting_grounds',
+      'REMOVE_RESOURCE strips the live roster',
+    );
     expect(removed._config.resourceEdits.removed).toEqual(['hunting_grounds']);
 
     const s2 = gen(buildNextConfig(removed), SEED);
-    expect(s2.config.nearbyResources).not.toContain('hunting_grounds');
-    expect(s2.config.nearbyResourcesDepleted).not.toContain('hunting_grounds');
+    expectPresentThenAbsent(
+      s1.config.nearbyResources, s2.config.nearbyResources, 'hunting_grounds',
+      'the suppression keeps a rolled node gone across regeneration',
+    );
+    // ancient_grove survives as this seed's rolled depletion, so the depletion set is
+    // demonstrably still populated when we assert the removed node is not in it.
+    expectAbsentWithAnchor(
+      s2.config.nearbyResourcesDepleted, 'hunting_grounds', 'ancient_grove',
+      'a suppressed node carries no depletion record',
+    );
 
     // Re-ADD on the regenerated settlement clears the suppression entry —
     // the lists keep agreeing across generations.
@@ -290,8 +345,14 @@ describe('join: REMOVE_RESOURCE suppression survives a full regeneration', () =>
     const removed = mutate(s1, ev('REMOVE_RESOURCE', { targetId: 'ancient_grove' }));
 
     const s2 = gen(buildNextConfig(removed), SEED);
-    expect(s2.config.nearbyResources).not.toContain('ancient_grove');
-    expect(s2.config.nearbyResourcesDepleted).not.toContain('ancient_grove');
+    expectPresentThenAbsent(
+      s1.config.nearbyResources, s2.config.nearbyResources, 'ancient_grove',
+      'the removed node stays off the regenerated roster',
+    );
+    expectPresentThenAbsent(
+      s1.config.nearbyResourcesDepleted, s2.config.nearbyResourcesDepleted, 'ancient_grove',
+      'removing a rolled-depleted node takes its depletion entry with it',
+    );
   });
 });
 
@@ -325,7 +386,10 @@ describe('join: manual mode — the overlay is mode-agnostic', () => {
     const recovered = mutate(s1, ev('RECOVERED_RESOURCE', { targetId: 'stone_quarry' }));
     const s2 = gen(buildNextConfig(recovered), 're-man-2');
     expect(s2.config.nearbyResources).toContain('stone_quarry');
-    expect(effectiveDepleted(s2)).not.toContain('stone_quarry');
+    expectPresentThenAbsent(
+      effectiveDepleted(s1), effectiveDepleted(s2), 'stone_quarry',
+      "recovery survives the manual-mode 'allow' re-roll",
+    );
   });
 });
 
@@ -349,7 +413,12 @@ describe('join: the overlay consumes no rng and the slice strip never eats the k
   });
 
   test('stripDerivedConfigKeys preserves resourceEdits (it is user input, not derived)', () => {
-    expect(DERIVED_CONFIG_KEYS).not.toContain('resourceEdits');
+    // 'stressType' is the liveness anchor: it is a real derived key that this same
+    // test strips below, so an emptied or renamed DERIVED_CONFIG_KEYS cannot make
+    // the exclusion pass by accident.
+    expectAbsentWithAnchor(
+      DERIVED_CONFIG_KEYS, 'resourceEdits', 'stressType', 'derived-key roster',
+    );
     const stripped = stripDerivedConfigKeys({
       stressType: 'plague',
       resourceEdits: { added: [], removed: ['hunting_grounds'], depleted: [], recovered: [] },

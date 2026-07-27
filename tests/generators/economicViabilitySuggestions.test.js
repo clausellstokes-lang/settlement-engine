@@ -23,6 +23,7 @@ import { describe, expect, it } from 'vitest';
 import { generateEconomicViability } from '../../src/generators/economicGenerator.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { TIER_ORDER } from '../../src/data/constants.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const mkSettlement = (tier, instNames, config = {}) => ({
   population: tier === 'thorp' ? 40 : 2500,
@@ -107,8 +108,13 @@ describe('a town processing grain', () => {
       expect(reachableAt('town', name), `'${name}' is not town-reachable`).toBe(true);
     }
     // The impact line names the chains' real outputs, not the dead
-    // 'finished goods' fallback the flattened union used to force.
-    expect(grain.impact).not.toContain('(finished goods)');
+    // 'finished goods' fallback the flattened union used to force. 'Baked goods'
+    // is the anchor: it is a real grain-chain output rendered by the very
+    // parenthetical that used to read '(finished goods)'.
+    expectAbsentWithAnchor(
+      grain.impact, '(finished goods)', 'Baked goods',
+      "impact names the chain's real outputs",
+    );
   });
 
   it('resource-less chains (slave trade, organised crime) never join a resource union', () => {
@@ -120,9 +126,13 @@ describe('a town processing grain', () => {
       ['Grain fields', 'Grazing land', 'Iron ore deposits', 'Stone quarry'],
     );
     const text = JSON.stringify(chainSuggestions(v));
-    expect(text).not.toMatch(/slave market/i);
-    expect(text).not.toMatch(/street gang/i);
-    expect(text).not.toMatch(/thieves/i);
-    expect(text).not.toMatch(/workhouse/i);
+    // LIVENESS ANCHOR: chainSuggestions admits only category 'Resource Chain', so
+    // this token appears iff at least one suggestion actually survived the filter.
+    // An empty set serializes to '[]' and would pass all four scans below forever.
+    expect(text).toContain('Resource Chain');
+    expect(text).not.toMatch(/slave market/i); // anchored: live-suggestion pin above
+    expect(text).not.toMatch(/street gang/i); // anchored: live-suggestion pin above
+    expect(text).not.toMatch(/thieves/i); // anchored: live-suggestion pin above
+    expect(text).not.toMatch(/workhouse/i); // anchored: live-suggestion pin above
   });
 });

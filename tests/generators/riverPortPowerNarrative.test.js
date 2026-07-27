@@ -32,6 +32,11 @@ describe('merchant power narrative maritime grounding', () => {
     const description = merchantDescription(settlement);
 
     expect(description).toBeTruthy();
+    // The faction this reads is the Merchant Guilds bloc, and its description always
+    // names the merchant community. Asserting that FIRST means the maritime exclusion
+    // below measures vocabulary, not a description that stopped being written.
+    expect(description).toMatch(/\bmerchant\b/i);
+    // anchored: the merchant-vocabulary assertion above proves this desc is live prose
     expect(description).not.toMatch(/\bmaritime\b|\bport licences?\b/i);
   });
 

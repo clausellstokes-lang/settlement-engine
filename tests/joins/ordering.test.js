@@ -27,6 +27,7 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveInstitutionalServices } from '../../src/generators/computeActiveChains.js';
 import { checkStructuralValidity } from '../../src/generators/structuralValidator.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 function gen(config, seed) {
   return generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -47,10 +48,12 @@ describe('faction-pulled institutions join services / chains / income', () => {
 
   it('known seeds still produce faction_boost institutions (full catalog defs, traced)', () => {
     let sawAny = false;
-    for (const { seed, config } of FB_CASES) {
+    // Every pinned case runs: `sawAny` below only says SOME case pulled, so a per-case
+    // regression must report its own true count rather than stopping at the first.
+    const failures = collectSeedFailures(FB_CASES, ({ seed, config }) => {
       const s = gen(config, seed);
       const pulled = s.institutions.filter(i => i.source === 'faction_boost');
-      if (pulled.length === 0) continue;
+      if (pulled.length === 0) return;
       sawAny = true;
       for (const inst of pulled) {
         // Full catalog def carried — not a metadata stub (the old code
@@ -67,14 +70,15 @@ describe('faction-pulled institutions join services / chains / income', () => {
         );
         expect(trace, `${inst.name} has no faction_pulled trace`).toBeTruthy();
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'pinned seeds produce fully-formed faction_boost institutions');
     expect(sawAny, 'none of the pinned seeds produced a faction_boost — refresh FB_CASES').toBe(true);
   });
 
   it('the dossier economy is derived from the FINAL roster (pull included)', () => {
-    for (const { seed, config } of FB_CASES) {
+    const failures = collectSeedFailures(FB_CASES, ({ seed, config }) => {
       const s = gen(config, seed);
-      if (!s.institutions.some(i => i.source === 'faction_boost')) continue;
+      if (!s.institutions.some(i => i.source === 'faction_boost')) return;
       // economicState.institutionalServices is a pure derivation of the
       // roster the economy was computed from. If the economy had been left
       // on the pre-pull roster (the old ordering bug), this equality fails
@@ -85,7 +89,8 @@ describe('faction-pulled institutions join services / chains / income', () => {
       // step is the only producer of these keys now).
       expect(s.availableServices && typeof s.availableServices).toBe('object');
       expect(s.spatialLayout).toBeTruthy();
-    }
+    });
+    expectNoSeedFailures(failures, 'the dossier economy is derived from the FINAL roster');
   });
 
   it('a force-excluded institution is never resurrected by a faction pull', () => {
@@ -98,16 +103,22 @@ describe('faction-pulled institutions join services / chains / income', () => {
       toggles[`town::Religious::${n}`] = { allow: false, forceExclude: true };
       toggles[`town::Essential::${n}`] = { allow: false, forceExclude: true };
     }
-    for (const seed of ['ord-1', 'ord-2', 'ord-6', 'ord-8', 'ord-9', 'ord-14']) {
-      const s = gen({
-        settType: 'town', culture: 'germanic', tradeRouteAccess: 'road',
-        _institutionToggles: toggles,
-      }, seed);
-      const resurrections = s.institutions.filter(i =>
-        i.source === 'faction_boost' && excluded.includes(i.name));
-      expect(resurrections, `${seed} resurrected ${resurrections.map(r => r.name).join(', ')}`)
-        .toEqual([]);
-    }
+    // Run all six: "across the seeds that previously pulled religious institutions"
+    // is a claim about the whole set, so a partial breakage must report its true size.
+    const failures = collectSeedFailures(
+      ['ord-1', 'ord-2', 'ord-6', 'ord-8', 'ord-9', 'ord-14'],
+      (seed) => {
+        const s = gen({
+          settType: 'town', culture: 'germanic', tradeRouteAccess: 'road',
+          _institutionToggles: toggles,
+        }, seed);
+        const resurrections = s.institutions.filter(i =>
+          i.source === 'faction_boost' && excluded.includes(i.name));
+        expect(resurrections, `${seed} resurrected ${resurrections.map(r => r.name).join(', ')}`)
+          .toEqual([]);
+      },
+    );
+    expectNoSeedFailures(failures, 'a force-excluded institution is never resurrected by a faction pull');
   });
 });
 

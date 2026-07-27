@@ -13,6 +13,7 @@
  * injection that relocates from author time to tick time.
  */
 import { beforeAll, beforeEach, describe, test, expect, vi } from 'vitest';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -680,10 +681,18 @@ describe('campaign-clock: re-homing a settlement drops its queued intentions fro
     store.getState().applyEvent(stressorEvent('ev-move'));
     expect(pendingOf(store)).toHaveLength(1); // queued on camp-1
 
+    // Snapshot the roster camp-1 held BEFORE the move: it is the liveness anchor for
+    // "the settlement left". A copy, because the store re-homes in place.
+    const camp1IdsBefore = [
+      ...store.getState().campaigns.find(c => c.id === 'camp-1').settlementIds,
+    ];
+
     store.getState().addToCampaign('camp-2', 'ashford');
 
     const camp1 = store.getState().campaigns.find(c => c.id === 'camp-1');
-    expect(camp1.settlementIds).not.toContain('ashford');
+    expectPresentThenAbsent(
+      camp1IdsBefore, camp1.settlementIds, 'ashford', 're-homing leaves the old campaign',
+    );
     // The queued intentions did NOT strand in camp-1 to be silently vaporized.
     expect(camp1.worldState.pendingEvents || []).toHaveLength(0);
   });

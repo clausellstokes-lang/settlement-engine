@@ -18,6 +18,7 @@ import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../src/data/servicesData.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const KEYS_LC = new Map(Object.keys(INSTITUTION_SERVICES).map((k) => [k.toLowerCase(), k]));
 
@@ -99,13 +100,18 @@ describe('dedicated INSTITUTION_SERVICES entry wins the lookup', () => {
 
   it.each(CASES)('%s surfaces only its own dedicated services', (name, category, legacyNames) => {
     const ownKeys = new Set(Object.keys(INSTITUTION_SERVICES[name]));
-    for (const seed of SEEDS) {
+    // The legacy roster is the whole content of this case row: an empty one would make
+    // every exclusion below vacuous, so its liveness is asserted once, up front.
+    expect(legacyNames.length, `${name}: the case row lists no legacy services`).toBeGreaterThan(0);
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const buckets = servicesWithSeed(seed, 'village', [{ name, category }], { ...CONFIG });
       for (const entry of allEntries(buckets)) {
         expect(ownKeys.has(entry.name), `${name} offered foreign service '${entry.name}' (seed ${seed})`).toBe(true);
+        // anchored: legacyNames is a literal case row whose non-emptiness is asserted above.
         expect(legacyNames).not.toContain(entry.name);
       }
-    }
+    });
+    expectNoSeedFailures(failures, `${name} surfaces only its own dedicated services`);
   });
 });
 
@@ -122,14 +128,22 @@ describe("Garrison 'Defence services' bucket and crime gate", () => {
   });
 
   it('a low-crime garrisoned town keeps Defence services on EVERY seed, under employment', () => {
-    for (const seed of SEEDS) {
+    // "EVERY seed" is the claim, so every seed must actually run: a bare loop would
+    // report one casualty and leave the rest of the corpus unexercised.
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const buckets = servicesWithSeed(seed, 'town', INSTS, { ...CONFIG });
       const defence = buckets.employment.find((e) => e.name === 'Defence services');
       expect(defence, `Defence services missing on seed ${seed}`).toBeTruthy();
       expect(defence.institution).toBe('Garrison');
-      // And it must never surface under the Criminal Services header.
+      // And it must never surface under the Criminal Services header. This lawful
+      // fixture keeps the criminal bucket empty on every seed, so the meaning lives in
+      // the SPLIT, and a vanished bucket throws on .map() rather than passing quietly.
+      // anchored: the employment side of the same split is asserted three lines up.
       expect(buckets.criminal.map((e) => e.name)).not.toContain('Defence services');
-    }
+    });
+    expectNoSeedFailures(
+      failures, 'a low-crime garrisoned town keeps Defence services under employment',
+    );
   });
 
   it('genuinely criminal providers are still crime-gated in lawful settlements', () => {

@@ -2,6 +2,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 
 // F12(4) regression pin: the trade-goods force/exclude toggle is keyed
 // `${tier}_good_${goodName}` — the vocabulary the Trade Dynamics UI writes
@@ -37,11 +38,24 @@ describe('goods force/exclude toggles (${tier}_good_<name>)', () => {
       { 'city_good_Iron ore': { allow: false, force: false, forceExclude: true } },
       CITY_CFG,
     );
-    expect(excluded.primaryExports).not.toContain('Iron ore');
+    expectPresentThenAbsent(
+      baseline.primaryExports,
+      excluded.primaryExports,
+      'Iron ore',
+      'city_good_Iron ore forceExclude',
+    );
   });
 
   test('force includes a good that would otherwise be absent', () => {
     const baseline = gen('town', [], 'road', {}, { nearbyResources: [] });
+    // A bare town (no institutions, no nearby resources) exports NOTHING, so this
+    // precondition has no live sibling to anchor against — measured 2026-07-27:
+    // primaryExports === []. Pin the exact emptiness instead: that statement goes
+    // false the moment the baseline drifts, which is precisely the vacuity a bare
+    // `not.toContain` would hide.
+    expect(baseline.primaryExports).toEqual([]);
+    // The line below names the one good the force toggle is about to add.
+    // anchored: the exact-emptiness pin above cannot go vacuous.
     expect(baseline.primaryExports).not.toContain('Pottery and ceramics');
 
     const forced = gen(

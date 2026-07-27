@@ -16,6 +16,11 @@
 import { describe, test, expect } from 'vitest';
 
 import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
+
+import {
   evaluateResourceDynamics,
   applyResourceMembershipOutcomeToSettlement,
 } from '../../src/domain/worldPulse/resourceDynamicsKernel.js';
@@ -72,7 +77,11 @@ describe('undo round-trip — the writer + mover are pure (paused-resume safe)',
 describe('regen durability — an organic discovery survives full regeneration', () => {
   test('discover organically → regenerate → the node persists via resourceEdits (like a DM ADD)', () => {
     const s1 = gen(BASE_CFG, SEED);
-    expect(s1.config.nearbyResources).not.toContain('grain_fields');
+    // coal_deposits is one of this seed's rolled nodes (the sibling test below leans
+    // on it too) — the live anchor proving the roster exists before the discovery.
+    expectAbsentWithAnchor(
+      s1.config.nearbyResources, 'grain_fields', 'coal_deposits', 'the pre-discovery roster',
+    );
 
     const discovered = applyResourceMembershipOutcomeToSettlement(s1, discoverOutcome('grain_fields'));
     // The regen-surviving delta, dual-written config + _config (== the DM ADD shape).
@@ -94,7 +103,10 @@ describe('regen durability — an organic discovery survives full regeneration',
     const removed = applyResourceMembershipOutcomeToSettlement(s1, removeOutcome('coal_deposits'));
     expect(removed._config.resourceEdits.removedNative).toContain('coal_deposits');
     const s2 = gen(buildNextConfig(removed), SEED);
-    expect(s2.config.nearbyResources).not.toContain('coal_deposits');
+    expectPresentThenAbsent(
+      s1.config.nearbyResources, s2.config.nearbyResources, 'coal_deposits',
+      'the worked-out vein stays gone across regeneration',
+    );
   });
 
   test('native exhaustion preserves a same-name custom add across regeneration', () => {
@@ -135,8 +147,13 @@ describe('regen durability — an organic discovery survives full regeneration',
       .toContain('iron_deposits');
     expect(regenerated.config.nearbyResourcesCustom)
       .toContain('iron_deposits');
-    expect(regenerated.config.nearbyResourcesNative)
-      .not.toContain('iron_deposits');
+    // The native list still carries this config's rolled natives; grain_fields anchors
+    // it, so the exclusion measures the native/custom identity split rather than a
+    // native list that regeneration stopped producing.
+    expectAbsentWithAnchor(
+      regenerated.config.nearbyResourcesNative, 'iron_deposits', 'grain_fields',
+      'native exhaustion preserves only the custom owner',
+    );
     expect(regenerated._config.resourceEdits.added).toEqual([
       { key: 'iron_deposits', custom: true },
     ]);

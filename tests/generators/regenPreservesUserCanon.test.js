@@ -20,6 +20,8 @@ import {
 } from '../../src/generators/generateSettlementPipeline.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import { deepClone } from '../../src/domain/clone.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const CFG = {
   settType: 'town',
@@ -117,7 +119,7 @@ describe('user canon survives a reroll', () => {
     const allPinned = deepClone(settlement);
     for (const npc of allPinned.npcs) npc.locked = true;
 
-    for (const seed of ['overflow-a', 'overflow-b', 'overflow-c']) {
+    const failures = collectSeedFailures(['overflow-a', 'overflow-b', 'overflow-c'], (seed) => {
       const parts = reroll(allPinned, seed);
       const ids = new Set(parts.npcs.map((/** @type {{id: string}} */ n) => n.id));
       const withEdges = new Set();
@@ -130,7 +132,8 @@ describe('user canon survives a reroll', () => {
       // Every preserved character is reachable in the social graph.
       const isolated = parts.npcs.filter((/** @type {{id: string}} */ n) => !withEdges.has(n.id));
       expect(isolated, `seed ${seed} left characters with no relationships`).toHaveLength(0);
-    }
+    });
+    expectNoSeedFailures(failures, 'a wholly pinned cast gets real slots on every overflow seed');
   });
 });
 
@@ -205,13 +208,25 @@ describe('nobody in the dossier talks about a character who left', () => {
   test('no relationship prose names a displaced character', () => {
     for (const rel of parts.relationships || []) {
       const prose = `${rel.description} ${rel.tension}`;
-      for (const name of gone) expect(prose).not.toContain(name);
+      // The live endpoint's name is the liveness anchor: the sibling test above
+      // pins that this prose names both endpoints, so prose that stopped naming
+      // anybody reds on the anchor instead of passing this exclusion for free.
+      for (const name of gone) {
+        expectAbsentWithAnchor(prose, name, rel.npc1Name, `rel ${rel.npc1Id}→${rel.npc2Id}`);
+      }
     }
   });
 
   test('no NPC secret names a displaced character', () => {
     for (const npc of parts.npcs) {
       const secret = `${npc.secret?.what || ''} ${npc.secret?.stakes || ''}`;
+      // A secret is not required to name anybody, so there is no sibling-name
+      // anchor available here; the liveness anchor is that the scanned text is
+      // real prose at all (measured 2026-07-27: 7/7 secrets, min 115 chars).
+      expect(secret.trim().length, `${npc.name} has secret prose to scan`).toBeGreaterThan(0);
+      // The sibling test 'the fixture actually displaces somebody' pins `gone`
+      // non-empty, so an empty displaced-name list cannot silently skip this loop.
+      // anchored: the assertion above pins `secret` as live non-empty prose, so this exclusion cannot pass against an emptied or absent secret.
       for (const name of gone) expect(secret).not.toContain(name);
     }
   });

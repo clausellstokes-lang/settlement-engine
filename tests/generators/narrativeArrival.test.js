@@ -26,6 +26,7 @@ import { ARRIVAL_SCENES, ARRIVAL_ADDONS } from '../../src/data/narrativeData.js'
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // generateArrivalScene draws through the ambient rngContext, which now fails
 // CLOSED (throws) with no active seeded RNG — so seed one per test. The
@@ -104,8 +105,11 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
     for (let i = 0; i < 32; i++) {
       setActiveRng(createPRNG(`port-not-river-${i}`));
       const scene = generateArrivalScene(settlementFor('port'));
-      expect(scene, `seed ${i} used inland-river language`).not.toMatch(inlandRiverTerms);
+      // The maritime assertion runs FIRST: it proves this seed produced real port prose,
+      // so the river-vocabulary exclusion below cannot pass on a bare fallback line.
       expect(scene, `seed ${i} lacked maritime grounding`).toMatch(maritimeTerms);
+      // anchored: the maritime-terms assertion above proves the scene is live port prose
+      expect(scene, `seed ${i} used inland-river language`).not.toMatch(inlandRiverTerms);
     }
   });
 
@@ -143,7 +147,14 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
       tier: 'metropolis',
     });
     expect(scene).toContain("region's great urban centre");
-    expect(scene).not.toContain('It is a city in its own right');
+    // The metropolis line REPLACES the city line; the metropolis phrase is the sibling
+    // proving the scale sentence rendered at all.
+    expectAbsentWithAnchor(
+      scene,
+      'It is a city in its own right',
+      "region's great urban centre",
+      'metropolis scale line supersedes the city line',
+    );
   });
 
   test('a riverside port is described as an inland river port, never a seaport', () => {
@@ -154,6 +165,7 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
       { terrainType: 'riverside' },
     );
     expect(reason).toMatch(/\briver port\b/i);
+    // anchored: the river-port assertion above proves `reason` is live founding prose
     expect(reason).not.toMatch(/\bcoastal\b|\bsea\b/i);
 
     setActiveRng(createPRNG('riverside-port-arrival'));
@@ -165,6 +177,7 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
       },
     });
     expect(scene).toMatch(/\briver|barge|waterfront|quay|dock\b/i);
+    // anchored: the river/wharf assertion above proves the scene is live riverside prose
     expect(scene).not.toMatch(/\bsea|coastal|gulls?\b/i);
   });
 });
@@ -180,6 +193,9 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
     expect(out).toBe(
       'The Sack of the Granary is still present in living memory — The supply of grain is under pressure.',
     );
+    // The toBe above pins `out` to an exact full string, so this exclusion cannot
+    // survive the subject drifting away — it names the defect that string encodes.
+    // anchored: `out` is pinned to an exact string by the toBe assertion above
     expect(out).not.toContain('[object Object]');
   });
 
@@ -211,6 +227,9 @@ describe('generateSiegeCapability joins the tensions array honestly', () => {
     expect(out).toBe(
       'The Succession Crisis is still present in living memory — The supply of grain is under pressure.',
     );
+    // The toBe above pins `out` to an exact full string, so this exclusion cannot
+    // survive the subject drifting away — it names the defects that string encodes.
+    // anchored: `out` is pinned to an exact string by the toBe assertion above
     expect(out).not.toMatch(/\bThe The\b|\.\.$/);
   });
 

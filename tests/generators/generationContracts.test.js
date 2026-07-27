@@ -88,8 +88,12 @@ describe('final settlement generation contracts', () => {
       { seed: 'generation-contract-envelope-v1', customContent: {} },
     );
 
-    expect(settlement).not.toHaveProperty('generationContext');
-    expect(settlement).not.toHaveProperty('worldLaw');
+    // LIVENESS ANCHOR: the pipeline result carries its receipt, so the two
+    // negatives below measure "the transient world law was stripped from a real
+    // settlement", not "the pipeline returned nothing".
+    expect(settlement).toHaveProperty('generationCoherenceReceipt');
+    expect(settlement).not.toHaveProperty('generationContext'); // anchored: receipt pin above
+    expect(settlement).not.toHaveProperty('worldLaw'); // anchored: receipt pin above
 
     expect(settlement.culturalIdentity).toMatchObject({
       key: 'latin',

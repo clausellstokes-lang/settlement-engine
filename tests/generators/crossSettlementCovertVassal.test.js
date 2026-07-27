@@ -11,6 +11,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateCrossSettlementConflicts } from '../../src/generators/crossSettlementConflicts.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const settlement = (name, seedTag) => ({
   name,
@@ -42,7 +43,16 @@ describe('criminal_network / vassal cross-settlement conflicts', () => {
       for (const c of npcConflicts) {
         expect(c.relType).toBe(relType);
         expect(String(c.conflictNature || '')).not.toBe('');
-        expect(String(c.description || '')).not.toContain('undefined');
+        // Every template interpolates BOTH settlement identities, so 'Ashford' is
+        // the liveness anchor: an unfilled slot that leaks 'undefined' is the same
+        // interpolation failure that would drop the name, and `|| ''` would
+        // otherwise turn a missing description into a silent pass.
+        expectAbsentWithAnchor(
+          String(c.description || ''),
+          'undefined',
+          'Ashford',
+          `${relType} npc-conflict description`,
+        );
       }
     });
 
@@ -51,7 +61,14 @@ describe('criminal_network / vassal cross-settlement conflicts', () => {
       const factionConflicts = [...forA, ...forB].filter((c) => c.type === 'faction_engagement');
       expect(factionConflicts.length).toBeGreaterThan(0);
       for (const c of factionConflicts) {
-        expect(String(c.description || '')).not.toContain('undefined');
+        // Same anchor as the conflict pass: the faction templates name both
+        // settlements, so a live description always carries 'Ashford'.
+        expectAbsentWithAnchor(
+          String(c.description || ''),
+          'undefined',
+          'Ashford',
+          `${relType} faction-engagement description`,
+        );
       }
     });
   }

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 import { RESOURCE_CHAINS } from '../../src/data/resourceChains.js';
 import { TERRAIN_DATA } from '../../src/data/geographyData.js';
@@ -153,8 +154,11 @@ describe('resource analysis: terrain-vocabulary chains classify (cycle-5 miss re
     // Plains holds none of copper/gems/precious/glass; the synonym table must not
     // conjure them.
     const activeKeys = analyze('plains').resourceChains.map((c) => c.chainKey);
+    // 'grain' is the anchor — the same producer, the same terrain, a chain plains
+    // demonstrably works (pinned by the sibling test above). Without it an analysis
+    // that returned no chains at all would read as "the synonym table is inert".
     for (const k of ['copperOre', 'preciousMetals', 'gemstones', 'sand']) {
-      expect(activeKeys, `${k} must not activate on plains`).not.toContain(k);
+      expectAbsentWithAnchor(activeKeys, k, 'grain', `${k} must not activate on plains`);
     }
   });
 

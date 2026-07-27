@@ -74,8 +74,11 @@ describe('generation certification soak vocabulary', () => {
     expect(config).toHaveProperty('terrainOverride');
     expect(config).toHaveProperty('magicExists');
     expect(config).toHaveProperty('priorityMagic');
-    expect(config).not.toHaveProperty('terrain');
-    expect(config).not.toHaveProperty('magicLevel');
+    // The three positive toHaveProperty pins above prove this config object is
+    // live and carries the CURRENT vocabulary, so the two retired-alias negatives
+    // below cannot pass against an empty or undefined config.
+    expect(config).not.toHaveProperty('terrain'); // anchored: live-config pins above
+    expect(config).not.toHaveProperty('magicLevel'); // anchored: live-config pins above
   });
 });
 

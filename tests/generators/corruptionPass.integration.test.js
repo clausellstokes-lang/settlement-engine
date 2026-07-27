@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { readCorruptionClimate } from '../../src/domain/corruption.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 // §corruption Phase 1a — generation-time onset, exercised through the REAL
 // pipeline. Asserts the invariants rather than a specific (seed-dependent)
@@ -18,7 +19,7 @@ describe('corruptionPass — generation-time onset (integration)', () => {
     let sawCriminalSettlement = false;
     let sawCorruptNpc = false;
 
-    for (const seed of SEEDS) {
+    const failures = collectSeedFailures(SEEDS, (seed) => {
       const s = gen(seed);
       const climate = readCorruptionClimate(s);
       const npcs = Array.isArray(s.npcs) ? s.npcs : [];
@@ -47,7 +48,8 @@ describe('corruptionPass — generation-time onset (integration)', () => {
           expect(npc.corrupt === true).toBe(false);
         }
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'corruption is marked iff a criminal institution is present');
 
     // A river-port metropolis across six seeds should surface criminal institutions
     // at least once, exercising the true path.

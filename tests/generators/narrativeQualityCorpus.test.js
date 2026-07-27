@@ -5,9 +5,25 @@
  * matrix of seeds and inputs for classes of defects that can hide in otherwise
  * valid output: unresolved template tokens, doubled articles, lower-case
  * sentence joins, number disagreement, scale drift, and ambiguous NPC names.
+ *
+ * EPISTEMIC PREVENTION (wave EP-2D, 2026-07-27). Two classes were swept here:
+ *   • ANCHORED NEGATIVES — every `not.toMatch` / `not.toContain` in this file now
+ *     sits next to a positive that can only hold while the prose it scans is live.
+ *     A bare negative against prose that drifted away (a renamed branch, an empty
+ *     join, a producer that stopped emitting) is vacuously green forever; the
+ *     anchor turns that silent pass into a loud red on the POSITIVE.
+ *   • A DERIVED DISTRIBUTION BOUND — the relationship-rumor emission floor is no
+ *     longer a hand-picked `> 40`. It is derived from the measured emission rate
+ *     at the corpus size, and lives in tests/fixtures/distribution-envelopes.manifest.json
+ *     so the bound and its provenance cannot drift apart.
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { readEnvelope } from '../helpers/distributionEnvelope.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { generateHistory } from '../../src/generators/historyGenerator.js';
 import { renderHistoryTemplate } from '../../src/generators/historyTemplate.js';
@@ -24,6 +40,12 @@ import { generateSafetyProfile } from '../../src/generators/safetyProfile.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+
+/** The one canonical home for this file's derived distribution bounds. */
+const ENVELOPES = JSON.parse(readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../fixtures/distribution-envelopes.manifest.json'),
+  'utf8',
+));
 
 const withSeed = (seed, work) => {
   setActiveRng(createPRNG(seed));
@@ -168,10 +190,21 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
     }).join(' ');
 
     expect(prose).toMatch(expected);
+    // LIVENESS ANCHOR: the negative below scans SENTENCE JOINS. Prose with no join at
+    // all satisfies it vacuously — and so does prose that drifted to empty. Assert the
+    // joins exist first (every branch measures 2-3 of them), so "no join opens
+    // lower-case" is a statement about real joins.
+    expect(prose, 'the branch must produce at least one sentence join to scan').toMatch(/[.!?]\s+/);
+    // anchored: the two toMatch assertions above prove the prose is live AND that a sentence join actually occurs.
     expect(prose).not.toMatch(/[.!?]\s+[a-z]/);
   });
 
   test('relationship-rumor variants never form "a outstanding"', () => {
+    // The emission floor is DERIVED, not guessed. Measured 2026-07-27 at 400 draws:
+    // 229/400 = 57.25% of seeds emit a phrasing, so a 160-draw corpus expects ~91.6
+    // with sigma 6.26. The old `> 40` sat 8.1 sigma below the mean — it could not have
+    // reddened on anything short of the producer halving twice over.
+    const emission = readEnvelope(ENVELOPES, 'narrativeQuality.relationshipRumor.emitted');
     const relationship = {
       type: 'debtor_creditor',
       typeName: 'Outstanding Debt',
@@ -182,7 +215,7 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
     };
     const phrasings = [];
 
-    for (let index = 0; index < 160; index++) {
+    for (let index = 0; index < emission.n; index++) {
       const rumor = withSeed(`relationship-grammar-${index}`, () =>
         genRelNarrative({
           relationships: [relationship],
@@ -192,9 +225,22 @@ describe('sentence boundaries and relationship rumors remain grammatical', () =>
       if (rumor?.phrasing) phrasings.push(rumor.phrasing);
     }
 
-    expect(phrasings.length).toBeGreaterThan(40);
+    expect(
+      phrasings.length,
+      `relationship-rumor emission: ${phrasings.length}/${emission.n} draws produced a phrasing; `
+      + `the derived floor is ${emission.bound} (base rate ${emission.baseRate}, `
+      + `alpha ${emission.alpha}, ${emission.margin} sigma of power). A red here means the `
+      + `emission RATE moved, not that a die rolled badly — the corpus is seeded.`,
+    ).toBeGreaterThanOrEqual(emission.bound);
     expect(phrasings.some(text => text.includes('best understood as outstanding debt'))).toBe(true);
-    expect(phrasings.join('\n')).not.toMatch(/\bthere is a outstanding\b/i);
+    const corpus = phrasings.join(`\n`);
+    // The derived-floor count above proves the corpus is populated; this proves the
+    // "outstanding debt" phrase family is genuinely produced, so the malformed-article
+    // scan below is a statement about a construct that actually occurs.
+    expect(corpus, 'the outstanding-debt phrase family must be live to scan its article')
+      .toMatch(/\boutstanding debt\b/i);
+    // anchored: the derived-floor count and the phrase-family toMatch directly above are the liveness anchors.
+    expect(corpus).not.toMatch(/\bthere is a outstanding\b/i);
   });
 });
 
@@ -219,7 +265,11 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     );
 
     expect(marketTaxes).toBeTruthy();
+    // The city-scale wording is the liveness anchor: it fails first if the description
+    // drifts, empties, or is re-keyed, so "no metropolis wording" can never pass over
+    // an absent description.
     expect(marketTaxes.desc).toMatch(/urban districts/i);
+    // anchored: the urban-districts toMatch directly above proves this description is live and city-scaled.
     expect(marketTaxes.desc).not.toMatch(/metropolis scale/i);
   });
 
@@ -235,7 +285,10 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     );
     const prose = `${profile.safetyDesc} ${profile.guardEffectivenessDesc}`;
 
+    // The prose must NAME the town watch before "and never a city watch" means
+    // anything; a safetyDesc that stopped mentioning the watch reds on the anchor.
     expect(prose).toMatch(/\btown watch\b/i);
+    // anchored: the town-watch toMatch directly above proves the watch is named at all.
     expect(prose).not.toMatch(/\bcity watch\b/i);
   });
 
@@ -258,11 +311,14 @@ describe('safety prose agrees in number and respects settlement scale', () => {
       'town',
       [{ name: 'Garrison' }],
     );
-    expect(occupiedGarrison.safetyDesc).toContain(
-      'The garrison, now under occupier command, enforces curfew',
-    );
-    expect(occupiedGarrison.safetyDesc).not.toContain(
+    // The singular subject takes the singular predicate. The anchor is the CORRECT
+    // sentence: if the garrison clause drifts away entirely, the anchor reds instead
+    // of the plural-form negative passing over prose that no longer exists.
+    expectAbsentWithAnchor(
+      occupiedGarrison.safetyDesc,
       'garrison, now under occupier command, enforce curfew',
+      'The garrison, now under occupier command, enforces curfew',
+      'occupied garrison — singular predicate',
     );
 
     const occupiedOfficials = generateSafetyProfile(
@@ -286,8 +342,12 @@ describe('safety prose agrees in number and respects settlement scale', () => {
       [{ name: 'Garrison' }],
     );
     expect(authoritarian.flags.stateCrime).toBe(true);
-    expect(authoritarian.safetyDesc).toContain('The garrison is visible everywhere');
-    expect(authoritarian.safetyDesc).not.toContain('The garrison are visible');
+    expectAbsentWithAnchor(
+      authoritarian.safetyDesc,
+      'The garrison are visible',
+      'The garrison is visible everywhere',
+      'state-control branch — singular predicate',
+    );
 
     const fraud = generateSafetyProfile(
       {
@@ -305,8 +365,12 @@ describe('safety prose agrees in number and respects settlement scale', () => {
     );
     const fraudDesc = fraud.crimeTypes.find(type => type.type === 'Religious fraud')?.desc;
     expect(fraud.flags.religiousFraud).toBe(true);
-    expect(fraudDesc).toContain("The church's moral authority provides cover");
-    expect(fraudDesc).not.toContain("authority provide cover");
+    expectAbsentWithAnchor(
+      fraudDesc,
+      'authority provide cover',
+      "The church's moral authority provides cover",
+      'religious-fraud branch — singular predicate',
+    );
   });
 });
 

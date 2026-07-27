@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, test } from 'vitest';
 
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
+
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../src/data/economicData.js';
 import { GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
@@ -158,12 +163,20 @@ describe('behavior: repaired joins produce DM-visible output', () => {
     );
     const incomeSources = withLanding.incomeSources.map((i) => i.source);
     expect(incomeSources).toContain('Fish & Preserved Produce');
-    expect(incomeSources).not.toContain('Fish & Maritime Produce');
+    // The inland label is the anchor: both labels are produced by the same fish good
+    // through the same gate, so an empty income list cannot fake the maritime denial.
+    expectAbsentWithAnchor(
+      incomeSources, 'Fish & Maritime Produce', 'Fish & Preserved Produce',
+      'an inland landing claims no maritime trade',
+    );
 
     // Without the landing the good's institution gate must block the roll.
     setActiveRng({ random: () => 0 });
     const without = generateEconomicState('hamlet', [], 'road', {}, { nearbyResources: [] });
-    expect(without.incomeSources.map((i) => i.source)).not.toContain('Fish & Preserved Produce');
+    expectPresentThenAbsent(
+      incomeSources, without.incomeSources.map((i) => i.source), 'Fish & Preserved Produce',
+      'the institution gate blocks the good when the landing is absent',
+    );
   });
 
   test("coastal port with a Fisher's landing retains the maritime income label", () => {

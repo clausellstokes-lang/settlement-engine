@@ -21,6 +21,7 @@ import {
   identifiedCustomContentReferencePack,
   REFERENCE_PACK_NAMES,
 } from '../fixtures/customContentReferencePack.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const MATRIX = Object.freeze([
   { tier: 'thorp', route: 'isolated', terrain: 'forest', eligible: false },
@@ -218,8 +219,17 @@ describe('canonical adversarial custom-content reference pack', () => {
                 ? 'stressor'
                 : 'tradition'
         ];
-        expect(settlementJson, `${matrixCase.tier}:${bucket}`)
-          .not.toContain(name);
+        // The institution name reaches the serialized settlement at EVERY tier
+        // (the reviewed chain labels carry it even where the pack is ineligible),
+        // so it proves pack names do land in this payload — without it, a
+        // settlement that stopped embedding custom names at all would read as
+        // "correctly dormant" forever.
+        expectAbsentWithAnchor(
+          settlementJson,
+          name,
+          REFERENCE_PACK_NAMES.institution,
+          `${matrixCase.tier}:${bucket}`,
+        );
         expect(materializedCategories.has(bucket)).toBe(false);
       }
 
@@ -330,9 +340,16 @@ describe('canonical adversarial custom-content reference pack', () => {
 
       const settlementJson = JSON.stringify(settlement);
       for (const name of dormantNames) {
-        expect(settlementJson, `seed ${index}: dormant ${name}`)
-          .not.toContain(name);
+        // Anchored on the materialized institution name, which the assertions
+        // above already prove is present in this settlement — so each dormant
+        // name is measured against a payload that demonstrably carries pack names.
+        expectAbsentWithAnchor(
+          settlementJson,
+          name,
+          REFERENCE_PACK_NAMES.institution,
+          `seed ${index}: dormant ${name}`,
+        );
       }
     }
-  });
+  }, 180_000);
 });

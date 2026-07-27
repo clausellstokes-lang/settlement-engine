@@ -89,6 +89,9 @@ describe('deterministic generation coherence repair', () => {
     expect(settlement.powerStructure.recentConflict).toMatch(
       /militia is stretched thin/i,
     );
+    // A missing, emptied, or renamed recentConflict reds on the positive pin
+    // above, so this negative is only ever reached with live repaired prose.
+    // anchored: the positive toMatch above pins this same string.
     expect(settlement.powerStructure.recentConflict).not.toMatch(
       /whether to build defenses/i,
     );

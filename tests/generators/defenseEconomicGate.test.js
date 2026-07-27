@@ -19,6 +19,7 @@ import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js
 import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function town({
   priorityEconomy = 50,
@@ -77,7 +78,13 @@ describe('economic survival respects the actual economy', () => {
     expect(poor.scores.economic).toBeLessThanOrEqual(55);
     const assessment = buildThreatAssessment(poor);
     const economicLine = JSON.stringify(assessment);
-    expect(economicLine).not.toMatch(/Strong economic base/);
+    // 'Economic Survival' is the anchor: it is the label of the very dimension
+    // whose verdict is under test, so an assessment that stopped emitting that
+    // dimension reds here instead of passing the exclusion vacuously.
+    expectAbsentWithAnchor(
+      economicLine, 'Strong economic base', 'Economic Survival',
+      'a struggling economy never earns the strong-base verdict',
+    );
   });
 
   test('a healthy economy with identical buildings scores meaningfully higher', () => {

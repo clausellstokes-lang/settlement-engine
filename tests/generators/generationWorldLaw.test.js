@@ -16,6 +16,8 @@ import {
 } from '../../src/generators/generationContext.js';
 import { buildGenerationCoherenceReceipt } from '../../src/generators/generationCoherence.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const TIERS = [
   'thorp',
@@ -40,31 +42,51 @@ function generatedServices(settlement) {
     ));
 }
 
+/**
+ * Scan a whole settlement for functional-magic leaks.
+ *
+ * Every assertion below is a NEGATIVE, so each one is true of a settlement that
+ * produced nothing at all. The four liveness anchors at the top make that reading
+ * impossible: an emptied roster reds here instead of certifying a magic-free world
+ * that was simply never generated. The floors are `> 0` against measured minima over
+ * this suite's entire corpus (2026-07-27, every tier × 8 seeds plus the five audited
+ * fixtures): institutions 7, npcs 2, services 6, history events 2.
+ */
 function expectNoFunctionalMagic(settlement) {
-  for (const institution of settlement.institutions || []) {
-    expect(institution.name).not.toMatch(MAGIC_INSTITUTION);
-  }
-  for (const npc of settlement.npcs || []) {
-    expect(`${npc.role || ''} ${npc.title || ''}`).not.toMatch(MAGIC_ROLE);
-    expect(JSON.stringify(npc.secret || '')).not.toMatch(MAGIC_ASSERTION);
-  }
-  for (const { category, service } of generatedServices(settlement)) {
-    expect(
-      `${category} ${service.name || ''} ${service.desc || ''}`,
-    ).not.toMatch(MAGIC_ASSERTION);
-  }
-  for (const event of [
+  const institutions = settlement.institutions || [];
+  const npcs = settlement.npcs || [];
+  const services = generatedServices(settlement);
+  const events = [
     ...(settlement.history?.historicalEvents || []),
     ...(settlement.history?.currentTensions || []),
-  ]) {
-    expect([
-      event.type,
-      event.templateType,
-    ]).not.toContain('magical_controversy');
-    expect([
-      event.type,
-      event.templateType,
-    ]).not.toContain('wild_magic');
+  ];
+
+  expect(institutions.length, 'liveness: the institution roster this scan reads').toBeGreaterThan(0);
+  expect(npcs.length, 'liveness: the NPC roster this scan reads').toBeGreaterThan(0);
+  expect(services.length, 'liveness: the generated services this scan reads').toBeGreaterThan(0);
+  expect(events.length, 'liveness: the history events this scan reads').toBeGreaterThan(0);
+
+  for (const institution of institutions) {
+    // anchored: the institutions-length anchor above pins a live roster, so this exclusion cannot pass against a settlement with no institutions.
+    expect(institution.name).not.toMatch(MAGIC_INSTITUTION);
+  }
+  for (const npc of npcs) {
+    // anchored: the npcs-length anchor above pins a live cast, so these two exclusions cannot pass against an empty roster.
+    expect(`${npc.role || ''} ${npc.title || ''}`).not.toMatch(MAGIC_ROLE);
+    // anchored: same live-cast anchor as the assertion above.
+    expect(JSON.stringify(npc.secret || '')).not.toMatch(MAGIC_ASSERTION);
+  }
+  for (const { category, service } of services) {
+    const serviceText = `${category} ${service.name || ''} ${service.desc || ''}`;
+    // anchored: the services-length anchor above pins a live service list, so this exclusion cannot pass against a settlement that offers nothing.
+    expect(serviceText).not.toMatch(MAGIC_ASSERTION);
+  }
+  for (const event of events) {
+    const eventKeys = [event.type, event.templateType];
+    // anchored: the events-length anchor above pins a live history, and this array is built from a real event object in the loop.
+    expect(eventKeys).not.toContain('magical_controversy');
+    // anchored: same live-history anchor as the assertion above.
+    expect(eventKeys).not.toContain('wild_magic');
   }
 }
 
@@ -391,18 +413,26 @@ describe('full-pipeline world-law enforcement', () => {
     expect(settlement.history.founding.initialChallenge).toMatch(
       /seasonal flooding|water rights|navigation hazards|river bandits/i,
     );
-    expect(
+    // 'River Tolls' is the liveness anchor for the 'Port Duties' exclusion: both are
+    // minted by the same income-source pass off the same resolved trade access, so an
+    // income list that drifted or emptied reds on the anchor.
+    expectAbsentWithAnchor(
       settlement.economicState.incomeSources.map(source => source.source),
-    ).toContain('River Tolls');
-    expect(
-      settlement.economicState.incomeSources.map(source => source.source),
-    ).not.toContain('Port Duties');
-    expect(JSON.stringify({
+      'Port Duties',
+      'River Tolls',
+      'river-port income sources',
+    );
+    const riverProjection = JSON.stringify({
       spatialLayout: settlement.spatialLayout,
       founding: settlement.history.founding,
       incomeSources: settlement.economicState.incomeSources,
       siegeNarrative: settlement.history.siegeNarrative,
-    })).not.toMatch(
+    });
+    // LIVENESS ANCHOR: every one of those four projections could go undefined and
+    // JSON.stringify would still yield a perfectly maritime-free '{}'.
+    expect(riverProjection, 'the scanned projection is live river-port prose').toMatch(/river/i);
+    // anchored: the assertion above pins riverProjection as live river prose, so this maritime exclusion cannot pass against an empty projection.
+    expect(riverProjection).not.toMatch(
       /\b(?:maritime|naval|ocean-going|seagoing|seaport)\b|\bcoastal\s+(?:districts?|ports?|raids?|shipping|trade|waters?)\b|\bsea\s+(?:access|lanes?|power|raids?|supply|trade|traffic|voyages?)\b/i,
     );
     expect(settlement.generationCoherenceReceipt.status).toBe('coherent');
@@ -428,7 +458,16 @@ describe('full-pipeline world-law enforcement', () => {
       { seed: 'receipt-scan-101', customContent: {} },
     );
 
-    expect(settlement.config.nearbyResources).not.toContain('magical_node');
+    // 'ancient_ruins' is what this exact config+seed rolls (measured 2026-07-27) and
+    // it is selected by the SAME resolveResources pass that would have emitted a
+    // magical node, so an emptied resource roll reds on the anchor instead of
+    // certifying that magic was correctly withheld from nothing.
+    expectAbsentWithAnchor(
+      settlement.config.nearbyResources,
+      'magical_node',
+      'ancient_ruins',
+      'magic-disabled resource roll',
+    );
     expect(settlement.generationCoherenceReceipt.status).toBe('coherent');
   });
 
@@ -470,16 +509,20 @@ describe('full-pipeline world-law enforcement', () => {
       ],
     ];
 
-    for (const [config, seed] of fixtures) {
+    const failures = collectSeedFailures(fixtures, ([config, seed]) => {
       const settlement = generateSettlementPipeline(
         config,
         null,
         { seed, customContent: {} },
       );
-      const conflictProse = JSON.stringify(
-        settlement.powerStructure.conflicts || [],
-      );
+      const conflicts = settlement.powerStructure.conflicts || [];
+      const conflictProse = JSON.stringify(conflicts);
 
+      // LIVENESS ANCHOR: an empty conflict list stringifies to '[]', which is
+      // mundane by construction. Both fixtures roll exactly one conflict
+      // (measured 2026-07-27), so there is always prose to scan.
+      expect(conflicts.length, `${seed} generated faction conflicts to scan`).toBeGreaterThan(0);
+      // anchored: the assertion above pins a non-empty conflict list, so this exclusion measures the prose rather than its absence.
       expect(conflictProse).not.toMatch(
         /arcane research permit|magical autonomy/i,
       );
@@ -491,7 +534,8 @@ describe('full-pipeline world-law enforcement', () => {
         status: 'pass',
         findings: [],
       });
-    }
+    });
+    expectNoSeedFailures(failures, 'generated faction conflicts stay mundane when world law disables magic');
   });
 
   it('filters audited generated role and cultural-title leaks', () => {
@@ -532,11 +576,22 @@ describe('full-pipeline world-law enforcement', () => {
       { seed: 'generation-certification-11', customContent: {} },
     );
 
-    expect(riverSettlement.npcs.map(npc => npc.role)).not.toContain(
+    // The anchors are siblings from the SAME tables the filtered entries come from:
+    // 'City Watch Chief' is a generated security role that survives allowsRole on a
+    // river port, and 'Laird' is a celtic cultural title minted beside 'Druid'. Both
+    // measured present on these exact seeds (2026-07-27). A roster that stopped
+    // carrying roles or titles at all now reds on the anchor.
+    expectAbsentWithAnchor(
+      riverSettlement.npcs.map(npc => npc.role),
       'Naval Commander',
+      'City Watch Chief',
+      'river-port generated roles',
     );
-    expect(mundaneSettlement.npcs.map(npc => npc.title)).not.toContain(
+    expectAbsentWithAnchor(
+      mundaneSettlement.npcs.map(npc => npc.title),
       'Druid',
+      'Laird',
+      'magic-disabled cultural titles',
     );
     expect(riverSettlement.generationCoherenceReceipt.status).toBe('coherent');
     expect(mundaneSettlement.generationCoherenceReceipt.status).toBe('coherent');

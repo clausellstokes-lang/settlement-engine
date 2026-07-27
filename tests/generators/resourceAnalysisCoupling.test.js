@@ -19,6 +19,7 @@ import {
 } from '../../src/generators/resourceGenerator.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { getCompatibleResources } from '../../src/generators/terrainHelpers.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const TERRAIN = 'mountain'; // allows stone_quarry, mountain_timber, iron_deposits, …
 
@@ -45,10 +46,13 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     // The tautology this kills: identical terrain used to force identical chains.
     expect(stoneChains).not.toEqual(timberChains);
     expect(stoneChains).toEqual(['stone']);
-    expect(stoneChains).not.toContain('timber');
-    expect(stoneChains).not.toContain('gemstones');
+    // Each exclusion is anchored by the chain the roster DID activate: 'stone' proves
+    // the quarry roster produced a live chain set, 'timber' the same for the forest
+    // roster. An analysis that stopped returning chains entirely now reds.
+    expectAbsentWithAnchor(stoneChains, 'timber', 'stone', 'quarry roster activates stone only');
+    expectAbsentWithAnchor(stoneChains, 'gemstones', 'stone', 'quarry roster activates stone only');
     expect(timberChains).toContain('timber');
-    expect(timberChains).not.toContain('stone');
+    expectAbsentWithAnchor(timberChains, 'stone', 'timber', 'forest roster activates timber only');
   });
 
   it('a commodity reconciles with its chain rawResource across vocabularies (iron ← iron_deposits)', () => {
@@ -58,7 +62,7 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     const commodities = resolveNearbyCommodities({ nearbyResources: ['iron_deposits'] }, TERRAIN);
     expect(commodities).toContain('iron');
     expect(commodities).toContain('iron_deposits');
-    expect(commodities).not.toContain('stone');
+    expectAbsentWithAnchor(commodities, 'stone', 'iron', 'iron_deposits resolves to iron, never stone');
   });
 
   it('river clay activates ceramics, never the stone-quarry chain', () => {
@@ -73,9 +77,9 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     );
 
     expect(commodities).toContain('clay');
-    expect(commodities).not.toContain('stone');
+    expectAbsentWithAnchor(commodities, 'stone', 'clay', 'river clay resolves to clay, never stone');
     expect(activeKeys(analysis)).toContain('clay');
-    expect(activeKeys(analysis)).not.toContain('stone');
+    expectAbsentWithAnchor(activeKeys(analysis), 'stone', 'clay', 'river clay activates ceramics, never the quarry chain');
   });
 
   it('treats a riverside port as river geography for resource eligibility', () => {
@@ -109,9 +113,13 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     );
 
     expect(activeKeys(settlement.resourceAnalysis)).toEqual(['stone']);
-    expect(
-      settlement.resourceAnalysis.imports.critical.join(' '),
-    ).not.toMatch(/\bstone\b/i);
+    // The critical-import list is genuinely populated for this seed ('metals' is one of
+    // nine entries), so asserting a live sibling FIRST stops the stone exclusion below
+    // from passing on an empty join — the vacuity this pin would otherwise hide.
+    const criticalImports = settlement.resourceAnalysis.imports.critical.join(' ');
+    expect(criticalImports).toMatch(/\bmetals\b/);
+    // anchored: the metals assertion above proves imports.critical is live and populated
+    expect(criticalImports).not.toMatch(/\bstone\b/i);
     expect(
       settlement.generationCoherenceReceipt.checks.find(
         check => check.id === 'resource_truth',
@@ -148,7 +156,13 @@ describe('F32 — resource analysis couples to the settlement, not just the terr
     ];
     const prose = JSON.stringify(diagnostics);
 
+    // This settlement DOES earn diagnostics (the isolated stockpile dependency), so the
+    // blob is live prose rather than the '[]' an empty list would serialize to — which
+    // would satisfy both exclusions below without proving anything.
+    expect(prose).toMatch(/Isolated: Stockpile Dependency/);
+    // anchored: the stockpile-dependency assertion above proves `prose` is a live, non-empty blob
     expect(prose).not.toMatch(/stone quarry[^.]*requires iron ore/i);
+    // anchored: same live-diagnostics blob asserted immediately above
     expect(prose).not.toMatch(/parish church[^.]*requires hot springs/i);
     expect(
       diagnostics.filter(item => item.category === 'Resource Access'),
@@ -174,8 +188,9 @@ describe('F32 — depleted resources are excluded from the analysis', () => {
 
     expect(activeKeys(both)).toContain('stone');
     expect(activeKeys(both)).toContain('timber');
-    // Worked-out quarry ⇒ no stone chain; the timber sibling is untouched.
-    expect(activeKeys(stoneDepleted)).not.toContain('stone');
+    // Worked-out quarry ⇒ no stone chain; the timber sibling is untouched — and that
+    // untouched sibling is exactly the anchor proving the analysis still ran.
+    expectAbsentWithAnchor(activeKeys(stoneDepleted), 'stone', 'timber', 'depleted quarry drops only its own chain');
     expect(activeKeys(stoneDepleted)).toContain('timber');
     expect(stoneDepleted.resourceConditions).toEqual(
       expect.arrayContaining([
@@ -201,7 +216,7 @@ describe('F32 — depleted resources are excluded from the analysis', () => {
       nearbyResources: ['stone_quarry', 'mountain_timber'],
       nearbyResourcesState: { stone_quarry: 'depleted' },
     });
-    expect(activeKeys(depletedViaState)).not.toContain('stone');
+    expectAbsentWithAnchor(activeKeys(depletedViaState), 'stone', 'timber', 'manual depleted state drops only its own chain');
     expect(activeKeys(depletedViaState)).toContain('timber');
   });
 

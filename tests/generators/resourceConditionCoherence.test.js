@@ -21,6 +21,10 @@ import {
   buildGenerationCoherenceReceipt,
 } from '../../src/generators/generationCoherence.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import {
+  expectAbsentWithAnchor,
+  expectPresentThenAbsent,
+} from '../helpers/anchoredNegatives.js';
 
 const QUARRY = { name: 'Stone quarry', category: 'Economic' };
 
@@ -206,8 +210,14 @@ describe('resource condition drives chains and local production together', () =>
     expect(depleted.primaryImports).toContain(
       'Dressed stone (local quarry depleted)',
     );
-    expect(available.primaryImports).not.toContain(
+    // The metamorphic pair itself is the anchor: the depletion-only import IS produced
+    // (by the depleted run) and is NOT produced by the live-quarry run. A writer that
+    // stopped emitting the line altogether reds on the presence half.
+    expectPresentThenAbsent(
+      depleted.primaryImports,
+      available.primaryImports,
       'Dressed stone (local quarry depleted)',
+      'the depletion import exists only while the quarry is depleted',
     );
     expect(
       chainById(depleted.activeChains, 'raw_extraction.stone'),
@@ -235,7 +245,9 @@ describe('resource vocabulary does not cross material domains', () => {
     const local = deriveLocalProductionFromChains(chains, resources);
 
     expect(local).toEqual(expect.arrayContaining(['game meat', 'furs']));
-    expect(local).not.toContain('livestock');
+    // 'game meat' is what the hunting chain DOES yield on this exact path, so it proves
+    // the production list is live before we claim 'livestock' is kept out of it.
+    expectAbsentWithAnchor(local, 'livestock', 'game meat', 'hunting yields game, never herd animals');
     expect(chainById(chains, 'food_security.hunting')).toMatchObject({
       resourceKey: 'hunting_grounds',
       resourceCondition: 'available',

@@ -68,7 +68,13 @@ describe('divine food tradition requires a world where magic functions (Wave 5 #
       expect(c.magicRecovery).toBeUndefined();
       expect(c.status).not.toBe('magically_sustained');
     }
-    expect(JSON.stringify(chains)).not.toMatch(/blessed|divine provision/i);
+    const chainsJson = JSON.stringify(chains);
+    // LIVENESS ANCHOR: the grain chain is asserted truthy above; pin it inside this
+    // exact serialization so an emptied or re-shaped payload reds here instead of
+    // passing the leak scan below.
+    expect(chainsJson).toContain(`"chainId":"${grain.chainId}"`);
+    // anchored: grain-chain token pinned in this same payload directly above.
+    expect(chainsJson).not.toMatch(/blessed|divine provision/i);
   });
 });
 
@@ -137,9 +143,13 @@ describe('generation-level pins (Wave 5 #3)', () => {
       expect(c.magicNote).toBeUndefined();
     }
     const json = JSON.stringify(s);
-    expect(json).not.toMatch(/Temple granaries blessed/i);
-    expect(json).not.toMatch(/magically.sustained/i);
-    expect(json).not.toMatch(/divine provision/i);
+    // LIVENESS ANCHOR: chains.length > 0 is asserted above; pin one of those chain
+    // ids inside this exact payload so a truncated or short-circuited serialization
+    // reds here rather than passing all three leak scans below.
+    expect(json).toContain(`"chainId":"${chains[0].chainId}"`);
+    expect(json).not.toMatch(/Temple granaries blessed/i); // anchored: chain-id pin above
+    expect(json).not.toMatch(/magically.sustained/i); // anchored: chain-id pin above
+    expect(json).not.toMatch(/divine provision/i); // anchored: chain-id pin above
   });
 
   it('same-seed identity: a magic-enabled fixture reproduces its chain economy exactly', () => {

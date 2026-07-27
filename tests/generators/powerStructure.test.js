@@ -70,7 +70,12 @@ describe('F31: powerGenerator split structure', () => {
       .readFileSync(ENTRY, 'utf8')
       .replace(/\/\*[\s\S]*?\*\//g, '')
       .replace(/\/\/.*$/gm, '');
+    // Liveness first: the comment-stripped source must still carry at least one
+    // `export { … } from '…'`. Without this, an emptied, renamed or unreadable entry
+    // file would satisfy the "declares nothing" assertion by declaring nothing at all.
+    expect(src).toMatch(/export\s*\{[^}]*\}\s*from/);
     // A barrel declares nothing of its own — no const/function/class bodies.
+    // anchored: the re-export assertion above proves `src` is the live barrel body
     expect(src).not.toMatch(/^\s*(export\s+)?(const|let|var|function|class)\s/m);
   });
 

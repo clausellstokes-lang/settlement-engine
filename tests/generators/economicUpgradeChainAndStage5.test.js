@@ -19,6 +19,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { generateEconomicState } from '../../src/generators/economy/economicState.js';
 import { getUpgradeChain } from '../../src/generators/economy/tradeGoods.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 afterEach(() => clearActiveRng());
 
@@ -28,10 +29,18 @@ describe('getUpgradeChain — tier-connectivity pool selection', () => {
     expect(imports).toContain('Luxury textiles');
     expect(imports).toContain('Spices and exotic dyes');
     expect(imports).toContain('Rare materials');
-    // Services are never physical imports
-    expect(imports).not.toContain('Banking services');
+    // Services are never physical imports. 'Luxury textiles' is the anchor: it
+    // rides the same fromCityOrMetropolis pool, so a pool that stopped resolving
+    // reds on the anchor instead of passing both exclusions.
+    expectAbsentWithAnchor(
+      imports, 'Banking services', 'Luxury textiles',
+      'higher-tier pool carries goods, never services',
+    );
     // The hinterland pool no longer shadows the higher-tier one
-    expect(imports).not.toContain('Food surplus');
+    expectAbsentWithAnchor(
+      imports, 'Food surplus', 'Luxury textiles',
+      'fromCityOrMetropolis pool is not shadowed by hinterland',
+    );
   });
 
   it('a town without a higher-tier connection keeps the hinterland pool', () => {
@@ -83,7 +92,10 @@ describe('call-site connectivity — a crossroads town surfaces higher-tier tran
     );
     expect(state.isEntrepot).toBe(true);
     expect(state.transit).toContain('Luxury textiles');
-    expect(state.transit).not.toContain('Food surplus');
+    expectAbsentWithAnchor(
+      state.transit, 'Food surplus', 'Luxury textiles',
+      'entrepot transit carries higher-tier goods, not hinterland bulk',
+    );
   });
 });
 

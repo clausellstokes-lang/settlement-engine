@@ -56,6 +56,9 @@ describe('formal generation receipt judgments', () => {
     expect(receipt.judgments).toHaveLength(7);
     for (const entry of receipt.judgments) {
       expect(entry.evidence.length).toBeGreaterThan(0);
+      // The roster is pinned to exactly seven judgments above, and a missing or
+      // hollow entry reds on the evidence pin above or the status pin below.
+      // anchored: non-empty evidence pinned on this same entry directly above.
       expect(entry).not.toHaveProperty('confidence');
       expect(entry.status).toMatch(
         /^(pass|pass_with_tension|needs_review|not_applicable)$/,

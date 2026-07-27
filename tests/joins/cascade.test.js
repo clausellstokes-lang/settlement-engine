@@ -24,6 +24,8 @@ import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
 import { applyCascadeInstitutions } from '../../src/generators/cascadeGenerator.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 // Same match key the cascade uses (cascadeGenerator.js `mk`): institutions and
 // catalog entries join on the first 16 lowercased characters of the name.
@@ -202,9 +204,16 @@ describe('join: applyCascadeInstitutions resolves the adjacency', () => {
 
   test('already-present targets are never re-added', () => {
     setActiveRng({ random: () => 0 });
+    // The Smelter-only roster is the liveness anchor: from it the cascade DOES add the
+    // metalworkers, so the absence below measures the already-present guard rather
+    // than a cascade that quietly stopped resolving the adjacency at all.
+    const withoutTarget = applyCascadeInstitutions([{ name: 'Smelter' }], 'city')
+      .map((a) => a.name);
     const roster = [{ name: 'Smelter' }, { name: 'Specialized metalworkers' }];
-    const adds = applyCascadeInstitutions(roster, 'city');
-    expect(adds.map((a) => a.name)).not.toContain('Specialized metalworkers');
+    const adds = applyCascadeInstitutions(roster, 'city').map((a) => a.name);
+    expectPresentThenAbsent(
+      withoutTarget, adds, 'Specialized metalworkers', 'the already-present guard',
+    );
   });
 });
 
@@ -283,12 +292,16 @@ describe('behavior: cascade additions cannot contradict the roster', () => {
       ['viol-metro-1', { settType: 'metropolis', culture: 'germanic' }],
       ['viol-village-1', { settType: 'village', culture: 'germanic' }],
     ];
-    for (const [seed, cfg] of cases) {
+    // Every case runs: a coexistence bug that hits four of the six seeds must report
+    // four, or the tier spread this list exists to cover goes unexercised after the
+    // first casualty.
+    const failures = collectSeedFailures(cases, ([seed, cfg]) => {
       const names = new Set(gen(cfg, seed).institutions.map((i) => i.name));
       for (const [lesser, greater] of UPGRADE_CHAINS) {
         expect(names.has(lesser) && names.has(greater), `${seed}: "${lesser}" + "${greater}" coexist`).toBe(false);
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'no upgrade-chain pair coexists after generation');
   });
 
   test('a DM exclude-toggle survives the cascade (no resurrection of excluded institutions)', () => {

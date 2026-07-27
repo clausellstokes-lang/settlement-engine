@@ -2,6 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { contentRevisionHash } from '../../src/domain/content/customContentVersioning.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+
+/** The provenance sweep's seed corpus, as an explicit list so every case runs. */
+const PROVENANCE_SEEDS = Array.from({ length: 100 }, (_, index) => index);
 
 const CONFIG = Object.freeze({
   settType: 'town',
@@ -59,7 +63,7 @@ describe('custom-service exact provenance', () => {
       services: [service],
     };
 
-    for (let seed = 0; seed < 100; seed += 1) {
+    const failures = collectSeedFailures(PROVENANCE_SEEDS, (seed) => {
       const settlement = generateSettlementPipeline(CONFIG, null, {
         seed: `custom-service-provenance-${seed}`,
         customContent,
@@ -91,8 +95,12 @@ describe('custom-service exact provenance', () => {
         )),
         `exact service provenance missing for seed ${seed}`,
       ).toBe(true);
-    }
-  });
+    });
+    expectNoSeedFailures(
+      failures,
+      'every seed keeps the custom service revision through the provider roll',
+    );
+  }, 120_000);
 
   it('retains both exact identities when distinct custom services share a name', () => {
     const sharedName = 'Twin Counsel';

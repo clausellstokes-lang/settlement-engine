@@ -70,9 +70,13 @@ describe('the history reroll runs the same coherence tail assembly runs', () => 
       regen.siegeNarrative === null || typeof regen.siegeNarrative === 'string',
     ).toBe(true);
 
-    // historicalCharacter is prose, not the generator's stub.
-    expect(GENERATOR_STUBS).not.toContain(regen.historicalCharacter);
+    // historicalCharacter is prose, not the generator's stub. The length assertion runs
+    // FIRST because GENERATOR_STUBS is a frozen literal declared in this file: the only
+    // way the exclusion below can go vacuous is the MEMBER being absent (undefined or
+    // empty), and a paragraph of real prose is what proves the coherence tail ran.
     expect(regen.historicalCharacter.length).toBeGreaterThan(40);
+    // anchored: the length assertion above proves the member is live prose (GENERATOR_STUBS is a local literal)
+    expect(GENERATOR_STUBS).not.toContain(regen.historicalCharacter);
 
     // legacyAnnotations is gated on non-empty in BOTH paths, so when the key is
     // there it carries entries — and this settlement's history earns some.
@@ -96,6 +100,8 @@ describe('the history reroll runs the same coherence tail assembly runs', () => 
       const s = gen(config, `rh-${settType}`);
       const regen = regenHistoryPipeline(s, s.config || config, { seed: `rh-${settType}-r` });
       expect(regen, settType).toHaveProperty('siegeNarrative');
+      expect(regen.historicalCharacter.length, settType).toBeGreaterThan(40);
+      // anchored: the length assertion above proves the member is live prose (GENERATOR_STUBS is a local literal)
       expect(GENERATOR_STUBS, settType).not.toContain(regen.historicalCharacter);
     }
   });

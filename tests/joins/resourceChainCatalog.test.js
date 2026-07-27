@@ -19,6 +19,7 @@
  *      runtime matcher (institutionSupportsChain) — no chain is orphaned.
  */
 import { describe, it, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { RESOURCE_CHAINS } from '../../src/data/resourceChains.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { institutionTags } from '../../src/lib/entities.js';
@@ -81,8 +82,13 @@ describe('F32 — processingInstitutions display names resolve (no phantom label
 
   it('the specific phantoms the finding named are gone', () => {
     const all = chains.flatMap((c) => c.processingInstitutions || []);
+    // 'Town granary' is the anchor — 'granar' was the typo FOR it, so the corrected
+    // name travels the exact path the phantom used to. A flattened list that came
+    // back empty (the field renamed, the table re-shaped) reds here.
     for (const gone of ['granar', 'Salt merchant', 'Cheesemaker']) {
-      expect(all, `"${gone}" must be corrected to a real catalog name`).not.toContain(gone);
+      expectAbsentWithAnchor(
+        all, gone, 'Town granary', `"${gone}" must be corrected to a real catalog name`,
+      );
     }
     // and their real replacements are present
     const grain = RESOURCE_CHAINS.grain.processingInstitutions;

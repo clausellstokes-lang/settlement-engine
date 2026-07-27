@@ -16,6 +16,7 @@
  *    or a hospital city reads "no dedicated healing institutions".
  */
 import { describe, it, expect } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
 import { RESOURCE_TO_CHAINS } from '../../src/data/supplyChainResourceIndex.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
@@ -286,9 +287,16 @@ describe('chain processor joins (activation gate resolvability)', () => {
   it('the faith chain belongs to churches, law to courts, hospital to hospitals', () => {
     const procs = id => allChains.find(c => c.fullId === id).processingInstitutions;
     expect(procs('religion_civic.parish')).toContain('Parish church');
-    expect(procs('religion_civic.law_governance')).toContain('Courthouse');
-    expect(procs('religion_civic.law_governance')).not.toContain('Public bathhouse');
-    expect(procs('religion_civic.law_governance')).not.toContain('Workhouse');
+    // 'Courthouse' is the anchor: the same processor list, the same lookup, so an
+    // empty or re-pointed law chain reds on the anchor instead of passing quietly.
+    expectAbsentWithAnchor(
+      procs('religion_civic.law_governance'), 'Public bathhouse', 'Courthouse',
+      'law_governance processors',
+    );
+    expectAbsentWithAnchor(
+      procs('religion_civic.law_governance'), 'Workhouse', 'Courthouse',
+      'law_governance processors',
+    );
     expect(procs('healing_medicine.hospital')).toContain('Small hospital');
     expect(procs('healing_medicine.hospital')).toContain('Major hospital');
     expect(procs('healing_medicine.divine_healing')).toContain('Monastery');
@@ -302,8 +310,14 @@ describe('chain processor joins (activation gate resolvability)', () => {
     const procs = allChains.find(c => c.fullId === 'arcane_magical.magical_goods').processingInstitutions;
     expect(procs).toContain("Wizard's tower");
     expect(procs).toContain("Enchanter's shop");
-    expect(procs).not.toContain('Enchanting quarter');
-    expect(procs).not.toContain('Magic item consignment');
+    // The two real catalog processors anchor the list: the spatialData vocabulary is
+    // absent from a list that demonstrably still holds its catalog names.
+    expectAbsentWithAnchor(
+      procs, 'Enchanting quarter', "Wizard's tower", 'magical_goods processors',
+    );
+    expectAbsentWithAnchor(
+      procs, 'Magic item consignment', "Enchanter's shop", 'magical_goods processors',
+    );
   });
 
   it('every chain resolves through the id mapping too (Wave 8: the id path cannot go dark)', () => {
