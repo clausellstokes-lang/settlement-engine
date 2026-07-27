@@ -178,6 +178,33 @@ describe('upswing — B1 completion: history beat + legitimacy dividend + upgrad
     expect(news.some((n) => n.impactKind === 'reconstruction')).toBe(true);
   });
 
+  it('the upgrade pool scopes `required`: a persisted cascade seat is upgradeable, a real contract is not', () => {
+    // The completion UPGRADE renames the record in place, so only an institution
+    // whose `required` is genuinely its OWN contract may be exempt. 'Blacksmith'
+    // is codepoint-FIRST (< 'Carpenter'), so it wins the pool the moment it is
+    // eligible — which makes the two runs below differ by exactly one stamp.
+    const withSeat = (extra) => struck('Ashford', {
+      institutions: [
+        { name: 'Town hall', required: true, category: 'civic' },
+        { name: 'Blacksmith', category: 'crafts', ...extra },
+        { name: 'Carpenter', category: 'crafts' },
+        { name: "Wizard's tower", category: 'magic' },
+      ],
+    });
+
+    // The PERSISTED pre-fix shape — cascade provenance + the source tier's
+    // borrowed flag, as every settlement saved before 2026-07-26 still carries.
+    const cascaded = drive({ settlement: withSeat({ source: 'cascade', cascadeAdded: true, required: true }) }, 12);
+    expect(cascaded.receipts.find((r) => r.kind === 'reconstruction_complete').upgraded)
+      .toBe('Blacksmith → Blacksmiths (3-10)');
+
+    // The same flag WITHOUT provenance is a contract: the pool skips it and the
+    // next eligible name up the codepoint order takes the upgrade instead.
+    const contracted = drive({ settlement: withSeat({ required: true }) }, 12);
+    expect(contracted.receipts.find((r) => r.kind === 'reconstruction_complete').upgraded)
+      .toBe('Carpenter → Carpenters (5-15)');
+  });
+
   it('THE SKIM fires ONLY under LOW conscience (funds flowing × malice)', () => {
     // Honest town (no evil signal) ⇒ NO skim even with ally funds.
     const honestObl = { 'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 1, mintTick: 1, lastTick: 1 } };

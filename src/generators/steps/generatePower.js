@@ -38,8 +38,8 @@ registerStep('generatePower', {
   // neighbourFactions step (ctx.neighbourFacBias); generatePowerStructure
   // itself reads no neighbour bias, so none is threaded into its config.
   //
-  // The 3rd arg (tradeRoute) drives the hostile-neighbour stability band and the
-  // "Ongoing tensions with {neighbour}" recentConflict line. resolveNeighbour writes
+  // The 3rd arg (neighbourRelationship) drives the hostile-neighbour stability band
+  // and the "Ongoing tensions with {neighbour}" recentConflict line. resolveNeighbour writes
   // effectiveConfig.neighborRelationship = { neighborName, relationshipType } when a
   // neighbour is bound. Pass it ONLY for adversarial relationships — the recentConflict
   // branch fires for ANY truthy value, so an allied/trade_partner neighbour must be
@@ -50,13 +50,13 @@ registerStep('generatePower', {
   // .has('hostile')/.has('rival') were always false and the two most adversarial
   // relationships never militarized governance. isAdversarialRelationship is the
   // shared predicate (canonicalRelationship) the priorityHelpers reader also uses.
-  const tradeRouteArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
+  const neighbourRelationshipArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
   const powerIntent = createPowerGenerationIntent({
     stepRng: rng,
     tier,
-    tradeRoute: tradeRouteArg,
+    neighbourRelationship: neighbourRelationshipArg,
     config: effectiveConfig,
     institutions,
   });

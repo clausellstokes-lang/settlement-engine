@@ -29,7 +29,10 @@ import {
   renormalizeFactionPower,
 } from './rulingStructure.js';
 
-const POWER_INTENT_VERSION = 1;
+// v2: the neighbour-relationship slot was renamed off its old `tradeRoute`
+// misnomer. The intent is transient, so the version exists only to reject a
+// stale intent object handed across the seam mid-run — nothing is persisted.
+const POWER_INTENT_VERSION = 2;
 const POWER_PROJECTION_VERSION = 1;
 const ECONOMY_FINGERPRINT_VERSION = 'power-economy-v1';
 const POWER_STREAM = 'power-structure';
@@ -115,7 +118,7 @@ export function fingerprintPowerEconomyInput(economicState, tier) {
 export function createPowerGenerationIntent({
   stepRng,
   tier,
-  tradeRoute,
+  neighbourRelationship,
   config,
   institutions,
 }) {
@@ -128,7 +131,7 @@ export function createPowerGenerationIntent({
     version: POWER_INTENT_VERSION,
     rngSeed: stepRng.fork(POWER_STREAM).seed,
     tier,
-    tradeRoute: tradeRoute || null,
+    neighbourRelationship: neighbourRelationship || null,
     config: config || {},
     institutions: institutions || [],
   });
@@ -159,7 +162,7 @@ export function projectPowerGenerationIntent(
     const powerStructure = generatePowerStructure(
       intent.tier,
       economicState,
-      intent.tradeRoute,
+      intent.neighbourRelationship,
       intent.config,
       intent.institutions,
       defenseLabel ? { defenseLabel } : {},

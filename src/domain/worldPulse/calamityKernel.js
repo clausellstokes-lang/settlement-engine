@@ -47,6 +47,9 @@ import {
   exposureMultiplier, normalizeExposure, severityScaleFor, severityKFactorFor,
   DEFAULT_CALAMITY_SEVERITY, CALAMITY_SEVERITY_BANDS,
 } from '../spatial/calamity.js';
+// The provenance law (domain→domain). A cascade seat carries the SOURCE tier's
+// borrowed `required`, so the collapse pool asks the law, never the raw flag.
+import { hasOwnRequiredContract } from '../generationOwnership.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 import { pickLine, CALAMITY_TITLES, CALAMITY_SUMMARIES, CALAMITY_REASONS } from './eventProse.js';
 
@@ -217,13 +220,17 @@ function applyStrikeToRoster(institutions, targets) {
   // not just active, means a same-name lesser blocks the demote and the greater
   // falls through to collapse/destroy instead. [spatial-engine-6]
   const alreadyStanding = (/** @type {string} */ n) => list.some((i) => String(i.name).toLowerCase() === n.toLowerCase());
+  // A sibling listed here can be COLLAPSED AWAY by the strike (planInstitutionFate
+  // keeps only the codepoint-first survivor), so this pool carries the same hard
+  // "no required institution is destroyed" bound as isStrikeTarget — and asks the
+  // same scoped question, so a borrowed cascade flag cannot fake immunity.
   /** @param {string} name @returns {string[]} the OTHER active non-required names sharing this name's category */
   const categoryMembers = (name) => {
     const self = list.find((i) => String(i.name) === name);
     const cat = self ? String(self.category || '') : '';
     if (!cat) return [];
     return list
-      .filter((i) => String(i.name) !== name && i.required !== true
+      .filter((i) => String(i.name) !== name && !hasOwnRequiredContract(i)
         && String(i.status || 'active') === 'active' && String(i.category || '') === cat)
       .map((i) => String(i.name))
       .sort();

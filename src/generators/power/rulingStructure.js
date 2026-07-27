@@ -79,25 +79,25 @@ export const normalizeAndAnnotateFactions = (factions) => {
 export const generatePowerStructure = (
   tier,
   economicState,
-  // MISNAMED, and load-bearingly so: this is NOT a route. Every call site passes
-  // a neighbour RELATIONSHIP — { neighborName, relationshipType } — or null
-  // (steps/generatePower.js passes tradeRouteArg; economyReconciliation replays
-  // it as intent.tradeRoute). Its only consumer is buildGovernanceLabels, which
-  // reads `.relationshipType` and `.neighborName` off it. See the world-law note.
-  tradeRoute,
+  // The bound neighbour RELATIONSHIP — { neighborName, relationshipType } — or
+  // null. steps/generatePower.js passes it ONLY for adversarial relationships
+  // (an allied neighbour must arrive as null), and economyReconciliation
+  // replays it as intent.neighbourRelationship. Its only consumer is
+  // buildGovernanceLabels, which reads both fields off it.
+  neighbourRelationship,
   config,
   institutions = [],
   projection = {},
 ) => {
-  // `config` is deliberately the sole route authority: this generator holds no
-  // positional route (the `tradeRoute` param above is a neighbour relationship)
-  // and the pipeline writes the resolved route to
+  // `config` is deliberately the sole route authority: this generator takes no
+  // positional route at all (the 3rd positional is the neighbour relationship
+  // above) and the pipeline writes the resolved route to
   // effectiveConfig.tradeRouteAccess (steps/resolveConfig.js). Do NOT "repair"
-  // this into resolveGenerationWorldLaw(null, config, { tradeRoute }) — that
-  // stringifies a relationship OBJECT into the route slot, and a non-coastal
-  // seaport with a hostile neighbour silently loses its maritime standing
-  // (verified: merchant prose falls back from "International merchant houses
-  // controlling port licences" to the generic commercial line).
+  // this into resolveGenerationWorldLaw(null, config, { tradeRoute: … }) fed
+  // from the relationship — that stringifies a relationship OBJECT into the
+  // route slot, and a non-coastal seaport with a hostile neighbour silently
+  // loses its maritime standing (verified: merchant prose falls back from
+  // "International merchant houses controlling port licences" to the generic).
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
       institution => !isMaterializedCustomContent(institution),
@@ -704,7 +704,7 @@ export const generatePowerStructure = (
     config,
     stressFlags,
     instFlags,
-    tradeRoute,
+    neighbourRelationship,
     instNames,
     priorities,
     tier,

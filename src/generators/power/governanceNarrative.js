@@ -244,7 +244,7 @@ const rewriteFactionPhrasing = (
 const deriveBaselineStability = ({
   stressFlags,
   institutionFlags,
-  tradeRoute,
+  neighbourRelationship,
 }) => {
   if (stressFlags.stateCrime) return 'Enforced Order (authoritarian)';
   if (stressFlags.crimeIsGovt) return 'Unstable — criminal governance';
@@ -264,7 +264,7 @@ const deriveBaselineStability = ({
     return 'Tense (militarised, chronically underfunded)';
   }
   if (stressFlags.theocraticEconomy) return 'Stable (theocratic governance)';
-  if (ADVERSARIAL_RELATIONSHIP_TYPES.has(tradeRoute?.relationshipType)) {
+  if (ADVERSARIAL_RELATIONSHIP_TYPES.has(neighbourRelationship?.relationshipType)) {
     return 'Tense (external threat)';
   }
   if (
@@ -373,7 +373,7 @@ const deriveBaselineConflict = ({
   stressFlags,
   institutionFlags,
   institutionSignals,
-  tradeRoute,
+  neighbourRelationship,
   priorities,
   monsterThreat,
   hasRoyalAuthority,
@@ -422,7 +422,7 @@ const deriveBaselineConflict = ({
       ? "Two guild masters are having each other's warehouses robbed. Both deny it publicly. Both are losing patience."
       : "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.";
   }
-  if (tradeRoute) return `Ongoing tensions with ${tradeRoute.neighborName}`;
+  if (neighbourRelationship) return `Ongoing tensions with ${neighbourRelationship.neighborName}`;
   if (institutionFlags.criminalEffective > 65) {
     return hasMilitaryInstitution || hasCivicInstitution
       ? 'Crime rates are rising; several merchants have been found murdered, and the guard is being accused of inaction.'
@@ -702,7 +702,7 @@ export const buildGovernanceLabels = ({
   config,
   stressFlags,
   instFlags: institutionFlags,
-  tradeRoute,
+  neighbourRelationship,
   instNames: institutionNames,
   priorities,
   tier,
@@ -717,7 +717,7 @@ export const buildGovernanceLabels = ({
   const baselineStability = deriveBaselineStability({
     stressFlags,
     institutionFlags,
-    tradeRoute,
+    neighbourRelationship,
   });
   const stressStability = applyStressStability(
     baselineStability,
@@ -746,7 +746,7 @@ export const buildGovernanceLabels = ({
     stressFlags,
     institutionFlags,
     institutionSignals,
-    tradeRoute,
+    neighbourRelationship,
     priorities,
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,

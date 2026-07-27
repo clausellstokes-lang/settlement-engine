@@ -305,9 +305,18 @@ neighbour silently loses maritime standing (2 of 13 pipeline hashes shifted).
 Comment guards now sit on the parameter and the world-law call so nobody
 "repairs" it again. Probe hazard recorded there too: a port route auto-derives
 coastal terrain, so route-driven maritime behavior is only testable with an
-explicit non-coastal `terrainOverride`. OWNER-GATED follow-up: renaming the
-parameter (`tradeRoute` → `neighbourRelationship`) crosses the
-`POWER_INTENT_VERSION`-versioned frozen snapshot shape. The cosmetic instance
+explicit non-coastal `terrainOverride`. RENAME SHIPPED 2026-07-26 (owner
+ordered): the parameter, `intent.tradeRoute`, `buildGovernanceLabels`' key and
+the `tradeRouteArg` local are all `neighbourRelationship` now, and the guard
+comments were rewritten to explain the shape instead of the misnomer (the
+do-not-repair warning stands). The snapshot was PROVEN transient first — no
+schema, store, persistence path, fixture, golden, or edge bundle carries it;
+the only reference outside the three generator modules is the freshness suite
+asserting `settlement.powerIntent` is undefined — so `POWER_INTENT_VERSION` was
+bumped 1 → 2 as a pure stale-object guard (`assertIntent` is its only reader).
+Behaviour-zero proven: 48 pipeline power-structure hashes (16 configs × 3
+seeds, incl. hostile/rival/cold_war neighbours and non-coastal seaports)
+byte-identical before/after, generator golden master green. The cosmetic instance
 in `src/generators/economy/prosperity.js:37` remains flagged and deferred
 (unverified at the same depth). The class rule stands for producers that truly
 hold a resolved route positionally (economicState was one; it is currently the
@@ -518,8 +527,10 @@ REFUTED by execution (see the defect-class note in section A above).
    flat step"** (city 0.35 stands; pressure plateaus at city scale).
 3. **Founding-seeds receipt prose** — the-enduring-mill synopsis/receipt edits
    (registry has no src importer; tests only).
-4. **`tradeRoute` → `neighbourRelationship` rename** in generatePowerStructure
-   — crosses the POWER_INTENT_VERSION frozen snapshot shape.
+4. ~~`tradeRoute` → `neighbourRelationship` rename~~ — **RULED + SHIPPED
+   2026-07-26 (owner ordered)**: the intent snapshot was proven transient, so
+   the rename crossed nothing persisted; POWER_INTENT_VERSION bumped 1 → 2 and
+   48 pipeline hashes stayed identical. See the defect-class note above.
 5. **`isProtectedFromCustomSubsumption` exact-target branch** still reads bare
    `required === true` (conservative; a custom `subsumes` cannot absorb a
    cascade-borrowed institution) — harmless asymmetry, align or leave.
@@ -541,7 +552,8 @@ Owner rulings taken this session (all implemented + ledgered): capture
 "recalibrate" · chain stability "tune depletion down" (city 0.35) · chunk
 "pins + 673,000" · borrowed-required "fix producer now" · ladder "keep flat
 step". Still open for the owner (recorded, non-blocking): queue items 3-5
-above (founding-seeds prose · tradeRoute rename · subsumption asymmetry), the
+above (founding-seeds prose · subsumption asymmetry — item 4, the tradeRoute
+rename, was ordered and shipped 2026-07-26), the
 name-keyed closure backstop (reader-side ruling), and the persisted pre-fix
 borrowed-flag migration. Nothing was staged or committed by this program's
 sessions; a concurrent banking session is folding the tree (HEAD moved

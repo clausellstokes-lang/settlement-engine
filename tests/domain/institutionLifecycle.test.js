@@ -299,6 +299,43 @@ describe('institutionLifecycle — necessity ordering inputs', () => {
       name: 'Bathhouse', category: 'Services', source: 'cascade', cascadeAdded: true, required: false,
     })).toBe(true);
   });
+
+  it('reader scoping retires the borrowed flag on PERSISTED rosters (no migration needed)', () => {
+    // Every settlement saved BEFORE the 2026-07-26 producer fix still carries the
+    // SOURCE tier's `required: true` on its cascade seats. Nothing rewrites that
+    // saved byte — the reader asks whether the contract is this record's OWN, so
+    // the persisted lie is neutralized in place, on load, forever.
+    const persistedPreFix = {
+      name: 'Bathhouse', category: 'Services', status: 'active',
+      source: 'cascade', cascadeAdded: true, required: true,
+    };
+    expect(isClosableInstitution(persistedPreFix)).toBe(true);
+    // The scoping is narrow: the same borrowed flag WITHOUT the cascade stamp is
+    // an ordinary contract and keeps its full immunity.
+    const { cascadeAdded: _ignored, ...noProvenance } = persistedPreFix;
+    expect(isClosableInstitution(noProvenance)).toBe(false);
+  });
+
+  it('the name-keyed catalog backstop still rescues legacy rosters, but not stamped cascade records', () => {
+    // THE BACKSTOP exists for legacy/imported rosters whose records LOST their
+    // provenance stamps: the instance carries no `required` at all, so closure is
+    // refused on the strength of the catalog spec for the NAME. 'Town watch' is
+    // required at town — and is exactly the def the cascade borrows into a city.
+    expect(catalogEntryByName('Town watch')?.spec.required).toBe(true);
+    const legacyRoster = { name: 'Town watch', category: 'Defense', status: 'active' };
+    expect(isClosableInstitution(legacyRoster)).toBe(false);
+
+    // A cascade record has FULL provenance (source + cascadeAdded), so it answers
+    // from its own stamps and needs no name-keyed rescue. Without this skip the
+    // backstop kept every borrowed-required NAME un-closable even once the
+    // instance flag told the truth — the producer fix would have been inert.
+    expect(isClosableInstitution({
+      ...legacyRoster, source: 'cascade', cascadeAdded: true, required: true,
+    })).toBe(true);
+    expect(isClosableInstitution({
+      ...legacyRoster, source: 'cascade', cascadeAdded: true, required: false,
+    })).toBe(true);
+  });
 });
 
 describe('institutionLifecycle — outcome application', () => {
@@ -477,10 +514,22 @@ describe('institutionLifecycle — outcome application', () => {
     );
     expect(honest.institutions[0]).toMatchObject({ status: 'remnant', _worldPulseMorallyAbolished: true });
 
-    // The pre-fix shape — the same record carrying the SOURCE tier's borrowed
-    // flag — was immune: the guard refused and returned the settlement unchanged.
-    const borrowed = smithyTown({ institutions: [cascaded({ required: true })] });
-    expect(applyInstitutionLifecycleOutcome(borrowed, abolish)).toBe(borrowed);
+    // THE PERSISTED PRE-FIX SHAPE — the same record carrying the SOURCE tier's
+    // borrowed flag, as every settlement saved before the producer fix still does.
+    // It USED to be immune here (the guard read the flag raw and returned the
+    // settlement unchanged). Reader-side scoping neutralizes the saved lie in
+    // place, which is why the fix ships without a data migration.
+    const borrowed = applyInstitutionLifecycleOutcome(
+      smithyTown({ institutions: [cascaded({ required: true })] }), abolish,
+    );
+    expect(borrowed.institutions[0]).toMatchObject({ status: 'remnant', _worldPulseMorallyAbolished: true });
+
+    // The scoping is narrow: an institution whose `required` is its OWN contract
+    // is still immune — a patron cannot abolish the town's granary.
+    const contracted = smithyTown({ institutions: [{
+      name: 'Slave market', category: 'criminal_economy', status: 'active', required: true,
+    }] });
+    expect(applyInstitutionLifecycleOutcome(contracted, abolish)).toBe(contracted);
   });
 
   it('no-ops on malformed outcomes with the same reference', () => {

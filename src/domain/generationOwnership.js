@@ -7,7 +7,7 @@
  * a content profile, scale-ladder collapse, or coherence repair must not erase
  * the player's premise in order to make the output appear internally tidy.
  *
- * This module deliberately answers two related, but distinct, questions:
+ * This module deliberately answers several related, but distinct, questions:
  *
  *   - `isAuthoredGenerationEntity` identifies player-controlled provenance.
  *     Generated-theme profiles use it to leave authored content untouched and
@@ -18,9 +18,20 @@
  *   - `isProtectedFromCustomSubsumption` answers the narrower question an exact
  *     custom `subsumes` reference asks, where custom provenance is the
  *     authority doing the asking rather than a reason to refuse.
+ *   - `hasOwnRequiredContract` scopes a bare `required` flag to the settlement
+ *     that actually owes the contract. EXPORTED for pulse-time readers, not
+ *     just generation: institution lifecycle and calamity decide closure,
+ *     abolition, and strike eligibility off that flag, and a settlement
+ *     PERSISTED before the 2026-07-26 cascade fix still carries the borrowed
+ *     value on disk. Scoping at the READ retro-covers those saves, so the fix
+ *     needs no data migration.
+ *   - `hasCascadeProvenance` is the stamp those readers key on.
  *
  * Keep provenance recognition here. A second local list of protected `source`
- * values will eventually drift and reopen a deletion path.
+ * values will eventually drift and reopen a deletion path. The ONE sanctioned
+ * exception is `spatial/calamity.js`, a deliberately IMPORT-FREE pure leaf that
+ * mirrors the `hasOwnRequiredContract` conjunction inline; that mirror is held
+ * honest by a parity ratchet in tests/domain/calamity.test.js.
  */
 
 const AUTHORED_SOURCES = new Set([
@@ -82,6 +93,27 @@ export function isAuthoredGenerationEntity(entity) {
 }
 
 /**
+ * True when a record carries the supply-chain cascade's own provenance stamp.
+ *
+ * The cascade seats a BORROWED lower-tier catalog def at a higher tier and
+ * stamps the record `source: 'cascade'` + `cascadeAdded: true`. That stamp is
+ * the record's own account of where it came from, which is why a cascade record
+ * never needs the name-keyed catalog rescue that legacy/imported rosters (which
+ * lost their provenance) depend on.
+ *
+ * `cascadeAdded` is the load-bearing signal. `source` is checked nowhere here on
+ * purpose: a source string is a label an importer can spoof or drop, while the
+ * boolean is written only by the cascade step itself.
+ *
+ * @param {unknown} record
+ * @returns {boolean}
+ */
+export function hasCascadeProvenance(record) {
+  if (!record || typeof record !== 'object') return false;
+  return /** @type {Record<string, unknown>} */ (record).cascadeAdded === true;
+}
+
+/**
  * True when a record's `required` flag is this settlement's own contract.
  *
  * `required` is scoped to the tier whose catalog declares it. The supply-chain
@@ -97,12 +129,20 @@ export function isAuthoredGenerationEntity(entity) {
  * `required` is always borrowed. The flag itself is left on the record because
  * it is the source catalog's own data; only its authority is scoped here.
  *
- * @param {Record<string, unknown>} record
+ * EXPORTED because generation is not the only reader. The world pulse decides
+ * economic closure, patron abolition, disaster strikes, and calamity collapse
+ * off the same flag, and settlements PERSISTED before the 2026-07-26 producer
+ * fix still carry `required: true` on cascade records. Scoping the judgment at
+ * every read is what retro-covers that saved data — there is no migration and
+ * none is needed, because the flag is never trusted bare again.
+ *
+ * @param {unknown} record
  * @returns {boolean}
  */
-function hasOwnRequiredContract(record) {
-  if (record.cascadeAdded === true) return false;
-  return record.required === true;
+export function hasOwnRequiredContract(record) {
+  if (!record || typeof record !== 'object') return false;
+  if (hasCascadeProvenance(record)) return false;
+  return /** @type {Record<string, unknown>} */ (record).required === true;
 }
 
 /**
@@ -138,6 +178,14 @@ export function isProtectedGenerationEntity(entity) {
  * must never erase a required, forced, event-authored, locked, or pinned
  * institution. Bare legacy-name targets receive no such exception because a
  * display label is not sufficient deletion authority.
+ *
+ * The bare `required === true` read below is deliberate and correct even
+ * though generator cleanup scopes the flag through hasOwnRequiredContract:
+ * cascade seats have written `required: false` since the 2026-07-26 producer
+ * fix, and subsumption only ever runs during assembly on freshly seated
+ * records — never on persisted rosters — so a borrowed flag cannot reach this
+ * branch. Do not "align" it to the scoped form; the extra condition would
+ * guard a path that cannot occur.
  *
  * @param {unknown} entity
  * @param {{ exactTarget?: boolean }} [options]

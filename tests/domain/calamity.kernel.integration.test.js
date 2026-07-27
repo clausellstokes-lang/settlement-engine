@@ -77,9 +77,9 @@ const plainSettlement = (name) => ({
   activeConditions: [], npcs: [],
 });
 
-function fixture({ spatial }) {
+function fixture({ spatial, struck = struckSettlement() }) {
   const settlements = [
-    { id: 'thornwood', name: 'Thornwood', settlement: struckSettlement() },
+    { id: 'thornwood', name: 'Thornwood', settlement: struck },
     { id: 'midvale', name: 'Midvale', settlement: plainSettlement('Midvale') },
     { id: 'faredge', name: 'Faredge', settlement: plainSettlement('Faredge') },
   ];
@@ -105,8 +105,8 @@ function fixture({ spatial }) {
 // Cross a year boundary (week 51 → 52 ⇒ year 1 → 2) so the annual draw evaluates.
 const YEAR_CROSS = { prevWeeks: 51, weeks: 52 };
 
-function runStrike({ spatial }) {
-  const f = fixture({ spatial });
+function runStrike({ spatial, struck }) {
+  const f = fixture({ spatial, ...(struck ? { struck } : {}) });
   return advanceCalamity({
     settlementUpdates: f.settlementUpdates,
     worldState: f.worldState,
@@ -126,6 +126,38 @@ const struckOf = (res) => res.settlementUpdates.find((u) => u.saveId === 'thornw
 const instByName = (s, name) => (s.institutions || []).find((i) => String(i.name) === name);
 
 describe('M11b calamity kernel — the strike + subsumption', () => {
+  it('the COLLAPSE pool scopes `required` too: a persisted cascade sibling folds away, a real contract does not', () => {
+    // The collapse pool (categoryMembers) removes SIBLINGS the strike never
+    // targeted, so it carries the same hard "no required institution is
+    // destroyed" bound as the target selection — and asks the same SCOPED
+    // question. 'Wine hall' is codepoint-LAST in its category, so it is never
+    // picked as a target: whatever happens to it happens through the pool.
+    const lodging = { name: 'Wine hall', category: 'lodging' };
+
+    // (a) The PERSISTED pre-fix shape — cascade provenance carrying the source
+    // tier's borrowed flag, exactly as a settlement saved before 2026-07-26 has
+    // it on disk. It enters the pool and folds away with Tavern behind Inn.
+    const withProvenance = struckSettlement();
+    withProvenance.institutions.push({ ...lodging, source: 'cascade', cascadeAdded: true, required: true });
+    const cascaded = runStrike({ spatial: true, struck: withProvenance });
+    const cascadedStrike = cascaded.receipts.find((r) => r.kind === 'strike');
+    expect(cascadedStrike.targets).not.toContain('Wine hall');   // never TARGETED …
+    expect(cascadedStrike.removed).toContain('Wine hall');       // … but collapsed away
+    expect(instByName(struckOf(cascaded), 'Wine hall').status).toBe('ruined');
+    expect(String(instByName(struckOf(cascaded), 'Inn').status || 'active')).toBe('active'); // the survivor
+
+    // (b) The SAME borrowed flag WITHOUT provenance is a real contract: identical
+    // targets, but the institution is shielded from the fold. This is the pair
+    // that proves the scoping is doing the work, not the strike's randomness.
+    const noProvenance = struckSettlement();
+    noProvenance.institutions.push({ ...lodging, required: true });
+    const contracted = runStrike({ spatial: true, struck: noProvenance });
+    const contractedStrike = contracted.receipts.find((r) => r.kind === 'strike');
+    expect(contractedStrike.targets).toEqual(cascadedStrike.targets);
+    expect(contractedStrike.removed).not.toContain('Wine hall');
+    expect(String(instByName(struckOf(contracted), 'Wine hall').status || 'active')).toBe('active');
+  });
+
   it('composes DEMOTE + COLLAPSE + DESTROY, and NEVER touches a required institution', () => {
     const res = runStrike({ spatial: true });
     expect(res.changed).toBe(true);

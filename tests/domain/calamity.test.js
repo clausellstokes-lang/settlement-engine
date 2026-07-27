@@ -37,6 +37,7 @@ import {
   CALAMITY_SEVERITY_BANDS,
 } from '../../src/domain/spatial/calamity.js';
 import { strikeCapForTier } from '../../src/domain/worldPulse/calamityKernel.js';
+import { hasOwnRequiredContract } from '../../src/domain/generationOwnership.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 
 const T = CALAMITY_TUNING;
@@ -239,6 +240,49 @@ describe('M11b calamity — the strike (bounded, required-never, subsumption)', 
     expect(isStrikeTarget({ name: 'Gone', status: 'remnant' })).toBe(false);
     expect(isStrikeTarget({ name: '' })).toBe(false);
     expect(isStrikeTarget(null)).toBe(false);
+  });
+
+  it('a PERSISTED pre-fix cascade seat is strikeable — the borrowed flag buys no immunity', () => {
+    // `required` is scoped to the tier whose catalog declares it. The cascade
+    // seats a BORROWED lower-tier def at a higher tier; before the 2026-07-26
+    // producer fix it carried the source tier's flag forward, and every
+    // settlement saved back then still has that on disk. Reader-side scoping
+    // retires the lie in place — no migration touches the saved record.
+    const persistedPreFix = {
+      name: 'Town watch', category: 'Defense', status: 'active',
+      source: 'cascade', cascadeAdded: true, required: true,
+    };
+    expect(isStrikeTarget(persistedPreFix)).toBe(true);
+    // Post-fix seats write the truth; still strikeable, for the ordinary reason.
+    expect(isStrikeTarget({ ...persistedPreFix, required: false })).toBe(true);
+    // The hard bound survives where the contract is genuinely this record's own.
+    expect(isStrikeTarget({ name: 'Town watch', category: 'Defense', required: true })).toBe(false);
+    // …and the selection boundary agrees, not just the predicate.
+    expect(selectStrikeTargets({
+      institutions: [persistedPreFix, { name: 'Town hall', required: true }, { name: 'Inn' }],
+      k: 99,
+      rng: constRng(0.5),
+    })).toEqual(['Inn', 'Town watch']);
+  });
+
+  it('PARITY RATCHET: the import-free mirror agrees with generationOwnership over the shape matrix', () => {
+    // calamity.js is an IMPORT-FREE PURE LEAF (display/realmManifest reach it from
+    // outside the pulse chunk), so it MIRRORS hasOwnRequiredContract inline rather
+    // than importing it. This ratchet is what keeps the mirror honest: if the law
+    // gains a clause the mirror does not, the two disagree here and this reds.
+    const shapes = [
+      {}, { required: true }, { required: false }, { required: 'yes' },
+      { cascadeAdded: true }, { cascadeAdded: true, required: true },
+      { cascadeAdded: true, required: false }, { cascadeAdded: false, required: true },
+      { source: 'cascade', required: true }, { source: 'cascade', cascadeAdded: true, required: true },
+    ];
+    for (const shape of shapes) {
+      const inst = { name: 'Probe', status: 'active', ...shape };
+      // isStrikeTarget rejects EXACTLY when the law says the contract is its own
+      // (every probe here is a live, named institution, so nothing else can reject it).
+      expect(isStrikeTarget(inst), JSON.stringify(shape))
+        .toBe(!hasOwnRequiredContract(inst));
+    }
   });
 
   it('THE HARD BOUND: a required institution is NEVER selected, over EVERY seed', () => {

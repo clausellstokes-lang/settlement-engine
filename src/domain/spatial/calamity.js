@@ -276,19 +276,32 @@ export function stampTitle(settlementName, year) {
  * @typedef {Object} StrikeInstitution
  * @property {string} name
  * @property {boolean} [required]
+ * @property {boolean} [cascadeAdded]
  * @property {string} [category]
  * @property {string} [status]
  */
 
 /**
- * Is an institution a valid strike TARGET? Never `required` (the hard bound), and
- * never one already inactive (a remnant/ruin doesn't fall twice). Pure.
+ * Is an institution a valid strike TARGET? Never a `required` institution whose
+ * contract is its OWN (the hard bound), and never one already inactive (a
+ * remnant/ruin doesn't fall twice). Pure.
+ *
+ * PROVENANCE MIRROR — keep in sync with domain/generationOwnership.js's
+ * `hasOwnRequiredContract`. `required` is scoped to the tier whose catalog
+ * declares it; the supply-chain cascade seats a BORROWED lower-tier def at a
+ * higher tier, so a `cascadeAdded` record's flag is never this settlement's
+ * contract and must not shield it from the disaster. The predicate is mirrored
+ * inline rather than imported because this module is an IMPORT-FREE PURE LEAF
+ * (see the header) and display/realmManifest reach it from outside the pulse
+ * chunk — the same reason UPGRADE_CHAIN_PAIRS is mirrored in calamityKernel.
+ * The mirror is held honest by a parity ratchet in tests/domain/calamity.test.js,
+ * which asserts this conjunction agrees with the law over a shape matrix.
  * @param {StrikeInstitution | null | undefined} inst
  * @returns {boolean}
  */
 export function isStrikeTarget(inst) {
   if (!inst || typeof inst !== 'object') return false;
-  if (inst.required === true) return false;
+  if (inst.required === true && inst.cascadeAdded !== true) return false;
   const status = String(inst.status || 'active');
   if (status === 'remnant' || status === 'removed' || status === 'ruined') return false;
   return !!String(inst.name || '');

@@ -42,20 +42,20 @@ describe('power-adversarial — War Council dedup under siege + wartime', () => 
 
 describe('power-adversarial — canonical hostile/rival neighbour drives the external-threat band', () => {
   test("a 'hostile' neighbour produces the 'Tense (external threat)' stability band", () => {
-    const tradeRoute = { neighborName: 'Karsgard', relationshipType: 'hostile' };
-    const { stability } = generatePowerStructure('city', economicState, tradeRoute, {}, []);
+    const neighbourRelationship = { neighborName: 'Karsgard', relationshipType: 'hostile' };
+    const { stability } = generatePowerStructure('city', economicState, neighbourRelationship, {}, []);
     expect(stability).toBe('Tense (external threat)');
   });
 
   test("a 'rival' neighbour produces the 'Tense (external threat)' stability band", () => {
-    const tradeRoute = { neighborName: 'Karsgard', relationshipType: 'rival' };
-    const { stability } = generatePowerStructure('city', economicState, tradeRoute, {}, []);
+    const neighbourRelationship = { neighborName: 'Karsgard', relationshipType: 'rival' };
+    const { stability } = generatePowerStructure('city', economicState, neighbourRelationship, {}, []);
     expect(stability).toBe('Tense (external threat)');
   });
 
   test("the pre-existing 'cold_war' id still maps to the external-threat band", () => {
-    const tradeRoute = { neighborName: 'Karsgard', relationshipType: 'cold_war' };
-    const { stability } = generatePowerStructure('city', economicState, tradeRoute, {}, []);
+    const neighbourRelationship = { neighborName: 'Karsgard', relationshipType: 'cold_war' };
+    const { stability } = generatePowerStructure('city', economicState, neighbourRelationship, {}, []);
     expect(stability).toBe('Tense (external threat)');
   });
 });

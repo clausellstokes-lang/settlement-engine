@@ -1357,8 +1357,152 @@ flag does not reach.
   regression. Whoever re-captures **must bring their own ledger entry** naming the
   cause and its measured key count, exactly as (a)–(d) above. Never run
   `UPDATE_GOLDEN=1` merely to make a red go away.
-- **Persisted settlements are NOT migrated.** Worlds generated before the producer fix
-  still carry the borrowed `required: true` on their cascade-added institutions and
-  keep their abolition/calamity immunity until regeneration. The data migration was
-  considered and deliberately deferred as **owner-gated** — documented, not a bug to
-  re-find (see the producer-fix entry's own deferral note for the exact walk).
+- ~~**Persisted settlements are NOT migrated.**~~ **SUPERSEDED 2026-07-26** by the
+  reader-side scoping entry below. The saved bytes are still not migrated — nothing
+  rewrites a persisted `required: true` — but no reader trusts the flag bare any
+  more, so the immunity is gone on load. The owner-gated migration is **retired, not
+  deferred**: there is nothing left for it to fix.
+
+---
+
+## 2026-07-26 — reader-side `required` scoping retires the borrowed-flag migration
+
+**No golden moved.** `generatorGoldenMaster` (523 rows) and `worldpulseSpatialGolden`
+are byte-identical after this change, by construction: every edit is on a **pulse-time
+READ**, and generation-time output is untouched. This entry is in the ledger because
+it changes **simulated behavior on already-saved worlds**, which is the same class of
+disclosure a golden shift is.
+
+### What the producer fix could not reach
+
+The 2026-07-26 producer fix (`cascadeGenerator` seats write `required: false`) tells
+the truth from that commit forward. It says nothing about the worlds already on disk:
+every settlement generated before it still carries the SOURCE tier's borrowed
+`required: true` on its cascade-added institutions, and the pulse-time predicates read
+that flag raw. Those worlds kept the immunity lie — a cascade-added `Subsistence
+farming` that never declines, never closes, never burns — until regenerated.
+
+The resolution is **reader-side scoping**, not a migration. Every read that means
+*"is this a tier contract?"* now asks the provenance law instead of the flag. That
+retro-covers persisted data with **zero** schema change, zero backfill, zero
+migration number, and zero risk of a half-applied sweep: the flag stays on the record
+(it is the source catalog's own data) and simply stops being authority.
+
+### The law, now exported
+
+`src/domain/generationOwnership.js` — `hasOwnRequiredContract` was a private helper
+serving `isProtectedGenerationEntity` only. It is now **exported**, alongside a new
+`hasCascadeProvenance`, and both are null-safe (`unknown` in, boolean out) because
+non-generator callers pass whatever the roster holds. `isProtectedGenerationEntity`
+still consumes it unchanged, so the generator side is byte-identical. The module
+header now carries the reader contract and the one sanctioned mirror (below).
+
+### The census — every `.required` in `src/domain/worldPulse/` + `src/domain/spatial/`
+
+⚠️ **The obvious census command hides the two most important sites.** `grep -rn
+"\.required" … | grep -v requiredForTier` drops any line *containing*
+`requiredForTier` — and both primary instance-flag reads were written
+`if (inst.required || inst.requiredForTier)`. Census with `grep -v requiredStreak`
+instead, or the two sites this entry exists for never appear.
+
+| # | site | expression (before) | disposition |
+| --- | --- | --- | --- |
+| 1 | `worldPulse/institutionLifecycle.js` `isClosableInstitution` | `if (inst.required \|\| inst.requiredForTier)` | **REWIRED** → `hasOwnRequiredContract(inst)` — instance-flag read, pure tier-contract immunity |
+| 2 | `worldPulse/institutionLifecycle.js` abolish apply-guard | `if (target.required \|\| target.requiredForTier)` | **REWIRED** → `hasOwnRequiredContract(target)` — same question at apply time |
+| 3 | `worldPulse/institutionLifecycle.js` name-keyed backstop | `if (entry.spec.required)` | **REWIRED** → `&& !hasCascadeProvenance(inst)` — see the backstop section |
+| 4 | `spatial/calamity.js` `isStrikeTarget` | `if (inst.required === true)` | **REWIRED** (inline mirror — import-free leaf, see below) |
+| 5 | `worldPulse/calamityKernel.js` `categoryMembers` | `i.required !== true` | **REWIRED** → `!hasOwnRequiredContract(i)` — this pool **removes** siblings the strike never targeted, so it carries the identical hard bound |
+| 6 | `worldPulse/upswingKernel.js` `upgradeCandidate` | `i.required !== true` | **REWIRED** → `!hasOwnRequiredContract(i)` — the upgrade **renames the record in place**, so only a real contract may be exempt |
+| 7 | `worldPulse/institutionLifecycle.js` settlement-tier check | `tierEntry?.spec?.required` | **EXEMPT** — asks whether the name is a contract at the tier the settlement stands at *now*, which is correct regardless of provenance (a demoted city's cascade seat may genuinely be required at its new tier) |
+| 8 | `worldPulse/tierOutcomeApply.js:53` `requiredInstitutionsForTier` | `entry.spec.required` | **EXEMPT** — reads the CATALOG, defining the contract; no instance flag can reach it |
+| 9 | `worldPulse/tierOutcomeApply.js:103` `newInstitution` | `required: !!entry.spec.required` | **EXEMPT** — a WRITER, and tier-correct by construction (`entry` comes from `entriesForTier(toTier)`) |
+| 10 | `worldPulse/tierOutcomeApply.js:133` `shouldRemoveForDemotion` | `entry.spec.required` | **EXEMPT** — catalog spec at the native tier, a demotion question, not an immunity one |
+| 11 | `tierOutcomeApply.js:129/165`, `institutionLifecycle.js:554/990` | `.requiredForTier` | **EXEMPT** — a different field entirely: the tier a promotion seated the record for, written by the engine, never borrowed |
+| 12 | `institutionLifecycle.js` ×8 | `t.requiredStreak` | **EXEMPT** — hysteresis tuning; unrelated name collision |
+| 13 | `institutionLifecycle.js:906/1048` | `required: false` | **EXEMPT** — writers; world-pulse-built institutions already tell the truth |
+
+`src/generators/**` is deliberately untouched: generation-time already flows through
+`isProtectedGenerationEntity`, which has consumed the scoped judgment since the
+roster-side half shipped.
+
+### The name-keyed backstop — why it needed scoping, and why it survives
+
+`isClosableInstitution` refuses closure a second time if `catalogEntryByName(inst.name)`
+declares `required`. That backstop exists for **legacy/imported rosters whose records
+LOST their provenance stamps** — the instance carries no flag at all, so the catalog
+answers for the name. It is also why the producer fix alone would have been *inert*:
+all ~68 borrowed-required NAMES stayed economically un-closable even once the instance
+flag told the truth, because the name still resolved to a `required` catalog def.
+
+The fix is not to weaken the rescue but to **skip it for records that do not need
+rescuing**: a cascade record carries full provenance (`source: 'cascade'` +
+`cascadeAdded: true`), so it answers from its own stamps. Legacy records — the ones
+the backstop was built for — are untouched and still protected.
+
+### The one sanctioned mirror (`spatial/calamity.js`)
+
+`calamity.js` is an **IMPORT-FREE PURE LEAF** by documented invariant ("M9b's lesson —
+no eager preload edge"; the same reason `UPGRADE_CHAIN_PAIRS` is mirrored into
+`calamityKernel`). It is reached from *outside* the pulse chunk by
+`domain/events/realmManifest.js` and `domain/display/calamityLedger.js`, so importing
+the law there would drag `generationOwnership` into a first-paint-adjacent chunk. The
+conjunction is therefore **mirrored inline** — `inst.required === true &&
+inst.cascadeAdded !== true` — and held honest by a **parity ratchet** in
+`tests/domain/calamity.test.js` that asserts `isStrikeTarget` agrees with
+`hasOwnRequiredContract` across a 10-shape matrix. If the law gains a clause the
+mirror does not, that test reds.
+
+The other three modules take the real import: `institutionLifecycle`, `calamityKernel`,
+and `upswingKernel` are all pulse-chunk modules, so `generationOwnership` is pulled in
+once and the second and third edges cost nothing. All three are **domain → domain** —
+`tests/build/domainGeneratorsBoundary.test.js` (the domain→generators ratchet) stays
+green at its frozen 4-file / ≤6-edge baseline.
+
+### The pins
+
+| pin | file | what it proves |
+| --- | --- | --- |
+| persisted pre-fix shape is closable | `tests/domain/institutionLifecycle.test.js` | `{cascadeAdded:true, required:true}` → closable; strip the stamp → immune again |
+| the backstop pair | `tests/domain/institutionLifecycle.test.js` | `'Town watch'` (catalog `required:true` at town) — legacy roster still rescued, stamped cascade record no longer shielded |
+| persisted pre-fix shape is abolishable | `tests/domain/institutionLifecycle.test.js` | the c9e5ca62 assertion **inverted**: it pinned the borrowed shape as immune (the pre-fix contrast); it now lands `status:'remnant'` |
+| persisted pre-fix shape is strikeable | `tests/domain/calamity.test.js` | predicate **and** `selectStrikeTargets` boundary |
+| PARITY RATCHET | `tests/domain/calamity.test.js` | the import-free mirror ≡ the law over 10 shapes |
+| the collapse pool | `tests/domain/calamity.kernel.integration.test.js` | `'Wine hall'` is codepoint-last so it is **never targeted** — with provenance it is nonetheless `removed`/`ruined` (folded away behind `Inn`), without provenance the *same* target list leaves it standing |
+| the upgrade pool | `tests/domain/upswingKernel.test.js` | `'Blacksmith'` with the stamp wins the upgrade (`→ Blacksmiths (3-10)`); without it the pool skips to `Carpenter → Carpenters (5-15)` |
+
+### Measured gates (all single-threaded, `--no-file-parallelism`)
+
+```
+BOTH GOLDENS — tests/property/worldpulseSpatialGolden.test.js
+               tests/property/generatorGoldenMaster.test.js
+ Test Files  2 passed (2)
+      Tests  9 passed (9)
+
+LIFECYCLE + CALAMITY + UPSWING + CASCADE (15 files)
+ Test Files  15 passed (15)
+      Tests  265 passed (265)
+
+PULSE DORMANCY GOLDENS + SOAKS (11 files)
+ Test Files  11 passed (11)
+      Tests  84 passed (84)
+
+RATCHETS — domainGeneratorsBoundary, domainAnyCastBaseline, domainStrictBaseline,
+           sizeBaseline, mutationCoverageManifest, contractTestAntiVacuity,
+           generationAuthoredIntent
+ Test Files  7 passed (7)
+      Tests  43 passed (43)
+
+tests/architecture/
+ Test Files  19 passed (19)
+      Tests  336 passed (336)
+
+tests/generators/ (the whole layer — generation-time output unchanged)
+ Test Files  99 passed (99)
+      Tests  720 passed (720)
+
+npx eslint <5 source files + 4 test files>   EXIT=0
+```
+
+`institutionLifecycle.js` sits at ~784 effective lines against the 800 domain
+`max-lines` ceiling after the one added import — the change was kept to a single
+effective line there deliberately; comments are free, code is not.

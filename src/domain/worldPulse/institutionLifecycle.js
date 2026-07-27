@@ -38,6 +38,10 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
 import { isMaterializedCustomContent } from '../content/customContentSemanticAuthority.js';
+// The provenance law (domain→domain, no generator edge): `required` is scoped to
+// the tier whose catalog declares it, so every read below asks the law instead of
+// the raw flag — which is what covers settlements PERSISTED before the cascade fix.
+import { hasCascadeProvenance, hasOwnRequiredContract } from '../generationOwnership.js';
 import { institutionHasTag, TAG } from '../../lib/entities.js';
 import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
@@ -528,18 +532,33 @@ export function institutionImpairmentLoad(/** @type {any} */ inst) {
  * instance lacks the generation-time `required` flag (legacy/imported
  * rosters): catalogEntryByName alone returns the LOWEST tier's spec, and
  * e.g. 'Weekly market' is optional at village but required at town.
+ *
+ * THE THREE `required` READS ARE NOT THE SAME QUESTION (2026-07-26):
+ *   1. the INSTANCE flag — asked through hasOwnRequiredContract, because a
+ *      cascade seat carries the SOURCE tier's borrowed flag and a settlement
+ *      saved before the producer fix still has that lie on disk;
+ *   2. the NAME-KEYED CATALOG rescue (catalogEntryByName → the LOWEST tier that
+ *      declares the name) — the legacy/imported backstop above, and the reason
+ *      ~68 borrowed names stayed un-closable even once the instance flag told
+ *      the truth. It is skipped for a record with full cascade provenance: that
+ *      record can answer from its own stamps, so it needs no rescue;
+ *   3. the SETTLEMENT'S OWN TIER (entriesForTier below) — deliberately NOT
+ *      provenance-scoped. It asks whether this name is a contract at the tier
+ *      the settlement is standing at right now, which is the correct answer
+ *      regardless of how the record got here (a demoted city's cascade seat may
+ *      genuinely be required at its new tier).
  */
 export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} */ settlement = null) {
   if (!inst || !inst.name) return false;
   if (inst.status === 'removed' || inst.status === 'destroyed' || inst._worldPulseInactive) return false;
-  if (inst.required || inst.requiredForTier) return false;
+  if (hasOwnRequiredContract(inst) || inst.requiredForTier) return false;
   if (isMaterializedCustomContent(inst)) return false;
   if (/criminal/i.test(String(inst.category || '')) || institutionHasTag(inst, TAG.CRIMINAL)) return false;
   const tags = Array.isArray(inst.tags) ? inst.tags : [];
   if (tags.includes('essential')) return false;
   const entry = catalogEntryByName(inst.name);
   if (entry) {
-    if (entry.spec.required) return false;
+    if (entry.spec.required && !hasCascadeProvenance(inst)) return false;
     if ((entry.spec.tags || []).includes('essential')) return false;
     if (['government', 'waterSupply'].includes(entry.spec.exclusiveGroup)) return false;
   }
@@ -961,11 +980,14 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
   // these morally-loaded-but-NON-criminal). Re-verifies at apply time (self-contained,
   // proposal-safe): the institution must STILL be present, morally-coded or martial, and
   // NOT required/essential/tier-required (a patron cannot abolish the town's granary).
+  // The required read is SCOPED (hasOwnRequiredContract): a cascade seat's flag is the
+  // source tier's, borrowed, so it never buys immunity here — including on a settlement
+  // persisted before the producer fix, which still carries required:true on disk.
   if (patch.action === 'abolish') {
     if (index < 0) return settlement;
     const target = institutions[index];
     if (target._worldPulseInactive || ['removed', 'destroyed', 'remnant'].includes(String(target.status || '').toLowerCase())) return settlement;
-    if (target.required || target.requiredForTier) return settlement;
+    if (hasOwnRequiredContract(target) || target.requiredForTier) return settlement;
     const stillLoaded = institutionMoralLean(target) || institutionMartialLean(target);
     if (!stillLoaded) return settlement;
     const fate = patch.fate || 'abolished';

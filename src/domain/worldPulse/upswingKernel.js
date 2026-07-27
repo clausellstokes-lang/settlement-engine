@@ -32,6 +32,9 @@
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
+// The provenance law (domain→domain): the upgrade RENAMES the record in place, so
+// only an institution whose `required` is genuinely its OWN contract is exempt.
+import { hasOwnRequiredContract } from '../generationOwnership.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeMalice } from './disposition.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
@@ -261,7 +264,7 @@ function upgradeCandidate(s) {
   const insts = Array.isArray(s?.institutions) ? s.institutions : [];
   const standing = new Set(insts.map((i) => String(i?.name || '').toLowerCase()));
   const eligible = insts
-    .filter((i) => i && i.required !== true && String(i.status || 'active') === 'active' && String(i.name || ''))
+    .filter((i) => i && !hasOwnRequiredContract(i) && String(i.status || 'active') === 'active' && String(i.name || ''))
     .map((i) => String(i.name))
     .sort();
   for (const name of eligible) {

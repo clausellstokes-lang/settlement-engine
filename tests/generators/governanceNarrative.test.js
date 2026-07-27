@@ -19,7 +19,7 @@ const DEFAULT_INPUT = {
     economyOutput: 50,
     religionInfluence: 30,
   },
-  tradeRoute: null,
+  neighbourRelationship: null,
   instNames: [],
   priorities: { military: 50, economy: 50 },
   tier: 'village',
@@ -141,7 +141,7 @@ describe('governance narrative institutional phrasing', () => {
 
   test('canonical adversarial relationship tokens drive both label and vignette', () => {
     const result = deriveGovernance({
-      tradeRoute: {
+      neighbourRelationship: {
         neighborName: 'Grimhold',
         relationshipType: 'hostile',
       },
