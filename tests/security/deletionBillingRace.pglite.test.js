@@ -359,19 +359,22 @@ beforeEach(async () => {
 });
 
 describe('migration 178 inactive-account billing fence', () => {
+  // ⚠ ANCHORED AT LINE START (`^` + m), replacing bare indexOf: a header that
+  // quotes one of these create statements in prose would silently shift a
+  // section boundary and misalign every slice below — and this test only
+  // asserts over the sliced TEXT. Throws on a missing definition rather than
+  // slicing from -1. See tests/security/moneyRpcNetCurrentGuards.test.js.
+  const defIndex = (name) => {
+    const m = migration.match(new RegExp(`^create or replace function public\\.${name}\\b`, 'im'));
+    if (!m) throw new Error(`definition not found in 178: ${name}`);
+    return m.index;
+  };
+
   it('pins profile locks before all guarded money/restore mutations', () => {
-    const claim = migration.indexOf(
-      'create or replace function public.claim_auto_reload_attempt',
-    );
-    const grant = migration.indexOf(
-      'create or replace function public.system_grant_credits',
-    );
-    const restore = migration.indexOf(
-      'create or replace function public.restore_premium_settlements',
-    );
-    const nextSection = migration.indexOf(
-      'create or replace function public.guard_inactive_profile_billing',
-    );
+    const claim = defIndex('claim_auto_reload_attempt');
+    const grant = defIndex('system_grant_credits');
+    const restore = defIndex('restore_premium_settlements');
+    const nextSection = defIndex('guard_inactive_profile_billing');
     const claimBody = migration.slice(claim, grant);
     const grantBody = migration.slice(grant, restore);
     const restoreBody = migration.slice(restore, nextSection);
@@ -385,9 +388,7 @@ describe('migration 178 inactive-account billing fence', () => {
       .toBeLessThan(grantBody.indexOf('credit_grant_idempotency'));
     expect(restoreBody.indexOf('public.account_is_active'))
       .toBeLessThan(restoreBody.indexOf('update public.settlements'));
-    const surveyorGrant = migration.indexOf(
-      'create or replace function public.grant_surveyor_entitlement',
-    );
+    const surveyorGrant = defIndex('grant_surveyor_entitlement');
     const lateColumns = migration.indexOf(
       'alter table public.account_deletion_cleanup_jobs',
     );

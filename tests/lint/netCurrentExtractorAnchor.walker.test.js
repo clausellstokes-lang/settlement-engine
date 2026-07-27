@@ -15,22 +15,25 @@
  * writeup: tests/security/moneyRpcNetCurrentGuards.test.js.
  *
  * THE WALK: scan tests/ and scripts/ sources for create-or-replace-function
- * regex constructions in any of the three house spellings —
- *   1. escaped:      /create\s+or\s+replace\s+function…/  (regex literals) and
- *                    `create\\s+or\\s+replace\\s+function…` (RegExp strings);
- *   2. plain-space regex literal:  /create or replace function…/;
- *   3. plain-space RegExp string:  new RegExp(`create or replace function…`)
- * — and fail on any occurrence NOT immediately preceded by `^`, naming the file
- * and line. Surviving pre-fix offenders are frozen below, SHRINK-ONLY.
+ * extractor constructions in any known spelling — the DETECTORS table below is
+ * the authoritative roster (escaped regex literal, escaped RegExp string,
+ * plain-space literal, plain-space RegExp string, the alternation and
+ * optional-group reformulations, the classifier kind-group form, and direct
+ * indexOf/search substring calls) — and fail on any occurrence not anchored in
+ * its sanctioned form, naming the file and line. Surviving offenders are
+ * frozen below, SHRINK-ONLY.
  *
  * CANNOT-CATCH (accepted costs of a regex gate, hand-audited 2026-07-27):
  *   - bare `function\s+<name>` block matches with no create prefix at all
  *     (none exist since the shrink wave rewrote contracts.test.js's onto the
  *     optional-group spelling, which detector 5 now guards);
- *   - substring-search extractors (an indexOf with a create-or-replace
- *     needle) carry no regex to scan — sourceContract.sqlFunctionBody was
- *     converted to the anchored idiom; a future indexOf spelling is invisible
- *     here and is caught only by review;
+ *   - substring searches routed through a VARIABLE (const needle = 'create
+ *     or replace …'; src.indexOf(needle)) — the DIRECT
+ *     indexOf/lastIndexOf/search('create or replace function…') spelling is
+ *     detector 8 and always a violation (no anchored variant exists; use the
+ *     anchored-regex idiom instead — sourceContract.sqlFunctionBody was the
+ *     one live instance, converted at 24c85e7f); the indirect form has no
+ *     scannable signature and is caught only by review;
  *   - sibling statement families (create trigger / create policy extractors,
  *     e.g. enforceSaveLimit's extractTrigger) — a different spelling class;
  *   - `\s*`-spelled or split-across-concatenation patterns (none exist today);
@@ -70,6 +73,10 @@ const DETECTORS = [
   // Its sanctioned anchor is `^[ \t]*create…` (indented DDL is legal there), so
   // the exemption capture accepts `^` optionally followed by a `[…]*` class.
   { name: 'kind-group', re: /(\^(?:\[[^\]]*\]\*)?)?create\\{1,2}s\+\(\?:or\\{1,2}s\+replace\\{1,2}s\+\)\?/gi },
+  // Direct substring-search extractors. There is NO anchored variant of
+  // indexOf — the capture group can never match, so every hit is a violation;
+  // the cure is the anchored-regex idiom (see sourceContract.sqlFunctionBody).
+  { name: 'substring-search', re: /(\^)?(?<=(?:indexOf|lastIndexOf|search)\(\s{0,8}[`'"])create or replace function/gi },
 ];
 
 /** { 'relative/file.js': { count, lines: [n, …] } } for UNANCHORED occurrences. */
@@ -176,6 +183,8 @@ describe('unanchored net-current extractor walker (habitat removal)', () => {
     expect(hits('expect(migrations).toMatch(/(create|create or replace)\\s+function\\s+(public\\.)?refund_credits/i)'), 'alternation spelling').toBe(1);
     expect(hits('migrations.match(/create(?:\\s+or\\s+replace)?\\s+function\\s+(public\\.)?refund_credits[\\s\\S]{0,4000}/i)'), 'optional-group spelling').toBe(1);
     expect(hits('const re = /create\\s+(?:or\\s+replace\\s+)?(?:function|table)\\s+(?:public\\.)?([a-z_][a-z0-9_]*)/gi'), 'kind-group spelling').toBe(1);
+    expect(hits("const start = src.indexOf('create or replace function public.foo');"), 'direct indexOf substring search').toBe(1);
+    expect(hits('const at = src.search(`create or replace function ${fnName}`);'), 'direct search substring call').toBe(1);
   });
 
   test('detectors stay silent on the anchored house form', () => {
@@ -185,6 +194,7 @@ describe('unanchored net-current extractor walker (habitat removal)', () => {
     expect(hits('expect(migrations).toMatch(/^(create|create or replace)\\s+function/im)'), 'anchored alternation').toBe(0);
     expect(hits('migrations.match(/^create(?:\\s+or\\s+replace)?\\s+function/im)'), 'anchored optional-group').toBe(0);
     expect(hits('const re = /^[ \\t]*create\\s+(?:or\\s+replace\\s+)?(?:function|table)/gim'), 'anchored kind-group (classifier form)').toBe(0);
+    expect(hits("const end = src.indexOf('$$;', start);"), 'indexOf with a non-create needle').toBe(0);
   });
 
   test('the migrations corpus itself keeps every create-or-replace-function at column 0', () => {
