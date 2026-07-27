@@ -1366,7 +1366,11 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   beforeAll(() => { sql = readMigration('017_fix_credit_auth_integrity.sql'); });
 
   it('replaces the broken welcome-credit trigger with the current ledger schema', () => {
-    const handleBlock = sql.match(/create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?comment\s+on\s+function\s+public\.handle_new_user/i);
+    // ⚠ Both ends ANCHORED AT LINE START (`^` + m): the unanchored form also
+    // matches prose quoting the statement and extracts comment text, which this
+    // test would assert over without failing. Canonical writeup:
+    // tests/security/moneyRpcNetCurrentGuards.test.js.
+    const handleBlock = sql.match(/^create\s+or\s+replace\s+function\s+public\.handle_new_user[\s\S]*?^comment\s+on\s+function\s+public\.handle_new_user/im);
     expect(handleBlock, 'handle_new_user block not found').toBeTruthy();
     expect(handleBlock[0]).toMatch(/insert\s+into\s+public\.credit_ledger\s*\(\s*user_id,\s*kind,\s*amount,\s*source,\s*metadata\s*\)/i);
     expect(handleBlock[0]).toMatch(/'grant'[\s\S]{0,80}'welcome'/i);
@@ -1379,13 +1383,13 @@ describe('Tier 9.10 — credit/auth integrity migration 017 invariants', () => {
   });
 
   it('exposes welcome_credit_available for the client gift-card gate', () => {
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.welcome_credit_available/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.welcome_credit_available/im);
     expect(sql).toMatch(/grant\s+execute\s+on\s+function\s+public\.welcome_credit_available\(uuid\)\s+to\s+authenticated/i);
   });
 
   it('adds service-role RPCs for audited admin writes', () => {
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/i);
-    expect(sql).toMatch(/create\s+or\s+replace\s+function\s+public\.service_set_credits/i);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_update_profile_metadata/im);
+    expect(sql).toMatch(/^create\s+or\s+replace\s+function\s+public\.service_set_credits/im);
     expect(sql).toMatch(/_assert_service_admin_actor/i);
     expect(sql).toMatch(/insert\s+into\s+public\.admin_actions/i);
   });

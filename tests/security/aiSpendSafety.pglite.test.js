@@ -26,9 +26,13 @@ const haveMigration = existsSync(MIG_079);
 const UID = '11111111-1111-1111-1111-111111111111';
 const UID2 = '22222222-2222-2222-2222-222222222222';
 
-/** Extract a `create or replace function public.<name>` body verbatim. */
+/** Extract a `create or replace function public.<name>` body verbatim.
+ *  ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
+ *  prose quoting the statement and extracts comment text. pglite fails loudly on
+ *  that, but the anchor makes the class impossible rather than merely loud.
+ *  Canonical writeup: tests/security/moneyRpcNetCurrentGuards.test.js. */
 function extractFn(src, name) {
-  const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'im'));
   if (!m) throw new Error(`could not extract ${name}`);
   return m[0];
 }

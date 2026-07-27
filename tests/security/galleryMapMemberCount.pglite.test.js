@@ -31,7 +31,9 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
  *  net-current behavior, not a superseded one. */
 function netCurrentFn(name) {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'ig');
+  // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
+  // prose quoting the statement (see tests/security/moneyRpcNetCurrentGuards.test.js).
+  const re = new RegExp(`^create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'igm');
   let last = null;
   for (const f of files) {
     const matches = readFileSync(resolve(MIGRATIONS_DIR, f), 'utf-8').match(re);

@@ -57,7 +57,11 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
   });
 
   it('exposes the public projection RPC to anon, returning opted-in fields only', () => {
-    expect(lower).toMatch(/create or replace function public\.list_founder_seats_public\(\)/);
+    // ⚠ Create-statement matches are LINE-START anchored (`^` + m) here and
+    // below: the unanchored form also matches prose quoting the statement, and
+    // this file only asserts over SOURCE text. Canonical writeup:
+    // tests/security/moneyRpcNetCurrentGuards.test.js.
+    expect(lower).toMatch(/^create or replace function public\.list_founder_seats_public\(\)/m);
     expect(lower).toMatch(/grant execute on function public\.list_founder_seats_public\(\) to anon, authenticated/);
     // Fail-closed: a name projects only when moderation-approved.
     expect(lower).toMatch(/display_name_status\s*=\s*'approved'/);
@@ -65,20 +69,20 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
     // Anchor on the actual CREATE ... $$ body ... $$; (the name also appears in
     // comments, so a naive split is unreliable).
     const m = SQL.match(
-      /create or replace function public\.list_founder_seats_public\(\)[\s\S]*?\$\$([\s\S]*?)\$\$;/i,
+      /^create or replace function public\.list_founder_seats_public\(\)[\s\S]*?\$\$([\s\S]*?)\$\$;/im,
     );
     expect(m).not.toBeNull();
     expect(m[1].toLowerCase()).not.toMatch(/holder_user_id/);
   });
 
   it('the holder self-service opt-in RPC is authenticated-only and re-enters moderation', () => {
-    expect(lower).toMatch(/create or replace function public\.set_founder_display_optin\(/);
+    expect(lower).toMatch(/^create or replace function public\.set_founder_display_optin\(/m);
     expect(lower).toMatch(/grant execute on function public\.set_founder_display_optin\([^)]*\) to authenticated/);
     expect(lower).toMatch(/display_name_status\s*=\s*'pending'/);
   });
 
   it('the seat-assignment primitive is service-role only (revoked from public)', () => {
-    expect(lower).toMatch(/create or replace function public\.claim_next_founder_seat\(/);
+    expect(lower).toMatch(/^create or replace function public\.claim_next_founder_seat\(/m);
     expect(lower).toMatch(/revoke all on function public\.claim_next_founder_seat\([^)]*\) from public/);
     expect(lower).toMatch(/grant execute on function public\.claim_next_founder_seat\([^)]*\) to service_role/);
     // service-role gate inside the body.
@@ -105,7 +109,7 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
   });
 
   it('adds the service-role clawback seat-release RPC (mirror of the claim)', () => {
-    expect(lower).toMatch(/create or replace function public\.release_founder_seat_on_clawback\(/);
+    expect(lower).toMatch(/^create or replace function public\.release_founder_seat_on_clawback\(/m);
     expect(lower).toMatch(/revoke all on function public\.release_founder_seat_on_clawback\([^)]*\) from public/);
     expect(lower).toMatch(/grant execute on function public\.release_founder_seat_on_clawback\([^)]*\) to service_role/);
     // Appends a 'clawback' lineage note (append, never erase).

@@ -55,8 +55,11 @@ function allMigrationSql() {
 const sql = allMigrationSql();
 
 // Every service_* function the migrations define (net of case).
+// ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form can invent a phantom
+// name from a comment that wraps the statement mid-identifier (the 098 shape;
+// see tests/security/moneyRpcNetCurrentGuards.test.js).
 const defined = [
-  ...sql.matchAll(/create\s+or\s+replace\s+function\s+public\.(service_[a-z0-9_]+)\s*\(/gi),
+  ...sql.matchAll(/^create\s+or\s+replace\s+function\s+public\.(service_[a-z0-9_]+)\s*\(/gim),
 ].map((m) => m[1].toLowerCase());
 const definedSet = [...new Set(defined)].sort();
 

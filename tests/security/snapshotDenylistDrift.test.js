@@ -29,7 +29,12 @@ const MIGRATIONS_DIR = resolve(here, '../../supabase/migrations');
  *  drift is checked against the EFFECTIVE server denylist, not a superseded one. */
 function netCurrentScannerSql() {
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = /create\s+or\s+replace\s+function\s+public\._gallery_world_snapshot_is_safe\b[\s\S]*?\$\$;/ig;
+  // ⚠ ANCHORED AT LINE START (`^` + m): the unanchored form also matches a
+  // migration header that quotes the create statement in prose and extracts
+  // comment text — and this suite only asserts over the extracted TEXT, so a
+  // mis-extract would stay GREEN over prose. Canonical writeup:
+  // tests/security/moneyRpcNetCurrentGuards.test.js.
+  const re = /^create\s+or\s+replace\s+function\s+public\._gallery_world_snapshot_is_safe\b[\s\S]*?\$\$;/igm;
   let last = null;
   for (const f of files) {
     const src = readFileSync(join(MIGRATIONS_DIR, f), 'utf8');

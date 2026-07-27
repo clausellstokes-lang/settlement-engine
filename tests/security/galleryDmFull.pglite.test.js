@@ -30,7 +30,9 @@ const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 function netCurrentDmFullSql() {
   if (!existsSync(MIGRATIONS_DIR)) return null;
   const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
-  const re = /create\s+or\s+replace\s+function\s+public\._gallery_dm_full_json\b[\s\S]*?\$\$;/ig;
+  // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
+  // prose quoting the statement (see tests/security/moneyRpcNetCurrentGuards.test.js).
+  const re = /^create\s+or\s+replace\s+function\s+public\._gallery_dm_full_json\b[\s\S]*?\$\$;/igm;
   let last = null;
   for (const f of files) {
     const src = readFileSync(join(MIGRATIONS_DIR, f), 'utf-8');

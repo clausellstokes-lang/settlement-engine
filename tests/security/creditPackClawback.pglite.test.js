@@ -31,7 +31,9 @@ const allExist = allMigrationsExist && existsSync(MIG_190);
  *  public.system_clawback_credits` to the first `$$;` (the harness idiom). */
 function extract190() {
   const src = readFileSync(MIG_190, 'utf-8');
-  const m = src.match(/create\s+or\s+replace\s+function\s+public\.system_clawback_credits\b[\s\S]*?\$\$;/i);
+  // ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form also matches header
+  // prose quoting the statement (see tests/security/moneyRpcNetCurrentGuards.test.js).
+  const m = src.match(/^create\s+or\s+replace\s+function\s+public\.system_clawback_credits\b[\s\S]*?\$\$;/im);
   if (!m) throw new Error('could not extract system_clawback_credits from migration 190');
   return m[0];
 }

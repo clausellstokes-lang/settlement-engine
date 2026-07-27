@@ -62,7 +62,12 @@ const REPINNED_POST_111 = [
   'public.add_gallery_comment',
 ];
 
-const FUNC_RE = /create\s+or\s+replace\s+function\s+([a-zA-Z0-9_.]+)\s*\(/gi;
+// ⚠ ANCHORED AT LINE START (`^` + m) — the unanchored form can invent a PHANTOM
+// function from a comment that wraps the statement mid-identifier (098's
+// @rollback note yields "enforce_allocation_"), corrupting both the name set and
+// the body slicing below. Canonical writeup:
+// tests/security/moneyRpcNetCurrentGuards.test.js.
+const FUNC_RE = /^create\s+or\s+replace\s+function\s+([a-zA-Z0-9_.]+)\s*\(/gim;
 
 /** True when a `set search_path = …` clause pins pg_temp LAST (the invariant). */
 function pinsPgTempLast(searchPath) {
