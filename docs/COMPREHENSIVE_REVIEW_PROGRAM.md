@@ -29,6 +29,16 @@ ledger — never from a session digest.
 >   foreign-WIP notes, W5+W2 double-allocation flagged) — first fix wave of the program, closes
 >   register ids docs-knowledge-1/3/4/5, build-tooling-docs-1/2, spatial-engine-7,
 >   sim-logic-counterparts-11. Both Phase-V workflows in flight.
+> - 2026-07-27: EPISTEMIC PREVENTION PROGRAM folded @ composite-r4 e56cbeaa (73 files, minifold;
+>   owner order "do it all"). The three lane-close hazards are machinery now: anchored-negatives
+>   walker (181→2 sites; 2 survivors = deliberate findings EP-e/EP-f), seed-loop-totality walker
+>   (32→0), powered distribution envelopes (5 registered, 2 TIGHTENED, 1 loosenPending held tight,
+>   exact-binomial helper), effect-reachability corpus gate (10 effects proven firing; 3 repair
+>   strata recorded UNREACHABLE — EP-g). 6 vacuous-green instruments surfaced honestly; 0 assertions
+>   weakened. Fold gate: 19,724 passed, 9 failing files ALL name-attributed foreign (2 by execution:
+>   advancePauseResume red AT HEAD; mechanismLitCoverage red only vs foreign untracked test). Commit
+>   proven HEAD-green in a detached-worktree battery (45/45). Owner picks EP-a..EP-j in queue §9.
+>   Doctrine: GENERATION_CONTRACTS.md §Test epistemics; program doc: EPISTEMIC_PREVENTION_PLAN.md.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
