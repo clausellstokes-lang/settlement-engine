@@ -120,9 +120,23 @@ async function read(paymentIntentId = 'pi_auto_reload') {
   return rows[0] ?? null;
 }
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeEach builds a
+ * FRESH database per test, so every single test pays the full cold-boot cost.
+ * Never tune this to a measurement (that is how a previous 30000ms went
+ * brittle); generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProbeTierSql) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 beforeEach(async () => {
   db = await makeDb();
-}, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('migration 177 durable payment refund obligations', () => {
   it('applies the full schema with RLS and an RPC-only service-role mutation posture', async () => {

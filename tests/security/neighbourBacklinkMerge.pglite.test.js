@@ -28,6 +28,20 @@ it('migration 096 is present (suite is not vacuous)', () => {
   expect(have).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hooks that stand up PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. BOTH hooks carry the ceiling
+ * because the beforeAll only constructs the instance — the first beforeEach
+ * exec pays the cold WASM boot. Never tune this to a measurement (that is how
+ * a previous 30000ms went brittle); generous is the point. Kept in step with
+ * the sibling suites (tierCreditMultiplierSql, surveyorProbeTierSql) and
+ * enforced by tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(have)('096 merge_neighbour_backlink — atomic additive merge (pglite)', () => {
   /** @type {any} */
   let db;
@@ -40,7 +54,7 @@ describe.runIf(have)('096 merge_neighbour_backlink — atomic additive merge (pg
     (await db.query(`select data from public.settlements where id = '${PARTNER}'`)).rows[0].data;
   const linkIds = async () => (await partnerData()).neighbourNetwork.map((/** @type {any} */ e) => e.linkId);
 
-  beforeAll(async () => { db = new PGlite(); }, 180_000 /* pglite cold boot exceeds the 10s hookTimeout default under load — deadlock guard, not a perf budget */);
+  beforeAll(async () => { db = new PGlite(); }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`
@@ -57,7 +71,7 @@ describe.runIf(have)('096 merge_neighbour_backlink — atomic additive merge (pg
          '{"name":"Partner","neighbourNetwork":[],"interSettlementRelationships":[]}'::jsonb, '[]'::jsonb);
     `);
     await db.exec(SRC); // the real 096 function + grants
-  }, 180_000 /* same deadlock-guard as the beforeAll: first exec pays pglite's cold WASM boot */);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('applies a back-link entry to the partner’s CURRENT data + mirrors neighbour_links', async () => {
     await merge('link_A', SAVE_A, { id: SAVE_A, linkId: 'link_A', name: 'A' });

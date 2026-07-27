@@ -126,9 +126,24 @@ async function claim(limit = 10, leaseSeconds = 120) {
   return rows;
 }
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeEach builds a
+ * FRESH database per test, so every single test pays the full cold-boot cost.
+ * Never tune this to a measurement — this hook's previous 60_000 and a
+ * sibling's 30000 both went brittle exactly that way; generous is the point.
+ * Kept in step with the sibling suites (tierCreditMultiplierSql,
+ * surveyorProbeTierSql) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 beforeEach(async () => {
   db = await makeDb();
-}, 180_000 /* was 60s tuned-to-a-measurement; class law: a hook timeout is a deadlock guard, not a perf budget */);
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('migration 180 payment refund recovery', () => {
   it('seeds an inert dispatcher and stores the original producer idempotency keys', async () => {

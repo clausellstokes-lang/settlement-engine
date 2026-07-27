@@ -51,6 +51,21 @@ it('targeted migration present (suite not vacuous)', () => {
   expect(haveMigration).toBe(true);
 });
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite and installs the migration
+ * bodies. A hook timeout is a DEADLOCK GUARD, not a performance budget: the
+ * inherited 10000ms default sits exactly on pglite's boot-noise band (this very
+ * suite measured ~10.1s standalone on 2026-07-27 and reported 8 SKIPPED with
+ * one green vacuity guard; under gate load the class measures 8.6-20.7s), so an
+ * untimed — or tuned — hook goes FLAKY red and the tests it feeds never
+ * execute. This replaces a 30000ms that was tuned to that measurement, the
+ * exact brittleness that already bit surveyorProbeTierSql. Never tune it again;
+ * generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProbeTierSql) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 describe.runIf(haveMigration)('surveyor BYOK key-health — real SQL (pglite)', () => {
   beforeAll(async () => {
     db = await new PGlite();
@@ -89,9 +104,7 @@ describe.runIf(haveMigration)('surveyor BYOK key-health — real SQL (pglite)', 
     await db.exec(extractFn(src, 'surveyor_byok_set_health'));
     await db.exec(extractFn(src, 'surveyor_byok_status'));
     await db.exec(extractFn(src, 'write_ai_operation_log'));
-  }, 30000); // PGlite WASM cold-start exceeds the 10s default hook timeout on a loaded
-  // machine (measured 2026-07-27: ~10.1s standalone, so the suite reported 8 SKIPPED and
-  // one green vacuity guard). Matched to the sibling pglite harnesses, which all pass 30000.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.surveyor_byok_keys; truncate public.ai_operation_log;');
