@@ -430,12 +430,28 @@ describe('every walled Surveyor surface wires the formative repair loop (wave L-
     expect((src.match(/rpc\('spend_credits'/g) || []).length).toBe(1);
   });
 
-  it('the tier dial is still INERT in source (activation is an owner switch, not a merge)', () => {
+  it('the tier dial carries the OWNER-SWITCHED shape, and no other (drift is not activation)', () => {
+    // THE SWITCH WAS THROWN 2026-07-27 by the owner, in writing, naming the activation batch
+    // ("tier values, repair rounds, thinking budgets — one signing") and ordering it finished.
+    // This guard's job does not end at activation, it changes: it stopped an accidental merge
+    // from activating the dial, and now it stops an accidental edit from RE-TUNING it. The
+    // shape below is the one the design recorded as INTENDED long before the switch, so a
+    // value that is neither 0/1/2 nor a fresh owner decision reds here.
+    // VETO = restore 0/0/0 in repairLoop.ts and the three pins in repairLoop.test.ts; nothing
+    // else in the program depends on the dial being non-zero.
     const dial = readFileSync(join(FN_DIR, '_shared', 'repairLoop.ts'), 'utf8');
     const block = dial.slice(dial.indexOf('REPAIR_ROUNDS_BY_TIER: Readonly'));
-    expect(block).toMatch(/scout:\s*0/);
-    expect(block).toMatch(/journeyman:\s*0/);
-    expect(block).toMatch(/master:\s*0/);
+    expect(block).toMatch(/scout:\s*0/);       // a scout still gets no second chance
+    expect(block).toMatch(/journeyman:\s*1/);
+    expect(block).toMatch(/master:\s*2/);
+    // The thinking dial stays at zero on a CONFIRMED provider blocker (claude-opus-4-8
+    // rejects a fixed thinking budget with a 400), not on caution. Pinned so that clearing
+    // the blocker is a deliberate act with this comment in front of it.
+    const resolver = readFileSync(join(FN_DIR, 'ai-analyst', 'modelResolver.ts'), 'utf8');
+    const think = resolver.slice(resolver.indexOf('THINKING_BUDGET_BY_TIER: Readonly'));
+    expect(think).toMatch(/scout:\s*0/);
+    expect(think).toMatch(/journeyman:\s*0/);
+    expect(think).toMatch(/master:\s*0/);
   });
 
   it('every assertion above has an executed negative control (this wall is not vacuous)', () => {

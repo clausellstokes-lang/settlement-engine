@@ -81,8 +81,8 @@ function scriptedModel(answers: string[]) {
 
 Deno.test('the tier dial ships at zero on every rung, frozen', () => {
   assertEquals(REPAIR_ROUNDS_BY_TIER.scout, 0);
-  assertEquals(REPAIR_ROUNDS_BY_TIER.journeyman, 0);
-  assertEquals(REPAIR_ROUNDS_BY_TIER.master, 0);
+  assertEquals(REPAIR_ROUNDS_BY_TIER.journeyman, 1);
+  assertEquals(REPAIR_ROUNDS_BY_TIER.master, 2);
   assert(Object.isFrozen(REPAIR_ROUNDS_BY_TIER));
   assert(Object.isFrozen(TIER_BY_CLASS));
 });
@@ -91,8 +91,8 @@ Deno.test('every tierClass maps to a rung, and every rung resolves to zero round
   assertEquals(TIER_BY_CLASS.deep, 'master');
   assertEquals(TIER_BY_CLASS.balanced, 'journeyman');
   assertEquals(TIER_BY_CLASS.fast, 'scout');
-  assertEquals(repairRoundsForTierClass('deep'), 0);
-  assertEquals(repairRoundsForTierClass('balanced'), 0);
+  assertEquals(repairRoundsForTierClass('deep'), 2);
+  assertEquals(repairRoundsForTierClass('balanced'), 1);
   assertEquals(repairRoundsForTierClass('fast'), 0);
 });
 
@@ -211,7 +211,7 @@ Deno.test('INERTNESS, per surface: the loop at zero rounds equals the pre-L-6 ex
     // deno-lint-ignore no-explicit-any
     const out = await runWithRepair<any>({
       basePrompt: 'BASE',
-      maxRounds: repairRoundsForTierClass('deep'), // the DEEPEST rung, which is still 0
+      maxRounds: 0, // the INERT case stays pinned explicitly now that the dial is activated
       callModel: model.callModel,
       parse: c.parse,
       // deno-lint-ignore no-explicit-any

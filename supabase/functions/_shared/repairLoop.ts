@@ -140,8 +140,8 @@ export { TIER_BY_CLASS };
  */
 export const REPAIR_ROUNDS_BY_TIER: Readonly<Record<LadderTier, number>> = Object.freeze({
   scout: 0,
-  journeyman: 0,
-  master: 0,
+  journeyman: 1,
+  master: 2,
 });
 
 /**
@@ -298,7 +298,7 @@ export interface RepairLoopResult<TParsed> {
 
 /** A stable identity for a violation, so two verdicts can be compared as sets. */
 function violationKey(v: RepairViolation): string {
-  return `${v.code} ${v.subject} ${v.where ?? ''}`;
+  return `${v.code}\u0000${v.subject}\u0000${v.where ?? ''}`;
 }
 
 /** Coerce a validator's output to the wire shape. Total: garbage yields an empty verdict. */
