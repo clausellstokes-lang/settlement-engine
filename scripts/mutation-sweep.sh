@@ -516,6 +516,14 @@ check_caught "patch-keys/call site writes an unadmitted key" src/store/aiSlice.j
 perl -0pi -e "s/    set\(state => \{ state\.importedNeighbour = null; \}\),/    set(state => { state.importedNeighbour = null; state.config.rogueKey = 1; }),/" src/store/neighbourSlice.js
 check_caught "config-door/fifth direct draft writer" src/store/neighbourSlice.js "npx vitest run tests/store/configDirectWriterExemptions.scan.test.js"
 
+# 55. Net-current extractor anchor walker — append an UNANCHORED corpus
+#     extractor to an anchored suite. The habitat walker must red: a
+#     create-or-replace regex without a line-start anchor takes a migration
+#     header's prose quote as a function body (the wave L-5 mis-extract class;
+#     098/101 carry live prose quotes today).
+printf '\n%s\n%s\n' 'const mutProbeUnanchored = /create\s+or\s+replace\s+function\s+public\.mut_probe\b[\s\S]*?\$\$;/i;' 'void mutProbeUnanchored;' >> tests/security/aiSpendSafety.pglite.test.js
+check_caught "extractor-anchor/unanchored corpus extractor planted" tests/security/aiSpendSafety.pglite.test.js "npx vitest run tests/lint/netCurrentExtractorAnchor.walker.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
