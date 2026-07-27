@@ -391,7 +391,10 @@ describe('THE COMMAND-REGISTRATION WALKER (no unregistered capability)', () => {
     // A floor guard. If a refactor breaks callArgumentSpan the census collapses
     // to ~0 and every other assertion here passes vacuously.
     expect(sites.length).toBeGreaterThanOrEqual(5);
-    expect(denominator.length).toBeGreaterThanOrEqual(11);
+    // 2026-07-27: content.definition.mass-update retired per R-5b #6; floor
+    // re-baselined 11 -> 10. The exact 10-kind toEqual in commandRegistry.test.js
+    // is the stronger pin; this stays a scanner-collapse floor only.
+    expect(denominator.length).toBeGreaterThanOrEqual(10);
   });
 
   test('every envelope site resolves to a kind OR is a declared dynamic source', () => {
@@ -456,7 +459,7 @@ describe('THE COMMAND-REGISTRATION WALKER (no unregistered capability)', () => {
     expect(staticKinds).toContain('campaign.party-impact.record');
     expect(staticKinds).toContain('settlement.pending-edits.commit');
     // And the dynamic vocabularies really contributed their families.
-    expect(denominator).toContain('content.definition.mass-update');
+    expect(denominator).toContain('content.environment.migrate');
     expect(denominator).toContain('import.campaign.attach-existing');
   });
 

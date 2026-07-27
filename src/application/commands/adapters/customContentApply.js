@@ -133,18 +133,14 @@ export const customContentEnvironmentMigrateSpec = spec(
   CUSTOM_CONTENT_COMMAND_KIND.ENVIRONMENT_MIGRATE,
   'Create and bind a reviewed immutable content-environment revision.',
 );
-export const customContentMassUpdateSpec = spec(
-  CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
-  'Append a reviewed set of definition revisions atomically.',
-);
-
+// content.definition.mass-update retired 2026-07-27 (R-5b #6): its spec was a
+// duplicate of create-revision, which is already N-entry and atomic.
 export const customContentCommandSpecs = Object.freeze([
   customContentCreateRevisionSpec,
   customContentArchiveSpec,
   customContentRestoreSpec,
   customContentPackImportSpec,
   customContentEnvironmentMigrateSpec,
-  customContentMassUpdateSpec,
 ]);
 
 /**

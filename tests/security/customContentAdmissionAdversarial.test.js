@@ -126,7 +126,7 @@ describe('custom-content hostile JSON admission', () => {
 describe('custom-content command and environment admission', () => {
   it('rejects duplicate stable identities before local or cloud execution', () => {
     expect(() => previewCustomContentCommand({
-      kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
+      kind: CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
       entries: [
         {
           definitionId: '11111111-1111-4111-8111-111111111111',
@@ -164,7 +164,7 @@ describe('custom-content command and environment admission', () => {
     })).toThrow(/repeats packEntryId/);
 
     expect(() => previewCustomContentCommand({
-      kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
+      kind: CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
       entries: [
         {
           definitionId: '22222222-2222-4222-8222-222222222222',
@@ -288,7 +288,7 @@ describe('custom-content command and environment admission', () => {
       data: { name: 'Review Hall' },
     };
     expect(() => previewCustomContentCommand({
-      kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
+      kind: CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
       entries: Array.from({ length: 1_001 }, () => entry),
     })).toThrow(/at most 1000/i);
 

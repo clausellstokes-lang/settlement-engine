@@ -161,11 +161,6 @@ const LIT_COVERED_BY = {
     evidence: 'refreshRelationshipMemory',
     note: 'the dedicated lit suite imports the module’s exports via the index barrel',
   },
-  tierOutcomeApply: {
-    file: 'tests/domain/evaluateInstitutionLifecycle.test.js',
-    evidence: 'applyTierOutcomeToSettlement',
-    note: 'tierResourceDynamics.js re-exports from ./tierOutcomeApply.js; the test imports the applier from there',
-  },
 };
 
 // ── AXIS 2 denominator: every simulation-rules `<x>Enabled` flag ─────────────

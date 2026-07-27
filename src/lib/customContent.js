@@ -58,7 +58,7 @@ export const customContentService = Object.freeze({
   delete: operation('delete'),
   archive: operation('archive'),
   restore: operation('restore'),
-  bulkInsert: operation('bulkInsert'),
+  // bulkInsert retired 2026-07-27 (R-5b #6) with content.definition.mass-update.
   importPack: operation('importPack'),
   exportArchive: operation('exportArchive'),
   importArchive: operation('importArchive'),

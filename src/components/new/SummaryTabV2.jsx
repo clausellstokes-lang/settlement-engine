@@ -26,6 +26,7 @@ import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
 import EconomyFreshnessNote from './EconomyFreshnessNote.jsx';
+import ReadSystemStateBar from '../settlement/ReadSystemStateBar.jsx';
 import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
@@ -99,6 +100,19 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           )}
         </div>
       </header>
+
+      {/* The 4-dimension glance (R-5b #22). The Summary used to open at
+          "sentence" with no glance above it; the strip restores the top rung of
+          the legibility ladder for read-mode and public-gallery readers, who
+          previously could not see these four dimensions at all (the store-bound
+          SystemStateBar is edit-mode only). The strip renders nothing only when
+          there is no settlement at all — deriveSystemState is total, so a
+          sanitized gallery projection degrades to neutral bands rather than
+          vanishing (measured, pinned). Derivation stays INSIDE the strip —
+          this tab remains read-only on its props, no store. */}
+      <div style={{ padding: '14px 18px 0' }}>
+        <ReadSystemStateBar settlement={settlement} />
+      </div>
 
       {/* Two-column body */}
       <div style={{

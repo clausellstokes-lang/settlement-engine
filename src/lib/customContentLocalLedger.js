@@ -624,7 +624,6 @@ function executeLocalCustomContentCommandUnlocked(
     outcome = applyLifecycleToLedger(next, preview.plan, timestamp);
   } else if (
     preview.plan.kind === CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION
-    || preview.plan.kind === CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE
     || preview.plan.kind === CUSTOM_CONTENT_COMMAND_KIND.PACK_IMPORT
   ) {
     outcome = applyEntriesToLedger(next, preview.plan, timestamp);

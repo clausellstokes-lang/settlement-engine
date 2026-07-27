@@ -2,7 +2,7 @@
  * standardCommandRegistry.js — the small live application capability set.
  *
  * Importers reach this module only through lazy authoring/Surveyor paths. Keeping
- * it separate from operationRegistry prevents the 172-action store census from
+ * it separate from operationRegistry prevents the store-wide action census from
  * becoming an accidental permission or AI-tool surface.
  */
 

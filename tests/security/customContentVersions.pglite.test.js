@@ -528,7 +528,11 @@ describe('migration 185 immutable custom content', () => {
     expect(restored.result.items[0].archivedAt).toBeNull();
   });
 
-  test('preflights every mass-update head before writing any revision', async () => {
+  // Migration 185 still lists the retired 'content.definition.mass-update' in its
+  // shared v_kind checks, but the SQL never branched on it — the multi-head CAS
+  // preflight, ordered locking and apply loop are the same rows create-revision
+  // takes. This test rides create-revision since the retirement (R-5b #6).
+  test('preflights every multi-entry head before writing any revision', async () => {
     const first = await apply(
       ALICE,
       'cmd:content:mass:first',
@@ -548,7 +552,7 @@ describe('migration 185 immutable custom content', () => {
       secondCreate,
     );
     const massPreview = previewCustomContentCommand({
-      kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
+      kind: CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
       entries: [{
         definitionId: DEFINITION,
         expectedHeadRevisionId: first.result.items[0].revisionId,
@@ -1057,7 +1061,7 @@ describe('migration 185 immutable custom content', () => {
 
   test('rejects duplicate direct identities even when the client adapter is bypassed', async () => {
     const admitted = previewCustomContentCommand({
-      kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
+      kind: CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
       entries: [{
         definitionId: DEFINITION,
         category: 'institutions',

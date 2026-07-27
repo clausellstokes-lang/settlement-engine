@@ -99,4 +99,17 @@ describe('faction compendium — custom factions (the FactionEventBanner promise
   test('factionCompendiumFlat threads custom factions through', () => {
     expect(factionCompendiumFlat({}, custom).some(o => o.name === 'Ash Circle')).toBe(true);
   });
+
+  // PIN 4 of the tier-gate family (see tests/domain/customContentTierGates.test.js).
+  // The composer catalog is deliberately TIER-BLIND: tierMin/tierMax on an authored
+  // faction are compendium chips, never an eligibility rule here. Entering a faction
+  // into a world is a DM decision on a user-action lane, so the catalog must not
+  // quietly hide an option the author can see in the Compendium.
+  test('tier gates never filter the composer catalog (composer tier-blindness)', () => {
+    const tiered = [{ name: 'Tiered Order', tierMin: 'metropolis', tierMax: 'metropolis' }];
+    expect(factionCompendiumFlat({}, tiered).some(o => o.name === 'Tiered Order')).toBe(true);
+    // And it lands in the Custom group like any other authored faction.
+    const groups = factionCompendium({}, tiered);
+    expect(groups[groups.length - 1].options.map(o => o.name)).toEqual(['Tiered Order']);
+  });
 });

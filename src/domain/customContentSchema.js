@@ -349,11 +349,34 @@ export function isCriminal(entity = {}) {
 }
 
 /**
+ * The buckets whose tier fields actually gate generation.
+ *
+ * Derived from schema/custom-content.manifest.json: exactly the categories that
+ * declare tierMin/tierMax with effect 'mechanical' AND name `eligibleCustomContent`
+ * among that field's consumers. The agreement between this list and the manifest
+ * is pinned by tests/domain/customContentTierGates.test.js, so the manifest and
+ * this filter can never silently disagree.
+ *
+ * Buckets OUTSIDE the list pass through UNFILTERED. That is the point: `factions`
+ * declares a tierMin whose effect is 'presentation' (its only consumer is the
+ * compendium attribute chip), and a presentation-classified field must never
+ * quietly acquire a generation effect by riding a generic loop (capability-atlas
+ * custom-content Gap 7c). A future bucket that genuinely needs gating declares
+ * mechanical tier fields and joins this list — the agreement pin reds until it does.
+ *
+ * Hardcoded rather than imported from customContentManifest.generated.js on
+ * purpose: this module sits inside the generation-time lazy boundary and must not
+ * pull the generated manifest into its closure. Hardcode + agreement test is the
+ * table-clerk pattern used elsewhere in this repo.
+ */
+export const TIER_GATED_BUCKETS = Object.freeze(['institutions', 'services', 'resources']);
+
+/**
  * Filter a whole customContent blob to the items eligible for a settlement of
  * `tier`, honoring each item's tier gate (§14 P2 — gates honored in generation).
- * Items with no gate pass through, so ungated buckets (resources, stressors, …)
- * are unaffected. Pure — never mutates the input; returns the blob unchanged
- * when no tier is given.
+ * Only TIER_GATED_BUCKETS are filtered at all; every other bucket passes through
+ * untouched. Inside a gated bucket an item with no gate of its own still passes.
+ * Pure — never mutates the input; returns the blob unchanged when no tier is given.
  *
  * @param {Object|null} customContent
  * @param {{ tier?: string }} [opts]
@@ -364,7 +387,9 @@ export function eligibleCustomContent(customContent, { tier } = {}) {
   /** @type {Record<string, unknown>} */
   const out = {};
   for (const [bucket, items] of Object.entries(customContent)) {
-    out[bucket] = Array.isArray(items) ? items.filter((it) => passesTierGate(it, tier)) : items;
+    out[bucket] = Array.isArray(items) && TIER_GATED_BUCKETS.includes(bucket)
+      ? items.filter((it) => passesTierGate(it, tier))
+      : items;
   }
   return out;
 }

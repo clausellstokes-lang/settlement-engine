@@ -335,7 +335,7 @@ describe('lazy admission is atomic before command persistence', () => {
   test('rejects a mixed batch before persisting any entry', async () => {
     const store = makeStore();
     const receipt = await store.getState().applyCustomContentCommand({
-      kind: 'content.definition.mass-update',
+      kind: 'content.definition.create-revision',
       entries: [
         {
           category: 'deities',

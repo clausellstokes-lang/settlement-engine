@@ -44,7 +44,6 @@ describe('application command registry', () => {
       'content.definition.restore',
       'content.pack.import',
       'content.environment.migrate',
-      'content.definition.mass-update',
     ]);
     expect(
       standardCommandRegistry.surveyorCapabilities().map((entry) => entry.kind),

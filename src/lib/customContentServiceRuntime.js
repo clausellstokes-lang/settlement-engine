@@ -450,7 +450,6 @@ function appliedResultMatchesPlan(preview, result, perEntry) {
   const entries = Array.isArray(plan.entries) ? plan.entries : [];
   if (
     plan.kind === CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION
-    || plan.kind === CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE
     || plan.kind === CUSTOM_CONTENT_COMMAND_KIND.PACK_IMPORT
   ) {
     return (
@@ -735,28 +734,9 @@ async function restore(id, options = {}) {
   return appliedOrThrow(await executePreview(preview, options));
 }
 
-async function bulkInsert(items, options = {}) {
-  const entries = (items || []).map(({ category, item }) => ({
-    definitionId: makeCustomContentUuid(),
-    category,
-    data: {
-      ...item,
-      localUid: item?.localUid || makeCustomContentLocalUid(),
-    },
-  }));
-  if (!entries.length) return [];
-  const preview = previewCustomContentCommand({
-    kind: CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
-    entries,
-  }, options);
-  const receipt = appliedOrThrow(await executePreview(preview, options));
-  return (receipt.result?.items || []).map(item => ({
-    category: definitionContext.get(String(item.definitionId || item.id))?.category
-      || entries.find(entry => entry.definitionId === item.definitionId)?.category,
-    item,
-    commandReceipt: receipt,
-  }));
-}
+// bulkInsert() retired 2026-07-27 (R-5b #6) with content.definition.mass-update:
+// it had zero callers (the local→cloud cutover uses importArchive), and a batch
+// of N definitions is a create-revision preview with N entries.
 
 async function importPack(pack, prepared, options = {}) {
   if (prepared?.rejected?.length || prepared?.diagnostics?.atomic === false) {
@@ -853,7 +833,6 @@ export const customContentService = {
   delete: archive,
   archive,
   restore,
-  bulkInsert,
   importPack,
   exportArchive,
   importArchive,

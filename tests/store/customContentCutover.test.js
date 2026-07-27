@@ -17,7 +17,6 @@ const service = vi.hoisted(() => ({
   localExportArchive: vi.fn(),
   localClearArchivesAfterSnapshot: vi.fn(),
   importArchive: vi.fn(),
-  bulkInsert: vi.fn(),
   add: vi.fn(),
 }));
 
@@ -173,7 +172,10 @@ describe('premium custom-content local-to-cloud cutover', () => {
       .toBe('1');
     expect(store.getState().loadCustomContentFromCloud)
       .toHaveBeenCalledTimes(1);
-    expect(service.bulkInsert).not.toHaveBeenCalled();
+    // The bulk verb is retired (R-5b #6). Leaving it off the mock makes any
+    // reintroduced service.bulkInsert(...) call in the cutover path throw here
+    // instead of passing a vacuous not.toHaveBeenCalled().
+    expect(service.bulkInsert).toBeUndefined();
     expect(service.add).not.toHaveBeenCalled();
   });
 

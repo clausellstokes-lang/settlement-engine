@@ -33,8 +33,9 @@ export default function SystemStateBar() {
 
 /**
  * Presentational 4-dimension grid (UX overhaul Phase 2). The store-bound
- * SystemStateBar above and the read-view ReadSystemStateBar below both render
- * through this, so the promoted read-view strip and the edit-mode bar share ONE
+ * SystemStateBar above and the read-view ReadSystemStateBar (its own file,
+ * ReadSystemStateBar.jsx — NOT below in this one) both render through this, so
+ * the read-view strip in the dossier Summary and the edit-mode bar share ONE
  * visual. Pure — takes the already-derived systemState; no store read.
  * @param {{ systemState: any, title?: string }} props
  */

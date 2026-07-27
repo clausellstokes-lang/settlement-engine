@@ -227,10 +227,9 @@ export const createCustomContentRuntimeActions = (set, get) => {
         });
         return receipt;
       }
-      const needsDefinitionId = (
-        kind === 'content.definition.create-revision'
-        || kind === 'content.definition.mass-update'
-      );
+      // Single-kind since content.definition.mass-update retired (R-5b #6);
+      // create-revision carries every multi-entry batch.
+      const needsDefinitionId = kind === 'content.definition.create-revision';
       entries.push({
         definitionId: entry.definitionId
           || (needsDefinitionId ? makeDefinitionId() : null),

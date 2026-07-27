@@ -29,13 +29,19 @@ import {
 
 export const CUSTOM_CONTENT_COMMAND_SCHEMA_VERSION = 1;
 
+// RETIRED 2026-07-27 (owner ruling R-5b item #6, capability-atlas gap
+// "op-but-no-exposure"): `content.definition.mass-update` was a strict synonym of
+// create-revision at every layer — same entries[] budget, same server branches,
+// zero product callers — so bulk append ships today as a multi-entry
+// create-revision (1..MAX_ENTRIES). Migration 185 still names the retired string
+// in its shared kind lists; that is inert server vocabulary no client can emit
+// (in-place edits to a committed migration are owner-gated).
 export const CUSTOM_CONTENT_COMMAND_KIND = Object.freeze({
   CREATE_REVISION: 'content.definition.create-revision',
   ARCHIVE: 'content.definition.archive',
   RESTORE: 'content.definition.restore',
   PACK_IMPORT: 'content.pack.import',
   ENVIRONMENT_MIGRATE: 'content.environment.migrate',
-  MASS_UPDATE: 'content.definition.mass-update',
 });
 
 const KNOWN_KINDS = /** @type {Set<string>} */ (
@@ -44,7 +50,6 @@ const KNOWN_KINDS = /** @type {Set<string>} */ (
 const ENTRY_COMMAND_KINDS = /** @type {Set<string>} */ (new Set([
   CUSTOM_CONTENT_COMMAND_KIND.CREATE_REVISION,
   CUSTOM_CONTENT_COMMAND_KIND.PACK_IMPORT,
-  CUSTOM_CONTENT_COMMAND_KIND.MASS_UPDATE,
 ]));
 const LIFECYCLE_COMMAND_KINDS = /** @type {Set<string>} */ (new Set([
   CUSTOM_CONTENT_COMMAND_KIND.ARCHIVE,
