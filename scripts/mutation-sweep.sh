@@ -280,18 +280,21 @@ perl -0pi -e "s/faction-key\/reversed name-precedence read/zzz-phantom-label/" s
 check_caught "meta/manifest label tampered" scripts/mutation-coverage-manifest.json "npx vitest run tests/lint/mutationCoverageManifest.test.js"
 
 # 24. State-lifecycle totality — an UNREGISTERED persisted family lands in the
-#     campaign record (createCampaign gains a key absent from
+#     campaign record (the new-campaign envelope gains a key absent from
 #     CAMPAIGN_RECORD_REGISTRY). The E-C round-trip walker must red: every
 #     persisted family needs registered migrate + undo policies.
-#     (Isolation-proven at fold: mutated 1-red/21-green, reverted 22/22.)
+#     (Re-anchored 2026-07-27: the envelope literal moved from campaignSlice's
+#     createCampaign into buildNewCampaign in campaignImportedCreation.js; the
+#     old anchor made the plant a silent no-op and the step scored MISSED.
+#     The python raises on a missing anchor so a future move fails LOUD.)
 python3 - <<'PYEOF'
-src_path = 'src/store/campaignSlice.js'
+src_path = 'src/store/campaignImportedCreation.js'
 src = open(src_path).read()
-i = src.index("createCampaign: (name) =>")
+i = src.index("export function buildNewCampaign")
 j = src.index("pendingSync: true,", i) + len("pendingSync: true,")
-open(src_path, 'w').write(src[:j] + "\n        __mutLifecycleProbe: 1," + src[j:])
+open(src_path, 'w').write(src[:j] + "\n    __mutLifecycleProbe: 1," + src[j:])
 PYEOF
-check_caught "state-lifecycle/unregistered campaign family" src/store/campaignSlice.js "npx vitest run tests/store/lifecycleRoundTrip.test.js"
+check_caught "state-lifecycle/unregistered campaign family" src/store/campaignImportedCreation.js "npx vitest run tests/store/lifecycleRoundTrip.test.js"
 
 # 25. AI-wall census — a NEW model-calling edge function appears with no wall
 #     disposition (the N-1 sweep class: a surface added after the census).

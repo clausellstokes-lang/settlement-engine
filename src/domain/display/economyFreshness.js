@@ -132,7 +132,7 @@ const REBUILD_SOURCES = new Set(['regenerate']);
  * @returns {boolean}
  */
 export function eventTypeShiftsEconomy(type) {
-  const keys = RERUN_KEYS_FOR_EVENT[/** @type {string} */ (type)];
+  const keys = /** @type {Record<string, string[]>} */ (RERUN_KEYS_FOR_EVENT)[/** @type {string} */ (type)];
   return Array.isArray(keys) && keys.some(k => ECONOMY_READMODEL_KEYS.includes(k));
 }
 
