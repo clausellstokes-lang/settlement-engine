@@ -82,12 +82,52 @@ Exit: one writer per record family or a declared, pinned reason for two; no sile
 Findings: lever-field normalization to `traced input causes` (atlas + slice conventions, CONFLICT 4 cure); advertised-undo invariant test (every non-null undoToken must arm — the class guard for queue #5); dead-op ratchet (only-shrinks inventory of the 31, pending the owner's retire-vs-wire word); premium-gate single-source scan (the R-0 deity cure generalized); walkers for what still lacks them per structural-prevention.
 Exit: the bug classes this program fixed have no habitat left; ratchets green over the final tree.
 
-## Wave R-5 — OWNER-GATED (not started without sign-off)
-Why gated: golden shifts, T4 regens, paid-feature builds, capability-vs-repair calls a code revert cannot cleanly undo.
-- Network effects as declared engine input (shifts goldens) vs advisory label — owner pick (queue #8).
-- The 31 dead ops: retire vs wire, per family (queue #21) — R-4's ratchet holds the line meanwhile.
-- VersionsTab feature build (manual snapshot + diff) vs the R-1 copy fix standing (queue #18).
-- regenSection('history') destruction (T4, standing park) · deity pool removal (T4) · G9/G10 polarity band fix (one-time visible shift, queue #3) · Edit toggle keep/retire (#1) · bands-vs-numbers (#20) · mass-update retire-vs-ship (#6) · ReadSystemStateBar remount-vs-delete (#22) · provenance-ledger merge (#10) · scene/canonical address join (#15) · flag-on review blackout cure ships with G-2b promotion, not before — NOTE (2026-07-27, R-3 verify): the class WIDENED under R-2's premium gate; see the R-3 entry in Deferred.
+## Wave R-5 — EXECUTING (owner sign-off 2026-07-27: "do all of these" over the recommendations-recorded queue)
+The gate opened: the owner ratified the recorded recommendations wholesale. Disposition of every Part VII item + plan addition, in three tranches. Standing laws still bind: THE PROMISE (no same-seed drift without a declared, owner-signed shift — items whose execution shifts goldens land as DECLARED one-time shifts with re-records named), no cross-program collisions (T4 ONE-REGEN batch items belong to the ledger lane), pushes/deploys owner-executed.
+
+**R-5a — RULINGS RATIFIED IN PLACE (doc-only; each was recommendation-recorded; the owner's blanket word executes it):**
+- #1 Edit toggle: KEEP (the premium paywall seam; the Workbench inspector routes through it; retire re-opens G-2a's question at its promotion, not before).
+- #15 scene/canonical address spaces: NOT JOINED, ratified (the atlas's own recommendation).
+- #16 settlementScene3dDefault promotion: STAYS PARKED — the promotion contract requires external human evidence; a chat ratification cannot substitute (contract outranks).
+- CONFLICT 4: Option 1 ratified (recorded above + atlas §5).
+- Lapsed-shed deity judgment: KEEP (R-0 recommendation confirmed).
+- uncanonize-by-id verb: LEAVE until G-2b family migration (R-1 recommendation confirmed).
+- Founder disjunct: KEEP verbatim in viewerAuthority (future-proof; retiring stays available any time as a one-line edit).
+- Terrain crawler twin: KEEP routed (R-4 recommendation confirmed).
+- SessionMode freshness note: KEEP wired (P-3 judgment confirmed).
+- Rename-undo semantics + destroy-blob widening + eventId data-only addressing: all three R-3/R-4 judgments RATIFIED as shipped.
+- Copyable/exported markdown staleness caveats: SCREEN-ONLY affordance ratified (export text stays clean; revisit only if users report confusion).
+- #12 regenSection('history'): the structural cure is BUILT (src/domain/historyPreservation.js, tracked); the residual generated-beat identity question (historicalEvents[]/currentTensions[]) stays a recorded design note for the G-2b family migration — not a bug.
+- #2 residual (tombstone-vs-successor dial): the consent barrier + EXPOSE_CORRUPTION phase-independence shipped in R-1; the dial is a G-2b-desk product design, recorded there.
+
+**R-5b — IMPLEMENT (Opus lanes per the model split; two batches by risk):**
+Batch 1 (display/registry/small-surface; no golden movers except where declared):
+- #3 G9/G10 polarity banding fix — DECLARED one-time visible shift (band words, colours, Library sort, PDF); pins + the declaration ride the lane.
+- #8 network effects → ADVISORY LABEL (honest, zero drift; wiring-as-engine-input stays a future owner-signed tuning candidate — recorded, not lost).
+- #20 stat-bars → BANDS (legibility law) + extend the OverviewTab raw-ratio retirement to DefenseTab's sibling.
+- Lapsed-panel Remove/Clear controls surfaced (R-0 queue, recommended yes — seam already allows shed).
+- catchUpCampaignWorld undo advertising PROMOTED (registry row + compendium regen; R-0 recommendation).
+- #28 G5 FROZEN_VS_LIVE manifest rows — the five land as declared snapshot rows with displayRules (the enforcement machinery exists; the atlas amendment names the shape).
+- npcAuthoringAllowed → viewerCanAuthor ALIGNMENT (paid-surface change, owner-authorized here): free/anon Create-flow users stop seeing NPC authoring levers they cannot commit — also narrows the flag-on blackout widening. Declared.
+- #17 3D quality-ceiling persistence (small saved-state addition via the persist allowlist — persistence-content, not schema).
+- Reload-into-paused interval arming (pre-interval snapshot into the pausedAdvance cursor — the R-0 deferral).
+Batch 2 (feature/architecture builds; design-first, then implement):
+- #18 VersionsTab BUILD: manual snapshot on demand (recordSnapshot is registered and armed — wire the button) + side-by-side diff view; the paid pitch becomes true.
+- #14 faction-rename convergence + door, per the recorded direction (store lane's list resolution + dual-write + library lane's cascade).
+- #21 dead-op families: per-family retire-vs-wire executed; sharpest first — BUILD THE LOCKS ENGINE (setLock/clearLocks become real; state.locks consulted by regen paths; this is the regen-edit-loss structural cure the descriptions already promise). Families with no wiring case: RETIRE (registry rows removed + compendium regen + the ratchet shrinks).
+- #10 provenance-ledger MERGE (composer vs pulse writers of institutions/resources) — investigation lane first (the undo rings stay separate BY DESIGN; the merge is the provenance record, not the stacks).
+- #22 ReadSystemStateBar: investigate remount-vs-delete, execute the winner.
+- #6 mass-update: investigate the one-call-site-away claim; ship the bulk lane if the spine holds, else retire the spec.
+- #24 factions bucket: ship-or-retire per investigation; tierMin reclassified either way.
+- #13 deity sub-items (lawAxis drop on organic conversion; undo-less patron replacement; third converted: namespace) — investigate seeded-advance drift exposure first; implement what lands drift-free; anything drift-bearing joins the T4 batch with a written note.
+
+**R-5c — DEFERRED WITH REASONS (not silently dropped):**
+- Deity pool removal + #29 Herald record ids: T4 ONE-REGEN batch, ledger lane's sequencing — executing here would collide cross-program.
+- #23 CC-CLOUD-CUTOVER rehearsal + platform evidence: owner-run infrastructure (production clone); code side is committed and clean.
+- #26 flag-on review blackout full cure: rides G-2b promotion (its blocker list), narrowed meanwhile by the npcAuthoringAllowed alignment above.
+- #11 table-event economy verbs: G-2b Adjudication-desk product design — new vocabulary belongs to that program's desk spec.
+- #30 DM-parked proposals sweep / order-8 film / K-1 budget / pricing sheet: other lanes' standing picks (ledger lane).
+- #5/#7/#9/#19/#25/#27/#4-two-writer/#2-barrier: ALREADY DELIVERED by R-0..R-4 (recorded per wave above); #4's three-lane parity question (FORCE_ABANDON) stays a recorded design note for G-2b.
 
 ## Sequencing rationale
 Metadata truth before behavior (R-0 makes the registry stop lying so later waves can trust it); destruction/undo honesty before mounting new reachability (R-1 before R-2 — do not widen access to lanes whose recovery story is false); writer unification after both sides are honest (R-3); correctness-asserting prevention deliberately last (R-4) so manifests never enshrine the pre-fix lies; owner-gated last (R-5) because none of it blocks the rest.
@@ -149,4 +189,4 @@ Added by Wave R-3:
 - Dead 'founder' tier branch (no code path produces auth.tier==='founder'; founder-transfer sets tier:'premium' + is_founder): R-4 single-sources the spelling RETAINING the disjunct verbatim; retire-or-keep is the owner's word.
 - src/domain/aiCharter.js voice reds (foreign L-1 file): owner should direct the L-1 lane to strip the 23 em dashes or sign a baseline raise — the remediation program will not touch it.
 Added by Wave R-4 (lane P-5):
-- **CONFLICT 4 lever-field normalization — OWNER RULING NEEDED (the one item R-4 could not mechanize).** Three options, recommendation first. **(1) RECOMMENDED — leave the slices verbatim and keep §3 as the reader's decoder ring.** The atlas is a dated snapshot whose evidentiary value rests on the verbatim guarantee; the corrected §3 rule now tells a reader exactly how to read each of the four families, which is what a consumer actually needs. Cost: `traced input causes` stays aspirational, and gap #172b stays open by construction. **(2)** Re-adjudicate: authorize rewriting the lever field on all 107 influenceable rows, accepting that family-A prose gets SPLIT and the verbatim guarantee is formally retired for those rows — a genuine re-audit, not a rename, and it needs its own verification pass because it changes what the audit says. **(3)** Normalize only economy-family + power-faith (the 25 rows where the split is already clean), leaving derived-influenceable's inversion and family A's hybrids alone — cheap, but it makes the file MORE inconsistent, not less, so it is recommended against. Nothing else in R-0..R-4 depends on this.
+- **CONFLICT 4 lever-field normalization — RULED (owner, 2026-07-27: Option 1 ratified — slices verbatim, §3 as decoder ring, #172b open by construction; options 2/3 retired; atlas §5 STATUS updated).** Original menu kept for the record: Three options, recommendation first. **(1) RECOMMENDED — leave the slices verbatim and keep §3 as the reader's decoder ring.** The atlas is a dated snapshot whose evidentiary value rests on the verbatim guarantee; the corrected §3 rule now tells a reader exactly how to read each of the four families, which is what a consumer actually needs. Cost: `traced input causes` stays aspirational, and gap #172b stays open by construction. **(2)** Re-adjudicate: authorize rewriting the lever field on all 107 influenceable rows, accepting that family-A prose gets SPLIT and the verbatim guarantee is formally retired for those rows — a genuine re-audit, not a rename, and it needs its own verification pass because it changes what the audit says. **(3)** Normalize only economy-family + power-faith (the 25 rows where the split is already clean), leaving derived-influenceable's inversion and family A's hybrids alone — cheap, but it makes the file MORE inconsistent, not less, so it is recommended against. Nothing else in R-0..R-4 depends on this.
