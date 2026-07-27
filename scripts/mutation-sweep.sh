@@ -64,6 +64,12 @@ MUTATED_FILES=(
   supabase/migrations/182_operational_obligation_health.sql
   supabase/migrations/183_application_command_journal.sql
   supabase/migrations/184_import_reconciliation_commands.sql
+  src/store/canonEventCommandTransaction.js
+  src/domain/display/economyFreshness.js
+  src/components/new/tabs/EconomicsTab.jsx
+  src/store/operationRegistry.js
+  src/store/aiSlice.js
+  src/store/neighbourSlice.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -454,6 +460,61 @@ check_caught "town-scene/canvas context-loss listener detached" src/components/t
 #     ship lever-less (or worse, wired without a lifecycle trace).
 perl -0pi -e "s/    'arrivalScene',\n/    'arrivalScene',\n    'zzzMutsweepProsePath',\n/" src/domain/userEdits.js
 check_caught "edit-prose/wired-subset lockstep drift" src/domain/userEdits.js "npx vitest run tests/store/editProseQueueSpine.test.js"
+
+# ── Capability-remediation (R-3/R-4) standing plants ─────────────────────────
+# Steps 48-54 were carried as kind:"rationale" entries with EXECUTED build-time
+# proof while their targets were uncommitted in the live shared tree (the E-A
+# amendment at b0fc33e1: an untracked/dirty mutation target is ineligible, because
+# check_caught's `git checkout --` revert would destroy concurrent work rather
+# than restore the plant). The program folded at b0a137db, every target below is
+# now tracked and clean, so the deferred upgrade lands here.
+
+# 48. R-3 narrative-stamp single writer — re-inline a direct
+#     appendEventNarrativeSnapshot call at the command lane. The single-writer
+#     source scan must red: both lanes stamp through stampPreEventNarrative, and
+#     a second direct writer is exactly how the two lanes' parity drifted before.
+perl -0pi -e "s/  return stampPreEventNarrative\(beforeSave, \{/  if (beforeSave === undefined) appendEventNarrativeSnapshot(beforeSave, {});\n  return stampPreEventNarrative(beforeSave, {/" src/store/canonEventCommandTransaction.js
+check_caught "narrative/stamp re-inlined at the command lane" src/store/canonEventCommandTransaction.js "npx vitest run tests/store/narrativeStampParity.test.js"
+
+# 49. R-3 economy stale-window detector — empty the rebuild-boundary vocabulary,
+#     so no trail source can ever clear an accumulated economy shift. The
+#     boundary pins must red (a regenerate no longer resets the window).
+perl -0pi -e "s/const REBUILD_SOURCES = new Set\(\['regenerate'\]\);/const REBUILD_SOURCES = new Set([]);/" src/domain/display/economyFreshness.js
+check_caught "economy-freshness/rebuild boundary vocabulary emptied" src/domain/display/economyFreshness.js "npx vitest run tests/domain/economyFreshness.test.js"
+
+# 50. R-3/R-4 economy stale-window notes — silence the shared note leaf at the
+#     tallies surface. The EconomicsTab pin, the same-sentence pin and the
+#     five-surface one-copy-unit pin must all red: a tally surface may not show a
+#     stale read-model with no freshness sentence.
+perl -0pi -e "s|<EconomyFreshnessNote settlement=\{s\} variant=\"tallies\" />|<span />|" src/components/new/tabs/EconomicsTab.jsx
+check_caught "economy-freshness/tallies note silenced at EconomicsTab" src/components/new/tabs/EconomicsTab.jsx "npx vitest run tests/components/economyFreshnessNote.test.jsx"
+
+# 51. R-4 advertised-undo walker — re-advertise the de-advertised updatePlacement
+#     row (undoToken:'mapUndo', undoState:'action'). The walker must red on both
+#     sides: the advertiser carries no hand-audited ARMING entry, and the
+#     de-advertised regression guard sees the promise return.
+perl -0pi -e "s/(opType:'updatePlacement'[^\n]*?)undoToken:null, undoState:'none'/\${1}undoToken:'mapUndo', undoState:'action'/" src/store/operationRegistry.js
+check_caught "undo-arming/de-advertised updatePlacement re-advertises mapUndo" src/store/operationRegistry.js "npx vitest run tests/store/advertisedUndoArming.walker.test.js"
+
+# 52. R-4 dead-operation ratchet — land a registered operation no file in src
+#     consumes. The shrink-only ledger must red on JOINS: an unreachable op may
+#     not ship, and may not be laundered into the frozen owner-queue-#21 list.
+perl -0pi -e "s/\n  replaceAllPlacements: \{/\n  probeOrphanOp: { opType:'probeOrphanOp', label:\"Probe orphan op\", description:\"Mutation-sweep probe row: registered, consumed by nothing.\", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'none' },\n  replaceAllPlacements: {/" src/store/operationRegistry.js
+check_caught "dead-op/unconsumed registry row joins the frozen ledger" src/store/operationRegistry.js "npx vitest run tests/store/deadOperationRatchet.test.js"
+
+# 53. R-4 saved-settlement patch-key walker — write a key the allowlist refuses at
+#     a real call site. updateSavedSettlement refuses the patch ATOMICALLY and no
+#     caller reads the envelope, so in production the whole write vanishes; the
+#     live source census must red rather than let that ship silently.
+perl -0pi -e "s/chronicle: nextChronicle \};\n    get\(\)\.updateSavedSettlement\(saveId, \{ aiData: nextAiData \}\);/chronicle: nextChronicle };\n    get().updateSavedSettlement(saveId, { aiData: nextAiData, aiRevisionCount: 1 });/" src/store/aiSlice.js
+check_caught "patch-keys/call site writes an unadmitted key" src/store/aiSlice.js "npx vitest run tests/store/savedSettlementPatchKeysWalker.test.js"
+
+# 54. R-4 config single-door scan — plant a fifth direct config-draft writer
+#     outside the enumerated exemptions. The exact-set scan must red: a write that
+#     never passes isAllowedConfigKey is the bypass R-3's one-validated-door claim
+#     depends on not existing.
+perl -0pi -e "s/    set\(state => \{ state\.importedNeighbour = null; \}\),/    set(state => { state.importedNeighbour = null; state.config.rogueKey = 1; }),/" src/store/neighbourSlice.js
+check_caught "config-door/fifth direct draft writer" src/store/neighbourSlice.js "npx vitest run tests/store/configDirectWriterExemptions.scan.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
