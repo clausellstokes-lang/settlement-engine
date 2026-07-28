@@ -71,6 +71,8 @@ MUTATED_FILES=(
   src/store/operationRegistry.js
   src/store/aiSlice.js
   src/store/neighbourSlice.js
+  src/generators/steps/assembleInstitutions.js
+  tests/fixtures/distribution-envelopes.manifest.json
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -540,6 +542,47 @@ check_caught "extractor-anchor/unanchored corpus extractor planted" tests/securi
 #     new unguarded hooks anywhere in the corpus.
 printf '\n%s\n' 'beforeAll(async () => { const mutProbeDb = new PGlite(); void mutProbeDb; });' >> tests/security/systemConfigPublicRead.pglite.test.js
 check_caught "pglite-hook-timeout/unguarded boot hook planted" tests/security/systemConfigPublicRead.pglite.test.js "npx vitest run tests/security/pgliteHookTimeoutRatchet.test.js"
+
+# ── Epistemic-prevention + deity-doctrine post-fold standing plants ──────────
+# These five gates carried executed build-time proof while their gate or target
+# files were untracked/dirty. Fold 5f8dc783 made every target tracked and clean,
+# so the E-A amendment now permits attribution-controlled standing plants.
+
+# 57. Effect reachability — restore the historical over-broad protection law at
+#     custom subsumption. Exact custom references may supersede ordinary custom
+#     provenance; the generic protection predicate makes that authored effect
+#     unreachable. The pinned corpus must report the one dead stratum by receipt.
+perl -0pi -e "s/!isProtectedFromCustomSubsumption\(candidate, \{\n\s+exactTarget: Boolean\(target\.refId\),\n\s+\}\)/!isProtectedGenerationEntity(candidate)/" src/generators/steps/assembleInstitutions.js
+check_caught "epistemic/effect reachability custom subsumption killed" src/generators/steps/assembleInstitutions.js "npx vitest run tests/generators/effectReachability.coverage.test.js --no-file-parallelism"
+
+# 58. Distribution-envelope power — make the first registered upper bound sit
+#     exactly on its expected count. loosenPending keeps the tighter-than-derived
+#     shape admissible, isolating the zero-margin / under-2-sigma POWER failure.
+perl -0pi -e 's/("id": "capture\.ordinaryCity\.corrupted"[\s\S]*?"bound": )7(,\n\s+"margin": )6\.008([\s\S]*?"loosenPending": )false/${1}1${2}0${3}true/' tests/fixtures/distribution-envelopes.manifest.json
+check_caught "epistemic/distribution bound collapsed to zero margin" tests/fixtures/distribution-envelopes.manifest.json "npx vitest run tests/lint/distributionEnvelopePower.test.js --no-file-parallelism"
+
+# 59. Anchored negatives — land one bare absence assertion in a scanned tree.
+#     The habitat walker must refuse it because an empty subject would pass for
+#     the wrong reason and the new file has no frozen allowance.
+check_caught_planted "epistemic/unanchored negative assertion planted" \
+  tests/property/_mutsweepUnanchoredNegative.test.js \
+  "import { expect, test } from 'vitest'; test('mutation probe', () => { expect([]).not.toContain('mutsweep'); });" \
+  "npx vitest run tests/lint/negativeAssertionAnchor.walker.test.js --no-file-parallelism"
+
+# 60. Seed-loop totality — land a corpus loop that asserts inline and therefore
+#     stops at the first failing seed. The zero-habitat walker must refuse it.
+check_caught_planted "epistemic/bare seed loop planted" \
+  tests/property/_mutsweepBareSeedLoop.test.js \
+  "import { expect, test } from 'vitest'; test('mutation probe', () => { for (const seed of ['a', 'b']) { expect(seed).toBeTruthy(); } });" \
+  "npx vitest run tests/lint/seedLoopTotality.walker.test.js --no-file-parallelism"
+
+# 61. Deity doctrine — reintroduce a premade pool module under the retired
+#     generator habitat. Scan 1 must reject the DEITY_POOL producer while the
+#     legacy persisted-pantheon reader remains untouched.
+check_caught_planted "deity-doctrine/premade deity pool module reintroduced" \
+  src/generators/data/_mutsweepDeityPool.js \
+  "export const DEITY_POOL = Object.freeze([]);" \
+  "npx vitest run tests/lint/noPremadeDeityPool.walker.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
