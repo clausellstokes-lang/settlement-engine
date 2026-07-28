@@ -385,8 +385,12 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //     satellite (+596 B, §10.4, blocked since 2026-07-14), W2 feed-retention
 //     (+363 B, round-21), W-R2-DEPTH (~100 B), and slack. The reclaim paid for
 //     the whole queue ~15× over; NET −55,503 B vs the pre-G8 1,121,942.
+// → 1,040,000 (RATCHET #11 — 2026-07-28 ledger-lane reconciliation):
+//   this review-fixes checkout is formally a ledger/marketing lane, not a code
+//   merge source. Its copied constitutional budget is aligned to the code-of-
+//   record composite so the retired branch cannot advertise a looser wall.
 // Monotone-down only; raises are owner-signed, never incidental.
-const CLOSURE_BUDGET_BYTES = 1_066_400;
+const CLOSURE_BUDGET_BYTES = 1_040_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

@@ -6,7 +6,7 @@
 ### composite worktree, claude/the-composite @ aad6265e. Recon receipts inline
 ### (file:line anchors verified against that tip).
 ### AMENDED 2026-07-19 (owner ruling "do that!"): §6.8 THE STEWARDSHIP LIMB —
-### lifetime promise UNTOUCHED; 5-year abandonment · $49.50 standing buyback ·
+### lifetime promise UNTOUCHED; 5-year abandonment · $25 standing buyback ·
 ### dormancy nudge. Slice M-10; terms §12 + Q1 updated.
 
 ## §0 FROZEN LAWS (violating any of these is a design defect)
@@ -955,7 +955,9 @@ and the Stripe Tax question.)
 ## §13 OPEN QUESTIONS (owner-gated; each ships with a recommendation and a safe
 default that requires no answer to build)
 1. ESCHEAT — PARTIALLY RULED 2026-07-19: abandonment policy is now DEFINED
-  (§6.8: 5y + 90d notices → escheat + claimable $49.50). REMAINING open sliver:
+  (§6.8: 5y + 90d notices → escheat + claimable $25). This is intentionally
+  distinct from the $49.50 outgoing-holder share of a completed $99 transfer.
+  REMAINING open sliver:
   DELETED-account orphan seats (holder SET NULL) still park at escheat with no
   resale path, released only by owner decision (estate process).
 2. SURVEYOR PRICE + BILLING SHAPE: monthly price set in Stripe by the owner;

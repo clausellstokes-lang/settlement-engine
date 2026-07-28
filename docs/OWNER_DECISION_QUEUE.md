@@ -18,6 +18,115 @@
 > same-day delegation directive — "I leave all decisions to you… best option even if
 > it introduces risk" — as proposed rulings, veto open).
 
+## §0 · 2026-07-28 DELEGATED DISPOSITION — current truth
+
+The owner delegated every remaining engineering, product, and taste choice to
+the manager's best judgment. The rulings below therefore close the decision
+questions even where execution or external proof is still pending. This
+delegation does **not** manufacture facts only a human or production system can
+establish: legal identity/counsel advice, mailbox and provider delivery,
+production credentials/state, a human Chronicle review, an owner taste walk,
+or uncoached-user evidence remain physical gates rather than open design picks.
+
+**Launch posture.**
+
+- **T1 RULED + EXECUTED:** masters live outside the repository at
+  `/Users/cstokes/Desktop/settlementforge-marketing-masters`; the tracked
+  marketing asset README records the split.
+- **T3 RULED:** 30 years is the useful behavioral horizon, 100 years is the
+  release/endurance gate, and 300 years is research only. The automated release
+  matrix is orthogonal rather than Cartesian. No release certification may be
+  signed until its current behavioral failures are investigated and a real
+  human completes the source-bound Chronicle sample.
+- **T4 RULED + BUILT** on `claude/composite-r4` at `03685467`: the nine tuning
+  bands are ratified; obligation decay has one unconditional 0.02 owner; the
+  town/city depletion steps remain 0.35/0.35.
+- **T5 RULED:** light the eight charter flags plus Roads only through the three
+  deep presets (`dramatic_campaign`, `living_realm`, `full_simulation`), not the
+  default rules and not the four dark presets. `memoryWeave` and every other
+  deep-coupling flag stay out. The same declared batch owns EP-g2, reader-facing
+  humanization, the exact 180+3 dash census, the two NPC-goal prose pools, the
+  H15/H16/H4 vocabulary repairs, and one scoped golden recapture.
+- **T10/T14/T15 RULED:** do not present legal drafts as counsel-approved, do not
+  accept an unsoaked public deploy, and do not publish the microsite before the
+  soak, finished-site walk, and legal gates pass.
+- **T11 RULED:** customer support will be `support@settlementforge.com`; urgent
+  operations will use the separate `ops@settlementforge.com` destination through
+  an external monitor. Neither is considered active until mailbox/DNS/provider
+  setup and an end-to-end delivery receipt exist.
+
+**Engine rulings.**
+
+- **G1** remains advisory, not a new engine input. **G2/G4/G5/G8/G11** close on
+  the shipped polarity, deity-retirement, cascade, version-2 hash, and stable-ID
+  contracts; do not invent a second incompatible `fkey` namespace.
+- **G3** stays parked: history/tension edit doors remain closed until those
+  records have stable identity and non-destructive provenance. **G6** keeps
+  0.35/0.35. **G7** keeps the siege floor at 10 and moves the expensive
+  distribution corpus to research/nightly rather than weakening it.
+- **G9** ratifies the current truth-aligned founding prose. **G10** waits for
+  release reachability evidence. **G12** keeps the safer whole-docket forecast.
+  **G13** waits for a truthful per-cell map bridge.
+
+**Product/taste rulings.**
+
+- **P1/P2:** keep **The Herald**, its exact-six routing, and current post-advance
+  behavior. **P3:** label the realm-wide W/L as the **realm contest record**
+  (siege, conquest, defense, supplier-flip contests); Pantheon W/L remains
+  conversion contests. **P4:** do not fabricate a replacement Oracle slot.
+- **P5/P6/P7:** keep the global Edit toggle for launch, keep the ratified stat
+  bands, and treat Order 8 as backdrop rather than a rebuild. **P8:** closed as
+  stale—the realm journey film exists and is wired. **P9:** retain the `bg`
+  media path and retire the losing `journey` path.
+- **P10/P11/P12:** retain the About pivot, six-tab Handbook, and split hero;
+  number Commons 05 and Set Out 06 and retire the stale map waypoint.
+  **P13:** withhold a maker name until exact public-name/face consent exists.
+- **P14:** sign the K1 budgets; K3 plates are engineering evidence, not customer
+  proof, and scene tone remains tied to 3D evidence. **P15:** keep the hybrid
+  de-round result; `MemberSettlementsList` and `SimulationRulesGateToggle` stay
+  retired while the wired `GalleryMapsSidebar` stays. **P16–P22:** retain their
+  recorded deferrals/address-space boundaries until the named prerequisites
+  exist.
+
+**Platform/money rulings.**
+
+- **M3/M4/M7–M9/M11–M22/M25–M27/M30/M38/M40/M41** are closed or stale against
+  the current code. M38 uses immutable historical migrations plus the forward
+  reprice; M41's refund, tier-price, task-cost, and $25 abandonment-copy
+  contradictions are repaired.
+- **M5:** ratify standard task costs 5/4/6, canonical Cartographer at
+  $5.99/599 cents, live displayed pricing, automatic repricing **off**, and tier
+  multipliers **unseeded/off**. **M6:** FMG BYOK stays disabled and fail-closed.
+  **M10:** `KILL_NPC` means death/tombstone; `EXPOSE_CORRUPTION` means
+  successor/office continuity—no global identity dial.
+- **M23:** 3D default stays off. **M24/M37:** external promotion and uncoached
+  evidence remain real gates. **M28** is a separate post-T5 UI/state wave.
+  **M29** should use a durable edge endpoint when built. **M36** ratifies the
+  eleven engineering-skill amendments. **M39** retires review-fixes as a
+  ledger/marketing lane and forbids merging it toward master.
+- **M42:** retain q=0.05, MIN_N=30, weight floor 0.25, soak-prior cap 0.5, and
+  render cap 12. **M43:** retain scout/journeyman/master, thinking budgets 0,
+  repair budgets 0/1/2, and disabled multipliers. **M44:** expose only bounded
+  multipliers for growth, depletion severity, unrest/tension gain,
+  external-threat pressure, and trade-route yield (0.5x–2.0x,
+  typed/validated/confirmed and persisted with the world). Exclude identity,
+  named fates, money, deity/faith doctrine, and criminal-capture calibration.
+
+**Epistemic-prevention rulings.**
+
+- **EP-a/m/n:** keep the tighter live floors/ceilings 40, 10, and 4.
+  **EP-b:** adopt the powered ordinary-town ceiling 20. **EP-c:** restate the six
+  degenerate rates as totality. **EP-d:** move the 400-seed measurement to
+  slow/nightly; never accept the misleading 4/50 family substitution.
+  **EP-e:** pin stress icons exactly empty.
+- **EP-g1/g3:** retire truly dead vocabulary (including phantom Major port) only
+  as a separate, measured no-outcome cleanup; keep the future Navy vocabulary.
+  **EP-g2:** take the measured three-piece ladder repair in T5. **EP-h:** re-freeze
+  the widened walker in a deliberate later wave. **EP-i:** plant the eligible
+  sweeps. **EP-j:** tighten calamity's upper count to 169 and keep lower 100.
+  **EP-k/o/p** are already closed in the current lineage; do not reopen them
+  from stale queue text.
+
 ## §1 · THE LAUNCH TAIL — ⛔ owner-physical acts, in execution order
 Tail order (owner ruling 2026-07-19, unchanged): loop convergence → PUSH #1 → soak
 → tuning → THE ONE REGEN → THE WALK → PUSH #2 → THE VERY END deploy → PUSH #3.
