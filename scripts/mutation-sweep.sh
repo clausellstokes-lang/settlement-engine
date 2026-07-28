@@ -503,7 +503,12 @@ check_caught "undo-arming/de-advertised updatePlacement re-advertises mapUndo" s
 # 52. R-4 dead-operation ratchet — land a registered operation no file in src
 #     consumes. The shrink-only ledger must red on JOINS: an unreachable op may
 #     not ship, and may not be laundered into the frozen owner-queue-#21 list.
-perl -0pi -e "s/\n  replaceAllPlacements: \{/\n  probeOrphanOp: { opType:'probeOrphanOp', label:\"Probe orphan op\", description:\"Mutation-sweep probe row: registered, consumed by nothing.\", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'none' },\n  replaceAllPlacements: {/" src/store/operationRegistry.js
+#     ANCHOR (R-5b): re-pointed from `replaceAllPlacements` to
+#     `clearAllPlacementsLocal` when the former was RETIRED out of the registry.
+#     The anchor must name a row that still exists — a perl substitution whose
+#     pattern no longer matches inserts nothing, and check_caught would then be
+#     grading an UNMUTATED tree, i.e. reporting a pass for a probe that never ran.
+perl -0pi -e "s/\n  clearAllPlacementsLocal: \{/\n  probeOrphanOp: { opType:'probeOrphanOp', label:\"Probe orphan op\", description:\"Mutation-sweep probe row: registered, consumed by nothing.\", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'none' },\n  clearAllPlacementsLocal: {/" src/store/operationRegistry.js
 check_caught "dead-op/unconsumed registry row joins the frozen ledger" src/store/operationRegistry.js "npx vitest run tests/store/deadOperationRatchet.test.js"
 
 # 53. R-4 saved-settlement patch-key walker — write a key the allowlist refuses at
