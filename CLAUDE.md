@@ -10,3 +10,9 @@ remediation from the recorded validation checkpoint, preserve deterministic
 behavior unless an intentional golden shift is documented, and keep all new
 code legible to both human and AI maintainers.
 
+Gate reading: never read a gate through a pipe — `npm run check | tail`
+reports the PIPE's exit status, not the gate's, and has greenwashed red gates
+twice. Use `npm run check:tail`, or `sh scripts/gate-tail.sh <command...>`
+for any other gate command; both print the tail and exit with the gate's own
+code.
+

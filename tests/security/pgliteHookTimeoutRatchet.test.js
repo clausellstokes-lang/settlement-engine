@@ -14,8 +14,9 @@
  * 60_000ms both went brittle exactly that way, which is why the floor below treats
  * the tuned-30s stratum as unguarded.
  *
- * THE WALK: extract every beforeAll/beforeEach call in tests/security/*.pglite.test.js
- * (paren-matched from the hook keyword), keep the BOOT-BEARING ones — callback text
+ * THE WALK: extract every beforeAll/beforeEach call in every tests/security/*.test.js
+ * (ANY test file there, not only *.pglite.test.js — a booting hook does not care what
+ * its file is called; paren-matched from the hook keyword), keep the BOOT-BEARING ones — callback text
  * names a live boot constructor/helper (`new PGlite`, makeDb, makeCreditLedgerDb,
  * baseDb, buildDb, supportDb), OR the hook is the file's first PGlite-touching hook
  * and calls `.exec(`/`.query(` (boot is LAZY: `new PGlite()` returns instantly and
@@ -43,10 +44,12 @@
  * exec-aware. What still escapes (accepted costs of a regex gate):
  *   - A boot helper with an UNLISTED name whose hook never execs directly — a pure
  *     `db = await newHelper()` line — shows neither marker nor exec text. The
- *     HELPER-NAME LAW below turns this from convention into enforcement for helpers
- *     defined in tests/security: a census walker reds any hook calling an unlisted
- *     in-scope constructor. Remaining escape: a constructor defined OUTSIDE
- *     tests/security and imported into a hook.
+ *     HELPER-NAME LAW below turns this from convention into enforcement, and the
+ *     JURISDICTION test pins `new PGlite` to tests/security across tests/ and
+ *     scripts/ (quoters frozen with rationale), so an out-of-scope constructor
+ *     cannot exist to be imported. Remaining escape: a constructor in src/ —
+ *     none exists, and one would be a product-architecture change (shipping
+ *     in-browser Postgres), not a test helper.
  *   - Two files construct PGlite inside per-test helper/test bodies rather than hooks
  *     (customContentBackfill, reviewedQuarantineConflict). Those boots run under
  *     testTimeout, not hookTimeout — a different failure surface this ratchet does
@@ -142,14 +145,20 @@ function timeoutOf(hookText, src) {
  * "First" approximates runtime order at the string level: all beforeAll hooks in
  * source order, then all beforeEach hooks — exact for the corpus's single-describe
  * shape. A later toucher runs warm and is out of scope regardless of its own guard.
+ * Rule (2) additionally requires the FILE to actually USE PGlite — import
+ * @electric-sql/pglite or construct `new PGlite` — not merely mention it: a suite
+ * driving real PostgreSQL (pg Client `.query(` — customContentLockOrder.postgres,
+ * whose header PROSE explains PGlite while constructing none) has no lazy WASM
+ * boot to pay, so its exec-touching hooks are not this class.
  */
 function unguardedHooks(src) {
+  const filePGlite = /new\s+PGlite|@electric-sql\/pglite/.test(src);
   const hooks = extractHooks(src);
   const ordered = [...hooks.filter((h) => h.kind === 'beforeAll'), ...hooks.filter((h) => h.kind === 'beforeEach')];
-  const firstToucher = ordered.find((h) => BOOT_MARKER_RE.test(h.text) || EXEC_RE.test(h.text));
+  const firstToucher = ordered.find((h) => BOOT_MARKER_RE.test(h.text) || (filePGlite && EXEC_RE.test(h.text)));
   const bad = [];
   for (const h of hooks) {
-    if (!BOOT_MARKER_RE.test(h.text) && !(h === firstToucher && EXEC_RE.test(h.text))) continue;
+    if (!BOOT_MARKER_RE.test(h.text) && !(filePGlite && h === firstToucher && EXEC_RE.test(h.text))) continue;
     const t = timeoutOf(h.text, src);
     if (t === null || t < FLOOR_MS) bad.push({ kind: h.kind, line: h.line, timeout: t });
   }
@@ -228,10 +237,37 @@ function helperLawViolations(defs, suites) {
   return violations;
 }
 
-/** @returns {Record<string, number>} unguarded-hook count per pglite suite. */
+/**
+ * Files under tests/ and scripts/ that may mention `new PGlite` WITHOUT living in
+ * tests/security — each row is a QUOTER (pattern text, never construction), frozen
+ * with its rationale. The jurisdiction test proves every row still exists, still
+ * mentions the pattern, and that nothing else outside tests/security does.
+ */
+const PGLITE_OUTSIDE_JURISDICTION = Object.freeze({
+  'tests/lint/contractTestAntiVacuity.walker.test.js':
+    'quotes `new PGlite` inside its DERIV_RE detection regex; never constructs',
+});
+
+/** Every .js/.jsx/.mjs/.ts file under dir (repo-relative), recursively. */
+function* walkSourceFiles(dir) {
+  for (const e of readdirSync(join(ROOT, dir), { withFileTypes: true })) {
+    const rel = `${dir}/${e.name}`;
+    if (e.isDirectory()) yield* walkSourceFiles(rel);
+    else if (/\.(js|jsx|mjs|ts)$/.test(e.name)) yield rel;
+  }
+}
+
+/**
+ * @returns {Record<string, number>} unguarded-hook count per tests/security suite.
+ * Scope is EVERY *.test.js in tests/security, not only *.pglite.test.js — a
+ * pglite-booting hook in a conventionally named file is the same flake with a
+ * different filename (non-booting files contribute zero and cost microseconds).
+ */
 function scanCorpus() {
   const found = {};
-  for (const f of readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.pglite.test.js')).sort()) {
+  // Self-exclusion: this file's guard-the-guard fixtures QUOTE offending hook
+  // shapes as template-literal text; scanning self would flag the quotes.
+  for (const f of readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.test.js') && n !== 'pgliteHookTimeoutRatchet.test.js').sort()) {
     const rel = `${SCAN_DIR}/${f}`;
     const bad = unguardedHooks(readFileSync(join(ROOT, rel), 'utf8'));
     if (bad.length) found[rel] = bad.length;
@@ -333,6 +369,30 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
     expect(stale).toEqual([]);
   });
 
+  test('jurisdiction: `new PGlite` lives only where this ratchet can see it', () => {
+    const problems = [];
+    for (const dir of ['tests', 'scripts']) {
+      for (const rel of walkSourceFiles(dir)) {
+        if (rel.startsWith(`${SCAN_DIR}/`)) continue;
+        if (!/new\s+PGlite/.test(readFileSync(join(ROOT, rel), 'utf8'))) continue;
+        if (PGLITE_OUTSIDE_JURISDICTION[rel]) continue;
+        problems.push(
+          `${rel}: mentions \`new PGlite\` outside ${SCAN_DIR}, where this ratchet cannot police hooks. ` +
+          `Move the construction under ${SCAN_DIR}, or — if the file only QUOTES the pattern — freeze it in ` +
+          `PGLITE_OUTSIDE_JURISDICTION with a rationale.`,
+        );
+      }
+    }
+    for (const [rel, why] of Object.entries(PGLITE_OUTSIDE_JURISDICTION)) {
+      if (!existsSync(join(ROOT, rel))) {
+        problems.push(`${rel}: frozen quoter no longer exists (${why}) — remove its row`);
+      } else if (!/new\s+PGlite/.test(readFileSync(join(ROOT, rel), 'utf8'))) {
+        problems.push(`${rel}: frozen quoter no longer mentions the pattern (${why}) — remove its row`);
+      }
+    }
+    expect(problems).toEqual([]);
+  });
+
   test('the guarded exemplars are detected as boot-bearing AND clean (positive pin)', () => {
     // Without this, every green above could mean the detector stopped seeing hooks at all.
     const problems = [];
@@ -366,7 +426,7 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
     });
 
     test('no hook in the corpus calls an unlisted constructor', () => {
-      const suites = readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.pglite.test.js')).sort()
+      const suites = readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.test.js')).sort()
         .map((f) => ({ file: `${SCAN_DIR}/${f}`, src: readFileSync(join(ROOT, SCAN_DIR, f), 'utf8') }));
       expect(helperLawViolations(censusDefs(), suites)).toEqual([]);
     });
@@ -400,7 +460,10 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
       `beforeEach(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);`;
     const NON_TOUCHING_HOOK = `beforeEach(() => { seed = DEFAULT_SEED; })`;
     const HELPER_BOOT_UNGUARDED = `beforeAll(async () => { db = await makeCreditLedgerDb(); })`;
-    const FIRST_EXEC_UNGUARDED = `beforeAll(async () => { db = await bootSomehowElse(); await db.exec('select 1'); })`;
+    const FIRST_EXEC_UNGUARDED =
+      `import { PGlite } from '@electric-sql/pglite';\n` +
+      `beforeAll(async () => { db = await bootSomehowElse(); await db.exec('select 1'); })`;
+    const REAL_POSTGRES_EXEC_HOOK = `beforeAll(async () => { admin = new Client({ connectionString: url }); await admin.query('create database x'); })`;
     const WARM_EXEC_AFTER_GUARDED_BOOT =
       `const PGLITE_BOOT_TIMEOUT_MS = 180_000;\n` +
       `beforeAll(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);\n` +
@@ -434,6 +497,10 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
 
     test('an unguarded first-exec hook is flagged even when its boot helper is unlisted (lazy boot: the first exec pays)', () => {
       expect(unguardedHooks(FIRST_EXEC_UNGUARDED)).toHaveLength(1);
+    });
+
+    test('a real-PostgreSQL suite (no PGlite in the file) is out of scope for the exec rule', () => {
+      expect(unguardedHooks(REAL_POSTGRES_EXEC_HOOK)).toEqual([]);
     });
 
     test('a warm exec hook after the guarded boot hook is out of scope (only the first toucher pays boot)', () => {
