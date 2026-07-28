@@ -621,7 +621,25 @@ registerStep('assembleInstitutions', {
       // A bare legacy name is not enough authority to choose among multiple
       // identity-distinct entities. Structured targets remain exact.
       if (target.source == null && matches.length !== 1) continue;
-      if (matches.length > 0) institutions.splice(matches[0].index, 1);
+      if (matches.length > 0) {
+        const [absorbed] = institutions.splice(matches[0].index, 1);
+        // Every sibling absorption site (subsumptionPass, cascadePass,
+        // factionCorrelationPass, coherenceRepairPass) emits a receipt; this
+        // one is the custom-authored mechanism and owes the same. Shape is
+        // subsumptionPass's verbatim: the absorbing institution is the cause,
+        // the absorbed one is the target, `effect: 'absorbed'`.
+        recordTrace(ctx, {
+          targetType: 'institution',
+          targetId:   instId(absorbed.name),
+          step:       'assembleInstitutions',
+          result:     'subsumed_by_custom',
+          causes: [
+            { source: instId(inst.name),
+              effect: 'absorbed',
+              reason: `"${absorbed.name}" was absorbed into "${inst.name}" — the custom definition declares it subsumes this institution.` },
+          ],
+        });
+      }
     }
   }
 

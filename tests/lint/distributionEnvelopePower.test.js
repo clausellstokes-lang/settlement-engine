@@ -147,15 +147,29 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + '(23.75% vs the authored 47.5%). Runtime cost ~135 ms. The floor is loosenPending: its '
       + 'derivation is the vacuous 0.' },
   { file: 'tests/domain/roadsMissions.test.js', pendingMigration: false,
-    rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION). EP-2D flagged the variable '
-      + 'denominator as needing the fixed-n treatment; it turned out FIXED, not outcome-'
-      + 'divided — the trial unit is the NPC-year (12 NPCs x 3 years = 36) and the same test '
-      + 'asserts at most one departure per NPC-year, so the Bernoulli unit is exact. A '
-      + 'denominator guard in the test pins 36. Base rate 207/576 over 16 runs of the identical '
-      + 'fixture; both arms tightened (floor 2 -> 4, ceiling 32 -> 23). A FINDING travels with '
-      + 'this measurement: the cadence law is VIOLATED on 5 of those 16 seeds (dominion / '
-      + 'embassy / observance / diplomacy purposes at a city seat or envoy). The test\'s own '
-      + 'single seed is clean, so its cadence assertion is green over a corpus of one.' },
+    rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION); RE-DERIVED and finding WITHDRAWN '
+      + 'under EP-l 2026-07-28. EP-2D flagged the variable denominator as needing the fixed-n '
+      + 'treatment; it turned out FIXED, not outcome-divided — the trial unit is the NPC-year '
+      + '(12 NPCs x 3 years = 36) and the same test asserts at most one GENESIS departure per '
+      + 'NPC-year, so the Bernoulli unit is exact. A denominator guard in the test pins 36. '
+      + 'Base rate is the GENESIS rate 201/576 over 16 runs of the identical fixture: the '
+      + '2026-07-27 reading of 207/576 counted every mission id, and 6 of those ids were '
+      + 'release-return legs (releasedFromRansom) — the RESOLUTION of a captivity, not a '
+      + 'fresh dispatch, and the cadence law governs genesis dispatch only. The ceiling '
+      + 'tightened 32 -> 23 and holds unchanged at the genesis rate (margin 3.495 -> 3.650); '
+      + 'the floor tightened 2 -> 4 and is now loosenPending — at the genesis rate its own '
+      + 'alpha-1e-3 derivation is the LOOSER 3, so the live 4 stays in force (2.994 sigma) '
+      + 'and the loosening is filed for the owner, not taken here. THE 2026-07-27 FINDING IS '
+      + 'WITHDRAWN: the "cadence law VIOLATED on 5 of 16 seeds" was an artefact of this '
+      + 'instrument, not a producer defect. The release path (roadsKernel.js PASS 4) mints a '
+      + 'NEW mission id whose startedYear is the RELEASE year, and the old counting summed '
+      + 'every mission id per npcKey|startedYear, so one interrupted journey counted twice; '
+      + 'each of the five flagged keys holds exactly one releasedFromRansom leg. Realigned '
+      + 'with the charter counting (tests/property/roadsCharter.test.js), GENESIS violations '
+      + 'measure 0 across all 17 seeds — the law is real and correctly enforced at the '
+      + 'genesis cadence stamps (roadsKernel.js PASS 5). The same investigation surfaced a '
+      + 'DIFFERENT, REAL producer defect, fixed under EP-l: SELF-CAPTURE (a court taking its '
+      + 'own envoy hostage), which accounted for 4 of the 7 ransoms in that corpus.' },
 
   // ── STILL OWED: a real instrument, blocked for a stated reason ──────────────
   { file: 'tests/simulation/distributionEnvelopes.test.js', pendingMigration: true,

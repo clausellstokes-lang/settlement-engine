@@ -191,7 +191,72 @@ function repairThreatDefense(ctx, entries) {
   }
 }
 
-function repairHardViolations(ctx, entries) {
+/**
+ * Record that the pass SAW a hard violation it has no lawful move against.
+ *
+ * Deliberately a trace and NOT a `generationRepairs` entry: the repair array
+ * feeds a user-visible count (ViabilityTab's "N deterministic repairs
+ * recorded", generationContracts' `repairCount`), and an observation is not a
+ * repair — filing it there would inflate that number and make the receipt less
+ * honest rather than more. The trace lane already exists on every settlement,
+ * so this adds no persistence shape.
+ *
+ * `targetType: 'condition'` because a settlement-scope violation names no
+ * roster entry: survival_crisis carries the literal 'Settlement (Regional
+ * Threat)' in its `institution` field, and minting an institution id from that
+ * string would hand every institution-keyed trace reader a join against
+ * nothing.
+ *
+ * Written generically rather than as a survival_crisis special case so a
+ * violation type added to the validator later cannot become silently
+ * unhandled here — the receipt is what makes the gap visible.
+ *
+ * @param {object} ctx
+ * @param {{ type: string, institution?: string, reason?: string }} violation
+ * @returns {void}
+ */
+function recordUnrepairable(ctx, violation) {
+  recordTrace(ctx, {
+    targetType: 'condition',
+    targetId: `condition.${violation.type}`,
+    step: 'coherenceRepairPass',
+    result: 'observed_no_repair',
+    causes: [{
+      source: `structural.${violation.type}`,
+      effect: 'no repair applicable',
+      reason: 'The pass observed this violation and has no lawful repair for it: '
+        + 'the subject is a settlement-scope condition rather than a roster entry, '
+        + 'and the institutions that would answer it are either unavailable at this '
+        + 'tier or explicitly excluded by the DM — an exclusion this pass may never '
+        + 'override. The violation is left standing and reported.'
+        + (violation.reason ? ` Observed: ${violation.reason}` : ''),
+    }],
+  });
+}
+
+/**
+ * The violation types the branches below own. Declared as data so "which kinds
+ * does this pass actually repair?" is one grep rather than a read of the loop,
+ * and so a future branch that forgets its `continue` cannot make the pass
+ * report its own repair as unrepairable.
+ */
+const REPAIRABLE_VIOLATION_TYPES = new Set([
+  'access_violation',
+  'dependency_violation',
+  'exclusion_violation',
+]);
+
+/**
+ * @param {object} ctx
+ * @param {Array<any>} entries
+ * @param {Set<string>} observed  step-scoped dedupe for unrepairable sightings.
+ *   MUST be created once per step run and shared by both calls below: the
+ *   validator is re-read on each bounded pass AND this function is called twice
+ *   per step (before and after isolation repair), so a call-scoped set still
+ *   emits the same receipt up to four times.
+ * @returns {void}
+ */
+function repairHardViolations(ctx, entries, observed) {
   // Two bounded passes allow an added dependency to expose its own missing
   // dependency without turning this into an open-ended fixpoint.
   for (let pass = 0; pass < 2; pass += 1) {
@@ -244,6 +309,17 @@ function repairHardViolations(ctx, entries) {
           'mutual_exclusion',
           `${violation.institution} conflicts with ${violation.blockedBy}.`,
         ) || changed;
+        continue;
+      }
+      // No branch above owns this type. Leave a receipt instead of falling
+      // through in silence, so a reader can tell "nothing was wrong" apart
+      // from "something was wrong that this pass cannot lawfully touch".
+      if (!REPAIRABLE_VIOLATION_TYPES.has(violation.type)) {
+        const key = `${violation.type}:${violation.institution || ''}`;
+        if (!observed.has(key)) {
+          observed.add(key);
+          recordUnrepairable(ctx, violation);
+        }
       }
     }
     if (!changed) break;
@@ -275,8 +351,10 @@ registerStep('coherenceRepairPass', {
     ? ctx.generationRepairs
     : [];
 
+  // One dedupe set for the whole step run — see repairHardViolations' contract.
+  const observedUnrepairable = new Set();
   repairThreatDefense(ctx, entries);
-  repairHardViolations(ctx, entries);
+  repairHardViolations(ctx, entries, observedUnrepairable);
 
   applySubsumption(ctx.institutions, ctx, {
     step: 'coherenceRepairPass',
@@ -315,7 +393,7 @@ registerStep('coherenceRepairPass', {
   // Transit infrastructure has the same dependency laws as every other
   // institution. Repair those dependencies after injection, then normalize the
   // roster once more before taking the persisted support measurement.
-  repairHardViolations(ctx, entries);
+  repairHardViolations(ctx, entries, observedUnrepairable);
   applySubsumption(ctx.institutions, ctx, {
     step: 'coherenceRepairPass',
     result: 'subsumed_after_isolation_repair',

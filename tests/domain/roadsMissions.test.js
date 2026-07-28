@@ -1,8 +1,8 @@
 /**
  * roadsMissions.test.js — THE ROADS genesis + routing + journey (R-2). The §18 R-2 done-when:
  * a 3-year lit spatial run showing journeys of every available purpose, a known-danger
- * refusal, and clean return-home; roster conservation (the NO-DEATH law); cadence ≤ 1/NPC-
- * year; dark byte-identical. DESIGN_THE_ROADS.md §4/§5/§6.
+ * refusal, and clean return-home; roster conservation (the NO-DEATH law); cadence ≤ 1 GENESIS
+ * journey/NPC-year; dark byte-identical. DESIGN_THE_ROADS.md §4/§5/§6/§9.
  */
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -85,12 +85,12 @@ function rosterSize(saves) {
 }
 
 describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
-  it('shows trade/diplomacy/observance journeys, a whereabouts mirror, clean returns, NO-DEATH for hostages, cadence <= 1/NPC-year', () => {
+  it('shows trade/diplomacy/observance journeys, a whereabouts mirror, clean returns, NO-DEATH for hostages, cadence <= 1 GENESIS journey/NPC-year', () => {
     let { campaign, saves } = makeCampaign('roads-3y', true);
     const initial = rosterSize(saves);
     const purposes = new Set();
     const seenMissions = new Set();
-    const departuresByKeyYear = new Map(); // npcKey|year → count (cadence proof)
+    const genesisByKeyYear = new Map(); // npcKey|year → GENESIS departures (cadence proof)
     const capturedKeys = new Set(); // every NPC roads ever took hostage (NO-DEATH tracking)
     let whereaboutsSeen = 0;
     let returnBeats = 0;
@@ -101,8 +101,17 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
         purposes.add(m.purpose.kind);
         if (!seenMissions.has(mid)) {
           seenMissions.add(mid);
-          const key = `${m.npcKey}|${m.startedYear}`;
-          departuresByKeyYear.set(key, (departuresByKeyYear.get(key) || 0) + 1);
+          // A release-return-leg (releasedFromRansom) is the RESOLUTION of a captivity, not a
+          // fresh genesis journey — the cadence law governs genesis dispatch, so it is excluded.
+          // PRIOR ART: tests/property/roadsCharter.test.js's 12-year walkthrough encoded this
+          // rule first (§9 is the charter's law; roadsKernel.js stamps the cadence ONLY on the
+          // genesis paths). This instrument counted every mission id and therefore counted one
+          // INTERRUPTED journey twice: the release path mints a NEW mission id whose startedYear
+          // is the RELEASE year, so a capture that spans no year boundary reads as two departures.
+          if (!m.releasedFromRansom) {
+            const key = `${m.npcKey}|${m.startedYear}`;
+            genesisByKeyYear.set(key, (genesisByKeyYear.get(key) || 0) + 1);
+          }
         }
       }
       for (const rr of Object.values(r.worldState?.spatialLedgers?.roads?.ransoms || {})) capturedKeys.add(String(rr.npcKey));
@@ -135,26 +144,30 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
       expect(present, `captured NPC ${key} is still in the roster (NO-DEATH)`).toBe(true);
     }
     expect(finalIds.size, 'the roster is non-empty (sanity)').toBeGreaterThan(0);
-    // Cadence: no NPC departed twice in the same year.
-    for (const [key, count] of departuresByKeyYear) expect(count, `<=1 journey for ${key}`).toBeLessThanOrEqual(1);
+    // Cadence: no NPC made two GENESIS departures in the same year.
+    for (const [key, count] of genesisByKeyYear) expect(count, `<=1 genesis journey for ${key}`).toBeLessThanOrEqual(1);
     // Infrequent by construction. The trial unit is the NPC-YEAR: the cadence assertion
-    // immediately above allows at most one departure per NPC per year, so this fixture
-    // offers exactly (roster × 3) Bernoulli trials and the denominator is fixed by the
-    // fixture rather than by an outcome. Pin it, so a roster change reds here instead of
+    // immediately above allows at most one GENESIS departure per NPC per year, so this
+    // fixture offers exactly (roster × 3) Bernoulli trials and the denominator is fixed by
+    // the fixture rather than by an outcome. Pin it, so a roster change reds here instead of
     // silently re-scaling what the bounds mean.
     const floor = readEnvelope(ENVELOPES, 'roadsMissions.journeyCadence.floor');
     const ceiling = readEnvelope(ENVELOPES, 'roadsMissions.journeyCadence.ceiling');
     const npcYears = initial.count * 3;
     expect(npcYears, 'the cadence envelope is registered for this exact trial count').toBe(floor.n);
     expect(ceiling.n, 'both arms of the band share one trial count').toBe(floor.n);
-    // Both bounds DERIVED from a measured 207/576 departure rate, not hand-picked. The
-    // authored band was perNpcYear > 0.05 and < 0.9 — i.e. >= 2 and <= 32 departures of
-    // a possible 36, sitting 3.8 and 6.6 sigma from the mean of 12.94. The derived pair
-    // tightens both arms to 4 and 23; this run lands on 16.
-    const perNpcYear = seenMissions.size / npcYears;
-    expect(seenMissions.size, `journey count below the derived cadence floor (perNpcYear ${perNpcYear})`)
+    // Both bounds DERIVED from a measured 201/576 GENESIS-departure rate, not hand-picked
+    // (the base rate excludes release-return legs for the same reason this count does). The
+    // authored band was perNpcYear > 0.05 and < 0.9 — i.e. >= 2 and <= 32 departures of a
+    // possible 36, sitting 3.7 and 6.6 sigma from the mean of 12.56. The live pair is 4 and
+    // 23; this run lands on 16 (its own seed mints no release leg, so realigning the counting
+    // left this fixture's number unchanged). The FLOOR is loosenPending: its own derivation is
+    // the looser 3, and the program never loosens a live bound silently.
+    const genesisCount = [...genesisByKeyYear.values()].reduce((a, b) => a + b, 0);
+    const perNpcYear = genesisCount / npcYears;
+    expect(genesisCount, `genesis-journey count below the derived cadence floor (perNpcYear ${perNpcYear})`)
       .toBeGreaterThanOrEqual(floor.bound);
-    expect(seenMissions.size, `journey count above the derived cadence ceiling (perNpcYear ${perNpcYear})`)
+    expect(genesisCount, `genesis-journey count above the derived cadence ceiling (perNpcYear ${perNpcYear})`)
       .toBeLessThanOrEqual(ceiling.bound);
   }, 120_000);
 

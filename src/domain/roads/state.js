@@ -89,9 +89,15 @@ export function cmp(a, b) {
  * @property {string} homeId
  * @property {string} captorId
  * @property {string} threatClass        T1|T2|T3|T4
+ * @property {string} purposeKind        the captured mission's purpose (§9 prose + the release leg)
+ * @property {string} missionId          the mission this capture resolved (the V-24d cause edge)
  * @property {number} startedTick
+ * @property {number} startedWeek        the CALENDAR week of capture — the term clock's origin
+ * @property {number} knownDangerAtDispatch  §19 the stale-intel receipt, carried from the mission
  * @property {number} termWeeks
  * @property {number} remainingWeeks
+ * @property {boolean} hostileAtCapture  §9 was home at war/hostile with the captor at capture
+ *   (the peace early-release check reads it: hostile-then-peaceful ⇒ amnesty)
  * @property {boolean} conversionRolled
  * @property {boolean} willConvert
  * @property {string|null} [payerId]        D-5 THIRD-PARTY RANSOM: the third party who paid (null until scanned)

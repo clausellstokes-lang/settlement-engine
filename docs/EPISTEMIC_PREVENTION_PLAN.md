@@ -220,3 +220,34 @@ branch; memory; backup-push decision recorded vetoably.
 > diplomacy at a city seat) — the original test was green over a corpus of one.
 > NEW OWNER PICK: ordering.siegeSuppression.unwalledFloor loosenPending (live
 > 10 vs derived 6).
+
+> **2026-07-27/28 (EP-6, src-side repair — owner "continue" on EP-g + EP-l):**
+> Four parallel investigations, then two implementation waves; every fix
+> measured before shipped. VERDICTS: `access_compatibility` was NEVER
+> unreachable — EP-3's evidence missed the forbidden-list/inclusion-list
+> polarity gap on the `mountain_pass` route; promoted to EFFECT_MANIFEST with a
+> specimen, and the new zero-occurrence EXCLUSION RATCHET now holds the two
+> remaining strata honest. `mutual_exclusion`: blockedBy was never authored in
+> the project's entire history; the working mechanism is exclusiveGroup (0/400
+> coexistence); authoring data measured HARMFUL; retirement (0/400 output)
+> queued EP-g1. `hard_dependency`: real bug, but the audit's literal fix is a
+> MEASURED REGRESSION (17 of 65 self-satisfying gates are legitimately vacuous
+> via the roster ladders); the correct ladder-aware fix moves 41% of golden
+> keys → parked for the T4 ONE REGEN batch (EP-g2). EP-l WITHDRAWN as an
+> instrument artefact (release legs double-counted; genesis violations 0/17;
+> the charter test had it right from birth) — its real yield was SELF-CAPTURE:
+> a court taking its own envoy hostage, fixed in all four land arms of the dark
+> roads kernel (genesis counts byte-identical; sea-piracy sibling chip-filed,
+> EP-p). SHIPPED with zero golden movement (A/B-proven against the concurrent
+> deity-lane's in-tree drift): §14 custom-subsumption trace (receipt parity),
+> the generic skip-with-receipt for unrepairable violations (trace lane, never
+> the user-visible repairs count; step-scoped dedupe proven load-bearing), the
+> furrier→tannery producer-eating rule DELETED (confirmed severing leather on
+> 46/46 firings when DM-forced; protectedProducers ratchet has teeth both
+> directions), and the subsumption tanner-guard rewritten live — the anchored-
+> negatives habitat is now 1 file / 1 site (EP-e only). Law text amended on the
+> ledger branch (DESIGN_THE_ROADS §4/§19: cadence governs GENESIS; release
+> legs resume). New owner picks: EP-n (roads floor 4 vs derived 3), EP-o
+> (mission-id reuse persistence shape), EP-p (seaRoads S3 guard + gauntlet
+> pins, chips filed). Durable facts to memory: cascade tier-window, plagued
+> military floor, step-vs-call dedupe scope, list-polarity gap.

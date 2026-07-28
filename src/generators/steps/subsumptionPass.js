@@ -56,7 +56,14 @@ const SUBSUMPTION_RULES = [
   { greater: 'mint (official)',             lesser: ['mint', 'assay office'] },
   { greater: 'stable district',             lesser: ['stable master', 'stable yard'] },
   { greater: 'fish market',                 lesser: ['fishmonger'] },
-  { greater: "furrier's district",          lesser: ['tannery'] },
+  // Retired 2026-07-28 (queue EP-f): `furrier's district` absorbed `tannery`,
+  // breaking BOTH laws above. It is not a same-function scale ladder — a
+  // furrier works fur, a tannery works hide — and the tannery is the sole
+  // hide→leather processor, so absorbing it deactivated the leather chain and
+  // severed the Tanned leather export gate, which names `requiredInstitution:
+  // 'Tannery'` by exact string. Measured at zero same-seed golden movement:
+  // no in-tier roster seats both, so the rule only ever fired for DM-forced
+  // out-of-tier configs — precisely where the severance was invisible.
   { greater: "assassins' guild",            lesser: ['contract killer', 'hired blades'] },
   { greater: "thieves' guild (powerful)",   lesser: ["thieves' guild chapter", 'black market bazaar', 'contract killer'] },
   { greater: 'auction house',              lesser: ['slave market'] },

@@ -243,6 +243,9 @@ const CORPUS = Object.freeze([
     // Same config, same seed, same pack minus the `subsumes` reference: the RNG
     // stream is identical because §14 removal happens after seating, so the
     // control proves the cart shed WAS seated and the treatment removed it.
+    // Since §14 began recording its own receipt (queue EP-g, 2026-07-28) the
+    // control ALSO cross-checks that receipt — it must be silent here, which is
+    // what ties the trace to the `subsumes` reference rather than to the seed.
     controlCustomContent: referencePackWithoutSubsumption,
   },
   {
@@ -262,13 +265,31 @@ const CORPUS = Object.freeze([
       priorityMilitary: 35,
     }),
   },
+  {
+    id: 'mountain-pass-fishmonger',
+    targets: 'access-compatibility repair: mountain_pass is user-selectable but '
+      + "absent from Fishmonger's forbiddenTradeRoutes (a forbidden-list permits "
+      + "every route it does not name, while INSTITUTION_SPATIAL's requiredAccess "
+      + 'is an inclusion-list that rejects it), so the Fishmonger seats and the '
+      + 'access check removes it — fired on 10 of 40 sibling seeds',
+    seed: 'effect-reach-v1-mountain-pass-fishmonger-6',
+    config: Object.freeze({
+      settType: 'village',
+      culture: 'germanic',
+      terrainOverride: 'hills',
+      tradeRouteAccess: 'mountain_pass',
+      monsterThreat: 'heartland',
+    }),
+  },
 ]);
 
 // ── the manifest ────────────────────────────────────────────────────────────
 //
 // `detect(settlement, specimen)` — the second argument carries the specimen
 // record (including `control`, the paired dossier) and is used only by the
-// custom-subsumption entry, whose effect is a REMOVAL that records no receipt.
+// custom-subsumption entry. That entry reads §14's own receipt like every
+// other detector here; the control it keeps is what proves the receipt tracks
+// the authored `subsumes` reference and not the seed.
 
 const EFFECT_MANIFEST = Object.freeze([
   Object.freeze({
@@ -288,12 +309,31 @@ const EFFECT_MANIFEST = Object.freeze([
       'a custom institution\'s authored `subsumes` reference removed its exact '
       + 'target (assembleInstitutions §14 — the cart-shed conjunction)',
     detect: (settlement, specimen) => {
+      // §14 now emits its own receipt (queue EP-g, 2026-07-28), so this reads
+      // the trace directly — the file's own idiom — instead of inferring the
+      // removal from a roster diff.
       const control = specimen?.control;
       if (!control) return false;
+      const absorbed = traces(settlement).some(trace => (
+        trace.step === 'assembleInstitutions'
+        && trace.result === 'subsumed_by_custom'
+        && (trace.causes || []).some(cause => cause.effect === 'absorbed')
+      ));
+      if (!absorbed) return false;
+      // The PAIRED CONTROL is kept, and now does double duty. It still proves
+      // the absorbed institution was SEATABLE on this seed (it is optional at
+      // ~30%, so its mere absence from the treated roster is not evidence of
+      // removal — that is the vacuity the cart-shed bug hid behind). It now
+      // ALSO cross-checks the new receipt: the trace must be the §14 mechanism
+      // firing, so it appears only when the `subsumes` reference is present.
       const named = dossier => new Set(roster(dossier).map(entry => entry?.name));
       const treated = named(settlement);
       const untreated = named(control);
-      return treated.has(REFERENCE_PACK_NAMES.institution)
+      const controlSilent = !traces(control).some(
+        trace => trace.result === 'subsumed_by_custom',
+      );
+      return controlSilent
+        && treated.has(REFERENCE_PACK_NAMES.institution)
         && untreated.has(REFERENCE_PACK_NAMES.absorbedInstitution)
         && !treated.has(REFERENCE_PACK_NAMES.absorbedInstitution);
     },
@@ -372,6 +412,16 @@ const EFFECT_MANIFEST = Object.freeze([
       repair => repair?.type === 'unsupported_institution',
     ),
   }),
+  Object.freeze({
+    id: 'repair.access_compatibility',
+    description:
+      'coherenceRepairPass removed an institution the resolved trade route '
+      + 'cannot support (a mountain-pass village seats a Fishmonger, whose '
+      + 'catalog gate only forbids `isolated`, then the access check rejects it)',
+    detect: settlement => repairs(settlement).some(
+      repair => repair?.type === 'access_compatibility',
+    ),
+  }),
 ]);
 
 /**
@@ -382,35 +432,46 @@ const EFFECT_MANIFEST = Object.freeze([
  *
  * - `hard_dependency` (add the missing dependency): never observed in 194
  *   generated specimens. GATE_FEATURES dependencies are structurally
- *   pre-satisfied — 60 of 89 hard-`requires` gates are self-satisfying through
+ *   pre-satisfied — 65 of 89 hard-`requires` gates are self-satisfying through
  *   structuralValidator's SPATIAL_FEATURES expansion (the gated institution
- *   implies its own prerequisites into the checked set), and the rest name
- *   `required: true` catalog entries their tier always seats. Forcing the gap
- *   with a toggle cannot reach it either: the toggle marks the dependency
+ *   implies its own prerequisites into the checked set; counts corrected from
+ *   60/29 to 65/24 by the EP-6 INV-B enumeration, 2026-07-27), and the rest
+ *   name `required: true` catalog entries their tier always seats. Forcing the
+ *   gap with a toggle cannot reach it either: the toggle marks the dependency
  *   explicitly excluded, so `isCompatible` refuses to add it and the pass falls
- *   through to `unsupported_institution` instead.
- * - `access_compatibility` (remove an institution the route cannot support):
- *   INSTITUTION_SPATIAL gates exactly four names. Two ('Major port', 'Navy (if
- *   coastal)') are absent from institutionalCatalog entirely; 'Fishmonger'
- *   declares `forbiddenTradeRoutes: ['isolated']` and 'Docks/port facilities'
- *   declares `tradeRouteRequired: ['port','river']`, so no seating path can
- *   place either on an incompatible route. The cascade's airship override is
- *   the one path that seats docks off-route, and INSTITUTION_SPATIAL's
- *   exception names the exact catalog entry it requires. Custom content cannot
- *   open the gap: a custom institution has no native semantic name, so the
- *   airship check does not see it (finite-semantics law).
+ *   through to `unsupported_institution` instead. INV-B measured the correct
+ *   ladder-aware fix at 41% of golden keys / 39% of soak worlds — it is PARKED
+ *   for the owner-signed T4 ONE REGEN batch (17 of the 65 gates are
+ *   LEGITIMATELY vacuous: the roster ladders evict the lesser whenever the
+ *   greater seats, so the naive self-exclusion fix is a measured regression).
  * - `mutual_exclusion` (remove an institution that conflicts with another):
  *   `exclusion_violation` has exactly one producer — GATE_FEATURES `blockedBy`
  *   — and NO entry in src/data/spatialData.js declares `blockedBy`. The branch
- *   is unreachable by construction, not by sampling.
+ *   is unreachable by construction, not by sampling. INV-A archaeology
+ *   (2026-07-27): the data was NEVER authored at any commit back to the
+ *   2026-03-27 prototype bundle; the working exclusion mechanism is
+ *   `exclusiveGroup` (61 catalog entries, four seat-time enforcement sites,
+ *   0/400 measured coexistence), and authoring `blockedBy` pairs was measured
+ *   HARMFUL (self-implication makes the blocker vacuously present; protected
+ *   subjects produce permanent unclearable errors). Retirement is the
+ *   recommended owner call (queue EP-g1), measured at 0/400 output change.
  *
- * Authored institutions cannot reach any of the three either: structuralValidator
+ * `access_compatibility` was listed here until 2026-07-27 and its recorded
+ * evidence was FALSIFIED by the EP-6 INV-A/INV-B probes: the reasoning held for
+ * Docks (a true inclusion-list) but not for Fishmonger, whose FORBIDDEN-list
+ * permits every route it does not name — `mountain_pass` (user-selectable) and
+ * `none` fall in the gap between the two list polarities, seat the Fishmonger,
+ * and the access check then removes it. The stratum now lives in
+ * EFFECT_MANIFEST with the mountain-pass specimen. The lesson is recorded in
+ * the zero-occurrence ratchet below: exclusion entries are CLAIMS, and claims
+ * carry enforcement.
+ *
+ * Authored institutions cannot reach either stratum: structuralValidator
  * downgrades every violation naming an authored/forced/custom institution to
  * `by_design`, below the error floor the repair pass acts on.
  */
 const UNREACHABLE_STRATA = Object.freeze([
   'repair.hard_dependency',
-  'repair.access_compatibility',
   'repair.mutual_exclusion',
 ]);
 
@@ -484,5 +545,32 @@ describe('authored effect reachability', () => {
     ).toEqual([]);
     expect(registered.size, 'duplicate effect id in EFFECT_MANIFEST')
       .toBe(EFFECT_MANIFEST.length);
+  });
+
+  it('holds every recorded-unreachable stratum at ZERO occurrences (the exclusion ratchet)', () => {
+    // The gap INV-B exposed: an exclusion entry is a CLAIM about the pipeline,
+    // and until 2026-07-27 nothing enforced it — access_compatibility sat here
+    // for a day while quietly firing at baseline. If a stratum recorded as
+    // unreachable ever fires, that is NEWS (a producer changed, or the original
+    // probe was wrong): promote it to EFFECT_MANIFEST with a specimen instead of
+    // letting the finding rot.
+    const failures = collectSeedFailures(UNREACHABLE_STRATA, (strataId) => {
+      const repairType = strataId.replace(/^repair\./, '');
+      const firedOn = specimens
+        .filter(specimen => repairs(specimen.settlement).some(
+          repair => repair?.type === repairType,
+        ))
+        .map(specimen => specimen.id);
+      expect(
+        firedOn,
+        `${strataId} is recorded UNREACHABLE but fired on [${firedOn.join(', ')}] — `
+        + 'the producer became reachable (or the exclusion evidence was wrong); '
+        + 'move it into EFFECT_MANIFEST with a specimen and delete its exclusion',
+      ).toEqual([]);
+    });
+    expectNoSeedFailures(
+      failures,
+      'every recorded-unreachable stratum records zero repairs across the corpus',
+    );
   });
 });

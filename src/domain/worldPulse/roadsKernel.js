@@ -542,8 +542,11 @@ function advanceLitRoads(args) {
       });
       if (!res && phase !== 'visiting') {
         const level = embattlementLevel(worldState, hop);
-        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
-          const captorId = idSet.has(hop) ? hop : destId;
+        const captorId = idSet.has(hop) ? hop : destId;
+        // THE LAW: a court cannot take its own envoy hostage. currentHopOf returns path[0] ===
+        // homeId early outbound, so an embattled HOME would otherwise capture its own embassy.
+        // The arm contributes nothing (no roll) — the army arm's `=== homeId` skip at armyOnHop.
+        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD && captorId !== homeId) {
           const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
           res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
         }
@@ -557,8 +560,14 @@ function advanceLitRoads(args) {
         res = resolveSeaHazard({ m, weekClock, digest, season, worldState, graph, homeId, destId, exposure, protection, fork, rngSeed, now2, idSet, blockades: seaBlockades });
       }
       // T1 — army on the route / occupation during the stay.
-      let t1Captor = null;
-      if (!overSea && phase === 'visiting' && asObject(occupations[destId]).occupierId) t1Captor = str(asObject(occupations[destId]).occupierId);
+      // THE LAW: a court cannot take its own envoy hostage. The army arm already skips its own
+      // home (armyOnHop's `armyHome === homeId` guard); the OCCUPIER arm was missing the same
+      // guard, so a §11b dominion inspection into a holding the home court itself occupies was
+      // captured BY ITS OWN COURT — home paid itself the ransom and ate its own legitimacy hit.
+      // When the occupier IS home, this arm contributes no captor and the pass falls through to
+      // armyOnHop exactly as it does for an unoccupied host.
+      const occupier = asObject(occupations[destId]).occupierId;
+      let t1Captor = !overSea && phase === 'visiting' && occupier && str(occupier) !== homeId ? str(occupier) : null;
       if (!res && !overSea && !t1Captor) t1Captor = armyOnHop(armyLedger, graph, worldState, hop, homeId);
       if (t1Captor) {
         const p = captureProbability({ base: ROADS_TUNING.T1_BASE, exposure, protection, alpha: ROADS_TUNING.T1_ALPHA });
@@ -566,7 +575,11 @@ function advanceLitRoads(args) {
       }
       // T2 — siege into the host during the stay.
       if (!res && phase === 'visiting') {
-        const besiegers = warFrontsInto(graph, destId);
+        // THE LAW: a court cannot take its own envoy hostage — home is filtered OUT of the
+        // besieger list (the army arm's per-army `=== homeId` skip, applied to a list), so a
+        // guest visiting a host that HOME itself besieges is taken by another besieger or by
+        // no one at all, never by its own siege lines.
+        const besiegers = warFrontsInto(graph, destId).filter((b) => str(b) !== homeId);
         if (besiegers.length) {
           const captorId = String([...besiegers].sort(cmp)[0]);
           const p = captureProbability({ base: ROADS_TUNING.T2_BASE, exposure, protection, alpha: ROADS_TUNING.T2_ALPHA });
@@ -576,8 +589,11 @@ function advanceLitRoads(args) {
       // T3 — embattled roads (LAND in-transit only; a sea hop's piracy is S3, handled above).
       if (!res && !overSea && phase !== 'visiting') {
         const level = embattlementLevel(worldState, hop);
-        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD) {
-          const captorId = idSet.has(hop) ? hop : destId;
+        const captorId = idSet.has(hop) ? hop : destId;
+        // THE LAW: a court cannot take its own envoy hostage. currentHopOf returns path[0] ===
+        // homeId early outbound (and again at the end of the reversed return path), so an
+        // embattled HOME would otherwise rob or capture its own traveller on the doorstep.
+        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD && captorId !== homeId) {
           const p = captureProbability({ base: ROADS_TUNING.T3_BASE * level, exposure, protection, alpha: ROADS_TUNING.T3_ALPHA });
           res = fork.random() < p ? { cls: 'T3', outcome: 'hostage', captorId } : { cls: 'T3', outcome: 'robbed', captorId };
         }

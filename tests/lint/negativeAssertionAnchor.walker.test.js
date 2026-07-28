@@ -116,8 +116,10 @@ function renderLiteral(found) {
  * FROZEN 2026-07-27 from this walker's own scan at composite-r4 d0fdcf7c (55 files /
  * 181 sites), RE-FROZEN the same day after the EP-2 sweep banked the win: 2 files,
  * 2 sites. Both survivors are DELIBERATE honest-bare findings awaiting owner rulings
- * (tuningBatchE2 — the VS16 pin over all-empty icons; subsumption — the unreachable
- * tanner-rule guard), recorded in docs/EPISTEMIC_PREVENTION_PLAN.md. SHRINK-ONLY.
+ * (tuningBatchE2 — the VS16 pin over all-empty icons, owner pick EP-e). The
+ * subsumption tanner-guard site was RETIRED 2026-07-28 by the EP-6 fix wave: the
+ * dead conditional became a live anchored invariant when the furrier→tannery
+ * producer-eating rule was deleted. SHRINK-ONLY.
  *
  * To bank a win: anchor the site (prefer expectPresentThenAbsent /
  * expectAbsentWithAnchor; use `// anchored: <reason>` only where the anchor is
@@ -127,7 +129,6 @@ function renderLiteral(found) {
  */
 const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/generators/tuningBatchE2.test.js': 1,
-  'tests/joins/subsumption.test.js': 1,
 });
 
 describe('negative-assertion anchor walker (habitat removal)', () => {
@@ -195,8 +196,8 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
       'the scan found fewer un-anchored negatives than the frozen inventory — either sites were'
       + ' anchored (lower their rows) or the scanner broke',
     ).toBeGreaterThanOrEqual(totalFrozen);
-    expect(Object.keys(FROZEN_UNANCHORED_NEGATIVES).length, 'frozen file roster').toBe(2);
-    expect(totalFrozen, 'frozen site total').toBe(2);
+    expect(Object.keys(FROZEN_UNANCHORED_NEGATIVES).length, 'frozen file roster').toBe(1);
+    expect(totalFrozen, 'frozen site total').toBe(1);
   });
 
   // ── GUARD-THE-GUARD: the detector, on fixtures ─────────────────────────────
