@@ -230,7 +230,7 @@ export default function AccountAiKeysSection() {
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Model capability</div>
               {tierLabel && (
-                <span style={{ padding: `2px ${SP.sm}px`, borderRadius: R.pill || R.md, fontSize: FS.xs, fontWeight: 700, color: GOLD, border: `1px solid ${GOLD}` }}>{tierLabel}</span>
+                <span style={{ padding: `2px ${SP.sm}px`, fontSize: FS.xs, fontWeight: 700, color: GOLD, border: `1px solid ${GOLD}` }}>{tierLabel}</span>
               )}
               <div style={{ marginLeft: 'auto' }}>
                 <Button variant="ghost" size="sm" disabled={busy === 'probe' || health !== 'healthy'} onClick={handleProbe}>

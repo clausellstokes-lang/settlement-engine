@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 117;
-export const MIGRATION_TRAIN_REPO_HEAD = 190;
+export const MIGRATION_TRAIN_REPO_HEAD = 192;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -230,6 +230,30 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({
         kind: 'function',
         name: 'system_clawback_credits',
+      }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'surveyor-probe-and-tier-price',
+    from: 191,
+    to: 192,
+    purpose: 'Surveyor BYOK capability probing (profile columns + probe-tier RPCs) and the tier credit multiplier on spend_credits — priced identity until the owner seeds ai_tier_multipliers.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        '191 recreates surveyor_byok_set carrying the 143 health-reset repair that 159 dropped — reverting reopens that regression;',
+        '192 recreates the net-current spend_credits; with no seeded multiplier row it charges base prices, so forward is already the safe state.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({
+        kind: 'function',
+        name: 'surveyor_byok_set_probe_tier',
+      }),
+      Object.freeze({
+        kind: 'function',
+        name: 'spend_credits',
       }),
     ]),
   }),
