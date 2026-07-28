@@ -105,6 +105,21 @@ describe('Lightly Defended contributes to legitimacy (the DEFENSE_CONTRIB hole)'
   });
 });
 
+describe('safety crisis labels contribute monotonically to legitimacy (H4)', () => {
+  const contribution = (safetyLabel) => computePublicLegitimacy({
+    prosperity: 'Moderate',
+    safetyProfile: { safetyLabel },
+  }, 'Defensible', 'city').breakdown.safety;
+
+  it('orders control and plague containment below Moderate, with Critical worst', () => {
+    expect(contribution('Moderate')).toBe(0);
+    expect(contribution('Controlled — Occupation Curfew')).toBe(-5);
+    expect(contribution('Quarantined — Plague Conditions')).toBe(-8);
+    expect(contribution('Restricted — Plague Conditions')).toBe(-12);
+    expect(contribution('Critical — Slave Revolt')).toBe(-20);
+  });
+});
+
 // ── 5. Arcane-instability magic gate ─────────────────────────────────────────
 describe('arcane_instability requires live magic (no wild-magic threats in mundane towns)', () => {
   const town = (config, magical) => ({

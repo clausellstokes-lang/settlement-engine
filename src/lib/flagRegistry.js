@@ -74,7 +74,6 @@ export const FLAG_DEFAULTS = Object.freeze({
   // also activates the RealmUnfurlLoading backdrop over the booting FMG map.
   loadingJourneyFilm: true,
   welcomeJourneyFilm: true,
-  loadingJourneySetBg: true,
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

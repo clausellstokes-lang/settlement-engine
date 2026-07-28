@@ -361,8 +361,9 @@ arbitration terms to be set at legal review, tied to the operating entity in §1
 ## 14. Contact
 
 Questions about these terms? Reach us at
-`[[CONTACT EMAIL — currently settlementforge@gmail.com; support@settlementforge.com is
-proposed but unconfirmed pending owner sign-off before launch]]`.
+`[[CONTACT EMAIL — support@settlementforge.com is selected; activate only after
+MX/forwarding and a round-trip test pass. The current runtime fallback remains
+settlementforge@gmail.com until that operational proof.]]`.
 
 *(Source of truth: `src/copy/support.js` — SUPPORT_EMAIL default
 `settlementforge@gmail.com`, overridable via `VITE_SUPPORT_EMAIL`.)*
@@ -404,8 +405,9 @@ proposed but unconfirmed pending owner sign-off before launch]]`.
    deployed `STRIPE_PRICE_PREMIUM` object charges 599 cents before launch.
 3. **`[[Surveyor price — $19.99/month, PROVISIONAL]]`** (§3) — owner-queued; not in
    force until the feature ships.
-4. **`[[CONTACT EMAIL]]`** (§14) — `settlementforge@gmail.com` today;
-   `support@settlementforge.com` is proposed but unconfirmed pending owner sign-off.
+4. **`[[CONTACT EMAIL]]`** (§14) — `support@settlementforge.com` is selected.
+   Operational activation still requires MX/forwarding and a successful round-trip;
+   `settlementforge@gmail.com` remains the runtime fallback until then.
 5. **`[[Operating entity / legal name]]`** — no legal entity name appears anywhere in
    the terms; §12–§13 need it.
 6. **`[[Governing law, jurisdiction, disputes/arbitration]]`** (§13).

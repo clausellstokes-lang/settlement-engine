@@ -18,34 +18,31 @@ import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import {
   INSTITUTION_SPATIAL,
   GATE_FEATURES,
+  GATE_DERIVED_REQUIREMENTS,
   GOVERNMENT_INSTITUTIONS,
 } from '../../src/data/spatialData.js';
 import { SPATIAL_FEATURES } from '../../src/generators/structuralValidator.js';
 
-// Pre-existing data bugs this guard surfaced on first run. These GATE_FEATURES
-// requirements name institutions that exist nowhere in the catalog/spatial maps,
-// so the requirement can never resolve. Fixing them is a domain/behavioral call
-// (which name was intended?), so they're quarantined here rather than guessed:
-//   - "Arcane university" / "Magical academy"  (required by "Magic item
-//     consignment") — no such institutions; likely meant "Academy of magic"
-//     and/or "Mages' guild".
-//   - "River access"  (required by "Tanners") — an ACCESS type, not an
-//     institution; belongs in `requiresAccess: ['river']`, not `requires`.
-// Remove each entry as the underlying data is fixed (the test enforces that:
-// a fixed name left in this list will fail).
-const KNOWN_UNRESOLVED = new Set([
-  'Arcane university',
-  'Magical academy',
-  'River access',
+// EP-g3 is an explicit owner disposition, not part of the EP-g2 vocabulary
+// repair. Keep these two dead legacy keys visible and exact until that decision
+// lands; any third non-catalog gate is a regression.
+const EP_G3_OWNER_DEFERRED_GATE_KEYS = new Set([
+  'Major port',
+  'Navy (if coastal)',
 ]);
 
-function buildDefinedNames() {
-  const defined = new Set();
+function buildCatalogNames() {
+  const names = new Set();
   for (const tier of Object.values(institutionalCatalog)) {
     for (const category of Object.values(tier)) {
-      for (const name of Object.keys(category)) defined.add(name);
+      for (const name of Object.keys(category)) names.add(name);
     }
   }
+  return names;
+}
+
+function buildDefinedNames() {
+  const defined = buildCatalogNames();
   for (const key of Object.keys(GATE_FEATURES)) defined.add(key);
   for (const entry of INSTITUTION_SPATIAL) {
     if (entry?.institution) defined.add(entry.institution);
@@ -59,6 +56,7 @@ function buildDefinedNames() {
 }
 
 describe('institution-name integrity (string-coupling guard)', () => {
+  const catalogNames = buildCatalogNames();
   const defined = buildDefinedNames();
   const isDefined = (name) => defined.has(name);
 
@@ -85,15 +83,24 @@ describe('institution-name integrity (string-coupling guard)', () => {
     expect(orphans).toEqual([]);
   });
 
-  it('every GATE_FEATURES requirement resolves, except documented pre-existing bugs', () => {
-    const orphans = new Set();
+  it('every live GATE_FEATURES key is a catalog institution', () => {
+    const orphans = Object.keys(GATE_FEATURES)
+      .filter(name => !catalogNames.has(name))
+      .sort();
+    expect(orphans).toEqual([...EP_G3_OWNER_DEFERRED_GATE_KEYS].sort());
+  });
+
+  it('every live GATE_FEATURES dependency is cataloged or explicitly real-derived', () => {
+    const derived = new Set(GATE_DERIVED_REQUIREMENTS);
+    const orphans = [];
     for (const [feature, def] of Object.entries(GATE_FEATURES)) {
-      for (const req of def?.requires || []) {
-        if (!isDefined(req)) orphans.add(req);
+      for (const field of ['requires', 'requiresAny', 'blockedBy']) {
+        for (const requirement of def?.[field] || []) {
+          if (catalogNames.has(requirement) || derived.has(requirement)) continue;
+          orphans.push(`${feature}.${field}: ${requirement}`);
+        }
       }
     }
-    // Exact match: a NEW unresolved name fails (drift caught); a FIXED one also
-    // fails, prompting its removal from KNOWN_UNRESOLVED so the list stays honest.
-    expect([...orphans].sort()).toEqual([...KNOWN_UNRESOLVED].sort());
+    expect(orphans.sort()).toEqual([]);
   });
 });

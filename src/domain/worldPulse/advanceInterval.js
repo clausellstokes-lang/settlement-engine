@@ -11,6 +11,8 @@ import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
 import { withCustomContent } from '../../lib/dependencyEngine.js';
 
+/** @typedef {import('../region/wizardNews.js').RawWizardNewsEntry} RawWizardNewsEntry */
+
 // Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
 // (a one_year advance is 52 synchronous one-week ticks — 4-week months, 13-week seasons, a 52-week year) does not freeze the UI:
 // the await hands control back to the event loop, letting the toolbar progress
@@ -76,6 +78,15 @@ function reportAdvanceProgress(onProgress, detail) {
   try {
     host.dispatchEvent(new host.CustomEvent(ADVANCE_PROGRESS_EVENT, { detail }));
   } catch { /* no listener contract — never let the notification break the tick loop */ }
+}
+
+/**
+ * @param {((detail: {tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}) => void)|null|undefined} onTickObservation
+ * @param {{tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}} detail
+ */
+function reportTickObservation(onTickObservation, detail) {
+  if (typeof onTickObservation !== 'function') return;
+  onTickObservation(detail);
 }
 
 // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
@@ -234,6 +245,9 @@ function foldUpdatesOntoSaves(saves, updates) {
  *   resumed segment continues from its cursor, so ticksDone picks up where the
  *   pause left off). Observational only — see reportAdvanceProgress; the same
  *   detail is also dispatched as ADVANCE_PROGRESS_EVENT on globalThis.
+ * @param {((detail: {tick:number, ticksDone:number, ticksTotal:number, interval:string, rawWizardNewsEntries:RawWizardNewsEntry[]}) => void)|null} [args.onTickObservation]
+ *   Audit-only callback invoked once after each completed kernel tick. Its raw
+ *   Wizard News receipts are captured before feed dedupe/retention.
  * @param {Record<string, unknown>|null} [args.customContent] Immutable projection
  *   resolved from the campaign's pinned content binding.
  *
@@ -249,7 +263,7 @@ function foldUpdatesOntoSaves(saves, updates) {
  */
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
-  autoResolve = true, resume = null, onProgress = null, weeks = null,
+  autoResolve = true, resume = null, onProgress = null, onTickObservation = null, weeks = null,
   customContent = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
@@ -343,6 +357,8 @@ export async function simulateCampaignWorldInterval({
     // DM's dismissals filtered out); every other tick under autoresolve OFF defers
     // its majors so the loop can pause on the first that surfaces them.
     const isResumeTick = resuming && i === startTick;
+    /** @type {RawWizardNewsEntry[] | null} */
+    const rawWizardNewsEntries = typeof onTickObservation === 'function' ? [] : null;
     const tickArgs = {
       campaign: runningCampaign,
       saves: runningSaves,
@@ -352,6 +368,7 @@ export async function simulateCampaignWorldInterval({
       deferMajors: !autoResolve && !isResumeTick,
       dismissMajorIds: isResumeTick ? dismissMajorIds : null,
       intervalStartTick,
+      newsReceiptSink: rawWizardNewsEntries,
     };
     // Scope only the synchronous kernel call. The orchestrator may yield between
     // batches, so retaining a module-global override across awaits would allow
@@ -362,6 +379,13 @@ export async function simulateCampaignWorldInterval({
           customContent,
           () => simulateCampaignWorldPulse(tickArgs),
         );
+    reportTickObservation(onTickObservation, {
+      tick: tickResult.tick,
+      ticksDone: i + 1,
+      ticksTotal: tickCount,
+      interval: chosenInterval,
+      rawWizardNewsEntries: rawWizardNewsEntries || [],
+    });
 
     for (const update of tickResult.settlementUpdates || []) {
       updatesById.set(String(update.saveId), update);

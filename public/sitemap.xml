@@ -573,6 +573,16 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/system-distancepricednews</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/system-reframe</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/system-spatialconsequence</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -589,6 +599,21 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/system-npcgrowth</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/system-npcladder</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/system-traditions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/system-roads</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

@@ -40,11 +40,11 @@
  * tests/fixtures/distribution-envelopes.manifest.json — one home per bound, provenance
  * attached, re-derived on every run by tests/lint/distributionEnvelopePower.test.js.
  *
- * FOUR bounds here are deliberately NOT derived, and each says why at its assertion:
- * three rest on a measured rate of exactly 0 or exactly 1 (a binomial envelope is
+ * THREE bounds here are deliberately NOT derived, and each says why at its assertion:
+ * all three rest on a measured rate of exactly 0 or exactly 1 (a binomial envelope is
  * degenerate there — 0/400 does NOT license "at most 1 of 400", the rule of three puts
- * the plausible ceiling at 3), and one — the ordinary-town corrupted ceiling — is a
- * genuinely POWERLESS bound that no affordable corpus can rescue. See its comment.
+ * the plausible ceiling at 3). The formerly powerless ordinary-town corrupted ceiling
+ * was owner-ratified at the derived 20-count upper envelope on 2026-07-28.
  */
 
 import { readFileSync } from 'node:fs';
@@ -131,19 +131,18 @@ describe('birth-scale distribution sweep', () => {
   const criminalCities = sweep({ settType: 'city', culture: 'germanic', ...CRIMINAL_HEAVY }, 'cap-crim-city');
 
   it('ordinary settlements essentially never read influenced (corrupted) at birth', () => {
-    // ── TOWNS: a POWERLESS bound, kept in force, queued for the owner ──────────
-    // Re-measured 2026-07-27 at N=400: 9/400 = 2.25% corrupted, sigma 2.97. The 2.5%
-    // bound is 10 — ONE count above the measurement, which is 0.34 sigma of power. It
-    // is the capture defect in a second costume: it cannot distinguish tuning drift
-    // from ordinary corpus variation, and it reds on a single extra corrupted town.
-    // Making it a 2-sigma instrument at this rate needs N >= ~14,000 (the sweep is
-    // ~75 ms per settlement — over four hours), so raising N is not available. The
-    // honest alternatives are BOTH the owner's: accept a powerless bound, or loosen it
-    // to the derived 20 (5.0%, alpha 1e-3, 3.71 sigma). Program law forbids an agent
-    // loosening a bound, so 10 STAYS and the loosening is filed, not taken.
-    // Deliberately NOT registered in the envelope manifest: the registry refuses a
-    // sub-2-sigma bound, and papering over that with a registration would be the lie.
-    expect(countAtLeast(ordinaryTowns, 'corrupted')).toBeLessThanOrEqual(Math.round(N * 0.025));
+    // ── TOWNS: owner-ratified derived envelope ────────────────────────────────
+    // Re-measured 2026-07-27 at N=400: 9/400 = 2.25% corrupted. The old ceiling
+    // of 10 sat only 0.34 sigma above that base and could not distinguish tuning
+    // drift from ordinary corpus variation. The owner delegated the decision on
+    // 2026-07-28, so the alpha-1e-3 derived ceiling of 20 replaces it.
+    const townCorrupted = envelope('capture.ordinaryTown.corrupted');
+    expect(
+      countAtLeast(ordinaryTowns, 'corrupted'),
+      `ordinary towns corrupted: bound ${townCorrupted.bound} derived from a measured `
+      + `${townCorrupted.baseRate} at N=${townCorrupted.baseMeasurementN} `
+      + `(${townCorrupted.margin} sigma). A red means the town rate moved.`,
+    ).toBeLessThanOrEqual(townCorrupted.bound);
     // ── CITIES: derived ───────────────────────────────────────────────────────
     const cityCorrupted = envelope('capture.ordinaryCity.corrupted');
     expect(

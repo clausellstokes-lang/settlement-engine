@@ -52,14 +52,14 @@ describe('traditionProse — canonical-at-zero', () => {
 });
 
 describe('traditionProse — traditionBeatProse selector', () => {
-  it('seedless ⇒ canonical (byte-identical to the pre-existing beat)', () => {
+  it('seedless ⇒ canonical (with the T5 punctuation sweep applied)', () => {
     const held = traditionBeatProse({ outcome: 'triumph', name: 'The Feast', town: 'Ashford', ownerBit: '', seed: null });
     expect(held.phrase).toBe('was a triumph');
     expect(held.summary).toBe(
-      "In Ashford, The Feast was a triumph this year. A settlement's traditions carry its identity forward; each holding — or failing — is a mark on the year.",
+      "In Ashford, The Feast was a triumph this year. A settlement's traditions carry its identity forward; each holding or failing is a mark on the year.",
     );
     const cancelled = traditionBeatProse({ outcome: 'cancelled', name: 'The Feast', town: 'Ashford', ownerBit: '', seed: null });
-    expect(cancelled.summary).toContain('was set aside this year — hardship left no room');
+    expect(cancelled.summary).toContain('was set aside this year: hardship left no room');
   });
   it('is deterministic for a given seed and varies across seeds', () => {
     const a = traditionBeatProse({ outcome: 'good', name: 'X', town: 'T', ownerBit: '', seed: 'tradition.good.a.5' });

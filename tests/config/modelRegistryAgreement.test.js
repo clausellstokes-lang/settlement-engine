@@ -247,9 +247,9 @@ const familyOf = (id) => id.replace(/-\d{8}$/, '');
 // mirrors, so the two statements of the same fact can never drift apart silently.
 
 const KNOWN_DIVERGENCES = Object.freeze({
-  /** D1 + D2 - generate-narrative serves anthropic ids the picker allowlist refuses.
-   *  claude-sonnet-4-6 is D1; the dated haiku literal is D2. */
-  narrativeServesWhatThePickerRefuses: Object.freeze(['claude-haiku-4-5-20251001', 'claude-sonnet-4-6']),
+  /** D2 - generate-narrative's dated Haiku literal remains outside the exact-id
+   *  picker allowlist. D1's Sonnet 4.6 refusal was closed 2026-07-28. */
+  narrativeServesWhatThePickerRefuses: Object.freeze(['claude-haiku-4-5-20251001']),
 
   /** D1 + D2, the mirror direction - the picker offers ids generate-narrative never serves. */
   pickerOffersWhatNarrativeNeverServes: Object.freeze(['claude-haiku-4-5', 'claude-sonnet-4-5']),

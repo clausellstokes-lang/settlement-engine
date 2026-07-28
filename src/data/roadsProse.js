@@ -32,7 +32,7 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} departs ${x.home} on the ${x.dest} road`,
     ],
     summary: [
-      (x) => `${x.npc} has left ${x.home} for ${x.dest} on ${x.purpose} business — a journey of the middle ranks.`, // canonical
+      (x) => `${x.npc} has left ${x.home} for ${x.dest} on ${x.purpose} business. It is a journey of the middle ranks.`, // canonical
       (x) => `${x.npc} has taken the ${x.dest} road out of ${x.home}, sent on ${x.purpose} business.`,
       (x) => `An envoy of ${x.home}, ${x.npc}, is abroad toward ${x.dest} on ${x.purpose} business.`,
       (x) => `${x.npc} of ${x.home} is on the road to ${x.dest}, carrying ${x.purpose} business.`,
@@ -62,7 +62,7 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} is captured making for ${x.dest}`,
     ],
     summary: [
-      (x) => `${x.npc}, an envoy of ${x.home} bound for ${x.dest}, has fallen into the hands of ${x.captor} — a ransom will be raised.`, // canonical
+      (x) => `${x.npc}, an envoy of ${x.home} bound for ${x.dest}, has fallen into the hands of ${x.captor}. A ransom will be raised.`, // canonical
       (x) => `On the road to ${x.dest}, ${x.npc} of ${x.home} was taken by ${x.captor}; ${x.home} must ransom them home.`,
       (x) => `${x.captor} has seized ${x.npc} of ${x.home} en route to ${x.dest}; the price of return is being reckoned.`,
       (x) => `${x.npc} of ${x.home} is a captive of ${x.captor}, taken on the ${x.dest} road.`,
@@ -107,7 +107,7 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} is slowed on the ${x.dest} road`,
     ],
     summary: [
-      (x) => `A column on the ${x.dest} road forced ${x.npc} of ${x.home} to wait it out — a week lost, no more.`, // canonical
+      (x) => `A column on the ${x.dest} road forced ${x.npc} of ${x.home} to wait it out. A week was lost, no more.`, // canonical
       (x) => `${x.npc} of ${x.home} lost a week to a marching army on the ${x.dest} road.`,
       (x) => `Held off the ${x.dest} road by soldiers, ${x.npc} of ${x.home} was delayed a week.`,
       (x) => `${x.npc} of ${x.home} waited out a passing army and lost a week to ${x.dest}.`,
@@ -138,7 +138,7 @@ export const ROADS_NEWS = Object.freeze({
     ],
     summary: [
       (x) => `A party of adventurers has paid ${x.captor} the price of ${x.npc}'s release; the envoy of ${x.home} rides home, the treasury untouched.`, // canonical
-      (x) => `${x.npc} of ${x.home} is free of ${x.captor} — the coin came from adventurers, not the seat, and the road home lies open.`,
+      (x) => `${x.npc} of ${x.home} is free of ${x.captor}. The coin came from adventurers, not the seat, and the road home lies open.`,
       (x) => `Hired hands met ${x.captor}'s price for ${x.npc}; the captive of ${x.home} turns homeward with the debt paid by others.`,
       (x) => `${x.captor} has released ${x.npc} of ${x.home} to a party that bought them back; ${x.home}'s coffers were spared.`,
     ],
@@ -152,7 +152,7 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `A rescue frees ${x.npc} from ${x.captor}`,
     ],
     summary: [
-      (x) => `A party has broken ${x.npc} of ${x.home} out of ${x.captor}'s hands — no ransom paid, and ${x.captor} nurses the insult as ${x.npc} rides home.`, // canonical
+      (x) => `A party has broken ${x.npc} of ${x.home} out of ${x.captor}'s hands. No ransom was paid, and ${x.captor} nurses the insult as ${x.npc} rides home.`, // canonical
       (x) => `${x.npc} of ${x.home} is spirited free of ${x.captor} by force; the captor keeps no coin and holds a fresh grudge against ${x.home}.`,
       (x) => `The jailbreak succeeds: ${x.npc} of ${x.home} is gone from ${x.captor}, who is left the poorer and the angrier.`,
       (x) => `Adventurers pulled ${x.npc} of ${x.home} out of ${x.captor} without paying a coin; ${x.captor} will remember the affront.`,
@@ -182,7 +182,7 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} carries ${x.home}'s suit for peace toward ${x.dest}`,
     ],
     summary: [
-      (x) => `${x.home} has dispatched ${x.npc} to sue ${x.dest} for peace — a suit carried down the war road.`, // canonical
+      (x) => `${x.home} has dispatched ${x.npc} to sue ${x.dest} for peace. The suit travels down the war road.`, // canonical
       (x) => `${x.npc}, an envoy of ${x.home}, is bound for ${x.dest} to seek terms and an end to the war.`,
       (x) => `The court of ${x.home} sends ${x.npc} to the enemy at ${x.dest}, bearing an overture of peace.`,
       (x) => `${x.npc} of ${x.home} is on the war road to ${x.dest}, sent to plead for peace.`,
@@ -198,7 +198,7 @@ export const ROADS_NEWS = Object.freeze({
     ],
     summary: [
       (x) => `${x.dest} has received ${x.npc} of ${x.home} and heard the suit for peace; the envoy rides home under escort.`, // canonical
-      (x) => `The peace suit of ${x.home} was heard at ${x.dest} — ${x.npc} turns homeward, the overture laid before the enemy court.`,
+      (x) => `The peace suit of ${x.home} was heard at ${x.dest}. ${x.npc} turns homeward, the overture laid before the enemy court.`,
       (x) => `${x.npc} of ${x.home} was received at ${x.dest}; a case for peace now stands with the enemy, and the envoy comes home.`,
       (x) => `${x.dest} took in ${x.home}'s envoy and heard the plea for terms; ${x.npc} is sent home in honour.`,
     ],
@@ -213,7 +213,7 @@ export const ROADS_NEWS = Object.freeze({
     ],
     summary: [
       (x) => `${x.dest} refused to hear ${x.npc} of ${x.home}; the peace suit is turned back on the road, the war unabated.`, // canonical
-      (x) => `The enemy court at ${x.dest} would not receive ${x.home}'s envoy — ${x.npc} rides home, the overture rebuffed.`,
+      (x) => `The enemy court at ${x.dest} would not receive ${x.home}'s envoy. ${x.npc} rides home, the overture rebuffed.`,
       (x) => `${x.npc} of ${x.home} was turned away from ${x.dest} unheard; the suit for peace failed at the gates.`,
       (x) => `${x.dest} sent ${x.home}'s peace envoy home with nothing; ${x.npc} carries back only the refusal.`,
     ],
@@ -230,9 +230,9 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} is freed from ${x.captor} by a friend's coin from ${x.payer}`,
     ],
     summary: [
-      (x) => `${x.payer} met ${x.captor}'s price for ${x.npc} of ${x.home} out of friendship — a gift of freedom that binds ${x.home} in gratitude, not debt.`, // canonical
+      (x) => `${x.payer} met ${x.captor}'s price for ${x.npc} of ${x.home} out of friendship. The gift of freedom binds ${x.home} in gratitude, not debt.`, // canonical
       (x) => `A friendly hand in ${x.payer} bought ${x.npc} out of ${x.captor}'s keeping; ${x.home}'s treasury was spared and a bond of thanks was made.`,
-      (x) => `${x.npc} of ${x.home} rides home free of ${x.captor} — ${x.payer} paid the ransom as a friend, and ${x.home} remembers the mercy.`,
+      (x) => `${x.npc} of ${x.home} rides home free of ${x.captor}. ${x.payer} paid the ransom as a friend, and ${x.home} remembers the mercy.`,
       (x) => `Out of goodwill, ${x.payer} settled ${x.npc}'s ransom to ${x.captor}; the envoy of ${x.home} is freed and the friendship deepened.`,
     ],
   },
@@ -244,9 +244,9 @@ export const ROADS_NEWS = Object.freeze({
       (x) => `${x.npc} is bought free of ${x.captor} by ${x.payer}`,
     ],
     summary: [
-      (x) => `${x.payer} paid ${x.captor} the price of ${x.npc}'s release — a favour to ${x.home} that leaves a debt of gratitude owed to ${x.payer}.`, // canonical
+      (x) => `${x.payer} paid ${x.captor} the price of ${x.npc}'s release. The favour leaves ${x.home} owing a debt of gratitude to ${x.payer}.`, // canonical
       (x) => `An allied purse in ${x.payer} met ${x.captor}'s demand for ${x.npc} of ${x.home}; the envoy comes home owing ${x.payer} the favour.`,
-      (x) => `${x.npc} of ${x.home} is free of ${x.captor}, the coin found by ${x.payer} — a kindness ${x.home} will be expected to repay.`,
+      (x) => `${x.npc} of ${x.home} is free of ${x.captor}, the coin found by ${x.payer}. It is a kindness ${x.home} will be expected to repay.`,
       (x) => `${x.payer} covered ${x.npc}'s ransom to ${x.captor}; ${x.home}'s envoy rides home, the seat now indebted to ${x.payer}.`,
     ],
   },
@@ -254,13 +254,13 @@ export const ROADS_NEWS = Object.freeze({
     headline: [
       (x) => `${x.payer}, no friend to ${x.home}, pays ${x.npc}'s ransom to ${x.captor}`, // canonical
       (x) => `A rival in ${x.payer} buys ${x.npc} out of ${x.captor}'s hands`,
-      (x) => `${x.payer} settles ${x.npc}'s ransom — and gains a hold over ${x.home}`,
+      (x) => `${x.payer} settles ${x.npc}'s ransom and gains a hold over ${x.home}`,
       (x) => `${x.npc} is freed from ${x.captor} by rival coin from ${x.payer}`,
     ],
     summary: [
-      (x) => `${x.payer}, ${x.home}'s rival, paid ${x.captor} for ${x.npc}'s freedom — a coin that frees the envoy but leaves ${x.home} beholden to an enemy.`, // canonical
+      (x) => `${x.payer}, ${x.home}'s rival, paid ${x.captor} for ${x.npc}'s freedom. The coin frees the envoy but leaves ${x.home} beholden to an enemy.`, // canonical
       (x) => `A rival purse in ${x.payer} met ${x.captor}'s price for ${x.npc} of ${x.home}; the envoy is home, but the favour is a leash in ${x.payer}'s hand.`,
-      (x) => `${x.npc} of ${x.home} is bought free of ${x.captor} by ${x.payer} — no kindness, but a debt owed to a rival who will call it in.`,
+      (x) => `${x.npc} of ${x.home} is bought free of ${x.captor} by ${x.payer}. It is no kindness, but a debt owed to a rival who will call it in.`,
       (x) => `${x.payer} settled ${x.npc}'s ransom to ${x.captor} for its own ends; ${x.home}'s envoy rides home under obligation to an enemy court.`,
     ],
   },

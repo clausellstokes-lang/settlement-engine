@@ -64,12 +64,15 @@ function buildFixture(seed = 'interval-seed') {
     id: 'camp-interval',
     name: 'Interval Realm',
     settlementIds: ids,
-    regionalGraph: ensureRegionalGraph({
-      edges: [
-        { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'trade_partner' },
-        { id: 'edge.b.c', from: 'b', to: 'c', relationshipType: 'rival' },
-      ],
-    }),
+    regionalGraph: ensureRegionalGraph(
+      {
+        edges: [
+          { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'trade_partner' },
+          { id: 'edge.b.c', from: 'b', to: 'c', relationshipType: 'rival' },
+        ],
+      },
+      { now: NOW },
+    ),
     wizardNews: { currentTick: 0, entries: [] },
     worldState: {
       rngSeed: seed,
@@ -207,6 +210,49 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
     expect(first.worldState).toEqual(second.worldState);
     expect(first.settlementUpdates).toEqual(second.settlementUpdates);
     expect(first.wizardNews).toEqual(second.wizardNews);
+  });
+
+  test('AUDIT RECEIPTS: callback fires once per tick and cannot change composed bytes', async () => {
+    const observedFixture = buildFixture('audit-receipt-seed');
+    const plainFixture = buildFixture('audit-receipt-seed');
+    const observations = [];
+    const observed = await simulateCampaignWorldInterval({
+      campaign: observedFixture.campaign,
+      saves: observedFixture.saves,
+      interval: 'one_month',
+      commit: true,
+      now: NOW,
+      onTickObservation: (detail) => observations.push(detail),
+    });
+    const plain = await simulateCampaignWorldInterval({
+      campaign: plainFixture.campaign,
+      saves: plainFixture.saves,
+      interval: 'one_month',
+      commit: true,
+      now: NOW,
+    });
+
+    expect(observations).toHaveLength(4);
+    expect(observations.map(({ tick }) => tick)).toEqual([1, 2, 3, 4]);
+    expect(observations.map(({ ticksDone }) => ticksDone)).toEqual([1, 2, 3, 4]);
+    expect(observations.every(({ rawWizardNewsEntries }) => (
+      Array.isArray(rawWizardNewsEntries)
+    ))).toBe(true);
+    const rawReceipts = observations.flatMap(
+      ({ rawWizardNewsEntries }) => rawWizardNewsEntries,
+    );
+    const selectedIds = new Set(observed.selected.map((entry) => String(entry.id)));
+    expect(rawReceipts.some((entry) => {
+      const sourceEventId = String(entry.sourceEventId || '');
+      const prefix = `wizard_news.${entry.tick}.world_pulse`;
+      return selectedIds.has(sourceEventId)
+        && (
+          entry.id === `${prefix}.applied.${sourceEventId}`
+          || entry.id === `${prefix}.proposal.${sourceEventId}`
+        );
+    })).toBe(true);
+    expect(JSON.stringify(observed)).toBe(JSON.stringify(plain));
+    expect(observed).not.toHaveProperty('rawWizardNewsEntries');
   });
 
   test('Stage 2 METADATA: the composed result reports the DM-chosen interval, not the interior one_week', async () => {

@@ -12,9 +12,9 @@
  *     no Date, no rng-stream perturbation. Selection consumes zero draws, so NO
  *     structural/numeric field of the world can move; only the prose text varies. The
  *     newsVoice.js FNV idiom, brought engine-side (the CONTENT-VT-2 "new mechanism" note).
- *  2. CANONICAL-AT-ZERO. Every pool's index-0 entry is the EXACT pre-existing string, and
- *     a falsy seed selects index 0. So every seedless caller (all existing scorer unit
- *     tests) is byte-identical; only the seeded fold/kernel path varies.
+ *  2. CANONICAL-AT-ZERO. A falsy seed selects index 0, keeping every seedless caller
+ *     on the canonical telling. For pools that predate T5, index 0 preserves the
+ *     original semantics while the declared punctuation sweep retires its em dashes.
  *  3. FRAMING-NOT-SEMANTICS. Variants vary PHRASING only. Interpolated semantic tokens
  *     (counts, cause, provenance, names, numbers) are threaded through unchanged, so the
  *     receipt's meaning — the same reason, the same cause — never drifts.
@@ -69,6 +69,82 @@ export function pickLine(pool, seed, interp = {}) {
 }
 
 // ════════════════════════════════════════════════════════════════════════════════════
+// NPC GOAL BEATS (C2-Q2). These two emitters used one fixed telling for every
+// culmination and every context-driven change of ambition. The pools vary only
+// the telling; names, goals, roles, personality anchors, and context receipts
+// remain the same semantic facts. npcAgency seeds each cell from npc id + tick +
+// cell, so no rng draw moves and the same beat always replays to the same words.
+// ════════════════════════════════════════════════════════════════════════════════════
+
+/** @type {Record<string, Record<string, ProseVariant[]>>} */
+export const NPC_GOAL_NEWS = Object.freeze({
+  culmination: {
+    headline: [
+      (x) => `${x.name} achieves a long ambition`, // canonical
+      (x) => `${x.name}'s long design comes to fruition`,
+      (x) => `${x.name} claims a long-sought prize`,
+      (x) => `${x.name} brings a long ambition to its end`,
+    ],
+    summary: [
+      (x) => `${x.name} has worked toward "${x.goal}" for a long while, and now seizes it.`, // canonical
+      (x) => `After a long pursuit of "${x.goal}", ${x.name} has at last made it real.`,
+      (x) => `${x.name}'s patient work toward "${x.goal}" has paid off; the prize is now in hand.`,
+      (x) => `The long design to "${x.goal}" has borne fruit for ${x.name}.`,
+    ],
+    progressReason: [
+      (x) => `${x.name}'s long-term goal progress reached its culmination.`, // canonical
+      (x) => `${x.name}'s long design had ripened into action.`,
+      (x) => `The accumulated work toward "${x.goal}" could no longer be deferred.`,
+      (x) => `Patient effort finally carried ${x.name}'s ambition across the threshold.`,
+    ],
+    roleReason: [
+      (x) => `Role: ${x.role}; goal: ${x.goal}.`, // canonical
+      (x) => `${x.name} pursued "${x.goal}" from the position of ${x.role}.`,
+      (x) => `The ${x.role} path gave ${x.name} the means to pursue "${x.goal}".`,
+      (x) => `For ${x.name}, "${x.goal}" had become the defining aim of the ${x.role} role.`,
+    ],
+    conditionDescription: [
+      (x) => `${x.name} has consolidated power, shifting the local balance.`, // canonical
+      (x) => `${x.name}'s success has rearranged the local balance of power.`,
+      (x) => `${x.name} now commands greater standing, and the local balance has shifted around that fact.`,
+      (x) => `The old balance no longer holds after ${x.name}'s ascent.`,
+    ],
+    causeReason: [
+      'A long ambition reached fruition.', // canonical
+      'Years of effort brought a long design to its end.',
+      'A sustained ambition finally became fact.',
+      'The balance shifted when patient work paid off.',
+    ],
+  },
+  rebranch: {
+    headline: [
+      (x) => `${x.name} changes ambitions`, // canonical
+      (x) => `${x.name} takes up a new ambition`,
+      (x) => `${x.name} redirects a long design`,
+      (x) => `${x.name}'s aims turn with the times`,
+    ],
+    summary: [
+      (x) => `${x.name}'s goals shift because the settlement context changed.`, // canonical
+      (x) => `A changed settlement has forced ${x.name} to reconsider what comes next.`,
+      (x) => `${x.name} keeps the same character, but new circumstances now demand different aims.`,
+      (x) => `New conditions in the settlement have turned ${x.name}'s effort toward another end.`,
+    ],
+    contextReason: [
+      (x) => `Context changed from ${x.previous} to ${x.next}.`, // canonical
+      (x) => `The settlement context moved from ${x.previous} to ${x.next}.`,
+      (x) => `${x.name}'s recorded circumstances changed from ${x.previous} to ${x.next}.`,
+      (x) => `A new context, ${x.next}, displaced the old footing, ${x.previous}.`,
+    ],
+    personalityReason: [
+      (x) => `Personality remains anchored by ideal ${x.ideal} and flaw ${x.flaw}.`, // canonical
+      (x) => `${x.name}'s ${x.ideal} ideal and ${x.flaw} flaw remain unchanged beneath the new aims.`,
+      (x) => `The ambitions turn, but ${x.ideal} and ${x.flaw} still anchor ${x.name}.`,
+      (x) => `New goals do not rewrite ${x.name}: the ${x.ideal} ideal and ${x.flaw} flaw still hold.`,
+    ],
+  },
+});
+
+// ════════════════════════════════════════════════════════════════════════════════════
 // CALAMITY (CRITICAL — bucket-neutral by constitution). Title keeps "Great Calamity"
 // + name + year; summary/reasons never assert a kind and speak the bucket.
 // ════════════════════════════════════════════════════════════════════════════════════
@@ -86,18 +162,18 @@ export const CALAMITY_TITLES = Object.freeze([
 export const CALAMITY_SUMMARIES = Object.freeze([
   (x) => `A calamity has struck ${x.name}: ${x.ruin}, about ${x.deaths} dead, and many more take to the roads.`, // canonical
   (x) => `Calamity has come to ${x.name}: ${x.ruin}, near ${x.deaths} dead, and the survivors scatter to the roads.`,
-  (x) => `A great calamity has fallen on ${x.name} — ${x.ruin}, some ${x.deaths} dead, and many take flight along the roads.`,
+  (x) => `A great calamity has fallen on ${x.name}. The toll is ${x.ruin}, some ${x.deaths} dead, and many take flight along the roads.`,
   (x) => `${x.name} lies broken by calamity: ${x.ruin}, about ${x.deaths} dead, and the roads fill with those who remain.`,
   (x) => `Calamity has undone ${x.name}: ${x.ruin}, roughly ${x.deaths} dead, and the living take what they can to the roads.`,
 ]);
 
 /** @type {readonly ProseVariant[]} strike reason — bucket-neutral, geography-of-exposure. */
 export const CALAMITY_REASONS = Object.freeze([
-  'The calamity struck where the land lies most exposed — a reckoning of geography.', // canonical
-  'It fell hardest where the land lies most exposed — geography kept no favourites.',
-  'The most exposed ground bore the worst of it — a reckoning written by the terrain.',
-  'Where the land lies open and unsheltered, the ruin ran deepest — geography decided the toll.',
-  'The exposed ground took the heaviest blow — where the land offers no shelter, the reckoning is worst.',
+  'The calamity struck where the land lies most exposed. Geography exacted the reckoning.', // canonical
+  'It fell hardest where the land lies most exposed. Geography kept no favourites.',
+  'The most exposed ground bore the worst of it. The reckoning was written by the terrain.',
+  'Where the land lies open and unsheltered, the ruin ran deepest. Geography decided the toll.',
+  'The exposed ground took the heaviest blow because the land offers no shelter there.',
 ]);
 
 // ════════════════════════════════════════════════════════════════════════════════════
@@ -111,64 +187,64 @@ export const CALAMITY_REASONS = Object.freeze([
 /** @type {Record<string, ProseVariant[] | Record<string, ProseVariant[]>>} */
 export const WAR_RECEIPTS = Object.freeze({
   grievance: [
-    (x) => `A ledger of grievances stands open — resentment ${x.resentment}, memory ${x.memory}.`, // canonical
-    (x) => `The book of grievances stays open between them — resentment ${x.resentment}, memory ${x.memory}.`,
-    (x) => `Old accounts go unsettled — resentment stands at ${x.resentment}, the long memory at ${x.memory}.`,
-    (x) => `Every slight is still tallied — resentment ${x.resentment}, memory ${x.memory}, and nothing forgiven.`,
+    (x) => `A ledger of grievances stands open: resentment ${x.resentment}, memory ${x.memory}.`, // canonical
+    (x) => `The book of grievances stays open between them: resentment ${x.resentment}, memory ${x.memory}.`,
+    (x) => `Old accounts go unsettled: resentment stands at ${x.resentment}, the long memory at ${x.memory}.`,
+    (x) => `Every slight is still tallied: resentment ${x.resentment}, memory ${x.memory}, and nothing forgiven.`,
   ],
   revanchism: [
-    (x) => `Old wounds unforgotten — ${x.wounds} mark${x.s} in the ledger, and the grudge still burns.`, // canonical (keyword: unforgotten)
-    (x) => `The old wounds are not forgotten — ${x.wounds} mark${x.s} stand in the ledger, and the grudge burns yet.`,
-    (x) => `Wrongs long past still ache — ${x.wounds} mark${x.s} unavenged, and the grudge has not cooled.`,
-    (x) => `The reckoning was never paid — ${x.wounds} old mark${x.s} in the ledger, and the anger keeps its heat.`,
+    (x) => `Old wounds unforgotten: ${x.wounds} mark${x.s} in the ledger, and the grudge still burns.`, // canonical (keyword: unforgotten)
+    (x) => `The old wounds are not forgotten: ${x.wounds} mark${x.s} stand in the ledger, and the grudge burns yet.`,
+    (x) => `Wrongs long past still ache: ${x.wounds} mark${x.s} unavenged, and the grudge has not cooled.`,
+    (x) => `The reckoning was never paid: ${x.wounds} old mark${x.s} in the ledger, and the anger keeps its heat.`,
   ],
   resource_pressure: [
-    'Their granaries stand full while ours thin — hunger is faster than patience.', // canonical
-    'Their stores are heavy while our own run lean — an empty granary outpaces patience.',
-    'They eat their fill while our larders empty — want moves quicker than restraint.',
-    'Their harvest keeps while ours fails — a hungry season answers sooner than diplomacy.',
+    'Their granaries stand full while ours thin. Hunger is faster than patience.', // canonical
+    'Their stores are heavy while our own run lean. An empty granary outpaces patience.',
+    'They eat their fill while our larders empty. Want moves quicker than restraint.',
+    'Their harvest keeps while ours fails. A hungry season answers sooner than diplomacy.',
   ],
   treaty_default: [
-    'The treaty lies broken and the promised wagons never came — oathbreach is casus.', // canonical (keyword: oathbreach)
-    'The treaty is in tatters and the promised convoys never arrived — oathbreach is cause enough.',
-    'A signed compact went unhonoured and the pledged goods never came — oathbreach makes the casus.',
-    'The bargain was struck and then abandoned, the promised tribute withheld — such oathbreach is its own casus.',
+    'The treaty lies broken and the promised wagons never came. Oathbreach is casus.', // canonical (keyword: oathbreach)
+    'The treaty is in tatters and the promised convoys never arrived. Oathbreach is cause enough.',
+    'A signed compact went unhonoured and the pledged goods never came. Oathbreach makes the casus.',
+    'The bargain was struck and then abandoned, the promised tribute withheld. Such oathbreach is its own casus.',
   ],
   encirclement: [
-    'War stands at the borders on more sides than one — better to strike than be ringed.', // canonical
-    'Enemies press the frontier from several quarters — better the first blow than the closing ring.',
-    'Hostile banners gather on more marches than one — strike now, or be surrounded at leisure.',
-    'The borders are threatened from too many sides at once — better to break out than be encircled.',
+    'War stands at the borders on more sides than one. Better to strike than be ringed.', // canonical
+    'Enemies press the frontier from several quarters. Better the first blow than the closing ring.',
+    'Hostile banners gather on more marches than one. Strike now, or be surrounded at leisure.',
+    'The borders are threatened from too many sides at once. Better to break out than be encircled.',
   ],
   foreign_clash: [
-    'Our banners and theirs bleed for opposite claimants on the same field — the proxy is becoming our own quarrel.', // canonical
-    'Our men and theirs die for rival claimants on one field — the proxy war is curdling into ours.',
-    'We back opposite sides of the same contest with our own blood — what began as proxy is turning personal.',
-    'Their sponsored side and ours meet on the same ground — the borrowed quarrel is becoming a private one.',
+    'Our banners and theirs bleed for opposite claimants on the same field. The proxy is becoming our own quarrel.', // canonical
+    'Our men and theirs die for rival claimants on one field. The proxy war is curdling into ours.',
+    'We back opposite sides of the same contest with our own blood. What began as proxy is turning personal.',
+    'Their sponsored side and ours meet on the same ground. The borrowed quarrel is becoming a private one.',
   ],
   legitimacy_hunger: [
-    'The seat is contested at home — a foreign enemy is cheaper than a domestic answer.', // canonical
-    'The throne is shaky at home — a war abroad costs less than an answer to the streets.',
-    'Authority is questioned within the walls — an outside foe is a cheaper reply than reform.',
-    'The seat is unsteady and challenged — a foreign quarrel buys the loyalty a domestic fix would not.',
+    'The seat is contested at home. A foreign enemy is cheaper than a domestic answer.', // canonical
+    'The throne is shaky at home. A war abroad costs less than an answer to the streets.',
+    'Authority is questioned within the walls. An outside foe is a cheaper reply than reform.',
+    'The seat is unsteady and challenged. A foreign quarrel buys the loyalty a domestic fix would not.',
   ],
   corruption_exposed: [
-    'Their court is rotten and the rot is now public — someone must answer for it.', // canonical
-    'Their court is corrupt and the corruption is now in the open — a reckoning is demanded.',
-    'The rot in their halls is known to all now — such exposure calls for an answer.',
-    'Their governance is fouled and the foulness laid bare — someone must be made to answer.',
+    'Their court is rotten and the rot is now public. Someone must answer for it.', // canonical
+    'Their court is corrupt and the corruption is now in the open. A reckoning is demanded.',
+    'The rot in their halls is known to all now. Such exposure calls for an answer.',
+    'Their governance is fouled and the foulness laid bare. Someone must be made to answer.',
   ],
   ingratitude_debt: [
-    'The grain we gave in the lean years is spoken of now as a debt unpaid — ingratitude is its own casus.', // canonical
-    'The aid we gave in the hungry years is now called a debt owed — such ingratitude is casus enough.',
-    'What we shared in the lean seasons is remembered as a loan unrepaid — the ingratitude alone is cause.',
-    'The help extended in the thin years is recast as an obligation defaulted — ingratitude makes its own casus.',
+    'The grain we gave in the lean years is spoken of now as a debt unpaid. Ingratitude is its own casus.', // canonical
+    'The aid we gave in the hungry years is now called a debt owed. Such ingratitude is casus enough.',
+    'What we shared in the lean seasons is remembered as a loan unrepaid. The ingratitude alone is cause.',
+    'The help extended in the thin years is recast as an obligation defaulted. Ingratitude makes its own casus.',
   ],
   dependency_by_design: [
-    'Our looms and larders were bound to their markets by design — a dependence built to be a leash.', // canonical
-    'Our trades and stores were tied to their markets on purpose — a dependence made to be a tether.',
-    'Our workshops and granaries were fastened to their custom deliberately — a reliance shaped into a leash.',
-    'Our craft and provisions were made to lean on their markets by intent — a dependence meant to bind.',
+    'Our looms and larders were bound to their markets by design. The dependence was built to be a leash.', // canonical
+    'Our trades and stores were tied to their markets on purpose. The dependence was made to be a tether.',
+    'Our workshops and granaries were fastened to their custom deliberately. The reliance was shaped into a leash.',
+    'Our craft and provisions were made to lean on their markets by intent. The dependence was meant to bind.',
   ],
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
@@ -176,95 +252,95 @@ export const WAR_RECEIPTS = Object.freeze({
 /** @type {Record<string, ProseVariant[] | Record<string, ProseVariant[]>>} */
 export const PEACE_RECEIPTS = Object.freeze({
   exhaustion: [
-    (x) => `The war has worn the town to the bone — exhaustion ${x.score}; the seat needs peace to survive.`, // canonical (keyword: exhaustion)
-    (x) => `The war has ground the town to the bone — exhaustion ${x.score}; the seat must have peace to last.`,
-    (x) => `The fighting has hollowed the town — exhaustion ${x.score}; without peace the seat cannot hold.`,
-    (x) => `The war has spent the town to its bones — exhaustion ${x.score}; peace is now a matter of survival.`,
+    (x) => `The war has worn the town to the bone: exhaustion ${x.score}; the seat needs peace to survive.`, // canonical (keyword: exhaustion)
+    (x) => `The war has ground the town to the bone: exhaustion ${x.score}; the seat must have peace to last.`,
+    (x) => `The fighting has hollowed the town: exhaustion ${x.score}; without peace the seat cannot hold.`,
+    (x) => `The war has spent the town to its bones: exhaustion ${x.score}; peace is now a matter of survival.`,
   ],
   belief_convergence: {
     converged: [
-      'The fighting has taught both courts the same truth — no offer insults any longer.', // canonical (keyword: same truth)
-      'The war has taught both courts the same truth at last — no terms give offence now.',
-      'Both courts have been schooled to the same truth by the fighting — no offer is an insult any more.',
-      'The fighting has brought both courts to the same truth — an honest offer no longer offends.',
+      'The fighting has taught both courts the same truth. No offer insults any longer.', // canonical (keyword: same truth)
+      'The war has taught both courts the same truth at last. No terms give offence now.',
+      'Both courts have been schooled to the same truth by the fighting. No offer is an insult any more.',
+      'The fighting has brought both courts to the same truth. An honest offer no longer offends.',
     ],
     drifting: [
-      (x) => `The courts' reckonings drift closer (divergence ${x.divergence}) — the war is running out of illusions.`, // canonical
-      (x) => `The two courts' accounts draw nearer (divergence ${x.divergence}) — the war is losing its illusions.`,
-      (x) => `Their reckonings are converging (divergence ${x.divergence}) — the war has fewer illusions left to spend.`,
-      (x) => `The courts read the war more alike now (divergence ${x.divergence}) — the last illusions are wearing thin.`,
+      (x) => `The courts' reckonings drift closer (divergence ${x.divergence}). The war is running out of illusions.`, // canonical
+      (x) => `The two courts' accounts draw nearer (divergence ${x.divergence}). The war is losing its illusions.`,
+      (x) => `Their reckonings are converging (divergence ${x.divergence}). The war has fewer illusions left to spend.`,
+      (x) => `The courts read the war more alike now (divergence ${x.divergence}). The last illusions are wearing thin.`,
     ],
   },
   economic_strangulation: {
     base: [
-      'The routes are severed and the treasury bleeds — the war costs more than its aims.', // canonical
-      'The trade routes are cut and the treasury drains — the war now costs more than it can win.',
+      'The routes are severed and the treasury bleeds. The war costs more than its aims.', // canonical
+      'The trade routes are cut and the treasury drains. The war now costs more than it can win.',
       'With the routes broken and the coffers emptying, the war is dearer than its purpose.',
       'The severed routes and the bleeding treasury make the war cost more than it could ever gain.',
     ],
     blockade: [
-      'The harbour is blockaded — no keel comes or goes and the wharves stand idle; a strangled port cannot bear the war.', // canonical (keyword: blockaded)
-      'The port is blockaded — nothing sails in or out and the docks lie still; a choked harbour cannot fund a war.',
-      'A blockade seals the harbour — no ship moves and the quays stand empty; a strangled port cannot sustain the fight.',
-      'The harbour is blockaded shut — no cargo comes or goes and the wharves are idle; a throttled port cannot carry the war.',
+      'The harbour is blockaded. No keel comes or goes, and the wharves stand idle; a strangled port cannot bear the war.', // canonical (keyword: blockaded)
+      'The port is blockaded. Nothing sails in or out, and the docks lie still; a choked harbour cannot fund a war.',
+      'A blockade seals the harbour. No ship moves, and the quays stand empty; a strangled port cannot sustain the fight.',
+      'The harbour is blockaded shut. No cargo comes or goes, and the wharves are idle; a throttled port cannot carry the war.',
     ],
     supplyweb: [
-      'A neighbour strangles the supply web by design — the granary villages burn and the routes are cut; the war cannot be borne.', // canonical (keyword: supply web)
-      'A neighbour throttles the supply web on purpose — the granary villages fall and the routes are severed; the war cannot be carried.',
-      'The supply web is being strangled by deliberate design — the feeder villages are put to ruin and the roads cut; the war is past bearing.',
-      'A rival chokes the supply web by intent — the granary hamlets are wasted and the routes broken; the war can no longer be borne.',
+      'A neighbour strangles the supply web by design. The granary villages burn and the routes are cut; the war cannot be borne.', // canonical (keyword: supply web)
+      'A neighbour throttles the supply web on purpose. The granary villages fall and the routes are severed; the war cannot be carried.',
+      'The supply web is being strangled by deliberate design. The feeder villages are put to ruin and the roads cut; the war is past bearing.',
+      'A rival chokes the supply web by intent. The granary hamlets are wasted and the routes broken; the war can no longer be borne.',
     ],
   },
   coalition_fracture: [
-    (x) => `The coalition thins — ${x.peel} of ${x.peak} co-belligerents have left the field.`, // canonical (keyword: coalition thins)
-    (x) => `The coalition is thinning — ${x.peel} of ${x.peak} co-belligerents have quit the field.`,
-    (x) => `The alliance frays — ${x.peel} of ${x.peak} co-belligerents have withdrawn from the field.`,
-    (x) => `The war-coalition thins out — ${x.peel} of ${x.peak} co-belligerents have abandoned the field.`,
+    (x) => `The coalition thins: ${x.peel} of ${x.peak} co-belligerents have left the field.`, // canonical (keyword: coalition thins)
+    (x) => `The coalition is thinning: ${x.peel} of ${x.peak} co-belligerents have quit the field.`,
+    (x) => `The alliance frays: ${x.peel} of ${x.peak} co-belligerents have withdrawn from the field.`,
+    (x) => `The war-coalition thins out: ${x.peel} of ${x.peak} co-belligerents have abandoned the field.`,
   ],
   // mediation — EVERY variant must lead with the mediator's name (the ^M pin).
   mediation: [
-    (x) => `${x.mediatorName} stands torn between the belligerents — its envoys carry terms both courts will hear.`, // canonical
+    (x) => `${x.mediatorName} stands torn between the belligerents. Its envoys carry terms both courts will hear.`, // canonical
     (x) => `${x.mediatorName}, caught between the belligerents, sends envoys with terms both courts will hear.`,
-    (x) => `${x.mediatorName} is pulled both ways between the warring courts — its envoys bring terms each will hear.`,
-    (x) => `${x.mediatorName} stands cross-pressured between the two — its envoys offer terms both courts can hear.`,
+    (x) => `${x.mediatorName} is pulled both ways between the warring courts. Its envoys bring terms each will hear.`,
+    (x) => `${x.mediatorName} stands cross-pressured between the two. Its envoys offer terms both courts can hear.`,
   ],
   harvest_pressure: [
-    'The harvest stands in the fields and the levies mutter of home — wars pause for bread.', // canonical
-    'The harvest waits in the fields and the levies grumble for home — wars give way to bread.',
-    'The crop stands ready and the levies long for home — even wars pause for the harvest.',
-    'The fields are heavy with harvest and the levies want home — bread stills the war for a season.',
+    'The harvest stands in the fields and the levies mutter of home. Wars pause for bread.', // canonical
+    'The harvest waits in the fields and the levies grumble for home. Wars give way to bread.',
+    'The crop stands ready and the levies long for home. Even wars pause for the harvest.',
+    'The fields are heavy with harvest and the levies want home. Bread stills the war for a season.',
   ],
   realignment: {
     common: [
-      'A third banner is at both gates — signed in haste, for the horde was at the passes.', // canonical (keyword: horde/passes)
-      'A common enemy stands at both gates — the peace is signed in haste, for the horde was in the passes.',
-      'One third banner threatens them both — terms are struck quickly, with the horde already at the passes.',
-      'A shared foe presses both courts — the peace comes in haste, the horde loose in the passes.',
+      'A third banner is at both gates. The peace is signed in haste, for the horde was at the passes.', // canonical (keyword: horde/passes)
+      'A common enemy stands at both gates. The peace is signed in haste, for the horde was in the passes.',
+      'One third banner threatens them both. Terms are struck quickly, with the horde already at the passes.',
+      'A shared foe presses both courts. The peace comes in haste, the horde loose in the passes.',
     ],
     distinct: [
-      'Each court is beset by another foe — this front is a luxury neither can keep.', // canonical
-      'Each court has another enemy of its own — this front is a luxury neither can afford.',
-      'Both courts face separate threats elsewhere — keeping this front is a luxury for neither.',
-      'Each is pressed by a different foe — neither can spare the strength this front demands.',
+      'Each court is beset by another foe. This front is a luxury neither can keep.', // canonical
+      'Each court has another enemy of its own. This front is a luxury neither can afford.',
+      'Both courts face separate threats elsewhere. Keeping this front is a luxury for neither.',
+      'Each is pressed by a different foe. Neither can spare the strength this front demands.',
     ],
   },
   spheres_understanding: [
-    'Better to draw a line between our claims than to make this proxy our own war — a sphere apiece, and the field left to them.', // canonical
-    'Better a line drawn between our claims than a proxy made our own war — a sphere for each, the field left to them.',
-    'Sooner a boundary between our claims than a borrowed quarrel turned real — a sphere apiece, and the field theirs.',
-    'Rather mark our claims apart than let this proxy become our war — a sphere for each side, the field left to them.',
+    'Better to draw a line between our claims than to make this proxy our own war: a sphere apiece, and the field left to them.', // canonical
+    'Better a line drawn between our claims than a proxy made our own war: a sphere for each, the field left to them.',
+    'Sooner a boundary between our claims than a borrowed quarrel turned real: a sphere apiece, and the field theirs.',
+    'Rather mark our claims apart than let this proxy become our war: a sphere for each side, the field left to them.',
   ],
   debt_forgiven: [
-    'The old grain-debt is spoken of as a gift once more — what was owed is forgiven, and the quarrel loses its cause.', // canonical
-    'The old grain-debt is called a gift again — what was owed is written off, and the quarrel loses its reason.',
-    'The aid once counted a debt is named a gift once more — the obligation is forgiven, and the cause of the quarrel falls away.',
-    'The old debt of grain is remembered as a gift again — forgiven, and with it the quarrel loses its ground.',
+    'The old grain-debt is spoken of as a gift once more. What was owed is forgiven, and the quarrel loses its cause.', // canonical
+    'The old grain-debt is called a gift again. What was owed is written off, and the quarrel loses its reason.',
+    'The aid once counted a debt is named a gift once more. The obligation is forgiven, and the cause of the quarrel falls away.',
+    'The old debt of grain is remembered as a gift again. It is forgiven, and with it the quarrel loses its ground.',
   ],
   bonds_of_commerce: [
-    'Too many looms and larders bind us to their markets — a war would cost more than either court could bear.', // canonical
-    'Too many trades and stores tie us to their markets — a war would cost more than either court could stand.',
-    'Our workshops and granaries are too bound to their custom — a war would cost more than either could bear.',
-    'So much of our craft and provision leans on their markets — a war would ruin both courts before it settled anything.',
+    'Too many looms and larders bind us to their markets. A war would cost more than either court could bear.', // canonical
+    'Too many trades and stores tie us to their markets. A war would cost more than either court could stand.',
+    'Our workshops and granaries are too bound to their custom. A war would cost more than either could bear.',
+    'So much of our craft and provision leans on their markets. A war would ruin both courts before it settled anything.',
   ],
   // balance_restored — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
@@ -272,16 +348,16 @@ export const PEACE_RECEIPTS = Object.freeze({
 /** @type {Record<string, ProseVariant[]>} the two hegemony-sphere receipts (hegemonyFear.js). */
 export const HEGEMONY_RECEIPTS = Object.freeze({
   fear_of_dominance: [
-    (x) => `The shadow of ${x.centerName} falls long over the free towns — better to gather against it than be swallowed one by one.`, // canonical
-    (x) => `${x.centerName}'s shadow lies long over the free towns — better to band against it than be taken one by one.`,
-    (x) => `The reach of ${x.centerName} looms over the free towns — sooner a common stand than to be swallowed piecemeal.`,
-    (x) => `${x.centerName} throws a long shadow across the free towns — better to gather now than be devoured one at a time.`,
+    (x) => `The shadow of ${x.centerName} falls long over the free towns. Better to gather against it than be swallowed one by one.`, // canonical
+    (x) => `${x.centerName}'s shadow lies long over the free towns. Better to band against it than be taken one by one.`,
+    (x) => `The reach of ${x.centerName} looms over the free towns. Sooner a common stand than to be swallowed piecemeal.`,
+    (x) => `${x.centerName} throws a long shadow across the free towns. Better to gather now than be devoured one at a time.`,
   ],
   balance_restored: [
-    (x) => `${x.centerName}'s grip is slipping — with the shadow lifting, old rivals can breathe and treat.`, // canonical
-    (x) => `${x.centerName}'s hold is loosening — as the shadow lifts, old rivals can breathe and come to terms.`,
-    (x) => `The grip of ${x.centerName} is failing — with its shadow receding, old rivals find room to treat.`,
-    (x) => `${x.centerName}'s dominance wanes — the shadow lifts, and old rivals can breathe and parley.`,
+    (x) => `${x.centerName}'s grip is slipping. With the shadow lifting, old rivals can breathe and treat.`, // canonical
+    (x) => `${x.centerName}'s hold is loosening. As the shadow lifts, old rivals can breathe and come to terms.`,
+    (x) => `The grip of ${x.centerName} is failing. With its shadow receding, old rivals find room to treat.`,
+    (x) => `${x.centerName}'s dominance wanes. The shadow lifts, and old rivals can breathe and parley.`,
   ],
 });
 
@@ -290,7 +366,7 @@ export const DECREE_DEFAULT_RECEIPTS = Object.freeze([
   (x) => `Declared by decree: ${x.type} against ${x.to}.`, // canonical
   (x) => `By decree, ${x.type} is declared against ${x.to}.`,
   (x) => `Set by decree: ${x.type} against ${x.to}.`,
-  (x) => `A decree names the cause — ${x.type} against ${x.to}.`,
+  (x) => `A decree names the cause: ${x.type} against ${x.to}.`,
 ]);
 
 /** Resolve a possibly-dotted pool key ("economic_strangulation.blockade") to its array.
@@ -348,13 +424,13 @@ export const UPSWING_NEWS = Object.freeze({
       (x) => `${x.name} has finished rebuilding in the year ${x.year}, its wounds closed by its own hands and its allies'.${x.built}${x.graft}`, // canonical
       (x) => `By the year ${x.year} ${x.name} has finished its rebuilding, the damage mended by its own labour and its allies' aid.${x.built}${x.graft}`,
       (x) => `${x.name} has closed its wounds at last, the rebuilding done in the year ${x.year} by its own hands and its allies'.${x.built}${x.graft}`,
-      (x) => `The rebuilding of ${x.name} is complete in the year ${x.year} — its own people and its allies together have made it whole.${x.built}${x.graft}`,
+      (x) => `The rebuilding of ${x.name} is complete in the year ${x.year}. Its own people and its allies together have made it whole.${x.built}${x.graft}`,
     ],
     reasons: [
-      "A conserved rebuild — its own prosperity, builders, peace, and its allies' investment repaid.", // canonical
-      "A rebuild paid for in kind — its own prosperity, its builders, a lasting peace, and its allies' returned investment.",
+      "A conserved rebuild: its own prosperity, builders, peace, and its allies' investment repaid.", // canonical
+      "A rebuild paid for in kind: its own prosperity, its builders, a lasting peace, and its allies' returned investment.",
       "The recovery drew on what it had: its prosperity, its masons, the peace, and the aid its allies repaid.",
-      "Nothing conjured — the rebuild ran on its own wealth, its builders, the peace it kept, and its allies' repaid stake.",
+      "Nothing conjured: the rebuild ran on its own wealth, its builders, the peace it kept, and its allies' repaid stake.",
     ],
   },
   boom: {
@@ -365,16 +441,16 @@ export const UPSWING_NEWS = Object.freeze({
       (x) => `${x.name} rides a boom`,
     ],
     summary: [
-      (x) => `Brisk and sustained trade has tipped ${x.name} into a boom — markets swell and coin flows.${x.dep}`, // canonical
-      (x) => `A steady run of brisk trade has tipped ${x.name} into a boom — the markets swell and the coin runs freely.${x.dep}`,
-      (x) => `Trade has come thick and lasting to ${x.name}, and it has tipped into a boom — swelling markets, flowing coin.${x.dep}`,
-      (x) => `Sustained, vigorous trade has carried ${x.name} into a boom — its markets swell and coin moves fast.${x.dep}`,
+      (x) => `Brisk and sustained trade has tipped ${x.name} into a boom. Markets swell and coin flows.${x.dep}`, // canonical
+      (x) => `A steady run of brisk trade has tipped ${x.name} into a boom. The markets swell and the coin runs freely.${x.dep}`,
+      (x) => `Trade has come thick and lasting to ${x.name}, and it has tipped into a boom. Its markets swell and coin flows.${x.dep}`,
+      (x) => `Sustained, vigorous trade has carried ${x.name} into a boom. Its markets swell and coin moves fast.${x.dep}`,
     ],
     reasons: [
-      (x) => `The boom is fed by ${x.arteries} trade artery${x.arteryS} — a composition the trade movers already built.`, // canonical
-      (x) => `The boom rides on ${x.arteries} trade artery${x.arteryS} — a mix the trade movers had already laid.`,
-      (x) => `${x.arteries} trade artery${x.arteryS} feed the boom — the composition the trade movers built beforehand.`,
-      (x) => `Behind the boom stand ${x.arteries} trade artery${x.arteryS} — a structure the trade movers already assembled.`,
+      (x) => `The boom is fed by ${x.arteries} trade artery${x.arteryS}: a composition the trade movers already built.`, // canonical
+      (x) => `The boom rides on ${x.arteries} trade artery${x.arteryS}: a mix the trade movers had already laid.`,
+      (x) => `${x.arteries} trade artery${x.arteryS} feed the boom: the composition the trade movers built beforehand.`,
+      (x) => `Behind the boom stand ${x.arteries} trade artery${x.arteryS}: a structure the trade movers already assembled.`,
     ],
   },
   bust: {
@@ -385,15 +461,15 @@ export const UPSWING_NEWS = Object.freeze({
       (x) => `${x.name}'s fortune turns`,
     ],
     summary: [
-      (x) => `The trade that made ${x.name} rich has collapsed — ${x.cause}, and the boom curdles into flight and empty stalls.`, // canonical
-      (x) => `The commerce that made ${x.name} rich has fallen apart — ${x.cause}, and the boom sours into flight and shuttered stalls.`,
-      (x) => `What made ${x.name} rich has come undone — ${x.cause}, and the boom curdles into departures and empty market rows.`,
-      (x) => `The trade that lifted ${x.name} has broken — ${x.cause}, and the boom turns to flight and abandoned stalls.`,
+      (x) => `The trade that made ${x.name} rich has collapsed because ${x.cause}. The boom curdles into flight and empty stalls.`, // canonical
+      (x) => `The commerce that made ${x.name} rich has fallen apart because ${x.cause}. The boom sours into flight and shuttered stalls.`,
+      (x) => `What made ${x.name} rich has come undone because ${x.cause}. The boom curdles into departures and empty market rows.`,
+      (x) => `The trade that lifted ${x.name} has broken because ${x.cause}. The boom turns to flight and abandoned stalls.`,
     ],
     reasons: [
       (x) => `The boom's own dependency concentration was its undoing${x.arteryClause}.`, // canonical
       (x) => `Its boom leaned on too narrow a base, and that concentration undid it${x.arteryClause}.`,
-      (x) => `The boom had staked itself on too few threads — the concentration was its ruin${x.arteryClause}.`,
+      (x) => `The boom had staked itself on too few threads. The concentration was its ruin${x.arteryClause}.`,
       (x) => `Over-reliance on a narrow trade was the boom's undoing${x.arteryClause}.`,
     ],
   },
@@ -405,16 +481,16 @@ export const UPSWING_NEWS = Object.freeze({
       (x) => `${x.name} enjoys a golden age`,
     ],
     summary: [
-      (x) => `A long peace and steady rule have made ${x.name} culturally fertile — tolerance broadens and the temples keep warm.${x.built}`, // canonical
-      (x) => `Under a long peace and a steady hand, ${x.name} has grown culturally fertile — tolerance widens and the temples stay warm.${x.built}`,
-      (x) => `Years of peace and steady rule have left ${x.name} culturally fertile — its tolerance broadens and its temples keep warm.${x.built}`,
-      (x) => `A lasting peace and settled rule have made ${x.name} fertile in its culture — broadening tolerance, warm temples.${x.built}`,
+      (x) => `A long peace and steady rule have made ${x.name} culturally fertile. Tolerance broadens and the temples keep warm.${x.built}`, // canonical
+      (x) => `Under a long peace and a steady hand, ${x.name} has grown culturally fertile. Tolerance widens and the temples stay warm.${x.built}`,
+      (x) => `Years of peace and steady rule have left ${x.name} culturally fertile. Its tolerance broadens and its temples keep warm.${x.built}`,
+      (x) => `A lasting peace and settled rule have made ${x.name} fertile in its culture. Tolerance broadens, and the temples keep warm.${x.built}`,
     ],
     reasons: [
-      'A bounded cultural attractor — no army, no treasury swell, only the fertility of a long peace.', // canonical
-      'A cultural high, and a bounded one — no army, no swelling treasury, only what a long peace makes fertile.',
-      'A contained cultural flowering — not arms, not coin, only the fertility a long peace brings.',
-      'A modest, bounded flourishing — no host and no full treasury, just the fruit of a lasting peace.',
+      'A bounded cultural attractor. No army, no treasury swell, only the fertility of a long peace.', // canonical
+      'A cultural high, and a bounded one. No army, no swelling treasury, only what a long peace makes fertile.',
+      'A contained cultural flowering. Not arms, not coin, only the fertility a long peace brings.',
+      'A modest, bounded flourishing. No host and no full treasury, just the fruit of a lasting peace.',
     ],
   },
 });
@@ -429,10 +505,10 @@ export const RESOURCE_NEWS = Object.freeze({
       (x) => `${x.label} comes to light near ${x.name}`,
     ],
     summary: [
-      (x) => `Prospecting near ${x.name} has struck ${x.labelLower} — a new resource for the local economy.`, // canonical
-      (x) => `Prospecting around ${x.name} has turned up ${x.labelLower} — a fresh resource for the local economy.`,
-      (x) => `Diggers working near ${x.name} have hit ${x.labelLower} — a new resource for the local economy.`,
-      (x) => `A prospecting effort near ${x.name} has found ${x.labelLower} — new wealth for the local economy.`,
+      (x) => `Prospecting near ${x.name} has struck ${x.labelLower}: a new resource for the local economy.`, // canonical
+      (x) => `Prospecting around ${x.name} has turned up ${x.labelLower}: a fresh resource for the local economy.`,
+      (x) => `Diggers working near ${x.name} have hit ${x.labelLower}: a new resource for the local economy.`,
+      (x) => `A prospecting effort near ${x.name} has found ${x.labelLower}: new wealth for the local economy.`,
     ],
   },
   removal: {
@@ -443,10 +519,10 @@ export const RESOURCE_NEWS = Object.freeze({
       (x) => `${x.label}'s vein near ${x.name} fails`,
     ],
     summary: [
-      (x) => `The ${x.labelLower} near ${x.name} has been worked out — after long depletion the vein is done.`, // canonical
-      (x) => `The ${x.labelLower} near ${x.name} is exhausted — after a long depletion the vein is finished.`,
-      (x) => `After a long decline the ${x.labelLower} near ${x.name} has given out — the vein is done.`,
-      (x) => `The ${x.labelLower} workings near ${x.name} have run out — long depleted, the vein is now done.`,
+      (x) => `The ${x.labelLower} near ${x.name} has been worked out. After long depletion, the vein is done.`, // canonical
+      (x) => `The ${x.labelLower} near ${x.name} is exhausted. After a long depletion, the vein is finished.`,
+      (x) => `After a long decline the ${x.labelLower} near ${x.name} has given out. The vein is done.`,
+      (x) => `The ${x.labelLower} workings near ${x.name} have run out. Long depleted, the vein is now done.`,
     ],
   },
 });
@@ -461,10 +537,10 @@ export const LIFECYCLE_NEWS = Object.freeze({
       (x) => `The orbit of ${x.parent} disperses`,
     ],
     summary: [
-      (x) => `With ${x.parent} dead, its ${x.count} outlying steading${x.countS} emptied — ${x.dispersed} folk scattered to the wider world with the town's own.`, // canonical
-      (x) => `${x.parent} being dead, its ${x.count} outlying steading${x.countS} emptied — ${x.dispersed} folk scattered into the wider world alongside the town's own.`,
-      (x) => `With ${x.parent} gone, its ${x.count} outlying steading${x.countS} fell empty — ${x.dispersed} folk drifted out to the wider world with the town's own.`,
-      (x) => `The death of ${x.parent} emptied its ${x.count} outlying steading${x.countS} — ${x.dispersed} folk scattered into the wider world with the town's own.`,
+      (x) => `With ${x.parent} dead, its ${x.count} outlying steading${x.countS} emptied. ${x.dispersed} folk scattered to the wider world with the town's own.`, // canonical
+      (x) => `${x.parent} being dead, its ${x.count} outlying steading${x.countS} emptied. ${x.dispersed} folk scattered into the wider world alongside the town's own.`,
+      (x) => `With ${x.parent} gone, its ${x.count} outlying steading${x.countS} fell empty. ${x.dispersed} folk drifted out to the wider world with the town's own.`,
+      (x) => `The death of ${x.parent} emptied its ${x.count} outlying steading${x.countS}. ${x.dispersed} folk scattered into the wider world with the town's own.`,
     ],
   },
   founded: {
@@ -497,10 +573,10 @@ export const LIFECYCLE_NEWS = Object.freeze({
       (x) => `${x.name} steps out of its parent's shadow`,
     ],
     summary: [
-      (x) => `The steading of ${x.name} has reached village scale — a charter awaits.`, // canonical
-      (x) => `The steading of ${x.name} has grown to village scale — a charter is due.`,
+      (x) => `The steading of ${x.name} has reached village scale. A charter awaits.`, // canonical
+      (x) => `The steading of ${x.name} has grown to village scale. A charter is due.`,
       (x) => `Now at village scale, the steading of ${x.name} awaits a charter.`,
-      (x) => `The steading of ${x.name} has come up to village scale — a charter is pending.`,
+      (x) => `The steading of ${x.name} has come up to village scale. A charter is pending.`,
     ],
   },
   abandoned: {
@@ -551,6 +627,7 @@ const REGISTRY = [
   { id: 'calamity.reason', pool: CALAMITY_REASONS },
   { id: 'decree_default', pool: DECREE_DEFAULT_RECEIPTS },
 ];
+flattenPools('npc_goal', NPC_GOAL_NEWS, REGISTRY);
 flattenPools('war', WAR_RECEIPTS, REGISTRY);
 flattenPools('peace', PEACE_RECEIPTS, REGISTRY);
 flattenPools('hegemony', HEGEMONY_RECEIPTS, REGISTRY);

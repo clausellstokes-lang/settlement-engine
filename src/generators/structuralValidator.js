@@ -19,6 +19,7 @@ import {
 } from '../domain/generationOwnership.js';
 import { TIER_ORDER } from '../data/constants.js';
 import { deriveIsolationSupport } from './isolationSupport.js';
+import { institutionLadderEvicts } from '../data/institutionLadders.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
@@ -35,7 +36,7 @@ export const SPATIAL_FEATURES = {
   // Military
   'Multiple garrisons': [
     'Garrison', 'Barracks', 'Town watch',
-    'Citizen militia', 'Professional guard (hundreds)',
+    'Citizen militia', 'Professional city watch',
   ],
   'Professional guard (hundreds)':  ['Garrison', 'Barracks', 'Town watch', 'Citizen militia'],
   // Fortification
@@ -82,7 +83,7 @@ export const SPATIAL_FEATURES = {
   // Magic
   'Multiple wizard towers':         ["Wizard's tower", 'Alchemist shop'],
   "Mages' district":                ["Wizard's tower", "Mages' guild"],
-  'Academy of magic':               ["Mages' guild", "Mages' district", 'Multiple wizard towers', "Wizard's tower"],
+  'Academy of magic':               ["Mages' guild", "Mages' district", "Wizard's tower"],
   'Enchanting quarter':             ["Mages' guild", "Mages' district", "Enchanter's shop"],
   // Criminal
   "Thieves' guild (powerful)": [
@@ -98,22 +99,22 @@ export const SPATIAL_FEATURES = {
   // Entertainment
   'Gambling district':              ['Gambling halls', 'Gambling den'],
   'Gambling halls':                 ['Gambling den', 'Ale house'],
-  'Colosseum/arena':                ['Professional arena', 'Fighting pits'],
+  'Colosseum/arena':                ['Fighting pits'],
   'Professional arena':             ['Fighting pits'],
   'Multiple theaters':              ['Theaters'],
   'Opera house':                    ['Multiple theaters', 'Theaters'],
   // Adventuring
-  "Multiple adventurers' guilds":   ["Adventurers' guild hall", 'Hireling hall'],
-  'Dungeon delving supply district': ["Adventurers' guild hall", "Multiple adventurers' guilds"],
+  "Multiple adventurers' guilds":   ["Adventurers' charter hall", 'Hireling hall'],
+  'Dungeon delving supply district': ["Adventurers' charter hall", "Multiple adventurers' guilds"],
   // Justice
   'Massive prison':                 ['Large prison', 'Multiple court buildings', 'Courthouse'],
   'Large prison':                   ['Courthouse', 'City hall', 'Town hall'],
   'Multiple court buildings':       ['Courthouse', 'City hall', 'Town hall'],
   'Palace/government complex':      ['City hall', 'Town hall'],
   // Knowledge
-  'University':                     ['Great library', 'Cathedral (10,000+ only)', 'Sage/library'],
-  'Great library':                  ['Sage/library', 'Cathedral (10,000+ only)'],
-  "Sage's quarter":                 ['Great library', 'Sage/library'],
+  'University':                     ['Great library', 'Cathedral (10,000+ only)'],
+  'Great library':                  ['Cathedral (10,000+ only)'],
+  "Sage's quarter":                 ['Great library'],
   // Chains
   'Major port':                     ['Docks/port facilities'],
   'Garrison':                       ['Barracks', 'Citizen militia', 'Town watch'],
@@ -121,16 +122,16 @@ export const SPATIAL_FEATURES = {
   'City hall':                      ['Town hall', 'Mayor and council'],
   "Wizard's tower":                 ['Hedge wizard', 'Alchemist shop'],
   "Mages' guild":                   ["Wizard's tower", 'Alchemist shop', 'Hedge wizard'],
-  "Adventurers' guild hall":        ['Hireling hall', 'Mercenary company HQ'],
+  "Adventurers' guild hall":        ['Hireling hall'],
   'Cathedral (10,000+ only)':       ['Monastery or friary', 'Parish churches (10-30)', 'Major hospital'],
   'City granaries':                 ['Town granary'],
   'State granary complex':          ['City granaries', 'Town granary'],
   "Thieves' guild chapter":         ['Street gang', 'Black market', 'Gambling den'],
   'Smuggling network':              ['Smuggling operation', 'Warehouse district'],
   'Front businesses':               ['Street gang', 'Gambling den', 'Black market'],
-  'Mercenary quarter':              ['Mercenary company HQ', 'Hireling hall'],
+  'Mercenary quarter':              ['Hireling hall'],
   'Courthouse':                     ['Town hall', 'Mayor and council'],
-  'Bardic college':                 ['Sage/library', 'Theaters'],
+  'Bardic college':                 ['Theaters'],
   "Enchanter's shop":               ["Wizard's tower", 'Alchemist shop'],
   'Teleportation circle':           ["Mages' guild", "Wizard's tower"],
   'Scroll scribe':                  ["Wizard's tower", 'Hedge wizard', 'Alchemist shop'],
@@ -140,7 +141,7 @@ export const SPATIAL_FEATURES = {
   'Glassmakers':                    ['Craft guilds (30-80)', 'Craft guilds (5-15)'],
   'Specialized metalworkers':       ['Blacksmiths (3-10)', 'Craft guilds (5-15)'],
   'Weekly market':                  ['Common grazing land'],
-  'Monster part dealers':           ["Adventurers' guild hall", 'Alchemist shop'],
+  'Monster part dealers':           ["Adventurers' charter hall", 'Alchemist shop'],
   'Curse breaking':                 ["Mages' guild", 'Cathedral (10,000+ only)', "Wizard's tower"],
   'Small hospital':                 ['Parish church', 'Monastery or friary', 'Priest (resident)'],
 };
@@ -387,6 +388,18 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   Object.entries(GATE_FEATURES).forEach(([instName, gate]) => {
     if (!instNames.includes(instName)) return;
 
+    // Do not let the subject manufacture evidence for its own gate through
+    // SPATIAL_FEATURES. Other seated institutions may still imply a supporting
+    // feature. A missing prerequisite also remains valid when a centralized
+    // scale ladder proves that a seated greater legitimately evicted it.
+    const dependencyInstitutionNames = new Set(instNames);
+    dependencyInstitutionNames.delete(instName);
+    const dependencyEvidence = expandInstitutionSet([...dependencyInstitutionNames]);
+    const requirementIsSatisfied = requirement => (
+      dependencyEvidence.has(requirement)
+      || institutionLadderEvicts(instName, requirement)
+    );
+
     if (gate.minTier && !tierAtLeast(tier, gate.minTier) && !outOfTierNames.has(instName)) {
       violations.push({
         type:        'tier_violation',
@@ -399,7 +412,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       });
     }
 
-    if (gate.requires?.length > 0 && !gate.requires.some(r => expandedSet.includes(r))) {
+    if (gate.requires?.length > 0 && !gate.requires.some(requirementIsSatisfied)) {
       if (gate.suggestionOnly) {
         // Soft dependency — push as a suggestion, not a violation
         suggestions.push({
@@ -419,7 +432,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
       }
     }
 
-    if (gate.requiresAny?.length > 0 && !gate.requiresAny.some(r => expandedSet.includes(r))) {
+    if (gate.requiresAny?.length > 0 && !gate.requiresAny.some(requirementIsSatisfied)) {
       violations.push({
         type:        'dependency_violation',
         institution: instName,
@@ -430,7 +443,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     }
 
     if (gate.blockedBy?.length > 0) {
-      const blocker = gate.blockedBy.find(b => expandedSet.includes(b));
+      const blocker = gate.blockedBy.find(requirementIsSatisfied);
       if (blocker) {
         violations.push({
           type:        'exclusion_violation',

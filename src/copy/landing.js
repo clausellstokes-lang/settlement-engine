@@ -136,15 +136,14 @@ export const landing = {
     chronicleTag:   'writes itself',
   },
 
-  // ── 05 · The map ────────────────────────────────────────────────────────────
-  // W-DOC (brief §4): THE MAP WAYPOINT. The plates are FROZEN REAL ENGINE OUTPUT
+  // ── The map artifact (folded into 02 · The visual) ──────────────────────────
+  // W-DOC (brief §4): the plates are FROZEN REAL ENGINE OUTPUT
   // (the fixture idiom extended to the map layer): scripts/generate-landing-map-
   // plates.mjs replays the fixture's exact seed + config, verifies the replay
   // still produces the fixture town (the drift gate), and renders the v2 map in
   // two lenses (public/landing-maps/). Same town as §02's dossier — the seed tag
   // is the receipt. Art law (brief §5): the product's own output is the art.
   map: {
-    waypoint: '05 · The map',
     h2:    'The same town, drawn. Every street has a reason.',
     body:  'The v2 map engine lays out districts, walls, and lanes from the same constraints that wrote the dossier. Nothing is decorated into place. Flip the lens: one town, one memory, any style.',
     provenance: 'This is {name} from the brief above: same seed, same town, drawn.',
@@ -157,13 +156,13 @@ export const landing = {
     alt: 'The generated town map of {name}, drawn in the {lens} lens by the v2 map engine.',
   },
 
-  // ── 06 · The commons ────────────────────────────────────────────────────────
+  // ── 05 · The commons ────────────────────────────────────────────────────────
   // Owner amendment W-L2/3: up to FOUR real published gallery settlements render
   // here (fetched on below-fold mount, ranked by the strongest signal gallery.js
   // actually tracks); the decorative cards below fill any remaining slots, and a
   // failed/empty fetch renders all four decorative — zero layout shift.
   commons: {
-    waypoint: '06 · The commons',
+    waypoint: '05 · The commons',
     // Owner amendment: was 'Towns other DMs have forged.' — softened to not
     // gatekeep the audience, keeping the knowing/dry voice.
     h2:   'Towns others have forged.',
@@ -187,9 +186,9 @@ export const landing = {
     ],
   },
 
-  // ── 07 · Set out (closer) ────────────────────────────────────────────────────
+  // ── 06 · Set out (closer) ────────────────────────────────────────────────────
   closer: {
-    waypoint: '07 · Set out',
+    waypoint: '06 · Set out',
     h2:       'The world holds together. Yours can too.',
     sub:      'Forge a town before the kettle boils. Keep it if it’s good.',
     cta:      'Forge your first settlement',

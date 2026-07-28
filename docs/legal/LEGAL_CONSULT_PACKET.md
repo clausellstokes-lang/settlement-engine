@@ -147,7 +147,12 @@ DNT is honored as a hard opt-out of **all** telemetry including essential. Serve
 
 **The standing buyback and escheat.** Mig 164, owner ruling 2026-07-19: the buyback repurchase price **and** the abandonment claimable credit are one shared config dial, **default $25**, read at claim time. Abandonment: an account inactive and unreachable for **five years**, then unresponsive to notices over a further **90 days**, is deemed abandoned; the seat escheats to the company and $25 is held as a claimable credit. Escheat seats are never auto-resold.
 
-**A live inconsistency to resolve before the consult:** LEDGER `docs/DESIGN_MONEY_WAVE.md` §12 says the abandonment credit is **$25**; §13 Q1 (line 958) says **$49.50**. Migration 164 implements **$25**. The $25/$49.50 figures do not appear on any user-facing surface — neither the buyback nor abandonment terms are published anywhere in `TermsPage.jsx`.
+**Resolved policy distinction (2026-07-28):** LEDGER
+`docs/DESIGN_MONEY_WAVE.md` now says **$25** consistently for an abandoned-seat
+standing buyback, matching migration 164. That is distinct from the
+**$49.50** outgoing-holder share of a completed $99 successor transfer. The
+abandonment buyback remains unpublished pending counsel; the successor-transfer
+share is the user-facing Founder transfer term.
 
 **LEGAL SIGN-OFF is already coded as a hard launch gate.** `DESIGN_MONEY_WAVE.md` §11 step 4: "LEGAL SIGN-OFF (HARD GATE for transfers): the §12 terms bundle + the Stripe Connect platform agreement + the refund/cancellation interplay reviewed. **Nothing in code can substitute for this step.**" The fallback posture (§11 4b/5b) permits launching transfers credits-only if Connect is not approved, but explicitly states "LEGAL SIGN-OFF (step 4) remains the hard gate regardless — no fallback for it." The master switch `system_config.founder_transfers` ships seeded `{enabled:false}`; nothing lights from a deploy alone.
 
@@ -186,7 +191,13 @@ What the live pages actually say about themselves:
 - `TermsPage.jsx:191-196` — "The service is provided as is, without warranties of any kind. To the extent permitted by law, SettlementForge is not liable for indirect or consequential losses arising from your use of the service. **Nothing here limits rights you have under mandatory consumer law in your jurisdiction.**"
 - `src/copy/footer.js` — `copyright: '© {year} SettlementForge'`.
 
-Contact, unresolved: `TERMS_OF_USE_DRAFT.md:365` — "`[[CONTACT EMAIL — currently settlementforge@gmail.com; support@settlementforge.com is proposed but unconfirmed pending owner sign-off before launch]]`." Source of truth `src/copy/support.js` (`SUPPORT_EMAIL` default `settlementforge@gmail.com`, overridable via `VITE_SUPPORT_EMAIL`). Domain: `settlementforge.com` appears as the CLIENT_URL fallback in `founder-transfer/index.ts:31`.
+Contact destination selected 2026-07-28 under owner delegation:
+`support@settlementforge.com`. Activation remains an operational gate: configure
+MX/forwarding, prove a round trip, then set `VITE_SUPPORT_EMAIL` in the same deploy
+batch. Until that proof, `src/copy/support.js` deliberately retains
+`settlementforge@gmail.com` as its runtime fallback. Domain:
+`settlementforge.com` appears as the CLIENT_URL fallback in
+`founder-transfer/index.ts:31`.
 
 **Named third-party processors** (from `PRIVACY_POLICY_DRAFT.md:170` and the code): **Stripe** (payments + Connect), **Supabase** (hosting/DB/auth/edge), **Anthropic** (AI provider — `surveyor-byok/index.ts`, `ai-analyst`), **Resend** (transactional email — `RESEND_API_KEY`, currently inert).
 

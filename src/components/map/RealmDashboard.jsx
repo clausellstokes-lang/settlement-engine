@@ -27,7 +27,15 @@ import { Lock, Sparkles, Globe, Flame, Users, ArrowUp, ArrowRight } from 'lucide
 
 import { useStore } from '../../store/index.js';
 import {
-  liveSieges, warExhaustionStandings, warExhaustionBand, activeDeployments, liveTradeWars, dispositionStandings, } from '../../domain/display/warStatus.js';
+  liveSieges,
+  warExhaustionStandings,
+  warExhaustionBand,
+  activeDeployments,
+  liveTradeWars,
+  dispositionStandings,
+  REALM_CONTEST_RECORD_HELP,
+  REALM_CONTEST_RECORD_LABEL,
+} from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { hegemonyRead } from '../../domain/display/hegemonyRead.js';
@@ -443,15 +451,16 @@ export default function RealmDashboard({
             ? tradeWars.slice(0, 2).map(t => t.commodityLabel).filter(Boolean).join(' · ')
             : 'No supplier has been displaced'}
         />
-        {/* The cross-settlement aggressor record (dispositionStandings). Names the
-            top scorer by net win/loss. Dormant ⇒ "–". */}
+        {/* The realm contest record (dispositionStandings). Names the top scorer
+            by net resolved-contest W/L. Dormant ⇒ "–". */}
         <Stat
           Icon={Flame}
-          label="Top aggressor"
+          label={REALM_CONTEST_RECORD_LABEL}
           value={topAggressor ? (nameById?.get(String(topAggressor.id)) || 'a settlement') : '–'}
           sub={topAggressor
             ? `${topAggressor.wins}W / ${topAggressor.losses}L`
-            : 'No win record yet'}
+            : 'No resolved contests yet'}
+          subTitle={REALM_CONTEST_RECORD_HELP}
         />
         {/* ambition-fit-2: the unnamed-empire count. Dormant ⇒ "–", same null idiom
             as the cluster's other reads. */}

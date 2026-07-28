@@ -24,7 +24,7 @@ export const WORLD_SECTIONS = Object.freeze([
   ['worldClock', 'World clock', 'The in-world date, season, and how many ticks the realm has lived.'],
   ['chronicle', 'Chronicle', 'The headline log of what happened each tick across the realm.'],
   ['pantheon', 'Pantheon', 'The deities, their tiers, and how many settlements hold each faith.'],
-  ['warNetwork', 'War and network', 'Live sieges, trade wars, standings, and the public channels between settlements.'],
+  ['warNetwork', 'War and network', 'Live sieges, trade wars, realm contest records, and the public channels between settlements.'],
   ['dashboard', 'Dashboard', 'The simulation rules in play and the realm-arc summary of its epics.'],
 ]);
 

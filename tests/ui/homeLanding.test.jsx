@@ -86,6 +86,17 @@ describe('HomeLanding — scrollable landing', () => {
     }
   });
 
+  test('visible waypoints stay contiguous after the map artifact moved into 02', async () => {
+    renderLanding();
+    await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
+
+    expect(landing.map).not.toHaveProperty('waypoint');
+    expect(screen.queryByText('05 · The map')).toBeNull();
+    expect(screen.getByText('05 · The commons')).toBeTruthy();
+    expect(screen.getByText('06 · Set out')).toBeTruthy();
+    expect(screen.queryByText('07 · Set out')).toBeNull();
+  });
+
   // Owner walk order 10 (2026-07-22): the Instant Draft widget — the ceiling
   // string's only landing carrier — left the landing (the Cnocby card took
   // its slot). The ceiling copy lives on the Create page's own picker now;
@@ -184,8 +195,8 @@ describe('HomeLanding — scrollable landing', () => {
     expect(screen.getByText(`seed · ${fixture.seed} · week ${fixture.weeks}`)).toBeTruthy();
   });
 
-  // ── W-DOC — THE MAP WAYPOINT (§05) ─────────────────────────────────────────
-  test('the map waypoint renders the fixture-town plate with an honest lens flip', async () => {
+  // ── W-DOC — THE MAP ARTIFACT (folded into §02) ─────────────────────────────
+  test('the map artifact renders the fixture-town plate with an honest lens flip', async () => {
     renderLanding();
     await screen.findByText(landing.map.h2);
     // The lens flip is a REAL control (a second sanctioned interactive control

@@ -23,8 +23,10 @@
 import { describe, expect, test } from 'vitest';
 
 import {
+  appendObservedWizardNewsEntries,
   ensureWizardNewsFeed,
   appendWizardNewsEntries,
+  applyPulseMover,
   WIZARD_NEWS_SIGNIFICANCE,
 } from '../../src/domain/region/wizardNews.js';
 
@@ -204,5 +206,52 @@ describe('wizard news retention — arc-aware 240-cap', () => {
     const out = feed.entries.map(e => e.id);
     const recency = recencyIds(entries);
     expect(isSubsequence(out, recency)).toBe(true);
+  });
+
+  test('the audit sink receives every valid raw receipt before the 240-entry cap', () => {
+    const entries = Array.from(
+      { length: 300 },
+      (_, i) => mk(`raw${i}`, { tick: i + 1 }),
+    );
+    const receiptSink = [];
+    const feed = appendObservedWizardNewsEntries(
+      { currentTick: 0, entries: [] },
+      entries,
+      { now: '2026-01-01T00:00:00.000Z' },
+      receiptSink,
+    );
+
+    expect(feed.entries).toHaveLength(MAX);
+    expect(receiptSink).toHaveLength(300);
+    expect(receiptSink.map((entry) => entry.id)).toEqual(entries.map((entry) => entry.id));
+  });
+
+  test('a late pulse mover is captured even when feed retention evicts its receipt', () => {
+    const fullFeed = ensureWizardNewsFeed({
+      currentTick: 340,
+      entries: Array.from(
+        { length: MAX },
+        (_, i) => mk(`kept${i}`, { tick: 100 + i }),
+      ),
+    });
+    const lateReceipt = mk('late-mover', { tick: 1 });
+    const receiptSink = [];
+    const moved = applyPulseMover(
+      {
+        changed: true,
+        worldState: { tick: 340 },
+        settlementUpdates: [],
+        newsEntries: [lateReceipt],
+      },
+      {},
+      [],
+      fullFeed,
+      '2026-01-01T00:00:00.000Z',
+      receiptSink,
+    );
+
+    expect(moved.wizardNews.entries).toHaveLength(MAX);
+    expect(moved.wizardNews.entries.some((entry) => entry.id === lateReceipt.id)).toBe(false);
+    expect(receiptSink).toEqual([lateReceipt]);
   });
 });

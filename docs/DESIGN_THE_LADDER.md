@@ -1,5 +1,5 @@
 # DESIGN — THE LADDER (intra-faction rank dynamics)
-## Fable 5 architecture, 2026-07-17 — owner-commissioned ("build it… cohesive completely with the NPC's entire description and the settlement's entire state and shape — alignment, patron deity, etc."). ENGINE LIFT #3, owner-sanctioned. Builds DORMANT behind virtual `npcLadderEnabled`; lights at THE ONE REGEN (joins the list; vetoable).
+## Fable 5 architecture, 2026-07-17 — owner-commissioned ("build it… cohesive completely with the NPC's entire description and the settlement's entire state and shape — alignment, patron deity, etc."). ENGINE LIFT #3, owner-sanctioned. Built behind virtual `npcLadderEnabled`; T5 lights it only in `dramatic_campaign`, `living_realm`, and `full_simulation`.
 
 ## 0. One sentence
 Every faction carries a persistent, contested rank ladder; NPCs rise ONLY by displacing

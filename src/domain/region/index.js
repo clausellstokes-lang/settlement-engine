@@ -71,6 +71,7 @@ export {
 export {
   WIZARD_NEWS_SIGNIFICANCE,
   advanceWizardNewsFeed,
+  appendObservedWizardNewsEntries,
   appendWizardNewsEntries,
   applyPulseMover,
   deriveNewsThreads,

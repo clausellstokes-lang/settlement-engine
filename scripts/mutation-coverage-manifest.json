@@ -321,6 +321,10 @@
     "tests/domain/autonomy/signalRegistry.walker.test.js": {
       "kind": "uncovered"
     },
+    "tests/domain/behavioralCertificationContract.test.js": {
+      "kind": "rationale",
+      "rationale": "Pure fail-closed release oracle with its mutation proof embedded in the ordinary suite: the passing matrix must earn every named property, while independent negative controls extinguish a final-decade mover, inject dark-control leakage, remove the human review, omit required dark fields, and present ineligible 30-year and 300-year profiles. The human-evidence half separately rejects an automated reviewer, missing final-decade coverage, a failed criterion, and absent blocking notes. These controls mutate every certification boundary through the public evaluator on every run; a standing source sed would duplicate the same checks while being less specific about which claim failed."
+    },
     "tests/domain/candidateTypeVoicePhrasing.walker.test.js": {
       "kind": "uncovered"
     },

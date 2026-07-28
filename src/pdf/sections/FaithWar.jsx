@@ -21,6 +21,7 @@ import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule, Tag } from '../primitives/Dense.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, humanize } from '../lib/format.js';
+import { REALM_CONTEST_RECORD_HELP, REALM_CONTEST_RECORD_LABEL } from '../../domain/display/warStatus.js';
 
 const POSTURE_TONE = {
   Belligerent: 'bad',
@@ -125,9 +126,9 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         )}
         {standing && (
           <Stat
-            label="STANDING"
+            label={REALM_CONTEST_RECORD_LABEL.toUpperCase()}
             value={`${standing.wins}W / ${standing.losses}L`}
-            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score}`}
+            sub={`net ${standing.score > 0 ? '+' : ''}${standing.score} · ${REALM_CONTEST_RECORD_HELP}`}
             tone={standing.score > 0 ? 'good' : standing.score < 0 ? 'bad' : 'muted'}
           />
         )}

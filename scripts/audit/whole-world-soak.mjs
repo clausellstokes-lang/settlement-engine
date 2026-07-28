@@ -252,6 +252,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
 
   for (let year = 1; year <= years; year++) {
     const beforeSaves = runningSaves;
+    const rawWizardNewsById = new Map();
     const y0 = Date.now();
     const result = await simulateCampaignWorldInterval({
       campaign: runningCampaign,
@@ -260,6 +261,12 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       commit: true,
       now: NOW,
       autoResolve: true,
+      onTickObservation: ({ rawWizardNewsEntries }) => {
+        for (const entry of rawWizardNewsEntries || []) {
+          if (!entry || typeof entry !== 'object' || !entry.id) continue;
+          rawWizardNewsById.set(String(entry.id), entry);
+        }
+      },
     });
     if (year === 1) firstResultSha256 = sha(result);
     yearlyMs.push(Date.now() - y0);
@@ -282,6 +289,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       result,
       beforeSaves,
       afterSaves: runningSaves,
+      rawWizardNewsEntries: [...rawWizardNewsById.values()],
     }));
 
     // 1. NaN/Infinity scan — fail fast with paths.

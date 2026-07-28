@@ -135,7 +135,7 @@ export const normalizeType = normalizeRelationshipType;
 // twice the ordinary history window.
 export const RELATIONSHIP_TURNING_POINT_CAP = 24;
 
-/** @param {any} row */
+/** @param {Record<string, unknown>} row */
 function isRelationshipTurningPoint(row) {
   return row?.type === "label_proposal_applied"
     || row?.type === "hierarchy_resolution"
@@ -146,8 +146,8 @@ function isRelationshipTurningPoint(row) {
  * Append one major relationship transition to the separately bounded durable
  * archive. Callers pass an ensured state, so legacy history has already been
  * backfilled into the archive before the new transition lands.
- * @param {any} state
- * @param {any} entry
+ * @param {Record<string, unknown>} state
+ * @param {Record<string, unknown>} entry
  */
 export function appendRelationshipTurningPoint(state, entry) {
   const prior = Array.isArray(state?.turningPoints)

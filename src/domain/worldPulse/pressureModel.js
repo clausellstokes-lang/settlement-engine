@@ -1,4 +1,5 @@
 import { clamp01 } from '../../kernel/math.js';
+import { humanizeToken } from '../display/humanizeEngineTokens.js';
 import { SEASONS_TUNING } from './seasons.js';
 
 /** @param {any} value @returns {number} */
@@ -42,6 +43,16 @@ function matchedConditionArchetypes(item, archetypes, systems = []) {
       && (c.affectedSystems || []).some(/** @param {any} s */ s => systems.includes(s))) matched.push('custom_crisis');
   }
   return [...new Set(matched)];
+}
+
+/**
+ * Reader-facing pressure reasons cross the presentation boundary here; the
+ * archetype ids above remain raw for matching, receipts, and all typed logic.
+ * @param {string[]} ids
+ * @returns {string}
+ */
+function humanizedConditionList(ids) {
+  return ids.map(humanizeToken).join(', ');
 }
 
 // Build ONE from-keyed index of confirmed channels per pressure pass.
@@ -144,7 +155,7 @@ export function deriveSettlementPressures(snapshot) {
     const foodConditions = matchedConditionArchetypes(item, FOOD_ARCHETYPES, ['food_security']);
     if (foodConditions.length) {
       food += 0.18;
-      foodReasons.push(`active condition: ${foodConditions.join(', ')}`);
+      foodReasons.push(`active condition: ${humanizedConditionList(foodConditions)}`);
     }
     if (countChannels(channelIndex, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
       food += 0.08;
@@ -173,7 +184,7 @@ export function deriveSettlementPressures(snapshot) {
     const diseaseConditions = matchedConditionArchetypes(item, DISEASE_ARCHETYPES, ['healing_capacity']);
     if (diseaseConditions.length) {
       disease += 0.14;
-      diseaseReasons.push(`active condition: ${diseaseConditions.join(', ')}`);
+      diseaseReasons.push(`active condition: ${humanizedConditionList(diseaseConditions)}`);
     }
     if ((scores.housing_pressure ?? 70) < 45) {
       disease += 0.08;
@@ -186,7 +197,7 @@ export function deriveSettlementPressures(snapshot) {
     const conflictConditions = matchedConditionArchetypes(item, CONFLICT_ARCHETYPES, ['defense_readiness']);
     if (conflictConditions.length) {
       conflict += 0.18;
-      conflictReasons.push(`active condition: ${conflictConditions.join(', ')}`);
+      conflictReasons.push(`active condition: ${humanizedConditionList(conflictConditions)}`);
     }
     if (countChannels(channelIndex, item.id, ['war_front', 'military_protection']) > 0) {
       conflict += 0.08;
@@ -213,7 +224,7 @@ export function deriveSettlementPressures(snapshot) {
     const tradeConditions = matchedConditionArchetypes(item, TRADE_ARCHETYPES, ['trade_connectivity']);
     if (tradeConditions.length) {
       trade += 0.16;
-      tradeReasons.push(`active condition: ${tradeConditions.join(', ')}`);
+      tradeReasons.push(`active condition: ${humanizedConditionList(tradeConditions)}`);
     }
     out.push({ ...base, kind: 'trade', label: 'Trade pressure', score: clamp01(trade), reasons: tradeReasons });
 
@@ -228,7 +239,7 @@ export function deriveSettlementPressures(snapshot) {
     const economyConditions = matchedConditionArchetypes(item, TRADE_ARCHETYPES, ['trade_connectivity']);
     if (economyConditions.length) {
       economy += 0.14;
-      economyReasons.push(`active condition: ${economyConditions.join(', ')}`);
+      economyReasons.push(`active condition: ${humanizedConditionList(economyConditions)}`);
     }
     if ((scores.criminal_opportunity ?? 50) > 65) {
       economy += 0.06;
@@ -241,7 +252,7 @@ export function deriveSettlementPressures(snapshot) {
     const legitimacyConditions = matchedConditionArchetypes(item, LEGITIMACY_ARCHETYPES, ['public_legitimacy', 'ruling_authority']);
     if (legitimacyConditions.length) {
       legitimacy += 0.16;
-      legitimacyReasons.push(`active condition: ${legitimacyConditions.join(', ')}`);
+      legitimacyReasons.push(`active condition: ${humanizedConditionList(legitimacyConditions)}`);
     }
     out.push({ ...base, kind: 'legitimacy', label: 'Legitimacy pressure', score: clamp01(legitimacy), reasons: legitimacyReasons });
 
@@ -255,7 +266,7 @@ export function deriveSettlementPressures(snapshot) {
     const defenseConditions = matchedConditionArchetypes(item, DEFENSE_ARCHETYPES, ['defense_readiness']);
     if (defenseConditions.length) {
       defense += 0.16;
-      defenseReasons.push(`active condition: ${defenseConditions.join(', ')}`);
+      defenseReasons.push(`active condition: ${humanizedConditionList(defenseConditions)}`);
     }
     if (countChannels(channelIndex, item.id, ['war_front']) > 0) {
       defense += 0.08;
@@ -268,7 +279,7 @@ export function deriveSettlementPressures(snapshot) {
     const crimeConditions = matchedConditionArchetypes(item, CRIME_ARCHETYPES, ['criminal_opportunity']);
     if (crimeConditions.length) {
       crime += 0.12;
-      crimeReasons.push(`active condition: ${crimeConditions.join(', ')}`);
+      crimeReasons.push(`active condition: ${humanizedConditionList(crimeConditions)}`);
     }
     // SEASONS-A: the lean winter raises criminal desperation — a small,
     // bounded seasonal term on the EXISTING crime-pressure input (constant

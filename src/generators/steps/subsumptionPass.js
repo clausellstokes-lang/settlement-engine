@@ -15,74 +15,15 @@ import {
 import {
   isProtectedGenerationEntity,
 } from '../../domain/generationOwnership.js';
+import { SUBSUMPTION_RULES } from '../../data/institutionLadders.js';
+
+// Compatibility export: callers historically imported the table from this
+// step module. The single writer now lives in the side-effect-free data leaf.
+export { SUBSUMPTION_RULES } from '../../data/institutionLadders.js';
 
 function instId(name) {
   return `institution.${String(name).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase()}`;
 }
-
-// Rules collapse same-function scale ladders ONLY (a bigger version of the
-// same trade replaces the smaller one). Constraints the table must hold:
-//   - No rule may let a downstream consumer absorb its upstream producer
-//     (smelter/charcoal burner, merchant guild/salt works, butchers/shepherd,
-//     harbour master/docks): producers feeding a processor ARE the supply
-//     chain — removing them deactivates the chains and export gates keyed on
-//     their names. Cross-function adjacency belongs to the cascade pass,
-//     which adds institutions instead of removing them.
-//   - Lessers are matched by EXACT name (case-insensitive) against the
-//     catalog vocabulary; every lesser must be a real catalog name.
-//   - A greater must never equal one of its own lessers.
-const SUBSUMPTION_RULES = [
-  { greater: 'banking district',            lesser: ['banking houses', 'money changers'] },
-  { greater: 'banking houses',              lesser: ['money changers'] },
-  { greater: 'mages\' guild',               lesser: ['wizard\'s tower', 'alchemist shop'] },
-  { greater: 'mages\' district',            lesser: ['wizard\'s tower', 'mages\' guild', 'alchemist shop', 'alchemist quarter'] },
-  { greater: 'academy of magic',            lesser: ['wizard\'s tower', 'mages\' guild'] },
-  { greater: 'multiple adventurers\' guild', lesser: ['adventurers\' charter hall', 'hireling hall'] },
-  { greater: 'adventurers\' guild',          lesser: ['adventurers\' charter hall', 'hireling hall'] },
-  { greater: 'cathedral',                   lesser: ['parish church', 'priest (resident)', 'wayside shrine'] },
-  { greater: 'major hospital',              lesser: ['small hospital'] },
-  { greater: 'professional city watch',     lesser: ['town watch', 'citizen militia'] },
-  { greater: 'multiple courthouses',        lesser: ['courthouse'] },
-  { greater: 'major port',                  lesser: ['docks/port facilities', 'river boatyard', 'river ferry'] },
-  { greater: 'craft guilds (30-80)',         lesser: ['craft guilds (5-15)'] },
-  { greater: 'craft guilds (100-150+)',      lesser: ['craft guilds (30-80)', 'craft guilds (5-15)'] },
-  { greater: 'merchant guilds (15-40)',      lesser: ['merchant guilds (3-8)'] },
-  { greater: 'merchant guilds (50-100+)',    lesser: ['merchant guilds (15-40)', 'merchant guilds (3-8)'] },
-  { greater: 'thieves\' guild chapter',      lesser: ['fence (word of mouth)', 'local fence', 'bandit affiliate'] },
-  { greater: 'black market',                lesser: ['fence (word of mouth)', 'local fence'] },
-  { greater: 'brewery',                     lesser: ['brewer'] },
-  { greater: "cobbler's guild",             lesser: ['cobbler'] },
-  { greater: "tailor's guild",              lesser: ['tailor'] },
-  { greater: 'mint (official)',             lesser: ['mint', 'assay office'] },
-  { greater: 'stable district',             lesser: ['stable master', 'stable yard'] },
-  { greater: 'fish market',                 lesser: ['fishmonger'] },
-  // Retired 2026-07-28 (queue EP-f): `furrier's district` absorbed `tannery`,
-  // breaking BOTH laws above. It is not a same-function scale ladder — a
-  // furrier works fur, a tannery works hide — and the tannery is the sole
-  // hide→leather processor, so absorbing it deactivated the leather chain and
-  // severed the Tanned leather export gate, which names `requiredInstitution:
-  // 'Tannery'` by exact string. Measured at zero same-seed golden movement:
-  // no in-tier roster seats both, so the rule only ever fired for DM-forced
-  // out-of-tier configs — precisely where the severance was invisible.
-  { greater: "assassins' guild",            lesser: ['contract killer', 'hired blades'] },
-  { greater: "thieves' guild (powerful)",   lesser: ["thieves' guild chapter", 'black market bazaar', 'contract killer'] },
-  { greater: 'auction house',              lesser: ['slave market'] },
-  { greater: 'gladiatorial school',        lesser: ['fighting pits'] },
-  { greater: 'printing house',             lesser: ['village scribe'] },
-  { greater: 'great library',              lesser: ['village scribe', 'printing house'] },
-  { greater: 'banking houses',             lesser: ['pawnbroker'] },
-  { greater: 'banking district',           lesser: ['pawnbroker', 'banking houses'] },
-  { greater: 'major hospital',              lesser: ['almshouse'] },
-  { greater: 'hospital network',             lesser: ['almshouse', 'foundling home'] },
-  { greater: "caravan masters' exchange",    lesser: ["caravaneer's post", 'waystation', 'pack animal trader'] },
-  { greater: "caravaneer's post",            lesser: ['waystation', 'pack animal trader'] },
-  { greater: 'international trade center',  lesser: ["caravan masters' exchange", "caravaneer's post"] },
-  { greater: 'luxury goods quarter',        lesser: ['jeweller'] },
-  { greater: 'specialized metalworkers',    lesser: ['jeweller'] },
-];
-
-// Exported for re-use in cascadePass
-export { SUBSUMPTION_RULES };
 
 // Backwards-compatible domain-specific name for callers that operate on
 // institution rosters. The actual provenance law is shared with upgrade

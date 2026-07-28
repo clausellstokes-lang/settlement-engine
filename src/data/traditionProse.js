@@ -51,9 +51,9 @@ export const TRAD_OUTCOME_PHRASE = Object.freeze({
  * @type {ReadonlyArray<TraditionProseVariant>}
  */
 export const TRAD_HELD_SUMMARY = Object.freeze([
-  (x) => `In ${x.town}, ${x.name} ${x.phrase} this year. A settlement's traditions carry its identity forward; each holding — or failing — is a mark on the year.${x.ownerBit}`, // canonical
+  (x) => `In ${x.town}, ${x.name} ${x.phrase} this year. A settlement's traditions carry its identity forward; each holding or failing is a mark on the year.${x.ownerBit}`, // canonical
   (x) => `${x.name} ${x.phrase} this year in ${x.town}. A town's observances carry its identity forward, and every year they hold or fail leaves its mark.${x.ownerBit}`,
-  (x) => `This year in ${x.town}, ${x.name} ${x.phrase}. What a people keeps — and how well — is written into the record of the year.${x.ownerBit}`,
+  (x) => `This year in ${x.town}, ${x.name} ${x.phrase}. What a people keeps, and how well, is written into the record of the year.${x.ownerBit}`,
   (x) => `In ${x.town}, ${x.name} ${x.phrase}. A settlement is known by the customs it keeps; each year's keeping, or failing, is a mark upon it.${x.ownerBit}`,
 ]);
 
@@ -62,9 +62,9 @@ export const TRAD_HELD_SUMMARY = Object.freeze([
  * @type {ReadonlyArray<TraditionProseVariant>}
  */
 export const TRAD_CANCELLED_SUMMARY = Object.freeze([
-  (x) => `In ${x.town}, ${x.name} was set aside this year — hardship left no room for the observance, and a people that keeps its restraint is remembered for it too.${x.ownerBit}`, // canonical
+  (x) => `In ${x.town}, ${x.name} was set aside this year: hardship left no room for the observance, and a people that keeps its restraint is remembered for it too.${x.ownerBit}`, // canonical
   (x) => `${x.name} was set aside in ${x.town} this year; hardship left no room for it, and a people that shows restraint in a hard season is remembered for that too.${x.ownerBit}`,
-  (x) => `In ${x.town} this year, ${x.name} went unheld — the season left no room for it, and there is a quiet credit in a town that knows when to keep its restraint.${x.ownerBit}`,
+  (x) => `In ${x.town} this year, ${x.name} went unheld: the season left no room for it, and there is a quiet credit in a town that knows when to keep its restraint.${x.ownerBit}`,
 ]);
 
 // ════════════════════════════════════════════════════════════════════════════════════
@@ -77,37 +77,37 @@ export const TRAD_CANCELLED_SUMMARY = Object.freeze([
 export const TRAD_HOOKS = Object.freeze({
   // lastOutcome === 'failure' — a botched festival breeds blame + discontent.
   failure: Object.freeze([
-    (x) => `${x.name} failed badly this year, and the townsfolk are looking for someone to blame — a rich seam of grievance for a party to work.`, // canonical
+    (x) => `${x.name} failed badly this year, and the townsfolk are looking for someone to blame: a rich seam of grievance for a party to work.`, // canonical
     (x) => `The failure of ${x.name} has soured the mood in ${x.town}; muttered blame is hardening into factions, and a clever party could tip it either way.`,
-    (x) => `${x.name} came apart this year. Someone profited from the disgrace, or arranged it — and the party may be the ones to find out who.`,
+    (x) => `${x.name} came apart this year. Someone profited from the disgrace, or arranged it. The party may be the ones to find out who.`,
   ]),
   // lastOutcome === 'cancelled' — a rite set aside reads as an omen to the anxious.
   cancelled: Object.freeze([
-    (x) => `${x.town} set aside ${x.name} this year, and the older folk call it an ill omen — a rumour a party could confirm, dispel, or exploit.`, // canonical
+    (x) => `${x.town} set aside ${x.name} this year, and the older folk call it an ill omen: a rumour a party could confirm, dispel, or exploit.`, // canonical
     (x) => `For the first time in memory, ${x.name} went unheld in ${x.town}; the quiet has left people uneasy, and uneasy towns hire adventurers.`,
-    (x) => `The setting-aside of ${x.name} has emboldened those who always resented it — and alarmed those who need it kept. The party is caught between them.`,
+    (x) => `The setting-aside of ${x.name} has emboldened those who always resented it and alarmed those who need it kept. The party is caught between them.`,
   ]),
   // lastOutcome === 'triumph' — a great festival draws envy, crowds, and opportunists.
   triumph: Object.freeze([
-    (x) => `${x.name} was a triumph this year, and ${x.town} is thick with visitors, coin, and the cut-purses who follow both — the party arrives at the height of it.`, // canonical
+    (x) => `${x.name} was a triumph this year, and ${x.town} is thick with visitors, coin, and the cut-purses who follow both: the party arrives at the height of it.`, // canonical
     (x) => `The triumph of ${x.name} has made ${x.town} the envy of its neighbours; someone means to spoil it, and the party may be the only ones who notice in time.`,
-    (x) => `On the strength of ${x.name}'s triumph, a bold claim is being made in ${x.town} — and a rival is already moving to answer it.`,
+    (x) => `On the strength of ${x.name}'s triumph, a bold claim is being made in ${x.town}. A rival is already moving to answer it.`,
   ]),
   // suppressedBy — a rite traded away under an overlord smoulders as resistance.
   suppressed: Object.freeze([
-    (x) => `${x.name} was traded away under the overlord and now survives only in secret; the party may be asked to help keep it — or to stamp it out.`, // canonical
+    (x) => `${x.name} was traded away under the overlord and now survives only in secret; the party may be asked to help keep it or to stamp it out.`, // canonical
     (x) => `The banned rite of ${x.name} is still kept behind closed doors in ${x.town}, and word of it has reached the wrong ears. The party arrives as the net tightens.`,
-    (x) => `Since ${x.name} was forced under, a quiet resistance has gathered around its memory in ${x.town} — and the overlord wants names.`,
+    (x) => `Since ${x.name} was forced under, a quiet resistance has gathered around its memory in ${x.town}. The overlord wants names.`,
   ]),
   // a recent 'restoration' mutationLog entry — a liberated rite returns, and reckonings with it.
   restored: Object.freeze([
-    (x) => `With the occupation ended, ${x.town} keeps ${x.name} openly again for the first time in years — and old scores are being settled under cover of the celebration.`, // canonical
-    (x) => `${x.name} has returned to ${x.town} now the overlord is gone, but the first free keeping stirs up who collaborated and who resisted — and the party is in the middle of it.`,
+    (x) => `With the occupation ended, ${x.town} keeps ${x.name} openly again for the first time in years. Old scores are being settled under cover of the celebration.`, // canonical
+    (x) => `${x.name} has returned to ${x.town} now the overlord is gone, but the first free keeping stirs up who collaborated and who resisted. The party is in the middle of it.`,
     (x) => `The restored rite of ${x.name} draws home exiles and grudges alike; ${x.town} has not decided whether it is a reconciliation or a reckoning.`,
   ]),
   // adoptedFrom — a transplanted rite frays against the older custom.
   adopted: Object.freeze([
-    (x) => `${x.name}, brought by newcomers, has taken root in ${x.town} — and it chafes against the older custom; the party may be asked to broker, or to take a side.`, // canonical
+    (x) => `${x.name}, brought by newcomers, has taken root in ${x.town}, and it chafes against the older custom; the party may be asked to broker, or to take a side.`, // canonical
     (x) => `The settlers' rite of ${x.name} has grown too large for the old families of ${x.town} to ignore, and the friction is turning into something a party could be hired over.`,
     (x) => `${x.name} arrived with the newcomers and now rivals the town's own observances; someone in ${x.town} means to see it gone, and someone else to see it crowned.`,
   ]),

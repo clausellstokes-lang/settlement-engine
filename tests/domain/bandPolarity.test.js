@@ -52,7 +52,7 @@ const BAND_RANK = { Stable: 0, Strained: 1, Vulnerable: 2, Critical: 3 };
  *  crime, strong legitimacy, a safe region, a real road and diversified exports. */
 const CALM = {
   id: 'calm',
-  config: { monsterThreat: 'safe', nearbyResourcesState: {}, tradeRouteAccess: 'road' },
+  config: { monsterThreat: 'heartland', nearbyResourcesState: {}, tradeRouteAccess: 'road' },
   economicState: {
     prosperity: { tier: 'Comfortable' },
     primaryExports: ['grain', 'wool', 'iron'],
@@ -270,7 +270,7 @@ describe('layerAuthoredDeltas — the layer that PERSISTS bands on the same orie
 describe('G10 — the substrate band WORD reaches the reader polarity-correct', () => {
   const CRIMINAL = {
     id: 'crime',
-    config: { monsterThreat: 'safe', tradeRouteAccess: 'road' },
+    config: { monsterThreat: 'heartland', tradeRouteAccess: 'road' },
     economicState: { prosperity: { tier: 'Moderate' }, safetyProfile: { blackMarketCapture: 95 } },
     powerStructure: {
       factions: [{ name: 'Syndicate', power: 90, type: 'criminal' }],

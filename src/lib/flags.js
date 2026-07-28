@@ -83,9 +83,8 @@ const FLAG_DESCRIPTIONS = Object.freeze({
   sessionMode: "W-Session: distraction-free run-of-play overlay on a saved settlement.",
   foundryExport: "W-Session: Foundry VTT module export beside the PDF in ExportSheet.",
   pricingSimulationCopy: "Simulation-led premium pricing copy. ON (default) = \"generate a town, then run the region\" — names the simulation, never size. OFF = the old \"unlimited saves / full size\" copy.",
-  loadingJourneyFilm: "C2L: the progress-scrubbed journey film as the loading backdrop (generation + realm). OFF = stills floor only (default). Flip on at the taste walk to compare without a rebuild.",
-  welcomeJourneyFilm: "C2: the scroll-scrubbed journey film behind the Welcome page. OFF = stills floor only (default, zero video bytes). Flip on at the taste walk to compare film-on vs stills-only without a rebuild.",
-  loadingJourneySetBg: "C2L media-set toggle (only meaningful when loadingJourneyFilm is on). TRUE = \"bg\" set (5.04s legs, ~42 MB); FALSE = \"journey\" set (2.5s legs, ~10 MB). The walk compares the two; the loser is deleted.",
+  loadingJourneyFilm: "C2L: the progress-scrubbed journey film as the loading backdrop (generation + realm). ON is the selected default; OFF retains the stills-only accessibility/fallback floor.",
+  welcomeJourneyFilm: "C2: the scroll-scrubbed journey film behind the Welcome page. ON is the selected default; OFF retains the stills-only, zero-video-byte floor.",
 });
 
 // ── Composed registry ────────────────────────────────────────────────────────

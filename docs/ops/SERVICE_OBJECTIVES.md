@@ -70,6 +70,10 @@ installation. Until an operator configures the following contract and retains a
 successful alert-delivery drill, the five-minute obligation-visibility objective
 remains unachieved:
 
+The selected paging destination is `ops@settlementforge.com` through an external
+monitoring provider. Selection is not delivery evidence; the mailbox, provider
+route, and drill receipt must still exist.
+
 - run `npm run ops:obligations -- --max-severity=healthy --json` from a private,
   secret-bearing monitor at least every four minutes;
 - provide only the production `SUPABASE_URL` and

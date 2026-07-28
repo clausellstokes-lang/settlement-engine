@@ -25,6 +25,9 @@ import {
 } from '../helpers/anchoredNegatives.js';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import {
+  UPGRADE_CHAINS as DATA_UPGRADE_CHAINS,
+} from '../../src/data/institutionLadders.js';
 import { UPGRADE_CHAINS, collapseUpgradeChains } from '../../src/generators/steps/assembleInstitutions.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
@@ -47,6 +50,10 @@ function catalogNameSet() {
 // ── Joins: the upgrade-ladder table ──────────────────────────────────────────
 
 describe('joins: UPGRADE_CHAINS is a scale ladder, not an adjacency map', () => {
+  test('the step compatibility export is the data leaf single writer', () => {
+    expect(UPGRADE_CHAINS).toBe(DATA_UPGRADE_CHAINS);
+  });
+
   test('Docks/port facilities and Warehouse district are never paired', () => {
     // Complementary port infrastructure; Warehouse district is required:true
     // at city tier, so any pairing deterministically deletes the other member.

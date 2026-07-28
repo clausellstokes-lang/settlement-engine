@@ -14,11 +14,41 @@
 
 import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
 
-/** @typedef {Record<string, any>} BehavioralReceipt */
+/** @typedef {Record<string, unknown>} UnknownRecord */
+/**
+ * @typedef {Object} BehavioralYear
+ * @property {unknown} [year]
+ * @property {unknown} [eventCount]
+ * @property {unknown} [majorEventCount]
+ * @property {Record<string, unknown>} [eventTypeCounts]
+ * @property {Record<string, unknown>} [moverCounts]
+ * @property {Record<string, unknown>} [arcCounts]
+ * @property {Record<string, unknown>} [motion]
+ * @property {Record<string, unknown>} [attentionCounts]
+ * @property {Record<string, unknown>} [succession]
+ * @property {{ crossFamilyEdges?: unknown, familyPairs?: unknown[] }} [causal]
+ * @property {Record<string, UnknownRecord>} [stateVectors]
+ */
+/**
+ * @typedef {Object} BehavioralReceipt
+ * @property {unknown} [caseId]
+ * @property {unknown} [seed]
+ * @property {unknown} [years]
+ * @property {unknown} [settlements]
+ * @property {{
+ *   schemaVersion?: unknown,
+ *   yearly?: BehavioralYear[],
+ *   settlementIds?: unknown[],
+ *   controls?: {
+ *     neighbor?: UnknownRecord,
+ *     dark?: UnknownRecord,
+ *   },
+ * }} [behavioral]
+ */
 /**
  * @typedef {Object} BehavioralYearRow
  * @property {BehavioralReceipt} receipt
- * @property {Record<string, any>} year
+ * @property {BehavioralYear} year
  * @property {boolean} finalDecade
  */
 /**
@@ -31,7 +61,9 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
  */
 
 export { BEHAVIORAL_CONTRACT_VERSION };
-export const BEHAVIORAL_OBSERVATION_VERSION = 1;
+// v2 adds uncapped post-apply receipts and authoritative major/succession/causal
+// semantics. A v1 receipt must never be reinterpreted by this oracle.
+export const BEHAVIORAL_OBSERVATION_VERSION = 2;
 export const HUMAN_CHRONICLE_REVIEW_VERSION = 1;
 
 export const CERTIFICATION_HORIZONS = Object.freeze({
@@ -187,10 +219,17 @@ const ratio = (numerator, denominator) => (
  */
 const rate = (count, denominator, scale) => ratio(count, denominator) * scale;
 
-/** @param {unknown} value @returns {Array<[string, any]>} */
+/** @param {unknown} value @returns {UnknownRecord} */
+const asRecord = (value) => (
+  value && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {UnknownRecord} */ (value)
+    : {}
+);
+
+/** @param {unknown} value @returns {Array<[string, unknown]>} */
 const entriesOf = (value) => (
   value && typeof value === 'object' && !Array.isArray(value)
-    ? Object.entries(/** @type {Record<string, any>} */ (value))
+    ? Object.entries(/** @type {UnknownRecord} */ (value))
     : []
 );
 
@@ -231,21 +270,21 @@ function effectiveDiversity(counts) {
   const values = Object.values(counts).filter((value) => value > 0);
   const total = sum(values);
   if (!total) return 0;
-  let entropy = 0;
-  for (const count of values) {
-    const probability = count / total;
-    entropy -= probability * Math.log(probability);
-  }
-  return Math.exp(entropy);
+  // Inverse Simpson diversity is an effective-number metric like exp(Shannon),
+  // but uses only correctly-rounded arithmetic. The release oracle therefore
+  // stays byte-stable across JS engines instead of adding transcendental math
+  // to a source-bound certification receipt.
+  const squares = sum(values.map((value) => value * value));
+  return squares > 0 ? (total * total) / squares : 0;
 }
 
 /** @param {number[]} counts @returns {number} */
 function jainFairness(counts) {
   if (!counts.length) return 0;
   const total = sum(counts);
-  const squares = sum(counts.map((value) => finite(value) ** 2));
+  const squares = sum(counts.map((value) => finite(value) * finite(value)));
   if (squares === 0) return 0;
-  return (total ** 2) / (counts.length * squares);
+  return (total * total) / (counts.length * squares);
 }
 
 /**
@@ -284,8 +323,7 @@ function seedFamilyOf(receipt) {
 function yearlyRowsOf(receipts) {
   return receipts.flatMap((receipt) => (
     Array.isArray(receipt?.behavioral?.yearly)
-      ? /** @type {Array<Record<string, any>>} */ (receipt.behavioral.yearly)
-        .map((year) => ({
+      ? receipt.behavioral.yearly.map((year) => ({
           receipt,
           year,
           finalDecade: finite(year?.year) > finite(receipt?.years) - 10,
@@ -303,8 +341,8 @@ function valuesBySettlement(receipt, field) {
   /** @type {Record<string, number[]>} */
   const result = {};
   for (const row of receipt?.behavioral?.yearly || []) {
-    for (const [settlementId, vector] of entriesOf(row?.stateVectors)) {
-      const value = finite(vector?.[field], Number.NaN);
+    for (const [settlementId, rawVector] of entriesOf(row?.stateVectors)) {
+      const value = finite(asRecord(rawVector)[field], Number.NaN);
       if (!Number.isFinite(value)) continue;
       if (!result[settlementId]) result[settlementId] = [];
       result[settlementId].push(value);
@@ -330,9 +368,7 @@ function checkMoverActivity(receipts, rows, settlementYears) {
   for (const family of BEHAVIORAL_MOVER_FAMILIES) {
     const familyTotal = finite(totals[family]);
     const activeCases = receipts.filter((receipt) => (
-      sum((/** @type {Array<Record<string, any>>} */ (
-        receipt.behavioral?.yearly || []
-      ))
+      sum((receipt.behavioral?.yearly || [])
         .filter((year) => finite(year?.year) > finite(receipt.years) - 10)
         .map((year) => year?.moverCounts?.[family])) > 0
     )).length;
@@ -455,9 +491,7 @@ function checkArcs(receipts, rows, settlementYears) {
   for (const polarity of polarities) {
     const count = sum(rows.map(({ year }) => year?.arcCounts?.[polarity]));
     const activeCases = receipts.filter((receipt) => (
-      sum((/** @type {Array<Record<string, any>>} */ (
-        receipt.behavioral?.yearly || []
-      ))
+      sum((receipt.behavioral?.yearly || [])
         .map((year) => year?.arcCounts?.[polarity])) > 0
     )).length;
     const tailCount = sum(finalRows.map(({ year }) => year?.arcCounts?.[polarity]));
@@ -546,9 +580,9 @@ function checkNeighborControls(receipts) {
   const scaleBands = new Set(probes.map(({ receipt }) => finite(receipt?.settlements)));
   const seedFamilies = new Set(probes.map(({ receipt }) => seedFamilyOf(receipt)));
   const individuallyPassing = probes.filter(({ probe }) => {
-    const checkpoints = /** @type {Array<Record<string, any>>} */ (
-      Array.isArray(probe?.checkpoints) ? probe.checkpoints : []
-    );
+    const checkpoints = Array.isArray(probe?.checkpoints)
+      ? probe.checkpoints.map(asRecord)
+      : [];
     const positive = checkpoints.filter((checkpoint) => finite(checkpoint?.targetDistance) > 0);
     const useful = checkpoints
       .filter((checkpoint) => finite(checkpoint?.year) <= CERTIFICATION_HORIZONS.useful.years)
@@ -625,9 +659,7 @@ function attentionFor(receipt) {
       ? receipt.behavioral.settlementIds.map(String)
       : []
   );
-  const totals = countMap((/** @type {Array<Record<string, any>>} */ (
-    receipt?.behavioral?.yearly || []
-  ))
+  const totals = countMap((receipt?.behavioral?.yearly || [])
     .map((year) => year?.attentionCounts));
   const counts = ids.map((id) => finite(totals[id]));
   const mean = ratio(sum(counts), counts.length);
@@ -795,7 +827,7 @@ export function validateHumanChronicleReview(raw, context = {}) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     return { ok: false, errors: ['Human Chronicle review is missing.'], review: null };
   }
-  const review = /** @type {Record<string, any>} */ (raw);
+  const review = asRecord(raw);
   if (review.schemaVersion !== HUMAN_CHRONICLE_REVIEW_VERSION) {
     errors.push(`schemaVersion must be ${HUMAN_CHRONICLE_REVIEW_VERSION}.`);
   }
@@ -863,8 +895,9 @@ export function validateHumanChronicleReview(raw, context = {}) {
     }
   }
 
+  const criteria = asRecord(review.criteria);
   for (const criterion of thresholds.requiredCriteria) {
-    if (review.criteria?.[criterion] !== 'pass') {
+    if (criteria[criterion] !== 'pass') {
       errors.push(`criteria.${criterion} must be pass.`);
     }
   }
@@ -917,7 +950,7 @@ function earnedBehavioralProperties(checks, humanReviewPassed) {
  *   profile: string,
  *   complete: boolean,
  *   source?: { commit?: string },
- *   receipts?: any[],
+ *   receipts?: BehavioralReceipt[],
  *   humanReview?: unknown,
  * }} input
  */

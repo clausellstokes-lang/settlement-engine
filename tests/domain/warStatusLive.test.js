@@ -111,7 +111,7 @@ describe('live war status (§S3)', () => {
     expect(wars[0].commodityId).toBe('iron');
   });
 
-  test('disposition standings surface net win/loss records, not net-zero', () => {
+  test('realm contest records surface resolved win/loss counts, not zero-count entries', () => {
     const worldState = {
       dispositionStats: {
         a: { wins: 3, losses: 1, score: 2 },

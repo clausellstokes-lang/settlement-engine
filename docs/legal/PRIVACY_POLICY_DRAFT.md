@@ -180,8 +180,9 @@ stamped at the top of the live policy.
 ## 13. Contact
 
 Questions about your privacy or a deletion request? Reach us at
-`[[CONTACT EMAIL — currently settlementforge@gmail.com; support@settlementforge.com is
-proposed but unconfirmed pending owner sign-off before launch]]`.
+`[[CONTACT EMAIL — support@settlementforge.com is selected; activate only after
+MX/forwarding and a round-trip test pass. The current runtime fallback remains
+settlementforge@gmail.com until that operational proof.]]`.
 
 *(Source of truth: `src/copy/support.js`.)*
 
@@ -206,8 +207,9 @@ proposed but unconfirmed pending owner sign-off before launch]]`.
 
 ## 15. Open placeholders (must be resolved before force)
 
-1. **`[[CONTACT EMAIL]]`** — `settlementforge@gmail.com` today;
-   `support@settlementforge.com` proposed but unconfirmed.
+1. **`[[CONTACT EMAIL]]`** — `support@settlementforge.com` is selected.
+   Operational activation still requires MX/forwarding and a successful round-trip;
+   `settlementforge@gmail.com` remains the runtime fallback until then.
 2. **`[[Operating entity / legal name]]`** — required for the data-controller identity.
 3. **`[[Children / minimum age]]`** (§10) — consistent with Terms §1.
 4. **`[[International transfers / GDPR lawful bases + SCCs]]`** (§11), naming the

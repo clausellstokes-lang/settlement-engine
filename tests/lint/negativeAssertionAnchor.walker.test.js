@@ -115,8 +115,9 @@ function renderLiteral(found) {
 /**
  * FROZEN 2026-07-27 from this walker's own scan at composite-r4 d0fdcf7c (55 files /
  * 181 sites), RE-FROZEN the same day after the EP-2 sweep banked the win: 2 files,
- * 2 sites. Both survivors are DELIBERATE honest-bare findings awaiting owner rulings
- * (tuningBatchE2 — the VS16 pin over all-empty icons, owner pick EP-e). The
+ * 2 sites. The final survivor was the tuningBatchE2 VS16 pin. Owner delegation
+ * resolved EP-e as an exact-empty icon contract on 2026-07-28, so the habitat is
+ * now zero. The
  * subsumption tanner-guard site was RETIRED 2026-07-28 by the EP-6 fix wave: the
  * dead conditional became a live anchored invariant when the furrier→tannery
  * producer-eating rule was deleted. SHRINK-ONLY.
@@ -127,12 +128,15 @@ function renderLiteral(found) {
  * raise a number; never add a file. A new file needing a row means a new un-anchored
  * negative was authored, which is the thing this gate exists to stop.
  */
-const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
-  'tests/generators/tuningBatchE2.test.js': 1,
-});
+const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({});
 
 describe('negative-assertion anchor walker (habitat removal)', () => {
   const found = scanUnanchoredNegatives();
+  const scannedFileCount = SCAN_ROOTS.reduce((total, root) => {
+    const abs = join(ROOT, root);
+    if (!existsSync(abs)) return total;
+    return total + walk(abs).filter((filePath) => /\.test\.(js|jsx)$/.test(filePath)).length;
+  }, 0);
 
   if (process.env.UPDATE_EPISTEMIC_ALLOWLIST) {
     test('REGENERATION MODE: prints the fresh literal and fails on purpose', () => {
@@ -185,19 +189,10 @@ describe('negative-assertion anchor walker (habitat removal)', () => {
     expect(stale).toEqual([]);
   });
 
-  test('the scan is not vacuous (it sees the frozen population)', () => {
-    // If the directory walk or the extension filter silently broke, `found` would
-    // collapse and the honesty test above would demand mass-lowering. Name the real
-    // problem first.
-    const totalFound = Object.values(found).reduce((n, { count }) => n + count, 0);
-    const totalFrozen = Object.values(FROZEN_UNANCHORED_NEGATIVES).reduce((a, b) => a + b, 0);
-    expect(
-      totalFound,
-      'the scan found fewer un-anchored negatives than the frozen inventory — either sites were'
-      + ' anchored (lower their rows) or the scanner broke',
-    ).toBeGreaterThanOrEqual(totalFrozen);
-    expect(Object.keys(FROZEN_UNANCHORED_NEGATIVES).length, 'frozen file roster').toBe(1);
-    expect(totalFrozen, 'frozen site total').toBe(1);
+  test('the scan is not vacuous (it walks the corpus and holds the habitat at zero)', () => {
+    expect(scannedFileCount, 'generation-facing test files visited').toBeGreaterThanOrEqual(50);
+    expect(found, 'all formerly bare negative assertions are now anchored or exact').toEqual({});
+    expect(FROZEN_UNANCHORED_NEGATIVES, 'the shrink-only exception roster is empty').toEqual({});
   });
 
   // ── GUARD-THE-GUARD: the detector, on fixtures ─────────────────────────────

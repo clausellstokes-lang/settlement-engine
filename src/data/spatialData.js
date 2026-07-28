@@ -25,6 +25,12 @@ export const INSTITUTION_SPATIAL = [
   }
 ];
 
+// Non-institution evidence intentionally named by a gate. Keep this list
+// explicit and tiny so catalog typos cannot masquerade as "derived" features.
+export const GATE_DERIVED_REQUIREMENTS = Object.freeze([
+  "Managed forest",
+]);
+
 export const GATE_FEATURES = {
   "Gates (if walled)": {
     suggestionOnly: true,
@@ -34,11 +40,6 @@ export const GATE_FEATURES = {
   Citadel: {
     requires: ["City walls and gates", "Massive walls and fortifications"],
     reason: "Inner fortress requires outer defenses."
-  },
-  "Inner citadel": {
-    minTier: "metropolis",
-    requires: ["City walls and gates", "Massive walls and fortifications"],
-    reason: "Citadel is last-stand fortification within an already-fortified city."
   },
   Garrison: {
     reason: "A garrison provides its own quarters and replaces the citizen militia."
@@ -51,21 +52,17 @@ export const GATE_FEATURES = {
   },
   "Multiple garrisons": {
     minTier: "city",
-    requires: ["Garrison", "Barracks", "Professional guard (hundreds)"],
+    requires: ["Garrison", "Barracks", "Professional city watch"],
     reason: "Multiple garrison facilities require city-scale population and military investment."
   },
-  "Professional guard (hundreds)": {
+  "Professional city watch": {
     minTier: "city",
     requires: ["Garrison", "Barracks", "Town watch"],
     reason: "Hundreds of professional guards require established military infrastructure."
   },
-  "Mercenary company HQ": {
-    minTier: "town",
-    reason: "Mercenary companies require town-scale population to recruit and supply."
-  },
   "Mercenary quarter": {
     minTier: "city",
-    requires: ["Mercenary company HQ", "Hireling hall"],
+    requires: ["Hireling hall"],
     reason: "Sellsword district requires military infrastructure and sustained demand."
   },
   "Aqueduct or water system": {
@@ -82,7 +79,7 @@ export const GATE_FEATURES = {
     reason: "Sewage infrastructure requires engineered water supply for flushing and drainage."
   },
   Tanners: {
-    requires: ["Water source", "Multiple water sources", "Aqueduct or water system", "River access"],
+    requires: ["Water source", "Multiple water sources", "Aqueduct or water system"],
     reason: "Tanning requires massive amounts of water for hide processing."
   },
   "Market square": {
@@ -129,20 +126,10 @@ export const GATE_FEATURES = {
     requires: ["Daily markets", "Docks/port facilities", "Market square"],
     reason: "Bulk storage requires major trade volume from markets or port access."
   },
-  "Multiple warehouse districts": {
-    minTier: "metropolis",
-    requires: ["Warehouse district"],
-    reason: "Multiple districts require enormous trade throughput."
-  },
   "International trade center": {
     minTier: "metropolis",
-    requires: ["Warehouse district", "Banking houses", "Multiple warehouse districts"],
+    requires: ["Warehouse district", "Banking houses"],
     reason: "Global trade requires major trade infrastructure: port access or substantial overland networksstructure with banking."
-  },
-  "Stock exchange (early)": {
-    minTier: "metropolis",
-    requires: ["Banking district", "International trade center"],
-    reason: "Share trading requires sophisticated financial infrastructure."
   },
   "Docks/port facilities": {
     requiresAccess: ["port", "river"],
@@ -231,33 +218,19 @@ export const GATE_FEATURES = {
     requires: ["Cathedral (10,000+ only)", "Parish churches (10-30)", "Parish churches (50-100+)"],
     reason: "Architectural marvel requires massive wealth, metropolitan population, and deep parish roots."
   },
-  "Multiple cathedrals": {
-    minTier: "metropolis",
-    requires: ["Great cathedral", "Cathedral (10,000+ only)"],
-    reason: "Only the largest cities support competing religious authorities of cathedral rank."
-  },
-  "Sage/library": {
-    minTier: "town",
-    reason: "A permanent sage or library requires town-level patronage and literate customers."
-  },
   "Great library": {
     minTier: "city",
-    requires: ["Sage/library", "Cathedral (10,000+ only)", "Multiple monasteries"],
+    requires: ["Sage's quarter", "Cathedral (10,000+ only)", "Multiple monasteries"],
     reason: "Major collections require wealthy religious or civic patronage to fund acquisition."
-  },
-  University: {
-    minTier: "metropolis",
-    requires: ["Great library", "Cathedral (10,000+ only)", "Great cathedral"],
-    reason: "Universities grew from cathedral schools. Require metropolis population (25,000+) and library infrastructure."
   },
   "Sage's quarter": {
     minTier: "city",
-    requires: ["Great library", "University"],
+    requires: ["Great library", "Bardic college"],
     reason: "Concentration of scholars requires educational infrastructure to attract them."
   },
   "Bardic college": {
     minTier: "city",
-    requires: ["Sage/library", "Theaters", "Great library"],
+    requires: ["Theaters", "Great library"],
     reason: "Formal bardic training requires cultural infrastructure."
   },
   "Town hall": {
@@ -363,13 +336,8 @@ export const GATE_FEATURES = {
   },
   "Colosseum/arena": {
     minTier: "metropolis",
-    requires: ["Professional arena", "Fighting pits"],
-    reason: "Colosseum-scale entertainment requires enormous investment and audience."
-  },
-  "Professional arena": {
-    minTier: "city",
     requires: ["Fighting pits"],
-    reason: "Professional events require established fighting culture."
+    reason: "Colosseum-scale entertainment requires enormous investment and audience."
   },
   "Gambling district": {
     minTier: "metropolis",
@@ -432,24 +400,15 @@ export const GATE_FEATURES = {
     minTier: "hamlet",
     reason: "A charter hall operates under regional authority and can exist in smaller settlements, especially on dangerous frontiers."
   },
-  "Adventurers' guild hall": {
-    minTier: "city",
-    reason: "Formal adventurers' guild requires city-scale demand. The guild itself provides the hireling and mercenary infrastructure."
-  },
   "Multiple adventurers' guilds": {
     minTier: "city",
-    requires: ["Adventurers' guild hall"],
+    requires: ["Adventurers' charter hall"],
     reason: "Competing guilds require metropolis-scale adventuring demand."
   },
   "Dungeon delving supply district": {
     minTier: "city",
-    requires: ["Adventurers' guild hall", "Multiple adventurers' guilds"],
+    requires: ["Adventurers' charter hall", "Multiple adventurers' guilds"],
     reason: "Specialized gear suppliers follow adventurer concentration."
-  },
-  "Monster part dealers": {
-    minTier: "city",
-    requires: ["Adventurers' guild hall", "Alchemist quarter", "Alchemist shop"],
-    reason: "Monster component trade requires guild infrastructure and alchemical buyers."
   },
   "Traveling hedge wizard": {
     minTier: "thorp",
@@ -480,12 +439,12 @@ export const GATE_FEATURES = {
   },
   "Mages' guild": {
     minTier: "city",
-    requires: ["Wizard's tower", "Multiple wizard towers"],
+    requires: ["Wizard's tower"],
     reason: "Organized magical guild requires established tower infrastructure."
   },
   "Academy of magic": {
     minTier: "city",
-    requires: ["Mages' guild", "Mages' district", "Multiple wizard towers"],
+    requires: ["Mages' guild", "Mages' district"],
     reason: "Formal magical education requires organized guild and district infrastructure."
   },
   "Mages' district": {
@@ -493,34 +452,9 @@ export const GATE_FEATURES = {
     requires: ["Wizard's tower", "Mages' guild"],
     reason: "A mages' district requires concentration of practitioners and guild organization."
   },
-  "Enchanting quarter": {
-    minTier: "city",
-    requires: ["Mages' guild", "Mages' district", "Academy of magic"],
-    reason: "Magic item production requires organized magical community and arcane infrastructure."
-  },
   "Teleportation circle": {
     minTier: "town",
     reason: "Permanent teleportation requires substantial magical investment. Cost: 18,250 GP to create."
-  },
-  "Multiple wizard towers": {
-    minTier: "city",
-    requires: ["Wizard's tower", "Mages' guild"],
-    reason: "Multiple towers require established magical community and sufficient demand."
-  },
-  "Spellcasting services (1st-4th level)": {
-    minTier: "town",
-    requires: ["Wizard's tower", "Hedge wizard", "Parish church"],
-    reason: "Regular spellcasting services require resident practitioner."
-  },
-  "Spellcasting services (1st-6th level)": {
-    minTier: "city",
-    requires: ["Mages' guild", "Wizard's tower", "Academy of magic"],
-    reason: "Higher-level services require organized magical institutions."
-  },
-  "Spellcasting services (1st-8th level)": {
-    minTier: "metropolis",
-    requires: ["Academy of magic", "Mages' district", "Multiple wizard towers"],
-    reason: "Near-epic spellcasting requires metropolis-scale magical community."
   },
   "Golem workforce": {
     minTier: "city",
@@ -532,11 +466,6 @@ export const GATE_FEATURES = {
     requires: ["Mages' guild", "Academy of magic"],
     reason: "Necromantic labor requires organized magical community for control and containment."
   },
-  "Magical banking (high magic)": {
-    minTier: "metropolis",
-    requires: ["Banking district", "Mages' guild", "Academy of magic"],
-    reason: "Extradimensional vaults require high-level magic and established banking infrastructure."
-  },
   "Dream parlors (high magic)": {
     minTier: "metropolis",
     requires: ["Mages' district", "Academy of magic"],
@@ -544,35 +473,13 @@ export const GATE_FEATURES = {
   },
   "Airship docking (high magic)": {
     minTier: "metropolis",
-    requires: ["Mages' guild", "Academy of magic", "Multiple wizard towers"],
-    reason: "Airship docking requires major magical infrastructure to operate. Without a mages' guild, academy, or multiple wizard towers, there is no magical expertise to maintain the mooring fields or weather protection."
+    requires: ["Mages' guild", "Academy of magic"],
+    reason: "Airship docking requires major magical infrastructure to operate. Without a mages' guild or academy, there is no magical expertise to maintain the mooring fields or weather protection."
   },
   "Message network (high magic)": {
     minTier: "metropolis",
     requires: ["Mages' guild", "Banking houses"],
     reason: "Sending Stone networks require institutional coordination and 250\u201310,000 GP per station."
-  },
-  "Magic item consignment": {
-    minTier: "city",
-    requires: [
-      "Mages' guild",
-      "Enchanter's shop",
-      "Enchanting quarter",
-      "Wizard's tower",
-      "Arcane university",
-      "Magical academy",
-    ],
-    reason: "Consignment market requires concentration of both producers and wealthy buyers."
-  },
-  "Curse breaking": {
-    minTier: "city",
-    requires: ["Mages' guild", "Cathedral (10,000+ only)", "Wizard's tower"],
-    reason: "Remove Curse (5th level) requires an established arcane or divine practitioner at city scale."
-  },
-  "Resurrection services (10,000+ only)": {
-    minTier: "city",
-    requires: ["Cathedral (10,000+ only)"],
-    reason: "Raise Dead (5th level) requires a major temple with a high-level cleric. Available in cities with 10,000+ population."
   },
   "Planar embassy": {
     minTier: "metropolis",

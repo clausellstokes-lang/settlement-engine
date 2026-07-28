@@ -112,6 +112,13 @@ The threshold logic (`> N distinct crash signatures/hour`, default 8) lives in
 Like the whole error pipeline, the email side is **inert until keys + wiring are
 added** — the always-on admin banner is what launch relies on.
 
+**2026-07-28 posture ruling.** Use the recommended external-monitor path; do not
+widen `send-email`'s anonymous template surface for launch. The urgent operator
+destination is `ops@settlementforge.com`, deliberately separate from customer
+support. This selects the channel but does not claim it works: mailbox/DNS setup,
+provider routing, and an end-to-end alert drill remain operator evidence required
+before the five-minute service objective can be claimed.
+
 ---
 
 ## See also

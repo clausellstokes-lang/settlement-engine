@@ -23,7 +23,7 @@
  */
 
 import { newsVoiceCategory } from './newsVoice.js';
-import { tickCalendarLabel } from './humanizeEngineTokens.js';
+import { humanizeFlagKey, tickCalendarLabel } from './humanizeEngineTokens.js';
 
 /** Local FNV-1a (the newsVoice idiom — each module keeps its own copy rather than
  *  import a sibling's table). @param {string} str @returns {number} */
@@ -115,7 +115,7 @@ export const KIND_SECTION = Object.freeze({
 /** Greeting variants (FNV-picked by the diff's own fingerprint — deterministic). */
 const GREETINGS = Object.freeze([
   'To the keeper of this realm, greetings. Since last I wrote, the following came to pass.',
-  'My lord, my lady — the season has turned, and with it these tidings.',
+  'My lord, my lady, the season has turned, and with it these tidings.',
   'Word from the realm, set down faithfully as it reached me.',
   'Herewith the record of what has stirred since you last read my hand.',
 ]);
@@ -130,7 +130,7 @@ const QUIET = Object.freeze([
   'A still season: no war, no crowning, no calamity worth the ink. All held.',
   'The days ran on without event worth the setting-down. Peace, of a kind.',
 ]);
-const DEEPENED_LEAD = 'The world itself has deepened since last we spoke — new currents now run beneath it:';
+const DEEPENED_LEAD = 'The world itself has deepened since last we spoke. New currents now run beneath it:';
 
 /** C2 (bar 97, "claims completeness it cannot keep"): the honest line the letter
  *  carries when the capped feed has provably shed beats older than the read floor.
@@ -372,13 +372,13 @@ export function composeChroniclersLetter({ wizardNews, lastReadTick = 0, simulat
 export function letterToPlainText(letter) {
   const lines = [];
   lines.push('THE CHRONICLER’S LETTER');
-  lines.push(`(the record from tick ${letter.sinceTick} through ${letter.throughTick})`);
+  lines.push(`(the record from ${tickCalendarLabel(letter.sinceTick)} through ${tickCalendarLabel(letter.throughTick)})`);
   lines.push('');
   lines.push(letter.greeting);
   if (letter.deepened) {
     lines.push('');
     lines.push(letter.deepened.lead);
-    for (const f of letter.deepened.flags) lines.push(`  — ${f}`);
+    for (const f of letter.deepened.flags) lines.push(`  • ${humanizeFlagKey(f)}`);
   }
   for (const s of letter.sections) {
     lines.push('');

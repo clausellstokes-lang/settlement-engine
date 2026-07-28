@@ -43,8 +43,8 @@
  * content. tickCalendarLabel is reused from humanizeEngineTokens.js.
  *
  * DORMANCY: consumed by CauseWalkPanel only when the virtual `discourseProseEnabled`
- * flag is lit (absent from every preset, read defensively — the provenanceLedgerEnabled
- * idiom). Flag OFF ⇒ the panel renders the exact current path, byte-identical.
+ * flag is lit (absent from every preset and read defensively like every virtual
+ * gate). Flag OFF ⇒ the panel renders the exact current path, byte-identical.
  *
  * @enforced-by tests/domain/discourseKernel.test.js (realizer + clause-provenance +
  *   determinism), tests/lint/discourseLexiconCoverage.test.js (lexicon totality),

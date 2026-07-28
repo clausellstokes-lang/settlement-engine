@@ -30,9 +30,14 @@ const PROSPERITY_CONTRIB = {
 function safetyContrib(label) {
   if (!label) return 0;
   const l = label.toLowerCase();
-  if (l.includes('desperate') || l.includes('dangerous') || l.includes('famine'))    return -20;
-  if (l.includes('volatile')  || l.includes('tense')     || l.includes('strained'))  return -12;
-  if (l.includes('suspicious')|| l.includes('unsafe'))                                return -8;
+  if (l.includes('critical')   || l.includes('desperate')
+      || l.includes('dangerous') || l.includes('famine'))                             return -20;
+  if (l.includes('restricted') || l.includes('volatile')
+      || l.includes('tense') || l.includes('strained'))                               return -12;
+  if (l.includes('quarantined') || l.includes('suspicious') || l.includes('unsafe'))   return  -8;
+  // An authoritarian peace suppresses ordinary crime but exacts legitimacy:
+  // order without consent is deliberately worse than Moderate, not a crisis.
+  if (l.includes('controlled'))                                                           return  -5;
   if (l.includes('moderate'))                                                          return  0;
   if (l.includes('very safe') || l.includes('orderly'))                               return +20;
   if (l.includes('safe'))                                                              return +15;

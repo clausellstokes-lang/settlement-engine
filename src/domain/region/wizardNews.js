@@ -730,6 +730,23 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
 }
 
 /**
+ * Audit-only append seam. Valid raw receipts are copied into `receiptSink`
+ * before the canonical feed normalizes, dedupes, sorts, and caps them. With no
+ * sink this delegates exactly to appendWizardNewsEntries.
+ * @param {WizardNewsFeed | null | undefined} [feed]
+ * @param {RawWizardNewsEntry[]} [entries]
+ * @param {WizardNewsOptions} [options]
+ * @param {RawWizardNewsEntry[] | null} [receiptSink]
+ * @returns {ReturnType<typeof appendWizardNewsEntries>}
+ */
+export function appendObservedWizardNewsEntries(feed = {}, entries = [], options = {}, receiptSink = null) {
+  if (Array.isArray(receiptSink)) {
+    for (const entry of entries || []) if (entry?.id) receiptSink.push(entry);
+  }
+  return appendWizardNewsEntries(feed, entries, options);
+}
+
+/**
  * Fold a per-settlement pulse mover's result into the kernel's threaded state (the
  * upswing/lifecycle/growth applier — the "minimal-line" mover-registration idiom that keeps
  * pulseKernel under its frozen line ceiling). A mover returns
@@ -739,11 +756,12 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
  * @param {{ changed?: boolean, worldState?: Record<string, unknown>, settlementUpdates?: unknown[], newsEntries?: unknown[] }} result
  * @param {Record<string, unknown>} worldState @param {unknown[]} settlementUpdates
  * @param {ReturnType<typeof appendWizardNewsEntries>} wizardNews @param {string|null} now
+ * @param {RawWizardNewsEntry[] | null} [receiptSink]
  * @returns {{ worldState: Record<string, unknown>, settlementUpdates: unknown[], wizardNews: ReturnType<typeof appendWizardNewsEntries> }} */
-export function applyPulseMover(result, worldState, settlementUpdates, wizardNews, now) {
+export function applyPulseMover(result, worldState, settlementUpdates, wizardNews, now, receiptSink = null) {
   if (!result || !result.changed) return { worldState, settlementUpdates, wizardNews };
   const news = Array.isArray(result.newsEntries) && result.newsEntries.length
-    ? appendWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now: now ?? undefined })
+    ? appendObservedWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now: now ?? undefined }, receiptSink)
     : wizardNews;
   return {
     worldState: result.worldState !== undefined ? result.worldState : worldState,

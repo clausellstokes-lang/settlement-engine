@@ -13,6 +13,9 @@
  *   - AGGREGATE death + exodus fractions are BOUNDED, tier-scaled, and survivable
  *     (deaths + exodus < population — NO annihilation).
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
   CALAMITY_TUNING,
@@ -42,8 +45,13 @@ import {
   hasOwnRequiredContract,
 } from '../../src/domain/generationOwnership.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { readEnvelope } from '../helpers/distributionEnvelope.js';
 
 const T = CALAMITY_TUNING;
+const ENVELOPES = JSON.parse(readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../fixtures/distribution-envelopes.manifest.json'),
+  'utf8',
+));
 const constRng = (v) => ({ random: () => v });
 
 // ── The PARITY RATCHET's generated shape product ─────────────────────────────
@@ -113,6 +121,7 @@ describe('M11b calamity — frequency + cooldown', () => {
     const SEEDS = 40;
     const hazard = annualHazard(N);
     let totalStrikes = 0;
+    let eligibleRolls = 0;
     for (let s = 0; s < SEEDS; s++) {
       const master = createPRNG(`calamity-soak-${s}`);
       // Per-settlement last-stamp year (cooldown state, exactly as the kernel reads it).
@@ -120,6 +129,7 @@ describe('M11b calamity — frequency + cooldown', () => {
       for (let year = 1; year <= YEARS; year++) {
         for (let i = 0; i < N; i++) {
           if (withinCooldown(lastStamp[i], year)) continue;
+          eligibleRolls += 1;
           const rng = master.fork(`disaster:s${i}:${year}`);
           if (rollStrike({ rng, hazard })) { totalStrikes += 1; lastStamp[i] = year; }
         }
@@ -128,7 +138,13 @@ describe('M11b calamity — frequency + cooldown', () => {
     // Realized realm interval = total realm-years / total realm-strikes.
     const realmYears = YEARS * SEEDS;
     const interval = realmYears / totalStrikes;
+    const strikeFloor = readEnvelope(ENVELOPES, 'calamity.strikeCount.floor');
+    const strikeCeiling = readEnvelope(ENVELOPES, 'calamity.strikeCount.ceiling');
+    expect(eligibleRolls).toBe(strikeFloor.n);
+    expect(strikeCeiling.n).toBe(eligibleRolls);
     expect(totalStrikes).toBeGreaterThan(0);
+    expect(totalStrikes).toBeGreaterThanOrEqual(strikeFloor.bound);
+    expect(totalStrikes).toBeLessThanOrEqual(strikeCeiling.bound);
     expect(interval).toBeGreaterThanOrEqual(10);
     expect(interval).toBeLessThanOrEqual(20);
   });

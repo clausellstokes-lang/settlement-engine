@@ -11,7 +11,12 @@ import {
 
 // Mirrors ANTHROPIC_SUPPORTED_MODELS in supabase/functions/ai-analyst/analystCore.ts — a
 // routing model that isn't supported would be rejected by routeWorldDataAdapter at runtime.
-const SUPPORTED_MODELS = ['claude-opus-4-8', 'claude-sonnet-4-5', 'claude-haiku-4-5'];
+const SUPPORTED_MODELS = [
+  'claude-opus-4-8',
+  'claude-sonnet-4-6',
+  'claude-sonnet-4-5',
+  'claude-haiku-4-5',
+];
 
 describe('aiTaskConfig — routing classes', () => {
   it('the three classes map to real supported models', () => {

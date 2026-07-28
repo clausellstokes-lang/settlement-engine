@@ -4,8 +4,10 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatia
 /**
  * The single unconditional per-tick obligation-decay owner. Mutation movers
  * must call foldObligations with decayPerTick:0 so elapsed time is charged once.
- * @param {any} worldState
+ * @template {Record<string, unknown>} T
+ * @param {T} worldState
  * @param {number} tick
+ * @returns {T}
  */
 export function advanceObligationDecay(worldState, tick) {
   const prior = getSpatialLedger(worldState, 'obligations');
@@ -13,7 +15,8 @@ export function advanceObligationDecay(worldState, tick) {
   const next = foldObligations(/** @type {Record<string, unknown>} */ (prior), {
     now: tick, decayPerTick: REACTION_TUNING.OBLIGATION_DECAY,
   });
-  return next
+  const advanced = next
     ? setSpatialLedger(worldState, 'obligations', next)
     : dropSpatialLedger(worldState, 'obligations');
+  return /** @type {T} */ (advanced);
 }

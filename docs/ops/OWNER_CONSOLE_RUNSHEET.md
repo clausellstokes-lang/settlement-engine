@@ -42,10 +42,11 @@ Per FMG_ORIGIN_RUNBOOK.md, deploy MAP FIRST, then app:
       refunds** — the deployed legacy webhook still claws back whole seats.
 
 ## 4 · Support email (T11 — no code involved)
-- [ ] Confirm the destination address (still unconfirmed; gmail is the fallback).
+- [x] Destination selected under owner delegation: `support@settlementforge.com`.
+      The Gmail fallback stays live until the branded mailbox passes the next step.
 - [ ] Configure MX/forwarding at the registrar; send a test mail and confirm the
       round-trip.
-- [ ] Set `VITE_SUPPORT_EMAIL=<branded address>` in the deploy env — in the SAME
+- [ ] Set `VITE_SUPPORT_EMAIL=support@settlementforge.com` in the deploy env — in the SAME
       deploy batch, never before the round-trip passes.
 
 ## 5 · Stripe Connect + founder transfers (D7/T13 — at PUSH #3)

@@ -71,6 +71,45 @@ describe('deterministic generation coherence repair', () => {
     ]));
   });
 
+  it('adds newly visible hard dependencies and reports only final-roster additions', () => {
+    const settlement = generate({
+      settType: 'metropolis',
+      culture: 'greek',
+      terrainOverride: 'mountain',
+      tradeRouteAccess: 'isolated',
+      magicExists: true,
+      priorityMagic: 100,
+    }, 'effect-reach-v1-iso-metro-7');
+    const names = new Set(
+      settlement.institutions.map(institution => institution.name),
+    );
+    const additions = settlement.generationCoherenceReceipt.repairs.filter(
+      repair => repair.action === 'added',
+    );
+
+    expect(additions).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        type: 'hard_dependency',
+        subject: 'Hireling hall',
+      }),
+      expect.objectContaining({
+        type: 'hard_dependency',
+        subject: 'Fighting pits',
+      }),
+    ]));
+    for (const repair of additions) {
+      expect(
+        names.has(repair.subject),
+        `repair receipt says "${repair.subject}" was added but it is absent from the final roster`,
+      ).toBe(true);
+    }
+    expect(
+      settlement.structuralViolations.filter(violation => (
+        violation.severity === 'error' || violation.severity === 'critical'
+      )),
+    ).toEqual([]);
+  });
+
   it('repairs defense before power prose and provenance read the roster', () => {
     const settlement = generate({
       settType: 'hamlet',

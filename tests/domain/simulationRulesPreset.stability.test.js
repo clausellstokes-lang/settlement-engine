@@ -216,6 +216,74 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
+  // T5 THE ONE REGEN — eight chartered engine lifts plus the later Roads
+  // adjunct. They use the same virtual-key law as WAVES, but stay a distinct
+  // cohort so the charter does not silently absorb the separately commissioned
+  // deep-couplings flags.
+  const ONE_REGEN_FLAGS = [
+    'distancePricedNewsEnabled',
+    'reframeEnabled',
+    'provenanceLedgerEnabled',
+    'urbanFabricEnabled',
+    'npcGrowthEnabled',
+    'spatialConsequenceEnabled',
+    'npcLadderEnabled',
+    'traditionsEnabled',
+    'roadsEnabled',
+  ];
+
+  test('the One-Regen eight plus Roads remain virtual and exclude Memory Weave', () => {
+    expect(new Set(ONE_REGEN_FLAGS).size).toBe(9);
+    expect(ONE_REGEN_FLAGS).not.toContain('memoryWeaveEnabled');
+    for (const flag of ONE_REGEN_FLAGS) {
+      expect(
+        DEFAULT_SIMULATION_RULES,
+        `${flag} must stay absent from DEFAULT_SIMULATION_RULES`,
+      ).not.toHaveProperty(flag);
+      expect(
+        RULE_COMPARISON_KEYS,
+        `${flag} must stay outside preset comparison keys`,
+      ).not.toContain(flag);
+    }
+    expect(DEFAULT_SIMULATION_RULES).not.toHaveProperty('memoryWeaveEnabled');
+    for (const id of PRESET_IDS) {
+      expect(
+        SIMULATION_RULE_PRESETS[id].rules,
+        `${id} must not light the separately commissioned Memory Weave`,
+      ).not.toHaveProperty('memoryWeaveEnabled');
+    }
+  });
+
+  test('exactly the three world-alive presets light every One-Regen flag', () => {
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      for (const flag of ONE_REGEN_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag}`).toBe(true);
+      }
+    }
+    for (const id of WAVE_DARK_PRESET_IDS) {
+      for (const flag of ONE_REGEN_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} stays dark`).not.toBe(true);
+      }
+    }
+  });
+
+  test('virtual One-Regen flags do not disturb legacy or keyless preset identity', () => {
+    for (const id of PRESET_IDS) {
+      const keyless = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete keyless.presetId;
+      expect(normalizeSimulationRules(keyless).presetId, `${id} keyless identity`).toBe(id);
+    }
+
+    // A legacy world-alive save predating the virtual cohort has none of the
+    // nine keys, yet comparison-key identity remains unchanged.
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      const legacy = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete legacy.presetId;
+      for (const flag of ONE_REGEN_FLAGS) delete legacy[flag];
+      expect(normalizeSimulationRules(legacy).presetId, `${id} legacy identity`).toBe(id);
+    }
+  });
+
   // #5 — custom detection still fires (proves matching is not always-true).
   test('flipping one comparison key away from every preset yields custom', () => {
     const base = SIMULATION_RULE_PRESETS.dramatic_campaign.rules;

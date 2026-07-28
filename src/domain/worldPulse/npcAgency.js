@@ -5,8 +5,7 @@ import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptibility, corruptionVectorForFlaw, spawnCorruptionChance,
   onsetHazard, exposureChance, demoteDotRank, CORRUPTION_TUNING, guildEffectiveSecurity,
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
-  hasCorruptingDeity, npcDeityDisfavor,
-} from '../corruption.js';
+  hasCorruptingDeity, npcDeityDisfavor } from '../corruption.js';
 // THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
 // corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
 // this import adds nothing to first paint.
@@ -17,6 +16,7 @@ import { resolveLeash } from '../corruptionLeash.js';
 import { corruptionPlaneMultOf, skimPressureMultFor } from './piety.js';
 // H17: per-advance indices replacing evaluateNpcRules' O(states × (settlements + edges)) rescan.
 import { settlementByIdIndex, edgeAdjacencyIndex } from './tickIndices.js';
+import { NPC_GOAL_NEWS, pickLine } from './eventProse.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -1018,11 +1018,11 @@ function npcGoalCulmination(state, tick) {
     severity: 0.85,
     probability: 0.9,
     applyMode: 'auto',
-    headline: `${state.name} achieves a long ambition`,
-    summary: `${state.name} has worked toward "${goal}" for a long while, and now seizes it.`,
+    headline: pickLine(NPC_GOAL_NEWS.culmination.headline, `${state.npcId}:${tick}:culmination:headline`, { name: state.name, goal }),
+    summary: pickLine(NPC_GOAL_NEWS.culmination.summary, `${state.npcId}:${tick}:culmination:summary`, { name: state.name, goal }),
     reasons: [
-      `${state.name}'s long-term goal progress reached its culmination.`,
-      `Role: ${state.roleArchetype.replace(/_/g, ' ')}; goal: ${goal}.`,
+      pickLine(NPC_GOAL_NEWS.culmination.progressReason, `${state.npcId}:${tick}:culmination:progress`, { name: state.name, goal }),
+      pickLine(NPC_GOAL_NEWS.culmination.roleReason, `${state.npcId}:${tick}:culmination:role`, { name: state.name, goal, role: state.roleArchetype.replace(/_/g, ' ') }),
     ],
     npcPatch: {
       goalProgress: { short: 0, long: 0 },
@@ -1035,12 +1035,12 @@ function npcGoalCulmination(state, tick) {
     condition: {
       archetype: 'faction_challenge',
       label: `${state.name}'s ascendance`,
-      description: `${state.name} has consolidated power, shifting the local balance.`,
+      description: pickLine(NPC_GOAL_NEWS.culmination.conditionDescription, `${state.npcId}:${tick}:culmination:condition`, { name: state.name }),
       severity: 0.55,
       status: 'stable',
       triggeredAt: { tick, sourceEventType: 'WORLD_PULSE_GOAL_CULMINATION', sourceEventTargetId: state.npcId },
       affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
-      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: 'A long ambition reached fruition.' }],
+      causes: [{ source: state.npcId, effect: 'goal_culmination', reason: pickLine(NPC_GOAL_NEWS.culmination.causeReason, `${state.npcId}:${tick}:culmination:cause`) }],
     },
     metadata: { roleArchetype: state.roleArchetype, longGoal: state.longGoal, dotRankBefore: state.dotRank, dotRankAfter: nextRank },
     conflictTags: [`npc:${state.npcId}`, `settlement:${state.settlementId}:goal_culmination`],
@@ -1067,11 +1067,11 @@ function npcGoalRebranch(state, context, tick) {
     severity: 0.44,
     probability: 1,
     applyMode: 'auto',
-    headline: `${state.name} changes ambitions`,
-    summary: `${state.name}'s goals shift because the settlement context changed.`,
+    headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
+    summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
     reasons: [
-      `Context changed from ${state.contextSignature || 'unknown'} to ${context.signature}.`,
-      `Personality remains anchored by ideal ${String(state.ideal || 'unknown').replace(/_/g, ' ')} and flaw ${String(state.flaw || 'unknown').replace(/_/g, ' ')}.`,
+      pickLine(NPC_GOAL_NEWS.rebranch.contextReason, `${state.npcId}:${tick}:rebranch:context`, { name: state.name, previous: state.contextSignature || 'unknown', next: context.signature }),
+      pickLine(NPC_GOAL_NEWS.rebranch.personalityReason, `${state.npcId}:${tick}:rebranch:personality`, { name: state.name, ideal: String(state.ideal || 'unknown').replace(/_/g, ' '), flaw: String(state.flaw || 'unknown').replace(/_/g, ' ') }),
     ],
     npcPatch: {
       ...goals,

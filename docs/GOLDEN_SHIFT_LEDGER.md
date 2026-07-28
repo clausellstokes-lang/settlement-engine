@@ -1654,3 +1654,116 @@ entry moved.
 the isolated run before it and every run after. `find -mmin` showed a concurrent
 session writing `src/store/settlementSlice.js` (baselined at 1261) and `src/copy/en.js`
 during the window. No file this change touches is in `scripts/.size-baseline.json`.
+
+---
+
+## 2026-07-28 — T5: the authoritative flag-lighting ONE REGEN
+
+**Status:** owner-ratified and implemented in the code-of-record worktree; scoped
+fixtures recaptured, with the final composite gate pending at record time. Base commit:
+`37459391af234658b4fb32f0600ccd22ea5283ca`.
+
+This is the successor correction to the earlier deity-retirement recapture. That
+batch was declared, but it did not light the T5 engines. The owner queue's current
+§0 ruling defines this boundary: the eight charter flags plus Roads, EP-g2,
+reader-facing humanization, the exact dash census, the two NPC-goal prose pools,
+H15/H16/H4, and one evidence-bounded recapture.
+
+### What changed
+
+- `distancePricedNewsEnabled`, `reframeEnabled`,
+  `provenanceLedgerEnabled`, `urbanFabricEnabled`, `npcGrowthEnabled`,
+  `spatialConsequenceEnabled`, `npcLadderEnabled`, `traditionsEnabled`, and
+  `roadsEnabled` are virtual overrides in exactly `dramatic_campaign`,
+  `living_realm`, and `full_simulation`. They are not default-rule keys and do
+  not appear in the four dark presets. `memoryWeaveEnabled` remains dark.
+- EP-g2 removes the gate subject from its own dependency evidence, centralizes
+  both institution ladder tables in the side-effect-free
+  `src/data/institutionLadders.js`, makes the validator ladder-aware, prevents
+  repair additions that normalization would immediately evict, reconciles
+  public repair receipts to the final roster, and replaces phantom gate
+  vocabulary with real catalog names. The separate EP-g3 exceptions remain
+  exactly `Major port` and `Navy (if coastal)`.
+- Chronicler plain text now prints calendar labels and humanized flag names;
+  pressure reasons humanize condition ids only at the reader-facing boundary.
+  Numeric pressure and raw matching ids remain unchanged.
+- The declared punctuation debt shrank by exactly **183 em dashes**:
+  `eventProse` 148→0, `roadsProse` 15→0, `traditionProse` 17→0, and
+  `chroniclersLetter` 3→0. No bang count moved.
+- The culmination and context-rebranch NPC goal emitters now choose each prose
+  cell from four authored variants using stable FNV keys built from NPC id,
+  tick, beat kind, and cell. They consume no RNG and change no mechanics.
+- H15 now consumes only `heartland/frontier/plagued`; H16 matches the produced
+  `occupied` stress token; H4 covers every safety-profile prefix with the
+  pinned monotone contributions `0, -5, -8, -12, -20`.
+
+### Hard-stop audit before any write
+
+The complete dry family run produced only the two declared reds:
+
+- generator master: **157 of 523** keys changed; key set remained 523;
+- Chronicler manifest: hash changed, while sections/total/deepened stayed
+  `5/7/1`.
+
+The controls were green and byte-identical: belief map, world-pulse deity,
+world-pulse spatial, world-pulse seasons, and fixed-seed PDF. All **29**
+`*DormancyGolden.test.js` files passed (**158/158**) without a fixture write.
+`tests/generation.test.js` passed 21/21 with its snapshot untouched, and the
+composed-prose seam baseline passed unchanged.
+
+The generator changes are concentrated where the repaired dependency gates can
+exist: village 48, city 36, metropolis 73; thorp, hamlet, and town 0. By route:
+road 73, port 36, isolated 24, river 24; all other corpus routes 0. That is
+**30.02% of the final 523-key manifest**. The historical EP-g2 note's “39% of
+worlds” was a different denominator: 157 of 400 experiment worlds. It must not
+be restated as 41% of this final manifest.
+
+Generation certification after the repair:
+
+- requested EP-g2 corpus: 400 settlements, 0 generation errors, 0 findings,
+  0/4 replay mismatches;
+- default certification corpus: 1,200 settlements, 0 errors, 0 findings,
+  0/12 replay mismatches.
+
+### The recaptured tracked artifacts
+
+| artifact | before SHA-256 | after SHA-256 | disposition |
+| --- | --- | --- | --- |
+| `tests/fixtures/generator-golden-master.json` | `7fe64ac2ec7feab8d690f4c8ef6f4361be565efe8d9d64a8f9b69067dabaa494` | `4cb961f3b831855a0d6a7ecc5ce28cfcf7615a4270a83c022ca1e8549d815a1c` | 157 values changed, 0 keys added/removed |
+| `tests/fixtures/chroniclers-letter-golden.json` | `edc900dd032a0c1916f49b52dbde6a176c71244b4277c8d8f65ee8038942ae15` | `2009cf7f2e81f4e653e51544ce7124c8f50c4f43dcb7b887df339243c7e9c932` | reader-humanized hash only |
+| `tests/copy/.voice-mechanics-baseline.json` | `7500cea3e09a517303319dbcb3da2aebb3b9134613616e235ef3e4117926ec7d` | `cb3a9cc203cb2a9d37cc99f140bc4b9121fae2144d1b9f9a86dbc2db4a6aa49c` | four debt entries retired |
+| `src/domain/data/intentAtlas.distillate.json` | `a680a3c0da5ae04e9db6da4db1e083f39661838e2c8141f43bff5e8969949895` | `75d4d9f455b08e59c9c05ee6c914e2a1302a396e1a05007d4ee7d7ec9807a3b3` | 400-seed derived prior; 92→93 kept cells; exact reproduction green |
+
+Explicit unchanged hashes: PDF
+`6deaaacbc2f1494ef01861c3eb64ccec2b287f8e7acf672798bb268a160589b5`;
+belief `659f54ba09e53e3155b5e76388b304377d431896931b300acfff4309277a5aaf`;
+deity `51d79f9fe5e13d4d05057bed5dc7f8e135ae999c5249394a4849f65a54373807`;
+spatial `fe6b4055dc2abcab6c573b5ed45784b61fe80a9734e8e9e39a5422ac358cd236`;
+seasons `48fa24f86ecf0d504080f6e66747cad87a665b691d6e697276f37166f1081218`;
+voice JSX
+`e997d258179f19a3cc4e94ff394a66542c5436d99cbcc8781a9751ed97a0342e`;
+prose-leak JSX
+`76a5522dc1a40321fc4aaf222a84964762ce1c77b5fa8de729e3bd37e8155aa9`.
+
+Recapture commands were deliberately scoped:
+`UPDATE_GOLDEN=1` for the generator test,
+`UPDATE_LETTER_GOLDEN=1` for the Chronicler test, and
+`UPDATE_VOICE_BASELINE=1` for the voice/prose-leak pair. The first frozen
+composite gate then found the generator-derived intent atlas stale, so
+`node scripts/distill-intent-atlas.mjs --quiet` performed its single maintained
+400-seed regeneration; a prior `/tmp` dry output and the tracked write were
+byte-identical at the after hash above, and both the reproduction and id-free
+suites passed 90/90. No `-u` sweep was run, no dormancy fixture was written,
+and no commit was created.
+
+### Roads performance follow-up
+
+Lighting Roads exposed a real quadratic-looking hot path in the legacy
+relationship-state fallback: the unchanged scan contract measured
+`1,143 → 5,084` probes (`4.448×`) from four to eight settlements. The source
+was repaired rather than hiding Roads or relaxing the limit. A bounded,
+shape-level ordered-pair index now preserves raw-edge precedence, legacy
+substring matching, key order, current values, and non-edge behavior while
+making the same measurement `1,169 → 2,393` (`2.047×`) under the existing
+`2.6×` ceiling, with zero fallback scans. The Roads and performance verification
+set passed 163/163.

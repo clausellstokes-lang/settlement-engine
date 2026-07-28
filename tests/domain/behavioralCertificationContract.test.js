@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  BEHAVIORAL_CONTRACT_VERSION,
   BEHAVIORAL_MOVER_FAMILIES,
+  BEHAVIORAL_OBSERVATION_VERSION,
   CERTIFICATION_HORIZONS,
   evaluateBehavioralCertification,
   validateHumanChronicleReview,
@@ -74,7 +76,7 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
     years,
     settlements,
     behavioral: {
-      schemaVersion: 1,
+      schemaVersion: BEHAVIORAL_OBSERVATION_VERSION,
       kind: 'whole_world_behavioral_observation',
       settlementIds,
       yearly: Array.from(
@@ -157,6 +159,7 @@ describe('behavioral certification contract', () => {
 
   it('passes only when every automated group and the human Chronicle sample pass', () => {
     const result = evaluateBehavioralCertification(passingInput());
+    expect(result.schemaVersion).toBe(BEHAVIORAL_CONTRACT_VERSION);
     expect(result.observationsComplete).toBe(true);
     expect(result.automatedPassed).toBe(true);
     expect(result.humanChronicleReview.passed).toBe(true);
@@ -177,6 +180,18 @@ describe('behavioral certification contract', () => {
       'chronicle_human_reviewed',
     ]));
     expect(result.claimBoundary).toMatch(/does not write or publish/);
+  });
+
+  it('fails closed instead of reinterpreting a pre-v2 observation receipt', () => {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.behavioral.schemaVersion = BEHAVIORAL_OBSERVATION_VERSION - 1;
+    }
+    const result = evaluateBehavioralCertification(input);
+    expect(result.releaseCasesMeasured).toBe(0);
+    expect(result.observationsComplete).toBe(false);
+    expect(result.automatedPassed).toBe(false);
+    expect(result.passed).toBe(false);
   });
 
   it('fails closed when a mover goes dark in the final decade', () => {

@@ -34,7 +34,12 @@ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
-import { __tickIndexStats, __resetTickIndexStats } from '../../src/domain/worldPulse/tickIndices.js';
+import {
+  __tickIndexStats,
+  __resetTickIndexStats,
+  relationshipTypeBetweenIdx,
+} from '../../src/domain/worldPulse/tickIndices.js';
+import { relationshipTypeBetween } from '../../src/domain/roads/embassyHazard.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -154,6 +159,71 @@ function rawScanProxy(n) {
 }
 
 describe('tick SCAN BUDGET — the per-advance graph scans stay sub-quadratic (Wave 4)', () => {
+  it('the relationship-state pair index preserves raw-edge precedence and legacy key order', () => {
+    const graph = {
+      edges: [
+        // The first non-empty RAW edge wins before any relationship-state row.
+        { id: 'edge.alpha.beta.empty', from: 'alpha', to: 'beta', relationshipType: '' },
+        { id: 'edge.alpha.beta.rival', from: 'alpha', to: 'beta', relationshipType: 'rival' },
+      ],
+      channels: [],
+    };
+    const keys = {
+      // Keep an empty first match to prove the cached list preserves key order
+      // while the reader still skips blank relationshipType values.
+      'legacy.alpha.gamma.0': { relationshipType: '' },
+      'legacy.alpha.gamma.1': { relationshipType: 'cold_war' },
+      'legacy.alpha.gamma.2': { relationshipType: 'hostile' },
+      // Deliberately overlaps the short id "alpha"; matching remains the
+      // legacy String.includes predicate, not a newly parsed id grammar.
+      'legacy.alphabet.delta': { relationshipType: 'allied' },
+    };
+    const first = { relationshipStates: keys };
+    const changed = {
+      relationshipStates: {
+        ...keys,
+        'legacy.alpha.gamma.1': { relationshipType: 'allied' },
+      },
+    };
+    const pairs = [
+      ['alpha', 'beta'],
+      ['alpha', 'gamma'],
+      ['alpha', 'delta'],
+      ['missing', 'pair'],
+    ];
+
+    __resetTickIndexStats();
+    for (const [a, b] of pairs) {
+      expect(relationshipTypeBetweenIdx(graph, first, a, b))
+        .toBe(relationshipTypeBetween(graph, first, a, b));
+      expect(relationshipTypeBetweenIdx(graph, changed, a, b))
+        .toBe(relationshipTypeBetween(graph, changed, a, b));
+    }
+    expect(relationshipTypeBetweenIdx(graph, first, 'alpha', 'beta')).toBe('rival');
+    expect(relationshipTypeBetweenIdx(graph, first, 'alpha', 'gamma')).toBe('cold_war');
+    expect(relationshipTypeBetweenIdx(graph, changed, 'alpha', 'gamma')).toBe('allied');
+  });
+
+  it('a cached non-edge pair does not rescan the relationship-state key set', () => {
+    const graph = {
+      edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'allied' }],
+      channels: [],
+    };
+    const worldState = {
+      relationshipStates: Object.fromEntries(
+        Array.from({ length: 24 }, (_, i) => [`edge.a.b.${i}`, { relationshipType: 'neutral' }]),
+      ),
+    };
+
+    __resetTickIndexStats();
+    expect(relationshipTypeBetweenIdx(graph, worldState, 'not-here', 'nor-here')).toBe('');
+    const afterBuild = __tickIndexStats().scanOps;
+    for (let i = 0; i < 40; i += 1) {
+      expect(relationshipTypeBetweenIdx(graph, worldState, 'not-here', 'nor-here')).toBe('');
+    }
+    expect(__tickIndexStats().scanOps).toBe(afterBuild);
+  });
+
   it('scanOps(S=8) / scanOps(S=4) stays under the near-linear ceiling, indices engaged, no fallbacks', () => {
     const s4 = measure(4);
     const s8 = measure(8);

@@ -7,7 +7,7 @@
  * through the SAME pure display read-models the DM surfaces use, plus the engine
  * `*_TUNING` constants — and turns them into tuning views + balance warnings:
  *
- *   - war-outcome frequency (sieges, deployments, disposition standings)
+ *   - war-outcome frequency (sieges, deployments, realm contest records)
  *   - military-strength comparison (latent host strength across the realm)
  *   - deployed-army status + attrition (armyStrength read-model)
  *   - occupation + resistance (occupationStatus read-model)
@@ -23,7 +23,14 @@
 
 import { useMemo, useState } from 'react';
 import { useStore } from '../../store/index.js';
-import { liveSieges, activeDeployments, dispositionStandings, liveTradeWars, warExhaustionStandings } from '../../domain/display/warStatus.js';
+import {
+  activeDeployments,
+  dispositionStandings,
+  liveSieges,
+  liveTradeWars,
+  REALM_CONTEST_RECORD_LABEL,
+  warExhaustionStandings,
+} from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { latentStrength, deployedArmyStandings } from '../../domain/display/armyStrength.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
@@ -68,7 +75,7 @@ function balanceWarnings(campaign, members) {
   // Persistent war-weariness across the realm?
   if (weary.length / n > 0.6) out.push({ level: 'info', text: `Realm is broadly war-weary. ${weary.length} of ${n} settlements carry an exhaustion scar.` });
   // Stalemate? everyone net-zero (no decisive outcomes).
-  if (members.length >= 3 && standings.length === 0 && sieges > 0) out.push({ level: 'info', text: 'Active sieges but no disposition standings yet. Outcomes may be slow to resolve.' });
+  if (members.length >= 3 && standings.length === 0 && sieges > 0) out.push({ level: 'info', text: 'Active sieges but no realm contest record yet. Outcomes may be slow to resolve.' });
 
   if (!out.length) out.push({ level: 'good', text: 'No balance warnings. The realm looks well-tuned.' });
   return out;
@@ -195,9 +202,9 @@ export default function AdminSimTuningPanel() {
             />
           </Card>
 
-          {/* ── Disposition standings (aggressors / beaten) ───────────────── */}
+          {/* ── Realm contest record (resolved cross-settlement outcomes) ──── */}
           {data.standings.length > 0 && (
-            <Card title="Disposition standings (W/L)">
+            <Card title={`${REALM_CONTEST_RECORD_LABEL} (W/L)`}>
               <MiniTable
                 rows={data.standings.map(s => ({ settlement: data.nameFor(s.id), wins: s.wins, losses: s.losses, net: s.score }))}
                 columns={['settlement', 'wins', 'losses', 'net']}

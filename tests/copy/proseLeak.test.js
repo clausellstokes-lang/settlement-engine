@@ -18,9 +18,8 @@
  * RATCHET DISCIPLINE (the errorCopyBaseline idiom): EXPECTED_LEAKS is the
  * committed CURRENT violation set — exact equality, so a NEW leak fails loudly
  * and a FIXED leak must be struck (the win is banked). It may only shrink.
- * The entries below are REAL, KNOWN debt in the chronicler's letter composer,
- * deliberately left in place because fixing them shifts the GREEN
- * chroniclersLetterGolden — that re-record is owner-gated (the ONE-REGEN queue).
+ * THE ONE REGEN retired the final letter entries; the empty exact set below now
+ * makes every future composer leak a hard regression.
  *
  * E-E EXTENSION (docs/THE_APLUS_EXECUTION_ARCHITECTURE.md §E-E): the above only
  * ever scanned COMPOSER OUTPUT (letter/worldBook/chronicle/decrees) — it never
@@ -206,16 +205,11 @@ function decreeProse() {
 }
 
 // ── THE BASELINE — current, known, owner-gated debt. SHRINK-ONLY. ────────────
-// Every entry is real output of the fixtures above. All four live in
-// src/domain/display/chroniclersLetter.js and are hash-bound into the GREEN
-// chroniclersLetterGolden — the fix (humanizeEngineTokens wiring + §6 rewrite)
-// is queued for the owner's ONE REGEN. Strike entries as they are fixed.
+// The One-Regen letter-humanizer pass retired the final three leak classes:
+// calendar labels replace raw ticks, flag names cross the shared presentation
+// boundary, and the house-punctuation rewrite removes U+2014.
 const EXPECTED_LEAKS = {
-  letter: [
-    'emDash|—',                 // DEEPENED_LEAD + the `— <flag>` bullets
-    'flagKey|faithSpreadEnabled',    // deepened section prints raw flag keys
-    'tick|tick 4',                   // "(the record from tick 4 through 14)"
-  ],
+  letter: [],
   worldBook: [],
   chronicle: [],
   decrees: [],

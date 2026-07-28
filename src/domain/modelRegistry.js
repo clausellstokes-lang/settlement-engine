@@ -29,7 +29,8 @@
  *
  *   A. ANTHROPIC_SUPPORTED_MODELS + ANTHROPIC_RETENTION_CLASS
  *      supabase/functions/ai-analyst/analystCore.ts
- *      3 ids: claude-opus-4-8, claude-sonnet-4-5, claude-haiku-4-5.
+ *      4 ids: claude-opus-4-8, claude-sonnet-4-6, claude-sonnet-4-5,
+ *      claude-haiku-4-5.
  *      Retention posture is declared ONCE for the whole adapter: 'bounded'.
  *
  *   B. ROUTING_CLASS_MODEL
@@ -46,10 +47,11 @@
  * THE DISAGREEMENTS, RECORDED VERBATIM (each is a fact about the tree, not a fix)
  * ─────────────────────────────────────────────────────────────────────────────
  *
- *   D1. SONNET GENERATION SPLIT. Lists A and B both carry 'claude-sonnet-4-5'. List C
- *       carries 'claude-sonnet-4-6' and carries no 4-5 at all. Consequence: generate-
- *       narrative can serve a sonnet that the surveyor-byok model picker would refuse,
- *       because the picker's ceiling is the intersection with list A.
+ *   D1. SONNET GENERATION SPLIT — RESOLVED 2026-07-28. List A now accepts both
+ *       'claude-sonnet-4-5' (the balanced routing default) and 'claude-sonnet-4-6'
+ *       (the model list C actually serves). The BYOK picker no longer refuses a
+ *       model the narrative endpoint can serve. The two literal versions remain
+ *       distinct registry entries because their routing sources still differ.
  *
  *   D2. HAIKU DATED VERSUS UNDATED. Lists A and B say 'claude-haiku-4-5'. List C defaults
  *       to 'claude-haiku-4-5-20251001'. Same family, two literal ids. analystCore's
@@ -170,8 +172,10 @@ const ENTRIES = [
   entry('claude-sonnet-4-5', 'anthropic', 'bounded', 'balanced', [
     'ANTHROPIC_SUPPORTED_MODELS', 'ROUTING_CLASS_MODEL',
   ]),
-  // D1: list C only. Not offerable through the surveyor-byok picker today.
-  entry('claude-sonnet-4-6', 'anthropic', 'bounded', 'balanced', ['MODEL_PROFILES']),
+  // D1 resolved: list C's Sonnet is also accepted by the BYOK picker.
+  entry('claude-sonnet-4-6', 'anthropic', 'bounded', 'balanced', [
+    'ANTHROPIC_SUPPORTED_MODELS', 'MODEL_PROFILES',
+  ]),
   entry('claude-haiku-4-5', 'anthropic', 'bounded', 'fast', [
     'ANTHROPIC_SUPPORTED_MODELS', 'ROUTING_CLASS_MODEL',
   ]),

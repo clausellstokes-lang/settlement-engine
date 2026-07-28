@@ -370,7 +370,7 @@ const RETENTION_CLASSES: ReadonlySet<string> = new Set(['zero', 'bounded', 'trai
  *  'bounded' is the conservative floor. For a BYOK key this is the USER's own provider
  *  posture, surfaced honestly (§3e) rather than laundered. */
 export const ANTHROPIC_SUPPORTED_MODELS: readonly string[] = Object.freeze([
-  'claude-opus-4-8', 'claude-sonnet-4-5', 'claude-haiku-4-5',
+  'claude-opus-4-8', 'claude-sonnet-4-6', 'claude-sonnet-4-5', 'claude-haiku-4-5',
 ]);
 export const ANTHROPIC_RETENTION_CLASS: RetentionClass = 'bounded';
 

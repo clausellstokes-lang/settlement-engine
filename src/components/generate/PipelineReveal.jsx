@@ -76,7 +76,6 @@ export default function PipelineReveal({ onComplete }) {
   // (taste-gate); the stills floor + reveal card are unchanged when off.
   const hasSettlement = useStore(s => !!s.settlement);
   const showFilm = flag('loadingJourneyFilm');
-  const useBgSet = flag('loadingJourneySetBg');
   const [filmClock, setFilmClock] = useState(null);
 
   // Stable label lookup. tx() returns the whole map; we read once.
@@ -182,7 +181,6 @@ export default function PipelineReveal({ onComplete }) {
           holdAtEnd
           fallback={showFilm && filmClock ? (
             <JourneyFilm
-              set={useBgSet ? 'bg' : 'journey'}
               legsToPlay={legsForTier(tier)}
               arrived={hasSettlement}
               scriptWindowMs={filmClock.targetMs}

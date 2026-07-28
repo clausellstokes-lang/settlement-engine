@@ -216,6 +216,28 @@ const WAVES = Object.freeze({
   constructiveFlowsEnabled: true,
 });
 
+// ── THE ONE REGEN — EIGHT ENGINE LIFTS + THE ROADS ADJUNCT (2026-07-28) ─────
+// These are the eight chartered dark engines, plus roadsEnabled (the later
+// owner-ratified adjunct), lit together at the single declared golden boundary.
+// They stay VIRTUAL: adding them to DEFAULT_SIMULATION_RULES would serialize new
+// bytes into legacy saves and enlist them in BOOLEAN_KEYS/RULE_COMPARISON_KEYS,
+// collapsing preset identity. Like WAVES, they therefore ride only the preset
+// override spread and every gate reads `=== true`.
+//
+// memoryWeaveEnabled is deliberately NOT a member. It belongs to the separately
+// commissioned deep-couplings cohort, whose One-Regen membership remains dark.
+const ONE_REGEN = Object.freeze({
+  distancePricedNewsEnabled: true,
+  reframeEnabled: true,
+  provenanceLedgerEnabled: true,
+  urbanFabricEnabled: true,
+  npcGrowthEnabled: true,
+  spatialConsequenceEnabled: true,
+  npcLadderEnabled: true,
+  traditionsEnabled: true,
+  roadsEnabled: true,
+});
+
 // KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
 // so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —
 // resolvable forever: old saves carry their ids, the realm toolbar chips apply
@@ -262,6 +284,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
     // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
     ...WAVES,
+    // T5 THE ONE REGEN: the chartered eight engine lifts plus Roads.
+    ...ONE_REGEN,
   }),
   static_campaign: preset('static_campaign', 'Static Campaign', {
     propagationMode: 'off',
@@ -298,6 +322,7 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // (intervention/peaceEngine/supplyWebWarfare) sleep here until war is lit —
     // living_realm's world moves, but does not start wars on its own.
     ...WAVES,
+    ...ONE_REGEN,
   }),
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
@@ -341,6 +366,7 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
     // this preset verbatim, so they now cover the full stack automatically).
     ...WAVES,
+    ...ONE_REGEN,
   }),
 });
 

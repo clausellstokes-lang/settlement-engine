@@ -260,6 +260,23 @@ describe('living-world signals — dormancy-quiet', async () => {
     expect(screen.getByText(/Sol/)).toBeTruthy();
   });
 
+  test('the W/L pip names and defines the realm contest record', () => {
+    const { container } = render(
+      <LivingWorldSignalRow
+        model={{
+          hasLiveWorld: true,
+          standing: { wins: 2, losses: 1, score: 1 },
+          names: {},
+        }}
+      />,
+    );
+    const pip = screen.getByText('won 2, lost 1');
+    expect(container.firstChild).not.toBeNull();
+    expect(pip.getAttribute('title')).toContain('Realm contest record');
+    expect(pip.getAttribute('title')).toContain('primary-supplier-flip');
+    expect(pip.getAttribute('title')).toContain('not time at war or casualties');
+  });
+
   test('healthPip is null-safe (no settlement → null)', () => {
     expect(healthPip(null)).toBeNull();
   });

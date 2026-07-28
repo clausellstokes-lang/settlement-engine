@@ -270,14 +270,14 @@ function deriveExternalThreat(s) {
   /** @type {string[]} */
   const risks = [];
 
-  const monsterThreat = s.config?.monsterThreat || 'safe';
+  const monsterThreat = s.config?.monsterThreat || 'heartland';
   if (monsterThreat === 'plagued') {
     value += 30;
     risks.push('Region is plagued by monsters');
   } else if (monsterThreat === 'frontier') {
     value += 15;
     risks.push('Frontier conditions — monsters present');
-  } else if (monsterThreat === 'safe' || monsterThreat === 'civilized') {
+  } else if (monsterThreat === 'heartland') {
     value -= 5;
     drivers.push('Monster activity minimal');
   }
@@ -296,7 +296,7 @@ function deriveExternalThreat(s) {
   const stressList = canonStressors(s);
   const threatStresses = stressList.filter(st => {
     const t = String(st.type || st.name || '').toLowerCase();
-    return t.includes('siege') || t.includes('occupation') || t.includes('raid')
+    return t.includes('siege') || t.includes('occupied') || t.includes('raid')
         || t.includes('plague') || t.includes('war') || t.includes('refugee');
   });
   if (threatStresses.length > 0) {

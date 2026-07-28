@@ -104,14 +104,24 @@ const ENDGAME_SYSTEMS = [
     blurb: 'Lets a foreign patron covertly turn a corruptible official inside a rival settlement, buying sight into it and a measure of hidden influence. It is off in every default preset today and wakes only under a custom ruleset.' },
   { id: 'infoStatecraft',     label: 'Information statecraft',          flag: 'infoStatecraftEnabled',
     blurb: 'Gives each power a credibility standing and the ability to plant a lie, which can spread, be contradicted, and finally be exposed for a reputational cost. It is off in every default preset today and wakes only under a custom ruleset.' },
+  { id: 'distancePricedNews', label: 'News pays for distance',           flag: 'distancePricedNewsEnabled',
+    blurb: 'Makes reports from farther settlements arrive effectively older, with additional delay when a route is embattled. It stays inert without a canonized realm map or when the campaign uses omniscient information.' },
+  { id: 'reframe',            label: 'Gifts and debts remembered',       flag: 'reframeEnabled',
+    blurb: 'Lets a settlement reinterpret an old gift, tribute, or dependence as relationships change, while leaving the underlying receipt untouched. Meaning can sour or reconcile; recorded facts are never rewritten.' },
   { id: 'spatialConsequence', label: 'Spatial consequence',            flag: 'spatialConsequenceEnabled',
-    blurb: 'On a mapped realm, it decides where a calamity\'s toll, a siege\'s breach, and corruption\'s creep actually fall across districts, without changing any totals. It is off in every default preset today.' },
+    blurb: 'On a mapped realm, it decides where a calamity\'s toll, a siege\'s breach, and corruption\'s creep actually fall across districts, without changing any totals.' },
   { id: 'provenance',         label: 'The provenance ledger',           flag: 'provenanceLedgerEnabled',
-    blurb: 'Records the true parent cause of each durable outcome into a ledger, so the chronicle can mark a link as genuinely recorded rather than merely inferred from time and place. It is off in every default preset today and wakes only under a custom ruleset.' },
+    blurb: 'Records the true parent cause of each durable outcome into a ledger, so the chronicle can mark a link as genuinely recorded rather than merely inferred from time and place.' },
   { id: 'urbanFabric',        label: 'Urban fabric',                    flag: 'urbanFabricEnabled',
-    blurb: 'Gives each district a slowly decaying sense of prominence, so old power and wealth linger after a regime or economy shifts instead of flipping at once. It also tracks a gradual alignment grain and fading scars from past disasters, and it is off in every default preset today.' },
+    blurb: 'Gives each district a slowly decaying sense of prominence, so old power and wealth linger after a regime or economy shifts instead of flipping at once. It also tracks a gradual alignment grain and fading scars from past disasters.' },
   { id: 'npcGrowth',          label: 'NPC growth',                      flag: 'npcGrowthEnabled',
-    blurb: 'Lets NPCs slowly change: lived events like calamity, betrayal, or a golden age build pressure that can, rarely, add an acquired trait over an NPC\'s authored core, never overwriting it. It is off in every default preset today and wakes only under a custom ruleset.' },
+    blurb: 'Lets NPCs slowly change: lived events like calamity, betrayal, or a golden age build pressure that can, rarely, add an acquired trait over an NPC\'s authored core, never overwriting it.' },
+  { id: 'npcLadder',          label: 'The contested court',              flag: 'npcLadderEnabled',
+    blurb: 'Gives each faction a persistent rank ladder. NPCs rise by displacing a named rival and fall when displaced, so advancement changes the court without creating titles or resolving anyone\'s fate.' },
+  { id: 'traditions',         label: 'Living traditions',                flag: 'traditionsEnabled',
+    blurb: 'Gives every settlement recurring observances with a durable origin, an accountable keeper, and outcomes shaped by the local economy. Traditions can flourish, fail, migrate, or be imposed without losing their history.' },
+  { id: 'roads',              label: 'Named travellers on the roads',    flag: 'roadsEnabled',
+    blurb: 'Lets named NPCs travel for diplomacy, trade, dominion, and observance across a canonized realm. Journeys take time and can lead to capture, ransom, rescue, or return, but the engine never resolves a traveller\'s life.' },
   // NOTE: the live gate for the calamity system is the real rules key
   // `disastersEnabled` (set true in dramatic_campaign + full_simulation). The
   // curated label `calamityEnabled` was NOT a real key, so the preset-membership
@@ -386,7 +396,7 @@ export function buildCompendiumDataObject() {
     const inUniverse = ruleKeyUniverse.has(s.flag);
     const presets = presetsThatLight(s.flag);
     // A wave flag (one that appears in the rule universe) must resolve to a real
-    // key; a dormant flag (corruption, provenance, …) legitimately has no preset.
+    // key; a separately dormant flag (such as corruption) legitimately has no preset.
     return {
       id: s.id, label: s.label, flag: s.flag, blurb: s.blurb,
       presetGated: inUniverse,

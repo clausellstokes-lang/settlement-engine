@@ -9,6 +9,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import {
+  BEHAVIORAL_CONTRACT_VERSION,
   CERTIFICATION_MANIFEST_VERSION,
   CERTIFICATION_REQUIRED_PROPERTY_KEYS,
   SOAK_PROPERTY_KEYS,
@@ -27,7 +28,7 @@ const goodSoak = {
   properties: [...CERTIFICATION_REQUIRED_PROPERTY_KEYS],
   runAt: '2026-07-20T00:00:00.000Z',
   buildHash: 'abc1234',
-  behavioralContractVersion: 1,
+  behavioralContractVersion: BEHAVIORAL_CONTRACT_VERSION,
   evidenceDigest: 'a'.repeat(64),
   humanChronicleReviewDigest: 'b'.repeat(64),
 };

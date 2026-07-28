@@ -32,7 +32,7 @@
 /** The manifest schema version (bumped only on a breaking shape change). @type {number} */
 export const CERTIFICATION_MANIFEST_VERSION = 1;
 /** Behavioral oracle version required before a band may claim certification. */
-export const BEHAVIORAL_CONTRACT_VERSION = 1;
+export const BEHAVIORAL_CONTRACT_VERSION = 2;
 
 /** @type {ReadonlyArray<{ key: string, label: string }>} */
 export const CERTIFICATION_STATUS = Object.freeze([

@@ -250,7 +250,9 @@ law, not lore. Full program record: `docs/EPISTEMIC_PREVENTION_PLAN.md`.
   from a measured base rate (N ≥ 400, provenance recorded) registered in
   `tests/fixtures/distribution-envelopes.manifest.json`, margin ≥ 2σ, validated by
   `tests/lint/distributionEnvelopePower.test.js`. Bounds are never loosened
-  without an owner ruling (`loosenPending` keeps the tighter live bound in force).
+  without an owner ruling (`loosenPending` keeps the tighter live bound in force
+  while the choice is open; `ratifiedStricterBound` records a decision to retain
+  it without pretending the choice remains pending).
   Two laws from the migration: a base rate must be measured on the corpus the
   test actually runs (the `envelope-${'{'}i{'}'}` prefix corner: 4/50 on the real corpus
   vs 89/400 on the wider family), and degenerate rates (0/N, N/N) are not

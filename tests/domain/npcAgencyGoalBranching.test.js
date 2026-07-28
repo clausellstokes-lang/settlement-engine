@@ -91,6 +91,26 @@ describe('NPC goal branching classifies by condition archetype, not label prose'
     const rebranch = rebranchFor([{ label: 'War memorial dedication' }]);
     expect(rebranch).toBeNull();
   });
+
+  test('the rebranch telling is deterministic per beat and varies across NPCs', () => {
+    const telling = (npcId) => {
+      const candidate = rebranchFor(
+        [{ archetype: 'war_pressure', label: 'Wartime pressure' }],
+        npcState({ npcId, name: 'Tam Ledgerwell' }),
+      );
+      return {
+        headline: candidate.headline,
+        summary: candidate.summary,
+        reasons: candidate.reasons,
+      };
+    };
+
+    expect(telling('a:clerk:stable')).toEqual(telling('a:clerk:stable'));
+    const tellings = Array.from({ length: 24 }, (_, i) => telling(`a:clerk:${i}`));
+    expect(new Set(tellings.map(row => row.headline)).size).toBeGreaterThan(1);
+    expect(new Set(tellings.map(row => row.summary)).size).toBeGreaterThan(1);
+    expect(new Set(tellings.map(row => row.reasons.join(' '))).size).toBeGreaterThan(1);
+  });
 });
 
 // H16 pin (R3 must-fix): dominantRelationshipContext resolves vassal/overlord

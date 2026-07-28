@@ -9,6 +9,7 @@ import {
   BEHAVIORAL_OBSERVATION_VERSION,
   CERTIFICATION_HORIZONS,
 } from '../../src/domain/certification/behavioralContract.js';
+import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { prosperityRank } from '../../src/data/constants.js';
 
 const FAMILY_TOKENS = Object.freeze({
@@ -69,15 +70,20 @@ const DESTRUCTIVE_ARC_TOKENS = Object.freeze([
   'coup_succeeded', 'rebellion', 'blockade', 'raid', 'population_decline',
 ]);
 
-const SUCCESSION_ATTEMPT_TOKENS = Object.freeze([
-  'succession', 'coup', 'challenge', 'contest', 'government_change',
-  'faction_capture',
+// Exact production vocabulary only. Generic `challenge` / `contest` tokens also
+// describe rival-power and religious contests, while faction capture and
+// vassalization are not seat successions.
+const SUCCESSION_ATTEMPT_CANDIDATE_TYPES = new Set([
+  'stressor_birth_coup_detat',
+  'faction_government_challenge',
 ]);
 
-const SUCCESSION_COMPLETION_TOKENS = Object.freeze([
-  'succession', 'coup_succeeded', 'government_change', 'faction_capture',
-  'occupation_vassalized',
+const SUCCESSION_COMPLETION_CANDIDATE_TYPES = new Set([
+  'coup_succeeded',
+  'faction_government_challenge',
 ]);
+
+const OBSERVED_YEAR_TICKS = 52;
 
 const DARK_CONDITIONAL_WORLD_KEYS = Object.freeze([
   'beliefStates',
@@ -158,18 +164,17 @@ function arcPolaritiesOf(record) {
   return polarities;
 }
 
-function isMajor(record) {
-  return record?.major === true
-    || record?.decisionTier === 'major'
-    || record?.significance === 'major'
-    || record?.applyMode === 'proposal'
-    || finite(record?.severity, -1) >= 0.72;
+function isMajor(record, majorIds = null) {
+  if (majorIds instanceof Set) {
+    return record?.id != null && majorIds.has(String(record.id));
+  }
+  return deriveDecisionTier(record) === 'major';
 }
 
-function chronicleSampleOf(records) {
+function chronicleSampleOf(records, majorIds) {
   const ordered = [
-    ...records.filter(isMajor),
-    ...records.filter((record) => !isMajor(record)),
+    ...records.filter((record) => isMajor(record, majorIds)),
+    ...records.filter((record) => !isMajor(record, majorIds)),
   ];
   const seen = new Set();
   const sample = [];
@@ -246,6 +251,174 @@ function parentIdsOf(record) {
     }
   }
   return [...ids];
+}
+
+function observationEndTick(result) {
+  for (const value of [result?.tick, result?.worldState?.tick]) {
+    const tick = finite(value, Number.NaN);
+    if (Number.isFinite(tick)) return tick;
+  }
+  return null;
+}
+
+function recordFallsInObservedYear(record, endTick) {
+  if (endTick == null) return true;
+  const tick = finite(record?.tick, Number.NaN);
+  return Number.isFinite(tick)
+    && tick > endTick - OBSERVED_YEAR_TICKS
+    && tick <= endTick;
+}
+
+/**
+ * Post-apply movers (belief reconciliation, upswing, the NPC ladder, and other
+ * aggregate lanes) do not join `result.selected`. Read their uncapped audit
+ * receipts plus the terminal feed fallback for mover/arc reachability. Exclude
+ * only the canonical applied/proposal twin of a selected outcome: derived
+ * receipts may share its sourceEventId and still prove a separate mover.
+ */
+function isSelectedOutcomeNewsTwin(entry, selectedIds) {
+  const sourceEventId = entry?.sourceEventId == null
+    ? ''
+    : String(entry.sourceEventId);
+  if (!sourceEventId || !selectedIds.has(sourceEventId) || entry?.tick == null) return false;
+  const prefix = `wizard_news.${String(entry.tick)}.world_pulse`;
+  const id = String(entry?.id || '');
+  return id === `${prefix}.applied.${sourceEventId}`
+    || id === `${prefix}.proposal.${sourceEventId}`;
+}
+
+function postApplyRecordsOf(result, selectedIds, rawWizardNewsEntries) {
+  const endTick = observationEndTick(result);
+  const terminalEntries = Array.isArray(result?.wizardNews?.entries)
+    ? result.wizardNews.entries
+    : [];
+  const observedEntries = Array.isArray(rawWizardNewsEntries)
+    ? rawWizardNewsEntries
+    : [];
+  const byId = new Map();
+  for (const entry of [...terminalEntries, ...observedEntries]) {
+    if (!entry || typeof entry !== 'object' || !entry.id) continue;
+    if (entry.source === 'table' || !recordFallsInObservedYear(entry, endTick)) continue;
+    if (isSelectedOutcomeNewsTwin(entry, selectedIds)) continue;
+    byId.set(String(entry.id), entry);
+  }
+  return [...byId.values()];
+}
+
+function majorIdsOf(result, records) {
+  const majors = Array.isArray(result?.majors)
+    ? result.majors.filter((record) => record && typeof record === 'object')
+    : records.filter((record) => deriveDecisionTier(record) === 'major');
+  return {
+    count: majors.length,
+    ids: new Set(majors
+      .map((record) => record?.id)
+      .filter((id) => id != null)
+      .map(String)),
+  };
+}
+
+function familyOfLedgerNode(id, entry, recordFamilyById) {
+  const recordedFamily = recordFamilyById.get(String(id));
+  if (recordedFamily) return recordedFamily;
+  const typedFamily = moverFamilyOf({ candidateType: entry?.type });
+  if (typedFamily) return typedFamily;
+  const semanticId = String(id).replace(/^wizard_news\.[^.]+\./, '');
+  return moverFamilyOf({ id: semanticId });
+}
+
+function causalObservationFromRecords(records, recordFamilyById) {
+  let crossFamilyEdges = 0;
+  let multiParentEvents = 0;
+  const familyPairs = new Set();
+  for (const record of records) {
+    const childFamily = moverFamilyOf(record);
+    if (!childFamily) continue;
+    const parentFamilies = new Set();
+    for (const parentId of parentIdsOf(record)) {
+      const parentFamily = recordFamilyById.get(parentId) || moverFamilyOf({
+        id: parentId,
+      });
+      if (!parentFamily || parentFamily === childFamily) continue;
+      parentFamilies.add(parentFamily);
+      crossFamilyEdges += 1;
+      familyPairs.add(`${parentFamily}->${childFamily}`);
+    }
+    if (parentFamilies.size >= 2) multiParentEvents += 1;
+  }
+  return {
+    crossFamilyEdges,
+    multiParentEvents,
+    familyPairs: [...familyPairs].sort(),
+  };
+}
+
+/**
+ * Production causal truth lives in the provenance ledger, not on the selected
+ * array. Each ledger row is child receipt -> explicit parent receipt ids.
+ */
+function causalObservationOf(result, records, recordFamilyById) {
+  const ledger = asObject(result?.worldState?.spatialLedgers?.provenance);
+  const provenanceEnabled = result?.worldState?.simulationRules
+    ?.provenanceLedgerEnabled === true;
+  if (!provenanceEnabled && Object.keys(ledger).length === 0) {
+    return causalObservationFromRecords(records, recordFamilyById);
+  }
+
+  const endTick = observationEndTick(result);
+  let crossFamilyEdges = 0;
+  let multiParentEvents = 0;
+  const familyPairs = new Set();
+  for (const [childId, rawEntry] of Object.entries(ledger)) {
+    const entry = asObject(rawEntry);
+    if (!recordFallsInObservedYear(entry, endTick)) continue;
+    const childFamily = familyOfLedgerNode(childId, entry, recordFamilyById);
+    if (!childFamily) continue;
+    const parentFamilies = new Set();
+    for (const rawParentId of Array.isArray(entry.parents) ? entry.parents : []) {
+      if (rawParentId == null || typeof rawParentId === 'object') continue;
+      const parentId = String(rawParentId);
+      const parentFamily = familyOfLedgerNode(
+        parentId,
+        asObject(ledger[parentId]),
+        recordFamilyById,
+      );
+      if (!parentFamily || parentFamily === childFamily) continue;
+      parentFamilies.add(parentFamily);
+      crossFamilyEdges += 1;
+      familyPairs.add(`${parentFamily}->${childFamily}`);
+    }
+    if (parentFamilies.size >= 2) multiParentEvents += 1;
+  }
+  return {
+    crossFamilyEdges,
+    multiParentEvents,
+    familyPairs: [...familyPairs].sort(),
+  };
+}
+
+function isLadderChallengeReceipt(record) {
+  if (record?.impactKind !== 'npc_ladder') return false;
+  const tags = new Set((Array.isArray(record?.tags) ? record.tags : []).map(String));
+  return tags.has('npc_ladder') && (tags.has('rise') || tags.has('failed'));
+}
+
+function successionObservationOf(result, records, postApplyRecords) {
+  let attempts = records.filter((record) => (
+    SUCCESSION_ATTEMPT_CANDIDATE_TYPES.has(String(record?.candidateType || ''))
+  )).length;
+  let completions = (Array.isArray(result?.autoApplied) ? result.autoApplied : [])
+    .filter((record) => (
+      SUCCESSION_COMPLETION_CANDIDATE_TYPES.has(String(record?.candidateType || ''))
+      || (record?.type === 'power_transfer' && record?.powerTransfer?.cause === 'coup')
+    )).length;
+
+  for (const record of postApplyRecords) {
+    if (!isLadderChallengeReceipt(record)) continue;
+    attempts += 1;
+    if ((record.tags || []).map(String).includes('rise')) completions += 1;
+  }
+  return { attempts, completions };
 }
 
 function factionName(faction) {
@@ -352,11 +525,26 @@ export function observeBehavioralYear({
   result,
   beforeSaves,
   afterSaves,
+  rawWizardNewsEntries = null,
 }) {
   const records = (Array.isArray(result?.selected) ? result.selected : [])
     .filter((record) => record && typeof record === 'object');
+  const selectedIds = new Set(records
+    .map((record) => record?.id)
+    .filter((id) => id != null)
+    .map(String));
+  const postApplyRecords = postApplyRecordsOf(result, selectedIds, rawWizardNewsEntries);
+  const major = majorIdsOf(result, records);
   /** @type {Record<string, number>} */
   const moverCounts = Object.fromEntries(
+    BEHAVIORAL_MOVER_FAMILIES.map((family) => [family, 0]),
+  );
+  /** @type {Record<string, number>} */
+  const selectedMoverCounts = Object.fromEntries(
+    BEHAVIORAL_MOVER_FAMILIES.map((family) => [family, 0]),
+  );
+  /** @type {Record<string, number>} */
+  const postApplyMoverCounts = Object.fromEntries(
     BEHAVIORAL_MOVER_FAMILIES.map((family) => [family, 0]),
   );
   /** @type {Record<string, number>} */
@@ -364,42 +552,42 @@ export function observeBehavioralYear({
   /** @type {Record<string, number>} */
   const attentionCounts = {};
   const arcCounts = { constructive: 0, destructive: 0 };
+  const postApplyArcCounts = { constructive: 0, destructive: 0 };
   const recordFamilyById = new Map();
   let unclassifiedEventCount = 0;
-  let majorEventCount = 0;
 
   for (const record of records) {
     const type = typeOf(record);
     eventTypeCounts[type] = (eventTypeCounts[type] || 0) + 1;
     const family = moverFamilyOf(record);
-    if (family) moverCounts[family] += 1;
-    else unclassifiedEventCount += 1;
+    if (family) {
+      moverCounts[family] += 1;
+      selectedMoverCounts[family] += 1;
+    } else {
+      unclassifiedEventCount += 1;
+    }
     if (record?.id != null && family) recordFamilyById.set(String(record.id), family);
-    if (isMajor(record)) majorEventCount += 1;
     for (const polarity of arcPolaritiesOf(record)) arcCounts[polarity] += 1;
     for (const id of targetIdsOf(record)) {
       attentionCounts[id] = (attentionCounts[id] || 0) + 1;
     }
   }
 
-  let crossFamilyEdges = 0;
-  let multiParentEvents = 0;
-  const familyPairs = new Set();
-  for (const record of records) {
-    const childFamily = moverFamilyOf(record);
-    if (!childFamily) continue;
-    const parentFamilies = new Set();
-    for (const parentId of parentIdsOf(record)) {
-      const parentFamily = recordFamilyById.get(parentId) || moverFamilyOf({
-        id: parentId,
-      });
-      if (!parentFamily || parentFamily === childFamily) continue;
-      parentFamilies.add(parentFamily);
-      crossFamilyEdges += 1;
-      familyPairs.add(`${parentFamily}->${childFamily}`);
+  // These receipts prove that aggregate post-apply lanes can actually move. They
+  // enrich family/arc reachability only: eventCount, type mix, and attention stay
+  // anchored to the contract's selected-outcome throughput unit.
+  for (const record of postApplyRecords) {
+    const family = moverFamilyOf(record);
+    if (family) {
+      moverCounts[family] += 1;
+      postApplyMoverCounts[family] += 1;
     }
-    if (parentFamilies.size >= 2) multiParentEvents += 1;
+    for (const polarity of arcPolaritiesOf(record)) {
+      arcCounts[polarity] += 1;
+      postApplyArcCounts[polarity] += 1;
+    }
   }
+  const causal = causalObservationOf(result, records, recordFamilyById);
 
   const before = settlementMap(beforeSaves);
   const after = settlementMap(afterSaves);
@@ -439,22 +627,20 @@ export function observeBehavioralYear({
     }
   }
 
-  let successionAttempts = 0;
-  let successionCompletions = 0;
-  for (const record of records) {
-    const type = typeOf(record);
-    if (containsToken(type, SUCCESSION_ATTEMPT_TOKENS)) successionAttempts += 1;
-    if (containsToken(type, SUCCESSION_COMPLETION_TOKENS)) successionCompletions += 1;
-  }
+  const succession = successionObservationOf(result, records, postApplyRecords);
 
   return {
     year,
     eventCount: records.length,
-    majorEventCount,
+    majorEventCount: major.count,
     unclassifiedEventCount,
     eventTypeCounts,
     moverCounts,
+    selectedMoverCounts,
+    postApplyMoverCounts,
+    postApplyReceiptCount: postApplyRecords.length,
     arcCounts,
+    postApplyArcCounts,
     motion: {
       populationTransitions,
       populationMoved,
@@ -465,17 +651,12 @@ export function observeBehavioralYear({
     },
     attentionCounts,
     succession: {
-      attempts: successionAttempts,
-      completions: successionCompletions,
+      ...succession,
       integrityFailures,
       integrityFailureKinds,
     },
-    causal: {
-      crossFamilyEdges,
-      multiParentEvents,
-      familyPairs: [...familyPairs].sort(),
-    },
-    chronicleSample: chronicleSampleOf(records),
+    causal,
+    chronicleSample: chronicleSampleOf(records, major.ids),
     stateVectors,
   };
 }

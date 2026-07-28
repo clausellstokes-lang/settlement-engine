@@ -51,7 +51,7 @@ describe('THE WELCOME FLOOR — the journey renders from stills, film absent', (
     // The floor is a crisp stop still under the (absent) video.
     const still = container.querySelector('img[src*="/media/journey-legs/"]');
     expect(still, 'the stop still floor must render film-independently').not.toBeNull();
-    expect(still.getAttribute('src')).toMatch(/\/media\/journey-legs\/(bg|journey)\/still-\d+-[a-z]+\.jpg$/);
+    expect(still.getAttribute('src')).toMatch(/\/media\/journey-legs\/bg\/still-\d+-[a-z]+\.jpg$/);
     // Progressive enhancement only: jsdom has no matchMedia → no <video> anywhere.
     expect(container.querySelector('video'), 'no film byte without a fine pointer').toBeNull();
   });

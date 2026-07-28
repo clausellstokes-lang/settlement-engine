@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T12:44:20.647Z",
+  "generatedAt": "2026-07-28T19:15:48.534Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "7dd92259b1410e60",
+  "sourceHash": "3c8ab23d92c9aed1",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -41,6 +41,7 @@
     "src/domain/defenseLedger.js",
     "src/domain/deityConstants.js",
     "src/domain/display/exportPosture.js",
+    "src/domain/display/humanizeEngineTokens.js",
     "src/domain/display/warStatus.js",
     "src/domain/entities/npcs.js",
     "src/domain/entities/status.js",

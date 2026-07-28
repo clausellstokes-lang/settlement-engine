@@ -21,6 +21,21 @@
   ],
   "entries": [
     {
+      "id": "capture.ordinaryTown.corrupted",
+      "file": "tests/generators/captureBirthScale.test.js",
+      "n": 400,
+      "baseRate": 0.0225,
+      "baseMeasuredAt": "2026-07-27",
+      "baseMeasurementN": 400,
+      "direction": "upper",
+      "alpha": 0.001,
+      "bound": 20,
+      "margin": 3.709,
+      "measurementContext": "minifold claude/composite-r4 d0fdcf7c, live tree carrying unrelated foreign dirt (none in this instrument's path)",
+      "loosenPending": false,
+      "notes": "9/400 ordinary towns read corrupted at birth. The old ceiling of 10 sat only 0.34 sigma above that measured base and could red on a single additional town; it was not a useful drift detector. Owner delegation on 2026-07-28 ratified the alpha-1e-3 derived ceiling of 20 (5.0% of the corpus), which carries 3.709 sigma of power."
+    },
+    {
       "id": "capture.ordinaryCity.corrupted",
       "file": "tests/generators/captureBirthScale.test.js",
       "n": 400,
@@ -47,8 +62,9 @@
       "bound": 40,
       "margin": 2.591,
       "measurementContext": "minifold claude/composite-r4 d0fdcf7c, live tree carrying unrelated foreign dirt (none in this instrument's path)",
-      "loosenPending": true,
-      "notes": "THE TRIGGER INSTRUMENT of the epistemic-prevention program. 27/400 = 6.75% of 90-criminal-priority towns reach full capture. The live ceiling 40 (Math.round(400*0.1)) is KEPT: the alpha-1e-3 envelope derives 45, which is LOOSER, and program law forbids an agent loosening a bound. Not a defect — 40 carries 2.59 sigma and is EXACTLY the alpha-1e-2 derivation, so the loosening is a strictness choice for the owner, not a repair. Owner ruling wanted: keep 40 (1% budget) or adopt 45 (0.1% budget)."
+      "loosenPending": false,
+      "ratifiedStricterBound": true,
+      "notes": "THE TRIGGER INSTRUMENT of the epistemic-prevention program. 27/400 = 6.75% of 90-criminal-priority towns reach full capture. The live ceiling 40 (Math.round(400*0.1)) is RATIFIED: the alpha-1e-3 envelope derives 45, which is LOOSER, and program law forbids silently weakening a live bound. Not a defect — 40 carries 2.59 sigma and is EXACTLY the alpha-1e-2 derivation. Owner delegation ratified the stricter 40 ceiling on 2026-07-28."
     },
     {
       "id": "capture.criminalCity.capture",
@@ -107,8 +123,9 @@
       "bound": 10,
       "margin": 2.169,
       "measurementContext": "minifold claude/composite-r4 3aa08f1d, live tree carrying unrelated foreign dirt (none in this instrument's path)",
-      "loosenPending": true,
-      "notes": "The unwalled baseline arm of the walls-suppress-sieges paired comparison: siege-family stress types summed over 120 unwalled `siege-${i}` runs. Measured 62/400 on the extended family (15.5%) against 21/120 on the test's OWN corpus (17.5%) — 0.61 sigma apart, so no corpus/family divergence here (contrast the `envelope-${i}` corner, 4/50 vs 89/400). The live floor 10 is KEPT: the alpha-1e-3 envelope derives 6, which is LOOSER, and program law forbids an agent loosening a bound. Not a defect — 10 still carries 2.17 sigma. Owner ruling wanted: keep 10 or adopt 6. Two side notes. (1) The file header's comment claimed 'empirically 18' unwalled sieges; the current measurement is 21, a stale comment rather than a bound failure, refreshed at the assertion. (2) This arm is mildly OVERDISPERSED relative to a Bernoulli — two of 400 seeds carry two siege types (distribution 0:340 1:58 2:2) — so a derived bound would be optimistically tight. Harmless here precisely because the derivation is the looser side and is not adopted."
+      "loosenPending": false,
+      "ratifiedStricterBound": true,
+      "notes": "The unwalled baseline arm of the walls-suppress-sieges paired comparison: siege-family stress types summed over 120 unwalled `siege-${i}` runs. Measured 62/400 on the extended family (15.5%) against 21/120 on the test's OWN corpus (17.5%) — 0.61 sigma apart, so no corpus/family divergence here (contrast the `envelope-${i}` corner, 4/50 vs 89/400). The live floor 10 is RATIFIED: the alpha-1e-3 envelope derives 6, which is LOOSER, and program law forbids silently weakening a live bound. The stricter 10 still carries 2.17 sigma. Owner delegation ratified it on 2026-07-28. Two side notes. (1) The file header's comment claimed 'empirically 18' unwalled sieges; the current measurement is 21, a stale comment rather than a bound failure, refreshed at the assertion. (2) This arm is mildly OVERDISPERSED relative to a Bernoulli — two of 400 seeds carry two siege types (distribution 0:340 1:58 2:2) — so a derived bound would be optimistically tight. Harmless here precisely because the derivation is the looser side and is not adopted."
     },
     {
       "id": "ordering.siegeSuppression.walledCeiling",
@@ -167,8 +184,9 @@
       "bound": 4,
       "margin": 2.994,
       "measurementContext": "minifold claude/composite-r4 f9560c57, live tree carrying unrelated foreign dirt from concurrent sessions (including pulse-chain files); at that PRE-self-capture-fix tree the 16-run corpus re-measured to exactly the 2026-07-27 reading of 207 mission ids, proving the dirt behaviour-neutral for this instrument. The 207 is pre-fix provenance: the self-capture fix that shipped with this entry (11c295c1) removes 3 of the 6 release legs, so the same corpus reads 204 ids at HEAD — the genesis numerator 201, and this baseRate, are unchanged",
-      "loosenPending": true,
-      "notes": "The 3-year lit soak's journey cadence, expressed as a COUNT of GENESIS departures over the fixture's 12 NPCs x 3 years = 36 NPC-year trials. The trial unit is exact by the same test's cadence assertion (at most one genesis departure per NPC-year), and the denominator is fixed by the fixture rather than by an outcome, so this needs no fixed-n workaround. RE-DERIVED 2026-07-28 from the ratified GENESIS base rate 201/576 = 34.8958% (was 207/576 = 35.9375%): the earlier measurement counted every mission id, and a release-return leg (releasedFromRansom) is the RESOLUTION of a captivity, not a fresh dispatch — 6 of those 207 ids were release legs. The 16-run corpus is unchanged (the test's literal seed 'roads-3y' plus `roads-3y-0`..`roads-3y-14`), and the test's own seed mints no release leg, so it still yields 16/36 (44.4%), 1.20 sigma high — no divergence. The authored floor was perNpcYear > 0.05, i.e. >= 2 departures; the live floor of 4 stays IN FORCE and is now loosenPending, because at the genesis base rate its own alpha-1e-3 derivation is the LOOSER 3 (3.344 sigma; the live 4 carries 2.994, still over the program's 2-sigma bar). Program law: never loosen a bound silently — the loosening to 3 is filed for the owner, not taken here. A denominator guard in the test pins 36, so a change to the fixture's NPC roster reds instead of silently re-scaling what this bound means."
+      "loosenPending": false,
+      "ratifiedStricterBound": true,
+      "notes": "The 3-year lit soak's journey cadence, expressed as a COUNT of GENESIS departures over the fixture's 12 NPCs x 3 years = 36 NPC-year trials. The trial unit is exact by the same test's cadence assertion (at most one genesis departure per NPC-year), and the denominator is fixed by the fixture rather than by an outcome, so this needs no fixed-n workaround. RE-DERIVED 2026-07-28 from the ratified GENESIS base rate 201/576 = 34.8958% (was 207/576 = 35.9375%): the earlier measurement counted every mission id, and a release-return leg (releasedFromRansom) is the RESOLUTION of a captivity, not a fresh dispatch — 6 of those 207 ids were release legs. The 16-run corpus is unchanged (the test's literal seed 'roads-3y' plus `roads-3y-0`..`roads-3y-14`), and the test's own seed mints no release leg, so it still yields 16/36 (44.4%), 1.20 sigma high — no divergence. The authored floor was perNpcYear > 0.05, i.e. >= 2 departures; the live floor of 4 remains RATIFIED even though the alpha-1e-3 derivation is the looser 3 (3.344 sigma; the live 4 carries 2.994, still over the program's 2-sigma bar). Owner delegation ratified the stricter 4 floor on 2026-07-28. A denominator guard in the test pins 36, so a change to the fixture's NPC roster reds instead of silently re-scaling what this bound means."
     },
     {
       "id": "roadsMissions.journeyCadence.ceiling",
@@ -184,6 +202,37 @@
       "measurementContext": "minifold claude/composite-r4 f9560c57, live tree carrying unrelated foreign dirt from concurrent sessions (including pulse-chain files); at that PRE-self-capture-fix tree the 16-run corpus re-measured to exactly the 2026-07-27 reading of 207 mission ids, proving the dirt behaviour-neutral for this instrument. The 207 is pre-fix provenance: the self-capture fix that shipped with this entry (11c295c1) removes 3 of the 6 release legs, so the same corpus reads 204 ids at HEAD — the genesis numerator 201, and this baseRate, are unchanged",
       "loosenPending": false,
       "notes": "Ceiling arm of the same cadence band, re-derived 2026-07-28 from the ratified GENESIS base rate 201/576 = 34.8958% (see the floor entry for why 6 release-return legs left the numerator). The authored bound was perNpcYear < 0.9, i.e. <= 32 departures of a possible 36 — 6.797 sigma out, reachable only if nearly every NPC travelled every year. The derivation returns 23 (63.9% per NPC-year) UNCHANGED at the new base rate, and its power rises from 3.495 to 3.650 sigma. THE 2026-07-27 FINDING IS WITHDRAWN, and this is the record of why: the '5 cadence-law violations across 16 seeds' (roads-3y-7, roads-3y-9, roads-3y-12 twice, roads-3y-13) were an ARTEFACT OF THIS INSTRUMENT, not a producer defect. Every one of the five was a single interrupted journey counted twice — the release path mints a NEW mission id with startedYear = the RELEASE year (roadsKernel.js PASS 4), and the old counting summed every mission id per npcKey|startedYear. Each of the five keys holds exactly one releasedFromRansom leg. Re-measured after the counting was realigned with the charter (2026-07-28): GENESIS violations are 0 across all 17 seeds (the 16-run corpus plus `roads-3y-15`). The cadence law is real and correctly enforced at the genesis stamps in roadsKernel.js PASS 5. A DIFFERENT, REAL producer defect surfaced from the same investigation and was fixed under EP-6 (finding EP-l): SELF-CAPTURE (a court taking its own envoy hostage), which accounted for 4 of the 7 ransoms in this corpus."
+    },
+    {
+      "id": "calamity.strikeCount.floor",
+      "file": "tests/domain/calamity.test.js",
+      "n": 15053,
+      "baseRate": 0.0087,
+      "baseMeasuredAt": "2026-07-27",
+      "baseMeasurementN": 151372,
+      "direction": "lower",
+      "alpha": 0.001,
+      "bound": 100,
+      "margin": 2.717,
+      "measurementContext": "minifold claude/composite-r4 d0fdcf7c, 400-seed extension of the same 8-settlement, 50-year calamity realm instrument",
+      "loosenPending": false,
+      "ratifiedStricterBound": true,
+      "notes": "The 40-seed test corpus supplies exactly 15,053 eligible settlement-year rolls after cooldown and records 147 strikes. The measured 400-seed extension records 1,317 strikes over 151,372 eligible rolls (0.87%). The alpha-1e-3 derivation would loosen the floor to 96; owner delegation ratified the stricter live 100-count floor on 2026-07-28. It remains in force and carries 2.717 sigma."
+    },
+    {
+      "id": "calamity.strikeCount.ceiling",
+      "file": "tests/domain/calamity.test.js",
+      "n": 15053,
+      "baseRate": 0.0087,
+      "baseMeasuredAt": "2026-07-27",
+      "baseMeasurementN": 151372,
+      "direction": "upper",
+      "alpha": 0.001,
+      "bound": 169,
+      "margin": 3.339,
+      "measurementContext": "minifold claude/composite-r4 d0fdcf7c, 400-seed extension of the same 8-settlement, 50-year calamity realm instrument",
+      "loosenPending": false,
+      "notes": "Upper arm of the same calibrated strike-count instrument. The old interval assertion permitted up to 200 strikes, 6.06 sigma above the measured base; the alpha-1e-3 exact-binomial envelope tightens that ceiling to 169, with 3.339 sigma of power."
     }
   ]
 }

@@ -24,6 +24,9 @@
 import { describe, test, expect } from 'vitest';
 import { SUBSUMPTION_RULES, applySubsumption } from '../../src/generators/steps/subsumptionPass.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import {
+  SUBSUMPTION_RULES as DATA_SUBSUMPTION_RULES,
+} from '../../src/data/institutionLadders.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const SEED = 'joins-subsumption-0';
@@ -75,6 +78,10 @@ const PROTECTED_PRODUCERS = new Set([
 // ── Rule-table lints ────────────────────────────────────────────────────────
 
 describe('SUBSUMPTION_RULES table invariants', () => {
+  test('the step compatibility export is the data leaf single writer', () => {
+    expect(SUBSUMPTION_RULES).toBe(DATA_SUBSUMPTION_RULES);
+  });
+
   test('no rule names itself: greater never equals one of its own lessers', () => {
     for (const { greater, lesser } of SUBSUMPTION_RULES) {
       for (const l of lesser) {

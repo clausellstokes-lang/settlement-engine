@@ -35,6 +35,11 @@ import {
 } from '../../domain/generationOwnership.js';
 import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
+import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+
+// Compatibility export: callers historically imported the table from this
+// step module. The single writer now lives in the side-effect-free data leaf.
+export { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
 
 // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
@@ -170,40 +175,6 @@ function getResourceMultiplier(instTags, instName, nearbyResources, instModifier
 
   return Math.min(multiplier, 5);
 }
-
-// Exported: cascadePass must apply the SAME collapse after its additions, or the
-// cascade re-adds the lesser member of a ladder assembly just collapsed (a city
-// listing both "Town hall" and "City hall").
-// Pairs must be scale tiers of the SAME function. Complementary infrastructure
-// (e.g. Docks/port facilities vs Warehouse district) must never be paired:
-// 'Warehouse district' is required:true at city tier, so such a pair would
-// deterministically delete the other member from every city roster.
-export const UPGRADE_CHAINS = [
-  ["Parish church","Parish churches (2-5)"],["Parish church","Parish churches (10-30)"],
-  ["Parish churches (2-5)","Parish churches (10-30)"],["Wayside shrine","Parish church"],
-  ["Water source","Multiple water sources"],["Citizen militia","Town watch"],
-  ["Citizen militia","Professional city watch"],["Town watch","Professional city watch"],
-  ["Palisade or earthworks","Town walls"],["Town walls","City walls and gates"],
-  ["Barracks","Garrison"],["Street gang","Multiple criminal factions"],
-  ["Gambling den","Gambling halls"],["Gambling halls","Gambling district"],
-  ["Gambling den","Gambling district"],["Traveling performers","Theaters"],
-  ["Theaters","Multiple theaters"],["Traveling performers","Multiple theaters"],
-  ["River boatyard","Shipyard"],["Hedge wizard","Wizard's tower"],
-  ["Traveling hedge wizard","Hedge wizard"],["Alchemist shop","Alchemist quarter"],
-  ["Wizard's tower","Mages' guild"],["Town granary","City granaries"],
-  ["Town hall","City hall"],["Blacksmith","Blacksmiths (3-10)"],
-  ["Carpenter","Carpenters (5-15)"],
-  ["Carriers' hiring hall","Carriers' guild"],["Carriers' guild","Caravan masters' exchange"],
-  ["Carriers' hiring hall","Caravan masters' exchange"],["Small prison/stocks","Large prison"],
-  ["Courthouse","Multiple courthouses"],["Craft guilds (5-15)","Craft guilds (30-80)"],
-  ["Merchant guilds (3-8)","Merchant guilds (15-40)"],
-  ["Adventurers' charter hall","Multiple adventurers' guilds"],
-  ["Bowyers & fletchers (guild)","Dungeon delving supply district"],
-  ["Apothecary","Apothecary (established)"],["Apothecary (established)","Apothecary district"],
-  ["Apothecary","Apothecary district"],["Cartographer's workshop","Cartographer's guild"],
-  ["Bowyer & fletcher","Bowyers & fletchers (guild)"],["Small hospital","Major hospital"],
-  ["Slave market","Slave market district"],
-];
 
 /**
  * Collapse upgrade ladders in place: when both members of an UPGRADE_CHAINS pair

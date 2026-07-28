@@ -227,6 +227,8 @@ export function envelopeBound({ n, baseRate, direction, alpha = 1e-4 }) {
  * @property {boolean} loosenPending true when the derivation is LOOSER than the live
  *   bound; the live (tighter) bound stays in force and the derivation is queued for
  *   the owner. Never loosen a bound silently.
+ * @property {boolean} [ratifiedStricterBound] true when the owner has resolved that
+ *   pending choice by retaining the tighter live bound
  * @property {string} [notes]
  * @property {boolean} [pendingMigration] set on a totality roster row that has not been
  *   migrated to this helper yet; carries `rationale` instead of a derivation.

@@ -31,12 +31,46 @@ import { RUMOR_TRADE_CHANNEL_TYPES } from '../spatial/rumorNetwork.js';
 
 // ── Instrumentation (test seam) ──────────────────────────────────────────────
 const stats = { scanOps: 0, builds: 0, consults: 0, fallbacks: 0 };
+// The relationship-state fallback is keyed by an ordered key SHAPE rather than
+// object identity: pulse state is immutably rebuilt every tick, while its
+// relationship keys normally stay stable for long stretches. Cache only the
+// keys that match a queried pair; values are always read from the CURRENT
+// relationshipStates object, so a label transition can never go stale.
+/** @type {WeakMap<object, { keys: string[], signature: string }>} */
+let relationshipStateShapeCache = new WeakMap();
+/**
+ * @typedef {{
+ *   ids: Set<string>,
+ *   byPair: Map<string, string[]>,
+ *   legacyByPair: Map<string, string[]>,
+ * }} RelationshipStatePairIndex
+ */
+/** @type {Map<string, RelationshipStatePairIndex>} */
+const relationshipStatePairCache = new Map();
+const RELATIONSHIP_STATE_SHAPE_CACHE_MAX = 16;
+/** @type {readonly string[]} */
+const NO_RELATIONSHIP_STATE_KEYS = Object.freeze([]);
 /** @returns {{ scanOps: number, builds: number, consults: number, fallbacks: number }} */
 export function __tickIndexStats() { return { ...stats }; }
-export function __resetTickIndexStats() { stats.scanOps = 0; stats.builds = 0; stats.consults = 0; stats.fallbacks = 0; }
+export function __resetTickIndexStats() {
+  stats.scanOps = 0;
+  stats.builds = 0;
+  stats.consults = 0;
+  stats.fallbacks = 0;
+  // Tests compare cold drives at different scales. Reset the bounded
+  // cross-object shape cache with the counters so those measurements remain
+  // order-independent and reproducible.
+  relationshipStateShapeCache = new WeakMap();
+  relationshipStatePairCache.clear();
+}
 
 /** Canonical unordered pair key (relationship reads match a↔b in either direction). */
 function pairKey(/** @type {string} */ a, /** @type {string} */ b) { return a < b ? `${a} ${b}` : `${b} ${a}`; }
+
+/** Collision-proof unordered key for the relationship-state pair cache. */
+function statePairKey(/** @type {string} */ a, /** @type {string} */ b) {
+  return JSON.stringify(a < b ? [a, b] : [b, a]);
+}
 
 /** @param {unknown} v @returns {string} */
 function idStr(v) { return String(v); }
@@ -182,6 +216,7 @@ export function tradeNeighbourIndex(graph) {
  * @typedef {Object} WarRelIndex
  * @property {Set<string>} openWarPairs   pair keys with a live war-front channel (== atOpenWar)
  * @property {Map<string, string>} edgeRtByPair  pair key -> FIRST non-empty edge relationshipType
+ * @property {Set<string>} settlementIds  ids addressable through the graph
  */
 /** @type {WeakMap<object, WarRelIndex>} */
 const warRelCache = new WeakMap();
@@ -199,11 +234,23 @@ function warRelIndex(graph) {
   const g = asObject(graph);
   /** @type {Set<string>} */
   const openWarPairs = new Set();
+  /** @type {Set<string>} */
+  const settlementIds = new Set();
+  const nodes = Array.isArray(g.nodes) ? /** @type {unknown[]} */ (g.nodes) : [];
+  for (const n of nodes) {
+    stats.scanOps += 1;
+    const id = idStr(asObject(n).id || '');
+    if (id) settlementIds.add(id);
+  }
   const channels = Array.isArray(g.channels) ? /** @type {unknown[]} */ (g.channels) : [];
   for (const c of channels) {
     stats.scanOps += 1;
+    const ch = asObject(c);
+    const from = idStr(ch.from || '');
+    const to = idStr(ch.to || '');
+    if (from) settlementIds.add(from);
+    if (to) settlementIds.add(to);
     if (isLiveWarFront(c)) {
-      const ch = asObject(c);
       openWarPairs.add(pairKey(idStr(ch.from), idStr(ch.to)));
     }
   }
@@ -213,38 +260,147 @@ function warRelIndex(graph) {
   for (const e of edges) {
     stats.scanOps += 1;
     const edge = asObject(e);
+    const from = idStr(edge.from || '');
+    const to = idStr(edge.to || '');
+    if (from) settlementIds.add(from);
+    if (to) settlementIds.add(to);
     const rt = String(edge.relationshipType || '');
     if (!rt) continue;
-    const key = pairKey(idStr(edge.from), idStr(edge.to));
+    const key = pairKey(from, to);
     if (!edgeRtByPair.has(key)) edgeRtByPair.set(key, rt); // FIRST non-empty rt, in edge order
   }
   /** @type {WarRelIndex} */
-  const idx = { openWarPairs, edgeRtByPair };
+  const idx = { openWarPairs, edgeRtByPair, settlementIds };
   stats.builds += 1;
   warRelCache.set(graph, idx);
   return idx;
 }
 
 /**
+ * Ordered relationship-state keys whose legacy id contains BOTH settlement
+ * ids. This is the exact fallback predicate used by
+ * roads/embassyHazard.relationshipTypeBetween; caching the matching key list
+ * changes no join semantics and preserves Object.keys insertion order.
+ *
+ * The cache is split in two:
+ *   1. a WeakMap captures Object.keys once for each immutable state object;
+ *   2. a small bounded map reuses pair matches across successive immutable
+ *      state objects with the same ordered key shape.
+ *
+ * Only keys are cached. Callers read the current record values afterward, so
+ * relationshipType changes under a stable shape remain immediately visible.
+ *
+ * @param {Obj} states
+ * @param {WarRelIndex} graphIndex
+ * @returns {RelationshipStatePairIndex}
+ */
+function relationshipStatePairIndex(states, graphIndex) {
+  let shape = relationshipStateShapeCache.get(states);
+  if (!shape) {
+    const keys = Object.keys(states);
+    stats.scanOps += keys.length;
+    shape = { keys, signature: JSON.stringify(keys) };
+    relationshipStateShapeCache.set(states, shape);
+  } else {
+    stats.consults += 1;
+  }
+
+  const ids = [...graphIndex.settlementIds].sort(compareCodepoint);
+  const indexSignature = JSON.stringify([shape.signature, ids]);
+  let index = relationshipStatePairCache.get(indexSignature);
+  if (!index) {
+    const byPair = new Map();
+    const idSet = new Set(ids);
+    // One ordered pass over the key shape builds every graph-addressable
+    // substring pair. If short ids overlap inside a longer legacy key, all
+    // matching pairs receive that key, exactly as repeated String.includes
+    // queries did. Key order is the outer loop, so first-key-wins is retained.
+    for (const key of shape.keys) {
+      /** @type {string[]} */
+      const matchedIds = [];
+      for (const id of ids) {
+        stats.scanOps += 1;
+        if (key.includes(id)) matchedIds.push(id);
+      }
+      for (let i = 0; i < matchedIds.length; i += 1) {
+        for (let j = i; j < matchedIds.length; j += 1) {
+          const cacheKey = statePairKey(matchedIds[i], matchedIds[j]);
+          let matchedKeys = byPair.get(cacheKey);
+          if (!matchedKeys) {
+            matchedKeys = [];
+            byPair.set(cacheKey, matchedKeys);
+          }
+          matchedKeys.push(key);
+        }
+      }
+    }
+    index = { ids: idSet, byPair, legacyByPair: new Map() };
+    relationshipStatePairCache.set(indexSignature, index);
+    if (relationshipStatePairCache.size > RELATIONSHIP_STATE_SHAPE_CACHE_MAX) {
+      const oldest = relationshipStatePairCache.keys().next().value;
+      if (typeof oldest === 'string') relationshipStatePairCache.delete(oldest);
+    }
+    stats.builds += 1;
+  } else {
+    stats.consults += 1;
+  }
+  return index;
+}
+
+/**
+ * Resolve the ordered matching-key list. Graph-addressable ids use the complete
+ * shape-level pair index; unusual legacy callers whose ids are absent from the
+ * graph retain the old on-demand String.includes scan and cache its exact result.
+ * @param {Obj} states
+ * @param {WarRelIndex} graphIndex
+ * @param {string} a
+ * @param {string} b
+ * @returns {readonly string[]}
+ */
+function relationshipStateKeysForPair(states, graphIndex, a, b) {
+  const index = relationshipStatePairIndex(states, graphIndex);
+  const cacheKey = statePairKey(a, b);
+  if (index.ids.has(a) && index.ids.has(b)) {
+    const hit = index.byPair.get(cacheKey);
+    stats.consults += 1;
+    return hit || NO_RELATIONSHIP_STATE_KEYS;
+  }
+
+  const prior = index.legacyByPair.get(cacheKey);
+  if (prior) {
+    stats.consults += 1;
+    return prior;
+  }
+  const matched = [];
+  const shape = relationshipStateShapeCache.get(states);
+  for (const key of shape?.keys || []) {
+    stats.scanOps += 1;
+    if (key.includes(a) && key.includes(b)) matched.push(key);
+  }
+  index.legacyByPair.set(cacheKey, matched);
+  stats.builds += 1;
+  return matched;
+}
+
+/**
  * O(1)-amortized relationshipTypeBetween — byte-identical to roads/embassyHazard.relationshipTypeBetween:
  * the FIRST pair-matching edge with a non-empty relationshipType, else the relationshipStates
- * substring fallback, else ''. The edge scan is served from the graph index; the (rare, worldState-
- * dependent) relationshipStates loop is reproduced verbatim.
+ * substring fallback, else ''. The edge scan is served from the graph index; the now-hot
+ * relationshipStates fallback is served from an ordered pair index that reproduces the legacy
+ * substring join verbatim.
  * @param {Obj} graph @param {Obj} worldState @param {string} a @param {string} b @returns {string}
  */
 export function relationshipTypeBetweenIdx(graph, worldState, a, b) {
   if (!graph || typeof graph !== 'object') { stats.fallbacks += 1; return relationshipTypeBetweenRaw(graph, worldState, a, b); }
   const A = String(a);
   const B = String(b);
-  const edgeRt = warRelIndex(graph).edgeRtByPair.get(pairKey(A, B));
+  const graphIndex = warRelIndex(graph);
+  const edgeRt = graphIndex.edgeRtByPair.get(pairKey(A, B));
   if (edgeRt) return edgeRt;
   const rs = asObject(asObject(worldState).relationshipStates);
-  for (const key of Object.keys(rs)) {
-    stats.scanOps += 1;
-    if (key.includes(A) && key.includes(B)) {
-      const rt = String(asObject(rs[key]).relationshipType || '');
-      if (rt) return rt;
-    }
+  for (const key of relationshipStateKeysForPair(rs, graphIndex, A, B)) {
+    const rt = String(asObject(rs[key]).relationshipType || '');
+    if (rt) return rt;
   }
   return '';
 }

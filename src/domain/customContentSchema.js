@@ -253,8 +253,8 @@ export function validateDeity(deity = {}) {
 
 // ── Traditions (THE TRADITIONS wave, Engine Lift #4 / slice T-5) ───────────────
 // The `traditions` custom-content bucket: a DECLARED per-settlement observance that,
-// once the traditions layer lights (traditionsEnabled at THE ONE REGEN), can claim a
-// genesis slot (declared-over-derived, DESIGN_TRADITIONS §11). Authored content is a
+// when a deep preset lights traditionsEnabled, can claim a genesis slot
+// (declared-over-derived, DESIGN_TRADITIONS §11). Authored content is a
 // NAME plus an OPTIONAL typed motif (element × act) drawn from the same vocabulary the
 // derived founding traditions use, plus an optional free-text epithet.
 //

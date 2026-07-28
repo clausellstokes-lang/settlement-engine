@@ -2,8 +2,8 @@
  * distancePricedNews.test.js — D1 (DESIGN_SIM_DEPTH_R2 D1) pins.
  *
  * Distance-priced news: information age gains a distance surcharge off the frozen
- * digest, gated by the VIRTUAL flag distancePricedNewsEnabled (dark EVERYWHERE ⇒
- * byte-identical). Design pins: (1) dormancy — flag absent ⇒ byte-identical;
+ * digest, gated by the VIRTUAL flag distancePricedNewsEnabled (lit by T5 only in
+ * the three deep presets). Design pins: (1) dormancy — flag absent ⇒ byte-identical;
  * (2) adjacent ⇒ zero added delay; (3) monotonicity — further ⇒ never fresher;
  * (4) DM-truth surfaces unaffected; (5) determinism. Plus the believed-need coupling.
  */

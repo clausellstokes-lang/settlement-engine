@@ -404,6 +404,15 @@ const EFFECT_MANIFEST = Object.freeze([
     ),
   }),
   Object.freeze({
+    id: 'repair.hard_dependency',
+    description:
+      'coherenceRepairPass added a real catalog prerequisite after validation '
+      + 'stopped accepting the gated institution as evidence for its own gate',
+    detect: settlement => repairs(settlement).some(
+      repair => repair?.type === 'hard_dependency',
+    ),
+  }),
+  Object.freeze({
     id: 'repair.unsupported_institution',
     description:
       'coherenceRepairPass removed a generated institution whose hard dependency '
@@ -430,20 +439,6 @@ const EFFECT_MANIFEST = Object.freeze([
  * probe evidence is the reason, and re-adding an entry without new evidence
  * would only convert a known finding back into a silent red.
  *
- * - `hard_dependency` (add the missing dependency): never observed in 194
- *   generated specimens. GATE_FEATURES dependencies are structurally
- *   pre-satisfied — 65 of 89 hard-`requires` gates are self-satisfying through
- *   structuralValidator's SPATIAL_FEATURES expansion (the gated institution
- *   implies its own prerequisites into the checked set; counts corrected from
- *   60/29 to 65/24 by the EP-6 INV-B enumeration, 2026-07-27), and the rest
- *   name `required: true` catalog entries their tier always seats. Forcing the
- *   gap with a toggle cannot reach it either: the toggle marks the dependency
- *   explicitly excluded, so `isCompatible` refuses to add it and the pass falls
- *   through to `unsupported_institution` instead. INV-B measured the correct
- *   ladder-aware fix at 41% of golden keys / 39% of soak worlds — it is PARKED
- *   for the owner-signed T4 ONE REGEN batch (17 of the 65 gates are
- *   LEGITIMATELY vacuous: the roster ladders evict the lesser whenever the
- *   greater seats, so the naive self-exclusion fix is a measured regression).
  * - `mutual_exclusion` (remove an institution that conflicts with another):
  *   `exclusion_violation` has exactly one producer — GATE_FEATURES `blockedBy`
  *   — and NO entry in src/data/spatialData.js declares `blockedBy`. The branch
@@ -471,7 +466,6 @@ const EFFECT_MANIFEST = Object.freeze([
  * `by_design`, below the error floor the repair pass acts on.
  */
 const UNREACHABLE_STRATA = Object.freeze([
-  'repair.hard_dependency',
   'repair.mutual_exclusion',
 ]);
 

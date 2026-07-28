@@ -34,6 +34,12 @@ import {
 } from './subsumptionPass.js';
 import { slugify } from '../../kernel/slugify.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
+import {
+  institutionWouldBeImmediatelyEvicted,
+} from '../../data/institutionLadders.js';
+import {
+  nativeSemanticNames,
+} from '../../domain/content/customContentSemanticAuthority.js';
 
 function institutionId(name) {
   return `institution.${slugify(name, { sep: '_', raw: true })}`;
@@ -143,9 +149,15 @@ function addCandidate(ctx, entries, names, type, reason) {
   const present = new Set(ctx.institutions.map(
     institution => normalizedName(institution.name),
   ));
+  const nativeRosterNames = nativeSemanticNames(ctx.institutions);
   const candidate = names
     .map(name => entries.find(entry => normalizedName(entry.name) === normalizedName(name)))
-    .find(entry => entry && !present.has(normalizedName(entry.name)) && isCompatible(ctx, entry));
+    .find(entry => (
+      entry
+      && !present.has(normalizedName(entry.name))
+      && isCompatible(ctx, entry)
+      && !institutionWouldBeImmediatelyEvicted(nativeRosterNames, entry.name)
+    ));
   if (!candidate) return false;
   ctx.institutions.push({
     ...candidate,
@@ -160,6 +172,22 @@ function addCandidate(ctx, entries, names, type, reason) {
     reason,
   });
   return true;
+}
+
+/**
+ * The public repair ledger describes the final roster, not transient work the
+ * pass normalized away. The candidate guard above prevents the known false-add
+ * path; this final reconciliation also covers a lesser added on pass one and
+ * superseded by a greater added later in the same bounded repair.
+ */
+function reconcileAddedRepairReceipts(ctx) {
+  const present = new Set(ctx.institutions.map(
+    institution => normalizedName(institution.name),
+  ));
+  ctx.generationRepairs = ctx.generationRepairs.filter(repair => (
+    repair?.action !== 'added'
+    || present.has(normalizedName(repair.subject))
+  ));
 }
 
 function removeUnprotected(ctx, name, type, reason) {
@@ -408,6 +436,8 @@ registerStep('coherenceRepairPass', {
   });
   ctx.effectiveConfig._isolationSupport = isolationSupport;
   ctx.effectiveConfig._magicTradeOnly = isolationSupport.magicDependent === true;
+
+  reconcileAddedRepairReceipts(ctx);
 
   const after = ctx.institutions.map(institution => institution.name);
   if (JSON.stringify(before) !== JSON.stringify(after)) {

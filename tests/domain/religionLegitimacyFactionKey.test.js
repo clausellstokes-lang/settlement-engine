@@ -132,7 +132,7 @@ describe('rulerLens reads the canonical governing seat', () => {
   // the governing seat is frequently NOT the highest-power faction: rulingStructure sorts
   // the array governing-first regardless of power, which hides it from a casual read, but
   // the pre-fix lens re-sorted by power alone and landed elsewhere. Measured 66/180 = 36.7%
-  // of freshly generated settlements. Here a 15-power elected seat is out-powered 38-to-15
+  // of freshly generated settlements. Here a 12-power elected seat is out-powered 39-to-12
   // by the temple, so pre-fix the lens read the settlement's character off the TEMPLE.
   it('reads the weak elected seat, not the faction that out-powers it', () => {
     const cfg = { tier: 'thorp', culture: 'germanic', terrain: 'plains', tradeRoute: 'road' };
@@ -147,15 +147,15 @@ describe('rulerLens reads the canonical governing seat', () => {
     const wrongPick = highestPower(s.powerStructure);
     expect(nameOf(seat)).toBe('Elected Reeve');
     expect(nameOf(wrongPick)).toBe('Religious Authorities');
-    expect(Number(seat.power)).toBe(15);
-    expect(Number(wrongPick.power)).toBe(38);
+    expect(Number(seat.power)).toBe(12);
+    expect(Number(wrongPick.power)).toBe(39);
     expect(factionArchetype(seat)).toBe('government');     // from the name ('reeve')
     expect(factionArchetype(wrongPick)).toBe('religious'); // from the category
 
     // Selection, isolated: lens.power tracks the chosen record's own power. The roster is
-    // non-empty here, so leadPow floors it — assert the seat's 15 does NOT read as 38.
+    // non-empty here, so leadPow floors it — assert the seat's 12 does NOT read as 39.
     const lens = rulerLens(s);
-    expect(lens.power).toBeLessThan(0.45 + 0.55 * 0.38);
+    expect(lens.power).toBeLessThan(0.45 + 0.55 * 0.39);
     // And the lean is the seat's (government temper 0.5), not the temple's (religious 0.4).
     expect(lens.temper).toBeCloseTo(0.5, 10);
   });

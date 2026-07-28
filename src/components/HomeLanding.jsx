@@ -1,7 +1,7 @@
 /**
  * HomeLanding.jsx — the marketing front door: a scrollable landing page that is
  * both advertisement and onboarding. It walks a cold visitor down "the salt
- * road" — Hero → 01 Forge → 02 Brief → 03 Voice → 04 Realm → 05 Commons →
+ * road" — Hero → 01 Forge → 02 Visual → 03 Voice → 04 Realm → 05 Commons →
  * 06 Set out — teaching one lifecycle stage per painted-scene section while
  * selling it (landing spec).
  *

@@ -17,13 +17,10 @@
  *   • no consumer entry without a producer that emits it (no dead arm), and
  *   • no producer value without a consumer entry (no silent miss).
  *
- * THE WAIVER (shrink-only, T4). Three consumers are KNOWN-broken and their fix
- * SHIFTS a golden, so it is parked for the owner's single ONE REGEN (Wave 9):
- * deriveExternalThreat's threat branch (H15) and stressor filter (H16), and
- * factionDynamics.safetyContrib (H4). The walker tolerates EXACTLY their current
- * gap, dated 2026-07-21 — and it asserts that gap by EQUALITY, so the moment the
- * Wave-9 fix lands (the gap shrinks or closes) the waiver assertion fails and
- * forces the waiver to shrink with it. A waiver can only shrink, never widen.
+ * THE HISTORICAL WAIVER (retired at T5). Three consumers were known-broken and
+ * golden-bound: deriveExternalThreat's threat branch (H15) and stressor filter
+ * (H16), and factionDynamics.safetyContrib (H4). THE ONE REGEN repaired all
+ * three, so the former exact-gap waiver is now an exact-totality contract below.
  *
  * TO COMPLY (a new violation): bind the consumer to its producer set (import the
  * producer's keys / derive the table from it, as DEFENSE_STRESS_STATUS now does),
@@ -134,55 +131,31 @@ describe('vocabularyTotality — bound consumers (exact set, both ways)', () => 
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
-// WAIVER MANIFEST — KNOWN-broken consumers, parked for the Wave-9 ONE REGEN.
-// Each gap is asserted by EQUALITY: the Wave-9 fix shrinks the gap, the equality
-// fails, and this waiver must shrink with it. Shrink-only; widening is a red.
+// T5 ONE-REGEN REPAIRS — the formerly waived consumers now cover their complete
+// producer vocabularies. These assertions keep the repaired joins total.
 // ═══════════════════════════════════════════════════════════════════════════
-describe('vocabularyTotality — T4 waivers (shrink-only, dated 2026-07-21)', () => {
-  const KIND = (rule, comply, shrink) => `${rule}\n  TO COMPLY: ${comply}\n  WAIVER SHRINKS WHEN: ${shrink}`;
-
-  it('WAIVER H15 — deriveExternalThreat threat branch (dead safe/civilized, missing heartland)', () => {
+describe('vocabularyTotality — T5 repaired consumers', () => {
+  it('H15 — deriveExternalThreat branches on exactly the produced threat tiers', () => {
     const body = fnBody(read('src/domain/state/deriveSystemState.js'), 'deriveExternalThreat');
     const consumer = tokensBy(body, /monsterThreat\s*(?:===|\|\|)\s*'([^']+)'/g).sort();
     const dead = setDiff(consumer, PRODUCER_THREAT);
     const missing = setDiff(PRODUCER_THREAT, consumer);
-    const msg = KIND(
-      'deriveExternalThreat branches on threat tiers no producer emits and misses one it does.',
-      'branch on the canonical tiers (heartland/frontier/plagued); drop safe/civilized.',
-      'the branch stops referencing safe/civilized AND handles heartland (Wave-9 ONE REGEN, golden-shifting).',
-    );
-    // EXACTLY the known gap — no more (a new dead token) and no less (a partial fix).
-    expect(dead, `H15 dead tokens changed:\n  ${msg}`).toEqual(['civilized', 'safe']);
-    expect(missing, `H15 missing tokens changed:\n  ${msg}`).toEqual(['heartland']);
+    expect(dead, 'deriveExternalThreat must not branch on dead threat tokens').toEqual([]);
+    expect(missing, 'deriveExternalThreat must handle every produced threat token').toEqual([]);
   });
 
-  it('WAIVER H16 — deriveExternalThreat stressor filter substring-matches dead "occupation"', () => {
+  it('H16 — deriveExternalThreat matches the produced occupied stressor token', () => {
     const body = fnBody(read('src/domain/state/deriveSystemState.js'), 'deriveExternalThreat');
-    // The generator emits the occupation stressor as type 'occupied'; the filter
-    // substring-matches 'occupation', which matches nothing. Assert the dead
-    // substring still ships (proving the bug), so a Wave-9 fix reddens this waiver.
-    expect(
-      body.includes("'occupation'") && !body.includes("'occupied'"),
-      KIND(
-        'deriveExternalThreat threat-stressor filter matches the dead substring "occupation" (producer emits "occupied").',
-        'match the producer stress type "occupied" (or bind to STRESS_TYPE_MAP threat tags).',
-        'the filter stops matching "occupation" / starts matching "occupied" (Wave-9 ONE REGEN, golden-shifting).',
-      ),
-    ).toBe(true);
+    expect(body).toBeTruthy();
+    expect(body).toContain("'occupied'");
+    expect(body).not.toContain("'occupation'");
   });
 
-  it('WAIVER H4 — factionDynamics.safetyContrib misses critical/controlled/restricted/quarantined', () => {
+  it('H4 — factionDynamics.safetyContrib handles every produced safety prefix', () => {
     const body = fnBody(read('src/generators/factionDynamics.js'), 'safetyContrib');
     const consumer = tokensBy(body, /l\.includes\('([^']+)'\)/g);
     const missing = setDiff(PRODUCER_SAFETY_TOKENS, consumer);
-    const msg = KIND(
-      'safetyContrib substring-matches safety labels but misses the crisis-tier prefixes, so those settlements contribute 0 to legitimacy safety.',
-      'add includes() arms for controlled/critical/quarantined/restricted.',
-      'safetyContrib recognizes those prefixes (Wave-9 ONE REGEN, legitimacy-golden-shifting).',
-    );
-    // EXACTLY the four missing crisis prefixes (safetyContrib carries extra
-    // non-leading tokens 'famine'/'orderly' that are not producer leading tokens).
-    expect(missing, `H4 missing tokens changed:\n  ${msg}`).toEqual(['controlled', 'critical', 'quarantined', 'restricted']);
+    expect(missing, 'safetyContrib must classify every safety-profile prefix').toEqual([]);
   });
 });
 

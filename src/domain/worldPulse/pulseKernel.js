@@ -87,7 +87,7 @@ import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectC
 import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
-import { appendWizardNewsEntries, applyPulseMover } from '../region/index.js';
+import { appendObservedWizardNewsEntries, applyPulseMover } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateResourceDynamics } from './resourceDynamicsKernel.js';
@@ -201,8 +201,9 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   proposal minted DURING the advance is not expired-to-declined before the DM
  *   opens the panel. Absent ⇒ defaults to the current tick (single-tick advance;
  *   byte-identical). [worldpulse-core-3]
+ * @param {import('../region/wizardNews.js').RawWizardNewsEntry[]|null} [args.newsReceiptSink] Audit-only raw Wizard News sink.
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick, newsReceiptSink = null } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -1344,7 +1345,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
   // @pulse-stage: consequence_fold
-  let memoryState = advanceObligationDecay(applied.worldState, worldState.tick);
+  let memoryState = advanceObligationDecay(applied.worldState, worldState.tick); if (Array.isArray(newsReceiptSink)) newsReceiptSink.push(...applied.newsEntries);
   // E0 NARRATIVE TEMPO GOVERNOR — WRITE hook (design §7.2). Fold this tick's landed
   // spontaneous major births + the seam's deferrals into the next narrativeTempo
   // ledger, window-stamped on the PRE-TICK `worldState.calendar.elapsedWeeks`
@@ -1768,7 +1769,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
   // pantheon) leaked wall-clock time into the composed output — a latent determinism/
   // equivalence break that only bit once an advance reached such a tick.
-  let wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
+  let wizardNews = newsToAppend.length ? appendObservedWizardNewsEntries(applied.wizardNews, newsToAppend, { now }, newsReceiptSink) : applied.wizardNews;
   // STEP 3.5 — RUMORS & NEWS (trade carrier). AFTER the tick's feed is fully
   // composed (the seeds read the same entries the DM reads), the rumor network
   // advances one step: expire by tick-age, seed this window's significant
@@ -1905,7 +1906,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (infowar.changed) memoryState = /** @type {typeof memoryState} */ (infowar.worldState);
     if (infowar.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, infowar.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, infowar.newsEntries, { now }, newsReceiptSink);
     }
   }
   // W-DOCTRINE-1 — SUPPLY-WEB WARFARE (DESIGN_SUPPLY_WEB_WARFARE.md). The indirect-war
@@ -1932,7 +1933,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (webwar.changed) memoryState = webwar.worldState;
     if (webwar.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, webwar.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, webwar.newsEntries, { now }, newsReceiptSink);
     }
     webwarAtrocities = webwar.atrocities;
   }
@@ -2003,7 +2004,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // The reckoning receipts (a good polity's conscience curdling) reach the Chronicle,
       // appended like the army-transit news. Empty ⇒ byte-neutral.
       if (drift.reckonings.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, moralReckoningNewsEntries(drift.reckonings, settlementNameFor, worldState.tick, now), { now });
+        wizardNews = appendObservedWizardNewsEntries(wizardNews, moralReckoningNewsEntries(drift.reckonings, settlementNameFor, worldState.tick, now), { now }, newsReceiptSink);
       }
     }
   }
@@ -2104,7 +2105,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (armyTransit.changed) memoryState = armyTransit.worldState;
     if (armyTransit.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now }, newsReceiptSink);
     }
   }
   // W-NAVY — THE SEA HALF (DESIGN_NAVY.md). The maritime twin of army-transit, immediately
@@ -2129,7 +2130,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (naval.changed) memoryState = /** @type {typeof memoryState} */ (naval.worldState);
     if (naval.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, naval.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, naval.newsEntries, { now }, newsReceiptSink);
     }
   }
   // Phase 5.5 mover M11a — PESTILENCE (the traveling plague). AFTER the war/army layer +
@@ -2157,7 +2158,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (pestilence.changed) memoryState = pestilence.worldState;
     if (pestilence.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, pestilence.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, pestilence.newsEntries, { now }, newsReceiptSink);
     }
   }
   // Phase 5.5 mover M11b — CALAMITY (the natural disaster). LAST in the tick (its
@@ -2194,7 +2195,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = calamity.worldState;
       settlementUpdates = calamity.settlementUpdates;
       if (calamity.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, calamity.newsEntries, { now });
+        wizardNews = appendObservedWizardNewsEntries(wizardNews, calamity.newsEntries, { now }, newsReceiptSink);
       }
     }
   }
@@ -2224,7 +2225,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = generosity.worldState;
       settlementUpdates = generosity.settlementUpdates;
       if (generosity.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
+        wizardNews = appendObservedWizardNewsEntries(wizardNews, generosity.newsEntries, { now }, newsReceiptSink);
       }
     }
   }
@@ -2249,7 +2250,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (intervention.changed) memoryState = /** @type {typeof memoryState} */ (intervention.worldState);
     if (intervention.newsEntries.length) {
-      wizardNews = appendWizardNewsEntries(wizardNews, intervention.newsEntries, { now });
+      wizardNews = appendObservedWizardNewsEntries(wizardNews, intervention.newsEntries, { now }, newsReceiptSink);
     }
   }
   // W-UPSWING — THE UPSWING MOVER (DESIGN_UPSWING.md). Runs AFTER generosity so the
@@ -2266,7 +2267,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceUpswing({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, rng, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now));
+  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-LIFECYCLE — THE SATELLITE LANE + peakTier (DESIGN_SETTLEMENT_LIFECYCLE.md).
   // Runs AFTER upswing so a boom minted THIS tick feeds the seeding drive, and
   // AFTER the apply pass so a W-DISCOVERY resource_strike condition planted this
@@ -2282,7 +2283,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceSettlementLifecycle({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     pIndex, rng, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now));
+  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // THE GROWTH LAYER — acquired/temporary NPC traits (owner commission #36). Runs LAST of
   // the per-settlement movers so its deposits read THIS tick's fully-settled durable
   // outcomes — the calamity stamped, the boom/bust/flourishing/reconstruction condition
@@ -2367,7 +2368,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoadsAndCommonsAndAssize({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates, saves,
     graph: applied.regionalGraph, tick: worldState.tick, now,
-  }), memoryState, settlementUpdates, wizardNews, now));
+  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
   // winds down through the existing sue-for-peace path (a fresh recalled.cause =
   // sue_for_peace* stamp, not yet consumed by the war layer), the believed-stronger
@@ -2390,7 +2391,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (treaties.changed) {
       memoryState = treaties.worldState;
       if (treaties.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, treaties.newsEntries, { now });
+        wizardNews = appendObservedWizardNewsEntries(wizardNews, treaties.newsEntries, { now }, newsReceiptSink);
       }
     }
   }
@@ -2498,7 +2499,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = /** @type {typeof memoryState} */ (cracks.worldState);
       settlementUpdates = cracks.settlementUpdates;
       if (cracks.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, cracks.newsEntries, { now });
+        wizardNews = appendObservedWizardNewsEntries(wizardNews, cracks.newsEntries, { now }, newsReceiptSink);
       }
     }
   }

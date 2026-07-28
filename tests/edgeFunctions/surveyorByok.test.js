@@ -205,6 +205,16 @@ describe('resolveCapturedModel - the BYOK preference rule, extracted (L-3a)', ()
     expect(out.source).toBe('pref');
   });
 
+  it('D1 is closed: the Sonnet version served by Narrative is accepted for BYOK', () => {
+    const out = resolveCapturedModel({
+      byok: true,
+      modelPref: 'claude-sonnet-4-6',
+      surfaceDefault: DEFAULT,
+    });
+    expect(out.model).toBe('claude-sonnet-4-6');
+    expect(out.source).toBe('pref');
+  });
+
   it('a MANAGED key never honours a preference, however valid', () => {
     for (const id of ANTHROPIC_SUPPORTED_MODELS) {
       const out = resolveCapturedModel({ byok: false, modelPref: id, surfaceDefault: DEFAULT });
@@ -214,7 +224,7 @@ describe('resolveCapturedModel - the BYOK preference rule, extracted (L-3a)', ()
   });
 
   it('BYOK + an off-allowlist preference falls back to the surface default', () => {
-    for (const bad of ['gpt-5.2', 'claude-sonnet-4-6', 'claude-opus-4-8-20251001', 'nonsense']) {
+    for (const bad of ['gpt-5.2', 'claude-opus-4-8-20251001', 'nonsense']) {
       const out = resolveCapturedModel({ byok: true, modelPref: bad, surfaceDefault: DEFAULT });
       expect(out.model, bad).toBe(DEFAULT);
       expect(out.source).toBe('default');

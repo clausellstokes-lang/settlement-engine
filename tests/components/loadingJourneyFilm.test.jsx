@@ -24,7 +24,7 @@ describe('THE FLOOR — the journey renders from stills with the film absent', (
   it('paints a stop still even with no fine-pointer / no matchMedia (film never mounts)', () => {
     // jsdom provides no window.matchMedia → filmLive stays false → stills only.
     const { container } = render(
-      <JourneyFilm set="bg" legsToPlay={3} arrived scriptWindowMs={1} startedAtMs={0} />,
+      <JourneyFilm legsToPlay={3} arrived scriptWindowMs={1} startedAtMs={0} />,
     );
     const img = container.querySelector('img');
     expect(img, 'the stop still (the floor) must render').not.toBeNull();
@@ -35,7 +35,7 @@ describe('THE FLOOR — the journey renders from stills with the film absent', (
 
   it('mints the lazy-ratchet fingerprint on the rendered root', () => {
     const { container } = render(
-      <JourneyFilm set="bg" legsToPlay={2} arrived scriptWindowMs={1} startedAtMs={0} />,
+      <JourneyFilm legsToPlay={2} arrived scriptWindowMs={1} startedAtMs={0} />,
     );
     const root = container.querySelector('[data-journey-film]');
     expect(root).not.toBeNull();
@@ -54,7 +54,7 @@ describe('THE FLOOR — the journey renders from stills with the film absent', (
     });
     try {
       const { container } = render(
-        <JourneyFilm set="bg" legsToPlay={3} arrived scriptWindowMs={1} startedAtMs={0} />,
+        <JourneyFilm legsToPlay={3} arrived scriptWindowMs={1} startedAtMs={0} />,
       );
       const video = await waitFor(() => {
         const v = container.querySelector('video');

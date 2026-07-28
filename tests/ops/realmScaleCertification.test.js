@@ -3,6 +3,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
+import { BEHAVIORAL_OBSERVATION_VERSION } from '../../src/domain/certification/behavioralContract.js';
 import {
   buildRealmScalePlan,
   isPassingWholeWorldReceipt,
@@ -54,7 +55,7 @@ describe('realm scale certification evidence', () => {
         },
       },
       behavioral: {
-        schemaVersion: 1,
+        schemaVersion: BEHAVIORAL_OBSERVATION_VERSION,
         kind: 'whole_world_behavioral_observation',
         yearly: [{}],
       },

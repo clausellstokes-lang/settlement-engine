@@ -14,7 +14,9 @@
  *       rate and corpus size. A registered bound that does not match its own derivation
  *       reds. When `loosenPending` is set, the derivation is LOOSER than the live bound;
  *       the live bound stays in force (program law: never loosen a bound silently) and
- *       the entry must then be strictly tighter than the derivation.
+ *       the entry must then be strictly tighter than the derivation. Once the owner
+ *       resolves that choice by retaining the stricter bound, `ratifiedStricterBound`
+ *       records the durable exception instead of pretending the decision is pending.
  *   (b) POWER — margin >= 2 sigma, and never zero. An instrument whose bound sits
  *       inside two standard errors of its own mean cannot tell tuning drift from
  *       ordinary corpus variation.
@@ -73,11 +75,12 @@
  *     tests/joins/ordering.test.js (EP-2D marked NOT MINE — another agent's partition —
  *       and classified only: `unwalledSieges >= 10`, `walledSieges <= 0.7 * unwalled` ARE
  *       a two-sided rate comparison over a corpus). CLOSED by EP-5.
- *   STILL OPEN, deliberately not an envelope:
- *     tests/generators/historyNoUndefinedProse.js   `generated > 80` of 192 configs is an
+ *   CLOSED AS TOTALITY, deliberately not an envelope:
+ *     tests/generators/historyNoUndefinedProse.test.js   `generated > 80` of 192 configs is an
  *       anti-vacuity floor on a THROW rate; the honest tightening is totality
- *       (`=== 192`), not an envelope — any throw is a defect. Not a .test.js, so it is
- *       not roster-eligible; it stays an owner-queue item.
+ *       (`=== 192`), not an envelope — any throw is a defect. Owner delegation on
+ *       2026-07-28 ratified the exact totality claim. Not roster-eligible because
+ *       this is a throw contract rather than a distribution-rate instrument.
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -115,16 +118,16 @@ const MIN_MARGIN_SIGMAS = 2;
 const DISTRIBUTION_TOTALITY = Object.freeze([
   // ── MIGRATED: reads its bounds from the manifest ────────────────────────────
   { file: 'tests/generators/captureBirthScale.test.js', pendingMigration: false,
-    rationale: 'EP-2D MIGRATED 2026-07-27. Four bounds derived and registered '
-      + '(ordinaryCity.corrupted 7, criminalTown.capture 40 loosenPending, '
-      + 'criminalCity.capture 29, criminalCity.equilibrium 388). FOUR bounds deliberately '
-      + 'NOT registered, each labelled at its assertion: three rest on a measured rate of '
+    rationale: 'EP-2D MIGRATED 2026-07-27; owner-ratified ordinary-town migration '
+      + '2026-07-28. Five bounds derived and registered '
+      + '(ordinaryTown.corrupted 20, ordinaryCity.corrupted 7, criminalTown.capture 40 '
+      + 'ratified stricter, criminalCity.capture 29, criminalCity.equilibrium 388). THREE bounds '
+      + 'remain deliberately NOT registered, each labelled at its assertion: all rest on a '
+      + 'measured rate of '
       + 'exactly 0 or 1 (ordinary-village corrupted 0/400, ordinary-village none 400/400, '
       + 'criminal-town equilibrium 400/400) where a binomial envelope is degenerate and '
-      + 'would assert certainty the sample cannot buy; and the ordinary-TOWN corrupted '
-      + 'ceiling is POWERLESS — 9/400 measured against a bound of 10 is 0.34 sigma, and '
-      + 'reaching 2 sigma at that rate needs N ~= 14,000 (over four hours of pipeline). '
-      + 'Its loosening to 20 is filed for the owner; program law forbids taking it here.' },
+      + 'would assert certainty the sample cannot buy. The ordinary-town ceiling moved '
+      + 'from the powerless 10 (0.34 sigma) to the derived 20 (3.709 sigma).' },
   { file: 'tests/generators/narrativeQualityCorpus.test.js', pendingMigration: false,
     rationale: 'EP-2D MIGRATED 2026-07-27. One real bound: the relationship-rumor emission '
       + 'floor, was a hand-picked `> 40` sitting 8.1 sigma BELOW the mean of a 160-draw '
@@ -134,7 +137,7 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
     rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION — a tightening; EP-2D classified '
       + 'this file as a real two-sided instrument but it belonged to another partition, so it '
       + 'was never rostered). The walls-suppress-sieges paired comparison over 120 `siege-${i}` '
-      + 'seeds. Two entries: unwalledFloor (lower, live 10 kept, loosenPending — the alpha-1e-3 '
+      + 'seeds. Two entries: unwalledFloor (lower, live 10 ratified stricter — the alpha-1e-3 '
       + 'derivation of 6 is looser) and walledCeiling (upper 17, NEW). The pre-existing RELATIVE '
       + 'assertion (walled <= floor(unwalled * 0.7)) is KEPT alongside the absolute envelope: '
       + 'the ratio is blind to both arms inflating together and the envelope is blind to a '
@@ -161,7 +164,7 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + 'release-return legs (releasedFromRansom) — the RESOLUTION of a captivity, not a '
       + 'fresh dispatch, and the cadence law governs genesis dispatch only. The ceiling '
       + 'tightened 32 -> 23 and holds unchanged at the genesis rate (margin 3.495 -> 3.650); '
-      + 'the floor tightened 2 -> 4 and is now loosenPending — at the genesis rate its own '
+      + 'the floor tightened 2 -> 4 and is ratified stricter — at the genesis rate its own '
       + 'alpha-1e-3 derivation is the LOOSER 3, so the live 4 stays in force (2.994 sigma) '
       + 'and the loosening is filed for the owner, not taken here. THE 2026-07-27 FINDING IS '
       + 'WITHDRAWN: the "cadence law VIOLATED on 5 of 16 seeds" was an artefact of this '
@@ -191,30 +194,24 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + '(total hooks / total stress entries), so they need a fixed-n treatment plus a '
       + 'denominator guard before an integer bound means anything. Full measurement table '
       + 'is in the EP-2D report; nothing here is guesswork any more.' },
-  { file: 'tests/domain/calamity.test.js', pendingMigration: true,
-    rationale: 'EP-2D MEASURED, NOT MIGRATED — and the instrument is VERIFIED SOUND. The '
+  { file: 'tests/domain/calamity.test.js', pendingMigration: false,
+    rationale: 'EP-2D MEASURED 2026-07-27; owner-ratified and MIGRATED 2026-07-28. The '
       + '50-year multi-seed realm soak asserts a realized strike interval in [10, 20] years, '
       + 'i.e. totalStrikes in [100, 200] over 15,053 eligible settlement-year rolls. '
       + 'Measured 2026-07-27: 147 strikes at the test\'s own 40 seeds; 1317/151,372 = '
       + '0.87% per eligible roll at 400 seeds (the analytic hazard is 1/(15*8) = 0.833%). '
-      + 'Both live bounds already carry power: upper 200 = 6.06 sigma, lower 100 = 2.72 '
-      + 'sigma. The BLOCKER is the helper, not the bound: envelopeBound(direction:"lower") '
-      + 'starts its search at n-1 and walks down, so at n=15,053 it is O(n^2) — the upper '
-      + 'derivation alone costs 2.8 s and the lower does not finish. Derived upper is 169 '
-      + '(a tightening); the lower would be ~96 (a loosening, so 100 would stay). Cure is a '
-      + 'helper change (start the search at the mean, or bisect) and belongs to EP-1.' },
-  { file: 'tests/domain/distribution.test.js', pendingMigration: true,
+      + 'The repaired lower-tail helper now completes at this scale. The upper bound tightens '
+      + '200 -> 169; the derived lower 96 would be looser, so the owner-ratified live 100 '
+      + 'stays registered as a stricter override. The test pins the exact eligible-roll denominator.' },
+  { file: 'tests/domain/distribution.test.js', pendingMigration: false,
     rationale: 'EP-2D ROSTER EXTENSION 2026-07-27 (a tightening: this file is the "generous '
       + 'thresholds at N=40" precedent the program was named for, and it was missing). '
-      + 'MEASURED, NOT MIGRATED, because the measurement says the thresholds are not merely '
-      + 'generous — SIX of them bound events that never happen. At N=400: towns with '
+      + 'Owner-ratified as TOTALITY and MIGRATED 2026-07-28. SIX former rate thresholds '
+      + 'bound events that never happen. At N=400: towns with '
       + 'enforcement 400/400, cities with enforcement 400/400, cities with multiple factions '
       + '400/400, towns with formal authority 400/400, cities with any hook 400/400, '
-      + 'isolated trade-gate violations 0/400. A binomial envelope is degenerate at rate 0 '
-      + 'or 1, so deriving would manufacture certainty (0/400 does not license "at most 1 '
-      + 'of 40"; the rule of three puts the ceiling at 3 per 400). The honest fix is to '
-      + 'restate them as TOTALITY invariants, which changes what each test claims and is '
-      + 'therefore the owner\'s call, not an agent\'s. The three non-degenerate bounds '
+      + 'isolated trade-gate violations 0/400. They now assert exact totality instead of '
+      + 'manufacturing a degenerate binomial envelope. The three non-degenerate bounds '
       + '(cities definingCrisis 399/400; city stable-chain share 0.548; town history-beat '
       + 'fill 0.950) all divide by an outcome or span correlated slots within one '
       + 'settlement, so they need the fixed-n treatment too.' },
@@ -266,8 +263,12 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
  * ancientRuinsGeneration, roadsMissions — EP-2D's recorded follow-up candidates), all
  * three arriving MIGRATED rather than pending, so the roster grew 12 -> 15 while the
  * pending column did not move. A row may only ever join this file already derived.
+ * 3 -> 1 on 2026-07-28 after owner delegation: calamity migrated to a two-sided
+ * strike-count envelope, and distribution.test's six degenerate 0/400 or 400/400
+ * rates became explicit totality invariants. The seed-family mismatch instrument
+ * remains the sole pending row.
  */
-const PENDING_MIGRATION_BASELINE = 3;
+const PENDING_MIGRATION_BASELINE = 1;
 
 /** A file counts as migrated when it reads its bound from the canonical helper. */
 function readsFromHelper(relPath) {
@@ -314,6 +315,17 @@ function validateEnvelopeEntry(entry) {
   check(typeof entry?.measurementContext === 'string' && entry.measurementContext.length > 0,
     'measurementContext must name the tree/commit the measurement was taken in');
   check(typeof entry?.loosenPending === 'boolean', 'loosenPending must be an explicit boolean');
+  check(entry?.ratifiedStricterBound === undefined
+    || typeof entry.ratifiedStricterBound === 'boolean',
+    'ratifiedStricterBound, when present, must be a boolean');
+  check(!(entry?.loosenPending && entry?.ratifiedStricterBound),
+    'a stricter live bound cannot be both pending and ratified');
+  if (entry?.ratifiedStricterBound) {
+    check(
+      typeof entry?.notes === 'string' && /ratif/i.test(entry.notes),
+      'ratifiedStricterBound requires a note that records the ratification',
+    );
+  }
 
   if (problems.length) return problems;
 
@@ -322,21 +334,24 @@ function validateEnvelopeEntry(entry) {
   });
 
   // (a) DERIVATION.
-  if (entry.loosenPending) {
+  if (entry.loosenPending || entry.ratifiedStricterBound) {
     const tighter = entry.direction === 'upper'
       ? entry.bound < derived.bound
       : entry.bound > derived.bound;
+    const disposition = entry.ratifiedStricterBound
+      ? 'ratifiedStricterBound'
+      : 'loosenPending';
     check(tighter,
-      `loosenPending is set but the registered bound ${entry.bound} is not TIGHTER than the `
-      + `derivation ${derived.bound}. loosenPending exists only to keep a tighter live bound in `
-      + `force while its loosening waits on the owner; if the derivation is tighter, adopt it and `
-      + `clear the flag.`);
+      `${disposition} is set but the registered bound ${entry.bound} is not TIGHTER than the `
+      + `derivation ${derived.bound}. This disposition exists only to keep a tighter live bound `
+      + `in force; if the derivation is tighter, adopt it and clear the flag.`);
   } else {
     check(entry.bound === derived.bound,
       `registered bound ${entry.bound} does not match the derivation ${derived.bound} `
       + `(n=${entry.n}, baseRate=${entry.baseRate}, ${entry.direction}, alpha=${entry.alpha}). `
       + `Either re-derive the bound, or — if the derivation is LOOSER and you are keeping the `
-      + `current bound — set loosenPending and queue the loosening for the owner.`);
+      + `current bound — set loosenPending while the choice is open, or ratifiedStricterBound `
+      + `after the owner retains it.`);
   }
 
   // (b) POWER, measured on the REGISTERED bound (the one the test actually asserts).
@@ -541,6 +556,15 @@ describe('envelope-entry validator (self-test on synthetic entries)', () => {
     expect(validateEnvelopeEntry(sound)).toEqual([]);
   });
 
+  test('an owner-ratified stricter bound passes without remaining pending', () => {
+    expect(validateEnvelopeEntry({
+      ...sound,
+      loosenPending: false,
+      ratifiedStricterBound: true,
+      notes: 'Owner-ratified stricter bound retained.',
+    })).toEqual([]);
+  });
+
   /** Every rule, each proven by the entry that breaks exactly it. */
   const caught = (overrides) => validateEnvelopeEntry({ ...sound, ...overrides }).join(` | `);
 
@@ -557,11 +581,14 @@ describe('envelope-entry validator (self-test on synthetic entries)', () => {
     expect(caught({ baseMeasuredAt: 'last week' })).toMatch(/ISO date/);
     expect(caught({ measurementContext: '' })).toMatch(/measurementContext/);
     expect(caught({ loosenPending: undefined })).toMatch(/loosenPending must be an explicit boolean/);
+    expect(caught({ ratifiedStricterBound: 'yes' })).toMatch(/must be a boolean/);
+    expect(caught({ ratifiedStricterBound: true })).toMatch(/both pending and ratified/);
   });
 
   test('derivation failures are caught', () => {
     // loosenPending false demands exact agreement; 40 != the alpha=1e-4 derivation of 48.
-    expect(caught({ loosenPending: false })).toMatch(/does not match the derivation 48/);
+    expect(caught({ loosenPending: false, ratifiedStricterBound: false }))
+      .toMatch(/does not match the derivation 48/);
     // The flag keeps a TIGHTER live bound in force; it must not launder a looser one.
     expect(caught({ bound: 52, margin: 4.982 })).toMatch(/is not TIGHTER than the derivation/);
     expect(caught({ margin: 9.9 })).toMatch(/recorded margin 9.9 disagrees/);

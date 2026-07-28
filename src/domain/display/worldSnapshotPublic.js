@@ -320,8 +320,10 @@ function publicTradeWars(worldState, regionalGraph, nameById) {
 }
 
 /**
- * Public disposition standings — the cross-settlement win/loss aggregate (no covert
- * tier). Net-zero/absent ledgers yield []. Ids + names + coarse counts only.
+ * Public realm contest records — the cross-settlement win/loss aggregate for
+ * resolved sieges, defenses, conquests, and primary-supplier flips (no covert
+ * tier). Zero-count/absent ledgers yield []. Ids + names + coarse counts only;
+ * the record does not represent time at war or casualties.
  * @param {any} worldState
  * @param {Map<string, string>} nameById
  * @returns {Array<{ id: string, name: string, wins: number, losses: number, score: number }>}

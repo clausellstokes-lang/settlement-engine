@@ -27,6 +27,8 @@ const SAMPLE_INTERP = Object.freeze({
   label: 'Iron', labelLower: 'iron',
   parent: 'Oldmarch', count: 2, countS: 's', dispersed: 120, debit: 30,
   resource: 'silver', a: 'Ashfield', b: 'Brookend', pop: 340,
+  goal: 'secure office', role: 'heir', previous: 'town|local|',
+  next: 'town|vassal|war pressure', ideal: 'order', flaw: 'pride',
   // THE ROADS tokens (ENGINE LIFT #5) — the roads.* pools read these.
   npc: 'Sir Aldric', home: 'Ashford', dest: 'Briar', captor: 'Corvin', purpose: 'trade',
   payer: 'Wexbridge', // D-5 third-party-ransom voice — the paying court's name

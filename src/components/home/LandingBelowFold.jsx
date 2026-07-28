@@ -1,7 +1,7 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
- * Welcome page: the salt-road journey 01·Forge → 02·Brief → 03·Voice →
- * 04·Realm → 05·Map → 06·Commons → 07·Set out + footer. Lazy-loaded as ONE
+ * Welcome page: the salt-road journey 01·Forge → 02·Visual → 03·Voice →
+ * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE
  * chunk by HomeLanding.jsx so the hero paints first (LCP).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
@@ -321,10 +321,9 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
       <div ref={rootRef} style={{ position: 'relative', zIndex: 1 }}>
         {/* leg 1 · desk → thorp */}
         <div className="sf-welcome-leg" data-welcome-leg="0" aria-hidden="true" />
-        {/* ══ 01 · Forge + the drawn town. Item 9 (owner 2026-07-21): the §05 map
-            section is MERGED into this card — forge first, the drawn town second, copy
-            verbatim. Item 10: translucent cream (sf-landing-scene-cream) with no painted
-            scene, so the growth film reads through (stop 1 · thorp). ══ */}
+        {/* ══ 01 · Forge + the sample draft. Translucent cream
+            (sf-landing-scene-cream) with no painted scene, so the growth film
+            reads through (stop 1 · thorp). ══ */}
       <section
         id="forge"
         aria-labelledby="sf-forge-title"
@@ -354,10 +353,9 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
 
         {/* leg 2 · thorp → hamlet */}
         <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
-        {/* ══ 02 · The visual — the drawn town (owner order 2026-07-22: the old
-            "The brief" card is replaced entirely by the v2 map card content, which
-            moved here out of §01. Section id stays "brief" for anchor stability;
-            the visible title is now "The visual"). Plain parchment (stop 2 · hamlet). ══ */}
+        {/* ══ 02 · The visual — the drawn town. The old standalone map waypoint
+            is retired; its v2 map artifact lives here. Section id stays "brief"
+            for anchor stability. Plain parchment (stop 2 · hamlet). ══ */}
       <section id="brief" aria-labelledby="sf-visual-title" className="sf-landing-scene-cream" style={{ ...pad }}>
         <Waypoint pill={tl('brief.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -441,12 +439,12 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <RealmMapCard />
       </section>
 
-        {/* leg 5 · town → city. Item 9 merged the §05 map card into §01 Forge, so
-            this travel leg (the film still has six: data-welcome-leg 0..5) now leads
-            straight into §06 The commons at the city stop. */}
+        {/* leg 5 · town → city. With the map artifact folded into §02, this
+            travel leg (the film still has six: data-welcome-leg 0..5) leads
+            straight into §05 The commons at the city stop. */}
         <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
 
-      {/* ══ 06 · The commons — translucent cream (item 10) ══ */}
+      {/* ══ 05 · The commons — translucent cream (item 10) ══ */}
       <section id="commons" aria-labelledby="sf-commons-title" className="sf-landing-scene-cream" style={{ ...pad }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -463,7 +461,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
 
         {/* leg 6 · city → metropolis */}
         <div className="sf-welcome-leg" data-welcome-leg="5" aria-hidden="true" />
-        {/* ══ 07 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
+        {/* ══ 06 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"

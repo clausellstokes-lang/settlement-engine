@@ -36,23 +36,13 @@
  * BASELINE HONESTY: every number in BASELINE below was MEASURED on this exact
  * fixture (seed 'spell-census-seed', 30 one_month ticks). The known standing
  * breaks it freezes (burn-down list):
- *   · letter.tickSpeak ×1 — the span line prints raw ticks: "(the record from
- *     tick 0 through 31)" (letterToPlainText)
- *   · letter.camelKey ×37 — the R-16 'world deepened' section prints raw
- *     simulationRules flag keys (warLayerEnabled, …) as prose bullets, ONE PER
- *     LIT FLAG — so this cell deliberately moves with the preset's flag count: a
- *     future full_simulation flag reds it by +1, which is a REAL new leak
- *     instance, not a false positive
- *   · chronicle.rawId ×32 / decrees.rawId ×3 — deputy-diary and decree-cone
- *     `reasons` prose embeds raw condition archetypes ("active condition:
- *     regional_criminal_pressure, regional_route_disruption"). BOTH cells read
- *     the SAME pressureModel.js `active condition: ${…join}` reason (raw
- *     archetype ids stored on the recorded outcome, surfaced verbatim by
- *     deputysDiary AND the decree cone) — so decrees.rawId cannot fall without
- *     also shifting chronicle.rawId. The single cure (humanize the archetypes at
- *     the source) is bundled into the owner's ONE REGEN (tranche 4); until then
- *     BOTH cells stay pinned. (Proven: humanizing pressureModel drops rawId in
- *     both surfaces together.)
+ *   · letter.tickSpeak / letter.camelKey — CURED at THE ONE REGEN: the span uses
+ *     calendar labels and the R-16 bullets cross humanizeFlagKey.
+ *   · decrees.rawId — CURED at THE ONE REGEN: pressureModel humanizes condition
+ *     archetypes at its reader-facing reason boundary.
+ *   · chronicle.rawId ×6 — the same pressure fix retired 26 of the former 32;
+ *     the six remaining ids originate in other chronicle sources and stay
+ *     pinned as the measured residual, not charged to pressureModel.
  *   · chronicle.camelKey — CURED (was ×3): the embargo/lever reason no longer
  *     leaks the raw relationshipPatch keys ("resentment/tradeBalance"); the M9a
  *     lever line now humanizes them ("resentment/trade balance") via
@@ -296,9 +286,9 @@ const SURFACES = Object.freeze({
 
 // ── THE SHRINK-ONLY BASELINE (measured; see the header's burn-down list) ─────
 const BASELINE = Object.freeze({
-  letter: { rawId: 0, tickSpeak: 1, camelKey: 37, jsonFragment: 0, softwareVoice: 0 },
-  chronicle: { rawId: 32, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
-  decrees: { rawId: 3, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
+  letter: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
+  chronicle: { rawId: 6, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
+  decrees: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   dossier: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   roadScene: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   causeWalk: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },

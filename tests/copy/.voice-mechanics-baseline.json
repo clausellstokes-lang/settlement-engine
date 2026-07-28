@@ -1,12 +1,4 @@
 {
- "src/data/roadsProse.js": {
-  "em": 15,
-  "bang": 0
- },
- "src/data/traditionProse.js": {
-  "em": 17,
-  "bang": 0
- },
  "src/domain/activeConditions.js": {
   "em": 5,
   "bang": 0
@@ -73,10 +65,6 @@
  },
  "src/domain/display/causeLifecycleVocabulary.js": {
   "em": 4,
-  "bang": 0
- },
- "src/domain/display/chroniclersLetter.js": {
-  "em": 3,
   "bang": 0
  },
  "src/domain/display/credibilityRead.js": {
@@ -297,10 +285,6 @@
  },
  "src/domain/worldPulse/decisionTier.js": {
   "em": 2,
-  "bang": 0
- },
- "src/domain/worldPulse/eventProse.js": {
-  "em": 148,
   "bang": 0
  },
  "src/domain/worldPulse/generosityNews.js": {

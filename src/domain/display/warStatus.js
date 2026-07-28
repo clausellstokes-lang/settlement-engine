@@ -30,6 +30,14 @@ import { isLiveWarFront } from '../worldPulse/warFrontReads.js';
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
+// This ledger is broader than a war score. It ratchets every decisive
+// settlement-vs-settlement contest the engine currently settles: an abandoned
+// siege, a successful defense, a conquest, or a primary-supplier flip. Keep the
+// label and definition shared across the Realm, Library, admin, and export
+// surfaces so W/L is never mistaken for time at war or casualty accounting.
+export const REALM_CONTEST_RECORD_LABEL = 'Realm contest record';
+export const REALM_CONTEST_RECORD_HELP = 'Resolved siege, defense, conquest, and primary-supplier-flip outcomes; not time at war or casualties.';
+
 /**
  * The LIVE war_front channels on a regional graph, as { from, to } pairs.
  * Tolerates an absent graph / channels array.
@@ -216,9 +224,11 @@ function commodityLabelsByPair(graph) {
 }
 
 /**
- * The cross-settlement disposition standings: settlements with a net win/loss
- * record, codepoint-sorted by id. A net-zero (or absent) ledger yields []; this
- * surfaces the AGGRESSORS and the BEATEN, not every settlement.
+ * The realm contest record: settlements with a win/loss entry from resolved
+ * sieges, defenses, conquests, or primary-supplier flips, codepoint-sorted by
+ * id. A zero-count (or absent) ledger yields []; this surfaces settlements that
+ * have actually resolved a contest, not every settlement. This is NOT a measure
+ * of time at war or casualties.
  * @param {any} worldState
  * @returns {Array<{ id: string, wins: number, losses: number, score: number }>}
  */

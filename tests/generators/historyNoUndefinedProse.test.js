@@ -87,7 +87,8 @@ describe('history prose never leaks the literal "undefined"', () => {
         }
       }
     }
-    expect(generated).toBeGreaterThan(80);
+    expect(generated, 'every config × seed case must generate; a throw is a test failure, not a skipped sample')
+      .toBe(192);
     expect(offenders, `history prose contained "undefined":\n${JSON.stringify(offenders.slice(0, 5), null, 2)}`).toHaveLength(0);
   }, 60_000);
 });

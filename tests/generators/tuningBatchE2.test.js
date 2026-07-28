@@ -125,10 +125,10 @@ describe('E2.1 — faction descriptor pools cover crafts and noble', () => {
   });
 });
 
-describe('E2.2 — no bare variation selector (U+FE0F) icons', () => {
-  it('every stress-type icon is free of the lone VS16 glyph', () => {
+describe('E2.2 — stress-type icon contract', () => {
+  it('every stress-type icon is exactly empty', () => {
     for (const [key, st] of Object.entries(STRESS_TYPE_MAP)) {
-      expect(st.icon || '', `stress ${key} carries a bare U+FE0F`).not.toContain('️');
+      expect(st.icon, `stress ${key} unexpectedly carries an icon`).toBe('');
     }
   });
 });

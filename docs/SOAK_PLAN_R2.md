@@ -11,7 +11,7 @@ three things that were previously conflated:
 A passing process is not automatically a certification. The composed soak proves
 finite arithmetic, same-seed replay, different-seed divergence, bounded population,
 a generous serialized-state envelope, and execution in a real isolated Node worker
-thread. Contract v1 now also records and evaluates mover activity, event rhythm,
+thread. Contract v2 now also records and evaluates mover activity, event rhythm,
 arc polarity, state motion, neighbour propagation, succession, attention, dark
 controls, and cross-family composition.
 
@@ -116,7 +116,7 @@ time. Browser startup and device-specific worker duration remain unmeasured unti
 the production browser journey can exercise a representative saved realm without
 adding a test-only product API or a second simulation path.
 
-## Behavioral contract v1
+## Behavioral contract v2
 
 The machine-readable source of truth is
 `src/domain/certification/behavioralContract.js`. These gates were fixed before a
@@ -130,7 +130,7 @@ equivalent exposure.
 | Property | Release gate |
 |---|---|
 | Mover activity | Ten broad families (`pressure`, `place`, `population`, `economy`, `politics`, `war`, `faith`, `people`, `constructive`, `knowledge`) each produce at least 0.25 classified events per 100 settlement-years; each appears in the final decade of at least 25% of century cases; no family exceeds 65% of classified activity. Unknown outcomes remain unclassified rather than being forced into a passing family. |
-| Event tempo and diversity | 0.25–52 selected events per settlement-year; 0.25–20 major events per settlement-decade; at least 12 event types; effective Shannon diversity at least 4; no type exceeds 55% of events. |
+| Event tempo and diversity | 0.25–52 selected events per settlement-year; 0.25–20 major events per settlement-decade; at least 12 event types; effective inverse-Simpson diversity at least 4; no type exceeds 55% of events. |
 | Constructive and destructive arcs | Each polarity produces at least 0.25 explicit arc signals per 100 settlement-years, appears in at least 25% of century cases, and remains present in the final decade. Classification uses committed event vocabulary; a generic positive population delta is not promoted into an "arc." |
 | State motion | Population changes by at least 0.25% on 5% of settlement-year transitions (2% in the final decade); prosperity moves a canonical rung on 3% (1% final decade); governing identity or faction-share distance moves on 2% (1% final decade); median per-settlement normalized power-entropy range is at least 0.03. |
 | Neighbour perturbation | Three same-seed probes across at least two scale bands and two seed families. One source settlement begins at +10% population; the source is excluded from the distance. Non-source state distance must reach 0.001 by year 30, be positive at two checkpoints, and retain at least half its observed peak. Release probes are fixed at 30y/12/seed1, 30y/12/seed2, and 100y/4/seed1 (the latter compares its first 30 years); the research seed1 probe runs the full 300 years. |
@@ -148,6 +148,26 @@ that two unrelated seeds differ.
 The anomaly gate and the cross-family gate are intentionally paired. A busy world
 does not earn credit for composition merely by emitting many simultaneous events:
 the outcome must name a causal parent in a different mover family.
+
+### Preliminary observer check on the launch-tail source
+
+A one-year, four-settlement diagnostic was run after the audit-only raw
+Wizard-News capture was added. It is **not** a release-matrix cell and cannot
+earn or fail the product certificate, but it confirms that capped terminal feed
+state no longer hides post-apply outcomes. The observer retained 52 post-apply
+receipts and found 21 constructive mover signals (23 constructive arcs total);
+the earlier zero-constructive reading was instrumentation loss. Knowledge
+remained at zero.
+
+The same diagnostic also exposed source behavior that must not be normalized
+away: 1,198 selected events equal 299.5 events per settlement-year against the
+signed maximum of 52, and 25 authoritative major events equal 62.5 per
+settlement-decade against the signed maximum of 20. It recorded 239 explicit
+cross-family edges over four ordered family pairs, plus 18 succession attempts
+and zero completions. The correct next step is source-level tuning followed by
+the complete release matrix; the thresholds remain unchanged. Receipt SHA-256:
+`38f680d19ad993ea6902776200d056d40b6c5ccc05497dbc5cc9a1ee785b5613`
+(behavioral observation schema v2).
 
 ## Human Chronicle receipt
 

@@ -6,10 +6,10 @@
  *
  * MIRROR-ONLY + SELF-GATING (the byte-identical-when-absent law, DESIGN_TRADITIONS
  * §12): it reads the `settlement.traditions` MIRROR the T-2 mover writes — NOT the
- * genesis preview — so a draft, or any export while the traditions layer is DARK
- * (the flag unlit ⇒ no mirror anywhere), produces a PDF where this chapter never
- * appears, byte-identical to today. It lights only for a lit campaign's settlements
- * once traditionsEnabled turns on at THE ONE REGEN (a declared additive section).
+ * genesis preview — so a draft, or any export under a preset where the traditions
+ * layer is DARK (the flag unlit ⇒ no mirror anywhere), produces a PDF where this
+ * chapter never appears. T5 lights traditionsEnabled only in the three deep presets;
+ * the chapter remains a declared additive section for settlements with a mirror.
  *
  * The register uses the TEXT motif label (element · act), not the tab's unicode
  * glyph — the embedded PDF fonts do not cover the dingbat set, so a glyph would

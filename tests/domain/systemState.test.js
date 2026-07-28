@@ -114,7 +114,7 @@ describe('deriveSystemState', () => {
   });
 
   test('plagued region raises external threat over safe region', () => {
-    const safe = deriveSystemState({ config: { monsterThreat: 'civilized' } });
+    const safe = deriveSystemState({ config: { monsterThreat: 'heartland' } });
     const plagued = deriveSystemState({ config: { monsterThreat: 'plagued' } });
     expect(plagued.externalThreat.value).toBeGreaterThan(safe.externalThreat.value);
   });

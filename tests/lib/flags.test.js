@@ -95,6 +95,10 @@ describe('getAllFlags()', () => {
 });
 
 describe('FLAGS registry', () => {
+  it('does not expose the retired journey media-set comparison toggle', () => {
+    expect(FLAGS).not.toHaveProperty('loadingJourneySetBg');
+  });
+
   it('every flag has a default + description', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(typeof decl.default).toBe('boolean');

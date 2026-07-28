@@ -46,7 +46,6 @@ const EDGE = 0.08;
  */
 export function JourneyFilmView({
   frame,
-  set = 'bg',
   legsToPlay = 6,
   scrimOpacity = 0.5,
   filmEnabled = true,
@@ -79,10 +78,11 @@ export function JourneyFilmView({
 
   // ── The scrub: keep the current leg paused, seek to legT * duration ─────────
   const videoRef = useRef(null);
-  const [videoReady, setVideoReady] = useState(false);
-  // Reset readiness whenever the leg (or media set) changes — the fresh <video>
-  // must re-report metadata before we trust its duration; the still covers the gap.
-  useEffect(() => { setVideoReady(false); }, [currentLegN, set]);
+  // Readiness belongs to one numbered leg. Deriving the boolean from that id
+  // resets it immediately on a leg change without a synchronous state-writing
+  // effect; the fresh video must report readiness for its own number.
+  const [readyLeg, setReadyLeg] = useState(null);
+  const videoReady = readyLeg === currentLegN;
   useEffect(() => {
     const v = videoRef.current;
     if (!v || !videoReady) return;
@@ -95,7 +95,7 @@ export function JourneyFilmView({
     }
   }, [legT, videoReady]);
 
-  const floorUrl = stopStillUrl(set, floorStill);
+  const floorUrl = stopStillUrl(floorStill);
   const videoOpacity = showVideo && videoReady
     ? Math.max(0, Math.min(1, Math.min(legT / EDGE, (1 - legT) / EDGE, 1)))
     : 0;
@@ -110,7 +110,7 @@ export function JourneyFilmView({
     >
       {/* z0 — THE FLOOR: the crisp stop still, always rendered (film-independent). */}
       <img
-        key={`still-${set}-${floorStill}`}
+        key={`still-${floorStill}`}
         src={floorUrl}
         alt=""
         style={{ ...fill, animation: 'sf-fadeIn 0.4s ease-out' }}
@@ -120,16 +120,16 @@ export function JourneyFilmView({
               and fades at the leg's mouth/end so the still is the stop frame. */}
       {showVideo && (
         <video
-          key={`leg-${set}-${currentLegN}`}
+          key={`leg-${currentLegN}`}
           ref={videoRef}
-          src={legVideoUrl(set, currentLegN)}
+          src={legVideoUrl(currentLegN)}
           muted
           playsInline
           preload="auto"
           aria-hidden="true"
-          onLoadedMetadata={() => setVideoReady(true)}
-          onCanPlay={() => setVideoReady(true)}
-          onError={() => setVideoReady(false)}
+          onLoadedMetadata={() => setReadyLeg(currentLegN)}
+          onCanPlay={() => setReadyLeg(currentLegN)}
+          onError={() => setReadyLeg(null)}
           style={{ ...fill, opacity: videoOpacity, transition: 'opacity 0.12s linear' }}
         />
       )}
@@ -138,8 +138,8 @@ export function JourneyFilmView({
           element; 1px so it never paints). */}
       {showVideo && nextLegN && (
         <video
-          key={`prefetch-${set}-${nextLegN}`}
-          src={legVideoUrl(set, nextLegN)}
+          key={`prefetch-${nextLegN}`}
+          src={legVideoUrl(nextLegN)}
           muted
           playsInline
           preload="auto"
@@ -163,7 +163,6 @@ export function JourneyFilmView({
  * and rendered DOM are unchanged from Slice C2L (its tests bind to both).
  */
 export default function JourneyFilm({
-  set = 'bg',
   legsToPlay = 6,
   arrived = false,
   scriptWindowMs = 6000,
@@ -180,7 +179,6 @@ export default function JourneyFilm({
   return (
     <JourneyFilmView
       frame={frame}
-      set={set}
       legsToPlay={legsToPlay}
       scrimOpacity={scrimOpacity}
     />

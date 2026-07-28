@@ -4,7 +4,7 @@
  * Reads the LIVE worldState ledgers (deployments / tradeWarState / dispositionStats)
  * + the live regional graph (war_front coalitions) through the pure
  * domain/display/warStatus helpers and renders the current war / siege /
- * trade-war / disposition standings. This is the LIVE read-path the plan flags as
+ * trade-war / realm contest records. This is the LIVE read-path the plan flags as
  * missing — the cards reflect the post-pulse world, not stale generation fields.
  *
  * INERT WHEN ABSENT: hasLiveWarState gates the whole block; a no-war campaign
@@ -21,6 +21,8 @@ import {
   hasLiveWarState,
   liveSieges,
   liveTradeWars,
+  REALM_CONTEST_RECORD_HELP,
+  REALM_CONTEST_RECORD_LABEL,
 } from '../../domain/display/warStatus.js';
 import { liveBlockades, hasLiveBlockades } from '../../domain/display/navalDisplay.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
@@ -169,7 +171,10 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
 
         {standings.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            <Subhead label="War standings" />
+            <Subhead label={REALM_CONTEST_RECORD_LABEL} />
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>
+              {REALM_CONTEST_RECORD_HELP}
+            </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
               {standings.map(s => {
                 const aggressor = s.score > 0;

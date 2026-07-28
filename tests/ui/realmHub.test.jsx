@@ -58,6 +58,7 @@ const simulatedCampaign = {
     calendar: { month: 9, year: 3, season: 'autumn' },
     deployments: { s1: { targetId: 's2', sinceTick: 4, role: 'siege' } },
     warExhaustion: { s1: 0.72 },
+    dispositionStats: { s1: { wins: 2, losses: 1, score: 1 } },
     pantheon: { 'deity:Vol': { tier: 'major', seats: 5 } },
   },
 };
@@ -75,6 +76,10 @@ describe('RealmDashboard — live summary (premium)', () => {
     expect(screen.getByText(/1 siege/)).toBeTruthy();
     // The dominant faith reads off the pantheon ledger.
     expect(screen.getByText('Vol')).toBeTruthy();
+    // Realm-wide W/L is explicitly a contest record, not a war-duration or
+    // casualty counter; its tooltip carries the definition.
+    expect(screen.getByText('Realm contest record')).toBeTruthy();
+    expect(screen.getByText('2W / 1L').getAttribute('title')).toContain('not time at war or casualties');
     // The war-weariest power surfaces from warExhaustionStandings. This render
     // passes no nameById, so the name lookup misses — and the fallback must be
     // the in-fiction generic, never the raw id (C3 finding 12; this line used

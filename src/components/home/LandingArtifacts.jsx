@@ -379,7 +379,7 @@ export function RealmMapCard() {
   );
 }
 
-// ── 05 · The map — THE MAP WAYPOINT's frozen lens plates (W-DOC, brief §4) ────
+// ── Map artifact — frozen lens plates folded into 02 · The visual ─────────────
 // The plates are FROZEN REAL ENGINE OUTPUT: scripts/generate-landing-map-
 // plates.mjs replays the fixture's exact seed + config (drift-gated: the replay
 // must still produce the fixture town), renders the v2 layout in each lens, and

@@ -24,7 +24,10 @@ import {
 } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { evaluateBehavioralCertification } from '../../src/domain/certification/behavioralContract.js';
+import {
+  BEHAVIORAL_OBSERVATION_VERSION,
+  evaluateBehavioralCertification,
+} from '../../src/domain/certification/behavioralContract.js';
 import { CERTIFICATION_REQUIRED_PROPERTY_KEYS } from '../../src/domain/certification/certificationSchema.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -248,7 +251,7 @@ export function isPassingWholeWorldReceipt(receipt) {
     receipt?.schemaVersion === 4
     && receipt?.kind === 'whole_world_soak'
     && receipt?.passed === true
-    && receipt?.behavioral?.schemaVersion === 1
+    && receipt?.behavioral?.schemaVersion === BEHAVIORAL_OBSERVATION_VERSION
     && receipt?.behavioral?.kind === 'whole_world_behavioral_observation'
     && Array.isArray(receipt?.behavioral?.yearly)
     && receipt.behavioral.yearly.length === receipt?.years
