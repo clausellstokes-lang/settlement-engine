@@ -21,39 +21,18 @@ import {
   isEdited,
 } from '../../domain/userEdits.js';
 import Button from '../primitives/Button.jsx';
+import { PROSE_FIELD_LABELS } from './proseFieldLabels.js';
 import { BORDER, FS, SP, swatch, serif_ } from '../theme.js';
 
 const MUTED = swatch.inkMag3;
 
-/**
- * Display labels for every queue-wired prose path, per entity kind. One string
- * each; kept in exact lockstep with QUEUE_WIRED_PROSE_PATHS by
- * tests/components/workbenchProseEditor.test.jsx.
- */
-export const PROSE_FIELD_LABELS = Object.freeze({
-  faction: Object.freeze([
-    { path: 'desc', label: 'Description' },
-  ]),
-  institution: Object.freeze([
-    { path: 'desc', label: 'Description' },
-  ]),
-  settlement: Object.freeze([
-    { path: 'arrivalScene', label: 'Arrival scene' },
-    { path: 'pressureSentence', label: 'Pressure summary' },
-    { path: 'settlementReason', label: 'Origin note' },
-    { path: 'prominentRelationship.phrasing', label: 'Prominent relationship' },
-    { path: 'history.historicalCharacter', label: 'Historical character' },
-    { path: 'history.founding.reason', label: 'Founding reason' },
-    { path: 'history.founding.initialChallenge', label: 'Founding challenge' },
-    { path: 'history.founding.overcoming', label: 'How the challenge was overcome' },
-    { path: 'history.founding.stressNote', label: 'Founding stress note' },
-    { path: 'history.founding.foundedBy', label: 'Founded by' },
-    { path: 'economicViability.summary', label: 'Outlook summary' },
-    { path: 'economicState.safetyProfile.safetyDesc', label: 'Safety, as first surveyed' },
-    { path: 'economicState.safetyProfile.guardEffectivenessDesc', label: 'Guard effectiveness, as first surveyed' },
-    { path: 'economicState.safetyProfile.economicDragDesc', label: 'Economic drag, as first surveyed' },
-  ]),
-});
+// The display-label vocabulary moved to the zero-import sibling leaf
+// (proseFieldLabels.js) when it gained its SECOND consumer: the Versions-tab
+// diff view names a changed field with the same words this editor offers, and
+// a lazy diff leaf importing this component would drag the whole authoring
+// panel into its chunk. Re-exported here so this file stays the import home
+// its existing consumers and its lockstep pin already use.
+export { PROSE_FIELD_LABELS } from './proseFieldLabels.js';
 
 /** Render one effective value as editable text (settlementReason is an array). */
 function asText(value) {

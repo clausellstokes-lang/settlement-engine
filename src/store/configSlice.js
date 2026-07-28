@@ -185,11 +185,16 @@ export const createConfigSlice = (set, get) => ({
     return unknownKeys.length ? { ok: true, ignoredKeys: unknownKeys } : { ok: true };
   },
 
-  resetConfig: () =>
-    set(state => {
-      state.config = { ...DEFAULT_CONFIG };
-      state.configExplicitFields = {};
-    }),
+  // RETIRED (R-5b, owner queue #21): `resetConfig`. A whole-object "restore the
+  // generation settings to defaults" that no surface offered — the wizard resets a
+  // FIELD at a time through updateConfig, and the Create flow's whole-bag reset is
+  // resetAllToggles over the toggle bags, not this. Its retirement pays a structural
+  // dividend beyond the dead row: it was one of the enumerated EXEMPTIONS that
+  // bypassed R-3's validated door, so with it gone `updateConfig` is the ONE writer
+  // of state.config in the entire store, exactly what the R-4 single-door law wanted
+  // (tests/store/configDirectWriterExemptions.scan.test.js now enumerates a door and
+  // zero exemptions). Re-adding a reset means routing it THROUGH updateConfig, or
+  // re-earning an exemption in that scan with a written reason.
 
   setWizardStep: (step) =>
     set(state => { state.wizardStep = step; }),

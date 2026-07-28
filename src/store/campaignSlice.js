@@ -924,14 +924,16 @@ export const createCampaignSlice = (set, get) => {
     return ensureWizardNewsFeed(c?.wizardNews);
   },
 
-  clearCampaignWizardNews: (campaignId) =>
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      c.wizardNews = ensureWizardNewsFeed();
-      c.updatedAt = new Date().toISOString();
-      persistCampaignState(state, campaignId);
-    }),
+  // RETIRED (R-5b, owner queue #21): `clearCampaignWizardNews`. It blanked a
+  // campaign's whole news feed in one unrecoverable write — the registry row said
+  // undoState:'none' honestly — and nothing called it. Under the NEWS ADDRESS LAW
+  // the feed is the campaign's Herald record, not scratch UI state: every item
+  // carries its address chain and its recorded reason, so a one-click "forget all
+  // of that happened" door is a history eraser, and it had no confirmation gate
+  // because it had no surface. The feed's LIVE lifecycle is untouched —
+  // ensureCampaignWizardNews creates it, advanceWizardNewsFeed ages it, and the
+  // per-item read path (getCampaignWizardNews) still serves it. Reinstating a
+  // clear means designing the confirmation and the recovery first.
 
   // V-17 THE CAMPAIGN IMPORT — commit confirmed typed table-event records into the
   // campaign's news feed as source:'table' HISTORY at each record's DM-chosen tick.

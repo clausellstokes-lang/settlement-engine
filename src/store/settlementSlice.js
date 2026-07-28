@@ -2160,16 +2160,16 @@ export const createSettlementSlice = (set, get) => ({
     });
   },
 
-  /** Force a re-derivation of systemState from the current settlement.
-   *  Useful after an out-of-band edit that mutates settlement directly. */
-  refreshSystemState: () => set(state => {
-    if (!state.settlement) return;
-    try {
-      state.systemState = deriveSystemState(state.settlement);
-    } catch (e) {
-      console.warn('[settlementSlice] refreshSystemState failed:', e);
-    }
-  }),
+  // RETIRED (R-5b, owner queue #21): `refreshSystemState`. It advertised a
+  // "force a re-derivation after an out-of-band edit" door that no product path
+  // ever opened — its only callers were eight TEST HARNESSES using it to seed a
+  // store, which is how a registered op can look busy while being unreachable.
+  // There is no out-of-band edit to recover from: every writer that changes the
+  // settlement re-derives systemState in the same set() (generateSettlement,
+  // applyEvent, undoLastEvent, revertToSnapshot, hydrateFromSave). The harnesses
+  // now call deriveSystemState directly, which is the real path and cannot rot
+  // into a false consumer. Retiring it also drops the swallow-and-warn catch that
+  // would have hidden a derivation throw from the one caller class that existed.
 
   /**
    * Hydrate the live lifecycle slots from a saved settlement record.
@@ -2276,7 +2276,8 @@ export const createSettlementSlice = (set, get) => ({
   // SURFACE. The flavor Impl is very much alive; it is called directly by
   // settlementPendingEditWriters, which is the only path that records one. What
   // was dead was this second, registered door onto it — a live Impl with a dead
-  // store surface, the same shape the atlas found at setRegionalChannelVisibility.
+  // store surface, the same shape the atlas found at setRegionalChannelVisibility
+  // (which turned out dead in BOTH halves and was itself retired, twin included).
   renameSettlement: (id, newName) => renameSettlementImpl(get, set, id, newName),
   canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
 

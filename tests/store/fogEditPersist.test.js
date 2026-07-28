@@ -20,6 +20,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { createFogEditSlice } from '../../src/store/fogEditSlice.js';
 
 const stubSlice = () => ({
@@ -122,7 +125,7 @@ describe('applyFogEdit — cosmetic-always + guards', () => {
   test('a CANON-locked save still accepts the fog reveal', async () => {
     const store = makeStore();
     withActiveSave(store);
-    store.getState().refreshSystemState();
+    store.setState(s => { s.systemState = deriveSystemState(s.settlement); });
     store.getState().canonize();
     expect(store.getState().phase).toBe('canon');
 

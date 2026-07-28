@@ -71,7 +71,6 @@ const storeState = {
   addPlacement: vi.fn(),
   removePlacementLocal: vi.fn(),
   clearAllPlacementsLocal: vi.fn(),
-  replaceAllPlacements: vi.fn(),
   replaceMapState: vi.fn(),
   resetMapState: vi.fn(),
   setMapSnapshot: vi.fn(),

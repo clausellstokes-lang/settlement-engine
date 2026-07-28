@@ -928,11 +928,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-handleimportdirect</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-canonizecampaignworld</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1103,11 +1098,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-refreshsystemstate</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-hydratefromsave</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1208,11 +1198,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-clearcampaignwizardnews</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-appendcampaignchronicle</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1254,11 +1239,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-setregionalchannelstatus</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-setregionalchannelvisibility</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1383,11 +1363,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-replaceallplacements</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-clearallplacementslocal</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1488,11 +1463,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-setneighbourreltype</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-completeonboarding</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
@@ -1513,22 +1483,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium/op-addcredits</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-spendcredits</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://settlementforge.com/compendium/op-updateconfig</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-resetconfig</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1539,11 +1494,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-setinstitutiontoggles</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-mergeinstitutiontoggles</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -1574,16 +1524,6 @@
   </url>
   <url>
     <loc>https://settlementforge.com/compendium/op-setservicetoggles</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-resettoggles</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://settlementforge.com/compendium/op-resetgoodsservices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

@@ -79,7 +79,16 @@ describe('store generation resolves the correct content environment', () => {
     expect(settlement._config.priorityEconomy).toBe(50);
   });
 
-  it('clears field intent with the ordinary generation-config reset', () => {
+  it('accumulates field intent through the door, and honours recordIntent:false', () => {
+    // This pin used to end by calling resetConfig() to clear the intent bag.
+    // resetConfig was RETIRED (R-5b, owner queue #21) as a dead op, so the pin is
+    // re-pointed at what is actually reachable. NOTE THE HONEST CONSEQUENCE: intent
+    // is now ADD-ONLY at runtime — nothing in the client clears the whole bag. That
+    // is not a regression, because resetConfig had no caller either; the capability
+    // was already unreachable, and this test is what stops it being re-imagined as
+    // present. The one real control is updateConfig's `recordIntent: false`, which
+    // writes a value WITHOUT claiming the user authored it — the flag the
+    // environment-default layer reads.
     store.getState().updateConfig({
       priorityEconomy: 50,
       magicExists: true,
@@ -89,8 +98,25 @@ describe('store generation resolves the correct content environment', () => {
       magicExists: true,
     });
 
-    store.getState().resetConfig();
-    expect(store.getState().configExplicitFields).toEqual({});
+    // Intent accumulates; a later admitted write adds to the bag, never resets it.
+    // (Only REGISTERED tunables record intent — monsterThreat is an admitted config
+    // key but not a tunable, so it lands a value and claims no authorship.)
+    store.getState().updateConfig({ priorityMagic: 80, monsterThreat: 'civilized' });
+    expect(store.getState().config.monsterThreat).toBe('civilized');
+    expect(store.getState().configExplicitFields).toEqual({
+      priorityEconomy: true,
+      magicExists: true,
+      priorityMagic: true,
+    });
+
+    // recordIntent:false lands the VALUE without claiming authorship.
+    store.getState().updateConfig({ priorityReligion: 71 }, { recordIntent: false });
+    expect(store.getState().config.priorityReligion).toBe(71);
+    expect(store.getState().configExplicitFields).toEqual({
+      priorityEconomy: true,
+      magicExists: true,
+      priorityMagic: true,
+    });
   });
 
   it('disables environment defaults with the existing custom-content gate', async () => {

@@ -29,6 +29,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { pickleCampaignState, uncanonizeTombstoneKey } from '../../src/store/settlementSliceHelpers.js';
 
 const stubSlice = (set, get) => ({
@@ -81,9 +84,8 @@ function seededStore({ name = 'Testford', saveId = 'save-1' } = {}) {
     s.lastSeed = 'tomb-seed';
     s.activeSaveId = saveId;
     s.savedSettlements = [{ id: saveId, name, settlement: fixture(name) }];
-    s.systemState = null;
+    s.systemState = deriveSystemState(s.settlement);
   });
-  store.getState().refreshSystemState();
   return store;
 }
 

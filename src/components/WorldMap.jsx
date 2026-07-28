@@ -112,7 +112,9 @@ export default function WorldMap({ onNavigate } = {}) {
   const addPlacement    = useStore(s => s.addPlacement);
   const removePlacementLocal = useStore(s => s.removePlacementLocal);
   const clearAllPlacementsLocal = useStore(s => s.clearAllPlacementsLocal);
-  const _replaceAllPlacements = useStore(s => s.replaceAllPlacements);
+  // (R-5b, owner queue #21) the inert `_replaceAllPlacements` subscription is gone
+  // with the op it bound: it was never called, and a component-level useStore call
+  // still costs a subscription + a re-render check on every store write.
   const replaceMapState = useStore(s => s.replaceMapState);
   const resetMapState   = useStore(s => s.resetMapState);
   const setMapSnapshot  = useStore(s => s.setMapSnapshot);

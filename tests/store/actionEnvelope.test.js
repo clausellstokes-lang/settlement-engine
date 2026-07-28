@@ -33,6 +33,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
 // ── Checked-in adoption list (GROW-ONLY) ────────────────────────────────────
 // The five canon-path actions share the persistSaveUpdate seam C3 needs; they
@@ -117,15 +120,13 @@ const damageEvent = (id) => ({
 const INVOKERS = {
   applyEvent: () => {
     const store = makeStore();
-    store.setState(s => { s.settlement = fixture(); });
-    store.getState().refreshSystemState();
+    store.setState(s => { s.settlement = fixture(); s.systemState = deriveSystemState(s.settlement); });
     store.getState().canonize();
     return store.getState().applyEvent(damageEvent('env-apply'));
   },
   undoLastEvent: () => {
     const store = makeStore();
-    store.setState(s => { s.settlement = fixture(); });
-    store.getState().refreshSystemState();
+    store.setState(s => { s.settlement = fixture(); s.systemState = deriveSystemState(s.settlement); });
     store.getState().canonize();
     store.getState().applyEvent(damageEvent('env-undo'));
     return store.getState().undoLastEvent();

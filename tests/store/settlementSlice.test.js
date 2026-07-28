@@ -30,6 +30,10 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// The harness derives systemState on the REAL path (the same pure function every
+// store writer calls inside its own set()); the old `refreshSystemState` store
+// action existed only for harnesses and was retired with owner queue #21.
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
   deriveGraphWithDiscoveredCandidates,
@@ -104,9 +108,8 @@ describe('settlementSlice — canonize lifecycle', () => {
     store.setState(s => {
       s.settlement = fixture();
       s.lastSeed = 'test-seed';
-      s.systemState = null;  // hydrate via refreshSystemState
+      s.systemState = deriveSystemState(s.settlement);
     });
-    store.getState().refreshSystemState();
   });
 
   test('phase defaults to draft on a fresh slice', () => {
@@ -141,8 +144,11 @@ describe('settlementSlice — applyEvent mutates entities', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 
@@ -191,8 +197,11 @@ describe('settlementSlice — the staleness law + the veto refusal (Composer V2 
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 
@@ -263,8 +272,11 @@ describe('settlementSlice — undoLastEvent reverses impairments', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'test-seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'test-seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
     store.getState().canonize();
   });
 

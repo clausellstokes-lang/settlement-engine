@@ -61,7 +61,19 @@ function countItems(delta) {
   );
 }
 
-export function RegenerationDeltaCard({ delta, onDismiss }) {
+/**
+ * @param {Object} props
+ * @param {any} props.delta
+ * @param {Function} [props.onDismiss]
+ * @param {string} [props.heading] — header wording. Defaults to the rerun
+ *   phrasing this card was born for; the Versions-tab snapshot comparison
+ *   (VersionDiffView) passes its own, because "rerun" is the wrong word for a
+ *   reader comparing two points on a campaign timeline. Named `heading`, not
+ *   `title`, so the native-tooltip census can tell a presentation prop from a
+ *   real title= attribute (the AdminPanel Section precedent in
+ *   tests/domain/guidanceRegistry.walker.test.js).
+ */
+export function RegenerationDeltaCard({ delta, onDismiss, heading = 'What changed in the rerun' }) {
   const [collapsed, setCollapsed] = useState(false);
 
   if (!delta || countItems(delta) === 0) return null;
@@ -90,7 +102,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
           fontSize: FS.xs, fontWeight: 800, color: COLORS.gold,
           textTransform: 'uppercase', letterSpacing: '0.06em',
         }}>
-          What changed in the rerun
+          {heading}
         </span>
         <span style={{ fontSize: FS.xs, color: COLORS.muted, flex: 1 }}>
           {summarizeCounts(delta)}

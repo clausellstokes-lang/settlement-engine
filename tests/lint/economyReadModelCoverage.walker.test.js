@@ -123,8 +123,8 @@ const FROZEN_DEFERRED = {
     'Writes a gallery FACET (facetProsperity) onto a published record. Not a reader-facing economy display, and the published snapshot is a snapshot by definition.',
   'src/components/dossier/EngineSections.jsx':
     'Dead code: zero importers in src (verified by import census). Classified rather than cured; retire-vs-wire is the owner queue.',
-  'src/components/dossier/WorkbenchProseEditor.jsx':
-    'Edits AUTHORED economicState.safetyProfile prose fields, each already labelled "as first surveyed" in its own picker. An editor of survey prose, not a display of derived tallies.',
+  'src/components/dossier/proseFieldLabels.js':
+    'Pure frozen label vocabulary (zero imports, no render surface) extracted from WorkbenchProseEditor: the economicState mentions are path string literals naming AUTHORED safetyProfile prose fields, and each such label itself already says "as first surveyed". The editor now reaches these paths only through this map, so it left the census (the documented helper shape).',
   'src/components/gallery/GallerySidebar.jsx':
     'Gallery filter chips over published rows (filters.prosperity), not a live settlement read-model.',
   'src/components/gallery/galleryUtils.js':

@@ -194,7 +194,12 @@ const MECHANISM_VOCABULARY = Object.freeze([
   'restore-command',
   'revision-history',
   'rollback-migration',
-  'server-rebalance',
+  // DELETED (R-5b, owner queue #21): 'server-rebalance'. Its only two speakers were
+  // addCredits and spendCredits (undoState:'external:server-rebalance'), and both
+  // were RETIRED as dead ops — a client-side credit ledger beside the
+  // server-authoritative one. With no row left pointing at it, the honesty half of
+  // this exact-set demands the spelling go too: a vocabulary that outlives its
+  // speakers starts describing recovery machinery the product no longer advertises.
 ]);
 
 /**

@@ -67,7 +67,7 @@ export default function ServicesTogglePanel() {
   const currentCatalog = useStore(selectCurrentCatalog);
   const servicesToggles = useStore(s => s.servicesToggles);
   const onServiceToggle = useStore(s => s.toggleService);
-  const setServiceToggles = useStore(s => s.setServiceToggles);
+  const bulkSetServices = useStore(s => s.bulkSetServices);
   const [expanded, setExpanded] = useState({});
   const [search, setSearch] = useState('');
   const [filterMode, setFilterMode] = useState('all');
@@ -112,21 +112,17 @@ export default function ServicesTogglePanel() {
     onServiceToggle(toggleKey(svcKey, svcName), next);
   };
 
-  // Bulk operations
-  const bulkForce = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
-      Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(svcKey, svcName), { allow:true, force:true, forceExclude:false });
-      });
-    });
-  };
-  const bulkExclude = () => {
-    Object.entries(instServiceMap).forEach(([svcKey, {services}]) => {
-      Object.keys(services).forEach(svcName => {
-        onServiceToggle(toggleKey(svcKey, svcName), { allow:false, force:false, forceExclude:true });
-      });
-    });
-  };
+  // Bulk operations — one store action owns the write for the whole grid, the way
+  // InstitutionalGrid routes its strip through bulkSetInstitutions. The key list is
+  // the SAME `${svcKey}_service_${svcName}` spelling cycleService writes, so a bulk
+  // press and a card click land on the same entries.
+  const bulkKeys = useMemo(
+    () => Object.entries(instServiceMap).flatMap(([svcKey, {services}]) =>
+      Object.keys(services).map(svcName => `${svcKey}_service_${svcName}`)),
+    [instServiceMap],
+  );
+  const bulkForce = () => bulkSetServices('force', bulkKeys);
+  const bulkExclude = () => bulkSetServices('exclude', bulkKeys);
 
   const totals = useMemo(() => {
     let total=0, on=0, forced=0, excluded=0;
@@ -183,7 +179,7 @@ export default function ServicesTogglePanel() {
         setSearch={setSearch}
         placeholder="Search services…"
         onForceAll={bulkForce}
-        onReset={() => setServiceToggles({})}
+        onReset={() => bulkSetServices('reset')}
         onExcludeAll={bulkExclude}
         onExpandAll={() => setExpanded(Object.fromEntries(Object.keys(filtered).map(k=>[k,true])))}
         onCollapseAll={() => setExpanded({})}

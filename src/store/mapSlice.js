@@ -429,9 +429,17 @@ export const createMapSlice = (set, get) => ({
     if (patch?.cellId !== undefined) p.cellId = patch.cellId;
   }),
 
-  replaceAllPlacements: (placements) => set(state => {
-    state.mapState.placements = { ...(placements || {}) };
-  }),
+  // RETIRED (R-5b, owner queue #21): `replaceAllPlacements`. It overwrote the
+  // whole placement bag in one unguarded, un-snapshotted write — no canon guard,
+  // no snapshotForUndo — and its ONLY appearance in the product was an INERT
+  // WorldMap.jsx binding (`const _replaceAllPlacements = useStore(...)`) that was
+  // never called. That binding is what made the op look reachable to a naive grep,
+  // and it is the shape the dead-op ratchet's inert-binding discount exists to
+  // catch. The LIVE bulk-placement writers are replaceMapState (whole-mapState
+  // restore, the snapshot/undo path) and clearAllPlacementsLocal (snapshotted);
+  // neither needed this door. Nothing durable referred to it, so no migration is
+  // owed. Re-adding a bulk placement write means re-facing the snapshot + canon
+  // guard questions this one silently skipped.
 
   clearAllPlacementsLocal: () => set(state => {
     snapshotForUndo(state, 'clear placements');

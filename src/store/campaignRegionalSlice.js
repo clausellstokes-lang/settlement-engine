@@ -23,7 +23,6 @@ import {
   ensureRegionalGraph,
   isRegionalImpactAvailable,
   setRegionalChannelStatus as domainSetRegionalChannelStatus,
-  setRegionalChannelVisibility as domainSetRegionalChannelVisibility,
   setRegionalImpactStatus as domainSetRegionalImpactStatus,
 } from '../domain/region/index.js';
 // Leaf-module imports (not the `export *` barrel). ensureWorldState/proposalIdFor/
@@ -157,25 +156,19 @@ export const createCampaignRegionalSlice = (set, get) => ({
     return graph;
   },
 
-  setRegionalChannelVisibility: (campaignId, channelId, visibility) => {
-    // Advance/parked guard (store-2 / store-hooks-state-4): the DM-curation sibling
-    // of setRegionalChannelStatus — same wholesale-restore clobber class. Guarded so
-    // a future "hide channel" wiring cannot reintroduce the lost-write here.
-    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
-    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
-    let graph = null;
-    set(state => {
-      const c = findActiveCampaign(state.campaigns, campaignId);
-      if (!c) return;
-      const now = new Date().toISOString();
-      c.regionalGraph = domainSetRegionalChannelVisibility(c.regionalGraph, channelId, visibility, { now });
-      ensureCampaignWizardNews(c);
-      c.updatedAt = now;
-      graph = c.regionalGraph;
-      persistCampaignState(state, campaignId);
-    });
-    return graph;
-  },
+  // RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`, together with
+  // its domain twin in domain/region/graph.js. It was a DM-curation door onto a
+  // channel's public/gm/hidden field that NO surface opened, in BOTH halves — the
+  // store action had no caller and the pure helper had no caller but that action,
+  // which is the "live Impl behind a dead store surface" shape the atlas kept
+  // finding, here with the Impl dead too. Its advance/parked guard was written
+  // defensively for a "hide channel" wiring that never arrived; a future one must
+  // re-add the guard with the control, which is the honest ordering. VISIBILITY
+  // ITSELF IS UNTOUCHED and still fully live: channels are BORN with a visibility
+  // (relationship bundles mint public/gm/hidden per type), ensureRegionalGraph
+  // normalizes and migrates the field, activeChannelsFrom filters on it, and the
+  // confirmed-channel preservation path carries it across a rediscovery. What is
+  // gone is only the never-opened door for CHANGING it after the fact.
 
   /**
    * Register an authored stressor as a ROAMING world-pulse stressor. The

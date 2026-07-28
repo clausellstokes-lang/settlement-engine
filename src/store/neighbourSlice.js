@@ -16,6 +16,11 @@
 // remaining producer either. The LIVE neighbour surface is the relationship graph
 // (domain/relationships/*), which never touched this array.
 
+// KEPT DELIBERATELY (R-5b): the relationship-picker vocabulary now has no reader,
+// because its only consumer would have been the Neighbour System tab whose verbs
+// just retired. It stays with the seam above rather than being deleted twice — the
+// G-2b re-exposure needs exactly this list. Not a dead-op ratchet member: it is a
+// data export, not a registered operation.
 export const RELATIONSHIP_TYPES = [
   { id: 'neutral',       label: 'Neutral',       color: '#888' },
   { id: 'trade_partner', label: 'Trade Partner',  color: '#2a7a2a' },
@@ -28,42 +33,35 @@ export const RELATIONSHIP_TYPES = [
   { id: 'criminal_network', label: 'Criminal Network', color: '#5a2a8a' },
 ];
 
-export const createNeighbourSlice = (set, get) => ({
+// `_get` is unused: its last reader was handleImportDirect's canUseNeighbour()
+// premium check, which retired with the verb. The parameter STAYS so this slice
+// keeps the uniform `(set, get)` factory shape every sibling has in the
+// store/index.js composition block — dropping it made tsc red there (TS2554) and
+// would leave one odd factory out of fourteen for a future editor to trip over.
+export const createNeighbourSlice = (set, _get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   importedNeighbour:  null,          // settlement JSON to feed into next generation
   neighbourRelType:   'neutral',     // relationship type for next link
 
   // ── Actions ────────────────────────────────────────────────────────────────
-  // RETIRED (R-5b, owner queue #21): `importNeighbour`. It was the premium
-  // "feed this settlement into the next generation" verb and no surface ever
-  // called it. The SEAM it fed is untouched and still live — generateSettlement
-  // reads `state.importedNeighbour`, the pipeline takes a `neighbor` argument,
-  // and `canUseNeighbour` still gates — so re-exposing the feature is a matter of
-  // writing that one field from a real control, not of rebuilding anything.
-  // Recorded as a G-2b feature spec rather than kept as a decoy verb.
+  // RETIRED (R-5b, owner queue #21): `importNeighbour`, and — completing the same
+  // finding — `handleImportDirect` (the direct-JSON import for a "Neighbour System
+  // tab" that does not exist) and `setNeighbourRelType` (the relationship picker
+  // for the same absent tab). All three were premium verbs no surface ever called.
+  //
+  // THE SEAM IS UNTOUCHED AND STILL LIVE — generateSettlement reads
+  // `state.importedNeighbour`, resolveNeighbour/assembleSettlement read the
+  // `config._neighbourRelType` rider, the pipeline takes a `neighbor` argument, and
+  // `canUseNeighbour` still gates. Both slice fields below are therefore kept ON
+  // PURPOSE and are now WRITER-LESS by design: re-exposing the feature is a matter
+  // of writing them from a real control (recorded as a G-2b feature spec), not of
+  // rebuilding anything. What is gone is the decoy — three registered, documented,
+  // Compendium-rendered verbs advertising a feature with no door.
+  //
+  // Their retirement also SHRANK the config single-door enumeration: both wrote
+  // `state.config._neighbourRelType` directly and were two of the four reviewed
+  // exemptions in tests/store/configDirectWriterExemptions.scan.test.js.
 
   clearNeighbour: () =>
     set(state => { state.importedNeighbour = null; }),
-
-  setNeighbourRelType: (relType) =>
-    set(state => {
-      state.neighbourRelType = relType;
-      // Also sync to config for the generator
-      state.config._neighbourRelType = relType;
-    }),
-
-  /** Import a neighbour from direct JSON (for the Neighbour System tab). */
-  handleImportDirect: (json) => {
-    if (!get().canUseNeighbour()) return false;
-    let parsed;
-    try { parsed = JSON.parse(json); } catch { return false; }
-    const s = parsed?.settlement?.name ? parsed.settlement : parsed;
-    if (!s?.name || !s?.tier) return false;
-
-    set(state => {
-      state.importedNeighbour = s;
-      state.config._neighbourRelType = state.neighbourRelType;
-    });
-    return true;
-  },
 });

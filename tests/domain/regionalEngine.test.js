@@ -25,7 +25,6 @@ import {
   queueRegionalImpacts,
   REGIONAL_GRAPH_SCHEMA_VERSION,
   setRegionalChannelStatus,
-  setRegionalChannelVisibility,
   setRegionalImpactStatus,
   summarizeWizardNews,
   WIZARD_NEWS_SIGNIFICANCE,
@@ -615,10 +614,16 @@ describe('graph channel merge', () => {
       strength: 0.4,
       discoveredAt,
       confirmedAt,
+      // Curated HIDDEN at mint. (This used to be applied afterwards through
+      // setRegionalChannelVisibility, RETIRED under owner queue #21; normalizeChannel
+      // honours an explicit visibility on the way in, which is the live path a
+      // relationship bundle already uses to mint gm/hidden channels.)
+      visibility: 'hidden',
       evidence: [{ source: 'dm', reason: 'Canonized at the table.' }],
     };
-    let graph = addRegionalChannels(null, [raw]);
-    graph = setRegionalChannelVisibility(graph, graph.channels[0].id, 'hidden');
+    const graph0 = addRegionalChannels(null, [raw]);
+    expect(graph0.channels[0].visibility).toBe('hidden'); // the curation is really there
+    let graph = graph0;
 
     // Discovery re-derives the candidate: born suggested, fresh wall-clock
     // discoveredAt, no confirmedAt, new measurements.
@@ -656,15 +661,19 @@ describe('graph channel merge', () => {
       channels: [
         { type: 'trade_dependency', from: 'a', to: 'b', status: 'confirmed' },
         { type: 'criminal_corridor', from: 'b', to: 'c', status: 'confirmed' },
+        // A v1 row that already carried a curated value. The migration must DEFAULT
+        // the two above without OVERWRITING this one — the half a defaults-only pin
+        // cannot see. (Formerly proven by calling setRegionalChannelVisibility after
+        // the migration; that op was RETIRED under owner queue #21, and asserting on
+        // the migration's own output is the closer pin anyway.)
+        { type: 'trade_dependency', from: 'c', to: 'd', status: 'confirmed', visibility: 'hidden' },
       ],
     });
 
     expect(graph.schemaVersion).toBe(REGIONAL_GRAPH_SCHEMA_VERSION);
-    expect(graph.channels.find(c => c.type === 'trade_dependency').visibility).toBe('public');
+    expect(graph.channels.find(c => c.from === 'a').visibility).toBe('public');
     expect(graph.channels.find(c => c.type === 'criminal_corridor').visibility).toBe('gm');
-
-    const hidden = setRegionalChannelVisibility(graph, graph.channels[0].id, 'hidden');
-    expect(hidden.channels[0].visibility).toBe('hidden');
+    expect(graph.channels.find(c => c.from === 'c').visibility).toBe('hidden');
   });
 
   it('advances delayed queued impacts and expires stale impacts', () => {

@@ -6,18 +6,23 @@
  * report, and tests/generators/configPatchAllowlistWalker.test.js keeps the
  * admitted surface a superset of everything source reads or writes. That story
  * is only true while updateConfig is the ONLY way `state.config` changes — and
- * today it is not. Three store actions write the config draft directly, by
- * design, and a fourth resets it wholesale. Unenumerated, those side doors make
- * the one-validated-door claim quietly false, and a FUTURE direct writer could
- * plant an unadmitted key that updateConfig would never have accepted, that
- * isAllowedConfigKey therefore never vets, and that no reader can rely on.
+ * when this scan was written it was not: four store actions wrote the config draft
+ * directly. Unenumerated, those side doors made the one-validated-door claim
+ * quietly false, and a FUTURE direct writer could plant an unadmitted key that
+ * updateConfig would never have accepted, that isAllowedConfigKey therefore never
+ * vets, and that no reader can rely on.
+ *
+ * AS OF R-5b (owner queue #21) ALL FOUR EXEMPTIONS ARE RETIRED — every one of them
+ * turned out to be a DEAD op, so each bypass was a door nobody walked through. The
+ * claim is now unqualified: updateConfig is the only writer of state.config in src.
+ * This scan's job shifts from ENUMERATING bypasses to REFUSING the first new one.
  *
  * WHAT IT DOES. It scans src for assignments to an immer draft's `.config`
  * (whole-object, dotted key, or computed key) and asserts the EXACT SET equals
- * the enumeration below: one door plus four reviewed exemptions. A fifth direct
- * writer reds here. It also asserts each exemption writes a key isAllowedConfigKey
- * admits, so "it bypasses the door but writes an admitted key" stays a fact rather
- * than a claim.
+ * the enumeration below: the door, and today nothing else. Any other direct writer
+ * reds here. It also asserts each exemption — should one ever be admitted again —
+ * writes a key isAllowedConfigKey admits, so "it bypasses the door but writes an
+ * admitted key" stays a fact rather than a claim.
  *
  * KNOWN EDGES (deliberate, reviewed):
  *   - Draft receivers are matched by name (state / s / draft / st). Those names
@@ -65,13 +70,7 @@ const EXPECTED_WRITERS = [
     role: 'door',
     why: 'THE validated door: writes only keys isAllowedConfigKey admits, drops the rest with a typed report.',
   },
-  {
-    file: 'src/store/configSlice.js',
-    action: 'resetConfig',
-    key: null,
-    role: 'exemption',
-    why: 'Whole-object reset to DEFAULT_CONFIG. It writes no caller-supplied key at all, so there is nothing for the door to validate; every key it lands is admitted by construction (Object.hasOwn(DEFAULT_CONFIG, key)).',
-  },
+  // ── THE EXEMPTIONS ARE GONE — all four, and none by weakening this scan ──────
   // EXEMPTION RETIRED (R-5b, owner queue #21): `setSettlementType`. Its exemption
   // was earned by the tier clamp in its body — and the op turned out to have no
   // caller anywhere, so that clamp had never run. Retiring the op shrinks this
@@ -80,20 +79,18 @@ const EXPECTED_WRITERS = [
   // was proven to live at the generation commit (settlementSlice.generateSettlement
   // refuses an over-cap settType and re-gates the resolved tier) before the op was
   // removed — see the retirement note in configSlice.js.
-  {
-    file: 'src/store/neighbourSlice.js',
-    action: 'setNeighbourRelType',
-    key: '_neighbourRelType',
-    role: 'exemption',
-    why: 'Mirrors the slice-owned neighbourRelType onto the config rider the generator reads, inside the same set() that owns the source of truth. Splitting the mirror into a second action would let the two fall out of step for a tick.',
-  },
-  {
-    file: 'src/store/neighbourSlice.js',
-    action: 'handleImportDirect',
-    key: '_neighbourRelType',
-    role: 'exemption',
-    why: 'Same mirror, on the direct-JSON import path, again inside the one set() that also lands importedNeighbour. The underscore rider family is admitted by isAllowedConfigKey.',
-  },
+  //
+  // EXEMPTIONS RETIRED (R-5b, owner queue #21), the remaining three: `resetConfig`
+  // (configSlice) and `setNeighbourRelType` + `handleImportDirect` (neighbourSlice).
+  // All three were dead ops — no caller anywhere in src — so all three side doors
+  // onto state.config were doors nobody walked through. With them gone, R-3's
+  // "updateConfig is the one validated door" claim is no longer a claim WITH
+  // EXEMPTIONS; it is simply true, and this file now enumerates a door and nothing
+  // else. That is the terminal state this scan was built to drive toward, reached
+  // by deleting bypasses rather than by blessing them.
+  //
+  // A new exemption is still ADMISSIBLE — add a row with the reason it cannot route
+  // through updateConfig — but it now has to argue against a clean sheet.
 ];
 
 function walkFiles(dir, exts, acc = []) {
@@ -183,11 +180,13 @@ const signature = w => `${w.file}::${w.action}::${w.key ?? (w.computed ? '[compu
 describe('R-4 — the config draft has ONE validated door plus enumerated exemptions', () => {
   it('self-check: the scan finds writers (not vacuous)', () => {
     const found = scanDirectWriters();
-    // Floor lowered 5 → 4 with the R-5b retirement of setSettlementType, whose
-    // exemption left this set. This number guards against the scan silently
-    // collapsing to nothing; it tracks the enumeration DOWNWARD as exemptions are
-    // retired, which is the direction the R-4 single-door law wants.
-    expect(found.length, JSON.stringify(found, null, 2)).toBeGreaterThanOrEqual(4);
+    // Floor 5 → 4 → 1 as the R-5b retirements removed all four exemptions. It
+    // tracks the enumeration DOWNWARD, which is the direction the R-4 single-door
+    // law wants, and 1 is the floor's terminal value: the door itself can never
+    // leave. The scan's catching POWER is no longer carried by this number at all —
+    // it is proven directly by the planted-fifth-writer negative control at the
+    // bottom of this file, which is why shrinking to 1 costs no rigor.
+    expect(found.length, JSON.stringify(found, null, 2)).toBeGreaterThanOrEqual(1);
   });
 
   it('the direct-writer set is EXACTLY the door plus its enumerated exemptions', () => {

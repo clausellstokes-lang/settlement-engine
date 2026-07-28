@@ -43,9 +43,12 @@
  *       React components pass on as a prop or handler, which is the dominant
  *       shape and is never a syntactic call) — MINUS the inert-binding evasion:
  *       a `const LOCAL = useStore(s => s.op)` whose LOCAL never appears again in
- *       the file. That evasion is real and load-bearing: `_replaceAllPlacements`
- *       at WorldMap.jsx is bound and never used, and a naive grep scores it as a
- *       caller. It is pinned as a positive control below.
+ *       the file. That evasion is real and load-bearing: it is what kept
+ *       `replaceAllPlacements` honestly dead against a naive grep, which scored
+ *       WorldMap.jsx's bound-and-never-used `_replaceAllPlacements` as a caller.
+ *       That op is now RETIRED and the binding with it, so the discount is pinned
+ *       by a SYNTHETIC two-arm positive control below (inert excluded, live kept)
+ *       rather than by whichever real file happens to carry an unused binding.
  * Requiring a `.op` store-handle reference in the file is what keeps a same-named
  * DOMAIN function from masquerading as a store consumer — `setRegionalChannelStatus`
  * and `setRegionalChannelVisibility` each exist twice under one name, once in
@@ -132,11 +135,15 @@ const identCount = (code, id) =>
   (code.match(new RegExp(`(?<![\\w$.])${escapeRe(id)}(?![\\w$])`, 'g')) || []).length;
 
 /**
- * Files that consume the named store operation, per the rule in the header.
+ * Files in `sources` that consume the named store operation, per the rule in the
+ * header. Parameterized on the source map so the inert-binding discount can be
+ * proven against a SYNTHETIC fixture rather than against whichever real file
+ * happens to carry an unused binding today — see the positive control below.
+ * @param {Map<string,string>} sources repo-relative path → comment/string-stripped code
  * @param {string} name
  * @returns {string[]} sorted repo-relative paths
  */
-function consumerFiles(name) {
+function consumerFilesIn(sources, name) {
   const N = escapeRe(name);
   const handleCall = new RegExp(`\\.${N}\\s*\\(`);
   const handleRead = new RegExp(`\\.${N}(?![\\w$])`, 'g');
@@ -148,7 +155,7 @@ function consumerFiles(name) {
     'g',
   );
   const out = [];
-  for (const [file, code] of SOURCES) {
+  for (const [file, code] of sources) {
     if (handleCall.test(code)) { out.push(file); continue; }
     if (destructure.test(code)) { out.push(file); continue; }
     const reads = (code.match(handleRead) || []).length;
@@ -159,6 +166,9 @@ function consumerFiles(name) {
   }
   return out.sort();
 }
+
+/** The real-tree measurement the ratchet runs on. */
+const consumerFiles = (name) => consumerFilesIn(SOURCES, name);
 
 /**
  * THE FROZEN DEAD LIST — measured from this tree on 2026-07-27 by the scanner
@@ -171,30 +181,13 @@ function consumerFiles(name) {
  */
 const DEAD_OPERATIONS = Object.freeze([
   // canon / macro class (outside the atlas's mechanical-only slice)
-  'destroySavedSettlement',
-  'handleImportDirect',
   'requestProgression',
   // the atlas's separately-recorded dead op (owner queue #14)
   'renameFaction',
   // the atlas's registered mechanical ops with zero callers
-  'addCredits',
-  'bulkSetGoods',
-  'bulkSetServices',
-  'clearCampaignWizardNews',
   'completeOnboarding',
   'markFeatureUsed',
-  'mergeInstitutionToggles',
-  'refreshSystemState',
-  'replaceAllPlacements',
-  'resetAllToggles',
-  'resetConfig',
-  'resetGoodsServices',
   'resetOnboarding',
-  'resetToggles',
-  'revertSingleEdit',
-  'setNeighbourRelType',
-  'setRegionalChannelVisibility',
-  'spendCredits',
 ]);
 
 /**
@@ -207,7 +200,10 @@ const DEAD_OPERATIONS = Object.freeze([
 const UNREACHABLE_INVERSE = Object.freeze([
   'completeOnboarding', // → resetOnboarding (dead)
   'markFeatureUsed',    // → resetOnboarding (dead)
-  'queueEdit',          // → revertSingleEdit (dead)
+  // queueEdit left this ledger in the WIRING half: its promised inverse,
+  // revertSingleEdit, is now the per-change Remove on both pending-edit review
+  // surfaces, so the row's recovery claim is true in the product as well as in
+  // the code (tests/components/pendingEditSingleRevert.test.jsx).
   // addNeighbourLink / removeNeighbourLink pointed at each other and BOTH left
   // the registry in the R-5b retirement below, so their rows go with them — the
   // no-ghost-rows rule applied to this ledger.
@@ -252,13 +248,36 @@ describe('R-4 dead-op ratchet — the measurement is real', () => {
     expect(consumerFiles('markFeatureUsed')).toEqual([]);
   });
 
-  test('positive control — an inert store binding is NOT a consumer', () => {
-    // WorldMap.jsx binds replaceAllPlacements to a name it never uses. A naive
-    // grep scores that as a caller; the inert-binding discount is what keeps the
-    // op honestly dead. Prove both halves so the discount cannot rot into a no-op.
-    const worldMap = stripCode(readFileSync(join(ROOT, 'src/components/WorldMap.jsx'), 'utf8'));
-    expect(/\.replaceAllPlacements(?![\w$])/.test(worldMap)).toBe(true);
-    expect(consumerFiles('replaceAllPlacements')).toEqual([]);
+  test('positive control — an inert store binding is NOT a consumer (synthetic)', () => {
+    // The discount's original anchor was WorldMap.jsx's `_replaceAllPlacements`
+    // binding — bound, never used. That op was RETIRED (R-5b, owner queue #21) and
+    // the binding went with it, so this control is re-anchored onto a SYNTHETIC
+    // fixture. That is the stronger anchoring anyway: the discount is a property of
+    // the SCANNER, and pinning it to whichever real file happens to carry an unused
+    // binding today makes the control evaporate the moment that file is cleaned up
+    // (exactly what just happened). Both arms run through the same stripCode +
+    // consumerFilesIn pipeline the real measurement uses, so a discount that rots
+    // into a no-op — or into a discount that eats LIVE bindings — reds here.
+    const inert = [
+      'export default function InertPanel() {',
+      '  const _bound = useStore(s => s.probeVerb);',
+      '  return null;',
+      '}',
+    ].join('\n');
+    const live = [
+      'export default function LivePanel() {',
+      '  const bound = useStore(s => s.probeVerb);',
+      '  return <button onClick={bound} />;',
+      '}',
+    ].join('\n');
+    const fixture = new Map([
+      ['src/synthetic/inert.jsx', stripCode(inert)],
+      ['src/synthetic/live.jsx', stripCode(live)],
+    ]);
+    // A naive grep scores BOTH as callers — each contains `.probeVerb`.
+    expect(/\.probeVerb(?![\w$])/.test(stripCode(inert))).toBe(true);
+    // The discount keeps only the one whose binding is actually used downstream.
+    expect(consumerFilesIn(fixture, 'probeVerb')).toEqual(['src/synthetic/live.jsx']);
   });
 
   test('positive control — the scanner finds real consumers for wired ops', () => {
@@ -303,12 +322,49 @@ describe('R-4 dead-op ratchet — the list only shrinks (owner queue #21)', () =
     // reorderCampaignSettlements, setAiDailyLife, setDossierEntitlement,
     // syncActiveNeighbourFields, recordCanonFlavorEntry's store surface, and
     // setSettlementType — the last only after its tier clamp was PROVEN redundant
-    // against the live generation gate). The remaining twenty-two are still open:
-    // some await a wiring lane (revertSingleEdit, destroySavedSettlement,
-    // resetAllToggles), some belong to another program (renameFaction #14,
-    // requestProgression), and some are entangled with an unadjudicated finding
-    // (the onboarding coach's missing exit path). Shrink-only, as ever.
-    expect(DEAD_OPERATIONS.length).toBe(22);
+    // against the live generation gate).
+    //
+    // 22 → 10 with the R-5b RETIREMENT HALF of the owner's dead-op dispositions:
+    // twelve more left the registry, each proven callerless in src first, each with
+    // a written retirement note at its old site — refreshSystemState (a harness-only
+    // door; the 8 test harnesses now call deriveSystemState directly),
+    // replaceAllPlacements (the inert-binding case itself), mergeInstitutionToggles
+    // + resetToggles + resetGoodsServices (the toggle cluster's unreachable merge
+    // and two half-resets), addCredits + spendCredits (a client-side ledger beside a
+    // server-authoritative one — no paid behavior moved), clearCampaignWizardNews
+    // (an ungated Herald-history eraser), setRegionalChannelVisibility (dead in BOTH
+    // halves — the domain twin went too), and resetConfig + handleImportDirect +
+    // setNeighbourRelType (which between them emptied the config single-door
+    // exemption list: updateConfig is now the ONLY writer of state.config).
+    //
+    // 10 → 5 with the WIRING HALF of the same dispositions. The five the retirement
+    // half held as "wire, not retire" each gained a real consumer, so they left this
+    // list the way the rule intends — by becoming reachable, not by being excused:
+    //   • revertSingleEdit — the per-change Remove on BOTH pending-edit review
+    //     surfaces (PendingChangesBar standalone, and the Workbench Change Dock that
+    //     renders it). tests/components/pendingEditSingleRevert.test.jsx.
+    //   • destroySavedSettlement — the Library row's type-the-name destruction
+    //     confirm, the front end for the confirm gate Wave R-1 put at the action
+    //     boundary. tests/components/librarySettlementDestroy.test.jsx.
+    //   • resetAllToggles — "Clear all" beside the Create flow's three constraint
+    //     grids, the group-level reset none of the per-grid Resets could do.
+    //   • bulkSetGoods / bulkSetServices — the Goods and Services grids' Force All /
+    //     Exclude All / Reset, which had been hand-rolled per-key loops inside the
+    //     components while InstitutionalGrid already routed through its store op.
+    //     bulkSetServices needed a repair to be wirable at all: it rewrote only the
+    //     bag's EXISTING entries, so Force All was a no-op on a clean bag.
+    //     tests/components/toggleGridBulkControls.test.jsx covers the last three.
+    //
+    // THE FIVE THAT REMAIN, and why each is HELD:
+    //   • renameFaction — owner queue #14's door is built in this tree but
+    //     not yet folded; it leaves this list with that fold, by becoming
+    //     live rather than by being excused.
+    //   • requestProgression — belongs to the progression program.
+    //   • completeOnboarding, markFeatureUsed, resetOnboarding — entangled with an
+    //     unadjudicated finding (the onboarding coach has no exit path). Retiring
+    //     them would bank a decision that investigation has not been made yet.
+    // Shrink-only, as ever.
+    expect(DEAD_OPERATIONS.length).toBe(5);
   });
 });
 

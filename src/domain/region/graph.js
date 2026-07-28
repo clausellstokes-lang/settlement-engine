@@ -779,22 +779,14 @@ export function setRegionalChannelStatus(graph, channelId, status, options = {})
   return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
 }
 
-/**
- * @param {RegionGraph} graph
- * @param {string} channelId
- * @param {string} visibility
- * @param {RegionOptions} [options]
- */
-export function setRegionalChannelVisibility(graph, channelId, visibility, options = {}) {
-  if (!REGIONAL_CHANNEL_VISIBILITIES.includes(visibility)) return ensureRegionalGraph(graph || {}, { now: options.now });
-  const now = options.now || nowIso();
-  const current = ensureRegionalGraph(graph || {}, { now });
-  const channels = current.channels.map(channel => {
-    if (channel.id !== channelId) return channel;
-    return { ...channel, visibility, updatedAt: now };
-  });
-  return ensureRegionalGraph({ ...current, channels, updatedAt: now }, { now });
-}
+// RETIRED (R-5b, owner queue #21): `setRegionalChannelVisibility`. The after-the-
+// fact visibility setter had exactly one caller — the identically-named store
+// action, which itself had none — so both halves were retired together. The
+// visibility FIELD is untouched and still governed here: REGIONAL_CHANNEL_VISIBILITIES
+// is the vocabulary, normalizeChannel (above) defaults and migrates it per channel
+// type, relationshipChannelBundle mints it, activeChannelsFrom filters on it, and
+// the confirmed-channel preservation branch carries a curated value across a
+// rediscovery pass. Only the never-called mutator is gone.
 
 /**
  * @param {RegionGraph} graph

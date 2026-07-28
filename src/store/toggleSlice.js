@@ -140,8 +140,13 @@ export const createToggleSlice = (set, get) => ({
   setInstitutionToggles: (toggles) =>
     set(state => { state.institutionToggles = toggles; }),
 
-  mergeInstitutionToggles: (partial) =>
-    set(state => { Object.assign(state.institutionToggles, partial); }),
+  // RETIRED (R-5b, owner queue #21): `mergeInstitutionToggles`. A partial merge
+  // into the institution bag that no surface ever performed — the two live writers
+  // are toggleInstitution (one key, from the panel) and setInstitutionToggles
+  // (whole bag, from the save-load restore). Its registry row also advertised
+  // recovery via 'external:inverse-call', a promise nothing could keep: merging is
+  // not self-inverse, and no caller existed to un-merge. Re-adding a partial merge
+  // means deciding what un-merging means first.
 
   // ── Category toggles ──────────────────────────────────────────────────────
   toggleCategory: (tier, category) =>
@@ -185,17 +190,13 @@ export const createToggleSlice = (set, get) => ({
     set(state => { state.servicesToggles = normalizeServicesToggles(state.servicesToggles); }),
 
   // ── Resets ─────────────────────────────────────────────────────────────────
-  resetToggles: () =>
-    set(state => {
-      state.institutionToggles = {};
-      state.categoryToggles = {};
-    }),
-
-  resetGoodsServices: () =>
-    set(state => {
-      state.goodsToggles = {};
-      state.servicesToggles = {};
-    }),
+  // RETIRED (R-5b, owner queue #21): `resetToggles` (institutions + categories)
+  // and `resetGoodsServices` (goods + services). They were the two HALF-resets
+  // beside the whole-bag `resetAllToggles`, and nothing called either one. The
+  // product only ever offers "reset my generation settings" as one act, which is
+  // what resetAllToggles below does; a half-reset that clears two of the four bags
+  // and silently leaves the other two is a legibility trap, not a feature. The
+  // bags themselves and the whole-bag reset are untouched.
 
   resetAllToggles: () =>
     set(state => {
@@ -225,18 +226,20 @@ export const createToggleSlice = (set, get) => ({
       });
     }),
 
-  bulkSetServices: (mode) =>
+  // 'reset' clears the whole bag. 'force' / 'exclude' rewrite exactly the toggle
+  // keys the caller hands in. The store owns no service catalog, so the grid
+  // passes its own tier-filtered key list — the same arrangement bulkSetInstitutions
+  // uses when it takes a catalog getter from its caller. Writing the CALLER's keys
+  // rather than the bag's existing ones is what lets a first bulk press reach a
+  // service nobody has touched yet; rewriting only existing entries made the op a
+  // no-op on a clean bag, which is the shape no surface could use.
+  bulkSetServices: (mode, serviceKeys = []) =>
     set(state => {
-      if (mode === 'reset') {
-        state.servicesToggles = {};
-      } else if (mode === 'force') {
-        for (const k of Object.keys(state.servicesToggles)) {
-          state.servicesToggles[k] = { allow: true, force: true, forceExclude: false };
-        }
-      } else if (mode === 'exclude') {
-        for (const k of Object.keys(state.servicesToggles)) {
-          state.servicesToggles[k] = { allow: false, force: false, forceExclude: true };
-        }
+      if (mode === 'reset') { state.servicesToggles = {}; return; }
+      if (mode !== 'force' && mode !== 'exclude') return;
+      const forced = mode === 'force';
+      for (const key of serviceKeys) {
+        state.servicesToggles[key] = { allow: forced, force: forced, forceExclude: !forced };
       }
     }),
 

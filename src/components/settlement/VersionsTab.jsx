@@ -13,12 +13,20 @@
  * Reverting creates a *new* snapshot from the old state (never
  * destructive — the critique was explicit about that).
  *
- * HONESTY NOTE (Wave R-1, atlas queue #18): there is NO manual
- * take-a-snapshot lever and NO side-by-side diff view — `recordSnapshot`
- * has no UI caller, and no diff component exists. The locked-state pitch
- * below sells only what ships. Whether to BUILD manual snapshot + diff
- * (vs. this copy fix standing) is an OPEN OWNER-QUEUE decision (Wave R-5,
- * queue #18) — do not re-promise those features here before that ruling.
+ * HONESTY NOTE (Wave R-1, atlas queue #18 — now CLOSED by the BUILD).
+ * R-1 found this tab's pitch selling two features that did not exist:
+ * `recordSnapshot` was registered and armed but had no UI caller, and no
+ * diff component existed. R-1 un-promised both rather than fake them. The
+ * owner then ruled BUILD, and both now ship: the Take-a-snapshot control
+ * below is `recordSnapshot`'s first user-facing caller, and VersionDiffView
+ * (lazy leaf) is the side-by-side comparison. The pitch re-promises exactly
+ * those two and nothing more.
+ *
+ * STILL FALSE, still unsold: canonize records NO snapshot (it stamps
+ * `canonizedAt` and nothing else). tests/components/versionsTabPitchHonesty
+ * holds that negative, and holds the two new promises positively, so the
+ * copy and the shipped surface can never drift apart again in EITHER
+ * direction.
  *
  * Cartographer-gated. Wanderer/Free users see a locked-state preview
  * with a Cartographer upgrade pitch.
@@ -27,7 +35,7 @@
  * data — no schema migration needed.
  */
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
@@ -39,6 +47,15 @@ import Button from '../primitives/Button.jsx';
 const SLATE = swatch['#5A6E82'];
 const GREEN = swatch['#4A7A3A'];
 const AMBER = swatch['#D08020'];
+
+// The comparison view is the only heavy thing this tab can reach: it pulls the
+// whole settlement-comparison derivation stack (system state, causal state,
+// capacity, daily life). Behind its own React.lazy seam so a reader who never
+// compares never pays for it. Pinned by tests/build/versionDiffLazy.test.js.
+const VersionDiffView = lazy(() => import('./VersionDiffView.jsx'));
+
+/** Default label for a manual snapshot the user did not name. */
+const DEFAULT_SNAPSHOT_LABEL = 'Manual snapshot';
 
 function formatTs(ts) {
   if (!ts) return EMPTY_VALUE;
@@ -64,13 +81,23 @@ export function buildVersionTimeline(save) {
   // saved checkpoints we'd revert TO.
   if (Array.isArray(save.versionHistory)) {
     for (const v of save.versionHistory) {
+      // PAYLOAD SPELLING. `recordSnapshot` writes the frozen content under
+      // `settlement` (settlementSlice.js); this builder only ever read
+      // `snapshot`, so every REAL store-written entry arrived here with an
+      // undefined payload. Nothing noticed while revert addressed snapshots by
+      // id alone, but the comparison view reads the payload, so the two
+      // spellings are reconciled here: the store's `settlement` first, the
+      // legacy/fixture `snapshot` as fallback.
+      const payload = v.settlement ?? v.snapshot;
       entries.push({
         id: v.id || `snap_${v.ts || ''}`,
         ts: v.ts,
         label: v.label || 'Snapshot',
         kind: 'snapshot',
         revertable: true,
-        snapshot: v.snapshot,
+        snapshot: payload,
+        // Only an entry that actually carries content can be compared.
+        comparable: payload != null,
       });
     }
   }
@@ -141,13 +168,66 @@ export default function VersionsTab({ save }) {
   const enabled = flag('versionHistory');
   const tier = useStore(s => s.auth.tier);
   const revertToSnapshot = useStore(s => s.revertToSnapshot);
+  const recordSnapshot = useStore(s => s.recordSnapshot);
   // 'premium' is the only paid tier value auth ever resolves (resolveTier maps
   // elevated roles to it too); Cartographer is the PLAN name, not a tier value.
   const isPaid = tier === 'premium';
   const [confirmRevert, setConfirmRevert] = useState(null);
   const [revertError, setRevertError] = useState(null);
+  const [snapshotLabel, setSnapshotLabel] = useState('');
+  const [snapshotError, setSnapshotError] = useState(null);
+  // Ids of the snapshots picked for comparison, oldest pick first. Two is the
+  // whole vocabulary: a third pick drops the oldest, so the control never needs
+  // a "clear then start over" step.
+  const [compareIds, setCompareIds] = useState([]);
 
   const entries = useMemo(() => buildVersionTimeline(save), [save]);
+
+  // Resolve the picked ids against the CURRENT timeline every render: a snapshot
+  // can leave the timeline while selected (the cap is 50, newest kept), and a
+  // dangling id must degrade to "not comparing", never to a stale payload.
+  const comparePair = useMemo(() => {
+    const picked = compareIds
+      .map(id => entries.find(e => e.id === id && e.comparable))
+      .filter(Boolean);
+    if (picked.length < 2) return null;
+    const [a, b] = picked;
+    const at = a.ts ? new Date(a.ts).getTime() : 0;
+    const bt = b.ts ? new Date(b.ts).getTime() : 0;
+    return at <= bt ? { earlier: a, later: b } : { earlier: b, later: a };
+  }, [compareIds, entries]);
+
+  // The snapshot lever writes onto the SAVED entry's timeline. With no save
+  // there is no `save.versionHistory` for this tab to read back, so offering
+  // the button would record into the draft sibling and show the user nothing.
+  const canSnapshot = Boolean(save?.id);
+
+  const toggleCompare = (entryId) => {
+    setCompareIds(prev => (
+      prev.includes(entryId)
+        ? prev.filter(id => id !== entryId)
+        : [...prev, entryId].slice(-2)
+    ));
+  };
+
+  const handleSnapshot = () => {
+    if (typeof recordSnapshot !== 'function') {
+      setSnapshotError(t('errors.snapshotRecordUnavailable'));
+      return;
+    }
+    const typed = snapshotLabel.trim();
+    const result = recordSnapshot({
+      saveId: save?.id || null,
+      kind: 'manual',
+      label: typed || DEFAULT_SNAPSHOT_LABEL,
+    });
+    if (!result) {
+      setSnapshotError(t('errors.snapshotRecordFail'));
+      return;
+    }
+    setSnapshotLabel('');
+    setSnapshotError(null);
+  };
 
   const handleRevert = (snapshotId) => {
     if (!snapshotId || typeof revertToSnapshot !== 'function') {
@@ -188,7 +268,7 @@ export default function VersionsTab({ save }) {
         feature="Version history"
         eyebrow="Cartographer · Version history"
         headline="Every change, on a timeline you can roll back."
-        body="Auto-snapshot before every committed change and every revert, on a timeline with your canonize, export, and save milestones. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
+        body="Take a snapshot whenever you want, name it, and put any two of them side by side to see what changed. Auto-snapshot before every committed change and every revert, on a timeline with your canonize, export, and save milestones. Revert creates a new snapshot from the old state. Never destructive. The campaign-running worldbuilder's safety net."
         ctaLabel="See Cartographer"
         trackEvent={EVENTS.LOCKED_DESTINATION_SHOWN}
       />
@@ -215,6 +295,80 @@ export default function VersionsTab({ save }) {
         <div style={{ color: AMBER, fontSize: FS.xs, fontWeight: 700, marginBottom: SP.sm }}>
           {revertError}
         </div>
+      )}
+      {snapshotError && (
+        <div style={{ color: AMBER, fontSize: FS.xs, fontWeight: 700, marginBottom: SP.sm }}>
+          {snapshotError}
+        </div>
+      )}
+
+      {/* The manual snapshot lever. recordSnapshot has been registered and armed
+          (undoToken revertToSnapshot) since Track K; this is its first
+          user-facing caller. */}
+      {canSnapshot ? (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap',
+          marginBottom: SP.md, paddingBottom: SP.sm,
+          borderBottom: `1px solid ${BORDER}`,
+        }}>
+          <label
+            htmlFor="version-snapshot-label"
+            style={{
+              display: 'flex', alignItems: 'center', gap: SP.xs,
+              flex: '1 1 280px', fontSize: FS.xs, color: MUTED,
+            }}
+          >
+            Name this moment (optional)
+            <input
+              id="version-snapshot-label"
+              type="text"
+              // The wrapping label carries the same words for sighted readers;
+              // the explicit aria-label is the house idiom for a text input
+              // (CatalogPicker) and is what the a11y lint reads.
+              aria-label="Name this moment (optional)"
+              value={snapshotLabel}
+              maxLength={80}
+              onChange={e => setSnapshotLabel(e.target.value)}
+              placeholder={DEFAULT_SNAPSHOT_LABEL}
+              style={{
+                flex: 1, minWidth: 140,
+                padding: '5px 8px',
+                fontFamily: sans, fontSize: FS.sm, color: INK,
+                background: CARD, border: `1px solid ${BORDER}`,
+              }}
+            />
+          </label>
+          <Button type="button" variant="secondary" size="sm" onClick={handleSnapshot}>
+            Take a snapshot
+          </Button>
+        </div>
+      ) : (
+        <div style={{
+          marginBottom: SP.md, fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
+        }}>
+          Save this settlement to start taking snapshots of it.
+        </div>
+      )}
+
+      {/* The comparison. Rendered above the timeline so the answer sits where
+          the reader is looking after picking the second snapshot. */}
+      {compareIds.length === 1 && (
+        <div style={{ marginBottom: SP.sm, fontSize: FS.xs, color: MUTED }}>
+          Pick a second snapshot to compare.
+        </div>
+      )}
+      {comparePair && (
+        <Suspense fallback={
+          <div style={{ marginBottom: SP.md, fontSize: FS.xs, color: MUTED, fontStyle: 'italic' }}>
+            Working out what changed.
+          </div>
+        }>
+          <VersionDiffView
+            earlier={comparePair.earlier}
+            later={comparePair.later}
+            onClose={() => setCompareIds([])}
+          />
+        </Suspense>
       )}
 
       {entries.length === 0 ? (
@@ -277,14 +431,27 @@ export default function VersionsTab({ save }) {
                         </Button>
                       </div>
                     ) : (
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => setConfirmRevert(e.id)}
-                      >
-                        Revert to this snapshot
-                      </Button>
+                      <div style={{ display: 'flex', gap: SP.xs, alignItems: 'center', flexWrap: 'wrap' }}>
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          size="sm"
+                          onClick={() => setConfirmRevert(e.id)}
+                        >
+                          Revert to this snapshot
+                        </Button>
+                        {e.comparable && (
+                          <Button
+                            type="button"
+                            variant={compareIds.includes(e.id) ? 'primary' : 'ghost'}
+                            size="sm"
+                            aria-pressed={compareIds.includes(e.id)}
+                            onClick={() => toggleCompare(e.id)}
+                          >
+                            {compareIds.includes(e.id) ? 'Comparing this' : 'Compare'}
+                          </Button>
+                        )}
+                      </div>
                     )}
                   </div>
                 )}

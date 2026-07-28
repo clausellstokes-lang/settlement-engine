@@ -30,6 +30,7 @@ import InstitutionalGrid from '../InstitutionalGrid.jsx';
 import ServicesTogglePanel from '../ServicesTogglePanel.jsx';
 import TradeDynamicsPanel from '../TradeDynamicsPanel.jsx';
 import CharacterPresetCard from './CharacterPresetCard.jsx';
+import ResetConstraintsButton from './ResetConstraintsButton.jsx';
 import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
@@ -219,6 +220,9 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
               2 · Institutions, services &amp; trade
             </span>
             <span style={{ fontSize: FS.xs, color: MUTED }}>force or forbid specifics</span>
+            {/* The group-level undo for the three grids below: each grid's own
+                Reset clears one bag, this clears all three at once. */}
+            <ResetConstraintsButton />
           </div>
           {DEEP_SECTIONS.map(s => <DeepSection key={s.id} {...s} />)}
         </div>

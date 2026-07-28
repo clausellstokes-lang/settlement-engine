@@ -203,7 +203,11 @@ describe('campaignSlice world pulse', () => {
 
     store.getState().toggleCampaignCollapsed('retained-campaign');
     store.getState().renameCampaign('retained-campaign', 'Changed');
-    store.getState().clearCampaignWizardNews('retained-campaign');
+    // Was clearCampaignWizardNews, RETIRED under owner queue #21. Its stand-in is
+    // markCampaignLettersRead — the same findActiveCampaign-guarded shape, on the
+    // same news feed, and LIVE, so this pin keeps testing a reachable door rather
+    // than a decoy one.
+    store.getState().markCampaignLettersRead('retained-campaign');
 
     expect(await store.getState().previewCampaignWorldPulse('retained-campaign')).toBeNull();
     expect(store.getState().campaigns[0]).toMatchObject({
@@ -211,6 +215,9 @@ describe('campaignSlice world pulse', () => {
       collapsed: false,
       accessState: 'inactive_plan',
     });
+    // The refused mutation left no trace either: no read-marker, no updatedAt bump.
+    expect(store.getState().campaigns[0].lastReadTick).toBeUndefined();
+    expect(store.getState().campaigns[0].updatedAt).toBeUndefined();
   });
 
   test('proposal apply and dismiss update world state', async () => {

@@ -87,6 +87,12 @@ export default function PendingChangesBar() {
   const commit = useStore(s => s.commitPendingEdits);
   const revert = useStore(s => s.revertPendingEdits);
   const refresh = useStore(s => s.refreshPendingEdits);
+  // Per-edit removal. `queueEdit`'s registry row has always advertised "the edit
+  // can be reverted on its own" through revertSingleEdit; until this list there
+  // was no surface for it, so Discard-everything was the only way out of one
+  // mistyped change. Both review mounts get it at once: the Workbench Change Dock
+  // renders this same component.
+  const revertOne = useStore(s => s.revertSingleEdit);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [resultNote, setResultNote] = useState('');
   // Staging and committing changes is a heavy-authoring write surface; the
@@ -144,6 +150,15 @@ export default function PendingChangesBar() {
       setResultNote('These changes still cannot be applied. They remain here for review.');
     }
   };
+  const onRemoveOne = (intent) => {
+    // The action is owner-scoped and returns false when the intent is not held
+    // for this dossier any more (another save took the namespace, or a sibling
+    // surface already discarded it). Say so rather than leaving a dead click.
+    const removed = typeof revertOne === 'function' && revertOne(intent.id) === true;
+    setResultNote(removed
+      ? ''
+      : 'That change is no longer held for this dossier, so nothing was removed.');
+  };
   const onPreview = () => {
     Funnel.track(EVENTS.EDIT_CASCADE_PREVIEWED, { count });
     setPreviewOpen(true);
@@ -171,11 +186,18 @@ export default function PendingChangesBar() {
             ? `${failedCount} ${failedCount === 1 ? 'change needs' : 'changes need'} attention`
             : `${count} unsaved ${noun}`}
         </span>
-        {summary && (
-          <span style={{ color: swatch['#3A2F18'], flex: 1, minWidth: 0 }}>
-            · {summary}
-          </span>
-        )}
+        {/* The one-line summary is the MOBILE reading of the queue: the phone
+            withholds the write actions, so a categorical sentence is all it can
+            offer. On desktop the itemized list below says the same thing per
+            change and carries each one's Remove, so the sentence would only
+            repeat it; the spacer keeps the action cluster on the right edge. */}
+        {mobile
+          ? (summary && (
+            <span style={{ color: swatch['#3A2F18'], flex: 1, minWidth: 0 }}>
+              · {summary}
+            </span>
+          ))
+          : <span aria-hidden="true" style={{ flex: 1, minWidth: 0 }} />}
         {mobile ? (
           <span style={{ flexBasis: '100%', color: swatch['#3A2F18'], fontSize: FS.xxs, lineHeight: 1.5 }}>
             Reviewing and saving these edits is best on a larger screen. Open this dossier on desktop to preview the cascade and commit.
@@ -197,6 +219,35 @@ export default function PendingChangesBar() {
               Discard
             </Button>
           </>
+        )}
+        {/* The itemized layer under the glance count: every staged change, each
+            with its own removal. Scrolls inside its own box so a long queue never
+            stretches the banner. Desktop only, matching the write-action policy
+            above. */}
+        {!mobile && (
+          <ul style={{
+            flexBasis: '100%', margin: 0, padding: 0, listStyle: 'none',
+            maxHeight: 132, overflowY: 'auto',
+          }}>
+            {active.map((intent) => (
+              <li
+                key={intent.id}
+                style={{ display: 'flex', alignItems: 'center', gap: SP.xs, padding: '2px 0' }}
+              >
+                <span style={{ flex: 1, minWidth: 0, color: swatch['#3A2F18'] }}>
+                  {describePendingEdit(intent, settlement)}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => onRemoveOne(intent)}
+                  aria-label={`Remove this change: ${describePendingEdit(intent, settlement)}`}
+                >
+                  Remove
+                </Button>
+              </li>
+            ))}
+          </ul>
         )}
         {resultNote && (
           <span role="alert" style={{ flexBasis: '100%', color: swatch.danger, lineHeight: 1.5 }}>

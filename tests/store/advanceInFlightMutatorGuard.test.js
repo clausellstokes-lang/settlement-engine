@@ -214,7 +214,6 @@ describe('store-2 — mutators are gated by advanceInFlight', () => {
 //   • injectCampaignStressor       — surveyor AutonomyPanel nudge approval
 //   • rebuildCampaignRegionalGraph — SettlementsPanel "Discover channels"
 //   • setRegionalChannelStatus     — SettlementsPanel "confirm channel"
-//   • setRegionalChannelVisibility — its DM-curation sibling (guarded for parity)
 // The ripple-only twins (resolveCampaignStressor / setCampaignRegionalGraph) are
 // DELIBERATELY left unguarded: their sole caller (settlementSlice.rippleEventThroughWorld)
 // is upstream-gated by the queueSettlementEvent guard, so they never run in-flight —
@@ -265,15 +264,9 @@ describe('store-registries — the missed regional DM mutators are gated (in-fli
     expect(snap(parked)).toBe(before);
   });
 
-  test('setRegionalChannelVisibility no-ops (null) both in-flight AND parked', () => {
-    const inflight = makeStore(); seedStore(inflight); markInFlight(inflight);
-    let before = snap(inflight);
-    expect(inflight.getState().setRegionalChannelVisibility('camp-1', 'any-ch', 'hidden')).toBe(null);
-    expect(snap(inflight)).toBe(before);
-
-    const parked = makeStore(); seedStore(parked); markPaused(parked);
-    before = snap(parked);
-    expect(parked.getState().setRegionalChannelVisibility('camp-1', 'any-ch', 'hidden')).toBe(null);
-    expect(snap(parked)).toBe(before);
-  });
+  // RETIRED (R-5b, owner queue #21): the setRegionalChannelVisibility pin went with
+  // the op. It was the only member of this describe covering a mutator that no DM
+  // surface could actually fire — its guard was written for parity with
+  // setRegionalChannelStatus, against a "hide channel" control that never shipped.
+  // The three pins above all cover REACHABLE doors, which is what this suite is for.
 });

@@ -1,5 +1,9 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
-import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2, FileText} from 'lucide-react';
+import { lazy, Suspense, useMemo, useState, useRef, useEffect } from 'react';
+import {Clock, FolderOpen, ArrowRight, Unlock, BookMarked, ChevronDown, Trash2, FileText, Flame} from 'lucide-react';
+
+// The type-the-name destruction confirm. Lazy: a Library page that never opens
+// the row pays nothing for it (mirrors the frozen-export PDF boundary below).
+const DestroySettlementControl = lazy(() => import('./DestroySettlementControl.jsx'));
 
 // AUDIT-2.2 — the paid-rights floor: a lapsed plan can always extract what it
 // made. A retention-frozen card keeps a read-only PDF export. Lazy so the jsPDF
@@ -43,6 +47,7 @@ const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: 
 // container (jsdom-tolerant; every query is by text/label/testid, not tag).
 export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, currentCampaignId, regionalCounts, onReactivate, canReactivate, reactivatingId, onCanonize, worldState = null, regionalGraph = null, nameFor, onAdvanceTime, onCreateCampaign, onNavigate, canManageCampaigns = false, selectMode = false, selected = false, onToggleSelect }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [destroyOpen, setDestroyOpen] = useState(false);
   const menuRef = useRef(null);
   const ts = (t) => {
     // An absent or unparseable timestamp must NEVER render the literal "Invalid
@@ -59,6 +64,8 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   const active = isSaveActive(s);
   const planInactive = isPlanInactiveSave(s);
   const isCanon = canonPhaseOf(s) === 'canon';
+  // A settlement the canon already records as destroyed cannot be destroyed twice.
+  const alreadyDestroyed = s.settlement?.status === 'destroyed';
   const retentionUntil = s.retentionExpiresAt ? ts(s.retentionExpiresAt) : null;
   // The saved-on line: prefer the durable `timestamp` (Supabase updated_at), fall
   // back to the numeric `savedAt` epoch that the local save path always stamps.
@@ -483,6 +490,26 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                           </Button>
                         </>
                       )}
+
+                      {/* Canon destruction. Different act from Delete: the save
+                          stays, and the settlement's own timeline records that the
+                          place was destroyed. One-way, so the menu only OPENS the
+                          type-the-name row below rather than firing anything.
+                          Offered on a canonized settlement that still stands. */}
+                      {isCanon && !alreadyDestroyed && (
+                        <>
+                          <div style={{ height:1, background:BORDER, margin:'2px 4px' }} />
+                          {/* No native title= tooltip (shrink-only census): the
+                              type-the-name confirm row this opens carries the
+                              full consequence copy before anything fires. */}
+                          <Button variant="ghost" fullWidth
+                            onClick={() => { setMenuOpen(false); setDestroyOpen(true); }}
+                            icon={<Flame size={13}/>}
+                            style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6, fontSize:FS.sm, color:swatch.danger, fontWeight:500 }}>
+                            Record its destruction
+                          </Button>
+                        </>
+                      )}
                     </div>
                   )}
                 </div>
@@ -521,6 +548,35 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             />
           </td>
         </tr>
+      )}
+
+      {/* Destruction confirmation — the same full-width ledger row treatment. The
+          store action is the authority on consent; this row is its front end. */}
+      {destroyOpen && (
+        // The boundary sits OUTSIDE the row so the row's own child chain matches
+        // the delete row's exactly; a fallback element between <td> and the
+        // control would also be invalid table nesting. The fallback is itself a
+        // full-width ledger row (witnessed-wait ratchet): the chunk is tiny, but
+        // a slow fetch must not leave the destruction click silent.
+        <Suspense fallback={
+          // The aria-label names the row: control-has-associated-label searches
+          // only shallowly for nested text, so the span's text cannot label the
+          // <tr> by itself. The span (not the td) carries role="status" so the
+          // wait is announced — a status role directly on the td reds
+          // no-interactive-element-to-noninteractive-role (jsx-a11y treats td
+          // as interactive).
+          <tr aria-label="Opening the destruction record">
+            <td colSpan={colCount} style={{ ...LEDGER_CELL, fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+              <span role="status">Opening the destruction record…</span>
+            </td>
+          </tr>
+        }>
+          <tr>
+            <td colSpan={colCount} style={{ padding:0 }}>
+              <DestroySettlementControl save={s} onCancel={() => setDestroyOpen(false)} />
+            </td>
+          </tr>
+        </Suspense>
       )}
     </>
   );

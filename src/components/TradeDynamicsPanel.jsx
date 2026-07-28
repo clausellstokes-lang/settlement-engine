@@ -98,7 +98,7 @@ function GoodsPanel() {
   const tier = useStore(selectTierForGrid);
   const goodsToggles = useStore(s => s.goodsToggles);
   const onGoodsToggle = useStore(s => s.toggleGood);
-  const setGoodsToggles = useStore(s => s.setGoodsToggles);
+  const bulkSetGoods = useStore(s => s.bulkSetGoods);
   const [showExport, setShowExport] = useState(false);
   const [showImport, setShowImport] = useState(false);
   const [search, setSearch] = useState('');
@@ -141,9 +141,24 @@ function GoodsPanel() {
     onGoodsToggle(getKey(good.name), next);
   };
 
-  // Bulk operations
-  const bulkForce   = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:true,  force:true,  forceExclude:false }));
-  const bulkExclude = () => goods.forEach(g => onGoodsToggle(getKey(g.name), { allow:false, force:false, forceExclude:true  }));
+  // Bulk operations — one store action owns the write for the whole grid, the way
+  // InstitutionalGrid routes its strip through bulkSetInstitutions. bulkSetGoods
+  // builds `${tier}_good_${name}` per tier it is given, so the goods are grouped by
+  // the tier their key ALREADY resolves to (getKey's own rule: the visible tier, or
+  // under 'All tiers' the first tier that carries the good). That keeps a bulk press
+  // and a card click writing the same entries, and never reaches a tier the grid is
+  // not showing.
+  const bulkTierData = useMemo(() => {
+    const byTier = {};
+    for (const g of goods) {
+      const t = tier === 'all' ? g._tier : tier;
+      if (!byTier[t]) byTier[t] = {};
+      byTier[t][g.name] = g;
+    }
+    return byTier;
+  }, [goods, tier]);
+  const bulkForce   = () => bulkSetGoods('force', bulkTierData);
+  const bulkExclude = () => bulkSetGoods('exclude', bulkTierData);
 
   const filtered = search
     ? goods.filter(g => g.name.toLowerCase().includes(search.toLowerCase()) || (g.desc||'').toLowerCase().includes(search.toLowerCase()) || (g.category||'').toLowerCase().includes(search.toLowerCase()))
@@ -164,7 +179,7 @@ function GoodsPanel() {
         setSearch={setSearch}
         placeholder="Search goods…"
         onForceAll={bulkForce}
-        onReset={() => setGoodsToggles({})}
+        onReset={() => bulkSetGoods('reset')}
         onExcludeAll={bulkExclude}
         onExpandAll={() => { setShowExport(true); setShowImport(true); }}
         onCollapseAll={() => { setShowExport(false); setShowImport(false); }}

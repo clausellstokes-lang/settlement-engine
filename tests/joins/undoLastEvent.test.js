@@ -68,6 +68,9 @@ import { createSettlementSlice, stripDerivedConfigKeys } from '../../src/store/s
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const gen = (config, seed) =>
@@ -120,8 +123,11 @@ function makeStore() {
 /** Seed the slice with a pipeline-generated settlement and enter canon. */
 function bootCanonStore(settlement) {
   const store = makeStore();
-  store.setState(s => { s.settlement = settlement; s.lastSeed = 'undo-test'; });
-  store.getState().refreshSystemState();
+  store.setState(s => {
+    s.settlement = settlement;
+    s.lastSeed = 'undo-test';
+    s.systemState = deriveSystemState(s.settlement);
+  });
   store.getState().canonize();
   return store;
 }

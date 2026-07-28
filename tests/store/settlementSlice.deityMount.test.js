@@ -25,6 +25,9 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 import {
   DEFAULT_SIMULATION_RULES,
@@ -76,8 +79,11 @@ describe('settlementSlice deity mount — embed → religion gate', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
-    store.setState(s => { s.settlement = fixture(); s.lastSeed = 'seed'; });
-    store.getState().refreshSystemState();
+    store.setState(s => {
+      s.settlement = fixture();
+      s.lastSeed = 'seed';
+      s.systemState = deriveSystemState(s.settlement);
+    });
   });
 
   test('a deity-free settlement leaves the religion subsystem dormant', () => {

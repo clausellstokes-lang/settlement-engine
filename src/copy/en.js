@@ -994,6 +994,8 @@ export const en = Object.freeze({
     notesSaveFail:       'Those notes could not be saved. Your text is still here. Try again.',
     snapshotRestoreUnavailable: 'Snapshot restore is unavailable.',
     snapshotRestoreFail: 'Snapshot could not be restored.',
+    snapshotRecordUnavailable: 'Taking a snapshot is unavailable.',
+    snapshotRecordFail: 'That snapshot could not be recorded. Nothing changed.',
     customContentSampleFail: 'The sample settlement could not be forged. Nothing was saved.',
     customContentWriterSaveUnavailable: 'The immutable content writer is unavailable. Nothing was saved.',
     customContentRevisionUnconfirmed: 'The revision was not durably confirmed, so nothing changed.',

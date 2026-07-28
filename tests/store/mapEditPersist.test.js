@@ -27,6 +27,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
 const stubSlice = () => ({
   auth: { user: null, tier: 'free', loading: false },
@@ -122,7 +125,7 @@ describe('applyMapEdit — cosmetic-always (no canon guard)', () => {
   test('a CANON-locked save still accepts the cosmetic edit (unlike renameNPC)', async () => {
     const store = makeStore();
     withActiveSave(store);
-    store.getState().refreshSystemState();
+    store.setState(s => { s.systemState = deriveSystemState(s.settlement); });
     store.getState().canonize();
     expect(store.getState().phase).toBe('canon');
 
@@ -170,7 +173,7 @@ describe('applyMapEdit — lifecycle (blob-resident survival)', () => {
   test('an undoLastEvent of an unrelated event leaves mapEdits intact', () => {
     const store = makeStore();
     withActiveSave(store);
-    store.getState().refreshSystemState();
+    store.setState(s => { s.systemState = deriveSystemState(s.settlement); });
     store.getState().canonize();
     store.getState().applyEvent({
       id: 'lc-undo', type: 'DAMAGE_INSTITUTION', targetId: 'institution.granary',

@@ -20,6 +20,9 @@ import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+// Harness derivation on the real path (the retired `refreshSystemState` store
+// action was a harness-only door — owner queue #21).
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { mintDeityRef, customRefIdFromItem } from '../../src/lib/customRegistry.js';
 import { deityIdOf } from '../../src/domain/worldPulse/pantheon.js';
 
@@ -65,8 +68,11 @@ function fixture() {
 /** Assign the store's only authored deity as the settlement's patron; return its
  *  embedded identity ref. (setPrimaryDeity is async since the de-eager lane.) */
 async function assignPatron(store, localUid) {
-  store.setState(s => { s.settlement = fixture(); s.lastSeed = 'seed'; });
-  store.getState().refreshSystemState();
+  store.setState(s => {
+    s.settlement = fixture();
+    s.lastSeed = 'seed';
+    s.systemState = deriveSystemState(s.settlement);
+  });
   const res = await store.getState().setPrimaryDeity(customRefIdFromItem(warFather(localUid)));
   expect(res).not.toBeNull();
   return store.getState().settlement.config.primaryDeitySnapshot;

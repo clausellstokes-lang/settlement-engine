@@ -48,7 +48,6 @@ export {
   queueRegionalImpacts,
   relationshipChannelBundle,
   setRegionalChannelStatus,
-  setRegionalChannelVisibility,
   setRegionalImpactStatus,
   stablePart,
   syncRelationshipChannelBundle,

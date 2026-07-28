@@ -8,8 +8,9 @@
  *
  * Pins:
  *   • DECLARED SCOPE — every registered toggleSlice op says
- *     targetScope:'global', and the op inventory is exactly the 15 the
- *     verdict covered (a new toggle op must re-face this contract).
+ *     targetScope:'global', and the op inventory is exactly the 12 the
+ *     verdict still covers (a new toggle op must re-face this contract;
+ *     three callerless ops were retired under owner queue #21, see the list).
  *   • PER-SETTLEMENT CAPTURE — generateSettlement stamps all four live
  *     bags into the pipeline config (_institutionToggles …), and
  *     resolveConfig consumes all four snapshot keys. This capture is what
@@ -35,19 +36,26 @@ import { createToggleSlice } from '../../src/store/toggleSlice.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const read = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 
+// 15 at the queue-#9 verdict → 12 after the R-5b (owner queue #21) retirement of
+// the three toggle ops nothing called: mergeInstitutionToggles (a partial merge
+// with no caller and an un-keepable inverse-call promise) and the two HALF-resets
+// resetToggles / resetGoodsServices (superseded by the whole-bag resetAllToggles).
+// The verdict itself is unchanged — every surviving toggle op is still global by
+// design — and this list stays EXACT in both directions, so a new toggle op must
+// re-face queue #9 rather than slip in beside the survivors.
 const EXPECTED_TOGGLE_OPS = [
-  'toggleInstitution', 'setInstitutionToggles', 'mergeInstitutionToggles',
+  'toggleInstitution', 'setInstitutionToggles',
   'toggleCategory', 'setCategoryToggles',
   'toggleGood', 'setGoodsToggles',
   'toggleService', 'setServiceToggles',
-  'resetToggles', 'resetGoodsServices', 'resetAllToggles',
+  'resetAllToggles',
   'bulkSetInstitutions', 'bulkSetServices', 'bulkSetGoods',
 ];
 
 const BAGS = ['institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles'];
 
 describe('declared scope — the registry layer', () => {
-  test('the toggleSlice op inventory is exactly the 15 the verdict covered', () => {
+  test('the toggleSlice op inventory is exactly the 12 the verdict still covers', () => {
     const registered = Object.values(OPERATIONS)
       .filter(op => op.slice === 'toggleSlice')
       .map(op => op.opType)

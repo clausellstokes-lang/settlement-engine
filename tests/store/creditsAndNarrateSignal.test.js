@@ -8,8 +8,10 @@
  *     Previously the count stayed 0 forever (never called from any spend path).
  *   - computeReaderAudience flips 'new' → 'intermediate' once narrateCount >= 1,
  *     proving the bump actually drives the audience signal.
- *   - spendCredits / addCredits still behave as a balance API (kept, documented
- *     as not on the live server-authoritative spend path).
+ *   - the credit surface is a MIRROR of the server balance: setCreditBalance is
+ *     the only writer, canAfford prices a read-only pre-flight check off it, and
+ *     no local debit/credit door exists. (spendCredits / addCredits were RETIRED
+ *     under owner queue #21 — see the retirement note in creditsSlice.js.)
  */
 import { describe, it, expect } from 'vitest';
 import { create } from 'zustand';
@@ -52,27 +54,46 @@ describe('lifetimeNarrate reader-audience signal (finding #4)', () => {
   });
 });
 
-describe('credit balance actions remain a safe balance API (finding #4)', () => {
-  it('addCredits raises the balance and records a purchase transaction', () => {
+describe('the client mirrors a server-authoritative balance (R-5b, owner queue #21)', () => {
+  // addCredits / spendCredits were RETIRED: a second, client-side ledger beside a
+  // server-authoritative one, called by nothing. What replaces those pins is the
+  // contract that made them retirable — the client only ECHOES what the server
+  // said, and prices a pre-flight check off that echo.
+  it('setCreditBalance is the balance writer and takes the server value verbatim', () => {
     const store = makeStore();
-    store.getState().addCredits(50, 'pack_50');
-    expect(store.getState().creditBalance).toBe(50);
-    expect(store.getState().transactions[0]).toMatchObject({ type: 'purchase', amount: 50 });
+    expect(store.getState().creditBalance).toBe(0);
+    store.getState().setCreditBalance(37); // as returned in `creditsRemaining`
+    expect(store.getState().creditBalance).toBe(37);
+    store.getState().setCreditBalance(0);  // a server-side burn to empty
+    expect(store.getState().creditBalance).toBe(0);
   });
 
-  it('spendCredits debits when affordable and refuses when not', () => {
+  it('canAfford gates on the mirrored balance, never on a local debit', () => {
     const store = makeStore();
-    store.getState().setCreditBalance(10);
-    expect(store.getState().spendCredits(4, 'narrative')).toBe(true);
-    expect(store.getState().creditBalance).toBe(6);
-    expect(store.getState().spendCredits(99, 'narrative')).toBe(false);
-    expect(store.getState().creditBalance).toBe(6); // unchanged on refusal
+    const cost = store.getState().getCost('narrative');
+    expect(cost).toBeGreaterThan(0);
+    store.getState().setCreditBalance(cost - 1);
+    expect(store.getState().canAfford('narrative')).toBe(false);
+    store.getState().setCreditBalance(cost);
+    expect(store.getState().canAfford('narrative')).toBe(true);
+    // The pre-flight check is READ-ONLY: asking does not spend.
+    expect(store.getState().creditBalance).toBe(cost);
   });
 
-  it('elevated roles never debit (unlimited)', () => {
+  it('elevated roles are unlimited regardless of the mirrored balance', () => {
     const store = makeStore({ elevated: true });
-    store.getState().setCreditBalance(3);
-    expect(store.getState().spendCredits(100, 'narrative')).toBe(true);
-    expect(store.getState().creditBalance).toBe(3);
+    store.getState().setCreditBalance(0);
+    expect(store.getState().canAfford('narrative')).toBe(true);
+  });
+
+  it('the slice exposes NO local debit/credit door (the retirement holds)', () => {
+    // Structural, not behavioral: the danger these two ops carried was that a
+    // future caller wires one onto the generation path and double-counts against
+    // the server-set balance. If they (or the client-side `transactions` ledger
+    // they wrote) come back, this reds and that decision gets re-faced.
+    const state = makeStore().getState();
+    for (const gone of ['addCredits', 'spendCredits', 'transactions']) {
+      expect(state[gone], `${gone} was retired under owner queue #21`).toBeUndefined();
+    }
   });
 });
