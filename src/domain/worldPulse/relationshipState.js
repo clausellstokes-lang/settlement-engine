@@ -127,6 +127,35 @@ export const normalizeRelationshipType = (type) =>
 
 export const normalizeType = normalizeRelationshipType;
 
+// Major relationship changes need a longer-lived source than the rolling
+// incident/history windows: a busy border can otherwise evict the alliance,
+// vassalage, or peace that explains its present posture. Keep a separate,
+// deterministic archive, but cap it so persisted edges remain bounded. Twenty-
+// four matches the incident-memory maximum lookback horizon while retaining
+// twice the ordinary history window.
+export const RELATIONSHIP_TURNING_POINT_CAP = 24;
+
+/** @param {any} row */
+function isRelationshipTurningPoint(row) {
+  return row?.type === "label_proposal_applied"
+    || row?.type === "hierarchy_resolution"
+    || (row?.fromType != null && row?.toType != null);
+}
+
+/**
+ * Append one major relationship transition to the separately bounded durable
+ * archive. Callers pass an ensured state, so legacy history has already been
+ * backfilled into the archive before the new transition lands.
+ * @param {any} state
+ * @param {any} entry
+ */
+export function appendRelationshipTurningPoint(state, entry) {
+  const prior = Array.isArray(state?.turningPoints)
+    ? state.turningPoints.filter(isRelationshipTurningPoint)
+    : [];
+  return [...prior.slice(-(RELATIONSHIP_TURNING_POINT_CAP - 1)), entry];
+}
+
 /** @param {any} edge @returns {string} */
 export function relationshipKeyFromEdge(edge) {
   if (edge?.id) return edge.id;
@@ -209,6 +238,14 @@ export function ensureRelationshipState(edge, existing = {}) {
   const defaults = RELATIONSHIP_DEFAULTS[relationshipType] || RELATIONSHIP_DEFAULTS.neutral;
   const recentIncidents = Array.isArray(existing.recentIncidents) ? existing.recentIncidents.slice(-8) : [];
   const history = Array.isArray(existing.history) ? existing.history.slice(-12) : [];
+  // Backfill the major rows a legacy save still retains, then keep writing to
+  // this archive independently of the shorter rolling history window.
+  const turningPointsSource = Array.isArray(existing.turningPoints)
+    ? existing.turningPoints
+    : history.filter(isRelationshipTurningPoint);
+  const turningPoints = turningPointsSource
+    .filter(isRelationshipTurningPoint)
+    .slice(-RELATIONSHIP_TURNING_POINT_CAP);
 
   return {
     relationshipType,
@@ -224,6 +261,7 @@ export function ensureRelationshipState(edge, existing = {}) {
     pactStrength: clamp01(existing.pactStrength ?? defaults.pactStrength ?? 0),
     recentIncidents,
     history,
+    ...(turningPoints.length ? { turningPoints } : {}),
     hierarchyResolutions: Array.isArray(existing.hierarchyResolutions) ? existing.hierarchyResolutions.slice(-6) : [],
     trajectory: existing.trajectory || "stable",
     proposedRelationshipType: existing.proposedRelationshipType || null,

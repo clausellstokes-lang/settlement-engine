@@ -491,7 +491,7 @@ describe('upswing r2 — SAME-TICK COMPOSITION (determinism-constitution-1)', ()
 });
 
 describe('upswing r2 — SINGLE-DECAY obligations (economy-upswing-4)', () => {
-  it('the repayment fold does NOT re-decay a bystander obligation (generosity already decayed it this tick)', () => {
+  it('the repayment fold does NOT re-decay a bystander obligation (pulseKernel owns decay)', () => {
     const obligations = {
       'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 0.6, mintTick: 100, lastTick: 100 },
       'z:bystander:credit': { from: 'z', to: 'bystander', kind: 'credit', magnitude: 0.5, mintTick: 100, lastTick: 100 },

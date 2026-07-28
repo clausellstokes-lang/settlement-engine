@@ -2,12 +2,12 @@
  * proposedSoakBands.js — R-15 THE TUNING-BAND MANIFEST (the proving bands, declared).
  *
  * WHAT THIS IS
- *   A machine-readable, committed declaration of the PROPOSED target-distribution
+ *   A machine-readable, committed declaration of the RATIFIED target-distribution
  *   BANDS for the pre-launch soak: for each governing coupling, the range an OBSERVED
- *   metric should land in for the world to read as "alive but not thrashing." Every
- *   band is a hypothesis to be tested by the soak, not a settled fact — each is marked
- *   status:'PROPOSED' and is soak-vetoable. The soak either confirms a band (the dials
- *   land inside it) or reveals a divergence (a Lane-B retune proposal for the owner).
+ *   metric should land in for the world to read as "alive but not thrashing." The owner
+ *   has signed these targets without changing their proposed values. The soak either
+ *   confirms the dials land inside them or reveals a divergence (a Lane-B retune
+ *   proposal for the owner).
  *
  * HOW IT RELATES TO THE TUNING LOOP (weeklyTuningJob.js)
  *   Each band projects to a §10 ENVELOPE ({ metric, min, max }) via toEnvelopes(). Feed
@@ -31,7 +31,7 @@
  */
 
 /** Bump when the band ENTRY SHAPE or the validation rules change (vocabulary-pin idiom). */
-export const SOAK_BAND_MANIFEST_VERSION = 1;
+export const SOAK_BAND_MANIFEST_VERSION = 2;
 
 /** The coupling families the soak proves. A band must name one of these. */
 export const SOAK_COUPLINGS = Object.freeze([
@@ -44,9 +44,9 @@ export const SOAK_COUPLINGS = Object.freeze([
  *   coupling: string,         // one of SOAK_COUPLINGS
  *   label: string,            // human, house-register label
  *   unit: string,             // what the min/max are measured in
- *   min: number,              // the PROPOSED band floor (envelope.min)
- *   max: number,              // the PROPOSED band ceiling (envelope.max)
- *   status: 'PROPOSED',       // ALWAYS 'PROPOSED' until the soak ratifies (never auto-flips)
+ *   min: number,              // the RATIFIED band floor (envelope.min)
+ *   max: number,              // the RATIFIED band ceiling (envelope.max)
+ *   status: 'RATIFIED',       // owner-signed target; never auto-flips or auto-retunes
  *   constantIds: string[],    // the governing dial(s), or the nearest constants when emergent
  *   constantModule: string,   // where those dials live (repo-relative)
  *   currentValue: number|null,// the primary dial's current value (null when purely emergent)
@@ -58,8 +58,7 @@ export const SOAK_COUPLINGS = Object.freeze([
 /**
  * Validate one band against the manifest contract. Returns { ok, reasons }. A band is
  * valid only if it declares a known coupling, a finite [min, max] with min < max, a
- * non-empty governing-constant list, and status EXACTLY 'PROPOSED' (the soak-vetoable
- * law: nothing in this file is ever a ratified fact).
+ * non-empty governing-constant list, and status EXACTLY 'RATIFIED'.
  * @param {unknown} entry
  * @returns {{ ok: boolean, reasons: string[] }}
  */
@@ -79,7 +78,7 @@ export function validateSoakBand(entry) {
   if (!minOk || !maxOk) reasons.push('min and max must both be finite numbers');
   else if (!(minNum < maxNum)) reasons.push(`min (${minNum}) must be < max (${maxNum})`);
   else if (minNum < 0) reasons.push('min must be >= 0 (a band is a non-negative observed range)');
-  if (e.status !== 'PROPOSED') reasons.push("status must be exactly 'PROPOSED' (bands are soak-vetoable, never pre-ratified)");
+  if (e.status !== 'RATIFIED') reasons.push("status must be exactly 'RATIFIED' (bands are owner-signed targets)");
   if (!Array.isArray(e.constantIds) || e.constantIds.length === 0) reasons.push('constantIds must be a non-empty list');
   else if (!e.constantIds.every((c) => typeof c === 'string' && c)) reasons.push('every constantId must be a non-empty string');
   if (typeof e.constantModule !== 'string' || !e.constantModule) reasons.push('missing constantModule');
@@ -113,19 +112,19 @@ export function assertValidSoakBands(bands) {
  * `constantId` carries the primary dial (informational; these are Lane-B forever, so the
  * loop can only PROPOSE from a divergence). @param {readonly SoakBand[]} [bands]
  */
-export function toEnvelopes(bands = PROPOSED_SOAK_BANDS) {
+export function toEnvelopes(bands = RATIFIED_SOAK_BANDS) {
   return bands.map((b) => ({ metric: b.metric, min: b.min, max: b.max, constantId: b.constantIds[0] }));
 }
 
 /**
- * THE PROPOSED SOAK BANDS. Frozen. Every entry status:'PROPOSED' and soak-vetoable.
+ * THE RATIFIED SOAK BANDS. Frozen. Every entry status:'RATIFIED'.
  * Derived from each coupling's committed tuning comment (quoted in `rationale`) + the
  * current dial value. Metrics are OBSERVED distributions (rates/shares/spans), NOT the
  * dial values themselves — the dial is what produces the metric; the band is where the
  * metric should land.
  * @type {ReadonlyArray<SoakBand>}
  */
-export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
+export const RATIFIED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
   // ── 1. CONTEST / court succession cadence ─────────────────────────────────────
   {
     metric: 'contest.successions_per_faction_decade',
@@ -133,7 +132,7 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Court successions per faction, per sim-decade',
     unit: 'successions per faction per decade',
     min: 1.5, max: 4.0,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['CHALLENGE_RATE', 'COOLDOWN_WEEKS', 'REALM_SUCCESSION_CAP'],
     constantModule: 'src/domain/worldPulse/npcLadderChallenge.js',
     currentValue: 0.05,
@@ -145,11 +144,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Live contested goals per settlement',
     unit: 'live contests per settlement',
     min: 0.05, max: 1.2,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['CONTESTS_PER_SETTLEMENT_CAP', 'DISCOVER_BASE'],
     constantModule: 'src/domain/worldPulse/npcLadderContest.js',
     currentValue: 2,
-    rationale: 'Contests are hard-capped at two live per settlement (CONTESTS_PER_SETTLEMENT_CAP), with a 0.04 per-advance discovery base. A healthy world has occasional live rivalries, not a permanent brawl in every town: mean well under the cap, but non-trivially above zero. The structural ceiling is 2; the proposed watch-band is 0.05 to 1.2.',
+    rationale: 'Contests are hard-capped at two live per settlement (CONTESTS_PER_SETTLEMENT_CAP), with a 0.04 per-advance discovery base. A healthy world has occasional live rivalries, not a permanent brawl in every town: mean well under the cap, but non-trivially above zero. The structural ceiling is 2; the ratified watch-band is 0.05 to 1.2.',
   },
   // ── 2. BOND saturation ────────────────────────────────────────────────────────
   {
@@ -158,11 +157,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Share of live positive bonds at or near the full-mark cap',
     unit: 'fraction of active bonds at >= 0.9 of the cap',
     min: 0.05, max: 0.40,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['BOND_MAX_SEV', 'BOND_MINT_SEV', 'BOND_HALF_LIFE_WEEKS'],
     constantModule: 'src/domain/worldPulse/npcLadderState.js',
     currentValue: 1.0,
-    rationale: 'A bond mints half a mark (BOND_MINT_SEV 0.5), stacks additively, is clamped to a full mark (BOND_MAX_SEV 1.0), and fades on a ~3-year half-life (BOND_HALF_LIFE_WEEKS 156). If most live bonds sit maxed, the mint is too generous or decay too slow (everyone is everyone else best friend); if almost none approach the cap, bonds never deepen. The proposed watch-band is 5 to 40 percent of live bonds near the cap.',
+    rationale: 'A bond mints half a mark (BOND_MINT_SEV 0.5), stacks additively, is clamped to a full mark (BOND_MAX_SEV 1.0), and fades on a ~3-year half-life (BOND_HALF_LIFE_WEEKS 156). If most live bonds sit maxed, the mint is too generous or decay too slow (everyone is everyone else best friend); if almost none approach the cap, bonds never deepen. The ratified watch-band is 5 to 40 percent of live bonds near the cap.',
   },
   // ── 3. FESTIVAL cadence + outcome ─────────────────────────────────────────────
   {
@@ -171,11 +170,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Festivals actually observed per settlement, per year',
     unit: 'observances per settlement per year',
     min: 0.55, max: 0.98,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['SKIP_PROSPERITY_RANK_MAX'],
     constantModule: 'src/domain/worldPulse/traditionsKernel.js',
     currentValue: 0,
-    rationale: 'A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (SKIP_PROSPERITY_RANK_MAX 0) cancel it. A healthy world celebrates most years with some cancellations, so the observed rate sits below the once-per-year ceiling of 1.0: a proposed 0.55 to 0.98. A rate near 1.0 means nothing is ever hard enough to cancel; a low rate means the world is in permanent crisis.',
+    rationale: 'A festival window opens once per year, but hard stressors (plague, famine, war, occupation) and a Subsistence economy (SKIP_PROSPERITY_RANK_MAX 0) cancel it. A healthy world celebrates most years with some cancellations, so the observed rate sits below the once-per-year ceiling of 1.0: a ratified 0.55 to 0.98. A rate near 1.0 means nothing is ever hard enough to cancel; a low rate means the world is in permanent crisis.',
   },
   {
     metric: 'festival.triumph_share',
@@ -183,11 +182,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Share of observed festivals that score a triumph',
     unit: 'fraction of observances scoring triumph',
     min: 0.15, max: 0.45,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['BASE', 'TRIUMPH_OFFSET'],
     constantModule: 'src/domain/worldPulse/traditionsKernel.js',
     currentValue: 0.55,
-    rationale: 'The success model centres on BASE 0.55 with a triumph reached when the seed draw beats score+TRIUMPH_OFFSET (-0.25), i.e. roughly the lower ~30 percent of draws at a middling economy, shifted by prosperity and memory. Triumphs should be a real minority, not routine and not vanishing: a proposed 0.15 to 0.45.',
+    rationale: 'The success model centres on BASE 0.55 with a triumph reached when the seed draw beats score+TRIUMPH_OFFSET (-0.25), i.e. roughly the lower ~30 percent of draws at a middling economy, shifted by prosperity and memory. Triumphs should be a real minority, not routine and not vanishing: a ratified 0.15 to 0.45.',
   },
   // ── 4. GRATITUDE mint ─────────────────────────────────────────────────────────
   {
@@ -196,11 +195,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Share of qualifying gifts that deposit a lasting gratitude bond',
     unit: 'fraction of gifts that mint above the obligation floor',
     min: 0.40, max: 0.90,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['GRATITUDE_MITE', 'TIE_BIND'],
     constantModule: 'src/domain/spatial/generosityReactions.js',
     currentValue: 1.0,
-    rationale: 'Gratitude scales with need relieved and the giver sacrifice (the widow-mite rule: GRATITUDE_MITE 1.0 lets a costly gift bind up to twice a costless one), with a small lift for gifts through a named tie (TIE_BIND 0.25), clamped to a full mark. Most meaningful gifts should leave a mark, but not every trivial transfer: a proposed 40 to 90 percent mint rate above the obligation floor.',
+    rationale: 'Gratitude scales with need relieved and the giver sacrifice (the widow-mite rule: GRATITUDE_MITE 1.0 lets a costly gift bind up to twice a costless one), with a small lift for gifts through a named tie (TIE_BIND 0.25), clamped to a full mark. Most meaningful gifts should leave a mark, but not every trivial transfer: a ratified 40 to 90 percent mint rate above the obligation floor.',
   },
   {
     metric: 'gratitude.mean_minted_severity',
@@ -208,11 +207,11 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Mean severity of a freshly minted gratitude bond',
     unit: 'bond severity in [0, 1]',
     min: 0.20, max: 0.70,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['GRATITUDE_MITE', 'TIE_BIND'],
     constantModule: 'src/domain/spatial/generosityReactions.js',
     currentValue: 1.0,
-    rationale: 'Minted severity is clamped to [0, 1] and driven by need, sacrifice, and tie. A mean near 1.0 means every gift is a life-debt (the mint is too hot); a mean near 0 means gratitude never accumulates. The proposed watch-band is a mean of 0.20 to 0.70, leaving headroom for the exceptional widow-mite gift to stand out.',
+    rationale: 'Minted severity is clamped to [0, 1] and driven by need, sacrifice, and tie. A mean near 1.0 means every gift is a life-debt (the mint is too hot); a mean near 0 means gratitude never accumulates. The ratified watch-band is a mean of 0.20 to 0.70, leaving headroom for the exceptional widow-mite gift to stand out.',
   },
   // ── 5. OCCUPATION-FLIGHT ───────────────────────────────────────────────────────
   {
@@ -221,12 +220,12 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Annual share of an occupied settlement population that flees',
     unit: 'fraction of population per year, occupied settlements',
     min: 0.02, max: 0.15,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['WAR_CRISIS_ARCHETYPES_RATE_PRESS', 'SEVERE_FLIGHT_CAP'],
     constantModule: 'src/domain/worldPulse/populationDynamics.js',
     currentValue: null,
     emergent: true,
-    rationale: 'Flight is emergent: occupation presses the monthly population rate down by 0.016, and crisis-flight settlements are capped at 18 percent of population per interval (versus 5.5 percent normal). The design law is rescuable, not annihilated, so a bounded but visible bleed is right: a proposed 2 to 15 percent per year. The 18 percent per-interval severe cap is the hard structural ceiling this band sits under; below 2 percent, an occupied town does not visibly bleed at all.',
+    rationale: 'Flight is emergent: occupation presses the monthly population rate down by 0.016, and crisis-flight settlements are capped at 18 percent of population per interval (versus 5.5 percent normal). The design law is rescuable, not annihilated, so a bounded but visible bleed is right: a ratified 2 to 15 percent per year. The 18 percent per-interval severe cap is the hard structural ceiling this band sits under; below 2 percent, an occupied town does not visibly bleed at all.',
   },
   // ── 6. COUP-ECON swing ─────────────────────────────────────────────────────────
   {
@@ -235,10 +234,10 @@ export const PROPOSED_SOAK_BANDS = Object.freeze(/** @type {SoakBand[]} */ ([
     label: 'Coup-success swing between a prosperous seat and a hollowed one',
     unit: 'delta in coup-success probability across the prosperity spectrum',
     min: 0.05, max: 0.25,
-    status: 'PROPOSED',
+    status: 'RATIFIED',
     constantIds: ['economicAdj_divisor_400'],
     constantModule: 'src/domain/worldPulse/coup.js',
     currentValue: 0.125,
-    rationale: 'The economic term shifts the incumbent hold-chance by (economic_capacity - 50) / 400, i.e. plus or minus 0.125 at the extremes. A prosperous seat holds; a hollowed treasury falls. The observed coup-success-rate difference between the richest and poorest seats should approach but not exceed twice that span (~0.25). A swing near 0 means prosperity does not matter; a proposed watch-band of 0.05 to 0.25 keeps the economy load-bearing without deciding every coup.',
+    rationale: 'The economic term shifts the incumbent hold-chance by (economic_capacity - 50) / 400, i.e. plus or minus 0.125 at the extremes. A prosperous seat holds; a hollowed treasury falls. The observed coup-success-rate difference between the richest and poorest seats should approach but not exceed twice that span (~0.25). A swing near 0 means prosperity does not matter; a ratified watch-band of 0.05 to 0.25 keeps the economy load-bearing without deciding every coup.',
   },
 ]));

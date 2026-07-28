@@ -5,6 +5,8 @@
  * fog-mediated forgiveness + refusal damage (§3.2/§3.3), the typed incidents (§2.1), the
  * §G named-tie CLAMP, and the moral-hazard buffer decay + recovery (scenario 10).
  */
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, it, expect } from 'vitest';
 import {
   REACTION_TUNING, RELIEF_INCIDENT_KINDS,
@@ -14,6 +16,7 @@ import {
   creditMaturityResolution, lendAppetiteStep, lendAppetiteOf,
 } from '../../src/domain/spatial/generosityReactions.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { advanceObligationDecay } from '../../src/domain/worldPulse/obligationDecay.js';
 
 describe('the widow\'s mite (§3.1) — gratitude ∝ need × the giver\'s sacrifice', () => {
   it('the same need binds TIGHTER when the gift cost the giver more (the poor friend)', () => {
@@ -80,6 +83,49 @@ describe('the obligation sub-ledger (§3.1) — fold, deepen, repay, prune', () 
     while (led && ticks < 5000) { led = foldObligations(led, { now: ++ticks }); }
     expect(led).toBeNull();
     expect(ticks).toBeGreaterThan(5); // it does LINGER (slow decay), not vanish next tick
+  });
+  it('pulseKernel unconditionally schedules exactly one tuned 0.02 decay per tick', () => {
+    const key = obligationKey('b', 'a', 'grain_relief');
+    const prior = {
+      [key]: {
+        from: 'b',
+        to: 'a',
+        kind: 'grain_relief',
+        magnitude: 0.5,
+        mintTick: 1,
+        lastTick: 1,
+      },
+    };
+    const worldState = setSpatialLedger({ tick: 2 }, 'obligations', prior);
+    const decayed = advanceObligationDecay(worldState, 2);
+
+    expect(getSpatialLedger(decayed, 'obligations')[key].magnitude).toBe(0.49);
+    expect(advanceObligationDecay({ tick: 2 }, 2)).toEqual({ tick: 2 });
+  });
+
+  it('every other runtime obligation fold is mutation-only (decayPerTick:0)', () => {
+    const root = fileURLToPath(new URL('../../src/domain/worldPulse/', import.meta.url));
+    const files = [];
+    const walk = (dir) => {
+      for (const name of readdirSync(dir)) {
+        const path = `${dir}/${name}`;
+        if (statSync(path).isDirectory()) walk(path);
+        else if (name.endsWith('.js')) files.push(path);
+      }
+    };
+    walk(root);
+
+    const calls = files.flatMap(path => [...readFileSync(path, 'utf8')
+      .matchAll(/foldObligations\([\s\S]*?\);/g)]
+      .map(match => ({ path, source: match[0] })));
+    const decayOwners = calls.filter(row => !row.source.includes('decayPerTick: 0'));
+
+    expect(calls).toHaveLength(5);
+    expect(decayOwners).toHaveLength(1);
+    expect(decayOwners[0].path.endsWith('/obligationDecay.js')).toBe(true);
+    expect(decayOwners[0].source).toContain('REACTION_TUNING.OBLIGATION_DECAY');
+    const pulseSource = readFileSync(`${root}/pulseKernel.js`, 'utf8');
+    expect(pulseSource.match(/advanceObligationDecay\(/g)).toHaveLength(1);
   });
   it('DORMANCY: an empty fold + dropSpatialLedger is byte-identical to a world that never had the ledger', () => {
     const base = { tick: 3, calendar: {}, foo: 1 };

@@ -790,10 +790,10 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   }
 
   // Mature consumed ally obligations (the conservation debit) into the obligations ledger.
-  // SINGLE-DECAY LAW (r2 economy-upswing-4): decayPerTick:0 — advanceGenerosity (and, when
-  // intervening, convergence) already folded+decayed this same ledger earlier THIS tick; a
-  // second whole-ledger decay here would erode every debt faster than the tuned rate. This
-  // pass is repayment-only.
+  // SINGLE-DECAY LAW (r2 economy-upswing-4): decayPerTick:0 — pulseKernel's
+  // unconditional owner already decayed this ledger once THIS tick. A second
+  // whole-ledger decay here would erode every debt faster than the tuned rate.
+  // This pass is repayment-only.
   if (obligationRepayments.length) {
     const prevObl = /** @type {Record<string, unknown>|null} */ (getSpatialLedger(worldState, 'obligations'));
     const nextObl = foldObligations(prevObl, { mints: [], repayments: obligationRepayments, now: tick, decayPerTick: 0 });

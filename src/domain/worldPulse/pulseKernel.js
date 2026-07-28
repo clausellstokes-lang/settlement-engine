@@ -68,7 +68,7 @@ import { advanceCalamity } from './calamityKernel.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { rumorCarrierParams } from '../spatial/migrationRumors.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
-import { advanceGenerosity } from './generosityKernel.js';
+import { advanceGenerosity, advanceObligationDecay } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
@@ -1344,7 +1344,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
   // @pulse-stage: consequence_fold
-  let memoryState = applied.worldState;
+  let memoryState = advanceObligationDecay(applied.worldState, worldState.tick);
   // E0 NARRATIVE TEMPO GOVERNOR — WRITE hook (design §7.2). Fold this tick's landed
   // spontaneous major births + the seam's deferrals into the next narrativeTempo
   // ledger, window-stamped on the PRE-TICK `worldState.calendar.elapsedWeeks`

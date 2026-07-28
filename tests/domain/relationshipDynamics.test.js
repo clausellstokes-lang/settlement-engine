@@ -4,6 +4,7 @@ import {
   applyRelationshipPatch,
   evaluateRelationshipRules,
   pressureIndex,
+  RELATIONSHIP_TURNING_POINT_CAP,
 } from '../../src/domain/worldPulse/index.js';
 
 function item(id, patch = {}) {
@@ -521,6 +522,36 @@ describe('relationship dynamics rulebook', () => {
       patronSaveId: null,
       clientSaveId: null,
     });
+  });
+
+  test('major label changes outlive rolling history in a separately hard-capped archive', () => {
+    let worldState = {
+      tick: 0,
+      relationshipStates: { 'edge.pair': { relationshipType: 'neutral' } },
+    };
+
+    for (let tick = 1; tick <= RELATIONSHIP_TURNING_POINT_CAP + 6; tick += 1) {
+      const fromType = tick % 2 ? 'neutral' : 'rival';
+      const toType = tick % 2 ? 'rival' : 'neutral';
+      worldState = applyRelationshipPatch({ ...worldState, tick }, {
+        id: `outcome.label.${tick}`,
+        relationshipKey: 'edge.pair',
+        relationshipPatch: {},
+        proposalPayload: {
+          kind: 'relationship_label_change',
+          fromType,
+          toType,
+          reason: `turning point ${tick}`,
+        },
+      }, '2026-06-11T00:00:00.000Z');
+    }
+
+    const state = worldState.relationshipStates['edge.pair'];
+    expect(state.history).toHaveLength(12);
+    expect(state.turningPoints).toHaveLength(RELATIONSHIP_TURNING_POINT_CAP);
+    expect(state.turningPoints[0].outcomeId).toBe('outcome.label.7');
+    expect(state.turningPoints.at(-1).outcomeId)
+      .toBe(`outcome.label.${RELATIONSHIP_TURNING_POINT_CAP + 6}`);
   });
 
   // Regional triage pin: the conflict obligation reads BOTH allies — the

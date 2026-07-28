@@ -168,7 +168,10 @@ function tierCandidate(item, drift, tick, rules) {
     // forced to proposal under dm_only/recommendations).
     applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),
     headline: `${item.name || item.id} may ${drift.direction === 'promotion' ? 'rise' : 'fall'} to ${drift.toTier}`,
-    summary: `${item.name || item.id} has met ${drift.direction} eligibility for ${drift.streak} advancement(s).`,
+    // Eligibility is conjunctive in substance: population proximity/failure
+    // and the support vector jointly decide a tier drift. Name both here so
+    // the DM never reads the streak as a population-only threshold.
+    summary: `${item.name || item.id} has met combined population and support ${drift.direction} eligibility for ${drift.streak} consecutive advances.`,
     reasons: [
       drift.reason,
       `Minimum streak ${minimum}; current streak ${drift.streak}.`,

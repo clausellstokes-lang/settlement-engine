@@ -1060,7 +1060,8 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   // Obligations sub-ledger (fold this tick's mints + credit-maturity repayments, decay+prune;
   // drop-when-empty).
   if (obligationMints.length || obligationRepayments.length || obligationLedger) {
-    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, repayments: obligationRepayments, now: tick });
+    // pulseKernel already owns this tick's one 0.02 decay; mutate only here.
+    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, repayments: obligationRepayments, now: tick, decayPerTick: 0 });
     if (JSON.stringify(nextObl || null) !== JSON.stringify(obligationLedger || null)) {
       nextWorldState = nextObl
         ? setSpatialLedger(nextWorldState, 'obligations', nextObl)
@@ -1376,3 +1377,4 @@ function sortedRecord(rec) {
 }
 
 export { REACTION_TUNING };
+export { advanceObligationDecay } from './obligationDecay.js';

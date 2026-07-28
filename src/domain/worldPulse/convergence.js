@@ -1193,7 +1193,13 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
   // Mint the installed-regime obligations (only when a challenger-intervention prevailed).
   if (obligationMints.length) {
     const priorObligations = /** @type {Record<string, unknown> | null} */ (getSpatialLedger(nextWorldState, 'obligations') || null);
-    const folded = foldObligations(priorObligations, { mints: obligationMints, now: nowTick });
+    // pulseKernel already applied the ledger's one unconditional decay this
+    // tick; intervention only mints the installed-regime obligations.
+    const folded = foldObligations(priorObligations, {
+      mints: obligationMints,
+      now: nowTick,
+      decayPerTick: 0,
+    });
     nextWorldState = folded
       ? setSpatialLedger(nextWorldState, 'obligations', folded)
       : dropSpatialLedger(nextWorldState, 'obligations');

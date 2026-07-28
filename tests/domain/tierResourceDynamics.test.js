@@ -625,7 +625,28 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
   it('emits a tier candidate when no tier proposal is pending for the settlement', () => {
     const result = evaluateTierResourceDynamics(promotionWorldState([]), promotionSnapshot(), undefined, { tick: 9 });
 
-    expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(true);
+    const candidate = result.candidates.find(entry => entry.candidateType === 'tier_promotion');
+    expect(candidate).toBeTruthy();
+    expect(candidate.summary).toContain('combined population and support promotion eligibility');
+  });
+
+  it('describes demotion as combined population and support eligibility too', () => {
+    const worldState = {
+      tick: 8,
+      settlementTickStates: {
+        a: { tierDrift: { direction: 'demotion', toTier: 'village', streak: 1 } },
+      },
+      proposals: [],
+    };
+    const snapshot = {
+      settlements: [item('a', settlement('Ashford', { tier: 'town', population: 500 }), 0)],
+    };
+
+    const result = evaluateTierResourceDynamics(worldState, snapshot, undefined, { tick: 9 });
+    const candidate = result.candidates.find(entry => entry.candidateType === 'tier_demotion');
+
+    expect(candidate).toBeTruthy();
+    expect(candidate.summary).toContain('combined population and support demotion eligibility');
   });
 
   it('skips re-emitting while a pending tier proposal already targets the settlement', () => {

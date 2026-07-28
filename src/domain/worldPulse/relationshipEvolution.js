@@ -12,7 +12,15 @@
  * this module's public surface (candidateDirection, settlementStrength,
  * signed*Factor) are re-exported from the helper leaf for the same reason.
  */
-import { clamp01, RELATIONSHIP_DEFAULTS, relationshipKeyFromEdge, getRelationshipSettlements, normalizeRelationshipEdge, ensureRelationshipState } from './relationshipState.js';
+import {
+  appendRelationshipTurningPoint,
+  clamp01,
+  RELATIONSHIP_DEFAULTS,
+  relationshipKeyFromEdge,
+  getRelationshipSettlements,
+  normalizeRelationshipEdge,
+  ensureRelationshipState,
+} from './relationshipState.js';
 import { pressureFor, strongestPressure, EMPTY_DISPOSITION, EMPTY_TRADE_SALIENCE, buildRelationshipIndex, sharedEnemyAllianceCandidate } from './relationshipRuleHelpers.js';
 import { RULE_EVALUATORS, tradeLeverageCandidate } from './relationshipRulesAdversarial.js';
 import { facetOf } from '../spatial/cohesionWeave.js';
@@ -21,6 +29,7 @@ export {
   RELATIONSHIP_TYPE_ALIASES, normalizeRelationshipType,
   relationshipKeyFromEdge, getRelationshipSettlements, relationshipRoles,
   normalizeRelationshipEdge, ensureRelationshipState,
+  appendRelationshipTurningPoint, RELATIONSHIP_TURNING_POINT_CAP,
 } from './relationshipState.js';
 export {
   candidateDirection, signedDispositionFactor, signedTradeSalienceFactor, settlementStrength,
@@ -411,6 +420,9 @@ export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type 
       },
     ],
     history: historyEntry ? [...(current.history || []).slice(-11), historyEntry] : current.history || [],
+    ...(historyEntry
+      ? { turningPoints: appendRelationshipTurningPoint(current, historyEntry) }
+      : {}),
   };
 
   return {

@@ -188,7 +188,12 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const proposal of worldState?.proposals || []) {
     if (proposal?.status === 'applied' && proposal?.outcome?.id) appliedMarkers.add(proposal.outcome.id);
   }
-  for (const store of [relState.recentIncidents, relState.hierarchyResolutions, relState.history]) {
+  for (const store of [
+    relState.recentIncidents,
+    relState.hierarchyResolutions,
+    relState.turningPoints,
+    relState.history,
+  ]) {
     for (const row of store || []) {
       if (row?.outcomeId) appliedMarkers.add(row.outcomeId);
     }
@@ -226,6 +231,14 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   for (const item of relState.hierarchyResolutions || []) {
     const entry = memoryEntry({ severity: 0.74, ...item }, currentTick, 'hierarchy_resolution');
     add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type || 'hierarchy_resolution')]);
+  }
+  // Major label/hierarchy changes survive in a separate bounded archive even
+  // after the rolling history window fills. Read it before history so the
+  // durable copy claims the identity and the duplicate short-window row cannot
+  // double-score.
+  for (const item of relState.turningPoints || []) {
+    const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_turning_point');
+    add(entry, [outcomeKeyFor(item?.outcomeId), keyFor(item?.tick, item?.type)]);
   }
   for (const item of relState.history || []) {
     const entry = memoryEntry({ severity: 0.62, ...item }, currentTick, 'relationship_history');

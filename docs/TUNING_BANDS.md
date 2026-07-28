@@ -1,14 +1,13 @@
 # Tuning Bands (the proving bands for the soak)
 
-The declared, PROPOSED target ranges the pre-launch soak proves the world against. For
+The declared, RATIFIED target ranges the pre-launch soak proves the world against. For
 each governing coupling, a soak band says where an OBSERVED metric should land for the
 world to read as **alive but not thrashing**. The machine-readable source of truth is
 `src/domain/tuning/proposedSoakBands.js`; this document is its human companion.
 
-> **Every band is PROPOSED and soak-vetoable.** Nothing here is a ratified fact. A band
-> is a hypothesis: the soak either confirms it (the dials land inside) or reveals a
-> divergence (a proposal for the owner to retune a dial or move the band). No band ever
-> auto-promotes itself out of `PROPOSED`.
+> **Every band is RATIFIED.** The owner has accepted the existing proposed ranges
+> unchanged as the targets for the soak. A divergence still produces a proposal for
+> explicit review; it never auto-retunes a dial or silently moves a band.
 
 ---
 
@@ -41,7 +40,7 @@ auto-apply one. A band divergence is a note for the owner, not a lever the machi
 
 ## The bands
 
-Ranges are the current PROPOSED values (see the manifest for the full rationale strings).
+Ranges are the current RATIFIED values (see the manifest for the full rationale strings).
 
 ### Contest / court-succession cadence
 | Metric | Band | Dial(s) | Current |
@@ -106,8 +105,8 @@ matter; the band keeps the economy load-bearing without deciding every coup.
 
 ## Vetoing or retuning a band
 
-1. Edit the band in `src/domain/tuning/proposedSoakBands.js` (change `min`/`max`, or the
-   rationale). The band stays `PROPOSED`.
+1. Propose the band change in `src/domain/tuning/proposedSoakBands.js` (change `min`/`max`,
+   or the rationale) and obtain explicit owner re-ratification before it lands.
 2. `npm run validate:tuning-bands` (also in `npm run check`) schema-guards the edit.
 3. If the soak shows a dial's observed metric is outside its band, that is a divergence:
    either retune the dial (a Lane-B change, owner-signed, may re-mint goldens) or move the

@@ -394,8 +394,9 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
   }
 
   if (obligationMints.length) {
-    // Fold reparation obligations through the generosity ledger's OWN writer. decayPerTick:0 —
-    // the generosity mover already decayed the ledger THIS tick; the assize only upserts.
+    // Fold reparation obligations through the generosity ledger's OWN writer.
+    // pulseKernel already applied this tick's one unconditional decay, so the
+    // assize only upserts.
     const prev = getSpatialLedger(nextWorldState, 'obligations');
     const mints = obligationMints.map((m) => ({ from: m.from, to: m.to, kind: m.kind, magnitude: round4(clamp01(m.magnitude)), mintTick: now2, lastTick: now2 }));
     const nextObl = foldObligations(/** @type {Record<string, unknown>} */ (prev), { mints, repayments: [], now: now2, decayPerTick: 0 });
