@@ -45,6 +45,17 @@ type RateAdmin = {
   };
 };
 
+/**
+ * Shallow public boundary for generated Supabase clients. Expanding their full
+ * recursive return types at each edge-function call site can exceed Deno's type
+ * instantiation limit; callable rpc/from members retain the useful contract
+ * without importing that recursive graph.
+ */
+type RateAdminBoundary = {
+  rpc: (...args: never[]) => unknown;
+  from?: (...args: never[]) => unknown;
+};
+
 /** One dimension: true only when the RPC returns a definite under-rate. */
 async function underKey(
   admin: RateAdmin,
@@ -75,7 +86,7 @@ async function underKey(
  * @param admin a service-role client (ingest_check_rate is granted to service_role)
  */
 export async function checkUserIpRate(
-  admin: RateAdmin,
+  admin: RateAdminBoundary,
   opts: {
     prefix: string;
     userId?: string | null;
@@ -86,15 +97,16 @@ export async function checkUserIpRate(
     ipWindowSeconds?: number;
   },
 ): Promise<boolean> {
+  const rateAdmin = admin as RateAdmin;
   if (opts.userId) {
-    if (!(await underKey(admin, `${opts.prefix}:u:${opts.userId}`, opts.userMax, opts.userWindowSeconds))) {
+    if (!(await underKey(rateAdmin, `${opts.prefix}:u:${opts.userId}`, opts.userMax, opts.userWindowSeconds))) {
       return false;
     }
   }
   if (opts.ip && opts.ip !== '0.0.0.0') {
     const ipMax = opts.ipMax ?? opts.userMax * 3;
     const ipWindow = opts.ipWindowSeconds ?? opts.userWindowSeconds;
-    if (!(await underKey(admin, `${opts.prefix}:ip:${opts.ip}`, ipMax, ipWindow))) {
+    if (!(await underKey(rateAdmin, `${opts.prefix}:ip:${opts.ip}`, ipMax, ipWindow))) {
       return false;
     }
   }
@@ -193,11 +205,13 @@ export async function checkAiIpRate(
  * credits charged"). Keeps each call site to two lines.
  */
 export async function aiIpRateGuard(
-  admin: RateAdmin,
+  // checkAiIpRate itself stays typed against the exact result shapes; this
+  // boundary only prevents call-site expansion of Supabase's recursive client.
+  admin: RateAdminBoundary,
   ip: string | null | undefined,
   corsHeaders: Record<string, string>,
 ): Promise<Response | null> {
-  const r = await checkAiIpRate(admin, ip);
+  const r = await checkAiIpRate(admin as RateAdmin, ip);
   if (r.ok) return null;
   const status = r.reason === 'over' ? 429 : 503;
   const error = r.reason === 'over'
