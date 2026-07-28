@@ -84,9 +84,10 @@ or uncoached-user evidence remain physical gates rather than open design picks.
 - **P14:** sign the K1 budgets; K3 plates are engineering evidence, not customer
   proof, and scene tone remains tied to 3D evidence. **P15:** keep the hybrid
   de-round result; `MemberSettlementsList` and `SimulationRulesGateToggle` stay
-  retired while the wired `GalleryMapsSidebar` stays. **P16–P22:** retain their
-  recorded deferrals/address-space boundaries until the named prerequisites
-  exist.
+  retired while the wired `GalleryMapsSidebar` stays. **P16–P19/P22:** retain
+  their recorded prerequisite holds and address-space boundary. **P20** is stale:
+  no plate `.orig` files remain tracked. **P21** is shipped as five
+  `fieldManifest` snapshot records, so it is no longer a taste decision.
 
 **Platform/money rulings.**
 
