@@ -837,3 +837,23 @@ everything else green):
    AFTER the merge (the bundle derives from app code; its freshness test prescribes the command).
 REGEN PROCEDURE at sign-off: UPDATE_GOLDEN=1 for 1-3, vitest -u for 4, UPDATE_GOLDEN for 5 per its
 header, build:edge-shared for 6 — one commit, owner-co-signed, then merge to review-fixes.
+
+## 2026-07-26 — plot-hook "worst ≤ 15%" was a mis-specified statistic (test corrected, engine untouched)
+
+`tests/simulation/distributionEnvelopes.test.js`'s hook-repetition test failed
+(worst 16.67% @ city/envelope-0). Measured over 2000 settlements base-vs-dirty:
+the REAL ratchet — corpus duplication ≤ 2% — is unmoved (base 0.96%, dirty
+0.93%, difference −0.5 SE, direction favouring the dirty tree), and the
+per-city exceedance rate behind the "worst" statistic is IDENTICAL in both
+trees (32/1000 = 3.2%). The `worst ≤ 15%` assertion was a max over ~50 cities
+of a 3.2%-per-city event: ~80% failure probability on any seed block, and the
+COMMITTED BASE ITSELF fails it at seeds 0-199 (20.0%) and 0-499 (29.2%). The
+base's green at seeds 0-49 was a ~20% lottery win; an NPC-count reroll from the
+npcGenerator decomposition (city/envelope-0: 14 → 15 NPCs) moved one city over
+the line. Correction (manager authority — a broken instrument, not a balance
+call): the max assertion becomes an exceedance-count bound (≤ 5 of ~100
+settlements over 15%; measured base 0, dirty 1, expected ~1.6), which still
+trips violently on a real registry regression (the pre-fix 8.19% corpus state
+would score dozens). The corpus ≤ 2% ratchet is untouched. Standing follow-up
+unchanged: enlarge the ~11-string NPC_FACTION_LOYALTY pools so a 16-NPC city
+cannot exhaust them (authored content, not code).
