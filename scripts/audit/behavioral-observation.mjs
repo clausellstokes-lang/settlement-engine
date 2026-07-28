@@ -73,14 +73,19 @@ const DESTRUCTIVE_ARC_TOKENS = Object.freeze([
 // Exact production vocabulary only. Generic `challenge` / `contest` tokens also
 // describe rival-power and religious contests, while faction capture and
 // vassalization are not seat successions.
-const SUCCESSION_ATTEMPT_CANDIDATE_TYPES = new Set([
+const SUCCESSION_ATTEMPT_APPLIED_TYPES = new Set([
   'stressor_birth_coup_detat',
   'faction_government_challenge',
 ]);
 
-const SUCCESSION_COMPLETION_CANDIDATE_TYPES = new Set([
+const SUCCESSION_COMPLETION_APPLIED_TYPES = new Set([
   'coup_succeeded',
   'faction_government_challenge',
+]);
+
+const SUCCESSION_PROPOSAL_TYPES = new Set([
+  ...SUCCESSION_ATTEMPT_APPLIED_TYPES,
+  ...SUCCESSION_COMPLETION_APPLIED_TYPES,
 ]);
 
 const OBSERVED_YEAR_TICKS = 52;
@@ -403,22 +408,38 @@ function isLadderChallengeReceipt(record) {
   return tags.has('npc_ladder') && (tags.has('rise') || tags.has('failed'));
 }
 
-function successionObservationOf(result, records, postApplyRecords) {
-  let attempts = records.filter((record) => (
-    SUCCESSION_ATTEMPT_CANDIDATE_TYPES.has(String(record?.candidateType || ''))
+function proposalCandidateType(proposal) {
+  return String(proposal?.outcome?.candidateType || proposal?.candidateType || '');
+}
+
+/**
+ * Selected is not applied: every proposal-mode outcome appears in `selected`
+ * before applyWorldPulseOutcomes parks it for the DM. Actual succession credit
+ * therefore comes only from autoApplied receipts (plus the NPC ladder's explicit
+ * rise/failed receipts). Proposal receipts remain visible as a separate count.
+ */
+function successionObservationOf(result, postApplyRecords) {
+  const applied = Array.isArray(result?.autoApplied) ? result.autoApplied : [];
+  let attempts = applied.filter((record) => (
+    SUCCESSION_ATTEMPT_APPLIED_TYPES.has(String(record?.candidateType || ''))
   )).length;
-  let completions = (Array.isArray(result?.autoApplied) ? result.autoApplied : [])
-    .filter((record) => (
-      SUCCESSION_COMPLETION_CANDIDATE_TYPES.has(String(record?.candidateType || ''))
-      || (record?.type === 'power_transfer' && record?.powerTransfer?.cause === 'coup')
-    )).length;
+  let completions = applied.filter((record) => (
+    SUCCESSION_COMPLETION_APPLIED_TYPES.has(String(record?.candidateType || ''))
+    || (record?.type === 'power_transfer' && record?.powerTransfer?.cause === 'coup')
+  )).length;
+  const pendingProposalIds = new Set((Array.isArray(result?.proposals) ? result.proposals : [])
+    .filter((proposal) => (
+      proposal?.status === 'pending'
+      && SUCCESSION_PROPOSAL_TYPES.has(proposalCandidateType(proposal))
+    ))
+    .map((proposal, index) => String(proposal?.id || `pending-succession:${index}`)));
 
   for (const record of postApplyRecords) {
     if (!isLadderChallengeReceipt(record)) continue;
     attempts += 1;
     if ((record.tags || []).map(String).includes('rise')) completions += 1;
   }
-  return { attempts, completions };
+  return { pendingProposals: pendingProposalIds.size, attempts, completions };
 }
 
 function factionName(faction) {
@@ -627,7 +648,7 @@ export function observeBehavioralYear({
     }
   }
 
-  const succession = successionObservationOf(result, records, postApplyRecords);
+  const succession = successionObservationOf(result, postApplyRecords);
 
   return {
     year,

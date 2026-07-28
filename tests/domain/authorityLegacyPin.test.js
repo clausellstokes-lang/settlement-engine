@@ -2,18 +2,22 @@
  * authorityLegacyPin.test.js — CL-0 gate (b): the four ROGUE severity-gated
  * candidate families (pressure_event, faction_competition, stressor_escalation,
  * relationship_evolution — changeAuthorityPolicy.js names them) plus every
- * other candidate family produce IDENTICAL candidates/applyMode to pre-CL0
- * HEAD under legacy rules, per flag value.
+ * other candidate family preserve their pre-CL0 applyMode under legacy rules.
+ * The initial no-pending tick remains byte-identical per flag value.
  *
  * tests/fixtures/cl0-rogue-authority-pin.json was captured at HEAD
  * (2026-07-11, pre-CL0): a fixed 3-settlement crisis fixture advanced 4 real
  * one-week ticks under majorChangesRequireProposal true AND false, recording
  * every rollExplanation (candidate id/type/family/severity/probability/roll/
  * passed/applyMode) and the selected/auto/proposal partitions. The post-CL0
- * engine — with authorityFor routed through every family — must replay both
- * runs deep-equal. This IS the constitutional law, executed: the rogue
- * families' severity-only escalation is their legacy default under BOTH
- * routine (flag on) and full (flag off) autonomy.
+ * engine — with authorityFor routed through every family — must replay the
+ * FIRST tick of both runs deep-equal. Later ticks now intentionally diverge
+ * because the shared pending-proposal hold guard removes an already-asked
+ * question before conflict selection, allowing a distinct question to take its
+ * place. The first tick has no pending proposal and therefore remains the clean
+ * constitutional pin for authority routing itself: the rogue families'
+ * severity-only escalation is their legacy default under BOTH routine (flag
+ * on) and full (flag off) autonomy.
  *
  * The new dm_only/recommendations forcing modes are asserted separately at the
  * bottom (they are NEW behavior, so they have no HEAD pin).
@@ -141,22 +145,22 @@ describe('CL-0 (b) — the rogue families replay HEAD byte-exactly under legacy 
     expect(families).toContain('faction:proposal');        // faction families
   });
 
-  test('legacy flag ON (politicalAutonomy routine): identical candidates + applyModes to HEAD', () => {
-    expect(runFixture({ majorChangesRequireProposal: true })).toEqual(pin.flagOn);
+  test('legacy flag ON (politicalAutonomy routine): first-tick candidates + applyModes stay identical to HEAD', () => {
+    expect(runFixture({ majorChangesRequireProposal: true }, 1)).toEqual(pin.flagOn.slice(0, 1));
   });
 
-  test('legacy flag OFF (politicalAutonomy full): identical candidates + applyModes to HEAD', () => {
-    expect(runFixture({ majorChangesRequireProposal: false })).toEqual(pin.flagOff);
+  test('legacy flag OFF (politicalAutonomy full): first-tick candidates + applyModes stay identical to HEAD', () => {
+    expect(runFixture({ majorChangesRequireProposal: false }, 1)).toEqual(pin.flagOff.slice(0, 1));
   });
 
-  test('an explicit routine profile replays the flag-ON world byte-exactly', () => {
+  test('an explicit routine profile replays the first flag-ON tick byte-exactly', () => {
     // Materializing the profile at its legacy-equivalent value changes the
     // STORED rules but not one candidate, roll, or applyMode.
-    expect(runFixture({ majorChangesRequireProposal: true, politicalAutonomy: 'routine' })).toEqual(pin.flagOn);
+    expect(runFixture({ majorChangesRequireProposal: true, politicalAutonomy: 'routine' }, 1)).toEqual(pin.flagOn.slice(0, 1));
   });
 
-  test('an explicit full profile replays the flag-OFF world byte-exactly', () => {
-    expect(runFixture({ politicalAutonomy: 'full' })).toEqual(pin.flagOff);
+  test('an explicit full profile replays the first flag-OFF tick byte-exactly', () => {
+    expect(runFixture({ politicalAutonomy: 'full' }, 1)).toEqual(pin.flagOff.slice(0, 1));
   });
 });
 

@@ -152,7 +152,7 @@ describe('behavioral soak observation adapter', () => {
       tick: 52,
       selected: [attempt, war, coup, reconstruction],
       majors: [war, coup],
-      autoApplied: [coup],
+      autoApplied: [attempt, coup],
       worldState: {
         tick: 52,
         simulationRules: { provenanceLedgerEnabled: true },
@@ -237,6 +237,7 @@ describe('behavioral soak observation adapter', () => {
     expect(observed.motion.prosperityMoved).toBe(1);
     expect(observed.motion.powerMoved).toBe(1);
     expect(observed.succession).toMatchObject({
+      pendingProposals: 0,
       attempts: 2,
       completions: 2,
       integrityFailures: 0,
@@ -346,7 +347,11 @@ describe('behavioral soak observation adapter', () => {
     expect(observed.chronicleSample[0].id).toBe('war.quiet');
   });
 
-  it('uses exact succession vocabulary and counts only applied or ladder completions', () => {
+  it('separates pending succession proposals from applied and ladder outcomes', () => {
+    const appliedAttempt = {
+      id: 'attempt.coup',
+      candidateType: 'stressor_birth_coup_detat',
+    };
     const coup = {
       id: 'politics.coup',
       candidateType: 'coup_succeeded',
@@ -358,7 +363,7 @@ describe('behavioral soak observation adapter', () => {
       result: {
         tick: 52,
         selected: [
-          { id: 'attempt.coup', candidateType: 'stressor_birth_coup_detat' },
+          appliedAttempt,
           { id: 'attempt.government', candidateType: 'faction_government_challenge' },
           { id: 'false.rival', candidateType: 'faction_rival_power_contest' },
           { id: 'false.faith', candidateType: 'religious_contest' },
@@ -367,7 +372,29 @@ describe('behavioral soak observation adapter', () => {
           coup,
         ],
         majors: [],
-        autoApplied: [coup],
+        autoApplied: [appliedAttempt, coup],
+        proposals: [
+          {
+            id: 'proposal.government',
+            status: 'pending',
+            outcome: { candidateType: 'faction_government_challenge' },
+          },
+          {
+            id: 'proposal.coup-birth',
+            status: 'pending',
+            outcome: { candidateType: 'stressor_birth_coup_detat' },
+          },
+          {
+            id: 'proposal.resolved',
+            status: 'applied',
+            outcome: { candidateType: 'faction_government_challenge' },
+          },
+          {
+            id: 'proposal.not-succession',
+            status: 'pending',
+            outcome: { candidateType: 'faction_rival_power_contest' },
+          },
+        ],
         wizardNews: {
           entries: [
             {
@@ -399,7 +426,8 @@ describe('behavioral soak observation adapter', () => {
     });
 
     expect(observed.succession).toMatchObject({
-      attempts: 4,
+      pendingProposals: 2,
+      attempts: 3,
       completions: 2,
     });
   });

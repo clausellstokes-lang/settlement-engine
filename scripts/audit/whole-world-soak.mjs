@@ -56,6 +56,7 @@ import {
   buildNeighborControl,
   observeBehavioralYear,
 } from './behavioral-observation.mjs';
+import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -203,6 +204,10 @@ function buildFixture(seed, { variant = 'baseline' } = {}) {
       rngSeed: seed,
       tick: 0,
       canonizedAt: NOW,
+      // The lit fixture is a real spatial canon: deterministic FMG-shaped capture
+      // data authored through buildSpatialDigest. The explicit dark control strips
+      // both marker and digest so its constitutional aspatial path remains honest.
+      ...buildWholeWorldSoakSpatialCanon(saves, { enabled: variant !== 'dark' }),
       // FULL SIMULATION — the §11 ceiling preset: war layer + strategy + faith
       // spread + (W0-A3) the eight war-depth sub-flags. The soak exercises the
       // deepest composed stack the control layer can turn on.

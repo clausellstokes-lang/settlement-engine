@@ -25,7 +25,12 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
  * @property {Record<string, unknown>} [arcCounts]
  * @property {Record<string, unknown>} [motion]
  * @property {Record<string, unknown>} [attentionCounts]
- * @property {Record<string, unknown>} [succession]
+ * @property {{
+ *   pendingProposals?: unknown,
+ *   attempts?: unknown,
+ *   completions?: unknown,
+ *   integrityFailures?: unknown,
+ * }} [succession]
  * @property {{ crossFamilyEdges?: unknown, familyPairs?: unknown[] }} [causal]
  * @property {Record<string, UnknownRecord>} [stateVectors]
  */
@@ -61,9 +66,10 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
  */
 
 export { BEHAVIORAL_CONTRACT_VERSION };
-// v2 adds uncapped post-apply receipts and authoritative major/succession/causal
-// semantics. A v1 receipt must never be reinterpreted by this oracle.
-export const BEHAVIORAL_OBSERVATION_VERSION = 2;
+// v2 added uncapped post-apply receipts and authoritative major/succession/causal
+// semantics. v3 separates pending succession proposals from actual applied
+// attempts/completions. Older receipts must never be reinterpreted by this oracle.
+export const BEHAVIORAL_OBSERVATION_VERSION = 3;
 export const HUMAN_CHRONICLE_REVIEW_VERSION = 1;
 
 export const CERTIFICATION_HORIZONS = Object.freeze({
@@ -618,6 +624,9 @@ function checkNeighborControls(receipts) {
  */
 function checkSuccession(rows, settlementYears) {
   const thresholds = BEHAVIORAL_THRESHOLDS.succession;
+  const pendingProposals = sum(
+    rows.map(({ year }) => year?.succession?.pendingProposals),
+  );
   const attempts = sum(rows.map(({ year }) => year?.succession?.attempts));
   const completions = sum(rows.map(({ year }) => year?.succession?.completions));
   const failures = sum(rows.map(({ year }) => year?.succession?.integrityFailures));
@@ -626,13 +635,14 @@ function checkSuccession(rows, settlementYears) {
   const completionShare = ratio(completions, attempts);
   return [makeCheck(
     'succession.integrity',
-    'succession turns over at volume without malformed or impossible seats',
+    'applied succession attempts turn over at volume without malformed or impossible seats',
     attemptRate >= thresholds.minAttemptsPerSettlementDecade
       && completionRate >= thresholds.minCompletionsPerSettlementDecade
       && completionShare >= thresholds.minCompletionShare
       && completionShare <= thresholds.maxCompletionShare
       && failures <= thresholds.maxIntegrityFailures,
     {
+      pendingProposals,
       attempts,
       completions,
       integrityFailures: failures,

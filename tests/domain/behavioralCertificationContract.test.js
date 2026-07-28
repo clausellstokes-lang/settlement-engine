@@ -51,7 +51,12 @@ function yearlyObservation(year, settlementIds) {
       powerMoved: Math.max(1, Math.ceil(settlementIds.length * 0.04)),
     },
     attentionCounts,
-    succession: { attempts: 2, completions: 1, integrityFailures: 0 },
+    succession: {
+      pendingProposals: 3,
+      attempts: 2,
+      completions: 1,
+      integrityFailures: 0,
+    },
     causal: {
       crossFamilyEdges: 1,
       familyPairs: [
@@ -182,7 +187,7 @@ describe('behavioral certification contract', () => {
     expect(result.claimBoundary).toMatch(/does not write or publish/);
   });
 
-  it('fails closed instead of reinterpreting a pre-v2 observation receipt', () => {
+  it('fails closed instead of reinterpreting a pre-v3 observation receipt', () => {
     const input = passingInput();
     for (const receipt of input.receipts) {
       receipt.behavioral.schemaVersion = BEHAVIORAL_OBSERVATION_VERSION - 1;
@@ -205,6 +210,29 @@ describe('behavioral certification contract', () => {
     expect(result.automatedPassed).toBe(false);
     expect(result.failures).toContain('mover.faith.tail');
     expect(result.propertiesEarned).not.toContain('mover_activity');
+  });
+
+  it('does not let pending succession proposals satisfy applied-attempt gates', () => {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      for (const year of receipt.behavioral.yearly) {
+        year.succession.pendingProposals = 1_000;
+        year.succession.attempts = 0;
+        year.succession.completions = 0;
+      }
+    }
+    const result = evaluateBehavioralCertification(input);
+    const succession = result.checks.find(
+      (check) => check.id === 'succession.integrity',
+    );
+
+    expect(succession?.passed).toBe(false);
+    expect(succession?.observed).toMatchObject({
+      pendingProposals: 200_000,
+      attempts: 0,
+      completions: 0,
+    });
+    expect(result.failures).toContain('succession.integrity');
   });
 
   it('fails closed on dark-control leakage or a missing human review', () => {

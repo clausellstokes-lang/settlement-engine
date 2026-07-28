@@ -9,6 +9,7 @@ import {
   isPassingWholeWorldReceipt,
   liveSourceFilesFromGitListing,
   percentileOf,
+  REALM_SCALE_SOURCE_PATHS,
   runRealmScaleCertification,
   sourceIdentityMatches,
   summarizeRealmScaleReceipts,
@@ -125,6 +126,11 @@ describe('realm scale certification evidence', () => {
     ].join('\n'))).toEqual([
       'src/domain/worldPulse/latentPantheon.js',
     ]);
+  });
+
+  it('binds the maintained spatial pack fixture into the aggregate source identity', () => {
+    expect(REALM_SCALE_SOURCE_PATHS)
+      .toContain('tests/fixtures/spatialPackFixtures.js');
   });
 
   it('rejects clone-only, mislabeled, or output-divergent worker receipts', () => {

@@ -86,7 +86,8 @@ source-bound aggregate or if a referenced case receipt is missing.
   duration separately;
 - calculates transparent p50/p95/max summaries;
 - binds the aggregate to Git HEAD and to a content fingerprint that includes
-  uncommitted and untracked simulation inputs;
+  uncommitted and untracked simulation inputs, including the maintained synthetic
+  FMG pack fixture consumed by the headless spatial canon;
 - rechecks that identity before and after every child and at aggregate
   finalization, failing the matrix instead of combining mixed-source evidence;
 - writes atomically and never mutates the committed certification manifest.
@@ -97,7 +98,8 @@ Each primary run additionally emits a versioned behavioral observation:
   polarity, explicit causal parents, and settlement targets;
 - annual population, prosperity-rung, governing-faction, and normalized
   faction-power-entropy vectors;
-- succession attempt/completion counts plus power-seat integrity failures;
+- pending succession proposals, actual applied attempt/completion counts, and
+  power-seat integrity failures;
 - a bounded eight-entry Chronicle sample per year, with late-decade prose retained
   for human review.
 
@@ -116,7 +118,7 @@ time. Browser startup and device-specific worker duration remain unmeasured unti
 the production browser journey can exercise a representative saved realm without
 adding a test-only product API or a second simulation path.
 
-## Behavioral contract v2
+## Behavioral contract v3
 
 The machine-readable source of truth is
 `src/domain/certification/behavioralContract.js`. These gates were fixed before a
@@ -134,9 +136,9 @@ equivalent exposure.
 | Constructive and destructive arcs | Each polarity produces at least 0.25 explicit arc signals per 100 settlement-years, appears in at least 25% of century cases, and remains present in the final decade. Classification uses committed event vocabulary; a generic positive population delta is not promoted into an "arc." |
 | State motion | Population changes by at least 0.25% on 5% of settlement-year transitions (2% in the final decade); prosperity moves a canonical rung on 3% (1% final decade); governing identity or faction-share distance moves on 2% (1% final decade); median per-settlement normalized power-entropy range is at least 0.03. |
 | Neighbour perturbation | Three same-seed probes across at least two scale bands and two seed families. One source settlement begins at +10% population; the source is excluded from the distance. Non-source state distance must reach 0.001 by year 30, be positive at two checkpoints, and retain at least half its observed peak. Release probes are fixed at 30y/12/seed1, 30y/12/seed2, and 100y/4/seed1 (the latter compares its first 30 years); the research seed1 probe runs the full 300 years. |
-| Succession integrity | At least 0.05 attempts and 0.02 completions per settlement-decade; completion share 5–95%; zero duplicate governing identities, invalid faction powers, multiple governing factions, or governing names absent from their faction roster. |
+| Succession integrity | At least 0.05 **applied** attempts and 0.02 applied completions per settlement-decade; completion share 5–95%; zero duplicate governing identities, invalid faction powers, multiple governing factions, or governing names absent from their faction roster. Pending succession proposals are reported separately and earn no attempt/completion credit. |
 | Attention fairness | At least 90% of century cases attain Jain fairness 0.70 with no settlement above 4× its case mean; no more than 5% of settlement/case members receive zero selected-event attention across the century. |
-| Dark controls | Three one-year, all-dark probes across at least two scale bands and two seed families, attached to the same designated release cells as the neighbour probes. Every boolean mover gate is false, propagation is off, migration is void, and patron/cult/latent deity activation is removed. The lit first year must be non-vacuous; the dark year must emit zero selected outcomes and no non-empty conditional mover ledger. |
+| Dark controls | Three one-year, all-dark probes across at least two scale bands and two seed families, attached to the same designated release cells as the neighbour probes. Every boolean mover gate is false, propagation is off, migration is void, patron/cult/latent deity activation is removed, and the spatial-canon marker/digest are stripped. The lit first year must be non-vacuous; the dark year must emit zero selected outcomes and no non-empty conditional mover ledger. |
 | Anomaly and composition | Burst years are at most 5% and p99 event load is at most 80 events per settlement-year. Explicit cross-family causal edges occur at least 0.10 times per 100 settlement-years, span at least three ordered family pairs, and remain below 50% of selected events. This proves coupled consequences without accepting a cascade storm as "depth." |
 | Human Chronicle review | A human reviews at least 30 retained entries from both 100-year cases, spanning the 4- and 12-settlement bands and seed families 1 and 2, including the final decade. Causal legibility, temporal coherence, settlement attribution, and arc readability must each pass; blocking notes must be empty. |
 
@@ -156,18 +158,34 @@ Wizard-News capture was added. It is **not** a release-matrix cell and cannot
 earn or fail the product certificate, but it confirms that capped terminal feed
 state no longer hides post-apply outcomes. The observer retained 52 post-apply
 receipts and found 21 constructive mover signals (23 constructive arcs total);
-the earlier zero-constructive reading was instrumentation loss. Knowledge
-remained at zero.
+the earlier zero-constructive reading was instrumentation loss. Its zero-knowledge
+reading was also an audit-fixture artifact: that historical run stamped
+`canonizedAt` but carried no spatial-canon marker/digest, so the belief plane was
+constitutionally dark. The v3 fixture now authors a real deterministic spatial
+canon through the production digest seam. The replacement v3 diagnostic observed
+two knowledge signals, proving the plane is reachable.
 
 The same diagnostic also exposed source behavior that must not be normalized
 away: 1,198 selected events equal 299.5 events per settlement-year against the
 signed maximum of 52, and 25 authoritative major events equal 62.5 per
 settlement-decade against the signed maximum of 20. It recorded 239 explicit
-cross-family edges over four ordered family pairs, plus 18 succession attempts
-and zero completions. The correct next step is source-level tuning followed by
-the complete release matrix; the thresholds remain unchanged. Receipt SHA-256:
+cross-family edges over four ordered family pairs. Its schema-v2 count of 18
+"succession attempts" is superseded: that observer included selected-but-pending
+government proposals, which v3 now reports separately from applied attempts and
+completions. The correct next step is source-level tuning followed by the complete
+release matrix; the thresholds remain unchanged. Receipt SHA-256:
 `38f680d19ad993ea6902776200d056d40b6c5ccc05497dbc5cc9a1ee785b5613`
-(behavioral observation schema v2).
+(historical behavioral observation schema v2; not eligible under v3).
+
+The replacement v3 diagnostic remained mechanically deterministic and worker-
+identical, but it did not clear tempo: 1,210 selected outcomes and 33 majors over
+four settlement-years. It reported 32 pending succession proposals separately
+from 0 applied attempts and 0 completions. The pending-proposal hold prevents an
+equivalent unresolved question from being re-selected; this first-year count is
+therefore a set of distinct questions, not evidence of 32 failed transfers.
+Receipt SHA-256:
+`965905fbf05ac10a1a29f056aa76c1fda148ffbcb0d69e783dac4588e7cdf75f`
+(behavioral observation schema v3).
 
 ## Human Chronicle receipt
 

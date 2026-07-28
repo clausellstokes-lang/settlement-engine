@@ -31,6 +31,136 @@ export function volatilityMultiplier(/** @type {any} */ volatility) {
   return VOLATILITY_MULTIPLIERS[/** @type {keyof typeof VOLATILITY_MULTIPLIERS} */ (volatility)] ?? 1.0;
 }
 
+// A proposal id contains its emission tick, so it cannot answer whether the same
+// unresolved question is already on the DM's desk. These are the stable semantic
+// fields shared by generated candidates and the cloned outcomes stored in
+// worldState.proposals. Volatile quantities (tick, severity, probability, prose,
+// pressure bands) are intentionally absent.
+const PROPOSAL_IDENTITY_FIELDS = new Set([
+  'targetSaveId', 'sourceSaveId', 'actorSaveId', 'subjectSaveId',
+  'settlementId', 'saveId', 'targetId', 'sourceId', 'actorId', 'subjectId',
+  'relationshipKey', 'courseKey',
+  'npcId', 'rivalNpcId', 'factionId', 'rivalFactionId',
+  'institutionId', 'institutionName',
+  'fromSaveId', 'toSaveId', 'from', 'to',
+  'besieger', 'besieged', 'navyId', 'patronId', 'rivalRef',
+]);
+const PROPOSAL_INTENT_FIELDS = new Set([
+  'kind', 'verb', 'action', 'actionFamily', 'resource',
+  'fromType', 'toType', 'proposedRelationshipType',
+  'fromTier', 'toTier', 'direction', 'governmentPreference',
+  'populationKind', 'flowKind', 'strategyMove', 'toPowerName', 'winner',
+]);
+const PROPOSAL_NAMED_IDENTITY_PARENTS = new Set([
+  'institutionPatch', 'lifecyclePatch', 'proposalPayload',
+]);
+
+/** @param {unknown} value @returns {Record<string, unknown>|null} */
+function proposalRecord(value) {
+  return value != null && typeof value === 'object' && !Array.isArray(value)
+    ? /** @type {Record<string, unknown>} */ (value)
+    : null;
+}
+
+/** @param {unknown} value @returns {string|null} */
+function proposalScalar(value) {
+  if (typeof value === 'string') return value.length ? value : null;
+  if (typeof value === 'number' && Number.isFinite(value)) return String(value);
+  if (typeof value === 'boolean') return value ? 'true' : 'false';
+  return null;
+}
+
+/**
+ * Collect only identity/intent scalars, recursively, in codepoint path order.
+ * `id` itself is never collected: generated ids are tick-bearing by design.
+ * @param {unknown} value
+ * @param {string[]} path
+ * @param {Array<[string, string]>} parts
+ * @returns {number} number of identity anchors found
+ */
+function collectProposalSemantics(value, path, parts) {
+  if (Array.isArray(value)) {
+    return value.reduce(
+      (count, entry, index) => count + collectProposalSemantics(entry, [...path, String(index)], parts),
+      0,
+    );
+  }
+  const record = proposalRecord(value);
+  if (!record) return 0;
+  let anchors = 0;
+  for (const key of Object.keys(record).sort()) {
+    if (key === 'id' || key === 'candidateType' || key === 'conflictTags') continue;
+    const child = record[key];
+    const scalar = proposalScalar(child);
+    const parent = path[path.length - 1] || '';
+    const namedIdentity = key === 'name' && PROPOSAL_NAMED_IDENTITY_PARENTS.has(parent);
+    if (scalar != null && (PROPOSAL_IDENTITY_FIELDS.has(key) || PROPOSAL_INTENT_FIELDS.has(key) || namedIdentity)) {
+      parts.push([[...path, key].join('.'), scalar]);
+      if (PROPOSAL_IDENTITY_FIELDS.has(key) || namedIdentity) anchors += 1;
+      continue;
+    }
+    if (scalar == null) anchors += collectProposalSemantics(child, [...path, key], parts);
+  }
+  return anchors;
+}
+
+/**
+ * Stable identity for the QUESTION a proposal asks, not for one tick's emission.
+ * Unknown/unanchored shapes return null, so the guard can never collapse a whole
+ * candidate family merely because its candidateType happens to match.
+ * @param {unknown} outcome
+ * @returns {string|null}
+ */
+export function proposalSemanticKey(outcome) {
+  const record = proposalRecord(outcome);
+  const candidateType = proposalScalar(record?.candidateType);
+  if (!record || !candidateType) return null;
+  /** @type {Array<[string, string]>} */
+  const parts = [];
+  let anchors = collectProposalSemantics(record, [], parts);
+  const tags = Array.isArray(record.conflictTags)
+    ? [...new Set(record.conflictTags.map(proposalScalar).filter((tag) => tag != null))].sort()
+    : [];
+  if (tags.length) {
+    parts.push(['conflictTags', tags.join('\u001f')]);
+    anchors += tags.length;
+  }
+  if (!anchors) return null;
+  return JSON.stringify([candidateType, parts]);
+}
+
+/**
+ * The generic pending-proposal HOLD guard. Mirrors pendingTierProposals,
+ * pendingLifecycle, and pendingActorMajorFor at the shared candidate seam:
+ * an equivalent unresolved proposal suppresses only that semantic candidate.
+ * Filtering preserves input order and returns the original array reference when
+ * no candidate is suppressed. Resolved/dismissed/expired proposals do not hold.
+ * @param {unknown[]} candidates
+ * @param {unknown} worldState
+ * @returns {unknown[]}
+ */
+export function suppressEquivalentPendingProposalCandidates(candidates, worldState) {
+  if (!Array.isArray(candidates) || candidates.length === 0) return candidates;
+  const proposals = proposalRecord(worldState)?.proposals;
+  if (!Array.isArray(proposals) || proposals.length === 0) return candidates;
+  const pendingKeys = new Set();
+  for (const raw of proposals) {
+    const proposal = proposalRecord(raw);
+    if (proposal?.status !== 'pending') continue;
+    const key = proposalSemanticKey(proposal.outcome);
+    if (key) pendingKeys.add(key);
+  }
+  if (!pendingKeys.size) return candidates;
+  let suppressed = false;
+  const next = candidates.filter(candidate => {
+    const key = proposalSemanticKey(candidate);
+    const held = key != null && pendingKeys.has(key);
+    if (held) suppressed = true;
+    return !held;
+  });
+  return suppressed ? next : candidates;
+}
+
 function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {
   if (!pressure || pressure.score < 0.5) return null;
   const archetypeByKind = {
@@ -352,7 +482,7 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     })
     : candidates;
 
-  return resolveCandidateConflicts(routed, context.budgets || {});
+  return resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {});
 }
 
 export function generateWorldPulseCandidates(/** @type {any} */ { pressures = [], relationshipCandidates = [], npcCandidates = [], factionCandidates = [], tick = 0 } = {}) {

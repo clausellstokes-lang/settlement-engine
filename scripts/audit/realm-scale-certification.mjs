@@ -32,6 +32,15 @@ import { CERTIFICATION_REQUIRED_PROPERTY_KEYS } from '../../src/domain/certifica
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WHOLE_WORLD_SOAK = resolve(ROOT, 'scripts/audit/whole-world-soak.mjs');
+export const REALM_SCALE_SOURCE_PATHS = Object.freeze([
+  'src',
+  'scripts/audit',
+  // whole-world-soak-spatial-fixture imports this maintained synthetic FMG
+  // capture, so its bytes are part of the attributable simulation source.
+  'tests/fixtures/spatialPackFixtures.js',
+  'package.json',
+  'package-lock.json',
+]);
 
 /**
  * Profiles separate fast regression evidence from expensive release and
@@ -307,10 +316,7 @@ export function readSourceIdentity() {
     '-o',
     '--exclude-standard',
     '--',
-    'src',
-    'scripts/audit',
-    'package.json',
-    'package-lock.json',
+    ...REALM_SCALE_SOURCE_PATHS,
   ]);
   const files = liveSourceFilesFromGitListing(listed);
   const hash = createHash('sha256');

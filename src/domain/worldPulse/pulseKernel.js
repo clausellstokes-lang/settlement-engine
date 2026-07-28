@@ -48,7 +48,7 @@ import {
   ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions,
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
-import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
+import { evaluateWorldPulseRules, rollCandidates, suppressEquivalentPendingProposalCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries, sublinearBudget, REALM_SCALING } from './narrativeTempo.js';
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
@@ -1263,7 +1263,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
+  const stochasticCandidates = [...candidates, ...suppressEquivalentPendingProposalCandidates([...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], worldState)];
   // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
   // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
   // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
