@@ -528,6 +528,14 @@ check_caught "config-door/fifth direct draft writer" src/store/neighbourSlice.js
 printf '\n%s\n%s\n' 'const mutProbeUnanchored = /create\s+or\s+replace\s+function\s+public\.mut_probe\b[\s\S]*?\$\$;/i;' 'void mutProbeUnanchored;' >> tests/security/aiSpendSafety.pglite.test.js
 check_caught "extractor-anchor/unanchored corpus extractor planted" tests/security/aiSpendSafety.pglite.test.js "npx vitest run tests/lint/netCurrentExtractorAnchor.walker.test.js"
 
+# 56. PGlite hook-timeout ratchet — append an UNGUARDED boot hook to a guarded
+#     suite. The ratchet must red: a hook that boots PGlite while inheriting
+#     vitest's 10000ms hookTimeout sits ON the boot-noise band under gate load
+#     (the F4 flaky-red class), and the burned-down inventory tolerates zero
+#     new unguarded hooks anywhere in the corpus.
+printf '\n%s\n' 'beforeAll(async () => { const mutProbeDb = new PGlite(); void mutProbeDb; });' >> tests/security/systemConfigPublicRead.pglite.test.js
+check_caught "pglite-hook-timeout/unguarded boot hook planted" tests/security/systemConfigPublicRead.pglite.test.js "npx vitest run tests/security/pgliteHookTimeoutRatchet.test.js"
+
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"
 for r in "${results[@]}"; do echo "  $r"; done
