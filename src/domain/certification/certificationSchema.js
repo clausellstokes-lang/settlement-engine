@@ -2,13 +2,14 @@
  * certification/certificationSchema.js — THE WORLD CERTIFICATION MANIFEST schema
  * (VISION WAVE V-10 THE CERTIFICATE).
  *
- * WHY: nobody else CAN run a 300-year soak; saying so HONESTLY is marketing that
- * compounds. The claims-parity law (the product's spine) forbids a surface from
- * claiming what the soak has not proven. This file is the SCHEMA WALL for that
- * claim: it defines the shape of a certification manifest — the durable record a
- * soak writes ("seed/config band → soak results") — and the validator that keeps
- * a manifest honest. Until the owner's soak writes the first band, the shipped
- * manifest is EMPTY and every surface reads PENDING (the inert-honest state).
+ * WHY: the claims-parity law (the product's spine) forbids a surface from
+ * claiming what the maintained release evidence has not proven. This file is
+ * the SCHEMA WALL for that claim: it defines the shape of a certification
+ * manifest — the durable record an operator may publish from a source-bound
+ * 100-year release receipt — and the validator that keeps a manifest honest.
+ * The 300-year run remains research evidence. Until the owner's soak writes the
+ * first band, the shipped manifest is EMPTY and every surface reads PENDING
+ * (the inert-honest state).
  *
  * THE LAWS (enforced by validateCertificationManifest + the claims-parity pin):
  *  1. CLOSED PROPERTY VOCABULARY: a soak may only claim a property from
@@ -30,6 +31,8 @@
 
 /** The manifest schema version (bumped only on a breaking shape change). @type {number} */
 export const CERTIFICATION_MANIFEST_VERSION = 1;
+/** Behavioral oracle version required before a band may claim certification. */
+export const BEHAVIORAL_CONTRACT_VERSION = 1;
 
 /** @type {ReadonlyArray<{ key: string, label: string }>} */
 export const CERTIFICATION_STATUS = Object.freeze([
@@ -54,6 +57,16 @@ export const SOAK_PROPERTIES = Object.freeze([
   { key: 'population_bounded', label: 'held its people within honest bounds' },
   { key: 'stressor_rhythm', label: 'kept a steady rhythm of trouble and relief' },
   { key: 'no_stasis', label: 'never once fell still' },
+  { key: 'mover_activity', label: 'kept every load-bearing mover family active into the final decade' },
+  { key: 'event_tempo_diversity', label: 'sustained consequential, varied events without cacophony' },
+  { key: 'constructive_and_destructive_arcs', label: 'made recovery as observable as ruin' },
+  { key: 'state_motion', label: 'continued moving population, prosperity, and faction power' },
+  { key: 'neighbor_perturbation', label: 'carried a bounded neighbour change beyond its source' },
+  { key: 'succession_integrity', label: 'turned governing seats over without corrupting them' },
+  { key: 'attention_fairness', label: 'gave every settlement a fair share of the record' },
+  { key: 'dark_controls', label: 'left gated movers truly dark when their controls were off' },
+  { key: 'interaction_bounded', label: 'composed mover consequences without cascade storms' },
+  { key: 'chronicle_human_reviewed', label: 'remained legible when a person read the late Chronicle' },
 ]);
 /** @type {ReadonlyArray<string>} */
 export const SOAK_PROPERTY_KEYS = Object.freeze(SOAK_PROPERTIES.map((p) => p.key));
@@ -83,6 +96,9 @@ export function soakPropertyLabel(key) {
  * @property {string[]} properties   the SOAK_PROPERTY_KEYS this run held
  * @property {string} runAt          ISO timestamp the soak completed
  * @property {string} [buildHash]    the build the soak ran against (optional)
+ * @property {number} [behavioralContractVersion] behavioral oracle version
+ * @property {string} [evidenceDigest] source-bound aggregate evidence digest
+ * @property {string} [humanChronicleReviewDigest] signed human-review digest
  */
 
 /**
@@ -141,6 +157,18 @@ export function validateSoakResult(raw) {
   if (r.buildHash != null && typeof r.buildHash !== 'string') {
     errors.push('buildHash, when present, must be a string.');
   }
+  if (r.behavioralContractVersion != null
+      && (typeof r.behavioralContractVersion !== 'number'
+        || !Number.isInteger(r.behavioralContractVersion)
+        || r.behavioralContractVersion < 1)) {
+    errors.push('behavioralContractVersion, when present, must be a positive integer.');
+  }
+  for (const key of ['evidenceDigest', 'humanChronicleReviewDigest']) {
+    if (r[key] != null
+        && (typeof r[key] !== 'string' || !/^[a-f0-9]{64}$/.test(r[key]))) {
+      errors.push(`${key}, when present, must be a lowercase SHA-256 digest.`);
+    }
+  }
   return { ok: errors.length === 0, errors };
 }
 
@@ -173,6 +201,20 @@ export function validateCertificationBand(raw) {
       const missing = CERTIFICATION_REQUIRED_PROPERTY_KEYS.filter((key) => !properties.includes(key));
       if (missing.length) {
         errors.push(`a certified band is missing required properties: ${missing.join(', ')}.`);
+      }
+      if (Number(soak.years) < 100) {
+        errors.push('a certified band must cover the 100-year release horizon.');
+      }
+      if (soak.behavioralContractVersion !== BEHAVIORAL_CONTRACT_VERSION) {
+        errors.push(`a certified band must name behavioralContractVersion ${BEHAVIORAL_CONTRACT_VERSION}.`);
+      }
+      if (typeof soak.evidenceDigest !== 'string'
+          || !/^[a-f0-9]{64}$/.test(soak.evidenceDigest)) {
+        errors.push('a certified band must carry its aggregate evidenceDigest.');
+      }
+      if (typeof soak.humanChronicleReviewDigest !== 'string'
+          || !/^[a-f0-9]{64}$/.test(soak.humanChronicleReviewDigest)) {
+        errors.push('a certified band must carry its humanChronicleReviewDigest.');
       }
     }
   } else if (b.status === 'measured') {

@@ -53,6 +53,9 @@ describe('V-10 claims-parity — a certified view claims ONLY what the soak reco
     ticksAdvanced: 4800,
     properties: [...CERTIFICATION_REQUIRED_PROPERTY_KEYS],
     runAt: '2026-07-20T00:00:00.000Z',
+    behavioralContractVersion: 1,
+    evidenceDigest: 'a'.repeat(64),
+    humanChronicleReviewDigest: 'b'.repeat(64),
   };
   const manifest = {
     manifestVersion: 1,

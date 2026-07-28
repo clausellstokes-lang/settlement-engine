@@ -23,8 +23,9 @@ afterEach(async () => {
 describe('realm scale certification evidence', () => {
   function passingChildReceipt() {
     return {
-      schemaVersion: 3,
+      schemaVersion: 4,
       kind: 'whole_world_soak',
+      years: 1,
       passed: true,
       properties: [
         'isolated_worker_executed',
@@ -52,6 +53,11 @@ describe('realm scale certification evidence', () => {
           workerHandlerToTerminalPost: 250,
         },
       },
+      behavioral: {
+        schemaVersion: 1,
+        kind: 'whole_world_behavioral_observation',
+        yearly: [{}],
+      },
     };
   }
 
@@ -63,14 +69,29 @@ describe('realm scale certification evidence', () => {
 
     expect(smoke.cases.map(({ years, settlements }) => [years, settlements]))
       .toEqual([[1, 4], [1, 30]]);
-    expect(weekly.cases).toHaveLength(4);
-    expect(new Set(weekly.cases.map((entry) => entry.settlements)))
-      .toEqual(new Set([4, 12, 24, 30]));
-    expect(release.cases).toHaveLength(36);
-    expect(new Set(release.cases.map((entry) => entry.years)))
-      .toEqual(new Set([1, 30, 100]));
-    expect(research.cases).toHaveLength(3);
+    expect(weekly.cases.map(({ years, settlements }) => [years, settlements]))
+      .toEqual([[30, 12]]);
+    expect(release.cases.map(({ years, settlements, id }) => [
+      years,
+      settlements,
+      Number(/seed(\d+)$/.exec(id)?.[1]),
+    ])).toEqual([
+      [1, 4, 1],
+      [1, 12, 1],
+      [1, 24, 1],
+      [1, 30, 1],
+      [30, 12, 1],
+      [30, 12, 2],
+      [100, 4, 1],
+      [100, 12, 2],
+    ]);
+    expect(research.cases).toHaveLength(1);
     expect(research.cases.every((entry) => entry.years === 300 && entry.settlements === 12)).toBe(true);
+    expect(release.cases.filter((entry) => entry.behavioralControls?.dark)).toHaveLength(3);
+    expect(release.cases.filter((entry) => entry.behavioralControls?.neighborYears === 30))
+      .toHaveLength(3);
+    expect(research.cases.filter((entry) => entry.behavioralControls?.neighborYears === 300))
+      .toHaveLength(1);
   });
 
   it('rejects an unknown profile instead of silently choosing a cheaper run', () => {

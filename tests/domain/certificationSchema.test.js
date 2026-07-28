@@ -27,6 +27,9 @@ const goodSoak = {
   properties: [...CERTIFICATION_REQUIRED_PROPERTY_KEYS],
   runAt: '2026-07-20T00:00:00.000Z',
   buildHash: 'abc1234',
+  behavioralContractVersion: 1,
+  evidenceDigest: 'a'.repeat(64),
+  humanChronicleReviewDigest: 'b'.repeat(64),
 };
 const certifiedBand = { bandId: 'sig_deadbeef', presetId: 'full_simulation', status: 'certified', soak: goodSoak };
 const measuredBand = {
@@ -67,6 +70,17 @@ describe('V-10 — status↔soak lockstep (the claims-parity wall at the schema)
     });
     expect(res.ok).toBe(false);
     expect(res.errors.join(' ')).toMatch(/missing required properties/);
+  });
+  it('REJECTS a 30-year measurement or unsigned behavioral evidence as certification', () => {
+    expect(validateCertificationBand({
+      ...certifiedBand,
+      soak: { ...goodSoak, years: 30 },
+    }).errors.join(' ')).toMatch(/100-year release horizon/);
+    const { evidenceDigest, ...withoutEvidenceDigest } = goodSoak;
+    expect(validateCertificationBand({
+      ...certifiedBand,
+      soak: withoutEvidenceDigest,
+    }).errors.join(' ')).toMatch(/aggregate evidenceDigest/);
   });
   it('REJECTS a certified band with no soak (a claim without a receipt)', () => {
     const res = validateCertificationBand({ ...certifiedBand, soak: null });

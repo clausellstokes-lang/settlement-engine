@@ -19,10 +19,10 @@
  *   4. POPULATION BOUNDED — every settlement stays finite and > 0; the realm
  *      total stays within a generous envelope of its start (attractors, not
  *      runaways or death-spirals);
- *   5. STRESSOR RHYTHM — yearly active-stressor counts are REPORTED, and the
- *      known EQUILIBRIUM TENDENCY (the composed world winding down to stasis
- *      under autoresolve — the strategic argument FOR the spatial engine) is
- *      DOCUMENTED rather than failed: a frozen tail prints as a finding.
+ *   5. BEHAVIORAL OBSERVATION — selected outcomes, mover families, event
+ *      diversity, arc polarity, state motion, succession, causal composition,
+ *      attention, and a bounded Chronicle sample are recorded for the
+ *      predeclared realm-scale oracle. This cell does not choose its own bands.
  *   6. ISOLATED WORKER EXECUTION — one real Node worker_threads isolate imports
  *      the product Web Worker module, advances the same initial realm through
  *      the same domain entry, and must return the same output hash as run A.
@@ -36,6 +36,8 @@
  *   node scripts/audit/whole-world-soak.mjs [--years 30] [--seed w0-soak]
  *                                           [--divergence-years 5] [--json]
  *                                           [--seasons on|off]
+ *                                           [--neighbor-control-years 30]
+ *                                           [--dark-control]
  *
  * SEASONS-A: full_simulation now lights seasonsEnabled, so the default soak
  * runs the food year. `--seasons off` restores the pre-seasons variant for
@@ -48,6 +50,12 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { measureIsolatedAdvanceWorker } from './advance-worker-evidence.mjs';
+import {
+  buildBehavioralObservation,
+  buildDarkControl,
+  buildNeighborControl,
+  observeBehavioralYear,
+} from './behavioral-observation.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -62,7 +70,13 @@ const SEED = String(arg('seed', 'w0-soak'));
 const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-years', 5))));
 const AS_JSON = process.argv.includes('--json');
 const RECEIPT_PATH = arg('receipt', '');
+const CASE_ID = String(arg('case-id', ''));
 const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
+const NEIGHBOR_CONTROL_YEARS = Math.max(
+  0,
+  Math.min(YEARS, Number(arg('neighbor-control-years', 0)) || 0),
+);
+const RUN_DARK_CONTROL = process.argv.includes('--dark-control');
 // performance-scale-6: parameterize the fixture up to the 30-settlement envelope so
 // the soak can exercise the cost axis at the product's headline scale. Default stays
 // 4 (the historical fixture — byte-identical archetypes for the first four ids).
@@ -87,7 +101,7 @@ const REGION = Array.from({ length: SETTLEMENTS }, (_, i) => ({
   ...REGION_ARCHETYPES[i % REGION_ARCHETYPES.length],
 }));
 
-function buildFixture(seed) {
+function buildFixture(seed, { variant = 'baseline' } = {}) {
   const saves = REGION.map(({ id, ...config }, i) => {
     // Options are the THIRD argument (the second is importedNeighbour; passing
     // an options bag there now throws — the 85bb8c51 fail-closed contract).
@@ -100,6 +114,35 @@ function buildFixture(seed) {
       campaignState: { phase: 'canon', eventLog: [], locks: {} },
     };
   });
+
+  if (variant === 'neighbor_perturbed' && saves[0]?.settlement) {
+    const settlement = saves[0].settlement;
+    saves[0] = {
+      ...saves[0],
+      settlement: {
+        ...settlement,
+        population: Math.max(
+          1,
+          Math.round((Number(settlement.population) || 1) * 1.10),
+        ),
+      },
+    };
+  }
+
+  if (variant === 'dark') {
+    for (let index = 0; index < saves.length; index += 1) {
+      const settlement = saves[index].settlement;
+      const config = { ...(settlement?.config || {}) };
+      delete config.primaryDeityRef;
+      delete config.primaryDeitySnapshot;
+      delete config.cultDeitySnapshots;
+      delete config.latentPantheon;
+      saves[index] = {
+        ...saves[index],
+        settlement: { ...settlement, config },
+      };
+    }
+  }
 
   const firstExport = (save) => {
     const list = save.settlement?.economicState?.primaryExports || [];
@@ -135,6 +178,21 @@ function buildFixture(seed) {
     if (i % 3 === 0) baseChannels.push(channel(saves[i], saves[i - 3]));
   }
 
+  const fullRules = {
+    ...SIMULATION_RULE_PRESETS.full_simulation.rules,
+    ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
+  };
+  const darkRules = Object.fromEntries(Object.entries(fullRules).map(([key, value]) => (
+    [key, typeof value === 'boolean' ? false : value]
+  )));
+  Object.assign(darkRules, {
+    presetId: 'behavioral_dark_control',
+    propagationMode: 'off',
+    migrationMode: 'void',
+    worldProgression: 'dm_advanced',
+    politicalAutonomy: 'dm_only',
+  });
+
   const campaign = {
     id: 'whole-world-soak',
     name: 'Whole-World Soak Realm',
@@ -148,10 +206,7 @@ function buildFixture(seed) {
       // FULL SIMULATION — the §11 ceiling preset: war layer + strategy + faith
       // spread + (W0-A3) the eight war-depth sub-flags. The soak exercises the
       // deepest composed stack the control layer can turn on.
-      simulationRules: {
-        ...SIMULATION_RULE_PRESETS.full_simulation.rules,
-        ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
-      },
+      simulationRules: variant === 'dark' ? darkRules : fullRules,
       stressors: [],
     },
   };
@@ -177,8 +232,9 @@ function findBadNumber(value, path = '$', out = [], seen = new Set()) {
 }
 
 // ── One N-year run: thread state year over year like the store does ──────────
-async function runYears(seed, years, label) {
-  const { campaign, saves } = buildFixture(seed);
+async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
+  const fixture = buildFixture(seed, { variant });
+  const { campaign, saves } = fixture;
   let runningCampaign = campaign;
   let runningSaves = saves;
   const yearlyHashes = [];
@@ -189,11 +245,13 @@ async function runYears(seed, years, label) {
   const yearlyBytes = [];
   const yearlyRealmBytes = [];
   const yearlyMs = [];
+  const yearlyBehavior = [];
   let firstResultSha256 = null;
   let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
 
   for (let year = 1; year <= years; year++) {
+    const beforeSaves = runningSaves;
     const y0 = Date.now();
     const result = await simulateCampaignWorldInterval({
       campaign: runningCampaign,
@@ -219,6 +277,12 @@ async function runYears(seed, years, label) {
       const byId = new Map(result.settlementUpdates.map((u) => [String(u.saveId), u.settlement]));
       runningSaves = runningSaves.map((s) => (byId.has(String(s.id)) ? { ...s, settlement: byId.get(String(s.id)) } : s));
     }
+    yearlyBehavior.push(observeBehavioralYear({
+      year,
+      result,
+      beforeSaves,
+      afterSaves: runningSaves,
+    }));
 
     // 1. NaN/Infinity scan — fail fast with paths.
     const bad = findBadNumber({
@@ -275,7 +339,9 @@ async function runYears(seed, years, label) {
     firstResultSha256,
     heapUsedBytes: process.memoryUsage().heapUsed,
     peakHeapUsedBytes,
-    startPopulations: buildFixture(seed).saves.map((s) => Number(s.settlement?.population) || 0),
+    startPopulations: fixture.saves.map((s) => Number(s.settlement?.population) || 0),
+    yearlyBehavior,
+    finalWorldState: runningCampaign.worldState,
   };
 }
 
@@ -358,6 +424,48 @@ const runC = await runYears(`${SEED}-divergent`, DIVERGENCE_YEARS, 'C');
 const diverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
 check(diverged, 'divergence on a different seed', `within ${DIVERGENCE_YEARS} years`);
 
+// Behavioral controls are deliberately sparse matrix probes, selected by the
+// realm-scale plan. They are not hidden inside every cell: three release probes
+// across two seed families and two scale bands are enough to test the control
+// oracle without roughly doubling the long release soak.
+let neighborControl = null;
+if (NEIGHBOR_CONTROL_YEARS > 0) {
+  console.log(`\n## neighbor perturbation control (${NEIGHBOR_CONTROL_YEARS} years)`);
+  const perturbed = await runYears(
+    SEED,
+    NEIGHBOR_CONTROL_YEARS,
+    'neighbor-perturbed',
+    { variant: 'neighbor_perturbed' },
+  );
+  neighborControl = buildNeighborControl({
+    baselineYearly: runA.yearlyBehavior.slice(0, NEIGHBOR_CONTROL_YEARS),
+    perturbedYearly: perturbed.yearlyBehavior,
+    sourceSettlementId: REGION[0].id,
+  });
+  const finalCheckpoint = neighborControl.checkpoints.at(-1);
+  console.log(
+    `  source ${REGION[0].id} +10% population; non-source distance `
+    + `${Number(finalCheckpoint?.targetDistance || 0).toFixed(6)} at year `
+    + `${finalCheckpoint?.year || 0}`,
+  );
+}
+
+let darkControl = null;
+if (RUN_DARK_CONTROL) {
+  console.log('\n## all-dark control (one year)');
+  const dark = await runYears(SEED, 1, 'dark-control', { variant: 'dark' });
+  darkControl = buildDarkControl({
+    litBaselineYear: runA.yearlyBehavior[0],
+    darkYearly: dark.yearlyBehavior,
+    finalWorldState: dark.finalWorldState,
+  });
+  console.log(
+    `  lit activity ${darkControl.litBaselineActivityCount}; dark activity `
+    + `${darkControl.darkActivityCount}; conditional leaks `
+    + `${darkControl.conditionalStateLeaks.length}`,
+  );
+}
+
 // 4. Population bounded.
 const startTotal = runA.startPopulations.reduce((a, b) => a + b, 0);
 const finalPops = runA.yearlyPopulations[runA.yearlyPopulations.length - 1];
@@ -428,8 +536,9 @@ REGION.forEach((r, i) => {
 });
 
 const receipt = {
-  schemaVersion: 3,
+  schemaVersion: 4,
   kind: 'whole_world_soak',
+  ...(CASE_ID ? { caseId: CASE_ID } : {}),
   seed: SEED,
   years: YEARS,
   settlements: SETTLEMENTS,
@@ -461,12 +570,25 @@ const receipt = {
   heapUsedBytes: runA.heapUsedBytes,
   peakHeapUsedBytes: runA.peakHeapUsedBytes,
   realmScalingExercised: SETTLEMENTS === 30,
+  behavioral: buildBehavioralObservation({
+    settlementIds: REGION.map((settlement) => settlement.id),
+    yearly: runA.yearlyBehavior,
+    controls: {
+      ...(neighborControl ? { neighbor: neighborControl } : {}),
+      ...(darkControl ? { dark: darkControl } : {}),
+    },
+  }),
   runDurationsMs: {
     primary: runA.ms,
     replay: runB.ms,
     divergent: runC.ms,
   },
-  ticksAdvanced: ((YEARS * 2) + DIVERGENCE_YEARS) * 52,
+  ticksAdvanced: (
+    (YEARS * 2)
+    + DIVERGENCE_YEARS
+    + (neighborControl ? NEIGHBOR_CONTROL_YEARS : 0)
+    + (darkControl ? 1 : 0)
+  ) * 52,
   frozenTail,
   failures,
   completedAt: new Date().toISOString(),

@@ -4,12 +4,12 @@
  * matrix and emits one aggregate evidence receipt.
  *
  * This is deliberately an evidence collector, not a manifest writer. The
- * composed soak currently proves determinism, bounded population, finite
- * arithmetic, the byte/cost envelope, and actual execution in an isolated Node
- * worker thread. Worker duration remains host-sensitive evidence, and the Node
- * transport must not be mislabeled as browser Web Worker timing. The soak
- * reports stasis but does not yet prove the full rhythm/no-stasis contract, so
- * a successful matrix must not silently promote itself to product certification.
+ * composed soak proves mechanics and emits normalized behavioral observations
+ * for the predeclared certification oracle. Worker duration remains
+ * host-sensitive evidence, and the Node transport must not be mislabeled as
+ * browser Web Worker timing. A successful matrix still never writes the product
+ * manifest: a source-bound human Chronicle review is required, then an operator
+ * separately reviews and publishes the candidate entry.
  */
 
 import { execFileSync, spawn } from 'node:child_process';
@@ -24,6 +24,8 @@ import {
 } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { evaluateBehavioralCertification } from '../../src/domain/certification/behavioralContract.js';
+import { CERTIFICATION_REQUIRED_PROPERTY_KEYS } from '../../src/domain/certification/certificationSchema.js';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WHOLE_WORLD_SOAK = resolve(ROOT, 'scripts/audit/whole-world-soak.mjs');
@@ -36,31 +38,57 @@ const WHOLE_WORLD_SOAK = resolve(ROOT, 'scripts/audit/whole-world-soak.mjs');
 export const REALM_SCALE_PROFILES = Object.freeze({
   smoke: Object.freeze({
     description: 'Fast shape check at the smallest and supported maximum realm sizes.',
-    horizons: Object.freeze([1]),
-    settlements: Object.freeze([4, 30]),
-    seedsPerCell: 1,
+    cells: Object.freeze([
+      Object.freeze({ years: 1, settlements: 4, seedIndices: Object.freeze([1]) }),
+      Object.freeze({ years: 1, settlements: 30, seedIndices: Object.freeze([1]) }),
+    ]),
   }),
   weekly: Object.freeze({
-    description: 'Thirty-year useful-horizon evidence across the supported scale curve.',
-    horizons: Object.freeze([30]),
-    settlements: Object.freeze([4, 12, 24, 30]),
-    seedsPerCell: 1,
+    description: 'Thirty-year useful-horizon regression at the representative 12-settlement scale.',
+    cells: Object.freeze([
+      Object.freeze({ years: 30, settlements: 12, seedIndices: Object.freeze([1]) }),
+    ]),
   }),
   release: Object.freeze({
-    description: 'Pre-launch evidence for short, useful, and century horizons at every scale band.',
-    horizons: Object.freeze([1, 30, 100]),
-    settlements: Object.freeze([4, 12, 24, 30]),
-    seedsPerCell: 3,
+    description: 'Orthogonal pre-launch evidence: scale sweep, useful-horizon breadth, and century endurance.',
+    cells: Object.freeze([
+      // Scale is measured cheaply and independently of duration.
+      Object.freeze({ years: 1, settlements: 4, seedIndices: Object.freeze([1]) }),
+      Object.freeze({ years: 1, settlements: 12, seedIndices: Object.freeze([1]) }),
+      Object.freeze({ years: 1, settlements: 24, seedIndices: Object.freeze([1]) }),
+      Object.freeze({ years: 1, settlements: 30, seedIndices: Object.freeze([1]) }),
+      // The useful product horizon gets two independent representative seeds.
+      Object.freeze({ years: 30, settlements: 12, seedIndices: Object.freeze([1, 2]) }),
+      // Endurance is a duration question, exercised at small and representative scale.
+      Object.freeze({ years: 100, settlements: 4, seedIndices: Object.freeze([1]) }),
+      Object.freeze({ years: 100, settlements: 12, seedIndices: Object.freeze([2]) }),
+    ]),
   }),
   research: Object.freeze({
     description: 'Three-hundred-year attractor study; informative, never a launch gate.',
-    horizons: Object.freeze([300]),
-    settlements: Object.freeze([12]),
-    seedsPerCell: 3,
+    cells: Object.freeze([
+      Object.freeze({ years: 300, settlements: 12, seedIndices: Object.freeze([1]) }),
+    ]),
   }),
 });
 
+function behavioralControlsFor(profileName, years, settlements, seedIndex) {
+  if (profileName === 'release') {
+    const releaseProbes = new Set(['30:12:1', '30:12:2', '100:4:1']);
+    if (releaseProbes.has(`${years}:${settlements}:${seedIndex}`)) {
+      return { neighborYears: 30, dark: true };
+    }
+  }
+  if (profileName === 'research' && years === 300 && seedIndex === 1) {
+    return { neighborYears: 300, dark: false };
+  }
+  return null;
+}
+
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
+const sumFinite = (values) => values.reduce((total, value) => (
+  total + (Number.isFinite(Number(value)) ? Number(value) : 0)
+), 0);
 
 function readArg(argv, name, fallback = null) {
   const index = argv.indexOf(`--${name}`);
@@ -85,17 +113,23 @@ export function buildRealmScalePlan(profileName, seedPrefix = 'realm-scale') {
   }
 
   const cases = [];
-  for (const years of profile.horizons) {
-    for (const settlements of profile.settlements) {
-      for (let seedIndex = 1; seedIndex <= profile.seedsPerCell; seedIndex += 1) {
-        const id = `${profileName}-${years}y-${settlements}s-seed${seedIndex}`;
-        cases.push({
-          id,
-          years,
-          settlements,
-          seed: `${safeSlug(seedPrefix)}-${id}`,
-        });
-      }
+  for (const cell of profile.cells) {
+    const { years, settlements } = cell;
+    for (const seedIndex of cell.seedIndices) {
+      const id = `${profileName}-${years}y-${settlements}s-seed${seedIndex}`;
+      const behavioralControls = behavioralControlsFor(
+        profileName,
+        years,
+        settlements,
+        seedIndex,
+      );
+      cases.push({
+        id,
+        years,
+        settlements,
+        seed: `${safeSlug(seedPrefix)}-${id}`,
+        ...(behavioralControls ? { behavioralControls } : {}),
+      });
     }
   }
   return {
@@ -211,9 +245,13 @@ export function isPassingWholeWorldReceipt(receipt) {
     Array.isArray(receipt?.properties) ? receipt.properties : [],
   );
   return (
-    receipt?.schemaVersion === 3
+    receipt?.schemaVersion === 4
     && receipt?.kind === 'whole_world_soak'
     && receipt?.passed === true
+    && receipt?.behavioral?.schemaVersion === 1
+    && receipt?.behavioral?.kind === 'whole_world_behavioral_observation'
+    && Array.isArray(receipt?.behavioral?.yearly)
+    && receipt.behavioral.yearly.length === receipt?.years
     && properties.has('isolated_worker_executed')
     && properties.has('isolated_worker_output_identical')
     && worker?.kind === 'isolated_advance_worker_measurement'
@@ -323,8 +361,34 @@ function writeJsonAtomically(path, value) {
   renameSync(temp, path);
 }
 
+function loadHumanReview(path) {
+  if (!path) return { review: null, evidence: null };
+  const absoluteReviewPath = resolve(String(path));
+  try {
+    const reviewText = readFileSync(absoluteReviewPath, 'utf8');
+    return {
+      review: JSON.parse(reviewText),
+      evidence: {
+        path: relative(ROOT, absoluteReviewPath),
+        sha256: sha256(reviewText),
+        loadError: null,
+      },
+    };
+  } catch (error) {
+    return {
+      review: null,
+      evidence: {
+        path: relative(ROOT, absoluteReviewPath),
+        sha256: null,
+        loadError: error instanceof Error ? error.message : String(error),
+      },
+    };
+  }
+}
+
 function evidenceDigestFor(receipts) {
   const evidence = receipts.map((receipt) => ({
+    caseId: receipt.caseId,
     seed: receipt.seed,
     years: receipt.years,
     settlements: receipt.settlements,
@@ -338,8 +402,40 @@ function evidenceDigestFor(receipts) {
     structuredCloneMs: receipt.structuredCloneMs,
     isolatedWorker: receipt.isolatedWorker,
     peakHeapUsedBytes: receipt.peakHeapUsedBytes,
+    behavioral: receipt.behavioral,
   }));
   return sha256(JSON.stringify(evidence));
+}
+
+function buildCertificationSoakCandidate({
+  behavioralCertification,
+  receipts,
+  evidenceDigest,
+  source,
+  runAt,
+  humanReviewEvidence,
+}) {
+  const candidateProperties = CERTIFICATION_REQUIRED_PROPERTY_KEYS.filter((key) => (
+    ['no_crash', 'rerun_identical', 'seed_divergent', 'population_bounded']
+      .includes(key)
+    || behavioralCertification.propertiesEarned.includes(key)
+  ));
+  if (!behavioralCertification.passed
+      || candidateProperties.length !== CERTIFICATION_REQUIRED_PROPERTY_KEYS.length
+      || !humanReviewEvidence?.sha256) {
+    return null;
+  }
+  return {
+    years: 100,
+    seedsTested: new Set(receipts.map((receipt) => receipt.seed)).size,
+    ticksAdvanced: sumFinite(receipts.map((receipt) => receipt.ticksAdvanced)),
+    properties: candidateProperties,
+    runAt,
+    buildHash: source.commit,
+    behavioralContractVersion: behavioralCertification.schemaVersion,
+    evidenceDigest,
+    humanChronicleReviewDigest: humanReviewEvidence.sha256,
+  };
 }
 
 /**
@@ -349,11 +445,76 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
   const profileName = String(readArg(argv, 'profile', 'smoke'));
   const seedPrefix = String(readArg(argv, 'seed-prefix', 'realm-scale'));
   const dryRun = argv.includes('--dry-run');
+  const reviewExisting = argv.includes('--review-existing');
+  const humanReviewPath = readArg(argv, 'human-review', '');
   const source = readSourceIdentity();
   const plan = buildRealmScalePlan(profileName, seedPrefix);
   const defaultOutput = resolve(ROOT, 'artifacts/soak', `${profileName}.json`);
   const output = resolve(String(readArg(argv, 'output', defaultOutput)));
   const caseDirectory = resolve(dirname(output), `${safeSlug(profileName)}.cases`);
+
+  if (reviewExisting) {
+    if (!existsSync(output)) {
+      throw new Error(`Cannot review missing realm-scale evidence: ${output}`);
+    }
+    const existing = JSON.parse(readFileSync(output, 'utf8'));
+    if (existing?.kind !== 'realm_scale_evidence' || existing?.profile !== profileName) {
+      throw new Error(
+        `Existing evidence is not a ${profileName} realm-scale aggregate.`,
+      );
+    }
+    if (!sourceIdentityMatches(existing.source, source)) {
+      throw new Error(
+        'Current source identity does not match the existing evidence; human review cannot rebind stale evidence.',
+      );
+    }
+    const existingReceipts = (existing.caseReceipts || []).map((path) => (
+      JSON.parse(readFileSync(resolve(dirname(output), path), 'utf8'))
+    ));
+    const {
+      review: existingHumanReview,
+      evidence: existingHumanReviewEvidence,
+    } = loadHumanReview(humanReviewPath);
+    const behavioralCertification = evaluateBehavioralCertification({
+      profile: profileName,
+      complete: existing.mechanicalPassed === true,
+      source: existing.source,
+      receipts: existingReceipts,
+      humanReview: existingHumanReview,
+    });
+    const reviewed = {
+      ...existing,
+      behavioralCertification,
+      humanReviewEvidence: existingHumanReviewEvidence,
+      certificationSoakCandidate: buildCertificationSoakCandidate({
+        behavioralCertification,
+        receipts: existingReceipts,
+        evidenceDigest: existing.evidenceDigest,
+        source: existing.source,
+        runAt: existing.completedAt,
+        humanReviewEvidence: existingHumanReviewEvidence,
+      }),
+      reviewedAt: new Date().toISOString(),
+      claimBoundary: {
+        ...existing.claimBoundary,
+        certificationWritten: false,
+        manifestEntryEligible: behavioralCertification.passed,
+        reason: behavioralCertification.claimBoundary,
+      },
+    };
+    writeJsonAtomically(output, reviewed);
+    console.log(`realm-scale behavioral review: ${output}`);
+    console.log(
+      behavioralCertification.passed
+        ? 'eligible for operator-reviewed manifest entry'
+        : `not eligible: ${[
+            ...behavioralCertification.failures,
+            ...behavioralCertification.humanChronicleReview.errors,
+          ].join(', ')}`,
+    );
+    if (!behavioralCertification.passed) process.exitCode = 1;
+    return reviewed;
+  }
 
   if (dryRun) {
     const dryReceipt = {
@@ -385,12 +546,21 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
     rmSync(caseReceiptPath, { force: true });
     console.log(`\n# realm-scale case ${testCase.id}`);
     try {
-      await runSoak([
+      const soakArgs = [
         '--years', String(testCase.years),
         '--settlements', String(testCase.settlements),
         '--seed', testCase.seed,
+        '--case-id', testCase.id,
         '--receipt', caseReceiptPath,
-      ]);
+      ];
+      if (testCase.behavioralControls?.neighborYears) {
+        soakArgs.push(
+          '--neighbor-control-years',
+          String(testCase.behavioralControls.neighborYears),
+        );
+      }
+      if (testCase.behavioralControls?.dark) soakArgs.push('--dark-control');
+      await runSoak(soakArgs);
       const receipt = JSON.parse(readFileSync(caseReceiptPath, 'utf8'));
       if (!isPassingWholeWorldReceipt(receipt)) {
         throw new Error('The child receipt was missing, stale, or did not pass.');
@@ -424,8 +594,33 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
     sourceStable
     && failures.length === 0
     && receipts.length === plan.cases.length;
+  const mechanicalPassed = complete
+    && receipts.every((receipt) => receipt.passed === true);
+  const {
+    review: humanReview,
+    evidence: humanReviewEvidence,
+  } = loadHumanReview(humanReviewPath);
+  const behavioralCertification = evaluateBehavioralCertification({
+    profile: profileName,
+    complete: mechanicalPassed,
+    source,
+    receipts,
+    humanReview,
+  });
+  const passed = mechanicalPassed
+    && (profileName !== 'release' || behavioralCertification.automatedPassed);
+  const evidenceDigest = evidenceDigestFor(receipts);
+  const completedAt = new Date().toISOString();
+  const certificationSoakCandidate = buildCertificationSoakCandidate({
+    behavioralCertification,
+    receipts,
+    evidenceDigest,
+    source,
+    runAt: completedAt,
+    humanReviewEvidence,
+  });
   const aggregate = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     kind: 'realm_scale_evidence',
     profile: profileName,
     description: plan.description,
@@ -433,12 +628,13 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
     sourceAtCompletion,
     sourceStable,
     complete,
-    passed: complete && receipts.every((receipt) => receipt.passed === true),
+    mechanicalPassed,
+    passed,
     casesPlanned: plan.cases.length,
     casesCompleted: receipts.length,
     matrix: plan.cases,
     summary: summarizeRealmScaleReceipts(receipts),
-    evidenceDigest: evidenceDigestFor(receipts),
+    evidenceDigest,
     caseReceipts: receipts.map((receipt) => {
       const seedSuffix = receipt.seed.split('-').at(-1);
       const receiptName = safeSlug(
@@ -450,10 +646,14 @@ export async function runRealmScaleCertification(argv = process.argv.slice(2)) {
       );
     }),
     failures,
-    completedAt: new Date().toISOString(),
+    behavioralCertification,
+    humanReviewEvidence,
+    certificationSoakCandidate,
+    completedAt,
     claimBoundary: {
       certificationWritten: false,
-      reason: 'This matrix does not yet prove the full rhythm and no-stasis property set.',
+      manifestEntryEligible: behavioralCertification.passed,
+      reason: behavioralCertification.claimBoundary,
       workerTiming:
         'Worker duration is an actual Node worker_threads isolate measurement, not browser Web Worker or field-device timing.',
     },

@@ -12,10 +12,13 @@
  * When the maintained realm-scale runner completes, an operator may append a
  * validated band here:
  *   { bandId, presetId, status: 'certified', soak: { years, seedsTested,
- *     ticksAdvanced, properties: [<all required property keys>], runAt, buildHash } }
+ *     ticksAdvanced, properties: [<all required property keys>], runAt, buildHash,
+ *     behavioralContractVersion, evidenceDigest, humanChronicleReviewDigest } }
  * and sets generatedAt. validateCertificationManifest MUST pass before commit
  * (the schema wall). A `measured` band records an honest partial result; a
  * `pending` band (soak:null) records an unproven config band explicitly.
+ * Certification requires the 100-year release horizon. A 30-year useful-horizon
+ * result and a 300-year research result remain measured evidence.
  *
  * Pure data. Imported ONLY by the lazy certification read/panel — never eager.
  */
