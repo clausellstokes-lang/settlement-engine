@@ -202,3 +202,21 @@ branch; memory; backup-push decision recorded vetoably.
 > headroom) · deepCraftKillList · guidanceRegistry.walker ·
 > domainAnyCastBaseline · migrationRehearsal (mig 191 landed same day by the
 > AI-ladder lane) · pipeline.property (the ledger's documented known flake).
+
+> **2026-07-27 (EP-5, the unclaimed tail — owner "continue"):** all three EP-2D
+> follow-up instruments CLOSED and rostered (roster 12 → 15, baseline unchanged
+> at 3): ordering's two-sided siege pair (the relative-ratio assertion KEPT
+> beside the absolute envelope — they red on different worlds), ancientRuins'
+> two-sided mint pair (N=40 proven unable to carry a two-sided instrument at
+> 2σ — corpus doubled to 80 for 135 ms, vetoable), roadsMissions' cadence pair
+> (EP-2D's variable-denominator concern dissolved: 12 NPCs × 3 years = 36 fixed
+> Bernoulli trials, guarded). Six envelope entries registered; no corpus/family
+> divergence anywhere (the envelope-${'{'}i{'}'} corner did not repeat). Eight more
+> loops converted to truthful totality; one pure accumulator declined with the
+> marker; negative control executed (a planted break reported the TRUE 11-of-80
+> count). One more explicit timeout (siege test, fake-red verified via ps at
+> load 90). NEW SRC FINDING for the owner queue: the roads ≤1-journey-per-
+> NPC-year law is VIOLATED on 5 of 16 seeds (dominion/embassy/observance/
+> diplomacy at a city seat) — the original test was green over a corpus of one.
+> NEW OWNER PICK: ordering.siegeSuppression.unwalledFloor loosenPending (live
+> 10 vs derived 6).

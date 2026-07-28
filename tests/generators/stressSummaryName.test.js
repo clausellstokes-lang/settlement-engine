@@ -51,7 +51,10 @@ const ALL_TYPES = Object.keys(STRESS_TYPE_MAP);
 
 describe('F8 — stress summaries render with the real settlement name', () => {
   it('never emits a bare leading-space summary and embeds the real name', () => {
-    for (const type of ALL_TYPES) {
+    // Every registered stress type runs. A renderer regression hitting six types must
+    // report six: the bare loop reported "1 failure" either way, and the types after
+    // the first casualty were never rendered at all.
+    const failures = collectSeedFailures(ALL_TYPES, (type) => {
       const s = mk({ stressType: type });
       const entries = entriesOf(s);
       // Forced single stress always produces exactly one entry of this type.
@@ -76,7 +79,8 @@ describe('F8 — stress summaries render with the real settlement name', () => {
         // anchored: same live-prose anchor; the summary is non-empty rendered text.
         expect(e.summary).not.toContain('of  died'); // "leader of  died"
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every stress summary renders with the real settlement name');
   }, 120_000);
 
   it('leaves NO summaryRoll token on any persisted stress entry', () => {

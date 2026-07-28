@@ -4,7 +4,11 @@
  * refusal, and clean return-home; roster conservation (the NO-DEATH law); cadence ≤ 1/NPC-
  * year; dark byte-identical. DESIGN_THE_ROADS.md §4/§5/§6.
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
+import { readEnvelope } from '../helpers/distributionEnvelope.js';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
@@ -15,6 +19,12 @@ import { ROADS_TUNING } from '../../src/domain/roads/state.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const IDS = ['s000', 's001', 's002', 's003'];
+
+/** The one canonical home for this file's derived distribution bounds. */
+const ENVELOPES = JSON.parse(readFileSync(
+  join(dirname(fileURLToPath(import.meta.url)), '../fixtures/distribution-envelopes.manifest.json'),
+  'utf8',
+));
 
 function digestFor() {
   const pack = makeGridPack({ cols: 5, rows: 4 });
@@ -127,10 +137,25 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
     expect(finalIds.size, 'the roster is non-empty (sanity)').toBeGreaterThan(0);
     // Cadence: no NPC departed twice in the same year.
     for (const [key, count] of departuresByKeyYear) expect(count, `<=1 journey for ${key}`).toBeLessThanOrEqual(1);
-    // Infrequent by construction: journeys fit the soak band (≈0.2-0.6 per eligible NPC-year).
-    const perNpcYear = seenMissions.size / (initial.count * 3);
-    expect(perNpcYear, 'cadence in the soak band').toBeGreaterThan(0.05);
-    expect(perNpcYear, 'cadence in the soak band').toBeLessThan(0.9);
+    // Infrequent by construction. The trial unit is the NPC-YEAR: the cadence assertion
+    // immediately above allows at most one departure per NPC per year, so this fixture
+    // offers exactly (roster × 3) Bernoulli trials and the denominator is fixed by the
+    // fixture rather than by an outcome. Pin it, so a roster change reds here instead of
+    // silently re-scaling what the bounds mean.
+    const floor = readEnvelope(ENVELOPES, 'roadsMissions.journeyCadence.floor');
+    const ceiling = readEnvelope(ENVELOPES, 'roadsMissions.journeyCadence.ceiling');
+    const npcYears = initial.count * 3;
+    expect(npcYears, 'the cadence envelope is registered for this exact trial count').toBe(floor.n);
+    expect(ceiling.n, 'both arms of the band share one trial count').toBe(floor.n);
+    // Both bounds DERIVED from a measured 207/576 departure rate, not hand-picked. The
+    // authored band was perNpcYear > 0.05 and < 0.9 — i.e. >= 2 and <= 32 departures of
+    // a possible 36, sitting 3.8 and 6.6 sigma from the mean of 12.94. The derived pair
+    // tightens both arms to 4 and 23; this run lands on 16.
+    const perNpcYear = seenMissions.size / npcYears;
+    expect(seenMissions.size, `journey count below the derived cadence floor (perNpcYear ${perNpcYear})`)
+      .toBeGreaterThanOrEqual(floor.bound);
+    expect(seenMissions.size, `journey count above the derived cadence ceiling (perNpcYear ${perNpcYear})`)
+      .toBeLessThanOrEqual(ceiling.bound);
   }, 120_000);
 
   it('dark twin: the SAME fixture with roads dark carries no roads ledger and no whereabouts', () => {

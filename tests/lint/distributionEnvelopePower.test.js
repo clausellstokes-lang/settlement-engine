@@ -57,18 +57,24 @@
  *     tests/domain/pietyReceipts.test.js            structural lengths + a severity scalar
  *     tests/domain/settlementLifecycleKernel…       scalar thresholds, single run
  *     tests/domain/spatialSubstrate.test.js         structural lengths
- *   RATE INSTRUMENTS — follow-up warranted:
+ *   RATE INSTRUMENTS — follow-up warranted. All three of the .test.js candidates were
+ *   taken by wave EP-5 (2026-07-27) and are now ROSTERED AND MIGRATED above:
  *     tests/domain/ancientRuinsGeneration.test.js   0 < minted < 20 over a 40-seed sweep;
  *       a two-sided generation-rate envelope, and at N=40 it is the same small-corpus
- *       shape as the trigger. Strongest remaining candidate.
+ *       shape as the trigger. Strongest remaining candidate. CLOSED by EP-5 — and it
+ *       proved N=40 cannot carry a two-sided instrument at all, so the corpus doubled.
  *     tests/domain/roadsMissions.test.js            0.05 < perNpcYear < 0.9 soak band;
  *       genuine two-sided rate, variable denominator (needs the fixed-n treatment).
+ *       CLOSED by EP-5 — the denominator turned out FIXED (NPC-years), not
+ *       outcome-divided, so no fixed-n workaround was needed; it is guarded instead.
+ *     tests/joins/ordering.test.js (EP-2D marked NOT MINE — another agent's partition —
+ *       and classified only: `unwalledSieges >= 10`, `walledSieges <= 0.7 * unwalled` ARE
+ *       a two-sided rate comparison over a corpus). CLOSED by EP-5.
+ *   STILL OPEN, deliberately not an envelope:
  *     tests/generators/historyNoUndefinedProse.js   `generated > 80` of 192 configs is an
  *       anti-vacuity floor on a THROW rate; the honest tightening is totality
- *       (`=== 192`), not an envelope — any throw is a defect.
- *   NOT MINE: tests/joins/ordering.test.js is another agent's partition. Classification
- *     only: lines 231/236 (`unwalledSieges >= 10`, `walledSieges <= 0.7 * unwalled`) ARE
- *     a two-sided rate comparison over a corpus — a real instrument, follow-up warranted.
+ *       (`=== 192`), not an envelope — any throw is a defect. Not a .test.js, so it is
+ *       not roster-eligible; it stays an owner-queue item.
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -121,6 +127,35 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + 'floor, was a hand-picked `> 40` sitting 8.1 sigma BELOW the mean of a 160-draw '
       + 'corpus; now the derived 71 (measured 57.25% at 400 draws, 3.29 sigma). The file\'s '
       + 'other big loops are deterministic sweeps, not rate instruments.' },
+  { file: 'tests/joins/ordering.test.js', pendingMigration: false,
+    rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION — a tightening; EP-2D classified '
+      + 'this file as a real two-sided instrument but it belonged to another partition, so it '
+      + 'was never rostered). The walls-suppress-sieges paired comparison over 120 `siege-${i}` '
+      + 'seeds. Two entries: unwalledFloor (lower, live 10 kept, loosenPending — the alpha-1e-3 '
+      + 'derivation of 6 is looser) and walledCeiling (upper 17, NEW). The pre-existing RELATIVE '
+      + 'assertion (walled <= floor(unwalled * 0.7)) is KEPT alongside the absolute envelope: '
+      + 'the ratio is blind to both arms inflating together and the envelope is blind to a '
+      + 'suppression collapse scaling both. Measured 62/400 and 23/400; the test\'s own corpus '
+      + 'reads 21/120 and 6/120, 0.61 sigma apart from the family — no divergence.' },
+  { file: 'tests/domain/ancientRuinsGeneration.test.js', pendingMigration: false,
+    rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION — EP-2D named it the strongest '
+      + 'remaining candidate but left it off the roster). Two-sided mint-rate envelope, '
+      + 'measured 43/400 on the `anc-${i}` family. THE CORPUS WAS DOUBLED 40 -> 80: at the '
+      + 'authored N=40 the anti-vacuity floor of 1 carries 1.685 sigma and NO non-vacuous bound '
+      + 'can reach the 2-sigma bar (the achievable ceiling there is 2.195, at the vacuous 0). '
+      + 'At 80 the floor carries 2.743 and the ceiling of 19 is a 2x tightening in rate terms '
+      + '(23.75% vs the authored 47.5%). Runtime cost ~135 ms. The floor is loosenPending: its '
+      + 'derivation is the vacuous 0.' },
+  { file: 'tests/domain/roadsMissions.test.js', pendingMigration: false,
+    rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION). EP-2D flagged the variable '
+      + 'denominator as needing the fixed-n treatment; it turned out FIXED, not outcome-'
+      + 'divided — the trial unit is the NPC-year (12 NPCs x 3 years = 36) and the same test '
+      + 'asserts at most one departure per NPC-year, so the Bernoulli unit is exact. A '
+      + 'denominator guard in the test pins 36. Base rate 207/576 over 16 runs of the identical '
+      + 'fixture; both arms tightened (floor 2 -> 4, ceiling 32 -> 23). A FINDING travels with '
+      + 'this measurement: the cadence law is VIOLATED on 5 of those 16 seeds (dominion / '
+      + 'embassy / observance / diplomacy purposes at a city seat or envoy). The test\'s own '
+      + 'single seed is clean, so its cadence assertion is green over a corpus of one.' },
 
   // ── STILL OWED: a real instrument, blocked for a stated reason ──────────────
   { file: 'tests/simulation/distributionEnvelopes.test.js', pendingMigration: true,
@@ -208,6 +243,10 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
  * 11 -> 3 at wave EP-2D (2026-07-27): two rows MIGRATED (captureBirthScale,
  * narrativeQualityCorpus), seven CLASSIFIED as non-instruments, one row ADDED
  * (tests/domain/distribution.test.js — a roster extension, which is a tightening).
+ * UNCHANGED at 3 by wave EP-5 (2026-07-27): three rows ADDED (ordering,
+ * ancientRuinsGeneration, roadsMissions — EP-2D's recorded follow-up candidates), all
+ * three arriving MIGRATED rather than pending, so the roster grew 12 -> 15 while the
+ * pending column did not move. A row may only ever join this file already derived.
  */
 const PENDING_MIGRATION_BASELINE = 3;
 
@@ -362,7 +401,7 @@ describe('distribution-envelope registry: derivation, power, provenance', () => 
   });
 
   test('the roster is frozen and non-vacuous', () => {
-    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(12);
+    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(15);
     const files = DISTRIBUTION_TOTALITY.map((row) => row.file);
     expect(files.filter((f, i) => files.indexOf(f) !== i), 'duplicate roster rows').toEqual([]);
   });

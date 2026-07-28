@@ -315,24 +315,31 @@ describe('full-pipeline world-law enforcement', () => {
   });
 
   it('holds across every tier and a deterministic seed corpus', () => {
-    for (const tier of TIERS) {
-      for (let index = 0; index < 8; index += 1) {
-        const settlement = generateSettlementPipeline(
-          {
-            settType: tier,
-            culture: 'germanic',
-            magicExists: false,
-            priorityMagic: 100,
-          },
-          null,
-          {
-            seed: `world-law-corpus-${tier}-${index}`,
-            customContent: {},
-          },
-        );
-        expectNoFunctionalMagic(settlement);
-      }
-    }
+    // All 48 generations run. A magic leak reappearing in five tiers must report five;
+    // the bare nested loop reported "1 failure" whether five tiers leaked or one, and
+    // every tier after the casualty went ungenerated — so a fix could be "verified"
+    // against a corpus that never reached metropolis.
+    const CASES = TIERS.flatMap(tier => Array.from(
+      { length: 8 },
+      (_, index) => ({ tier, seed: `world-law-corpus-${tier}-${index}` }),
+    ));
+    const failures = collectSeedFailures(CASES, ({ tier, seed }) => {
+      const settlement = generateSettlementPipeline(
+        {
+          settType: tier,
+          culture: 'germanic',
+          magicExists: false,
+          priorityMagic: 100,
+        },
+        null,
+        {
+          seed,
+          customContent: {},
+        },
+      );
+      expectNoFunctionalMagic(settlement);
+    });
+    expectNoSeedFailures(failures, 'no functional magic leaks in any tier across the deterministic corpus');
   });
 
   it('remains byte-deterministic after policy filtering', () => {
