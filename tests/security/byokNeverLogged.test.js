@@ -75,6 +75,10 @@ describe('BYOK — the decrypted key is never logged', () => {
     expect(/grant execute on function public\.surveyor_byok_get\([^)]*\) to authenticated/.test(mig)).toBe(false);
     // the ciphertext table is RLS-on with no select policy (never selectable)
     expect(mig).toContain('alter table public.surveyor_byok_keys enable row level security');
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(/create policy[^;]*on public\.surveyor_byok_keys[^;]*for select/i.test(mig)).toBe(false);
   });
 

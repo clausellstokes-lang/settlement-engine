@@ -44,7 +44,7 @@ function netCurrentFn(name) {
  *  so the test wires up the REAL trigger DDL, not a hand-rolled copy. */
 function triggerStmt(file, name) {
   const sql = readFileSync(resolve(MIGRATIONS_DIR, file), 'utf-8');
-  const re = new RegExp(`create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'i');
+  const re = new RegExp(`^create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'im');
   const m = sql.match(re);
   return m ? m[0] : null;
 }

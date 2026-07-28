@@ -43,7 +43,7 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
   });
 
   it('grants a holder UPDATE only over their OWN seat row', () => {
-    expect(lower).toMatch(/create policy "holder updates own founder seat" on public\.founder_seats/);
+    expect(lower).toMatch(/^create policy "holder updates own founder seat" on public\.founder_seats/m);
     expect(lower).toMatch(/auth\.uid\(\)\s*=\s*holder_user_id/);
   });
 
@@ -53,6 +53,10 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
     expect(lower).not.toMatch(/grant\s+[^;]*\bon\s+public\.founder_seats\b[^;]*\bto\b[^;]*\banon\b/);
     // The transfer ledger has NO policy at all → default-deny; assert no select/insert
     // policy names it (append-only via the service-role write path only).
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(lower).not.toMatch(/create policy[^;]*on public\.founder_seat_transfers/);
   });
 

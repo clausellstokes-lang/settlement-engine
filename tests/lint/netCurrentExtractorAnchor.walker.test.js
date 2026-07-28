@@ -34,8 +34,8 @@
  *     anchored-regex idiom instead — sourceContract.sqlFunctionBody was the
  *     one live instance, converted at 24c85e7f); the indirect form has no
  *     scannable signature and is caught only by review;
- *   - sibling statement families (create trigger / create policy extractors,
- *     e.g. enforceSaveLimit's extractTrigger) — a different spelling class;
+ *   - other statement families beyond trigger/policy (create view/index/…)
+ *     — swept only if extractors for them ever appear;
  *   - `\s*`-spelled or split-across-concatenation patterns (none exist today);
  *   - shell-side patterns in scripts/*.sh (grep/sed syntax; none exist today);
  *   - regexes built from variables where the create prefix lives elsewhere.
@@ -77,6 +77,17 @@ const DETECTORS = [
   // indexOf — the capture group can never match, so every hit is a violation;
   // the cure is the anchored-regex idiom (see sourceContract.sqlFunctionBody).
   { name: 'substring-search', re: /(\^)?(?<=(?:indexOf|lastIndexOf|search)\(\s{0,8}[`'"])create or replace function/gi },
+  // The TRIGGER/POLICY sibling family (second sweep, 2026-07-27). ⚠ UNLIKE
+  // functions, the corpus does NOT guarantee column 0 for these statements —
+  // 005:69 mints a policy via DO-block EXECUTE, and 003:65 / 004:49 create
+  // triggers as indented DO-block DDL — so anchoring a trigger/policy
+  // extractor is legal ONLY after verifying that site's OWN input holds every
+  // target at column 0, and negative-presence guards NEVER anchor (pin them
+  // in FROZEN_UNANCHORED with the site comment instead).
+  { name: 'tp-escaped', re: /(\^)?create\\{1,2}s\+(?:trigger|policy)/gi },
+  { name: 'tp-literal', re: /\/(\^)?create (?:trigger|policy)/gi },
+  { name: 'tp-constructed', re: /RegExp\(\s*[`'"](\^)?create (?:trigger|policy)/gi },
+  { name: 'tp-substring', re: /(\^)?(?<=(?:indexOf|lastIndexOf|search)\(\s{0,8}[`'"])create (?:trigger|policy)/gi },
 ];
 
 /** { 'relative/file.js': { count, lines: [n, …] } } for UNANCHORED occurrences. */
@@ -123,8 +134,17 @@ function scanForUnanchored() {
  * Never raise a number; never add a file.
  */
 const FROZEN_UNANCHORED = Object.freeze({
+  // Rows may be re-frozen upward ONLY when a detector-family widening makes a
+  // pre-existing DELIBERATE site newly visible (as the trigger/policy family
+  // did on 2026-07-27); fixing or adding a real extractor never raises a row.
+  'tests/lint/founderSeatsMigration.test.js': 1, // DELIBERATE: negative-presence (policy family)
+  'tests/security/adminLeastPrivilege.pglite.test.js': 4, // DELIBERATE: negative-presence (policy family)
+  'tests/security/adminUserManagement.pglite.test.js': 2, // DELIBERATE: negative-presence (policy family)
+  'tests/security/byokNeverLogged.test.js': 1, // DELIBERATE: negative-presence (policy family)
+  'tests/security/customContentDeities.pglite.test.js': 1, // DELIBERATE: negative-presence (policy family)
+  'tests/security/denyAllRlsCensus.pglite.test.js': 1, // DELIBERATE: negative-presence (policy family)
   'tests/security/dossierEntitlements.pglite.test.js': 3, // DELIBERATE: negative-presence guards
-  'tests/security/gallery_privacy.contract.test.js': 2, // DELIBERATE: negative-presence guards
+  'tests/security/gallery_privacy.contract.test.js': 3, // DELIBERATE: 2 function-family + 1 policy-family negative-presence
   'tests/security/moneyRpcNetCurrentGuards.test.js': 3, // DELIBERATE: negative controls
 });
 
@@ -185,6 +205,10 @@ describe('unanchored net-current extractor walker (habitat removal)', () => {
     expect(hits('const re = /create\\s+(?:or\\s+replace\\s+)?(?:function|table)\\s+(?:public\\.)?([a-z_][a-z0-9_]*)/gi'), 'kind-group spelling').toBe(1);
     expect(hits("const start = src.indexOf('create or replace function public.foo');"), 'direct indexOf substring search').toBe(1);
     expect(hits('const at = src.search(`create or replace function ${fnName}`);'), 'direct search substring call').toBe(1);
+    expect(hits('src.match(/create\\s+policy\\s+"([^"]+)"\\s+on\\s+public\\.profiles/gi)'), 'trigger/policy escaped').toBe(1);
+    expect(hits('expect(lower).toMatch(/create policy "x" on public\\.y/)'), 'trigger/policy plain literal').toBe(1);
+    expect(hits('new RegExp(`create trigger ${name}\\\\b[\\\\s\\\\S]*?;`, "i")'), 'trigger/policy constructed').toBe(1);
+    expect(hits("const at = migration.indexOf('create policy \"x\"');"), 'trigger/policy substring').toBe(1);
   });
 
   test('detectors stay silent on the anchored house form', () => {
@@ -195,6 +219,10 @@ describe('unanchored net-current extractor walker (habitat removal)', () => {
     expect(hits('migrations.match(/^create(?:\\s+or\\s+replace)?\\s+function/im)'), 'anchored optional-group').toBe(0);
     expect(hits('const re = /^[ \\t]*create\\s+(?:or\\s+replace\\s+)?(?:function|table)/gim'), 'anchored kind-group (classifier form)').toBe(0);
     expect(hits("const end = src.indexOf('$$;', start);"), 'indexOf with a non-create needle').toBe(0);
+    expect(hits('src.match(/^create\\s+policy\\s+"([^"]+)"/gim)'), 'anchored trigger/policy escaped').toBe(0);
+    expect(hits('expect(lower).toMatch(/^create policy "x" on public\\.y/m)'), 'anchored trigger/policy literal').toBe(0);
+    expect(hits('new RegExp(`^create trigger ${name}\\\\b`, "im")'), 'anchored trigger/policy constructed').toBe(0);
+    expect(hits('await db.exec(`\n      create policy "fixture" on public.t for select using (true);\n    `)'), 'plain SQL policy fixture (data, not a pattern)').toBe(0);
   });
 
   test('the migrations corpus itself keeps every create-or-replace-function at column 0', () => {

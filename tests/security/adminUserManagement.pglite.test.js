@@ -55,7 +55,7 @@ function extractFn(src, name) {
 }
 /** Extract a `create policy "<name>" … ;` block verbatim. */
 function extractPolicy(src, name) {
-  const m = src.match(new RegExp(`create\\s+policy\\s+"${name}"[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy\\s+"${name}"[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract policy ${name}`);
   return m[0];
 }
@@ -392,14 +392,22 @@ describe.runIf(allExist)('A4 user-management — executed against 050/051/053 (p
 describe.runIf(allExist)('A4 — warnings/internal_notes are append-only by RLS (static)', () => {
   const s053 = sql('053');
   it('internal_notes has NO insert/update/delete policy (written only via the RPC)', () => {
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s053).not.toMatch(/create policy[^;]*on public\.internal_notes[\s\S]*?for\s+(insert|update|delete)/i);
   });
   it('the subject is NOT in the internal_notes read policy (no self-read)', () => {
-    const m = s053.match(/create policy "Elevated read internal notes"[\s\S]*?;/i);
+    const m = s053.match(/^create policy "Elevated read internal notes"[\s\S]*?;/im);
     expect(m).toBeTruthy();
     expect(m[0]).not.toMatch(/auth\.uid\(\)\s*=\s*user_id/i);
   });
   it('warnings has NO insert/update/delete policy (written only via the RPC)', () => {
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(s053).not.toMatch(/create policy[^;]*on public\.warnings[\s\S]*?for\s+(insert|update|delete)/i);
   });
 });

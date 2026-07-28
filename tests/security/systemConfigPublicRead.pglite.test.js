@@ -38,7 +38,7 @@ describe('system_config pglite target exists (guards against silent vacuous skip
 /** Extract the allowlist SELECT policy verbatim from migration 058. */
 function extractPolicy() {
   const src = readFileSync(MIG_058, 'utf-8');
-  const m = src.match(/create policy "Public reads scoped to safe config keys"[\s\S]*?;\s*\n/i);
+  const m = src.match(/^create policy "Public reads scoped to safe config keys"[\s\S]*?;\s*\n/im);
   if (!m) throw new Error('could not extract the allowlist policy from migration 058');
   return m[0];
 }

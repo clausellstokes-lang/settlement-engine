@@ -61,7 +61,7 @@ function extractFn(migKey, name) {
 function extractPolicy(migKey, title) {
   const src = readFileSync(MIG[migKey], 'utf-8');
   const escTitle = title.replace(/[.*+?^${}()|[\]\\]/g, (c) => `\\${c}`);
-  const m = src.match(new RegExp(`create policy "${escTitle}"[\\s\\S]*?\\n\\s*\\);`, 'i'));
+  const m = src.match(new RegExp(`^create policy "${escTitle}"[\\s\\S]*?\\n\\s*\\);`, 'im'));
   if (!m) throw new Error(`could not extract policy "${title}" from migration ${migKey}`);
   return m[0];
 }

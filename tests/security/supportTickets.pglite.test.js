@@ -62,7 +62,7 @@ function extractFn(src, name) {
 }
 /** Extract a `create policy "<name>" … ;` block verbatim. */
 function extractPolicy(src, name) {
-  const m = src.match(new RegExp(`create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy\\s+"${name.replace(/[()]/g, '\\$&')}"[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract policy ${name}`);
   return m[0];
 }

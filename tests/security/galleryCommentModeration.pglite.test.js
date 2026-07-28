@@ -256,8 +256,8 @@ describe.runIf(allExist)('gallery comment moderation — RLS + grant posture pin
   });
 
   it('carries the two report policies (select-own / insert-gated)', () => {
-    expect(sql).toMatch(/create policy "Users can read their own gallery comment reports"[\s\S]*?for select[\s\S]*?auth\.uid\(\) = user_id/i);
-    const insertPolicy = sql.match(/create policy "Users can report gallery comments"[\s\S]*?\);/i)?.[0] || '';
+    expect(sql).toMatch(/^create policy "Users can read their own gallery comment reports"[\s\S]*?for select[\s\S]*?auth\.uid\(\) = user_id/im);
+    const insertPolicy = sql.match(/^create policy "Users can report gallery comments"[\s\S]*?\);/im)?.[0] || '';
     expect(insertPolicy).toMatch(/auth\.uid\(\) = user_id/);
     expect(insertPolicy).toMatch(/status = 'open'/);
     expect(insertPolicy).toMatch(/is_public = true/);

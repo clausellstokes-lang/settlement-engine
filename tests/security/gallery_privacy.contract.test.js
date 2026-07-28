@@ -35,6 +35,10 @@ describe('gallery public privacy migration', () => {
   it('removes direct anonymous public settlement row reads', () => {
     const sql = readFileSync(MIGRATION, 'utf8');
     expect(sql).toMatch(/drop policy if exists "Public dossiers are world-readable"/);
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(sql).not.toMatch(/create policy "Public dossiers are world-readable"/);
   });
 
@@ -171,7 +175,7 @@ describe('gallery report moderation contract', () => {
 
   it('requires auth and a public settlement for report inserts', () => {
     const sql = readFileSync(REPORTS_MIGRATION, 'utf8');
-    expect(sql).toMatch(/create table if not exists public\.gallery_reports/);
+    expect(sql).toMatch(/^create table if not exists public\.gallery_reports/m);
     expect(sql).toMatch(/auth\.uid\(\) = user_id/);
     expect(sql).toMatch(/where s\.id = settlement_id and s\.is_public = true/);
     expect(sql).toMatch(/auth\.uid\(\) is null[\s\S]{0,140}Sign in to report a dossier/);

@@ -41,7 +41,7 @@ const present = existsSync(MIG_DIR);
 function netCurrentSelfUpdatePolicy() {
   const files = readdirSync(MIG_DIR).filter(f => /^\d.*\.sql$/.test(f)).sort();
   const live = new Map(); // policy name -> ddl
-  const createRe = /create\s+policy\s+"([^"]+)"\s+on\s+public\.profiles([\s\S]*?);/gi;
+  const createRe = /^create\s+policy\s+"([^"]+)"\s+on\s+public\.profiles([\s\S]*?);/gim;
   const dropRe = /drop\s+policy\s+if\s+exists\s+"([^"]+)"\s+on\s+public\.profiles/gi;
   for (const f of files) {
     const src = readFileSync(resolve(MIG_DIR, f), 'utf-8');

@@ -33,8 +33,8 @@ function extractFunction(source, name) {
 function extractPolicy(source, title) {
   const escaped = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const match = source.match(new RegExp(
-    `create\\s+policy\\s+"${escaped}"[\\s\\S]*?;\\s*\\n`,
-    'i',
+    `^create\\s+policy\\s+"${escaped}"[\\s\\S]*?;\\s*\\n`,
+    'im',
   ));
   if (!match) throw new Error(`missing policy ${title}`);
   return match[0];

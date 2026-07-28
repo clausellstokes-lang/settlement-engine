@@ -62,7 +62,7 @@ function extractPolicy(migKey, title) {
   const src = readFileSync(MIG[migKey], 'utf-8');
   // Match from `create policy "title"` to the terminating `;` at column-0-ish
   // (the policy bodies in 059 are multi-line and end with `);`).
-  const m = src.match(new RegExp(`create policy "${title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}"[\\s\\S]*?;\\s*\\n`, 'i'));
+  const m = src.match(new RegExp(`^create policy "${title.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&')}"[\\s\\S]*?;\\s*\\n`, 'im'));
   if (!m) throw new Error(`could not extract policy "${title}" from migration ${migKey}`);
   return m[0];
 }

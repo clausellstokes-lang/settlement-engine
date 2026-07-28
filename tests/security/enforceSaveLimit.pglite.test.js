@@ -30,7 +30,7 @@ function extractFn(src, name) {
 }
 /** Extract the `create trigger ...;` DDL by name. */
 function extractTrigger(src, name) {
-  const m = src.match(new RegExp(`create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+trigger\\s+${name}\\b[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not extract trigger ${name}`);
   return m[0];
 }

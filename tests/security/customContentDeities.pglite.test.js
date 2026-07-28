@@ -185,6 +185,10 @@ describe.runIf(allExist)('migration 049 — RLS is owner-scoped + premium-gated 
   it('049 adds NO tier predicate of its own (premium gate stays the inherited one — D.0)', () => {
     const sql049 = loadSql(MIG049);
     expect(sql049).not.toMatch(/profile_has_premium_access/i);
+    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
     expect(sql049).not.toMatch(/create policy/i);
   });
 });

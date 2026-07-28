@@ -65,6 +65,7 @@ MUTATED_FILES=(
   supabase/migrations/183_application_command_journal.sql
   supabase/migrations/184_import_reconciliation_commands.sql
   src/store/canonEventCommandTransaction.js
+  src/store/campaignImportedCreation.js
   src/domain/display/economyFreshness.js
   src/components/new/tabs/EconomicsTab.jsx
   src/store/operationRegistry.js

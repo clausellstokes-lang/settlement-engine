@@ -18,7 +18,7 @@ const MIG_087 = resolve(process.cwd(), 'supabase', 'migrations', '087_review_mon
 
 describe.runIf(existsSync(MIG_087))('087 self-UPDATE policy pins stripe_subscription_id', () => {
   const src = readFileSync(MIG_087, 'utf-8');
-  const policy = (src.match(/create policy "Users update own profile[\s\S]*?\);/i) || [])[0];
+  const policy = (src.match(/^create policy "Users update own profile[\s\S]*?\);/im) || [])[0];
 
   it('recreates the self-UPDATE policy in 087', () => {
     expect(policy, 'self-update policy not recreated in 087 (stripe_subscription_id would stay user-writable)').toBeTruthy();

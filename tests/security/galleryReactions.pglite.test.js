@@ -40,7 +40,7 @@ function extractFn(src, name) {
 
 /** Extract the gallery_reactions CREATE TABLE statement verbatim. */
 function extractReactionsTable(src) {
-  const m = src.match(/create\s+table\s+if\s+not\s+exists\s+public\.gallery_reactions[\s\S]*?\);/i);
+  const m = src.match(/^create\s+table\s+if\s+not\s+exists\s+public\.gallery_reactions[\s\S]*?\);/im);
   if (!m) throw new Error('could not extract the gallery_reactions table DDL');
   return m[0];
 }
@@ -206,13 +206,13 @@ describe.runIf(allExist)('gallery reactions — RLS + grant posture pins (migrat
   });
 
   it('carries the three vote-shaped policies (select-own / insert-gated / delete-own)', () => {
-    expect(sql).toMatch(/create policy "Users can read their own gallery reactions"[\s\S]*?for select[\s\S]*?auth\.uid\(\) = user_id/i);
+    expect(sql).toMatch(/^create policy "Users can read their own gallery reactions"[\s\S]*?for select[\s\S]*?auth\.uid\(\) = user_id/im);
     // INSERT must carry all three gates: identity, active account, public settlement.
-    const insertPolicy = sql.match(/create policy "Users can react to public settlements"[\s\S]*?\);/i)?.[0] || '';
+    const insertPolicy = sql.match(/^create policy "Users can react to public settlements"[\s\S]*?\);/im)?.[0] || '';
     expect(insertPolicy).toMatch(/auth\.uid\(\) = user_id/);
     expect(insertPolicy).toMatch(/account_is_active\(auth\.uid\(\)\)/);
     expect(insertPolicy).toMatch(/is_public = true/);
-    expect(sql).toMatch(/create policy "Users can remove their own gallery reactions"[\s\S]*?for delete[\s\S]*?auth\.uid\(\) = user_id/i);
+    expect(sql).toMatch(/^create policy "Users can remove their own gallery reactions"[\s\S]*?for delete[\s\S]*?auth\.uid\(\) = user_id/im);
   });
 
   it('grant posture: toggle is authenticated-only; state read includes anon; both revoked from public', () => {

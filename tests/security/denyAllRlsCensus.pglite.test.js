@@ -69,7 +69,7 @@ function extractRlsEnable(src, table) {
 /** Pull the `create policy … on public.<t> … ;` statement (table-scoped, single-statement:
  *  [^;] between `create policy` and the table can't span a statement boundary). */
 function extractCreatePolicy(src, table) {
-  const m = src.match(new RegExp(`create\\s+policy[^;]*?on\\s+public\\.${table}\\b[\\s\\S]*?;`, 'i'));
+  const m = src.match(new RegExp(`^create\\s+policy[^;]*?on\\s+public\\.${table}\\b[\\s\\S]*?;`, 'im'));
   if (!m) throw new Error(`could not find create policy for ${table}`);
   return m[0];
 }
@@ -115,6 +115,10 @@ describe.runIf(have)('deny-all RLS census (pglite)', () => {
         const src = getSrc();
         expect(new RegExp(`alter\\s+table\\s+public\\.${table}\\s+enable\\s+row\\s+level\\s+security`, 'i').test(src)).toBe(true);
         // No `create policy … on public.<table>` anywhere in the migration.
+        // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
+        // ANY indentation — this corpus legally mints indented policies/triggers (005:69
+        // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+        // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
         expect(new RegExp(`create\\s+policy[\\s\\S]*?on\\s+public\\.${table}\\b`, 'i').test(src)).toBe(false);
       });
     });

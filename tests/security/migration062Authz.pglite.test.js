@@ -31,7 +31,7 @@ const allExist = Object.values(MIG).every(existsSync);
 function extractPolicy(migKey, title) {
   const src = readFileSync(MIG[migKey], 'utf-8');
   const esc = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const m = src.match(new RegExp(`create policy "${esc}"[\\s\\S]*?;\\s*\\n`, 'i'));
+  const m = src.match(new RegExp(`^create policy "${esc}"[\\s\\S]*?;\\s*\\n`, 'im'));
   if (!m) throw new Error(`could not extract policy "${title}" from ${migKey}`);
   return m[0];
 }
