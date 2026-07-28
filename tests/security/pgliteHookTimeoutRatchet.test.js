@@ -15,26 +15,42 @@
  * the tuned-30s stratum as unguarded.
  *
  * THE WALK: extract every beforeAll/beforeEach call in tests/security/*.pglite.test.js
- * (paren-matched from the hook keyword), keep the BOOT-BEARING ones (callback text
- * contains `new PGlite` or `makeDb(`), and require a trailing timeout argument that is
- * a numeric literal >= 60_000 or an in-file `const NAME = <number>` resolving >= 60_000.
- * Surviving offenders are frozen below, SHRINK-ONLY; the sweep that clears them is
- * future work banked one row at a time.
+ * (paren-matched from the hook keyword), keep the BOOT-BEARING ones — callback text
+ * names a live boot constructor/helper (`new PGlite`, makeDb, makeCreditLedgerDb,
+ * baseDb, buildDb, supportDb), OR the hook is the file's first PGlite-touching hook
+ * and calls `.exec(`/`.query(` (boot is LAZY: `new PGlite()` returns instantly and
+ * the cold WASM start lands on the first exec, wherever that runs) — and require a
+ * trailing timeout argument that is a numeric literal >= 60_000 or an in-file
+ * `const NAME = <number>` resolving >= 60_000. Surviving offenders are frozen below,
+ * SHRINK-ONLY; the sweep that clears them is future work banked one row at a time.
  *
  * WHY per-file counts, not per-line pins: line numbers churn under unrelated edits; a
  * per-file exact count is stable, still reds on a NEW unguarded hook in a frozen file,
  * and — because the assertion is exact equality in both directions — forces every win
  * to be banked by lowering the row (the negativeAssertionAnchor idiom).
  *
- * CANNOT-CATCH (audited 2026-07-27 at the freeze; accepted costs of a regex gate):
- *   - A boot helper named something other than makeDb, or a cross-file harness import,
- *     leaves a hook with neither marker. Zero such hooks exist today; prefer naming
- *     the helper makeDb over widening the marker.
- *   - Six files construct PGlite inside per-test helper bodies rather than hooks
- *     (accountStatusProfilesCustomContent, accountStatusSupportTickets,
- *     customContentBackfill, migration062Authz, profileModerationColumnLock,
- *     reviewedQuarantineConflict). Those boots run under testTimeout, not hookTimeout —
- *     a different failure surface this ratchet does not claim.
+ * CANNOT-CATCH — audited 2026-07-27 at the freeze, AMENDED the same day after the
+ * helper-boot audit proved the original first two claims false: makeCreditLedgerDb
+ * alone was live in four files the makeDb-only marker could not see, and four of the
+ * six files claimed to boot "inside per-test helper bodies" actually await their
+ * helper INSIDE a before-hook, squarely under hookTimeout. The eight files carrying
+ * that blind spot (founderTransferPayout — which booted PER TEST with no timeout at
+ * all — creditAllocationTrigger, creditPackClawback, moneyPathJourney,
+ * accountStatusProfilesCustomContent, profileModerationColumnLock,
+ * accountStatusSupportTickets, migration062Authz) are now guarded and pinned in
+ * GUARDED_EXEMPLARS; BOOT_MARKER_RE carries the live helper roster and the walk is
+ * exec-aware. What still escapes (accepted costs of a regex gate):
+ *   - A boot helper with an UNLISTED name whose hook never execs directly — a pure
+ *     `db = await newHelper()` line — shows neither marker nor exec text. Add every
+ *     new harness name to BOOT_MARKER_RE when introducing one.
+ *   - Two files construct PGlite inside per-test helper/test bodies rather than hooks
+ *     (customContentBackfill, reviewedQuarantineConflict). Those boots run under
+ *     testTimeout, not hookTimeout — a different failure surface this ratchet does
+ *     not claim.
+ *   - The exec rule orders hooks beforeAll-then-beforeEach (source order within each)
+ *     to pick the file's first toucher; an exotic layout — a later describe's
+ *     beforeEach outrunning an earlier describe's beforeAll — could flag a warm hook.
+ *     A LOUD false positive, fixed by guarding the flagged hook.
  *   - Paren matching is string-naive: an unbalanced `)` inside a hook's string literal
  *     truncates that hook's extracted text. None exist today. A truncation before the
  *     boot marker hides the hook (silent); after it, the lost tail reds as unguarded
@@ -59,8 +75,19 @@ const SCAN_DIR = 'tests/security';
 /** Below this, a timeout is either absent or tuned-to-a-measurement; both are the class. */
 const FLOOR_MS = 60_000;
 
-/** A hook whose callback text matches this is standing up (or first-exec-booting) PGlite. */
-const BOOT_MARKER_RE = /new\s+PGlite|makeDb\s*\(/;
+/**
+ * A hook whose callback text matches this is standing up (or first-exec-booting)
+ * PGlite. The alternation carries the LIVE boot-helper roster (2026-07-27 amendment):
+ * makeDb (the common cross-file harness name), makeCreditLedgerDb
+ * (creditLedgerHarness.js), and the local baseDb/buildDb/supportDb helpers. Add every
+ * NEW harness name here when introducing one — the exec-aware rule in unguardedHooks
+ * catches the common miss (a hook that also execs directly), but a pure
+ * `await newHelper()` with no in-hook exec is invisible until listed.
+ */
+const BOOT_MARKER_RE = /new\s+PGlite|\b(?:makeDb|makeCreditLedgerDb|baseDb|buildDb|supportDb)\s*\(/;
+
+/** A hook whose callback touches the db at all — the lazy-boot payment surface. */
+const EXEC_RE = /\.exec\s*\(|\.query\s*\(/;
 
 /**
  * The hook call's trailing timeout argument: a numeric literal (underscores legal) or an
@@ -101,11 +128,24 @@ function timeoutOf(hookText, src) {
   return c ? Number(c[1].replace(/_/g, '')) : null;
 }
 
-/** Unguarded boot-bearing hooks in one source. */
+/**
+ * Unguarded boot-bearing hooks in one source. A hook is boot-bearing when
+ *   (1) its callback names a known boot constructor/helper (BOOT_MARKER_RE), or
+ *   (2) it is the file's FIRST PGlite-touching hook and touches `.exec(`/`.query(` —
+ *       PGlite boot is LAZY (`new PGlite()` returns instantly; the cold WASM start
+ *       lands on the first exec), so whichever hook performs the file's first exec
+ *       pays the boot even when the constructor hides behind an unlisted helper.
+ * "First" approximates runtime order at the string level: all beforeAll hooks in
+ * source order, then all beforeEach hooks — exact for the corpus's single-describe
+ * shape. A later toucher runs warm and is out of scope regardless of its own guard.
+ */
 function unguardedHooks(src) {
+  const hooks = extractHooks(src);
+  const ordered = [...hooks.filter((h) => h.kind === 'beforeAll'), ...hooks.filter((h) => h.kind === 'beforeEach')];
+  const firstToucher = ordered.find((h) => BOOT_MARKER_RE.test(h.text) || EXEC_RE.test(h.text));
   const bad = [];
-  for (const h of extractHooks(src)) {
-    if (!BOOT_MARKER_RE.test(h.text)) continue;
+  for (const h of hooks) {
+    if (!BOOT_MARKER_RE.test(h.text) && !(h === firstToucher && EXEC_RE.test(h.text))) continue;
     const t = timeoutOf(h.text, src);
     if (t === null || t < FLOOR_MS) bad.push({ kind: h.kind, line: h.line, timeout: t });
   }
@@ -130,6 +170,10 @@ function scanCorpus() {
  * SHRINK-ONLY. To clear a row: add the PGLITE_BOOT_TIMEOUT_MS = 180_000 constant shape
  * from tierCreditMultiplierSql.pglite.test.js to every boot-bearing hook, then DELETE
  * the row. Never raise a number; never add a file.
+ *
+ * The 2026-07-27 helper-boot amendment (widened marker + exec-aware walk) changed no
+ * row: the eight files it made visible were guarded in the same change, so they enter
+ * the ledger at zero.
  */
 const FROZEN_UNGUARDED = Object.freeze({
   'tests/security/accountDeletionProcessing.pglite.test.js': 1,
@@ -192,11 +236,25 @@ const FROZEN_UNGUARDED = Object.freeze({
   'tests/security/worldPulseAtomicPersist.pglite.test.js': 1,
 });
 
-/** Suites that carry the guard on every boot-bearing hook — the detector's positive pin. */
+/**
+ * Suites that carry the guard on every boot-bearing hook — the detector's positive
+ * pin. The eight 2026-07-27-amendment files (helper-boot shapes: makeCreditLedgerDb,
+ * baseDb, buildDb, supportDb) are pinned here deliberately: narrowing BOOT_MARKER_RE
+ * back to makeDb-only would make the detector see "no boot-bearing hook" in them and
+ * red this pin, so the widened marker cannot silently regress.
+ */
 const GUARDED_EXEMPLARS = [
+  'tests/security/accountStatusProfilesCustomContent.pglite.test.js',
+  'tests/security/accountStatusSupportTickets.pglite.test.js',
+  'tests/security/creditAllocationTrigger.pglite.test.js',
+  'tests/security/creditPackClawback.pglite.test.js',
+  'tests/security/founderTransferPayout.pglite.test.js',
+  'tests/security/migration062Authz.pglite.test.js',
+  'tests/security/moneyPathJourney.pglite.test.js',
   'tests/security/neighbourBacklinkMerge.pglite.test.js',
   'tests/security/paymentRefundObligations.pglite.test.js',
   'tests/security/paymentRefundRecovery.pglite.test.js',
+  'tests/security/profileModerationColumnLock.pglite.test.js',
   'tests/security/refundDedup.pglite.test.js',
   'tests/security/surveyorByokHealth.pglite.test.js',
   'tests/security/surveyorProbeTierSql.pglite.test.js',
@@ -226,7 +284,7 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
 
     if (process.env.UPDATE_PGLITE_HOOK_ALLOWLIST) {
       // Print-only regeneration: paste the literal, review the diff, never auto-write.
-      // eslint-disable-next-line no-console
+       
       console.log(renderLiteral(found));
       expect.fail('UPDATE_PGLITE_HOOK_ALLOWLIST printed a fresh literal above. Paste it over FROZEN_UNGUARDED, review the diff as a reviewed artifact, and re-run without the flag.');
     }
@@ -276,7 +334,13 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
     const CONSTANT_GUARDED_SRC =
       `const PGLITE_BOOT_TIMEOUT_MS = 180_000;\n` +
       `beforeEach(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);`;
-    const NON_BOOT_HOOK = `beforeEach(async () => { await db.exec('truncate public.t;'); })`;
+    const NON_TOUCHING_HOOK = `beforeEach(() => { seed = DEFAULT_SEED; })`;
+    const HELPER_BOOT_UNGUARDED = `beforeAll(async () => { db = await makeCreditLedgerDb(); })`;
+    const FIRST_EXEC_UNGUARDED = `beforeAll(async () => { db = await bootSomehowElse(); await db.exec('select 1'); })`;
+    const WARM_EXEC_AFTER_GUARDED_BOOT =
+      `const PGLITE_BOOT_TIMEOUT_MS = 180_000;\n` +
+      `beforeAll(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);\n` +
+      `beforeEach(async () => { await db.exec('truncate public.t;'); });`;
 
     test('an unguarded boot hook is flagged', () => {
       expect(unguardedHooks(UNGUARDED_BOOT)).toHaveLength(1);
@@ -297,7 +361,19 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
     });
 
     test('a hook that never touches PGlite is out of scope', () => {
-      expect(unguardedHooks(NON_BOOT_HOOK)).toEqual([]);
+      expect(unguardedHooks(NON_TOUCHING_HOOK)).toEqual([]);
+    });
+
+    test('an unguarded helper-boot hook is flagged (the makeCreditLedgerDb shape that hid the eight-file gap)', () => {
+      expect(unguardedHooks(HELPER_BOOT_UNGUARDED)).toHaveLength(1);
+    });
+
+    test('an unguarded first-exec hook is flagged even when its boot helper is unlisted (lazy boot: the first exec pays)', () => {
+      expect(unguardedHooks(FIRST_EXEC_UNGUARDED)).toHaveLength(1);
+    });
+
+    test('a warm exec hook after the guarded boot hook is out of scope (only the first toucher pays boot)', () => {
+      expect(unguardedHooks(WARM_EXEC_AFTER_GUARDED_BOOT)).toEqual([]);
     });
 
     test('a beforeEach that boots per test is in scope (the paymentRefundObligations shape)', () => {

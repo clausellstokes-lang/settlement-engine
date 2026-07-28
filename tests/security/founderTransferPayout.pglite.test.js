@@ -40,6 +40,20 @@ const OTHER = '99999999-9999-9999-9999-999999999999';
 
 let db;
 
+/**
+ * Wall-clock ceiling for the hook that boots PGlite. A hook timeout is a
+ * DEADLOCK GUARD, not a performance budget: the inherited 10000ms default sits
+ * exactly on pglite's boot-noise band under gate load (measured 2026-07-27:
+ * failing hooks 11.2-20.7s, passing hooks 8.6-10.0s), so an untimed hook goes
+ * FLAKY red and the tests it feeds never execute. This beforeEach builds a
+ * FRESH database per test, so every single test pays the full cold-boot cost.
+ * Never tune this to a measurement (that is how a previous 30000ms went
+ * brittle); generous is the point. Kept in step with the sibling suites
+ * (tierCreditMultiplierSql, surveyorProvisioning) and enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 beforeEach(async () => {
   db = await makeCreditLedgerDb();
   // Minimal founder_transfer_cases mirror — only the columns the payout RPCs touch.
@@ -72,7 +86,7 @@ beforeEach(async () => {
   await db.exec(extractFn('system_grant_credits').replace(/\bgrant_fn\.source\b/g, 'system_grant_credits.source'));
   await db.exec(extractFn('claim_due_transfer_payout'));
   await db.exec(extractFn('reelect_transfer_payout'));
-});
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 async function asService() { await db.query(`select set_config('request.jwt.claim.role', 'service_role', false)`); }
 async function asAuthed() { await db.query(`select set_config('request.jwt.claim.role', 'authenticated', false)`); }
