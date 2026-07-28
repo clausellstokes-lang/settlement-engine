@@ -39,6 +39,17 @@ const CAMPAIGN_COMMAND =
 const DEFINITION_COMMAND =
   `legacy:reviewed-supply-chain-quarantine:${LEGACY_DEFINITION}`;
 
+/**
+ * Wall-clock ceiling for tests that BOOT PGlite in their bodies: this file's
+ * constructor helper runs under testTimeout (20000 via vite.config.js), not
+ * hookTimeout, but the same boot-noise band applies (cold boots measured up to
+ * 20.7s under 2026-07-27 gate load). A timeout is a DEADLOCK GUARD, not a perf
+ * budget — never tune it to a measurement (this file's previous 30_000 was that
+ * mistake). Sibling of the hook-scoped constant enforced by
+ * tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 async function createPre188Database() {
   const database = new PGlite();
   await database.exec(`
@@ -328,7 +339,7 @@ describe('migration 188 quarantine conflict integrity', () => {
     } finally {
       await database.close();
     }
-  }, 30_000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   test('a substituted definition receipt aborts and preserves its graph', async () => {
     const database = await createPre188Database();
@@ -375,5 +386,5 @@ describe('migration 188 quarantine conflict integrity', () => {
     } finally {
       await database.close();
     }
-  }, 30_000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 });

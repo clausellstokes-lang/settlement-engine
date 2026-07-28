@@ -47,6 +47,16 @@ function legacyId(ordinal) {
   return `40000000-0000-4000-8000-${String(ordinal).padStart(12, '0')}`;
 }
 
+/**
+ * Wall-clock ceiling for tests that BOOT PGlite in their bodies: this file's
+ * constructor helper runs under testTimeout (20000 via vite.config.js), not
+ * hookTimeout, but the same boot-noise band applies (cold boots measured up to
+ * 20.7s under 2026-07-27 gate load). A timeout is a DEADLOCK GUARD, not a perf
+ * budget — never tune it to a measurement. Sibling of the hook-scoped constant
+ * enforced by tests/security/pgliteHookTimeoutRatchet.test.js.
+ */
+const PGLITE_BOOT_TIMEOUT_MS = 180_000;
+
 async function makeLegacyDatabase() {
   const database = new PGlite();
   await database.exec(`
@@ -315,4 +325,4 @@ test('dirty legacy rows backfill losslessly, uniquely, and idempotently', async 
   } finally {
     await database.close();
   }
-}, 60_000);
+}, PGLITE_BOOT_TIMEOUT_MS);

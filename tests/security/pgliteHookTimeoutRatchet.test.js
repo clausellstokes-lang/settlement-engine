@@ -41,8 +41,11 @@
  * GUARDED_EXEMPLARS; BOOT_MARKER_RE carries the live helper roster and the walk is
  * exec-aware. What still escapes (accepted costs of a regex gate):
  *   - A boot helper with an UNLISTED name whose hook never execs directly — a pure
- *     `db = await newHelper()` line — shows neither marker nor exec text. Add every
- *     new harness name to BOOT_MARKER_RE when introducing one.
+ *     `db = await newHelper()` line — shows neither marker nor exec text. The
+ *     HELPER-NAME LAW below turns this from convention into enforcement for helpers
+ *     defined in tests/security: a census walker reds any hook calling an unlisted
+ *     in-scope constructor. Remaining escape: a constructor defined OUTSIDE
+ *     tests/security and imported into a hook.
  *   - Two files construct PGlite inside per-test helper/test bodies rather than hooks
  *     (customContentBackfill, reviewedQuarantineConflict). Those boots run under
  *     testTimeout, not hookTimeout — a different failure surface this ratchet does
@@ -150,6 +153,78 @@ function unguardedHooks(src) {
     if (t === null || t < FLOOR_MS) bad.push({ kind: h.kind, line: h.line, timeout: t });
   }
   return bad;
+}
+
+/** Index just past the delimiter that closes the one opening at openIdx. */
+function matchedClose(src, openIdx, open, close) {
+  let i = openIdx;
+  let depth = 0;
+  do {
+    const ch = src[i];
+    if (ch === open) depth += 1;
+    else if (ch === close) depth -= 1;
+    i += 1;
+  } while (i < src.length && depth > 0);
+  return i;
+}
+
+/**
+ * HELPER-NAME LAW (2026-07-27 second amendment). BOOT_MARKER_RE can only see a
+ * helper-boot hook if the helper's NAME is in its alternation, so the law is:
+ * a before-hook may only call a PGlite-constructing helper the marker knows.
+ * Enforcement is need-based — a constructor used solely in test bodies (today:
+ * makeLegacyDatabase, createPre188Database, profilesDb, firstOrderingVerdict)
+ * needs no marker entry, and the walker reds the moment any hook adopts one,
+ * with the fix in the message.
+ *
+ * Named functions whose body constructs PGlite. Shapes covered:
+ * `function name(…) {…}` (destructured params included), `const name = (…) => {…}`,
+ * `const name = (…) => new PGlite(…)`, `const name = function (…) {…}`.
+ * String-naive like every walker in this file — a brace inside a body's string
+ * or regex literal can desync the match; the fixture test pins the live shapes.
+ */
+function constructorHelperNames(src) {
+  const names = new Set();
+  const heads = [
+    /(?:async\s+)?function\s+([A-Za-z_$][\w$]*)\s*(?=\()/g,
+    /const\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s+)?(?:function\s*)?(?=\()/g,
+  ];
+  for (const re of heads) {
+    let m;
+    while ((m = re.exec(src))) {
+      const afterParams = matchedClose(src, re.lastIndex, '(', ')');
+      const tail = src.slice(afterParams);
+      const arrow = tail.match(/^\s*=>\s*/);
+      if (arrow && /^new\s+PGlite/.test(tail.slice(arrow[0].length))) {
+        names.add(m[1]);
+        continue;
+      }
+      const braceAt = afterParams + (arrow ? arrow[0].length : tail.match(/^\s*/)[0].length);
+      if (src[braceAt] !== '{') continue;
+      if (/new\s+PGlite/.test(src.slice(braceAt, matchedClose(src, braceAt, '{', '}')))) names.add(m[1]);
+    }
+  }
+  return names;
+}
+
+/** Violations of the helper-name law: hooks calling a constructor the marker cannot see. */
+function helperLawViolations(defs, suites) {
+  const violations = [];
+  for (const { file, src } of suites) {
+    for (const h of extractHooks(src)) {
+      if (BOOT_MARKER_RE.test(h.text)) continue; // already visible to the timeout walk
+      for (const [name, where] of defs) {
+        if (new RegExp(`\\b${name}\\s*\\(`).test(h.text)) {
+          violations.push(
+            `${file}:${h.line} ${h.kind} calls ${name}() — a PGlite constructor (defined in ${where.join(', ')}) ` +
+            `invisible to BOOT_MARKER_RE, so its boot cost escapes the timeout walk. Add \`${name}\` to the ` +
+            `BOOT_MARKER_RE alternation (and guard the hook with PGLITE_BOOT_TIMEOUT_MS).`,
+          );
+        }
+      }
+    }
+  }
+  return violations;
 }
 
 /** @returns {Record<string, number>} unguarded-hook count per pglite suite. */
@@ -325,6 +400,51 @@ describe('pglite hook-timeout ratchet (F4 class habitat removal)', () => {
       if (bad.length > 0) problems.push(`${file}: exemplar has unguarded hooks ${JSON.stringify(bad)}`);
     }
     expect(problems).toEqual([]);
+  });
+
+  describe('helper-name law: hooks may only call constructors the marker can see', () => {
+    const censusDefs = () => {
+      const defs = new Map();
+      for (const f of readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.js')).sort()) {
+        for (const name of constructorHelperNames(readFileSync(join(ROOT, SCAN_DIR, f), 'utf8'))) {
+          if (!defs.has(name)) defs.set(name, []);
+          defs.get(name).push(f);
+        }
+      }
+      return defs;
+    };
+
+    test('the census keeps seeing the live constructor roster (vacuity pin)', () => {
+      const names = [...censusDefs().keys()];
+      for (const known of ['makeDb', 'makeCreditLedgerDb', 'baseDb', 'buildDb', 'supportDb', 'profilesDb', 'makeLegacyDatabase', 'createPre188Database']) {
+        expect(names, `census lost sight of ${known}`).toContain(known);
+      }
+    });
+
+    test('no hook in the corpus calls an unlisted constructor', () => {
+      const suites = readdirSync(join(ROOT, SCAN_DIR)).filter((n) => n.endsWith('.pglite.test.js')).sort()
+        .map((f) => ({ file: `${SCAN_DIR}/${f}`, src: readFileSync(join(ROOT, SCAN_DIR, f), 'utf8') }));
+      expect(helperLawViolations(censusDefs(), suites)).toEqual([]);
+    });
+
+    test('constructorHelperNames: declaration/destructured/arrow/expression shapes in, query helpers out', () => {
+      const src =
+        `async function buildThing({ with060 }) { const db = new PGlite(); return db; }\n` +
+        `const arrowMaker = async () => { return new PGlite(); };\n` +
+        `const exprMaker = () => new PGlite();\n` +
+        `const scalar = async (q) => (await db.query(q)).rows[0];\n` +
+        `function reader() { return 'no database here'; }\n`;
+      expect([...constructorHelperNames(src)].sort()).toEqual(['arrowMaker', 'buildThing', 'exprMaker']);
+    });
+
+    test('a hook calling an unlisted constructor is a violation; a marker-visible hook is not (planted)', () => {
+      const defs = new Map([['makeShadowDb', ['shadowHarness.js']]]);
+      const offender = { file: 'planted.pglite.test.js', src: `beforeAll(async () => { db = await makeShadowDb(); })` };
+      const legal = { file: 'legal.pglite.test.js', src: `beforeAll(async () => { db = await makeDb(); }, 180_000)` };
+      const violations = helperLawViolations(defs, [offender, legal]);
+      expect(violations).toHaveLength(1);
+      expect(violations[0]).toContain('makeShadowDb');
+    });
   });
 
   describe('guard the guard: the detector discriminates on planted fixtures', () => {
