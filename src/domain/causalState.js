@@ -1324,32 +1324,41 @@ export function pressuresOn(settlement) {
   return [...state.summary.strained, ...state.summary.critical, ...state.summary.collapsed];
 }
 
-// Problem-term phrasing for lower_is_better variables. Their band is computed
-// off the INVERTED score, so a 'collapsed'/'critical' band means the underlying
-// value (e.g. criminal_opportunity) is HIGH — a problem. Reusing the raw band
-// word in the summary ("Collapsed: criminal_opportunity") reads as a positive
-// (crime collapsed = good) when it actually means rampant crime. These lines
-// phrase the worst bands in problem terms instead.
-const LOWER_IS_BETTER_PROBLEM_TERM = Object.freeze({
+// THE LOWER-IS-BETTER LADDER — the display word for every band a lower_is_better
+// variable can carry, worst to best. Their band is computed off the INVERTED
+// score, so the raw band word says the opposite of the truth at BOTH ends:
+//   • a 'collapsed'/'critical' band means the underlying value (e.g.
+//     criminal_opportunity) is HIGH, and "Collapsed: criminal_opportunity" reads
+//     as a positive (crime collapsed = good) when it means rampant crime;
+//   • a benign 'adequate'/'surplus' band means the value is LOW, and the pill
+//     "Criminal opportunity · ADEQUATE" reads as the crime being adequate.
+// The first three words closed the problem end. The benign two close the other,
+// so no band can reach a reader carrying the raw word. The ladder is total over
+// CAUSAL_BANDS by construction, and the walker
+// (tests/lint/bandPolaritySingleSourceScan.test.js) holds it that way.
+const LOWER_IS_BETTER_BAND_TERM = Object.freeze({
   collapsed: 'Rampant',
   critical:  'Acute',
   strained:  'Elevated',
+  adequate:  'Contained',
+  surplus:   'Negligible',
 });
 
 /**
- * Polarity-correct display word for a variable's band — the SINGLE source both
- * summarizeCausalState and the simulation causal view route through, so the
- * lower_is_better inversion lives in exactly one place. Higher-is-better bands
- * read the raw word; a lower_is_better 'collapsed' (crime RAMPANT, not gone) is
- * computed off the INVERTED score (finalizeVariable) so it is re-phrased as a
- * problem term. Benign bands never carry a lower_is_better var, so they fall through.
+ * Polarity-correct display word for a variable's band — the SINGLE source every
+ * renderer, summarizeCausalState and the simulation causal view route through, so
+ * the lower_is_better inversion lives in exactly one place. Higher-is-better bands
+ * read the raw word; a lower_is_better band is computed off the INVERTED score
+ * (finalizeVariable) and is re-worded at both ends of the ladder: 'collapsed' is
+ * crime RAMPANT rather than gone, and 'adequate' is crime CONTAINED rather than
+ * crime being an adequate amount.
  * @param {string} name  substrate variable name
  * @param {string} band  surplus/adequate/strained/critical/collapsed
  * @returns {string}
  */
 export function causalBandWord(name, band) {
   if (variablePolarity(name) === 'lower_is_better') {
-    return /** @type {Record<string, string>} */ (LOWER_IS_BETTER_PROBLEM_TERM)[band] || band;
+    return /** @type {Record<string, string>} */ (LOWER_IS_BETTER_BAND_TERM)[band] || band;
   }
   return band;
 }

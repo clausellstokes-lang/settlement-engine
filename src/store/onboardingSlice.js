@@ -1,159 +1,64 @@
 /**
- * onboardingSlice — First-run coaching + progressive feature discovery.
+ * onboardingSlice — the SESSION NUDGE-TOAST channel (and nothing else).
  *
- * Tracks whether the user has completed initial onboarding and which
- * features they've already discovered. Onboarding is NOT a separate
- * tutorial layer — it's a coaching overlay on the real Quick Generate
- * flow. The user's first settlement IS the onboarding.
+ * WHAT THIS IS NOW. One transient string plus its setter and its clearer. A
+ * writer puts a short sentence here; App.jsx renders it as the single gold
+ * toast at the bottom of the shell and clears it on click, on Enter/Space, or
+ * after 8s. Its live writer is the post-signup save handler
+ * (src/store/index.js, the F34 SAVE_SETTLEMENT auth intent): "Saved as {name} —
+ * view it in Settlements." Nothing here is persisted — the field is absent from
+ * the Zustand partialize by design, so the toast dies with the session.
  *
- * Persistence:
- *   sf_onboarded        — 'true' after first completed generation
- *   sf_features_used    — JSON map of feature keys → boolean
+ * THE 2026-07-27 RETIREMENT (coach-exit lane). This slice used to also carry a
+ * first-run COACH state machine (onboardingActive / onboardingStep /
+ * onboardingTabsExplored / initOnboarding / advanceOnboarding /
+ * setOnboardingStep / trackTabExplored / completeOnboarding / resetOnboarding)
+ * and a feature-HINTS subsystem (featuresUsed / markFeatureUsed /
+ * shouldShowHint). Both were retired whole. The coach was headless: its only
+ * render was two `data-onboard-highlight` attributes in GenerateWizard, and no
+ * CSS rule anywhere targeted that attribute — so it could never be seen, and
+ * because nothing ever called completeOnboarding it also never ended. The
+ * hints subsystem had zero consumers: the live first-run teaching moved to the
+ * GUIDANCE REGISTRY (W-GUIDE-1 / host C4 — the PostGenCoach whisper host with
+ * real exit paths through the unified sf:guidance:* dismissals, plus
+ * FirstDossierCallouts, whose firsts are DERIVED by deriveGuidanceFirst rather
+ * than flagged). Wiring the coach instead of retiring it would have stood a
+ * second teaching system up beside the registry, against the one-guidance-
+ * system consolidation (single whisper budget, unified dismissals, newborn
+ * gating). See src/domain/display/guidanceRegistry.js for the forward path.
+ *
+ * ABANDONED LOCALSTORAGE RESIDUE — DELIBERATELY NOT MIGRATED.
+ *   sf_onboarded      — written only by completeOnboarding, which had no
+ *                       callers, so no browser legitimately holds it.
+ *   sf_features_used  — written only by markFeatureUsed, likewise callerless.
+ * Neither key is a dismissal source for any whisper, so NO
+ * LEGACY_DISMISSAL_MIGRATIONS entry is owed in src/lib/guidance.js and none was
+ * added: mapping either key onto a whisper dismissal would be semantically
+ * wrong — a present key is not evidence the user was ever taught anything, and
+ * the migration would silently suppress teaching they have not seen. The keys
+ * are inert residue; the only reader of either is gone.
+ *
+ * FIRST-PAINT NOTE. `featuresUsed: loadFeaturesUsed()` was an EAGER
+ * localStorage read executed at store-creation time on every boot. It is gone
+ * with the hints subsystem — the slice now touches no browser storage at all.
  */
 
-const ONBOARDED_KEY = 'sf_onboarded';
-const FEATURES_KEY = 'sf_features_used';
-
-const DEFAULT_FEATURES = {
-  saved: false,
-  edited: false,
-  linked: false,
-  aiNarrative: false,
-  campaign: false,
-  customContent: false,
-  exported: false,
-};
-
-function loadFeaturesUsed() {
-  try {
-    const raw = localStorage.getItem(FEATURES_KEY);
-    if (!raw) return { ...DEFAULT_FEATURES };
-    const parsed = JSON.parse(raw);
-    return { ...DEFAULT_FEATURES, ...parsed };
-  } catch {
-    return { ...DEFAULT_FEATURES };
-  }
-}
-
-function saveFeaturesUsed(features) {
-  try {
-    localStorage.setItem(FEATURES_KEY, JSON.stringify(features));
-  } catch {
-    /* ignore quota errors */
-  }
-}
-
-export const createOnboardingSlice = (set, get) => ({
+export const createOnboardingSlice = (set) => ({
   // ── State ──────────────────────────────────────────────────────────────────
-  /** true = user is currently inside the first-run coach flow */
-  onboardingActive: false,
-  /** 0 = welcome, 1 = tier selected, 2 = generated, 3 = explored tabs, 4 = done */
-  onboardingStep: 0,
-  /** Count of tabs the user has clicked during post-generation exploration */
-  onboardingTabsExplored: 0,
-  /** Features the user has already used — hints won't re-show */
-  featuresUsed: loadFeaturesUsed(),
-  /** Post-onboarding nudge toast */
+  /** Transient nudge toast text, or null. Session-only; never persisted. */
   onboardingNudge: null,
 
   // ── Actions ────────────────────────────────────────────────────────────────
 
   /**
-   * Check localStorage on app mount. If the user has never completed
-   * onboarding, activate the coach flow.
+   * Raise the nudge toast. Falsy input clears it, so a caller never has to
+   * branch between "show this" and "show nothing".
+   * @param {string|null|undefined} message
    */
-  initOnboarding: () => {
-    try {
-      const onboarded = localStorage.getItem(ONBOARDED_KEY) === 'true';
-      set(state => {
-        state.onboardingActive = !onboarded;
-        state.onboardingStep = 0;
-        state.onboardingTabsExplored = 0;
-      });
-    } catch {
-      /* localStorage blocked — treat as already-onboarded to avoid showing coach */
-      set(state => { state.onboardingActive = false; });
-    }
-  },
+  setOnboardingNudge: (message) =>
+    set(state => { state.onboardingNudge = message || null; }),
 
-  /** Advance to the next onboarding step. No-op if onboarding is inactive. */
-  advanceOnboarding: () =>
-    set(state => {
-      if (!state.onboardingActive) return;
-      state.onboardingStep = Math.min(4, state.onboardingStep + 1);
-    }),
-
-  /** Jump to a specific step. */
-  setOnboardingStep: (step) =>
-    set(state => {
-      if (!state.onboardingActive) return;
-      state.onboardingStep = step;
-    }),
-
-  /** Record that the user explored a tab during post-generation. */
-  trackTabExplored: () =>
-    set(state => {
-      if (!state.onboardingActive) return;
-      state.onboardingTabsExplored += 1;
-      // Auto-advance from "generated" to "explored" after 2 tab clicks
-      if (state.onboardingStep === 2 && state.onboardingTabsExplored >= 2) {
-        state.onboardingStep = 3;
-      }
-    }),
-
-  /**
-   * Dismiss the coach and mark onboarding complete. Also queues a
-   * post-onboarding nudge toast with tips for what to explore next.
-   */
-  completeOnboarding: () => {
-    try {
-      localStorage.setItem(ONBOARDED_KEY, 'true');
-    } catch { /* ignore */ }
-    const authTier = get().auth?.tier || 'anon';
-    const nudge = authTier === 'anon'
-      ? 'Nice work! Sign in to save settlements to your library, or visit the Compendium to explore all available institutions.'
-      : 'Nice work! Save this to your library, visit the Compendium to explore all institutions, or try the Advanced mode for full control.';
-    set(state => {
-      state.onboardingActive = false;
-      state.onboardingStep = 4;
-      state.onboardingNudge = nudge;
-    });
-  },
-
-  /** Clear the post-onboarding nudge toast. */
+  /** Clear the nudge toast. */
   clearOnboardingNudge: () =>
     set(state => { state.onboardingNudge = null; }),
-
-  /**
-   * Mark a feature as used. Feature hints will not re-show after this.
-   * @param {string} key — one of: saved, edited, linked, aiNarrative, campaign, customContent, exported
-   */
-  markFeatureUsed: (key) => {
-    const current = get().featuresUsed || {};
-    if (current[key]) return;
-    const next = { ...current, [key]: true };
-    saveFeaturesUsed(next);
-    set(state => { state.featuresUsed = next; });
-  },
-
-  /** Check if a feature hint should be shown. */
-  shouldShowHint: (key) => {
-    const features = get().featuresUsed || {};
-    return !features[key];
-  },
-
-  /** Reset all onboarding state — used for testing / "show tour again" buttons. */
-  resetOnboarding: () => {
-    try {
-      localStorage.removeItem(ONBOARDED_KEY);
-      localStorage.removeItem(FEATURES_KEY);
-    } catch { /* ignore */ }
-    set(state => {
-      state.onboardingActive = true;
-      state.onboardingStep = 0;
-      state.onboardingTabsExplored = 0;
-      state.featuresUsed = { ...DEFAULT_FEATURES };
-      state.onboardingNudge = null;
-    });
-  },
 });

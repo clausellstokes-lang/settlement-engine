@@ -285,7 +285,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     : (readOnly && !saveId ? (propSettlement?.aiSettlement ?? null) : storeAi);
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
-  const trackTabExplored = useStore(s => s.trackTabExplored);
   // P142 / D-6 — Table View overlay state. The trigger lives in
   // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
@@ -300,7 +299,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const setActiveTab = (id, via = 'tab_click') => {
     pendingTabViaRef.current = via;
     _setActiveTab(id);
-    if (!readOnly && trackTabExplored) trackTabExplored();
   };
   const [pendingAiAction, setPendingAiAction] = useState(null);
   // Whether the first-save WelcomeCreditCard is currently showing. When it is, it

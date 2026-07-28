@@ -21,6 +21,8 @@ import { sans, FS, SP, R, INK, SLATE, SLATE_BG, MUTED, CARD, AMBER_DEEP, RED } f
 import {
   TABLE_EVENT_KINDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES, KIND_SPEC,
   validateTableEvent, buildTableEffect, exposureTargets,
+  institutionTargets, impairedInstitutionTargets,
+  depletableResourceTargets, depletedResourceTargets,
 } from '../../domain/tableLedger.js';
 // The canonical stressor accessor (already eager via the engine substrate): the
 // picker and the clerk must see the SAME hardships every domain reader sees —
@@ -42,12 +44,20 @@ const KIND_LABELS = {
   'stressor-relief': 'A hardship eased',
   obligation: 'A burden taken on',
   exposure: 'A secret laid bare',
+  'structure-harm': 'A structure harmed',
+  'structure-restored': 'A structure mended',
+  'supply-loss': 'A supply lost',
+  'supply-restored': 'A supply regained',
 };
 const KIND_HINTS = {
   incident: 'A moment worth remembering, recorded as a line of the settlement’s chronicle.',
   'stressor-relief': 'The party lifted a hardship the settlement was carrying.',
   obligation: 'The settlement now owes a debt or bears a new burden.',
   exposure: 'A hidden corruption is dragged into the light.',
+  'structure-harm': 'A granary burned, a bridge smashed, a hall ransacked. The place is weakened until it mends.',
+  'structure-restored': 'A wounded institution was rebuilt or set right. Its latest wound is healed.',
+  'supply-loss': 'A caravan looted, a mine flooded, a fishery ruined. A worked resource is no longer available.',
+  'supply-restored': 'A lost resource flows again.',
 };
 const BAND_LABELS = { minor: 'Slight', moderate: 'Marked', major: 'Grave' };
 const OBLIGATION_LABELS = {
@@ -87,6 +97,11 @@ export default function TableLedgerPanel() {
   // offers ONLY what EXPOSE_CORRUPTION can act on (exposureTargets — corrupt NPCs +
   // corruption-impaired institutions/factions, id-or-name refs the engine resolves),
   // so a recorded exposure can never ghost into a target_not_found veto.
+  // The four economy verbs draw the SAME rosters the composer's own pickers draw
+  // (events/targetRosters.js), each narrowed to what its handler can actually
+  // act on: mend only a wounded institution, deplete only a resource still
+  // worked, recover only one already gone. An offered target the engine would
+  // veto is a lie the picker told.
   const targetOptions = useMemo(() => {
     if (kind === 'obligation') return OBLIGATION_TYPES.map((t) => ({ ref: t, label: OBLIGATION_LABELS[t] || t }));
     if (kind === 'stressor-relief') {
@@ -95,6 +110,12 @@ export default function TableLedgerPanel() {
         .filter((o) => o.ref);
     }
     if (kind === 'exposure') return exposureTargets(settlement);
+    const roster = kind === 'structure-harm' ? institutionTargets
+      : kind === 'structure-restored' ? impairedInstitutionTargets
+        : kind === 'supply-loss' ? depletableResourceTargets
+          : kind === 'supply-restored' ? depletedResourceTargets
+            : null;
+    if (roster) return roster(settlement).map((o) => ({ ref: o.id, label: o.name }));
     return [];
   }, [kind, settlement]);
 
@@ -159,7 +180,17 @@ export default function TableLedgerPanel() {
 
       <div style={{ marginBottom: SP.md }}>
         <span style={labelStyle}>What happened</span>
-        <Segmented options={KIND_OPTIONS} value={kind} onChange={(k) => { setKind(k); setTargetRef(''); setNote(''); }} ariaLabel="Kind of table event" />
+        {/* A select, not the Segmented pill row: the vocabulary is eight kinds
+            and Segmented is a 2-4 control whose cells never wrap, so the pills
+            would run off the panel. The vocabulary stays CLOSED either way —
+            these are the only eight things a table moment can be, and there is
+            no free-text kind. */}
+        <select
+          id="tl-kind" aria-label="What happened" style={selectStyle} value={kind}
+          onChange={(e) => { setKind(e.target.value); setTargetRef(''); setNote(''); }}
+        >
+          {KIND_OPTIONS.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+        </select>
         <p style={{ fontFamily: sans, fontSize: FS.xs, color: MUTED, margin: `${SP.xs}px 0 0` }}>{KIND_HINTS[kind]}</p>
       </div>
 
@@ -205,11 +236,20 @@ export default function TableLedgerPanel() {
         <Button variant="primary" size="sm" onClick={record} disabled={!canRecord}>Record it</Button>
         <TableClerkAffordance
           // The clerk grounds on the SAME rosters the manual picker offers: canonical
-          // stressors (all aliases) and the compromised exposure roster — so the two
-          // paths can never disagree about what is nameable on this settlement.
+          // stressors (all aliases), the compromised exposure roster, and the
+          // institutions/resources the economy verbs act on — so the two paths can
+          // never disagree about what is nameable on this settlement. The rosters
+          // here are the UNNARROWED ones (every institution, every resource): the
+          // clerk proposes, the human confirms, and a proposal the engine cannot act
+          // on is vetoed typed at commit and stays queued for review.
           targets={{
             stressors: canonStressors(settlement).map((s) => String(s.type || s.name || '')).filter(Boolean),
             npcs: exposureTargets(settlement).map((t) => ({ id: t.ref, name: t.label })),
+            institutions: institutionTargets(settlement),
+            resources: [
+              ...depletableResourceTargets(settlement),
+              ...depletedResourceTargets(settlement),
+            ],
           }}
           onAccept={async (rec) => queueEdit(
             'table-event',

@@ -42,7 +42,10 @@ export const TABLE_CLERK_FINGERPRINT = '::table-clerk:v1';
  * ({ accepted, rejected }) — the CLIENT re-validates the edge's raw proposals, so
  * only vocabulary-valid buckets ever reach the human's confirm step. Never throws.
  *
- * @param {{ text?: string, targets?: { stressors?: string[], npcs?: Array<{id:string,name:string}> } }} [ctx]
+ * @param {{ text?: string, targets?: { stressors?: string[],
+ *   npcs?: Array<{id:string,name:string}>,
+ *   institutions?: Array<{id:string,name:string}>,
+ *   resources?: Array<{id:string,name:string}> } }} [ctx]
  * @returns {Promise<{ ok: boolean, error?: string, refusalKind?: string,
  *   accepted?: Array<{ index: number, record: any, proposal: any }>,
  *   rejected?: Array<{ index: number, errors: string[], proposal: any }> }>}
@@ -55,14 +58,23 @@ export async function compileTableClerk({ text = '', targets = {} } = {}) {
   }
   // The CLOSED VOCABULARY posted to the edge (the schema wall the server grounds
   // on): the kinds, the named bands, the obligation types, and the campaign's
-  // real targets (existing stressors + NPCs) so the clerk can only name what is
-  // already there — never invent a target.
+  // real targets (existing stressors, NPCs, institutions, resources) so the clerk
+  // can only name what is already there — never invent a target.
+  //
+  // THE EDGE ALLOWLIST IS A DEPLOY SEAM (owner-gated, recorded in tableLedger's
+  // header): until the 'table-clerk' function's own allowlist learns the four
+  // economy kinds and these two target lists, it simply will not propose them.
+  // That is inert-honest, not broken — the client re-validation wall below means
+  // a stale edge can only under-propose, never smuggle an off-vocabulary bucket
+  // through, and the manual picker offers all eight kinds regardless.
   const vocabulary = {
     kinds: [...TABLE_EVENT_KINDS],
     bands: [...MAGNITUDE_BAND_IDS],
     obligationTypes: [...OBLIGATION_TYPES],
     stressorTargets: Array.isArray(targets.stressors) ? targets.stressors : [],
     npcTargets: Array.isArray(targets.npcs) ? targets.npcs : [],
+    institutionTargets: Array.isArray(targets.institutions) ? targets.institutions : [],
+    resourceTargets: Array.isArray(targets.resources) ? targets.resources : [],
   };
   const { data, error } = await supabase.functions.invoke('table-clerk', { body: { text: notes, vocabulary } });
   if (error) {

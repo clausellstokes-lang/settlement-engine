@@ -101,6 +101,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',
   // ── mutation / write / undo: rewrites the roster ─────────────────────────────────
+  'src/domain/factionRename.js': 'mutation — a faction rename rewrites `institutions[].factionSource`, the exact-name marker recording WHICH faction raised an institution. A ruined institution keeps that provenance, so filtering the roster here would strand the ruin under the old faction name and split the join the rename exists to hold together. Credits nothing.',
   'src/domain/worldPulse/blockadeTransport.js': 'mutation — stamps airship impairments across the roster',
   'src/domain/events/mutateEntities.js': 'mutation — entity edit application',
   'src/domain/events/mutateHelpers.js': 'mutation — roster edit helpers',
@@ -108,6 +109,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/events/undoEvent.js': 'undo — reverts created institutions',
   'src/domain/events/batch.js': 'name-set — indexes institution ids/names for batch ops',
   'src/domain/events/affordanceManifest.js': 'affordance — enumerates the roster for edit affordances',
+  'src/domain/events/targetRosters.js': 'affordance — the Session Ledger half of affordanceManifest\'s target pickers, and deliberately ruin-blind for the SAME reason: these rosters answer "what may a human name for this event", not "what capacity does this settlement have". A ruined institution is a legitimate target (mending one is a real table moment, and RESTORE_INSTITUTION\'s own gate counts destroyed/removed as impairable). Filtering ruins here would also break the composer-parity pins in tests/domain/tableLedger.test.js, which are what stop the two desks from offering different worlds. Credits nothing.',
   'src/domain/normalizeSettlement.js': 'normalization — structural fingerprint reads the roster length',
   // ── graph/catalog build: builds an index/graph, not a live-provider sum ──────────
   'src/domain/inferSupplyChains.js': 'graph-build — supply-chain graph over a custom-content authoring bundle',

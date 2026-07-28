@@ -18,7 +18,8 @@
  *   customContent     – user-authored institutions / resources / trade routes
  *   corpusFactory     – generation-time content corpus factory state
  *   instantWorld      – the instant-world (one-click realm) flow state
- *   onboarding        – first-run coaching + nudge state
+ *   onboarding        – the session nudge-toast channel (the first-run coach was
+ *                       retired 2026-07-27; teaching lives in the guidance registry)
  *   ui                – cross-cutting UI flags (modals, wizard step / mode)
  *   displayPrefs      – PERSISTED device-scoped display preferences (uiSlice's
  *                       persisted counterpart; see that slice's header)
@@ -83,7 +84,7 @@ export const useStore = create(
           ...createCustomContentSlice(set, get),
           ...createCorpusFactorySlice(set, get),
           ...createInstantWorldSlice(set, get),
-          ...createOnboardingSlice(set, get),
+          ...createOnboardingSlice(set),
           ...createUiSlice(set, get),
           ...createDisplayPrefsSlice(set, get),
           ...createAccountImportSlice(set, get),

@@ -45,7 +45,7 @@ vi.mock('../../src/lib/flags.js', () => ({
 }));
 
 // Store mock. A mutable singleton drives every selector; subscribe and
-// getState are stubbed for the analytics/onboarding/effect paths.
+// getState are stubbed for the analytics/effect paths.
 const storeState = {
   settlement: null,
   aiSettlement: null,
@@ -70,9 +70,6 @@ const storeState = {
   pinNpc: vi.fn(),
   unpinNpc: vi.fn(),
   queueEdit: vi.fn(),
-  trackTabExplored: vi.fn(),
-  onboardingActive: false,
-  onboardingStep: 0,
   userPrefs: { tableViewOpen: false },
   setUserPref: vi.fn(),
 };

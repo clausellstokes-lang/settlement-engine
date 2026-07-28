@@ -75,10 +75,6 @@ const storeState = {
   clearSettlement: vi.fn(),
   setSettlement: vi.fn(),
   dismissPipelineReveal: vi.fn(),
-  onboardingActive: false,
-  onboardingStep: 0,
-  advanceOnboarding: vi.fn(),
-  setOnboardingStep: vi.fn(),
   institutionToggles: {},
   goodsToggles: {},
 };

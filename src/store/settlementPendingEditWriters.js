@@ -12,10 +12,19 @@ import { validateNpcFacet } from '../domain/npc/npcFacetContract.js';
 import { recordCanonFlavorEntryImpl } from './settlementRenameHelpers.js';
 
 const TABLE_SOURCE = 'table';
+// The CLOSED set of engine events a table record may reach. Closedness is the
+// point: IMPAIR_FACTION, DESTROY_SETTLEMENT and the rest of the registry stay
+// out, so a fabricated directive naming one is refused here even if it somehow
+// cleared admission. The four economy verbs (atlas Part VII #11) join the three
+// originals; every one of them is an event type the engine already had.
 const TABLE_AUTHORABLE_EVENT_TYPES = new Set([
   'RESOLVE_STRESSOR',
   'APPLY_STRESSOR',
   'EXPOSE_CORRUPTION',
+  'IMPAIR_INSTITUTION',
+  'RESTORE_INSTITUTION',
+  'DEPLETE_RESOURCE',
+  'RECOVERED_RESOURCE',
 ]);
 const STASIS_REASONS = new Set([
   'journey',

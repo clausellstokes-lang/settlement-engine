@@ -50,6 +50,9 @@ const MUTED = swatch.inkMag3;
 // adds nothing to the workbench chunk until an authorable entity is inspected.
 const WorkbenchProseEditor = lazy(() => import('./WorkbenchProseEditor.jsx'));
 const PROSE_AUTHORABLE_TYPES = new Set(['faction', 'institution', 'settlement']);
+// Owner queue #14 — THE FACTION-RENAME DOOR, a sibling lazy sub-leaf so the
+// rename control costs the workbench chunk nothing until a faction is inspected.
+const WorkbenchFactionRename = lazy(() => import('./WorkbenchFactionRename.jsx'));
 
 function words(value) {
   const text = String(value || '').replace(/[_-]+/g, ' ').trim();
@@ -426,6 +429,12 @@ function EntityInspector({ readOnly = false }) {
           )}
         </section>
 
+        {interactive && !readOnly && !mobile && entry.type === 'faction' && (
+          <Suspense fallback={<span role="status">Opening the name control…</span>}>
+            <WorkbenchFactionRename entry={entry} />
+          </Suspense>
+        )}
+
         {interactive && !readOnly && !mobile && PROSE_AUTHORABLE_TYPES.has(entry.type) && (
           <Suspense fallback={<span role="status">Opening authoring…</span>}>
             <WorkbenchProseEditor entry={entry} />
@@ -436,7 +445,16 @@ function EntityInspector({ readOnly = false }) {
   );
 }
 
-function ChangeDock() {
+/**
+ * The Change Dock is the sole review/commit surface at flag-ON, so it accepts
+ * `readOnly` for exactly one purpose: naming the review-only mode in words. In
+ * that mode the authoring levers upstream are closed but the viewer still owns
+ * the intents they staged earlier (hydrateFromSave preserves save-scoped work
+ * across navigation), and the commit path keeps all of its own defenses:
+ * owner-namespace filtering, source-fingerprint staleness refusals, the
+ * write-capability preflight, and a snapshot taken before any write.
+ */
+function ChangeDock({ readOnly = false }) {
   const queue = useStore(state => state.pendingEditsQueue || []);
   const receipts = useStore(state => state.pendingEditReceipts || []);
   const ownerKey = useStore(state => pendingEditOwnerScope(state).ownerKey);
@@ -508,6 +526,22 @@ function ChangeDock() {
         </div>
       </div>
 
+      {readOnly && pending.length > 0 && (
+        <p
+          role="note"
+          style={{
+            margin: 0,
+            padding: `${SP.sm}px ${SP.md}px 0`,
+            color: MUTED,
+            fontSize: FS.xxs,
+            lineHeight: 1.45,
+          }}
+        >
+          Editing is closed on this view. You can still review, commit, or
+          discard the changes you staged earlier.
+        </p>
+      )}
+
       {pending.length > 0 && <PendingChangesBar />}
 
       {recentReceipts.length > 0 && (
@@ -576,11 +610,18 @@ function ChangeDock() {
   );
 }
 
-export default function SettlementWorkbench({ readOnly = false }) {
+/**
+ * `canReview` defaults to false so every existing standalone render keeps its
+ * exact behaviour: a readOnly workbench with no explicit review entitlement
+ * shows no dock at all. The mount supplies it from the one authoring-authority
+ * predicate, which is what lifts the review blackout for an entitled owner
+ * whose saved dossier arrives readOnly.
+ */
+export default function SettlementWorkbench({ readOnly = false, canReview = false }) {
   return (
     <>
       <EntityInspector readOnly={readOnly} />
-      {!readOnly && <ChangeDock />}
+      {(!readOnly || canReview) && <ChangeDock readOnly={readOnly} />}
     </>
   );
 }

@@ -19,6 +19,10 @@ import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.j
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 import { countPreservedNpcs, mergePreservedNpcs } from '../domain/regenerationPreservation.js';
+// The LOCKS leaf (importless but for clone.js), already in this chunk through
+// regenerationPreservation — the full-generate carry reads the same id set the
+// section reroll does, so the two paths can never disagree about what is locked.
+import { lockedNpcIdSet } from '../domain/locksPreservation.js';
 import { carryCampaignEvents, restoreAuthoredHistory } from '../domain/historyPreservation.js';
 // Already in this chunk via npcGenerator; the reroll tail re-derives relationship
 // prose from the same archetype table the generator used.
@@ -212,6 +216,159 @@ function refreshRosterProse(npcs, displacements, keeperIds) {
     }
     return touched ? { ...npc, secret: { ...secret, what, stakes } } : npc;
   });
+}
+
+/**
+ * The SETTLEMENT-LEVEL prose that interpolates a roster member's name.
+ *
+ * A name census over the serialized full-pipeline output (5 seeds, 2026-07-27)
+ * found interpolated roster names in exactly these places: the NPC objects
+ * themselves and their `secret` prose (repaired by refreshRosterProse), the
+ * relationship edges (re-derived by refreshRelationshipProjections), the social
+ * factions' member objects (re-linked by relinkFactionMembers), and then these
+ * two settlement-level carriers, which nothing else touches:
+ *
+ *   • `pressureSentence` — one string naming two roster members.
+ *   • `prominentRelationship` — an object whose STRING fields (npc1, npc2,
+ *     phrasing, full, tension) all name the pair. It is null on many seeds, which
+ *     is why every string field is swept rather than a frozen key list: a field
+ *     genRelNarrative adds later must not become a place a departed name hides.
+ *     generationReceiptJudgments checks prominentRelationship.npc1/npc2 against
+ *     the live roster, so leaving this unrepaired would fail the certifier.
+ *
+ * powerStructure, conflicts, history, arrivalScene and coherenceNotes had ZERO
+ * hits across every seed — they are faction-name-keyed or nameless — and are
+ * deliberately untouched.
+ */
+const NAME_CARRYING_PROSE = Object.freeze({
+  scalar: Object.freeze(['pressureSentence']),
+  objectOfStrings: Object.freeze(['prominentRelationship']),
+});
+
+/**
+ * Rewrite a departed character's name to the keeper who took their slot.
+ * @param {unknown} text
+ * @param {Array<{from: string, to: string}>} swaps
+ * @returns {{ value: unknown, touched: boolean }}
+ */
+function swapNames(text, swaps) {
+  if (typeof text !== 'string') return { value: text, touched: false };
+  let out = text;
+  let touched = false;
+  for (const { from, to } of swaps) {
+    if (out.includes(from)) { out = out.split(from).join(to); touched = true; }
+  }
+  return { value: out, touched };
+}
+
+/**
+ * THE FULL-GENERATE ROSTER CARRY — locks engine Phase B.
+ *
+ * A full generate mints an entirely new town, and until this existed the id
+ * arrays in `state.locks` were simply dropped: the user could say "keep this
+ * person" and a new roll would take them anyway. This is the tail that makes the
+ * promise true, and it is the SAME tail regenNPCsPipeline already runs over a
+ * section reroll — substitution, prose repair, projection refresh, faction
+ * relink — lifted to run over finished pipeline output.
+ *
+ * ── WHY THIS CANNOT PERTURB A SEEDED ROLL (THE PROMISE) ─────────────────────
+ *
+ * Every draw is finished before this function is entered. mergePreservedNpcs is
+ * pure post-hoc substitution; refreshRelationshipProjections re-derives prose
+ * from the edge's own archetypeKey through an FNV hash of the name pair, not an
+ * RNG draw; refreshRosterProse, relinkFactionMembers and the prose swap are
+ * string and reference rewrites. Nothing here touches the active RNG.
+ *
+ * The DORMANCY GATE below returns the fresh settlement by the SAME REFERENCE
+ * whenever the lock map names no NPC id — absent, `{}`, booleans-only, garbage,
+ * or an array of ids nobody in the previous roster carries. That is the path
+ * every existing world takes, and it is what makes "a seed is a world, forever"
+ * hold for them byte-for-byte.
+ *
+ * ── ACCEPTED INCOHERENCES (documented, not bugs to re-find) ─────────────────
+ *
+ * The keeper's `factionAffiliation` and its derived standing (structuralRank,
+ * structuralPosition, activeConstraint, settlementCondition) are frozen from the
+ * world it was preserved from — the same deferral regenerationPreservation.js
+ * records as its deferral 1, and for the same reason: re-enriching would rewrite
+ * the authored `goal.short` the merge exists to protect.
+ *
+ * OVERFLOW — more locked ids than the fresh cast has slots — appends the surplus
+ * keepers with a minted id, no relationships and no faction, and reports them.
+ * Deliberately NOT cured with a `_minNpcCount` roll floor the way the section
+ * reroll cures it: the floor would have to ride `fullConfig`, and fullConfig IS
+ * PERSISTED as `settlement.config`. Either the key persists — leaking a
+ * permanent roster floor into later unlocked section rerolls — or it is stripped,
+ * which breaks seed+config replay under THE PROMISE because the roll depended on
+ * an input the stored config no longer records. Post-hoc overflow is the honest
+ * answer, and it needs more locked characters than the new town has people.
+ *
+ * @param {Record<string, any>|null|undefined} previousSettlement  the town being replaced
+ * @param {Record<string, any>|null|undefined} freshSettlement     the town just generated
+ * @param {Record<string, unknown>|null|undefined} locks           the settlement's lock map
+ * @returns {{ settlement: any, _preservation?: { preserved: Array<{id: string, name: string, fromId: string}>, overflow: Array<{id: string, name: string}> } }}
+ *   The report is OUT OF BAND on purpose: it is a trace, and if it ever entered
+ *   the settlement blob it would persist, export and diff forever.
+ */
+export function carryLockedRosterThroughGenerate(previousSettlement, freshSettlement, locks) {
+  const previousNpcs = previousSettlement?.npcs;
+  if (
+    !freshSettlement
+    || !Array.isArray(previousNpcs) || previousNpcs.length === 0
+    || lockedNpcIdSet(locks).size === 0
+  ) {
+    return { settlement: freshSettlement };
+  }
+
+  const { npcs: merged, preserved, displacements, overflow } = mergePreservedNpcs(
+    previousNpcs,
+    freshSettlement.npcs,
+    { locks, lockedIdsOnly: true },
+  );
+  // Every locked id named somebody the previous roster does not hold. Nothing to
+  // carry, so the fresh town goes back untouched — same reference, no report.
+  if (preserved.length === 0) return { settlement: freshSettlement };
+
+  const keeperIds = new Set(preserved.map(entry => entry.id));
+  // Prose repair BEFORE the relink, so the factions bind to repaired objects
+  // rather than ghosted ones — the ordering regenNPCsPipeline uses.
+  const roster = displacements.length
+    ? refreshRosterProse(merged, displacements, keeperIds)
+    : merged;
+
+  /** @type {Record<string, any>} */
+  const next = {
+    ...freshSettlement,
+    npcs: roster,
+    relationships: refreshRelationshipProjections(freshSettlement.relationships, roster),
+    factions: relinkFactionMembers(freshSettlement.factions, roster),
+  };
+
+  // A departed name that still belongs to somebody in the final cast is not
+  // departed at all — the same live-name filter refreshRosterProse applies, so a
+  // namesake substitution rewrites nothing.
+  const live = new Set(roster.map(npc => String(npc?.name || '')).filter(Boolean));
+  const swaps = displacements.filter(swap => swap.from && swap.to && !live.has(swap.from));
+  if (swaps.length > 0) {
+    for (const key of NAME_CARRYING_PROSE.scalar) {
+      const { value, touched } = swapNames(next[key], swaps);
+      if (touched) next[key] = value;
+    }
+    for (const key of NAME_CARRYING_PROSE.objectOfStrings) {
+      const source = next[key];
+      if (!source || typeof source !== 'object') continue;
+      /** @type {Record<string, any>} */
+      const rewritten = { ...source };
+      let touchedAny = false;
+      for (const field of Object.keys(rewritten)) {
+        const { value, touched } = swapNames(rewritten[field], swaps);
+        if (touched) { rewritten[field] = value; touchedAny = true; }
+      }
+      if (touchedAny) next[key] = rewritten;
+    }
+  }
+
+  return { settlement: next, _preservation: { preserved, overflow } };
 }
 
 /**

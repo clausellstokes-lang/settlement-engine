@@ -44,10 +44,14 @@ import { compareCodepoint } from './deterministicSort.js';
  * @satisfies {readonly string[]}
  */
 export const TABLE_EVENT_KINDS = Object.freeze([
-  'incident',         // something befell the place (famine, fire, raid, plague) — a stressor
-  'stressor-relief',  // a burden was lifted (the granary saved, the sick healed) — relief
-  'obligation',       // a debt/oath/promise was incurred — a generosity-ledger obligation
-  'exposure',         // a hidden truth surfaced (corruption revealed, a lie caught) — stigma
+  'incident',            // something befell the place (famine, fire, raid, plague) — a stressor
+  'stressor-relief',     // a burden was lifted (the granary saved, the sick healed) — relief
+  'obligation',          // a debt/oath/promise was incurred — a generosity-ledger obligation
+  'exposure',            // a hidden truth surfaced (corruption revealed, a lie caught) — stigma
+  'structure-harm',      // an institution was weakened (a granary burned, a hall ransacked)
+  'structure-restored',  // a wounded institution was rebuilt or set right
+  'supply-loss',         // a worked resource is gone (a caravan looted, a mine flooded)
+  'supply-restored',     // a lost resource flows again
 ]);
 
 /** The named magnitude bands (no raw numbers cross the wall — the DM picks a band). */
@@ -63,12 +67,26 @@ const _bandSet = new Set(MAGNITUDE_BANDS);
  * Per-kind display metadata + the engine-effect family each kind routes to. `effect`
  * names the existing writer V-F's apply path targets (recorded for the fold — this
  * leaf does not itself apply mechanics; it produces typed history records).
+ *
+ * TOTAL over TABLE_EVENT_KINDS by contract: the review UI lets a human override a
+ * proposed kind to ANY kind in the vocabulary, so a missing row here would ship a
+ * headline reading "undefined at the table".
+ *
+ * BAND ASYMMETRY (deliberate, mirrored in tableLedger's header): the IMPORT lane
+ * keeps a uniform band on every record because band drives news SIGNIFICANCE here,
+ * not mechanics — no record built by this leaf reaches an engine payload. The live
+ * session-ledger lane is the opposite: there the band IS a mechanical severity, so
+ * it is offered per-kind and withheld from the three dial-free kinds.
  */
 export const TABLE_EVENT_META = /** @type {Record<string, { label: string, effect: string, verb: string }>} */ (Object.freeze({
-  incident:          Object.freeze({ label: 'Incident',        effect: 'stressor',   verb: 'befell' }),
-  'stressor-relief': Object.freeze({ label: 'Relief',          effect: 'stressor',   verb: 'eased' }),
-  obligation:        Object.freeze({ label: 'Obligation',      effect: 'obligation', verb: 'bound' }),
-  exposure:          Object.freeze({ label: 'Exposure',        effect: 'stigma',     verb: 'exposed' }),
+  incident:             Object.freeze({ label: 'Incident',           effect: 'stressor',    verb: 'befell' }),
+  'stressor-relief':    Object.freeze({ label: 'Relief',             effect: 'stressor',    verb: 'eased' }),
+  obligation:           Object.freeze({ label: 'Obligation',         effect: 'obligation',  verb: 'bound' }),
+  exposure:             Object.freeze({ label: 'Exposure',           effect: 'stigma',      verb: 'exposed' }),
+  'structure-harm':     Object.freeze({ label: 'Structure harmed',   effect: 'institution', verb: 'struck' }),
+  'structure-restored': Object.freeze({ label: 'Structure mended',   effect: 'institution', verb: 'mended' }),
+  'supply-loss':        Object.freeze({ label: 'Supply lost',        effect: 'resource',    verb: 'despoiled' }),
+  'supply-restored':    Object.freeze({ label: 'Supply regained',    effect: 'resource',    verb: 'renewed' }),
 }));
 
 /**
@@ -201,10 +219,20 @@ export function buildTableEvent(spec) {
 // ── The bucketing clerk (deterministic, key-free, always available) ──────────────
 
 /**
- * Keyword tables, iterated in TABLE_EVENT_KINDS order (fixed) so scoring is
+ * Keyword tables, iterated in INSERTION order (fixed) so scoring is
  * deterministic and a tie resolves to the earlier kind. These are lowercased
  * substrings matched against the segment text. They tune the PROPOSAL only — the
  * human confirms every row, so a wrong guess costs one click, never a bad write.
+ *
+ * DELIBERATELY PARTIAL over TABLE_EVENT_KINDS (documented, not a gap to re-find):
+ * the four economy kinds (structure-harm / structure-restored / supply-loss /
+ * supply-restored) carry NO keyword rows. Their strings would be eager first-paint
+ * bytes on a budget with barely a kilobyte of headroom, and the cost of omitting
+ * them is only that the deterministic clerk never PROPOSES them — the human can
+ * still pick any kind in the review UI, and the live session-ledger picker (the
+ * desk these verbs were built for) is unaffected. classifySegment therefore
+ * iterates THIS table, not the vocabulary: adding a kind must never make the
+ * clerk throw on a missing row.
  */
 const KIND_KEYWORDS = /** @type {Record<string, string[]>} */ (Object.freeze({
   incident: ['famine', 'starv', 'fire', 'burn', 'plague', 'sick', 'disease', 'raid', 'attack',
@@ -269,9 +297,9 @@ export function classifySegment(text, index) {
   const hay = String(text || '').toLowerCase();
   let bestKind = 'incident';
   let bestScore = 0;
-  for (const kind of TABLE_EVENT_KINDS) {
+  for (const [kind, words] of Object.entries(KIND_KEYWORDS)) {
     let score = 0;
-    for (const kw of KIND_KEYWORDS[kind]) if (hay.includes(kw)) score += 1;
+    for (const kw of words) if (hay.includes(kw)) score += 1;
     if (score > bestScore) { bestScore = score; bestKind = kind; }
   }
   let band = 'moderate';

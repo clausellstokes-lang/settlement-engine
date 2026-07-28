@@ -1,3 +1,8 @@
+import {
+  applyFactionRenameToPartner,
+  factionRenameChanges,
+} from '../../domain/factionRename.js';
+
 // ── Save migration ─────────────────────────────────────────────────────────
 export function migrateConfig(config) {
   if (!config) return {};
@@ -17,17 +22,11 @@ export function findSaveById(saves, id) {
     : saves.find(save => save?.id != null && String(save.id) === String(id)) || null;
 }
 
-/** Rename every supported settlement reference field on one relationship. */
-export function renameInterSettlementReference(relationship, oldName, newName) {
-  const rename = value => value === oldName ? newName : value;
-  return {
-    ...relationship,
-    partnerName: rename(relationship.partnerName),
-    partnerFactionName: rename(relationship.partnerFactionName),
-    npcName: rename(relationship.npcName),
-    factionName: rename(relationship.factionName),
-  };
-}
+// Rename every supported settlement reference field on one relationship. The
+// implementation moved to src/domain/factionRename.js (owner queue #14) so the
+// store lane and this library lane share ONE writer; re-exported here because
+// this module is the spelling every existing importer already reaches for.
+export { renameInterSettlementReference } from '../../domain/factionRename.js';
 
 /** Apply settlement fields without disturbing save-level persistence metadata. */
 export function withSettlementChanges(save, changes) {
@@ -38,6 +37,32 @@ export function withSettlementChanges(save, changes) {
       ...changes,
     },
   };
+}
+
+/**
+ * Apply a faction rename to ONE library save (owner queue #14). The host save
+ * gets the full in-settlement cascade; every other save gets only the neighbour
+ * links that point back at the host. Returns the SAME reference when nothing
+ * moved, so the caller's `s !== saves[i]` modified-set stays honest and no
+ * untouched save is persisted.
+ *
+ * The generic rewrites in applyRename are deliberately not reused for factions:
+ * they also rewrite partnerName and npcName, which would rename a neighbouring
+ * town or a person who happens to share the faction's name.
+ *
+ * @param {any} save
+ * @param {boolean} isHost  whether this save owns the renamed faction
+ * @param {string} hostName the host settlement's own name
+ * @param {string} oldName
+ * @param {string} newName
+ */
+export function withFactionRenamed(save, isHost, hostName, oldName, newName) {
+  if (!isHost) {
+    const partner = applyFactionRenameToPartner(save?.settlement, hostName, oldName, newName);
+    return partner.changed ? { ...save, settlement: partner.settlement } : save;
+  }
+  const { changed, changes } = factionRenameChanges(save?.settlement, oldName, newName);
+  return changed ? withSettlementChanges(save, changes) : save;
 }
 
 // ── Analytics banding (coarse, privacy-safe) ─────────────────────────────────

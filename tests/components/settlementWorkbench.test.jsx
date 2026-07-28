@@ -8,6 +8,8 @@
  * instead of creating a second mutation store.
  */
 
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import {
   cleanup,
@@ -123,12 +125,54 @@ describe('Entity Inspector', () => {
     expect(mocks.navigateToEntity).toHaveBeenCalledWith(faction.id);
   });
 
+  // MATRIX ROW M7 — a readOnly caller that passes NO canReview gets no dock.
+  //
+  // WHY THE QUEUE IS SEEDED HERE. This row was VACUOUS until 2026-07-28: the
+  // harness defaults pendingEditsQueue/pendingEditReceipts to EMPTY, and
+  // ChangeDock returns null on its own emptiness branch before `canReview` is
+  // consulted at all. The dock was therefore absent for a reason that had
+  // nothing to do with the entitlement default, and flipping that default to
+  // true left this row green. Staging real owner-scoped work (no ownerRef, so
+  // it passes the owner-scope filter exactly as the Change Dock rows below
+  // stage it) makes the absence attributable to the default and nothing else.
+  // Refutation executed: with `canReview = true` in the signature this row
+  // fails on the Change Dock heading.
   test('keeps inspection available without exposing authoring to a read-only owner', () => {
-    renderWorkbench(npc, {}, { readOnly: true });
+    renderWorkbench(npc, {
+      pendingEditsQueue: [{
+        id: 'edit-1',
+        kind: 'rename-settlement',
+        payload: { newName: 'Newhaven' },
+        reverted: false,
+      }],
+      pendingEditReceipts: [{
+        intentId: 'edit-0',
+        status: 'applied',
+        summary: 'NPC goal changed',
+      }],
+    }, { readOnly: true });
 
     expect(screen.getByRole('heading', { name: 'Mara' })).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'Edit NPC details' })).toBeNull();
     expect(screen.queryByRole('heading', { name: 'Change Dock' })).toBeNull();
+  });
+
+  // The signature half of M7, pinned at the source so the two halves fail for
+  // DIFFERENT reasons: the render row above proves the behaviour, this proves
+  // the declared default that produces it. A render-only pin can be silenced by
+  // an unrelated change to what the dock chooses to render; this one cannot.
+  test('the SettlementWorkbench signature defaults canReview to false', () => {
+    const source = readFileSync(
+      resolve(process.cwd(), 'src/components/dossier/SettlementWorkbench.jsx'),
+      'utf-8',
+    );
+    const signature = source.match(/export default function SettlementWorkbench\(([^)]*)\)/);
+    expect(signature, 'the default export signature moved — re-point this pin').toBeTruthy();
+    expect(
+      signature[1],
+      'canReview must DECLARE its false default: an entitlement that defaults open '
+      + 'hands the review surface to every standalone readOnly render.',
+    ).toMatch(/canReview\s*=\s*false/);
   });
 
   test('keeps mobile inspection readable without advertising a dead-end authoring path', () => {
@@ -312,6 +356,64 @@ describe('Change Dock', () => {
     expect(completedButton.disabled).toBe(true);
     fireEvent.click(completedButton);
     expect(mocks.revertToSnapshot).toHaveBeenCalledTimes(1);
+  });
+
+  // REVIEW-ONLY MODE. `canReview` is the entitlement half of the gate, threaded
+  // from the mount's single viewerCanAuthor read; `readOnly` remains the
+  // authoring half. The default-false pin (matrix row M7) lives above, now in
+  // two halves — the render row 'keeps inspection available without exposing
+  // authoring to a read-only owner', which stages a NON-EMPTY queue so the
+  // dock's absence is attributable to the default, and the source-level
+  // signature row beside it. Mount-level behaviour, including the free/anon
+  // negative control, is pinned in settlementWorkbenchMount.test.jsx.
+  test('opens the staged queue for review when a read-only viewer holds review authority', () => {
+    renderWorkbench(null, {
+      pendingEditsQueue: [{
+        id: 'edit-1',
+        kind: 'rename-settlement',
+        payload: { newName: 'Newhaven' },
+        reverted: false,
+      }],
+    }, { readOnly: true, canReview: true });
+
+    expect(screen.getByRole('heading', { name: 'Change Dock' })).toBeTruthy();
+    expect(screen.getByTestId('pending-review')).toBeTruthy();
+    expect(screen.getByRole('note').textContent)
+      .toMatch(/Editing is closed on this view.*review, commit, or discard/is);
+  });
+
+  test('review authority alone adds no dock when the queue and receipts are empty', () => {
+    renderWorkbench(null, {}, { readOnly: true, canReview: true });
+
+    expect(screen.queryByRole('heading', { name: 'Change Dock' })).toBeNull();
+    expect(screen.queryByText(/Editing is closed on this view/i)).toBeNull();
+  });
+
+  test('does not narrate a closed editor to a viewer whose editor is open', () => {
+    renderWorkbench(null, {
+      pendingEditsQueue: [{
+        id: 'edit-1',
+        kind: 'rename-settlement',
+        payload: { newName: 'Newhaven' },
+        reverted: false,
+      }],
+    }, { readOnly: false, canReview: true });
+
+    expect(screen.getByRole('heading', { name: 'Change Dock' })).toBeTruthy();
+    expect(screen.queryByText(/Editing is closed on this view/i)).toBeNull();
+  });
+
+  test('keeps post-commit receipts and Undo reachable in review-only mode', () => {
+    renderWorkbench(null, {
+      ...savedSettlement,
+      pendingEditReceipts: [appliedReceipt('edit-1')],
+    }, { readOnly: true, canReview: true });
+
+    // Recorded JUDGMENT: the receipts branch is deliberately NOT gated on
+    // !readOnly, so committing in review mode does not delete the surface
+    // carrying its own result note and Undo. Veto = one condition here.
+    expect(screen.getByText(/edit-1 applied/)).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Undo last batch' })).toBeTruthy();
   });
 
   test('keeps the recorded result and offers a truthful retry when revert fails', async () => {

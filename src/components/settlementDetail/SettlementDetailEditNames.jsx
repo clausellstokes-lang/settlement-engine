@@ -1,5 +1,6 @@
 import { BORDER_STRONG, INK, MUTED, BODY, CARD, sans, serif_, FS } from '../theme';
 import Button from '../primitives/Button.jsx';
+import { nameOf } from '../../domain/rulingPower.js';
 
 // ── Edit Names ───────────────────────────────────────────────────────────────
 // Inline rename affordance for NPC & faction names. Presentational: all state
@@ -13,6 +14,26 @@ export default function SettlementDetailEditNames({
   isCanonLocked,
   handleApplyRename,
 }) {
+  // Owner queue #14. This section used to iterate `settlement.factions` ONLY —
+  // the NPC-grouping mirror, which is empty on every generated settlement — so
+  // the Factions rows rendered blank and the door did not exist. Prefer the
+  // CANONICAL powerStructure roster, reading its label through nameOf so the
+  // `.faction` / `.name` precedence can never be hand-rolled here.
+  const powerFactions = settlement?.powerStructure?.factions || [];
+  const factionRows = (powerFactions.length
+    ? powerFactions.map((fac, fi) => ({
+        key: `power-${fi}`,
+        name: nameOf(fac),
+        label: fac?.category || 'power faction',
+      }))
+    : (settlement?.factions || []).map((fac, fi) => ({
+        key: `group-${fi}`,
+        name: fac?.name,
+        label: fac?.dominantCategory && fac.dominantCategory !== 'other'
+          ? fac.dominantCategory
+          : fac?.powerFactionName || fac?.powerFactionCat || 'mixed',
+      }))
+  ).filter(row => row.name);
   return (
       settlement&&<div style={{overflow:'hidden'}}>
         {/* A routine collapsible rename utility doesn't earn a permanent full
@@ -81,42 +102,40 @@ export default function SettlementDetailEditNames({
           </>}
 
           {/* Factions */}
-          {(settlement.factions||[]).length>0&&<>
+          {factionRows.length>0&&<>
             <div style={{fontSize:FS.xxs,fontWeight:800,color:MUTED,textTransform:'uppercase',
               letterSpacing:'0.06em',marginBottom:6}}>Factions</div>
             <div style={{display:'flex',flexDirection:'column',gap:4}}>
-              {(settlement.factions||[]).map((fac,fi)=>{
-                const isEditing = editingName?.type==='faction' && editingName?.id===fac.name;
-                return <div key={fi} style={{display:'flex',alignItems:'center',gap:8}}>
+              {factionRows.map(row=>{
+                const isEditing = editingName?.type==='faction' && editingName?.id===row.name;
+                return <div key={row.key} style={{display:'flex',alignItems:'center',gap:8}}>
                   {/* The faction category is load-bearing DATA (which faction is
                       being renamed), so it reads at BODY (AA), not MUTED (P7). */}
                   <span style={{fontSize:FS.xs,color:BODY,minWidth:130,flexShrink:0}}>
-                    {fac.dominantCategory&&fac.dominantCategory!=='other'
-                      ? fac.dominantCategory
-                      : fac.powerFactionName||fac.powerFactionCat||'mixed'}
+                    {row.label}
                   </span>
                   {isEditing
                     ? <><input
                         // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the inline rename field the user just opened
                         autoFocus
-                        aria-label={`Rename faction ${fac.name}`}
+                        aria-label={`Rename faction ${row.name}`}
                         value={editDraft}
                         onChange={e=>setEditDraft(e.target.value)}
                         onKeyDown={e=>{
-                          if(e.key==='Enter') handleApplyRename('faction',fac.name,fac.name,editDraft);
+                          if(e.key==='Enter') handleApplyRename('faction',row.name,row.name,editDraft);
                           if(e.key==='Escape'){setEditingName(null);setEditDraft('');}
                         }}
                         style={{flex:1,fontSize:FS.sm,minHeight:40,padding:'8px 10px',border:`1px solid ${BORDER_STRONG}`,
                           fontFamily:sans,color:INK}}
                       />
-                      <Button variant="primary" size="md" onClick={()=>handleApplyRename('faction',fac.name,fac.name,editDraft)}>
+                      <Button variant="primary" size="md" onClick={()=>handleApplyRename('faction',row.name,row.name,editDraft)}>
                         Save
                       </Button>
                       <Button variant="secondary" size="md" onClick={()=>{setEditingName(null);setEditDraft('');}}>
                         Cancel
                       </Button></>
-                    : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{fac.name}</span>
-                      <Button variant="ghost" size="md" onClick={()=>{setEditingName({type:'faction',id:fac.name,oldName:fac.name});setEditDraft(fac.name);}}>
+                    : <><span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{row.name}</span>
+                      <Button variant="ghost" size="md" onClick={()=>{setEditingName({type:'faction',id:row.name,oldName:row.name});setEditDraft(row.name);}}>
                         Rename
                       </Button></>}
                 </div>;
@@ -127,7 +146,7 @@ export default function SettlementDetailEditNames({
           {/* Empty state: when there are no named NPCs or factions to rename,
               the opened panel would otherwise show only the disclaimer below and
               read as broken. Explain why it's empty. */}
-          {(settlement.npcs||[]).length===0 && (settlement.factions||[]).length===0 && (
+          {(settlement.npcs||[]).length===0 && factionRows.length===0 && (
             <div style={{fontSize:FS.xs,color:BODY,lineHeight:1.5}}>
               This settlement has no named NPCs or factions to rename yet.
             </div>

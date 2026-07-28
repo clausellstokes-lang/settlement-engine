@@ -68,7 +68,12 @@ const _editKindSet = new Set(EDIT_KINDS);
 // dispatcher (settlementPendingEdits → settlementRenameHelpers) and a registered
 // operation (operationRegistry).
 export const COMMITTABLE_EDIT_KINDS = Object.freeze([
-  'rename-npc', 'rename-settlement',
+  // Owner queue #14 — 'rename-faction' joins its two siblings. It was declared
+  // scaffolding for a year (PendingChangesBar even rendered a label for it)
+  // because no writer could carry a faction name through its references. There
+  // is one now: settlementRenameHelpers.renameFactionImpl over the enumerated
+  // cascade in domain/factionRename.js.
+  'rename-npc', 'rename-faction', 'rename-settlement',
   'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
   // DESIGN_THE_ROADS §11 — the party's roads-hostage ops; dispatched via applyNpcOp,
   // stamping whereabouts.partyRelease for the mover.

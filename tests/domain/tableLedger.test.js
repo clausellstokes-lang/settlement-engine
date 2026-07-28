@@ -9,20 +9,99 @@
 import { describe, test, expect } from 'vitest';
 import {
   TABLE_EVENT_KINDS, MAGNITUDE_BANDS, MAGNITUDE_BAND_IDS, OBLIGATION_TYPES,
-  TABLE_EVENT_SOURCE, KIND_SPEC,
+  TABLE_EVENT_SOURCE, KIND_SPEC, IMPAIR_DIMENSION,
   validateTableEvent, buildTableEffect, reviewClerkProposals, exposureTargets,
+  institutionTargets, impairedInstitutionTargets,
+  depletableResourceTargets, depletedResourceTargets,
 } from '../../src/domain/tableLedger.js';
+
+/** A valid target ref for each kind, so a totality loop can build every kind. */
+const REF_FOR_KIND = {
+  incident: '',
+  'stressor-relief': 'famine',
+  obligation: 'debt',
+  exposure: 'npc.aldis',
+  'structure-harm': 'inst.granary',
+  'structure-restored': 'inst.granary',
+  'supply-loss': 'timber',
+  'supply-restored': 'timber',
+};
 
 describe('the closed vocabulary + bounded bands', () => {
   test('kinds and bands are frozen closed sets', () => {
     expect(Object.isFrozen(TABLE_EVENT_KINDS)).toBe(true);
     expect(Object.isFrozen(MAGNITUDE_BANDS)).toBe(true);
-    expect([...TABLE_EVENT_KINDS].sort()).toEqual(['exposure', 'incident', 'obligation', 'stressor-relief']);
+    expect([...TABLE_EVENT_KINDS].sort()).toEqual([
+      'exposure', 'incident', 'obligation', 'stressor-relief',
+      'structure-harm', 'structure-restored', 'supply-loss', 'supply-restored',
+    ]);
     expect(MAGNITUDE_BAND_IDS).toEqual(['minor', 'moderate', 'major']);
     // Every band resolves to a clamped 0..1 severity.
     for (const id of MAGNITUDE_BAND_IDS) {
       expect(MAGNITUDE_BANDS[id]).toBeGreaterThan(0);
       expect(MAGNITUDE_BANDS[id]).toBeLessThanOrEqual(1);
+    }
+  });
+
+  test('every kind has a spec, and the spec table is total over the vocabulary', () => {
+    expect(Object.keys(KIND_SPEC).sort()).toEqual([...TABLE_EVENT_KINDS].sort());
+    for (const kind of TABLE_EVENT_KINDS) {
+      const spec = KIND_SPEC[kind];
+      // A dial is offered only where a target is named; 'none' is the flavor kind.
+      expect(spec.needsMagnitude && !spec.needsTarget).toBe(false);
+      expect(['none', 'stressor', 'severity', 'impair', 'bare']).toContain(spec.payloadShape);
+      // The shape IS the discriminator the admission wall mirrors: no target
+      // means no event, and a 'bare' shape means a target with no dial.
+      expect(spec.needsTarget).toBe(spec.payloadShape !== 'none');
+      expect(spec.needsMagnitude).toBe(
+        spec.payloadShape !== 'none' && spec.payloadShape !== 'bare',
+      );
+    }
+  });
+
+  test('the four economy verbs ride EXISTING engine event types', () => {
+    expect(KIND_SPEC['structure-harm'].eventType).toBe('IMPAIR_INSTITUTION');
+    expect(KIND_SPEC['structure-restored'].eventType).toBe('RESTORE_INSTITUTION');
+    expect(KIND_SPEC['supply-loss'].eventType).toBe('DEPLETE_RESOURCE');
+    expect(KIND_SPEC['supply-restored'].eventType).toBe('RECOVERED_RESOURCE');
+    // structure-harm rides IMPAIR, never the composer-retired DAMAGE verb.
+    for (const kind of TABLE_EVENT_KINDS) {
+      expect(KIND_SPEC[kind].eventType).not.toBe('DAMAGE_INSTITUTION');
+    }
+  });
+
+  test('the three dial-free kinds record a null band even when one is offered', () => {
+    // validateTableEvent must not quietly accept a dial the kind does not have.
+    for (const kind of ['structure-restored', 'supply-loss', 'supply-restored']) {
+      const r = validateTableEvent({
+        kind, magnitude: 'major', targets: { ref: REF_FOR_KIND[kind] }, flavor: 'x',
+      });
+      expect(r.ok).toBe(true);
+      expect(r.record.band).toBeNull();
+      expect(r.record.severity).toBeNull();
+    }
+  });
+
+  test('structure-harm DOES require a band (its severity is real physics)', () => {
+    const missing = validateTableEvent({
+      kind: 'structure-harm', targets: { ref: 'inst.granary' }, flavor: 'x',
+    });
+    expect(missing.ok).toBe(false);
+    const ok = validateTableEvent({
+      kind: 'structure-harm', magnitude: 'major', targets: { ref: 'inst.granary' }, flavor: 'x',
+    });
+    expect(ok.ok).toBe(true);
+    // The food-anchor break threshold is severity >= 0.6 with a capacity
+    // dimension: 'major' crosses it, 'moderate' does not. Declared, not implied.
+    expect(ok.record.severity).toBe(0.8);
+    expect(MAGNITUDE_BANDS.major).toBeGreaterThanOrEqual(0.6);
+    expect(MAGNITUDE_BANDS.moderate).toBeLessThan(0.6);
+  });
+
+  test('every economy verb still requires a named target', () => {
+    for (const kind of ['structure-harm', 'structure-restored', 'supply-loss', 'supply-restored']) {
+      const r = validateTableEvent({ kind, magnitude: 'moderate', targets: {}, flavor: 'x' });
+      expect(r.ok).toBe(false);
     }
   });
 
@@ -91,19 +170,54 @@ describe('FREE TEXT IS FLAVOR ONLY — the source-scan on the built directive', 
     expect(built.entry.payload).toBeUndefined();
   });
 
-  test('every built directive carries source:table', () => {
+  test('every built directive carries source:table, and none leaks flavor', () => {
     for (const kind of TABLE_EVENT_KINDS) {
       const spec = KIND_SPEC[kind];
       const input = {
-        kind, flavor: 'x',
+        kind, flavor: FLAVOR,
         ...(spec.needsMagnitude ? { magnitude: 'minor' } : {}),
-        ...(spec.needsTarget ? { targets: { ref: kind === 'obligation' ? 'debt' : 'famine' } } : {}),
+        ...(spec.needsTarget ? { targets: { ref: REF_FOR_KIND[kind] } } : {}),
       };
       const { ok, record } = validateTableEvent(input);
-      expect(ok).toBe(true);
+      expect(ok, `${kind} failed validation`).toBe(true);
       const built = buildTableEffect(record);
       const stamped = built.dispatch === 'flavor' ? built.entry.source : built.event.source;
       expect(stamped).toBe(TABLE_EVENT_SOURCE);
+      if (built.dispatch === 'flavor') continue;
+      // The mechanical surface of EVERY kind is free of the DM's words.
+      const mechanical = JSON.stringify({
+        type: built.event.type, targetId: built.event.targetId, payload: built.event.payload,
+      });
+      expect(mechanical, kind).not.toContain('BURNED');
+      expect(mechanical, kind).not.toContain('INSULTED');
+      expect(mechanical, kind).not.toContain(FLAVOR);
+      expect(built.event.tableFlavor).toBe(FLAVOR);
+    }
+  });
+
+  test('structure-harm builds a banded impairment on a FIXED capacity dimension', () => {
+    const { record } = validateTableEvent({
+      kind: 'structure-harm', magnitude: 'major',
+      targets: { ref: 'inst.granary', label: 'The Granary' }, flavor: FLAVOR,
+    });
+    const built = buildTableEffect(record);
+    expect(built.event.type).toBe('IMPAIR_INSTITUTION');
+    expect(built.event.targetId).toBe('inst.granary');
+    // Exactly the two mechanical keys — no stressorType, no smuggled label.
+    expect(built.event.payload).toEqual({ severity: MAGNITUDE_BANDS.major, dimension: 'capacity' });
+    expect(IMPAIR_DIMENSION).toBe('capacity');
+  });
+
+  test('the three dial-free kinds build an EXACTLY empty payload', () => {
+    for (const kind of ['structure-restored', 'supply-loss', 'supply-restored']) {
+      const { record } = validateTableEvent({
+        kind, targets: { ref: REF_FOR_KIND[kind], label: 'A thing' }, flavor: FLAVOR,
+      });
+      const built = buildTableEffect(record);
+      // {} exactly: the engine's own default stands, and no dial was invented.
+      expect(built.event.payload, kind).toEqual({});
+      expect(Object.keys(built.event.payload), kind).toHaveLength(0);
+      expect(built.event.targetId, kind).toBe(REF_FOR_KIND[kind]);
     }
   });
 });
@@ -163,5 +277,54 @@ describe('the exposure roster mirrors the affordance manifest (SB2 parity pin)',
   test('a settlement with nothing compromised yields an empty roster (the picker offers nothing)', () => {
     expect(exposureTargets({ npcs: [{ id: 'n1', name: 'Clean' }] })).toEqual([]);
     expect(exposureTargets(null)).toEqual([]);
+  });
+});
+
+describe('the economy verbs offer exactly what their handlers can act on', () => {
+  // One fixture exercising every discrimination the four rosters make: a clean
+  // institution vs a wounded one, and a live resource vs BOTH depletion formats
+  // (the nearbyResourcesDepleted array AND the nearbyResourcesState map — a key
+  // present in only the map is the case a naive reader drops).
+  const fx = {
+    institutions: [
+      { id: 'inst.market', name: 'The Market' },                                  // whole
+      { id: 'inst.granary', name: 'The Granary', impairments: [{ type: 'capacity' }] }, // wounded
+      { id: 'inst.mill', name: 'The Mill', status: 'destroyed' },                 // wounded by status
+    ],
+    config: {
+      nearbyResources: ['timber', 'iron', 'fish'],
+      nearbyResourcesDepleted: ['iron'],
+      nearbyResourcesState: { fish: 'depleted' },
+    },
+  };
+  const ids = (roster) => roster.map((o) => o.id);
+
+  test('structure-harm offers EVERY institution; structure-restored only the wounded', () => {
+    expect(ids(institutionTargets(fx))).toEqual(['inst.market', 'inst.granary', 'inst.mill']);
+    expect(ids(impairedInstitutionTargets(fx))).toEqual(['inst.granary', 'inst.mill']);
+  });
+
+  test('supply-loss offers only live resources; supply-restored only depleted ones', () => {
+    // 'fish' is depleted via the STATE MAP alone — both rosters must see it.
+    expect(ids(depletableResourceTargets(fx))).toEqual(['timber']);
+    expect(ids(depletedResourceTargets(fx))).toEqual(['iron', 'fish']);
+  });
+
+  test('the two institution rosters ARE the manifest entries (one leaf, two desks)', async () => {
+    const { AFFORDANCE_MANIFEST } = await import('../../src/domain/events/affordanceManifest.js');
+    expect(impairedInstitutionTargets(fx))
+      .toEqual(AFFORDANCE_MANIFEST.RESTORE_INSTITUTION.targetOptions(fx));
+    expect(depletableResourceTargets(fx))
+      .toEqual(AFFORDANCE_MANIFEST.DEPLETE_RESOURCE.targetOptions(fx));
+    expect(depletedResourceTargets(fx))
+      .toEqual(AFFORDANCE_MANIFEST.RECOVERED_RESOURCE.targetOptions(fx));
+  });
+
+  test('an empty settlement yields empty rosters (the picker says so honestly)', () => {
+    for (const roster of [institutionTargets, impairedInstitutionTargets,
+      depletableResourceTargets, depletedResourceTargets]) {
+      expect(roster({})).toEqual([]);
+      expect(roster(null)).toEqual([]);
+    }
   });
 });

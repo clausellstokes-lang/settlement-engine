@@ -89,12 +89,31 @@ const SEAT_FIELDS = new Set([
 ]);
 const SEAT_ARRAY_FIELDS = new Set(['linkedInstitutionIds', 'linkedFactionIds']);
 
+// The admission wall's mirror of tableLedger's KIND_SPEC. A mirror rather than
+// an import because this module is EAGER and the ledger is lazy; the end-to-end
+// totality loop over TABLE_EVENT_KINDS in tests/store/tableEventCommit.test.js
+// is what keeps the two in lockstep (a half-landed kind reds there, not in prod).
+//
+// [eventType, payloadShape]. A tuple, not a record, because this table is EAGER
+// first-paint bytes on a closure budget measured in hundreds of bytes. The shape
+// is the ONE discriminator and everything else derives from it:
+//   dispatch  = 'none' means a flavor chronicle line, anything else an engine event
+//   needsTarget    = shape !== 'none'
+//   needsMagnitude = shape is 'stressor' | 'severity' | 'impair'
+// 'impair' fixes the dimension to IMPAIR_DIMENSION: the table may weaken a
+// structure physically, never author a legitimacy dimension (that is 'exposure').
 const TABLE_EFFECTS = Object.freeze({
-  incident: { dispatch: 'flavor', eventType: 'TABLE_INCIDENT', target: false },
-  'stressor-relief': { dispatch: 'applyEvent', eventType: 'RESOLVE_STRESSOR', target: true },
-  obligation: { dispatch: 'applyEvent', eventType: 'APPLY_STRESSOR', target: true },
-  exposure: { dispatch: 'applyEvent', eventType: 'EXPOSE_CORRUPTION', target: true },
+  incident: ['TABLE_INCIDENT', 'none'],
+  'stressor-relief': ['RESOLVE_STRESSOR', 'stressor'],
+  obligation: ['APPLY_STRESSOR', 'stressor'],
+  exposure: ['EXPOSE_CORRUPTION', 'severity'],
+  'structure-harm': ['IMPAIR_INSTITUTION', 'impair'],
+  'structure-restored': ['RESTORE_INSTITUTION', 'bare'],
+  'supply-loss': ['DEPLETE_RESOURCE', 'bare'],
+  'supply-restored': ['RECOVERED_RESOURCE', 'bare'],
 });
+/** Mirrors tableLedger.IMPAIR_DIMENSION; lockstep pinned by the totality loop. */
+const IMPAIR_DIMENSION = 'capacity';
 const TABLE_MAGNITUDES = Object.freeze({ minor: 0.25, moderate: 0.5, major: 0.8 });
 const OBLIGATION_TYPES = new Set(['debt', 'famine', 'scarcity', 'unrest', 'siege', 'plague']);
 
@@ -103,6 +122,7 @@ const OBLIGATION_TYPES = new Set(['debt', 'famine', 'scarcity', 'unrest', 'siege
 // requires an explicit timing/classification/recovery decision beside its schema.
 const EDIT_POLICY = Object.freeze({
   'rename-npc':        ['authoring', 'immediate', 'settlement.rename-npc'],
+  'rename-faction':    ['authoring', 'immediate', 'settlement.rename-faction'],
   'rename-settlement': ['authoring', 'immediate', 'settlement.rename'],
   'edit-npc':          ['authoring', 'immediate', 'npc.edit-facet'],
   'reassign-npc':      ['authoring', 'immediate', 'npc.reassign'],
@@ -424,14 +444,23 @@ function validateTablePayload(payload) {
   const recordKind = text(record.kind);
   const spec = TABLE_EFFECTS[/** @type {keyof typeof TABLE_EFFECTS} */ (recordKind)];
   if (!spec) return { ok: false, reason: 'table_event_kind_invalid' };
+  // Target and magnitude are DECOUPLED: three kinds name a typed target and
+  // carry no dial at all, so a wall that inferred one from the other would
+  // either refuse them or stop checking the dialled kinds.
+  const [eventType, shape] = spec;
+  const dispatch = shape === 'none' ? 'flavor' : 'applyEvent';
+  const needsTarget = shape !== 'none';
+  const needsMagnitude = needsTarget && shape !== 'bare';
+
   if (typeof record.flavor !== 'string' || record.flavor.length > 2000) {
     return { ok: false, reason: 'table_event_flavor_invalid' };
   }
-  if (directive.dispatch !== spec.dispatch) {
+  if (directive.dispatch !== dispatch) {
     return { ok: false, reason: 'table_event_dispatch_mismatch' };
   }
+
   const targetRef = text(record.targetRef);
-  if (spec.target && !targetRef) {
+  if (needsTarget && !targetRef) {
     return { ok: false, reason: 'table_event_target_missing' };
   }
   if (recordKind === 'obligation' && !OBLIGATION_TYPES.has(targetRef)) {
@@ -441,36 +470,38 @@ function validateTablePayload(payload) {
   const expectedSeverity = TABLE_MAGNITUDES[
     /** @type {keyof typeof TABLE_MAGNITUDES} */ (band)
   ];
-  if (spec.target && (
+  if (needsMagnitude && (
     !Object.hasOwn(TABLE_MAGNITUDES, band)
     || record.severity !== expectedSeverity
   )) {
     return { ok: false, reason: 'table_event_magnitude_invalid' };
   }
-  if (!spec.target && (
-    text(record.targetRef)
-    || record.band != null
-    || record.severity != null
-  )) {
+  // A dial-free kind must arrive dial-free. A smuggled band or severity is
+  // REFUSED rather than dropped, so the wall can never be widened by handing it
+  // a field the engine would not read from this kind.
+  if (!needsMagnitude && (record.band != null || record.severity != null)) {
+    return { ok: false, reason: 'table_event_record_mismatch' };
+  }
+  if (!needsTarget && targetRef) {
     return { ok: false, reason: 'table_event_record_mismatch' };
   }
 
   const normalizedRecord = {
     kind: recordKind,
-    targetRef: spec.target ? targetRef : '',
-    targetLabel: spec.target ? text(record.targetLabel) || targetRef : '',
-    band: spec.target ? band : null,
-    severity: spec.target ? record.severity : null,
+    targetRef: needsTarget ? targetRef : '',
+    targetLabel: needsTarget ? text(record.targetLabel) || targetRef : '',
+    band: needsMagnitude ? band : null,
+    severity: needsMagnitude ? record.severity : null,
     flavor: record.flavor,
   };
 
-  if (spec.dispatch === 'flavor') {
+  if (dispatch === 'flavor') {
     const entry = recordOf(directive.entry);
     const narrativeSummary = normalizedRecord.flavor
       || 'A moment at the table was recorded.';
     if (!entry
       || entry.source !== 'table'
-      || entry.type !== spec.eventType
+      || entry.type !== eventType
       || entry.narrativeSummary !== narrativeSummary) {
       return { ok: false, reason: 'table_event_directive_invalid' };
     }
@@ -480,37 +511,55 @@ function validateTablePayload(payload) {
         record: normalizedRecord,
         directive: {
           dispatch: 'flavor',
-          entry: { type: spec.eventType, source: 'table', narrativeSummary },
+          entry: { type: eventType, source: 'table', narrativeSummary },
         },
       },
     };
   } else {
     const event = recordOf(directive.event);
-    if (!event || event.source !== 'table' || event.type !== spec.eventType) {
+    if (!event || event.source !== 'table' || event.type !== eventType) {
       return { ok: false, reason: 'table_event_directive_invalid' };
     }
     if (String(event.targetId ?? '') !== String(record.targetRef)) {
       return { ok: false, reason: 'table_event_target_mismatch' };
     }
+    // Check the MEANINGFUL fields per shape and let anything unrecognized fall
+    // away at reconstruction below. That tolerance is a pinned contract, not an
+    // oversight (tests/store/pendingEditTransaction.test.js "detaches and
+    // canonicalizes nested table payloads at admission"): a stray mechanical
+    // field is CANONICALIZED AWAY, never a refusal the DM cannot act on. The
+    // wall against a smuggled dial lives on the RECORD side above, where a band
+    // or severity on a dial-free kind is refused outright.
     const sourceEventPayload = recordOf(event.payload);
-    if (Number(sourceEventPayload?.severity) !== Number(record.severity)) {
-      return { ok: false, reason: 'table_event_magnitude_mismatch' };
-    }
-    if (event.type !== 'EXPOSE_CORRUPTION'
-      && String(sourceEventPayload?.stressorType ?? '') !== String(record.targetRef)) {
-      return { ok: false, reason: 'table_event_target_mismatch' };
+    if (shape !== 'bare') {
+      if (Number(sourceEventPayload?.severity) !== Number(record.severity)) {
+        return { ok: false, reason: 'table_event_magnitude_mismatch' };
+      }
+      if (shape === 'impair' && sourceEventPayload?.dimension !== IMPAIR_DIMENSION) {
+        return { ok: false, reason: 'table_event_directive_invalid' };
+      }
+      if (shape === 'stressor'
+        && String(sourceEventPayload?.stressorType ?? '') !== String(record.targetRef)) {
+        return { ok: false, reason: 'table_event_target_mismatch' };
+      }
     }
     if (event.tableFlavor !== normalizedRecord.flavor) {
       return { ok: false, reason: 'table_event_flavor_mismatch' };
     }
 
-    const eventPayload = event.type === 'EXPOSE_CORRUPTION'
-      ? { severity: normalizedRecord.severity }
-      : {
-          stressorType: normalizedRecord.targetRef,
-          label: normalizedRecord.targetLabel,
-          severity: normalizedRecord.severity,
-        };
+    // The payload this record IMPLIES — the ONLY payload the queue ever stores.
+    const eventPayload = shape === 'bare'
+      ? {}
+      : shape === 'impair'
+        ? { severity: normalizedRecord.severity, dimension: IMPAIR_DIMENSION }
+        : shape === 'severity'
+          ? { severity: normalizedRecord.severity }
+          : {
+              stressorType: normalizedRecord.targetRef,
+              label: normalizedRecord.targetLabel,
+              severity: normalizedRecord.severity,
+            };
+
     return {
       ok: true,
       payload: {
@@ -518,7 +567,7 @@ function validateTablePayload(payload) {
         directive: {
           dispatch: 'applyEvent',
           event: {
-            type: spec.eventType,
+            type: eventType,
             targetId: normalizedRecord.targetRef,
             payload: eventPayload,
             source: 'table',
@@ -556,6 +605,20 @@ export function normalizePendingEditPayload(kind, rawPayload, context) {
     const newName = text(input.newName);
     if (!newName) return { ok: false, reason: 'new_name_required' };
     payload = { npcId, newName };
+  } else if (kind === 'rename-faction') {
+    // Position-addressed on the resolved faction list, exactly like edit-prose
+    // on a faction: the roster has no durable id on generator output, and
+    // staleness between review and commit is caught by the source fingerprint
+    // (any settlement mutation, including a reorder, invalidates it). The
+    // writer re-resolves and re-checks the name before it writes.
+    const newName = text(input.newName);
+    if (!newName) return { ok: false, reason: 'new_name_required' };
+    if (typeof input.factionIndex !== 'number'
+      || !Number.isInteger(input.factionIndex)
+      || input.factionIndex < 0) {
+      return { ok: false, reason: 'faction_target_missing' };
+    }
+    payload = { factionIndex: input.factionIndex, newName };
   } else if (kind === 'rename-settlement') {
     const newName = text(input.newName);
     if (!newName) return { ok: false, reason: 'new_name_required' };
@@ -658,9 +721,17 @@ export function normalizePendingEditPayload(kind, rawPayload, context) {
         ownerKey: context.ownerKey,
       }
     : null;
+  // A faction rename targets the SAME `faction:<index>` key an edit-prose on
+  // that faction produces, so renaming one faction and rewriting another's
+  // description rebase as disjoint work, while two edits to the SAME faction
+  // correctly collide.
+  const factionTarget = kind === 'rename-faction'
+    ? { type: 'faction', id: String(payload.factionIndex), ownerKey: context.ownerKey }
+    : null;
   const targetRef = NPC_KINDS.has(kind)
     ? { type: 'npc', id: npcId, ownerKey: context.ownerKey }
     : proseEntityTarget
+      || factionTarget
       || (kind === 'table-event' && recordTargetRef
         ? { type: 'table-subject', id: recordTargetRef, ownerKey: context.ownerKey }
         : { type: 'settlement', id: context.settlementRef, ownerKey: context.ownerKey });

@@ -241,16 +241,22 @@ export const OPERATIONS = Object.freeze({
   removeSavedSettlement: { opType:'removeSavedSettlement', label:"Remove a saved settlement", description:"Deletes one settlement from the saved-settlements list.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
   updateSavedSettlement: { opType:'updateSavedSettlement', label:"Update a saved settlement", description:"Writes changed fields onto one saved settlement in the list.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
   renameNPC: { opType:'renameNPC', label:"Rename an NPC", description:"Renames a named NPC within the settlement and carries the new name through its references.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
-  renameFaction: { opType:'renameFaction', label:"Rename a faction", description:"Renames a faction within the settlement and carries the new name through its references.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
+  // Owner queue #14. The old copy claimed the rename "carries the new name
+  // through its references" while the action cascaded nothing. It does now, so
+  // the row says exactly which references and stops there.
+  renameFaction: { opType:'renameFaction', label:"Rename a faction", description:"Renames a faction and carries the new name through the settlement: its place in the power structure, the governing seat, every member, the institutions it founded, and any neighbouring settlement that names it.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
   applyUserEditAction: { opType:'applyUserEditAction', label:"Apply a manual edit", description:"Applies a manual user edit to the settlement. It can be reversed with Revert a manual edit.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertUserEditAction', undoState:'action' },
   revertUserEditAction: { opType:'revertUserEditAction', label:"Revert a manual edit", description:"Reverses a previously applied manual user edit.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'applyUserEditAction', undoState:'action' },
   persistActiveSaveEdit: { opType:'persistActiveSaveEdit', label:"Persist an edit to the active save", description:"Writes an edit to the active save so the change survives a reload.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   markExported: { opType:'markExported', label:"Mark as exported", description:"Flags the settlement as having been exported, for example to a PDF dossier.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'irreversible' },
-  // Phase-A honesty (owner queue #21): these two rows described a locks engine that
-  // did not exist for a year. They now describe exactly what domain/locksPreservation.js
-  // performs and nothing more — carrying locked characters through a FULL regenerate is
-  // Phase B and is deliberately absent from this copy until it is built.
-  setLock: { opType:'setLock', label:"Set a section lock", description:"Locks a part of the settlement. A locked section refuses to reroll, locked characters survive a roster reroll, and a full regenerate keeps the locked name, terrain and history.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
+  // Phase-A honesty (owner queue #21) carried forward to Phase B: these two rows
+  // described a locks engine that did not exist for a year. They describe exactly
+  // what the engine performs and nothing more. Phase B added the one promise the
+  // Phase-A copy had to withhold — locked characters now survive a FULL regenerate,
+  // not only a roster reroll. Still deliberately unsaid, because still unbuilt:
+  // locking a whole roster does not stop a full regenerate, and a locked faction
+  // survives as a name rather than as the faction object itself.
+  setLock: { opType:'setLock', label:"Set a section lock", description:"Locks a part of the settlement. A locked section refuses to reroll. Locked characters survive any reroll, including a full regenerate, where they take a place in the new town. A full regenerate also keeps the locked name, terrain and history.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
   clearLocks: { opType:'clearLocks', label:"Clear section locks", description:"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
   hydrateFromSave: { opType:'hydrateFromSave', label:"Load state from a save", description:"Rebuilds the working settlement state from a saved settlement.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   renameSettlement: { opType:'renameSettlement', label:"Rename the settlement", description:"Changes the settlement's name.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
@@ -354,9 +360,13 @@ export const OPERATIONS = Object.freeze({
   mapUndo: { opType:'mapUndo', label:"Undo a map change", description:"Reverses the most recent campaign-map change. It can be redone.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapRedo', undoState:'action' },
   mapRedo: { opType:'mapRedo', label:"Redo a map change", description:"Re-applies a campaign-map change that was undone. It can be undone again.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo', undoState:'action' },
   clearNeighbour: { opType:'clearNeighbour', label:"Clear a neighbour", description:"Removes a settlement's neighbour link data.", klass:'mechanical', slice:'neighbourSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
-  completeOnboarding: { opType:'completeOnboarding', label:"Complete onboarding", description:"Marks the first-run onboarding as finished. It can be reset.", klass:'mechanical', slice:'onboardingSlice', targetScope:'global', receiptRef:null, undoToken:'resetOnboarding', undoState:'action' },
-  markFeatureUsed: { opType:'markFeatureUsed', label:"Mark a feature as used", description:"Records that the user has used a given feature, which retires its coaching hints. It can be reset.", klass:'mechanical', slice:'onboardingSlice', targetScope:'global', receiptRef:null, undoToken:'resetOnboarding', undoState:'action' },
-  resetOnboarding: { opType:'resetOnboarding', label:"Reset onboarding", description:"Clears the onboarding progress so the coaching flow runs again.", klass:'mechanical', slice:'onboardingSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // RETIRED 2026-07-27 (coach-exit lane, owner queue #21 for the onboarding trio):
+  // completeOnboarding, markFeatureUsed, resetOnboarding left the registry with
+  // the coach state machine and the feature-hints subsystem they described. All
+  // three were measured callerless by the dead-op ratchet, the coach they served
+  // was headless (no CSS ever targeted its only rendered output), and the live
+  // first-run teaching belongs to the guidance registry (W-GUIDE-1 / host C4).
+  // See src/store/onboardingSlice.js for the full retirement note.
   setCreditBalance: { opType:'setCreditBalance', label:"Set the credit balance", description:"Sets the account's narrative-credit balance to a given amount.", klass:'mechanical', slice:'creditsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   updateConfig: { opType:'updateConfig', label:"Update the generation settings", description:"Changes the settlement generation settings, such as size, sliders, and options.", klass:'mechanical', slice:'configSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
   toggleInstitution: { opType:'toggleInstitution', label:"Toggle an institution", description:"Turns one institution on or off in the generation settings.", klass:'mechanical', slice:'toggleSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'external:inverse-call' },
@@ -422,11 +432,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   setMapViewport: { slice: 'mapSlice', reason: 'camera pan/zoom; NOT part of saved campaign mapState' },
   toggleLayer: { slice: 'mapSlice', reason: 'layer visibility toggle; NOT part of saved campaign mapState' },
   setLayerFilter: { slice: 'mapSlice', reason: 'layer display filter; NOT part of saved campaign mapState' },
-  initOnboarding: { slice: 'onboardingSlice', reason: 'reads persisted flag but writes session-only coaching UI state' },
-  advanceOnboarding: { slice: 'onboardingSlice', reason: 'session-only coach-flow step' },
-  setOnboardingStep: { slice: 'onboardingSlice', reason: 'session-only coach-flow step' },
-  trackTabExplored: { slice: 'onboardingSlice', reason: 'session-only exploration counter' },
-  clearOnboardingNudge: { slice: 'onboardingSlice', reason: 'transient post-onboarding nudge toast' },
+  // The coach-flow exempt rows (initOnboarding, advanceOnboarding,
+  // setOnboardingStep, trackTabExplored) were RETIRED 2026-07-27 with the coach
+  // itself; only the nudge-toast channel remains on onboardingSlice.
+  setOnboardingNudge: { slice: 'onboardingSlice', reason: 'transient nudge toast; session-only, excluded from persist partialize' },
+  clearOnboardingNudge: { slice: 'onboardingSlice', reason: 'clears the transient nudge toast; session-only, excluded from persist partialize' },
   setPurchaseModalOpen: { slice: 'creditsSlice', reason: 'UI modal visibility flag' },
   setDossierClaimToast: { slice: 'uiSlice', reason: 'transient toast; excluded from persist partialize' },
   setAuthModalOpen: { slice: 'uiSlice', reason: 'UI modal visibility flag; excluded from persist partialize' },
@@ -474,7 +484,13 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // K-D EXEMPT class as its mapSlice peers setSelectedSettlementId / setHoveredSettlementId /
 // toggleLayer / setLayerFilter (all exempt above). A documented ratchet raise for a
 // genuinely-new UI setter, not an operation-surface omission.
-export const EXEMPT_CEILING = 72;
+// 72 -> 69 (coach-exit lane, 2026-07-27): a net -3. FOUR coach-flow rows left with
+// the retired state machine (initOnboarding, advanceOnboarding, setOnboardingStep,
+// trackTabExplored) and ONE was minted — setOnboardingNudge, the missing writer of
+// the nudge-toast channel App.jsx already renders (its only call site, the F34
+// post-signup save handler, had been silently no-opping behind a typeof guard).
+// Shrink direction, per the K-D shrink-only convention.
+export const EXEMPT_CEILING = 69;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

@@ -40,13 +40,20 @@ export default function SettlementWorkbenchMount({ enabled, readOnly }) {
   // (2026-07-27) `npcAuthoringAllowed` reads the SAME viewerCanAuthor predicate,
   // so those levers close in lockstep with this Dock and the widening is gone.
   // The RESIDUAL blackout — an entitled owner whose saved dossier arrives
-  // readOnly with mapCanEdit=false — is unchanged and still owner-gated (rides
-  // G-2b promotion); tracked in the plan's Deferred ledger.
+  // readOnly with mapCanEdit=false or an unhydrated owner scope, stranding the
+  // save-scoped intents hydrateFromSave deliberately preserves — is CLOSED by
+  // owner order (2026-07-27). `canReview` decouples the review surface from the
+  // authoring surface: reviewing work you already staged is an entitlement
+  // question, so it derives from this same fail-closed viewerCanAuthor read and
+  // from nothing upstream, while `readOnly` keeps closing the staging levers
+  // (Edit NPC details, the prose editor, the rename door). Free/anon therefore
+  // change not at all — canAuthor=false makes readOnly true AND canReview false
+  // — which is the R-5b closure preserved, pinned as a negative control.
   const canAuthor = useStore(viewerCanAuthor);
   if (!enabled) return null;
   return (
     <Suspense fallback={<span role="status">Opening settlement tools…</span>}>
-      <SettlementWorkbench readOnly={readOnly || !canAuthor} />
+      <SettlementWorkbench readOnly={readOnly || !canAuthor} canReview={canAuthor} />
     </Suspense>
   );
 }

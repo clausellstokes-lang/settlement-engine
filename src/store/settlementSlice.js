@@ -27,6 +27,7 @@
  * top-level store graph made every visitor download that presentation leaf.
  * @type {?{
  *   generateSettlementPipeline:Function,
+ *   carryLockedRosterThroughGenerate:Function,
  *   regenNPCsPipeline:Function,
  *   regenHistoryPipeline:Function,
  *   generateSeed:Function,
@@ -46,6 +47,7 @@ function loadEngine() {
   ]).then(([pipe, prng, metadata]) => {
     _engineModule = {
       generateSettlementPipeline: pipe.generateSettlementPipeline,
+      carryLockedRosterThroughGenerate: pipe.carryLockedRosterThroughGenerate,
       regenNPCsPipeline:          pipe.regenNPCsPipeline,
       regenHistoryPipeline:       pipe.regenHistoryPipeline,
       generateSeed:               prng.generateSeed,
@@ -105,7 +107,7 @@ import {
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, resetRosterLocksAfterGenerate, persistLocksToActiveSave } from './settlementSliceHelpers.js';
+  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, remapLocksAfterGenerate, persistLocksToActiveSave } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -132,7 +134,7 @@ import { runAuthoritativeCanonEventFromSlice } from './canonEventCommandEntry.js
 // the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
 // Settlements-list + change-queue affordances consume. See each helper's header.
 import {
-  renameSettlementImpl, canonizeSavedSettlementImpl,
+  renameSettlementImpl, canonizeSavedSettlementImpl, renameFactionImpl,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -815,17 +817,25 @@ export const createSettlementSlice = (set, get) => ({
       // below; the save keeps its own settlement and crises) — carrying the
       // old save's world/party conditions onto the new identity would clone
       // the campaign layer onto an unrelated town.
-      // LOCKS ENGINE Phase A — the POST-HOC half: identity (the name) and history
-      // (the whole section the user froze) are carried over the finished roll. The
-      // draw already happened, so this cannot perturb a seeded run; an unlocked
-      // settlement gets `result` back unchanged, same reference.
-    const locked = carryLockedSections(state.locks, state.settlement, result);
+      // LOCKS ENGINE — the POST-HOC half, in two steps over the FINISHED roll (so
+      // neither can perturb a seeded run; an unlocked settlement gets `result`
+      // back by the same reference through both):
+      //   Phase B — the locked CHARACTERS are carried bodily into the new town,
+      //     each taking over a fresh slot and inheriting its id. `_preservation`
+      //     is the out-of-band report that lets the lock map follow them; it is
+      //     destructured off here and never enters the settlement blob.
+      //   Phase A — identity (the name) and history (the whole section the user
+      //     froze) are carried across.
+      // The carry ignores activeSaveId on purpose: a lock is the user's standing
+      // instruction about what to keep, and Phase A's name/history carry has
+      // always crossed that boundary. Only the campaign-layer condition carry
+      // below is guarded, because those belong to a save, not to an intent.
+    const { settlement: withRoster, _preservation } = eng.carryLockedRosterThroughGenerate(state.settlement, result, state.locks);
+    const locked = carryLockedSections(state.locks, state.settlement, withRoster);
     const reconciled = state.activeSaveId
       ? locked
       : reconcileSettlementChange(locked, state.settlement, {
-          source: 'regenerate',
-          changeType: 'GENERATE_SETTLEMENT',
-          changeLabel: locked?.name,
+          source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: locked?.name,
         });
       // W-F6 THE PREMIUM GATE — turn the key at generation-complete. A premium
       // account activates the seed's latent starting pantheon into live embeds
@@ -851,13 +861,13 @@ export const createSettlementSlice = (set, get) => ({
         // run's own lifecycle fields below. Without this, the prior settlement's
         // queued edits / successor prompt / draft timeline survived onto the new town.
         resetSettlementIdentity(state);
-        // LOCKS ENGINE Phase A — the id arrays named members of a roster that no
-        // longer exists; the booleans are statements about the settlement and
-        // survive. Keeping the arrays would leave the map advertising a protection
-        // nothing performs, which is the exact defect this engine closes. Phase B
-        // (carrying locked characters THROUGH a full generate) is deferred and
-        // documented in domain/locksPreservation.js — not a bug to re-find.
-        resetRosterLocksAfterGenerate(state);
+        // LOCKS ENGINE Phase B — rewrite the map to the world that now exists:
+        // each locked NPC id becomes the id its subject inherited in the carry
+        // above, an id nothing preserved is pruned, and the name-keyed faction /
+        // institution arrays and the booleans are kept. Run inside the same set()
+        // that folds the settlement in, so the map and the roster can never
+        // disagree. See domain/locksPreservation.js for the identity split.
+        remapLocksAfterGenerate(state, _preservation);
         state.settlement = withFaith;
         state.activeSaveId = null;
         state.lastSeed = seed;
@@ -1342,29 +1352,15 @@ export const createSettlementSlice = (set, get) => ({
     if (changed) get().persistActiveSaveEdit?.();
   },
 
-  renameFaction: (factionIndex, newName) => {
-    let changed = false;
-    set(state => {
-      // Campaign-clock identity lock: faction names freeze at canonization.
-      if (state.phase === 'canon') return;
-      // Canonical factions live on powerStructure.factions; settlement.factions
-      // is a usually-empty legacy mirror. The old code only saw the mirror, so
-      // a rename silently no-opped on every generated settlement. Resolve the
-      // canonical list first, falling back to the legacy array.
-      const list = state.settlement?.powerStructure?.factions?.length
-        ? state.settlement.powerStructure.factions
-        : state.settlement?.factions;
-      const fac = list?.[factionIndex];
-      if (!fac) return;
-      // Faction records label on `.faction` (generated) or `.name` (edited/
-      // legacy); keep both in sync so every reader (findFaction checks both)
-      // sees the new name.
-      fac.name = newName;
-      if ('faction' in fac) fac.faction = newName;
-      changed = true;
-    });
-    if (changed) get().persistActiveSaveEdit?.();
-  },
+  // THE CONVERGED faction rename (owner queue #14). The body lives in
+  // settlementRenameHelpers.renameFactionImpl: it resolves the CANONICAL
+  // powerStructure.factions list, dual-writes `.faction` + `.name`, cascades
+  // the new name through every surface in domain/factionRename.js
+  // FACTION_RENAME_SURFACES and into every neighbour save, then persists and
+  // hands the narrative blob to applyCosmeticRename. Returns the cascade result
+  // so the pending-edits writer can build an honest receipt.
+  renameFaction: (factionIndex, newName) =>
+    renameFactionImpl(get, set, factionIndex, newName),
 
   // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
   //

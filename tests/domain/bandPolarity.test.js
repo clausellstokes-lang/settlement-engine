@@ -37,6 +37,7 @@ import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { compareSystemState } from '../../src/domain/state/compareSystemState.js';
 import { layerAuthoredDeltas } from '../../src/domain/events/eventPipeline.js';
 import {
+  CAUSAL_BANDS,
   deriveCausalState,
   causalBandWord,
   compareCausalState,
@@ -296,9 +297,27 @@ describe('G10 — the substrate band WORD reaches the reader polarity-correct', 
     }
   });
 
-  test('a benign band on the lower-is-better variable falls through unchanged', () => {
-    expect(causalBandWord('criminal_opportunity', 'surplus')).toBe('surplus');
-    expect(causalBandWord('criminal_opportunity', 'adequate')).toBe('adequate');
+  test('the BENIGN end of the same ladder is worded too (the ADEQUATE defect)', () => {
+    // These two used to fall through to the raw band, so a settlement with almost
+    // no crime printed "Criminal opportunity · ADEQUATE" — read by a human as the
+    // crime being adequate, the same lie as COLLAPSED at the other end.
+    expect(causalBandWord('criminal_opportunity', 'adequate')).toBe('Contained');
+    expect(causalBandWord('criminal_opportunity', 'surplus')).toBe('Negligible');
+  });
+
+  test('the ladder is TOTAL — no band on the lower-is-better variable prints its raw word', () => {
+    for (const band of CAUSAL_BANDS) {
+      const word = causalBandWord('criminal_opportunity', band);
+      expect(word, `band '${band}' fell through to the raw word`).not.toBe(band);
+      expect(word.length).toBeGreaterThan(0);
+    }
+    // The five words are distinct, so two bands can never read the same.
+    const words = CAUSAL_BANDS.map(b => causalBandWord('criminal_opportunity', b));
+    expect(new Set(words).size).toBe(CAUSAL_BANDS.length);
+  });
+
+  test('an unknown band still falls through rather than throwing (tolerance control)', () => {
+    expect(causalBandWord('criminal_opportunity', 'unheard_of')).toBe('unheard_of');
   });
 
   test('the delta sentence names the problem, not its opposite', () => {

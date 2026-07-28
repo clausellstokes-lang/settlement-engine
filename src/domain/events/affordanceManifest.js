@@ -119,6 +119,15 @@ export const NON_AUTHORABLE_EVENTS = new Set([
 
 // ── Target options (moved from eventComposer/helpers.js buildTargetOptions —
 // domain-pure; helpers.js re-exports for its old callers) ────────────────────
+//
+// A SECOND DESK MIRRORS THESE, DELIBERATELY: the Session Ledger offers the same
+// institution/resource rosters from domain/events/targetRosters.js. Single-
+// sourcing them here was tried and REVERTED — a leaf imported by two different
+// LAZY chunks (this manifest's and the ledger's) is hoisted by Rollup into the
+// entry chunk, which measured +3,985 B of first paint and blew the closure
+// budget. The mirror is the cheaper half of that trade; parity is pinned in
+// tests/domain/tableLedger.test.js against the very entries below, so the two
+// copies cannot drift without a red.
 
 /** Build {id, name} options from a dossier collection for the target picker.
  * @param {Mut} settlement

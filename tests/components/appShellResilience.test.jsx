@@ -69,7 +69,6 @@ function makeState(overrides = {}) {
     settlement: null,
     initAuth: vi.fn(),
     authSignOut: vi.fn(),
-    initOnboarding: vi.fn(),
     onboardingNudge: null,
     clearOnboardingNudge: vi.fn(),
     purchaseModalOpen: false,

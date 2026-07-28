@@ -20,7 +20,10 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
-import { validateTableEvent, buildTableEffect, TABLE_EVENT_SOURCE } from '../../src/domain/tableLedger.js';
+import {
+  validateTableEvent, buildTableEffect, TABLE_EVENT_SOURCE,
+  TABLE_EVENT_KINDS, KIND_SPEC,
+} from '../../src/domain/tableLedger.js';
 
 const stubSlice = () => ({
   auth: { user: null, tier: 'free', loading: false },
@@ -35,14 +38,40 @@ const makeStore = () => create(immer((...a) => ({ ...stubSlice(...a), ...createS
 function canonFixture() {
   return {
     id: 'town.bridgeford', tier: 'town', name: 'Bridgeford', population: 1500,
-    config: { monsterThreat: 'safe' },
-    institutions: [{ id: 'inst.market', name: 'Market' }],
+    // The economy verbs need something to act on: a whole institution and a
+    // wounded one, a resource still worked and one already gone.
+    config: {
+      monsterThreat: 'safe',
+      nearbyResources: ['timber', 'iron'],
+      nearbyResourcesDepleted: ['iron'],
+    },
+    institutions: [
+      { id: 'inst.market', name: 'Market' },
+      {
+        id: 'inst.granary', name: 'Granary',
+        impairments: [{ type: 'capacity', severity: 0.3, causeEventId: 'seed.wound' }],
+      },
+    ],
     powerStructure: { factions: [], conflicts: [] },
     stressors: [{ type: 'famine', name: 'famine', label: 'A failing harvest', severity: 0.6, status: 'active' }],
-    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster' }],
+    // Corrupt, so EXPOSE_CORRUPTION has something to act on (the exposure kind
+    // vetoes target_not_found on a clean NPC — pre-existing engine behavior).
+    npcs: [{ id: 'npc.aldis', name: 'Aldis', role: 'Guildmaster', corrupt: true }],
     history: { historicalEvents: [], currentTensions: [] },
   };
 }
+
+/** A valid target on canonFixture for every kind in the closed vocabulary. */
+const REF_FOR_KIND = {
+  incident: null,
+  'stressor-relief': 'famine',
+  obligation: 'debt',
+  exposure: 'npc.aldis',
+  'structure-harm': 'inst.market',
+  'structure-restored': 'inst.granary',
+  'supply-loss': 'timber',
+  'supply-restored': 'iron',
+};
 
 const SAVE_ID = 'save-canon-1';
 
@@ -153,6 +182,248 @@ describe('R-1 the session ledger commits typed, bounded, source:table effects', 
     });
     await store.getState().commitPendingEdits();
     expect(store.getState().eventLog.some(e => e.event?.type === 'DESTROY_SETTLEMENT')).toBe(false);
+  });
+});
+
+// ── THE FOUR ECONOMY VERBS (atlas Part VII #11) ─────────────────────────────
+// Four table kinds riding four EXISTING engine event types. These pins are the
+// lockstep guard across the lane's four vocabulary sites (tableLedger KIND_SPEC,
+// pendingEditIntents TABLE_EFFECTS, the writer's TABLE_AUTHORABLE set, and the
+// eager tableEvents mirror): a kind that half-landed commits nothing, and the
+// totality loop below is what says so out loud.
+describe('R-5 the table economy verbs reach the world through existing physics', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); withCanonSave(store); });
+
+  const institutionNamed = (state, id) =>
+    state.settlement.institutions.find(i => i.id === id);
+
+  test('structure-harm(major) writes a banded capacity impairment, persists, survives reload', async () => {
+    const FLAVOR = 'raiders fired the market stalls and the roof came down';
+    await queueTableEvent(store, {
+      kind: 'structure-harm', magnitude: 'major',
+      targets: { ref: 'inst.market', label: 'Market' }, flavor: FLAVOR,
+    });
+    await store.getState().commitPendingEdits();
+
+    const receipt = store.getState().eventLog.find(e => e.event?.type === 'IMPAIR_INSTITUTION');
+    expect(receipt).toBeTruthy();
+    expect(receipt.event.source).toBe('table');
+    expect(receipt.event.tableFlavor).toBe(FLAVOR);
+    // The mechanical surface carries the band and the fixed dimension only.
+    expect(receipt.event.payload).toEqual({ severity: 0.8, dimension: 'capacity' });
+    const mechanical = JSON.stringify({ targetId: receipt.event.targetId, payload: receipt.event.payload });
+    expect(mechanical).not.toContain('raiders');
+    expect(mechanical).not.toContain('roof');
+
+    // The world actually changed: the institution carries the wound.
+    const wound = institutionNamed(store.getState(), 'inst.market').impairments.at(-1);
+    expect(wound.type).toBe('capacity');
+    expect(wound.severity).toBe(0.8);
+
+    await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
+    const reloaded = reloadInto(persistedEntry(store));
+    expect(reloaded.eventLog.some(e => e.event?.type === 'IMPAIR_INSTITUTION' && e.event.source === 'table')).toBe(true);
+    expect(institutionNamed(reloaded, 'inst.market').impairments.at(-1).severity).toBe(0.8);
+  });
+
+  test('harm then mend on the SAME institution removes the wound (the lifecycle pair)', async () => {
+    await queueTableEvent(store, {
+      kind: 'structure-harm', magnitude: 'moderate',
+      targets: { ref: 'inst.market', label: 'Market' }, flavor: 'a fire',
+    });
+    await store.getState().commitPendingEdits();
+    expect(institutionNamed(store.getState(), 'inst.market').impairments).toHaveLength(1);
+
+    await queueTableEvent(store, {
+      kind: 'structure-restored',
+      targets: { ref: 'inst.market', label: 'Market' }, flavor: 'the guild rebuilt it',
+    });
+    await store.getState().commitPendingEdits();
+
+    // RESTORE heals the LATEST impairment — here the only one, so the market is whole.
+    expect(institutionNamed(store.getState(), 'inst.market').impairments || []).toHaveLength(0);
+    const mend = store.getState().eventLog.find(e => e.event?.type === 'RESTORE_INSTITUTION');
+    expect(mend.event.source).toBe('table');
+    expect(mend.event.payload).toEqual({});
+  });
+
+  test('supply-loss depletes a worked resource; supply-restored clears BOTH formats', async () => {
+    await queueTableEvent(store, {
+      kind: 'supply-loss', targets: { ref: 'timber', label: 'timber' }, flavor: 'the mill flooded',
+    });
+    await store.getState().commitPendingEdits();
+    let cfg = store.getState().settlement.config;
+    expect(cfg.nearbyResourcesDepleted).toContain('timber');
+    expect(cfg.nearbyResourcesState.timber).toBe('depleted');
+
+    // 'iron' starts depleted in the fixture (array format only) — recovering it
+    // must clear the array entry AND not leave a stale 'depleted' state key.
+    await queueTableEvent(store, {
+      kind: 'supply-restored', targets: { ref: 'iron', label: 'iron' }, flavor: 'the seam reopened',
+    });
+    await store.getState().commitPendingEdits();
+    cfg = store.getState().settlement.config;
+    expect(cfg.nearbyResourcesDepleted).not.toContain('iron');
+    expect(cfg.nearbyResourcesState?.iron).not.toBe('depleted');
+
+    const back = store.getState().eventLog.find(e => e.event?.type === 'RECOVERED_RESOURCE');
+    expect(back.event.source).toBe('table');
+    // A BARE payload: the engine's own 0.7 severity default stands. The dial is
+    // withheld on legibility grounds, not because the engine ignores it.
+    expect(back.event.payload).toEqual({});
+  });
+
+  test('an economy verb TRIPS the R-3 freshness note (the detector working as designed)', async () => {
+    const { economyFreshnessNote } = await import('../../src/domain/display/economyFreshness.js');
+    expect(economyFreshnessNote(store.getState().settlement)).toBeNull();
+
+    await queueTableEvent(store, {
+      kind: 'structure-harm', magnitude: 'major',
+      targets: { ref: 'inst.market', label: 'Market' }, flavor: 'a fire',
+    });
+    await store.getState().commitPendingEdits();
+
+    const trail = store.getState().settlement.reconciliationLog;
+    expect(trail.at(-1).changeType).toBe('IMPAIR_INSTITUTION');
+    // IMPAIR_INSTITUTION declares economy keys in RERUN_KEYS_FOR_EVENT, so the
+    // tallies are now older than the world. Saying so is CORRECT, not a defect.
+    expect(economyFreshnessNote(store.getState().settlement)).toBeTruthy();
+  });
+
+  test('a MAJOR harm on a food anchor starves the town; a moderate one does not', async () => {
+    // The sharpest consequence of the new verb, DECLARED rather than discovered.
+    // impairInstitution raises the settlement-level food crisis only at severity
+    // >= 0.6 with a capacity dimension, so 'major' (0.8) crosses it and
+    // 'moderate' (0.5) does not. The Granary is a food anchor; the Market is not.
+    const anchorLost = (s) => (s.settlement.activeConditions || [])
+      .some(c => c.archetype === 'food_anchor_lost');
+
+    await queueTableEvent(store, {
+      kind: 'structure-harm', magnitude: 'moderate',
+      targets: { ref: 'inst.granary', label: 'Granary' }, flavor: 'a cracked wall',
+    });
+    await store.getState().commitPendingEdits();
+    expect(anchorLost(store.getState())).toBe(false);
+
+    const grave = makeStore();
+    withCanonSave(grave);
+    await queueTableEvent(grave, {
+      kind: 'structure-harm', magnitude: 'major',
+      targets: { ref: 'inst.granary', label: 'Granary' }, flavor: 'the granary burned',
+    });
+    await grave.getState().commitPendingEdits();
+    expect(anchorLost(grave.getState())).toBe(true);
+
+    // A non-anchor never raises it, however grave the harm.
+    const market = makeStore();
+    withCanonSave(market);
+    await queueTableEvent(market, {
+      kind: 'structure-harm', magnitude: 'major',
+      targets: { ref: 'inst.market', label: 'Market' }, flavor: 'razed',
+    });
+    await market.getState().commitPendingEdits();
+    expect(anchorLost(market.getState())).toBe(false);
+  });
+
+  test('a stray mechanical field on a bare kind is CANONICALIZED away, not refused', async () => {
+    // The same admission contract the obligation kind has carried since R-1
+    // (pendingEditTransaction.test.js), now pinned for the dial-free kinds: the
+    // queue stores only the reconstructed payload, so an unrecognized field is
+    // scrubbed rather than becoming a refusal the DM cannot act on. The wall
+    // against a smuggled DIAL is separate and lives on the record.
+    const { record } = validateTableEvent({
+      kind: 'supply-loss', targets: { ref: 'timber', label: 'timber' }, flavor: 'gone',
+    });
+    const directive = buildTableEffect(record);
+    directive.event.payload = { unrecognizedMechanicalField: 99 };
+    const intent = await store.getState().queueEdit('table-event', { directive, record });
+
+    expect(intent).not.toBeNull();
+    expect(intent.payload.directive.event.payload).toEqual({});
+
+    // But a smuggled DIAL on a dial-free kind is refused outright.
+    const smuggled = await store.getState().queueEdit('table-event', {
+      directive: buildTableEffect(record),
+      record: { ...record, band: 'major', severity: 0.8 },
+    });
+    expect(smuggled).toBeNull();
+  });
+
+  test('the writer FAILS CLOSED on a sibling event type outside the closed set', async () => {
+    // IMPAIR_FACTION is real physics the composer can author — but it is NOT
+    // table-authorable, and a fabricated directive must not smuggle it in.
+    await store.getState().queueEdit('table-event', {
+      directive: {
+        dispatch: 'applyEvent',
+        event: { type: 'IMPAIR_FACTION', targetId: 'fac.x', payload: { severity: 0.8 }, source: 'table' },
+      },
+    });
+    await store.getState().commitPendingEdits();
+    expect(store.getState().eventLog.some(e => e.event?.type === 'IMPAIR_FACTION')).toBe(false);
+  });
+
+  test('EVERY kind in the closed vocabulary commits end-to-end (the lockstep totality loop)', async () => {
+    for (const kind of TABLE_EVENT_KINDS) {
+      const fresh = makeStore();
+      withCanonSave(fresh);
+      const spec = KIND_SPEC[kind];
+      const ref = REF_FOR_KIND[kind];
+      expect(ref === null, `${kind} has no fixture target`).toBe(!spec.needsTarget);
+
+      const queued = await queueTableEvent(fresh, {
+        kind,
+        flavor: `a ${kind} happened`,
+        ...(spec.needsMagnitude ? { magnitude: 'moderate' } : {}),
+        ...(spec.needsTarget ? { targets: { ref, label: String(ref) } } : {}),
+      });
+      expect(queued, `${kind} was refused at admission`).not.toBeNull();
+      await fresh.getState().commitPendingEdits();
+
+      // Every kind leaves a source:'table' receipt — a flavor line for the one
+      // flavor kind, an engine-event entry for the seven mechanical ones.
+      const log = fresh.getState().eventLog;
+      const receipt = spec.dispatch === 'flavor'
+        ? log.find(e => e.type === 'TABLE_INCIDENT')
+        : log.find(e => e.event?.type === spec.eventType);
+      expect(receipt, `${kind} committed NOTHING`).toBeTruthy();
+      const stamped = spec.dispatch === 'flavor' ? receipt.source : receipt.event.source;
+      expect(stamped, kind).toBe('table');
+      // And nothing is left behind in the queue pretending to still be pending.
+      expect(fresh.getState().pendingEditsQueue.filter(e => !e.reverted && !e.revertedAt), kind).toHaveLength(0);
+    }
+  });
+
+  test('an unresolvable INSTITUTION ref is REFUSED typed and stays queued for review', async () => {
+    // The tri-state honesty leg: a ref the handler cannot resolve vetoes, and
+    // the intent is kept for the DM to fix — never silently cleared as applied.
+    await queueTableEvent(store, {
+      kind: 'structure-harm', magnitude: 'moderate',
+      targets: { ref: 'inst.nowhere', label: 'Nowhere' }, flavor: 'a ghost',
+    });
+    const result = await store.getState().commitPendingEdits();
+
+    expect(store.getState().eventLog.some(e => e.event?.type === 'IMPAIR_INSTITUTION')).toBe(false);
+    expect(result.status).not.toBe('applied');
+    const still = store.getState().pendingEditsQueue
+      .filter(e => e.kind === 'table-event' && !e.reverted && !e.revertedAt);
+    expect(still).toHaveLength(1);
+  });
+
+  test('an off-roster RESOURCE ref is recorded, not vetoed (declared handler behavior)', async () => {
+    // DECLARED, NOT A DEFECT, and pinned so it is never re-found as one: unlike
+    // findInstitution, resolveRosterKey falls back to the SLUG of the raw ref
+    // (`rosterMatch || slug`), so DEPLETE/RECOVERED_RESOURCE accept a key the
+    // live roster does not hold. That is deliberate upstream — mutateWorld's own
+    // comment notes a re-rolled roster may only gain the key later, and the
+    // recovered record is what forces it out there. Only an EMPTY ref vetoes
+    // empty_target. The picker cannot produce an off-roster ref (its rosters are
+    // drawn from live state); a clerk proposal could, and lands here.
+    await queueTableEvent(store, {
+      kind: 'supply-loss', targets: { ref: 'unobtainium', label: 'unobtainium' }, flavor: 'a ghost',
+    });
+    await store.getState().commitPendingEdits();
+    expect(store.getState().settlement.config.nearbyResourcesDepleted).toContain('unobtainium');
   });
 });
 

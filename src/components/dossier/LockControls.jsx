@@ -1,5 +1,5 @@
 /**
- * LockControls.jsx — the surface of the LOCKS ENGINE (Phase A).
+ * LockControls.jsx — the whole-section / world surface of the LOCKS ENGINE.
  *
  * A lock is the user's standing instruction "keep this when you roll again". The
  * store has written `state.locks` for a year; domain/locksPreservation.js is the
@@ -37,7 +37,12 @@ import Button from '../primitives/Button.jsx';
 const SECTIONS = {
   npcs: {
     label: 'the people',
-    locked: 'Locked. Rerolls keep the people here.',
+    // The boundary is said out loud because the roster rows beside this control
+    // now promise more than it does: locks engine Phase B carries an INDIVIDUALLY
+    // locked character into a brand-new settlement, while this whole-section
+    // boolean stops at rerolls (freezing a whole cast through a fresh roll would
+    // nullify the roll — deliberately not built).
+    locked: 'Locked. Rerolls keep the people here. A brand-new settlement still gets a new cast, so lock people one by one to bring them along.',
     open: 'Rerolls can replace the people here.',
     lockCta: 'Keep these people',
     unlockCta: 'Allow rerolls',
@@ -125,9 +130,11 @@ export default function LockControls({ scope, onReroll = null, style }) {
   const copy = SECTIONS[scope];
   if (!copy) return null;
   // A whole-section lock is the boolean form of the key; the ARRAY form of the
-  // same key names individuals and is a Phase-A engine capability with no
-  // per-row control yet (deliberately deferred — see the tab's mount comment).
-  // Reading `=== true` keeps the two forms from being confused for each other.
+  // same key names individuals and is driven from the roster rows themselves
+  // (NPC_LOCK_COPY in components/new/npcComponents.jsx). Reading `=== true` keeps
+  // the two forms from being confused for each other: a row toggle must never
+  // write its array over this boolean, which would silently unlock the section,
+  // so the row reports the section lock instead of overwriting it.
   const on = locks?.[scope] === true;
   return (
     <div style={{ ...rowStyle, ...style }}>

@@ -8,6 +8,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   TABLE_EVENT_KINDS,
+  TABLE_EVENT_META,
   MAGNITUDE_BANDS,
   TABLE_EVENT_SOURCE,
   isTableEventKind,
@@ -24,8 +25,11 @@ import {
 } from '../../src/domain/tableEvents.js';
 
 describe('the closed vocabulary (V-F parity)', () => {
-  it('is exactly the four mirrored kinds, frozen', () => {
-    expect([...TABLE_EVENT_KINDS]).toEqual(['incident', 'stressor-relief', 'obligation', 'exposure']);
+  it('is exactly the eight mirrored kinds, in order, frozen', () => {
+    expect([...TABLE_EVENT_KINDS]).toEqual([
+      'incident', 'stressor-relief', 'obligation', 'exposure',
+      'structure-harm', 'structure-restored', 'supply-loss', 'supply-restored',
+    ]);
     expect(Object.isFrozen(TABLE_EVENT_KINDS)).toBe(true);
   });
   it('is exactly the three named bands, frozen', () => {
@@ -35,6 +39,41 @@ describe('the closed vocabulary (V-F parity)', () => {
   it('provenance stamp is the literal table source (the soak excludes it)', () => {
     expect(TABLE_EVENT_SOURCE).toBe('table');
   });
+  it('display metadata is TOTAL over the vocabulary (the review UI can pick any kind)', () => {
+    expect(Object.keys(TABLE_EVENT_META).sort()).toEqual([...TABLE_EVENT_KINDS].sort());
+    for (const kind of TABLE_EVENT_KINDS) {
+      const meta = TABLE_EVENT_META[kind];
+      expect(meta.label, kind).toBeTruthy();
+      expect(meta.effect, kind).toBeTruthy();
+      expect(meta.verb, kind).toBeTruthy();
+    }
+  });
+
+  it('a news entry for EVERY kind composes from typed fields, never from undefined', () => {
+    // A missing META row would ship "undefined at the table" as a headline.
+    for (const kind of TABLE_EVENT_KINDS) {
+      const rec = buildTableEvent({ kind, band: 'moderate', tick: 3, targets: { settlementIds: ['s1'] }, flavor: 'a line' });
+      const news = tableEventToNewsEntry(rec);
+      expect(news.headline, kind).not.toContain('undefined');
+      expect(news.impactKind, kind).toBe(`table_${kind.replace(/-/g, '_')}`);
+      // NEWS ADDRESS LAW: the affected settlement rides by id, and the DM's
+      // words stay in the summary — never parsed into a typed field.
+      expect(news.settlementIds, kind).toEqual(['s1']);
+      expect(news.summary, kind).toBe('a line');
+      expect(news.source, kind).toBe('table');
+    }
+  });
+
+  it('the deterministic clerk never throws on a kind with no keyword row', () => {
+    // KIND_KEYWORDS is DELIBERATELY partial over the vocabulary (the four
+    // economy kinds carry no rows — eager bytes). classifySegment must iterate
+    // the keyword table, not the vocabulary, or adding a kind crashes the clerk.
+    expect(() => proposeBuckets('the granary burned and a caravan was looted')).not.toThrow();
+    for (const p of proposeBuckets('a debt fell due. the harvest was saved.')) {
+      expect(TABLE_EVENT_KINDS).toContain(p.kind);
+    }
+  });
+
   it('kind/band guards reject anything outside the vocabulary', () => {
     expect(isTableEventKind('incident')).toBe(true);
     expect(isTableEventKind('coup')).toBe(false);

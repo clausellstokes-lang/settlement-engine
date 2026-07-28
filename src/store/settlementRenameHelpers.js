@@ -9,10 +9,15 @@
  *   • canonizeSavedSettlementImpl  — canonize a saved settlement BY ID (list row).
  *   • recordCanonFlavorEntryImpl   — append a canon-only flavor timeline line.
  *   • syncActiveNeighbourFieldsImpl — flush-only neighbour-field reconcile.
+ *   • renameFactionImpl            — the CONVERGED faction rename (queue #14).
+ *                                    ASYNC: it fetches its cascade module at the
+ *                                    call seam to keep it off first paint.
  *
- * NPC / faction renames stay INLINE in settlementSlice (renameNPC / renameFaction)
- * — OUR slice already carries the canon-locked versions; they are not duplicated
- * here.
+ * The NPC rename stays INLINE in settlementSlice (renameNPC) — it writes one
+ * field on one entity and needs no cascade. The FACTION rename moved here when
+ * it gained one: it now walks eleven name-keyed surfaces plus every neighbour
+ * save, which is an action body, not a two-line write, and settlementSlice sits
+ * at its frozen max-lines ceiling.
  *
  * Wave 4a composition note: recordCanonFlavorEntry and syncActiveNeighbourFields
  * consult `get().flushSuppressPersist`, and renameSettlement defers its cloud
@@ -26,6 +31,11 @@
  * never imports settlementSlice, so there is no cycle.
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
+
+// NO STATIC IMPORT OF ../domain/factionRename.js — see the FIRST-PAINT note on
+// renameFactionImpl. This module is reached from the EAGER settlementSlice, so a
+// static edge here drags the whole cascade (~8.6 kB minified) into the entry's
+// first-paint closure. It is fetched at the action seam instead.
 
 // RETIRED (R-5b, owner queue #21): `syncActiveNeighbourFieldsImpl` and its store
 // wrapper `syncActiveNeighbourFields`. DEAD IN BOTH HALVES — neither the Impl nor
@@ -252,4 +262,131 @@ export function canonizeSavedSettlementImpl(get, set, id) {
     }).catch(() => {});
   }
   return true;
+}
+
+/**
+ * THE CONVERGED FACTION RENAME (atlas presentation-scene gaps 1 / 1b / 2, owner
+ * queue #14). One call now does what the two divergent lanes each did half of:
+ *
+ *   1. resolve on the CANONICAL `powerStructure.factions` list (legacy
+ *      `settlement.factions` only as the pre-pipeline fallback) — the store
+ *      lane's contribution, and the reason the gallery rename used to no-op on
+ *      every generated settlement;
+ *   2. cascade the new name through every in-settlement surface enumerated in
+ *      domain/factionRename.js FACTION_RENAME_SURFACES, dual-writing `.faction`
+ *      and `.name` so no reader sees a half-renamed record;
+ *   3. cascade into every NEIGHBOUR save whose links point back at this
+ *      settlement — the library lane's contribution;
+ *   4. persist the active save and each touched neighbour row, then hand the
+ *      ai_data narrative to its own registered writer (applyCosmeticRename).
+ *
+ * Canon-locked: faction names freeze at canonization, matching renameNPC. The
+ * caller sees a typed-ish result rather than a bare boolean because the queue
+ * writer needs the OLD name for its receipt.
+ *
+ * DELIBERATELY DEFERRED — documented, not a bug to re-find. UNDO IS
+ * SINGLE-SAVE. When this rename is committed through the pending-edits queue,
+ * the Change Dock's snapshot undo (revertToSnapshot, settlementSlice) reads ONE
+ * save's versionHistory and restores ONE settlement. The neighbour rows this
+ * function rewrote keep the NEW name after that undo, and the compensating
+ * action is to rename back. Widening undo to span saves means a cross-save
+ * snapshot, which is a persistence-shape change and owner-gated. This is not a
+ * regression: the library lane cascaded to neighbours with no undo at all, so
+ * the host settlement gaining one is strictly more recovery than existed.
+ *
+ * FIRST-PAINT: ASYNC BY CONSTRUCTION (2026-07-28). domain/factionRename.js is a
+ * ~8.6 kB minified cascade whose only eager path into the bundle was the static
+ * import this module used to carry, so the whole surface census rode the entry
+ * chunk for every visitor who never renames anything. It is now fetched at the
+ * call seam — the same idiom settlementSlice uses for loadEngine and
+ * setPrimaryDeity — which makes this function return a PROMISE. That is sound
+ * here and nowhere near a hot path: a faction rename is an explicit, one-at-a-
+ * time user action, already routed through the staged-change queue. The await
+ * happens AFTER the two cheap refusals (so a refused call fetches nothing) and
+ * BEFORE any work begins, so every cascade call below is byte-identical and
+ * still fully synchronous inside the Immer producer. The producer's own
+ * re-resolve guard (`target.currentName !== oldName`) was already the defense
+ * against the roster moving under this call, and it now also covers the await
+ * window: a concurrent write can only make this rename REFUSE, never misfire.
+ *
+ * @param {Function} get  the slice's get()
+ * @param {Function} set  the slice's set() (Immer producer)
+ * @param {number} factionIndex  position in the resolved faction list
+ * @param {string} newName
+ * @returns {Promise<{ changed: boolean, oldName: string|null, newName: string|null,
+ *   touched: string[], modifiedSaveIds: string[] }>}
+ */
+export async function renameFactionImpl(get, set, factionIndex, newName) {
+  const idle = { changed: false, oldName: null, newName: null, touched: [], modifiedSaveIds: [] };
+  const trimmed = String(newName || '').trim();
+  const before = get();
+  // Campaign-clock identity lock: faction names freeze at canonization.
+  if (!trimmed || before.phase === 'canon') return idle;
+  const {
+    applyFactionRenameToPartner,
+    applyFactionRenameToSettlement,
+    resolveFactionForRename,
+  } = await import('../domain/factionRename.js');
+  // Re-read after the await: `before` is a pre-fetch snapshot, and resolving
+  // against the CURRENT settlement is what keeps the oldName this call commits
+  // to honest.
+  const resolved = resolveFactionForRename(get().settlement, factionIndex);
+  if (!resolved || resolved.currentName === trimmed) return idle;
+  const oldName = resolved.currentName;
+
+  /** @type {string[]} */
+  let touched = [];
+  // RAW save ids, not stringified: applyCosmeticRename matches with `===`, so a
+  // stringified numeric id would silently skip the narrative cascade.
+  /** @type {any[]} */
+  const modifiedSaves = [];
+  set(state => {
+    // Re-resolve inside the producer: the index is only a stable target for as
+    // long as the roster has not moved under a concurrent write.
+    const target = resolveFactionForRename(state.settlement, factionIndex);
+    if (!target || target.currentName !== oldName) return;
+    const result = applyFactionRenameToSettlement(state.settlement, oldName, trimmed);
+    if (!result.changed) return;
+    touched = result.touched;
+    const hostName = String(state.settlement?.name || '');
+    const activeId = String(state.activeSaveId || '');
+    const saves = Array.isArray(state.savedSettlements) ? state.savedSettlements : [];
+    for (let i = 0; i < saves.length; i += 1) {
+      const save = saves[i];
+      if (!save || String(save.id) === activeId) continue;
+      const next = applyFactionRenameToPartner(save.settlement, hostName, oldName, trimmed);
+      if (!next.changed) continue;
+      saves[i] = { ...save, settlement: next.settlement };
+      modifiedSaves.push(save.id);
+    }
+  });
+  if (!touched.length) return idle;
+
+  get().persistActiveSaveEdit?.();
+  // Read the finalized rows back out of the store rather than closing over the
+  // Immer drafts: a draft is revoked the moment its producer returns, so
+  // cloning one here would throw.
+  const after = get();
+  for (const saveId of modifiedSaves) {
+    const row = (after.savedSettlements || []).find(s => String(s?.id) === String(saveId));
+    if (row?.settlement) persistSaveUpdate(row.id, { settlement: cloneJson(row.settlement) });
+  }
+  // AI-2 cosmetic tier: the narrative blob is renamed by its own registered
+  // operation, which no-ops on a save with no narrative. The active save is
+  // included because its ai_data is a sibling column, not part of the
+  // settlement blob persistActiveSaveEdit just wrote.
+  const activeSaveId = after.activeSaveId;
+  const cosmeticTargets = activeSaveId != null
+    ? [activeSaveId, ...modifiedSaves]
+    : modifiedSaves;
+  for (const saveId of cosmeticTargets) {
+    get().applyCosmeticRename?.({ saveId, oldName, newName: trimmed });
+  }
+  return {
+    changed: true,
+    oldName,
+    newName: trimmed,
+    touched,
+    modifiedSaveIds: modifiedSaves.map(String),
+  };
 }

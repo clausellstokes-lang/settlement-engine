@@ -25,6 +25,7 @@ import {
 } from '../domain/pendingEditIntents.js';
 import { applyEditOp } from './settlementPendingEditWriters.js';
 import { getEffectiveValue, isEditablePath } from '../domain/userEdits.js';
+import { resolveFactionForRename } from '../domain/factionRename.js';
 import { _resolveEntity } from './settlementSliceHelpers.js';
 
 const RECEIPT_LIMIT = 100;
@@ -161,6 +162,19 @@ function availability(kind, payload, state) {
     return { ok: true };
   }
 
+  if (kind === 'rename-faction') {
+    // Canon lock first: it is the reason a rename is refused, and reporting
+    // 'faction_target_missing' for a locked-but-present faction would send the
+    // reader looking for a data problem that is not there.
+    if (state.phase === 'canon') return { ok: false, reason: 'canon_identity_locked' };
+    const target = resolveFactionForRename(settlement, payload.factionIndex);
+    if (!target) return { ok: false, reason: 'faction_target_missing' };
+    if (target.currentName === String(payload.newName || '')) {
+      return { ok: false, reason: 'no_effect' };
+    }
+    return { ok: true };
+  }
+
   if (kind === 'table-event') {
     if (payload.directive?.dispatch === 'flavor' && state.phase !== 'canon') {
       return { ok: false, reason: 'canon_required' };
@@ -290,7 +304,7 @@ function successfulReceiptFor(receipts, intentId, ownerKey) {
   )) || null;
 }
 
-function applyRename(get, set, intent) {
+async function applyRename(get, set, intent) {
   const payload = intent.payload || {};
   if (intent.kind === 'rename-npc') {
     const npcs = get().settlement?.npcs || [];
@@ -301,6 +315,24 @@ function applyRename(get, set, intent) {
     return after?.name === payload.newName
       ? { ok: true, status: 'applied', reason: null }
       : { ok: false, status: 'failed', reason: 'rename_not_applied' };
+  }
+
+  if (intent.kind === 'rename-faction') {
+    // The converged writer owns resolution, the dual-write, the eleven-surface
+    // cascade and the neighbour walk. This dispatcher only reports whether the
+    // write landed, so a receipt can never claim an apply the writer refused.
+    // AWAITED: the writer fetches its cascade module at the call seam to keep it
+    // off first paint, so the action envelope is a promise. Reading `.changed`
+    // off the un-awaited promise would score every real rename as a failure
+    // while the write still landed.
+    const result = /** @type {any} */ (await get().renameFaction?.(payload.factionIndex, payload.newName));
+    if (result?.changed) return { ok: true, status: 'applied', reason: null };
+    const after = resolveFactionForRename(get().settlement, payload.factionIndex);
+    return {
+      ok: false,
+      status: 'failed',
+      reason: after ? 'rename_not_applied' : 'faction_target_missing',
+    };
   }
 
   const saveId = get().activeSaveId;
@@ -335,10 +367,17 @@ function applyProse(get, intent) {
     : { ok: false, status: 'failed', reason: 'prose_not_applied' };
 }
 
-function applyOne(get, set, intent) {
+// ASYNC because applyRename is (the faction writer fetches its cascade module at
+// the call seam). The `await` must stay INSIDE the try: a bare `return
+// applyRename(...)` would settle the promise outside this frame and route a
+// writer exception past the 'writer_exception' receipt into an unhandled
+// rejection.
+async function applyOne(get, set, intent) {
   try {
-    if (intent.kind === 'rename-npc' || intent.kind === 'rename-settlement') {
-      return applyRename(get, set, intent);
+    if (intent.kind === 'rename-npc'
+      || intent.kind === 'rename-faction'
+      || intent.kind === 'rename-settlement') {
+      return await applyRename(get, set, intent);
     }
     if (intent.kind === 'edit-prose') {
       return applyProse(get, intent);
@@ -448,7 +487,9 @@ function classifyCounts(intents) {
   let rename = 0;
   let prose = 0;
   for (const intent of intents) {
-    if (intent.kind === 'rename-npc' || intent.kind === 'rename-settlement') rename += 1;
+    if (intent.kind === 'rename-npc'
+      || intent.kind === 'rename-faction'
+      || intent.kind === 'rename-settlement') rename += 1;
     if (intent.kind === 'edit-prose') prose += 1;
   }
   return { structural: 0, rename, prose };
@@ -494,8 +535,17 @@ function captureResearchRows(preState, successfulIntents) {
 /**
  * Commit an exact set of intent ids. Preflight is evaluated against one immutable
  * pre-batch state; writers then execute in queue order and report independently.
+ *
+ * ASYNC (2026-07-28): the faction-rename writer fetches its cascade module at the
+ * call seam, so applyOne is awaited. Writers still run STRICTLY IN QUEUE ORDER —
+ * the loop awaits each before starting the next — and the pre-batch snapshot is
+ * still captured before the first writer. The only caller,
+ * commitPendingEditsAction, passes this through the session-command runtime,
+ * whose `commit` dependency is already typed `Promise<object>|object`.
+ *
+ * @returns {Promise<object>}
  */
-export function commitPendingEditScope(get, set, selection = null) {
+export async function commitPendingEditScope(get, set, selection = null) {
   const preState = get();
   const queue = preState.pendingEditsQueue || [];
   const context = pendingEditContext(preState);
@@ -603,7 +653,7 @@ export function commitPendingEditScope(get, set, selection = null) {
   const retryableFailures = [];
   for (const intent of ready) {
     const attempt = Number(intent.attempts || 0) + 1;
-    const result = applyOne(get, set, intent);
+    const result = await applyOne(get, set, intent);
     const receipt = makePendingEditReceipt(
       intent,
       result.ok && undoToken ? { ...result, undoToken } : result,

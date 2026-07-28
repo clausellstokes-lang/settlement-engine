@@ -21,6 +21,11 @@
  *   3. Every surface that prints a causal band word routes it through
  *      `causalBandWord`; a renderer may not print a raw `band` for the 16
  *      substrate variables.
+ *   4. The lower-is-better word table is TOTAL over CAUSAL_BANDS, and no other
+ *      module spells those words. The first cut froze only the three problem
+ *      bands, so the benign end fell through to the raw word and the pill read
+ *      "Criminal opportunity · ADEQUATE"; totality is what stops a band from
+ *      having no word at all.
  *
  * The scan reads SOURCE (it is a habitat guard, not a behaviour assertion) and
  * is deliberately anchored to named files, so a moved file reds here rather than
@@ -150,11 +155,38 @@ describe('causal band word — every renderer routes through causalBandWord', ()
     for (const rel of RENDERERS) expect(callers).toContain(rel);
   });
 
-  test('the problem-term table is declared once and stays the frozen three', () => {
+  test('the lower-is-better band-word table is declared once and covers the WHOLE ladder', () => {
+    // It used to be the frozen THREE (collapsed/critical/strained), which closed
+    // only the problem end. A benign band fell through to the raw word, so the
+    // lone lower-is-better variable printed "Criminal opportunity · ADEQUATE" —
+    // read by a human as the crime being adequate. Totality against CAUSAL_BANDS
+    // is the structural cure: a sixth band cannot be added without a word, and a
+    // word cannot be dropped back out.
     const code = read('src/domain/causalState.js');
-    const m = code.match(/LOWER_IS_BETTER_PROBLEM_TERM\s*=\s*Object\.freeze\(\{([^}]*)\}/);
-    expect(m, 'the problem-term table moved or changed shape').toBeTruthy();
+    const m = code.match(/LOWER_IS_BETTER_BAND_TERM\s*=\s*Object\.freeze\(\{([^}]*)\}/);
+    expect(m, 'the lower-is-better band-word table moved or changed shape').toBeTruthy();
     const keys = [...m[1].matchAll(/^\s*(\w+)\s*:/gm)].map((x) => x[1]).sort();
-    expect(keys).toEqual(['collapsed', 'critical', 'strained']);
+    const bandsBlock = code.match(/CAUSAL_BANDS\s*=\s*Object\.freeze\(\[([^\]]*)\]/);
+    expect(bandsBlock, 'CAUSAL_BANDS moved — re-anchor this scan').toBeTruthy();
+    const bands = [...bandsBlock[1].matchAll(/'([a-z]+)'/g)].map((x) => x[1]).sort();
+    expect(bands.length, 'the band vocabulary parsed empty (guard the guard)').toBe(5);
+    expect(keys, 'every causal band needs a lower-is-better word; a fall-through prints the raw band, which reads inverted').toEqual(bands);
+  });
+
+  test('no module re-declares its own lower-is-better wording beside the table', () => {
+    // The habitat half: the words live in causalState.js, so a surface cannot
+    // quietly grow a second (drifting) vocabulary the way DIM_META did for
+    // polarity. The threshold is TWO distinct words, not one: 'Acute' is also a
+    // threat-severity label in domain/qualitativeBands.js (an unrelated ladder),
+    // and a single shared adjective is a coincidence. A copy of THIS vocabulary
+    // brings several of its words with it.
+    const WORDS = ['Rampant', 'Acute', 'Elevated', 'Contained', 'Negligible'];
+    const offenders = FILES
+      .filter((rel) => rel !== 'src/domain/causalState.js')
+      .filter((rel) => {
+        const code = read(rel);
+        return WORDS.filter((w) => code.includes(`'${w}'`)).length >= 2;
+      });
+    expect(offenders, 'lower-is-better band words belong to causalState.js LOWER_IS_BETTER_BAND_TERM').toEqual([]);
   });
 });

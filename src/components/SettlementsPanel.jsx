@@ -28,7 +28,7 @@ import { forkSeedFor } from '../data/sampleSettlements.js';
 import {
   migrateConfig, findSaveById, saveCountBand, dayGapBand,
   canonPhaseOf, lastEditedMs, hasAiData,
-  renameInterSettlementReference, withSettlementChanges,
+  renameInterSettlementReference, withSettlementChanges, withFactionRenamed,
 } from './settlements/helpers.js';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import {
@@ -340,7 +340,18 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     const saveId = detail?.saveData?.id;
     const updatedSaves = saves.map(save => {
       const settlement = save.settlement;
-      if (String(save.id) !== String(saveId)) {
+      const isHost = String(save.id) === String(saveId);
+      // Owner queue #14: the faction arm routes ENTIRELY through the ONE
+      // converged writer (domain/factionRename.js), which resolves the CANONICAL
+      // powerStructure list this lane used to miss and carries the name into the
+      // governing seat, the roster, institution attribution and the neighbour
+      // links. It takes the whole branch because the generic rewrites below are
+      // too broad for a faction: they would also rename a neighbouring TOWN or a
+      // PERSON who happens to share the faction's name.
+      if (type === 'faction') {
+        return withFactionRenamed(save, isHost, detail.settlement.name, oldName, trimmed);
+      }
+      if (!isHost) {
         const relationships = settlement?.interSettlementRelationships || [];
         const referencesEntity = relationships.some(relationship => {
           const names = [
@@ -363,10 +374,6 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         ? (settlement.npcs || []).map(npc =>
             String(npc.id) === String(id) ? { ...npc, name: trimmed } : npc)
         : settlement.npcs;
-      const factions = type === 'faction'
-        ? (settlement.factions || []).map(faction =>
-            faction.name === oldName ? { ...faction, name: trimmed } : faction)
-        : settlement.factions;
       const relationships = (settlement.relationships || []).map(relationship => ({
         ...relationship,
         npc1Name: relationship.npc1Name === oldName ? trimmed : relationship.npc1Name,
@@ -375,7 +382,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
       const interSettlementRelationships = (settlement.interSettlementRelationships || [])
         .map(relationship => renameInterSettlementReference(relationship, oldName, trimmed));
       return withSettlementChanges(
-        save, { npcs, factions, relationships, interSettlementRelationships },
+        save, { npcs, relationships, interSettlementRelationships },
       );
     });
     setSaves(updatedSaves);

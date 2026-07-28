@@ -97,7 +97,6 @@ function freshStore() {
     auth: { tier: 'premium' },
     isElevated: () => false,
     isSettlementClockBound: () => false,
-    trackTabExplored: vi.fn(),
     userPrefs: { tableViewOpen: false },
     setUserPref: vi.fn(),
   };

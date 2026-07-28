@@ -132,7 +132,6 @@ export default function App() {
   // the shell only re-renders when the settlement toggles absent↔present.
   const hasSettlement = useStore(s => !!s.settlement);
   const initAuth = useStore(s => s.initAuth);
-  const initOnboarding = useStore(s => s.initOnboarding);
   const onboardingNudge = useStore(s => s.onboardingNudge);
   const clearOnboardingNudge = useStore(s => s.clearOnboardingNudge);
   const purchaseModalOpen = useStore(s => s.purchaseModalOpen);
@@ -183,7 +182,6 @@ export default function App() {
   // on timeout, and a terminal notice on a verified failure.
   useEffect(() => {
     initAuth();
-    initOnboarding();
     let cancelled = false;
     import('./lib/stripe.js').then(async (stripeLib) => {
       const { checkCheckoutResult, fetchCreditBalance } = stripeLib;
@@ -288,7 +286,7 @@ export default function App() {
       }
     });
     return () => { cancelled = true; };
-  }, [initAuth, initOnboarding, setCreditBalance]);
+  }, [initAuth, setCreditBalance]);
 
   // Auto-dismiss the dossier retro-claim confirmation toast after a short read.
   useEffect(() => {

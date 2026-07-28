@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../theme.js';
-import { Pin } from 'lucide-react';
+import { Lock, Pin, Unlock } from 'lucide-react';
 import { catColor } from './design';
 import {Ti, serif, PlotHook} from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
@@ -35,6 +35,38 @@ function durableNpcId(npc) {
   const id = npc?.id == null ? '' : String(npc.id).trim();
   return id || null;
 }
+
+/**
+ * THE ROW LOCK — the per-character half of the locks engine (Phase A).
+ *
+ * Two promises now sit on one roster row and they must never blur into each
+ * other, so each gets its own glyph, its own colour and its own sentence:
+ *   • PIN (purple, a pin) guards a character's PROSE from the AI rewriting it.
+ *   • LOCK (bronze, a padlock) keeps the PERSON through a roster reroll.
+ * Neither sentence uses the other's word — the same rule the section-level twin
+ * (components/dossier/LockControls.jsx) states in its header.
+ *
+ * WHY THE THIRD LINE. `locks.npcs` carries two forms: `true` freezes the whole
+ * roster, an array names individuals (domain/locksPreservation.js normalizes
+ * both). When the section lock is on, every person is already kept, and writing
+ * an array over that boolean would silently UNLOCK the section. The row says so
+ * and refuses instead.
+ */
+// Phase B made the individual promise total: a locked character now survives a
+// FULL regenerate too, taking a place in the brand-new town, so these two strings
+// say "any new roll" instead of "rerolls". The whole-roster boolean did NOT gain
+// that reach — freezing an entire cast through a fresh roll would nullify the
+// roll — so its line states the boundary rather than letting the reader
+// generalize from the row beside it.
+const NPC_LOCK_COPY = Object.freeze({
+  locked:  'Locked. This person stays through any new roll.',
+  open:    'Lock this person so they stay through any new roll.',
+  section: 'The whole roster is locked. Rerolls keep everyone; a brand-new settlement starts a new cast.',
+});
+
+/** Bronze, deliberately not the pin's purple: a glance must tell the two apart. */
+const LOCK_TONE = swatch['#8A5A1A'];
+const LOCK_TONE_BG = swatch['#F5ECD8'];
 
 function uniqueNpcIndex(npcs, npcId) {
   if (!Array.isArray(npcs) || !npcId) return -1;
@@ -241,6 +273,27 @@ function NPCInlineCard({
   const isPinned = pinAvailable && pinnedIds instanceof Set && pinnedIds.has(pinKey);
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
+  // THE ROW LOCK (see NPC_LOCK_COPY). Gated on the same authoring right as the
+  // Reroll button this lock disarms: a viewer who cannot roll the roster is never
+  // shown a control over that roll. It also needs a DURABLE id — locks name
+  // `npc.id`, never the pin's name fallback, because the preservation engine
+  // matches ids and remaps them when a survivor inherits a fresh slot.
+  const locks = useStore(s => s.locks);
+  const setLock = useStore(s => s.setLock);
+  const rosterLocked = locks?.npcs === true;
+  const lockedIds = Array.isArray(locks?.npcs) ? locks.npcs.map(String) : [];
+  const lockAvailable = canAuthorNpc && npcId != null;
+  const isLocked = rosterLocked || (npcId != null && lockedIds.includes(npcId));
+  const lockNote = rosterLocked ? NPC_LOCK_COPY.section
+    : (isLocked ? NPC_LOCK_COPY.locked : NPC_LOCK_COPY.open);
+  const toggleLock = () => {
+    if (rosterLocked || npcId == null) return;
+    const next = lockedIds.includes(npcId)
+      ? lockedIds.filter(id => id !== npcId)
+      : [...lockedIds, npcId];
+    setLock('npcs', next);
+  };
+
   return (
     <div id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
@@ -281,6 +334,36 @@ function NPCInlineCard({
             }}
           >
             <Pin size={12} fill={isPinned ? pinColor : 'none'} strokeWidth={isPinned ? 2 : 1.7}/>
+          </span>
+        )}
+        {lockAvailable && (
+          <span
+            role="button"
+            tabIndex={rosterLocked ? -1 : 0}
+            aria-pressed={isLocked}
+            aria-label={lockNote}
+            aria-disabled={rosterLocked || undefined}
+            onClick={(e)=>{ e.stopPropagation(); toggleLock(); }}
+            onKeyDown={(e)=>{ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); toggleLock(); } }}
+            // No native OS tooltip here: the aria-label above ALREADY carries
+            // `lockNote` verbatim, so a hover tooltip would only duplicate the
+            // accessible name — the GUIDE-2 tranche-1 ruling on the two
+            // WorldMapToolbar selects, and the R-3 NarrativeArchivePanel ruling
+            // (drop the tooltip; never let one displace an accessible name).
+            // The glyph pair carries the state visually; the sentence is read.
+            style={{
+              display:'inline-flex',alignItems:'center',justifyContent:'center',
+              width:22,height:22,flexShrink:0,
+              background: isLocked ? LOCK_TONE_BG : 'transparent',
+              border: `1px solid ${isLocked ? LOCK_TONE : 'transparent'}`,
+              color: isLocked ? LOCK_TONE : '#b8a898',
+              cursor: rosterLocked ? 'help' : 'pointer',
+              transition:'all 0.15s',
+            }}
+          >
+            {isLocked
+              ? <Lock size={12} strokeWidth={2}/>
+              : <Unlock size={12} strokeWidth={1.7}/>}
           </span>
         )}
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>

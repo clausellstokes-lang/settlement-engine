@@ -381,7 +381,7 @@ export const GUIDANCE_REGISTRY = Object.freeze({
  * @property {(id: string) => boolean} isDismissed — whether the whisper's
  *   unified dismissal (sf:guidance:*) is set for this device.
  * @property {(firstKey: string) => boolean} firstAvailable — whether the firsts
- *   milestone has been reached (from the sf_features_used map, derive-backfilled).
+ *   milestone has been reached (derived from store signals).
  * @property {boolean} isNewborn — true when the user is NOT a veteran (no saves);
  *   gates newbornOnly whispers.
  * @property {Record<string, unknown>} data - surface-specific signals for condition().
@@ -427,11 +427,14 @@ export function selectWhisper(surface, ctx) {
  * Derive whether a guidance FIRST milestone is available from plain store
  * signals - the "derive rather than flag" path (§3). All of W-GUIDE-1's live
  * whispers gate on DERIVABLE firsts, so the firsts logic lives HERE (a pure lazy
- * leaf, ZERO eager bytes) rather than growing the eager sf_features_used map and
+ * leaf, ZERO eager bytes) rather than growing an eager feature-flag map and
  * blowing the first-paint budget. A future wave that needs a NON-derivable first
- * (first_treaty_strain, first_docket, ...) flags it via the existing
- * markFeatureUsed and extends this switch alongside its whisper (the criterion
- * clause). Veterans (saves exist) never re-see a derivable milestone.
+ * (first_treaty_strain, first_docket, ...) mints a device-local first-marker in
+ * the sf:guidance:* lane (src/lib/guidance.js, under the same try/catch
+ * discipline as the dismissals) and extends this switch alongside its whisper
+ * (the criterion clause). The old onboarding-slice hints map that used to host
+ * such flags was retired 2026-07-27 and is not the forward path.
+ * Veterans (saves exist) never re-see a derivable milestone.
  * @param {string} key
  * @param {{ hasSettlement?: boolean, savedCount?: number }} signals
  * @returns {boolean}

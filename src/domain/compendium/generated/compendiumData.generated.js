@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 158,
-    "exemptCount": 72,
+    "count": 155,
+    "exemptCount": 69,
     "byKlass": {
       "canon": 5,
       "macro": 44,
-      "mechanical": 109
+      "mechanical": 106
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -156,12 +156,12 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"removeSavedSettlement","label":"Remove a saved settlement","description":"Deletes one settlement from the saved-settlements list.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"updateSavedSettlement","label":"Update a saved settlement","description":"Writes changed fields onto one saved settlement in the list.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameNPC","label":"Rename an NPC","description":"Renames a named NPC within the settlement and carries the new name through its references.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"renameFaction","label":"Rename a faction","description":"Renames a faction within the settlement and carries the new name through its references.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
+      {"opType":"renameFaction","label":"Rename a faction","description":"Renames a faction and carries the new name through the settlement: its place in the power structure, the governing seat, every member, the institutions it founded, and any neighbouring settlement that names it.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"applyUserEditAction","label":"Apply a manual edit","description":"Applies a manual user edit to the settlement. It can be reversed with Revert a manual edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"revertUserEditAction"},
       {"opType":"revertUserEditAction","label":"Revert a manual edit","description":"Reverses a previously applied manual user edit.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"applyUserEditAction"},
       {"opType":"persistActiveSaveEdit","label":"Persist an edit to the active save","description":"Writes an edit to the active save so the change survives a reload.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"markExported","label":"Mark as exported","description":"Flags the settlement as having been exported, for example to a PDF dossier.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
-      {"opType":"setLock","label":"Set a section lock","description":"Locks a part of the settlement. A locked section refuses to reroll, locked characters survive a roster reroll, and a full regenerate keeps the locked name, terrain and history.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
+      {"opType":"setLock","label":"Set a section lock","description":"Locks a part of the settlement. A locked section refuses to reroll. Locked characters survive any reroll, including a full regenerate, where they take a place in the new town. A full regenerate also keeps the locked name, terrain and history.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"clearLocks","label":"Clear section locks","description":"Removes every lock from the settlement, so nothing is held back from a reroll. To recover a lock, set it again.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"hydrateFromSave","label":"Load state from a save","description":"Rebuilds the working settlement state from a saved settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"renameSettlement","label":"Rename the settlement","description":"Changes the settlement's name.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
@@ -236,9 +236,6 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"mapUndo","label":"Undo a map change","description":"Reverses the most recent campaign-map change. It can be redone.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapRedo"},
       {"opType":"mapRedo","label":"Redo a map change","description":"Re-applies a campaign-map change that was undone. It can be undone again.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
       {"opType":"clearNeighbour","label":"Clear a neighbour","description":"Removes a settlement's neighbour link data.","klass":"mechanical","slice":"neighbourSlice","targetScope":"global","receiptRef":null,"undoToken":null},
-      {"opType":"completeOnboarding","label":"Complete onboarding","description":"Marks the first-run onboarding as finished. It can be reset.","klass":"mechanical","slice":"onboardingSlice","targetScope":"global","receiptRef":null,"undoToken":"resetOnboarding"},
-      {"opType":"markFeatureUsed","label":"Mark a feature as used","description":"Records that the user has used a given feature, which retires its coaching hints. It can be reset.","klass":"mechanical","slice":"onboardingSlice","targetScope":"global","receiptRef":null,"undoToken":"resetOnboarding"},
-      {"opType":"resetOnboarding","label":"Reset onboarding","description":"Clears the onboarding progress so the coaching flow runs again.","klass":"mechanical","slice":"onboardingSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"setCreditBalance","label":"Set the credit balance","description":"Sets the account's narrative-credit balance to a given amount.","klass":"mechanical","slice":"creditsSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"updateConfig","label":"Update the generation settings","description":"Changes the settlement generation settings, such as size, sliders, and options.","klass":"mechanical","slice":"configSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"toggleInstitution","label":"Toggle an institution","description":"Turns one institution on or off in the generation settings.","klass":"mechanical","slice":"toggleSlice","targetScope":"global","receiptRef":null,"undoToken":null},

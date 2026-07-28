@@ -268,15 +268,24 @@ export function remapLocksAfterRegen(state, preservation) {
 }
 
 /**
- * The FULL-GENERATE lock tail: drop the id arrays, keep the booleans.
- * Phase A does not carry rosters through a full generate, so an id array would
- * name members of a roster that no longer exists — see domain/locksPreservation.js.
- * Dormant: an untouched map is not written back.
+ * THE FULL-GENERATE LOCK TAIL (locks engine Phase B, lifecycle: GENERATE).
+ *
+ * The engine's `carryLockedRosterThroughGenerate` has already carried the locked
+ * characters bodily into the new town and reported which fresh slot each one
+ * landed on. This rewrites the map to match: locked NPC ids become the ids their
+ * subjects inherited, a locked id nothing preserved is pruned, and the name-keyed
+ * faction / institution arrays plus every boolean are kept. Dormant by
+ * construction — an untouched map is never written back to the draft.
+ *
+ * This helper takes the REPORT, never the engine: settlementSliceHelpers must stay
+ * free of generator imports or the lazy engine chunk re-parents into first paint.
+ *
  * @param {{ locks?: Record<string, any> }} state  the Immer draft
+ * @param {{ preserved?: Array<{id?: string, fromId?: string}> }|null|undefined} preservation
  */
-export function resetRosterLocksAfterGenerate(state) {
+export function remapLocksAfterGenerate(state, preservation) {
   const current = state.locks || {};
-  const next = locksAfterFullGenerate(current);
+  const next = locksAfterFullGenerate(current, preservation?.preserved);
   if (next !== current) state.locks = next;
 }
 

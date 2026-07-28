@@ -55,10 +55,6 @@ vi.mock('../../src/store/index.js', () => {
     clearSettlement: vi.fn(),
     pipelineRevealActive: false,
     dismissPipelineReveal: vi.fn(),
-    onboardingActive: false,
-    onboardingStep: 0,
-    advanceOnboarding: vi.fn(),
-    setOnboardingStep: vi.fn(),
   };
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;

@@ -25,21 +25,57 @@
  * ADD survivors; they can never perturb a seeded draw, because every one of these
  * functions runs over a FINISHED roll.
  *
- * ── PHASE A vs PHASE B (what this honestly does) ────────────────────────────
+ * ── WHAT THIS HONESTLY DOES (Phase A + Phase B, both built) ─────────────────
  *
- * Phase A — section rerolls honour every lock (a locked section refuses to roll;
- * locked NPC ids survive an npcs reroll and the lock follows the id its subject
- * inherits). A FULL regenerate honours the identity, geography and history
- * booleans.
+ * Section rerolls honour every lock: a locked section refuses to roll, locked NPC
+ * ids survive an npcs reroll, and the lock follows the id its subject inherits.
  *
- * Phase B (deliberately deferred, documented, not a bug to re-find) — the
- * npcs/factions/institutions ID ARRAYS on a FULL regenerate. A full generate
- * mints an entirely new roster, so carrying a keeper into it needs the
- * displacement / prose-repair / faction-relink tail that regenNPCsPipeline runs,
- * extracted to run over pipeline output. That is its own lane. Until it lands,
- * `locksAfterFullGenerate` DROPS the id arrays (they name a roster that no longer
- * exists) and keeps the booleans, and the registry description promises only what
- * is built.
+ * A FULL regenerate honours the identity, geography and history booleans, AND —
+ * Phase B — carries the locked characters bodily into the new town. The tail that
+ * does it lives in generators/generateSettlementPipeline.js
+ * (`carryLockedRosterThroughGenerate`) because it needs the displacement /
+ * prose-repair / projection-refresh / faction-relink machinery the section reroll
+ * already runs; this leaf owns only what happens to the MAP afterwards.
+ *
+ * The three id arrays split by how they identify their subject, and the split is
+ * the whole design:
+ *
+ *   • `npcs` is POSITIONAL-ID-keyed. A full roll re-issues npc_1..npc_N to
+ *     strangers, so a locked id is meaningless unless the carry tells us which
+ *     fresh slot its subject landed on. Remapped by the preservation report;
+ *     an id the report does not mention is DROPPED.
+ *   • `factions` and `institutions` are NAME-keyed — power factions and
+ *     institutions carry no id at all, and the one consumer that exists
+ *     (worldPulse/coup.js `lockedGoverningFaction`) matches on the stable part of
+ *     the NAME, tolerating a `faction.` prefix. A name cannot misbind across a
+ *     roll: it either names a same-named entity in the new town or it names
+ *     nothing. So they are KEPT VERBATIM as standing intent. Dropping them, which
+ *     is what this function used to do, silently disarmed the coup shield on
+ *     every full regenerate.
+ *
+ * ── THE STALE-ID DROP, and why it diverges from remapNpcLocks ───────────────
+ *
+ * `remapNpcLocks` (the section-reroll path) leaves an unrecognised id ALONE: undo
+ * can restore an older settlement blob whose roster ids match the map again, so
+ * an unknown id there is a dormant no-op rather than an error. Across a FULL roll
+ * that cure cannot apply — every old id has been reissued to a stranger, so a
+ * locked id the carry did not preserve is not dormant, it is actively pointing at
+ * somebody the user never locked. It is dropped. (Consequence, accepted: revert
+ * to an older snapshot does not restore locks — revertToSnapshot carries the
+ * settlement blob, not the map — so a full generate after such a revert prunes
+ * ids that the restored roster may in fact hold.)
+ *
+ * ── STILL DEFERRED (documented, not bugs to re-find) ────────────────────────
+ *
+ *  1. `npcs: true`, the WHOLE-SECTION boolean, is kept but not enforced on a full
+ *     generate. Carrying an entire roster through a full roll would nullify the
+ *     roll; making it mean that is an owner call, not this lane's.
+ *  2. Faction / institution OBJECT carry — substituting the locked faction itself
+ *     into the fresh town — is a new capability, owner-gated. The arrays survive
+ *     as intent; the objects do not.
+ *  3. Canon and authored NPCs that are not locked still do not survive a full
+ *     generate. That is the pre-Phase-B baseline, held deliberately: the carry
+ *     runs under `lockedIdsOnly`, so it performs the lock map and nothing else.
  */
 
 import { deepClone } from './clone.js';
@@ -235,25 +271,52 @@ export function remapNpcLocks(locks, preservedEntries) {
 }
 
 /**
- * The lock map that survives a FULL regenerate.
+ * The lock map that survives a FULL regenerate (locks engine Phase B).
  *
- * The booleans are statements about the settlement (its identity, its ground, its
- * past) and remain meaningful across a fresh roll. The id arrays name members of a
- * roster that no longer exists, and Phase A does not carry rosters through a full
- * generate — keeping them would leave the map advertising a protection nothing
- * performs, which is the exact defect this lane closes. They are dropped.
+ * The booleans are statements about the settlement — its identity, its ground,
+ * its past — and remain meaningful across a fresh roll, so they are untouched.
+ * The name-keyed `factions` / `institutions` arrays are statements about names and
+ * are kept verbatim. Only `npcs` needs work, because only `npcs` is keyed on ids a
+ * full roll has just reissued: each locked id becomes the id its subject INHERITED
+ * in the new town, and a locked id the carry did not preserve is dropped. The
+ * header explains why that drop diverges from remapNpcLocks' leave-it-alone rule.
  *
- * Returns `locks` UNCHANGED (same reference) when it holds no id arrays.
+ * Feed it the `preserved` half of the report `carryLockedRosterThroughGenerate`
+ * returns. Called with no report at all — which is what happens when the carry sat
+ * dormant — every locked id is stale by definition and the key goes away.
+ *
+ * Returns `locks` UNCHANGED (same reference) when there is no `npcs` ARRAY to
+ * rewrite, or when rewriting it would reproduce the array already there.
  *
  * @template {Record<string, any>} L
  * @param {L} locks
+ * @param {Array<{id?: string, fromId?: string}>|null|undefined} preservedEntries
  * @returns {L}
  */
-export function locksAfterFullGenerate(locks) {
+export function locksAfterFullGenerate(locks, preservedEntries) {
   const l = /** @type {Record<string, unknown>} */ (locks && typeof locks === 'object' ? locks : {});
-  const doomed = ['npcs', 'factions', 'institutions'].filter(k => Array.isArray(l[k]));
-  if (doomed.length === 0) return locks;
-  const next = { ...l };
-  for (const k of doomed) delete next[k];
-  return /** @type {L} */ (next);
+  const raw = l.npcs;
+  // `npcs: true` is the whole-section boolean, not an id list — nothing to remap.
+  if (!Array.isArray(raw)) return locks;
+
+  /** @type {Map<string, string>} */
+  const inherited = new Map();
+  if (Array.isArray(preservedEntries)) {
+    for (const entry of preservedEntries) {
+      const from = String(entry?.fromId ?? '').trim();
+      const to = String(entry?.id ?? '').trim();
+      if (from && to) inherited.set(from, to);
+    }
+  }
+
+  // Substitution can land two locked ids on one slot only if the same character
+  // was locked twice; dedupe so the map cannot grow a phantom.
+  const next = [...new Set(
+    idArray(raw).map(id => inherited.get(id)).filter(id => typeof id === 'string' && id !== ''),
+  )];
+  if (next.length === raw.length && next.every((id, i) => id === raw[i])) return locks;
+  const rewritten = { ...l };
+  if (next.length === 0) delete rewritten.npcs;
+  else rewritten.npcs = next;
+  return /** @type {L} */ (rewritten);
 }

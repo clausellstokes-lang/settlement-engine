@@ -109,8 +109,20 @@ describe('SubstrateTab — the Causes tab names the problem, not its opposite', 
     expect(row.textContent).not.toContain('collapsed');
   });
 
-  it('a low-crime settlement leaves the variable in a benign band, unrephrased (other direction)', () => {
+  it('a low-crime settlement reads the BENIGN word, never the raw band (other direction)', () => {
+    // The second half of the same defect: the benign end fell through to the raw
+    // band, so a town with no crime printed "Criminal opportunity · ADEQUATE",
+    // which reads as the crime being adequate.
     const { container } = render(<SubstrateTab settlement={CALM} />);
+    const row = [...container.querySelectorAll('[data-substrate-row]')]
+      .find(r => r.textContent.startsWith('Criminal opportunity'));
+    expect(row, 'no Criminal opportunity row rendered').toBeTruthy();
+    const pill = row.querySelector('[data-band]');
+    // The MODEL band is still the benign machine word on the data attribute.
+    expect(['surplus', 'adequate']).toContain(pill.getAttribute('data-band'));
+    expect(['Negligible', 'Contained']).toContain(pill.textContent);
+    expect(row.textContent).not.toContain('adequate');
+    expect(row.textContent).not.toContain('surplus');
     expect(container.textContent).not.toContain('Rampant');
     expect(container.textContent).not.toContain('Acute');
   });
@@ -118,9 +130,12 @@ describe('SubstrateTab — the Causes tab names the problem, not its opposite', 
   it('higher-is-better variables still print their raw band word (control)', () => {
     const { container } = render(<SubstrateTab settlement={CRISIS} />);
     const words = [...container.querySelectorAll('[data-band]')].map(n => n.textContent);
-    // Every pill is either a raw band word or one of the three problem terms —
-    // nothing else may leak into the vocabulary.
-    const legal = new Set(['surplus', 'adequate', 'strained', 'critical', 'collapsed', 'Rampant', 'Acute', 'Elevated']);
+    // Every pill is either a raw band word or one of the five lower-is-better
+    // words — nothing else may leak into the vocabulary.
+    const legal = new Set([
+      'surplus', 'adequate', 'strained', 'critical', 'collapsed',
+      'Rampant', 'Acute', 'Elevated', 'Contained', 'Negligible',
+    ]);
     for (const w of words) expect(legal.has(w), `illegal band word rendered: ${w}`).toBe(true);
     // And at least one pill still carries a raw (higher-is-better) word.
     expect(words.some(w => ['surplus', 'adequate', 'strained', 'critical', 'collapsed'].includes(w))).toBe(true);

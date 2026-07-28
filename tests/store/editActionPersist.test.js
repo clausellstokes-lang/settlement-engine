@@ -109,7 +109,9 @@ describe('edit actions persist on a hydrated save (§10.4)', () => {
   });
 
   test('renameFaction: keeps .name AND .faction in sync, survives reload', async () => {
-    store.getState().renameFaction(0, 'Free Company');
+    // AWAITED: the writer fetches its cascade module at the call seam (first-paint
+    // budget), so the action envelope is a promise.
+    await store.getState().renameFaction(0, 'Free Company');
 
     const facLive = store.getState().settlement.powerStructure.factions[0];
     expect(facLive.name).toBe('Free Company');

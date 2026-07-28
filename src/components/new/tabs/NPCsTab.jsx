@@ -74,13 +74,16 @@ export function NPCsTab({
             ⚲ {pinnedCount} PINNED
           </span>
         )}
-        {/* The Reroll button now lives INSIDE LockControls: a locked roster must
-            never render an armed Reroll, and the only way to guarantee that is to
-            let the lock own the button. Per-CHARACTER locks are supported by the
-            engine (domain/locksPreservation.js reads an id array under the same
-            key) but have no per-row control yet — deliberately deferred so the
-            roster row does not grow a second toggle next to Pin, which makes a
-            DIFFERENT promise (pinning guards prose from the AI, not from dice). */}
+        {/* The Reroll button lives INSIDE LockControls: a locked roster must never
+            render an armed Reroll, and the only way to guarantee that is to let the
+            lock own the button. This control is the WHOLE-SECTION lock (the boolean
+            form of locks.npcs). Per-CHARACTER locks (the id-array form of the same
+            key, read by domain/locksPreservation.js) are now on the roster rows
+            themselves — see NPC_LOCK_COPY in ../npcComponents.jsx. The question that
+            held that back was whether a second row toggle would blur into Pin, which
+            makes a DIFFERENT promise; the answer was to separate them by glyph,
+            colour and sentence (a bronze padlock keeping the PERSON through a
+            reroll, beside a purple pin keeping the PROSE from the AI). */}
         <LockControls scope="npcs" onReroll={onRerollNPCs} style={{flexShrink:0}} />
       </div>
 

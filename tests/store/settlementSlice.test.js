@@ -631,27 +631,34 @@ describe('settlementSlice — renameFaction (canonical powerStructure path)', ()
     store.setState(s => { s.settlement = fixture(); });
   });
 
-  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', () => {
+  // AWAITED: renameFaction fetches domain/factionRename.js at the call seam to
+  // keep the cascade off first paint, so the action returns a promise.
+  test('renames a faction on powerStructure.factions (was a silent no-op on the empty legacy mirror)', async () => {
     // The fixture has factions on powerStructure.factions and no top-level
     // settlement.factions — the exact shape the old code could not rename.
-    store.getState().renameFaction(0, 'High Council');
+    await store.getState().renameFaction(0, 'High Council');
     const factions = store.getState().settlement.powerStructure.factions;
     expect(factions[0].name).toBe('High Council');
     expect(factions[1].name).toBe('Merchants'); // sibling untouched
   });
 
-  test('keeps .faction and .name in sync when the record labels on .faction', () => {
+  test('keeps .faction and .name in sync when the record labels on .faction', async () => {
     store.setState(s => {
       s.settlement.powerStructure.factions = [{ id: 'f1', faction: 'Old Guild', name: 'Old Guild' }];
     });
-    store.getState().renameFaction(0, 'New Guild');
+    await store.getState().renameFaction(0, 'New Guild');
     const f = store.getState().settlement.powerStructure.factions[0];
     expect(f.faction).toBe('New Guild');
     expect(f.name).toBe('New Guild');
   });
 
-  test('out-of-range index is a safe no-op', () => {
-    expect(() => store.getState().renameFaction(99, 'X')).not.toThrow();
+  test('out-of-range index is a safe no-op', async () => {
+    // `.not.toThrow()` around an ASYNC action is vacuous — an async function
+    // returns a rejected promise instead of throwing in the caller's frame, so
+    // the old shape would have passed even if the writer blew up. Assert the
+    // promise RESOLVES, and resolves to the idle envelope.
+    await expect(store.getState().renameFaction(99, 'X'))
+      .resolves.toMatchObject({ changed: false });
     expect(store.getState().settlement.powerStructure.factions[0].name).toBe('Council');
   });
 });

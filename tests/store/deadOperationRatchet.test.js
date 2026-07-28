@@ -27,7 +27,7 @@
  *     MECHANICAL ops"; these four are canon/macro class and were outside it.
  *   • renameFaction — the atlas recorded it dead separately (its own gap, owner
  *     queue #14, "the registry row advertises an op no surface exposes") and
- *     never folded it into the 31.
+ *     never folded it into the 31. It has since been WIRED and is off the list.
  * So the delta is an enumeration-scope difference, not a regression: no op became
  * dead between the atlas snapshot and this measurement.
  *
@@ -182,12 +182,6 @@ const consumerFiles = (name) => consumerFilesIn(SOURCES, name);
 const DEAD_OPERATIONS = Object.freeze([
   // canon / macro class (outside the atlas's mechanical-only slice)
   'requestProgression',
-  // the atlas's separately-recorded dead op (owner queue #14)
-  'renameFaction',
-  // the atlas's registered mechanical ops with zero callers
-  'completeOnboarding',
-  'markFeatureUsed',
-  'resetOnboarding',
 ]);
 
 /**
@@ -198,8 +192,11 @@ const DEAD_OPERATIONS = Object.freeze([
  * whose inverse gets wired up must be deleted from here.
  */
 const UNREACHABLE_INVERSE = Object.freeze([
-  'completeOnboarding', // → resetOnboarding (dead)
-  'markFeatureUsed',    // → resetOnboarding (dead)
+  // EMPTY, and that is the point: every row that once sat here has left by
+  // having its promise made true or by leaving the registry.
+  // completeOnboarding / markFeatureUsed both pointed at resetOnboarding; all
+  // three were RETIRED together in the coach-exit lane (2026-07-27), so their
+  // rows go with them — the no-ghost-rows rule applied to this ledger.
   // queueEdit left this ledger in the WIRING half: its promised inverse,
   // revertSingleEdit, is now the per-change Remove on both pending-edit review
   // surfaces, so the row's recovery claim is true in the product as well as in
@@ -240,12 +237,21 @@ describe('R-4 dead-op ratchet — the measurement is real', () => {
   });
 
   test('positive control — a comment-only mention is NOT a consumer', () => {
-    // markFeatureUsed's only appearance outside its slice is a JSDoc reference in
-    // guidanceRegistry.js. Prove the strip step is what makes it dead, by showing
-    // the raw file mentions it while the scanner does not count it.
-    const raw = readFileSync(join(ROOT, 'src/domain/display/guidanceRegistry.js'), 'utf8');
-    expect(raw.includes('markFeatureUsed')).toBe(true);
-    expect(consumerFiles('markFeatureUsed')).toEqual([]);
+    // RE-ANCHORED 2026-07-27 (coach-exit lane). This control used to ride
+    // markFeatureUsed, whose only outside appearance was a JSDoc reference in
+    // guidanceRegistry.js — but that op was RETIRED and the JSDoc rewritten, so
+    // the anchor moved to requestProgression, the one member of the frozen list
+    // that survives every currently-planned retirement (it belongs to the
+    // progression program, HELD not adjudicated). Its only appearance outside
+    // its own slice is a prose reference inside a comment in
+    // src/hooks/useReaderAudience.js. Prove the strip step is what makes it
+    // dead, by showing the raw file mentions it while the scanner does not
+    // count it. NOTE the earlier candidate destroySavedSettlement is NOT usable
+    // here: owner queue #21's wiring half gave it a real consumer
+    // (src/components/settlements/DestroySettlementControl.jsx).
+    const raw = readFileSync(join(ROOT, 'src/hooks/useReaderAudience.js'), 'utf8');
+    expect(raw.includes('requestProgression')).toBe(true);
+    expect(consumerFiles('requestProgression')).toEqual([]);
   });
 
   test('positive control — an inert store binding is NOT a consumer (synthetic)', () => {
@@ -355,16 +361,33 @@ describe('R-4 dead-op ratchet — the list only shrinks (owner queue #21)', () =
     //     bag's EXISTING entries, so Force All was a no-op on a clean bag.
     //     tests/components/toggleGridBulkControls.test.jsx covers the last three.
     //
-    // THE FIVE THAT REMAIN, and why each is HELD:
-    //   • renameFaction — owner queue #14's door is built in this tree but
-    //     not yet folded; it leaves this list with that fold, by becoming
-    //     live rather than by being excused.
+    // 5 → 4 when OWNER QUEUE #14 built the faction-rename door:
+    //   • renameFaction — the Entity Inspector's rename control stages
+    //     queueEdit('rename-faction'), and the commit coordinator dispatches
+    //     through the store action, so it is reachable from a user surface for
+    //     the first time. It left this list by becoming live, not by being
+    //     excused. tests/store/factionRenameConvergence.test.js +
+    //     tests/components/workbenchFactionRename.test.jsx.
+    //
+    // 4 → 1 when the COACH-EXIT lane (2026-07-27) adjudicated the finding the
+    // previous note held open. completeOnboarding, markFeatureUsed and
+    // resetOnboarding were RETIRED out of the registry together with the coach
+    // state machine and the feature-hints subsystem they described. The
+    // investigation that had to happen first found the coach HEADLESS — its only
+    // rendered output was two data-onboard-highlight attributes no CSS rule
+    // anywhere targeted — and found the exit door dead for the same reason the
+    // ops were: completeOnboarding, the sole writer of sf_onboarded, had no
+    // callers. So the coach could neither be seen nor finished, and the live
+    // first-run teaching had already moved to the guidance registry (W-GUIDE-1 /
+    // host C4). Wiring them instead would have stood a second teaching system up
+    // beside the registry. The nudge-toast channel survives and gained its
+    // missing writer (setOnboardingNudge, exempt) — see
+    // tests/store/onboardingNudge.test.js.
+    //
+    // THE ONE THAT REMAINS, and why it is HELD:
     //   • requestProgression — belongs to the progression program.
-    //   • completeOnboarding, markFeatureUsed, resetOnboarding — entangled with an
-    //     unadjudicated finding (the onboarding coach has no exit path). Retiring
-    //     them would bank a decision that investigation has not been made yet.
     // Shrink-only, as ever.
-    expect(DEAD_OPERATIONS.length).toBe(5);
+    expect(DEAD_OPERATIONS.length).toBe(1);
   });
 });
 

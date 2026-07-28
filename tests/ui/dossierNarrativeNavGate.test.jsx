@@ -91,9 +91,6 @@ function freshStore() {
     auth: { tier: 'free', modelPreference: null },
     isElevated: () => false,
     creditLedger: [],
-    trackTabExplored: vi.fn(),
-    onboardingActive: false,
-    onboardingStep: 0,
     userPrefs: { tableViewOpen: false },
     setUserPref: vi.fn(),
   };

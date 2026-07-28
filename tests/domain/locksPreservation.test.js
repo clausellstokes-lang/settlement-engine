@@ -202,25 +202,87 @@ describe('remapNpcLocks — the lock survives its own subject reroll', () => {
   });
 });
 
-describe('locksAfterFullGenerate — Phase A drops what it cannot keep', () => {
+describe('locksAfterFullGenerate — Phase B remaps what it carried, prunes the rest', () => {
   test('DORMANT: a booleans-only map survives untouched, same reference', () => {
     const locks = { identity: true, geography: true, history: true };
-    expect(locksAfterFullGenerate(locks)).toBe(locks);
-    expect(locksAfterFullGenerate({})).toEqual({});
+    expect(locksAfterFullGenerate(locks, [])).toBe(locks);
+    expect(locksAfterFullGenerate({}, [])).toEqual({});
   });
 
-  test('id arrays are dropped, booleans kept', () => {
-    // The arrays would name a roster that no longer exists. Keeping them would
-    // leave the map advertising a protection nothing performs — the exact defect
-    // this engine was built to close, recreated one level down.
-    const out = locksAfterFullGenerate({
-      identity: true, npcs: ['npc_1'], factions: ['f_1'], institutions: ['i_1'],
-    });
-    expect(out).toEqual({ identity: true });
-  });
-
-  test('a WHOLE-SECTION npcs lock is a boolean and survives', () => {
+  test('a WHOLE-SECTION npcs lock is a boolean, not an id list, and survives', () => {
     const locks = { npcs: true };
-    expect(locksAfterFullGenerate(locks)).toBe(locks);
+    expect(locksAfterFullGenerate(locks, [])).toBe(locks);
+  });
+
+  test('a locked NPC id becomes the id its subject INHERITED in the new town', () => {
+    // The whole reason the carry returns a report: the keeper took over a fresh
+    // slot, so the old id now belongs to a stranger the user never locked.
+    const out = locksAfterFullGenerate(
+      { identity: true, npcs: ['npc_4'] },
+      [{ id: 'npc_2', fromId: 'npc_4' }],
+    );
+    expect(out).toEqual({ identity: true, npcs: ['npc_2'] });
+  });
+
+  test('an id the carry did not preserve is DROPPED, not left pointing at a stranger', () => {
+    // This is the deliberate divergence from remapNpcLocks, which leaves an
+    // unknown id alone because undo may restore a roster that matches it again.
+    // Across a FULL roll every old id has been reissued, so a stale id is not
+    // dormant — it protects somebody else. The leaf header records the tradeoff.
+    const out = locksAfterFullGenerate(
+      { npcs: ['npc_4', 'npc_9'], identity: true },
+      [{ id: 'npc_2', fromId: 'npc_4' }],
+    );
+    expect(out).toEqual({ npcs: ['npc_2'], identity: true });
+  });
+
+  test('when nothing survived, the npcs KEY goes away rather than emptying', () => {
+    // An empty array would read as "an npcs lock exists" to every sparse-map
+    // consumer; the absence of the key is what "not locked" is spelled as.
+    const out = locksAfterFullGenerate({ npcs: ['npc_4'], geography: true }, []);
+    expect(Object.prototype.hasOwnProperty.call(out, 'npcs')).toBe(false);
+    expect(out).toEqual({ geography: true });
+    // No report at all is the same situation: the carry sat dormant, so every
+    // locked id is stale by definition.
+    expect(locksAfterFullGenerate({ npcs: ['npc_4'] }, undefined)).toEqual({});
+  });
+
+  test('factions and institutions are NAME-keyed and KEPT VERBATIM', () => {
+    // Power factions and institutions carry no id: coup.js matches locks.factions
+    // on the stable part of the NAME. A name cannot misbind across a roll — it
+    // either matches a same-named entity in the new town or matches nothing — so
+    // the array survives as standing intent. Dropping it (what Phase A did)
+    // silently disarmed the coup shield on every full regenerate.
+    const locks = { factions: ['faction.the-guild'], institutions: ['the-mint'], history: true };
+    expect(locksAfterFullGenerate(locks, [])).toBe(locks);
+    const mixed = locksAfterFullGenerate(
+      { npcs: ['npc_4'], factions: ['f_1'], institutions: ['i_1'] },
+      [{ id: 'npc_2', fromId: 'npc_4' }],
+    );
+    expect(mixed).toEqual({ npcs: ['npc_2'], factions: ['f_1'], institutions: ['i_1'] });
+  });
+
+  test('the map cannot grow a phantom when two locks land on one slot', () => {
+    const out = locksAfterFullGenerate({ npcs: ['npc_3', 'npc_4'] }, [
+      { id: 'npc_7', fromId: 'npc_3' },
+      { id: 'npc_7', fromId: 'npc_4' },
+    ]);
+    expect(out.npcs).toEqual(['npc_7']);
+  });
+
+  test('a keeper that kept its own id leaves the map alone, same reference', () => {
+    const locks = { npcs: ['npc_2'], identity: true };
+    expect(locksAfterFullGenerate(locks, [{ id: 'npc_2', fromId: 'npc_2' }])).toBe(locks);
+  });
+
+  test('garbage degrades to "not locked" instead of throwing inside a generate', () => {
+    for (const locks of [null, undefined, 'locked', 42]) {
+      expect(() => locksAfterFullGenerate(/** @type {any} */ (locks), [])).not.toThrow();
+      expect(locksAfterFullGenerate(/** @type {any} */ (locks), [])).toBe(locks);
+    }
+    // A junk entry inside a real array is filtered, and the filtering itself is a
+    // change, so the caller gets a cleaned map rather than the raw one.
+    expect(locksAfterFullGenerate({ npcs: ['npc_4', '', null] }, [{ id: 'npc_2', fromId: 'npc_4' }]))
+      .toEqual({ npcs: ['npc_2'] });
   });
 });

@@ -13,8 +13,11 @@
  *   REFUSE — a locked section must not reroll, and must say so in a typed shape
  *     rather than silently doing nothing.
  *   REGEN  — the lock map must follow its subject through the roster reroll.
- *   GENERATE — a full roll keeps the booleans and drops the id arrays, which name
- *     a roster that no longer exists (Phase B carries them; it is not built).
+ *   GENERATE — a full roll carries the locked CHARACTERS bodily into the new town
+ *     (Phase B), remaps their ids to the slots they inherited, prunes ids nothing
+ *     preserved, and keeps the booleans and the name-keyed faction / institution
+ *     arrays. The pure algebra is pinned in tests/domain/locksPreservation.test.js
+ *     and the seeded no-drift proof in tests/generators/locksSurviveFullGenerate.
  *
  * @enforced-by this test
  */
@@ -195,13 +198,49 @@ describe('REGEN — the lock map follows its subject through the real reroll', (
 });
 
 describe('GENERATE — the full-roll lock tail', () => {
-  test('id arrays are dropped and booleans kept', async () => {
+  test('a locked character rides a FULL generate into the new town, map remapped', async () => {
+    // Phase B, driven through the STORE rather than the engine: the carry runs
+    // between the pipeline and carryLockedSections, and the map is rewritten
+    // inside the same Immer set() that folds the settlement in. An Immer draft is
+    // the one place a "returns the input unchanged" contract can misbehave.
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const town = generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
+      null, { seed: 'locks-store-generate-prev', customContent: {} },
+    );
+    const target = town.npcs[2];
+    store.setState({
+      settlement: town,
+      config: town.config,
+      locks: { identity: true, npcs: [String(target.id)], factions: ['f_1'], institutions: ['i_1'] },
+    });
+
+    await store.getState().generateSettlement('locks-store-generate-next');
+
+    const after = store.getState();
+    const survivor = after.settlement.npcs.find(n => String(n.name) === String(target.name));
+    expect(survivor, 'the locked character must be in the freshly generated town').toBeTruthy();
+    // The map now names the id the survivor actually holds, not the one they had.
+    expect(after.locks.npcs).toEqual([String(survivor.id)]);
+    // Name-keyed arrays are standing intent and survive verbatim; so do booleans.
+    expect(after.locks.factions).toEqual(['f_1']);
+    expect(after.locks.institutions).toEqual(['i_1']);
+    expect(after.locks.identity).toBe(true);
+    // The report is a TRACE. In the blob it would persist, export and diff forever.
+    expect(after.settlement._preservation).toBeUndefined();
+  }, 120_000);
+
+  test('a stale npc id disappears from the map, booleans and names stay', async () => {
     store.setState({
       settlement: townFixture(),
-      locks: { identity: true, geography: true, npcs: ['npc_1'], factions: ['f_1'] },
+      locks: { identity: true, geography: true, npcs: ['npc_nobody'], factions: ['f_1'] },
     });
     await store.getState().generateSettlement('locks-store-seed');
-    expect(store.getState().locks).toEqual({ identity: true, geography: true });
+    // npc_nobody named nobody in the previous roster, so nothing was carried and
+    // the id is pruned — but the name-keyed factions lock is kept, which is the
+    // Phase-A behaviour this lane inverted (it used to be dropped, silently
+    // disarming coup.js's proposal downgrade on every full regenerate).
+    expect(store.getState().locks).toEqual({ identity: true, geography: true, factions: ['f_1'] });
   }, 60_000);
 
   test('a locked identity keeps the name across a full roll', async () => {

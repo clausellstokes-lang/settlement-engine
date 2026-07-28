@@ -57,7 +57,7 @@ vi.mock('../../src/components/HomeHero.jsx', () => ({
 }));
 
 // Store mock. A mutable singleton drives every selector; subscribe and
-// getState are stubbed for the analytics/onboarding effects.
+// getState are stubbed for the analytics effects.
 const storeState = {
   // generator state (signed-in, empty: no mode picked, no settlement)
   settlement: null,
@@ -79,11 +79,6 @@ const storeState = {
   clearNeighbour: vi.fn(),
   clearSettlement: vi.fn(),
   dismissPipelineReveal: vi.fn(),
-  // onboarding slice
-  onboardingActive: false,
-  onboardingStep: 0,
-  advanceOnboarding: vi.fn(),
-  setOnboardingStep: vi.fn(),
   // analytics snapshot (read via getState in handleGenerate; unused on mount)
   institutionToggles: {},
   goodsToggles: {},

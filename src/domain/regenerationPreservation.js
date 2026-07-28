@@ -172,13 +172,26 @@ function chooseSlot(fresh, keeper, claimed) {
  * union is why an unlocked settlement is unaffected — an empty id set adds
  * nobody, so the filter returns exactly what it returned before locks existed.
  *
+ * `lockedIdsOnly` narrows that union to its second half, and exists for exactly
+ * one caller: the FULL-generate lock carry (locks engine Phase B, in
+ * generators/generateSettlementPipeline.js). A full generate mints a new town,
+ * and its baseline is that NOTHING survives — carrying the user's canon across
+ * it is a separate, unordered capability, and the mode policies would smuggle it
+ * in through the entity's own `locked` flag. Under this option the lock map is
+ * the whole ground of survival, so the carry performs precisely what the user
+ * asked for and nothing else. Default false ⇒ every existing caller is untouched.
+ *
  * @param {RosterMember[]|null|undefined} previousNpcs
  * @param {string|undefined} mode
  * @param {Set<string>} lockedIds  ids the settlement's lock map names; may be empty
+ * @param {boolean} [lockedIdsOnly]  ignore the mode policy; survive on the map alone
  * @returns {RosterMember[]}
  */
-function keepersOf(previousNpcs, mode, lockedIds) {
+function keepersOf(previousNpcs, mode, lockedIds, lockedIdsOnly = false) {
   if (!Array.isArray(previousNpcs)) return [];
+  if (lockedIdsOnly) {
+    return previousNpcs.filter(npc => npc && lockedIds.has(String(npc.id ?? '')));
+  }
   return previousNpcs.filter(npc => npc
     && (preservesEntity(mode, 'npc', npc) || lockedIds.has(String(npc.id ?? ''))));
 }
@@ -194,11 +207,13 @@ function keepersOf(previousNpcs, mode, lockedIds) {
  * characters it was added to protect.
  *
  * @param {RosterMember[]|null|undefined} previousNpcs
- * @param {{ mode?: string, locks?: Record<string, unknown>|null }} [options]
+ * @param {{ mode?: string, locks?: Record<string, unknown>|null, lockedIdsOnly?: boolean }} [options]
  * @returns {number}
  */
 export function countPreservedNpcs(previousNpcs, options = {}) {
-  return keepersOf(previousNpcs, options.mode, lockedNpcIdSet(options.locks)).length;
+  return keepersOf(
+    previousNpcs, options.mode, lockedNpcIdSet(options.locks), options.lockedIdsOnly === true,
+  ).length;
 }
 
 /**
@@ -213,13 +228,17 @@ export function countPreservedNpcs(previousNpcs, options = {}) {
  *
  * @param {RosterMember[]|null|undefined} previousNpcs  Roster being replaced.
  * @param {RosterMember[]|null|undefined} freshNpcs     Roster the generators just produced.
- * @param {{ mode?: string, locks?: Record<string, unknown>|null }} [options]
+ * @param {{ mode?: string, locks?: Record<string, unknown>|null, lockedIdsOnly?: boolean }} [options]
  *   Regeneration mode (defaults to 'rebalance') and the settlement's lock map.
+ *   `lockedIdsOnly` drops the mode policy so the map is the only ground for
+ *   survival — see keepersOf; it is the full-generate carry's policy.
  * @returns {PreservationResult}
  */
 export function mergePreservedNpcs(previousNpcs, freshNpcs, options = {}) {
   const fresh = Array.isArray(freshNpcs) ? freshNpcs : [];
-  const keepers = keepersOf(previousNpcs, options.mode, lockedNpcIdSet(options.locks));
+  const keepers = keepersOf(
+    previousNpcs, options.mode, lockedNpcIdSet(options.locks), options.lockedIdsOnly === true,
+  );
   if (keepers.length === 0) {
     return { npcs: fresh, preserved: [], displacements: [], overflow: [] };
   }

@@ -72,7 +72,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // Store state
   const settlement    = useStore(s => s.settlement);
   const activeSaveId  = useStore(s => s.activeSaveId);
-  const config        = useStore(s => s.config);
+  // (No `config` subscription: the retired coach effect was its only reader, and
+  // the analytics payload takes config off a fresh useStore.getState() snapshot
+  // in handleGenerate. Nothing this component RENDERS depends on config.)
   const wizardMode    = useStore(s => s.wizardMode);
   const loadedFromSave = useStore(s => s.loadedFromSave);
   const importedNeighbour = useStore(s => s.importedNeighbour);
@@ -298,29 +300,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     setRestorableDraft(null);
   }, []);
 
-  // Onboarding coach step tracking
-  const onboardingActive = useStore(s => s.onboardingActive);
-  const onboardingStep = useStore(s => s.onboardingStep);
-  const advanceOnboarding = useStore(s => s.advanceOnboarding);
-
-  // Auto-advance step 0 → 1 when user picks a tier (config.settType changes from 'random')
-  useEffect(() => {
-    if (!onboardingActive) return;
-    if (onboardingStep !== 0) return;
-    if (config.settType && config.settType !== 'random') {
-      advanceOnboarding();
-    }
-  }, [onboardingActive, onboardingStep, config.settType, advanceOnboarding]);
-
-  // Auto-advance step 1 → 2 when a settlement is first generated
-  useEffect(() => {
-    if (!onboardingActive) return;
-    if (onboardingStep >= 2) return;
-    if (settlement) {
-      // Jump straight to "explore" regardless of whether tier was touched
-      useStore.getState().setOnboardingStep(2);
-    }
-  }, [onboardingActive, onboardingStep, settlement]);
+  // (The first-run coach's step tracking lived here until 2026-07-27. It drove
+  // two data-onboard-highlight attributes that no CSS rule ever styled, so it
+  // rendered nothing; the coach state machine was retired whole and the live
+  // first-run teaching belongs to the guidance registry — see the header of
+  // src/store/onboardingSlice.js.)
 
   // Empty state: no mode selected yet AND no settlement.
   //
@@ -428,7 +412,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             unchanged. The inner flex column re-supplies the SP.xl gap the two blocks
             had as sibling flex children before the leaf wrapped them. */}
         <div className="oc-m-unfold" style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
-          <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
+          <div>
             {/* showPlaceInRegion is a conscious decision (census A3): the
                 Place-in-Region layer is a KEEP control that master's base-of-record
                 composition renders in Advanced (the panel internally gates it to
@@ -465,7 +449,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           onClick={handleGenerate}
           disabled={generating}
           busy={generating}
-          data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
         >
           {generating ? 'Generating draft…' : 'Generate Draft'}
         </Button>

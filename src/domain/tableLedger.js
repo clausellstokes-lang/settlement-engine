@@ -15,11 +15,63 @@
  * confirmed, validated, typed record reaches the engine (the store dispatcher).
  *
  * EXISTING-EFFECTS-ONLY: every kind maps to an effect the engine already has —
- *   • incident        → a canon flavor chronicle line (no mechanical delta).
- *   • stressor-relief → the RESOLVE_STRESSOR canon event (ease a live hardship).
- *   • obligation      → the APPLY_STRESSOR canon event (a new burden/debt).
- *   • exposure        → the EXPOSE_CORRUPTION canon event (a covert→revealed).
- * No new physics. Two design-listed kinds are deliberately NOT built here for
+ *   • incident           → a canon flavor chronicle line (no mechanical delta).
+ *   • stressor-relief    → the RESOLVE_STRESSOR canon event (ease a live hardship).
+ *   • obligation         → the APPLY_STRESSOR canon event (a new burden/debt).
+ *   • exposure           → the EXPOSE_CORRUPTION canon event (a covert→revealed).
+ *   • structure-harm     → the IMPAIR_INSTITUTION canon event (a place weakened).
+ *   • structure-restored → the RESTORE_INSTITUTION canon event (a place mended).
+ *   • supply-loss        → the DEPLETE_RESOURCE canon event (a worked resource gone).
+ *   • supply-restored    → the RECOVERED_RESOURCE canon event (it flows again).
+ * No new physics: no new event type, no registry row, no mutation handler.
+ *
+ * ── THE FOUR ECONOMY VERBS (atlas Part VII #11) ─────────────────────────────
+ * WHY IMPAIR AND NOT DAMAGE: the composer folds DAMAGE_INSTITUTION into
+ * IMPAIR_INSTITUTION ("the single weaken-it action", affordanceManifest
+ * foldedInto). The table desk must not resurrect a verb the composer's
+ * legibility law retired, so structure-harm rides IMPAIR.
+ *
+ * WHY ONLY structure-harm CARRIES A DIAL: a band is offered iff the engine
+ * reads it in a way the DM can SEE. IMPAIR_INSTITUTION reads payload.severity
+ * (registry sev01(…, 0.5)) and the handler writes an impairment whose severity
+ * decides real consequences — at severity >= 0.6 with dimension 'capacity' a
+ * food-anchor institution raises the settlement's food_anchor_lost crisis, so
+ * 'major' (0.8) starves the town where 'moderate' (0.5) does not. That dial is
+ * honest. RESTORE_INSTITUTION and DEPLETE_RESOURCE have flat stateDeltas that
+ * never read severity, so a dial there would be a lie.
+ *
+ * supply-restored IS THE SUBTLE ONE (recorded because the obvious reading is
+ * wrong): RECOVERED_RESOURCE's stateDeltas DOES read payload.severity —
+ * sev01(payload?.severity, 0.7). We still send a BARE payload, so the engine
+ * takes its own 0.7 default, deliberately: the part of a recovery a DM can see
+ * is BINARY (the resource is back or it is not — the handler clears every
+ * depletion format regardless), and the band vocabulary is a severity-of-harm
+ * scale on which "a Grave recovery" means nothing. Offering it would be a dial
+ * whose only effect is a hidden pressure nudge. The dial is withheld on
+ * legibility grounds, not because the engine ignores it.
+ *
+ * dimension IS A FIXED WALL LITERAL ('capacity'), never user input: a
+ * legitimacy scandal is the EXISTING 'exposure' kind, and letting the table
+ * choose a dimension would let a scandal ride the physical-harm verb.
+ *
+ * CONSENT GATE: N/A, and that is decided rather than missed. None of the four
+ * touches NPC identity, fate, or personhood — the targets are institutions and
+ * resources only.
+ *
+ * DELIBERATELY DEFERRED (documented, not bugs to re-find):
+ *   • Trade-good verbs (ADD_TRADE_GOOD / REMOVE_TRADE_GOOD): roster surgery is
+ *     an AUTHORING act (the composer/editor desk), not a table moment. A looted
+ *     caravan that is pure scarcity is already expressible as obligation.
+ *   • Deterministic import-clerk keywords for the four new kinds: eager bytes
+ *     in the import mirror, and the manual picker is unaffected (see
+ *     domain/tableEvents.js KIND_KEYWORDS).
+ *   • The 'table-clerk' EDGE FUNCTION vocabulary allowlist: a deploy seam, and
+ *     OWNER-GATED. Safe while stale — the client re-validation wall means a
+ *     stale edge can only fail to propose the new kinds, never smuggle one.
+ *   • A Herald-side (campaign-scope) mount of this ledger: a separate G-2b
+ *     product decision.
+ *
+ * Two design-listed kinds are deliberately NOT built here for
  * lack of a clean existing settlement-blob effect (documented deferrals, not
  * bugs to re-find):
  *   • legitimacy-nudge — no standalone legitimacy event type exists; the field
@@ -37,6 +89,15 @@
  * reach targetId / payload.severity / any stateDeltas-read field.
  */
 
+// The four economy verbs' target rosters. Re-exported from the ONE leaf both
+// authoring desks share (events/targetRosters.js), so the ledger's pickers and
+// the composer's pickers cannot disagree about what is nameable. Both this
+// module and the manifest are lazy, so the shared leaf stays off first paint.
+export {
+  institutionTargets, impairedInstitutionTargets,
+  depletableResourceTargets, depletedResourceTargets,
+} from './events/targetRosters.js';
+
 /** The provenance stamp on every table-authored effect. */
 export const TABLE_EVENT_SOURCE = 'table';
 
@@ -46,6 +107,10 @@ export const TABLE_EVENT_KINDS = Object.freeze([
   'stressor-relief',
   'obligation',
   'exposure',
+  'structure-harm',
+  'structure-restored',
+  'supply-loss',
+  'supply-restored',
 ]);
 const _kindSet = new Set(TABLE_EVENT_KINDS);
 
@@ -69,16 +134,34 @@ export const OBLIGATION_TYPES = Object.freeze([
 const _obligationSet = new Set(OBLIGATION_TYPES);
 
 /**
+ * The FIXED impairment dimension every structure-harm carries. A wall literal,
+ * never user input — see the header's dimension note.
+ */
+export const IMPAIR_DIMENSION = 'capacity';
+
+/**
  * Per-kind spec: the existing engine effect each kind maps to, and whether it
  * needs a bounded magnitude / a typed target. The dispatch tag routes the store
  * committer (settlementRenameHelpers.applyTableEvent) to applyEvent vs the
  * flavor-line helper.
+ *
+ * payloadShape names the SHAPE of the engine event's payload, and it is the one
+ * discriminator buildTableEffect and the admission wall both switch on:
+ *   • 'none'     — no engine event at all (a flavor chronicle line).
+ *   • 'stressor' — { stressorType, label, severity }.
+ *   • 'severity' — { severity }.
+ *   • 'impair'   — { severity, dimension } (dimension fixed to IMPAIR_DIMENSION).
+ *   • 'bare'     — {} exactly: a typed target and no dial.
  */
 export const KIND_SPEC = Object.freeze({
-  incident: { needsMagnitude: false, needsTarget: false, dispatch: 'flavor', eventType: null },
-  'stressor-relief': { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'RESOLVE_STRESSOR' },
-  obligation: { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'APPLY_STRESSOR' },
-  exposure: { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'EXPOSE_CORRUPTION' },
+  incident: { needsMagnitude: false, needsTarget: false, dispatch: 'flavor', eventType: null, payloadShape: 'none' },
+  'stressor-relief': { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'RESOLVE_STRESSOR', payloadShape: 'stressor' },
+  obligation: { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'APPLY_STRESSOR', payloadShape: 'stressor' },
+  exposure: { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'EXPOSE_CORRUPTION', payloadShape: 'severity' },
+  'structure-harm': { needsMagnitude: true, needsTarget: true, dispatch: 'applyEvent', eventType: 'IMPAIR_INSTITUTION', payloadShape: 'impair' },
+  'structure-restored': { needsMagnitude: false, needsTarget: true, dispatch: 'applyEvent', eventType: 'RESTORE_INSTITUTION', payloadShape: 'bare' },
+  'supply-loss': { needsMagnitude: false, needsTarget: true, dispatch: 'applyEvent', eventType: 'DEPLETE_RESOURCE', payloadShape: 'bare' },
+  'supply-restored': { needsMagnitude: false, needsTarget: true, dispatch: 'applyEvent', eventType: 'RECOVERED_RESOURCE', payloadShape: 'bare' },
 });
 
 /** Clamp any value to a finite string; empty for non-strings.
@@ -171,10 +254,15 @@ export function buildTableEffect(record) {
     };
   }
   // A typed, bounded engine event. Mechanical fields come ONLY from the typed
-  // target + the banded severity; the verbatim flavor rides tableFlavor.
-  const payload = spec.eventType === 'EXPOSE_CORRUPTION'
-    ? { severity: record.severity }
-    : { stressorType: record.targetRef, label: record.targetLabel, severity: record.severity };
+  // target + the banded severity; the verbatim flavor rides tableFlavor. The
+  // payload shape is the kind's declared one — a 'bare' kind sends {} and lets
+  // the engine's own default stand (see the header on supply-restored).
+  const shape = spec.payloadShape;
+  let payload;
+  if (shape === 'bare') payload = {};
+  else if (shape === 'impair') payload = { severity: record.severity, dimension: IMPAIR_DIMENSION };
+  else if (shape === 'severity') payload = { severity: record.severity };
+  else payload = { stressorType: record.targetRef, label: record.targetLabel, severity: record.severity };
   return {
     dispatch: 'applyEvent',
     event: {
