@@ -13,7 +13,7 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
+import { getActivePacks, findPackByKey, SINGLE_DOSSIER, TIERS } from '../config/pricing.js';
 import { fetchCreditBalanceFromLedger } from './creditLedger.js';
 import { track, EVENTS, Funnel } from './analytics.js';
 
@@ -28,7 +28,7 @@ function buildProductsMap() {
     premium: {
       key:       'premium',
       name:      'Premium Upgrade',
-      price:     '$6/mo',
+      price:     `$${(TIERS.cartographer.priceCents / 100).toFixed(2)}/mo`,
       credits:   30,
       perCredit: null,
       discount:  null,

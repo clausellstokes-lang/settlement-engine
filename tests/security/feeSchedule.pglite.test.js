@@ -7,7 +7,8 @@
  *   · CLIENT quote  — src/config/pricing.js getAiCostForModel(feature, model)
  *                     picks NEW_AI_COSTS (standard) or FAST_AI_COSTS (fast).
  *                     This is the pre-flight number the UI shows the buyer.
- *   · SERVER charge — the spend_credits(feature) RPC (migration 024) has its
+ *   · SERVER charge — the net-current spend_credits(feature) RPC (migration
+ *                     192, carrying 174's forward reprice) has its
  *                     OWN internal CASE fee schedule and is the ONLY thing that
  *                     actually debits the ledger. The edge function passes just
  *                     the feature STRING; the RPC decides the price.
@@ -19,14 +20,15 @@
  * it is pinned by its own contract test. This pin nails the two ENDPOINTS: the
  * client's quote and the database's actual charge.)
  *
- * This runs the REAL RPC body (extracted verbatim from migration 024, with
+ * This runs the REAL net-current RPC body (extracted verbatim from migration
+ * 192, with
  * get_credit_balance from 018) inside in-process Postgres (pglite) — the same
  * house pattern as creditLedger.pglite.test.js — and, for every feature × model
  * the client can request, asserts the ledger debit equals pricing.js's quote.
  *
  * The pin FAILS IF EITHER SOURCE CHANGES ALONE:
  *   · bump a number in pricing.js only → quote ≠ ledger debit → red.
- *   · bump a number in the 024 CASE only → ledger debit ≠ quote → red.
+ *   · bump a number in the 192 CASE only → ledger debit ≠ quote → red.
  * Restore parity (change both) and it goes green again — which is the point:
  * the two must move together.
  */
@@ -46,7 +48,7 @@ const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget —
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
-  '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
+  '192': resolve(dir, '192_tier_credit_multiplier.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -114,7 +116,8 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
   beforeAll(async () => {
     db = new PGlite();
     // Minimal harness: auth.uid()/privilege stubs + the four credit tables, then
-    // the REAL get_credit_balance (018) and spend_credits (024) bodies.
+    // the REAL get_credit_balance (018) and net-current spend_credits (192)
+    // bodies. Historical 024/057/114 remain immutable at their applied prices.
     await db.exec(`
       create schema if not exists auth;
       create or replace function auth.uid() returns uuid language sql stable as $fn$
@@ -122,6 +125,9 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
       $fn$;
       create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
+      $fn$;
+      create or replace function public.assert_current_session() returns void language plpgsql as $fn$
+        begin return; end
       $fn$;
       create table public.profiles (
         id uuid primary key, role text,
@@ -145,9 +151,16 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
         created_at timestamptz not null default now(),
         primary key (spend_id, grant_id)
       );
+      create table public.system_config (
+        key text primary key,
+        value jsonb not null
+      );
+      create or replace function public.account_is_active(p_user_id uuid) returns boolean language sql stable as $fn$
+        select exists(select 1 from public.profiles where id = p_user_id)
+      $fn$;
     `);
     await db.exec(extractFn('018', 'get_credit_balance'));
-    await db.exec(extractFn('024', 'spend_credits'));
+    await db.exec(extractFn('192', 'spend_credits'));
   }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
@@ -182,7 +195,7 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
       await grant(UID, START);
 
       const { r } = await scalar(`select public.spend_credits('${spendFeature}') as r`);
-      expect(r.ok, `RPC rejected feature "${spendFeature}" (unknown to the 024 CASE?)`).toBe(true);
+      expect(r.ok, `RPC rejected feature "${spendFeature}" (unknown to the 192 CASE?)`).toBe(true);
 
       // The amount the ledger actually debited — the SERVER's charged price.
       const charged = (await scalar(

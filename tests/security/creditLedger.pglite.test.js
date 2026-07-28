@@ -8,8 +8,8 @@
  * isn't available in this dev env.
  *
  * This closes that gap WITHOUT Docker: it loads the ACTUAL, NET-CURRENT function
- * bodies — spend_credits from migration 024 (the ledger-allocation rewrite, NOT
- * the superseded 009 counter version), get_credit_balance from 110 (the IDOR-
+ * bodies — spend_credits from migration 192 (174's forward reprice plus the
+ * inert tier-multiplier seam), get_credit_balance from 110 (the IDOR-
  * guarded net-current reader), refund_credits from the Wave-1 fused 123 (FOR
  * UPDATE + elevated-skip from 087 + no-op idempotency + ledger-recompute counter),
  * admin_grant_credits from 009 — into an in-process Postgres (pglite) and
@@ -64,6 +64,7 @@ const MIG = {
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
   '110': resolve(dir, '110_restrict_get_credit_balance_to_owner.sql'),
   '123': resolve(dir, '123_money_and_public_projection_hardening.sql'),
+  '192': resolve(dir, '192_tier_credit_multiplier.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -124,6 +125,9 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
       create or replace function public.current_user_is_privileged() returns boolean language sql stable as $fn$
         select coalesce(nullif(current_setting('test.privileged', true), '')::boolean, false)
       $fn$;
+      create or replace function public.assert_current_session() returns void language plpgsql as $fn$
+        begin return; end
+      $fn$;
       create or replace function public._audit_action(
         p_actor_id uuid, p_target_id uuid, p_action text, p_before jsonb, p_after jsonb, p_reason text
       ) returns void language plpgsql as $fn$ begin return; end $fn$;
@@ -151,6 +155,13 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
         created_at timestamptz not null default now(),
         primary key (spend_id, grant_id)
       );
+      create table public.system_config (
+        key text primary key,
+        value jsonb not null
+      );
+      create or replace function public.account_is_active(p_user_id uuid) returns boolean language sql stable as $fn$
+        select exists(select 1 from public.profiles where id = p_user_id)
+      $fn$;
     `);
     // Structural refund idempotency — the APPLIED backstop index (087, re-asserted
     // by the fused 123): at most one refund grant per spend row, keyed on the
@@ -167,7 +178,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     // (incremental `credits + amount` drift + raise-on-duplicate) or 009 (F1 raise).
     // get_credit_balance is the net-current 110 (IDOR-guarded).
     await db.exec(extractFn('110', 'get_credit_balance'));
-    await db.exec(extractFn('024', 'spend_credits'));
+    await db.exec(extractFn('192', 'spend_credits'));
     await db.exec(extractFn('123', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
   }, PGLITE_BOOT_TIMEOUT_MS);
@@ -187,7 +198,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     expect(await balanceOf(UID)).toBe(5); // the expired 5 is NOT counted
   });
 
-  // ── spend_credits (024 ledger-allocation version) ────────────────────────────
+  // ── spend_credits (192 net-current ledger-allocation version) ────────────────
   it('debits the feature cost from active grants and records an allocation', async () => {
     await grant(UID, 10);
     const { r } = await scalar("select public.spend_credits('narrative') as r"); // cost 5

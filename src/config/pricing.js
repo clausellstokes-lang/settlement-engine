@@ -73,6 +73,29 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
+// Runtime quote cache. The server remains the charging authority; this holds the
+// last validated get_ai_pricing payload fetched by the lazy live-pricing leaf so
+// every synchronous client preflight and label can quote the same schedule.
+// It is deliberately session-only and starts null, preserving the shipped
+// constants as the offline/undeployed fallback.
+let liveAiPricing = null;
+
+/** @internal Called only by config/livePricing.js after a successful RPC read. */
+export function _setLiveAiPricing(payload) {
+  liveAiPricing = payload && typeof payload === 'object' ? payload : null;
+}
+
+/** @internal Test/HMR seam paired with livePricing._resetLivePricingCache(). */
+export function _clearLiveAiPricing() {
+  liveAiPricing = null;
+}
+
+function validLiveAiCost(feature, modelPreference) {
+  const profile = normalizeModelPreference(modelPreference || DEFAULT_MODEL_PREFERENCE);
+  const value = liveAiPricing?.creditCosts?.[profile]?.[feature];
+  return Number.isInteger(value) && value >= 1 && value <= 12 ? value : null;
+}
+
 // ── Surveyor (S1 + S3 + S4–S6) task-priced managed-credit costs ────────────
 // The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
 // pricing is an owner-queued decision. Kept in lockstep with the server-side
@@ -312,7 +335,9 @@ export function getActiveAiCosts() {
 
 /** Cost in credits for a specific AI feature. */
 export function getAiCost(feature) {
-  return getActiveAiCosts()[feature] ?? 0;
+  return validLiveAiCost(feature, DEFAULT_MODEL_PREFERENCE)
+    ?? getActiveAiCosts()[feature]
+    ?? 0;
 }
 
 /**
@@ -351,6 +376,8 @@ export function getSurveyorAiCost(feature, tier) {
 
 /** Cost in credits for a feature under the selected AI model preference. */
 export function getAiCostForModel(feature, modelPreference) {
+  const live = validLiveAiCost(feature, modelPreference);
+  if (live != null) return live;
   const schedule = isFastModelPreference(modelPreference) ? FAST_AI_COSTS : getActiveAiCosts();
   return schedule[feature] ?? getAiCost(feature);
 }

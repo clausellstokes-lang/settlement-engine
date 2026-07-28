@@ -1,10 +1,13 @@
 # AI Credit Pricing: Margin Sheet (optimal margins at Opus-default economics)
 
-Owner decision surface for the 2026-07-21 reprice. The owner's deploy of the
-migration plus the edge function IS the sign-off act (see Deploy order). Nothing
-here is live until that deploy: the migration sits in the 180 band and is not
-applied, the edge function is deploy-gated, and the client ships at the next
-release with a graceful fallback to the shipped constants.
+Ratified 2026-07-28 under the owner's delegated best-judgment instruction. The
+5 / 4 / 6 standard schedule and 2 / 3 / 4 fast schedule remain the starting
+prices until real usage telemetry justifies a later explicit reprice.
+
+Nothing here reaches production merely because it is committed: migration 174
+and the edge function remain deploy-gated, while the client reads the live
+schedule lazily and falls back to the shipped constants when the RPC is absent
+or offline.
 
 ## 1. Summary of the change
 
@@ -130,7 +133,7 @@ Other standard-tier models are cheaper than Opus per token (Sonnet ~0.6x,
 GPT-5.2 ~0.4x on input), so they clear the floor by a wider margin than the Opus
 figures above; the Opus column is the binding case because Opus is the default.
 
-SENSITIVITY on the narrative decision (the one judgment call): narrative = 5
+SENSITIVITY on the narrative decision: narrative = 5
 meets the 2.5x floor on the careful realistic cost (~0.31 USD, output-dominated,
 ~2.57x) and clears 1.2x on a p95 worst-case; it falls short of 1.2x only against
 the pathological absolute-max output (every one of 20 calls maxing its
@@ -140,12 +143,13 @@ conservative alternative is narrative = 6; to keep progression the premium
 action that would lift progression to 7, or the owner may instead accept
 narrative > progression (breaking the `progression > narrative` invariant, which
 is arguably the more cost-honest ordering since narrative is the highest-cost
-action). This is left for the owner at deploy; the calibrator (below) will also
-surface a recommendation from real cost data.
+action). The 2026-07-28 ruling is to hold 5 / 4 / 6 until the calibrator and
+observed usage provide evidence, rather than pre-emptively charging for the
+pathological ceiling.
 
 ## 5. The policy knobs
 
-Seeded in `ai_pricing_knobs`, updated by migration 180:
+Seeded in `ai_pricing_knobs`, updated by migration 174:
 
 | Knob | Before | After | Meaning |
 |---|---:|---:|---|
@@ -164,61 +168,36 @@ provider prices move.
 
 Everything commits inert. The deploy sequence:
 
-1. **CLIENT first.** The client ships the new constants (the displayed AI costs
-   are now correct: 5 / 4 / 6). NOTE: the display strings ship as correct STATIC
-   literals, not live-config-driven — the reusable live-read leaf
-   (`src/config/livePricing.js`, get_ai_pricing plus graceful fallback) is built
-   but UNWIRED because wiring it, or config-driving any display, rebalances the
-   eager first-paint closure past its owner-gated byte ceiling (see section 7).
-   So a shipped client shows the correct static numbers; it does not yet
-   auto-follow a future server-side reprice.
+1. **CLIENT first.** The client ships the 5 / 4 / 6 constants as its offline
+   fallback and lazily reads `get_ai_pricing` on paid action, pricing, and admin
+   surfaces. A successful read warms the synchronous preflight cache, so the
+   displayed price and the action preflight use the same live schedule.
 2. **Migration + edge function TOGETHER.** The migration updates the live
    `ai_credit_costs` config (the config-first charge path) and the fallback
    bodies; the edge function precheck is repriced to match. The server precheck
    plus the `spend_credits` RPC stay authoritative and fail-safe: a stale client
    can never over- or under-charge, because the database decides the price.
 
-The migration in the 180 band is NOT applied (the applied-migrations head is
-untouched at 117). Applying it, together with deploying the edge function, is the
-owner's sign-off act.
-
-MIGRATION NUMBER (180, not 170): the parallel admin/moderation lane (vision-i)
-has already committed migrations 170-173, so the pricing migration sits in its
-reserved 180 band to avoid an unfoldable duplicate. On this isolated branch the
-contiguity gate reports a 170-179 gap, and the merged tree will still have a
-174-179 gap; the fold renumbers this file to 174 (the next contiguous slot after
-the admin lane's head). The gap is a known fold-time item, deliberately NOT
-filled with dummy migrations.
+Migration 174 is the sole forward reprice. Already-applied migrations 024, 057,
+and 114 retain their original 3 / 4 / 5 bytes; migration 192 carries the current
+net spend body plus the still-inert capability-tier multiplier seam. Applying
+the migration train and deploying the edge function remain external release
+acts, after the clone rehearsal.
 
 ## 7. Open items flagged for the owner
 
 - **Cartographer / Stripe price**: the codebase is internally consistent that
-  Cartographer is 5.99 USD (599 cents), and every rendered surface shows 5.99.
+  Cartographer is 5.99 USD (599 cents), and rendered surfaces derive or show
+  that price consistently.
   The actual Stripe charge is a `STRIPE_PRICE_PREMIUM` price id whose amount
   lives in the Stripe dashboard, NOT in the repo, so the true charged cents can
-  only be confirmed there. Residual dead 6.00 / 600 literals remain in
-  src/lib/stripe.js, a workshop copy key, and a LockedDestination default (none
-  currently rendered); a small cleanup, out of this lane's scope.
-- **AiPricingResyncPanel dead read**: the admin panel reads a store slice that no
-  slice writes, so "Schedule last updated" always shows "never". The fix is to
-  read `get_ai_pricing().updatedAt` via the new `config/livePricing.js` leaf, but
-  the panel lives in the admin lane owned by a parallel workstream, so the fix is
-  deferred with an exact patch rather than applied across a lane boundary.
-- **Live-config-driven display (the byte-budget decision)**: `config/livePricing.js`
-  (the reusable get_ai_pricing live-read plus graceful-fallback leaf) is BUILT but
-  UNWIRED. Neither it nor a plain `config/pricing.js` import can be added to a
-  display surface without rebalancing vite shared chunks and pushing the eager
-  first-paint static closure past its owner-gated ceiling (measured +9 bytes over
-  the 1,040,000 budget; the closure sits at 1,039,995 today, a 5-byte margin).
-  This is an owner decision:
-    - Option A (RECOMMENDED): raise the eager first-paint byte budget ~10 bytes
-      (an owner-signed bump), then wire `livePricing.js` into the display surfaces
-      so the client display follows whatever the server actually charges after any
-      reprice or nightly-calibrator change. This retires the drift bug class for
-      good and also unblocks the AiPricingResyncPanel "last updated" fix.
-    - Option B: keep the correct static literals (what shipped) and accept that the
-      displayed AI costs will silently drift from the server again after any future
-      reprice or applied calibrator recommendation, until someone hand-syncs them.
-  Recommendation: Option A. The displays already drifted once (the bug this lane
-  fixed); a roughly 10-byte budget bump is cheap next to recurring silent
-  price-display drift on a paid surface.
+  only be confirmed there. That dashboard verification is the only remaining
+  price-fact check.
+- **Live pricing and first paint — CLOSED 2026-07-28.** The lazy hook is wired
+  into the pricing page, action surfaces, and resync panel. A fresh production
+  build measured the eight-file first-paint static closure at **1,034,867
+  bytes**, 5,133 bytes below the unchanged 1,040,000-byte ceiling. No budget
+  raise was needed.
+- **Automatic repricing remains OFF.** `applyCreditCosts` stays disabled and no
+  `ai_tier_multipliers` row is seeded. The calibrator may recommend; it does not
+  silently change customer charges.

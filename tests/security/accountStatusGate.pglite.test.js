@@ -148,7 +148,10 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
   it('an ACTIVE account can spend (baseline — funds + gate both pass)', async () => {
     const { r } = await scalar("select public.spend_credits('narrative') as r");
     expect(r.ok).toBe(true);
-    expect(r.balance).toBe(5); // 10-credit grant − narrative (cost 5)
+    // This suite deliberately executes historical migration 057, whose applied
+    // fallback schedule was 3/4/5. Migration 174 performs the later forward
+    // reprice; current-price parity is covered against net-current 192.
+    expect(r.balance).toBe(7); // 10-credit grant − historical narrative cost 3
   });
 
   it('a BANNED account cannot spend (despite a valid JWT and sufficient funds)', async () => {

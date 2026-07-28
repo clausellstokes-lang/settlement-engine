@@ -1402,7 +1402,7 @@ export const en = Object.freeze({
     navLabel:       'Workshop',
     locked:         'Workshop unlocks with Cartographer.',
     lockedBody:     'Drag and drop institutions, resources, and stressors. Cascade-preview before you commit. Bring your own custom content.',
-    upgradeCta:     'Upgrade for $6/mo',
+    upgradeCta:     'Upgrade to Cartographer',
     samplePreview:  'See a sample →',
   },
 
@@ -1540,7 +1540,7 @@ export const en = Object.freeze({
   accountFaq: {
     creditGrant: {
       q: 'How does the free first Narrative work?',
-      a: "Every account gets one free Narrative. It refines a saved settlement into prose, and it costs you nothing the first time. After that, AI actions spend credits: a Narrative is 5, Daily Life is 4, and a Progression pass is 6. Choosing a faster model costs less: a Narrative is 2, Daily Life 3, and a Progression pass 4. Buy more from the Subscription panel.",
+      a: "Every account gets one free Narrative. It refines a saved settlement into prose, and it costs you nothing the first time. After that, AI actions spend credits. Each action shows its current price before you run it, and faster models cost less. Buy more from the Subscription panel.",
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
@@ -1548,11 +1548,11 @@ export const en = Object.freeze({
     },
     refundWindow: {
       q: 'Do you offer refunds?',
-      a: 'Single-dossier purchases are refundable within 7 days if you have not exported or downloaded the PDF. Subscription refunds are handled case-by-case via Customer Support below.',
+      a: 'If you were charged twice, charged in error, or did not receive what you bought, contact Customer Support below with your Stripe receipt. Other refunds and cancellations follow the Terms and any rights required by applicable law.',
     },
     founderLifetime: {
       q: 'What is the Founder Lifetime plan?',
-      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 30 buyers; the counter is live above this FAQ.',
+      a: 'A one-time payment for lifetime access to the paid Cartographer tier and a place in the credits. Capped at the first 30 buyers; the counter is live above this FAQ.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',

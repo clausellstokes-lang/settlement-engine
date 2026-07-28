@@ -45,11 +45,10 @@
 --        coherent with the spend_credits CASE — no quote/charge mismatch if config
 --        ever vanishes).
 --
--- SEED-vs-DEPLOY: the historical CASE/seed declarations (024/057/114) are edited in
---   place to the new schedule so the contract + fee-schedule parity tests (which grep
---   / execute those bodies) stay green and internally consistent; they are inert for
---   production (the live function is the superseded net-current body this migration
---   recreates, and the live config is what UPDATE (1) changes).
+-- HISTORY-vs-DEPLOY: migrations 024/057/114 retain the bytes that production
+--   applied (standard 3/4/5). This migration is the sole forward reprice to
+--   standard 5/4/6. Tests that assert current charge/display parity execute the
+--   net-current 192 body rather than rewriting historical migrations.
 --
 -- Re-runnable: idempotent jsonb UPDATEs + create-or-replace function bodies.
 -- Depends on: 002 (system_config), 018/024 (credit ledger), 057 (account gate),
@@ -71,7 +70,7 @@
 -- four fast profiles and every dailyLife value stay untouched.
 update public.system_config set value = jsonb_set(
       jsonb_set(value, '{updatedAt}', to_jsonb(to_char(now() at time zone 'utc', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))),
-      '{updatedBy}', to_jsonb('migration_180'::text))
+      '{updatedBy}', to_jsonb('migration_174'::text))
 where key = 'ai_credit_costs';
 
 update public.system_config set value = jsonb_set(

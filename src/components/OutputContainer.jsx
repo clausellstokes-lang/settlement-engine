@@ -9,6 +9,7 @@ import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import Button from './primitives/Button.jsx';
 import MobileTabStrip from './primitives/MobileTabStrip.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
+import { useLiveAiCostResolver } from '../hooks/useLivePricing.js';
 import { navigate } from '../hooks/useRoute.js';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
@@ -203,7 +204,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const storeRegenerate = useStore(s => s.regenSection);
   const requestNarrative = useStore(s => s.requestNarrative);
   const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useStore(s => s.getCost);
+  const getCost = useLiveAiCostResolver();
   const _creditBalance = useStore(s => s.creditBalance);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);

@@ -15,6 +15,7 @@
  */
 
 import { getActiveAiCosts, TIERS } from '../../config/pricing.js';
+import { resolveLiveStandardCost } from '../../config/livePricing.js';
 import {
   getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths, SURVEYOR_SURFACE, } from '../../config/pricingDisplay.js';
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
@@ -159,16 +160,22 @@ export function FounderCharterBand({ founderSeatsRemaining, cta, isPrimaryCta, l
 // from SURVEYOR_SURFACE.taskCosts (PROVISIONAL, owner-queued) + the active
 // narrative schedule; the ≈$ derives from the starter-pack anchor. A geometric
 // instrument (a real table), quiet and fully accessible (craft-law split).
-export function TaskMenu() {
+export function TaskMenu({ livePricing = null }) {
   const anchor = getCreditAnchor();
+  const narrativeCosts = Object.fromEntries(
+    Object.keys(getActiveAiCosts()).map((feature) => [
+      feature,
+      resolveLiveStandardCost(feature, livePricing),
+    ]),
+  );
   const rows = [
     ...Object.entries(SURVEYOR_SURFACE.taskCosts),
-    ...Object.entries(getActiveAiCosts()),
+    ...Object.entries(narrativeCosts),
   ];
   const taskNames = tp('band3.taskMenu.tasks') || {};
   const workedRows = (tp('band3.taskMenu.worked') || []).map((w) => {
     const credits = w.tasks.reduce((sum, [key, n]) => {
-      const cost = SURVEYOR_SURFACE.taskCosts[key] ?? getActiveAiCosts()[key] ?? 0;
+      const cost = SURVEYOR_SURFACE.taskCosts[key] ?? narrativeCosts[key] ?? 0;
       return sum + cost * n;
     }, 0);
     const detail = w.tasks

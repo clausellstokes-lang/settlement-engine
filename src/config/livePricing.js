@@ -21,7 +21,13 @@
  * of the eager graph is the whole reason it is a separate leaf.
  */
 import { supabase, isConfigured } from '../lib/supabase.js';
-import { getAiCostForModel, DEFAULT_MODEL_PREFERENCE, normalizeModelPreference } from './pricing.js';
+import {
+  _clearLiveAiPricing,
+  _setLiveAiPricing,
+  getAiCostForModel,
+  DEFAULT_MODEL_PREFERENCE,
+  normalizeModelPreference,
+} from './pricing.js';
 
 // One memoized fetch per page load — the schedule changes at most once per deploy,
 // so a single call is plenty and a resolved-null result stops us from re-hitting a
@@ -44,6 +50,7 @@ export function fetchLivePricing() {
     try {
       const { data, error } = await supabase.rpc('get_ai_pricing');
       if (error || !data || typeof data !== 'object') return null;
+      _setLiveAiPricing(data);
       return data;
     } catch {
       return null;
@@ -55,6 +62,7 @@ export function fetchLivePricing() {
 /** Test/HMR seam: forget the memoized fetch so the next call re-reads the RPC. */
 export function _resetLivePricingCache() {
   _pricingPromise = null;
+  _clearLiveAiPricing();
 }
 
 /**

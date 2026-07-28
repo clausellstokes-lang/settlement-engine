@@ -547,23 +547,21 @@ describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', (
   });
 });
 
-describe('migration 114 AI-pricing config is lockstep with the client + 057', () => {
-  // The pricing-resync system (migration 114) adds a config-backed CHARGE path:
-  // spend_credits(feature, p_profile) reads ai_credit_costs from system_config,
-  // and get_ai_pricing serves the same schedule to the client. Three couplings
-  // MUST stay pinned or the CHARGE silently drifts from the display / the seed:
-  //   (a) 114's spend_credits fallback CASE == 057's CASE (config-absent = 057),
-  //   (b) 114's ai_credit_costs SEED == the client NEW_AI_COSTS / FAST_AI_COSTS,
-  //   (c) 114's seeded profile keys == the 8 AI_MODEL_OPTIONS keys.
+describe('historical AI-pricing migrations stay immutable; forward reprice owns current parity', () => {
+  // Migration 114 added the config-backed charge path while the applied schedule
+  // was standard 3/4/5 and fast 2/3/4. Migrations 024/057/114 are historical
+  // evidence and must not be rewritten when prices change. Migration 174 is the
+  // forward 5/4/6 reprice; migration 192 is the net-current spend_credits body.
   let mig114;
   let mig057;
+  let mig174;
+  let mig192;
   let pricing;
   beforeAll(() => {
     mig114 = readMigration('114_ai_pricing_config.sql');
-    // 057 = the net-current spend_credits body 114 forked from (per the house
-    // migration-recreate rule). Its CASE is the config-absent fallback 114 keeps
-    // verbatim. The filename carries the account-status recreate of spend_credits.
     mig057 = readMigration('057_enforce_account_status_writes.sql');
+    mig174 = readMigration('174_pricing_optimal_margins.sql');
+    mig192 = readMigration('192_tier_credit_multiplier.sql');
     pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
   });
 
@@ -592,23 +590,21 @@ describe('migration 114 AI-pricing config is lockstep with the client + 057', ()
     expect(case114).toEqual(case057);
     // Spot-pin the money-bearing literals so a whole-map swap can't pass silently.
     expect(case114.chronicle).toBe(2);
-    expect(case114.narrative).toBe(5);
+    expect(case114.narrative).toBe(3);
     expect(case114.dailyLife).toBe(4);
-    expect(case114.progression).toBe(6);
+    expect(case114.progression).toBe(5);
     expect(case114.narrative_fast).toBe(2);
     expect(case114.dailyLife_fast).toBe(3);
     expect(case114.progression_fast).toBe(4);
   });
 
-  it('(b) 114 ai_credit_costs SEED equals client NEW_AI_COSTS (standard) / FAST_AI_COSTS (fast)', () => {
+  it('(b) 114 preserves the applied 3/4/5 standard seed and 2/3/4 fast seed', () => {
     // Extract the seeded per-profile costs from the ai_credit_costs insert. Each
     // profile row is `'<key>', jsonb_build_object('narrative', N, 'dailyLife', N,
-    // 'progression', N)`. Reuse the client-block extractor for the source-of-truth.
-    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
-    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
-    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
-    const std = { narrative: num(stdBlock, 'narrative'), dailyLife: num(stdBlock, 'dailyLife'), progression: num(stdBlock, 'progression') };
-    const fast = { narrative: num(fastBlock, 'narrative'), dailyLife: num(fastBlock, 'dailyLife'), progression: num(fastBlock, 'progression') };
+    // 'progression', N)`. The historical values are intentionally NOT sourced
+    // from today's client config; doing that is what caused the in-place edit.
+    const std = { narrative: 3, dailyLife: 4, progression: 5 };
+    const fast = { narrative: 2, dailyLife: 3, progression: 4 };
 
     // Isolate the ai_credit_costs seed insert (the 'profiles' jsonb) so we don't
     // accidentally read get_ai_pricing's in-function `defaults` table below it.
@@ -629,9 +625,9 @@ describe('migration 114 AI-pricing config is lockstep with the client + 057', ()
 
     for (const [, profile, nar, daily, prog] of rows) {
       const expected = tierOf(profile) === 'fast' ? fast : std;
-      expect(Number(nar), `${profile}.narrative seed drifted from client`).toBe(expected.narrative);
-      expect(Number(daily), `${profile}.dailyLife seed drifted from client`).toBe(expected.dailyLife);
-      expect(Number(prog), `${profile}.progression seed drifted from client`).toBe(expected.progression);
+      expect(Number(nar), `${profile}.narrative historical seed drifted`).toBe(expected.narrative);
+      expect(Number(daily), `${profile}.dailyLife historical seed drifted`).toBe(expected.dailyLife);
+      expect(Number(prog), `${profile}.progression historical seed drifted`).toBe(expected.progression);
     }
   });
 
@@ -644,6 +640,36 @@ describe('migration 114 AI-pricing config is lockstep with the client + 057', ()
     const seedKeys = [...seedM[0].matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative'/gi)]
       .map((m) => m[1]).sort();
     expect(seedKeys, '114 seed profile keys drifted from AI_MODEL_OPTIONS').toEqual(clientKeys);
+  });
+
+  it('(d) 174 and net-current 192 carry the client 5/4/6 + fast 2/3/4 schedule', () => {
+    const case174 = extractSpendCase(mig174);
+    const case192 = extractSpendCase(mig192);
+    expect(case174, '174 forward-reprice CASE not found').toBeTruthy();
+    expect(case192, '192 net-current CASE not found').toBeTruthy();
+    expect(case192).toEqual(case174);
+
+    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
+    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    expect({
+      narrative: case192.narrative,
+      dailyLife: case192.dailyLife,
+      progression: case192.progression,
+    }).toEqual({
+      narrative: num(stdBlock, 'narrative'),
+      dailyLife: num(stdBlock, 'dailyLife'),
+      progression: num(stdBlock, 'progression'),
+    });
+    expect({
+      narrative: case192.narrative_fast,
+      dailyLife: case192.dailyLife_fast,
+      progression: case192.progression_fast,
+    }).toEqual({
+      narrative: num(fastBlock, 'narrative'),
+      dailyLife: num(fastBlock, 'dailyLife'),
+      progression: num(fastBlock, 'progression'),
+    });
   });
 });
 

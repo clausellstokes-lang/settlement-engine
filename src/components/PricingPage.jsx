@@ -26,6 +26,7 @@ import { startCheckout, startCustomerPortal } from '../lib/stripe.js';
 import { isConfigured } from '../lib/supabase.js';
 import { getPendingRedeemCode, setPendingRedeemCode, clearPendingRedeemCode } from '../lib/referralRedeem.js';
 import { useReferralIntent } from '../hooks/useReferralIntent.js';
+import useLivePricing from '../hooks/useLivePricing.js';
 import {
   getVisibleTiers, getActivePacks, SINGLE_DOSSIER, TIERS,
 } from '../config/pricing.js';
@@ -78,6 +79,7 @@ export default function PricingPage({ onNavigate }) {
   const [redeemNotice, setRedeemNotice] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
+  const livePricing = useLivePricing();
 
   // Keep the cross-surface stash in sync with the field so the code survives
   // leaving for the credit-pack modal (and vice versa).
@@ -461,7 +463,7 @@ export default function PricingPage({ onNavigate }) {
           {tp('band3.packs.note')}
         </p>
 
-        <TaskMenu />
+        <TaskMenu livePricing={livePricing} />
 
         {!isConfigured && (
           <p style={{

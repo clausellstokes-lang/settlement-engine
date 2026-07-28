@@ -22,8 +22,8 @@
  * theme tokens.
  */
 import { useCallback, useEffect, useState } from 'react';
-import { useStore } from '../../store/index.js';
 import { supabase } from '../../lib/supabase.js';
+import useLivePricing from '../../hooks/useLivePricing.js';
 import Button from '../primitives/Button.jsx';
 import {
   INK, MUTED, BODY, BORDER2, CARD_HDR, RED, GREEN, GOLD_TXT, sans, SP, FS } from '../theme.js';
@@ -77,9 +77,8 @@ const bodyRow = {
 const tableWrap = { border: `1px solid ${BORDER2}`, overflow: 'hidden' };
 
 export default function AiPricingResyncPanel() {
-  // The last schedule-update time comes from the already-fetched get_ai_pricing
-  // payload the store caches (warmed on the account page / narrate surfaces).
-  const aiPricing = useStore(s => s.aiPricing);
+  // This panel is lazy, so the live read never enters the first-paint graph.
+  const aiPricing = useLivePricing();
 
   const [dryRun, setDryRun] = useState(true);   // safe default: preview, don't write
   const [busy, setBusy] = useState(false);

@@ -43,11 +43,17 @@ Related non-legal-but-binding pages in minifold only: `CovenantPage.jsx` (`/cove
 
 **Terms text says:** failed narrations auto-refund their credit; first narration free; single dossier PDF re-downloadable while the settlement is saved, download right forfeited on deletion; Cartographer cancels at period end with "We do not generally refund partial months, except where consumer law in your jurisdiction requires it"; Founder Lifetime charged-in-error reviewed on request.
 
-**CONTRADICTING COPY — flag this.** `.../minifold/src/copy/en.js:1528-1531`, the Account-page FAQ (`refundWindow`, rendered by `src/components/account/AccountFAQ.jsx`), tells users:
+**PRE-CONSULT COPY RECONCILIATION (resolved in repo 2026-07-28).** The Account-page FAQ formerly promised:
 
 > "Single-dossier purchases are refundable within 7 days if you have not exported or downloaded the PDF. Subscription refunds are handled case-by-case via Customer Support below."
 
-No 7-day window appears in the Terms. Two further mismatches in the same FAQ block: credit costs are stated as Narrative 5 / Daily Life 4 / Progression 6 (`en.js:1521`) while `TERMS_OF_USE_DRAFT.md:88` states 3 / 4 / 5; and `founderLifetime` (`en.js:1533`) promises "every current and future tier for the life of the product," broader than the Terms' "lifetime access to the paid tier."
+That unsupported 7-day promise has been removed. The FAQ now limits its promise
+to duplicate, erroneous, or undelivered charges and points every other case to
+the Terms and applicable law. The same reconciliation removed hard-coded AI
+costs from the FAQ (each action displays the live price), updated this draft to
+the current 5 / 4 / 6 standard and 2 / 3 / 4 fast schedules, and narrowed Founder
+copy to lifetime access to the paid Cartographer tier. These are factual/copy
+repairs, not a substitute for counsel's consumer-law review.
 
 **THE CRIT-1 POLICY REALITY the copy must match.** `.../minifold/supabase/functions/stripe-webhook/index.ts:3015-3021`:
 
@@ -57,7 +63,13 @@ A single `charge.refunded` event — of **any amount** — runs four clawbacks o
 
 Operationally: **a $5 goodwill refund on a $99 Founder purchase destroys the seat and the lifetime license.** The safe goodwill instrument is a credit grant (`service_adjust_credits` / `admin_grant_credits`, mig 009/103), which touches no entitlement. There is also a dedicated goodwill path: `stripe-webhook/index.ts:808-846` — a goodwill refund of the original $99 while a transfer case is live aborts the case and refunds the nominee's $99, keyed `abort-refund-<case>`.
 
-**Questions for counsel:** (a) Must the FAQ's 7-day PDF window be honored as a published offer, or can it be corrected to match the Terms? (b) Can the Terms disclose that any partial refund voids the entitlement, and is that enforceable against a consumer? (c) Does UK/EU 14-day distance-selling withdrawal apply to the PDF and the Founder license, and does the "delivered on the success page" moment kill it? (d) Is "we do not generally refund partial months" safe in the target markets?
+**Questions for counsel:** (a) Does the former, pre-launch 7-day draft promise
+create any obligation despite being removed before public launch? (b) Can the
+Terms disclose that any partial refund voids the entitlement, and is that
+enforceable against a consumer? (c) Does UK/EU 14-day distance-selling withdrawal
+apply to the PDF and the Founder license, and does the "delivered on the success
+page" moment affect it? (d) Is "we do not generally refund partial months" safe
+in the target markets?
 
 ---
 
@@ -186,4 +198,7 @@ Contact, unresolved: `TERMS_OF_USE_DRAFT.md:365` — "`[[CONTACT EMAIL — curre
 
 `TERMS_OF_USE_DRAFT.md` §16 (nine items) and `PRIVACY_POLICY_DRAFT.md` §15 (six items) are the owner's own pre-drafted agenda. Both end with the same rule: the live page updates **only** after owner + counsel sign off through the consolidated pre-launch legal consult; the drafts are input, not replacement. `TOS_AUTOMATION_CLAUSES_DRAFT.md` §9 adds six more (TDM/AI-reservation jurisdiction, browsewrap vs clickwrap, consumer-protection fit, security-research safe harbor, "abusive volume" definition, BYOK/enrichment-rider conflict) and instructs: "Deliver to counsel alongside `TERMS_OF_USE_DRAFT.md`, `PRIVACY_POLICY_DRAFT.md`, and `docs/PERIMETER_RUNBOOK.md`."
 
-One item on that list is a genuine repo defect worth resolving before the meeting: `TERMS_OF_USE_DRAFT.md:405-408` records that the Pricing page (`copy/en.js`) displays **$5.99/month** for Cartographer while `config/pricing.js` sets **$6/month (600 cents)** — "a real discrepancy in the repo, not a drafting choice."
+The former Cartographer discrepancy is resolved in the repository:
+`config/pricing.js` and rendered copy now use **$5.99/month (599 cents)**. The
+remaining external check is that the deployed `STRIPE_PRICE_PREMIUM` object in
+Stripe also charges 599 cents.

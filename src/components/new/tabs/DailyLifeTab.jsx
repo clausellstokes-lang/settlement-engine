@@ -8,6 +8,7 @@ import {extractSettlementContext} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
+import { useLiveAiCostResolver } from '../../../hooks/useLivePricing.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
       BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
@@ -49,7 +50,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const mobile = useIsMobile();
 
   const requestDailyLife = useStore(s => s.requestDailyLife);
-  const getCost = useStore(s => s.getCost);
+  const getCost = useLiveAiCostResolver();
   const aiDailyLife = useStore(s => s.aiDailyLife);
   const storeAiLoading = useStore(s => s.aiLoading);
   const storeAiRegenerating = useStore(s => s.aiRegenerating);

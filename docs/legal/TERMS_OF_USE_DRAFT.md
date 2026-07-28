@@ -70,8 +70,7 @@ amount actually charged.
 
 - **Wanderer** — free forever. Generate any size up to metropolis, keep up to
   3 saved settlements, and pay per dossier for PDF export (see below).
-- **Cartographer** — currently `[[$5.99/month — displayed Pricing-page figure;
-  see §16 re: pricing.js/en.js discrepancy]]`, billed monthly through Stripe.
+- **Cartographer** — currently **$5.99/month**, billed monthly through Stripe.
   Unlimited saves and cloud sync, the living simulation, campaigns, custom content,
   unlimited PDF and JSON export, and currently 30 narrative credits each month.
 - **Founder Lifetime** — currently **$99 one-time**. A transferable lifetime
@@ -85,8 +84,8 @@ saved. If you delete the settlement, the download right for it is forfeited.
 **Narrative credits (currently).** The optional Narrative Layer spends credits per
 generation. Credit packs are currently **25 credits for $4.99, 60 for $9.99, and
 150 for $19.99**; purchased credits do not expire. A narration currently costs
-3 credits, a daily-life pass 4, and a progression pass 5 (fewer on the fast model
-tier). Your first narration is free. **You are only charged for narrations you
+5 credits, a daily-life pass 4, and a progression pass 6. On the fast model tier
+those costs are 2, 3, and 4. Your first narration is free. **You are only charged for narrations you
 actually receive:** if a narration fails, its credit is returned automatically.
 
 **The Surveyor tier and task-priced AI credits (not yet available).** When the
@@ -400,10 +399,9 @@ proposed but unconfirmed pending owner sign-off before launch]]`.
 
 1. **`[[MINIMUM AGE]]`** (§1) — 13 / 16 / 18 by jurisdiction; tied to the GDPR/COPPA
    question.
-2. **`[[Cartographer price]]`** (§3) — the Pricing page (`copy/en.js`) displays
-   **$5.99/month** while `config/pricing.js` sets **$6/month (600 cents)**. This is a
-   real discrepancy in the repo, not a drafting choice; it must be reconciled and one
-   canonical figure chosen before terms cite it.
+2. **Stripe dashboard amount verification** (§3) — the repository now has one
+   canonical Cartographer figure, **$5.99/month (599 cents)**. Confirm that the
+   deployed `STRIPE_PRICE_PREMIUM` object charges 599 cents before launch.
 3. **`[[Surveyor price — $19.99/month, PROVISIONAL]]`** (§3) — owner-queued; not in
    force until the feature ships.
 4. **`[[CONTACT EMAIL]]`** (§14) — `settlementforge@gmail.com` today;
