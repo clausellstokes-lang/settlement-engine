@@ -36,6 +36,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '107_referral_redeem.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
@@ -201,7 +203,7 @@ describe.runIf(have)('107 referral + redeem codes — real SQL (pglite)', () => 
         public.referrals, public.redemptions, public.redeem_codes, public.processed_webhook_events
         to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

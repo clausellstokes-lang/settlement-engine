@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -106,7 +108,7 @@ describe('saved_maps world-snapshot guard trigger — net-current execution (pgl
       insert into public.saved_maps (id, user_id, name, map_data, share_kind, is_public, public_slug)
       values ('${MAP_ID}', '${OWNER}', 'Edited Map', '{}'::jsonb, 'map_with_campaign', true, 'edit-slug');
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   /** A DIRECT update of the stored snapshot — the bypassed edit path. */
   const updateSnapshot = (snapshot) =>

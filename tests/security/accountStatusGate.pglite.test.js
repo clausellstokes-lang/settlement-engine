@@ -25,6 +25,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
@@ -114,7 +116,7 @@ describe.runIf(allExist)('account-status write gate — execution against 057 (p
     await db.exec(extractFn('057', 'account_is_active'));
     await db.exec(extractFn('057', 'spend_credits'));
     await db.exec(extractFn('057', 'mutate_settlement_batch'));
-  }, 30000); // PGlite WASM cold-start is ~20s under parallel/loaded runs; match the sibling harnesses.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions, public.settlements cascade;');

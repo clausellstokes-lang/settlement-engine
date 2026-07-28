@@ -26,6 +26,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 const present = existsSync(MIG_DIR);
 
@@ -152,7 +154,7 @@ describe.runIf(present)('profiles RLS column-lock — executed against the NET-C
       create role nosuperuser nologin;
       grant select, update on public.profiles to nosuperuser;
     `);
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(reseed);
 

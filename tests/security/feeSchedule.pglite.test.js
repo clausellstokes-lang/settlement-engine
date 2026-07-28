@@ -41,6 +41,8 @@ import {
   isFastModelPreference,
 } from '../../src/config/pricing.js';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
@@ -146,7 +148,7 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
     `);
     await db.exec(extractFn('018', 'get_credit_balance'));
     await db.exec(extractFn('024', 'spend_credits'));
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');

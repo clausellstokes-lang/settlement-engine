@@ -19,6 +19,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_133 = join(MIGRATIONS_DIR, '133_analytics_v2_rollups.sql');
 const MIG_133_SQL = existsSync(MIG_133) ? readFileSync(MIG_133, 'utf8') : null;
@@ -64,7 +66,7 @@ describe.runIf(!!MIG_133_SQL)('Analytics v2 rollups (pglite execution)', () => {
     db = new PGlite();
     await db.exec(SCAFFOLD);
     await db.exec(MIG_133_SQL); // the REAL migration functions
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('the migration installed the v2 rollup + market functions', async () => {
     const { rows } = await db.query(`

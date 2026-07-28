@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_146 = resolve(dir, '146_gallery_title_aliveness_columns.sql');
 const MIG_148 = resolve(dir, '148_gallery_maps_campaign_tiles.sql');
@@ -112,7 +114,7 @@ describe.runIf(allExist)('publish_map + list_gallery_maps — execution against 
     `);
     await db.exec(readFileSync(MIG_146, 'utf-8'));
     await db.exec(readFileSync(MIG_148, 'utf-8'));
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.saved_maps, public.settlements, public.profiles cascade; alter sequence public._slug_seq restart;');

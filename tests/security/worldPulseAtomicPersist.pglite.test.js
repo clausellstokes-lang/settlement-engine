@@ -25,6 +25,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 // Extract from 084 — the NET-CURRENT body of persist_world_pulse_advance (084
 // forked 069's body to harden the ownership check against a duplicate saveId; the
 // signature + every other line is identical). Testing the net-current def keeps
@@ -140,7 +142,7 @@ describe.runIf(exists)('world-pulse atomic persist — execution against 069 (pg
 
     // The real, verbatim RPC body from 069.
     await db.exec(extractFn('persist_world_pulse_advance'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`truncate public.saved_maps; truncate public.settlements; truncate public.profiles cascade;`);

@@ -29,6 +29,8 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { toPublicSafe, NPC_PUBLIC_KEYS } from '../../src/domain/display/publicSafe.js';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of the net-current `_gallery_sanitize_public_json`
@@ -179,7 +181,7 @@ describe.runIf(!!SANITIZER_SQL)('SERVER half — net-current sanitizer strips me
       [JSON.stringify(SETTLEMENT)],
     )).rows[0];
     serverOut = row.j;
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('strips goal/secret/plotHooks/relationships/gender/power from factions[].members[]', () => {
     expect(serverOut.factions).toHaveLength(1);

@@ -22,6 +22,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = resolve(dir, '168_gallery_visibility_and_featured.sql');
 const present = existsSync(MIG);
@@ -101,7 +103,7 @@ describe.runIf(present)('gallery unlisted + featured — execution against the r
     ]) {
       await db.exec(extractFn(src, fn));
     }
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

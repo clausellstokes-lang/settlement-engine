@@ -25,6 +25,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_058 = resolve(process.cwd(), 'supabase', 'migrations', '058_scope_system_config_public_read.sql');
 const present = existsSync(MIG_058);
 
@@ -80,7 +82,7 @@ describe.runIf(present)('system_config public-read allowlist — executed agains
       create role nosuperuser nologin;
       grant select on public.system_config to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

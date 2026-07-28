@@ -14,6 +14,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '158_credit_auto_reload.sql');
 const MIG_PI_CLAIM = resolve(
   process.cwd(),
@@ -86,7 +88,7 @@ async function bindPaymentIntent(
 }
 
 let db;
-beforeEach(async () => { db = await makeDb(); });
+beforeEach(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('claim_auto_reload_attempt', () => {
   it('claims below threshold: delta = target - balance, amount = round(delta * unit/per)', async () => {

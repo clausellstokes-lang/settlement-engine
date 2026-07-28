@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG004 = resolve(dir, '004_custom_content.sql');
 const MIG017 = resolve(dir, '017_fix_credit_auth_integrity.sql');
@@ -92,7 +94,7 @@ describe.runIf(allExist)('migration 049 — deities bucket constraints (pglite)'
     await db.exec(loadSql(MIG049));
     await db.exec(loadSql(MIG056));
     await db.exec(`set test.uid = '${UID}';`);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.custom_content cascade;');

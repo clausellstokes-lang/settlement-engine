@@ -45,6 +45,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase', 'migrations', '108_dossier_entitlements.sql');
 const have = existsSync(MIG);
 const SRC = have ? readFileSync(MIG, 'utf-8') : '';
@@ -194,7 +196,7 @@ describe.runIf(have)('108 dossier entitlements — real SQL (pglite)', () => {
         public.dossier_entitlements, public.single_dossier_purchases, public.settlements
         to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

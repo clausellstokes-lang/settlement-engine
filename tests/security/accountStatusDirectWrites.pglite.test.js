@@ -33,6 +33,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '057': resolve(dir, '057_enforce_account_status_writes.sql'),
@@ -198,7 +200,7 @@ describe.runIf(allExist)('account-status DIRECT-table write gate — executed ag
         public.settlements, public.saved_maps, public.gallery_votes,
         public.gallery_comments, public.gallery_reports to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     // Seed as a SERVICE-ROLE system run: the BEFORE-write triggers exempt

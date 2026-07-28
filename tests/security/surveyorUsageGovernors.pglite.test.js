@@ -16,6 +16,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_145 = resolve(process.cwd(), 'supabase', 'migrations', '144_surveyor_usage_governors.sql');
 const haveMigration = existsSync(MIG_145);
 
@@ -84,7 +86,7 @@ describe.runIf(haveMigration)('surveyor usage governors — real SQL (pglite)', 
     await db.exec(extractFn(src, 'surveyor_settings_get'));
     await db.exec(extractFn(src, 'surveyor_settings_set'));
     await db.exec(extractFn(src, 'surveyor_usage_precheck'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.ai_usage_events; truncate public.surveyor_user_settings;');

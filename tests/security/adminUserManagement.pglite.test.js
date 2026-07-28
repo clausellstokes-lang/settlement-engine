@@ -28,6 +28,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '050': resolve(dir, '050_admin_least_privilege.sql'),
@@ -201,7 +203,7 @@ describe.runIf(allExist)('A4 user-management — executed against 050/051/053 (p
       grant select, insert, update, delete on public.settlements to nosuperuser;
       grant select on public.support_messages to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

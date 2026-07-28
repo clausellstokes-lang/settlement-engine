@@ -27,6 +27,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_146 = resolve(dir, '146_gallery_title_aliveness_columns.sql');
 const MIG_147 = resolve(dir, '147_gallery_tile_chain_aliveness_title_reactions.sql');
@@ -128,7 +130,7 @@ describe.runIf(allExist)('gallery aliveness/title/reactions chain — execution 
     // The REAL migrations, wholesale.
     await db.exec(readFileSync(MIG_146, 'utf-8'));
     await db.exec(readFileSync(MIG_147, 'utf-8'));
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

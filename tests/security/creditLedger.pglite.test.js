@@ -36,6 +36,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 /** Compute the NET-CURRENT set of roles holding EXECUTE on a public function,
  *  by replaying every migration's grant/revoke in file order. Implicit PUBLIC
  *  default-grants aren't tracked (Supabase revokes function EXECUTE from PUBLIC
@@ -168,7 +170,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await db.exec(extractFn('024', 'spend_credits'));
     await db.exec(extractFn('123', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
-  }, 30000); // PGlite WASM cold-start is ~8s in CI/dev — beyond the 10s hook default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');

@@ -20,6 +20,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_079 = resolve(process.cwd(), 'supabase', 'migrations', '079_ai_spend_safety.sql');
 const haveMigration = existsSync(MIG_079);
 
@@ -116,7 +118,7 @@ describe.runIf(haveMigration)('ai spend safety — real SQL (pglite)', () => {
     // Load the real RPC bodies from the migration (no cron / table DDL).
     await db.exec(extractFn(src, 'check_ai_spend_cap'));
     await db.exec(extractFn(src, 'consume_ai_generate_rate_limit'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.ai_usage_events; truncate public.ai_generate_rate_limits;');

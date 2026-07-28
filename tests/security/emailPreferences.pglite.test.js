@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_126 = resolve(process.cwd(), 'supabase', 'migrations', '126_email_preferences.sql');
 const exists = existsSync(MIG_126);
 
@@ -68,7 +70,7 @@ describe.runIf(exists)('email preferences + token unsubscribe — real SQL (pgli
     `);
     // The real migration, verbatim.
     await db.exec(readFileSync(MIG_126, 'utf-8'));
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.email_preferences cascade;');

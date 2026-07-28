@@ -32,6 +32,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_169 = resolve(dir, '169_gallery_comment_moderation.sql');
 const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
@@ -137,7 +139,7 @@ describe.runIf(allExist)('gallery comment moderation — execution against the r
     await db.exec(extractFn(src169, 'set_gallery_comment_hidden'));
     // Net-current list_gallery_comments comes from 172 (the tombstone rewrite).
     await db.exec(extractFn(src172, 'list_gallery_comments'));
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.settlements, public.profiles, public.gallery_comments, public.gallery_comment_reports, public.user_action_rate_limits, auth.users cascade;');

@@ -13,6 +13,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_170 = resolve(dir, '170_founders_roll.sql');
 
@@ -65,7 +67,7 @@ async function asUser(db, uid) { await db.query(`select set_config('test.uid', '
 async function asAnon(db) { await db.query(`select set_config('test.uid', '', false)`); }
 
 let db;
-beforeEach(async () => { db = await makeDb(); });
+beforeEach(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('set_founder_credit_listed — founder-gated own-row toggle', () => {
   it('a founder can list themselves', async () => {

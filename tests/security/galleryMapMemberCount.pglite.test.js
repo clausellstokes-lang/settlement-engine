@@ -24,6 +24,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -229,7 +231,7 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
     // Stash the IDOR campaign envelope for that test.
     db.__idorCampaign = idorCampaign;
     db.__campaign = campaign;
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const memberCountFor = async (slug) => {
     const rows = (await db.query(`select slug, member_count from public.list_gallery_maps(0, 24)`)).rows;

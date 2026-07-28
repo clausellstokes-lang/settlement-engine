@@ -41,6 +41,8 @@ import { supabase } from '../../src/lib/supabase.js';
 import { toPublicSafe, PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { fetchDossierForImport, updateGalleryMetadata } from '../../src/lib/gallery.js';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of a `create or replace function` body across all
@@ -83,7 +85,7 @@ describe('SQL sanitizers strip the generation seed (net-current, pglite)', () =>
     await db.exec('create schema if not exists public;');
     await db.exec(netCurrentFn('_gallery_sanitize_public_json'));
     await db.exec(netCurrentFn('_gallery_dm_full_json'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const run = async (fn, obj) =>
     (await db.query(`select public.${fn}($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;

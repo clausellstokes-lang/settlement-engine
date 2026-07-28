@@ -11,6 +11,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const migrationPath = resolve(
   process.cwd(),
   'supabase/migrations/178_inactive_account_billing_fence.sql',
@@ -356,7 +358,7 @@ async function complete(job, {
 
 beforeEach(async () => {
   db = await makeDb();
-});
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('migration 178 inactive-account billing fence', () => {
   // ⚠ ANCHORED AT LINE START (`^` + m), replacing bare indexOf: a header that

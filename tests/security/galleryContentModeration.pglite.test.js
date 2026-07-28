@@ -13,6 +13,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_171 = resolve(dir, '171_gallery_content_moderation.sql');
 
@@ -66,7 +68,7 @@ async function makeDb() {
 }
 
 let db;
-beforeEach(async () => { db = await makeDb(); });
+beforeEach(async () => { db = await makeDb(); }, PGLITE_BOOT_TIMEOUT_MS);
 
 describe('role gate — HIGHEST only', () => {
   it('a non-staff actor cannot ban content', async () => {

@@ -18,6 +18,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_134 = join(MIGRATIONS_DIR, '134_intent_corpus_atlas.sql');
 const MIG_134_SQL = existsSync(MIG_134) ? readFileSync(MIG_134, 'utf8') : null;
@@ -60,7 +62,7 @@ describe.runIf(!!MIG_134_SQL)('Intent atlas rollup (pglite execution)', () => {
     db = new PGlite();
     await db.exec(SCAFFOLD);
     await db.exec(MIG_134_SQL); // the REAL migration function
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('the migration installed the intent-atlas rollup fn', async () => {
     const { rows } = await db.query(

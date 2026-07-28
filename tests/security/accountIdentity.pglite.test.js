@@ -30,6 +30,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG = {
   '075': resolve(dir, '075_account_identity_columns.sql'),
@@ -133,7 +135,7 @@ describe.runIf(allExist)('account identity — 075 generation + RLS + external_n
       grant select, insert, update on public.profiles to nosuperuser;
       grant select on public.reserved_external_names to nosuperuser;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`

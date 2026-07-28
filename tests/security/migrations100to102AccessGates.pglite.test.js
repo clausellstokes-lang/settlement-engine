@@ -31,6 +31,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_DIR = resolve(process.cwd(), 'supabase/migrations');
 const MIG_038 = resolve(MIG_DIR, '038_analytics_rollups.sql');
 const MIG_018 = resolve(MIG_DIR, '018_account_billing_models_credits.sql');
@@ -120,7 +122,7 @@ describe.runIf(allExist)('100 — analytics views/MV are not API-readable (pglit
     // anon/authenticated — the exposure 100 closes.
     await db.exec(readFileSync(MIG_038, 'utf8'));
     await db.exec(`grant select on ${OBJECTS.join(', ')} to anon, authenticated;`);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('BEFORE 100 the API roles can read every dashboard object (the exposure is real)', async () => {
     for (const obj of OBJECTS) {
@@ -179,7 +181,7 @@ describe.runIf(allExist)('101 — current_user_is_privileged is role-only (pglit
          ($3, 'user', 'alice@example.com')`,
       [OWNER, IMPOSTOR, ALICE],
     );
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('018 net-current body is ALREADY role-only on this lineage (the backdoor never existed here)', async () => {
     // LINEAGE NOTE (master merge): master's 018 carried an email-OR backdoor and
@@ -284,7 +286,7 @@ describe.runIf(allExist)('102 — frozen (non-active access_state) rows are read
         );
       $fn$;
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.saved_maps; truncate public.settlements; truncate public.profiles;');

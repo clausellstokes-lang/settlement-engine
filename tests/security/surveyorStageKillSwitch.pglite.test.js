@@ -17,6 +17,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_150 = resolve(process.cwd(), 'supabase', 'migrations', '150_surveyor_stage_kill_switch.sql');
 const haveMigration = existsSync(MIG_150);
 
@@ -36,7 +38,7 @@ describe.runIf(haveMigration)('surveyor stage kill-switch — real SQL (pglite)'
       create table public.system_config (key text primary key, value jsonb not null);
     `);
     await db.exec(readFileSync(MIG_150, 'utf-8'));
-  }, 30000); // PGlite WASM cold-start + the migration exec can exceed the 10s hook default
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('the seed enables every current stage (launch-whole default-on)', async () => {
     for (const s of ['analysis', 'brief', 'interpret', 'parley']) {

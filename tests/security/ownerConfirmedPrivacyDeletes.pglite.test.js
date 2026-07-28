@@ -11,6 +11,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const migrations = resolve(process.cwd(), 'supabase', 'migrations');
 const migration057 = readFileSync(
   resolve(migrations, '057_enforce_account_status_writes.sql'),
@@ -172,7 +174,7 @@ describe('migration 179 owner-confirmed privacy deletes', () => {
         uuid, jsonb, uuid[], jsonb
       ) to app_user;
     `);
-  }, 30_000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await asSuper(`

@@ -26,6 +26,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_145 = resolve(dir, '145_gallery_reactions.sql');
 const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
@@ -100,7 +102,7 @@ describe.runIf(allExist)('gallery reactions — execution against the real SQL (
     await db.exec(extractFn(src125, '_consume_action_rate_limit'));
     await db.exec(extractFn(src146, 'toggle_gallery_reaction'));
     await db.exec(extractFn(src146, 'get_gallery_reaction_state'));
-  }, 30000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.settlements, public.gallery_reactions, public.user_action_rate_limits, auth.users cascade;');

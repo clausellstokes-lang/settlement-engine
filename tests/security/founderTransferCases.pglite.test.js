@@ -13,6 +13,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_137 = resolve(dir, '137_founder_seats.sql');
 const MIG_160 = resolve(dir, '160_founder_transfer_cases.sql');
@@ -70,7 +72,7 @@ beforeAll(async () => {
             then 'crypt$' || split_part(p_salt_or_stored, '$', 2) || '$' || md5(split_part(p_salt_or_stored, '$', 2) || p_answer)
           else 'crypt$0$' || md5(p_answer) end $fn$;
   `);
-});
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 beforeEach(async () => {
   // Reset to: FROM holds seat 1, is eligible (12mo elapsed), un-flagged; nominee free.

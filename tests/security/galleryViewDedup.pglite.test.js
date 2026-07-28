@@ -23,6 +23,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '029_gallery_view_dedup.sql');
 const migExists = existsSync(MIGRATION);
 
@@ -63,7 +65,7 @@ describe.runIf(migExists)('bump_public_view — dedup + bot-skip (pglite, migrat
       );
     `);
     await db.exec(readFileSync(MIGRATION, 'utf-8'));
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     // Fresh counters + ledger + session GUCs before every case.

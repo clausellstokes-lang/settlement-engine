@@ -22,6 +22,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_086 = resolve(process.cwd(), 'supabase', 'migrations', '086_ai_spend_reservation.sql');
 const haveMigration = existsSync(MIG_086);
 
@@ -108,7 +110,7 @@ describe.runIf(haveMigration)('ai spend reservation — real SQL (pglite)', () =
     await db.exec(extractFn(src, 'reserve_ai_spend'));
     await db.exec(extractFn(src, 'release_ai_spend_reservation'));
     await db.exec(extractFn(src, 'cleanup_ai_spend_reservations'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.ai_usage_events; truncate public.ai_spend_reservations;');

@@ -22,6 +22,8 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
 /** Latest-wins extraction of the net-current `_gallery_dm_full_json` body across
@@ -101,7 +103,7 @@ describe.runIf(!!DM_FULL_SQL)('_gallery_dm_full_json — DM-full latent-pantheon
       [JSON.stringify(SETTLEMENT)],
     )).rows[0];
     serverOut = row.j;
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('static: the net-current dm_full body strips latentPantheon (129 drift guard)', () => {
     // The config re-add must remove BOTH _seed AND latentPantheon.

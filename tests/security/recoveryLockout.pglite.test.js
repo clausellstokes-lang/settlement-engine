@@ -27,6 +27,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG = resolve(process.cwd(), 'supabase/migrations/067_recovery_verify_lockout.sql');
 const exists = existsSync(MIG);
 
@@ -87,7 +89,7 @@ describe.runIf(exists)('recovery lockout backend — execution against 067 (pgli
         ('${ALICE}', 'alice@example.com'),
         ('${BOB}',   'bob@example.com');
     `);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec(`reset role; truncate public.recovery_lockouts;`);

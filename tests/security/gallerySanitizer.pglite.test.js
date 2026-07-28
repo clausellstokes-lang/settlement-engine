@@ -22,6 +22,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 const PUBLIC_SAFE_JS = resolve(process.cwd(), 'src', 'domain', 'display', 'publicSafe.js');
 
@@ -76,7 +78,7 @@ describe('gallery public-JSON sanitizer — net-current execution (pglite)', () 
     // The function pins `set search_path = public`; create the schema + load it.
     await db.exec('create schema if not exists public;');
     await db.exec(SANITIZER.sql);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   const sanitize = async (obj) =>
     (await db.query(`select public._gallery_sanitize_public_json($1::jsonb) as out`, [JSON.stringify(obj)])).rows[0].out;
@@ -186,7 +188,7 @@ describe('gallery per-member overrides — net-current execution (pglite)', () =
     await mdb.exec(SANITIZER.sql);
     await mdb.exec(KEY.sql);
     await mdb.exec(APPLY.sql);
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   // The RAW DM-full dossier the RPC passes as `dm_full`: it carries SETTLEMENT-LEVEL
   // DM content (plotHooks, dmCompass) plus full NPCs. The leak in 092 was promoting

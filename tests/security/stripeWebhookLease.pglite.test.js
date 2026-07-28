@@ -12,6 +12,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const migration = readFileSync(
   resolve(
     process.cwd(),
@@ -59,7 +61,7 @@ describe('migration 181 leased Stripe webhook claims', () => {
       set test.role = 'service_role';
     `);
     await db.exec(migration);
-  }, 30_000);
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   it('backfills legacy claims as completed rows', async () => {
     const { rows } = await db.query(`

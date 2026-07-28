@@ -21,8 +21,9 @@
  * and calls `.exec(`/`.query(` (boot is LAZY: `new PGlite()` returns instantly and
  * the cold WASM start lands on the first exec, wherever that runs) — and require a
  * trailing timeout argument that is a numeric literal >= 60_000 or an in-file
- * `const NAME = <number>` resolving >= 60_000. Surviving offenders are frozen below,
- * SHRINK-ONLY; the sweep that clears them is future work banked one row at a time.
+ * `const NAME = <number>` resolving >= 60_000. The offender inventory below was
+ * burned down to EMPTY on 2026-07-27 (63 hooks across 58 files took the constant
+ * shape); it now stands as a zero-tolerance gate.
  *
  * WHY per-file counts, not per-line pins: line numbers churn under unrelated edits; a
  * per-file exact count is stable, still reds on a NEW unguarded hook in a frozen file,
@@ -239,77 +240,18 @@ function scanCorpus() {
 }
 
 /**
- * FROZEN 2026-07-27 from this ratchet's own scan of the working tree after the F4 fold
- * (ada1252d) plus the named-constant harmonization wave (63 hooks across 58 files; the
- * ~19-file `30000` stratum is an earlier tuned wave, deliberately counted as unguarded).
- * SHRINK-ONLY. To clear a row: add the PGLITE_BOOT_TIMEOUT_MS = 180_000 constant shape
- * from tierCreditMultiplierSql.pglite.test.js to every boot-bearing hook, then DELETE
- * the row. Never raise a number; never add a file.
+ * CLEARED 2026-07-27 (was 63 hooks across 58 files, frozen earlier the same day the
+ * ratchet stood; the ~19-file `30000` stratum was an earlier tuned wave, deliberately
+ * counted as unguarded). The burn-down wave gave every one of those hooks the
+ * PGLITE_BOOT_TIMEOUT_MS = 180_000 constant shape, so this is now a ZERO-TOLERANCE
+ * gate: a new unguarded boot hook anywhere in the corpus is a bug to fix in the same
+ * change (add the constant shape), never an entry to append here.
  *
  * The 2026-07-27 helper-boot amendment (widened marker + exec-aware walk) changed no
- * row: the eight files it made visible were guarded in the same change, so they enter
- * the ledger at zero.
+ * row: the eight files it made visible were guarded in the same change, so they
+ * entered the ledger at zero.
  */
-const FROZEN_UNGUARDED = Object.freeze({
-  'tests/security/accountDeletionProcessing.pglite.test.js': 1,
-  'tests/security/accountIdentity.pglite.test.js': 1,
-  'tests/security/accountStatusDirectWrites.pglite.test.js': 1,
-  'tests/security/accountStatusGate.pglite.test.js': 1,
-  'tests/security/actionVelocity.pglite.test.js': 1,
-  'tests/security/adminLeastPrivilege.pglite.test.js': 1,
-  'tests/security/adminUserManagement.pglite.test.js': 1,
-  'tests/security/aiSpendReservation.pglite.test.js': 1,
-  'tests/security/aiSpendSafety.pglite.test.js': 1,
-  'tests/security/analyticsV2Rollups.pglite.test.js': 1,
-  'tests/security/creditAutoReload.pglite.test.js': 1,
-  'tests/security/creditBalanceIdorGuard.pglite.test.js': 1,
-  'tests/security/creditLedger.pglite.test.js': 1,
-  'tests/security/customContentDeities.pglite.test.js': 1,
-  'tests/security/deletionBillingRace.pglite.test.js': 1,
-  'tests/security/dossierEntitlements.pglite.test.js': 1,
-  'tests/security/emailPreferences.pglite.test.js': 1,
-  'tests/security/factionMemberPublicParity.pglite.test.js': 1,
-  'tests/security/feeSchedule.pglite.test.js': 1,
-  'tests/security/founderSeats.pglite.test.js': 1,
-  'tests/security/founderTransferCases.pglite.test.js': 1,
-  'tests/security/foundersRoll.pglite.test.js': 1,
-  'tests/security/galleryAlivenessTitleChain.pglite.test.js': 1,
-  'tests/security/galleryCampaignTiles.pglite.test.js': 1,
-  'tests/security/galleryCommentModeration.pglite.test.js': 1,
-  'tests/security/galleryContentModeration.pglite.test.js': 1,
-  'tests/security/galleryDmFull.pglite.test.js': 1,
-  'tests/security/galleryMapMemberCount.pglite.test.js': 1,
-  'tests/security/galleryReactions.pglite.test.js': 1,
-  'tests/security/galleryReportPipeline.pglite.test.js': 1,
-  'tests/security/gallerySanitize.pglite.test.js': 1,
-  'tests/security/gallerySanitizer.pglite.test.js': 2,
-  'tests/security/gallerySeedLeak.pglite.test.js': 1,
-  'tests/security/galleryUnlisted.pglite.test.js': 1,
-  'tests/security/galleryViewDedup.pglite.test.js': 1,
-  'tests/security/galleryWorldSnapshotScanner.pglite.test.js': 1,
-  'tests/security/intentCorpusAtlas.pglite.test.js': 1,
-  'tests/security/migrations100to102AccessGates.pglite.test.js': 3,
-  'tests/security/migrations104to106LowFixes.pglite.test.js': 3,
-  'tests/security/ownerConfirmedPrivacyDeletes.pglite.test.js': 1,
-  'tests/security/profileEscalation.pglite.test.js': 1,
-  'tests/security/rateLimitConfig.pglite.test.js': 1,
-  'tests/security/recoveryLockout.pglite.test.js': 1,
-  'tests/security/recoveryLockoutSelfheal.pglite.test.js': 1,
-  'tests/security/referralRedeem.pglite.test.js': 1,
-  'tests/security/refundServiceRole.pglite.test.js': 1,
-  'tests/security/reservedNamesRls.pglite.test.js': 1,
-  'tests/security/savedMapsSnapshotTrigger.pglite.test.js': 1,
-  'tests/security/securityAnswers.pglite.test.js': 1,
-  'tests/security/serviceAdjustCredits.pglite.test.js': 1,
-  'tests/security/singleSession.pglite.test.js': 1,
-  'tests/security/singleSessionBelt.pglite.test.js': 1,
-  'tests/security/stripeWebhookLease.pglite.test.js': 1,
-  'tests/security/supportTickets.pglite.test.js': 1,
-  'tests/security/surveyorStageKillSwitch.pglite.test.js': 1,
-  'tests/security/surveyorUsageGovernors.pglite.test.js': 1,
-  'tests/security/systemConfigPublicRead.pglite.test.js': 1,
-  'tests/security/worldPulseAtomicPersist.pglite.test.js': 1,
-});
+const FROZEN_UNGUARDED = Object.freeze({});
 
 /**
  * Suites that carry the guard on every boot-bearing hook — the detector's positive
@@ -345,7 +287,9 @@ const ratchetMessage = (file, count, ceiling) =>
   `  const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget\n` +
   `and pass it as the hook's second argument (copy the shape from\n` +
   `tests/security/tierCreditMultiplierSql.pglite.test.js). Never tune it to a measurement.\n` +
-  `Guarded a frozen file? DELETE (or lower) its row in FROZEN_UNGUARDED. Never raise one.`;
+  `The FROZEN_UNGUARDED inventory was cleared 2026-07-27: fix the hook in this same
+` +
+  `change — never append a row.`;
 
 const renderLiteral = (found) =>
   `const FROZEN_UNGUARDED = Object.freeze({\n${Object.keys(found)

@@ -11,6 +11,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PGlite } from '@electric-sql/pglite';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_161 = resolve(dir, '161_single_session.sql');
 const U = '11111111-1111-1111-1111-111111111111';
@@ -40,7 +42,7 @@ beforeAll(async () => {
     insert into auth.users(id) values ('${U}') on conflict do nothing;
   `);
   await db.exec(readFileSync(MIG_161, 'utf-8'));
-});
+}, PGLITE_BOOT_TIMEOUT_MS);
 
 beforeEach(async () => { await db.query(`truncate public.current_account_session`); });
 

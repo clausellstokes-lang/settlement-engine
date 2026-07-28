@@ -32,6 +32,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
 const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
 const allExist = existsSync(MIG_125);
@@ -126,7 +128,7 @@ describe.runIf(allExist)('action velocity guards — execution against the real 
     await db.exec(extractFn(src, '_consume_action_rate_limit'));
     await db.exec(extractFn(src, 'toggle_gallery_vote'));
     await db.exec(extractFn(src, 'add_gallery_comment'));
-  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.settlements, public.gallery_votes, public.gallery_comments, public.user_action_rate_limits cascade;');

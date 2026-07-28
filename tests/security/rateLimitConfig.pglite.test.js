@@ -15,6 +15,8 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+const PGLITE_BOOT_TIMEOUT_MS = 180_000; // deadlock guard, not a perf budget — never tune to a measured boot (see pgliteHookTimeoutRatchet.test.js)
+
 const MIG_087 = resolve(process.cwd(), 'supabase', 'migrations', '087_review_money_hardening.sql');
 const have = existsSync(MIG_087);
 const UID = '11111111-1111-1111-1111-111111111111';
@@ -52,7 +54,7 @@ describe.runIf(have)('consume_ai_generate_rate_limit — live operator config (p
         values ('ai_user_rate_limit', '{"window_seconds": 86400, "per_user_limit": 60}'::jsonb);
     `);
     await db.exec(extractFn(readFileSync(MIG_087, 'utf-8'), 'consume_ai_generate_rate_limit'));
-  });
+  }, PGLITE_BOOT_TIMEOUT_MS);
 
   beforeEach(async () => {
     await db.exec('truncate public.ai_generate_rate_limits;');
