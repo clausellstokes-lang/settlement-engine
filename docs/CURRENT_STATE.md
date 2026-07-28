@@ -2,14 +2,14 @@
 
 > **BANKED 2026-07-26 (THE BANKING FOLD).** Everything this document describes as
 > "uncommitted integration" is now committed on claude/composite-r4 as 12 lane
-> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 188 at
+> commits (b503fe05..7a6603de) plus follow-ups; migrations are contiguous to 192 at
 > HEAD. Governance home: the ledger branch (review-fixes-2026-07-08) — owner
 > decisions live in ONE surface, `docs/OWNER_DECISION_QUEUE.md` there; the
 > 2026-07-26 ledger rows carry the pivot ratification, the golden-regen
 > adjudication, and the Wave-8 confirmation. This file remains the honest
 > program-state entry point for the code branch.
 
-**Status date:** 2026-07-24  
+**Status date:** 2026-07-28
 **Code of record:** the active integration worktree; verify with `git worktree list`  
 **Audience:** contributors, operators, and reviewers who need the shortest honest
 entry point
@@ -76,8 +76,8 @@ evidence must be checked independently.
 
 ## Current release blockers
 
-1. **Migration train.** Working-tree migration head 185 is 68 migrations ahead
-   of the recorded production head 117. The six declared waves need clone
+1. **Migration train.** Working-tree migration head 192 is 71 migrations ahead
+   of the live-verified production head 121. The eleven declared waves need clone
    rehearsal, wave receipts, rollback practice, and then an authorized deployment.
 2. **Live-service proof.** Local code cannot prove production Stripe, Supabase,
    DNS/TLS, CSP reporting, alert delivery, backup retention, or restore timing.

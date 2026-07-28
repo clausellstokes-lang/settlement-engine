@@ -74,11 +74,11 @@ describe('bounded migration rehearsal plan', () => {
   });
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
-    expect(plan.appliedHead).toBe(117);
+    expect(plan.appliedHead).toBe(121);
     expect(plan.repoHead).toBe(192);
-    expect(plan.pendingCount).toBe(75);
+    expect(plan.pendingCount).toBe(71);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
-      [118, 136],
+      [122, 136],
       [137, 156],
       [157, 174],
       [175, 182],
@@ -95,7 +95,7 @@ describe('bounded migration rehearsal plan', () => {
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 75 }, (_, index) => 118 + index),
+      Array.from({ length: 71 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
@@ -161,6 +161,24 @@ describe('bounded migration rehearsal plan', () => {
     );
   });
 
+  it('uses only expected objects touched inside each bounded wave', () => {
+    for (const wave of plan.waves) {
+      const waveSource = wave.migrations
+        .map((migration) => readFileSync(
+          join(MIGRATIONS, migration.name),
+          'utf8',
+        ))
+        .join('\n');
+      for (const expectedObject of wave.expectedObjects) {
+        const unqualifiedName = expectedObject.name.replace(/^public\./, '');
+        expect(
+          waveSource,
+          `${wave.id} does not touch ${expectedObject.name}`,
+        ).toContain(unqualifiedName);
+      }
+    }
+  });
+
   it('stages no migration beyond the selected wave boundary', () => {
     const snapshot = captureWaveWorkspaceSnapshot(plan);
     const staged = stageWaveWorkspace(136, snapshot);
@@ -174,7 +192,7 @@ describe('bounded migration rehearsal plan', () => {
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
     expect(Math.max(...numbers)).toBe(136);
-    expect(numbers).toContain(118);
+    expect(numbers).toContain(MIGRATION_TRAIN_BASE_HEAD + 1);
     expect(numbers).not.toContain(137);
     expect(readFileSync(
       join(staged.workspace, 'supabase', 'config.toml'),
@@ -194,7 +212,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(validateCloneAttestation({
       attestation: cloneAttestation(),
       target,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: ['db.production-ref.supabase.co', 'production-ref'],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -216,7 +234,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(() => validateCloneAttestation({
       attestation: cloneAttestation(),
       target,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: ['clone.release.internal'],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -229,7 +247,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(() => validateCloneAttestation({
       attestation: cloneAttestation(),
       target: productionPoolerTarget,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: ['production-ref'],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -244,7 +262,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(() => validateCloneAttestation({
       attestation: unsafe,
       target,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: ['db.production-ref.supabase.co'],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -253,7 +271,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(() => validateCloneAttestation({
       attestation: cloneAttestation(),
       target,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: [],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -267,7 +285,7 @@ describe('clone admission is positive and source-bound', () => {
         expiresAt: '2026-07-25T00:03:00.000Z',
       }),
       target,
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       allowedHosts: ['clone.release.internal'],
       productionRefs: ['db.production-ref.supabase.co'],
       now: new Date('2026-07-25T00:00:00.000Z'),
@@ -286,7 +304,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(result.status).toBe(0);
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
-      appliedHead: 117,
+      appliedHead: MIGRATION_TRAIN_BASE_HEAD,
       repoHead: 192,
     });
   });

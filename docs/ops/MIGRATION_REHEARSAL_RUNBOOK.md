@@ -4,12 +4,12 @@ This runbook proves the pending Supabase migration train on a
 production-shaped clone before any production database write. It is an
 attended release operation, not a CI substitute and not a deployment command.
 
-The current checked-in train starts at the production ledger head in
-`supabase/applied-head.json` (117) and ends at the repository head (188):
+The current checked-in train starts at the live-verified production ledger head
+in `supabase/applied-head.json` (121) and ends at the repository head (192):
 
 | Wave | Migrations | Boundary |
 |---|---:|---|
-| Activation, trust, and market plane | 118–136 | Activation, request idempotency, projections, consent/email, analytics |
+| Activation, trust, and market plane | 122–136 | Dossier purchases, projection/privacy hardening, consent/email, analytics |
 | Founder, Surveyor, and community | 137–156 | Founder custody, AI/Surveyor controls, gallery reactions, abuse limits |
 | Money, lifecycle, and moderation | 157–174 | Money events, auto-reload, sessions, founder lifecycle, retention/moderation |
 | Durable external obligations | 175–182 | Deletion, refunds, leased webhooks, operator health |
@@ -18,6 +18,8 @@ The current checked-in train starts at the production ledger head in
 | Campaign content-binding authority | 186 | Saved-map row locking, reviewed binding compare-and-swap, and blind-write prevention |
 | Custom-content archive transfer | 187 | Constitutional archive export, deterministic identity remapping, transactional restore, and local-to-cloud cutover |
 | Reviewed supply-chain persistence | 188 | Exact reviewed-chain identity, transaction-bound command authority, archive repair, campaign bindings, lifecycle generations, and legacy quarantine |
+| Wave-8 reversal safety | 189–190 | Faction-member public-scrub parity and credit-pack refund clawback |
+| Surveyor probe and tier price | 191–192 | BYOK capability probing and the inert-until-seeded tier multiplier |
 
 The manifest is deliberately finite. If either the applied ledger or repository
 head changes, planning fails until an engineer reviews and rebases these
@@ -119,7 +121,7 @@ evidence directory):
   "createdAt": "2026-07-24T12:00:00.000Z",
   "expiresAt": "2026-07-26T12:00:00.000Z",
   "source": {
-    "appliedHead": 117,
+    "appliedHead": 121,
     "snapshotReceiptSha256": "64-lowercase-hex-characters"
   },
   "target": {
@@ -179,7 +181,7 @@ constructs a shell command.
 ## 5. Read the result
 
 A passing receipt has `kind=settlementforge_migration_rehearsal`,
-`passed=true`, final history 188, nine passed wave receipts, and no integrity
+`passed=true`, final history 192, eleven passed wave receipts, and no integrity
 failure. Receipts are mode `0600`, atomically published, and never overwritten.
 
 On a failed wave:

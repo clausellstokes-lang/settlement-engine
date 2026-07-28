@@ -133,7 +133,7 @@ otherwise the UI reports the plan drift and only reads safe journal metadata.
 - Browser recovery is deliberately not a copy of the source export. Losing the
   original export means decisions cannot be reconstructed from the recovery receipt.
 - Migration 184 must be rehearsed and deployed before a configured production client
-  can use the command RPC; the recorded production head remains 117.
+  can use the command RPC; the live-verified production head is 121.
 
 Natural-language notes and third-party formats remain a later, separately admitted
 vertical; they do not inherit structured-export certainty.

@@ -15,7 +15,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
-export const MIGRATION_TRAIN_BASE_HEAD = 117;
+export const MIGRATION_TRAIN_BASE_HEAD = 121;
 export const MIGRATION_TRAIN_REPO_HEAD = 192;
 
 const FORWARD_ONLY_REASON = [
@@ -30,18 +30,18 @@ const FORWARD_ONLY_REASON = [
 export const MIGRATION_WAVES = Object.freeze([
   Object.freeze({
     id: 'activation-trust-and-market-plane',
-    from: 118,
+    from: 122,
     to: 136,
-    purpose: 'Activation, idempotency, projection privacy, email preferences, analytics, and corpus contracts.',
+    purpose: 'Dossier purchases, projection privacy, email preferences, analytics, and corpus contracts.',
     rollback: Object.freeze({
       mode: 'forward-only',
       reason: FORWARD_ONLY_REASON,
     }),
     expectedObjects: Object.freeze([
-      Object.freeze({ kind: 'table', name: 'public.ai_request_claims' }),
       Object.freeze({ kind: 'table', name: 'public.dossier_purchases' }),
       Object.freeze({ kind: 'table', name: 'public.user_action_rate_limits' }),
       Object.freeze({ kind: 'table', name: 'public.email_preferences' }),
+      Object.freeze({ kind: 'function', name: 'rollup_intent_atlas_daily' }),
     ]),
   }),
   Object.freeze({

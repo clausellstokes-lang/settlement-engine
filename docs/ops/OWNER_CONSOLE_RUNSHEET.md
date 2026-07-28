@@ -29,8 +29,8 @@ Per FMG_ORIGIN_RUNBOOK.md, deploy MAP FIRST, then app:
 - [ ] Provision a PRODUCTION-SHAPED CLONE from a fresh backup (Supabase: restore
       backup to a new project). Never point tooling at the real host — the
       runbook denylists it.
-- [ ] Mint the attestation and run: `npm run ops:migrations:rehearse` — 9 waves,
-      118→190, per MIGRATION_REHEARSAL_RUNBOOK.md; keep every wave receipt.
+- [ ] Mint the attestation and run: `npm run ops:migrations:rehearse` — 11 waves,
+      122→192, per MIGRATION_REHEARSAL_RUNBOOK.md; keep every wave receipt.
 - [ ] Only after rehearsal receipts + your deploy decision: `supabase db push`
       against production (the deploy sequencing in DEPLOY_ROLLBACK_RUNBOOK.md
       governs; admin-actions ships AFTER the client release per ruling D4).
