@@ -69,6 +69,18 @@ describe('UndoHistoryPanel — the visible walk-back', () => {
     expect(screen.getByText('Year 3, Spring')).toBeTruthy();
   });
 
+  it('names the full multi-week catch-up span, not its delegated one-week interval', () => {
+    const beforeCatchUp = entry('c1', 4, 'one_week');
+    mockState.pulseUndoStack = [beforeCatchUp];
+    mockState.campaigns = [{
+      id: 'c1',
+      worldState: { tick: beforeCatchUp.tick + 6 },
+    }];
+    render(<UndoHistoryPanel campaignId="c1" onClose={() => {}} />);
+    expect(screen.getByText(/Undoes 6 weeks/)).toBeTruthy();
+    expect(screen.queryByText(/Undoes a week/)).toBeNull();
+  });
+
   it('shows only the active campaign\'s snapshots', () => {
     mockState.pulseUndoStack = [entry('c1', 3, 'one_week'), entry('c2', 9, 'one_year')];
     mockState.proposalUndoStack = [proposalEntry('c2', 1, 'Foreign famine')];

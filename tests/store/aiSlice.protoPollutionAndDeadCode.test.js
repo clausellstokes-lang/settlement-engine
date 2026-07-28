@@ -72,7 +72,7 @@ const settlement = {
   activeConditions: [], institutions: [], npcs: [],
 };
 
-function stubSlice() {
+function stubSlice(set) {
   return {
     activeSaveId: 'save.a',
     settlement,
@@ -85,6 +85,10 @@ function stubSlice() {
     isElevated: () => false,
     isPremium: () => true,
     setPurchaseModalOpen: () => {},
+    lifetimeNarrateCount: 0,
+    bumpLifetimeNarrate: () => set(state => {
+      state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
+    }),
     updateSavedSettlement: vi.fn(),
     getCampaignForSettlement: () => null,
     _appendChronicleEntry: async () => {},
@@ -152,5 +156,6 @@ describe('aiSlice — prototype pollution / dead code / stale banner', () => {
     gateResolve();
     await pending;
     expect(store.getState().aiPartialFailure).toBeNull();
+    expect(store.getState().lifetimeNarrateCount).toBe(1);
   });
 });

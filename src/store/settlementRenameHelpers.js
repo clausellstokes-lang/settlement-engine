@@ -50,9 +50,9 @@ import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
  * Rename a saved settlement (town). Unlike NPC/faction names, a settlement's own
  * name is NEVER canon-locked. Before canon it is a plain name edit; after canon
  * the rename is ALSO appended to the timeline as a RENAME_SETTLEMENT flavor entry
- * (flavor only — no systemState delta, no entity mutation, no PRNG draw); that
- * row stamps the settlement's own systemState so undoLastEvent pops it as a
- * no-op rather than jamming on it (see the per-lane note at the push site).
+ * (flavor only — no systemState delta, no entity mutation, no PRNG draw).
+ * undoLastEvent leaves that chronicle row in place and reaches past it to the
+ * newest mechanical event.
  * Honours the flush-suppression invariant: a change-queue flush owns the single
  * atomic commit, so the row's cloud write is deferred while suppressed.
  *
@@ -82,23 +82,9 @@ export function renameSettlementImpl(get, set, id, newName) {
     const eventLog = Array.isArray(currentCampaignState.eventLog)
       ? [...currentCampaignState.eventLog]
       : [];
-    // R-3 undo-safety (atlas VI.10 #148 follow-on). undoLastEvent inspects ONLY
-    // the newest eventLog entry and refuses typed (`entry_not_undoable`) when it
-    // carries no `beforeState`. An unstamped rename row parked on top of the log
-    // therefore JAMMED undo for every real event beneath it, permanently — the
-    // rename row can never be popped, so nothing below it can ever surface.
-    // Stamp this settlement's own systemState as beforeState/afterState exactly
-    // as recordCanonFlavorEntryImpl does below, and the row pops as a no-op
-    // instead of blocking the stack.
-    //
-    // The stamp is chosen PER LANE because this one push feeds two destinations:
-    // the live `state.eventLog` (when this save is the active one) and the saved
-    // row's `campaignState.eventLog`. hydrateFromSave restores `cs.systemState`
-    // alongside `cs.eventLog`, so a row written into a NON-ACTIVE save's log must
-    // carry THAT save's snapshot; stamping the live one would swap a different
-    // settlement's state in the moment that save is opened and the row undone.
-    // When neither snapshot exists the field is omitted deliberately and the
-    // `entry_not_undoable` refusal keeps guarding the row.
+    // Keep the per-settlement before/after stamp for save-shape compatibility.
+    // The explicit flavor marker below now owns undo eligibility: the shared
+    // planner leaves this row in history and searches beneath it.
     const rowSystemState = (isActive ? state.systemState : currentCampaignState.systemState) || null;
     if (isCanon) {
       eventLog.push({
@@ -110,8 +96,8 @@ export function renameSettlementImpl(get, set, id, newName) {
         narrativeSummary: oldName
           ? `${oldName} is now known as ${trimmed}.`
           : `The settlement is now known as ${trimmed}.`,
-        // The same marker recordCanonFlavorEntryImpl sets, so a future undo
-        // refinement can skip both flavor shapes through one predicate.
+        // Shared with recordCanonFlavorEntryImpl so every flavor row is skipped
+        // through one predicate.
         flavor: true,
         ...(rowSystemState ? { beforeState: rowSystemState, afterState: rowSystemState } : {}),
       });
@@ -160,10 +146,11 @@ export function renameSettlementImpl(get, set, id, newName) {
  * generalizing the RENAME_SETTLEMENT precedent so every committed change-queue
  * order leaves a chronicle line. Flavor-only (no systemState delta, no entity
  * mutation, no PRNG draw); stamps the current systemState as beforeState/
- * afterState so undoLastEvent pops it as a no-op. No-op unless the active
- * settlement is in canon phase. Does NOT persist on its own — the caller (flush)
- * owns the single atomic commit; the mutated eventLog rides along in that save's
- * campaignState.
+ * afterState for save-shape compatibility, while undoLastEvent uses the flavor
+ * marker to leave it in history and target a real event beneath it. No-op unless
+ * the active settlement is in canon phase. Does NOT persist on its own — the
+ * caller (flush) owns the single atomic commit; the mutated eventLog rides along
+ * in that save's campaignState.
  *
  * @param {Function} get  the slice's get()
  * @param {Function} set  the slice's set() (Immer producer)
@@ -198,10 +185,8 @@ export function recordCanonFlavorEntryImpl(get, set, {
       ...(sourceIntentId ? { sourceIntentId } : {}),
       // Flavor only — a recorded line of in-world history, no afterState delta.
       narrativeSummary,
-      // R3 undo-safety: a flavor entry carries no real state transition. Stamp
-      // the current systemState as beforeState so undoLastEvent's
-      // `systemState = popped.beforeState` is a no-op, and mark it flavor so a
-      // future undo refinement can skip it entirely.
+      // A flavor entry carries no real state transition. Keep the legacy state
+      // stamps, but mark it so undo skips the row without deleting it.
       flavor: true,
       beforeState: state.systemState,
       afterState: state.systemState,

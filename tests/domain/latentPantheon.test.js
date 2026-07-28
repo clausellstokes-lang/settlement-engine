@@ -2,12 +2,20 @@
  * latentPantheon.test.js — the activation seam (Phase 4 W-F5 stage 2;
  * PREMIUM GATE addendum).
  *
- * The seam is the second half of TIER-NEVER-TOUCHES-GENERATION: a pure,
- * RNG-FREE copy of the latent record into the live embed keys. Pinned here:
- * determinism/byte-equality, idempotence, conservatism (no latent / already
- * active / DM-authored ⇒ untouched), latency preservation, and the
+ * The seam is a pure, RNG-FREE copy of a latent record into the live embed keys.
+ * Pinned here: determinism/byte-equality, idempotence, conservatism (no latent /
+ * already active / DM-authored ⇒ untouched), latency preservation, and the
  * neutrality-theorem inertness flip — the subsystem gate is CLOSED before
  * activation and OPEN after, on the very same settlement data.
+ *
+ * ⚠️ THE SEAM IS NOW LEGACY-ONLY (T4 ONE-REGEN batch). The premade deity pool and
+ * the `seedStartingPantheon` step that baked a pantheon into every seed were
+ * retired under the deity doctrine, so the seam's only input is a record
+ * PERSISTED in an older save. The final describe block is the doctrine made
+ * executable, and it carries the two lifecycle facts that batch is accountable
+ * for: a fresh generation bakes NOTHING, and a LIVE embed on the input config
+ * survives a full regeneration (the property the deleted step's own guard used
+ * to be the sole guarantor of).
  */
 
 import { describe, expect, test } from 'vitest';
@@ -91,11 +99,13 @@ describe('latentPantheon — the rng-free activation seam', () => {
     expect(isSubsystemActive(snapshotOf(active), 'religion')).toBe(true);    // the key turns, the engine wakes
   });
 
-  test('end-to-end: a REAL pipeline settlement activates its own baked latent record verbatim', () => {
-    const s = generateSettlementPipeline(
-      { settType: 'city', culture: 'mediterranean', terrainOverride: 'coastal', tradeRouteAccess: 'port', monsterThreat: 'civilized' },
-      null, { seed: 'seam-e2e', customContent: {} },
-    );
+  test('end-to-end: a settlement carrying a PERSISTED latent record activates it verbatim', () => {
+    // This used to generate a settlement and read the pantheon the pipeline baked
+    // into it. The T4 batch retired the premade pool, so generation bakes nothing
+    // — the seam's input is now exclusively a PERSISTED record from an older
+    // save. That is what this drives: the same end-to-end assertions, sourced the
+    // way the seam is actually fed today.
+    const s = latentSettlement([CULT]);
     const latent = latentPantheonOf(s);
     expect(latent?.patron).toBeTruthy();
     expect(isSubsystemActive(snapshotOf(s), 'religion')).toBe(false);
@@ -105,5 +115,42 @@ describe('latentPantheon — the rng-free activation seam', () => {
     expect(isSubsystemActive(snapshotOf(active), 'religion')).toBe(true);
     // Idempotence holds on the real object too.
     expect(activateLatentPantheon(active)).toBe(active);
+  });
+});
+
+describe('the deity doctrine, made executable (T4 ONE-REGEN batch)', () => {
+  const GEN_CONFIG = Object.freeze({
+    settType: 'city', culture: 'mediterranean', terrainOverride: 'coastal',
+    tradeRouteAccess: 'port', monsterThreat: 'civilized',
+  });
+
+  test('a freshly generated settlement bakes NO pantheon and NO faith key — no premade deities', () => {
+    const s = generateSettlementPipeline(GEN_CONFIG, null, { seed: 'seam-e2e', customContent: {} });
+    // Anchored negatives: assert against the CONFIG THAT EXISTS, so a config that
+    // vanished entirely (which would make every absence assertion vacuously true)
+    // fails this pin instead of passing it.
+    expect(s.config).toBeTruthy();
+    expect(s.config.tradeRouteAccess).toBe('port');
+    expect(latentPantheonOf(s)).toBe(null);
+    expect(s.config.latentPantheon).toBeUndefined();
+    expect(s.config.faith).toBeUndefined();
+    // And with nothing latent, the seam is a conservative no-op on real output.
+    expect(activateLatentPantheon(s)).toBe(s);
+    expect(isSubsystemActive(snapshotOf(s), 'religion')).toBe(false);
+  }, 30_000);
+
+  test('REGENERATION preserves a LIVE embed carried on the input config', () => {
+    // The retired step used to guard this: it refused to bake latent gods beneath
+    // an explicit live deity. With the step gone, nothing else asserted that a
+    // DM-assigned (or previously activated) patron survives a full regeneration —
+    // the property would have been silently orphaned. This is that guard's heir.
+    const s = generateSettlementPipeline(
+      { ...GEN_CONFIG, primaryDeityRef: PATRON._deityRef, primaryDeitySnapshot: PATRON },
+      null, { seed: 'seam-e2e', customContent: {} },
+    );
+    expect(s.config.primaryDeitySnapshot).toEqual(PATRON);
+    expect(s.config.primaryDeityRef).toBe(PATRON._deityRef);
+    // A live embed means the religion subsystem is awake on generated output.
+    expect(isSubsystemActive(snapshotOf(s), 'religion')).toBe(true);
   }, 30_000);
 });

@@ -219,6 +219,7 @@ describe('R-0 pulse-undo advertising truth (queue #5)', () => {
     // because the delegation makes the arming real (behaviour proved below).
     expect(OPERATIONS.catchUpCampaignWorld.undoToken).toBe('undoLastPulse');
     expect(OPERATIONS.catchUpCampaignWorld.undoState).toBe('action');
+    expect(OPERATIONS.catchUpCampaignWorld.receiptRef).toBe('pulse-record');
     expect(OPERATIONS.catchUpCampaignWorld.description).toMatch(/undone with Undo last pulse/);
     // De-advertised (queue #5): no token, honest null-state, and the published
     // description no longer claims an undo.

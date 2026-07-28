@@ -573,6 +573,17 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
  * conversion is structurally identical to a DM assign — never leaking a foreign
  * field or wall-clock stamp into the embedded record.
  *
+ * FULL PARITY (T4 ONE-REGEN batch): the ONE deliberate asymmetry is gone. This
+ * writer used to drop `lawAxis`, so an organically converted settlement read
+ * chaos01 0.5 no matter which god took the altar, while the identical deity
+ * assigned by a DM read its true law coordinate. The axis is now carried, and
+ * conversion is structurally identical to a DM assign on EVERY axis. The lift
+ * re-arms for every chaos01 reader (deityAxes.chaos01 → deriveTemper, stance,
+ * piety, legitimacy, contest, tolerance, disposition, and the law_order term),
+ * so a seeded advance that commits a conversion whose winning snapshot carries
+ * a NON-neutral lawAxis moves — the declared drift of that batch. An absent
+ * lawAxis still embeds 'neutral', so legacy converts read exactly as before.
+ *
  * IDENTITY: the committed ref is `deityIdOf(snapshot)` — the SAME id the pantheon
  * ledger keys the same snapshot by (pantheon.collectFaithDeltas), so config and
  * ledger can never split identity. Two rots were removed here (R-5b item 13c):
@@ -588,16 +599,23 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
 function reEmbedPrimaryDeity(/** @type {any} */ settlement, /** @type {any} */ snapshot) {
   const ref = settlement && snapshot ? deityIdOf(snapshot) : null;
   if (!ref) return settlement;
-  const config = { ...(settlement.config || {}), primaryDeityRef: ref };
-  config.primaryDeitySnapshot = Object.freeze({
+  // NET-ZERO SHAPE (size-ratchet discipline): the embed is named and the config
+  // is built in the return, so restoring lawAxis below costs the file no
+  // effective line. Behavior is identical — same keys, same freeze, same order.
+  const embed = Object.freeze({
     _deityRef: ref,
     name: String(snapshot.name || ''),
     alignmentAxis: snapshot.alignmentAxis || 'neutral',
     temperamentAxis: snapshot.temperamentAxis || 'neutral',
     rankAxis: snapshot.rankAxis || 'minor',
+    // lawAxis: the SAME default discipline both DM writers use (mutateEntities
+    // setPrimaryDeity/imposeCult) — a legacy 3-axis deity carries none ⇒
+    // 'neutral', which reads chaos01 0.5, the no-signal midpoint. Restored at
+    // T4: this was the one deliberate writer asymmetry.
+    lawAxis: snapshot.lawAxis || 'neutral',
     ...(snapshot.domain ? { domain: String(snapshot.domain) } : {}),
   });
-  return { ...settlement, config };
+  return { ...settlement, config: { ...(settlement.config || {}), primaryDeityRef: ref, primaryDeitySnapshot: embed } };
 }
 
 /**

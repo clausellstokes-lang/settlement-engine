@@ -625,7 +625,7 @@ function advanceLitRoads(args) {
       ransoms[`ransom.${mid}`] = {
         id: `ransom.${mid}`, npcKey: str(m.npcKey), npcName: str(m.npcName), homeId, captorId: res.captorId,
         threatClass: res.cls, purposeKind: str(asObject(m.purpose).kind), missionId: mid,
-        startedTick: now2, startedWeek: weekClock, termWeeks, remainingWeeks: termWeeks,
+        startedYear: num(m.startedYear, year), startedTick: now2, startedWeek: weekClock, termWeeks, remainingWeeks: termWeeks,
         // THE STALE-INTEL RECEIPT (§19): the believed danger the envoy was dispatched under,
         // carried onto the capture record — a poorly-informed faction's capture cites how
         // little it knew (knownDangerAtDispatch < the truth that took them).
@@ -743,14 +743,16 @@ function advanceLitRoads(args) {
     // bargained — by dropping willConvert on the returning mission (consumed on arrival home).
     delete ransoms[rid];
     const retWeeks = Math.max(1, num(hopWeeks(digest, captorId, homeId, season), 1));
-    const backMid = `road.${homeId}.${npcKey}.${weekClock}`;
+    // Captivity interrupts a mission; it does not mint a second journey identity. New ransom
+    // records carry both fields, while the fallbacks keep pre-field persisted records releasable.
+    const backMid = str(r.missionId) || `road.${homeId}.${npcKey}.${weekClock}`;
     const willConvertOut = early === 'party_rescue' ? false : !!r.willConvert;
     missions[backMid] = {
       id: backMid, npcKey, npcName: str(r.npcName), homeId, destId: captorId,
       purpose: { kind: str(r.purposeKind) || 'trade', ref: '' }, phase: 'returning', path: [captorId, homeId],
       departTick: weekClock, legArrivalTick: weekClock + retWeeks, stayWeeks: 0,
       escort01: 1, riskTolerance01: 0.65, knownDangerAtDispatch: 0, trappedBySiege: false,
-      startedYear: year, releasedFromRansom: true, willConvert: willConvertOut, captorId,
+      startedYear: num(r.startedYear, year), releasedFromRansom: true, willConvert: willConvertOut, captorId,
     };
     // WRITE SCHEDULE (§9/§11): term-end pays the FULL schedule. A PARTY RANSOM keeps the captor
     // prosperity pulse (the party met the price) but spares the home seat BOTH the legitimacy hit

@@ -67,6 +67,9 @@
  *       genuine two-sided rate, variable denominator (needs the fixed-n treatment).
  *       CLOSED by EP-5 — the denominator turned out FIXED (NPC-years), not
  *       outcome-divided, so no fixed-n workaround was needed; it is guarded instead.
+ *       The src finding EP-5 filed from that closure ("5 cadence violations") was
+ *       WITHDRAWN under EP-6 (finding EP-l, 2026-07-28) — see the roadsMissions
+ *       roster row below for the record.
  *     tests/joins/ordering.test.js (EP-2D marked NOT MINE — another agent's partition —
  *       and classified only: `unwalledSieges >= 10`, `walledSieges <= 0.7 * unwalled` ARE
  *       a two-sided rate comparison over a corpus). CLOSED by EP-5.
@@ -148,7 +151,8 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + 'derivation is the vacuous 0.' },
   { file: 'tests/domain/roadsMissions.test.js', pendingMigration: false,
     rationale: 'EP-5 MIGRATED 2026-07-27 (roster EXTENSION); RE-DERIVED and finding WITHDRAWN '
-      + 'under EP-l 2026-07-28. EP-2D flagged the variable denominator as needing the fixed-n '
+      + 'under EP-6 (finding EP-l) 2026-07-28. EP-2D flagged the variable denominator as '
+      + 'needing the fixed-n '
       + 'treatment; it turned out FIXED, not outcome-divided — the trial unit is the NPC-year '
       + '(12 NPCs x 3 years = 36) and the same test asserts at most one GENESIS departure per '
       + 'NPC-year, so the Bernoulli unit is exact. A denominator guard in the test pins 36. '
@@ -168,7 +172,8 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + 'with the charter counting (tests/property/roadsCharter.test.js), GENESIS violations '
       + 'measure 0 across all 17 seeds — the law is real and correctly enforced at the '
       + 'genesis cadence stamps (roadsKernel.js PASS 5). The same investigation surfaced a '
-      + 'DIFFERENT, REAL producer defect, fixed under EP-l: SELF-CAPTURE (a court taking its '
+      + 'DIFFERENT, REAL producer defect, fixed under EP-6 (finding EP-l): SELF-CAPTURE (a '
+      + 'court taking its '
       + 'own envoy hostage), which accounted for 4 of the 7 ransoms in that corpus.' },
 
   // ── STILL OWED: a real instrument, blocked for a stated reason ──────────────
@@ -422,10 +427,12 @@ describe('distribution-envelope registry: derivation, power, provenance', () => 
 });
 
 // ── GUARD-THE-GUARD: the mathematics, on known values ────────────────────────
-// The manifest starts empty, so the validation loop above asserts nothing today. A
-// validator proven only by a zero-length loop is the vacuous green this whole program
-// exists to kill — so the tails, the bound search, and the validator are each exercised
-// directly here, and stay exercised no matter how the manifest fills.
+// The manifest STARTED empty — on day one the validation loop above asserted nothing,
+// and a validator proven only by a zero-length loop is the vacuous green this whole
+// program exists to kill. The manifest has since filled with live entries, but those
+// all pass in a green run, so the validator's failure branches are still proven only
+// here — the tails, the bound search, and the validator are each exercised directly
+// on known values, and stay exercised no matter how the manifest fills.
 describe('binomial envelope mathematics (self-test)', () => {
   test('exact tails match hand-computable values', () => {
     // Bin(10, 0.5): P(X<=4) = (1+10+45+120+210)/1024 = 386/1024.

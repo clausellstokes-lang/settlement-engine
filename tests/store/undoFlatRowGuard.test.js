@@ -10,19 +10,11 @@
  * Reproduced by probe on 2026-07-27 before the fix (ok:true, systemState
  * undefined, destruction record popped, corruption persisted).
  *
- * The chokepoint cure: undoLastEvent refuses typed (`entry_not_undoable`)
- * when the newest entry has no `beforeState`. But the refusal is a REFUSAL,
- * not a skip — undo only ever inspects the NEWEST entry, so a refused row
- * parked on top of the log JAMS every real event beneath it, permanently.
- * The rename row hit exactly that: one rename froze the whole timeline.
- *
- * The cure for the jam is the in-repo flavor precedent, not a weaker guard:
- * renameSettlement now stamps the settlement's OWN systemState as
- * beforeState/afterState (as recordCanonFlavorEntryImpl already did), so the row
- * pops as a no-op and the refusal class shrinks to destroy-only. This file
- * pins both halves — the no-op pop, the un-jammed stack beneath it, the
- * per-lane stamp source (live vs saved-row snapshot), and the destroy row's
- * unchanged typed refusal.
+ * The complete cure distinguishes chronology from mutation history:
+ * undoLastEvent walks past explicit `flavor:true` rows, leaves those durable
+ * chronicle records in place, and reverses the newest mechanical entry beneath
+ * them. The first non-flavor row remains a hard barrier when it lacks the
+ * beforeState needed for reversal, so undo can never reorder mechanical history.
  */
 import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { create } from 'zustand';
@@ -106,14 +98,41 @@ describe('undoLastEvent refuses flat library-row entries (VI.10 #148)', () => {
     expect(row.campaignState.eventLog).toHaveLength(1);
   });
 
-  test('Impl-written flavor rows still undo (beforeState is stamped)', () => {
+  test('flavor rows do not let undo tunnel through a non-undoable mechanical barrier', () => {
+    const priorState = { ...SYSTEM_STATE, volatility: { value: 5 } };
+    store.setState(s => {
+      s.eventLog = [
+        {
+          event: { id: 'evt-1', type: 'CUT_TRADE_ROUTE' },
+          appliedAt: new Date().toISOString(),
+          beforeState: priorState,
+          afterState: SYSTEM_STATE,
+        },
+        {
+          id: 'destroy.save-x.1',
+          type: 'DESTROY_SETTLEMENT',
+          timestamp: new Date().toISOString(),
+        },
+      ];
+    });
+    recordCanonFlavorEntryImpl(store.getState, store.setState, {
+      type: 'OMEN', narrativeSummary: 'A comet crosses the night sky.',
+    });
+
+    const result = store.getState().undoLastEvent();
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('entry_not_undoable');
+    expect(result.before.entryType).toBe('DESTROY_SETTLEMENT');
+    expect(result.before.skippedFlavorEntries).toBe(1);
+    expect(store.getState().eventLog).toHaveLength(3);
+    expect(store.getState().systemState).toEqual(SYSTEM_STATE);
+  });
+
+  test('an Impl-written flavor row alone is not treated as an undoable event', () => {
     // R-5b (owner queue #21) retired the recordCanonFlavorEntry STORE SURFACE —
     // a second, dead door onto a live Impl. The one live writer is
     // settlementPendingEditWriters → recordCanonFlavorEntryImpl, so the guard
-    // exercises the Impl directly with the store's own get/set (the immer
-    // producer, exactly what the writers pass). The guarded behavior is
-    // unchanged: an Impl-written flavor row is beforeState-stamped, so undo
-    // pops it ok:true as a state no-op instead of refusing.
+    // exercises the Impl directly with the store's own get/set.
     const recorded = recordCanonFlavorEntryImpl(store.getState, store.setState, {
       type: 'OMEN', narrativeSummary: 'A comet crosses the night sky.',
     });
@@ -121,8 +140,10 @@ describe('undoLastEvent refuses flat library-row entries (VI.10 #148)', () => {
     expect(store.getState().eventLog).toHaveLength(1);
 
     const result = store.getState().undoLastEvent();
-    expect(result.ok).toBe(true);
-    expect(store.getState().eventLog).toHaveLength(0);
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('no_undoable_entry');
+    expect(result.before.skippedFlavorEntries).toBe(1);
+    expect(store.getState().eventLog).toHaveLength(1);
     expect(store.getState().systemState).toEqual(SYSTEM_STATE);
   });
 
@@ -143,38 +164,35 @@ describe('undoLastEvent refuses flat library-row entries (VI.10 #148)', () => {
   });
 });
 
-describe('the rename row pops as a no-op instead of jamming undo (#148 follow-on)', () => {
+describe('flavor rows stay in the chronicle while undo reaches the real event', () => {
   let store;
   beforeEach(() => { store = makeStore(); seedActiveCanon(store); });
 
-  test('a real canon rename writes a stamped row that pops with zero state change', () => {
+  test('a real canon rename writes a stamped row but does not advertise a state undo', () => {
     const recorded = store.getState().renameSettlement('save-x', 'Newford');
     expect(recorded).toBe(true);
 
     const log = store.getState().eventLog;
     expect(log).toHaveLength(1);
     expect(log[0].type).toBe('RENAME_SETTLEMENT');
-    // The flavor stamp: the settlement's OWN state on both sides, so the pop
-    // reassigns exactly what was already there.
+    // The compatibility stamp still uses the settlement's OWN state.
     expect(log[0].beforeState).toEqual(SYSTEM_STATE);
     expect(log[0].afterState).toEqual(SYSTEM_STATE);
     expect(log[0].flavor).toBe(true);
 
     const before = store.getState().systemState;
     const result = store.getState().undoLastEvent();
-    expect(result.ok).toBe(true);
-    expect(result.before.poppedEventType).toBe('RENAME_SETTLEMENT');
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('no_undoable_entry');
 
     const after = store.getState();
-    expect(after.eventLog).toHaveLength(0);
+    expect(after.eventLog).toHaveLength(1);
     expect(after.systemState).toEqual(SYSTEM_STATE);
     expect(after.systemState).toBe(before);
-    // The rename itself is NOT reverted — the row is flavor, and undoing a
-    // chronicle line was never advertised as undoing the name edit.
     expect(after.settlement.name).toBe('Newford');
   });
 
-  test('THE JAM: a rename no longer freezes the real event beneath it', () => {
+  test('one undo skips a rename row, preserves it, and reverses the real event beneath', () => {
     const PRIOR = { ...SYSTEM_STATE, volatility: { value: 5 } };
     // A genuine applyEvent-shaped entry, then a rename stacked on top of it.
     store.setState(s => {
@@ -189,18 +207,37 @@ describe('the rename row pops as a no-op instead of jamming undo (#148 follow-on
     expect(store.getState().eventLog).toHaveLength(2);
     expect(store.getState().eventLog[1].type).toBe('RENAME_SETTLEMENT');
 
-    // Pop 1 — the rename row, a no-op.
-    const first = store.getState().undoLastEvent();
-    expect(first.ok).toBe(true);
+    const result = store.getState().undoLastEvent();
+    expect(result.ok).toBe(true);
+    expect(result.before.poppedEventType).toBe('CUT_TRADE_ROUTE');
+    expect(result.before.skippedFlavorEntries).toBe(1);
     expect(store.getState().eventLog).toHaveLength(1);
-    expect(store.getState().systemState).toEqual(SYSTEM_STATE);
+    expect(store.getState().eventLog[0].type).toBe('RENAME_SETTLEMENT');
+    expect(store.getState().systemState).toEqual(PRIOR);
+    expect(store.getState().settlement.name).toBe('Newford');
+  });
 
-    // Pop 2 — the real event finally reverses. Before the fix BOTH calls
-    // returned ok:false / entry_not_undoable and systemState never moved.
-    const second = store.getState().undoLastEvent();
-    expect(second.ok).toBe(true);
-    expect(second.before.poppedEventType).toBe('CUT_TRADE_ROUTE');
-    expect(store.getState().eventLog).toHaveLength(0);
+  test('multiple flavor rows are all preserved while the newest real event is reversed', () => {
+    const PRIOR = { ...SYSTEM_STATE, volatility: { value: 5 } };
+    store.setState(s => {
+      s.eventLog = [{
+        event: { id: 'evt-1', type: 'CUT_TRADE_ROUTE' },
+        appliedAt: new Date().toISOString(),
+        beforeState: PRIOR,
+        afterState: SYSTEM_STATE,
+      }];
+    });
+    recordCanonFlavorEntryImpl(store.getState, store.setState, {
+      type: 'OMEN', narrativeSummary: 'A comet crosses the night sky.',
+    });
+    recordCanonFlavorEntryImpl(store.getState, store.setState, {
+      type: 'RUMOR', narrativeSummary: 'The ferrymen whisper of war.',
+    });
+
+    const result = store.getState().undoLastEvent();
+    expect(result.ok).toBe(true);
+    expect(result.before.skippedFlavorEntries).toBe(2);
+    expect(store.getState().eventLog.map(entry => entry.type)).toEqual(['OMEN', 'RUMOR']);
     expect(store.getState().systemState).toEqual(PRIOR);
   });
 
@@ -222,18 +259,17 @@ describe('the rename row pops as a no-op instead of jamming undo (#148 follow-on
     expect(stamped.beforeState).toEqual(OTHER_SYSTEM_STATE);
     expect(stamped.beforeState).not.toEqual(SYSTEM_STATE);
 
-    // …and it survives the lifecycle that makes it undoable: hydrateFromSave
-    // restores cs.systemState alongside cs.eventLog, so the pop is a true
-    // no-op on the OTHER settlement rather than a cross-world state swap.
+    // …and hydration never turns the flavor row into a state undo.
     store.getState().hydrateFromSave(row);
     expect(store.getState().eventLog).toHaveLength(1);
-    const popped = store.getState().undoLastEvent();
-    expect(popped.ok).toBe(true);
-    expect(store.getState().eventLog).toHaveLength(0);
+    const result = store.getState().undoLastEvent();
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('no_undoable_entry');
+    expect(store.getState().eventLog).toHaveLength(1);
     expect(store.getState().systemState).toEqual(OTHER_SYSTEM_STATE);
   });
 
-  test('with no snapshot to stamp the row stays unstamped and the refusal guards it', () => {
+  test('an explicit flavor marker is sufficient to skip a legacy unstamped rename row', () => {
     // A canon save carrying no persisted systemState: stamping `null` would let
     // the pop BLANK a systemState that hydrateFromSave had re-derived, so the
     // field is omitted on purpose and the typed refusal keeps holding the row.
@@ -251,10 +287,10 @@ describe('the rename row pops as a no-op instead of jamming undo (#148 follow-on
     expect('beforeState' in stamped).toBe(false);
 
     store.getState().hydrateFromSave(row);
-    const refused = store.getState().undoLastEvent();
-    expect(refused.ok).toBe(false);
-    expect(refused.before.reason).toBe('entry_not_undoable');
-    expect(refused.before.entryType).toBe('RENAME_SETTLEMENT');
+    const result = store.getState().undoLastEvent();
+    expect(result.ok).toBe(false);
+    expect(result.before.reason).toBe('no_undoable_entry');
+    expect(result.before.skippedFlavorEntries).toBe(1);
     expect(store.getState().eventLog).toHaveLength(1);
   });
 

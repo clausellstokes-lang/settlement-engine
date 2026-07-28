@@ -33,6 +33,16 @@ type RateAdmin = {
     fn: string,
     args?: Record<string, unknown>,
   ) => PromiseLike<{ data: unknown; error: unknown }>;
+  from?: (table: string) => {
+    select: (columns: string) => {
+      eq: (column: string, value: string) => {
+        maybeSingle: () => PromiseLike<{
+          data: { value?: unknown } | null;
+          error: unknown;
+        }>;
+      };
+    };
+  };
 };
 
 /** One dimension: true only when the RPC returns a definite under-rate. */
@@ -99,12 +109,47 @@ export async function checkUserIpRate(
 // cap, because it guards provider COGS: a definite over-limit is 429, and a
 // limiter-INFRASTRUCTURE error is a 503 DENY, never a silent open.
 
-/** Server-fixed per-IP AI burst allowance (matches migration 156's ai_ip_rate_limit
- *  config default): a 40-request burst refilling ~40/hour. Not client-overridable. */
+/** Server-side fallbacks for migration 156's private ai_ip_rate_limit config:
+ *  a 40-request burst refilling ~40/hour. Never client-overridable. */
 const AI_IP_CAPACITY = 40;
 const AI_IP_REFILL_PER_SEC = 40 / 3600; // ≈ 0.0111 tokens/sec → 40/hour sustained
 
 export type AiIpRateResult = { ok: boolean; reason: 'under' | 'over' | 'error' | 'skipped' };
+
+type AiIpRateConfig = { capacity: number; refillPerSec: number };
+
+/**
+ * Read the private operator-tunable row installed by migration 156. A missing
+ * query seam (unit stubs), missing row, read error, or malformed value falls back
+ * to the same conservative server defaults; it never disables the limiter.
+ */
+async function loadAiIpRateConfig(admin: RateAdmin): Promise<AiIpRateConfig> {
+  const fallback = { capacity: AI_IP_CAPACITY, refillPerSec: AI_IP_REFILL_PER_SEC };
+  if (typeof admin.from !== 'function') return fallback;
+
+  try {
+    const { data, error } = await admin
+      .from('system_config')
+      .select('value')
+      .eq('key', 'ai_ip_rate_limit')
+      .maybeSingle();
+    if (error || !data?.value || typeof data.value !== 'object') return fallback;
+
+    const value = data.value as Record<string, unknown>;
+    const capacity = value.capacity;
+    const refillPerSec = value.refill_per_sec;
+    return {
+      capacity: typeof capacity === 'number' && Number.isFinite(capacity) && capacity >= 1
+        ? capacity
+        : fallback.capacity,
+      refillPerSec: typeof refillPerSec === 'number' && Number.isFinite(refillPerSec) && refillPerSec >= 0
+        ? refillPerSec
+        : fallback.refillPerSec,
+    };
+  } catch {
+    return fallback;
+  }
+}
 
 /**
  * Consume one token from the caller's per-IP AI bucket. FAIL-CLOSED on a limiter
@@ -121,8 +166,9 @@ export async function checkAiIpRate(
   opts?: { capacity?: number; refillPerSec?: number },
 ): Promise<AiIpRateResult> {
   if (!ip || ip === '0.0.0.0') return { ok: true, reason: 'skipped' };
-  const capacity = opts?.capacity ?? AI_IP_CAPACITY;
-  const refillPerSec = opts?.refillPerSec ?? AI_IP_REFILL_PER_SEC;
+  const config = await loadAiIpRateConfig(admin);
+  const capacity = opts?.capacity ?? config.capacity;
+  const refillPerSec = opts?.refillPerSec ?? config.refillPerSec;
   try {
     const { data, error } = await admin.rpc('consume_token_bucket', {
       p_key: `aiip:${ip}`,

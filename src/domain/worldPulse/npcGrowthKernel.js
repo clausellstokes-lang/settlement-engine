@@ -707,6 +707,9 @@ function growthNews(nid, npcName, townName, sid, trait, minted, provenance, tick
     summary,
     kind: 'applied', impactKind: 'npc_growth', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [],
+    // Actor layer (NEWS ADDRESS LAW): the person the trait moved on. A learned
+    // trait is reversible state, so linking the record names a soul, never seals one.
+    npcIds: [nid],
     sourceEventId: `npc_growth.${nid}.${trait}.${tick}`,
     tags: ['world_pulse', 'npc_growth', minted ? 'trait_gained' : 'trait_shed'],
     reasons: [minted

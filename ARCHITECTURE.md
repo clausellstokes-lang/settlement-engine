@@ -31,7 +31,7 @@ kernel/      Determinism primitives — the seeded-PRNG seam (prng.js) and its
              both build on. Its own first-paint chunk (`kernel`), so the
              createPRNG seam never drags the lazy engine chunk into first paint.
 generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
-             steps/ holds the 23-step pipeline; the rest are domain generators
+             steps/ holds the 22-step pipeline; the rest are domain generators
              (economic, power, npc, faction, defense, history, resource, …).
              Bundled as the ~514 kB lazy `engine` chunk — fetched on first
              Generate (settlementSlice's loadEngine dynamic import), NOT on
@@ -116,12 +116,12 @@ module calls `registerStep()` on import. The runner lives in
 (`kernel/rngContext.js`, `kernel/prng.js`) plus an `onStep` callback (used by
 the UI "pipeline reveal").
 
-Order (23 steps): `resolveConfig → buildGenerationContext → resolveResources →
+Order (22 steps): `resolveConfig → buildGenerationContext → resolveResources →
 resolveStress → resolveNeighbour → assembleInstitutions → subsumptionPass →
 cascadePass → isolationPass → stressConfirmPass → generateEconomy →
 generatePower → neighbourFactions → factionCorrelationPass →
 coherenceRepairPass → economyReconcilePass → powerEconomyReconcilePass →
-structuralValidationPass → generatePopulation → corruptionPass → seedStartingPantheon →
+structuralValidationPass → generatePopulation → corruptionPass →
 generateNarratives → assembleSettlement`.
 <!-- @enforced-by tests/docs/architectureFreshness.test.js (derived from steps/index.js) -->
 

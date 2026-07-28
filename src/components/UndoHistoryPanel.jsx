@@ -73,6 +73,21 @@ function pointLabel(entry) {
   return `Tick ${entry?.tick ?? 0}`;
 }
 
+// Catch-up delegates through the one-week interval API even when it advances up
+// to 26 weeks. The snapshot therefore carries interval:'one_week', which is not
+// enough to name what its undo restores. Tick movement is the honest source:
+// the next advance snapshot begins where this one ended, and the newest snapshot
+// ends at the campaign's current tick. Named manual intervals retain their
+// familiar month/season/year copy.
+function advanceSpanLabel(entry, weeksAdvanced) {
+  if (entry?.interval === 'one_week'
+      && Number.isInteger(weeksAdvanced)
+      && weeksAdvanced > 1) {
+    return `${weeksAdvanced} weeks`;
+  }
+  return INTERVAL_LABEL[entry?.interval] || 'one advance';
+}
+
 /** Merge one campaign's advance + proposal snapshots into a single newest-first
  *  row list. Total order key: advance i (stack order) → (i+1, 0); a proposal
  *  stamped advanceDepth k sits after advance k and before advance k+1 → (k, 1),
@@ -84,8 +99,11 @@ function pointLabel(entry) {
  *  the cursor. Listing it keeps this panel and the toolbar chip telling the same
  *  story; an empty panel beside an enabled "Undo Advance" chip would be the worse
  *  lie. In-session it is a duplicate of the stack's newest entry, so it is
- *  deliberately NOT appended then. */
-function mergedRows(advStack, propStack, campaignId, parkedAdvance) {
+ *  deliberately NOT appended then.
+ *
+ *  `currentTick` closes the newest advance's span. Earlier advance spans close
+ *  at the next snapshot's pre-advance tick. */
+function mergedRows(advStack, propStack, campaignId, parkedAdvance, currentTick) {
   const mine = (stack) => (stack || [])
     .filter((e) => e && String(e.campaignId) === String(campaignId));
   const advances = mine(advStack);
@@ -93,7 +111,16 @@ function mergedRows(advStack, propStack, campaignId, parkedAdvance) {
     ? [parkedAdvance]
     : advances;
   const items = [
-    ...rowsFromAdvances.map((entry, i) => ({ entry, kind: 'advance', key: [i + 1, 0, i] })),
+    ...rowsFromAdvances.map((entry, i) => {
+      const startTick = Number(entry?.tick);
+      const endTick = Number(rowsFromAdvances[i + 1]?.tick ?? currentTick);
+      const weeksAdvanced = Number.isFinite(startTick)
+        && Number.isFinite(endTick)
+        && endTick > startTick
+        ? endTick - startTick
+        : null;
+      return { entry, kind: 'advance', weeksAdvanced, key: [i + 1, 0, i] };
+    }),
     ...mine(propStack).map((entry, j) => ({ entry, kind: 'proposal', key: [entry.advanceDepth ?? 0, 1, j] })),
   ];
   items.sort((a, b) => (b.key[0] - a.key[0]) || (b.key[1] - a.key[1]) || (b.key[2] - a.key[2]));
@@ -104,19 +131,25 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
   const dialogRef = useDialogFocusTrap(true, onClose);
   const advStack = useStore((s) => s.pulseUndoStack);
   const propStack = useStore((s) => s.proposalUndoStack);
-  // Subscribed by a STABLE path into stored state (the parked snapshot object is
-  // written once at the pause and never re-created per render), so this selector
-  // cannot loop the store's snapshot check the way a derived array would.
-  const parkedAdvance = useStore((s) => parkedIntervalUndoSnapshot(
-    (s.campaigns || []).find((c) => c && String(c.id) === String(campaignId)),
-  ));
+  // Subscribe to the stored campaign object itself, not a freshly derived wrapper.
+  // Its parked snapshot supplies reload-safe undo while its live tick closes the
+  // newest row's actual span.
+  const campaign = useStore((s) =>
+    (s.campaigns || []).find((c) => c && String(c.id) === String(campaignId)));
+  const parkedAdvance = parkedIntervalUndoSnapshot(campaign);
   const undoLastPulse = useStore((s) => s.undoLastPulse);
   const undoLastProposalApply = useStore((s) => s.undoLastProposalApply);
   const [busy, setBusy] = useState(false);
 
   // Both stores merged, most recent first. Row index k therefore needs one
   // matching-verb pop per row 0..k to return to it.
-  const rows = mergedRows(advStack, propStack, campaignId, parkedAdvance);
+  const rows = mergedRows(
+    advStack,
+    propStack,
+    campaignId,
+    parkedAdvance,
+    campaign?.worldState?.tick,
+  );
   // True only on the reload-into-paused path (a parked snapshot standing in for an
   // empty session stack), which is the one case where a return point outlives the
   // session and the copy below must say so instead of "this session only".
@@ -195,7 +228,7 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
                   : 'Kept for this session only.'}
               </p>
               <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column' }}>
-                {rows.map(({ entry, kind }, k) => (
+                {rows.map(({ entry, kind, weeksAdvanced }, k) => (
                   <li
                     key={`${kind}-${entry.tick}-${entry.now}-${k}`}
                     style={{
@@ -220,7 +253,7 @@ export default function UndoHistoryPanel({ campaignId, onClose }) {
                           </>
                         ) : (
                           <>
-                            Undoes {INTERVAL_LABEL[entry.interval] || 'one advance'}
+                            Undoes {advanceSpanLabel(entry, weeksAdvanced)}
                             {entry.now ? ` · captured ${ago(entry.now)}` : ''}
                           </>
                         )}

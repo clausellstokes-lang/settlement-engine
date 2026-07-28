@@ -588,11 +588,13 @@ describe('R-4 advertised-undo invariant — records and the session tombstone', 
       expect(OPERATIONS[arming.reader], `${name} names reader ${arming.reader}`).toBeTruthy();
       expect(OPERATIONS[name].undoToken).toBe(arming.reader);
     }
-    // R-3's row-class-conditional truth, asserted rather than flattened: the pop
-    // refuses undoable-by-design rows with a TYPED reason instead of corrupting
-    // state. If that refusal disappears, the conditional note here is stale.
+    // R-3's row-class-conditional truth, asserted rather than flattened: the
+    // shared planner skips flavor rows but refuses a non-undoable mechanical
+    // barrier with a TYPED reason. If either half disconnects, the conditional
+    // note here is stale.
+    expect(/planTimelineUndo\s*\(\s*eventLog\s*\)/.test(settlement)).toBe(true);
     expect(
-      /reason:\s*'entry_not_undoable'/.test(storeRaw.get('settlementSlice.js') || ''),
+      /reason:\s*'entry_not_undoable'/.test(storeRaw.get('settlementSliceHelpers.js') || ''),
       'undoLastEvent lost its typed refusal — the conditional arming note in ARMING is now unproven',
     ).toBe(true);
     for (const [name, arming] of Object.entries(ARMING)) {

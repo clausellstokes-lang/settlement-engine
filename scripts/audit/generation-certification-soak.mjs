@@ -36,7 +36,7 @@ import { GENERATION_CONTENT_PROFILES } from '../../src/domain/generationContentP
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { TERRAIN_WEIGHTS } from '../../src/generators/steps/resolveConfig.js';
 
-const DEFAULT_COUNT = 1_200;
+export const DEFAULT_COUNT = 1_200;
 const MAX_EXAMPLES = 20;
 const FORMAL_JUDGMENT_IDS = Object.freeze([
   'hard_structural_validity',
@@ -51,13 +51,17 @@ const FORMAL_JUDGMENT_IDS = Object.freeze([
 const TERRAIN_VALUES = Object.freeze(
   TERRAIN_WEIGHTS.map(([terrain]) => terrain),
 );
+// The product's explicit route vocabulary (ConfigurationPanel), minus
+// random_trade, which resolveConfig resolves before the pipeline sees it.
+// 'none' is a reader-side fallback token no code path ever writes into a
+// config, so certifying it would spend corpus on worlds users cannot make.
 const ROUTE_VALUES = Object.freeze([
   'road',
   'river',
   'port',
   'crossroads',
   'isolated',
-  'none',
+  'mountain_pass',
 ]);
 const CONTENT_PROFILE_VALUES = Object.freeze(
   Object.keys(GENERATION_CONTENT_PROFILES),
@@ -107,6 +111,14 @@ function selectDimension(
 /**
  * Produce one live generator config without stale aliases such as `terrain`,
  * `magicLevel`, or the retired four-culture vocabulary.
+ *
+ * Two selectors whose phase terms share a period cancel: their join then
+ * degenerates to pure stride arithmetic, which can lock one dimension to
+ * another (threat and magic were once pure functions of the route residue).
+ * monsterThreat and the magic scenario therefore phase-advance once per full
+ * route super-cycle (TIER_ORDER.length * ROUTE_VALUES.length) instead of
+ * sharing the route selector's own phase period; the soak contract test pins
+ * full pairwise joint coverage over every dimension pair.
  */
 export function configForIndex(index) {
   const random = mulberry32(Math.imul(index + 1, 2_654_435_761));
@@ -115,7 +127,7 @@ export function configForIndex(index) {
     index,
     3,
     0,
-    TIER_ORDER.length,
+    TIER_ORDER.length * ROUTE_VALUES.length,
   );
 
   return {
@@ -123,7 +135,13 @@ export function configForIndex(index) {
     culture: selectDimension(CULTURE_PROFILE_KEYS, index, 5, 1, TIER_ORDER.length),
     terrainOverride: selectDimension(TERRAIN_VALUES, index, 3, 2, CULTURE_PROFILE_KEYS.length),
     tradeRouteAccess: selectDimension(ROUTE_VALUES, index, 5, 3, TIER_ORDER.length),
-    monsterThreat: selectDimension(MONSTER_THREAT_TIERS, index, 2, 1, ROUTE_VALUES.length),
+    monsterThreat: selectDimension(
+      MONSTER_THREAT_TIERS,
+      index,
+      2,
+      1,
+      TIER_ORDER.length * ROUTE_VALUES.length,
+    ),
     contentProfile: selectDimension(CONTENT_PROFILE_VALUES, index, 2, 0, CULTURE_PROFILE_KEYS.length),
     ...magic,
     priorityEconomy: Math.floor(random() * 101),

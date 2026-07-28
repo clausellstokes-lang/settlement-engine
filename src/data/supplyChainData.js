@@ -622,7 +622,7 @@ export const SUPPLY_CHAIN_NEEDS = {
         resource: null,
         resourceIcon: '',
         rawInputs: [],
-        processingInstitutions: ['Glassblower', 'Glassmakers', 'Specialized craftsmen quarters'],
+        processingInstitutions: ['Glassblower', 'Glassmakers', 'Printing house'],
         intermediateGoods: ['Glassware', 'Books and manuscripts'],
         outputs: ['Glassware', 'Books and manuscripts', 'Printing services'],
         services: ['information'],

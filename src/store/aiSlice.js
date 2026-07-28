@@ -418,8 +418,7 @@ export const createAiSlice = (set, get) => ({
       if (disposition === 'abandon') return;
       if (disposition === 'release') {
         set(state => {
-          state.aiLoading = false;
-          state.aiRegenerating = false;
+          state.aiLoading = false; state.aiRegenerating = false;
           state.aiProgress = '';
           state.aiAbortController = null;
         });
@@ -438,8 +437,7 @@ export const createAiSlice = (set, get) => ({
         state.aiSettlement = result;
         state.aiDataVersion = Date.now();
         state.aiSourceFingerprint = sourceFingerprint;
-        state.aiLoading = false;
-        state.aiRegenerating = false;
+        state.aiLoading = false; state.aiRegenerating = false;
         state.aiProgress = '';
         state.showNarrative = true;
         state.aiPartialFailure = partialFailure ? { failedFields: failedFields || [] } : null;
@@ -447,6 +445,10 @@ export const createAiSlice = (set, get) => ({
         state.aiAbortController = null; // this run is done; release the controller
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
+      // P104 / F34 — this paid generation actually completed and committed.
+      // Keep the reader-audience signal behind the same disposition gate so an
+      // abandoned or switched-away run never counts as engagement.
+      get().bumpLifetimeNarrate?.();
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
         type: 'narrative',
@@ -890,6 +892,7 @@ export const createAiSlice = (set, get) => ({
         state.aiAbortController = null;
         if (typeof creditsRemaining === 'number') state.creditBalance = creditsRemaining;
       });
+      get().bumpLifetimeNarrate?.();
 
       track(EVENTS.AI_GENERATION_COMPLETED, {
         type: 'progression',

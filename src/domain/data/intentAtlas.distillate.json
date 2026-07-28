@@ -114,8 +114,8 @@
       "bucket": "metropolis",
       "coBucket": "high",
       "n": 63,
-      "effect": 0.12,
-      "weight": 0.37,
+      "effect": 0.13,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -124,7 +124,7 @@
       "bucket": "metropolis",
       "coBucket": "low",
       "n": 63,
-      "effect": -0.18,
+      "effect": -0.17,
       "weight": 0.5,
       "source": "soak"
     },
@@ -154,7 +154,7 @@
       "bucket": "town",
       "coBucket": "high",
       "n": 81,
-      "effect": 0.21,
+      "effect": 0.2,
       "weight": 0.5,
       "source": "soak"
     },
@@ -354,7 +354,7 @@
       "bucket": "crossroads",
       "coBucket": "high",
       "n": 61,
-      "effect": 0.48,
+      "effect": 0.47,
       "weight": 0.5,
       "source": "soak"
     },
@@ -374,7 +374,7 @@
       "bucket": "isolated",
       "coBucket": "high",
       "n": 69,
-      "effect": -0.2,
+      "effect": -0.21,
       "weight": 0.5,
       "source": "soak"
     },
@@ -384,7 +384,7 @@
       "bucket": "isolated",
       "coBucket": "low",
       "n": 69,
-      "effect": 0.51,
+      "effect": 0.52,
       "weight": 0.5,
       "source": "soak"
     },
@@ -394,7 +394,7 @@
       "bucket": "isolated",
       "coBucket": "moderate",
       "n": 69,
-      "effect": -0.33,
+      "effect": -0.34,
       "weight": 0.5,
       "source": "soak"
     },
@@ -414,7 +414,7 @@
       "bucket": "mountain_pass",
       "coBucket": "low",
       "n": 62,
-      "effect": 0.56,
+      "effect": 0.55,
       "weight": 0.5,
       "source": "soak"
     },
@@ -434,7 +434,7 @@
       "bucket": "port",
       "coBucket": "high",
       "n": 65,
-      "effect": -0.12,
+      "effect": -0.13,
       "weight": 0.5,
       "source": "soak"
     },
@@ -444,7 +444,7 @@
       "bucket": "port",
       "coBucket": "low",
       "n": 65,
-      "effect": -0.21,
+      "effect": -0.22,
       "weight": 0.5,
       "source": "soak"
     },
@@ -494,7 +494,7 @@
       "bucket": "road",
       "coBucket": "moderate",
       "n": 75,
-      "effect": 0.19,
+      "effect": 0.2,
       "weight": 0.5,
       "source": "soak"
     },

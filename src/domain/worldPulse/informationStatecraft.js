@@ -653,6 +653,12 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
           `The court that lies to neighbours lies to its own people — a legitimacy wound and a people-held grievance ride with the credibility charge.`,
         ],
         settlementIds: [String(rec.liarId), String(rec.audienceId)],
+        // Actor layer (NEWS ADDRESS LAW): the court's stamped mouthpiece, who
+        // just took the personal credibility charge above — the one named soul
+        // this beat is genuinely ABOUT. Present only when npcCredibility was lit
+        // and a spokesperson was actually stamped; an anonymous bluff carries no
+        // actor and the entry serializes exactly as before.
+        ...(rec.spokespersonNpcId ? { npcIds: [String(rec.spokespersonNpcId)] } : {}),
         significance: 'notable',
         score: 61,
         tick: now,

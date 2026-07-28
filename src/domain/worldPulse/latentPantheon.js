@@ -3,10 +3,15 @@
  * (Phase 4 W-F5 stage 2; PHASE4_FAITH_DELTA "THE PREMIUM GATE" addendum,
  * owner 2026-07-10).
  *
- * The generation pipeline bakes a starting pantheon LATENTLY into every seed
- * (`config.latentPantheon` — seedStartingPantheon step; identical data for all
- * account tiers, tier never touches generation). This module is the OTHER half
- * of that law: the post-generation, RNG-FREE seam that turns the key —
+ * ⚠️ LEGACY-ONLY SEAM (T4 ONE-REGEN batch). Generation NO LONGER bakes a latent
+ * pantheon: the deity doctrine retires the premade pool (no premade deities —
+ * custom content only), and the `seedStartingPantheon` step and its pool were
+ * deleted with it. This module is KEPT, unchanged in behavior, because saves
+ * written before that batch still carry a `config.latentPantheon` record, and
+ * those un-activated gods must keep working. It is a reader of persisted data,
+ * never a producer.
+ *
+ * WHAT IT DOES: the post-generation, RNG-FREE seam that turns the key —
  * `activateLatentPantheon` COPIES the latent patron/cults into the live embed
  * keys (`config.primaryDeityRef` / `primaryDeitySnapshot` /
  * `cultDeitySnapshots`) in the exact field-disciplined shape the
@@ -15,6 +20,13 @@
  * the engine is provably inert by the neutrality theorem — the free tier IS the
  * certified ground state. Upgrade = activation fires on open: "the gods were
  * always there, latent in the seed."
+ *
+ * THE ONE LIFECYCLE CONSEQUENCE, stated plainly: a FULL REGENERATION re-runs the
+ * pipeline, and the seeding step no longer exists — so an old save that never
+ * activated its latent gods and is then fully regenerated comes back without
+ * them. That is the doctrine's intent, and it is declared in the batch. An
+ * ACTIVATED patron is unaffected: the live embed rides `config` through
+ * regeneration verbatim (pinned by tests/domain/latentPantheon.test.js).
  *
  * WHO CALLS THIS: the store's generation-complete / save-open wiring for
  * premium accounts (W-F6 — tier checks, dossier gating, and generic-faith copy
@@ -83,9 +95,10 @@ export function activateLatentPantheon(settlement) {
   if (hasActivePantheon(settlement)) return settlement; // already live ⇒ idempotent no-op
 
   const config = { ...(settlement.config || {}) };
-  // The latent records are already field-disciplined frozen snapshots
-  // (seedStartingPantheon.poolDeityEmbed — the setPrimaryDeity/imposeCult
-  // shape). Copy them VERBATIM: latent and activated data stay byte-equal.
+  // The latent records are already field-disciplined frozen snapshots in the
+  // setPrimaryDeity/imposeCult shape (written by the retired generation step,
+  // and persisted in the save ever since). Copy them VERBATIM: latent and
+  // activated data stay byte-equal.
   config.primaryDeityRef = String(latent.patron._deityRef || latent.patron.name || '');
   config.primaryDeitySnapshot = Object.freeze({ ...latent.patron });
   if (Array.isArray(latent.cults) && latent.cults.length) {

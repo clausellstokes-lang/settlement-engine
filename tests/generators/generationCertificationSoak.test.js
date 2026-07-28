@@ -2,7 +2,8 @@
  * Contract tests for the scheduled generation-certification soak.
  *
  * The full 1,200-settlement lane belongs to weekly/manual CI. These tests keep
- * its vocabulary and independent oracle honest on the ordinary change path.
+ * its vocabulary, its joint lattice, and its independent oracle honest on the
+ * ordinary change path.
  */
 
 import {
@@ -12,32 +13,37 @@ import {
 } from 'vitest';
 
 import {
+  DEFAULT_COUNT,
   GENERATION_DIMENSIONS,
   configForIndex,
   inspectSettlement,
 } from '../../scripts/audit/generation-certification-soak.mjs';
 
+const DIMENSION_KEYS = {
+  tiers: config => config.settType,
+  cultures: config => config.culture,
+  terrains: config => config.terrainOverride,
+  routes: config => config.tradeRouteAccess,
+  threats: config => config.monsterThreat,
+  contentProfiles: config => config.contentProfile,
+  magicScenarios: config => `${config.magicExists}:${config.priorityMagic}`,
+};
+
+function expectedValues(name) {
+  const values = GENERATION_DIMENSIONS[name];
+  if (name !== 'magicScenarios') return [...values];
+  return values.map(value => `${value.magicExists}:${value.priorityMagic}`);
+}
+
 function observedDimensions(count) {
-  const observed = {
-    tiers: new Set(),
-    cultures: new Set(),
-    terrains: new Set(),
-    routes: new Set(),
-    threats: new Set(),
-    contentProfiles: new Set(),
-    magicScenarios: new Set(),
-  };
+  const observed = Object.fromEntries(
+    Object.keys(DIMENSION_KEYS).map(name => [name, new Set()]),
+  );
   for (let index = 0; index < count; index += 1) {
     const config = configForIndex(index);
-    observed.tiers.add(config.settType);
-    observed.cultures.add(config.culture);
-    observed.terrains.add(config.terrainOverride);
-    observed.routes.add(config.tradeRouteAccess);
-    observed.threats.add(config.monsterThreat);
-    observed.contentProfiles.add(config.contentProfile);
-    observed.magicScenarios.add(
-      `${config.magicExists}:${config.priorityMagic}`,
-    );
+    for (const [name, keyFor] of Object.entries(DIMENSION_KEYS)) {
+      observed[name].add(keyFor(config));
+    }
   }
   return observed;
 }
@@ -79,6 +85,44 @@ describe('generation certification soak vocabulary', () => {
     // below cannot pass against an empty or undefined config.
     expect(config).not.toHaveProperty('terrain'); // anchored: live-config pins above
     expect(config).not.toHaveProperty('magicLevel'); // anchored: live-config pins above
+  });
+});
+
+describe('generation certification soak pairwise lattice', () => {
+  it('fills every joint cell of every dimension pair across the full corpus', () => {
+    // Per-dimension coverage cannot see two CORRELATED selectors: phase terms
+    // with a shared period cancel, and one dimension collapses into a pure
+    // function of another. Measured 2026-07-28, before configForIndex gave
+    // monsterThreat and the magic scenario their own phase period:
+    // routes×threats covered 6/18 joint cells and routes×magicScenarios
+    // 12/24, so e.g. mountain_pass worlds were only ever certified under
+    // heartland threat. This walks the full default soak corpus and names
+    // every empty joint cell.
+    const names = Object.keys(DIMENSION_KEYS);
+    const seen = new Set();
+    for (let index = 0; index < DEFAULT_COUNT; index += 1) {
+      const config = configForIndex(index);
+      const keys = names.map(name => `${name}:${DIMENSION_KEYS[name](config)}`);
+      for (let a = 0; a < keys.length; a += 1) {
+        for (let b = a + 1; b < keys.length; b += 1) {
+          seen.add(`${keys[a]}|${keys[b]}`);
+        }
+      }
+    }
+
+    const missing = [];
+    for (let a = 0; a < names.length; a += 1) {
+      for (let b = a + 1; b < names.length; b += 1) {
+        for (const valueA of expectedValues(names[a])) {
+          for (const valueB of expectedValues(names[b])) {
+            if (!seen.has(`${names[a]}:${valueA}|${names[b]}:${valueB}`)) {
+              missing.push(`${names[a]}.${valueA} × ${names[b]}.${valueB}`);
+            }
+          }
+        }
+      }
+    }
+    expect(missing).toEqual([]);
   });
 });
 

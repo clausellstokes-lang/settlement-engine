@@ -454,6 +454,14 @@ describe('DM-visible activation behavior (computeActiveChains)', () => {
     expect(lux.activatedByResource).toBe(true);
   });
 
+  it('Specialized metalworkers do not process Glass & Print through a shared 12-character prefix', () => {
+    const metal = computeActiveChains(inst('Specialized metalworkers'), [], 'city', 'road');
+    expect(metal.some(c => c.chainId === 'glass_print')).toBe(false);
+
+    const print = computeActiveChains(inst('Printing house'), [], 'city', 'road');
+    expect(print.some(c => c.chainId === 'glass_print')).toBe(true);
+  });
+
   it('smuggling is the dark entrepôt: a fence runs it at a crossroads, not on a dead-end road', () => {
     const crossroads = computeActiveChains(inst('Local fence'), [], 'thorp', 'crossroads');
     expect(crossroads.some(c => c.chainId === 'smuggling')).toBe(true);

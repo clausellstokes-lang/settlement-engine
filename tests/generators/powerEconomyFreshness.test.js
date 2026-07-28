@@ -47,11 +47,11 @@ function powerByFaction(settlement) {
 }
 
 describe('bounded final economy -> power reconciliation', () => {
-  test('econ-power-freshness-43 consumes Moderate, not provisional Comfortable', () => {
+  test('econ-power-freshness-166 consumes Moderate, not provisional Comfortable', () => {
     const snapshots = {};
     const settlement = generate(
       STALE_SEED_CONFIG,
-      'econ-power-freshness-43',
+      'econ-power-freshness-166',
       {
         onStep(name, ctx) {
           if (

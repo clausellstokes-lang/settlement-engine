@@ -107,7 +107,7 @@ import {
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, remapLocksAfterGenerate, persistLocksToActiveSave } from './settlementSliceHelpers.js';
+  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -439,14 +439,10 @@ export const createSettlementSlice = (set, get) => ({
   // P104 / X-4 — Lifetime narrate count, read by hooks/useReaderAudience.js to
   // promote anonymous → intermediate after the first narrate spend.
   //
-  // TODO(F34 · cross-slice wiring): bumpLifetimeNarrate has no caller yet, so the
-  // count never increments and the audience-promotion signal never fires. The
-  // real narrate-success point lives in aiSlice.requestNarrative — right after the
-  // `set(state => { state.aiSettlement = result; ... })` commit and the
-  // `track(EVENTS.AI_GENERATION_COMPLETED, { type: 'narrative', ... })` call
-  // (src/store/aiSlice.js, the requestNarrative success branch). Add
-  // `get().bumpLifetimeNarrate();` there. That file is outside this change's fence,
-  // so the incrementer is left in place (not deleted) to be wired from aiSlice.
+  // F34 closed: aiSlice bumps this only after requestNarrative or
+  // requestProgression passes its active-request disposition gate and commits.
+  // Failed, abandoned, and switched-away runs therefore do not promote the
+  // reader audience.
   lifetimeNarrateCount: 0,
   bumpLifetimeNarrate: () => set(state => {
     state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
@@ -2021,38 +2017,20 @@ export const createSettlementSlice = (set, get) => ({
    */
   undoLastEvent: () => {
     if (get().phase !== 'canon' || get().eventLog.length === 0) {
-      // Track K §C1 — nothing to undo: a conformant ok:false envelope. No
-      // consumer reads undoLastEvent's return today (Timeline's onUndo ignores
-      // it); the success path below is the real contract.
+      // Track K §C1 — nothing to undo: a conformant ok:false envelope.
       return makeActionResult('undoLastEvent', { ok: false });
     }
-    const eventLogLengthBefore = get().eventLog.length;
-    // Read the entry about to be popped while it is still in state — the
-    // roaming-twin reconcile below needs its event + undo snapshot.
-    const undoneEntry = get().eventLog[get().eventLog.length - 1];
-    // R-3 (atlas VI.10 #148): a flat library-row entry carrying no `beforeState`
-    // and no nested `.event` used to pop anyway — assigning systemState =
-    // undefined, dropping the record while the blob kept its effect, and
-    // PERSISTING the corruption. Refuse typed instead.
-    //
-    // Read this as a REFUSAL, not a skip: undo only ever inspects the NEWEST
-    // entry, so any refused row parked on top of the log blocks every real event
-    // beneath it for good. Both flavor writers therefore stamp `beforeState` on
-    // purpose so their rows pop as harmless no-ops — recordCanonFlavorEntry and
-    // renameSettlement (both in settlementRenameHelpers.js; the rename stamp
-    // closed exactly that jam). Only the flat destroySavedSettlement row still
-    // refuses, which is correct — the destruction is not reversible from the log
-    // — but Timeline still renders its Undo button when that row is newest, so
-    // the click returns ok:false and nothing visibly happens. Surfacing the
-    // refusal, or hiding the affordance on a non-undoable newest entry, is an
-    // open component-lane deferral (documented, not a bug to re-find).
-    if (undoneEntry?.beforeState === undefined) {
-      return makeActionResult('undoLastEvent', {
-        ok: false, before: { reason: 'entry_not_undoable', entryType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null, eventLogLength: eventLogLengthBefore },
-      });
+    const eventLog = get().eventLog, eventLogLengthBefore = eventLog.length;
+    // Flavor rows are chronicle records, not state transitions: leave them in
+    // place and target the first mechanical entry beneath them. A non-undoable
+    // mechanical row remains a hard barrier so history can never be reordered.
+    const undoPlan = planTimelineUndo(eventLog);
+    const undoneEntry = undoPlan.targetIndex >= 0 ? eventLog[undoPlan.targetIndex] : null;
+    if (!undoPlan.ok) {
+      return makeActionResult('undoLastEvent', { ok: false, before: { reason: undoPlan.reason, entryType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null, eventLogLength: eventLogLengthBefore, skippedFlavorEntries: undoPlan.skippedFlavorEntries } });
     }
     set(state => {
-      const popped = state.eventLog.pop();
+      const [popped] = state.eventLog.splice(undoPlan.targetIndex, 1);
       state.systemState = popped.beforeState;
       const eventId = popped.event?.id;
       if (!eventId || !state.settlement) return;
@@ -2134,16 +2112,15 @@ export const createSettlementSlice = (set, get) => ({
     }
     // Track K §C1 — ActionResult envelope. The undo REVERSES the popped event,
     // so `receipts` is empty this step (C2 may surface the reversed entry).
-    // `poppedEventType` falls back to the FLAT row's own `type` exactly as the
-    // refusal envelope above does, so a stamped flavor pop reports what it
-    // popped instead of a bare null. `poppedEventId` keeps its narrow meaning —
-    // the EVENT's id, which a flat row genuinely does not have.
+    // `poppedEventType` retains the flat-row fallback for legacy undoable rows;
+    // `poppedEventId` keeps its narrow meaning — the authored event's id.
     const persistedToSave = Boolean(afterState.activeSaveId && afterState.settlement);
     return makeActionResult('undoLastEvent', {
       before: {
         poppedEventId: undoneEntry?.event?.id ?? null,
         poppedEventType: undoneEntry?.event?.type ?? undoneEntry?.type ?? null,
         eventLogLength: eventLogLengthBefore,
+        skippedFlavorEntries: undoPlan.skippedFlavorEntries,
       },
       after: {
         phase: afterState.phase,

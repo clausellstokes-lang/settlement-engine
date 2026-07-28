@@ -24,6 +24,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const MIG_156 = resolve(process.cwd(), 'supabase', 'migrations', '156_ai_ip_token_bucket.sql');
+const RATE_HELPER = resolve(process.cwd(), 'supabase', 'functions', '_shared', 'rateLimit.ts');
 const have = existsSync(MIG_156);
 
 /** Extract a single `create or replace function ... $$;` block by name. */
@@ -46,6 +47,14 @@ const consume = async (key, capacity = 3, refillPerSec = 0, cost = 1) =>
 // would silently pass zero assertions. Fail loud.
 it('migration 156 is present (suite is not vacuous)', () => {
   expect(have).toBe(true);
+});
+
+it('the operator-tunable ai_ip_rate_limit row is consumed by the shared edge chokepoint', () => {
+  const helper = readFileSync(RATE_HELPER, 'utf8');
+  expect(helper).toContain(".from('system_config')");
+  expect(helper).toContain(".eq('key', 'ai_ip_rate_limit')");
+  expect(helper).toMatch(/p_capacity:\s*capacity/);
+  expect(helper).toMatch(/p_refill_per_sec:\s*refillPerSec/);
 });
 
 describe.runIf(have)('consume_token_bucket — smooth-refill token bucket (pglite, 156)', () => {

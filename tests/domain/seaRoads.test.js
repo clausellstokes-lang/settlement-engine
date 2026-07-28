@@ -70,12 +70,26 @@ describe('D-6 §10(3) resolveSeaHazard', () => {
   });
 
   it('S3 PIRACY: an embattled port node ⇒ an S3 capture/rob (the T3 twin)', () => {
-    const worldState = { simulationRules: {}, spatialLedgers: { embattlement: { a: { level: 0.6 } } } };
+    // The embattled port is the DESTINATION 'b' — the home port is guarded (the cell below).
+    const worldState = { simulationRules: {}, spatialLedgers: { embattlement: { b: { level: 0.6 } } } };
     const res = resolveSeaHazard(baseArgs(worldState));
     expect(res).toBeTruthy();
     expect(res.cls).toBe('S3');
+    expect(res.captorId).toBe('b');
     expect(['hostage', 'robbed']).toContain(res.outcome);
     expect(res.overSea).toBe(true);
+  });
+
+  it('S3 SELF-CAPTURE GUARD: the embattled HOME port never pirates its own traveller', () => {
+    // THE LAW: a court cannot take its own envoy hostage (the T3 twin's fifth arm, EP-l).
+    const homeOnly = { simulationRules: {}, spatialLedgers: { embattlement: { a: { level: 0.6 } } } };
+    expect(resolveSeaHazard(baseArgs(homeOnly))).toBeNull();
+    // Home AND the far port embattled ⇒ the guard skips home and the FAR port takes them.
+    const both = { simulationRules: {}, spatialLedgers: { embattlement: { a: { level: 0.6 }, b: { level: 0.6 } } } };
+    const res = resolveSeaHazard(baseArgs(both));
+    expect(res).toBeTruthy();
+    expect(res.cls).toBe('S3');
+    expect(res.captorId).toBe('b');
   });
 
   it('S2 STORM: a winter sea hop can delay (never capture), scaled by the storm law', () => {

@@ -11,6 +11,7 @@ import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.
 import { advanceRoads } from '../../src/domain/worldPulse/roadsKernel.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { ROADS_TUNING, protectionOf, exposureOf, captureProbability } from '../../src/domain/roads/state.js';
+import { SEA_ROADS_TUNING } from '../../src/domain/roads/seaRoads.js';
 
 // Four real settlements h, x, d, e (x = a waystation hop on the h→d road; e = the captor —
 // army home / besieger / occupier — a REAL settlement so the ransom-tick captor_gone
@@ -90,6 +91,7 @@ describe('gauntlet — T1 ARMY ON THE ROUTE (in-transit)', () => {
     const rec = Object.values(ransoms(res))[0];
     expect(rec?.threatClass).toBe('T1');
     expect(rec.captorId).toBe('e');
+    expect(rec.startedYear, 'capture carries the interrupted mission genesis year').toBe(2);
     expect(homeNpc(res).whereabouts.state).toBe('hostage');
   });
   it('T1 → DELAYED (roll >= captureP): legArrivalTick +1, journey continues', () => {
@@ -182,6 +184,96 @@ describe('gauntlet — T4 HOSTILE RECEPTION (the host also rolls)', () => {
     expect(Object.keys(ransoms(res))).toEqual([]);
     expect(missions(res)[MID].phase).toBe('visiting');
     expect(missions(res)[MID].expelled).toBeUndefined();
+  });
+});
+
+describe('gauntlet — THE SELF-CAPTURE GUARD (a court cannot take its own envoy hostage)', () => {
+  // EP-l: four land captor-selection arms + the S3 piracy arm could each pick the traveller's
+  // OWN home court as captor (home ransomed its own envoy, paid itself, ate its own legitimacy
+  // hit). One pin per arm — the arms select their captor by different routes. Every cell forces
+  // a seed whose FIRST hazard draw lands under captureP (it WOULD capture were the arm live);
+  // the guard must mint NO ransom and leave the mission untouched. Positive controls: the
+  // hostage cells above (T1-occ / T2 / T3 land), and the captor≠home twins in this block for
+  // the embassy-fallback and S3 arms (same fixture, foreign captor ⇒ the arm DOES fire).
+
+  // Position the traveller ON the home hop: f = (100 − 96) / 20 = 0.2 ⇒ floor(0.2 × 2) = node 0 = 'h'.
+  const atHomeHop = (over) => ({ ...missionFor(over), departTick: 96, legArrivalTick: 116 });
+  const embattled = (sid) => ({ embattlement: { [sid]: { level: 0.9, phase: 'embattled', sinceTick: 0, lastTick: 0 } } });
+  const cPT3 = capturePFor({ base: ROADS_TUNING.T3_BASE * 0.9, alpha: ROADS_TUNING.T3_ALPHA, importanceWeight: WEAK.iw, escort01: WEAK.escort01, phase: 'outbound', legWeeks: 20 });
+
+  it('T1 OCCUPIER arm: home occupying the host mints no ransom — the visit proceeds', () => {
+    const occ = { d: { occupierId: 'h', state: 'extractive', sinceTick: 0, stateHeld: 1, resistance: 0.3, benefitYield: 0, lastTick: 0 } };
+    const cP = capturePFor({ base: ROADS_TUNING.T1_BASE, alpha: ROADS_TUNING.T1_ALPHA, importanceWeight: WEAK.iw, escort01: WEAK.escort01, phase: 'visiting', legWeeks: 8 });
+    const seed = findSeed((r) => r < cP - 0.02);
+    const res = advanceRoads(argsFor(worldFor({ seed, mission: missionFor({ phase: 'visiting', escort01: WEAK.escort01, stayWeeks: 8 }), occupations: occ }), WEAK.importance, graphWith()));
+    expect(Object.keys(ransoms(res)), 'no self-ransom from home\'s own occupation').toEqual([]);
+    expect(missions(res)[MID].phase).toBe('visiting');
+    expect(missions(res)[MID].legArrivalTick, 'no T1 delay either — the arm contributed no captor').toBe(110);
+  });
+
+  it('T2 BESIEGER arm: home besieging the host is filtered out — no capture, no trap', () => {
+    const graph = graphWith({ channels: [{ id: 'wf.h.d', from: 'h', to: 'd', type: 'war_front', status: 'confirmed', evidence: [{ source: 'war_layer' }] }] });
+    const cP = capturePFor({ base: ROADS_TUNING.T2_BASE, alpha: ROADS_TUNING.T2_ALPHA, importanceWeight: WEAK.iw, escort01: WEAK.escort01, phase: 'visiting', legWeeks: 8 });
+    const seed = findSeed((r) => r < cP - 0.02);
+    const res = advanceRoads(argsFor(worldFor({ seed, mission: missionFor({ phase: 'visiting', escort01: WEAK.escort01, stayWeeks: 8 }) }), WEAK.importance, graph));
+    expect(Object.keys(ransoms(res)), 'no self-ransom from home\'s own siege lines').toEqual([]);
+    expect(missions(res)[MID].trappedBySiege, 'home\'s own siege traps no one').toBe(false);
+    expect(missions(res)[MID].phase).toBe('visiting');
+  });
+
+  it('T3 LAND arm: an embattled HOME hop rolls nothing — the journey continues', () => {
+    const seed = findSeed((r) => r < cPT3 - 0.01);
+    const res = advanceRoads(argsFor(worldFor({ seed, mission: atHomeHop({ phase: 'outbound', escort01: WEAK.escort01, stayWeeks: 1 }), extraLedgers: embattled('h') }), WEAK.importance, graphWith()));
+    expect(Object.keys(ransoms(res)), 'no self-ransom on home\'s own doorstep').toEqual([]);
+    expect(missions(res)[MID].phase).toBe('outbound');
+    expect(missions(res)[MID].legArrivalTick).toBe(116);
+    expect(missions(res)[MID].robbedReceipted, 'not robbed by home either').toBeUndefined();
+  });
+
+  it('T3 EMBASSY-FALLBACK arm: an embattled HOME hop never takes its own embassy', () => {
+    const seed = findSeed((r) => r < cPT3 - 0.01);
+    const mission = { ...atHomeHop({ phase: 'outbound', escort01: WEAK.escort01, stayWeeks: 1 }), purpose: { kind: 'embassy', ref: 'd' } };
+    const res = advanceRoads(argsFor(worldFor({ seed, mission, extraLedgers: embattled('h') }), WEAK.importance, graphWith()));
+    expect(Object.keys(ransoms(res)), 'no self-ransom of home\'s own embassy').toEqual([]);
+    expect(missions(res)[MID].phase).toBe('outbound');
+    expect(missions(res)[MID].robbedReceipted).toBeUndefined();
+  });
+  it('T3 EMBASSY-FALLBACK positive control: the same embassy IS taken at a foreign embattled hop', () => {
+    const seed = findSeed((r) => r < cPT3 - 0.01);
+    const mission = { ...missionFor({ phase: 'outbound', escort01: WEAK.escort01, stayWeeks: 1 }), purpose: { kind: 'embassy', ref: 'd' } };
+    const res = advanceRoads(argsFor(worldFor({ seed, mission, extraLedgers: embattled('x') }), WEAK.importance, graphWith()));
+    const rec = Object.values(ransoms(res))[0];
+    expect(rec?.threatClass).toBe('T3');
+    expect(rec.captorId).toBe('x');
+    expect(rec.purposeKind).toBe('embassy');
+  });
+
+  // D-6: the same law at sea. legModes is authoritative (['sea','land'] marks h→x a water hop);
+  // the gauntlet DIGEST carries no seaLanes ⇒ stormMult 1 ⇒ S2 dead by construction (winter
+  // notwithstanding), and navalEnabled stays absent ⇒ S1 unreachable — S3 alone is in play.
+  const seaWorld = (a) => {
+    const w = worldFor(a);
+    w.simulationRules = { ...w.simulationRules, seaRoadsEnabled: true };
+    return w;
+  };
+  const seaMission = () => ({ ...atHomeHop({ phase: 'outbound', escort01: WEAK.escort01, stayWeeks: 1 }), legModes: ['sea', 'land'] });
+  const cPS3 = capturePFor({ base: SEA_ROADS_TUNING.S3_PIRACY_BASE * 0.9, alpha: SEA_ROADS_TUNING.S3_PIRACY_ALPHA, importanceWeight: WEAK.iw, escort01: WEAK.escort01, phase: 'outbound', legWeeks: 20 });
+
+  it('S3 PIRACY arm: an embattled coastal HOME never pirates its own sea traveller', () => {
+    const seed = findSeed((r) => r < cPS3 - 0.01);
+    const res = advanceRoads(argsFor(seaWorld({ seed, mission: seaMission(), extraLedgers: embattled('h') }), WEAK.importance, graphWith()));
+    expect(Object.keys(ransoms(res)), 'no self-ransom in home\'s own harbour').toEqual([]);
+    expect(missions(res)[MID].phase).toBe('outbound');
+    expect(missions(res)[MID].legArrivalTick).toBe(116);
+    expect(missions(res)[MID].robbedReceipted).toBeUndefined();
+  });
+  it('S3 positive control: the same crossing with the FAR port embattled IS pirated (captor = x)', () => {
+    const seed = findSeed((r) => r < cPS3 - 0.01);
+    const res = advanceRoads(argsFor(seaWorld({ seed, mission: seaMission(), extraLedgers: embattled('x') }), WEAK.importance, graphWith()));
+    const rec = Object.values(ransoms(res))[0];
+    expect(rec?.threatClass).toBe('S3');
+    expect(rec.captorId).toBe('x');
+    expect(homeNpc(res).whereabouts.state).toBe('hostage');
   });
 });
 

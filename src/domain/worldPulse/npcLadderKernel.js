@@ -869,6 +869,11 @@ function ladderBeat(sid, townName, fkey, ev, tick, now) {
     summary,
     kind: 'applied', impactKind: 'npc_ladder', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [],
+    // Actor layer (NEWS ADDRESS LAW): both parties to the challenge, as the
+    // canonical npc pulse ids npcAgency.npcId minted — the same spelling the
+    // realm entity web resolves. Ranks move, never a fate: linking the record
+    // does not change what the beat says about them.
+    npcIds: [ev.challengerNid, ev.defenderNid],
     sourceEventId: `npc_ladder.${sid}.${slug}.${tick}`,
     tags: ['world_pulse', 'npc_ladder', ev.kind],
     reasons: [reason],
@@ -901,6 +906,7 @@ function investitureBeat(sid, townName, fkey, heirNid, predNid, nameByNid, kind,
     summary,
     kind: 'applied', impactKind: 'npc_ladder', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [],
+    npcIds: [heirNid, predNid],   // actor layer: the heir and the predecessor
     sourceEventId: `npc_ladder.${sid}.${slug}.${tick}`,
     tags: ['world_pulse', 'npc_ladder', 'investiture', kind],
     reasons: [reason],

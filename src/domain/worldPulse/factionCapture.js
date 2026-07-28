@@ -218,6 +218,12 @@ export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @t
       channelType: null,
       severity: Math.max(0, LADDER.indexOf(t.to)) / (LADDER.length - 1),
       settlementIds: [String(t.settlementId)],
+      // THE NEWS ADDRESS LAW's actor layer: the faction IS the subject of a
+      // capture beat, and its id here is already the canonical world-pulse
+      // faction id (`<saveId>:<stablePart(name)>` — the same spelling
+      // realmEntityWeb.realmFactionPulseId recomputes and resolves), so the
+      // Herald links the faction instead of reading its name out of the headline.
+      factionIds: [String(t.factionId)],
       impactIds: [],
       channelIds: [],
       sourceEventId: t.factionId,

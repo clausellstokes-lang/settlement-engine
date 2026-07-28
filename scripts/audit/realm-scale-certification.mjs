@@ -15,6 +15,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import {
+  existsSync,
   mkdirSync,
   readFileSync,
   renameSync,
@@ -240,6 +241,19 @@ function commandOutput(command, args) {
 }
 
 /**
+ * `git ls-files --cached` includes tracked paths deleted in a dirty worktree.
+ * A source-bound soak must fingerprint the live checkout, not try to read a
+ * cached path that no longer exists.
+ *
+ * @param {string} listed
+ */
+export function liveSourceFilesFromGitListing(listed) {
+  return [...new Set(String(listed).split('\n').filter(Boolean))]
+    .filter((file) => existsSync(resolve(ROOT, file)))
+    .sort();
+}
+
+/**
  * Fingerprints the checked-out simulation inputs, including uncommitted and
  * untracked files. A Git SHA alone is not an honest identity for a dirty soak.
  */
@@ -257,7 +271,7 @@ export function readSourceIdentity() {
     'package.json',
     'package-lock.json',
   ]);
-  const files = [...new Set(listed.split('\n').filter(Boolean))].sort();
+  const files = liveSourceFilesFromGitListing(listed);
   const hash = createHash('sha256');
   for (const file of files) {
     const absolute = resolve(ROOT, file);

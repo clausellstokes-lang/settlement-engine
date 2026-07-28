@@ -280,7 +280,12 @@ describe('previewCampaignWorldPulse — full pulse wiring', () => {
     expect(snap).toBeTruthy();
     expect(['Vael', 'Korl']).toContain(snap.name);
     // The re-embed re-picks the exact field set (no foreign field leaks).
-    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'name', 'rankAxis', 'temperamentAxis']);
+    // `lawAxis` joined that set in the T4 ONE-REGEN batch, which restored the
+    // conversion writer's one missing axis — a conversion is now structurally
+    // identical to a DM assign. Writer-level parity is pinned in
+    // tests/domain/deityEmbedWriterParity.test.js; this is the through-the-pulse
+    // witness that the restored field survives the real kernel path.
+    expect(Object.keys(snap).sort()).toEqual(['_deityRef', 'alignmentAxis', 'lawAxis', 'name', 'rankAxis', 'temperamentAxis']);
   });
 
   test('DOUBLE-GATE: a deity-free campaign with the flag ON is byte-identical to flag OFF', () => {

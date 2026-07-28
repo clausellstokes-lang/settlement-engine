@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import {
   buildRealmScalePlan,
   isPassingWholeWorldReceipt,
+  liveSourceFilesFromGitListing,
   percentileOf,
   runRealmScaleCertification,
   sourceIdentityMatches,
@@ -92,6 +93,16 @@ describe('realm scale certification evidence', () => {
         sourceFingerprint: 'd'.repeat(64),
       }),
     ).toBe(false);
+  });
+
+  it('fingerprints the live graph when a cached source file is deleted', () => {
+    expect(liveSourceFilesFromGitListing([
+      'src/generators/data/deityPool.js',
+      'src/domain/worldPulse/latentPantheon.js',
+      'src/domain/worldPulse/latentPantheon.js',
+    ].join('\n'))).toEqual([
+      'src/domain/worldPulse/latentPantheon.js',
+    ]);
   });
 
   it('rejects clone-only, mislabeled, or output-divergent worker receipts', () => {

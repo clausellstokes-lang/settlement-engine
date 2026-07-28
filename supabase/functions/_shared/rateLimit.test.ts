@@ -30,6 +30,29 @@ function makeAdmin(result: { data: unknown; error: unknown } | 'throw') {
   return { admin, calls };
 }
 
+/** Add the system_config query seam used in production and record its key. */
+function withConfig(
+  base: ReturnType<typeof makeAdmin>,
+  result: { data: { value?: unknown } | null; error: unknown } | 'throw',
+) {
+  const configCalls: Array<{ table: string; column: string; value: string }> = [];
+  const admin = {
+    ...base.admin,
+    from: (table: string) => ({
+      select: (_columns: string) => ({
+        eq: (column: string, value: string) => ({
+          maybeSingle: () => {
+            configCalls.push({ table, column, value });
+            if (result === 'throw') return Promise.reject(new Error('config transport down'));
+            return Promise.resolve(result);
+          },
+        }),
+      }),
+    }),
+  };
+  return { ...base, admin, configCalls };
+}
+
 const CORS = { 'Access-Control-Allow-Origin': 'https://x.test' };
 
 Deno.test('SKIP: a missing IP short-circuits (ok, skipped) and never calls the RPC', async () => {
@@ -52,6 +75,47 @@ Deno.test('UNDER: a real IP with allowed=true proceeds (ok, under) and keys on a
   assertEquals(r, { ok: true, reason: 'under' });
   assertEquals(calls.length, 1);
   assertEquals((calls[0].args as { p_key: string }).p_key, 'aiip:203.0.113.7');
+});
+
+Deno.test('LIVE CONFIG: operator capacity/refill values reach consume_token_bucket', async () => {
+  const wired = withConfig(
+    makeAdmin({ data: { allowed: true }, error: null }),
+    { data: { value: { capacity: 7, refill_per_sec: 0.25 } }, error: null },
+  );
+  const r = await checkAiIpRate(wired.admin, '203.0.113.7');
+  assertEquals(r, { ok: true, reason: 'under' });
+  assertEquals(wired.configCalls, [{
+    table: 'system_config',
+    column: 'key',
+    value: 'ai_ip_rate_limit',
+  }]);
+  assertEquals(wired.calls[0].args, {
+    p_key: 'aiip:203.0.113.7',
+    p_capacity: 7,
+    p_refill_per_sec: 0.25,
+    p_cost: 1,
+  });
+});
+
+Deno.test('CONFIG FALLBACK: missing, malformed, or failed reads keep conservative defaults', async () => {
+  for (const configResult of [
+    { data: null, error: null },
+    { data: { value: { capacity: 0, refill_per_sec: 'fast' } }, error: null },
+    { data: null, error: { message: 'read failed' } },
+    'throw' as const,
+  ]) {
+    const wired = withConfig(
+      makeAdmin({ data: { allowed: true }, error: null }),
+      configResult,
+    );
+    assertEquals((await checkAiIpRate(wired.admin, '203.0.113.7')).ok, true);
+    assertEquals(wired.calls[0].args, {
+      p_key: 'aiip:203.0.113.7',
+      p_capacity: 40,
+      p_refill_per_sec: 40 / 3600,
+      p_cost: 1,
+    });
+  }
 });
 
 Deno.test('OVER: allowed=false is a definite over-limit (not ok, over → 429)', async () => {

@@ -105,9 +105,9 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
           // fresh genesis journey — the cadence law governs genesis dispatch, so it is excluded.
           // PRIOR ART: tests/property/roadsCharter.test.js's 12-year walkthrough encoded this
           // rule first (§9 is the charter's law; roadsKernel.js stamps the cadence ONLY on the
-          // genesis paths). This instrument counted every mission id and therefore counted one
-          // INTERRUPTED journey twice: the release path mints a NEW mission id whose startedYear
-          // is the RELEASE year, so a capture that spans no year boundary reads as two departures.
+          // genesis paths). Release now resumes the original mission id and startedYear, while
+          // this explicit marker keeps the measurement aligned with the law even for a run that
+          // begins from a persisted legacy ransom and never observed the original departure.
           if (!m.releasedFromRansom) {
             const key = `${m.npcKey}|${m.startedYear}`;
             genesisByKeyYear.set(key, (genesisByKeyYear.get(key) || 0) + 1);
@@ -159,7 +159,7 @@ describe('roads genesis — the 3-year lit run (§18 R-2 done-when)', () => {
     // Both bounds DERIVED from a measured 201/576 GENESIS-departure rate, not hand-picked
     // (the base rate excludes release-return legs for the same reason this count does). The
     // authored band was perNpcYear > 0.05 and < 0.9 — i.e. >= 2 and <= 32 departures of a
-    // possible 36, sitting 3.7 and 6.6 sigma from the mean of 12.56. The live pair is 4 and
+    // possible 36, sitting 3.7 and 6.8 sigma from the mean of 12.56. The live pair is 4 and
     // 23; this run lands on 16 (its own seed mints no release leg, so realigning the counting
     // left this fixture's number unchanged). The FLOOR is loosenPending: its own derivation is
     // the looser 3, and the program never loosens a live bound silently.

@@ -1,23 +1,29 @@
 /**
- * deityEmbedWriterParity.test.js — the FOUR deity-embed writers, pinned against
- * one canonical field set (Wave R-5b, item 13c; the executable form of item 13a's
- * deferral).
+ * deityEmbedWriterParity.test.js — the THREE deity-embed writers, pinned against
+ * one canonical field set (Wave R-5b, item 13c; closed out by the T4 ONE-REGEN
+ * batch, which both restored the missing axis and retired the fourth writer).
  *
- * THE CLASS THIS CLOSES: "embed writers drift apart." Four separate places build
- * a settlement's frozen deity record, each by hand-picking fields (never a
- * spread, so no wall-clock or foreign key can leak in). Nothing structural kept
- * them agreeing, and they had already parted: the conversion writer silently
- * dropped the law axis, and it minted its ref down a chain nothing else spoke.
- * The writers:
+ * THE CLASS THIS CLOSES: "embed writers drift apart." Separate places build a
+ * settlement's frozen deity record, each by hand-picking fields (never a spread,
+ * so no wall-clock or foreign key can leak in). Nothing structural kept them
+ * agreeing, and they had already parted: the conversion writer silently dropped
+ * the law axis, and it minted its ref down a chain nothing else spoke. The
+ * writers:
  *
  *   1. setPrimaryDeity        src/domain/events/mutateEntities.js — the DM assign
  *   2. imposeCult             src/domain/events/mutateEntities.js — the DM cult
- *   3. poolDeityEmbed         src/generators/steps/seedStartingPantheon.js — the
- *                             generated latent pantheon (activation copies it verbatim)
- *   4. reEmbedPrimaryDeity    src/domain/worldPulse/applyWorldPulse.js — the
+ *   3. reEmbedPrimaryDeity    src/domain/worldPulse/applyWorldPulse.js — the
  *                             organic conversion commit (module-private, so it is
  *                             driven here through applyWorldPulseOutcomes, the
  *                             only door the kernel itself uses)
+ *
+ * A FOURTH writer once existed: `poolDeityEmbed`, the premade-pool embed builder
+ * in the generation step that baked a starting pantheon into every seed. The T4
+ * batch retired the premade pool under the deity doctrine (no premade deities —
+ * custom content only), and the builder went with it. Nothing replaced it: the
+ * activation seam copies a persisted latent record VERBATIM, so it mints no
+ * embed of its own and there is no fourth key set left to drift. The seam's own
+ * behavior is pinned by tests/domain/latentPantheon.test.js.
  *
  * WHAT IS PINNED
  *   • each writer's exact produced key set against the canonical list;
@@ -27,24 +33,19 @@
  *     `deityIdOf(snapshot)` — the SAME id the pantheon ledger keys that snapshot
  *     by — so the config and the ledger can never split a deity in two;
  *   • the two rots removed with it: the ousted patron's ref is never inherited
- *     by the incoming deity, and the `converted:` namespace no longer exists.
- *
- * THE ONE DELIBERATE ASYMMETRY: reEmbedPrimaryDeity omits `lawAxis`. That is
- * TODAY'S TRUTH, asserted as such rather than left unnoticed — restoring the axis
- * moves every conversion-bearing seeded advance (the law_order lift in
- * deriveSystemState plus fourteen chaos01-reading pulse modules), so it belongs to
- * the T4 ONE-REGEN batch, not here. See the loud marker on that assertion.
+ *     by the incoming deity, and the `converted:` namespace no longer exists;
+ *   • that the restored `lawAxis` is REACHABLE — it changes the coordinate the
+ *     engine actually reads, not merely a stored field (the last describe block).
  */
 
 import { describe, expect, test } from 'vitest';
 
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { applyWorldPulseOutcomes } from '../../src/domain/worldPulse/applyWorldPulse.js';
+// The consumer leaf the restored axis feeds — imported so the reachability pin
+// reads the axis the way the engine does, never by re-deriving the mapping here.
+import { chaos01, deityTemper } from '../../src/domain/worldPulse/deityAxes.js';
 import { deityIdOf } from '../../src/domain/worldPulse/pantheon.js';
-// The generated-pantheon writer. (This module also carries the premade pool the
-// deity doctrine retires at T4; the import here is of the EMBED BUILDER, which
-// survives that removal.)
-import { poolDeityEmbed } from '../../src/generators/steps/seedStartingPantheon.js';
 
 /** The field set every disciplined deity embed carries. */
 const CANONICAL_KEYS = ['_deityRef', 'name', 'alignmentAxis', 'temperamentAxis', 'rankAxis', 'lawAxis'];
@@ -134,27 +135,56 @@ describe('deity embed writers — one canonical field set', () => {
     expect(entry._deityRef).toBeTruthy();
   });
 
-  test('poolDeityEmbed (generated pantheon) writes the canonical keys plus domain and the ratified portfolio', () => {
-    const bare = poolDeityEmbed({ slug: 'vael', ...SOURCE });
-    expect(Object.keys(bare).sort()).toEqual([...CANONICAL_KEYS, 'domain'].sort());
-    expect(bare._deityRef).toBeTruthy();
-    // `portfolio` is the owner-ratified free-text flavor field — additive, zero
-    // mechanics — and appears only when the pool record carries one.
-    const flavored = poolDeityEmbed({ slug: 'vael', ...SOURCE, portfolio: 'the broken spear' });
-    expect(Object.keys(flavored).sort()).toEqual([...CANONICAL_KEYS, 'domain', 'portfolio'].sort());
-  });
-
-  test('reEmbedPrimaryDeity (organic conversion) writes the canonical keys EXCEPT lawAxis — today’s truth, flipped at T4', () => {
+  test('reEmbedPrimaryDeity (organic conversion) writes the FULL canonical key set — parity restored at T4', () => {
     const next = reEmbedViaPulse(baseSettlement(), withRef('deity:core:vael'));
     const embed = next.config.primaryDeitySnapshot;
     expect(embed._deityRef).toBeTruthy();
-    // ⚠️ T4 FLIPS THIS LINE — see the T4 ONE-REGEN batch note (item 13a).
-    // Restoring lawAxis here is DRIFT-BEARING: it re-arms the law_order lift and
-    // every chaos01 reader, so a conversion-bearing seeded advance moves. When
-    // that batch lands, change the expectation to the full CANONICAL_KEYS set
-    // and delete this comment.
-    expect(Object.keys(embed).sort()).toEqual([...CANONICAL_KEYS.filter((k) => k !== 'lawAxis'), 'domain'].sort());
-    expect(embed.lawAxis).toBeUndefined();
+    // The T4 ONE-REGEN batch restored lawAxis here. The conversion writer now
+    // produces the same key set as the DM assign, on every axis.
+    expect(Object.keys(embed).sort()).toEqual([...CANONICAL_KEYS, 'domain'].sort());
+    expect(embed.lawAxis).toBe('lawful');           // carried from SOURCE, not defaulted
+  });
+
+  test('a lawAxis-less snapshot still embeds the documented `neutral` — absence tolerance survives parity', () => {
+    const { lawAxis, ...legacy } = SOURCE;
+    expect(lawAxis).toBe('lawful');                 // the field really was dropped from the input
+    const next = reEmbedViaPulse(baseSettlement(), { _deityRef: 'deity:core:old', ...legacy });
+    expect(next.config.primaryDeitySnapshot.lawAxis).toBe('neutral');
+  });
+});
+
+describe('the restored axis is REACHABLE — it changes what the engine reads (T4)', () => {
+  /** Drive a conversion with the given lawAxis and read the committed embed. */
+  const convertWith = (/** @type {string} */ axis) =>
+    reEmbedViaPulse(baseSettlement(), withRef('deity:core:vael', { lawAxis: axis }))
+      .config.primaryDeitySnapshot;
+
+  // EFFECT-REACHABILITY (EP discipline): a parity pin alone would pass even if
+  // every reader ignored the field. This drives the axis through the ACTUAL
+  // consumer leaf — deityAxes.chaos01, the coordinate ~14 pulse modules read —
+  // and proves the two ends of the axis produce DIFFERENT engine input. Before
+  // the restore both of these read 0.5, so this pin fails on the old writer:
+  // it is the executable witness that the lift is armed, not merely stored.
+  test('lawful vs chaotic converts produce DIFFERENT chaos01 — the lift is armed', () => {
+    const lawful = convertWith('lawful');
+    const chaotic = convertWith('chaotic');
+    expect(chaos01(lawful)).toBe(0);
+    expect(chaos01(chaotic)).toBe(1);
+    expect(chaos01(lawful)).not.toBe(chaos01(chaotic));
+  });
+
+  test('the difference carries all the way into a derived temper', () => {
+    // deityTemper reads chaos01; with alignment held fixed at 'good', the law
+    // axis alone decides whether the derivation clears the peacelike band.
+    const good = { alignmentAxis: 'good' };
+    expect(deityTemper({ ...good, ...convertWith('lawful') })).toBe('peacelike');
+    expect(deityTemper({ ...convertWith('chaotic'), alignmentAxis: 'neutral' })).toBe('neutral');
+    // And the absent-axis convert still lands on the documented midpoint.
+    const { lawAxis, ...legacy } = SOURCE;
+    expect(lawAxis).toBe('lawful');
+    const legacyEmbed = reEmbedViaPulse(baseSettlement(), { _deityRef: 'deity:core:old', ...legacy })
+      .config.primaryDeitySnapshot;
+    expect(chaos01(legacyEmbed)).toBe(0.5);
   });
 });
 

@@ -24,9 +24,10 @@ const graph = ensureRegionalGraph({ edges: [{ id: 'edge.h.e', from: 'h', to: 'e'
 
 const captive = (importance) => ({ id: 'm', name: 'The Captive', importance, category: 'economy', personality: { dominant: 'bold' }, whereabouts: { state: 'hostage', placeId: 'e', purposeKind: 'trade', sinceTick: 10, expectedReturnTick: null, missionId: MID } });
 const settlement = (name, npcs, prosperity = 'Comfortable', legit = 55) => ({ name, tier: 'town', npcs, economicState: { prosperity }, powerStructure: { publicLegitimacy: { score: legit, label: 'Accepted' }, factions: [{ faction: 'C', isGoverning: true, power: 55 }] } });
-const ransomRec = (importance, captorId, { termWeeks = 5, startedWeek = 90, hostileAtCapture = false, willConvert = false } = {}) => ({
+const ransomRec = (importance, captorId, { termWeeks = 5, startedWeek = 90, startedYear, hostileAtCapture = false, willConvert = false } = {}) => ({
   id: RID, npcKey: 'h:m', npcName: 'The Captive', homeId: 'h', captorId, threatClass: 'T2',
   purposeKind: 'trade', missionId: MID, startedTick: 90, startedWeek, termWeeks, remainingWeeks: termWeeks,
+  ...(Number.isFinite(startedYear) ? { startedYear } : {}),
   hostileAtCapture, conversionRolled: true, willConvert,
 });
 
@@ -67,6 +68,15 @@ describe('roads ransom — the term-end write schedule (§9, deterministic)', ()
     const r = directRelease('pillar', 'e');
     expect(upd(r, 'h').economicState.prosperity, 'a realm notices ransoming a pillar (home −1 band: Comfortable→Moderate)').toBe('Moderate');
     expect(upd(r, 'e').economicState.prosperity).toBe('Prosperous');
+  });
+
+  it('release resumes the captured mission id and its original genesis year', () => {
+    const r = directRelease('key', 'e', { startedYear: 1 });
+    expect(Object.keys(roadsOf(r).missions || {})).toEqual([MID]);
+    const mission = roadsOf(r).missions[MID];
+    expect(mission.id).toBe(MID);
+    expect(mission.startedYear).toBe(1);
+    expect(mission.departTick, 'the resumed return leg still begins at release').toBe(100);
   });
 });
 

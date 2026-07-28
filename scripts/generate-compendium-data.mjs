@@ -667,7 +667,7 @@ export function buildCompendiumData() {
   const lines = [];
   lines.push('// GENERATED FILE — DO NOT EDIT BY HAND.');
   lines.push('// Source of truth: the engine registries (causalState, signalRegistry,');
-  lines.push('// constants, operationRegistry, deityPool, townMapStyles, interiorTemplates,');
+  lines.push('// constants, operationRegistry, townMapStyles, interiorTemplates,');
   lines.push('// calamity, simulationRules) + the authored catalogData taxonomy.');
   lines.push('// Regenerate: npm run gen:compendium-data');
   lines.push('// Pinned by tests/docs/compendiumDataFreshness.test.js (byte-identity + parity).');

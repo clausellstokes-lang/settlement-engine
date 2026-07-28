@@ -16,7 +16,7 @@
  */
 
 import { useMemo } from 'react';
-import { causalBandWord, deriveCausalState } from '../../../domain/causalState.js';
+import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 
@@ -51,6 +51,15 @@ const BAND_TONE = {
   collapsed: RED,
 };
 const BAND_RANK = { collapsed: 0, critical: 1, strained: 2, adequate: 3, surplus: 4 };
+
+// Convert the raw score onto the same higher-is-healthier axis used to compute
+// the band. Sorting this ascending therefore keeps the most pressured row first
+// inside a shared band without treating high criminal opportunity as healthy.
+function healthOrientedScore(row) {
+  if (typeof row.score !== 'number' || !Number.isFinite(row.score)) return 100;
+  const score = row.score;
+  return variablePolarity(row.key) === 'lower_is_better' ? 100 - score : score;
+}
 
 /**
  * `band` is the MODEL band (the machine value, kept on data-band so tests and
@@ -87,10 +96,11 @@ export default function SubstrateTab({ settlement }) {
         band: v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
-      // Pressures first: worst band, then lowest score, then stable by label.
+      // Pressures first: worst band, then worst polarity-oriented score, then
+      // stable by label.
       .sort((a, b) =>
         (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5)
-        || (a.score ?? 100) - (b.score ?? 100)
+        || healthOrientedScore(a) - healthOrientedScore(b)
         || a.label.localeCompare(b.label));
   }, [model]);
 

@@ -813,6 +813,9 @@ function contestBeat(sid, townName, id, phase, c, m1, m2, tick, now) {
     tick, createdAt: now, scope: 'local', significance: e.sig, severity: e.sev, score: e.sc,
     headline: e.h, summary: e.s, kind: 'applied', impactKind: 'npc_contest', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [], sourceEventId: `npc_contest.${sid}.${slug}.${tick}`,
+    // Actor layer (NEWS ADDRESS LAW): the two rivals, by their canonical npc
+    // pulse ids — a goal decided, never a fate.
+    npcIds: [c.a.nid, c.b.nid],
     tags: ['world_pulse', 'npc_contest', phase], reasons: [`A contested-goals resolution (${c.kind}) over ${noun}.`],
   };
 }
@@ -830,6 +833,7 @@ function contestSupportBeat(sid, townName, nid, patronNid, phase, tick, now) {
       : `In ${townName}, a supporter shared in their patron's victory, and the bond deepened both ways.`,
     kind: 'applied', impactKind: 'npc_support', channelType: 'settlement',
     settlementIds: [sid], impactIds: [], channelIds: [], sourceEventId: `npc_support.${sid}.${phase}.${nid}.${patronNid}.${tick}`,
+    npcIds: [nid, patronNid],     // actor layer: the supporter and their patron
     tags: ['world_pulse', 'npc_support', phase], reasons: ['A D-4f linked support-goal outcome.'],
   };
 }

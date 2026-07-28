@@ -182,10 +182,10 @@ function accusedFactionKeyDistinctFromGoverning(settlement, accused, governing) 
  * Build the seated-judgment beat (own in-register prose; deliberately unvoiced at the crier —
  * the ladder/roads/traditions precedent — newsVoiceCategory returns null via the
  * set-but-unclassified guard).
- * @param {{ sid: string, townName: string, accusedName: string, charge: string, sham: boolean, coupled: boolean, tick: number, now: string|null, accusedKey: string }} a
+ * @param {{ sid: string, townName: string, accusedName: string, accusedPulseId?: string, charge: string, sham: boolean, coupled: boolean, tick: number, now: string|null, accusedKey: string }} a
  * @returns {Record<string, unknown>}
  */
-function assizeBeat({ sid, townName, accusedName, charge, sham, coupled, tick, now, accusedKey }) {
+function assizeBeat({ sid, townName, accusedName, accusedPulseId, charge, sham, coupled, tick, now, accusedKey }) {
   const chargeWord = charge === 'corruption' ? 'corruption' : charge === 'perjury' ? 'a proven lie' : 'a false boast unmasked';
   const headline = sham
     ? `${townName}: the assize acquits its own over ${chargeWord}`
@@ -210,6 +210,11 @@ function assizeBeat({ sid, townName, accusedName, charge, sham, coupled, tick, n
     impactKind: 'assize_verdict',
     channelType: 'political_authority',
     settlementIds: [sid],
+    // Actor layer (NEWS ADDRESS LAW): the accused — the person the verdict is
+    // about. A settlement-wide "exposed patronage" charge names no individual
+    // and therefore carries no actor, so the key is absent and the beat
+    // serializes exactly as before.
+    ...(accusedPulseId ? { npcIds: [accusedPulseId] } : {}),
     tags: ['assize', sham ? 'assize_sham' : 'assize_just', charge],
   };
 }
@@ -276,7 +281,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
     const npcs = Array.isArray(asObject(s).npcs) ? /** @type {Record<string, unknown>[]} */ (asObject(s).npcs) : [];
 
     // ── Assemble this tick's age-one CHARGES for this settlement (deduped by accused). ──
-    /** @type {Map<string, { accused: Record<string, unknown>|null, accusedName: string, charge: string, patron: string }>} */
+    /** @type {Map<string, { accused: Record<string, unknown>|null, accusedName: string, accusedPulseId: string, charge: string, patron: string }>} */
     const charges = new Map();
 
     // (1) CORRUPTION — a fresh exposedCorruption entry (corrupted === sid), age one.
@@ -292,15 +297,20 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
     }
     if (corruptionFresh) {
       // Accused = the codepoint-lowest corrupt, un-ousted, exposed roster member.
-      let accused = null; let accusedNid = '';
-      for (const npc of npcs) {
+      let accused = null; let accusedNid = ''; let accusedIndex = -1;
+      npcs.forEach((npc, index) => {
         if (npc && npc.corrupt === true && npc.ousted !== true && num(npc.timesExposed, 0) > 0) {
           const nid = typeof npc.id === 'string' ? npc.id : (npc.id != null ? String(npc.id) : '');
-          if (nid && (!accusedNid || nid < accusedNid)) { accusedNid = nid; accused = npc; }
+          if (nid && (!accusedNid || nid < accusedNid)) { accusedNid = nid; accused = npc; accusedIndex = index; }
         }
-      }
+      });
       const accusedName = accused ? String(asObject(accused).name || accusedNid) : `${townName}'s exposed patronage`;
-      charges.set(`corruption:${accusedNid || sid}`, { accused, accusedName, charge: 'corruption', patron: corruptionPatron });
+      // The charge-map key keeps its LOCAL nid (it is an id-disambiguator, and
+      // changing it would move every assize beat id). The ADDRESS needs the
+      // canonical pulse id instead — the `<saveId>:<local>` spelling the realm
+      // entity web resolves — so it is carried alongside, not substituted.
+      const accusedPulseId = accused ? npcId(sid, accused, accusedIndex) : '';
+      charges.set(`corruption:${accusedNid || sid}`, { accused, accusedName, accusedPulseId, charge: 'corruption', patron: corruptionPatron });
     }
 
     // (2) PERJURY / FALSE BOAST — a fresh lieExposure deposit on a roster NPC, age one.
@@ -313,7 +323,8 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
       // A contradicted bluff and a proven lie both arrive through lieExposure; distinguish only
       // in the charge word by whether the NPC ever fronted a bluff is not tracked here — call it
       // perjury (a proven lie) uniformly; the beat's own prose carries the register.
-      charges.set(`perjury:${nid}`, { accused: npc, accusedName, charge: 'perjury', patron: '' });
+      // `nid` here is ALREADY the canonical pulse id (npcId(sid, npc, index)).
+      charges.set(`perjury:${nid}`, { accused: npc, accusedName, accusedPulseId: nid, charge: 'perjury', patron: '' });
     });
 
     if (!charges.size) continue;
@@ -324,7 +335,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
     const unrestId = topUnrestStressorId(s);
 
     for (const ckey of [...charges.keys()].sort(compareCodepoint)) {
-      const c = /** @type {{ accused: Record<string, unknown>|null, accusedName: string, charge: string, patron: string }} */ (charges.get(ckey));
+      const c = /** @type {{ accused: Record<string, unknown>|null, accusedName: string, accusedPulseId: string, charge: string, patron: string }} */ (charges.get(ckey));
       const { sham, governing } = judgeCourt(s, c.accused);
       // The coupling: a live commons grievance NAMING this accused (or a corruption grievance
       // against any corrupt figure) is ANSWERED by this verdict.
@@ -337,7 +348,7 @@ function advanceLitAssize({ snapshot, worldState, settlementUpdates, tick, now }
 
       // The charge map key (`${charge}:${accusedNid||sid}`) is unique per (charge, accused);
       // sanitized it disambiguates the beat id so same-direction verdicts don't collapse.
-      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, charge: c.charge, sham, coupled, tick: now2, now: nowIso, accusedKey: slugify(ckey, { sep: '_' }) }));
+      newsEntries.push(assizeBeat({ sid, townName, accusedName: c.accusedName, accusedPulseId: c.accusedPulseId, charge: c.charge, sham, coupled, tick: now2, now: nowIso, accusedKey: slugify(ckey, { sep: '_' }) }));
 
       // ── THE MASSES ──
       const coupleLegit = coupled ? AZ.COUPLE_LEGIT : 0;

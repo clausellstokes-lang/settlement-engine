@@ -210,7 +210,10 @@ describe('compareSystemState — the band pair agrees with its own pressure clau
       snap({ volatility: { value: 70 } }),
       snap({ volatility: { value: 80 } }),
     );
-    expect(delta.explanation).toContain('pressure increased');
+    expect(delta.explanation).toBe(
+      'Volatility rose noticeably (Vulnerable → Critical); pressure increased',
+    );
+    expect(delta.explanation).not.toContain('—');
     expect(delta.explanation).toContain('Vulnerable → Critical');
     // The pre-fix string was "(Strained → Stable) — pressure increased".
     expect(delta.explanation).not.toContain('→ Stable');

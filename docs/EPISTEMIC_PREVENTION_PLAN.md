@@ -251,3 +251,52 @@ branch; memory; backup-push decision recorded vetoably.
 > (mission-id reuse persistence shape), EP-p (seaRoads S3 guard + gauntlet
 > pins, chips filed). Durable facts to memory: cascade tier-window, plagued
 > military floor, step-vs-call dedupe scope, list-polarity gap.
+
+> **2026-07-28 (EP-g soak-vocabulary follow-through, owner-directed):** the
+> certification soak's ROUTE_VALUES swapped `none` → `mountain_pass` (in-place
+> at position 5; the array stays length 6, so the monsterThreat phase
+> arithmetic is untouched and only the former `none` stratum shifts). `none`
+> is a reader-side fallback token no code path ever writes into a config; the
+> product's seventh route (`mountain_pass`, user-selectable in
+> ConfigurationPanel) had never been soaked. Receipts: fast gate 3 files /
+> 13 tests green; full soak PASS — 1,200 worlds, 0 findings, 0/12 replay
+> mismatches, no coverage gaps; all 200 mountain_pass worlds coherent,
+> carrying 9 access_compatibility repairs (all Fishmonger — the EP-6
+> list-polarity stratum is now exercised by the standing corpus, not only the
+> reachability specimen). No committed golden/baseline ties to configForIndex
+> output (certification.json is gitignored; envelopes measure their own
+> corpora) — the per-index corpus shift is deliberate and one-time. The
+> `impossible_route_claim` oracle in inspectSettlement stays: the soak test
+> pins it with an explicit `none` config, and `none` remains a legal
+> reader-side token. TWO NEW FINDINGS, chips filed: (1) route×threat lattice
+> correlation — joint coverage 6/18 cells, each route certified under exactly
+> ONE threat tier (both selectDimension phase terms are floor(index/6) and
+> cancel, and 5≡2 mod 3 makes threat a function of the route residue);
+> pre-existing, soak-side, so mountain_pass is so far certified only at
+> heartland threat. (2) tradeRouteSemantics scores `mountain_pass` as neutral
+> `unknown` — not connected, not disconnected, all-zero deltas, and
+> GENERATED_ROUTE_VALUES omits it — the P1.1 neutral-scoring class recurring
+> on the product side; OWNER-GATED tuning (derived-state shift for existing
+> mountain-pass worlds).
+
+> **2026-07-28 (lattice-correlation cure, chip follow-through):** finding (1)
+> above is FIXED in configForIndex: monsterThreat AND the magic scenario now
+> phase-advance once per full route super-cycle (TIER_ORDER.length *
+> ROUTE_VALUES.length = 36) instead of sharing the route selector's own
+> 6-index phase period. The verifying census surfaced a SECOND instance of the
+> same class that the 6/18 measurement missed: routes×magicScenarios sat at
+> 12/24 — strides 5 and 3 are both odd, the shared floor(index/6) phase
+> cancels, and magic parity was locked to route parity, so each route was only
+> ever certified under one magic parity. After the cure, a pairwise census over
+> all 21 dimension pairs reads 100% joint coverage across the 1,200-index
+> corpus. Prevention: the soak contract test now walks the full DEFAULT_COUNT
+> corpus and reds with named cells on any empty joint cell of any dimension
+> pair (reproduce-then-clear executed — against the old arithmetic the pin
+> fails naming all 12 missing routes×threats cells). Receipts: fast gate 3
+> files / 16 tests green including both EP walkers; full soak PASS — 1,200
+> worlds, 0 findings, 0/12 replay mismatches, no coverage gaps — so the 24
+> newly-reached joint cells (mountain_pass×plagued, port×plagued,
+> isolated×heartland, every off-parity route×magic cell, and the rest) certify
+> clean on first contact. This is a second deliberate one-time corpus shift
+> with the same justification as the vocabulary shift above. Finding (2)
+> (mountain_pass neutral scoring) remains OPEN and owner-gated.

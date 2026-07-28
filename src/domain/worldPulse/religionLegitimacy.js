@@ -50,7 +50,7 @@ import { factionArchetype } from '../factionArchetypes.js';
 import { npcInFaction, ladderFactionKey } from './npcLadderState.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
-// 'peacelike' is deriveTemper's spelling (deityAxes/deityPool); 'peaceful' is the
+// 'peacelike' is deriveTemper's spelling (deityAxes); 'peaceful' is the
 // legacy stored-axis spelling. BOTH map to 0 so a derived temper reads correctly
 // through this lens. [worldpulse-religion-trade-1]
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0, peacelike: 0 });

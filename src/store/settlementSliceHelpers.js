@@ -51,6 +51,32 @@ export function cappedVersionHistory(history) {
 }
 
 /**
+ * Locate the event an Undo command may actually reverse.
+ *
+ * Flavor rows are durable chronicle records, not state transitions. They stay
+ * in the timeline while the search walks past them. The first non-flavor row
+ * is a barrier: it is undoable only when it carries the pre-event state needed
+ * by undoLastEvent; otherwise callers must refuse rather than reach further
+ * back and reorder mechanical history.
+ *
+ * @param {any[]} eventLog
+ * @returns {{ok:boolean, targetIndex:number, skippedFlavorEntries:number, reason:string|null}}
+ */
+export function planTimelineUndo(eventLog) {
+  const log = Array.isArray(eventLog) ? eventLog : [];
+  let targetIndex = log.length - 1;
+  while (targetIndex >= 0 && log[targetIndex]?.flavor === true) targetIndex -= 1;
+  const skippedFlavorEntries = log.length - 1 - targetIndex;
+  if (targetIndex < 0) {
+    return { ok: false, targetIndex: -1, skippedFlavorEntries, reason: 'no_undoable_entry' };
+  }
+  if (log[targetIndex]?.beforeState === undefined) {
+    return { ok: false, targetIndex, skippedFlavorEntries, reason: 'entry_not_undoable' };
+  }
+  return { ok: true, targetIndex, skippedFlavorEntries, reason: null };
+}
+
+/**
  * Build a snapshot payload from a settlement: a deep clone with its OWN
  * versionHistory stripped. A snapshot records CONTENT, never the timeline —
  * embedding the history inside every snapshot made each new snapshot carry all

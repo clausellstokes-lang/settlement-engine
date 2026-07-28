@@ -25,6 +25,5 @@ import './powerEconomyReconcilePass.js';
 import './structuralValidationPass.js';
 import './generatePopulation.js';
 import './corruptionPass.js';
-import './seedStartingPantheon.js';
 import './generateNarratives.js';
 import './assembleSettlement.js';

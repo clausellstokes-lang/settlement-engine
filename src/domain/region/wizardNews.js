@@ -75,6 +75,8 @@ const MAX_ENTRIES = 240;
  * @property {string | null} sourceEventId
  * @property {string[]} tags
  * @property {string[]} reasons
+ * @property {string[]} [npcIds]      NEWS ADDRESS LAW actor layer — present only when non-empty.
+ * @property {string[]} [factionIds]  NEWS ADDRESS LAW actor layer — present only when non-empty.
  * @property {string} [source]
  * @property {boolean} [covert]
  */
@@ -100,6 +102,8 @@ const MAX_ENTRIES = 240;
  * @property {string | null} [sourceEventId]
  * @property {Array<string | number | null | undefined>} [tags]
  * @property {Array<string | number | null | undefined>} [reasons]
+ * @property {Array<string | number | null | undefined>} [npcIds]
+ * @property {Array<string | number | null | undefined>} [factionIds]
  * @property {string} [source]
  * @property {boolean} [covert]
  */
@@ -266,11 +270,18 @@ function maxCriticality(goods = []) {
 }
 
 /**
- * @param {Array<unknown> | null | undefined} [values]
+ * Compact an id list: drop falsy members, stringify, dedupe. NON-ARRAY INPUT
+ * DEGRADES TO EMPTY rather than throwing — this runs on PERSISTED save data
+ * (ensureWizardNewsFeed re-normalizes every stored entry on every read), and a
+ * malformed or hand-edited field must not take the whole feed down with a
+ * TypeError. Degrading here is the same fail-closed posture normalizeEntry
+ * already applies to every other field it reads.
+ * @param {unknown} [values]
  * @returns {string[]}
  */
 function compactIds(values = []) {
-  return [...new Set((values || []).filter(Boolean).map(String))];
+  if (!Array.isArray(values)) return [];
+  return [...new Set(values.filter(Boolean).map(String))];
 }
 
 /**
@@ -488,6 +499,21 @@ function normalizeEntry(entry, options = {}) {
     sourceEventId: entry.sourceEventId || null,
     tags: compactIds(entry.tags),
     reasons: compactIds(entry.reasons),
+    // THE NEWS ADDRESS LAW's ACTOR layer (T4 ONE-REGEN batch). `settlementIds`
+    // already carries the place; these carry the SUBJECT — the npc or faction the
+    // beat is about — as TYPED ids, so the Herald links a subject instead of
+    // scanning its own headline prose for a name. Ids are minted only where a
+    // composer already holds the typed identity, in the realm entity web's own
+    // spelling (`<saveId>:<localId>`), so a rendered link resolves or degrades to
+    // exactly today's text.
+    //
+    // BYTE-NEUTRAL BY CONSTRUCTION (the V-17 `source` idiom above): the key is
+    // spread in ONLY when a non-empty id list survives compaction. Every entry
+    // minted without ids — and every entry already persisted in a save, which
+    // ensureWizardNewsFeed re-normalizes on every read — serializes exactly as
+    // before. Absent-tolerant on old saves without a migration.
+    ...(compactIds(entry.npcIds).length ? { npcIds: compactIds(entry.npcIds) } : {}),
+    ...(compactIds(entry.factionIds).length ? { factionIds: compactIds(entry.factionIds) } : {}),
     // V-17 provenance: table-authored history (source:'table') is distinguishable
     // from world-authored (the soak excludes 'table'). BYTE-NEUTRAL: world entries
     // pass no `source`, so this spread adds nothing and their serialization is

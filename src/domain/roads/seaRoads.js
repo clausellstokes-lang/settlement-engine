@@ -173,8 +173,12 @@ export function resolveSeaHazard(a) {
   // S3 — PIRACY: an embattled port node (the T3 twin verbatim; "piracy" is prose, never new math).
   for (const port of ports) {
     const level = embattlementLevel(a.worldState, port);
-    if (level >= T.EMBATTLED_THRESHOLD) {
-      const captorId = a.idSet.has(port) ? port : a.destId;
+    const captorId = a.idSet.has(port) ? port : a.destId;
+    // THE LAW: a court cannot take its own envoy hostage. At hopIdx 0 the near port IS homeId
+    // (early outbound, and again at the end of the reversed return path), so an embattled
+    // coastal HOME would otherwise pirate its own sea traveller. The port contributes nothing
+    // (no roll) and the loop moves on to the far port — the T3 arms' `captorId !== homeId` skip.
+    if (level >= T.EMBATTLED_THRESHOLD && captorId !== a.homeId) {
       const p = captureProbability({ base: T.S3_PIRACY_BASE * level, exposure: a.exposure, protection: a.protection, alpha: T.S3_PIRACY_ALPHA });
       return a.fork.random() < p
         ? { cls: 'S3', outcome: 'hostage', captorId, overSea: true }

@@ -86,7 +86,7 @@ function explain(key, before, after, change) {
   const bandBefore = bandForDimension(key, before);
   const bandAfter  = bandForDimension(key, after);
   if (bandBefore !== bandAfter) {
-    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : ' — pressure increased'}`;
+    return `${label} ${dir} ${mag} (${bandBefore} → ${bandAfter})${better ? '' : '; pressure increased'}`;
   }
-  return `${label} ${dir} ${mag}${better ? '' : ' — pressure increased'}`;
+  return `${label} ${dir} ${mag}${better ? '' : '; pressure increased'}`;
 }

@@ -140,4 +140,18 @@ describe('SubstrateTab — the Causes tab names the problem, not its opposite', 
     // And at least one pill still carries a raw (higher-is-better) word.
     expect(words.some(w => ['surplus', 'adequate', 'strained', 'critical', 'collapsed'].includes(w))).toBe(true);
   });
+
+  it('sorts within a shared band by polarity-oriented severity', () => {
+    const { container } = render(<SubstrateTab settlement={CRISIS} />);
+    const rows = [...container.querySelectorAll('[data-substrate-row]')];
+    const crimeIndex = rows.findIndex(r => r.textContent.startsWith('Criminal opportunity'));
+    const legitimacyIndex = rows.findIndex(r => r.textContent.startsWith('Public legitimacy'));
+    expect(crimeIndex).toBeGreaterThanOrEqual(0);
+    expect(legitimacyIndex).toBeGreaterThanOrEqual(0);
+    expect(rows[crimeIndex].querySelector('[data-band]').getAttribute('data-band')).toBe('collapsed');
+    expect(rows[legitimacyIndex].querySelector('[data-band]').getAttribute('data-band')).toBe('collapsed');
+    // Raw scores are crime=100 and legitimacy=10. Crime is lower-is-better, so
+    // its health-oriented score is 0 and it belongs ahead of legitimacy.
+    expect(crimeIndex).toBeLessThan(legitimacyIndex);
+  });
 });

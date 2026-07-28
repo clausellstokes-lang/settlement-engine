@@ -10,7 +10,7 @@ import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import EmptyState from '../primitives/EmptyState.jsx';
-import { AffectedSettlements } from './AddressChain.jsx';
+import { AddressChain, AffectedSettlements } from './AddressChain.jsx';
 // Wave R-2 (atlas queue #19 / gap 13): the FULL chronicle reader. This panel is
 // only ever loaded through lazy() (HeraldBody + WorldMapStage), so the static
 // import rides the same already-lazy chunk — zero first-paint bytes.
@@ -83,12 +83,23 @@ function MetaPill({ children, tone = 'neutral' }) {
 function NewsEntry({ entry, compact = false }) {
   const major = entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR;
   const color = statusColor(entry.kind, major);
-  // The settlements this update touches — now LINKED (THE NEWS ADDRESS LAW's
-  // affected-settlements part): each name opens its dossier. The subject itself
-  // (the headline actor) is a record-gap here — the wizardNews entry carries no
-  // npc/faction id, only the headline prose — so it is not linked (never a prose
-  // scan). AddressChain/AffectedSettlements read the realm web from context.
+  // The settlements this update touches — LINKED (THE NEWS ADDRESS LAW's
+  // affected-settlements part): each name opens its dossier.
   const hasSettlements = (entry.settlementIds || []).length > 0;
+  // THE SUBJECT — the law's actor part, and the record-gap this used to
+  // document. The entry now carries TYPED `npcIds` / `factionIds` (T4 ONE-REGEN
+  // batch), minted only where a composer held real identity, so the chain
+  // resolves `settlement › power › faction › npc` through the realm web. Still
+  // NEVER a prose scan: an entry without ids yields an undefined descriptor,
+  // AddressChain renders null, and the card looks exactly as it does today — so
+  // the older half of the feed grows no dead chrome.
+  const subject = (entry.npcIds || [])[0] || (entry.factionIds || [])[0]
+    ? {
+      npcId: (entry.npcIds || [])[0] || null,
+      factionId: (entry.factionIds || [])[0] || null,
+      settlementId: (entry.settlementIds || [])[0] ?? null,
+    }
+    : null;
   // The crier's voice: a short, in-world line a herald would proclaim about a
   // war/faith/trade beat. Pure display sidecar (domain/display/newsVoice.js);
   // null for out-of-scope news, so the quote only shows when it has something
@@ -144,6 +155,11 @@ function NewsEntry({ entry, compact = false }) {
           </h4>
           <MetaPill tone={major ? 'major' : 'neutral'}>{scopeLabel(entry.scope)}</MetaPill>
         </div>
+
+        {/* The subject's address, as deep as the record identifies it. The
+            settlement level is omitted because the meta row below already links
+            the affected settlements — presence over repetition. */}
+        {subject && <AddressChain descriptor={subject} omitSettlement style={{ marginTop: 5 }} />}
 
         {bodyText && (
           <p title={entry.summary || undefined} style={{

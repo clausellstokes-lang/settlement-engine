@@ -44,6 +44,10 @@ const stubSlice = (set) => ({
   isElevated: () => true,
   isPremium: () => false,
   setPurchaseModalOpen: () => {},
+  lifetimeNarrateCount: 0,
+  bumpLifetimeNarrate: () => set(state => {
+    state.lifetimeNarrateCount = (state.lifetimeNarrateCount || 0) + 1;
+  }),
   updateSavedSettlement: (id, partial) =>
     set(state => {
       const idx = state.savedSettlements.findIndex(s => s.id === id);
@@ -93,6 +97,7 @@ describe('requestNarrative — normal commit', () => {
     expect(s.aiLoading).toBe(false);
     expect(s.aiAbortController).toBeNull();
     expect(s.creditBalance).toBe(5);
+    expect(s.lifetimeNarrateCount).toBe(1);
   });
 });
 
@@ -116,6 +121,7 @@ describe('F19 — superseded / view-moved runs do not commit onto the wrong view
     expect(s.aiSettlement).toBeNull();   // A's prose did NOT land on B
     expect(s.showNarrative).toBe(false); // not force-flipped
     expect(s.aiLoading).toBe(false);     // released by clearAiSettlement
+    expect(s.lifetimeNarrateCount).toBe(0);
   });
 
   it('a run whose activeSaveId changed does not commit, and frees the lock (no wedge)', async () => {
@@ -154,6 +160,7 @@ describe('F20 — first-time failure clears progressive partials', () => {
     expect(s.aiSettlement).toBeNull();           // phantom fragment cleared
     expect(s.showNarrative).toBe(false);
     expect(s.aiLoading).toBe(false);
+    expect(s.lifetimeNarrateCount).toBe(0);
     expect(s.aiError).toMatch(/completion marker|truncat/i);
   });
 
