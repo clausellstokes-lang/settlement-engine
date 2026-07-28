@@ -19,13 +19,22 @@
  * Lazy-mounted from SettlementCard: a Library page that never opens this row pays
  * nothing for it.
  *
+ * CLOSED (was deferred here): the row now SAYS it. The confirm sentence below
+ * promises the dossier "stays in your library, marked destroyed", and until the
+ * fold-scope legibility pass that sentence was the only place the mark existed —
+ * SettlementCard read `status === 'destroyed'` solely to HIDE this affordance.
+ * The Phase column now stacks a danger "Destroyed" rubric under the phase word,
+ * off that same derivation, so the mark lands in the same repaint that removes
+ * the affordance (useOwnerScopedSaves subscribes to savedSettlements, which the
+ * action writes).
+ *
  * DELIBERATELY DEFERRED, documented so nobody re-finds it as a bug:
- *   • The row does not yet SAY "destroyed" after the act. The list repaints from
- *     the store (useOwnerScopedSaves subscribes to savedSettlements, which the
- *     action writes), and the affordance correctly disappears, but the Phase and
- *     Health columns read the same as before. Giving destruction its own row
- *     encoding is a legibility change to the ledger's column grammar, not part of
- *     wiring the operation, so it belongs to whoever next owns the Library row.
+ *   • The Health column still reads the band derived from the settlement blob, so
+ *     a destroyed town can show "Stable" beside its Destroyed mark. Suppressing or
+ *     re-tensing that column is a SECOND change to the ledger's column grammar and
+ *     was left out of the mark's diff deliberately; the same goes for surfacing
+ *     `destroyedCause` on the row (it is recorded on the settlement and in the
+ *     DESTROY_SETTLEMENT log entry, and the dossier is where a cause is read).
  *   • The affordance is offered on CANON rows only (a vetoable judgment). On a
  *     draft, the action's own `phase: currentCampaignState.phase || 'canon'`
  *     would open a campaign timeline behind the GM as a side effect of destroying

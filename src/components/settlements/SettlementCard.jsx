@@ -338,11 +338,25 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
           <span style={{ fontSize:FS.sm, color:BODY, textTransform:'capitalize', whiteSpace:'nowrap' }}>{s.tier}</span>
         </td>
 
-        {/* ── Phase — CANON as a small-caps rubric; drafts read quiet. */}
+        {/* ── Phase — CANON as a small-caps rubric; drafts read quiet. A destroyed
+            settlement stacks a danger rubric UNDER its phase word: destruction is a
+            LIFECYCLE fact, and the Phase column is this row's single lifecycle
+            encoding (see the spine note above — a second encoding elsewhere is the
+            exact defect the 2026-07-22 legibility wave removed). Stacked rather than
+            substituted so the phase word survives: a destroyed row still says
+            whether its names are locked. This is the visible half of
+            DestroySettlementControl's promise that the dossier "stays in your
+            library, marked destroyed"; it reads off the SAME `alreadyDestroyed`
+            derivation that hides the destroy affordance, so the mark appears in the
+            same repaint the affordance disappears in. A standing row renders exactly
+            as before — the guard yields nothing. */}
         <td style={LEDGER_CELL}>
           {isCanon
             ? <span style={{ ...RUBRIC, color:GOLD_TXT }}>Canon</span>
             : <span style={{ fontSize:FS.sm, color:SECOND }}>Draft</span>}
+          {alreadyDestroyed && (
+            <div style={{ ...RUBRIC, color:swatch.danger, marginTop:2 }}>Destroyed</div>
+          )}
         </td>
 
         {/* ── Health — the worst health-band word (Stable / Strained / Vulnerable

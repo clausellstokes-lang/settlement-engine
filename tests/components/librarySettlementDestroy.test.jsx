@@ -18,6 +18,12 @@
  *      GM typed.
  *   3. A non-matching name cannot be submitted, and a refusal from the action
  *      itself renders as text instead of a silent no-op.
+ *   4. The confirm sentence promises the dossier "stays in your library, marked
+ *      destroyed" — so the Library row MUST carry that mark. The Phase column
+ *      stacks a "Destroyed" rubric under the phase word off the same
+ *      `status === 'destroyed'` derivation that hides the affordance, and a
+ *      standing row is untouched. Without this the promise was copy with no
+ *      surface behind it (the state the fold-scope review found).
  */
 
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
@@ -87,6 +93,52 @@ describe('the destruction affordance appears only where the act is coherent', ()
     save.settlement.status = 'destroyed';
     seedStore(save);
     render(<SettlementCard s={save} {...baseProps} />);
+    openMenu();
+    expect(screen.queryByRole('button', { name: /Record its destruction/ })).toBeNull();
+  });
+});
+
+describe('the library row carries the mark the confirm sentence promises', () => {
+  /** The Phase cell — the row's single lifecycle encoding (3rd column, no select mode). */
+  const phaseCell = () => screen.getByTestId('settlement-card').children[2];
+
+  test('a destroyed settlement is marked destroyed on its row', () => {
+    const save = canonSave();
+    save.settlement.status = 'destroyed';
+    seedStore(save);
+    render(<SettlementCard s={save} {...baseProps} />);
+    // The mark sits WITH the phase word, not loose in the row: a second lifecycle
+    // encoding elsewhere is the defect the 2026-07-22 legibility wave removed.
+    expect(phaseCell().textContent).toBe('CanonDestroyed');
+  });
+
+  test('a standing row is untouched — the phase cell still reads only its phase', () => {
+    const save = canonSave();
+    seedStore(save);
+    render(<SettlementCard s={save} {...baseProps} />);
+    expect(phaseCell().textContent).toBe('Canon');
+    expect(screen.queryByText('Destroyed')).toBeNull();
+  });
+
+  test('the mark lands in the same repaint that removes the affordance', async () => {
+    // The Library re-renders each row from the store (useOwnerScopedSaves
+    // subscribes to savedSettlements). This drives the REAL action, then hands the
+    // row the save the action wrote — the exact prop the Library would pass next.
+    const save = canonSave();
+    seedStore(save);
+    const { rerender } = render(<SettlementCard s={save} {...baseProps} />);
+    openMenu();
+    fireEvent.click(screen.getByRole('button', { name: /Record its destruction/ }));
+    await waitFor(() => screen.getByRole('button', { name: 'Record the destruction' }));
+    fireEvent.change(screen.getByLabelText(/^Type Ashford to confirm/), { target: { value: 'Ashford' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Record the destruction' }));
+
+    const stored = useStore.getState().savedSettlements[0];
+    expect(stored.settlement.status).toBe('destroyed');
+    rerender(<SettlementCard s={stored} {...baseProps} />);
+    expect(phaseCell().textContent).toBe('CanonDestroyed');
+    // Same derivation, same repaint: the affordance is gone in the very render
+    // that gained the mark.
     openMenu();
     expect(screen.queryByRole('button', { name: /Record its destruction/ })).toBeNull();
   });
