@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { evaluateNpcRules, pressureIndex } from '../../src/domain/worldPulse/index.js';
+import { applyNpcPatch, evaluateNpcRules, pressureIndex } from '../../src/domain/worldPulse/index.js';
 
 // Pin: NPC goal branching classifies conditions by archetype id ONLY (mirror
 // of the R1 pressure/population fix). Label prose must never read as a crisis,
@@ -61,6 +61,32 @@ describe('NPC goal branching classifies by condition archetype, not label prose'
     expect(rebranch).toBeTruthy();
     expect(rebranch.npcPatch.shortGoal).toBe('survive_crisis');
     expect(rebranch.npcPatch.longGoal).toBe('restore_order');
+    expect(rebranch.recordMode).toBeUndefined();
+  });
+
+  test('a context-only rebranch applies its reset state without becoming Chronicle news', () => {
+    const state = npcState({
+      contextSignature: 'town|local|famine',
+      shortGoal: 'survive_crisis',
+      longGoal: 'restore_order',
+      goalProgress: { short: 0.7, long: 0.4 },
+    });
+    const rebranch = rebranchFor([{ archetype: 'war_pressure', label: 'Wartime pressure' }], state);
+
+    expect(rebranch).toMatchObject({
+      recordMode: 'state_only',
+      npcPatch: {
+        shortGoal: 'survive_crisis',
+        longGoal: 'restore_order',
+        goalProgress: { short: 0, long: 0 },
+        contextSignature: 'town|local|war_pressure',
+      },
+    });
+
+    const tagged = applyNpcPatch({ tick: 4, npcStates: { [state.npcId]: state } }, rebranch);
+    const { recordMode: _recordMode, ...legacyShape } = rebranch;
+    const untagged = applyNpcPatch({ tick: 4, npcStates: { [state.npcId]: state } }, legacyShape);
+    expect(tagged).toEqual(untagged);
   });
 
   test('a crisis word in the label does not branch goals when the archetype is non-crisis', () => {

@@ -6,6 +6,7 @@ import {
   pressureIndex,
   RELATIONSHIP_TURNING_POINT_CAP,
 } from '../../src/domain/worldPulse/index.js';
+import { deriveActiveCondition } from '../../src/domain/activeConditions.js';
 
 function item(id, patch = {}) {
   return {
@@ -16,7 +17,7 @@ function item(id, patch = {}) {
       tier: patch.tier || 'town',
       population: patch.population || 2000,
     },
-    activeConditions: [],
+    activeConditions: patch.activeConditions || [],
     causal: { scores: patch.scores || {} },
   };
 }
@@ -54,6 +55,92 @@ function snapshot({ edges, states, channels = [], items = {} }) {
 }
 
 describe('relationship dynamics rulebook', () => {
+  test('vassal tribute is public on onset and state-only while the same condition band holds', () => {
+    const edge = { id: 'edge.o.v', from: 'o', to: 'v', relationshipType: 'vassal' };
+    const state = {
+      relationshipType: 'vassal',
+      dependency: 0.4,
+      leverage: 0.4,
+      resentment: 0.3,
+    };
+    const pressures = pressureIndex(pressureRows(['o', 'v']));
+    const onset = evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: state },
+    }), pressures, { tick: 9 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+
+    expect(onset.recordMode).toBeUndefined();
+
+    const refresh = evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: state },
+      items: {
+        v: item('v', { activeConditions: [onset.condition] }),
+      },
+    }), pressures, { tick: 10 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+
+    expect(refresh).toMatchObject({
+      recordMode: 'state_only',
+      relationshipPatch: onset.relationshipPatch,
+    });
+    expect(deriveActiveCondition(refresh.condition).severityBand)
+      .toBe(deriveActiveCondition(onset.condition).severityBand);
+  });
+
+  test('vassal tribute stays public across severity, status, and role-context transitions', () => {
+    const edge = { id: 'edge.o.v', from: 'o', to: 'v', relationshipType: 'vassal' };
+    const pressures = pressureIndex(pressureRows(['o', 'v', 'new-o']));
+    const highState = {
+      relationshipType: 'vassal',
+      dependency: 0.9,
+      leverage: 0.9,
+      resentment: 0.3,
+    };
+    const high = evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: highState },
+    }), pressures, { tick: 9 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+    const priorMedium = {
+      ...high.condition,
+      severity: 0.49,
+      severityBand: 'medium',
+    };
+    const bandTransition = evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: highState },
+      items: { v: item('v', { activeConditions: [priorMedium] }) },
+    }), pressures, { tick: 10 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+    expect(bandTransition.condition.severity).toBeGreaterThanOrEqual(0.5);
+    expect(bandTransition.recordMode).toBeUndefined();
+
+    const statusTransition = evaluateRelationshipRules(snapshot({
+      edges: [edge],
+      states: { [edge.id]: highState },
+      items: {
+        v: item('v', {
+          activeConditions: [{ ...high.condition, status: 'easing' }],
+        }),
+      },
+    }), pressures, { tick: 10 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+    expect(statusTransition.recordMode).toBeUndefined();
+
+    const changedRoles = evaluateRelationshipRules(snapshot({
+      edges: [{ ...edge, from: 'new-o' }],
+      states: { [edge.id]: { ...highState, overlordSaveId: 'new-o', vassalSaveId: 'v' } },
+      items: {
+        v: item('v', { activeConditions: [high.condition] }),
+      },
+    }), pressures, { tick: 10 })
+      .find(candidate => candidate.candidateType === 'vassal_tribute_extraction');
+    expect(changedRoles.metadata.overlordSaveId).toBe('new-o');
+    expect(changedRoles.recordMode).toBeUndefined();
+  });
+
   test('vassals support overlord cold wars in the background', () => {
     const snap = snapshot({
       edges: [

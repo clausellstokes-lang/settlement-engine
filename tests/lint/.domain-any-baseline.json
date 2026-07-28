@@ -1,6 +1,6 @@
 {
-  "total": 2237,
-  "totalAny": 2199,
+  "total": 2217,
+  "totalAny": 2179,
   "totalSuppress": 38,
   "files": {
     "src/domain/activeConditions.js": {
@@ -296,7 +296,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/applyWorldPulse.js": {
-      "any": 68,
+      "any": 58,
       "suppress": 0
     },
     "src/domain/worldPulse/attrition.js": {
@@ -564,7 +564,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 64,
+      "any": 54,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {

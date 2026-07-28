@@ -82,6 +82,17 @@ export function humanizeToken(token) {
 }
 
 /**
+ * A durable NPC `tier|relationship|condition_a,condition_b` signature as prose.
+ * @param {unknown} signature
+ * @returns {string}
+ */
+export function humanizeContextSignature(signature) {
+  const [tier = '', relationship = '', conditions = ''] = String(signature ?? '').split('|');
+  const parts = [tier, relationship, ...conditions.split(',')].map(humanizeToken).filter(Boolean);
+  return parts.length ? parts.join(', ') : 'unknown circumstances';
+}
+
+/**
  * A stored settlement-size token as the product's reader-facing size name.
  *
  * The canonical six sizes have authored labels; the legacy `capital` token

@@ -40,9 +40,9 @@
  *     calendar labels and the R-16 bullets cross humanizeFlagKey.
  *   · decrees.rawId — CURED at THE ONE REGEN: pressureModel humanizes condition
  *     archetypes at its reader-facing reason boundary.
- *   · chronicle.rawId ×6 — the same pressure fix retired 26 of the former 32;
- *     the six remaining ids originate in other chronicle sources and stay
- *     pinned as the measured residual, not charged to pressureModel.
+ *   · chronicle.rawId — CURED: pressure reasons humanize condition archetypes,
+ *     and NPC goal-rebranch prose humanizes its durable context signature at
+ *     the reader boundary while retaining the structured receipt metadata.
  *   · chronicle.camelKey — CURED (was ×3): the embargo/lever reason no longer
  *     leaks the raw relationshipPatch keys ("resentment/tradeBalance"); the M9a
  *     lever line now humanizes them ("resentment/trade balance") via
@@ -268,7 +268,11 @@ collectStrings(composeRoadScenePlayerBrief({ originId: 'a', destId: 'd', worldSt
 /** cause walk — the V-4 "trace the causes" surface over a recorded receipt. */
 const causeWalkStrings = [];
 {
-  const firstChild = Object.keys(provenance).sort()[0];
+  const provenanceIds = Object.keys(provenance).sort();
+  // Select an actual child, not merely the lexicographically first ledger row:
+  // newly recorded roots can sort first while carrying no backward walk.
+  const firstChild = provenanceIds.find((id) => Array.isArray(provenance[id]?.parents)
+    && provenance[id].parents.length > 0) || provenanceIds[0];
   if (firstChild) {
     collectStrings(buildCauseWalk({ worldState, rootId: firstChild, seesSecrets: false }), causeWalkStrings);
     collectStrings(buildCauseWalk({ worldState, rootId: firstChild, seesSecrets: true }), causeWalkStrings);
@@ -287,7 +291,7 @@ const SURFACES = Object.freeze({
 // ── THE SHRINK-ONLY BASELINE (measured; see the header's burn-down list) ─────
 const BASELINE = Object.freeze({
   letter: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
-  chronicle: { rawId: 6, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
+  chronicle: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   decrees: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   dossier: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },
   roadScene: { rawId: 0, tickSpeak: 0, camelKey: 0, jsonFragment: 0, softwareVoice: 0 },

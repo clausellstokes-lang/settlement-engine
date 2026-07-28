@@ -40,6 +40,11 @@ import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
 import { proposalIdFor, upsertProposal } from './worldState.js';
+import {
+  buildProposalDocket,
+  proposalDocketAllows,
+  recordProposalAdmission,
+} from './proposalAdmission.js';
 import { clamp01 } from '../../kernel/math.js';
 import { formatCount } from '../formatNumber.js';
 
@@ -251,11 +256,20 @@ function seaBattleNews(b, snapshot, tick, now) {
  * @param {string|null} [args.season]
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @returns {{ worldState: Record<string, unknown>, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>> }}
+ * @param {ReturnType<typeof buildProposalDocket>|null} [args.proposalDocket]
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>>, proposalDocket?: ReturnType<typeof buildProposalDocket> }}
  */
-export function advanceNaval({ snapshot, worldState, digest, graph, rng, season = null, tick, now = null }) {
+export function advanceNaval({ snapshot, worldState, digest, graph, rng, season = null, tick, now = null, proposalDocket = null }) {
+  const threadsProposalDocket = proposalDocket != null;
+  let nextProposalDocket = proposalDocket || buildProposalDocket(worldState);
   if (!navalActive(worldState) || !digest) {
-    return { worldState, changed: false, newsEntries: [], deferrals: [] };
+    return {
+      worldState,
+      changed: false,
+      newsEntries: [],
+      deferrals: [],
+      ...(threadsProposalDocket ? { proposalDocket: nextProposalDocket } : {}),
+    };
   }
   const nowTick = Math.max(0, Math.floor(num(tick, 0)));
   const deployments = /** @type {Record<string, DeploymentRecord>} */ (worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {});
@@ -378,12 +392,17 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
             args: { ownerId: navyId, targetId: target, ownerStrength: navStrength },
           },
         };
-        mintedProposals.push({
-          id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
-          tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
-          severity: outcome.severity, reasons: outcome.reasons,
-        });
-        deferrals.push({ ownerId: navyId, targetId: target, reason: 'dm_approval' });
+        if (proposalDocketAllows(nextProposalDocket, outcome)) {
+          mintedProposals.push({
+            id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
+            tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
+            severity: outcome.severity, reasons: outcome.reasons,
+          });
+          nextProposalDocket = recordProposalAdmission(nextProposalDocket, outcome);
+          deferrals.push({ ownerId: navyId, targetId: target, reason: 'dm_approval' });
+        } else {
+          deferrals.push({ ownerId: navyId, targetId: target, reason: 'proposal_capacity' });
+        }
       }
       continue;
     }
@@ -497,7 +516,13 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
   }
   const changed = changedLedger || Object.keys(sharedFateWriteback).length > 0 || debarkRecall.size > 0
     || Object.keys(deliveryStamps).length > 0 || mintedProposals.length > 0;
-  return { worldState: nextWorldState, changed, newsEntries, deferrals };
+  return {
+    worldState: nextWorldState,
+    changed,
+    newsEntries,
+    deferrals,
+    ...(threadsProposalDocket ? { proposalDocket: nextProposalDocket } : {}),
+  };
 }
 
 // ── VERBS (REGISTERED in realmManifest.js — the W-COMPOSER-2 lift) ─────────────────────

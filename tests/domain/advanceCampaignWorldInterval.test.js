@@ -21,6 +21,7 @@ import {
   simulateCampaignWorldInterval,
   weeksPerInterval,
 } from '../../src/domain/worldPulse/index.js';
+import { collapseIntervalHistory } from '../../src/domain/worldPulse/advanceInterval.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
@@ -99,9 +100,6 @@ function buildFixture(seed = 'interval-seed') {
 // equivalence comparison — the substantive simulation output is identical; only
 // the history-ring bookkeeping is composed (decision #2).
 function runWeeksByHand(campaign, saves, weeks) {
-  const preHistoryLen = Array.isArray(campaign.worldState?.pulseHistory)
-    ? campaign.worldState.pulseHistory.length
-    : 0;
   let c = campaign;
   let s = saves;
   let last = null;
@@ -124,17 +122,13 @@ function runWeeksByHand(campaign, saves, weeks) {
       : s;
     last = r;
   }
-  // Collapse to the composed ring policy (pre-interval records + the final record).
-  const history = last.worldState.pulseHistory || [];
-  if (history.length - preHistoryLen > 1) {
-    last = {
-      ...last,
-      worldState: {
-        ...last.worldState,
-        pulseHistory: [...history.slice(0, preHistoryLen), history[history.length - 1]],
-      },
-    };
-  }
+  // Collapse through the production v4 policy. In addition to retaining one
+  // public pulse beat, it carries the bounded private state-only rumor seeds
+  // and reconciles provenance for the interior records it removes.
+  last = {
+    ...last,
+    worldState: collapseIntervalHistory(last.worldState, weeks, last.wizardNews),
+  };
   return { last, settlementUpdates: [...updatesById.values()] };
 }
 

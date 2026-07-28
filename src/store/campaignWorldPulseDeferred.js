@@ -760,6 +760,16 @@ export async function runApplyWorldPulseProposal({
       now,
     });
     if (!result) return;
+    // Upgrade tombstones are a persisted status transition, not an applied
+    // world change: land the row without minting an undo snapshot or "applied"
+    // telemetry for mechanics that deliberately did not run.
+    if (result.proposalDisposition === 'superseded') {
+      campaign.worldState = ensureWorldState(result.worldState, campaign);
+      campaign.wizardNews = result.wizardNews;
+      campaign.updatedAt = now;
+      campaignPersist = cacheCampaignState(state);
+      return;
+    }
     // R-1 REAL ARMING (queue #5): capture the pre-APPLY world before the
     // effects land on the draft, for the SEPARATE session proposal-undo ring.
     // The entry stamps the campaign's current advance depth (the cross-ring
@@ -789,7 +799,7 @@ export async function runApplyWorldPulseProposal({
     campaignPersist = cacheCampaignState(state);
   });
 
-  if (result && campaignPersist) {
+  if (result && campaignPersist && result.proposalDisposition !== 'superseded') {
     track(
       EVENTS.WORLD_PULSE_PROPOSAL_APPLIED,
       appliedDecision,

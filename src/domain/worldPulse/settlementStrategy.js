@@ -490,6 +490,8 @@ function leverNudgeFor(move, snapshot, sId, ctx, strengthFor) {
  *   relationshipNudge?: RelationshipNudge|null }} args
  */
 function strategyCandidate({ move, sId, tick, severity, headline, summary, reasons, proposal, condition, metadata, relationshipNudge = null }) {
+  const inertLever = Object.prototype.hasOwnProperty.call(LEVER_COPY, move)
+    && !relationshipNudge;
   const base = {
     id: `candidate.strategy.${move}.${stablePart(sId)}.${tick}`,
     type: (proposal || condition) ? (proposal ? 'relationship' : 'condition') : 'condition',
@@ -504,6 +506,12 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
     summary,
     reasons,
     metadata: { settlementId: String(sId), strategyMove: move, ...(metadata || {}) },
+    // Defend / hold and a relationship-less archetype lever have only one job:
+    // win the strategy:<S> exclusive group. The central cadence partition drops
+    // them after arbitration because they carry no state mutation or Chronicle beat.
+    ...(move === 'defend' || move === 'hold' || inertLever
+      ? { recordMode: 'suppression_only' }
+      : {}),
     // `strategy:<S>` is the exclusive tag (allow-listed in candidateEvents). The
     // reactive raid/occupation candidates where S is the aggressor resolve to the
     // SAME tag (via their metadata.aggressorSaveId) — exactly one is admitted.

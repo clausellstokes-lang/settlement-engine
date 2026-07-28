@@ -257,13 +257,20 @@ const ONE_REGEN = Object.freeze({
 export const SIMULATION_RULE_PRESETS = Object.freeze({
   quiet_local: preset('quiet_local', 'Quiet Local', {
     ...QUIET,
+    // The tempo governor is a presentation/backpressure layer over real state
+    // changes: quiet worlds still simulate, but independent drama births arrive
+    // at the quietest supported cadence.
+    narrativeTempo: 'quiet_local',
     factionCompetitionEnabled: false,
     tradeFlowsEnabled: false,
   }),
-  realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {}),
+  realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {
+    narrativeTempo: 'realistic_regional',
+  }),
   dramatic_campaign: preset('dramatic_campaign', 'Dramatic Campaign', {
     ...OPEN,
     intensity: 'dramatic',
+    narrativeTempo: 'dramatic_campaign',
     // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): dramatic_campaign
     // now carries the real drama set — a running war layer, settlement war strategy,
     // faith spread, seasons, and calamities. It stays LIGHTER than full_simulation
@@ -306,9 +313,13 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   }),
   narrative_campaign: preset('narrative_campaign', 'Narrative Campaign', {
     ...QUIET,
+    narrativeTempo: 'quiet_local',
     politicalAutonomy: 'recommendations',
   }),
   living_realm: preset('living_realm', 'Living Realm', {
+    // Living Realm keeps the measured regional cadence; its distinction from
+    // Full Simulation is depth/autonomy, not a noisier Chronicle.
+    narrativeTempo: 'realistic_regional',
     politicalAutonomy: 'routine',
     seasonsEnabled: true,
     // STEP 3.5: the §11 sleeper — true news that travels by road. Inert until
@@ -327,6 +338,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
     intensity: 'normal',
+    // E0 graduated from opt-in-only after the behavioral observer proved that
+    // the everything-on preset otherwise bypassed its own Chronicle governor.
+    narrativeTempo: 'full_simulation',
     warLayerEnabled: true,
     settlementStrategyEnabled: true,
     faithSpreadEnabled: true,

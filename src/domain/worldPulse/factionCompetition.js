@@ -115,8 +115,37 @@ function institutionsFor(item) {
     .map((/** @type {any} */ entry, /** @type {any} */ index) => ({
       id: stablePart(entry.id || entry.name || entry.label || `institution_${index}`),
       name: entry.name || entry.label || entry.id || `Institution ${index + 1}`,
+      status: entry.status,
+      inactive: entry._worldPulseInactive === true,
+      impairments: Array.isArray(entry.impairments) ? entry.impairments : [],
     }))
     .slice(0, 12);
+}
+
+/** @typedef {{ id: string, name: string }} InstitutionTarget */
+/** @typedef {{ id?: string, name?: string, status?: string, _worldPulseInactive?: boolean, impairments?: import('../entities/status.js').Impairment[] }} SuppressionInstitution */
+/** @typedef {{ status?: string, outcome?: { proposalPayload?: { kind?: string, factionId?: unknown } } }} FactionProposal */
+
+/** Resolve the same standing institution the apply seam will impair.
+ * @param {import('./pulseShapes.js').SettlementItem} item
+ * @param {InstitutionTarget} target
+ * @returns {SuppressionInstitution}
+ */
+function standingInstitutionFor(item, target) {
+  const pools = [
+    item.settlement?.institutions,
+    item.settlement?.services,
+    item.settlement?.infrastructure,
+  ];
+  for (const pool of pools) {
+    if (!Array.isArray(pool)) continue;
+    const found = pool.find((entry, index) => (
+      stablePart(entry?.id || entry?.name || entry?.label || `institution_${index}`) === String(target.id)
+      || String(entry?.name || entry?.label || '').toLowerCase() === String(target.name).toLowerCase()
+    ));
+    if (found) return /** @type {SuppressionInstitution} */ (found);
+  }
+  return target;
 }
 
 /** @param {any} item */
@@ -420,6 +449,10 @@ export function factionMomentumBand(momentum) {
   return (/** @type {any} */ (MOMENTUM_BANDS.find(b => m >= b.min))).band;
 }
 
+// Shared with the apply seam so the producer's "already live" check cannot
+// drift from the impairment an approved suppression actually writes.
+export const INSTITUTION_SUPPRESSION_SEVERITY = 0.4;
+
 /** @param {any} a @param {any} b */
 function sameStringList(a, b) {
   const left = Array.isArray(a) ? a : [];
@@ -540,7 +573,7 @@ function factionVerbPhrase(candidateType) {
   return { may: `act on its ${stem}`, did: `acts on its ${stem}` };
 }
 
-function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
+function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, recordMode = null, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
   const verb = factionVerbPhrase(candidateType);
   return {
     id: `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`,
@@ -553,6 +586,7 @@ function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateT
     severity: clamp01(severity),
     probability: clamp01(probability),
     applyMode,
+    ...(recordMode ? { recordMode } : {}),
     headline: `${state.name} may ${verb.may}`,
     // The applied twin (the de-hedger reads outcome.appliedHeadline first).
     appliedHeadline: `${state.name} ${verb.did}`,
@@ -625,7 +659,11 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
 }
 
 /** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} trade @param {any} crime */
-function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime) {
+function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime, pendingIntent = false) {
+  // Capture and suppression are two forms of one institution-control intent.
+  // Until the DM resolves the faction's existing question, rotating the target
+  // must not mint a fresh backlog entry every week.
+  if (pendingIntent) return null;
   const institutions = institutionsFor(item);
   if (!institutions.length) return null;
   const target = institutions[Math.floor((entry.index + tick) % institutions.length)];
@@ -634,6 +672,21 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
   const criminalSuppression = state.archetype === 'criminal' || crime > 0.58;
   const candidateType = criminalSuppression ? 'faction_institution_suppression' : 'faction_institution_capture';
   const severity = clamp01(pressureScore * 0.44 + entry.power * 0.24 + state.momentum * 0.16 + state.riskTolerance * 0.08);
+  const suppressionCause = `faction_suppression:${state.factionId}:${target.id}`;
+  const standingInstitution = standingInstitutionFor(item, target);
+  const suppressionLive = criminalSuppression
+    && (state.suppressedInstitutions || []).map(String).includes(String(target.id))
+    && standingInstitution?._worldPulseInactive !== true
+    && !['removed', 'destroyed'].includes(String(standingInstitution?.status || '').toLowerCase())
+    && (standingInstitution?.impairments || []).some((impairment) => (
+      impairment?.type === 'legitimacy'
+      && impairment?.causeEventId === suppressionCause
+      && Number(impairment?.severity) === INSTITUTION_SUPPRESSION_SEVERITY
+    ));
+  const nextMomentum = clamp01((state.momentum || 0) + severity * 0.12);
+  const suppressionBandChanged = suppressionLive
+    && factionMomentumBand(nextMomentum) !== factionMomentumBand(state.momentum);
+  const asksForApproval = criminalSuppression ? !suppressionLive : severity >= 0.68;
   return candidateBase({
     item,
     entry,
@@ -643,7 +696,8 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
     ruleId: candidateType,
     severity,
     probability: 0.08 + severity * 0.3,
-    applyMode: severity >= 0.68 || criminalSuppression ? 'proposal' : 'auto',
+    applyMode: asksForApproval ? 'proposal' : 'auto',
+    recordMode: suppressionLive && !suppressionBandChanged ? 'state_only' : null,
     reasons: [
       `${state.name} can convert pressure into institution ${criminalSuppression ? 'suppression' : 'control'}.`,
       `Target institution: ${target.name}.`,
@@ -651,12 +705,12 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
     factionPatch: {
       controlledInstitutions: criminalSuppression ? state.controlledInstitutions || [] : [...new Set([...(state.controlledInstitutions || []), target.id])],
       suppressedInstitutions: criminalSuppression ? [...new Set([...(state.suppressedInstitutions || []), target.id])] : state.suppressedInstitutions || [],
-      momentum: clamp01((state.momentum || 0) + severity * 0.12),
+      momentum: nextMomentum,
       exhaustion: clamp01((state.exhaustion || 0) + severity * 0.04),
       lastActedTick: tick,
       recentAction: criminalSuppression ? 'suppress_institution' : 'capture_institution',
     },
-    proposalPayload: severity >= 0.68 || criminalSuppression
+    proposalPayload: asksForApproval
       ? {
           kind: criminalSuppression ? 'institution_suppression' : 'institution_capture',
           factionId: state.factionId,
@@ -776,6 +830,15 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conf
 export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
   const out = [];
+  const pendingInstitutionIntentByFaction = new Set(
+    (snapshot.worldState?.proposals || [])
+      .filter((/** @type {FactionProposal} */ proposal) => (
+        proposal?.status === 'pending'
+        && ['institution_capture', 'institution_suppression'].includes(String(proposal?.outcome?.proposalPayload?.kind || ''))
+        && proposal?.outcome?.proposalPayload?.factionId != null
+      ))
+      .map((/** @type {FactionProposal} */ proposal) => String(proposal.outcome?.proposalPayload?.factionId)),
+  );
 
   for (const item of snapshot.settlements) {
     const legitimacy = pressure(pressureIdx, item.id, 'legitimacy');
@@ -793,7 +856,16 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
       if (cooldown && (state.exhaustion || 0) < 0.62) continue;
       const candidates = [
         governmentChallenge(item, entry, state, tick, legitimacy, conflict),
-        institutionCandidate(item, entry, state, tick, legitimacy, trade, crime),
+        institutionCandidate(
+          item,
+          entry,
+          state,
+          tick,
+          legitimacy,
+          trade,
+          crime,
+          pendingInstitutionIntentByFaction.has(String(state.factionId)),
+        ),
         serviceOrLawCandidate(item, entry, state, tick, food, disease, trade),
         rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict),
       ].filter(Boolean);

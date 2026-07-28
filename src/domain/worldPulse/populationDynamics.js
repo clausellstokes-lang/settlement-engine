@@ -371,6 +371,10 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     severity: clamp(abs / Math.max(1, pop * 0.12), 0.12, 1),
     probability: 1,
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
+    // Ordinary population drift remains real weekly state math, but is not itself
+    // a Chronicle beat. Mass emigration and every major transition stay visible
+    // (including legacy-auto major changes when proposals are disabled).
+    ...(!major && kind !== 'emigration' ? { recordMode: 'state_only' } : {}),
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
     // formatCount (not toLocaleString): a bare toLocaleString() renders `12,000`
     // on en-US ICU but `12 000`/`12.000` elsewhere, so persisted candidate

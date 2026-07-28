@@ -30,6 +30,7 @@ import { lawSign } from './deityStance.js';
 // (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
 import { evil01, chaos01, deityTemper } from './deityAxes.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 // Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
 // STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
 // and its martial readiness (a maintained war machine is warlike conduct). Both close
@@ -395,7 +396,7 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
     let touches = 0;
     for (const e of (rec?.corruptionEvents || [])) if (String(e?.settlementId) === cid) touches += 1;
     for (const e of (rec?.factionCaptureEvents || [])) if (String(e?.settlementId) === cid) touches += 1.5;
-    for (const o of (rec?.selectedOutcomes || [])) if (String(o?.targetSaveId) === cid) touches += 0.4 * (Number(o?.severity) || 0.3);
+    for (const o of outcomesForMechanicalHistory(rec)) if (String(o?.targetSaveId) === cid) touches += 0.4 * (Number(o?.severity) || 0.3);
     if (touches <= 0) continue;
     momentum += recency * Math.min(2, touches) * (fit - 0.5) * 2;  // (fit−0.5)*2 ⇒ −1..+1 direction
     wsum += recency * Math.min(2, touches);

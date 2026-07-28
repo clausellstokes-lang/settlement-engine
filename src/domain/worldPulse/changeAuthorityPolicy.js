@@ -177,7 +177,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     module: 'factionCompetition.js',
     consultsProposalFlag: false,
     rationale:
-      'A faction capturing/suppressing an institution escalates to proposal at severity >= 0.68 (or whenever the move is a criminal suppression), independent of the flag. (institutionCandidate)',
+      'A faction capture escalates at severity >= 0.68; a new or cleared criminal suppression always asks approval, while continuation of an already-approved live suppression is automatic. All are independent of the proposal flag. (institutionCandidate)',
   }),
   faction_rival_power_contest: Object.freeze({
     authority: 'severity-gated',

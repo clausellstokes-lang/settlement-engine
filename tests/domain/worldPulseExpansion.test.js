@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   applyWorldPulseOutcomes,
+  applyPopulationOutcomeToSettlement,
   applyTierOutcomeToSettlement,
   applyNpcPatch,
   deriveFlowCandidates,
@@ -88,6 +89,7 @@ describe('World Pulse expansion systems', () => {
     const migration = candidates.find(candidate => candidate.candidateType === 'population_emigration');
 
     expect(migration).toBeTruthy();
+    expect(migration.recordMode).toBeUndefined();
     expect(migration.populationDeltas.some(delta => delta.saveId === 'a' && delta.delta < 0)).toBe(true);
     expect(migration.populationDeltas.some(delta => delta.saveId === 'b' && delta.delta > 0)).toBe(true);
 
@@ -108,6 +110,45 @@ describe('World Pulse expansion systems', () => {
     const updated = new Map(result.settlementUpdates.map(update => [update.saveId, update.settlement]));
     expect(updated.get('a').population).toBeLessThan(2000);
     expect(updated.get('b').population).toBeGreaterThan(800);
+  });
+
+  test('ordinary growth is state-only, while a major transition stays Chronicle-eligible', () => {
+    const calm = item('calm', settlement('Calmwater', { population: 10000 }));
+    const snapshot = {
+      worldState: { tick: 3, simulationRules: normalizeSimulationRules() },
+      regionalGraph: { channels: [], edges: [] },
+      settlements: [calm],
+      byId: new Map([['calm', calm]]),
+    };
+    const pressures = pressureIndex(['food', 'disease', 'conflict', 'trade', 'legitimacy', 'crime']
+      .map(kind => ({ settlementId: 'calm', kind, score: 0.1 })));
+
+    const ordinary = evaluatePopulationDynamics(snapshot, pressures, {
+      tick: 4,
+      interval: 'one_month',
+      simulationRules: normalizeSimulationRules({ intensity: 'dramatic', majorChangesRequireProposal: true }),
+    })[0];
+    const major = evaluatePopulationDynamics(snapshot, pressures, {
+      tick: 4,
+      interval: 'one_year',
+      simulationRules: normalizeSimulationRules({ intensity: 'dramatic', majorChangesRequireProposal: true }),
+    })[0];
+
+    expect(ordinary).toMatchObject({
+      candidateType: 'population_growth',
+      applyMode: 'auto',
+      recordMode: 'state_only',
+    });
+    expect(major).toMatchObject({
+      candidateType: 'population_growth',
+      applyMode: 'proposal',
+    });
+    expect(major.recordMode).toBeUndefined();
+
+    // The lane tag is receipt metadata only; weekly state arithmetic is unchanged.
+    const { recordMode: _recordMode, ...legacyShape } = ordinary;
+    expect(applyPopulationOutcomeToSettlement(calm.settlement, ordinary, 'calm'))
+      .toEqual(applyPopulationOutcomeToSettlement(calm.settlement, legacyShape, 'calm'));
   });
 
   test('siege_lifted is recovery: growth bonus, never the emigration gate; an active siege still declines', () => {

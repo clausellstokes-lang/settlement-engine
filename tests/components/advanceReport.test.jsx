@@ -165,4 +165,36 @@ describe('AdvanceReport — receipts clickable', () => {
     fireEvent.click(receipts[0]);
     expect(setSelectedSettlementId).toHaveBeenCalledWith('A');
   });
+
+  test('a mechanical root without an edge does not advertise a public cause trace', () => {
+    const campaign = {
+      id: 'c-mechanical-root',
+      settlementIds: ['A'],
+      worldState: {
+        pulseHistory: [{
+          tick: 1,
+          selectedOutcomes: [{
+            id: 'public-o1',
+            headline: 'A stirs',
+            targetSaveId: 'A',
+            settlementIds: ['A'],
+          }],
+          impactDigest: [],
+        }],
+        spatialLedgers: {
+          provenance: {
+            'mechanical.population.a.1': {
+              parents: [],
+              type: 'population_growth',
+              tick: 1,
+              receiptClass: 'mechanical',
+            },
+          },
+        },
+      },
+    };
+    render(<AdvanceReport campaign={campaign} />);
+    expect(screen.queryByTestId('cause-walk-trigger')).toBeNull();
+    expect(screen.getByText(/causal links between events are inferred/i)).toBeTruthy();
+  });
 });

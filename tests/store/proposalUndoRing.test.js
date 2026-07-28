@@ -122,7 +122,7 @@ function settlement(name) {
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
-function seedStore(store, { proposals = [] } = {}) {
+function seedStore(store, { proposals = [], wizardNewsEntries = [] } = {}) {
   store.setState(state => {
     state.savedSettlements = ['a', 'b', 'c'].map(id => ({
       id, name: id, phase: 'canon',
@@ -137,7 +137,7 @@ function seedStore(store, { proposals = [] } = {}) {
           { id: 'edge.b.c', from: 'b', to: 'c', relationshipType: 'hostile' },
         ],
       }),
-      wizardNews: { currentTick: 1, entries: [] },
+      wizardNews: { currentTick: 1, entries: wizardNewsEntries },
       worldState: {
         rngSeed: 'proposal-undo-ring-seed', tick: 1, canonizedAt: NOW,
         proposals,
@@ -215,6 +215,53 @@ describe('R-1 proposal-undo ring (queue #5)', () => {
     // …the entry was popped, and a second undo honestly refuses (empty ring).
     expect(ringOf(store)).toHaveLength(0);
     expect(await store.getState().undoLastProposalApply('camp-1')).toBe(false);
+  });
+
+  test('a legacy record-mode proposal is tombstoned without mechanics, news, or an undo entry', async () => {
+    const store = makeStore();
+    const legacyHold = {
+      id: 'world_proposal.legacy.hold',
+      status: 'pending',
+      tick: 1,
+      headline: 'Hold the line',
+      outcome: {
+        id: 'candidate.strategy.hold.a.1',
+        candidateType: 'strategy_hold',
+        targetSaveId: 'a',
+        applyMode: 'proposal',
+        metadata: { settlementId: 'a', strategyMove: 'hold' },
+        conflictTags: ['strategy:a'],
+      },
+    };
+    const staleNews = {
+      id: `wizard_news.1.world_pulse.proposal.${legacyHold.outcome.id}`,
+      kind: 'queued',
+      sourceEventId: legacyHold.outcome.id,
+      tags: ['world_pulse', 'strategy_hold', 'proposal'],
+    };
+    const unrelatedNews = {
+      id: 'wizard_news.1.applied.unrelated',
+      kind: 'applied',
+      sourceEventId: 'unrelated',
+      tags: ['world_pulse', 'applied'],
+    };
+    seedStore(store, {
+      proposals: [legacyHold],
+      wizardNewsEntries: [staleNews, unrelatedNews],
+    });
+    const settlementsBefore = JSON.parse(JSON.stringify(store.getState().savedSettlements));
+
+    const result = await store.getState()
+      .applyWorldPulseProposal('camp-1', legacyHold.id);
+
+    expect(result.proposalDisposition).toBe('superseded');
+    expect(statusOf(store, legacyHold.id)).toBe('superseded');
+    expect(store.getState().savedSettlements).toEqual(settlementsBefore);
+    expect(store.getState().campaigns[0].wizardNews).toEqual({
+      currentTick: 1,
+      entries: [unrelatedNews],
+    });
+    expect(ringOf(store)).toEqual([]);
   });
 
   test('RESTORE is stepwise: two applies walk back newest-first', async () => {

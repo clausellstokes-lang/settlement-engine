@@ -248,6 +248,111 @@ describe('behavioral soak observation adapter', () => {
     expect(observed.chronicleSample[0].headline).toBe('The walls fell.');
   });
 
+  it('keeps state-only mechanics out of every public tempo lane and counts them separately', () => {
+    const mechanical = {
+      id: 'population.background',
+      candidateType: 'population_growth',
+      targetSaveId: 'a',
+      recordMode: 'state_only',
+      headline: 'Population grows in the background.',
+    };
+    const publicEvent = {
+      id: 'war.public',
+      candidateType: 'conquest',
+      targetSaveId: 'a',
+      headline: 'The walls fall.',
+      causedBy: 'population.background',
+    };
+    const observed = observeBehavioralYear({
+      year: 1,
+      result: {
+        tick: 52,
+        // Deliberately feed the adapter an over-broad upstream shape: v4 must
+        // fail safe even if a caller regresses the public partition.
+        selected: [mechanical, publicEvent],
+        majors: [mechanical, publicEvent],
+        autoApplied: [mechanical],
+        worldState: {
+          tick: 52,
+          simulationRules: { provenanceLedgerEnabled: true },
+          spatialLedgers: {
+            provenance: {
+              'population.background': {
+                parents: [],
+                type: 'population_growth',
+                tick: 52,
+                receiptClass: 'mechanical',
+              },
+              'war.public': {
+                parents: ['population.background'],
+                type: 'conquest',
+                tick: 52,
+              },
+            },
+          },
+        },
+        wizardNews: {
+          entries: [{
+            id: 'wizard_news.52.world_pulse.applied.population.background',
+            tick: 52,
+            impactKind: 'population_growth',
+            sourceEventId: 'population.background',
+            recordMode: 'state_only',
+          }],
+        },
+      },
+      beforeSaves: [],
+      afterSaves: [],
+    });
+
+    expect(observed.eventCount).toBe(1);
+    expect(observed.majorEventCount).toBe(1);
+    expect(observed.mechanicalOutcomeCount).toBe(1);
+    expect(observed.moverCounts.population).toBe(0);
+    expect(observed.moverCounts.war).toBe(1);
+    expect(observed.postApplyReceiptCount).toBe(0);
+    expect(observed.causal.crossFamilyEdges).toBe(0);
+    expect(observed.chronicleSample.map(entry => entry.id)).toEqual(['war.public']);
+
+    const fallback = observeBehavioralYear({
+      year: 1,
+      result: {
+        tick: 52,
+        selected: [mechanical, publicEvent],
+        majors: [publicEvent],
+        autoApplied: [mechanical],
+        worldState: { tick: 52, simulationRules: {} },
+      },
+      beforeSaves: [],
+      afterSaves: [],
+    });
+    expect(fallback.causal.crossFamilyEdges).toBe(0);
+
+    const priorPulseFallback = observeBehavioralYear({
+      year: 2,
+      result: {
+        tick: 53,
+        selected: [publicEvent],
+        majors: [publicEvent],
+        autoApplied: [],
+        worldState: {
+          tick: 53,
+          simulationRules: {},
+          pulseHistory: [{
+            tick: 52,
+            selectedOutcomes: [],
+            consequenceOutcomes: [mechanical],
+            mechanicalOutcomes: [mechanical],
+          }],
+        },
+      },
+      beforeSaves: [],
+      afterSaves: [],
+    });
+    expect(priorPulseFallback.mechanicalOutcomeCount).toBe(0);
+    expect(priorPulseFallback.causal.crossFamilyEdges).toBe(0);
+  });
+
   it('dedupes uncapped receipts, excludes only exact selected twins, and ignores structural news prefixes', () => {
     const selected = {
       id: 'war.1',

@@ -6,12 +6,17 @@
 // history-ring collapse. Imports the kernel + the shared helpers (saveId,
 // usableTickInterval); never imported BY the kernel (keeps the chain acyclic).
 import { ensureWorldState, INTERVAL_WEEKS } from './worldState.js';
+import { reconcileProvenanceAfterHistoryCollapse } from './provenanceKernel.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
+import { boundedMechanicalRumorSeeds } from './pulseOutcomePartition.js';
+import { stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
 import { withCustomContent } from '../../lib/dependencyEngine.js';
 
 /** @typedef {import('../region/wizardNews.js').RawWizardNewsEntry} RawWizardNewsEntry */
+/** @typedef {import('../region/wizardNews.js').WizardNewsEntry} WizardNewsEntry */
+/** @typedef {{ entries?: WizardNewsEntry[] }} NormalizedWizardNewsFeed */
 
 // Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
 // (a one_year advance is 52 synchronous one-week ticks — 4-week months, 13-week seasons, a 52-week year) does not freeze the UI:
@@ -135,9 +140,10 @@ export function ticksForInterval(interval) {
  *
  * @param {any} worldState  the final tick's composed worldState
  * @param {number} appendedRecords  records this interval appended (= ticks run)
+ * @param {NormalizedWizardNewsFeed|null} [wizardNews]
  * @returns {any}
  */
-function collapseIntervalHistory(worldState, appendedRecords) {
+export function collapseIntervalHistory(worldState, appendedRecords, wizardNews = null) {
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   const appended = Math.max(0, Math.floor(appendedRecords));
   // Fewer than two interval records means there is nothing interior to collapse
@@ -149,8 +155,42 @@ function collapseIntervalHistory(worldState, appendedRecords) {
   // the kernel's MAX_HISTORY eviction; `base`-anchored front slicing does not.
   const intervalSpan = Math.min(appended, history.length);
   const survivors = history.slice(0, history.length - intervalSpan);
-  const composed = [...survivors, history[history.length - 1]];
-  return { ...worldState, pulseHistory: composed };
+  const intervalRecords = history.slice(history.length - intervalSpan);
+  const removed = intervalRecords.slice(0, -1);
+  const finalRecord = intervalRecords[intervalRecords.length - 1];
+  const finalTick = Number(finalRecord?.tick || 0);
+  // Reconstruct against the FULL retained history so the metronome predicate
+  // sees surviving pre-interval beats. Replaying only `intervalRecords` can
+  // invent a louder interior repeat that was correctly suppressed when the
+  // tick originally ran. Survivor seeds are already durable in the records we
+  // keep, so subtract their source IDs before applying the carry cap; otherwise
+  // a saturated survivor can consume all 48 slots and evict the interval beats
+  // that would actually be lost by this collapse.
+  const publicEntries = wizardNews?.entries;
+  const survivorSeedIds = new Set(stateOnlyRumorSeedsFromHistory(
+    survivors,
+    publicEntries,
+  ).map(entry => String(entry?.sourceEventId ?? entry?.id)));
+  const mechanicalRumorSeeds = boundedMechanicalRumorSeeds(stateOnlyRumorSeedsFromHistory(
+    history,
+    publicEntries,
+  )
+    .filter(entry => !survivorSeedIds.has(String(entry?.sourceEventId ?? entry?.id)))
+    .filter(entry => finalTick - Number(entry?.tick || 0) <= 6));
+  const carriesAuthoritativeMechanicalSeeds = intervalRecords
+    .some((/** @type {NonNullable<Parameters<typeof stateOnlyRumorSeedsFromHistory>[0]>[number]} */ record) => (
+      Array.isArray(record?.mechanicalRumorSeeds)
+    ));
+  const composed = [
+    ...survivors,
+    (mechanicalRumorSeeds.length || carriesAuthoritativeMechanicalSeeds)
+      ? { ...finalRecord, mechanicalRumorSeeds }
+      : finalRecord,
+  ];
+  return reconcileProvenanceAfterHistoryCollapse(
+    { ...worldState, pulseHistory: composed },
+    removed,
+  );
 }
 
 /**
@@ -473,7 +513,11 @@ export async function simulateCampaignWorldInterval({
   // one_week case (tickCount=1) appended exactly one record already, so the collapse
   // is a no-op. The collapse is on the FINAL composed worldState only — every interior
   // computation still threaded its full history forward, so determinism is untouched.
-  const composedWorldState = collapseIntervalHistory(last.worldState, tickCount);
+  const composedWorldState = collapseIntervalHistory(
+    last.worldState,
+    tickCount,
+    last.wizardNews,
+  );
   return {
     ...last,
     worldState: composedWorldState,

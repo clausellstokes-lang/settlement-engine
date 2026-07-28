@@ -153,6 +153,25 @@ describe('flagged Herald Decisions', () => {
     expect(store.applyWorldPulseProposal).toHaveBeenCalledTimes(1);
   });
 
+  test('shows a truthful upgrade receipt when Apply safely supersedes a legacy proposal', async () => {
+    store.applyWorldPulseProposal.mockResolvedValue({
+      proposalDisposition: 'superseded',
+      worldState: {
+        proposals: [{ ...visibleProposal, status: 'superseded' }],
+      },
+    });
+    renderDecisions();
+
+    fireEvent.click(screen.getByTitle('Apply proposal'));
+
+    await waitFor(() => {
+      expect(screen.getByRole('status').textContent)
+        .toContain('upgrade made this proposal obsolete');
+    });
+    fireEvent.click(screen.getAllByTitle('This decision was already recorded.')[0]);
+    expect(store.applyWorldPulseProposal).toHaveBeenCalledTimes(1);
+  });
+
   test('shows a truthful dismiss receipt from the exact returned proposal', async () => {
     store.dismissWorldPulseProposal.mockResolvedValue({
       ...visibleProposal,
@@ -215,5 +234,25 @@ describe('flagged Herald Decisions', () => {
     expect(log.textContent).toContain('dismissed by you');
     expect(log.textContent.indexOf(newer.headline))
       .toBeLessThan(log.textContent.indexOf(older.headline));
+  });
+
+  test('the legacy Decisions projection retains an upgrade-superseded tombstone', () => {
+    const superseded = {
+      ...proposal('proposal-superseded', 'The obsolete hold'),
+      status: 'superseded',
+      tick: 4,
+      supersededAt: '2026-01-03T00:00:00.000Z',
+      supersessionReason: 'record_mode_upgrade',
+    };
+    const legacyCampaign = campaign();
+    legacyCampaign.worldState.proposals = [superseded];
+    render(<HeraldAdjudication campaign={legacyCampaign} />);
+
+    const pending = screen.getByText('Pending Decisions').closest('section');
+    expect(pending?.textContent).not.toContain(superseded.headline);
+    expect(pending?.textContent).toContain('No decision awaits you');
+    const log = screen.getByTestId('adjudication-resolved');
+    expect(log.textContent).toContain(superseded.headline);
+    expect(log.textContent).toContain('superseded by upgrade');
   });
 });

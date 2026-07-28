@@ -12,15 +12,19 @@
  * ── WHAT THIS RECORDS ─────────────────────────────────────────────────────────
  * At the SINGLE durable-write seam (appendPulseHistory, worldState.js — the sole
  * chokepoint every advance commits through), for exactly the receipts that land in
- * the durable pulseRecord (selectedOutcomes ≤24 + impactDigest ≤18, the same ids
- * the chronicle reads as nodes), we record the parent cause-edge ids each carries:
+ * the durable pulseRecord (selectedOutcomes ≤24 + mechanicalOutcomes ≤8 +
+ * impactDigest ≤18), we record the parent cause-edge ids each carries:
  *   · `causedBy`      — the explicit forward SEAM (scalar or array of parent ids)
  *                       kernels populate when they mint a child of a known outcome.
  *   · `sourceEventId` — the existing one-hop edge (news→source-outcome; and the
  *                       aftermath/lifecycle/cascade children that already carry it).
- * The entry is `{ [receiptId]: { parents:string[], type:string, tick:number } }` —
- * a stable receipt id keyed to its parent cause-edge ids, its type, and the tick.
- * NO prose, NO PII (never a headline/summary/name — only structural ids + tick).
+ * An ordinary pulse write is
+ * `{ [receiptId]: { parents:string[], type:string, tick:number } }` — a stable
+ * receipt id keyed to its parent cause-edge ids, its type, and the tick.
+ * Mechanical audit roots add `receiptClass:"mechanical"`; interval collapse may
+ * temporarily add `retentionClass:"collapsed_ancestor"` while an otherwise
+ * removed receipt remains reachable ancestry. NO prose, NO PII (never a
+ * headline/summary/name — only structural ids, class markers, and tick).
  *
  * ── STORAGE (owner-signable; the recommended in-blob home is implemented) ──────
  * `worldState.spatialLedgers.provenance` — the Phase-5.5 conditional ledger family.
@@ -29,7 +33,8 @@
  * empty (dropSpatialLedger) so a dormant campaign serializes byte-identically. The
  * SIZE GOVERNOR / horizon-compaction law caps the ledger at MAX_PROVENANCE_EDGES
  * recorded edges, evicting the lowest-tick first — sized to cover pulseHistory's
- * own MAX_HISTORY=80 advance window.
+ * own MAX_HISTORY=80 advance window. Mechanical receipts remain provenance-visible
+ * without becoming public Chronicle nodes.
  *
  * ── DORMANCY (constitutional) ─────────────────────────────────────────────────
  * FLAG-GATED behind the VIRTUAL `provenanceLedgerEnabled` (absent from
@@ -72,7 +77,8 @@ export const PROVENANCE_LEDGER_KEY = 'provenance';
  * recorded edges; when a write would exceed it, the lowest-tick edges are evicted
  * first (ties broken by id desc, deterministic). Sized to cover pulseHistory's own
  * MAX_HISTORY=80 advance window at the THEORETICAL durable maximum — a record holds
- * ≤24 selectedOutcomes + ≤18 impactDigest = ≤42 durable receipts, so ≤42×80 = 3360
+ * ≤24 selectedOutcomes + ≤8 mechanicalOutcomes + ≤18 impactDigest = ≤50 durable
+ * receipts, so ≤50×80 = 4000
  * edges can be current-window-live at once; 4096 clears that with headroom, so the
  * governor NEVER evicts an edge whose child receipt is still in the pulseHistory
  * window (only strictly-older orphans evict). MEASURED reality is far lighter: a
@@ -92,11 +98,20 @@ export const MAX_PROVENANCE_EDGES = 4096;
  * @property {string} [type]
  * @property {string} [candidateType]
  * @property {string} [impactKind]
+ * @property {string} [recordMode]
  * @property {string|number|ReadonlyArray<string|number>} [causedBy]  explicit parent seam
  * @property {string|number} [sourceEventId]                          existing one-hop edge
  */
 
-/** One recorded cause-edge entry. @typedef {{ parents: string[], type: string, tick: number }} ProvEntry */
+/**
+ * One recorded receipt/edge entry. Mechanical roots are retained with an empty
+ * parents array so the audit can distinguish state motion from public events.
+ * Ordinary pulse writes keep the legacy public/impact
+ * `{ parents, type, tick }` shape. `retentionClass` is added only by interval
+ * collapse, and only while a removed receipt remains required as ancestry.
+ * @typedef {{ parents: string[], type: string, tick: number, receiptClass?: 'mechanical',
+ *   retentionClass?: 'collapsed_ancestor' }} ProvEntry
+ */
 
 /** The ledger: receipt id → its recorded entry. @typedef {Record<string, ProvEntry>} ProvLedger */
 
@@ -158,10 +173,17 @@ function typeOf(item) {
  * @param {ProvReceipt[]} args.outcomes      raw applied outcomes (applied.autoApplied ∪ proposals)
  * @param {ProvReceipt[]} args.newsEntries   raw news entries (applied.newsEntries) carrying sourceEventId
  * @param {Set<string>} args.durableIds  the ids that land in the durable pulseRecord
+ * @param {Set<string>} [args.mechanicalIds] state-only receipt ids
  * @param {number} args.tick
  * @returns {ProvLedger}
  */
-export function collectProvenanceEdges({ outcomes = [], newsEntries = [], durableIds, tick }) {
+export function collectProvenanceEdges({
+  outcomes = [],
+  newsEntries = [],
+  durableIds,
+  mechanicalIds = new Set(),
+  tick,
+}) {
   /** @type {ProvLedger} */
   const edges = {};
   const scope = durableIds instanceof Set ? durableIds : null;
@@ -169,8 +191,16 @@ export function collectProvenanceEdges({ outcomes = [], newsEntries = [], durabl
     const id = item?.id != null ? String(item.id) : '';
     if (!id) return;
     if (scope && !scope.has(id)) return;
+    const mechanical = mechanicalIds.has(id);
     const rawParents = rawParentIdsOf(item);
-    if (rawParents.length === 0) return;
+    // Public/impact roots stay sparse as before. Mechanical roots are themselves
+    // the audit evidence that an intentionally non-public state mutation landed.
+    if (rawParents.length === 0) {
+      if (mechanical) {
+        edges[id] = { parents: [], type: typeOf(item), tick, receiptClass: 'mechanical' };
+      }
+      return;
+    }
     // Dedupe + drop self-edges; merge with any parents already recorded for this id.
     const seen = new Set(edges[id]?.parents || []);
     const parents = [...(edges[id]?.parents || [])];
@@ -181,7 +211,12 @@ export function collectProvenanceEdges({ outcomes = [], newsEntries = [], durabl
     }
     if (parents.length === 0) return;
     parents.sort();
-    edges[id] = { parents, type: edges[id]?.type || typeOf(item), tick };
+    edges[id] = {
+      parents,
+      type: edges[id]?.type || typeOf(item),
+      tick,
+      ...(mechanical ? { receiptClass: /** @type {const} */ ('mechanical') } : {}),
+    };
   };
   for (const o of outcomes) consider(o);
   for (const n of newsEntries) consider(n);
@@ -233,12 +268,25 @@ function compactToHorizon(ledger) {
  * @param {ProvReceipt[]} args.outcomes
  * @param {ProvReceipt[]} args.newsEntries
  * @param {Set<string>} args.durableIds
+ * @param {Set<string>} [args.mechanicalIds]
  * @param {number} args.tick
  * @returns {ProvWorldState} a new worldState (or the same reference when nothing changed)
  */
-export function recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick }) {
+export function recordProvenanceLedger(worldState, {
+  outcomes,
+  newsEntries,
+  durableIds,
+  mechanicalIds,
+  tick,
+}) {
   if (!provenanceLedgerActive(worldState)) return worldState;
-  const fresh = collectProvenanceEdges({ outcomes, newsEntries, durableIds, tick });
+  const fresh = collectProvenanceEdges({
+    outcomes,
+    newsEntries,
+    durableIds,
+    mechanicalIds,
+    tick,
+  });
   // The ledger key is a STRING LITERAL at every accessor call (not the
   // PROVENANCE_LEDGER_KEY constant) because the spatialLedgerCoverage walker scans
   // for literal-key setSpatialLedger writes — the 'upswing'/'reframes' idiom.
@@ -255,6 +303,78 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
   // live self-drop path — recordProvenanceLedger never empties the ledger from a non-empty input.
   if (Object.keys(merged).length === 0) return dropSpatialLedger(worldState, 'provenance');
   return setSpatialLedger(worldState, 'provenance', merged);
+}
+
+/**
+ * Stage-5 interval-collapse twin. Only rows named by pulse records removed in
+ * this collapse are eligible for pruning; unrelated manual-proposal provenance
+ * remains untouched. A removed row is retained when any surviving/manual row
+ * reaches it as an ancestor.
+ * @param {ProvWorldState} worldState already carrying the collapsed pulseHistory
+ * @param {Array<Record<string, unknown>>} removedPulseRecords
+ * @returns {ProvWorldState}
+ */
+export function reconcileProvenanceAfterHistoryCollapse(worldState, removedPulseRecords = []) {
+  if (!provenanceLedgerActive(worldState) || removedPulseRecords.length === 0) return worldState;
+  const ledger = /** @type {ProvLedger|null} */ (getSpatialLedger(worldState, 'provenance')) || null;
+  if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) return worldState;
+  const receiptIds = (/** @type {Array<Record<string, unknown>>} */ records) => {
+    const ids = new Set();
+    for (const record of records) {
+      for (const field of ['selectedOutcomes', 'mechanicalOutcomes', 'impactDigest']) {
+        const receipts = Array.isArray(record?.[field]) ? record[field] : [];
+        for (const receipt of receipts) if (receipt?.id != null) ids.add(String(receipt.id));
+      }
+    }
+    return ids;
+  };
+  const removedIds = receiptIds(removedPulseRecords);
+  if (removedIds.size === 0) return worldState;
+  const survivingRecords = Array.isArray(worldState?.pulseHistory)
+    ? /** @type {Array<Record<string, unknown>>} */ (worldState.pulseHistory)
+    : [];
+  const protectedIds = receiptIds(survivingRecords);
+  // Every ordinary ledger row not owned by this collapse is a conservative
+  // root too (manual proposals and legacy rows have no durable owner marker).
+  // A row tagged collapsed_ancestor was retained only for a prior surviving
+  // receipt, so it must not become an immortal root on the next collapse.
+  for (const id of Object.keys(ledger)) {
+    if (!removedIds.has(id) && ledger[id]?.retentionClass !== 'collapsed_ancestor') {
+      protectedIds.add(id);
+    }
+  }
+  const pending = [...protectedIds];
+  while (pending.length) {
+    const id = pending.pop();
+    if (!id || !ledger[id]) continue;
+    for (const parent of ledger[id].parents || []) {
+      const parentId = String(parent);
+      if (protectedIds.has(parentId)) continue;
+      protectedIds.add(parentId);
+      pending.push(parentId);
+    }
+  }
+  const drop = new Set(Object.keys(ledger).filter(id => (
+    (removedIds.has(id) || ledger[id]?.retentionClass === 'collapsed_ancestor')
+    && !protectedIds.has(id)
+  )));
+  /** @type {ProvLedger} */
+  const next = {};
+  let changed = drop.size > 0;
+  for (const id of Object.keys(ledger).sort()) {
+    if (drop.has(id)) continue;
+    const entry = ledger[id];
+    if (removedIds.has(id) && protectedIds.has(id)
+        && entry.retentionClass !== 'collapsed_ancestor') {
+      next[id] = { ...entry, retentionClass: 'collapsed_ancestor' };
+      changed = true;
+    } else {
+      next[id] = entry;
+    }
+  }
+  if (!changed) return worldState;
+  if (Object.keys(next).length === 0) return dropSpatialLedger(worldState, 'provenance');
+  return setSpatialLedger(worldState, 'provenance', next);
 }
 
 /**
@@ -319,7 +439,8 @@ export function withWaveCauseEdges(newsEntries, queuedImpacts) {
  * appendPulseHistory. When the ledger is dormant it IS appendPulseHistory (returns
  * its exact result — byte-identical). When lit it records the advance's cause-edges
  * first, then commits the pulse record. The durable receipt set (selectedOutcomes ∪
- * impactDigest ids) scopes the recording to exactly the chronicle's node ids. The
+ * mechanicalOutcomes ∪ impactDigest ids) scopes the recording to the public
+ * chronicle plus its compact mechanical audit. The
  * record/applied params are read structurally (cast to the fields used) so the
  * broadly-typed kernel call site passes without an `any`.
  * @param {ProvWorldState} worldState
@@ -329,17 +450,34 @@ export function withWaveCauseEdges(newsEntries, queuedImpacts) {
  */
 export function appendPulseHistoryWithProvenance(worldState, pulseRecord, applied) {
   if (!provenanceLedgerActive(worldState)) return appendPulseHistory(worldState, pulseRecord);
-  const rec = /** @type {{ tick?: number, selectedOutcomes?: ProvReceipt[], impactDigest?: ProvReceipt[] }} */ (pulseRecord || {});
+  const rec = /** @type {{ tick?: number, selectedOutcomes?: ProvReceipt[], mechanicalOutcomes?: ProvReceipt[], impactDigest?: ProvReceipt[] }} */ (pulseRecord || {});
   const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[], regionalGraph?: { queuedImpacts?: ReadonlyArray<Record<string, unknown>> } }} */ (applied || {});
   /** @type {Set<string>} */
   const durableIds = new Set();
+  const mechanicalIds = new Set();
   for (const o of (rec.selectedOutcomes || [])) if (o?.id != null) durableIds.add(String(o.id));
-  for (const d of (rec.impactDigest || [])) if (d?.id != null) durableIds.add(String(d.id));
+  for (const o of (rec.mechanicalOutcomes || [])) {
+    if (o?.id == null) continue;
+    const id = String(o.id);
+    durableIds.add(id);
+    mechanicalIds.add(id);
+  }
+  for (const d of (rec.impactDigest || [])) {
+    if (d?.id == null) continue;
+    const id = String(d.id);
+    durableIds.add(id);
+  }
   const outcomes = [...(app.autoApplied || []), ...(app.proposals || [])];
   // E-J: enrich wave receipts with their immediate-parent recorded key (additive, dark).
   const newsEntries = withWaveCauseEdges(app.newsEntries || [], app.regionalGraph?.queuedImpacts);
   const tick = Number.isFinite(rec.tick) ? Number(rec.tick) : Number(worldState?.tick) || 0;
-  const withLedger = recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
+  const withLedger = recordProvenanceLedger(worldState, {
+    outcomes,
+    newsEntries,
+    durableIds,
+    mechanicalIds,
+    tick,
+  });
   return appendPulseHistory(withLedger, pulseRecord);
 }
 
@@ -360,5 +498,14 @@ export function recordProposalProvenance(worldState, applied, tick) {
   // E-J: a hand-approved decree that queues regional waves records the immediate-parent edge too.
   const newsEntries = withWaveCauseEdges(app.newsEntries || [], app.regionalGraph?.queuedImpacts);
   const durableIds = new Set([...outcomes, ...newsEntries].map((r) => (r && r.id != null ? String(r.id) : '')).filter(Boolean));
-  return recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
+  const mechanicalIds = new Set((app.autoApplied || [])
+    .filter((o) => o?.recordMode === 'state_only' && o?.id != null)
+    .map((o) => String(o.id)));
+  return recordProvenanceLedger(worldState, {
+    outcomes,
+    newsEntries,
+    durableIds,
+    mechanicalIds,
+    tick,
+  });
 }

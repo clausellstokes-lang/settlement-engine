@@ -141,6 +141,136 @@ describe('C2 strategy chooser — gated (anti-vacuity)', () => {
       expect(c.ruleFamily).toBe('strategy');
     }
   });
+
+  test('defend and hold remain conflict suppressors, not Chronicle outcomes', () => {
+    const saves = [save('solo', 'Stillwater')];
+    const { snap, pIdx } = snapshotFor(strategyCampaign({}, { settlementIds: ['solo'] }), saves);
+    const chooseAt = (roll) => evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 6,
+      simulationRules: { settlementStrategyEnabled: true },
+      rng: { random: () => roll, fork: () => ({ random: () => roll }) },
+    })[0];
+
+    const defend = chooseAt(0);
+    const hold = chooseAt(0.999999);
+
+    expect(defend.candidateType).toBe('strategy_defend');
+    expect(hold.candidateType).toBe('strategy_hold');
+    for (const candidate of [defend, hold]) {
+      expect(candidate.recordMode).toBe('suppression_only');
+      expect(candidate.conflictTags).toEqual([`strategy:${candidate.targetSaveId}`]);
+      expect(candidate.condition).toBeUndefined();
+    }
+  });
+
+  test('an archetype lever with no eligible relationship is an inert conflict suppressor', () => {
+    const merchant = save('solo', 'Stillwater', {
+      factions: [
+        { faction: 'Merchant Council', category: 'merchant', power: 78, isGoverning: true },
+        { faction: 'Dock Wardens', category: 'military', power: 42 },
+      ],
+    });
+    const campaign = strategyCampaign({ infoMode: 'unreliable' }, {
+      settlementIds: ['solo'],
+      extraState: { spatialCanonVersion: 1 },
+    });
+    const { snap, pIdx } = snapshotFor(campaign, [merchant]);
+    let inertLever = null;
+
+    for (let index = 0; index < 64 && !inertLever; index += 1) {
+      const candidate = evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6,
+        simulationRules: campaign.worldState.simulationRules,
+        rng: createPRNG(`inert-lever-${index}`),
+      })[0];
+      if (['strategy_reroute', 'strategy_embargo', 'strategy_credit']
+        .includes(candidate?.candidateType)) {
+        inertLever = candidate;
+      }
+    }
+
+    expect(inertLever).toMatchObject({
+      recordMode: 'suppression_only',
+      conflictTags: ['strategy:solo'],
+    });
+    expect(inertLever.relationshipKey).toBeUndefined();
+    expect(inertLever.relationshipPatch).toBeUndefined();
+    expect(inertLever.condition).toBeUndefined();
+  });
+
+  test('an archetype lever with a real relationship nudge remains public', () => {
+    const merchant = save('merchant', 'Stillwater', {
+      factions: [
+        { faction: 'Merchant Council', category: 'merchant', power: 78, isGoverning: true },
+      ],
+    });
+    const partner = save('partner', 'Fairhaven');
+    const fixture = {
+      settlementIds: ['merchant', 'partner'],
+      edges: [{
+        id: 'edge.merchant.partner',
+        from: 'merchant',
+        to: 'partner',
+        relationshipType: 'neutral',
+      }],
+      relationshipStates: {
+        'edge.merchant.partner': { relationshipType: 'neutral' },
+      },
+      extraState: { spatialCanonVersion: 1 },
+    };
+    const campaign = strategyCampaign({ infoMode: 'unreliable' }, fixture);
+    const { snap, pIdx } = snapshotFor(campaign, [merchant, partner]);
+    let materialLever = null;
+
+    for (let index = 0; index < 64 && !materialLever; index += 1) {
+      const candidate = evaluateSettlementStrategyRules(snap, pIdx, {
+        tick: 6,
+        simulationRules: campaign.worldState.simulationRules,
+        rng: createPRNG(`material-lever-${index}`),
+      }).find(row => row.targetSaveId === 'merchant');
+      if (candidate?.relationshipKey && candidate?.relationshipPatch) {
+        materialLever = candidate;
+      }
+    }
+
+    expect(materialLever).toMatchObject({
+      ruleFamily: 'strategy',
+      relationshipKey: 'edge.merchant.partner',
+    });
+    expect(materialLever.recordMode).toBeUndefined();
+  });
+
+  test('a production pulse drops a chosen hold from candidate and roll receipts', () => {
+    const saves = [save('solo', 'Stillwater')];
+    const campaign = strategyCampaign({}, {
+      settlementIds: ['solo'],
+      extraState: { rngSeed: 'strategy-0' },
+    });
+    const { snap, pIdx } = snapshotFor(campaign, saves);
+    const raw = evaluateSettlementStrategyRules(snap, pIdx, {
+      tick: 7,
+      simulationRules: campaign.worldState.simulationRules,
+      rng: createPRNG('strategy-0::tick:7::one_week').fork('settlement-strategy'),
+    });
+    expect(raw).toEqual([expect.objectContaining({
+      candidateType: 'strategy_hold',
+      recordMode: 'suppression_only',
+    })]);
+
+    const pulse = previewCampaignWorldPulse({
+      campaign,
+      saves,
+      interval: 'one_week',
+      now: NOW,
+    });
+    expect(pulse.candidates.some(candidate =>
+      candidate.recordMode === 'suppression_only')).toBe(false);
+    expect(pulse.rollExplanations.some(explanation =>
+      explanation.candidateType === 'strategy_hold')).toBe(false);
+    expect(pulse.pulseRecord.candidateCount).toBe(
+      pulse.candidates.filter(candidate => !candidate.recordMode).length,
+    );
+  });
 });
 
 describe('C2 strategy chooser — softmax order-independence', () => {

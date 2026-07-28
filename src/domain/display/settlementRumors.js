@@ -561,6 +561,7 @@ export function settlementRumors({
   const newsEmbattlement = newsDigest ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
   const arrived = Object.entries(ledger)
     .filter(([, record]) => record && typeof record === 'object'
+      && record.content?.visibility !== 'mechanical'
       && finiteNumber(record.arrivalTick, Infinity) <= tick)
     .sort(([keyA, a], [keyB, b]) => (finiteNumber(b.arrivalTick, 0) - finiteNumber(a.arrivalTick, 0))
       || (finiteNumber(b.score, 0) - finiteNumber(a.score, 0))
@@ -583,7 +584,13 @@ export function settlementRumors({
 export function hasRumorLedgers(worldState) {
   const ledgers = getSpatialLedger(worldState, 'rumorLedgers');
   return !!ledgers && typeof ledgers === 'object' && !Array.isArray(ledgers)
-    && Object.keys(ledgers).length > 0;
+    && Object.values(ledgers).some((ledger) => (
+      ledger && typeof ledger === 'object' && !Array.isArray(ledger)
+      && Object.values(ledger).some((record) => (
+        record && typeof record === 'object'
+        && record.content?.visibility !== 'mechanical'
+      ))
+    ));
 }
 
 /**

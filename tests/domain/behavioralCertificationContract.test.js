@@ -187,7 +187,7 @@ describe('behavioral certification contract', () => {
     expect(result.claimBoundary).toMatch(/does not write or publish/);
   });
 
-  it('fails closed instead of reinterpreting a pre-v3 observation receipt', () => {
+  it('fails closed instead of reinterpreting a pre-v4 observation receipt', () => {
     const input = passingInput();
     for (const receipt of input.receipts) {
       receipt.behavioral.schemaVersion = BEHAVIORAL_OBSERVATION_VERSION - 1;

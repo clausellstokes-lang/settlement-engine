@@ -11,7 +11,9 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import {
-  recordProvenanceLedger, collectProvenanceEdges, provenanceLedgerActive,
+  appendPulseHistoryWithProvenance, recordProvenanceLedger,
+  collectProvenanceEdges, provenanceLedgerActive,
+  reconcileProvenanceAfterHistoryCollapse,
   MAX_PROVENANCE_EDGES,
 } from '../../src/domain/worldPulse/provenanceKernel.js';
 import { buildRecordedEdges, recordedDescendants } from '../../src/domain/display/chronicleGraph.js';
@@ -133,5 +135,136 @@ describe('provenance ledger — writer basics', () => {
       newsEntries: [], durableIds: new Set(['zeta', 'alpha']), tick: 1,
     });
     expect(Object.keys(ws.spatialLedgers.provenance)).toEqual(['alpha', 'zeta']);
+  });
+
+  it('records bounded state-only roots as mechanical without changing public row shape', () => {
+    const mechanical = {
+      id: 'mechanical.population.a.9',
+      type: 'population',
+      candidateType: 'population_growth',
+      recordMode: 'state_only',
+    };
+    const publicChild = {
+      id: 'public.aftermath.a.9',
+      type: 'condition',
+      causedBy: 'public.root',
+    };
+    const pulseRecord = {
+      id: 'pulse.9',
+      tick: 9,
+      selectedOutcomes: [publicChild],
+      mechanicalOutcomeCount: 1,
+      mechanicalOutcomes: [mechanical],
+      impactDigest: [],
+    };
+    const next = appendPulseHistoryWithProvenance(LIT, pulseRecord, {
+      autoApplied: [mechanical, publicChild],
+      proposals: [],
+      newsEntries: [],
+    });
+    expect(next.pulseHistory.at(-1)).toEqual(pulseRecord);
+    expect(next.spatialLedgers.provenance['mechanical.population.a.9']).toEqual({
+      parents: [],
+      type: 'population',
+      tick: 9,
+      receiptClass: 'mechanical',
+    });
+    expect(next.spatialLedgers.provenance['public.aftermath.a.9']).toEqual({
+      parents: ['public.root'],
+      type: 'condition',
+      tick: 9,
+    });
+  });
+
+  it('prunes collapsed pulse rows, preserves kept ancestry, and leaves manual rows alone', () => {
+    const removed = {
+      tick: 8,
+      selectedOutcomes: [],
+      mechanicalOutcomes: [
+        { id: 'mechanical.drop' },
+        { id: 'mechanical.ancestor' },
+      ],
+      impactDigest: [],
+    };
+    const kept = {
+      tick: 9,
+      selectedOutcomes: [{ id: 'public.kept' }],
+      mechanicalOutcomes: [],
+      impactDigest: [],
+    };
+    const ledger = {
+      'manual.decree': { parents: ['manual.root'], type: 'realm_verb', tick: 7 },
+      'mechanical.ancestor': {
+        parents: [],
+        type: 'population_growth',
+        tick: 8,
+        receiptClass: 'mechanical',
+      },
+      'mechanical.drop': {
+        parents: [],
+        type: 'population_growth',
+        tick: 8,
+        receiptClass: 'mechanical',
+      },
+      'public.kept': { parents: ['mechanical.ancestor'], type: 'conquest', tick: 9 },
+    };
+    const worldState = setSpatialLedger(
+      { ...LIT, pulseHistory: [kept] },
+      'provenance',
+      ledger,
+    );
+    const next = reconcileProvenanceAfterHistoryCollapse(worldState, [removed]);
+    expect(next.spatialLedgers.provenance['mechanical.drop']).toBeUndefined();
+    expect(next.spatialLedgers.provenance['mechanical.ancestor']).toEqual({
+      ...ledger['mechanical.ancestor'],
+      retentionClass: 'collapsed_ancestor',
+    });
+    expect(next.spatialLedgers.provenance['public.kept']).toEqual(ledger['public.kept']);
+    expect(next.spatialLedgers.provenance['manual.decree']).toEqual(ledger['manual.decree']);
+
+    // A second collapse may retain the previously-kept receipt and its old
+    // mechanical parent as ancestry for a newer child.
+    const current = {
+      tick: 10,
+      selectedOutcomes: [{ id: 'public.current' }],
+      mechanicalOutcomes: [],
+      impactDigest: [],
+    };
+    const withCurrent = setSpatialLedger(
+      { ...next, pulseHistory: [current] },
+      'provenance',
+      {
+        ...next.spatialLedgers.provenance,
+        'public.current': { parents: ['public.kept'], type: 'aftermath', tick: 10 },
+      },
+    );
+    const twice = reconcileProvenanceAfterHistoryCollapse(withCurrent, [kept]);
+    expect(twice.spatialLedgers.provenance['public.kept'].retentionClass)
+      .toBe('collapsed_ancestor');
+    expect(twice.spatialLedgers.provenance['mechanical.ancestor']).toBeTruthy();
+
+    // Once the rooted descendant also leaves the retained history, both prior
+    // collapsed ancestors become unreachable and are collected. Manual roots
+    // remain conservative and untouched.
+    const finalRecord = {
+      tick: 11,
+      selectedOutcomes: [{ id: 'public.final' }],
+      mechanicalOutcomes: [],
+      impactDigest: [],
+    };
+    const withFinal = setSpatialLedger(
+      { ...twice, pulseHistory: [finalRecord] },
+      'provenance',
+      {
+        ...twice.spatialLedgers.provenance,
+        'public.final': { parents: [], type: 'event', tick: 11 },
+      },
+    );
+    const thrice = reconcileProvenanceAfterHistoryCollapse(withFinal, [current]);
+    expect(thrice.spatialLedgers.provenance['public.current']).toBeUndefined();
+    expect(thrice.spatialLedgers.provenance['public.kept']).toBeUndefined();
+    expect(thrice.spatialLedgers.provenance['mechanical.ancestor']).toBeUndefined();
+    expect(thrice.spatialLedgers.provenance['manual.decree']).toEqual(ledger['manual.decree']);
+    expect(thrice.spatialLedgers.provenance['public.final']).toBeTruthy();
   });
 });

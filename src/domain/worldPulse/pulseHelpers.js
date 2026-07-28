@@ -5,9 +5,93 @@
 // the pulseHelpers ← pulseKernel ← advanceInterval ← barrel chain).
 import { deepClone } from '../clone.js';
 
+/** @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome */
+/** @typedef {{ outcome?: PulseOutcome|null, recordModeVersion?: unknown }} RecordModeProposal */
+/** @typedef {{ consequenceOutcomes?: PulseOutcome[], selectedOutcomes?: PulseOutcome[] }} PulseHistoryRecord */
+
+/** Record-only lanes carried by outcome producers into the central pulse seams. */
+const STATE_ONLY_RECORD_MODE = 'state_only';
+const SUPPRESSION_ONLY_RECORD_MODE = 'suppression_only';
+// Pending proposals are durable and may be approved long after the tick that
+// minted them. Version the proposal row at the record-mode policy boundary so
+// the apply seam can distinguish a current, intentionally public question from
+// an ambiguous pre-v4 copy of a family whose Chronicle meaning changed.
+const RECORD_MODE_PROPOSAL_VERSION = 4;
+const LEGACY_RECORD_MODE_CANDIDATE_TYPES = new Set([
+  'npc_goal_rebranch',
+]);
+const ALWAYS_SUPERSEDED_PROPOSAL_TYPES = new Set([
+  'strategy_defend',
+  'strategy_hold',
+]);
+// Keep the durable mechanical audit inside the provenance ledger's 4,096-edge
+// history horizon: 24 public outcomes + 8 mechanical outcomes + 18 impact rows
+// = 50 receipts/tick × 80 retained ticks = 4,000.
+const MAX_MECHANICAL_OUTCOMES_PER_PULSE = 8;
+// Private rumor replay is behavioral state, not provenance audit. Give it the
+// same bounded horizon as interval collapse so the audit cap cannot crowd out
+// a later significant seed before information mode is enabled.
+const MAX_MECHANICAL_RUMOR_SEEDS_PER_PULSE = 48;
+
 /** @param {any} value */
 function clone(value) {
   return value == null ? value : deepClone(value);
+}
+
+/** @param {unknown} outcome */
+function isStateOnlyOutcome(outcome) {
+  const record = /** @type {{ recordMode?: unknown }|null|undefined} */ (outcome);
+  return record?.recordMode === STATE_ONLY_RECORD_MODE;
+}
+
+/** @param {unknown} outcome */
+function isSuppressionOnlyOutcome(outcome) {
+  const record = /** @type {{ recordMode?: unknown }|null|undefined} */ (outcome);
+  return record?.recordMode === SUPPRESSION_ONLY_RECORD_MODE;
+}
+
+/** @param {unknown} outcome */
+function isPublicOutcome(outcome) {
+  return !isStateOnlyOutcome(outcome) && !isSuppressionOnlyOutcome(outcome);
+}
+
+/**
+ * Manual-apply fail-closed guard for durable proposal rows crossing the v4
+ * record-mode upgrade. Hold/defend are now conflict suppressors and can never
+ * be approved. For mixed families, only an unversioned legacy row is
+ * ambiguous: v4 proposal rows are stamped when minted, so legitimate public
+ * transitions (major population movement, a real NPC goal change, or a war
+ * onset/band change) remain approvable.
+ * @param {RecordModeProposal|null|undefined} proposal
+ */
+function proposalRequiresRecordModeSupersession(proposal) {
+  const outcome = proposal?.outcome;
+  const candidateType = String(outcome?.candidateType || '');
+  if (ALWAYS_SUPERSEDED_PROPOSAL_TYPES.has(candidateType)) return true;
+  if (isStateOnlyOutcome(outcome) || isSuppressionOnlyOutcome(outcome)) return true;
+  const version = Number(proposal?.recordModeVersion);
+  return LEGACY_RECORD_MODE_CANDIDATE_TYPES.has(candidateType)
+    && (!Number.isFinite(version) || version < RECORD_MODE_PROPOSAL_VERSION);
+}
+
+/**
+ * Internal history read-model for simulation mechanics. Public/display readers
+ * intentionally consume selectedOutcomes only; domain readers must also see the
+ * the exact legacy consequence window or moving state-only receipts out of the
+ * Chronicle would alter next-tick consequence math. consequenceOutcomes is
+ * written only when the public/mechanical split exists and preserves the
+ * original selectedForApply.slice(0, 24) ordering and bound.
+ * @param {PulseHistoryRecord|null|undefined} pulseRecord
+ * @returns {PulseOutcome[]}
+ */
+function outcomesForMechanicalHistory(pulseRecord) {
+  if (Array.isArray(pulseRecord?.consequenceOutcomes)) {
+    return pulseRecord.consequenceOutcomes;
+  }
+  const selected = Array.isArray(pulseRecord?.selectedOutcomes)
+    ? pulseRecord.selectedOutcomes
+    : [];
+  return selected;
 }
 
 /** @param {any} [patch] */
@@ -45,6 +129,14 @@ function compactOutcomeForHistory(outcome = {}) {
     probability: outcome.probability ?? null,
     roll: outcome.roll ?? null,
     applyMode: outcome.applyMode || null,
+    ...(outcome.recordMode ? { recordMode: outcome.recordMode } : {}),
+    ...(outcome.recordMode === STATE_ONLY_RECORD_MODE
+      && (outcome.tierChange || outcome.powerTransfer || outcome.resourcePatch
+        || outcome.institutionPatch || outcome.condition || outcome.stressor
+        || outcome.relationshipKey || outcome.relationshipPatch
+        || outcome.proposalPayload || outcome.lifecyclePatch)
+      ? { curationClass: 'transition' }
+      : {}),
     headline: outcome.headline || 'World pulse outcome',
     summary: outcome.summary || '',
     reasons: (outcome.reasons || []).slice(0, 4),
@@ -152,7 +244,17 @@ function capPersistedRollExplanations(deterministicExplanations = [], rollExplan
 }
 
 export {
+  STATE_ONLY_RECORD_MODE,
+  SUPPRESSION_ONLY_RECORD_MODE,
+  RECORD_MODE_PROPOSAL_VERSION,
+  MAX_MECHANICAL_OUTCOMES_PER_PULSE,
+  MAX_MECHANICAL_RUMOR_SEEDS_PER_PULSE,
   clone,
+  isStateOnlyOutcome,
+  isSuppressionOnlyOutcome,
+  isPublicOutcome,
+  proposalRequiresRecordModeSupersession,
+  outcomesForMechanicalHistory,
   compactNpcPatch,
   compactOutcomeForHistory,
   compactImpactDigest,

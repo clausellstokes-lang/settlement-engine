@@ -78,10 +78,17 @@ describe('advance-to-Herald routing', () => {
   test('a completed advance remains on the changed-results Briefing address', async () => {
     harness.advanceCampaignWorld.mockResolvedValue({
       ok: true,
-      autoApplied: [],
+      autoApplied: [
+        { id: 'mechanical-earlier', recordMode: 'state_only' },
+        { id: 'suppressed-earlier', recordMode: 'suppression_only' },
+        { id: 'public-earlier' },
+      ],
+      // The final tick happened to be quiet. The toast must count the full
+      // interval aggregate while excluding its hidden record-mode lanes.
+      pulseRecord: { autoAppliedCount: 0 },
       proposals: [],
     });
-    const { hook, openInspectorAt } = setup();
+    const { hook, openInspectorAt, showToast } = setup();
 
     await act(async () => {
       await hook.result.current.performAdvanceRealm();
@@ -89,6 +96,10 @@ describe('advance-to-Herald routing', () => {
 
     expect(openInspectorAt).toHaveBeenCalledTimes(1);
     expect(openInspectorAt).toHaveBeenCalledWith('dashboard');
+    expect(showToast).toHaveBeenCalledWith(
+      'success',
+      'Realm advanced: 1 drift, 0 proposal(s)',
+    );
     expect(hook.result.current.advanceSession.phase).toBe('idle');
   });
 });

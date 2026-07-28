@@ -352,6 +352,34 @@ describe('RealmItem independent dimensions and provenance', () => {
       receiptId: null,
     });
   });
+
+  it('does not expose a mechanical audit root as a public recorded cause edge', () => {
+    const model = buildRealmItemReadModel(campaignWith({
+      stressors: [{
+        id: 'public-stressor',
+        type: 'siege',
+        sourceEventId: 'mechanical.population.ashford.12',
+      }],
+      spatialLedgers: {
+        provenance: {
+          'mechanical.population.ashford.12': {
+            parents: [],
+            type: 'population_growth',
+            tick: 12,
+            receiptClass: 'mechanical',
+          },
+        },
+      },
+    }));
+    const item = model.items.find(entry =>
+      entry.source.originKey.endsWith(':public-stressor'));
+    expect(item.cause).toMatchObject({
+      state: 'degraded',
+      available: false,
+      rootRecordId: 'mechanical.population.ashford.12',
+      receiptId: 'mechanical.population.ashford.12',
+    });
+  });
 });
 
 describe('RealmItem actions, operational truth, attention, and read state', () => {

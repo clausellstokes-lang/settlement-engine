@@ -76,7 +76,6 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // ── name-lookup / target-selection: resolves ONE institution, not a provider sum ─
   'src/domain/worldPulse/entrepotKernel.js': 'name-lookup + write — founds/looks up one institution',
-  'src/domain/worldPulse/factionCompetition.js': 'target-selection — picks one institution to suppress/capture',
   'src/domain/worldPulse/supplyKernel.js': 'name-lookup + mutation — resolves one consuming institution; stamps impairments',
   'src/domain/worldPulse/applyWorldPulse.js': 'name-lookup + mutation — finds one named institution to impair',
   'src/domain/dailyLife.js': 'name-lookup/display — first temple/market/inn for gathering-place flavour',

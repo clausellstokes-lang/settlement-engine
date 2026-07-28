@@ -5,6 +5,7 @@ import { useStore } from '../../store/index.js';
 import {
   SIMULATION_RULE_PRESETS, normalizeSimulationRules, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
 import { validateSimulationProfile } from '../../domain/worldPulse/simulationProfile.js';
+import { isPublicOutcome } from '../../domain/worldPulse/pulseHelpers.js';
 import { DomainRows, EngineWaves, WorldLawAxes } from './SimulationRulesAxes.jsx';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, RED, SP, sans } from '../theme.js';
@@ -219,6 +220,12 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
 
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;
   const previewOutcomes = previewResult?.pulseRecord?.selectedOutcomes || previewResult?.selected || [];
+  const previewCandidateCount = previewResult?.pulseRecord?.candidateCount
+    ?? previewResult?.candidates?.filter(isPublicOutcome).length
+    ?? 0;
+  const previewAppliedCount = previewResult?.pulseRecord?.autoAppliedCount
+    ?? previewResult?.autoApplied?.filter(isPublicOutcome).length
+    ?? 0;
 
   // The dependency-gating record for the CURRENT draft — coercions as data
   // (validateSimulationProfile), consumed for the honest disabled states.
@@ -569,9 +576,9 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                   gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 110px), 1fr))',
                   gap: SP.sm,
                 }}>
-                  <Metric label="Candidates" value={previewResult.pulseRecord?.candidateCount ?? previewResult.candidates?.length ?? 0} />
+                  <Metric label="Candidates" value={previewCandidateCount} />
                   <Metric label="Selected" value={previewResult.pulseRecord?.selectedCount ?? previewOutcomes.length} />
-                  <Metric label="Applied" value={previewResult.pulseRecord?.autoAppliedCount ?? previewResult.autoApplied?.length ?? 0} />
+                  <Metric label="Applied" value={previewAppliedCount} />
                   <Metric label="Proposals" value={previewResult.pulseRecord?.proposalCount ?? previewResult.proposals?.length ?? 0} />
                 </div>
                 {previewOutcomes.length > 0 && (

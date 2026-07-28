@@ -11,9 +11,9 @@ three things that were previously conflated:
 A passing process is not automatically a certification. The composed soak proves
 finite arithmetic, same-seed replay, different-seed divergence, bounded population,
 a generous serialized-state envelope, and execution in a real isolated Node worker
-thread. Contract v2 now also records and evaluates mover activity, event rhythm,
-arc polarity, state motion, neighbour propagation, succession, attention, dark
-controls, and cross-family composition.
+thread. Contract v4 also records and evaluates mover activity, public event rhythm,
+separate mechanical work, arc polarity, state motion, neighbour propagation,
+succession, attention, dark controls, and cross-family composition.
 
 The runner still never edits the committed certification manifest. Every aggregate
 therefore keeps `certificationWritten: false`; a completely passing release matrix
@@ -78,7 +78,7 @@ source-bound aggregate or if a referenced case receipt is missing.
 - executes cells sequentially so CPU contention does not corrupt timing trends;
 - stops on the first failed, malformed, or vacuous child receipt;
 - records raw yearly timings, full-realm bytes, a same-thread structured-clone
-  observation, and observed peak heap use;
+  observation, and sampled yearly peak heap use;
 - runs one additional one-year advance in an actual `node:worker_threads` isolate
   per matrix cell, importing `src/workers/advanceInterval.worker.js` and requiring
   its output hash to equal the direct domain run;
@@ -94,8 +94,10 @@ source-bound aggregate or if a referenced case receipt is missing.
 
 Each primary run additionally emits a versioned behavioral observation:
 
-- every selected outcome's type, major/minor status, broad mover family, arc
+- every public selected outcome's type, major/minor status, broad mover family, arc
   polarity, explicit causal parents, and settlement targets;
+- a separate mechanical-outcome count for state-only reducer work, which is
+  excluded from public event/major/mover/arc/causal tempo;
 - annual population, prosperity-rung, governing-faction, and normalized
   faction-power-entropy vectors;
 - pending succession proposals, actual applied attempt/completion counts, and
@@ -106,7 +108,8 @@ Each primary run additionally emits a versioned behavioral observation:
 Wall time, clone time, worker duration, and heap use are host-sensitive
 observations. Deterministic state hashes, finite-number scans, tick arithmetic,
 population bounds, worker/direct output equality, and the serialized byte ceiling
-are gates.
+are gates. The serialized-byte trend and ceiling require at least two yearly
+checkpoints; a one-year cell reports bytes but does not exercise that gate.
 
 The isolated-worker measurement is actual execution, not a structured-clone
 approximation: the receipt carries distinct parent/worker thread IDs, progress
@@ -118,7 +121,7 @@ time. Browser startup and device-specific worker duration remain unmeasured unti
 the production browser journey can exercise a representative saved realm without
 adding a test-only product API or a second simulation path.
 
-## Behavioral contract v3
+## Behavioral contract v4
 
 The machine-readable source of truth is
 `src/domain/certification/behavioralContract.js`. These gates were fixed before a
@@ -132,7 +135,7 @@ equivalent exposure.
 | Property | Release gate |
 |---|---|
 | Mover activity | Ten broad families (`pressure`, `place`, `population`, `economy`, `politics`, `war`, `faith`, `people`, `constructive`, `knowledge`) each produce at least 0.25 classified events per 100 settlement-years; each appears in the final decade of at least 25% of century cases; no family exceeds 65% of classified activity. Unknown outcomes remain unclassified rather than being forced into a passing family. |
-| Event tempo and diversity | 0.25–52 selected events per settlement-year; 0.25–20 major events per settlement-decade; at least 12 event types; effective inverse-Simpson diversity at least 4; no type exceeds 55% of events. |
+| Event tempo and diversity | 0.25–52 public selected events per settlement-year; 0.25–20 public major events per settlement-decade; at least 12 event types; effective inverse-Simpson diversity at least 4; no type exceeds 55% of events. State-only mechanical refreshes are audited separately and earn no event-tempo credit. |
 | Constructive and destructive arcs | Each polarity produces at least 0.25 explicit arc signals per 100 settlement-years, appears in at least 25% of century cases, and remains present in the final decade. Classification uses committed event vocabulary; a generic positive population delta is not promoted into an "arc." |
 | State motion | Population changes by at least 0.25% on 5% of settlement-year transitions (2% in the final decade); prosperity moves a canonical rung on 3% (1% final decade); governing identity or faction-share distance moves on 2% (1% final decade); median per-settlement normalized power-entropy range is at least 0.03. |
 | Neighbour perturbation | Three same-seed probes across at least two scale bands and two seed families. One source settlement begins at +10% population; the source is excluded from the distance. Non-source state distance must reach 0.001 by year 30, be positive at two checkpoints, and retain at least half its observed peak. Release probes are fixed at 30y/12/seed1, 30y/12/seed2, and 100y/4/seed1 (the latter compares its first 30 years); the research seed1 probe runs the full 300 years. |
@@ -151,7 +154,34 @@ The anomaly gate and the cross-family gate are intentionally paired. A busy worl
 does not earn credit for composition merely by emitting many simultaneous events:
 the outcome must name a causal parent in a different mover family.
 
-### Preliminary observer check on the launch-tail source
+Version 4 separates state motion from story tempo at the central pulse seam.
+`recordMode: "state_only"` outcomes still pass through the production reducers,
+remain in `autoApplied`, and are retained in each pulse's bounded mechanical audit,
+but their direct headline is absent from Wizard News and they do not join public
+`selected`, `majors`, or behavioral event counts. Genuinely derived transitions
+caused by that state motion remain visible. `recordMode: "suppression_only"`
+candidates first participate in normal conflict resolution, then disappear before
+tempo governance, RNG, apply, and receipts. A bounded internal consequence window
+preserves the exact pre-v4 next-tick mechanical history read while Chronicle and
+display readers continue to consume public `selectedOutcomes` only. A separate
+48-seed private replay horizon preserves delayed rumor/belief activation without
+inflating the eight-row mechanical provenance audit. Both the
+behavioral observation schema and certification contract are version 4; every
+pre-v4 receipt fails closed.
+
+Organic proposals now share one pulse-wide admission docket: 12 minor and 4 major
+slots, per-settlement ceilings of 3 minor and 1 major, one conditional same-tick
+major reserve, and square-root scaling only above 24 settlements. Candidates use
+their producer order while capacity is non-binding; contended proposal lanes
+resolve by stable identity. Intervention and blockade retry paths emit
+`proposal_capacity` when refused and leave the question eligible on a later tick.
+Existing pending rows are never rewritten. Explicit DM realm orders and authored
+resolution aftermath remain uncapped user-action paths.
+
+### Historical observer diagnostics and latest schema-v4 preliminary check
+
+These direct one-cell diagnostics are not source-bound realm-scale aggregates.
+None can earn or fail the product certificate.
 
 A one-year, four-settlement diagnostic was run after the audit-only raw
 Wizard-News capture was added. It is **not** a release-matrix cell and cannot
@@ -172,10 +202,10 @@ settlement-decade against the signed maximum of 20. It recorded 239 explicit
 cross-family edges over four ordered family pairs. Its schema-v2 count of 18
 "succession attempts" is superseded: that observer included selected-but-pending
 government proposals, which v3 now reports separately from applied attempts and
-completions. The correct next step is source-level tuning followed by the complete
-release matrix; the thresholds remain unchanged. Receipt SHA-256:
+completions. At that point, the next step was source-level tuning followed by the
+complete release matrix; the thresholds remained unchanged. Receipt SHA-256:
 `38f680d19ad993ea6902776200d056d40b6c5ccc05497dbc5cc9a1ee785b5613`
-(historical behavioral observation schema v2; not eligible under v3).
+(historical behavioral observation schema v2; not eligible under v4).
 
 The replacement v3 diagnostic remained mechanically deterministic and worker-
 identical, but it did not clear tempo: 1,210 selected outcomes and 33 majors over
@@ -185,7 +215,46 @@ equivalent unresolved question from being re-selected; this first-year count is
 therefore a set of distinct questions, not evidence of 32 failed transfers.
 Receipt SHA-256:
 `965905fbf05ac10a1a29f056aa76c1fda148ffbcb0d69e783dac4588e7cdf75f`
-(behavioral observation schema v3).
+(historical behavioral observation schema v3; not eligible under v4).
+
+The latest preliminary schema-v4 diagnostic passed its mechanical assertions: a
+52-tick primary, byte-identical 52-tick replay, divergent 52-tick comparison, and
+separate 52-tick isolated-worker check whose output matched the direct domain
+path. Top-level `passed: true` describes only those mechanical assertions; it is
+not a behavioral or release verdict. The raw observation recorded 258 public
+outcomes, 543 separate state-only mechanical outcomes, 10 public majors, 3
+pending succession proposals, 0 applied succession attempts, and 0 completions
+over four settlement-years. Compared with the historical v3 diagnostic, public
+outcomes fell from 1,210 to 258 and public majors from 33 to 10 while the v4
+observer recorded the mechanical work separately.
+
+This one-year sample, which may overweight initialization behavior, is still above
+the signed long-horizon tempo ceilings when naively annualized: 64.5 public events
+per settlement-year against 52, and 25 public majors per settlement-decade against
+20. Population and knowledge mover counts were zero, prosperity moved on 0 of 4
+annual settlement transitions, applied succession remained 0/0, and composition
+contained only one explicit cross-family edge over one ordered family pair.
+Controls, entropy range, final-decade and century behavior, scale and seed-family
+breadth, and human review were not measured. These are diagnostic findings for the
+source-bound release matrix to test, not grounds to tune against one seed and not
+a pass/fail verdict on product certification. The full release profile must
+determine whether first-year bursts amortize, whether late-decade composition
+appears, and whether all other contract properties hold. Receipt SHA-256:
+`4171eb3ce61b2831af883349418117012197f19b2f2b45b1662c0975b003e00c`
+(behavioral observation schema v4; preliminary diagnostic only).
+
+The v4 source change deliberately moved 14 whole-pulse property manifests:
+belief map, intervention, momentum, seasons, peace causality, spatial pulse,
+supply-web warfare, generosity, NPC credibility, corruption web, deity pulse,
+intel trade, information statecraft, and settlement politics. Their 42 fixture
+keys remained identical; only digest values changed, and all 60 substantive
+dormancy, lit-path, and anti-vacuity assertions stayed green. The first traced
+belief divergence is intentional: inert `strategy_hold` rows no longer become
+rumor evidence. The first traced dormant-fixture divergence is also intentional:
+state-only population refreshes still apply mechanically but no longer duplicate
+themselves in public selected/news/roll surfaces. This was an explicit, reviewed
+world-pulse recapture, not a generator-golden regeneration and not a behavioral
+certificate.
 
 ## Human Chronicle receipt
 

@@ -358,6 +358,34 @@ describe('THE RE-MINT CLOSED: intervention_ordered mints a pending proposal unde
     const mintedAgain = (again.worldState.proposals || []).filter((/** @type {any} */ p) => p.outcome?.candidateType === 'intervention_ordered');
     expect(mintedAgain).toHaveLength(1);
 
+    // Organic re-mints share the pulse-wide major lane. A saturated docket
+    // defers visibly and leaves every existing pending row untouched.
+    const saturatedState = {
+      ...worldState,
+      proposals: Array.from({ length: 4 }, (_, index) => ({
+        id: `held-intervention-${index}`,
+        status: 'pending',
+        outcome: {
+          id: `held-intervention-outcome-${index}`,
+          candidateType: 'intervention_ordered',
+          targetSaveId: `other-patron-${index}`,
+          applyMode: 'proposal',
+        },
+      })),
+    };
+    const blocked = advanceIntervention({
+      snapshot,
+      worldState: saturatedState,
+      graph: snapshot.regionalGraph,
+      rng: null,
+      tick: 12,
+      now: '2026-01-01T00:00:00.000Z',
+    });
+    expect(blocked.changed).toBe(false);
+    expect(blocked.worldState).toBe(saturatedState);
+    expect(blocked.worldState.proposals).toEqual(saturatedState.proposals);
+    expect(blocked.deferrals.some((/** @type {any} */ d) => d.reason === 'proposal_capacity')).toBe(true);
+
     // APPROVAL: the same arm the DM's own ORDER_INTERVENTION uses commits the
     // record in the mover's own shape.
     const campaign = { id: 'c1', worldState: r.worldState, regionalGraph: snapshot.regionalGraph, wizardNews: { entries: [], currentTick: 12 } };

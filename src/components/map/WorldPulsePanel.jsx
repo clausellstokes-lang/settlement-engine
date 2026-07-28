@@ -133,7 +133,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       : routineMajorApproval
         ? 'Routine life runs itself; the campaign-altering turns (a war declaration, a coup) wait here for your word. They stand down on their own if left unanswered.'
         : null;
-  const rolls = latestPulse?.rollExplanations || [];
+  const rolls = (latestPulse?.rollExplanations || [])
+    .filter(roll => !['state_only', 'suppression_only'].includes(roll?.recordMode));
   const resolved = latestPulse?.resolvedStressors || [];
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
   const impactDigest = latestPulse?.impactDigest || [];

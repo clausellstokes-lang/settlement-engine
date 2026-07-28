@@ -33,6 +33,7 @@
  * rides the lazy engine chunk, never the eager first-paint closure.
  */
 import { ROADS_NEWS } from '../../data/roadsProse.js';
+import { humanizeContextSignature } from '../display/humanizeEngineTokens.js';
 
 /**
  * FNV-1a 32-bit — the pure variant-selection hash (no rng, no Date). Matches the
@@ -130,10 +131,10 @@ export const NPC_GOAL_NEWS = Object.freeze({
       (x) => `New conditions in the settlement have turned ${x.name}'s effort toward another end.`,
     ],
     contextReason: [
-      (x) => `Context changed from ${x.previous} to ${x.next}.`, // canonical
-      (x) => `The settlement context moved from ${x.previous} to ${x.next}.`,
-      (x) => `${x.name}'s recorded circumstances changed from ${x.previous} to ${x.next}.`,
-      (x) => `A new context, ${x.next}, displaced the old footing, ${x.previous}.`,
+      (x) => `Context changed from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`, // canonical
+      (x) => `The settlement context moved from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`,
+      (x) => `${x.name}'s recorded circumstances changed from ${humanizeContextSignature(x.previous)} to ${humanizeContextSignature(x.next)}.`,
+      (x) => `A new context, ${humanizeContextSignature(x.next)}, displaced the old footing, ${humanizeContextSignature(x.previous)}.`,
     ],
     personalityReason: [
       (x) => `Personality remains anchored by ideal ${x.ideal} and flaw ${x.flaw}.`, // canonical

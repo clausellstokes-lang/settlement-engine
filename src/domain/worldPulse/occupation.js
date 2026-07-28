@@ -62,6 +62,13 @@ import { stablePart } from './worldState.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { isLiveWarFront } from './warFrontReads.js';
 import {
+  occupationBurdenClearanceOutcome,
+  occupationContext,
+  recurringOccupationConditionRecordMode,
+  storedOccupierBenefit,
+  warSpoilsEndedOutcome,
+} from './occupationRecordMode.js';
+import {
   normalizeRelationshipEdge,
   relationshipKeyFromEdge,
   ensureRelationshipState,
@@ -543,9 +550,9 @@ function occupierStillPresent(graph, deployments, occupierId, occupiedId) {
 /**
  * A condition outcome (the coup-verdict / war-layer shape). Flows through
  * applyWorldPulseOutcomes UNCHANGED.
- * @param {{ id: string, archetype: string, targetSaveId: string, severity: number, headline: string, summary: string, reasons: string[], tick: number, sourceEventTargetId: string, causes: any[] }} args
+ * @param {{ id: string, archetype: string, targetSaveId: string, severity: number, headline: string, summary: string, reasons: string[], tick: number, sourceEventTargetId: string, causes: any[], recordMode?: string }} args
  */
-function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes }) {
+function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes, recordMode }) {
   return {
     id,
     type: 'condition',
@@ -559,6 +566,7 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
     headline,
     summary,
     reasons,
+    ...(recordMode ? { recordMode } : {}),
     condition: {
       archetype,
       severity: clamp01(severity),
@@ -899,6 +907,43 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
   // ── Step 4: the CAPPED/DELAYED/CONDITIONAL benefit + the burden. ──────────────────
   const { perOccupier: benefit } = computeOccupierBenefit(occupations, itemFor);
   const burden = computeOccupierBurden(occupations);
+  const previousBurden = computeOccupierBurden(existing);
+
+  // A producer that falls silent still owns one real transition: its renewal ended.
+  // Emit one aggregate public receipt per occupier on that edge, without changing the
+  // bounded expiry tail already carried by the active condition.
+  const previousOccupierIds = [...new Set(Object.values(existing)
+    .map(rec => rec?.occupierId)
+    .filter(id => id != null)
+    .map(String))].sort(codepoint);
+  for (const occupierId of previousOccupierIds) {
+    if (!snapshot?.byId?.has?.(occupierId)) continue;
+    const occupierName = nameFor(occupierId);
+    const previousCount = occupationContext(existing, occupierId).length;
+    const nextCount = occupationContext(occupations, occupierId).length;
+    const previousBenefit = storedOccupierBenefit(existing, occupierId);
+    const nextBenefit = clamp01(num(benefit[occupierId]));
+
+    const burdenClearance = occupationBurdenClearanceOutcome({
+      occupierId,
+      occupierName,
+      previousCount,
+      nextCount,
+      previousSeverity: clamp01(num(previousBurden[occupierId])),
+      tick: t,
+    });
+    if (burdenClearance) outcomes.push(burdenClearance);
+
+    const spoilsEnded = warSpoilsEndedOutcome({
+      occupierId,
+      occupierName,
+      previousBenefit,
+      nextBenefit,
+      previousSeverity: clamp01(previousBenefit * BENEFIT_RELIEF_SCALE),
+      tick: t,
+    });
+    if (spoilsEnded) outcomes.push(spoilsEnded);
+  }
 
   // ── Step 5: emit per-occupier burden + war_spoils (capped benefit relief). ────────
   // Iterate the union of occupiers (codepoint-sorted) so each occupier gets one of each.
@@ -921,6 +966,15 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         tick: t,
         sourceEventTargetId: occupierId,
         causes: [{ source: occupierId, effect: 'occupation_burden', reason: `${occupierName} garrisons and administers ${occCount} occupied settlement${occCount === 1 ? '' : 's'}.` }],
+        recordMode: recurringOccupationConditionRecordMode({
+          snapshot,
+          archetype: 'occupation_burden',
+          targetSaveId: occupierId,
+          severity: burdenSeverity,
+          previousOccupations: existing,
+          nextOccupations: occupations,
+          previousProducerActive: occupationContext(existing, occupierId).length > 0,
+        }),
       }));
     }
 
@@ -929,6 +983,15 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     const benefitYield = clamp01(num(benefit[occupierId]));
     if (benefitYield > 0) {
       const relief = clamp01(benefitYield * BENEFIT_RELIEF_SCALE);
+      const recordMode = recurringOccupationConditionRecordMode({
+        snapshot,
+        archetype: 'war_spoils',
+        targetSaveId: occupierId,
+        severity: relief,
+        previousOccupations: existing,
+        nextOccupations: occupations,
+        previousProducerActive: storedOccupierBenefit(existing, occupierId) > 0,
+      });
       outcomes.push({
         id: `world_outcome.war_spoils.${stablePart(occupierId)}.${t}`,
         type: 'condition',
@@ -942,6 +1005,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
         headline: `${occupierName} draws strength from its occupations`,
         summary: `Tribute, levies, and materiel from stabilized occupations sustain ${occupierName}'s war effort.`,
         reasons: [`Occupier benefit ${benefitYield.toFixed(2)} (HARD-CAPPED at ${OCCUPIER_BENEFIT_CONTAINMENT}); relief ${relief.toFixed(2)} eases war exhaustion.`],
+        ...(recordMode ? { recordMode } : {}),
         // war_spoils is the INVERSE of war_exhaustion — it RELIEVES economic_capacity. The
         // apply path treats it as an easing condition (status 'easing'); it feeds the
         // homeostasis dial the OTHER way (extending endurance), bounded by the cap.

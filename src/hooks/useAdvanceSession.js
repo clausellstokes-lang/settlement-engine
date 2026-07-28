@@ -54,6 +54,22 @@ function subscribeAdvanceProgress(onTick) {
 
 const IDLE = { phase: 'idle', ticksDone: 0, ticksTotal: 0 };
 
+// Completed interval results aggregate auto-applies from every tick, while
+// pulseRecord describes only the final tick. Count the aggregate here without
+// importing the heavy pulse-domain chunk; record-mode values are a frozen
+// wire contract. Older/sparse results that omit autoApplied retain the final
+// pulse's already-public count as a safe fallback.
+function publicAutoAppliedCount(result) {
+  if (Array.isArray(result?.autoApplied)) {
+    return result.autoApplied.filter(outcome => (
+      outcome?.recordMode !== 'state_only'
+      && outcome?.recordMode !== 'suppression_only'
+    )).length;
+  }
+  const fallback = Number(result?.pulseRecord?.autoAppliedCount);
+  return Number.isFinite(fallback) && fallback >= 0 ? Math.floor(fallback) : 0;
+}
+
 // Fold one orchestrator progress beat into the session. Running-phase only: a
 // stray/late event must never resurrect an idle session or overwrite the
 // paused cursor's counts (the pause result is authoritative there).
@@ -123,7 +139,7 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
           result.cloudPending ? 'error' : 'success',
           result.cloudPending
             ? 'The realm advanced here, but the change has not finished saving to the cloud. Reload to confirm once your connection recovers.'
-            : `Realm advanced: ${result.autoApplied.length} drift, ${result.proposals.length} proposal(s)`,
+            : `Realm advanced: ${publicAutoAppliedCount(result)} drift, ${result.proposals.length} proposal(s)`,
         );
       } else {
         if (result?.reason) console.warn('[WorldMap] advance realm reason:', result.reason);

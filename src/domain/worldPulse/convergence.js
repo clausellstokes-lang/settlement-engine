@@ -75,6 +75,11 @@ import { foreignGripOf, obligationDebt01, directionBias } from './corruptionWeb.
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
 import { proposalIdFor, upsertProposal } from './worldState.js';
+import {
+  buildProposalDocket,
+  proposalDocketAllows,
+  recordProposalAdmission,
+} from './proposalAdmission.js';
 // THE MERCENARY CLAUSE (owner ruling, design §4): a mercenary-related institution reinforces
 // a force deployed FROM its settlement. Detection rides the ONE facet chokepoint (declared
 // facet) OR the established hireable-force name/tag pattern.
@@ -964,11 +969,20 @@ export function liveCoupContests(worldState, snapshot) {
  * @param {Object} args
  * @param {Snapshot} args.snapshot @param {WorldStateLike} args.worldState @param {Graph} [args.graph] @param {Rng} args.rng
  * @param {number} args.tick @param {string|null} [args.now]
- * @returns {{ worldState: Record<string, unknown>, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>> }}
+ * @param {ReturnType<typeof buildProposalDocket>|null} [args.proposalDocket]
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>>, proposalDocket?: ReturnType<typeof buildProposalDocket> }}
  */
-export function advanceIntervention({ snapshot, worldState, graph = null, rng, tick, now = null }) {
+export function advanceIntervention({ snapshot, worldState, graph = null, rng, tick, now = null, proposalDocket = null }) {
+  const threadsProposalDocket = proposalDocket != null;
+  let nextProposalDocket = proposalDocket || buildProposalDocket(worldState);
   if (!interventionActive(worldState)) {
-    return { worldState, changed: false, newsEntries: [], deferrals: [] };
+    return {
+      worldState,
+      changed: false,
+      newsEntries: [],
+      deferrals: [],
+      ...(threadsProposalDocket ? { proposalDocket: nextProposalDocket } : {}),
+    };
   }
   const nowTick = Math.max(0, Math.floor(num(tick, 0)));
   // Relationship edges: the graph the war layer reads, falling back to the snapshot
@@ -1099,11 +1113,23 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
             args: { patronId: best.patronId, targetId, side: best.side, invited, strength, motive: best.motive },
           },
         };
-        mintedProposals.push({
-          id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
-          tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
-          severity: outcome.severity, reasons: outcome.reasons,
-        });
+        if (proposalDocketAllows(nextProposalDocket, outcome)) {
+          mintedProposals.push({
+            id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
+            tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
+            severity: outcome.severity, reasons: outcome.reasons,
+          });
+          nextProposalDocket = recordProposalAdmission(nextProposalDocket, outcome);
+        } else {
+          deferrals.push({
+            patronId: best.patronId,
+            targetId,
+            motive: best.motive,
+            side: best.side,
+            reason: 'proposal_capacity',
+          });
+          continue;
+        }
       }
       deferrals.push({ patronId: best.patronId, targetId, motive: best.motive, side: best.side, reason: 'dm_approval' });
       continue;
@@ -1184,7 +1210,13 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
   }
 
   if (!mutated && !obligationMints.length && !mintedProposals.length) {
-    return { worldState, changed: false, newsEntries: [], deferrals };
+    return {
+      worldState,
+      changed: false,
+      newsEntries: [],
+      deferrals,
+      ...(threadsProposalDocket ? { proposalDocket: nextProposalDocket } : {}),
+    };
   }
   const hasRecords = Object.keys(next).length > 0;
   let nextWorldState = hasRecords
@@ -1208,7 +1240,13 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
   for (const proposal of mintedProposals) {
     nextWorldState = /** @type {Record<string, unknown>} */ (upsertProposal(nextWorldState, proposal));
   }
-  return { worldState: nextWorldState, changed: true, newsEntries, deferrals };
+  return {
+    worldState: nextWorldState,
+    changed: true,
+    newsEntries,
+    deferrals,
+    ...(threadsProposalDocket ? { proposalDocket: nextProposalDocket } : {}),
+  };
 }
 
 /** Did the coup at `targetId` FALL (challenger prevailed) at/after `sinceTick`? Read from

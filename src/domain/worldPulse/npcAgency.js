@@ -886,6 +886,8 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     + action.severityBias,
   );
   const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);
+  // A repeated automatic, non-targeted action advances gauges but expresses no new
+  // choice. Proposals and moves against named rivals remain public events.
   const nextRank = actionFamily === 'seek_promotion' ? Math.min(3, (state.dotRank || 1) + 1) : state.dotRank;
 
   return {
@@ -899,7 +901,7 @@ function candidateForAction(state, actionFamily, pressure, tick, rivalTarget = n
     factionId: state.factionId,
     severity,
     probability: Math.min(0.48, 0.06 + severity * 0.36 + state.ambition * 0.08),
-    applyMode: proposal ? 'proposal' : 'auto',
+    applyMode: proposal ? 'proposal' : 'auto', ...(!proposal && !subject && state.lastAction === actionFamily ? { recordMode: 'state_only' } : {}),
     headline: `${state.name} may ${actionPhrase}`,
     summary: `${state.name}'s ${state.shortGoal.replace(/_/g, ' ')} goal can advance through ${actionPhrase}.`,
     reasons: [
@@ -1066,7 +1068,9 @@ function npcGoalRebranch(state, context, tick) {
     factionId: state.factionId,
     severity: 0.44,
     probability: 1,
-    applyMode: 'auto',
+    applyMode: 'auto', ...(goals.shortGoal === state.shortGoal && goals.longGoal === state.longGoal ? { recordMode: 'state_only' } : {}),
+    // A context signature/reset is still applied and audited, but only an actual
+    // change of short/long intent earns a Chronicle beat.
     headline: pickLine(NPC_GOAL_NEWS.rebranch.headline, `${state.npcId}:${tick}:rebranch:headline`, { name: state.name }),
     summary: pickLine(NPC_GOAL_NEWS.rebranch.summary, `${state.npcId}:${tick}:rebranch:summary`, { name: state.name }),
     reasons: [

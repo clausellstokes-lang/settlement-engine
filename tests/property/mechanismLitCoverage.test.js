@@ -156,11 +156,6 @@ const LIT_COVERED_BY = {
     evidence: 'resolveRelationshipHierarchy',
     note: 'drives both exports via the index barrel re-export',
   },
-  relationshipMemory: {
-    file: 'tests/domain/relationshipMemory.test.js',
-    evidence: 'refreshRelationshipMemory',
-    note: 'the dedicated lit suite imports the module’s exports via the index barrel',
-  },
 };
 
 // ── AXIS 2 denominator: every simulation-rules `<x>Enabled` flag ─────────────

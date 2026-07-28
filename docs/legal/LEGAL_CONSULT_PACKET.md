@@ -4,7 +4,7 @@
 
 # T10 LEGAL CONSULT PACKET — SettlementForge
 
-**Two lanes exist and they differ materially.** The Desktop checkout `/Users/cstokes/Desktop/settlement-engine` (the "ledger", branch `review-fixes-2026-07-08`, 136 migrations, 17 edge functions) is **behind**. Everything legally material — the founder-transfer machine, the deletion worker, migration 179, and all three legal drafts — lives only in the **minifold worktree**: `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold` (branch `claude/composite-r4`, HEAD `2e037f62`, 188 migrations, 31 edge functions). **Bring minifold to the consult.** Paths below are minifold unless marked LEDGER.
+**Two lanes exist and they differ materially.** The Desktop checkout `/Users/cstokes/Desktop/settlement-engine` (the "ledger", branch `review-fixes-2026-07-08`, 136 migrations, 17 edge functions) is **behind**. Everything legally material — the founder-transfer machine, the deletion worker, migration 179, and all three legal drafts — lives only in the **minifold worktree**: `/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/minifold` (branch `claude/composite-r4`; 192 migration files and 32 edge-function directories as counted 2026-07-28). **Bring minifold to the consult and record its then-current `git rev-parse HEAD`; do not rely on a packet-baked commit hash while the launch tail is moving.** Paths below are minifold unless marked LEDGER.
 
 ---
 

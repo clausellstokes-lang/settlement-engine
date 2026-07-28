@@ -42,6 +42,7 @@ import { stanceOf } from './deityStance.js';
 import { chaos01 } from './deityAxes.js';
 import { normalizeStressor } from './stressors.js';
 import { stablePart } from '../region/graph.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 
 /** @typedef {{ alignmentAxis?: string, lawAxis?: string, name?: string, _deityRef?: string }} DeitySnapshot */
 /** @typedef {{ localMult: number, realmMult: number }} AmplifierTag */
@@ -101,7 +102,7 @@ export function betrayalCooldownPairs(worldState, tick) {
   const out = new Set();
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   for (const rec of history) {
-    for (const o of (rec?.selectedOutcomes || [])) {
+    for (const o of outcomesForMechanicalHistory(rec)) {
       if (o?.ruleId !== 'religious_pact_betrayal') continue;
       const key = o?.metadata?.pairKey;
       if (!key) continue;
@@ -127,7 +128,7 @@ export function pactCooldownPairs(worldState, tick) {
   const out = new Set();
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   for (const rec of history) {
-    for (const o of (rec?.selectedOutcomes || [])) {
+    for (const o of outcomesForMechanicalHistory(rec)) {
       if (o?.ruleId !== 'religious_pact_formation') continue;
       const key = o?.metadata?.pairKey;
       if (!key) continue;
@@ -163,7 +164,7 @@ export function footholdCooldownKeys(worldState, tick) {
   const out = new Set();
   const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
   for (const rec of history) {
-    for (const o of (rec?.selectedOutcomes || [])) {
+    for (const o of outcomesForMechanicalHistory(rec)) {
       if (o?.ruleId !== 'religious_targeted_foothold') continue;
       const m = o?.metadata;
       if (!m || m.settlementId == null || m.rivalRef == null) continue;

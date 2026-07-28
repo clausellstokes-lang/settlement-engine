@@ -91,7 +91,7 @@ const SOURCE_ANCHORS = Object.freeze({
   stressor_escalation: "applyMode: severity >= 0.78 ? 'proposal' : 'auto'",
   relationship_evolution: 'applyMode: severity >= 0.72 ? "proposal" : "auto"',
   // severity-gated, newly-mapped sites (each distinct from the families above).
-  faction_institution_capture: "applyMode: severity >= 0.68 || criminalSuppression ? 'proposal' : 'auto'",
+  faction_institution_capture: "applyMode: asksForApproval ? 'proposal' : 'auto'",
   faction_rival_power_contest: "applyMode: severity >= 0.7 ? 'proposal' : 'auto'",
   // A SECOND stressor gate (pressure-born birth), distinct from stressor_escalation.
   stressor_birth: "const major = pressure.score >= 0.78 || ['occupation', 'magic_deadzone', 'siege', 'coup_detat'].includes(type);",
@@ -209,7 +209,7 @@ describe('change-authority contract — newly-mapped sites carry their live auth
   test('evaluateWorldPulseRules routes all candidates through authorityFor', () => {
     const src = sourceFor('candidateEvents.js');
     expect(src).toContain("authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode)");
-    expect(src).toContain("resolveCandidateConflicts(routed, context.budgets || {})");
+    expect(src).toContain("resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {})");
   });
 
   // The relationship rules have TWO distinct gates too: labelProposal (always

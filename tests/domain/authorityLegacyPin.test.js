@@ -3,19 +3,26 @@
  * candidate families (pressure_event, faction_competition, stressor_escalation,
  * relationship_evolution — changeAuthorityPolicy.js names them) plus every
  * other candidate family preserve their pre-CL0 applyMode under legacy rules.
- * The initial no-pending tick remains byte-identical per flag value.
+ * The initial no-pending tick pins authority and applied/proposed partitions.
  *
  * tests/fixtures/cl0-rogue-authority-pin.json was captured at HEAD
  * (2026-07-11, pre-CL0): a fixed 3-settlement crisis fixture advanced 4 real
  * one-week ticks under majorChangesRequireProposal true AND false, recording
  * every rollExplanation (candidate id/type/family/severity/probability/roll/
  * passed/applyMode) and the selected/auto/proposal partitions. The post-CL0
- * engine — with authorityFor routed through every family — must replay the
- * FIRST tick of both runs deep-equal. Later ticks now intentionally diverge
+ * engine — with authorityFor routed through every family — must preserve the
+ * FIRST tick's legacy authority decisions and applied/proposed partitions.
+ * Later ticks now intentionally diverge
  * because the shared pending-proposal hold guard removes an already-asked
  * question before conflict selection, allowing a distinct question to take its
- * place. The first tick has no pending proposal and therefore remains the clean
- * constitutional pin for authority routing itself: the rogue families'
+ * place. Record-mode v4 also deliberately removes exact mechanical refreshes
+ * from public `selected`/roll surfaces while retaining them in `autoApplied`,
+ * and the bounded docket may decline to roll public questions it cannot admit.
+ * Those two contracts have their own focused tests and must not force a blanket
+ * re-record of this historical fixture. The first tick therefore remains the
+ * constitutional pin for authority routing itself: every still-public
+ * candidate must retain its pinned applyMode, and the actual applied/proposed
+ * partitions remain exact. The rogue families'
  * severity-only escalation is their legacy default under BOTH routine (flag
  * on) and full (flag off) autonomy.
  *
@@ -131,6 +138,40 @@ function runFixture(rules, ticks = 4) {
   return perTick;
 }
 
+/**
+ * Preserve what the historical fixture constitutionally proves after v4 split
+ * public Chronicle work from mechanical work:
+ *   - every candidate still admitted to the public roll surface existed in the
+ *     pre-CL0 fixture with the same rule family/id and applyMode;
+ *   - the actual auto-applied and proposal partitions remain byte-exact.
+ *
+ * Missing public roll rows are governed by the record-mode and docket suites,
+ * not silently accepted here; anti-vacuity below still requires every rogue
+ * family to remain exercised in the historical source fixture.
+ */
+function expectPinnedAuthorityAndApply(currentTick, pinnedTick) {
+  const pinnedRolls = new Map(
+    pinnedTick.rollExplanations.map(row => [row.candidateId, row]),
+  );
+  for (const row of currentTick.rollExplanations) {
+    const prior = pinnedRolls.get(row.candidateId);
+    expect(prior, `${row.candidateId} must exist in the historical authority pin`).toBeTruthy();
+    expect({
+      candidateType: row.candidateType,
+      ruleId: row.ruleId,
+      ruleFamily: row.ruleFamily,
+      applyMode: row.applyMode,
+    }).toEqual({
+      candidateType: prior.candidateType,
+      ruleId: prior.ruleId,
+      ruleFamily: prior.ruleFamily,
+      applyMode: prior.applyMode,
+    });
+  }
+  expect(currentTick.autoAppliedIds).toEqual(pinnedTick.autoAppliedIds);
+  expect(currentTick.proposalIds).toEqual(pinnedTick.proposalIds);
+}
+
 describe('CL-0 (b) — the rogue families replay HEAD byte-exactly under legacy rules', () => {
   test('the pin actually exercises the rogue families in both modes (anti-vacuity)', () => {
     const families = new Set();
@@ -145,22 +186,32 @@ describe('CL-0 (b) — the rogue families replay HEAD byte-exactly under legacy 
     expect(families).toContain('faction:proposal');        // faction families
   });
 
-  test('legacy flag ON (politicalAutonomy routine): first-tick candidates + applyModes stay identical to HEAD', () => {
-    expect(runFixture({ majorChangesRequireProposal: true }, 1)).toEqual(pin.flagOn.slice(0, 1));
+  test('legacy flag ON (politicalAutonomy routine): first-tick authority and applied partitions stay pinned', () => {
+    expectPinnedAuthorityAndApply(
+      runFixture({ majorChangesRequireProposal: true }, 1)[0],
+      pin.flagOn[0],
+    );
   });
 
-  test('legacy flag OFF (politicalAutonomy full): first-tick candidates + applyModes stay identical to HEAD', () => {
-    expect(runFixture({ majorChangesRequireProposal: false }, 1)).toEqual(pin.flagOff.slice(0, 1));
+  test('legacy flag OFF (politicalAutonomy full): first-tick authority and applied partitions stay pinned', () => {
+    expectPinnedAuthorityAndApply(
+      runFixture({ majorChangesRequireProposal: false }, 1)[0],
+      pin.flagOff[0],
+    );
   });
 
-  test('an explicit routine profile replays the first flag-ON tick byte-exactly', () => {
+  test('an explicit routine profile replays the current first flag-ON tick byte-exactly', () => {
     // Materializing the profile at its legacy-equivalent value changes the
     // STORED rules but not one candidate, roll, or applyMode.
-    expect(runFixture({ majorChangesRequireProposal: true, politicalAutonomy: 'routine' }, 1)).toEqual(pin.flagOn.slice(0, 1));
+    expect(runFixture(
+      { majorChangesRequireProposal: true, politicalAutonomy: 'routine' },
+      1,
+    )).toEqual(runFixture({ majorChangesRequireProposal: true }, 1));
   });
 
-  test('an explicit full profile replays the first flag-OFF tick byte-exactly', () => {
-    expect(runFixture({ politicalAutonomy: 'full' }, 1)).toEqual(pin.flagOff.slice(0, 1));
+  test('an explicit full profile replays the current first flag-OFF tick byte-exactly', () => {
+    expect(runFixture({ politicalAutonomy: 'full' }, 1))
+      .toEqual(runFixture({ majorChangesRequireProposal: false }, 1));
   });
 });
 

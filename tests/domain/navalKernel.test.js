@@ -185,6 +185,42 @@ describe('W-NAVY Stage 4 — the blockade (mint, authority-routing, lift)', () =
     expect(anyDefer).toBe(true); // the deferral is visible (not a silent drop)
   });
 
+  it('a full organic major lane defers blockade approval without touching pending rows', () => {
+    const d = digest();
+    const proposals = Array.from({ length: 4 }, (_, index) => ({
+      id: `held-major-${index}`,
+      status: 'pending',
+      outcome: {
+        id: `held-major-outcome-${index}`,
+        candidateType: 'intervention_ordered',
+        targetSaveId: `other-seat-${index}`,
+        applyMode: 'proposal',
+      },
+    }));
+    const ws = {
+      spatialCanonVersion: 1,
+      spatialDigest: d,
+      simulationRules: { navalEnabled: true, politicalAutonomy: 'dm_only' },
+      deployments: {},
+      proposals,
+    };
+    const out = advanceNaval({
+      snapshot: navySnapshot,
+      worldState: ws,
+      digest: d,
+      graph: hostileGraph,
+      rng: createPRNG('blk').fork('naval'),
+      tick: 5,
+      now: NOW,
+    });
+
+    expect(out.changed).toBe(false);
+    expect(out.worldState).toBe(ws);
+    expect(out.worldState.proposals).toEqual(proposals);
+    expect(out.deferrals.some((row) => row.reason === 'proposal_capacity')).toBe(true);
+    expect(out.deferrals.some((row) => row.reason === 'dm_approval')).toBe(false);
+  });
+
   it('LIFT-THE-BLOCKADE: a relief fleet that beats the blockading fleet drops the blockade record', () => {
     const d = digest();
     const ws = {

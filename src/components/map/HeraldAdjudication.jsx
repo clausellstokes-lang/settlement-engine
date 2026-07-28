@@ -391,13 +391,17 @@ export default function HeraldAdjudication({
     ? canonicalResolvedRows(canonicalItems)
     : sortResolvedLog([
       ...(worldState.proposals || [])
-        .filter(p => ['applied', 'dismissed', 'refused'].includes(p.status) && touchesFocus(p))
+        .filter(p => ['applied', 'dismissed', 'refused', 'superseded'].includes(p.status) && touchesFocus(p))
         .map(p => ({
           id: `prop-${p.id}`,
           headline: p.headline || 'A decision',
-          by: p.status === 'refused' ? 'refused by the realm' : `${p.status} by you`,
+          by: p.status === 'refused'
+            ? 'refused by the realm'
+            : p.status === 'superseded'
+              ? 'superseded by upgrade'
+              : `${p.status} by you`,
           tick: p.tick,
-          recordedTime: recordedTime(p.updatedAt ?? p.appliedAt ?? p.dismissedAt),
+          recordedTime: recordedTime(p.updatedAt ?? p.appliedAt ?? p.dismissedAt ?? p.supersededAt),
         })),
       ...((latestPulse?.selectedOutcomes || [])
         .filter(o => o.applyMode !== 'proposal' && (o.significance === 'major' || (o.severity ?? 0) >= 0.72) && touchesFocus(o))
@@ -451,7 +455,7 @@ export default function HeraldAdjudication({
       const heading = text(row.item?.headline || row.proposal?.headline) || proposalId;
       const accepted = action === 'dismiss'
         ? status === 'dismissed'
-        : status === 'applied' || status === 'refused';
+        : status === 'applied' || status === 'refused' || status === 'superseded';
       if (!accepted) {
         setActionError(t('errors.proposalReceiptMissing'));
         return;
@@ -461,6 +465,8 @@ export default function HeraldAdjudication({
         ? `Dismissed “${heading}”. The authoritative proposal is recorded as dismissed.`
         : status === 'refused'
           ? `“${heading}” was not applied. The authoritative proposal is recorded as refused.`
+          : status === 'superseded'
+            ? `“${heading}” was not applied. An upgrade made this proposal obsolete, so it is recorded as superseded.`
           : `Applied “${heading}”. The authoritative proposal is recorded as applied.`;
       setActionReceipt({ proposalId, status, message });
       setLocallyResolvedProposalIds(previous => {

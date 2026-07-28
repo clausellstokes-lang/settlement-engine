@@ -12,7 +12,8 @@
  *      projected to a MECHANICAL summary (tick + the pulseHistory structure + the
  *      provenance ledger, which is null when dormant), ORACLE-NORMALIZED + hashed.
  *   2. A dormancy CONTRACT: the gate absent adds NO 'provenance' ledger.
- *   3. LIT-PATH ANTI-VACUITY: the gate ON populates the ledger with recorded edges,
+ *   3. LIT-PATH ANTI-VACUITY: the gate ON populates public cause edges plus
+ *      mechanically-tagged state-only roots,
  *      AND the pulseHistory is IDENTICAL to the dormant run (the writer is additive-
  *      only — it never perturbs the pulse record). A pin that never fires is worthless.
  *
@@ -162,14 +163,24 @@ describe('provenance ledger — lit-path anti-vacuity (the recorded edges appear
     expect(led, 'the provenance ledger materializes when lit').toBeTruthy();
     const ids = Object.keys(led);
     expect(ids.length, 'recorded edges accumulate').toBeGreaterThan(0);
-    // Every entry is structural — parent id(s), a type, a tick; no prose/PII keys.
+    const parentEdgeCount = ids.filter(id => led[id].parents?.length > 0).length;
+    const mechanicalCount = ids.filter(id => led[id].receiptClass === 'mechanical').length;
+    // Every entry is structural — parent id(s), a type, a tick, and only the
+    // conditional mechanical class marker; no prose/PII keys.
     for (const id of ids.slice(0, 20)) {
       expect(Array.isArray(led[id].parents)).toBe(true);
-      expect(led[id].parents.length).toBeGreaterThan(0);
       expect(typeof led[id].type).toBe('string');
       expect(Number.isFinite(led[id].tick)).toBe(true);
-      expect(Object.keys(led[id]).sort()).toEqual(['parents', 'tick', 'type']);
+      if (led[id].parents.length === 0) expect(led[id].receiptClass).toBe('mechanical');
+      if (led[id].receiptClass === 'mechanical') {
+        expect(Object.keys(led[id]).sort())
+          .toEqual(['parents', 'receiptClass', 'tick', 'type']);
+      } else {
+        expect(Object.keys(led[id]).sort()).toEqual(['parents', 'tick', 'type']);
+      }
     }
+    expect(parentEdgeCount, 'at least one real cause edge exists').toBeGreaterThan(0);
+    expect(mechanicalCount, 'state-only audit roots exist').toBeGreaterThan(0);
   }, 30_000);
 
   it('gate ON is ADDITIVE-ONLY: the pulseHistory is identical to the dormant run', () => {

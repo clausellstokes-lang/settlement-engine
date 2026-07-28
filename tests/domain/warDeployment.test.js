@@ -161,8 +161,40 @@ describe('war layer — deployment + drain', () => {
     const kinds = war.outcomes.map(o => o.candidateType).sort();
     expect(kinds).toEqual(['army_deployed', 'strategy_deploy', 'war_drain']);
     const drain = war.outcomes.find(o => o.candidateType === 'war_drain');
+    const deployed = war.outcomes.find(o => o.candidateType === 'army_deployed');
     expect(drain.condition.archetype).toBe('war_drain');
     expect(drain.condition.severity).toBeGreaterThan(0);
+    // No persisted WAR_LAYER condition exists yet: both are onset beats.
+    expect(drain.recordMode).toBeUndefined();
+    expect(deployed.recordMode).toBeUndefined();
+  });
+
+  test('a fresh age-0 deployment keeps its first conscription visible and conserved', () => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = {
+      settlementIds: ['strong', 'weak'],
+      edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
+      relationshipStates: { 'edge.strong.weak': { relationshipType: 'hostile' } },
+    };
+    const rules = { warLayerEnabled: true, warEconomyDrainEnabled: true };
+    const snap = snapshotFor(warCampaign(rules, {
+      edges,
+      extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } } },
+    }), saves);
+    const war = evaluateWarLayer({
+      snapshot: snap,
+      worldState: snap.worldState,
+      rng: createPRNG('r'),
+      tick: 5,
+      now: NOW,
+      rules,
+    });
+    const conscription = war.outcomes.find(o => o.candidateType === 'war_conscription');
+
+    expect(war.deployments.strong.deploymentAge).toBe(0);
+    expect(conscription.recordMode).toBeUndefined();
+    expect(-conscription.populationDeltas[0].delta)
+      .toBe(war.deployments.strong.deployedPopulation);
   });
 
   // Landed W2b causalState wave — needs causalState economic_capacity system variable

@@ -82,6 +82,7 @@ import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
+import { recurringWarConditionRecordMode, warConditionOutcome, warExhaustionClearanceOutcome } from './warRecordMode.js';
 // M2b: the supply-interdiction read (0 when the shipment ledger is absent / dormant
 // ⇒ resolveSiegeVerdict's term is 0 ⇒ the aspatial siege path is byte-identical).
 import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
@@ -815,35 +816,6 @@ function hostileTargetsOf(snapshot, fromId) {
 }
 
 /**
- * A condition outcome (the coup-verdict shape). Flows through
- * applyWorldPulseOutcomes UNCHANGED — it already applies `condition` via
- * withActiveCondition.
- * @param {{ id: any, archetype: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, causes: any }} args
- */
-function conditionOutcome({ id, archetype, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, causes }) {
-  return {
-    id,
-    type: 'condition',
-    candidateType: archetype,
-    ruleId: `war_layer_${archetype}`,
-    ruleFamily: 'stressor',
-    applyMode: 'auto',
-    probability: 1,
-    targetSaveId,
-    severity,
-    headline,
-    summary,
-    reasons,
-    condition: {
-      archetype,
-      severity,
-      triggeredAt: { tick, sourceEventType: 'WAR_LAYER', sourceEventTargetId },
-      causes,
-    },
-  };
-}
-
-/**
  * The siege verdict for a single target. FIRST a DETERMINISTIC FEASIBILITY GATE
  * classifies the coalition-vs-defender CURRENT-capacity matchup; only a `plausible`
  * (or a satisfied internal-collapse / war-magic override) matchup goes to RNG.
@@ -1474,7 +1446,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
             dispositionDeltas.push({ id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5) });
             const name = settlementNameFor(attackerId);
             const targetName = settlementNameFor(targetId);
-            outcomes.push(conditionOutcome({
+            outcomes.push(warConditionOutcome({
               id: `world_outcome.siege_abandoned.${stablePart(attackerId)}.${stablePart(targetId)}.${tick}`,
               archetype: 'war_exhaustion',
               targetSaveId: attackerId,
@@ -1515,7 +1487,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       if (verdict.harass) {
         const targetName = settlementNameFor(targetId);
         const raiderName = settlementNameFor(besiegers[0]);
-        outcomes.push(conditionOutcome({
+        outcomes.push(warConditionOutcome({
           id: `world_outcome.harassment.${stablePart(targetId)}.${tick}`,
           archetype: 'war_pressure',
           targetSaveId: targetId,
@@ -1877,7 +1849,6 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const name = settlementNameFor(fromId);
     const targetName = settlementNameFor(rec.targetId);
     const deploymentAge = Number(rec.deploymentAge) || 0;
-
     // ── REINFORCEMENT: the home sends a PARTIAL, EXPENSIVE replenishment to its
     // army in the field. The flow ∝ the origin's economy/manpower/materiel/food/trade/
     // legitimacy, damped by route burden + its own war-exhaustion, ZEROED if the home
@@ -1906,7 +1877,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           candidateType: 'war_conscription',
           targetSaveId: fromId,
           generatedAtTick: tick,
-          tick,
+          tick, ...(deploymentAge > 0 ? { recordMode: 'state_only' } : {}),
           headline: `${name} conscripts for the front`,
           // formatCount (as deploymentReturn/populationDynamics do): this summary
           // persists into wizardNews/chronicle, so a bare toLocaleString() would emit
@@ -1999,7 +1970,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
           candidateType: 'war_levy',
           targetSaveId: fromId,
           generatedAtTick: tick,
-          tick,
+          tick, ...(deploymentAge > 0 ? { recordMode: 'state_only' } : {}),
           headline: `${name} calls up its vassals`,
           // formatCount: persists into wizardNews/chronicle (see the conscription
           // summary above for the byte-identity rationale).
@@ -2024,7 +1995,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const nextScar = clamp01(prevScar + EXHAUSTION_ACCRUE_PER_TICK);
     warExhaustion[fromId] = nextScar;
 
-    outcomes.push(conditionOutcome({
+    outcomes.push(warConditionOutcome({
       id: `world_outcome.war_drain.${stablePart(fromId)}.${tick}`,
       archetype: 'war_drain',
       targetSaveId: fromId,
@@ -2035,9 +2006,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       tick,
       sourceEventTargetId: rec.targetId,
       causes: [{ source: fromId, effect: 'war_drain', reason: `${name} is besieging ${targetName}.` }],
+      recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'war_drain', targetSaveId: fromId, severity: drainSeverity, sourceEventTargetId: rec.targetId }),
     }));
 
-    outcomes.push(conditionOutcome({
+    outcomes.push(warConditionOutcome({
       id: `world_outcome.army_deployed.${stablePart(fromId)}.${tick}`,
       archetype: 'army_deployed',
       targetSaveId: fromId,
@@ -2048,6 +2020,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       tick,
       sourceEventTargetId: rec.targetId,
       causes: [{ source: fromId, effect: 'army_deployed', reason: `${name}'s army is away besieging ${targetName}.` }],
+      recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'army_deployed', targetSaveId: fromId, severity: ARMY_DEPLOYED_SEVERITY, sourceEventTargetId: rec.targetId }),
     }));
 
     // ── REINFORCEMENT COST: the home pays for keeping the army in the field. Only
@@ -2055,7 +2028,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // strength army imposes no cost (byte-light). Severity ∝ the flow + deploymentAge,
     // bites economic_capacity / public_legitimacy / defense_readiness. ───────────────
     if (flow.drainSeverity > REINFORCEMENT_COST_FLOOR && flow.flowPoints > 0) {
-      outcomes.push(conditionOutcome({
+      outcomes.push(warConditionOutcome({
         id: `world_outcome.reinforcement_cost.${stablePart(fromId)}.${tick}`,
         archetype: 'reinforcement_cost',
         targetSaveId: fromId,
@@ -2066,6 +2039,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         tick,
         sourceEventTargetId: rec.targetId,
         causes: [{ source: fromId, effect: 'reinforcement_cost', reason: `${name} is reinforcing its army besieging ${targetName} (${deploymentAge} ticks deployed).` }],
+        recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'reinforcement_cost', targetSaveId: fromId, severity: flow.drainSeverity, sourceEventTargetId: rec.targetId }),
       }));
     }
 
@@ -2075,7 +2049,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // aggressor's confidence below HOSTILE_CONFIDENCE/CONQUEST_MARGIN — the realm can
     // no longer sustain or escalate the war and the loop converges toward peace.
     if (nextScar >= EXHAUSTION_CONDITION_FLOOR) {
-      outcomes.push(conditionOutcome({
+      outcomes.push(warConditionOutcome({
         id: `world_outcome.war_exhaustion.${stablePart(fromId)}.${tick}`,
         archetype: 'war_exhaustion',
         targetSaveId: fromId,
@@ -2092,6 +2066,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         // re-stamps. One key ⇒ one condition that accrues and then decays.
         sourceEventTargetId: fromId,
         causes: [{ source: fromId, effect: 'war_exhaustion', reason: `${name} has campaigned too long against ${targetName}.` }],
+        recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'war_exhaustion', targetSaveId: fromId, severity: nextScar, sourceEventTargetId: fromId, incomingCauseEffect: 'war_exhaustion' }),
       }));
     }
   }
@@ -2105,7 +2080,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // recovering but not yet whole — peace holds because the wound persists).
   for (const homeId of Object.keys(warExhaustion).sort(codepoint)) {
     if (activeDeployers.has(homeId)) continue;
-    const decayed = clamp01((warExhaustion[homeId] || 0) - EXHAUSTION_DECAY_PER_TICK);
+    const previousScar = clamp01(warExhaustion[homeId] || 0);
+    const decayed = clamp01(previousScar - EXHAUSTION_DECAY_PER_TICK);
+    const clearance = warExhaustionClearanceOutcome({ homeId, name: settlementNameFor(homeId), previousScar, nextScar: decayed, floor: EXHAUSTION_CONDITION_FLOOR, tick });
+    if (clearance && snapshot?.byId?.has?.(homeId)) outcomes.push(clearance);
     if (decayed <= 0) {
       delete warExhaustion[homeId];
       continue;
@@ -2118,7 +2096,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // flag is off). Same condition id/arithmetic; only the narrative differs, so the
       // vassal is no longer described as nursing wounds from a war it never waged.
       const leviedNow = leviedThisTick.has(homeId);
-      outcomes.push(conditionOutcome({
+      outcomes.push(warConditionOutcome({
         id: `world_outcome.war_exhaustion.${stablePart(homeId)}.${tick}`,
         archetype: 'war_exhaustion',
         targetSaveId: homeId,
@@ -2134,9 +2112,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         sourceEventTargetId: homeId,
         causes: [{
           source: homeId,
-          effect: 'war_exhaustion',
+          effect: leviedNow ? 'war_levy_exhaustion' : 'war_exhaustion',
           reason: leviedNow ? `${name} is drained by an overlord's war levies.` : `${name} is recovering from a costly war.`,
         }],
+        // A pre-tick deployment absent from the post-resolution active set marks recovery onset.
+        recordMode: recurringWarConditionRecordMode({ snapshot, archetype: 'war_exhaustion', targetSaveId: homeId, severity: decayed, sourceEventTargetId: homeId, forceChronicle: !leviedNow && Object.prototype.hasOwnProperty.call(existing, homeId), incomingCauseEffect: leviedNow ? 'war_levy_exhaustion' : 'war_exhaustion' }),
       }));
     }
   }

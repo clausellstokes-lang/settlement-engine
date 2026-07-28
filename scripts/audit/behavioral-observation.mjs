@@ -10,6 +10,7 @@ import {
   CERTIFICATION_HORIZONS,
 } from '../../src/domain/certification/behavioralContract.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
+import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 import { prosperityRank } from '../../src/data/constants.js';
 
 const FAMILY_TOKENS = Object.freeze({
@@ -303,6 +304,7 @@ function postApplyRecordsOf(result, selectedIds, rawWizardNewsEntries) {
   const byId = new Map();
   for (const entry of [...terminalEntries, ...observedEntries]) {
     if (!entry || typeof entry !== 'object' || !entry.id) continue;
+    if (!isPublicOutcome(entry)) continue;
     if (entry.source === 'table' || !recordFallsInObservedYear(entry, endTick)) continue;
     if (isSelectedOutcomeNewsTwin(entry, selectedIds)) continue;
     byId.set(String(entry.id), entry);
@@ -312,7 +314,7 @@ function postApplyRecordsOf(result, selectedIds, rawWizardNewsEntries) {
 
 function majorIdsOf(result, records) {
   const majors = Array.isArray(result?.majors)
-    ? result.majors.filter((record) => record && typeof record === 'object')
+    ? result.majors.filter((record) => record && typeof record === 'object' && isPublicOutcome(record))
     : records.filter((record) => deriveDecisionTier(record) === 'major');
   return {
     count: majors.length,
@@ -332,7 +334,7 @@ function familyOfLedgerNode(id, entry, recordFamilyById) {
   return moverFamilyOf({ id: semanticId });
 }
 
-function causalObservationFromRecords(records, recordFamilyById) {
+function causalObservationFromRecords(records, recordFamilyById, mechanicalIds) {
   let crossFamilyEdges = 0;
   let multiParentEvents = 0;
   const familyPairs = new Set();
@@ -341,6 +343,7 @@ function causalObservationFromRecords(records, recordFamilyById) {
     if (!childFamily) continue;
     const parentFamilies = new Set();
     for (const parentId of parentIdsOf(record)) {
+      if (mechanicalIds.has(String(parentId))) continue;
       const parentFamily = recordFamilyById.get(parentId) || moverFamilyOf({
         id: parentId,
       });
@@ -362,12 +365,12 @@ function causalObservationFromRecords(records, recordFamilyById) {
  * Production causal truth lives in the provenance ledger, not on the selected
  * array. Each ledger row is child receipt -> explicit parent receipt ids.
  */
-function causalObservationOf(result, records, recordFamilyById) {
+function causalObservationOf(result, records, recordFamilyById, mechanicalIds) {
   const ledger = asObject(result?.worldState?.spatialLedgers?.provenance);
   const provenanceEnabled = result?.worldState?.simulationRules
     ?.provenanceLedgerEnabled === true;
   if (!provenanceEnabled && Object.keys(ledger).length === 0) {
-    return causalObservationFromRecords(records, recordFamilyById);
+    return causalObservationFromRecords(records, recordFamilyById, mechanicalIds);
   }
 
   const endTick = observationEndTick(result);
@@ -376,6 +379,7 @@ function causalObservationOf(result, records, recordFamilyById) {
   const familyPairs = new Set();
   for (const [childId, rawEntry] of Object.entries(ledger)) {
     const entry = asObject(rawEntry);
+    if (entry.receiptClass === 'mechanical' || mechanicalIds.has(String(childId))) continue;
     if (!recordFallsInObservedYear(entry, endTick)) continue;
     const childFamily = familyOfLedgerNode(childId, entry, recordFamilyById);
     if (!childFamily) continue;
@@ -383,9 +387,11 @@ function causalObservationOf(result, records, recordFamilyById) {
     for (const rawParentId of Array.isArray(entry.parents) ? entry.parents : []) {
       if (rawParentId == null || typeof rawParentId === 'object') continue;
       const parentId = String(rawParentId);
+      const parentEntry = asObject(ledger[parentId]);
+      if (parentEntry.receiptClass === 'mechanical' || mechanicalIds.has(parentId)) continue;
       const parentFamily = familyOfLedgerNode(
         parentId,
-        asObject(ledger[parentId]),
+        parentEntry,
         recordFamilyById,
       );
       if (!parentFamily || parentFamily === childFamily) continue;
@@ -419,7 +425,9 @@ function proposalCandidateType(proposal) {
  * rise/failed receipts). Proposal receipts remain visible as a separate count.
  */
 function successionObservationOf(result, postApplyRecords) {
-  const applied = Array.isArray(result?.autoApplied) ? result.autoApplied : [];
+  const applied = Array.isArray(result?.autoApplied)
+    ? result.autoApplied.filter(isPublicOutcome)
+    : [];
   let attempts = applied.filter((record) => (
     SUCCESSION_ATTEMPT_APPLIED_TYPES.has(String(record?.candidateType || ''))
   )).length;
@@ -549,7 +557,24 @@ export function observeBehavioralYear({
   rawWizardNewsEntries = null,
 }) {
   const records = (Array.isArray(result?.selected) ? result.selected : [])
-    .filter((record) => record && typeof record === 'object');
+    .filter((record) => record && typeof record === 'object' && isPublicOutcome(record));
+  const mechanicalRecords = (Array.isArray(result?.autoApplied) ? result.autoApplied : [])
+    .filter((record) => record && typeof record === 'object' && isStateOnlyOutcome(record));
+  const mechanicalIds = new Set(mechanicalRecords
+    .map((record) => record?.id)
+    .filter((id) => id != null)
+    .map(String));
+  for (const pulse of Array.isArray(result?.worldState?.pulseHistory)
+    ? result.worldState.pulseHistory
+    : []) {
+    for (const field of ['consequenceOutcomes', 'mechanicalOutcomes']) {
+      for (const record of Array.isArray(pulse?.[field]) ? pulse[field] : []) {
+        if (isStateOnlyOutcome(record) && record?.id != null) {
+          mechanicalIds.add(String(record.id));
+        }
+      }
+    }
+  }
   const selectedIds = new Set(records
     .map((record) => record?.id)
     .filter((id) => id != null)
@@ -608,7 +633,7 @@ export function observeBehavioralYear({
       postApplyArcCounts[polarity] += 1;
     }
   }
-  const causal = causalObservationOf(result, records, recordFamilyById);
+  const causal = causalObservationOf(result, records, recordFamilyById, mechanicalIds);
 
   const before = settlementMap(beforeSaves);
   const after = settlementMap(afterSaves);
@@ -654,6 +679,7 @@ export function observeBehavioralYear({
     year,
     eventCount: records.length,
     majorEventCount: major.count,
+    mechanicalOutcomeCount: mechanicalRecords.length,
     unclassifiedEventCount,
     eventTypeCounts,
     moverCounts,

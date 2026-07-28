@@ -74,6 +74,26 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
+  test('every moving preset lights the narrative tempo governor at an intentional tier', () => {
+    expect(Object.fromEntries(PRESET_IDS.map(id => [
+      id,
+      SIMULATION_RULE_PRESETS[id].rules.narrativeTempo ?? null,
+    ]))).toEqual({
+      quiet_local: 'quiet_local',
+      realistic_regional: 'realistic_regional',
+      dramatic_campaign: 'dramatic_campaign',
+      static_campaign: null,
+      narrative_campaign: 'quiet_local',
+      living_realm: 'realistic_regional',
+      full_simulation: 'full_simulation',
+    });
+
+    // The axis remains virtual: old saves and explicit custom rules that never
+    // selected a newly-wired preset keep the governor dormant byte-for-byte.
+    expect(DEFAULT_SIMULATION_RULES).not.toHaveProperty('narrativeTempo');
+    expect(normalizeSimulationRules({})).not.toHaveProperty('narrativeTempo');
+  });
+
   // #2 — THE churn guard: every comparison key is DEFINED in every preset.
   // If a dev grows RULE_COMPARISON_KEYS but forgets a preset, that preset's
   // value for the new key is undefined here and this assertion fails first.

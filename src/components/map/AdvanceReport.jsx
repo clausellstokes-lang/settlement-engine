@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
-import { advanceEntries } from '../../domain/display/chronicleGraph.js';
+import { advanceEntries, buildRecordedEdges } from '../../domain/display/chronicleGraph.js';
 import {
   humanizeToken,
   settlementSizeLabel,
@@ -352,7 +352,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
   // only when provenanceLedgerEnabled lit the campaign; absent ⇒ the chronicle infers
   // from shared entities exactly as before. A plain read — no engine import.
   const provenance = worldState?.spatialLedgers?.provenance;
-  const hasRecordedEdges = !!provenance && Object.keys(provenance).length > 0;
+  const hasRecordedEdges = buildRecordedEdges(provenance).size > 0;
   const chronicle = useMemo(() => (entry ? chronicleForAdvance(entry, provenance) : null), [entry, provenance]);
   const decrees = useMemo(() => (entry ? decreesForAdvance(entry, provenance) : null), [entry, provenance]);
 

@@ -48,7 +48,7 @@ import {
   ensureFactionStates, pruneFactionStates, relaxFactionStates, seatNpcsIntoFactions,
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
-import { evaluateWorldPulseRules, rollCandidates, suppressEquivalentPendingProposalCandidates, volatilityMultiplier } from './candidateEvents.js';
+import { admitGuaranteedProposalOutcomes, buildProposalDocket, evaluateWorldPulseRules, rollCandidates, suppressEquivalentPendingProposalCandidates, supersedeLegacyRecordModeProposals, volatilityMultiplier } from './candidateEvents.js';
 import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries, sublinearBudget, REALM_SCALING } from './narrativeTempo.js';
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
@@ -56,6 +56,8 @@ import { computeDispositionFactorMap, computeLawfulness, computeMalice } from '.
 import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
+import { reconcileSupersededProposalNews, stateOnlyRumorSeedsFromHistory } from './worldPulseFeedCuration.js';
+import { mechanicalPulseRecordFields, partitionPulseOutcomeLanes, publicPulseSurfaces } from './pulseOutcomePartition.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
 import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceRead.js';
@@ -98,7 +100,7 @@ import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecy
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
-import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations } from './pulseHelpers.js';
+import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations, isPublicOutcome } from './pulseHelpers.js';
 import { assertNoResidueLeak } from './residueStripGuard.js';
 
 /**
@@ -743,9 +745,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // NOT commit, else the paused world ramps a war footing whose mobilization is parked.
     // So unlike the dismiss path (which drops the whole outcome), the defer path KEEPS the
     // footing outcome and strips only the ledger/graph residue, keyed by the settlement id
-    // of each deferred footing major (war_mobilization is always a major).
+    // of each deferred PUBLIC footing major (mechanical exact recurrences still commit).
     const deferredMobilizerIds = suppressDeferredMajorResidue
-      ? new Set(effects.outcomes.filter(o => deriveDecisionTier(o) === 'major' && o?.targetSaveId != null).map(o => String(o.targetSaveId)))
+      ? new Set(effects.outcomes.filter(o => isPublicOutcome(o) && deriveDecisionTier(o) === 'major' && o?.targetSaveId != null).map(o => String(o.targetSaveId)))
       : null;
     // Drop the warPosture ledger key for any settlement whose war_mobilization the DM
     // dismissed (effects.dismissedIds) or whose footing major this paused tick deferred:
@@ -1271,68 +1273,40 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // (saves.length; design §D2a/§D2c). At N ≤ BASE_REALM every bonus is 0 ⇒ classMax /
   // maxAuto / maxProposals are byte-identical to today.
   const tempoContext = buildTempoContext(worldState, simulationRules, saves.length);
-  const { selected, rollExplanations, deferred: tempoDeferred } = rollCandidates(
+  // Guaranteed organic proposals (population, coup, held war decisions) get
+  // first claim on the same read-only docket snapshot; stochastic questions
+  // may fill only the capacity that remains.
+  const deterministicAdmission = admitGuaranteedProposalOutcomes(buildProposalDocket(worldState, saves.length), [...coupOutcomes, ...warOutcomes, ...structuralCandidates]); const admittedDeterministicOutcomes = deterministicAdmission.outcomes;
+  const { selected, rollExplanations, deferred: tempoDeferred, proposalDocket: rolledProposalDocket } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
-    { maxAuto: sublinearBudget(7, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.AUTO_SCALE_PER_ROOT), maxProposals: sublinearBudget(5, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.PROPOSAL_SCALE_PER_ROOT), volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext },
-  );
-  const deterministicExplanations = [...coupOutcomes, ...warOutcomes, ...structuralCandidates].map(candidate => ({
-    candidateId: candidate.id,
-    candidateType: candidate.candidateType,
-    ruleId: candidate.ruleId || null,
-    ruleFamily: candidate.ruleFamily || null,
-    targetSaveId: candidate.targetSaveId || null,
-    relationshipKey: candidate.relationshipKey || null,
-    npcId: candidate.npcId || null,
-    factionId: candidate.factionId || null,
-    severity: candidate.severity,
-    probability: 1,
-    roll: 0,
-    passed: true,
-    gates: candidate.reasons || [],
-    applyMode: candidate.applyMode,
-    proposalPayload: candidate.proposalPayload || null,
-    conflictResolution: { selected: true, deterministic: true },
-  }));
-  const selectedForApply = [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...selected];
-
-  // Advance-scaling Stage 3 PAUSE BOUNDARY: partition the selected set into the
-  // structural MAJORS (the campaign-altering subset the DM should get a say on)
-  // and everything else (the MINORS, auto-resolved as usual). When deferMajors is
-  // ON, only the minors are routed through this tick's apply pass; the majors are
-  // returned on `deferredMajors` for the orchestrator to resolve (autoresolve ON)
-  // or park (autoresolve OFF). When OFF, the partition is inert — the full set
-  // applies in one pass, byte-identical to today.
+    { maxAuto: sublinearBudget(7, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.AUTO_SCALE_PER_ROOT), maxProposals: sublinearBudget(5, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.PROPOSAL_SCALE_PER_ROOT), volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext, proposalDocket: deterministicAdmission.docket },
+  ); let organicProposalDocket = rolledProposalDocket || deterministicAdmission.docket;
+  worldState = supersedeLegacyRecordModeProposals(worldState, { tick: worldState.tick, now });
+  const reconciledNews = reconcileSupersededProposalNews(worldState, campaign?.wizardNews);
+  worldState = reconciledNews.worldState;
   // @pulse-stage: permission_and_apply
-  const deferredMajors = deferMajors ? selectedForApply.filter(o => deriveDecisionTier(o) === 'major') : [];
-  // RESUME re-run filter: when the DM dismissed specific majors, drop them from the
-  // apply set on the re-run (deferMajors OFF). Empty/null ⇒ no exclusion ⇒
-  // byte-identical to the autoresolve-ON tick. `activeDismissals` (computed up front)
-  // is the SAME set the occupation layer was filtered against above, so a dismissed
-  // conquest is excluded from BOTH the occupation seed AND the apply set — no residue.
-  const outcomesToApply = deferMajors
-    ? selectedForApply.filter(o => deriveDecisionTier(o) !== 'major')
-    : (activeDismissals
-        ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
-        : selectedForApply);
-  // r2 worldpulse-tick-core-1: the post-apply CONSEQUENCE readers (moral drift, misjudgment
-  // news, the tempo birth fold) must see the same dismissal discipline the apply pass does — a
-  // DM-VETOED major never happened, so it must not drift alignment, emit a "marches on a
-  // misjudgment" receipt, or count as a landed birth. We subtract ONLY the DISMISSED majors
-  // (activeDismissals), NOT the merely-DEFERRED ones: on the pause path a deferred major is still
-  // pending-apply and legitimately counts (activeDismissals is null there ⇒ the full set, so the
-  // tempo birth ledger is unchanged). On an ordinary tick activeDismissals is null ⇒ this is the
-  // SAME reference as selectedForApply ⇒ byte-identical. pulseRecord below keeps the FULL set.
-  const selectedForConsequences = activeDismissals
-    ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
-    : selectedForApply;
+  const {
+    deterministicExplanations,
+    selectedForApply,
+    publicSelectedOutcomes,
+    deferredMajors,
+    outcomesToApply,
+    selectedForConsequences,
+    publicSelectedForConsequences,
+  } = partitionPulseOutcomeLanes({
+    coupOutcomes: admittedDeterministicOutcomes,
+    selected,
+    deferMajors,
+    activeDismissals,
+  });
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
     snapshot: postTimeSnapshot,
     worldState,
     regionalGraph: postTimeSnapshot.regionalGraph,
-    wizardNews: campaign?.wizardNews,
+    wizardNews: reconciledNews.wizardNews,
     settlementMap,
     outcomes: outcomesToApply,
     tick: worldState.tick,
@@ -1340,7 +1314,6 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     season: roadSeason,
     simulationRules,
   });
-
   // applied.worldState already carries this tick's posture/memory stamp:
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
@@ -1354,7 +1327,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // legacy campaign has no narrativeTempo key and none is added (byte-neutral).
   const nextTempo = foldNarrativeTempo(
     memoryState.narrativeTempo,
-    selectedForConsequences, // r2 tick-core-1: a DM-dismissed major is not a landed birth
+    publicSelectedForConsequences, // v4: mechanical refreshes are not behavioral births
     tempoDeferred,
     worldState.calendar?.elapsedWeeks ?? 0,
     simulationRules,
@@ -1609,6 +1582,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
+  const publicSurfaces = publicPulseSurfaces([...admittedDeterministicOutcomes, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates], [...deterministicExplanations, ...rollExplanations]);
   const pulseRecord = {
     id: pulseIdFor(campaign?.id, worldState.tick),
     tick: worldState.tick,
@@ -1616,11 +1590,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + resourceDyn.candidates.length + lifecycleCand.candidates.length + instLifecycle.candidates.length + moralInst.candidates.length + moralFounding.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
-    selectedCount: selectedForApply.length,
-    autoAppliedCount: applied.autoApplied.length,
+    candidateCount: publicSurfaces.candidateCount,
+    selectedCount: publicSelectedOutcomes.length,
+    autoAppliedCount: applied.autoApplied.filter(isPublicOutcome).length,
     proposalCount: applied.proposals.length,
-    selectedOutcomes: selectedForApply.slice(0, 24).map(compactOutcomeForHistory),
+    selectedOutcomes: publicSelectedOutcomes.slice(0, 24).map(compactOutcomeForHistory),
+    ...mechanicalPulseRecordFields({ applied, selectedForApply }),
     impactDigest: compactImpactDigest(applied.newsEntries),
     resolvedStressors: agedStressors.resolved.map(stressor => ({
       id: stressor.id,
@@ -1637,7 +1612,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // performance-scale-5: cap the PERSISTED explanations (this record rides every
     // upsert / cache write / undo snapshot). The RETURN value below keeps the full set
     // for the session UI. Byte-identical on any record within the missed-roll cap.
-    rollExplanations: capPersistedRollExplanations(deterministicExplanations, rollExplanations),
+    rollExplanations: capPersistedRollExplanations([], publicSurfaces.rollExplanations),
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
     corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map((/** @type {any} */ e) => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,
@@ -1724,7 +1699,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // what was believed, what was true, and how stale the read was. Empty (byte-
   // neutral) when beliefs are dormant or every acting belief was sound.
   const beliefMisjudgmentNews = beliefMisjudgmentNewsEntries(
-    selectedForConsequences, settlementNameFor, worldState.tick, now, // r2 tick-core-1: no receipt for a vetoed march
+    selectedForConsequences, settlementNameFor, worldState.tick, now, // derived consequence remains visible even when its source refresh is mechanical-only
   );
   // SEASONS-A: the season boundary markers — the ONE new news kind
   // ('season_marker': harvest at the autumn boundary, hungry_gap at month 12).
@@ -1789,8 +1764,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // already drained the due columns from memoryState) and light ONLY behind
     // migrationRumorsEnabled (dark ⇒ null migrantPaths + no flight entries ⇒ byte-identical).
     const carrier = rumorCarrierParams({ carrierState: memoryState, migrationState: startingWorldState, rules: simulationRules });
-    const feedEntries = carrier.flightEntries.length
-      ? [...(wizardNews?.entries || []), ...carrier.flightEntries]
+    // v4 state-only headlines are not public feed rows, but remain exact rumor
+    // inputs so hiding a metronome never changes beliefs or later actions.
+    const internalRumorSeeds = [
+      ...stateOnlyRumorSeedsFromHistory(memoryState.pulseHistory, wizardNews?.entries),
+      ...(applied.rumorSeedEntries || []),
+    ];
+    const feedEntries = carrier.flightEntries.length || internalRumorSeeds.length
+      ? [...(wizardNews?.entries || []), ...internalRumorSeeds, ...carrier.flightEntries]
       : (wizardNews?.entries || []);
     const rumors = advanceRumorLedgers({
       worldState: memoryState,
@@ -2126,8 +2107,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       rng: rng.fork('naval'),
       season: roadSeason,
       tick: worldState.tick,
-      now,
+      now, proposalDocket: organicProposalDocket,
     });
+    if (naval.proposalDocket) organicProposalDocket = naval.proposalDocket;
     if (naval.changed) memoryState = /** @type {typeof memoryState} */ (naval.worldState);
     if (naval.newsEntries.length) {
       wizardNews = appendObservedWizardNewsEntries(wizardNews, naval.newsEntries, { now }, newsReceiptSink);
@@ -2246,7 +2228,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       graph: applied.regionalGraph,
       rng: rng.fork('intervention'),
       tick: worldState.tick,
-      now,
+      now, proposalDocket: organicProposalDocket,
     });
     if (intervention.changed) memoryState = /** @type {typeof memoryState} */ (intervention.worldState);
     if (intervention.newsEntries.length) {
@@ -2524,9 +2506,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates],
-    selected: selectedForApply,
-    rollExplanations: [...deterministicExplanations, ...rollExplanations],
+    candidates: publicSurfaces.candidates,
+    selected: publicSelectedOutcomes,
+    rollExplanations: publicSurfaces.rollExplanations,
     autoApplied: applied.autoApplied,
     proposals: applied.proposals,
     resolvedStressors: agedStressors.resolved,
@@ -2534,7 +2516,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // outcomes, classified on structural markers (deriveDecisionTier), NOT
     // applied-on-pause. Stage 2 still auto-resolves everything — majors[] is a
     // read-only annotation so Stages 3+ can pause on it. Behavior is unchanged.
-    majors: selectedForApply.filter(outcome => deriveDecisionTier(outcome) === 'major'),
+    majors: publicSelectedOutcomes.filter(outcome => deriveDecisionTier(outcome) === 'major'),
     // Advance-scaling Stage 3 PAUSE: the structural majors WITHHELD from this
     // tick's apply pass (only populated when deferMajors is on). The orchestrator
     // batches these onto `pendingMajors` and RE-DERIVES them on resume by re-running

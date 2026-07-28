@@ -58,11 +58,31 @@ describe('V-10 — status↔soak lockstep (the claims-parity wall at the schema)
   it('a certified band with a full soak is valid', () => {
     expect(validateCertificationBand(certifiedBand)).toEqual({ ok: true, errors: [] });
   });
+  it('fails closed on a pre-v4 behavioral contract receipt', () => {
+    const res = validateCertificationBand({
+      ...certifiedBand,
+      soak: { ...goodSoak, behavioralContractVersion: 3 },
+    });
+    expect(res.ok).toBe(false);
+    expect(res.errors.join(' ')).toContain(
+      `behavioralContractVersion ${BEHAVIORAL_CONTRACT_VERSION}`,
+    );
+  });
   it('a pending band with soak:null is valid', () => {
     expect(validateCertificationBand(pendingBand)).toEqual({ ok: true, errors: [] });
   });
   it('a measured band carries partial evidence without claiming certification', () => {
     expect(validateCertificationBand(measuredBand)).toEqual({ ok: true, errors: [] });
+  });
+  it('fails closed on a measured pre-v4 behavioral receipt too', () => {
+    const res = validateCertificationBand({
+      ...measuredBand,
+      soak: { ...measuredBand.soak, behavioralContractVersion: 3 },
+    });
+    expect(res.ok).toBe(false);
+    expect(res.errors.join(' ')).toContain(
+      `behavioralContractVersion ${BEHAVIORAL_CONTRACT_VERSION}`,
+    );
   });
   it('REJECTS a certified band missing any required property', () => {
     const res = validateCertificationBand({

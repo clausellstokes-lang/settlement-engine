@@ -90,13 +90,17 @@ const NONCOMPLIANT_BASELINE = [
 
 describe('metronome-cooldown lint — condition-bearing outcome sources self-limit', () => {
   it('the metronome class is real: isDriftOnlyOutcome exempts condition/stressor and a cooldown exists', () => {
+    const curation = readFileSync(join(WP_DIR, 'worldPulseFeedCuration.js'), 'utf-8');
     const applied = readFileSync(join(WP_DIR, 'applyWorldPulse.js'), 'utf-8');
-    expect(applied).toMatch(/function isDriftOnlyOutcome/);
+    expect(curation).toMatch(/function isDriftOnlyOutcome/);
     // The exemption still lists the two keys the standing-state findings hit.
-    expect(applied).toMatch(/outcome\.condition/);
-    expect(applied).toMatch(/outcome\.stressor/);
+    expect(curation).toMatch(/outcome\.condition/);
+    expect(curation).toMatch(/outcome\.stressor/);
     // The metronome cooldown itself is defined.
-    expect(applied).toMatch(/DRIFT_REEMIT_COOLDOWN_TICKS/);
+    expect(curation).toMatch(/DRIFT_REEMIT_COOLDOWN_TICKS/);
+    // The extracted curation seam remains connected to the pulse orchestrator.
+    expect(applied).toMatch(/isDriftOnlyOutcome/);
+    expect(applied).toMatch(/isMetronomeRepeat/);
   });
 
   it('the review-named standing-state sources still name a cooldown (worldpulse-religion-trade-2 regression guard)', () => {

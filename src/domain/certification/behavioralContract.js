@@ -68,8 +68,10 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
 export { BEHAVIORAL_CONTRACT_VERSION };
 // v2 added uncapped post-apply receipts and authoritative major/succession/causal
 // semantics. v3 separates pending succession proposals from actual applied
-// attempts/completions. Older receipts must never be reinterpreted by this oracle.
-export const BEHAVIORAL_OBSERVATION_VERSION = 3;
+// attempts/completions. v4 separates public event tempo from state-only mechanical
+// refreshes and records their count independently. Older receipts must never be
+// reinterpreted by this oracle.
+export const BEHAVIORAL_OBSERVATION_VERSION = 4;
 export const HUMAN_CHRONICLE_REVIEW_VERSION = 1;
 
 export const CERTIFICATION_HORIZONS = Object.freeze({

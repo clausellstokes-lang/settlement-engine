@@ -48,7 +48,7 @@ const HOSTILE = { id: 'edge.atlas.borin', from: 'atlas', to: 'borin', relationsh
 const VASSAL = { id: 'edge.atlas.carth', from: 'atlas', to: 'carth', relationshipType: 'vassal' };
 const CARTH_POP = 5000;
 
-function evaluate(warLevy) {
+function evaluate(warLevy, { carthExhaustion = 0 } = {}) {
   const saves = [
     save('atlas', 'Atlas', { tier: 'town', population: 6000, storageMonths: 2, granary: true }),
     save('borin', 'Borin', { tier: 'town', population: 4000 }),
@@ -59,7 +59,7 @@ function evaluate(warLevy) {
     rngSeed: 'levy-seed', tick: 100,
     relationshipStates: { [HOSTILE.id]: { relationshipType: 'hostile' }, [VASSAL.id]: { relationshipType: 'vassal' } },
     deployments: { atlas: siegeRecord('borin', { age: 5, strength: 50.9 }) },
-    warExhaustion: { atlas: 1.0 }, simulationRules: rules,
+    warExhaustion: { atlas: 1.0, ...(carthExhaustion > 0 ? { carth: carthExhaustion } : {}) }, simulationRules: rules,
   };
   const campaign = {
     id: 'levy-fixture', name: 'L', settlementIds: ['atlas', 'borin', 'carth'], worldState,
@@ -155,6 +155,7 @@ describe('the levy rides a war_levy outcome', () => {
     const war = evaluate(true);
     const levy = war.outcomes.find(o => o.candidateType === 'war_levy');
     expect(levy).toBeTruthy();
+    expect(levy.recordMode).toBe('state_only');
     // Men: a floored 0.4% of Carth's 5000 = 20, marched into Atlas's army.
     const levied = -levy.populationDeltas.find(d => d.saveId === 'carth').delta;
     expect(levied).toBe(Math.round(CARTH_POP * 0.004)); // 20
@@ -171,5 +172,16 @@ describe('the levy rides a war_levy outcome', () => {
     // The accrual is gross (0.05 strain + 0.03 same-tick-decay compensation) so step
     // 5b's decay nets it to the tunable, not 40% of it.
     expect(war.warExhaustion.carth).toBeCloseTo(0.05, 5);
+  });
+
+  test('an active levy scar stamps a structured cause for the first recovery beat', () => {
+    const war = evaluate(true, { carthExhaustion: 0.4 });
+    const exhaustion = war.outcomes.find(outcome => (
+      outcome.candidateType === 'war_exhaustion'
+      && outcome.targetSaveId === 'carth'
+    ));
+    expect(exhaustion.condition.causes).toEqual([
+      expect.objectContaining({ effect: 'war_levy_exhaustion' }),
+    ]);
   });
 });

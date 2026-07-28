@@ -32,7 +32,7 @@
 /** The manifest schema version (bumped only on a breaking shape change). @type {number} */
 export const CERTIFICATION_MANIFEST_VERSION = 1;
 /** Behavioral oracle version required before a band may claim certification. */
-export const BEHAVIORAL_CONTRACT_VERSION = 2;
+export const BEHAVIORAL_CONTRACT_VERSION = 4;
 
 /** @type {ReadonlyArray<{ key: string, label: string }>} */
 export const CERTIFICATION_STATUS = Object.freeze([
@@ -223,6 +223,10 @@ export function validateCertificationBand(raw) {
     } else {
       const s = validateSoakResult(b.soak);
       if (!s.ok) errors.push(...s.errors.map((e) => `soak: ${e}`));
+      const soak = /** @type {Record<string, unknown>} */ (b.soak);
+      if (soak.behavioralContractVersion !== BEHAVIORAL_CONTRACT_VERSION) {
+        errors.push(`a measured band must name behavioralContractVersion ${BEHAVIORAL_CONTRACT_VERSION}.`);
+      }
     }
   } else if (b.status === 'pending') {
     if (b.soak != null) errors.push('a pending band must carry soak:null (it has proven nothing yet).');

@@ -7,6 +7,7 @@ import {
   relationshipKeyFromEdge,
   relationshipRoles,
 } from './relationshipEvolution.js';
+import { outcomesForMechanicalHistory } from './pulseHelpers.js';
 
 export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
 export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
@@ -150,7 +151,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
   const out = [];
   // One world event lands in up to THREE stores: applyRelationshipPatch writes
   // a recentIncidents row AND (for label changes) a history row, while the
-  // pulse record keeps the outcome itself in pulseHistory.selectedOutcomes —
+  // pulse record keeps the outcome itself in its internal consequence window —
   // and a hierarchy resolution writes incident + history + hierarchyResolutions
   // in one call. Each event must score ONCE (double/triple-counting saturated
   // memoryScore — one modest incident read as an escalating rivalry). The
@@ -201,7 +202,7 @@ function collectRelationshipMemories(/** @type {any} */ { worldState, relationsh
 
   for (const pulse of worldState?.pulseHistory || []) {
     const pulseTick = Number.isFinite(pulse?.tick) ? pulse.tick : null;
-    for (const outcome of pulse?.selectedOutcomes || []) {
+    for (const outcome of outcomesForMechanicalHistory(pulse)) {
       if (outcome?.relationshipKey !== relationshipKey) continue;
       if (outcome?.applyMode === 'proposal' && !appliedMarkers.has(outcome?.id)) continue;
       const tick = Number.isFinite(outcome?.tick) ? outcome.tick : pulseTick;

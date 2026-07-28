@@ -45,6 +45,21 @@ const famineBirth = (id, sid) => ({ id, candidateType: 'stressor_birth_famine', 
 const siegeBirth = (id, sid) => ({ id, candidateType: 'stressor_birth_siege', ruleFamily: 'stressor', targetSaveId: sid, probability: 0.3, applyMode: 'auto', severity: 0.6 });
 const spreadFamine = (id, sid) => ({ id, candidateType: 'stressor_spread_famine', ruleFamily: 'stressor', targetSaveId: sid, probability: 0.3, applyMode: 'auto', severity: 0.6, condition: { causes: [{ source: 'world_stressor.famine.a' }] } });
 const residual = (id, sid) => ({ id, candidateType: 'stressor_residual', ruleFamily: 'stressor', targetSaveId: sid, probability: 1, applyMode: 'auto', severity: 0.5 });
+const governmentChallenge = (id, sid) => ({
+  id,
+  candidateType: 'faction_government_challenge',
+  ruleFamily: 'faction',
+  targetSaveId: sid,
+  factionId: `${sid}:challenger`,
+  probability: 0.5,
+  applyMode: 'proposal',
+  severity: 0.8,
+  proposalPayload: {
+    kind: 'government_change',
+    settlementId: sid,
+    factionId: `${sid}:challenger`,
+  },
+});
 
 const CM = TEMPO_BUDGETS.dramatic_campaign.classMax; // 3
 const AM = TEMPO_BUDGETS.dramatic_campaign.arcMax;   // 7
@@ -63,6 +78,49 @@ describe('CLASS BUDGET — an over-budget spontaneous birth is deferred, once', 
     const { selected, deferred } = rollCandidates([famineBirth('c.famine.x', 'x')], passRng, opts(ctx));
     expect(selected.map((s) => s.id)).toContain('c.famine.x');
     expect(deferred).toHaveLength(0);
+  });
+
+  test('classMax is a hard same-tick ceiling across multiple passing candidates', () => {
+    const fullMax = TEMPO_BUDGETS.full_simulation.classMax;
+    const ctx = tempoCtx({
+      tier: 'full_simulation',
+      classStamps: { succession_coup: fullMax - 1 },
+    });
+    const { selected, deferred } = rollCandidates(
+      [
+        governmentChallenge('c.gov.a', 'a'),
+        governmentChallenge('c.gov.b', 'b'),
+      ],
+      passRng,
+      opts(ctx),
+    );
+
+    expect(selected.map(candidate => candidate.id)).toEqual(['c.gov.a']);
+    expect(deferred).toEqual([{
+      class: 'succession_coup',
+      settlementId: 'b',
+      reason: 'class_budget',
+    }]);
+  });
+
+  test('a failed same-class roll consumes no in-tick class slot', () => {
+    const fullMax = TEMPO_BUDGETS.full_simulation.classMax;
+    const ctx = tempoCtx({
+      tier: 'full_simulation',
+      classStamps: { succession_coup: fullMax - 1 },
+    });
+    const rolls = [1, 0];
+    const { selected, deferred } = rollCandidates(
+      [
+        governmentChallenge('c.gov.a', 'a'),
+        governmentChallenge('c.gov.b', 'b'),
+      ],
+      { random: () => rolls.shift() ?? 1 },
+      opts(ctx),
+    );
+
+    expect(selected.map(candidate => candidate.id)).toEqual(['c.gov.b']);
+    expect(deferred).toEqual([]);
   });
 });
 

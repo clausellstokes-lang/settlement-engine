@@ -90,7 +90,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   strategy_deploy: 'war', strategy_defend: 'war', strategy_hold: 'war',
   strategy_return_home: 'war', strategy_sue_for_peace: 'war',
   occupation: 'war', occupation_lifted: 'war', occupation_vassalized: 'war',
-  occupation_resistance: 'war', occupation_burden: 'war',
+  occupation_resistance: 'war', occupation_burden: 'war', occupation_burden_cleared: 'war',
   wartime: 'war', vassal_rebellion: 'war', rebellion_vassal: 'war',
   cold_war_supply_sanctions: 'war', ally_burden: 'war', alliance_burden: 'war', relief_burden: 'war',
   casus_declared: 'war', peace_sued: 'war', supply_raid_ordered: 'war', military_protection: 'war',

@@ -97,7 +97,14 @@ export function realmCauseIndex(campaign) {
   const provenance = recordOf(ledgers.provenance);
   return {
     receiptIds,
-    provenanceIds: new Set(Object.keys(provenance)),
+    provenanceIds: new Set(Object.entries(provenance)
+      .filter(([, value]) => {
+        const entry = recordOf(value);
+        return entry.receiptClass !== 'mechanical'
+          && Array.isArray(entry.parents)
+          && entry.parents.length > 0;
+      })
+      .map(([id]) => id)),
   };
 }
 

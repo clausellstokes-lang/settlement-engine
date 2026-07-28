@@ -6,10 +6,26 @@ import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
-import { governBirth, computeLowestPendingClass } from './narrativeTempo.js';
+import { governBirth, computeLowestPendingClass, dramaClassOf } from './narrativeTempo.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+import { classifyRecurringConditionCandidate } from './conditionRefreshRecordMode.js';
+import {
+  admitGuaranteedProposalOutcomes,
+  buildProposalDocket,
+  PROPOSAL_DOCKET_POLICY,
+  proposalDocketAllows,
+  recordProposalAdmission,
+} from './proposalAdmission.js';
+import { isMajorOutcome } from './decisionTier.js';
 import { activeChannelsFrom } from '../region/index.js';
 import { RUMOR_TRADE_CHANNEL_TYPES } from '../spatial/rumorNetwork.js';
+import {
+  isStateOnlyOutcome,
+  isSuppressionOnlyOutcome,
+  proposalRequiresRecordModeSupersession,
+} from './pulseHelpers.js';
+
+export { admitGuaranteedProposalOutcomes, buildProposalDocket };
 
 function stablePart(/** @type {any} */ value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
@@ -147,18 +163,58 @@ export function suppressEquivalentPendingProposalCandidates(candidates, worldSta
   for (const raw of proposals) {
     const proposal = proposalRecord(raw);
     if (proposal?.status !== 'pending') continue;
+    if (proposalRequiresRecordModeSupersession(proposal)) continue;
     const key = proposalSemanticKey(proposal.outcome);
     if (key) pendingKeys.add(key);
   }
   if (!pendingKeys.size) return candidates;
   let suppressed = false;
   const next = candidates.filter(candidate => {
+    // Upgrade safety: pre-v4 saves may hold proposal copies of outcomes that are
+    // mechanical/suppressive under v4. Those old questions must not starve a
+    // required state refresh or remove a conflict suppressor before arbitration.
+    if (isStateOnlyOutcome(candidate) || isSuppressionOnlyOutcome(candidate)) return true;
     const key = proposalSemanticKey(candidate);
     const held = key != null && pendingKeys.has(key);
     if (held) suppressed = true;
     return !held;
   });
   return suppressed ? next : candidates;
+}
+
+/**
+ * Upgrade reconciliation for proposal rows created before recordMode v4.
+ * The only ambiguous authority-routed family was npc_goal_rebranch; hold and
+ * defend are unconditionally suppressive. Close those known legacy rows even
+ * when no equivalent candidate emits this tick. Retain each as an audit
+ * tombstone; only status metadata changes.
+ * @template T
+ * @param {T} worldState
+ * @param {{ tick?: number, now?: string|null }} [context]
+ * @returns {T}
+ */
+export function supersedeLegacyRecordModeProposals(worldState, context = {}) {
+  const state = proposalRecord(worldState);
+  const proposals = state?.proposals;
+  if (!Array.isArray(proposals) || proposals.length === 0) return worldState;
+  let changed = false;
+  const nextProposals = proposals.map((raw) => {
+    const proposal = proposalRecord(raw);
+    if (proposal?.status !== 'pending'
+        || !proposalRequiresRecordModeSupersession(proposal)) return raw;
+    changed = true;
+    return {
+      ...proposal,
+      status: 'superseded',
+      updatedAt: context.now ?? proposal.updatedAt ?? proposal.createdAt ?? null,
+      supersededAt: context.now ?? null,
+      supersededAtTick: Number.isFinite(context.tick) ? context.tick : null,
+      supersessionReason: 'record_mode_upgrade',
+    };
+  });
+  return changed
+    ? /** @type {T} */ (/** @type {unknown} */ ({ ...state, proposals: nextProposals }))
+    : worldState;
 }
 
 function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {
@@ -462,6 +518,18 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     }));
   }
 
+  // Chronicle curation at the last shared pre-authority seam. The classifier's
+  // closed producer opt-in is deliberately narrow: organic pressure conditions
+  // and condition-only trade scarcity refreshes. It fails closed on proposals,
+  // migration transfers, relationship patches, and every other compound shape.
+  // Run BEFORE the shared political-autonomy routing so a source-auto proven
+  // refresh stays mechanical instead of becoming a new DM question. A producer
+  // that already authored a proposal (pressure events do this under dm_only)
+  // fails the classifier closed; genuine onsets/transitions route below.
+  const recordClassified = candidates.map(candidate => (
+    classifyRecurringConditionCandidate(snapshot, candidate)
+  ));
+
   // ── Political-autonomy AUTHORITY routing (Phase 5.5 CL-0) ──────────────────
   // The choke point that routes EVERY stochastic candidate family — including
   // the modules this file composes (stressors, relationships, factions, NPCs,
@@ -475,12 +543,18 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   // they are consequences, not initiations, and stay auto by design.
   const autonomy = politicalAutonomyOf(rules);
   const routed = autonomy === 'dm_only' || autonomy === 'recommendations'
-    ? candidates.map(candidate => {
+    ? recordClassified.map(candidate => {
       if (!candidate) return candidate;
+      // A state-only record is background reducer work, not a political choice.
+      // Keep it on its source auto lane so dm_only/recommendations cannot turn a
+      // required mechanical refresh into a proposal-budget casualty.
+      if (isStateOnlyOutcome(candidate)) {
+        return candidate.applyMode === 'auto' ? candidate : { ...candidate, applyMode: 'auto' };
+      }
       const applyMode = authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode);
       return applyMode === candidate.applyMode ? candidate : { ...candidate, applyMode };
     })
-    : candidates;
+    : recordClassified;
 
   return resolveCandidateConflicts(suppressEquivalentPendingProposalCandidates(routed, snapshot?.worldState), context.budgets || {});
 }
@@ -511,8 +585,50 @@ function candidateRoll(/** @type {any} */ rng, /** @type {any} */ candidate) {
 export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {any} */ rng, /** @type {any} */ options = {}) {
   const maxAuto = options.maxAuto ?? 6;
   const maxProposals = options.maxProposals ?? 5;
+  // A suppression-only candidate is a conflict-resolution instrument, not an
+  // event. Producers deliberately let it win exclusive tags in
+  // resolveCandidateConflicts; this is the first seam AFTER that arbitration.
+  // Remove it before tempo governance, RNG, budgets, explanations, and apply.
+  const rollableCandidates = candidates.filter(candidate => !isSuppressionOnlyOutcome(candidate));
   // World volatility scales pass probability (default 1.0 = unchanged).
   const volatility = Number.isFinite(options.volatility) ? options.volatility : 1;
+  const proposalDocketAtStart = options.proposalDocket || null;
+  const publicProposals = rollableCandidates
+    .filter(candidate => candidate.applyMode === 'proposal' && !isStateOnlyOutcome(candidate));
+  // Identity forks let us detect ACTUAL passing contention without consuming a
+  // shared stream: createPRNG.fork derives a child from seed + label and never
+  // advances its parent. The cached child draw is the exact roll emitted below,
+  // so even a candidate later deferred by tempo consumes zero parent RNG.
+  // Preserve historical producer order when all passing questions fit; sort only
+  // a contended proposal lane. Automatic/state-only positions and relative order
+  // are never touched.
+  const prefetchedProposalRolls = new Map();
+  const capacityContenders = publicProposals.filter(candidate => {
+    if (typeof rng.fork !== 'function') return true;
+    const roll = candidateRoll(rng, candidate);
+    prefetchedProposalRolls.set(candidate, roll);
+    const probability = (candidate.probability ?? 0) >= 1
+      ? 1
+      : Math.max(0, Math.min(1, (candidate.probability ?? 0) * volatility));
+    return roll <= probability;
+  });
+  let proposalContention = capacityContenders.length > maxProposals;
+  if (!proposalContention && proposalDocketAtStart) {
+    let probe = proposalDocketAtStart;
+    for (const candidate of capacityContenders) {
+      if (!proposalDocketAllows(probe, candidate)) { proposalContention = true; break; }
+      probe = recordProposalAdmission(probe, candidate);
+    }
+  }
+  const orderedProposals = proposalContention
+    ? [...publicProposals].sort(compareStableKeys)
+    : publicProposals;
+  let orderedProposalIndex = 0;
+  const admissionOrderedCandidates = rollableCandidates.map(candidate => (
+    candidate.applyMode === 'proposal' && !isStateOnlyOutcome(candidate)
+      ? orderedProposals[orderedProposalIndex++]
+      : candidate
+  ));
   const selected = [];
   const rollExplanations = [];
   // E0 NARRATIVE TEMPO GOVERNOR seam (design §2 — the ONE seam). `options.tempo` is
@@ -524,28 +640,74 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
   // The lowest-priority pending spontaneous class (for the simultaneity tiebreak) —
   // a pure, codepoint-deterministic function of THIS roll's candidate list, computed
   // once. Only needed when the governor is active.
-  const lowestPendingClass = tempo?.active ? computeLowestPendingClass(candidates) : null;
+  const lowestPendingClass = tempo?.active
+    ? computeLowestPendingClass(rollableCandidates.filter(candidate => !isStateOnlyOutcome(candidate)))
+    : null;
+  // The persisted ledger is pre-tick. Overlay only births that actually pass
+  // their roll in this call so classMax remains a hard in-window ceiling even
+  // when several same-class candidates compete in one tick.
+  const landedClassCounts = new Map();
+  let proposalDocket = proposalDocketAtStart;
+  // If at least one admissible major question is waiting in this roll, routine
+  // questions may not consume its explicit per-tick reserve. No major pending
+  // means no artificial vacancy; all of maxProposals remains available.
+  const majorProposalPending = proposalDocket && maxProposals > 0
+    ? capacityContenders.some(candidate => (
+        isMajorOutcome(candidate)
+        && proposalDocketAllows(proposalDocket, candidate)
+      ))
+    : false;
+  const majorProposalReserve = majorProposalPending
+    ? Math.min(PROPOSAL_DOCKET_POLICY.majorProposalSlotsPerTick, maxProposals)
+    : 0;
   let autoCount = 0;
   let proposalCount = 0;
+  let minorProposalCount = 0;
 
-  for (const candidate of candidates) {
+  for (const rawCandidate of admissionOrderedCandidates) {
+    // Defensive twin of the authority-routing exemption above: every caller of
+    // rollCandidates gets the same invariant, and an exhausted proposal budget
+    // can never starve a state-only reducer refresh.
+    const candidate = isStateOnlyOutcome(rawCandidate) && rawCandidate.applyMode !== 'auto'
+      ? { ...rawCandidate, applyMode: 'auto' }
+      : rawCandidate;
+    const stateOnly = isStateOnlyOutcome(candidate);
+    const majorProposal = candidate.applyMode === 'proposal' && isMajorOutcome(candidate);
     // Probability-1 candidates are GUARANTEED consequences (e.g. the residual
     // aftermath a resolved stressor leaves behind), not stochastic events.
     // They neither consume nor respect the auto budget (a mass-resolution
     // tick must not silently drop aftermaths), and volatility never scales
     // them — volatility scales uncertainty, not certainties.
     const guaranteed = (candidate.probability ?? 0) >= 1;
-    if (candidate.applyMode === 'auto' && autoCount >= maxAuto && !guaranteed) continue;
+    if (!stateOnly && candidate.applyMode === 'auto' && autoCount >= maxAuto && !guaranteed) continue;
     if (candidate.applyMode === 'proposal' && proposalCount >= maxProposals) continue;
+    if (candidate.applyMode === 'proposal'
+        && !majorProposal
+        && minorProposalCount >= maxProposals - majorProposalReserve) continue;
+    if (candidate.applyMode === 'proposal'
+        && proposalDocket
+        && !proposalDocketAllows(proposalDocket, candidate)) continue;
     // TEMPO GOVERNOR (spontaneity throttle). A pure ledger + codepoint decision (ZERO
     // rng), taken BEFORE the roll — a deferral `continue`s here, consuming NO rng and
     // NO auto budget, and emits NO rollExplanation row. Only SPONTANEOUS class births
     // are eligible; receipted consequences (isChainedConsequence) always pass. Dormant
     // ⇒ tempo?.active is false ⇒ this whole block is skipped ⇒ byte-identical.
-    if (tempo?.active) {
+    let governedClass = null;
+    if (tempo?.active && !stateOnly) {
+      const candidateClass = dramaClassOf(candidate);
+      const landed = candidateClass ? landedClassCounts.get(candidateClass) || 0 : 0;
+      const governorSnapshot = candidateClass && landed > 0
+        ? {
+            ...tempo.snapshot,
+            classCounts: {
+              ...tempo.snapshot.classCounts,
+              [candidateClass]: (tempo.snapshot.classCounts[candidateClass] || 0) + landed,
+            },
+          }
+        : tempo.snapshot;
       const gov = governBirth({
         candidate,
-        snapshot: tempo.snapshot,
+        snapshot: governorSnapshot,
         config: { active: true, budgets: tempo.budgets, lowestPendingClass },
       });
       if (gov.defer) {
@@ -556,8 +718,11 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
         });
         continue;
       }
+      governedClass = gov.class;
     }
-    const roll = candidateRoll(rng, candidate);
+    const roll = prefetchedProposalRolls.has(candidate)
+      ? prefetchedProposalRolls.get(candidate)
+      : candidateRoll(rng, candidate);
     const probability = guaranteed
       ? 1
       : Math.max(0, Math.min(1, (candidate.probability ?? 0) * volatility));
@@ -577,16 +742,30 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
       passed,
       gates: candidate.reasons || [],
       applyMode: candidate.applyMode,
+      ...(candidate.recordMode ? { recordMode: candidate.recordMode } : {}),
       proposalPayload: candidate.proposalPayload || null,
       conflictResolution: candidate.conflictResolution || null,
     };
     rollExplanations.push(explanation);
     if (!passed) continue;
     selected.push({ ...candidate, roll });
-    if (candidate.applyMode === 'proposal') proposalCount += 1;
-    else if (!guaranteed) autoCount += 1;
+    if (governedClass) {
+      landedClassCounts.set(governedClass, (landedClassCounts.get(governedClass) || 0) + 1);
+    }
+    if (candidate.applyMode === 'proposal') {
+      proposalCount += 1;
+      if (!majorProposal) minorProposalCount += 1;
+      if (proposalDocket) {
+        proposalDocket = recordProposalAdmission(proposalDocket, candidate);
+      }
+    } else if (!guaranteed && !stateOnly) autoCount += 1;
   }
 
   // `deferred` defaults to [] — byte-neutral when the governor is dormant.
-  return { selected, rollExplanations, deferred };
+  return {
+    selected,
+    rollExplanations,
+    deferred,
+    ...(options.proposalDocket ? { proposalDocket } : {}),
+  };
 }

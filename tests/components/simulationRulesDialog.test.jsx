@@ -74,6 +74,35 @@ describe('SimulationRulesDialog', () => {
     });
   });
 
+  test('preview metric fallbacks exclude hidden record-mode outcomes', async () => {
+    actions.previewCampaignWorldPulse.mockReturnValue({
+      candidates: [
+        { id: 'public-candidate' },
+        { id: 'mechanical-candidate', recordMode: 'state_only' },
+        { id: 'suppressor-candidate', recordMode: 'suppression_only' },
+      ],
+      selected: [{ id: 'public-selected', headline: 'A public change' }],
+      autoApplied: [
+        { id: 'public-applied' },
+        { id: 'mechanical-applied', recordMode: 'state_only' },
+      ],
+      proposals: [],
+    });
+
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={vi.fn()}
+    />);
+    fireEvent.click(screen.getByRole('button', { name: 'Preview' }));
+
+    await waitFor(() => {
+      expect(screen.getByText('A public change')).toBeTruthy();
+    });
+    expect(screen.getByText('Candidates').parentElement?.textContent).toBe('Candidates1');
+    expect(screen.getByText('Applied').parentElement?.textContent).toBe('Applied1');
+  });
+
   // LINEAGE NOTE (master merge W6): master placed the three living-world gates
   // (war / strategy / religion) INSIDE this dialog under an auto-opened "Engine
   // gates (advanced)" group. This lineage deliberately surfaces them as

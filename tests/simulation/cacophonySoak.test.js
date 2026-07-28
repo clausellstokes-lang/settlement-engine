@@ -10,14 +10,19 @@
  *
  * HONESTY NOTE (plan §8C): calamity/religious-contest/war-mobilization pacing is
  * REGISTERED-BUT-NOT-WIRED this wave (the bypass producers), so this soak asserts on
- * the GOVERNED SEAM classes only. In this fixture the dominant governed birth is
- * succession_coup (crisis legitimacy), with a minority of economic_shock — claiming
- * a rich multi-class band would over-state what the wired seam produces.
+ * the GOVERNED SEAM classes only. This fixture deliberately keeps crisis legitimacy
+ * alive and resolves each resulting DM question between ticks, so it exercises the
+ * succession_coup governor without conflating proposal-response latency with tempo.
+ * Pressure-born classes remain seed-dependent; this soak does not claim a rich
+ * multi-class band.
  */
 import { describe, expect, test } from 'vitest';
 import { createHash } from 'node:crypto';
 
-import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+import {
+  simulateCampaignWorldPulse,
+  updateProposalStatus,
+} from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { dramaClassOf, isChainedConsequence, countLiveMajorArcs, TEMPO_BUDGETS } from '../../src/domain/worldPulse/narrativeTempo.js';
 
@@ -112,7 +117,23 @@ function soak(tier) {
 
     const upd = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
     saves = saves.map((s) => (upd.has(s.id) ? { ...s, settlement: upd.get(s.id) } : s));
-    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+    // This soak isolates the tempo governor, not DM response latency. Model an
+    // always-dismiss table between ticks so v4's correct pending-question hold
+    // and proposal docket cannot hide recurring pressure before it reaches the
+    // governor. Terminal proposal rows remain in the real bounded ledger.
+    const settledWorldState = (r.worldState.proposals || [])
+      .filter(proposal => proposal?.status === 'pending')
+      .reduce((worldState, proposal) => updateProposalStatus(
+        worldState,
+        proposal.id,
+        'dismissed',
+        { dismissedAt: NOW, updatedAt: NOW },
+      ), r.worldState);
+    campaign = {
+      ...campaign,
+      worldState: settledWorldState,
+      regionalGraph: r.regionalGraph || campaign.regionalGraph,
+    };
   }
 
   return {

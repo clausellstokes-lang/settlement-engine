@@ -157,6 +157,7 @@ export const RUMOR_FIDELITY_FLOOR = 0.05;
  * @property {string[]} partyIds    involved settlement ids (swap-mutable)
  * @property {string | null} causeClass  DM-only; dropped from player views
  * @property {string | null} deityName   gated to ACTIVATED public snapshots
+ * @property {'mechanical'} [visibility]  internal state-only seed; never displayed
  */
 
 /**
@@ -191,7 +192,8 @@ export const RUMOR_FIDELITY_FLOOR = 0.05;
  * @typedef {{ id?: string, tick?: number, significance?: string, score?: number,
  *   severity?: number, scope?: string, kind?: string, impactKind?: string | null,
  *   settlementIds?: Array<string | number>, sourceEventId?: string | null,
- *   tags?: string[], causeClass?: string, deityName?: string }} RumorSeedEntry
+ *   tags?: string[], causeClass?: string, deityName?: string,
+ *   recordMode?: string }} RumorSeedEntry
  */
 
 /** The rng surface this module consumes (the kernel PRNG's fork/draw subset). */
@@ -397,6 +399,7 @@ function captureContent(entry) {
     partyIds: ids,
     causeClass: typeof entry.causeClass === 'string' && entry.causeClass ? entry.causeClass : null,
     deityName: typeof entry.deityName === 'string' && entry.deityName ? entry.deityName : null,
+    ...(entry.recordMode === 'state_only' ? { visibility: /** @type {const} */ ('mechanical') } : {}),
   };
 }
 

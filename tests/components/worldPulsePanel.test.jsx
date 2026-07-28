@@ -96,6 +96,15 @@ describe('WorldPulsePanel', () => {
               passed: true,
               conflictResolution: { deterministic: true },
             },
+            {
+              candidateId: 'candidate-hidden',
+              candidateType: 'private_mechanical_refresh',
+              recordMode: 'state_only',
+              severity: 0.3,
+              probability: 1,
+              roll: 0,
+              passed: true,
+            },
           ],
         }],
       },
@@ -111,6 +120,7 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText('Briarwatch faces import shortage')).toBeTruthy();
     expect(screen.getByText('deterministic')).toBeTruthy();
     expect(screen.getAllByText('food pressure').length).toBeGreaterThan(0);
+    expect(screen.queryByText(/private mechanical refresh/i)).toBeNull();
 
     fireEvent.click(screen.getByTitle('Apply proposal'));
     await waitFor(() => {

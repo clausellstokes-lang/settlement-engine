@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-28T19:15:48.469Z",
+  "generatedAt": "2026-07-28T23:20:10.123Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "3f9a741bb7e43dd2",
+  "sourceHash": "8ed23fd40b8add78",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -14,6 +14,7 @@
     "src/domain/capacityModel.js",
     "src/domain/causalState.js",
     "src/domain/clock.js",
+    "src/domain/clone.js",
     "src/domain/content/customContentSemanticAuthority.js",
     "src/domain/contradictions.js",
     "src/domain/corruption.js",
@@ -42,6 +43,7 @@
     "src/domain/userEdits.js",
     "src/domain/worldPulse/archetypeCatalog.js",
     "src/domain/worldPulse/deityAxes.js",
+    "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",
     "src/domain/worldPulse/relationshipHierarchy.js",
