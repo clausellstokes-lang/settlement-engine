@@ -317,11 +317,19 @@ Two kernel headers carve named-NPC protection as law and MUST be amended in plac
 - RANGE: destinations within MAX_JOURNEY_HOPS=2 on the trade graph AND
   hopWeeks ≤ 3 (near-radius law). STAY: stayWeeks = 1 + (scale/purpose seeded
   0..1) — "~1-week stays".
-- CADENCE: per-NPC ≤ 1 journey per year — the tick-invariant world-seed draw
-  (law 9) fires with JOURNEY_CHANCE=0.35 per eligible NPC-year, checked against
-  `cadence[npcKey] < year`; per-settlement concurrency cap ABROAD_CAP=2.
+- CADENCE: per-NPC ≤ 1 GENESIS journey per year — the tick-invariant world-seed
+  draw (law 9) fires with JOURNEY_CHANCE=0.35 per eligible NPC-year, checked
+  against `cadence[npcKey] < year`; per-settlement concurrency cap ABROAD_CAP=2.
   Expected outcome: a court of ~8 notables produces ~2-3 journeys/year —
   infrequent by construction (§19 soak band).
+  CLARIFIED 2026-07-28 (EP-l adjudication; roadsCharter.test.js encoded this
+  from birth): the law governs GENESIS DISPATCH only. A captivity-release
+  return leg (releasedFromRansom) is the RESOLUTION of the same journey (§9
+  "release → phase 'returning'"), not a fresh genesis — the kernel mints a new
+  mission id for the release leg with startedYear = the release year, so any
+  instrument that counts mission ids per NPC-year double-counts interrupted
+  journeys and will read phantom cadence violations (EP-l's 5-of-16-seeds
+  finding was exactly this). Count genesis only.
 - SELECTION (importance-INVERSE): eligible = importance ∈ {notable, key,
   pillar} (weight ≥ 0.4 — minor/nameless NPCs never travel), not in stasis,
   not away, not hostage. Draw weight = (1.15 − importanceWeight) for
@@ -849,7 +857,9 @@ never raw failing sets).
 - THE LIT WALKTHROUGH (the traditions T-2 proof pattern, mandatory before the
   lane closes): a 12-year lit run on a war-shaped SPATIAL world (executed
   test, quoted output) demonstrating — journeys fire within the cadence band
-  (0.2-0.6 per eligible NPC-year; per-NPC ≤1/year absolute) · every purpose
+  (0.2-0.6 per eligible NPC-year; per-NPC ≤1 GENESIS/year absolute — release
+  legs are the same journey resuming, excluded from the count per §4's
+  2026-07-28 clarification) · every purpose
   kind observed · ≥1 capture per threat class (fixtures may force the rare
   ones) · a ransom term completes with the full write schedule · a conversion
   mints (web lit) and does NOT (web dark) · every captured NPC is released,

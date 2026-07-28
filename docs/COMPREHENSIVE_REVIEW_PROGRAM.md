@@ -39,6 +39,14 @@ ledger — never from a session digest.
 >   advancePauseResume red AT HEAD; mechanismLitCoverage red only vs foreign untracked test). Commit
 >   proven HEAD-green in a detached-worktree battery (45/45). Owner picks EP-a..EP-j in queue §9.
 >   Doctrine: GENERATION_CONTRACTS.md §Test epistemics; program doc: EPISTEMIC_PREVENTION_PLAN.md.
+> - 2026-07-28: EP-6 SRC-SIDE REPAIR folded @ composite-r4 11c295c1 (12 files; owner "continue"
+>   on EP-g/EP-l). Four measured investigations → two waves. The audit's own hard_dependency
+>   prescription proven a REGRESSION (ladder-aware fix = 41% golden keys → ONE REGEN batch,
+>   EP-g2); access_compatibility never unreachable (polarity gap; promoted + exclusion ratchet);
+>   EP-l WITHDRAWN as instrument artefact — real yield = SELF-CAPTURE fixed in 4 dark kernel
+>   arms (5th instance chip-filed, EP-p); furrier→tannery producer-eater deleted (EP-f, 46/46
+>   severing proof); §14 trace + survival_crisis receipt shipped (zero goldens, A/B-proven
+>   against the deity lane's concurrent drift). Picks: EP-g1/g3/g4, EP-n/o/p (queue §9).
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
