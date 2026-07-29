@@ -47,6 +47,17 @@ ledger — never from a session digest.
 >   arms (5th instance chip-filed, EP-p); furrier→tannery producer-eater deleted (EP-f, 46/46
 >   severing proof); §14 trace + survival_crisis receipt shipped (zero goldens, A/B-proven
 >   against the deity lane's concurrent drift). Picks: EP-g1/g3/g4, EP-n/o/p (queue §9).
+> - 2026-07-28: EXHAUSTIVE REMEDIATION RECONCILIATION recorded against code-of-record
+>   `minifold` @ 018e4119 and execution branch `codex/exhaustive-remediation`. All 202 REM rows
+>   have an explicit disposition: 18 done / 146 partial / 9 superseded / 21 true repository gaps /
+>   6 external-evidence closures / 2 demand-gated. The isolated worktree baseline is fully green:
+>   1,980 test files passed (8 skipped), 20,102 tests passed (79 skipped), build + `verify:dist`
+>   green, edge behavior 629/629, lint 0 errors (24 pre-existing warnings). Migration head remains
+>   frozen at 192 pending clone rehearsal of the existing 71-migration train; deterministic
+>   rehearsal-set SHA-256:
+>   `b353c97b91a93609c40103a2b39275ec88f2fa79ba135e0cf4a7ac2d78d1fe3d`.
+>   Binding reconciliation and fold order:
+>   `docs/EXHAUSTIVE_REMEDIATION_RECONCILIATION_018e4119.md`.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
