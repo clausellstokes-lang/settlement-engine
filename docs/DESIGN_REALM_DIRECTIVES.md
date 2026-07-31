@@ -306,15 +306,22 @@
   cartography-visible (the dark windows render).
   **VOCABULARY RULING 2026-07-31 (owner asked "shells or impaired?" — answer: BOTH,
   distinct):** one closed institution operational-status vocabulary —
-  `operational | impaired | shell` — where IMPAIRED is the corruption web's EXISTING
-  term (something is wrong WITH it: corruption, damage; operates but sick; cured by
-  scrubbing/repair) and SHELL is the regime law's new member (nothing wrong with it;
+  `operational | impaired | shell` — where IMPAIRED is the general
+  operating-but-degraded state carrying a CLOSED CAUSE VOCABULARY (owner
+  clarification 2026-07-31: supply_shortage [from any root: cut route, failed
+  harvest, interdicted reagents] | corruption_exposed | damage | siege_occupation |
+  ...authored) — the cure follows the cause (restock / scrub / repair / relieve) —
+  and SHELL is the regime law's new member (nothing wrong with it;
   the world cannot fund it; intact but dark; reactivated by economic recovery). They
   COMPOSE: an impaired shell (closed and rotten) is the darkest state short of ruin.
   Cartography renders each honestly (the frayed / the dark / the frayed-dark); the
   Herald tells them apart ("the tannery is rotten" vs "the foundry is quiet").
   Optional depth band: very-long-neglected shells may decay toward ruin —
-  infrastructure remembers, but not forever.
+  infrastructure remembers, but not forever. THE TWO-TIMESCALE ECHO (binding):
+  impairment is the FAST layer, shell the SLOW verdict — the same law as trade
+  disruption vs organic route removal: a severed reagent road impairs the foundry
+  in ticks (starved but working); only sustained economic failure shells it. The
+  world responds quickly and concludes slowly, everywhere.
 
 
 ## Waves (execution order = the reviewed sequencing)
