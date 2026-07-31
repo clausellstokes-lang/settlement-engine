@@ -256,6 +256,18 @@
   the gating asymmetry (high-magic/low-economy ≈ mundane/low-economy); (f) bands in
   the disaster kernel's tuning table; dark behind the existing disasters flag family;
   dormancy golden. Builds in W-K (queued with the held waves).
+  **AMENDED 2026-07-31 (owner: PRESENCE vs EXPLOITATION):** high magic exists
+  INDEPENDENTLY of economy — magic-class institution PRESENCE keys off magicLevel
+  alone (the magicFilter seam; high magic ⇒ high presence odds at any wealth).
+  Economy gates EXPLOITATION only: the economy_gate graduates from a disaster-local
+  term to THE canonical magic-exploitation gate — ONE definition (single-writer for
+  formulas), read by every magic-derived output (buffer, economic contribution,
+  wards, service scale). This mints the MYSTIC BACKWATER archetype (real power, no
+  capital, mechanically modest, LATENT — rising economy awakens it; an upswing story
+  needing zero new machinery). Pins: presence-independence (magic-institution rates
+  at high magic invariant across economy bands), archetype reachability
+  (poor+high-magic cells generate magic institutions in real corpora), exploitation
+  ordering (magic output monotone in economy at fixed magic).
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
