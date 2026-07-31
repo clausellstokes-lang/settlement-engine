@@ -82,11 +82,33 @@ describe('public gallery dossier — Chronicle tab', () => {
     // Party attribution survives the projection.
     expect(screen.getByTitle('Caused by the party')).toBeTruthy();
 
-    // Owner-private surfaces stay off the public page.
+    // Owner-private surfaces stay off the public page. The strings are the tab
+    // strip's own labels (TABS in OutputContainer) — a renamed label must move
+    // these pins with it or they go vacuous.
     expect(screen.queryByText('DM Notes')).toBeNull();
-    expect(screen.queryByText('AI Instructions')).toBeNull(); // the ai_notes tab (renamed from 'Narrative Notes')
+    expect(screen.queryByText('AI Notes')).toBeNull();
     expect(screen.queryByText('Campaign Context')).toBeNull();
     expect(screen.queryByText('DM Summary')).toBeNull();
+  });
+
+  test('a shareDm dossier keeps the notes tabs off the page while the Chronicle stays', async () => {
+    // "Reveal DM-private content" turns playerView OFF, so the playerView
+    // hide-list stops guarding the notes tabs and the readOnly + no-saveId gate
+    // is the only one left. ai_notes used to fall through it and published an
+    // editable, unsavable Campaign Context box to whoever opened the link.
+    render(<PublicDossierView dossier={{ ...dossier(), shareDm: true }} showHeader={false} />);
+
+    fireEvent.click(await screen.findByText('Notes'));
+
+    // Asserted BEFORE the positive control: an ai_notes tab here does not merely
+    // sit in the strip, it takes the Notes group's landing slot, so a Chronicle
+    // assertion would fail first and name the wrong defect.
+    expect(screen.queryByText('DM Notes')).toBeNull();
+    expect(screen.queryByText('AI Notes')).toBeNull();
+    expect(screen.queryByText('Campaign Context')).toBeNull();
+    // Positive control: the group rendered and landed on the Chronicle, so the
+    // absences above are about the gate, not an unrendered strip.
+    expect(await screen.findByText('A tremor damaged the granary.')).toBeTruthy();
   });
 
   test('an empty chronicle renders the tab with its empty state (no crash)', async () => {

@@ -489,12 +489,15 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // through the gallery RPC's allowlisted `chronicle` column (migration 032,
     // disclosed in the share flow) — so it stays visible in the player view.
     if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
-    // DM Notes are a private DM scratch space — never surface them on a public /
-    // shared gallery dossier (readOnly with no owning saveId), even in the full
-    // "Reveal DM-private content" view. They're truly confidential to the DM and
-    // are kept only on the owner's own saved-settlement view (readOnly + saveId)
-    // and the live editor (not readOnly).
-    if (t.id === 'dm_notes' && readOnly && !saveId) return false;
+    // DM Notes and AI Notes are private prep spaces — never surface them on a
+    // public / shared gallery dossier (readOnly with no owning saveId), even in
+    // the full "Reveal DM-private content" view. They're truly confidential to
+    // the DM and are kept only on the owner's own saved-settlement view (readOnly
+    // + saveId) and the live editor (not readOnly). ONE gate for both, because
+    // NotesTab has no saveId early return of its own — only its Save button is
+    // keyed on saveId, so tab PRESENCE is the whole boundary: an ai_notes tab
+    // here rendered an editable, unsavable Campaign Context box to a visitor.
+    if (['dm_notes', 'ai_notes'].includes(t.id) && readOnly && !saveId) return false;
     return true;
   });
   // Phase 5 W4e — War & Faith presence. The faith half renders SOMETHING unless

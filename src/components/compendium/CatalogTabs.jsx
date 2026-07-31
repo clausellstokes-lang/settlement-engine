@@ -118,7 +118,7 @@ export function PowerTab_({ search='' }) {
   const effectiveCat = search ? 'All' : cat;
   const filtered = CD.archetypes.entries.filter(a => (effectiveCat==='All'||a.cat===effectiveCat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
+    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes are never picked: no single slider names one, and an archetype appears only once several world inputs have settled far enough into the shape it needs. A faction's power starts from the institutions it holds, then rises or falls with how the public sees the ruling seat.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
       {cats.map(c => <Button key={c} onClick={() => setCat(c)} variant={effectiveCat===c?'primary':'ghost'} size="sm" aria-pressed={effectiveCat===c}>{c}</Button>)}
     </div>

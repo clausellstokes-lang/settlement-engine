@@ -133,6 +133,10 @@ describe('FaithSection — the live faith panel + cause chains as sentences', ()
     expect(standings.textContent).toMatch(/Sunlord Aurelian/);
     expect(standings.textContent).toMatch(/Ashmother/);
     expect(standings.textContent).toMatch(/secure/);   // 0.82 legitimacy
+    // LEGIBILITY LAW: the 0..1 legitimacy scalar reads as what it measures — a
+    // creed's rightful claim — not as the engine's field name.
+    expect(standings.textContent).toMatch(/rightful claim 82%/);
+    expect(standings.textContent).not.toMatch(/legitimacy/i);
     expect(standings.textContent).toMatch(/14% keep no god/);
     // Cause chains as sentences (legibility law).
     expect(container.textContent).toMatch(/no longer lives like its god/i);   // conduct_drift
@@ -140,6 +144,20 @@ describe('FaithSection — the live faith panel + cause chains as sentences', ()
     expect(container.textContent).toMatch(/Crisis calls the faithful home/i);  // revival (rising + unaffiliated)
     // Divine mandate line (theocracy).
     expect(container.textContent).toMatch(/[Dd]ivine mandate/);
+  });
+
+  it('a live realm term names WHICH faith is carrying the amplification, in words', () => {
+    // realmMult ≠ 1 (a campaign with faith spread) is the branch that used to
+    // print the two raw factors as "(local ×1.05, realm ×1.25)".
+    const s = livePantheon();
+    Object.assign(s.config.faithProfile.piety, { localMult: 1.05, realmMult: 1.25, composite: 1.31 });
+    useStore.__set({ auth: { tier: 'premium' } });
+    render(<FaithSection settlement={s} />);
+
+    const piety = screen.getByTestId('faith-piety');
+    expect(piety.textContent).toMatch(/Mostly the faith of the wider realm\./);
+    expect(piety.textContent).not.toMatch(/local ×/);
+    expect(piety.textContent).not.toMatch(/realm ×/);
   });
 
   it('a freshly-activated settlement (embeds, no faithProfile yet) shows the day-one static state', () => {

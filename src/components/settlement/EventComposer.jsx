@@ -275,6 +275,24 @@ export default function EventComposer({ onLink = null }) {
   const isStale = !!pendingPreview
     && (pendingPreview._previewKey !== currentKey || pendingPreview._forSettlement !== settlement);
 
+  // The ONE setters bag (threaded to the verb-reset + intent-consumption
+  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
+  // DECLARED ABOVE the `if (!settlement) return null` below: the intent effect
+  // is registered on EVERY render, settlement-null ones included, so a const
+  // declared after that return is in its temporal dead zone when the effect
+  // fires and reading it throws. Nothing here needs a live settlement.
+  const composerSetters = {
+    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
+    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
+    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
+    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
+    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
+    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
+    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
+    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
+    setImportance, setReliefMagnitude, setPartyCaused,
+  };
+
   // Composer-intent consumption (§4): an intent staged from anywhere (entity
   // card, SuccessorPrompt) populates the FORM — the one source of truth — and
   // the live preview derives from it like any hand-built composition.
@@ -315,22 +333,12 @@ export default function EventComposer({ onLink = null }) {
     .map(i => ({ id: i.id || i.name, name: i.name || i.id }))
     .filter(o => o.id && o.name);
 
-  // The ONE setters bag (threaded to the verb-reset + intent-consumption
-  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
-  const composerSetters = {
-    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
-    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
-    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
-    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
-    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
-    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
-    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
-    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
-    setImportance, setReliefMagnitude, setPartyCaused,
-  };
   // The ONE verb-change chokepoint (select dropdown, navigator chips, staged
   // intents): resets every per-type field, re-mints the compose-session id
   // (a different verb IS a different composition — §5 identity), ends §10 edits.
+  // Safe to stay below the early return even though the intent effect calls it:
+  // a function declaration is initialized at scope entry, and the bag its body
+  // reads is declared above.
   function switchType(v) { resetComposerForVerb(v, composerSetters); }
 
   // Thin closure: thread the form state into the pure buildEvent assembler. The

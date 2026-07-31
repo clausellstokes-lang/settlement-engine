@@ -200,6 +200,20 @@ export function DefenseWarFrontSection({ settlement, warStatus = null, nameFor =
 // ── Power: ruler identity, coup forecast, lineage, disposition ────────────────
 
 /**
+ * The seat's legitimacy multiplier (rulingPower.js bands: 0.60 … 1.30) read as
+ * what the public's view DOES to its grip. The coefficient itself never reaches
+ * the page — the legibility law wants the consequence, not the arithmetic.
+ * @param {number} mult @returns {string}
+ */
+function legitimacyHold(mult) {
+  if (mult >= 1.25) return 'public backing hardens their hold';
+  if (mult >= 1.05) return 'public approval lends them weight';
+  if (mult > 0.95) return 'public opinion neither helps nor hurts';
+  if (mult >= 0.7) return 'public doubt loosens their hold';
+  return 'public rejection is breaking their hold';
+}
+
+/**
  * @param {{ settlement: any }} props
  */
 export function PowerSuccessionSection({ settlement }) {
@@ -236,7 +250,7 @@ export function PowerSuccessionSection({ settlement }) {
               (e.g. a bare government-type label like "Town Council"). */}
           <strong>Ruler:</strong> <EntityLink id={factionIdFromName(incumbentName)} type="faction" fallback={incumbentName} style={{ color: BODY }} />
           {Number.isFinite(contenders.incumbent?.govMultiplier) && level !== 'guided' && (
-            <span style={{ color: MUTED }}> · legitimacy ×{contenders.incumbent.govMultiplier}</span>
+            <span style={{ color: MUTED }}> · {legitimacyHold(contenders.incumbent.govMultiplier)}</span>
           )}
         </div>
       )}

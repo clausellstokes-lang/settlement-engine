@@ -322,6 +322,29 @@ describe('EventComposer — post-apply staleness modal', () => {
   });
 });
 
+describe('EventComposer — a staged intent on a settlement-less render', () => {
+  // The intent effect is registered on EVERY render, including the ones that
+  // take the `if (!settlement) return null` early return, so everything it
+  // touches must be declared ABOVE that return. When the setters bag sat below
+  // it, `{ ...composerSetters }` read a const in its temporal dead zone and the
+  // effect threw `Cannot access 'composerSetters' before initialization`.
+  test('consumes and clears the intent instead of throwing on the setters bag', () => {
+    state = baseState({
+      settlement: null,
+      composerIntent: { type: 'ADD_NPC', target: 'Mira the Bold', fields: { importance: 'major' } },
+    });
+
+    const { container } = render(<EventComposer />);
+
+    // The settlement-less render itself is empty…
+    expect(container.firstChild).toBeNull();
+    // …but the intent was consumed into the form and cleared at the source, so
+    // it cannot re-fire (the effect's only dep is the intent object).
+    expect(state.stageComposerIntent).toHaveBeenCalledTimes(1);
+    expect(state.stageComposerIntent).toHaveBeenCalledWith(null);
+  });
+});
+
 describe('EventComposer — ADD_FACTION offers Compendium factions (the FactionEventBanner promise)', () => {
   // Guards the manifest's factions.name + factions.description "eventComposer"
   // consumer evidence: a Compendium faction must be PICKABLE here, and its

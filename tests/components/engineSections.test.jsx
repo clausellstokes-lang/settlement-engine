@@ -87,6 +87,26 @@ describe('PowerSuccessionSection — ruler / coup forecast / lineage', () => {
     expect(getByTestId('coup-risk').textContent).toMatch(/Stable|Holding|Contested|Critical/);
     expect(getByTestId('government-lineage').textContent).toMatch(/Free Commune/);
     expect(getByTestId('government-lineage').textContent).toMatch(/coup/);
+    // LEGIBILITY LAW: the seat's legitimacy multiplier reads as its consequence,
+    // never as the coefficient (this fixture's 1.0 = the neutral band).
+    expect(getByTestId('power-succession-section').textContent).toMatch(/public opinion neither helps nor hurts/);
+    expect(getByTestId('power-succession-section').textContent).not.toMatch(/×/);
+  });
+
+  test('a discredited seat reads its legitimacy as a consequence, not a multiplier', () => {
+    const town = {
+      id: 'p3', name: 'Cinderwatch', population: 3000, config: {},
+      powerStructure: {
+        governingName: 'The Regency',
+        factions: [{ faction: 'The Regency', archetype: 'noble', power: 50, isGoverning: true }],
+        // 0.60 = the Legitimacy Crisis band (rulingPower.js).
+        publicLegitimacy: { govMultiplier: 0.6 },
+      },
+    };
+    const { getByTestId } = render(<PowerSuccessionSection settlement={town} />);
+    const text = getByTestId('power-succession-section').textContent;
+    expect(text).toMatch(/public rejection is breaking their hold/);
+    expect(text).not.toMatch(/0\.6/);
   });
 
   test('self-gates to nothing for a placeholder with no ruler, challengers, or lineage', () => {

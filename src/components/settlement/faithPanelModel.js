@@ -74,6 +74,27 @@ const STRUCTURAL_LABEL = Object.freeze({
 });
 
 /**
+ * WHERE the amplification comes from, in words. The composite is localMult ×
+ * realmMult; naming the two factors as bare coefficients is exactly what the
+ * legibility law forbids, so the split reads as a sentence instead. Only built
+ * when the realm term is live — otherwise the whole of it is local by
+ * construction and the receipt sentence already says so.
+ * @param {number} localMult @param {number} realmMult @returns {string}
+ */
+function amplifierSource(localMult, realmMult) {
+  const local = Math.abs(localMult - 1);
+  const realm = Math.abs(realmMult - 1);
+  if ((localMult - 1) * (realmMult - 1) < 0) {
+    return local >= realm
+      ? 'The town’s own devotion carries it — the wider realm pulls the other way.'
+      : 'The wider realm carries it — the town’s own devotion pulls the other way.';
+  }
+  if (local > realm * 1.5) return 'Mostly the town’s own devotion.';
+  if (realm > local * 1.5) return 'Mostly the faith of the wider realm.';
+  return 'The town’s own devotion and the wider realm alike.';
+}
+
+/**
  * The piety sub-model: the lagged reading + its arc, the amplifier receipt (owner:
  * "name both multipliers with causes"), the structural cause bars, and the cause
  * SENTENCES. Null when the settlement carries no projected piety record.
@@ -87,12 +108,16 @@ function pietyModel(piety) {
   const localMult = num(piety.localMult, 1);
   const realmMult = num(piety.realmMult, 1);
   const causes = Array.isArray(piety.causes) ? piety.causes : [];
-  // The amplifier RECEIPT: name the composite multiplier and its two factors.
+  const realmActive = Math.abs(realmMult - 1) > 0.001;
+  // The amplifier RECEIPT: name the composite multiplier and, when the realm
+  // term is live, which of the two factors is carrying it — as prose, never as
+  // a second pair of coefficients.
+  const source = realmActive ? amplifierSource(localMult, realmMult) : null;
   let amplifier = null;
   if (composite > 1.05) {
-    amplifier = { dir: 'up', mult: composite, sentence: `Faith runs strong here — the gods’ influence is amplified ×${composite.toFixed(2)}.` };
+    amplifier = { dir: 'up', mult: composite, source, sentence: `Faith runs strong here — the gods’ influence is amplified ×${composite.toFixed(2)}.` };
   } else if (composite < 0.95) {
-    amplifier = { dir: 'down', mult: composite, sentence: `Faith is thin here — the gods’ influence is dampened ×${composite.toFixed(2)}.` };
+    amplifier = { dir: 'down', mult: composite, source, sentence: `Faith is thin here — the gods’ influence is dampened ×${composite.toFixed(2)}.` };
   }
   const bars = causes
     .filter((c) => STRUCTURAL_SOURCES.has(c?.source))
@@ -102,7 +127,7 @@ function pietyModel(piety) {
     .map((c) => CAUSE_SENTENCE[c.source]);
   return {
     local01, target, trend: pietyTrend(local01, target), band: pietyBandLabel(local01),
-    localMult, realmMult, composite, realmActive: Math.abs(realmMult - 1) > 0.001,
+    localMult, realmMult, composite, realmActive,
     amplifier, bars, sentences,
   };
 }

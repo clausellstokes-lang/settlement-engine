@@ -157,9 +157,12 @@ describe('gallery client chronicle contract', () => {
     // The playerView hide-list keeps the owner-private tabs and no longer
     // blocks the chronicle…
     expect(src).toMatch(/playerView && \['summary', 'dm_notes', 'ai_notes'\]\.includes\(t\.id\)/);
-    // …and the dm_notes hard-block for public dossiers (readOnly, no owning
-    // saveId) stays in place.
-    expect(src).toMatch(/t\.id === 'dm_notes' && readOnly && !saveId/);
+    // …and the hard-block for public dossiers (readOnly, no owning saveId)
+    // covers BOTH note surfaces. ai_notes used to fall through this gate, so an
+    // owner who opted into "Reveal DM-private content" (shareDm ⇒ playerView
+    // false) published the tab itself — an editable, unsavable Campaign Context
+    // box for the visitor. Both ids must stay in the one predicate.
+    expect(src).toMatch(/\['dm_notes', 'ai_notes'\]\.includes\(t\.id\) && readOnly && !saveId/);
   });
 
   it('discloses the public chronicle in the share flow', () => {

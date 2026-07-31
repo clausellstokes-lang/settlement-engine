@@ -156,8 +156,8 @@ function ActiveFaith({ model }) {
             {piety.amplifier && (
               <Cause>
                 <span style={{ color: piety.amplifier.dir === 'up' ? GREEN : MUTED, fontWeight: 700 }}>{piety.amplifier.sentence}</span>
-                {piety.realmActive && (
-                  <span style={{ color: MUTED }}> (local ×{piety.localMult.toFixed(2)}, realm ×{piety.realmMult.toFixed(2)})</span>
+                {piety.amplifier.source && (
+                  <span style={{ color: MUTED }}> {piety.amplifier.source}</span>
                 )}
               </Cause>
             )}
@@ -173,7 +173,7 @@ function ActiveFaith({ model }) {
                 <span style={{ fontWeight: 800, color: INK }}>{d.name}</span>
                 {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
                 <span style={{ color: TONE_COLOR[d.band.tone], fontWeight: 700 }}>{d.band.label}</span>{' '}
-                <span style={{ color: MUTED }}>(legitimacy {Math.round(d.legitimacy * 100)}%)</span>
+                <span style={{ color: MUTED }}>(rightful claim {Math.round(d.legitimacy * 100)}%)</span>
                 <div
                   role="img"
                   aria-label={`${d.name} adherent share ${d.share} percent`}

@@ -1,6 +1,8 @@
 import {
   applyFactionRenameToPartner,
+  applyNpcRenameToPartner,
   factionRenameChanges,
+  npcRenameChanges,
 } from '../../domain/factionRename.js';
 
 // ── Save migration ─────────────────────────────────────────────────────────
@@ -62,6 +64,29 @@ export function withFactionRenamed(save, isHost, hostName, oldName, newName) {
     return partner.changed ? { ...save, settlement: partner.settlement } : save;
   }
   const { changed, changes } = factionRenameChanges(save?.settlement, oldName, newName);
+  return changed ? withSettlementChanges(save, changes) : save;
+}
+
+/**
+ * Apply an NPC rename to ONE library save, through the SAME writer the store
+ * lane calls (domain/factionRename.js). The host save gets the full
+ * in-settlement cascade — including `factions[].members[].name`, the second home
+ * this lane used to miss on every reloaded save; every other save gets only the
+ * neighbour contacts that name the renamed person. Returns the SAME reference
+ * when nothing moved, so the caller's modified-set stays honest.
+ *
+ * @param {any} save
+ * @param {boolean} isHost  whether this save owns the renamed character
+ * @param {string} hostName the host settlement's own name
+ * @param {string} oldName
+ * @param {string} newName
+ */
+export function withNpcRenamed(save, isHost, hostName, oldName, newName) {
+  if (!isHost) {
+    const partner = applyNpcRenameToPartner(save?.settlement, hostName, oldName, newName);
+    return partner.changed ? { ...save, settlement: partner.settlement } : save;
+  }
+  const { changed, changes } = npcRenameChanges(save?.settlement, oldName, newName);
   return changed ? withSettlementChanges(save, changes) : save;
 }
 
