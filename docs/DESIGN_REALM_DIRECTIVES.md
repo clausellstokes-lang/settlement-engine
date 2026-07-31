@@ -53,6 +53,22 @@
 >   golden re-records where legitimately shifted. STILL HELD after tuning: the build
 >   waves (D..K, TC-0..8) and wave-3 programs.
 >   DESIGN_MAGIC_ECONOMY.md joined the corpus (6 architecture docs).
+> - 2026-07-31 (⭐⭐ OWNER RESTART ORDER — supersedes the boundary amendments above):
+>   "begin building everything from the waves because they change the simulation.
+>   then we need to redo all of the soaks. Between the waves and the subsystem
+>   certifications, I leave those to you on how you want to handle the order."
+>   THE PROGRAM (manager's ordering, recorded vetoably): (1) wave C commits (gate in
+>   flight); (2) SUBSYSTEM CERTIFICATION BUILDS FIRST — the totality walker makes an
+>   uncertified subsystem structurally impossible, so every subsequent wave ships
+>   pre-certified and the final soaks emit v5 receipts grading the new systems;
+>   includes the harness remnant amendment; (3) THE BUILD WAVES in dependency order:
+>   D → E → F → G → J1-J2 → H1-H2 → J3 → H3-H4 → I1-I4 → J4 → K1-K4 — each wave:
+>   Opus implementers, dark flags lit in full_simulation (the certification vehicle)
+>   with budgets proven lit, full gate, one commit, ledger row; (4) REDO ALL SOAKS
+>   on the post-wave engine (release grid + 300y research, everything lit);
+>   (5) TUNING on the new evidence (authorized). STILL HELD: TC-0..8 + wave-3
+>   programs (they do not change the simulation — the owner's rationale, applied).
+>   The currently-running pre-wave 300y soak completes as BASELINE evidence.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
