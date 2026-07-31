@@ -279,6 +279,20 @@
   magic-only per the amendment above; the ladder + bands live in one tuning table;
   the regime vocabulary joins finite semantics; transition events carry address
   chains and material receipts (what the crossing cost).
+  **AMENDED 2026-07-31 (owner — FORMS + SUBSTITUTION):** (i) PRESENCE SCALES IN KIND:
+  the magic ladder has forms — practitioner (a hedge wizard/druid: a TIED ROSTER
+  CHARACTER as much as an institution row, reachable by the consequence economy) →
+  circle → tower → guild → foundry; a poor thorp at high magic holds a person, not
+  an arcane tower. (ii) SUBSTITUTION AT THE TOP, AS A CHANNEL: at the highest
+  regime(s), magic may substitute for food and supply — entering the SAME material
+  ledger as a supply CHANNEL (the foodBalance channel idiom), never an exemption:
+  its costs stay material (reagents, practitioner capacity — flowing, charterable,
+  cuttable), its share is CAP-BANDED, and the substitution share is itself a
+  VULNERABILITY METRIC — magical dependency is a named fragility class ("the city
+  eats from the Guild's hand"), Herald-narratable and enemy-targetable.
+  Conservation pin: remove the magic source and the deficit honestly reappears.
+  Routes stay load-bearing: substitution shifts WHAT moves, never whether things
+  move.
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
