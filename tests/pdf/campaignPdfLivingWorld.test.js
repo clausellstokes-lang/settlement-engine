@@ -41,11 +41,19 @@ describe('a living campaign surfaces its realm state', () => {
   };
 
   test('the summary is present and carries the war-weariness + pantheon reads', () => {
-    const rs = collectRealmSummary(living, saves);
+    // The pantheon read is behind the premium faith seam (default false), so this
+    // unlocks it; the locked half is pinned in realmExportFaithSeam.test.js.
+    const rs = collectRealmSummary(living, saves, { faithUnlocked: true });
     expect(rs.present).toBe(true);
     expect(rs.weary.map(w => w.id)).toContain('ashford');
     expect(rs.pantheon.map(p => p.id)).toContain('deity:war');
     // nameFor resolves member ids to display names for the rendered chapter.
     expect(rs.nameFor('grimhold')).toBe('Grimhold');
+  });
+
+  test('the war-weariness read survives a default (faith-locked) export', () => {
+    const rs = collectRealmSummary(living, saves);
+    expect(rs.present).toBe(true);
+    expect(rs.weary.map(w => w.id)).toContain('ashford');
   });
 });

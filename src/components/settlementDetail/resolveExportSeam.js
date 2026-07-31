@@ -51,9 +51,22 @@ export function resolveExportSeam(liveStore, saveId) {
   // The faith premium seam — mirrors FaithSection's screen gate
   // (tier === 'premium' || elevated). Free / lapsed / anon exports thread
   // false, so faithChapterVisible's default-safe gate stays load-bearing.
-  const faithUnlocked = liveStore.auth?.tier === 'premium'
-    || (typeof liveStore.isElevated === 'function' ? liveStore.isElevated() : false);
+  const faithUnlocked = resolveFaithUnlocked(liveStore);
   return { campaign, faithUnlocked };
+}
+
+/**
+ * The ONE spelling of the export-faith entitlement. Realm-scope callers
+ * (CampaignFolder's World Book / Campaign PDF) consume this instead of
+ * re-spelling the tier comparison — the premium-gate census holds this file
+ * as the seam's single exemption.
+ *
+ * @param {any} liveStore
+ * @returns {boolean}
+ */
+export function resolveFaithUnlocked(liveStore) {
+  return liveStore?.auth?.tier === 'premium'
+    || (typeof liveStore?.isElevated === 'function' ? liveStore.isElevated() : false);
 }
 
 export default resolveExportSeam;

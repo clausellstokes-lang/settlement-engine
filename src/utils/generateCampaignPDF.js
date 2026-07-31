@@ -745,13 +745,30 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
  * SAME display selectors the settlement PDF consumes; never recomputes. Gated on a
  * canonized worldState; a legacy / draft-world campaign returns `{ present:false }`
  * so the chapter is skipped and the export is byte-identical to before.
+ *
+ * THE FAITH SEAM — `opts.faithUnlocked` is the realm-scale twin of the settlement
+ * lane's gate (resolveExportSeam feeding faithChapterVisible): the caller passes the
+ * premium result and the DEFAULT (false) is the safe one, so a free / lapsed / anon
+ * realm export never prints a deity name. A locked export reads the realm WITHOUT its
+ * faith ledger, so neither the Pantheon standing nor an "Ascendancy of <deity>" arc
+ * line is ever PRODUCED — whole-section omission, never a blanked name. War, chronicle
+ * and trade content read the live worldState and are untouched by the seam.
+ *
+ * @param {Object} campaign
+ * @param {Array} [settlements]
+ * @param {{ faithUnlocked?: boolean }} [opts]
  * @returns {{ present:false } | { present:true, nameFor:(id:any)=>string, majors:string[],
  *   sieges:any[], weary:any[], standings:any[], pantheon:any[], arcs:string[] }}
  */
-export function collectRealmSummary(campaign, settlements = []) {
+export function collectRealmSummary(campaign, settlements = [], opts = {}) {
   const worldState = campaign?.worldState || null;
   if (!worldState?.canonizedAt) return { present: false };
+  const { faithUnlocked = false } = opts;
   const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+  // The faith-gated read of the realm: the live world minus its pantheon ledger when
+  // the export is locked. ONE seam value feeds BOTH deity-name producers (the
+  // standings and the arc lines), so the two can never drift apart.
+  const faithView = faithUnlocked ? worldState : { ...worldState, pantheon: null };
 
   const nameById = new Map();
   for (const save of settlements) {
@@ -772,15 +789,15 @@ export function collectRealmSummary(campaign, settlements = []) {
   const sieges = liveSieges({ worldState, regionalGraph }).filter(sg => sg.visibility !== 'concealed');
   const weary = warExhaustionStandings(worldState);
   const standings = dispositionStandings(worldState);
-  const pantheon = pantheonStandings(worldState);
-  const arcs = realmArcLines({ worldState, regionalGraph, settlements });
+  const pantheon = pantheonStandings(faithView);
+  const arcs = realmArcLines({ worldState: faithView, regionalGraph, settlements });
 
   const present = !!(majors.length || sieges.length || weary.length || standings.length || pantheon.length || arcs.length);
   return { present, nameFor, majors, sieges, weary, standings, pantheon, arcs };
 }
 
-function buildLivingWorld(d, campaignName, campaign, settlements, pageN) {
-  const rs = collectRealmSummary(campaign, settlements);
+function buildLivingWorld(d, campaignName, campaign, settlements, pageN, faithUnlocked) {
+  const rs = collectRealmSummary(campaign, settlements, { faithUnlocked });
   if (!rs.present) return { pageN }; // legacy / draft / quiet world ⇒ chapter skipped
   const { nameFor, majors, sieges, weary, standings, pantheon, arcs } = rs;
 
@@ -846,10 +863,12 @@ function buildLivingWorld(d, campaignName, campaign, settlements, pageN) {
  * doc.save().
  * @param {Object} campaign
  * @param {Array} [allSaves]
- * @param {{ now?: string }} [opts] `now` is the already-formatted cover date —
- *   the SAME injectable seam the World Book cover carries (generateWorldBook
- *   opts.now), so a fixture renders a reproducible cover. Omitted ⇒ wall clock,
- *   exactly as before.
+ * @param {{ now?: string, faithUnlocked?: boolean }} [opts] `now` is the already-
+ *   formatted cover date — the SAME injectable seam the World Book cover carries
+ *   (generateWorldBook opts.now), so a fixture renders a reproducible cover.
+ *   Omitted ⇒ wall clock, exactly as before. `faithUnlocked` is the premium faith
+ *   seam (see collectRealmSummary); the default false is the safe one, so a free /
+ *   lapsed / anon campaign export carries no pantheon and no deity-named arc.
  */
 export function generateCampaignPDF(campaign, allSaves, opts = {}) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
@@ -900,8 +919,10 @@ export function generateCampaignPDF(campaign, allSaves, opts = {}) {
 
   // State of the Realm — the living-world chapter (lib-infra-7). Self-gates on a
   // canonized worldState with living content; a legacy campaign skips it entirely.
+  // The faith seam rides with it: a locked export collects no pantheon and no
+  // deity-named arc, so a deity-only realm degrades to no chapter at all.
   {
-    const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN);
+    const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN, opts.faithUnlocked);
     if (rlw.pageN !== pageN) { pageN = rlw.pageN; footer(doc, campaign.name, pageN); }
   }
 

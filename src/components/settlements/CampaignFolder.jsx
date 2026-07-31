@@ -17,6 +17,7 @@ import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, 
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
+import { resolveFaithUnlocked } from '../settlementDetail/resolveExportSeam.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
@@ -113,6 +114,12 @@ export function CampaignFolder({
   // to the Realm toggle (auto-resolve only rides the multi-tick advance path).
   const advanceAutoResolve = useStore(s => s.advanceAutoResolve);
   const setAdvanceAutoResolve = useStore(s => s.setAdvanceAutoResolve);
+  // The faith premium seam at realm scope. The SAME predicate resolveExportSeam
+  // threads into the settlement exports (tier premium, or elevated), passed to both
+  // realm exporters so a lapsed or downgraded session binds a book with no pantheon
+  // and no deity-named arc. Both exporters default it to false, so this read is the
+  // unlock, never the gate.
+  const faithUnlocked = useStore(resolveFaithUnlocked);
   const multiTickOn = flag('advanceMultiTick');
   const autoResolveId = useId();
   const [editing, setEditing] = useState(false);
@@ -135,7 +142,7 @@ export function CampaignFolder({
     setWbError(null);
     setWbBusy(true);
     try {
-      await generateWorldBook(campaign, settlements, { mode });
+      await generateWorldBook(campaign, settlements, { mode, faithUnlocked });
     } catch (err) {
       setWbError(err?.message ? `World Book failed: ${err.message}` : 'World Book export failed. Please try again.');
     } finally {
@@ -165,7 +172,7 @@ export function CampaignFolder({
     setPdfError(null);
     setPdfBusy(true);
     try {
-      await generateCampaignPDF(campaign, settlements);
+      await generateCampaignPDF(campaign, settlements, { faithUnlocked });
     } catch (err) {
       setPdfError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
     } finally {

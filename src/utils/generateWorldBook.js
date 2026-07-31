@@ -173,12 +173,19 @@ function buildReceipts(members) {
  * Collect the whole World Book model. Pure + deterministic given (campaign, saves).
  * The mode chooses the face: 'dm' binds everything; 'player' projects each
  * settlement through toPublicSafe and drops covert history.
+ *
+ * `faithUnlocked` is the premium faith seam, threaded straight into the realm
+ * collector (collectRealmSummary owns the rule). Default false is the safe one: a
+ * free / lapsed / anon book carries NO pantheon standing and no deity-named realm
+ * arc, in the collected model as well as on the page. It is ORTHOGONAL to mode —
+ * the DM face of a locked account is still locked.
  * @param {Object} campaign
  * @param {Array} [allSaves]
- * @param {{ mode?: 'dm' | 'player' }} [opts]
+ * @param {{ mode?: 'dm' | 'player', faithUnlocked?: boolean }} [opts]
  */
 export function collectWorldBook(campaign, allSaves = [], opts = {}) {
   const mode = opts.mode === 'player' ? 'player' : 'dm';
+  const { faithUnlocked = false } = opts;
   if (!campaign) return { present: false, mode };
   const player = mode === 'player';
   const ids = new Set(campaign.settlementIds || []);
@@ -216,7 +223,7 @@ export function collectWorldBook(campaign, allSaves = [], opts = {}) {
   const realmCampaign = player
     ? { ...campaign, wizardNews: { ...(campaign.wizardNews || {}), entries: rawEntries.filter(e => !isCovertEntry(e)) } }
     : campaign;
-  const realm = collectRealmSummary(realmCampaign, members);
+  const realm = collectRealmSummary(realmCampaign, members, { faithUnlocked });
 
   return {
     present: true,
@@ -434,9 +441,11 @@ function buildRealmChapter(d, book, pageN) {
  * Paint + download the World Book. Fire-and-download (mirrors generateCampaignPDF):
  * returns nothing; calls doc.save(). The cover date is injectable via opts.now for
  * reproducible output; the pins walk collectWorldBook's structure, not these bytes.
+ * `faithUnlocked` (default false) rides through to the realm collector — the premium
+ * faith seam, so a free / lapsed / anon book is bound with no deity name in it.
  * @param {Object} campaign
  * @param {Array} allSaves
- * @param {{ mode?: 'dm' | 'player', now?: string }} [opts]
+ * @param {{ mode?: 'dm' | 'player', now?: string, faithUnlocked?: boolean }} [opts]
  */
 export function generateWorldBook(campaign, allSaves = [], opts = {}) {
   if (!campaign) throw new Error('generateWorldBook: missing campaign');
