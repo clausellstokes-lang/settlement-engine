@@ -129,6 +129,21 @@ unmet demand again, and the road starves honestly). SMUGGLER EXTREME: hidden-pat
 traffic tolerates danger at the steepest premium — the dangerous goods take the
 overgrown road. All bands tunable (RISK_PREMIUM, danger weights, embattled deferral).
 
+## 5c. BYPASS GEOMETRY (owner amendment 2026-07-31 — circumvention)
+
+An unsafe settlement need not be a wall: when BELIEVED danger at an intermediate
+settlement exceeds the bypass band, through-corridor pathing may pay a DETOUR PREMIUM
+to skirt its vicinity (an avoidance radius in the geometry derivation — waypoints are
+geometry, never new graph nodes; the frozen digest is untouched). BOTH edges may
+coexist: the road TO the dangerous town (serving its own demand — someone still sells
+it grain, at the risk premium) and the road AROUND it (carrying through-traffic).
+Hysteresis applies to geometry too: a worn bypass persists after danger clears until
+usage says otherwise — roads remember fear a while. THE FEEDBACK (the design's gift):
+a settlement that becomes unsafe LOSES ITS THROUGH-TRAFFIC — the caravans swing wide,
+its market thins, and the loss reads honestly into its unmet-demand ledger. Safety
+becomes an economic asset a settlement can squander; recovering the through-trade is
+a story arc the Herald can tell ("the wagons return to the Vale road").
+
 ## 6. CHARTER (formation) — demand-then-event
 
 When a corridor's accumulated demand crosses the formation threshold (per dominant
