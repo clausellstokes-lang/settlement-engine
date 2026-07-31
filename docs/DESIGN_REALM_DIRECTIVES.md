@@ -47,6 +47,15 @@
    NPC becomes roaming BY DEFAULT — durable id minted at dispersal, reputation intact —
    except rival-compromised NPCs, who additionally retain the turncoat option. Roaming
    is a state, never a fate: the never-resolve-fates law holds at the grave's edge.
+   AMENDED 2026-07-31 (three additions): (i) the Herald gains a WANDERERS tab — the
+   roaming pool as an in-world register, with a DM ASSIGN verb placing a roamer into a
+   settlement (rides the command/adjudication discipline; assignment is address-chain
+   news: "X takes up residence in Y"). (ii) JAILED or ROAMING NPCs RELINQUISH ALL
+   INFLUENCE in their settlement — and the vacancy is never silently refilled: it routes
+   through the existing succession/faction-competition machinery as a contested opening
+   (power abhors a vacuum; the contest is the story). (iii) NPCs CAN die — but ONLY by
+   explicit user order: a DM death verb with receipts, snapshot-undoable like every
+   canon edit. The engine's never-kill law is unchanged; the DM's authority is total.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
