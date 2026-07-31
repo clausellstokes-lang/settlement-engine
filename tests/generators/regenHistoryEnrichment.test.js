@@ -23,6 +23,7 @@ import {
   generateSettlementPipeline,
   regenHistoryPipeline,
 } from '../../src/generators/generateSettlementPipeline.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { withCampaignHistoryEvent } from '../../src/domain/worldPulse/stressorAftermath.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import {
@@ -61,7 +62,7 @@ const echo = (id, label) => ({
 describe('the history reroll runs the same coherence tail assembly runs', () => {
   test('a rerolled history carries siegeNarrative, legacyAnnotations and real character prose', () => {
     const s = gen(CITY, 'rh-city');
-    const regen = regenHistoryPipeline(s, s.config || CITY, { seed: 'rh-city-r' });
+    const { history: regen } = regenHistoryPipeline(s, s.config || CITY, { seed: 'rh-city-r' });
 
     // siegeNarrative is always PRESENT on the assembly path (null when recent
     // history supports no sentence); pre-fix the key was absent entirely.
@@ -85,7 +86,7 @@ describe('the history reroll runs the same coherence tail assembly runs', () => 
 
   test('the rerolled field set matches a generated one', () => {
     const s = gen(TOWN, 'rh-town');
-    const regen = regenHistoryPipeline(s, s.config || TOWN, { seed: 'rh-town-r' });
+    const { history: regen } = regenHistoryPipeline(s, s.config || TOWN, { seed: 'rh-town-r' });
 
     // legacyAnnotations and ancientRuin are conditional in both paths (a
     // different roll can earn one and not the other), so compare the rest.
@@ -98,7 +99,7 @@ describe('the history reroll runs the same coherence tail assembly runs', () => 
     for (const settType of ['thorp', 'village', 'town', 'city', 'metropolis']) {
       const config = { settType, culture: 'germanic', terrainOverride: 'plains', tradeRouteAccess: 'road' };
       const s = gen(config, `rh-${settType}`);
-      const regen = regenHistoryPipeline(s, s.config || config, { seed: `rh-${settType}-r` });
+      const { history: regen } = regenHistoryPipeline(s, s.config || config, { seed: `rh-${settType}-r` });
       expect(regen, settType).toHaveProperty('siegeNarrative');
       expect(regen.historicalCharacter.length, settType).toBeGreaterThan(40);
       // anchored: the length assertion above proves the member is live prose (GENERATOR_STUBS is a local literal)
@@ -113,7 +114,7 @@ describe('the reroll carries the campaign record it used to delete', () => {
     const advanced = withCampaignHistoryEvent(base, echo('siege-1', 'The Long Siege'), 9);
     expect(countCampaignEvents(advanced.history)).toBe(1);
 
-    const regen = regenHistoryPipeline(advanced, advanced.config || CITY, { seed: 'rh-campaign-r' });
+    const { history: regen } = regenHistoryPipeline(advanced, advanced.config || CITY, { seed: 'rh-campaign-r' });
 
     const carried = regen.historicalEvents.filter(e => e.campaignEra === true);
     expect(carried).toHaveLength(1);
@@ -124,7 +125,7 @@ describe('the reroll carries the campaign record it used to delete', () => {
     // seed rolls for a settlement carrying no campaign history at all, so
     // preservation cannot have perturbed the seeded roll. (Event count is
     // itself a seeded draw, so it need not match the pre-reroll history.)
-    const control = regenHistoryPipeline(base, base.config || CITY, { seed: 'rh-campaign-r' });
+    const { history: control } = regenHistoryPipeline(base, base.config || CITY, { seed: 'rh-campaign-r' });
     expect(regen.historicalEvents.filter(e => e.campaignEra !== true))
       .toEqual(control.historicalEvents);
     expect(control.historicalEvents.length).toBeGreaterThan(0);
@@ -141,11 +142,11 @@ describe('the reroll carries the campaign record it used to delete', () => {
     advanced = withCampaignHistoryEvent(advanced, echo('famine-2', 'The Hungry Year'), 7);
     expect(countCampaignEvents(advanced.history)).toBe(2);
 
-    const once = regenHistoryPipeline(advanced, advanced.config || TOWN, { seed: 'rh-c2-a' });
+    const { history: once } = regenHistoryPipeline(advanced, advanced.config || TOWN, { seed: 'rh-c2-a' });
     expect(once.historicalEvents.filter(e => e.campaignEra === true)).toHaveLength(2);
 
     // Reroll the ALREADY-merged history: the dedup key is the writers' own.
-    const twice = regenHistoryPipeline(
+    const { history: twice } = regenHistoryPipeline(
       { ...advanced, history: once },
       advanced.config || TOWN,
       { seed: 'rh-c2-b' },
@@ -174,7 +175,7 @@ describe('authored settlement-root history prose survives the reroll', () => {
     applyUserEdit(s, 'history.historicalCharacter', 'The chandlers have always run this place.');
     applyUserEdit(s, 'history.founding.reason', 'A ford, and a grudge that outlived the man who started it.');
 
-    const regen = regenHistoryPipeline(s, s.config || CITY, { seed: 'rh-authored-r' });
+    const { history: regen } = regenHistoryPipeline(s, s.config || CITY, { seed: 'rh-authored-r' });
 
     expect(regen.historicalCharacter).toBe('The chandlers have always run this place.');
     expect(regen.founding.reason).toBe('A ford, and a grudge that outlived the man who started it.');
@@ -190,5 +191,45 @@ describe('authored settlement-root history prose survives the reroll', () => {
     const other = gen(TOWN, 'rh-noedits2');
     applyUserEdit(other, 'arrivalScene', 'Rain on the river gate.');
     expect(restoreAuthoredHistory(other, other.history)).toBe(other.history);
+  });
+});
+
+/**
+ * [generators-pipeline-5] — the reroll minted a seed and threw it away, so a
+ * persisted history reroll could never be reproduced: the settlement still carried
+ * its original `_seed`, which by then reproduced a DIFFERENT history. The NPC twin
+ * had returned `_regenSeed` since it was seeded; this closes the gap for history.
+ */
+describe('the reroll records the seed it minted', () => {
+  test('the seed rides at the settlement-parts level, never inside the history', () => {
+    const s = gen(CITY, 'rh-seed-record');
+    const { history, _regenSeed } = regenHistoryPipeline(s, s.config || CITY);
+
+    expect(typeof _regenSeed).toBe('string');
+    expect(_regenSeed.length).toBeGreaterThan(0);
+    // The seed must NOT be a key of the section the store persists. `history.
+    // _regenSeed` would read as a field OF the history and would ride straight
+    // through the DM-share gallery strip, which is a TOP-LEVEL key list.
+    // `historicalEvents` anchors the check: it comes off the same return.
+    expectAbsentWithAnchor(Object.keys(history), '_regenSeed', 'historicalEvents', 'history parts');
+  });
+
+  test('an explicit seed is echoed back rather than re-minted', () => {
+    const s = gen(TOWN, 'rh-seed-echo');
+    const { _regenSeed } = regenHistoryPipeline(s, s.config || TOWN, { seed: 'rh-echo' });
+    expect(_regenSeed).toBe('rh-echo');
+  });
+
+  test('replaying the recorded seed reproduces the rerolled history byte for byte', () => {
+    const s = gen(CITY, 'rh-seed-replay');
+    // A REAL reroll: no seed passed, so the pipeline mints one the way the store does.
+    const first = regenHistoryPipeline(s, s.config || CITY);
+    const replay = regenHistoryPipeline(s, s.config || CITY, { seed: first._regenSeed });
+    expect(JSON.stringify(replay.history)).toBe(JSON.stringify(first.history));
+
+    // Non-vacuous: a DIFFERENT seed does not reproduce it, so the equality above
+    // measures the recorded seed rather than a history that ignores its seed.
+    const other = regenHistoryPipeline(s, s.config || CITY, { seed: `${first._regenSeed}-elsewhere` });
+    expect(JSON.stringify(other.history)).not.toBe(JSON.stringify(first.history));
   });
 });

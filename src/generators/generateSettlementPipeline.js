@@ -544,16 +544,29 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
  *  3. The settlement's authored `history.*` prose is restored last, because the
  *    tail above mints `historicalCharacter` and that field is itself editable.
  *
- * NOT fixed here (deliberate, documented): the minted seed still is not
- * recorded — the NPC twin returns `_regenSeed` at the settlement root, and a
- * `history._regenSeed` would mean something different, so [generators-pipeline-5]
- * stays open rather than being half-answered. Authored ENTRIES inside
- * `historicalEvents[]` / `currentTensions[]` also still reroll away; they have
- * no identity to be carried by (historyPreservation.js, deferral A).
+ * THE MINTED SEED IS RECORDED [generators-pipeline-5, closed 2026-07-30 under the
+ * owner's blanket exhaustive-fix authorization; this note previously deferred it].
+ * The return is settlement-ROOT PARTS — `{ history, _regenSeed }` — the same
+ * contract regenNPCsPipeline returns, so the store folds the seed onto the
+ * settlement root and it never lands inside `history` (a `history._regenSeed`
+ * would read as a field OF the history, which it is not, and it would break the
+ * "a rerolled history is shape-identical to a generated one" parity above).
+ * Replay a persisted reroll with `{ seed: settlement._regenSeed }`.
+ *
+ * ROOT `_regenSeed` HOLDS THE LAST SECTION REROLL, whichever section it was: the
+ * key has only ever carried one value (a second NPC reroll already overwrote the
+ * first), and history now writes the same key rather than a sibling — a sibling
+ * would ride straight through the DM-share gallery strip, which is a key list
+ * (migration 121 / publicSafe.js) and would need a new migration to widen.
+ *
+ * STILL DEFERRED (documented, not a bug to re-find): authored ENTRIES inside
+ * `historicalEvents[]` / `currentTensions[]` still reroll away; they have no
+ * identity to be carried by (historyPreservation.js, deferral A).
  *
  * @param {Object} settlement
  * @param {Object} config
  * @param {{ seed?: string }} [options]
+ * @returns {{ history: Object, _regenSeed: string }}
  */
 export function regenHistoryPipeline(settlement, config, options = {}) {
   const seed = options.seed || generateSeed();
@@ -589,12 +602,15 @@ export function regenHistoryPipeline(settlement, config, options = {}) {
     // Key order mirrors the assembly path's finished history exactly, and
     // legacyAnnotations is gated on non-empty the way the generateNarratives
     // step gates it, so a rerolled history is shape-identical to a generated one.
-    return restoreAuthoredHistory(settlement, {
+    const history = restoreAuthoredHistory(settlement, {
       ...carried,
       historicalCharacter,
       ...(legacyAnnotations.length > 0 ? { legacyAnnotations } : {}),
       siegeNarrative,
     });
+    // Settlement-ROOT parts, mirroring regenNPCsPipeline: `history` is the section
+    // the store assigns, `_regenSeed` the record that makes this reroll replayable.
+    return { history, _regenSeed: seed };
   } finally {
     clearActiveRng(prevRng);
   }
