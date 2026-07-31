@@ -14,6 +14,19 @@ abolishes it). Not the rumor plane: this is the player's/DM's access to more rel
 information. The brokerage feeds its patron power, improving that power's confidence
 calibration and/or truth-closeness of its belief map.
 
+## 0b. THE TWO INSTITUTIONAL ROLES (owner clarification 2026-07-31 — binding)
+RUMOR SOURCES are not brokerages. Existing institutions — brothels, coaching inns,
+fences, and their kin — are WHERE TALK HAPPENS: they contribute VOLUME and color to the
+rumor plane (the mechanicalRumorSeeds lanes). Brokerages are HOW TALK IS WEIGHED:
+fidelity and calibration infrastructure over the belief derivation. Distinct roles,
+distinct wiring, never conflated. INTERACTION (authored synergy): the illegal house
+thrives where talk is thick — Whisper Market presence weighting favors rumor-rich hosts
+(fence/inn/brothel density), the natural ecology of listeners among talkers. WIRING
+NOTE: the rumor-source role is design intent today, not yet an explicit catalog tag —
+the brokerage wave includes a small data pass adding a closed `rumorSource` service tag
+to the existing institutions so the plane's sources become census-able (and the
+certification observation can count them).
+
 ## 1. CHALLENGE A (Fable, veto open): CALIBRATION PRIMARY, ACCURACY SECONDARY
 Passive effect = RELIABILITY GRADES on news (calibrated confidence: 'confirmed by three
 roads' vs 'tavern talk' — a closed reliability vocabulary stamped on Herald items in
