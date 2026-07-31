@@ -244,6 +244,47 @@ post-promotion; the Watabou iframe retires only at promotion.
   facts but do not feed economy/services math — zero golden shift, dormancy intact.
   Promoting counts into engine math is a recorded FUTURE owner-gated tuning decision.
 
+## 11c. FULL COLOR IN THE HOUSE VOICE (owner directive 2026-07-31, BINDING: A-9 —
+## governs TC-5)
+
+The painter is FULL COLOR in the Watabou/FTG genre — ward tones, water, green space,
+roofs, walls — but every color derives from `src/design/tokens.js`: a cartography palette
+FAMILY extends the canonical tokens (muted house register), never a foreign color world.
+Rules: Watabou/FTG define the color ROLES and their relationships (what gets tone, what
+recedes, how water/green anchor the page); the tokens define the VALUES. Light/dark/print
+coherence rides the token system for free. The palette lives in data (bespokeStyles +
+sceneExportPalette discipline) so taste iterates without code. The visual-budget lint
+rules (no-raw-color) apply to the painter like any surface — the map cannot smuggle hex.
+
+## 11d. URBAN MORPHOLOGY LAW (owner directive 2026-07-31, BINDING: A-10 — governs
+## TC-2..TC-5; "comprehensively cohesive to everything")
+
+The full determination chain, each layer answering only to the one above it:
+
+1. **STATE decides order vs chaos** (A-8 cohesion: stressors, alignment, law, corruption
+   → district/clustered/dispersed_orderly/dispersed_chaotic).
+2. **PROMINENCE decides space:** parcel area scales with power rank, economic
+   contribution (an institution carrying the economy earns grounds), and faith-deity
+   alignment (the aligned deity's temple takes a precinct on a node; contested faith
+   scatters competing shrines). A closed prominence ladder in TOWN_CARTOGRAPHY_TUNING —
+   authored bands, seeded jitter, never free-form.
+3. **LYNCH decides structure:** the five elements are the synthesis targets — paths
+   (streets), edges (walls/waterfronts), districts (wards), nodes (plazas/gates/market
+   confluences), landmarks (prominent institutions) — and `lynchRubric` graduates from
+   taste-gate to STRUCTURAL GRAMMAR: the skeleton/ward stages aim at the rubric's
+   elements; the gate verifies the aim. Higher-order urban design is referenced through
+   this one instrument, not scattered citations.
+4. **WATABOU/FTG decide feel** (owner partiality, standing): organic-first geometry;
+   grid cores ONLY where a planned era earns them (planning maturity derived from age +
+   law + power stability — an authored table, engine facts only); the hand-drawn warmth
+   is the rendering register, never overruled by theory.
+5. **TOKENS decide color** (A-9).
+
+Cohesion guarantee: every input in this chain is an existing typed engine fact; no layer
+invents truth; the chain is total (every ward/parcel/building decision traces to exactly
+one layer) — pinned by a TC-3 property test that walks a compiled manifest and asserts
+each element carries its deciding-layer provenance tag.
+
 ## 12. THE DOSSIER MAP TAB — SUB-TAB SHELL (owner directive 2026-07-31, BINDING: J-TC-8)
 
 The dossier's Map tab becomes a CONTAINER with one sub-tab per settlement map
