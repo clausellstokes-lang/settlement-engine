@@ -238,6 +238,30 @@ export function destroySettlementConfirmRefusal(state, { id, reason, confirmName
 }
 
 /**
+ * THE MISSING-TARGET SNAPSHOT REFUSAL (Track K §C1 envelope honesty).
+ *
+ * recordSnapshot resolves its target as `opts.saveId || activeSaveId`, and the
+ * save chokepoints stamp activeSaveId on a row the savedSettlements cache does not
+ * hold yet (setActiveSaveId's header explains the byte constitution behind that,
+ * and activeSaveId is outside the persist partialize, so the window is not a
+ * hydration blip — a post-save Create session sits in it). With no row there is no
+ * timeline to append to and nothing to persist, so `ok` must say so: the envelope
+ * used to report ok:true carrying an `after.snapshotId` for a snapshot that exists
+ * nowhere, and commitPendingEditScope mints its batch undo token off exactly that
+ * field. `after` stays null — an id nothing recorded is the thing to withhold.
+ *
+ * @param {string|number} targetSaveId
+ * @returns {ReturnType<typeof makeActionResult>}
+ */
+export function snapshotTargetMissingRefusal(targetSaveId) {
+  return makeActionResult('recordSnapshot', {
+    ok: false,
+    before: { targetSaveId: String(targetSaveId), timeline: 'saved', reason: 'save_not_loaded' },
+    userMessage: 'This settlement is not open in the library yet, so no snapshot was recorded.',
+  });
+}
+
+/**
  * updateSavedSettlement patch-key allowlist — Wave R-3 (atlas VI.12 #163b).
  * THE CENSUS IS THE CONTRACT: exactly the top-level keys the writer's 21 real
  * call sites patch today — settlementSlice lifecycle folds x6 (settlement /
@@ -291,6 +315,79 @@ export function remapLocksAfterRegen(state, preservation) {
   const current = state.locks || {};
   const next = remapNpcLocks(current, preservation?.preserved);
   if (next !== current) state.locks = next;
+}
+
+/**
+ * THE PIN-SURVIVES-ITS-OWN-REGEN STEP (lifecycle: REGEN) — the aiData twin of
+ * remapLocksAfterRegen.
+ *
+ * `aiData.pinnedNpcs` is the SECOND npc-id-keyed store a roster reroll can strand,
+ * and the only one that crosses a persistence boundary: the pins live on the save
+ * row, ride every narrative request (aiSlice's pinned-NPC header), and reach
+ * Supabase. A preserved keeper does not rejoin the roster, it TAKES OVER a fresh
+ * slot and inherits that slot's id — so a pin left naming the old id protects
+ * whoever the roll put there and stops protecting the character the DM pinned.
+ *
+ * ONE ALGEBRA, not two: a pin list is the same id-keyed shape as `locks.npcs`, so
+ * it goes through `remapNpcLocks` under an `npcs` key rather than growing a second
+ * remap rule that can drift from the first. Unknown ids are therefore left alone
+ * for the reason that leaf documents (a revert can restore an older blob whose
+ * roster ids match the pins again).
+ *
+ * WHY THIS HAS NO GENERATE TWIN: a full generate mints a NEW town and resets
+ * activeSaveId to null without touching any save row, so the previous save keeps
+ * both its own roster and its own pins — remapping them there would break the
+ * correct pins rather than fix stale ones.
+ *
+ * Dormant by construction: no active save, no pins, or nothing moved, and neither
+ * the draft nor the network is touched. The write rides `aiData` through
+ * persistSaveUpdate — already on the outbox column map and on
+ * SAVED_SETTLEMENT_PATCH_KEYS — so it widens no allowlist and mints no schema.
+ *
+ * @param {() => any} get
+ * @param {(fn: (draft: any) => void) => void} set
+ * @param {{ preserved?: Array<{id?: string, fromId?: string}> }|null|undefined} preservation
+ * @returns {Promise<boolean>|undefined} the persist promise when pins actually moved
+ */
+export function remapPinnedNpcsAfterRegen(get, set, preservation) {
+  const saveId = get().activeSaveId;
+  if (!saveId) return undefined;
+  const entry = (get().savedSettlements || []).find(e => String(e.id) === String(saveId));
+  const pinned = entry?.aiData?.pinnedNpcs;
+  if (!Array.isArray(pinned) || pinned.length === 0) return undefined;
+  // The dormancy contract is by REFERENCE: remapNpcLocks hands back the very
+  // wrapper it was given when no locked id moved.
+  const wrapper = { npcs: pinned };
+  const remapped = remapNpcLocks(wrapper, preservation?.preserved);
+  if (remapped === wrapper) return undefined;
+  const nextAiData = { ...(entry.aiData || {}), pinnedNpcs: remapped.npcs };
+  set(s => {
+    const idx = s.savedSettlements.findIndex(e => String(e.id) === String(saveId));
+    if (idx !== -1) s.savedSettlements[idx].aiData = nextAiData;
+  });
+  return persistSaveUpdate(saveId, { aiData: nextAiData });
+}
+
+/**
+ * THE ROSTER FOLD — the one step that lands a reroll's three outputs together.
+ *
+ * regenNPCsPipeline returns the new roster PARTS plus an out-of-band preservation
+ * report, and two separate id-keyed maps depend on that report: `state.locks` and
+ * the active save's `aiData.pinnedNpcs`. Folding them from one place is what keeps
+ * "the roster moved but its map did not" impossible — the roster and the lock map
+ * land in a single `set()`, and the pin remap follows immediately with its own
+ * durable write (the pin is save-row state, so an in-memory-only rewrite would
+ * ghost on reload).
+ *
+ * @param {() => any} get
+ * @param {(fn: (draft: any) => void) => void} set
+ * @param {Record<string, any>} parts  the regenerated roster fields
+ * @param {{ preserved?: Array<{id?: string, fromId?: string}> }|null|undefined} preservation
+ * @returns {Promise<boolean>|undefined} the pin persist promise when pins moved
+ */
+export function foldRegeneratedRoster(get, set, parts, preservation) {
+  set(s => { Object.assign(s.settlement, parts); remapLocksAfterRegen(s, preservation); });
+  return remapPinnedNpcsAfterRegen(get, set, preservation);
 }
 
 /**

@@ -1,5 +1,13 @@
 /**
- * factionRename.js — THE ONE FACTION-RENAME WRITER (owner queue #14).
+ * factionRename.js — THE ONE ENTITY-RENAME WRITER (owner queue #14).
+ *
+ * IT OWNS TWO CASCADES, NOT ONE. The faction cascade landed first and named the
+ * file; the NPC cascade (applyNpcRenameToSettlement, further down) joined it
+ * because the two share the mechanism that makes either of them hard — a
+ * character is stored at TWO homes whose alias JSON splits on reload (NPC_HOMES
+ * below), and both cascades must heal both. Declaring the homes once and reusing
+ * the same rewrite primitives is the whole reason the NPC cascade lives beside
+ * the faction one instead of in a module of its own.
  *
  * WHY THIS MODULE EXISTS. Until this landed, a faction could be renamed by two
  * divergent lanes that were invisible to each other (atlas presentation-scene
@@ -112,6 +120,19 @@ const CASCADE_BUCKETS = Object.freeze([
   'pressureSentence',
 ]);
 
+/**
+ * The same minimal-clone contract for the NPC cascade. `relationships` is the
+ * in-settlement edge list (a DIFFERENT bucket from the neighbour links), and it
+ * is joined by display name even though every edge also carries npc1Id/npc2Id.
+ */
+const NPC_CASCADE_BUCKETS = Object.freeze([
+  'npcs',
+  // The second home a character is stored in — see NPC_HOMES.
+  'factions',
+  'relationships',
+  'interSettlementRelationships',
+]);
+
 // The two `powerStructure` path prefixes are composed rather than spelled
 // inline for one specific reason: the FACTION-KEY no-fallback scan
 // (tests/lint/factionNamePrecedenceScan.test.js) is a same-line text scan, and a
@@ -169,6 +190,23 @@ function npcFieldPath(home, field) {
 }
 
 /**
+ * The affiliation keys the MEMBERSHIP PREDICATE accepts that this cascade does
+ * NOT rewrite, with the reason each is excluded. npcInFaction
+ * (worldPulse/npcLadderState.js) resolves an NPC's faction through
+ * `factionAffiliation | factionId | factionLink | faction | organizationId`,
+ * first present wins; only the first is in NPC_FACTION_FIELDS. The other four are
+ * declared here so the divergence reads as a decision rather than an oversight.
+ *
+ * @type {ReadonlyArray<{ key: string, why: string }>}
+ */
+const NPC_HANDLE_KEYS_NOT_CASCADED = Object.freeze([
+  { key: 'factionId', why: 'an identity, not a label: a rename changes the label only (the same ruling as the roster id); no writer for it exists in src' },
+  { key: 'factionLink', why: 'derived read-model output (npcProfile.js mints it from factionAffiliation via factionIdFromName), not stored generator state, and it holds an id' },
+  { key: 'organizationId', why: 'an identity the membership predicate accepts; no writer for it exists in src, and an id never follows a label' },
+  { key: 'faction', why: 'a name-shaped alternate affiliation key the membership predicate accepts, written by no generator; widening the cascade to a key only imported or custom content could carry is a persistence-shape judgement, recorded as latent rather than taken here' },
+]);
+
+/**
  * The enumerated cascade denominator. Every entry is a stored field that holds
  * a faction DISPLAY NAME (or prose naming one) on a saved settlement. `kind`
  * separates exact-key rewrites from whole-word prose substitution, because the
@@ -221,6 +259,77 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   { path: 'aiData', why: 'cascaded by the registered applyCosmeticRename operation instead' },
   { path: 'simulationTrace[].causes[].reason', why: 'the generation TRACE, a recorded statement of what the generator decided while the faction still bore its old name; rewriting it would falsify the receipt, the same ruling as previousGovernments. It is also not a live reference: the fingerprint extractors read the trace enums and drop the reason prose' },
   { path: 'economicState.safetyProfile.criminalInstitutions[]', why: 'a fixed vocabulary label from the CRIMINAL_INST_LABELS table in generators/safetyProfile.js, naming an INSTITUTION rather than referring to the faction; that a criminal power faction is often generated with a similar name is incidental, and an institution owns its own name' },
+  // THE MEMBERSHIP PREDICATE READS A WIDER KEY FAMILY THAN THIS LIST WRITES —
+  // see NPC_HANDLE_KEYS_NOT_CASCADED above for the per-key reasons. Only one of
+  // the four is an open question (`faction`); the rest hold identities, and an
+  // identity never follows a label.
+  // Spread across BOTH homes for the same reason NPC_FACTION_FIELDS is: a key
+  // declared at one home and forgotten at the other IS the bug this module exists
+  // to close, and that holds for a written ruling as much as for a rewrite.
+  ...NPC_HOMES.flatMap(home => NPC_HANDLE_KEYS_NOT_CASCADED.map(field => ({
+    path: `${home}.${field.key}`,
+    why: field.why,
+  }))),
+]);
+
+/**
+ * The enumerated denominator for a PERSON rename. A character's display name is
+ * a join key in fewer stored fields than a faction's, but it is stored at BOTH
+ * homes (NPC_HOMES) and it keys the relationship edge list, so the same alias
+ * split that hid the faction bug hides this one: a cascade that walked only
+ * `npcs[]` looked complete on a live settlement and left every member copy
+ * holding the dead name on every reloaded save. That member copy is what the
+ * dossier renders as a faction member chip (tabs/RelationshipsTab.jsx).
+ *
+ * KEY SURFACES ONLY. Every entry is an exact-name join; the prose that NAMES a
+ * character is ruled out in writing below rather than substituted.
+ *
+ * @type {ReadonlyArray<{ path: string, kind: 'key' | 'prose', why: string }>}
+ */
+export const NPC_RENAME_SURFACES = Object.freeze([
+  { path: `${NPC_HOMES[0]}.name`, kind: 'key', why: 'the character record\'s own display name at the canonical home' },
+  { path: `${NPC_HOMES[1]}.name`, kind: 'key', why: 'the grouping copy the dossier renders as a faction member chip; a separate object on every reloaded save' },
+  { path: 'relationships[].npc1Name', kind: 'key', why: 'the first end of an NPC relationship edge, joined by display name' },
+  { path: 'relationships[].npc2Name', kind: 'key', why: 'the second end of an NPC relationship edge, joined by display name' },
+  { path: 'interSettlementRelationships[].npcName', kind: 'key', why: 'this settlement side of a neighbour NPC contact (the partner save holds the same person as partnerName)' },
+]);
+
+/**
+ * The ledger of stored fields that DO hold a character's name and are left
+ * alone. Every one of them is PROSE, and the ruling is the same for all:
+ *
+ *   NO RENAME LANE HAS EVER REWRITTEN GENERATED PROSE ABOUT A PERSON. The
+ *   faction cascade substitutes faction names into prose under a ratified
+ *   policy (see FACTION_RENAME_SURFACES' prose entries); that policy was
+ *   decided for organizations and does not extend itself to people. Making a
+ *   character rename rewrite the generated sentences about that character is
+ *   NEW CAPABILITY rather than repair of the two-lane divergence this module
+ *   closes, so it is owner-gated and recorded here rather than taken silently.
+ *   Until it is ruled, these fields keep the name the generator wrote — stale
+ *   after a rename, and deliberately so.
+ *
+ * @type {ReadonlyArray<{ path: string, why: string }>}
+ */
+export const NPC_NON_CASCADED_SURFACES = Object.freeze([
+  { path: `${NPC_HOMES[0]}.secret.what`, why: 'the secret is generated prose that names the characters it implicates; prose policy for people is owner-gated (see above)' },
+  { path: `${NPC_HOMES[0]}.secret.stakes`, why: 'the stakes sentence names who would pay to bury the secret; prose policy for people is owner-gated' },
+  { path: `${NPC_HOMES[1]}.secret.what`, why: 'the grouping copy of the same secret prose; it moves if and only if its twin does' },
+  { path: `${NPC_HOMES[1]}.secret.stakes`, why: 'the grouping copy of the same stakes prose; it moves if and only if its twin does' },
+  { path: 'relationships[].description', why: 'the generated relationship paragraph names both ends; prose policy for people is owner-gated' },
+  { path: 'relationships[].tension', why: 'the generated tension line names both ends; prose policy for people is owner-gated' },
+  { path: 'interSettlementRelationships[].description', why: 'the generated contact sentence names both people and the partner settlement; prose policy for people is owner-gated' },
+  // The prominent-relationship record, enumerated from its PRODUCER rather than
+  // from whichever fields a sample seed happened to fill: genRelNarrative
+  // (generators/power/settlementNarrative.js) emits exactly npc1, npc2, type,
+  // phrasing, full, tension — and `type` is a relationship label, never a person.
+  // It is a rendered quotation of one relationship, so it moves as a unit or not
+  // at all, and the unit is prose.
+  { path: 'prominentRelationship.npc1', why: 'the first end of a generated micro-record whose reader-facing half is prose; the record moves as a unit or not at all' },
+  { path: 'prominentRelationship.npc2', why: 'the second end of that same generated micro-record' },
+  { path: 'prominentRelationship.full', why: 'the quoted relationship description inside that record; prose policy for people is owner-gated' },
+  { path: 'prominentRelationship.tension', why: 'the quoted tension line inside that record; prose policy for people is owner-gated' },
+  { path: 'prominentRelationship.phrasing', why: 'the overview line drawn from that record; it is also a registered EDITABLE prose path (domain/userEdits.js), so a user may already own its wording' },
+  { path: 'pressureSentence', why: 'the generated pressure line can name a character; it is a faction-rename PROSE surface, and extending it to people is the same owner-gated decision' },
 ]);
 
 /**
@@ -663,6 +772,147 @@ export function applyFactionRenameToPartner(partnerSettlement, hostName, oldName
     if (!result.changed) return relationship;
     changed = true;
     return result.relationship;
+  });
+  if (!changed) return { settlement: partnerSettlement, changed: false };
+  return {
+    settlement: { ...partner, interSettlementRelationships: next },
+    changed: true,
+  };
+}
+
+/**
+ * Apply an NPC rename across every in-settlement surface in
+ * NPC_RENAME_SURFACES — THE ONE NPC-RENAME WRITER.
+ *
+ * Both rename lanes call this. Before it, the store lane wrote exactly
+ * `npcs[index].name` and the library lane wrote `npcs[].name` plus the
+ * relationship and neighbour joins; NEITHER walked `factions[].members[]`, so
+ * on every reloaded save the dossier's member chips kept the dead name.
+ *
+ * KEYED BY NAME, ALL MATCHING RECORDS. The caller addresses one character (by
+ * index in the store lane, by id in the library lane) but the cascade rewrites
+ * every record whose name matches, exactly as the faction roster walk does. Two
+ * characters sharing a display name is a data defect, and the joins below CANNOT
+ * tell them apart — `relationships[].npc1Name` is a name, not an id — so
+ * renaming only one of them would silently split the join instead of healing it.
+ *
+ * MUTATES `settlement` IN PLACE, on the same reasoning as
+ * applyFactionRenameToSettlement: both callers already hold a draft they own.
+ *
+ * @param {unknown} settlement  the settlement draft to rewrite
+ * @param {string} oldName  the character's current display name
+ * @param {string} newName  the new display name (already trimmed by the caller)
+ * @returns {{ changed: boolean, touched: string[] }} `touched` names the
+ *   surfaces that actually moved, for receipts and for the cascade pin.
+ */
+export function applyNpcRenameToSettlement(settlement, oldName, newName) {
+  /** @type {string[]} */
+  const touched = [];
+  if (!isRecord(settlement) || !oldName || !newName || oldName === newName) {
+    return { changed: false, touched };
+  }
+  const mark = (/** @type {string} */ surface, /** @type {boolean} */ moved) => {
+    if (moved && !touched.includes(surface)) touched.push(surface);
+  };
+
+  // 1. The canonical home.
+  for (const npc of listOf(settlement.npcs) || []) {
+    if (!isRecord(npc)) continue;
+    mark(`${NPC_HOMES[0]}.name`, rewriteKey(npc, 'name', oldName, newName));
+  }
+
+  // 2. The grouping home. On a live settlement these ARE the objects above and
+  // every rewrite here is a no-op; on a reloaded save they are separate copies,
+  // and this walk is the only thing that moves them.
+  for (const group of listOf(settlement.factions) || []) {
+    if (!isRecord(group)) continue;
+    for (const member of listOf(group.members) || []) {
+      if (!isRecord(member)) continue;
+      mark(`${NPC_HOMES[1]}.name`, rewriteKey(member, 'name', oldName, newName));
+    }
+  }
+
+  // 3. The in-settlement relationship edges. Both ends are display names: miss
+  // one and the edge points at a character who no longer exists.
+  for (const relationship of listOf(settlement.relationships) || []) {
+    if (!isRecord(relationship)) continue;
+    mark('relationships[].npc1Name', rewriteKey(relationship, 'npc1Name', oldName, newName));
+    mark('relationships[].npc2Name', rewriteKey(relationship, 'npc2Name', oldName, newName));
+  }
+
+  // 4. This save's own neighbour contacts. Scoped to links whose `npcName` IS
+  // this character: on any save that field holds THAT save's own person, while
+  // `partnerName` holds the neighbour's — so the broad reference rewrite is
+  // correct for a link about this person and would rename a stranger on any
+  // other link that happened to share the name.
+  const links = listOf(settlement.interSettlementRelationships);
+  if (links) {
+    for (let i = 0; i < links.length; i += 1) {
+      const before = links[i];
+      if (!isRecord(before) || before.npcName !== oldName) continue;
+      links[i] = renameInterSettlementReference(before, oldName, newName);
+      mark('interSettlementRelationships[].npcName', true);
+    }
+  }
+
+  return { changed: touched.length > 0, touched };
+}
+
+/**
+ * The IMMUTABLE form of the NPC cascade, for the library lane's saved rows.
+ * Returns only the top-level buckets the cascade touched, ready to spread over
+ * the existing settlement.
+ *
+ * @param {unknown} settlement
+ * @param {string} oldName
+ * @param {string} newName
+ * @returns {{ changed: boolean, touched: string[], changes: StoredRecord }}
+ */
+export function npcRenameChanges(settlement, oldName, newName) {
+  if (!isRecord(settlement)) return { changed: false, touched: [], changes: {} };
+  /** @type {StoredRecord} */
+  const draft = {};
+  for (const bucket of NPC_CASCADE_BUCKETS) {
+    if (settlement[bucket] === undefined) continue;
+    draft[bucket] = deepClone(settlement[bucket]);
+  }
+  const { changed, touched } = applyNpcRenameToSettlement(draft, oldName, newName);
+  if (!changed) return { changed: false, touched: [], changes: {} };
+  return { changed: true, touched, changes: draft };
+}
+
+/**
+ * Cascade an NPC rename into ONE neighbour save. A partner settlement never
+ * holds the renamed character's record; it holds contact links back to the host,
+ * and on those links the host's person is `partnerName` (the partner's OWN
+ * person is `npcName` — see buildInterSettlementNPCs and
+ * crossSettlementConflicts, which build both sides from the same pair).
+ *
+ * Scoped twice over: to links pointing AT the host settlement, and to the field
+ * that actually holds the host's person. Two neighbours may each have someone of
+ * the same name, and renaming one must not rewrite the other's contact.
+ *
+ * Returns a NEW settlement object (or the original reference when nothing
+ * moved), because the library lane maps over immutable save rows.
+ *
+ * @param {unknown} partnerSettlement  the neighbour save's settlement
+ * @param {string} hostName  the renamed character's OWN settlement name
+ * @param {string} oldName
+ * @param {string} newName
+ * @returns {{ settlement: unknown, changed: boolean }}
+ */
+export function applyNpcRenameToPartner(partnerSettlement, hostName, oldName, newName) {
+  const partner = isRecord(partnerSettlement) ? partnerSettlement : null;
+  const links = partner ? listOf(partner.interSettlementRelationships) : null;
+  if (!partner || !links || !hostName || !oldName || !newName || oldName === newName) {
+    return { settlement: partnerSettlement, changed: false };
+  }
+  let changed = false;
+  const next = links.map((relationship) => {
+    if (!isRecord(relationship)) return relationship;
+    if (relationship.partnerSettlement !== hostName || relationship.partnerName !== oldName) return relationship;
+    changed = true;
+    return renameInterSettlementReference(relationship, oldName, newName);
   });
   if (!changed) return { settlement: partnerSettlement, changed: false };
   return {

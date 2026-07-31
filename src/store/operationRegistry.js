@@ -93,7 +93,11 @@ export const OPERATIONS = Object.freeze({
   recordSnapshot: { opType:'recordSnapshot', label:"Record a snapshot", description:"Saves a full point-in-time snapshot of the current settlement into its version history, so the state can be returned to later.", klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'versionHistory-snapshot', undoToken:'revertToSnapshot', undoState:'action' },
   revertToSnapshot: { opType:'revertToSnapshot', label:"Revert to a snapshot", description:"Restores the settlement to a previously recorded snapshot from its version history, discarding changes made since.", klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'external:auto-pre-revert-snapshot' },
   destroySavedSettlement: { opType:'destroySavedSettlement', label:"Destroy a saved settlement", description:"Marks a saved settlement as destroyed, recording a destroy entry in canon. This is a one-way canon act; it requires the settlement's exact name as confirmName to proceed.", klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'eventLog-entry(DESTROY_SETTLEMENT)', undoToken:null, undoState:'irreversible' },
-  // ── K-C MACRO (40) — orchestrators; existing receipts become receiptRef ──
+  // ── K-C MACRO — orchestrators; existing receipts become receiptRef ──
+  // (No count in this header either. The transcribed "(40)" had rotted to 43
+  //  in-section / 44 file-wide before anyone read it again — the same failure the
+  //  K-B header below records. Census the live number with
+  //  `grep -c "klass:'macro'"`; never transcribe it back.)
   generateSettlement: { opType:'generateSettlement', label:"Generate a settlement", description:"Runs the full generation pipeline to build a new settlement from the current configuration and seed, and records it in the pipeline history.", klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'pipelineHistory', undoToken:null, undoState:'irreversible' },
   regenSection: { opType:'regenSection', label:"Regenerate a section", description:"Rebuilds one section of the settlement (for example its power structure or economy) from the seed, recording the change as a regeneration delta.", klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'regenerationDelta', undoToken:null, undoState:'none' },
   // R-0 undo-truth: the canonize/uncanonize pair is PARTIAL, not 'action' (the

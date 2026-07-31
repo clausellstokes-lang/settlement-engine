@@ -28,7 +28,7 @@ vi.mock('../../src/store/index.js', () => {
     auth: { tier: 'wanderer' },
     setPurchaseModalOpen: vi.fn(),
     revertToSnapshot: vi.fn(() => true),
-    recordSnapshot: vi.fn(() => ({ after: { snapshotId: 'snap-new' } })),
+    recordSnapshot: vi.fn(() => ({ ok: true, after: { snapshotId: 'snap-new' } })),
   };
   function useStore(selector) { return selector(data); }
   useStore.__set = (next) => Object.assign(data, next);
@@ -45,7 +45,7 @@ describe('VersionsTab — X-7 locked-destination fold-in', () => {
       auth: { tier: 'wanderer' },
       setPurchaseModalOpen: vi.fn(),
       revertToSnapshot: vi.fn(() => true),
-      recordSnapshot: vi.fn(() => ({ after: { snapshotId: 'snap-new' } })),
+      recordSnapshot: vi.fn(() => ({ ok: true, after: { snapshotId: 'snap-new' } })),
     });
     try { sessionStorage.clear(); } catch { /* ignore */ }
   });
@@ -116,7 +116,7 @@ const paidStore = (over = {}) => ({
   auth: { tier: 'premium' },
   setPurchaseModalOpen: vi.fn(),
   revertToSnapshot: vi.fn(() => true),
-  recordSnapshot: vi.fn(() => ({ after: { snapshotId: 'snap-new' } })),
+  recordSnapshot: vi.fn(() => ({ ok: true, after: { snapshotId: 'snap-new' } })),
   ...over,
 });
 
@@ -146,7 +146,7 @@ describe('VersionsTab — manual snapshot on demand (queue #18)', () => {
   afterEach(() => cleanup());
 
   it('dispatches recordSnapshot against the active save with the manual kind', () => {
-    const recordSnapshot = vi.fn(() => ({ after: { snapshotId: 'snap-new' } }));
+    const recordSnapshot = vi.fn(() => ({ ok: true, after: { snapshotId: 'snap-new' } }));
     useStore.__set(paidStore({ recordSnapshot }));
 
     render(<VersionsTab save={savedWith([])} />);
@@ -160,7 +160,7 @@ describe('VersionsTab — manual snapshot on demand (queue #18)', () => {
   });
 
   it('passes the typed label through and clears the field', () => {
-    const recordSnapshot = vi.fn(() => ({ after: { snapshotId: 'snap-new' } }));
+    const recordSnapshot = vi.fn(() => ({ ok: true, after: { snapshotId: 'snap-new' } }));
     useStore.__set(paidStore({ recordSnapshot }));
 
     render(<VersionsTab save={savedWith([])} />);

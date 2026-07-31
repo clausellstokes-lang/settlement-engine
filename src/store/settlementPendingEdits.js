@@ -310,7 +310,11 @@ async function applyRename(get, set, intent) {
     const npcs = get().settlement?.npcs || [];
     const index = npcs.findIndex((npc) => String(npc?.id ?? '') === String(payload.npcId));
     if (index < 0) return { ok: false, status: 'failed', reason: 'npc_target_missing' };
-    get().renameNPC?.(index, payload.newName);
+    // AWAITED, for the same reason the faction arm below is: the writer fetches
+    // its cascade module at the call seam, so the write lands a microtask later.
+    // Reading the roster off the un-awaited call would score every real rename as
+    // 'rename_not_applied' while the write still landed.
+    await get().renameNPC?.(index, payload.newName);
     const after = npcFor(get().settlement, payload.npcId);
     return after?.name === payload.newName
       ? { ok: true, status: 'applied', reason: null }
@@ -318,8 +322,9 @@ async function applyRename(get, set, intent) {
   }
 
   if (intent.kind === 'rename-faction') {
-    // The converged writer owns resolution, the dual-write, the eleven-surface
-    // cascade and the neighbour walk. This dispatcher only reports whether the
+    // The converged writer owns resolution, the dual-write, the whole
+    // FACTION_RENAME_SURFACES cascade (the count lives in that list, never in a
+    // comment beside it) and the neighbour walk. This dispatcher only reports whether the
     // write landed, so a receipt can never claim an apply the writer refused.
     // AWAITED: the writer fetches its cascade module at the call seam to keep it
     // off first paint, so the action envelope is a promise. Reading `.changed`
@@ -635,7 +640,11 @@ export async function commitPendingEditScope(get, set, selection = null) {
           kind: 'auto-commit',
           label: count === 1 ? 'Dossier change' : `${count} dossier changes`,
         });
-        const snapshotId = result?.after?.snapshotId;
+        // Read the REFUSAL, not just the shape: recordSnapshot returns ok:false
+        // (and a null `after`) when its target save is not in the cache, so nothing
+        // was checkpointed. Either signal alone must block the mint — a token
+        // naming a snapshot that was never recorded is a dead undo lever.
+        const snapshotId = result?.ok === false ? null : result?.after?.snapshotId;
         if (snapshotId) {
           undoToken = {
             kind: 'snapshot',

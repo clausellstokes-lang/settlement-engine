@@ -22,7 +22,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
 import SettlementDetailEditNames from '../../src/components/settlementDetail/SettlementDetailEditNames.jsx';
-import { withFactionRenamed } from '../../src/components/settlements/helpers.js';
+import { withFactionRenamed, withNpcRenamed } from '../../src/components/settlements/helpers.js';
 import { nameOf } from '../../src/domain/rulingPower.js';
 
 const noop = () => {};
@@ -130,5 +130,59 @@ describe('the library lane writes through the converged writer', () => {
     expect(withFactionRenamed(untouched, false, HOST, 'Merchant Guild', 'Amber Concord')).toBe(untouched);
     const noSuchFaction = hostSave();
     expect(withFactionRenamed(noSuchFaction, true, HOST, 'Nobody', 'Amber Concord')).toBe(noSuchFaction);
+  });
+});
+
+describe('the library lane renames a PERSON through the same converged writer', () => {
+  // The NPC twin of the block above. This lane is the ONLY shipped NPC-rename
+  // affordance (SettlementDetailEditNames → SettlementDetail → SettlementsPanel
+  // .applyRename), and it operated on persisted JSON saves — where the
+  // npcs[]/members[] alias is already split — while walking only `npcs[]`.
+  const HOST = 'Bridgeford';
+  const OLD = 'Aldis Vane';
+  /** A RELOADED save: the member record is a SEPARATE object, as JSON makes it. */
+  const hostSave = () => ({
+    id: 'save-host',
+    settlement: {
+      name: HOST,
+      npcs: [{ id: 'n1', name: OLD, role: 'Guildmaster' }],
+      factions: [{ name: 'Merchant Guild', members: [{ id: 'n1', name: OLD, role: 'Guildmaster' }] }],
+      relationships: [{ npc1Id: 'n1', npc2Id: 'n2', npc1Name: OLD, npc2Name: 'Mira Solt' }],
+    },
+  });
+  const partnerSave = () => ({
+    id: 'save-partner',
+    settlement: {
+      name: 'Elsewhere',
+      interSettlementRelationships: [
+        { partnerSettlement: HOST, npcName: 'Odo Wick', partnerName: OLD },
+      ],
+    },
+  });
+
+  test('the host save gets the MEMBER-CHIP write both lanes used to miss', () => {
+    const before = hostSave();
+    // Anchored: the member copy is a distinct object holding the same name, which
+    // is the state a reloaded save is always in.
+    expect(before.settlement.factions[0].members[0]).not.toBe(before.settlement.npcs[0]);
+    const next = withNpcRenamed(before, true, HOST, OLD, 'Wren Ashdown');
+    expect(next.settlement.npcs[0].name).toBe('Wren Ashdown');
+    expect(next.settlement.factions[0].members[0].name).toBe('Wren Ashdown');
+    expect(next.settlement.relationships[0].npc1Name).toBe('Wren Ashdown');
+    expect(next.settlement.relationships[0].npc2Name).toBe('Mira Solt');
+  });
+
+  test('a neighbour save gets only the contact naming that person', () => {
+    const next = withNpcRenamed(partnerSave(), false, HOST, OLD, 'Wren Ashdown');
+    const link = next.settlement.interSettlementRelationships[0];
+    expect(link.partnerName).toBe('Wren Ashdown');
+    expect(link.npcName).toBe('Odo Wick');
+  });
+
+  test('an untouched save is returned BY REFERENCE so it is never persisted needlessly', () => {
+    const untouched = { id: 'save-other', settlement: { name: 'Third Town' } };
+    expect(withNpcRenamed(untouched, false, HOST, OLD, 'Wren Ashdown')).toBe(untouched);
+    const noSuchNpc = hostSave();
+    expect(withNpcRenamed(noSuchNpc, true, HOST, 'Nobody', 'Wren Ashdown')).toBe(noSuchNpc);
   });
 });

@@ -102,14 +102,17 @@ export function isAllowedConfigKey(key) {
     || CONFIG_PATCH_EXTRA_KEYS.has(key);
 }
 
-// The `(set, get)` signature is LOAD-BEARING as written: the operation-registry
-// walker locates a slice's action object by matching `create<Name>Slice = (set, get) =>`
-// literally, and renaming the unused second parameter to `_get` made it fail to find
-// this file's slice at all. `get`'s only reader was setSettlementType's tier clamp,
-// retired below; the parameter stays under its real name (and its warning stays
-// visible) rather than breaking the census that keeps this registry honest.
-// eslint-disable-next-line no-unused-vars
-export const createConfigSlice = (set, get) => ({
+// The FIRST parameter is LOAD-BEARING and must stay literally `set`: the
+// operation-registry walker locates a slice's action object by matching
+// `create<Name>Slice = (set, …) =>`, and it deliberately refuses `(_set, get)` /
+// `(store, get)` so a renamed first parameter fails loudly instead of silently
+// dropping this file's actions from the census (pinned in
+// tests/store/operationRegistry.walker.test.js). LATER parameters are free —
+// the 2026-07-27 hardening widened the locator to any name and pins `(set, _get)`
+// explicitly — so the second one, whose only reader (setSettlementType's tier
+// clamp) was retired below, now carries the unused-arg underscore instead of an
+// eslint suppression.
+export const createConfigSlice = (set, _get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   config: { ...DEFAULT_CONFIG },
 

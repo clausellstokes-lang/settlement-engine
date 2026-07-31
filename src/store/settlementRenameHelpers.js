@@ -10,14 +10,26 @@
  *   • recordCanonFlavorEntryImpl   — append a canon-only flavor timeline line.
  *   • syncActiveNeighbourFieldsImpl — flush-only neighbour-field reconcile.
  *   • renameFactionImpl            — the CONVERGED faction rename (queue #14).
- *                                    ASYNC: it fetches its cascade module at the
- *                                    call seam to keep it off first paint.
+ *   • renameNpcImpl                — the CONVERGED NPC rename.
+ *                                    Both are ASYNC: each fetches the shared
+ *                                    cascade module at the call seam to keep it
+ *                                    off first paint.
  *
- * The NPC rename stays INLINE in settlementSlice (renameNPC) — it writes one
- * field on one entity and needs no cascade. The FACTION rename moved here when
- * it gained one: it now walks eleven name-keyed surfaces plus every neighbour
- * save, which is an action body, not a two-line write, and settlementSlice sits
- * at its frozen max-lines ceiling.
+ * BOTH ENTITY RENAMES LIVE HERE FOR THE SAME REASON: each gained a CASCADE, and
+ * a cascade is an action body rather than a two-line write, while settlementSlice
+ * sits at its frozen max-lines ceiling. Each walks the surface list its own
+ * denominator declares — FACTION_RENAME_SURFACES and NPC_RENAME_SURFACES in
+ * domain/factionRename.js, both pinned against real pipeline data by
+ * tests/domain/factionRename.test.js and tests/domain/npcRename.test.js.
+ *
+ * NEITHER COUNT IS RESTATED HERE. This header used to say the faction rename
+ * "walks eleven name-keyed surfaces", which was stale by fifteen the moment the
+ * denominator grew (the list is 26 entries and its floor is pinned), and it used
+ * to say the NPC rename "writes one field on one entity and needs no cascade",
+ * which was false even then: the library lane already cascaded the relationship
+ * joins, and NOBODY cascaded `factions[].members[].name`. A number copied into
+ * prose beside the list that owns it can only go stale, so this header names the
+ * lists instead.
  *
  * Wave 4a composition note: recordCanonFlavorEntry and syncActiveNeighbourFields
  * consult `get().flushSuppressPersist`, and renameSettlement defers its cloud
@@ -374,4 +386,59 @@ export async function renameFactionImpl(get, set, factionIndex, newName) {
     touched,
     modifiedSaveIds: modifiedSaves.map(String),
   };
+}
+
+/**
+ * THE CONVERGED NPC RENAME. Until this landed the two lanes each moved a
+ * different subset and neither knew about the other's:
+ *
+ *   • the STORE lane wrote exactly `settlement.npcs[index].name` — one field,
+ *     no cascade, while operationRegistry advertised that it "carries the new
+ *     name through its references";
+ *   • the LIBRARY lane rewrote `npcs[].name`, the relationship join keys and
+ *     the neighbour contacts — but not `factions[].members[].name`.
+ *
+ * That last one is the second home a character is stored in (domain/
+ * factionRename.js NPC_HOMES): at generation it is the SAME OBJECT as the
+ * `npcs[]` record, so an in-memory rename appears to move both, and JSON splits
+ * the alias on save. Every RELOADED save therefore kept the dead name on the
+ * member chips the dossier renders. Both lanes now call
+ * applyNpcRenameToSettlement, so the rename means the same thing everywhere.
+ *
+ * Canon-locked, exactly as the faction rename is: identity freezes at
+ * canonization.
+ *
+ * ASYNC BY CONSTRUCTION, for the first-paint reason spelled out on
+ * renameFactionImpl: the cascade module is fetched at the call seam, so this
+ * returns a PROMISE and every caller must await it before reading the result
+ * (settlementPendingEdits' rename-npc dispatcher does).
+ *
+ * @param {Function} get  the slice's get()
+ * @param {Function} set  the slice's set() (Immer producer)
+ * @param {number} npcIndex  position in `settlement.npcs`
+ * @param {string} newName
+ * @returns {Promise<boolean>} whether anything moved.
+ */
+export async function renameNpcImpl(get, set, npcIndex, newName) {
+  const trimmed = String(newName || '').trim();
+  const before = get();
+  // Campaign-clock identity lock: NPC names freeze at canonization. The UI hides
+  // the affordance post-canon; this is the guard on the mutation itself.
+  if (!trimmed || before.phase === 'canon') return false;
+  const oldName = String(before.settlement?.npcs?.[npcIndex]?.name || '');
+  if (!oldName || oldName === trimmed) return false;
+  const { applyNpcRenameToSettlement } = await import('../domain/factionRename.js');
+  let changed = false;
+  set(state => {
+    // Re-read inside the producer: the index is a stable target only for as long
+    // as the roster has not moved under a concurrent write, and the await above
+    // widens that window. A concurrent write can only make this rename REFUSE.
+    if (state.phase === 'canon') return;
+    if (state.settlement?.npcs?.[npcIndex]?.name !== oldName) return;
+    changed = applyNpcRenameToSettlement(state.settlement, oldName, trimmed).changed;
+  });
+  // Persist so the rename survives reload instead of ghosting until some later
+  // action happens to write the blob (§10.4). No-op without a hydrated save.
+  if (changed) get().persistActiveSaveEdit?.();
+  return changed;
 }

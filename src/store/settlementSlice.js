@@ -106,8 +106,8 @@ import {
   cloneJson, persistSaveUpdate, cappedVersionHistory, saveEnvelopeFor,
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
-  uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, carryLockedSections, geographyLockedConfig, remapLocksAfterRegen, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo } from './settlementSliceHelpers.js';
+  uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys, snapshotTargetMissingRefusal,
+  sectionLocked, carryLockedSections, geographyLockedConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -134,7 +134,7 @@ import { runAuthoritativeCanonEventFromSlice } from './canonEventCommandEntry.js
 // the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
 // Settlements-list + change-queue affordances consume. See each helper's header.
 import {
-  renameSettlementImpl, canonizeSavedSettlementImpl, renameFactionImpl,
+  renameSettlementImpl, canonizeSavedSettlementImpl, renameFactionImpl, renameNpcImpl,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -499,8 +499,23 @@ export const createSettlementSlice = (set, get) => ({
   //
   // Saved-settlement timelines persist immediately through the normal
   // save service (`version_history` in Supabase, `versionHistory` locally).
-  // Unsaved draft timelines live in `draftVersionHistory` until the
-  // settlement itself is saved.
+  //
+  // Unsaved draft timelines are SESSION-ONLY and DO NOT TRANSFER at the
+  // save-to-library transition — the earlier "until the settlement itself is
+  // saved" wording promised a hand-off that has never existed. Save-to-library
+  // mints the row with `versionHistory: []` (lib/saves.js), and the draft
+  // timeline stays in `draftVersionHistory` until the identity reset drops it.
+  // Nothing misfires when it goes: setting activeSaveId flips the pending-edit
+  // owner scope from `draft:` to `save:` (domain/pendingEditIntents.js), so
+  // every draft-owned undo receipt is filtered out rather than resolved against
+  // an empty saved timeline — the affordance disappears, it never errors.
+  //
+  // DELIBERATELY DEFERRED — documented, not a bug to re-find. Carrying the
+  // timeline across would need each of the three save chokepoints (the wizard
+  // button, the dossier purchase rung, the post-signup SAVE_SETTLEMENT intent)
+  // to put it in the create payload, and it asks a product question this lane
+  // cannot answer: a draft snapshot predates the save, so a post-save revert to
+  // one would rewrite the freshly saved row with pre-save content. Owner call.
 
   /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
   recordSnapshot: (opts = {}) => {
@@ -537,8 +552,16 @@ export const createSettlementSlice = (set, get) => ({
         s.draftVersionHistory = cappedVersionHistory([...(Array.isArray(s.draftVersionHistory) ? s.draftVersionHistory : []), snapshot]);
       });
     }
-    const persisted = Boolean(targetSaveId && persistedHistory);
-    if (persisted) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
+    // ENVELOPE HONESTY: a targetSaveId the savedSettlements cache does not hold
+    // appended nothing to any timeline and persisted nothing (the producer above
+    // returns on idx === -1), so the action must REFUSE. It used to fall through
+    // to the success envelope below, handing back an `after.snapshotId` for a
+    // snapshot that exists nowhere — and commitPendingEditScope mints its batch
+    // undo token off exactly that field. The window is real and not transient:
+    // the save chokepoints stamp activeSaveId on a row the cache only learns
+    // about at its next hydration (see setActiveSaveId's header).
+    if (targetSaveId && !persistedHistory) return snapshotTargetMissingRefusal(targetSaveId);
+    if (targetSaveId) persistSaveUpdate(targetSaveId, { versionHistory: persistedHistory });
     // Track K §C2 — ActionResult envelope. The immutable snapshot maps to an
     // 'edit'-source Receipt (kind 'history': a checkpoint in the settlement's
     // timeline); the snapshot id is also surfaced on `after.snapshotId` for
@@ -553,7 +576,7 @@ export const createSettlementSlice = (set, get) => ({
         targetId: snapshot.id,
         causes: [{ source: 'edit', effect: snapshot.kind, reason: snapshot.label }],
       })],
-      persistenceOps: persisted
+      persistenceOps: targetSaveId
         ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: ['versionHistory'] }]
         : [],
     });
@@ -1079,11 +1102,13 @@ export const createSettlementSlice = (set, get) => ({
     if (section === 'npcs') {
       // `_preservation` is the pipeline's report, carried OUT OF BAND of the parts
       // (it must never land in the settlement blob) and destructured off here. A
-      // locked keeper INHERITS the id of the slot it took over, so the lock map is
-      // rewritten inside the same set() that folds the roster in — otherwise the
-      // lock silently follows the stranger who got the old id on the next reroll.
+      // locked keeper INHERITS the id of the slot it took over, so BOTH npc-id-keyed
+      // maps have to be rewritten in the same step that folds the roster in —
+      // otherwise each one silently follows the stranger who got the old id on the
+      // next reroll. foldRegeneratedRoster owns all three writes (roster, `locks`,
+      // and the save row's `aiData.pinnedNpcs`) so they can never disagree.
       const { _preservation, ...parts } = eng.regenNPCsPipeline(settlement, cfg, { locks });
-      set(s => { Object.assign(s.settlement, parts); remapLocksAfterRegen(s, _preservation); });
+      foldRegeneratedRoster(get, set, parts, _preservation);
     } else if (section === 'history') {
       // This branch still assigns the whole history object, but the pipeline now
       // carries the parts a reroll has no business discarding, so the assignment
@@ -1333,20 +1358,19 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
-  renameNPC: (npcIndex, newName) => {
-    let changed = false;
-    set(state => {
-      // Campaign-clock identity lock: NPC names freeze at canonization. Renames
-      // are a draft-only affordance (the UI hides them post-canon; guard here too).
-      if (state.phase === 'canon') return;
-      if (!state.settlement?.npcs?.[npcIndex]) return;
-      state.settlement.npcs[npcIndex].name = newName;
-      changed = true;
-    });
-    // Persist so the rename survives reload instead of ghosting until some later
-    // action happens to write the blob (§10.4). No-op without a hydrated save.
-    if (changed) get().persistActiveSaveEdit?.();
-  },
+  //
+  // THE CONVERGED NPC rename. The body moved to
+  // settlementRenameHelpers.renameNpcImpl when this action gained a CASCADE: it
+  // used to write exactly `npcs[index].name` while operationRegistry advertised
+  // that it "carries the new name through its references", and the library lane
+  // carried a second, differently-incomplete walk. Both lanes now call
+  // domain/factionRename.js applyNpcRenameToSettlement, which also heals
+  // `factions[].members[].name` — the second home a character is stored in, and
+  // the one every reloaded save left holding the dead name.
+  // ASYNC: the cascade module is fetched at the call seam (first-paint budget),
+  // so this returns a PROMISE and callers must await it before reading the result.
+  renameNPC: (npcIndex, newName) =>
+    renameNpcImpl(get, set, npcIndex, newName),
 
   // THE CONVERGED faction rename (owner queue #14). The body lives in
   // settlementRenameHelpers.renameFactionImpl: it resolves the CANONICAL

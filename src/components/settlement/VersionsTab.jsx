@@ -221,7 +221,7 @@ export default function VersionsTab({ save }) {
       kind: 'manual',
       label: typed || DEFAULT_SNAPSHOT_LABEL,
     });
-    if (!result) {
+    if (!result?.ok) {
       setSnapshotError(t('errors.snapshotRecordFail'));
       return;
     }

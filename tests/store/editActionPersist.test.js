@@ -98,7 +98,9 @@ describe('edit actions persist on a hydrated save (§10.4)', () => {
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
   test('renameNPC: live + entry + cloud + reload all carry the new name', async () => {
-    store.getState().renameNPC(0, 'Aldric');
+    // AWAITED: the writer fetches its cascade module at the call seam (first-paint
+    // budget), so the action returns a promise — same idiom as renameFaction below.
+    await store.getState().renameNPC(0, 'Aldric');
 
     expect(store.getState().settlement.npcs[0].name).toBe('Aldric');       // live
     expect(persistedEntry(store).settlement.npcs[0].name).toBe('Aldric');  // in-memory entry synced
@@ -148,7 +150,7 @@ describe('edit actions persist on a hydrated save (§10.4)', () => {
   });
 
   test('the persisted campaignState carries NO new event (content edits are not events)', async () => {
-    store.getState().renameNPC(0, 'Aldric');
+    await store.getState().renameNPC(0, 'Aldric');
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
     expect(persistedEntry(store).campaignState.eventLog).toEqual([]);
   });
@@ -355,7 +357,7 @@ describe('edit-persist guards (no spurious writes)', () => {
     const store = makeStore();
     store.setState(s => { s.settlement = fixture(); }); // no activeSaveId / savedSettlements
 
-    store.getState().renameNPC(0, 'Aldric');
+    await store.getState().renameNPC(0, 'Aldric');
     store.getState().applyUserEditAction('npc', 0, 'secret.what', 'X');
 
     expect(store.getState().settlement.npcs[0].name).toBe('Aldric'); // live edit still lands
@@ -368,7 +370,7 @@ describe('edit-persist guards (no spurious writes)', () => {
     withActiveSave(store);
     store.setState(s => { s.phase = 'canon'; });
 
-    store.getState().renameNPC(0, 'Aldric');
+    await store.getState().renameNPC(0, 'Aldric');
 
     expect(store.getState().settlement.npcs[0].name).toBe('Aldis'); // unchanged
     await new Promise(r => setTimeout(r, 0));
@@ -390,7 +392,7 @@ describe('edit-persist guards (no spurious writes)', () => {
     withActiveSave(store);
     store.setState(s => { s.flushSuppressPersist = true; });
 
-    store.getState().renameNPC(0, 'Aldric');
+    await store.getState().renameNPC(0, 'Aldric');
 
     expect(store.getState().settlement.npcs[0].name).toBe('Aldric'); // live mutation still happens
     await new Promise(r => setTimeout(r, 0));

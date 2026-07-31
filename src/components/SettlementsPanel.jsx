@@ -28,7 +28,7 @@ import { forkSeedFor } from '../data/sampleSettlements.js';
 import {
   migrateConfig, findSaveById, saveCountBand, dayGapBand,
   canonPhaseOf, lastEditedMs, hasAiData,
-  renameInterSettlementReference, withSettlementChanges, withFactionRenamed,
+  withSettlementChanges, withFactionRenamed, withNpcRenamed,
 } from './settlements/helpers.js';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import {
@@ -338,52 +338,22 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     if ((type === 'npc' || type === 'faction') && canonPhaseOf(detail?.saveData) === 'canon') return;
     const trimmed = newName.trim();
     const saveId = detail?.saveData?.id;
+    // Owner queue #14: BOTH arms route ENTIRELY through the ONE converged writer
+    // (domain/factionRename.js), which the store lane calls too, so a rename
+    // means the same thing on every lane and can only regress in one place. The
+    // generic rewrites this replaced were both too broad and too narrow: too
+    // broad because they renamed a neighbouring TOWN sharing the name, and too
+    // narrow because neither walked `factions[].members[]` — the second home a
+    // character is stored in, and a separate object on every RELOADED save.
+    //
+    // `id` addresses the record the detail view offered; the cascade itself
+    // joins by NAME, because the stored joins it heals (relationships[].npc1Name,
+    // member chips) are display names rather than ids.
     const updatedSaves = saves.map(save => {
-      const settlement = save.settlement;
       const isHost = String(save.id) === String(saveId);
-      // Owner queue #14: the faction arm routes ENTIRELY through the ONE
-      // converged writer (domain/factionRename.js), which resolves the CANONICAL
-      // powerStructure list this lane used to miss and carries the name into the
-      // governing seat, the roster, institution attribution and the neighbour
-      // links. It takes the whole branch because the generic rewrites below are
-      // too broad for a faction: they would also rename a neighbouring TOWN or a
-      // PERSON who happens to share the faction's name.
-      if (type === 'faction') {
-        return withFactionRenamed(save, isHost, detail.settlement.name, oldName, trimmed);
-      }
-      if (!isHost) {
-        const relationships = settlement?.interSettlementRelationships || [];
-        const referencesEntity = relationships.some(relationship => {
-          const names = [
-            relationship.partnerName, relationship.npcName, relationship.partnerFactionName,
-            relationship.factionName,
-          ];
-          return relationship.partnerSettlement === detail.settlement.name
-            && names.includes(oldName);
-        });
-        if (!referencesEntity) return save;
-        return withSettlementChanges(save, {
-          interSettlementRelationships: relationships.map(relationship => (
-            relationship.partnerSettlement === detail.settlement.name
-              ? renameInterSettlementReference(relationship, oldName, trimmed) : relationship
-          )),
-        });
-      }
-
-      const npcs = type === 'npc'
-        ? (settlement.npcs || []).map(npc =>
-            String(npc.id) === String(id) ? { ...npc, name: trimmed } : npc)
-        : settlement.npcs;
-      const relationships = (settlement.relationships || []).map(relationship => ({
-        ...relationship,
-        npc1Name: relationship.npc1Name === oldName ? trimmed : relationship.npc1Name,
-        npc2Name: relationship.npc2Name === oldName ? trimmed : relationship.npc2Name,
-      }));
-      const interSettlementRelationships = (settlement.interSettlementRelationships || [])
-        .map(relationship => renameInterSettlementReference(relationship, oldName, trimmed));
-      return withSettlementChanges(
-        save, { npcs, relationships, interSettlementRelationships },
-      );
+      return type === 'faction'
+        ? withFactionRenamed(save, isHost, detail.settlement.name, oldName, trimmed)
+        : withNpcRenamed(save, isHost, detail.settlement.name, oldName, trimmed);
     });
     setSaves(updatedSaves);
     const modifiedIds = updatedSaves.filter((s, i) => s !== saves[i]).map(s => s.id);
