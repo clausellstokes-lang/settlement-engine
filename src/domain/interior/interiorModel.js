@@ -24,8 +24,12 @@
  *   • DETERMINISM — integer geometry only (round/min/max), a canonical south-entrance
  *     frame rotated by whole quarter-turns to the map-facing edge (no trig), fixed
  *     output key order ⇒ byte-identical JSON per (settlement, institution, opts).
+ *   • SEED POSTURE — the DM fork embeds the settlement seed as its literal prefix, and a
+ *     seed regenerates the whole unsanitized world. NO public projection carries it:
+ *     both public paths emit PUBLIC_SEED_FORK instead (see the constant).
  *
- * PURITY: no Date / Math.random / localeCompare (pinned by interiorPurity.test.js).
+ * PURITY: no Date / Math.random / localeCompare (pinned by the PURITY source-scan in
+ * tests/interior/interiorModel.test.js — the townMap directory-walk idiom).
  */
 
 import { createPRNG } from '../../kernel/prng.js';
@@ -39,6 +43,15 @@ import { deriveBuildingFootprint } from './interiorFootprint.js';
 const VIEW = 1000;
 const MARGIN = 60;
 export const INTERIOR_VERSION = 1;
+
+/** The `seedFork` a PUBLIC projection carries: none. The DM fork is
+ *  `${seed}::interior:v1:<institutionId>` — the settlement seed is its literal prefix,
+ *  trivially extractable, and a seed regenerates the entire unsanitized world (the
+ *  `_seed` SECRET posture, domain/display/publicSafe.js). Public identity rides
+ *  interiorVersion + meta.institutionId, which are already public. ONE value shared by
+ *  BOTH public paths (the publicSafe BUILD and the toPublicSafeInterior SCRUB) — that is
+ *  what keeps the two byte-identical (the path-independence pin). @type {string} */
+export const PUBLIC_SEED_FORK = '';
 
 /**
  * The institution view an interior reads. A superset of the map's AnchorableInstitution
@@ -375,7 +388,7 @@ export function buildInteriorModel(settlement, institution, opts = {}) {
 
   return {
     interiorVersion: INTERIOR_VERSION,
-    seedFork,
+    seedFork: publicSafe ? PUBLIC_SEED_FORK : seedFork,
     meta: {
       institutionId,
       kind,
@@ -400,10 +413,12 @@ export function buildInteriorModel(settlement, institution, opts = {}) {
 }
 
 /**
- * Project an interior model to its PUBLIC-SAFE form: drop every covert:true room /
- * wall / door / furnishing and clear the covert meta flags. Defense-in-depth twin of
- * the publicSafe BUILD mode — the two public paths are byte-identical (pinned), so a
- * DM model shared to the gallery can never leak the concealed chamber. Pure.
+ * Project an interior model to its PUBLIC-SAFE form: drop the settlement seed, drop every
+ * covert:true room / wall / door / furnishing, and clear the covert meta flags. Defense-in-
+ * depth twin of the publicSafe BUILD mode — the two public paths are byte-identical
+ * (pinned), so a DM model shared to the gallery can never leak the concealed chamber or
+ * the seed behind it. A malformed model yields empty collections rather than throwing
+ * (fail-closed: a scrub that dies is worse than one that emits nothing). Pure.
  * @param {InteriorModel} model
  * @returns {InteriorModel}
  */
@@ -411,12 +426,12 @@ export function toPublicSafeInterior(model) {
   if (!model || typeof model !== 'object') return model;
   return {
     interiorVersion: model.interiorVersion,
-    seedFork: model.seedFork,
+    seedFork: PUBLIC_SEED_FORK,
     meta: { ...model.meta, hasConcealed: false, publicSafe: true },
     bounds: model.bounds,
-    rooms: model.rooms.filter((r) => !r.covert),
-    walls: model.walls.filter((w2) => !w2.covert),
-    doors: model.doors.filter((d) => !d.covert),
-    furnishings: model.furnishings.filter((f) => !f.covert),
+    rooms: Array.isArray(model.rooms) ? model.rooms.filter((r) => !r.covert) : [],
+    walls: Array.isArray(model.walls) ? model.walls.filter((w2) => !w2.covert) : [],
+    doors: Array.isArray(model.doors) ? model.doors.filter((d) => !d.covert) : [],
+    furnishings: Array.isArray(model.furnishings) ? model.furnishings.filter((f) => !f.covert) : [],
   };
 }

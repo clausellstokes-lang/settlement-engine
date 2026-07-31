@@ -7,7 +7,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
-  buildInteriorModel,
+  buildInteriorModel, toPublicSafeInterior,
   buildInteriorUvtt, interiorExportSvg, interiorExportFilename, interiorExportGateReady,
 } from '../../src/domain/interior/index.js';
 import { makeInteriorSettlement, ROSTER_BY_KIND } from '../fixtures/interiorFixtures.js';
@@ -69,6 +69,29 @@ describe('KEYED SCALE — SVG self-gate + filename + pricing seam', () => {
     expect(svg.startsWith('<svg')).toBe(true);
     expect(interiorExportSvg(null)).toBe(null);
     expect(interiorExportSvg({ interiorVersion: 1, meta: {}, bounds: { x: 0, y: 0, w: 0, h: 0 }, rooms: [], walls: [], doors: [], furnishings: [] })).toBe(null);
+  });
+
+  it('FAIL-CLOSED: the export SVG omits covert geometry unless the caller declares a DM audience', () => {
+    const base = makeInteriorSettlement('svgcovert', 'city', 'prosperous');
+    const covertS = {
+      ...base,
+      institutions: base.institutions.map((i) => (i.catalogId === 'merchant_guild'
+        ? { ...i, impairments: [{ type: 'corruption', covert: true }] } : i)),
+    };
+    const inst = covertS.institutions.find((i) => i.catalogId === 'merchant_guild');
+    const dm = buildInteriorModel(covertS, inst, {});
+    expect(dm.rooms.some((r) => r.covert), 'the DM model has no covert geometry (vacuous)').toBe(true);
+
+    const dmPlate = interiorExportSvg(dm, { audience: 'dm' });
+    const defaultPlate = interiorExportSvg(dm);
+    // the default plate is EXACTLY the plate of an explicitly scrubbed model…
+    expect(defaultPlate).toBe(interiorExportSvg(toPublicSafeInterior(dm), { audience: 'dm' }));
+    // …and the DM plate really does carry more (the concealed chamber's rooms/walls/door)
+    expect(dmPlate).not.toBe(defaultPlate);
+    expect(dmPlate.length).toBeGreaterThan(defaultPlate.length);
+    // an unrecognized audience scrubs — the opt-in is exact, so a typo cannot leak
+    expect(interiorExportSvg(dm, { audience: 'gm' })).toBe(defaultPlate);
+    expect(interiorExportSvg(dm, { audience: 'public' })).toBe(defaultPlate);
   });
 
   it('the filename is slugged, denylist-free, and lens-aware', () => {

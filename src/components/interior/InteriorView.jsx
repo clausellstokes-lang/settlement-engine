@@ -12,6 +12,14 @@
  * fail-closed (the DM-only concealed chamber is never derived). The default (owner) mount
  * shows the full interior.
  *
+ * WIRING RULE (binding on the mount the manager wires — the prop default cannot enforce
+ * it): EVERY mount whose audience is not the owner — gallery, shared handout, an
+ * owner-side "preview as public" pane — MUST pass `publicSafe`. The default is the OWNER
+ * mount, so a forgotten prop builds the DM model, and nothing downstream re-scrubs it:
+ * the SVG is drawn AS GIVEN (interiorDraw.js). Gallery data reaching here through
+ * toPublicSafe already carries no covert impairment, so it yields no concealed chamber
+ * either way; the rule closes the one seam that reads RAW local data.
+ *
  * LAZY: imported by NOTHING eager — a consumer React.lazy()-loads it (the town-map surface
  * chunk), so the interior domain fingerprint stays off first paint (interiorLazy pin).
  */

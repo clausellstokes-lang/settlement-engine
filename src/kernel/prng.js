@@ -61,7 +61,26 @@ export function createPRNG(seed) {
       return items[items.length - 1];
     },
 
-    /** Create a child PRNG with a derived seed for sub-step isolation. */
+    /**
+     * Create a child PRNG with a derived seed for sub-step isolation.
+     *
+     * THE '::' DELIMITER IS LOAD-BEARING VOCABULARY, not an internal detail. The
+     * child seed is the concatenation below, so a label that itself contains '::'
+     * derives the SAME string a fork CHAIN derives: fork('a::b') and
+     * fork('a').fork('b') are one stream, silently correlated. Three worldPulse
+     * lanes already spell their sub-keys that way (fidelityNoise, deityStanceLane,
+     * religiousContest), so the delimiter cannot be rejected here — a throw would
+     * crash the religion lane, not harden it.
+     *
+     * THE RULE a caller must hold: one label family, one spelling. Never build both
+     * a chain and an embedded-delimiter label rooted at the same first segment.
+     * tests/kernel/prngForkLabelDelimiter.test.js freezes the families that embed
+     * the delimiter and reds when a new one lands without that check.
+     *
+     * Changing the derivation itself — escaping the label, a different separator —
+     * re-rolls every seeded stream in the product and is owner-gated under THE
+     * PROMISE ("a seed is a world, forever").
+     */
     fork: (label) => createPRNG(`${seed}::${label}`),
 
     /** Round a random value to range [lo, hi]. */

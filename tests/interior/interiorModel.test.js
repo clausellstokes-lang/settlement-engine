@@ -86,6 +86,26 @@ describe('KEYED SCALE — THE ENVELOPE LAW (interior ⊆ footprint; entrances sh
       if (side === SIDE_WEST) onEdge = near(ent.x1, b.x) && near(ent.x2, b.x);
       expect(onEdge, `entrance not on side ${side}`).toBe(true);
     });
+
+    it(`${kind}: an EDITED interior stays in the envelope — a max pin cannot leave the room`, () => {
+      const m = buildInteriorModel(s, ROSTER_BY_KIND[kind], {});
+      const b = m.bounds;
+      const roomById = new Map(m.rooms.map((r) => [r.id, r]));
+      expect(m.furnishings.length, 'no furnishings to nudge (vacuous)').toBeGreaterThan(0);
+      // PIN_BOUND is the whole view, so these are LEGAL pins, not malformed input.
+      for (const [dx, dy] of [[1000, 1000], [-1000, -1000], [1000, -1000], [-1000, 1000]]) {
+        const entry = { pins: m.furnishings.map((f) => ({ anchor: f.id, dx, dy })) };
+        const edited = applyInteriorEdits(m, entry);
+        for (const f of edited.furnishings) {
+          const r = roomById.get(f.roomId);
+          expect(r, `furnishing ${f.id} names an unknown room`).toBeTruthy();
+          expect(f.x >= r.x && f.y >= r.y && f.x + f.w <= r.x + r.w && f.y + f.h <= r.y + r.h,
+            `${kind}: pin (${dx},${dy}) pushed ${f.id} out of room ${r.id}`).toBe(true);
+          expect(f.x >= b.x - 1 && f.y >= b.y - 1 && f.x + f.w <= b.x + b.w + 1 && f.y + f.h <= b.y + b.h + 1,
+            `${kind}: pin (${dx},${dy}) pushed ${f.id} outside the building`).toBe(true);
+        }
+      }
+    });
   }
 });
 
@@ -174,6 +194,24 @@ describe('KEYED SCALE — SEMANTIC FURNISHING (corruption exposure)', () => {
 
     // defense-in-depth SCRUB: stripping a DM model == building publicSafe (path-independent).
     expect(JSON.stringify(toPublicSafeInterior(dm))).toBe(JSON.stringify(pub));
+  });
+
+  it('NEITHER public path carries the settlement seed (the DM seedFork embeds it verbatim)', () => {
+    const s = withImp(true);
+    const inst = s.institutions.find((i) => i.catalogId === 'merchant_guild');
+    const dm = buildInteriorModel(s, inst, {});
+    // the anchor: the DM fork DOES embed the raw seed, so an absence below is a real strip
+    expect(dm.seedFork.startsWith('corrupt::interior:v1:')).toBe(true);
+    expect(JSON.stringify(dm)).toContain('corrupt::');
+
+    const paths = [
+      ['BUILD publicSafe', buildInteriorModel(s, inst, { publicSafe: true })],
+      ['SCRUB toPublicSafeInterior', toPublicSafeInterior(dm)],
+    ];
+    for (const [label, m] of paths) {
+      expect(m.seedFork, `${label} kept a seedFork`).toBe('');
+      expect(JSON.stringify(m).includes('corrupt::'), `${label} leaked the settlement seed`).toBe(false);
+    }
   });
 
   it('covert corruption changes NOTHING visible — its public geometry == a clean build', () => {

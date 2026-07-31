@@ -53,8 +53,12 @@ describe('determinism', () => {
   test.each(FIXTURES)('$name produces stable structure across two runs with same seed', ({ config }) => {
     const a = gen(config);
     const b = gen(config);
-    // The full settlement object includes generated NPCs whose IDs may embed
-    // timestamps or other entropy — compare structure, not deep equality.
+    // Same seed ⇒ BYTE-identical output, NPC ids included: ids are slug+index
+    // composed (factionRoles.js), and eslint bans Date.now / new Date() /
+    // Math.random across src/generators. This tripwire compares the SHAPE on
+    // purpose — a cosmetic re-wording should not fail it. The byte line is held
+    // by tests/property/generatorGoldenMaster.test.js (sha256 over the whole
+    // settlement, whole corpus); nothing here licenses entropy in an id.
     expect(structureFingerprint(a)).toEqual(structureFingerprint(b));
   });
 });

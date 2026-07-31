@@ -17,7 +17,8 @@
  * (heals / feeds / arms / judges …) selects a variant of the kind's room set.
  *
  * PURITY: pure, deterministic, table-only. No Date / Math.random / localeCompare
- * (pinned by tests/interior/interiorPurity.test.js — the townMap source-scan idiom).
+ * (pinned by the PURITY source-scan in tests/interior/interiorModel.test.js — the
+ * townMap source-scan idiom, walking every file in this directory).
  */
 
 import { facetOf } from '../spatial/cohesionWeave.js';

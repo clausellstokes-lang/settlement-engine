@@ -166,8 +166,11 @@ export function buildInteriorSvg(model, opts = {}) {
   return interiorDrawListToSvg(buildInteriorDrawList(model, style), { width: opts.width, height: opts.height, background: opts.background, style });
 }
 
-/** Whether an interior model carries anything worth drawing (≥1 room OR ≥1 wall).
- *  @param {import('./interiorModel.js').InteriorModel | null | undefined} model @returns {boolean} */
+/** Whether an interior model carries anything worth drawing (≥1 room OR ≥1 wall). A TYPE
+ *  GUARD: this is the narrowing gate every lane opens with, so a caller that passed it
+ *  holds a real model (the export lane scrubs through it — interiorExport.js).
+ *  @param {import('./interiorModel.js').InteriorModel | null | undefined} model
+ *  @returns {model is import('./interiorModel.js').InteriorModel} */
 export function hasDrawableInterior(model) {
   if (!model || typeof model !== 'object') return false;
   const rooms = Array.isArray(model.rooms) ? model.rooms : [];

@@ -6,7 +6,15 @@
  *  - Institution classification  (getInstitutionNames)
  *  - Core influence scoring      (getInstFlags, getStressFlags)
  *  - Trade/water dependency      (evaluateWaterDependency)
- *  - Shared utility functions    (pickRandom, clamp, replaceTokens, …)
+ *  - Shared utility functions    (pickRandom, replaceTokens, …)
+ *
+ * NOT for clamp. src/kernel/math.js is the ONE clamp primitive, and its ADOPTION
+ * rule binds here: new generator code imports clamp/clamp01 from ../kernel/math.js.
+ * The `clamp` exported below is a frozen legacy copy carrying the PASSTHROUGH
+ * non-finite policy (NaN rides through) where the kernel clamps a non-finite input
+ * to `lo`. It survives only because scripts/.clamp-primitive-baseline.json freezes
+ * divergent copies rather than silently changing their semantics — a baseline row,
+ * not a recommendation.
  */
 
 import {
@@ -36,7 +44,8 @@ const _isSmallTier = (tier) => SMALL_TIERS.includes(tier);
 
 // ─── Math utilities ──────────────────────────────────────────────────────────
 
-/** Clamp a value between lo and hi (defaults: 0–100). */
+/** Clamp a value between lo and hi (defaults: 0–100). PASSTHROUGH on a non-finite
+ *  input — NaN survives. Frozen: new code takes clamp from ../kernel/math.js. */
 export const clamp = (val, lo = 0, hi = 100) => Math.max(lo, Math.min(hi, val));
 
 /** Convert a 0–100 priority slider to a multiplier centred at 1.0 when priority = 50. */

@@ -149,10 +149,17 @@ export function withInteriorStyleLens(container, institutionId, lens) {
 
 /**
  * THE EDITS-DELTA LAW. Apply an institution's cosmetic pins to a freshly-derived interior
- * model: nudge each FURNISHING whose id matches a pin anchor, clamped to the view; a pin
- * whose anchor no longer resolves (the interior re-derived under a new template) is
+ * model: nudge each FURNISHING whose id matches a pin anchor, clamped to ITS OWN ROOM; a
+ * pin whose anchor no longer resolves (the interior re-derived under a new template) is
  * silently dropped. Walls / rooms / doors are structural and never moved. Returns a NEW
  * model (never mutates the input) so the projection stays pure.
+ *
+ * THE ENVELOPE LAW HOLDS UNDER EDITS. A pin is bounded by ±PIN_BOUND, which is the whole
+ * view — clamping to the view would let a legal pin park a table outside the walls, on a
+ * plan whose entire claim is that the interior and the map agree. The clamp box is the
+ * furnishing's room rect (`f.roomId`), falling back to the model bounds and then the view
+ * when the room does not resolve. A piece wider than its room lands on the room origin
+ * (clamp prefers `lo` when the box inverts), never outside it.
  * @param {import('./interiorModel.js').InteriorModel} model
  * @param {InteriorEditEntry | null | undefined} entry
  * @returns {import('./interiorModel.js').InteriorModel}
@@ -161,12 +168,16 @@ export function applyInteriorEdits(model, entry) {
   const pins = readInteriorPins(entry);
   if (!model || pins.length === 0) return model;
   const byAnchor = new Map(pins.map((p) => [p.anchor, p]));
+  const rooms = Array.isArray(model.rooms) ? model.rooms : [];
+  const byRoomId = new Map(rooms.map((r) => [r.id, r]));
+  const fallback = model.bounds || { x: 0, y: 0, w: VIEW, h: VIEW };
   /** @type {import('./interiorModel.js').InteriorFurnishing[]} */
   const furnishings = model.furnishings.map((f) => {
     const pin = byAnchor.get(f.id);
     if (!pin) return f;
-    const x = clamp(f.x + pin.dx, 0, VIEW - f.w);
-    const y = clamp(f.y + pin.dy, 0, VIEW - f.h);
+    const box = byRoomId.get(f.roomId) || fallback;
+    const x = clamp(f.x + pin.dx, box.x, box.x + box.w - f.w);
+    const y = clamp(f.y + pin.dy, box.y, box.y + box.h - f.h);
     return f.covert
       ? { id: f.id, kind: f.kind, roomId: f.roomId, x, y, w: f.w, h: f.h, covert: true }
       : { id: f.id, kind: f.kind, roomId: f.roomId, x, y, w: f.w, h: f.h };

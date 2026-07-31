@@ -18,6 +18,11 @@ import { generateHistory } from './historyGenerator.js';
 import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js';
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
+// THE whole-word substitution, shared with the faction-rename convergence. The
+// prose repair below rewrites a departed character's name out of the roster's
+// prose, and a raw substring swap there corrupts a SURVIVOR whose name merely
+// starts with the departed one — one rule, one place, Unicode-aware boundaries.
+import { substituteWholeWord } from '../lib/narrativeMutations.js';
 import { countPreservedNpcs, mergePreservedNpcs } from '../domain/regenerationPreservation.js';
 // The LOCKS leaf (importless but for clone.js), already in this chunk through
 // regenerationPreservation — the full-generate carry reads the same id set the
@@ -180,6 +185,36 @@ function refreshRelationshipProjections(relationships, npcs) {
 }
 
 /**
+ * Rewrite a departed character's name to the keeper who took their slot.
+ *
+ * WHOLE-WORD, never a raw substring swap. Full names collide by prefix inside a
+ * single culture's draw window — east_asian 'Wei Li' / 'Wei Lin', south_asian
+ * 'Bhat' / 'Bhatt' at every tier — so `text.split('Wei Li').join('Kara Voss')`
+ * rewrites the SURVIVING 'Wei Lin' into 'Kara Vossn'. substituteWholeWord fires
+ * only on a name flanked by non-word characters, and its boundaries are
+ * Unicode-aware because `\b` is ASCII-only and cannot see 'Weiß' or 'Grün'. A
+ * name that does not collide is rewritten exactly as the substring swap did.
+ *
+ * THE ONE substitution point: both prose lanes — the NPC secrets in
+ * refreshRosterProse and the settlement-level carriers in NAME_CARRYING_PROSE —
+ * run through here, so the two can never diverge on what counts as a match.
+ *
+ * @param {unknown} text
+ * @param {Array<{from: string, to: string}>} swaps
+ * @returns {{ value: unknown, touched: boolean }}
+ */
+function swapNames(text, swaps) {
+  if (typeof text !== 'string') return { value: text, touched: false };
+  let out = text;
+  let touched = false;
+  for (const { from, to } of swaps) {
+    const next = substituteWholeWord(out, from, to);
+    if (next !== out) { out = next; touched = true; }
+  }
+  return { value: out, touched };
+}
+
+/**
  * Rewrite a displaced character's name out of the roster's own prose.
  *
  * generateCrimeLevel bakes another roster member's NAME into secret.what and
@@ -192,7 +227,9 @@ function refreshRelationshipProjections(relationships, npcs) {
  * inheriting the slot's name references is the consistent reading. Keepers
  * themselves are skipped — their prose may be user-authored, and the merge has
  * no business editing canon. A departed name that still belongs to someone in
- * the cast is skipped too, so a namesake substitution rewrites nothing.
+ * the cast is skipped too, so a namesake substitution rewrites nothing. The
+ * rewrite runs through swapNames, so this lane and the settlement-level one
+ * cannot drift apart on what counts as a match.
  *
  * @param {Array<Record<string, any>>} npcs
  * @param {Array<{from: string, to: string}>} displacements
@@ -207,14 +244,10 @@ function refreshRosterProse(npcs, displacements, keeperIds) {
   return npcs.map(npc => {
     const secret = npc?.secret;
     if (!npc || keeperIds.has(npc.id) || !secret || typeof secret !== 'object') return npc;
-    let what = secret.what;
-    let stakes = secret.stakes;
-    let touched = false;
-    for (const { from, to } of swaps) {
-      if (typeof what === 'string' && what.includes(from)) { what = what.split(from).join(to); touched = true; }
-      if (typeof stakes === 'string' && stakes.includes(from)) { stakes = stakes.split(from).join(to); touched = true; }
-    }
-    return touched ? { ...npc, secret: { ...secret, what, stakes } } : npc;
+    const what = swapNames(secret.what, swaps);
+    const stakes = swapNames(secret.stakes, swaps);
+    if (!what.touched && !stakes.touched) return npc;
+    return { ...npc, secret: { ...secret, what: what.value, stakes: stakes.value } };
   });
 }
 
@@ -244,22 +277,6 @@ const NAME_CARRYING_PROSE = Object.freeze({
   scalar: Object.freeze(['pressureSentence']),
   objectOfStrings: Object.freeze(['prominentRelationship']),
 });
-
-/**
- * Rewrite a departed character's name to the keeper who took their slot.
- * @param {unknown} text
- * @param {Array<{from: string, to: string}>} swaps
- * @returns {{ value: unknown, touched: boolean }}
- */
-function swapNames(text, swaps) {
-  if (typeof text !== 'string') return { value: text, touched: false };
-  let out = text;
-  let touched = false;
-  for (const { from, to } of swaps) {
-    if (out.includes(from)) { out = out.split(from).join(to); touched = true; }
-  }
-  return { value: out, touched };
-}
 
 /**
  * THE FULL-GENERATE ROSTER CARRY — locks engine Phase B.
@@ -375,11 +392,12 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
  * Re-generate NPCs for an existing settlement.
  * Uses the pipeline's generatePopulation step in isolation.
  *
- * Runs under a seeded PRNG: the underlying generators draw from the active RNG
- * and SILENTLY fall back to Math.random() when none is set — so a bare regen was
- * non-deterministic and unreproducible. `options.seed` lets a caller reproduce a
- * prior reroll; omitting it mints a fresh seed (a real reroll). The seed used is
- * returned on `_regenSeed` so the caller can persist it for replay.
+ * Runs under a seeded PRNG: the underlying generators draw from the active RNG,
+ * and that context FAILS CLOSED — an ambient draw with no RNG set THROWS rather
+ * than falling back to Math.random() (src/kernel/rngContext.js), so this function
+ * must establish the context before it calls them. `options.seed` lets a caller
+ * reproduce a prior reroll; omitting it mints a fresh seed (a real reroll). The
+ * seed used is returned on `_regenSeed` so the caller can persist it for replay.
  *
  * Characters the user has authored or locked survive the reroll (see the
  * preservation tail below). A settlement holding none is unaffected: it gets

@@ -30,7 +30,7 @@
  * that mean to coerce a numeric string must do so BEFORE calling this.
  *
  * ADOPTION: new engine code MUST import these instead of re-rolling a local copy.
- * The source-scan ratchet (tests/lint/clampPrimitive.test.js) baselines the
+ * The source-scan ratchet (tests/lint/clampPrimitiveBaseline.test.js) baselines the
  * remaining local copies and blocks any NEW local clamp/clamp01 definition
  * (shrink-only). Existing local copies are migrated only where the local variant
  * is provably byte-identical to this policy on ALL inputs (parity-proven in

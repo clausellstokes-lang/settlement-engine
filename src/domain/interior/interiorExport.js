@@ -13,6 +13,16 @@
  * doors by construction, so even a raw DM model exported here cannot leak the hidden room
  * (the covert-scrub precedent, defense-in-depth over toPublicSafeInterior).
  *
+ * THE SVG LANE IS FAIL-CLOSED TOO, BUT ASYMMETRICALLY — a recorded decision, not drift.
+ * buildInteriorSvg (interiorDraw.js) is DUAL-PURPOSE: it is also the DM's own on-screen
+ * view, which MUST show the concealed chamber, so the covert filter cannot live in the
+ * shared builder the way it lives inside buildInteriorUvtt. It lives in the export-only
+ * wrapper instead: `interiorExportSvg` scrubs through toPublicSafeInterior unless the
+ * caller passes `{ audience: 'dm' }` — the ONE explicit, documented opt-in for a
+ * DM-eyes-only plate. Any other value (or none, or a typo) scrubs, so an export UI that
+ * forgets the option leaks nothing. UVTT takes no such option: a battlemap is shared by
+ * definition, and there is no DM-eyes-only UVTT audience to serve.
+ *
  * PRICING SEAM (owner-pending ladder ruling): interior export rides the EXISTING per-
  * settlement export-bundle entitlement lane (resolveExportAccess — the $2.99 dossier
  * bundle). `interiorExportGateReady` is the ONE predicate the owner wires when the free /
@@ -25,6 +35,7 @@
  */
 
 import { buildInteriorSvg, hasDrawableInterior } from './interiorDraw.js';
+import { toPublicSafeInterior } from './interiorModel.js';
 import { slugify } from '../townMap/anchors.js';
 
 /** The VTT grid: the interior 0..1000 view maps to a 20×20 cell scene at the same
@@ -91,14 +102,20 @@ export function buildInteriorUvtt(model) {
 /**
  * The interior SVG string for a settlement's institution under a lens — the native
  * (vector) export. `null` when the interior is degenerate (nothing to draw).
+ *
+ * FAIL-CLOSED: the plate is scrubbed (toPublicSafeInterior) unless the caller declares
+ * `audience: 'dm'`. An exported file outlives the surface that made it — a handout gets
+ * mailed, a VTT folder gets shared — so a DM plate must be ASKED for, never inherited
+ * from whichever model happened to be on screen. See the asymmetry note in the header.
  * @param {import('./interiorModel.js').InteriorModel | null | undefined} model
- * @param {{ style?: string, resolution?: number }} [opts]
+ * @param {{ style?: string, resolution?: number, audience?: 'public'|'dm' }} [opts]
  * @returns {string | null}
  */
 export function interiorExportSvg(model, opts = {}) {
   if (!hasDrawableInterior(model)) return null;
+  const plate = opts.audience === 'dm' ? model : toPublicSafeInterior(model);
   const size = opts.resolution || 1600;
-  return buildInteriorSvg(model, { style: opts.style, width: size, height: size });
+  return buildInteriorSvg(plate, { style: opts.style, width: size, height: size });
 }
 
 /** A filesystem-safe interior export filename: `<settlement>-<institution>-interior[-<lens>].<ext>`.
