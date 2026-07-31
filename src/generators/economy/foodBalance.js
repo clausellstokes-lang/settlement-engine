@@ -19,6 +19,7 @@ import { resolveTerrain } from '../../domain/resolveTerrain.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
+  SEASONAL_ROUTE_FOOD_IMPORT_RATE,
 } from '../../domain/tradeRouteSemantics.js';
 
 
@@ -198,6 +199,11 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           ? 0.5
           : effectiveRoute === 'road'
             ? 0.35
+            // A pass is a seasonal channel: heavy caravan traffic while it is
+            // open, nothing at all once winter shuts it. The annualized rung
+            // sits below road and above the isolated trickle.
+            : effectiveRoute === 'mountain_pass'
+              ? SEASONAL_ROUTE_FOOD_IMPORT_RATE
           : 0)
     : Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate);
   const canImportFood = importCoverageRate > 0 && rawDeficit > 0;
@@ -206,10 +212,13 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // deficit); the actual display is gated on real import coverage at return time
   // (importCoverageFinal > 0), which is byte-identical to the old `!canImportFood`
   // gate on the fallback path and correct on the canonical path.
+  // The label is read by a player (dossierViewModel prints it verbatim), so the
+  // config token is de-slugged: 'mountain_pass' must arrive as "mountain pass
+  // trade". Byte-identical for every single-word route.
   const importChannelLabel = importCoverageRate <= 0
     ? null
     : !disconnectedRoute
-      ? `${effectiveRoute} trade`
+      ? `${String(effectiveRoute).replace(/_/g, ' ')} trade`
       : _magicTradeRate * _maintainerMult >= _minorRouteRate
         ? (_hasTeleportCircle ? 'teleportation circle' : _siegeIsolation ? 'airship runs (impaired by siege)' : 'airship traffic')
         : 'minor routes and sanctioned caravans';

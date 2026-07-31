@@ -26,6 +26,7 @@ import { availableNativeResourceKeys } from '../domain/resourceSemantics.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
+  SEASONAL_ROUTE_FOOD_IMPORT_RATE,
 } from '../domain/tradeRouteSemantics.js';
 
 // ── Constants (match buildFactionList in economicGenerator) ────────────────
@@ -300,6 +301,10 @@ export function generateFoodSecurity(tier, institutions, config) {
     _isLowAgriTerrain && hasTradeRouteConnection(effectiveRoute)
       ? 0.15
       : 0;
+  // The mountain_pass rung is the annualized seasonal rate and takes no terrain
+  // boost: for a pass town the binding constraint is the winter closure, not
+  // the efficiency of its trade infrastructure, and the pass IS that
+  // infrastructure. Below road, above the isolated trickle.
   const importCoverageRate = disconnectedRoute
                            ? Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate)
                            : effectiveRoute === 'port'       ? 0.70
@@ -307,7 +312,9 @@ export function generateFoodSecurity(tier, institutions, config) {
                            : effectiveRoute === 'river'      ? 0.50
                            : effectiveRoute === 'road'
                              ? (0.35 + _terrainImportBoost)
-                             : 0;
+                             : effectiveRoute === 'mountain_pass'
+                               ? SEASONAL_ROUTE_FOOD_IMPORT_RATE
+                               : 0;
   const importCoverage  = rawDeficit > 0 ? Math.min(rawDeficit, rawDeficit * importCoverageRate) : 0;
 
   // Magic food offset

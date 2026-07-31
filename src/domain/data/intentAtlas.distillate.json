@@ -13,7 +13,7 @@
     "weightFloor": 0.25,
     "soakWeightCap": 0.5,
     "cellsTested": 213,
-    "cellsKept": 93,
+    "cellsKept": 91,
     "cellsUntestable": 33,
     "cellsUnderSampled": 0
   },
@@ -91,16 +91,6 @@
     {
       "surface": "construct",
       "dimension": "settType.resilience",
-      "bucket": "city",
-      "coBucket": "moderate",
-      "n": 56,
-      "effect": -0.12,
-      "weight": 0.27,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.resilience",
       "bucket": "hamlet",
       "coBucket": "high",
       "n": 72,
@@ -124,7 +114,7 @@
       "bucket": "metropolis",
       "coBucket": "low",
       "n": 63,
-      "effect": -0.16,
+      "effect": -0.17,
       "weight": 0.5,
       "source": "soak"
     },
@@ -144,7 +134,7 @@
       "bucket": "thorp",
       "coBucket": "low",
       "n": 61,
-      "effect": 0.18,
+      "effect": 0.28,
       "weight": 0.5,
       "source": "soak"
     },
@@ -162,10 +152,10 @@
       "surface": "construct",
       "dimension": "settType.resilience",
       "bucket": "town",
-      "coBucket": "moderate",
+      "coBucket": "low",
       "n": 81,
-      "effect": -0.12,
-      "weight": 0.36,
+      "effect": -0.14,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -264,7 +254,7 @@
       "bucket": "city",
       "coBucket": "moderate",
       "n": 56,
-      "effect": 0.14,
+      "effect": 0.16,
       "weight": 0.5,
       "source": "soak"
     },
@@ -284,7 +274,7 @@
       "bucket": "hamlet",
       "coBucket": "moderate",
       "n": 72,
-      "effect": -0.29,
+      "effect": -0.3,
       "weight": 0.5,
       "source": "soak"
     },
@@ -324,7 +314,7 @@
       "bucket": "thorp",
       "coBucket": "moderate",
       "n": 61,
-      "effect": -0.27,
+      "effect": -0.28,
       "weight": 0.5,
       "source": "soak"
     },
@@ -335,7 +325,7 @@
       "coBucket": "low",
       "n": 81,
       "effect": -0.12,
-      "weight": 0.36,
+      "weight": 0.35,
       "source": "soak"
     },
     {
@@ -354,7 +344,7 @@
       "bucket": "village",
       "coBucket": "moderate",
       "n": 67,
-      "effect": 0.19,
+      "effect": 0.18,
       "weight": 0.5,
       "source": "soak"
     },
@@ -384,7 +374,17 @@
       "bucket": "crossroads",
       "coBucket": "low",
       "n": 61,
-      "effect": -0.3,
+      "effect": -0.25,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "tradeRoute.resilience",
+      "bucket": "crossroads",
+      "coBucket": "moderate",
+      "n": 61,
+      "effect": -0.15,
       "weight": 0.5,
       "source": "soak"
     },
@@ -404,7 +404,7 @@
       "bucket": "isolated",
       "coBucket": "low",
       "n": 69,
-      "effect": 0.53,
+      "effect": 0.66,
       "weight": 0.5,
       "source": "soak"
     },
@@ -414,7 +414,7 @@
       "bucket": "isolated",
       "coBucket": "moderate",
       "n": 69,
-      "effect": -0.35,
+      "effect": -0.43,
       "weight": 0.5,
       "source": "soak"
     },
@@ -434,17 +434,7 @@
       "bucket": "mountain_pass",
       "coBucket": "low",
       "n": 62,
-      "effect": 0.54,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "tradeRoute.resilience",
-      "bucket": "mountain_pass",
-      "coBucket": "moderate",
-      "n": 62,
-      "effect": -0.37,
+      "effect": 0.13,
       "weight": 0.5,
       "source": "soak"
     },
@@ -455,7 +445,7 @@
       "coBucket": "high",
       "n": 65,
       "effect": -0.12,
-      "weight": 0.43,
+      "weight": 0.42,
       "source": "soak"
     },
     {
@@ -464,7 +454,7 @@
       "bucket": "port",
       "coBucket": "low",
       "n": 65,
-      "effect": -0.21,
+      "effect": -0.15,
       "weight": 0.5,
       "source": "soak"
     },
@@ -474,7 +464,7 @@
       "bucket": "port",
       "coBucket": "moderate",
       "n": 65,
-      "effect": 0.29,
+      "effect": 0.22,
       "weight": 0.5,
       "source": "soak"
     },
@@ -484,7 +474,7 @@
       "bucket": "river",
       "coBucket": "low",
       "n": 68,
-      "effect": -0.28,
+      "effect": -0.22,
       "weight": 0.5,
       "source": "soak"
     },
@@ -494,7 +484,7 @@
       "bucket": "river",
       "coBucket": "moderate",
       "n": 68,
-      "effect": 0.29,
+      "effect": 0.22,
       "weight": 0.5,
       "source": "soak"
     },
@@ -504,7 +494,7 @@
       "bucket": "road",
       "coBucket": "low",
       "n": 75,
-      "effect": -0.26,
+      "effect": -0.19,
       "weight": 0.5,
       "source": "soak"
     },
@@ -514,8 +504,8 @@
       "bucket": "road",
       "coBucket": "moderate",
       "n": 75,
-      "effect": 0.2,
-      "weight": 0.5,
+      "effect": 0.12,
+      "weight": 0.37,
       "source": "soak"
     },
     {
@@ -574,17 +564,7 @@
       "bucket": "isolated",
       "coBucket": "moderate",
       "n": 69,
-      "effect": 0.14,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "tradeRoute.volatility",
-      "bucket": "mountain_pass",
-      "coBucket": "high",
-      "n": 62,
-      "effect": 0.17,
+      "effect": 0.13,
       "weight": 0.5,
       "source": "soak"
     },
@@ -595,7 +575,7 @@
       "coBucket": "low",
       "n": 75,
       "effect": 0.12,
-      "weight": 0.48,
+      "weight": 0.47,
       "source": "soak"
     },
     {

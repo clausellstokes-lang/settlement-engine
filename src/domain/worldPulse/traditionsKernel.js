@@ -319,7 +319,8 @@ export function outcomeForDraw(score, r) {
  * additional band-step through the SAME §5 prosperity applicator (never a new write path, §14).
  * Fires ONLY for a 'fair'-act observance that lands GOOD-or-better at a settlement on a real trade
  * LANE (a connective route tier — merchants come from afar); an isolated/route-less fair (local
- * only) or a non-fair earns nothing extra ⇒ 0. Pure, total.
+ * only) or a non-fair earns nothing extra ⇒ 0. The seasonal tier counts in full: a pass town holds
+ * its fair while the pass is open, which is when the merchants are there. Pure, total.
  * @param {TraditionRec} rec @param {TradSettlement} settlement @param {string} outcome @returns {number}
  */
 export function fairTradePulse(rec, settlement, outcome) {
@@ -327,7 +328,7 @@ export function fairTradePulse(rec, settlement, outcome) {
   if (outcome !== TRADITION_OUTCOME.TRIUMPH && outcome !== TRADITION_OUTCOME.GOOD) return 0;
   const route = asObject(asObject(settlement).config).tradeRouteAccess;
   const tier = tradeRouteTier(typeof route === 'string' ? route : null);
-  return (tier === 'major' || tier === 'standard') ? TRAD_TUNING.FAIR_TRADE_PULSE : 0;
+  return (tier === 'major' || tier === 'standard' || tier === 'seasonal') ? TRAD_TUNING.FAIR_TRADE_PULSE : 0;
 }
 
 // ── §3 OCCURRENCE — the calendar window test ──────────────────────────────────

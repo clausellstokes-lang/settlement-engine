@@ -43,7 +43,10 @@ const TERRAIN_ROUTE = {
   plains: 'road', hills: 'road', forest: 'isolated',
   riverside: 'river', coastal: 'port', mountain: 'road', desert: 'road',
 };
-const TRADE    = ['road', 'river', 'port', 'crossroads', 'isolated', 'none'];
+// 'mountain_pass' is the panel's seventh option. No route pool rolls it, so only an
+// explicit config reaches it, and it was therefore the one selectable route with no
+// golden row at all — the blind spot that let it score a neutral tier unnoticed.
+const TRADE    = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass', 'none'];
 const THREAT   = ['safe', 'civilized', 'frontier', 'plagued'];
 
 /** The fixed corpus. One-dimension-at-a-time sweeps from a base config plus a
@@ -68,6 +71,11 @@ function corpus() {
   }
   // Sweep trade and threat independently from the base (plains baseline).
   for (const tradeRouteAccess of TRADE) rows.push({ ...base, tradeRouteAccess, _seed: seed });
+  // The plains sweep row above holds the mountain_pass hash but exercises little of
+  // it: a plains town runs a food surplus, so the seasonal import rung never bites.
+  // This row puts the pass on the terrain it belongs to, where the structural
+  // deficit makes the rung load-bearing.
+  rows.push({ ...base, tradeRouteAccess: 'mountain_pass', terrainOverride: 'mountain', _seed: seed });
   for (const monsterThreat of THREAT) rows.push({ ...base, monsterThreat, _seed: seed });
   // Pin the random_trade machinery: the weighted terrain roll (TERRAIN_WEIGHTS)
   // and the terrain-constrained route pools (TERRAIN_ROUTE_POOLS) in

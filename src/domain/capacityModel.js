@@ -768,6 +768,10 @@ function deriveCraft(s, ctx) {
   const rawTier = tradeRouteTier(s.config?.tradeRouteAccess);
   if (rawTier === 'major' || rawTier === 'standard') {
     supply += 4; push(supplyContributors, 'config.tradeRouteAccess', rawTier, +4, 'Trade route supplies raw materials.');
+  } else if (rawTier === 'seasonal') {
+    // A pass delivers the same materials at the same annualized discount the
+    // seasonal tier carries everywhere else (0.4 x 4, rounded).
+    supply += 2; push(supplyContributors, 'config.tradeRouteAccess', rawTier, +2, 'Seasonal pass supplies raw materials while it is open.');
   }
 
   // DEMAND: population + exports
