@@ -268,6 +268,17 @@
   at high magic invariant across economy bands), archetype reachability
   (poor+high-magic cells generate magic institutions in real corpora), exploitation
   ordering (magic output monotone in economy at fixed magic).
+  **RECONCILED 2026-07-31 (owner + Fable — THE REGIME LADDER):** the exploitation
+  gate is thresholds-with-bands, the house idiom (tiers, route grades): a CLOSED
+  regime vocabulary — subsistence | funded | patronized | industrial (authored,
+  final names owner-vetoable) — entered by economy THRESHOLDS, with continuous
+  BANDED gradation within each regime. Silent drift inside a regime; a Herald EVENT
+  at every crossing ("the enchanters' circle takes a patron"; "the guild opens its
+  foundry") — events-never-silent-drift, applied to magic. HYSTERESIS at every
+  threshold (promotion above demotion — no flapping foundries). Presence stays
+  magic-only per the amendment above; the ladder + bands live in one tuning table;
+  the regime vocabulary joins finite semantics; transition events carry address
+  chains and material receipts (what the crossing cost).
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
