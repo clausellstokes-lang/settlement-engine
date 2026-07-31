@@ -14,6 +14,7 @@ import {
   buildGalleryMeta,
   injectGalleryMeta,
   galleryCardImage,
+  isValidGallerySlug,
   ORIGIN,
   SITE_NAME,
 } from '../../api/_galleryMeta.js';
@@ -72,10 +73,46 @@ describe('buildGalleryMeta', () => {
     expect(galleryCardImage('slug', '')).toBe(`${ORIGIN}/og-craft.png`);
     expect(galleryCardImage('', SUPA)).toBe(`${ORIGIN}/og-craft.png`);
   });
+});
 
-  test('slug is URL-encoded in the canonical', () => {
-    const meta = buildGalleryMeta('a b/c', null, { origin: ORIGIN });
-    expect(meta.url).toBe(`${ORIGIN}/gallery/a%20b%2Fc`);
+describe('the slug bound — the og-image twin', () => {
+  // og-image (supabase/functions/og-image/index.ts) refuses anything outside
+  // /^[A-Za-z0-9_-]{1,64}$/ before it will touch an RPC. This head keys on the
+  // same value and must agree on what a slug IS: an out-of-bound value must not
+  // mint a self-canonical page for a nonexistent dossier, nor an unbounded image
+  // argument. In-bound slugs are untouched.
+  const OVER_LONG = 'a'.repeat(65);
+
+  test('an in-bound slug still gets its per-slug card', () => {
+    expect(isValidGallerySlug('oak-mere_42')).toBe(true);
+    const meta = buildGalleryMeta('oak-mere_42', null, { origin: ORIGIN, supabaseUrl: SUPA });
+    expect(meta.url).toBe(`${ORIGIN}/gallery/oak-mere_42`);
+    expect(meta.image).toBe(`${SUPA}/functions/v1/og-image?slug=oak-mere_42`);
+  });
+
+  test.each([
+    ['a path separator', 'a b/c'],
+    ['a query injection', 'oak?x=1'],
+    ['an angle bracket', '<script>'],
+    ['an over-long token', OVER_LONG],
+    ['an empty slug', ''],
+  ])('%s degrades to the collection URL + default card', (_label, slug) => {
+    expect(isValidGallerySlug(slug)).toBe(false);
+    const meta = buildGalleryMeta(slug, null, { origin: ORIGIN, supabaseUrl: SUPA });
+    expect(meta.url).toBe(`${ORIGIN}/gallery`);
+    expect(meta.image).toBe(`${ORIGIN}/og-craft.png`);
+    // Nothing junk is reflected into the head at all.
+    expect(meta.url).not.toContain(slug.slice(0, 8) || 'never');
+  });
+
+  test('the bound accepts the full 64-character width', () => {
+    const maxWidth = 'z'.repeat(64);
+    expect(isValidGallerySlug(maxWidth)).toBe(true);
+    expect(buildGalleryMeta(maxWidth, null, { origin: ORIGIN }).url).toBe(`${ORIGIN}/gallery/${maxWidth}`);
+  });
+
+  test('a non-string slug is never a slug', () => {
+    for (const bad of [null, undefined, 42, {}, ['a']]) expect(isValidGallerySlug(bad)).toBe(false);
   });
 });
 

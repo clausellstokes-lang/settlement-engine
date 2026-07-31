@@ -22,7 +22,20 @@ const world = () => ({
       settlement: {
         id: 's_ab12cd34ef567890', name: 'Saltmoor', tier: 'town', population: 1200,
         thesis: 'A toll town on the ford.',
-        plotHooks: ['A midnight muster at the ford'],
+        // ENGINE-TRUTHFUL HOOK SHAPE. `settlement.plotHooks` is never written by
+        // the pipeline; settlement-scope hooks live on economicViability (objects
+        // keyed `hook`) and per history event (bare strings) — see
+        // src/generators/aiLayer.js, which merges exactly these two surfaces. The
+        // fixture deliberately carries NO top-level plotHooks so the page can only
+        // render if the builder reads the real surfaces.
+        economicViability: {
+          plotHooks: [{ category: 'trade', hook: 'The toll ledger keeps a second set of numbers.', severity: 'high' }],
+        },
+        history: {
+          historicalEvents: [
+            { type: 'economic', yearsAgo: 12, anchored: true, plotHooks: ['A flood-year debt still binds the ford families.'] },
+          ],
+        },
         powerStructure: { factions: [{ faction: 'The River Guild', desc: 'Toll-keepers.' }] },
         npcs: [{ id: 'npc.varn', name: 'Lord Varn', role: 'ruler', secret: { what: 'took a bribe' }, goal: { short: 'hold the bridge' } }],
       },
@@ -63,6 +76,25 @@ describe('foundry-module — buildJournalDocuments (DM variant)', () => {
     expect(md).toContain('took a bribe');
     expect(md).toContain('hold the bridge');
   });
+
+  it('the hooks page reads the surfaces the ENGINE writes, not a fabricated field', () => {
+    // The exported dossier must NOT carry a top-level plotHooks key — if it did,
+    // this suite would be certifying a shape the pipeline never produces (the
+    // fabricated-fixture hazard the page shipped with).
+    const exported = data.settlements[0].dossier;
+    expect(exported.plotHooks).toBeUndefined();
+    expect(exported.economicViability.plotHooks).toHaveLength(1);
+    expect(exported.history.historicalEvents[0].plotHooks).toHaveLength(1);
+
+    // Both real surfaces reach the page, economics first then history — the
+    // aiLayer merge order. An object hook is read through its `hook` key.
+    const hooksPage = docs[1].pages.find((p) => p.name === 'Plot Hooks');
+    expect(hooksPage.text.markdown).toContain('The toll ledger keeps a second set of numbers.');
+    expect(hooksPage.text.markdown).toContain('A flood-year debt still binds the ford families.');
+    expect(hooksPage.text.markdown).not.toContain('[object Object]');
+    expect(hooksPage.text.markdown.indexOf('toll ledger'))
+      .toBeLessThan(hooksPage.text.markdown.indexOf('flood-year'));
+  });
 });
 
 describe('foundry-module — buildJournalDocuments (player variant leaks nothing)', () => {
@@ -75,6 +107,10 @@ describe('foundry-module — buildJournalDocuments (player variant leaks nothing
     expect(dossier.pages.map((p) => p.name)).not.toContain('Plot Hooks');
     expect(allMarkdown).not.toContain('took a bribe');
     expect(allMarkdown).not.toContain('hold the bridge');
+    // …including hooks off the REAL surfaces: toPublicSafe's recursive denylist
+    // drops every *hook key, so neither economics nor history hooks survive.
+    expect(allMarkdown).not.toContain('second set of numbers');
+    expect(allMarkdown).not.toContain('flood-year debt');
   });
 
   it('still renders the public settlement (not vacuous)', () => {

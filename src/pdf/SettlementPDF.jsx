@@ -76,10 +76,17 @@ export function SettlementPDF({
   // Edition" badge on the cover. Defaults false so historical PDFs
   // are unaffected.
   isFounder = false,
-  // Anonymous PDFs (single-dossier purchase, anonymous preview) carry
-  // a footer watermark. Account holders — Wanderer, Cartographer,
-  // Founder — get clean exports.
+  // The cover's anti-scraping watermark. VERIFIED POSTURE (2026-07-30): NO
+  // production caller passes true. The single-dossier purchase export passes
+  // `false` explicitly (SingleDossierSuccessPage.jsx), and the three account
+  // export surfaces (SettlementCard, ExportDraftButton, SettlementDetail) omit
+  // it and take this default — so the watermark block in Cover.jsx is reachable
+  // only from tests. Whether a purchase / anonymous export should carry it is an
+  // open product call, recorded here, not a defect to re-find.
   isAnonymous = false,
+  // The export date — injectable, mirroring the World Book cover (opts.now).
+  // Null keeps the wall-clock read inside Cover, so legacy callers are unchanged.
+  now = null,
 }) {
   const safe = settlement || {};
   const vm = buildViewModel({
@@ -155,7 +162,7 @@ export function SettlementPDF({
       creator="SettlementForge"
       subject={`Settlement dossier${useAi ? ' (AI narrative edition)' : ''}`}
     >
-      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} />}
+      {inc('cover')               && <Cover                settlement={safe} narrativeMode={useAi} vm={vm} isFounder={isFounder} isAnonymous={isAnonymous} now={now} />}
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}

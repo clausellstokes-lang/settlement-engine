@@ -126,8 +126,12 @@ function CrisisRow({ chips }) {
   );
 }
 
-export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false }) {
-  const date = new Date().toLocaleDateString('en-US', {
+export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false, now = null }) {
+  // The export date is the ONE non-reproducible byte on a cover, so it rides the
+  // same injectable seam the World Book cover uses (generateWorldBook opts.now):
+  // a caller/fixture may pass the already-formatted label, and omitting it keeps
+  // the previous wall-clock behavior exactly.
+  const date = now || new Date().toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
 

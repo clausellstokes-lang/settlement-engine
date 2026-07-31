@@ -33,6 +33,19 @@ export const SITE_NAME = 'SettlementForge';
 // dynamic per-settlement card.
 const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
 
+// Slugs are opaque URL-safe ids (migration 008 `_make_public_slug`). This is the
+// SAME bound the og-image edge function applies before it will touch an RPC
+// (supabase/functions/og-image/index.ts SLUG_RE) — the two crawler-facing surfaces
+// that key on a slug must agree on what a slug IS. A junk / oversized value
+// degrades to the collection card rather than minting a self-canonical page for a
+// nonexistent dossier and an unbounded image argument.
+const SLUG_RE = /^[A-Za-z0-9_-]{1,64}$/;
+
+/** @param {unknown} slug @returns {boolean} */
+export function isValidGallerySlug(slug) {
+  return typeof slug === 'string' && SLUG_RE.test(slug);
+}
+
 /** river_valley → River Valley (matches seoDossier.humanize). */
 function humanize(v) {
   if (!v || typeof v !== 'string') return '';
@@ -48,7 +61,9 @@ function humanize(v) {
  * @returns {string}
  */
 export function galleryCardImage(slug, supabaseUrl) {
-  if (supabaseUrl && slug) {
+  if (supabaseUrl && isValidGallerySlug(slug)) {
+    // encodeURIComponent is a no-op over the bounded charset — kept as
+    // defense in depth so the bound is the only thing that has to hold.
     return `${supabaseUrl}/functions/v1/og-image?slug=${encodeURIComponent(slug)}`;
   }
   return OG_IMAGE_DEFAULT;
@@ -56,8 +71,10 @@ export function galleryCardImage(slug, supabaseUrl) {
 
 /**
  * Build the per-slug OG meta from a (possibly null) sanitized gallery dossier row.
- * Image + URL are ALWAYS per-slug (slug-derived, no DB needed); title/description
- * upgrade to the real settlement name + coarse facts only when the row is present.
+ * Image + URL are per-slug (slug-derived, no DB needed) for any slug inside the
+ * og-image bound; an out-of-bound slug falls back to the collection URL + default
+ * card. Title/description upgrade to the real settlement name + coarse facts only
+ * when the row is present.
  *
  * @param {string} slug
  * @param {{ name?: string, tier?: string, terrain?: string, publishedAt?: string,
@@ -69,7 +86,7 @@ export function galleryCardImage(slug, supabaseUrl) {
 export function buildGalleryMeta(slug, dossier, opts = {}) {
   const origin = opts.origin || ORIGIN;
   const supabaseUrl = opts.supabaseUrl || '';
-  const url = slug ? `${origin}/gallery/${encodeURIComponent(slug)}` : `${origin}/gallery`;
+  const url = isValidGallerySlug(slug) ? `${origin}/gallery/${encodeURIComponent(slug)}` : `${origin}/gallery`;
   const image = galleryCardImage(slug, supabaseUrl);
 
   const name = dossier?.name || dossier?.settlement?.name || '';

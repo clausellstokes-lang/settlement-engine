@@ -24,9 +24,13 @@
  *     resolve against the worker's same-origin scope; workers have fetch).
  *     The FontStore caches them, so repeat exports skip the fetch — one more
  *     reason the worker is a keep-alive singleton, not per-export.
- *   - This module graph must stay free of dynamic import() — Vite bundles
- *     workers as a single iife file (worker.format default), which rejects
- *     code-split graphs at build time.
+ *   - This module graph must stay free of dynamic import(). That is a LATENCY
+ *     contract, not a build constraint: vite.config.js sets worker.format to
+ *     'es', and townScene.worker code-splits under it today, so a split PDF
+ *     graph would build fine. But this worker is constructed lazily on first
+ *     export and is deliberately never preloaded, so a split would land a
+ *     second cold fetch inside the export the user is already waiting on —
+ *     the exact freeze the worker exists to remove.
  *   - This file lives in src/utils (NOT src/pdf) on purpose: tsconfig.full
  *     includes src/pdf/**\/*.js, and a checked .js file that statically
  *     imports SettlementPDF.jsx would drag the whole deliberately-unchecked

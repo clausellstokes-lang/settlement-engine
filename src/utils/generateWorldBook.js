@@ -389,6 +389,25 @@ function buildReceiptsAppendix(d, book, pageN) {
   return pageN;
 }
 
+/**
+ * The State of the Realm chapter's RENDERED ROWS — split out of the painter so the
+ * chapter's field reads are pinnable under this file's collector-not-bytes doctrine.
+ * A siege row keys on `targetId`: liveSieges emits `{ targetId, coalition, frontCount,
+ * visibility }` and carries NO `id` (src/domain/display/warStatus.js), so reading
+ * `sg.id` paints the literal string 'undefined' for every besieged settlement. War-
+ * exhaustion standings DO key on `id`. The campaign PDF's siege line is the twin read.
+ * @param {any} realm collectRealmSummary's output
+ * @returns {{ majors: string[], sieges: string[], weary: string[] }}
+ */
+export function realmChapterRows(realm) {
+  const nameFor = typeof realm?.nameFor === 'function' ? realm.nameFor : (/** @type {any} */ id) => String(id);
+  return {
+    majors: (realm?.majors || []).map((/** @type {any} */ m) => m.headline || m.summary || String(m)),
+    sieges: (realm?.sieges || []).map((/** @type {any} */ sg) => nameFor(sg.targetId)),
+    weary: (realm?.weary || []).map((/** @type {any} */ w) => nameFor(w.id)),
+  };
+}
+
 function buildRealmChapter(d, book, pageN) {
   const realm = book.realm;
   if (!realm?.present) return pageN;
@@ -403,9 +422,10 @@ function buildRealmChapter(d, book, pageN) {
     }
     y += 3;
   };
-  section('Major headlines', (realm.majors || []).map(m => m.headline || m.summary || String(m)));
-  section('Under siege', (realm.sieges || []).map(sg => realm.nameFor ? realm.nameFor(sg.id) : sg.id));
-  section('War-weary', (realm.weary || []).map(w => realm.nameFor ? realm.nameFor(w.id) : w.id));
+  const rows = realmChapterRows(realm);
+  section('Major headlines', rows.majors);
+  section('Under siege', rows.sieges);
+  section('War-weary', rows.weary);
   footer(d, book.title, pageN);
   return pageN;
 }

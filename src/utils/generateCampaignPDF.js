@@ -140,7 +140,7 @@ function _ensureSpace(d, y, h, campaignName, pageN, newTopHandler) {
 // ─────────────────────────────────────────────────────────────────────────────
 // Page 1: Cover
 // ─────────────────────────────────────────────────────────────────────────────
-function buildCover(d, campaign, settlements) {
+function buildCover(d, campaign, settlements, generatedLabel) {
   // Parchment backdrop
   rect(d, 0, 0, PW, PH, PARCH);
 
@@ -249,7 +249,7 @@ function buildCover(d, campaign, settlements) {
 
   // Footer byline
   d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
-  d.text(`Generated ${new Date().toLocaleDateString('en-US')}`, centerX, PH - 20, { align: 'center' });
+  d.text(`Generated ${generatedLabel}`, centerX, PH - 20, { align: 'center' });
   d.text('SettlementForge', centerX, PH - 15, { align: 'center' });
 }
 
@@ -841,7 +841,17 @@ function buildLivingWorld(d, campaignName, campaign, settlements, pageN) {
   return { pageN };
 }
 
-export function generateCampaignPDF(campaign, allSaves) {
+/**
+ * Paint + download the campaign PDF. Fire-and-download: returns nothing, calls
+ * doc.save().
+ * @param {Object} campaign
+ * @param {Array} [allSaves]
+ * @param {{ now?: string }} [opts] `now` is the already-formatted cover date —
+ *   the SAME injectable seam the World Book cover carries (generateWorldBook
+ *   opts.now), so a fixture renders a reproducible cover. Omitted ⇒ wall clock,
+ *   exactly as before.
+ */
+export function generateCampaignPDF(campaign, allSaves, opts = {}) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
   const startedAt = Date.now();
@@ -856,7 +866,7 @@ export function generateCampaignPDF(campaign, allSaves) {
   let pageN = 1;
 
   // Page 1: cover
-  buildCover(doc, campaign, settlements);
+  buildCover(doc, campaign, settlements, opts.now || new Date().toLocaleDateString('en-US'));
 
   // Page 2+: index
   doc.addPage();

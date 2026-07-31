@@ -43,9 +43,13 @@ export function Timeline({ settlement, narrativeMode, vm }) {
 
 function Entry({ entry }) {
   const ts = new Date(entry.appliedAt);
+  // timeZone is PINNED, like the locale beside it: appliedAt is a real-world
+  // instant, and an unpinned toLocaleString renders it through the EXPORTING
+  // MACHINE's zone — the same event log then prints a different stamp (and
+  // sometimes a different calendar day) depending on who ran the export.
   const tsLabel = ts.toLocaleString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric',
-    hour: 'numeric', minute: '2-digit',
+    hour: 'numeric', minute: '2-digit', timeZone: 'UTC',
   });
   return (
     <View

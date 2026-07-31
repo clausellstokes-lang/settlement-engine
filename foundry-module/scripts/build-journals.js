@@ -14,32 +14,18 @@
  * it contains and a player export simply has none to show.
  */
 
+import { escapeMarkdown } from './markdownEscape.js';
+
 export const WORLD_EXPORT_FORMAT = 'settlementforge-world';
 export const MODULE_ID = 'settlementforge-world-importer';
 
 /**
- * Neutralize HTML and markdown metacharacters so no settlement string can inject
- * markup or markdown structure once Foundry converts the page to HTML. Angle
- * brackets and ampersands become entities; markdown structural characters are
- * backslash-escaped.
- * @param {unknown} value
- * @returns {string}
+ * THE escaper, shared with the in-app lane (see markdownEscape.js for the
+ * ordering contract). Re-exported under this lane's historical name so existing
+ * importers keep working.
+ * @type {(value: unknown) => string}
  */
-export function esc(value) {
-  // Order matters: backslash-escape the markdown metacharacters FIRST, then
-  // HTML-entity-encode. If the HTML pass ran first it would turn `'`→`&#39;`,
-  // whose `#` the markdown pass would then re-escape to `&\#39;` — a double-
-  // encode that mangles the stored JSON (e.g. O'Brien → O&\#39;Brien). With the
-  // markdown pass first, every entity we emit (&#39; &amp; &lt; …) is produced
-  // AFTER it, so the `#`/`&` inside those entities is left intact.
-  return String(value == null ? '' : value)
-    .replace(/([\\`*_[\]()#+~|])/g, '\\$1')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+export const esc = escapeMarkdown;
 
 /** @param {any} data @returns {string} */
 export function worldFolderName(data) {
@@ -55,6 +41,54 @@ function page(name, markdown) {
 /** @param {any[]} lines @returns {string} */
 function joinLines(lines) {
   return lines.filter((l) => l != null && l !== '').join('\n');
+}
+
+/**
+ * A raw hook is either a bare string or an object carrying its prose under
+ * `hook` (economics) / `text`. Same read order as the app's shared aggregator
+ * (src/domain/dossier/plotHooks.js textForHook).
+ * @param {any} raw
+ * @returns {string}
+ */
+function hookProse(raw) {
+  if (raw == null) return '';
+  if (typeof raw === 'object') return String(raw.hook || raw.text || '');
+  return String(raw);
+}
+
+/**
+ * The settlement-level plot hooks a DM export actually carries.
+ *
+ * `settlement.plotHooks` is NEVER written by the engine. The live settlement-scope
+ * hooks are `economicViability.plotHooks` ({ category, hook, severity } objects)
+ * and the per-event `history.historicalEvents[].plotHooks` (strings) — the same
+ * two surfaces src/generators/aiLayer.js merges, with the top-level key kept only
+ * as a legacy fallback for hand-authored/imported payloads. Reading the top-level
+ * key alone rendered NO hooks page for any real export.
+ *
+ * A player export carries none: toPublicSafe's recursive denylist drops every
+ * *hook key, so this returns [] and the page is skipped — the secrets seam is the
+ * export's, never re-implemented here.
+ * @param {any} dossier
+ * @returns {string[]}
+ */
+function dossierPlotHooks(dossier) {
+  const arr = (v) => (Array.isArray(v) ? v : []);
+  const events = arr(dossier && dossier.history && dossier.history.historicalEvents);
+  const raw = [
+    ...arr(dossier && dossier.economicViability && dossier.economicViability.plotHooks),
+    ...events.flatMap((e) => arr(e && e.plotHooks)),
+    ...arr(dossier && dossier.plotHooks),
+  ];
+  /** @type {string[]} */ const out = [];
+  const seen = new Set();
+  for (const entry of raw) {
+    const text = hookProse(entry).trim();
+    if (!text || seen.has(text)) continue;
+    seen.add(text);
+    out.push(text);
+  }
+  return out;
 }
 
 /**
@@ -145,11 +179,12 @@ function settlementJournal(entry, realmName) {
     pages.push(page('Power & Factions', joinLines(lines)));
   }
 
-  // DM-only chapter: plot hooks (a player export carries none).
-  const hooks = Array.isArray(dossier.plotHooks) ? dossier.plotHooks : [];
+  // DM-only chapter: plot hooks (a player export carries none — see
+  // dossierPlotHooks for where the engine actually writes them).
+  const hooks = dossierPlotHooks(dossier);
   if (hooks.length) {
     const lines = ['## Plot hooks', ''];
-    for (const h of hooks) lines.push(`- ${esc(typeof h === 'object' && h ? (h.text || h.source) : h)}`);
+    for (const h of hooks) lines.push(`- ${esc(h)}`);
     pages.push(page('Plot Hooks', joinLines(lines)));
   }
 

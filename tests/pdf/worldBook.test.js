@@ -10,7 +10,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { existsSync, rmSync, statSync } from 'node:fs';
-import { collectWorldBook, generateWorldBook } from '../../src/utils/generateWorldBook.js';
+import { collectWorldBook, generateWorldBook, realmChapterRows } from '../../src/utils/generateWorldBook.js';
 
 function fixtureCampaign() {
   const ashford = {
@@ -164,6 +164,47 @@ describe('the chronicle reads start → end, and covert history never reaches th
     const json = JSON.stringify(book);
     expect(json).not.toContain('SECRET_CABAL_MOVE');
     expect(json).not.toContain('COVERTSUMMARY');
+  });
+});
+
+describe('the State of the Realm chapter names the besieged settlement', () => {
+  // The chapter used to read `sg.id` off a liveSieges row, which carries only
+  // `targetId` — so every 'Under siege' row painted the literal string
+  // 'undefined'. The fixture drives a REAL siege through the REAL collector
+  // (a deployment against Ashford ⇒ liveSieges mints { targetId:'ashford', … }),
+  // so the pin fails the moment the row keys on a field liveSieges never emits.
+  function besiegedFixture() {
+    const { campaign, saves } = fixtureCampaign();
+    campaign.worldState = {
+      tick: 40,
+      canonizedAt: '2026-01-01T00:00:00.000Z',
+      deployments: { brightwater: { targetId: 'ashford', sinceTick: 38, role: 'attacker' } },
+      warExhaustion: { brightwater: 0.84 },
+    };
+    return { campaign, saves };
+  }
+
+  it('the collector carries a targetId-keyed siege and NO id field', () => {
+    const { campaign, saves } = besiegedFixture();
+    const { realm } = collectWorldBook(campaign, saves, { mode: 'dm' });
+    expect(realm.present).toBe(true);
+    expect(realm.sieges.map(sg => sg.targetId)).toEqual(['ashford']);
+    expect(realm.sieges[0].id).toBeUndefined();
+  });
+
+  it('the rendered rows resolve the settlement NAME, never the string "undefined"', () => {
+    const { campaign, saves } = besiegedFixture();
+    const rows = realmChapterRows(collectWorldBook(campaign, saves, { mode: 'dm' }).realm);
+    expect(rows.sieges).toEqual(['Ashford']);
+    expect(rows.sieges).not.toContain('undefined');
+    // The war-weary row keys on `id` (warExhaustionStandings' own field) — the
+    // two rows read DIFFERENT keys, which is exactly how the bug slipped in.
+    expect(rows.weary).toEqual(['Brightwater']);
+  });
+
+  it('an unresolvable id degrades to the id itself, not to "undefined"', () => {
+    const rows = realmChapterRows({ present: true, sieges: [{ targetId: 'ghost' }], weary: [], majors: [] });
+    expect(rows.sieges).toEqual(['ghost']);
   });
 });
 
