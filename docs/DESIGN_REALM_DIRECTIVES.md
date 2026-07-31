@@ -43,8 +43,16 @@
 >   reconciliation); (3) the FULL release-profile soak rerun — one run serves three
 >   purposes: the zombie-cure proof on the previously-failing 100y×4s cell, the
 >   never-run 100y×12s sibling, and v5-instrumented receipts across the whole grid.
->   STILL HELD: the tuning pass and everything after it (waves D..K, TC, wave-3
->   programs). DESIGN_MAGIC_ECONOMY.md joined the corpus (6 architecture docs).
+>   (4) THE TUNING PASS — owner amended again same day ("include tuning in there as
+>   well"): AUTHORIZED. Conducted against the full evidence set (both 30y seeds, the
+>   preserved failing 100y receipt, the 300y receipt, the v5 rerun grid); agenda:
+>   knowledge-lane starvation, lifecycle tempo, strategy-verb monotone, cooling
+>   slope, small-N normalization, tier-promotion flatness, town/city ordering, R-15
+>   PROPOSED band ratifications. Every ratification lands as an owner-authorized
+>   versioned change per THE PROMISE — receipts + vetoable records + same-commit
+>   golden re-records where legitimately shifted. STILL HELD after tuning: the build
+>   waves (D..K, TC-0..8) and wave-3 programs.
+>   DESIGN_MAGIC_ECONOMY.md joined the corpus (6 architecture docs).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
