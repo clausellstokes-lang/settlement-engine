@@ -128,7 +128,7 @@ describe('layer 3 — the load-error dialog escapes the attacker URL', () => {
 });
 
 describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', () => {
-  test('the /map/ CSP script-src trusts no CDN and pins navigations', () => {
+  test('the /map/ CSP script-src trusts no CDN and claims only enforced directives', () => {
     const vercel = JSON.parse(read('vercel.json'));
     const mapHeaders = vercel.headers.find((h) => h.source.startsWith('/map/'));
     const csp = mapHeaders.headers.find(
@@ -136,7 +136,15 @@ describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', ()
     ).value;
     const scriptSrc = csp.split(';').find((d) => d.trim().startsWith('script-src'));
     expect(scriptSrc).not.toMatch(/unpkg|cdn|googleapis|https:\/\//);
-    expect(csp).toContain("navigate-to 'self' https://*.supabase.co");
+    // `navigate-to` was dropped from the CSP3 draft and NO browser ever shipped it.
+    // This policy carried it, and this test asserted it — a security pin claiming
+    // navigation containment that nothing enforced. A dead directive in an enforced
+    // header is worse than an absent one: it reads as coverage. What actually bounds
+    // navigation on the fork is `form-action`, the `frame-src` allowlist, and the
+    // separate map origin (see cspForkIsolation), so those are what is pinned.
+    expect(csp).not.toMatch(/navigate-to/);
+    expect(csp).toContain("form-action 'self'");
+    expect(csp).toContain("frame-src 'self' https://watabou.github.io https://deorum.vercel.app");
   });
 
   test('dropbox.html loads only the vendored pinned SDK', () => {

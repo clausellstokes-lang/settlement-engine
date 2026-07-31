@@ -114,12 +114,16 @@ export async function checkUserIpRate(
 }
 
 // ── AI per-IP burst gate (Wave-D item 2) ─────────────────────────────────────
-// The 11 AI edge functions meter spend with the per-USER daily limiter
-// (consume_ai_generate_rate_limit, 079) which is deliberately FAIL-OPEN. This adds
-// the missing PER-IP dimension on the cross-instance token bucket (migration 156,
-// consume_token_bucket), and it is FAIL-CLOSED — the same posture as the hard spend
-// cap, because it guards provider COGS: a definite over-limit is 429, and a
-// limiter-INFRASTRUCTURE error is a 503 DENY, never a silent open.
+// The CREDITED AI edge functions meter spend with the per-USER daily limiter
+// (consume_ai_generate_rate_limit, 079) which is deliberately FAIL-OPEN there — a
+// limiter outage still runs into the spend reservation and the hard cap. The ONE
+// exception is surveyor-byok, whose verify/probe spend no credits: with no cap
+// behind it the per-user limiter is that surface's only ceiling, so it fails CLOSED
+// (see its consumeRate). This adds the missing PER-IP dimension on the
+// cross-instance token bucket (migration 156, consume_token_bucket), and it is
+// FAIL-CLOSED — the same posture as the hard spend cap, because it guards provider
+// COGS: a definite over-limit is 429, and a limiter-INFRASTRUCTURE error is a 503
+// DENY, never a silent open.
 
 /** Server-side fallbacks for migration 156's private ai_ip_rate_limit config:
  *  a 40-request burst refilling ~40/hour. Never client-overridable. */

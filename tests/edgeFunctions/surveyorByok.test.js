@@ -128,6 +128,26 @@ describe('surveyor-byok — verify handler contracts', () => {
   it('rate-limits the test-call (bounds provider-ping abuse)', () => {
     expect(BYOK).toContain("rpc('consume_ai_generate_rate_limit'");
   });
+
+  it('the per-user limiter FAILS CLOSED — the only bound on an uncredited provider path', () => {
+    // Neither action spends credits, so no reservation or spend cap backstops this
+    // surface: a fail-open limiter here means a limiter outage removes the ONLY
+    // ceiling on provider calls. The verdict is three-valued so an infra error is a
+    // 503 deny rather than a 429 that would lie about which limit was hit — the same
+    // posture the sibling per-IP bucket carries (_shared/rateLimit.ts checkAiIpRate).
+    const rateFn = BYOK.slice(BYOK.indexOf('const consumeRate ='), BYOK.indexOf('const firstRate ='));
+    expect(rateFn.length, 'guard the guard: the limiter body was found').toBeGreaterThan(200);
+    expect(rateFn).toMatch(/Promise<'under' \| 'over' \| 'error'>/);
+    expect(rateFn, 'an RPC error must NOT resolve to under-rate').toMatch(/if \(rlErr\)[\s\S]{0,200}return 'error'/);
+    expect(rateFn, 'an unreadable verdict must fail closed too').toMatch(/return 'error'; \/\/ unexpected shape/);
+    expect(rateFn, 'only a definite allowed===true is under rate').toMatch(/allowed === true\) return 'under'/);
+    // and every consumeRate call site routes a non-'under' verdict to the refusal
+    for (const site of BYOK.split('await consumeRate()').slice(1)) {
+      expect(site.slice(0, 120), 'a consumeRate verdict must reach rateRefusal').toMatch(/!== 'under'[\s\S]{0,80}rateRefusal/);
+    }
+    expect(BYOK).toMatch(/verdict === 'over'\s*\?[\s\S]{0,160}429/);
+    expect(BYOK).toMatch(/503, cors\)\)/);
+  });
 });
 
 // ── Layer 3: ai-analyst governor + refusal wiring ───────────────────────────
@@ -576,8 +596,10 @@ describe('surveyor-byok — probe handler contracts (L-3b)', () => {
 
   it('takes one rate-limit unit PER TASK, inside the task loop', () => {
     expect(PROBE_BLOCK).toMatch(/for \(let i = 0; i < PROBE_TASK_KEYS\.length/);
-    expect(PROBE_BLOCK).toMatch(/if \(i > 0 && !await consumeRate\(\)\)/);
-    expect(PROBE_BLOCK).toMatch(/429/);
+    expect(PROBE_BLOCK).toMatch(/if \(i > 0\) \{[\s\S]{0,160}await consumeRate\(\)/);
+    // and the per-task verdict is honoured with the same fail-closed refusal the
+    // first unit uses — a task that could not be metered never reaches the provider
+    expect(PROBE_BLOCK).toMatch(/taskRate !== 'under'\) return rateRefusal\(taskRate\)/);
   });
 
   it('bounds every provider call AND the whole probe', () => {

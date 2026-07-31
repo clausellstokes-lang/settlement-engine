@@ -2,6 +2,10 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { EVENTS, EVENT_CLASS, EVENT_NAME_RE, EDIT_KINDS } from '../_shared/analyticsEventsBundle.js';
+// The ONE writer of the two actor mapping tables — first-contact claiming that
+// yields to the stored row instead of discarding a losing insert. Import-free so
+// tests/edgeFunctions/ingestActorLinks.test.js can execute the race for real.
+import { resolveDeviceActor, resolveUserActor } from './actorLinks.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
@@ -96,30 +100,6 @@ function stripPropValue(v: unknown, depth: number): unknown {
 export function stripProps(props: unknown): Record<string, unknown> {
   if (!props || typeof props !== 'object' || Array.isArray(props)) return {};
   return stripPropValue(props, 0) as Record<string, unknown>;
-}
-
-// deno-lint-ignore no-explicit-any
-async function resolveDeviceActor(admin: any, deviceKey: string): Promise<string> {
-  const { data } = await admin.from('analytics_device_links').select('actor_id').eq('device_key', deviceKey).maybeSingle();
-  if (data?.actor_id) return data.actor_id;
-  const actor = crypto.randomUUID();
-  await admin.from('analytics_device_links').insert({ device_key: deviceKey, actor_id: actor });
-  return actor;
-}
-
-// deno-lint-ignore no-explicit-any
-async function resolveUserActor(admin: any, userId: string, deviceKey: string | null): Promise<string> {
-  const { data } = await admin.from('analytics_identity_links').select('actor_id').eq('user_id', userId).maybeSingle();
-  if (data?.actor_id) return data.actor_id;
-  // No actor yet — adopt the device's actor so the anon funnel stitches to signup.
-  let actor: string | null = null;
-  if (deviceKey) {
-    const { data: dev } = await admin.from('analytics_device_links').select('actor_id').eq('device_key', deviceKey).maybeSingle();
-    if (dev?.actor_id) actor = dev.actor_id;
-  }
-  if (!actor) actor = crypto.randomUUID();
-  await admin.from('analytics_identity_links').upsert({ user_id: userId, actor_id: actor }, { onConflict: 'user_id', ignoreDuplicates: true });
-  return actor;
 }
 
 // Body cap in BYTES, not UTF-16 code units: `text.length` let ~192KB of 3-byte

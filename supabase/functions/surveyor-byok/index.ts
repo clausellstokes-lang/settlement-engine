@@ -179,20 +179,32 @@ export async function handleSurveyorByok(
     const provider = typeof body?.provider === 'string' && body.provider ? body.provider : PROVIDER;
     if (!ACTIONS.has(action)) return json({ error: 'unknown action' }, 400, cors);
 
-    // Rate-limit the test-call (fail-open on RPC error). NEITHER action spends credits;
-    // the limiter is what bounds provider-ping abuse. `verify` takes one unit; `probe`
-    // takes one PER TASK (this call covers its first task, the loop takes the rest).
-    const consumeRate = async (): Promise<boolean> => {
+    // Rate-limit the test-call. NEITHER action spends credits, so on THIS surface the
+    // limiter is the only thing standing between a caller and unbounded provider calls
+    // — which is why it FAILS CLOSED here while the same per-user daily limiter stays
+    // deliberately fail-open on the credited AI surfaces (_shared/rateLimit.ts §AI
+    // per-IP gate): there the spend reservation and the hard cap still bound a limiter
+    // outage, here nothing does. Posture now matches the sibling per-IP gate above — a
+    // definite over-limit is 429, a limiter-INFRA error (or an unreadable verdict) is a
+    // 503 deny, never a silent open. `verify` takes one unit; `probe` takes one PER
+    // TASK (this call covers its first task, the loop takes the rest).
+    const consumeRate = async (): Promise<'under' | 'over' | 'error'> => {
       const { data: rl, error: rlErr } = await supabaseAdmin.rpc('consume_ai_generate_rate_limit', { p_user: user.id });
       if (rlErr) {
         logError('surveyor-byok', user.id, `rate_limit errored: ${rlErr.message}`, { stage: 'rate-limit' });
-        return true; // fail-open on a limiter-infra error, as verify always has
+        return 'error';
       }
-      return (rl as { allowed?: boolean } | null)?.allowed !== false;
+      const allowed = (rl as { allowed?: boolean } | null)?.allowed;
+      if (allowed === true) return 'under';
+      if (allowed === false) return 'over';
+      return 'error'; // unexpected shape — fail-closed, as the IP bucket does
     };
-    if (!await consumeRate()) {
-      return json({ error: "You have reached today's AI limit. Please try again tomorrow." }, 429, cors);
-    }
+    /** The ready-to-return refusal for a non-'under' verdict: 429 over, 503 infra. */
+    const rateRefusal = (verdict: 'over' | 'error') => (verdict === 'over'
+      ? json({ error: "You have reached today's AI limit. Please try again tomorrow." }, 429, cors)
+      : json({ error: 'Key checks are briefly unavailable. Please try again in a moment. No credits were charged.' }, 503, cors));
+    const firstRate = await consumeRate();
+    if (firstRate !== 'under') return rateRefusal(firstRate);
 
     // Resolve the user's OWN key. If they have none (falls back to the server key), there
     // is nothing of theirs to verify — a graceful, specific refusal.
@@ -259,8 +271,9 @@ export async function handleSurveyorByok(
         const taskKey = PROBE_TASK_KEYS[i];
         // One rate-limit unit PER TASK. The shared chain above already paid for the
         // first, so each further task takes its own before it reaches the provider.
-        if (i > 0 && !await consumeRate()) {
-          return json({ error: "You have reached today's AI limit. Please try again tomorrow." }, 429, cors);
+        if (i > 0) {
+          const taskRate = await consumeRate();
+          if (taskRate !== 'under') return rateRefusal(taskRate);
         }
         // The whole-probe deadline. Classified 'down' because the honest thing to tell
         // the user is that the run did not finish and nothing was recorded.

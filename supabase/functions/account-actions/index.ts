@@ -63,6 +63,26 @@ function corsHeadersFor(req: Request): Record<string, string> {
 // CLOSED (override disabled), never fails privileged. Matches admin-actions.
 const OWNER_EMAIL = (Deno.env.get("OWNER_EMAIL") || "").trim().toLowerCase();
 
+// ── Request ceilings for the support-write path ──────────────────────────────
+// Support content is user free text on an authed, MAILER-BACKED path: create_ticket
+// persists the message AND sends a Resend email, so an uncapped request buys storage
+// and third-party send cost per call. The envelope is capped in BYTES, never UTF-16
+// code units — `text.length` let ~3x the intended payload past a "64KB" cap on the
+// AI surfaces before they were fixed (ingest-events MAX_BODY_BYTES carries the same
+// note). The envelope cap transitively bounds the pass-through jsonb (`links`,
+// `metadata`); the two per-field caps bound the columns a human actually reads and
+// sit far above any genuine support message, so no real ticket is ever refused.
+const MAX_BODY_BYTES = 64 * 1024;
+const MAX_SUBJECT_CHARS = 200;
+const MAX_MESSAGE_CHARS = 10_000;
+
+// Per-user ceiling on support WRITES (create_ticket + reply_ticket share one bucket,
+// since both cost a row and one of them costs an email). Reuses the deployed keyed
+// limiter (036 ingest_check_rate) rather than inventing a second one — the same
+// migration-free idiom claim_dossier_purchase uses below. 20/hour lets a real
+// back-and-forth thread proceed while bounding a scripted flood.
+const SUPPORT_WRITE_MAX_PER_HOUR = 20;
+
 // Grace window before a filed request is eligible for processing. Defaults to 7
 // days; an out-of-range / unparsable value falls back to 7.
 function graceDays(): number {
@@ -190,13 +210,28 @@ export async function handleAccountActions(
       return json({ error: "session_superseded" }, 401);
     }
 
+    // Size the envelope BEFORE it is parsed, and both before the account gate, the
+    // support-write limiter and every write RPC below, so an oversized or malformed
+    // body is refused without buying a single row or email. (An unreadable body used
+    // to fall through to the outer catch as a 500; it is a client fault, so 400.)
+    const rawBody = await req.text();
+    if (new TextEncoder().encode(rawBody).length > MAX_BODY_BYTES) {
+      return json({ error: "That request is too large. Please shorten it and try again." }, 413);
+    }
+    // deno-lint-ignore no-explicit-any
+    let payload: any;
+    try {
+      payload = rawBody ? JSON.parse(rawBody) : {};
+    } catch {
+      return json({ error: "The request could not be read." }, 400);
+    }
     const {
       action, graceDays: graceOverride,
       // A5 ticket params (user-facing self-service path).
       subject, message, category, priority, links, ticketId, body, metadata,
       // Dossier retro-claim, same-device token params (108).
       sessionId, checkoutToken, saveId,
-    } = await req.json();
+    } = payload;
 
     // A+ defense-in-depth (finding #1): a banned/disabled/soft-deleted account may
     // not write NEW support content (mirrors the account_is_active gate on the AI
@@ -211,6 +246,20 @@ export async function handleAccountActions(
       if (isActive !== true) {
         return json({ error: "Account is not active" }, 403);
       }
+      // ONE limiter for BOTH support-write actions, checked here rather than per case
+      // so a third write action cannot ship unmetered. Fail CLOSED on a limiter error,
+      // matching claim_dossier_purchase and ingest-events: the limiter is a DB call, so
+      // an errored limiter means the ticket RPC on the very next line would fail too —
+      // failing closed costs a reachable user nothing and closes the flood window.
+      const { data: underRate, error: rateErr } = await adminClient.rpc("ingest_check_rate", {
+        p_key: `support_write:${callingUser.id}`,
+        p_max: SUPPORT_WRITE_MAX_PER_HOUR,
+        p_window_seconds: 3600,
+      });
+      if (rateErr || underRate === false) {
+        if (rateErr) logError("account-actions", callingUser.id, `support write rate limiter error: ${rateErr.message}`, { stage: "support_write_rate" });
+        return json({ error: "Too many support messages just now. Please wait a little while and try again." }, 429);
+      }
     }
 
     switch (action) {
@@ -223,6 +272,15 @@ export async function handleAccountActions(
         }
         if (typeof message !== "string" || !message.trim()) {
           return json({ error: "A message is required" }, 400);
+        }
+        // Length caps: the RPC (055) only btrims, and no column carries a
+        // char_length check, so this is the sole ceiling on what lands in
+        // support_messages and in the confirmation email's subject line.
+        if (subject.trim().length > MAX_SUBJECT_CHARS) {
+          return json({ error: `A subject must be ${MAX_SUBJECT_CHARS} characters or fewer.` }, 400);
+        }
+        if (message.trim().length > MAX_MESSAGE_CHARS) {
+          return json({ error: `A message must be ${MAX_MESSAGE_CHARS} characters or fewer.` }, 400);
         }
         const { data, error } = await adminClient.rpc("create_ticket", {
           p_actor: callingUser.id,
@@ -277,6 +335,9 @@ export async function handleAccountActions(
         }
         if (typeof body !== "string" || !body.trim()) {
           return json({ error: "A reply body is required" }, 400);
+        }
+        if (body.trim().length > MAX_MESSAGE_CHARS) {
+          return json({ error: `A reply must be ${MAX_MESSAGE_CHARS} characters or fewer.` }, 400);
         }
         const { data, error } = await adminClient.rpc("post_ticket_reply", {
           p_actor: callingUser.id, p_id: ticketId, p_body: body.trim(), p_visibility: "user",
