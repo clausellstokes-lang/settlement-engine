@@ -144,6 +144,32 @@ its market thins, and the loss reads honestly into its unmet-demand ledger. Safe
 becomes an economic asset a settlement can squander; recovering the through-trade is
 a story arc the Herald can tell ("the wagons return to the Vale road").
 
+## 5d. THE LIVED PROFILE (owner amendment 2026-07-31 — the loop closes both ways)
+
+Routes react to the economy; the economy MUST react to its routes. A settlement's
+LIVED ECONOMIC PROFILE is a derived role composition with two components:
+- **THE PERMANENT BASIS (genesis, frozen):** terrain, resources, founding character —
+  the mountain and its ore never leave (same-seed law; never back-propagated).
+- **THE NETWORK ROLES (worldState, fluid):** crossroads, entrepot, port-of-transit —
+  derived from live network position: through-flows (what travels, with what
+  material — through-traffic is an ECONOMIC INPUT, generalizing the bypass
+  feedback), the connected-neighbor set (who you can trade with is an input to the
+  trade flows), and route grades.
+THE CANONICAL EXAMPLE (binding): a mountain mining town charters into a crossroads
+(mining + crossroads), tilts to mostly-crossroads-with-a-mountain as through-trade
+dominates, then war severs two routes and — on the slow timescale, with hysteresis —
+it is a mountain town again. Identity shifts at ROLE THRESHOLDS are Herald EVENTS
+("Karsgard is spoken of as a crossroads now"), never silent drift; the dossier shows
+the composition honestly ("a mining town, lately a crossroads"). CARRIERS: religion
+spread and information propagation WEIGHT BY EDGE GRADE — the roads are the arteries
+of faith and news as much as goods (faithSpread + distance-priced news read the
+network; a severed route slows a god and a story alike). CARTOGRAPHY: the lived
+profile drives ward evolution through the existing pulse-reactivity law (the market
+quarter grows as crossroads-ness rises; the A-8 institution counts read the LIVED
+profile, not genesis alone). Pins: genesis immutability under any network history;
+role-threshold hysteresis (no identity flapping); the canonical example as an
+end-to-end integration test — charter in, tilt, sever, revert, every step evented.
+
 ## 6. CHARTER (formation) — demand-then-event
 
 When a corridor's accumulated demand crosses the formation threshold (per dominant
