@@ -220,6 +220,30 @@ post-promotion; the Watabou iframe retires only at promotion.
   audience monotonicity (player manifest ⊆ DM manifest), all as seeded property tests
   over the corpus matrix, anchored per the walker laws.
 
+## 11b. INSTITUTION MULTIPLICITY + COHESION PLACEMENT (owner directive 2026-07-31,
+## BINDING: A-8 — governs TC-3 and TC-4)
+
+- **Counts are DOMAIN truth, never painter invention.** A pure seeded derivation
+  (`resolveInstitutionMultiplicity`) turns each catalog range ("Craftsmen 5-30") into THE
+  canonical count from population-within-tier x economic profile (+ prosperity), seeded
+  jitter, clamped to the authored range. Every surface projects it: map footprints,
+  dossier prose ("the Craft Ward, seventeen workshops"), exports, Herald growth items.
+  An envelope property pins monotonicity: expected count rises with population and
+  economic strength (the Wave-A instrument, reused).
+- **Cohesion decides the layout, from existing typed facts only** (stressors, alignment,
+  religion, economic profile, powers, defense — no new state): a per-institution-class
+  cohesion score maps to the CLOSED placement vocabulary
+  { district | clustered | dispersed_orderly | dispersed_chaotic }. Strong guild + lawful
+  order earns a named ward; corruption/unrest fragments placement with visibly chaotic
+  footprint jitter — the settlement's inner state becomes glanceable texture (legibility
+  law as cartography).
+- **Instance identity is deterministic and APPEND-STABLE** (the NPC positional-id lesson,
+  paid for 2026-07-30): growth appends instance N+1, never reindexes 1..N; user anchors
+  (map edits, future interiors) survive recompile by construction.
+- **v1 is presentation-canonical, engine-inert:** resolved counts derive FROM engine
+  facts but do not feed economy/services math — zero golden shift, dormancy intact.
+  Promoting counts into engine math is a recorded FUTURE owner-gated tuning decision.
+
 ## 12. THE DOSSIER MAP TAB — SUB-TAB SHELL (owner directive 2026-07-31, BINDING: J-TC-8)
 
 The dossier's Map tab becomes a CONTAINER with one sub-tab per settlement map
