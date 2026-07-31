@@ -198,6 +198,21 @@ export const SETTLEMENT_LIFECYCLE_TUNING = Object.freeze({
   DEATH_EMIT_P: 0.05,               // base emit probability once dwelled (rollCandidates rolls it)
   DEATH_DEPTH_WEIGHT: 0.08,         // deeper decline ⇒ likelier draw
   DEATH_RETRY_COOLDOWN: 8,          // ticks between death candidates at one settlement
+  // THE EMPTY-SETTLEMENT FAST PATH (owner-signed 2026-07-31 — the zombie cure).
+  // Population at/below ZERO_POP_FLOOR is the STRONGEST terminal signal, never a
+  // disqualifier (the diagnosed soak defect: a `pop > 0` eligibility gate meant a
+  // settlement at population zero could neither die nor recover — it zombied for
+  // decades). A DEDICATED dwell (`zeroSince`, a tick STAMP — catch-up-safe) starts
+  // at the first effectively-empty sighting and HOLDS through trickle bounces
+  // below ZERO_POP_CLEAR (the observed zombie oscillated 0↔24 on migrant credits;
+  // every crossing reset the terminal dwell and immunized the corpse). Once the
+  // dwell is met AND the settlement is empty NOW, the death candidate emits with
+  // CERTAINTY (probability 1): an empty town rolls no survival lottery. The dwell
+  // is ONE SEASON — the satellite lane's STARVE_DWELL "quickly die" precedent at
+  // first-class scale — not the two-year TERMINAL_DWELL.
+  ZERO_POP_FLOOR: 4,                // at/below this the settlement is effectively empty (a last handful)
+  ZERO_POP_CLEAR: 32,               // recovery to at/above this clears the zero dwell (4x the thorp floor; above the 24-head trickle)
+  ZERO_POP_DWELL: 13,               // ticks effectively empty before certain death (~a season — the STARVE_DWELL rhythm)
   // The aspatial dispersal reconciliation (populationDynamics/calamity parity):
   // 45% of the residual disperses as credited migrants; the remainder is the
   // origin-loss proxy. Spatial worlds ride the M4 realized-debit path instead.

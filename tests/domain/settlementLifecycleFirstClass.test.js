@@ -171,6 +171,128 @@ describe('terminal decline (no-sudden-death; the dwell is a tick stamp)', () => 
   });
 });
 
+// ── THE EMPTY-SETTLEMENT FAST PATH (owner-signed 2026-07-31: the zombie cure) ──
+describe('the empty-settlement fast path (population zero is the STRONGEST terminal signal)', () => {
+  const litWorld = (tick, tickStates = null) => makeWorldState({ tick, tickStates });
+  const snapAt = (pop) => makeSnapshot({ a: thorp('a', { population: pop }) });
+
+  it('the zombie fixture: a pop-0 thorp stamps zeroSince, then emits the death candidate at the zero dwell with CERTAINTY', () => {
+    // First sighting: the stamp lands, no candidate yet (never sudden, even for a corpse).
+    const first = evalOnce(litWorld(500), snapAt(0), collapsedPIndex);
+    expect(first.candidates).toEqual([]);
+    expect(first.worldState.settlementTickStates.a.settlementLifecycle.zeroSince).toBe(500);
+    // Dwell met: certain emission (probability 1 — an empty town rolls no survival lottery).
+    const armed = evalOnce(litWorld(500 + T.ZERO_POP_DWELL, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(0), collapsedPIndex);
+    expect(armed.candidates.length).toBe(1);
+    const cand = armed.candidates[0];
+    expect(cand.candidateType).toBe('settlement_terminal_death');
+    expect(cand.probability).toBe(1);
+    expect(cand.metadata.lifecycle.emptied).toBe(true);
+    expect(cand.reasons.join(' ')).toContain('empty');
+    // One tick short of the wall: nothing (the boundary is exact).
+    const short = evalOnce(litWorld(500 + T.ZERO_POP_DWELL - 1, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(0), collapsedPIndex);
+    expect(short.candidates).toEqual([]);
+  });
+
+  it('the immunity loop is dead: a 0→24→0 trickle bounce neither resets nor clears the zero dwell', () => {
+    // Mid-dwell the population bounces to 24 (the observed aspatial trickle): the stamp HOLDS.
+    const bounced = evalOnce(litWorld(506, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(24), calmPIndex);
+    expect(bounced.candidates).toEqual([]);
+    expect(bounced.worldState.settlementTickStates.a.settlementLifecycle.zeroSince).toBe(500);
+    // Back at zero with the ORIGINAL stamp's dwell met: certain death — the bounce bought nothing.
+    const dead = evalOnce(litWorld(500 + T.ZERO_POP_DWELL, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(0), collapsedPIndex);
+    expect(dead.candidates.length).toBe(1);
+    expect(dead.candidates[0].probability).toBe(1);
+    // REAL recovery (at/above ZERO_POP_CLEAR) clears the stamp (anchored by the held-stamp case above).
+    const recovered = evalOnce(litWorld(506, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(T.ZERO_POP_CLEAR), calmPIndex);
+    expect(recovered.worldState.settlementTickStates.a?.settlementLifecycle?.zeroSince).toBeUndefined();
+  });
+
+  it('the perverse pop>0 inversion is dead: the ORDINARY dwell ladder emits for a pop-0 settlement too', () => {
+    // Terminal dwell met, zero dwell NOT yet met (fresh zero stamp): the ladder path fires at its
+    // ordinary rare probability — population zero no longer disqualifies anything.
+    const out = evalOnce(litWorld(500, { a: { settlementLifecycle: { declineSince: 500 - T.TERMINAL_DWELL - 10, zeroSince: 500 - 2 } } }), snapAt(0), collapsedPIndex);
+    expect(out.candidates.length).toBe(1);
+    expect(out.candidates[0].probability).toBeLessThan(0.2);
+    expect(out.candidates[0].metadata.lifecycle.emptied).toBeUndefined();
+  });
+
+  it('a low-pop thorp ABOVE the effective-zero floor does not fast-path (the ladder still governs ordinary decline)', () => {
+    // One soul above the floor, with a zero stamp old enough that a leak WOULD fire: nothing —
+    // the fast path demands the settlement be effectively empty NOW.
+    const out = evalOnce(litWorld(500 + T.ZERO_POP_DWELL + 40, { a: { settlementLifecycle: { zeroSince: 500, declineSince: 500 } } }), snapAt(T.ZERO_POP_FLOOR + 1), collapsedPIndex);
+    expect(out.candidates).toEqual([]); // the decline dwell is short of TERMINAL_DWELL — the ordinary wall stands
+    // AT the floor the fast path fires (the boundary is exact).
+    const atFloor = evalOnce(litWorld(500 + T.ZERO_POP_DWELL, { a: { settlementLifecycle: { zeroSince: 500 } } }), snapAt(T.ZERO_POP_FLOOR), collapsedPIndex);
+    expect(atFloor.candidates.length).toBe(1);
+    expect(atFloor.candidates[0].probability).toBe(1);
+  });
+
+  it('conservation: an empty settlement\'s death moves ZERO population and mints the remnant status', () => {
+    const armedState = () => litWorld(500 + T.ZERO_POP_DWELL, { a: { settlementLifecycle: { zeroSince: 500 } } });
+    const snapshot = makeSnapshot({ a: thorp('a', { population: 0, peakTier: 'city' }), b: donorTown('b') });
+    const aspatial = evalOnce(armedState(), snapshot, collapsedPIndex, { spatialActive: false });
+    const cand = aspatial.candidates[0];
+    // The origin debit is EXACTLY 0 (never -0), no migrant credits, sum 0.
+    expect(cand.populationDeltas).toEqual([{ saveId: 'a', delta: 0, reason: expect.any(String) }]);
+    expect(cand.populationDeltas.reduce((s, d) => s + d.delta, 0)).toBe(0);
+    expect(cand.metadata.spatialEmigration).toBeUndefined();
+    // Spatial mode: no shed marker either (there is nobody to shed).
+    const spatial = evalOnce(armedState(), snapshot, collapsedPIndex, { spatialActive: true });
+    expect(spatial.candidates[0].metadata.spatialEmigration).toBeUndefined();
+    // The writer mints the remnant off the candidate with zero movement.
+    const dead = applySettlementLifecycleOutcomeToSettlement(thorp('a', { population: 0, peakTier: 'city' }), cand);
+    expect(lifecycleStatusOf(dead)).toBe('relic_ruin');
+    expect(dead.population).toBe(0);
+    expect(dead.populationHistory).toEqual([]); // zero residual ⇒ zero movement entries
+  });
+
+  it('dormancy: a zombie world with the flag OFF returns the SAME reference and zero candidates', () => {
+    const worldState = makeWorldState({ lit: false, tickStates: { a: { settlementLifecycle: { zeroSince: 400 } } } });
+    const out = evaluateSettlementLifecycle(worldState, snapAt(0), collapsedPIndex, { tick: 500 });
+    expect(out.worldState).toBe(worldState);
+    expect(out.candidates).toEqual([]);
+  });
+
+  it('END-TO-END: a zombie world resolves through the ORGANIC path — full pulses until the remnant status lands (~a season)', async () => {
+    const { simulateCampaignWorldPulse } = await import('../../src/domain/worldPulse/index.js');
+    const { ensureRegionalGraph } = await import('../../src/domain/region/index.js');
+    // The soak-d shape: a once-city thorp at population ZERO, lifecycle lit, wide-world authority.
+    const empty = thorp('a', { population: 0, peakTier: 'city' });
+    empty.economicState = { prosperity: 'Subsistence' };
+    const saves = [
+      { id: 'a', name: 'Ash', phase: 'canon', settlement: empty, campaignState: { phase: 'canon', eventLog: [], locks: {} } },
+      { id: 'b', name: 'Brim', phase: 'canon', settlement: donorTown('b'), campaignState: { phase: 'canon', eventLog: [], locks: {} } },
+    ];
+    let campaign = {
+      id: 'lc-zombie', name: 'Zombie', settlementIds: ['a', 'b'],
+      worldState: {
+        rngSeed: 'zombie-1', tick: 500,
+        simulationRules: { settlementLifecycleEnabled: true, majorChangesRequireProposal: false, warLayerEnabled: false },
+        calendar: { elapsedWeeks: 500, year: 10 }, stressors: [],
+      },
+      regionalGraph: ensureRegionalGraph({ edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'trade_partner' }] }),
+      wizardNews: { currentTick: 500, entries: [] },
+    };
+    let currentSaves = saves;
+    let deathTick = null;
+    for (let t = 0; t < T.ZERO_POP_DWELL + 12 && deathTick == null; t += 1) {
+      const r = simulateCampaignWorldPulse({ campaign, saves: currentSaves, interval: 'one_week', now: '2026-01-01T00:00:00.000Z' });
+      const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
+      currentSaves = currentSaves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
+      campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+      if (lifecycleStatusOf(currentSaves.find((s) => s.id === 'a').settlement)) deathTick = r.worldState.tick;
+    }
+    expect(typeof deathTick, 'the empty settlement resolved through the organic path (no more zombies)').toBe('number');
+    // Within the seasonal doctrine's window: the dedicated dwell plus a small margin,
+    // nowhere near the two-year TERMINAL_DWELL the zombie previously could not even enter.
+    expect(deathTick - 500).toBeLessThanOrEqual(T.ZERO_POP_DWELL + 8);
+    const a = currentSaves.find((s) => s.id === 'a').settlement;
+    expect(lifecycleStatusOf(a)).toBe('relic_ruin'); // peakTier city: the scarcity law held at the writer
+    expect(a.population).toBe(0);
+  }, 60_000);
+});
+
 // ── AUTHORITY (campaign-altering, proposal-gated) ─────────────────────────────
 describe('authority routing (the blockade_declared registration pattern)', () => {
   const armedWorld = (rules) => ({

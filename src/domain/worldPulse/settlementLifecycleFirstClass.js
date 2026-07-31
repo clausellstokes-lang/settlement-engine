@@ -100,7 +100,7 @@ function supportOf(pIndex, id) {
   ));
 }
 
-/** @typedef {{ declineSince?: number, lastDeathCandidateTick?: number }} LcTickMeta */
+/** @typedef {{ declineSince?: number, zeroSince?: number, lastDeathCandidateTick?: number }} LcTickMeta */
 /** @typedef {Record<string, unknown>} LcCandidate */
 
 // ── THE SHARED OUTCOME BUILDERS (force ≡ organic BY CONSTRUCTION) ──────────────
@@ -115,9 +115,11 @@ function supportOf(pIndex, id) {
  * @param {number} args.dwell @param {number} args.support
  * @param {string} args.applyMode
  * @param {boolean} [args.forced]
+ * @param {boolean} [args.emptied] the empty-settlement fast path fired (dwell at/
+ *   below the effective-zero floor met — certain emission, no lottery)
  * @returns {LcCandidate}
  */
-export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false }) {
+export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false }) {
   const s = item.settlement || {};
   const cid = String(item.id ?? '');
   const name = String(item.name || s.name || cid);
@@ -125,11 +127,11 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
   const depth = clamp01(1 - support);
   /** @type {Array<{ saveId: string, delta: number, reason: string }>} */
   const populationDeltas = [{
-    saveId: cid, delta: -pop,
+    saveId: cid, delta: pop > 0 ? -pop : 0, // never -0 (an empty death moves nobody)
     reason: 'The last residents leave with the wagons — the settlement dies.',
   }];
   /** @type {Record<string, unknown>} */
-  const metadata = { tick, dwell, lifecycle: { residual: pop, forced } };
+  const metadata = { tick, dwell, lifecycle: { residual: pop, forced, ...(emptied ? { emptied: true } : {}) } };
   if (spatialActive) {
     // M4 realized-debit dispatch: the shed pool the migrationKernel reads
     // POST-APPLY (conservation asserted in dispatchMigrations).
@@ -151,17 +153,25 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
     ruleFamily: 'lifecycle',
     targetSaveId: item.id,
     severity: clamp01(0.7 + depth * 0.25),
-    probability: forced ? 1 : clamp01(T.DEATH_EMIT_P + depth * T.DEATH_DEPTH_WEIGHT),
+    // CERTAIN for a forced verb AND for the empty-settlement fast path: an empty
+    // town rolls no survival lottery. The ordinary ladder keeps its rare draw.
+    probability: forced || emptied ? 1 : clamp01(T.DEATH_EMIT_P + depth * T.DEATH_DEPTH_WEIGHT),
     applyMode,
     headline: `${name} is dying`,
     summary: forced
       ? `${name} is abandoned by decree; its last ${formatCount(pop)} residents scatter for good.`
-      : `${name} has dwelled in terminal decline for ${dwell} ticks; its last ${formatCount(pop)} residents may scatter for good.`,
+      : emptied
+        ? `${name} has stood all but empty for ${dwell} ticks; the last hearths are cold and the settlement passes from the living map.`
+        : `${name} has dwelled in terminal decline for ${dwell} ticks; its last ${formatCount(pop)} residents may scatter for good.`,
     reasons: [
       forced
         ? 'FORCE_ABANDON — the DM-authority terminal-death verb (dwell-bypassing; resolves through the organic path).'
-        : `Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`,
-      forced ? null : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,
+        : emptied
+          ? `Effectively empty (population ${formatCount(pop)}, at or below the ${T.ZERO_POP_FLOOR}-soul floor); an empty settlement is the strongest terminal signal.`
+          : `Demoted to the ladder's bottom rung and unsupported (support ${support.toFixed(2)}).`,
+      forced ? null : emptied
+        ? `Empty dwell ${dwell} at or past ${T.ZERO_POP_DWELL}; certain, never a lottery (an empty town cannot endure).`
+        : `Terminal dwell ${dwell} ≥ ${T.TERMINAL_DWELL} — extended, never sudden.`,
       'The last residents disperse with fates UNRESOLVED — the engine kills no named character, ever.',
     ].filter((r) => r != null).map(String),
     populationDeltas,
@@ -256,7 +266,9 @@ export function buildResettleOutcome({ item, donorPool, tick, forkFn, applyMode,
 
 /**
  * THE CANDIDATE EVALUATOR (the tierResourceDynamics lane) — terminal death for a
- * first-class settlement that demoted to thorp and DWELLED in terminal decline,
+ * first-class settlement that demoted to thorp and DWELLED in terminal decline
+ * (plus the EMPTY-SETTLEMENT FAST PATH: an effectively-empty thorp dies with
+ * certainty after a short dedicated dwell that trickle bounces cannot reset),
  * and resettlement of a remnant. Pure over (worldState, snapshot, pIndex, rng);
  * threads worldState (the decline dwell nests under
  * settlementTickStates[cid].settlementLifecycle, byte-neutral when empty).
@@ -366,24 +378,40 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
     /** @type {LcTickMeta} */
     const meta = {};
     if (Number.isFinite(prior?.lastDeathCandidateTick)) meta.lastDeathCandidateTick = num(prior?.lastDeathCandidateTick, 0);
+    const cooled = meta.lastDeathCandidateTick == null
+      || (tick - num(meta.lastDeathCandidateTick, 0)) >= T.DEATH_RETRY_COOLDOWN;
+
+    // ── THE EMPTY-SETTLEMENT FAST PATH (owner-signed 2026-07-31): population at/
+    // below the effective-zero floor is the STRONGEST terminal signal, never a
+    // disqualifier. The dedicated dwell is a tick STAMP that HOLDS through
+    // trickle bounces below ZERO_POP_CLEAR (a 0↔24 migrant-credit oscillation
+    // must not immunize a corpse) and clears only on real recovery. Dwell met
+    // while empty NOW ⇒ the candidate emits with CERTAINTY (tuning rationale in
+    // SETTLEMENT_LIFECYCLE_TUNING). ──
+    const priorZero = Number.isFinite(prior?.zeroSince) ? num(prior?.zeroSince, tick) : null;
+    const zeroSince = pop <= T.ZERO_POP_FLOOR
+      ? (priorZero ?? tick)
+      : (priorZero != null && pop < T.ZERO_POP_CLEAR ? priorZero : null);
+    if (zeroSince != null) meta.zeroSince = zeroSince;
+    const emptied = pop <= T.ZERO_POP_FLOOR && zeroSince != null && (tick - zeroSince) >= T.ZERO_POP_DWELL;
+
     if (declining) {
       // The decline dwell is a tick STAMP (integer arithmetic — survives the
       // M10b one-interval catch-up collapse).
       const since = Number.isFinite(prior?.declineSince) ? num(prior?.declineSince, tick) : tick;
       meta.declineSince = since;
-      const dwell = tick - since;
-      const cooled = meta.lastDeathCandidateTick == null
-        || (tick - num(meta.lastDeathCandidateTick, 0)) >= T.DEATH_RETRY_COOLDOWN;
-      if (dwell >= T.TERMINAL_DWELL && cooled && !pendingLifecycle.has(cid) && pop > 0) {
-        meta.lastDeathCandidateTick = tick;
-        // CAMPAIGN-ALTERING + proposal-gated: honors majorChangesRequireProposal
-        // (the tier_change precedent), forced to proposal under
-        // dm_only/recommendations by authorityFor.
-        candidates.push(buildTerminalDeathOutcome({
-          item, snapshot, pIndex, tick, spatialActive, dwell, support,
-          applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
-        }));
-      }
+    }
+    const declineDwell = meta.declineSince != null ? tick - num(meta.declineSince, tick) : 0;
+    if (cooled && !pendingLifecycle.has(cid) && (emptied || (declining && declineDwell >= T.TERMINAL_DWELL))) {
+      meta.lastDeathCandidateTick = tick;
+      // CAMPAIGN-ALTERING + proposal-gated: honors majorChangesRequireProposal
+      // (the tier_change precedent), forced to proposal under
+      // dm_only/recommendations by authorityFor.
+      candidates.push(buildTerminalDeathOutcome({
+        item, snapshot, pIndex, tick, spatialActive, support, emptied,
+        dwell: emptied && zeroSince != null ? tick - zeroSince : declineDwell,
+        applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
+      }));
     }
 
     // Conditional materialization (byte-neutral when nothing is tracked).

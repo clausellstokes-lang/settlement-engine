@@ -54,7 +54,17 @@ A first-class settlement that has DEMOTED down the existing ladder to thorp tier
 dwelled in terminal decline (extended dwell — the resource-removal ruling's rhythm: never
 sudden) may draw terminal death (§H-loaded on the decline's depth, E0-classed very rare;
 authority-routed as a campaign-altering candidate — the DM sees it coming and can force or
-veto). ON DEATH: the last residents DISPERSE through the migration ledger (conserved); NPCs
+veto).
+
+THE EMPTY FAST PATH (owner ruling 2026-07-31, the zombie-settlement cure): population at
+or below the effective-zero floor is the STRONGEST death signal, never a disqualifier. An
+effectively-empty thorp accumulates its own dedicated dwell (`zeroSince`) that trickle
+bounces cannot reset (the 0↔24 oscillation immunized zombies for decades in the 100y×4s
+soak cell — the class this paragraph retires); after ~one season empty (`ZERO_POP_DWELL`,
+the satellite lane's "quickly die" rhythm) the candidate emits with CERTAINTY — an empty
+town holds no lottery. Resolution rides the same organic path below unchanged; an empty
+death moves exactly zero population. Constants + rationale: `SETTLEMENT_LIFECYCLE_TUNING`
+(`ZERO_POP_FLOOR` / `ZERO_POP_CLEAR` / `ZERO_POP_DWELL`). ON DEATH: the last residents DISPERSE through the migration ledger (conserved); NPCs
 disperse with fates UNRESOLVED ("she left with the last wagons" — the never-resolve-fates
 boundary holds at the grave's edge: the engine kills no named character, ever — pinned);
 institutions clear; the entity's status becomes its remnant grade:
