@@ -8,6 +8,13 @@
 > **Progress**
 > - 2026-07-31: Program opened. Waves A+B launched (tier-inertia certification;
 >   neutral-connected default; full auto-resolve). C–G queued in order.
+> - 2026-07-31 (later): Waves A+B RETURNED green. A: directive 6 CONFIRMED — tier
+>   inertia is EMERGENT (scale-free predicate; causal layer supplies all resistance;
+>   84.25% village vs 10.0% city demotion under matched load; envelope registered,
+>   roster 15—16). B1: neutral-connected BUILT DARK, lit nowhere — all-pairs is
+>   quadratic (J-D2 amended to k-NN, B1b queued). B2: full auto-resolve through the
+>   proposal accept path with engine-adjudicated provenance; toggle persists. Gate +
+>   commit in progress.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
@@ -27,6 +34,16 @@
    pending decisions leave the Herald and appear in a popup replacing the advance-time
    popup after Advance is pressed.
 
+8. NPC CORRUPTION CONSEQUENCES (added 2026-07-31) — an exposed-corrupt NPC never dies
+   (death stays the DM's alone); the engine resolves one of five outcomes: jailed (prisons
+   exist) / banished (no prisons) / roaming (rehosts elsewhere, reputation travels,
+   may found a faction) / turncoat (rival-nation compromise embeds them there) /
+   criminal_founding (criminal-institution compromise + that power present). Full faction
+   ⇒ found a sibling faction under that power; open faction ⇒ enter at the lowest
+   position; rejection possible on alignment/archetype/history conflict. The vacated
+   slot refills shortly after with a roaming/random NPC whose traits are MARGINALLY
+   biased toward the settlement's state (noticeable at scale only).
+
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
   every settlement before proposing ANY change. The popup itemizes exactly what it will do,
@@ -40,6 +57,12 @@
 - **J-D2 (neutral-connected):** the default edge = diplomatic KNOWN + minimal route
   awareness. NOT a free trade route, no resource flow. Versioned default applying to NEW
   worlds only; existing seeds keep frozen semantics (THE PROMISE).
+  **AMENDED 2026-07-31 (B1 measurement):** the all-pairs edge set is QUADRATIC and reds
+  the tick-scan budget 3.32x at realm scale (measured, not shipped). The default edge set
+  is k-NEAREST SPATIAL NEIGHBORS, k=3 (deterministic: distance, then codepoint id) —
+  COMPLETE at N<=4 (exactly where the small-N stasis medicine binds) and O(S*k) at scale,
+  under budget with no raise. The dark seam as built stands; only the pair-selection
+  function changes (B1b, folds into wave C's batch).
 - **J-D3 (user routes):** CREATE_ROUTE is the second command-spine vertical, the mirror
   sibling of CUT_TRADE_ROUTE — same family, same journal/receipt discipline, one
   transaction. User picks endpoints; the engine paths via the spatial travel-cost raster.
@@ -65,6 +88,21 @@
   a durable HELD DOCKET that re-surfaces on the next advance and shows a one-line Herald
   pointer; nothing is ever silently dropped (the coup-guarantee law extends to the UI).
 
+- **J-D8 (NPC consequences — the exhaustiveness blueprint, BINDING for W-H):**
+  (a) TOTAL seeded decision table over the closed outcome vocabulary — no fall-through;
+  (b) identity earned by consequence: a mobile NPC graduates to a durable WORLD-SCOPED id
+  at exposure; roster locals stay positional; (c) reputation = typed banded facets
+  (finite-semantics), travels with the durable id, decay tunable; rejection = an authored
+  compatibility table (alignment x archetype x history flags), closed and pinned;
+  (d) replacement bias = a powered envelope property at the designed small effect size
+  (the Wave-A instrument) landing through the slot-inheritance + pin-remap machinery;
+  (e) every path walks BOTH alias homes (npcs[] and factions[].members[]) with
+  JSON-round-trip, regen, and undo pins; faction founding mints new ids, never reuses;
+  (f) every outcome is address-chain Herald news, and later rejections REFERENCE the
+  original scandal (circulation made visible); (g) dark virtual flag + dormancy golden;
+  fires ONLY on revealed corruption (covert seam untouched; ~6.75% capture truth
+  upstream unchanged); all rates in tuning bands.
+
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
   green or a documented tuning-band finding. NO engine edits.
@@ -78,6 +116,8 @@
 - **W-E (item 4):** satellite topographic resources.
 - **W-F (item 7-popup):** the gathered adjudication screen + held docket + Herald pointer.
 - **W-G (item 1):** autoplacement (scoring derivation + button + consent popup per J-D1).
+- **W-H (item 8):** NPC corruption consequences per J-D8 — architected fully at wave
+  start (its own slice spec), built dark, envelope-verified, Herald-wired.
 
 ## Interleaving with the standing pipeline
 The 300y research soak, its cure-proof rerun (100y×4s), the subsystem-certification build,
