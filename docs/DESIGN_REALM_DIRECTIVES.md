@@ -134,6 +134,20 @@
   fires ONLY on revealed corruption (covert seam untouched; ~6.75% capture truth
   upstream unchanged); all rates in tuning bands.
 
+- **J-D8b (protective guards, bound 2026-07-31 after whole-design review):**
+  (i) POOL EQUILIBRIUM — the roaming pool has outflow pressure: unassigned roamers
+  eventually settle themselves at tunable rates; pool size is envelope-bounded at soak
+  horizons (a register that only grows is the product's anti-pattern).
+  (ii) TRAIT STATIONARITY — the replacement bias must not compound: cast trait
+  distributions at year 100 match year 10 within a powered envelope (guards the
+  corruption-attracts-corruption feedback loop the bias could seed).
+  (iii) AUDIENCE PROJECTION OF THE POOL — roamer records carry DM truth (a turncoat's
+  compromise source is covert intelligence); the Wanderers tab and every pool
+  projection ride the includeCovert seam extended to world-level NPC state.
+  (iv) TURNCOAT CAPACITY is a closed vocabulary, authored before W-H starts.
+  W-H is SLICED AS A PROGRAM: H1 identity+state, H2 outcomes, H3 circulation+rejection,
+  H4 UI+verbs — each dark, each gated, each its own commit.
+
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
   green or a documented tuning-band finding. NO engine edits.
