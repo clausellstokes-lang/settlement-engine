@@ -58,6 +58,24 @@ ledger — never from a session digest.
 >   `b353c97b91a93609c40103a2b39275ec88f2fa79ba135e0cf4a7ac2d78d1fe3d`.
 >   Binding reconciliation and fold order:
 >   `docs/EXHAUSTIVE_REMEDIATION_RECONCILIATION_018e4119.md`.
+> - 2026-07-30: THE VERIFIED-FIX WAVES landed @ composite-r4 e1adc7bd..b66e9551 (14 commits,
+>   owner order "fix all of them… I give all permission"). Pipeline: 14-agent holistic review of
+>   018e4119 (96 findings, 0 critical) → 14 Opus adversarial verifiers (39 CONFIRMED / 52
+>   ADJUSTED / 5 REFUTED; mountain_pass UPGRADED to high — fall-through scored a pass WORSE than
+>   isolated; NEW live bug found: World Book sieges printed `undefined`) → wave 1 (8 commits,
+>   48 fixes: NPC-rename single-writer convergence, pinnedNpcs regen remap, EP walkers to ALL of
+>   tests/, sweep self-diagnosis, modulePreload engine-core fix, interior seedFork scrub, edge
+>   hardening, doc truth) → wave 2 (6 commits, 22 fixes incl. FOUR OWNER RULINGS 2026-07-30:
+>   mountain_pass = seasonal tier [golden 523→525, 2 ADDED 0 CHANGED, sha-verified]; coup
+>   verdicts = guaranteed admission [golden 0/4 rows changed, saturation fixture pins it]; BYOK
+>   = fail-closed 503 with reservation release; realm exports = faithUnlocked seam fail-closed.
+>   Plus: consent → profiles.telemetry_consent, ai_data → durable outbox, draft timelines
+>   transfer on save, [generators-pipeline-5] reroll seed recorded, crypto seed minting).
+>   Full gate green at both wave folds (20,323 passed / 2,003 files at wave 2). Deliberately NOT
+>   done: production migration deploy (launch train unchanged), first-paint budget raise
+>   (constitutional). NEXT per owner order: soak:release (30y+100y grid) → soak:research (300y)
+>   → tuning pass over soak evidence → wave 3 programs (stripe coverage, manifest burn-down,
+>   negative-assertion burn-down, structural moves, src/lib+FMG review sweeps).
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
