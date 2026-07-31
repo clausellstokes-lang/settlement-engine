@@ -76,6 +76,21 @@ ledger — never from a session digest.
 >   (constitutional). NEXT per owner order: soak:release (30y+100y grid) → soak:research (300y)
 >   → tuning pass over soak evidence → wave 3 programs (stripe coverage, manifest burn-down,
 >   negative-assertion burn-down, structural moves, src/lib+FMG review sweeps).
+> - 2026-07-31: THE SOAK LADDER + THE ZOMBIE CURE. Owner-ordered 30/100/300y soak
+>   (full_simulation, everything lit): scale sweep + BOTH 30y×12s seeds fully green (byte-identical
+>   30y replays, worker==direct hashes, bounded perturbation 0→0.08/30y, divergent fates, 4-majors
+>   cadence, zero unclassified events after burn-in). ⚠️ 100y×4s cell FAILED and exposed THE ZOMBIE
+>   SETTLEMENT CLASS: soak-d hit pop 0 in YEAR 4 and simulated six decades undead — root cause a
+>   pop>0 terminal-death eligibility inversion (settlementLifecycleFirstClass.js:377) + dwell reset
+>   on trickle bounces; small-realm stasis co-finding (stressors ~0 for 99y at N=4, politics mover
+>   monopoly, majors ~1/decade late-century) routed to the tuning pass. Owner ruled option 1
+>   ("do it"): the designed lane wired — empty fast path (floor 4 / clear 32 / dwell 13 ticks),
+>   certainty not lottery, organic path unchanged, conservation zero-moved, dormancy byte-identical,
+>   worldpulse goldens ZERO rows shifted. Landed @ composite-r4 (post-b66e9551), full gate green
+>   under soak load. Failing receipt preserved; 100y×4s re-run queued as cure proof after the
+>   300y×12s research leg (running) completes. Subsystem-certification build (9-agent, parked
+>   script) launches post-soak; then tuning (agenda: knowledge-lane starvation, lifecycle tempo,
+>   strategy-verb monotone, cooling slope, small-N normalization); then wave 3 programs.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
