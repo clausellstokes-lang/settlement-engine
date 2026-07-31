@@ -293,6 +293,18 @@
   Conservation pin: remove the magic source and the deficit honestly reappears.
   Routes stay load-bearing: substitution shifts WHAT moves, never whether things
   move.
+  **AMENDED 2026-07-31 (owner — THE TWO-SIDED BAND):** tier × magic set the FLOOR of
+  magical expression (a high-magic metropolis's minimum exceeds a thorp's — scale
+  demands circles, never just one hedge wizard); the economy regime sets the CEILING
+  (no foundry without the treasury, whatever the tier or magic). Available forms =
+  [floor(tier, magic), ceiling(economy regime)] — a settlement's magical skyline is a
+  DIAGNOSIS of its condition. FORMS OUTLIVE THEIR REGIMES AS SHELLS: economic decline
+  closes the foundry (regime demotion event), never demolishes it — the quiet tower
+  persists on the map below its operating regime, and recovery WARM-STARTS from the
+  shell (the third instance of the infrastructure-remembers law: hidden paths,
+  settlement remnants, institutional shells). Shell state is Herald-narratable and
+  cartography-visible (the dark windows render).
+
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
