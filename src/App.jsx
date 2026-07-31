@@ -37,6 +37,7 @@ import {
 } from './components/theme.js';
 import { resolveViewBackground } from './config/pageBackgrounds.js';
 import AccountMenu from './components/AccountMenu.jsx';
+import NavFlowArrow from './components/nav/NavFlowArrow.jsx';
 import FeatureErrorBoundary from './components/FeatureErrorBoundary.jsx';
 import Button from './components/primitives/Button.jsx';
 import IconButton from './components/primitives/IconButton.jsx';
@@ -568,7 +569,7 @@ export default function App() {
 
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>
               <nav style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-                {NAV.map(({ id, label }) => {
+                {NAV.map(({ id, label }, i) => {
                   const active = view === id;
                   return (
                     <button
@@ -580,12 +581,13 @@ export default function App() {
                         // Active tab is a wayfinding marker, not a CTA: a gold
                         // underline + weight, not a filled cartouche, so the Sign
                         // In chip stays the region's single filled-gold focal point.
+                        // `relative` is the positioning context for the flow chevron.
                         display: 'flex', alignItems: 'center', gap: SP.xs,
                         padding: `${SP.sm}px ${SP.lg}px`,
                         background: 'transparent',
                         border: 'none',
                         borderBottom: active ? `2px solid ${GOLD}` : '2px solid transparent',
-                        borderRadius: 0, cursor: 'pointer',
+                        borderRadius: 0, cursor: 'pointer', position: 'relative',
                         color: active ? GOLD : PARCH_100,
                         fontSize: FS.sm, fontWeight: active ? 700 : 500,
                         fontFamily: sans,
@@ -594,6 +596,9 @@ export default function App() {
                       }}
                     >
                       {label}
+                      {/* Flow chevron — drawn only when the NEXT TAB RENDERED HERE is
+                          this tab's declared flow successor (routes.js NAV_FLOW). */}
+                      <NavFlowArrow from={id} to={NAV[i + 1]?.id} active={active} />
                     </button>
                   );
                 })}
@@ -729,15 +734,9 @@ export default function App() {
           background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
           borderTop: '1px solid rgba(160,118,42,0.25)',
           padding: isMobile ? `${SP.lg}px ${SP.xl}px 88px` : `${SP.lg}px ${SP.xxl}px`,
-          textAlign: 'center',
-          fontFamily: sans,
-          fontSize: FS.sm,
-          color: PARCH_100,
-          letterSpacing: '0.04em',
-          userSelect: 'none',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: SP.sm,
+          textAlign: 'center', fontFamily: sans, fontSize: FS.sm,
+          color: PARCH_100, letterSpacing: '0.04em', userSelect: 'none',
+          display: 'flex', flexDirection: 'column', gap: SP.sm,
           alignItems: 'center',
         }}>
           <nav aria-label="Footer" style={{
@@ -785,7 +784,7 @@ export default function App() {
             boxShadow: '0 -4px 20px rgba(0,0,0,0.4)',
             paddingBottom: 'env(safe-area-inset-bottom)',
           }}>
-            {mobileNav.map(({ id, label }) => {
+            {mobileNav.map(({ id, label }, i) => {
               const active = view === id;
               return (
                 <button
@@ -796,7 +795,8 @@ export default function App() {
                   style={{
                     // minWidth:0 lets a flex child shrink below its content width so
                     // the longest label ellipsis-fits at 375px. Five equal columns.
-                    flex: 1, minWidth: 0,
+                    // `relative` is the positioning context for the flow chevron.
+                    flex: 1, minWidth: 0, position: 'relative',
                     display: 'flex', flexDirection: 'column',
                     alignItems: 'center', justifyContent: 'center', gap: SP.xs,
                     minHeight: 44,
@@ -812,6 +812,8 @@ export default function App() {
                   }}
                 >
                   <span style={{ lineHeight: 1, maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</span>
+                  {/* Flow chevron — the mobile bar omits Realm, so Library draws none. */}
+                  <NavFlowArrow from={id} to={mobileNav[i + 1]?.id} active={active} />
                 </button>
               );
             })}

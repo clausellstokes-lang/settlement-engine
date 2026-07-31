@@ -1,16 +1,26 @@
-// HeraldBody.jsx — the Herald's seven section bodies (the paper).
+// HeraldBody.jsx — the Herald's section bodies (the paper).
 //
 // RealmInspector owns the chrome (size, tabs, the desk strip, the time lens);
-// this component owns the BODY: which of the seven news doors renders, and with
-// what. The pulse + chronicle content is filed by the routing table
+// this component owns the BODY: which news door renders, and with what. The
+// pulse + chronicle content is filed by the routing table
 // (heraldFeed.buildHeraldFeed) into the four report doors (War / Faith / Trade /
 // Events); Divination reads the forecast substrate; Adjudication is the decisions
 // desk; Dashboard is the front page + prose session-prep.
 //
 // Closure discipline (survey wf_e940f170): the heavy section panels keep their
-// EXISTING lazy() split (net-zero preload manifest — the same dynamic imports the
-// old inspector minted); every NEW child is a STATIC import so it rides
-// RealmInspector's already-lazy chunk at zero first-paint cost. No new lazy() here.
+// EXISTING lazy() split (the same dynamic imports the old inspector minted), and
+// a small NEW child is a STATIC import so it rides RealmInspector's already-lazy
+// chunk at zero first-paint cost.
+//
+// W-C AMENDS THAT RULE FOR THE TWO REGISTER DOORS (owner directive 5 / J-D5).
+// This header used to say "No new lazy() here", on the reasoning that a static
+// child costs nothing beyond the inspector chunk it already rides. That reasoning
+// holds for a small child of an ALREADY-OPEN door; it does not hold for a whole
+// door most sessions never open. The Gazetteer and Ruins & Remembrance are
+// mounted through lazy() so their bodies + the heraldRegister read model stay out
+// of the inspector chunk until the GM asks for that page. First paint is
+// unaffected either way (the inspector is itself lazy); what this buys is the
+// Herald's own open cost. @enforced-by tests/build/heraldRegisterDoorsLazy.test.js
 
 import { lazy, useState } from 'react';
 import { BookOpen, LayoutList } from 'lucide-react';
@@ -39,6 +49,9 @@ const PantheonPanel  = lazy(() => import('./PantheonPanel.jsx'));
 const AssignDeityFromMap = lazy(() => import('./AssignDeityFromMap.jsx'));
 const WarResolveSection = lazy(() => import('./WarResolveSection.jsx'));
 const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
+// W-C — the two REGISTER doors, each its own lazy leaf (see the header note).
+const HeraldGazetteer = lazy(() => import('./HeraldGazetteer.jsx'));
+const HeraldRemembrance = lazy(() => import('./HeraldRemembrance.jsx'));
 
 // A calm peacetime note (the War door's live-block empty tail).
 function PeacetimeNote({ campaign }) {
@@ -161,6 +174,8 @@ export default function HeraldBody({
       events: 'The realm\'s events fill once a campaign is live.',
       divination: 'The forecast reads a live campaign\'s rising pressures.',
       adjudication: 'Decisions await once a campaign\'s realm is live.',
+      gazetteer: 'The register fills with every settlement a live campaign counts.',
+      remembrance: 'The realm remembers its lost places once a campaign is live.',
     };
     return <CampaignEmptyState lead={leads[section] || leads.events} {...emptyHandlers} />;
   }
@@ -235,6 +250,17 @@ export default function HeraldBody({
         </Section>
       </div>
     );
+  }
+
+  // ── THE TWO REGISTERS (W-C) ────────────────────────────────────────────────
+  // Not report doors: they carry no feed items and no focus/filter narrowing,
+  // because a register answers "what is there", not "what happened since".
+  if (section === 'gazetteer') {
+    return <HeraldGazetteer campaign={campaign} saves={saves} />;
+  }
+
+  if (section === 'remembrance') {
+    return <HeraldRemembrance campaign={campaign} saves={saves} />;
   }
 
   if (section === 'adjudication') {

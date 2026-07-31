@@ -242,30 +242,43 @@ const ONE_REGEN = Object.freeze({
 // `neutralNeighborsEnabled` is a VIRTUAL flag of the same class as WAVES /
 // ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
 // `=== true` at its single seam (region/neutralNeighbourEdges.js, wired into
-// buildWorldSnapshot). Lit, it gives every un-linked pair of campaign members a
-// neutral, channel-less regional edge, which RAISES cross-settlement interaction
-// density by design (the small-N stasis evidence).
+// buildWorldSnapshot). Lit, it gives each campaign member a neutral, channel-less
+// regional edge to its K NEAREST fellows, which RAISES cross-settlement
+// interaction density by design (the small-N stasis evidence).
 //
 // DELIBERATELY LIT IN NO PRESET (recorded, not an oversight) — and the blocker
-// is ASYMPTOTIC, not merely a golden re-record. MEASURED 2026-07-31: adding
+// is ASYMPTOTIC, not merely a golden re-record. MEASURED 2026-07-31 (B1): adding
 // `neutralNeighborsEnabled: true` to the ONE_REGEN spread (so the three
 // world-alive presets carry it) REDS tests/perf/tickScanBudget.test.js —
-// "scanOps grew 3.320x (1007 -> 3343) when S doubled (> 2.6)". The reason is
-// structural: the default CONNECTS EVERY PAIR, so the regional graph becomes
-// COMPLETE and its edge count is C(S,2) — quadratic in settlements. The
-// per-advance tick indices are near-linear in EDGES, so they stay honest, but a
-// quadratic edge population drags total scan work past the asymptotic ceiling
-// that Cycle-3 Wave 4 exists to defend. A 12-settlement realm goes from ~11
-// authored edges to 66.
+// "scanOps grew 3.320x (1007 -> 3343) when S doubled (> 2.6)". The reason was
+// structural: B1's default CONNECTED EVERY PAIR, so the regional graph became
+// COMPLETE and its edge count C(S,2) — quadratic in settlements.
 //
-// So realm-wide lighting is a PERFORMANCE-ARCHITECTURE decision (owner-gated),
-// not a flag flip. The shapes worth pricing first: cap the default to a bounded
-// neighbourhood (k-nearest by travel cost) rather than the full clique; or make
-// the default edge a lighter, non-scanned class the hot indices skip. Until one
-// is chosen and measured, the flag stays dark and the engine keeps its ceiling.
-// (The T5 charter flags were also lit only at "the single declared golden
-// boundary" — the ONE REGEN batch — so a mid-wave lighting would be off-sequence
-// regardless.)
+// B1b (2026-07-31) FIXED THE POPULATION AND RE-MEASURED. The pair selection is now
+// k-NEAREST (k=3, region/neutralNeighbourEdges.js), and the edge population is
+// LINEAR: the selection takes 6 / 16 / 31 pairs at S = 4 / 8 / 16 against a
+// complete graph's 6 / 28 / 120, always within S·k. THE RATCHET IS STILL RED WHEN
+// LIT — measured on the same fixture, 12 ticks, full_simulation rules:
+//     dark            scanOps 1205 / 2521 /  5893   ratios 4→8 2.092  8→16 2.338
+//     lit  k-nearest  scanOps 1007 / 3918 / 10266   ratios 4→8 3.891  8→16 2.620
+//     lit  all-pairs  scanOps 1001 / 3315 / 11913   ratios 4→8 3.312  8→16 3.594
+// So k-nearest genuinely beats all-pairs where the asymptote lives (8→16: 2.620 vs
+// 3.594, with 46 edges instead of 128), yet no lit window clears the 2.6 ceiling.
+// The 4→8 window in particular is STRUCTURALLY UNWINNABLE while J-D2 requires the
+// default to be COMPLETE at S <= 4: the lit S=4 fixture is already saturated (7 → 8
+// edges, +1) while lit S=8 gains +9, so lighting can only inflate that ratio, no
+// matter how small k is. The ceiling itself is a 4→8 calibration against the DARK
+// fixture's density, not a scale-free law — the dark ratio climbs too (2.092 →
+// 2.338 at 8→16).
+//
+// Realm-wide lighting therefore remains a PERFORMANCE-ARCHITECTURE decision
+// (OWNER-GATED): it requires re-calibrating what tickScanBudget measures — either
+// a window/ceiling that admits the lit density, or the remaining unpriced shape
+// (make the default edge a lighter class the hot indices skip, so a defaulted pair
+// costs nothing until it evolves). Until one is chosen and measured, the flag
+// stays dark and the engine keeps its ceiling. (The T5 charter flags were also lit
+// only at "the single declared golden boundary" — the ONE REGEN batch — so a
+// mid-wave lighting would be off-sequence regardless.)
 //
 // KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
 // so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —

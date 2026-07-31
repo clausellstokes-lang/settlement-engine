@@ -171,6 +171,27 @@ export const NAV = Object.freeze(
     .sort((a, b) => a.order - b.order),
 );
 
+/**
+ * THE CREATE FLOW — which destination each nav tab FEEDS. Create feeds the
+ * Library (a forged settlement is kept there); the Library feeds the Realm (a
+ * kept settlement is placed on the map). This is nav metadata, so it lives
+ * beside NAV rather than inside the chrome that draws it — one place declares
+ * the sequence, every surface reads it.
+ *
+ * THE ADJACENCY GUARD (why this is a relation, not an ordering): the chrome
+ * draws a flow chevron ONLY when the successor named here is the tab actually
+ * rendered next ON THAT SURFACE. The desktop ribbon runs Welcome · Create ·
+ * Library · Realm, so both chevrons draw; the mobile bottom nav omits Realm
+ * (Gallery follows Library there), so Library draws none. An arrow pointing at
+ * the wrong neighbour teaches a false lesson about where the work goes.
+ * See components/nav/NavFlowArrow.jsx.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const NAV_FLOW = Object.freeze({
+  generate: 'settlements',
+  settlements: 'realm',
+});
+
 /** True if `view` is a declared view id. */
 export function isKnownView(view) {
   return Object.prototype.hasOwnProperty.call(VIEW_TO_ROUTE, view);

@@ -145,15 +145,18 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
 
   const byId = new Map(settlements.map(item => [String(item.id), item]));
   // THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2) — the campaign-connect
-  // seam. Every pair of PARTICIPATING campaign members (the canon settlements this
-  // snapshot carries — exactly the world the kernels simulate) that has no edge yet
-  // gets the neutral, channel-less default edge, so the relationship layer has a
-  // substrate instead of an edgeless graph. Explicit relationships always win.
+  // seam. Each PARTICIPATING campaign member (the canon settlements this snapshot
+  // carries — exactly the world the kernels simulate) gets a neutral, channel-less
+  // default edge to its K NEAREST fellows, so the relationship layer has a substrate
+  // instead of an edgeless graph. Explicit relationships always win. `state` is
+  // threaded because "nearest" reads the world's FROZEN spatial canon when it has one
+  // (aspatial realms fall back to the codepoint-rank line); the selection is the
+  // amended J-D2 — complete at S <= 4, bounded by S·k at realm scale.
   // DORMANT behind the virtual `neutralNeighborsEnabled`: absent ⇒ this is the SAME
   // graph object ensureRegionalGraphOnce returned, so the snapshot is byte-identical
   // to the pre-wire engine by object identity — every dark world, every golden.
   const graph = neutralNeighboursActive(state)
-    ? withNeutralNeighbourEdges(ensuredGraph, settlements.map(item => String(item.id)))
+    ? withNeutralNeighbourEdges(ensuredGraph, settlements.map(item => String(item.id)), state)
     : ensuredGraph;
   return {
     campaign,

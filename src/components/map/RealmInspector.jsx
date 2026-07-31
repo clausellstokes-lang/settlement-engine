@@ -1,6 +1,6 @@
 /**
  * RealmInspector.jsx — THE HERALD (owner doctrine 2026-07-22, THE REALM INSPECTOR =
- * NEWSPAPER). The Realm's right-dock rail, rebuilt as a seven-section newspaper.
+ * NEWSPAPER). The Realm's right-dock rail, rebuilt as a newspaper.
  *
  * THE PAPER (seven news doors): Dashboard (front page + prose session-prep) · War ·
  * Faith · Trade · Events · Divination (the forecast) · Adjudication (the decisions
@@ -9,6 +9,13 @@
  * Chronicle CONTENT distributes into the topical doors via the routing table
  * (heraldFeed). History is a LENS, not a door — the time-lens toggle (this advance /
  * whole campaign) rides the chrome and scopes every report door.
+ *
+ * THE REGISTERS (W-C, owner directive 5 / J-D5): Gazetteer (the living roster) ·
+ * Ruins & Remembrance (the graveyard). They sit AFTER the paper because they are
+ * not news: the paper reports what happened, the registers report what is there
+ * and what is gone. Both bodies are lazy leaves (HeraldBody) over one read model
+ * (heraldRegister), and neither is stocked by the routing table — so the tab
+ * badges deliberately skip them (UNCOUNTED_SECTIONS below).
  *
  * THE DESK (tools, kept OUT of the paper): Stage the Road + the Timelapse scrubber
  * move to a compact tools strip in the chrome; their panels are unchanged.
@@ -19,7 +26,7 @@
  */
 
 import { Suspense, useCallback, useMemo, useEffect, useRef, useState } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, ScrollText, Landmark, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
@@ -61,10 +68,16 @@ import TimelapsePanel from './TimelapsePanel.jsx';
 export const HERALD_TITLE = 'The Herald';
 
 /**
- * The seven news doors, in reading order. Unlike the old inspector, none self-hides:
+ * The Herald's doors, in reading order. Unlike the old inspector, none self-hides:
  * a deity-free realm's Faith door shows its empty state (not a broken block), an
  * un-warred realm's War door shows peace. The old conditional tabs (pantheon /
  * treaty / resolve) fold their self-hide into the door body's empty/flag handling.
+ *
+ * W-C (owner directive 5 / J-D5) adds the two REGISTER doors at the end. They are
+ * not report doors: the seven-door paper answers "what happened", the registers
+ * answer "what is there" (Gazetteer) and "what is gone" (Ruins & Remembrance).
+ * Both are gated exactly like their siblings — always present, the body carries
+ * the no-campaign and nothing-yet states — so a door never appears disabled.
  */
 export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard',    label: 'Dashboard',    Icon: LayoutDashboard },
@@ -74,7 +87,15 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'events',       label: 'Events',       Icon: CalendarClock },
   { id: 'divination',   label: 'Divination',   Icon: Eye },
   { id: 'adjudication', label: 'Adjudication', Icon: Gavel },
+  { id: 'gazetteer',    label: 'Gazetteer',    Icon: ScrollText },
+  { id: 'remembrance',  label: 'Ruins & Remembrance', Icon: Landmark },
 ]);
+
+/** Doors the section-filed feed does not stock, so a narrowing filter must NOT
+ *  badge them with a count: a "0" beside Gazetteer would be a lie about a
+ *  register that is full. Dashboard and Adjudication have always been in this
+ *  set; the two W-C registers join it. */
+const UNCOUNTED_SECTIONS = new Set(['dashboard', 'adjudication', 'gazetteer', 'remembrance']);
 
 /** G-4a's task-oriented doors. Their IDs are accepted only while the internal
  *  migration flag is active; every established section ID remains an alias. */
@@ -472,7 +493,7 @@ export default function RealmInspector({
               Icon={s.Icon}
               count={commandBriefOn
                 ? (commandCounts[s.id] ?? 0)
-                : narrowing && s.id !== 'dashboard' && s.id !== 'adjudication'
+                : narrowing && !UNCOUNTED_SECTIONS.has(s.id)
                   ? (filtered.counts[s.id] ?? 0)
                   : null}
               onClick={() => {

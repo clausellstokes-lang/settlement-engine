@@ -44,6 +44,11 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // P100 — pipeline reveal overlay (tiny, but stays lazy so non-generating
 // surfaces don't pay for the playback animator).
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
+// THE WORKFLOW BLOCK — the generation-steps rail that sits ahead of the film
+// block below. Lazy for the same reason the drawer's copy is: the Create page is
+// a first-paint surface, and the wizard chunk must not statically re-absorb the
+// rail's import graph (stepMetadata / trace / simulationSpine).
+const PipelineRail = lazy(() => import('./PipelineRail.jsx'));
 // LAZY on purpose: this wizard is a first-paint surface, and the lock controls are
 // only meaningful once a settlement exists. The dossier tabs import the same leaf
 // statically from inside their own lazy chunks, so this costs a shared chunk, not
@@ -489,6 +494,30 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         >
           {generateError}
         </ClerkNote>
+      )}
+
+      {/* THE WORKFLOW BLOCK (owner directive, 2026-07-31) — the generation-steps
+          rail, restored to the Create-page seat it lost when the dossier's dead
+          Simulation tab was excised (3176e22d), and seated IMMEDIATELY BEFORE the
+          film block below on BOTH breakpoints (this column is the shared
+          desktop/mobile order — nothing here is breakpoint-forked).
+
+          It reads the SAME store pipelineHistory the reveal plays back — the
+          engine's own onStep receipts — so every label comes from the step
+          registry through metaForStep and fills in as a run's steps land; no
+          label list is forked here. `compact` holds it to the legibility law's
+          glance register, and the rail self-hides until a run has produced
+          history, so the pre-generation and recall states are untouched.
+
+          The wait is NARRATED rather than silent (the witnessed-wait ratchet):
+          this block occupies real space above the film, so a null boundary would
+          be a perceptible hole. */}
+      {settlement && (
+        <Suspense fallback={<div style={{ padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xxs }}>Retracing how this settlement was forged…</div>}>
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+            <PipelineRail compact />
+          </div>
+        </Suspense>
       )}
 
       {/* P100 — pipeline reveal overlay. Renders only when the flag is on,

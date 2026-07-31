@@ -117,6 +117,8 @@ const PRINT_DEFERRED = [
 
 /** Reaches a read-model, owns no freshness claim. Reason is mandatory. */
 const FROZEN_DEFERRED = {
+  'src/components/map/heraldRegister.js':
+    'Gazetteer register rows: prosperity is banded into ONE word inside a glance sentence ("A prosperous town, at peace") — a register makes no freshness claim, and every row entity-links straight into the settlement dossier where the COVERED surfaces own the note. A second note per roster row would be noise, not honesty.',
   'src/components/OutputContainer.jsx':
     'Routing only: hands s.availableServices to ServicesTab as a prop. The covered child owns the note; a second one here would double it.',
   'src/components/ShareToGallery.jsx':
