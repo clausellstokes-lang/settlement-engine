@@ -76,6 +76,19 @@ ledger — never from a session digest.
 >   (constitutional). NEXT per owner order: soak:release (30y+100y grid) → soak:research (300y)
 >   → tuning pass over soak evidence → wave 3 programs (stripe coverage, manifest burn-down,
 >   negative-assertion burn-down, structural moves, src/lib+FMG review sweeps).
+> - 2026-07-31 (⛔ OWNER STOP + HANDOFF NOTICE): building STOPS after the in-flight
+>   wave C; owner may hand off to another account. A SUCCESSOR RESUMES FROM: (1) this
+>   ledger's newest rows; (2) minifold docs/DESIGN_REALM_DIRECTIVES.md Progress
+>   blockquote (the stop order + full held-queue state is recorded there); (3) the
+>   soak receipts in minifold artifacts/soak/ (release cases + the research 300y when
+>   it lands; the FAILED 100y×4s receipt is the zombie-cure evidence — the cure is
+>   committed @ 6f74870e, its proof rerun HELD). LANDED TODAY on composite-r4:
+>   verified-fix waves (14 commits), zombie cure, realm-directive waves A+B
+>   (45600de6/3183b3b9/260ddb7d), five architecture docs (realm directives ×9,
+>   cartography, NPC consequences, brokerages, route lifecycle). HELD: waves C-gate+
+>   commit (in flight at order time), then D..J, W-H/W-I/W-J, TC-0..8, cure-proof
+>   rerun, subsystem-certification build (parked 9-agent script), tuning pass.
+>   Owner-physical tail unchanged (migration train, walk, pushes, legal).
 > - 2026-07-31: THE SOAK LADDER + THE ZOMBIE CURE. Owner-ordered 30/100/300y soak
 >   (full_simulation, everything lit): scale sweep + BOTH 30y×12s seeds fully green (byte-identical
 >   30y replays, worker==direct hashes, bounded perturbation 0→0.08/30y, divergent fates, 4-majors
