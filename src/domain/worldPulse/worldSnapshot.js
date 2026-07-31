@@ -1,6 +1,7 @@
 import { deriveCausalState } from '../causalState.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { ensureRegionalGraphOnce } from '../region/graph.js';
+import { neutralNeighboursActive, withNeutralNeighbourEdges } from '../region/neutralNeighbourEdges.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { isCanonSave } from '../campaign/canon.js';
 import { ensureWorldState } from './worldState.js';
@@ -97,7 +98,7 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
   // is skipped and the SAME graph object is returned. Byte-neutral (brand ⟺ normalized-and-
   // unmodified; unbranded graphs still get a full ensure — worst case a redundant normalize, never
   // a stale one), proven by the Wave-4 byte-identity receipt.
-  const graph = ensureRegionalGraphOnce(regionalGraph || campaign?.regionalGraph || {});
+  const ensuredGraph = ensureRegionalGraphOnce(regionalGraph || campaign?.regionalGraph || {});
   const state = ensureWorldState(worldState || campaign?.worldState, campaign);
   const canonSaves = (saves || [])
     .filter(save => ids.has(saveId(save)))
@@ -143,6 +144,17 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
   });
 
   const byId = new Map(settlements.map(item => [String(item.id), item]));
+  // THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2) — the campaign-connect
+  // seam. Every pair of PARTICIPATING campaign members (the canon settlements this
+  // snapshot carries — exactly the world the kernels simulate) that has no edge yet
+  // gets the neutral, channel-less default edge, so the relationship layer has a
+  // substrate instead of an edgeless graph. Explicit relationships always win.
+  // DORMANT behind the virtual `neutralNeighborsEnabled`: absent ⇒ this is the SAME
+  // graph object ensureRegionalGraphOnce returned, so the snapshot is byte-identical
+  // to the pre-wire engine by object identity — every dark world, every golden.
+  const graph = neutralNeighboursActive(state)
+    ? withNeutralNeighbourEdges(ensuredGraph, settlements.map(item => String(item.id)))
+    : ensuredGraph;
   return {
     campaign,
     worldState: state,

@@ -238,6 +238,35 @@ const ONE_REGEN = Object.freeze({
   roadsEnabled: true,
 });
 
+// ── THE NEUTRAL-CONNECTED DEFAULT (realm directive 2 / J-D2, 2026-07-31) ────
+// `neutralNeighborsEnabled` is a VIRTUAL flag of the same class as WAVES /
+// ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
+// `=== true` at its single seam (region/neutralNeighbourEdges.js, wired into
+// buildWorldSnapshot). Lit, it gives every un-linked pair of campaign members a
+// neutral, channel-less regional edge, which RAISES cross-settlement interaction
+// density by design (the small-N stasis evidence).
+//
+// DELIBERATELY LIT IN NO PRESET (recorded, not an oversight) — and the blocker
+// is ASYMPTOTIC, not merely a golden re-record. MEASURED 2026-07-31: adding
+// `neutralNeighborsEnabled: true` to the ONE_REGEN spread (so the three
+// world-alive presets carry it) REDS tests/perf/tickScanBudget.test.js —
+// "scanOps grew 3.320x (1007 -> 3343) when S doubled (> 2.6)". The reason is
+// structural: the default CONNECTS EVERY PAIR, so the regional graph becomes
+// COMPLETE and its edge count is C(S,2) — quadratic in settlements. The
+// per-advance tick indices are near-linear in EDGES, so they stay honest, but a
+// quadratic edge population drags total scan work past the asymptotic ceiling
+// that Cycle-3 Wave 4 exists to defend. A 12-settlement realm goes from ~11
+// authored edges to 66.
+//
+// So realm-wide lighting is a PERFORMANCE-ARCHITECTURE decision (owner-gated),
+// not a flag flip. The shapes worth pricing first: cap the default to a bounded
+// neighbourhood (k-nearest by travel cost) rather than the full clique; or make
+// the default edge a lighter, non-scanned class the hot indices skip. Until one
+// is chosen and measured, the flag stays dark and the engine keeps its ceiling.
+// (The T5 charter flags were also lit only at "the single declared golden
+// boundary" — the ONE REGEN batch — so a mid-wave lighting would be off-sequence
+// regardless.)
+//
 // KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
 // so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —
 // resolvable forever: old saves carry their ids, the realm toolbar chips apply
