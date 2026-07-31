@@ -69,6 +69,19 @@
 >   (5) TUNING on the new evidence (authorized). STILL HELD: TC-0..8 + wave-3
 >   programs (they do not change the simulation — the owner's rationale, applied).
 >   The currently-running pre-wave 300y soak completes as BASELINE evidence.
+> - 2026-07-31 (build era, entries as waves land): wave C @ 94ffbccc + subsystem
+>   certification @ a19d2d77 (combined gate green; 46-row registry, v5 receipts,
+>   knowledge-mover contamination + v4-hardcode + lifecycle-horizon corrections).
+>   ⛔ WAVE D BLOCKED WITH EXECUTED PROOF (PGlite probe, 4 arms + negative control):
+>   the 183 journal cannot host CREATE_ROUTE (3 hard guards; primitives are
+>   service-role-only; all no-migration fallbacks refuted on the sibling's own
+>   rationale). UNBLOCK = OWNER DECISION: authorize migration 193
+>   apply_create_route_command (bilateral one-transaction CAS + journal identity,
+>   joining the undeployed train — written, never deployed by us) or park D until
+>   after the train ships. Provenance resolution needs NO owner call: user-route
+>   marks live in config._userRoutes (the sibling's own _cutRoutes pattern,
+>   private-side); public neighbourNetwork shape untouched. Build continues: wave E
+>   next.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
