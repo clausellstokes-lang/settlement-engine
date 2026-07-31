@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-31T01:50:30.473Z",
+  "generatedAt": "2026-07-31T17:04:35.812Z",
   "entry": "src/domain/aiCharter.js",
-  "sourceHash": "d9bd86edd592c04e",
+  "sourceHash": "b20b6aa5372aea36",
   "inputs": [
     "node_modules/immer/dist/immer.mjs",
     "node_modules/seedrandom/index.js",
@@ -64,6 +64,7 @@
     "src/domain/region/deriveRegionalState.js",
     "src/domain/region/goodsCatalog.js",
     "src/domain/region/graph.js",
+    "src/domain/region/neutralNeighbourEdges.js",
     "src/domain/relationships/canonicalRelationship.js",
     "src/domain/resolveTerrain.js",
     "src/domain/roads/state.js",

@@ -236,13 +236,30 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     return !token || isPulseSessionCurrent(get, token);
   },
 
-  // Advance-scaling Stage 3: the auto-resolve toggle. Default OFF — when the
-  // multi-tick flag is ON, an Advance PAUSES at the first tick that surfaces
-  // campaign-altering MAJORS so the DM gets a say (auto-resolve ON runs straight to
-  // the end, resolving every major to recommended). With the multi-tick flag OFF
-  // this value is inert (the single-tick path never pauses), so it changes nothing
-  // in prod. UI-scoped; not persisted across reloads (a present pausedAdvance on the
-  // campaign worldState rehydrates an in-flight pause instead).
+  // Advance-scaling Stage 3 + realm directive 7 (J-D7): the auto-resolve toggle —
+  // FULL AUTO-RESOLVE MODE. Default OFF. Two things ride this ONE value, so the DM
+  // sets a play MODE rather than two half-settings:
+  //   • the multi-tick PAUSE. OFF ⇒ an Advance pauses at the first tick that
+  //     surfaces campaign-altering MAJORS so the DM gets a say; ON ⇒ it runs
+  //     straight to the end. (With the multi-tick flag OFF this half is inert —
+  //     the single-tick path never pauses.)
+  //   • the PROPOSAL DOCKET. ON ⇒ every major the advance parks as a pending
+  //     proposal is ruled immediately by the engine, through the SAME accept path
+  //     a hand-Apply uses, each ruling stamped `adjudicatedBy: 'engine_auto'`
+  //     (domain/worldPulse/autoAdjudication.js). OFF ⇒ the docket waits for the DM,
+  //     exactly as before. Engagement is decided at the single advance chokepoint
+  //     (campaignAdvanceSession.runAdvanceCampaignWorld) and requires this toggle —
+  //     an internally-derived autoResolve (the living/autonomous catch-up) never
+  //     triggers it.
+  // PERSISTED (realm directive 7 wave B): a play mode the user OWNS, not session
+  // chrome — re-picking it on every reload was the bug. It rides the store/index.js
+  // `partialize` allowlist as an additive top-level key, absent-tolerant: a blob
+  // written before this shipped rehydrates to the `false` default below, so no
+  // persist-version bump and no migrate branch is owed (the displayPrefs precedent).
+  // Registered in tests/store/lifecycleRoundTrip.test.js ZUSTAND_PERSIST_KEYS. It is
+  // NOT campaign canon — clearTransientCampaignWork leaves it alone at the auth
+  // boundary, and a present pausedAdvance on a campaign worldState still rehydrates
+  // an in-flight pause independently of it.
   advanceAutoResolve: false,
   setAdvanceAutoResolve: (value) => set(state => { state.advanceAutoResolve = !!value; }),
 

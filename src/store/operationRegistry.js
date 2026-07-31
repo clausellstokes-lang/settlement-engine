@@ -234,6 +234,15 @@ export const OPERATIONS = Object.freeze({
   // campaign; undoState 'not-applicable' because re-picking a ceiling IS the
   // inverse, and the value is outside canon entirely.
   setSceneQualityMode: { opType:'setSceneQualityMode', label:"Set the portrait quality ceiling", description:"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // Realm directive 7 (J-D7): REGISTERED, not EXEMPT, for the SAME reason as
+  // setSceneQualityMode above. It was exempt while it was session-only chrome; the
+  // full auto-resolve wave made it a PERSISTED play mode (it rides the store/index.js
+  // partialize allowlist) that also changes what an advance does to the proposal
+  // docket, so it is a real setter of durable state and belongs in the census proper.
+  // targetScope 'global' because the mode belongs to the player, not to one campaign;
+  // undoState 'not-applicable' because re-picking the mode IS the inverse and the
+  // value is outside campaign canon entirely.
+  setAdvanceAutoResolve: { opType:'setAdvanceAutoResolve', label:"Set the auto-resolve mode", description:"Chooses whether the world resolves major events on its own while time advances. When it is on, advancing time never stops to ask, and every major decision the world raises is settled by the engine and recorded as an engine ruling. When it is off, time stops at the first major decision and those decisions wait for you. The choice is remembered for this browser.", klass:'mechanical', slice:'campaignWorldPulseSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   queueEdit: { opType:'queueEdit', label:"Queue an edit", description:"Adds a single pending edit to the settlement, to be committed later. The edit can be reverted on its own.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertSingleEdit', undoState:'action' },
   revertSingleEdit: { opType:'revertSingleEdit', label:"Revert a single edit", description:"Removes one queued pending edit from the settlement.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   revertPendingEdits: { opType:'revertPendingEdits', label:"Revert all pending edits", description:"Discards every queued pending edit on the settlement without committing them.", klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
@@ -455,7 +464,10 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   setCustomSlidersExplicit: { slice: 'configSlice', reason: 'custom-chip intent; session-only UI' },
   setLoadedFromSave: { slice: 'configSlice', reason: 'loaded-from-save indicator; transient' },
   clearLoadedFromSave: { slice: 'configSlice', reason: 'clears loaded-from-save indicator; transient' },
-  setAdvanceAutoResolve: { slice: 'campaignWorldPulseSlice', reason: 'auto-resolve UI toggle; not persisted' },
+  // setAdvanceAutoResolve LEFT this list 2026-07-31 (realm directive 7, wave B): the
+  // toggle became a PERSISTED play mode that also governs proposal-docket
+  // adjudication, so it no longer earns the "excluded from the persist partialize"
+  // exemption. It is registered in OPERATIONS above.
   dismissLivingCatchUp: { slice: 'campaignWorldPulseSlice', reason: 'dismisses the while-you-were-away digest banner; transient' },
   // Entity-link hyperlink focus (master-merge W5): transient dossier-navigation
   // target, deliberately excluded from the persist partialize (uiSlice).
@@ -494,7 +506,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // the nudge-toast channel App.jsx already renders (its only call site, the F34
 // post-signup save handler, had been silently no-opping behind a typeof guard).
 // Shrink direction, per the K-D shrink-only convention.
-export const EXEMPT_CEILING = 69;
+// 69 -> 68 (realm directive 7 wave B, 2026-07-31): setAdvanceAutoResolve was ADOPTED
+// into the operation surface. Persisting the toggle (store/index.js partialize) and
+// giving it authority over proposal-docket adjudication retired its "pure-UI /
+// transient" exemption, so the ceiling falls by exactly one. Shrink direction.
+export const EXEMPT_CEILING = 68;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

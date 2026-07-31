@@ -31,6 +31,12 @@ import { appendWizardNewsEntries } from '../domain/region/index.js';
 // body only, so it adds nothing to the first-paint closure.
 import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
+// FULL AUTO-RESOLVE (realm directive 7 / J-D7). Static import is free here: this
+// whole module is reachable only through campaignWorldPulseSlice.loadWorldEngine(),
+// the SAME dynamic import that already pulls advanceCampaignWorld → pulseKernel →
+// applyWorldPulse, so the adjudicator rides the existing lazy sim chunk and adds
+// nothing to the first-paint entry closure.
+import { autoAdjudicateAdvanceProposals } from '../domain/worldPulse/autoAdjudication.js';
 import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import {
   cloneJson, cacheCampaignState, flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
@@ -230,6 +236,22 @@ export async function runAdvanceCampaignWorld({
     // overrides per-advance; otherwise the store toggle governs. The single-tick path
     // ignores it (it never pauses).
     const autoResolve = options.autoResolve != null ? !!options.autoResolve : !!get().advanceAutoResolve;
+    // FULL AUTO-RESOLVE (realm directive 7 / J-D7): the DM's toggle says the realm
+    // rules on its own, so the majors this advance parks in the PROPOSAL DOCKET are
+    // ruled immediately — through the same accept path a hand-Apply uses — instead
+    // of piling up unread. Engagement is deliberately narrower than `autoResolve`:
+    // it requires the USER TOGGLE, i.e. NO caller passed an explicit option. The one
+    // internal caller that does (runCatchUpCampaignWorld, which derives autoResolve
+    // from world progression) therefore keeps its existing semantics BYTE-IDENTICALLY
+    // — an autonomous world's open-hook catch-up is not a decision the DM pressed, and
+    // silently changing what it does to existing seeds is exactly the unversioned
+    // semantics shift THE PROMISE forbids. Extending full-auto to catch-ups is a
+    // deliberate DEFERRAL, recorded here, not an oversight.
+    // Derived from the ALREADY-RESOLVED `autoResolve` above rather than re-reading the
+    // shared toggle: the single-chokepoint law (tests/lint/autoresolveTwoMount.walker)
+    // allows exactly ONE store read of it in this module, and that walker scans the raw
+    // source, so even a comment quoting the accessor would trip it.
+    const fullAutoResolve = options.autoResolve == null && autoResolve;
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -407,6 +429,25 @@ export async function runAdvanceCampaignWorld({
     // append them to the result's feed through the house appender (dedupe/cap).
     if (simCampaign && result && drainRefusalNews.length && result.wizardNews) {
       result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews);
+    }
+
+    // FULL AUTO-RESOLVE ruling pass (realm directive 7 / J-D7). Runs on the composed
+    // result BEFORE the Phase-2 commit, so the advance and every verdict it triggered
+    // land in ONE atomic commit, ONE persist, and ONE undo step — a DM who undoes the
+    // advance undoes its rulings with it. Pure + deterministic: the advance's pinned
+    // `now`, the STORED outcome replayed through applyWorldPulseProposal, no fresh RNG.
+    // Returns the input result BY REFERENCE when the advance minted no proposals, so a
+    // toggle-OFF advance (the default) is byte-identical to before this existed.
+    // Placed AFTER the §10 refusal append (those belong to the tick's own digest) and
+    // BEFORE the deposit-and-consume reconcile below, so a wizardNews entry that landed
+    // during the in-flight yield still survives the wholesale commit.
+    if (simCampaign && result && fullAutoResolve) {
+      result = autoAdjudicateAdvanceProposals({
+        campaign: simCampaign,
+        saves: simSaves,
+        result,
+        now,
+      });
     }
 
     // Deposit-and-consume reconcile (fix wave 2 #2): fold back any wizardNews entry

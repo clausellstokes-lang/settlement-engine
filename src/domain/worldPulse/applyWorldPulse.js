@@ -1268,8 +1268,17 @@ export function applyWorldPulseOutcomes({
  * @param {any[]} [args.saves]
  * @param {string} [args.proposalId]
  * @param {string} [args.now]
+ * @param {string|null} [args.adjudicatedBy] FULL AUTO-RESOLVE provenance (realm
+ *   directive 7 / J-D7, worldPulse/autoAdjudication.js). A ruling rendered by the
+ *   ENGINE — because the DM's auto-resolve toggle said the realm rules on its own —
+ *   stamps `adjudicatedBy` onto the proposal ROW's terminal status transition, so a
+ *   retrospective read of the docket can always answer "who ruled this?". The DM's
+ *   own hand-Apply passes NOTHING: the ABSENCE of the key is the DM's signature and
+ *   the pre-existing row shape, so this whole parameter is byte-neutral when unused
+ *   (`null` ⇒ every patch below spreads an empty object). Additive + absent-tolerant:
+ *   a legacy row simply lacks the key, and no migration is owed.
  */
-export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow() } = {}) {
+export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now = wallClockNow(), adjudicatedBy = null } = {}) {
   const proposal = (campaign?.worldState?.proposals || []).find((/** @type {any} */ item) => item.id === proposalId);
   if (!proposal || proposal.status !== 'pending') return null;
   // A pre-v4 proposal can be approved before the next pulse gets a chance to
@@ -1282,7 +1291,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
         supersededAt: now,
         supersededAtTick: tick,
         supersessionReason: 'record_mode_upgrade_apply_guard',
-        updatedAt: now,
+        updatedAt: now, ...(adjudicatedBy ? { adjudicatedBy } : {}),
       }),
       campaign?.wizardNews,
     );
@@ -1312,7 +1321,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     snapshot,
     // updatedAt threaded explicitly: updateProposalStatus falls back to the
     // wall clock for it, which would break replay-identical worldState.
-    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now }),
+    worldState: updateProposalStatus(campaign.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now, ...(adjudicatedBy ? { adjudicatedBy } : {}) }),
     regionalGraph: campaign.regionalGraph,
     wizardNews: campaign.wizardNews,
     settlementMap,
@@ -1329,7 +1338,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
   // uses now records the decree's cause-edges too (flag-gated in recordProposalProvenance ⇒ byte-
   // identical when dark), so a DM-approved decree leaves a recorded-causality entry, not only pulses.
   const wasRefused = Array.isArray(result.newsEntries) && result.newsEntries.some((/** @type {NonNullable<SimSettlement['config']>} */ n) => n && n.impactKind === 'realm_verb_refused');
-  result.worldState = recordProposalProvenance(updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now }), result, campaign.worldState?.tick || proposal.tick || 0);
+  result.worldState = recordProposalProvenance(updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now, ...(adjudicatedBy ? { adjudicatedBy } : {}) }), result, campaign.worldState?.tick || proposal.tick || 0);
   return result;
 }
 

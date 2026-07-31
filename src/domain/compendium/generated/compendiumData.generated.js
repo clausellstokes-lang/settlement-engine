@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 155,
-    "exemptCount": 69,
+    "count": 156,
+    "exemptCount": 68,
     "byKlass": {
       "canon": 5,
       "macro": 44,
-      "mechanical": 106
+      "mechanical": 107
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -145,6 +145,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"undoLastPulse","label":"Undo last pulse","description":"Reverses the most recent world pulse on the campaign, rolling the living world back.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"undoLastProposalApply","label":"Undo a proposal apply","description":"Reverses the most recent applied world-pulse proposal on the campaign, restoring the world and its settlements to just before the apply. The proposal returns to pending review.","klass":"macro","slice":"campaignWorldPulseSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"setSceneQualityMode","label":"Set the portrait quality ceiling","description":"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.","klass":"mechanical","slice":"displayPrefsSlice","targetScope":"global","receiptRef":null,"undoToken":null},
+      {"opType":"setAdvanceAutoResolve","label":"Set the auto-resolve mode","description":"Chooses whether the world resolves major events on its own while time advances. When it is on, advancing time never stops to ask, and every major decision the world raises is settled by the engine and recorded as an engine ruling. When it is off, time stops at the first major decision and those decisions wait for you. The choice is remembered for this browser.","klass":"mechanical","slice":"campaignWorldPulseSlice","targetScope":"global","receiptRef":null,"undoToken":null},
       {"opType":"queueEdit","label":"Queue an edit","description":"Adds a single pending edit to the settlement, to be committed later. The edit can be reverted on its own.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":"revertSingleEdit"},
       {"opType":"revertSingleEdit","label":"Revert a single edit","description":"Removes one queued pending edit from the settlement.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"revertPendingEdits","label":"Revert all pending edits","description":"Discards every queued pending edit on the settlement without committing them.","klass":"mechanical","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},

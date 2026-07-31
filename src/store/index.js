@@ -128,6 +128,14 @@ export const useStore = create(
             // persist `version` bump and no migrate branch is owed. Deliberately
             // NOT uiSlice's userPrefs, which is the session-only bag by contract.
             displayPrefs:       state.displayPrefs,
+            // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Same
+            // additive-top-level-key discipline as displayPrefs above — persistence
+            // CONTENT, not a schema change, absent-tolerant (an older blob rehydrates
+            // to the slice's `false` default), so no persist `version` bump and no
+            // migrate branch. Deliberately NOT folded into displayPrefs: that bag is
+            // chartered for preferences about the MACHINE the user is sitting at, and
+            // this one is about how the WORLD advances.
+            advanceAutoResolve: state.advanceAutoResolve,
           }),
           // On rehydrate: always start the Create page at the mode picker.
           // (Also wipes any stale wizardMode persisted by older builds.) AND heal

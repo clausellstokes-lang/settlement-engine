@@ -114,11 +114,25 @@ import { deepClone } from '../../src/domain/clone.js';
  *  allowed to render), never world state — no domain module reads it, it is
  *  absent from `config` so it cannot reach the generator, and it is covered by
  *  mergePersistedState so a returning user missing a later-added key backfills to
- *  the shipped default instead of forking shapes. */
+ *  the shipped default instead of forking shapes.
+ *
+ *  `advanceAutoResolve` joined in the realm-directive-7 full-auto-resolve wave
+ *  (J-D7, 2026-07-31), also with a written reason. It is NOT a family moved out of
+ *  SESSION_ONLY_FAMILIES — it was never registered there; it was simply an
+ *  unpersisted slice default, and re-picking the play mode on every reload was the
+ *  defect. The reason it may persist: it is a PLAYER preference about how the world
+ *  advances, it is absent from `config` so it cannot reach the generator, it is not
+ *  campaign canon (clearTransientCampaignWork leaves it alone and no undo touches
+ *  it), and it is a bare boolean whose ABSENCE in an older blob rehydrates to the
+ *  slice's `false` default through the top-level spread — the same cohort-fork
+ *  safety `displayPrefs` gets from its explicit merge branch. */
 const ZUSTAND_PERSIST_KEYS = Object.freeze([
   'config', 'configExplicitFields',
   'institutionToggles', 'categoryToggles', 'goodsToggles', 'servicesToggles',
   'displayPrefs',
+  // Realm directive 7 (J-D7): the FULL AUTO-RESOLVE play mode. Persisted as an
+  // additive top-level key (store/index.js partialize), absent-tolerant on rehydrate.
+  'advanceAutoResolve',
 ]);
 
 /**
@@ -756,6 +770,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
     configExplicitFields: {},
     institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
     displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
+    // Realm directive 7 (J-D7): the slice default a blob written before the mode
+    // existed must rehydrate to.
+    advanceAutoResolve: false,
     someSliceMethod: () => {},
   });
 
@@ -766,10 +783,39 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       institutionToggles: { temple: true }, categoryToggles: { economy: false },
       goodsToggles: { grain: true }, servicesToggles: { svc_smith: true },
       displayPrefs: { sceneQualityMode: 'low' },
+      advanceAutoResolve: true,
     };
     const merged = mergePersistedState(JSON.parse(JSON.stringify(blob)), currentStub());
     const rePartialized = Object.fromEntries(ZUSTAND_PERSIST_KEYS.map((k) => [k, merged[k]]));
     expectByteEqual(rePartialized, blob);
+  });
+
+  // ── Realm directive 7 (J-D7): the full-auto-resolve play mode, both directions.
+  // The point of persisting it is that the mode SURVIVES a reload; the point of it
+  // being safe is that a blob written before it existed is indistinguishable from a
+  // fresh install. Both run through the REAL partialize + merge pair.
+
+  test('the full-auto-resolve mode survives the persist to rehydrate round trip', () => {
+    const merged = mergePersistedState(
+      JSON.parse(JSON.stringify({ ...currentStub(), advanceAutoResolve: true, someSliceMethod: undefined })),
+      currentStub(),
+    );
+    expect(merged.advanceAutoResolve).toBe(true);
+  });
+
+  test('a blob written BEFORE the mode existed rehydrates to the shipped default', () => {
+    // The legacy blob: every pre-directive-7 key, and no advanceAutoResolve at all.
+    const legacy = {
+      config: { ...DEFAULT_CONFIG },
+      configExplicitFields: {},
+      institutionToggles: {}, categoryToggles: {}, goodsToggles: {}, servicesToggles: {},
+      displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
+    };
+    // anchored: the sibling key proves the blob really rehydrated (not an empty merge)
+    expect(Object.hasOwn(legacy, 'advanceAutoResolve')).toBe(false);
+    const merged = mergePersistedState(legacy, currentStub());
+    expect(merged.displayPrefs).toEqual({ ...DEFAULT_DISPLAY_PREFS });
+    expect(merged.advanceAutoResolve).toBe(false);
   });
 
   // ── R-5b: the display-preference family, both directions ───────────────────

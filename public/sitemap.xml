@@ -1033,6 +1033,11 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-setadvanceautoresolve</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-queueedit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

@@ -198,11 +198,15 @@ export function collapseIntervalHistory(worldState, appendedRecords, wizardNews 
  * id-matched replace (last-write-wins), pure (returns a new array). Lets the
  * orchestrator thread tick outputs into tick inputs without importing the store
  * layer.
+ *
+ * EXPORTED for worldPulse/autoAdjudication.js, which threads the SAME fold between
+ * consecutive proposal rulings (full auto-resolve, realm directive 7). One fold,
+ * one spelling — a second id-matched merge would drift from this one silently.
  * @param {any[]} saves
  * @param {any[]} [updates]
  * @returns {any[]}
  */
-function foldUpdatesOntoSaves(saves, updates) {
+export function foldUpdatesOntoSaves(saves, updates) {
   if (!Array.isArray(updates) || updates.length === 0) return saves;
   /** @type {Map<string, any>} */
   const bySaveId = new Map();
