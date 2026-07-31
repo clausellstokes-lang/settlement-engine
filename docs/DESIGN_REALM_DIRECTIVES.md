@@ -15,6 +15,18 @@
 >   quadratic (J-D2 amended to k-NN, B1b queued). B2: full auto-resolve through the
 >   proposal accept path with engine-adjudicated provenance; toggle persists. Gate +
 >   commit in progress.
+> - 2026-07-31 (⛔ OWNER STOP ORDER): "stop all of the building after the current
+>   build as we wait for the soak. I may have to hand this off to another account."
+>   BINDING STATE FOR ANY SUCCESSOR: waves A+B COMMITTED (45600de6/3183b3b9/260ddb7d,
+>   gate-certified); wave C IN FLIGHT at order time (Herald tabs + create chrome +
+>   B1b k-NN) — it completes, gates, and commits as "the current build"; EVERYTHING
+>   AFTER IS HELD: waves D..J, W-H, W-I, TC-0..TC-8, the cure-proof rerun, the
+>   subsystem-certification build, the tuning pass — ALL WAIT on owner resume. The
+>   300y research soak (running) completes passively; its receipts + the preserved
+>   failing 100y×4s receipt are the tuning pass's evidence when resumed. The full
+>   design corpus is committed in docs/: DESIGN_REALM_DIRECTIVES (9 directives),
+>   DESIGN_TOWN_CARTOGRAPHY, DESIGN_NPC_CONSEQUENCES, DESIGN_INFORMATION_BROKERAGES,
+>   DESIGN_ROUTE_LIFECYCLE — every judgment veto-open, every wave sliced.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
