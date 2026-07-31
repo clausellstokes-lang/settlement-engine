@@ -34,6 +34,17 @@
 >   design corpus is committed in docs/: DESIGN_REALM_DIRECTIVES (9 directives),
 >   DESIGN_TOWN_CARTOGRAPHY, DESIGN_NPC_CONSEQUENCES, DESIGN_INFORMATION_BROKERAGES,
 >   DESIGN_ROUTE_LIFECYCLE — every judgment veto-open, every wave sliced.
+> - 2026-07-31 (owner amends the boundary: "do everything up to Tuning after this"):
+>   AUTHORIZED after wave C commits — in order: (1) the subsystem-certification build
+>   (the parked 9-agent workflow; its receipt-schema v5 lands first so later runs
+>   emit richer evidence), gated + committed; (2) the soak-harness remnant amendment
+>   (the population>0 assertion learns that a properly-died settlement legitimately
+>   holds zero people — ships as the cure's companion, per the recorded
+>   reconciliation); (3) the FULL release-profile soak rerun — one run serves three
+>   purposes: the zombie-cure proof on the previously-failing 100y×4s cell, the
+>   never-run 100y×12s sibling, and v5-instrumented receipts across the whole grid.
+>   STILL HELD: the tuning pass and everything after it (waves D..K, TC, wave-3
+>   programs). DESIGN_MAGIC_ECONOMY.md joined the corpus (6 architecture docs).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
