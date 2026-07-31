@@ -188,6 +188,17 @@
   shocks); (i) this gives supply-web warfare its true target — cutting a route now
   severs a named material artery, and the war layer's interdiction reasoning reads
   the same flow ledger the charter events write.
+  **AMENDED 2026-07-31 (owner: incorporate military + population movement):** the
+  corridor demand ledger carries THREE NAMED FLOW CLASSES, each with its own weight
+  band: (j) GOODS/SERVICES (as above); (k) POPULATION — migration flows WEAR PATHS
+  (desire-path mechanic: a booming settlement's inflow literally paves its roads;
+  roamer and mid-route traffic count as informal flow); (l) MILITARY — deployments
+  and mobilization corridors accumulate strategic demand; powers may charter MILITARY
+  ROADS (a distinct charter flavor with its own address-chain attribution: the
+  Crown's road, not the Guild's), and a militarily critical route RESISTS DECAY while
+  strategic need persists even after trade dies (the garrison-road asymmetry — the
+  war layer writes strategic need into the same ledger). Charter events name their
+  dominant flow class so every road tells its origin story.
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
