@@ -112,6 +112,23 @@ the system term, not endpoint health alone). REALM SELF-SUFFICIENCY becomes a
 measured metric: emitted per-pulse into the behavioral observation (certification +
 soak envelope: monotone improvement absent shocks).
 
+## 5b. SAFETY VS GREED (owner amendment 2026-07-31)
+
+Danger is a first-class term in the objective: corridor cost is DANGER-ADJUSTED using
+the M1 danger re-score vocabulary the army planner already speaks (war fronts,
+occupation, monster threat, banditry pressure) — and routing reads BELIEVED danger
+through knownWorld (the roads engine's law: route by the known picture, roll outcomes
+against truth — a corridor FEARED dangerous suppresses charters even when safe, and
+vice versa; the epistemics layer prices safety). EMBATTLED REGIONS: active war zones
+defer charters (the slow lifecycle waits out the fast layer) and step up effective
+cost on existing edges without removing them (Law 4). THE GREED OVERRIDE: a corridor
+whose profit margin clears the RISK PREMIUM band charters anyway — traders' greed
+carries roads through danger, at a price: dangerous-route flows carry loss rates that
+feed back into the ledger (greed that keeps losing caravans eventually reads as
+unmet demand again, and the road starves honestly). SMUGGLER EXTREME: hidden-path
+traffic tolerates danger at the steepest premium — the dangerous goods take the
+overgrown road. All bands tunable (RISK_PREMIUM, danger weights, embattled deferral).
+
 ## 6. CHARTER (formation) — demand-then-event
 
 When a corridor's accumulated demand crosses the formation threshold (per dominant
