@@ -43,6 +43,10 @@
    position; rejection possible on alignment/archetype/history conflict. The vacated
    slot refills shortly after with a roaming/random NPC whose traits are MARGINALLY
    biased toward the settlement's state (noticeable at scale only).
+   AMENDED 2026-07-31: on SETTLEMENT DESTRUCTION (the terminal-death lane), every named
+   NPC becomes roaming BY DEFAULT — durable id minted at dispersal, reputation intact —
+   except rival-compromised NPCs, who additionally retain the turncoat option. Roaming
+   is a state, never a fate: the never-resolve-fates law holds at the grave's edge.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
