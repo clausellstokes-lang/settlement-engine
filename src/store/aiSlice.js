@@ -20,7 +20,16 @@
  * AI features are gated by credits (creditsSlice), not account tier.
  */
 
-import { saves as savesService } from '../lib/saves.js';
+// THE ONE ai_data LANE. Every narrative write below goes through the durable
+// outbox (campaignSliceShared.persistSaveUpdate), never savesService.update
+// directly: the outbox keys its op on the DB COLUMN SET, so two racing ai_data
+// writes for one save supersede rather than race, an in-flight stale write can
+// never land over a fresher one, and an offline write parks + retries + survives
+// a tab close instead of vanishing into a local catch. persistSaveUpdate never
+// throws and never rejects — it resolves the FIRST attempt's outcome as a
+// boolean, so each site below reports `false` the way its old catch reported an
+// error, and the retry keeps running underneath.
+import { persistSaveUpdate } from './campaignSliceShared.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel, isFastModelPreference } from '../config/pricing.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -470,21 +479,19 @@ export const createAiSlice = (set, get) => ({
         });
       }).catch(() => {});
 
-      // Persist the refined narrative + mode flip to the saved settlement.
-      // Generation succeeded — don't let a persist error lose what the user just paid for.
-      try {
-        const existingEntry = get().savedSettlements.find(s => s.id === saveId);
-        const aiData = buildAiDataBlob(existingEntry?.aiData, {
-          aiSettlement:         result,
-          aiDailyLife:          get().aiDailyLife,
-          narrativeMode:        'narrated',
-          narrativeGeneratedAt: new Date().toISOString(),
-          narrativeSourceFingerprint: sourceFingerprint,
-        });
-        await savesService.update(saveId, { aiData });
-        get().updateSavedSettlement(saveId, { aiData });
-      } catch (persistErr) {
-        console.error('Failed to persist narrative to save:', persistErr);
+      // Persist the refined narrative + mode flip to the saved settlement. The
+      // local mirror commits FIRST and the outbox catches up, so what the user
+      // just paid for is on screen in one frame and durable underneath.
+      const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+      const aiData = buildAiDataBlob(existingEntry?.aiData, {
+        aiSettlement:         result,
+        aiDailyLife:          get().aiDailyLife,
+        narrativeMode:        'narrated',
+        narrativeGeneratedAt: new Date().toISOString(),
+        narrativeSourceFingerprint: sourceFingerprint,
+      });
+      get().updateSavedSettlement(saveId, { aiData });
+      if (!(await persistSaveUpdate(saveId, { aiData }))) {
         set(state => { state.aiError = 'Narrative generated but save failed — it may not persist across sessions.'; });
       }
 
@@ -686,19 +693,16 @@ export const createAiSlice = (set, get) => ({
 
       // Persist daily-life prose to the saved settlement. Mode flips to 'narrated'
       // if either narrative OR daily life exists.
-      try {
-        const existingEntry = get().savedSettlements.find(s => s.id === saveId);
-        const aiData = buildAiDataBlob(existingEntry?.aiData, {
-          aiSettlement:         get().aiSettlement,
-          aiDailyLife:          result,
-          narrativeMode:        'narrated',
-          narrativeGeneratedAt: existingEntry?.aiData?.narrativeGeneratedAt || new Date().toISOString(),
-          narrativeSourceFingerprint: get().aiSourceFingerprint || settlementFingerprint(settlement),
-        });
-        await savesService.update(saveId, { aiData });
-        get().updateSavedSettlement(saveId, { aiData });
-      } catch (persistErr) {
-        console.error('Failed to persist daily-life to save:', persistErr);
+      const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+      const aiData = buildAiDataBlob(existingEntry?.aiData, {
+        aiSettlement:         get().aiSettlement,
+        aiDailyLife:          result,
+        narrativeMode:        'narrated',
+        narrativeGeneratedAt: existingEntry?.aiData?.narrativeGeneratedAt || new Date().toISOString(),
+        narrativeSourceFingerprint: get().aiSourceFingerprint || settlementFingerprint(settlement),
+      });
+      get().updateSavedSettlement(saveId, { aiData });
+      if (!(await persistSaveUpdate(saveId, { aiData }))) {
         set(state => { state.aiError = 'Daily life generated but save failed — it may not persist across sessions.'; });
       }
     } catch (e) {
@@ -908,19 +912,16 @@ export const createAiSlice = (set, get) => ({
 
       // Persist the evolved narrative. Daily life is carried through
       // unchanged — progression v1 doesn't touch it.
-      try {
-        const existingEntry = get().savedSettlements.find(s => s.id === saveId);
-        const aiData = buildAiDataBlob(existingEntry?.aiData, {
-          aiSettlement:         result,
-          aiDailyLife:          get().aiDailyLife,
-          narrativeMode:        'narrated',
-          narrativeGeneratedAt: new Date().toISOString(),
-          narrativeSourceFingerprint: sourceFingerprint,
-        });
-        await savesService.update(saveId, { aiData });
-        get().updateSavedSettlement(saveId, { aiData });
-      } catch (persistErr) {
-        console.error('Failed to persist progression to save:', persistErr);
+      const existingEntry = get().savedSettlements.find(s => s.id === saveId);
+      const aiData = buildAiDataBlob(existingEntry?.aiData, {
+        aiSettlement:         result,
+        aiDailyLife:          get().aiDailyLife,
+        narrativeMode:        'narrated',
+        narrativeGeneratedAt: new Date().toISOString(),
+        narrativeSourceFingerprint: sourceFingerprint,
+      });
+      get().updateSavedSettlement(saveId, { aiData });
+      if (!(await persistSaveUpdate(saveId, { aiData }))) {
         set(state => { state.aiError = 'Progression generated but save failed — it may not persist across sessions.'; });
       }
 
@@ -1040,9 +1041,9 @@ export const createAiSlice = (set, get) => ({
 
     const nextAiData = { ...(entry.aiData || {}), chronicle: nextChronicle };
     get().updateSavedSettlement(saveId, { aiData: nextAiData });
-
-    try { await savesService.update(saveId, { aiData: nextAiData }); }
-    catch (e) { console.error('Failed to persist chronicle entry:', e); }
+    // Non-fatal by contract: a first-attempt failure is reported by the outbox
+    // runner (console warn + campaignSyncError) and the op retries on its own.
+    await persistSaveUpdate(saveId, { aiData: nextAiData });
   },
 
   updateDossierNotes: async (saveId, notes = {}) => {
@@ -1056,11 +1057,12 @@ export const createAiSlice = (set, get) => ({
     };
     const nextAiData = buildAiDataBlob(entry.aiData, { dossierNotes });
     get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    try {
-      await savesService.update(saveId, { aiData: nextAiData });
-    } catch (e) {
-      console.error('Failed to persist dossier notes:', e);
-      throw e;
+    // The ONE ai_data writer that rejects: NotesTab shows a retry affordance off
+    // this rejection (its catch is load-bearing). The outbox still holds the
+    // write and retries it, so the rejection now means "not landed yet", not
+    // "lost" — the local draft text and the queued op both survive.
+    if (!(await persistSaveUpdate(saveId, { aiData: nextAiData }))) {
+      throw new Error('Dossier notes did not reach the cloud on this attempt; the write is queued for retry.');
     }
     return dossierNotes;
   },
@@ -1081,8 +1083,8 @@ export const createAiSlice = (set, get) => ({
 
   /**
    * Pin an NPC on a save so regenerations don't rewrite it. No-op if already
-   * pinned. Persists through savesService; a persist failure is logged but
-   * leaves the in-memory pin in place (same policy as cosmetic rename).
+   * pinned. Persists through the ai_data outbox lane; a failed first attempt
+   * leaves the in-memory pin in place and retries (same policy as cosmetic rename).
    */
   pinNpc: async (saveId, npcId) => {
     if (!saveId || npcId == null) return;
@@ -1093,8 +1095,7 @@ export const createAiSlice = (set, get) => ({
     if (current.some(x => String(x) === key)) return; // already pinned
     const nextAiData = { ...(entry.aiData || {}), pinnedNpcs: [...current, key] };
     get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    try { await savesService.update(saveId, { aiData: nextAiData }); }
-    catch (e) { console.error('Failed to persist pinNpc:', e); }
+    await persistSaveUpdate(saveId, { aiData: nextAiData });
   },
 
   /**
@@ -1110,8 +1111,7 @@ export const createAiSlice = (set, get) => ({
     if (next.length === current.length) return; // not pinned; nothing to do
     const nextAiData = { ...(entry.aiData || {}), pinnedNpcs: next };
     get().updateSavedSettlement(saveId, { aiData: nextAiData });
-    try { await savesService.update(saveId, { aiData: nextAiData }); }
-    catch (e) { console.error('Failed to persist unpinNpc:', e); }
+    await persistSaveUpdate(saveId, { aiData: nextAiData });
   },
 
   /**
@@ -1185,16 +1185,9 @@ export const createAiSlice = (set, get) => ({
       });
     }
     get().updateSavedSettlement(saveId, { aiData: nextAiData });
-
-    try {
-      await savesService.update(saveId, { aiData: nextAiData });
-    } catch (e) {
-      console.error('Failed to persist cosmetic rename to ai_data:', e);
-      // Non-fatal: in-memory state is correct, next save-triggered update
-      // will retry. We don't surface an aiError because the rename DID
-      // succeed from the user's perspective — only the cross-session
-      // persistence is at risk.
-    }
+    // Non-fatal: in-memory state is correct and the outbox owns the retry, so no
+    // aiError is surfaced — the rename DID succeed from the user's perspective.
+    await persistSaveUpdate(saveId, { aiData: nextAiData });
   },
 
   /**
@@ -1250,11 +1243,11 @@ export const createAiSlice = (set, get) => ({
         state.aiError          = null;
       });
     }
-    try {
-      await savesService.update(saveId, { aiData });
-      get().updateSavedSettlement(saveId, { aiData });
-    } catch (e) {
-      console.error('Failed to persist revert-to-raw:', e);
+    // Local mirror first (it used to sit INSIDE the try, after the await, so a
+    // failed cloud write left the cached row still carrying the reverted-away
+    // prose while the durable write was queued to remove it — the two disagreed).
+    get().updateSavedSettlement(saveId, { aiData });
+    if (!(await persistSaveUpdate(saveId, { aiData }))) {
       set(state => { state.aiError = 'Reverted in view but save failed — it may persist on reload.'; });
     }
   },

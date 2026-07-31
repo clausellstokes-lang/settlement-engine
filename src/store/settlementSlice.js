@@ -107,7 +107,7 @@ import {
   visibleSettlementIdsForCampaign, _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession, snapshotSettlement, loadSettlementContentRuntimeOptions,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys, snapshotTargetMissingRefusal,
-  sectionLocked, carryLockedSections, geographyLockedConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo } from './settlementSliceHelpers.js';
+  sectionLocked, carryLockedSections, geographyLockedConfig, foldRegeneratedRoster, remapLocksAfterGenerate, persistLocksToActiveSave, planTimelineUndo, bindActiveSaveId } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -500,22 +500,24 @@ export const createSettlementSlice = (set, get) => ({
   // Saved-settlement timelines persist immediately through the normal
   // save service (`version_history` in Supabase, `versionHistory` locally).
   //
-  // Unsaved draft timelines are SESSION-ONLY and DO NOT TRANSFER at the
-  // save-to-library transition — the earlier "until the settlement itself is
-  // saved" wording promised a hand-off that has never existed. Save-to-library
-  // mints the row with `versionHistory: []` (lib/saves.js), and the draft
-  // timeline stays in `draftVersionHistory` until the identity reset drops it.
-  // Nothing misfires when it goes: setting activeSaveId flips the pending-edit
-  // owner scope from `draft:` to `save:` (domain/pendingEditIntents.js), so
-  // every draft-owned undo receipt is filtered out rather than resolved against
-  // an empty saved timeline — the affordance disappears, it never errors.
+  // Unsaved draft timelines TRANSFER at the save-to-library transition (owner
+  // ruling, 2026-07-30 — this closed the deferral recorded here, which asked
+  // whether a pre-save snapshot may be reverted to after saving; it may, and
+  // revertToSnapshot's own pre-revert checkpoint keeps that non-destructive).
+  // Save-to-library still mints the row with `versionHistory: []` (lib/saves.js);
+  // the hand-off happens one step later, inside setActiveSaveId — the store
+  // action all four create chokepoints already call — so the timeline lands on
+  // the new row and `draftVersionHistory` is cleared in the same commit. The
+  // mechanism, its transition gate, and why it writes through persistSaveUpdate
+  // rather than the patch writer live on bindActiveSaveId in
+  // settlementSliceHelpers.js.
   //
-  // DELIBERATELY DEFERRED — documented, not a bug to re-find. Carrying the
-  // timeline across would need each of the three save chokepoints (the wizard
-  // button, the dossier purchase rung, the post-signup SAVE_SETTLEMENT intent)
-  // to put it in the create payload, and it asks a product question this lane
-  // cannot answer: a draft snapshot predates the save, so a post-save revert to
-  // one would rewrite the freshly saved row with pre-save content. Owner call.
+  // What the hand-off deliberately does NOT carry: the draft's pending-edit undo
+  // receipts. Setting activeSaveId flips the pending-edit owner scope from
+  // `draft:` to `save:` (domain/pendingEditIntents.js), so a draft-owned receipt
+  // is filtered out rather than resolved — the affordance disappears, it never
+  // errors, and the snapshots it would have pointed at are now in the save's
+  // timeline where the Versions tab can reach them.
 
   /** @param {{saveId?: string|null, kind?: string, label?: string, ts?: number}} opts */
   recordSnapshot: (opts = {}) => {
@@ -1134,8 +1136,16 @@ export const createSettlementSlice = (set, get) => ({
       // has no branch for them, so it tags every one 'generated'/'draft' and
       // both canon-aware modes preserve nothing). Curing that needs an identity
       // scheme minted for the purpose — an owner decision, not oversight.
-      const history = eng.regenHistoryPipeline(settlement, cfg);
-      set(s => { s.settlement.history = history; });
+      //
+      // THE SEED FOLD [generators-pipeline-5, closed 2026-07-30]. The pipeline now
+      // returns settlement-ROOT parts, exactly like the npcs branch above, so the
+      // seed it minted lands at the settlement root and a persisted history reroll
+      // is replayable (`regenHistoryPipeline(settlement, cfg, { seed: _regenSeed })`).
+      // Root, never `history._regenSeed`: the DM-share gallery strip is a top-level
+      // KEY list (migration 121 + publicSafe.js), so only the root spelling is
+      // covered, and the history blob stays shape-identical to a generated one.
+      const { history, _regenSeed } = eng.regenHistoryPipeline(settlement, cfg);
+      set(s => { s.settlement.history = history; s.settlement._regenSeed = _regenSeed; });
     }
 
     // Compute the delta against the post-regen settlement.
@@ -1248,19 +1258,26 @@ export const createSettlementSlice = (set, get) => ({
    * all three: the exit dialog stops mis-warning, the rung advances to
    * 'unpurchased', and the now-absent save-first button cannot be re-clicked.
    *
-   * DELIBERATELY MINIMAL (byte constitution): this stamps ONLY activeSaveId — the
-   * load-bearing state for the fix — and does NOT upsert a full savedSettlements
-   * cache row. The full-row upsert the finding sketched would add ~500 B of eager
-   * store code (this slice ships in the first-paint `index` chunk) and blow the
-   * closure ratchet's ~80 B margin. The freshly-saved row still appears in the
-   * library on its next hydration (setSavedSettlements after savesService.list()),
-   * so the only thing deferred is an instant in-memory cache echo, not any
-   * correctness — see the in-caller notes in SaveToLibraryButton/BuyThisDossier.
+   * IT IS ALSO THE DRAFT-TIMELINE HAND-OFF: a stamp made while activeSaveId is
+   * still null is a draft becoming a save, so the session's `draftVersionHistory`
+   * moves onto the new row and the draft sibling clears. bindActiveSaveId
+   * (settlementSliceHelpers.js) owns both halves — putting them in the action
+   * rather than in each caller is what makes a fourth create chokepoint inherit
+   * the behaviour instead of re-deciding it.
+   *
+   * DELIBERATELY MINIMAL (byte constitution): this stamps activeSaveId and hands
+   * the timeline over, and does NOT upsert a full savedSettlements cache row. The
+   * full-row upsert the finding sketched would add ~500 B of eager store code
+   * (this slice ships in the first-paint `index` chunk) and blow the closure
+   * ratchet's ~80 B margin. The freshly-saved row still appears in the library on
+   * its next hydration (setSavedSettlements after savesService.list()) — carrying
+   * the timeline the hand-off persisted — so the only thing deferred is an instant
+   * in-memory cache echo, not any correctness. See the in-caller notes in
+   * SaveToLibraryButton/BuyThisDossier.
    *
    * @param {string|number} saveId the id savesService.save() returned
    */
-  setActiveSaveId: (saveId) =>
-    set(state => { if (saveId != null) state.activeSaveId = saveId; }),
+  setActiveSaveId: (saveId) => bindActiveSaveId(get, set, saveId),
 
   /**
    * The third param stays a PLAIN identifier (`opts`, read at its use site):

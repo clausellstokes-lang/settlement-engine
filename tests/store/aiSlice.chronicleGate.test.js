@@ -105,11 +105,16 @@ describe('_appendChronicleEntry canon gate on regenerations', () => {
     expect(chronicle).toHaveLength(1);
     expect(chronicle[0].reason).toBe('regenerate');
     expect(chronicle[0].thesis).toBe('A town holding its breath.');
+    // The ai_data write now rides the durable outbox lane, so the saves boundary
+    // is reached through campaignSliceShared's runner — which always carries the
+    // owner-fence options object as a third argument (undefined owner here: the
+    // mock reports no `isConfigured`, so persistSaveUpdate takes its local path).
     expect(savesService.update).toHaveBeenCalledWith(
       SAVE_ID,
       expect.objectContaining({
         aiData: expect.objectContaining({ chronicle: expect.any(Array) }),
       }),
+      { expectedOwnerId: undefined },
     );
   });
 

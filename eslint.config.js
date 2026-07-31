@@ -360,8 +360,9 @@ export default [
   //   • workers/** — the FULL ban incl. Math.random (no legitimate ambient entropy).
   //   • kernel/** except prng.js — Date + locale, but NOT Math.random (rngContext's
   //     unseededRandom() is the sanctioned fail-closed ambient draw).
-  //   • kernel/prng.js — locale only; generateSeed() mints from Date.now()+Math.random()
-  //     BY DESIGN (the sole seed-minting entry), but prng needs no LOCALE exemption.
+  //   • kernel/prng.js — locale only; generateSeed() mints from Date.now() plus WebCrypto,
+  //     falling back to Math.random where no crypto is exposed, BY DESIGN (the sole
+  //     seed-minting entry) — but prng needs no LOCALE exemption.
   {
     files: ['src/workers/**/*.js'],
     rules: {

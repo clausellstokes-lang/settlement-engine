@@ -432,6 +432,10 @@
    "kind": "rationale",
    "ref": "edge-lifecycle-double-pin"
   },
+  "tests/edgeFunctions/byokFailClosed.test.js": {
+   "kind": "rationale",
+   "ref": "negative-control-executed-2026-07-30"
+  },
   "tests/edgeFunctions/checkoutAsyncPaymentFailure.test.js": {
    "kind": "rationale",
    "ref": "edge-lifecycle-double-pin"

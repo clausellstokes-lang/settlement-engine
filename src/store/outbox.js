@@ -19,10 +19,18 @@
  * FIFO continues through retry backoff: a newer same-save op remains queued behind
  * an older backing-off or parked op. That intentionally favors correctness over
  * availability for one save; the visible Retry affordance revives the blocked head
- * and its successors. Cross-save writes remain independent. Still deferred:
- * routing aiSlice's direct ai_data writes through persistSaveUpdate (changes their
- * local-catch error handling across a large tested surface) so one lane owns that
- * column.
+ * and its successors. Cross-save writes remain independent.
+ *
+ * ONE LANE OWNS ai_data (convergence landed): aiSlice's nine narrative writes
+ * (generation / progression / chronicle / dossier notes / pin / unpin / cosmetic
+ * rename / revert) used to call savesService.update directly and swallow the error
+ * in a local catch, so two racing ai_data writes could land out of order and an
+ * offline one was simply lost. They now all go through persistSaveUpdate, so the
+ * `ai_data` column obeys the same supersede + retry guarantees as `data` and
+ * `campaign_state`. The remaining non-outbox ai_data writer is deliberate: the
+ * canon command transaction commits ai_data through a server RPC carrying an
+ * `expectedAiData` compare-and-set, a STRONGER guarantee than the outbox's
+ * last-write-wins, and it must stay on that lane.
  *
  * WHAT THIS MODULE OWNS (and what it does NOT):
  *   • The op list (intent) and the payload cache (data), each mirrored to a

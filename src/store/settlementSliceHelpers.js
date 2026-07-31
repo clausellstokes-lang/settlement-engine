@@ -369,6 +369,58 @@ export function remapPinnedNpcsAfterRegen(get, set, preservation) {
 }
 
 /**
+ * THE DRAFT-TIMELINE HAND-OFF (lifecycle: CREATE) — the body of setActiveSaveId.
+ *
+ * An unsaved session records its snapshots into the `draftVersionHistory` sibling
+ * (recordSnapshot with no saveId). Saving to the library minted the new row with
+ * `versionHistory: []` and the draft timeline then died at the next identity reset,
+ * so every checkpoint a DM took while building a town was destroyed by the act of
+ * keeping the town. This carries them across.
+ *
+ * IT LIVES HERE, NOT IN THE COMPONENTS: there are three create chokepoints (the
+ * wizard's Save to Library, BuyThisDossier's save-it-first rung, the surveyor's
+ * construction panel) plus the post-signup SAVE_SETTLEMENT intent, and all of them
+ * already funnel through setActiveSaveId to stamp the new id. Putting the hand-off
+ * inside the store action means a fourth chokepoint inherits it for free, which is
+ * exactly what the four-way split cost the FIRST time.
+ *
+ * GATED ON THE TRANSITION, not merely on a non-empty draft: only a stamp made while
+ * `activeSaveId` is still null is a draft becoming a save. Re-stamping between two
+ * existing saves must never pour one row's history into another.
+ *
+ * THE WRITE IS persistSaveUpdate, NOT updateSavedSettlement, for two independent
+ * reasons: `versionHistory` is deliberately absent from SAVED_SETTLEMENT_PATCH_KEYS
+ * (the patch writer would refuse it), and the freshly-saved row is not in the
+ * savedSettlements cache yet anyway (see setActiveSaveId's byte-constitution note) —
+ * it arrives with its timeline on the next hydration.
+ *
+ * THE CONSEQUENCE, ACCEPTED: a transferred snapshot predates the save, so reverting
+ * to one after saving rewrites the row with pre-save content. That is what a
+ * timeline is for, and revertToSnapshot records a `pre-revert` checkpoint first, so
+ * the post-save state is recoverable rather than overwritten.
+ *
+ * @param {() => any} get
+ * @param {(fn: (draft: any) => void) => void} set
+ * @param {string|number|null|undefined} saveId the id savesService.save() returned
+ * @returns {Promise<boolean>|undefined} the transfer's persist promise, when one ran
+ */
+export function bindActiveSaveId(get, set, saveId) {
+  if (saveId == null) return undefined;
+  const draftTimeline = get().draftVersionHistory;
+  const transfers = get().activeSaveId == null
+    && Array.isArray(draftTimeline) && draftTimeline.length > 0;
+  const versionHistory = transfers ? cappedVersionHistory(cloneJson(draftTimeline)) : null;
+  set(state => {
+    state.activeSaveId = saveId;
+    // Cleared in the SAME set() that stamps the id: a draft timeline surviving
+    // alongside a bound save id is a second, unreachable history the pending-edit
+    // owner scope has already stopped resolving receipts against.
+    if (transfers) state.draftVersionHistory = [];
+  });
+  return transfers ? persistSaveUpdate(saveId, { versionHistory }) : undefined;
+}
+
+/**
  * THE ROSTER FOLD — the one step that lands a reroll's three outputs together.
  *
  * regenNPCsPipeline returns the new roster PARTS plus an out-of-band preservation
