@@ -178,6 +178,33 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + 'DIFFERENT, REAL producer defect, fixed under EP-6 (finding EP-l): SELF-CAPTURE (a '
       + 'court taking its '
       + 'own envoy hostage), which accounted for 4 of the 7 ransoms in that corpus.' },
+  { file: 'tests/simulation/tierInertiaEnvelope.test.js', pendingMigration: false,
+    rationale: 'WAVE W-A ROSTER EXTENSION 2026-07-31 (a tightening — a NEW instrument, born '
+      + 'derived, which is the only way a row may join this file). Realm directive 6 / J-D6: '
+      + 'TIER-INERTIA CONFIRMATION. NINE bounds over a 3 x 3 matrix (village/town/city x '
+      + 'calm/matched/acute stressor load), each arm a 120-seed corpus of generated settlements '
+      + 'advanced 8 pulse ticks through the REAL tier-drift chain '
+      + '(generateSettlementPipeline -> buildWorldSnapshot -> deriveSettlementPressures -> '
+      + 'pressureIndex -> evaluateTierResourceDynamics -> rollCandidates). Trial unit is one '
+      + 'seeded settlement under a HELD stressor load, so the Bernoulli unit is exact and the '
+      + 'denominator is fixed by the corpus rather than by an outcome; denominator guards in the '
+      + 'test pin the corpus size, the horizon, the injected archetype count, and all three '
+      + 'severities. VERDICT CONFIRMED: at matched severity the village arm is floored at 87/120 '
+      + 'while the town arm is capped at 42 and the city arm at 24, so village > town > city holds '
+      + 'STRUCTURALLY (any corpus satisfying the three bounds satisfies the ordering); at acute '
+      + 'severity all three arms are floored at 105 or above, so the gap closes. The calm arm is '
+      + 'the control: three statistically indistinguishable rates (10.5 / 11.0 / 10.75 percent), '
+      + 'every event a PROMOTION, each floored so the matched-pressure ceilings can never go '
+      + 'vacuous. Base rates measured at N=400 on the same seed family; the worst corpus/family '
+      + 'divergence across the nine cells is 1.81 sigma. No bound here is loosenPending or a '
+      + 'ratified stricter override — every one is exactly its alpha-1e-3 derivation. THE RECORDED '
+      + 'BOUNDARY (J-D6 tuning-band routing, no engine edit): the inertia is EMERGENT, not '
+      + 'structural. Every demotion in the corpus fires the population-independent '
+      + 'structural-failure branch (support <= 0.25) — pinned two ways — and that branch is '
+      + 'SCALE-FREE: matched support plus matched relative headroom returns an identical verdict '
+      + 'at all three rungs (severity 0.48, minimum streak 2, probability 0.9452). The one '
+      + 'structural tier term is the PROMOTION streak ladder (4 / 5 / 6); the demotion requirement '
+      + 'is flat at 2 across village, town, and city.' },
 
   // ── STILL OWED: a real instrument, blocked for a stated reason ──────────────
   { file: 'tests/simulation/distributionEnvelopes.test.js', pendingMigration: true,
@@ -267,6 +294,10 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
  * strike-count envelope, and distribution.test's six degenerate 0/400 or 400/400
  * rates became explicit totality invariants. The seed-family mismatch instrument
  * remains the sole pending row.
+ * UNCHANGED at 1 by wave W-A (2026-07-31): one row ADDED
+ * (tests/simulation/tierInertiaEnvelope.test.js, the realm-directive-6 tier-inertia
+ * confirmation), arriving MIGRATED with nine derived bounds, so the roster grew
+ * 15 -> 16 while the pending column did not move.
  */
 const PENDING_MIGRATION_BASELINE = 1;
 
@@ -435,7 +466,7 @@ describe('distribution-envelope registry: derivation, power, provenance', () => 
   });
 
   test('the roster is frozen and non-vacuous', () => {
-    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(15);
+    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(16);
     const files = DISTRIBUTION_TOTALITY.map((row) => row.file);
     expect(files.filter((f, i) => files.indexOf(f) !== i), 'duplicate roster rows').toEqual([]);
   });
