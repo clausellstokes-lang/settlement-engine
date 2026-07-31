@@ -157,6 +157,9 @@ post-promotion; the Watabou iframe retires only at promotion.
 
 ## 9. SLICES (each: dark, gated, one commit, full gate, ledger row)
 
+- **TC-0 shell (buildable NOW, independent of the renderer):** the Map tab sub-tab
+  container per §12 — Plan + 3D Portrait + Player View reorganized, lazy pins with the
+  second assertion, presence gating, deep links, persisted sub-tab preference.
 - **TC-1 contract:** manifest schema extension + closed vocabularies + digest/golden
   scaffolding + dormancy pins. (The keystone; everything else is additive.)
 - **TC-2 skeleton:** field + street synthesis + walls/gates/bridges + iteration caps +
@@ -186,7 +189,56 @@ post-promotion; the Watabou iframe retires only at promotion.
   or not at all — this is the program's write-that-ghosts hazard and it is pre-committed,
   not deferred.
 
-## 11. DEFERRED (recorded, not bugs to re-find)
+## 11. EXHAUSTIVENESS AMENDMENTS (owner asked "is it exhaustive?" 2026-07-31 — these
+## close the audited gaps; each is BINDING on its slice)
+
+- **A-1 Map-edits interplay (TC-1):** `projectMapEditsForScene` already carries user map
+  edits into the scene. The new layers join that seam from day one: an edit's provenance
+  outranks synthesis (the field/skeleton stages treat user-edited geometry as boundary
+  conditions, never overwrite), and the TC-1 provenance model is the SAME vocabulary the
+  edit projection already speaks — one edit truth, not two.
+- **A-2 Custom content (TC-4):** `customBuildingPresentation.js` exists — custom
+  institutions already declare presentation. Parcel binding honors it: custom-content
+  footprint classes ride the same closed vocabulary with a declared-else-generic fall
+  (THE WALL's grammar, as interiors did for facets). No custom item can inject geometry
+  outside the vocabulary.
+- **A-3 Byte budget (TC-1):** TOWN_SCENE_COMPILE_INPUT_MAX_BYTES is a live cap. The four
+  layers get a per-tier byte budget table in TOWN_CARTOGRAPHY_TUNING, measured at TC-2
+  and ratchet-pinned; metropolis fits by parcel-band streaming, not by raising the cap.
+- **A-4 Degraded states (TC-5):** synthesis failure, rubric-floor exhaustion, or budget
+  overflow degrade DETERMINISTICALLY to the plan view with a visible, honest notice —
+  never a blank map, never a silent fallback (the fail-closed display doctrine).
+- **A-5 Labels + naming (TC-3):** street/ward names draw from namingData through seeded
+  substreams (`carto:names:*`); label placement obeys the legibility rubric; names are
+  manifest data (exports/a11y read them), not paint-time decoration.
+- **A-6 Satellites + seasons (TC-7):** a satellite thorp gets a MINIATURE of the same
+  synthesis (orbit-context field, parent-derived palette), not a bespoke path; seasonal
+  paint (seasons rule lit) is a palette modulation in the painter, never a geometry
+  change — winter does not move houses.
+- **A-7 Property invariants (TC-2, tests):** beyond goldens — planarity (no street
+  self-crossings except bridges), parcel containment (footprint ⊂ parcel ⊂ ward),
+  audience monotonicity (player manifest ⊆ DM manifest), all as seeded property tests
+  over the corpus matrix, anchored per the walker laws.
+
+## 12. THE DOSSIER MAP TAB — SUB-TAB SHELL (owner directive 2026-07-31, BINDING: J-TC-8)
+
+The dossier's Map tab becomes a CONTAINER with one sub-tab per settlement map
+presentation, each an audience-gated lazy leaf under the existing `new/tabs/` discipline:
+
+  Map ▸ [ Plan | Illustrated (this program, flag-gated) | 3D Portrait (opt-in flag) |
+          Player View (fog/audience projection) ]
+
+Rules: sub-tab PRESENCE is audience- and flag-gated exactly like sibling dossier tabs
+(absent, not disabled, when dark — the ai_notes presence lesson); each sub-tab is its own
+lazy chunk with a build pin (the 5-layer *Lazy.test.js recipe; the parent Map tab is
+itself lazy, so every pin carries the SECOND assertion per the lazy-parent lesson); Plan
+remains first and default; deep-links address sub-tabs through the routes table; the
+shell ships EARLY as **TC-0** (Plan + 3D + Player View reorganized under the container
+now, Illustrated joining at TC-5) so the UI restructure is proven long before the new
+renderer lands. State: one selected-sub-tab display preference, persisted per the
+display-preference partialize rules.
+
+## 13. DEFERRED (recorded, not bugs to re-find)
 
 - Hand-editing of streets/wards (user cartography verbs) — after TC-8; requires the
   command-spine treatment (CREATE_ROUTE precedent from directive 3).
