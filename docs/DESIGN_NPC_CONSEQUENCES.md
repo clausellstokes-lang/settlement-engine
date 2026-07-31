@@ -133,6 +133,40 @@ existing `_preservation` remap unchanged.
   unassigned roamers eventually settle themselves; pool size is envelope-bounded at
   soak horizons. The Wanderers register cannot become a graveyard of forgotten names.
 
+## 6b. REPUTATION AS BELIEF (owner amendment 2026-07-31 — supersedes global-fact
+## reputation; the epistemology unification)
+
+The ledger records TRUTH (what happened, where, verdict, marks). What any settlement
+BELIEVES about a roamer is DERIVED through the information layer: distance-priced decay
+from the origin, complicated by infoMode — unreliable information can REINFORCE (the
+rumor grows) or COUNTER (the story dies on the road) the truth, deterministically seeded
+per (settlement, roamer, elapsed). Admission and rejection checks run against the LOCAL
+BELIEF, never the global truth — a wanderer can outrun their story or be preceded by a
+worse one. ENGINEERING GUARD: beliefs are derived on demand from the news/rumor record,
+NEVER stored per-pair (no S x roamers state); the derivation is pure and pinned. This
+gives the knowledge mover lane a personal payload (tuning-agenda tie-in: the starved
+lane becomes load-bearing here).
+
+## 6c. UNAFFILIATES + RESIDENCY (owner amendment 2026-07-31)
+
+Roamers REST somewhere: each settlement dossier gains an UNAFFILIATES section — the
+local projection of the same world ledger (one truth, two views: Wanderers tab = world,
+unaffiliates = local). Stay durations are banded (weeks to years, seeded); transitions
+happen on any advance (seeded) or by user input. Residency PREFERENCE weights toward
+settlements matching the roamer's personal state — weighted, never bounded. While
+resident, experiences reshape them: stay duration x settlement state x witnessed events
+drive personality drift through the EXISTING growth system (npcGrowthKernel / trait
+planes), bounded within facet bands at capped rates — a decade bends a person, never
+replaces them. PRESENTATION: titles prefix "(former ...)"; the card carries a one-line
+why (banishment / destruction / jail — jail cards carry it too), audience-projected.
+
+## 6d. CRIMINAL DESTINATION GENERALIZATION (owner amendment 2026-07-31)
+
+Criminal-compromise verdicts may target ANY settlement hosting a criminal-organization
+power — join its faction at the lowest position or found a sibling under that power —
+making the underworld a realm-wide network, not a local feature. Same admission,
+rejection, and belief rules as every other flow.
+
 ## 7. DM VERBS (command-spine discipline, each with receipts + snapshot undo)
 
 - **ASSIGN** a roamer to a settlement (sovereign — may override exclusions explicitly;
