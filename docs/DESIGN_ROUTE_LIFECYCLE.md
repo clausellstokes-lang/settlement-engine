@@ -170,6 +170,25 @@ profile, not genesis alone). Pins: genesis immutability under any network histor
 role-threshold hysteresis (no identity flapping); the canonical example as an
 end-to-end integration test — charter in, tilt, sever, revert, every step evented.
 
+**AMENDED 2026-07-31 (owner — DEGREE, CENTRALITY, AND THE GRAVITY OF CROSSROADS):**
+(a) ROUTE COUNT (degree) feeds every network role's strength — more living routes,
+stronger lived roles. (b) CROSSROADS REQUIRES CENTRALITY, not just degree: the role
+derives from BETWEENNESS over the cheapest-path structure (how much of the realm's
+through-traffic naturally transits you) plus regional geometric placement — a
+high-degree BORDER town is a GATEWAY/entrepot (its own honest role: where trade
+enters and leaves the realm), never a crossroads; the town seated among many
+settlements earns crossroads-ness, at network genesis if no pending alternative
+exists. Betweenness computes over the bounded network (the candidate-set law holds;
+trivial at realm scale). (c) THE GRAVITY LOOP: crossroads attract — merchants
+weight their paths through economic centers seeking profit (a preference term in
+path selection), which strengthens the crossroads, which attracts more — capped by
+an anti-runaway band (one realm never collapses into a single mega-hub unless
+geography genuinely says so) and broken by circumstances (danger, bypass, war — the
+existing safety/bypass laws are the gravity's counterweights). Role vocabulary
+gains 'gateway' beside 'crossroads' in the closed set; the pin: a synthetic
+border-heavy realm must produce gateways and no crossroads, and a hub-and-spoke
+realm the reverse.
+
 ## 6. CHARTER (formation) — demand-then-event
 
 When a corridor's accumulated demand crosses the formation threshold (per dominant
