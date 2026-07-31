@@ -42,10 +42,20 @@ coaching, and the now-open repair dial (journeyman 1 / master 2).
 
 ## C. THE TASTE PICKS (no engineering waits on these)
 
+> **Both picks were RULED 2026-07-28** under the delegated disposition (§0 of
+> `docs/OWNER_DECISION_QUEUE.md`, ledger tree). The bullets below stand as written on
+> 2026-07-27; each carries its ruling appended. M43 also ratifies §B's dial states as
+> they stand (thinking budgets 0, repair budgets 0/1/2, multipliers disabled).
+
 - **Tier names** — `scout / journeyman / master` are working names, live in the DB check
   constraint and the Account copy. One word changes them (a migration for the constraint).
+  — **RULED 2026-07-28 (M43): retain `scout / journeyman / master`.** No migration owed.
 - **M44 dial list** — the physics-amendment surface is spec-ratified; the five proposed dials
   are in the queue awaiting your enumeration.
+  — **RULED 2026-07-28 (M44): expose exactly those five** — growth, depletion severity,
+  unrest/tension gain, external-threat pressure, trade-route yield — as bounded multipliers
+  (0.5x–2.0x, typed/validated/confirmed, persisted with the world). Identity, named fates,
+  money, deity/faith doctrine, and criminal-capture calibration stay off the surface.
 
 ## D. WHAT I DELIBERATELY DID NOT DO
 

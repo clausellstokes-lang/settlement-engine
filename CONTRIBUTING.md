@@ -10,9 +10,10 @@
 Everything runs through `npm run check` — the full 14-step chain: `validate:data` →
 `validate:custom-content-manifest` → `validate:migration-head` → `validate:edge` → `validate:map` →
 `validate:tuning-bands` → `validate:foundry-module` → `validate:mcp-server` → `typecheck` →
-`typecheck:domain:strict` → `lint` → `test` (the full Vitest suite, ~9,800 tests) →
-`build` → `verify:dist` (the first-paint ratchet) — plus the Playwright `e2e` job.
-Both run in CI (`.github/workflows/ci.yml`) on every PR to `master`/`main`.
+`typecheck:domain:strict` → `lint` → `test` (the full Vitest suite, ~20,100 tests /
+~1988 files) → `build` → `verify:dist` (the first-paint ratchet) — plus the Playwright
+`e2e` job. Both run in CI (`.github/workflows/ci.yml`) on every PR to `master`/`main`.
+Counts are approximate; executable output remains the authority.
 
 **CI must be the only path to production.** To enforce that (a one-time maintainer
 action in the GitHub UI — it cannot be set from the repo):

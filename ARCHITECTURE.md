@@ -43,7 +43,7 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
              the renderer-neutral settlement-scene projection and manifest
              compiler (`townScene/`; one canonical truth for 2D and 3D),
-             the **campaign world-pulse simulation** (`worldPulse/` — ~157 modules
+             the **campaign world-pulse simulation** (`worldPulse/` — ~167 modules
              that age a canonized region tick-by-tick: proposals, party impacts,
              the multi-tick interval orchestrator, PLUS the geopolitical
              subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
@@ -338,7 +338,7 @@ typecheck && typecheck:domain:strict && lint && test && build && verify:dist`.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~17,000 tests / ~1767 files: unit, property-based,
+- **test** — Vitest, ~20,100 tests / ~1988 files: unit, property-based,
   domain/store/lib integration, component/UI smoke, accessibility, security, and
   edge-function contracts. Counts are approximate; executable output remains the
   authority.

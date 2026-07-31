@@ -425,7 +425,7 @@ delete the row to make the dashboard look green.
 Run locally before pushing:
 
 ```bash
-npm run check        # the full 13-stage gate (validate → typecheck → lint → test → build → verify:dist)
+npm run check        # the full 14-stage gate (validate → typecheck → lint → test → build → verify:dist)
 npm run build:edge-shared   # regenerate bundle if src/domain/ changed
 npm run ops:migrations:rehearse   # review the exact applied-head → repo-head waves
 ```
