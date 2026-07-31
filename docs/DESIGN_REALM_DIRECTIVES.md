@@ -304,6 +304,17 @@
   shell (the third instance of the infrastructure-remembers law: hidden paths,
   settlement remnants, institutional shells). Shell state is Herald-narratable and
   cartography-visible (the dark windows render).
+  **VOCABULARY RULING 2026-07-31 (owner asked "shells or impaired?" — answer: BOTH,
+  distinct):** one closed institution operational-status vocabulary —
+  `operational | impaired | shell` — where IMPAIRED is the corruption web's EXISTING
+  term (something is wrong WITH it: corruption, damage; operates but sick; cured by
+  scrubbing/repair) and SHELL is the regime law's new member (nothing wrong with it;
+  the world cannot fund it; intact but dark; reactivated by economic recovery). They
+  COMPOSE: an impaired shell (closed and rotten) is the darkest state short of ruin.
+  Cartography renders each honestly (the frayed / the dark / the frayed-dark); the
+  Herald tells them apart ("the tannery is rotten" vs "the foundry is quiet").
+  Optional depth band: very-long-neglected shells may decay toward ruin —
+  infrastructure remembers, but not forever.
 
 
 ## Waves (execution order = the reviewed sequencing)
