@@ -1,9 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
 import { rollCandidates } from '../../src/domain/worldPulse/candidateEvents.js';
+import { coupVerdictOutcomes } from '../../src/domain/worldPulse/coup.js';
 import {
   admitGuaranteedProposalOutcomes,
   buildProposalDocket,
+  isOneShotVerdictOutcome,
+  ONE_SHOT_VERDICT_RULE_IDS,
   PROPOSAL_DOCKET_POLICY,
 } from '../../src/domain/worldPulse/proposalAdmission.js';
 import { upsertProposal } from '../../src/domain/worldPulse/worldState.js';
@@ -45,6 +48,91 @@ function majorCandidate(id, targetSaveId) {
       factionId: `${targetSaveId}:${id}`,
     },
   };
+}
+
+/**
+ * A proposal-routed re-deriving MINOR, shaped like populationDynamics' candidate.
+ * Unadmitted, it applies no population delta, so the pressure persists and the
+ * candidate re-derives next tick — it stays under the cap.
+ */
+function populationCandidate(id, targetSaveId) {
+  return {
+    id: `candidate.population.decline.${targetSaveId}.${id}`,
+    type: 'population',
+    candidateType: 'population_decline',
+    ruleId: 'population_decline',
+    ruleFamily: 'population',
+    targetSaveId,
+    probability: 1,
+    applyMode: 'proposal',
+    severity: 0.5,
+    populationDeltas: [],
+  };
+}
+
+/**
+ * A proposal-routed re-deriving MAJOR, shaped like warDeployment's siege
+ * initiation. Under proposal mode it withholds its deployment seed and war_front,
+ * so an unadmitted march re-derives from unspent war-readiness — also capped.
+ */
+function deployCandidate(id, targetSaveId) {
+  return {
+    id: `world_outcome.strategy_deploy.${targetSaveId}.${id}`,
+    type: 'strategy_deploy',
+    candidateType: 'strategy_deploy',
+    ruleId: 'war_layer_strategy_deploy',
+    ruleFamily: 'stressor',
+    targetSaveId,
+    probability: 1,
+    applyMode: 'proposal',
+    severity: 0.7,
+    proposalPayload: { kind: 'siege_initiation', besieger: targetSaveId, besieged: 'target' },
+  };
+}
+
+/**
+ * A REAL coup fall verdict, built by coupVerdictOutcomes itself with a
+ * player-locked governing faction (the legacy axis that routes a fall to a
+ * proposal). Hand-rolling the outcome would let a ruleId rename in coup.js
+ * silently un-arm the bypass while this pin stayed green.
+ */
+function coupFallOutcome(saveId = 'coup-home') {
+  const settlement = {
+    name: 'Oakmere',
+    tier: 'town',
+    powerStructure: {
+      governingName: 'Town Council',
+      publicLegitimacy: { score: 22, label: 'Legitimacy Crisis', govMultiplier: 0.6, crimMultiplier: 1.3 },
+      factions: [
+        { faction: 'Town Council', power: 24, category: 'government', isGoverning: true },
+        { faction: 'The Garrison', power: 30, category: 'military' },
+        { faction: 'Merchant Guilds', power: 26, category: 'economy' },
+      ],
+    },
+  };
+  const rolls = [0.5, 0];
+  const [outcome] = coupVerdictOutcomes({
+    resolved: [{
+      id: `world_stressor.coup_detat.${saveId}`,
+      type: 'coup_detat',
+      status: 'resolved',
+      severity: 0.4,
+      peakSeverity: 0.7,
+      originSettlementId: saveId,
+      affectedSettlementIds: [saveId],
+    }],
+    snapshot: {
+      byId: new Map([[saveId, {
+        name: settlement.name,
+        settlement,
+        save: { campaignState: { locks: { factions: ['faction.town_council'] } } },
+        causal: { scores: { ruling_authority: 20 } },
+      }]]),
+    },
+    rng: { random: () => rolls.shift() ?? 0 },
+    tick: 9,
+  });
+  return outcome;
 }
 
 function proposal(outcome, status = 'pending') {
@@ -367,5 +455,99 @@ describe('proposal docket admission', () => {
     expect(large.caps.major).toBe(6);
     expect(large.caps.perSettlementMinor).toBe(3);
     expect(large.caps.perSettlementMajor).toBe(1);
+  });
+});
+
+describe('one-shot verdict admission (owner ruling 2026-07-30)', () => {
+  /** A docket saturated in BOTH lanes, with the coup's own settlement holding its
+   *  one per-settlement major slot — global and local saturation at once. */
+  function saturatedPending(coupHome) {
+    return [
+      ...Array.from({ length: 12 }, (_, index) => (
+        proposal(minorCandidate(`held-minor-${index}`, `minor-home-${index}`))
+      )),
+      proposal(majorCandidate('held-major-coup-home', coupHome)),
+      ...Array.from({ length: 3 }, (_, index) => (
+        proposal(majorCandidate(`held-major-${index}`, `major-home-${index}`))
+      )),
+    ];
+  }
+
+  test('the coup family is the whole bypass; the re-deriving siblings sharing the mouth are not', () => {
+    expect([...ONE_SHOT_VERDICT_RULE_IDS].sort()).toEqual([
+      'coup_verdict_fall',
+      'coup_verdict_hold',
+    ]);
+    expect(isOneShotVerdictOutcome(coupFallOutcome())).toBe(true);
+    expect(isOneShotVerdictOutcome(deployCandidate('d1', 'war-home'))).toBe(false);
+    expect(isOneShotVerdictOutcome(populationCandidate('p1', 'pop-home'))).toBe(false);
+  });
+
+  test('a resolved coup lands on a saturated docket while re-deriving candidates defer', () => {
+    const coup = coupFallOutcome();
+    // Liveness: the real producer emitted a proposal-routed campaign-altering major.
+    // Without this the pin could pass on an outcome the docket never had to judge.
+    expect(coup.applyMode).toBe('proposal');
+    expect(coup.ruleId).toBe('coup_verdict_fall');
+    expect(coup.candidateType).toBe('coup_succeeded');
+
+    const batch = [
+      populationCandidate('p1', 'pop-home'),
+      coup,
+      deployCandidate('d1', 'war-home'),
+    ];
+    const open = admitGuaranteedProposalOutcomes(docketFor([]), batch);
+    // The anchor: with room, all three are admissible — so the saturated run below
+    // measures the cap, not a fixture that could never be admitted at all.
+    expect(open.outcomes.map(outcome => outcome.id)).toEqual(batch.map(outcome => outcome.id));
+
+    const saturated = admitGuaranteedProposalOutcomes(
+      docketFor(saturatedPending(coup.targetSaveId)),
+      batch,
+    );
+    expect(saturated.outcomes.map(outcome => outcome.id)).toEqual([coup.id]);
+    // The verdict records its occupancy: the major lane carries it above its cap,
+    // exactly as an over-cap legacy docket already does, and evicts nothing.
+    expect(saturated.docket.counts).toEqual({ minor: 12, major: 5 });
+    expect(saturated.docket.bySettlement[coup.targetSaveId]).toEqual({ minor: 0, major: 2 });
+  });
+
+  test('the bypass is invariant under batch permutation and leaves the parent docket untouched', () => {
+    const coup = coupFallOutcome();
+    const batch = [
+      populationCandidate('p1', 'pop-home'),
+      coup,
+      deployCandidate('d1', 'war-home'),
+      minorCandidate('structural.alpha', 'alpha-home'),
+    ];
+    const pending = saturatedPending(coup.targetSaveId);
+    const docket = docketFor(pending);
+    const forward = admitGuaranteedProposalOutcomes(docket, batch);
+    const reversed = admitGuaranteedProposalOutcomes(docket, [...batch].reverse());
+
+    const ids = result => result.outcomes.map(outcome => outcome.id).sort();
+    expect(ids(forward)).toEqual([coup.id]);
+    expect(ids(reversed)).toEqual(ids(forward));
+    expect(reversed.docket.counts).toEqual(forward.docket.counts);
+    expect(reversed.docket.bySettlement).toEqual(forward.docket.bySettlement);
+    // The snapshot handed in is read-only: both runs saw the same starting counts.
+    expect(docket.counts).toEqual({ minor: 12, major: 4 });
+  });
+
+  test('a verdict claims the last free slot ahead of a capped major that sorts before it', () => {
+    // One free major slot. The contender's stable key sorts AHEAD of the verdict's,
+    // so a bypass applied in ranking order would hand it the slot and push the lane
+    // to five. Guaranteed admission runs the verdict first: the lane stays at cap
+    // and the capped contender is the one that waits.
+    const coup = coupFallOutcome();
+    const pending = Array.from({ length: 3 }, (_, index) => (
+      proposal(majorCandidate(`held-major-${index}`, `major-home-${index}`))
+    ));
+    const contender = majorCandidate('aaa.contending-major', 'contender-home');
+    expect(contender.id < coup.id).toBe(true);
+    const result = admitGuaranteedProposalOutcomes(docketFor(pending), [contender, coup]);
+
+    expect(result.outcomes.map(outcome => outcome.id)).toEqual([coup.id]);
+    expect(result.docket.counts.major).toBe(4);
   });
 });

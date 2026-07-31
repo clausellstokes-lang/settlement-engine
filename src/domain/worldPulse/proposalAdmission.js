@@ -11,6 +11,11 @@
  * Scope is deliberately organic pulse output. Explicit DM realm orders and
  * authored stressor-resolution aftermaths remain user-command paths and bypass
  * this policy; the generic proposal upsert is intentionally not a hidden cap.
+ *
+ * The cap is an attention budget, and a budget may only ration work that can
+ * come back. A ONE-SHOT VERDICT cannot: its trigger is consumed in the same tick
+ * that produces it, so a deferral is a deletion. Those outcomes are admitted
+ * regardless of saturation (ONE_SHOT_VERDICT_RULE_IDS below).
  */
 
 import { isMajorOutcome } from './decisionTier.js';
@@ -28,6 +33,35 @@ export const PROPOSAL_DOCKET_POLICY = Object.freeze({
   perSettlementMajorPending: 1,
   majorProposalSlotsPerTick: 1,
 });
+
+/**
+ * The ruleIds whose outcomes are ONE-SHOT VERDICTS: the generating event is
+ * consumed in the tick that emits them and cannot re-fire, so an unadmitted one
+ * is lost outright rather than re-derived. A coup_detat stressor that resolves
+ * leaves ageRoamingStressors as a residual ECHO (stressors.js), and the echo is
+ * never handed back to coupVerdictOutcomes; the verdict is the settlement's only
+ * one. OWNER RULING 2026-07-30: these bypass the docket cap. Only the FALL branch
+ * can be proposal-routed today (a player-locked seat, or the forcing autonomy
+ * modes); the hold branch is listed because it is the same spent trigger and must
+ * not become droppable if its authority ever moves.
+ *
+ * MEMBERSHIP CRITERION, applied to every proposal-routed family sharing the
+ * guaranteed-admission mouth in pulseKernel: a family belongs here only if its
+ * trigger provably cannot re-derive. The two siblings that share the mouth both
+ * can, and both stay under the cap:
+ *   - strategy_deploy (warDeployment.js) withholds its deployment seed and its
+ *     war_front channel under proposal mode, so an unadmitted march re-derives
+ *     next tick from war-readiness that was never spent;
+ *   - population_growth / _decline / _emigration (populationDynamics.js) apply
+ *     no population delta when unadmitted, so the pressure persists and the
+ *     candidate re-derives.
+ *
+ * @type {ReadonlyArray<string>}
+ */
+export const ONE_SHOT_VERDICT_RULE_IDS = Object.freeze([
+  'coup_verdict_fall',
+  'coup_verdict_hold',
+]);
 
 /**
  * @typedef {{ minor: number, major: number }} ProposalLaneCounts
@@ -78,6 +112,19 @@ function requiresProposalAdmission(candidate) {
   return record?.applyMode === 'proposal'
     && !isStateOnlyOutcome(candidate)
     && !isSuppressionOnlyOutcome(candidate);
+}
+
+/**
+ * Whether this outcome is a one-shot verdict (see ONE_SHOT_VERDICT_RULE_IDS).
+ * Keyed on ruleId, so no marker field is added to the outcome shape and the
+ * verdict travels the news / pulseRecord lanes byte-identically.
+ *
+ * @param {unknown} candidate
+ * @returns {boolean}
+ */
+export function isOneShotVerdictOutcome(candidate) {
+  const record = asRecord(candidate);
+  return ONE_SHOT_VERDICT_RULE_IDS.includes(String(record?.ruleId ?? ''));
 }
 
 /** @param {unknown} candidate @returns {string} */
@@ -200,6 +247,15 @@ export function recordProposalAdmission(docket, candidate) {
  * ordering for every admitted outcome. Non-proposals and record-only lanes are
  * always retained and never consume capacity.
  *
+ * Two passes, both over the same stable-identity ranking. One-shot verdicts go
+ * first and unconditionally: their trigger is already spent, so the cap has
+ * nothing left to ration. They still RECORD their occupancy, which keeps the
+ * lane counts an honest reading of the DM's load and keeps the cap binding on
+ * the re-deriving families in the second pass; a saturated lane simply carries
+ * the verdict above its cap, the way an over-cap legacy docket already does.
+ * Nothing already admitted is evicted, here or in the stochastic lane that
+ * inherits this docket.
+ *
  * @template T
  * @param {ProposalDocket} docket
  * @param {T[]} outcomes
@@ -213,6 +269,12 @@ export function admitGuaranteedProposalOutcomes(docket, outcomes) {
   const admitted = new Set();
   let nextDocket = docket;
   for (const proposal of proposals) {
+    if (!isOneShotVerdictOutcome(proposal)) continue;
+    admitted.add(proposal);
+    nextDocket = recordProposalAdmission(nextDocket, proposal);
+  }
+  for (const proposal of proposals) {
+    if (isOneShotVerdictOutcome(proposal)) continue;
     if (!proposalDocketAllows(nextDocket, proposal)) continue;
     admitted.add(proposal);
     nextDocket = recordProposalAdmission(nextDocket, proposal);
