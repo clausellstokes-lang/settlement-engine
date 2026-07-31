@@ -27,6 +27,8 @@ const SAMPLE_INTERP = Object.freeze({
   label: 'Iron', labelLower: 'iron',
   parent: 'Oldmarch', count: 2, countS: 's', dispersed: 120, debit: 30,
   resource: 'silver', a: 'Ashfield', b: 'Brookend', pop: 340,
+  // W-E (J-D4) — the sampled ground the lifecycle.founded.summary_site pool names.
+  place: 'the river bank',
   goal: 'secure office', role: 'heir', previous: 'town|local|',
   next: 'town|vassal|war pressure', ideal: 'order', flaw: 'pride',
   // THE ROADS tokens (ENGINE LIFT #5) — the roads.* pools read these.

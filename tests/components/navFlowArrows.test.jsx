@@ -63,6 +63,13 @@ vi.mock('../../src/lib/stripe.js', () => ({
 
 // The routed view is irrelevant to the nav chrome; a bare marker keeps the
 // wizard's own store reads out of this render.
+// Sever the pricing surface's lazy stripe->creditLedger chain at the component
+// boundary — this suite tests the nav ribbon, not pricing internals, and the
+// chain's dynamic import races environment teardown under gate load.
+vi.mock('../../src/components/pricing/PricingMomentCard.jsx', () => ({
+  default: () => null,
+}));
+
 vi.mock('../../src/components/GenerateWizard.jsx', () => ({
   default: () => <div data-testid="generate-view">create</div>,
 }));

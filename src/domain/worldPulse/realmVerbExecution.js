@@ -559,6 +559,9 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         sats: /** @type {import('./settlementLifecycleKernel.js').SatelliteRecord[]} */ (/** @type {unknown} */ (sats)), tick: nowTick, forkFn,
         name: args.name != null && String(args.name).trim() ? String(args.name) : null,
         resourceKey: args.resource != null && String(args.resource).trim() ? String(args.resource) : null,
+        // W-E (J-D4): a DECREED founding samples the same frozen ground an organic
+        // one does (force ≡ organic, extended to topography). Null when aspatial.
+        digest: /** @type {Mut} */ (activeSpatialDigest(/** @type {Mut} */ (state))),
       });
       if ('refusal' in minted) return refused(refuse('steading_refused', minted.refusal));
       // The kernel's ledger fold shape: entry { steadings: { [rec.id]: rec } }.

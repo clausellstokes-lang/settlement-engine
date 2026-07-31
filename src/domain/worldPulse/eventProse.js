@@ -565,6 +565,15 @@ export const LIFECYCLE_NEWS = Object.freeze({
       (x) => `${x.debit} settlers have gone out from ${x.parent} and founded the steading of ${x.name}.`,
       (x) => `From ${x.parent}, ${x.debit} settlers have struck out to found the steading of ${x.name}.`,
     ],
+    // W-E (J-D4): the ground the settlers actually chose, named in-world. Selected
+    // only when the founding SAMPLED the frozen spatial rasters (a spatial world);
+    // an aspatial founding keeps summary_growth, so no existing world's prose moves.
+    summary_site: [
+      (x) => `${x.debit} settlers out of ${x.parent} have raised the steading of ${x.name} on ${x.place}.`, // canonical
+      (x) => `${x.debit} settlers have set the steading of ${x.name} down on ${x.place}, a day out of ${x.parent}.`,
+      (x) => `The steading of ${x.name} has taken root on ${x.place}, raised by ${x.debit} settlers out of ${x.parent}.`,
+      (x) => `Out of ${x.parent}, ${x.debit} settlers have raised the steading of ${x.name} on ${x.place}.`,
+    ],
   },
   charter_pending: {
     headline: [

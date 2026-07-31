@@ -45,9 +45,19 @@
  *     mover seam) and applyWorldPulse (the stage-2 writer), never the entry
  *     closure. The satellites ledger nests under the FP-R `spatialLedgers`
  *     namespace ⇒ ZERO eager bytes for the state.
- *   • RNG — stable keyed forks only (`satellite:<parent>:<tick>`), §H
- *     situation-loaded; no fork when dark; draw order inside a fork is fixed
- *     (codepoint-ordered iteration) so the parent stream is never touched.
+ *   • RNG — stable keyed forks only (`satellite:<parent>:<tick>`, and the W-E
+ *     sibling `satellite:<parent>:<tick>:site`), §H situation-loaded; no fork when
+ *     dark; draw order inside a fork is fixed (codepoint-ordered iteration) so the
+ *     parent stream is never touched. The site fork is a DISTINCT key precisely so
+ *     that adding topographic placement left the existing satellite stream's draw
+ *     sequence (name, founders, starve, converge) byte-identical.
+ *   • TOPOGRAPHY (W-E / J-D4) — a founding SAMPLES the frozen spatial rasters
+ *     READ-ONLY (steadingTopography.js: the territory partition, the integer cost
+ *     field, the gates' named terrain classes) to pick a site inside the parent's
+ *     own country and to derive starting resources through the EXISTING
+ *     resource-strike vocabulary. The digest is never written and satellites never
+ *     join it. An ASPATIAL world (no active digest) samples nothing, so its records
+ *     carry neither `site` nor `resources` and are byte-identical to pre-W-E.
  *   • CATCH-UP INTEGRITY — every dwell/cooldown is a TICK STAMP compared by
  *     integer subtraction (tick − since), never an incrementing counter, so the
  *     M10b one-interval catch-up collapse cannot lose or double-count dwell.
@@ -56,10 +66,11 @@
 import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { NAMING_DATA } from '../../data/namingData.js';
-import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
 import { pickLine, LIFECYCLE_NEWS } from './eventProse.js';
+import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ archetype?: string, id?: string, triggeredAt?: { sourceEventTargetId?: string } }} LcCondition */
@@ -98,6 +109,12 @@ import { pickLine, LIFECYCLE_NEWS } from './eventProse.js';
  * @property {number} foundedTick
  * @property {'growth'|'resource_strike'|'resettlement'|'forced'} provenance
  * @property {string} [resourceKey] the struck vein a mining-camp exists for
+ * @property {{ cell: number, landform: string, cost: number, source: 'gate_terrain'|'cost_band' }} [site]
+ *   W-E: the sampled ground. Present ONLY when a frozen spatial digest was active
+ *   at the founding; the cell is a READ key into the frozen rasters and is never
+ *   written back to them (a satellite is never a digest member).
+ * @property {string[]} [resources] W-E: starting resources derived from `site`
+ *   through the existing RESOURCE_DATA vocabulary (closed; absent when aspatial)
  * @property {number} orbit         cosmetic orbit slot (deterministic, unique per parent)
  * @property {number} inflow        cumulative in-migration tally (people moved in)
  * @property {number} backing01     last computed backing read (display/receipt)
@@ -378,9 +395,14 @@ export function drawSteadingName(culture, draw) {
  * @param {string|null} [args.nameOverride]   FORCE dial: freetext name (cosmetic)
  * @param {string|null} [args.resourceKey]    the struck vein (resource_strike / force dial)
  * @param {SatelliteRecord['provenance']} args.provenance
+ * @param {import('./steadingTopography.js').TopoDigest|null} [args.digest] the FROZEN
+ *   spatial digest, READ-ONLY (W-E). Absent/null ⇒ no ground is sampled and the
+ *   record is byte-identical to a pre-W-E founding.
+ * @param {(() => number)|null} [args.siteDraw] the SITE fork's sequential draw
+ *   (`satellite:<parent>:<tick>:site`) — a distinct stream from `draw`
  * @returns {{ record: SatelliteRecord, debit: number } | { refusal: string }}
  */
-export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance }) {
+export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance, digest = null, siteDraw = null }) {
   const parentTier = String(parent?.tier || 'village');
   const cap = num(/** @type {Record<string, unknown>} */ (T.SATELLITE_CAPS)[parentTier], 0);
   if (!cap) return { refusal: 'only town-or-higher parents seed steadings' };
@@ -398,19 +420,38 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
   let orbit = 0;
   while (usedOrbits.has(orbit)) orbit += 1;
   const key = String(resourceKey || '');
+  // ── W-E / J-D4: SAMPLE THE GROUND (read-only; absent digest ⇒ absent site). ──
+  // The site draw runs on its OWN keyed fork, so the founding's name/founders
+  // draws above (and every later draw on the satellite fork this tick) are
+  // unchanged by the existence of this feature.
+  const site = digest && typeof siteDraw === 'function'
+    ? chooseSteadingSite({
+      digest, parentId, draw: siteDraw, resourceKey: key || null,
+      occupied: sats.map((r) => num(r.site?.cell, -1)).filter((c) => c >= 0),
+    })
+    : null;
+  const resources = site && typeof siteDraw === 'function'
+    ? deriveSteadingResources({
+      landform: site.landform, draw: siteDraw, resourceKey: key || null,
+      parentResources: Array.isArray(parent?.config?.nearbyResources) ? parent.config.nearbyResources : [],
+    })
+    : [];
+  const ground = site ? ` on ${landformPlaceName(site.landform)}` : '';
   /** @type {SatelliteRecord} */
   const record = {
     id: `steading.${stablePart(parentId)}.${tick}`,
     name, parentId, tier: 'thorp', population: debit,
     foundedTick: tick, provenance,
     ...(key ? { resourceKey: key } : {}),
+    ...(site ? { site } : {}),
+    ...(resources.length ? { resources } : {}),
     orbit, inflow: debit, backing01: 0,
     history: [
       provenance === 'resource_strike'
-        ? `Founded on the new ${key.replace(/_/g, ' ')} workings (tick ${tick}).`
+        ? `Founded on the new ${key.replace(/_/g, ' ')} workings${ground} (tick ${tick}).`
         : provenance === 'forced'
-          ? `Founded by decree — ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`
-          : `Founded by ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`,
+          ? `Founded by decree${ground}: ${debit} settlers out of ${String(parent?.name || parentId)} (tick ${tick}).`
+          : `Founded by ${debit} settlers out of ${String(parent?.name || parentId)}${ground} (tick ${tick}).`,
     ],
   };
   return { record, debit };
@@ -487,6 +528,12 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
     if (ui !== undefined) return nextUpdates[ui]?.settlement;
     return itemById.get(String(id))?.settlement;
   };
+
+  // W-E / J-D4: the FROZEN spatial rasters, READ-ONLY, resolved once per tick
+  // through the ONE constitutional gate (activeSpatialDigest). Null on every
+  // aspatial world ⇒ no ground is sampled anywhere below.
+  const spatialDigest = /** @type {import('./steadingTopography.js').TopoDigest|null} */ (
+    /** @type {unknown} */ (activeSpatialDigest(/** @type {never} */ (worldState))));
 
   const priorLedger = satellitesLedgerOf(worldState);
   /** @type {Record<string, ParentSatellites>} the working copy (folded at the end) */
@@ -622,11 +669,18 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
         receipts.push({ id: parentId, kind: 'satellite_deferred', reason: 'cap', cap, count: sats.length });
       } else if (armed) {
         // FOUND THE STEADING — through the ONE shared mint (the force verb uses
-        // the same path: force ≡ organic by construction).
+        // the same path: force ≡ organic by construction). The SITE fork is
+        // created only here, on the founding tick, and only when a digest is
+        // active: an aspatial world forks nothing new and stays byte-identical.
+        const siteFork = spatialDigest && rng && typeof rng.fork === 'function'
+          ? rng.fork(`satellite:${parentId}:${tick}:site`)
+          : null;
         const minted = mintSteading({
           parent: parent0, parentId, sats, tick, draw,
           resourceKey: strike ? String(strike.triggeredAt?.sourceEventTargetId || '') : null,
           provenance: strike ? 'resource_strike' : 'growth',
+          digest: spatialDigest,
+          siteDraw: siteFork ? () => siteFork.random() : null,
         });
         if ('record' in minted) {
           const { record: rec, debit } = minted;
@@ -645,17 +699,29 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
           receipts.push({
             id: parentId, kind: 'satellite_founded', satId: rec.id, name: rec.name, founders: debit,
             provenance: rec.provenance, ...(rec.resourceKey ? { resourceKey: rec.resourceKey } : {}), orbit: rec.orbit,
+            ...(rec.site ? { site: rec.site } : {}),
+            ...(rec.resources ? { resources: rec.resources } : {}),
             sources: { boom, strike: !!strike, inflow },
           });
+          // THE GROUND, NAMED IN-WORLD (W-E). A sampled site swaps the growth
+          // summary for the site pool; a strike keeps its own voice (the workings
+          // are the stronger fact) and carries the ground in its reasons.
+          const place = rec.site ? landformPlaceName(rec.site.landform) : '';
           newsEntries.push(steadingNews('steading_founded', parentId, tick, now, {
             headline: pickLine(LIFECYCLE_NEWS.founded.headline, `${parentId}:${rec.id}:${tick}:h`, { parent: String(parent0.name || parentId) }),
             summary: rec.provenance === 'resource_strike'
               ? pickLine(LIFECYCLE_NEWS.founded.summary_strike, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, resource: String(rec.resourceKey || '').replace(/_/g, ' ') })
-              : pickLine(LIFECYCLE_NEWS.founded.summary_growth, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId) }),
+              : rec.site
+                ? pickLine(LIFECYCLE_NEWS.founded.summary_site, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId), place })
+                : pickLine(LIFECYCLE_NEWS.founded.summary_growth, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId) }),
             reasons: [
               boom ? 'A boom sends capital and families looking outward.' : null,
               strike ? 'A fresh resource strike wants hands at the vein.' : null,
               inflow ? 'Newcomers the town cannot absorb become the frontier.' : null,
+              rec.site ? `The settlers chose ${place}, inside the town's own country.` : null,
+              rec.resources && rec.resources.length
+                ? `The ground offers ${rec.resources.map(resourcePhrase).join(', ')}.`
+                : null,
             ].filter((r) => r != null).map(String),
           }));
         }
@@ -910,13 +976,18 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
  * @param {(k: string) => { random: () => number }} args.forkFn
  * @param {string|null} [args.name]        freetext name (cosmetic dial)
  * @param {string|null} [args.resourceKey] optional resource assignment
+ * @param {import('./steadingTopography.js').TopoDigest|null} [args.digest] the FROZEN
+ *   rasters, READ-ONLY (W-E) — threaded so a DECREED founding samples the same
+ *   ground an organic one would (force ≡ organic, extended to topography)
  * @returns {{ record: SatelliteRecord, debit: number, receipt: Record<string, unknown> } | { refusal: string }}
  */
-export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name = null, resourceKey = null }) {
+export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name = null, resourceKey = null, digest = null }) {
   const fork = forkFn(`satellite:${parentId}:${tick}`);
+  const siteFork = digest ? forkFn(`satellite:${parentId}:${tick}:site`) : null;
   const minted = mintSteading({
     parent, parentId, sats, tick, draw: () => fork.random(),
     nameOverride: name, resourceKey, provenance: 'forced',
+    digest, siteDraw: siteFork ? () => siteFork.random() : null,
   });
   if ('refusal' in minted) return minted;
   return {
@@ -925,6 +996,8 @@ export function forceFoundSteading({ parent, parentId, sats, tick, forkFn, name 
       id: parentId, kind: 'satellite_founded', forced: true,
       satId: minted.record.id, name: minted.record.name, founders: minted.debit,
       provenance: 'forced', ...(minted.record.resourceKey ? { resourceKey: minted.record.resourceKey } : {}),
+      ...(minted.record.site ? { site: minted.record.site } : {}),
+      ...(minted.record.resources ? { resources: minted.record.resources } : {}),
       orbit: minted.record.orbit,
     },
   };

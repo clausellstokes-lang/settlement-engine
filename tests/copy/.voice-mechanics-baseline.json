@@ -372,7 +372,7 @@
   "bang": 0
  },
  "src/domain/worldPulse/settlementLifecycleKernel.js": {
-  "em": 5,
+  "em": 4,
   "bang": 0
  },
  "src/domain/worldPulse/settlementPolitics.js": {

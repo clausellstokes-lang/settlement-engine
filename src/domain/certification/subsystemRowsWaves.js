@@ -35,7 +35,7 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'settlementLifecycleEnabled',
     title: 'Settlement lifecycle',
-    module: 'src/domain/worldPulse/settlementLifecycleFirstClass.js,src/domain/worldPulse/settlementLifecycleKernel.js',
+    module: 'src/domain/worldPulse/settlementLifecycleFirstClass.js,src/domain/worldPulse/settlementLifecycleKernel.js,src/domain/worldPulse/steadingTopography.js',
     aliveness: Object.freeze({
       // The FIRST-CLASS lane rides the ordinary candidate seam (pulseKernel calls
       // evaluateSettlementLifecycle before rollCandidates), so both literals reach
@@ -68,6 +68,19 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
         name: 'terminal_death_is_dwelt',
         description: 'A settlement never dies suddenly. settlement_terminal_death fires only after an extended dwell at the bottom tier, so a death always has an observable decline behind it.',
         check: 'For every receipt year carrying settlement_terminal_death, an earlier year in the same case shows the affected settlement falling through prosperity and population toward the tier floor. Expressible from the v4 per-year stateVectors series plus eventTypeCounts.',
+      }),
+      // W-E (J-D4). The satellite lane gained an observable channel: on a SPATIAL
+      // world a founding samples the frozen rasters read-only and stamps the ground
+      // it chose plus the resources that ground implies onto the ledger record.
+      Object.freeze({
+        name: 'steading_ground_is_sampled_not_invented',
+        description: 'On a spatially canonized world every satellite steading sits on a real cell of the frozen rasters, inside its own parent country, on land, and its starting resources are all legal at that ground under the same terrain vocabulary generation itself rolls from. The lane reads the digest and never writes it.',
+        check: 'For every satellites ledger record carrying a site, digest.territory[site.cell] resolves to the record parentId and digest.costField[site.cell] is above the impassable sentinel, and every key in record.resources is a RESOURCE_DATA key compatible with the ground the landform maps to. Expressible from a v5 subsystems.stateKeys census that carries the satellite record bodies alongside the frozen digest; NOT yet expressible from the current census, which records entry counts only.',
+      }),
+      Object.freeze({
+        name: 'strike_camp_sits_at_its_seam',
+        description: 'A steading founded on a resource strike is placed on ground where that vein could actually be worked, not at an arbitrary point of the orbit. The mining camp goes to the rock.',
+        check: 'For every satellite_founded receipt whose provenance is resource_strike and which carries a site, the site landform is one the struck resourceKey leans to or is at minimum legal on. Expressible once satellite receipts are carried in the census; today it is pinned in tests/domain/steadingTopography.test.js against a built digest.',
       }),
     ]),
     // The 100-year release case measured 20 terminal deaths and 20 resettlements;
