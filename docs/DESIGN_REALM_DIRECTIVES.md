@@ -174,6 +174,20 @@
   at news speed — pinned as an integration property with the brokerage/belief layer;
   (f) dark flag routeLifecycleEnabled + dormancy goldens + all thresholds as tuning
   bands; charter and abandonment events carry full address chains.
+  **AMENDED 2026-07-31 (owner clarification — EFFICIENCY IS MATERIAL):** the route
+  objective is denominated in GOODS AND SERVICES, not abstract cost: (g) corridor
+  demand derives from actual commodity/service IMBALANCES through the existing
+  vocabulary (goodsCatalog, supplyChainData, commodity flows, foodBalance import
+  channels) — a grain deficit west and a surplus east IS the corridor's demand, so a
+  charter event can say WHY in goods ("grain wants to move west; the road follows");
+  (h) the SYSTEM term = REALM SELF-SUFFICIENCY: a candidate route scores by how much
+  it reduces the realm's aggregate unmet demand (closing material loops), with a
+  resilience credit for giving a critical good a second path — and self-sufficiency
+  becomes a MEASURED realm metric (certification observation + soak envelope
+  candidate: the network should monotonically improve realm self-sufficiency absent
+  shocks); (i) this gives supply-web warfare its true target — cutting a route now
+  severs a named material artery, and the war layer's interdiction reasoning reads
+  the same flow ledger the charter events write.
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
