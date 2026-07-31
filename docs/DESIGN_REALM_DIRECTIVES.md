@@ -65,6 +65,15 @@
    within the exclusion window (tunable band, long by default), and the edict carries a
    harsher reputation mark than a scandal-only displacement. The DM assign verb remains
    sovereign and may override any exclusion explicitly.
+   AMENDED 2026-07-31 (population floor invariant): NPCs COUNT TOWARD POPULATION, and a
+   settlement can never reach 0 population while at least one named NPC resides there —
+   population >= resident named-NPC count AT ALL TIMES; anonymous residents drain first.
+   RECONCILIATION with the terminal-death lane (the 2026-07-31 zombie cure): a town
+   reduced to only its named cast IS terminal-decline eligible ("only the innkeeper
+   remains" is a dying town), but resolution DISPERSES the cast into roaming (per the
+   destruction rule) in the same outcome — the empty fast path's effective-zero floor
+   evaluates against pop MINUS resident named NPCs, and W-H must land this
+   reconciliation inside settlementLifecycleFirstClass alongside the roaming pool.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
