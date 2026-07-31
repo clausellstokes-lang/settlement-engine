@@ -75,6 +75,18 @@
    evaluates against pop MINUS resident named NPCs, and W-H must land this
    reconciliation inside settlementLifecycleFirstClass alongside the roaming pool.
 
+9. ORGANIC ROUTE LIFECYCLE (added 2026-07-31) — as time advances, routes form and
+   fade organically: efficiency-primary (settlement AND system benefit), topography-
+   reactive, reacting to rise/fall, conflict, and shifting trade costs. Isolation ends
+   when connection becomes worth an expedition — or persists as geographic fate when
+   nothing ever will. Removal where the system says it is not worth it, and on
+   settlement destruction — ALWAYS leaving a HIDDEN PATH (the roads-layer remnant,
+   pairing with the settlement remnant's privileged-rebirth law) for potential revival.
+   PORTS TOTALITY: every port settlement has water routes (the seaRoads coverage
+   becomes an invariant). ROAMER TRAVEL PHYSICS: roaming NPCs move at most ONE
+   route-hop per tick, only on routes connected to their current settlement, and may
+   be MID-ROUTE at any pause (the armyTransit ledger pattern).
+
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
   every settlement before proposing ANY change. The popup itemizes exactly what it will do,
@@ -148,6 +160,21 @@
   W-H is SLICED AS A PROGRAM: H1 identity+state, H2 outcomes, H3 circulation+rejection,
   H4 UI+verbs — each dark, each gated, each its own commit.
 
+- **J-D9 (route lifecycle — Fable refinements, veto open):** (a) DEMAND-THEN-CHARTER
+  formation: accumulated informal corridor flow crosses a threshold, then a charter/
+  expedition EVENT materializes the route — every network change is an address-chain
+  story, never silent re-optimization (anti-stasis, anti-flap, pacing-governed);
+  (b) HYSTERESIS: formation threshold well above removal threshold; wars never remove
+  routes on the fast timescale (trade_route_disruption is the fast layer; organic
+  removal is the slow verdict); (c) DUAL-BENEFIT formation (local demand AND system
+  improvement) with its asymmetric mercy: system-critical links resist removal while
+  an endpoint struggles; (d) decay ladder road → track → hidden → (hidden persists);
+  wanderers and smugglers may travel hidden paths slowly, armies may not;
+  (e) THE REPUTATION RACE is a designed property: persons move at road speed, stories
+  at news speed — pinned as an integration property with the brokerage/belief layer;
+  (f) dark flag routeLifecycleEnabled + dormancy goldens + all thresholds as tuning
+  bands; charter and abandonment events carry full address chains.
+
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
   green or a documented tuning-band finding. NO engine edits.
@@ -161,6 +188,9 @@
 - **W-E (item 4):** satellite topographic resources.
 - **W-F (item 7-popup):** the gathered adjudication screen + held docket + Herald pointer.
 - **W-G (item 1):** autoplacement (scoring derivation + button + consent popup per J-D1).
+- **W-J (item 9):** organic route lifecycle per J-D9 — demand ledgers, charter/decay
+  events, hidden-path remnants, ports-water totality invariant; roamer travel physics
+  land in W-H H3 (shared armyTransit pattern).
 - **W-H (item 8):** NPC corruption consequences per J-D8 — architected fully at wave
   start (its own slice spec), built dark, envelope-verified, Herald-wired.
 

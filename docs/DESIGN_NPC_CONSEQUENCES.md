@@ -129,6 +129,14 @@ existing `_preservation` remap unchanged.
   the CLOSED vocabulary (J-D8b iv): `advisor | agent | quartermaster | envoy |
   enforcer` — mapped from the NPC's profession facet by authored table; embeds via the
   same admission rules inside the rival's settlements/factions.
+- **TRAVEL PHYSICS (owner amendment 2026-07-31):** roamers move at most ONE
+  route-hop per tick, only on routes connected to their current settlement, and may be
+  MID-ROUTE at any pause — the armyTransit conditional-ledger pattern (drop-when-empty,
+  dormancy-safe). Wanderers may use hidden paths (slowly); armies may not. DESIGNED
+  CONSEQUENCE: a person travels at road speed while their story travels at news speed —
+  the reputation race is a real mechanic (integration property pinned with §6b and the
+  brokerage persons channel: whether the wanderer or the rumor arrives first depends on
+  distance, route quality, and listeners at the gate).
 - **Equilibrium (J-D8b i):** rehost pressure RISES with time-in-pool (banded), so
   unassigned roamers eventually settle themselves; pool size is envelope-bounded at
   soak horizons. The Wanderers register cannot become a graveyard of forgotten names.
