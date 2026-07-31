@@ -803,10 +803,12 @@ describe('F41 — PDF worker source contracts', () => {
     expect(workerSrc).toMatch(/from\s+['"]\.\.\/pdf\/SettlementPDF\.jsx['"]/);
   });
 
-  // The worker's own module scope must stay free of dynamic import() —
-  // Vite's default worker.format is 'iife', which hard-fails the build on a
-  // code-split worker graph. (Vendored deps are checked by the build itself;
-  // this pins our file so a future edit fails with a named culprit.)
+  // The worker's own module scope must stay free of dynamic import(). The
+  // rationale is stated once, in src/utils/pdfRender.worker.js's docblock — it
+  // is a latency contract, NOT the old build constraint (worker.format is 'es'
+  // here, and townScene.worker code-splits under it, so a split PDF graph would
+  // build fine). Vendored deps are the build's problem; this pins our file so a
+  // future edit fails with a named culprit.
   it('pdfRender.worker.js contains no dynamic import()', () => {
     const code = workerSrc
       .replace(/\/\*[\s\S]*?\*\//g, '')

@@ -386,23 +386,35 @@ export default defineConfig({
     //     mobile) for the network fetch; subsequent exports hit the HTTP
     //     cache.
     //
-    // NOTE on engine: `engine` is intentionally NOT in this filter, and no
-    // longer needs to be — the engine chunk (~656 kB / 214 kB gz) is now
-    // ABSENT from the entry's first-paint static closure. The eager store/
-    // domain edges that used to reach it (neighbour backlink, coherence
-    // draft-check, defense display, and the createPRNG seam) now resolve to
-    // the small `kernel` + `engine-core` chunks instead (see manualChunks
-    // below), so the big engine chunk is genuinely lazy — fetched only when
-    // the user Generates (settlementSlice's loadEngine dynamic import) or a
-    // lazy dossier tab pulls it. A preload filter would be moot: the entry
-    // has no static edge to engine to hint in the first place.
+    // NOTE on engine: the big `engine` chunk (~656 kB / 214 kB gz) is ABSENT
+    // from the entry's first-paint static closure. The eager store/domain
+    // edges that used to reach it (neighbour backlink, coherence draft-check,
+    // defense display, and the createPRNG seam) resolve to the small `kernel`
+    // + `engine-core` chunks instead (see manualChunks below), so the big
+    // engine chunk is genuinely lazy — fetched only when the user Generates
+    // (settlementSlice's loadEngine dynamic import) or a lazy dossier tab
+    // pulls it. It stays in the filter anyway: on the HTML side the strip is
+    // a no-op today (no static edge to hint), and it keeps the hint off the
+    // dynamic-import dep lists.
+    //
+    // NOTE on engine-core: it is the OPPOSITE case, and the reason the filter
+    // needs a `core-` guard. engine-core IS eager (inside the first-paint
+    // static closure), so stripping its hint cannot make it lazy — it only
+    // serializes its ~95 kB fetch behind the entry's download and parse. An
+    // unguarded `engine-` alternative matches `engine-core-<hash>` because the
+    // hash character class contains `-`; the guard is what keeps the eager
+    // chunk's hint. It also spares `engine-core-lazy`, which the entry never
+    // statically reaches, so no HTML hint exists for it either way.
     modulePreload: {
       resolveDependencies(_filename, deps) {
-        // vendor-pdf AND the engine chunk (ported master fix): the heavy
+        // vendor-pdf AND the lazy engine chunk (ported master fix): the heavy
         // generators should download on first GENERATE, not first paint — the
         // hint strip is graph-neutral (no closure-budget effect), it only stops
         // the browser pre-fetching the chunk alongside the entry.
-        return deps.filter(d => !/\/(vendor-pdf|engine)-[A-Za-z0-9_-]+\.js$/.test(d));
+        // @guarded-by tests/build/engineChunkLazy.test.js: its preload assertion
+        // and ENGINE_CHUNK_RE carry the same `(?!core-)` guard for the same
+        // engine / engine-core ambiguity — the two must move together.
+        return deps.filter(d => !/\/(vendor-pdf-|engine-(?!core-))[A-Za-z0-9_-]+\.js$/.test(d));
       },
     },
     rollupOptions: {
