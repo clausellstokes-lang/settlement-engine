@@ -53,6 +53,7 @@
     "ops:migrations:rehearse": "node scripts/ops/migration-rehearsal.mjs",
     "ops:post-deploy": "node scripts/ops/post-deploy-verify.mjs",
     "certify:generation": "node scripts/audit/generation-certification-soak.mjs",
+    "certify:subsystems": "node scripts/audit/certify-subsystems.mjs",
     "soak:smoke": "node scripts/audit/realm-scale-certification.mjs --profile smoke",
     "soak:weekly": "node scripts/audit/realm-scale-certification.mjs --profile weekly",
     "soak:release": "node scripts/audit/realm-scale-certification.mjs --profile release",

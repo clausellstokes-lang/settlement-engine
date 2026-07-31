@@ -74,6 +74,28 @@ export { BEHAVIORAL_CONTRACT_VERSION };
 export const BEHAVIORAL_OBSERVATION_VERSION = 4;
 export const HUMAN_CHRONICLE_REVIEW_VERSION = 1;
 
+/**
+ * The whole-world soak RECEIPT ENVELOPE version, which is a different axis from
+ * BEHAVIORAL_OBSERVATION_VERSION above: the observation version governs the
+ * meaning of each behavioral.yearly row, while this governs the receipt's
+ * top-level sections. v5 ADDS the `subsystems` section (the per-subsystem rule
+ * state and the worldState key census that subsystemCertification.js grades
+ * against). It changes NO v4 field: every v4 section keeps its exact meaning, so
+ * the behavioral oracle continues to read completed v4 evidence unchanged and
+ * BEHAVIORAL_OBSERVATION_VERSION deliberately stays at 4. Bumping the observation
+ * version instead would have blinded this oracle to every soak receipt already on
+ * disk, which is a silent evidence regression rather than a schema improvement.
+ */
+export const SOAK_RECEIPT_SCHEMA_VERSION = 5;
+
+/**
+ * Receipt envelope versions this estate still reads. v4 receipts predate the
+ * subsystems section; consumers must grade what a v4 receipt carries and report
+ * the rest as an honest instrument gap rather than as a pass.
+ * @type {ReadonlyArray<number>}
+ */
+export const SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS = Object.freeze([4, 5]);
+
 export const CERTIFICATION_HORIZONS = Object.freeze({
   useful: Object.freeze({
     years: 30,

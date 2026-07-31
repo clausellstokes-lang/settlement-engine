@@ -8,6 +8,7 @@ import {
   BEHAVIORAL_MOVER_FAMILIES,
   BEHAVIORAL_OBSERVATION_VERSION,
   CERTIFICATION_HORIZONS,
+  SOAK_RECEIPT_SCHEMA_VERSION,
 } from '../../src/domain/certification/behavioralContract.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
@@ -546,6 +547,172 @@ function integrityFailuresOf(settlement) {
   return failures;
 }
 
+// ── BELIEF DIVERGENCE (2026-07-31) ───────────────────────────────────────────
+// THE BLIND SPOT THIS CLOSES. infoMode is the one unlocked simulation-profile axis
+// (omniscient / perfect_delayed / full / unreliable) and NOTHING in the receipt
+// envelope observed its consequence. A run could carry infoMode 'full' and a fully
+// materialized belief map while every belief in it was either perfectly true or
+// permanently wrong, and no field could tell those apart. Worse, the obvious proxy
+// is a trap: the `knowledge` mover family is a RESIDUAL bucket (fifteen unrelated
+// impactKinds reach it through the `news` token in their own wizard-news id), so
+// "knowledge: 28" over thirty years proves nothing about the belief lane at all.
+//
+// WHAT IS MEASURED. Two CATEGORICAL belief axes, each compared against a ground
+// truth this adapter can read exactly, with no re-implementation of engine math:
+//   relationship  the believed allianceLabel against the declared relationship on
+//                 the regional-graph edge, overlaid by worldState.relationshipStates
+//                 (read the same way beliefMap's relationshipNeighbourhood reads it).
+//   faith         the believed faithLabel against the settlement's public
+//                 primaryDeitySnapshot name (the same field groundTruthBelief seeds
+//                 from).
+// The numeric axes (strengthBand, readiness) are DELIBERATELY NOT compared: their
+// ground truth is settlementStrength over a live pressure index, and reconstructing
+// it here would fork the engine's math into an audit adapter, which is exactly the
+// drift this estate has been bitten by. Their absence is reported as an axis gap
+// rather than folded silently into the mean.
+//
+// Pure and deterministic: sorted key iteration, integer tick arithmetic, no clock,
+// no rng, no locale compare. Observational only; it tunes and mutates nothing.
+
+/** The reserved one-key seed sentinel that sits BESIDE the observer ids in the
+ *  belief map (beliefMap.js BELIEF_SEED_KEY). It is not an observer. */
+const BELIEF_SEED_SENTINEL = '__seededAt';
+
+/** 4-dp round, so the metric adds bounded, byte-stable digits to the receipt. */
+const round4 = (value) => Math.round(finite(value) * 10000) / 10000;
+
+/**
+ * observer|subject (both directions) to the DECLARED relationship label, read off
+ * the regional-graph edges and overlaid by worldState.relationshipStates on the
+ * edge id. Tolerant of the from/source/a and to/target/b aliases, matching the
+ * belief engine's own edge reader.
+ */
+function declaredRelationshipIndex(result) {
+  const states = asObject(result?.worldState?.relationshipStates);
+  const edges = Array.isArray(result?.regionalGraph?.edges)
+    ? result.regionalGraph.edges
+    : [];
+  const index = new Map();
+  for (const raw of edges) {
+    const from = String(raw?.from ?? raw?.source ?? raw?.a ?? '');
+    const to = String(raw?.to ?? raw?.target ?? raw?.b ?? '');
+    if (!from || !to || from === to) continue;
+    const overlay = asObject(states[String(raw?.id ?? `edge.${from}.${to}`)]);
+    const label = String(overlay.relationshipType || raw?.relationshipType || 'neutral');
+    if (!index.has(`${from}|${to}`)) index.set(`${from}|${to}`, label);
+    if (!index.has(`${to}|${from}`)) index.set(`${to}|${from}`, label);
+  }
+  return index;
+}
+
+/** settlementId to its PUBLIC dominant-faith name, or null when it has none. */
+function declaredFaithIndex(saves) {
+  const index = new Map();
+  for (const save of Array.isArray(saves) ? saves : []) {
+    const id = String(save?.id ?? save?.saveId ?? '');
+    if (!id) continue;
+    const name = (save?.settlement || save)?.config?.primaryDeitySnapshot?.name;
+    index.set(id, typeof name === 'string' && name ? name : null);
+  }
+  return index;
+}
+
+/**
+ * The compact belief-versus-ground-truth distance for ONE observed year.
+ *
+ * divergence01 is the mean of the COMPARABLE axis mismatch rates, so an axis with
+ * no comparable pairs lowers no average and is named in `axes` instead. It is null
+ * when nothing was comparable at all: a dormant or omniscient realm reports an
+ * honest instrument gap here, never a flattering zero.
+ */
+export function observeBeliefDivergence({ result, afterSaves }) {
+  const worldState = asObject(result?.worldState);
+  const maps = asObject(asObject(worldState.spatialLedgers).beliefMaps);
+  const rules = asObject(worldState.simulationRules);
+  const tick = finite(worldState.tick ?? result?.tick);
+  const relationships = declaredRelationshipIndex(result);
+  const faiths = declaredFaithIndex(afterSaves);
+
+  let observers = 0;
+  let slots = 0;
+  let records = 0;
+  let confidenceTotal = 0;
+  let stalenessTotal = 0;
+  let stalenessMax = 0;
+  let relationshipComparable = 0;
+  let relationshipMismatched = 0;
+  let faithComparable = 0;
+  let faithMismatched = 0;
+
+  for (const observerId of Object.keys(maps).sort()) {
+    if (observerId === BELIEF_SEED_SENTINEL) continue;
+    const byFaction = asObject(maps[observerId]);
+    let observerCounted = false;
+    for (const factionKey of Object.keys(byFaction).sort()) {
+      const bySubject = asObject(byFaction[factionKey]);
+      let slotCounted = false;
+      for (const subjectId of Object.keys(bySubject).sort()) {
+        const record = asObject(bySubject[subjectId]);
+        if (Object.keys(record).length === 0) continue;
+        records += 1;
+        if (!observerCounted) { observers += 1; observerCounted = true; }
+        if (!slotCounted) { slots += 1; slotCounted = true; }
+        confidenceTotal += Math.min(1, Math.max(0, finite(record.confidence01)));
+        const staleness = Math.max(0, tick - finite(record.lastUpdateTick));
+        stalenessTotal += staleness;
+        stalenessMax = Math.max(stalenessMax, staleness);
+
+        const trueLabel = relationships.get(`${observerId}|${subjectId}`);
+        const believedLabel = record.allianceLabel;
+        if (trueLabel != null && typeof believedLabel === 'string' && believedLabel) {
+          relationshipComparable += 1;
+          if (believedLabel !== trueLabel) relationshipMismatched += 1;
+        }
+
+        if (faiths.has(subjectId) && 'faithLabel' in record) {
+          faithComparable += 1;
+          const trueFaith = faiths.get(subjectId);
+          const believedFaith = typeof record.faithLabel === 'string' ? record.faithLabel : null;
+          if (String(believedFaith ?? '') !== String(trueFaith ?? '')) faithMismatched += 1;
+        }
+      }
+    }
+  }
+
+  const axes = [];
+  const rates = [];
+  if (relationshipComparable > 0) {
+    axes.push('relationship');
+    rates.push(relationshipMismatched / relationshipComparable);
+  }
+  if (faithComparable > 0) {
+    axes.push('faith');
+    rates.push(faithMismatched / faithComparable);
+  }
+
+  return {
+    // The two halves of the belief engine's activation gate, recorded so a reader
+    // can separate a QUIET knowledge lane from a DORMANT one without re-running.
+    infoMode: typeof rules.infoMode === 'string' ? rules.infoMode : null,
+    spatialCanonized: Number.isInteger(worldState.spatialCanonVersion)
+      && Number(worldState.spatialCanonVersion) > 0,
+    observers,
+    slots,
+    records,
+    meanConfidence01: records > 0 ? round4(confidenceTotal / records) : null,
+    meanStalenessTicks: records > 0 ? round4(stalenessTotal / records) : null,
+    maxStalenessTicks: records > 0 ? stalenessMax : null,
+    relationshipComparable,
+    relationshipMismatched,
+    faithComparable,
+    faithMismatched,
+    axes,
+    divergence01: rates.length
+      ? round4(rates.reduce((total, rate) => total + rate, 0) / rates.length)
+      : null,
+  };
+}
+
 /**
  * Observe one simulated year.
  */
@@ -705,6 +872,12 @@ export function observeBehavioralYear({
     causal,
     chronicleSample: chronicleSampleOf(records, major.ids),
     stateVectors,
+    // ADDITIVE, and deliberately NOT a BEHAVIORAL_OBSERVATION_VERSION bump: it
+    // changes the meaning of no existing field, and bumping would blind the
+    // behavioral oracle to every soak receipt already on disk (the same reasoning
+    // recorded for the v5 envelope in behavioralContract.js). A v4 receipt simply
+    // lacks this key, which consumers must read as an instrument gap.
+    beliefDivergence: observeBeliefDivergence({ result, afterSaves }),
   };
 }
 
@@ -782,6 +955,87 @@ export function buildDarkControl({
     litBaselineActivityCount: finite(litBaselineYear?.eventCount),
     darkActivityCount,
     conditionalStateLeaks,
+  };
+}
+
+/**
+ * Census ONE year's worldState containers, so a subsystem whose only observable
+ * output is a sidecar ledger can still be graded. Deliberately TOTAL over the
+ * top-level keys plus one level into spatialLedgers (where the wave and one-regen
+ * sidecars live): totality is what lets a certification read a key's ABSENCE as
+ * evidence rather than as a gap. A scalar marker counts as one entry so a
+ * presence flag is observable; a null or undefined value is not recorded at all.
+ */
+export function censusWorldStateKeys(worldState) {
+  const state = asObject(worldState);
+  const entriesOfValue = (value) => {
+    if (Array.isArray(value)) return value.length;
+    if (value && typeof value === 'object') return Object.keys(value).length;
+    return value == null ? null : 1;
+  };
+  const census = {};
+  for (const key of Object.keys(state).sort()) {
+    const count = entriesOfValue(state[key]);
+    if (count == null) continue;
+    census[key] = count;
+    if (key !== 'spatialLedgers') continue;
+    const ledgers = asObject(state[key]);
+    for (const sub of Object.keys(ledgers).sort()) {
+      const subCount = entriesOfValue(ledgers[sub]);
+      if (subCount != null) census[`${key}.${sub}`] = subCount;
+    }
+  }
+  return census;
+}
+
+/**
+ * Fold per-year censuses into the receipt shape: how many observed years carried
+ * the key at all, the largest population it ever reached, and where it ended.
+ * maxEntries is the aliveness signal, because a ledger that filled and drained
+ * still proves its subsystem ran.
+ */
+export function foldStateKeyCensus(yearlyCensuses) {
+  const folded = {};
+  for (const census of Array.isArray(yearlyCensuses) ? yearlyCensuses : []) {
+    for (const [key, count] of Object.entries(asObject(census))) {
+      const row = folded[key] || { years: 0, maxEntries: 0, finalEntries: 0 };
+      row.years += 1;
+      row.maxEntries = Math.max(row.maxEntries, finite(count));
+      row.finalEntries = finite(count);
+      folded[key] = row;
+    }
+  }
+  return Object.fromEntries(Object.keys(folded).sort().map((key) => [key, folded[key]]));
+}
+
+/**
+ * The receipt's `subsystems` section (envelope schema v5). It records WHICH
+ * subsystem switches the run actually carried and WHICH worldState containers it
+ * ever populated, so evaluateSubsystemCertification can separate "off by config"
+ * from "on and silent" without inferring either.
+ */
+export function buildSubsystemConfiguration({
+  presetId,
+  rules,
+  yearlyCensuses,
+}) {
+  const booleanRules = {};
+  for (const key of Object.keys(asObject(rules)).sort()) {
+    if (typeof asObject(rules)[key] === 'boolean') booleanRules[key] = asObject(rules)[key];
+  }
+  const stateKeys = foldStateKeyCensus(yearlyCensuses);
+  return {
+    schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
+    kind: 'soak_subsystem_configuration',
+    presetId: presetId == null ? null : String(presetId),
+    observedYears: Array.isArray(yearlyCensuses) ? yearlyCensuses.length : 0,
+    ruleKeysRecorded: Object.keys(booleanRules).length,
+    rules: booleanRules,
+    // The census enumerated every worldState container at every observed year, so
+    // a key absent from stateKeys was never present. Certification may therefore
+    // read absence as zero evidence instead of as an instrument gap.
+    stateKeysComplete: true,
+    stateKeys,
   };
 }
 

@@ -3,7 +3,10 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { BEHAVIORAL_OBSERVATION_VERSION } from '../../src/domain/certification/behavioralContract.js';
+import {
+  BEHAVIORAL_OBSERVATION_VERSION,
+  SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS,
+} from '../../src/domain/certification/behavioralContract.js';
 import {
   buildRealmScalePlan,
   isPassingWholeWorldReceipt,
@@ -131,6 +134,30 @@ describe('realm scale certification evidence', () => {
   it('binds the maintained spatial pack fixture into the aggregate source identity', () => {
     expect(REALM_SCALE_SOURCE_PATHS)
       .toContain('tests/fixtures/spatialPackFixtures.js');
+  });
+
+  it('admits both supported receipt envelopes and rejects retired ones', () => {
+    // The envelope bumped 4 -> 5 when the subsystems section landed. v5 ADDS a
+    // section and changes no field this predicate reads, so BOTH must pass:
+    // pinning a single version here would silently reject every receipt the
+    // soak writes after a bump, which is how a green harness stops seeing its
+    // own evidence.
+    const v4 = passingChildReceipt();
+    expect(SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).toEqual([4, 5]);
+    expect(isPassingWholeWorldReceipt({ ...v4, schemaVersion: 4 })).toBe(true);
+    expect(isPassingWholeWorldReceipt({
+      ...v4,
+      schemaVersion: 5,
+      subsystems: {
+        schemaVersion: 5,
+        kind: 'soak_subsystem_configuration',
+        presetId: 'full_simulation',
+        rules: { npcAgencyEnabled: true },
+        stateKeysComplete: true,
+        stateKeys: {},
+      },
+    })).toBe(true);
+    expect(isPassingWholeWorldReceipt({ ...v4, schemaVersion: 3 })).toBe(false);
   });
 
   it('rejects clone-only, mislabeled, or output-divergent worker receipts', () => {

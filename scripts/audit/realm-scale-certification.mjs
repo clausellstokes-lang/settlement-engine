@@ -26,6 +26,7 @@ import { dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   BEHAVIORAL_OBSERVATION_VERSION,
+  SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS,
   evaluateBehavioralCertification,
 } from '../../src/domain/certification/behavioralContract.js';
 import { CERTIFICATION_REQUIRED_PROPERTY_KEYS } from '../../src/domain/certification/certificationSchema.js';
@@ -257,7 +258,10 @@ export function isPassingWholeWorldReceipt(receipt) {
     Array.isArray(receipt?.properties) ? receipt.properties : [],
   );
   return (
-    receipt?.schemaVersion === 4
+    // Envelope v4 and v5 are both admissible: v5 only ADDS the subsystems section
+    // and changes no field this predicate reads. Pinning a single version here
+    // would have silently rejected every receipt written after the bump.
+    SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS.includes(receipt?.schemaVersion)
     && receipt?.kind === 'whole_world_soak'
     && receipt?.passed === true
     && receipt?.behavioral?.schemaVersion === BEHAVIORAL_OBSERVATION_VERSION

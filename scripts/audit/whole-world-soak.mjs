@@ -54,8 +54,11 @@ import {
   buildBehavioralObservation,
   buildDarkControl,
   buildNeighborControl,
+  buildSubsystemConfiguration,
+  censusWorldStateKeys,
   observeBehavioralYear,
 } from './behavioral-observation.mjs';
+import { SOAK_RECEIPT_SCHEMA_VERSION } from '../../src/domain/certification/behavioralContract.js';
 import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
@@ -251,6 +254,11 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
   const yearlyRealmBytes = [];
   const yearlyMs = [];
   const yearlyBehavior = [];
+  // Envelope v5: the per-year worldState container census. A subsystem whose only
+  // observable output is a sidecar ledger (the satellite lane, the one-regen
+  // sidecars) leaves no candidate in `selected`, so without this census its
+  // certification row could only ever read UNOBSERVED.
+  const yearlyStateKeyCensus = [];
   let firstResultSha256 = null;
   let peakHeapUsedBytes = process.memoryUsage().heapUsed;
   const t0 = Date.now();
@@ -296,6 +304,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
       afterSaves: runningSaves,
       rawWizardNewsEntries: [...rawWizardNewsById.values()],
     }));
+    yearlyStateKeyCensus.push(censusWorldStateKeys(result.worldState));
 
     // 1. NaN/Infinity scan — fail fast with paths.
     const bad = findBadNumber({
@@ -354,6 +363,11 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     peakHeapUsedBytes,
     startPopulations: fixture.saves.map((s) => Number(s.settlement?.population) || 0),
     yearlyBehavior,
+    yearlyStateKeyCensus,
+    // The EFFECTIVE rules this run carried (the preset spread plus any --seasons
+    // override), recorded so the receipt states its configuration instead of
+    // leaving a reader to infer it from the script.
+    simulationRules: fixture.campaign.worldState.simulationRules,
     finalWorldState: runningCampaign.worldState,
   };
 }
@@ -549,7 +563,10 @@ REGION.forEach((r, i) => {
 });
 
 const receipt = {
-  schemaVersion: 4,
+  // Envelope v5 ADDS the `subsystems` section below. Every v4 field keeps its
+  // exact v4 meaning; consumers accept both versions
+  // (SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).
+  schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
   kind: 'whole_world_soak',
   ...(CASE_ID ? { caseId: CASE_ID } : {}),
   seed: SEED,
@@ -583,6 +600,14 @@ const receipt = {
   heapUsedBytes: runA.heapUsedBytes,
   peakHeapUsedBytes: runA.peakHeapUsedBytes,
   realmScalingExercised: SETTLEMENTS === 30,
+  // The per-subsystem certification input: which of the 46 boolean switches this
+  // run carried, and which worldState containers it ever populated. Graded by
+  // src/domain/certification/subsystemCertification.js.
+  subsystems: buildSubsystemConfiguration({
+    presetId: runA.simulationRules?.presetId,
+    rules: runA.simulationRules,
+    yearlyCensuses: runA.yearlyStateKeyCensus,
+  }),
   behavioral: buildBehavioralObservation({
     settlementIds: REGION.map((settlement) => settlement.id),
     yearly: runA.yearlyBehavior,
