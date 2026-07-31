@@ -15,6 +15,13 @@
 >   quadratic (J-D2 amended to k-NN, B1b queued). B2: full auto-resolve through the
 >   proposal accept path with engine-adjudicated provenance; toggle persists. Gate +
 >   commit in progress.
+> - 2026-07-31 (B1b RETURNED): k-nearest selection BUILT (k=3, distance then codepoint
+>   id, spatial canon when present and the codepoint-rank line when not). Edge
+>   population CURED and pinned — 6/16/31 pairs at S=4/8/16 vs a complete graph's
+>   6/28/120, complete at S<=4 by construction. Budget NOT cleared: lit ratios 3.891
+>   (4→8) and 2.620 (8→16) against a 2.6 ceiling, versus all-pairs' 3.312/3.594 —
+>   better, still red. The flag therefore STAYS DARK in every preset and lighting is
+>   OWNER-GATED on re-scoping tickScanBudget (see the J-D2 correction below).
 > - 2026-07-31 (⛔ OWNER STOP ORDER): "stop all of the building after the current
 >   build as we wait for the soak. I may have to hand this off to another account."
 >   BINDING STATE FOR ANY SUCCESSOR: waves A+B COMMITTED (45600de6/3183b3b9/260ddb7d,
@@ -98,6 +105,12 @@
    becomes an invariant). ROAMER TRAVEL PHYSICS: roaming NPCs move at most ONE
    route-hop per tick, only on routes connected to their current settlement, and may
    be MID-ROUTE at any pause (the armyTransit ledger pattern).
+10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
+    each buffer catastrophe individually, and their COMBINATION is the strong buffer:
+    damage reduction against, repair acceleration following. THE DEPENDENCY ASYMMETRY
+    (owner insight, binding): magic's contribution is GATED by economy — magic consumes
+    resources and materials, so mitigation = economy_term + magic_term × economy_gate;
+    a high-magic poor settlement buffers barely better than a mundane poor one.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
@@ -118,6 +131,25 @@
   COMPLETE at N<=4 (exactly where the small-N stasis medicine binds) and O(S*k) at scale,
   under budget with no raise. The dark seam as built stands; only the pair-selection
   function changes (B1b, folds into wave C's batch).
+  **CORRECTED 2026-07-31 (B1b measurement — the amendment's last clause was wrong):**
+  k-nearest is BUILT and its structural claims are CONFIRMED — the selection takes
+  6 / 16 / 31 pairs at S = 4 / 8 / 16 against a complete graph's 6 / 28 / 120, always
+  within S·k, and is exactly complete at S <= 4. But "under budget with no raise" is
+  MEASURED FALSE. Driving the tickScanBudget fixture 12 ticks under full_simulation:
+  dark 1205 / 2521 / 5893 scanOps (ratios 4→8 2.092, 8→16 2.338); lit k-nearest
+  1007 / 3918 / 10266 (3.891, 2.620); lit all-pairs 1001 / 3315 / 11913 (3.312, 3.594).
+  k-nearest beats all-pairs where the asymptote lives (8→16: 2.620 vs 3.594 on 46 edges
+  instead of 128) but no lit window clears the 2.6 ceiling, and the 4→8 window is
+  STRUCTURALLY UNWINNABLE for any k while completeness at S <= 4 is mandated: the lit
+  S=4 fixture is already saturated (+1 edge) while lit S=8 gains +9, so the denominator
+  cannot grow. The ceiling is a 4→8 calibration against the DARK fixture's density, not
+  a scale-free law (the dark ratio itself climbs 2.092 → 2.338). CONSEQUENCE: the flag
+  STAYS DARK in every preset. Lighting it is OWNER-GATED and now costs exactly one
+  decision — re-scope what tickScanBudget measures (a window/ceiling that admits the lit
+  density, holding the index-regression teeth), or price the remaining shape (a lighter
+  default-edge class the hot indices skip until the pair evolves). Nothing else about
+  J-D2 changes; the k-nearest selection ships regardless because it is strictly better
+  than all-pairs at every scale.
 - **J-D3 (user routes):** CREATE_ROUTE is the second command-spine vertical, the mirror
   sibling of CUT_TRADE_ROUTE — same family, same journal/receipt discipline, one
   transaction. User picks endpoints; the engine paths via the spatial travel-cost raster.
@@ -211,6 +243,19 @@
   strategic need persists even after trade dies (the garrison-road asymmetry — the
   war layer writes strategic need into the same ledger). Charter events name their
   dominant flow class so every road tells its origin story.
+- **J-D10 (disaster buffer — Fable refinements, veto open):** (a) THE BUFFER SPENDS
+  ITSELF: mitigation CONVERTS damage into economic drain (treasury, stocks, magical
+  reserves draw down) — damage transmutes, never vanishes; a spent buffer is a
+  vulnerability window, and the second shock is the story the first could not be;
+  (b) MITIGATION CEILING: banded cap, never nullification — tail risk survives at
+  every wealth level; (c) REACHABILITY PIN mandatory: the high-magic × high-economy
+  cell must be proven reachable in generated corpora (the unreachable-conjunction
+  hazard class; effectReachability idiom); (d) receipts narrate the buffer ("the
+  wards held; the granaries paid") — Herald-carried, legibility law; (e) envelope:
+  damage distributions conditioned on magic × economy show the designed ordering AND
+  the gating asymmetry (high-magic/low-economy ≈ mundane/low-economy); (f) bands in
+  the disaster kernel's tuning table; dark behind the existing disasters flag family;
+  dormancy golden. Builds in W-K (queued with the held waves).
 
 ## Waves (execution order = the reviewed sequencing)
 - **W-A (item 6):** tier-inertia envelope + pins. Done-when: envelope registered, powered,
@@ -225,6 +270,7 @@
 - **W-E (item 4):** satellite topographic resources.
 - **W-F (item 7-popup):** the gathered adjudication screen + held docket + Herald pointer.
 - **W-G (item 1):** autoplacement (scoring derivation + button + consent popup per J-D1).
+- **W-K (item 10):** magic-economy disaster buffer per J-D10 (HELD with all waves).
 - **W-J (item 9):** organic route lifecycle per J-D9 — demand ledgers, charter/decay
   events, hidden-path remnants, ports-water totality invariant; roamer travel physics
   land in W-H H3 (shared armyTransit pattern).
