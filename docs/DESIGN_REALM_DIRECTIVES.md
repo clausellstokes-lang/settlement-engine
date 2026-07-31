@@ -322,6 +322,14 @@
   disruption vs organic route removal: a severed reagent road impairs the foundry
   in ticks (starved but working); only sustained economic failure shells it. The
   world responds quickly and concludes slowly, everywhere.
+  **MECHANICAL DEFINITION (owner, 2026-07-31):** impairment = a CAPACITY MODIFIER in
+  [reduced .. temporarily zero]: the engine derives a default severity from the
+  cause; the DM may override anywhere in the range down to full suspension (DM
+  sovereignty over operations); and the impairment is CAUSE-BOUND — every record
+  references its living cause, lifts automatically as an EVENT when the cause
+  resolves ("the road reopened; the fires relit"), and can never orphan (pinned: no
+  impairment without a live cause). Zero-capacity impairment ≠ shell: suspended BY a
+  problem vs unfunded BY a regime — same silence, different cure.
 
 
 ## Waves (execution order = the reviewed sequencing)
