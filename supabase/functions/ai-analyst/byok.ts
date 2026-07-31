@@ -16,6 +16,27 @@
  * VERDICTS rather than prose by database construction. The logging discipline is unchanged
  * and unconditional: neither the key nor the RPC `data` may reach console.*, logError, or
  * any serializer, whatever else the envelope grows.
+ *
+ * ── FAIL CLOSED ON A VAULT ERROR (owner ruling, 2026-07-30) ──────────────────────────
+ * This module used to answer EVERY failure with the shared house key. That silently moved
+ * a BYOK user's request onto the platform account: their prompt reached the provider under
+ * our key, on our bill, outside the boundary they chose. The ruling is that the chosen key
+ * boundary is never crossed silently, so a vault failure is now a TYPED, RETRYABLE refusal
+ * for anyone who has a key of their own.
+ *
+ * The distinction that keeps it from locking out the managed majority: a vault error is not
+ * the same fact as "no key on file". surveyor_byok_get answers NULL, WITHOUT an error, when
+ * the user has no row (139's contract, carried forward by 191) - that answer is a successful
+ * lookup and still takes the house path. Only the error/throw branches are ambiguous, and
+ * they are resolved by a SECOND, independent witness: surveyor_byok_status, the user's own
+ * read of their own key row (granted to `authenticated`, no plaintext, no new grant). It
+ * runs ONLY on the already-failed branch, so the happy path costs nothing extra.
+ *   - witness says NO row  => the user is a managed-key user, house path, unchanged.
+ *   - witness says a row   => fail closed.
+ *   - witness unavailable  => cannot determine => fail closed (the ruling's "or the lookup
+ *     cannot determine that"). A caller that passes no witness therefore fails closed too.
+ * A row that the vault DID answer for but whose plaintext came back blank is also closed:
+ * the row exists, so the boundary exists, and an empty key is a broken read, not an absence.
  */
 import type { CoachingProfile } from '../_shared/modelCoaching.ts';
 
@@ -52,7 +73,43 @@ export interface ResolvedKey {
   probeTier: string | null;
 }
 
-type ProviderKeyAdmin = {
+/**
+ * THE TYPED VAULT FAILURE. Returned instead of a key when the vault could not be read for
+ * a user who has (or may have) a key of their own. `retryable` is the honest word for it:
+ * the request was not sent, nothing was charged, and the same request can simply be made
+ * again once the vault answers. It carries no key material and no request data, so it is
+ * a frozen module constant rather than something built per request.
+ */
+export interface VaultUnavailable {
+  vaultUnavailable: true;
+  code: 'byok_vault_unavailable';
+  status: 503;
+  retryable: true;
+  message: string;
+}
+
+/** What resolveProviderKey answers: a usable key, or the typed refusal. */
+export type ProviderKeyOutcome = ResolvedKey | VaultUnavailable;
+
+/** House copy for the refusal. Names the boundary, the non-charge, and the retry. */
+export const BYOK_VAULT_UNAVAILABLE_MESSAGE =
+  'Your own provider key could not be read just now, so this request was not sent and nothing was charged. Your key is never swapped for ours. Try again in a moment.';
+
+const VAULT_UNAVAILABLE: VaultUnavailable = Object.freeze({
+  vaultUnavailable: true,
+  code: 'byok_vault_unavailable',
+  status: 503,
+  retryable: true,
+  message: BYOK_VAULT_UNAVAILABLE_MESSAGE,
+} as const);
+
+/** The one narrowing gate. Every shell calls this before touching `.key` or `.byok`, and
+ *  the union makes forgetting it a type error rather than a silent house-key request. */
+export function isVaultUnavailable(outcome: ProviderKeyOutcome): outcome is VaultUnavailable {
+  return (outcome as VaultUnavailable).vaultUnavailable === true;
+}
+
+type RpcClient = {
   rpc: (
     fn: string,
     args: Record<string, unknown>,
@@ -60,30 +117,35 @@ type ProviderKeyAdmin = {
 };
 
 /**
- * Resolve the provider API key for a request: the user's decrypted BYOK key if they
- * have one, else the shared server key. On ANY error, falls back to the server key —
- * and NEVER logs the key material (only a keyless, structured note that BYOK lookup
- * failed, if a logger is supplied).
+ * Resolve the provider API key for a request: the user's decrypted BYOK key if they have
+ * one, else the shared server key. A vault failure is a TYPED REFUSAL for a user who has
+ * (or may have) their own key, and the unchanged house path for a user who has none - see
+ * the FAIL CLOSED note at the top of this file. NEVER logs the key material (only a
+ * keyless, structured note that the BYOK lookup failed, if a logger is supplied).
  *
  * @param admin      service-role supabase client (the only role granted surveyor_byok_get)
  * @param userId     the authenticated caller
  * @param provider   e.g. 'anthropic'
- * @param serverKey  the shared server key (fallback)
+ * @param serverKey  the shared server key (used only when the user has no key of their own)
  * @param onLookupError optional keyless error note — MUST NOT be passed the key
+ * @param owner      the caller's OWN user-scoped client, the has-a-key witness consulted
+ *                   only when the vault read failed. Omitting it means the ambiguity can
+ *                   never be resolved, so a vault failure fails closed.
  */
 export async function resolveProviderKey(
-  admin: ProviderKeyAdmin,
+  admin: RpcClient,
   userId: string,
   provider: string,
   serverKey: string,
   onLookupError?: (note: string) => void,
-): Promise<ResolvedKey> {
+  owner?: RpcClient,
+): Promise<ProviderKeyOutcome> {
   try {
     const { data, error } = await admin.rpc('surveyor_byok_get', { p_user: userId, p_provider: provider });
     if (error) {
       // Log the FACT of a failure — never the key, never the RPC data.
-      if (onLookupError) onLookupError('surveyor_byok_get errored — using server key');
-      return serverKeyResult(serverKey);
+      if (onLookupError) onLookupError('surveyor_byok_get errored — vault unreadable');
+      return await settleVaultFailure(owner, provider, serverKey);
     }
     // ── the LEGACY shape: the plaintext key as a bare string ────────────────────
     // Migration 191 part 2 widened this RPC to an object carrying the key PLUS the exam
@@ -91,9 +153,15 @@ export async function resolveProviderKey(
     // and migrations deploy separately, so between the two deploys this code runs against
     // 139's `returns text` body, and a rollback puts it back. A shape assumption here
     // would present as every user silently losing BYOK for the length of that window.
-    if (typeof data === 'string' && data.trim().length > 0) {
+    if (typeof data === 'string') {
       // The user's own key. Returned to the caller for the provider request ONLY.
-      return { key: data, byok: true, probeProfile: null, probeModel: null, probeVersion: null, probeTier: null };
+      if (data.trim().length > 0) {
+        return { key: data, byok: true, probeProfile: null, probeModel: null, probeVersion: null, probeTier: null };
+      }
+      // A STRING at all means a row: 139's body returns NULL, not '', when there is no
+      // key on file. So a blank plaintext is a broken read of an existing key, and the
+      // boundary it belongs to is real. Closed, without asking the witness.
+      return VAULT_UNAVAILABLE;
     }
     // ── the CARRY-ALL shape (migration 191 part 2) ──────────────────────────────
     // Read field by field rather than spread, so nothing the row grows later reaches a
@@ -111,15 +179,44 @@ export async function resolveProviderKey(
           probeTier: typeof row.probe_tier === 'string' ? row.probe_tier : null,
         };
       }
+      // 191's body only BUILDS this object when the ciphertext row exists, so an object
+      // with a blank key is the carry-all twin of the blank string above: a real boundary
+      // whose plaintext did not survive the read. Closed.
+      return VAULT_UNAVAILABLE;
     }
   } catch {
-    if (onLookupError) onLookupError('surveyor_byok_get threw — using server key');
+    if (onLookupError) onLookupError('surveyor_byok_get threw — vault unreadable');
+    return await settleVaultFailure(owner, provider, serverKey);
   }
+  // The lookup SUCCEEDED and answered "no key on file" (null / an unrecognized shape).
+  // That is not a vault failure, so the managed house path is untouched.
   return serverKeyResult(serverKey);
 }
 
+/**
+ * Resolve the ambiguity a failed vault read leaves behind: does this user have a key of
+ * their own? Asks the witness the user themselves reads (surveyor_byok_status — provider,
+ * has_key, health; never plaintext). Anything short of a confident "no row" fails closed.
+ */
+async function settleVaultFailure(
+  owner: RpcClient | undefined,
+  provider: string,
+  serverKey: string,
+): Promise<ProviderKeyOutcome> {
+  if (!owner) return VAULT_UNAVAILABLE;
+  try {
+    const { data, error } = await owner.rpc('surveyor_byok_status', { p_provider: provider });
+    if (error || !Array.isArray(data)) return VAULT_UNAVAILABLE;
+    // A set-returning function answers one row per stored key and none at all for a user
+    // with no key. Empty is therefore the ONLY answer that reopens the house path.
+    return data.length === 0 ? serverKeyResult(serverKey) : VAULT_UNAVAILABLE;
+  } catch {
+    return VAULT_UNAVAILABLE;
+  }
+}
+
 /** The shared server key carries no exam receipt: a probe measures a USER's key, and the
- *  server key is not one. Stated as a function so all four fall-through paths agree. */
+ *  server key is not one. Stated as a function so every house path agrees. */
 function serverKeyResult(serverKey: string): ResolvedKey {
   return { key: serverKey, byok: false, probeProfile: null, probeModel: null, probeVersion: null, probeTier: null };
 }

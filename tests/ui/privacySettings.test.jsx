@@ -10,10 +10,16 @@
  *     and body render;
  *   - the research toggle defaults ON (opt-out) absent DNT / an explicit choice;
  *   - no floating "Research contribution notice" is rendered by this section.
+ *
+ * It also pins the SERVER MIRROR half (consentSync.js): a toggle writes locally AND pushes
+ * the whole record to the account, and a failed push tells the user without reverting the
+ * toggle they just set. The reconcile direction is pinned in tests/lib/consentSync.test.js.
  */
 import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 import PrivacySettings from '../../src/components/PrivacySettings.jsx';
+import { getConsent } from '../../src/lib/consent.js';
+import { pushTelemetryConsent } from '../../src/lib/consentSync.js';
 
 // Analytics is fire-and-forget; stub it so mount stays quiet (PrivacySettings
 // imports track/EVENTS on the toggle path).
@@ -23,6 +29,12 @@ vi.mock('../../src/lib/analytics.js', () => ({
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
+// The mirror is a network call; stub the module so the toggle path is observable without
+// a Supabase client. Its own contract is pinned in tests/lib/consentSync.test.js.
+vi.mock('../../src/lib/consentSync.js', () => ({
+  pushTelemetryConsent: vi.fn(async () => ({ ok: true })),
+}));
+
 function setDNT(on) {
   try { Object.defineProperty(navigator, 'doNotTrack', { value: on ? '1' : null, configurable: true }); } catch { /* ignore */ }
 }
@@ -30,6 +42,7 @@ function setDNT(on) {
 beforeEach(() => {
   localStorage.clear();
   setDNT(false);
+  pushTelemetryConsent.mockReset().mockResolvedValue({ ok: true });
 });
 afterEach(cleanup);
 
@@ -57,6 +70,40 @@ describe('PrivacySettings — the silent research disclosure', () => {
     render(<PrivacySettings />);
     // The card title is a real heading, so screen readers announce a section.
     expect(screen.getByRole('heading', { name: /Privacy & data/i })).toBeTruthy();
+  });
+
+  test('a toggle writes locally AND mirrors the whole record to the account', async () => {
+    render(<PrivacySettings />);
+    fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
+
+    // Local first: the choice is in force whatever the network does.
+    expect(getConsent().research).toBe(false);
+    // Then mirrored, as the WHOLE record (not a one-key patch) so the row is complete.
+    await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(1));
+    const sent = pushTelemetryConsent.mock.calls[0][0];
+    expect(sent.research).toBe(false);
+    expect(sent.essential).toBe(true);
+    expect(sent.market).toBe(false);
+  });
+
+  test('a failed mirror tells the user and never reverts the toggle', async () => {
+    pushTelemetryConsent.mockResolvedValue({ ok: false, reason: 'rls denied' });
+    render(<PrivacySettings />);
+    fireEvent.click(screen.getByRole('switch', { name: /You're helping improve the generator/i }));
+
+    const notice = await screen.findByRole('status');
+    expect(notice.textContent).toMatch(/could not reach your account/i);
+    // The toggle stays where the user put it, and so does the stored record.
+    expect(screen.getByRole('switch', { name: /You're helping improve the generator/i })
+      .getAttribute('aria-checked')).toBe('false');
+    expect(getConsent().research).toBe(false);
+  });
+
+  test('no failure notice is rendered while the mirror is succeeding', async () => {
+    render(<PrivacySettings />);
+    fireEvent.click(screen.getByRole('switch', { name: /Anonymous market research/i }));
+    await waitFor(() => expect(pushTelemetryConsent).toHaveBeenCalledTimes(1));
+    expect(screen.queryByRole('status')).toBeNull();
   });
 
   test('bare flattens to a borderless sub-group: inline title, no heading', () => {

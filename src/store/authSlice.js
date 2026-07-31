@@ -334,6 +334,15 @@ export const createAuthSlice = (set, get) => ({
           import('../lib/sessionClient.js').then((m) => m.claimSession()).catch(() => { /* never block auth */ });
         }
 
+        // CONSENT RECONCILE — a telemetry opt-out recorded on the account beats this
+        // device's local record (opt-out wins; it never re-grants). Lazy + fire-and-forget
+        // like the claim above: consent is already enforced locally, so this only narrows.
+        if (event === 'SIGNED_IN' && user?.id) {
+          import('../lib/consentSync.js')
+            .then((m) => m.reconcileTelemetryConsent())
+            .catch(() => { /* never block auth; the local record stands */ });
+        }
+
         // Tier 8.5 — fire the welcome email once per account. We mark a
         // localStorage flag keyed by user id so we don't double-send on
         // SIGNED_IN events (e.g. after a token refresh or a sign-out +

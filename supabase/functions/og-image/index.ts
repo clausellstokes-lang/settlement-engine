@@ -87,10 +87,16 @@ function imageHeaders(): Record<string, string> {
     // Public image: no credentials, no cookies. '*' is the correct posture for a
     // CDN-style asset that arbitrary unfurl bots fetch cross-origin.
     'Access-Control-Allow-Origin': '*',
-    // Cache hard: the card only changes when the dossier's coarse facts change,
-    // which is rare. Long browser cache + longer shared/CDN cache. Scrapers and
-    // proxies cache the unfurl aggressively regardless.
-    'Cache-Control': 'public, max-age=86400, s-maxage=604800',
+    // Cache a day, not a week. The card is cheap to rebuild and the coarse facts rarely
+    // move, so the old week-long shared TTL bought almost nothing — and it cost the one
+    // case that matters: UNPUBLISHING. When a dossier leaves the gallery the RPC stops
+    // answering and this endpoint falls back to the house card, but a CDN holding a
+    // week-old render kept showing the settlement's name and stats to every new unfurl
+    // for the rest of that week. A day is the ceiling the owner set on that lag.
+    // stale-while-revalidate is bounded to the SAME day for the same reason: it is a
+    // revalidation grace so a cold edge never blocks a scraper, not a second week of
+    // staleness wearing a different header.
+    'Cache-Control': 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400',
     'X-Content-Type-Options': 'nosniff',
   };
 }

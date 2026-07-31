@@ -94,7 +94,7 @@ Deno.test('a rasterize throw redirects to default (fail-safe)', async () => {
   assertEquals(res.status, 302);
 });
 
-Deno.test('a valid slug renders a PNG with image content-type + long cache', async () => {
+Deno.test('a valid slug renders a PNG with image content-type + a ONE-DAY cache', async () => {
   const spy = rasterizeSpy();
   const res = await handleOgImage(get('ashford'), {
     fetchProjection: () => Promise.resolve(sampleProjection),
@@ -102,7 +102,13 @@ Deno.test('a valid slug renders a PNG with image content-type + long cache', asy
   });
   assertEquals(res.status, 200);
   assertEquals(res.headers.get('Content-Type'), 'image/png');
-  assertStringIncludes(res.headers.get('Cache-Control') || '', 'max-age');
+  // EXACT, not "contains max-age": the TTL is the whole contract here. An unpublished
+  // dossier's card must age out of every shared cache within a day, and the revalidation
+  // grace is bounded to the same day so it cannot become a second staleness window.
+  assertEquals(
+    res.headers.get('Cache-Control'),
+    'public, max-age=86400, s-maxage=86400, stale-while-revalidate=86400',
+  );
   const body = new Uint8Array(await res.arrayBuffer());
   // PNG magic bytes came straight from the (stub) rasterizer.
   assertEquals(Array.from(body.slice(0, 4)), [0x89, 0x50, 0x4e, 0x47]);

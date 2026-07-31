@@ -31,7 +31,7 @@ import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 import { scheduleAutoReload } from '../_shared/autoReload.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 import { runCreditedCall } from '../ai-analyst/creditFlow.ts';
-import { resolveProviderKey } from '../ai-analyst/byok.ts';
+import { resolveProviderKey, isVaultUnavailable } from '../ai-analyst/byok.ts';
 import { resolveCapturedModel } from '../ai-analyst/modelResolver.ts';
 import {
   buildRetrievalBundle, registerProviderAdapter, routeWorldDataAdapter,
@@ -212,7 +212,15 @@ export async function handleInterpretSession(
     const providerKey = await resolveProviderKey(
       supabaseAdmin, user.id, INTERPRET_PROVIDER, ANTHROPIC_API_KEY,
       (note) => logError('interpret-session', user.id, note, { stage: 'byok' }),
+      supabaseUser,
     );
+    // FAIL CLOSED (owner ruling 2026-07-30): a vault error for a user who HAS (or may
+    // have) a key of their own is a typed, retryable refusal — never a silent hop onto the
+    // house key. This returns BEFORE the credit flow is constructed, so no reservation is
+    // taken, no spend happens, and there is nothing to release or refund.
+    if (isVaultUnavailable(providerKey)) {
+      return json({ error: providerKey.message, code: providerKey.code, retryable: providerKey.retryable }, providerKey.status, cors);
+    }
 
     let capturedSpendId: string | null = null;
     let capturedPrompt = '';

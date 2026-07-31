@@ -14,6 +14,13 @@
  * Writes through consent.js and fires CONSENT_UPDATED. Stamp-at-write: downgrades
  * apply going forward; full erasure goes through the account-deletion path.
  *
+ * The write is ALSO mirrored to profiles.telemetry_consent (consentSync.js) so the choice
+ * follows the account to the user's other devices and the server clamp finally has a real
+ * value to clamp against. Fire-and-forget by design: localStorage is written first and
+ * remains the offline source of truth, so a failed mirror surfaces as a live-region notice
+ * under the toggles and NOTHING reverts. A toggle that silently sprang back would be a
+ * worse answer than a stale mirror.
+ *
  * The research opt-out is SILENT — there is no pop-up or first-run notice. This
  * section IS the disclosure surface: the owner's copy explains, in plain language,
  * that anonymous settlement structure is studied (never names/prose/secrets), it's
@@ -21,6 +28,7 @@
  */
 import { useState } from 'react';
 import { getConsent, setConsent, dntEnabled } from '../lib/consent.js';
+import { pushTelemetryConsent } from '../lib/consentSync.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP } from './theme.js';
 
@@ -75,6 +83,7 @@ function Row({ id, title, desc, on, disabled, note, onToggle }) {
  */
 export default function PrivacySettings({ bare = false }) {
   const [consent, setLocal] = useState(getConsent);
+  const [syncError, setSyncError] = useState(false);
   const dnt = dntEnabled();
 
   const update = (key, value) => {
@@ -86,6 +95,12 @@ export default function PrivacySettings({ bare = false }) {
       market: next.market ? 'granted' : 'denied',
       surface: 'account',
     });
+    // Mirror to the account. Unawaited on purpose: the choice is already stored locally
+    // and in force, so the only thing left to do is tell the user if it did not travel.
+    setSyncError(false);
+    pushTelemetryConsent(next)
+      .then((r) => setSyncError(!r?.ok))
+      .catch(() => setSyncError(true));
   };
 
   const sectionStyle = bare
@@ -147,6 +162,13 @@ export default function PrivacySettings({ bare = false }) {
         note="Not used yet."
         onToggle={update}
       />
+
+      {syncError && (
+        <p role="status" style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 0`, lineHeight: 1.45, fontFamily: sans }}>
+          Saved on this device, but we could not reach your account just now, so your other
+          devices still have the old setting. It will save next time you change it here.
+        </p>
+      )}
     </section>
   );
 }

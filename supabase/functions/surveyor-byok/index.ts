@@ -37,7 +37,7 @@ import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionG
 import { logError } from '../_shared/logError.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 import { aiIpRateGuard } from '../_shared/rateLimit.ts';
-import { resolveProviderKey } from '../ai-analyst/byok.ts';
+import { resolveProviderKey, isVaultUnavailable } from '../ai-analyst/byok.ts';
 import {
   ANTHROPIC_SUPPORTED_MODELS, ANTHROPIC_RETENTION_CLASS, intersectModels,
 } from '../ai-analyst/analystCore.ts';
@@ -211,7 +211,15 @@ export async function handleSurveyorByok(
     const providerKey = await resolveProviderKey(
       supabaseAdmin, user.id, provider, ANTHROPIC_API_KEY,
       (note) => logError('surveyor-byok', user.id, note, { stage: 'byok' }),
+      supabaseUser,
     );
+    // FAIL CLOSED (owner ruling 2026-07-30): a vault error is a typed, retryable refusal —
+    // never a silent hop onto the house key. It MUST precede the no-key branch below: an
+    // unreadable vault is not the same fact as an empty one, and telling a user with a key
+    // on file that they have none would invite them to paste it again over a broken vault.
+    if (isVaultUnavailable(providerKey)) {
+      return json({ ok: false, health: 'unverified', error: providerKey.message, code: providerKey.code, retryable: providerKey.retryable }, providerKey.status, cors);
+    }
     if (!providerKey.byok) {
       return json({ ok: false, health: 'unverified', error: 'No key on file to verify. Paste your provider key first, then verify it.' }, 400, cors);
     }
