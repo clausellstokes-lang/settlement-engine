@@ -56,6 +56,15 @@
    (power abhors a vacuum; the contest is the story). (iii) NPCs CAN die — but ONLY by
    explicit user order: a DM death verb with receipts, snapshot-undoable like every
    canon edit. The engine's never-kill law is unchanged; the DM's authority is total.
+   AMENDED 2026-07-31 (taxonomy ruling): BANISHED IS A VERDICT, ROAMING IS A STATE —
+   they are not sibling outcomes. Banishment, destruction-dispersal, and flight all
+   RESOLVE INTO the one roaming state; the outcome vocabulary is
+   { jailed, banished, turncoat, criminal_founding } with roaming as the shared
+   resulting status. What distinguishes banishment mechanically is the EXCLUSION EDGE:
+   the engine never rehosts a banished roamer to the settlement that banished them
+   within the exclusion window (tunable band, long by default), and the edict carries a
+   harsher reputation mark than a scandal-only displacement. The DM assign verb remains
+   sovereign and may override any exclusion explicitly.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
