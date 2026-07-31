@@ -285,6 +285,26 @@ invents truth; the chain is total (every ward/parcel/building decision traces to
 one layer) — pinned by a TC-3 property test that walks a compiled manifest and asserts
 each element carries its deciding-layer provenance tag.
 
+## 11e. SKINS + USER/AI EDITING CONTROLS (owner directive 2026-07-31, BINDING: A-11 —
+## governs TC-5/TC-6; substrate for the deferred styles marketplace)
+
+- **A skin is data, never geometry:** a named override of the cartography palette FAMILY
+  plus closed style knobs (ward tone intensity, label density, roof/wall style set,
+  ground dress weight...). Skins repaint the SAME manifest — switching skins can never
+  move a house, and every skin remains token-derived (A-9), so even user skins stay in
+  the muted house register's gamut.
+- **Basic controls, closed vocabulary:** every knob is an enumerated or banded value in
+  the manifest's style block — no free-form hex, no arbitrary geometry input. The
+  no-raw-color lint law extends to skin definitions.
+- **AI editing obeys the FINITE-SEMANTICS LAW:** the AI is a bucketing clerk — it may
+  MAP a user's intent ("weathered coastal fishing town") onto the SAME closed control
+  values a human could set, and nothing else. No AI-emitted colors, no AI-emitted
+  geometry, ever. AI-set controls carry ai-suggested provenance and are one-tap
+  revertible.
+- **Geometry editing stays in the existing edit seam (A-1):** user street/ward edits are
+  the provenance-guarded map-edit vocabulary, deferred to post-TC-8 as recorded — skins
+  do not reopen that door early.
+
 ## 12. THE DOSSIER MAP TAB — SUB-TAB SHELL (owner directive 2026-07-31, BINDING: J-TC-8)
 
 The dossier's Map tab becomes a CONTAINER with one sub-tab per settlement map
