@@ -566,9 +566,15 @@ export default [
   // unguarded. Same 800 ceiling as the other engine-adjacent layers (600 for the
   // root .jsx, which is component-shaped); current over-ceiling files
   // (settlementSlice, aiSlice, pdf/lib/viewModel, App.jsx) are frozen by the baseline.
+  // The extension left ONE hole: the components ceiling above matches `.jsx` only, so the
+  // non-component logic modules under src/components (runtimes, presentation models,
+  // handler bundles) had no rule at all — threeSceneRuntime.js reached 704 effective lines
+  // unguarded. They take the 800 engine-adjacent ceiling, not the 600 component ceiling:
+  // they are plain modules, and 704 already lives between the two.
   // @enforced-by max-lines (these rules) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
   {
     files: [
+      'src/components/**/*.js', // components-layer .js modules (the .jsx rule above is jsx-only)
       'src/store/**/*.{js,jsx}',
       'src/pdf/**/*.{js,jsx}',
       'src/lib/**/*.{js,jsx}',

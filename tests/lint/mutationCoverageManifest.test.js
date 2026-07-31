@@ -24,8 +24,14 @@
  *                   never a silent gap); below fails demanding the baseline be
  *                   LOWERED so the win is banked (the sizeBaseline honesty
  *                   idiom). Drive toward 0.
+ *   4. DIRTY GUARD— the sweep's MUTATED_FILES refusal list names EXACTLY the
+ *                   files its check_caught/check_caught_missing calls mutate.
+ *                   A missing row means `git checkout --` would discard a
+ *                   maintainer's uncommitted work in that file; a stale row is
+ *                   an over-broad refusal. Both directions red here.
  *
  * TO COMPLY when this reds:
+ *   - added/moved a sweep mutation target → update MUTATED_FILES in the same edit.
  *   - added an invariant test → plant a sweep mutation for it (preferred) or
  *     add a rationale entry with a written reason; do NOT mark it uncovered.
  *   - upgraded an uncovered entry → lower uncoveredBaseline by one.
@@ -37,13 +43,20 @@ import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
-import { enumerateInvariants, parseSweepLabels } from './mutationCoverage.shared.mjs';
+import {
+  enumerateInvariants,
+  parseSweepLabels,
+  parseSweepMutationTargets,
+  parseGuardedMutatedFiles,
+} from './mutationCoverage.shared.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const manifest = JSON.parse(readFileSync(join(ROOT, 'scripts/mutation-coverage-manifest.json'), 'utf8'));
 const sweepSrc = readFileSync(join(ROOT, 'scripts/mutation-sweep.sh'), 'utf8');
 const sweepLabels = parseSweepLabels(sweepSrc);
+const mutationTargets = parseSweepMutationTargets(sweepSrc);
+const guardedFiles = parseGuardedMutatedFiles(sweepSrc);
 const enumerated = enumerateInvariants(ROOT);
 const invariantEntries = Object.entries(manifest.invariants);
 const metaEntries = Object.entries(manifest.meta ?? {});
@@ -51,9 +64,12 @@ const metaEntries = Object.entries(manifest.meta ?? {});
 describe('mutation-coverage manifest — the totality contract (E-A)', () => {
   test('guard-the-guard: enumeration and label parsing are not vacuous', () => {
     // If the enumerator or the label regex silently broke, everything below
-    // would pass on empty sets. Today: 342 invariant files, 22 sweep labels.
-    expect(enumerated.length).toBeGreaterThanOrEqual(300);
-    expect(sweepLabels.length).toBeGreaterThanOrEqual(22);
+    // would pass on empty sets. Today: 450 invariant files, 61 sweep labels —
+    // the floors below had rotted to the 2026-05 figures (300/22), which is two
+    // thirds of the corpus a broken enumerator could have dropped unnoticed.
+    // Floors TIGHTEN toward reality; they are never raised to admit a budget.
+    expect(enumerated.length).toBeGreaterThanOrEqual(440);
+    expect(sweepLabels.length).toBeGreaterThanOrEqual(61);
     expect(new Set(sweepLabels).size, 'duplicate labels in mutation-sweep.sh — labels are the join key and must be unique').toBe(sweepLabels.length);
   });
 
@@ -115,6 +131,45 @@ describe('mutation-coverage manifest — the totality contract (E-A)', () => {
     ).toEqual([]);
     const doubled = [...claimCounts.entries()].filter(([, n]) => n > 1).map(([l]) => l);
     expect(doubled, 'a sweep label may prove exactly one invariant entry').toEqual([]);
+  });
+
+  // ── DIRTY-GUARD TOTALITY ────────────────────────────────────────────────────
+  // The sweep reverts each mutation with `git checkout -- <file>`, which DISCARDS
+  // uncommitted work in that file. Its MUTATED_FILES refusal guard is the only thing
+  // standing between a manual run and a maintainer's unsaved edits — and it was
+  // hand-maintained, so it drifted: seven targets (the arch/discourse/realmEntityWeb
+  // areas and two pglite suites) were mutated but unguarded. This binds the two lists
+  // in BOTH directions, at the same join the sweep/manifest contract uses.
+  test('DIRTY-GUARD TOTALITY: the refusal guard names exactly the files the sweep mutates', () => {
+    const targetFiles = [...new Set(mutationTargets.map((t) => t.file))].sort();
+    const guarded = new Set(guardedFiles);
+    const unguarded = targetFiles.filter((f) => !guarded.has(f));
+    expect(
+      unguarded,
+      `\nThe sweep MUTATES these files and reverts them with \`git checkout --\`, but the`
+      + ` MUTATED_FILES dirty-tree guard in scripts/mutation-sweep.sh does not name them —`
+      + ` so a manual run on a tree with uncommitted work in any of them DESTROYS that work`
+      + ` instead of refusing. Add each to MUTATED_FILES:\n${unguarded.join('\n')}\n`,
+    ).toEqual([]);
+
+    const targetSet = new Set(targetFiles);
+    const stale = [...guarded].filter((f) => !targetSet.has(f)).sort();
+    expect(
+      stale,
+      `MUTATED_FILES names files no check_caught/check_caught_missing call mutates — an`
+      + ` over-broad refusal that makes the guard read as maintained when it is not.`
+      + ` Remove them (or re-anchor the area that used to touch them):\n${stale.join('\n')}`,
+    ).toEqual([]);
+  });
+
+  test('guard-the-guard: every guarded path exists (a typo guards nothing, silently)', () => {
+    // `git status --porcelain -- <path-that-does-not-exist>` prints nothing, so a
+    // misspelled row passes the refusal check while protecting no file at all.
+    const missing = guardedFiles.filter((rel) => !existsSync(join(ROOT, rel)));
+    expect(missing, 'MUTATED_FILES rows that name no file on disk').toEqual([]);
+    expect(guardedFiles.length, 'the MUTATED_FILES parse is not vacuous').toBeGreaterThanOrEqual(40);
+    expect(mutationTargets.length, 'the mutation-target parse is not vacuous').toBeGreaterThanOrEqual(50);
+    expect(new Set(guardedFiles).size, 'duplicate rows in MUTATED_FILES').toBe(guardedFiles.length);
   });
 
   test('SHRINK-ONLY: uncovered count equals uncoveredBaseline exactly', () => {

@@ -60,10 +60,12 @@ function effectiveLines(absPath) {
 }
 
 // The per-layer max-lines ceilings — MIRRORS eslint.config.js. Keep in lockstep with
-// the layer rules there (components/src-root-jsx 600; generators/domain/store/pdf/lib/
-// hooks/utils + src-root .js 800). Returns null for files no max-lines rule covers.
+// the layer rules there (components/src-root-jsx 600; components .js + generators/domain/
+// store/pdf/lib/hooks/utils + src-root .js 800). Returns null for files no max-lines rule
+// covers.
 function ceilingFor(rel) {
   if (/^src\/components\/.*\.jsx$/.test(rel)) return 600;
+  if (/^src\/components\/.*\.js$/.test(rel)) return 800;   // components-layer .js modules
   if (/^src\/[^/]+\.jsx$/.test(rel)) return 600;              // src-root .jsx (App.jsx …)
   if (/^src\/[^/]+\.js$/.test(rel)) return 800;               // src-root .js
   if (/^src\/generators\/.*\.js$/.test(rel)) return 800;

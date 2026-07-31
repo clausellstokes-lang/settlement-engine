@@ -291,12 +291,12 @@ describe('contract-test anti-vacuity walker — adversarial self-tests (not vacu
   it('Rule 1b fires on an unguarded extract negation and clears the guarded form', () => {
     const vacuous = codeSkeleton([
       "const detail = functionBody(js, 'fetchPublicDossier');",
-      "expect(detail).not.toMatch(/from settlements/);",
+      "expect(detail).not.toMatch(/from settlements/);", // anchored: detector fixture, not an assertion
     ].join('\n'));
     const fixed = codeSkeleton([
       "const detail = functionBody(js, 'fetchPublicDossier');",
       "expect(detail).toBeTruthy();",
-      "expect(detail).not.toMatch(/from settlements/);",
+      "expect(detail).not.toMatch(/from settlements/);", // anchored: detector fixture, not an assertion
     ].join('\n'));
     expect(findUnguardedExtractNegations(vacuous)).toContain('detail');
     expect(findUnguardedExtractNegations(fixed)).toEqual([]);
@@ -325,6 +325,10 @@ describe('contract-test anti-vacuity walker — adversarial self-tests (not vacu
     // A skip-guard buried in a STRING literal must not be seen as code.
     const src = "expect(re.test(\"if (!ts) return ', ';\")).toBe(true);";
     expect(findSkipBeforeExpect(src)).toEqual([]);
+    // LIVENESS ANCHOR: the skeleton keeps the CODE it was handed (so it is not simply
+    // returning an empty string, which would satisfy the exclusion below for free).
+    expect(codeSkeleton(src)).toContain('expect(');
+    // anchored: the surviving `expect(` above proves the skeleton is non-empty
     expect(codeSkeleton(src)).not.toContain('return');
   });
 });

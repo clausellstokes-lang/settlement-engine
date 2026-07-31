@@ -48,15 +48,22 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
   });
 
   it('grants NOTHING to anon on the base tables (fail-closed — the RPC is the only public read)', () => {
+    // LIVENESS ANCHOR: the corpus DOES grant to anon — the projection RPC's execute
+    // grant — so a renamed/emptied migration reds here instead of passing the three
+    // exclusions below for want of any grant text at all.
+    expect(lower).toMatch(/^grant execute on function public\.list_founder_seats_public\(\) to anon/m);
     // No table-level grant to anon on either base table.
+    // anchored: the anon execute-grant above proves `lower` is the live migration text
     expect(lower).not.toMatch(/grant\s+[^;]*\bon\s+table\s+public\.founder_seats\b[^;]*\bto\b[^;]*\banon\b/);
+    // anchored: same liveness anchor — this leg drops the optional `table` keyword
     expect(lower).not.toMatch(/grant\s+[^;]*\bon\s+public\.founder_seats\b[^;]*\bto\b[^;]*\banon\b/);
     // The transfer ledger has NO policy at all → default-deny; assert no select/insert
     // policy names it (append-only via the service-role write path only).
-    // DELIBERATELY UNANCHORED (negative-presence): must catch a future re-creation at
-    // ANY indentation — this corpus legally mints indented policies/triggers (005:69
-    // DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
-    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not "fix".
+    // The REGEX is deliberately unanchored (negative-presence): it must catch a future
+    // re-creation at ANY indentation — this corpus legally mints indented
+    // policies/triggers (005:69 DO-block EXECUTE; 003:65/004:49 DO-block DDL). Pinned in
+    // netCurrentExtractorAnchor.walker FROZEN_UNANCHORED — do not add `^` to it.
+    // anchored: liveness comes from the anon execute-grant above, not from the regex
     expect(lower).not.toMatch(/create policy[^;]*on public\.founder_seat_transfers/);
   });
 
@@ -76,6 +83,10 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
       /^create or replace function public\.list_founder_seats_public\(\)[\s\S]*?\$\$([\s\S]*?)\$\$;/im,
     );
     expect(m).not.toBeNull();
+    // LIVENESS ANCHOR: the extracted body is the real projection query (it selects the
+    // opted-in columns), so the exclusion below measures omission, not an empty capture.
+    expect(m[1].toLowerCase()).toMatch(/display_name/);
+    // anchored: the body is asserted non-null and to carry display_name, immediately above
     expect(m[1].toLowerCase()).not.toMatch(/holder_user_id/);
   });
 
@@ -125,6 +136,7 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
     // Prod head stays 117 — the whole 118+ chain ships together at db push.
     expect(lower).toMatch(/written-not-deployed/);
     // The draft/awaiting-sign-off framing is gone.
+    // anchored: the two header assertions above prove `lower` still carries the header prose
     expect(lower).not.toMatch(/awaiting owner sign-off/);
   });
 
@@ -134,10 +146,13 @@ describe('137 founder_seats — production shape pins (THE FOUNDER LANE)', () =>
     // edit that drops the pin fails here too).
     const defs = [...SQL.matchAll(/security definer/gi)];
     expect(defs.length).toBeGreaterThanOrEqual(3);
-    // No definer function may use a bare `set search_path = public` (without pg_temp).
-    expect(lower).not.toMatch(/set search_path = public\s*\n/);
+    // LIVENESS ANCHOR first: the corpus carries at least three PINNED search_path
+    // settings, so the "no bare form" exclusion below cannot pass on empty text.
     const pinned = [...lower.matchAll(/set search_path = public, pg_temp/g)];
     expect(pinned.length).toBeGreaterThanOrEqual(3);
+    // No definer function may use a bare `set search_path = public` (without pg_temp).
+    // anchored: the >= 3 pinned search_path matches above prove `lower` is live
+    expect(lower).not.toMatch(/set search_path = public\s*\n/);
   });
 
 });

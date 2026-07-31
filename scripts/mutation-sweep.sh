@@ -36,6 +36,13 @@ results=()
 # On a dirty tree that revert would DISCARD a maintainer's uncommitted work in
 # any of those files. Refuse up front unless the files it touches are clean.
 # Override for an intentional throwaway run with MUTATION_SWEEP_ALLOW_DIRTY=1.
+#
+# TOTALITY: this list must name EVERY check_caught / check_caught_missing target
+# below and nothing else — a missing entry is uncommitted-work destruction, a
+# stale entry is an over-broad refusal. Hand-maintenance drifted (7 targets were
+# missing), so the pairing is now machine-enforced both ways by
+# tests/lint/mutationCoverageManifest.test.js. check_caught_planted targets are
+# deliberately absent: that variant refuses to overwrite an existing path.
 MUTATED_FILES=(
   src/domain/userEdits.js
   src/generators/cascadeGenerator.js
@@ -50,7 +57,6 @@ MUTATED_FILES=(
   supabase/config.toml
   src/App.jsx
   scripts/mutation-coverage-manifest.json
-  src/store/campaignSlice.js
   src/domain/display/chroniclersLetter.js
   src/design/townGlyphs/medieval.js
   src/lib/flagRegistry.js
@@ -73,6 +79,14 @@ MUTATED_FILES=(
   src/store/neighbourSlice.js
   src/generators/steps/assembleInstitutions.js
   tests/fixtures/distribution-envelopes.manifest.json
+  src/domain/display/discourseKernel.js
+  src/domain/townMap/arch/params.js
+  src/domain/townMap/arch/kit.js
+  src/domain/townMap/arch/conditionParams.js
+  src/domain/dossier/realmEntityWeb.js
+  tests/security/aiSpendSafety.pglite.test.js
+  tests/security/systemConfigPublicRead.pglite.test.js
+  supabase/migrations/087_review_money_hardening.sql
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -90,8 +104,22 @@ fi
 # regression is present (gate caught it). Always reverts <file> via git, then
 # re-runs check-cmd on the clean tree: CAUGHT requires mutated=red AND
 # clean=green (attribution), otherwise the gate itself is broken/mistargeted.
+#
+# PLANT VERIFICATION — a perl substitution whose anchor no longer matches writes
+# NOTHING and exits 0. The gate then stays green on an UNMUTATED tree and the
+# area scores "MISSED (gate stayed green)": the operator is told the gate is
+# weak when in truth the plant never fired. The dirty-tree guard above proves
+# every target matched the index before the sweep started (an untracked target
+# would have shown as `??` and refused the run), so a target that still matches
+# the index here was never mutated — grade that BROKEN, which is
+# self-diagnosing. (Under MUTATION_SWEEP_ALLOW_DIRTY=1 the premise does not
+# hold, so the check is skipped rather than lying in the other direction.)
 check_caught() {
   local label="$1" file="$2" check="$3"
+  if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ] && git diff --quiet -- "$file" 2>/dev/null; then
+    results+=("BROKEN  GAP  $label  (mutation did not apply — $file is unchanged; stale anchor?)"); FAIL=$((FAIL+1))
+    return
+  fi
   $check >/dev/null 2>&1; local code=$?
   git checkout -- "$file" 2>/dev/null
   $check >/dev/null 2>&1; local clean=$?
@@ -589,8 +617,16 @@ echo "── Mutation sweep results ──────────────�
 for r in "${results[@]}"; do echo "  $r"; done
 echo "────────────────────────────────────────────────────────"
 echo "  CAUGHT: $PASS    MISSED/BROKEN: $FAIL"
-if [ -n "$(git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml supabase/functions/ 2>/dev/null)" ]; then
-  echo "  WARNING: tree not clean after sweep:"; git status --short src/ eslint.config.js ARCHITECTURE.md supabase/migrations/ supabase/config.toml supabase/functions/
+# Leftover check. Scoped to MUTATED_FILES (so it can never drift from the areas
+# above — the old hand-kept directory list omitted tests/ and scripts/, where five
+# areas mutate) plus a tree-wide sweep for surviving PLANTED probes and .bak
+# rescue copies, every one of which carries a mutsweep marker in its path.
+leftover_mutations="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
+leftover_plants="$(git status --porcelain --untracked-files=all 2>/dev/null | grep -Ei 'mutsweep|mutation_sweep' || true)"
+if [ -n "$leftover_mutations$leftover_plants" ]; then
+  echo "  WARNING: tree not clean after sweep:"
+  [ -n "$leftover_mutations" ] && echo "$leftover_mutations"
+  [ -n "$leftover_plants" ] && echo "$leftover_plants"
 fi
 if [ "$FAIL" -eq 0 ]; then echo "  spine holds: every injected regression was caught."; else echo "  SPINE GAP: $FAIL regression(s) slipped past the gate or the gate is broken."; fi
 exit "$FAIL"

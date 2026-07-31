@@ -10,18 +10,24 @@
  * the estate has been quietly reporting floors (`unreachable-predicate-conjunction`,
  * 2026-07-26).
  *
- * THE WALK: scan the generation-facing test trees for `for` / `for…of` loops whose
- * HEADER names a seed (`seed`, `seeds`, `SEED`) and whose BODY contains a bare
- * `expect(`. Those are the loops that die early. Exemptions, in the order checked:
+ * THE WALK: scan the WHOLE tests/ corpus for `for` / `for…of` loops whose HEADER names a
+ * seed (`seed`, `seeds`, `SEED`) and whose BODY contains a bare `expect(`. Those are the
+ * loops that die early. (SCOPE, 2026-07-30: the walk covered four generation-facing trees
+ * and the class lived on unguarded in the other twenty; it now walks `tests` itself, so a
+ * new tree is covered the day it lands. The four swept trees are held at EXACT zero —
+ * they may not even take a frozen row — while the newly-visible habitat is enumerated in
+ * FROZEN_BARE_SEED_LOOPS below, shrink-only.) Exemptions, in the order checked:
  *   1. the file imports/uses `collectSeedFailures` — it has adopted the truthful idiom
  *      (tests/helpers/seedFailures.js), so its loops run every case by construction;
  *   2. the file header (first 40 lines) carries `// seed-loop: collected` — a file-wide
  *      justification, read by a reviewer;
  *   3. the loop line, or the line immediately above it, carries `// seed-loop: collected`
  *      — a per-loop justification;
- *   4. `it.each` / `test.each` are exempt BY SHAPE: vitest registers one case per item
- *      and reports the true count itself, and they are not `for` loops, so the scanner
- *      never sees them.
+ *   4. a case REGISTRATION reached before any assertion — `for (const seed of SEEDS) {
+ *      it(…) }` — is exempt BY SHAPE, the same reason `it.each` / `test.each` are:
+ *      vitest registers one case per item, runs every one, and reports the true count,
+ *      so there is no early exit to hide. An assertion that precedes the registration
+ *      still counts.
  * Surviving bare loops are frozen below, SHRINK-ONLY, and swept by wave EP-2.
  *
  * WHY THE HEADER, NOT THE BODY, decides seed-ness: a body-wide match ("this loop
@@ -61,9 +67,15 @@ import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-/** The generation-facing trees. tests/simulation carries zero seed loops today; it is
- *  scanned so the first one that lands there reds rather than arriving unnoticed. */
-const SCAN_ROOTS = ['tests/generators', 'tests/joins', 'tests/property', 'tests/simulation'];
+/** The WHOLE test corpus. Scanning `tests` itself rather than a list of trees removes
+ *  the scope-drift class outright: a new tree is covered the day it lands. */
+const SCAN_ROOTS = ['tests'];
+
+/** The four trees the EP-1/EP-2 sweep drove to zero. They stay at EXACT zero: no frozen
+ *  row may name a file here, so the banked win cannot be quietly spent. */
+const GENERATION_FACING_ROOTS = ['tests/generators', 'tests/joins', 'tests/property', 'tests/simulation'];
+
+const inGenerationTree = (rel) => GENERATION_FACING_ROOTS.some((root) => rel.startsWith(`${root}/`));
 
 const FOR_HEADER_RE = /\bfor\s*\(/;
 // Case-insensitive on purpose: the estate spells the loop variable `seed`, `SEEDS`, and
@@ -72,6 +84,11 @@ const FOR_HEADER_RE = /\bfor\s*\(/;
 // (tests/generators/servicesSeverityPlaceholder.test.js:54).
 const SEED_WORD_RE = /\bseeds?\b|SEED/i;
 const EXPECT_RE = /\bexpect\s*\(/;
+// A vitest case REGISTRATION opening inside the loop body — `it(`, `test(`, `it.each(`,
+// `test.skip(`. A loop that REGISTERS one case per item is exempt for the same reason
+// `it.each` is: vitest runs every case and reports the true count, so nothing exits
+// early. The leading `[^.\w]` keeps `re.test(x)` / `s.it` from posing as a registration.
+const CASE_REGISTRATION_RE = /(?:^|[^.\w])(?:it|test)\s*(?:\.\w+)*\s*\(/;
 const COLLECTED_MARKER_RE = /\/\/\s*seed-loop:\s*collected/;
 const ADOPTED_HELPER_RE = /collectSeedFailures/;
 const HEADER_LOOKBACK_LINES = 40;
@@ -157,7 +174,9 @@ function forHeaderEnd(stripped) {
 /**
  * Does the loop that starts at `startIndex` contain a bare `expect(` in its body?
  * Brace counting from the body brace; a braceless single-statement loop is read directly
- * (on the header line, or on the first non-empty line after it).
+ * (on the header line, or on the first non-empty line after it). A case REGISTRATION
+ * reached before any assertion ends the walk: that loop builds vitest cases, so it
+ * carries no early-exit defect (exemption 4, the `it.each` rule by another spelling).
  */
 function loopBodyAsserts(lines, startIndex) {
   const header = stripNoise(lines[startIndex]);
@@ -165,7 +184,9 @@ function loopBodyAsserts(lines, startIndex) {
   const afterHeader = headerEnd >= 0 ? header.slice(headerEnd) : '';
 
   // Braceless, body on the header line: `for (const seed of SEEDS) expect(…);`
-  if (!afterHeader.includes('{') && afterHeader.trim().length > 0) return EXPECT_RE.test(afterHeader);
+  if (!afterHeader.includes('{') && afterHeader.trim().length > 0) {
+    return !CASE_REGISTRATION_RE.test(afterHeader) && EXPECT_RE.test(afterHeader);
+  }
 
   let depth = 0;
   let opened = false;
@@ -176,11 +197,14 @@ function loopBodyAsserts(lines, startIndex) {
       if (ch === '{') { depth += 1; opened = true; } else if (ch === '}') depth -= 1;
     }
     if (opened) {
+      // Registration wins on a shared line: `for (…) it('x', () => { expect(…) })` is
+      // one vitest case per item, not one assertion the first failure kills.
+      if (CASE_REGISTRATION_RE.test(stripped)) return false;
       if (EXPECT_RE.test(stripped)) return true;
       if (depth <= 0) return false;
     } else if (j > startIndex && stripped.trim().length > 0) {
       // Reached a non-empty line with no brace yet: braceless body on its own line.
-      return EXPECT_RE.test(stripped);
+      return !CASE_REGISTRATION_RE.test(stripped) && EXPECT_RE.test(stripped);
     }
   }
   return false;
@@ -197,10 +221,14 @@ function renderLiteral(found) {
 
 /**
  * FROZEN 2026-07-27 from this walker's own scan at composite-r4 d0fdcf7c (19 files /
- * 32 bare loops), RE-FROZEN the same day after the EP-2 sweep converted or justified
- * every one: the habitat is EMPTY. The guard-the-guard fixtures below carry the
- * detection proof now that the live population is zero. SHRINK-ONLY (which at zero
- * means: stays zero).
+ * 32 bare loops) over four trees, RE-FROZEN the same day after the EP-2 sweep converted
+ * or justified every one.
+ *
+ * RE-FROZEN 2026-07-30 at the SCOPE WIDENING: the walk now covers the whole tests/
+ * corpus, not four trees, and the newly-visible habitat is enumerated below — 10 files /
+ * 13 loops, every one a genuine lower-bound loop inside a single `it()`. The four
+ * generation-facing trees stay at EXACT zero and may never take a row here (enforced
+ * below), so the EP-2 win cannot be spent to pay for a new offender elsewhere.
  *
  * To bank a win: convert the loop to collectSeedFailures + expectNoSeedFailures
  * (tests/helpers/seedFailures.js), which exempts the whole file and drops its row to 0
@@ -209,10 +237,26 @@ function renderLiteral(found) {
  * never add a file. A new file needing a row means a new lower-bound loop was authored,
  * which is the thing this gate exists to stop.
  */
-const FROZEN_BARE_SEED_LOOPS = Object.freeze({});
+const FROZEN_BARE_SEED_LOOPS = Object.freeze({
+  'tests/data/foundingSeeds.test.js': 1,
+  'tests/design/organicOrnament.test.js': 1,
+  'tests/domain/autonomy/signalRegistry.walker.test.js': 1,
+  'tests/domain/causeConjunctionContent.test.js': 1,
+  'tests/domain/coalitionDissentCoupSoak.m9d.test.js': 1,
+  'tests/domain/npc/npcBank.test.js': 1,
+  'tests/domain/settlementStrategy.test.js': 3,
+  'tests/domain/warMachineObeysPolitics.test.js': 2,
+  'tests/kernel/proseHash.test.js': 1,
+  'tests/pdf/countersealStructuredPath.test.js': 1,
+});
 
 describe('seed-loop totality walker (habitat removal)', () => {
   const found = scanBareSeedLoops();
+  const scannedFileCount = SCAN_ROOTS.reduce((total, root) => {
+    const abs = join(ROOT, root);
+    if (!existsSync(abs)) return total;
+    return total + walk(abs).filter((filePath) => /\.test\.(js|jsx)$/.test(filePath)).length;
+  }, 0);
 
   if (process.env.UPDATE_EPISTEMIC_ALLOWLIST) {
     test('REGENERATION MODE: prints the fresh literal and fails on purpose', () => {
@@ -273,8 +317,16 @@ describe('seed-loop totality walker (habitat removal)', () => {
       'the scan found fewer bare seed loops than the frozen inventory — either loops were'
       + ' converted (lower their rows) or the scanner broke',
     ).toBeGreaterThanOrEqual(totalFrozen);
-    expect(Object.keys(FROZEN_BARE_SEED_LOOPS).length, 'frozen file roster').toBe(0);
-    expect(totalFrozen, 'frozen loop total').toBe(0);
+    expect(scannedFileCount, 'test files visited across the whole corpus').toBeGreaterThanOrEqual(1500);
+  });
+
+  test('the four generation-facing trees stay at EXACT zero (the EP-2 win is not spendable)', () => {
+    // The widening enumerates habitat elsewhere; it may never re-admit any here. Both
+    // halves matter: no live offender, and no frozen row that could legalise one.
+    const live = Object.keys(found).filter(inGenerationTree).sort();
+    expect(live, 'a bare seed loop landed back in a generation-facing tree').toEqual([]);
+    const frozenRows = Object.keys(FROZEN_BARE_SEED_LOOPS).filter(inGenerationTree).sort();
+    expect(frozenRows, 'the frozen roster may not carry a generation-facing file').toEqual([]);
   });
 
   // ── GUARD-THE-GUARD: the detector, on fixtures ─────────────────────────────
@@ -345,6 +397,32 @@ describe('seed-loop totality walker (habitat removal)', () => {
       countIn(`it.each(SEEDS)('seed %s', (seed) => {\n  expect(gen(seed)).toBeTruthy();\n});`),
       'it.each is exempt by shape — vitest reports the true count itself',
     ).toBe(0);
+    expect(
+      countIn(`for (const seed of SEEDS) {\n  it(\`seed \${seed}\`, () => {\n    expect(gen(seed)).toBeTruthy();\n  });\n}`),
+      'a loop that REGISTERS one case per seed runs them all — same shape as it.each',
+    ).toBe(0);
+    expect(
+      countIn(`for (const seed of SEEDS) {\n  test('x', () => {\n    expect(gen(seed)).toBeTruthy();\n  });\n}`),
+      'test() registration too',
+    ).toBe(0);
+    expect(
+      countIn(`for (const seed of SEEDS) it('x', () => { expect(gen(seed)).toBeTruthy(); });`),
+      'braceless registration on the header line',
+    ).toBe(0);
+  });
+
+  test('the registration exemption is TIGHT (it does not mute a real bare loop)', () => {
+    // The exemption exists because vitest runs every registered case. An assertion that
+    // fires BEFORE the registration is still the early-exit defect, and a `.test(` method
+    // call is not a registration at all — either mistake would silently empty this walker.
+    expect(
+      countIn(`for (const seed of SEEDS) {\n  expect(gen(seed)).toBeTruthy();\n  it('x', () => {});\n}`),
+      'assert-then-register is still a bare loop',
+    ).toBe(1);
+    expect(
+      countIn(`for (const seed of SEEDS) {\n  expect(RE.test(seed)).toBe(true);\n}`),
+      'a .test( method call is not a case registration',
+    ).toBe(1);
   });
 
   test('a marker two lines above does NOT exempt (the escape hatch stays tight)', () => {

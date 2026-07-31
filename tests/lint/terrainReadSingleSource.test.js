@@ -81,6 +81,8 @@ describe('P-6 — resolveTerrain is the ONE terrain read on the display surfaces
     expect(CONFIG_TERRAIN_READ.test('cfg.terrainType || cfg.terrainOverride')).toBe(false);
     // The stripper leaves code alone and removes prose.
     expect(codeOf(join(ROOT, 'src/domain/resolveTerrain.js'))).toMatch(/terrainOrNull\(cfg\.terrain\)/);
+    // An empty read would red on the live-code pin above before reaching this one.
+    // anchored: the same file's live code is pinned two lines up
     expect(codeOf(join(ROOT, 'src/domain/resolveTerrain.js'))).not.toMatch(/never written by any generator path/);
   });
 
@@ -98,9 +100,16 @@ describe('P-6 — resolveTerrain is the ONE terrain read on the display surfaces
 
   test.each(ROUTED)('$rel reads neither config.terrain nor geography.terrain', ({ rel }) => {
     const code = codeOf(join(ROOT, rel));
+    // LIVENESS ANCHOR: a moved/renamed file (or an over-greedy stripper) would leave
+    // `code` empty, and both exclusions below would pass for that wrong reason. Every
+    // ROUTED file reaches terrain through the resolver, so its import is the anchor.
+    expect(code, `${rel} read as empty — the exclusions below would be vacuous`)
+      .toMatch(/domain\/resolveTerrain\.js'/);
     expect(code, `${rel} reads config.terrain again — route it through resolveTerrain (the ONE terrain read)`)
+      // anchored: the resolveTerrain import above proves `code` is the live file
       .not.toMatch(CONFIG_TERRAIN_READ);
     expect(code, `${rel} reads geography.terrain again — resolveSettlementTerrain owns that leg`)
+      // anchored: same import liveness anchor
       .not.toMatch(/geography\s*\??\.\s*terrain\b/);
   });
 

@@ -22,6 +22,7 @@ import { describe, expect, test } from 'vitest';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/pulseKernel.js';
 import { applyWorldPulseProposal } from '../../src/domain/worldPulse/applyWorldPulse.js';
+import { SIEGE_MAX_AGE } from '../../src/domain/worldPulse/warDeployment.js';
 import { domainState, SIMULATION_DOMAINS } from '../../src/domain/worldPulse/simulationProfile.js';
 import { normalizeSimulationRules } from '../../src/domain/worldPulse/simulationRules.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -225,13 +226,15 @@ describe('M9d — RESOLUTION is UNCHANGED (only initiation splits)', () => {
   // A pre-seeded LIVE siege (deployment + confirmed war_front already in place). Under
   // BOTH autonomy modes the resolution path (resolveSiegeVerdict) must run identically —
   // it is not routed through the initiation authority.
-  function besiegedCampaign(extraRules = {}) {
+  // `deploymentPatch` tunes the seeded siege record; the conquest pin below uses it to
+  // park the siege AT the hard duration ceiling, where the storm is deterministic.
+  function besiegedCampaign(extraRules = {}, deploymentPatch = {}) {
     const base = campaign(extraRules);
     return {
       ...base,
       worldState: {
         ...base.worldState,
-        deployments: { strong: { targetId: 'weak', sinceTick: 0, role: 'siege', maxStartStrength: 5000, currentEffectiveStrength: 5000, accumulatedAttrition: 0, reinforcementFlow: 0, deploymentAge: 4, manpower: 0.6, supplyIntegrity: 0.6, morale: 0.6, equipmentCondition: 0.6, magicSupport: 0.5, commandQuality: 0.6, foodReserve: 0.6, logisticsBurden: 0.3, objective: 'conquest', returnCondition: 'pending' } },
+        deployments: { strong: { targetId: 'weak', sinceTick: 0, role: 'siege', maxStartStrength: 5000, currentEffectiveStrength: 5000, accumulatedAttrition: 0, reinforcementFlow: 0, deploymentAge: 4, manpower: 0.6, supplyIntegrity: 0.6, morale: 0.6, equipmentCondition: 0.6, magicSupport: 0.5, commandQuality: 0.6, foodReserve: 0.6, logisticsBurden: 0.3, objective: 'conquest', returnCondition: 'pending', ...deploymentPatch } },
       },
       regionalGraph: ensureRegionalGraph({
         edges: [{ id: 'edge.strong.weak', from: 'strong', to: 'weak', relationshipType: 'hostile' }],
@@ -244,8 +247,8 @@ describe('M9d — RESOLUTION is UNCHANGED (only initiation splits)', () => {
       }),
     };
   }
-  const resolveRun = (extraRules) => simulateCampaignWorldPulse({
-    campaign: besiegedCampaign(extraRules), saves: SAVES, interval: 'one_week', now: NOW,
+  const resolveRun = (extraRules, deploymentPatch = {}) => simulateCampaignWorldPulse({
+    campaign: besiegedCampaign(extraRules, deploymentPatch), saves: SAVES, interval: 'one_week', now: NOW,
   });
 
   test('a live siege resolves identically under routine vs recommendations', () => {
@@ -260,11 +263,21 @@ describe('M9d — RESOLUTION is UNCHANGED (only initiation splits)', () => {
   });
 
   test('a conquest outcome stays applyMode auto under DM-Driven (resolution is not proposal-gated)', () => {
-    const dm = resolveRun({ politicalAutonomy: 'recommendations' });
-    const conquest = (dm.selected || []).find(o => o.candidateType === 'conquest');
-    if (conquest) expect(conquest.applyMode).toBe('auto');
-    // (If the single tick did not fall the town, the invariant above — identical
-    // deployment ledger across modes — already proves resolution is mode-agnostic.)
-    expect(true).toBe(true);
+    // The siege is parked AT the hard duration ceiling, where resolveSiegeVerdict
+    // auto-resolves with NO roll and a capacity-holding coalition storms the walls. The
+    // fall is therefore STRUCTURAL, not lucky, so this pin is unconditional: a fixture
+    // whose branch might not fire asserts nothing on the ticks where it doesn't.
+    const atCeiling = { deploymentAge: SIEGE_MAX_AGE };
+    const conquestIn = (r) => (r.selected || []).find(o => o.candidateType === 'conquest');
+
+    const dm = conquestIn(resolveRun({ politicalAutonomy: 'recommendations' }, atCeiling));
+    expect(dm, 'the ceiling siege must storm — this fixture exists to reach the conquest branch').toBeTruthy();
+    expect(dm.applyMode).toBe('auto');
+
+    // …and byte-for-byte the same routing on the legacy path: resolution never consults
+    // the initiation authority, so the mode cannot change the apply mode.
+    const legacy = conquestIn(resolveRun({ politicalAutonomy: 'routine' }, atCeiling));
+    expect(legacy).toBeTruthy();
+    expect(legacy.applyMode).toBe('auto');
   });
 });

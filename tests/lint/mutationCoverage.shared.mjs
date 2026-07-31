@@ -78,3 +78,33 @@ export function parseSweepLabels(shText) {
   }
   return labels;
 }
+
+/**
+ * Parse the files the sweep MUTATES IN PLACE — the second argument of every
+ * check_caught (git-revert variant) and check_caught_missing (mv-aside variant)
+ * call. check_caught_planted is excluded on purpose: it writes a path that must
+ * not already exist and refuses otherwise, so it can never touch real content.
+ * @param {string} shText the sweep script source
+ * @returns {{ label: string, file: string }[]} in script order
+ */
+export function parseSweepMutationTargets(shText) {
+  const targets = [];
+  for (const m of shText.matchAll(/^\s*check_caught(?:_missing)?\s+"([^"]+)"\s+(\S+)/gm)) {
+    targets.push({ label: m[1], file: m[2] });
+  }
+  return targets;
+}
+
+/**
+ * Parse the MUTATED_FILES=( … ) dirty-tree refusal guard out of the sweep script.
+ * @param {string} shText the sweep script source
+ * @returns {string[]} the listed paths, in script order
+ */
+export function parseGuardedMutatedFiles(shText) {
+  const block = shText.match(/^MUTATED_FILES=\(\n([\s\S]*?)^\)$/m);
+  if (!block) return [];
+  return block[1]
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0 && !line.startsWith('#'));
+}
