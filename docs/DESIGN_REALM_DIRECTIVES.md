@@ -102,6 +102,14 @@
 >   a Fable-capable account, which CONFIRMS/ADJUSTS forward (never rewrites) and
 >   readjusts instructions where a systematic lean appears. The frozen design
 >   corpus needs no rows to build from — only deviations do.
+> - 2026-08-01 (BUILD ERA, batch 2 LANDED): wave D @ 8c82e8ae (CREATE_ROUTE +
+>   migration 193 — the spine's first BILATERAL vertical), J1 @ ed5ac49d (route
+>   ledger + genesis, ports totality structural), H1 @ 2bafa5d1 (durable NPC
+>   identity + world ledger, Law 7 structural), reclaim @ 05786319 (first paint
+>   1,056,635 to 1,020,590 — RECLAIMED via the FP-G16 ESD trim, never raised; the
+>   soak harness learns the remnant law). Combined gate exit 0 over all four. Five
+>   Opus-era judgments recorded in FABLE_VALIDATION_QUEUE.md. NEXT: the J2+H2+I1
+>   parallel batch.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
