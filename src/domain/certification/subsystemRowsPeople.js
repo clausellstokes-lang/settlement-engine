@@ -445,6 +445,74 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
     // which is consistent with the ladder running and proves nothing on its own.
     soakEvidence: 'indirect',
   }),
+  Object.freeze({
+    rule: 'npcConsequencesEnabled',
+    title: 'The personal consequence economy (durable identity + the world NPC ledger)',
+    module: 'src/domain/worldPulse/npcLedger.js,src/domain/worldPulse/npcLedgerFacets.js,src/domain/worldPulse/npcLedgerProjection.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY AT H1, and this is a statement about today rather than a
+      // permanent one. The design's testing section anticipates verdict / rejection /
+      // arrival event types, but H1 ships IDENTITY AND STATE only: it emits no
+      // candidate, so nothing it produces can reach result.selected, and
+      // eventTypeCounts observes result.selected only. Declaring those three types
+      // NOW would manufacture a channel that reads zero forever and mint a false
+      // SILENT on every receipt written before H2 lands (the npcGrowth row's
+      // reasoning, applied to a subsystem that is early rather than post-apply).
+      // H2 AND H3 MUST EXTEND THIS LIST when their candidate types exist.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. A `people` claim would be corroborating-only and could
+      // never carry ALIVE, so nothing is lost by declining it; and the sibling rows
+      // measured that the family a beat lands in is decided at runtime by tokens in
+      // its wizard-news id, which for this lane would straddle people and politics
+      // (a banishment is a court act, an arrival is a person act). No family is
+      // claimed rather than one guessed.
+      moverFamilies: Object.freeze([]),
+      // THE ONE REAL H1 CHANNEL, and an exclusive one: every write goes through
+      // setNpcLedger, and graduateNpc returns an immediate no-op when
+      // npcConsequencesActive is false, so the key cannot exist with the flag dark.
+      // Receipt-expressible from the v5 subsystems.stateKeys census, which enumerates
+      // spatialLedgers sub-keys by dotted path.
+      stateKeys: Object.freeze(['spatialLedgers.npcLedger']),
+      other: 'DARK BY DECLARATION AT H1. npcConsequencesEnabled is a virtual flag declared FALSE in the full_simulation spread and lit in no preset, so every receipt grades this row DORMANT_BY_CONFIG until the W-H program lights it at its golden boundary. That is the honest verdict for a slice that is built and gated, and it is exactly why the key is declared at all: a rule key reachable from neither the defaults nor any preset spread is invisible to the totality walker, and a subsystem behind an invisible key can ship completely dead with no check ever asking. npcCredibilityEnabled is that shape in-tree today and carries no row as a consequence. THE INSTRUMENT GAP TO CLOSE LATER: the census records the ledger key\'s ENTRY COUNT per year, not its contents, so it can prove that souls are in the ledger and cannot yet prove which ledger they are in. The disjointness and never-reminted invariants below are written against that limit rather than around it.',
+    }),
+    // REACTIVE, per the design. Graduation fires on the corruption web's covert to
+    // revealed transition, not on a clock: a realm can honestly run years with no
+    // exposure at all, so no per-year floor applies and a single firing anywhere in
+    // the span is the aliveness bar.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'consequences_are_gated',
+        description: 'The world NPC ledger cannot exist while npcConsequencesEnabled is dark. The dormancy gate is a whole-entry-point early return, not a suppressed write, so the constitutional dormancy law is observable in the receipt rather than only in the golden.',
+        check: 'In any receipt whose subsystems.rules records npcConsequencesEnabled false, subsystems.stateKeys carries no spatialLedgers.npcLedger entry. Expressible from the v5 receipt alone, because the census claims to be total.',
+      }),
+      Object.freeze({
+        name: 'the_ledger_never_exceeds_the_cast',
+        description: 'CONSERVATION (law 6) at receipt scale: a durable identity is minted for somebody who already exists, so the ledger can never hold more souls than the world is tracking. A ledger larger than the roster would mean graduation invented people.',
+        check: 'subsystems.stateKeys spatialLedgers.npcLedger maxEntries is at most npcStates maxEntries in the same census. Expressible from the v5 subsystems.stateKeys census alone. Note the direction of the proof: it can catch invention, and it cannot catch loss, because a soul dropped from the ledger only lowers the count.',
+      }),
+      Object.freeze({
+        name: 'graduation_is_monotone',
+        description: 'Graduation is a one-way door: an identity, once minted, is never unminted. So the ledger population may fall only when a lifecycle path legitimately removes a soul, and it must never oscillate year over year the way a re-derived sidecar would.',
+        check: 'Across the census, spatialLedgers.npcLedger years equals subsystems.observedYears minus the years before the first graduation, and finalEntries is at least the largest single-year drop. PARTIALLY expressible today: the census gives years, maxEntries and finalEntries but no per-year series, so a fall followed by a rise is indistinguishable from a plateau. Recorded as the instrument gap it is; the exact per-graduation proof lives in the unit pins (mint idempotency, one-way re-graduation) rather than in a receipt.',
+      }),
+      Object.freeze({
+        name: 'no_dm_truth_in_a_player_projection',
+        description: 'AUDIENCE PROJECTION (law 7): compromise sources are covert intelligence and must never reach a player view. The projection is allowlist-built, so an unwritten field cannot appear.',
+        check: 'NOT EXPRESSIBLE FROM ANY RECEIPT, and named here rather than omitted so the reader knows where the proof lives instead of assuming a soak covers it. A soak receipt records engine state, never a rendered projection. The property is pinned statically in tests/domain/npcLedgerProjection.test.js with an anchored negative (the DM view of the SAME fixture must report the covert path through the same helper), and independently by publicSafe.js\'s recursive denylist, whose PRIVATE_KEY_RE matches the dmTruth spelling.',
+      }),
+    ]),
+    // NOT 'unobserved', and the refusal is deliberate: that flag suppresses the SILENT
+    // verdict permanently, and once this lane is lit, a v5 receipt whose total census
+    // shows NO npcLedger key is precisely the diagnosis this contract exists to make.
+    // 'indirect' is the least wrong of the three labels rather than a claim that the
+    // completed soak carries corroboration for this row: it carries none, because the
+    // subsystem did not exist when those receipts were written. What the label BUYS is
+    // the correct behaviour on both receipt generations: a v4 receipt has no census, so
+    // the row grades UNOBSERVED through the no-instrumented-channel branch, while a v5
+    // receipt with the flag lit and no ledger grades SILENT and raises the alarm.
+    soakEvidence: 'indirect',
+  }),
 ]);
 
 /**

@@ -865,6 +865,10 @@
    "kind": "rationale",
    "ref": "golden-byte-pin"
   },
+  "tests/property/npcLedgerDormancyGolden.test.js": {
+   "kind": "rationale",
+   "ref": "golden-byte-pin"
+  },
   "tests/property/peaceCausalDormancyGolden.test.js": {
    "kind": "rationale",
    "ref": "golden-byte-pin"
@@ -1004,6 +1008,10 @@
   "tests/security/applicationCommandJournal.pglite.test.js": {
    "kind": "mutation",
    "label": "commands/journal conflict contract drift"
+  },
+  "tests/security/createRouteCommand.pglite.test.js": {
+   "kind": "rationale",
+   "ref": "pglite-executed"
   },
   "tests/security/actionVelocity.pglite.test.js": {
    "kind": "rationale",

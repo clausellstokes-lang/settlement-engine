@@ -338,7 +338,36 @@ describe('subsystem certification — the completed corpus diagnosis', () => {
       && row.aliveness.moverFamilies.length === 0
       && row.aliveness.stateKeys.length > 0);
     expect(sidecarOnly.length, 'no sidecar-only row means this pin measures nothing').toBeGreaterThan(0);
-    for (const row of sidecarOnly) {
+
+    // AMENDED 2026-07-31 (W-H1) — a DOMAIN RESTRICTION, not a loosening. The assertion
+    // below is the original one, byte for byte; only the set it runs over is corrected.
+    //
+    // The claim is about INSTRUMENT GAPS, so it is only meaningful for a row the
+    // receipt actually tried to observe. A row whose rule was OFF in the recorded run
+    // never reaches a channel at all: gradeRow returns DORMANT_BY_CONFIG from the rule
+    // state before any evidence is consulted, so including such a row asserts a
+    // property of the switch rather than of the schema. Every sidecar-only row was
+    // rule-ON when this test was written, which is why the distinction did not exist;
+    // npcConsequencesEnabled is the first one declared FALSE in the harness preset.
+    //
+    // TWO WIDER ASSERTIONS WERE DRAFTED HERE AND DELETED, each after a negative control
+    // proved it could not fail. (1) A blanket `not.toBe('SILENT')` over the whole set:
+    // the only route to SILENT is an instrumented channel reading zero, and the only
+    // channel these rows declare is the v5 census this v4 fixture does not carry — and
+    // a planted event type that made SILENT reachable also removed the row from the
+    // sidecar-only filter. (2) An OFF-arm `toBe('DORMANT_BY_CONFIG')` loop: deleting
+    // the evaluator's harness rule-state inference outright left that loop green
+    // (the row simply moved to the other arm), because the mapping is a tautology of
+    // gradeRow rather than an independent property. Neither is shipped: an assertion
+    // that cannot fail in its own fixture is the vacuous green the walker laws forbid.
+    const observable = sidecarOnly.filter((row) => (
+      evaluation.rows.find((graded) => graded.rule === row.rule).ruleState !== 'off'
+    ));
+    expect(
+      observable.length,
+      'every sidecar-only row is rule-OFF here, so this pin no longer measures an instrument gap',
+    ).toBeGreaterThan(0);
+    for (const row of observable) {
       expect(
         verdictOf(evaluation, row.rule),
         `row ${row.rule} declares only a v5 census channel, so a v4 receipt cannot answer for it`,
