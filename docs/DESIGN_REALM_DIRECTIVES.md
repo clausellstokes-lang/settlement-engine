@@ -321,6 +321,38 @@
 >   history actually records outcomes and not merely occurrences before building. If
 >   it records only that wars happened, the favourable qualifier cannot be honoured
 >   and the cause must NOT be built as bare militarism; report instead.
+> - ⭐⭐ 2026-08-01 AMENDMENT E2 — DISPOSITION IS A GENERAL MECHANISM, NOT A WAR ONE.
+>   Owner: "the same can be said for suing for peace as a cultural thing as well, or
+>   pushing for trade, or whatever." E on its own was a half-model — a people who
+>   learn only that war pays. THE FULL LAW: a realm develops STANDING DISPOSITIONS
+>   from what has historically WORKED FOR IT, across a closed vocabulary, and war is
+>   merely one channel of several.
+>   ── THE CHANNELS (closed, finite-semantics, authored — proposed: martial,
+>   mercantile, diplomatic, insular). Each is learned the same way from the same
+>   honest read: the outcomes of what this realm actually did. Wars won raise
+>   martial; wars lost lower it. Treaties that held and mediations that landed raise
+>   diplomatic. Trade that enriched raises mercantile. Ventures that cost and
+>   returned nothing lower their own channel. ONE READER, MANY CHANNELS.
+>   ── ⭐ THIS SATISFIES THE BIJECTION NATURALLY, which is why it belongs here: the
+>   peace mirror of "war has worked for us" is "peace has worked for us" — the same
+>   mechanism, the other channel. No filler mirror needs inventing.
+>   ── EVERY CHANNEL IS BOTH A CAUSE-WEIGHT AND AN END-TERM. Martial reaches for war
+>   and is slow to sue; diplomatic reaches for mediation and sues early; mercantile
+>   reaches for the trade agreement and prices the war against the caravans it will
+>   cost. In the C/C2/D termination read, the disposition profile is what colours
+>   every other term.
+>   ── ⚠️ IT IS A PROFILE, NEVER A LABEL. A realm holds all channels at once with
+>   different weights; it is never "the warlike one". Banded and capped like every
+>   other appetite (law 6), so disposition COLOURS situational causes and can never
+>   drown them — a peaceable realm still fights when starving, a martial one still
+>   sues when ruined.
+>   ── ⭐ THE PAYOFF, and it is the best argument for building this at all: two realms
+>   generated from identical configs DIVERGE over a century into genuinely different
+>   peoples, because history rewarded them differently. That is character emerging
+>   from events rather than from a config field, and it is the same principle as the
+>   NPC facet drift H3 already ships. THE LOOP MUST BE ABLE TO REVERSE — a martial
+>   realm broken in a long war becomes cautious, or the mechanism is a personality
+>   ratchet and realms calcify. Pin the reversal explicitly.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
