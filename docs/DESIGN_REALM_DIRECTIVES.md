@@ -996,6 +996,47 @@
 >   the returning envoy is a TRUSTED source (K4). A realm may buy back its own man and
 >   with him the lie that loses it the war. That is the strongest single argument for
 >   building this lane at all.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT Q — THE COMPROMISED ENVOY, AND THE ONE HONEST CHANNEL
+>   IN THE WHOLE WORLD. Owner: what if the NPC sent out was ALREADY COMPROMISED — and
+>   what if they VOLUNTEERED to be the one who goes? Then at the meeting they treat
+>   with their true allegiance, negotiate terms favourable to the enemy, and give them
+>   TRUE INFORMATION ABOUT EVERYTHING.
+>   ── ⭐⭐⭐ THE INVERSION, AND IT IS THE BEST STRUCTURAL IRONY THIS ENGINE CONTAINS:
+>   K.2 gives every envoy a TRUE snapshot of their own settlement at the moment they
+>   leave. K3 then rules that NOBODY in the world may ever read truth. THE TRAITOR IS
+>   THEREFORE THE ONLY CHANNEL IN THE ENTIRE SIMULATION THAT DELIVERS ACCURATE
+>   INFORMATION — carried, willingly, straight to the enemy. In a world built on
+>   everyone acting from decayed and distorted belief, treachery is the one thing that
+>   transmits the truth intact. Build it and the epistemic thesis acquires its own
+>   dark mirror.
+>   ── TWO BETRAYALS, NOT ONE: (1) TERMS — they negotiate what favours their true
+>   patron, and their home reads those terms as the best that could be had; (2)
+>   INTELLIGENCE — they hand over the snapshot, so the enemy learns their opponent's
+>   real stores, real strength, real desperation. The second is worth far more than
+>   the first and is invisible for far longer.
+>   ── ⭐ VOLUNTEERING IS THE TELL, AND ONLY IF SOMEBODY READS IT. Who goes is a
+>   DECISION, not a draw: a careful seat vets the envoy against loyalty, facets, and
+>   known associations; a careless or hurried one takes whoever offers. A compromised
+>   soul eagerly volunteering for the errand is exactly the kind of fact the
+>   information layer can surface — or fail to. Pin both: a vetting that catches it,
+>   and a hurried dispatch that does not.
+>   ── ⭐⭐ AND THIS IS WHY YOU SEND TWO. K4's multiple envoys stop being mere
+>   redundancy and become COUNTER-INTELLIGENCE: two accounts of the same parlay that
+>   DIVERGE are the traitor's signature, caught by the corroboration ladder I2 already
+>   built. A realm that sends one envoy trusts a man; a realm that sends two is
+>   checking. That is a strategy the player can learn, which is the mark of a real
+>   mechanic.
+>   ── EXPOSURE AND ITS PRICE (the corruption web's existing covert→revealed seam):
+>   when the betrayal surfaces, the terms are re-read as treason — a grievance of the
+>   first order, an H2 verdict for the man, and a live question of whether the terms
+>   themselves stand or are repudiated (which is its OWN casus belli against a party
+>   that knowingly bought a traitor). G's third-party books, previously ruled for
+>   rulers, apply identically to an envoy: this soul's profit belongs to somebody
+>   else's realm.
+>   ── THE COUNTERFORCE IS THE SAME LAYER, as always: absurd terms are themselves
+>   evidence, divergent envoy accounts are evidence, and a realm that buys envoys earns
+>   a reputation that makes future parlay harder for everyone — including the next time
+>   it wants peace honestly.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
