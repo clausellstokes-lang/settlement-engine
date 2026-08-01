@@ -865,6 +865,39 @@
 >   not friction to be optimised away — it is the reason a nearly-agreed peace can
 >   fail, the reason terms go obsolete (K3), and the reason the compromise round costs
 >   something real.
+> - ⭐⭐ 2026-08-01 AMENDMENT N — CONQUEST IS A DIFFERENT END STATE, AND ITS GATE
+>   MATTERS MORE THAN ITS MECHANICS. Owner: "peace can also be achieved if they simply
+>   occupied all of the enemy forces and settlements. But that is a different end
+>   state, and one that only happens when one settlement or coalition is overwhelmingly
+>   more powerful than their counter."
+>   ── IT BYPASSES EVERYTHING IN K. No envoy walks, no terms are carried, no coalition
+>   votes, no compromise round. There is no second party left to agree with. This is
+>   the ONE termination path that needs none of the negotiation machinery, and it must
+>   be modelled as a distinct outcome rather than as a peace with harsh terms — the
+>   Herald sentence is different and so is the world after.
+>   ── ⚠️ THE GATE IS THE WHOLE DESIGN, and it must be strict: OVERWHELMING asymmetry
+>   only. If a moderate advantage produces conquest, every war becomes a conquest and
+>   the entire negotiation system built in C through L is decoration. Pin the negative
+>   case hardest: a CLEARLY WINNING side that is not overwhelming must still have to
+>   negotiate. Conquest is the rare ending, not the default one.
+>   ── IT IS PHYSICAL AND THEREFORE SLOW (amendment M): occupying every settlement means
+>   armies actually reaching them, one leg at a time, over roads that may be cut. A
+>   realm cannot be conquered in a season, which is its own natural rarity — the map
+>   itself rations this outcome.
+>   ── ⭐⭐ THE COUNTERFORCE IS INHERITANCE, AND IT NEEDS NO NEW RULE: THE VICTOR TAKES
+>   THE LOSER'S PROBLEMS ALONG WITH THEIR GROUND. Their food deficit becomes your food
+>   deficit (P's K_food is summed over what you now hold), their ruined roads are yours
+>   to maintain, their unrest is garrisoned by your soldiers, their starving population
+>   eats from your granaries, and their enemies inherit you. A realm that conquers a
+>   dying neighbour has annexed a famine. This is the honest brake on conquest and
+>   every engine needed to compute it already exists.
+>   ── OCCUPATION IS NOT ANNEXATION. Held settlements are HELD — K1's siege_occupation
+>   impairment, garrison cost, unrest, and the standing possibility of revolt. The
+>   conqueror may spend a generation holding what it took, and losing it is a real
+>   outcome. Do not collapse "occupied" into "owned".
+>   ── THIS IS AMENDMENT L's CONVERGENCE FORCE #6 MADE SPECIFIC, and it belongs in the
+>   soak's ending-mix measurement: if conquest carries a large share of endings, the
+>   gate is too loose and the negotiation model is not being exercised.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
