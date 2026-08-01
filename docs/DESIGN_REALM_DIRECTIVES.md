@@ -128,6 +128,16 @@
 >   real types — the RouteBypass shape moved into J1's ledger to keep one writer.
 >   NEXT: batch 5 — H4 (Wanderers tab + DM verbs), I2 (reliability stamps +
 >   fidelity), J4 (consumers: garrison/war, interdiction, roamer physics hookup).
+> - 2026-08-01 (BUILD ERA, batch 5 LANDED - THE H AND J PROGRAMS ARE COMPLETE):
+>   H4 @ 6594548d (Wanderers register, unaffiliates, three DM verbs, undo WIRED
+>   after the dead-op ratchet caught it advertised-but-unreachable), I2 @ 1f464505
+>   (reliability stamps, ceiling-bounded fidelity, the calibration-honesty envelope
+>   executed with a mutant control), J4 @ bc843d33 (garrison asymmetry, goods-
+>   denominated interdiction, roamer physics, THE REPUTATION RACE pinned both ways
+>   on one fixture). Gate exit 0; no golden moved. NEXT AND FINAL BUILD BATCH:
+>   I3 (brokerage services), I4 (the Whisper Market's plant), K2 (magic regimes +
+>   the two-sided band), K3 (the disaster buffer), K4 (substitution + reagents).
+>   Then the full soak redo, then tuning.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
