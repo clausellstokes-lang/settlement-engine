@@ -151,6 +151,17 @@
 >   natural mortality (named NPCs exempt), push-pull migration, stressor-coupled
 >   curbs. Architecture: docs/DESIGN_DEMOGRAPHIC_ENGINE.md. ALL SOAK REDOS WAIT on
 >   wave P (a pre-cure soak would re-prove a known defect).
+> - 2026-08-01 (WAVE P): P1 LANDED @ d620a05d, gate exit 0, THE CURE MEASURED
+>   (8 settlements x 300 years all at fixed points; the pre-cure control re-creates
+>   the runaway from the same fixture). GROUNDED FINDING (DESIGN_DEMOGRAPHIC_ENGINE
+>   section 0): the runaway and the floor are ONE defect - an uncapped rate read
+>   through an integer deadband; four intuitive floor hypotheses refuted, incl. the
+>   named-cast floor (ZERO production callers). P1a chartered: kill the deadband,
+>   open the descent through EXISTING tier drift, disposition the already-
+>   unconserved promotion mint. External review's three amendments accepted (three
+>   readings; migration before response competition; persistent plans), slices
+>   re-staged P1/P1a/P2-homeostat/P3-valves/P4-world, and THE FOURTEEN CLAIMS
+>   adopted as the wave's certification contract.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
