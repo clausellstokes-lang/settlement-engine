@@ -61,6 +61,7 @@ import { hasSpatialLedger, getSpatialLedger, activeSpatialDigest } from '../spat
 import { routeAwareHopDelayTicks } from './distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
+import { composeBrokerageSight, makeBrokerageFloorFn } from './brokerageFidelity.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
 /** The governing seat's operational belief — the v1 map that DRIVES the war
@@ -1107,7 +1108,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
  *   ABSENT / 1 ⇒ byte-identical (the reconciliation only SLOWS convergence, never inverts it).
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf = null, commitmentDiscountFor = null }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf: baseSightOf = null, commitmentDiscountFor = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -1164,6 +1165,17 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   // distance surcharge REACT to embattlement/blockade transitions. Null (dark) ⇒ the geometric
   // surcharge ⇒ byte-identical. Bound once per advance; a pure per-settlement level read.
   const newsEmbattlement = distancePriced ? (/** @type {string} */ sid) => embattlementLevel(worldState, sid) : null;
+  // W-I I2 THE BROKERAGE FIDELITY TERM (docs/DESIGN_INFORMATION_BROKERAGES.md §5 secondary,
+  // Law 1). Where an information house stands, that observer's aggregate fidelity is FLOORED
+  // at the house's belief competence, attenuated by news distance so the curve bends and is
+  // never abolished. It rides the EXISTING sight slot rather than a new reconcile parameter,
+  // because "paid eyes sharpen the read" is already exactly what that slot means. The
+  // composition is built here rather than in the pulse kernel because this module already
+  // holds the snapshot index and the distance digest the floor needs. makeBrokerageFloorFn
+  // returns null unless the statecraft gate AND the virtual informationBrokeragesEnabled are
+  // both lit, and composeBrokerageSight then hands back the caller's own closure BY
+  // REFERENCE, so every campaign that never lit the flag reconciles byte-identically.
+  const sightOf = composeBrokerageSight(baseSightOf, makeBrokerageFloorFn({ worldState, byId }));
   // Every observer that either holds a belief OR heard a rumor this window. The
   // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
   // it. [spatial-engine-5]

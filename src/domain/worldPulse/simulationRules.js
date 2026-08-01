@@ -473,6 +473,21 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // words. LIGHTING IT belongs at the declared golden boundary once K2's regimes,
     // K3's buffer and K4's substitution land; flip this one value there.
     magicEconomyEnabled: false,
+    // W-I2: THE INFORMATION BROKERAGES, DECLARED DARK — the same shape, and for the same
+    // reason, as the W-H1, W-J1 and W-K1 declarations directly above.
+    // `informationBrokeragesEnabled` is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry;
+    // brokerageStamps.brokerageEffectsActive reads `=== true`, so a declared false is
+    // behaviourally identical to absent and cannot perturb a byte), declared here at FALSE
+    // so the subsystem-certification totality walker can SEE the key and hold W-I's lane
+    // under the contract from the commit that first gives it effects.
+    //
+    // THE GATE IS A CONJUNCTION, DELIBERATELY (design Law 5): the brokerage effects need
+    // this key AND infoStatecraftActive, which is itself beliefsActive plus
+    // infoStatecraftEnabled. A settlement cannot grade information that its world does not
+    // model as travelling, so lighting this key alone is a no-op by construction rather
+    // than by a second check. LIGHTING IT belongs at the declared golden boundary once I3's
+    // services and I4's market land; flip this one value there.
+    informationBrokeragesEnabled: false,
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive

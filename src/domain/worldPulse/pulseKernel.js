@@ -1848,6 +1848,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // W-DOCTRINE-2b: the SEE/HIDE per-pair sight modifier (an active sight/secrecy posture
       // slows/speeds this pair's belief decay + floors its fidelity). Reads the postures
       // written LAST tick (read-last/write-next). null when dormant / no posture ⇒ byte-identical.
+      //
+      // W-I I2 THE BROKERAGE FIDELITY TERM rides this SAME slot, composed inside
+      // advanceBeliefMaps rather than here (beliefMap.js, the brokerage floor): the belief
+      // engine already holds the snapshot index and the distance digest the floor needs, and
+      // this kernel file is at its frozen size ceiling. Nothing changes on this line.
       sightOf: makeSightFn(memoryState),
     });
     if (beliefs.changed) {

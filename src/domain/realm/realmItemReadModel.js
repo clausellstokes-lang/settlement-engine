@@ -24,6 +24,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { heraldItemReliability } from '../worldPulse/brokerageStamps.js';
 import { SECTION_OF, heraldSectionOfRecord, routingKeyOf } from './heraldRouting.js';
 import { realmLegalActions, realmOperationalCondition } from './realmItemActions.js';
 import { realmAttentionDefinition } from './realmItemAttention.js';
@@ -505,6 +506,32 @@ function epistemicClassOf(sourceClass, resolution) {
 }
 
 /**
+ * [W-I I2] The epistemic block: its class, plus a RELIABILITY STAMP when an information
+ * house standing on this item's address chain both vouches for the item's channel and
+ * actually heard the telling. The stamp key is CONDITIONAL and drops when absent, so a
+ * campaign without brokerages (and every campaign while the virtual flag is dark) carries
+ * the identical block it carried before this slice existed. The derivation itself lives in
+ * domain/worldPulse/brokerageStamps.js; this seam only supplies what it already has.
+ *
+ * @param {EpistemicClass} epistemicClass
+ * @param {RealmItemDerivationContext} context
+ * @param {Record<string, unknown>} source
+ * @param {{ primary: import('./heraldRouting.js').HeraldSection, tags: string[] }} topic
+ * @param {{ subjects: Array<Record<string, unknown>> }} subjectContext
+ * @returns {Record<string, unknown>}
+ */
+function epistemicBlockOf(epistemicClass, context, source, topic, subjectContext) {
+  const reliability = heraldItemReliability({
+    worldState: recordOf(context.campaign.worldState),
+    settlements: context.settlementIndex.settlements,
+    section: topic.primary,
+    subjects: subjectContext.subjects,
+    source,
+  });
+  return reliability ? { class: epistemicClass, reliability } : { class: epistemicClass };
+}
+
+/**
  * @param {Record<string, unknown>} semantic
  * @param {RealmSourceClass} sourceClass
  * @returns {{ primary: import('./heraldRouting.js').HeraldSection, tags: string[] }}
@@ -688,7 +715,11 @@ function realmItemOf(projection, context) {
       canUseCustom: context.canUseCustom,
     }),
     workflow: { kind: workflowKindOf(sourceClass, resolution) },
-    epistemic: { class: epistemicClassOf(sourceClass, resolution) },
+    // [W-I I2] The epistemic dimension gains a CONDITIONAL reliability stamp where an
+    // information house stands on the item's own address chain (design section 5). The key
+    // is absent everywhere else, which is the design's unlabelled baseline rather than an
+    // omission, and absent entirely while the virtual flag is dark, so no golden moves.
+    epistemic: epistemicBlockOf(epistemicClassOf(sourceClass, resolution), context, source, topic, subjectContext),
     attention: { significance: significanceOf(semantic) },
     subjects: subjectContext.subjects,
     affectedEntities: subjectContext.affectedEntities,
