@@ -37,6 +37,13 @@
  * tombstone: a voided row with no mark under full-auto would read as a DM action,
  * which is precisely the mis-attribution the mark exists to prevent.
  *
+ * ── TWO QUEUES, ONE PASS (the J-D7 toggle transition) ───────────────────────
+ * A full-auto advance rules on the HELD DOCKET first (every row left pending by
+ * the DM's manual sessions, oldest first) and then on the rows this advance
+ * minted. Both go through the same accept path and carry the same mark, so a DM
+ * who flips the toggle mid-docket finds the backlog ruled and receipted rather
+ * than stranded. See heldProposalIds below for the ordering contract.
+ *
  * ── DORMANCY ────────────────────────────────────────────────────────────────
  * Called only when an advance ran in full-auto (the store's engagement rule lives
  * in campaignAdvanceSession.js: the USER TOGGLE, never an internally-derived
@@ -67,6 +74,7 @@
  */
 import { applyWorldPulseProposal } from './applyWorldPulse.js';
 import { foldUpdatesOntoSaves } from './advanceInterval.js';
+import { ENGINE_AUTO_ADJUDICATOR, isEngineAdjudicated } from './adjudicationMark.js';
 
 /**
  * The loose sim shapes this module threads, spelled with `unknown` rather than the
@@ -93,23 +101,69 @@ import { foldUpdatesOntoSaves } from './advanceInterval.js';
  * @typedef {{ worldState?: unknown, regionalGraph?: unknown, wizardNews?: unknown }} CampaignLike
  */
 
-/**
- * The typed provenance value for a ruling the ENGINE rendered under full
- * auto-resolve. A frozen vocabulary of exactly one member today; a future
- * adjudicator (a scheduled ruling, a co-DM) adds a sibling here rather than
- * inventing a free-form string at a call site.
- * @type {'engine_auto'}
- */
-export const ENGINE_AUTO_ADJUDICATOR = 'engine_auto';
+// THE MARK lives in its own zero-import leaf so the Herald's read side can share
+// the ONE spelling of the key without dragging this module's apply-kernel import
+// into the inspector chunk. Imported (the default stamp below binds the name) AND
+// re-exported, so every established import path (`from './autoAdjudication.js'`)
+// keeps resolving to the same two names.
+export { ENGINE_AUTO_ADJUDICATOR, isEngineAdjudicated };
 
 /**
- * Is this proposal row one the ENGINE ruled on (rather than the DM)?
- * The single read-side accessor, so no surface re-spells the key.
- * @param {{ adjudicatedBy?: unknown } | null | undefined} proposal
- * @returns {boolean}
+ * The HELD DOCKET's proposal ids, OLDEST FIRST — every row still PENDING on the
+ * advance's committed world that this advance did NOT mint.
+ *
+ * WHY THE AUTO PATH OWES THESE (J-D7's toggle-transition clause). A DM who ran
+ * with auto-resolve OFF accumulates a held docket: rows they dismissed the
+ * gathered screen on, which sit pending until someone rules. When that DM then
+ * turns the toggle ON, "the realm rules on its own" has to mean the whole docket,
+ * not just the rows the next advance happens to mint — otherwise the held half
+ * would sit unread forever with the DM believing the realm was handling it, which
+ * is precisely the silent drop the coup guarantee forbids. So they are ruled at
+ * the NEXT advance, through the same accept path, with the same engine mark, and
+ * with the same news entries a hand-Apply would leave (the Herald note).
+ *
+ * ORDER IS OLDEST FIRST and fully deterministic: tick, then the recorded
+ * createdAt stamp, then the row id. Every key is already on the persisted row, so
+ * no new state is introduced and the order survives a JSON round trip. Ties on
+ * all three are impossible (ids are unique within the ring).
+ *
+ * EXPORTED for the ordering pin: the manual desk (components/map/gatheredDocket.js)
+ * sorts the very same backlog for the DM, and a silent divergence between the two
+ * would have the engine and the desk rule a docket in different orders with no
+ * test able to see it. tests/components/gatheredDocketModel.test.js asserts the
+ * two orderings are equal over one fixture.
+ *
+ * @param {unknown} worldState the advance's COMMITTED world (never the pre-advance clone)
+ * @param {Set<string>} minted the ids this advance minted, which lead the queue on their own
+ * @returns {string[]}
  */
-export function isEngineAdjudicated(proposal) {
-  return !!proposal && proposal.adjudicatedBy === ENGINE_AUTO_ADJUDICATOR;
+export function heldProposalIds(worldState, minted) {
+  const state = worldState != null && typeof worldState === 'object'
+    ? /** @type {{ proposals?: unknown }} */ (worldState)
+    : null;
+  const rows = Array.isArray(state?.proposals) ? state.proposals : [];
+  /** @type {Array<{ id: string, tick: number, createdAt: string }>} */
+  const held = [];
+  for (const raw of rows) {
+    const row = raw != null && typeof raw === 'object'
+      ? /** @type {{ id?: unknown, status?: unknown, tick?: unknown, createdAt?: unknown }} */ (raw)
+      : null;
+    if (!row || row.status !== 'pending') continue;
+    const id = row.id == null ? '' : String(row.id);
+    if (!id || minted.has(id)) continue;
+    const tick = Number(row.tick);
+    held.push({
+      id,
+      tick: Number.isFinite(tick) ? tick : -1,
+      createdAt: row.createdAt == null ? '' : String(row.createdAt),
+    });
+  }
+  held.sort((a, b) => (
+    (a.tick - b.tick)
+    || (a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0)
+    || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
+  ));
+  return held.map(entry => entry.id);
 }
 
 /**
@@ -138,7 +192,8 @@ function mintedProposalIds(result) {
 }
 
 /**
- * Rule on every proposal an advance just minted, through the hand-accept path.
+ * Rule on the whole unresolved docket — the rows held from earlier advances and
+ * the rows this advance just minted — through the hand-accept path.
  *
  * Returns a NEW result of the SAME shape the advance already produced (so the
  * store's existing commit — applyWorldPulseResultToState — consumes it unchanged),
@@ -166,7 +221,11 @@ export function autoAdjudicateAdvanceProposals({
   // A blocked advance (ok:false) committed nothing, and a PAUSED interval is by
   // construction the auto-resolve-OFF path — neither has a docket to rule on.
   if (!campaign || !result || result.ok === false || result.status === 'paused') return result;
-  const queue = mintedProposalIds(result);
+  // THE HELD DOCKET LEADS. Oldest first, so a matter the DM parked two advances
+  // ago is ruled before the one this tick just raised — the same order the
+  // gathered screen shows it in, so the receipt reads the way the desk read.
+  const minted = mintedProposalIds(result);
+  const queue = [...heldProposalIds(result.worldState, new Set(minted)), ...minted];
   if (!queue.length) return result;
 
   // Thread the ADVANCE's committed world (not the pre-advance clone) into the

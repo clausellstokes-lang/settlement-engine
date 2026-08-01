@@ -129,6 +129,8 @@ function DashboardBody({ campaign, feed = { bySection: {} }, canManageCampaigns,
  * @param {() => void} [props.onUpgrade]
  * @param {ReadonlyArray<Record<string, unknown>>} [props.realmDecisionItems]
  * @param {string|null} [props.activeDecisionItemId]
+ * @param {(() => void)|null} [props.onOpenGatheredDocket]  J-D7: re-open the gathered
+ *   adjudication screen from the Adjudication door's one-line pointer.
  */
 export default function HeraldBody({
   section,
@@ -145,6 +147,7 @@ export default function HeraldBody({
   onUpgrade,
   realmDecisionItems,
   activeDecisionItemId = null,
+  onOpenGatheredDocket = null,
 }) {
   const showResolve = flag('warEconomySurfacing');
   const bySection = feed.bySection || {};
@@ -271,6 +274,7 @@ export default function HeraldBody({
         focusName={focusName}
         realmDecisionItems={realmDecisionItems}
         activeDecisionItemId={activeDecisionItemId}
+        onOpenGatheredDocket={onOpenGatheredDocket}
       />
     );
   }

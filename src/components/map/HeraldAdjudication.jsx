@@ -20,6 +20,12 @@ import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sa
 import { ClerkNote } from '../generate/ClerkNote.jsx';
 import { OutcomeCard, Section, SmallButton } from './WorldPulsePrimitives.jsx';
 import RealmVerbComposer from './RealmVerbComposer.jsx';
+import HeraldJudgmentPointer from './HeraldJudgmentPointer.jsx';
+import { pendingDecisionCount } from './gatheredDocket.js';
+// The read-side accessor for the engine's adjudicator mark, imported from its own
+// zero-import leaf — reaching for it through autoAdjudication.js would drag the
+// whole apply kernel into the Herald's chunk for one string compare.
+import { isEngineAdjudicated } from '../../domain/worldPulse/adjudicationMark.js';
 import {
   collectSettlementIds,
   human,
@@ -173,13 +179,18 @@ function canonicalResolvedRows(items) {
     if (!id || seen.has(id)) continue;
     seen.add(id);
     const status = text(proposal.status).toLowerCase();
+    // WHO RULED IT (J-D7). A row the engine ruled under full auto-resolve carries
+    // the adjudicator mark; calling that "by you" would be the exact
+    // mis-attribution the mark exists to prevent. 'refused' and 'superseded' are
+    // already the realm's own words, so only the two DM verbs need the split.
+    const engine = isEngineAdjudicated(proposal);
     const by = status === 'dismissed'
-      ? 'dismissed by you'
+      ? (engine ? 'dismissed by the realm itself' : 'dismissed by you')
       : status === 'refused'
         ? 'refused by the realm'
         : status === 'superseded' || status === 'expired'
           ? 'superseded'
-          : 'applied by you';
+          : (engine ? 'applied by the realm itself' : 'applied by you');
     rows.push({
       id,
       headline: text(item?.headline || proposal.headline) || 'A decision',
@@ -301,6 +312,7 @@ export default function HeraldAdjudication({
   focusName = '',
   realmDecisionItems,
   activeDecisionItemId = null,
+  onOpenGatheredDocket = null,
 }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
@@ -342,26 +354,19 @@ export default function HeraldAdjudication({
           major,
         }))
     : [];
-  const allPending = (worldState.proposals || []).filter(p => p.status === 'pending');
-  // FOCUS scopes the decisions desk too (the whole paper is the local edition): a
-  // proposal touching the focused settlement stays. Then the uncapped wall becomes
-  // collapsible group-by-settlement sections.
-  const pending = canonicalMode
-    ? canonicalProposalRows(canonicalItems)
-    : (focusId != null
-      ? allPending.filter(p => collectSettlementIds(p).map(String).includes(String(focusId)))
-      : allPending)
-      .map(proposal => ({
-        canonical: false,
-        // Legacy mode must retain the raw writer argument byte-for-byte. The
-        // canonical flagged path above owns normalized RealmItem source IDs.
-        sourceId: proposal.id,
-        itemId: null,
-        item: null,
-        proposal,
-        applyAction: null,
-        dismissAction: null,
-      }));
+  // THE PENDING HALF LEFT THIS DOOR (realm directive 7 / J-D7). The legacy Herald
+  // no longer carries per-item apply/dismiss cards: the pending docket is ruled on
+  // the GATHERED ADJUDICATION SCREEN, and this door states the count and points at
+  // it. Two desks over one docket is how a DM half-rules a tick and loses the
+  // thread; one desk plus one honest pointer is the directive.
+  // The count is REALM-WIDE on purpose — deliberately NOT focus-scoped like the
+  // report doors — because it must equal what the gathered screen actually lists.
+  const gatheredCount = pendingDecisionCount(campaign);
+  // CANONICAL (flagged) mode keeps its own decisions surface: it is the in-flight
+  // G-4a command-brief migration, with its own receipts contract and its own pins,
+  // and folding it into the gathered screen is that wave's call, not this one.
+  // DEFERRED, recorded here so it is not re-found as a bug.
+  const pending = canonicalMode ? canonicalProposalRows(canonicalItems) : [];
   const pendingGroups = groupProposalsBySettlement(pending, nameById);
 
   // A Briefing jump carries the canonical RealmItem key, not a raw proposal ID.
@@ -585,9 +590,11 @@ export default function HeraldAdjudication({
         </div>
       )}
 
-      <Section heading="Pending Decisions" count={pending.length}>
-        {pending.length > 0 && proposalNote && <ClerkNote rubric="The realm's counsel">{proposalNote}</ClerkNote>}
-        {pending.length === 0 ? (
+      <Section heading="Pending Decisions" count={gatheredCount}>
+        {gatheredCount > 0 && proposalNote && <ClerkNote rubric="The realm's counsel">{proposalNote}</ClerkNote>}
+        {!canonicalMode ? (
+          <HeraldJudgmentPointer count={gatheredCount} onOpen={onOpenGatheredDocket} />
+        ) : pending.length === 0 ? (
           <div style={{ border: `1px dashed ${BORDER}`, padding: 14, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             {focusId != null ? `No decision awaits at ${focusName}.` : 'No decision awaits you. The realm runs on its own for now.'}
           </div>

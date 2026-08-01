@@ -16,6 +16,11 @@ import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
 
 const SimulationRulesDialog = lazy(() => import('./SimulationRulesDialog.jsx'));
+// THE GATHERED ADJUDICATION SCREEN (realm directive 7 / J-D7). A lazy leaf: a
+// session that never withholds a decision never loads the docket surface, its
+// outcome cards, or the address-chain machinery behind them.
+// @enforced-by tests/build/gatheredAdjudicationLazy.test.js
+const GatheredAdjudication = lazy(() => import('./GatheredAdjudication.jsx'));
 
 export function WorldMapOverlays({
   toast,
@@ -46,6 +51,9 @@ export function WorldMapOverlays({
   setShowSimulationRules,
   tourOpen,
   setTourOpen,
+  // J-D7: { open, count, sinceTick, onClose, onOpen } from useAdvanceSession.
+  // Inert default so every existing call site renders byte-identically.
+  gatheredDocket = null,
 }) {
   return (
     <>
@@ -169,6 +177,27 @@ export function WorldMapOverlays({
           onClose={() => setShowSimulationRules(false)}
         />
       </Suspense>
+
+      {/* THE GATHERED ADJUDICATION SCREEN — ONE surface for every matter the
+          advance left unruled (never a sequential modal chain). Mounted only
+          while open, so the lazy chunk is fetched on the first withheld decision
+          and never on a full-auto realm. */}
+      {gatheredDocket?.open && (
+        <Suspense
+          fallback={
+            <div role="status" aria-live="polite" style={{ position: 'fixed', inset: 0, display: 'grid', placeItems: 'center', zIndex: 60 }}>
+              Gathering the matters for your judgment…
+            </div>
+          }
+        >
+          <GatheredAdjudication
+            open
+            campaign={activeCampaign}
+            sinceTick={gatheredDocket.sinceTick}
+            onClose={gatheredDocket.onClose}
+          />
+        </Suspense>
+      )}
 
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />

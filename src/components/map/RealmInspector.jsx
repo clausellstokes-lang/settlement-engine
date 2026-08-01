@@ -161,6 +161,9 @@ function SectionTab({ active, label, Icon, count = null, onClick }) {
  * @param {boolean} [props.advancing]
  * @param {'min'|'default'|'expanded'} [props.inspectorSize]
  * @param {(size: 'min'|'default'|'expanded') => void} [props.onSetSize]
+ * @param {(() => void)|null} [props.onOpenGatheredDocket] J-D7: the Adjudication door
+ *   is a one-line POINTER at the gathered adjudication screen, not a second work
+ *   surface. This re-opens that screen; absent, the pointer simply states the count.
  */
 export default function RealmInspector({
   open, section, onSection, onClose,
@@ -168,6 +171,7 @@ export default function RealmInspector({
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
   advancing = false,
   inspectorSize = 'default', onSetSize,
+  onOpenGatheredDocket = null,
 }) {
   const saves = useStore(s => s.savedSettlements);
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -620,6 +624,7 @@ export default function RealmInspector({
               canManageCampaigns={canManageCampaigns}
               tier={tier}
               onUpgrade={onUpgrade}
+              onOpenGatheredDocket={onOpenGatheredDocket}
             />
           )}
         </Suspense>

@@ -222,12 +222,14 @@ export default function WorldMap({ onNavigate } = {}) {
   const {
     advanceSession, worldPulseBusy, multiTickOn,
     performAdvanceRealm, handleResumeAdvance, handleUndoRealm,
-    performCanonizeWorld, canonizeBusy,
+    performCanonizeWorld, canonizeBusy, gatheredDocket,
   } = useAdvanceSession({
     activeCampaignId: activeCampaignTargetId,
     worldPulseInterval,
     openInspectorAt,
-    showToast,
+    // J-D7: the gathered adjudication screen reads the realm's OWN pending docket
+    // off this campaign, so the hook needs the campaign, not just its id.
+    showToast, campaign: activeCampaign,
   });
 
   // Advance-scaling Stage 4: the paused-advance cursor for the active campaign, read
@@ -858,7 +860,9 @@ export default function WorldMap({ onNavigate } = {}) {
               onSection={setInspectorSection} onClose={() => setInspectorOpen(false)}
               campaign={activeCampaign} canManageCampaigns={canManageCampaigns}
               tier={authTier} onUpgrade={handleUpgrade}
-              inspectorSize={inspectorSize} onSetSize={setInspectorSize}
+              // J-D7: the Herald's adjudication door is a POINTER at the gathered
+              // screen, not a second work surface. onOpenGatheredDocket re-opens it.
+              inspectorSize={inspectorSize} onSetSize={setInspectorSize} onOpenGatheredDocket={gatheredDocket.onOpen}
               {...campaignActivation} advancing={advanceSession.phase === 'running'} />
           </Suspense>
         )}
@@ -881,7 +885,9 @@ export default function WorldMap({ onNavigate } = {}) {
         worldCanonized={worldCanonized} onCanonizeWorld={performCanonizeWorld} canonizeBusy={canonizeBusy}
         importConfirm={!!pendingImportFile} performImportImage={performImportImage} cancelImportImage={cancelImportImage}
         showSimulationRules={showSimulationRules} activeCampaign={activeCampaign}
-        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} />
+        // J-D7 — gatheredDocket carries the gathered adjudication screen's open/dismiss
+        // state plus the clock the last advance started from.
+        setShowSimulationRules={setShowSimulationRules} tourOpen={tourOpen} setTourOpen={setTourOpen} gatheredDocket={gatheredDocket} />
 
       {shareEditorOpen && (
         <Suspense fallback={null}>
