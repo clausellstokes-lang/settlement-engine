@@ -353,6 +353,41 @@
 >   NPC facet drift H3 already ships. THE LOOP MUST BE ABLE TO REVERSE — a martial
 >   realm broken in a long war becomes cautious, or the mechanism is a personality
 >   ratchet and realms calcify. Pin the reversal explicitly.
+> - ⭐⭐ 2026-08-01 AMENDMENT E3 — DISPOSITION IS A THRESHOLD, NEVER A TARGET
+>   SELECTOR. This is the correction that keeps E/E2 from becoming a monster. Owner:
+>   a war-cultured realm "does not mean that they need to betray all of their allies
+>   unless they have other pressures. It's just that they lower the bar, or the
+>   weights and reason needed, to go to war — with preference to those that already
+>   have a little reason, or little relation to maintain amiability or cordiality. Of
+>   course, risk assessment and everything else we built, as well as noting who is in
+>   alliance with their allies. Forces and counter-forces everywhere."
+>   ── THE LAW: a disposition modulates the BAR FOR ACTING. It never picks a victim,
+>   never manufactures a grievance, and never overrides a relationship. A martial
+>   realm with no quarrel anywhere still fights nobody — it is simply a realm that
+>   would need less provocation than another.
+>   ── TARGET PREFERENCE FALLS OUT OF EXISTING STATE, in this order: those who ALREADY
+>   carry some reason (a live grievance, a defaulted treaty, an alignment gulf), and
+>   those with LITTLE RELATION TO PRESERVE (no alliance, thin trade, no kinship edge,
+>   low cordiality). Both readings already exist in the relationship record — the
+>   disposition consults them, it does not replace them.
+>   ── ⭐ ALLIES ARE PROTECTED BY THE RELATIONSHIP ITSELF, NOT BY AN EXEMPTION, and
+>   this is the elegant part: a strong friendly tie IS a high bar, so a lowered
+>   threshold still does not clear it. Betrayal therefore stays REACHABLE — under
+>   genuine pressure, a starving martial realm may turn on a friend — but it costs
+>   proportionally more, which is exactly right and needs no special-case rule. Do
+>   NOT implement an ally exemption; implement the bar honestly and let betrayal be
+>   expensive. Pin both arms: the ordinary case where allies are passed over, and the
+>   pressured case where one is not.
+>   ── ⭐ RISK ASSESSMENT READS THE ALLIANCE WEB, not just the target. Who would come
+>   to their aid, and who would come to THEIR aid in turn — the second order matters,
+>   because a small realm with powerful friends is not a cheap target and a strong one
+>   standing alone may be. This is the chain-ganging read, and it is also a
+>   counterforce: alliance topology raises the price of aggression without any pacifism
+>   term existing anywhere.
+>   ── THE GENERALIZATION, per E2: the same law governs every channel. A mercantile
+>   realm does not trade indiscriminately; it lowers the bar for the partners it
+>   already has ties or reasons with. Threshold, preference, relationship, risk —
+>   forces and counterforces everywhere, and no channel gets a shortcut.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
