@@ -27,6 +27,116 @@ appropriate.
 
 ---
 
+## §0 THE DEFECT, GROUNDED (executed verification 2026-08-01 — supersedes every
+## earlier hypothesis, including my own and the external review's)
+
+**THE RUNAWAY AND THE FLOOR ARE THE SAME DEFECT.** Both halves of the
+bifurcation come from ONE uncapped proportional rate read through ONE integer
+deadband:
+
+```
+src/domain/worldPulse/populationDynamics.js:277  monthlyRate = 0.0018 + (stability - 0.5) * 0.012   // no carrying capacity
+src/domain/worldPulse/populationDynamics.js:303  const rawDelta = Math.round(pop * rate * magnitude);
+src/domain/worldPulse/populationDynamics.js:305  if (Math.abs(delta) < Math.max(2, Math.round(pop * 0.001))) return null;
+```
+
+A settlement below ~2,500 people must produce |delta| >= 2 or **no candidate is
+emitted at all**. Because rawDelta scales with pop, a shrinking settlement
+shrinks until its delta rounds to -1 and then **freezes permanently**.
+Equilibrium is `pop* = 1.5 / (|monthlyRate| x intervalMagnitude)`.
+
+Executed against the real evaluator and the real full_simulation preset at
+one_year intervals (the soak's own configuration), 300-year trajectories from
+pop=1200 under constant pressure p:
+
+| p | y50 | y100 | y300 | next delta |
+|---|---|---|---|---|
+| 0.60 | 1533 | 1964 | 5280 | +26 (unbounded) |
+| 0.62 | 1400 | 1621 | 2931 | +9 (unbounded) |
+| 0.67 | 1100 | 1000 | 756 | 0 — FROZEN |
+| 0.68 | 1044 | 894 | 504 | 0 — FROZEN |
+| 0.70 | 934 | 728 | 301 | 0 — FROZEN |
+| 0.75 | 729 | 442 | 151 | 0 — FROZEN |
+
+**The soak's 200-500 band is reproduced exactly at p ≈ 0.68-0.70.**
+
+**CONSEQUENCE FOR THIS WAVE (binding):** a carrying-capacity ceiling alone
+fixes the top and leaves the bottom frozen — the bifurcation survives with
+smaller winners. **P1 must also remove the deadband's attractor property on the
+decline side.** The in-flight P1 change suppresses only the GROWTH lane behind
+`demographicsEnabled`; the decline lane and this deadband were explicitly left
+untouched. That is a HOLE, not a scope boundary, and P1a closes it.
+
+**FOUR INTUITIVE HYPOTHESES ABOUT THE FLOOR ARE ALL REFUTED** (each grepped and
+disproven — anyone reasoning from them designs the wrong cure): there is no
+population clamp anywhere (only `Math.max(0, ...)`); it is NOT the named-cast
+floor (`reconcilePopulationFloor` has **zero production callers**, and
+`npcConsequencesEnabled` is false in the soak preset); the growth term DOES go
+negative (rate spans [-0.0042, +0.0078] before modifiers); and it is NOT the
+zombie-cure dwell gate (that engages at <= 4 people; the floored six sit at
+200-500).
+
+### §0b What the tree ALREADY has (the review's premises, verified)
+
+- **FOOD STOCKS EXIST.** `advanceFoodStockpile`
+  (src/domain/worldPulse/foodStockpile.js:279-488) is a real conserved,
+  tick-advanced stock: opening balance clamped to a granary capacity, surplus
+  fill at 0.6, a reserve tithe, rationed drawdown capped at 50% of stores per
+  tick, hysteresis giving the pair a fixed point, and a live resilience re-grade.
+  A siege ALREADY has a staged arc. **Do not build a second stock — extend this
+  one.** The three REAL gaps: (1) no spoilage/decay sink anywhere; (2) the stock
+  is denominated in MONTHS OF NEED, not absolute food, so a population change
+  silently revalues the granary; (3) `dailyProduction`/`dailyNeed` are
+  GENERATION-FROZEN, so consumption does not follow the head count at tick time —
+  **K_food and the granary diverge the moment population moves.** Gap 3 is the
+  demographic engine's problem to fix, not to inherit.
+- **`storageMonths` HAS FIVE WRITERS** (foodStockpile, generosityUpdates, war
+  sack in applyWorldPulse, K3's magicBufferApply, and the DM grain verb). The
+  production/need/deficit half IS single-writer (`generateFoodSecurity`, one call
+  site, with `deriveFoodBalanceAnalysis` demoted to a view and pinned). A new
+  stock term becomes writer #6 unless it joins foodStockpile. A single-writer
+  ratchet for `storageMonths` is the missing structural guard.
+- **DEPENDABLE-vs-NOMINAL IMPORTS DO NOT EXIST.** `config.tradeRouteAccess` is a
+  static generation value with read-only consumers; import coverage is a static
+  per-token table. The only live modulators are siege-specific. Route reliability
+  affecting delivered food is NEW WORK, not a retune.
+- **DEMOTION ALREADY EXISTS ON THREE PATHS**, the primary one ON BY DEFAULT
+  (`tierDriftEnabled` is true in DEFAULT_SIMULATION_RULES): organic tier drift
+  with a consecutive-streak gate deliberately easier than promotion's, emergent
+  calamity demotion via `popToTier`, and the DM's SHIFT_TIER verb. Demotion is
+  conservation-exact (a pure label change). **A new density-driven demotion would
+  be a SECOND WRITER on the same transition — extend tier drift's eligibility
+  instead.**
+- **PROMOTION IS NOT CONSERVED.** `tierOutcomeApply.js:308-316` raises population
+  to the new tier's minimum, self-annotated as "a deliberate (unconserved) mint".
+  This VIOLATES law 4 and must be dispositioned explicitly before the
+  conservation check can be exact (see §14).
+- **DISPERSAL IS WRITTEN BUT UNWIRED, AND DOES NOT SCATTER.**
+  `disperseCastToPool` has exactly one grep hit — its own definition. Even lit,
+  it moves souls to a POOL with `hostSettlementId: null`; placement is a separate
+  uncalled flow. The LIVE terminal lane marks NPCs `dispersed: true` and keeps
+  them on the dead settlement's roster (THE FATES PIN). Worse: the floored
+  settlements can never reach the death lane at all, because it has a thorp-tier
+  precondition and 200-500 is above the thorp ceiling of 60. **The tier gate and
+  the deadband must be fixed together.**
+- **STRESSOR INCIDENCE HAS EXACTLY ONE SEAM.** Incidence is a function of ONE
+  number, the pressure score (birth-threshold gate + emission probability).
+  Population has effectively no coupling today and "density" in that code is a
+  tier ordinal. Demographic coupling means adding contributors to the causal
+  derivers or new condition archetypes — NOT retuning a weight. Two traps: the
+  pop>=5000 steps SATURATE (a new term must be continuous or the whole runaway
+  range collapses into one bucket), and the housing-pressure consumer sits behind
+  a hard gate.
+- **WAR ALREADY HAS AN ECONOMIC MOTIVE, AND NO DEMOGRAPHIC ONE.**
+  `resource_pressure` is a first-class casus belli wired into the live per-pair
+  loop, scored off `pressureBlend` = 0.6 x food + 0.4 x economy. Law 6's
+  insertion point is `scoreResourcePressure`'s own01/foe01 terms, with
+  RESOURCE_ENVY_GAIN and the x1.30 war-factor cap already supplying the banded
+  appetite. **Do NOT build a parallel motive path** — the casus taxonomy is
+  walker-enforced for totality and bijection.
+
+---
+
 ## §1 The laws (constitutional for this wave)
 
 1. **DEMOGRAPHY IS A DIFFERENCE OF RATES.** Net growth = births − deaths ± net
@@ -102,6 +212,31 @@ Derivations (pure leaves, all zero-PRNG except where noted):
   death band modulated UP by pressure, food deficit, and the §8 stressor
   couplings. Natural mortality (old age and the likes) is the death band's
   floor — it exists at zero pressure, in the happiest town, forever.
+
+### §2b THREE READINGS, NEVER ONE DIAGNOSIS (review amendment 1, accepted 2026-08-01)
+
+Reserves are NOT carrying capacity — a warehouse of grain buys TIME, never
+permanent headroom. The engine therefore exposes THREE independent readings,
+each with its own bands, and NO single "binding cause" enum collapses them:
+
+- **foodFlowRatio** — recurring production + dependable imports vs recurring
+  consumption. K_food derives from FLOW ONLY (P1 already builds this way:
+  K_food reads dailyProduction, never storageMonths — reserves are excluded
+  from K by construction, and that exclusion is pinned).
+- **reserveCoverage** — how long stores cover the current deficit. THIS READING
+  ALREADY EXISTS: foodStockpile's storageMonths + rationed drawdown IS the
+  reserve horizon (§0b). The wave formalizes it as a named band and closes its
+  three verified gaps (spoilage sink; absolute-food denomination; tick-time
+  need following the head count).
+- **urbanLoadRatio** — population vs D_tier.
+
+A settlement can be food-insecure, reserve-rich, and overcrowded AT ONCE, and
+politically able to address only one of those — so consequences key on the
+COMBINATION (deficit+high reserves+comfortable ⇒ import policy and lower
+births; secure+high+critical ⇒ construction, promotion, satellites; deficit+
+low+critical ⇒ rationing, displacement, disease risk). min(K_food, D_tier)
+survives ONLY as the safety bound and the pressure01 denominator, never as
+the behavior selector.
 
 ## §3 Natural demography
 
@@ -200,6 +335,21 @@ The map must never crowd, and the count of settlements must cap ORGANICALLY:
   count into the higher tier's density ceiling. A saturated realm stops
   sprawling and starts DEEPENING — which is what old countries do.
 
+### §5c THE PLAN, NOT THE REROLL (review amendment 3, accepted)
+
+The response draw fires when a pressure episode CROSSES a band threshold,
+never per tick — and the selected response becomes a PERSISTENT PLAN riding
+the existing proposal/commitment machinery: proposed → underway → completed /
+failed / abandoned, with startup cost, duration, progress, failure conditions,
+a reconsideration threshold (band-crossing magnitude, not drift), a cooldown
+after abandonment, and a receipt naming why it was chosen. ONE active plan
+per settlement (the scope trim: this rides the docket architecture, it is not
+a general planning system). A city that commits to founding a satellite does
+not change its mind because one weekly ratio moved a fraction — deterministic
+AND coherent. Draws are keyed by (realm, settlement, episode, response) so an
+unrelated candidate's appearance cannot steal a draw from another
+settlement's history (the wave-E stream-theft law applied forward).
+
 
 ## §6 The realm food conservation effect, and what it fuels
 
@@ -214,6 +364,15 @@ feeds, inside authored caps (law 6):
 - **trade-agreement propensity** (buy the grain before you bleed for it),
 - **expansion/satellite propensity** (the §5 lane's realm-level appetite),
 - and STOPS at its band cap — "up to a point."
+- **MOTIVE / CAPABILITY / OPPORTUNITY / BELIEF (review refinement, accepted):**
+  scarcity creates motive; surplus creates CAPABILITY (armies eat). The war
+  read splits them: a starving fractured realm WANTS war and cannot wage it;
+  a fed realm CAN and may not need to. And the actor acts on PERCEIVED
+  scarcity through its belief map — never omniscient truth — so a court can
+  invade a neighbor it wrongly believes grain-rich and destroy the route both
+  needed. Insertion point per §0b: scoreResourcePressure's own01/foe01 terms
+  (the EXISTING wired casus belli), fed through the belief read; never a
+  parallel motive path (the taxonomy is walker-enforced).
 
 ## §7 Stressor coupling — populations reasonably die
 
@@ -228,6 +387,19 @@ The existing stressor machinery gains demographic incidence coupling, banded:
   its deaths now flow through §3's accounting instead of ad-hoc subtraction.
 - **War:** deaths through the existing war lanes, now conservation-visible;
   conquest transfers population and K (territory) — the release valve.
+
+### §7b THE VIABILITY LADDER (review refinement, accepted)
+
+Nonzero population and functioning-settlement status are DIFFERENT facts. A
+ruined city holding one named hermit does not trade, field armies, or emit
+institutional output. The lifecycle's existing grades extend to: viable →
+failing → evacuating → remnant (occupied) → remnant (empty), with movers
+gated on the grade (the K1 status system's precedent: liveInstitutions for
+buildings, this ladder for the settlement itself). The named soul counts
+toward population (the owner's law) while the PLACE has ceased to function —
+both laws hold. §0b's finding folds in here: the terminal lane's thorp-tier
+precondition is replaced by the ladder, so a nonviable town descends and dies
+properly instead of freezing at 300 people forever.
 
 ## §8 Integration seams (all existing, none rewritten)
 
@@ -261,25 +433,51 @@ Every one banded, none a bare float on a surface.
 
 ## §11 Wave slicing (build order)
 
-- **P1 — THE RATES:** demographicsKernel (K_food, D_tier, rates, the §3 step,
-  H3-floor composition), certification row, dormancy golden. The runaway dies
-  in this slice.
-- **P2 — THE VALVES:** overflow → satellites (need-weighted), earned promotion,
-  metropolis ceiling, AND §5b's spatial law: the proximity band on every engine
-  founding (user exempt), saturation-by-empty-candidate-set, and the
-  at-saturation promotion/demotion pathway with its conservation pins.
-- **P3 — THE HOMEOSTAT:** push-pull migration through the ledger, arrivals,
-  transit accounting.
-- **P4 — THE WORLD'S HAND:** stressor couplings, realmPressure emission +
-  motive weights, Herald lines.
+- **P1 — THE RATES** (LANDED 2026-08-01, cure measured: 8 settlements x 300
+  years all plateau at fixed points; the pre-cure control re-creates the
+  runaway from the same fixture): demographicsKernel, K_food from FLOW,
+  D_tier, the §3 step, certification row, object-identity dormancy fence.
+- **P1a — THE FLOOR (from the §0 finding):** remove the integer deadband's
+  attractor on the decline side (emit the candidate at |delta| >= 1 when
+  declining, or accumulate fractional decline across ticks — implementer's
+  choice, pinned either way); fix the terminal lane's thorp-tier precondition
+  so a nonviable non-thorp can descend the ladder and die; wire tier drift's
+  EXISTING demotion as the descent path (never a second writer); disposition
+  the promotion mint (tierOutcomeApply's unconserved population raise) against
+  law 4. The floored-six seed must UNFREEZE.
+- **P2 — THE HOMEOSTAT FIRST (review amendment 2: migration precedes response
+  competition, because you cannot choose between moving people to existing
+  capacity and founding new settlements until destination competition
+  exists):** push-pull migration over the lived network, destination
+  competition (existing settlements with spare capacity outcompete new
+  foundings), arrivals + transit accounting, refugee vs voluntary classes.
+- **P3 — THE VALVES + PLANS:** overflow responses as WEIGHTED COMPETING
+  options (satellite / promotion / infrastructure / imports / emigration —
+  the owner's "where reasonable and appropriate", never a fixed order), the
+  §5b spatial law, earned promotion, AND §5c's commitment model.
+- **P4 — THE WORLD'S HAND:** causal risk conditions (crowding raises disease
+  susceptibility CONTINUOUSLY — §0b's saturation trap noted), war
+  motive/capability split through the PERCEIVED-scarcity belief read,
+  realmPressure emission, Herald lines, the viability ladder (§7b).
 
-**Acceptance (the 300-year re-run, everything lit):** every settlement
-plateaus (no monotone growth past ~×50 century-over-century); the realm's
-size distribution is realm-shaped (all tiers occupied, no 10^9 outliers, the
-floored-six pattern replaced by circulation); realm conservation exact;
-the SAME seed that produced 29T now produces a bounded world — that receipt
-diff IS the cure's proof. Paired check: the small-N stasis medicine (B1b)
-re-measured on the same run — the two findings bracket the model.
+**Acceptance — THE FOURTEEN CLAIMS (the review's contract, adopted verbatim as
+the wave's certification):** (1) no unexplained exponential growth — sustained
+positive growth requires identifiable capacity expansion; (2) reserves delay
+crisis, never create permanent capacity; (3) capacity expansion produces
+RENEWED bounded growth (stepwise history, NOT a flat plateau — a plateau
+criterion would fail a healthy realm and tempt tuning to flatten the model);
+(4) food-bound and crowding-bound settlements behave DIFFERENTLY; (5) responses
+do not flap (plans persist to receipts); (6) existing settlements compete with
+and usually beat new foundings; (7) founding conserves people and capital;
+(8) territorial opportunity is finite but dynamic (saturate/reclaim/reopen,
+receipted); (9) low-population settlements recover, demote, or die — NO
+unexplained floor beyond the named-cast dispersal rule (the §0 deadband must
+be provably gone: the floored-six seed unfreezes); (10) risk stays causal —
+disease and war correlate with enabling conditions, never with a hidden
+population target; (11) replay exact hash-for-hash; (12) direct == worker;
+(13) seed families, never the one pathological century; (14) NO imposed target
+distribution — bounded, varied, causally intelligible, and nothing else.
+Paired check: the B1b small-N stasis medicine re-measured on the same run.
 
 ## §12 Judgment blocks (binding unless vetoed)
 
