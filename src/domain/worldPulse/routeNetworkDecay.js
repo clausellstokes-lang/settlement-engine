@@ -505,6 +505,30 @@ export function evaluateEdgeDecay(input) {
   }
 
   const to = stepGradeDown(from);
+  // THE GARRISON FLOOR, ASKED A SECOND TIME AND IN THE OTHER DIRECTION (§7).
+  //
+  // The first ask, at the top, is the RAISE: an edge already below the floor comes
+  // up to it. This one is the HOLD: an edge sitting exactly ON the floor may not be
+  // stepped through it. Both are needed and neither implies the other, which was not
+  // obvious until J4 wired a real war layer into the ledger and the gap became
+  // reachable.
+  //
+  // WHAT THE GAP ACTUALLY WAS, because it is worth recording. `withEdgeGrade` applies
+  // the floor as it writes, so the GRADE was never wrong: a garrisoned road stayed a
+  // road, and the J3 pin that asserted exactly that was green and honest. What leaked
+  // was the VERDICT. The ladder went on returning `demote` for a step the writer then
+  // refused, `sweepRouteDecay` counted no step, and `gradeStepHeraldItem` minted a
+  // beat anyway, because it keys off the verdict word rather than off whether anything
+  // moved. MEASURED on the barren realm with a garrison: SEVEN `route_demoted` beats
+  // over three hundred and twenty weeks, every one of them announcing a fall that did
+  // not happen, on a road that was still a road at the end.
+  //
+  // A hold rather than a step is therefore the correct shape, and it is the shape the
+  // other three holds (`hold`, `mercy`, `busy`) already take: no step word, no news,
+  // and a verdict that names the rule that held it.
+  if (floor && gradeRank(to) < gradeRank(floor)) {
+    return decayVerdictOf({ ...shared, verdict: 'garrison_floor', score });
+  }
   return decayVerdictOf({
     ...shared,
     verdict: to === 'hidden' ? 'abandon' : 'demote',
