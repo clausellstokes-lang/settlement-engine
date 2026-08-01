@@ -119,6 +119,15 @@
 >   dormancy goldens untouched). Gate exit 0. Four more Opus-era judgments recorded.
 >   NEXT: batch 4 — J3 (charter/decay events), H3 (circulation + replacement),
 >   K1 (the general institution status system: operational|impaired|shell).
+> - 2026-08-01 (BUILD ERA, batch 4 LANDED): J3 @ 49b42f47 (charter/decay/danger/
+>   bypass — hidden persistence as absence-of-code, the bypass feedback measured
+>   both ways), H3 @ fc3a6a49 (circulation, belief-not-truth admission, residency
+>   drift, the stationarity mutant), K1 @ 4728af34 (operational|impaired|shell,
+>   no-orphan totality, magicEconomyEnabled declared dark). Gate exit 0; NO golden
+>   moved (every slice dark). Eight cross-slice typecheck errors reconciled with
+>   real types — the RouteBypass shape moved into J1's ledger to keep one writer.
+>   NEXT: batch 5 — H4 (Wanderers tab + DM verbs), I2 (reliability stamps +
+>   fidelity), J4 (consumers: garrison/war, interdiction, roamer physics hookup).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
