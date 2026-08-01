@@ -793,6 +793,11 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-charteruserroute</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-recordsnapshot</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

@@ -133,6 +133,29 @@ const FIXTURES = {
   ADD_RESOURCE: (s) => ({ before: s, event: ev('ADD_RESOURCE', { targetId: 'sky_iron', payload: { label: 'Sky Iron' } }) }),
   REMOVE_RESOURCE: (s) => ({ before: s, event: ev('REMOVE_RESOURCE', { targetId: s.config.nearbyResources[0] }) }),
   CUT_TRADE_ROUTE: (s) => ({ before: s, event: ev('CUT_TRADE_ROUTE', { targetId: 'river road' }) }),
+  // Directive 3 — the initiating endpoint's half. The PARTNER endpoint lives in
+  // another save row this settlement-scoped inverse cannot reach, which is exactly
+  // why the store refuses a timeline undo of this type (settlementSliceHelpers
+  // planTimelineUndo). The domain inverse below still has to be exact.
+  CREATE_ROUTE: (s) => ({
+    before: s,
+    event: ev('CREATE_ROUTE', {
+      targetId: 'Brookmere',
+      payload: {
+        routeId: 'route.save-a.save-b.land',
+        mode: 'land',
+        selfSaveId: 'save-a',
+        partnerSaveId: 'save-b',
+        partnerName: 'Brookmere',
+        partnerTier: 'town',
+        cost: 640,
+        band: 'steady',
+        a: 'save-a',
+        b: 'save-b',
+        createdTick: 0,
+      },
+    }),
+  }),
   ADD_NPC: (s) => ({ before: s, event: ev('ADD_NPC', { targetId: 'Brenna the Fence', payload: { role: 'Fence', importance: 'notable' } }) }),
   KILL_NPC: (s) => ({ before: s, event: ev('KILL_NPC', { targetId: s.npcs[0].id }) }),
   ASSIGN_NPC_TO_ROLE: (s) => ({ before: s, event: ev('ASSIGN_NPC_TO_ROLE', { targetId: s.npcs[0].id, payload: { role: 'Steward', quality: 'competent' } }) }),

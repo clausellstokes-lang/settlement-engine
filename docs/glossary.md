@@ -6,7 +6,7 @@
 
 # The Guidance-Layer Glossary
 
-_66 terms, generated from the code registries — "how to interpret everything."_
+_67 terms, generated from the code registries — "how to interpret everything."_
 
 > Scope note: institution **facets** and the continuous **credibility** stock are
 > intentionally absent — the facet vocabulary is un-exported in the spatial engine,
@@ -21,6 +21,7 @@ _The actions a DM can apply to a settlement, and the dials each exposes._
 | Add institution | Economy | An Economy verb the DM can apply to the settlement. | — |
 | Remove institution | Economy | An Economy verb the DM can apply to the settlement. | — |
 | Deplete resource | Economy | An Economy verb the DM can apply to the settlement. | — |
+| Charter a road | Relations | A Relations verb the DM can apply to the settlement. | — |
 | Settlement dispute | Relations | A Relations verb the DM can apply to the settlement, with the option New relationship. | `New relationship` |
 | Destroy settlement | Realm | A Realm verb the DM can apply to the settlement. | — |
 | Add NPC | People | A People verb the DM can apply to the settlement, with the option Importance. | `Importance` |

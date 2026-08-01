@@ -69,6 +69,7 @@ export const TARGET_ENTITY_BY_EVENT = Object.freeze({
   DEPLETE_RESOURCE:     'resources',
   RECOVERED_RESOURCE:   'resources',
   CUT_TRADE_ROUTE:      null,
+  CREATE_ROUTE:         null,
   SETTLEMENT_DISPUTE:   'neighbours',
   BROKERED_ALLIANCE:    'neighbours',
   OPENED_TRADE_ROUTE:   'neighbours',
@@ -578,6 +579,23 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
     }],
     targetOptions: qualifyingNeighbourOptions,
     predicate: generosityVerbPredicate,
+  }),
+  // Directive 3 — the DM charters a road to ANOTHER SAVE, so its target roster is
+  // cross-settlement and this settlement object simply cannot see it (targetsFrom
+  // stays null; the composer supplies the roster the way the neighbour-link idiom
+  // already does). The real legality gate is therefore deliberately NOT duplicated
+  // here as a half-informed guess: domain/roads/userRoutes.js validateUserRoute is
+  // the ONE gate, and the picker and the command runtime both run it. A permissive
+  // predicate that admits a verb the shared gate then judges is honest; a
+  // restrictive one written against data this layer lacks would only be wrong.
+  CREATE_ROUTE: entry({
+    type: 'CREATE_ROUTE', family: 'Relations', entityKind: 'settlement',
+    coversVetoCodes: [
+      'route_endpoints_incomplete',
+      'route_mode_unsupported',
+      'route_identity_mismatch',
+    ],
+    predicate: () => ok(),
   }),
   OFFER_CREDIT: entry({
     type: 'OFFER_CREDIT', family: 'Relations',

@@ -33,13 +33,29 @@ export const RELATIONSHIP_TYPES = [
   { id: 'criminal_network', label: 'Criminal Network', color: '#5a2a8a' },
 ];
 
-// `_get` is unused: its last reader was handleImportDirect's canUseNeighbour()
-// premium check, which retired with the verb. The parameter STAYS so this slice
-// keeps the uniform `(set, get)` factory shape every sibling has in the
-// store/index.js composition block — dropping it made tsc red there (TS2554) and
-// would leave one odd factory out of fourteen for a future editor to trip over.
-export const createNeighbourSlice = (set, _get) => ({
+// `get` was parked here unused after handleImportDirect's canUseNeighbour() premium
+// check retired with its verb — kept only so this slice matched the uniform
+// `(set, get)` factory shape every sibling has in the store/index.js composition
+// block. The user-route verb below is its first real reader since.
+export const createNeighbourSlice = (set, get) => ({
+  // ── Directive 3 (W-D): the ONE door onto user routes ───────────────────────
+  // The R-5b note above predicted this shape exactly: re-exposing the neighbour
+  // surface is a matter of writing a real control, not rebuilding anything. This
+  // is that control's verb. Its body lives in a leaf so the slice stays a
+  // composition point; the leaf performs no local mutation, because the
+  // bilateral canon-event transaction owns the write and only after the database
+  // confirms BOTH endpoints (supabase/migrations/193_create_route_command.sql).
+  charterUserRoute: (partnerSaveId, options = {}) => import('./userRouteCharter.js')
+    .then(({ charterUserRouteImpl }) => charterUserRouteImpl({
+      set,
+      get,
+      partnerSaveId,
+      now: options.now ?? null,
+      executeCommand: options.executeCommand,
+    })),
+
   // ── State ──────────────────────────────────────────────────────────────────
+  userRouteCharterInFlight: null,    // route id of the charter awaiting the server
   importedNeighbour:  null,          // settlement JSON to feed into next generation
   neighbourRelType:   'neutral',     // relationship type for next link
 

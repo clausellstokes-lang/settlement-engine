@@ -19,11 +19,18 @@ import {
   prepareAuthoritativeCanonEvent,
 } from '../domain/events/prepareCanonEvent.js';
 import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
+import { isBilateralCanonEventType } from '../domain/events/authoritativeCanonEventTypes.js';
 import {
   CANON_COMMAND_BACKEND,
   canonEventCommandBackend,
+  commitCreateRouteCommand,
   commitCutTradeRouteCommand,
 } from '../lib/canonEventCommandPersistence.js';
+import {
+  prepareRoutePartner,
+  projectRoutePartner,
+  routePartnerProjectionChanged,
+} from './canonRouteCommandBilateral.js';
 import { makeActionResult } from './actionResult.js';
 import { stampPreEventNarrative } from './eventNarrativeSnapshots.js';
 import { OP_KIND_BARRIER, peekOps } from './outbox.js';
@@ -356,7 +363,7 @@ export async function runCanonEventCommandTransaction(input) {
     editedAt: prepared.appliedAt,
   }, { now: prepared.appliedAt });
   const aiData = nextAiData(beforeSave, prepared);
-  const remote = await commitCutTradeRouteCommand({
+  const shared = {
     ownerId,
     commandId: input.command.commandId,
     saveId,
@@ -368,7 +375,30 @@ export async function runCanonEventCommandTransaction(input) {
     settlement: prepared.nextSettlement,
     campaignState,
     aiData,
-  });
+  };
+  // A bilateral command resolves its partner BEFORE entering the journal. A
+  // missing or moved partner is a local refusal under the same retryable command
+  // identity, never a claim the server has to unwind.
+  let partner = null;
+  if (isBilateralCanonEventType(input.event?.type)) {
+    const resolved = prepareRoutePartner({
+      state: stateBefore,
+      event: input.event,
+      saveId,
+    });
+    if (resolved.ok === false) {
+      return refusal(stateBefore, input.event, resolved.reason, 'stale');
+    }
+    partner = resolved;
+  }
+  const remote = partner
+    ? await commitCreateRouteCommand({
+      ...shared,
+      partnerSaveId: partner.partnerSaveId,
+      partnerExpectedSettlement: partner.partnerBefore.settlement,
+      partnerSettlement: partner.partnerNext,
+    })
+    : await commitCutTradeRouteCommand(shared);
 
   if (remote.status !== 'applied') {
     return refusal(
@@ -414,9 +444,28 @@ export async function runCanonEventCommandTransaction(input) {
       )
     )
   );
+  // The partner's cached row gets the same freshness question as the initiating
+  // one, asked here on live state rather than inside the producer below.
+  const partnerProjectionChanged = partner != null && routePartnerProjectionChanged({
+    state: current,
+    partnerSaveId: partner.partnerSaveId,
+    partnerBefore: partner.partnerBefore,
+  });
   let projection = 'deferred-owner-changed';
-  if (sameOwner && !activeProjectionChanged && !cachedProjectionChanged) {
+  if (
+    sameOwner
+    && !activeProjectionChanged
+    && !cachedProjectionChanged
+    && !partnerProjectionChanged
+  ) {
     input.set((draft) => {
+      if (partner) {
+        projectRoutePartner({
+          draft,
+          partnerSaveId: partner.partnerSaveId,
+          settlement: remote.partnerSettlement,
+        });
+      }
       const index = (draft.savedSettlements || []).findIndex(
         (entry) => String(entry?.id) === saveId,
       );

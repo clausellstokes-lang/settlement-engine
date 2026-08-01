@@ -17,7 +17,7 @@ import {
 import { makeActionResult } from '../../src/store/actionResult.js';
 import { OPERATIONS, operationFor } from '../../src/store/operationRegistry.js';
 
-const CANON = ['applyEvent', 'undoLastEvent', 'recordSnapshot', 'revertToSnapshot', 'destroySavedSettlement'];
+const CANON = ['applyEvent', 'undoLastEvent', 'recordSnapshot', 'revertToSnapshot', 'destroySavedSettlement', 'charterUserRoute'];
 
 describe('Operation envelope (operations.js)', () => {
   test('makeOperation fills the silent default envelope', () => {
@@ -86,7 +86,7 @@ describe('K-A canon adapter (operationFromActionResult)', () => {
     }
   });
 
-  test('OPERATIONS holds exactly the 5 canon actions in class "canon"', () => {
+  test('OPERATIONS holds exactly the 6 canon actions in class "canon"', () => {
     const canonEntries = Object.values(OPERATIONS).filter((o) => o.klass === 'canon').map((o) => o.opType).sort();
     expect(canonEntries).toEqual([...CANON].sort());
   });

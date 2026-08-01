@@ -188,6 +188,27 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     },
   },
 
+  // Directive 3 — a road the DM charters by hand between two settlements of one
+  // realm. The deltas are deliberately modest and one-directional: a new road
+  // widens the market a little and steadies the town a little. It is not a
+  // windfall, and it never sours anything, because chartering a road is an act of
+  // infrastructure rather than diplomacy. The geography-derived cost lives in the
+  // route's own provenance row, not in these dimensions.
+  CREATE_ROUTE: {
+    label: 'Charter a road',
+    requiresTarget: true,
+    stateDeltas() {
+      return { resourcePressure: -6, resilience: +4 };
+    },
+    narrate(event) {
+      const to = labelOf(event.targetId);
+      const water = event.payload?.mode === 'water';
+      return water
+        ? `A run of ships to ${to} is chartered; the harbour keeps the schedule.`
+        : `A road to ${to} is chartered; wagons will wear it in by the season's end.`;
+    },
+  },
+
   // §9b — Settlement Dispute: sours relations with a neighbouring settlement.
   // Replaces the freetext Cut Trade Route in the DM composer; the relationship
   // it sets (neutral/rival/cold_war/hostile) drives the severity + the mutation.

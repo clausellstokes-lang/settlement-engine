@@ -110,6 +110,14 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/npcLadderContest.js',
     'src/domain/worldPulse/npcLadderKernel.js',
     'src/domain/worldPulse/npcLadderState.js',
+    // W-H1 THE NPC LEDGER (dark): settlementNpcCensus reads the RAW, UNTOUCHED settlement
+    // roster (s.npcs + factions[].members[]) to count the named cast for CONSERVATION
+    // accounting (law 6 — a graduation must neither duplicate nor drop a soul). It is a
+    // raw-roster read by construction (the roadsKernel/partyImpact idiom): the census MUST
+    // see EVERY soul, hostages and shelved included, so it is participation-INDEPENDENT and
+    // correctly ungated. Dormant by default (npcConsequencesEnabled has no entry in
+    // DEFAULT_SIMULATION_RULES).
+    'src/domain/worldPulse/npcLedger.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',

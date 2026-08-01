@@ -116,6 +116,13 @@ const DISPATCH_SURFACE = Object.freeze([
   'src/application/commands/pendingEditCommitRuntime.js',
   'src/lib/intent/interpretApply.js',
   'src/store/customContentSliceRuntime.js',
+  // W-D directive 3 (CREATE_ROUTE): the charter store verb dispatches a
+  // canonEventCommand (canonEventApply adapter) through executeSessionCommand — it
+  // builds its envelope with makeCommandEnvelope via that adapter, so its kind
+  // (settlement.canon-event.apply) is already visible to the kind census above and
+  // is registered. It reaches the executor legitimately; it hand-builds no raw
+  // envelope. Frozen here so a future second route verb is a deliberate addition.
+  'src/store/userRouteCharter.js',
 ]);
 
 /** The single legal executor construction site. A second executor would mean a

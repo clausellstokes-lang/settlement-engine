@@ -254,6 +254,14 @@ const ARMING = Object.freeze({
   addPlacement: { kind: 'map-snapshot' },
   removePlacementLocal: { kind: 'map-snapshot' },
   clearAllPlacementsLocal: { kind: 'map-snapshot' },
+  // W-G / J-D1. Hand-audited 2026-07-31: applyAutoplacement opens with exactly ONE
+  // snapshotForUndo for the whole act, then delegates every coordinate write to
+  // updatePlacement. That delegation is why the op advertises `mapUndo` while its
+  // sibling updatePlacement is de-advertised (R-4): the arming lives in the CALLER
+  // here, deliberately, so a single Undo reverts an entire placement pass rather
+  // than one settlement of seven. The snapshot is taken before the first write, so
+  // the restored image is genuinely pre-autoplacement.
+  applyAutoplacement: { kind: 'map-snapshot' },
   addLabel: { kind: 'map-snapshot' },
   deleteLabel: { kind: 'map-snapshot' },
   addMarker: { kind: 'map-snapshot' },

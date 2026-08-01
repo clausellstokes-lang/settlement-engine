@@ -406,7 +406,7 @@ function scrubConfigAnnotations(/** @type {MutEntity} */ config, /** @type {MutE
   // _forcedRelief/_offeredCredit (the FP-G3 generosity verbs) follow the _cutRoutes
   // discipline exactly: append-only, atEventId-stamped, dual-written to _config
   // (withoutEventAnnotations runs this scrub on both copies).
-  for (const key of ['_cutRoutes', '_refugeeWaves', '_raidHistory', '_forcedRelief', '_offeredCredit']) {
+  for (const key of ['_cutRoutes', '_userRoutes', '_refugeeWaves', '_raidHistory', '_forcedRelief', '_offeredCredit']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
     const filtered = arr.filter((/** @type {MutEntity} */ e) => e?.atEventId !== eventId);
@@ -421,10 +421,30 @@ function scrubConfigAnnotations(/** @type {MutEntity} */ config, /** @type {MutE
 
 function withoutEventAnnotations(/** @type {MutSettlement} */ s, /** @type {MutEntity} */ eventId) {
   let next = s;
+  // A user route leaves TWO marks on a settlement: the _userRoutes ledger row
+  // (atEventId-stamped, scrubbed by provenance below) and a neighbourNetwork entry
+  // that carries the route identity in its linkId and no event stamp of its own.
+  // Read the ledger for the identities this event chartered BEFORE the scrub
+  // removes the only record that connects them to it.
+  const chartered = new Set();
+  for (const home of [s?.config, s?._config]) {
+    const rows = Array.isArray(home?._userRoutes) ? home._userRoutes : [];
+    for (const row of rows) {
+      if (row?.atEventId === eventId && row?.routeId) chartered.add(String(row.routeId));
+    }
+  }
   const config = scrubConfigAnnotations(s.config, eventId);
   if (config !== s.config) next = { ...next, config };
   const raw = scrubConfigAnnotations(s._config, eventId);
   if (raw !== s._config) next = { ...next, _config: raw };
+  if (chartered.size && Array.isArray(next.neighbourNetwork)) {
+    const kept = next.neighbourNetwork.filter(
+      (/** @type {MutEntity} */ n) => !chartered.has(String(n?.linkId || '')),
+    );
+    if (kept.length !== next.neighbourNetwork.length) {
+      next = { ...next, neighbourNetwork: kept };
+    }
+  }
   return next;
 }
 

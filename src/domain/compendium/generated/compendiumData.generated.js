@@ -86,10 +86,10 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 157,
+    "count": 158,
     "exemptCount": 68,
     "byKlass": {
-      "canon": 5,
+      "canon": 6,
       "macro": 44,
       "mechanical": 108
     },
@@ -97,6 +97,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     "entries": [
       {"opType":"applyEvent","label":"Apply an event","description":"Applies a chosen event to the active save, writing the change into canon and recording it in the event log. It can be undone with Undo last event.","klass":"canon","slice":"settlementSlice","targetScope":"save","receiptRef":"eventLog-entry","undoToken":"undoLastEvent"},
       {"opType":"undoLastEvent","label":"Undo last event","description":"Reverses the most recent applied event on the active save, rolling canon back to the state before it.","klass":"canon","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
+      {"opType":"charterUserRoute","label":"Charter a road","description":"Charters a route between the active settlement and another settlement of the same realm. The path and its cost are read from the realm map, and the road is recorded on both settlements in one step.","klass":"canon","slice":"neighbourSlice","targetScope":"save","receiptRef":"eventLog-entry(CREATE_ROUTE)","undoToken":null},
       {"opType":"recordSnapshot","label":"Record a snapshot","description":"Saves a full point-in-time snapshot of the current settlement into its version history, so the state can be returned to later.","klass":"canon","slice":"settlementSlice","targetScope":"save","receiptRef":"versionHistory-snapshot","undoToken":"revertToSnapshot"},
       {"opType":"revertToSnapshot","label":"Revert to a snapshot","description":"Restores the settlement to a previously recorded snapshot from its version history, discarding changes made since.","klass":"canon","slice":"settlementSlice","targetScope":"save","receiptRef":null,"undoToken":null},
       {"opType":"destroySavedSettlement","label":"Destroy a saved settlement","description":"Marks a saved settlement as destroyed, recording a destroy entry in canon. This is a one-way canon act; it requires the settlement's exact name as confirmName to proceed.","klass":"canon","slice":"settlementSlice","targetScope":"save","receiptRef":"eventLog-entry(DESTROY_SETTLEMENT)","undoToken":null},

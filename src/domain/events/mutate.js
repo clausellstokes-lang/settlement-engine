@@ -39,6 +39,7 @@ import {
   addTradeGood, removeTradeGood, addResource, removeResource,
   forceRelief, offerCredit,
 } from './mutateWorld.js';
+import { createRoute } from './mutateUserRoute.js';
 import { makeReceipt } from '../trace.js';
 import { mutationVetoOf } from './mutateHelpers.js';
 
@@ -74,6 +75,7 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: MutSettlement, event: Mu
   REMOVED_THREAT: removedThreat,
   STARTED_RIOT: startedRiot,
   CUT_TRADE_ROUTE: cutTradeRoute,
+  CREATE_ROUTE: createRoute,
   SETTLEMENT_DISPUTE: setNeighbourRelationship,
   BROKERED_ALLIANCE: setNeighbourRelationship,
   OPENED_TRADE_ROUTE: setNeighbourRelationship,

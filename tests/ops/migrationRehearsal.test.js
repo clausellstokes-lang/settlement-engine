@@ -75,8 +75,8 @@ describe('bounded migration rehearsal plan', () => {
 
   it('covers the exact applied-head to repository-head gap in semantic waves', () => {
     expect(plan.appliedHead).toBe(121);
-    expect(plan.repoHead).toBe(192);
-    expect(plan.pendingCount).toBe(71);
+    expect(plan.repoHead).toBe(193);
+    expect(plan.pendingCount).toBe(72);
     expect(plan.waves.map(({ from, to }) => [from, to])).toEqual([
       [122, 136],
       [137, 156],
@@ -89,17 +89,18 @@ describe('bounded migration rehearsal plan', () => {
       [188, 188],
       [189, 190],
       [191, 192],
+      [193, 193],
     ]);
     expect(MIGRATION_WAVES.at(-1).to).toBe(MIGRATION_TRAIN_REPO_HEAD);
 
     const covered = plan.waves.flatMap((wave) =>
       wave.migrations.map((migration) => migration.number));
     expect(covered).toEqual(
-      Array.from({ length: 71 }, (_, index) => 122 + index),
+      Array.from({ length: 72 }, (_, index) => 122 + index),
     );
     expect(new Set(covered).size).toBe(covered.length);
 
-    expect(plan.waves.at(-1)).toMatchObject({
+    expect(plan.waves.at(-2)).toMatchObject({
       id: 'surveyor-probe-and-tier-price',
       from: 191,
       to: 192,
@@ -109,6 +110,18 @@ describe('bounded migration rehearsal plan', () => {
       }, {
         kind: 'function',
         name: 'spend_credits',
+      }],
+    });
+    expect(plan.waves.at(-1)).toMatchObject({
+      id: 'bilateral-user-route-command',
+      from: 193,
+      to: 193,
+      expectedObjects: [{
+        kind: 'function',
+        name: 'apply_create_route_command',
+      }, {
+        kind: 'function',
+        name: 'assert_create_route_half',
       }],
     });
   });
@@ -186,8 +199,8 @@ describe('bounded migration rehearsal plan', () => {
     const numbers = staged.copied.map((name) => Number(name.split('_')[0]));
 
     expect(snapshot).toMatchObject({
-      repoHead: 192,
-      migrationCount: 192,
+      repoHead: 193,
+      migrationCount: 193,
       configSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
       workspaceSourceSha256: expect.stringMatching(/^[a-f0-9]{64}$/),
     });
@@ -305,7 +318,7 @@ describe('clone admission is positive and source-bound', () => {
     expect(`${result.stdout}${result.stderr}`).not.toContain('super-secret');
     expect(JSON.parse(result.stdout)).toMatchObject({
       appliedHead: MIGRATION_TRAIN_BASE_HEAD,
-      repoHead: 192,
+      repoHead: 193,
     });
   });
 });

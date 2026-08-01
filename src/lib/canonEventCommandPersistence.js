@@ -101,6 +101,75 @@ export async function commitCutTradeRouteCommand(
 }
 
 /**
+ * The BILATERAL sibling (migration 193). Same journal, same command identity, same
+ * receipt discipline; it differs only in carrying a second save id and that save's
+ * exact base and next projections, because a user route is an edge and an edge with
+ * one endpoint written is a corrupt world rather than a partial success.
+ *
+ * @param {{
+ *   ownerId:string,
+ *   commandId:string,
+ *   saveId:string,
+ *   partnerSaveId:string,
+ *   expectedRevision:string,
+ *   event:object,
+ *   expectedSettlement:object,
+ *   expectedCampaignState:object,
+ *   expectedAiData:object|null,
+ *   partnerExpectedSettlement:object,
+ *   settlement:object,
+ *   campaignState:object,
+ *   partnerSettlement:object,
+ *   aiData:object|null,
+ * }} request
+ * @param {{client?:typeof supabase}} [dependencies]
+ */
+export async function commitCreateRouteCommand(
+  request,
+  { client = supabase } = {},
+) {
+  if (!client || typeof client.rpc !== 'function') {
+    throw persistenceError({ code: 'canon_command_backend_unavailable' });
+  }
+  const { data, error } = await client.rpc('apply_create_route_command', {
+    p_expected_owner: request.ownerId,
+    p_command_id: request.commandId,
+    p_save_id: request.saveId,
+    p_partner_save_id: request.partnerSaveId,
+    p_expected_revision: request.expectedRevision,
+    p_event: request.event,
+    p_expected_data: request.expectedSettlement,
+    p_expected_campaign_state: request.expectedCampaignState,
+    p_expected_ai_data: request.expectedAiData,
+    p_partner_expected_data: request.partnerExpectedSettlement,
+    p_next_data: request.settlement,
+    p_next_campaign_state: request.campaignState,
+    p_partner_next_data: request.partnerSettlement,
+    p_next_ai_data: request.aiData,
+  });
+  if (error) throw persistenceError(error);
+  if (!data || typeof data !== 'object' || Array.isArray(data)) {
+    throw persistenceError({ code: 'canon_command_response_invalid' });
+  }
+  return {
+    status: String(data.status || 'failed'),
+    reason: data.reason == null ? null : String(data.reason),
+    replayed: data.replayed === true,
+    fingerprint: data.fingerprint == null ? null : String(data.fingerprint),
+    routeId: data.routeId ?? data.route_id ?? null,
+    revisionKind: data.revisionKind
+      ?? data.revision_kind
+      ?? 'base-projection-v1',
+    settlement: data.settlement ?? null,
+    campaignState: data.campaignState ?? data.campaign_state ?? null,
+    aiData: data.aiData ?? data.ai_data ?? null,
+    partnerSettlement: data.partnerSettlement ?? data.partner_settlement ?? null,
+    updatedAt: data.updatedAt ?? data.updated_at ?? null,
+    receipt: data.receipt ?? null,
+  };
+}
+
+/**
  * Read one exact durable canon-event identity through the journal's owner RLS.
  *
  * A missing row is meaningful because migration 183 claims and mutates inside

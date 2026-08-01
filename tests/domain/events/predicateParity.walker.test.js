@@ -33,9 +33,13 @@ const EXEMPT_VETO_CODES = Object.freeze({
 });
 const EXEMPT_CEILING = 0;
 
+// The census denominator. A handler that lives outside this list is invisible to
+// the scan, so a NEW handler module must join it the day it lands — that scope gap
+// is the one way a gate could still ship without a covering predicate.
 const HANDLER_FILES = [
   'src/domain/events/mutateEntities.js',
   'src/domain/events/mutateWorld.js',
+  'src/domain/events/mutateUserRoute.js',
 ];
 
 function stripComments(code) {

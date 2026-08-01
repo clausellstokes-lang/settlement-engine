@@ -179,6 +179,10 @@ export const EVENT_PROSE = {
     description: 'Decree a gift of grain to a qualifying neighbour — an ally, trade partner, or vassal/patron. Only grain above the hard reserve floor can go (the DM overrides the willingness, never the law); shipping it out is charity with a political price at home.',
     targetPrompt: 'Qualifying neighbour to relieve',
   },
+  CREATE_ROUTE: {
+    description: 'Charter a road between this settlement and another of your realm. The path follows the map: mountains, forest, and open country each price it differently, and two settlements the sea already links charter a water route instead. A route you charter is yours, and every later rebuild of the world keeps it.',
+    targetPrompt: 'Settlement to charter a road to',
+  },
   OFFER_CREDIT: {
     description: 'Extend grain to a qualifying neighbour as a LOAN — the same wagons, a ledger behind them. Only grain above the hard reserve floor can go; a loan is not charity, so it spends no legitimacy. Maturity, repayment, and default play out with the living world.',
     targetPrompt: 'Qualifying neighbour to lend to',

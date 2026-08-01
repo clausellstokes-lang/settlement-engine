@@ -86,4 +86,5 @@ export const RERUN_KEYS_FOR_EVENT = {
   // and FORCE_RELIEF also moves the ruler's legitimacy dial (powerStructure).
   FORCE_RELIEF:           ['foodSecurity', 'economicState', 'powerStructure', 'narrative'],
   OFFER_CREDIT:           ['foodSecurity', 'economicState', 'narrative'],
+  CREATE_ROUTE:           ['economicState', 'narrative'],
 };

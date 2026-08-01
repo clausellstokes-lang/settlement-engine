@@ -1,19 +1,35 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Link2 } from 'lucide-react';
 import { RELATIONSHIP_SELECTIONS } from '../../domain/relationships/canonicalRelationship.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from '../theme';
 import Button from '../primitives/Button.jsx';
 
+// Directive 3 lives BESIDE the diplomatic link rather than in its own corner of
+// the app, because a DM reaching for "connect these two towns" does not yet know
+// whether they mean a treaty or a road. Lazy: chartering pulls the spatial
+// readers and the command runtime, and the far more common visit here is someone
+// linking a neighbour who should never pay for that.
+const CharterRoadCard = lazy(() => import('./CharterRoadCard.jsx'));
+
 export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
   const[selected,setSelected]=useState(null);
   const[relType,setRelType]=useState('neutral');
+  const[mode,setMode]=useState('link');
   const others=allSaves.filter(s=>{
     if(s.id===currentSave?.saveData?.id) return false;
     if(currentSave?.settlement?.neighbourNetwork?.some(n=>n.id===s.id||n.name===s.name)) return false;
     return true;
   });
-  if(!others.length) return<div style={{padding:'12px 14px',fontSize:FS.sm,color:MUTED,background:swatch['#F7F0E4'],border:`1px solid ${BORDER}`}}>No other saved settlements to link.</div>;
+  if(!others.length&&mode==='link') return<div style={{padding:'12px 14px',fontSize:FS.sm,color:MUTED,background:swatch['#F7F0E4'],border:`1px solid ${BORDER}`}}>No other saved settlements to link.</div>;
   return<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',padding:'12px 14px'}}>
+    <div role="tablist" aria-label="Connect this settlement" style={{display:'flex',gap:6,marginBottom:10}}>
+      <Button role="tab" aria-selected={mode==='link'} variant={mode==='link'?'gold':'secondary'} size="sm" onClick={()=>setMode('link')}>Link as neighbour</Button>
+      <Button role="tab" aria-selected={mode==='road'} variant={mode==='road'?'gold':'secondary'} size="sm" onClick={()=>setMode('road')}>Charter a road</Button>
+    </div>
+    {mode==='road'&&<Suspense fallback={<div style={{padding:'10px 12px',fontSize:FS.sm,color:MUTED,fontFamily:sans}}>Reading the map…</div>}>
+      <CharterRoadCard currentSave={currentSave} allSaves={allSaves}/>
+    </Suspense>}
+    {mode==='road'?null:<>
     <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
       <Link2 size={12}/> Link as Neighbour
     </div>
@@ -40,5 +56,6 @@ export default function LinkNeighbourCard({currentSave, allSaves, onLink}){
         <Button variant="secondary" size="sm" onClick={()=>setSelected(null)}>Cancel</Button>
       </div>
     </div>}
+    </>}
   </div>;
 }

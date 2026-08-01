@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 192;
+export const MIGRATION_TRAIN_REPO_HEAD = 193;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -254,6 +254,30 @@ export const MIGRATION_WAVES = Object.freeze([
       Object.freeze({
         kind: 'function',
         name: 'spend_credits',
+      }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'bilateral-user-route-command',
+    from: 193,
+    to: 193,
+    purpose: 'The bilateral user-route command: both endpoint base-projection compare-and-swaps, the shared journal claim, and the final receipt in one transaction.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Roll the CREATE_ROUTE caller back before forward-fixing the RPC: dropping it while clients still call it turns every user route into a hard failure,',
+        'and the routes already written are world truth carried in the settlement rows, not in anything this migration owns.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({
+        kind: 'function',
+        name: 'apply_create_route_command',
+      }),
+      Object.freeze({
+        kind: 'function',
+        name: 'assert_create_route_half',
       }),
     ]),
   }),

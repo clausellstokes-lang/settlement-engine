@@ -84,6 +84,13 @@ export const OPERATIONS = Object.freeze({
   // ── K-A CANON (5) — ActionResult-enveloped; adapt via operationFromActionResult ──
   applyEvent: { opType:'applyEvent', label:"Apply an event", description:"Applies a chosen event to the active save, writing the change into canon and recording it in the event log. It can be undone with Undo last event.", klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'eventLog-entry', undoToken:'undoLastEvent', undoState:'action' },
   undoLastEvent: { opType:'undoLastEvent', label:"Undo last event", description:"Reverses the most recent applied event on the active save, rolling canon back to the state before it.", klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null, undoState:'none' },
+  // Directive 3 (W-D). undoState is 'none' and says so honestly: this verb writes
+  // TWO settlement rows in one database transaction, and Undo last event is
+  // settlement-scoped, so it refuses this entry rather than reversing one endpoint
+  // and leaving the other holding a road to nowhere (settlementSliceHelpers
+  // planTimelineUndo). The per-endpoint domain inverse exists and is pinned; the
+  // bilateral transaction that would apply it to both rows is not built.
+  charterUserRoute: { opType:'charterUserRoute', label:"Charter a road", description:"Charters a route between the active settlement and another settlement of the same realm. The path and its cost are read from the realm map, and the road is recorded on both settlements in one step.", klass:'canon', slice:'neighbourSlice', targetScope:'save', receiptRef:'eventLog-entry(CREATE_ROUTE)', undoToken:null, undoState:'none' },
   // R-0 exposure honesty, CLOSED by the queue-#18 BUILD (owner-signed): recordSnapshot
   // WAS internal-only — its two callers were the commitPendingEdits batch snapshot and
   // revertToSnapshot's auto 'pre-revert' capture — and the R-0 census recorded it as the

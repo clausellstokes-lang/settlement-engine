@@ -51,6 +51,20 @@ export function cappedVersionHistory(history) {
 }
 
 /**
+ * Events that write a SECOND settlement row. This undo is settlement-scoped: it
+ * can reverse the active save and nothing else. Reversing one endpoint of a user
+ * route would therefore leave exactly the half-edge migration 193 exists to make
+ * unrepresentable, so these types are a hard barrier rather than a partial undo.
+ *
+ * DELIBERATELY DEFERRED (documented, not a bug to re-find): a bilateral undo is a
+ * second command with its own journal identity and its own two-row transaction.
+ * The domain inverse already exists and is pinned per endpoint
+ * (tests/domain/events/undoRoundTrip.test.js); what is missing is the transaction
+ * that applies it to both rows at once.
+ */
+const BILATERAL_EVENT_TYPES = new Set(['CREATE_ROUTE']);
+
+/**
  * Locate the event an Undo command may actually reverse.
  *
  * Flavor rows are durable chronicle records, not state transitions. They stay
@@ -72,6 +86,14 @@ export function planTimelineUndo(eventLog) {
   }
   if (log[targetIndex]?.beforeState === undefined) {
     return { ok: false, targetIndex, skippedFlavorEntries, reason: 'entry_not_undoable' };
+  }
+  if (BILATERAL_EVENT_TYPES.has(String(log[targetIndex]?.event?.type || ''))) {
+    return {
+      ok: false,
+      targetIndex,
+      skippedFlavorEntries,
+      reason: 'entry_not_undoable_bilateral',
+    };
   }
   return { ok: true, targetIndex, skippedFlavorEntries, reason: null };
 }

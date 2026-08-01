@@ -128,10 +128,10 @@ describe('interpret review — correction typology (PIN C)', () => {
 // ── PIN D: the client tool-schema builder ──────────────────────────────────────
 
 describe('interpret review — op vocabulary builder (PIN D)', () => {
-  it('the vocabulary enumerates the real registries (40 canon types + 12 party kinds)', () => {
+  it('the vocabulary enumerates the real registries (41 canon types + 12 party kinds)', () => {
     const v = buildOpVocabulary();
     expect(v.canonEventTypes).toEqual([...EVENT_TYPES]);
-    expect(v.canonEventTypes.length).toBe(40);
+    expect(v.canonEventTypes.length).toBe(41);
     expect(v.partyImpactKinds).toEqual(Object.keys(PARTY_IMPACT_KINDS));
     expect(v.partyImpactKinds.length).toBe(12);
   });
