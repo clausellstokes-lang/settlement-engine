@@ -52,6 +52,8 @@
 import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER } from '../../data/constants.js';
 import { hash01 } from '../region/contestMath.js';
+// WAVE P4 (design §7b): the viability ladder gates the founding mover. Pure read.
+import { gradeFromReading, moverPermitted } from './demographicsLadder.js';
 
 /** @typedef {import('./demographicsPushPull.js').DemographicReadings} DemographicReadings */
 
@@ -129,6 +131,10 @@ export const RESPONSES = Object.freeze([
  */
 export const RESPONSE_REFUSALS = Object.freeze([
   'absorbed', 'available', 'lane_dark', 'no_ground', 'no_headroom', 'no_next_tier',
+  // WAVE P4 (design §7b, THE VIABILITY LADDER): a settlement whose own ground and
+  // granaries no longer support the grade it wears may not go and start another one.
+  // The ladder gates the mover; the refusal has a name so the Herald can say it.
+  'nonviable',
   'nowhere_to_go', 'parent_tier', 'unfed',
 ]);
 
@@ -232,6 +238,17 @@ export function scoreResponses(input) {
   const moved = Math.max(0, num(input.homeostat.placed, 0));
   const stuck = Math.max(0, num(input.homeostat.unplaced, 0));
   const wanted = moved + stuck;
+  // WAVE P4: the §7b grade, from readings already in hand. `deficit01` is deliberately
+  // not threaded: the founding gate turns on the nonviable branch (the bound has fallen
+  // through the tier's own floor), and a hungry-but-viable town keeps its frontier.
+  const foundingPermitted = moverPermitted(gradeFromReading({
+    population: num(r.population, 0),
+    bound: num(r.bound, 0),
+    tierFloor: tierFloorOf(input.tier),
+    foodKnown: r.foodKnown === true,
+    deficit01: 0,
+    remnant: false,
+  }).grade, 'founding');
 
   /** @type {Array<{ response: string, available: boolean, refusal: string,
    *   terms: Record<string, number> }>} */
@@ -296,15 +313,23 @@ export function scoreResponses(input) {
       // foundings" a matter of luck; this makes it a matter of law. A settlement that
       // raised no column at all (nobody wanted to leave) is NOT absorbed and keeps the
       // frontier as an honest answer to its own crowding.
+      // WAVE P4, THE LADDER GATE (design §7b): a settlement graded below `viable` may
+      // not found. A place that can no longer support the town it already is has no
+      // business planting another one, and the refusal is NAMED rather than weighted
+      // away, exactly as the absorption refusal above is. The grade is read through the
+      // ONE grade predicate (demographicsLadder.gradeFromReading) from readings this
+      // function already holds, so no second food read and no second definition.
       available: input.satelliteLaneLit
         && input.satelliteCap > 0
+        && foundingPermitted
         && !(input.ground.applicable && input.ground.saturated)
         && !(num(input.homeostat.considered, 0) > 0 && moved > 0 && stuck === 0),
       refusal: !input.satelliteLaneLit ? 'lane_dark'
         : input.satelliteCap <= 0 ? 'parent_tier'
-          : (input.ground.applicable && input.ground.saturated) ? 'no_ground'
-            : (num(input.homeostat.considered, 0) > 0 && moved > 0 && stuck === 0) ? 'absorbed'
-              : 'available',
+          : !foundingPermitted ? 'nonviable'
+            : (input.ground.applicable && input.ground.saturated) ? 'no_ground'
+              : (num(input.homeostat.considered, 0) > 0 && moved > 0 && stuck === 0) ? 'absorbed'
+                : 'available',
       terms: {
         // An aspatial world has no map to read, so open land is UNKNOWN rather than
         // absent, and the lean takes the neutral reading instead of a false zero.

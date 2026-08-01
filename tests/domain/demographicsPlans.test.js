@@ -828,8 +828,15 @@ describe('7. THE OWNER\'S THREE SENTENCES fall out of the weights', () => {
   test('a walled metropolis with NO GROUND imports and intensifies', () => {
     const scored = scoreResponses({
       readings: readings({
+        // WAVE P4 FIXTURE CORRECTION (not a behaviour change): `bound` was left at the
+        // helper's town-scale default of 8625 while this metropolis declared a food
+        // capacity of 130000 and a density ceiling of 161000, so the reading was
+        // internally inconsistent. Nothing read `bound` before P4, so the inconsistency
+        // was invisible; the §7b ladder gate does read it, and an 8625 bound under the
+        // metropolis population floor of 25001 correctly grades the place nonviable.
+        // min(130000, 161000) is what demographicReadings would actually produce here.
         binding: 'granary', foodFlowRatio: 0.72, foodCapacity: 130000,
-        population: 150000, densityCeiling: 161000,
+        population: 150000, densityCeiling: 161000, bound: 130000,
       }),
       pressure01: 1.15, tier: 'metropolis', prosperity01: 0.8, connectivity01: 0.9,
       homeostat: { placed: 0, unplaced: 600, considered: 0 },

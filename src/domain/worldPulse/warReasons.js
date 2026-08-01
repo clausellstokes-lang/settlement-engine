@@ -59,6 +59,16 @@ import { buildThreatByCid } from './martialReadiness.js';
 // D4 (DESIGN_SIM_DEPTH_R2): fear_of_dominance reads the hegemony sphere topology (belief-side).
 // no sphere ⇒ 0 everywhere ⇒ byte-identical. One-directional: hegemonyFear never imports this module.
 import { makeHegemonyFear } from './hegemonyFear.js';
+// THE VULTURE WAR (§14.1 OPPORTUNISM) + its §14.3-named mirror. The mirror-image of
+// fear_of_dominance: appetite for a neighbour BELIEVED weak, routed through the same
+// belief estate. Both signs of one gradient live in the leaf, so warReasons and
+// peaceReasons share ONE measurement. No substrate ⇒ 0 ⇒ byte-identical.
+// One-directional: opportunism never imports this module.
+import { makeOpportunismRead } from './opportunism.js';
+// THE RELIGIOUS CASUS (§14.1 IDEOLOGY/FAITH) + its mirror, off the CLOSED faith×alignment
+// quadrant. Faith flag dark or either town patronless ⇒ 0 ⇒ byte-identical.
+// One-directional: sacredClaim never imports this module.
+import { makeSacredClaimRead } from './sacredClaim.js';
 // D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7): the reframe interpretation mover runs at the
 // TOP of advanceWarReasons behind its OWN gate (reframeActive), and its dark-aid read feeds the
 // ingratitude_debt casus. reframeKernel is a pure leaf (never imports back — the reasons DAG
@@ -68,6 +78,14 @@ import { advanceReframe, reframeActive, debtClaim01, dependencyByDesign01 } from
 // liar01 closure into advanceReframe; one-directional (informationStatecraft never imports this).
 import { credibilityScoreOf, credibilityDiscount } from './informationStatecraft.js';
 import { clamp01 } from '../../kernel/math.js';
+// WAVE P4 (THE WORLD'S HAND, docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 6 and §6): the
+// endogenous demographic motive, its capability split, and the perceived-scarcity read.
+// It feeds the EXISTING resource_pressure casus belli and mints no reason type of its
+// own, because the casus taxonomy is walker-enforced for totality AND bijection. Dark
+// (demographicsEnabled absent) ⇒ never called ⇒ byte-identical.
+import { demographicsActive } from './demographicsRates.js';
+import { demographicWarTermsFor } from './demographicsWar.js';
+import { demographyMembersFromSnapshot, measureRealmDemography } from './demographicsObservation.js';
 import { warReceipt, pickLine, DECREE_DEFAULT_RECEIPTS } from './eventProse.js';
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
@@ -130,6 +148,17 @@ export const WAR_REASON_TYPES = Object.freeze([
   // D7: our trade-dependence, re-read as a leash built on purpose (commerce → dependency_by_design).
   // 0 when reframe dark ⇒ byte-identical. Its DISTINCT mirror is bonds_of_commerce.
   'dependency_by_design',
+  // THE VULTURE WAR (§14.1 OPPORTUNISM, "weakness smelled"): the taxonomy modelled fear of
+  // the STRONG and had no appetite for the WEAK, which taught players that being harmless
+  // is safe. EPISTEMIC exactly as fear_of_dominance is — the foe half routes through the
+  // belief selector, so a court can covet a neighbour that is not actually weak. 0 when the
+  // pair publishes no vulnerability substrate ⇒ byte-identical. Mirror: hopelessness.
+  'opportunism',
+  // THE RELIGIOUS CASUS (§14.1 IDEOLOGY/FAITH): the engine ran live faith machinery and no
+  // court ever went to war over a god. Scored off the CLOSED faith×alignment quadrant the
+  // engine already bands. 0 when the faith flag is dark or either town names no patron ⇒
+  // byte-identical. Mirror: common_rite.
+  'sacred_claim',
 ]);
 
 /** The casus pacis taxonomy (design §14.2, the brief's seven + W-CONVERGENCE's spheres). */
@@ -155,6 +184,15 @@ export const PEACE_REASON_TYPES = Object.freeze([
   // D7: the distinct mirror of dependency_by_design — the same trade tie re-read as a MUTUAL
   // bond that makes war too costly (commercial interdependence, Blainey-adjacent). Distinct kind.
   'bonds_of_commerce',
+  // The distinct mirror of opportunism, and the pairing §14.3 itself names
+  // ("opportunism↔hopelessness"): the SAME believed vulnerability gradient, read from the
+  // losing end. One measurement, two signs — the mirror cannot drift from the casus because
+  // there is only one number. 0 when the gradient favours the reader ⇒ byte-identical.
+  'hopelessness',
+  // The distinct mirror of sacred_claim: the SAME faith quadrant, read the other way — the
+  // ground two courts already share. Distinct from `mediation` (a THIRD party standing
+  // between them); this is the two of them standing on one floor.
+  'common_rite',
 ]);
 
 /**
@@ -195,6 +233,13 @@ export const REASON_MIRRORS = Object.freeze({
   // commerce. Both distinct peace kinds (the strict bijection walker forbids reuse).
   ingratitude_debt: 'debt_forgiven',
   dependency_by_design: 'bonds_of_commerce',
+  // §14.3 names this pairing itself ("opportunism↔hopelessness") and it is the strongest
+  // mirror in the table: both sides are the SIGN of one believed vulnerability gradient,
+  // so they are the same evidence read the other way by construction, not by convention.
+  opportunism: 'hopelessness',
+  // The faith pair: one closed quadrant, two columns. Divergence presses a claim,
+  // convergence offers a floor; no quadrant scores on both.
+  sacred_claim: 'common_rite',
 });
 
 // ── The shared substrate (imported by peaceReasons.js — shape law) ──────────
@@ -461,14 +506,28 @@ export function scoreRevanchism(relState, tick, seed) {
  * RESOURCE PRESSURE (§14.1 economic hunger): my depleted stores against their
  * intact ones — the envy gradient on the SAME pressure index the war layer
  * reads. own/foe are 0..1 blended pressures (food-weighted).
- * @param {{ own01: number, foe01: number }} args
+ *
+ * WAVE P4 adds two OPTIONAL terms, and their optionality IS the contract: an absent
+ * `capability01` reads 1 and an absent `note` appends nothing, so every pre-P4 caller
+ * — and every world whose demographic engine is dark — scores and reads byte-identically
+ * (the dormancy pins hold that). demographicsWar.js supplies both together or neither.
+ * @param {{ own01: number, foe01: number, capability01?: number, note?: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreResourcePressure({ own01, foe01 }, /** @type {string | undefined} */ seed) {
+export function scoreResourcePressure({ own01, foe01, capability01, note }, /** @type {string | undefined} */ seed) {
   const gap = clamp01(Number(own01) || 0) - clamp01(Number(foe01) || 0);
-  const score = clamp01(gap * REASON_TUNING.RESOURCE_ENVY_GAIN);
+  // WAVE P4 (design law 6, §6): MOTIVE vs CAPABILITY. Scarcity creates the motive the
+  // gradient above measures; surplus creates the CAPABILITY to act on it, because
+  // armies eat. A starving fractured realm therefore WANTS war and cannot wage it: the
+  // gradient stays high and the score it produces is damped by what the granaries can
+  // actually put in the field. ABSENT ⇒ 1 ⇒ byte-identical, which is what keeps every
+  // dark world and every existing caller exactly where it was. There is no second cap
+  // here: RESOURCE_ENVY_GAIN and the x1.30 war-factor cap remain the only two.
+  const capability = Number.isFinite(Number(capability01)) ? clamp01(Number(capability01)) : 1;
+  const score = clamp01(gap * REASON_TUNING.RESOURCE_ENVY_GAIN) * capability;
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: warReceipt('resource_pressure', seed) };
+  // The receipt says what the court acted on, including when the court was wrong.
+  return { score, receipt: `${warReceipt('resource_pressure', seed)}${typeof note === 'string' ? note : ''}` };
 }
 
 /**
@@ -621,6 +680,18 @@ export function warReasonsFor(worldState, fromId, toId) {
  */
 
 /**
+ * ONE snapshot member, as this module reads it. `buildWorldSnapshot` derives `byId`
+ * FROM `settlements` (worldSnapshot.js: `new Map(settlements.map(...))`), so the two
+ * views carry the SAME records and must never be spelled apart here: the per-pair loop
+ * reads members through `byId` and the P4 realm reading walks `settlements`, and a
+ * divergence between those two spellings would be a silent disagreement about what a
+ * member is.
+ * @typedef {{ id: string, name?: string,
+ *   settlement?: import('../settlement.schema.js').SimSettlement,
+ *   causal?: { scores?: Record<string, number> } }} WarSnapItem
+ */
+
+/**
  * Advance the war-reason ledger one tick. DETERMINISTIC (no rng); gate absent
  * ⇒ immediate no-op. Iterates the relationship graph's edges in both
  * orientations (codepoint-ordered), recomputes each directed pair's typed
@@ -631,9 +702,8 @@ export function warReasonsFor(worldState, fromId, toId) {
  * the ledger; decision receipts name the top reasons — accumulation beats
  * would be noise). Documented deferral, not an omission.
  *
- * @param {{ snapshot: { byId?: Map<string, { id: string, name?: string,
- *                         settlement?: import('../settlement.schema.js').SimSettlement,
- *                         causal?: { scores?: Record<string, number> } }>,
+ * @param {{ snapshot: { byId?: Map<string, WarSnapItem>,
+ *                       settlements?: WarSnapItem[],
  *                       regionalGraph?: { edges?: Array<Record<string, unknown>> } },
  *           worldState: Record<string, unknown>,
  *           graph?: { edges?: Array<Record<string, unknown>> } | null,
@@ -679,6 +749,20 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // The threat-environment index (existing martialReadiness read), built once.
   const threatByCid = buildThreatByCid(snapshot, ws);
 
+  // The predation + faith contexts, built ONCE per pass (both memoize their per-settlement
+  // truth reads inside; both are cheap no-ops when their own substrate is dark).
+  const opportunismRead = makeOpportunismRead({ snapshot, worldState: ws });
+  const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState: ws });
+
+  // WAVE P4: the REALM's carrying-capacity divergence, measured ONCE per pass rather
+  // than per pair (it is a realm reading, and a per-pair recomputation would be the
+  // same number N squared times). This is a MOTIVE input, which is what law 6 says it
+  // is; it never reaches a risk incidence deriver, which is what law 5 forbids.
+  const demographicsLit = demographicsActive(ws);
+  const realmPressure01 = demographicsLit
+    ? measureRealmDemography(demographyMembersFromSnapshot(snapshot), ws).realmPressure01
+    : 0;
+
   // W-PEACE-2: the TREATY_DEFAULT feed — CLOSING this module's registration seam.
   // The treaties ledger (built by advanceTreaties, which runs THIS tick before the
   // war-reason mover) carries {parties, complianceState, defaultedBy, defaultSeverity01}
@@ -713,11 +797,37 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
 
     const ownPressure = pressureBlend(pIndex, fromId);
     const foePressure = pressureBlend(pIndex, toId);
+    // WAVE P4: the motive blend, the perceived foe reading and the capability damper,
+    // assembled in demographicsWar.js so this loop gains one call rather than an engine.
+    // Null when dark ⇒ the two terms below are the pressure blend verbatim and the
+    // capability is absent ⇒ the score is byte-identical to every pre-P4 world.
+    const demoTerms = demographicsLit
+      ? demographicWarTermsFor({
+        worldState: ws,
+        fromId,
+        toId,
+        fromSettlement: fromItem?.settlement,
+        toSettlement: snapshot?.byId?.get?.(toId)?.settlement,
+        base01: ownPressure,
+        baseFoe01: foePressure,
+        realmPressure01,
+      })
+      : null;
 
     const computed = [
       { type: 'grievance', ...scoreGrievance(relState, key) },
       { type: 'revanchism', ...scoreRevanchism(relState, tick, key) },
-      { type: 'resource_pressure', ...scoreResourcePressure({ own01: ownPressure, foe01: foePressure }, key) },
+      {
+        type: 'resource_pressure',
+        ...scoreResourcePressure(demoTerms
+          ? {
+            own01: demoTerms.own01,
+            foe01: demoTerms.foe01,
+            capability01: demoTerms.capability01,
+            note: demoTerms.note,
+          }
+          : { own01: ownPressure, foe01: foePressure }, key),
+      },
       { type: 'treaty_default', ...scoreTreatyDefault({ treaties: treatiesList, fromId, toId }, key) },
       { type: 'encirclement', ...scoreEncirclement({ threat01: threatByCid.get(fromId) || 0, hostile }, key) },
       {
@@ -739,6 +849,17 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // a war from a kindness misremembered.
       { type: 'ingratitude_debt', ...scoreIngratitudeDebt({ debt01: debtClaim01(ws, fromId, toId) }, key) },
       { type: 'dependency_by_design', ...scoreDependencyByDesign({ design01: dependencyByDesign01(ws, fromId, toId) }, key) },
+      // THE VULTURE WAR: fromId covets toId because it BELIEVES toId could not resist.
+      // The own-side means term is P4's capability verbatim (armies eat — a court that
+      // cannot feed a march does not get to act on the appetite); absent ⇒ 1 ⇒ the
+      // pre-P4 reading. 0 when the pair publishes no vulnerability substrate, when the
+      // gradient runs the other way (that is hopelessness, on the peace side), or when
+      // fromId is the weaker ⇒ byte-identical.
+      { type: 'opportunism', ...opportunismRead.opportunismOf(fromId, toId, demoTerms?.capability01) },
+      // THE RELIGIOUS CASUS: fromId's church holds a claim on toId's altars. 0 when the
+      // faith flag is dark, when either town names no patron, or when the quadrant is a
+      // common-ground one (that is common_rite, on the peace side) ⇒ byte-identical.
+      { type: 'sacred_claim', ...sacredClaimRead.sacredClaimOf(fromId, toId) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);

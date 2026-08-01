@@ -143,6 +143,10 @@ export function extractSpatialUsage(worldState) {
     // adoption signal is the EDGE count, never the container's own key count
     // (Object.keys of the ledger itself would read a constant 2 and mean nothing).
     route_edges: recCount(isObj(L.routeNetwork) ? L.routeNetwork.edges : null),
+    // WAVE P3 THE DEMOGRAPHIC VALVES. One row per settlement that is carrying a plan,
+    // holding a cooldown, or has banked a completed public work — the ledger is
+    // drop-when-empty, so a nonzero count means the valve lane genuinely fired.
+    demographic_plans: recCount(L.demographicPlans),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -173,6 +177,7 @@ export function extractSpatialUsage(worldState) {
     ['satellites', counts.satellites],
     ['war_campaign', counts.war_campaigns],
     ['route_network', counts.route_edges],           // W-J lived route network
+    ['demographic_plans', counts.demographic_plans], // wave P3 the overflow valves
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -212,6 +217,11 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   // is a virtual flag lit in no preset, so it is absent from TRACKED_FLAGS too. A
   // reading of zero while the layer is dark is the truth, not a blind spot.
   'routeNetwork',
+  // WAVE P3. TRACKED for the same reason as routeNetwork and not the exemption's: the
+  // demographic valve lane's adoption is visible through no existing mover and no
+  // tracked flag, because `demographicsEnabled` is a virtual flag lit in no preset. A
+  // reading of zero while the wave is dark is the truth rather than a blind spot.
+  'demographicPlans',
 ]);
 
 /**

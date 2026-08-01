@@ -33,7 +33,7 @@ import {
   simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
 import { GROWTH_PENDING_RULE_KEYS } from '../../src/domain/certification/subsystemRowsGrowth.js';
-import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
+import { censusWorldStateKeys, moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { mustExtract } from '../helpers/sourceContract.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -503,17 +503,28 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
       expect(src.includes('setSpatialLedger'), `${rel} writes a spatial ledger`).toBe(false);
       expect(src.includes('worldState.demographics'), `${rel} writes a worldState key`).toBe(false);
     }
-    // THE CHANNEL IS EARNED BUT NOT YET DECLARED, and the difference matters. P3 wrote
-    // a plan ledger that satisfies every condition a dispositive channel must satisfy —
-    // exactly one writer, gated on THIS flag, a name no other module in the tree spells
-    // (precisely the test spatialLedgers.migration fails, which is why the homeostat's
-    // own ledger is not claimed either). What it does NOT yet have is a READER: no
-    // receipt in existence carries a stateKeys census, so declaring it converted a real
-    // SILENT into an instrument gap and the corpus guard refused it. The traces below
-    // stay, because they are the standing evidence that will justify the claim the day
-    // P4 wires the v5 census. A channel is declarable when something can read it, not
-    // when something can write it.
-    expect(row.aliveness.stateKeys).toEqual([]);
+    // THE CHANNEL IS EARNED AND, IN WAVE P4, DECLARED. P3 wrote a plan ledger that
+    // satisfies every condition a dispositive channel must satisfy — exactly one
+    // writer, gated on THIS flag, a name no other module in the tree spells (precisely
+    // the test spatialLedgers.migration fails, which is why the homeostat's own ledger
+    // is not claimed either). What it did NOT have was a READER, so P3 declaring it
+    // converted a real SILENT into an instrument gap and the corpus guard refused it.
+    // P4 supplies the reader and the declaration lands in the SAME slice, which is the
+    // discipline the guard exists to enforce: a channel is declarable when something
+    // can read it, not when something can write it.
+    expect(row.aliveness.stateKeys).toEqual(['spatialLedgers.demographicPlans']);
+    // THE READER, PROVEN RATHER THAN ASSERTED: the v5 census walks one level into
+    // spatialLedgers, which is what makes the declared spelling a key the envelope
+    // actually emits. Driven through the REAL census function over a worldState the
+    // REAL plan writer shape produces.
+    expect(Object.keys(censusWorldStateKeys({
+      spatialLedgers: { demographicPlans: { ashford: { response: 'satellite' } } },
+    }))).toContain('spatialLedgers.demographicPlans');
+    // NEGATIVE CONTROL, executed: an empty ledger container is still censused (the key
+    // exists with zero entries), and a world that never opened one carries no key at
+    // all, so ABSENCE is dispositive rather than a gap.
+    // anchored: the very same census function is asserted above to EMIT this exact key for a populated ledger
+    expect(Object.keys(censusWorldStateKeys({ spatialLedgers: {} }))).not.toContain('spatialLedgers.demographicPlans');
     const plansSrc = read('src/domain/worldPulse/demographicsPlans.js');
     expect(plansSrc.includes('if (!demographicsActive(worldState)) return inert;'),
       'the plan writer does not gate on the wave flag').toBe(true);
@@ -546,11 +557,15 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
     expect(moverFamilyOf({ kind: 'demographic_step', id: 'demographics.Ashford.12' })).toBe(null);
     // And the row says why, at length.
     expect(row.aliveness.other.length).toBeGreaterThan(200);
-    expect(row.soakEvidence).toBe('unobserved');
+    // WAVE P4: `indirect`, never `unobserved`. The distinction is the corpus guard's
+    // whole subject: `unobserved` is a row telling the evaluator to downgrade its own
+    // zero readings, which is the ceilinged escape hatch; `indirect` lets the SCHEMA
+    // decide, which is what a row with a real instrument is obliged to do.
+    expect(row.soakEvidence).toBe('indirect');
     expect(row.invariants.length).toBeGreaterThan(0);
   });
 
-  test('it grades DORMANT_BY_CONFIG dark and UNOBSERVED lit, and can never reach ALIVE', () => {
+  test('it grades DORMANT_BY_CONFIG dark, SILENT on an instrumented zero, ALIVE on the channel', () => {
     const loudYears = [
       year(1, { eventTypeCounts: { population_growth: 40, population_decline: 12 }, moverCounts: { population: 900 } }),
       year(2, { eventTypeCounts: { population_growth: 61, population_decline: 9 }, moverCounts: { population: 1200 } }),
@@ -564,17 +579,27 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
     // switch LIT must NOT be read as this subsystem being alive. If the row ever
     // claimed the population family, this assertion is what would red.
     const lit = evaluateSubsystemCertification(receiptV5({ years: loudYears }));
-    expect(verdictOf(lit, DEMO)).toBe('UNOBSERVED');
-    // WAVE P3, THEN CORRECTED: P3 declared a dispositive channel (the plan ledger)
-    // here, and the corpus guard refused it — no receipt that exists carries a
-    // stateKeys census, so declaring the channel converted a real SILENT into an
-    // instrument gap. The channel returns in P4 alongside the v5 census wiring that
-    // can actually read it. Until then the row declares NO channel, which is the
-    // honest state and is what makes the claim below load-bearing: with nothing
-    // declared, no amount of population traffic from the lane this wave replaced can
-    // carry this row to ALIVE.
-    expect(evalRowOf(lit, DEMO).instrumentedChannels).toEqual([]);
+    // WAVE P4: the channel is declared and the census is TOTAL, so a receipt whose
+    // plan ledger never materialized is a real reading and reads SILENT. That is the
+    // corpus guard's own instruction taken rather than evaded ("give the new row a
+    // channel the receipt can read, or accept SILENT"), and it is the routeLifecycle
+    // row's situation exactly: the row's invariants below tell a reader that a
+    // legitimate zero means a realm that never crossed an overflow band.
+    expect(verdictOf(lit, DEMO)).toBe('SILENT');
+    // THE ANTI-VACUITY CLAIM, now sharper than it was: the channel is INSTRUMENTED and
+    // it is the ONLY thing that can carry this row, so all that deafening population
+    // traffic from the lane this wave replaced still cannot reach it.
+    expect(evalRowOf(lit, DEMO).instrumentedChannels).toEqual(['stateKeys']);
     expect(evalRowOf(lit, DEMO).corroboratingOnlyEvidence).toBe(false);
+    expect(evalRowOf(lit, DEMO).evidence.moverFamilies.total).toBe(0);
+    // AND THE POSITIVE ARM: the same loud receipt, plus the one key the plan writer
+    // materializes, reaches ALIVE. Without this the SILENT above would be consistent
+    // with a channel spelled in a form the census never emits.
+    const withPlans = evaluateSubsystemCertification(receiptV5({
+      years: loudYears,
+      stateKeys: { 'spatialLedgers.demographicPlans': { years: 2, maxEntries: 3, finalEntries: 1 } },
+    }));
+    expect(verdictOf(withPlans, DEMO)).toBe('ALIVE');
 
     // CONTROL: the evaluator is not simply refusing to grade this receipt. A sibling
     // row on the same envelope reaches ALIVE, so UNOBSERVED above is a statement about

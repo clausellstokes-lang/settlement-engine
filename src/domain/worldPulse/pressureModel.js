@@ -1,6 +1,16 @@
 import { clamp01 } from '../../kernel/math.js';
 import { humanizeToken } from '../display/humanizeEngineTokens.js';
 import { SEASONS_TUNING } from './seasons.js';
+// WAVE P4 (THE WORLD'S HAND, docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 5 and §7): the
+// demographic incidence coupling. This is THE ONE SEAM stressor incidence has, and the
+// coupling is added HERE rather than through the causal derivers because §0b measured
+// two traps on that route: the population contributors are STEPS at pop >= 5000 (so the
+// whole runaway range collapses into one bucket) and the disease consumer reads housing
+// pressure through a HARD GATE at 45 (so a smooth term routed through it arrives as a
+// step anyway). The lift below is continuous and lands beside that gate, never through
+// it. Gated on `demographicsEnabled`, which is absent from DEFAULT_SIMULATION_RULES, so
+// a dark world never calls the reader at all and this file is byte-identical to legacy.
+import { demographicRiskOf, diseaseCouplingReason, raidCouplingReason } from './demographicsRisk.js';
 
 /** @param {any} value @returns {number} */
 
@@ -136,6 +146,9 @@ export function deriveSettlementPressures(snapshot) {
   // byte-identical to legacy — including the pre-existing UNGATED +0.08
   // winter food bias below, which predates the flag and must stay.
   const seasonsOn = snapshot.worldState?.simulationRules?.seasonsEnabled === true;
+  // WAVE P4: the ONE dormancy gate for the demographic incidence coupling, read once
+  // per pass rather than per settlement (the seasonsOn precedent exactly).
+  const demographicsOn = snapshot.worldState?.simulationRules?.demographicsEnabled === true;
   // Index the confirmed channels once for all per-settlement lookups
   // below instead of re-normalizing the whole graph on each countChannels call.
   const channelIndex = buildConfirmedChannelIndex(snapshot.regionalGraph);
@@ -146,6 +159,19 @@ export function deriveSettlementPressures(snapshot) {
       settlementId: item.id,
       settlementName: item.name,
     };
+    // WAVE P4: ONE risk read per settlement per pass, shared by the disease and the
+    // conflict couplings below so the two can never disagree about how crowded, how
+    // filthy, how travelled, how sprawled or how thinly watched this place is. Null
+    // when the wave is dark, and every consumer below is guarded on that null.
+    const demographicRisk = demographicsOn
+      ? demographicRiskOf({
+        settlement: item.settlement,
+        worldState: snapshot.worldState,
+        settlementId: String(item.id),
+        scores,
+      })
+      : null;
+
     const foodReasons = [];
     let food = pressureFromScore(scores.food_security);
     if (season === 'winter') {
@@ -190,6 +216,17 @@ export function deriveSettlementPressures(snapshot) {
       disease += 0.08;
       diseaseReasons.push('housing pressure weakens containment');
     }
+    // WAVE P4, law 5: a packed hungry city INVITES plague. The engine raises the
+    // condition and the disease lane still decides on its own rules, with its own
+    // birth-threshold gate and its own severity draw, so nothing here fires an event.
+    // The lift is CONTINUOUS in the head count (it rides population / min(K_food,
+    // D_tier)), which is what keeps a settlement of twelve thousand distinguishable
+    // from one of five thousand after every existing population contributor has
+    // saturated.
+    if (demographicRisk && demographicRisk.diseaseLift01 > 0) {
+      disease += demographicRisk.diseaseLift01;
+      diseaseReasons.push(diseaseCouplingReason(demographicRisk));
+    }
     out.push({ ...base, kind: 'disease', label: 'Disease pressure', score: clamp01(disease), reasons: diseaseReasons });
 
     const conflictReasons = [];
@@ -207,6 +244,13 @@ export function deriveSettlementPressures(snapshot) {
     if (hostility > 0.4) {
       conflict += hostility * 0.18;
       conflictReasons.push('a hostile neighbour relationship raises conflict pressure');
+    }
+    // WAVE P4, law 5 and §7: "the sprawl pays for its cheap land." Frontier sprawl and a
+    // thin watch raise RAID exposure, which is a condition rather than a raid: the beast
+    // and bandit lanes still decide, on their own rules, whether anything comes.
+    if (demographicRisk && demographicRisk.raidLift01 > 0) {
+      conflict += demographicRisk.raidLift01;
+      conflictReasons.push(raidCouplingReason(demographicRisk));
     }
     out.push({ ...base, kind: 'conflict', label: 'Conflict pressure', score: clamp01(conflict), reasons: conflictReasons });
     out.push({

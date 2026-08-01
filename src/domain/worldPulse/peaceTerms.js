@@ -57,6 +57,9 @@ import { readBeliefStrength, readBeliefRelationship, governingCoalition } from '
 import { buildThreatByCid } from './martialReadiness.js';
 import { faithAlignmentQuadrant, crossPressureMediation } from '../spatial/cohesionWeave.js';
 import { evil01 } from './deityAxes.js';
+// The pair's faith×alignment proximity read — owned by sacredClaim.js (a pure leaf) so the
+// war side can read it too without closing a cycle back through this module.
+import { faithProximityOf } from './sacredClaim.js';
 import { relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
 import { deepClone } from '../clone.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -1062,23 +1065,13 @@ function victorMonitorReach(victorId, loserId, worldState, truthFor) {
 // directions), and peaceReasons.advancePeaceReasons imports THIS finder for its
 // mediation peace-reason — one finder, so the reason and the treaty never drift.
 
-/**
- * The faith×alignment proximity inputs for a pair of snapshot items (the
- * generosityKernel faithProximity derivation, kept identical so the quadrant
- * reads agree across movers).
- * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemA
- * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemB
- * @returns {{ samePatron: boolean, alignmentKinship01: number }}
- */
-export function faithProximityOf(itemA, itemB) {
-  const dA = itemA?.settlement?.config?.primaryDeitySnapshot || null;
-  const dB = itemB?.settlement?.config?.primaryDeitySnapshot || null;
-  const refA = dA && dA._deityRef != null ? String(dA._deityRef) : '';
-  const refB = dB && dB._deityRef != null ? String(dB._deityRef) : '';
-  const samePatron = !!(refA && refA === refB);
-  const alignmentKinship01 = clamp01(1 - Math.abs(evil01(dA) - evil01(dB)));
-  return { samePatron, alignmentKinship01 };
-}
+// faithProximityOf now lives in sacredClaim.js and is RE-EXPORTED here so this module's
+// historic import path keeps working. It moved because the faith casus belli
+// (sacred_claim ↔ common_rite) needs the same read from warReasons.js, and warReasons
+// could never import peaceTerms — peaceTerms imports warReasons' gate, so the edge would
+// close a cycle. ONE reader, three consumers (the treaty mint, the mediation reason, and
+// the two faith reasons), no fork.
+export { faithProximityOf };
 
 /**
  * Find the first (codepoint-ordered) third settlement adjacent to BOTH

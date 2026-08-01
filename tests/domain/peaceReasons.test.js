@@ -305,8 +305,8 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
     // 11 = the wave-1 seven + W-CONVERGENCE's foreign_clash↔spheres_understanding
     //   + D4's fear_of_dominance↔balance_restored + D7's two reframe casus.
-    expect(brief.peace.length).toBe(11);
-    expect(brief.war.length).toBe(11);
+    expect(brief.peace.length).toBe(13);
+    expect(brief.war.length).toBe(13);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -314,7 +314,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(present.sinceTick).toBe(10);
   });
 
-  it('renders the calm form below the dying threshold and "0 of 11" on a dark world', () => {
+  it('renders the calm form below the dying threshold and "0 of 13" on a dark world', () => {
     const one = advancePeaceReasons({
       snapshot: snapshotFor([item('a'), item('b')]),
       worldState: warWorld({ simulationRules: { ...LIT_RULES, infoMode: 'full' }, calendar: { elapsedWeeks: 40 }, spatialCanonVersion: 1, spatialLedgers: { beliefMaps: {
@@ -327,7 +327,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 11 peace reasons now present');
+    expect(dark.line).toBe('0 of 13 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

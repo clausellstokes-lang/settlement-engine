@@ -12,6 +12,7 @@ import {
 } from '../../src/domain/certification/behavioralContract.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 import { observeRealmSelfSufficiency } from '../../src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js';
+import { observeRealmDemography } from '../../src/domain/worldPulse/demographicsObservation.js';
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 import { prosperityRank } from '../../src/data/constants.js';
 
@@ -856,6 +857,21 @@ export function observeBehavioralYear({
     saves: afterSaves,
   });
 
+  // REALM DEMOGRAPHY (wave P4; DESIGN_DEMOGRAPHIC_ENGINE.md §6). ADDITIVE and
+  // CONDITIONAL on exactly the terms realmSelfSufficiency established above, and it is
+  // THE INSTRUMENT the demographicsEnabled certification row was waiting for. The
+  // per-settlement demographic_step receipts are dropped at applyPulseMover (that seam
+  // forwards newsEntries and nothing else), so the realm reading is re-derived here from
+  // the SAME pure reads the kernel used: Sigma pop against Sigma K_food, which of the two
+  // bounds is the wall for how many settlements, and the §7b viability census. Null on a
+  // dark world, and a null drops the key rather than recording a zero, because a
+  // realmPressure of 0 would read as a realm with infinite slack instead of as an
+  // instrument that was never switched on.
+  const realmDemography = observeRealmDemography({
+    worldState: result?.worldState,
+    saves: afterSaves,
+  });
+
   return {
     year,
     eventCount: records.length,
@@ -893,6 +909,7 @@ export function observeBehavioralYear({
     // lacks this key, which consumers must read as an instrument gap.
     beliefDivergence: observeBeliefDivergence({ result, afterSaves }),
     ...(realmSelfSufficiency ? { realmSelfSufficiency } : {}),
+    ...(realmDemography ? { realmDemography } : {}),
   };
 }
 

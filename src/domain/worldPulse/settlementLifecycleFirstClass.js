@@ -27,6 +27,10 @@ import { SETTLEMENT_LIFECYCLE_TUNING, drawSteadingName } from './settlementLifec
 // WAVE P1a — the viability ladder (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §7b) reads the
 // demographic engine's ONE dormancy gate; it never opens a second one.
 import { demographicsActive } from './demographicsRates.js';
+// WAVE P4 (design §7b): the NAMED rung of the ladder P1a's head-count read opened. A
+// pure read, stamped onto the terminal receipt; it opens no second descent and gates
+// nothing here (the death gate is P1a's, unchanged).
+import { viabilityGradeOf } from './demographicsLadder.js';
 import { withEventConditionsSynced } from '../activeConditions.js';
 
 /** @typedef {import('./settlementLifecycleKernel.js').LcSettlement} LcSettlement */
@@ -126,9 +130,15 @@ function supportOf(pIndex, id) {
  *   the writer's self-re-verify, which sees only (settlement, outcome) and may run many
  *   ticks later from a parked proposal, can honor the same reading instead of refusing
  *   the outcome its own evaluator emitted. Absent ⇒ the legacy label-only contract.
+ * @param {string|null} [args.viabilityGrade] WAVE P4 (design §7b): the NAMED rung the
+ *   ONE grade read put this settlement on, stamped onto the receipt's lifecycle
+ *   metadata so the descent is legible as a ladder rather than as a single verdict.
+ *   Declared on THIS typedef — the owning one — beside `viabilityLadder`, and
+ *   OPTIONAL for the same reason: null (a dark demographic engine, or either force
+ *   verb) drops the key entirely and serializes exactly as it did before the wave.
  * @returns {LcCandidate}
  */
-export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false, viabilityLadder = false }) {
+export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false, viabilityLadder = false, viabilityGrade = null }) {
   const s = item.settlement || {};
   const cid = String(item.id ?? '');
   const name = String(item.name || s.name || cid);
@@ -140,7 +150,20 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
     reason: 'The last residents leave with the wagons — the settlement dies.',
   }];
   /** @type {Record<string, unknown>} */
-  const metadata = { tick, dwell, lifecycle: { residual: pop, forced, ...(emptied ? { emptied: true } : {}) } };
+  // WAVE P4 (design §7b): the NAMED rung this death was reached at, recorded on the
+  // receipt so the descent is legible as a ladder rather than as a single verdict.
+  // Conditional and drop-when-absent: a dark world stamps nothing and serializes
+  // exactly as it did before this wave.
+  const metadata = {
+    tick,
+    dwell,
+    lifecycle: {
+      residual: pop,
+      forced,
+      ...(emptied ? { emptied: true } : {}),
+      ...(viabilityGrade ? { viabilityGrade: String(viabilityGrade) } : {}),
+    },
+  };
   if (spatialActive) {
     // M4 realized-debit dispatch: the shed pool the migrationKernel reads
     // POST-APPLY (conservation asserted in dispatchMigrations).
@@ -435,6 +458,11 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
         // Stamped ONLY when the census, not the label, is what put this settlement on
         // the bottom rung. A label-thorp death is the legacy outcome, byte for byte.
         viabilityLadder: tier !== 'thorp',
+        // WAVE P4: the NAMED rung, from the ONE grade read. Null when the wave is dark,
+        // which drops the key entirely (the P1a viabilityLadder precedent exactly).
+        viabilityGrade: demographicsLit
+          ? viabilityGradeOf(s, worldState, cid).grade
+          : null,
         dwell: emptied && zeroSince != null ? tick - zeroSince : declineDwell,
         applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
       }));

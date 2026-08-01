@@ -47,6 +47,14 @@ import { foreignClashIntensityOf } from './convergence.js';
 // D4 (DESIGN_SIM_DEPTH_R2): balance_restored — the peace mirror of fear_of_dominance. Reads
 // the SAME belief-side hegemony sphere context; 0 when no sphere ⇒ byte-identical.
 import { makeHegemonyFear } from './hegemonyFear.js';
+// hopelessness — the §14.3-named mirror of opportunism. THE SAME believed vulnerability
+// gradient the war side reads, taken with the opposite sign, off the SAME leaf: one
+// measurement, so the casus and its mirror cannot drift. 0 when the gradient favours this
+// party (that is the war side's appetite) ⇒ byte-identical.
+import { makeOpportunismRead } from './opportunism.js';
+// common_rite — the mirror of sacred_claim, off the SAME closed faith×alignment quadrant.
+// 0 when the faith flag is dark or either town names no patron ⇒ byte-identical.
+import { makeSacredClaimRead } from './sacredClaim.js';
 // D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe peace mirrors — debt_forgiven (aid re-read as a
 // gift again) + bonds_of_commerce (the trade tie re-read as a binding mutual commerce). Pure
 // reads over THIS tick's reframe ledger (written by advanceWarReasons, which runs first). 0 when
@@ -378,6 +386,10 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
   // D4: the hegemony fear context (same belief-side read as the war side) — balance_restored
   // rises as a feared sphere crumbles. hasSphere false ⇒ 0 everywhere ⇒ byte-identical.
   const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
+  // The predation + faith contexts, built ONCE per pass — the SAME two leaves the war
+  // mover builds, so both sides of each mirror come off one reading.
+  const opportunismRead = makeOpportunismRead({ snapshot, worldState });
+  const sacredClaimRead = makeSacredClaimRead({ snapshot, worldState });
 
   // The live war pairs, both directions, codepoint-ordered.
   /** @type {Map<string, { partyId: string, foeId: string }>} */
@@ -489,6 +501,13 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       // no such bright reading ⇒ byte-identical (reframe reads THIS tick's fresh ledger).
       { type: 'debt_forgiven', ...scoreDebtForgiven({ forgiven01: debtForgiven01(worldState, partyId, foeId) }, key) },
       { type: 'bonds_of_commerce', ...scoreBondsOfCommerce({ bonds01: bondsOfCommerce01(worldState, partyId, foeId) }, key) },
+      // HOPELESSNESS: partyId believes foeId could bear this war far longer than it can —
+      // the vulnerability gradient of the war side, read from the losing end. No capability
+      // damper: being unable to march is part of being hopeless, never a reason to fight on.
+      { type: 'hopelessness', ...opportunismRead.hopelessnessOf(partyId, foeId) },
+      // COMMON RITE: the two courts already stand on one floor. Distinct from `mediation`,
+      // which is a THIRD party standing between them.
+      { type: 'common_rite', ...sacredClaimRead.commonRiteOf(partyId, foeId) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);

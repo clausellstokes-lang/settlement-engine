@@ -89,9 +89,18 @@ import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourc
  *   history?: { historicalEvents?: Array<Record<string, unknown>> },
  *   institutions?: Array<Record<string, unknown>>,
  *   npcs?: Array<Record<string, unknown>>,
- *   economicState?: { prosperity?: unknown },
+ *   economicState?: { prosperity?: unknown, foodSecurity?: unknown },
  *   activeConditions?: LcCondition[],
  *   populationHistory?: LcPopHistoryEntry[] }} LcSettlement
+ *
+ * `economicState` carries BOTH readings on purpose, and carries them in the spelling
+ * the siblings already use (migrationKernel / upswingKernel / generosityKernel all
+ * declare prosperity beside foodSecurity on one settlement read shape). The lifecycle
+ * lane reads prosperity; wave P4 hands the same record to the demographic readers,
+ * whose DemoSettlement declares `foodSecurity?: unknown`. Declaring only prosperity
+ * here did not make the food half absent from the record — it made the two read
+ * shapes structurally disjoint, which is what a `has no properties in common`
+ * mismatch is. One record, one spelling, no third shape minted.
  */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: LcSettlement }} LcSnapItem */
 /** @typedef {{ settlements?: LcSnapItem[] }} LcSnapshot */
@@ -557,7 +566,10 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       worldState,
       settlementUpdates: updates,
       changed: demo.changed,
-      newsEntries: [],
+      // WAVE P4: the demographic lane's Herald lines are ITS news, gated by ITS flag, so
+      // they must survive this module's own dormancy gate. Dark demographics returns an
+      // empty array here, which is the same [] this path always returned.
+      newsEntries: demo.newsEntries,
       receipts: [
         .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
         ...demo.migrationReceipts,

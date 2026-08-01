@@ -72,6 +72,7 @@ import { formatCount } from '../formatNumber.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
 import { advanceDemographicMigration } from './demographicsMigration.js';
 import { advanceDemographicPlans } from './demographicsPlans.js';
+import { demographicNewsEntries } from './demographicsHerald.js';
 import {
   demographicsActive,
   demographicRates,
@@ -178,7 +179,9 @@ function demographicLine(f) {
  *   provisionRaised: number, provisionSpent: number, provisionForfeited: number }}
  *   planAccounting WAVE P3: raised equals spent plus forfeited plus what plans still
  *   hold, and a pin adds it up.
- * @property {Array<Record<string, unknown>>} newsEntries always empty (P4 owns the Herald)
+ * @property {Array<Record<string, unknown>>} newsEntries WAVE P4: the Herald's demographic
+ *   lines, built by demographicsHerald.js from the receipts above under the NEWS ADDRESS
+ *   LAW. Banded rather than per settlement per tick, so the Herald stays a newspaper.
  */
 
 /** The accounting a dormant or unmoved tick reports. @returns {{ departures: number,
@@ -391,6 +394,17 @@ export function advanceDemographics({
     planReceipts: planned.receipts,
     foundIntents: planned.foundIntents,
     planAccounting: planned.accounting,
-    newsEntries: [],
+    // ── WAVE P4, THE HERALD (design §8, the NEWS ADDRESS LAW). The receipts above were
+    // authored honestly by P1 and P2 precisely so this slice could CONSUME them rather
+    // than re-derive them, and it does: the lines are a pure function of what the step
+    // and the homeostat already recorded, so the newspaper and the engine can never
+    // disagree about what happened. ──
+    newsEntries: demographicNewsEntries({
+      receipts,
+      migrationReceipts: moved.receipts,
+      tick: stepTick,
+      now: null,
+      nameOf: (id) => nameById.get(String(id)) || String(id),
+    }),
   };
 }

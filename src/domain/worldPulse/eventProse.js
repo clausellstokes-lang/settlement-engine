@@ -247,6 +247,31 @@ export const WAR_RECEIPTS = Object.freeze({
     'Our workshops and granaries were fastened to their custom deliberately. The reliance was shaped into a leash.',
     'Our craft and provisions were made to lean on their markets by intent. The dependence was meant to bind.',
   ],
+  // OPPORTUNISM (the vulture war, §14.1). The clause naming WHAT the court believes and
+  // whether it is wrong is appended by opportunism.js — these lines carry the appetite,
+  // the perceived-vulnerability clause carries the epistemics.
+  opportunism: [
+    'They are weaker now than they will ever be again. A season like this does not come twice.', // canonical (keyword: weaker)
+    'They will never be weaker than they are this season. Such an hour does not return.',
+    'Their guard is down and their house divided; they are weaker now than they will be again. The moment is the argument.',
+    'Weaker than they have been in a generation, and mending. Wait, and the chance is gone.',
+  ],
+  // SACRED CLAIM (§14.1 ideology/faith), split by the CLOSED quadrant vocabulary: a
+  // schism is a quarrel inside one rite, a natural enemy a quarrel between two.
+  sacred_claim: {
+    schism_axis: [
+      'They keep our god and read it backwards. A heresy at our own altars is worse than a stranger god.', // canonical (keyword: heresy)
+      'They name our god and invert its every teaching. Heresy among our own is fouler than any stranger creed.',
+      'Ours is the god they claim, and they have turned it inside out. A heresy at home outweighs a foreign altar.',
+      'They pray to our god in a corrupted tongue. Heresy under our own roof is the graver wrong.',
+    ],
+    natural_enemy: [
+      'Their altars serve what ours abhor. There is no treaty to be made between such rites.', // canonical (keyword: altars)
+      'What their altars honour, ours abhor. No treaty holds between rites so opposed.',
+      'Their rite venerates everything our altars condemn. Between such faiths there is nothing to sign.',
+      'Their altars and ours want opposite things of the world. No compact survives that.',
+    ],
+  },
   // fear_of_dominance — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
@@ -343,6 +368,29 @@ export const PEACE_RECEIPTS = Object.freeze({
     'Our workshops and granaries are too bound to their custom. A war would cost more than either could bear.',
     'So much of our craft and provision leans on their markets. A war would ruin both courts before it settled anything.',
   ],
+  // HOPELESSNESS (§14.2 no-other-options) — the MIRROR of opportunism: the same believed
+  // balance, read from the losing end. The perceived clause is appended by opportunism.js.
+  hopelessness: [
+    'They can bear this longer than we can. Every month we fight, the gap widens against us.', // canonical (keyword: bear this longer)
+    'They can carry this war longer than we can. Each month we hold out, the gap grows against us.',
+    'Their strength outlasts ours by a wide margin. The longer this runs, the worse our position.',
+    'We cannot outlast them, and every season proves it further. There is no victory down this road.',
+  ],
+  // COMMON RITE (§14.2 moral/faith) — the same quadrant as sacred_claim, read the other way.
+  common_rite: {
+    brothers: [
+      'We keep the same god and read it the same way. There is a floor here both courts can stand on.', // canonical (keyword: same god)
+      'The same god, and the same reading of it. Both courts have a floor to stand on here.',
+      'One god between us, understood alike. That is common ground enough for terms.',
+      'We share a god and an understanding of it. Two courts on one floor can be brought to terms.',
+    ],
+    respectable_rival: [
+      'Their rite is not ours, but it asks the same things of a person. Two honest faiths can share a table.', // canonical (keyword: share a table)
+      'Their rite differs from ours, yet asks the same of a person. Honest faiths can share a table.',
+      'A different altar, the same virtues taught beneath it. Such courts can sit at one table.',
+      'We do not share their god, but we recognise what it asks. That is enough to share a table.',
+    ],
+  },
   // balance_restored — authored in hegemonyFear.js (see HEGEMONY_RECEIPTS below).
 });
 
