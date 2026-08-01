@@ -138,6 +138,19 @@
 >   I3 (brokerage services), I4 (the Whisper Market's plant), K2 (magic regimes +
 >   the two-sided band), K3 (the disaster buffer), K4 (substitution + reagents).
 >   Then the full soak redo, then tuning.
+> - 2026-08-01 (BUILD ERA, batch 6 LANDED - EVERY DIRECTIVE WAVE IS BUILT):
+>   I3+I4 @ 007e0dcf (query/feed/plant + patronage; the knowledge lane gains its
+>   institutional generators), K2 @ 230e0f22 (regimes, forms, the tied
+>   practitioner), K3 @ e2614d4f (the buffer; a rounding overdraw caught by the
+>   conservation pin), K4 @ 7b6639f9 (substitution + reagents; the golden-shifting
+>   change deliberately NOT written). Gate exit 0. THE 300-YEAR BASELINE SOAK
+>   COMPLETED AND FAILED AS EVIDENCE: population runaway (29T by year 300, smooth
+>   x1.07/yr, bifurcation against six floored settlements; receipt preserved).
+>   OWNER RATIFIED THE CURE 2026-08-01: the DEMOGRAPHIC ENGINE (wave P) - density
+>   ceilings by tier, food as carrying capacity, satellites as purposeful overflow,
+>   natural mortality (named NPCs exempt), push-pull migration, stressor-coupled
+>   curbs. Architecture: docs/DESIGN_DEMOGRAPHIC_ENGINE.md. ALL SOAK REDOS WAIT on
+>   wave P (a pre-cure soak would re-prove a known defect).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
