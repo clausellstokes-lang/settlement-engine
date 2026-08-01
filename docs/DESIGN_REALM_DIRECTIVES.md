@@ -489,6 +489,53 @@
 >   offered and refused" is exactly the kind of fact a table remembers, it changes the
 >   relationship record, and per the address law it names who offered, who refused,
 >   and — where the receipt can honestly say it — whose books the refusal served.
+> - ⭐⭐ 2026-08-01 AMENDMENT H — A COALITION INSIDE THE WALLS CAN OVERTURN THE RULER
+>   OVER A WAR DECISION. Owner: "coalitions can overturn the legitimate ruler inside
+>   of a settlement for many decisions, including suing for peace." D made a ruler
+>   change re-read the war; H makes THE WAR DECISION ITSELF THE TRIGGER for the
+>   change. The causation runs the other way and both directions must exist.
+>   ── THE MECHANISM, all of it already built: factions, the coup lane, the ladder
+>   contest, legitimacy. A ruler who REFUSES a peace the powers within want, or SUES
+>   a peace they oppose, forms the coalition against themselves — the decision is the
+>   organizing grievance. This is G's counterforce made immediate and causal rather
+>   than diffuse: the settlement does not merely suffer and slowly erode its ruler, it
+>   ACTS, and it acts about this specific choice.
+>   ── BOTH POLARITIES, pinned: the war party overturns a ruler who would end it, and
+>   the peace party overturns a ruler who would not. Neither is the default.
+>   ── AND THE SUCCESSOR INHERITS THE DECISION, not a blank slate: a ruler installed
+>   BY a peace faction arrives owing them a peace, which D's re-read must honour or
+>   the coup was pointless. The Herald names the chain — refusal, coalition, removal,
+>   terms — because that sequence is a whole story and a table will remember it.
+> - ⭐⭐ 2026-08-01 AMENDMENT I — MULTI-PARTY AND COALITION WAR: EVERY RULING ABOVE
+>   EXTENDS, AND THE ARCHITECTURE ALREADY WANTS IT. Owner: expand all of this to wars
+>   between allied kingdoms and to three-or-more-party wars.
+>   ── ⭐ THE LOAD-BEARING INSIGHT: the reasons layer is ALREADY PER-PAIR (the live
+>   per-pair reason loop). So a multi-party war is NOT a monolithic object with a
+>   winner — it is A GRAPH OF BILATERAL RELATIONSHIPS, each edge carrying its own
+>   cause, its own projected costs, its own trajectory and its own termination read,
+>   bound loosely by alliance. Build it that way and most of what follows falls out
+>   rather than being special-cased.
+>   ── CAUSES DIFFER PER EDGE, AND SO DO THEIR DEATHS: A fights B over a grievance; C
+>   joins A under alliance and has NO grievance with B at all. C's cause is the
+>   alliance itself, and C's dissolution condition is therefore different — when A's
+>   grievance dissolves, C may already have nothing left to fight for, or may have
+>   acquired its own quarrel in the meantime. Pin both.
+>   ── ⭐ SEPARATE PEACE IS THE HEADLINE DRAMA AND IT FALLS OUT FOR FREE: each party
+>   runs G/G2 on its OWN books, so one ally can sue and exit while the others fight
+>   on. That is betrayal or prudence depending on who tells it, it is a first-class
+>   Herald event, and it must feed the relationship record as the grievance it is.
+>   ── COALITION COHESION IS A REAL FORCE: allies bleed for someone else's war (G2),
+>   and a member whose home front (F) is draining for a cause that was never theirs
+>   exits soonest. Different trajectories per party are normal — a coalition can be
+>   winning overall while one member is being ruined on its own front, and that member
+>   sues first. This is the multi-party shape worth building for.
+>   ── THE ALLIANCE WEB (E3) RESOLVES INTO SIDES: who joins whom is already read for
+>   risk; the same read decides who is actually IN the war. Second-order matters — an
+>   ally's ally may join, or may refuse and be remembered for refusing.
+>   ── ⚠️ SCOPE DISCIPLINE: this must not become a diplomacy simulator. Peace is
+>   negotiated PAIRWISE along the graph's edges, never as an N-party treaty table.
+>   No new negotiation layer, no multilateral congress. The graph plus the existing
+>   pairwise machinery is the whole implementation.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
