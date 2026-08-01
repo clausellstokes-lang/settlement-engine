@@ -694,6 +694,42 @@
 >   network and interception, and the reputation race. What is genuinely NEW is small:
 >   the envoy errand itself, the knowledge snapshot, the coalition vote, and the
 >   non-return inference. Build it as wiring and it stays affordable.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT K2 — THE INTERCEPTOR'S DILEMMA, BILATERAL
+>   RATIFICATION, AND THE COMPROMISE ROUND.
+>   ── ⭐ K2.1 CATCHING AN ENVOY IS A PROBLEM, NOT A PRIZE. An army that intercepts
+>   one must DECIDE: hold its current path and mission, or turn back to an ALLIED,
+>   OCCUPIED or otherwise RELATED settlement so the terms can be carried to its own
+>   coalition's vote. Carrying peace means abandoning a position, and that is a real
+>   military cost weighed like any other (F's comparative costs, the commander's own
+>   books per G). An occupied enemy settlement counts as a venue, which is a nice
+>   irony worth allowing: terms heard in a hall the bearer's army took.
+>   ── K2.2 THE OTHER SIDE RUNS THE SAME PROCESS. Whatever the army brings home goes
+>   to the same K.6 authority — majority of the legitimate powers, with the coalition
+>   able to veto a member's own ruler. No shortcut exists for the side that happened
+>   to do the intercepting.
+>   ── ⭐ K2.3 BOTH SIDES MUST AGREE, AND EITHER SIDE ALONE CAN REFUSE. This is G2's
+>   "two yeses, one no" made concrete at coalition scale: if either body declines,
+>   there is no peace. No majority-of-the-whole, no arbitration, no tiebreak.
+>   ── ⭐⭐ K2.4 THE COMPROMISE ROUND, and it is the best mechanic in the whole envoy
+>   design: if the vote is CLOSE, both sides send out an envoy ONE LAST TIME to hash
+>   out the details and find a middle. Not one side — BOTH, simultaneously, each
+>   travelling the same dangerous roads under every risk in K.3. AND THE WAR CONTINUES
+>   THROUGHOUT: there is no ceasefire for talks, so the home fronts keep draining
+>   while the messengers walk. ⭐ THE COMPOUNDING IS THE POINT: the closer the vote,
+>   the more rounds; the more rounds, the more chances a messenger is taken, planted
+>   on, imprisoned, or simply too slow — so a peace that was nearly agreed can fail on
+>   the road, repeatedly, while both realms bleed. That is not a bug to be smoothed;
+>   it is the most honest thing in the model.
+>   ── THE CONVERGENCE PRESSURE IS ALREADY THERE AND NEEDS NO TIMER: every round costs
+>   time, the war continues during it, and F's home-front stream keeps accruing
+>   against both sides. Negotiation cannot run forever because it is expensive to
+>   negotiate. If a round limit is ever needed, that is a tuning band and a confession
+>   that the costs are mistuned.
+>   ── "CLOSE" IS A BAND (tuning property, owner-signed): how near a vote must be to
+>   earn another round, and whether repeated near-misses widen or narrow it.
+>   ── LEGIBILITY: the Herald must be able to say a peace FAILED ON THE ROAD rather
+>   than failing at the table — "the terms were agreed and the envoy never reached
+>   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
