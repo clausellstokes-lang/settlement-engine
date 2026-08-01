@@ -171,6 +171,31 @@
 >   maximal at true polar opposition, zero at shared alignment. Reads the local
 >   pantheon the deity doctrine already generates (no premade pool), banded per
 >   finite semantics.
+> - ⭐ 2026-08-01 AMENDMENT A — EVERY CAUSE NEEDS A REAL COUNTERFORCE, not just a
+>   mirror word. A peace mirror satisfies the walker; a COUNTERFORCE is what keeps
+>   the cause from becoming a one-way slide in play. Each of the three ships with
+>   the force that opposes it, scoring off the SAME evidence: (1) predation is
+>   opposed by the victim's patrons and by the aggressor's own restraint (amendment
+>   B) — taking a harmless neighbour must cost something a court can feel; (2) the
+>   lineage claim is opposed by KINSHIP, because the same parent-child edge that
+>   mints the claim is equally a bond; (3) the faith war is opposed by shared rite
+>   and by the fact that polar opposition is RARE — most pairs sit near each other
+>   on the axes and read zero. Pin each counterforce as able to WIN, never a stub.
+> - ⭐ 2026-08-01 AMENDMENT B — ABSOLUTE COHERENCE WITH SETTLEMENT STATE (owner:
+>   "coherent with everything within the state of a settlement from alignment to
+>   history to NPCs to everything"). A casus belli is not a free-floating score; it
+>   must be IN CHARACTER for the place that raises it. Binding: (i) ALIGNMENT
+>   WEIGHTS MOTIVE — a lawful or good settlement does not predate a harmless
+>   neighbour the way a chaotic or evil one does; alignment suppresses or refuses
+>   the causes that contradict it, which is also predation's primary counterforce.
+>   (ii) THE RULING NPCs MATTER — the seat's officeholders and their facets modulate
+>   appetite (an ambitious ruler and a cautious one do not reach for the same war),
+>   and a compromised or jailed ruler is not the same actor. (iii) HISTORY BINDS —
+>   the chronicle and the relationship record must agree with the claim: you do not
+>   sack the satellite you spent a decade provisioning. (iv) NOTHING MAY CONTRADICT
+>   A LIVE READ — if the settlement's own state says one thing and the casus says
+>   another, the casus is wrong. Every new scorer names in its RECEIPT which state
+>   made it, so incoherence is visible rather than silent.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
