@@ -908,6 +908,10 @@ function mintNews(aggressorId, targetId, name, ev, stages, tick) {
     ],
     settlementIds: [String(aggressorId), String(targetId)],
     significance: 'notable',
+    // Material weight for the reader-facing meters (absent severity clamps to 0 and
+    // renders "Severity 0%"; register per the upswing exemplars): a minted plan is a
+    // threat declared, not yet a wound.
+    severity: 0.45,
     score: 62,
     tick,
   };
@@ -936,6 +940,7 @@ function raidNews(aggressorId, targetId, stage, name, wrongVillage, confidence01
     reasons,
     settlementIds: [String(aggressorId), String(stage.satelliteId), String(targetId)],
     significance: 'major',
+    severity: 0.65, // a village burned: the heaviest beat this doctrine mints
     score: 70,
     tick,
   };
@@ -959,6 +964,7 @@ function abandonNews(aggressorId, targetId, name, adapted, tick) {
     ],
     settlementIds: [String(aggressorId), String(targetId)],
     significance: 'notable',
+    severity: 0.4, // a squeeze released, not a wound dealt
     score: 60,
     tick,
   };
@@ -978,6 +984,7 @@ function completeNews(aggressorId, targetId, name, plan, tick) {
     ],
     settlementIds: [String(aggressorId), String(targetId)],
     significance: 'notable',
+    severity: 0.5, // the target's web is thinned and bled: material, short of a razing
     score: 62,
     tick,
   };

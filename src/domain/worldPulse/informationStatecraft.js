@@ -667,6 +667,7 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
         // actor and the entry serializes exactly as before.
         ...(rec.spokespersonNpcId ? { npcIds: [String(rec.spokespersonNpcId)] } : {}),
         significance: 'notable',
+        severity: 0.45, // material weight for the reader-facing meters (absent clamps to 0)
         score: 61,
         tick: now,
         tags: ['world_pulse', 'infowar', 'deception', 'exposed_lie', 'grievance', 'legitimacy'],
@@ -1066,6 +1067,7 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
             ],
             settlementIds: [String(watcherId), String(targetId)],
             significance: 'notable',
+            severity: 0.4, // eyes burned and a grievance banked, no walls touched
             score: 59,
             tick: now,
             tags: ['world_pulse', 'infowar', 'see', 'spy_exposed', 'grievance', 'legitimacy'],
@@ -1383,6 +1385,7 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
         reasons: [`The report carries ${nameFn(String(rec.sellerId))}'s own certainty, no better — a courier's word is only as sure as its source.`],
         settlementIds: [String(rec.sellerId), receiverId, subjectId],
         significance: 'notable',
+        severity: 0.35, // information changing hands: the lightest material beat here
         score: 60,
         tick: nowTick,
         tags: ['world_pulse', 'infowar', 'intel_trade', gift ? 'intel_gift' : 'intel_sale'],

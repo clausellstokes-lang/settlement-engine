@@ -887,6 +887,14 @@ function mintTreaty(args) {
     id: `wizard_news.${tick}.treaty_signed.${stablePart(victorId)}.${stablePart(loserId)}`,
     kind: 'treaty_signed',
     impactKind: 'diplomacy',
+    // A dictated peace ENDS A WAR — a major beat by any in-world reading, on par with
+    // the climb-down (major/68). Without these three, normalizeEntry graded it notable
+    // with severity 0 and score 0: invisible weight on the one beat that closes an arc.
+    // Also the reader-facing meters: absent severity renders "Severity 0%" on the card
+    // and seeds rumors at the mildest magnitude band.
+    significance: 'major',
+    severity: 0.55,
+    score: 66,
     tick,
     headline: separateExit
       ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`

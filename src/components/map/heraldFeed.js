@@ -93,8 +93,12 @@ export function toHeraldItem(record, forced) {
   const section = forced || heraldSectionOfRecord(record);
   const severity = num(record.severity ?? o.severity ?? (o.score != null ? Math.min(1, num(o.score) / 100) : 0));
   const major = record.significance === 'major' || o.significance === 'major' || severity >= 0.72;
+  // `kind` falls to record.kind LAST: on ordinary wizard entries `kind` is a lifecycle
+  // word ('applied'/'queued') and impactKind fires first, but the late-lane authors
+  // (momentum/webwar/infowar) mint their routing token AS the kind with no impactKind —
+  // without this tail their HeraldItem.kind would be ''.
   const kind = String(o.impactKind || o.candidateType || record.impactKind || record.candidateType
-    || (o.stressor && o.stressor.type) || record.type || o.type || '');
+    || (o.stressor && o.stressor.type) || record.type || o.type || record.kind || o.kind || '');
   const authoredHeadline = record.headline || o.headline || labelOf(record) || labelOf(o);
   return {
     id: String(record.id ?? o.id ?? `${section}-${kind}-${record.tick ?? ''}`),
@@ -154,6 +158,23 @@ export function buildHeraldFeed(campaign, opts = {}) {
         headline: label ? `${label} has lifted` : 'A recorded pressure has lifted',
       }));
     }
+  }
+
+  // The wizard-news feed — the module header's promised second source, wired
+  // 2026-07-31. The impactDigest above is frozen from `applied.newsEntries` BEFORE the
+  // kernel's late-lane appends (momentum cracks, supply-web campaigns, infowar,
+  // treaties), so those beats exist ONLY here: without this read the Herald's doors
+  // never showed them even after their receipts gained ids. Read-only on data the
+  // campaign already carries; the `seen` set dedupes the digest twins by id, so an
+  // entry recorded in both sources files once. Lens: a pulse's movers are handed
+  // worldState.tick — the same value the pulse record stores — so `tick >=
+  // latestPulse.tick` IS "this advance's beats"; with no recorded pulse the whole
+  // feed is current.
+  const latestPulseTick = pulses.length ? num(pulses[pulses.length - 1]?.tick) : null;
+  for (const entry of (campaign?.wizardNews?.entries || [])) {
+    if (!entry || entry.id == null) continue;
+    if (lens === 'advance' && latestPulseTick != null && num(entry.tick) < latestPulseTick) continue;
+    file(toHeraldItem(entry));
   }
 
   // Lens-independent operational substrate — the live stressors. Active

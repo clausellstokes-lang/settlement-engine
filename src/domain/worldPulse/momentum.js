@@ -1174,6 +1174,11 @@ export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exit
     settlementIds: [String(actorId), String(targetId)],
     significance: 'major',
     score: 68,
+    // MATERIAL WEIGHT for the reader-facing meters (added with the id fix's follow-up):
+    // normalizeEntry clamps an absent severity to 0, so this major beat rendered
+    // "Severity 0%" on its card and seeded rumors at the mildest magnitude band. 0.6 =
+    // the bust/upswing 'major' register (upswingKernel bustNews).
+    severity: 0.6,
     tick,
   };
 }
