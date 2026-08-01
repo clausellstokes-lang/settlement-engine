@@ -735,7 +735,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} narrativeNote={null}
         onRerollNPCs={npcAuthoringAllowed && onRegenerate ? () => onRegenerate('npcs') : null} pinnedIds={pinnedIds}
-        onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed} />;
+        onTogglePin={onTogglePin} canAuthorNpc={npcAuthoringAllowed}
+        saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
       case 'resources':  return <ResourcesTab settlement={s} narrativeNote={null} />;
       case 'viability':  return <ViabilityTab settlement={s} narrativeNote={null} />;

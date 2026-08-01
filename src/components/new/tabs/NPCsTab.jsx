@@ -7,6 +7,10 @@ import {relStyle} from '../tabConstants';
 import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
+// W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
+// already-lazy tab (HeraldBody's rule for small children of an open door), and it
+// self-hides entirely when the owning realm does not run the consequence economy.
+import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 import LockControls from '../../dossier/LockControls.jsx';
@@ -19,12 +23,34 @@ export function NPCsTab({
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
+  saveId = null,
+  playerView = false,
+  publicDossier = false,
 }) {
   const [search, setSearch] = useState('');
   const [impFilter, setImpFilter] = useState('all');
   const pinnedCount = pinnedIds instanceof Set ? pinnedIds.size : 0;
 
-  if (!npcs?.length) return <Empty message="No NPCs generated. Generate a settlement to see key figures."/>;
+  // The unaffiliates are people the WORLD ledger holds against this place, not roster
+  // entries, so they survive an empty roster and are rendered beside the empty state
+  // rather than behind it.
+  const unaffiliates = (
+    <UnaffiliatesSection
+      saveId={saveId}
+      settlement={settlement}
+      playerView={playerView}
+      publicDossier={publicDossier}
+    />
+  );
+
+  if (!npcs?.length) {
+    return (
+      <div>
+        <Empty message="No NPCs generated. Generate a settlement to see key figures."/>
+        {unaffiliates}
+      </div>
+    );
+  }
 
   const highCount = npcs.filter(n=>n.influence==='high').length;
   const modCount  = npcs.filter(n=>n.influence==='moderate').length;
@@ -144,6 +170,8 @@ export function NPCsTab({
           </div>
         </Collapsible>
       )}
+
+      {unaffiliates}
 </div>
   );
 }

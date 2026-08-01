@@ -113,6 +113,20 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // false in the full_simulation spread and lit in no preset), and nothing calls it
     // from the pulse yet.
     'src/domain/worldPulse/npcCirculation.js',
+    // W-H4 THE THREE DM VERBS (dark): markRosterDeath and clearJailHold read the RAW,
+    // UNTOUCHED roster of the HOST SAVE (settlement.npcs) to stamp a death mark and to
+    // clear a jail hold. Both are MUTATION reads of the stripNpcInfluence kind, not stage
+    // reads, and they are participation-INDEPENDENT for three separate reasons. (1) A DM's
+    // ruling lands on a person whether or not they were on-stage this tick — and the people
+    // a PARDON exists for are precisely the ones participation excludes, so filtering here
+    // would make the mercy verb unable to reach a jailed figure. (2) The settlement these
+    // functions receive is the SAVED settlement handed down by npcVerbsBody.js, never the
+    // snapshot projection, so there is no gate between them and the roster to honour. (3)
+    // Writing a mark through the filtered projection would strand the alias copies (the
+    // JSON-alias trap) exactly as the H2 relinquishment would. Dormant by default
+    // (npcConsequencesEnabled has no entry in DEFAULT_SIMULATION_RULES) and unreachable
+    // from the pulse: only a DM pressing a verb calls it.
+    'src/domain/worldPulse/npcDmVerbs.js',
     'src/domain/worldPulse/npcGrowthKernel.js',
     'src/domain/worldPulse/npcLadderChallenge.js',
     // D-4 (fold batch 3): `.npcs` here is the ladder-standings map PARAMETER (a

@@ -230,6 +230,19 @@ export const OPERATIONS = Object.freeze({
   // R-1 (queue #5): the proposal-ring inverse — pops the newest pre-apply
   // snapshot from the session proposalUndoStack; never touches advance snapshots.
   undoLastProposalApply: { opType:'undoLastProposalApply', label:"Undo a proposal apply", description:"Reverses the most recent applied world-pulse proposal on the campaign, restoring the world and its settlements to just before the apply. The proposal returns to pending review.", klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // ── W-H4: THE THREE DM VERBS over the world NPC ledger, plus their one inverse ──
+  // (design DESIGN_NPC_CONSEQUENCES.md §7). Law 1 says the engine resolves no fate and
+  // the DM's authority is total; these rows ARE that authority's registered surface.
+  // All three are ARMED, and they share ONE inverse the way the two stressor verbs share
+  // undoCampaignStressorBridge: each verb hands back a typed inverse payload (the prior
+  // placement / the removed record verbatim / the lifted edges), which the ring replays.
+  // The undoState is 'action' rather than 'action-partial' because the payload restores
+  // BOTH halves a verb can touch — the world ledger through the pure inverse, and the
+  // host settlement's roster mark through the before-image the ring carries beside it.
+  assignNpc: { opType:'assignNpc', label:"Settle a wanderer", description:"Settles a wandering named figure into one of the realm's settlements. The realm's rulers can overrule a standing banishment when the DM says so explicitly, and the receipt names the order it set aside. It can be undone with Undo the last ruling.", klass:'macro', slice:'npcVerbsSlice', targetScope:'campaign', receiptRef:'npcRulings-entry(npc_assignment)', undoToken:'undoLastNpcVerb', undoState:'action' },
+  killNpc: { opType:'killNpc', label:"Record a death", description:"Records that a named figure in the realm's register of wanderers has died, striking them from it and ending any order standing against them. This is the only death the system ever writes, and it can be undone with Undo the last ruling.", klass:'macro', slice:'npcVerbsSlice', targetScope:'campaign', receiptRef:'npcRulings-entry(npc_death)', undoToken:'undoLastNpcVerb', undoState:'action' },
+  pardonNpc: { opType:'pardonNpc', label:"Pardon a wanderer", description:"Lifts the banishment orders shut against a named figure, at one settlement or at every settlement, and releases them from a sentence their host settlement was holding them under. It can be undone with Undo the last ruling.", klass:'macro', slice:'npcVerbsSlice', targetScope:'campaign', receiptRef:'npcRulings-entry(npc_pardon)', undoToken:'undoLastNpcVerb', undoState:'action' },
+  undoLastNpcVerb: { opType:'undoLastNpcVerb', label:"Undo the last ruling", description:"Reverses the most recent ruling the DM handed down over the realm's wanderers, restoring the world register and withdrawing the notice from the Herald.", klass:'macro', slice:'npcVerbsSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   // ── K-B MECHANICAL — simple setters/updaters of durable/domain state ──
   // (No count in this header: the old "(118)" rotted to 124 unnoticed. Census
   //  the live number with `grep -c "klass:'mechanical'"` — never transcribe it.)

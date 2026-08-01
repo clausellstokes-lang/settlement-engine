@@ -1033,6 +1033,26 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium/op-assignnpc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-killnpc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-pardonnpc</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium/op-undolastnpcverb</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium/op-setscenequalitymode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

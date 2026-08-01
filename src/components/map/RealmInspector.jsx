@@ -26,7 +26,10 @@
  */
 
 import { Suspense, useCallback, useMemo, useEffect, useRef, useState } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, ScrollText, Landmark, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+// Footprints is a MAP-ONLY icon (no surface outside src/components/map imports it), so
+// vite's map-only lucide split routes it into the lazy vendor-icons-map chunk and it
+// costs first paint nothing. @see tests/build/iconChunkSplit.test.js
+import { LayoutDashboard, Swords, Sparkles, Coins, CalendarClock, Eye, Gavel, ScrollText, Landmark, Footprints, Route, History, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
@@ -56,6 +59,13 @@ import {
   writeHeraldCommandSession,
 } from './heraldCommandSession.js';
 import { buildRealmItemReadModel } from '../../domain/realm/realmItemReadModel.js';
+// W-H4's tab-presence gate, read through the ledger's OWN canonical accessor rather
+// than a second spelling of `simulationRules.npcConsequencesEnabled === true` — the
+// heraldRegister precedent (importing the one writer's reader is what stops a surface
+// drifting from the engine). Deliberately NOT `wanderersDoorOpen` from
+// heraldWanderers.js: that module carries the whole register read model, and a static
+// edge to it from this chrome would fold the lazy door's body into the inspector chunk.
+import { npcConsequencesActive } from '../../domain/worldPulse/npcLedger.js';
 import { flag } from '../../lib/flags.js';
 import RealmItemShadowDiagnostics from './RealmItemShadowDiagnostics.jsx';
 // THE DESK — the two tools, STATIC within this already-lazy chunk (FP-R class): a
@@ -91,11 +101,38 @@ export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'remembrance',  label: 'Ruins & Remembrance', Icon: Landmark },
 ]);
 
+/** THE CONDITIONAL DOOR (W-H4). The Wanderers register is the ONE Herald door that is
+ *  not always present, and the asymmetry is deliberate: the nine doors above all report
+ *  on machinery every realm runs, so an empty one is news ("the realm is at peace").
+ *  The roaming pool is different — a realm whose rules do not run the consequence
+ *  economy has no pool AT ALL, and an empty register of a switched-off system teaches a
+ *  reader that the system is broken. So it is ABSENT when dark rather than present and
+ *  empty, and absent rather than DISABLED (the ai_notes presence lesson: a surface that
+ *  registers itself and then refuses to work is worse than one that never appears).
+ *  @type {Readonly<{ id: string, label: string, Icon: unknown }>} */
+export const WANDERERS_SECTION = Object.freeze({ id: 'wanderers', label: 'Wanderers', Icon: Footprints });
+
+/**
+ * The doors this campaign actually has, in reading order.
+ *
+ * Exported because a tab list that can vary is a thing a pin has to be able to ask
+ * about directly: the presence gate is the contract, and reading it out of a rendered
+ * DOM would test the renderer instead of the rule.
+ *
+ * @param {{ worldState?: unknown } | null | undefined} campaign
+ * @returns {ReadonlyArray<{ id: string, label: string, Icon: unknown }>}
+ */
+export function realmInspectorSectionsFor(campaign) {
+  return npcConsequencesActive(campaign?.worldState || null)
+    ? Object.freeze([...REALM_INSPECTOR_SECTIONS, WANDERERS_SECTION])
+    : REALM_INSPECTOR_SECTIONS;
+}
+
 /** Doors the section-filed feed does not stock, so a narrowing filter must NOT
  *  badge them with a count: a "0" beside Gazetteer would be a lie about a
  *  register that is full. Dashboard and Adjudication have always been in this
- *  set; the two W-C registers join it. */
-const UNCOUNTED_SECTIONS = new Set(['dashboard', 'adjudication', 'gazetteer', 'remembrance']);
+ *  set; the two W-C registers joined it, and W-H4's Wanderers register with them. */
+const UNCOUNTED_SECTIONS = new Set(['dashboard', 'adjudication', 'gazetteer', 'remembrance', 'wanderers']);
 
 /** G-4a's task-oriented doors. Their IDs are accepted only while the internal
  *  migration flag is active; every established section ID remains an alias. */
@@ -249,8 +286,12 @@ export default function RealmInspector({
   const commandCounts = useMemo(() => commandViewCounts(visibleRealmItems), [visibleRealmItems]);
 
   const commandLocation = commandLocationOf(section);
-  const sections = commandBriefOn ? HERALD_COMMAND_SECTIONS : REALM_INSPECTOR_SECTIONS;
-  const legacySectionKnown = REALM_INSPECTOR_SECTIONS.some(candidate => candidate.id === section);
+  const legacySections = realmInspectorSectionsFor(campaign);
+  const sections = commandBriefOn ? HERALD_COMMAND_SECTIONS : legacySections;
+  // A door the campaign does not have is not a KNOWN section, so a session record that
+  // remembers `wanderers` from a realm whose rules later went dark falls back to the
+  // Dashboard rather than rendering a page with no tab to leave it by.
+  const legacySectionKnown = legacySections.some(candidate => candidate.id === section);
   const commandSectionKnown = COMMAND_VIEW_IDS.includes(section);
   const sectionKnown = commandBriefOn ? legacySectionKnown || commandSectionKnown : legacySectionKnown;
   const activeSection = commandBriefOn

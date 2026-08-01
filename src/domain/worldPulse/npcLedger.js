@@ -37,6 +37,15 @@
  * is arithmetically untouched by graduation - the ledger is a pure sidecar over people
  * who already exist.
  *
+ * W-H4 AMENDS THAT SENTENCE, AND THE AMENDMENT IS THE WHOLE POINT OF LAW 1. Since the
+ * DM verbs landed there is exactly ONE function that can drop a soul out of the ledger
+ * (removeNpcRecord) and exactly one that can put a dropped one back (restoreNpcRecord).
+ * They serve the DM's KILL verb and its undo, and nothing else: law 1 says the ENGINE
+ * kills no named character ever and that the DM's authority is total, so the removal
+ * door is not a hole in law 6, it IS law 1. Every engine lane still moves people through
+ * moveNpcRecord alone, and an anchored negative scans those lanes to prove none of them
+ * has learned the removal symbol.
+ *
  * DORMANCY (law 5, constitutional). Everything here is behind the VIRTUAL
  * `npcConsequencesEnabled` flag, which has NO entry in DEFAULT_SIMULATION_RULES. Dark
  * (the default, and every existing campaign) every entry point is an immediate no-op
@@ -53,6 +62,7 @@
  *
  * @enforced-by tests/domain/npcLedgerIdentity.test.js,
  *   tests/domain/npcLedgerState.test.js,
+ *   tests/domain/npcDmVerbs.test.js,
  *   tests/property/npcLedgerDormancyGolden.test.js
  */
 
@@ -63,6 +73,7 @@ import {
   VERDICT_CAUSES,
   COMPROMISE_SOURCES,
   EXCLUSION_KINDS,
+  EDICT_EXCLUSION_KINDS,
   closedValue,
   normalizeReputationFacets,
   normalizeExclusionEdges,
@@ -646,6 +657,166 @@ export function addExclusionEdge(worldState, wnpcId, edge) {
   const nextExclusions = sortedRecords({ ...ledger.exclusions, [id]: merged });
   const next = setNpcLedger(worldState, { ...ledger, exclusions: nextExclusions });
   return { worldState: next, changed: next !== worldState };
+}
+
+/**
+ * LIFT EXCLUSION EDGES against a durable identity (W-H4: the DM's mercy verb).
+ *
+ * The inverse of addExclusionEdge, and it lives HERE for the same reason the adder
+ * does: the exclusions map has exactly one writer, so a pardon cannot invent a second
+ * merge rule that disagrees with the "stricter wins" one above.
+ *
+ * SCOPE IS EXPLICIT AND NARROWING. `settlementId` absent means every door; present
+ * means that door only. `kinds` defaults to the EDICT kinds rather than all of them,
+ * because a pardon is an act against a LEGAL FACT: sweeping a rehost cooldown away as
+ * a mercy would silently hand the pardoned person a free retry at every house that
+ * refused them this tick, which is circulation bookkeeping the DM never asked to touch.
+ * A caller that genuinely wants the cooldown cleared has to say so.
+ *
+ * DORMANT, an unknown id, or nothing to lift ⇒ the SAME worldState reference, so the
+ * gate is a whole-entry-point early return exactly as it is for every sibling.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} wnpcId
+ * @param {{ settlementId?: unknown, kinds?: ReadonlyArray<string> }} [scope]
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, lifted: ReadonlyArray<ExclusionEdge> }}
+ */
+export function liftExclusionEdges(worldState, wnpcId, scope = {}) {
+  if (!npcConsequencesActive(worldState)) return { worldState, changed: false, lifted: [] };
+  const id = String(wnpcId == null ? '' : wnpcId);
+  if (!id) return { worldState, changed: false, lifted: [] };
+  const ledger = npcLedgerOf(worldState);
+  const priorEdges = ledger.exclusions[id] || [];
+  if (priorEdges.length === 0) return { worldState, changed: false, lifted: [] };
+  const door = String(asObject(scope).settlementId == null ? '' : asObject(scope).settlementId);
+  const kinds = Array.isArray(scope.kinds) && scope.kinds.length > 0
+    ? scope.kinds.map(String)
+    : EDICT_EXCLUSION_KINDS;
+  const lifted = priorEdges.filter((edge) => (
+    kinds.includes(edge.kind) && (door === '' || edge.settlementId === door)
+  ));
+  if (lifted.length === 0) return { worldState, changed: false, lifted: [] };
+  const kept = priorEdges.filter((edge) => !lifted.includes(edge));
+  const nextExclusions = { ...ledger.exclusions };
+  // AN EMPTY EDGE LIST IS NOT A RECORD (the npcLedgerOf reading). Deleting rather than
+  // writing `[]` is what lets a fully pardoned world drain back to a byte-identical
+  // dormant one instead of keeping an empty husk that would defeat drop-when-empty.
+  if (kept.length === 0) delete nextExclusions[id];
+  else nextExclusions[id] = kept;
+  const next = setNpcLedger(worldState, { ...ledger, exclusions: sortedRecords(nextExclusions) });
+  return { worldState: next, changed: next !== worldState, lifted: Object.freeze(lifted) };
+}
+
+/**
+ * REMOVE A DURABLE IDENTITY FROM THE LEDGER (W-H4: the DM's KILL verb, and NOTHING
+ * ELSE).
+ *
+ * ── READ THIS BEFORE CALLING IT ─────────────────────────────────────────────────
+ * This is the ONLY function in the estate that can drop a soul out of the world
+ * ledger, and it exists to serve exactly one caller: the DM's explicit KILL verb
+ * (design §7, law 1 NEVER-KILL / DM-SOVEREIGN). Law 6 CONSERVATION says an NPC is
+ * never duplicated and never vanishes; law 1 says the ENGINE kills no named character,
+ * ever, and that the DM's authority is total. The two compose exactly here: every
+ * ENGINE path moves a record between two maps through moveNpcRecord and can never
+ * reach this function, and the one path that removes a person is a DM pressing a
+ * button and getting a receipt they can undo. No pulse kernel, no verdict, no
+ * circulation flow, no residency pass may call this. That rule is not a convention:
+ * it is pinned by an anchored negative that scans the engine lanes for this symbol.
+ *
+ * THE EXCLUSION EDGES GO WITH THEM. A banishment is an edict against a living person;
+ * leaving edges behind would keep a dead name shutting doors, and would leave the
+ * ledger holding an exclusions row for an id neither map knows — the one shape the
+ * conservation reading at npcLedgerOf cannot repair.
+ *
+ * THE RECORD IS RETURNED, and that is the undo. This function keeps no tombstone (§3b
+ * freezes the ledger at three maps), so the removed record IS the receipt: a caller
+ * that wants to reverse a kill re-writes exactly what it was handed.
+ *
+ * DORMANT or an unknown id ⇒ the SAME worldState reference and a null record.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} wnpcId
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean,
+ *   removed: (RoamerRecord|PlacementRecord|null), wasPlaced: boolean,
+ *   exclusions: ReadonlyArray<ExclusionEdge> }}
+ */
+export function removeNpcRecord(worldState, wnpcId) {
+  const none = { worldState, changed: false, removed: null, wasPlaced: false, exclusions: [] };
+  if (!npcConsequencesActive(worldState)) return none;
+  const id = String(wnpcId == null ? '' : wnpcId);
+  if (!id) return none;
+  const ledger = npcLedgerOf(worldState);
+  const wasPlaced = Object.prototype.hasOwnProperty.call(ledger.placed, id);
+  const wasRoaming = Object.prototype.hasOwnProperty.call(ledger.roamers, id);
+  if (!wasPlaced && !wasRoaming) return none;
+  const removed = wasPlaced ? ledger.placed[id] : ledger.roamers[id];
+  const exclusions = ledger.exclusions[id] || [];
+  const placed = { ...ledger.placed };
+  const roamers = { ...ledger.roamers };
+  const nextExclusions = { ...ledger.exclusions };
+  delete placed[id];
+  delete roamers[id];
+  delete nextExclusions[id];
+  const next = setNpcLedger(worldState, {
+    placed: sortedRecords(placed),
+    roamers: sortedRecords(roamers),
+    exclusions: sortedRecords(nextExclusions),
+  });
+  return {
+    worldState: next,
+    changed: next !== worldState,
+    removed,
+    wasPlaced,
+    exclusions: Object.freeze(exclusions),
+  };
+}
+
+/**
+ * RESTORE A REMOVED IDENTITY (W-H4: the undo half of KILL, and nothing else).
+ *
+ * Takes back exactly what removeNpcRecord handed out and puts it where it was. This is
+ * NOT a second graduation door: it writes a record whose durable id was minted once,
+ * long ago, by graduateNpc, so the one-way-door contract is untouched — an id that was
+ * never minted cannot be conjured here, because the caller has to be holding the record
+ * to pass it.
+ *
+ * ID COLLISION FAILS CLOSED. If something has taken the id back in the meantime, the
+ * restore is refused rather than clobbering the living record: an undo that overwrote
+ * somebody would be a worse outcome than an undo that declines.
+ *
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.worldState
+ * @param {string} args.wnpcId
+ * @param {unknown} args.record        the record removeNpcRecord returned
+ * @param {boolean} args.wasPlaced
+ * @param {ReadonlyArray<unknown>} [args.exclusions]  the edges it carried
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, restored: boolean }}
+ */
+export function restoreNpcRecord({ worldState, wnpcId, record, wasPlaced, exclusions = [] }) {
+  if (!npcConsequencesActive(worldState)) return { worldState, changed: false, restored: false };
+  const id = String(wnpcId == null ? '' : wnpcId);
+  if (!id || !record || typeof record !== 'object') return { worldState, changed: false, restored: false };
+  const ledger = npcLedgerOf(worldState);
+  if (
+    Object.prototype.hasOwnProperty.call(ledger.placed, id)
+    || Object.prototype.hasOwnProperty.call(ledger.roamers, id)
+  ) {
+    return { worldState, changed: false, restored: false };
+  }
+  const placed = { ...ledger.placed };
+  const roamers = { ...ledger.roamers };
+  const normalized = normalizeRecord(record, { placed: wasPlaced === true });
+  if (wasPlaced === true) placed[id] = /** @type {PlacementRecord} */ (normalized);
+  else roamers[id] = /** @type {RoamerRecord} */ (normalized);
+  const edges = normalizeExclusionEdges(exclusions);
+  const nextExclusions = { ...ledger.exclusions };
+  if (edges.length > 0) nextExclusions[id] = edges;
+  const next = setNpcLedger(worldState, {
+    placed: sortedRecords(placed),
+    roamers: sortedRecords(roamers),
+    exclusions: sortedRecords(nextExclusions),
+  });
+  return { worldState: next, changed: next !== worldState, restored: true };
 }
 
 /**

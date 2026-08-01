@@ -52,6 +52,12 @@ const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 // W-C — the two REGISTER doors, each its own lazy leaf (see the header note).
 const HeraldGazetteer = lazy(() => import('./HeraldGazetteer.jsx'));
 const HeraldRemembrance = lazy(() => import('./HeraldRemembrance.jsx'));
+// W-H4 — the THIRD register door, on the same rule and for the same reason: the
+// Wanderers page carries a whole read model plus the DM's three verbs, and most
+// sessions never turn to it. Its tab is CONDITIONAL (RealmInspector omits it when the
+// consequence economy is dark), so this mount is only ever reached by a realm that runs
+// the lane at all.
+const HeraldWanderers = lazy(() => import('./HeraldWanderers.jsx'));
 
 // A calm peacetime note (the War door's live-block empty tail).
 function PeacetimeNote({ campaign }) {
@@ -179,6 +185,7 @@ export default function HeraldBody({
       adjudication: 'Decisions await once a campaign\'s realm is live.',
       gazetteer: 'The register fills with every settlement a live campaign counts.',
       remembrance: 'The realm remembers its lost places once a campaign is live.',
+      wanderers: 'The realm keeps track of its wanderers once a campaign is live.',
     };
     return <CampaignEmptyState lead={leads[section] || leads.events} {...emptyHandlers} />;
   }
@@ -264,6 +271,10 @@ export default function HeraldBody({
 
   if (section === 'remembrance') {
     return <HeraldRemembrance campaign={campaign} saves={saves} />;
+  }
+
+  if (section === 'wanderers') {
+    return <HeraldWanderers campaign={campaign} saves={saves} />;
   }
 
   if (section === 'adjudication') {
