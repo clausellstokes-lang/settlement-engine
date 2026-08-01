@@ -169,13 +169,18 @@ first: can a steading take the overflow? The ask is need-weighted:
 
 The map must never crowd, and the count of settlements must cap ORGANICALLY:
 
-- **THE PROXIMITY BAND:** every engine-founded settlement (satellites included)
-  must land inside a band — no closer than `MIN_SEPARATION` to ANY existing
-  settlement (tier-banded: a steading may sit nearer a thorp than a metropolis
-  may sit to a city), and no farther than `MAX_TETHER` from its parent (a
-  satellite that cannot be reached is not a satellite). Wave E's orbit annulus
-  and wave G's tier-banded spacing already speak this vocabulary; this section
-  graduates them from placement preferences into REALM LAW for engine foundings.
+- **THE PROXIMITY BAND (owner clarified: against ANY settlement, both ends):**
+  every engine-founded settlement (satellites included) must land inside a
+  band measured against the WHOLE realm, not just its parent — no closer than
+  `MIN_SEPARATION` to ANY existing settlement (tier-pair banded: a steading may
+  sit nearer a thorp than a metropolis may sit to a city), and no farther than
+  `MAX_REACH` from its NEAREST existing settlement, whichever settlement that
+  is. The max is a reach-the-web law, not a parent leash: the realm grows
+  contiguously, never as isolated pockets in the deep wild. A satellite still
+  PREFERS its parent's orbit (wave E's annulus stands as the placement
+  preference), but the LAW it must satisfy is realm-wide on both ends. Wave E's
+  annulus and wave G's tier-banded spacing already speak this vocabulary; this
+  section graduates them from placement preferences into REALM LAW.
 - **THE USER EXCEPTION (sovereign hand):** user-placed settlements are exempt
   from the band, exactly as user routes are lifecycle-immune. The engine never
   refuses the DM's hand; it only disciplines its own.
@@ -250,7 +255,7 @@ Birth/death bands per tier · MOUTHS_PER_FOOD_UNIT · density ceilings per tier
 (+terrain adjust) · pressure curve shape · overflow band · promotion window +
 headroom requirement · push/pull driver bands + applicability guards · migration
 column speed · realmPressure motive caps · stressor incidence couplings.
-MIN_SEPARATION per tier-pair · MAX_TETHER per parent tier · the saturation
+MIN_SEPARATION per tier-pair · MAX_REACH to the nearest settlement · the saturation
 re-ask cadence.
 Every one banded, none a bare float on a surface.
 
@@ -291,6 +296,9 @@ re-measured on the same run — the two findings bracket the model.
 - **J-P6:** MIN_SEPARATION is tier-PAIR banded (steading-near-thorp legal,
   city-near-city not) rather than one global radius. VETO flattens to one
   number.
+- **J-P6b:** the band's BOTH ends are any-settlement (min vs every settlement,
+  max vs the nearest), per the owner's clarification — the parent annulus is a
+  preference inside the law, never the law. VETO restores a parent-only tether.
 - **J-P7:** saturation is discovered per-attempt from the empty filtered
   candidate set, never precomputed realm-wide. VETO orders a global
   saturation census each pulse.
