@@ -313,6 +313,26 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   const result = deltaForSettlement(item, pressureIdx, interval, rules);
   if (!result) return null;
   const { pop, delta, severe } = result;
+  // ── WAVE P1, THE DEMOGRAPHIC ENGINE (docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 1:
+  // "there is no growth term that is not a birth"). THIS LINE IS THE RUNAWAY. The
+  // rate above is proportional to the head count with NO carrying-capacity term, so
+  // a settlement under no pressure compounds at a smooth ~x1.07/year forever — the
+  // 300-year soak rode it to 29.1 trillion people. When `demographicsEnabled` is lit,
+  // demographicsKernel.js owns the growth side (births minus deaths against
+  // min(K_food, D_tier)) and the raw proportional growth is REPLACED here rather than
+  // added to it, or the two lanes would both mint the same people.
+  //
+  // ONLY the growth side is suppressed. Decline and mass emigration are UNCHANGED and
+  // still ride this lane: they already have a floor and the soak proved they work.
+  // P4 reconciles the decline term with the demographic death term; until then a
+  // pressured settlement is answered by both, which is conservative in the direction
+  // this wave cares about.
+  //
+  // `demographicsEnabled` is VIRTUAL (absent from DEFAULT_SIMULATION_RULES, declared
+  // false in the full_simulation preset), and normalizeSimulationRules passes unknown
+  // keys through its `...input` spread, so this reads `=== true` and is unreachable
+  // on every existing campaign: byte-identical dark.
+  if (delta > 0 && rules.demographicsEnabled === true) return null;
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
   // Scale the mass-emigration bar DOWN for sub-month intervals. The fixed

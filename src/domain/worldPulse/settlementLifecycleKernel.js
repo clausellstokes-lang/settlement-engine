@@ -69,6 +69,7 @@ import { NAMING_DATA } from '../../data/namingData.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
+import { advanceDemographics } from './demographicsKernel.js';
 import { pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 import { chooseSteadingSite, deriveSteadingResources, landformPlaceName, resourcePhrase } from './steadingTopography.js';
 
@@ -506,11 +507,34 @@ function steadingNews(kind, parentId, tick, now, body) {
  * @param {string|null} args.now
  * @returns {LifecycleAdvanceResult}
  */
-export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpdates, pIndex, rng, tick, now }) {
-  const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
+export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldState, settlementUpdates, pIndex, rng, tick, now }) {
+  // ── THE DEMOGRAPHIC STEP (WAVE P1 — docs/DESIGN_DEMOGRAPHIC_ENGINE.md §8 names
+  // this module the HOST). It runs BEFORE this module's own dormancy gate, because
+  // demography is gated by its OWN virtual flag (`demographicsEnabled`) and must not
+  // inherit the settlement-lifecycle switch. DARK ⇒ advanceDemographics returns the
+  // SAME worldState and settlementUpdates REFERENCES, so wiring it in cannot perturb
+  // a byte — the fenced dormancy golden asserts object IDENTITY, not deep equality
+  // (the J1 precedent). LIT, it REPLACES the raw proportional growth line: the same
+  // flag stops populationDynamics emitting its organic-growth candidate, because law
+  // 1 says there is no growth term that is not a birth. The decline and terminal
+  // lanes below are UNCHANGED; the soak proved they work. ──
+  const demo = advanceDemographics({
+    snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
+    worldState: hostWorldState,
+    settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (settlementUpdates)),
+    rng, tick,
+  });
+  const worldState = demo.worldState;
+  const updates = /** @type {LcUpdate[]} */ (/** @type {unknown} */ (demo.settlementUpdates));
   // ── DORMANCY GATE: flag absent ⇒ an immediate no-op. No fork, no key. ──
   if (!settlementLifecycleActive(worldState)) {
-    return { worldState, settlementUpdates: updates, changed: false, newsEntries: [], receipts: [] };
+    return {
+      worldState,
+      settlementUpdates: updates,
+      changed: demo.changed,
+      newsEntries: [],
+      receipts: /** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
+    };
   }
 
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
@@ -546,7 +570,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
   /** @type {Array<Record<string, unknown>>} */
-  const receipts = [];
+  const receipts = [
+    .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
+  ];
   let ledgerChanged = false;
 
   // ── Settlement-record surgery helpers (population transfers, conserved). ──
@@ -944,7 +970,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
 
   // ── PERSIST (drop-when-empty at the namespace key too). ──
   let nextWorldState = worldState;
-  let changed = cloned;
+  // The demographic step's own write counts as change even when the satellite lane
+  // held still, or applyPulseMover would drop its settlementUpdates on the floor.
+  let changed = cloned || demo.changed;
   if (ledgerChanged) {
     nextWorldState = Object.keys(nextLedger).length
       ? setSpatialLedger(nextWorldState, 'satellites', nextLedger)

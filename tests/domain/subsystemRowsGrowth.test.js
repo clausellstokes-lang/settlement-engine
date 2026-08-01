@@ -458,3 +458,106 @@ describe('lifecycle-and-growth certification rows — verdicts', () => {
     }
   });
 });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// WAVE P1 — THE DEMOGRAPHIC ENGINE ROW. It is the lane's fourth row and the only one
+// with NO aliveness channel at all, so it is held to a different, stricter contract:
+// the emptiness must be a traced property of the slice rather than an author's
+// shrug, and the row must never be able to grade itself ALIVE.
+// ═══════════════════════════════════════════════════════════════════════════════
+describe('the demographic engine row — the deliberate empty-channel case', () => {
+  const DEMO = 'demographicsEnabled';
+
+  test('the key is a REAL rule key, authored, not pending, and reachable by the census', () => {
+    expect(simulationRuleKeys()).toContain(DEMO);
+    expect(rowOf(DEMO), 'the demographic engine has no certification row').toBeTruthy();
+    expect(new Set(SUBSYSTEM_CERTIFICATION_PENDING_KEYS).has(DEMO)).toBe(false);
+    expect(GROWTH_PENDING_RULE_KEYS).toEqual([]);
+  });
+
+  test('it is VIRTUAL: declared only in the preset spread, never in the serialized defaults', async () => {
+    const { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } =
+      await import('../../src/domain/worldPulse/simulationRules.js');
+    // A DEFAULT entry would serialize new bytes into every legacy save and enlist the
+    // key in RULE_COMPARISON_KEYS, collapsing preset identity (the disastersEnabled
+    // precedent). Declared-false in full_simulation is what the walker censuses.
+    expect(Object.prototype.hasOwnProperty.call(DEFAULT_SIMULATION_RULES, DEMO)).toBe(false);
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules[DEMO]).toBe(false);
+  });
+
+  test('the empty channels are TRACED to source, not asserted', () => {
+    const row = rowOf(DEMO);
+    // eventTypes: the kernel mints no candidate at all, so eventTypeCounts can never
+    // see it. Re-derived from live source rather than taken on the row's word.
+    expect(quotedCandidateTypes('src/domain/worldPulse/demographicsKernel.js')).toEqual([]);
+    expect(quotedCandidateTypes('src/domain/worldPulse/demographicsRates.js')).toEqual([]);
+    expect(row.aliveness.eventTypes).toEqual([]);
+    // stateKeys: P1 writes no worldState container. The two ledger setters the pulse
+    // uses appear nowhere in either module.
+    for (const rel of [
+      'src/domain/worldPulse/demographicsKernel.js',
+      'src/domain/worldPulse/demographicsRates.js',
+    ]) {
+      const src = read(rel);
+      expect(src.length, `${rel} read empty`).toBeGreaterThan(0);
+      expect(src.includes('setSpatialLedger'), `${rel} writes a spatial ledger`).toBe(false);
+      expect(src.includes('worldState.demographics'), `${rel} writes a worldState key`).toBe(false);
+    }
+    expect(row.aliveness.stateKeys).toEqual([]);
+    // moverFamilies: the refusal that matters. `population` is fed by the very lane
+    // this row replaces, so claiming it would let the row grade ALIVE off the runaway.
+    expect(row.aliveness.moverFamilies).toEqual([]);
+    // Run through the PRODUCTION classifier rather than transcribed from it: the family
+    // this row refused to claim is demonstrably the one the replaced lane feeds.
+    expect(moverFamilyOf({ candidateType: 'population_growth', ruleFamily: 'population' })).toBe('population');
+    // And the kernel's own receipt classifies into NO family, so a future census that
+    // starts collecting it cannot silently inflate somebody else's aliveness channel
+    // (the wizard-news id-token skew, avoided by construction rather than by luck).
+    expect(moverFamilyOf({ kind: 'demographic_step', id: 'demographics.Ashford.12' })).toBe(null);
+    // And the row says why, at length.
+    expect(row.aliveness.other.length).toBeGreaterThan(200);
+    expect(row.soakEvidence).toBe('unobserved');
+    expect(row.invariants.length).toBeGreaterThan(0);
+  });
+
+  test('it grades DORMANT_BY_CONFIG dark and UNOBSERVED lit, and can never reach ALIVE', () => {
+    const loudYears = [
+      year(1, { eventTypeCounts: { population_growth: 40, population_decline: 12 }, moverCounts: { population: 900 } }),
+      year(2, { eventTypeCounts: { population_growth: 61, population_decline: 9 }, moverCounts: { population: 1200 } }),
+    ];
+    const dark = evaluateSubsystemCertification(receiptV5({
+      rules: litRules({ [DEMO]: false }), years: loudYears,
+    }));
+    expect(verdictOf(dark, DEMO)).toBe('DORMANT_BY_CONFIG');
+
+    // THE ANTI-VACUITY CHECK, executed: the same deafening population traffic with the
+    // switch LIT must NOT be read as this subsystem being alive. If the row ever
+    // claimed the population family, this assertion is what would red.
+    const lit = evaluateSubsystemCertification(receiptV5({ years: loudYears }));
+    expect(verdictOf(lit, DEMO)).toBe('UNOBSERVED');
+    expect(evalRowOf(lit, DEMO).instrumentedChannels).toEqual([]);
+    expect(evalRowOf(lit, DEMO).corroboratingOnlyEvidence).toBe(false);
+
+    // CONTROL: the evaluator is not simply refusing to grade this receipt. A sibling
+    // row on the same envelope reaches ALIVE, so UNOBSERVED above is a statement about
+    // this row's instrument and not about the fixture.
+    const sibling = evaluateSubsystemCertification(receiptV5({
+      years: [year(1, { eventTypeCounts: { food_pressure: 7 } })],
+    }));
+    expect(verdictOf(sibling, 'emergentEventsEnabled')).toBe('ALIVE');
+  });
+
+  test('the invariant that IS receipt-expressible names the suppression, not a presence', () => {
+    const row = rowOf(DEMO);
+    const replacement = row.invariants.find((x) => x.name === 'the_raw_growth_line_is_replaced_not_supplemented');
+    expect(replacement, 'the one settleable invariant is missing').toBeTruthy();
+    expect(replacement.check).toContain('population_growth');
+    expect(replacement.check).toContain('exactly zero');
+    // And the source honours it: the suppression is a single flag-gated early return.
+    mustExtract(
+      read('src/domain/worldPulse/populationDynamics.js'),
+      'if (delta > 0 && rules.demographicsEnabled === true) return null;',
+      'the raw-growth suppression',
+    );
+  });
+});

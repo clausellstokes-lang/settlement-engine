@@ -211,6 +211,66 @@ export const GROWTH_SUBSYSTEM_ROWS = Object.freeze([
     // release case is a v4 envelope, so no dispositive reading exists yet.
     soakEvidence: 'indirect',
   }),
+  Object.freeze({
+    rule: 'demographicsEnabled',
+    title: 'The demographic engine (births, deaths, carrying capacity)',
+    module: 'src/domain/worldPulse/demographicsKernel.js,src/domain/worldPulse/demographicsRates.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and traced rather than assumed. The kernel is a POST-APPLY
+      // step at the settlementLifecycleKernel seam: it mints NO candidate, so it carries
+      // no candidateType literal at all and eventTypeCounts (which observes
+      // result.selected only) can never see it however hard the realm breeds or buries.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and this is the row's sharpest refusal. `population` is the
+      // obvious family to claim and it would be the WORST claim in the registry: that
+      // family is fed by populationDynamics, the migration kernel, the calamity lane and
+      // the war lanes, so declaring it would let this row grade ALIVE off exactly the
+      // subsystem it exists to replace. A row with no dispositive channel is graded ALIVE
+      // off its mover family alone (subsystemCertification.js: the anti-vacuity law only
+      // bites when a dispositive channel IS declared), so claiming `population` here would
+      // manufacture a green from the runaway itself.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and it is a property of the slice rather than a gap. P1
+      // persists NOTHING: K_food and D_tier are derived every tick and never stored
+      // (never-store-a-derivable), and the design's persisted surface (migrationDebt,
+      // overflowLedger) belongs to P3 and P2. The lane's whole output is a population
+      // number and a populationHistory entry on the settlement record, and the stateKeys
+      // census cannot see a per-settlement field. There is no worldState container to
+      // claim, so none is claimed.
+      stateKeys: Object.freeze([]),
+      other: 'THE ROW WITH NO CHANNEL, AND THE REASON IS THE SLICE. Wave P1 (docs/DESIGN_DEMOGRAPHIC_ENGINE.md) cures the finding that every soak redo waits on: the 300-year research soak FAILED its realm-population-bounded check because two settlements compounded at a smooth x1.07/year to 29.1 trillion and 16.4 trillion people while six siblings floored at 200 to 500. Root cause: the population model had births without a death side, growth without a carrying capacity, and no redistribution. P1 supplies the missing half as a difference of rates, next = pop + births - deaths, against the effective bound min(K_food, D_tier). IT SHIPS DARK behind the VIRTUAL flag demographicsEnabled (absent from DEFAULT_SIMULATION_RULES, declared false in full_simulation exactly so this row can census it), and dark is a no-op by OBJECT IDENTITY: the same worldState and settlementUpdates references come back, zero forks, zero keys. TWO SEAMS, ONE FLAG, AND THE SECOND ONE IS A SUPPRESSION. Lit, demographicsKernel owns the growth side AND populationDynamics.js stops emitting its organic-growth candidate under the same key, because design law 1 says there is no growth term that is not a birth. That suppression is the ONE channel a receipt can read today, and it reads as an ABSENCE rather than a presence, which is why it is declared as an invariant below rather than as an aliveness channel: a row may not grade itself ALIVE on another lane going quiet. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a receipt channel carrying per-settlement demographic terms. The kernel already emits a full per-settlement receipt every tick something is born or buried (kind demographic_step, carrying before, after, births, deaths, bound, binding, pressure01, deficit01, birthBand, deathBand, namedFloor and an in-world line), but the pulse drops mover receipts at applyPulseMover and no soak envelope collects them. Wiring that receipt into the v5 census is the instrument this row is waiting for, and it is P4 work alongside the Herald lines. UNTIL THEN THIS ROW GRADES UNOBSERVED WHEN LIT, which is the honest verdict and never a pass. NEAR-MISS TOKENS, recorded so a later reader does not adopt them: population_growth, population_decline and population_emigration are populationDynamics vocabulary, NOT this lane. Lit, the first of the three must read ZERO precisely because this lane replaced it, so a row that declared it would invert its own meaning.',
+    }),
+    // The step runs for every settlement every tick, and natural mortality is a floor
+    // rather than an event, so a realm of any size is demographically busy in every
+    // observed year. The tempo floor is moot until an instrument exists.
+    expectedTempo: 'per_tick',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_raw_growth_line_is_replaced_not_supplemented',
+        description: 'Lit, the demographic kernel is the ONLY source of positive population change. populationDynamics returns null for any positive delta under the same flag, so the two lanes can never both mint the same people. This is design law 1 expressed as a countable absence, and it is the one claim about this lane a receipt can settle today.',
+        check: 'In any receipt whose subsystems.rules records demographicsEnabled true, the summed eventTypeCounts for population_growth is exactly zero across every observed year, while population_decline and population_emigration are unconstrained (their lane is deliberately unchanged in P1). In any receipt recording demographicsEnabled false or omitting it, population_growth is unconstrained. Expressible from v5 subsystems.rules plus the v4 eventTypeCounts.',
+      }),
+      Object.freeze({
+        name: 'the_bound_is_a_plateau_and_not_a_clamp',
+        description: 'The equilibrium is a fixed point of the rate pair, not a ceiling anyone enforces. Far from min(K_food, D_tier) births dominate; approaching it the birth suppression and death strain close the gap; past it deaths dominate. Nothing in the kernel clamps a population, so a settlement CAN briefly exceed its food bound under a siege and then pay for it (J-P5, famine lag). The observable consequence is that a long horizon shows settlements FLATTENING rather than either compounding or pinning to a round number.',
+        check: 'For a receipt of at least one hundred observed years whose subsystems.rules records demographicsEnabled true, the realm-population-bounded assertion passes and no settlement final population exceeds fifty times its value one century earlier. The FAILING baseline this is measured against is on record: research-300y-12s-seed1.json, source b66e9551, in which two settlements reached 2.91e13 and 1.64e13. NOT expressible from the current v4 or v5 envelope, which carries realm totals rather than a per-settlement population series; the soak harness own bounded check is the instrument, and the receipt diff between that run and its re-run IS the cure proof the design names as acceptance.',
+      }),
+      Object.freeze({
+        name: 'natural_mortality_has_no_off_switch',
+        description: 'The death rate is the tier natural-mortality band times a multiplier that is at least one, so no combination of prosperity, peace, food surplus and empty land anywhere in the engine can produce a deathless settlement (J-P2: even paradise ages). The absence of exactly this property is what let a town reach 29 trillion people, so it is stated as an invariant rather than left as an implementation detail.',
+        check: 'NOT expressible from any receipt schema today: no envelope carries a per-settlement death count, and the natural floor is a rate rather than an event. It is pinned at source instead, by a zero-pressure prosperous fixture run over a window and asserted to bury somebody, with the floor deleted as an executed negative control (tests/domain/demographicsKernel.test.js). Recorded here as an honest instrument gap rather than implied by an empty pass.',
+      }),
+      Object.freeze({
+        name: 'the_named_cast_is_never_in_the_lottery',
+        description: 'The death draw is taken against population minus residentNamedNpcCount and the result floors at that count, so the engine starves the NUMBER and never the cast (law 3, composing with H3 floor). No engine path here removes a roster character; the DM KILL verb remains the only named death.',
+        check: 'NOT expressible from any receipt schema today: no envelope pairs a settlement population with its named-cast size. Pinned at source by a fixture whose head count already equals its cast, asserted never to fall below it across a long window (tests/domain/demographicsKernel.test.js). The same instrument gap the H3 floor records.',
+      }),
+    ]),
+    // Ships dark, and its dispositive instrument does not exist yet. UNOBSERVED is the
+    // verdict this row can reach and it is the honest one; it becomes readable the day a
+    // v5 census collects the demographic_step receipt.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**
