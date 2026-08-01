@@ -963,6 +963,39 @@
 >   EXPOSED (I4's existing triple), and a realm that discovers what it did carries that
 >   in its history and its disposition forever. The reckoning is as available as the
 >   deception, and both belong to the world rather than to the war.
+> - ⭐⭐ 2026-08-01 AMENDMENT O — CAPTIVITY IS NOT PERMANENT: THE RANSOM. Owner: "an
+>   NPC in prison is also still ransom, given enough time has passed since they were
+>   captured."
+>   ── THE DWELL IS THE GATE. A captured soul is not ransomable the moment they are
+>   taken; enough time must pass, exactly as every other lane in this engine gates on
+>   dwell rather than on an instant. Before it they are simply held (K.3d, H2's jailed
+>   verdict pointed at a foreign guest); after it, a price exists.
+>   ── RANSOM IS A CLAIM AND ITS SHAPE ALREADY EXISTS: I2's reparations claim with a
+>   PERSON as the subject — a demand for payment, denominated the same way, satisfied
+>   or refused the same way, becoming the same grievance when unpaid. Both the demand
+>   and the answer must TRAVEL (amendment M), so a ransom is two more journeys and
+>   every risk on the road applies to them.
+>   ── TWO DECISIONS, BOTH CHARACTERFUL: the CAPTOR holds, ransoms, or releases — a
+>   martial realm holds what a mercantile one sells, and a good realm may simply let
+>   them go (N3's mercy at the scale of one person). The HOME SETTLEMENT pays, refuses,
+>   or abandons — and G's two books apply, because a ruler may abandon an envoy whose
+>   return would be inconvenient.
+>   ── ⭐⭐ THE RANSOM DEMAND RESOLVES K.7's AMBIGUITY, AND THAT IS THE BEST THING HERE.
+>   K.7 says an envoy who does not return is read as hostility and that the reading may
+>   be wrong. A ransom demand arriving CONVERTS SILENCE INTO INFORMATION: they are
+>   alive, they are held, and they have a price. The false inference therefore has a
+>   cure — but only if the demand reaches home, which it may not. Pin all three shapes:
+>   silence misread as death, a demand that corrects it, and a demand intercepted so
+>   the misreading stands.
+>   ── ABANDONING YOUR OWN IS A FACT WITH CONSEQUENCES: it costs the ruler legitimacy,
+>   and if that soul ever returns THEY CARRY THE GRIEVANCE PERSONALLY. H1's ledger and
+>   H3's facets already hold this — a man ransomed by nobody comes home a different
+>   man, and may become the coalition that overturns the ruler who left him (H).
+>   ── ⭐ AND A RANSOMED SOUL RETURNS CARRYING WHATEVER THEIR CAPTORS LET THEM BELIEVE.
+>   Months in enemy hands is the longest plant exposure in the entire model (I4), and
+>   the returning envoy is a TRUSTED source (K4). A realm may buy back its own man and
+>   with him the lie that loses it the war. That is the strongest single argument for
+>   building this lane at all.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
