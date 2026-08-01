@@ -26,14 +26,25 @@
  * reads or writes an npc roster; it only counts one. The DM's KILL verb remains the
  * only named death.
  *
- * WHAT P1 DOES NOT DO, recorded so nobody re-finds it as a bug:
- *   • NO worldState key. The design's persisted surface (migrationDebt,
- *     overflowLedger) belongs entirely to P3 and P2; every P1 quantity is derived
- *     every tick from population, food and tier, so storing any of it would violate
- *     never-store-a-derivable. P1 therefore adds ZERO persisted bytes lit or dark.
- *   • NO migration, NO overflow, NO promotion, NO stressor coupling. P2/P3/P4.
- *   • NO wizard news. The Herald's demographic lines are P4; the receipt shape here
- *     is authored honestly now so P4 consumes it rather than re-deriving it.
+ * WAVE P2 ADDS THE THIRD AND FOURTH TERMS. `next = pop + births - deaths + arrivals -
+ * departures` is the design's §3 line in full, and the two migration terms are owned
+ * by demographicsMigration.js, called from this one entry point immediately after the
+ * natural step. Births and deaths are what a settlement does to itself; arrivals and
+ * departures are what the realm does between settlements, and both halves must land on
+ * the same settlementUpdates in one pass or a tick could read its own population two
+ * different ways.
+ *
+ * WHAT P1/P2 DO NOT DO, recorded so nobody re-finds it as a bug:
+ *   • NO NEW worldState key. P1 persists nothing at all; P2's transit accounting rides
+ *     the EXISTING `spatialLedgers.migration` columns (design §4: zero new ledger
+ *     kinds), and the design's `migrationDebt` is deliberately not built, because per
+ *     settlement in and out totals are derivable from those columns and a second
+ *     accounting surface could only ever drift from the first.
+ *   • NO overflow, NO satellite founding, NO promotion response, NO plans. P3 owns all
+ *     four, and it asks P2's `competeForDestinations` FIRST.
+ *   • NO stressor coupling and NO road mortality. P4.
+ *   • NO wizard news. The Herald's demographic lines are P4; the receipt shapes here
+ *     are authored honestly now so P4 consumes them rather than re-deriving them.
  *
  * DETERMINISM. The parent pulse rng is already seeded per tick
  * (`<rngSeed>::tick:<n>::<interval>`, pulseKernel.js), so the design's
@@ -52,6 +63,7 @@
 
 import { formatCount } from '../formatNumber.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
+import { advanceDemographicMigration } from './demographicsMigration.js';
 import {
   demographicsActive,
   demographicRates,
@@ -64,7 +76,10 @@ import {
 } from './demographicsRates.js';
 
 /** @typedef {import('./demographicsRates.js').DemoSettlement} DemoSettlement */
-/** @typedef {{ id?: (string|number), name?: string, settlement?: DemoSettlement }} DemoSnapItem */
+/** @typedef {import('./demographicsPushPull.js').DemoCausal} DemoCausal */
+/** @typedef {import('./demographicsPushPull.js').DemoPressureIndex} DemoPressureIndex */
+/** The pulse snapshot item, with the causal scores wave P2's push drivers read.
+ *  @typedef {{ id?: (string|number), name?: string, settlement?: DemoSettlement, causal?: DemoCausal }} DemoSnapItem */
 /** @typedef {{ settlements?: DemoSnapItem[] }} DemoSnapshot */
 /** @typedef {{ saveId?: (string|number), settlement?: DemoSettlement }} DemoUpdate */
 /** @typedef {{ fork?: (k: string) => { random: () => number } }} DemoRng */
@@ -139,8 +154,20 @@ function demographicLine(f) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {DemographicReceipt[]} receipts
- * @property {Array<Record<string, unknown>>} newsEntries always empty in P1 (P4 owns the Herald)
+ * @property {Array<Record<string, unknown>>} migrationReceipts WAVE P2: the homeostat's
+ *   own per-origin and per-destination lines, kept in their own list so the natural
+ *   step's receipt vocabulary stays exactly what P1 declared.
+ * @property {{ departures: number, arrivals: number, inTransit: number, returned: number,
+ *   lost: number, unplaced: number }} accounting WAVE P2, law 4: departures equals
+ *   arrivals plus in transit plus returned plus lost, and a pin adds it up.
+ * @property {Array<Record<string, unknown>>} newsEntries always empty (P4 owns the Herald)
  */
+
+/** The accounting a dormant or unmoved tick reports. @returns {{ departures: number,
+ *  arrivals: number, inTransit: number, returned: number, lost: number, unplaced: number }} */
+function stillAccounting() {
+  return { departures: 0, arrivals: 0, inTransit: 0, returned: 0, lost: 0, unplaced: 0 };
+}
 
 /**
  * ADVANCE THE DEMOGRAPHIC STEP ONE TICK for every settlement in the snapshot that the
@@ -154,13 +181,25 @@ function demographicLine(f) {
  * @param {DemoUpdate[]} args.settlementUpdates
  * @param {DemoRng|null} [args.rng]
  * @param {number} args.tick
+ * @param {DemoPressureIndex|null} [args.pIndex] WAVE P2: the pressure index the pulse
+ *   already built. Optional and total: absent, the push drivers fall back to the
+ *   generation-time causal scores and the threat guard fails closed.
+ * @param {string|null} [args.season] WAVE P2: the road season, for the hop pricing.
  * @returns {DemographicAdvanceResult}
  */
-export function advanceDemographics({ snapshot, worldState, settlementUpdates, rng, tick }) {
+export function advanceDemographics({ snapshot, worldState, settlementUpdates, rng, tick, pIndex, season }) {
   const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
   // ── DORMANCY GATE: flag absent ⇒ an immediate no-op. No fork, no key, no clone. ──
   if (!demographicsActive(worldState)) {
-    return { worldState, settlementUpdates: updates, changed: false, receipts: [], newsEntries: [] };
+    return {
+      worldState,
+      settlementUpdates: updates,
+      changed: false,
+      receipts: [],
+      migrationReceipts: [],
+      accounting: stillAccounting(),
+      newsEntries: [],
+    };
   }
 
   const items = Array.isArray(asObject(snapshot).settlements)
@@ -265,5 +304,28 @@ export function advanceDemographics({ snapshot, worldState, settlementUpdates, r
     };
   }
 
-  return { worldState, settlementUpdates: nextUpdates, changed: cloned, receipts, newsEntries: [] };
+  // ── WAVE P2, THE HOMEOSTAT (design §4). Arrivals and departures, on the SAME
+  // settlementUpdates the natural step just wrote, so a tick can never hold two
+  // readings of one settlement's head count. Runs after the rates because a column is
+  // drawn against the population the births and deaths have already settled. ──
+  const moved = advanceDemographicMigration({
+    snapshot: /** @type {import('./demographicsMigration.js').MigSnapshot} */ (
+      /** @type {unknown} */ (snapshot)),
+    worldState,
+    settlementUpdates: /** @type {import('./demographicsMigration.js').MigUpdate[]} */ (
+      /** @type {unknown} */ (nextUpdates)),
+    tick: stepTick,
+    pIndex: pIndex || null,
+    season: season || null,
+  });
+
+  return {
+    worldState: moved.worldState,
+    settlementUpdates: /** @type {DemoUpdate[]} */ (/** @type {unknown} */ (moved.settlementUpdates)),
+    changed: cloned || moved.changed,
+    receipts,
+    migrationReceipts: moved.receipts,
+    accounting: moved.accounting,
+    newsEntries: [],
+  };
 }

@@ -340,6 +340,9 @@ export function splitTravellers(travellers, destinations, weights, rng) {
  * @property {number} arrivals     Σ reaching a destination
  * @property {MigrationDispatch[]} dispatches one per receiving destination (arrivals > 0)
  * @property {string} mode         ALWAYS 'disperse' — 'concentrated' is forbidden under spatial
+ * @property {string} [travelClass] WAVE P2. When present, every column this plan
+ *   enqueues is stamped with it and belongs to the demographic homeostat. Absent on
+ *   every M4 plan, so the stamp is drop-when-empty and M4's ledger is unchanged.
  */
 
 /**
@@ -447,7 +450,40 @@ export function assertMigrationConservation(plan) {
  * @property {number} arrivals    people who will LAND (road death already booked at dispatch)
  * @property {number} departTick  the tick the column left the origin
  * @property {number} arrivalTick the tick the column lands (now + hopWeeks)
+ * @property {string} [travelClass] WAVE P2. Present ONLY on a column the demographic
+ *   homeostat raised (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §4), naming why these people
+ *   are on the road: `refugee` or `voluntary`. ABSENT on every M4 crisis column, which
+ *   is what makes the key drop-when-empty and every existing world byte-identical.
  */
+
+/**
+ * THE COLUMN CLASSES THE DEMOGRAPHIC LANE OWNS (wave P2). Declared HERE, beside the
+ * column shape itself, because ownership of a record is a property of the record and
+ * a vocabulary declared in two places is a vocabulary that drifts.
+ *
+ * WHY OWNERSHIP HAS TO BE EXPLICIT. Two lanes now write the one migration ledger: M4
+ * dispatches crisis columns behind the spatial-canon marker, and P2's homeostat
+ * dispatches push-pull columns behind `demographicsEnabled`. They are gated on
+ * DIFFERENT flags, so a world can carry either, both, or neither. If both release
+ * passes drained every column, whichever ran first would credit the other lane's
+ * people through the wrong receipt and with the wrong story; if neither skipped, a
+ * column could be credited twice. The class key is the mutex, and it is a property of
+ * the record rather than a rule either caller has to remember.
+ * @type {ReadonlyArray<string>}
+ */
+export const DEMOGRAPHIC_COLUMN_CLASSES = Object.freeze(['refugee', 'voluntary']);
+
+/**
+ * Does this column belong to the demographic homeostat rather than to M4? FAILS
+ * CLOSED toward M4: a column with no class, or a class this module has never heard
+ * of, is M4's, which is the reading that keeps every pre-P2 world unchanged.
+ * @param {{ travelClass?: unknown }|null|undefined} column
+ * @returns {boolean}
+ */
+export function isDemographicColumn(column) {
+  if (!column || typeof column !== 'object') return false;
+  return DEMOGRAPHIC_COLUMN_CLASSES.indexOf(String(column.travelClass ?? '')) >= 0;
+}
 
 /** The codepoint-stable AGGREGATE column key — one record per origin→dest per
  *  dispatch tick (never per-person). @param {string} o @param {string} d @param {number} t @returns {string} */
@@ -455,17 +491,33 @@ export function columnKey(o, d, t) {
   return `${String(o)}:${String(d)}:${Math.max(0, Math.floor(finiteNumber(t, 0)))}`;
 }
 
+/**
+ * NORMALIZE ONE PERSISTED COLUMN, or null when the record is not one. Exported so the
+ * demographic release pass reads a column through the SAME normalization the M4 pass
+ * does: two readers of one record shape is exactly how a ledger grows two meanings.
+ * @param {unknown} rec @returns {MigrationColumn|null}
+ */
+export function readMigrationColumn(rec) {
+  return columnOf(rec);
+}
+
 /** @param {unknown} rec @returns {MigrationColumn|null} */
 function columnOf(rec) {
   if (!rec || typeof rec !== 'object' || Array.isArray(rec)) return null;
   const r = /** @type {Record<string, unknown>} */ (rec);
   const arrivals = Math.max(0, Math.floor(finiteNumber(r.arrivals, 0)));
+  // The class rides through every normalization, CONDITIONALLY. Without this the M4
+  // enqueue pass would silently strip P2's ownership mark off a column merely because
+  // a crisis dispatch happened on the same tick, and the demographic release would
+  // then leave its own people on the road forever.
+  const travelClass = String(r.travelClass ?? '');
   return {
     originId: String(r.originId ?? ''),
     destId: String(r.destId ?? ''),
     arrivals,
     departTick: Math.max(0, Math.floor(finiteNumber(r.departTick, 0))),
     arrivalTick: Math.max(0, Math.floor(finiteNumber(r.arrivalTick, 0))),
+    ...(DEMOGRAPHIC_COLUMN_CLASSES.indexOf(travelClass) >= 0 ? { travelClass } : {}),
   };
 }
 
@@ -487,10 +539,18 @@ export function enqueueColumns(ledger, plan, tick) {
     if (col) next[k] = col;
   }
   const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));
+  // WAVE P2: the plan's class, stamped onto every column it raises. Absent on an M4
+  // plan, so the spread below adds no key and the ledger is byte-identical there.
+  const planClass = String((plan && /** @type {{ travelClass?: unknown }} */ (plan).travelClass) ?? '');
+  const stamp = DEMOGRAPHIC_COLUMN_CLASSES.indexOf(planClass) >= 0 ? { travelClass: planClass } : {};
   for (const d of (plan && Array.isArray(plan.dispatches) ? plan.dispatches : [])) {
     const arrivals = Math.max(0, Math.floor(finiteNumber(d.arrivals, 0)));
     if (arrivals <= 0) continue;
-    const key = columnKey(d.originId, d.destId, now);
+    // THE CLASS IS PART OF THE IDENTITY. Without the suffix an M4 crisis column and a
+    // P2 homeostat column running the same origin to the same destination on the same
+    // tick would collide on one key, and the survivor's class would decide which lane
+    // released BOTH. An M4 plan carries no class and keeps the bare key it always had.
+    const key = `${columnKey(d.originId, d.destId, now)}${planClass && stamp.travelClass ? `:${planClass}` : ''}`;
     const prior = columnOf(next[key]);
     // Two dispatches origin→dest on the SAME tick aggregate into one column (they
     // share the arrival tick — keep the later arrival to be safe).
@@ -499,6 +559,7 @@ export function enqueueColumns(ledger, plan, tick) {
       arrivals: (prior ? prior.arrivals : 0) + arrivals,
       departTick: now,
       arrivalTick: Math.max(prior ? prior.arrivalTick : 0, Math.max(0, Math.floor(finiteNumber(d.arrivalTick, now)))),
+      ...stamp,
     };
   }
   return next;
@@ -529,6 +590,12 @@ export function releaseArrivals(worldState, tick) {
   for (const key of Object.keys(prior).sort()) {
     const col = columnOf(prior[key]);
     if (!col) continue;
+    // WAVE P2: a column the demographic homeostat raised is NOT this pass's to land.
+    // It stays in transit here and is released by its own lane's pass, so the two
+    // lanes can never credit the same people twice or under the wrong story. No
+    // pre-P2 column carries a class, so this branch is unreachable on every existing
+    // world and the release is byte-identical there.
+    if (isDemographicColumn(col)) { next[key] = col; continue; }
     if (col.arrivalTick <= now) {
       const bucket = byDest.get(col.destId) || { count: 0, originIds: new Set() };
       bucket.count += col.arrivals;

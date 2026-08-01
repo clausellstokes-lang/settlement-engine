@@ -306,7 +306,35 @@ export function livedRouteToward(input) {
   const nowhere = { hop: null, ticks: 0, path: Object.freeze([]), reachable: false };
   if (!from || !dest || from === dest) return nowhere;
   const adjacency = livedAdjacency(consumableRouteNetwork(input.worldState));
+  const solved = solveLived(adjacency, from, dest, input.costOf);
 
+  const ticks = solved.best.get(dest);
+  if (ticks == null) return nowhere;
+  const walk = walkBack(solved.cameBy, from, dest);
+  return { hop: walk.hop, ticks, path: walk.path, reachable: true };
+}
+
+/**
+ * THE ONE LIVED SOLVER, shared by the single-destination reader above and the
+ * single-source reader below so the realm can never hold two answers to "what does
+ * this road cost".
+ *
+ * `stopAt` is the early exit the single-destination reader wants: Dijkstra settles
+ * seats in nondecreasing cost order and every admissible step is strictly positive,
+ * so the moment the destination is SELECTED its distance is final and everything the
+ * caller reads about it is already what the exhaustive walk would have produced.
+ * Passing null settles the whole reachable component instead, which is what a
+ * migration lane needs: ONE walk per origin per tick rather than one per candidate
+ * pair, because a pair-at-a-time reading is the quadratic the roads program already
+ * paid for once (§3's bounded-candidate law).
+ *
+ * @param {Map<string, ReadonlyArray<LivedHop>>} adjacency
+ * @param {string} from
+ * @param {string|null} stopAt
+ * @param {(fromId: string, hop: LivedHop) => number|null} costOf
+ * @returns {{ best: Map<string, number>, cameBy: Map<string, { fromId: string, hop: LivedHop }> }}
+ */
+function solveLived(adjacency, from, stopAt, costOf) {
   /** @type {Map<string, number>} */
   const best = new Map([[from, 0]]);
   /** @type {Map<string, { fromId: string, hop: LivedHop }>} */
@@ -321,10 +349,10 @@ export function livedRouteToward(input) {
       const cost = /** @type {number} */ (best.get(seat));
       if (!cursor || cost < cursorCost) { cursor = seat; cursorCost = cost; }
     }
-    if (!cursor || cursor === dest) break;
+    if (!cursor || cursor === stopAt) break;
     settled.add(cursor);
     for (const hop of adjacency.get(cursor) || []) {
-      const step = input.costOf(cursor, hop);
+      const step = costOf(cursor, hop);
       if (step == null) continue;
       const total = cursorCost + step;
       const prior = best.get(hop.toId);
@@ -334,9 +362,16 @@ export function livedRouteToward(input) {
       }
     }
   }
+  return { best, cameBy };
+}
 
-  const ticks = best.get(dest);
-  if (ticks == null) return nowhere;
+/**
+ * Reconstruct the whole road and its FIRST hop from the predecessor map.
+ * @param {Map<string, { fromId: string, hop: LivedHop }>} cameBy
+ * @param {string} from @param {string} dest
+ * @returns {{ hop: LivedHop|null, path: ReadonlyArray<string> }}
+ */
+function walkBack(cameBy, from, dest) {
   /** @type {Array<string>} */
   const path = [dest];
   /** @type {LivedHop|null} */
@@ -349,7 +384,55 @@ export function livedRouteToward(input) {
     path.unshift(step.fromId);
     cursor = step.fromId;
   }
-  return { hop: first, ticks, path: Object.freeze(path), reachable: true };
+  return { hop: first, path: Object.freeze(path) };
+}
+
+/**
+ * @typedef {Object} LivedReach
+ * @property {number} ticks  the whole journey's price in the caller's own units
+ * @property {ReadonlyArray<string>} path  every seat the road passes through, origin first
+ * @property {LivedHop|null} hop  the first hop of that road
+ */
+
+/**
+ * EVERY PLACE ONE SETTLEMENT CAN REACH, and what the road to each one costs.
+ *
+ * The single-source half of `livedRouteToward`, and it exists because a lane that
+ * asks "where could these people go" must ask ONCE. Asking per candidate pair runs
+ * the solver S times per origin and S-squared times per realm per tick, which is the
+ * shape §3's bounded-candidate law forbids; one walk per origin is linear in the
+ * network and answers the same question with the same arithmetic.
+ *
+ * THE ORIGIN IS NOT IN THE RESULT. A settlement does not travel to itself, and
+ * leaving a zero-cost self entry in would let a caller that ranks by cost pick
+ * "stay here" as a destination without ever deciding to.
+ *
+ * Codepoint-ordered, so the map enumerates the same way on every machine.
+ *
+ * @param {{
+ *   worldState: Record<string, unknown>,
+ *   fromId: string,
+ *   costOf: (fromId: string, hop: LivedHop) => number|null,
+ * }} input
+ * @returns {ReadonlyMap<string, LivedReach>}
+ */
+export function livedCostsFrom(input) {
+  const from = text(input.fromId);
+  /** @type {Map<string, LivedReach>} */
+  const out = new Map();
+  if (!from) return out;
+  const adjacency = livedAdjacency(consumableRouteNetwork(input.worldState));
+  const solved = solveLived(adjacency, from, null, input.costOf);
+  for (const seat of [...solved.best.keys()].sort()) {
+    if (seat === from) continue;
+    const walk = walkBack(solved.cameBy, from, seat);
+    out.set(seat, {
+      ticks: /** @type {number} */ (solved.best.get(seat)),
+      path: walk.path,
+      hop: walk.hop,
+    });
+  }
+  return out;
 }
 
 /**

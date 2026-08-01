@@ -518,11 +518,19 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // flag stops populationDynamics emitting its organic-growth candidate, because law
   // 1 says there is no growth term that is not a birth. The decline and terminal
   // lanes below are UNCHANGED; the soak proved they work. ──
+  // WAVE P2 threads the pressure index this seam ALREADY holds: the push drivers read
+  // live defense, crime and hostility pressure through it, and the defense guard fails
+  // closed without it (no threat evidence, no flight over a low readiness score).
   const demo = advanceDemographics({
     snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
     worldState: hostWorldState,
     settlementUpdates: /** @type {import('./demographicsKernel.js').DemoUpdate[]} */ (/** @type {unknown} */ (settlementUpdates)),
     rng, tick,
+    pIndex: /** @type {import('./demographicsKernel.js').DemoPressureIndex|null} */ (
+      /** @type {unknown} */ (pIndex || null)),
+    season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
+      ? String(asObject(asObject(hostWorldState).calendar).season)
+      : null,
   });
   const worldState = demo.worldState;
   const updates = /** @type {LcUpdate[]} */ (/** @type {unknown} */ (demo.settlementUpdates));
@@ -533,7 +541,10 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       settlementUpdates: updates,
       changed: demo.changed,
       newsEntries: [],
-      receipts: /** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
+      receipts: [
+        .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
+        ...demo.migrationReceipts,
+      ],
     };
   }
 
@@ -572,6 +583,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   /** @type {Array<Record<string, unknown>>} */
   const receipts = [
     .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
+    ...demo.migrationReceipts,
   ];
   let ledgerChanged = false;
 
