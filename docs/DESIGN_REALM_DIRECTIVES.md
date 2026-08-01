@@ -536,6 +536,40 @@
 >   negotiated PAIRWISE along the graph's edges, never as an N-party treaty table.
 >   No new negotiation layer, no multilateral congress. The graph plus the existing
 >   pairwise machinery is the whole implementation.
+> - ⭐⭐ 2026-08-01 AMENDMENT I2 — WHAT AN ALLY SPENT DOES NOT VANISH WHEN THE CAUSE
+>   DOES. Owner: an ally who joined has EXPENDED RESOURCES and may have LOST
+>   TERRITORY, "so that goes into momentum and into needed reparations from either
+>   [the ally who called them] or the enemy."
+>   ── THE HOLE THIS CLOSES: I said an ally's cause is the alliance, so when the
+>   originator's grievance dissolves the ally may have nothing left to fight for.
+>   That is true of the CAUSE and false of the LEDGER. By then they have spent stores,
+>   spent people, and possibly lost ground — and a realm that has paid does not simply
+>   walk away because somebody else's quarrel ended.
+>   ── ⭐ THE EXPENDITURE LEDGER IS REAL AND ALREADY DERIVABLE: stores drawn down
+>   (foodStockpile), population and named cast spent (P1/P1a), territory transferred
+>   by conquest, roads and institutions degraded at home (F's third stream). No new
+>   accounting is invented — the ally's bill is what the other engines already
+>   recorded, summed for this war.
+>   ── IT FEEDS TWO THINGS, AND THEY PULL OPPOSITE WAYS: (1) MOMENTUM — the ally is
+>   invested now, and sunk cost applies to allies exactly as it applies to
+>   principals (C2's cost-too-high-to-sue, arriving through the side door); (2) A
+>   REPARATIONS CLAIM, which is a demand to be MADE WHOLE and has TWO POSSIBLE
+>   DEBTORS: the ENEMY, satisfied through the peace terms of their own edge; or THE
+>   ALLY WHO CALLED THEM IN, when the enemy cannot or will not pay, or when the war
+>   was simply lost and there is nothing to take.
+>   ── ⭐⭐ AND HERE IS THE PAYOFF, because the reason it becomes already exists: AN
+>   UNPAID REPARATIONS CLAIM AGAINST YOUR OWN ALLY IS ingratitude_debt — aid given,
+>   re-read as a debt unpaid, which is reason #10 and already wired with its own
+>   mirror (debt_forgiven). So a coalition that wins and does not settle up, or loses
+>   and cannot, MINTS ITS OWN NEXT WAR between the people who fought side by side.
+>   Today's alliance is tomorrow's casus belli, through a ledger the tree already
+>   keeps and a reason already in the taxonomy. Nothing new is required except
+>   letting war participation feed that reason.
+>   ── THE COUNTERFORCE IS THE SETTLEMENT: paying reparations is expensive and the
+>   mirror is real — debt_forgiven — so an ally that settles up honestly buys a bond
+>   instead of a grudge. Both outcomes must be reachable and pinned, and the Herald
+>   must name which one happened, because "they paid what they owed" and "they never
+>   paid" are the two sentences a table will remember about that alliance forever.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
