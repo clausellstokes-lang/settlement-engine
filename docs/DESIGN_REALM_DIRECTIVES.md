@@ -839,6 +839,32 @@
 >   settlement did. Also measured: the mix of ENDINGS (terms, exhaustion, ruler change,
 >   fragmentation, annihilation) — if one path carries nearly all of them, the others
 >   are decoration and the model is simpler than it looks.
+> - ⭐⭐ 2026-08-01 AMENDMENT M — TRAVEL IS SLOW, AND THE ROAD IS A PLACE. Owner:
+>   "NPCs can only travel between settlements at a rate of MINIMUM ONE WEEK per. That
+>   does not mean that they arrive at the other side of a route at the end of the week
+>   — they could still be on the road — but that they do not just fly across the map."
+>   ── ⭐ THE FLOOR IS A MINIMUM, NOT A DURATION. One week per leg is the FASTEST a
+>   person moves; a long, poor, dangerous or mountainous road takes longer, priced by
+>   J4's grade-aware leg cost. Nothing may move a named person faster than this — not
+>   an envoy, not a wanderer, not an exile, not a DM-assigned NPC in transit.
+>   ── ⭐⭐ AND THE ROAD IS A REAL LOCATION, NOT A GAP BETWEEN TWO PLACES. A traveller
+>   at the end of a week is very often STILL ON THE ROAD, at a real mid-route position
+>   (the armyTransit pattern H3 already uses). This is what the whole envoy system
+>   depends on: a person can be intercepted, can be overtaken by news, can be robbed or
+>   jailed or planted upon, precisely BECAUSE there are weeks in which they are
+>   somewhere rather than nowhere. Collapse the road into an instant hop and every
+>   mechanic in K, K2, K3 and K4 silently dies.
+>   ── ⚠️ IMPLEMENTATION PROHIBITION: no path may teleport a named person between
+>   settlements, and no "arrives next tick" convenience is permitted for envoys,
+>   however tempting when a peace is nearly agreed. THE REPUTATION RACE IS THE PROOF
+>   THIS IS ALREADY RIGHT — news and people travel at different, honest speeds, and
+>   that pin exists and passes. The envoy system is that same physics carrying terms
+>   instead of a reputation.
+>   ── THE CONSEQUENCE TO EMBRACE: peace is SLOW. A sued peace across three legs of bad
+>   road is a month or more each way, and the war runs the whole time (K2.4). That is
+>   not friction to be optimised away — it is the reason a nearly-agreed peace can
+>   fail, the reason terms go obsolete (K3), and the reason the compromise round costs
+>   something real.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
