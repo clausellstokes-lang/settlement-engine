@@ -898,6 +898,40 @@
 >   ── THIS IS AMENDMENT L's CONVERGENCE FORCE #6 MADE SPECIFIC, and it belongs in the
 >   soak's ending-mix measurement: if conquest carries a large share of endings, the
 >   gate is too loose and the negotiation model is not being exercised.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT N2 — THE FEASIBILITY OF CONQUEST IS ITSELF AN INPUT,
+>   AND IT SETS THE BARGAINING RANGE. Owner: feasibility "should move into motivation
+>   and movement and peace terms and vote as well." Conquest is therefore not only an
+>   outcome — the BELIEF that it is possible reshapes behaviour long before it happens,
+>   and it may be the single most consequential belief in the war system.
+>   ── IT FEEDS FOUR THINGS: (1) MOTIVATION — a realm that believes it could take
+>   everything has little reason to settle for less, and a realm that believes it may
+>   BE taken has every reason to end the war now; (2) MOVEMENT — armies that see
+>   conquest within reach march on SETTLEMENTS rather than seeking the enemy's forces,
+>   which is a different campaign shape and must be visible in where they go;
+>   (3) PEACE TERMS — feasibility sets what each side thinks it can demand and what it
+>   must accept; (4) THE VOTE (K.6) — members who believe annihilation is coming vote
+>   for peace at any price, members who believe victory is total vote to continue, and
+>   THAT is how a coalition splits over the same war.
+>   ── ⭐ THE SHARPEST FRAMING: FEASIBILITY IS THE BARGAINING RANGE. Everything K
+>   negotiates happens between "what I could take by force" and "what I must give to
+>   survive". Both ends are beliefs, so the range itself is a belief, and two parties
+>   can hold ranges that do not overlap at all — which is precisely when no terms
+>   exist and the war grinds on with both sides certain they are being reasonable.
+>   ── ⚠️ BELIEVED, NEVER TRUE (K3 governs absolutely here): no path may check actual
+>   relative strength to decide feasibility. A realm that WRONGLY believes it can
+>   conquer refuses reasonable terms and then fails; a realm that wrongly believes it
+>   is about to be conquered accepts ruinous terms it never needed to. Both are among
+>   the best stories this engine can tell and both are forbidden the moment anybody
+>   reads the truth.
+>   ── ASYMMETRIC BY DESIGN: believing you might BE conquered should move behaviour far
+>   more than believing you might conquer. Annihilation is existential; opportunity is
+>   merely attractive. The bands must reflect that or every realm becomes an aggressor.
+>   ── ⭐ AND CONQUEST IS WHERE G's TWO BOOKS COLLAPSE INTO ONE: a ruler whose realm is
+>   about to be taken faces personal ruin alongside it, so the divergence between the
+>   ruler's interest and the settlement's — the engine of political drama everywhere
+>   else — VANISHES under existential threat. A cornered ruler and a cornered realm
+>   want the same thing. That is worth pinning, because it means desperation makes
+>   courts honest, which is a good and slightly unexpected consequence of the model.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
