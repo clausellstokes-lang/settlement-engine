@@ -24,6 +24,9 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { distributeMigrants } from './populationDynamics.js';
 import { SETTLEMENT_LIFECYCLE_TUNING, drawSteadingName } from './settlementLifecycleKernel.js';
+// WAVE P1a — the viability ladder (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §7b) reads the
+// demographic engine's ONE dormancy gate; it never opens a second one.
+import { demographicsActive } from './demographicsRates.js';
 import { withEventConditionsSynced } from '../activeConditions.js';
 
 /** @typedef {import('./settlementLifecycleKernel.js').LcSettlement} LcSettlement */
@@ -117,9 +120,15 @@ function supportOf(pIndex, id) {
  * @param {boolean} [args.forced]
  * @param {boolean} [args.emptied] the empty-settlement fast path fired (dwell at/
  *   below the effective-zero floor met — certain emission, no lottery)
+ * @param {boolean} [args.viabilityLadder] WAVE P1a: this death was authorized at the
+ *   bottom of the ladder by the CENSUS rather than by the tier label (the settlement is
+ *   thorp-scale in fact while its record still reads higher). Stamped onto the patch so
+ *   the writer's self-re-verify, which sees only (settlement, outcome) and may run many
+ *   ticks later from a parked proposal, can honor the same reading instead of refusing
+ *   the outcome its own evaluator emitted. Absent ⇒ the legacy label-only contract.
  * @returns {LcCandidate}
  */
-export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false }) {
+export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatialActive, dwell, support, applyMode, forced = false, emptied = false, viabilityLadder = false }) {
   const s = item.settlement || {};
   const cid = String(item.id ?? '');
   const name = String(item.name || s.name || cid);
@@ -175,7 +184,7 @@ export function buildTerminalDeathOutcome({ item, snapshot, pIndex, tick, spatia
       'The last residents disperse with fates UNRESOLVED — the engine kills no named character, ever.',
     ].filter((r) => r != null).map(String),
     populationDeltas,
-    lifecyclePatch: { kind: 'terminal_death', saveId: item.id },
+    lifecyclePatch: { kind: 'terminal_death', saveId: item.id, ...(viabilityLadder ? { viabilityLadder: true } : {}) },
     proposalPayload: { kind: 'settlement_terminal_death', saveId: item.id },
     generatedAtTick: tick,
     metadata,
@@ -297,6 +306,9 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
 
   const tick = Number.isFinite(context.tick) ? Number(context.tick) : Number(worldState?.tick) || 0;
   const spatialActive = context.spatialActive === true;
+  // WAVE P1a: the viability ladder's gate, read ONCE through the wave's single flag
+  // reader. Dark ⇒ every expression that consults it below is the legacy one.
+  const demographicsLit = demographicsActive({ simulationRules: rules });
   const forkFn = context.rng && typeof context.rng.fork === 'function' ? context.rng.fork.bind(context.rng) : null;
   const settlementTickStates = { ...(/** @type {Record<string, Record<string, unknown>>} */ (worldState?.settlementTickStates) || {}) };
   /** @type {LcCandidate[]} */
@@ -360,8 +372,20 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
 
     // ── TERMINAL DEATH (design §2): thorp-tier + extended decline dwell. ──
     const tier = String(s.tier || popToTier(num(s.population, 0)));
+    const pop = Math.max(0, Math.round(num(s.population, 0)));
     const prior = /** @type {LcTickMeta|null} */ (settlementTickStates[cid]?.settlementLifecycle || null);
-    if (tier !== 'thorp') {
+    // ── WAVE P1a, THE BOTTOM OF THE LADDER (design §7b) ───────────────────────
+    // The precondition is the ladder's last rung and it stays the last rung; what wave
+    // P1a fixes is that the rung was read from the LABEL alone. A settlement's tier is
+    // written by tier drift, which is streak-gated, probabilistic, and proposal-gateable,
+    // so a place can hold forty people while its record still says town, and the label
+    // lag alone made it immortal. Lit, the rung is read from the HEAD COUNT as well: a
+    // settlement that is thorp-scale in fact is at the bottom of the ladder whatever it
+    // is still called. This adds no second demotion writer and mints no tier: the tier
+    // stays exactly what tier drift says it is, and only the death gate learns to look
+    // at the census. Dark, the expression is the original label test, unchanged.
+    const atBottom = tier === 'thorp' || (demographicsLit && popToTier(pop) === 'thorp');
+    if (!atBottom) {
       // Recovered above the bottom rung: the dwell clears (drop the sub-key).
       if (prior && settlementTickStates[cid]) {
         const rest = { ...settlementTickStates[cid] };
@@ -370,7 +394,6 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
       }
       continue;
     }
-    const pop = Math.max(0, Math.round(num(s.population, 0)));
     const support = supportOf(pIndex, cid);
     const thorpMin = num(/** @type {{ min?: number }} */ ((/** @type {Record<string, unknown>} */ (POPULATION_RANGES)).thorp || {}).min, 8);
     const declining = support <= T.DEATH_SUPPORT_FLOOR || pop < thorpMin;
@@ -409,6 +432,9 @@ export function evaluateSettlementLifecycle(worldState, snapshot, pIndex, contex
       // dm_only/recommendations by authorityFor.
       candidates.push(buildTerminalDeathOutcome({
         item, snapshot, pIndex, tick, spatialActive, support, emptied,
+        // Stamped ONLY when the census, not the label, is what put this settlement on
+        // the bottom rung. A label-thorp death is the legacy outcome, byte for byte.
+        viabilityLadder: tier !== 'thorp',
         dwell: emptied && zeroSince != null ? tick - zeroSince : declineDwell,
         applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto'),
       }));
@@ -482,7 +508,9 @@ function withLifecycleHistoryEvent(settlement, event, tick) {
  * and a stale rebirth (the site is no longer a remnant) safely no-op.
  *
  * @param {LcSettlement} settlement
- * @param {{ id?: string, lifecyclePatch?: { kind?: string, name?: string }, metadata?: { tick?: number } }} outcome
+ * @param {{ id?: string, lifecyclePatch?: { kind?: string, name?: string, viabilityLadder?: boolean }, metadata?: { tick?: number } }} outcome
+ *   `viabilityLadder` is wave P1a's conditional key, declared HERE on the owning patch
+ *   typedef rather than reached for through a cast; absent is the legacy contract.
  * @returns {LcSettlement}
  */
 export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome) {
@@ -493,8 +521,16 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
 
   if (patch.kind === 'terminal_death') {
     if (lifecycleStatusOf(settlement)) return settlement; // already a remnant
-    const tier = String(settlement.tier || popToTier(num(settlement.population, 0)));
-    if (tier !== 'thorp') return settlement;              // stale — the settlement recovered
+    const pop = num(settlement.population, 0);
+    const tier = String(settlement.tier || popToTier(pop));
+    // WAVE P1a: a ladder-authorized death re-verifies against the CENSUS, which is what
+    // authorized it. The staleness contract is unchanged in substance: a settlement that
+    // recovered off the bottom rung still refuses, it is simply asked the same question
+    // the evaluator asked. Without the stamp this is the original label test, so every
+    // dark outcome and every label-thorp death reads exactly as before.
+    const atBottom = tier === 'thorp'
+      || (patch.viabilityLadder === true && popToTier(pop) === 'thorp');
+    if (!atBottom) return settlement;                     // stale — the settlement recovered
     const grade = remnantGradeOf(settlement);             // THE SCARCITY PIN (live peakTier)
 
     // Institutions clear — deactivated as archaeology, never erased from the record.

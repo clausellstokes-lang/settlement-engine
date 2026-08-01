@@ -160,7 +160,15 @@ describe('place-and-spatial certification rows — trace to live source', () => 
     // The composition itself: a renamed template reds here rather than silently
     // leaving the derived set below correct-looking.
     mustExtract(src, 'candidateType: `tier_${drift.direction}`', 'tierCandidate composition');
-    mustExtract(src, 'rules.tierDriftEnabled ? tierEligibility(item, pressureIdx) : null', 'the one gate seam');
+    // THE ONE GATE SEAM. Pinned as flag + call-site COUNT rather than as one
+    // literal line: P1a added the demographic viability argument and wrapped the
+    // ternary, and a literal needle would have to be re-pinned on every such edit
+    // while still passing if somebody added a SECOND, ungated call elsewhere.
+    // Two assertions carry the invariant the literal only implied.
+    mustExtract(src, 'rules.tierDriftEnabled', 'the drift flag guard');
+    const eligibilityMentions = [...src.matchAll(/\btierEligibility\(/g)].length;
+    expect(eligibilityMentions, 'exactly one definition and one gated call site')
+      .toBe(2);
     const directions = sorted(new Set([...src.matchAll(/\bdirection: '([a-z_]+)'/g)].map((m) => m[1])));
     expect(directions).toEqual(['demotion', 'promotion']);
     expect(sorted(rowOf('tierDriftEnabled').aliveness.eventTypes))

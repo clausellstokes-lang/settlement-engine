@@ -53,7 +53,7 @@
  */
 
 import { clamp, clamp01 } from '../../kernel/math.js';
-import { TIER_ORDER } from '../../data/constants.js';
+import { POPULATION_RANGES, TIER_ORDER } from '../../data/constants.js';
 import { foodLedger } from '../foodLedger.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { routeLifecycleActive } from './routeNetworkLedger.js';
@@ -500,6 +500,51 @@ export function demographicRates(input) {
 export function foodDeficit01Of(settlement) {
   const ledger = foodLedger(/** @type {Parameters<typeof foodLedger>[0]} */ (settlement));
   return ledger.present ? clamp01(ledger.deficitPct / 100) : 0;
+}
+
+/**
+ * @typedef {Object} TierViability
+ * @property {boolean} known      the settlement carries real food physics to read
+ * @property {number} bound       min(K_food, D_tier)
+ * @property {string} binding     one of BINDING_KINDS
+ * @property {number} tierFloor   the current tier's authored population minimum
+ * @property {boolean} nonviable  the bound sits BELOW the tier's own floor
+ */
+
+/**
+ * THE VIABILITY READ (design §7b, THE VIABILITY LADDER) — wave P1a.
+ *
+ * "Nonzero population and functioning-settlement status are DIFFERENT facts." A place
+ * whose effective bound has fallen below the population floor of the tier it wears
+ * cannot sustain that tier: not because anyone counted its people this tick, but
+ * because the granaries and the ground together cannot hold a settlement of that
+ * grade. That is a DEMOGRAPHIC input to the descent, and it is the one this slice adds.
+ *
+ * IT IS A READ, NEVER A WRITER. The ONE tier-transition writer stays tier drift's
+ * eligibility in tierResourceDynamics.js (design §0b: "a new density-driven demotion
+ * would be a SECOND WRITER on the same transition; extend tier drift's eligibility
+ * instead"). This function only answers a question that eligibility asks.
+ *
+ * UNKNOWN FOOD IS NEVER NONVIABLE. A fixture or a partially generated settlement with
+ * no food physics reads present:false, and an absent reading must never be evidence of
+ * failure; `nonviable` stays false and the legacy population/support tests decide alone.
+ *
+ * @param {DemoSettlement|null|undefined} settlement
+ * @param {{ spatialLedgers?: unknown, simulationRules?: unknown }|null|undefined} worldState
+ * @param {string} settlementId
+ * @returns {TierViability}
+ */
+export function tierViabilityOf(settlement, worldState, settlementId) {
+  const tier = tierOf(settlement);
+  const bound = effectiveBoundOf(foodCapacityOf(settlement, worldState, settlementId), densityCeilingOf(settlement));
+  const floor = num(/** @type {Record<string, { min?: number }>} */ (POPULATION_RANGES)[tier]?.min, 0);
+  return {
+    known: bound.foodKnown,
+    bound: bound.bound,
+    binding: bound.binding,
+    tierFloor: floor,
+    nonviable: bound.foodKnown === true && floor > 0 && bound.bound < floor,
+  };
 }
 
 /**

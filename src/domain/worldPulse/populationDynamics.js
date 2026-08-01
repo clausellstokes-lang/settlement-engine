@@ -1,7 +1,10 @@
 import { activeChannelsFrom } from '../region/index.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
+import { hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
+import { integerize } from './demographicsRates.js';
+import { residentNamedNpcCount } from './npcReplacement.js';
 import { formatCount } from '../formatNumber.js';
 
 // WEEK-denominated interval durations (the canonical grid — mirrors
@@ -292,15 +295,62 @@ function populationPressureRate(item, pressureIdx, rules) {
  * @param {any} pressureIdx
  * @param {any} interval
  * @param {any} rules
+ * @param {number} tick the dither's second key; typed rather than `any` so wave P1a
+ *   adds nothing to the domain any-cast ratchet.
  */
-function deltaForSettlement(item, pressureIdx, interval, rules) {
+function deltaForSettlement(item, pressureIdx, interval, rules, tick) {
   const pop = Math.max(0, Math.round(finite(item?.settlement?.population, 0)));
   if (pop <= 0) return null;
   const magnitude = intervalMagnitude(interval);
   const rate = populationPressureRate(item, pressureIdx, rules);
   const severe = Math.abs(rate) >= 0.025 || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES);
   const cap = pop * (severe ? 0.18 : 0.055) * intensityMultiplier(rules);
-  const rawDelta = Math.round(pop * rate * magnitude);
+  const expectation = pop * rate * magnitude;
+  // ── WAVE P1a, THE FLOOR (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §0 and §11) ────────
+  // THE TWO LINES BELOW ARE THE OTHER HALF OF THE 300-YEAR BIFURCATION, and it is ONE
+  // defect with the runaway P1 cured: an uncapped proportional rate read through an
+  // INTEGER DEADBAND. `Math.round` throws away any expectation under half a person, and
+  // the deadband then throws away a whole one, so a shrinking settlement shrinks until
+  // its delta rounds to -1 and FREEZES PERMANENTLY at pop* = 1.5 / (|rate| x magnitude).
+  // Executed at the soak's own configuration that is 301 people at pressure 0.70, which
+  // is exactly the 200-500 band six settlements sat in for two hundred years.
+  //
+  // MERELY LOWERING THE DEADBAND TO ONE WOULD NOT CURE IT. That moves the fixed point to
+  // 0.5 / (|rate| x magnitude), a third of the way down and no further: the same
+  // settlement refreezes near 100 people, still far above the thorp ceiling of 60, still
+  // unable to descend the tier ladder to the terminal lane. The attractor has to go, not
+  // shrink. So when the demographic engine is lit and the expectation is NEGATIVE, the
+  // decline is integerized the way the demographic kernel integerizes its own death term:
+  // the whole part lands every tick and the FRACTION IS THE PROBABILITY OF ONE MORE,
+  // through the wave's single `integerize` primitive. Expected value is preserved exactly
+  // (the measured decline curve is unchanged in expectation), and there is no population
+  // at which a negative rate stops emitting, so there is no nonzero equilibrium left.
+  //
+  // THE DRAW IS A HASH, NOT A STREAM. This evaluator is pure over (snapshot, pressures)
+  // and holds no rng, and threading one in would open a new per-tick draw in the
+  // candidate lane, which is the wave-E stream-theft hazard for no gain. `hash01` over
+  // (settlement, tick) is the house deterministic-dither idiom, replays exactly, is
+  // identical direct and in the worker, and cannot move any other lane's stream.
+  //
+  // DARK IS THE LEGACY ARITHMETIC, UNTOUCHED: `demographicsEnabled` is virtual (absent
+  // from DEFAULT_SIMULATION_RULES) so this reads `=== true` and is unreachable on every
+  // existing campaign, and the expression below is the same float expression in the same
+  // order it always was.
+  if (expectation < 0 && rules.demographicsEnabled === true) {
+    // THE H3 FLOOR COMPOSES STRUCTURALLY (design law 3: named souls are exempt). Dark,
+    // this lane never had to think about the cast, because the deadband froze every
+    // settlement thousands of souls above it. Removing the freeze is exactly what lets a
+    // decline walk down to the roster, so the floor arrives with it: the departure is
+    // drawn against the ANONYMOUS POOL, never the whole head count, the same subtraction
+    // the demographic kernel takes. The engine starves the number and never the cast.
+    const pool = Math.max(0, pop - residentNamedNpcCount(item?.settlement));
+    const shed = Math.min(pool, integerize(
+      Math.min(-expectation, cap),
+      hash01(`population.decline.${String(item?.id ?? '')}.${tick}`),
+    ));
+    return shed > 0 ? { pop, delta: -shed, severe } : null;
+  }
+  const rawDelta = Math.round(expectation);
   const delta = Math.round(clamp(rawDelta, -cap, cap));
   if (Math.abs(delta) < Math.max(2, Math.round(pop * 0.001))) return null;
   return { pop, delta, severe };
@@ -310,7 +360,7 @@ function deltaForSettlement(item, pressureIdx, interval, rules) {
  * @param {any} options
  */
 function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick, spatialActive }) {
-  const result = deltaForSettlement(item, pressureIdx, interval, rules);
+  const result = deltaForSettlement(item, pressureIdx, interval, rules, tick);
   if (!result) return null;
   const { pop, delta, severe } = result;
   // ── WAVE P1, THE DEMOGRAPHIC ENGINE (docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 1:

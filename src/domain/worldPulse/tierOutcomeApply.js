@@ -305,15 +305,33 @@ export function applyTierOutcomeToSettlement(settlement, outcome) {
   // `strainedBelowFloor` (pop < currentMin && support < 0.45) on the very next
   // tick — a promote/demote churn loop at the boundary. Demotion leaves
   // population untouched (the population already fell; the tier is catching up).
+  //
+  // ── WAVE P1a, LAW 4: DAMAGE TRANSMUTES, PEOPLE ACCOUNT ────────────────────────
+  // (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §1 law 4, §5 earned ascension, §0b's explicit
+  // finding that "PROMOTION IS NOT CONSERVED" and must be dispositioned before the
+  // conservation check can be exact.) The bump above is a MINT: it creates people out
+  // of a label change, and the realm total moves without a birth. Lit, that is illegal,
+  // and the design's answer is not a smaller mint but a stricter door: tier drift's
+  // eligibility requires the FULL next-tier minimum when the demographic engine is on,
+  // so the gap this bump was covering does not exist and nobody has to be invented to
+  // fill it. The population must already be there.
+  //
+  // The stamp rides on the OUTCOME rather than being read from the rules because a
+  // proposal applies from the stored outcome many ticks later and this applier never
+  // sees the rules. Absent (every dark campaign, and the DM SHIFT_TIER verb, which does
+  // its own sovereign rebanding before it ever reaches this line) ⇒ the legacy mint,
+  // byte for byte, which a golden depends on.
+  const populationConserved = outcome.tierChange.populationConserved === true;
+  const mints = direction === 'promotion' && !populationConserved;
   const promotedFloor = /** @type {any} */ (POPULATION_RANGES)[toTier]?.min || 0;
   const currentPopulation = Math.round(Number(settlement.population) || 0);
-  const nextPopulation = direction === 'promotion'
+  const nextPopulation = mints
     ? Math.max(currentPopulation, promotedFloor)
     : currentPopulation; // demotion leaves population untouched (already the rounded current value)
   // The anti-churn floor bump is a deliberate (unconserved) mint — leave a
   // populationHistory breadcrumb (same shape as applyPopulationOutcomeToSettlement's)
   // so the chronicle/audit surfaces can see it instead of an invisible population jump.
-  const floorBump = direction === 'promotion' ? Math.max(0, nextPopulation - currentPopulation) : 0;
+  const floorBump = mints ? Math.max(0, nextPopulation - currentPopulation) : 0;
 
   return {
     ...settlement,

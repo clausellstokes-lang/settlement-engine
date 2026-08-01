@@ -10,6 +10,7 @@ import {
   nativeSemanticResourceKeys,
 } from '../content/customContentSemanticAuthority.js';
 import { stablePart } from './worldState.js';
+import { formatCount } from '../formatNumber.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 // CL-0: every candidate family consults the per-domain change-authority policy.
 // authorityFor passes each site's legacy gate through VERBATIM under
@@ -31,6 +32,13 @@ import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
 import { readinessOf, readinessValueTilt, readinessUpkeepDrag } from './martialReadiness.js';
 import { isWarSupplyResource } from './moralMartialLean.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+// WAVE P1a (docs/DESIGN_DEMOGRAPHIC_ENGINE.md §7b) — THE VIABILITY LADDER'S ONE INPUT.
+// Design §0b is explicit that a density-driven demotion would be a SECOND WRITER on a
+// transition this module already owns, so the ladder arrives as an EXTRA INPUT to the
+// eligibility below and NEVER as a second lane. `tierViabilityOf` is a pure read; the
+// tier transition is still authored here and nowhere else. Dark (`demographicsEnabled`
+// absent, the virtual default) the input is not even computed.
+import { demographicsActive, tierViabilityOf } from './demographicsRates.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -95,10 +103,16 @@ function requiredStreak(direction, targetTier) {
 }
 
 /**
+ * THE ONE TIER-TRANSITION ELIGIBILITY (promotion and demotion both). Wave P1a extends
+ * its INPUTS rather than forking a second lane, per design §0b.
+ *
  * @param {any} item
  * @param {any} pressureIdx
+ * @param {import('./demographicsRates.js').TierViability|null} [demography] the wave-P
+ *   viability read, supplied ONLY when `demographicsEnabled` is lit. NULL means dark,
+ *   and every line that consults it below falls back to the legacy expression exactly.
  */
-function tierEligibility(item, pressureIdx) {
+function tierEligibility(item, pressureIdx, demography = null) {
   const settlement = item.settlement || {};
   const currentTier = settlement.tier || popToTier(settlement.population || 0);
   const rank = tierRank(currentTier);
@@ -106,8 +120,19 @@ function tierEligibility(item, pressureIdx) {
   const support = supportScore(pressureIdx, item.id);
   const nextTier = TIER_ORDER[rank + 1] || null;
   const previousTier = TIER_ORDER[rank - 1] || null;
+  // ── EARNED ASCENSION (design §5, wave P1a) ────────────────────────────────────
+  // Lit, the population must ALREADY BE THERE: promotion needs the next tier's whole
+  // authored minimum, not 92 percent of it. This is the paired half of removing the
+  // promotion mint in tierOutcomeApply.js, and the two MUST travel together. The 0.92
+  // window exists precisely because the mint covered the gap it opens: promote a
+  // settlement at 92 percent of the floor without minting the difference and it lands
+  // under its own tier's minimum, where `strainedBelowFloor` below can demote it on the
+  // very next tick, which is the promote/demote churn loop the mint was built to stop.
+  // Requiring the full floor closes the gap at the source instead of papering it with
+  // people who were never born (law 4: damage transmutes, people account).
+  const promotionWindow = demography ? 1 : 0.92;
 
-  if (nextTier && pop >= (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || Infinity) * 0.92 && support >= 0.62) {
+  if (nextTier && pop >= (/** @type {any} */ (POPULATION_RANGES)[nextTier]?.min || Infinity) * promotionWindow && support >= 0.62) {
     return {
       direction: 'promotion',
       fromTier: currentTier,
@@ -122,14 +147,27 @@ function tierEligibility(item, pressureIdx) {
   const hardPopulationFailure = previousTier && pop < currentMin * 0.82;
   const structuralFailure = previousTier && support <= 0.25;
   const strainedBelowFloor = previousTier && pop < currentMin && support < 0.45;
-  if (hardPopulationFailure || structuralFailure || strainedBelowFloor) {
+  // ── THE VIABILITY LADDER'S INPUT (design §7b, wave P1a) ───────────────────────
+  // Nonzero population and functioning-settlement status are different facts. The three
+  // legacy tests all ask about the HEAD COUNT and the support vector; this one asks
+  // whether the place can still be a settlement of this grade at all, by comparing the
+  // effective bound min(K_food, D_tier) against the tier's own population floor. A town
+  // whose granaries and ground together hold fewer souls than a town needs is failing
+  // whatever its current census says, and it descends the ladder toward the terminal
+  // lane instead of standing frozen at three hundred people forever. Dark, `demography`
+  // is null and this term is exactly false.
+  const demographicFailure = !!previousTier && demography != null && demography.nonviable === true;
+  if (hardPopulationFailure || structuralFailure || strainedBelowFloor || demographicFailure) {
+    const demographicOnly = demographicFailure && !hardPopulationFailure && !structuralFailure && !strainedBelowFloor;
     return {
       direction: 'demotion',
       fromTier: currentTier,
       toTier: previousTier,
       support,
       severity: clamp01((1 - support) * 0.6 + (currentMin ? Math.max(0, 1 - pop / currentMin) : 0) * 0.4),
-      reason: `${currentTier} is no longer supported by population, economy, defense, or legitimacy conditions.`,
+      reason: demographicOnly && demography
+        ? `${currentTier} can no longer be fed or housed at its own scale: the ${demography.binding === 'granary' ? 'granaries' : 'walls'} hold about ${formatCount(demography.bound)} souls, under the ${formatCount(currentMin)} a ${currentTier} needs.`
+        : `${currentTier} is no longer supported by population, economy, defense, or legitimacy conditions.`,
     };
   }
 
@@ -145,11 +183,21 @@ function tierEligibility(item, pressureIdx) {
  * @param {any} item
  * @param {any} drift
  * @param {any} tick
- * @param {{ majorChangesRequireProposal?: boolean }} rules
+ * @param {{ majorChangesRequireProposal?: boolean, demographicsEnabled?: boolean }} rules
+ *   `demographicsEnabled` is the wave-P virtual flag, declared on THIS typedef (the
+ *   owning surface) rather than reached for through a cast.
  */
 function tierCandidate(item, drift, tick, rules) {
   const minimum = requiredStreak(drift.direction, drift.toTier);
   if (drift.streak < minimum) return null;
+  // ── LAW 4, STAMPED ON THE OUTCOME (design §1 law 4, wave P1a) ─────────────────
+  // A tier change may be parked as a proposal and applied MANY ticks later, and the
+  // applier (tierOutcomeApply.js) receives only (settlement, outcome) with no access to
+  // the rules. So the conservation law in force when the candidate was minted travels
+  // WITH it, as a conditional key that is simply absent when dark. Absent means the
+  // legacy unconserved promotion mint, which a golden depends on; present means the
+  // promotion raises the tier and touches nobody's head count.
+  const populationConserved = rules.demographicsEnabled === true;
   const chance = clamp01(0.18 + (drift.streak - minimum + 1) * 0.13 + drift.severity * 0.24);
   return {
     id: `candidate.tier.${drift.direction}.${stablePart(item.id)}.${tick}`,
@@ -182,6 +230,7 @@ function tierCandidate(item, drift, tick, rules) {
       fromTier: drift.fromTier,
       toTier: drift.toTier,
       direction: drift.direction,
+      ...(populationConserved ? { populationConserved: true } : {}),
     },
     proposalPayload: {
       kind: 'tier_change',
@@ -525,9 +574,20 @@ export function evaluateTierResourceDynamics(worldState, snapshot, pressureIdx, 
     .filter((/** @type {any} */ proposal) => proposal?.status === 'pending' && proposal?.outcome?.tierChange?.saveId != null)
     .map((/** @type {any} */ proposal) => String(proposal.outcome.tierChange.saveId)));
 
+  // WAVE P1a: the viability read is computed ONLY when the demographic engine is lit,
+  // so a dark campaign never derives K_food, never touches the food ledger, and cannot
+  // pay a byte for a lane it does not run.
+  const demographicsLit = demographicsActive({ simulationRules: rules });
+
   for (const item of snapshot?.settlements || []) {
     const previous = settlementTickStates[item.id] || {};
-    const eligibility = rules.tierDriftEnabled ? tierEligibility(item, pressureIdx) : null;
+    const eligibility = rules.tierDriftEnabled
+      ? tierEligibility(
+        item,
+        pressureIdx,
+        demographicsLit ? tierViabilityOf(item.settlement, worldState, String(item.id)) : null,
+      )
+      : null;
     let tierDrift = null;
     if (eligibility) {
       const prior = previous.tierDrift || {};
