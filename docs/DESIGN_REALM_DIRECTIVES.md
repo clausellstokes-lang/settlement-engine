@@ -288,6 +288,39 @@
 >   quarrel — the war dissolves because the man who caused it is gone. That chain
 >   runs through the corruption web, the verdict table, succession and the war layer,
 >   and every piece of it already exists in the tree.
+> - ⭐⭐ 2026-08-01 AMENDMENT E — WAR AS CULTURE, AND THE GOD WHO WANTS IT. Owner:
+>   "war can also just simply be a cultural thing. If a kingdom has a history of war
+>   and it has been FAVOURABLE to them — not even mentioning the pressure from their
+>   deity — that is another cause, and also an end term."
+>   ── A FOURTEENTH CAUSE, and it is unlike the other thirteen: not grievance, not
+>   fear, not need. "We are a people who make war, and it has worked for us." It
+>   scores off the settlement's OWN martial history — wars fought and, crucially,
+>   wars WON. The favourable qualifier is the whole design: this is a FEEDBACK LOOP,
+>   and it must run in both directions from one honest read. Victories breed a
+>   standing appetite; DEFEATS BREED CAUTION. That is also its counterforce per
+>   amendment A — no separate damper is needed, because the same reader that credits
+>   a triumph debits a rout, and a realm that has been beaten twice is a realm that
+>   hesitates. A one-way militarism counter would be a ratchet and is forbidden.
+>   ── DEITY PRESSURE IS A SEPARATE TERM FROM THE HOLY-WAR CAUSE, and the two must not
+>   be conflated. sacred_claim (ruling 3) is about ALIGNMENT OPPOSITION between two
+>   settlements' gods. THIS is about the patron deity's own nature: a god of war,
+>   conquest or the hunt pushes its people toward war against ANYONE, with no
+>   opposition required. Reads the domains the local pantheon already carries (deity
+>   doctrine: no premade pool, so the war-god is one this world made).
+>   ── ⭐ IT IS ALSO AN END TERM, per the owner. A martial culture with a favourable
+>   history is SLOW TO SUE — it enters the termination read of C/C2/D alongside the
+>   cause, the two costs, the momentum and the ruler. A people who have won before
+>   believe they will win again, which is exactly how wars outlive their arithmetic.
+>   Conversely a culture carrying fresh defeats sues early. Same loop, both ways.
+>   ── COHERENCE (amendment B) IS AT ITS SHARPEST HERE: a martial culture, a war god
+>   and a history of victories is a COHERENT war-making realm and the receipt should
+>   read as one sentence about a people, not three unrelated modifiers. A peaceable
+>   culture with a harvest god and a history of losses that nonetheless raises this
+>   cause is INCOHERENT and must not be able to.
+>   ⚠️ SUBSTRATE: past war outcomes (won/lost) must be readable — verify the war
+>   history actually records outcomes and not merely occurrences before building. If
+>   it records only that wars happened, the favourable qualifier cannot be honoured
+>   and the cause must NOT be built as bare militarism; report instead.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
