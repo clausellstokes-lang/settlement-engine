@@ -761,6 +761,42 @@
 >   signed for a town that had already fallen" is one of the best sentences this engine
 >   will ever be able to produce, and it is only possible because nobody was allowed to
 >   look at the truth.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT K4 — MANY ENVOYS, MANY TRUTHS: RECONCILIATION IS THE
+>   MECHANIC, NOT A PREPROCESSING STEP. Owner: several NPCs out and returning at
+>   similar times, holding information that may or may not agree — "these should
+>   determine each individual's vote for peace as well as the conditions applied."
+>   ── ⚠️ THE PROHIBITION FIRST, because the instinct is wrong: DO NOT MERGE THE
+>   ACCOUNTS into one best estimate. That is K3's forbidden shortcut wearing a helpful
+>   face. Every envoy's account stays SEPARATE and the contradiction stands.
+>   ── ⭐ THE LADDER ALREADY EXISTS: I2 built confirmed / corroborated / reported /
+>   tavern_talk, earned from real provenance. Point it at envoy testimony. TWO ENVOYS
+>   WHO AGREE ARE CORROBORATED; a lone dissenting account is merely reported. Each
+>   envoy is additionally a SOURCE with their own credibility — past accuracy,
+>   standing, relationship to the seat — which the information layer already tracks.
+>   No new reconciliation rule is authored.
+>   ── ⭐ THE RULER CHOOSES WHOM TO BELIEVE, AND THAT CHOICE IS CHARACTER (G arriving
+>   somewhere unplanned): a ruler with divergent books may believe the envoy whose
+>   report SUITS them. The man who says "they are weak, press on" persuades a ruler
+>   whose seat depends on victory. Belief-selection is a political act here, not an
+>   arithmetic one, and the receipt should be able to say so.
+>   ── ⭐⭐ THE VOTE IS CAST ON EACH MEMBER'S OWN PICTURE, never a shared one. THE
+>   CONSEQUENCE IS THE BEST THING IN THIS AMENDMENT: A COALITION MAY BE UNANIMOUS IN
+>   JUDGEMENT AND SPLIT IN FACT — every member wanting the same outcome and voting
+>   differently because each heard from their own envoy. Pin that shape explicitly; it
+>   is far more interesting than members who simply disagree about strategy.
+>   ── TERMS ARE PER-ENVOY, NOT GLOBAL: envoys who parlayed with different
+>   counterparties (the army in the field, the court, a coalition member under K.3c)
+>   come home with DIFFERENT TERM-SHEETS. The vote is therefore over a SET of
+>   competing offers, and failure to choose between them is exactly K2.4's close-vote
+>   case and triggers the compromise round. No new failure mode is invented.
+>   ── ⭐ THE PAYOFF TO BUILD FOR: an enemy PLANTS on one envoy (K.3d, I4's existing
+>   verb), that envoy is the MORE CREDIBLE source, and the plant WINS THE VOTE. A
+>   peace accepted or refused on a lie carried home by a trusted man. This is the
+>   information program reaching into an irreversible decision, and it is the strongest
+>   justification the whole epistemic layer has.
+>   ── ⚠️ SCOPE BOUND: cap concurrent envoys per settlement (one or two). Without it
+>   the account/term-sheet state grows combinatorially with coalition size for very
+>   little added drama.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
