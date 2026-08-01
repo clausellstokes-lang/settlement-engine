@@ -130,6 +130,17 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
 the index — hazards, rulings, gotchas). If you are NOT Claude: everything
 load-bearing from memory has been mirrored into the docs above; trust the repo.
 
+## 6b-2. ⭐⭐ CONTINUITY ORDER UPDATED (owner, 2026-07-31 — supersedes 6b's model):
+"If i run out of fable, i want you to seemlessley switch to opus 5." An OPUS 5
+successor inherits FULL standing authority the moment the prior session ends — same
+laws as 6b (judgments vetoable, owner-gated classes never self-ruled, ultracode on,
+manager+implementer both chairs). NEW OBLIGATION: every Fable-chair judgment
+(acceptance, architecture deviation, golden adjudication, soak interpretation, tuning
+ratification) made under Opus is recorded as a row in the code branch's
+docs/FABLE_VALIDATION_QUEUE.md; a later Fable-capable account re-validates oldest-first
+(CONFIRM/ADJUST-forward/ESCALATE) and readjusts instructions on systematic lean. The
+LIVE program surface is minifold docs/DESIGN_REALM_DIRECTIVES.md (Progress blockquote).
+
 ## 6b. ⭐ STANDING CONTINUITY ORDER (owner, 2026-07-18, verbatim intent):
 "if i run out of fable, automatically switch and continue all the work with opus
 4.8 ultracode fast. don't wait on me." — A successor session on OPUS 4.8 (fast
