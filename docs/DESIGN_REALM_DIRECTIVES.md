@@ -729,6 +729,38 @@
 >   earn another round, and whether repeated near-misses widen or narrow it.
 >   ── LEGIBILITY: the Herald must be able to say a peace FAILED ON THE ROAD rather
 >   than failing at the table — "the terms were agreed and the envoy never reached
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT K3 — THE GOVERNING LAW OVER ALL OF K: NOBODY IS EVER
+>   CURRENT. Owner: "information and position are always changing, so they are working
+>   on limited or possibly obsolete knowledge." This is not another mechanic; it is the
+>   LAW the mechanics of K and K2 exist to serve, and it is binding over all of them.
+>   ── ⭐ NO PARTY TO A NEGOTIATION EVER HOLDS CURRENT TRUTH. Not the envoy, whose
+>   picture of home froze the day they left. Not the army, whose picture mutates per
+>   battle and per hall it rests in. Not the court, which is voting on a report that
+>   was stale when it was written and staler when it arrived. Not the coalition, which
+>   is ratifying a summary of a summary. Positions move while messengers walk, and
+>   there is no seat anywhere in the world from which the war can be seen as it is.
+>   ── ⚠️ THE IMPLEMENTATION PROHIBITION, and it is the whole point: NO NEGOTIATION
+>   PATH MAY EVER READ TRUE WORLD STATE. Not for the terms, not for the vote, not for
+>   the interceptor's judgement, not for the close-vote comparison. Every read is a
+>   BELIEF read through the existing machinery, or it is a bug. The tempting shortcut —
+>   "just check the actual front line to see if these terms make sense" — would silently
+>   delete the entire epistemic thesis at the exact moment it matters most.
+>   ── ⭐⭐ THE CONSEQUENCE THAT MUST BE ALLOWED: TERMS CAN BE AGREED THAT ARE ALREADY
+>   ABSURD. A settlement ceded that has already fallen to somebody else. A road
+>   conceded that was cut a season ago. An army's withdrawal promised when that army no
+>   longer exists. Reparations set against stores that burned while the envoy walked.
+>   The engine must NOT sanity-check terms against reality — it must let them be signed
+>   and then let the world discover the mismatch, because that discovery IS the next
+>   grievance, and it is how real treaties actually fail.
+>   ── ⭐ WHY THIS IS THE KEYSTONE OF THE WHOLE PROGRAM: every epistemic mechanism built
+>   this week — distance-priced belief, credibility, brokerage stamps, plants, the
+>   reputation race — is flavour until the moment it decides something irreversible.
+>   A peace negotiated on obsolete knowledge is that moment. This is where the
+>   information layer stops being texture and becomes the thing the world turns on.
+>   ── LEGIBILITY: where the Herald can honestly say it, it should — "the terms were
+>   signed for a town that had already fallen" is one of the best sentences this engine
+>   will ever be able to produce, and it is only possible because nobody was allowed to
+>   look at the truth.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
