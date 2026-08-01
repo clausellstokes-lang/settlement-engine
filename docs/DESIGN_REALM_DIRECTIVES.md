@@ -460,6 +460,35 @@
 >   ── LEGIBILITY (the hard requirement): the receipt must be able to say WHOSE
 >   INTEREST a decision served. "The realm sued for peace" and "the Margrave sued for
 >   peace" are different sentences and the Herald must know which one is true.
+> - ⭐⭐ 2026-08-01 AMENDMENT G2 — PEACE IS BILATERAL: THE SAME BOOKS DECIDE WHETHER
+>   TO DECLINE. Owner: "these are also reasons to decline someone's sue for peace, as
+>   well as another counterforce." Suing and ACCEPTING are two separate decisions,
+>   each made by a ruler with two sets of books, and the decline runs the identical
+>   machinery: the live cause, the projected comparative costs (F), the home front,
+>   momentum, disposition, coherence, and the ruler's own position (G).
+>   ── WHO DECLINES, AND WHY IT IS NOT SYMMETRIC WITH SUING: the winning side declines
+>   because F's trajectory says terms improve with time; a ruler whose seat depends on
+>   the war declines even when the settlement would plainly benefit (G's divergence,
+>   seen from the other side of the table); a martial disposition declines what a
+>   mercantile one would take (E2); and a court that WRONGLY BELIEVES it is winning
+>   declines a peace it should have seized — the epistemic layer's best moment in the
+>   whole war system.
+>   ── ⭐ THE STRUCTURAL ASYMMETRY, and it is the honest counterforce this amendment
+>   contributes: PEACE REQUIRES TWO YESES; WAR REQUIRES ONE NO. Ending a war is
+>   therefore structurally harder than continuing it, with no pessimism term needed
+>   anywhere. That single fact explains protraction better than any weight could, and
+>   it is why long wars exist.
+>   ── ⚠️ BUT DECLINING MUST NOT BE FREE, or the asymmetry becomes a deadlock
+>   generator. Every refusal accrues its own costs, all of them from existing state:
+>   the refusal IS A FACT and hardens the other side (a grievance the reasons layer
+>   can read); it prolongs the home-front drain (F) which the refuser now owns by
+>   choice; it can cost the refuser legitimacy at home ("he could have ended it") and
+>   patience among allies who are bleeding for someone else's war. Repeated refusal
+>   is therefore self-limiting, and the deadlock resolves without a timer.
+>   ── ⭐ A DECLINED PEACE IS A NEWS EVENT, never a silent non-event. "Terms were
+>   offered and refused" is exactly the kind of fact a table remembers, it changes the
+>   relationship record, and per the address law it names who offered, who refused,
+>   and — where the receipt can honestly say it — whose books the refusal served.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
