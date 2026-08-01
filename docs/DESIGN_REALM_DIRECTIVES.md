@@ -638,6 +638,62 @@
 >   and diplomatic channels for those who profited by it; a war whose spoils an ally
 >   stole teaches a people something else entirely. The loop closes back into
 >   character.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT K — THE ENVOY: PEACE IS CARRIED BY A PERSON, AND CAN
+>   BE STOPPED ON THE ROAD. This is the largest ruling of the war program and it makes
+>   diplomacy PHYSICAL, EPISTEMIC and INTERCEPTABLE. Owner, in full.
+>   ── K.1 SUING IS A JOURNEY, NOT A STATE CHANGE. A named NPC leaves to sue or
+>   parlay and travels the LIVED route network under H3's physics (one hop per tick,
+>   connected-only, mid-route positions real). Terms are not made by a flag flipping;
+>   they are made by somebody arriving.
+>   ── ⭐ K.2 THE ENVOY CARRIES A SNAPSHOT THAT DECAYS. They leave with TRUE knowledge
+>   of their own settlement, and from that moment it can only MUTATE: slowly, when
+>   they hear rumours that contradict it, or by coincidence when news happens to reach
+>   them. So an envoy may negotiate terms on a home that no longer exists as they
+>   remember it. THIS IS THE REPUTATION RACE APPLIED TO DIPLOMACY, on the same
+>   machinery (I2/I3 belief, distance-priced news, J4 travel), and it is the reason
+>   the whole amendment belongs in this engine rather than a menu.
+>   ── K.3 INTERCEPTION, FOUR KINDS, ALL REAL: (a) by an ARMY of the target — the
+>   parlay happens with the army in the field, not the court; (b) by a THIRD PARTY who
+>   wants the war continued for its own reasons; (c) ⭐ by a COALITION MEMBER OF THE
+>   TARGET — and if that member has no motive of its own to continue, THE ENVOY MAY
+>   PARLAY WITH THEM, one coalition to the other. Peace can therefore enter through an
+>   unexpected door, which is the sharpest new idea here; (d) by ANYONE, coalition or
+>   not, pursuing PRIVATE goals outside their coalition's: to set terms that benefit
+>   themselves, to PLANT FALSE INFORMATION (this is I4's existing plant verb, aimed at
+>   an envoy), or to IMPRISON the envoy so the opportunity never arrives (this is H2's
+>   existing jailed verdict, applied to a foreign guest).
+>   ── K.4 THE INTERCEPTOR'S PICTURE IS ALSO IMPERFECT. An army receiving steady
+>   reinforcement is updated by what each column brings, and its information mutates
+>   PER BATTLE and PER INTERMEDIATE SETTLEMENT it rests in. So a field parlay is two
+>   parties with differently-sourced, differently-stale pictures of the same war —
+>   which is exactly how field parlays actually go.
+>   ── K.5 THE RETURN LEG IS MANDATORY AND EQUALLY DANGEROUS. Terms bind nothing until
+>   they are carried home and told. The journey back is interceptable by every means
+>   in K.3, and an envoy carrying agreed terms is a more valuable target than one
+>   carrying an offer.
+>   ── ⭐ K.6 COALITION RATIFICATION IS A TWO-LEVEL AUTHORITY. Where the peace is with
+>   a coalition, the coalition must agree: MAJORITY VOTE OF THE LEGITIMATE POWERS. And
+>   the inter-settlement coalition MAY VETO what a member's own legitimate power
+>   decided. This extends G (the ruler's two books) and H (the coalition inside the
+>   walls) outward: a ruler can be overruled from ABOVE as well as from below, and the
+>   Herald must name which body actually decided.
+>   ── ⭐⭐ K.7 AN ENVOY WHO DOES NOT RETURN IS READ AS HOSTILITY — AND THE READING MAY
+>   BE WRONG. The home settlement infers the worst from silence. But the envoy may be
+>   imprisoned, delayed, lost, or simply slow. THIS IS THE JEWEL OF THE AMENDMENT: a
+>   war can ESCALATE BECAUSE A MESSENGER WAS LATE, which is both historically true and
+>   the purest possible expression of this engine's epistemic thesis. Pin the false
+>   inference explicitly — an envoy alive and travelling while home mourns them.
+>   ── COUNTERFORCES (amendment A), all from existing machinery: seizing or jailing an
+>   envoy is a GRIEVANCE if it becomes known, and whether it becomes known is the
+>   information layer's own question; a realm that harms envoys earns a reputation
+>   that makes future parlay harder (the relationship record already carries this); and
+>   a plant aimed at an envoy can be CONTRADICTED and EXPOSED with blowback priced, on
+>   I4's existing triple.
+>   ── ⚠️ SCOPE: this is overwhelmingly WIRING, not new machinery — H3 travel, H4 the
+>   register and DM verbs, H2 verdicts, I2/I3/I4 belief-rumour-plant, J4 the lived
+>   network and interception, and the reputation race. What is genuinely NEW is small:
+>   the envoy errand itself, the knowledge snapshot, the coalition vote, and the
+>   non-return inference. Build it as wiring and it stays affordable.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
