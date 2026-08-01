@@ -454,6 +454,25 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // precedent). LIGHTING IT belongs at the declared golden boundary once J2's flows,
     // J3's charter/decay events and J4's consumers land; flip this one value there.
     routeLifecycleEnabled: false,
+    // W-K1: THE MAGIC ECONOMY LANE, DECLARED DARK — the same shape, and for the same
+    // reason, as the W-H1 and W-J1 declarations directly above. `magicEconomyEnabled`
+    // is a VIRTUAL flag (no DEFAULT_SIMULATION_RULES entry; every gate reads
+    // `=== true`, so a declared false is behaviourally identical to absent and cannot
+    // perturb a byte), declared here at FALSE so the subsystem-certification totality
+    // walker can SEE the key and hold W-K's lane under the contract from its first
+    // commit rather than retroactively.
+    //
+    // THE KEY GATES MORE THAN MAGIC, DELIBERATELY. Slice K1 is the GENERAL institution
+    // status system (operational/impaired/shell), which is magic-INDEPENDENT and ships
+    // first precisely so every institution benefits before magic does
+    // (docs/DESIGN_MAGIC_ECONOMY.md §13). It rides this key anyway because §3c's status
+    // vocabulary is one of the magic economy's constitutional laws (law 1, NO
+    // EXEMPTION: magic's infrastructure obeys the same status vocabulary as every
+    // institution), so splitting the two behind separate switches would let a world
+    // exist in which magic's infrastructure and everything else spoke different status
+    // words. LIGHTING IT belongs at the declared golden boundary once K2's regimes,
+    // K3's buffer and K4's substitution land; flip this one value there.
+    magicEconomyEnabled: false,
     // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
     // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
     // supplyWebWarfare fire here; the composition smoke + whole-world soak drive

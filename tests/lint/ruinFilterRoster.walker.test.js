@@ -130,6 +130,18 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // a calamity-ruined port/circle should sever connectivity is an OWNER design call,
   // not a mechanical repair. Deferred to owner; NOT fixed in this lane.
   'src/domain/spatial/spatialDigest.js': 'owner-deferred — feeds seaLanes/teleportEdges (owner PORT/TELEPORT rules; siege=node-starvation not edge-severance)',
+  // ── status-grader: MUST see non-live rows, and applies its own ruin guard ────────
+  // W-K1's institution status system (docs/DESIGN_MAGIC_ECONOMY.md §3c) grades every
+  // institution as operational | impaired | shell. A SHELL is an intact-but-unfunded
+  // institution, which the estate marks `_worldPulseInactive: true` + status 'remnant'
+  // at an economic close, so routing this reader through liveInstitutions() would drop
+  // exactly the rows the slow half of the design exists to grade and silently delete
+  // the shell verdict. It is not ruin-BLIND either: it carries its own ruin guard
+  // (`if (isRuinedInstitution(institution)) continue`), which the file-granular regex
+  // cannot see only because the predicate lives in the sibling model leaf
+  // institutionStatusModel.js rather than inline. It credits nothing: the verdict it
+  // derives reports capacity, never sums it into a provider total.
+  'src/domain/worldPulse/institutionStatusLifecycle.js': 'status-grader — grades operational/impaired/shell, so it MUST see the non-live rows liveInstitutions() drops (a shell IS _worldPulseInactive); carries its own isRuinedInstitution guard via institutionStatusModel.js, and credits no provider capacity',
   // ── display: renders the roster (showing a ruin is correct) ──────────────────────
   'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
