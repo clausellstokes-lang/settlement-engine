@@ -388,6 +388,40 @@
 >   realm does not trade indiscriminately; it lowers the bar for the partners it
 >   already has ties or reasons with. Threshold, preference, relationship, risk —
 >   forces and counterforces everywhere, and no channel gets a shortcut.
+> - ⭐⭐ 2026-08-01 AMENDMENT F — COSTS ARE COMPARATIVE AND PROJECTED, AND THE HOME
+>   FRONT IS ITS OWN STREAM. Owner: "the cost of ending it now might be less or
+>   greater than the cost of ending it later depending on the war — that's how they
+>   rank it, if they're weak or strong or even. But then there's also the cost back
+>   at home to the economy to think about as well."
+>   ── THE COST READ IS NO LONGER A SNAPSHOT. C2 asked for cost-to-continue vs
+>   cost-to-stop; F makes both FORWARD-LOOKING. The question a court actually asks is
+>   not "what does peace cost?" but "what will peace cost me LATER, compared to now,
+>   given where this is going?" That is how wars really end: a belligerent sues when
+>   it believes its position will only worsen.
+>   ── ⭐ TRAJECTORY RANKS IT, THREE WAYS: (a) LOSING — terms degrade with time, so
+>   ending later costs MORE than ending now, and the pressure is to sue immediately;
+>   (b) WINNING — terms improve with time, so ending later costs LESS, and the
+>   pressure is to continue and collect; (c) EVEN — no trajectory advantage exists,
+>   the comparison is silent, AND THEREFORE EVERY OTHER FORCE DECIDES: momentum, the
+>   ruler, the disposition, the home front, the live cause. This is a feature and
+>   should be stated as one — the stalemate is exactly where long wars live, and it
+>   is where the rest of this model earns its keep.
+>   ── IT READS BELIEVED TRAJECTORY, NOT TRUE (per amendment B and the P4 precedent):
+>   a commander who wrongly believes he is winning holds out, and a realm that
+>   overrates its enemy sues from a position of strength. Both must be reachable, and
+>   the receipt must be able to say the court was mistaken.
+>   ── ⭐ THE HOME FRONT IS A THIRD STREAM, DISTINCT FROM BOTH: the war drains the
+>   realm behind it whatever happens at the front. CRITICAL IMPLEMENTATION RULE: this
+>   is NOT a new war-tax parameter — it is READ from the state degradation the
+>   existing systems already produce. Roads losing traffic and decaying (J), food
+>   and stores drawn down (P/foodStockpile), population and its named cast spent
+>   (P1/P1a), economy regimes demoting and institutions shelling (K1/K2), trade
+>   partners lost. The war's cost at home is the sum of what the other engines
+>   already register, not a number invented for war.
+>   ── ⭐ THEREFORE A REALM CAN BE WINNING ABROAD AND LOSING AT HOME, and that must be
+>   reachable, legible and narratable: victories on the field while the granaries
+>   empty and the roads go to grass. It is one of the most historically common shapes
+>   a war takes and one of the most dramatic for a table. Pin it explicitly.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
