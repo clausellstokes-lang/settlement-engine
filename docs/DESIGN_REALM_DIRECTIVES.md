@@ -93,6 +93,15 @@
 >   evidence. (3) The manager's veto-open design blocks are RATIFIED for the builds
 >   (brokerage Challenges A+B, K4 reagent chains, J-D9 refinements). Wave order
 >   adjusted: D resumes AFTER G lands (disjoint-surface discipline).
+> - 2026-07-31 (⭐ CONTINUITY ORDER, owner): Fable weekly usage may exhaust. On
+>   exhaustion: an OPUS 5 successor inherits FULL standing authority IMMEDIATELY
+>   (the 2026-07-18 continuity order updated: same laws, ultracode standing,
+>   manager+implementer both on Opus 5, owner-gated classes still gated, do not
+>   wait for the owner). Every Fable-chair judgment made in the Opus era is
+>   RECORDED as a row in docs/FABLE_VALIDATION_QUEUE.md for later re-validation by
+>   a Fable-capable account, which CONFIRMS/ADJUSTS forward (never rewrites) and
+>   readjusts instructions where a systematic lean appears. The frozen design
+>   corpus needs no rows to build from — only deviations do.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
