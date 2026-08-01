@@ -37,7 +37,8 @@ import {
   evaluateSubsystemCertification,
   simulationRuleKeys,
 } from '../../src/domain/certification/subsystemCertification.js';
-import { appendWizardNewsEntries } from '../../src/domain/region/wizardNews.js';
+import { appendObservedWizardNewsEntries, appendWizardNewsEntries } from '../../src/domain/region/wizardNews.js';
+import { climbDownNews } from '../../src/domain/worldPulse/momentum.js';
 import { moverFamilyOf } from '../../scripts/audit/behavioral-observation.mjs';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { mustExtract } from '../helpers/sourceContract.js';
@@ -259,31 +260,62 @@ describe('economy certification rows — the observer claims', () => {
     expect(withType).toBe('pressure');
   });
 
-  test('an id-less receipt is DROPPED, which is why momentum and supply-web declare no event channel', () => {
-    // The executable proof behind both rows' `other`: the climb-down and campaign
-    // receipts are authored without an id, and the feed refuses them.
-    const idless = {
-      kind: 'momentum_climb_down',
-      headline: 'A climbs down from its war on B',
-      summary: 'The proud hold comes due.',
-      tick: 5,
-      significance: 'major',
-      score: 68,
-      settlementIds: ['a', 'b'],
-    };
-    const dropped = appendWizardNewsEntries({}, [idless], { now: '2026-01-01T00:00:00.000Z' });
-    const kept = appendWizardNewsEntries({}, [{ ...idless, id: 'wizard_news.5.momentum_climb_down.a' }], { now: '2026-01-01T00:00:00.000Z' });
-    // The CONTROL is the second call: the identical entry differing in exactly one
-    // field survives, so the zero above measures the missing id and not a broken feed.
-    expect(kept.entries.length).toBe(1);
-    expect(dropped.entries.length).toBe(0);
-    // And the two authors really do omit it, at their real emission sites.
-    expect(mustExtract(read('src/domain/worldPulse/momentum.js'), /kind: 'momentum_climb_down',/, 'climb-down receipt')).toBeTruthy();
-    expect(mustExtract(read('src/domain/worldPulse/supplyWebWarfare.js'), /kind: 'webwar_campaign_minted',/, 'campaign mint receipt')).toBeTruthy();
-    for (const source of ['src/domain/worldPulse/momentum.js', 'src/domain/worldPulse/supplyWebWarfare.js']) {
-      // anchored: mustExtract on the two lines above already proved BOTH emission sites are present in this same source, so this negative cannot run against a vanished subject.
-      expect(read(source)).not.toMatch(/kind: '(momentum_climb_down|webwar_campaign_minted)',\n\s*id:/);
+  test('the climb-down and campaign receipts carry the id the feed requires, so both lanes narrate', () => {
+    // THIS PIN WAS INVERTED on 2026-07-31, and the old direction is the point of the
+    // new one. It used to assert the DEFECT: momentum's climbDownNews and supply-web's
+    // four campaign builders authored a kind, a headline and reasons but NO id, and an
+    // id-less entry is refused twice over (normalizeEntry returns null; the audit sink
+    // pushes only id-carrying entries), so both subsystems fired and narrated nothing.
+    // Both rows' `other` prose recorded that as live. The defect is repaired, so the
+    // pin and the prose move together, which is why they live in one commit.
+    const NOW = '2026-01-01T00:00:00.000Z';
+    // Drive the REAL author rather than a hand-shaped literal: a pin built from a
+    // transcribed object proves the transcription, not the writer.
+    const nameOf = (id) => ({ 'sv1:aldermoor': 'Aldermoor', 'sv1:brackwater': 'Brackwater' })[id] || String(id);
+    const authored = climbDownNews('sv1:aldermoor', 'sv1:brackwater', nameOf, 2.4, 1.2, { price01: 0.6 }, 'mediation', 7);
+    expect(authored.id, 'the real writer mints an id in the house shape').toBe(
+      'wizard_news.7.momentum_climb_down.crack.sv1_aldermoor.sv1_brackwater',
+    );
+    // The `crack` segment is PROVENANCE, and it is load-bearing: this receipt has a second
+    // author (the DM's FORCE_RECONSIDERATION verb, realmVerbExecution.js) which can price
+    // the same pair on the same tick. The feed dedupes by id, so identical ids would merge
+    // the two reversals into one beat and lose a receipt the world earned.
+    const forced = climbDownNews('sv1:aldermoor', 'sv1:brackwater', nameOf, 2.4, 1.2, { price01: 0.6 }, '', 7, 'forced');
+    expect(forced.id).not.toBe(authored.id);
+    const bothLanes = appendWizardNewsEntries({}, [authored, forced], { now: NOW });
+    expect(bothLanes.entries.length, 'a forced and an organic climb-down coexist').toBe(2);
+
+    // It survives BOTH sinks through the exact seam the kernel uses (pulseKernel appends
+    // every mover's receipts through appendObservedWizardNewsEntries).
+    const sink = [];
+    const feed = appendObservedWizardNewsEntries({}, [authored], { now: NOW }, sink);
+    expect(feed.entries.length, 'the canonical feed accepts it').toBe(1);
+    expect(sink.length, 'the audit receipt sink records it').toBe(1);
+    expect(feed.entries[0].headline).toContain('Aldermoor');
+
+    // THE CONTROL, and the reason an id is mandatory rather than decorative: the SAME
+    // authored entry with exactly one field removed still lands zero in both sinks. So
+    // the ones above measure the id, not a feed that accepts anything.
+    const { id: _dropped, ...idless } = authored;
+    const controlSink = [];
+    const refused = appendWizardNewsEntries({}, [idless], { now: NOW });
+    expect(refused.entries.length, 'the id-less control is still refused').toBe(0);
+    expect(controlSink.length).toBe(0);
+
+    // And every emission site in both modules mints one. mustExtract throws rather than
+    // returning empty when its target is gone, so each pair is anchored: the kind literal
+    // proves the site still exists in this source before the id literal is required of it.
+    const momentumSrc = read('src/domain/worldPulse/momentum.js');
+    expect(mustExtract(momentumSrc, /kind: 'momentum_climb_down',/, 'climb-down receipt')).toBeTruthy();
+    expect(mustExtract(momentumSrc, /id: `wizard_news\.\$\{tick\}\.momentum_climb_down\./, 'climb-down id')).toBeTruthy();
+    const webwarSrc = read('src/domain/worldPulse/supplyWebWarfare.js');
+    for (const kind of ['webwar_campaign_minted', 'webwar_campaign_abandoned', 'webwar_campaign_complete']) {
+      expect(mustExtract(webwarSrc, new RegExp(`kind: '${kind}',`), `${kind} receipt`)).toBeTruthy();
+      expect(mustExtract(webwarSrc, new RegExp(`id: \`wizard_news\\.\\$\\{tick\\}\\.${kind}\\.`), `${kind} id`)).toBeTruthy();
     }
+    // The raid builder mints its kind through a hoisted `kind` const (it splits into
+    // webwar_raid / webwar_wrong_village), so its id interpolates that const instead.
+    expect(mustExtract(webwarSrc, /id: `wizard_news\.\$\{tick\}\.\$\{kind\}\./, 'raid id')).toBeTruthy();
   });
 });
 

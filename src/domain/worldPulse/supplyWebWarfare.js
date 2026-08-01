@@ -99,6 +99,7 @@ import {
 } from './relationshipEvolution.js';
 import { stableSampleByWeight } from '../region/contestMath.js';
 import { clamp01 } from '../../kernel/math.js';
+import { stablePart } from './stablePart.js';
 import { abandonFloorScale } from './momentum.js';
 
 /** @typedef {{ fork?: (key: string) => { random: () => number } } | null} RngLike */
@@ -869,6 +870,27 @@ function sequenceStages(rng, aggressorId, targetId, web, actor, tick) {
 }
 
 // ── Receipt / news builders (house voice — the loaded dice narrated) ──────────────
+//
+// THE FEED'S ADMISSION KEY. All four builders below went WITHOUT an `id` until
+// 2026-07-31, and an id-less receipt is DROPPED twice over: normalizeEntry returns null
+// on `!entry?.id` (wizardNews.js:475) and appendObservedWizardNewsEntries pushes only
+// id-carrying entries into the audit sink (wizardNews.js:744). So this doctrine's whole
+// narrative output was discarded before it reached any reader, the Herald, or a soak
+// receipt, even on the ticks it fired. House convention (generosityNews.js:28,
+// upswingKernel.js:926): `wizard_news.<tick>.<slug>.<stableParts>`, normalized through
+// stablePart so the id stays inside the dotted-id alphabet whatever characters the
+// underlying save id happens to carry. On today's ids that normalization is INJECTIVE
+// (save ids are crypto.randomUUID hex-and-dash, and `-`>`_` is a bijection there), so it
+// cannot alias two settlements into one id and merge their beats.
+//
+// COLLISION-FREE PER TICK, which matters because appendWizardNewsEntries dedupes by id
+// through a Map and would SILENTLY MERGE two beats sharing one. advanceSupplyWebWarfare
+// walks a DEDUPED, codepoint-sorted aggressorIds list once, and every arm that emits
+// either `continue`s or falls out of the iteration, so an aggressor authors AT MOST ONE
+// receipt per tick; it also holds at most one plan, hence one targetId. So
+// (kind, aggressor, target) is already unique. The raid id carries the satellite as well
+// because the beat is ABOUT that village, and that keeps the id honest if the stage loop
+// is ever widened to fire more than one stage per tick.
 
 /** @param {string} aggressorId @param {string} targetId @param {(id:string)=>string} name @param {CampaignEV} ev @param {CampaignStage[]} stages @param {number} tick */
 function mintNews(aggressorId, targetId, name, ev, stages, tick) {
@@ -876,6 +898,7 @@ function mintNews(aggressorId, targetId, name, ev, stages, tick) {
   const Tn = name(targetId);
   const modes = [...new Set(stages.map((s) => INSTRUMENTS[s.mode]?.headline || s.mode))];
   return {
+    id: `wizard_news.${tick}.webwar_campaign_minted.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_minted',
     headline: `${A} opens an indirect campaign against ${Tn}`,
     summary: `${A} cannot (or will not) take ${Tn} head-on. It plans to strangle ${Tn}'s supply web first — ${modes.join(', ')} — before the reckoning.`,
@@ -895,6 +918,8 @@ function raidNews(aggressorId, targetId, stage, name, wrongVillage, confidence01
   const A = name(aggressorId);
   const V = name(stage.satelliteId);
   const Tn = name(targetId);
+  // Hoisted so the id and the kind cannot drift apart (npcGrowthKernel.js:704 idiom).
+  const kind = wrongVillage ? 'webwar_wrong_village' : 'webwar_raid';
   const reasons = [
     `${A} struck ${V} to sever ${Tn}'s supply of ${stage.input}.`,
   ];
@@ -902,7 +927,8 @@ function raidNews(aggressorId, targetId, stage, name, wrongVillage, confidence01
     reasons.push(`But ${V} no longer fed ${Tn} — the ${stage.input} had come by another road. ${A} burned the wrong village (read confidence ${confidence01.toFixed(2)}) — a misjudgment.`);
   }
   return {
-    kind: wrongVillage ? 'webwar_wrong_village' : 'webwar_raid',
+    id: `wizard_news.${tick}.${kind}.${stablePart(aggressorId)}.${stablePart(stage.satelliteId)}.${stablePart(targetId)}`,
+    kind,
     headline: wrongVillage ? `${A} burns the wrong village` : `${A} raids ${V}`,
     summary: wrongVillage
       ? `${A} put ${V} to the torch believing it fed ${Tn} — but the ${stage.input} had come by another road for seasons. The atrocity bought nothing.`
@@ -920,6 +946,7 @@ function abandonNews(aggressorId, targetId, name, adapted, tick) {
   const A = name(aggressorId);
   const Tn = name(targetId);
   return {
+    id: `wizard_news.${tick}.webwar_campaign_abandoned.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_abandoned',
     headline: `${A} abandons its strangulation of ${Tn}`,
     summary: adapted
@@ -942,6 +969,7 @@ function completeNews(aggressorId, targetId, name, plan, tick) {
   const A = name(aggressorId);
   const Tn = name(targetId);
   return {
+    id: `wizard_news.${tick}.webwar_campaign_complete.${stablePart(aggressorId)}.${stablePart(targetId)}`,
     kind: 'webwar_campaign_complete',
     headline: `${A} completes its strangulation of ${Tn}`,
     summary: `${A} has struck ${plan.stages.length} of ${Tn}'s suppliers. ${Tn}'s web is thinned and its buffers bled — the town is ripe for the reckoning.`,

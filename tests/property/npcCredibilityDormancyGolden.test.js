@@ -20,6 +20,19 @@
  *      unit level (tests/domain/npcCredibilityAttribution + npcCredibilityLadderHook).
  *
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/property/npcCredibilityDormancyGolden.test.js
+ *
+ * ONE-TIME GOLDEN MOVEMENT, 2026-07-31 — `nc-b|8|one_month` only, and DORMANCY DID NOT
+ * BREAK. informationStatecraft.js authored `infowar_spy_exposed` (and two siblings) with
+ * NO `id`, and the news feed drops an id-less entry twice over, so the beat this world
+ * really produced was discarded before it could be counted. Giving those receipts ids
+ * made one of them visible to the `newsKinds` histogram this projection hashes.
+ * ATTRIBUTED BY EXPERIMENT, not assumed: the projection was dumped with and without the
+ * fix on an isolated base worktree and diffed field by field. `nc-a` and `nc-c` are
+ * byte-identical; on `nc-b` the ONLY field that moved is `newsKinds`, and its only delta
+ * is `infowar_spy_exposed: 1`. tick, rollSummary and all four ledgers (npcCredibility,
+ * credibility, disinfo, npcLadder) are unchanged, so the D-2 gate is still the pure
+ * no-op this file exists to prove. The hash was re-recorded for that stated cause; do
+ * not re-record any future drift without an equivalent field-level attribution.
  */
 
 import { describe, it, expect } from 'vitest';

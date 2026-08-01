@@ -93,6 +93,23 @@ export const WHAT_PHRASES = Object.freeze({
   field_battle: 'a battle in the field',
   conflict_pressure: 'the drums of war',
   protection_gap: 'defences grown thin',
+  // The INDIRECT war and the war of words. These nine are keyed on `kind` rather than
+  // `impactKind`, because their authors (momentum.js, supplyWebWarfare.js,
+  // informationStatecraft.js) mint no impactKind. That is exactly why the impactKind
+  // walker never demanded them: it source-scans minted impactKinds, so a kind-only
+  // producer is invisible to it. They became reachable on 2026-07-31, when those
+  // receipts were given the ids the news feed requires; before that they were dropped
+  // and never seeded a rumor. Without these rows whatPhrase falls through to its
+  // de-underscored token and a townsperson says 'webwar campaign minted'.
+  momentum_climb_down: 'a proud course reversed',
+  webwar_campaign_minted: 'a quiet war upon the supply roads',
+  webwar_raid: 'raiders burning the outlying farms',
+  webwar_wrong_village: 'a village put to the torch in error',
+  webwar_campaign_abandoned: 'a slow strangling called off',
+  webwar_campaign_complete: 'a town cut off from all that feeds it',
+  infowar_lie_exposed: 'a court caught in its own lie',
+  infowar_spy_exposed: 'paid eyes found among us',
+  intel_transfer: 'word passing quietly between courts',
   // power / faction / coup
   coup_succeeded: 'a seizure of power',
   coup_suppressed: 'an uprising put down',

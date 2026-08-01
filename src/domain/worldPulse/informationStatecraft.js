@@ -51,6 +51,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, hasSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive, GOVERNING_SEAT_KEY, strengthBandOf, governingCoalition } from './beliefMap.js';
 import { intelTradeActive, intelInjectionBelief, resolveIntelSale, INTEL_TRANSFERS_LEDGER } from '../spatial/intelActs.js';
@@ -643,6 +644,12 @@ export function processLies({ snapshot, worldState, beliefMaps, rng, tick, stren
       // the SAME tick. incidentType carries 'betray' so it lights the old-wound clock too.
       grievances.push({ a: String(rec.audienceId), b: String(rec.liarId), magnitude01: T.EXPOSE_GRIEVANCE_W, incidentType: 'deception_betrayal' });
       newsEntries.push({
+        // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard). Without it
+        // normalizeEntry refuses the entry and the audit sink skips it, so the beat
+        // reaches no reader. COLLISION-FREE: the disinfo ledger holds at most ONE active
+        // bluff per (liar, audience) — the `lie:${liarId}:${audienceId}` key at :722 and
+        // its guard at :723 — so one exposure per pair per tick.
+        id: `wizard_news.${now}.infowar_lie_exposed.${stablePart(rec.liarId)}.${stablePart(rec.audienceId)}`,
         kind: 'infowar_lie_exposed',
         headline: `${name(rec.liarId)}'s bluff is exposed`,
         summary: `A telling ${name(rec.liarId)} planted in ${name(rec.audienceId)} — that its strength was greater than it is — has met independent word and collapsed. The lie traces to ${name(rec.liarId)}'s own court.`,
@@ -1046,6 +1053,10 @@ export function processSight({ snapshot, priorSight, secrecy, beliefMaps, rng, t
           deltas.push({ id: watcherId, kind: 'deception', magnitude01: T.EXPOSE_CHARGE01 });
           grievances.push({ a: targetId, b: watcherId, magnitude01: T.EXPOSE_GRIEVANCE_W, incidentType: 'spy_exposed' });
           newsEntries.push({
+            // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard).
+            // COLLISION-FREE: this sits inside the per-watcher walk over that watcher's
+            // own posture map, so (watcher, target) is visited at most once per tick.
+            id: `wizard_news.${now}.infowar_spy_exposed.${stablePart(watcherId)}.${stablePart(targetId)}`,
             kind: 'infowar_spy_exposed',
             headline: `${name(watcherId)}'s eyes in ${name(targetId)} go quiet`,
             summary: `${name(targetId)} closed its gates and caught the watchers within: ${name(watcherId)}'s paid eyes are exposed. The lineage traces back to ${name(watcherId)}'s own court — a covert watch, now a public grievance.`,
@@ -1355,6 +1366,13 @@ export function advanceInformationStatecraft({ snapshot, worldState, graph = nul
       if (resolved) resolvedSales.push(resolved);
       const gift = rec.mode === 'gift';
       intelNews.push({
+        // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard). All THREE
+        // parts are required: the intelTransfers ledger is keyed
+        // `intel.${sellerId}.${receiverId}.${subjectId}.${tick}` (generosityKernel.js:1044),
+        // so one seller can courier reads of several subjects to one receiver in a single
+        // tick. A (seller, receiver) id alone would collide and appendWizardNewsEntries
+        // would silently merge those beats through its by-id Map.
+        id: `wizard_news.${nowTick}.intel_transfer.${stablePart(rec.sellerId)}.${stablePart(receiverId)}.${stablePart(subjectId)}`,
         kind: 'intel_transfer',
         headline: gift
           ? `Riders from ${nameFn(String(rec.sellerId))} bring ${nameFn(receiverId)} word of ${nameFn(subjectId)}`

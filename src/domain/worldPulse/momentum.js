@@ -39,6 +39,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { stablePart } from './stablePart.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive } from './beliefMap.js';
 import { isFaithSpreadEnabled } from './simulationRules.js';
@@ -1119,13 +1120,46 @@ export function applyLegitimacyHits(updates, hits) {
  * face-saving off-ramp if any).
  * @param {string} actorId @param {string} targetId @param {(id: string) => string} name
  * @param {number} stock @param {number} cliff @param {{ price01: number }} crack
- * @param {string} exitKind @param {number} tick @returns {Record<string, unknown>} */
-export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
+ * @param {string} exitKind @param {number} tick
+ * @param {string} [origin] WHICH lane priced this reversal: 'crack' (the organic pass
+ *   below) or 'forced' (the DM's FORCE_RECONSIDERATION verb, realmVerbExecution.js). It
+ *   is an ID SEGMENT, not decoration: this function has TWO callers that can both fire
+ *   on the same tick for the same (actor, target), and the feed dedupes by id through a
+ *   Map, so without it a DM-forced reversal and an organic one would SILENTLY MERGE into
+ *   one beat and the world would lose a receipt it had actually earned.
+ * @returns {Record<string, unknown>} */
+export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick, origin = 'crack') {
   const A = name(actorId);
   const Tn = name(targetId);
   const faced = exitKind ? String(exitKind).replace(/_/g, ' ') : '';
   const depth = cliff > 0 ? Math.round((stock / cliff) * 100) / 100 : 0;
   return {
+    // THE FEED'S ADMISSION KEY, and this receipt went WITHOUT one until 2026-07-31.
+    // wizardNews.js normalizeEntry returns null on `!entry?.id` (wizardNews.js:475) and
+    // appendObservedWizardNewsEntries pushes only id-carrying entries into the audit sink
+    // (wizardNews.js:744), so an id-less receipt was dropped from BOTH the reader-facing
+    // feed and the soak observation: this layer's entire narrative output was discarded
+    // before it reached any reader, the Herald, or a receipt.
+    //
+    // House convention (generosityNews.js:28, upswingKernel.js:926, pestilenceKernel.js:279):
+    // `wizard_news.<tick>.<slug>.<stableParts>`, normalized through stablePart so the id
+    // stays inside the dotted-id alphabet whatever characters the underlying save id
+    // carries. On today's ids that normalization is INJECTIVE (save ids are
+    // crypto.randomUUID hex-and-dash, where `-`>`_` is a bijection), so it cannot alias
+    // two settlements into one id and silently merge their beats.
+    //
+    // COLLISION-FREE PER TICK, which matters because appendWizardNewsEntries dedupes by id
+    // through a Map and would SILENTLY MERGE two beats sharing one. Two facts earn it:
+    //   WITHIN the organic pass, advanceMomentumCracks iterates each actorId exactly once
+    //   (Object.keys(deployments)), charges it at most once (the chargedTick stamp is
+    //   idempotent across both lanes and both ticks), and reads a single targetId from that
+    //   actor's one deployment, so (actor, target) cannot repeat.
+    //   ACROSS the two callers, `origin` separates them. This receipt has a SECOND author:
+    //   the DM's FORCE_RECONSIDERATION verb (realmVerbExecution.js) prices its own reversal
+    //   through this same function, and a forced reversal and an organic one can land on the
+    //   same tick for the same pair. Without the segment they would collide and one beat
+    //   would vanish; with it the Chronicle can also tell a DM order from an emergent crack.
+    id: `wizard_news.${tick}.momentum_climb_down.${stablePart(origin)}.${stablePart(actorId)}.${stablePart(targetId)}`,
     kind: 'momentum_climb_down',
     headline: faced ? `${A} climbs down from its war on ${Tn} — with honour intact` : `${A} climbs down from its war on ${Tn}`,
     summary: faced

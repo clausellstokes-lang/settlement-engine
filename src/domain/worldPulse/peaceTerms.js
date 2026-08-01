@@ -51,6 +51,7 @@ import { peaceCausalActive, reasonPairKey } from './warReasons.js';
 // conservation untouched). reframeKernel is a pure leaf. 0 when dark ⇒ no asset ⇒ byte-identical.
 import { restitutionClaim01 } from './reframeKernel.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength, applyRelationshipPatch } from './relationshipEvolution.js';
 import { readBeliefStrength, readBeliefRelationship, governingCoalition } from './beliefMap.js';
 import { buildThreatByCid } from './martialReadiness.js';
@@ -877,6 +878,13 @@ function mintTreaty(args) {
   }
 
   const signingBeat = {
+    // THE FEED'S ADMISSION KEY (see the wizardNews.js authoring guard). This beat went
+    // WITHOUT one, so every treaty this engine has ever signed was narrated into a void:
+    // normalizeEntry refuses an id-less entry and the audit sink skips it. COLLISION-FREE:
+    // the minting loop keeps a `mintedThisPair` set and takes one treaty per unordered
+    // pair per tick, and re-mint is refused while a treaty is live, so (victor, loser)
+    // cannot repeat within a tick.
+    id: `wizard_news.${tick}.treaty_signed.${stablePart(victorId)}.${stablePart(loserId)}`,
     kind: 'treaty_signed',
     impactKind: 'diplomacy',
     tick,
@@ -884,6 +892,12 @@ function mintTreaty(args) {
       ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`
       : `${victorName} dictates the peace with ${loserName}`,
     summary: `A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`,
+    // THE NEWS ADDRESS LAW's place layer. `parties` is this module's own vocabulary and no
+    // feed consumer reads it (normalizeEntry, the rumor seeder, the panel's
+    // AffectedSettlements and arcIdForEntry all read `settlementIds`), so without this the
+    // beat would reach the feed addressed to nowhere. `parties` is retained because the
+    // treaty ledger's own readers speak it.
+    settlementIds: [victorId, loserId],
     parties: [victorId, loserId],
   };
 

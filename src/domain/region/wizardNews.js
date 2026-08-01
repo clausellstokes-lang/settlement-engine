@@ -729,6 +729,83 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   };
 }
 
+// ── THE AUTHORING GUARD (habitat removal for the SILENT ID-LESS DROP) ───────────
+//
+// THE CLASS: a world-pulse mover authors a receipt with a kind, a headline, reasons
+// and no `id`. normalizeEntry returns null on `!entry?.id` and the sink push below is
+// id-gated, so the beat is dropped from BOTH the canonical feed and the audit receipt
+// — silently, on the ONE path an author never re-reads. The subsystem fires, narrates
+// nothing, and every downstream reading of it (Herald, Chronicle, soak observation)
+// records an honest zero. Two members lived undetected for their whole life:
+// momentum.js climbDownNews and the four supplyWebWarfare.js campaign receipts, both
+// fixed 2026-07-31. Nothing would have caught a third.
+//
+// THE GUARD makes the drop LOUD at the seam where entries are AUTHORED rather than
+// where they are normalized. That distinction is load-bearing: normalizeEntry also
+// runs over PERSISTED save data on every read (ensureWizardNewsFeed), where degrading
+// a malformed row is the deliberate fail-closed posture and throwing would take a save
+// down. appendObservedWizardNewsEntries has exactly one caller family — pulseKernel's
+// thirteen mover-append sites — and every entry reaching it is freshly minted this
+// tick, so an id-less entry here is always an authoring bug and never bad save data.
+//
+// SAFETY (the residueStripGuard.js precedent, verbatim posture):
+//   • Pure read; it never mutates an entry or the feed → byte-neutral to the simulation.
+//   • It runs ONLY under NODE_ENV==='test' → never in the browser, never in the soak's
+//     default run. A mistaken check can only surface as a TEST failure, never a silent
+//     determinism corruption.
+// So a future author that forgets an id reds the suite the moment ANY test drives its
+// mover, instead of shipping a subsystem that narrates into a void.
+
+/** True only in a Node test run (vitest sets NODE_ENV=test). Browser / prod / soak = off.
+ *  Reads `process` reflectively and narrows it to a REAL shape rather than taking the
+ *  loose cast the sibling guards use: this file's any-cast baseline is 0, and that
+ *  ratchet is fix-the-types, never widen-the-baseline. (Do not name the loose cast
+ *  literally here either. The detector is a text scan, so quoting it in prose counts
+ *  as one.) */
+function authoringGuardEnabled() {
+  try {
+    const proc = /** @type {{ env?: { NODE_ENV?: string } } | undefined} */ (
+      Reflect.get(globalThis, 'process')
+    );
+    return proc?.env?.NODE_ENV === 'test';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * The distinct `kind`s among freshly-authored entries that carry no id (deduped,
+ * codepoint-sorted). Pure; exported for direct unit testing.
+ * @param {RawWizardNewsEntry[]} [entries]
+ * @returns {string[]}
+ */
+export function findIdlessAuthoredEntries(entries = []) {
+  return [...new Set((entries || [])
+    .filter(entry => entry && !entry.id)
+    .map(entry => String(entry.kind || 'unknown')))].sort(compareCodepoint);
+}
+
+/**
+ * Test-only assertion on the authoring seam: throws if a mover minted a receipt the
+ * feed would silently discard. No-op everywhere but a Node test run, always read-only.
+ * @param {RawWizardNewsEntry[]} [entries]
+ */
+export function assertAuthoredEntriesCarryIds(entries = []) {
+  if (!authoringGuardEnabled()) return;
+  const kinds = findIdlessAuthoredEntries(entries);
+  if (kinds.length) {
+    throw new Error(
+      '[wizard-news] a mover authored ID-LESS receipt(s), which the feed DROPS silently. kind(s): '
+      + kinds.join(', ')
+      + '\nAn entry without `id` is refused by normalizeEntry AND skipped by the audit receipt sink,'
+      + ' so the beat reaches no reader, no Herald and no soak receipt.'
+      + '\nMint one in the house shape `wizard_news.${tick}.<slug>.<stableParts>` (see'
+      + ' generosityNews.js, upswingKernel.js), using stablePart on actor/target ids and'
+      + ' enough parts that two beats of the same kind cannot collide within one tick.',
+    );
+  }
+}
+
 /**
  * Audit-only append seam. Valid raw receipts are copied into `receiptSink`
  * before the canonical feed normalizes, dedupes, sorts, and caps them. With no
@@ -740,6 +817,7 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
  * @returns {ReturnType<typeof appendWizardNewsEntries>}
  */
 export function appendObservedWizardNewsEntries(feed = {}, entries = [], options = {}, receiptSink = null) {
+  assertAuthoredEntriesCarryIds(entries);
   if (Array.isArray(receiptSink)) {
     for (const entry of entries || []) if (entry?.id) receiptSink.push(entry);
   }

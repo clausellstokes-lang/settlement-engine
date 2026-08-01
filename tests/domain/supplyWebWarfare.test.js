@@ -27,6 +27,7 @@ import {
   orderSupplyRaid, declareTradeEmbargo, WEBWAR_VETO_PROSE, WEBWAR_TUNING, INSTRUMENTS,
 } from '../../src/domain/worldPulse/supplyWebWarfare.js';
 import { scoreEconomicStrangulation } from '../../src/domain/worldPulse/peaceReasons.js';
+import { appendObservedWizardNewsEntries, appendWizardNewsEntries } from '../../src/domain/region/wizardNews.js';
 import { buildProducerIndex } from '../../src/domain/worldPulse/supplyKernel.js';
 
 const IRON = 'Wrought iron';
@@ -374,5 +375,120 @@ describe('W-DOCTRINE-1 §4 — the forceable verbs + VETO_PROSE', () => {
     const out = orderSupplyRaid(worldState, { aggressorId: 'aggressor', targetId: 'oldford', snapshot, digest: worldState.spatialDigest, tick: 1 });
     expect(out.ok).toBe(false);
     expect(out.code).toBe('webwar_no_web');
+  });
+});
+
+// ── THE RECEIPTS REACH A READER (the id-less-drop regression) ────────────────────
+//
+// Until 2026-07-31 all four campaign builders authored their receipts WITHOUT an
+// `id`, and the feed refuses an id-less entry twice over: normalizeEntry returns null,
+// and appendObservedWizardNewsEntries pushes only id-carrying entries into the audit
+// sink. So this doctrine fired and narrated NOTHING to the reader, the Herald, or a
+// soak receipt. The pins above all read `out.newsEntries` DIRECTLY, which is why none
+// of them noticed: the drop happens one seam later, inside the kernel's append.
+//
+// This battery closes that gap by pushing each beat through the REAL seam
+// (appendObservedWizardNewsEntries, exactly as pulseKernel.js does) and asserting it
+// lands in BOTH sinks, each against an id-stripped control of the very same entry.
+
+describe('W-DOCTRINE-1 — the campaign receipts survive the kernel append', () => {
+  const NOW = '2026-01-01T00:00:00.000Z';
+
+  /** Push receipts through the kernel's own seam and report both sinks. */
+  function throughTheKernelSeam(entries) {
+    const sink = [];
+    const feed = appendObservedWizardNewsEntries({}, entries, { now: NOW }, sink);
+    return { feed, sink };
+  }
+
+  /** Assert `entry` reaches both sinks, and that stripping ONLY its id sends it nowhere. */
+  function expectReadable(entry, kind) {
+    expect(entry.id, `${kind} mints an id`).toMatch(/^wizard_news\.\d+\./);
+    const { feed, sink } = throughTheKernelSeam([entry]);
+    expect(feed.entries.length, `${kind} reaches the canonical feed`).toBe(1);
+    expect(sink.length, `${kind} reaches the audit receipt sink`).toBe(1);
+    expect(feed.entries[0].headline.length, `${kind} carries readable prose`).toBeGreaterThan(0);
+    // CONTROL: the identical entry differing in exactly one field lands nowhere, so the
+    // ones above measure the id rather than a feed that accepts anything.
+    const { id: _stripped, ...idless } = entry;
+    const control = [];
+    const refused = appendWizardNewsEntries({}, [idless], { now: NOW });
+    expect(refused.entries.length, `${kind} without its id is still refused`).toBe(0);
+    expect(control.length).toBe(0);
+  }
+
+  it('MINT: the campaign-opened beat reaches the feed and the sink', () => {
+    const { snapshot, worldState } = makeWorld({ aggressorArchetype: 'merchant', aggressorMalice: 40, aggressorLawful: 70 });
+    const out = advanceSupplyWebWarfare({ snapshot, worldState, pIndex: null, digest: worldState.spatialDigest, rng: createPRNG('webwar-test'), tick: 5 });
+    const minted = out.newsEntries.find((n) => n.kind === 'webwar_campaign_minted');
+    expect(minted, 'the mint is receipted').toBeTruthy();
+    expectReadable(minted, 'webwar_campaign_minted');
+  });
+
+  it('ABANDON: the called-off beat reaches the feed and the sink', () => {
+    const { snapshot, worldState } = makeWorld({ aggressorArchetype: 'merchant' });
+    const seeded = {
+      ...worldState,
+      spatialLedgers: {
+        campaignPlans: {
+          aggressor: {
+            targetId: 'crownhold',
+            stages: [{ mode: 'embargo', satelliteId: 'irondell', input: 'wrought_iron', status: 'pending' }],
+            mintedTick: 1, lastScoredTick: 1, ev01: 0.5, mintFragility01: 1, strangle01: 0.2,
+          },
+        },
+      },
+    };
+    const s2 = { ...snapshot };
+    snapshot.byId.get('oldford').settlement.economicState.primaryExports = [IRON];
+    const out = advanceSupplyWebWarfare({ snapshot: s2, worldState: seeded, pIndex: null, digest: seeded.spatialDigest, rng: createPRNG('y'), tick: 6 });
+    const abandoned = out.newsEntries.find((n) => n.kind === 'webwar_campaign_abandoned');
+    expect(abandoned, 'the abandonment is receipted').toBeTruthy();
+    expectReadable(abandoned, 'webwar_campaign_abandoned');
+  });
+
+  it('COMPLETE: the strangulation-finished beat reaches the feed and the sink', () => {
+    const { snapshot, worldState } = makeWorld({ aggressorArchetype: 'merchant' });
+    // Every stage already done ⇒ no pending stage ⇒ the completion arm. mintFragility01
+    // is 0 so the adaptation test (which needs a positive at-mint fragility) cannot fire
+    // first and abandon the plan instead.
+    const seeded = {
+      ...worldState,
+      spatialLedgers: {
+        campaignPlans: {
+          aggressor: {
+            targetId: 'crownhold',
+            stages: [{ mode: 'embargo', satelliteId: 'irondell', input: 'wrought_iron', status: 'done' }],
+            mintedTick: 1, lastScoredTick: 1, ev01: 0.5, mintFragility01: 0, strangle01: 0.4,
+          },
+        },
+      },
+    };
+    const out = advanceSupplyWebWarfare({ snapshot, worldState: seeded, pIndex: null, digest: seeded.spatialDigest, rng: createPRNG('c'), tick: 6 });
+    const complete = out.newsEntries.find((n) => n.kind === 'webwar_campaign_complete');
+    expect(complete, 'the completion is receipted').toBeTruthy();
+    expectReadable(complete, 'webwar_campaign_complete');
+  });
+
+  it('RAID and WRONG-VILLAGE: both bloody beats reach the feed and the sink, on distinct ids', () => {
+    const { snapshot, worldState } = makeWorld();
+    const minted = orderSupplyRaid(worldState, { aggressorId: 'aggressor', targetId: 'crownhold', snapshot, digest: worldState.spatialDigest, tick: 5 });
+    const plans = minted.worldState.spatialLedgers.campaignPlans;
+    plans.aggressor.stages[0].mode = 'raid';
+    const hit = advanceSupplyWebWarfare({ snapshot, worldState: minted.worldState, pIndex: null, digest: worldState.spatialDigest, rng: createPRNG('z'), tick: 6 });
+    const raid = hit.newsEntries.find((n) => n.kind === 'webwar_raid' || n.kind === 'webwar_wrong_village');
+    expect(raid, 'the raid is receipted').toBeTruthy();
+    expectReadable(raid, raid.kind);
+
+    // The wrong-village twin, retargeted at a village outside the true web.
+    const missed = orderSupplyRaid(worldState, { aggressorId: 'aggressor', targetId: 'crownhold', snapshot, digest: worldState.spatialDigest, tick: 5 });
+    missed.worldState.spatialLedgers.campaignPlans.aggressor.stages[0] = { mode: 'raid', satelliteId: 'oldford', input: 'wrought_iron', status: 'pending' };
+    const out2 = advanceSupplyWebWarfare({ snapshot, worldState: missed.worldState, pIndex: null, digest: worldState.spatialDigest, rng: createPRNG('w'), tick: 6 });
+    const wrong = out2.newsEntries.find((n) => n.kind === 'webwar_wrong_village');
+    expect(wrong, 'the wrong-village strike is receipted').toBeTruthy();
+    expectReadable(wrong, 'webwar_wrong_village');
+    // The two strikes carry DISTINCT ids: the raid id names the satellite, so a right
+    // village and a wrong one on the same tick cannot merge through the feed's by-id Map.
+    expect(wrong.id).not.toBe(raid.id);
   });
 });

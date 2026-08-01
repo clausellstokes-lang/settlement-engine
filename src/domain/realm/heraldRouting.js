@@ -94,6 +94,20 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   wartime: 'war', vassal_rebellion: 'war', rebellion_vassal: 'war',
   cold_war_supply_sanctions: 'war', ally_burden: 'war', alliance_burden: 'war', relief_burden: 'war',
   casus_declared: 'war', peace_sued: 'war', supply_raid_ordered: 'war', military_protection: 'war',
+  // THE INDIRECT WAR + THE WAR OF WORDS. These nine route on `kind`, not `impactKind`
+  // (their authors mint none), which is exactly why the automatic discovery scan above
+  // never surfaced them: it reads `impactKind:` and `candidateType:` literals only. They
+  // became routable on 2026-07-31, when those receipts were given the ids the news feed
+  // requires; before that every one was dropped before reaching a reader. Filed under
+  // `war` because all nine are acts of a war doctrine: a reversal of a committed war
+  // course, the strangulation of a target's suppliers, and the deception and covert watch
+  // that surround both. `intel_transfer` is the one judgment call, filed under `trade`
+  // because it is intelligence BOUGHT or GIFTED through the obligation machinery, which
+  // is where its siblings (the generosity_* beats) already live.
+  momentum_climb_down: 'war',
+  webwar_campaign_minted: 'war', webwar_raid: 'war', webwar_wrong_village: 'war',
+  webwar_campaign_abandoned: 'war', webwar_campaign_complete: 'war',
+  infowar_lie_exposed: 'war', infowar_spy_exposed: 'war',
   // relationship types that are adversarial route to war (a cold_war / hostile turn
   // is a war-section beat; commercial/hierarchy relations are trade, below).
   rival: 'war', cold_war: 'war', hostile: 'war',
@@ -121,6 +135,9 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   market_shock: 'trade', indebtedness: 'trade', tier_change: 'trade', tier_promotion: 'trade',
   tier_demotion: 'trade', tier_up: 'trade', tier_down: 'trade',
   generosity_credit_default: 'trade', generosity_purchase: 'trade', generosity_trade_overture: 'trade',
+  // Intelligence bought or gifted between courts, ledgered through the SAME obligation
+  // machinery as the generosity beats above (see the war-section note for the cohort).
+  intel_transfer: 'trade',
   relationship_label_change: 'trade', diplomacy_trade: 'trade', treaty_signed: 'trade',
   strategy_embargo: 'trade', strategy_reroute: 'trade', strategy_credit: 'trade',
   compound_calling_of_debts: 'trade',
@@ -145,6 +162,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   disease_outbreak: 'events', succession_void: 'events', monster_raider_pressure: 'events',
   insurgency: 'events', slave_revolt: 'events', rebellion: 'events', criminal_corridor: 'events',
   magical_instability: 'events', coup_detat: 'events', magic_deadzone: 'events',
+  // W-G / J-D1 — the autoplacement charter. A DM act on the realm's map rather
+  // than an engine beat, but it is realm news all the same ("the realm's charter
+  // is drawn"), so it is filed explicitly instead of riding the silent catch-all.
+  // Its sibling user-act kind `ruleset_change` (simulationProfile.js) is still
+  // unfiled and lands in 'events' the quiet way; that is a pre-existing gap, noted
+  // here rather than fixed inside a placement wave.
+  autoplacement: 'events',
   // calamity + demographic + spatial
   calamity: 'events', plague: 'events', plague_arrival: 'events', spatial_consequence: 'events',
   custom_crisis: 'events', government_overthrown: 'events', corruption_exposed: 'events',
