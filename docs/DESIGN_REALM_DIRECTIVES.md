@@ -151,6 +151,26 @@
 >   natural mortality (named NPCs exempt), push-pull migration, stressor-coupled
 >   curbs. Architecture: docs/DESIGN_DEMOGRAPHIC_ENGINE.md. ALL SOAK REDOS WAIT on
 >   wave P (a pre-cure soak would re-prove a known defect).
+> - 2026-08-01 OWNER RULINGS — THE THREE MISSING WAR CAUSES (ordered built; the
+>   taxonomy is walker-enforced for totality + bijection, so each needs a mirror):
+>   (1) PREDATION ON WEAKNESS — the manager-found gap: every existing reason is
+>   grievance-, fear-, or need-driven, so a fat, peaceful, poorly-defended
+>   neighbour generates NO motive and players learn that being harmless is safe.
+>   Build the mirror-image of fear_of_dominance, EPISTEMIC the same way (believed
+>   weakness, through the P4 belief selector). (2) ⭐ DYNASTIC CLAIM IS SATELLITE
+>   LINEAGE — owner: "those are only appropriate between those that are related via
+>   satellite settlements. Whether it's the original and the satellite or the
+>   satellite outgrowing the original." THIS SOLVES THE SUBSTRATE PROBLEM: wave E
+>   already records parent->child founding lineage, so no dynasty system is
+>   invented. The claim runs BOTH directions — the parent reclaiming what it
+>   seeded, and the child that has outgrown its parent claiming the seat. Score
+>   should read the lineage edge plus the tier/population inversion. (3) ⭐ FAITH
+>   WAR IS ALIGNMENT DISTANCE — owner: settlements whose DEITIES sit on opposite
+>   ends of the alignment axes, "with the strongest being at the polar opposites
+>   between both axis." So the score is distance across BOTH axes (law and moral),
+>   maximal at true polar opposition, zero at shared alignment. Reads the local
+>   pantheon the deity doctrine already generates (no premade pool), banded per
+>   finite semantics.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
