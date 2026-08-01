@@ -258,6 +258,36 @@
 >   session (a concurrent owner session holds it). READ it and call its published
 >   exports; NEVER edit that file. If momentum needs a new export to serve this, say
 >   so precisely and stop rather than reaching in.
+> - ⭐⭐ 2026-08-01 AMENDMENT D — THE ACTOR IS NOT A CONSTANT: A CHANGE OF RULER OR
+>   LEGITIMATE POWER RE-READS THE WHOLE WAR. Owner: a change in rulers or legitimate
+>   power "should also affect the attitude and disposition for war against everything
+>   else we have mentioned." This is amendment B carried THROUGH the war's duration:
+>   B said a casus must be in character for the place that raises it; D says the
+>   character can CHANGE mid-war, and when it does, everything is re-read.
+>   ── EVERY TRIGGER IS ALREADY BUILT: succession, the coup lane, faction capture of
+>   the seat, an H2 verdict removing a compromised officeholder (jailed, banished,
+>   turncoat), and the DM's own KILL and ASSIGN verbs. Each changes WHO answers the
+>   war question, and none of them currently changes the answer.
+>   ── THE SUCCESSOR RE-READS ALL FOUR TERMS WITH THEIR OWN CHARACTER: the cause (do I
+>   hold my predecessor's quarrel at all?), the cost of continuing and the cost of
+>   stopping (what do I value, what will my seat survive?), weighted by their own
+>   facets and alignment per amendment B. BIDIRECTIONAL AND IT MUST BE: a successor
+>   may repudiate the war they inherited or prosecute it harder than the ruler who
+>   began it. Both reachable, both pinned.
+>   ── ⭐ THIS IS MOMENTUM'S COUNTERFORCE, which C2 left without one. Momentum resists
+>   change in both directions and nothing in the model could break it; a new hand on
+>   the tiller is exactly what breaks it, and is historically how long wars end. A
+>   ruler change is therefore the SANCTIONED momentum-breaking event, and the Herald
+>   should name it as such.
+>   ── LEGITIMACY CUTS BOTH WAYS, deliberately: a weakly-legitimate new ruler may NEED
+>   the war to prove the seat (the existing legitimacy_hunger reason, now reachable
+>   mid-war rather than only at its start), or may need to END it to consolidate.
+>   Which one depends on character and state, never on a coin and never on one rule.
+>   ── ⭐ THE COMPOSITION WORTH BUILDING FOR: corruption_exposed starts a war, the
+>   exposed officeholder is removed by an H2 verdict, and the successor has no
+>   quarrel — the war dissolves because the man who caused it is gone. That chain
+>   runs through the corruption web, the verdict table, succession and the war layer,
+>   and every piece of it already exists in the tree.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
