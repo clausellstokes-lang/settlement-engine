@@ -932,6 +932,37 @@
 >   else — VANISHES under existential threat. A cornered ruler and a cornered realm
 >   want the same thing. That is worth pinning, because it means desperation makes
 >   courts honest, which is a good and slightly unexpected consequence of the model.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT N3 — FEASIBILITY IS NOT INTENT: CONQUEST MUST BE THE
+>   GOAL, AND CHARACTER DECIDES WHETHER IT IS. Owner: conquest applies "if the end goal
+>   IS conquest, which is determined by the settlement's disposition, history and
+>   alignment — a good-natured settlement coupled with a good deity may still sue for
+>   peace even if conquest is in reach, if their enemy is not evil."
+>   ── ⭐ THE SEPARATION: N2 asked whether conquest is POSSIBLE. N3 asks whether it is
+>   WANTED. A realm may hold overwhelming power, know it, and refuse to use it. Never
+>   conflate the two — an engine where capability implies intent has no characters in
+>   it, only optimisers.
+>   ── INTENT IS READ FROM CHARACTER, exactly as amendment B requires: the martial
+>   channel of disposition (E2), the realm's own history of what it has done before,
+>   its ALIGNMENT, and its patron deity's nature (E's war-god term read the other way —
+>   a merciful patron argues against the sack). All four already exist.
+>   ── ⭐⭐ AND THE ENEMY'S NATURE IS AN INPUT TO THE AGGRESSOR'S WILLINGNESS. This is
+>   the moral discriminator: a good realm may press conquest against a genuinely EVIL
+>   enemy and refuse it against a decent one, suing for peace with victory in hand.
+>   Mercy becomes a CHARACTERFUL ACT with a receipt — "they could have taken everything
+>   and did not" is one of the best sentences this engine can print, and it is only
+>   available because intent is separate from capability.
+>   ── ⭐⭐⭐ THE DARKEST CONSEQUENCE, AND IT MUST BE REACHABLE: the enemy's evil is
+>   BELIEVED, not known (K3 and N2 govern absolutely). So a good realm can be DECEIVED
+>   — by rumour, by a plant carried home on a trusted envoy (K4), by a brokerage
+>   selling a lie (I4) — into believing a decent neighbour is monstrous, and conquer
+>   them BELIEVING ITSELF RIGHTEOUS. The information layer, the war layer, the
+>   alignment law and the envoy system produce a righteous atrocity between them, and
+>   no single subsystem contains it. Pin it: a good realm annihilating an innocent one
+>   on false testimony, with a receipt naming what they believed and why.
+>   ── THE COUNTERFORCE IS THE SAME LAYER: such a belief can be CONTRADICTED and
+>   EXPOSED (I4's existing triple), and a realm that discovers what it did carries that
+>   in its history and its disposition forever. The reckoning is as available as the
+>   deception, and both belong to the world rather than to the war.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
