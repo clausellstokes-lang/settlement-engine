@@ -144,13 +144,37 @@ export const COMPROMISE_SOURCES = Object.freeze([
 
 // ── EXCLUSION EDGE KINDS ─────────────────────────────────────────────────────
 /**
- * Why a door is shut. One kind today; the vocabulary exists so a future mercy or
- * feud-driven exclusion lands as a new rung rather than as an untyped boolean.
+ * Why a door is shut. The vocabulary exists so a new reason lands as a new rung rather
+ * than as an untyped boolean, and W-H3 is the first wave to take that extension point.
+ *
+ * THE TWO RUNGS ARE NOT THE SAME KIND OF SHUT, and the difference is why the second one
+ * is an edge rather than a fourth ledger map. A BANISHMENT_EDICT is a legal fact about
+ * a person, minted by a court and lifted by the DM's pardon verb. A REHOST_COOLDOWN is
+ * bookkeeping: design §6 requires that a rejected pair record a cooldown so a roamer
+ * does not knock on the same door every tick, and design §3b freezes the world ledger at
+ * exactly three maps, so a fourth map would be a shape change to a surface whose
+ * contract must be right before it persists (H2 refused an `openings` map for the same
+ * reason). Both are "this door is not open to you at this tick" keyed by (person,
+ * settlement, window), which is precisely what an ExclusionEdge already is.
+ *
+ * CONSUMERS MUST READ THE KIND. isExcludedFrom answers the whole-door question and is
+ * therefore total over kinds; the candidate filter wants that reading, and the roamer
+ * PROJECTION wants only the edict (a cooldown is not a shut door in the fiction, it is
+ * the wanderer not trying again yet). npcLedger.exclusionsOfKind is the kind-aware read.
  * @type {ReadonlyArray<string>}
  */
 export const EXCLUSION_KINDS = Object.freeze([
   'banishment_edict',
+  'rehost_cooldown',
 ]);
+
+/**
+ * The exclusion kinds that are a PUBLIC legal fact about a person, as opposed to
+ * private circulation bookkeeping. The projection's shutDoors list and every reader
+ * surface filter on this; the candidate flow does not.
+ * @type {ReadonlyArray<string>}
+ */
+export const EDICT_EXCLUSION_KINDS = Object.freeze(['banishment_edict']);
 
 /**
  * @typedef {Object} ReputationFacets

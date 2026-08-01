@@ -368,6 +368,36 @@
       "measurementContext": "minifold claude/composite-r4 a3922f2a, live tree carrying unrelated foreign dirt from a concurrent realm-directive wave (neutral-connected default + full auto-resolve), proven behaviour-neutral for this instrument by re-measurement at the dirty tree",
       "loosenPending": false,
       "notes": "THE GAP-CLOSING BOUND — the 'unless matched by acute pressure' half of realm directive 6. The SAME 400 city seeds that demote at 10.0% under the matched load demote at 95.5% (382/400) when the identical five archetypes are raised to full severity. The closure is proven STRUCTURALLY, not by corpus luck: this floor (105) sits far above the matched-pressure city ceiling (24), so any corpus satisfying both has recorded the lift. A red means acute pressure no longer overwhelms high-tier inertia, which would make the inertia an immunity rather than a resistance. Test's own corpus 117/120 (97.5%), 1.06 sigma high."
+    },
+    {
+        "id": "npcConsequences.replacementBias.favoured.upper",
+        "file": "tests/domain/npcReplacement.test.js",
+        "n": 1200,
+        "baseRate": 0.5036111111111111,
+        "baseMeasuredAt": "2026-08-01",
+        "baseMeasurementN": 3600,
+        "alpha": 0.0001,
+        "measurementContext": "minifold claude/composite-r4 66d6f777 (W-H3), live tree carrying unrelated foreign dirt (none in this instrument's path). The draw is a pure FNV-1a hash of a labelled composite key and consumes zero rng, so the corpus is fixed by construction rather than sampled.",
+        "loosenPending": false,
+        "notes": "W-H3 REPLACEMENT BIAS EFFECT SIZE (design DESIGN_NPC_CONSEQUENCES.md section 5, the Wave-A instrument). One trial is one biased rung draw; 400 fresh mints x 3 bands = 1200 trials, and a trial SUCCEEDS when the drawn rung is the one the settlement's own state favours. The DESIGNED rate is 1/3 + REPLACEMENT_BIAS_WEIGHT = 0.5133; the measured rate over 1200 mints (3600 trials) is 0.5036. Two-sided on purpose: the upper bound catches a bias that grew into determinism (the corruption-attracts-corruption failure), the lower bound catches a bias that was never applied at all (an unbiased draw sits at 0.333, which is 400 of 1200 and nowhere near the 539 floor). alpha is 1e-4 per side rather than the program default 1e-3 because the instrument is two-sided and each tail spends its own budget. NEGATIVE CONTROL EXECUTED: with REPLACEMENT_BIAS_WEIGHT forced to 0 the favoured count falls to about 400 and the lower bound reds.",
+        "direction": "upper",
+        "bound": 670,
+        "margin": 3.791
+    },
+    {
+        "id": "npcConsequences.replacementBias.favoured.lower",
+        "file": "tests/domain/npcReplacement.test.js",
+        "n": 1200,
+        "baseRate": 0.5036111111111111,
+        "baseMeasuredAt": "2026-08-01",
+        "baseMeasurementN": 3600,
+        "alpha": 0.0001,
+        "measurementContext": "minifold claude/composite-r4 66d6f777 (W-H3), live tree carrying unrelated foreign dirt (none in this instrument's path). The draw is a pure FNV-1a hash of a labelled composite key and consumes zero rng, so the corpus is fixed by construction rather than sampled.",
+        "loosenPending": false,
+        "notes": "W-H3 REPLACEMENT BIAS EFFECT SIZE (design DESIGN_NPC_CONSEQUENCES.md section 5, the Wave-A instrument). One trial is one biased rung draw; 400 fresh mints x 3 bands = 1200 trials, and a trial SUCCEEDS when the drawn rung is the one the settlement's own state favours. The DESIGNED rate is 1/3 + REPLACEMENT_BIAS_WEIGHT = 0.5133; the measured rate over 1200 mints (3600 trials) is 0.5036. Two-sided on purpose: the upper bound catches a bias that grew into determinism (the corruption-attracts-corruption failure), the lower bound catches a bias that was never applied at all (an unbiased draw sits at 0.333, which is 400 of 1200 and nowhere near the 539 floor). alpha is 1e-4 per side rather than the program default 1e-3 because the instrument is two-sided and each tail spends its own budget. NEGATIVE CONTROL EXECUTED: with REPLACEMENT_BIAS_WEIGHT forced to 0 the favoured count falls to about 400 and the lower bound reds.",
+        "direction": "lower",
+        "bound": 539,
+        "margin": 3.772
     }
   ]
 }

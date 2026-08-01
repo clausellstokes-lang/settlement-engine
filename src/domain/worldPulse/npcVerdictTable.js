@@ -67,6 +67,7 @@ import {
   notorietyRank,
 } from './npcLedgerFacets.js';
 import { npcConsequencesActive } from './npcLedger.js';
+import { NPC_CONSEQUENCES_TUNING } from './npcConsequencesTuning.js';
 
 /**
  * THE CLOSED OUTCOME VOCABULARY (design §3c). Four words, and the table may return
@@ -126,53 +127,17 @@ export const EXPOSURE_KINDS = Object.freeze(['ousted', 'demoted']);
 export const VERDICT_TRIGGERING_EXPOSURE_KINDS = Object.freeze(['ousted']);
 
 /**
- * NPC_CONSEQUENCES_TUNING (design §11) — the house table shape. Every rate is a band,
- * every band is soak-vetoable, and no rate is a bare literal anywhere below.
+ * NPC_CONSEQUENCES_TUNING (design §11) — the house table, RE-EXPORTED.
  *
- * H2 declares the verdict half. H3 extends this SAME object with the replacement
- * delay, the rehost pressure curve, the rejection strictness and the pool pressure
- * bands rather than minting a second tuning table beside it.
+ * The table itself moved to npcConsequencesTuning.js at W-H3, verbatim, and grew its
+ * circulation / replacement / residency halves THERE rather than here. Design §11 asks
+ * for ONE table for the whole W-H program and this file had 65 of its 800 permitted
+ * lines left, so relocating was the only way to honour that without spending the budget
+ * H4 still needs. It is re-exported from this module because every H2 importer and every
+ * H2 pin reads it through this name; the relocation is invisible to all of them, which
+ * is what makes it a move rather than a fork.
  */
-export const NPC_CONSEQUENCES_TUNING = Object.freeze({
-  /**
-   * The weighted choice for each ELIGIBLE arm, as integer weights against the base
-   * verdict. Integers rather than probabilities so the pin can read the table and the
-   * reader can see the ratio without arithmetic. `eligible` is the arm's own outcome;
-   * `base` is jailed-or-banished, whichever the settlement supports.
-   */
-  VERDICT_WEIGHTS: Object.freeze({
-    // A rival power would rather have an asset abroad than a corpse in a cell, and a
-    // compromised official generally knows it. Better than even, not overwhelming.
-    rival_power: Object.freeze({ eligible: 55, base: 45 }),
-    // A criminal power already inside the walls has somewhere to put them, so the
-    // underworld arm carries slightly more pull than the foreign one.
-    criminal_institution: Object.freeze({ eligible: 60, base: 40 }),
-  }),
-  /**
-   * The jail sentence, in TICKS. A tick is one advance of whatever interval the DM
-   * chose, which makes this a coarse unit; it is the unit H1 already chose for
-   * sinceTick and for the exclusion window, and a second time base inside one
-   * subsystem would be worse than a coarse one. Recorded as an adjacency.
-   */
-  JAIL_TERM_TICKS: 8,
-  /**
-   * The banishment exclusion window, in ticks. NULL means INDEFINITE, which is the
-   * default: an edict of banishment does not lapse on a clock, it is lifted by the
-   * DM's PARDON verb (design §7). A finite number here makes every new edge windowed.
-   */
-  BANISHMENT_EXCLUSION_TICKS: null,
-  /**
-   * A person exposed this many times or more is spoken of one band louder. The repeat
-   * offender is the one the whole road has heard of.
-   */
-  REPEAT_EXPOSURE_NOTORIETY_BUMP_AT: 2,
-  /**
-   * The alignment-read deadband. An authored conscience score inside this band reads
-   * 'neutral'; outside it reads good or evil. Wide enough that one stray trait does
-   * not brand somebody.
-   */
-  ALIGNMENT_READ_DEADBAND: 0.15,
-});
+export { NPC_CONSEQUENCES_TUNING };
 
 /** The seeded-fork label for the verdict choice (design §11's `npcfate:*` namespace). */
 export const VERDICT_FORK_LABEL = 'npcfate:verdict';

@@ -41,7 +41,7 @@
 
 import { compareCodepoint } from '../deterministicSort.js';
 import { npcLedgerOf } from './npcLedger.js';
-import { exclusionActiveAt } from './npcLedgerFacets.js';
+import { exclusionActiveAt, EDICT_EXCLUSION_KINDS } from './npcLedgerFacets.js';
 
 /**
  * The covert field name, single-sourced so the projection, the audit helper and the
@@ -98,10 +98,16 @@ function projectRecord(wnpcId, record, exclusions, opts) {
   const origin = asObject(record.originRef);
   const sinceTick = Number(record.sinceTick) || 0;
   const host = record.hostSettlementId == null ? null : String(record.hostSettlementId);
+  // EDICT KINDS ONLY (W-H3). The exclusions map now also carries rehost cooldowns, which
+  // are circulation bookkeeping rather than a legal fact about a person: a cooldown is
+  // the wanderer not knocking again yet, not a door shut against them, and listing it in
+  // a reader's register would invent a banishment that no court ever pronounced.
   const shutDoors = exclusions
-    .filter((edge) => exclusionActiveAt(edge, opts.tick))
+    .filter((edge) => EDICT_EXCLUSION_KINDS.includes(edge.kind) && exclusionActiveAt(edge, opts.tick))
     .map((edge) => edge.settlementId)
     .sort(compareCodepoint);
+  const residency = asObject(record.residency);
+  const transit = asObject(record.transit);
 
   /** @type {Record<string, unknown>} */
   const out = {
@@ -119,6 +125,11 @@ function projectRecord(wnpcId, record, exclusions, opts) {
     sinceTick,
     elapsedTicks: Math.max(0, (Number(opts.tick) || 0) - sinceTick),
     shutDoors: Object.freeze(shutDoors),
+    // W-H3, BOTH CONDITIONAL AT THE FIELD LEVEL. A record that carries neither a
+    // residency nor a transit leg projects EXACTLY the shape H1 projected, so the H1
+    // pins keep measuring the same object rather than one with two new null keys.
+    ...(String(residency.settlementId || '') ? { restingAt: String(residency.settlementId) } : {}),
+    ...(String(transit.toId || '') ? { travellingTo: String(transit.toId) } : {}),
   };
   // THE ONE COVERT ATTACHMENT, and the ONLY statement in this file that can write it.
   // The player path never reaches this branch, so a player projection cannot carry the
@@ -152,9 +163,14 @@ export function projectNpcPool({ worldState, tick = 0, includeCovert = false, se
   const roamers = [];
   for (const id of Object.keys(ledger.roamers).sort(compareCodepoint)) {
     const rec = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (ledger.roamers[id]));
-    // A roamer's "home" for the local view is where they came from: they rest and are
-    // remembered there until a rehost gives them a host of their own.
-    if (scope !== null && String(asObject(rec.originRef).settlementId) !== scope) continue;
+    // A roamer's "home" for the local view is WHERE THEY ARE RESTING (design §6c: the
+    // unaffiliates section of a settlement dossier), falling back to where they came
+    // from while they have taken no lodging yet. The fallback is what keeps every H1
+    // record, which carries no residency at all, projecting into exactly the local view
+    // it projected into before this lane existed.
+    const resting = String(asObject(rec.residency).settlementId || '')
+      || String(asObject(rec.originRef).settlementId || '');
+    if (scope !== null && resting !== scope) continue;
     roamers.push(projectRecord(id, rec, ledger.exclusions[id] || [], opts));
   }
   /** @type {ProjectedNpc[]} */

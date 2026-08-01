@@ -242,6 +242,25 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
       + '(cities definingCrisis 399/400; city stable-chain share 0.548; town history-beat '
       + 'fill 0.950) all divide by an outcome or span correlated slots within one '
       + 'settlement, so they need the fixed-n treatment too.' },
+  { file: 'tests/domain/npcReplacement.test.js', pendingMigration: false,
+    rationale: 'WAVE W-H3 ROSTER EXTENSION 2026-08-01 (a tightening — a NEW instrument, born '
+      + 'derived, which is the only way a row may join this file). Design '
+      + 'DESIGN_NPC_CONSEQUENCES.md section 5 requires the replacement bias to be '
+      + 'envelope-pinned AT THE DESIGNED EFFECT SIZE, which is a two-sided claim: too weak and '
+      + 'the settlement leaves no fingerprint on its next generation, too strong and the '
+      + 'corruption-attracts-corruption loop the same section requires be measured shut is open '
+      + 'again. TWO bounds over one 1200-trial corpus (400 fresh mints x the 3 biased bands); a '
+      + 'trial succeeds when the drawn rung is the one the settlement state favours. The trial '
+      + 'unit is exact and the denominator is fixed by the corpus rather than by an outcome, so '
+      + 'the Bernoulli model applies without a fixed-n workaround. The draw is a labelled FNV-1a '
+      + 'hash and consumes ZERO rng, so the corpus is deterministic and a red means the RATE '
+      + 'moved. Base rate 0.5036 measured over 3600 trials (1200 mints) on the same key family; '
+      + 'the designed rate is 1/3 + REPLACEMENT_BIAS_WEIGHT = 0.5133 and the corpus/family '
+      + 'divergence is 0.56 sigma. Neither bound is loosenPending or a ratified stricter '
+      + 'override. THE SAME registered pair is re-read by the STATIONARITY pin (year 100 versus '
+      + 'year 10), which is the point: stationarity IS the claim that the later cohort still '
+      + 'lands inside the earlier one\'s envelope, so a second pair of bounds would have been a '
+      + 'second definition of the same property.' },
 
   // ── NOT DISTRIBUTION INSTRUMENTS: classified EP-2D, nothing to derive ───────
   { file: 'tests/domain/guidanceNotes.test.js', pendingMigration: false,
@@ -298,6 +317,10 @@ const DISTRIBUTION_TOTALITY = Object.freeze([
  * (tests/simulation/tierInertiaEnvelope.test.js, the realm-directive-6 tier-inertia
  * confirmation), arriving MIGRATED with nine derived bounds, so the roster grew
  * 15 -> 16 while the pending column did not move.
+ * UNCHANGED at 1 by wave W-H3 (2026-08-01): one row ADDED
+ * (tests/domain/npcReplacement.test.js, the directive-8 replacement-bias effect size and
+ * trait stationarity), arriving MIGRATED with a two-sided derived pair, so the roster
+ * grew 16 -> 17 while the pending column did not move.
  */
 const PENDING_MIGRATION_BASELINE = 1;
 
@@ -466,7 +489,7 @@ describe('distribution-envelope registry: derivation, power, provenance', () => 
   });
 
   test('the roster is frozen and non-vacuous', () => {
-    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(16);
+    expect(DISTRIBUTION_TOTALITY.length, 'roster size').toBe(17);
     const files = DISTRIBUTION_TOTALITY.map((row) => row.file);
     expect(files.filter((f, i) => files.indexOf(f) !== i), 'duplicate roster rows').toEqual([]);
   });

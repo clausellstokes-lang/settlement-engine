@@ -102,6 +102,17 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     'src/domain/worldPulse/informationStatecraft.js',
     'src/domain/worldPulse/momentum.js',
     'src/domain/worldPulse/npcAgency.js',
+    // W-H3 THE DESTRUCTION DISPERSAL (dark): disperseCastToPool reads the RAW, UNTOUCHED
+    // settlement roster (settlement.npcs) to graduate every named soul into the pool when
+    // the town itself dies. Participation-INDEPENDENT by construction, and for the
+    // strongest possible reason: the settlement is GONE, so a hostage, a shelved figure
+    // and an on-stage magistrate are in exactly the same position, and filtering by
+    // participation would leave whoever happened to be off-stage that tick attached to a
+    // settlement that no longer exists. Law 6 CONSERVATION requires the dispersal see
+    // every soul or it drops one. Dormant by default (npcConsequencesEnabled is declared
+    // false in the full_simulation spread and lit in no preset), and nothing calls it
+    // from the pulse yet.
+    'src/domain/worldPulse/npcCirculation.js',
     'src/domain/worldPulse/npcGrowthKernel.js',
     'src/domain/worldPulse/npcLadderChallenge.js',
     // D-4 (fold batch 3): `.npcs` here is the ladder-standings map PARAMETER (a
@@ -118,6 +129,16 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // correctly ungated. Dormant by default (npcConsequencesEnabled has no entry in
     // DEFAULT_SIMULATION_RULES).
     'src/domain/worldPulse/npcLedger.js',
+    // W-H3 THE POPULATION FLOOR (dark): residentNamedNpcCount reads the RAW, UNTOUCHED
+    // settlement roster (settlement.npcs) to count the named cast for the design section 9
+    // reconciliation (population is never below the resident named count, and the empty
+    // fast path evaluates against population MINUS that count). Participation-INDEPENDENT
+    // for the same reason the H1 census is: a hostage still lives here and still eats, so
+    // a floor computed off the participation view would let a town with three captive
+    // magistrates read as emptier than it is and die for a reason that is not true. The
+    // count is deduped by SLOT ID rather than summed across the alias homes, so it reads
+    // the same in memory and after a reload. Dormant by default.
+    'src/domain/worldPulse/npcReplacement.js',
     // W-H2 THE VERDICT APPLICATION (dark): stripNpcInfluence reads the RAW, UNTOUCHED
     // settlement roster (source.npcs) as the first of the THREE alias homes it relinquishes
     // across (roster + factions[].members[] + powerStructure.factions[].members[]). It is a

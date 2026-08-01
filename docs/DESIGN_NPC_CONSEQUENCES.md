@@ -263,3 +263,40 @@ pool pressure bands — every rate a band, every band soak-vetoable (PROPOSED sh
 - Player-visible reputation inspection UI beyond the register (dossier drill-in).
 - Cross-realm (multi-region) roaming — bounded to the realm until the region graph
   earns it.
+
+## 16. IMPLEMENTATION CONVENTIONS (appended by W-H3; the frozen sections above are
+## unchanged — this records seams other programs must be able to read)
+
+- **THE HIDDEN-PATH SEAM (the J-program coordination, §6 travel physics).** Design §6
+  gives wanderers hidden paths and denies them to armies. The hidden-path network belongs
+  to the J program, so the coupling is an OPTIONAL CALLBACK and never an import:
+  `npcCirculationTransit.js` accepts `hiddenHopsOf(fromId) -> readonly string[]`, the ids
+  reachable from here by a hidden way. ABSENT (every caller today) the module is
+  byte-identical to the road-only reading. A hidden hop is taken only when it lands
+  STRICTLY closer to the destination, and it costs `HIDDEN_PATH_SLOWDOWN` times the
+  nominal hop ("slowly"). THE ARMY ASYMMETRY IS ENFORCED BY WHO SUPPLIES THE HOOK: the
+  army lane never passes it, so armies never get the paths. Neither program edits the
+  other's files.
+- **ONE TUNING TABLE, RELOCATED.** `NPC_CONSEQUENCES_TUNING` (§11) lives in
+  `src/domain/worldPulse/npcConsequencesTuning.js` and is RE-EXPORTED from
+  `npcVerdictTable.js`, which had 65 of its 800 permitted lines left. One table, one home,
+  every importer unchanged.
+- **THE COOLDOWN IS AN EXCLUSION KIND, NOT A FOURTH MAP.** §3b freezes the ledger at three
+  maps, so §6's rejection cooldown lands as a second `EXCLUSION_KINDS` rung
+  (`rehost_cooldown`) rather than a shape change. The candidate flow reads every kind; the
+  reader projection reads `EDICT_EXCLUSION_KINDS` only, because a cooldown is bookkeeping
+  and a banishment is a legal fact.
+- **RESIDENCY AND TRANSIT RIDE THE ROAMER'S OWN RECORD.** Both are conditional,
+  drop-when-empty fields on the ledger record (the armyTransit pattern applied to a
+  person) rather than new top-level ledger keys, so a walker cannot exist without a soul
+  and law 6 stays structural. A record carrying neither serializes exactly as a pre-H3 one.
+- **THE POPULATION FLOOR IS PURE, AND ITS WIRING IS DEFERRED.** `npcReplacement.js`
+  exports the §9 arithmetic (`residentNamedNpcCount`, `effectivePopulationForFloor`,
+  `reconcilePopulationFloor`, `drainAnonymousFirst`, `reducedToCast`). The settlement
+  lifecycle kernel is READ-ONLY to W-H3, so the call that hands its empty fast path the
+  effective population belongs to the slice that owns that kernel. Deliberately deferred,
+  documented, not a bug to re-find.
+- **NOTHING IN W-H3 IS CALLED FROM THE PULSE.** Every leaf is a pure function behind
+  `npcConsequencesEnabled`. The slice that wires a trigger must add its candidate types
+  (`npc_rejection`, `npc_arrival`, `npc_dispersal`) to the certification row's aliveness
+  in the SAME edit.

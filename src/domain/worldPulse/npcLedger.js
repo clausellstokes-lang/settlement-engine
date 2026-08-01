@@ -62,6 +62,7 @@ import {
   NEUTRAL_REPUTATION_FACETS,
   VERDICT_CAUSES,
   COMPROMISE_SOURCES,
+  EXCLUSION_KINDS,
   closedValue,
   normalizeReputationFacets,
   normalizeExclusionEdges,
@@ -258,9 +259,67 @@ function normalizeRecord(raw, opts) {
   };
   if (opts.placed) out.hostSettlementId = text(r.hostSettlementId);
   out.sinceTick = tickOf(r.sinceTick);
+  // W-H3, BOTH CONDITIONAL, BOTH DROP-WHEN-EMPTY. A roamer who is resting somewhere
+  // carries a residency; a roamer who is on the road carries a transit leg. A record
+  // that carries neither serializes EXACTLY as it did before H3 existed, which is what
+  // keeps every H1/H2 round-trip pin measuring the same bytes it measured before.
+  const residency = normalizeResidency(r.residency);
+  if (residency) out.residency = residency;
+  const transit = normalizeTransit(r.transit);
+  if (transit) out.transit = transit;
   const dmTruth = normalizeDmTruth(r.dmTruth);
   if (dmTruth) out.dmTruth = dmTruth;
   return /** @type {RoamerRecord | PlacementRecord} */ (out);
+}
+
+/**
+ * @typedef {Object} ResidencyRef
+ * @property {string} settlementId  where this person is resting (design §6c)
+ * @property {number} sinceTick
+ * @property {number} untilTick     the tick the banded stay is due to end
+ */
+
+/**
+ * Normalize a residency, or null when there is none to carry. A residency naming no
+ * settlement is not a residency: the whole point of the record is WHERE somebody is,
+ * so a nameless one would put a person nowhere while claiming they were somewhere.
+ * @param {unknown} raw @returns {ResidencyRef | null}
+ */
+function normalizeResidency(raw) {
+  const r = asObject(raw);
+  const settlementId = text(r.settlementId);
+  if (!settlementId) return null;
+  const sinceTick = tickOf(r.sinceTick);
+  // The stay never ends before it begins, whatever a garbled record claims.
+  return { settlementId, sinceTick, untilTick: Math.max(sinceTick, tickOf(r.untilTick)) };
+}
+
+/**
+ * @typedef {Object} TransitLeg
+ * @property {string} fromId        the settlement left behind
+ * @property {string} toId          the settlement being walked to
+ * @property {number} departTick
+ * @property {number} arrivalTick   the first tick the walker is THERE
+ * @property {true} [hidden]        the leg runs on a hidden path (wanderers only)
+ */
+
+/**
+ * Normalize a transit leg, or null when there is none. The armyTransit conditional
+ * ledger pattern, applied to a person: a leg needs both ends, and a leg that arrives
+ * before it departs is a leg that arrives on departure (never earlier), because the
+ * alternative is a walker who is retroactively somewhere they never left for.
+ * @param {unknown} raw @returns {TransitLeg | null}
+ */
+function normalizeTransit(raw) {
+  const r = asObject(raw);
+  const fromId = text(r.fromId);
+  const toId = text(r.toId);
+  if (!fromId || !toId || fromId === toId) return null;
+  const departTick = tickOf(r.departTick);
+  /** @type {Record<string, unknown>} */
+  const leg = { fromId, toId, departTick, arrivalTick: Math.max(departTick, tickOf(r.arrivalTick)) };
+  if (r.hidden === true) leg.hidden = true;
+  return /** @type {TransitLeg} */ (leg);
 }
 
 /**
@@ -366,12 +425,31 @@ export function exclusionsOf(worldState, wnpcId) {
  * @param {string} wnpcId @param {string} settlementId @param {number} tick
  * @returns {boolean}
  */
-export function isExcludedFrom(worldState, wnpcId, settlementId, tick) {
+export function isExcludedFrom(worldState, wnpcId, settlementId, tick, kinds = EXCLUSION_KINDS) {
   const target = String(settlementId);
+  const allowed = Array.isArray(kinds) && kinds.length > 0 ? kinds : EXCLUSION_KINDS;
   for (const edge of exclusionsOf(worldState, wnpcId)) {
-    if (edge.settlementId === target && exclusionActiveAt(edge, tick)) return true;
+    if (edge.settlementId !== target) continue;
+    if (!allowed.includes(edge.kind)) continue;
+    if (exclusionActiveAt(edge, tick)) return true;
   }
   return false;
+}
+
+/**
+ * The ACTIVE exclusion edges of given kinds against a durable identity, at `tick`.
+ * The kind-aware read W-H3's second EXCLUSION_KIND made necessary: the candidate flow
+ * wants every shut door, and a reader surface wants only the edicts, so neither may
+ * hard-code a kind list of its own.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {string} wnpcId @param {number} tick @param {ReadonlyArray<string>} kinds
+ * @returns {ReadonlyArray<ExclusionEdge>}
+ */
+export function exclusionsOfKind(worldState, wnpcId, tick, kinds) {
+  const allowed = Array.isArray(kinds) && kinds.length > 0 ? kinds : EXCLUSION_KINDS;
+  return exclusionsOf(worldState, wnpcId).filter(
+    (edge) => allowed.includes(edge.kind) && exclusionActiveAt(edge, tick),
+  );
 }
 
 /**
@@ -568,6 +646,66 @@ export function addExclusionEdge(worldState, wnpcId, edge) {
   const nextExclusions = sortedRecords({ ...ledger.exclusions, [id]: merged });
   const next = setNpcLedger(worldState, { ...ledger, exclusions: nextExclusions });
   return { worldState: next, changed: next !== worldState };
+}
+
+/**
+ * THE ONE TRANSITION (law 6 CONSERVATION), single-writer.
+ *
+ * Every W-H3 movement of a soul is this call: a rehost that places a roamer, a
+ * departure that returns a placed person to the pool, a residency stamp, a transit leg
+ * opening or closing. All of them are "take the record out of whichever map holds it,
+ * patch it, put it back into the map its new host implies" — so all of them are ONE
+ * function rather than four hand-rolled map surgeries that could each drop a person in
+ * a different way. The record is read through npcLedgerOf (already conservation-checked
+ * at the read door) and written back through setNpcLedger (already drop-when-empty), so
+ * a move can neither duplicate nor lose an identity by construction.
+ *
+ * `hostSettlementId`: a non-empty string ⇒ the record lands in `placed` under that
+ * host; null or '' ⇒ it lands in `roamers`. `undefined` KEEPS the current map, which is
+ * what a pure residency or transit patch wants.
+ *
+ * DORMANT, an unknown id, or a no-op patch ⇒ the SAME worldState reference.
+ *
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.worldState
+ * @param {string} args.wnpcId
+ * @param {string|null} [args.hostSettlementId]
+ * @param {Record<string, unknown>} [args.patch] shallow fields merged onto the record
+ * @param {number} [args.sinceTick] when set, restamps the record's state clock
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, moved: boolean }}
+ */
+export function moveNpcRecord({ worldState, wnpcId, hostSettlementId, patch = {}, sinceTick }) {
+  if (!npcConsequencesActive(worldState)) return { worldState, changed: false, moved: false };
+  const id = String(wnpcId == null ? '' : wnpcId);
+  const ledger = npcLedgerOf(worldState);
+  const wasPlaced = Object.prototype.hasOwnProperty.call(ledger.placed, id);
+  const wasRoaming = Object.prototype.hasOwnProperty.call(ledger.roamers, id);
+  if (!wasPlaced && !wasRoaming) return { worldState, changed: false, moved: false };
+
+  const current = /** @type {Record<string, unknown>} */ (
+    /** @type {unknown} */ (wasPlaced ? ledger.placed[id] : ledger.roamers[id])
+  );
+  const host = hostSettlementId === undefined
+    ? (wasPlaced ? text(current.hostSettlementId) : '')
+    : text(hostSettlementId);
+  const nextPlaced = host !== '';
+  /** @type {Record<string, unknown>} */
+  const merged = { ...current, ...asObject(patch), hostSettlementId: host };
+  if (sinceTick !== undefined) merged.sinceTick = tickOf(sinceTick);
+  const record = normalizeRecord(merged, { placed: nextPlaced });
+
+  const placed = { ...ledger.placed };
+  const roamers = { ...ledger.roamers };
+  delete placed[id];
+  delete roamers[id];
+  if (nextPlaced) placed[id] = /** @type {PlacementRecord} */ (record);
+  else roamers[id] = /** @type {RoamerRecord} */ (record);
+  const next = setNpcLedger(worldState, {
+    ...ledger,
+    placed: sortedRecords(placed),
+    roamers: sortedRecords(roamers),
+  });
+  return { worldState: next, changed: next !== worldState, moved: nextPlaced !== wasPlaced };
 }
 
 /**
