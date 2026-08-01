@@ -539,6 +539,38 @@ export function graduateNpc({
 }
 
 /**
+ * MINT ONE EXCLUSION EDGE against a durable identity (W-H2: the banishment door).
+ *
+ * The merge rule is normalizeExclusionEdges', not this function's: the new edge is
+ * appended to whatever the ledger already holds and the normalizer decides which
+ * survives, so a second banishment from the same town EXTENDS the sentence rather
+ * than replacing it with a shorter one. Delegating rather than re-deciding is what
+ * keeps the "stricter wins" rule single-writer.
+ *
+ * DORMANT ⇒ an immediate no-op returning the SAME worldState reference, so the
+ * constitutional gate is a whole-entry-point early return here exactly as it is for
+ * graduation. An edge naming no settlement, or an unknown durable id, is likewise a
+ * no-op: an exclusion against nobody is not an exclusion.
+ *
+ * @param {Record<string, unknown>} worldState
+ * @param {string} wnpcId
+ * @param {{ settlementId?: unknown, kind?: unknown, untilTick?: unknown, indefinite?: unknown }} edge
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean }}
+ */
+export function addExclusionEdge(worldState, wnpcId, edge) {
+  if (!npcConsequencesActive(worldState)) return { worldState, changed: false };
+  const id = String(wnpcId == null ? '' : wnpcId);
+  const target = String(asObject(edge).settlementId == null ? '' : asObject(edge).settlementId);
+  if (!id || !target) return { worldState, changed: false };
+  const ledger = npcLedgerOf(worldState);
+  const priorEdges = ledger.exclusions[id] || [];
+  const merged = normalizeExclusionEdges([...priorEdges, edge]);
+  const nextExclusions = sortedRecords({ ...ledger.exclusions, [id]: merged });
+  const next = setNpcLedger(worldState, { ...ledger, exclusions: nextExclusions });
+  return { worldState: next, changed: next !== worldState };
+}
+
+/**
  * Rebuild a record map in codepoint key order, so insertion order can never leak into
  * the serialized bytes. @template T @param {Record<string, T>} map @returns {Record<string, T>}
  */
@@ -559,6 +591,18 @@ function sortedRecords(map) {
  * homes SEPARATELY and never dedupes across them, so a caller can compare both and a
  * JSON-round-tripped fixture measures what an in-memory one cannot.
  *
+ * BOTH FACTION HOMES ARE WALKED, and the second one is a W-H2 repair rather than a
+ * widening. H1 walked `powerStructure.factions[]` only, which is the POWER roster:
+ * rulingStructure mints those records as `{ faction, power, category }` and NO writer
+ * in src ever puts members on them. The pipeline's member lists live on
+ * `settlement.factions[]`, which factionGrouping builds by pushing the very npc
+ * references into `members` (generateSettlementPipeline.js, relinked by
+ * relinkFactionMembers). Against real pipeline output the H1 census therefore reported
+ * memberCount 0 and its alias-home arm was VACUOUS; only its hand-built fixture,
+ * which put members under powerStructure, made it look alive. Walking both homes is
+ * what the alias trap actually requires, and it is the same both-homes rule
+ * factionRename.js enforces for its own cascade.
+ *
  * Returns codepoint-sorted id lists plus their counts, so two censuses compare by value.
  *
  * @param {unknown} settlement
@@ -570,13 +614,14 @@ export function settlementNpcCensus(settlement) {
   const npcIds = npcs.map((n) => text(asObject(n).id)).filter(Boolean).sort(compareCodepoint);
   /** @type {string[]} */
   const memberIds = [];
-  const power = asObject(s.powerStructure);
-  const factions = Array.isArray(power.factions) ? power.factions : [];
-  for (const faction of factions) {
-    const members = Array.isArray(asObject(faction).members) ? asObject(faction).members : [];
-    for (const m of /** @type {unknown[]} */ (members)) {
-      const id = text(asObject(m).id);
-      if (id) memberIds.push(id);
+  const factionLists = [asObject(s.powerStructure).factions, s.factions];
+  for (const list of factionLists) {
+    for (const faction of Array.isArray(list) ? list : []) {
+      const members = Array.isArray(asObject(faction).members) ? asObject(faction).members : [];
+      for (const m of /** @type {unknown[]} */ (members)) {
+        const id = text(asObject(m).id);
+        if (id) memberIds.push(id);
+      }
     }
   }
   memberIds.sort(compareCodepoint);

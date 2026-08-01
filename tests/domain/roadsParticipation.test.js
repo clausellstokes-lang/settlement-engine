@@ -118,6 +118,19 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // correctly ungated. Dormant by default (npcConsequencesEnabled has no entry in
     // DEFAULT_SIMULATION_RULES).
     'src/domain/worldPulse/npcLedger.js',
+    // W-H2 THE VERDICT APPLICATION (dark): stripNpcInfluence reads the RAW, UNTOUCHED
+    // settlement roster (source.npcs) as the first of the THREE alias homes it relinquishes
+    // across (roster + factions[].members[] + powerStructure.factions[].members[]). It is a
+    // MUTATION read, not a stage read, and it is participation-INDEPENDENT by construction
+    // for two separate reasons. (1) A verdict lands on a person whether or not they were
+    // on-stage this tick: a captive, shelved or hostage NPC who is exiled must still have
+    // their seat and influence relinquished, so filtering by participation would silently
+    // leave a banished soul holding office. (2) The participation view is a FILTERED
+    // PROJECTION, and writing a relinquishment through it would strand the alias copies the
+    // JSON-alias trap makes indistinguishable in memory — the strip must see every home to
+    // stay atomic. Dormant by default (npcConsequencesEnabled is declared false in the
+    // full_simulation spread and lit in no preset), and nothing calls it from the pulse yet.
+    'src/domain/worldPulse/npcVerdictApply.js',
     'src/domain/worldPulse/partyImpact.js',
     'src/domain/worldPulse/pulseKernel.js',
     'src/domain/worldPulse/religionLegitimacy.js',

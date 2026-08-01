@@ -106,6 +106,14 @@ const CASCADE_BUCKETS = Object.freeze([
   'institutions',
   'factions',
   'interSettlementRelationships',
+  // ADDED 2026-08-01 for exactly TWO paths: `relationships[].npc1Role` and
+  // `npc2Role`, the per-end TITLES on the in-settlement edge list, which carry the
+  // faction token. The bucket MUST be listed here and not merely walked: the
+  // immutable (library-lane) caller spreads only the buckets named in this list, so
+  // a walk over an unlisted bucket would write straight through into the caller's
+  // own object. The edge list is otherwise untouched by the faction lane; the NAME
+  // halves of each edge belong to the NPC cascade (NPC_CASCADE_BUCKETS below).
+  'relationships',
   // `history` is listed for exactly ONE path: `currentTensions[].factions[]`,
   // the party roster the dossier renders as chips (tabs/HistoryTab.jsx) and the
   // PDF prints as tension parties (pdf/lib/viewModel.js). Nothing else under
@@ -177,6 +185,20 @@ const NPC_FACTION_FIELDS = Object.freeze([
     why: 'the secret itself is faction-token prose (npcGenerator substitutes the faction token into it)' },
   { parent: 'secret', key: 'stakes', kind: 'prose',
     why: 'the stakes sentence names the faction that would pay to bury the secret' },
+  // ADDED 2026-08-01. Both fields were always faction-token prose; they were simply
+  // absent from every seed the denominator happened to sample until wave I1 translated
+  // the town/city streams and two of the 25 denominator cases began generating them.
+  // The staleness they caused is therefore LATENT AND PRE-EXISTING, not new: any world
+  // that rolled a faction-named role or goal has been surviving renames with a dead
+  // name in it for as long as both fields have existed. Cascading is repair under the
+  // faction lane's ALREADY-RATIFIED prose policy (the same policy that moves
+  // secret.what and secret.stakes on these very records); the owner gate recorded in
+  // NPC_NON_CASCADED_SURFACES governs rewriting prose about a PERSON during a PERSON
+  // rename, which is a different lane and is untouched here.
+  { parent: null, key: 'role', kind: 'prose',
+    why: 'the character\'s title is faction-token prose ("Thieves\' Guild Master"); leaving it stale renders a member chip that still names the dissolved faction' },
+  { parent: null, key: 'factionGoal', kind: 'prose',
+    why: 'the generated goal line names the faction whose position the character maintains' },
 ]);
 
 /**
@@ -233,6 +255,12 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
   { path: 'institutions[].factionSource', kind: 'key', why: 'the exact marker naming the faction that raised an institution' },
   { path: 'factions[].name', kind: 'key', why: 'the legacy top-level mirror the gallery rename surface renders' },
   { path: 'factions[].powerFactionName', kind: 'key', why: 'the NPC grouping list back-link to its power faction' },
+  // The relationship edge list stores each end's TITLE alongside its name, and that
+  // title carries the faction token exactly as the NPC-home `role` does. Declared here
+  // rather than in NPC_FACTION_FIELDS because these live on the edge, not under either
+  // NPC home. Same 2026-08-01 cause and same ratified prose policy as `role` above.
+  { path: 'relationships[].npc1Role', kind: 'prose', why: 'the first end\'s title on a relationship edge, faction-token prose like the NPC-home role it copies' },
+  { path: 'relationships[].npc2Role', kind: 'prose', why: 'the second end\'s title on that same edge; it moves if and only if its twin does' },
   { path: 'interSettlementRelationships[].factionName', kind: 'key', why: 'this settlement side of a neighbour link' },
   { path: 'interSettlementRelationships[].partnerFactionName', kind: 'key', why: 'the neighbour side of a link naming this faction' },
   { path: `${ROSTER}.desc`, kind: 'prose', why: 'the faction blurb names the faction' },
@@ -657,6 +685,15 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
   // roster silently regroups under "Unaffiliated".
   for (const npc of listOf(settlement.npcs) || []) {
     renameNpcRecord(npc, NPC_HOMES[0], oldName, newName, mark);
+  }
+
+  // 6b. The in-settlement relationship edges carry each end's TITLE, and a title
+  // spells the faction ("Thieves' Guild Master"). The NAME halves of the same edge
+  // belong to the NPC cascade; only the roles hold a faction token.
+  for (const relationship of listOf(settlement.relationships) || []) {
+    if (!isRecord(relationship)) continue;
+    mark('relationships[].npc1Role', rewriteProse(relationship, 'npc1Role', oldName, newName));
+    mark('relationships[].npc2Role', rewriteProse(relationship, 'npc2Role', oldName, newName));
   }
 
   // 7. Institutions raised BY this faction carry its exact name.

@@ -281,6 +281,10 @@ describe('faction rename — the declared surface set', () => {
       factionAffiliation: OLD,
       secondaryAffiliation: OLD,
       linkedFactionIds: [OLD, 'faction.militia'],
+      // The title and the goal line both carry the faction token (added 2026-08-01
+      // with the surfaces themselves; see NPC_FACTION_FIELDS in factionRename.js).
+      role: `${OLD} Harbourmaster`,
+      factionGoal: `Maintain ${OLD}'s position against current pressure`,
       secret: { what: `Aldis sells ${OLD} manifests to the Militia.`, stakes: `The ${OLD} would drown them for it.` },
     });
     const settlement = {
@@ -298,6 +302,12 @@ describe('faction rename — the declared surface set', () => {
         }],
       },
       npcs: [npcRecord()],
+      // The in-settlement edge list: only the per-end TITLES carry a faction token.
+      // The name halves belong to the NPC rename lane and stay put here.
+      relationships: [{
+        npc1Name: 'Aldis', npc2Name: 'Bryn',
+        npc1Role: `${OLD} Harbourmaster`, npc2Role: `${OLD} Tollwright`,
+      }],
       institutions: [{ name: 'Customs House', factionSource: OLD }],
       factions: [{ name: OLD, powerFactionName: OLD, members: [npcRecord()] }],
       history: {

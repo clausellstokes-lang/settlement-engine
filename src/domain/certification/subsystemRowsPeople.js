@@ -447,18 +447,20 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
   }),
   Object.freeze({
     rule: 'npcConsequencesEnabled',
-    title: 'The personal consequence economy (durable identity + the world NPC ledger)',
-    module: 'src/domain/worldPulse/npcLedger.js,src/domain/worldPulse/npcLedgerFacets.js,src/domain/worldPulse/npcLedgerProjection.js',
+    title: 'The personal consequence economy (durable identity, the world NPC ledger, the verdict table)',
+    module: 'src/domain/worldPulse/npcLedger.js,src/domain/worldPulse/npcLedgerFacets.js,src/domain/worldPulse/npcLedgerProjection.js,src/domain/worldPulse/npcVerdictTable.js,src/domain/worldPulse/npcVerdictApply.js',
     aliveness: Object.freeze({
-      // DELIBERATELY EMPTY AT H1, and this is a statement about today rather than a
-      // permanent one. The design's testing section anticipates verdict / rejection /
-      // arrival event types, but H1 ships IDENTITY AND STATE only: it emits no
-      // candidate, so nothing it produces can reach result.selected, and
-      // eventTypeCounts observes result.selected only. Declaring those three types
-      // NOW would manufacture a channel that reads zero forever and mint a false
-      // SILENT on every receipt written before H2 lands (the npcGrowth row's
-      // reasoning, applied to a subsystem that is early rather than post-apply).
-      // H2 AND H3 MUST EXTEND THIS LIST when their candidate types exist.
+      // STILL DELIBERATELY EMPTY AFTER H2, and the reason has changed shape, so it is
+      // restated rather than left standing. H1 had no candidate type at all. H2 MINTS
+      // one (`npc_verdict`, npcVerdictApply.VERDICT_NEWS_TYPE) and builds the item in
+      // pulse-row shape, but NO PULSE PATH ROUTES IT YET: the verdict lane's trigger
+      // is the corruption web's exposure record, and wiring that call site belongs to
+      // the slice that owns the exposure loop, not to this one. eventTypeCounts
+      // observes result.selected only, so declaring `npc_verdict` here today would
+      // manufacture a channel that reads zero forever and mint a false SILENT on every
+      // receipt written before the wiring lands. THE SLICE THAT WIRES THE TRIGGER MUST
+      // ADD IT HERE IN THE SAME EDIT, and H3 must add its rejection / arrival types
+      // when their emitters reach the selection.
       eventTypes: Object.freeze([]),
       // DELIBERATELY EMPTY. A `people` claim would be corroborating-only and could
       // never carry ALIVE, so nothing is lost by declining it; and the sibling rows
@@ -473,7 +475,7 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
       // Receipt-expressible from the v5 subsystems.stateKeys census, which enumerates
       // spatialLedgers sub-keys by dotted path.
       stateKeys: Object.freeze(['spatialLedgers.npcLedger']),
-      other: 'DARK BY DECLARATION AT H1. npcConsequencesEnabled is a virtual flag declared FALSE in the full_simulation spread and lit in no preset, so every receipt grades this row DORMANT_BY_CONFIG until the W-H program lights it at its golden boundary. That is the honest verdict for a slice that is built and gated, and it is exactly why the key is declared at all: a rule key reachable from neither the defaults nor any preset spread is invisible to the totality walker, and a subsystem behind an invisible key can ship completely dead with no check ever asking. npcCredibilityEnabled is that shape in-tree today and carries no row as a consequence. THE INSTRUMENT GAP TO CLOSE LATER: the census records the ledger key\'s ENTRY COUNT per year, not its contents, so it can prove that souls are in the ledger and cannot yet prove which ledger they are in. The disjointness and never-reminted invariants below are written against that limit rather than around it.',
+      other: 'DARK BY DECLARATION, STILL, AFTER H2. npcConsequencesEnabled is a virtual flag declared FALSE in the full_simulation spread and lit in no preset, so every receipt grades this row DORMANT_BY_CONFIG until the W-H program lights it at its golden boundary. That is the honest verdict for a slice that is built and gated, and it is exactly why the key is declared at all: a rule key reachable from neither the defaults nor any preset spread is invisible to the totality walker, and a subsystem behind an invisible key can ship completely dead with no check ever asking. npcCredibilityEnabled is that shape in-tree today and carries no row as a consequence. THE INSTRUMENT GAP TO CLOSE LATER: the census records the ledger key\'s ENTRY COUNT per year, not its contents, so it can prove that souls are in the ledger and cannot yet prove which ledger they are in, nor which verdict put them there. The disjointness, never-reminted and relinquishment invariants below are written against that limit rather than around it. WHAT H2 ADDED, AND WHAT IT DID NOT: the total verdict table, atomic influence relinquishment across both NPC alias homes, the banishment exclusion edge, the jail hold, the contested opening and the verdict Herald item all exist and are pinned as pure functions; NOTHING calls them from the pulse yet, so no receipt of any generation can observe them and no new aliveness channel is honest. That is why the eventTypes list above is still empty after a slice that mints a candidate type.',
     }),
     // REACTIVE, per the design. Graduation fires on the corruption web's covert to
     // revealed transition, not on a clock: a realm can honestly run years with no
@@ -499,7 +501,22 @@ export const PEOPLE_SUBSYSTEM_ROWS = Object.freeze([
       Object.freeze({
         name: 'no_dm_truth_in_a_player_projection',
         description: 'AUDIENCE PROJECTION (law 7): compromise sources are covert intelligence and must never reach a player view. The projection is allowlist-built, so an unwritten field cannot appear.',
-        check: 'NOT EXPRESSIBLE FROM ANY RECEIPT, and named here rather than omitted so the reader knows where the proof lives instead of assuming a soak covers it. A soak receipt records engine state, never a rendered projection. The property is pinned statically in tests/domain/npcLedgerProjection.test.js with an anchored negative (the DM view of the SAME fixture must report the covert path through the same helper), and independently by publicSafe.js\'s recursive denylist, whose PRIVATE_KEY_RE matches the dmTruth spelling.',
+        check: 'NOT EXPRESSIBLE FROM ANY RECEIPT, and named here rather than omitted so the reader knows where the proof lives instead of assuming a soak covers it. A soak receipt records engine state, never a rendered projection. The property is pinned statically in tests/domain/npcLedgerProjection.test.js with an anchored negative (the DM view of the SAME fixture must report the covert path through the same helper), and independently by publicSafe.js\'s recursive denylist, whose PRIVATE_KEY_RE matches the dmTruth spelling. W-H2 EXTENDS THE SAME PROPERTY TO THE VERDICT NEWS ITEM: its typed receipt (which arm ran, the roll, the weights, the compromise source) is written under the SAME dmTruth key, so both mechanisms cover it without either needing to learn a second spelling.',
+      }),
+      Object.freeze({
+        name: 'a_verdict_fires_only_on_a_revealed_exposure',
+        description: 'REVEALED-ONLY (law 2, constitutional): the lane fires exclusively on the corruption web\'s covert to revealed transition. A corrupt NPC with no exposure record is COVERT, and npc.corrupt is the hidden state rather than the trigger, so no verdict, no graduation and no ledger write may follow from it.',
+        check: 'NOT EXPRESSIBLE FROM ANY RECEIPT: the census records ledger entry counts, never the exposure that produced them, so a receipt cannot distinguish a verdict fired on a revealed exposure from one fired on a covert flag. Pinned statically in tests/domain/npcVerdictTable.test.js with an anchored negative (a covert-but-corrupt fixture yields null while the SAME fixture with an ousting exposure yields a verdict, through the same entry point), which is the shape a receipt cannot reach.',
+      }),
+      Object.freeze({
+        name: 'a_verdict_relinquishes_at_both_alias_homes',
+        description: 'INFLUENCE RELINQUISHMENT (design section 4): ladder position, faction role and influence contributions are stripped ATOMICALLY across npcs[] and every factions[].members[] home. The two homes alias in memory and split on serialization, so a one-home strip leaves a disgraced official still holding influence in the faction roster of every RELOADED campaign, and only a reloaded world can see it.',
+        check: 'NOT EXPRESSIBLE FROM ANY RECEIPT: no census field reads a faction member\'s influence, and the defect is invisible in memory by construction. Pinned statically in tests/domain/npcVerdictApply.test.js against a JSON-ROUND-TRIPPED fixture (the alias split is the precondition of the measurement, not an incidental detail) with per-home hit counts asserted, so a strip that reached only the roster reds.',
+      }),
+      Object.freeze({
+        name: 'a_vacancy_is_emitted_never_refilled',
+        description: 'THE CONTESTED OPENING (design section 4): the seat a verdict vacates is NEVER silently refilled. It is emitted as a typed opening carrying the vacancy_from_disgrace cause tag for the existing succession, ladder-contest and faction-competition machinery to fight over. A verdict that quietly installed a successor would delete the story the whole system exists to produce.',
+        check: 'PARTIALLY expressible once the lane is wired: a receipt whose npcStates maxEntries is unchanged across a year that graduated souls is consistent with no silent mint, but it cannot prove the OPENING was emitted, and it cannot see the cause tag at all. The exact proof is static, in tests/domain/npcVerdictApply.test.js: the apply result carries the opening with its cause tag, and the settlement roster after the verdict holds the SAME ids it held before (no successor minted anywhere in this slice).',
       }),
     ]),
     // NOT 'unobserved', and the refusal is deliberate: that flag suppresses the SILENT
