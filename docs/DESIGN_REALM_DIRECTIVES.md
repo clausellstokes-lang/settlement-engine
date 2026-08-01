@@ -570,6 +570,35 @@
 >   instead of a grudge. Both outcomes must be reachable and pinned, and the Herald
 >   must name which one happened, because "they paid what they owed" and "they never
 >   paid" are the two sentences a table will remember about that alliance forever.
+> - ⭐⭐ 2026-08-01 AMENDMENT I3 — THE LEDGER DOES NOT DECIDE EITHER. Owner: "it is
+>   also right that the primary reason has left, so it is up to the temperament and
+>   the state of [the ally] whether or not they want to continue."
+>   ── BOTH FACTS ARE TRUE AT ONCE AND NEITHER WINS BY DEFAULT: the cause that brought
+>   them in is gone (I), and the bill they have already paid is real (I2). An ally
+>   standing in that position is in a GENUINELY OPEN DECISION, and the engine must
+>   treat it as open.
+>   ── ⚠️ IMPLEMENTATION PROHIBITION, stated so nobody takes the easy road: do NOT
+>   hard-wire either direction. No "expenditure above X therefore continue", and no
+>   "primary cause dissolved therefore exit". Both are one-line rules that would
+>   destroy the interesting case, and either would make every ally in every war
+>   behave identically.
+>   ── IT RESOLVES ON TEMPERAMENT AND STATE, which is to say on everything already
+>   ruled: disposition (E2 — a martial ally stays where a mercantile one cashes out),
+>   alignment and the ruler's facets (B), the ruler's own books versus the
+>   settlement's (G), the home front and the projected comparative costs (F), the
+>   prospect of actually being paid (I2), and momentum (C2). THIS IS PRECISELY F's
+>   "EVEN" CASE ARRIVING BY ANOTHER ROAD: the primary comparison has gone silent, and
+>   therefore every other force decides. That symmetry is a good sign the model is
+>   coherent rather than accreted.
+>   ── ⭐ THE PIN THAT PROVES TEMPERAMENT IS LOAD-BEARING RATHER THAN DECORATIVE: the
+>   SAME expenditure ledger, the SAME dissolved cause, two different tempers — and two
+>   different outcomes. One realm goes home with its bill unpaid and a grudge to file
+>   later; the other fights on for a war that is no longer anybody's. If both arms do
+>   not fire from identical material state, temperament is not doing any work and the
+>   whole disposition mechanism is decoration.
+>   ── AND THE HERALD MUST SAY WHICH IT WAS, in the voice of a people rather than a
+>   calculation: they went home, or they stayed. Both are characterful; neither is a
+>   default.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
