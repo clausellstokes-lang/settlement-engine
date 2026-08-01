@@ -71,8 +71,21 @@ describe('K1 the certification row is registered and well shaped', () => {
     }
   });
 
-  it('the ONE declared channel is the ledger key this slice actually writes', () => {
-    expect(ROW.aliveness.stateKeys).toEqual([`spatialLedgers.${INSTITUTION_STATUS_LEDGER}`]);
+  it('declares K1\'s ledger key among its channels, and every channel is a real one', () => {
+    // AMENDED BY K3 (the disaster buffer). This pin originally asserted EXACT equality
+    // with K1's single key, on the reading that the lane had one channel. It does not
+    // any more: the row is shared by every W-K slice, and K3 writes a second key
+    // (spatialLedgers.magicBuffer, the ward reserve). Widening the assertion to
+    // CONTAINMENT plus a totality check over the shape keeps what the pin was actually
+    // for, which is that every declared channel names a key some slice really writes,
+    // and drops only the claim that has become false. K3's own key is pinned from the
+    // other side in tests/domain/magicBufferIntegration.test.js, which asserts the row
+    // declares it and that a real advance materializes it.
+    expect(ROW.aliveness.stateKeys).toContain(`spatialLedgers.${INSTITUTION_STATUS_LEDGER}`);
+    for (const key of ROW.aliveness.stateKeys) {
+      expect(key, `a declared channel must be a spatialLedgers key: ${key}`)
+        .toMatch(/^spatialLedgers\.[A-Za-z][A-Za-z0-9]*$/);
+    }
     const channels = ROW.aliveness.eventTypes.length
       + ROW.aliveness.moverFamilies.length
       + ROW.aliveness.stateKeys.length;
