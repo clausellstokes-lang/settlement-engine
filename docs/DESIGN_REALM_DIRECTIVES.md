@@ -110,6 +110,15 @@
 >   soak harness learns the remnant law). Combined gate exit 0 over all four. Five
 >   Opus-era judgments recorded in FABLE_VALIDATION_QUEUE.md. NEXT: the J2+H2+I1
 >   parallel batch.
+> - 2026-08-01 (BUILD ERA, batch 3 LANDED): J2 @ 6aa0f205 (three-class flow ledger,
+>   material objective with the counterfactual-mercy correction, realm
+>   self-sufficiency as an additive v5 observation), H2 @ 4b1e391f (total verdict
+>   table, atomic relinquishment, the contested opening; H1 census alias defect
+>   repaired), I1 @ 99974c4a (four brokerage houses + rumourSource census; GOLDEN
+>   RE-RECORD authorized and proven: 273/525 rows, 0 outside the predicted tiers,
+>   dormancy goldens untouched). Gate exit 0. Four more Opus-era judgments recorded.
+>   NEXT: batch 4 — J3 (charter/decay events), H3 (circulation + replacement),
+>   K1 (the general institution status system: operational|impaired|shell).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
