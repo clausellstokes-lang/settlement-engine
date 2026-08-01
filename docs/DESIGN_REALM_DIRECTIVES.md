@@ -422,6 +422,44 @@
 >   reachable, legible and narratable: victories on the field while the granaries
 >   empty and the roads go to grass. It is one of the most historically common shapes
 >   a war takes and one of the most dramatic for a table. Pin it explicitly.
+> - ⭐⭐ 2026-08-01 AMENDMENT G — THE ACTOR IS THE LEGITIMATE RULER, AND THEY HAVE
+>   THEIR OWN BOOKS. Owner: "the people that are suing are the legitimate rulers of
+>   settlements, so we have to think about the position of the settlement as a whole
+>   AND of the legitimate rulers — maximizing both of their profits, or minimizing
+>   both of their losses, or some combination of the two."
+>   ── THE SEAT SUES, NOT THE WALLS. Every read in C/C2/D/F is performed BY somebody,
+>   and that somebody is not a neutral agent of the place they rule. There are TWO
+>   OBJECTIVE FUNCTIONS and a war decision optimizes a weighted combination:
+>   (1) THE SETTLEMENT'S POSITION — survival, food, prosperity, people, standing;
+>   (2) THE RULER'S OWN POSITION — their seat, their legitimacy, their faction, their
+>   life. Neither may be dropped, and the WEIGHTING between them is itself derived
+>   from the ruler: their security, their legitimacy, their facets (amendment B),
+>   their alignment.
+>   ── ⭐ DIVERGENCE MUST BE REACHABLE, AND IT IS THE ENGINE OF POLITICAL DRAMA. Pin
+>   both shapes: a RUINOUS WAR CONTINUED because peace would cost the ruler their
+>   seat (the settlement bleeds so the seat survives), and a WINNING WAR ENDED
+>   because victory would raise a rival the ruler cannot afford (the settlement is
+>   denied a triumph so the seat survives). Neither is a bug. Both are history.
+>   ── A SECURE RULER CAN AFFORD TO GOVERN. High legitimacy and a safe seat let the
+>   settlement's interest dominate the weighting; insecurity pulls the weight onto
+>   the ruler's own books. That is the honest mechanism and it needs no villain: an
+>   ordinary frightened ruler behaves differently from an ordinary safe one.
+>   ── ⭐⭐ AND A COMPROMISED RULER OPTIMIZES A THIRD PARTY'S BOOKS. The corruption web
+>   already models compromise BY A RIVAL POWER, so a compromised ruler's "profit" may
+>   literally belong to somebody else's realm — a war prolonged or a peace signed for
+>   a patron neither the settlement nor the Herald can see until exposure. Every
+>   piece of this exists: the covert/revealed seam, H2's verdicts, and P4's
+>   belief-read. This is where the epistemic layer, the corruption layer and the war
+>   layer become one story.
+>   ── ⭐ THE LOOP CLOSES, and this is what makes it a system rather than a modifier:
+>   a ruler who serves their own books too visibly makes the settlement suffer →
+>   suffering erodes legitimacy → eroded legitimacy invites succession, coup, or an
+>   H2 verdict → amendment D fires and the successor re-reads the entire war with
+>   their own books. The settlement's counterforce against a self-serving ruler is
+>   the ruler's REPLACEMENT, and it is already built.
+>   ── LEGIBILITY (the hard requirement): the receipt must be able to say WHOSE
+>   INTEREST a decision served. "The realm sued for peace" and "the Margrave sued for
+>   peace" are different sentences and the Herald must know which one is true.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
