@@ -165,6 +165,37 @@ first: can a steading take the overflow? The ask is need-weighted:
   §6's expansion motives are the only valves — by design, the top of the ladder
   leaks ambition outward instead of numbers upward.
 
+### §5b Spatial density — the land is the last ledger (owner amendment 2026-08-01)
+
+The map must never crowd, and the count of settlements must cap ORGANICALLY:
+
+- **THE PROXIMITY BAND:** every engine-founded settlement (satellites included)
+  must land inside a band — no closer than `MIN_SEPARATION` to ANY existing
+  settlement (tier-banded: a steading may sit nearer a thorp than a metropolis
+  may sit to a city), and no farther than `MAX_TETHER` from its parent (a
+  satellite that cannot be reached is not a satellite). Wave E's orbit annulus
+  and wave G's tier-banded spacing already speak this vocabulary; this section
+  graduates them from placement preferences into REALM LAW for engine foundings.
+- **THE USER EXCEPTION (sovereign hand):** user-placed settlements are exempt
+  from the band, exactly as user routes are lifecycle-immune. The engine never
+  refuses the DM's hand; it only disciplines its own.
+- **THE ORGANIC COUNT CAP:** because every engine founding needs a legal spot,
+  the map's geometry itself bounds the settlement count. Saturation is
+  DISCOVERED, never precomputed: the overflow lane's bounded candidate
+  enumeration (wave E's capped set, Weyl-sampled) simply comes back EMPTY after
+  the band filters — that empty answer IS the saturation signal, cheap and
+  honest, re-asked every attempt as the map and its ruins change.
+- **AT SATURATION, THE LADDER TAKES OVER — WITH CONSERVATIONS:** when no legal
+  ground remains, overflow has no founding valve, so pressure resolves through
+  TIER MOVEMENT: sustained pressure with next-tier food headroom promotes
+  (§5's earned ascension — the same people on the same ground, holding more
+  because the settlement has become MORE); decline demotes down the same
+  ladder. Both are conservation-exact: not one person is created or destroyed
+  by a tier transition; the promotion absorbs the overflow ledger's refused
+  count into the higher tier's density ceiling. A saturated realm stops
+  sprawling and starts DEEPENING — which is what old countries do.
+
+
 ## §6 The realm food conservation effect, and what it fuels
 
 Realm-scale: Σ population tracks Σ K_food loosely (not strictly — food is
@@ -219,6 +250,8 @@ Birth/death bands per tier · MOUTHS_PER_FOOD_UNIT · density ceilings per tier
 (+terrain adjust) · pressure curve shape · overflow band · promotion window +
 headroom requirement · push/pull driver bands + applicability guards · migration
 column speed · realmPressure motive caps · stressor incidence couplings.
+MIN_SEPARATION per tier-pair · MAX_TETHER per parent tier · the saturation
+re-ask cadence.
 Every one banded, none a bare float on a surface.
 
 ## §11 Wave slicing (build order)
@@ -227,7 +260,9 @@ Every one banded, none a bare float on a surface.
   H3-floor composition), certification row, dormancy golden. The runaway dies
   in this slice.
 - **P2 — THE VALVES:** overflow → satellites (need-weighted), earned promotion,
-  metropolis ceiling.
+  metropolis ceiling, AND §5b's spatial law: the proximity band on every engine
+  founding (user exempt), saturation-by-empty-candidate-set, and the
+  at-saturation promotion/demotion pathway with its conservation pins.
 - **P3 — THE HOMEOSTAT:** push-pull migration through the ledger, arrivals,
   transit accounting.
 - **P4 — THE WORLD'S HAND:** stressor couplings, realmPressure emission +
@@ -253,3 +288,12 @@ re-measured on the same run — the two findings bracket the model.
   VETO reverts to population thresholds.
 - **J-P5:** the brief-overshoot allowance (famine lag) instead of a hard clamp
   at K. VETO clamps at K exactly.
+- **J-P6:** MIN_SEPARATION is tier-PAIR banded (steading-near-thorp legal,
+  city-near-city not) rather than one global radius. VETO flattens to one
+  number.
+- **J-P7:** saturation is discovered per-attempt from the empty filtered
+  candidate set, never precomputed realm-wide. VETO orders a global
+  saturation census each pulse.
+- **J-P8:** the user exception is total — no engine rule ever refuses or
+  relocates a user-placed settlement, matching the user-route immunity law.
+  VETO subjects user placements to MIN_SEPARATION warnings (never blocks).
