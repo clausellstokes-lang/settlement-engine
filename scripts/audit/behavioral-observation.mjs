@@ -11,6 +11,7 @@ import {
   SOAK_RECEIPT_SCHEMA_VERSION,
 } from '../../src/domain/certification/behavioralContract.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
+import { observeRealmSelfSufficiency } from '../../src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js';
 import { isPublicOutcome, isStateOnlyOutcome } from '../../src/domain/worldPulse/pulseHelpers.js';
 import { prosperityRank } from '../../src/data/constants.js';
 
@@ -842,6 +843,19 @@ export function observeBehavioralYear({
 
   const succession = successionObservationOf(result, postApplyRecords);
 
+  // REALM SELF-SUFFICIENCY (W-J slice J2; DESIGN_ROUTE_LIFECYCLE.md §5, §13). ADDITIVE
+  // and CONDITIONAL, on the exact terms the beliefDivergence field established below.
+  // It is null on a world whose routeLifecycleEnabled is absent, and a null drops the
+  // key entirely rather than recording a zero: every completed soak on disk is a dark
+  // run, and a 0 in a self-sufficiency column would read as a realm that cannot feed
+  // itself rather than as an instrument that was never switched on. Absence is the
+  // honest reading of a dormant subsystem, and it is the reading the certification
+  // row's gated-emission invariant checks for.
+  const realmSelfSufficiency = observeRealmSelfSufficiency({
+    worldState: result?.worldState,
+    saves: afterSaves,
+  });
+
   return {
     year,
     eventCount: records.length,
@@ -878,6 +892,7 @@ export function observeBehavioralYear({
     // recorded for the v5 envelope in behavioralContract.js). A v4 receipt simply
     // lacks this key, which consumers must read as an instrument gap.
     beliefDivergence: observeBeliefDivergence({ result, afterSaves }),
+    ...(realmSelfSufficiency ? { realmSelfSufficiency } : {}),
   };
 }
 

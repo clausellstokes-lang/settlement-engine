@@ -123,6 +123,36 @@ export const PROVENANCE_USER = 'user';
  *   `chartered:<tick>` once J3 mints organic charters
  * @property {boolean} [lifecycleImmune] present and true only on user edges
  * @property {string} [strategicNeed]   the war layer's band (J4 writes it)
+ * @property {FlowAccrual & { lastTick: number }} [usage]  the three-class USAGE
+ *   this edge has carried (§4: flow on an edge accrues decay's inverse). A
+ *   CONDITIONAL key on exactly the pattern `strategicNeed` sets: absent until a
+ *   flow walks the edge, so a genesis network serializes without it and the J1
+ *   dormancy golden cannot move. J2 writes it; J3's decay reads it.
+ */
+
+/**
+ * THE FLOW ACCRUAL (§4, J2). The three-class accumulation a corridor or an edge
+ * carries. Three parallel, drop-when-zero maps keyed by flow class, and the
+ * parallelism is the receipts law made structural:
+ *   - `tally` is the EXACT INTEGER accumulator. Integers, never floats: an
+ *     accumulator that drifts by a rounding error is a same-seed violation that
+ *     takes a century of ticks to become visible, and THE PROMISE does not survive
+ *     that. Every weight this layer adds is a whole number from a tuning band.
+ *   - `flows` is the BAND WORD derived from the tally, and it is what J3's
+ *     thresholds read. A band is a word about how walked a way is, never a number
+ *     a surface renders.
+ *   - `receipts` names the CONTRIBUTING SOURCES for that class, so every band step
+ *     can say what walked it (§4 is receipts-first). A class present in `flows`
+ *     with an empty receipt list is a contradiction the pins forbid.
+ * A class that never fired is absent from all three, so a corridor that only ever
+ * saw grain serializes with a goods key and nothing else.
+ *
+ * @typedef {Object} FlowAccrual
+ * @property {Record<string, string>} flows     flow class to accumulated band
+ * @property {Record<string, number>} tally     flow class to exact integer total
+ * @property {Record<string, ReadonlyArray<string>>} receipts  class to source names
+ * @property {ReadonlyArray<string>} [reasonGoods]  the goods-denominated reason,
+ *   present only when a goods flow named one
  */
 
 /**
@@ -130,6 +160,9 @@ export const PROVENANCE_USER = 'user';
  * @property {string} a
  * @property {string} b
  * @property {Record<string, string>} flows  flow class to accumulated band
+ * @property {Record<string, number>} tally
+ * @property {Record<string, ReadonlyArray<string>>} receipts
+ * @property {ReadonlyArray<string>} [reasonGoods]
  * @property {number} sinceTick
  * @property {number} lastCharterEval
  */
@@ -391,4 +424,183 @@ export function withRouteEdges(network, edges) {
   }
   if (added === 0) return base;
   return { edges: sortedRecord(next), corridor: base.corridor || {} };
+}
+
+/**
+ * THE ONE CORRIDOR FACTORY (§3, §4). A corridor is a PAIR that may not yet carry
+ * an edge, so it is mode-free, and it is minted EMPTY: `sinceTick` is when the
+ * realm first walked it and `lastCharterEval` is J3's cursor, which stays at the
+ * mint tick until a charter evaluation actually looks at it.
+ *
+ * Mirrors `routeEdge` deliberately: one factory per record type, so the
+ * drop-when-empty conditional keys can only appear under the conditions stated
+ * here, and the endpoints are canonicalized on the way in.
+ *
+ * @param {{ a: string|number, b: string|number, sinceTick?: number }} input
+ * @returns {CorridorDemand}
+ */
+export function corridorDemand(input) {
+  const [a, b] = orderedRouteEndpoints(input.a, input.b);
+  const tick = Number.isFinite(input.sinceTick) ? Number(input.sinceTick) : 0;
+  return { a, b, flows: {}, tally: {}, receipts: {}, sinceTick: tick, lastCharterEval: tick };
+}
+
+/**
+ * Fold corridor records into a network, REPLACING by corridor id.
+ *
+ * The opposite direction from `withRouteEdges`, and the asymmetry is the point.
+ * An edge is a fact about the world that a re-derivation may never overwrite
+ * (Law 2). A corridor is an ACCUMULATOR, and the accrual pass is its single
+ * writer: it reads the prior record, adds this pulse's traversals, and hands back
+ * the successor. Explicit-wins here would freeze demand at whatever the first
+ * pulse measured and the network would never charter anything.
+ *
+ * @param {RouteNetwork} network
+ * @param {Record<string, CorridorDemand>} corridors
+ * @returns {RouteNetwork}
+ */
+export function withCorridors(network, corridors) {
+  const base = network && typeof network === 'object' ? network : emptyRouteNetwork();
+  const incoming = corridors && typeof corridors === 'object' ? corridors : {};
+  if (Object.keys(incoming).length === 0) return base;
+  return {
+    edges: base.edges || {},
+    corridor: sortedRecord({ ...(base.corridor || {}), ...incoming }),
+  };
+}
+
+/**
+ * Fold per-edge USAGE onto the edges a network already carries, REPLACING by edge
+ * id. An id with no edge behind it is SKIPPED rather than minting one: usage is a
+ * property of a road that exists, and a usage row for an absent edge would be a
+ * ghost road that no charter ever authorized.
+ *
+ * @param {RouteNetwork} network
+ * @param {Record<string, FlowAccrual & { lastTick: number }>} usageById
+ * @returns {RouteNetwork}
+ */
+export function withEdgeUsage(network, usageById) {
+  const base = network && typeof network === 'object' ? network : emptyRouteNetwork();
+  const incoming = usageById && typeof usageById === 'object' ? usageById : {};
+  /** @type {Record<string, RouteEdge>} */
+  const next = { ...(base.edges || {}) };
+  let touched = 0;
+  for (const id of Object.keys(incoming).sort()) {
+    const edge = next[id];
+    if (!edge) continue;
+    next[id] = { ...edge, usage: incoming[id] };
+    touched += 1;
+  }
+  if (touched === 0) return base;
+  return { edges: sortedRecord(next), corridor: base.corridor || {} };
+}
+
+/**
+ * WHO CAN REACH WHOM over the LIVED network. Returns a map from settlement id to
+ * a component label, so two places are materially connected exactly when their
+ * labels match. The label is the codepoint-lowest member of the component, which
+ * makes it stable under any re-derivation and readable in a failure message.
+ *
+ * HIDDEN PATHS ARE EXCLUDED BY DEFAULT, and that is a material judgment rather
+ * than an oversight. A hidden path is the remnant Law 5 keeps so nothing is ever
+ * forgotten; §9 lets a wanderer or a smuggler use one at a grade penalty and
+ * forbids it to an army outright. A supply chain is not a smuggler: a realm that
+ * feeds itself down an overgrown track is not feeding itself, and counting hidden
+ * paths as connectivity would let the self-sufficiency metric rise as the network
+ * decayed. Callers that mean the smuggler's question pass includeHidden.
+ *
+ * @param {RouteNetwork|null|undefined} network
+ * @param {{ includeHidden?: boolean }} [options]
+ * @returns {Map<string, string>}
+ */
+export function routeNetworkComponents(network, options = {}) {
+  const edges = network && network.edges && typeof network.edges === 'object' ? network.edges : {};
+  const includeHidden = options.includeHidden === true;
+  /** @type {Map<string, Set<string>>} */
+  const adjacency = new Map();
+  /** @param {string} id */
+  const seat = (id) => {
+    const found = adjacency.get(id);
+    if (found) return found;
+    /** @type {Set<string>} */
+    const fresh = new Set();
+    adjacency.set(id, fresh);
+    return fresh;
+  };
+  for (const id of Object.keys(edges).sort()) {
+    const edge = edges[id];
+    if (!edge || typeof edge !== 'object') continue;
+    if (!includeHidden && edge.grade === 'hidden') continue;
+    const a = String(edge.a);
+    const b = String(edge.b);
+    if (!a || !b || a === b) continue;
+    seat(a).add(b);
+    seat(b).add(a);
+  }
+  /** @type {Map<string, string>} */
+  const label = new Map();
+  for (const start of [...adjacency.keys()].sort()) {
+    if (label.has(start)) continue;
+    /** @type {Array<string>} */
+    const frontier = [start];
+    /** @type {Array<string>} */
+    const seen = [];
+    label.set(start, start);
+    while (frontier.length > 0) {
+      const current = /** @type {string} */ (frontier.pop());
+      seen.push(current);
+      for (const next of [...(adjacency.get(current) || new Set())].sort()) {
+        if (label.has(next)) continue;
+        label.set(next, start);
+        frontier.push(next);
+      }
+    }
+    // The seat that started the walk is already the codepoint-lowest member, because
+    // the outer loop visits starts in codepoint order and never revisits a labelled
+    // node, so no relabelling pass is needed.
+    seen.length = 0;
+  }
+  return label;
+}
+
+/**
+ * True when two places can reach each other over the lived network. A place with
+ * no edges at all is connected to nobody, including itself, because the question
+ * this answers is whether a good can travel between them.
+ *
+ * @param {Map<string, string>} components
+ * @param {string} a @param {string} b
+ * @returns {boolean}
+ */
+export function routeConnected(components, a, b) {
+  const left = components.get(String(a));
+  const right = components.get(String(b));
+  return !!left && !!right && left === right;
+}
+
+/**
+ * One corridor off a world, or null. The accessor the charter evaluation and the
+ * surfaces both read, so neither has to know the id law.
+ *
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState
+ * @param {string|number} aId @param {string|number} bId
+ * @returns {CorridorDemand|null}
+ */
+export function readCorridor(worldState, aId, bId) {
+  const corridors = readCorridors(worldState);
+  return corridors[corridorId(aId, bId)] || null;
+}
+
+/**
+ * The USAGE an edge has carried, or null when nothing has walked it yet. Absence
+ * is a legitimate zero (the taxonomy norm): a brand-new charter and a road the
+ * realm has stopped walking are distinguished by the tally, never by the key.
+ *
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState
+ * @param {string} edgeId
+ * @returns {(FlowAccrual & { lastTick: number })|null}
+ */
+export function readEdgeUsage(worldState, edgeId) {
+  const edge = readRouteEdges(worldState)[edgeId];
+  return edge && edge.usage ? edge.usage : null;
 }
