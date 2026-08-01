@@ -82,6 +82,17 @@
 >   marks live in config._userRoutes (the sibling's own _cutRoutes pattern,
 >   private-side); public neighbourNetwork shape untouched. Build continues: wave E
 >   next.
+> - 2026-07-31 (owner: "for anything awaiting decisions from me, use your best
+>   judgement" — DELEGATED RULINGS, each vetoable): (1) MIGRATION 193 AUTHORIZED —
+>   wave D resumes; 193 mirrors 183 (SECURITY DEFINER authenticated-only, journal
+>   claim/finalize, one-transaction bilateral CAS, neighbour_links refresh,
+>   search-path hardening, @rollback note); provenance in config._userRoutes; pglite
+>   battery per the sibling; the train stays undeployed until the owner ships it.
+>   (2) B1b LIGHTING DEFERRED TO TUNING — the tick-scan re-window is budget-raise
+>   class; the k-NN machinery is committed dark; tuning rules with post-wave soak
+>   evidence. (3) The manager's veto-open design blocks are RATIFIED for the builds
+>   (brokerage Challenges A+B, K4 reagent chains, J-D9 refinements). Wave order
+>   adjusted: D resumes AFTER G lands (disjoint-surface discipline).
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
