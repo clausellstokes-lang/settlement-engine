@@ -151,6 +151,16 @@
 >   natural mortality (named NPCs exempt), push-pull migration, stressor-coupled
 >   curbs. Architecture: docs/DESIGN_DEMOGRAPHIC_ENGINE.md. ALL SOAK REDOS WAIT on
 >   wave P (a pre-cure soak would re-prove a known defect).
+> - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
+>   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
+>   commit — killing an implementer mid-build leaves partial edits, a recorded
+>   hazard). NOTHING RUNS AFTER THAT. Specifically HELD, do not start without a
+>   fresh owner order: the release soak grid, the 300-year research rerun, the
+>   subsystem-certification sweep over new receipts, and the tuning pass. The
+>   cure's proof (the same seed that produced 29.1e12 coming back bounded) is
+>   therefore NOT YET IN HAND — wave P is BUILT and gated, not PROVEN. Any
+>   successor reading this: the next action is to ask the owner, not to launch a
+>   soak.
 > - 2026-08-01 (WAVE P): P1 LANDED @ d620a05d, gate exit 0, THE CURE MEASURED
 >   (8 settlements x 300 years all at fixed points; the pre-cure control re-creates
 >   the runaway from the same fixture). GROUNDED FINDING (DESIGN_DEMOGRAPHIC_ENGINE
