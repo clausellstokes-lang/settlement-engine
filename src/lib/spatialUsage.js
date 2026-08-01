@@ -139,6 +139,10 @@ export function extractSpatialUsage(worldState) {
     corruption_exposed: recCount(L.exposedCorruption), // W-DOCTRINE-3 revealed corruption
     satellites: recCount(L.satellites),              // settlement-lifecycle satellites
     war_campaigns: recCount(L.campaignPlans),        // W-DOCTRINE-1 supply-web campaigns
+    // W-J THE ORGANIC ROUTE LIFECYCLE. The ledger nests two containers, so the
+    // adoption signal is the EDGE count, never the container's own key count
+    // (Object.keys of the ledger itself would read a constant 2 and mean nothing).
+    route_edges: recCount(isObj(L.routeNetwork) ? L.routeNetwork.edges : null),
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -168,6 +172,7 @@ export function extractSpatialUsage(worldState) {
     ['corruption_exposed', counts.corruption_exposed],
     ['satellites', counts.satellites],
     ['war_campaign', counts.war_campaigns],
+    ['route_network', counts.route_edges],           // W-J lived route network
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -201,6 +206,12 @@ export const TRACKED_LEDGER_KEYS = Object.freeze([
   'tradeFlow', 'rumorLedgers', 'beliefMaps', 'moralDrift', 'dispatchWillingness',
   'spatialArrivals', 'navalTransit', 'epidemic', 'disinfo', 'credibility', 'upswing',
   'commitments', 'interventions', 'exposedCorruption', 'satellites', 'campaignPlans',
+  // W-J. TRACKED rather than EXEMPT, deliberately: the exemption list is for
+  // ledgers whose adoption is ALREADY visible through a tracked mover or a tracked
+  // flag, and the route network's is visible through neither — routeLifecycleEnabled
+  // is a virtual flag lit in no preset, so it is absent from TRACKED_FLAGS too. A
+  // reading of zero while the layer is dark is the truth, not a blind spot.
+  'routeNetwork',
 ]);
 
 /**
@@ -240,6 +251,7 @@ export const EXEMPT_LEDGER_KEYS = Object.freeze({
   intelCooldown: 'DEEP COUPLINGS D-3 intel-transfer per-pair COOLDOWN stock (INTEL_COOLDOWN_LEDGER — rate-limit bookkeeping for the intel-transfer layer, the merchantAppetite STOCK idiom; substrate, not a distinct exercised mover)',
   roadsEmbassies: 'THE ROADS embassy SIDECAR (EMBASSY_LEDGER_KEY — per-pair diplomatic embassy state on the roads layer; a flag-gated per-mission/annotation state record like roads/traditions — adoption is roadsEnabled, and the roads news beats already surface activity, not a distinct spatial-adoption mover)',
   npcGrowth: 'NPC GROWTH per-NPC advancement STOCK (npcGrowthKernel recorded skill/standing growth projected onto the NPC card; a flag-gated personal state record like npcLadder/npcCredibility — adoption is the npc-growth flag, and the faction/ladder movers already signal that layer, not a distinct exercised mover)',
+  npcLedger: 'W-H1 THE WORLD NPC LEDGER — durable cross-settlement identities (roamers / placed / exclusions) minted at the first cross-settlement consequence; a flag-gated per-person state record like npcLadder/npcGrowth/npcCredibility, so it is classified the same way. TWO REASONS IT IS EXEMPT RATHER THAN TRACKED, and they are different reasons. (1) Adoption is already legible from the npcConsequencesEnabled flag itself, exactly as it is for the sibling personal-state ledgers. (2) MORE IMPORTANTLY, the records are PEOPLE: this module\'s prop-hygiene law forbids emitting an NPC id or name, and the ledger\'s per-record payload is identity plus DM truth (a compromise source is covert intelligence under law 7), so the only telemetry-legal reading would be a bare key count. A count that is structurally zero until the flag is lit, and that duplicates what the flag already says, is redundant noise rather than new information. If a future wave wants circulation ADOPTION telemetry, the honest signal is a banded pool-size / transition-rate derived inside this module from counts alone, never a projection of the records.',
   // NOTE: DOOR 1's `spatialSubstrate` sidecar is deliberately NOT listed here. The
   // walker governs ONLY spatialLedgers keys WRITTEN via setSpatialLedger inside
   // src/domain (engine movers). The substrate is derived + written at CANONIZE, from

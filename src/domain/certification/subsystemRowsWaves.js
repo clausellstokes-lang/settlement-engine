@@ -333,6 +333,76 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
     // completed release case is a v4 envelope, so no dispositive reading exists yet.
     soakEvidence: 'indirect',
   }),
+  // ── THE ORGANIC ROUTE LIFECYCLE (W-J, docs/DESIGN_ROUTE_LIFECYCLE.md §13) ──
+  // REGISTERED FROM THE FIRST COMMIT, and that was only possible once the key was
+  // DECLARED. `simulationRuleKeys()` censuses DEFAULT_SIMULATION_RULES plus the
+  // preset override spreads. `routeLifecycleEnabled` is VIRTUAL (no DEFAULT entry,
+  // by design — Law 7's byte-identity guarantee), so until it was declared at FALSE
+  // in the full_simulation spread the census could not see it and this row read
+  // back as `unknownRows` — MEASURED against the live registry, in both directions,
+  // before the declaration was written. The declaration is what puts W-J under the
+  // certification contract now instead of retroactively; the row's verdict on a
+  // dark receipt is DORMANT_BY_CONFIG, which is the honest one.
+  Object.freeze({
+    rule: 'routeLifecycleEnabled',
+    title: 'Organic route lifecycle',
+    module: 'src/domain/worldPulse/routeNetworkLedger.js,src/domain/worldPulse/routeNetworkGenesis.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, and the reason is the EVIDENCE LAW at the head of this
+      // file: every string here must be traceable to a `candidateType` literal in
+      // source. Slice J1 is the ledger and its genesis derivation; it emits NO
+      // candidate at all, by design ("Inert — no lifecycle events yet", §14). The
+      // charter and abandonment types are J3's to mint, and declaring them now would
+      // be a certification row describing code that does not exist.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY for the same reason the momentum and supply-web rows keep
+      // theirs empty: J1 authors no receipt, and once J3 does, its Herald beats will
+      // classify into `knowledge` off the shared `news` token in every wizard-news
+      // id, which the whole estate feeds and which can therefore never carry ALIVE
+      // for one row.
+      moverFamilies: Object.freeze([]),
+      // The ONE channel this slice actually has, and it is exact: routeNetworkLedger.js
+      // is the single writer of this key (writeRouteNetwork is the only setSpatialLedger
+      // call for it in the tree), and no other subsystem touches it, so a census
+      // reading is dispositive rather than shared. Receipt-expressible only from the
+      // v5 subsystems.stateKeys census.
+      stateKeys: Object.freeze(['spatialLedgers.routeNetwork']),
+      other: 'ONE GATE, AND THE SLICE BEHIND IT IS DELIBERATELY INERT. routeLifecycleActive is the virtual routeLifecycleEnabled alone (routeNetworkLedger.js), with no spatial or war precondition, so a lit preset genuinely asks the question. WHAT J1 DOES: at world-connect it derives the network the realm was born with, from the frozen tradeRouteAccess vocabulary plus the region layer k-nearest selection plus PORTS TOTALITY, and writes it once. WHAT IT DOES NOT DO: no charter, no decay, no flows, no consumers. So the honest reading of a lit J1 receipt is that the ledger key MATERIALIZES at the first tick and then never changes, which is why the tempo below is the slowest rung rather than a claim of yearly motion. A NON-OBVIOUS ZERO: an ASPATIAL realm whose members were all generated isolated derives no edges at all, and writeRouteNetwork drops an empty network rather than persisting empty containers, so the key is legitimately ABSENT on a lit world. That is the isolation-as-fate law (design section 0), not a dead subsystem, and the invariant below is what distinguishes the two. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.routeNetwork, over a case whose realm is spatially canonized and whose members are not uniformly isolated.',
+    }),
+    // The network is born once and then, until J3 lands, never moves. Even with the
+    // full lifecycle lit, hysteresis (Law 4) and the grade-promotion dwells make a
+    // charter a multi-year event by construction, so this is the honest rung in both
+    // eras and does not need re-declaring when J3 arrives.
+    expectedTempo: 'multi_year',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_ledger_is_gated',
+        description: 'The dormancy gate is one line: ensureGenesisRouteNetwork returns the input worldState BY REFERENCE when routeLifecycleEnabled is absent, so the ledger key cannot materialize behind a dark switch and a dark world is byte-identical by object identity.',
+        check: 'In any v5 receipt whose subsystems.rules records routeLifecycleEnabled false or omits it, subsystems.stateKeys does not carry spatialLedgers.routeNetwork. Expressible from the v5 subsystems section alone, with no behavioral evidence at all.',
+      }),
+      Object.freeze({
+        name: 'genesis_is_a_birth_not_a_hum',
+        description: 'The genesis network is derived exactly once, at world-connect, and J1 never rewrites it. A ledger that first appears in a later year, or whose entry count moves before the charter slice lands, would mean genesis ran twice or something outside this layer wrote the key.',
+        check: 'For any receipt whose census carries spatialLedgers.routeNetwork, the key is present from the FIRST observed year and its maxEntries equals its finalEntries. Expressible from the v5 stateKeys census alone (years count plus the entry extremes).',
+      }),
+      Object.freeze({
+        name: 'ports_totality_or_no_harbour_at_all',
+        description: 'PORTS TOTALITY (design section 6, an owner law) says every port settlement with a navigable counterpart carries at least one water edge. It holds STRUCTURALLY rather than by a repair pass: every ports pair is a member of the bounded candidate set, and a water candidate is minted unconditionally at the section 8 grade instead of being graded by the land access ladder, so no code path can skip it. The census cannot read edge bodies, so the receipt-level shadow of that invariant is the weaker but still falsifiable one: a spatially canonized realm whose digest carries a populated sea-lane set can never come out of genesis with a route ledger that is absent.',
+        check: 'For any receipt whose subsystems.rules records routeLifecycleEnabled true and whose realm is spatially canonized with sea lanes, subsystems.stateKeys carries spatialLedgers.routeNetwork. Expressible from the v5 subsystems section plus the canon marker; the edge-level invariant itself is pinned in tests/domain/routeNetworkGenesis.test.js against a built port digest.',
+      }),
+    ]),
+    // 'indirect', NOT 'unobserved', and the distinction is the contract's not a
+    // shade of meaning. `unobserved` is the ESCAPE HATCH that downgrades a zero
+    // reading from SILENT to an instrument gap, and it is ceilinged at a reviewed
+    // population precisely so it cannot become the default excuse. This row does
+    // not need it: its only channel is a spatialLedgers sidecar, and the corpus
+    // contract already grades a sidecar-only row UNOBSERVED on a v4 envelope by
+    // SHAPE. So the honest declaration is the one the momentum and supply-web rows
+    // make for their identically-shaped lanes: the dispositive channel exists and
+    // is instrumented ONLY by the v5 census, and every completed release case is a
+    // v4 envelope, so no dispositive reading exists yet.
+    soakEvidence: 'indirect',
+  }),
 ]);
 
 /**
