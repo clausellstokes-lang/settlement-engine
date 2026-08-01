@@ -155,6 +155,10 @@
   "tests/data/galleryReactionVocab.test.js": {
    "kind": "uncovered"
   },
+  "tests/data/informationBrokerageCatalog.test.js": {
+   "kind": "rationale",
+   "rationale": "[W-I INFORMATION BROKERAGES] I1. The subject is authored DATA: four catalog entries, their closed capability keys, a closed channel-competence table, and a closed rumour-source name census. Its catching power was proven by EIGHT executed in-place negative controls at authoring time (delete the exchange-subsumes-post rule; drop the town route gate; grant info_plant to a minor form; flatten the competence inversion past the fidelity ceiling; tag a brokerage as a rumour source; leak the Rookery into the village catalog; make the criminal-power precondition always true; strip the Whisper market's serviceKeys) - each reddened the intended pin and each file was restored and hash-verified. A sweep plant is deferred rather than skipped: it would have to add src/data/institutionalCatalog.js to MUTATED_FILES, and that file is under active concurrent edit in this shared tree, which the E-A amendment (b0fc33e1) says a plant must not target. Upgrade to kind:mutation at the brokerage wave's close."
+  },
   "tests/data/institutionNameIntegrity.test.js": {
    "kind": "uncovered"
   },

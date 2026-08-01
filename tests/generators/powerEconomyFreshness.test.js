@@ -87,12 +87,17 @@ describe('bounded final economy -> power reconciliation', () => {
     expect(
       snapshots.powerEconomyReconcilePass.legitimacy.breakdown.prosperity,
     ).toBe(0);
+    // Split re-pinned 2026-08-01: wave I1 added four information-brokerage entries to the
+    // town/city catalogs, which moves this city's institution mix and so the power the
+    // bounded closeout re-derives from the FINAL economy. Two powers traded one point
+    // (Craft Guilds 9 to 8, Merchant City Council 18 to 19); the total still sums to 100
+    // and the prosperity-contribution claim above (0, not the stale +8) is unchanged.
     expect(snapshots.powerEconomyReconcilePass.powers).toEqual({
       'Military/Guard': 22,
-      'Merchant City Council': 18,
+      'Merchant City Council': 19,
       'Merchant Guilds': 13,
       'Religious Authorities': 12,
-      'Craft Guilds': 9,
+      'Craft Guilds': 8,
       'War Council': 8,
       "Thieves' Guild": 8,
       'Noble Families': 5,
@@ -197,6 +202,20 @@ describe('bounded final economy -> power reconciliation', () => {
     )).toThrow(/no economy fingerprint/i);
   });
 
+  // TIER CHANGED city -> thorp on 2026-08-01, and the change is a FINDING, not a tidy-up.
+  // This test needs a neighbour-sourced faction to exist so that "it survives both final
+  // projections" is a claim about survival rather than a comparison of two empty arrays.
+  // After wave I1, no seed produces one at city tier: neighbourFactions injects a mirror
+  // only when `!existingTypes.has(fType)`, and a post-I1 city already holds every faction
+  // category the bias can name (economy, military, religious, criminal), so the gate is
+  // shut for EVERY relationship type. Measured on this tree: 0 of 200 seeds at city and
+  // 0 of 60 at town, against 14 of 60 at thorp. Ablating just the four new catalog entries
+  // in memory restores the original single mirror on the original seed, which is what
+  // identifies I1 as the cause. Re-pinning the length to 0 was rejected outright: it would
+  // convert this into a vacuous-absence pin, which is precisely the failure the
+  // `toHaveLength(1)` line was written to prevent. The underlying question — whether a
+  // city should be structurally incapable of receiving neighbour influence — is a design
+  // call and is escalated in the reconciliation report, not decided here.
   test('neighbour identities and raw rolls survive both final projections', () => {
     const neighbour = generateSettlementPipeline(
       {
@@ -211,14 +230,14 @@ describe('bounded final economy -> power reconciliation', () => {
     let rolledNeighbours = [];
     const settlement = generateSettlementPipeline(
       {
-        settType: 'city',
+        settType: 'thorp',
         culture: 'imperial',
-        tradeRouteAccess: 'port',
+        tradeRouteAccess: 'road',
         _neighbourRelType: 'allied',
       },
       neighbour,
       {
-        seed: 'renorm-allied-15',
+        seed: 'renorm-allied-2',
         customContent: {},
         onStep(name, ctx) {
           if (name !== 'neighbourFactions') return;

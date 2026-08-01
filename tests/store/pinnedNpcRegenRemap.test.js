@@ -32,8 +32,9 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 // The reroll mints its seed through generateSeed() (the sanctioned wall-clock
 // seam, generateSettlementPipeline.js:416), which would turn the slot-moves
-// guard below into a coin flip per run. Pin the mint: under this fixed seed the
-// npcs[2] keeper provably moves npc_7 → npc_8 (probe-verified 2026-07-30).
+// guard below into a coin flip per run. Pin the mint: under this fixed reroll
+// seed, paired with the FIXTURE seed below, the npcs[2] keeper provably moves
+// npc_6 → npc_8 (re-probed 2026-08-01; it was npc_7 → npc_8 on the pre-I1 tree).
 vi.mock('../../src/kernel/prng.js', async (importOriginal) => ({
   ...(await importOriginal()),
   generateSeed: () => 'pins-regen-remap-fixed',
@@ -84,7 +85,14 @@ beforeEach(() => {
 describe('REGEN — a pin follows its subject through the roster reroll', () => {
   test('a pinned, locked NPC keeps its pin when the reroll moves its id', async () => {
     const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen', customContent: {} }));
+    // FIXTURE SEED re-pinned `pins-store-regen` to `pins-store-regen-1` on 2026-08-01.
+    // Wave I1 added four information-brokerage entries to the town/city catalogs and
+    // assembleInstitutions draws once per candidate clearing its gates, so this town's
+    // stream translated and the old seed now leaves the keeper in slot npc_4 — which
+    // would make the non-vacuity guard below fail exactly as designed, because with the
+    // keeper standing still every later assertion would also hold with the remap
+    // deleted. Re-pinned to a seed that still MOVES the keeper (6 of the first 21 do).
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
     const target = town.npcs[2];
     store.setState({
       settlement: town,

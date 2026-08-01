@@ -66,6 +66,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "It seizes free persons and slips them into slavery on forged provenance papers. Where a legal market stands it borrows that infrastructure; where none does, it works alone.",
     "Free persons are taken and passed into slavery through counterfeit provenance documents. It leans on the legal market's apparatus wherever one exists, and runs its own where it does not.",
   ],
+  "city|Criminal|Rookery": [
+    "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the watch.",
+    "An undeclared loft in the roofs. Unsigned messages in and out, protected by whichever organization currently holds the street.",
+  ],
+  "city|Criminal|Whisper market": [
+    "The covert guild scale. Brokers deal in knowledge by the piece, attach a grade to it, and will build a claim to order for a patron with the coin. It settles where the talk already runs thickest.",
+    "A hidden guild of information brokers. They sell by the piece, grade what they sell, and take commissions to put a story into circulation. Always sited among the fences and the houses that keep late hours.",
+  ],
   "city|Criminal|Multiple criminal factions": [
     "Rival gangs, forever disputing their turf.",
     "Several gangs at odds, quarrelling over ground.",
@@ -121,6 +129,14 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "city|Economy|Cartographer's guild": [
     "A guild of professional cartographers turning out regional maps, sea charts, property surveys, and military reconnaissance. It sells ready-made maps and works to commission. No maps in the region are more accurate than the city's.",
     "Professional cartographers, guild-organised, producing regional maps, sea charts, property surveys, and reconnaissance maps for the army. Some sell off the shelf, others are drawn to order. The city's are the most accurate maps the region has.",
+  ],
+  "city|Economy|Chroniclers' exchange": [
+    "The guild scale of the listening trade. Correspondents kept on several roads, an archive that sets one report against another, and a fixed price for an answer in writing. Costly, and the only counter that grades a claim before selling it.",
+    "A chartered house of correspondents. Reports arrive from several roads and are checked against each other before anything is sold. The written answer carries a standing rate and a grade.",
+  ],
+  "city|Economy|Listening post": [
+    "A small licensed register office among much larger trades. It pays for arrivals and writes them down: who, from where, and carrying word of what.",
+    "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.",
   ],
   "city|Economy|City granaries": [
     "Several large grain stores feed the city between them. The state keeps them.",
@@ -774,6 +790,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Honest-looking trades that mask the dishonest kind.",
     "Lawful businesses standing cover for unlawful work.",
   ],
+  "town|Criminal|Rookery": [
+    "Message birds in a loft nobody declares. Word comes in unsigned and reaches its buyer before the watch hears anything. It stands only where a criminal organization stands behind it.",
+    "An unlicensed bird loft. The messages carry no name and outrun any rider on the road. Without an organization to protect it, the loft does not last a season.",
+  ],
   "town|Criminal|Smuggling operation": [
     "Contraband moved, and the duty on it never paid.",
     "Trade in forbidden goods, kept off the tax rolls.",
@@ -857,6 +877,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "town|Economy|Jeweller": [
     "Sets precious metal and gemstones into rings, necklaces, seals, and other luxuries. He works to commission, values stones, and now and then buys from customers who keep quiet about provenance.",
     "Rings, necklaces, seals, and finery, worked from gold and gemstone. He takes orders, appraises stones, and is not above the occasional purchase from a discreet seller.",
+  ],
+  "town|Economy|Listening post": [
+    "A licensed news house. It pays travellers for what they saw and enters it in the register: name, road, and report. Taxed openly, and worth keeping only where the traffic is.",
+    "Clerks who buy road news and write it down. Who came in, by which road, and what they claim. A cheap institution, and useless in a place nothing reaches.",
   ],
   "town|Economy|Market square": [
     "The central plaza where the weekly market and the fairs are held. Fifty to a hundred yards to a side.",

@@ -1610,6 +1610,38 @@ export const INSTITUTION_SERVICES = {
     "Hard labour contracts": { on: false, p: 0.6, desc: "Assign prisoners to labour contracts for public works." },
     "Bail hearings": { on: false, p: 0.5, desc: "Formal hearings to set or deny bail for detained persons." },
     "Visitor permits": { on: false, p: 0.4, desc: "Obtain a permit to visit an incarcerated person." }
+  },
+
+  // ── [W-I INFORMATION BROKERAGES] I1 menus (design §3). APPENDED, never interleaved:
+  // this object's insertion order is authoritative for fuzzy service-key tie-breaking
+  // (institutionServiceKeys.generated.js), so new keys go last and no existing key moves.
+  // Exact-name resolution wins over fuzzy matching, so "Whisper market" resolves to its
+  // own menu rather than the earlier "Market" entry.
+  "Listening post": {
+    "Road register": { on: true, p: 1.0, desc: "Read the day's register of arrivals and what each of them reported." },
+    "Claim weighing": { on: true, p: 0.8, desc: "Bring a rumour you already hold and have it weighed against the register." },
+    "Standing question": { on: true, p: 0.7, desc: "Leave a question with the clerk and collect the answer when word comes back." },
+    "Traveller vouching": { on: false, p: 0.5, desc: "Ask whether a named traveller passed through, and in whose company." }
+  },
+  "Chroniclers' exchange": {
+    "Written answer": { on: true, p: 1.0, desc: "Commission a written answer on a named subject, graded and sealed." },
+    "Archive consultation": { on: true, p: 0.9, desc: "Search the archive that cross-checks one road's report against another's." },
+    "Claim grading": { on: true, p: 0.9, desc: "Have a claim graded against every road the exchange keeps." },
+    "Standing subscription": { on: false, p: 0.6, desc: "A patron's regular digest, delivered each season by courier." },
+    "Correspondent hire": { on: false, p: 0.4, desc: "Place a paid correspondent on a road the exchange does not yet cover." }
+  },
+  "Rookery": {
+    "Bird message": { on: true, p: 1.0, desc: "Send word by loft, unsigned, ahead of any rider on the road." },
+    "Unattributed answer": { on: true, p: 0.8, desc: "Ask a question that no one will remember you having asked." },
+    "Watch movements": { on: true, p: 0.7, desc: "Where the watch is walking this week, and where it is not." },
+    "Name check": { on: false, p: 0.5, desc: "Find out who a newcomer answers to before you deal with them." }
+  },
+  "Whisper market": {
+    "Graded purchase": { on: true, p: 1.0, desc: "Buy a piece of knowledge with the seller's own grade attached to it." },
+    "Discreet commission": { on: true, p: 0.9, desc: "Commission an answer on a subject that cannot be asked aloud." },
+    "Broker introduction": { on: true, p: 0.7, desc: "Be put in front of the one broker who deals in your subject." },
+    "Standing retainer": { on: false, p: 0.6, desc: "A patron's covert feed, renewed for as long as the payments hold." },
+    "Manufactured claim": { on: false, p: 0.3, desc: "Have a story built, laundered through other mouths, and put into circulation." }
   }
 
 };

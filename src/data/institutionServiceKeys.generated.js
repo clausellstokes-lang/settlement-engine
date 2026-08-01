@@ -278,5 +278,9 @@ export const INSTITUTION_SERVICE_KEYS = Object.freeze([
   "Town hall",
   "City hall",
   "Small prison/stocks",
-  "Large prison"
+  "Large prison",
+  "Listening post",
+  "Chroniclers' exchange",
+  "Rookery",
+  "Whisper market"
 ]);

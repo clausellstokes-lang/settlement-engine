@@ -1062,6 +1062,23 @@ export const institutionalCatalog = {
         tags: ['food', 'trade'],
         priorityCategory: 'government',
       },
+      // [W-I INFORMATION BROKERAGES] I1, the legal MINOR form (design §3). A brokerage is
+      // HOW TALK IS WEIGHED, never where it happens: the rumour-source houses (inns,
+      // bathhouses, fences) keep their own role and are tagged separately in
+      // data/informationBrokerageTuning.js. `serviceKeys` is the closed capability
+      // vocabulary every effect reads (never the name) so custom brokerage-class content
+      // declaring the same keys behaves identically. Route-gated because information
+      // follows roads: a settlement nothing arrives at has no register worth keeping.
+      // Golden-shifting (a new catalog draw), same as [D6 THE UNDERWAYS].
+      'Listening post': {
+        required: false,
+        baseChance: 0.22,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
     },
     Crafts: {
       'Mills (2-5)': {
@@ -1429,6 +1446,19 @@ export const institutionalCatalog = {
         facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
         forbiddenResources: ['marshlands', 'fertile_floodplain'],
       },
+      // [W-I INFORMATION BROKERAGES] I1, the illegal MINOR form (design §3). The design's
+      // criminal-organization precondition and its rumour-source presence weighting are
+      // POWER-STRUCTURE reads, and powers do not exist yet when this catalog is walked;
+      // both live as authored predicates in data/informationBrokerageTuning.js and are
+      // wired by the slice that owns patron binding. Golden-shifting (a new catalog draw).
+      Rookery: {
+        required: false,
+        baseChance: 0.16,
+        desc: 'A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
     },
     Entertainment: {
       'Traveling performers': {
@@ -1658,6 +1688,29 @@ export const institutionalCatalog = {
         desc: 'Fur processors, traders, and retailers concentrated in one area. High-value trade. Quality furs are luxury goods.',
         tags: ['trade', 'guild'],
         priorityCategory: 'military',
+      },
+      // [W-I INFORMATION BROKERAGES] I1 (design §3). The city keeps BOTH legal forms in the
+      // catalog on purpose: the minor house can still roll here, and the existing
+      // subsumption pass collapses it into the guild form when both land, exactly the way
+      // 'banking district' absorbs 'money changers'. Merged into the metropolis catalog by
+      // mergeCatalogs(city, metropolis). Golden-shifting (new catalog draws).
+      'Listening post': {
+        required: false,
+        baseChance: 0.28,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'A licensed house that pays for road news and keeps the register: who arrived, from where, and what they carried word of. Cheap to run and openly taxed, which is why it appears wherever traffic does and nowhere that it does not.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
+      "Chroniclers' exchange": {
+        required: false,
+        baseChance: 0.3,
+        forbiddenTradeRoutes: ['isolated', 'none'],
+        desc: 'The guild form of the listening house: paid correspondents on several roads, an archive that cross-checks one road against another, and a standing rate for a written answer. Expensive to keep, and the only counter in the city where a claim is graded before it is sold.',
+        tags: ['legal', 'information', 'brokerage'],
+        priorityCategory: 'economy',
+        serviceKeys: ['info_calibration', 'info_query', 'info_feed'],
       },
     },
     Crafts: {
@@ -1948,6 +2001,27 @@ export const institutionalCatalog = {
         desc: 'Organized contraband trade.',
         tags: ['criminal', 'smuggling'],
         priorityCategory: 'criminal',
+      },
+      // [W-I INFORMATION BROKERAGES] I1 (design §3). Same pairing as the legal side: the
+      // minor loft stays in the city catalog so the subsumption pass has something to
+      // absorb into the covert guild. `info_plant` is declared HERE and nowhere else, so
+      // the lie-selling capability is illegal-major by construction rather than by a
+      // downstream name check. Golden-shifting (new catalog draws).
+      Rookery: {
+        required: false,
+        baseChance: 0.2,
+        desc: 'A loft of message birds kept by people who file no returns. Word arrives unsigned and ahead of the watch. Only a standing criminal organization can protect a loft like this, so one never appears without that backing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query'],
+      },
+      'Whisper market': {
+        required: false,
+        baseChance: 0.18,
+        desc: 'The covert guild form: brokers who buy and sell knowledge by the piece, grade what they sell, and will manufacture a claim for a patron who pays enough. It sites itself where the talk already is, among the fences, the late houses, and the inns that ask nothing.',
+        tags: ['criminal', 'information', 'brokerage'],
+        priorityCategory: 'criminal',
+        serviceKeys: ['info_calibration', 'info_query', 'info_feed', 'info_plant'],
       },
     },
     Entertainment: {

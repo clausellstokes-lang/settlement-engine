@@ -143,6 +143,11 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   'Human trafficking network': 'A clandestine operation moving people across borders outside all law, with its own safe houses and bought officials.',
   "Thieves' guild (powerful)": 'A dominant criminal syndicate tolerated because open gang war would be worse. It taxes crime and keeps it quiet.',
   'Black market bazaar': 'A permanent underground market for contraband, forged documents, and services no lawful trade will touch.',
+  // [W-I INFORMATION BROKERAGES] I1. The four houses that deal in what is known.
+  'Listening post': 'A licensed house that pays for road news and keeps the register of who arrived, from where, and carrying word of what. It exists wherever traffic does.',
+  "Chroniclers' exchange": 'The guild form of the listening house, with paid correspondents on several roads and an archive that checks one road against another. The only counter in the city where a claim is graded before it is sold.',
+  Rookery: 'A loft of message birds run by people who file no returns. Word arrives unsigned and ahead of the watch, and only a standing criminal organization can keep a loft like it safe.',
+  'Whisper market': 'A covert guild of brokers who buy and sell knowledge by the piece, grade what they sell, and will build a claim for a patron who pays enough. It sites itself among the fences and the late houses.',
   'Underground city': 'Repurposed tunnels and catacombs sheltering criminals, refugees, and everything that needs to stay out of daylight.',
   "Assassins' guild": 'A professional order of killers working through cut-outs and cover, acknowledged by no one and used by many.',
   'Citizen militia': 'Ordinary residents who drill and muster against local threats. Part-time soldiers with their own tools and no pay.',

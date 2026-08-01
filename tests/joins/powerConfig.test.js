@@ -112,7 +112,12 @@ describe('behavior: governing faction engages the legitimacy consumers', () => {
     // The original seed now lands exactly on neutral governing power (30),
     // correctly producing no zero-delta contributor. This re-probed seed keeps
     // the behavioral join observable with a non-neutral governing faction.
-    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-0');
+    // RE-PROBED AGAIN 2026-08-01, same reason as the first time: wave I1 added four
+    // information-brokerage entries to the town/city catalogs, and assembleInstitutions
+    // draws once per candidate clearing its gates, so this town's stream translated and
+    // `-0` fell back onto neutral governing power. `-2` is the nearest seed that again
+    // gives a non-neutral governing faction (11 of the first 25 seeds do).
+    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-2');
     const ra = deriveCausalState(s).variables.ruling_authority;
     const govContrib = (ra.contributors || []).find((c) => c.effect === 'governing_power');
     expect(govContrib, 'deriveRulingAuthority must engage the governing faction').toBeTruthy();

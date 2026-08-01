@@ -97,6 +97,12 @@ export const SUBSUMPTION_RULES = Object.freeze([
   { greater: 'international trade center', lesser: ["caravan masters' exchange", "caravaneer's post"] },
   { greater: 'luxury goods quarter', lesser: ['jeweller'] },
   { greater: 'specialized metalworkers', lesser: ['jeweller'] },
+  // [W-I INFORMATION BROKERAGES] I1 (design §3): the guild form of each information
+  // house replaces its minor form. Legal and illegal ladders stay separate on purpose
+  // (a Whisper market does not absorb a Listening post, and vice versa) because the two
+  // families answer to different patrons and grade by different competences.
+  { greater: "chroniclers' exchange", lesser: ['listening post'] },
+  { greater: 'whisper market', lesser: ['rookery'] },
 ]);
 
 function normalizedName(value) {

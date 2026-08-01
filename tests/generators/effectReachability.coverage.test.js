@@ -107,6 +107,24 @@ function referencePackWithoutSubsumption() {
 // Every config and seed is a fixed literal. The first six entries are
 // certification-corpus profiles (tests/generators/generationCertificationCorpus
 // .test.js); the rest are authored to target one effect each, and say so.
+//
+// SEED RE-SELECTION 2026-08-01 (four specimens; CONFIGS UNCHANGED). Wave I1 added four
+// information-brokerage entries to the town and city catalogs, and assembleInstitutions
+// consumes one rng.chance() draw per catalog candidate clearing its gates, so every
+// town / city / metropolis draw downstream of the catalog TRANSLATED. Four specimens
+// here were explicitly "pinned to a fire" (the suffixes below), and a translated stream
+// moves a pinned seed off its fire. THE PRODUCERS WERE RE-DERIVED AS UNCHANGED before
+// any seed moved: no file under src/generators, no coherence-repair, isolation-support
+// or supply-chain producer is touched by the wave, and the two new SUBSUMPTION_RULES
+// pairs relate only the new brokerage entries to each other, removing no existing ladder
+// relation. The re-measured fire RATES corroborate that independently, each matching the
+// rate this file already recorded before the wave:
+//   - custom-target subsumption 14/40 seeds (recorded: the cart shed seats on 3 of 9)
+//   - isolation_support repair    7/60 seeds (recorded: 2 fires in 20 at metropolis)
+//   - magic chain substitution   12/40 seeds
+//   - faction pull + reconcile   22/40 seeds (recorded: the pull fired on 8 of 10)
+// So the strata are as reachable as they ever were; only which seed lands on them moved.
+// The corpus was NOT widened, no assertion was weakened, and no stratum was deleted.
 
 const CORPUS = Object.freeze([
   {
@@ -142,7 +160,9 @@ const CORPUS = Object.freeze([
       + 'high-criminal crossroads town is the reliable trigger: the pull fired on '
       + '8 of 10 sibling seeds here versus 1 of 10 for the mercantile seaport '
       + 'profile, whose merchant bloc usually already owns its institutions',
-    seed: 'effect-reach-v1-criminal-crossroads-town-3',
+    // Re-pinned `-3` to `-23` on 2026-08-01 (I1 catalog stream translation, see the
+    // block note above). `-23` also keeps this specimen's threat_defense fire.
+    seed: 'effect-reach-v1-criminal-crossroads-town-23',
     config: Object.freeze({
       settType: 'town',
       culture: 'steppe',
@@ -156,7 +176,9 @@ const CORPUS = Object.freeze([
     targets: 'isolation magical transit + magic chain substitution: an isolated, '
       + 'high-magic mountain town has a real mundane capacity gap and traditions '
       + 'strong enough to prop its impaired chains',
-    seed: 'effect-reach-v1-isolated-arcane-town',
+    // Seed pinned to a fire on 2026-08-01 (I1 catalog stream translation, see the block
+    // note above). All 12 firing seeds in the sweep also keep the magical-transit fire.
+    seed: 'effect-reach-v1-isolated-arcane-town-3',
     config: Object.freeze({
       settType: 'town',
       culture: 'greek',
@@ -190,7 +212,13 @@ const CORPUS = Object.freeze([
       + 'Tier is the load-bearing dial, not isolation alone — measured 2 fires in '
       + '20 seeds at metropolis against 0 in 70 across isolated thorp/town/city '
       + 'with the same culture, terrain, and magic settings. Seed pinned to a fire',
-    seed: 'effect-reach-v1-iso-metro-7',
+    // Re-pinned `-7` to `-24` on 2026-08-01 (I1 catalog stream translation, see the block
+    // note above). This specimen is the sole firer of repair.hard_dependency, so the
+    // replacement was chosen to keep ALL FOUR of its strata: isolation_support,
+    // hard_dependency, standard subsumption, and magical transit. `-24` is also the seed
+    // tests/generators/coherenceRepairPass.test.js pins for the same config, so the two
+    // files keep sharing one metropolis specimen as they did before the wave.
+    seed: 'effect-reach-v1-iso-metro-24',
     config: Object.freeze({
       settType: 'metropolis',
       culture: 'greek',
@@ -229,8 +257,11 @@ const CORPUS = Object.freeze([
       + 'That is the exact vacuity the cart-shed bug hid behind: measured over '
       + 'nine sibling seeds of this config, the cart shed seats on 3 — on the '
       + 'other 6 an uncontrolled detector would report a fire that never happened. '
-      + 'The `-1` suffix is a seed pinned to one of the seating three.',
-    seed: 'effect-reach-v1-custom-subsumption-town-1',
+      + 'The numeric suffix is a seed pinned to one of the seating minority.',
+    // Re-pinned `-1` to `-8` on 2026-08-01 (I1 catalog stream translation, see the block
+    // note above); `-8` is one of the 14-in-40 seeds where the cart shed seats and the
+    // authored `subsumes` reference then removes it, with the paired control still silent.
+    seed: 'effect-reach-v1-custom-subsumption-town-8',
     config: Object.freeze({
       settType: 'town',
       culture: 'latin',

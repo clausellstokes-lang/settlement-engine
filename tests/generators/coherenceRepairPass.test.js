@@ -79,7 +79,13 @@ describe('deterministic generation coherence repair', () => {
       tradeRouteAccess: 'isolated',
       magicExists: true,
       priorityMagic: 100,
-    }, 'effect-reach-v1-iso-metro-7');
+      // Seed re-pinned `-7` to `-24` on 2026-08-01. Wave I1 added four information
+      // brokerage entries to the town/city catalogs and assembleInstitutions draws once
+      // per candidate clearing its gates, so every metropolis stream downstream of the
+      // catalog translated and `-7` no longer lands on a two-subject hard_dependency
+      // repair. `-24` restores it (and adds a third subject), and is the same seed
+      // tests/generators/effectReachability.coverage.test.js pins for this config.
+    }, 'effect-reach-v1-iso-metro-24');
     const names = new Set(
       settlement.institutions.map(institution => institution.name),
     );
@@ -88,9 +94,11 @@ describe('deterministic generation coherence repair', () => {
     );
 
     expect(additions).toEqual(expect.arrayContaining([
+      // Subjects re-pinned 2026-08-01 with the seed above (same cause). The claim is
+      // unchanged: MORE THAN ONE newly visible hard dependency is added and reported.
       expect.objectContaining({
         type: 'hard_dependency',
-        subject: 'Hireling hall',
+        subject: 'Market square',
       }),
       expect.objectContaining({
         type: 'hard_dependency',
