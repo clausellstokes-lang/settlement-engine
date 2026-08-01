@@ -26,7 +26,17 @@ import { render, cleanup, screen, fireEvent, within } from '@testing-library/rea
 // EntityPicker is the only surface here that reads the store / custom registry;
 // the mock is inert for every other component in this file (none call useStore).
 vi.mock('../../src/store/index.js', () => ({ useStore: (sel) => sel({ customContent: {} }) }));
+// `registerPrebuiltResourceChains` is not used by any surface in this file; it is the
+// SELF-REGISTRATION seam lib/prebuiltResourceChains.js calls at module scope, and the
+// K3 wiring put it on this file's import graph (SurveyorGlossary → glossary →
+// realmManifest → calamityKernel → magicBufferApply → magicRegimeModel →
+// institutionLifecycle → computeActiveChains → prebuiltResourceChains). A factory mock
+// replaces the WHOLE module, so omitting it makes that leaf's top-level call throw and
+// the suite never collects. The stub is a no-op because the mocked buildRegistry above
+// ignores the registry's prebuilt cache entirely — there is no behaviour to preserve,
+// only an export to keep the graph loadable.
 vi.mock('../../src/lib/customRegistry.js', () => ({
+  registerPrebuiltResourceChains: () => {},
   buildRegistry: () => ({
     listAll: () => ([
       { refId: 'prebuilt:institutions:a', name: 'Alpha', subcategory: 'One', source: 'prebuilt' },

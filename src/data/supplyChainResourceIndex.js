@@ -176,3 +176,96 @@ export const RESOURCE_TO_CHAINS = {
 export const RETIRED_CHAIN_ALIASES = Object.freeze({
   'food_security.fish': 'food_security.fishing',
 });
+
+// == THE REAGENT CHAIN SPINE (W-K slice K4; binding law docs/DESIGN_MAGIC_ECONOMY.md
+// section 7, "REAGENT SUPPLY CHAINS") ========================================
+//
+// Section 7 asks that magic's hunger be DENOMINATED IN THE GOODS CATALOG so that
+// reagent corridors join the flow ledger and anti-magic siegecraft becomes economic
+// warfare by construction. This constant is that denomination, and the shape it takes
+// is a NAMING rather than an authoring, for a reason that was measured before it was
+// written.
+//
+// THE CHAINS ALREADY EXIST. arcane_magical.alchemy is literally titled 'Alchemy and
+// Reagents' and already declares 'Arcane reagents' among its rawInputs; magical_goods
+// and planar declare the same input; spellcasting is the service the reagents pay for.
+// So section 7's "reagent chains join supplyChainData" was already true of the raw
+// input half. What was missing is the SPINE: a single place that says which of the
+// estate's existing chains are the magic economy's material dependency, and which
+// goods-catalog id each one hungers for. Without it every K4 consumer would hand-roll
+// a fifth spelling of "which chains are magical", which is the faction-key defect
+// class with the serial numbers filed off.
+//
+// WHY NOT A NEW CHAIN IN SUPPLY_CHAIN_NEEDS, MEASURED RATHER THAN ASSUMED. A new
+// entry in that table GENERATES. cascadeGenerator builds an institution adjacency map
+// from every chain's processingInstitutions and gives each neighbour a boosted second
+// chance whose acceptance costs one draw off the seeded ambient stream. Adding one
+// reagent chain whose processors are the magic institutions that actually appear on
+// rosters was measured on 2026-08-01 to mutate the adjacency of 'alchemist' and
+// "mages' guild" and to add six edges to the map, which is six new boost candidates,
+// which is up to six extra draws, which TRANSLATES the seeded stream for every
+// downstream generator. It also adds a seventy-fifth prebuilt registry row. That is
+// the I1 lesson exactly, and it would have cost an owner-signed golden re-record for
+// data that no dark world is allowed to feel. So the spine NAMES chains instead of
+// minting one, and generation is untouched by construction: nothing in this constant
+// is read by computeActiveChains, cascadeGenerator, the viability scan or the
+// prebuilt-registry enumerator.
+//
+// It lives in this file rather than in supplyChainData.js for the reason stated in
+// this file's own header: its only consumers are the lazy worldPulse tick modules, so
+// co-locating it in the eager first-paint chunk would pay first-paint bytes for zero
+// eager consumer. That is the split this file exists to be.
+//
+// LABELS, NOT IDS, on purpose. The values are catalog LABELS because they are fed to
+// goodsCatalog normalizeGood, which is the estate's one denominator and which resolves
+// 'Arcane reagents' and 'Alchemical reagents' onto the same arcane_reagents id. Naming
+// the id here would be a second spelling of a mapping the catalog already owns.
+//
+// @enforced-by tests/domain/magicSubstitutionReagents.test.js (every key resolves to a
+//   real chain in SUPPLY_CHAIN_NEEDS; every good resolves to a non-custom catalog id).
+
+/**
+ * The chains that make the magic economy MATERIAL, keyed by the same
+ * `${needKey}.${chainId}` id the engine stamps into economicState.activeChains.
+ *
+ * `consumes` is the reagent hunger: the goods a settlement running this chain must
+ * obtain, which is what generates corridor demand and what an interdiction denies.
+ * `produces` is what the chain puts back into the ledger, which is what makes a
+ * reagent-producing neighbour a supplier worth chartering a road to.
+ * `demandWeight` is the RELATIVE hunger of the rung, an integer band: a hedge
+ * alchemist's bench and a planar entrepot do not eat the same amount. The absolute
+ * scale is the regime's business (section 7: "scaled by regime") and lives in
+ * MAGIC_SUBSTITUTION_TUNING, never here, so this table stays a fact about chains.
+ * @type {Readonly<Record<string, Readonly<{ consumes: ReadonlyArray<string>, produces: ReadonlyArray<string>, demandWeight: number }>>>}
+ */
+export const REAGENT_CHAIN_SPINE = Object.freeze({
+  'arcane_magical.alchemy': Object.freeze({
+    consumes: Object.freeze(['Arcane reagents', 'Medicinal herbs']),
+    produces: Object.freeze(['Alchemical reagents']),
+    demandWeight: 1,
+  }),
+  'arcane_magical.spellcasting': Object.freeze({
+    consumes: Object.freeze(['Arcane reagents']),
+    produces: Object.freeze([]),
+    demandWeight: 2,
+  }),
+  'arcane_magical.magical_goods': Object.freeze({
+    consumes: Object.freeze(['Arcane reagents', 'Extraplanar goods']),
+    produces: Object.freeze(['Extraplanar goods']),
+    demandWeight: 3,
+  }),
+  'arcane_magical.planar': Object.freeze({
+    consumes: Object.freeze(['Arcane reagents', 'Extraplanar goods']),
+    produces: Object.freeze(['Extraplanar goods']),
+    demandWeight: 4,
+  }),
+});
+
+/**
+ * The ONE good every rung of the spine hungers for, and therefore the good an
+ * interdiction denies when it wants to reach the magic economy rather than a
+ * particular workshop. Stated as a label for the same reason the spine is: the
+ * catalog owns the mapping onto an id.
+ * @type {string}
+ */
+export const REAGENT_STAPLE_LABEL = 'Arcane reagents';

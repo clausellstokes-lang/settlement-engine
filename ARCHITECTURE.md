@@ -43,7 +43,7 @@ domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
              the renderer-neutral settlement-scene projection and manifest
              compiler (`townScene/`; one canonical truth for 2D and 3D),
-             the **campaign world-pulse simulation** (`worldPulse/` — ~167 modules
+             the **campaign world-pulse simulation** (`worldPulse/` — ~218 modules
              that age a canonized region tick-by-tick: proposals, party impacts,
              the multi-tick interval orchestrator, PLUS the geopolitical
              subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/

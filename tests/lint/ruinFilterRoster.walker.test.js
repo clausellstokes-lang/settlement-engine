@@ -96,6 +96,19 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── facet-scalar: reads a precomputed number, not the roster ─────────────────────
   'src/domain/worldPulse/attrition.js': 'facet-scalar — reads precomputed facets.institutions, not the roster',
   'src/domain/worldPulse/warDeployment.js': 'facet-scalar — reads precomputed facets.institutions (commandQuality)',
+  // W-K3 THE DISASTER BUFFER, model half. The single `.institutions` the regex finds is
+  // `loss?.institutions` inside convertStrike — the StrikeLoss COUNT of how many buildings
+  // one calamity strike would fell ("@property {number} institutions"), not a roster. The
+  // file's own header states the invariant the exemption rests on: "it never sees a
+  // settlement, a roster, a world, or a name." Routing it through liveInstitutions() is not
+  // merely unnecessary, it is impossible — there is no row here to filter, only an integer.
+  // The rows behind that integer were already chosen by the calamity producer
+  // (selectStrikeTargets, spatial/calamity.js) and arrive as a name list through
+  // magicBufferApply.resolveDisasterRelief, so target liveness is that producer's question
+  // and is asked before this arithmetic ever runs. Credits nothing: the number is divided
+  // by a mitigation fraction to decide how much damage CONVERTS, and a strike that felled
+  // nothing prices at zero relief either way.
+  'src/domain/worldPulse/magicBufferModel.js': 'loss-count scalar — `loss.institutions` is the StrikeLoss COUNT of buildings one calamity would fell (an integer supplied by the calamity producer via magicBufferApply), never a settlement roster; the leaf is pure arithmetic that sees no settlement, roster, world or name, so there is no row to ruin-filter and no provider capacity is credited',
   // ── penalty-side: counts impaired/criminal for a PENALTY, not live crediting ─────
   'src/domain/corruption.js': 'penalty-side — criminal/corruption-impairment classifier (drag, not credit)',
   'src/domain/state/deriveSystemState.js': 'penalty-side — countByStatus impaired/critical risk penalty (status-aware)',

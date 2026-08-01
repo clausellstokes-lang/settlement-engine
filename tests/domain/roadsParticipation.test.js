@@ -100,6 +100,25 @@ describe('participation chokepoint — the .npcs-reader inventory ratchet (§8 c
     // scan reads the UNTOUCHED item.save roster (the roadsKernel idiom) so a captive's
     // credibility key survives captivity.
     'src/domain/worldPulse/informationStatecraft.js',
+    // W-K2 THE TIED PRACTITIONER (dark): tiedPractitionerOf / practitionerLoss /
+    // ensureTiedPractitioner read the RAW, UNTOUCHED settlement roster (settlement.npcs)
+    // because the question they ask is WHO LIVES HERE, not who acted this tick, and the
+    // lane already carries its own correct filter — LOST_NPC_STATUS (dead, exiled,
+    // missing, retired, removed). Participation-INDEPENDENT for three reasons, the third
+    // of which is a defect the gate would actually cause. (1) A captive wizard is still
+    // the town's wizard: design §3b makes the thorp's practitioner rung a PERSON, and a
+    // band that flickered with captivity would make a settlement's magic skyline a
+    // report on its hostage situation. (2) practitionerLoss exists precisely to tell
+    // "never had one" apart from "had one and lost them"; behind the participation gate
+    // a hostage practitioner would vanish from tiedPractitionerOf and the loss read would
+    // narrate a death that did not happen. (3) ensureTiedPractitioner is a MUTATION write
+    // of the stripNpcInfluence/npcDmVerbs kind, and its idempotency guard IS
+    // tiedPractitionerOf — filtered, it would fail to see the captive practitioner and
+    // mint a SECOND one, duplicating a named soul against the law 6 conservation the H1
+    // census enforces. Dormant by default (magicEconomyEnabled is virtual, declared false
+    // in the full_simulation spread and lit in no preset) and unwired: nothing in the
+    // pulse calls this leaf yet.
+    'src/domain/worldPulse/magicFormsPractitioner.js',
     'src/domain/worldPulse/momentum.js',
     'src/domain/worldPulse/npcAgency.js',
     // W-H3 THE DESTRUCTION DISPERSAL (dark): disperseCastToPool reads the RAW, UNTOUCHED

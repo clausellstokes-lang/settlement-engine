@@ -1503,3 +1503,12 @@ export const SUPPLY_CHAIN_NEEDS = {
 // (tierResourceDynamics, institutionLifecycle), never first-paint code, so it
 // rides the lazy 'data-lazy' chunk instead of paying first-paint bytes here.
 // SUPPLY_CHAIN_NEEDS stays (it is reached eagerly via lib/customRegistry).
+//
+// W-K slice K4 (DESIGN_MAGIC_ECONOMY.md §7) put THE REAGENT CHAIN SPINE in that
+// same sibling, for the same reason and by the same rule: its only consumers are
+// the lazy worldPulse tick modules. It NAMES the arcane chains already authored in
+// the table above rather than adding one, because a new SUPPLY_CHAIN_NEEDS entry
+// generates — the cascade pass builds its institution-adjacency map from every
+// chain's processingInstitutions and pays one seeded draw per boosted candidate, so
+// a reagent chain naming real magic institutions translates the stream and shifts a
+// golden. Measured, not assumed; the measurement is written up beside the spine.

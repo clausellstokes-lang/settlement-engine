@@ -1134,7 +1134,19 @@ export function applyWorldPulseOutcomes({
       }
     }
     if (outcome.type === 'npc') state = applyNpcPatch(state, outcome);
-    if (outcome.type === 'faction') state = applyFactionPatch(state, outcome);
+    // W-I I3 — THE FACTION PATCH APPLIES BY PAYLOAD, NOT BY TAXONOMY. This guard used to
+    // read `outcome.type === 'faction'` alone, which coupled a PAYLOAD's application to an
+    // unrelated classification field: an outcome could carry a fully-formed factionPatch
+    // and have it silently dropped for being filed under some other type. BYTE-IDENTICAL
+    // for every pre-existing producer, by census: the only authors of factionPatch in the
+    // estate are factionCompetition's candidateBase (which hardcodes type 'faction') and
+    // partyImpact's bolster/undermine outcomes (likewise), so the added disjunct is never
+    // the reason this line fires today. It is the reason the brokerage services can charge
+    // a patron power an in-world price while still filing as knowledge rather than as
+    // politics, which is what the starved-lane cure needs. applyFactionPatch is itself
+    // total (no factionId ⇒ the worldState is returned unchanged), so a stray patch with
+    // no addressee is a no-op rather than a write.
+    if (outcome.type === 'faction' || outcome.factionPatch) state = applyFactionPatch(state, outcome);
     // war-4 — EMERGENCY RECALL EXECUTES. The strategy chooser's return_home hard
     // override (a besieged home / imperilled vassal recalling its committed army)
     // carries metadata.recallTargetId but was previously inert theater. Stamp the
