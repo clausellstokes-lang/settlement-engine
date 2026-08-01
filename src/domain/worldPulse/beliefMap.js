@@ -62,6 +62,7 @@ import { routeAwareHopDelayTicks } from './distancePricedNews.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { beliefAxesActive, axisGroundTruth, foldBeliefAxes } from './beliefAxes.js';
 import { composeBrokerageSight, makeBrokerageFloorFn } from './brokerageFidelity.js';
+import { applyPatronFeeds } from './brokerageServicesFeed.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
 /** The governing seat's operational belief — the v1 map that DRIVES the war
@@ -1248,13 +1249,32 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   const shared = allyIntel?.enabled
     ? applyAllyIntelSharing({ maps: next, ctx, neighbours, alignmentOf: allyIntel.alignmentOf || (() => ({ lawfulness01: 0.5, malice01: 0.5 })), now })
     : next;
+  // W-I I3 THE STANDING PATRON FEED (docs/DESIGN_INFORMATION_BROKERAGES.md §6 FEED, §7).
+  // A guild-form house calibrates the power that keeps it, every pulse, on the channels it
+  // will vouch for and no others. It runs HERE, after the reconcile and after ally intel,
+  // for the reason the I2 fidelity term composes in this file: the belief engine already
+  // holds the snapshot index and the ground-truth derivation the feed needs, and the pulse
+  // kernel is at its frozen size ceiling. The feed writes into the patron's OWN slot of
+  // the ledger this function already returns, so the slice adds no worldState key.
+  // DORMANT ⇒ applyPatronFeeds returns `shared` BY REFERENCE ⇒ byte-identical by object
+  // identity, the same anchor makeBrokerageFloorFn uses.
+  const fed = applyPatronFeeds({
+    maps: shared,
+    worldState,
+    byId,
+    now,
+    truthFor: (/** @type {string} */ observerId, /** @type {string} */ subjectId) => {
+      const label = neighbours.get(observerId)?.get(subjectId);
+      return label ? groundTruthBelief(subjectId, label, ctx, now) : null;
+    },
+  });
   // Reached only when the world is SEEDED (cold-start handles never-seeded). If
   // the ledger decayed fully empty, persist the one-key seed sentinel instead of
   // dropping to null — so next tick reads "seeded-but-empty" (deep fog persists),
   // not "never seeded" (which re-cold-starts to ground truth). The sentinel is
   // CONDITIONAL: a non-empty belief-active ledger never carries it ⇒ byte-identical.
   // [spatial-engine-5]
-  const nextOrNull = Object.keys(shared).length ? shared : { [BELIEF_SEED_KEY]: canonVersion };
+  const nextOrNull = Object.keys(fed).length ? fed : { [BELIEF_SEED_KEY]: canonVersion };
   const changed = mutated || JSON.stringify(prior ?? null) !== JSON.stringify(nextOrNull);
   return { next: changed ? nextOrNull : prior, changed };
 }

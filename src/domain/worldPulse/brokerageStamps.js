@@ -81,6 +81,9 @@
 
 import { clamp01 } from '../../kernel/math.js';
 import { isLiveInstitution } from '../institutions/institutionRoster.js';
+// The canonical id slug, a true dependency-free leaf (its own docblock's whole point), so
+// the Herald read model's chunk pays nothing for it.
+import { stablePart } from './stablePart.js';
 import {
   INFORMATION_CHANNELS,
   INFORMATION_BROKERAGE_TUNING,
@@ -187,6 +190,14 @@ export function rungOfHopCount(hopCount) {
  * @property {string} form      'minor' or 'major'
  */
 
+/**
+ * @typedef {Object} BrokerageHouseRecord
+ * @property {string} institutionId  the capture-addressable slug (see `brokerageHouseRosterIn`)
+ * @property {string} name           the house's roster name, for the legible line
+ * @property {string} legality       'legal' or 'illegal'
+ * @property {string} form           'minor' or 'major'
+ */
+
 /** @param {unknown} v @returns {string} */
 function text(v) {
   return typeof v === 'string' ? v : String(v == null ? '' : v);
@@ -220,20 +231,75 @@ export function brokerageHousesOf(institutions) {
   /** @type {BrokerageHouse[]} */
   const houses = [];
   const seen = new Set();
-  for (const candidate of Array.isArray(institutions) ? institutions : []) {
-    if (!isLiveInstitution(candidate)) continue;
-    if (!isInformationBrokerage(candidate)) continue;
-    const legality = brokerageLegalityOf(candidate);
-    const form = brokerageFormOf(candidate);
-    if (!legality || !form) continue;
-    const key = `${legality}:${form}`;
+  for (const record of buildHouseRoster(institutions)) {
+    const key = `${record.legality}:${record.form}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    houses.push({ legality, form });
+    houses.push({ legality: record.legality, form: record.form });
   }
   houses.sort((a, b) => (a.legality < b.legality ? -1 : a.legality > b.legality ? 1
     : (a.form < b.form ? -1 : a.form > b.form ? 1 : 0)));
   return Object.freeze(houses);
+}
+
+/**
+ * THE SAME PRESENCE GATE, KEEPING THE IDENTITIES (W-I I3). `brokerageHousesOf` answers
+ * "what can this settlement grade" and collapses two listening posts into one competence,
+ * which is right for a stamp and wrong for a patron: two houses can serve two powers. This
+ * accessor is the un-collapsed roster, and it is the ONE place a house gets an id.
+ *
+ * THE ID IS THE CAPTURE MACHINERY'S, NOT A NEW ONE. `stablePart(id or name or label or the
+ * positional fallback)` is exactly what factionCompetition's institution target uses, so a
+ * binding here addresses the same institution `faction_institution_capture` accretes into
+ * `controlledInstitutions`. The positional fallback therefore has to be computed over the
+ * RAW roster index (before the ruin filter drops anything), which is why the walk indexes
+ * first and filters second.
+ *
+ * IT TAKES THE SETTLEMENT, NOT THE ROSTER, and that shape is structural rather than
+ * convenient. The ruin-filter ratchet (tests/lint/ruinFilterRoster.walker.test.js) is
+ * FILE-GRANULAR: any domain file that reads a raw institution roster must itself name the
+ * canonical liveness predicate. Every I3/I4 consumer wants houses rather than rows, so
+ * taking the settlement here keeps the raw roster read inside the ONE file that owns the
+ * filter and leaves the service, patronage and plant leaves with no roster read at all.
+ * That is the ratchet's intent satisfied structurally rather than an exemption negotiated.
+ *
+ * RECORDED EDGE: the capture chooser looks at the first twelve institutions only, so a
+ * house sitting past that window can be bound but never captured. That is the capture
+ * layer's own bound, not this reader's, and narrowing the roster here to match would hide
+ * the house from the patronage derivation entirely, which is worse: a house nobody can
+ * take still serves the power it was born serving.
+ *
+ * @param {{ institutions?: unknown }|null|undefined} settlement
+ * @returns {readonly BrokerageHouseRecord[]}
+ */
+export function brokerageHouseRosterIn(settlement) {
+  const host = asObject(settlement);
+  return buildHouseRoster(Array.isArray(host.institutions) ? host.institutions : null);
+}
+
+/** The shared walk. `brokerageHousesOf` (the stamp side) and `brokerageHouseRosterIn` (the
+ *  patron side) both come through here, so the ruin filter has exactly one spelling.
+ *  @param {readonly unknown[]|null|undefined} institutions
+ *  @returns {readonly BrokerageHouseRecord[]} */
+function buildHouseRoster(institutions) {
+  /** @type {BrokerageHouseRecord[]} */
+  const out = [];
+  (Array.isArray(institutions) ? institutions : []).forEach((candidate, index) => {
+    if (!isLiveInstitution(candidate)) return;
+    if (!isInformationBrokerage(candidate)) return;
+    const legality = brokerageLegalityOf(candidate);
+    const form = brokerageFormOf(candidate);
+    if (!legality || !form) return;
+    const entry = asObject(candidate);
+    const name = text(entry.name || entry.label || entry.id || `Institution ${index + 1}`);
+    out.push({
+      institutionId: stablePart(entry.id || entry.name || entry.label || `institution_${index}`),
+      name,
+      legality,
+      form,
+    });
+  });
+  return Object.freeze(out);
 }
 
 /**

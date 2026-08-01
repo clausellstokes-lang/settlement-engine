@@ -2,6 +2,7 @@ import { evaluateFactionRules } from './factionCompetition.js';
 import { evaluateNpcRules } from './npcAgency.js';
 import { evaluateRelationshipRules } from './relationshipEvolution.js';
 import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
+import { evaluateBrokerageServiceRules } from './brokerageServicesRules.js';
 import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
@@ -510,6 +511,15 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   if (rules.factionCompetitionEnabled) {
     candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
+  // W-I I3/I4 — THE INFORMATION BROKERAGES DO BUSINESS (design §6, the knowledge-lane
+  // clause). Queries, standing feeds, intercepts and commissioned plants: the first acts
+  // in the estate that are, in themselves, a movement of knowledge rather than a beat that
+  // merely got filed as one. GATED inside the producer on brokerageEffectsActive (the
+  // virtual informationBrokeragesEnabled conjoined with the statecraft gate), which reads
+  // the WORLD STATE rather than the normalized rules, because a virtual flag has no
+  // DEFAULT_SIMULATION_RULES entry to normalize. Dark ⇒ an immediate [] with no roster
+  // walk and no draw ⇒ byte-identical for every golden.
+  candidates.push(...evaluateBrokerageServiceRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   if (!['off', 'local'].includes(rules.propagationMode) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
     candidates.push(...deriveFlowCandidates(snapshot, { tick, simulationRules: rules }).filter(candidate => {
       if (candidate.metadata?.flowKind === 'population') return rules.migrationFlowsEnabled;
