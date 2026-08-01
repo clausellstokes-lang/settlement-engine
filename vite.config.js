@@ -132,7 +132,23 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // engine-core -> custom-schema edge and returned all custom tunables to first
 // paint. Their only runtime callers are the lazy generation economy; pin them
 // with the other lazy shared engine leaves below.
+// FP-G16 (2026-08-01, the wave-D/F/G/J1/H1 reclaim): cultureProfiles.js — the
+// 466-byte DOMAIN BOUNDARY that re-exports the 33 kB governed culture corpus from
+// src/data. ESD derived it because three generators import it
+// (institutionProbability / assembleSettlement / resolveConfig), and because the
+// boundary sat in EAGER engine-core the derived EAGER_DATA classifier then routed
+// data/cultureProfiles.js into the EAGER 'data' chunk with it — ~21 kB of profile
+// tables riding first paint for nothing. MEASURED at this trim: NO module in the
+// true first-paint graph (main.jsx / kernel / lookups) reaches either file; every
+// importer is the lazy engine (3 generators + narrativeGenerator, which reads the
+// data table direct) or a lazy surface (ConfigurationPanel, new/dailyLifeLogic).
+// Excised here AND pinned to engine-core-lazy below — the FP-G14 convention, and
+// NOT left unpinned: an orphaned boundary co-locates into the big `engine` chunk
+// (the FP-G11 formatNumber incident), which would make the two lazy UI surfaces
+// fetch the whole generation engine to read a culture paragraph.
+// @guarded-by tests/build/vendorPdfLazy.test.js (the first-paint byte budget).
 for (const frag of [
+  '/src/domain/cultureProfiles.js',
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
   '/src/domain/resolveTerrain.js',
@@ -588,6 +604,12 @@ export default defineConfig({
           // Keeping a small shared lazy chunk avoids duplicating them while
           // preventing conservative engine-domain grouping from charging
           // their implementation to first paint.
+          // FP-G16 joins the culture-profile DOMAIN BOUNDARY here (see the
+          // ENGINE_SHARED_DOMAIN excision note above): shared by the lazy engine
+          // and two lazy product surfaces, never reached by the entry's static
+          // source graph. Its outward edge is data/cultureProfiles.js, which
+          // leaves the eager 'data' chunk for 'data-lazy' the moment the boundary
+          // leaves the eager module graph — lazy -> lazy, the safe direction.
           if (
             id.includes('/src/domain/content/settlementContentProvenance.js')
             || id.includes('/src/domain/content/customSupplyChainActivation.js')
@@ -595,6 +617,7 @@ export default defineConfig({
             || id.includes('/src/domain/priorityBands.js')
             || id.includes('/src/domain/townMap/glyphAssign.js')
             || id.includes('/src/domain/townScene/customBuildingPresentation.js')
+            || id.includes('/src/domain/cultureProfiles.js')
           )
             return 'engine-core-lazy';
 

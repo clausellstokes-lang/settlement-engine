@@ -423,6 +423,48 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // first or re-pins budget = measured + ~85 B house margin then. Until promotion,
 // treat eager Δ as HARD-ZERO for every remaining lane. Monotone-down unchanged;
 // raises stay owner-signed.
+//
+// ── (2026-08-01, THE WAVE RECLAIM) BUDGET UNCHANGED AT 1,040,000; RED CLEARED ──
+// The build waves D (CREATE_ROUTE) / F (gathered adjudication) / G (autoplacement)
+// / J1 + H1 (engine ledgers) drove this ratchet RED: MEASURED 1,056,635, i.e. 16,635
+// OVER, against a pre-wave 1,035,454. The budget was NOT raised (it is owner-signed
+// and the C5 note above already spent the last of its headroom); the closure was
+// brought back down. Two measured moves, one at a time, `npm run build` + this BFS
+// after each:
+//   • WAVE-D SEAM REPAIR  1,056,635 -> 1,045,523 (-11,112). domain/events/mutate.js
+//     is reached statically from the store, so its MUTATION_HANDLERS table is EAGER.
+//     Wave D's CREATE_ROUTE handler imported the deterministic edge id from
+//     roads/userRoutes.js, which statically imports spatial/distanceRead.js — the
+//     53 kB frozen-digest reader whose own docblock states it "never reaches first
+//     paint". One three-line function pulled the whole derivation plus the digest
+//     reader into the critical path. Cured with the house leaf extraction (move the
+//     FUNCTION, not the chunk pin — the stablePart / exportPosture idiom):
+//     roads/userRouteIdentity.js carries orderedRouteEndpoints + userRouteEdgeId with
+//     ZERO imports, roads/userRoutes.js re-exports them verbatim so no consumer or
+//     test moved, and the eager handler imports the leaf. The eager module graph
+//     drops userRoutes.js AND distanceRead.js; index 602,063 -> 590,951.
+//     @enforced-by tests/build/userRouteIdentityLeaf.test.js (5 layers: the leaf's
+//     zero-imports contract, the handler's anchored-negative import site, a
+//     main.jsx source-graph exclusion, dist absence of the derivation, and dist
+//     PRESENCE of the eager handler — the pair that keeps the absence non-vacuous).
+//   • FP-G16 ESD OVER-INCLUSION TRIM  1,045,523 -> 1,020,590 (-24,933). The
+//     conservative generator-domain derivation routed domain/cultureProfiles.js — a
+//     466-byte re-export BOUNDARY — into eager engine-core because three generators
+//     import it; being an eager-graph member, it then dragged its 33 kB governed
+//     corpus (data/cultureProfiles.js) into the eager 'data' chunk through the
+//     derived EAGER_DATA classifier. MEASURED: no module in the true first-paint
+//     graph reaches either file (every importer is the lazy engine or a lazy surface
+//     — ConfigurationPanel, new/dailyLifeLogic). Excised from ENGINE_SHARED_DOMAIN
+//     and pinned to engine-core-lazy — pinned, not orphaned, because an unpinned
+//     excision co-locates into the big `engine` chunk (the FP-G11 formatNumber
+//     incident) and makes those two UI surfaces fetch the whole generator. Placement
+//     only: zero source modules changed, generator-golden-master unchanged.
+//     data 125,804 -> 100,868. @enforced-by tests/build/cultureProfilesLazy.test.js.
+// MEASURED 1,020,590 across the same 8 chunks — 19,410 B under the ceiling. The
+// budget is DELIBERATELY LEFT AT 1,040,000 rather than re-pinned to measured + the
+// ~85 B house margin: tightening it is the composite-gate/owner move the C5 note
+// reserves, and this margin is what the remaining build waves' honest registration
+// costs have to spend. Monotone-down unchanged; raises stay owner-signed.
 const CLOSURE_BUDGET_BYTES = 1_040_000;
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded

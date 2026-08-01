@@ -248,6 +248,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
   const yearlyHashes = [];
   const yearlyStressorCounts = [];
   const yearlyPopulations = [];
+  const yearlyDiedFlags = []; // remnant law 2026-07-31: a properly-died settlement legitimately holds zero
   // performance-scale-6: the cost axis — serialized worldState+regionalGraph bytes and
   // per-year wall-time, so a size/cost regression trends visibly and can be asserted.
   const yearlyBytes = [];
@@ -324,6 +325,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     const stressors = Array.isArray(result.worldState?.stressors) ? result.worldState.stressors : [];
     yearlyStressorCounts.push(stressors.length);
     yearlyPopulations.push(runningSaves.map((s) => Number(s.settlement?.population) || 0));
+    yearlyDiedFlags.push(runningSaves.map((s) => Number.isFinite(Number(s.settlement?.config?.lifecycleDiedAtTick))));
     yearlyBytes.push(JSON.stringify(result.worldState).length + JSON.stringify(result.regionalGraph).length);
     yearlyRealmBytes.push(JSON.stringify({
       worldState: result.worldState,
@@ -353,6 +355,7 @@ async function runYears(seed, years, label, { variant = 'baseline' } = {}) {
     yearlyHashes,
     yearlyStressorCounts,
     yearlyPopulations,
+    yearlyDiedFlags,
     yearlyBytes,
     yearlyRealmBytes,
     yearlyMs,
@@ -497,9 +500,9 @@ if (RUN_DARK_CONTROL) {
 const startTotal = runA.startPopulations.reduce((a, b) => a + b, 0);
 const finalPops = runA.yearlyPopulations[runA.yearlyPopulations.length - 1];
 const finalTotal = finalPops.reduce((a, b) => a + b, 0);
-const everyAlive = runA.yearlyPopulations.every((pops) => pops.every((p) => Number.isFinite(p) && p > 0));
+const everyAlive = runA.yearlyPopulations.every((pops, y) => pops.every((p, i) => Number.isFinite(p) && (p > 0 || Boolean(runA.yearlyDiedFlags?.[y]?.[i]))));
 const ratio = startTotal > 0 ? finalTotal / startTotal : 0;
-check(everyAlive, 'every settlement population finite and > 0, every year');
+check(everyAlive, 'every settlement population finite and > 0 every year (remnants excepted: a properly-died settlement holds zero by law)');
 check(ratio > 0.05 && ratio < 20, 'realm population bounded',
   `${startTotal} → ${finalTotal} (×${ratio.toFixed(2)}; envelope 0.05–20)`);
 
