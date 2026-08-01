@@ -7,7 +7,7 @@
  */
 
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
-import { MapPin, Search, GripVertical, PlusCircle } from 'lucide-react';
+import { MapPin, MapPinned, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
 import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
@@ -29,7 +29,7 @@ const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'))
 export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
   onCreateCampaign, onSelectCampaign, hasCampaigns = false,
-  onKeyboardPlace, announcerRef,
+  onKeyboardPlace, announcerRef, onAutoplace,
 }) {
   const [query, setQuery] = useState('');
   // F28 → E-I — the placement live region. F28 made Enter honest (it selected
@@ -105,6 +105,25 @@ export default function SettlementPalette({
             }}
           />
         </div>
+        {/* W-G / directive 1 — the Autoplace entry. It lives HERE, at the head of
+            the placement surface, because this sidebar is where placing happens:
+            a worldbuilder looking at "drag a card onto the map" is exactly the
+            person who wants "or do it for all of them". Secondary, never the
+            page's gold (Advance owns that). It opens a consent popup and by
+            itself changes nothing, so it is safe to press out of curiosity —
+            which is the only way anyone will ever discover what it does. */}
+        {activeCampaign && typeof onAutoplace === 'function' && saves.length > 0 && (
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<MapPinned size={12} />}
+            onClick={onAutoplace}
+            aria-label="Autoplace: survey the realm and propose the best ground for every settlement. Nothing is placed until you confirm."
+            style={{ width: '100%', marginTop: SP.xs }}
+          >
+            Autoplace all
+          </Button>
+        )}
       </div>
 
       {/* No-campaign prompt — placement needs an active campaign. This is an

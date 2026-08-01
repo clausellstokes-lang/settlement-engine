@@ -197,24 +197,32 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
     title: 'Commitment momentum',
     module: 'src/domain/worldPulse/momentum.js',
     aliveness: Object.freeze({
-      // DELIBERATELY EMPTY, and this one is a FINDING rather than a design note. The
-      // layer DOES author a public receipt (climbDownNews, momentum.js:1123) and the
-      // kernel appends it (pulseKernel.js:2484), but the object carries NO id, and
-      // both the observation sink (wizardNews.js:744 pushes only entries with an id)
-      // and normalizeEntry (wizardNews.js:475 returns null without one) drop it.
-      // VERIFIED 2026-07-31 by feeding an id-less climb-down entry through
-      // appendWizardNewsEntries: the feed came back with ZERO entries, while the
-      // identical entry carrying an id came back with one. So this subsystem's whole
-      // narrative output is discarded before it reaches any reader or any receipt.
+      // DELIBERATELY EMPTY, and the REASON CHANGED on 2026-07-31. It used to be a
+      // FINDING: the layer authored a public receipt (climbDownNews) that carried NO
+      // id, and both the observation sink (wizardNews.js pushes only entries with an
+      // id) and normalizeEntry (returns null without one) dropped it, so the whole
+      // narrative output was discarded before reaching any reader or any receipt.
+      // THAT DEFECT IS REPAIRED: the receipt now mints
+      // `wizard_news.<tick>.momentum_climb_down.<actor>.<target>` and was VERIFIED
+      // reaching both the canonical feed and the audit sink, against an id-stripped
+      // control that still lands zero. The list stays empty for an ORDINARY reason
+      // instead: `eventTypes` names PULSE EVENT types counted in a receipt's
+      // eventTypeCounts, and a wizard-news receipt is not a pulse event. This layer
+      // still emits no event type of its own.
       eventTypes: Object.freeze([]),
-      // DELIBERATELY EMPTY for the same reason: a dropped entry is never classified,
-      // and momentum_climb_down matches no family token even if it were.
+      // DELIBERATELY EMPTY, and this reason changed too. The receipt now DOES classify,
+      // but into `knowledge`, and only because every wizard-news id contains the token
+      // `news` (moverFamilyOf concatenates the id into its match text). So EVERY
+      // id-carrying news author in the tree lands in that family. A family shared by the
+      // whole estate is not dispositive for this row, exactly as the generosity row is
+      // held to its shared families, so claiming it would buy an ALIVE verdict this
+      // subsystem had not earned.
       moverFamilies: Object.freeze([]),
       // The commitment ledger is the ONLY surviving channel (momentum.js:490).
       // realmVerbExecution.js:401 and :419 also write it, through the operator
       // FORCE verbs, and a soak issues none, so that writer never contaminates it.
       stateKeys: Object.freeze(['spatialLedgers.commitments']),
-      other: 'TWO GATES, ONE FLAG. momentumActive requires beliefsActive AND the virtual momentumEnabled (momentum.js:121), so a realm left at the omniscient infoMode leaves this subsystem dark while the receipt records the switch as on. full_simulation carries infoMode full and living_realm carries perfect_delayed, so both preconditions hold there; a DORMANT_BY_CONFIG verdict cannot be read off this key alone in any other preset. DEPOSITS ARE READS, NOT ROLLS: a live siege, a mobilization rung, a covert supply-web campaign or a blockade deposits deterministically, so an actor at total peace holds no course and the ledger is correctly absent. WHAT WOULD BE NEEDED TO OBSERVE IT: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.commitments, or an id on the climb-down receipt so the layer stops being narratively invisible. Both are recorded here rather than fixed by this row.',
+      other: 'TWO GATES, ONE FLAG. momentumActive requires beliefsActive AND the virtual momentumEnabled (momentum.js:121), so a realm left at the omniscient infoMode leaves this subsystem dark while the receipt records the switch as on. full_simulation carries infoMode full and living_realm carries perfect_delayed, so both preconditions hold there; a DORMANT_BY_CONFIG verdict cannot be read off this key alone in any other preset. DEPOSITS ARE READS, NOT ROLLS: a live siege, a mobilization rung, a covert supply-web campaign or a blockade deposits deterministically, so an actor at total peace holds no course and the ledger is correctly absent. WHAT WOULD BE NEEDED TO OBSERVE IT: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.commitments. This sentence used to carry a second half, an id on the climb-down receipt so the layer stops being narratively invisible, and that half was FIXED on 2026-07-31: the receipt now mints an id, so it reaches the reader-facing feed, the Herald and the audit sink instead of being dropped. The census reading is the one remaining gap, and it is recorded here rather than fixed by this row.',
     }),
     // The stock is a read of live public acts. A realm at peace legitimately holds
     // none, so the honest floor is a single materialization somewhere in the span.
@@ -280,15 +288,23 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
     title: 'Supply-web warfare',
     module: 'src/domain/worldPulse/supplyWebWarfare.js',
     aliveness: Object.freeze({
-      // DELIBERATELY EMPTY, and for the SAME defect as the momentum row above. The
-      // four campaign receipts (mintNews, raidNews, abandonNews, completeNews at
-      // supplyWebWarfare.js:879, :905, :923 and :945) author a kind, a headline and
-      // reasons but NO id, and the kernel appends them straight through
-      // (pulseKernel.js:1917). appendObservedWizardNewsEntries pushes only entries
-      // carrying an id, and normalizeEntry returns null without one, so the whole
-      // narrative output of this doctrine is dropped before it reaches the feed or
-      // the receipt. Verified on the sibling momentum receipt, same code path.
+      // DELIBERATELY EMPTY, and for the SAME repaired defect as the momentum row above.
+      // The four campaign builders (mintNews, raidNews, abandonNews, completeNews)
+      // authored a kind, a headline and reasons but NO id, and the kernel appended them
+      // straight through, so appendObservedWizardNewsEntries skipped the sink and
+      // normalizeEntry refused the entry: this doctrine's whole narrative output was
+      // dropped before it reached the feed or the receipt. REPAIRED 2026-07-31, and
+      // VERIFIED end to end by driving the real mover: all five kinds (the raid splits
+      // into webwar_raid and webwar_wrong_village) now mint
+      // `wizard_news.<tick>.<kind>.<aggressor>[.<satellite>].<target>` and survive both
+      // sinks. The list stays empty because `eventTypes` names PULSE EVENT types in a
+      // receipt's eventTypeCounts, and a wizard-news receipt is not a pulse event.
       eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY. Four of the five kinds now classify as `knowledge` and
+      // webwar_raid as `war`, but the `knowledge` reading comes from the token `news`
+      // inside every wizard-news id, which the whole estate shares, and the `war`
+      // reading is a token this doctrine shares with the entire war layer. Neither is
+      // dispositive for this row.
       moverFamilies: Object.freeze([]),
       // The campaign-plan ledger is the ONLY surviving channel
       // (supplyWebWarfare.js:794). realmVerbExecution.js:447 also writes it via the
@@ -296,7 +312,7 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
       // (realmManifest.js:245 and :261), and a soak issues none, so that writer
       // never contaminates the evidence.
       stateKeys: Object.freeze(['spatialLedgers.campaignPlans']),
-      other: 'TWO GATES, ONE FLAG. supplyWebWarfareActive requires warLayerEnabled AND the virtual supplyWebWarfareEnabled (supplyWebWarfare.js:258), so living_realm lights this switch while leaving the doctrine dark (its war layer stays inherited-false), and a DORMANT_BY_CONFIG verdict cannot be read off this key alone. THE DOCTRINE IS DELIBERATELY UNCOMMON EVEN WHEN LIT: the plan is minted only when an aggressor indirect EV beats its direct EV after the atrocity brake and the time discount, it is re-scored every tick as a hypothesis, and it is ABANDONED on EV collapse, so a whole war can be fought without one. WHAT WOULD BE NEEDED TO OBSERVE IT: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.campaignPlans, or an id on the four campaign receipts so the doctrine stops being narratively invisible. Both are recorded here rather than fixed by this row.',
+      other: 'TWO GATES, ONE FLAG. supplyWebWarfareActive requires warLayerEnabled AND the virtual supplyWebWarfareEnabled (supplyWebWarfare.js:258), so living_realm lights this switch while leaving the doctrine dark (its war layer stays inherited-false), and a DORMANT_BY_CONFIG verdict cannot be read off this key alone. THE DOCTRINE IS DELIBERATELY UNCOMMON EVEN WHEN LIT: the plan is minted only when an aggressor indirect EV beats its direct EV after the atrocity brake and the time discount, it is re-scored every tick as a hypothesis, and it is ABANDONED on EV collapse, so a whole war can be fought without one. WHAT WOULD BE NEEDED TO OBSERVE IT: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.campaignPlans. This sentence used to carry a second half, an id on the four campaign receipts so the doctrine stops being narratively invisible, and that half was FIXED on 2026-07-31: all of them mint ids now, so a campaign that fires is narrated to the reader, the Herald and the audit sink instead of being dropped. The census reading is the one remaining gap, and it is recorded here rather than fixed by this row.',
     }),
     // A plan is minted only when the indirect EV wins outright inside a live war.
     // Decades can pass without one and the doctrine still be healthy.

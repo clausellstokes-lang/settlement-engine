@@ -42,6 +42,10 @@ const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 // only when a palette card's Enter arms it, so it costs zero eager bytes (the
 // composite first-paint margin is ~25 B; nothing new may ride the entry).
 const KeyboardPlacementControl = lazy(() => import('./KeyboardPlacementControl.jsx'));
+// W-G / J-D1 — the autoplacement consent popup. Mounted only once the palette's
+// Autoplace entry is pressed, so the planner, the raster adapter and the pack read
+// all ride an interaction chunk that a session which never autoplaces never loads.
+const AutoplacementConsent = lazy(() => import('./AutoplacementConsent.jsx'));
 
 function WorldMapStageImpl({
   showingWizardNews,
@@ -95,6 +99,22 @@ function WorldMapStageImpl({
     setKbPlaceSave(null);
     const el = kbReturnFocusRef.current;
     kbReturnFocusRef.current = null;
+    if (el && typeof el.focus === 'function') el.focus();
+  }, []);
+  // W-G / J-D1 — the autoplacement consent session. The palette's Autoplace entry
+  // opens it; the popup surveys, itemizes, and writes nothing until confirmed. The
+  // trigger's focus is restored on close, the same contract the keyboard placement
+  // session honours.
+  const [showAutoplace, setShowAutoplace] = useState(false);
+  const autoplaceReturnFocusRef = useRef(null);
+  const handleAutoplace = useCallback(() => {
+    autoplaceReturnFocusRef.current = (typeof document !== 'undefined') ? document.activeElement : null;
+    setShowAutoplace(true);
+  }, []);
+  const endAutoplace = useCallback(() => {
+    setShowAutoplace(false);
+    const el = autoplaceReturnFocusRef.current;
+    autoplaceReturnFocusRef.current = null;
     if (el && typeof el.focus === 'function') el.focus();
   }, []);
   // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
@@ -157,9 +177,30 @@ function WorldMapStageImpl({
               hasCampaigns={hasCampaigns}
               onKeyboardPlace={handleKeyboardPlace}
               announcerRef={announceRef}
+              onAutoplace={handleAutoplace}
             />
           </Suspense>
         </SidebarShell>
+
+        {/* W-G / J-D1 — the consent popup. A fixed-position dialog, so it is
+            mounted beside the sidebar rather than inside the map container; it
+            renders nothing until the entry is pressed. */}
+        {showAutoplace && (
+          // A NARRATED boundary, not a silent one: pressing Autoplace must visibly
+          // do something even while its chunk is still arriving, or the button
+          // reads as broken and gets pressed again.
+          <Suspense fallback={
+            <div
+              role="status"
+              style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}
+            >
+              Opening the surveyor&hellip;
+            </div>
+          }
+          >
+            <AutoplacementConsent saves={activeSaves} onClose={endAutoplace} announce={announce} />
+          </Suspense>
+        )}
 
         {/* Map container */}
         {/* a11y: passive drag-and-drop target (settlements are dragged from the

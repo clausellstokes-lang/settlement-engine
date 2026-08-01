@@ -354,6 +354,13 @@ export const OPERATIONS = Object.freeze({
   // prevention wave. Pinned both ways in tests/store/advertisedUndoArming.walker.test.js.
   updatePlacement: { opType:'updatePlacement', label:"Update a map placement", description:"Changes a placement on the campaign map.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'none' },
   clearAllPlacementsLocal: { opType:'clearAllPlacementsLocal', label:"Clear all map placements", description:"Removes every placement from the campaign map. It can be undone with the map undo.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo', undoState:'action' },
+  // W-G / J-D1 (directive 1). Unlike its updatePlacement sibling — de-advertised at
+  // R-4 because nothing on that path ever pushed a snapshot — this op DOES open
+  // with snapshotForUndo, exactly once for the whole act, so `mapUndo` genuinely
+  // reverts an entire autoplacement pass. The receipt is the ONE wizardNews
+  // 'autoplacement' entry it appends (the Herald's charter line), not a per-move
+  // record: seven settlements moving under one consent is one act, not seven.
+  applyAutoplacement: { opType:'applyAutoplacement', label:"Place every settlement at once", description:"Moves the campaign's settlements to the best-fitting ground on the realm map, after the consent popup itemizes each move. It can be undone with the map undo.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:'wizardNews', undoToken:'mapUndo', undoState:'action' },
   addLabel: { opType:'addLabel', label:"Add a map label", description:"Adds a text label to the campaign map. It can be undone with the map undo.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo', undoState:'action' },
   updateLabel: { opType:'updateLabel', label:"Update a map label", description:"Changes a label on the campaign map.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:null, undoState:'partial:pushMapUndo' },
   deleteLabel: { opType:'deleteLabel', label:"Delete a map label", description:"Removes a label from the campaign map. It can be undone with the map undo.", klass:'mechanical', slice:'mapSlice', targetScope:'campaign', receiptRef:null, undoToken:'mapUndo', undoState:'action' },

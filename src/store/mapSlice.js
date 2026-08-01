@@ -16,6 +16,10 @@
 import { deepClone } from '../domain/clone.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
+// The campaign-write persistence chokepoint (campaignSlice's own idiom, and
+// already in the eager closure through it) — the autoplacement Herald record is a
+// campaign write, so it persists the way every other campaign write does.
+import { persistCampaignState } from './campaignSliceShared.js';
 
 // FP-G9 first-paint reclaim: computeRoadEdges (+ its supplyChains dep, ~19 KB
 // source) is reached from the eager store ONLY here, and ONLY for the
@@ -31,6 +35,18 @@ let _roadNetworkPromise;
 const loadRoadNetwork = () => {
   if (!_roadNetworkPromise) _roadNetworkPromise = import('../lib/roadNetwork.js');
   return _roadNetworkPromise;
+};
+
+// W-G: the Herald record for an autoplacement act. Reached from the eager store
+// ONLY here, and only to APPEND one news entry after the placements have already
+// landed — so it rides the same dynamic-import treatment as roadNetwork above
+// rather than dragging the region news module into the first-paint closure. The
+// one observable consequence is timing: the Herald entry lands one microtask
+// after the placements, exactly as MAP_ROUTE_DRAWN does.
+let _wizardNewsPromise;
+const loadWizardNews = () => {
+  if (!_wizardNewsPromise) _wizardNewsPromise = import('../domain/region/wizardNews.js');
+  return _wizardNewsPromise;
 };
 
 export const MAP_MODES = {
@@ -428,6 +444,140 @@ export const createMapSlice = (set, get) => ({
     if (typeof patch?.y === 'number') p.y = patch.y;
     if (patch?.cellId !== undefined) p.cellId = patch.cellId;
   }),
+
+  /**
+   * W-G / J-D1 — COMMIT AN AUTOPLACEMENT. The consent popup calls this only after
+   * the user has confirmed, with exactly the itemized moves they agreed to.
+   *
+   * THIS ACTION MINTS NO POSITION WRITE OF ITS OWN. Every coordinate goes through
+   * the two writes the map already uses — `updatePlacement` for a settlement
+   * already on the map, `addPlacement` (the authoritative campaign/canon/duplicate
+   * gate) for one that is not — so the canon move-lock, the placement row shape,
+   * and every existing refusal apply to autoplacement for free. A third position
+   * writer is precisely how a lock ends up enforced on one path and ghosted on
+   * another.
+   *
+   * WHY NO BRIDGE ROUND-TRIP (verified against the vendored frame, not assumed):
+   * public/map/sf-bridge.js stores `x: mapPt.x, y: mapPt.y` after `screenToMap`
+   * and derives `cellId = findCell(mapPt.x, mapPt.y)`, so a stored placement's x/y
+   * live in the SAME map space as the pack centroids the planner reads — a planned
+   * cell's centroid can be written straight through. And its `restorePlacements`
+   * handler documents itself a no-op "now that placements are React-rendered": the
+   * burgId is an opaque store key the frame does not own. So both classes commit
+   * store-side in map coordinates, in FMG and image mode alike, with no
+   * screen-space conversion and no async echo to race.
+   *
+   * The canonize guard is ALSO checked here, before anything is snapshotted, so a
+   * frozen realm gets one legible refusal instead of a silent no-op per move
+   * (updatePlacement's own guard would refuse each write without saying why).
+   *
+   * ONE undo snapshot covers the whole act: pressing Undo puts every settlement
+   * back where it was, because a placement pass the user cannot take back in one
+   * gesture is not a placement pass they will risk trying.
+   *
+   * @param {{ proposals?: Array<{ kind?: 'move'|'place', burgId?: string|null,
+   *   settlementId: string, name?: string, x: number, y: number, toCell?: number }>,
+   *   seed?: string, version?: number }} args
+   * @returns {{ ok: true, moved: number, placed: number, refused: number }
+   *   | { ok: false, reason: string }}
+   */
+  applyAutoplacement: ({ proposals = [], seed = '', version = 0 } = {}) => {
+    const gate = get();
+    const campaignId = gate.activeCampaignId;
+    if (!campaignId) return { ok: false, reason: 'no-campaign' };
+    const camp = (gate.campaigns || []).find(
+      c => c?.id != null && String(c.id) === String(campaignId),
+    );
+    if (camp?.worldState?.canonizedAt) return { ok: false, reason: 'canonized' };
+
+    const rows = (Array.isArray(proposals) ? proposals : []).filter(
+      m => m && m.settlementId != null
+        && Number.isFinite(Number(m.x)) && Number.isFinite(Number(m.y)),
+    );
+    if (!rows.length) return { ok: false, reason: 'nothing-to-do' };
+
+    // ONE snapshot for the whole act (before any write), so one Undo reverts it all.
+    set(state => { snapshotForUndo(state, 'autoplace settlements'); });
+
+    let moved = 0;
+    let placed = 0;
+    /** @type {string[]} */
+    const landedIds = [];
+    /** @type {string[]} */
+    const landedNames = [];
+    for (const row of rows) {
+      const cellId = Number.isInteger(row.toCell) ? row.toCell : null;
+      const x = Number(row.x);
+      const y = Number(row.y);
+      if (row.kind === 'place' || !row.burgId) {
+        // NOT on the map yet: through addPlacement, which is the gate that checks
+        // campaign / canon / no-duplicate. A refusal is honoured, never bypassed.
+        const res = get().addPlacement({
+          burgId: `sf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`,
+          settlementId: row.settlementId,
+          x,
+          y,
+          cellId,
+          via: 'picker',
+        });
+        if (res && res.ok === false) continue;
+        placed += 1;
+      } else {
+        const before = get().mapState.placements?.[row.burgId];
+        if (!before) continue;                     // a placement that vanished mid-consent
+        get().updatePlacement(row.burgId, { x, y, cellId });
+        const after = get().mapState.placements?.[row.burgId];
+        if (!after || (after.x === before.x && after.y === before.y)) continue;
+        moved += 1;
+      }
+      landedIds.push(String(row.settlementId));
+      if (row.name) landedNames.push(String(row.name));
+    }
+
+    // THE HERALD RECORD — ONE item for the whole charter, never one per settlement.
+    // Deferred by the dynamic import (see loadWizardNews); the placements above
+    // already landed synchronously and nothing here can undo them.
+    const namedIds = landedIds;
+    const names = landedNames;
+    const total = moved + placed;
+    if (total > 0) {
+      loadWizardNews().then(({ appendWizardNewsEntries }) => {
+        set(state => {
+          const c = (state.campaigns || []).find(
+            x => x?.id != null && String(x.id) === String(campaignId),
+          );
+          if (!c) return;
+          const tick = Number(c.worldState?.tick) || 0;
+          const already = (c.wizardNews?.entries || []).filter(
+            e => e?.kind === 'autoplacement',
+          ).length;
+          c.wizardNews = appendWizardNewsEntries(c.wizardNews, [{
+            // Deterministic and collision-free: the same charter drawn twice at the
+            // same tick is two entries, not one silently swallowed by a dedupe.
+            id: `wizard_news.autoplacement.${tick}.${already}`,
+            tick,
+            scope: 'realm',
+            kind: 'autoplacement',
+            significance: 'notable',
+            severity: 0.35,
+            headline: "The realm's charter is drawn",
+            summary: total === 1
+              ? 'One settlement takes its place on the map.'
+              : `${total} settlements take their places on the map.`,
+            // THE ADDRESS CHAIN: ids, never names — the AddressChain resolver names
+            // them at read time, so a later rename can never strand this record.
+            settlementIds: namedIds,
+            reasons: names.length ? [`The charter names ${names.join(', ')}.`] : [],
+            tags: ['autoplacement', `plan_v${Number(version) || 0}`, seed ? `seed:${seed}` : ''].filter(Boolean),
+          }], { now: new Date().toISOString() });
+          c.updatedAt = new Date().toISOString();
+          persistCampaignState(state, campaignId);
+        });
+      }).catch(() => { /* the record is a receipt, never a gate on the placements */ });
+    }
+
+    return { ok: true, moved, placed, refused: rows.length - total };
+  },
 
   // RETIRED (R-5b, owner queue #21): `replaceAllPlacements`. It overwrote the
   // whole placement bag in one unguarded, un-snapshotted write — no canon guard,

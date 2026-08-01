@@ -58,6 +58,11 @@
 
 import { getCompatibleResources } from '../resourceTerrainCompatibility.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+// The Weyl cell subsampler. It USED to live in this file; W-G needed the same
+// sampler for realm-scale candidate enumeration, so it moved to a zero-import
+// leaf and both lanes now read ONE writer (a second copy is how one lane silently
+// regresses while the other stays correct). Behaviour is byte-identical.
+import { spreadIndices } from '../lowDiscrepancy.js';
 
 /** The DENSE cost field's impassable sentinel (spatialCost.IMPASSABLE, re-declared
  *  here so this leaf never imports the builder — see the first-paint law above).
@@ -197,41 +202,6 @@ const T = STEADING_TOPOGRAPHY_TUNING;
 /** Codepoint comparator (device/locale-stable). @param {string} a @param {string} b */
 function codepoint(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
-}
-
-/** The golden-ratio conjugate — the additive-recurrence (Weyl) constant. */
-const PHI_CONJUGATE = 0.6180339887498949;
-
-/**
- * A LOW-DISCREPANCY subset of `length` indices, `count` of them, ascending.
- *
- * WHY NOT AN ARITHMETIC STRIDE: an evenly spaced integer stride ALIASES against a
- * grid pack's row width. Measured on a 12-wide fixture: a stride of 6 selected two
- * columns and made the map's entire mountain ridge structurally unreachable, so a
- * mining camp could never find rock that was plainly inside the parent's country.
- * The golden-ratio recurrence has no such resonance at any width. Deterministic and
- * pure: a function of (length, count) alone.
- *
- * @param {number} length @param {number} count @returns {number[]}
- */
-function spreadIndices(length, count) {
-  /** @type {number[]} */
-  const out = [];
-  if (!(length > 0) || !(count > 0)) return out;
-  if (count >= length) {
-    for (let i = 0; i < length; i += 1) out.push(i);
-    return out;
-  }
-  const used = new Set();
-  let x = 0;
-  for (let k = 0; k < count * 8 && out.length < count; k += 1) {
-    x = (x + PHI_CONJUGATE) % 1;
-    const i = Math.min(length - 1, Math.floor(x * length));
-    if (used.has(i)) continue;
-    used.add(i);
-    out.push(i);
-  }
-  return out.sort((a, b) => a - b);
 }
 
 /**

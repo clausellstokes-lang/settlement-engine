@@ -86,12 +86,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated. Only a major god can shift a realm's legality (see the deity axes above). A world with no magic reads as absent.","tab":"arcane","anchor":"magic","levels":[{"name":"Forbidden","reading":"Magic is outlawed; practicing it is a crime."},{"name":"Restricted","reading":"Magic is tightly controlled, permitted only in narrow licensed forms."},{"name":"Regulated","reading":"Magic is legal but overseen, with rules on who may practice and how."},{"name":"Tolerated","reading":"Magic is accepted as an ordinary part of life."},{"name":"Celebrated","reading":"Magic is embraced and openly honored."}]}
   ],
   "operations": {
-    "count": 156,
+    "count": 157,
     "exemptCount": 68,
     "byKlass": {
       "canon": 5,
       "macro": 44,
-      "mechanical": 107
+      "mechanical": 108
     },
     "scopes": ["campaign","global","save"],
     "entries": [
@@ -218,6 +218,7 @@ export const COMPENDIUM_DATA = Object.freeze({
       {"opType":"removePlacementLocal","label":"Remove a map placement","description":"Removes a placement from the campaign map. It can be undone with the map undo.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
       {"opType":"updatePlacement","label":"Update a map placement","description":"Changes a placement on the campaign map.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"clearAllPlacementsLocal","label":"Clear all map placements","description":"Removes every placement from the campaign map. It can be undone with the map undo.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
+      {"opType":"applyAutoplacement","label":"Place every settlement at once","description":"Moves the campaign's settlements to the best-fitting ground on the realm map, after the consent popup itemizes each move. It can be undone with the map undo.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":"wizardNews","undoToken":"mapUndo"},
       {"opType":"addLabel","label":"Add a map label","description":"Adds a text label to the campaign map. It can be undone with the map undo.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},
       {"opType":"updateLabel","label":"Update a map label","description":"Changes a label on the campaign map.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":null},
       {"opType":"deleteLabel","label":"Delete a map label","description":"Removes a label from the campaign map. It can be undone with the map undo.","klass":"mechanical","slice":"mapSlice","targetScope":"campaign","receiptRef":null,"undoToken":"mapUndo"},

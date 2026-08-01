@@ -470,7 +470,11 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
             [{ saveId: actorId, settlement: entry.settlement }], new Map([[actorId, -crack.legitimacyHit]]));
           patches = new Map([[actorId, /** @type {Mut} */ (patched[0].settlement)]]);
         }
-        news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick));
+        // 'forced' is the id-provenance segment (momentum.js climbDownNews): this verb and
+        // the organic crack pass can price the SAME (actor, target) on the same tick, and the
+        // news feed dedupes by id, so without it the DM's reversal and the emergent one would
+        // silently merge into a single beat.
+        news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick, 'forced'));
       } else {
         news.push(orderNews(verb, `${nameOf(shim, actorId)} reconsiders its course`,
           `The pressed court lets its course (${courseKey}) go — below its cliff, the reversal is felt but not priced.`,
