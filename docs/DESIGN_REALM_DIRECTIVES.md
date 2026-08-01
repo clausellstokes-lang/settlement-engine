@@ -599,6 +599,45 @@
 >   ── AND THE HERALD MUST SAY WHICH IT WAS, in the voice of a people rather than a
 >   calculation: they went home, or they stayed. Both are characterful; neither is a
 >   default.
+> - ⭐⭐ 2026-08-01 AMENDMENT J — THE COALITION SETTLEMENT, AND WHAT IT DOES TO THE
+>   ALLIANCE ITSELF. Owner: when one coalition beats another, "the losing coalition as
+>   a whole has to pay the winner", and this "affects the relationships between each
+>   settlement as well, especially those inside of a coalition, whether they won or
+>   lost — does it strengthen or harm those relationships, and history."
+>   ── ⭐ COLLECTIVE LIABILITY, PAIRWISE SETTLEMENT. This is how J honours I's scope
+>   fence instead of breaking it: the BURDEN is collective (an aggregate the winners
+>   take), but it is APPORTIONED among the losers and paid along ordinary pairwise
+>   edges. No treaty table, no congress, no N-party negotiation layer — one aggregate,
+>   one apportionment, then the machinery that already exists.
+>   ── ⭐⭐ APPORTIONMENT ON BOTH SIDES IS WHERE THE DRAMA LIVES, and it is symmetric:
+>   THE LOSERS divide a burden — by capacity, by culpability, by who actually lost the
+>   field, by who called the alliance in the first place. THE WINNERS divide spoils —
+>   by who bled, by who led, by who arrived late. Neither division is automatic and
+>   neither is fair by default.
+>   ── ⭐⭐ AND THE VERDICT ON EVERY ALLIANCE IS ONE COMPARISON THAT ALREADY EXISTS:
+>   what a member GOT against what it SPENT (I2's expenditure ledger). A winner whose
+>   spoils fall short of its bill holds an unsatisfied claim against its own allies —
+>   which IS ingratitude_debt, reason #10, already wired with its mirror. A loser made
+>   to carry more than its share reaches the same grievance by the other road. THE
+>   OWNER'S QUESTION THEREFORE ANSWERS ITSELF MECHANICALLY: the alliance strengthens
+>   when the division honours the ledger and harms when it does not. Nothing new
+>   decides this.
+>   ── ALL FOUR OUTCOMES MUST BE REACHABLE, and all four are real history: a
+>   victorious coalition that shares fairly emerges BOUND (debt_forgiven, bonds of
+>   commerce); a victorious coalition that does not emerges as TOMORROW'S WAR between
+>   the men who won together; a defeated coalition that carries its loss honestly is
+>   often STRENGTHENED by it, shared suffering fairly borne; and a defeated coalition
+>   that blames and shirks SHATTERS. Pin all four.
+>   ── ⭐ IT ENTERS HISTORY AND STAYS THERE. The apportionment writes to the
+>   relationship record and the chronicle permanently, so an alliance acquires a past
+>   that outlives the war: who paid, who was paid, who was made to carry another's
+>   share, who arrived late and took a full portion. THIS IS WHAT MAKES A LONG
+>   CAMPAIGN COMPOUND — twenty years on, two realms are cold to each other and the
+>   true reason is a settlement neither ruler was alive to sign.
+>   ── AND IT FEEDS DISPOSITION (E2): a coalition war that paid raises the mercantile
+>   and diplomatic channels for those who profited by it; a war whose spoils an ally
+>   stole teaches a people something else entirely. The loop closes back into
+>   character.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
