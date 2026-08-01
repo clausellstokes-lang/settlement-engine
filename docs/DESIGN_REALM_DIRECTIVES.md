@@ -196,6 +196,39 @@
 >   A LIVE READ — if the settlement's own state says one thing and the casus says
 >   another, the casus is wrong. Every new scorer names in its RECEIPT which state
 >   made it, so incoherence is visible rather than silent.
+> - ⭐⭐ 2026-08-01 AMENDMENT C — A CAUSE IS LIVE FOR THE WAR'S DURATION, AND COST
+>   IS A SECOND, INDEPENDENT FRONT. Owner, on holy war: if the patron deity is
+>   UNSEATED during the war or AS A CONSEQUENCE of it, in either settlement, that
+>   must bear on whether the war continues or the belligerent sues for peace — and
+>   this is SEPARATE from the war's own cost, "which could continue it in its own
+>   front if the cost is too high to sue or if the cost is too high to continue."
+>   TWO TRACKS, EVALUATED INDEPENDENTLY, ALLOWED TO DISAGREE:
+>   ── TRACK 1, THE CAUSE. Casus belli are not start-of-war stamps; they are re-read
+>   every pulse and each one declares its own DISSOLUTION CONDITION. When the reason
+>   evaporates the war loses its justification, which is a peace force in its own
+>   right (and the mirror it already owns is where that force belongs). Named
+>   dissolutions: sacred_claim dies when either patron deity is unseated — the gods
+>   that made the quarrel are no longer the gods in the temple, and a war fought over
+>   an alignment gulf has no gulf left to fight over; the lineage claim dies if the
+>   satellite is destroyed or the lineage edge is severed; predation dies the moment
+>   the victim stops being weak or gains a patron. A cause that cannot name its own
+>   death is not finished.
+>   ── TRACK 2, THE COST, AND IT IS NON-MONOTONIC — this is the sharp half. High cost
+>   pushes BOTH ways and the system must model both: (a) TOO HIGH TO CONTINUE — the
+>   exhaustion force that already exists in the peace list; (b) ⭐ TOO HIGH TO SUE —
+>   NEW, and absent today: a war that has cost enormously creates its own pressure to
+>   keep fighting, because stopping means the price bought nothing. Sunk cost and
+>   face. This is the force that turns a short punitive war into a generational one,
+>   and without it every expensive war ends tidily, which is false to history.
+>   ── THE INTERESTING SPACE IS WHERE THEY DISAGREE: a dissolved cause with a cost too
+>   high to abandon (the war outlives its reason — men still dying for a god nobody
+>   worships), and a live cause with a cost too high to bear (the reason stands and
+>   the realm cannot afford it). Both must be reachable, and the Herald must be able
+>   to say which one a given war is in.
+>   ⚠️ SUBSTRATE TO VERIFY BEFORE BUILDING: whether deity UNSEATING exists as a real
+>   transition (religionDynamicsEnabled / the faith lane) or must be defined. If it
+>   does not exist, report it — do not invent a pantheon coup under a war-reason
+>   banner.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
