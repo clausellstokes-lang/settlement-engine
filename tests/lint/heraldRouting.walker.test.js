@@ -130,6 +130,34 @@ describe('Herald routing table — totality + single-home + consistency', () => 
     expect(unrouted).toEqual([]);
   });
 
+  test('SINGLE-PRODUCER KEYS: a key routed on its one producer keeps exactly that producer', () => {
+    // Some routing rows are earned by WHAT THE ONE PRODUCER IS, not by what the token
+    // reads like. `diplomacy` files under `trade` because its only producer is the
+    // treaty signing beat, and a treaty changes terms, tribute and trade. Routing law
+    // reads impactKind BEFORE kind, so this row — not the `treaty_signed` kind-row
+    // beside it — is what actually decides where a signed treaty files.
+    //
+    // A SECOND producer would silently inherit that filing: an envoy parley or a summit
+    // minting `impactKind: 'diplomacy'` would land in trade with nothing red. That risk
+    // was recorded as vetoable in docs/FABLE_VALIDATION_QUEUE.md, and a recorded risk
+    // nothing enforces is just a comment — this walker is the enforcement. TO COMPLY
+    // when it reds: give the new producer its own impactKind, or re-split `diplomacy`
+    // and file both halves in KIND_SECTION.
+    const SINGLE_PRODUCER_KEYS = Object.freeze({
+      diplomacy: 'src/domain/worldPulse/peaceTerms.js',
+    });
+    for (const [kind, expected] of Object.entries(SINGLE_PRODUCER_KEYS)) {
+      const re = new RegExp(`impactKind:\\s*['"]${kind}['"]`);
+      const producers = walk(DOMAIN)
+        .filter((abs) => re.test(readFileSync(abs, 'utf8')))
+        .map((abs) => abs.slice(ROOT.length + 1).replace(/\\/g, '/'))
+        .sort();
+      // ANCHORED BOTH WAYS: the declared producer must still mint the key (a rename
+      // cannot empty this into a vacuous pass) AND must be the only one that does.
+      expect(producers, `${kind} producers`).toEqual([expected]);
+    }
+  });
+
   test('every stressor type + its lifecycle expansions are explicitly routed', () => {
     const types = Object.keys(STRESSOR_CATALOG).concat(['regional_pressure']);
     const tokens = [
