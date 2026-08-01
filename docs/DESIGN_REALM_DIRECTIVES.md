@@ -229,6 +229,35 @@
 >   transition (religionDynamicsEnabled / the faith lane) or must be defined. If it
 >   does not exist, report it — do not invent a pantheon coup under a war-reason
 >   banner.
+> - ⭐⭐ 2026-08-01 AMENDMENT C2 — DISSOLUTION IS GENERAL, AND MOMENTUM IS THE THIRD
+>   FORCE. Owner: the same live-cause logic applies to resource_pressure — "if a war
+>   was fought because they did not have resources and then they found resources in
+>   the war or unrelated to it, versus the cost of suing for peace, and all of this
+>   of course against momentum for the war itself."
+>   ── THE GENERAL PRINCIPLE, now explicit: A CAUSE DIES WHEN ITS NEED IS MET, NOT
+>   ONLY WHEN THE ENEMY CONCEDES. resource_pressure dissolves the moment the hunger
+>   behind it is answered BY ANY MEANS — territory or stores taken in the war, or
+>   something wholly unrelated: a new deposit struck, a road chartered, a treaty
+>   signed, a good harvest, K4 substitution coming online. The engine must not care
+>   which. A realm that went to war for grain and then found grain has no grain
+>   quarrel left, however it found it.
+>   ── THREE QUANTITIES, NOT TWO. Suing for peace has its OWN price (concessions,
+>   terms, face) which is DISTINCT from the price of continuing. So every war is
+>   read against: (1) the live strength of its cause, (2) the cost of continuing,
+>   (3) the cost of stopping. Any of the three can dominate.
+>   ── ⭐ MOMENTUM IS THE FOURTH TERM AND IT RESISTS CHANGE IN EITHER DIRECTION. The
+>   existing momentum machinery is the war's own inertia: it keeps a war going past
+>   the death of its cause and past the point the arithmetic says stop, and it is
+>   equally what makes a realm slow to enter one. Without it, wars would end the
+>   instant a spreadsheet said so, which is false to every war ever fought. THE
+>   TERMINATION READ IS THEREFORE: cause (live, dissolvable) versus cost-to-continue
+>   versus cost-to-stop, ALL against momentum — and the Herald must be able to say
+>   which of the four is deciding, because "why is this war still going?" is exactly
+>   the question a player will ask.
+>   ⚠️ BUILD CONSTRAINT: src/domain/worldPulse/momentum.js is FOREIGN territory this
+>   session (a concurrent owner session holds it). READ it and call its published
+>   exports; NEVER edit that file. If momentum needs a new export to serve this, say
+>   so precisely and stop rather than reaching in.
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
 >   commit — killing an implementer mid-build leaves partial edits, a recorded
