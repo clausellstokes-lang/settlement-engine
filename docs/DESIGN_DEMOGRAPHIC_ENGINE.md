@@ -479,6 +479,51 @@ population target; (11) replay exact hash-for-hash; (12) direct == worker;
 distribution — bounded, varied, causally intelligible, and nothing else.
 Paired check: the B1b small-N stasis medicine re-measured on the same run.
 
+## §11b P3's GROUNDED CORRECTIONS (2026-08-01, recorded so nobody re-finds them)
+
+- **⚠️ THE DIGEST PERSISTS NO COORDINATES, so §5b cannot be a radius.** Verified
+  three independent ways (spatialDigest assembly, placementRaster's header, and
+  steadingTopography's header all record it). The proximity band is therefore
+  written in the digest's own persisted nearness vocabulary — the frozen
+  cost-field Dijkstra — with two NAMED evidence classes: `frontier` (a recorded
+  gate, so the pair cost is exact) and `hinterland` (unmeasured, enveloped by the
+  country radius and CONSERVATIVE TOWARD REFUSING). Restore a true radius the day
+  the digest persists seed cells.
+- **⚠️ VILLAGE SEEDING: two ratified documents disagree.** This design's §5
+  example says "a farm village with open land spins off steadings"; wave E's
+  ratified `SATELLITE_CAPS` is `{town:2, city:4, metropolis:6}` — a village can
+  NEVER seed. **MANAGER RULING (delegated, vetoable): wave E's cap table STANDS.**
+  A cap table is a ratified engine law; a prose example in a later document is
+  not, and forking the satellite lane to satisfy an illustration is the wrong
+  direction. The founding lane refuses below town with the named word
+  `parent_tier`, and the canonical example is pinned at TOWN scale. If villages
+  SHOULD seed, that is a tuning-pass cap change with soak evidence behind it, not
+  a doc-driven fork. THE OWNER MAY VETO — the veto raises the cap; it does not
+  fork the lane.
+- **⚠️ THERE IS NO SETTLEMENT TREASURY.** Enumerated: `economicState` carries
+  foodSecurity, exports/imports, prosperity (a LABEL, not a stock), chains,
+  stockpiles, complexity — not one spendable. `storageMonths` was REFUSED as the
+  denomination precisely because §0b names its five existing writers and a sixth
+  would BE the drift. The founding's capital cost is therefore the plan lane's own
+  `provision` unit, conserved WITHIN the lane, and must be re-denominated the day a
+  real treasury exists.
+- **⚠️ A REAL SAME-SEED SHIFT, in ONE configuration that exists in no preset
+  today:** demographicsEnabled AND settlementLifecycleEnabled lit together move
+  the satellite fork's draw sequence (a plan-driven founding arms the mint on a
+  tick the seeding integrator would not have). No golden covers this
+  configuration. It is stated here rather than left to be discovered, and the
+  soak redo lights both — expect it and do not read it as corruption.
+- **The response race is `w * u`, not `u ** (1/w)`.** The textbook weighted race
+  was implemented and then REMOVED: `Math.pow` is implementation-approximated per
+  the ECMAScript spec and the transcendental-math ratchet caught it. Multiplication
+  is required to be correctly rounded, so cross-engine same-seed replay is
+  preserved at the cost of exact proportionality — THE PROMISE outranks elegance.
+- **§5b's occupancy census is REALM-WIDE**, which wave E's was not (it saw only
+  the parent's own steadings, so two adjacent parents could plant on one cell,
+  each blind to the other). An ASPATIAL world reports `applicable:false` rather
+  than `saturated:true` — reporting saturation there would have silently stopped
+  every aspatial realm from founding anything, a bug wearing a law's clothes.
+
 ## §12 Judgment blocks (binding unless vetoed)
 
 - **J-P1:** food = cap, density = rate (never two caps). VETO reverts to
