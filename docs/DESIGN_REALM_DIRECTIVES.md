@@ -797,6 +797,48 @@
 >   ── ⚠️ SCOPE BOUND: cap concurrent envoys per settlement (one or two). Without it
 >   the account/term-sheet state grows combinatorially with coalition size for very
 >   little added drama.
+> - ⭐⭐⭐ 2026-08-01 AMENDMENT L — CONVERGENCE: WAR MUST END, AND NOT BY A TIMER.
+>   Owner: "I don't want this to turn into endless war, so there needs to be an
+>   appropriate convergence." ⚠️ THIS IS STRUCTURALLY THE POPULATION RUNAWAY AGAIN — a
+>   process with strong drivers and weak brakes runs forever — and it takes the same
+>   kind of cure: NOT A CLAMP. No war-length cap, no forced peace, no arbitration
+>   timer. Those would be the war layer's version of clamping population at K, and
+>   they would read as the engine intervening rather than the world resolving.
+>   ── THE HONEST ACCOUNTING FIRST. Anti-convergence forces this program deliberately
+>   built: momentum (C2), sunk cost / cost-too-high-to-sue (C2), the two-yeses-one-no
+>   asymmetry (G2), peace failing on the road (K), coalitions split in fact (K4), and
+>   terms that no longer match reality (K3). That is a lot of brake-release. The
+>   convergence forces must be genuinely stronger, and each must be ENDOGENOUS.
+>   ── ⭐ THE SIX CONVERGENCE FORCES, all from machinery that exists:
+>   (1) THE HOME FRONT MUST GENUINELY RUIN (F). This is the primary force and it must
+>   ACCELERATE, not trickle: a realm twenty years at war should be visibly wrecked —
+>   roads to grass, granaries empty, tiers demoting. If the drain is gentle, wars last
+>   forever, and that is a TUNING FAILURE the soak must catch.
+>   (2) CAPABILITY COLLAPSE (P4). At some point a realm CANNOT campaign regardless of
+>   will — armies eat. This is a material floor on war-making and it is not a clamp,
+>   because nothing forbids the war; the realm simply cannot prosecute it.
+>   (3) ⭐ THE RULER-CHANGE LOOP SELF-ACCELERATES (D + H): a ruinous war erodes
+>   legitimacy, eroded legitimacy invites the coalition, the coalition replaces the
+>   seat, and the successor re-reads everything. THE LONGER A WAR RUNS THE MORE LIKELY
+>   IT IS BROKEN BY A NEW HAND. Convergence rises with duration, automatically.
+>   (4) ⭐⭐ EACH FAILED ROUND WIDENS THE ACCEPTABLE BAND. New and load-bearing: every
+>   collapsed negotiation should leave both parties LESS PICKY, so offered terms
+>   converge round over round. War-weary belligerents accept what they refused a year
+>   ago. This guarantees eventual agreement WITHOUT a timer, and it is the direct
+>   answer to K2.4's compounding-failure risk.
+>   (5) ⭐ SEPARATE PEACE IS A CONVERGENCE VALVE, NOT ONLY DRAMA (I): a coalition that
+>   cannot agree does not produce endless war — it produces COALITION COLLAPSE and a
+>   set of pairwise peaces. Deadlock resolves by fragmentation, which is both
+>   historically true and mechanically free.
+>   (6) TERMINAL RESOLUTION (P1a): a belligerent can simply cease to exist. Grim, rare,
+>   and a real ending.
+>   ── ⭐ THE ACCEPTANCE CRITERION, and it must be measured rather than asserted: the
+>   soak must show a WAR-DURATION DISTRIBUTION with a tail and no infinity — most wars
+>   short, some long, a few generational, NONE running the full horizon. A single war
+>   alive at year 300 is a FAILED convergence and must red exactly as the trillion
+>   settlement did. Also measured: the mix of ENDINGS (terms, exhaustion, ruler change,
+>   fragmentation, annihilation) — if one path carries nearly all of them, the others
+>   are decoration and the model is simpler than it looks.
 >   them" is a different and better sentence than "the war continued".
 > - ⛔ 2026-08-01 OWNER STOP ORDER: "Stop before the soak grid." THE BOUNDARY IS
 >   EXACT: wave P finishes (P4 was in flight and is allowed to land, gate, and
