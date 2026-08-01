@@ -20,7 +20,7 @@
  * read it). Where a measurement matters to a verdict, the fixtures below reproduce its
  * SHAPE and name the case it came from.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { describe, expect, test } from 'vitest';
@@ -503,7 +503,37 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
       expect(src.includes('setSpatialLedger'), `${rel} writes a spatial ledger`).toBe(false);
       expect(src.includes('worldState.demographics'), `${rel} writes a worldState key`).toBe(false);
     }
+    // THE CHANNEL IS EARNED BUT NOT YET DECLARED, and the difference matters. P3 wrote
+    // a plan ledger that satisfies every condition a dispositive channel must satisfy —
+    // exactly one writer, gated on THIS flag, a name no other module in the tree spells
+    // (precisely the test spatialLedgers.migration fails, which is why the homeostat's
+    // own ledger is not claimed either). What it does NOT yet have is a READER: no
+    // receipt in existence carries a stateKeys census, so declaring it converted a real
+    // SILENT into an instrument gap and the corpus guard refused it. The traces below
+    // stay, because they are the standing evidence that will justify the claim the day
+    // P4 wires the v5 census. A channel is declarable when something can read it, not
+    // when something can write it.
     expect(row.aliveness.stateKeys).toEqual([]);
+    const plansSrc = read('src/domain/worldPulse/demographicsPlans.js');
+    expect(plansSrc.includes('if (!demographicsActive(worldState)) return inert;'),
+      'the plan writer does not gate on the wave flag').toBe(true);
+    expect((plansSrc.match(/setSpatialLedger\(/g) || []).length,
+      'the plan writer has more than one ledger write site').toBe(1);
+    // ONE WRITER, source-scanned across the whole domain rather than asserted. The
+    // ledger's name is a constant in its own leaf, so both spellings are hunted.
+    const writers = [];
+    const walk = (dir) => {
+      for (const entry of readdirSync(join(ROOT, dir))) {
+        const rel = `${dir}/${entry}`;
+        if (statSync(join(ROOT, rel)).isDirectory()) { walk(rel); continue; }
+        if (!/\.js$/.test(entry)) continue;
+        const src = read(rel);
+        if (/setSpatialLedger\(\s*[^,]+,\s*(DEMOGRAPHIC_PLANS_LEDGER|'demographicPlans')/.test(src)) writers.push(rel);
+      }
+    };
+    walk('src/domain');
+    expect(writers, `more than one writer for the plan ledger: ${writers.join(', ')}`)
+      .toEqual(['src/domain/worldPulse/demographicsPlans.js']);
     // moverFamilies: the refusal that matters. `population` is fed by the very lane
     // this row replaces, so claiming it would let the row grade ALIVE off the runaway.
     expect(row.aliveness.moverFamilies).toEqual([]);
@@ -535,6 +565,14 @@ describe('the demographic engine row — the deliberate empty-channel case', () 
     // claimed the population family, this assertion is what would red.
     const lit = evaluateSubsystemCertification(receiptV5({ years: loudYears }));
     expect(verdictOf(lit, DEMO)).toBe('UNOBSERVED');
+    // WAVE P3, THEN CORRECTED: P3 declared a dispositive channel (the plan ledger)
+    // here, and the corpus guard refused it — no receipt that exists carries a
+    // stateKeys census, so declaring the channel converted a real SILENT into an
+    // instrument gap. The channel returns in P4 alongside the v5 census wiring that
+    // can actually read it. Until then the row declares NO channel, which is the
+    // honest state and is what makes the claim below load-bearing: with nothing
+    // declared, no amount of population traffic from the lane this wave replaced can
+    // carry this row to ALIVE.
     expect(evalRowOf(lit, DEMO).instrumentedChannels).toEqual([]);
     expect(evalRowOf(lit, DEMO).corroboratingOnlyEvidence).toBe(false);
 

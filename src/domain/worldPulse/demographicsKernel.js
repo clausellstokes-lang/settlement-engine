@@ -34,14 +34,21 @@
  * the same settlementUpdates in one pass or a tick could read its own population two
  * different ways.
  *
+ * WAVE P3 ADDS NO TERM AT ALL, WHICH IS THE POINT. The valves (design §5, §5b, §5c)
+ * run LAST in this one entry point and move nobody: they read the head count the
+ * three terms above have already settled, ask what a settlement should DO about it,
+ * and either commit that answer to a persistent plan or hand a founding INTENT back
+ * to wave E's one mint. Ordering is load-bearing — the plan lane is handed the
+ * homeostat's own receipts, so spare capacity in reachable existing settlements has
+ * demonstrably been consumed before any founding could be justified (design §11 P2,
+ * acceptance claim 6).
+ *
  * WHAT P1/P2 DO NOT DO, recorded so nobody re-finds it as a bug:
  *   • NO NEW worldState key. P1 persists nothing at all; P2's transit accounting rides
  *     the EXISTING `spatialLedgers.migration` columns (design §4: zero new ledger
  *     kinds), and the design's `migrationDebt` is deliberately not built, because per
  *     settlement in and out totals are derivable from those columns and a second
  *     accounting surface could only ever drift from the first.
- *   • NO overflow, NO satellite founding, NO promotion response, NO plans. P3 owns all
- *     four, and it asks P2's `competeForDestinations` FIRST.
  *   • NO stressor coupling and NO road mortality. P4.
  *   • NO wizard news. The Herald's demographic lines are P4; the receipt shapes here
  *     are authored honestly now so P4 consumes them rather than re-deriving them.
@@ -64,6 +71,7 @@
 import { formatCount } from '../formatNumber.js';
 import { residentNamedNpcCount } from './npcReplacement.js';
 import { advanceDemographicMigration } from './demographicsMigration.js';
+import { advanceDemographicPlans } from './demographicsPlans.js';
 import {
   demographicsActive,
   demographicRates,
@@ -160,6 +168,16 @@ function demographicLine(f) {
  * @property {{ departures: number, arrivals: number, inTransit: number, returned: number,
  *   lost: number, unplaced: number }} accounting WAVE P2, law 4: departures equals
  *   arrivals plus in transit plus returned plus lost, and a pin adds it up.
+ * @property {Array<Record<string, unknown>>} planReceipts WAVE P3: the valve lane's own
+ *   opened/closed lines, kept in their own list so P1's and P2's receipt vocabularies
+ *   stay exactly what they declared.
+ * @property {ReadonlyArray<import('./demographicsPlans.js').FoundIntent>} foundIntents
+ *   WAVE P3: completed satellite plans, for the ONE founding path to execute. This lane
+ *   never mints a steading itself.
+ * @property {{ opened: number, completed: number, failed: number, abandoned: number,
+ *   provisionRaised: number, provisionSpent: number, provisionForfeited: number }}
+ *   planAccounting WAVE P3: raised equals spent plus forfeited plus what plans still
+ *   hold, and a pin adds it up.
  * @property {Array<Record<string, unknown>>} newsEntries always empty (P4 owns the Herald)
  */
 
@@ -167,6 +185,16 @@ function demographicLine(f) {
  *  arrivals: number, inTransit: number, returned: number, lost: number, unplaced: number }} */
 function stillAccounting() {
   return { departures: 0, arrivals: 0, inTransit: 0, returned: 0, lost: 0, unplaced: 0 };
+}
+
+/** The plan accounting a dormant tick reports (WAVE P3). @returns {{ opened: number,
+ *  completed: number, failed: number, abandoned: number, provisionRaised: number,
+ *  provisionSpent: number, provisionForfeited: number }} */
+function stillPlanAccounting() {
+  return {
+    opened: 0, completed: 0, failed: 0, abandoned: 0,
+    provisionRaised: 0, provisionSpent: 0, provisionForfeited: 0,
+  };
 }
 
 /**
@@ -185,9 +213,21 @@ function stillAccounting() {
  *   already built. Optional and total: absent, the push drivers fall back to the
  *   generation-time causal scores and the threat guard fails closed.
  * @param {string|null} [args.season] WAVE P2: the road season, for the hop pricing.
+ * @param {boolean} [args.satelliteLaneLit] WAVE P3: is wave E's founding path present
+ *   at all. TOLD rather than read, so this lane never opens a second dormancy gate on
+ *   another layer's flag and the two modules stay free of an import cycle.
+ * @param {import('./demographicsLand.js').LandDigest|null} [args.digest] WAVE P3: the
+ *   FROZEN spatial rasters, READ-ONLY, for the §5b proximity band. Absent ⇒ aspatial ⇒
+ *   the land law is inapplicable and wave E's own behaviour stands.
+ * @param {Record<string, number>} [args.satelliteCaps] WAVE P3: wave E's per-tier cap
+ *   table, passed in rather than re-declared, so the two lanes can never disagree
+ *   about which parents may seed at all.
  * @returns {DemographicAdvanceResult}
  */
-export function advanceDemographics({ snapshot, worldState, settlementUpdates, rng, tick, pIndex, season }) {
+export function advanceDemographics({
+  snapshot, worldState, settlementUpdates, rng, tick, pIndex, season,
+  satelliteLaneLit, digest, satelliteCaps,
+}) {
   const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
   // ── DORMANCY GATE: flag absent ⇒ an immediate no-op. No fork, no key, no clone. ──
   if (!demographicsActive(worldState)) {
@@ -198,6 +238,9 @@ export function advanceDemographics({ snapshot, worldState, settlementUpdates, r
       receipts: [],
       migrationReceipts: [],
       accounting: stillAccounting(),
+      planReceipts: [],
+      foundIntents: Object.freeze([]),
+      planAccounting: stillPlanAccounting(),
       newsEntries: [],
     };
   }
@@ -235,7 +278,7 @@ export function advanceDemographics({ snapshot, worldState, settlementUpdates, r
 
     const named = residentNamedNpcCount(settlement);
     const food = foodCapacityOf(settlement, worldState, id);
-    const bound = effectiveBoundOf(food, densityCeilingOf(settlement));
+    const bound = effectiveBoundOf(food, densityCeilingOf(settlement, worldState, id));
     const pressure01 = pressureOf(before, bound.bound);
     const deficit01 = foodDeficit01Of(settlement);
     const rates = demographicRates({ settlement, pressure01, deficit01 });
@@ -319,13 +362,35 @@ export function advanceDemographics({ snapshot, worldState, settlementUpdates, r
     season: season || null,
   });
 
-  return {
+  // ── WAVE P3, THE VALVES AND THE PLANS (design §5, §5b, §5c). Runs LAST and moves
+  // NOBODY: it reads the head count the three terms above have settled and decides
+  // what the settlement should DO about it. Handed the homeostat's OWN receipts, so
+  // "ask P2 first" is structural rather than a comment — a founding can only ever be
+  // weighed by what the existing realm could not absorb. ──
+  const planned = advanceDemographicPlans({
+    snapshot: /** @type {import('./demographicsPlans.js').PlanSnapshot} */ (
+      /** @type {unknown} */ (snapshot)),
     worldState: moved.worldState,
+    settlementUpdates: /** @type {import('./demographicsPlans.js').PlanUpdate[]} */ (
+      /** @type {unknown} */ (moved.settlementUpdates)),
+    tick: stepTick,
+    migrationReceipts: moved.receipts,
+    satelliteLaneLit: satelliteLaneLit === true,
+    digest: digest || null,
+    satelliteCaps: satelliteCaps || {},
+    realmId: typeof asObject(worldState).rngSeed === 'string' ? String(asObject(worldState).rngSeed) : 'realm',
+  });
+
+  return {
+    worldState: planned.worldState,
     settlementUpdates: /** @type {DemoUpdate[]} */ (/** @type {unknown} */ (moved.settlementUpdates)),
-    changed: cloned || moved.changed,
+    changed: cloned || moved.changed || planned.changed,
     receipts,
     migrationReceipts: moved.receipts,
     accounting: moved.accounting,
+    planReceipts: planned.receipts,
+    foundIntents: planned.foundIntents,
+    planAccounting: planned.accounting,
     newsEntries: [],
   };
 }

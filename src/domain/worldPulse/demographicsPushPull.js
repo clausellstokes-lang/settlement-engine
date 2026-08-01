@@ -288,7 +288,10 @@ function urbanLoadBandWord(ratio) {
 export function demographicReadings(settlement, worldState, settlementId) {
   const population = Math.max(0, Math.round(num(asObject(settlement).population, 0)));
   const food = foodCapacityOf(settlement, worldState, settlementId);
-  const bound = effectiveBoundOf(food, densityCeilingOf(settlement));
+  const bound = effectiveBoundOf(
+    food,
+    densityCeilingOf(settlement, /** @type {Record<string, unknown>} */ (asObject(worldState)), settlementId),
+  );
   const mouths = Math.max(0, Math.round(num(food.mouths, 0)));
   // An unfed reading is NEVER a famine: a fixture with no food physics reads
   // foodKnown false and a neutral ratio of 1, exactly as P1a's viability read refuses
@@ -344,6 +347,19 @@ export function pressureScore(pIndex, id, kind, fallback) {
 export function prosperity01Of(item) {
   return clamp01(num(asObject(asObject(item).causal).scores
     && /** @type {Record<string, number>} */ (asObject(asObject(asObject(item).causal).scores)).economic_capacity, 50) / 100);
+}
+
+/**
+ * TRADE CONNECTIVITY, 0 worst to 1 best. `trade_connectivity` is the same causal
+ * score the dossier's own trade surface stands on, read here through the SAME path
+ * `prosperity01Of` uses so the wave never grows a second spelling of "how connected
+ * is this town". WAVE P3 reads it: the response competition weighs a settlement's
+ * roads when it decides whether to buy grain or to become a city.
+ * @param {DemoItem|null|undefined} item @returns {number}
+ */
+export function connectivity01Of(item) {
+  return clamp01(num(/** @type {Record<string, number>} */ (
+    asObject(asObject(asObject(item).causal).scores)).trade_connectivity, 50) / 100);
 }
 
 /**
@@ -561,13 +577,22 @@ export function needVectorOf(readings) {
  * Below DEPART_PUSH_FLOOR nobody moves: a realm where every settlement trickles a few
  * people every week has a noisy ledger and no story in it.
  *
- * @param {{ push01: number, reserveCoverage: number }} input @returns {number}
+ * WAVE P3 ADDS THE POLICY TERM, and adds it ABOVE the floor rather than around it. A
+ * settlement that has completed an emigration plan pushes its own people harder, but
+ * a settlement with NO grievance and a standing policy still sits under the floor and
+ * sheds nobody: a policy is a permission, not a reason, and the check below is
+ * deliberately made against the un-encouraged push so the guard cannot be bought.
+ * Absent works ⇒ 0 ⇒ P2's number verbatim.
+ *
+ * @param {{ push01: number, reserveCoverage: number, encouragement01?: number }} input
+ * @returns {number}
  */
 export function departureRateOf(input) {
   const push = clamp01(num(input.push01, 0));
   if (push < T.DEPART_PUSH_FLOOR) return 0;
+  const encouraged = clamp01(push + clamp01(num(input.encouragement01, 0)) * (1 - push));
   const delay = 1 - T.RESERVE_DELAY_MAX * clamp01(num(input.reserveCoverage, 0));
-  return Math.max(0, T.DEPART_RATE_MAX * push * delay);
+  return Math.max(0, T.DEPART_RATE_MAX * encouraged * delay);
 }
 
 /**

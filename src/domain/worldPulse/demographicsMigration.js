@@ -73,6 +73,7 @@ import {
 import { livedCostsFrom } from './routeNetworkConsumers.js';
 import { livedLegTicks } from './routeNetworkConsumersTransit.js';
 import { demographicsActive, integerize, tierViabilityOf } from './demographicsRates.js';
+import { encouragement01Of } from './demographicsWorks.js';
 import {
   PUSH_PULL_TUNING,
   demographicReadings,
@@ -517,7 +518,13 @@ export function advanceDemographicMigration({ snapshot, worldState, settlementUp
     const readings = demographicReadings(settlement, worldState, originId);
     const item = itemById.get(originId) || null;
     const push = pushScoreOf({ item, settlement, readings, pIndex, settlementId: originId });
-    const rate = departureRateOf({ push01: push.score01, reserveCoverage: readings.reserveCoverage });
+    const rate = departureRateOf({
+      push01: push.score01,
+      reserveCoverage: readings.reserveCoverage,
+      // WAVE P3: a completed emigration plan is a standing policy, read through the
+      // works leaf's ONE writer. No works ⇒ 0 ⇒ this line is P2's own arithmetic.
+      encouragement01: encouragement01Of(worldState, originId),
+    });
     if (rate <= 0) continue;
 
     // THE H3 FLOOR COMPOSES STRUCTURALLY (law 3). The column is drawn against the

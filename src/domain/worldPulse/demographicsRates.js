@@ -58,6 +58,10 @@ import { foodLedger } from '../foodLedger.js';
 import { resolveTerrain } from '../resolveTerrain.js';
 import { routeLifecycleActive } from './routeNetworkLedger.js';
 import { interdictableArteries } from './routeNetworkConsumersInterdiction.js';
+// WAVE P3 — what a completed plan left behind. A zero-import leaf on purpose: the
+// works read must not close the rates -> plans -> pushPull -> rates loop, so the
+// ledger's name and the effect arithmetic live in their own single writer.
+import { importFactorOf, infrastructureFactorOf } from './demographicsWorks.js';
 
 /** @typedef {{ tier?: string, terrainType?: string, terrainOverride?: string, terrain?: string }} DemoConfig */
 /**
@@ -343,7 +347,12 @@ export function foodCapacityOf(settlement, worldState, settlementId) {
     : 0;
   const factors = /** @type {ReadonlyArray<number>} */ (T.ARTERY_IMPORT_FACTORS);
   const arteryFactor = routesLit ? num(factors[Math.min(arteries, factors.length - 1)], 1) : 1;
-  const importUnits = ledger.dailyNeed * clamp01(ledger.importDependency) * arteryFactor;
+  // WAVE P3: a completed IMPORTS plan is a standing arrangement, and it raises the
+  // IMPORT side only. Law 2 says food is the cap; a treaty does not make a field, so
+  // `local` above is untouched and a settlement can never buy its way past its own
+  // ground. Absent works ⇒ factor 1 ⇒ P1's number verbatim.
+  const importUnits = ledger.dailyNeed * clamp01(ledger.importDependency) * arteryFactor
+    * importFactorOf(/** @type {Record<string, unknown>} */ (asObject(worldState)), String(settlementId));
   const imports = Math.max(0, Math.floor(importUnits * mouthsPerUnit));
 
   // ── THE OBLIGATION SIDE, banded and capped against LOCAL production.
@@ -367,17 +376,28 @@ export function foodCapacityOf(settlement, worldState, settlementId) {
 /**
  * D_tier — HOW MANY CAN FIT (design §2). The authored per-tier ceiling, adjusted by
  * the settlement's terrain through the ONE terrain read. METROPOLIS INCLUDED.
+ *
+ * WAVE P3 ADDS THE PUBLIC WORKS, and adds them OPTIONALLY. The two extra arguments
+ * are absent-tolerated on purpose: every pre-P3 call site passes one argument and
+ * gets the authored ceiling back verbatim, and a settlement that has completed no
+ * infrastructure plan reads the same number with all three. A finished aqueduct
+ * raises how many may be HOUSED and mints nobody, so law 4 is untouched — acceptance
+ * claim 3's "capacity expansion produces RENEWED bounded growth" is this line, and
+ * the rates then take the settlement there at their own speed.
  * @param {DemoSettlement|null|undefined} settlement
+ * @param {Record<string, unknown>|null} [worldState] omit ⇒ no works are read
+ * @param {string} [settlementId]
  * @returns {number}
  */
-export function densityCeilingOf(settlement) {
+export function densityCeilingOf(settlement, worldState = null, settlementId = '') {
   const tier = tierOf(settlement);
   const base = num(/** @type {Record<string, number>} */ (DENSITY_CEILINGS)[tier], DENSITY_CEILINGS.village);
   const s = asObject(settlement);
   const terrain = resolveTerrain(/** @type {Parameters<typeof resolveTerrain>[0]} */ (s.config))
     || (typeof s.terrain === 'string' && s.terrain !== 'auto' ? s.terrain : null);
   const adjust = num(/** @type {Record<string, number>} */ (TERRAIN_DENSITY_ADJUST)[String(terrain || '')], 1);
-  return Math.max(T.MIN_DENSITY_CEILING, Math.round(base * adjust));
+  const works = worldState && settlementId ? infrastructureFactorOf(worldState, settlementId) : 1;
+  return Math.max(T.MIN_DENSITY_CEILING, Math.round(base * adjust * works));
 }
 
 /**
@@ -536,7 +556,10 @@ export function foodDeficit01Of(settlement) {
  */
 export function tierViabilityOf(settlement, worldState, settlementId) {
   const tier = tierOf(settlement);
-  const bound = effectiveBoundOf(foodCapacityOf(settlement, worldState, settlementId), densityCeilingOf(settlement));
+  const bound = effectiveBoundOf(
+    foodCapacityOf(settlement, worldState, settlementId),
+    densityCeilingOf(settlement, /** @type {Record<string, unknown>} */ (asObject(worldState)), settlementId),
+  );
   const floor = num(/** @type {Record<string, { min?: number }>} */ (POPULATION_RANGES)[tier]?.min, 0);
   return {
     known: bound.foodKnown,

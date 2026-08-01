@@ -401,9 +401,15 @@ export function drawSteadingName(culture, draw) {
  *   record is byte-identical to a pre-W-E founding.
  * @param {(() => number)|null} [args.siteDraw] the SITE fork's sequential draw
  *   (`satellite:<parent>:<tick>:site`) — a distinct stream from `draw`
+ * @param {import('./steadingTopography.js').SteadingSite|null} [args.siteOverride]
+ *   WAVE P3: ground ALREADY chosen and already proved legal against the §5b proximity
+ *   band. Supplied, it is used verbatim and no site is picked here — a settlement that
+ *   committed to founding a steading committed to a PLACE, and re-picking the ground on
+ *   the last day would be the reroll §5c forbids wearing a plan's clothes. Absent (every
+ *   organic and forced founding), the seeded pick below runs exactly as before.
  * @returns {{ record: SatelliteRecord, debit: number } | { refusal: string }}
  */
-export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance, digest = null, siteDraw = null }) {
+export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride = null, resourceKey = null, provenance, digest = null, siteDraw = null, siteOverride = null }) {
   const parentTier = String(parent?.tier || 'village');
   const cap = num(/** @type {Record<string, unknown>} */ (T.SATELLITE_CAPS)[parentTier], 0);
   if (!cap) return { refusal: 'only town-or-higher parents seed steadings' };
@@ -425,12 +431,12 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
   // The site draw runs on its OWN keyed fork, so the founding's name/founders
   // draws above (and every later draw on the satellite fork this tick) are
   // unchanged by the existence of this feature.
-  const site = digest && typeof siteDraw === 'function'
+  const site = siteOverride || (digest && typeof siteDraw === 'function'
     ? chooseSteadingSite({
       digest, parentId, draw: siteDraw, resourceKey: key || null,
       occupied: sats.map((r) => num(r.site?.cell, -1)).filter((c) => c >= 0),
     })
-    : null;
+    : null);
   const resources = site && typeof siteDraw === 'function'
     ? deriveSteadingResources({
       landform: site.landform, draw: siteDraw, resourceKey: key || null,
@@ -521,6 +527,14 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   // WAVE P2 threads the pressure index this seam ALREADY holds: the push drivers read
   // live defense, crime and hostility pressure through it, and the defense guard fails
   // closed without it (no threat evidence, no flight over a low readiness score).
+  // WAVE P3 threads three things this seam ALREADY holds, so the demographic lane
+  // never has to re-declare another layer's law: whether the satellite lane exists at
+  // all (its own flag, read HERE and passed down — a read the other way would close an
+  // import cycle), the FROZEN rasters the §5b proximity band measures against, and
+  // wave E's own per-tier cap table. Passing the caps rather than copying them is what
+  // keeps "which parents may seed" a single authored fact.
+  const demoDigest = /** @type {import('./demographicsLand.js').LandDigest|null} */ (
+    /** @type {unknown} */ (activeSpatialDigest(/** @type {never} */ (hostWorldState))));
   const demo = advanceDemographics({
     snapshot: /** @type {import('./demographicsKernel.js').DemoSnapshot} */ (/** @type {unknown} */ (snapshot)),
     worldState: hostWorldState,
@@ -531,6 +545,9 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
     season: typeof asObject(asObject(hostWorldState).calendar).season === 'string'
       ? String(asObject(asObject(hostWorldState).calendar).season)
       : null,
+    satelliteLaneLit: settlementLifecycleActive(hostWorldState),
+    digest: demoDigest,
+    satelliteCaps: /** @type {Record<string, number>} */ (T.SATELLITE_CAPS),
   });
   const worldState = demo.worldState;
   const updates = /** @type {LcUpdate[]} */ (/** @type {unknown} */ (demo.settlementUpdates));
@@ -544,6 +561,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       receipts: [
         .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
         ...demo.migrationReceipts,
+        ...demo.planReceipts,
       ],
     };
   }
@@ -584,7 +602,13 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
   const receipts = [
     .../** @type {Array<Record<string, unknown>>} */ (/** @type {unknown} */ (demo.receipts)),
     ...demo.migrationReceipts,
+    ...demo.planReceipts,
   ];
+  // WAVE P3: completed satellite plans, indexed by the parent that committed to them.
+  // The plan lane decided; this lane founds, through the ONE mint.
+  /** @type {Map<string, import('./demographicsPlans.js').FoundIntent>} */
+  const foundIntents = new Map();
+  for (const intent of demo.foundIntents) foundIntents.set(String(intent.parentId), intent);
   let ledgerChanged = false;
 
   // ── Settlement-record surgery helpers (population transfers, conserved). ──
@@ -701,7 +725,14 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
       const { drive, boom, strike, inflow } = seedingDrive({ settlement: parent0, tick });
       seedAcc = stepSeeding(seedAcc, drive);
       const cooled = lastSeedTick == null || (tick - lastSeedTick) >= T.SEED_COOLDOWN;
-      const armed = seedAcc >= T.SEED_FLOOR && cooled;
+      // WAVE P3: a COMPLETED satellite plan arms the founding on its own. The plan
+      // already spent a season and its stores raising the undertaking (design §5c),
+      // already asked the homeostat whether the realm had room for these people
+      // (design §11 P2), and already proved its ground legal against the §5b band, so
+      // it does not also have to wait on the spontaneous seeding integrator. The tier
+      // CAP still binds, because that is wave E's law and this lane owns it.
+      const intent = foundIntents.get(parentId) || null;
+      const armed = (seedAcc >= T.SEED_FLOOR && cooled) || intent !== null;
       if (armed && sats.length >= cap) {
         // Deferral-visible (the caps + cadence pin): armed but cap-held.
         receipts.push({ id: parentId, kind: 'satellite_deferred', reason: 'cap', cap, count: sats.length });
@@ -716,9 +747,15 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
         const minted = mintSteading({
           parent: parent0, parentId, sats, tick, draw,
           resourceKey: strike ? String(strike.triggeredAt?.sourceEventTargetId || '') : null,
+          // The provenance vocabulary stays CLOSED at its four words. A plan-driven
+          // founding IS growth pressure — the plan is how the pressure was deliberated,
+          // not a different reason — and the deliberation is carried in the receipt's
+          // own `planId` and `because` rather than by widening a vocabulary other
+          // surfaces already enumerate.
           provenance: strike ? 'resource_strike' : 'growth',
           digest: spatialDigest,
           siteDraw: siteFork ? () => siteFork.random() : null,
+          siteOverride: intent ? intent.site : null,
         });
         if ('record' in minted) {
           const { record: rec, debit } = minted;
@@ -739,7 +776,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState: hostWorldStat
             provenance: rec.provenance, ...(rec.resourceKey ? { resourceKey: rec.resourceKey } : {}), orbit: rec.orbit,
             ...(rec.site ? { site: rec.site } : {}),
             ...(rec.resources ? { resources: rec.resources } : {}),
-            sources: { boom, strike: !!strike, inflow },
+            ...(intent ? { planId: intent.planId, because: [...intent.because], provisionSpent: intent.provisionSpent } : {}),
+            sources: { boom, strike: !!strike, inflow, plan: !!intent },
           });
           // THE GROUND, NAMED IN-WORLD (W-E). A sampled site swaps the growth
           // summary for the site pool; a strike keeps its own voice (the workings
