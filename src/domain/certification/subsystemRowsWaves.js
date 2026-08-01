@@ -346,15 +346,20 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'routeLifecycleEnabled',
     title: 'Organic route lifecycle',
-    module: 'src/domain/worldPulse/routeNetworkLedger.js,src/domain/worldPulse/routeNetworkGenesis.js,src/domain/worldPulse/routeNetworkFlows.js,src/domain/worldPulse/routeNetworkFlowsMaterial.js,src/domain/worldPulse/routeNetworkFlowsObjective.js,src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js',
+    module: 'src/domain/worldPulse/routeNetworkLedger.js,src/domain/worldPulse/routeNetworkGenesis.js,src/domain/worldPulse/routeNetworkFlows.js,src/domain/worldPulse/routeNetworkFlowsMaterial.js,src/domain/worldPulse/routeNetworkFlowsObjective.js,src/domain/worldPulse/routeNetworkFlowsSelfSufficiency.js,src/domain/worldPulse/routeNetworkCharter.js,src/domain/worldPulse/routeNetworkCharterEvents.js,src/domain/worldPulse/routeNetworkCharterDanger.js,src/domain/worldPulse/routeNetworkCharterBypass.js,src/domain/worldPulse/routeNetworkDecay.js,src/domain/worldPulse/routeNetworkDecayLifecycle.js',
     aliveness: Object.freeze({
-      // DELIBERATELY EMPTY, and the reason is the EVIDENCE LAW at the head of this
-      // file: every string here must be traceable to a `candidateType` literal in
-      // source. Slice J1 is the ledger and its genesis derivation; it emits NO
-      // candidate at all, by design ("Inert — no lifecycle events yet", §14). The
-      // charter and abandonment types are J3's to mint, and declaring them now would
-      // be a certification row describing code that does not exist.
-      eventTypes: Object.freeze([]),
+      // FILLED BY J3, and every string is traceable to a `candidateType` literal in
+      // source, which is the EVIDENCE LAW at the head of this file. It was
+      // DELIBERATELY EMPTY through J1 and J2 because those slices emit no candidate
+      // at all ("Inert — no lifecycle events yet", §14), and a row describing code
+      // that did not exist would have been the exact overclaim the law forbids.
+      // The five are the whole lifecycle vocabulary: a corridor earning a road, the
+      // two directions of the grade ladder, the last demotion (which §7 calls
+      // Herald-worthy mourning and therefore gives its own word), and a resettled
+      // remnant reopening a way it used to have.
+      eventTypes: Object.freeze([
+        'route_chartered', 'route_promoted', 'route_demoted', 'route_abandoned', 'route_revived',
+      ]),
       // DELIBERATELY EMPTY for the same reason the momentum and supply-web rows keep
       // theirs empty: J1 authors no receipt, and once J3 does, its Herald beats will
       // classify into `knowledge` off the shared `news` token in every wizard-news
@@ -367,7 +372,7 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
       // reading is dispositive rather than shared. Receipt-expressible only from the
       // v5 subsystems.stateKeys census.
       stateKeys: Object.freeze(['spatialLedgers.routeNetwork']),
-      other: 'ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone (routeNetworkLedger.js), with no spatial or war precondition, so a lit preset genuinely asks the question. WHAT J1 DOES: at world-connect it derives the network the realm was born with, from the frozen tradeRouteAccess vocabulary plus the region layer k-nearest selection plus PORTS TOTALITY, and writes it once. WHAT J2 ADDS: the FLOW LEDGER (design section 4). Every pulse it reads the traversals the existing movers have already written for their own reasons (migration columns and roads missions for population, supply shipments plus declared and starving imports for goods, army transit and standing deployments for military) and accrues each onto the corridor when no road serves the pair or onto the edge when one does. It writes no mover state of its own, so the economy and the network can never disagree about what moved. WHAT J2 ALSO ADDS is the first channel this row has that is not a container census: REALM SELF-SUFFICIENCY, a bounded 0..1 metric emitted per pulse into the behavioral observation as the additive yearly field realmSelfSufficiency, carrying provision (does the realm make what it wants), circulation (can a road reach the maker) and sustenance (does it feed itself). WHAT IT STILL DOES NOT DO: no charter, no decay, no removal, no consumers. So a lit J2 receipt reads as a ledger key that materializes at the first tick and then holds its two containers while their CONTENTS accumulate, plus a self-sufficiency series that should improve monotonically absent shocks. A NON-OBVIOUS ZERO: an ASPATIAL realm whose members were all generated isolated derives no edges at all, and writeRouteNetwork drops an empty network rather than persisting empty containers, so the key is legitimately ABSENT on a lit world. That is the isolation-as-fate law (design section 0), not a dead subsystem, and the invariants below are what distinguish the two. A SECOND NON-OBVIOUS ZERO: a realm whose settlements declare no imports at all scores provision and circulation at 1, because a place that needs nothing from anyone is self-sufficient by definition, and reporting 0 for an empty denominator would grade an untouched fixture as a catastrophe. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.routeNetwork, over a case whose realm is spatially canonized and whose members are not uniformly isolated, and whose yearly records carry realmSelfSufficiency.',
+      other: 'ONE GATE, AND THE SLICE BEHIND IT STILL EMITS NO EVENT. routeLifecycleActive is the virtual routeLifecycleEnabled alone (routeNetworkLedger.js), with no spatial or war precondition, so a lit preset genuinely asks the question. WHAT J1 DOES: at world-connect it derives the network the realm was born with, from the frozen tradeRouteAccess vocabulary plus the region layer k-nearest selection plus PORTS TOTALITY, and writes it once. WHAT J2 ADDS: the FLOW LEDGER (design section 4). Every pulse it reads the traversals the existing movers have already written for their own reasons (migration columns and roads missions for population, supply shipments plus declared and starving imports for goods, army transit and standing deployments for military) and accrues each onto the corridor when no road serves the pair or onto the edge when one does. It writes no mover state of its own, so the economy and the network can never disagree about what moved. WHAT J2 ALSO ADDS is the first channel this row has that is not a container census: REALM SELF-SUFFICIENCY, a bounded 0..1 metric emitted per pulse into the behavioral observation as the additive yearly field realmSelfSufficiency, carrying provision (does the realm make what it wants), circulation (can a road reach the maker) and sustenance (does it feed itself). WHAT J3 ADDS: the LIFECYCLE ITSELF (design sections 5b, 5c, 6 and 7). A corridor whose accumulated demand crosses the formation threshold, whose material objective clears its bar once danger and any detour premium are priced into the cost, and whose one-way travel time is inside the expedition-worth ceiling, PROPOSES a charter through the ordinary DM docket and materializes on acceptance at track grade. Charters are NOT guaranteed-admission: their trigger is a corridor demand ledger that persists, so an unadmitted charter simply re-derives with more demand behind it next season. Danger is read through the BELIEVED picture an observer holds rather than through the truth, so a corridor merely feared dangerous defers while a genuinely dangerous one nobody has heard about charters and pays for it later; a corridor whose profit clears a risk premium that rises with the danger charters through it anyway, and the losses that road then takes shorten the patience the decay ladder shows it. Through-roads may pay a detour premium to skirt a place the wagons fear, which is geometry and never a new graph node, and the settlement they skirt measurably loses its through-traffic. The grade ladder then runs both ways on long dwells: sustained recent traffic promotes, prolonged silence with a failing objective demotes, a live strategic need floors an edge at road regardless of trade, and the bottom rung is HIDDEN rather than absence. WHAT IT STILL DOES NOT DO: no consumers, so roamer physics, interdiction and the cartography seeds belong to J4. So a lit J3 receipt reads as a ledger key that materializes at the first tick, holds its two containers while their CONTENTS accumulate, and carries a sparse multi-year series of charter and grade-step events, plus a self-sufficiency series that should improve monotonically absent shocks. A NON-OBVIOUS ZERO: an ASPATIAL realm whose members were all generated isolated derives no edges at all, and writeRouteNetwork drops an empty network rather than persisting empty containers, so the key is legitimately ABSENT on a lit world. That is the isolation-as-fate law (design section 0), not a dead subsystem, and the invariants below are what distinguish the two. A THIRD NON-OBVIOUS ZERO, and J3 is the slice that introduces it: a lit realm can legitimately record ZERO charter events across a whole run. The formation threshold is a multi-year accumulation, the expedition-worth ceiling refuses unreachable pairs outright, and a realm whose genesis network already serves every material want has nothing left to charter. A quiet lifecycle is a settled realm, not a broken one, and the honest reading of a zero here is the state-key channel plus the self-sufficiency series rather than the event channel alone. A SECOND NON-OBVIOUS ZERO: a realm whose settlements declare no imports at all scores provision and circulation at 1, because a place that needs nothing from anyone is self-sufficient by definition, and reporting 0 for an empty denominator would grade an untouched fixture as a catastrophe. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.routeNetwork, over a case whose realm is spatially canonized and whose members are not uniformly isolated, and whose yearly records carry realmSelfSufficiency.',
     }),
     // The network is born once and then, until J3 lands, never moves. Even with the
     // full lifecycle lit, hysteresis (Law 4) and the grade-promotion dwells make a
@@ -395,6 +400,16 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
         description: 'PORTS TOTALITY (design section 6, an owner law) says every port settlement with a navigable counterpart carries at least one water edge. It holds STRUCTURALLY rather than by a repair pass: every ports pair is a member of the bounded candidate set, and a water candidate is minted unconditionally at the section 8 grade instead of being graded by the land access ladder, so no code path can skip it. The census cannot read edge bodies, so the receipt-level shadow of that invariant is the weaker but still falsifiable one: a spatially canonized realm whose digest carries a populated sea-lane set can never come out of genesis with a route ledger that is absent.',
         check: 'For any receipt whose subsystems.rules records routeLifecycleEnabled true and whose realm is spatially canonized with sea lanes, subsystems.stateKeys carries spatialLedgers.routeNetwork. Expressible from the v5 subsystems section plus the canon marker; the edge-level invariant itself is pinned in tests/domain/routeNetworkGenesis.test.js against a built port digest.',
       }),
+      Object.freeze({
+        name: 'nothing_is_forgotten',
+        description: 'LAW 5 (design section 1) says a removal demotes to HIDDEN and never to absence, and J3 implements that by having no removal path at all: the grade ladder floors at hidden, hidden steps nowhere, and no function in the lane deletes an edge. Settlement destruction is the same demotion applied to every edge of the dead settlement in ONE fold, so a half-hidden network cannot be observed. The consequence a receipt can see is that the edge population of a lit realm is MONOTONE NON-DECREASING across a run, whatever the charter and decay events did to the grades inside it.',
+        check: 'For any receipt whose subsystems.rules records routeLifecycleEnabled true and whose stateKeys census carries spatialLedgers.routeNetwork, the route_edges count never falls between consecutive observed years, and no year records route_abandoned without the edge count staying flat or rising. Expressible from the v5 stateKeys census (the spatialUsage route_edges reading) plus eventTypeCounts; the edge-level statement is pinned in tests/domain/routeNetworkDecay.test.js over a four-hundred-week soak.',
+      }),
+      Object.freeze({
+        name: 'the_lifecycle_is_slow_and_does_not_flap',
+        description: 'LAW 4 (hysteresis) and the section 13 stability envelope. Formation demand is more than six times removal demand, a corridor is only evaluated on a quarterly dwell, a promotion requires traffic inside the last season while a demotion requires a year and a half of silence, and a bypass persists half a year after the fear that wore it. Those clocks are what make a network change a story rather than noise, and they are structural rather than tuned: the freshness window a promotion needs lies strictly inside the silence a demotion needs, so no edge can satisfy both rules in the same pass.',
+        check: 'For any receipt whose subsystems.rules records routeLifecycleEnabled true, the summed per-year count of route_chartered, route_promoted, route_demoted, route_abandoned and route_revived is small beside the settlement count and never oscillates between a promotion year and a demotion year for the same realm. Expressible from eventTypeCounts across the yearly records; the per-edge no-reversal statement is pinned in tests/domain/routeNetworkDecay.test.js against an oscillating-demand fixture.',
+      }),
     ]),
     // 'indirect', NOT 'unobserved', and the distinction is the contract's not a
     // shade of meaning. `unobserved` is the ESCAPE HATCH that downgrades a zero
@@ -406,6 +421,68 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
     // make for their identically-shaped lanes: the dispositive channel exists and
     // is instrumented ONLY by the v5 census, and every completed release case is a
     // v4 envelope, so no dispositive reading exists yet.
+    soakEvidence: 'indirect',
+  }),
+  // ── THE MAGIC ECONOMY (W-K, docs/DESIGN_MAGIC_ECONOMY.md §12, §13) ────────
+  // REGISTERED FROM THE FIRST COMMIT, on the same terms as the W-J row above and for
+  // the same mechanical reason: `magicEconomyEnabled` is VIRTUAL (no
+  // DEFAULT_SIMULATION_RULES entry, by design), so until it was declared at FALSE in
+  // the full_simulation spread `simulationRuleKeys()` could not census it and this row
+  // read back as `unknownRows`. The declaration is what puts W-K under the
+  // certification contract now rather than retroactively.
+  Object.freeze({
+    rule: 'magicEconomyEnabled',
+    title: 'Magic economy and institution status',
+    module: 'src/domain/worldPulse/institutionStatusModel.js,src/domain/worldPulse/institutionStatusLifecycle.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY, per the EVIDENCE LAW at the head of this file: every string
+      // here must be traceable to a `candidateType` literal in source. K1 emits status
+      // TRANSITION RECEIPTS (impairment_opened / impairment_lifted / shell_formed /
+      // shell_reactivated), but they are returned from a pure advance and are not yet
+      // minted as pulse candidates, because K1 is not wired into pulseKernel. Declaring
+      // them now would be a certification row describing a candidate type that does not
+      // exist. K2's regime crossings are the first candidates this lane will own.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY for the reason the momentum, supply-web and route rows keep
+      // theirs empty: K1 authors no Herald beat, and once K2 does, its beats classify
+      // into `knowledge` off the shared `news` token that the whole estate feeds, which
+      // can therefore never carry ALIVE for one row.
+      moverFamilies: Object.freeze([]),
+      // The ONE channel this slice has, and it is exact: institutionStatusModel.js is the
+      // single writer of this key (writeInstitutionStatusLedger is the only
+      // setSpatialLedger call for it in the tree) and no other subsystem touches it, so a
+      // census reading is dispositive rather than shared.
+      stateKeys: Object.freeze(['spatialLedgers.institutionStatus']),
+      other: 'ONE GATE, AND THE SLICE BEHIND IT IS MAGIC-INDEPENDENT. magicEconomyActive is the virtual magicEconomyEnabled alone (institutionStatusModel.js), with no magic, spatial or economic precondition, so a lit preset genuinely asks the question. WHAT K1 DOES: it gives every institution in the estate an honest three-word status from the closed vocabulary operational, impaired and shell (design section 3c). IMPAIRED is a cause-bound capacity modifier whose cause is drawn from a closed four-member vocabulary (supply shortage, corruption exposed, damage, siege or occupation), whose default severity per cause is the severity the estate\'s own existing producer already stamps for that mechanism, and which the DM may override anywhere from reduced to a temporarily zero capacity. SHELL is the intact but unfunded verdict, and K1 does NOT mint it: it reads the mark institutionLifecycle already writes at an economic close, so the estate has one spelling of closed rather than two. THE TWO LAYERS COMPOSE, which is why the verdict carries impaired and shell as independent flags beside the single headline word. WHAT IT DOES NOT DO: no regimes, no forms ladder, no disaster buffer, no substitution, and NO PULSE WIRING AT ALL. K1 ships the model, the pure DM override verbs and the pins; the pulseKernel call site, the Herald routing and the DM command belong to later slices. A NON-OBVIOUS ZERO, and it is the important one: a lit world in which every institution is working carries NO ledger key whatsoever. The ledger stores only the durable half of a status, and cause PRESENCE is re-derived from live state on every advance rather than persisted, so a realm with nothing wrong with it has nothing to remember and writeInstitutionStatusLedger drops the key rather than persisting empty containers. That is the no-orphan law made structural (design section 3c: an impairment can NEVER orphan), not a dead subsystem. A SECOND NON-OBVIOUS ZERO: a RUINED institution is graded null rather than given a word, because section 3c calls the impaired shell the darkest state short of ruin, so ruin sits outside this vocabulary and the calamity and lifecycle machinery owns it. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: a v5 receipt whose subsystems.stateKeys census carries spatialLedgers.institutionStatus, over a lit case whose run actually damaged, starved, besieged or defunded at least one institution.',
+    }),
+    // A cause opens and lifts on the fast layer, but the SHELL half is the slow verdict
+    // by construction (institutionLifecycle's close requires a multi-tick decline streak
+    // and is deliberately uncommon), and K2's regime crossings carry hysteresis. So
+    // multi_year is the honest rung in both eras and will not need re-declaring.
+    expectedTempo: 'multi_year',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_ledger_is_gated',
+        description: 'The dormancy gate is one line: applyInstitutionStatus returns the input worldState BY REFERENCE when magicEconomyEnabled is absent, so the ledger key cannot materialize behind a dark switch and a dark world is byte-identical by object identity.',
+        check: 'In any v5 receipt whose subsystems.rules records magicEconomyEnabled false or omits it, subsystems.stateKeys does not carry spatialLedgers.institutionStatus. Expressible from the v5 subsystems section alone, with no behavioral evidence at all.',
+      }),
+      Object.freeze({
+        name: 'no_impairment_without_a_live_cause',
+        description: 'THE NO-ORPHAN LAW (design section 3c). An impairment record can never outlive the cause it is bound to, and the guarantee is structural rather than swept: presence is re-derived from live state on every advance and only the durable half is stored, so a resolved cause drops its record in the same pass that notices, emitting a lift event. The receipt-level shadow of that invariant is a shape claim, because the census cannot read record bodies: the ledger is a memory of trouble, so it can only ever be populated in a run that actually had some.',
+        check: 'For any receipt whose census carries spatialLedgers.institutionStatus, that same receipt records magicEconomyEnabled true. Expressible from the v5 subsystems section alone; the record-level orphan totality is pinned in tests/domain/institutionStatusLifecycle.test.js, which runs auditInstitutionStatusLedger before and after an advance over a hand-orphaned ledger.',
+      }),
+      Object.freeze({
+        name: 'the_ledger_drains_as_well_as_fills',
+        description: 'An impairment lifts automatically when its cause resolves, and a ledger that only ever accumulated would mean the lift path stopped running and every institution kept its first grievance forever. Because the whole key is dropped when the last record clears, a healed realm reads as an ABSENT key rather than as an empty container, which is the same drop-when-empty shape the route network uses.',
+        check: 'For any receipt whose census carries spatialLedgers.institutionStatus over more than one observed year, either maxEntries is strictly greater than finalEntries, or the key years count is below the receipt observedYears. Expressible from the v5 stateKeys census alone.',
+      }),
+    ]),
+    // 'indirect', NOT 'unobserved', on exactly the terms the route-network row states:
+    // the UNOBSERVED escape hatch is a ceilinged, reviewed population, and a
+    // sidecar-only row does not need it because the corpus contract already grades that
+    // SHAPE unobserved on a v4 envelope. The dispositive channel exists and is
+    // instrumented only by the v5 census, and every completed release case is a v4
+    // envelope, so no dispositive reading exists yet.
     soakEvidence: 'indirect',
   }),
 ]);

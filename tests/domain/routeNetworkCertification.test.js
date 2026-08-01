@@ -36,6 +36,13 @@ import { WAVE_SUBSYSTEM_ROWS } from '../../src/domain/certification/subsystemRow
 import { BEHAVIORAL_MOVER_FAMILIES } from '../../src/domain/certification/behavioralContract.js';
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { CHARTER_CANDIDATE_TYPE } from '../../src/domain/worldPulse/routeNetworkCharter.js';
+import {
+  ABANDONMENT_CANDIDATE_TYPE,
+  DEMOTION_CANDIDATE_TYPE,
+  PROMOTION_CANDIDATE_TYPE,
+  REVIVAL_CANDIDATE_TYPE,
+} from '../../src/domain/worldPulse/routeNetworkDecay.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const ROW = WAVE_SUBSYSTEM_ROWS.find(row => row.rule === 'routeLifecycleEnabled');
@@ -82,8 +89,25 @@ describe('J1 the certification row is registered and well shaped', () => {
     expect(ROW.aliveness.stateKeys).toEqual(['spatialLedgers.routeNetwork']);
   });
 
-  it('claims no event type, because J1 emits none (the evidence law)', () => {
-    expect(ROW.aliveness.eventTypes).toEqual([]);
+  it('claims exactly the candidateTypes J3 mints, and every one is in source', () => {
+    // AMENDED BY J3, and the amendment is what the evidence law asks for rather
+    // than a widening: through J1 and J2 this list was EMPTY because those slices
+    // emitted no candidate at all, and J3 is the slice that mints them. Each
+    // string is checked against the constant the emitting module exports, so a
+    // renamed mint cannot leave a stale claim behind in the row.
+    expect([...ROW.aliveness.eventTypes].sort()).toEqual([
+      'route_abandoned', 'route_chartered', 'route_demoted', 'route_promoted', 'route_revived',
+    ]);
+    for (const declared of [
+      CHARTER_CANDIDATE_TYPE, PROMOTION_CANDIDATE_TYPE, DEMOTION_CANDIDATE_TYPE,
+      ABANDONMENT_CANDIDATE_TYPE, REVIVAL_CANDIDATE_TYPE,
+    ]) {
+      expect(ROW.aliveness.eventTypes).toContain(declared);
+    }
+    // The mover families stay empty for the reason the momentum and supply-web
+    // rows keep theirs empty: the Herald beats classify into `knowledge` off the
+    // shared `news` token every wizard-news id carries, so that family can never
+    // carry ALIVE for one row.
     expect(ROW.aliveness.moverFamilies).toEqual([]);
   });
 

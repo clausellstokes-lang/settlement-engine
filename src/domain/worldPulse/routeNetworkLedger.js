@@ -128,6 +128,11 @@ export const PROVENANCE_USER = 'user';
  *   CONDITIONAL key on exactly the pattern `strategicNeed` sets: absent until a
  *   flow walks the edge, so a genesis network serializes without it and the J1
  *   dormancy golden cannot move. J2 writes it; J3's decay reads it.
+ * @property {RouteBypass} [bypass]  the avoidance this edge's wagons currently
+ *   keep (§5c). The SAME conditional-key pattern as `usage`: absent until a
+ *   corridor swings wide of a place it fears, and dropped again when the fear
+ *   lapses, so an edge that never feared anything and an edge whose fear passed
+ *   serialize identically. J3's routeNetworkCharterBypass.js is its single writer.
  */
 
 /**
@@ -153,6 +158,25 @@ export const PROVENANCE_USER = 'user';
  * @property {Record<string, ReadonlyArray<string>>} receipts  class to source names
  * @property {ReadonlyArray<string>} [reasonGoods]  the goods-denominated reason,
  *   present only when a goods flow named one
+ */
+
+/**
+ * THE BYPASS an edge carries (§5c, J3 writes it). The PERSISTED half of a corridor
+ * whose wagons refuse a place they fear: the avoidance set, when it was first worn,
+ * when the fear was last actually observed (the hysteresis clock), and what swinging
+ * wide costs. The GEOMETRY that avoidance implies is never stored, exactly as Law 1
+ * above requires: a consumer that needs the detour asks the digest for it.
+ *
+ * The shape lives HERE rather than in the writer for the same reason `FlowAccrual`
+ * does: this module owns what a persisted edge IS, so every conditional sub-shape an
+ * edge can carry has exactly one spelling, and a reader can type a whole edge without
+ * importing the slice that happened to write one of its keys.
+ *
+ * @typedef {Object} RouteBypass
+ * @property {ReadonlyArray<string>} avoid  the places the wagons refuse, codepoint sorted
+ * @property {number} sinceTick        when this bypass was first worn
+ * @property {number} lastDangerTick   the last tick the fear was actually observed
+ * @property {number} detourPremium01  what swinging wide costs, 0..1
  */
 
 /**
@@ -467,6 +491,42 @@ export function withCorridors(network, corridors) {
     edges: base.edges || {},
     corridor: sortedRecord({ ...(base.corridor || {}), ...incoming }),
   };
+}
+
+/**
+ * RETIRE corridor records by id (W-J slice J3).
+ *
+ * The one deletion this model allows, and it is deliberately narrow. A corridor
+ * is the ACCUMULATION of a want; when a charter answers that want the road
+ * becomes the record of it, and J2's accrual then routes every further traversal
+ * onto the edge rather than the pair. Leaving the spent corridor behind would
+ * park a frozen demand number next to a road that is already serving it, and any
+ * later evaluation reading that number would be double-counting a want the realm
+ * already met.
+ *
+ * NOTHING ELSE IS DELETABLE HERE, and the asymmetry is Law 5. An EDGE is never
+ * removed by anything in this estate: decay's floor is `hidden`, so a road that
+ * the realm stops walking becomes a remnant rather than an absence. A corridor is
+ * not a road and has no remnant to be.
+ *
+ * @param {RouteNetwork} network
+ * @param {ReadonlyArray<string>} corridorIds
+ * @returns {RouteNetwork}
+ */
+export function withoutCorridors(network, corridorIds) {
+  const base = network && typeof network === 'object' ? network : emptyRouteNetwork();
+  const doomed = new Set((corridorIds || []).map(String));
+  if (doomed.size === 0) return base;
+  const corridor = base.corridor || {};
+  /** @type {Record<string, CorridorDemand>} */
+  const next = {};
+  let removed = 0;
+  for (const id of Object.keys(corridor).sort()) {
+    if (doomed.has(id)) { removed += 1; continue; }
+    next[id] = corridor[id];
+  }
+  if (removed === 0) return base;
+  return { edges: base.edges || {}, corridor: next };
 }
 
 /**
