@@ -58,7 +58,7 @@ function partitionThreads(threads = [], mineIds = new Set()) {
   return { mine, elsewhere };
 }
 
-function MetaPill({ children, tone = 'neutral' }) {
+function MetaPill({ children, tone = 'neutral', wrap = false }) {
   const bg = tone === 'major' ? GOLD_BG : tone === 'good' ? swatch.successBg : CARD_ALT;
   const color = tone === 'major' ? GOLD : tone === 'good' ? GREEN : SECOND;
   return (
@@ -73,7 +73,12 @@ function MetaPill({ children, tone = 'neutral' }) {
       fontFamily: sans,
       fontSize: FS.xxs,
       fontWeight: 800,
-      whiteSpace: 'nowrap',
+      // `wrap` exists for the REASONS pills: the late-lane authors (momentum, webwar,
+      // infowar) write full multi-clause sentences into `reasons` — the recorded-reason
+      // half of the NEWS ADDRESS LAW — and a nowrap pill turns a sentence into an
+      // overflow scar. Token pills (tick, kind, severity) keep the nowrap default.
+      whiteSpace: wrap ? 'normal' : 'nowrap',
+      ...(wrap ? { textAlign: 'left', overflowWrap: 'anywhere' } : {}),
     }}>
       {children}
     </span>
@@ -215,7 +220,7 @@ function NewsEntry({ entry, compact = false }) {
           <MetaPill>{human(entry.kind)}</MetaPill>
           <MetaPill>Severity {percent(entry.severity)}</MetaPill>
           {reasonPhrases.slice(0, 3).map(reason => (
-            <MetaPill key={reason} tone={major ? 'major' : 'neutral'}>{reason}</MetaPill>
+            <MetaPill key={reason} tone={major ? 'major' : 'neutral'} wrap>{reason}</MetaPill>
           ))}
         </div>
       </div>

@@ -117,6 +117,36 @@ export const KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS = Object.freeze([
 ]);
 
 /**
+ * The SIBLING census the impactKind list above cannot see: KIND-ONLY producers.
+ * The late-lane authors (momentum, supply-web warfare, information statecraft)
+ * mint their routing token AS `kind` and set no impactKind at all, so when their
+ * receipts gained ids on 2026-07-31 and started reaching the observation, the
+ * impactKind census silently under-counted the residual bucket. Same contract,
+ * same honesty rule: each of these lands in `knowledge` ONLY through the `news`
+ * token in its wizard-news id (verified by executing moverFamilyOf, not by
+ * reading token lists), so a nonzero knowledge count is never one row's
+ * evidence while either list is non-empty.
+ *
+ * Deliberately EXCLUDED, with the executed reason:
+ *   - webwar_raid: `raid` is a war token, so it classifies `war` on its own
+ *     vocabulary — a real (if coarse) family, not residual.
+ *   - intel_transfer: `intel` is a knowledge token, so it classifies knowledge
+ *     WITHOUT its id — the one late-lane beat whose knowledge filing is
+ *     semantically earned (intelligence changing hands).
+ *   - treaty_signed: carries impactKind `diplomacy`, already censused above.
+ * @type {ReadonlyArray<string>}
+ */
+export const KNOWLEDGE_FAMILY_RESIDUAL_KINDS = Object.freeze([
+  'infowar_lie_exposed',
+  'infowar_spy_exposed',
+  'momentum_climb_down',
+  'webwar_campaign_abandoned',
+  'webwar_campaign_complete',
+  'webwar_campaign_minted',
+  'webwar_wrong_village',
+]);
+
+/**
  * Where the belief-versus-ground-truth metric lives in a soak receipt. Added to
  * the per-year observation on 2026-07-31 because the info regime (infoMode) had
  * no measurable consequence anywhere in the envelope: a run could carry

@@ -34,6 +34,7 @@ import {
 } from '../../src/domain/certification/subsystemCertification.js';
 import {
   KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS,
+  KNOWLEDGE_FAMILY_RESIDUAL_KINDS,
   KNOWLEDGE_LANE_EVENT_TYPES,
   KNOWLEDGE_LANE_STATE_KEYS,
 } from '../../src/domain/certification/knowledgeLaneEvidence.js';
@@ -224,6 +225,27 @@ describe('the knowledge-lane evidence catalog', () => {
         `${kind} with its wizard-news id`,
       ).toBe('knowledge');
     }
+  });
+
+  test('the KIND-ONLY residual sibling holds the same proof, and its exclusions are executed facts', () => {
+    // The late-lane authors (momentum, supply-web warfare, information statecraft)
+    // mint their routing token AS `kind` with no impactKind, so the impactKind
+    // census above cannot see them; this sibling carries the identical residual
+    // proof on the `kind` field.
+    for (const kind of KNOWLEDGE_FAMILY_RESIDUAL_KINDS) {
+      expect(moverFamilyOf({ kind }), `${kind} on its own`).toBeNull();
+      expect(
+        moverFamilyOf({ kind, id: `wizard_news.5.${kind}.actor.target` }),
+        `${kind} with its wizard-news id`,
+      ).toBe('knowledge');
+    }
+    // The catalog's three EXCLUSIONS are claims about the classifier, so they are
+    // executed rather than trusted: raid is `war` on its own vocabulary, intel is
+    // `knowledge` on its own vocabulary (the one earned filing), and the treaty
+    // beat is censused through its impactKind in the list above.
+    expect(moverFamilyOf({ kind: 'webwar_raid' })).toBe('war');
+    expect(moverFamilyOf({ kind: 'intel_transfer' })).toBe('knowledge');
+    expect(KNOWLEDGE_FAMILY_RESIDUAL_IMPACT_KINDS).toContain('diplomacy');
   });
 
   test('every catalogued knowledge container still has its literal-key writer', () => {

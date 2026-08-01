@@ -139,6 +139,13 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   // machinery as the generosity beats above (see the war-section note for the cohort).
   intel_transfer: 'trade',
   relationship_label_change: 'trade', diplomacy_trade: 'trade', treaty_signed: 'trade',
+  // Bare `diplomacy` has exactly ONE producer: the treaty signing beat (peaceTerms.js
+  // signingBeat, impactKind 'diplomacy'). Routing law reads impactKind before kind, so
+  // this key — not the treaty_signed row above — decides where a signed treaty files.
+  // Moved from `events` on 2026-07-31 so BOTH of the beat's keys agree on `trade`
+  // (terms, tribute, and trade normalization are what a treaty actually changes); the
+  // letter-precedent divergence is recorded in KIND_SECTION_DIVERGENCES below.
+  diplomacy: 'trade',
   strategy_embargo: 'trade', strategy_reroute: 'trade', strategy_credit: 'trade',
   compound_calling_of_debts: 'trade',
   // wizardNews IMPACT_LABELS (dynamic `impactKind: impact.kind`) — the trade-side.
@@ -181,7 +188,7 @@ export const EXACT_SECTION = Object.freeze(/** @type {Record<string, HeraldSecti
   faction_institution_capture: 'events', faction_service_bolster: 'events',
   faction_law_preference_push: 'events', institution_suppression: 'events', institution_capture: 'events',
   government_change: 'events', hierarchy_cascade: 'events', assize_verdict: 'events',
-  diplomacy: 'events', reconsideration_forced: 'events', criminal_network: 'events',
+  reconsideration_forced: 'events', criminal_network: 'events',
   commons_gathering: 'events', commons_petition: 'events', commons_riot: 'events',
   npc_action: 'events', npc_goal_culmination: 'events', npc_goal_rebranch: 'events',
   npc_growth: 'events', npc_ladder: 'events', npc_contest: 'events', npc_support: 'events',
@@ -412,6 +419,12 @@ export const KIND_SECTION_DIVERGENCES = Object.freeze(/** @type {Record<string, 
   // KIND_SECTION filed this under `courts`; a tribute extraction is an economic
   // relation, so the Herald files it under trade (JUDGMENT, vetoable).
   vassal_tribute_extraction: 'trade',
+  // KIND_SECTION filed this under `courts`; the Herald reads a signed treaty by what
+  // it changes — terms, tribute, trade normalization — and its ONLY producer is the
+  // treaty signing beat, whose kind-row (treaty_signed) already files trade. Both of
+  // the beat's routing keys now agree (JUDGMENT 2026-07-31, vetoable; queued for
+  // Fable re-examination in docs/FABLE_VALIDATION_QUEUE.md).
+  diplomacy: 'trade',
   // NB: cause_lifecycle and moral_reckoning are `traditions` keys, and `traditions`
   // is a documented SPLIT (faith | events) — routing them to events is a split
   // outcome, not a divergence, so they are deliberately NOT listed here.
