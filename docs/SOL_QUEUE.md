@@ -100,6 +100,13 @@ volumes corrected @ 36862650 + fdf43790):
     finds wanting or unspecced is a STOP-and-report, never a silent rewrite.
     The annex headers carry the slot convention; volume exemplars are variant
     1 verbatim wherever the volume speaks one.
+23. **THE REALM MAGIC TOGGLE** (DESIGN_REALM_MAGIC_TOGGLE.md, 2026-08-02) —
+    MG-1 the pre-generation modal + fourth realm knob → MG-2 the projection
+    into every member's config at mint (the core: one spread, whole-lifecycle
+    correctness by inheritance) → MG-3 the twelve-leak closure register
+    (REPRODUCE-FIRST each) → MG-4 realm-scope dead-magic pins + the
+    twin-world not-thinner envelope. Chair checkpoints in its §6; the
+    divine-effects ruling (MG-LAW-2) is vetoable owner surface.
 
 ## §3 CHAIR CHECKPOINTS (report, don't rule — the chair answers fast)
 
