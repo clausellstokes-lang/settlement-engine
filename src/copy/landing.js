@@ -211,16 +211,6 @@ export const landing = {
     fullPricing: 'Full pricing',
   },
 
-  // ── The journey (Slice C2, THE FILM RULING) ──────────────────────────────────
-  // Framing copy for the travel-and-stop film that carries the Welcome. The
-  // town-stop caption lands after the growth film has scrubbed desk → town — the
-  // one line the owner named for stop 4 ("you have just watched this town grow").
-  // Rendered as the eyebrow to §04 The Realm (the LivingWorld stop); present in
-  // the stills journey too, since the stop stills are the growth arc's floor.
-  journey: {
-    townGrew: 'You have just watched this town grow.',
-  },
-
   // ── Footer ──────────────────────────────────────────────────────────────────
   footer: {
     brand:   'settlementforge',

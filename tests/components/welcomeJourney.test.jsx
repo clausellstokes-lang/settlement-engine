@@ -65,10 +65,9 @@ describe('THE WELCOME FLOOR — the journey renders from stills, film absent', (
     expect([...legs].map((l) => l.getAttribute('data-welcome-leg'))).toEqual(['0', '1', '2', '3', '4', '5']);
   });
 
-  test('the town-stop caption (THE FILM RULING) renders at the living-world stop', async () => {
-    renderLanding();
-    expect(await screen.findByText(landing.journey.townGrew)).toBeTruthy();
-  });
+  // The town-stop caption pin was RETIRED 2026-08-01 by owner order ("remove
+  // 'You have just watched this town grow.'") — the ruling that added it (THE
+  // FILM RULING's stop-4 line) is superseded; copy + render + pin removed together.
 
   test('every section CTA is present and functional before any video byte', async () => {
     renderLanding();

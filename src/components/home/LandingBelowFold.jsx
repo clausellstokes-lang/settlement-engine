@@ -414,15 +414,6 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         className="sf-landing-scene-cream"
         style={{ ...pad }}
       >
-        {/* THE FILM RULING (owner): the town-stop caption — the film has just
-            scrubbed desk → town, so the world is alive before "make it canon". */}
-        <p style={{
-          maxWidth: CONTENT_MAX, margin: `0 auto ${SP.md}px`, textAlign: 'center',
-          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.1em',
-          textTransform: 'uppercase', color: GOLD_DEEP,
-        }}>
-          {tl('journey.townGrew')}
-        </p>
         <Waypoint pill={tl('realm.waypoint')} goldPill={tl('realm.waypointPill')} />
         <div style={twoColGrid(28)}>
           <div style={panelStyle}>
