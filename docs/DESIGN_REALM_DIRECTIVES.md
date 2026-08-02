@@ -1474,6 +1474,50 @@ under a header that still said seven, and directive 11 was filed between 9 and
    route-hop per tick, only on routes connected to their current settlement, and may
    be MID-ROUTE at any pause (the armyTransit ledger pattern).
 
+12. THE AGE TOGGLE (added 2026-08-02, owner dictation — the realm's climate under
+    the sovereign hand): a per-campaign three-state control — REALM AT WAR ·
+    REALM AT PEACE · ORGANIC DYNAMISM (the current default). ⭐ THE SEMANTICS ARE
+    CONVERGENCE, NEVER SWITCH (owner, verbatim intent): "it is not a switch to
+    end a war or to end a peace — it is a convergence from whatever the state is
+    at to those end goals." Realm at War converges the map toward an age of war —
+    war commonplace ON AVERAGE, two or more coalitions in conflict — without
+    conscripting any settlement. Realm at Peace converges to peacetime WITHOUT
+    killing drama: the other foreign-policy layers take the stage and economies
+    follow. Dynamism = the organic equilibrium as built.
+
+- **J-D12 (the age toggle — Fable architecture, veto open):**
+  (a) THE MECHANISM IS CLIMATE, NEVER FABRICATION: the toggle applies a named
+  BAND-FAMILY PRESET over the EXISTING force/counterforce ledgers, symmetric and
+  receipted — under Realm at War: grievance decay slows (grudges linger), peace
+  willingness thresholds rise, sunk-cost bites harder, martial channels learn
+  faster from victory; under Realm at Peace the inverse: grievances decay
+  faster, mediation reaches further, war-weariness accrues sooner, and the
+  trade/faith/population/information propensities LIFT (the FP corpus is what
+  makes a peace age an AGE rather than an absence). NO war is ever minted
+  without its casus (amendment B absolute); the climate lowers or raises BARS —
+  the E3 threshold idiom at realm scale, which makes this ruling one sentence:
+  ⭐ THE AGE TOGGLE IS THE DISPOSITION SYSTEM AT REALM SCALE, WITH THE DM'S HAND
+  ON IT — the sovereign-hand law applied to climate.
+  (b) CONVERGENCE PHYSICS: the preset applies as a DRIFT with its own dwell
+  (the two-timescale law — the climate changes slowly; in-flight wars and
+  peaces resolve under increasingly tilted forces, never cut); era transitions
+  are hysteresis-guarded (no flapping) and RECEIPTED AS ERA EVENTS in the
+  Herald's grandest register ("The realm darkens; old grudges are remembered" /
+  "The long peace begins; the roads grow busy") — the age turning is among the
+  biggest sentences the product can say.
+  (c) THE TARGET IS MEASURED, NEVER ENFORCED: Realm at War's two-plus-coalitions
+  state is the climate's EXPECTED equilibrium, verified by per-era envelopes
+  (the WR-9 discipline gains era variants: the war-age story mix ≠ the
+  peace-age mix, BOTH measured against monotony — a peace age that goes quiet
+  is a tuning red exactly as a war age that goes total). If the realm fails to
+  converge, the bands are wrong — the cure is tuning, never a forced spawn.
+  (d) THE PROMISE HOLDS: the toggle is a versioned campaign rules setting
+  (the autoResolve precedent) — same seed + same toggle history = same world,
+  byte-exact; flips are DM authorship, receipted, never engine mutation.
+  (e) Joins the FP corpus as its era layer (cross-wired after the audit lands);
+  dossier round-trip: each settlement's page reads the age through its own
+  posture ("the age is dark; Cnocby keeps its walls manned").
+
 10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
     each buffer catastrophe individually, and their COMBINATION is the strong buffer:
     damage reduction against, repair acceleration following. THE DEPENDENCY ASYMMETRY
