@@ -227,6 +227,29 @@ authored here so "SP-N landed" resolves corpus-wide.]
   volume-local band that is neither significance nor severity declares
   itself volume-local in its tuning table row — the owner signs one scale
   per family plus assignments, never a dozen scales.
+
+  **THE CONTENT-DEPTH FLOOR + THE REPETITION ENVELOPE [CHAIR AMENDMENT
+  2026-08-02 under full owner delegation — vetoable; from the owner's
+  question "is there enough content, with enough variability?"]:** the
+  volumes spec KINDS and exemplar sentences; the pools are build-time
+  authoring, and depth was hoped, not lawed — the measured cautionary tale
+  is the ~11-string hook pools' 8.19%/35% repeat rates. Two rules cure it:
+  (1) **THE FLOOR** — every phrased kind ships a seeded variant pool of AT
+  LEAST FOUR templates (the war volume's WAR_RECEIPTS shape, seeded
+  per-entity so same-seed worlds keep their sentences), and the kind's
+  WHAT_PHRASES registration walker asserts the floor — a two-variant kind
+  reds the gate exactly as an unregistered one does; exemplar sentences in
+  the volumes are the pool's FIRST member, never its whole. (2) **THE
+  ENVELOPE** — the soak harness gains a PHRASE-REPETITION instrument (the
+  hook program's repeat-rate discipline generalized): rendered-sentence
+  repeats per settlement per season-window land under an authored band,
+  with a mutant negative control (collapse a pool to one variant, prove
+  the envelope reds). Slot variety is not depth: two templates differing
+  only in slot fills are ONE family for the floor's count (the hook
+  family-id discipline applies). Variability is thereby measured on every
+  soak, never assumed — and the authoring bill this creates for Sol is
+  priced, deliberate, and small per kind (three more sentences than the
+  exemplar, in the house voice, at the register floor).
 - **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
   mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six.
 - **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
