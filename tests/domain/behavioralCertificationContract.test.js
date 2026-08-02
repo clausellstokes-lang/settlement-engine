@@ -168,6 +168,20 @@ function passingInput() {
   };
 }
 
+function distributeReleaseWarFlagCoverage(receipts) {
+  const releaseReceipts = receipts.filter(
+    (receipt) => receipt.years === CERTIFICATION_HORIZONS.release.years,
+  );
+  for (const [caseIndex, receipt] of releaseReceipts.entries()) {
+    for (const [flagIndex, row] of receipt.warConvergence.flagCertificationRows.entries()) {
+      const aliveHere = caseIndex === flagIndex % releaseReceipts.length;
+      row.ruleState = aliveHere ? 'on' : 'off';
+      row.verdict = aliveHere ? 'ALIVE' : 'DORMANT_BY_CONFIG';
+    }
+  }
+  return releaseReceipts;
+}
+
 describe('behavioral certification contract', () => {
   it('fixes the useful, release, and research horizon roles', () => {
     expect(BEHAVIORAL_CONTRACT_VERSION).toBe(5);
@@ -255,6 +269,52 @@ describe('behavioral certification contract', () => {
       'war_convergence.non_vacuous',
       'war_convergence.flag_coverage',
     ]));
+  });
+
+  it('accepts flag life distributed across release cases without requiring every flag on everywhere', () => {
+    const input = passingInput();
+    const releaseReceipts = distributeReleaseWarFlagCoverage(input.receipts);
+    expect(releaseReceipts).toHaveLength(2);
+
+    const result = evaluateBehavioralCertification(input);
+    const coverage = result.checks.find((check) => check.id === 'war_convergence.flag_coverage');
+    expect(coverage).toMatchObject({
+      passed: true,
+      threshold: { minAliveCasesPerFlag: 1, maxUnobservedCasesPerFlag: 0 },
+    });
+    expect(coverage.threshold).toEqual({ minAliveCasesPerFlag: 1, maxUnobservedCasesPerFlag: 0 });
+    for (const rule of WAR_RULINGS_FLAG_KEYS) {
+      expect(coverage.observed.flags[rule]).toEqual({
+        on: 1,
+        alive: 1,
+        silent: 0,
+        unobserved: 0,
+      });
+    }
+    expect(result.propertiesEarned).toContain('war_convergence_instrumented');
+  });
+
+  it('rejects one unobserved release case even when the same flag is alive elsewhere', () => {
+    const input = passingInput();
+    const releaseReceipts = distributeReleaseWarFlagCoverage(input.receipts);
+    const rule = WAR_RULINGS_FLAG_KEYS[0];
+    const unobserved = releaseReceipts[1].warConvergence.flagCertificationRows
+      .find((row) => row.rule === rule);
+    unobserved.ruleState = 'unknown';
+    unobserved.verdict = 'UNOBSERVED';
+
+    const result = evaluateBehavioralCertification(input);
+    const nonVacuous = result.checks.find((check) => check.id === 'war_convergence.non_vacuous');
+    const coverage = result.checks.find((check) => check.id === 'war_convergence.flag_coverage');
+    expect(nonVacuous.passed).toBe(true);
+    expect(coverage.passed).toBe(false);
+    expect(coverage.observed.flags[rule]).toMatchObject({ alive: 1, unobserved: 1 });
+    expectAbsentWithAnchor(
+      result.propertiesEarned,
+      'war_convergence_instrumented',
+      'event_tempo_diversity',
+      'an ALIVE sibling cannot conceal an UNOBSERVED release case',
+    );
   });
 
   it('fails closed when a mover goes dark in the final decade', () => {

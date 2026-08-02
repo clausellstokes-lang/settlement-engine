@@ -776,6 +776,26 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   verification passed 364/364. No golden, snapshot, flag, lighting state, or soak
   artifact changed.
 
+### Addendum implementation receipt — WR FLAG-COVERAGE SEMANTICS LANDED (2026-08-02)
+
+- **Coverage now measures the release matrix instead of demanding universal
+  activation.** Each of the seven WR flags must earn `ALIVE` in at least one release
+  case and must earn `UNOBSERVED` in none. Another case may honestly carry
+  `off` / `DORMANT_BY_CONFIG`; its `on` count remains inspectable diagnostics but is
+  no longer a pass condition.
+- **Both loopholes are executed closed.** A two-case fixture distributes the seven
+  flags so every row is alive exactly once and dormant exactly once, and earns the WR
+  property. A sibling fixture keeps one flag alive in one case but makes it unknown /
+  unobserved in the other; non-vacuous war evidence still passes while flag coverage
+  and the WR property fail. The existing all-silent fixture still fails because no
+  flag earned life anywhere.
+- **Verification:** the focused certification matrix passed 39/39; targeted ESLint
+  and `git diff --check` passed. The complete repository gate began and ended at
+  `b6598624`: 2,114 test files passed, one skipped; 22,399 tests passed, 54 skipped.
+  Production build completed, prerender wrote 311 route documents, and distribution
+  verification passed 364/364. No schema, collector, feature state, required-property
+  membership, golden, snapshot, lighting state, or soak artifact changed.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates
@@ -802,10 +822,11 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   `war_convergence_instrumented` was appended to SOAK_PROPERTIES and
   `CERTIFICATION_REQUIRED_PROPERTY_KEYS = SOAK_PROPERTY_KEYS`
   (certificationSchema.js:74/:85), making it a HARD requirement of every
-  `certified` band — not an optional extra property. flag_coverage demands every
-  one of the seven WR_RULINGS_FLAG_KEYS on + alive + observed in EVERY release case
-  (warConvergenceContract.js:323-332), and the whole-world collector still writes
-  deliberately-failing empty observations. Net effect: no band can certify until
+  `certified` band — not an optional extra property. `flag_coverage` demands every
+  one of the seven `WAR_RULINGS_FLAG_KEYS` be ALIVE in at least one release case and
+  UNOBSERVED in none; other release cases may honestly report `off` /
+  `DORMANT_BY_CONFIG`. The whole-world collector still writes deliberately-failing
+  empty observations. Net effect: no band can certify until
   the entire WR-1..WR-10 program lands and lights. That is a release-posture
   change; it is recorded HERE, vetoably, for owner ratification — it was ruled
   nowhere before this correction (see the audit's unresolved ledger for the

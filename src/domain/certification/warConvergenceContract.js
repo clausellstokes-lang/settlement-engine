@@ -100,7 +100,7 @@ export function createEmptyWarConvergenceObservation() {
  * Validate one additive v5 WR-9 observation. This is a shape and totality wall,
  * not an envelope oracle: it proves that every ending, deciding term, and WR
  * feature flag has an address. The behavioral evaluator separately refuses
- * vacuous histograms and unobserved/lit-silent flag coverage.
+ * vacuous histograms and unobserved/all-silent flag coverage.
  *
  * @param {unknown} raw
  * @returns {{ ok: boolean, errors: string[], observation: UnknownRecord|null }}
@@ -290,8 +290,7 @@ export function evaluateWarConvergenceInstrumentation(
   const decidingTermsObserved = sumCounts(decidingTermTotals);
   const flagCoveragePassed = shapePassed && WAR_RULINGS_FLAG_KEYS.every((rule) => {
     const totals = flagTotals[rule];
-    return totals.on === receipts.length
-      && totals.alive > 0
+    return totals.alive > 0
       && totals.unobserved === 0;
   });
   return [
@@ -322,11 +321,10 @@ export function evaluateWarConvergenceInstrumentation(
     },
     {
       id: 'war_convergence.flag_coverage',
-      label: 'every WR feature flag is lit, observed, and alive somewhere in the release matrix',
+      label: 'every WR feature flag is alive somewhere and never unobserved in the release matrix',
       passed: flagCoveragePassed,
       observed: { cases: receipts.length, flags: flagTotals },
       threshold: {
-        requiredRuleState: 'on in every release case',
         minAliveCasesPerFlag: 1,
         maxUnobservedCasesPerFlag: 0,
       },
