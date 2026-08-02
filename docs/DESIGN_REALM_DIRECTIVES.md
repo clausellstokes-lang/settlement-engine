@@ -1052,7 +1052,12 @@
 >   fire and the victor walks home. The intent read rides N3's machinery unchanged:
 >   disposition (E2's martial channel), ALIGNMENT (the evil axis reaches for this
 >   naturally; a good realm almost never — reachable only through N3's deception road,
->   the righteous atrocity), the ruler's own books (G: terror as a seat's deterrence
+>   the righteous atrocity) [SUPERSEDED IN PART by R2 — noted 2026-08-02
+>   (self-audit): initiation is evil-exclusive ABSOLUTELY — no pressure, no
+>   deception, no dice sequence opens razing initiation to a non-evil
+>   settlement; the deception road survives ONLY as the false-license path
+>   R2/J-WR-7 defers. R's text stands as dictated; R2 governs.], the ruler's
+>   own books (G: terror as a seat's deterrence
 >   policy), and the relationship extreme as the gate's precondition.
 >   ── THE GATE IS DOUBLE, AND THE NEGATIVE CASE PINS HARDEST (the N discipline): the
 >   relationship at its authored EXTREME band AND a won siege, weighted through
@@ -1078,7 +1083,19 @@
 >   the state; demotion rides the EXISTING calamity-demotion path (popToTier) reading
 >   the new truth — never a second writer on the tier transition (the §0b law).
 >   Whether one tier falls or two derives from sack severity (margin, brutality of
->   character, what the defenses absorbed) — a tuning band, not a coin. Institutions
+>   character, what the defenses absorbed) — a tuning band, not a coin. [CORRECTED
+>   2026-08-02 (self-audit) — THE DERIVATION INVERTS. A fraction-first sack
+>   cannot author "one or two": popToTier is a pure population→band map, so at
+>   any fixed death fraction the rungs lost depend on where in its band the
+>   victim happened to sit (executed counterexamples run from zero rungs to
+>   three). BINDING: SEVERITY PICKS THE TARGET RUNG — the sack-severity read
+>   (margin × brutality of character × what the defenses absorbed, banded per
+>   the owner's clause) chooses the target tier, one or two below current — and
+>   the death fraction DERIVES as whatever lands the surviving population
+>   inside that band: conservation-exact, still written through the ONE
+>   popToTier-reading path (never a second writer on the transition), with the
+>   banded escape share riding unchanged on top. The fraction-first model is
+>   RETIRED.] Institutions
 >   take damage-impairment or shell per K1's vocabulary; what stands, stands dark —
 >   the infrastructure-remembers law makes the razed city's recovery arc REAL: a town
 >   with a city's quiet towers, the saddest and best map this engine can draw.
@@ -1092,7 +1109,16 @@
 >   kin, moral drift on the razer (lawful razers drift hard), faith consequences,
 >   and E2's loop honestly learning the dark lesson that razing worked — which is
 >   the feedback that makes an evil realm MORE likely to raze again, as it should
->   be, and which the counterforces above exist to answer.
+>   be, and which the counterforces above exist to answer. [Substrate note
+>   2026-08-02 (self-audit): "every piece of that ledger already exists"
+>   overstates ONE piece — the atrocity-coalition casus is NOT in the
+>   walker-enforced war-reason taxonomy today (13 causes, no
+>   atrocity/moral-outrage entry; totality + bijection enforcement means it
+>   cannot land without an authored peace mirror and a J-WR name ruling). It is
+>   NEW work, homed with WR-8 in the war volume; whether it mints a new casus
+>   pair or rides `grievance` at extreme magnitude is ruled there, not here.
+>   Revanchism, moral drift (moralDrift.js), faith consequences and E2's loop
+>   are verified present.]
 >   ── WHAT SELF-LIMITS IT, with no pacifism term anywhere: ash pays no tribute. The
 >   sack yields one-time plunder against conquest's territory and terms' streams of
 >   years — the material logic already prices punishment as the expensive luxury it
@@ -1195,7 +1221,13 @@
 >   war). One instrument class, one ledger, one compliance machinery, one
 >   document the DM reads — a peacetime sale for grain and a wartime cession to
 >   buy peace are the SAME artifact with different term compositions. No new
->   negotiation layer exists anywhere in this amendment.
+>   negotiation layer exists anywhere in this amendment. [CORRECTED 2026-08-02
+>   (self-audit), scoped precisely: the market REUSES the term CATALOG, the
+>   stacking, and the appraisal lens; the war-side margin-derived term budget
+>   (termBudgetFor) is NOT reused — a peacetime sale has no war and no margin
+>   to mint one from. The two-sided clearing rule (reconciled below, at THE
+>   BUNDLE) IS the market's quantity mechanism. "No new artifact, no new
+>   ledger" remains exactly true; that is the sentence to build from.]
 >   ── ⭐ THE PRICE IS DENOMINATED IN WHAT EXISTS (there is NO settlement
 >   treasury — verified; prosperity is a label, not a stock): immediate stores
 >   transfer + years-long streams + concession riders. "Immediate but a loss
@@ -1224,7 +1256,23 @@
 >   to a hungry one, trade rights to a mercantile one — so an inappropriate
 >   offer (missionary access to a court that does not care) simply never
 >   clears. Situation and belief price everything; nothing is forbidden by
->   fiat, and nothing absurd clears by accident.
+>   fiat, and nothing absurd clears by accident. [RECONCILED 2026-08-02
+>   (self-audit): the amendment states the clearing rule two ways — "seller's
+>   reserve under buyer's ceiling" (VALUATION IS BELIEF, above) and "the buyer
+>   stacks terms until the seller's believed valuation of the whole bundle
+>   clears its reserve" (here). The second alone tests only the seller's
+>   belief on both sides of the comparison, so every stacked offer would
+>   eventually clear and overpayment would be the guaranteed outcome rather
+>   than the characterful one. BINDING: CLEARING IS TWO-SIDED — a trade clears
+>   only when (i) the SELLER's own-lens believed value of the BUNDLE ≥ the
+>   seller's reserve for the asset, AND (ii) the BUYER's own-lens believed
+>   value of the ASSET ≥ the buyer's own-lens cost of the bundle. Both sides
+>   are beliefs; K3 governs absolutely. A bundle that cannot satisfy both
+>   sides never clears — the no-trade outcome is receipted (the whitePeace
+>   shape: the machinery ran and produced nothing). WR-10's "The bundle"
+>   bullet in DESIGN_WAR_RULINGS_ARCHITECTURE.md carries the build-facing
+>   statement of this same rule ("ceiling reached before reserve met" is
+>   condition (ii) failing) — verified identical 2026-08-02 (self-audit).]
 >   ── ⭐ THE TRUE LONG-TERM COST EMERGES, NEVER A FORMULA: a parent that sells
 >   its satellite has sold its overflow valve (the demographic §5), its food
 >   stream, its reinforcement depth, its strategic position. Belief projects;
@@ -1284,7 +1332,13 @@
 >   adopted as the wave's certification contract.
 > - ⭐⭐ 2026-08-01 (THE FABLE VALIDATION PASS — the Fable-capable account arrived;
 >   pause over). ALL 33 queue rows RULED (27 confirmed / 6 adjusted / 0 engineering
->   reversals — verdict table + new chair rows in FABLE_VALIDATION_QUEUE.md), the
+>   reversals — verdict table + new chair rows in FABLE_VALIDATION_QUEUE.md)
+>   [CORRECTED 2026-08-02 (self-audit): the mechanical count is 26 confirmed
+>   outright / 6 adjusted / 1 escalation RULED in-table (the neighbour-mirror
+>   row) — a 27+6+2 split cannot sum over 33 rows. The second escalation pair
+>   (desert lock + SATURATION_POP divergence) was raised BY the pass and
+>   owner-ruled in the queue's later chair row. Zero engineering reversals
+>   stands.], the
 >   W1 goldens ADJUDICATED LEGITIMATE (re-record authorized, isolation-proof), the
 >   neighbour-mirror escalation RULED (inject-dampened at the ONE REGEN; interim
 >   emergent-suppression stands), and a 10-dimension holistic review with Opus 5
@@ -1300,7 +1354,10 @@
 >   EXISTING dispositionStats, WR-3 gains the lineage-substrate gate). NEW
 >   SCHEDULED STEP RULED: THE LIGHTING BATCH (four directive flags are FALSE in
 >   full_simulation against the restart order's record) — one lighting commit with
->   disclosed re-records, sequenced BEFORE the soak redo. Escalated to the owner:
+>   disclosed re-records, sequenced BEFORE the soak redo [2026-08-02
+>   (self-audit): subsequently corrected to FIVE flags — demographicsEnabled
+>   joins the four, per the queue's corrected lighting-batch row; a soak with
+>   demographics dark would re-prove the pre-cure engine]. Escalated to the owner:
 >   the DESERT PROMOTION-LOCK (a biome that cannot ascend at any tier pair) and
 >   the migrationKernel-vs-DENSITY_CEILINGS sibling divergence (reconcile before
 >   the grid runs). Model split this session per owner: Fable = validation +
@@ -1314,10 +1371,22 @@
 >   byte-identical dark; the both-flags-lit config gains its first fenced
 >   golden). THE PRE-SOAK ORDER IS NOW: WR-0 (land the tree + authorized
 >   re-records) → P5 → THE LIGHTING BATCH → the release grid + 300y rerun →
->   tuning. Both P5 fixes are dark-side today: zero golden risk, proven by pins
->   before the flag ever lights.
+>   tuning. [Sequence completed 2026-08-02 (self-audit): the WR-0c opener
+>   hardening slots between P5 and the batch — the standing order is
+>   WR-0 → P5 → WR-0c → THE LIGHTING BATCH (five flags incl.
+>   demographicsEnabled, per the correction above) → the grid → tuning.
+>   WR-0c items 1–3 landed @ 622a3aab; item 4 (the peace-terms time-base)
+>   is OUTSTANDING. Canonical statement: DESIGN_WAR_RULINGS_ARCHITECTURE.md
+>   §9.] Both P5 fixes are dark-side today: zero golden risk, proven by pins
+>   before the flag ever lights. [Corrected 2026-08-02 (self-audit): P5a is a
+>   CEILING unlock — necessary, never sufficient; the equilibrium-criterion
+>   correction and the two new reachability pins (P5c) are recorded in
+>   DESIGN_DEMOGRAPHIC_ENGINE.md §15.]
 
-## The seven directives (owner, verbatim intent)
+## The eleven directives (owner, verbatim intent)
+[Retitled + reordered 2026-08-02 (self-audit): the roster had grown to eleven
+under a header that still said seven, and directive 11 was filed between 9 and
+10 — it now follows 10. No directive's text changed.]
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism
    and a connected visual web, matching terrain/resources; mismatches trigger an OPTIONAL
    "bare minimum adjustments" popup.
@@ -1387,6 +1456,14 @@
    becomes an invariant). ROAMER TRAVEL PHYSICS: roaming NPCs move at most ONE
    route-hop per tick, only on routes connected to their current settlement, and may
    be MID-ROUTE at any pause (the armyTransit ledger pattern).
+
+10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
+    each buffer catastrophe individually, and their COMBINATION is the strong buffer:
+    damage reduction against, repair acceleration following. THE DEPENDENCY ASYMMETRY
+    (owner insight, binding): magic's contribution is GATED by economy — magic consumes
+    resources and materials, so mitigation = economy_term + magic_term × economy_gate;
+    a high-magic poor settlement buffers barely better than a mundane poor one.
+
 11. PORTS OF POSITION + ORGANIC WATERWAYS (added 2026-08-01, owner dictation):
     (a) A canonized settlement NOT designated port-trade, sitting in close
     proximity to a river or the ocean BY MAP POSITION, holds INCREASED
@@ -1401,13 +1478,6 @@
     NEGLECTED: water routes form and fade ORGANICALLY exactly as land routes
     do. [Closes the registered ports-totality-genesis-only gap — review
     register 2026-08-01.]
-
-10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
-    each buffer catastrophe individually, and their COMBINATION is the strong buffer:
-    damage reduction against, repair acceleration following. THE DEPENDENCY ASYMMETRY
-    (owner insight, binding): magic's contribution is GATED by economy — magic consumes
-    resources and materials, so mitigation = economy_term + magic_term × economy_gate;
-    a high-magic poor settlement buffers barely better than a mundane poor one.
 
 ## Binding design judgments (the manager's rulings under delegation — vetoable here)
 - **J-D1 (autoplacement consent):** placement-first — the placer finds best-fit terrain for
@@ -1544,12 +1614,17 @@
   (a) THE EARNED PORT is a PLAN-BUILT INSTITUTION: the §5c plan lane proposes it
   (banded opportunity weight from scaled-km water proximity — closed water-access
   vocabulary derived from the rasters: coastal | riverine | inland; port classes
-  closed: river_quay | harbor, banded by water class × tier), K1's status
+  closed: river_quay | harbor, banded by water class × tier) [corrected
+  2026-08-02 — see (iii) below: this is a NEW seventh response kind
+  `found_port` with its own episode gate, never a rider on the pressure lane],
+  K1's status
   vocabulary governs its life (operational/impaired/shell), and the digest's
   generation-time `isPort` is UNTOUCHED — port-capability becomes
   `isPort OR earned-port-operational` at exactly one read seam (single writer;
   DESIGN_NAVY's navy-capability read inherits it for free, so an earned harbor
-  can eventually float a navy). Generation is byte-untouched (THE PROMISE);
+  can eventually float a navy) [corrected 2026-08-02 — see (i)/(ii) below: the
+  one seam is a NEW `portCapability.js` read module at the non-hot seams;
+  pathCost keeps the frozen digest read]. Generation is byte-untouched (THE PROMISE);
   pulse-time only; dark behind `portOpportunityEnabled`.
   (b) ONE MODE-SPEED CALIBRATION TABLE (km/week per mode: foot | cart | river |
   coastal | sea), consumed by EVERY mover — armies, envoys, wanderers, columns,
@@ -1561,7 +1636,9 @@
   (c) WATER CORRIDORS JOIN J-D9's LIFECYCLE WHOLE: the same three-class demand
   ledger, water's own cost profile (bulk-cheap per km, slow to establish,
   PORT-GATED at both endpoints — the ≥2-ports condition is structural, not a
-  rule), the same hysteresis and charter/decay events with address chains, and
+  rule) [scoped 2026-08-02 — see (iv) below: structural at the
+  CHARTER/candidate layer; pathCost's single-endpoint seaLanes fold is
+  unchanged], the same hysteresis and charter/decay events with address chains, and
   embargo/interdiction/blockade apply (the navy design's blockade law reads the
   same arteries). THE REMNANT LAW MAPS TO HARBORS, NOT LANES: the sea keeps no
   track — a decayed water route's memory is the QUIET QUAY (the shell port),
@@ -1571,6 +1648,44 @@
   nothing while land roads duplicate their paths is a TUNING RED), plus the
   reachability pin — a two-port corpus world charters at least one organic
   water route or the wave is not done.
+  **CORRECTED 2026-08-02 (self-audit — the (a) seam and (c) gating claims were
+  checked against the tree and were wrong in three places; each correction is
+  NAMED WORK for the water-corridor wave, with pins, so nothing is left to
+  invention):**
+  (i) THE READ SEAM IS A NEW MODULE, NEVER THE DIGEST READ. `isPort(digest, id)`
+  is a frozen-digest, worldState-blind read memoized per digest object (the
+  WeakMap port set) and it gates the pathCost hot loop — the OR must NEVER
+  enter it (that would thread pulse-time state into a frozen read and stale
+  the memo the tick a port is earned). WORK ITEM D11-W1 — `portCapability.js`
+  (NEW): one read-side module, `portCapableOf(digest, worldState, id)` =
+  digest `isPort` OR earned-port-operational (K1 status `operational` only),
+  consumed at the NON-HOT seams only — route candidacy, navy capability,
+  charter evaluation — while pathCost keeps the frozen digest read untouched.
+  Single writer; a source-scan walker forbids new bare `isPort` consumers at
+  those seams; dark under `portOpportunityEnabled`, pinned dormancy-identical
+  to the bare digest read.
+  (ii) WORK ITEM D11-W2 — EARNED-PORT SEA-EDGE FOLDING is its own slice,
+  after D11-W1, in the water-corridor wave: when an earned port joins water
+  routing, the folded sea edges derive from a PER-TICK DERIVED SET rebuilt
+  from the earned-port ledger — never a poke into the digest's WeakMap memo.
+  The cache-invalidation story is the slice's acceptance: memo untouched,
+  derived set recomputed each tick, dark byte-identical.
+  (iii) WORK ITEM D11-W3 — `found_port` IS A NEW RESPONSE KIND. The §5c plan
+  lane's response vocabulary is CLOSED AT SIX (frozen, walker-enforced
+  totality) and its episodes open only on the crowding-pressure band — a
+  geography opportunity cannot ride it. The vocabulary EXTENDS by
+  `found_port` with its OWN episode gate: a water-proximity band + a
+  trade-demand crossing, never the pressure band, and never competing for the
+  overflow lane's single active plan (a harbour opportunity must not crowd
+  out a crisis valve). The seventh kind owes the full registry train:
+  PLAN_TUNING duration/startup rows, response weights, refusal vocabulary,
+  its own receipt sentence, and the totality-walker updates.
+  (iv) LAYER OWNERSHIP OF ≥2 PORTS, stated exactly: the two-ports condition
+  is structural at the CHARTER/CANDIDATE layer (route-mode classification
+  demands a port at BOTH endpoints — routeNetworkGenesis, userRoutes); the
+  PATHING layer's port-gating is the existing single-endpoint seaLanes fold
+  in pathCost, and it is UNCHANGED by this directive. (c)'s sentence binds
+  the former and never the latter.
 - **J-D10 (disaster buffer — Fable refinements, veto open):** (a) THE BUFFER SPENDS
   ITSELF: mitigation CONVERTS damage into economic drain (treasury, stocks, magical
   reserves draw down) — damage transmutes, never vanishes; a spent buffer is a

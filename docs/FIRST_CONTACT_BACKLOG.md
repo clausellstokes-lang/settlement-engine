@@ -341,7 +341,9 @@ not a facsimile.
   gives it. The exactness law: whatever the realm Herald shows (tabs, section
   doors, severity presentation, pills), the miniature shows; facsimile elements
   survive ONLY if the real surface has them. Fixed window + inner scroll per
-  LD-1 §4, same frame contract.
+  DESIGN_LIVING_MINIATURE.md §4 (LD-1's binding frame contract — the sketch in
+  this file is superseded and has no §4; pointer fixed 2026-08-02, self-audit),
+  same frame contract.
 - **Delta 1 — the data is world-side:** fixture v2 additionally emits the RAW
   inputs `buildHeraldFeed` consumes (the pulse records + campaign wizard-news
   entries + the read-only fourth source's inputs) from the same 12-tick run —
@@ -420,7 +422,8 @@ tokens.js chrome tokens) and silently reached into global chrome]:**
    scroll — out of scope). Only the BOTTOM ribbon is new and `position: fixed`,
    on the landing route only. The body remains the scroll container; the
    landing's SCROLL CONTAINER may not be re-parented. Bounded inner scroll
-   inside a fixed-size frame (LD-1 §4's miniature, LD-4's Herald) is EXPLICITLY
+   inside a fixed-size frame (the DESIGN_LIVING_MINIATURE.md §4 miniature,
+   LD-4's Herald) is EXPLICITLY
    PERMITTED and must carry `overscroll-behavior: contain` — the v1 blanket
    "nested scroll region is FORBIDDEN" read as banning what LD-1/LD-4 mandate.
 2. **The film math, against the real substrate:** there is no GSAP/ScrollTrigger

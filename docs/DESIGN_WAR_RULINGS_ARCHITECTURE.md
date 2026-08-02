@@ -1,7 +1,9 @@
-# DESIGN — THE WAR RULINGS ARCHITECTURE (amendments A–R compiled for build)
+# DESIGN — THE WAR RULINGS ARCHITECTURE (amendments A–S compiled for build)
 
-## Fable 5 architecture, 2026-08-01. Compiled from the 29 owner rulings recorded in
-## DESIGN_REALM_DIRECTIVES.md (amendments A through R + the three-causes ruling) into
+## Fable 5 architecture, 2026-08-01; census-corrected 2026-08-02 (self-audit).
+## Compiled from the 31 owner rulings recorded in
+## DESIGN_REALM_DIRECTIVES.md (amendments A through S — R2 and S included — plus the
+## three-causes ruling) into
 ## implementation-grade wave specs. IMPLEMENTATION IS ASSIGNED TO THE EXTERNAL
 ## IMPLEMENTER (owner order 2026-08-01: architecture and validation by Fable; all
 ## heavy coding by the external implementer). This document is self-contained: an
@@ -49,6 +51,18 @@ docs/GENERATION_CONTRACTS.md + the gate discipline in §10.
   the P4 no-hidden-governor pattern is the house idiom — pin the negotiation modules'
   import lists, scan their sources for true-state read tokens, and prove the same scan
   FINDS those tokens in a module that legitimately reads truth (guard-the-guard).
+- **B — ABSOLUTE COHERENCE (standing law; CORRECTED 2026-08-02 (self-audit) — the
+  first issue compiled B nowhere: no law slot, no wave item, no pin):** every new
+  scorer/evaluator this program introduces — WR-1's four-term read, WR-2's threshold
+  factor, WR-3's lineage claim, WR-4's trajectory, WR-8's feasibility + intent,
+  WR-10's appraisal — carries a RECEIPT FIELD naming the state that produced its
+  score, and a walker asserts the field across the whole scorer family (incoherence
+  is visible, never silent). Clause (iv)'s mechanic is SUPPRESSION: a casus
+  contradicted by a live read returns 0 with a receipt naming the contradicting
+  state — suppress-the-score, never refuse-the-mint (the reasons layer's decay
+  idiom). History binds the same way: the chronicle and the relationship record must
+  agree with a claim — you do not sack the satellite you spent a decade provisioning
+  (pinned in WR-3; the peaceable-culture sibling pins in WR-2).
 - **M — THE SPEED FLOOR:** no named person moves faster than ONE WEEK per route leg,
   ever, on any path (envoy, wanderer, exile, ransom demand bearer, DM-assigned NPC in
   transit). Mid-route positions are real places. STRUCTURAL ENFORCEMENT: one transit
@@ -98,12 +112,12 @@ docs/GENERATION_CONTRACTS.md + the gate discipline in §10.
 
 | Substrate | Where | State |
 |---|---|---|
-| Casus taxonomy: 13 war reasons + 14 peace mirrors, walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
+| Casus taxonomy: 13 war reasons + 13 peace mirrors (CORRECTED 2026-08-02 (self-audit): 13, not 14 — bijection means 13↔13; verified by enumeration, PEACE ends at `common_rite`), walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
 | Reasons are state-derived, decay-inherent, zero-RNG, per-pair directed ledger | `spatialLedgers.warReasons`, key `${from}>${to}` | BUILT — dissolution (amendment C) is structurally half-present already |
-| Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (1,501 lines; TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) | BUILT — the terms MATH the envoy program transports |
+| Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (1,501 lines; TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) | BUILT — the terms MATH the envoy program transports; ⚠️ TIME-BASE FLAG (2026-08-02, self-audit): prices a "year" at 12 ticks while the engine tick is one week — WR-0c item (4) rules it before any WR duration work builds on it; ⚠️ the `truthFor` seam is ONE closure for BOTH parties and advanceTreaties exposes no seam at all — see §3 THE SEAM MECHANICS |
 | Treaty enforcement: readiness cap, war block, occupation hold; tribute/reparations/restitution move real grain | `treatyEnforcement.js`, `treatyTransfer.js`, `warIntent.js` | BUILT + GATED (wave W1; landed in the WR-0 W1 commit) |
 | Momentum: commitment stock, cliffs, face-saving exits, climb-downs | `momentum.js` | BUILT, FOREIGN (read-only law above) |
-| NPC durable identity, facets, circulation, belief, transit, verdicts (jailed applies to any named soul), Wanderers register + DM verbs | H1–H4: `npcLedger*`, `npcCirculation*`, `npcVerdict*` | BUILT |
+| NPC durable identity, facets, circulation, belief, transit, verdicts (jailed = the corruption-exposure path ONLY — the sole writer is applyNpcVerdict, which requires a local roster npc + an exposure record; the FOREIGN-GUEST HOLD is NEW WORK, WR-7b) [CORRECTED 2026-08-02 (self-audit)], Wanderers register + DM verbs | H1–H4: `npcLedger*`, `npcCirculation*`, `npcVerdict*` | BUILT |
 | Credibility ladder (confirmed/corroborated/reported/tavern_talk), fidelity, plant/contradict/expose triple, patronage | I1–I4: `brokerage*` | BUILT |
 | Route ledger + genesis, three-class flows (goods/population/military), charter/decay/danger/bypass, hidden-path remnants, reputation race pinned | J1–J4: `routeNetwork*`, `armyTransit*` | BUILT |
 | Institution status (operational/impaired/shell, cause-bound), magic regimes, disaster buffer, substitution | K1–K4 | BUILT |
@@ -120,22 +134,46 @@ real transition (blocks sacred_claim's dissolution condition, amendment C); sett
 alignment axes readable where amendment B weights motive; relationship-state extreme
 bands (blocks R's gate). Each has a named fallback in its wave spec.
 
+**Verified ABSENT 2026-08-02 (self-audit) — NEW WORK, each homed in a wave; never
+build on these as if they existed:** the E3 alliance-web risk read (WR-6's join
+decision) · the foreign-guest hold writer (WR-7b) · the atrocity-coalition casus pair
+(WR-8; J-WR-14) · `negotiationPictures.js`, the two-picture wrapper (§3 seam
+mechanics; WR-7 slice work) · the opportunism patron arm (WR-1's dissolution slice —
+`opportunism.js` carries no patron token; the substrate is regionalGraph's existing
+`patron` relationship label) · the per-party belief seam at the pulse entry
+(`advanceTreaties` builds a live-snapshot truthFor internally today — WR-7 slice
+work).
+
 ---
 
 ## §3 THE FLAG FAMILY + THE ONE SEAM RULING
 
-Five new virtual flags (absent from DEFAULT_SIMULATION_RULES; lit only in
-full_simulation at the owner-signed soak redo), plus one casus sub-flag:
+Seven new virtual flags — six program flags plus the one casus sub-flag,
+`lineageClaimEnabled` (count CORRECTED 2026-08-02 (self-audit): amendment S added the
+seventh row and the old header still said five-plus-one). All absent from
+DEFAULT_SIMULATION_RULES; lit only in full_simulation at the owner-signed soak redo:
 
 | Flag | Gates | Wave |
 |---|---|---|
 | `warTerminationEnabled` | the four-term termination read (cause/continue/stop/momentum) + dissolution re-reads + cost-to-sue | WR-1 |
-| `dispositionEnabled` | the disposition profile, its learner, its threshold reads, deity war-pressure | WR-2 |
+| `dispositionChannelsEnabled` (CORRECTED 2026-08-02 (self-audit) — the WR-2 census-correction name; never `dispositionEnabled`, one word from the live `warDispositionEnabled`) | the disposition channels, their learner, their threshold reads, deity war-pressure | WR-2 |
 | `lineageClaimEnabled` | the lineage_claim casus + kinship_bond mirror | WR-3 |
 | `coalitionLedgerEnabled` | expenditure derivation, separate peace, coalition settlement + apportionment | WR-6 |
 | `envoyDiplomacyEnabled` | the whole envoy program (errands, interception, ratification, ransom, compromised envoy) | WR-7 |
 | `conquestDoctrineEnabled` | feasibility belief, intent gate, conquest end-state, the razing | WR-8 |
 | `sovereigntyTradeEnabled` | the settlement market (amendment S): sale/swap/cession-for-peace of satellites and vassals | WR-10 |
+
+**THE FLAG-DEPENDENCY RULING (added 2026-08-02, self-audit — the first issue declared
+seven independent flags and no lighting contract):** the WR flags are INDEPENDENT
+DARK SWITCHES — any one may stay dark forever without breaking another's dormancy
+fence — but lighting is ORDERED. WR-3, WR-8, and WR-10 declare `demographicsEnabled`
+a LIT-PRECONDITION (WR-3's overflow-founding graduation path, WR-8's conserved sack
+arithmetic through §3 demographics, WR-10's demographic-trajectory appraisal all read
+wave-P machinery), plus the flags of their §9 predecessors: WR-3 ⇒ WR-1/WR-2's flags;
+WR-8 ⇒ WR-1/WR-2/WR-6/WR-7's flags; WR-10 ⇒ WR-7's flag. THE LIGHTING ORDER IS THE §9
+BUILD ORDER; a flag lit out of order is an invalid config the WR-9 certification
+walker reds. A degraded dark-predecessor read exists only where a wave names one
+explicitly (WR-1's sunk-cost fallback); silence means the precondition is hard.
 
 **THE SEAM RULING (binding; the largest architectural decision in this document):**
 the envoy program does NOT fork the peace engine — it replaces its TRANSPORT, never its
@@ -149,6 +187,28 @@ per-battle-updated view; the court's stale reports) through the `truthFor` injec
 seam `believedAdvantage` already exposes. One evaluator, two transports. A second
 terms evaluator anywhere is a design defect.
 
+**THE SEAM MECHANICS (J-WR-1 refinement, added 2026-08-02, self-audit — the seam as
+first stated does not exist in the tree as claimed):** verified: `truthFor` is ONE
+id→strength closure and `resolveVictor(a, b, worldState, truthFor)` passes the SAME
+closure for BOTH parties; `advanceTreaties` accepts no `truthFor` at all — it builds
+a live-snapshot closure internally, so the pulse entry point is a true-state reader
+with no seam. The lit-path contract is therefore the TWO-PICTURE CONTRACT: a NEW pure
+wrapper module `negotiationPictures.js` (WR-7 work; no state, no writer) invokes the
+EXISTING leaf evaluators (`believedAdvantage` / `appraiseLoserPortfolio` /
+`draftTerms`) once PER PARTY under that party's own truthFor, and acceptance compares
+each party's OWN-PICTURE valuation of the sheet on the table. No evaluator is forked,
+no merged estimate exists anywhere (K4), and `peaceTerms.js` stays the single terms
+writer. The pulse injection point is `advanceTreaties`' CALL SITE — named WR-7 slice
+work: when `envoyDiplomacyEnabled` is lit, the willingness crossing at that site
+mints the errand and advanceTreaties' internal willingness→rounds path is suppressed
+at the call site; dark, it stands byte-identical. K3's structural pin set, module by
+module: `envoyErrand.js`, `negotiationPictures.js`, WR-8's feasibility composite,
+WR-10's `appraiseSettlementAsset`. `peaceTerms.js` sits OUTSIDE the pin set (its
+dark-path transport legitimately builds truth internally — the two-picture wrapper is
+what keeps the LIT path belief-sourced), and the guard-the-guard positive control
+points at a truth-reading module outside the negotiation set (warDeployment.js or
+peer) — never at peaceTerms.js, which cannot sit on both sides of its own guard.
+
 ---
 
 ## §4 CANONICAL MODEL — new state, and it is deliberately small
@@ -159,10 +219,18 @@ eager bytes, absent ⇒ byte-identical) and has exactly ONE writer module.
 ```
 worldState.spatialLedgers.warIntents        — EXISTS after WR-0 (W1's ledger)
 
-worldState.dispositions                     — WR-2, writer dispositionProfile.js
-  { [settlementId]: { martial, mercantile, diplomatic, insular:
-      { stock01: number, band: word } ,     // banded projection is what consumers read
-    updatedTick } }
+worldState.dispositionStats                 — EXISTS today (single-channel, lit via
+  // warDispositionEnabled); WR-2 EXTENDS IT IN PLACE — same ledger, same ONE
+  // writer: dispositionLedger.js.
+  { [settlementId]: { …existing single-channel fields…,
+      channels: { martial | mercantile | diplomatic | insular:
+        { stock01: number, band: word } },  // banded projection is what consumers read
+      updatedTick } }
+  // [CORRECTED 2026-08-02 (self-audit): the first issue specced a NEW
+  // worldState.dispositions with writer dispositionProfile.js — which is exactly
+  // J-WR-11's VETO position and the double-count it names. dispositionProfile.js
+  // survives ONLY as a pure read-side module (no state, no writer) exporting
+  // thresholdFactorOf-shaped reads.]
   // Learned from OUTCOME EVENTS only (war won/lost, treaty held/broke, trade
   // enriched, venture failed), decayed toward neutral on a generational
   // half-life band. Persisted because re-deriving from full history per tick is
@@ -188,6 +256,15 @@ worldState.envoyErrands                     — WR-7, writer envoyErrand.js
       state } ]                             // travelling | intercepted | parlaying |
                                             // returning | held | lost | home
   // Cap: MAX_CONCURRENT_ENVOYS per settlement (band, default 2) — K4's scope bound.
+
+worldState.spatialLedgers.foreignGuestHolds — WR-7b (NEW WORK, named 2026-08-02,
+  [ { npcId, captorId, heldSinceTick,       // self-audit), writer foreignGuestHold.js
+      cause } ]                             // — ONE writer. The captor-side record
+                                            // H2's verdicts cannot express (jailed is
+                                            // the corruption-exposure path only).
+                                            // WR-7d's ransom dwell gate reads
+                                            // heldSinceTick; release/escape/death all
+                                            // close the record through the writer.
 
 ransom claims                               — WR-7d: ride the I2 reparations-claim
                                             // shape with a PERSON subject; no new
@@ -277,6 +354,24 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
   every hard AND soft gate runs exactly as for an unordered candidate. Pin the
   negative: an escalation intent against a target failing CONQUEST_MARGIN does
   not open.
+- **(4) THE PEACE-TERMS TIME-BASE (ADDED 2026-08-02, self-audit — OUTSTANDING: the
+  Progress note below covers items 1–3 only; this lands as its own follow-up
+  commit):** `peaceTerms.js` prices a "year" at `TICKS_PER_YEAR: 12` (and
+  `treatyEnforcement.js` duplicates `INSTALLMENTS_PER_YEAR: 12` behind a no-drift
+  pin) while the engine tick is ONE WEEK (`INTERVAL_WEEKS.one_year: 52`;
+  advanceInterval: "a one_year advance is 52 synchronous one-week ticks"). Every
+  calendar-literal duration the peace engine names — "3–5y modest victory, 10–15y
+  crushing" — therefore expires ~4.3× early, while the transit half of this same
+  program is week-true (`planWanderLeg` adds `hopWeeks` straight to the tick
+  counter). RE-DERIVE the duration constants against the weekly tick — a disclosed
+  same-seed shift on every treaty golden plus a re-tune of the BUDGET/duration
+  bands — or, as the fallback arm, document the 12-tick "month-year" as deliberate
+  and forbid the Herald from ever printing it as a calendar year; taking the
+  fallback arm instead of the re-derivation is a STOP-and-report to the validation
+  chair, not an implementer pick. Either arm lands WITH A PIN tying the chosen
+  constant to `INTERVAL_WEEKS` so the two clocks can never silently drift again.
+  WR-9's duration envelopes are BLOCKED on this item (they must state which
+  constant defines a year before they are authored).
 
 > **Progress — WR-0c complete, 2026-08-01.** The chooser and opener now share one
 > treaty-eligibility read; a zero war factor removes deploy from the move space;
@@ -312,7 +407,24 @@ all against momentum — plus per-cause dissolution.
   if deity unseating is not a real transition, the pin documents the dormant arm
   and the dissolution ships structurally ready — never invent a pantheon coup here);
   lineage_claim dies on satellite destruction/edge severance (lands with WR-3);
-  opportunism dies when the victim stops being believed-weak or gains a patron.
+  opportunism dies when the victim stops being believed-weak or gains a patron
+  [CORRECTED 2026-08-02 (self-audit): the patron arm is NEW WORK in this slice —
+  `opportunism.js` today reads a single vulnerability gradient plus own capability
+  and carries no patron token; the substrate is regionalGraph's existing `patron`
+  relationship label, and the SAME read serves amendment A's counterforce below].
+- **Amendment A's counterforces, homed (added 2026-08-02, self-audit — A binds each
+  of the three causes to a counterforce "pinned as able to WIN, never a stub", and
+  the first issue homed only lineage's):** predation's counterforce lands HERE —
+  the victim's PATRONS (the new patron read above: a patron raises the aggressor's
+  believed price and dissolves the casus) and the aggressor's own RESTRAINT via
+  §1b-B suppression (an opportunism score contradicted by the live strength read
+  returns 0 with a receipt naming the read). The faith war's counterforce (shared
+  rite + polar opposition being rare) lives in the sacred_claim scorer's notes:
+  `common_rite` is the mirror that carries the shared-rite arm, and rarity is a
+  scored fact of pantheon composition, never a band. Lineage's counterforce
+  (kinship) is WR-3's kinship_bond mirror — verified present in WR-3's spec.
+  Pin per A: each counterforce WINS on at least one real fixture (the war predation
+  would have opened does not open).
 - **Cost-to-stop (C2's third quantity, NEW):** concession price from the peace
   engine's own ladder (what the believed ratio says peace costs) + face (the
   climb-down consequence momentum.js already exports) + sunk cost (the WR-6
@@ -324,6 +436,10 @@ all against momentum — plus per-cause dissolution.
   the reason standing) — both arms on real fixtures; dissolution totality (every
   WAR_REASON_TYPE names its dissolution read or is explicitly perpetual-until-resolved,
   a walker over the taxonomy); dormancy golden.
+**Lifecycle paths (added 2026-08-02):** `foundingCauses` persists on the war record —
+serialize + JSON-round-trip pinned, a regen that rebuilds a war re-pins them at open,
+undo restores them with the record, import validates each type against the taxonomy;
+the terminationRead receipt is per-pulse and never persisted.
 **Bands:** term weights, the deciding-term margin, sunk-cost fallback band.
 
 ### WR-2 — DISPOSITION (amendments E, E2, E3; flag `dispositionChannelsEnabled`)
@@ -355,7 +471,9 @@ WR-2 therefore EXTENDS, never duplicates (J-WR-11):**
   channel builds on it directly.
 - **Application (E3's law):** dispositions modulate BARS — the strategy chooser's
   thresholds, the termination read's sue/decline appetite, the trade/mediation
-  propensities. STRUCTURAL ENFORCEMENT: dispositionProfile exports only
+  propensities. STRUCTURAL ENFORCEMENT: dispositionProfile (a PURE READ-SIDE
+  module — no state, no writer; the ledger stays dispositionLedger.js per J-WR-11 —
+  clarified 2026-08-02, self-audit) exports only
   `thresholdFactorOf(settlement, channel)`-shaped reads; it never exposes a target
   list, never reads the relationship graph, and its import list is pinned (the P4
   no-hidden-governor pattern) so it CANNOT name a victim.
@@ -372,7 +490,17 @@ WR-2 therefore EXTENDS, never duplicates (J-WR-11):**
   outcome histories (E2's payoff, the program's best property test); the reversal;
   the ally-bar law (a lowered threshold does not clear a strong friendly tie —
   ordinary case allies passed over, pressured case betrayal reachable and
-  proportionally priced, BOTH arms); threshold-never-selector (the import pin).
+  proportionally priced, BOTH arms); threshold-never-selector (the import pin); the
+incoherence-unreachable negative (amendment E's peaceable-culture clause, homed
+2026-08-02 per §1b-B): a peaceable culture with a harvest god and a history of
+losses CANNOT raise war-culture pressure — the configuration scores 0 with a
+§1b-B suppression receipt naming the contradicting state, and the pin proves it.
+**Lifecycle paths (added 2026-08-02):** `dispositionStats` already persists in saves
+and is LIT in full_simulation, so the four-channel extension is a SHAPE MIGRATION on
+a live path — an old-shape world folds its legacy aggressiveness score into the
+martial channel deterministically at load/import, undo round-trips the extended
+shape, a mid-world `dispositionChannelsEnabled` flip reads the migrated ledger and
+never re-derives, and the JSON-round-trip pin covers both shapes.
 **Bands:** per-channel learn rates, decay half-life, threshold factor caps (a
 disposition COLOURS, never drowns — banded and capped per law 6).
 
@@ -398,7 +526,15 @@ reachable is part of the wave's acceptance, not an afterthought.**
 - **Dissolution (plugs into WR-1):** satellite destroyed or lineage edge severed.
 - **Pins:** claim requires inversion (negative case: no claim between healthy
   parent/satellite pairs — the reachability discipline); bijection walker green
-  without exemptions; dormancy.
+  without exemptions; the incoherence-unreachable negative (§1b-B's own clause,
+  homed 2026-08-02): you do not sack the satellite you spent a decade
+  provisioning — a lineage_claim whose pair's chronicle + relationship record show
+  sustained provisioning is SUPPRESSED to 0 with a receipt naming the record that
+  contradicts it; dormancy.
+**Lifecycle paths (added 2026-08-02):** `parentRef` lineage edges persist on the
+campaign-member settlement record — JSON-round-trip pinned, a regen that re-runs a
+graduation re-records the edge and one that does not preserves it, undo and import
+round-trip it with the settlement.
 **Bands:** inversion threshold, claim weight cap.
 
 ### WR-4 — COMPARATIVE COSTS + THE HOME FRONT (amendment F; rides
@@ -417,6 +553,8 @@ reachable is part of the wave's acceptance, not an afterthought.**
 - **Pins:** winning-abroad-losing-at-home reachable and receipted (F's explicit
   demand); mistaken-court reachable (believed trajectory wrong vs truth, and the
   receipt can say so post hoc); the even-case silence.
+**Lifecycle paths (added 2026-08-02):** this wave adds NO persisted state —
+warCosts.js is a pure evaluator; receipts only, nothing to regen or undo.
 **Bands:** trajectory margin bands, home-front acceleration curve.
 
 ### WR-5 — THE TWO BOOKS + THE POLITICAL LOOP (amendments G, G2, H, D; rides
@@ -454,6 +592,10 @@ reachable is part of the wave's acceptance, not an afterthought.**
   corruption_exposed opens a war → H2 verdict removes the exposed officeholder →
   the successor holds no quarrel → the war dissolves. One fixture, five
   subsystems, all existing.
+**Lifecycle paths (added 2026-08-02):** the installing faction's demand rides the
+EXISTING succession record — it serializes, regens, and undoes with that record's
+own pins; no other state is added (refusal costs and grievances land on existing
+ledgers).
 **Bands:** books-weight derivation bands, refusal-cost bands, re-read discount.
 
 ### WR-6 — THE COALITION GRAPH (amendments I, I2, I3, J; flag `coalitionLedgerEnabled`)
@@ -461,6 +603,21 @@ reachable is part of the wave's acceptance, not an afterthought.**
   multi-party war IS a graph of bilateral edges. This wave makes joining, spending,
   exiting, and settling first-class ON that graph — no war object gains a member
   list; membership is derived from the edges + alliance ties.
+- **THE JOIN DECISION (added 2026-08-02, self-audit — the first issue specced the
+  ally's edge and never the decision that mints it):** an ally's entry is a SCORED
+  DECISION with a receipt, never an automatic consequence of the tie. The candidate
+  runs the E3 ALLIANCE-WEB RISK READ — NEW WORK, homed here (verified ABSENT from
+  the tree 2026-08-02; the §2 register lists it): a pure belief-side read of who
+  would come to the target's aid and who would come to THEIRS — the second order
+  matters — raising the believed price of entry with no pacifism term existing
+  anywhere; plus its OWN books (G) under WR-2's temperament, against the alliance
+  obligation. A REFUSAL is a REMEMBERED FACT: a first-class receipted entry feeding
+  the relationship record (amendment I verbatim — an ally's ally "may refuse and be
+  remembered for refusing"), and the caller's reading of the refusal is the
+  caller's character. Both arms pinned — join under one temper, refusal under
+  another, from the same state (the I3 temperament-is-load-bearing discipline
+  applies at the door exactly as at the exit). WR-8's deterrence clause consumes
+  THIS read pointed at the aftermath.
 - **Joining:** an ally entering under alliance mints its OWN war edge whose
   foundingCauses = the alliance obligation (a casus record with its own mirror per
   the walker — J-WR-6 rules the pair `alliance_obligation` ↔ `obligation_discharged`,
@@ -503,7 +660,11 @@ reachable is part of the wave's acceptance, not an afterthought.**
   relationship record + chronicle (J's compounding-history demand), and it feeds
   the WR-2 channels (a war that paid teaches; a war whose spoils were stolen
   teaches something else).
-**Bands:** apportionment weights, adequacy-of-payment band, exit-cost weighting.
+**Lifecycle paths (added 2026-08-02):** joinLedger anchors and refusal facts persist
+on EXISTING records (the war record, the relationship record) and round-trip, regen,
+and undo with them; no expenditure totals are ever stored (J-WR-5).
+**Bands:** apportionment weights, adequacy-of-payment band, exit-cost weighting,
+join-bar + refusal-cost bands (added 2026-08-02).
 **Scope fence (I, verbatim law):** peace is negotiated PAIRWISE along edges. No
 congress, no multilateral table, ever.
 
@@ -515,7 +676,10 @@ congress, no multilateral table, ever.
 - A willingness crossing (the peace engine's existing trigger) mints an ERRAND: a
   named NPC (durable H1 id; chosen by the seat — see vetting in WR-7d) departs on
   the lived route network under the armyTransit mid-route pattern, ONE WEEK PER LEG
-  MINIMUM (law M), grade-priced longer (J4 leg costs).
+  MINIMUM (law M), grade-priced longer (J4 leg costs). The mint happens at
+  `advanceTreaties`' CALL SITE (§3 THE SEAM MECHANICS — added 2026-08-02): lit, the
+  crossing mints the errand and the internal willingness→rounds path is suppressed
+  at that site; dark, byte-identical. That suppression is slice work HERE.
 - **The snapshot (K.2):** a CLOSED banded excerpt frozen at departure — stores band,
   strength band, morale/exhaustion band, the founding-causes status, believed
   ratios at departure. From that moment it only MUTATES: slowly against rumors the
@@ -535,6 +699,15 @@ congress, no multilateral table, ever.
   site (envoys, wanderers, exiles, ransom bearers, DM transit) routes through the
   one transit kernel; the walker asserts totality; the reputation-race pin extends:
   news still outruns people.
+  [CORRECTED 2026-08-02 (self-audit — one kernel, two cost specs): J-D11(b) in
+  DESIGN_REALM_DIRECTIVES names this SAME kernel as the enforcement seam for its
+  mode-speed calibration table (km/week per mode) under `portOpportunityEnabled`.
+  Ruling for this seam: WR-7a BUILDS the kernel + walker FIRST; J-D11(b) EXTENDS
+  it. The kernel's denomination is km/week per mode with route grade as a
+  multiplier (the superset); until the mode table lands, legs price at grade
+  alone, and law M's one-week floor binds in EVERY denomination. The map's km
+  scale constant does not exist in the tree yet — an owner-signed tuning call,
+  carried in §7.]
 
 **WR-7b — INTERCEPTION + THE PARLAY.**
 - Four interceptor kinds (K.3), all riding position co-location per tick: (a) the
@@ -542,14 +715,28 @@ congress, no multilateral table, ever.
   (c) a coalition member of the target — who may PARLAY THEMSELVES if their own
   edge carries no live cause (peace entering through the unexpected door);
   (d) anyone with private goals: plant (I4's verb aimed at the snapshot), imprison
-  (H2's jailed verdict on a foreign guest), or terms-shopping.
+  (the FOREIGN-GUEST HOLD below — NOT H2's jailed verdict, which cannot reach a
+  foreign guest), or terms-shopping.
+- **THE FOREIGN-GUEST HOLD (NEW WORK, named 2026-08-02, self-audit — the first
+  issue presented this as existing wiring; the tree's only jail writer is
+  applyNpcVerdict, which requires a local roster npc plus a corruption exposure
+  record, so no path today can hold a travelling foreign envoy):** a
+  spatialLedgers-family record `{ npcId, captorId, heldSinceTick, cause }` with ONE
+  writer, `foreignGuestHold.js` (§4). WR-7d's ransom gate consumes the dwell read
+  (`heldSinceTick`). Release, escape, and death paths all close the record through
+  the same writer — no second mutation site. Pins: JSON-round-trip (the alias
+  trap — a held npc IS a roster object in memory), regen/undo round-trip, and the
+  writer/reader payload-spelling pin booting the REAL writer.
 - **The interceptor's dilemma (K2.1):** carry-the-terms-home (abandon position —
   a real military cost through WR-4's comparative read + the commander's books)
   vs hold-the-mission. An occupied enemy settlement is a legal venue (the irony is
   allowed).
-- **The parlay runs the peace engine's evaluators** (the §3 seam ruling): offer =
-  believed-fair terms through `draftTerms`/`appraiseLoserPortfolio` with the
-  parties' OWN pictures injected via `truthFor`; the interceptor's picture mutates
+- **The parlay runs the peace engine's evaluators** (the §3 seam ruling, through
+  `negotiationPictures.js` — corrected 2026-08-02, self-audit; `truthFor` is one
+  closure and cannot carry two pictures): offer = believed-fair terms through
+  `draftTerms`/`appraiseLoserPortfolio` invoked once PER PARTY under that party's
+  own truthFor, acceptance compared on each party's own-picture valuation (§3 THE
+  SEAM MECHANICS); the interceptor's picture mutates
   per battle and per hall (K.4) — sourced from its column's own belief exposure,
   never truth.
 - **Pins:** the field parlay's two differently-stale pictures produce terms neither
@@ -580,7 +767,8 @@ congress, no multilateral table, ever.
   are competing offers before the vote; failure to choose IS the close-vote case.
 
 **WR-7d — RANSOM + THE COMPROMISED ENVOY (O, Q).**
-- **Captivity → ransom (O):** dwell-gated (band); the claim rides the I2
+- **Captivity → ransom (O):** dwell-gated (band; the dwell read is WR-7b's hold
+  ledger `heldSinceTick` — corrected 2026-08-02); the claim rides the I2
   reparations shape with a PERSON subject; demand and answer both TRAVEL (law M);
   the three K.7 shapes pinned (silence misread / demand corrects the false
   inference / demand intercepted so the misreading stands). Captor's choice
@@ -601,6 +789,13 @@ congress, no multilateral table, ever.
   signature, caught by the corroboration ladder); exposure runs the covert→
   revealed seam ⇒ treason verdict (H2), terms-repudiation question (its own casus
   against a knowing buyer), G's third-party books applied to an envoy.
+**Lifecycle paths (WR-7 family, added 2026-08-02):** `envoyErrands` and
+`foreignGuestHolds` persist — JSON-round-trip (the alias trap), regen/undo/import
+round-trip both ledgers with any term-sheet in transit riding the errand record; a
+DM KILL mid-errand closes the errand `lost` through the one writer, so K.7's
+inference machinery runs on the honest silence (deletion would ghost the return
+path and void an open ransom claim — the lifecycle bug class this program is most
+bitten by); an open hold on a dead npc closes through the death path.
 **Bands (WR-7 family):** MAX_CONCURRENT_ENVOYS (default 2), snapshot mutation rate,
 interception base weights per kind, close-vote band, per-round widening step,
 ransom dwell + price bands, vetting-quality derivation.
@@ -621,7 +816,10 @@ ransom dwell + price bands, vetting-quality derivation.
   the enemy's BELIEVED nature (the moral discriminator — a good realm presses
   conquest against believed evil, refuses it against the decent, and can be
   DECEIVED into the righteous atrocity via I4; pinned with the receipt naming
-  what was believed and why). Mercy is a characterful receipt ("they could have
+  what was believed and why). THE I4 DECEPTION ROAD REACHES CONQUEST INTENT ONLY
+  (scoping added 2026-08-02, self-audit): R2 closes it for razing initiation — the
+  punitive intent stays unreachable for non-evil settlements, no pressure, no
+  deception, no dice sequence. Mercy is a characterful receipt ("they could have
   taken everything and did not").
 - **Conquest execution (N):** the OVERWHELMING gate (negative case pins hardest:
   clearly-winning-but-not-overwhelming still negotiates); physical and slow (law
@@ -645,23 +843,75 @@ ransom dwell + price bands, vetting-quality derivation.
   consequences, never zero for good actors — mercy stays a real choice).
   THE WORLD JUDGES on the observer's axis (monumental/lesser/recognition by
   observer alignment, settlements and deities both); deterrence priced BEFORE
-  the act through the believed retaliation web; terror-works and terror-backfires
-  both reachable per-neighbour.
+  the act through the believed retaliation web (that web IS WR-6's alliance-web
+  risk read pointed at the aftermath — built THERE, consumed here; pointer added
+  2026-08-02); terror-works and terror-backfires both reachable per-neighbour.
+- **THE ATROCITY-COALITION CASUS (NEW WORK, named 2026-08-02, self-audit —
+  amendment R claims "every piece of that ledger already exists" and this piece
+  does NOT: the 13 WAR_REASON_TYPES carry no atrocity or moral-outrage entry, and
+  the taxonomy is walker-enforced for totality + bijection, so it cannot land
+  without an authored mirror):** a walker-satisfying reason pair —
+  `atrocity_answer` ↔ `atrocity_atoned` (names vetoable; J-WR-14) — minted from
+  BELIEVED razings (belief arriving at news speed, per J-WR-7's
+  mint-on-the-public-fact discipline), state-derived and decay-inherent like every
+  casus, feeding R2's license machinery: "someone must stop them" builds alliances
+  among future victims, and the JUST razing mints none against the avenger (that
+  WAS the atrocity's answer — both R2 polarities now switch a real cause).
+  Registers in WHAT_PHRASES + heraldRouting or the totality walkers red.
+  moralDrift.js is real substrate; this casus was not — the spec stops claiming
+  otherwise.
+- **⚠️ SUBSTRATE GATE — THE LICENSE COUPLING'S REACHABILITY (added 2026-08-02,
+  self-audit; three verified facts, three open chair rulings):** (1) relationship
+  states exist per regional-graph NEIGHBOUR edge only — a license holder who is
+  not the razer's neighbour has NO relationship object to drive to an extreme, and
+  R's razer burns and rides home, typically from elsewhere; (2) axes mean-revert
+  toward the type baseline at RELATIONSHIP_RELAX 0.12/tick (~6-tick half-life)
+  while the license persists a generational band — the emotion decays two orders
+  of magnitude faster than the license unless the razing flips the edge TYPE,
+  which R2 never says; (3) no type baseline exceeds hostile's resentment 0.78, so
+  "the axes at their authored extreme" resolves to either nearly-unreachable or
+  ubiquitous unless the band is named. The license slice DOES NOT BUILD past this
+  gate until the validation chair rules: whether a razing MINTS an edge to
+  non-neighbour holders (or the license is restricted to existing-edge holders);
+  whether the atrocity flips the edge TYPE (durable) or only the axes (decaying);
+  and which authored band "extreme" names — J-WR-10 constrains all three (no new
+  relationship vocabulary). STOP-and-report if reached unruled.
 - **Pins:** the overwhelming negative case; the extremity negative case
   (victorious-but-not-extreme cannot raze); the initiation gate (non-evil
   initiation structurally unreachable — walk the intent table); license coupling
   (license without own-extreme ⇒ no razing); the closed loop (vengeance mints no
   license); conservation through the sack arithmetic; demotion-follows-truth;
-  dormancy goldens.
+  dormancy goldens. Added 2026-08-02 (self-audit): the MISTAKEN-FEASIBILITY pin,
+  BOTH directions, receipted (N2's explicitly requested pin) — a court that
+  believed conquest in reach and was wrong, and a court that believed itself
+  doomed and was not, each with the receipt honest enough to say so post hoc; the
+  BOOKS-COLLAPSE fixture (N2: existential threat collapses G's two books — ruler
+  and settlement choose alike from a state where they otherwise diverge;
+  desperation makes courts honest); the feasibility-asymmetry DIRECTIONAL pin
+  (being-conquered moves behaviour more than conquering, proven on one state pair,
+  or the band is a number nobody checked); the license POSITIVE-REACHABILITY pin
+  (in a generated corpus, some holder reaches the coupled extreme with the razer
+  and prosecutes — negative gates alone would let the license economy be
+  decoration; blocked on the substrate gate above); the material self-limit pins
+  (R's own brake: ash pays no tribute — plunder-vs-streams compared on a real
+  fixture; razing the same remnant twice yields NOTHING).
+**Lifecycle paths (added 2026-08-02):** vengeance licenses and atrocity-casus
+records persist (spatialLedgers family) — JSON-round-trip, regen and undo carry the
+license with the record (never re-derived from the chronicle), import validates it,
+and expiry is a read against heldSince ticks, not a stored countdown.
 **Bands:** overwhelming threshold, extremity band, sack severity → 1-vs-2-tier
 derivation, escape share, license adequacy band, license expiry (generational),
-consequence bands by observer alignment, vengeance discount bands.
+consequence bands by observer alignment, vengeance discount bands, atrocity-casus
+decay band (added 2026-08-02).
 
 ### WR-9 — CONVERGENCE INSTRUMENTATION (amendment L; no flag — this wave is
 measurement, envelopes, and certification rows)
 - **The war-duration distribution envelope:** tail and no infinity — most wars
   short, some long, a few generational, NONE alive at the soak's full horizon
   (a single year-300 war reds exactly as the trillion-person settlement did).
+  BLOCKED on WR-0c item (4) (added 2026-08-02, self-audit): the duration envelopes
+  must state which constant defines a year — the engine's 52-week year or
+  peaceTerms' 12-tick one — before they are authored.
 - **The endings mix:** {terms, exhaustion, ruler_change, fragmentation,
   annihilation, conquest, punitive_sack(initiation), punitive_sack(vengeance)}
   — each with a share envelope; one path carrying nearly all endings means the
@@ -676,6 +926,8 @@ measurement, envelopes, and certification rows)
 - Certification rows for every WR flag (the subsystem registry's Growth-lane
   discipline); v5 receipt fields for the termination read's deciding-term
   histogram (the Herald's "which force decided" at soak scale).
+**Lifecycle paths (added 2026-08-02):** this wave adds NO persisted world state —
+envelopes, certification rows, and receipt fields only.
 **This wave is the acceptance harness for the whole program: the program is DONE
 when these envelopes hold on the owner-ordered soak redo, and not before.**
 
@@ -703,7 +955,19 @@ builds after WR-7 — cession-for-peace rides the envoy term-sheet)
 - **The bundle (owner law):** consideration is a COMPOSED BUNDLE — the budget-and-
   stacking machinery run in reverse: the asset's believed value is the price to be
   met; the buyer stacks term families (a settlement + allyship + streams) until
-  the seller's believed valuation of the bundle clears its reserve. Each side
+  the seller's believed valuation of the bundle clears its reserve OR the buyer's
+  OWN believed ceiling is reached — whichever comes FIRST. [CORRECTED 2026-08-02
+  (self-audit): amendment S states the clearing rule twice — the OVERLAP
+  definition ("seller's reserve under buyer's ceiling") is the binding one, and
+  the stacking sentence is the search procedure INSIDE it; read literally,
+  seller-reserve-only would make every offered trade clear and overpayment the
+  guaranteed outcome instead of the characterful one. Ceiling-reached-before-
+  reserve-met is a NAMED no-trade outcome carrying a receipt — the whitePeace
+  precedent: the machinery ran and produced nothing. Amendment S's RECONCILED
+  note states the SAME rule as a two-sided conjunction — (i) seller's own-lens
+  bundle value ≥ reserve AND (ii) buyer's own-lens asset value ≥ bundle cost;
+  "ceiling reached before reserve met" is (ii) failing. One rule, stated in
+  both docs; verified identical 2026-08-02 (self-audit).] Each side
   values each component through ITS OWN needs (the §15.1 prize-ranking lens, both
   directions) — appropriateness is EMERGENT from need-weighted valuation, never a
   rule table. Pin: the value-matching example (a higher-value settlement clears
@@ -749,7 +1013,10 @@ legitimacy start, plan-trigger thresholds.
 
 - **J-WR-1 (the seam ruling, §3):** the envoy program transports the peace engine's
   math; peaceTerms.js stays the single terms writer. VETO forks a negotiation
-  evaluator into the envoy layer.
+  evaluator into the envoy layer. REFINED 2026-08-02 (self-audit): the tree exposes
+  no per-party seam, so the ruling's mechanics are the TWO-PICTURE CONTRACT +
+  the advanceTreaties call-site injection — §3 THE SEAM MECHANICS is part of this
+  ruling.
 - **J-WR-2 (war-culture compilation):** amendment E's "fourteenth cause" is built as
   WR-2's threshold channel + WR-1 end term, never a per-pair casus record — E3's
   later law outranks E's provisional framing, and the walker's bijection stays
@@ -791,12 +1058,22 @@ legitimacy start, plan-trigger thresholds.
   campaign-member parentRef seam first and proves pair-reachability by corpus
   probe. VETO ships the casus against the satellite ledger as-is (and accepts a
   structurally-unreachable cause).
-- **J-WR-13 (census corrections stand in the register):** the §2 substrate table's
-  two verified overstatements — "jailed applies to any named soul" (no
-  non-corruption jailing path exists today; the envoy program NAMES that seam as
-  new work in WR-7b) and the disposition row above — are corrected per
-  docs/COMPREHENSIVE_REVIEW_2026-08-01.md; any implementer finding a third census
-  overstatement STOPS and reports rather than building on it.
+- **J-WR-13 (the census STOP rule — REWRITTEN 2026-08-02, self-audit; the first
+  issue claimed the §2 rows were already corrected while the table stood
+  unamended, and undercounted the corrections):** THREE census overstatements are
+  KNOWN and now corrected in place in §2: (1) "jailed applies to any named soul" —
+  false; jailed is the corruption-exposure path only, and the foreign-guest hold
+  is named NEW WORK in WR-7b; (2) the disposition row — the tree already carries
+  the single-channel dispositionStats substrate, so WR-2 extends, never duplicates
+  (J-WR-11); (3) "14 peace mirrors" — 13, verified by enumeration. STANDING RULE:
+  any implementer finding a FOURTH census overstatement — anything beyond the
+  three named above — STOPS and reports rather than building on it.
+- **J-WR-14 (the atrocity pair, added 2026-08-02):** the atrocity-coalition casus
+  lands as `atrocity_answer` ↔ `atrocity_atoned`, minted from BELIEVED razings per
+  J-WR-7's news-speed discipline. Names vetoable; the structural need (walker
+  totality + bijection, and R2's both-polarity switch) is not. VETO rides moral
+  outrage on `grievance` at extreme magnitude with no new casus — and records why
+  the taxonomy is not extended.
 
 ## §7 THE TUNING SURFACE (owner-signed at the soak redo, per THE PROMISE)
 Every band named in §5, gathered: WR-1 term weights + deciding margin · WR-2
@@ -807,6 +1084,12 @@ mutation + interception + close-vote + widening + ransom + vetting · WR-8
 overwhelming + extremity + severity→tiers + escape + license bands + observer-
 alignment consequences · WR-9 envelope shapes. Every one banded, none a bare float
 on a surface, all in one tuning table per wave (the house idiom).
+Added 2026-08-02 (self-audit): WR-6 join-bar + refusal-cost bands · WR-8
+atrocity-casus decay + the feasibility-asymmetry DIRECTION (a signed band, pinned) ·
+the peace-terms TIME-BASE constant (WR-0c item 4 — whichever arm the ruling takes,
+the constant is owner-signed) · the map km-scale for the transit kernel's mode
+table (J-D11(b); does not exist in the tree — owner-signed when the mode table
+lands).
 
 ## §8 HERALD + LEGIBILITY CONTRACT (the sentences this program must be able to say)
 The legibility law is an acceptance criterion, not decoration. Each wave's receipts
@@ -815,6 +1098,7 @@ must be able to produce, in the house voice, at minimum:
 - "the war outlived its reason — men still dying for a god nobody worships" (WR-1)
 - "the Margrave sued for peace" vs "the realm sued for peace" (WR-5)
 - "they went home" / "they stayed" — the ally's temperament (WR-6)
+- "they were called, and would not come" — the remembered refusal (WR-6)
 - "they paid what they owed" / "they never paid" (WR-6)
 - "the terms were agreed and the envoy never reached them" (WR-7)
 - "the terms were signed for a town that had already fallen" (WR-7)
@@ -826,6 +1110,18 @@ Every one carries id + full address chain + typed action + named settlements +
 recorded reason (law 1a-5).
 
 ## §9 SEQUENCING AGAINST THE STANDING PIPELINE (owner-held items unchanged)
+
+**THE STANDING PRE-SOAK ORDER (prepended 2026-08-02, self-audit — the owner's queue
+ruling, recorded in DESIGN_REALM_DIRECTIVES.md Progress 2026-08-01 and carried in
+docs/FABLE_VALIDATION_QUEUE.md, was issued the same day as this volume and the
+volume never carried it):** WR-0 (landed) → P5 (landed @ 47b4ed9d) → WR-0c (items
+1–3 landed; item 4, the time-base ruling, OUTSTANDING) → THE LIGHTING BATCH
+(including `demographicsEnabled`) → the release grid + 300y rerun → tuning. The
+WR-1..WR-10 waves BUILD DARK and may proceed after WR-0c per the build order below;
+their flags are NOT in the standing lighting batch — they light at the owner-signed
+soak redo, in build order, after `demographicsEnabled` is lit (§3's flag-dependency
+ruling).
+
 1. WR-0 lands FIRST (it settles the tree; nothing builds over a dirty tree).
 2. WR-1 → WR-2 → WR-3 → WR-4 → WR-5 in order (each consumes the last).
 3. WR-6 after WR-5; WR-7 after WR-6 (votes need books; ransom needs errands).

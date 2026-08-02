@@ -46,7 +46,7 @@ shrinks until its delta rounds to -1 and then **freezes permanently**.
 Equilibrium is `pop* = 1.5 / (|monthlyRate| x intervalMagnitude)`.
 
 Executed against the real evaluator and the real full_simulation preset at
-one_year intervals (the soak's own configuration), 300-year trajectories from
+one_year intervals (the soak's own configuration)†, 300-year trajectories from
 pop=1200 under constant pressure p:
 
 | p | y50 | y100 | y300 | next delta |
@@ -59,6 +59,17 @@ pop=1200 under constant pressure p:
 | 0.75 | 729 | 442 | 151 | 0 — FROZEN |
 
 **The soak's 200-500 band is reproduced exactly at p ≈ 0.68-0.70.**
+[FOOTNOTE, CORRECTED 2026-08-02 (self-audit R-61): the soak HARNESS passes one_year,
+but the orchestrator decomposes every interval into one_week kernel ticks — the table
+above is the one_year DIRECT evaluator's reproduction of the same attractor; the
+in-vivo freeze regime is weekly ticks + crisis-condition modifiers. Same three lines,
+same defect; a tuner must model the weekly path.]
+
+†The soak's DECLARED interval is one_year, but the orchestrator decomposes every
+interval into one_week kernel ticks, so the in-vivo evaluator ran WEEKLY. Same
+defect, same attractor — but the in-vivo freeze regime is weekly ticks + crisis
+modifiers, and tuners must model THAT path, not the one_year table above.
+[Footnote landed 2026-08-02 (self-audit), verbatim per register R-61.]
 
 **CONSEQUENCE FOR THIS WAVE (binding):** a carrying-capacity ceiling alone
 fixes the top and leaves the bottom frozen — the bifurcation survives with
@@ -554,24 +565,32 @@ Paired check: the B1b small-N stasis medicine re-measured on the same run.
 ## §15 WAVE P5 — PRE-SOAK RECONCILIATION (owner-ordered 2026-08-01: "push them to
 ## before soak grid"; architecture by the Fable chair same day; implementation =
 ## the external implementer; sequenced WR-0 → P5 → the lighting batch → the grid)
+## [CORRECTED 2026-08-02 (self-audit): the full standing order is WR-0 → P5 →
+## WR-0c → THE LIGHTING BATCH (five flags incl. demographicsEnabled) → the grid →
+## tuning — the WR-0c opener hardening slots between P5 and the batch;
+## DESIGN_WAR_RULINGS_ARCHITECTURE.md §9 is the canonical statement]
 
 Both items were 2026-08-01 validation escalations with executed evidence. Both are
-DARK today (the demographics flag is in no preset), so both fixes carry ZERO golden
-risk now and land before the flag ever lights — the cheapest possible window. Both
+DARK today (the demographics flag is declared FALSE in full_simulation —
+deliberately, so the certification totality walker can census it — and lit in NO
+preset; parenthetical corrected 2026-08-02, self-audit), so both fixes carry ZERO
+golden risk now and land before the flag ever lights — the cheapest possible window. Both
 would corrupt the soak's evidence if left: the desert lock would surface as global
 "tier-promotion flatness" and invite a WRONG global tune for a biome-local
 arithmetic bug; the saturation divergence would make the legacy migration lane
 refuse destinations the density law calls half-empty, distorting the exact
 homeostat the soak exists to grade. Fix the instruments, then run the experiment.
 
-### P5a — THE DESERT UNLOCK (preserve the interlock, keep the desert harshest)
+### P5a — THE DESERT UNLOCK (a CEILING unlock — necessary, never sufficient; keep the desert harshest) [retitled 2026-08-02, self-audit — was "preserve the interlock"; see the correction below]
 **The measured defect:** TERRAIN_DENSITY_ADJUST.desert (0.50) × DENSITY_CEILINGS ×
 max public works (×1.24) sits below the NEXT tier's POPULATION_RANGES.min at ALL
 FIVE tier pairs (56<61 · 372<401 · 868<901 · 4650<5001 · 23560<25001), and
 populations equilibrate at 76–83% of bound, so the lock is absolute — a desert
 thorp can never become a hamlet regardless of anything it builds. Desert is the
 ONLY locked terrain; mountain (0.60) locks WITHOUT works and unlocks at max works —
-an elegant, evidently designed interlock. Desert being beyond the works ladder
+an elegant, evidently designed interlock [the "interlock" reading is CORRECTED
+below, 2026-08-02: a ceiling artifact, not a promotion guarantee, for desert and
+mountain alike]. Desert being beyond the works ladder
 contradicts DENSITY_CEILINGS' own stated purpose (demographicsRates.js:139-141).
 **THE RULING (owner-ordered fixed; design vetoable):** put desert ON the interlock
 rather than beyond it — raise TERRAIN_DENSITY_ADJUST.desert to the MINIMAL value
@@ -584,7 +603,9 @@ honest one: a pure-desert settlement ascends ONLY at maximum public works —
 cisterns and caravanserais, the Palmyra pattern — while a desert town that never
 builds stays locked forever, which is directive 9's "geographic fate" preserved.
 (A riverside desert settlement already carries the riverside class; this cell is
-the waterless extreme only.)
+the waterless extreme only.) [The "ascends ONLY at maximum public works" sentence
+is necessary-not-sufficient — corrected below, 2026-08-02: max works opens the
+ceiling; ascent still needs the §4 in-migration surge above the fixed point.]
 **STRUCTURAL PREVENTION (mandatory, the actual point):** a WALKER over
 TERRAIN_DENSITY_ADJUST × DENSITY_CEILINGS × works-max × POPULATION_RANGES
 asserting, for EVERY terrain, max works clears EVERY tier pair — so no future
@@ -601,6 +622,51 @@ walker executes all seven terrains across all five tier-promotion pairs through
 the real `densityCeilingOf` works reader at the live maximum factor (1.24). The
 strict terrain ordering, mountain-without-works negative, desert-before-cap
 negative, and 0.54 mutant pin preserve both sides of the interlock.
+
+**CORRECTED 2026-08-02 (self-audit) — P5a IS A CEILING UNLOCK: NECESSARY, NEVER
+SUFFICIENT.** 0.55 STANDS and the landed build is CORRECT — the walker's
+criterion (round(base × adjust × max works) ≥ the next tier's floor, every
+terrain, every pair) is exactly the CEILING criterion, and nothing about it is
+re-derived here. What the original story overclaimed is what clearing the
+ceiling BUYS. Populations do not sit at the ceiling: they equilibrate at the
+engine's own fixed point, 76–83% of bound by tier — which lands BELOW the next
+tier's floor at every pair, for desert at 0.55 AND for mountain at 0.60 (the
+audit's executed recomputation: mountain's max-works thorp ceiling is 67, and
+67 × ~0.83 ≈ 56 < 61, the hamlet floor). So maximum works OPENS the window; it
+does not walk a settlement through it. Promotion additionally requires
+IN-MIGRATION OVERSHOOT above the fixed point — §4's pull-driven arrivals
+pushing population over the next floor while the P5a ceiling holds that
+population legal — and §3's brief-overshoot allowance (J-P5) is the DESIGNED
+path for exactly this. The "elegant, evidently designed interlock" reading is
+therefore RETIRED for desert and mountain alike: it was an artifact of
+comparing ceilings while promotion compares populations. The honest story:
+works raise the walls; the road fills them. The two states this story leans
+on are pinned as P5c below.
+
+### P5c — THE REACHABILITY PINS (added 2026-08-02, self-audit — the two
+### conjunctions P5a's story leans on, pinned positively per the J-D10(c)
+### discipline; implementation = the external implementer, same lane as P5a/P5b)
+
+Both states were asserted, never demonstrated — the unreachable-conjunction
+hazard class aimed at the cure itself. Both are dark-side, zero golden risk.
+
+- **P5c-1 — works = WORKS_CAP IS REACHABLE.** Each infrastructure work needs a
+  completed plan; a plan opens only on a band CROSSING into pressed
+  (pressure01 ≥ 0.88) with an expired cooldown (182 ticks) and one active plan
+  per settlement — and the engine's own fixed point parks settlements BELOW
+  the pressed band, while each completed work drops pressure back out of it.
+  Reaching works = 3 therefore requires three separate external pressure
+  shocks (food/bound collapse or migration surge) spaced across the cooldowns.
+  PIN: a fenced multi-shock fixture in which some settlement actually banks
+  three infrastructure works. If no plausible shock sequence reaches it, that
+  is a FINDING for the tuning surface (the works ladder is decorative above
+  one), never a fixture to force.
+- **P5c-2 — DESERT PROMOTION UNDER SURGE IS REACHABLE.** PIN: a fixture where
+  a max-works desert settlement receives a §4 in-migration surge that pushes
+  population above the next tier's floor (inside the ceiling P5a opened, §3's
+  brief-overshoot allowance as the path) and the settlement PROMOTES — the
+  end-to-end proof that "a pure-desert settlement ascends only at maximum
+  public works" is a true sentence with a reachable subject.
 
 ### P5b — ONE CAPACITY TRUTH (retire the 9,000-person city wall when the engine is lit)
 **The measured divergence:** the legacy migration lane's size-saturation axis
@@ -633,6 +699,25 @@ fixture reads 1.0 dark and 0.526315... lit against the 38,000 city bound. The ne
 `demographicsLifecycleGolden` fences four both-flags seeds: each plan-driven
 founding occurs at tick 41 as `plan.Brimhold.1` / `steading.brimhold.41`, while
 the same-seed lifecycle-only twin produces no founding inside the 80-tick fence.
+
+**CORRECTED 2026-08-02 (self-audit) — THE LIT ARM'S PREDICTED RE-WEIGHTING,
+named before the soak reads it as a result.** The delegation is verified as
+specced (dark arm byte-identical; the 20k-city figures exact; the four-seed
+fence seed-sensitive, not vacuous). What the ruling did not record: lit,
+sizeSat becomes pressure01, and the engine's fixed point parks EVERY settled
+destination at ~0.76–0.83 of bound — so destinationScore's congestion
+multiplier (1 − CONGEST_DECAY 0.85 × pressure) sits near ~0.32 for every
+equilibrium destination, where dark it spanned ~0.98 (a 200-person village)
+down to ~0.15 (a 9,000+ hub). The richness axis's effective contribution
+falls roughly uniformly, shifting destination choice toward
+closeness/culture/safety — in EXACTLY the both-flags-lit configuration the
+soak will grade for population-spread narrowing. This is a design
+consequence, not a bug: the size-based megacity damper becomes a
+FULLNESS-based one, uniform at demographic equilibrium. It is a PREDICTED
+same-seed behavioural shift of the lit arm — the grid must read it as an
+instrument change, never as a homeostat result. OPEN QUESTION, routed to the
+pre-grid tuning agenda (owner-signed surface, unresolved here by design):
+whether CONGEST_DECAY needs a lit-arm recalibration band before the grid runs.
 
 **VERIFIED 2026-08-01:** the combined P5 wave passed the full repository gate:
 2,110 test files passed (one intentionally skipped), 22,319 tests passed with

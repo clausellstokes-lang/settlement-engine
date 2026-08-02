@@ -24,7 +24,12 @@ feature fills is that one), Founders' Hall plates (a numeral-only chair shows
 no image by the same single consent), comments — reads the SAME identity
 projection from one resolver (`publicIdentityOf(userId)` → `{ displayName,
 imageUrl | null, optedIn }`). No surface composes name and image independently;
-consent withdrawal blanks both everywhere at once.
+consent withdrawal blanks both everywhere at once. [Cross-doc note 2026-08-02
+(self-audit): this single switch SUPERSEDES DESIGN_GALLERY_SHOWCASE G-A-1's
+"the name is not [opt-in]" sentence once the identity object lands — flagged
+there as an OPEN FORK for the chair, because it changes shipped behavior (the
+campaigns author line renders external_name today with no opt-in, and that
+stands as the interim state until the chair confirms).]
 
 ## §2 THE ASSET CONTRACT (what is stored — judicious, exact)
 - **The canonical asset is ONE SQUARE MASTER: 512×512, WebP (quality band

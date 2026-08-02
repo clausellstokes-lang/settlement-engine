@@ -80,53 +80,73 @@ here as a row, so a Fable-capable account can re-validate later and readjust.
 ### tokens, 671 tool uses, all commits/tests re-read, key suites re-executed), then the
 ### chair ruled. Verdicts below; corrections land as register items in
 ### docs/COMPREHENSIVE_REVIEW_2026-08-01.md (R-xx refs) — the Opus rows above are never
-### rewritten. Overall: the Opus era's engineering judgments HOLD — 27 of 33 rows
-### CONFIRMED outright; 6 ADJUSTED (all doc-precision or scope corrections, zero
-### engineering reversals); 2 escalations RULED below.
+### rewritten. Overall [tally + characterization CORRECTED 2026-08-02 (self-audit): the
+### original "27 CONFIRMED / 6 ADJUSTED / 2 escalations RULED below" could not sum —
+### 27+6 already fills all 33 rows]: the Opus era's engineering judgments HOLD —
+### 26 of 33 rows CONFIRMED outright; 6 ADJUSTED (severity register, heraldFeed,
+### I1 Rookery, GROUNDED ANATOMY, WAVE P, P4 no-hidden-governor) — NOT all
+### doc-precision: three of the six generated real code work (I1 Rookery is a live
+### generation defect, R-29, assigned to the REM/WR dispatch; WAVE P's two escalations
+### became the P5a/P5b code wave, DESIGN_DEMOGRAPHIC_ENGINE §15, landed @ 47b4ed9d;
+### P4's scan-scope tightening is test work, R-64) — zero engineering REVERSALS stands.
+### 1 escalation RULED in-table (the neighbour-mirror row); the second escalation pair
+### (desert lock + SATURATION_POP divergence) was raised BY this pass and owner-ruled
+### in the chair row at the foot of the NEW ROWS table.
 
 | row (oldest first) | Fable verdict 2026-08-01 |
 |---|---|
 | npc-credibility nc-b golden re-record | ✓ CONFIRMED — field-level diff re-derived; only newsKinds moved |
 | Herald routing, nine kinds | ✓ CONFIRMED — all nine doors read right in play |
 | treaty_signed → major (0.55/66) | ✓ CONFIRMED — a dictated peace belongs in majorHeadlines |
-| Severity register | ✓ CONFIRMED with ADJUSTMENTS — census re-derived (numbers verified); intel_transfer HOLDS at 0.35 (a state secret changing hands is a notable turn); rumor-magnitude receipt channel RULED IN as a v5+ envelope field (the instrument gap closes at the soak redo, not before) |
+| Severity register | ✓ CONFIRMED with ADJUSTMENTS — census re-derived (numbers verified); intel_transfer HOLDS at 0.35 (a state secret changing hands is a notable turn); rumor-magnitude receipt channel RULED IN as a v5+ envelope field — spec at register R-56 (the instrument gap closes at the soak redo, not before) |
 | diplomacy → trade + single-producer walker | ✓ CONFIRMED — walker bites both directions; when it reds, mint a treaty-specific impactKind rather than re-splitting (pre-ruled) |
-| heraldFeed fourth source | ✓ CONFIRMED with ADJUSTMENT — lens rule holds at multi-interval advance; the adjustment is recorded in the register (R-ref) |
+| heraldFeed fourth source | ✓ CONFIRMED with ADJUSTMENT — lens rule holds at multi-interval advance; the adjustment is recorded in the register (R-57 — the lens is the FINAL-TICK window on composed advances, a semantics note, not a bug) |
 | Batch-3 golden re-record acceptance | ✓ CONFIRMED — blast radius independently re-derived |
-| ⚠️ Neighbour-mirror escalation | ⭐ RULED (vetoable): option (c) INJECTION form — when the category is occupied the neighbour faction still lands, distinctly labeled, at dampened weight (×0.5 band) with a per-settlement cap (≤1 mirror + ≤1 opposition); QUEUED FOR THE ONE REGEN batch (golden-shifting; owner lights it); option (a) emergent-suppression is the EXPLICIT INTERIM STATE until that batch. SCOPE CORRECTED: the cliff is city-specific + town-mirror-channel only — town opposition stays live (23/60 hostile, 14/60 rival); the queue row's "every relationship type at town" was an allied-cell artifact. Blast radius proven confined (per-step rng fork; un-neighboured seeds bit-identical; consumers duplication-aware) |
+| ⚠️ Neighbour-mirror escalation | ⭐ RULED (vetoable): option (c) INJECTION form — when the category is occupied the neighbour faction still lands, distinctly labeled, at dampened weight (×0.5 band) with a per-settlement cap (≤1 mirror + ≤1 opposition); QUEUED FOR THE ONE REGEN batch (golden-shifting; owner lights it); option (a) emergent-suppression is the EXPLICIT INTERIM STATE until that batch. SCOPE CORRECTED: the cliff is city-specific + town-mirror-channel only — town opposition stays live (23/60 hostile, 14/60 rival); the queue row's "every relationship type at town" was an allied-cell artifact. Blast radius proven confined (per-step rng fork; un-neighboured seeds bit-identical; consumers duplication-aware). Full executable injection spec = register R-65 [pointer landed 2026-08-02 (self-audit); R-65 carries one OPEN PIN — the shared existingTypes slot interaction — for the chair] |
 | factionRename cascade extension | ✓ CONFIRMED — REPAIR classification right; title substitution ACCEPTED (coincidental-token risk measured negligible; the one quirk found is pre-existing and recorded) |
-| npcVerdictTable ruin filter | ✓ CONFIRMED — zero-golden-risk claim verified; missing negative fixture = register item |
+| npcVerdictTable ruin filter | ✓ CONFIRMED — zero-golden-risk claim verified; missing negative fixture = register item R-58 |
 | Wave D (CREATE_ROUTE + 193) | ✓ CONFIRMED — config._userRoutes stands until the train deploys; revisit as a column only if a second consumer appears |
 | J1 (ledger + genesis) | ✓ CONFIRMED — road-grade water genesis is the intended §8 reading |
 | H1 (durable identity) | ✓ CONFIRMED — persistence disclosure needs NO migration (load path tolerant); forward note recorded: lighting later lights NEW campaigns only |
-| FP-G16 ESD trim | ✓ CONFIRMED — residual candidate-lazy set recorded as FP-G17 candidate (register) |
+| FP-G16 ESD trim | ✓ CONFIRMED — residual candidate-lazy set recorded as FP-G17 candidate (register R-59) |
 | GOLDEN RE-RECORD AUTHORIZED (I1) | ✓ CONFIRMED — the per-wave (not deferred-batch) policy was RIGHT; no subsequent wave shifted a golden, exactly as predicted |
 | J2 + counterfactual mercy | ✓ CONFIRMED — all three veto-open calls upheld |
 | H2 + alias repair | ✓ CONFIRMED |
-| I1 Rookery deferral | ⚠️ ADJUSTED — I3 did NOT close the precondition; it was inherited again exactly as the row feared (enforced nowhere at generation). Register R-ref carries the fix; assign in the next REM/WR dispatch |
+| I1 Rookery deferral | ⚠️ ADJUSTED — I3 did NOT close the precondition; it was inherited again exactly as the row feared (enforced nowhere at generation). Register R-29 carries the fix; assign in the next REM/WR dispatch [pointer resolved 2026-08-02 (self-audit): the item existed all along — the cell held an unresolved placeholder] |
 | J3 (charter/decay/danger) | ✓ CONFIRMED — the two-danger-reading split is the right model |
 | H3 (circulation + stationarity) | ✓ CONFIRMED — envelope re-executed, mutant control bites |
 | K1 (institution status) | ✓ CONFIRMED — four-cause vocabulary sufficient today; the real pressure point recorded for the day a fifth root appears |
 | Batch-4 typecheck reconciliation | ✓ CONFIRMED — no fourth world/settlement spelling crept in |
 | H4 + undo placement | ✓ CONFIRMED — leak check clean; no other advertised capability unreachable (ratchet green) |
-| I2 (stamps + fidelity) | ✓ CONFIRMED — impaired-still-trades reads right; "trades corruptly" is narrative-only today (register note) |
+| I2 (stamps + fidelity) | ✓ CONFIRMED — impaired-still-trades reads right; "trades corruptly" is narrative-only today (register R-60) |
 | J4 (reputation race) | ✓ CONFIRMED — the race pin proves what it claims |
-| THE GROUNDED ANATOMY | ✓ CONFIRMED — independently re-derived analytically; the fixed-point formula reproduces the executed table EXACTLY (756/504/301/151). ONE ADJUSTMENT: the soak evaluator ticks WEEKLY (the orchestrator decomposes every interval to one_week), so §0's "(the soak's own configuration)" parenthetical conflates harness interval with evaluation interval — same defect, same attractor, but the in-vivo freeze regime is weekly ticks + crisis modifiers, and tuners must model THAT path. §0 footnote ordered (register R-ref) |
-| P1 acceptance | ✓ CONFIRMED — growth-side-only suppression re-derived sound; two overstated numeric details in the row corrected in the register |
+| THE GROUNDED ANATOMY | ✓ CONFIRMED — independently re-derived analytically; the fixed-point formula reproduces the executed table EXACTLY (756/504/301/151). ONE ADJUSTMENT: the soak evaluator ticks WEEKLY (the orchestrator decomposes every interval to one_week), so §0's "(the soak's own configuration)" parenthetical conflates harness interval with evaluation interval — same defect, same attractor, but the in-vivo freeze regime is weekly ticks + crisis modifiers, and tuners must model THAT path. §0 footnote ordered (register R-61 carries the footnote text verbatim) |
+| P1 acceptance | ✓ CONFIRMED — growth-side-only suppression re-derived sound; two overstated numeric details in the row corrected in the register (R-62: six settlements, not 8; the 0.5% plateau literal) |
 | External design review (3 amendments) | ✓ CONFIRMED — one-plan-slot shows no thrash at scale; no fourth reading needed on current evidence |
-| WAVE P ENTIRE | ✓ CONFIRMED as accepted — with the calibration adjustment above and two band findings ESCALATED: (1) ⚠️ DESERT PROMOTION-LOCK — desert settlements are promotion-locked at EVERY tier pair even at maximum public works (band-combination extreme; a biome that structurally cannot ascend) — OWNER DECISION or tuning-pass item, recorded in the register; (2) legacy migrationKernel SATURATION_POP 9000 vs DENSITY_CEILINGS (city 38k) — sibling divergence to reconcile BEFORE the soak grid |
+| WAVE P ENTIRE | ✓ CONFIRMED as accepted — with the calibration adjustment above and two band findings ESCALATED: (1) ⚠️ DESERT PROMOTION-LOCK — desert settlements are promotion-locked at EVERY tier pair even at maximum public works (band-combination extreme; a biome that structurally cannot ascend) — OWNER DECISION or tuning-pass item, specced as P5a in DESIGN_DEMOGRAPHIC_ENGINE §15, NOT in the register [pointer CORRECTED 2026-08-02 (self-audit); landed @ 47b4ed9d]; (2) legacy migrationKernel SATURATION_POP 9000 vs DENSITY_CEILINGS (city 38k) — sibling divergence to reconcile BEFORE the soak grid, specced as P5b in the same §15 |
 | P4 'indirect' grade | ✓ CONFIRMED — honest grade for a reader-without-lit-receipts |
-| P4 capability floor 0.20 | ✓ CONFIRMED — sane pending soak; ⚠️ latent hazard recorded: capability01:null ZEROES war scores instead of defaulting to 1 (register) |
-| P4 no-hidden-governor | ✓ CONFIRMED with ADJUSTMENT — the structural scan is real and the guard-the-guard arm bites, but scan scope has an on-paper bypass (register R-ref carries the tightening) |
+| P4 capability floor 0.20 | ✓ CONFIRMED — sane pending soak; ⚠️ latent hazard recorded: capability01:null ZEROES war scores instead of defaulting to 1 (register R-63) |
+| P4 no-hidden-governor | ✓ CONFIRMED with ADJUSTMENT — the structural scan is real and the guard-the-guard arm bites, but scan scope has an on-paper bypass (register R-64 names the two bypass routes, the mitigating fact, and the tightening) |
 | Soak remnant amendment | ✓ CONFIRMED — the lifecycleDiedAtTick exception cannot mask a non-died zero |
+
+> CORRECTED 2026-08-02 (self-audit): nine verdict cells above promised corrections "in
+> the register" that had never landed — the self-audit's dangling-pointer finding.
+> Every pointer now resolves: severity→R-56 · heraldFeed→R-57 · npcVerdictTable→R-58 ·
+> FP-G17→R-59 · I1 Rookery→R-29 (it existed; the cell held a placeholder) · I2→R-60 ·
+> §0 footnote→R-61 · P1 numerics→R-62 · capability01→R-63 · P4 scan→R-64 · the WAVE P
+> escalations live in DESIGN_DEMOGRAPHIC_ENGINE §15 (P5a/P5b, landed @ 47b4ed9d), not
+> the register. Items R-56..R-66 were appended to the register's ADDENDUM REGISTER
+> section by the same audit; no dangling unresolved-placeholder pointer survives in
+> this file (checkable: grep the file for the hyphenated ref placeholder).
 
 ### NEW ROWS (Fable chair, 2026-08-01 — rulings made this session)
 | date | item | decision | evidence | veto surface |
 |---|---|---|---|---|
-| 2026-08-01 | ⭐ W1 GOLDEN ADJUDICATION — the three reds on the settled tree | RULED LEGITIMATE lit-path W1 shift; re-record AUTHORIZED (executed by the implementer in WR-0 per test headers; anyCast = ratchet-DOWN lock-in). Dormancy-break hypothesis REFUTED on four executed grounds: drifting configs have war+strategy LIT; momentum's own fenced layer stayed a perfect no-op; the 99e2d54f base worktree reproduces ALL SIX committed manifest hashes byte-exactly; every moved field traces to a declared W1 join and none doesn't | isolation-worktree field-level diff (validation workflow wf_df90beb3-931) | Owner may veto the re-record; then W1 holds uncommitted until re-ruled |
-| 2026-08-01 | Batch-6 acceptances (I3+I4 @ 007e0dcf, K2 @ 230e0f22, K3 @ e2614d4f, K4 @ 7b6639f9) — rows were NEVER WRITTEN (protocol breach found by review) | RETRO-VALIDATED as accepted: gate exit 0, no golden moved, K2..K4 did not strain K1's vocabulary; code-level findings from the review land in the register (Rookery precondition inherited; plant-wiring gap; regime-gate one-sidedness REFUTED by the skeptic) rather than blocking acceptance | review dimensions brokerages-ik + design-corpus; ledger Progress rows | standard |
-| 2026-08-01 | ⭐ THE LIGHTING BATCH is a first-class scheduled step | The four directive flags (npcConsequences, routeLifecycle, magicEconomy, informationBrokerages) are FALSE in full_simulation while the restart order says "lit in full_simulation" — a hidden prerequisite recorded only in a code comment. RULED: one ONE-REGEN-style lighting commit (flip the four directive flags PLUS demographicsEnabled — CORRECTED 2026-08-01 by self-audit: the original ruling omitted the one flag wave P's fourteen-claim acceptance contract depends on; a soak without it re-proves the pre-cure engine — + disclosed golden re-records with blast-radius proof + budgets-proven-lit, incl. the SS11b both-flags-lit same-seed shift captured as its own documented golden) sequenced explicitly BEFORE the soak redo | simulationRules.js:442-490 vs DESIGN_REALM_DIRECTIVES Progress | Owner sequences it with the soak order |
+| 2026-08-01 | ⭐ W1 GOLDEN ADJUDICATION — the three reds on the settled tree | RULED LEGITIMATE lit-path W1 shift; re-record AUTHORIZED (executed by the implementer in WR-0 per test headers; anyCast = ratchet-DOWN lock-in). Dormancy-break hypothesis REFUTED on four executed grounds: drifting configs have war+strategy LIT; momentum's own fenced layer stayed a perfect no-op; the 99e2d54f base worktree reproduces ALL SIX committed manifest hashes byte-exactly; every moved field traces to a declared W1 join and none doesn't [CORRECTED 2026-08-02 (self-audit) — stale attribution refreshed: W1 and the authorized re-record LANDED, executed by Sol @ f5a88ac1 ("War W1: join strategy, transit, and treaty enforcement"); the moved goldens are exactly the three predicted rows (belief-map bg-c\|14; momentum-dormancy mo-b\|8, mo-c\|6). The test headers cite WR-0b, but no commit carries a WR-0/WR-0a/WR-0b label — WR-0c landed separately @ 622a3aab, AFTER P5 @ 47b4ed9d. Register R-01 (which prescribed exactly this adjudication) is CLOSED by that landing] | isolation-worktree field-level diff (validation workflow wf_df90beb3-931) [re-runnable check added 2026-08-02 (self-audit): `npx vitest run tests/property/beliefMapGolden.test.js tests/property/momentumDormancyGolden.test.js` on the landed tree] | Owner may veto the re-record; then W1 holds uncommitted until re-ruled [CORRECTED 2026-08-02 (self-audit): W1 is no longer uncommitted — a veto now operates on the landed commit (revert the f5a88ac1 re-record and re-rule), not on a held tree] |
+| 2026-08-01 | Batch-6 acceptances (I3+I4 @ 007e0dcf, K2 @ 230e0f22, K3 @ e2614d4f, K4 @ 7b6639f9) — rows were NEVER WRITTEN (protocol breach found by review) | RETRO-VALIDATED as accepted: gate exit 0, no golden moved, K2..K4 did not strain K1's vocabulary; code-level findings from the review land in the register (Rookery precondition inherited; plant-wiring gap; regime-gate one-sidedness REFUTED by the skeptic) rather than blocking acceptance [CORRECTED 2026-08-02 (self-audit), three ways: (1) A FOURTH retro judgment the pass missed: K3 WIDENED a K1 certification pin @ e2614d4f — tests/domain/institutionStatusCertification.test.js's "ONE declared channel" pin went from EXACT equality to toContain + a shape loop because K3 added a second declared channel (spatialLedgers.magicBuffer, the ward reserve); the in-test note records the amendment. VERDICT: ACCEPTED as the honest in-flight amendment — the equality claim had become false; compensating pin = tests/domain/magicBufferIntegration.test.js — with the totality restoration a named work item (register R-66: exact-SET equality over the UNION of declared W-K channels). (2) "gate exit 0" is SELF-ATTESTED: its only citation is the Progress blockquote, the very record this retro pass was auditing, and no gate artifact exists under artifacts/ (generation/ops/performance/soak/town-scene only). Compensating fact the self-audit verified independently: `git diff --name-only 007e0dcf^ 7b6639f9` touches no fixture/golden/snapshot/baseline path — NO golden moved across batch 6, by diff, not by tally. (3) "K2..K4 did not strain K1's vocabulary" is true of the impairment-cause list only; the K3 deviation this row disposes of is corrected per register R-41 — the buffer-draw substance is REFUTED (the buffer draws TWO stocks: granary months + the ward-charge reserve; the reagent absence is a recorded deferral) and the SURVIVING deviation is the two-ratified-docs treasury contradiction (DESIGN_MAGIC_ECONOMY §5 vs amendment S), adjudicated at R-18/R-41] | review dimensions brokerages-ik + design-corpus; ledger Progress rows | standard |
+| 2026-08-01 | ⭐ THE LIGHTING BATCH is a first-class scheduled step | The four directive flags (npcConsequences, routeLifecycle, magicEconomy, informationBrokerages) are FALSE in full_simulation while the restart order says "lit in full_simulation" — a hidden prerequisite recorded only in a code comment. RULED: one ONE-REGEN-style lighting commit (flip the four directive flags PLUS demographicsEnabled — CORRECTED 2026-08-01 by self-audit: the original ruling omitted the one flag wave P's fourteen-claim acceptance contract depends on; a soak without it re-proves the pre-cure engine — + disclosed golden re-records with blast-radius proof + budgets-proven-lit, incl. the §11b both-flags-lit same-seed shift captured as its own documented golden ["SS11b" typo fixed + status CORRECTED 2026-08-02 (self-audit): that fenced golden was captured EARLY, at P5b @ 47b4ed9d — demographicsLifecycleGolden, four both-flags seeds, per DESIGN_DEMOGRAPHIC_ENGINE §15's landed receipt; the batch inherits it and re-records disclosed only if lighting moves it]) sequenced explicitly BEFORE the soak redo [CORRECTED 2026-08-02 (self-audit), completing the flag inventory: townCartographyEnabled (simulationRules.js:528, virtual) is NOT part of this batch — the TC-3..8 owner hold governs it and this batch does not touch it; if the owner wants cartography lit at the same regen boundary, that is a separate ruling. settlementLifecycleEnabled is already true (simulationRules.js:211), which is what makes the §11b both-flags-lit shift fire at THIS batch] | simulationRules.js:442-490 vs DESIGN_REALM_DIRECTIVES Progress | Owner sequences it with the soak order |
 | 2026-08-01 | Village-seeding row correction | The queue row locates the delegated ruling in "J-P blocks"; it lives in DESIGN_DEMOGRAPHIC_ENGINE §11b. Ruling itself CONFIRMED (cap table stands; veto raises the cap, never forks the lane) | §11b | none |
+| 2026-08-01 | ⭐ OWNER RULED the two wave-P escalations (desert promotion-lock + migrationKernel/DENSITY_CEILINGS divergence): FIX BOTH, sequenced BEFORE the soak grid | Architected same session as WAVE P5 (DESIGN_DEMOGRAPHIC_ENGINE.md §15): P5a puts desert ON the works interlock (minimal adjust clearing all five pairs at max works, strictly under mountain; locked-biome WALKER as structural prevention) · P5b = one capacity truth (legacy saturation axis delegates to pressure01 when lit, byte-identical dark; the §11b both-flags-lit config gains its first fenced golden). Sequence: WR-0 → P5 → lighting batch → grid [row relocated INTO this table 2026-08-02 (self-audit) — it previously sat orphaned below the protocol amendment, outside any table, where a renderer drops it to loose text. CORRECTION beside the owner's words, not to them: the EXECUTED order diverged from the recorded "WR-0 → P5" head — W1 + the authorized re-record landed first @ f5a88ac1, P5 landed @ 47b4ed9d, and the WR-0c opener hardening landed AFTER P5 @ 622a3aab (no commit carries the bare WR-0 label; the slice decomposed into 0b-in-W1 + 0c). The owner's binding constraint — every fix BEFORE the lighting batch and the grid — is intact; the lighting batch and the grid remain ahead, owner-sequenced] | validation wf findings (executed band arithmetic + divergence measurement); owner order in-session | Design details vetoable; the fix order itself is the owner's |
 
 ### INSTRUCTION READJUSTMENT (protocol step 3 — the systematic lean, recorded vetoably)
 The Opus era shows ONE systematic lean and it is PROCESS, not engineering: judgments hold
@@ -137,4 +157,35 @@ rows are written BEFORE the next batch dispatches (a batch without rows is un-di
 (2) every evidence cell quotes a RE-RUNNABLE command, not a summary tally; (3) any
 deviation from a recorded owner order (however sensible) gets its own row the day it is
 taken. Engineering delegation to Opus is otherwise re-affirmed at full scope.
-| 2026-08-01 | ⭐ OWNER RULED the two wave-P escalations (desert promotion-lock + migrationKernel/DENSITY_CEILINGS divergence): FIX BOTH, sequenced BEFORE the soak grid | Architected same session as WAVE P5 (DESIGN_DEMOGRAPHIC_ENGINE.md §15): P5a puts desert ON the works interlock (minimal adjust clearing all five pairs at max works, strictly under mountain; locked-biome WALKER as structural prevention) · P5b = one capacity truth (legacy saturation axis delegates to pressure01 when lit, byte-identical dark; the §11b both-flags-lit config gains its first fenced golden). Sequence: WR-0 → P5 → lighting batch → grid | validation wf findings (executed band arithmetic + divergence measurement); owner order in-session | Design details vetoable; the fix order itself is the owner's |
+[The owner ruling on the two wave-P escalations formerly sat here as an orphaned table
+row; it was moved up INTO the NEW ROWS table 2026-08-02 (self-audit), text verbatim.]
+
+
+## CHAIR RULINGS 2026-08-02 — the correction pass's 20 unresolved items (each was a
+## genuine fork the correctors rightly refused to decide; ruled here, vetoable)
+RATIFIED AS PROPOSED: chat thread/upload lifecycle defaults (world-delete purges both
+audiences; regen preserves; import mints fresh — threads never travel; undo untouched) ·
+the downgrade edge (no replayed history on a downgraded question, negative-controlled) ·
+transcription = NON-COMPILE surface (anthropicCache import pinned absent) · the curated
++40 grandfather (free disclosed editorial ≠ paid visibility; owner veto surface stands) ·
+THE ATROCITY PAIR MINTS in WR-8 (atrocity_outrage ↔ atonement_accepted, names vetoable;
+R2's just-razing switches it off BY NAME) · R2 license substrate v1 = existing-edge
+holders only (stranger-minting deferred with the false-license frontier) · ONE TRANSIT
+KERNEL denominated km/week-per-mode with J4 grade as multiplier (WR-7a builds, D11(b)
+extends — the superset ruling) · CONGEST_DECAY → the pre-grid tuning agenda (owner-signed
+class) · the directives H1 retitles count-free ("DESIGN — THE REALM DIRECTIVES") ·
+demo-mount tab-set deltas escalate before LM-2 (sentinel as the likely cure) · the
+narration picker STAYS in Profile · AccountPreferencesSection MOUNTS under Preferences
+(closes the orphan; the tab finally means its name) · injected neighbour mirrors do NOT
+consume the opposition slot (both channels preserved) · the protocol's re-runnable-
+command rule extends to ALL chair rows of ANY era incl. this one (receipts under
+artifacts/gate/ where a gate is claimed) · warConvergenceContract flag_coverage relaxes
+to alive>0-somewhere AND unobserved==0-everywhere (DORMANT_BY_CONFIG becomes honest) ·
+the §0 weekly-tick footnote LANDED this commit.
+ROUTED TO THE OWNER (paid/release class, never self-ruled): (1) ANNUAL CREDIT CADENCE —
+recommended: a monthly drip of 30 keyed to the subscription anniversary, deduped per
+period via the existing credit-ledger idiom (preserves the monthly-equivalent promise;
+avoids a 360-at-once grant); (2) THE WR-9 GATE READING — ratify "product certification
+gates on the WR program landing lit," or split war_convergence_instrumented out of the
+required keys until then. FOLLOW-UP row: verify corrector 4's four companion bracket
+notes landed in DESIGN_REALM_DIRECTIVES (cross-agent seam; sweep at next validation).

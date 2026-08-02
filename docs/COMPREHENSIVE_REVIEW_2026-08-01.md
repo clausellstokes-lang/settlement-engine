@@ -18,6 +18,7 @@
 - **Failure scenario:** W1 is committed on the current evidence: either (a) a genuine lit-path behavior change lands with the goldens quietly re-recorded — an undisclosed same-seed world shift violating THE PROMISE and non-negotiable 10, or (b) a not-yet-excluded dark-path leak ships unfixed. Conversely, a successor believing the handoff's churn hypothesis re-runs the full gate, sees the same reds, and burns hours re-deriving what one 3-second focused run already proves.
 - **Fix sketch:** Before the W1 commit: bisect the seven dirty worldPulse files against the two golden fixtures (both fixtures carry marching wars, so siegeArrivalGate and strategy-opens-wars are the prime suspects) to name the exact join that moves each hash; write the diagnosis into the commit as a disclosed one-time shift; then re-record both goldens under an owner-signed re-record (the handoff's step 3), never silently. If any drifted config turns out to have the war layer DARK, stop — that is a dormancy leak and a hard defect to fix, not re-record. Note the momentum contract sub-tests passing means the momentum fence itself needs no repair.
 - **Finder confidence:** CONFIRMED
+- **CLOSED 2026-08-02 (self-audit):** the adjudication this item prescribed was executed by the Fable chair 2026-08-01 (FABLE_VALIDATION_QUEUE W1 chair row — the dormancy-break hypothesis REFUTED on four executed grounds; the shift ruled a legitimate lit-path W1 change), and W1 landed WITH the authorized, disclosed re-record @ f5a88ac1, executed by Sol. The drifted rows were exactly the three predicted (bg-c|14, mo-b|8, mo-c|6). The one-time shift is disclosed, not silent; nothing here remains open.
 
 ### R-02 [HIGH/CONFIRMED] Autoplacement 'one undo reverts the whole act' is false for the place class
 - **Where:** src/store/mapSlice.js:500
@@ -136,7 +137,7 @@
 - **Finding:** The owner restart order recorded in DESIGN_REALM_DIRECTIVES Progress says waves ship 'dark flags lit in full_simulation (the certification vehicle) with budgets proven lit'. Built reality: npcConsequencesEnabled:false (:442), routeLifecycleEnabled:false (:456), magicEconomyEnabled:false (:475), informationBrokeragesEnabled:false (:490) in the full_simulation spread, while the older war sub-flags (warForageEnabled, warDispositionEnabled, etc.) ARE lit there (:398). The code comment says lighting 'belongs at the single declared golden boundary (the ONE REGEN batch discipline)… Flip this one value there' — a hidden prerequisite step for the owner's 'REDO ALL SOAKS… everything lit' that is recorded nowhere except this comment: not in Progress, not in FABLE_VALIDATION_QUEUE.md, not in the handoff. The deviation from the restart order is itself an unrecorded Fable-chair-class judgment.
 - **Verifier adjustment:** The four flags ARE false in the full_simulation spread (src/domain/worldPulse/simulationRules.js: npcConsequencesEnabled:false, routeLifecycleEnabled:false, magicEconomyEnabled:false, informationBrokeragesEnabled:false) while the eight war sub-flags including warDispositionEnabled are lit in the same block — that half is confirmed. But the claim that the deviation is 'recorded nowhere except this comment' is FALSE: DESIGN_REALM_DIRECTIVES Progress records it twice ('Gate exit 0; NO golden moved (every slice dark)' for batch 4; 'Gate exit 0; no golden moved' for batch 5) and FABLE_VALIDATION_QUEUE.md's I1 golden-re-record row states it in the re-examination column ('all remaining ship dark'). The surviving, narrower defect: no Progress entry, queue row, or handoff line ASSIGNS the lighting to a batch or names it as a prerequisite of the owner's 'REDO ALL SOAKS … everything lit' order, and no row records the per-wave deviation from the restart order's 'dark flags lit in full_simulation (the certification vehicle) with budgets proven lit' as a disposition — which the queue protocol's 'Deferral/skip/block dispositions with product consequences' clause requires.
 - **Failure scenario:** A successor executes the owner's soak-redo order against full_simulation as written; H, I(effects), J and K all grade DORMANT_BY_CONFIG; the redo whose entire rationale was 'the waves change the simulation' measures none of them — or worse, someone lights the flags ad hoc mid-soak without the golden-boundary batch and shifts goldens with no signed re-record.
-- **Fix sketch:** Record the lighting batch as a first-class scheduled step (a Progress entry plus a FABLE_VALIDATION_QUEUE row): one ONE-REGEN-style commit that flips the four values in full_simulation, re-records the disclosed goldens with blast-radius proof (the I1 precedent), and proves budgets lit — sequenced explicitly BEFORE the soak redo in the successor's resume order.
+- **Fix sketch:** Record the lighting batch as a first-class scheduled step (a Progress entry plus a FABLE_VALIDATION_QUEUE row): one ONE-REGEN-style commit that flips the four values in full_simulation, re-records the disclosed goldens with blast-radius proof (the I1 precedent), and proves budgets lit — sequenced explicitly BEFORE the soak redo in the successor's resume order. [Superseded in one detail 2026-08-02 (self-audit): the ruled batch is FIVE flags — `demographicsEnabled` joins the four (FABLE_VALIDATION_QUEUE's corrected lighting-batch chair row; DESIGN_REALM_DIRECTIVES Progress agrees); a soak with demographics dark would re-prove the pre-cure engine.]
 - **Finder confidence:** CONFIRMED
 
 ### R-18 [MEDIUM/ADJUSTED] Batch-6 wave acceptances (I3+I4, K2, K3, K4) have no rows in FABLE_VALIDATION_QUEUE — a breach of the binding continuity protocol, and it swallowed two real deviation judgments
@@ -146,6 +147,7 @@
 - **Failure scenario:** The Fable-capable re-validator works the queue oldest-first as instructed, finds no batch-6 rows, and never re-derives the K3 stock substitution, the K4 dark accrual, or the I3/I4 service-layer judgments; a later tuning or lighting decision is made assuming §5/§7 of DESIGN_MAGIC_ECONOMY were built as written.
 - **Fix sketch:** Backfill four dated rows (evidence = the four commit hashes and their test suites, plus the two code-recorded deviations quoted verbatim) marked as retro-recorded with the recording gap acknowledged; add the K4 dark-accrual lighting decision and the K3 stock-model question to each row's 'what Fable should re-examine' column.
 - **Finder confidence:** CONFIRMED
+- **CORRECTED 2026-08-02 (self-audit):** sub-claim (b)'s buffer-draw substance is REFUTED within this same register — R-41's verifier adjudication: magicBufferApply.js:14-21 names TWO stocks and both are drawn (granary months AND the ward-charge reserve; reserves ARE built), and the reagent absence is an explicitly recorded deferral (:23-27), which the review rules exclude. What survives of (b) is the missing acceptance ROW itself plus the two-ratified-docs treasury contradiction (DESIGN_MAGIC_ECONOMY §5 vs amendment S) — see R-41 for the adjudicated fact pattern; this item and R-41 no longer disagree. The missing rows themselves were retro-validated by the queue's batch-6 chair row (2026-08-01), which now consumes this corrected reading.
 
 ### R-19 [MEDIUM/ADJUSTED] Commissioned plants are charged and narrated but never planted: the PLANT_WIRING into processLies does not exist, yet the producer mints paid plant events
 - **Where:** src/domain/worldPulse/brokerageServicesRules.js:346-380
@@ -461,7 +463,7 @@
 - K_food is genuinely FLOW-only (the §2b pin holds): foodCapacityOf reads dailyProduction, dailyNeed x importDependency and the banded obligation draw through the ONE foodLedger read-point — no storageMonths term anywhere in K, reserves only ever scale departure DELAY (RESERVE_DELAY_MAX) and never capacity or destination choice.
 - The §3 step is exactly as specified and pinned by executed tests (162+34 green at HEAD): every term integer via one shared integerize primitive, ONE fork demographics:<id> per settlement per tick consuming exactly two draws in fixed order, draw-accounted by a counting-fork test harness, with P2/P3/P1a deliberately on keyed hashes so the two-draw pin survives every later lane (the wave-E stream-theft law applied consistently).
 - The H3 floor composes structurally in all three shrink lanes — kernel deaths, P2 departures, and the P1a decline path all draw against pop − residentNamedNpcCount — and the P1a cure is real: the decline-side integer deadband is gone when lit (fraction-as-probability, no nonzero equilibrium), the terminal lane's thorp gate widened to popToTier under the flag, and tier drift gained the viability read as an eligibility input (never a second transition writer), with the promotion mint dispositioned conserved under the same flag.
-- No hidden governor: demographicsRisk is structurally isolated from realm totals (no import path to the observation module, every term a function of one settlement's own state, continuous in the head count past the pop>=5000 saturation trap), and the one sanctioned realm read (Σpop/ΣK_food) flows only into capped war-motive shares and the additive v5 observation.
+- No hidden governor: demographicsRisk is structurally isolated from realm totals (no import path to the observation module, every term a function of one settlement's own state, continuous in the head count past the pop>=5000 saturation trap), and the one sanctioned realm read (Σpop/ΣK_food) flows only into capped war-motive shares and the additive v5 observation. [QUALIFIED 2026-08-02 (self-audit): "no import path" is proven single-file and non-transitively — the scan has two on-paper bypass routes (a helper hop through demographicsRates.js, whose own import list is pinned nowhere, and a seam-local governor inside pressureModel.js, which legitimately holds the whole realm and is scanned for exactly one token). Register R-64 names both routes and the tightening; the mitigating fact — realm totals are unreachable from demographicRiskOf's call signature today — is what keeps this bullet load-bearing. The 2026-08-01 queue verdict on P4 no-hidden-governor already carried this adjustment; the two halves of the record now agree.]
 - Ledger discipline is clean where it matters most: P2 rides the existing spatialLedgers.migration columns stamped with travelClass, M4's release pass explicitly skips demographic columns (migration.js:598) and vice versa, the plans ledger name is declared once in a zero-import leaf (writer/reader spelling drift pre-empted), every Herald entry carries a house-shaped id (the id-less wizard-news drop class avoided), and all three writers are conditional drop-when-empty with object-identity dormancy gates.
 - The spatialLedgers conditional-namespace discipline held across every Opus-era ledger: npcLedger, npcRulings, warIntents, demographicPlans, and the route ledgers all nest under the ONE CONDITIONAL_LEDGER_KEYS entry, with total readers (absent/garbage reads as empty), drop-when-empty at both sub-ledger and namespace level, and a real versioning seam already exercised (WORLD_STATE_MIGRATIONS v2 chief→patron precedent). The H1 persistence-shape disclosure is therefore safe: old saves missing the key load clean — CONFIRMED by the passing E-C worldState ensure/persist/clone/migrate/dormancy suite and npcLedgerDormancyGolden (executed, green).
 - operationRegistry ↔ compendiumData regen consistency is execution-verified over the dirty tree: operationRegistry.walker, deadOperationRatchet, and advertisedUndoArming.walker all pass (part of 95 green tests across 6 store files), and all three Opus commits (Wave D, Wave G, H4) regenerated compendiumData.generated.js in the same commit. Even the frozen mid-build TC-0 trio (displayPrefsSlice.mapSubTab + setMapSubTab registry row + regenerated compendium + updated lifecycleRoundTrip pins) is internally consistent and green.
@@ -593,6 +595,39 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   composed progress text) rather than installing a reusable spelling-based escape
   hatch. The wall therefore proves **no new member of the class**, not that the A-2
   legacy prose sweep is complete.
+  [CORRECTED 2026-08-02 (self-audit) — two named limits and one ratchet rule:
+  **(1) THE MONOTONE-CEILING RULE (substrate missing — a regenerated baseline must
+  never silently raise).** "Rows can only be removed; there is no update mode" is not
+  what the test enforces: it asserts deep-equality with the committed baseline, and
+  NOTHING bounds the row count — a new leak plus a regenerated
+  `.prose-numerics-baseline.json` is a green suite. Baseline edits are ROUTINE, not
+  rare (WR-0c @ 622a3aab rewrote 28 rows for pure line drift in peaceTerms.js and
+  settlementStrategy.js), and no generator script exists, so hand-editing is the fix
+  path — exactly where an added row goes unnoticed. Work item **W-A1a**: freeze
+  `PROSE_NUMERIC_DEBT_CEILING = 442` beside the equality pin with
+  `expect(LIVE.hits.length).toBeLessThanOrEqual(PROSE_NUMERIC_DEBT_CEILING)` — the
+  A-3 sibling's own idiom (wizardNewsAuthoring.walker.test.js:80, `<= 19`) — ideally a
+  per-category ceiling map too; optionally an `--update` generator that refuses to
+  write a baseline whose count exceeds the committed ceiling, so line-drift
+  regeneration is safe while debt growth is structurally impossible.
+  **(2) THE ONE-HOP LIMIT (named limitation).** The wall proves no new member authored
+  INLINE at a prose-NAMED site — not "no new member of the class". Executed probes
+  against the shipped scanner: a module-local binding hop, a `parts.push` hop, a local
+  function return, and a JSX intermediate variable ALL return zero hits while the
+  direct control hits; and PROSE_KEYS is closed to headline/summary/reason/receipt, so
+  `body`/`text`/`detail`-keyed authored sentences sit outside the denominator
+  entirely. Live census: 3,044 prose-key properties, 773 reaching no string literal,
+  322 resolving through a non-prose-named identifier or call the walker cannot follow.
+  Work item **W-A1b** (the follow-up detector): follow module-local single-assignment
+  bindings and local function returns ONE hop when the value flows into a prose key —
+  newsAuthoringCensus.shared.mjs already performs exactly this local resolution
+  (`staticStrings`/`collectBindings`); reuse the pattern — OR rule the naming
+  convention instead (an opaque prose value is a violation unless its producer is
+  prose-named). Either alone closes most of the gap; until one lands, quote this
+  receipt at the scope actually proven.
+  **(3) DEFINITION:** "267 exact source sites" means path+line+snippet identities;
+  path+line alone counts 254. Spelled out so the 13-count gap cannot read as drift in
+  a later audit.]
 - **A-3 is now a standing source-side wall.** The AST census parses 696 domain JS
   files and finds 82 object-literal authoring sites that co-locate `kind` +
   `headline` across 45 files. Sixty-three already carry id + settlementIds + severity
@@ -602,6 +637,29 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   unregistered impactKind, unregistered bare kind, unresolved dynamic bare kind,
   and the local closed-choice idiom. The historical peace-terms and 07-31 kind-only
   blind spots are explicit non-vacuity controls.
+  [CORRECTED 2026-08-02 (self-audit) — scope and count:
+  **(1) SCOPE WIDENS BEYOND src/domain.** The census walks src/domain ONLY
+  (newsAuthoringCensus.shared.mjs:250-252), but the codebase authors Wizard News
+  outside it: src/store/mapSlice.js:554-572 builds a complete inline entry
+  (`id: wizard_news.autoplacement.<tick>.<n>`, kind 'autoplacement', severity,
+  settlementIds) and hands it to appendWizardNewsEntries. That live site is
+  well-formed and 'autoplacement' IS routed, so widening adds no debt today — which
+  is exactly why it is cheap now and expensive later: the next store-side emitter
+  that forgets an id or a registration reds NOTHING. Work item **W-A3a**: extend
+  `censusNewsAuthoringSites` to walk src/store as well — two shapes there need
+  explicit judgment (src/store/campaignWorldPulseDeferred.js:779 is an undo-ring
+  entry, a false positive to exclude; src/components/map/heraldFeed.js:103 is a
+  read-model projection) — or, minimally, add a companion assertion that every
+  non-domain appendWizardNewsEntries caller passes only domain-authored arrays
+  (mapSlice.js:554 is the sole inline exception today). Until one lands, the wall
+  proves DOMAIN-SIDE authoring presence, not authoring presence.
+  **(2) COUNT.** "696 domain JS files" drifted the day it was written: the
+  denominator is what `find src/domain -name '*.js' | wc -l` reads — 699 on
+  2026-08-02 (WR-0c added treatyBreach.js and relationshipEdgeSeed.js among them).
+  The wall's own assertion is the floor `>= 690`
+  (wizardNewsAuthoring.walker.test.js:60), so state the floor and the measuring
+  command, never an absolute. The paragraph's other counts re-verified exactly:
+  82 sites / 45 files / 63 clean / 19 frozen rows in 10 files.]
 - **Focused verification:** the two walls plus mutation-coverage governance pass
   33/33; targeted ESLint and `git diff --check` pass. Full-gate evidence belongs to
   the wave commit receipt, not this pre-commit measurement.
@@ -620,12 +678,35 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   typed shifts, evidence validity, and diagnostic hash result. The realm-scale
   evidence digest now binds that complete `seedDivergence` section rather than only
   the older behavioral rows.
-- **WR-9 now has an additive v5 address.** The receipt contract owns closed ending,
+- **WR-9's v5 address — "additive" CORRECTED 2026-08-02 (self-audit): it moves the
+  certification gate.** The receipt contract owns closed ending,
   termination-deciding-term (`cause`, `cost_to_continue`, `cost_to_stop`,
   `momentum`), and WR-flag vocabularies. Its validator rejects missing, duplicate,
   unknown, negative, and contradictory rows. Behavioral-contract v5 adds three
   fail-closed checks: total receipt shape, non-vacuous war evidence, and flag
-  coverage. Old v4 receipts remain readable but cannot earn the new property.
+  coverage. What RE-BASELINES (the original sentence "old v4 receipts remain
+  readable but cannot earn the new property" understated all three effects):
+  **(a) The product certificate re-baselines on the WR program.**
+  `war_convergence_instrumented` was appended to SOAK_PROPERTIES and
+  `CERTIFICATION_REQUIRED_PROPERTY_KEYS = SOAK_PROPERTY_KEYS`
+  (certificationSchema.js:74/:85), making it a HARD requirement of every
+  `certified` band — not an optional extra property. flag_coverage demands every
+  one of the seven WR_RULINGS_FLAG_KEYS on + alive + observed in EVERY release case
+  (warConvergenceContract.js:323-332), and the whole-world collector still writes
+  deliberately-failing empty observations. Net effect: no band can certify until
+  the entire WR-1..WR-10 program lands and lights. That is a release-posture
+  change; it is recorded HERE, vetoably, for owner ratification — it was ruled
+  nowhere before this correction (see the audit's unresolved ledger for the
+  owner-queue routing).
+  **(b) Band validation re-baselines.** BEHAVIORAL_CONTRACT_VERSION 4→5 makes any
+  band NAMING v4 invalid at BOTH `certified` and `measured`
+  (certificationSchema.js:214/:233) — strictly stronger than "cannot earn the new
+  property". No on-disk band names v4 today (realm-scale-certification.mjs stamps
+  the current constant), so no live evidence is lost.
+  **(c) The genuinely additive half is the ENVELOPE.** The receipt envelope stays
+  v4-readable — `SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS = [4, 5]`
+  (behavioralContract.js:125). "Old v4 receipts remain readable" was true of the
+  envelope, not of band validation or the certification gate.
 - **No evidence was fabricated.** Until the ordered WR waves expose real endings,
   deciding terms, and flag-certification results, the whole-world collector writes
   zero histograms with `unknown` / `UNOBSERVED` rows. That shape is valid, is bound
@@ -643,3 +724,70 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   20/20 with three intentional skips, feed distribution 3/3, magic-buffer
   reachability 8/8). Production build is green and `verify:dist` passes 364/364.
   No golden was rerecorded and no baseline was widened.
+
+---
+
+## ADDENDUM REGISTER — 2026-08-02 SELF-AUDIT (R-56..R-66)
+## These are NOT new review findings ranked into the R-01..R-55 severity order. They are
+## the homes for corrections the 2026-08-01 validation pass promised "in the register"
+## but never landed (the dangling-pointer defect the self-audit confirmed), plus the
+## work items the self-audit's chair rulings ordered. Every FABLE_VALIDATION_QUEUE
+## verdict cell now points at its item; each work item carries pins so the external
+## implementer builds without inventing architecture.
+
+### R-56 [INSTRUMENT/RULED] The rumor-magnitude receipt channel — RULED IN (chair 2026-08-01) as a v5+ envelope field; spec landed here 2026-08-02
+- **The gap:** the 2026-07-31 severity-register row's original re-examination instruction was unexecutable — no soak receipt carries severity, rumor, or magnitude data. Re-verified 2026-08-02: certificationSchema.js contains zero severity/magnitude fields, and none of the six artifacts/soak/*.json does either. A further correction recorded here because the Opus-era row is immutable: that row's own corrected instruction describes the envelope as holding "eventTypeCounts/moverCounts" — the validation pass verified NONE of the six artifacts contains either key; the envelope holds case receipts with no per-entry news channels at all.
+- **The ruling:** a magnitude channel belongs in the envelope (three queue rows are unexecutable without it: treaty-spam trigger, band distribution under lit realms, any future register re-tune). RULED IN as a v5+ envelope field; the instrument gap closes at the soak redo, not before.
+- **Spec (pins):** per-case newsKind counts plus a magnitudeBandOf 4-integer histogram over minted entries — pure counts, no prose; band cut-points are the live ones (src/domain/spatial/rumorNetwork.js:247-253: >=0.8→3, >=0.55→2, >=0.3→1, else 0). Natural landing: the WR-9 v5 receipt work (the collector already grows v5 fields). Additive for real: absence must fail nothing on a v4 receipt.
+- **Veto surface:** a new envelope channel is arguably new surface, not repair — the chair ruled it in 2026-08-01; the owner sequences the soak redo that carries it.
+
+### R-57 [NOTE/RECORDED] heraldFeed fourth-source lens — the promised adjustment: the advance lens is the FINAL-TICK window on composed advances
+- **The adjustment (executed by the validation pass):** the lens rule (`entry.tick >= latestPulse.tick`) is exact for single-tick (one_week) advances, because pulseRecord.tick = worldState.tick per kernel tick (pulseKernel.js:1588). For a COMPOSED one_month/one_year advance, collapseIntervalHistory keeps only the final tick's pulse record, so the advance lens shows ONLY final-tick beats — executed probe: surviving pulse records at ticks 3 and 7, late-lane beats at 4,5,6,7 → advance lens [7], campaign lens [4,5,6,7]. "tick >= latestPulse.tick IS this advance's beats" over-claims on composed advances.
+- **Disposition:** a semantics note, NOT a bug — the final-tick window is exactly consistent with what the collapsed pulse sources themselves show under the advance lens (interior beats deliberately live in the chronicle). If whole-interval semantics are ever wanted, the filter is `entry.tick > previousSurvivingPulse.tick` — one line, plus a composed-advance pin in tests/components/heraldFeedSources.test.js. Everything else in the queue row re-confirmed: the fourth source is genuinely read-only, and the persisted-digest road stays closed (the fourth-source commit touched no kernel file).
+
+### R-58 [TEST WORK ITEM] npcVerdictTable ruin filter — the missing executed negative fixture
+- **The fact:** the claim "a ruined gaol does not credit hasPrison" is proven by source reading only. tests/domain/npcVerdictTable.test.js:307-325 exercises hasPrison/hasCriminalPower with STATUS-LESS institutions exclusively; ruinFilter.probe.test.js has no npcVerdictTable coverage; and because the file is fully routed it DROPS OUT of ruinFilterRoster.walker's discovery set (walker header :33-34), so walker 3/3 green does not attest it either.
+- **Work item (pins):** one behavioral pin — `hasPrison === false` over a roster holding a `{name:'Gaol', status:'ruined'}` institution — plus the sibling arm for the institution half of hasCriminalPower (a ruined criminal institution is not credited; a live FACTION still is — the deliberately-unfiltered half stays pinned live as the anchor). Timing: at latest with H2's pulse-wiring slice; cheap enough to land any time.
+
+### R-59 [CANDIDATE SWEEP/RECORDED] FP-G17 — the residual ESD candidate-lazy set (module bytes only)
+- **The measured set (validation pass, executed reachability split):** of 35 post-excision ENGINE_SHARED_DOMAIN members, TEN have no static path from the true first-paint graph. Two are already routed lazy by the settlement-normalize pin and are classifier-only (normalizeSettlement.js 10,897B; settlementMigrations.js 7,384B). EIGHT ride eager engine-core with no natural first-paint consumer: content/customDefinitionIdentityProjection.js 5,490B · generationContentProfile.js 6,778B · generationOwnership.js 10,288B · historyPreservation.js 9,156B · regenerationPolicy.js 4,903B · regenerationPreservation.js 13,452B · resourceSemantics.js 15,102B · resourceTerrainCompatibility.js 5,512B — ~70.7kB source, MODULE BYTES ONLY (their resourceData import stays eager regardless).
+- **The rule that governs any excision (the FP-G11 lesson, restated in FP-G16's own note):** excise AND pin, or the orphan co-locates into the big engine chunk (vite.config.js:145-148, :548-551; the settlement-normalize pin matches before isEngineSharedDomain at :649). Each candidate needs its own consumer verification before excision; minified+gzip reclaim is less than source bytes.
+- **Status:** recorded candidate sweep, same class as FP-G16 (reclaim, not raise) — not yet authorized work.
+
+### R-60 [NOTE/RECORDED] I2 — "trades corruptly" is narrative today, not mechanical
+- **The fact (executed by the validation pass):** house status feeds NOTHING downstream of the liveness gate. houseChannelCompetence reads only {legality, form}; the stamp payload is {grade, channel, label, detail, band} — no house identity, no status term, no competence discount (brokerageStamps.js:473-501; `grep -i corrupt` over brokerageStamps.js + brokerageFidelity.js → exactly one comment hit). An IMPAIRED house therefore stamps byte-identically to a healthy one, and the stamp is settlement-anonymous, so a player cannot attribute a stamp to the corrupt house even after the exposure beat.
+- **Why this is not a defect:** calibration honesty holds precisely BECAUSE no corrupt skew is injected; the I2 liveness pin preserves exactly the right substrate. The "corruptly" half of the queue row's line is an IOU.
+- **Forward decision (Fable, when an I3+/Herald surface ships):** whether a revealed-corrupt house's contribution wants a mechanical expression (competence discount, house-attributed stamps, or neither — priced explicitly).
+
+### R-61 [DOC WORK ITEM] The §0 weekly-tick footnote — ordered text, verbatim, for DESIGN_DEMOGRAPHIC_ENGINE
+- **The defect:** DESIGN_DEMOGRAPHIC_ENGINE.md §0's "at one_year intervals (the soak's own configuration)" (still unfootnoted 2026-08-02) conflates the harness's DECLARED interval with the EVALUATION interval. The §0 table's arithmetic itself was independently re-derived and stands.
+- **The footnote, verbatim (that doc is outside this audit's file assignment — whichever session next edits it lands this):** "†The soak's DECLARED interval is one_year, but the orchestrator decomposes every interval into one_week kernel ticks, so the in-vivo evaluator ran WEEKLY. Same defect, same attractor — but the in-vivo freeze regime is weekly ticks + crisis modifiers, and tuners must model THAT path, not the one_year table above."
+- **LANDED 2026-08-02 (self-audit, coherence sweep):** DESIGN_DEMOGRAPHIC_ENGINE §0 now carries the footnote verbatim (the doc was edited the same night, which per the clause above made landing it that editor's duty; the sweep closed the gap). This item is CLOSED.
+
+### R-62 [CORRECTION/RECORDED] P1 acceptance row — the two overstated numeric details, corrected
+- **(1) Six settlements, not 8:** the cure fixture spans SIX settlements across six tiers, both at d620a05d and at HEAD (tests/domain/demographicsCure.test.js REALM lists exactly Ashford/Brackwater/Cairnhold/Dunmarch/Elderfen/Fallowmere; the commit message's "eight settlements" repeats the error).
+- **(2) The 0.5% literal:** "y150==y300 within 0.5%" does not hold at HEAD — executed 300y run: Brackwater 1.827%, Cairnhold 2.128%, Elderfen 0.938% (small-N integer noise); only the three large settlements sit within 0.5%. The PINNED tolerance is 5% (demographicsCure.test.js:128).
+- **Disposition:** the plateau claim and the acceptance verdict survive untouched; neither the "8" nor the "0.5%" literal may be quoted forward.
+
+### R-63 [LATENT HAZARD + WORK ITEM] capability01:null zeroes war scores instead of defaulting to 1
+- **The hazard (executed by the validation pass):** the default-1 idiom treats null as 0 — Number(null)=0, Number.isFinite(0)=true ⇒ capability=0 ⇒ every resource_pressure/opportunism score for that pair silently zeroes. Idiom sites: warReasons.js:533 and opportunism.js:256. LATENT, not live: current callers pass only undefined or a real number (warReasons.js:849-856 omits the key when demoTerms is null; :885 passes demoTerms?.capability01; opportunism.js:324).
+- **Work item (pins):** guard null explicitly at both sites (null ⇒ absent ⇒ default 1) — the estate's fail-shut Number(null)===0 discipline (the window-type-check precedent). Pin: a score computed with capability01:null byte-equals the score with capability01 undefined, at both call sites. Cheap, dark-safe; land before any new caller appears — this codebase's writer/reader payload-spelling history is exactly how a null gets passed one day.
+
+### R-64 [TEST WORK ITEM] P4 no-hidden-governor — the two on-paper bypass routes, and the tightening
+- **ROUTE A (helper hop):** the import pin (tests/domain/demographicsWorldsHand.test.js:307-308) pins module SPECIFIERS of demographicsRisk.js only. demographicsRates.js — one of the two allowed imports — has its OWN import list pinned NOWHERE, and the P4.6 pure-leaf scan covers demographics{Ladder,Risk,War,Observation,Herald}.js but NOT Rates. A realm-aggregate helper added to demographicsRates.js under an innocent name passes every existing assertion.
+- **ROUTE B (seam-local governor):** pressureModel.js legitimately holds the WHOLE realm and is scanned for exactly ONE token ('measureRealmDemography'). An inline reduce over settlement populations needs no import and no forbidden token; the dark-arm byte-identity check is gated on demographicsOn, and the lit-arm fixture holds ONE settlement — realm total equals settlement population, so the fixture structurally cannot see a governor.
+- **The mitigating fact (why the STRENGTHS bullet stays load-bearing):** within current call signatures, demographicRiskOf receives {settlement, worldState, settlementId, scores}; realm populations are never passed and are not persisted in worldState. The scan blocks the whole accidental-coupling class; defeating it requires a deliberate two-site edit no token scan can bar.
+- **Work item (the tightening; test work only, no engine change):** (a) pin demographicsRates.js's import list — i.e. make the pinned surface the transitive closure of demographicsRisk's two allowed imports — and add Rates to the pure-leaf scan; (b) grow the pressureModel lit-arm fixture to ≥2 settlements with distinct populations so a seam-local realm total is observable, and widen its token scan beyond the single name (keep the guard-the-guard arm proving the scan still bites in demographicsWar.js).
+
+### R-65 [RULING SPEC/EXECUTABLE] Neighbour-mirror INJECTION — the full ONE-REGEN reference (chair ruling 2026-08-01, spec landed 2026-08-02)
+- **THE RULING (vetoable; option (c) of the Opus escalation):** when the faction category is occupied, the neighbour faction still LANDS — injected, distinctly labeled, at dampened weight (×0.5 of the band the emergent mirror would have drawn), under a per-settlement cap of ≤1 injected mirror + ≤1 injected opposition. Option (a) emergent-suppression is the EXPLICIT INTERIM STATE until the batch.
+- **MEMBERSHIP:** the ONE REGEN batch (golden-shifting; the owner lights it).
+- **Blast-radius facts (carried from the ruling):** the step draws from a per-step rng fork; un-neighboured seeds are bit-identical; consumers are duplication-aware. The `source: 'neighbour_mirror'` field already distinguishes mirrors — the injected-under-occupation form must remain distinguishable from the emergent form (a distinct source value or an `injected: true` mark; the ruling requires distinct labeling, and the acceptance pins below need the handle).
+- **SCOPE (as corrected 2026-08-01):** the cliff is city-specific + town-MIRROR-channel only. The two era measurements reconcile as DIFFERENT CHANNELS: the Opus row's "0 of 60 at town" measured MIRRORS; the chair's "23/60 hostile, 14/60 rival at town" measured OPPOSITION, which stays live. Provenance caveat: the 23/60 and 14/60 figures are chair-session measurements with no persisted command — the slice's acceptance must RE-DERIVE the interim distribution (seed sweep over the standard 60-seed family at town and city) before pinning the post-injection one.
+- **The coupling fact the implementer must handle:** a landed mirror does `existingTypes.add(fType)` (src/generators/steps/neighbourFactions.js:61) BEFORE the opposition loop reads the same set (:80-81) — injection order couples the two channels.
+- **OPEN PIN OP-1 (chair to rule before dispatch; do NOT invent):** whether an INJECTED mirror consumes its category's opposition slot via the shared existingTypes set. Escalated 2026-08-02 with a proposal in the self-audit's unresolved ledger.
+- **Acceptance pins for the slice:** per-settlement cap enforced (≤1 mirror + ≤1 opposition injected); dampened band asserted at ×0.5 of the emergent band; distinct labeling asserted; un-neighboured-seed bit-identity control; the pre/post distribution re-derivation above; and the OP-1 ruling pinned whichever way it lands.
+
+### R-66 [TEST WORK ITEM] K3's certification-pin widening — restore exact-set totality
+- **The fact (the batch-6 retro judgment the pass missed, now recorded):** e2614d4f widened tests/domain/institutionStatusCertification.test.js's "ONE declared channel" pin from EXACT equality to `toContain` + a shape loop (in-test note "AMENDED BY K3"), because K3 added spatialLedgers.magicBuffer as a second declared channel. ACCEPTED as the honest in-flight amendment (the equality claim had become false); compensating pin: tests/domain/magicBufferIntegration.test.js.
+- **Work item (pins):** restore an exact-SET assertion over the UNION of declared W-K channels — e.g. `expect(new Set(ROW.aliveness.stateKeys)).toEqual(new Set([the institutionStatus ledger key, the magicBuffer ledger key]))` with every future declared channel added HERE by name — so the totality claim regains teeth and the next widening is a visible one-line diff, not a silent containment pass. Test work only.

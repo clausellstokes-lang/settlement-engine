@@ -167,7 +167,9 @@ a chair is granted or open, and the counter never implies a sale.
   flows, founderLineage's transfer arcs) is RETIRED ENTIRELY — ⚠️ the
   op-retirement cascade checklist applies (the recorded five-frozen-artifacts
   hazard; dry-run every anchor), and the retirement is its own commit with the
-  capability atlas and any advertising surface swept. The legal sign-off gate
+  capability atlas and any advertising surface swept (the sweep includes
+  DESIGN_GALLERY_SHOWCASE §2/G-A-3's founder-transfer badge arm — cross-noted
+  there 2026-08-02, self-audit). The legal sign-off gate
   becomes moot for founders and is closed as RESOLVED-BY-REMOVAL in the queue.
 
 ## §5 THE PAGE (the pricing card, purchase-free by design)
@@ -265,7 +267,9 @@ are personal and non-transferable).
 Seat-ledger schema changes (the invited class, invites table) join the
 migration train per deploy law. ⚠️ Build-time check: reconcile with
 src/config/firstHundred.js (an existing early-supporter config whose
-relationship to the fifty must be stated, not discovered).
+relationship to the thirty must be stated, not discovered) [count fixed
+2026-08-02 (self-audit) — "the fifty" was a relic of the superseded seat
+total].
 
 ## §9 Parked owner calls
 1. The hall's name (working: The Founders' Hall).
