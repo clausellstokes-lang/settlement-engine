@@ -704,6 +704,31 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   test contracts. No golden or snapshot was re-recorded, no flag was lit, and no
   soak ran.
 
+### Addendum implementation receipt — W-A1b / W-A3a WALL HARDENING LANDED (2026-08-02)
+
+- **The prose-numerics wall now follows the bounded one-hop shapes it names.** A
+  prose-key value can no longer evade the detector merely by passing through a
+  unique same-file `const`, a direct local function return, a local array literal
+  or earlier `.push(...)`, or a string-like JSX binding. The resolver is deliberately
+  lexical and one-hop: parameters and imports block shadow fall-through, reassigned
+  bindings remain opaque, future pushes do not flow backward, nested returns are not
+  borrowed, and imports, member dispatch, recursion, and second-hop calls remain out
+  of scope. Executed positive and negative mutants pin every boundary. The live
+  baseline remains exactly 401 category rows; no debt or category ceiling increased.
+- **The authoring census now covers every current engine authoring root.** It parses
+  699 `src/domain` files plus 72 `src/store` files and finds 84 raw candidates. The
+  exact proposal undo snapshot in `campaignWorldPulseDeferred.js` is a signed,
+  location-bound non-authoring exclusion; the remaining 83 governed sites span 46
+  files, with 64 clean and the same 19 frozen legacy rows. The clean inline
+  `mapSlice` autoplacement author is explicitly required, so store-side presence can
+  no longer disappear behind a vacuous widened scan.
+- **Verification:** the focused walker and mutation matrix passed 35/35; targeted
+  ESLint and `git diff --check` passed. The complete repository gate began and ended
+  at `6e229457`: 2,114 test files passed, one skipped; 22,396 tests passed, 54
+  skipped. Production build completed, prerender wrote 311 route documents, and
+  distribution verification passed 364/364. No production module, golden, snapshot,
+  feature flag, lighting state, or soak artifact changed.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates

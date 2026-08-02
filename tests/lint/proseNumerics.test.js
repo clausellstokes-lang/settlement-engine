@@ -118,6 +118,69 @@ describe('prose numerics detector discriminates (executed mutants)', () => {
     const found = scanProseNumericsSource({ source: mutant, path: 'src/concat-mutant.js' }).hits;
     expect(found.map((hit) => hit.category)).toContain('floatInterpolation');
   });
+
+  it('follows one unique local binding when it flows into a prose key', () => {
+    const mutant = [
+      'const opaqueBody = `The court reads danger ${score.toFixed(2)}.`;',
+      'export const beat = { headline: opaqueBody };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/binding-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('follows a direct local function return when the call flows into a prose key', () => {
+    const mutant = [
+      'function opaqueComposer() { return `The levy roll was ${roll.toFixed(2)}.`; }',
+      'export const beat = { summary: opaqueComposer() };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/return-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('follows push arguments on a flowed local sentence array', () => {
+    const mutant = [
+      'const parts = [];',
+      'parts.push(`The levy chance was ${chance.toFixed(2)}.`);',
+      'export const beat = { reasons: parts };',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source: mutant, path: 'src/push-mutant.js' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
+  });
+
+  it('does not guess through reassigned, imported, or second-hop opaque values', () => {
+    const clean = [
+      "import { externalComposer } from './elsewhere.js';",
+      'const firstHop = `The court reads danger ${score.toFixed(2)}.`;',
+      'const secondHop = firstHop;',
+      'let reassigned = `The levy chance was ${chance.toFixed(2)}.`;',
+      "reassigned = 'The levy looks uncertain.';",
+      'export const beats = [',
+      '  { headline: secondHop },',
+      '  { summary: reassigned },',
+      '  { reason: externalComposer() },',
+      '];',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/opaque-control.js' }).hits).toEqual([]);
+  });
+
+  it('does not fall through a parameter shadow to an outer binding', () => {
+    const clean = [
+      'const opaqueBody = `The court reads danger ${score.toFixed(2)}.`;',
+      'export function authored(opaqueBody) {',
+      '  return { headline: opaqueBody };',
+      '}',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/shadow-control.js' }).hits).toEqual([]);
+  });
+
+  it('does not attribute a future array push to an earlier authored value', () => {
+    const clean = [
+      'const parts = [];',
+      'export const beat = { reasons: parts };',
+      'parts.push(`A later diagnostic reads ${score.toFixed(2)}.`);',
+    ].join('\n');
+    expect(scanProseNumericsSource({ source: clean, path: 'src/future-push-control.js' }).hits).toEqual([]);
+  });
 });
 
 describe('E-E JSX prose numerics detector discriminates (executed mutants)', () => {
@@ -138,6 +201,17 @@ describe('E-E JSX prose numerics detector discriminates (executed mutants)', () 
   it('the clean JSX control stays quiet', () => {
     const source = 'export function Clean() { return (<p>The watch is badly outmatched.</p>); }';
     expect(scanProseNumericsSource({ source, path: 'src/Clean.jsx' }).hits).toEqual([]);
+  });
+
+  it('follows one local JSX reader binding without scanning unrelated component state', () => {
+    const source = [
+      'export function Mutant() {',
+      '  const opaqueBody = `Hold chance ${chance.toFixed(2)}.`;',
+      '  return <p>{opaqueBody}</p>;',
+      '}',
+    ].join('\n');
+    const found = scanProseNumericsSource({ source, path: 'src/Mutant.jsx' }).hits;
+    expect(found.map((hit) => hit.category)).toEqual(['floatInterpolation', 'twoDecimalScore']);
   });
 
   it('layout/control/CSS numerics are not reader prose (negative matrix)', () => {

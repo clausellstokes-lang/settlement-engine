@@ -2,11 +2,13 @@
  * Shared AST machinery for the Wizard News authoring-site census.
  *
  * The census denominator is intentionally syntactic and broad: every object literal
- * under src/domain that co-locates `kind` and `headline` is a candidate authoring
- * site. That catches the kind-only producers the older impactKind/candidateType
- * walkers could not see. Read-model projections and intermediate records remain in
- * the denominator; the standing walker may exempt only their exact, frozen
- * path/location/signature rows.
+ * under src/domain or src/store that co-locates `kind` and `headline` is a candidate
+ * authoring site. That catches the kind-only producers the older
+ * impactKind/candidateType walkers could not see, including store-local inline
+ * authors. Read-model projections and intermediate records remain in the
+ * denominator; the standing walker may exempt only their exact, frozen
+ * path/location/signature rows. A separately identified exact exclusion keeps the
+ * proposal undo snapshot visible without misclassifying it as authored news.
  */
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -16,11 +18,21 @@ import { ancestor } from 'acorn-walk';
 
 const REQUIRED_FIELDS = Object.freeze(['id', 'settlementIds', 'severity']);
 
+const NON_AUTHORING_SITE_EXCLUSIONS = Object.freeze([
+  Object.freeze({
+    path: 'src/store/campaignWorldPulseDeferred.js',
+    line: 779,
+    column: 23,
+    signature: 'f4ac01180f8aaf35',
+    reason: 'proposal-undo-snapshot',
+  }),
+]);
+
 /** @param {string} dir @param {string[]} [out] @returns {string[]} */
-export function walkDomainJavaScript(dir, out = []) {
+export function walkJavaScript(dir, out = []) {
   for (const entry of readdirSync(dir).sort()) {
     const path = join(dir, entry);
-    if (statSync(path).isDirectory()) walkDomainJavaScript(path, out);
+    if (statSync(path).isDirectory()) walkJavaScript(path, out);
     else if (/\.js$/.test(entry) && !/\.test\./.test(entry)) out.push(path);
   }
   return out;
@@ -248,15 +260,31 @@ export function scanNewsAuthoringSource(source, path, isRegistered) {
  * @param {(token:string)=>boolean} isRegistered
  */
 export function censusNewsAuthoringSites(root, isRegistered) {
-  const domain = join(root, 'src', 'domain');
-  const files = walkDomainJavaScript(domain);
-  const sites = files.flatMap((absolutePath) => {
+  const files = [
+    ...walkJavaScript(join(root, 'src', 'domain')),
+    ...walkJavaScript(join(root, 'src', 'store')),
+  ];
+  const candidateSites = files.flatMap((absolutePath) => {
     const path = relative(root, absolutePath).split(/[\\/]/).join('/');
     return scanNewsAuthoringSource(readFileSync(absolutePath, 'utf8'), path, isRegistered);
-  });
+  }).sort((a, b) => a.path.localeCompare(b.path) || a.line - b.line || a.column - b.column);
+  const excludedSites = [];
+  const sites = [];
+  for (const site of candidateSites) {
+    const exclusion = NON_AUTHORING_SITE_EXCLUSIONS.find((row) => (
+      row.path === site.path
+      && row.line === site.line
+      && row.column === site.column
+      && row.signature === site.signature
+    ));
+    if (exclusion) excludedSites.push({ ...site, exclusionReason: exclusion.reason });
+    else sites.push(site);
+  }
   return {
     files,
-    sites: sites.sort((a, b) => a.path.localeCompare(b.path) || a.line - b.line || a.column - b.column),
+    candidateSites,
+    excludedSites,
+    sites,
   };
 }
 

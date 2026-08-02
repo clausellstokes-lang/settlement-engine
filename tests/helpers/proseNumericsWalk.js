@@ -81,6 +81,222 @@ function walk(node, visit, parent = null, ancestors = []) {
   for (const child of childrenOf(node)) walk(child, visit, node, next);
 }
 
+function isFunctionNode(node) {
+  return node?.type === 'FunctionDeclaration'
+    || node?.type === 'FunctionExpression'
+    || node?.type === 'ArrowFunctionExpression';
+}
+
+function isLexicalScope(node) {
+  return node?.type === 'Program' || node?.type === 'BlockStatement' || isFunctionNode(node);
+}
+
+function lexicalScopes(ancestors) {
+  return ancestors.filter(isLexicalScope);
+}
+
+function declarationScope(ancestors, declarationKind = 'const') {
+  for (let i = ancestors.length - 1; i >= 0; i -= 1) {
+    const candidate = ancestors[i];
+    if (declarationKind === 'var') {
+      if (candidate.type === 'Program' || isFunctionNode(candidate)) return candidate;
+    } else if (isLexicalScope(candidate)) {
+      return candidate;
+    }
+  }
+  return null;
+}
+
+/**
+ * Same-file symbols used by the bounded W-A1b resolver. Every declaration is
+ * retained so a nearer `let`/`var`, duplicate, or shadow makes resolution opaque
+ * instead of accidentally falling through to an outer `const`.
+ */
+function collectLocalSymbols(ast) {
+  /** @type {Map<any, Map<string, any[]>>} */
+  const byScope = new Map();
+  const add = (scope, name, entry) => {
+    if (!scope || !name) return;
+    if (!byScope.has(scope)) byScope.set(scope, new Map());
+    const names = byScope.get(scope);
+    if (!names.has(name)) names.set(name, []);
+    names.get(name).push(entry);
+  };
+
+  const bindingIdentifiers = (node, out = []) => {
+    if (!node) return out;
+    if (node.type === 'Identifier') out.push(node.name);
+    else if (node.type === 'RestElement') bindingIdentifiers(node.argument, out);
+    else if (node.type === 'AssignmentPattern') bindingIdentifiers(node.left, out);
+    else if (node.type === 'ArrayPattern') {
+      for (const element of node.elements || []) bindingIdentifiers(element, out);
+    } else if (node.type === 'ObjectPattern') {
+      for (const property of node.properties || []) {
+        bindingIdentifiers(property.type === 'RestElement' ? property.argument : property.value, out);
+      }
+    }
+    return out;
+  };
+
+  walk(ast, (node, parent, ancestors) => {
+    if (node.type === 'VariableDeclarator' && node.id?.type === 'Identifier') {
+      const declarationKind = parent?.type === 'VariableDeclaration' ? parent.kind : 'var';
+      add(declarationScope(ancestors, declarationKind), node.id.name, {
+        kind: 'binding',
+        declarationKind,
+        init: node.init,
+        start: node.range?.[0] ?? Number.POSITIVE_INFINITY,
+      });
+    } else if (node.type === 'FunctionDeclaration' && node.id?.type === 'Identifier') {
+      add(declarationScope(ancestors), node.id.name, {
+        kind: 'function',
+        node,
+        start: node.range?.[0] ?? 0,
+      });
+    }
+    if (isFunctionNode(node)) {
+      for (const parameter of node.params || []) {
+        for (const name of bindingIdentifiers(parameter)) {
+          add(node, name, { kind: 'opaque-parameter', start: node.range?.[0] ?? 0 });
+        }
+      }
+    } else if (node.type === 'ImportDeclaration') {
+      const scope = declarationScope(ancestors);
+      for (const specifier of node.specifiers || []) {
+        if (specifier.local?.name) add(scope, specifier.local.name, {
+          kind: 'opaque-import',
+          start: node.range?.[0] ?? 0,
+        });
+      }
+    }
+  });
+  return byScope;
+}
+
+function resolveLocalSymbol(name, { position, scopes, symbols }) {
+  if (!name) return null;
+  for (let i = scopes.length - 1; i >= 0; i -= 1) {
+    const declarations = symbols.get(scopes[i])?.get(name);
+    if (!declarations) continue;
+    if (declarations.length !== 1) return null;
+    const declaration = declarations[0];
+    if (declaration.kind === 'function') return declaration;
+    if (declaration.declarationKind !== 'const' || !declaration.init || declaration.start >= position) {
+      return null;
+    }
+    return declaration;
+  }
+  return null;
+}
+
+/** Return only this function's own returns; nested closures are another hop. */
+function directFunctionReturns(fn) {
+  if (fn?.type === 'ArrowFunctionExpression' && fn.body?.type !== 'BlockStatement') {
+    return [fn.body];
+  }
+  const out = [];
+  const visit = (node, root = false) => {
+    if (!node?.type) return;
+    if (!root && isFunctionNode(node)) return;
+    if (node.type === 'ReturnStatement') {
+      if (node.argument) out.push(node.argument);
+      return;
+    }
+    for (const child of childrenOf(node)) visit(child);
+  };
+  visit(fn?.body, true);
+  return out;
+}
+
+function functionNodeForSymbol(symbol) {
+  if (symbol?.kind === 'function') return symbol.node;
+  return isFunctionNode(symbol?.init) ? symbol.init : null;
+}
+
+function isStringLikeProseValue(node) {
+  if (!node) return false;
+  if (node.type === 'Literal') return typeof node.value === 'string';
+  if (node.type === 'TemplateLiteral' || isStringConcatenation(node)) return true;
+  if (node.type === 'ConditionalExpression') {
+    return isStringLikeProseValue(node.consequent) && isStringLikeProseValue(node.alternate);
+  }
+  if (node.type === 'LogicalExpression') {
+    return isStringLikeProseValue(node.left) || isStringLikeProseValue(node.right);
+  }
+  return false;
+}
+
+/**
+ * Index `.push(...)` writes by the exact const-array binding they target. This
+ * closes the common `const parts=[]; parts.push(sentence); reason: parts` hop
+ * without treating arbitrary mutable arrays as reader prose.
+ */
+function collectArrayPushes(ast, symbols) {
+  /** @type {Map<any, Array<{start:number, arguments:any[]}>>} */
+  const pushes = new Map();
+  walk(ast, (node, _parent, ancestors) => {
+    if (node.type !== 'CallExpression'
+      || node.callee?.type !== 'MemberExpression'
+      || node.callee.computed
+      || staticKey(node.callee.property) !== 'push'
+      || node.callee.object?.type !== 'Identifier') return;
+    const symbol = resolveLocalSymbol(node.callee.object.name, {
+      position: node.range?.[0] ?? Number.POSITIVE_INFINITY,
+      scopes: lexicalScopes(ancestors),
+      symbols,
+    });
+    if (symbol?.kind !== 'binding'
+      || symbol.init?.type !== 'ArrayExpression'
+      || symbol.declarationKind !== 'const') return;
+    if (!pushes.has(symbol)) pushes.set(symbol, []);
+    pushes.get(symbol).push({
+      start: node.range?.[0] ?? Number.POSITIVE_INFINITY,
+      arguments: node.arguments || [],
+    });
+  });
+  return pushes;
+}
+
+function collectOneHopProse(node, context, add, { allowFunctionReturns = true } = {}) {
+  if (!node) return;
+  let symbol = null;
+  if (node.type === 'Identifier') {
+    // Existing human-word suffixes are the detector's explicit authored-output
+    // contract (`severityLabel`, `calendarText`, etc.), not opaque value flow.
+    if (HUMAN_WORD_SUFFIX_RE.test(node.name)) return;
+    symbol = resolveLocalSymbol(node.name, context);
+  } else if (node.type === 'CallExpression' && node.callee?.type === 'Identifier') {
+    if (!allowFunctionReturns) return;
+    symbol = resolveLocalSymbol(node.callee.name, context);
+    const fn = functionNodeForSymbol(symbol);
+    if (fn) {
+      for (const returned of directFunctionReturns(fn)) {
+        if (isStringLikeProseValue(returned)) collectProseDescendants(returned, add);
+      }
+    }
+    return;
+  } else if (node.type === 'CallExpression'
+    && node.callee?.type === 'MemberExpression'
+    && !node.callee.computed
+    && staticKey(node.callee.property) === 'join'
+    && node.callee.object?.type === 'Identifier') {
+    symbol = resolveLocalSymbol(node.callee.object.name, context);
+  }
+
+  if (symbol?.kind !== 'binding') return;
+  if (symbol.init?.type === 'ArrayExpression') {
+    collectProseDescendants(symbol.init, add);
+    for (const push of context.arrayPushes.get(symbol) || []) {
+      if (push.start >= context.position) continue;
+      for (const argument of push.arguments) {
+        if (isStringLikeProseValue(argument)) collectProseDescendants(argument, add);
+      }
+    }
+  } else if (isStringLikeProseValue(symbol.init)) {
+    collectProseDescendants(symbol.init, add);
+  }
+}
+
 /** @param {any} node */
 function isToFixedCall(node) {
   return node?.type === 'CallExpression'
@@ -398,6 +614,9 @@ export function scanProseNumericsSource({ source, path }) {
     return { hits: [], parseError: String(error?.message || error) };
   }
 
+  const symbols = collectLocalSymbols(ast);
+  const arrayPushes = collectArrayPushes(ast, symbols);
+
   /** @type {Map<any, Set<string>>} */
   const candidates = new Map();
   /** @type {Map<any, any>} */
@@ -411,10 +630,17 @@ export function scanProseNumericsSource({ source, path }) {
   const jsx = /\.jsx$/.test(path);
   walk(ast, (node, parent, ancestors) => {
     if (parent) parents.set(node, parent);
+    const flowContext = {
+      position: node.range?.[0] ?? Number.POSITIVE_INFINITY,
+      scopes: lexicalScopes(ancestors),
+      symbols,
+      arrayPushes,
+    };
     if (jsx) {
       if (node.type === 'JSXText' && !isStyleOrScriptElement(parent)) add(node, 'jsx-text');
       else if (node.type === 'JSXExpressionContainer' && readerFacingJsxContainer(node, parent)) {
         add(node, 'jsx-expression');
+        collectOneHopProse(node.expression, flowContext, add, { allowFunctionReturns: false });
       } else if (node.type === 'Literal' && typeof node.value === 'string'
         && readerFacingJsxAttribute(parent)) {
         add(node, 'jsx-attribute-string');
@@ -432,19 +658,25 @@ export function scanProseNumericsSource({ source, path }) {
 
     if (node.type === 'Property' && PROSE_KEYS.has(staticKey(node.key).toLowerCase())) {
       collectProseDescendants(node.value, add);
+      collectOneHopProse(node.value, flowContext, add);
     } else if (node.type === 'VariableDeclarator'
       && isProseBindingName(bindingName(node.id))
       && !/Function/.test(node.init?.type || '')) {
       collectProseDescendants(node.init, add);
+      collectOneHopProse(node.init, flowContext, add);
     } else if (node.type === 'AssignmentExpression'
       && isProseBindingName(bindingName(node.left))
       && !/Function/.test(node.right?.type || '')) {
       collectProseDescendants(node.right, add);
+      collectOneHopProse(node.right, flowContext, add);
     } else if (node.type === 'CallExpression'
       && node.callee?.type === 'MemberExpression'
       && staticKey(node.callee.property) === 'push'
       && isProseBindingName(bindingName(node.callee.object))) {
-      for (const arg of node.arguments || []) collectProseDescendants(arg, add);
+      for (const arg of node.arguments || []) {
+        collectProseDescendants(arg, add);
+        collectOneHopProse(arg, flowContext, add);
+      }
     } else if (node.type === 'ReturnStatement') {
       const fn = [...ancestors].reverse().find((ancestor) => /Function/.test(ancestor.type));
       if (fn) {
@@ -452,7 +684,10 @@ export function scanProseNumericsSource({ source, path }) {
         const fnParent = index > 0 ? ancestors[index - 1] : null;
         if (isProseBindingName(functionName(fn, fnParent))
           && node.argument?.type !== 'JSXElement'
-          && node.argument?.type !== 'JSXFragment') collectProseDescendants(node.argument, add);
+          && node.argument?.type !== 'JSXFragment') {
+          collectProseDescendants(node.argument, add);
+          collectOneHopProse(node.argument, flowContext, add);
+        }
       }
     }
   });

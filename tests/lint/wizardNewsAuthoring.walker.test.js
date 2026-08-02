@@ -7,7 +7,9 @@
  * shape, and did a producer that routes on bare `kind` register that kind at all?
  * Peace terms and the 2026-07-31 ten-kind void both crossed that gap.
  *
- * DENOMINATOR: every src/domain object literal co-locating `kind` + `headline`.
+ * DENOMINATOR: every src/domain or src/store object literal co-locating `kind` +
+ * `headline`, except one exact store-side proposal-undo snapshot that is identified
+ * and pinned below as a non-authoring false positive.
  * REQUIRED: id + settlementIds + severity, plus an explicitly registered static
  * routing token. Dynamic impactKind/candidateType families remain owned by the
  * existing closed-vocabulary routing walkers; dynamic BARE kinds fail here because
@@ -57,9 +59,10 @@ function mutantIssues(source) {
 
 describe('Wizard News authoring presence — static census wall', () => {
   test('the source census is broad and non-vacuous, including the historical blind spots', () => {
-    expect(census.files.length).toBeGreaterThanOrEqual(690);
-    expect(census.sites.length).toBeGreaterThanOrEqual(80);
-    expect(new Set(census.sites.map((site) => site.path)).size).toBeGreaterThanOrEqual(45);
+    expect(census.files.length).toBeGreaterThanOrEqual(760);
+    expect(census.candidateSites.length).toBeGreaterThanOrEqual(84);
+    expect(census.sites.length).toBeGreaterThanOrEqual(83);
+    expect(new Set(census.sites.map((site) => site.path)).size).toBeGreaterThanOrEqual(46);
 
     const byPath = new Map();
     for (const site of census.sites) {
@@ -72,6 +75,31 @@ describe('Wizard News authoring presence — static census wall', () => {
     expect(byPath.get('src/domain/worldPulse/informationStatecraft.js')?.length).toBe(3);
     expect(byPath.get('src/domain/worldPulse/supplyWebWarfare.js')?.length).toBe(4);
     expect(byPath.get('src/domain/worldPulse/momentum.js')?.length).toBe(1);
+
+    // W-A3a: the sole store-local inline author must remain inside the governed
+    // denominator and clean. This is a source-authoring site, not a projection.
+    expect(byPath.get('src/store/mapSlice.js')).toEqual([
+      expect.objectContaining({
+        routeField: 'kind',
+        routeTokens: ['autoplacement'],
+        issues: [],
+      }),
+    ]);
+  });
+
+  test('the store-side proposal undo snapshot is the one exact non-authoring exclusion', () => {
+    expect(census.candidateSites.length).toBe(census.sites.length + 1);
+    expect(census.excludedSites).toEqual([
+      expect.objectContaining({
+        path: 'src/store/campaignWorldPulseDeferred.js',
+        line: 779,
+        column: 23,
+        signature: 'f4ac01180f8aaf35',
+        routeField: 'kind',
+        routeTokens: ['proposal'],
+        exclusionReason: 'proposal-undo-snapshot',
+      }),
+    ]);
   });
 
   test('the frozen legacy ledger is exact, location-bound, and shrink-only', () => {
