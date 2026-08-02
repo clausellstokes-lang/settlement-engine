@@ -636,6 +636,22 @@ without its own ruling and its own counterforce). Law One holds absolutely: the
 syndicate is faction-grain, operatives cast by read-wiring, no crime-boss
 micro-agent, no named-cast death, ever. Queue row CR-5 records the ruling.
 
+**THE UNIVERSALITY CLAUSE [CHAIR RULING 2026-08-02, from the owner's question
+"isn't every faction effectively a house, since everything runs on an economy?"
+— vetoable]:** every faction has economic CAPACITY, and it is DERIVED — read
+through its institutions (interest domains, institution status, backing),
+never stored. NO faction carries BOOKS until it exercises commercial agency
+through TR-2's eligibility predicate: books are EARNED STATE, not a birthright.
+Universal stored books would (1) reopen SP-4a's closed actor-class set, (2)
+multiply the banded-decaying-stock class the runaway lesson marks most
+dangerous by the faction count, and (3) double-count the settlement's own
+economy through per-faction wallets — whose band moves when the harvest fails
+is J-WR-11's defect at estate scale. The actor family generalizes at the
+JOINTS WHERE STORIES DIFFER: the seat's books are a derived read (INT-1), the
+temple's wealth is believer-side (WF-7), the syndicate's books are covert
+(TR-2b); a faction class whose economic story becomes genuinely distinct earns
+its instance THERE, with its own twelve, never a default wallet.
+
 ### TR-3 — BELIEVED MARKETS (flag `believedMarketsEnabled`)
 *Historical archetype: the Antwerp price letters — merchants sailed on last
 month's prices and found this month's.*
