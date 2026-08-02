@@ -445,3 +445,43 @@ box; the toggle lives inside the existing card.
    reads (a grep, not a rewrite; annual should be free if the webhook is honest).
 8. **Analytics:** toggle-state + checkout-initiation events extend the existing
    funnel vocabulary, consent-gated as ever.
+
+---
+
+## LD-7 — THE POPUP SCOPE LAW (owner-ordered 2026-08-01; implementation = the
+## external implementer; a live bug + the general law it reveals)
+
+**The bug (diagnosed):** the Cartographer World-Map upsell (PricingMomentCard)
+follows the user OUT of the Realm page — it mounts at App level (App.jsx:70 lazy
+mount) off a store moment-flag that no route change clears.
+
+**THE LAW (owner, verbatim intent — applies to ALL popups):**
+1. A popup is PAGE-SCOPED BY DEFAULT: it never follows the user off the surface
+   that spawned it (leaving the page unmounts it, immediately).
+2. Leaving is NOT dismissing: an undismissed popup RE-APPEARS every time the
+   user returns to its owner page, until they actually dismiss it.
+3. Cross-page popups exist ONLY by explicit design declaration — a popup that
+   travels must say so in its registration, never by accident of mount point.
+
+**Spec:**
+- Every popup/moment declares `{ scope: pageKey | 'global' }` in one registry
+  (the moment system's own table — no scattered mount-point logic). The App-level
+  host stays (lazy chunk economics unchanged) but RENDERS a moment only when the
+  active route matches its declared scope; route change auto-suppresses without
+  writing dismissal state (law 2 falls out: the flag survives, the render gates).
+- Dismissal (`Not now` / ✕) writes the per-user persisted suppression exactly as
+  today; it remains the ONLY permanent suppressor. [Parked owner knob, default
+  ships: whether `Not now` suppresses a moment forever or re-arms when its
+  triggering condition re-fires after a long cadence band — today's behavior
+  stands until ruled.]
+- AUDIT SLICE (the law applied retroactively): enumerate every popup/overlay/
+  moment in the tree (PricingMomentCard's moment kinds, welcome-back card, save
+  quota nudges, auth modal, feedback prompts, held-docket surfaces…) and classify
+  each page-scoped vs cross-page in the registry — the auth modal and the held
+  adjudication docket are the obvious legitimate cross-page members (the docket
+  is coup-guarantee law, never suppressed by navigation). The classification
+  table lands in the registry as data, pinned by a walker: no popup renders
+  without a declared scope.
+- Pins: the Realm upsell unmounts on navigate-away and re-shows on return
+  (undismissed) — the exact reported sequence as a DOM test; a declared-global
+  moment still travels; dismissal survives reload (persisted).
