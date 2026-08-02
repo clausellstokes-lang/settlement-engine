@@ -118,7 +118,56 @@ consent withdrawal blanks both everywhere at once.
   object swept by the GC job (the job pinned, not hoped).
 - Size ladder: the 512 never serves a ≤128 slot (srcset assertion).
 
-## §8 Parked owner calls
+## §9 THE CIVILITY GUARD (owner order, same session: display names + comments)
+**The order:** obscene or abusive language in a DISPLAY NAME or a COMMENT is
+simply prevented — the text cannot be saved or posted. NOTHING ELSE is
+affected: no lockouts, no strikes, no shadow penalties ("it doesn't lock them
+out of anything else" — the owner's proportionality ruling, and it is the
+right one: the guard rejects a string, never a person).
+
+- **ONE VALIDATOR, TWO MIRRORS:** a shared module (blocklist + normalizer)
+  runs CLIENT-SIDE for the polite inline refusal and SERVER-SIDE as law (the
+  save/post RPCs validate again — client checks are courtesy, server checks
+  are law; the two mirrors share ONE test-vector file so they can never drift,
+  the writer/reader-drift hazard applied to validation).
+- **MATCHING DISCIPLINE (the Scunthorpe defense):** word-boundary matching
+  over a NORMALIZED string (case fold, diacritic strip, homoglyph map,
+  leet-fold, repeated-character collapse, zero-width strip) — NEVER bare
+  substring matching, which convicts innocent words and, in a fantasy-name
+  product, convicts them constantly. An ALLOWLIST rides beside the blocklist
+  for known collisions. Both lists are DATA (authored, versioned, updatable
+  without code); severity is one class in v1 (blocked is blocked).
+- **HONESTY ABOUT THE CEILING (recorded so nobody oversells):** normalization
+  catches casual evasion; determined evasion beats any filter. The guard is a
+  CIVILITY FLOOR — the backstop remains the existing report + admin-remove
+  lane (comments already carry moderation/tombstone machinery; names carry
+  the §5 admin verbs). Pre-post filter + post-hoc human judgment, named as
+  two layers on purpose.
+- **THE REFUSAL IS POLITE AND NON-ACCUSATORY:** "That name can't be used
+  here." / "That comment can't be posted." — no moralizing, no echo of the
+  matched term, and a mistake path in the same breath ("Think this is wrong?
+  Feedback & support."). False positives are support tickets, not appeals
+  court.
+- **SCOPE + THE PUBLICATION-BOUNDARY EXTENSION (chair recommendation,
+  vetoable):** the ordered scope is display names + comments. The same guard
+  SHOULD also run at the GALLERY PUBLISH boundary over user-authored text
+  fields in shared content (renamed settlements, custom-content names) — the
+  principle being: the guard gates where text BECOMES PUBLIC, and never
+  polices private worlds (a DM's own campaign may say what it wants at home;
+  the product law that the world is theirs holds absolutely). Default: in.
+- **Limitations recorded:** the v1 lists are English-centric (i18n is a
+  future list-versioning matter, not a code change); AI-assisted moderation
+  stays PARKED with the avatar-scanning decision (§5 — one paid-service
+  ruling covers both).
+- **Pins:** shared vectors green on both mirrors; the Scunthorpe fixture set
+  (innocent-containing-substring names PASS); the evasion fixture set
+  (casual leet/spacing variants FAIL); the server refuses what a bypassed
+  client submits; no other account capability is touched by a refusal (the
+  proportionality pin — walk the account surface after a block and assert
+  nothing else changed).
+
+## §10 Parked owner calls
+0. The §9 publication-boundary extension (chair default: in).
 1. The product-voice name for it ("Profile image" ships; "emblem"/"sigil" is
    a voice-workstream candidate the owner may prefer).
 2. Proactive moderation service activation (paid; §5).
