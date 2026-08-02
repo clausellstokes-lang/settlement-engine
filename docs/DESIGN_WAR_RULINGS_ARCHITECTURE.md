@@ -222,17 +222,43 @@ verify every staged hunk).
   (b) execute the golden adjudication ruling recorded in the Fable validation queue
   (see §WR-0b below); (c) full gate via `sh scripts/gate-tail.sh npm run check` —
   NEVER a bare pipe.
-- **WR-0b THE GOLDEN ADJUDICATION** (the Fable chair's ruling, recorded in
-  FABLE_VALIDATION_QUEUE.md the day this lands): the three reds on the settled tree
-  are real (re-executed 2026-08-01: beliefMapGolden drifts on exactly
-  `bg-c|14|unreliable`; momentumDormancyGolden on exactly `mo-b|8|one_month` +
-  `mo-c|6|one_week`; anyCast is the ratchet-down above). The ruling on whether the
-  two golden drifts are a LEGITIMATE lit-path W1 shift (⇒ signed same-commit
-  re-record with the field-level diff quoted in the test header, the house
-  precedent) or a DORMANCY BREAK (⇒ W1 has a defect to fix before landing) follows
-  the field-level attribution evidence. The implementer executes the ruling; the
-  implementer never adjudicates.
+- **WR-0b THE GOLDEN ADJUDICATION — RULED 2026-08-01 (recorded in
+  FABLE_VALIDATION_QUEUE.md):** the three drifts are a LEGITIMATE lit-path W1
+  behavior shift; the re-record is AUTHORIZED. Evidence (executed, isolation
+  worktree): the drifting configs run war+strategy LIT; momentum's own fenced layer
+  remained a perfect no-op; the 99e2d54f base reproduces ALL SIX committed manifest
+  hashes byte-exactly; every moved field traces to a declared W1 join and no
+  undeclared field moved. Implementer executes: UPDATE_GOLDEN=1 per each test
+  header (gate-absent capture for momentum), the field-level diff quoted in the
+  header, same commit as W1. Also carried as a disclosed same-seed shift: a
+  conquest no longer recalls a marching co-besieger (declared + pinned in W1).
 **Acceptance:** both commits landed, gate exit 0, ledger rows written, the tree clean.
+
+### WR-0c — OPENER HARDENING (from the verified review register,
+docs/COMPREHENSIVE_REVIEW_2026-08-01.md; all three CONFIRMED with executed proof;
+all three PRE-EXISTING defects, not W1 regressions — W1 strictly improved this seam)
+Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline applies.
+- **(1) The treaty war-block reaches the ONE opener:** evaluateWarLayer never
+  consults treatyBlocksWar — a live honored non-aggression pact does not stop a war
+  (no breach, no cost; every negotiated NAP is structurally worthless). Fix per the
+  register sketch: drop pact-bound pairs at hostileTargetsOf (warIntent.js is a
+  dependency-free leaf the opener already imports), and make deliberate breach a
+  FIRST-CLASS receipted path (id-carrying beat, complianceState→defaulted,
+  treaty_default casus against the breaker) — "breakable at cost," never silently
+  ignored. Also: the chooser-side deploy weight must actually collapse at
+  warReasonFactor=0 (a zero-scored pact-violating march is currently still
+  softmax-samplable).
+- **(2) The scored target IS the ordered target:** emitMove independently picks
+  its deploy target (first out-muscled in codepoint order) while the score was
+  computed against bestTargetId — the deposited order then waives the margin gate
+  for a target the deliberation never evaluated. Unify (return bestTargetId from
+  enumerateMoves; emit THAT), and pin the 3-hostile divergence case.
+- **(3) The trade-war escalation routes through the one opener:** tradeWar.js
+  mints a confirmed war_front directly — a costless, ageless siege with no
+  deployment, no drain, no exhaustion, no SIEGE_MAX_AGE, one-army law bypassed.
+  Fix: the escalation deposits a war INTENT (the W1 ledger — this is exactly what
+  it is for) instead of minting a front; the opener then opens it with a real
+  deployment, or refuses it through the same gates every war faces.
 
 ### WR-1 — THE TERMINATION READ (amendments C, C2; flag `warTerminationEnabled`)
 **Scope:** the four-term read — live cause vs cost-to-continue vs cost-to-stop,
@@ -265,17 +291,33 @@ all against momentum — plus per-cause dissolution.
   a walker over the taxonomy); dormancy golden.
 **Bands:** term weights, the deciding-term margin, sunk-cost fallback band.
 
-### WR-2 — DISPOSITION (amendments E, E2, E3; flag `dispositionEnabled`)
-- **New module `dispositionProfile.js`** — ONE writer for `worldState.dispositions`.
-  Four closed channels {martial, mercantile, diplomatic, insular}; stock01 + banded
+### WR-2 — DISPOSITION (amendments E, E2, E3; flag `dispositionChannelsEnabled`)
+**⚠️ CENSUS CORRECTION (2026-08-01, the review caught this volume's own gap): the
+tree ALREADY carries a single-channel disposition substrate, LIT in
+full_simulation — `disposition.js` (computeAggressiveness blending govBaseline +
+NPC personality + win/loss history + deityTemper into war appetite),
+`dispositionLedger.js` (`worldState.dispositionStats`: per-settlement
+aggressiveness memory, wins/losses/signed score saturating ±12, fed by
+warDeployment win/loss deltas via pulseKernel), flag `warDispositionEnabled`.
+WR-2 therefore EXTENDS, never duplicates (J-WR-11):**
+- **Extend `dispositionStats` into the four-channel shape** — ONE ledger, ONE
+  writer (`dispositionLedger.js` stays the writer), migrating the existing
+  single-channel aggressiveness score into the martial channel's history. Four
+  closed channels {martial, mercantile, diplomatic, insular}; stock + banded
   projection; learned ONLY from outcome events (war won/lost, treaty held/broke,
-  trade enriched, venture failed — the honest read), decayed toward neutral on a
-  generational half-life band. THE REVERSAL PIN is mandatory: a martial realm fed
-  defeats becomes cautious on the same reader (no ratchet — amendment E's own law).
-- **SUBSTRATE GATE (amendment E's warning, verbatim):** if war history records only
-  occurrences and not OUTCOMES, the martial channel CANNOT be built as designed —
-  STOP and report; do not ship bare militarism. (The design-corpus review is
-  confirming this substrate; its verdict rides in the wave brief.)
+  trade enriched, venture failed), decayed toward neutral on a generational
+  half-life band. THE REVERSAL PIN is mandatory (no ratchet — amendment E's law).
+- **Subordinate the legacy consumer:** when `dispositionChannelsEnabled` is lit,
+  `disposition.js` consumes the martial channel and RETIRES its own win/loss
+  history term (one honest read, never double-counted — if both ran, war appetite
+  would double-count history: existing multiplier × new threshold factor). Dark,
+  the legacy path is byte-identical. The flag is named
+  `dispositionChannelsEnabled` precisely to avoid the `warDispositionEnabled`
+  collision.
+- **SUBSTRATE GATE — ANSWERED AFFIRMATIVELY:** amendment E's warning ("verify war
+  history records outcomes, not merely occurrences") is satisfied by this exact
+  machinery — dispositionStats already records wins and losses. The martial
+  channel builds on it directly.
 - **Application (E3's law):** dispositions modulate BARS — the strategy chooser's
   thresholds, the termination read's sue/decline appetite, the trade/mediation
   propensities. STRUCTURAL ENFORCEMENT: dispositionProfile exports only
@@ -300,6 +342,17 @@ all against momentum — plus per-cause dissolution.
 disposition COLOURS, never drowns — banded and capped per law 6).
 
 ### WR-3 — THE LINEAGE CLAIM (owner cause #2; flag `lineageClaimEnabled`)
+**⚠️ SUBSTRATE GATE (2026-08-01 review finding, verified): wave E's satellites are
+NOT digest-addressable war-capable settlements — they orbit a parent cosmetically,
+die back to the parent, or converge into a hamlet; warReasons pairs key over digest
+settlement ids. As-is, NO lineage edge joins two war-capable settlements and the
+casus would be a vocabulary entry whose TRUE branch never fires (the
+unreachable-predicate hazard class). THEREFORE WR-3 FIRST BUILDS THE SEAM: every
+graduation of a satellite-lineage site into a real settlement (satellite→hamlet
+convergence, wave-P plan-driven overflow foundings, remnant resettlement of a
+satellite site) records a durable `parentRef` lineage edge on the CAMPAIGN-MEMBER
+settlement. The casus reads THAT edge. An executed corpus probe proving the pair
+reachable is part of the wave's acceptance, not an afterthought.**
 - **New casus `lineage_claim` + mirror `kinship_bond`** in the taxonomy (the walker
   forces the pair). Reads wave E's parent→child founding lineage BOTH directions
   (parent reclaims what it seeded; the outgrown child claims the seat), scored by
@@ -694,6 +747,21 @@ legitimacy start, plan-trigger thresholds.
 - **J-WR-10 (R's extremity read):** existing relationship-state axes at their
   authored extreme + live grievance magnitude; no new relationship vocabulary.
   VETO mints an `extreme` band name into the relationship vocabulary.
+- **J-WR-11 (disposition extends, never duplicates — added 2026-08-01 after the
+  review caught the census gap):** WR-2 extends the EXISTING dispositionStats
+  ledger into four channels with one writer, migrating the single-channel score
+  and subordinating disposition.js's own history term when lit. VETO builds the
+  parallel dispositionProfile.js and accepts the double-count risk consciously.
+- **J-WR-12 (lineage substrate before lineage casus):** WR-3 builds the
+  campaign-member parentRef seam first and proves pair-reachability by corpus
+  probe. VETO ships the casus against the satellite ledger as-is (and accepts a
+  structurally-unreachable cause).
+- **J-WR-13 (census corrections stand in the register):** the §2 substrate table's
+  two verified overstatements — "jailed applies to any named soul" (no
+  non-corruption jailing path exists today; the envoy program NAMES that seam as
+  new work in WR-7b) and the disposition row above — are corrected per
+  docs/COMPREHENSIVE_REVIEW_2026-08-01.md; any implementer finding a third census
+  overstatement STOPS and reports rather than building on it.
 
 ## §7 THE TUNING SURFACE (owner-signed at the soak redo, per THE PROMISE)
 Every band named in §5, gathered: WR-1 term weights + deciding margin · WR-2

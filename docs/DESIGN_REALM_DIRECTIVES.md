@@ -1282,6 +1282,29 @@
 >   readings; migration before response competition; persistent plans), slices
 >   re-staged P1/P1a/P2-homeostat/P3-valves/P4-world, and THE FOURTEEN CLAIMS
 >   adopted as the wave's certification contract.
+> - ⭐⭐ 2026-08-01 (THE FABLE VALIDATION PASS — the Fable-capable account arrived;
+>   pause over). ALL 33 queue rows RULED (27 confirmed / 6 adjusted / 0 engineering
+>   reversals — verdict table + new chair rows in FABLE_VALIDATION_QUEUE.md), the
+>   W1 goldens ADJUDICATED LEGITIMATE (re-record authorized, isolation-proof), the
+>   neighbour-mirror escalation RULED (inject-dampened at the ONE REGEN; interim
+>   emergent-suppression stands), and a 10-dimension holistic review with Opus 5
+>   adversarial verifiers landed 55 verified findings (18 refuted) in
+>   docs/COMPREHENSIVE_REVIEW_2026-08-01.md — headlined by three CONFIRMED
+>   opener-seam defects (treaty war-block unreachable at the opener; scored-vs-
+>   ordered target divergence; tradeWar's second opener) now specced as WR-0c.
+>   Owner rulings dictated this session: AMENDMENTS R / R2 / S (the razing; its
+>   moral economy + vengeance licenses; the sovereignty market) — recorded above
+>   and compiled with A..Q into docs/DESIGN_WAR_RULINGS_ARCHITECTURE.md (waves
+>   WR-0..WR-10, implementation-grade, ALL implementation assigned to the external
+>   implementer per owner order; volume amended post-review: WR-2 extends the
+>   EXISTING dispositionStats, WR-3 gains the lineage-substrate gate). NEW
+>   SCHEDULED STEP RULED: THE LIGHTING BATCH (four directive flags are FALSE in
+>   full_simulation against the restart order's record) — one lighting commit with
+>   disclosed re-records, sequenced BEFORE the soak redo. Escalated to the owner:
+>   the DESERT PROMOTION-LOCK (a biome that cannot ascend at any tier pair) and
+>   the migrationKernel-vs-DENSITY_CEILINGS sibling divergence (reconcile before
+>   the grid runs). Model split this session per owner: Fable = validation +
+>   architecture; Opus 5 = verification; Sol 5.6 = implementation.
 
 ## The seven directives (owner, verbatim intent)
 1. AUTOPLACEMENT — one button places all settlements on the realm map balancing sim dynamism

@@ -74,3 +74,66 @@ here as a row, so a Fable-capable account can re-validate later and readjust.
 | 2026-07-31 | Severity scale for the ten late-lane receipts | climb-down 0.6 · webwar mint 0.45 / raid+wrong-village 0.65 / abandon 0.4 / complete 0.5 · infowar lie 0.45 / spy 0.4 / intel 0.35 · treaty 0.55 — register anchored to the upswing exemplars (bust 0.6 major, boom 0.4 notable) | wave-2 commit; fixes "Severity 0%" cards and mildest-band rumor magnitudes. **MEASURED 2026-08-01 against the estate** (94 severity literals in 28 news-authoring files): band distribution 13/58/16/7 across the four magnitudeBandOf bands (cut-points 0.3 / 0.55 / 0.8), so the estate is band-1 dominated and these ten (6 in band 1, 4 in band 2) sit in the house register. Band 3 is reserved for REALM-scale beats only (a calamity strike, a pantheon shift, one npcAgency 0.85), so band 2 is the correct ceiling for settlement/actor-scale beats and webwar_wrong_village was deliberately NOT promoted to the atrocity band. treaty 0.55 sits exactly on the band-2 cut-point but has a house sibling at the same value (armyTransitKernel), so it is consistent rather than an outlier. No value changed on this evidence. | ~~Re-examine against a lit-realm soak's rumor magnitude distribution~~ **INSTRUCTION CORRECTED 2026-08-01 — that check is NOT EXECUTABLE: no soak receipt carries severity, rumor or magnitude data (verified against artifacts/soak release.json + smoke.json; the envelope holds eventTypeCounts/moverCounts, not entry severities).** What Fable CAN do: (a) re-derive the estate census above and judge whether band 1 vs band 2 is the right split per beat — the values are Opus-chosen even though the register is now measured; (b) rule on whether intel_transfer (0.35, "a notable turn") should drop under 0.3 to "a minor stir"; (c) decide whether a rumor-magnitude channel belongs in the receipt envelope at all, which is the instrument gap that made the original instruction unwritable |
 | 2026-07-31 | `diplomacy` re-filed `events` → `trade` in heraldRouting (resolves row 2's open question) | Bare `diplomacy` has exactly ONE producer (the treaty signing beat), and its kind-row `treaty_signed` already filed `trade`, so both routing keys now agree; recorded as a KIND_SECTION divergence (the letter files diplomacy under `courts`) | heraldRouting.js + the walker's divergence registry (wave-3 commit); walker 17/17 green | ~~If a future producer mints `diplomacy` for a non-treaty beat, `trade` may misfile it~~ **RISK NOW ENFORCED 2026-08-01, not merely recorded:** heraldRouting.walker gained a SINGLE-PRODUCER KEYS test asserting `impactKind: 'diplomacy'` is minted by peaceTerms.js and nothing else, anchored both directions (a rename empties it and reds too). Mechanism proven by a two-producer fixture: the scan finds both, including in a subdirectory, and the assertion fails. So a second producer can no longer inherit the trade filing silently. Fable's remaining call is the taste one: when it does red, re-split `diplomacy` or give treaties their own impactKind |
 | 2026-07-31 | Herald-doors architecture: buildHeraldFeed gains a READ-ONLY fourth source (campaign.wizardNews.entries) instead of widening the persisted impactDigest freeze | Display-layer completion of the module's own stated contract ("pulse + wizard-news records"); rejected the pulseKernel freeze-widening because it rewrites persisted per-tick pulseHistory content and grazes provenanceKernel's read of `applied.newsEntries` | heraldFeed.js + tests/components/heraldFeedSources.test.js (wave-2 commit) | Validate the lens rule (advance = `entry.tick >= latestPulse.tick`; movers receive the same worldState.tick the pulse record stores) against a multi-interval advance; confirm the persisted-digest road stays closed |
+
+## ⭐⭐ THE FABLE VALIDATION PASS — 2026-08-01 (all rows through 2026-08-01 ruled)
+### Method: 13 Fable evidence agents re-derived every row from its cited evidence (2.0M
+### tokens, 671 tool uses, all commits/tests re-read, key suites re-executed), then the
+### chair ruled. Verdicts below; corrections land as register items in
+### docs/COMPREHENSIVE_REVIEW_2026-08-01.md (R-xx refs) — the Opus rows above are never
+### rewritten. Overall: the Opus era's engineering judgments HOLD — 27 of 33 rows
+### CONFIRMED outright; 6 ADJUSTED (all doc-precision or scope corrections, zero
+### engineering reversals); 2 escalations RULED below.
+
+| row (oldest first) | Fable verdict 2026-08-01 |
+|---|---|
+| npc-credibility nc-b golden re-record | ✓ CONFIRMED — field-level diff re-derived; only newsKinds moved |
+| Herald routing, nine kinds | ✓ CONFIRMED — all nine doors read right in play |
+| treaty_signed → major (0.55/66) | ✓ CONFIRMED — a dictated peace belongs in majorHeadlines |
+| Severity register | ✓ CONFIRMED with ADJUSTMENTS — census re-derived (numbers verified); intel_transfer HOLDS at 0.35 (a state secret changing hands is a notable turn); rumor-magnitude receipt channel RULED IN as a v5+ envelope field (the instrument gap closes at the soak redo, not before) |
+| diplomacy → trade + single-producer walker | ✓ CONFIRMED — walker bites both directions; when it reds, mint a treaty-specific impactKind rather than re-splitting (pre-ruled) |
+| heraldFeed fourth source | ✓ CONFIRMED with ADJUSTMENT — lens rule holds at multi-interval advance; the adjustment is recorded in the register (R-ref) |
+| Batch-3 golden re-record acceptance | ✓ CONFIRMED — blast radius independently re-derived |
+| ⚠️ Neighbour-mirror escalation | ⭐ RULED (vetoable): option (c) INJECTION form — when the category is occupied the neighbour faction still lands, distinctly labeled, at dampened weight (×0.5 band) with a per-settlement cap (≤1 mirror + ≤1 opposition); QUEUED FOR THE ONE REGEN batch (golden-shifting; owner lights it); option (a) emergent-suppression is the EXPLICIT INTERIM STATE until that batch. SCOPE CORRECTED: the cliff is city-specific + town-mirror-channel only — town opposition stays live (23/60 hostile, 14/60 rival); the queue row's "every relationship type at town" was an allied-cell artifact. Blast radius proven confined (per-step rng fork; un-neighboured seeds bit-identical; consumers duplication-aware) |
+| factionRename cascade extension | ✓ CONFIRMED — REPAIR classification right; title substitution ACCEPTED (coincidental-token risk measured negligible; the one quirk found is pre-existing and recorded) |
+| npcVerdictTable ruin filter | ✓ CONFIRMED — zero-golden-risk claim verified; missing negative fixture = register item |
+| Wave D (CREATE_ROUTE + 193) | ✓ CONFIRMED — config._userRoutes stands until the train deploys; revisit as a column only if a second consumer appears |
+| J1 (ledger + genesis) | ✓ CONFIRMED — road-grade water genesis is the intended §8 reading |
+| H1 (durable identity) | ✓ CONFIRMED — persistence disclosure needs NO migration (load path tolerant); forward note recorded: lighting later lights NEW campaigns only |
+| FP-G16 ESD trim | ✓ CONFIRMED — residual candidate-lazy set recorded as FP-G17 candidate (register) |
+| GOLDEN RE-RECORD AUTHORIZED (I1) | ✓ CONFIRMED — the per-wave (not deferred-batch) policy was RIGHT; no subsequent wave shifted a golden, exactly as predicted |
+| J2 + counterfactual mercy | ✓ CONFIRMED — all three veto-open calls upheld |
+| H2 + alias repair | ✓ CONFIRMED |
+| I1 Rookery deferral | ⚠️ ADJUSTED — I3 did NOT close the precondition; it was inherited again exactly as the row feared (enforced nowhere at generation). Register R-ref carries the fix; assign in the next REM/WR dispatch |
+| J3 (charter/decay/danger) | ✓ CONFIRMED — the two-danger-reading split is the right model |
+| H3 (circulation + stationarity) | ✓ CONFIRMED — envelope re-executed, mutant control bites |
+| K1 (institution status) | ✓ CONFIRMED — four-cause vocabulary sufficient today; the real pressure point recorded for the day a fifth root appears |
+| Batch-4 typecheck reconciliation | ✓ CONFIRMED — no fourth world/settlement spelling crept in |
+| H4 + undo placement | ✓ CONFIRMED — leak check clean; no other advertised capability unreachable (ratchet green) |
+| I2 (stamps + fidelity) | ✓ CONFIRMED — impaired-still-trades reads right; "trades corruptly" is narrative-only today (register note) |
+| J4 (reputation race) | ✓ CONFIRMED — the race pin proves what it claims |
+| THE GROUNDED ANATOMY | ✓ CONFIRMED — independently re-derived analytically; the fixed-point formula reproduces the executed table EXACTLY (756/504/301/151). ONE ADJUSTMENT: the soak evaluator ticks WEEKLY (the orchestrator decomposes every interval to one_week), so §0's "(the soak's own configuration)" parenthetical conflates harness interval with evaluation interval — same defect, same attractor, but the in-vivo freeze regime is weekly ticks + crisis modifiers, and tuners must model THAT path. §0 footnote ordered (register R-ref) |
+| P1 acceptance | ✓ CONFIRMED — growth-side-only suppression re-derived sound; two overstated numeric details in the row corrected in the register |
+| External design review (3 amendments) | ✓ CONFIRMED — one-plan-slot shows no thrash at scale; no fourth reading needed on current evidence |
+| WAVE P ENTIRE | ✓ CONFIRMED as accepted — with the calibration adjustment above and two band findings ESCALATED: (1) ⚠️ DESERT PROMOTION-LOCK — desert settlements are promotion-locked at EVERY tier pair even at maximum public works (band-combination extreme; a biome that structurally cannot ascend) — OWNER DECISION or tuning-pass item, recorded in the register; (2) legacy migrationKernel SATURATION_POP 9000 vs DENSITY_CEILINGS (city 38k) — sibling divergence to reconcile BEFORE the soak grid |
+| P4 'indirect' grade | ✓ CONFIRMED — honest grade for a reader-without-lit-receipts |
+| P4 capability floor 0.20 | ✓ CONFIRMED — sane pending soak; ⚠️ latent hazard recorded: capability01:null ZEROES war scores instead of defaulting to 1 (register) |
+| P4 no-hidden-governor | ✓ CONFIRMED with ADJUSTMENT — the structural scan is real and the guard-the-guard arm bites, but scan scope has an on-paper bypass (register R-ref carries the tightening) |
+| Soak remnant amendment | ✓ CONFIRMED — the lifecycleDiedAtTick exception cannot mask a non-died zero |
+
+### NEW ROWS (Fable chair, 2026-08-01 — rulings made this session)
+| date | item | decision | evidence | veto surface |
+|---|---|---|---|---|
+| 2026-08-01 | ⭐ W1 GOLDEN ADJUDICATION — the three reds on the settled tree | RULED LEGITIMATE lit-path W1 shift; re-record AUTHORIZED (executed by the implementer in WR-0 per test headers; anyCast = ratchet-DOWN lock-in). Dormancy-break hypothesis REFUTED on four executed grounds: drifting configs have war+strategy LIT; momentum's own fenced layer stayed a perfect no-op; the 99e2d54f base worktree reproduces ALL SIX committed manifest hashes byte-exactly; every moved field traces to a declared W1 join and none doesn't | isolation-worktree field-level diff (validation workflow wf_df90beb3-931) | Owner may veto the re-record; then W1 holds uncommitted until re-ruled |
+| 2026-08-01 | Batch-6 acceptances (I3+I4 @ 007e0dcf, K2 @ 230e0f22, K3 @ e2614d4f, K4 @ 7b6639f9) — rows were NEVER WRITTEN (protocol breach found by review) | RETRO-VALIDATED as accepted: gate exit 0, no golden moved, K2..K4 did not strain K1's vocabulary; code-level findings from the review land in the register (Rookery precondition inherited; plant-wiring gap; regime-gate one-sidedness REFUTED by the skeptic) rather than blocking acceptance | review dimensions brokerages-ik + design-corpus; ledger Progress rows | standard |
+| 2026-08-01 | ⭐ THE LIGHTING BATCH is a first-class scheduled step | The four directive flags (npcConsequences, routeLifecycle, magicEconomy, informationBrokerages) are FALSE in full_simulation while the restart order says "lit in full_simulation" — a hidden prerequisite recorded only in a code comment. RULED: one ONE-REGEN-style lighting commit (flip four values + disclosed golden re-records with blast-radius proof + budgets-proven-lit) sequenced explicitly BEFORE the soak redo | simulationRules.js:442-490 vs DESIGN_REALM_DIRECTIVES Progress | Owner sequences it with the soak order |
+| 2026-08-01 | Village-seeding row correction | The queue row locates the delegated ruling in "J-P blocks"; it lives in DESIGN_DEMOGRAPHIC_ENGINE §11b. Ruling itself CONFIRMED (cap table stands; veto raises the cap, never forks the lane) | §11b | none |
+
+### INSTRUCTION READJUSTMENT (protocol step 3 — the systematic lean, recorded vetoably)
+The Opus era shows ONE systematic lean and it is PROCESS, not engineering: judgments hold
+(zero reversals in 33 rows) but process metadata under-records — missing batch-6 rows,
+a mislocated ruling, an unreproducible test tally, an unrecorded flag-lighting deviation.
+AMENDMENT to the protocol, binding on any future Opus era: (1) every batch's acceptance
+rows are written BEFORE the next batch dispatches (a batch without rows is un-dispatched);
+(2) every evidence cell quotes a RE-RUNNABLE command, not a summary tally; (3) any
+deviation from a recorded owner order (however sensible) gets its own row the day it is
+taken. Engineering delegation to Opus is otherwise re-affirmed at full scope.
