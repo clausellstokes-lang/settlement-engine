@@ -317,6 +317,18 @@ describe('the settlement-state readers', () => {
     expect(hasPrison({ institutions: [{ name: 'Workhouse' }, { name: 'Large prison' }] })).toBe(true);
   });
 
+  test('ruined institutions credit neither prison nor criminal capacity', () => {
+    expect(hasPrison({ institutions: [{ name: 'Gaol', status: 'ruined' }] })).toBe(false);
+
+    const ruinedDen = {
+      institutions: [{ name: 'Smugglers ring', category: 'criminal', status: 'ruined' }],
+    };
+    expect(hasCriminalPower(ruinedDen)).toBe(false);
+    // ANCHOR: factions are organizations rather than buildings, so the deliberately
+    // unfiltered faction half must still see a live underworld beside the ruined den.
+    expect(hasCriminalPower({ ...ruinedDen, factions: [{ name: 'Thieves guild' }] })).toBe(true);
+  });
+
   test('a criminal power is a criminal FACTION or a criminal INSTITUTION, in either faction home', () => {
     expect(hasCriminalPower({ factions: [{ name: 'Thieves guild' }] })).toBe(true);
     expect(hasCriminalPower({ powerStructure: { factions: [{ faction: 'The Syndicate', category: 'criminal' }] } })).toBe(true);

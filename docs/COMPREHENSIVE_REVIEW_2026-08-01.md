@@ -729,6 +729,34 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   distribution verification passed 364/364. No production module, golden, snapshot,
   feature flag, lighting state, or soak artifact changed.
 
+### Addendum implementation receipt — R-58 / R-64 / R-66 EVIDENCE PINS LANDED (2026-08-02)
+
+- **R-58 now has the executed negative it claimed.** A ruined Gaol does not credit
+  prison capacity, and a ruined criminal institution does not credit criminal
+  power. The sibling anchor keeps the intentionally unfiltered half honest: a live
+  criminal faction beside that ruined institution still does credit criminal power.
+- **R-64 closes both hidden-governor routes without changing the engine.** The
+  demographics-risk leaf still imports exactly its two known readers, and the
+  reachable `demographicsRates.js` helper now has an exact seven-import contract and
+  joins the P4 pure-leaf wall. At the pressure seam, Ashford's complete disease and
+  conflict records are byte/deep-equal when an otherwise unrelated Brill changes
+  from 40 to 900,000 people. The same source detector forbids realm-observation
+  readers, realm-pressure and target/count aliases, and direct population-field
+  aggregation there; its positive control bites both classes in the intentionally
+  realm-aware war module.
+- **R-66 restores exact-set certification totality.** The shared W-K row must name
+  exactly the canonical institution-status, magic-regime, and magic-buffer spatial
+  ledgers. Cardinality plus set equality means a fourth channel, a duplicate, or a
+  dropped channel is now a visible reviewed change.
+- **Verification:** the three-file focused matrix passed 78/78; targeted ESLint and
+  `git diff --check` passed. The full repository gate began and ended at `ebc40b08`:
+  2,114 test files passed, one skipped; 22,397 tests passed, 54 skipped. Production
+  build completed, prerender wrote 311 route documents, and distribution verification
+  passed 364/364. `gate-tail` itself reported exit 0; only the caller's post-gate
+  diagnostic assignment used zsh's reserved `status` name and failed after the
+  verdict, so HEAD and the log were re-read directly. No production module, golden,
+  snapshot, flag, lighting state, or soak artifact changed.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates

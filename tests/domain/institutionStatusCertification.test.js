@@ -37,6 +37,8 @@ import { BEHAVIORAL_MOVER_FAMILIES } from '../../src/domain/certification/behavi
 import { DEFAULT_SIMULATION_RULES, SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { EXEMPT_LEDGER_KEYS, TRACKED_LEDGER_KEYS } from '../../src/lib/spatialUsage.js';
 import { INSTITUTION_STATUS_LEDGER } from '../../src/domain/worldPulse/institutionStatusModel.js';
+import { MAGIC_REGIME_LEDGER } from '../../src/domain/worldPulse/magicRegimeModel.js';
+import { MAGIC_BUFFER_LEDGER } from '../../src/domain/worldPulse/magicBufferApply.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
@@ -71,17 +73,17 @@ describe('K1 the certification row is registered and well shaped', () => {
     }
   });
 
-  it('declares K1\'s ledger key among its channels, and every channel is a real one', () => {
-    // AMENDED BY K3 (the disaster buffer). This pin originally asserted EXACT equality
-    // with K1's single key, on the reading that the lane had one channel. It does not
-    // any more: the row is shared by every W-K slice, and K3 writes a second key
-    // (spatialLedgers.magicBuffer, the ward reserve). Widening the assertion to
-    // CONTAINMENT plus a totality check over the shape keeps what the pin was actually
-    // for, which is that every declared channel names a key some slice really writes,
-    // and drops only the claim that has become false. K3's own key is pinned from the
-    // other side in tests/domain/magicBufferIntegration.test.js, which asserts the row
-    // declares it and that a real advance materializes it.
-    expect(ROW.aliveness.stateKeys).toContain(`spatialLedgers.${INSTITUTION_STATUS_LEDGER}`);
+  it('declares exactly the three W-K ledger channels, and every channel is a real one', () => {
+    // The union is named from the canonical writers rather than repeated as literals.
+    // Exact set equality restores the totality pin: adding or dropping a W-K channel
+    // must now produce a visible change here instead of passing through containment.
+    const expectedStateKeys = new Set([
+      `spatialLedgers.${INSTITUTION_STATUS_LEDGER}`,
+      `spatialLedgers.${MAGIC_REGIME_LEDGER}`,
+      `spatialLedgers.${MAGIC_BUFFER_LEDGER}`,
+    ]);
+    expect(ROW.aliveness.stateKeys).toHaveLength(expectedStateKeys.size);
+    expect(new Set(ROW.aliveness.stateKeys)).toEqual(expectedStateKeys);
     for (const key of ROW.aliveness.stateKeys) {
       expect(key, `a declared channel must be a spatialLedgers key: ${key}`)
         .toMatch(/^spatialLedgers\.[A-Za-z][A-Za-z0-9]*$/);

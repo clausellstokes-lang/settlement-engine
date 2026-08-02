@@ -257,26 +257,42 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
 
   test('the ONE seam carries the coupling, and DARK is byte-identical there', () => {
     const settlement = place({ tier: 'city', population: 20000, dailyProduction: 22000 });
-    const snapshot = (rules) => ({
+    const snapshot = (rules, companionPopulation = 40) => ({
       worldState: { simulationRules: rules, calendar: {}, relationshipStates: {} },
       regionalGraph: { channels: [], edges: [] },
-      settlements: [{
-        id: 'ashford',
-        name: 'Ashford',
-        settlement,
-        activeConditions: [],
-        causal: {
-          scores: {
-            healing_capacity: 20, infrastructure_condition: 20, trade_connectivity: 85,
-            defense_readiness: 20, food_security: 50, housing_pressure: 70,
-            labor_capacity: 50, criminal_opportunity: 50, public_legitimacy: 50,
+      settlements: [
+        {
+          id: 'ashford',
+          name: 'Ashford',
+          settlement,
+          activeConditions: [],
+          causal: {
+            scores: {
+              healing_capacity: 20, infrastructure_condition: 20, trade_connectivity: 85,
+              defense_readiness: 20, food_security: 50, housing_pressure: 70,
+              labor_capacity: 50, criminal_opportunity: 50, public_legitimacy: 50,
+            },
           },
         },
-      }],
+        {
+          id: 'brill',
+          name: 'Brill',
+          settlement: place({ name: 'Brill', population: companionPopulation }),
+          activeConditions: [],
+          causal: {
+            scores: {
+              healing_capacity: 50, infrastructure_condition: 50, trade_connectivity: 50,
+              defense_readiness: 50, food_security: 50, housing_pressure: 70,
+              labor_capacity: 50, criminal_opportunity: 50, public_legitimacy: 50,
+            },
+          },
+        },
+      ],
     });
     const dark = deriveSettlementPressures(snapshot({}));
     const lit = deriveSettlementPressures(snapshot({ demographicsEnabled: true }));
-    const kindOf = (list, kind) => list.find((p) => p.kind === kind);
+    const kindOf = (list, kind, settlementId = 'ashford') => list
+      .find((p) => p.settlementId === settlementId && p.kind === kind);
     // DARK: byte-identical to legacy on every pressure kind.
     expect(JSON.stringify(dark)).toBe(JSON.stringify(deriveSettlementPressures(snapshot({}))));
     // LIT: the two coupled kinds rise, and the others do not move at all.
@@ -288,6 +304,15 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     // The lifted entries NAME their cause rather than moving silently (law 5).
     expect(kindOf(lit, 'disease').reasons.join(' ')).toContain('packed');
     expect(kindOf(lit, 'conflict').reasons.join(' ')).toContain('watch is thin');
+
+    // A seam-local realm governor would make Ashford move when an otherwise unrelated
+    // companion grows. Both coupled outputs must remain functions of Ashford alone.
+    const litWithHugeCompanion = deriveSettlementPressures(snapshot(
+      { demographicsEnabled: true },
+      900000,
+    ));
+    expect(kindOf(litWithHugeCompanion, 'disease')).toEqual(kindOf(lit, 'disease'));
+    expect(kindOf(litWithHugeCompanion, 'conflict')).toEqual(kindOf(lit, 'conflict'));
   });
 
   test('NO HIDDEN GOVERNOR: no incidence path reads a realm total or a population target', () => {
@@ -307,18 +332,47 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     const imports = [...risk.matchAll(/from '([^']+)'/g)].map((m) => m[1]).sort();
     expect(imports).toEqual(['../../kernel/math.js', './demographicsRates.js']);
 
+    // Close the helper-hop route too: the risk reader may only reach this exact set of
+    // local physics leaves through demographicsRates. A new import is a reviewed event.
+    const rates = code('src/domain/worldPulse/demographicsRates.js');
+    expect(rates.length, 'the rates module read empty').toBeGreaterThan(1000);
+    const ratesImports = [...rates.matchAll(/from '([^']+)'/g)].map((m) => m[1]).sort();
+    expect(ratesImports).toEqual([
+      '../../data/constants.js',
+      '../../kernel/math.js',
+      '../foodLedger.js',
+      '../resolveTerrain.js',
+      './demographicsWorks.js',
+      './routeNetworkConsumersInterdiction.js',
+      './routeNetworkLedger.js',
+    ]);
+
     // AND THE CONSUMER SIDE: the pressure seam's demographic terms come from the risk
     // reader alone, never from a realm aggregate reachable in that file either.
     const seam = code('src/domain/worldPulse/pressureModel.js');
-    // anchored: the seam is asserted below to contain demographicRiskOf, so it is non-empty
-    expect(seam).not.toContain('measureRealmDemography');
+    const forbiddenRealmGovernor = [
+      ['realm observation import', /demographicsObservation/],
+      ['realm observation reader', /\b(?:measureRealmDemography|observeRealmDemography)\b/],
+      ['realm pressure', /\brealmPressure(?:01)?\b/],
+      [
+        'realm population alias',
+        /\b(?:realmPopulation|totalPopulation|populationTarget|targetPopulation|settlementCount)\b/,
+      ],
+      ['direct population field read', /(?:\.population\b|\[['"]population['"]\])/],
+    ];
+    const governorHits = (source) => forbiddenRealmGovernor
+      .filter(([, pattern]) => pattern.test(source))
+      .map(([label]) => label);
+    // anchored: the seam is asserted below to contain demographicRiskOf, so it is non-empty.
+    expect(governorHits(seam)).toEqual([]);
     expect(seam).toContain('demographicRiskOf({');
 
-    // GUARD THE GUARD: the scan is capable of finding the forbidden token. The war
-    // module, which is ALLOWED the realm reading because motive is not incidence,
-    // demonstrably carries it, so an absence above is a property of the file rather
-    // than of a regex that stopped matching.
-    expect(code('src/domain/worldPulse/demographicsWar.js')).toContain('realmPressure01');
+    // GUARD THE GUARD: the same scan finds both a realm reading and a direct population
+    // read in the war module. War is ALLOWED those inputs because motive is not incidence,
+    // so an empty seam result above cannot come from a detector that stopped biting.
+    const warGovernorHits = governorHits(code('src/domain/worldPulse/demographicsWar.js'));
+    expect(warGovernorHits).toContain('realm pressure');
+    expect(warGovernorHits).toContain('direct population field read');
   });
 });
 
@@ -695,10 +749,10 @@ describe('P4.6 DORMANCY — object identity, not deep equality', () => {
     }
   });
 
-  test('the five P4 modules are pure leaves: no store, no React, no clock, no I/O', () => {
+  test('the six P4 modules are pure leaves: no store, no React, no clock, no I/O', () => {
     const forbidden = /from '(react|zustand|.*\/store\/|node:fs)|Date\.now\(|Math\.random\(/;
     for (const rel of readdirSync(join(ROOT, 'src/domain/worldPulse'))
-      .filter((f) => /^demographics(Ladder|Risk|War|Observation|Herald)\.js$/.test(f))) {
+      .filter((f) => /^demographics(Ladder|Rates|Risk|War|Observation|Herald)\.js$/.test(f))) {
       const abs = join(ROOT, 'src/domain/worldPulse', rel);
       expect(statSync(abs).isFile()).toBe(true);
       expect(forbidden.test(readFileSync(abs, 'utf8')), `${rel} is not a pure leaf`).toBe(false);
