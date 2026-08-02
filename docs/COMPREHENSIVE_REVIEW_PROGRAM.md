@@ -142,6 +142,22 @@ ledger — never from a session digest.
 >   REAFFIRMED: every minifold commit is `git commit -- <explicit paths>` from now on. NEXT: the
 >   full correction pass over all ~134 findings (both journals preserved; crux rulings chair-held);
 >   NOTHING uncorrected ships to Sol.
+> - 2026-08-02 (~07:30, THE FP CORPUS + THE WINDOW BOUNDARY): the owner's closure ruling — THE
+>   SIMULATION ONTOLOGY IS CLOSED (vocabulary + polish only henceforth) — capped the design era.
+>   Built tonight after the last ledger row: 21 parity surveys (trade/faith/populations/
+>   information/diplomacy/interior, all vs war's grade); THE FP SPINE (twelve requirements:
+>   heuristics, counterforces, density, named actors, errands w/ declared-vs-true purposes,
+>   dossier coherence, derivable mess, coupling, temporal contract, risk posture, narration
+>   parity, pacing) @ 04935d78; SEVEN VOLUMES drafted (~615KB) + 143-finding Opus audit +
+>   correction pass under ten chair rulings — BANKED @ minifold be359d28 mid-correction (resume
+>   map: memory fp-corpus-handoff-2026-08-02). Also: directive 12 THE AGE TOGGLES (war/peace +
+>   pious/secular convergence climates, four corner ages, measured never enforced) @ f4716aa6;
+>   telemetry coverage doc @ 6a24d52d; the Founders' Hall finalized (all-invited 30, no-trade,
+>   petition, presence-sealed) + profile identity + civility guard/veil + operator messages +
+>   LD-1..11 + About split + Bound Book — the whole 08-02 dictation corpus architected and
+>   committed across ~30 minifold commits. Successor: finish the FP corrections per the memory
+>   map, deliver the accounting, then Sol's queue stands: sim-proof path first, FP corpus behind
+>   it, commons/landing parallel.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
