@@ -246,14 +246,15 @@ export function perceivedVulnerabilityClause(perceived) {
  * resist with and what WE could, damped by whether we can actually march (armies eat —
  * the P4 capability term, ABSENT ⇒ 1 ⇒ byte-identical for every pre-P4 and demographics-
  * dark world). Bounded 0..1 by construction; no gain, no second cap.
- * @param {{ gradient: number, capability01?: number, note?: string }} args
+ * @param {{ gradient: number, capability01?: number | null, note?: string }} args
  * @param {string} [seed] the directed-pair phrasing seed (absent ⇒ canonical wording)
  * @returns {{ score: number, receipt: string }}
  */
 export function scoreOpportunism({ gradient, capability01, note }, seed) {
   const appetite = clamp01(Number(gradient) || 0);
   if (appetite <= 0) return { score: 0, receipt: '' };
-  const capability = Number.isFinite(Number(capability01)) ? clamp01(Number(capability01)) : 1;
+  const numericCapability = Number(capability01 ?? 1);
+  const capability = Number.isFinite(numericCapability) ? clamp01(numericCapability) : 1;
   const score = clamp01(appetite * capability);
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: `${warReceipt('opportunism', seed)}${typeof note === 'string' ? note : ''}` };

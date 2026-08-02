@@ -407,12 +407,18 @@ describe('P4.3 WAR — motive, capability, and the picture the court acts on', (
       .toBe(able.score);
   });
 
-  test('ABSENT capability is 1: every pre-P4 caller and every dark world is byte-identical', () => {
-    expect(scoreResourcePressure({ own01: 0.8, foe01: 0.2 }, 'pair'))
-      .toEqual(scoreResourcePressure({ own01: 0.8, foe01: 0.2, capability01: 1 }, 'pair'));
+  test('ABSENT OR NULL capability is 1: every pre-P4 caller and every dark world is byte-identical', () => {
+    const args = { own01: 0.8, foe01: 0.2 };
+    const omitted = scoreResourcePressure(args, 'pair');
+    expect(omitted.score).toBeGreaterThan(0);
+    expect(scoreResourcePressure({ ...args, capability01: undefined }, 'pair')).toEqual(omitted);
+    expect(scoreResourcePressure({ ...args, capability01: 1 }, 'pair')).toEqual(omitted);
+    expect(scoreResourcePressure({ ...args, capability01: null }, 'pair')).toEqual(omitted);
+    // A real zero still means no means to wage the wanted war.
+    expect(scoreResourcePressure({ ...args, capability01: 0 }, 'pair'))
+      .toEqual({ score: 0, receipt: '' });
     // And no note ⇒ no clause appended.
-    expect(scoreResourcePressure({ own01: 0.8, foe01: 0.2 }, 'pair').receipt)
-      .toBe(scoreResourcePressure({ own01: 0.8, foe01: 0.2, note: '' }, 'pair').receipt);
+    expect(omitted.receipt).toBe(scoreResourcePressure({ ...args, note: '' }, 'pair').receipt);
   });
 
   test('PERCEIVED, not true: a court invades a neighbour it wrongly believes grain-rich', () => {

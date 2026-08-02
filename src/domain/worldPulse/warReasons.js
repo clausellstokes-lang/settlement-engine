@@ -518,7 +518,7 @@ export function scoreRevanchism(relState, tick, seed) {
  * `capability01` reads 1 and an absent `note` appends nothing, so every pre-P4 caller
  * — and every world whose demographic engine is dark — scores and reads byte-identically
  * (the dormancy pins hold that). demographicsWar.js supplies both together or neither.
- * @param {{ own01: number, foe01: number, capability01?: number, note?: string }} args
+ * @param {{ own01: number, foe01: number, capability01?: number | null, note?: string }} args
  * @returns {{ score: number, receipt: string }}
  */
 export function scoreResourcePressure({ own01, foe01, capability01, note }, /** @type {string | undefined} */ seed) {
@@ -530,7 +530,8 @@ export function scoreResourcePressure({ own01, foe01, capability01, note }, /** 
   // actually put in the field. ABSENT ⇒ 1 ⇒ byte-identical, which is what keeps every
   // dark world and every existing caller exactly where it was. There is no second cap
   // here: RESOURCE_ENVY_GAIN and the x1.30 war-factor cap remain the only two.
-  const capability = Number.isFinite(Number(capability01)) ? clamp01(Number(capability01)) : 1;
+  const numericCapability = Number(capability01 ?? 1);
+  const capability = Number.isFinite(numericCapability) ? clamp01(numericCapability) : 1;
   const score = clamp01(gap * REASON_TUNING.RESOURCE_ENVY_GAIN) * capability;
   if (score <= 0) return { score: 0, receipt: '' };
   // The receipt says what the court acted on, including when the court was wrong.

@@ -146,9 +146,15 @@ describe('opportunism — the vulture war (the appetite the taxonomy was missing
   it('the score is bounded 0..1 and the OWN-SIDE CAPABILITY damper is P4\'s, not a new one', () => {
     expect(scoreOpportunism({ gradient: 5 }).score).toBe(1);
     expect(scoreOpportunism({ gradient: -5 }).score).toBe(0);
-    // Absent capability ⇒ 1 ⇒ the pre-P4 reading, verbatim.
-    expect(scoreOpportunism({ gradient: 0.8 }).score)
-      .toBeCloseTo(scoreOpportunism({ gradient: 0.8, capability01: 1 }).score, 10);
+    // Absent or null capability ⇒ 1 ⇒ the pre-P4 reading, full receipt included.
+    const omitted = scoreOpportunism({ gradient: 0.8 }, 'pair');
+    expect(omitted.score).toBeGreaterThan(0);
+    expect(scoreOpportunism({ gradient: 0.8, capability01: undefined }, 'pair')).toEqual(omitted);
+    expect(scoreOpportunism({ gradient: 0.8, capability01: 1 }, 'pair')).toEqual(omitted);
+    expect(scoreOpportunism({ gradient: 0.8, capability01: null }, 'pair')).toEqual(omitted);
+    // Do not default by truthiness: a real zero must still disable action.
+    expect(scoreOpportunism({ gradient: 0.8, capability01: 0 }, 'pair'))
+      .toEqual({ score: 0, receipt: '' });
     // A realm that cannot feed a march wants the same and can do less about it.
     expect(scoreOpportunism({ gradient: 0.8, capability01: 0.25 }).score)
       .toBeLessThan(scoreOpportunism({ gradient: 0.8, capability01: 1 }).score);

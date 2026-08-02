@@ -757,6 +757,25 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
   verdict, so HEAD and the log were re-read directly. No production module, golden,
   snapshot, flag, lighting state, or soak artifact changed.
 
+### Addendum implementation receipt — R-63 NULL CAPABILITY DEFAULT LANDED (2026-08-02)
+
+- **Null now means absent at both war-capability boundaries.** Resource pressure and
+  opportunism normalize `capability01: null` through the same default-one path as an
+  omitted or explicit-undefined field. The correction is deliberately nullish rather
+  than truthy: a real zero still disables action, finite values still clamp, and the
+  existing invalid-number fallback remains one.
+- **The pins compare the whole authored result, not only the scalar.** At both scorers,
+  omitted, explicit `undefined`, explicit `1`, and `null` return exactly the same
+  positive `{score, receipt}` object. The zero arm returns exactly `{score: 0,
+  receipt: ''}`, preventing a future `|| 1` regression from reviving an incapable
+  aggressor.
+- **Verification:** the focused scorer matrix passed 110/110; targeted ESLint and
+  `git diff --check` passed. The complete repository gate began and ended at
+  `b2274069`: 2,114 test files passed, one skipped; 22,397 tests passed, 54 skipped.
+  Production build completed, prerender wrote 311 route documents, and distribution
+  verification passed 364/364. No golden, snapshot, flag, lighting state, or soak
+  artifact changed.
+
 ### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
 
 - **Seed divergence is now a story-mix claim.** The different-seed arm aggregates
@@ -865,6 +884,9 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
 ### R-63 [LATENT HAZARD + WORK ITEM] capability01:null zeroes war scores instead of defaulting to 1
 - **The hazard (executed by the validation pass):** the default-1 idiom treats null as 0 — Number(null)=0, Number.isFinite(0)=true ⇒ capability=0 ⇒ every resource_pressure/opportunism score for that pair silently zeroes. Idiom sites: warReasons.js:533 and opportunism.js:256. LATENT, not live: current callers pass only undefined or a real number (warReasons.js:849-856 omits the key when demoTerms is null; :885 passes demoTerms?.capability01; opportunism.js:324).
 - **Work item (pins):** guard null explicitly at both sites (null ⇒ absent ⇒ default 1) — the estate's fail-shut Number(null)===0 discipline (the window-type-check precedent). Pin: a score computed with capability01:null byte-equals the score with capability01 undefined, at both call sites. Cheap, dark-safe; land before any new caller appears — this codebase's writer/reader payload-spelling history is exactly how a null gets passed one day.
+- **LANDED 2026-08-02:** both scorer boundaries now use nullish defaulting, with
+  full-object equality across omitted/undefined/one/null and a separate true-zero
+  disabling control. See the implementation receipt above. This item is CLOSED.
 
 ### R-64 [TEST WORK ITEM] P4 no-hidden-governor — the two on-paper bypass routes, and the tightening
 - **ROUTE A (helper hop):** the import pin (tests/domain/demographicsWorldsHand.test.js:307-308) pins module SPECIFIERS of demographicsRisk.js only. demographicsRates.js — one of the two allowed imports — has its OWN import list pinned NOWHERE, and the P4.6 pure-leaf scan covers demographics{Ladder,Risk,War,Observation,Herald}.js but NOT Rates. A realm-aggregate helper added to demographicsRates.js under an innocent name passes every existing assertion.
