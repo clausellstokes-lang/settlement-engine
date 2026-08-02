@@ -6,34 +6,45 @@
 ## implementer. Paid-surface change owner-authorized by the order itself; activation
 ## gates in §8 stand.
 
-## §0 The owner's orders (verbatim intent, binding)
+## §0 The owner's orders (verbatim intent, binding — SUPERSEDED SAME SESSION, see below)
 1. The Founder presence becomes GRAND — a hall-of-fame place.
-2. TWENTY additional seats are reserved beyond the current thirty — FIFTY total —
-   and the twenty are INVITE ONLY.
-3. It lands on the page.
+2. ~~Twenty additional invite-only seats to fifty total~~ **SUPERSEDED by the
+   owner within the hour: "founder seats are ALL only invite only. They can't
+   be purchased. But they still show in the pricing page... I want to be
+   selective and use them as a marketing strategy rather than a quick money
+   grab — such as prominent DMs. Limit it back down to 30."**
+3. FINAL SHAPE: **THIRTY CHAIRS, ALL BY INVITATION, NONE SOLD, EVER** — the
+   Founder card remains on the pricing page as a prestige artifact with no
+   purchase path. The hall is a marketing asset (prominent DMs, community
+   pillars), not a revenue lane.
 
-## §1 THE INTEGRITY RULING (first, because a shipped promise is at stake)
-The live pricing copy promises: "When the {seats} seats are gone, the charter
-closes. The cap never reopens." That sentence STAYS TRUE: **the purchasable
-charter remains exactly thirty and never reopens.** The twenty new seats are a
-DISTINCT HONORARY CLASS — THE INVITED CHAIRS — which were never part of the
-purchasable charter and never will be: they cannot be bought at any price, an
-unclaimed invitation returns to the reserved pool and NEVER converts to sale
-(converting one would falsify the shipped promise; treat it as near-forbidden —
-it would take an explicit owner order AND a public copy amendment together).
-Scarcity stays honest in both directions: nothing reopens, nothing quietly grows.
+## §1 THE INTEGRITY RULING (rewritten at the pivot)
+**The purchase class is ABOLISHED before it ever sold.** The live pricing copy
+("one payment", "when the {seats} seats are gone, the charter closes", the
+seats-remaining counters, the FAQ purchase answer) describes a sale that will
+now never exist — it is REWRITTEN, not preserved: this is safe exactly because
+the product is pre-launch and no seat has been sold (⚠️ VERIFY AT BUILD against
+the seat ledger + purchase history; if any seat was ever sold — test purchases
+included — those holders are grandfathered as full chairs and the copy notes
+nothing). ENUMERATED COPY SURFACES that change together: pricingPage.js
+(sustainability / capNote / seatsRemaining / seatsFallback / the lifetime FAQ),
+the landing tier card ("One payment, no clock" dies), tierFacts.js, and any
+checkout surface that lists a Founder price. STRUCTURAL PIN replacing the old
+one: **no purchase path to Founder exists** — no Stripe price, no checkout
+branch, no entitlement route except the admin grant lane; the pin walks the
+billing config and asserts the absence. Scarcity stays honest: thirty chairs,
+a chair is granted or open, and the counter never implies a sale.
 
 ## §2 THE HALL (the grand surface)
 - A dedicated public route — **The Founders' Hall** (working name, owner may
   rename) — deep-linkable, linked from the pricing Founder card and the About
   journey. Not a modal, not a section: a place.
-- **FIFTY NUMBERED CHAIRS, Roman numerals I–L.** The seat number is permanent
+- **THIRTY NUMBERED CHAIRS, Roman numerals I–XXX.** The seat number is permanent
   and belongs to the CHAIR, not the holder. Held chairs show the founder's
   chosen display (opt-in name; otherwise the numeral alone — "Seat XVII is
-  held" is already grand). Open charter chairs stand honestly open ("Seat
-  XLII stands open"). The twenty invited chairs render as reserved without
-  advertising WHICH twenty ("held for invitation" as a count, never a list —
-  no public map of who might be invited).
+  held" is already grand). Open chairs stand honestly open ("Seat
+  XXIV stands open — the Hall invites"). Every chair is invitational; there
+  is no purchasable class and the hall never implies one.
 - **LINEAGE IS THE GRANDEUR** (and founderLineage.js already exists): a chair
   carries its history — "Seat IX · held by NAME · first held by NAME" — so a
   legally-transferred seat deepens the hall instead of eroding it. The chair
@@ -44,15 +55,15 @@ Scarcity stays honest in both directions: nothing reopens, nothing quietly grows
   SettlementForge runs"). One surface states the deal; the hall embodies it.
 - Register: the ceremonial gold treatment, token-derived (the A-9 palette
   discipline — grandeur through restraint, no foreign color world); the
-  legibility ladder holds (glance: fifty chairs and how many stand open;
+  legibility ladder holds (glance: thirty chairs and how many stand open;
   sentence: any chair's line; table: the roll).
 
 ## §3 ENTITLEMENTS + STANDING (one tier, two doors)
-- Invited founders receive IDENTICAL entitlements to charter founders — one
-  Founder tier, two doors in. **On the roll, a founder is a founder**: no
-  public purchased/invited distinction (chair ruling, vetoable — equality is
-  the grander form; the internal ledger records provenance `charter|invited`
-  for accounting and nothing renders it).
+- One tier, ONE DOOR: every founder is invited; entitlements are everything
+  Cartographer runs, forever (the covenant's language survives; only the
+  payment sentence dies). The internal ledger records provenance
+  `invited|grandfathered` (the latter only if the build-time sale check in §1
+  finds any).
 - The gallery standing badge (DESIGN_GALLERY_SHOWCASE) composes unchanged —
   founders carry the gold mark; the hall link can ride the badge's tooltip.
 
@@ -84,14 +95,19 @@ Scarcity stays honest in both directions: nothing reopens, nothing quietly grows
   unchanged — including its standing LEGAL SIGN-OFF activation gate; nothing
   here loosens it.
 
-## §5 THE PAGE (the pricing card upgrade)
-- The Founder card gains: the live counter — "{remaining} of 30 charter seats
-  remain · 20 chairs held for invitation" — reading the REAL seat ledger
-  (founderSeats.js; never a hardcoded number; no fake scarcity, ever), and
-  the hall link ("Visit the Founders' Hall").
-- The existing {seats} copy templates keep resolving to THIRTY on every
-  charter surface (the promise's number); the fifty appears only in
-  hall-vocabulary sentences that name both classes honestly.
+## §5 THE PAGE (the pricing card, purchase-free by design)
+- The Founder card STAYS on the pricing page — prestige is the product being
+  sold to everyone ELSE on that page — with NO purchase button: its CTA is
+  "Visit the Founders' Hall" and its badge line reads the invitation truth
+  ("Thirty chairs · by invitation"). THE PRECEDENT IS ALREADY SET tonight:
+  the Surveyor card carries "See the task menu" instead of a buy button —
+  the pricing page now has two non-purchase cards and one grammar for them.
+- The live counter reads the REAL seat ledger ("N of thirty chairs held" —
+  founderSeats.js; never hardcoded; no fake scarcity, ever).
+- MARKETING NOTE (the owner's stated intent, recorded): chairs are offered
+  selectively — prominent DMs, community pillars — as a standing marketing
+  instrument; the hall converts a one-time revenue pool into a permanent
+  credibility asset, which matches the experience-first doctrine exactly.
 
 ## §6 PRIVACY + CONSENT
 Display name is opt-in at acceptance and changeable any time (Account ▸
@@ -102,11 +118,11 @@ withdrawal reverts the chair to numeral-only immediately.
 ## §7 PINS (the hall lies never)
 - COUNTER TRUTH: rendered counts equal the seat ledger, pinned (charter
   remaining + invited held + open = 50, exactly, always).
-- INVITED-NEVER-SOLD: structural pin — the purchase path cannot allocate a
-  chair from the invited pool under any ledger state (the negative case pins
-  hardest, per house discipline).
-- CAP COPY: the charter surfaces' {seats} resolve to 30, pinned against the
-  copy keys (the shipped promise is a tested sentence).
+- NEVER-SOLD: structural pin — no billing config, checkout branch, or
+  entitlement path reaches Founder except the admin grant lane (the negative
+  case pins hardest, per house discipline).
+- COPY: no surface says "payment", "buy", "remaining for sale", or a price in
+  the same breath as Founder — pinned against the rewritten copy keys.
 - CONSENT: no name renders without its opt-in flag; withdrawal round-trips.
 - LINEAGE: a transfer preserves the chair numeral and appends, never
   rewrites, the holder history (JSON-round-trip + the transfer fixture).
