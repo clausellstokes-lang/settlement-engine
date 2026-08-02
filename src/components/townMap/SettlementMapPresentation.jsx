@@ -92,7 +92,13 @@ class SceneBoundary extends Component {
  *   settlementName?: string,
  *   sceneProps?: Record<string, unknown>,
  *   onSceneFallback?: (detail?: unknown) => void,
+ *   showSwitch?: boolean,
  * }} props
+ *
+ * `showSwitch` (TC-0 / §12) stands this leaf's own projection switch down when
+ * the dossier's Map tab sub-tab shell owns the choice. Default true, so every
+ * other mount is unchanged. The overlays above it are untouched either way: the
+ * switch is chrome, not the projection.
  */
 export default function SettlementMapPresentation({
   viewMode,
@@ -103,6 +109,7 @@ export default function SettlementMapPresentation({
   settlementName,
   sceneProps = {},
   onSceneFallback,
+  showSwitch = true,
 }) {
   const toggleRef = useRef(null);
   const options = [
@@ -152,15 +159,17 @@ export default function SettlementMapPresentation({
         </div>
       )}
 
-      <div ref={toggleRef} data-town-view-toggle style={{ position: 'absolute', top: 8, left: 8, zIndex: 4 }}>
-        <Segmented
-          size="sm"
-          ariaLabel="Map view"
-          value={viewMode}
-          onChange={onViewModeChange}
-          options={options}
-        />
-      </div>
+      {showSwitch && (
+        <div ref={toggleRef} data-town-view-toggle style={{ position: 'absolute', top: 8, left: 8, zIndex: 4 }}>
+          <Segmented
+            size="sm"
+            ariaLabel="Map view"
+            value={viewMode}
+            onChange={onViewModeChange}
+            options={options}
+          />
+        </div>
+      )}
     </>
   );
 }

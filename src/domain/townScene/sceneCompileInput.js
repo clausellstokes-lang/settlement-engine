@@ -16,6 +16,7 @@
  */
 
 import { deepClone } from '../clone.js';
+import { townCartographyActive } from './cartographyContract.js';
 import {
   compareSceneCodepoint,
   sceneRecord,
@@ -37,6 +38,26 @@ const TOP_LEVEL_KEYS = Object.freeze([
   'schemaVersion',
   'settlement',
 ]);
+
+/**
+ * THE TOWN-CARTOGRAPHY GATE, carried as a CONDITIONAL key (TC-1, design §8).
+ *
+ * The synthesis stage lives inside the manifest compiler, which by construction
+ * never sees worldState: the privacy wall consumes campaign carriers HERE and
+ * retains only audience-safe projections (the atmosphere precedent directly above
+ * this comment's neighbours). So the one bit the compiler needs — is the program
+ * lit — is resolved at this boundary and carried as a single boolean.
+ *
+ * IT IS DROPPED WHEN DARK, which is the whole reason the dormancy claim is a
+ * BYTE-IDENTITY claim rather than a byte-similarity one: a dark envelope has the
+ * same seven keys it always had, hashes to the same inputDigest (compileInputCore
+ * spreads only the keys that are present), and cannot be told apart from an
+ * envelope built before this key existed.
+ */
+const CARTOGRAPHY_KEY = 'cartography';
+const CARTOGRAPHY_TOP_LEVEL_KEYS = Object.freeze(
+  [...TOP_LEVEL_KEYS, CARTOGRAPHY_KEY].sort(compareSceneCodepoint),
+);
 const ATMOSPHERE_KEYS = Object.freeze([
   'besieged',
   'festivalScale',
@@ -56,6 +77,11 @@ const ATMOSPHERE_KEYS = Object.freeze([
  *   festivalScale: number|null,
  * }} TownSceneCompileAtmosphere
  *
+ * CONDITIONAL KEY, declared on the OWNING typedef and DROPPED when empty:
+ *   cartography  present only when the virtual `townCartographyEnabled` rule is
+ *                explicitly true. Its only admitted value is `{ enabled: true }`,
+ *                so the key's PRESENCE is the whole signal and a dark envelope is
+ *                byte-identical to one built before the key existed.
  * @typedef {{
  *   kind: 'TownSceneCompileInput',
  *   schemaVersion: 1,
@@ -64,6 +90,7 @@ const ATMOSPHERE_KEYS = Object.freeze([
  *   mapEdits: Record<string, unknown>|null,
  *   atmosphere: TownSceneCompileAtmosphere,
  *   inputDigest: string,
+ *   cartography?: { enabled: true },
  * }} TownSceneCompileInput
  */
 
@@ -83,6 +110,11 @@ function compileInputCore(value) {
     settlement: value.settlement,
     mapEdits: value.mapEdits,
     atmosphere: value.atmosphere,
+    // Conditional: a dark envelope's core is the exact object it was before this
+    // key existed, so its digest is unchanged. Only a LIT envelope digests anew.
+    ...(Object.prototype.hasOwnProperty.call(value, CARTOGRAPHY_KEY)
+      ? { [CARTOGRAPHY_KEY]: value[CARTOGRAPHY_KEY] }
+      : {}),
   };
 }
 
@@ -173,8 +205,21 @@ function validateTownSceneCompileInputWithMaximum(candidate, maximumBytes) {
   }
   const value = candidate;
   const keys = Object.keys(value).sort(compareSceneCodepoint);
-  if (!sameKeys(keys, TOP_LEVEL_KEYS)) {
-    errors.push(`top-level keys must be exactly ${TOP_LEVEL_KEYS.join(', ')}`);
+  const hasCartography = Object.prototype.hasOwnProperty.call(value, CARTOGRAPHY_KEY);
+  if (!sameKeys(keys, hasCartography ? CARTOGRAPHY_TOP_LEVEL_KEYS : TOP_LEVEL_KEYS)) {
+    errors.push(`top-level keys must be exactly ${TOP_LEVEL_KEYS.join(', ')}`
+      + ` (optional: ${CARTOGRAPHY_KEY})`);
+  }
+  // The gate is exactly one boolean, and only `true` may ride: a `false` would be a
+  // dark envelope wearing a lit envelope's key set, which would break the byte
+  // identity the whole dormancy claim rests on.
+  if (hasCartography) {
+    const cartography = value[CARTOGRAPHY_KEY];
+    if (!isPlainRecord(cartography)
+      || Object.keys(cartography).length !== 1
+      || cartography.enabled !== true) {
+      errors.push(`${CARTOGRAPHY_KEY} must be exactly { enabled: true }, or absent`);
+    }
   }
   if (value.kind !== TOWN_SCENE_COMPILE_INPUT_KIND) {
     errors.push(`kind must be ${TOWN_SCENE_COMPILE_INPUT_KIND}`);
@@ -305,6 +350,10 @@ function prepareTownSceneCompileInputWithMaximum(input, maximumBytes) {
       settlement: projected.settlement,
       mapEdits: projected.mapEdits,
       atmosphere,
+      // The gate, read once at the wall and carried as one bit. Dark drops the key.
+      ...(townCartographyActive(sceneRecord(input.worldState).simulationRules)
+        ? { [CARTOGRAPHY_KEY]: { enabled: true } }
+        : {}),
     }))
   );
   const prepared = /** @type {TownSceneCompileInput} */ ({

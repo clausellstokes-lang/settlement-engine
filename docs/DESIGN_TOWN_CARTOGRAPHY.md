@@ -1,9 +1,18 @@
 # DESIGN — TOWN CARTOGRAPHY (the deterministic MFCG-class settlement map)
 
 ## Owner-commissioned architecture, 2026-07-31 ("comprehensively architect it out").
-### Status: DESIGN ONLY — nothing here is scheduled until the owner sequences it. Builds
-### AFTER the seven realm directives (DESIGN_REALM_DIRECTIVES.md), whose W-E and W-G waves
-### construct raster-sampling and terrain-fitting substrate this program reuses.
+### Status: ACTIVE IMPLEMENTATION. TC-0 through TC-2 are built; TC-3 through TC-8 remain.
+### The owner's 2026-08-01 external-implementer order supersedes the earlier hold for
+### implementation work. Soak, promotion, and the other owner-physical gates remain held.
+
+> **Progress**
+> - 2026-08-01 — TC-0/TC-1/TC-2 completed for WR-0 landing under the owner's renewed
+>   implementation order. The dossier Map shell, additive manifest contract, deterministic
+>   field/street/defense synthesis, and the REAL compiler mount are present. TC-2 keeps
+>   provisional defense geometry synthesis-local and binds only deterministic nearby refs to
+>   the canonical TownScene walls/gates/bridges, so no second infrastructure truth crosses the
+>   manifest. Focused battery: 11 files, 156 passed / 3 distribution-only skips. Full gate is
+>   still owed at WR-0 close; TC-3 wards/parcels is the next cartography slice.
 
 ## 0. THESIS
 

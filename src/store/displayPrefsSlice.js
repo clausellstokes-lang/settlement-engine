@@ -25,6 +25,16 @@
  *     Before this slice the ceiling was component useState, so a user on a weak
  *     machine re-clamped it on every single portrait open (atlas
  *     presentation-scene gap 11 / owner queue #17).
+ *   mapSubTab — which sub-tab of the dossier's Map tab opens by default
+ *     (TC-0 / DESIGN_TOWN_CARTOGRAPHY §12: "one selected-sub-tab display
+ *     preference, persisted per the display-preference partialize rules"). The
+ *     vocabulary is owned by lib/mapSubTabs.js and deliberately NOT re-spelled
+ *     here, for the SAME reason sceneQualityMode's is not: that module is lazy
+ *     map-lane code and this slice is eager, so importing it would drag map bytes
+ *     into the first-paint closure. The store holds an opaque string; the one
+ *     consumer (MapTabShell) normalizes it against the sub-tabs that are actually
+ *     PRESENT on read, so an unknown, retired, or gated-off value opens the plan
+ *     rather than an empty panel.
  *
  * LIFECYCLE (all six hops, because this is persisted state):
  *   create     — DEFAULT_DISPLAY_PREFS below.
@@ -45,6 +55,9 @@
 /** The shipped defaults. Frozen: callers spread it, never mutate it. */
 export const DEFAULT_DISPLAY_PREFS = Object.freeze({
   sceneQualityMode: 'auto',
+  // The canonical 2D plan is first and default (§1, §12) — the permanent
+  // precision/accessibility/export surface every other presentation falls back to.
+  mapSubTab: 'plan',
 });
 
 // The `(set, get)` signature is the store's slice convention AND the anchor the
@@ -72,5 +85,22 @@ export const createDisplayPrefsSlice = (set, get) => ({
       state.displayPrefs.sceneQualityMode = typeof mode === 'string' && mode
         ? mode
         : DEFAULT_DISPLAY_PREFS.sceneQualityMode;
+    }),
+
+  /**
+   * Remember which sub-tab of the dossier's Map tab this device opens by default.
+   *
+   * Shape-guarded, not vocabulary-guarded — the same split sceneQualityMode uses
+   * and for the same reason (see the header): the vocabulary lives in the lazy
+   * map lane, and the reader clamps against the sub-tabs actually present, which
+   * is a stricter question than membership in the vocabulary anyway.
+   *
+   * @param {unknown} id one of the lib/mapSubTabs.js MAP_SUB_TAB_IDS
+   */
+  setMapSubTab: (id) =>
+    set(state => {
+      state.displayPrefs.mapSubTab = typeof id === 'string' && id
+        ? id
+        : DEFAULT_DISPLAY_PREFS.mapSubTab;
     }),
 });

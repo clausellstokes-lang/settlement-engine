@@ -87,6 +87,15 @@ import SettlementMapFog, { FogBrushCapture } from './fog/SettlementMapFog.jsx';
 import SettlementMapFogChrome from './fog/SettlementMapFogChrome.jsx';
 import { useFogLayer } from './fog/useFogLayer.js';
 
+/**
+ * Build sentinel (the TOWN_SCENE_3D_LAZY_SENTINEL precedent), stamped onto the
+ * pane's root element so minification cannot drop it. The town-map MODEL has its
+ * own fork-key fingerprint, but that literal is also minted in the dossier
+ * backdrop, so it cannot answer "which chunk is THIS component in". TC-0's
+ * chunk-separation pin (tests/build/mapTabShellLazy.test.js) needs an exact one.
+ */
+export const TOWN_MAP_PANE_LAZY_SENTINEL = 'settlementforge:town-map-pane:lazy-v1';
+
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
 const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
@@ -100,7 +109,14 @@ const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
  *   worldState?: any,
  *   regionalGraph?: any,
  *   audience?: 'dm'|'player'|'public',
+ *   presentation?: 'plan'|'panorama'|'portrait3d'|null,
+ *   onPresentationChange?: ((view: string) => void)|null,
  * }} props
+ * `presentation` / `onPresentationChange` (TC-0, §12 / J-TC-8, OPTIONAL and absent by
+ * default) hand the projection choice to the dossier Map tab's SUB-TAB SHELL. Supplied ⇒
+ * the shell's strip is the only view switch (this pane's own Segmented stands down) and
+ * every change from below — including the silent scene fallback — is reported up. Absent
+ * (the public gallery dossier, the library hero) ⇒ byte-identical to before.
  * `worldState` (IT-3, OPTIONAL) is the campaign's live clock context — its `.calendar.season`
  * paints the illustrated map's SEASON and its `.rngSeed` re-derives the year's severity (via
  * resolveMapDress). `regionalGraph` (OPTIONAL) feeds the siege-works STATE read. Absent (a
@@ -114,6 +130,7 @@ export default function SettlementMapPane({
   worldState = null,
   regionalGraph = null,
   audience = 'dm',
+  presentation = null, onPresentationChange = null,
 }) {
   const applyMapEdit = useStore(s => s.applyMapEdit);
   const desktop = useFinePointer();
@@ -126,6 +143,7 @@ export default function SettlementMapPane({
   } = useTownMapPresentation({
     sourceSettlement, audience, canEdit, desktop, saveId,
     worldState, regionalGraph, applyMapEdit,
+    controlledView: presentation, onControlledViewChange: onPresentationChange,
   });
   const legendPrefs = readLegendPrefs(mapEdits);
   const portraitActive = presentedViewMode === 'portrait3d';
@@ -408,7 +426,7 @@ export default function SettlementMapPane({
   return (
     <div
       ref={wrapperRef}
-      data-town-map
+      data-town-map={TOWN_MAP_PANE_LAZY_SENTINEL}
       style={{
         position: 'relative',
         width: '100%',
@@ -697,6 +715,7 @@ export default function SettlementMapPane({
           settlementName={settlement?.name}
           onSceneFallback={handlePortraitFallback}
           sceneProps={sceneBridge.sceneProps}
+          showSwitch={presentation == null}
         />
       )}
 

@@ -11,6 +11,10 @@
 
 import { stableSceneStringify } from './stableScene.js';
 import {
+  TOWN_CARTOGRAPHY_MANIFEST_KEY,
+  validateTownCartography,
+} from './cartographyContract.js';
+import {
   validateTownSceneRecordReferences,
   validateTownSceneRecordShapes,
 } from './manifestRecordValidation.js';
@@ -39,6 +43,25 @@ export const TOWN_SCENE_SHAPE_FAMILIES = Object.freeze([
   'sacred',
 ]);
 export const TOWN_SCENE_LOD_FAMILIES = Object.freeze(['commons', 'signature']);
+
+/**
+ * THE ADDITIVE EXTENSION POINT (TC-1, docs/DESIGN_TOWN_CARTOGRAPHY.md §3).
+ *
+ * The REQUIRED keys below are exactly today's manifest, unchanged, so a manifest
+ * compiled before the town-cartography program existed still validates byte for
+ * byte. The OPTIONAL list is the superset half: a manifest that also carries
+ * `cartography` is valid, and one that does not is equally valid. That pairing is
+ * what "schema-versioned and additive" has to mean here, because bumping
+ * TOWN_SCENE_SCHEMA_VERSION would move every recorded manifest golden and the
+ * program ships DARK. The cartography block carries its OWN schemaVersion instead.
+ *
+ * A key in NEITHER list is still a hard error, so the wall against raw carriers is
+ * exactly as tight as it was.
+ * @type {ReadonlyArray<string>}
+ */
+export const TOWN_SCENE_OPTIONAL_TOP_LEVEL_KEYS = Object.freeze([
+  TOWN_CARTOGRAPHY_MANIFEST_KEY,
+]);
 
 const TOP_LEVEL_KEYS = Object.freeze([
   'bridges',
@@ -160,8 +183,10 @@ export function validateTownSceneManifest(value) {
   }
 
   const keys = Object.keys(value).sort();
-  if (keys.length !== TOP_LEVEL_KEYS.length || keys.some((key, index) => key !== TOP_LEVEL_KEYS[index])) {
-    errors.push(`manifest top-level keys must be exactly: ${TOP_LEVEL_KEYS.join(', ')}`);
+  const required = keys.filter((key) => !TOWN_SCENE_OPTIONAL_TOP_LEVEL_KEYS.includes(key));
+  if (required.length !== TOP_LEVEL_KEYS.length || required.some((key, index) => key !== TOP_LEVEL_KEYS[index])) {
+    errors.push(`manifest top-level keys must be exactly: ${TOP_LEVEL_KEYS.join(', ')}`
+      + ` (optional: ${TOWN_SCENE_OPTIONAL_TOP_LEVEL_KEYS.join(', ')})`);
   }
   if (value.kind !== 'TownSceneManifest') errors.push('kind must be TownSceneManifest');
   if (value.schemaVersion !== TOWN_SCENE_SCHEMA_VERSION) errors.push(`schemaVersion must be ${TOWN_SCENE_SCHEMA_VERSION}`);
@@ -256,6 +281,29 @@ export function validateTownSceneManifest(value) {
         errors.push(`${field}[${i}].id must resolve through semantics`);
       }
     }
+  }
+
+  // THE CARTOGRAPHY BLOCK (TC-1). Absent is the dark, byte-identical default and
+  // costs nothing to validate; present, it is checked against THIS manifest, so a
+  // street can only reference a gate this manifest publishes and a footprint can
+  // only reference an institution this manifest's semantics table resolves. That
+  // referential closure is design §1's "the map and the dossier cannot disagree"
+  // expressed as a validator rule rather than as an aspiration.
+  if (Object.prototype.hasOwnProperty.call(value, TOWN_CARTOGRAPHY_MANIFEST_KEY)) {
+    /** @param {unknown} rows @returns {Set<string>} */
+    const idsOf = (rows) => new Set(
+      (Array.isArray(rows) ? rows : [])
+        .filter(isRecord)
+        .map((row) => row.id)
+        .filter((id) => typeof id === 'string'),
+    );
+    const cartography = validateTownCartography(value[TOWN_CARTOGRAPHY_MANIFEST_KEY], {
+      planExtent: TOWN_SCENE_PLAN_EXTENT,
+      gateIds: idsOf(value.gates),
+      bridgeIds: idsOf(value.bridges),
+      semanticIds,
+    });
+    for (const error of cartography.errors) errors.push(error);
   }
 
   const living = isRecord(value.living) ? value.living : null;

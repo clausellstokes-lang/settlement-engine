@@ -941,6 +941,10 @@
    "kind": "rationale",
    "ref": "golden-byte-pin"
   },
+  "tests/property/townCartographyDormancyGolden.test.js": {
+   "kind": "rationale",
+   "ref": "golden-byte-pin"
+  },
   "tests/property/townMapGolden.test.js": {
    "kind": "rationale",
    "ref": "golden-byte-pin"

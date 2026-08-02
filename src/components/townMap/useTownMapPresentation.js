@@ -22,6 +22,10 @@ import {
 } from 'react';
 import { useFlag } from '../../lib/flags.js';
 import { readLastMapView, writeLastMapView } from '../../lib/lastMapView.js';
+// TC-0 (§12): the ONE spelling of portrait selectability, shared with the Map
+// tab's sub-tab shell so a present sub-tab and a selectable projection can never
+// disagree; plus the presentation-id guard for the controlled seam below.
+import { isPresentationSubTab, townSceneSelectable } from '../../lib/mapSubTabs.js';
 import {
   detectTownSceneCapability,
   resolveTownSceneViewPolicy,
@@ -53,7 +57,17 @@ const MAP_EDIT_HISTORY_LIMIT = 50;
  *   worldState: any,
  *   regionalGraph: any,
  *   applyMapEdit?: ((saveId:string|number, edits:any) => void)|null,
+ *   controlledView?: 'plan'|'panorama'|'portrait3d'|null,
+ *   onControlledViewChange?: ((view: string) => void)|null,
  * }} input
+ *
+ * THE CONTROLLED SEAM (TC-0 / §12). `controlledView` is OPTIONAL and absent by
+ * default, so every existing mount keeps its own internal view state verbatim.
+ * When the dossier's Map tab sub-tab shell supplies it, the shell owns the
+ * projection choice and the pane's own switch stands down — one tab system, not
+ * two. `onControlledViewChange` is the notifier for EVERY path that changes the
+ * view from below, including the silent scene fallback, so the strip can never
+ * claim Portrait while the pane has already returned to the plan.
  */
 export function useTownMapPresentation({
   sourceSettlement,
@@ -64,6 +78,8 @@ export function useTownMapPresentation({
   worldState,
   regionalGraph,
   applyMapEdit,
+  controlledView = null,
+  onControlledViewChange = null,
 }) {
   const sceneEnabled = useFlag('settlementScene3d');
   const scenePromoted = useFlag('settlementScene3dDefault');
@@ -106,11 +122,15 @@ export function useTownMapPresentation({
     && Boolean(canEdit)
     && authoringSaveId != null
     && desktop;
-  const sceneSelectable = Boolean(sceneEnabled && sceneCapability.available);
+  const sceneSelectable = townSceneSelectable(sceneEnabled, sceneCapability);
+  // A supplied controlled view wins over the internal one, shape-guarded to the
+  // declared presentation vocabulary so a junk prop degrades to the local state
+  // rather than rendering an unknown projection.
+  const effectiveView = isPresentationSubTab(controlledView) ? controlledView : viewMode;
   const presentedViewMode = (
-    viewMode === TOWN_SCENE_VIEW_ID
+    effectiveView === TOWN_SCENE_VIEW_ID
     && (!sceneSelectable || sceneSessionDisabled)
-  ) ? 'plan' : viewMode;
+  ) ? 'plan' : effectiveView;
 
   const persistEdits = useCallback((normalized) => {
     setMapEdits(normalized);
@@ -176,9 +196,10 @@ export function useTownMapPresentation({
       setSceneSessionDisabled(false);
     }
     setViewMode(nextView);
+    onControlledViewChange?.(nextView);
     writeLastMapView(saveId, { view: nextView, lens });
     return true;
-  }, [saveId, sceneSelectable]);
+  }, [saveId, sceneSelectable, onControlledViewChange]);
 
   const rememberLens = useCallback((lens) => {
     writeLastMapView(saveId, { view: presentedViewMode, lens });
@@ -188,7 +209,10 @@ export function useTownMapPresentation({
     // Automatic recovery never overwrites an explicit stored preference.
     setSceneSessionDisabled(true);
     setViewMode('plan');
-  }, []);
+    // The strip above must follow the pane down, or a silent WebGL failure would
+    // leave the sub-tab claiming a Portrait nobody can see.
+    onControlledViewChange?.('plan');
+  }, [onControlledViewChange]);
 
   const handleSceneFallback = useCallback((detail, lens) => {
     // Runtime fallback is intentionally silent in production, but a developer

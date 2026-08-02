@@ -43,11 +43,12 @@ const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.j
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
 const TableView = lazy(() => import('./TableView.jsx'));
-// W2-c — MAP AS THE FIFTH TAB. The SAME lazy specifier SettlementDossierHero and
-// PublicDossierView already mint, so this adds no new chunk and no first-paint leak
-// (tests/build/townMapLazy). Mounted, NEVER edited — the pane sits at its exact size
-// ceiling. Fed the mechanical settlement + the owner-only map props (below).
-const SettlementMapPane = lazy(() => import('./townMap/SettlementMapPane.jsx'));
+// W2-c — MAP AS THE FIFTH TAB, now a SUB-TAB CONTAINER (TC-0, DESIGN_TOWN_CARTOGRAPHY
+// §12 / J-TC-8): Plan / Panorama / 3D Portrait / Player View as siblings. The shell's
+// prop surface is identical to the pane's, and it holds no static edge to any map body,
+// so this stays one lazy specifier and no first-paint leak (tests/build/mapTabShellLazy,
+// tests/build/townMapLazy). Fed the mechanical settlement + the owner-only map props.
+const MapTabShell = lazy(() => import('./townMap/MapTabShell.jsx'));
 // P131 / E-1 — Click-to-edit settlement name in the header.
 // The pencil reveals on hover; commit queues a rename-settlement
 // edit through the pending-edits drawer (E-2). The editable name now
@@ -721,7 +722,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // worldState / regionalGraph arrive as props: the wizard draft passes none
       // (view-only base map — the dormancy law), the saved view threads the owner's
       // edit gate + season/siege seam. Covered by the outer Suspense in the render.
-      case 'map':        return <SettlementMapPane settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} audience={playerView ? 'player' : 'dm'} />;
+      case 'map':        return <MapTabShell settlement={rawSettlement} canEdit={mapCanEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} audience={playerView ? 'player' : 'dm'} />;
       case 'magic':      return <MagicTab settlement={s} />;
       // War & Faith — OUR gated FaithSection + a war half from OUR light
       // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,

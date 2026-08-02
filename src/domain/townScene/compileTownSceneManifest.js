@@ -15,7 +15,9 @@ import {
 } from '../townMap/audienceProjection.js';
 import { readSceneOverrides } from '../townMap/mapEdits.js';
 import { buildTownMapModel } from '../townMap/townMapModel.js';
+import { compileTownCartography } from '../townCartography/cartographySynthesis.js';
 import { buildingHeadingStep } from './buildingProfiles.js';
+import { attachTownCartographyLayers } from './cartographyContract.js';
 import { buildCompleteSceneBuildings } from './sceneBuildingFabric.js';
 import {
   TOWN_SCENE_COMPILER_VERSION,
@@ -429,7 +431,7 @@ function compileAuthorizedTownSceneManifest(input) {
   const structureDigest = sceneDigest(structureValue);
   const dressDigest = sceneDigest(dressValue);
 
-  const manifest = {
+  const baseManifest = {
     kind: 'TownSceneManifest',
     schemaVersion: TOWN_SCENE_SCHEMA_VERSION,
     compiler: {
@@ -488,6 +490,20 @@ function compileAuthorizedTownSceneManifest(input) {
       maximumTrianglesByLod: [800, 16000, 240000],
     },
   };
+
+  // ── S-CARTO: the town-cartography synthesis stage (docs/DESIGN_TOWN_CARTOGRAPHY.md
+  // §1, THE ONE LAW). The cartography layers are a STAGE INSIDE this compile, never
+  // a parallel generator, so the seam lives here and nowhere else.
+  //
+  // TC-2: the transport key is conditional, so the dark path still hands null to
+  // the identity seam and returns baseManifest BY REFERENCE. Lit, synthesis reads
+  // this already-compiled manifest: its terrain and roads are the field boundary,
+  // and its walls/gates/bridges remain the sole infrastructure truth. The additive
+  // block carries street geometry plus references, never duplicate infrastructure.
+  const cartography = input.cartography?.enabled === true
+    ? compileTownCartography(baseManifest, settlement)
+    : null;
+  const manifest = attachTownCartographyLayers(baseManifest, cartography);
   assertTownSceneManifest(manifest);
   // Enforce the serializer claim now, not only when a cache first asks for it.
   stableSceneStringify(manifest);

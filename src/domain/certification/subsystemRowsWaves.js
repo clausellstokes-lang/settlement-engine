@@ -612,6 +612,80 @@ export const WAVE_SUBSYSTEM_ROWS = Object.freeze([
     // instrument exists and the corpus has not yet run a world in which it could fire.
     soakEvidence: 'indirect',
   }),
+  // ── THE TOWN CARTOGRAPHY PROGRAM (TC, docs/DESIGN_TOWN_CARTOGRAPHY.md §8, §9) ──
+  // REGISTERED FROM THE FIRST COMMIT, on the same terms and for the same mechanical
+  // reason as the four dark declarations above: `townCartographyEnabled` is VIRTUAL
+  // (no DEFAULT_SIMULATION_RULES entry, by design), so until it was declared at FALSE
+  // in the full_simulation spread `simulationRuleKeys()` could not census it and this
+  // row would have read back as `unknownRows`.
+  //
+  // THIS ROW DECLARES NO ALIVENESS CHANNEL AT ALL, and that is the finding rather than
+  // laziness. The other rows in this file certify ENGINE lanes: they mint candidates,
+  // they write worldState containers, and a soak receipt can therefore see them. This
+  // one gates the SCENE COMPILER, which runs on the presentation side of the wall a
+  // soak never crosses. It mints no candidate, writes no worldState key, and moves no
+  // mover family, so every channel this contract can grade is honestly empty and the
+  // row says so through soakEvidence 'unobserved' rather than by borrowing a channel
+  // it does not own. Declaring `place` here, for instance, would grade this row ALIVE
+  // off the 3,255 place movers the completed release case already carries, which is
+  // the exact vacuity the certification contract exists to forbid.
+  Object.freeze({
+    rule: 'townCartographyEnabled',
+    title: 'Town cartography (the deterministic settlement map)',
+    module: 'src/domain/townScene/cartographyContract.js,src/domain/townScene/manifestContract.js,src/domain/townScene/compileTownSceneManifest.js,src/domain/townScene/sceneCompileInput.js',
+    aliveness: Object.freeze({
+      // DELIBERATELY EMPTY. The program emits no candidate of any type: its whole
+      // output is manifest layers, and a manifest is compiled on demand for a viewer
+      // rather than proposed to a DM docket.
+      eventTypes: Object.freeze([]),
+      // DELIBERATELY EMPTY, and it could not be otherwise: a mover family is a
+      // classification of wizard-news beats, and this program authors no beat. The
+      // map narrates by being redrawn.
+      moverFamilies: Object.freeze([]),
+      // DELIBERATELY EMPTY, and this is the structural half of the finding: the
+      // cartography layers are written into a TownSceneManifest, never into
+      // worldState. The v5 census walks the top-level worldState keys plus one level
+      // into spatialLedgers, so there is no container for it to read, lit or dark.
+      stateKeys: Object.freeze([]),
+      other: 'A PRESENTATION-SIDE SUBSYSTEM, AND THE FIRST ONE THIS CONTRACT HOLDS. THE GATE: townCartographyActive is the virtual townCartographyEnabled alone (cartographyContract.js), read once at the scene compile-input wall, where it becomes the conditional envelope key the compiler reads; there is no spatial, war or canon precondition, so a lit campaign genuinely asks the question. WHAT TC-1 DOES, and no more: it extends the TownSceneManifest schema with ONE additive optional top-level key carrying the four cartography layers (streets, wards, parcels, buildings), it freezes the eight closed vocabularies those layers draw from, it captures the dormancy fence, and it wires the synthesis stage as an IDENTITY. It performs no synthesis whatsoever, which is why a lit TC-1 compile is byte-identical to a dark one, and saying so plainly is the honest reading rather than a gap. THE ADDITIVE LAW: the manifest keeps schemaVersion 1 and its required key set unchanged, so a manifest compiled before this program existed still validates byte for byte; the cartography block carries its OWN schemaVersion, which is what lets an old manifest load unchanged while a new one is a strict superset. THE CLOSED VOCABULARIES: ward kinds are the estates twelve district categories VERBATIM rather than a new list, because a ward is a district drawn in ink and a ward kind no district could carry would be a second truth about the same place; the other seven (street classes, building roles, the ordered condition ladder, provenance kinds, the A-8 placement modes, the A-10 deciding layers, the A-10 Lynch elements) are frozen here and censused by one registry so a ninth cannot enter unregistered. THE REFERENTIAL CLOSURE: a street may only reference a gate or a bridge the manifest already publishes, and a footprint may only reference an institution the manifests own semantics table resolves, so the design law that the map and the dossier cannot disagree is a validator rule rather than an aspiration. WHAT WOULD BE NEEDED TO OBSERVE IT DISPOSITIVELY: nothing a soak receipt can carry. The dispositive evidence for this lane is a MANIFEST corpus (seed x tier x terrain x route digests, plus rendered-PNG hashes for a pinned subset, design section 7) and the promotion contract evidence program, neither of which is a whole-world soak artifact. That is why this row declares soakEvidence unobserved rather than indirect: indirect would claim an instrumented channel this subsystem does not have.',
+    }),
+    // A manifest is compiled on demand for a viewer, so the subsystem has no cadence
+    // in world time at all. `reactive` is the honest rung: it fires when something
+    // asks it to, and its floor is a single firing anywhere in the span.
+    expectedTempo: 'reactive',
+    invariants: Object.freeze([
+      Object.freeze({
+        name: 'the_schema_extension_is_additive',
+        description: 'The manifest gains ONE optional top-level key and nothing else. Its required key set, its schemaVersion and its digest are all unchanged, so a manifest compiled before this program existed still validates unchanged and a manifest compiled after it is a strict superset. A schemaVersion bump would have moved every recorded manifest golden while the program is still dark, which THE GOLDEN LAW forbids.',
+        check: 'NOT expressible from a v4 or v5 receipt: no receipt of any envelope carries a TownSceneManifest. It is pinned instead in tests/domain/townSceneCartography.test.js, which validates a pre-cartography manifest unchanged, validates the same manifest carrying a well-formed block, and reds on a block that is partial, mis-keyed or out of vocabulary.',
+      }),
+      Object.freeze({
+        name: 'dormancy_holds_by_object_identity',
+        description: 'The dormancy gate is one line: attachTownCartographyLayers returns the manifest it was handed BY REFERENCE when the block is null, so a dark compile cannot materialize a layer and cannot even rebuild the object it would have added one to. The transport envelope obeys the same law one level up: the gate key is CONDITIONAL, so a dark envelope carries the same seven keys and digests to the same inputDigest it did before the key existed.',
+        check: 'NOT expressible from a v4 or v5 receipt, for the same reason as above. It is pinned in tests/property/townCartographyDormancyGolden.test.js against a fence recorded BEFORE the stage was wired: 54 manifests (the frozen 18-config town-map corpus crossed with all three audiences), hashed through the manifests own canonical serializer, so an added top-level key, a reordered array or a changed integer all move the hash.',
+      }),
+      Object.freeze({
+        name: 'no_layer_invents_a_reference',
+        description: 'Design section 1 says a map generated beside the manifest and then decorated is a second settlement truth and is forbidden. The structural expression of that is referential closure: every gate and bridge a street names, and every institution a footprint names, must already exist in the SAME manifest, resolved through the same semantics table the dossier reads. A reference that resolves nowhere is the fork the law forbids, so it is an error rather than a warning.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/townSceneCartography.test.js, where a block whose gateRef, parcelId, wardId or institutionRef names a record the manifest does not publish reds with a named error, and the same block with the reference corrected passes.',
+      }),
+      Object.freeze({
+        name: 'the_manifest_carries_tone_and_never_colour',
+        description: 'A-9 says the painter is full colour but every value derives from src/design/tokens.js, and A-11 extends the same law to skins. The manifest side of that is a hard one: the data layers carry tone INTENSITY in permille and no colour value of any kind, so a skin, a custom institution or a future AI bucketing clerk cannot smuggle a hex through a geometry record any more than through a stylesheet.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/townSceneCartography.test.js: the validator walks every string in the block and reds on anything that reads as a raw colour, proved against both a hex literal and an rgb() call, with the same block minus the colour passing.',
+      }),
+      Object.freeze({
+        name: 'geometry_is_integer_and_carries_no_seed',
+        description: 'Design section 3 requires integer coordinates on the existing plan grid (the interiors discipline: no float geometry crosses the contract), and the manifest constitutionally carries no seed, which is what makes it safe to hand to a player-facing renderer. The per-building style selector is therefore a bounded TOKEN rather than the styleSeed the design sketch names.',
+        check: 'NOT expressible from a receipt. Pinned in tests/domain/townSceneCartography.test.js, where a fractional coordinate, an out-of-extent coordinate and a fractional permille each red with a named error.',
+      }),
+    ]),
+    // The declared evidence is not derivable from any supported receipt, and the
+    // subsystem cannot run in the harness that writes them at all: a whole-world soak
+    // never compiles a TownSceneManifest. Stated as unobserved rather than indirect
+    // because indirect would claim an instrumented channel this lane does not have.
+    soakEvidence: 'unobserved',
+  }),
 ]);
 
 /**

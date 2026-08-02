@@ -254,6 +254,13 @@ export const OPERATIONS = Object.freeze({
   // campaign; undoState 'not-applicable' because re-picking a ceiling IS the
   // inverse, and the value is outside canon entirely.
   setSceneQualityMode: { opType:'setSceneQualityMode', label:"Set the portrait quality ceiling", description:"Sets how much detail the 3D settlement portrait is allowed to render on this device. The portrait can still lower detail below the ceiling to stay responsive, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
+  // TC-0 (DESIGN_TOWN_CARTOGRAPHY §12): REGISTERED, not EXEMPT, for the SAME
+  // reason as setSceneQualityMode above — it is persisted (displayPrefs rides the
+  // partialize allowlist), so it is a real setter of durable state. targetScope
+  // 'global' because the preference belongs to the device, not to any settlement;
+  // undoState 'not-applicable' because re-picking a map view IS the inverse and
+  // the value is outside canon entirely.
+  setMapSubTab: { opType:'setMapSubTab', label:"Set the default map view", description:"Chooses which view of a settlement's map opens first: the plan, the panorama, the 3D portrait, or the player view. Views the settlement or this machine cannot show are never offered, and the choice is remembered for this browser.", klass:'mechanical', slice:'displayPrefsSlice', targetScope:'global', receiptRef:null, undoToken:null, undoState:'not-applicable' },
   // Realm directive 7 (J-D7): REGISTERED, not EXEMPT, for the SAME reason as
   // setSceneQualityMode above. It was exempt while it was session-only chrome; the
   // full auto-resolve wave made it a PERSISTED play mode (it rides the store/index.js
