@@ -176,9 +176,20 @@ a chair is granted or open, and the counter never implies a sale.
   human reader); the letter lands as a normal support ticket — the invitation
   itself, if one ever follows, still flows ONLY through the §4 two-key admin
   issuance (a request grants nothing and shortcuts nothing).
+- **THE BUTTON DISAPPEARS WITH THE LAST CHAIR (owner order, same session):**
+  when the seat ledger reads thirty held, the Request CTA is ABSENT — not
+  disabled, absent (the presence discipline) — everywhere it renders, and the
+  surfaces state the completed truth in the covenant register ("The Hall is
+  full — thirty chairs, thirty names"). Presence derives from the SAME ledger
+  read as the counter (one truth), so if a chair were ever freed by the
+  parked mistake-window path or account deletion, the letterbox reopens by
+  itself with no code change. Open letters at fill-time are answered with
+  grace, not silence (the closure note is written in the same register).
 - **Pins:** the tag filter surfaces requests in the admin panel; one-open-
   request enforced; the guard runs; the anonymous path lands on sign-in and
-  returns to the letter afterward.
+  returns to the letter afterward; AND the presence pin — held==30 renders no
+  Request control anywhere and the full-hall line renders in its place;
+  held<30 restores it (both arms, one ledger fixture).
 
 ## §6 PRIVACY + CONSENT
 Display name is opt-in at acceptance and changeable any time (Account ▸
