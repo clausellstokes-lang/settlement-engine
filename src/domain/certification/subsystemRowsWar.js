@@ -103,7 +103,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'warLayerEnabled',
     title: 'War layer',
-    module: 'src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/occupation.js,src/domain/worldPulse/deploymentReturn.js,src/domain/worldPulse/mobilizationEffects.js,src/domain/worldPulse/mobilizationReactions.js',
+    module: 'src/domain/worldPulse/warDeployment.js,src/domain/worldPulse/occupation.js,src/domain/worldPulse/deploymentReturn.js,src/domain/worldPulse/mobilizationEffects.js,src/domain/worldPulse/mobilizationReactions.js,src/domain/worldPulse/warIntent.js,src/domain/spatial/armyTransit.js',
     aliveness: Object.freeze({
       eventTypes: WAR_LAYER_EVENT_TYPES,
       // DELIBERATELY EMPTY, and NOT for the usual shared-family reason. MEASURED
@@ -123,7 +123,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
       // back to absent when its lane empties. censusWorldStateKeys enumerates every
       // top-level key, so a v5 receipt reads all four.
       stateKeys: Object.freeze(['deployments', 'occupations', 'warExhaustion', 'warPosture']),
-      other: 'THE PARENT GATE. warDeployment.js:1082 returns the world untouched before any sub-flag is read, so every row below it grades DORMANT_BY_CONFIG when this key is false. MEASURED across all seven completed release cases: the 30-year 12-settlement seed1 case carries war_mobilization 73, war_exhaustion 26, occupation_burden 10, war_drain 9, war_spoils 8, army_homecoming 8, army_deployed 7, occupation_resistance 3, conquest 2 and occupation_vassalized 2. THE TRAP THIS ROW AVOIDS: strategy_deploy reads 126 in that same case and is NOT war-layer evidence, because settlementStrategy.js:498 mints the identical literal from the settlement-strategy chooser; a row that claimed it would grade ALIVE in a world where the war layer never opened a front. Public counts UNDER-read the tick rate by design: recurringWarConditionRecordMode files an unchanged recurring condition as recordMode state_only, and the behavioral observer counts only public selected outcomes, so army_deployed counts deployment EPISODES rather than deployed ticks.',
+      other: 'THE PARENT GATE. warDeployment.js:1082 returns the world untouched before any sub-flag is read, so every row below it grades DORMANT_BY_CONFIG when this key is false. The war stack owns both W1 consumers: the opener reads the chooser\'s resolved target through warIntent.js and the apply pass retires it once the army is committed, while the opener calls armyTransit.siegeArrivalGate so a column still on the road cannot besiege. Neither creates a new dispositive state key for this row: warIntents is the chooser\'s two-tick instruction, while armyTransit is the spatial mover\'s canonical ledger; deployments remains the war layer\'s durable observable. MEASURED across all seven completed release cases: the 30-year 12-settlement seed1 case carries war_mobilization 73, war_exhaustion 26, occupation_burden 10, war_drain 9, war_spoils 8, army_homecoming 8, army_deployed 7, occupation_resistance 3, conquest 2 and occupation_vassalized 2. THE TRAP THIS ROW AVOIDS: strategy_deploy reads 126 in that same case and is NOT war-layer evidence, because settlementStrategy.js:498 mints the identical literal from the settlement-strategy chooser; a row that claimed it would grade ALIVE in a world where the war layer never opened a front. Public counts UNDER-read the tick rate by design: recurringWarConditionRecordMode files an unchanged recurring condition as recordMode state_only, and the behavioral observer counts only public selected outcomes, so army_deployed counts deployment EPISODES rather than deployed ticks.',
     }),
     // A war layer that fires in EVERY observed year is a bug, not a standard. Wars
     // are episodic: a mobilization, a siege, a resolution, then a quiet stretch
@@ -447,7 +447,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'peaceEngineEnabled',
     title: 'Peace engine',
-    module: 'src/domain/worldPulse/warReasons.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/peaceTerms.js',
+    module: 'src/domain/worldPulse/warReasons.js,src/domain/worldPulse/peaceReasons.js,src/domain/worldPulse/peaceTerms.js,src/domain/worldPulse/treatyEnforcement.js,src/domain/worldPulse/treatyTransfer.js',
     aliveness: Object.freeze({
       // DELIBERATELY EMPTY. strategy_sue_for_peace is the nearest-looking literal
       // and is NOT this row's: settlementStrategy mints it with or without the
@@ -465,7 +465,7 @@ export const WAR_SUBSYSTEM_ROWS = Object.freeze([
         'spatialLedgers.treaties',
         'spatialLedgers.warReasons',
       ]),
-      other: 'peaceCausalActive (warReasons.js:408) is warLayerEnabled AND peaceEngineEnabled, both lit in full_simulation, so the two reason movers ran on every tick of every completed case. They emit no candidate on purpose: reasons are READS, not rolls, and the loaded draw that consumes them is the existing settlementStrategy softmax, so the engine\'s output is a REWEIGHTING of candidates that would fire anyway. That makes the three sidecars the only honest channel. The completed release receipts are envelope v4 and carry no subsystems census, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads all three for free. Two typed registration seams are confirmed unfed upstream (treaty_default until a treaties feed exists, corruption_exposed until W-DOCTRINE feeds it), so a thinner-than-expected warReasons ledger is expected rather than alarming.',
+      other: 'peaceCausalActive (warReasons.js:408) is warLayerEnabled AND peaceEngineEnabled, both lit in full_simulation, so the two reason movers ran on every tick of every completed case. They emit no candidate on purpose: reasons are READS, not rolls, and the loaded draw that consumes them is the existing settlementStrategy softmax, so the engine\'s output is a REWEIGHTING of candidates that would fire anyway. The treaty lane is now material: treatyEnforcement.js publishes the live war, mobilization and occupation reads, and treatyTransfer.js supplies the conserved grain-transfer executor used by peaceTerms.js. spatialLedgers.treaties remains the ONE canonical observable for those effects; the read helpers and transfer primitive do not invent duplicate state. That makes the three sidecars the only honest channels. The completed release receipts are envelope v4 and carry no subsystems census, which is why this row reports an INSTRUMENT GAP rather than a silence; a v5 rerun of the same cases reads all three for free. treaty_default is now fed from live treaty compliance through peaceTerms.js; corruption_exposed remains the confirmed unfed W-DOCTRINE registration seam, so a thinner-than-expected warReasons ledger is still expected rather than alarming.',
     }),
     // The reason ledgers are recomputed from state every tick, so in a realm that
     // carries any hostility at all they should be populated in most observed years.

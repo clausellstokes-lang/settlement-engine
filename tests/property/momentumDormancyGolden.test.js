@@ -29,6 +29,17 @@
  * takes no rng, so lighting it must not shift the stream). A dormancy pin that never had a
  * live counterpart would be worthless.
  *
+ * AUTHORIZED W1 RE-RECORD (2026-08-01; FABLE_VALIDATION_QUEUE / WR-0b): mo-a is
+ * unchanged. The siege-arrival join now withholds an on-road column from the siege
+ * loop, so mo-b moves only deployments.iron.strength 28.566→28.695 and the mirrored
+ * armyTransit strength 28.56623730231713→28.694822912024044 / supplyQuality
+ * 0.38935210731759196→0.4112080062264865. mo-c moves the same fields
+ * 35.361→35.468, 35.36078561910678→35.468349392810424, and
+ * 0.43694520553099675→0.46938340513598664, plus the chooser's transient
+ * warIntents.iron={targetId:'weak',tick:3}. The dormant commitments ledger remains
+ * absent and the lit no-new-RNG pin stays green: this is W1 lit-war behavior, not
+ * momentum leakage.
+ *
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/property/momentumDormancyGolden.test.js -t "captures"
  */
 

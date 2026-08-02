@@ -11,8 +11,11 @@
 >   field/street/defense synthesis, and the REAL compiler mount are present. TC-2 keeps
 >   provisional defense geometry synthesis-local and binds only deterministic nearby refs to
 >   the canonical TownScene walls/gates/bridges, so no second infrastructure truth crosses the
->   manifest. Focused battery: 11 files, 156 passed / 3 distribution-only skips. Full gate is
->   still owed at WR-0 close; TC-3 wards/parcels is the next cartography slice.
+>   manifest. Landed as `6e96e259`, with the strict-contract/generated-artifact repair in
+>   `0dcc3b9d`. Final focused battery: 12 files, 183 passed / 3 distribution-only skips.
+>   WR-0 full gate: exit 0 (2,110 files; 22,361 tests, 54 skipped), followed by a green
+>   production build and 47-file / 364-test dist verification. TC-3 wards/parcels is the
+>   next cartography slice.
 
 ## 0. THESIS
 

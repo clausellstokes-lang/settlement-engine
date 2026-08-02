@@ -494,6 +494,45 @@ export function armyTransitLedger(worldState) {
   return Object.keys(out).length ? out : null;
 }
 
+// ── THE SIEGE ARRIVAL GATE (the war-layer join) ───────────────────────────────
+/**
+ * Is an army AT THE WALLS of the target it was committed against? The aspatial war
+ * layer (warDeployment.js) reads THIS — never a second position model — so a column
+ * still ON THE ROAD does not besiege. An army in transit is marching, not investing a
+ * town; gating the siege on arrival is what turns the march time this module already
+ * computes into a real cost of DISTANCE.
+ *
+ * Returns a PREDICATE (armyId, targetId) => boolean, built ONCE per war-layer pass
+ * over the live ledger. It is DELIBERATELY PERMISSIVE wherever the transit layer is
+ * silent, which is what keeps the dark path byte-identical:
+ *   - NO ledger (no spatial canon, no digest, or every pair unreachable so planMarch
+ *     returned null) => ALWAYS true => the war layer besieges exactly as it does
+ *     today, and no `armyTransit` key is ever consulted;
+ *   - a record aimed ELSEWHERE (destId is not this target - e.g. a stale war_front
+ *     left by a former besieger) => true, so the stale-front retirement path in the
+ *     siege loop is untouched;
+ *   - a record aimed HERE => true only once `hasArrived` at the current tick.
+ *
+ * TERMINATION (load-bearing): a march is bounded by MAX_MARCH_WEEKS and departTick /
+ * arrivalTick are frozen when the record is seeded, so arrival is guaranteed within
+ * that many ticks. MAX_MARCH_WEEKS is strictly BELOW the war layer's SIEGE_MAX_AGE
+ * ceiling (a cross-module invariant the war tests pin), so a long march can never
+ * starve the siege of the ticks it needs to hit that ceiling. Pure.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {number} now the current tick
+ * @returns {(armyId: string|number, targetId: string|number) => boolean}
+ */
+export function siegeArrivalGate(worldState, now) {
+  const ledger = armyTransitLedger(worldState);
+  if (!ledger) return () => true;
+  const t = Math.max(0, Math.floor(finiteNumber(now, 0)));
+  return (armyId, targetId) => {
+    const rec = ledger[String(armyId)];
+    if (!rec || rec.destId !== String(targetId)) return true;
+    return hasArrived(rec, t);
+  };
+}
+
 // ── The march-route builder (frozen-digest candidate; never re-pathfound) ─────
 /**
  * The route + march time an army takes from origin to dest. Uses the M1 danger

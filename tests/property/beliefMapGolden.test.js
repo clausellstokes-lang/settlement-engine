@@ -13,6 +13,12 @@
  * that is a pure function of a fixture pack), so the hash is stable across runs
  * and machines — asserted by the two-run determinism test.
  *
+ * AUTHORIZED W1 RE-RECORD (2026-08-01; FABLE_VALIDATION_QUEUE / WR-0b): only
+ * bg-c|14|unreliable moved. The chooser's tick-13 c→b order now reaches the ONE
+ * opener at tick 14, so the real deployment raises b's final belief of c readiness
+ * from 0.7131 (readinessBand 3) to 0.9406 (readinessBand 4). No other projected
+ * field or corpus row moved: a declared lit-path war-intent join, not a dormancy leak.
+ *
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/property/beliefMapGolden.test.js
  */
 import { describe, it, expect } from 'vitest';

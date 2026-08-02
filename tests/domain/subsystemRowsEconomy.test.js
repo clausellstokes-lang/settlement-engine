@@ -180,6 +180,26 @@ describe('economy certification rows — the source claims', () => {
     }
   });
 
+  test('the strategy row owns its two-tick war-intent handoff without grading it from an annual census', () => {
+    const row = rowOf('settlementStrategyEnabled');
+    expect(modulesOf('settlementStrategyEnabled'))
+      .toContain('src/domain/worldPulse/warIntent.js');
+    const intentSource = read('src/domain/worldPulse/warIntent.js');
+    expect(mustExtract(
+      intentSource,
+      'export const WAR_INTENT_TTL_TICKS = 2',
+      'war intents expire between annual census samples',
+    )).toBeTruthy();
+    expect(mustExtract(
+      intentSource,
+      'return setSpatialLedger(worldState, WAR_INTENT_LEDGER_KEY, sorted);',
+      'war intent writer uses the canonical spatial-ledger seam',
+    )).toBeTruthy();
+    expect(row.aliveness.stateKeys).toEqual([]);
+    expect(row.aliveness.other).toContain('OWNED BUT NON-DISPOSITIVE');
+    expect(row.aliveness.other).toContain('manufacture partiallySilent');
+  });
+
   test('the deliberately refused containers stay refused, each anchored by a declared sibling', () => {
     // supplyShipments is written on the M2 path too (the spatial marker alone), so
     // declaring it would grade commodity continuity ALIVE in a world that never

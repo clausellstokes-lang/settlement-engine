@@ -2366,22 +2366,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // feeds warReasons.treaty_default and the strain feeds the loser's resentment THIS
   // tick. DORMANT behind peaceCausalActive ⇒ a complete no-op (zero treaty keys — the
   // peace-causal dormancy golden, extended to fence the treaties ledger, proves it).
-  {
-    const treaties = advanceTreaties({
-      snapshot: postTimeSnapshot,
-      worldState: memoryState,
-      graph: applied.regionalGraph,
-      pIndex,
-      tick: worldState.tick,
-      now,
-    });
-    if (treaties.changed) {
-      memoryState = treaties.worldState;
-      if (treaties.newsEntries.length) {
-        wizardNews = appendObservedWizardNewsEntries(wizardNews, treaties.newsEntries, { now }, newsReceiptSink);
-      }
-    }
-  }
+  // The stream terms move REAL grain, so this mover now threads settlementUpdates like
+  // the generosity/upswing movers do — hence the applyPulseMover form (byte-identical to
+  // the inline block it replaces: an unchanged mover returns the same references).
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceTreaties({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
+  }), memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
   // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
   // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,
   // receipted REASONS FOR WAR accumulate per directed edge pair (grievance /

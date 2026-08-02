@@ -24,21 +24,31 @@ import {
   treatiesForPair, demilitarizationCapFor, treatyBlocksWar, treatyPairKey,
   TERM_CATALOG, TERM_TYPES, TERM_FAMILIES, PEACE_TERMS_TUNING,
 } from '../../src/domain/worldPulse/peaceTerms.js';
+import { TREATY_TRANSFER_TUNING } from '../../src/domain/worldPulse/treatyTransfer.js';
+import { TREATY_ENFORCEMENT_TUNING } from '../../src/domain/worldPulse/treatyEnforcement.js';
 import { advanceWarReasons, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 
 const LIT = { warLayerEnabled: true, peaceEngineEnabled: true };
 
-/** A snapshot item with enough texture for settlementStrength + archetype/exports. */
-function item(id, { tier = 'town', population = 1800, category = 'military', exports = [], patron = null } = {}) {
+/** A snapshot item with enough texture for settlementStrength + archetype/exports.
+ *  `storageMonths` null ⇒ NO food model at all (the "nothing to levy" negative control);
+ *  a number materializes a real granary the treaty's stream terms can actually draw on. */
+function item(id, { tier = 'town', population = 1800, category = 'military', exports = [], patron = null, storageMonths = null } = {}) {
   return {
     id, name: id.charAt(0).toUpperCase() + id.slice(1),
     settlement: {
       name: id, tier, population,
       config: { tradeRouteAccess: 'road', priorityMilitary: 35, ...(patron ? { primaryDeitySnapshot: patron } : {}) },
-      institutions: [],
-      economicState: { prosperity: 'Prosperous', primaryExports: exports, primaryImports: [] },
+      // A State Granary gives both parties a REAL 8-month storage ceiling
+      // (foodStockpile.storageCapacityMonths), so a levy has headroom to land in and the
+      // applicator's capacity clamp is not what the pins are secretly measuring.
+      institutions: storageMonths == null ? [] : [{ name: 'State Granary', type: 'economic' }],
+      economicState: {
+        prosperity: 'Prosperous', primaryExports: exports, primaryImports: [],
+        ...(storageMonths == null ? {} : { foodSecurity: { storageMonths, dailyNeed: 100, dailyProduction: 100, deficitPct: 0, surplusPct: 0, resilienceScore: 50 } }),
+      },
       powerStructure: {
         publicLegitimacy: { score: 60, label: 'Stable' },
         factions: [{ faction: `${category} seat`, category, power: 78, isGoverning: true }],
@@ -242,9 +252,12 @@ describe('W-PEACE-2 compliance under fog — a cheated distant victor', () => {
 
 // ── E) TERM-CATALOG PINS via the mover: MINT · EXECUTE · EXPIRE · NEGATIVE ───
 
-/** Run advanceTreaties once. */
+/** Run advanceTreaties once. `settlementUpdates` mirrors the kernel's pending per-settlement
+ *  writes (the shape the food applicator folds onto), so the material executor has somewhere
+ *  real to move grain to and from. */
 function advance(worldState, items, edges, tick = worldState.tick, pIndex = null) {
-  return advanceTreaties({ snapshot: snapshotFor(items, edges), worldState, graph: { edges }, pIndex, tick, now: '2026-01-01T00:00:00.000Z' });
+  const settlementUpdates = items.map((i) => ({ saveId: String(i.id), settlement: i.settlement }));
+  return advanceTreaties({ snapshot: snapshotFor(items, edges), worldState, settlementUpdates, graph: { edges }, pIndex, tick, now: '2026-01-01T00:00:00.000Z' });
 }
 
 describe('W-PEACE-2 mint — the sue-for-peace path mints a dictated treaty', () => {
@@ -357,15 +370,90 @@ function treatyOf(terms, patch = {}) {
 const IW = [item('iron', { tier: 'city', population: 60000 }), item('weak', { tier: 'village', population: 280 })];
 const IW_EDGES = [edge('iron', 'weak')];
 
+// The FED pair — the same two courts, each with a REAL granary, so the material
+// executor has stock to move. The victor starts near-empty (headroom to receive) and
+// the loser well above the reserve floor (something to give).
+//
+// POPULATIONS ARE LOAD-BEARING, and the reason is the conserved sink itself. The
+// transfer moves ABSOLUTE food and re-expresses it in the recipient's own months
+// (÷ its population), then FLOORS to the tenth-month. So a big victor levying a tiny
+// loser really does receive an unmeasurable trickle — the beaten village's whole
+// tribute is a rounding error in a metropolis's granary. That is honest physics, not
+// a defect, but it means a fixture must give the PAYER the larger population for the
+// credit leg to clear the tenth-month floor at all. A populous beaten city paying a
+// smaller victor is the case where tribute is actually felt.
+const VICTOR_MONTHS = 1;
+const LOSER_MONTHS = 6;
+const VICTOR_POP = 1500;
+const LOSER_POP = 6000;
+const FED = [
+  item('iron', { tier: 'town', population: VICTOR_POP, storageMonths: VICTOR_MONTHS }),
+  item('weak', { tier: 'city', population: LOSER_POP, storageMonths: LOSER_MONTHS }),
+];
+/** The payer/payee granary months out of an advanceTreaties result. */
+const monthsIn = (out, id) => (out.settlementUpdates || [])
+  .find((u) => u.saveId === id)?.settlement?.economicState?.foodSecurity?.storageMonths;
+
 describe('W-PEACE-2 executors — each landed term executes and expires', () => {
-  it('EXECUTE (streams): tribute / resource_share / reparations move a CONSERVED transfer (delivered == extracted; nothing minted)', () => {
-    for (const type of ['tribute', 'resource_share', 'reparations']) {
+  it('EXECUTE (streams): every stream term moves REAL granary months out of the payer and into the payee, conserved', () => {
+    for (const type of ['tribute', 'resource_share', 'reparations', 'restitution']) {
       const ws = ledgerWorld(treatyOf([term(type, { magnitude: 0.3, expiresTick: 100 })]));
-      const out = advance(ws, IW, IW_EDGES, 10);
+      const out = advance(ws, FED, IW_EDGES, 10);
       const t = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')].terms.find((x) => x.type === type);
+      // QUANTITY OUT — the loser's granary actually shrank.
+      const loserMonths = monthsIn(out, 'weak');
+      const victorMonths = monthsIn(out, 'iron');
+      expect(t.extractedFromLoser, `${type} debited the loser`).toBeGreaterThan(0);
+      expect(loserMonths, `${type}: the payer's granary fell`).toBeLessThan(LOSER_MONTHS);
+      // QUANTITY IN — the victor's granary actually grew.
       expect(t.deliveredToVictor, `${type} credited the victor`).toBeGreaterThan(0);
-      expect(t.deliveredToVictor, `${type} conserved: credit == debit`).toBe(t.extractedFromLoser);
+      expect(victorMonths, `${type}: the payee's granary rose`).toBeGreaterThan(VICTOR_MONTHS);
+      // The ledger's own counters agree with the world's granaries (no parallel truth).
+      expect(t.extractedFromLoser, `${type}: the debit counter is the real loss`).toBeCloseTo(LOSER_MONTHS - loserMonths, 6);
+      expect(t.deliveredToVictor, `${type}: the credit counter is the real gain`).toBeCloseTo(victorMonths - VICTOR_MONTHS, 6);
+      // CONSERVED — a transfer, never a mint. Absolute food (months x population) gained
+      // can never exceed absolute food lost; the gap is the road's spoilage (the sink).
+      const lost = (LOSER_MONTHS - loserMonths) * LOSER_POP;
+      const gained = (victorMonths - VICTOR_MONTHS) * VICTOR_POP;
+      expect(gained, `${type}: absolute food is never minted`).toBeLessThanOrEqual(lost + 1e-9);
     }
+  });
+
+  it('NEGATIVE (no granary): a payer with NO food model moves nothing — the ledger records a zero stream', () => {
+    // IW carries no foodSecurity at all. The term is live and compliant; there is simply
+    // nothing to levy, so no phantom quantity is invented on either side.
+    const ws = ledgerWorld(treatyOf([term('tribute', { magnitude: 0.3, expiresTick: 100 })]));
+    const out = advance(ws, IW, IW_EDGES, 10);
+    const t = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')].terms.find((x) => x.type === 'tribute');
+    expect(t.extractedFromLoser).toBe(0);
+    expect(t.deliveredToVictor).toBe(0);
+  });
+
+  it('NEGATIVE (at the reserve floor): a payer whose granary sits at the untouchable reserve delivers nothing', () => {
+    const starving = [
+      item('iron', { tier: 'town', population: VICTOR_POP, storageMonths: VICTOR_MONTHS }),
+      item('weak', { tier: 'city', population: LOSER_POP, storageMonths: TREATY_TRANSFER_TUNING.RESERVE_MONTHS }),
+    ];
+    const ws = ledgerWorld(treatyOf([term('tribute', { magnitude: 0.3, expiresTick: 100 })]));
+    const out = advance(ws, starving, IW_EDGES, 10);
+    const t = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')].terms.find((x) => x.type === 'tribute');
+    expect(t.extractedFromLoser, 'a court at its reserve floor pays nothing').toBe(0);
+    // …and the tick is COMPLETELY inert: no granary write at all, so the reserve is
+    // untouched by construction rather than by a delta that happened to round to zero.
+    expect(out.changed, 'a floored payer produces no change whatsoever').toBe(false);
+    expect(out.settlementUpdates, 'and no settlement write is emitted').toBeUndefined();
+  });
+
+  it('NEGATIVE (expired): a term past its expiresTick draws no installment before it lapses', () => {
+    const ws = ledgerWorld(treatyOf([
+      term('tribute', { magnitude: 0.3, expiresTick: 5 }),          // already lapsed at tick 10
+      term('non_aggression', { expiresTick: 100 }),                  // keeps the treaty alive to inspect
+    ]));
+    const out = advance(ws, FED, IW_EDGES, 10);
+    expect(monthsIn(out, 'weak'), 'an expired tribute draws nothing').toBe(LOSER_MONTHS);
+    expect(monthsIn(out, 'iron'), 'and credits nothing').toBe(VICTOR_MONTHS);
+    const terms = getSpatialLedger(out.worldState, 'treaties')[treatyPairKey('iron', 'weak')].terms;
+    expect(terms.some((x) => x.type === 'tribute'), 'and the lapsed term is gone').toBe(false);
   });
 
   it('EXECUTE (demilitarization): the cap is queryable while live and lifts after expiry', () => {

@@ -360,16 +360,19 @@ export const BASELINE_SUBSYSTEM_ROWS = Object.freeze([
   Object.freeze({
     rule: 'settlementStrategyEnabled',
     title: 'Settlement strategy chooser',
-    module: 'src/domain/worldPulse/settlementStrategy.js,src/domain/worldPulse/candidateEvents.js',
+    module: 'src/domain/worldPulse/settlementStrategy.js,src/domain/worldPulse/candidateEvents.js,src/domain/worldPulse/warIntent.js',
     aliveness: Object.freeze({
       eventTypes: SETTLEMENT_STRATEGY_EVENT_TYPES,
       moverFamilies: Object.freeze([]),
-      // DELIBERATELY EMPTY. The chooser writes no worldState container of its own:
-      // its move lands as a candidate, and the state it moves (relationship
-      // scalars, a recall stamp, a deployment) belongs to the relationship and war
-      // layers, which run with this flag dark.
+      // DELIBERATELY EMPTY. A deploy decision now writes the chooser-owned
+      // spatialLedgers.warIntents handoff, but each row lives for only TWO ticks
+      // while the certification census samples at annual boundaries. Declaring that
+      // ephemeral key as dispositive would turn healthy between-census consumption
+      // into a false partiallySilent verdict. The durable state the move causes
+      // (relationship scalars, a recall stamp, a deployment) belongs to the
+      // relationship and war layers, which run with this flag dark.
       stateKeys: Object.freeze([]),
-      other: 'THE CHOOSER RUNS FOR EVERY SETTLEMENT EVERY TICK and emits exactly ONE probability-1 candidate per settlement (enumerate, score, softmax, sample, at settlementStrategy.js:1020 to :1037), so a lit realm of any size should carry a strategy type in nearly every observed year. Two of the twelve moves are STRUCTURALLY invisible: defend and hold always carry recordMode suppression_only, which isPublicOutcome rejects, so they never reach eventTypeCounts. An archetype lever that finds no valid edge falls back to the same inert marker, so a low count on the seven lever types reads as a seat-archetype distribution rather than a silence. The gate is unconditional dispatch with an internal early return (candidateEvents.js:485 calls the evaluator every tick; settlementStrategy.js:910 returns an empty list when the flag is dark). NOTE FOR THE DORMANCY READER: the rules dialog FORCES this flag on whenever the war layer is lit (SimulationRulesDialog.jsx:241), so a DORMANT_BY_CONFIG verdict here should never coexist with warLayerEnabled true in the same receipt. MEASURED over the completed release cases: 2796 and 2818 events across 30 of 30 observed years at 12 settlements, 253 across 76 of 100 years at 4 settlements, and 76 to 283 inside the single observed year of every one-year case.',
+      other: 'THE CHOOSER RUNS FOR EVERY SETTLEMENT EVERY TICK and emits exactly ONE probability-1 candidate per settlement (enumerate, score, softmax, sample, at settlementStrategy.js:1020 to :1037), so a lit realm of any size should carry a strategy type in nearly every observed year. A resolved deploy also stamps spatialLedgers.warIntents through warIntent.js; that is an OWNED BUT NON-DISPOSITIVE handoff, not a census channel. WAR_INTENT_TTL_TICKS is 2 while the receipt samples worldState once per year, so a healthy intent will normally be consumed or expire between samples; declaring the key in stateKeys would manufacture partiallySilent findings. Two of the twelve moves are STRUCTURALLY invisible: defend and hold always carry recordMode suppression_only, which isPublicOutcome rejects, so they never reach eventTypeCounts. An archetype lever that finds no valid edge falls back to the same inert marker, so a low count on the seven lever types reads as a seat-archetype distribution rather than a silence. The gate is unconditional dispatch with an internal early return (candidateEvents.js:485 calls the evaluator every tick; settlementStrategy.js:910 returns an empty list when the flag is dark). NOTE FOR THE DORMANCY READER: the rules dialog FORCES this flag on whenever the war layer is lit (SimulationRulesDialog.jsx:241), so a DORMANT_BY_CONFIG verdict here should never coexist with warLayerEnabled true in the same receipt. MEASURED over the completed release cases: 2796 and 2818 events across 30 of 30 observed years at 12 settlements, 253 across 76 of 100 years at 4 settlements, and 76 to 283 inside the single observed year of every one-year case.',
     }),
     // One sampled move per settlement per tick, so the realm-level cadence should be
     // near-continuous. Anything below the per_tick floor means settlements stopped

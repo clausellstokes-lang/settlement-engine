@@ -50,7 +50,22 @@ import { peaceCausalActive, reasonPairKey } from './warReasons.js';
 // claim priced + settleable through the EXISTING terms machinery (real goods move only here,
 // conservation untouched). reframeKernel is a pure leaf. 0 when dark ⇒ no asset ⇒ byte-identical.
 import { restitutionClaim01 } from './reframeKernel.js';
-import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+// THE TERMS THAT BITE. The three enforcement READS (readiness_cap · war_block ·
+// occupation_hold) live in a dependency-free leaf so the war-layer consumers can
+// consult them: this module imports warReasons' gate, and warReasons reaches
+// mobilization through corruptionWeb/settlementPolitics, so a consumer importing
+// THIS module would close a cycle. Same cure as sacredClaim.faithProximityOf. The
+// historic names are re-exported at the bottom, so callers and the battery are
+// untouched. `streamInstallmentFraction` is the stream terms' per-tick draw.
+import {
+  treatyLedgerOf, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor,
+  streamInstallmentFraction,
+} from './treatyEnforcement.js';
+// THE MATERIAL EXECUTOR: a stream term's installment moves REAL granary months
+// through the conserved sink-only primitive, applied by the existing single
+// food applicator. See treatyTransfer.js for why grain is the honest denomination.
+import { computeTreatyGrainDraw, applyTreatyFoodDeltas, freshestSettlement } from './treatyTransfer.js';
 import { stablePart } from './stablePart.js';
 import { buildPressureSummary, settlementStrength, applyRelationshipPatch } from './relationshipEvolution.js';
 import { readBeliefStrength, readBeliefRelationship, governingCoalition } from './beliefMap.js';
@@ -508,11 +523,9 @@ export function evolveCompliance({ loserCapacity01, monitorReach01 }) {
 /** @typedef {Record<string, unknown>} TreatyRecord */
 /** @typedef {Record<string, TreatyRecord>} TreatyLedger */
 
-/** The treaties ledger, or null when dark/absent.
- *  @param {Record<string, unknown> | null | undefined} worldState @returns {TreatyLedger | null} */
-export function treatyLedgerOf(worldState) {
-  return /** @type {TreatyLedger | null} */ (getSpatialLedger(worldState, 'treaties')) || null;
-}
+// treatyLedgerOf / demilitarizationCapFor / treatyBlocksWar MOVED to
+// treatyEnforcement.js (see the import block's note) and are RE-EXPORTED at the
+// bottom of this file, so every historic import path keeps working.
 
 /**
  * Every live treaty whose parties include BOTH ids (either direction) — the
@@ -543,55 +556,6 @@ export function treatiesForPair(worldState, aId, bId) {
   return out;
 }
 
-/**
- * The DEMILITARIZATION ceiling on a settlement (0..1 readiness cap), or null when
- * unbound — the mobilization/readiness reads consult this (§11 seam). Lowest cap
- * across live treaties wins.
- * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} settlementId
- * @param {number} tick @returns {number | null}
- */
-export function demilitarizationCapFor(worldState, settlementId, tick) {
-  const ledger = treatyLedgerOf(worldState);
-  if (!ledger) return null;
-  const id = String(settlementId);
-  let cap = null;
-  for (const key of Object.keys(ledger)) {
-    const t = ledger[key];
-    if (String(t?.loserId || '') !== id) continue;
-    for (const term of /** @type {TermRecord[]} */ (Array.isArray(t?.terms) ? t.terms : [])) {
-      if (term.type !== 'demilitarization') continue;
-      if (Number(tick) >= Number(term.expiresTick)) continue;
-      const c = clamp01(term.magnitude);
-      cap = cap == null ? c : Math.min(cap, c);
-    }
-  }
-  return cap;
-}
-
-/**
- * Does a live non-aggression / active treaty BLOCK war between two parties?
- * (the war chooser's read — §6/§11 the treaty war-block). A defaulted treaty no
- * longer blocks (the war-block lifts on repudiation, §12.4).
- * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} aId @param {unknown} bId
- * @param {number} tick @returns {boolean}
- */
-export function treatyBlocksWar(worldState, aId, bId, tick) {
-  const ledger = treatyLedgerOf(worldState);
-  if (!ledger) return false;
-  const a = String(aId); const b = String(bId);
-  for (const key of Object.keys(ledger)) {
-    const t = ledger[key];
-    const parties = Array.isArray(t?.parties) ? t.parties.map(String) : [];
-    if (!parties.includes(a) || !parties.includes(b)) continue;
-    if (String(t?.complianceState || '') === 'defaulted') continue; // repudiated ⇒ block lifts
-    for (const term of /** @type {TermRecord[]} */ (Array.isArray(t?.terms) ? t.terms : [])) {
-      if (term.type !== 'non_aggression') continue;
-      if (Number(tick) < Number(term.expiresTick)) return true;
-    }
-  }
-  return false;
-}
-
 // ── The mover ────────────────────────────────────────────────────────────────
 
 /**
@@ -599,6 +563,9 @@ export function treatyBlocksWar(worldState, aId, bId, tick) {
  * @property {Record<string, unknown>} worldState
  * @property {boolean} changed
  * @property {Array<Record<string, unknown>>} newsEntries
+ * @property {Array<Record<string, unknown>>} [settlementUpdates] the tick's pending
+ *   per-settlement writes, with this tick's conserved tribute/reparations/restitution/
+ *   resource_share installments folded in. Present only when grain actually moved.
  */
 
 /**
@@ -613,12 +580,13 @@ export function treatyBlocksWar(worldState, aId, bId, tick) {
  * @param {{ snapshot: { byId?: Map<string, Record<string, unknown>>,
  *                       regionalGraph?: { edges?: Array<Record<string, unknown>> } },
  *           worldState: Record<string, unknown>,
+ *           settlementUpdates?: Array<Record<string, unknown>>,
  *           graph?: { edges?: Array<Record<string, unknown>> } | null,
  *           pIndex?: Record<string, unknown> | null,
  *           tick: number, now?: unknown }} args
  * @returns {PeaceTermsAdvanceResult}
  */
-export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, tick, now = null }) {
+export function advanceTreaties({ snapshot, worldState, settlementUpdates = [], graph, pIndex = null, tick, now = null }) {
   // ── DORMANCY GATE (§8): absent ⇒ an immediate no-op. No key, no read. ──
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
     return { worldState, changed: false, newsEntries: [] };
@@ -649,6 +617,12 @@ export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, ti
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
   let workingState = worldState;
+  // The tick's conserved granary movements, accumulated across every stream term and
+  // folded onto settlementUpdates ONCE at the end (the generosity mover's idiom): a
+  // loser paying two victors debits a single, ordered running total rather than two
+  // independent draws that could each believe the whole granary was theirs to take.
+  /** @type {Map<string, number>} */
+  const foodDeltas = new Map();
 
   // ── PASS 1: MINT from a war just ended by a NEGOTIATED PEACE. The DURABLE,
   // reliable signal is the relationship overlay — an edge that has DE-ESCALATED
@@ -721,12 +695,31 @@ export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, ti
       term.complianceState = comp.observedState;
       term.burden01 = round4(loserBurden01);
 
-      // Streams execute a CONSERVED installment (victor credit == loser debit).
+      // ── STREAMS EXECUTE A REAL, CONSERVED INSTALLMENT. The term's magnitude is its
+      // nominal YEARLY share; one tick draws one installment of it from the loser's
+      // granary ABOVE its reserve floor and credits the victor's, through the
+      // sink-only primitive (absolute food is reduced by the carry, never minted —
+      // see treatyTransfer.js for why grain is the honest denomination here).
+      // The accumulators now record the REAL storage-months moved, so
+      // `extractedFromLoser` is what the payer actually lost and `deliveredToVictor`
+      // what the payee actually received; they DIVERGE by the road's spoilage, which
+      // is the sink. A payer at its reserve floor moves nothing — and that silence is
+      // exactly the under-delivery §12's compliance read is watching for.
       const spec = TERM_CATALOG[term.type];
       if (spec?.stream) {
-        const inst = round4(clamp01(term.magnitude) * comp.trueDelivery01);
-        term.deliveredToVictor = round4((Number(term.deliveredToVictor) || 0) + inst);
-        term.extractedFromLoser = round4((Number(term.extractedFromLoser) || 0) + inst);
+        const draw = computeTreatyGrainDraw({
+          payer: freshestSettlement(settlementUpdates, snapshot, loserId),
+          payee: freshestSettlement(settlementUpdates, snapshot, victorId),
+          takeFraction: streamInstallmentFraction(term, comp.trueDelivery01),
+          committedDebit: -(foodDeltas.get(loserId) || 0),
+          committedCredit: foodDeltas.get(victorId) || 0,
+        });
+        if (draw && draw.lostMonths > 0) {
+          foodDeltas.set(loserId, round4((foodDeltas.get(loserId) || 0) - draw.lostMonths));
+          if (draw.gainedMonths > 0) foodDeltas.set(victorId, round4((foodDeltas.get(victorId) || 0) + draw.gainedMonths));
+          term.extractedFromLoser = round4((Number(term.extractedFromLoser) || 0) + draw.lostMonths);
+          term.deliveredToVictor = round4((Number(term.deliveredToVictor) || 0) + draw.gainedMonths);
+        }
       }
       if (comp.trueState !== 'honored') anyStrainThisTick = true;
       if (comp.observedState === 'defaulted') defaultSeverity01 = Math.max(defaultSeverity01, round4(1 - comp.trueDelivery01));
@@ -755,16 +748,27 @@ export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, ti
   }
 
   // ── PERSIST (serialize-compare; drop-when-empty) ───────────────────────────
+  // The tick's granary movements fold on through the EXISTING single food applicator
+  // (clamped to each granary's capacity, rounded to the tenth-month). Zero deltas ⇒ the
+  // same array by reference, so a tick where no term drew is byte-identical here.
+  const nextUpdates = applyTreatyFoodDeltas(
+    /** @type {Array<{ saveId?: unknown }>} */ (settlementUpdates), foodDeltas);
+  const grainMoved = nextUpdates !== settlementUpdates;
   const hasNext = Object.keys(nextLedger).length > 0;
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? sortedLedger(nextLedger) : null);
   const relChanged = workingState !== worldState;
-  if (prevSerialized === nextSerialized && !relChanged && newsEntries.length === 0) {
+  if (prevSerialized === nextSerialized && !relChanged && !grainMoved && newsEntries.length === 0) {
     return { worldState, changed: false, newsEntries: [] };
   }
   let out = workingState;
   out = hasNext ? setSpatialLedger(out, 'treaties', sortedLedger(nextLedger)) : dropSpatialLedger(out, 'treaties');
-  return { worldState: out, changed: true, newsEntries };
+  return {
+    worldState: out,
+    changed: true,
+    newsEntries,
+    settlementUpdates: /** @type {Array<Record<string, unknown>>} */ (nextUpdates),
+  };
 }
 
 // ── Mint internals ───────────────────────────────────────────────────────────
@@ -1488,3 +1492,10 @@ function sortedLedger(ledger) {
 // Re-export the believed-relationship read the wave-3 stance/defection reads will
 // consume (the compelled-alliance defection window reads a believed victor weakness).
 export { readBeliefRelationship };
+
+// The three ENFORCEMENT reads now live in treatyEnforcement.js (a dependency-free leaf
+// the war-layer consumers can import without closing a cycle back through this module —
+// see the import block). Re-exported under their historic names so every existing caller,
+// the display layer and the battery keep their import path. occupationHoldFor rides the
+// same seam: one reader, so a term's expiry lifts every effect on the same tick.
+export { treatyLedgerOf, demilitarizationCapFor, treatyBlocksWar, occupationHoldFor };

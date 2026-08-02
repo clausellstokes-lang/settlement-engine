@@ -88,8 +88,16 @@ import { recurringWarConditionRecordMode, warConditionOutcome, warExhaustionClea
 import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
 // M5: the spatial marker gate for SIEGE-AS-STARVATION. false off the marker (every
 // aspatial world) ⇒ resolveSiegeVerdict runs the capacity-roll VERBATIM ⇒ byte-identical.
-import { armyTransitActive } from '../spatial/armyTransit.js';
+// JOIN 2 — siegeArrivalGate is the ONE READ of the transit layer's published position:
+// an army still on the road is NOT besieging. Permissive wherever the transit ledger is
+// absent/silent ⇒ the aspatial siege loop is byte-identical (see armyTransit.js).
+import { armyTransitActive, siegeArrivalGate } from '../spatial/armyTransit.js';
 import { getSpatialLedger } from '../spatial/distanceRead.js';
+// JOIN 1 — THE RESOLVED MARCH. `hostileTargetsOf` (the set of wars a settlement may
+// open) moved to that leaf because it is the other half of the same question the order
+// answers, and because this file is at its frozen size ceiling. The three intent reads
+// are TOTAL and rng-free: no order ⇒ null ⇒ step 4 runs its pre-existing expression.
+import { warIntentFor, intentNamesTarget, intentTargetOrder, hostileTargetsOf } from './warIntent.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -432,7 +440,9 @@ export function stripSuppressedDeployResidue({ war, suppressedIds, preTickWarExh
 // verdicts resolve to instead of going to RNG.
 const HARASSMENT_SEVERITY = 0.22;
 
-const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
+// (The hostile-axis set moved to warIntent.js with hostileTargetsOf, its only reader —
+// the chooser and the opener must agree on what "hostile" means, so the set that
+// defines an openable war now lives beside the order that may name one.)
 
 // ── STATEFUL ARMY tunables. A deployment now carries an effective strength
 // that the siege verdict reads (so a DEPLETED army can FAIL against a weaker
@@ -791,31 +801,6 @@ function isBesieged(graph, id) {
 }
 
 /**
- * Hostile targets of a settlement, read from the pre-tick relationshipStates +
- * edges. Returns codepoint-sorted target ids the settlement could besiege.
- * @param {PulseSnapshot} snapshot
- * @param {any} fromId
- * @returns {string[]}
- */
-function hostileTargetsOf(snapshot, fromId) {
-  const states = snapshot?.worldState?.relationshipStates || {};
-  const out = new Set();
-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
-    const edge = normalizeRelationshipEdge(rawEdge);
-    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
-    // The hostile axis is symmetric/adversarial only (hostile/cold_war/rival); a
-    // vassal/patron hierarchy edge is never a besiege candidate.
-    if (!HOSTILE_TYPES.has(relState.relationshipType)) continue;
-    const { from, to } = getRelationshipSettlements(edge);
-    const a = String(from);
-    const b = String(to);
-    if (a === String(fromId) && snapshot?.byId?.has?.(b)) out.add(b);
-    else if (b === String(fromId) && snapshot?.byId?.has?.(a)) out.add(a);
-  }
-  return [...out].sort(codepoint);
-}
-
-/**
  * The siege verdict for a single target. FIRST a DETERMINISTIC FEASIBILITY GATE
  * classifies the coalition-vs-defender CURRENT-capacity matchup; only a `plausible`
  * (or a satisfied internal-collapse / war-magic override) matchup goes to RNG.
@@ -1115,6 +1100,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // verdict resolves by supply interdiction × time (not the capacity roll). false off
   // the marker ⇒ every verdict runs the capacity-roll VERBATIM ⇒ byte-identical.
   const spatialSiege = armyTransitActive(/** @type {{ spatialCanonVersion?: unknown }} */ (worldState));
+  // JOIN 2 — THE ARRIVAL GATE. Built ONCE from the transit layer's published ledger:
+  // `atWalls(armyId, targetId)` is false only while that army's OWN march to THAT target
+  // is still under way. No ledger (dark spatial / unmapped pair) ⇒ always true ⇒ the
+  // besieger set below is byte-identical. The march time is bounded by MAX_MARCH_WEEKS,
+  // strictly below SIEGE_MAX_AGE, so the hard ceiling still terminates every campaign.
+  const atWalls = siegeArrivalGate(/** @type {{ spatialLedgers?: unknown }} */ (worldState), tick);
   // settlementStrength stays the RELATIONSHIP-dynamics confidence input (unchanged).
   const strengthFor = buildStrengthLookup(snapshot);
   // The war-specific MILITARY CAPACITY model (theoretical/current). The
@@ -1298,12 +1289,19 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     for (const attackerId of Object.keys(deployments)) {
       if (String(deployments[attackerId]?.targetId) === targetId) besiegerSet.add(String(attackerId));
     }
+    // Three exclusions on one pass (combined so the JOIN-2 gate is net-zero on this
+    // file's frozen size ceiling; `.filter(A).filter(B)` and `.filter(A && B)` are the
+    // same set in the same order):
+    //   • not in canon — the settlement left the campaign;
+    //   • strategically withdrawn (recalled / sued-for peace) THIS tick — its army has
+    //     gone home and its front is being retired, so a stale confirmed front must not
+    //     resolve a phantom siege here;
+    //   • JOIN 2 — still ON THE ROAD. An army whose transit record says its march to
+    //     THIS target has not landed is not at the walls: it neither rolls the siege,
+    //     nor ages it, nor takes siege attrition, nor withdraws. Always true when the
+    //     transit layer is dark ⇒ this set is byte-identical off the spatial canon.
     const besiegers = [...besiegerSet]
-      .filter(id => snapshot?.byId?.has?.(id))
-      // Exclude besiegers whose deployment was strategically withdrawn (recalled /
-      // sued-for peace) THIS tick: their army has gone home and their front is being
-      // retired, so a stale confirmed front must not resolve a phantom siege here.
-      .filter(id => !recalledPairs.has(`${id}:${targetId}`))
+      .filter(id => snapshot?.byId?.has?.(id) && !recalledPairs.has(`${id}:${targetId}`) && atWalls(id, targetId))
       .sort(codepoint);
     if (!besiegers.length) continue;
 
@@ -1677,8 +1675,18 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // BEFORE any front is minted, so a thorpe cannot open a solo siege on a strong
     // town even at a war-ready posture. Only a `plausible` (or satisfied override)
     // solo verdict mints a front; require_coalition / harassment / auto_fail do not.
+    // JOIN 1 — THE RESOLVED MARCH. The live ORDER (if any) this settlement's seat left
+    // for the opener when the strategy chooser resolved on `deploy` last tick. Null —
+    // and every consumer below therefore a no-op, running today's expression verbatim —
+    // when the chooser is dark, resolved otherwise, or the order has expired.
+    const marchOrder = warIntentFor(worldState, fromId, tick);
     let chosenTarget = null;
-    for (const targetId of hostileTargetsOf(snapshot, fromId)) {
+    for (const targetId of intentTargetOrder(hostileTargetsOf(snapshot, fromId), marchOrder)) {
+      // The ordered target is tried FIRST (intentTargetOrder above) and is the one
+      // target for which the CONQUEST_MARGIN pre-filter is waived below: that filter
+      // stands in for a deliberation the seat has now actually performed. Every HARD
+      // gate — occupation, already-besieging, and classifyFeasibility — still applies.
+      const ordered = intentNamesTarget(marchOrder, targetId);
       // worldpulse-war-9: under occupation, the ONLY permissible target is the occupier
       // (the uprising). Any third-party siege is blocked while garrisoned.
       if (occupierOfFrom && String(targetId) !== occupierOfFrom) continue;
@@ -1694,7 +1702,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       const casusEntry = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
         ? warReasonsFor(worldState, String(fromId), String(targetId)) : null;
       const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
-      if (fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate
+      if (!ordered && fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate (waived for a resolved march)
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,

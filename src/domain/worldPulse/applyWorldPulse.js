@@ -18,6 +18,9 @@ import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLed
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
+// JOIN 1 — THE RESOLVED MARCH: the chooser→opener order seam (see the two arms in the
+// auto-apply loop). Same lazy pulse chunk as every import above ⇒ zero new eager bytes.
+import { stampWarIntent, consumeWarIntent, stampDeploymentRecall } from './warIntent.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
 import { resolveRelationshipHierarchy } from './relationshipHierarchy.js';
 import { applyNpcPatch, npcId } from './npcAgency.js';
@@ -68,29 +71,9 @@ function clone(/** @type {any} */ value) {
 /** @typedef {import('../settlement.schema.js').SimFaction} SimFaction */
 /** @typedef {import('../settlement.schema.js').SimInstitution} SimInstitution */
 
-/**
- * Stamp a STRATEGIC-WITHDRAWAL order onto a live deployment (war-3 sue-for-peace /
- * war-4 return-home). The war layer consumes the `recalled` stamp at the top of its
- * NEXT tick, resolving the deployment as an outcome:'withdrawal' through the existing
- * deploymentReturn homecoming (→ contextual siege relief / occupation lift). Rides the
- * EXISTING `deployments` ledger (deep-cloned by ensureWorldState) — no new worldState
- * key. Byte-identical no-op unless `attackerId` actually holds a live deployment
- * against `targetId`, so a peace/recall with no matching siege changes nothing.
- * @param {PulseWorldState} state @param {string|number} attackerId @param {string|number} targetId @param {string} cause @param {number} [tick]
- */
-function stampDeploymentRecall(state, attackerId, targetId, cause, tick) {
-  const a = String(attackerId);
-  const dep = state?.deployments?.[a];
-  if (!dep || dep.targetId == null || String(dep.targetId) !== String(targetId)) return state;
-  if (dep.recalled) return state; // already ordered — idempotent, no re-stamp
-  return {
-    ...state,
-    deployments: {
-      ...state.deployments,
-      [a]: { ...dep, recalled: { cause, tick: Number.isFinite(tick) ? tick : null } },
-    },
-  };
-}
+// (stampDeploymentRecall moved to warIntent.js — the strategy chooser's decisions,
+// deposited as the war-ledger state the ONE opener consumes, are one family and now
+// live in one module. Its three call sites below are unchanged.)
 
 // war-2 — APPROVED FACTION PROPOSALS APPLY FOR REAL. The four DM-facing faction
 // payload kinds whose apply arms below move real settlement state (the government
@@ -1155,6 +1138,26 @@ export function applyWorldPulseOutcomes({
     // every tick. No matching deployment ⇒ byte-identical no-op.
     if (outcome.candidateType === 'strategy_return_home' && outcome.metadata?.recallTargetId != null) {
       state = stampDeploymentRecall(state, outcome.targetSaveId, outcome.metadata.recallTargetId, 'return_home', tick);
+    }
+    // JOIN 1 — THE RESOLVED MARCH REACHES THE OPENER (warIntent.js). The recall arm
+    // directly above is the same seam in the other direction: a chooser decision that
+    // used to be pure theater, deposited as state the war layer consumes. Here the
+    // chooser's `deploy` move deposits an ORDER naming the target its seat resolved
+    // on; warDeployment step 4 — still the ONE opener — reads it next tick, tries that
+    // target FIRST and waives only the CONQUEST_MARGIN pre-filter for it (never the
+    // feasibility gate, never the posture gate). Keyed on the CHOOSER's own metadata
+    // (`strategyMove: 'deploy'` + a target), which the war layer's own strategy_deploy
+    // outcome never carries — so the two can never be confused. No order ⇒ no write.
+    if (outcome.metadata?.strategyMove === 'deploy' && outcome.metadata?.deployTargetId != null) {
+      state = stampWarIntent(state, outcome.targetSaveId, outcome.metadata.deployTargetId, tick);
+    }
+    // …and the order RETIRES the moment the opener obeys it: the war layer's own
+    // siege-initiation outcome (ruleFamily 'stressor', never the chooser's 'strategy')
+    // means this besieger's army is committed. consumeWarIntent clears only an order
+    // from an EARLIER tick, so it is order-independent inside this pass — a march the
+    // chooser resolved on THIS tick survives regardless of which outcome applies first.
+    if (outcome.candidateType === 'strategy_deploy' && outcome.ruleFamily === 'stressor') {
+      state = consumeWarIntent(state, outcome.targetSaveId, tick);
     }
     // war-2 — APPROVED FACTION PROPOSALS APPLY FOR REAL. A DM-facing faction payload
     // moves real settlement state (the government read-path, the named institution, the

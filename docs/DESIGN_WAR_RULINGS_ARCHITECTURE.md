@@ -101,7 +101,7 @@ docs/GENERATION_CONTRACTS.md + the gate discipline in §10.
 | Casus taxonomy: 13 war reasons + 14 peace mirrors, walker-enforced totality+bijection | `warReasons.js` (WAR_REASON_TYPES / PEACE_REASON_TYPES / REASON_MIRRORS) | BUILT incl. `opportunism` (predation) + `sacred_claim` (holy war) at HEAD 99e2d54f |
 | Reasons are state-derived, decay-inherent, zero-RNG, per-pair directed ledger | `spatialLedgers.warReasons`, key `${from}>${to}` | BUILT — dissolution (amendment C) is structurally half-present already |
 | Peace terms: budget/appraisal/draft/compliance/fraying, believed-advantage evaluator with injectable belief (`truthFor`) | `peaceTerms.js` (1,501 lines; TERM_CATALOG, believedAdvantage, appraiseLoserPortfolio, draftTerms, advanceTreaties…) | BUILT — the terms MATH the envoy program transports |
-| Treaty enforcement: readiness cap, war block, occupation hold; tribute/reparations/restitution move real grain | `treatyEnforcement.js`, `treatyTransfer.js`, `warIntent.js` | UNCOMMITTED (wave W1, complete, gate-adjudication in flight — see WR-0) |
+| Treaty enforcement: readiness cap, war block, occupation hold; tribute/reparations/restitution move real grain | `treatyEnforcement.js`, `treatyTransfer.js`, `warIntent.js` | BUILT + GATED (wave W1; landed in the WR-0 W1 commit) |
 | Momentum: commitment stock, cliffs, face-saving exits, climb-downs | `momentum.js` | BUILT, FOREIGN (read-only law above) |
 | NPC durable identity, facets, circulation, belief, transit, verdicts (jailed applies to any named soul), Wanderers register + DM verbs | H1–H4: `npcLedger*`, `npcCirculation*`, `npcVerdict*` | BUILT |
 | Credibility ladder (confirmed/corroborated/reported/tavern_talk), fidelity, plant/contradict/expose triple, patronage | I1–I4: `brokerage*` | BUILT |
@@ -233,6 +233,16 @@ verify every staged hunk).
   header, same commit as W1. Also carried as a disclosed same-seed shift: a
   conquest no longer recalls a marching co-besieger (declared + pinned in W1).
 **Acceptance:** both commits landed, gate exit 0, ledger rows written, the tree clean.
+
+> **Progress — WR-0 complete, 2026-08-01.** Cartography TC-0/1/2 landed in
+> `6e96e259`, followed by its strict-contract/generated-artifact repair in `0dcc3b9d`.
+> W1 lands in this commit with the authorized belief-map and momentum re-records and the
+> any-cast ratchet-down. Focused W1/certification/golden battery: 13 files, 172 passed.
+> Final `sh scripts/gate-tail.sh npm run check`: exit 0 — 2,110 Vitest files,
+> 22,361 tests passed, 54 skipped; production build green; dist verification 47 files,
+> 364 tests passed. The only full-corpus timeout observed on the preceding attempt
+> (`magicBufferIntegration` conjunction reachability) passed in isolation in 10.20s;
+> the deterministic reds from that attempt were repaired before this green run.
 
 ### WR-0c — OPENER HARDENING (from the verified review register,
 docs/COMPREHENSIVE_REVIEW_2026-08-01.md; all three CONFIRMED with executed proof;

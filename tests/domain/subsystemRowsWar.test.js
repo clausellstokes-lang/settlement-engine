@@ -371,6 +371,19 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     expect(rowFor('defenderAttritionEnabled').aliveness.stateKeys).toEqual(['defenderSiegeLedger']);
   });
 
+  test('the war row owns the resolved-target and arrival-gate consumers without duplicating their ledgers', () => {
+    const row = rowFor(PARENT);
+    const modules = row.module.split(',').map((part) => part.trim());
+    expect(modules).toContain('src/domain/worldPulse/warIntent.js');
+    expect(modules).toContain('src/domain/spatial/armyTransit.js');
+    const opener = sourceOf('src/domain/worldPulse/warDeployment.js');
+    expect(opener).toContain('warIntentFor(worldState, fromId, tick)');
+    expect(opener).toContain('siegeArrivalGate(/** @type {{ spatialLedgers?: unknown }} */ (worldState), tick)');
+    expect(sourceOf('src/domain/worldPulse/applyWorldPulse.js'))
+      .toContain('state = consumeWarIntent(state, outcome.targetSaveId, tick);');
+    expect(row.aliveness.stateKeys).toEqual(['deployments', 'occupations', 'warExhaustion', 'warPosture']);
+  });
+
   test('the peace engine still writes exactly the three sidecars the row declares', () => {
     const writers = {
       'spatialLedgers.warReasons': 'src/domain/worldPulse/warReasons.js',
@@ -386,6 +399,28 @@ describe('war-stack rows — the source trace behind every declared literal', ()
     // The gate the row describes is still an AND of both halves.
     expect(sourceOf('src/domain/worldPulse/warReasons.js'))
       .toContain("r.warLayerEnabled === true && r.peaceEngineEnabled === true");
+  });
+
+  test('the peace row owns treaty enforcement and material transfer without inventing duplicate state', () => {
+    const row = rowFor('peaceEngineEnabled');
+    const modules = row.module.split(',').map((part) => part.trim());
+    expect(modules).toContain('src/domain/worldPulse/treatyEnforcement.js');
+    expect(modules).toContain('src/domain/worldPulse/treatyTransfer.js');
+    const peaceTerms = sourceOf('src/domain/worldPulse/peaceTerms.js');
+    expect(sourceOf('src/domain/worldPulse/warReasons.js'))
+      .toContain('treatyBlocksWar(worldState, fromId, toId, at)');
+    expect(sourceOf('src/domain/worldPulse/mobilization.js'))
+      .toContain('demilitarizationCapFor(worldState, id, tick)');
+    expect(sourceOf('src/domain/worldPulse/occupation.js'))
+      .toContain('occupationHoldFor(worldState, occupiedId, rec.occupierId, t)');
+    expect(peaceTerms).toContain('const draw = computeTreatyGrainDraw({');
+    expect(peaceTerms).toContain('const nextUpdates = applyTreatyFoodDeltas(');
+    expect(row.aliveness.stateKeys).toEqual([
+      'spatialLedgers.peaceReasons',
+      'spatialLedgers.treaties',
+      'spatialLedgers.warReasons',
+    ]);
+    expect(row.aliveness.other).toContain('treaty_default is now fed');
   });
 
   test('the naval row declares the sidecar and holds out the news-only literals', () => {

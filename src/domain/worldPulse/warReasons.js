@@ -78,6 +78,13 @@ import { advanceReframe, reframeActive, debtClaim01, dependencyByDesign01 } from
 // liar01 closure into advanceReframe; one-directional (informationStatecraft never imports this).
 import { credibilityScoreOf, credibilityDiscount } from './informationStatecraft.js';
 import { clamp01 } from '../../kernel/math.js';
+// W-PEACE-2 war_block. This module owns BOTH polarities of a treaty's war contract —
+// an honored non-aggression pact blocks the lane (warReasonFactor below), a defaulted
+// one lifts the block and mints the treaty_default casus (scoreTreatyDefault) — so the
+// two can never disagree about whether the pact stands. The read comes from the
+// dependency-free treatyEnforcement leaf: peaceTerms imports THIS module's gate, so
+// importing the peace mover here would close a cycle.
+import { treatyBlocksWar } from './treatyEnforcement.js';
 // WAVE P4 (THE WORLD'S HAND, docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 6 and §6): the
 // endogenous demographic motive, its capability split, and the perceived-scarcity read.
 // It feeds the EXISTING resource_pressure casus belli and mints no reason type of its
@@ -644,12 +651,32 @@ export function scoreDependencyByDesign({ design01 }, /** @type {string | undefi
  * dark, the ledger is absent, or the pair holds no case; up to
  * 1 + WAR_FACTOR_W when the case saturates. Consumed at the settlementStrategy
  * deploy-weight seam and warDeployment's conquest-margin seam.
+ *
+ * W-PEACE-2 war_block: a LIVE non-aggression pact returns 0, which collapses the
+ * deploy weight at the one seam both war consumers already read (settlementStrategy
+ * multiplies its deployScore by this factor). The grievances themselves are left
+ * standing in the ledger — the pact does not make enemies friends, it makes the war
+ * unavailable while it holds, and the receipts still say why they hate each other.
+ * A DEFAULTED treaty stops blocking and instead mints the treaty_default casus
+ * further down this same module, so both polarities of the pact live in one place
+ * and can never disagree about whether it stands.
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {unknown} fromId @param {unknown} toId
+ * @param {number|null} [tick] the current tick, for callers that hold a fresher one than the
+ *   world does. Omitted ⇒ read `worldState.tick`, which is what the strategy seam has —
+ *   and reading it MATTERS: with a hardcoded 0 every pact would test as live forever and
+ *   an expired non-aggression treaty would go on blocking wars for the rest of the world.
  * @returns {number}
  */
-export function warReasonFactor(worldState, fromId, toId) {
+export function warReasonFactor(worldState, fromId, toId, tick = null) {
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) return 1;
+  // `tick == null` FIRST: Number(null) is 0, which is finite, so an isFinite-only guard
+  // would silently read every omitted tick as tick 0 — under which every pact is still
+  // live and an expired treaty blocks wars forever.
+  const at = tick == null || !Number.isFinite(Number(tick))
+    ? (Number(/** @type {{ tick?: unknown }} */ (worldState || {}).tick) || 0)
+    : Number(tick);
+  if (treatyBlocksWar(worldState, fromId, toId, at)) return 0;
   const ledger = /** @type {ReasonLedger | null} */ (getSpatialLedger(worldState, 'warReasons'));
   if (!ledger) return 1;
   const entry = ledger[reasonPairKey(fromId, toId)];

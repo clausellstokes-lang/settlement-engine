@@ -59,6 +59,10 @@
 
 import { clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
+// W-PEACE-2 occupation_hold: a peace that CEDES the occupation ("the garrison stays at
+// the walls") must actually keep it standing after the army marches home. Read from the
+// dependency-free treatyEnforcement leaf so this module never pulls the peace mover.
+import { occupationHoldFor } from './treatyEnforcement.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { isLiveWarFront } from './warFrontReads.js';
 import {
@@ -810,7 +814,14 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       continue;
     }
     const occupiedItem = itemFor(occupiedId);
-    const present = occupierStillPresent(graph, deployments, rec.occupierId, occupiedId);
+    // W-PEACE-2 occupation_hold: a live occupation_continuation term is a CEDED garrison.
+    // It stands in for physical presence (the treaty is why the army could go home without
+    // the occupation evaporating) and it forbids the collapse exit while it runs. Resistance
+    // still climbs underneath — the hold suppresses the OUTCOME, not the grievance — so the
+    // day the term expires the occupation faces whatever it has become. false ⇒ every
+    // expression below is the pre-wire one, so an untreatied occupation is byte-identical.
+    const treatyHold = occupationHoldFor(worldState, occupiedId, rec.occupierId, t);
+    const present = treatyHold || occupierStillPresent(graph, deployments, rec.occupierId, occupiedId);
 
     // Resistance first (from the pre-tick state), then suitability, then state.
     const nextResistance = advanceResistance(rec, occupiedItem);
@@ -819,7 +830,7 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
     // is force-resolved after MAX_CONTESTED_DWELL ticks instead of grinding forever.
     const advanced = advanceOccupationState(rec, suitability, t);
 
-    if (advanced.liberated) {
+    if (advanced.liberated && !treatyHold) {
       // The occupation collapsed (the occupier lost control). Exit the ledger; the
       // occupied settlement banks a (re)liberation; the occupier banks a disposition loss.
       delete occupations[occupiedId];

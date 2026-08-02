@@ -806,6 +806,11 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     // The deploy DECISION; the war layer owns the actual front mint when its
     // own gate passes. We emit a guaranteed army_deployed-flavored marker so the
     // posture is visible AND it wins the exclusive group over the reactive raid.
+    // JOIN 1 — THE RESOLVED MARCH: the target below is no longer prose only. It rides
+    // out as `metadata.deployTargetId` (the machine-readable twin of the recall
+    // override's `metadata.recallTargetId`), the apply pass deposits it as an ORDER
+    // (warIntent.stampWarIntent), and the ONE opener — warDeployment step 4 — reads
+    // that order next tick. This module still mints no front and seeds no deployment.
     const target = ctx.hostileTargets.find((/** @type {any} */ t) => strengthFor(sId) > strengthFor(t)) || ctx.hostileTargets[0];
     // WAVE A misjudgment-as-cause: the chooser committed to an offensive on a
     // BELIEF about the target. If that belief diverges from ground truth beyond
@@ -832,7 +837,14 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
           'Casus belli',
         ),
       ],
-      metadata: misjudgment ? { misjudgment } : undefined,
+      // APPEND-ONLY key order: `deployTargetId` sits AFTER `misjudgment`, so an
+      // existing metadata bag's serialized key order is untouched. Conditional
+      // (drop-when-empty): a deploy with no resolvable target carries no key, and the
+      // apply-side stamp is a no-op without one.
+      metadata: {
+        ...(misjudgment ? { misjudgment } : {}),
+        ...(target ? { deployTargetId: String(target) } : {}),
+      },
       condition: {
         archetype: 'army_deployed',
         severity: clamp01(MOVE_SEVERITY * 0.6),
