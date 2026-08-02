@@ -113,7 +113,11 @@ afterEach(cleanup);
 
 async function openMara() {
   fireEvent.click(screen.getByRole('tab', { name: 'World' }));
-  const card = await screen.findByRole('button', { name: /Mara/i });
+  // NPCsTab is a deliberate per-tab lazy chunk. The first test in this file is
+  // its cold import and can sit just beyond Testing Library's 1s default under
+  // the full corpus; later cases are warm. Preserve the production split and
+  // give the real lazy boundary an honest component-test budget.
+  const card = await screen.findByRole('button', { name: /Mara/i }, { timeout: 5000 });
   fireEvent.click(card);
   expect(await screen.findByText('She controls the old ferry.')).toBeTruthy();
 }
