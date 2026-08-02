@@ -13,6 +13,19 @@
  */
 
 import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
+import { evaluateWarConvergenceInstrumentation } from './warConvergenceContract.js';
+
+export {
+  WAR_CONVERGENCE_OBSERVATION_VERSION,
+  WAR_ENDING_KEYS,
+  WAR_FLAG_CERTIFICATION_VERDICTS,
+  WAR_FLAG_RULE_STATES,
+  WAR_RULINGS_FLAG_KEYS,
+  WAR_TERMINATION_DECIDING_TERM_KEYS,
+  createEmptyWarConvergenceObservation,
+  evaluateWarConvergenceInstrumentation,
+  validateWarConvergenceObservation,
+} from './warConvergenceContract.js';
 
 /** @typedef {Record<string, unknown>} UnknownRecord */
 /**
@@ -36,6 +49,7 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
  */
 /**
  * @typedef {Object} BehavioralReceipt
+ * @property {unknown} [schemaVersion]
  * @property {unknown} [caseId]
  * @property {unknown} [seed]
  * @property {unknown} [years]
@@ -49,6 +63,17 @@ import { BEHAVIORAL_CONTRACT_VERSION } from './certificationSchema.js';
  *     dark?: UnknownRecord,
  *   },
  * }} [behavioral]
+ * @property {{
+ *   schemaVersion?: unknown,
+ *   kind?: unknown,
+ *   endingsMix?: Record<string, unknown>,
+ *   terminationDecidingTermHistogram?: Record<string, unknown>,
+ *   flagCertificationRows?: Array<{
+ *     rule?: unknown,
+ *     ruleState?: unknown,
+ *     verdict?: unknown,
+ *   }>,
+ * }} [warConvergence]
  */
 /**
  * @typedef {Object} BehavioralYearRow
@@ -80,7 +105,10 @@ export const HUMAN_CHRONICLE_REVIEW_VERSION = 1;
  * meaning of each behavioral.yearly row, while this governs the receipt's
  * top-level sections. v5 ADDS the `subsystems` section (the per-subsystem rule
  * state and the worldState key census that subsystemCertification.js grades
- * against). It changes NO v4 field: every v4 section keeps its exact meaning, so
+ * against). WR-9 later adds `warConvergence` to that same additive v5 envelope:
+ * no existing field changes meaning, and a v5 receipt without the section remains
+ * readable while reporting an honest instrumentation gap. It changes NO v4 field:
+ * every v4 section keeps its exact meaning, so
  * the behavioral oracle continues to read completed v4 evidence unchanged and
  * BEHAVIORAL_OBSERVATION_VERSION deliberately stays at 4. Bumping the observation
  * version instead would have blinded this oracle to every soak receipt already on
@@ -953,6 +981,7 @@ const CHECK_GROUP_PROPERTIES = Object.freeze({
   attention: 'attention_fairness',
   controls: 'dark_controls',
   interactions: 'interaction_bounded',
+  war_convergence: 'war_convergence_instrumented',
 });
 
 /**
@@ -1019,6 +1048,10 @@ export function evaluateBehavioralCertification(input) {
         ...checkAttention(releaseCases),
         ...checkDarkControls(observedReceipts),
         ...checkInteractions(rows, settlementYears),
+        ...evaluateWarConvergenceInstrumentation(
+          /** @type {unknown[]} */ (releaseCases),
+          SOAK_RECEIPT_SCHEMA_VERSION,
+        ),
       ]
     : [];
   const automatedPassed = observationsComplete

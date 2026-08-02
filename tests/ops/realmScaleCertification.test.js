@@ -9,6 +9,7 @@ import {
 } from '../../src/domain/certification/behavioralContract.js';
 import {
   buildRealmScalePlan,
+  evidenceDigestFor,
   isPassingWholeWorldReceipt,
   liveSourceFilesFromGitListing,
   percentileOf,
@@ -63,6 +64,36 @@ describe('realm scale certification evidence', () => {
         kind: 'whole_world_behavioral_observation',
         yearly: [{}],
       },
+    };
+  }
+
+  function passingSeedDivergenceEvidence() {
+    return {
+      instrument: 'event_type_total_variation_v1',
+      verdict: 'PASS',
+      passed: true,
+      windowYears: 5,
+      seeds: { baseline: 'seed-a', divergent: 'seed-b' },
+      thresholds: {
+        minTotalVariationDistance: 0.1,
+        minShiftedEventEquivalents: 2,
+      },
+      totalVariationDistance: 0.2,
+      shiftedEventEquivalents: 2,
+      sampleTotals: { baseline: 10, divergent: 10 },
+      distinctTypeTotals: { baseline: 2, divergent: 2 },
+      topTypeShifts: [{
+        type: 'siege',
+        baselineCount: 5,
+        comparisonCount: 3,
+        baselineShare: 0.5,
+        comparisonShare: 0.3,
+        absoluteShareShift: 0.2,
+      }],
+      equalWindows: true,
+      nonEmpty: true,
+      invalidEntries: [],
+      hashDiverged: false,
     };
   }
 
@@ -136,18 +167,35 @@ describe('realm scale certification evidence', () => {
       .toContain('tests/fixtures/spatialPackFixtures.js');
   });
 
+  it('binds both A-4 and WR-9 observations into the aggregate evidence digest', () => {
+    const receipt = {
+      caseId: 'release-case',
+      seedDivergence: { verdict: 'PASS', totalVariationDistance: 0.25 },
+      warConvergence: { endingsMix: { terms: 3 } },
+    };
+    const baseline = evidenceDigestFor([receipt]);
+
+    expect(evidenceDigestFor([{
+      ...receipt,
+      seedDivergence: { ...receipt.seedDivergence, verdict: 'FAIL' },
+    }])).not.toBe(baseline);
+    expect(evidenceDigestFor([{
+      ...receipt,
+      warConvergence: { endingsMix: { terms: 4 } },
+    }])).not.toBe(baseline);
+  });
+
   it('admits both supported receipt envelopes and rejects retired ones', () => {
-    // The envelope bumped 4 -> 5 when the subsystems section landed. v5 ADDS a
-    // section and changes no field this predicate reads, so BOTH must pass:
-    // pinning a single version here would silently reject every receipt the
-    // soak writes after a bump, which is how a green harness stops seeing its
-    // own evidence.
+    // v4 stays readable for the completed legacy corpus. A current v5 child is
+    // admitted only with the new distribution proof; the WR-9 section is graded
+    // separately by the behavioral oracle and an empty one cannot certify.
     const v4 = passingChildReceipt();
     expect(SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS).toEqual([4, 5]);
     expect(isPassingWholeWorldReceipt({ ...v4, schemaVersion: 4 })).toBe(true);
     expect(isPassingWholeWorldReceipt({
       ...v4,
       schemaVersion: 5,
+      seedDivergence: passingSeedDivergenceEvidence(),
       subsystems: {
         schemaVersion: 5,
         kind: 'soak_subsystem_configuration',
@@ -157,6 +205,7 @@ describe('realm scale certification evidence', () => {
         stateKeys: {},
       },
     })).toBe(true);
+    expect(isPassingWholeWorldReceipt({ ...v4, schemaVersion: 5 })).toBe(false);
     expect(isPassingWholeWorldReceipt({ ...v4, schemaVersion: 3 })).toBe(false);
   });
 

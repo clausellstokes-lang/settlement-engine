@@ -14,8 +14,9 @@
  *      (scanned every year, fail-fast);
  *   2. BYTE-IDENTICAL RE-RUN — the same seed replays the identical composite
  *      hash every year (run B == run A, all N years);
- *   3. DIVERGENCE on a different seed (run C forks from run A within the
- *      comparison window — the determinism is seed-derived, not degenerate);
+ *   3. STORY-MIX DIVERGENCE on a different seed (run C's aggregate selected-
+ *      event distribution differs materially from run A within the comparison
+ *      window; composite hashes remain diagnostic and earn no claim);
  *   4. POPULATION BOUNDED — every settlement stays finite and > 0; the realm
  *      total stays within a generous envelope of its start (attractors, not
  *      runaways or death-spirals);
@@ -58,8 +59,15 @@ import {
   censusWorldStateKeys,
   observeBehavioralYear,
 } from './behavioral-observation.mjs';
-import { SOAK_RECEIPT_SCHEMA_VERSION } from '../../src/domain/certification/behavioralContract.js';
+import {
+  SOAK_RECEIPT_SCHEMA_VERSION,
+  createEmptyWarConvergenceObservation,
+} from '../../src/domain/certification/behavioralContract.js';
 import { buildWholeWorldSoakSpatialCanon } from './whole-world-soak-spatial-fixture.mjs';
+import {
+  buildStoryMixDivergenceEvidence,
+  compareStoryMixDistributions,
+} from './story-mix-divergence.mjs';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { simulateCampaignWorldInterval } from '../../src/domain/worldPulse/advanceInterval.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
@@ -449,10 +457,36 @@ const firstMismatch = runA.yearlyHashes.findIndex((h, i) => runB.yearlyHashes[i]
 check(firstMismatch === -1, 'byte-identical re-run (same seed)',
   firstMismatch === -1 ? `all ${YEARS} yearly composite hashes equal` : `diverged at year ${firstMismatch + 1}`);
 
-// 3. Divergence on a different seed (compared inside the window).
+// 3. Different seeds must produce materially different STORY MIXES. A composite
+// hash difference remains useful diagnostics, but it cannot earn seed_divergent:
+// one altered draw anywhere in the world used to satisfy that weaker proof.
 const runC = await runYears(`${SEED}-divergent`, DIVERGENCE_YEARS, 'C');
-const diverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
-check(diverged, 'divergence on a different seed', `within ${DIVERGENCE_YEARS} years`);
+const hashDiverged = runC.yearlyHashes.some((h, i) => h !== runA.yearlyHashes[i]);
+const storyMixDivergence = compareStoryMixDistributions(
+  runA.yearlyBehavior.slice(0, DIVERGENCE_YEARS),
+  runC.yearlyBehavior,
+);
+const seedDivergence = buildStoryMixDivergenceEvidence({
+  comparison: storyMixDivergence,
+  windowYears: DIVERGENCE_YEARS,
+  baselineSeed: SEED,
+  comparisonSeed: `${SEED}-divergent`,
+  hashDiverged,
+});
+const largestMixShift = storyMixDivergence.typeShifts[0];
+const mixEvidenceIssue = storyMixDivergence.invalidEntries[0];
+check(
+  storyMixDivergence.passed,
+  'different seeds produce a divergent event-type mix',
+  `TV ${storyMixDivergence.totalVariationDistance.toFixed(3)} `
+    + `(min ${storyMixDivergence.thresholds.minTotalVariationDistance.toFixed(2)}); `
+    + `${storyMixDivergence.shiftedEventEquivalents.toFixed(2)} shifted event-equivalents `
+    + `(min ${storyMixDivergence.thresholds.minShiftedEventEquivalents}); `
+    + `largest shift ${largestMixShift?.type || 'none'} `
+    + `(${Number(largestMixShift?.absoluteShareShift || 0).toFixed(3)}); `
+    + `composite hash ${hashDiverged ? 'also differed' : 'did not differ'}`
+    + (mixEvidenceIssue ? `; invalid evidence ${mixEvidenceIssue}` : ''),
+);
 
 // Behavioral controls are deliberately sparse matrix probes, selected by the
 // realm-scale plan. They are not hidden inside every cell: three release probes
@@ -587,6 +621,15 @@ const receipt = {
         'isolated_worker_output_identical',
       ]
     : [],
+  // A-4 evidence, not just an earned-property label. The state-hash comparison
+  // is retained here only to diagnose whether state also diverged; the verdict
+  // comes exclusively from the selected-event distribution instrument above.
+  seedDivergence,
+  // WR-9's address-complete v5 section lands before the WR program that can
+  // populate it. Zero histograms plus unknown/UNOBSERVED flag rows are honest
+  // evidence of that sequencing state: the behavioral oracle accepts the shape
+  // and refuses both the non-vacuity and flag-coverage claims.
+  warConvergence: createEmptyWarConvergenceObservation(),
   finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
   directFirstResultSha256: runA.firstResultSha256,
   stressorCounts: counts,

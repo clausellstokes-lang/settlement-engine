@@ -605,3 +605,41 @@ land BEFORE that soak for its evidence to prove what the thesis needs.
 - **Focused verification:** the two walls plus mutation-coverage governance pass
   33/33; targeted ESLint and `git diff --check` pass. Full-gate evidence belongs to
   the wave commit receipt, not this pre-commit measurement.
+
+### Addendum implementation receipt — A-4 INSTRUMENTS LANDED (2026-08-01)
+
+- **Seed divergence is now a story-mix claim.** The different-seed arm aggregates
+  selected-event `eventTypeCounts` over the same five-year window as the baseline
+  and compares the normalized distributions by total-variation distance. It must
+  move at least one tenth of the distribution **and** at least two events at the
+  smaller sample size; different tempo with the same mix and one changed draw both
+  fail. Composite-hash inequality remains in the receipt as diagnostics only and
+  cannot earn `seed_divergent`.
+- **The evidence is inspectable and source-bound.** Each child receipt records the
+  thresholds, verdict, sample totals, distance, shifted event-equivalents, largest
+  typed shifts, evidence validity, and diagnostic hash result. The realm-scale
+  evidence digest now binds that complete `seedDivergence` section rather than only
+  the older behavioral rows.
+- **WR-9 now has an additive v5 address.** The receipt contract owns closed ending,
+  termination-deciding-term (`cause`, `cost_to_continue`, `cost_to_stop`,
+  `momentum`), and WR-flag vocabularies. Its validator rejects missing, duplicate,
+  unknown, negative, and contradictory rows. Behavioral-contract v5 adds three
+  fail-closed checks: total receipt shape, non-vacuous war evidence, and flag
+  coverage. Old v4 receipts remain readable but cannot earn the new property.
+- **No evidence was fabricated.** Until the ordered WR waves expose real endings,
+  deciding terms, and flag-certification results, the whole-world collector writes
+  zero histograms with `unknown` / `UNOBSERVED` rows. That shape is valid, is bound
+  into the aggregate digest, and deliberately fails the non-vacuity and flag-coverage
+  checks. The soak and lighting grid have not run; this is the prerequisite
+  instrument, not a convergence verdict.
+- **Focused verification:** the story-mix, behavioral contract, certification
+  schema/parity, and realm-scale suites pass 61/61; the negative-assertion and seed-
+  loop governance walls remain green after banking one newly anchored legacy site;
+  targeted ESLint and domain-strict are green. Full-gate evidence belongs to the
+  wave commit receipt.
+- **Wave gate:** the complete repository run passed 22,373 tests and timed out in
+  four load-heavy cases at their common 20-second ceiling. All four passed
+  immediately in isolation (pipeline determinism 6/6, town-scene build contract
+  20/20 with three intentional skips, feed distribution 3/3, magic-buffer
+  reachability 8/8). Production build is green and `verify:dist` passes 364/364.
+  No golden was rerecorded and no baseline was widened.

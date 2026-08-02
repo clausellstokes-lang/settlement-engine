@@ -31,8 +31,13 @@
 
 /** The manifest schema version (bumped only on a breaking shape change). @type {number} */
 export const CERTIFICATION_MANIFEST_VERSION = 1;
-/** Behavioral oracle version required before a band may claim certification. */
-export const BEHAVIORAL_CONTRACT_VERSION = 4;
+/**
+ * Behavioral oracle version required before a band may claim certification.
+ * v5 adds the WR-9 evidence wall: a release matrix must carry the additive v5
+ * war-convergence observation rather than earning a broad claim from ordinary
+ * event diversity alone.
+ */
+export const BEHAVIORAL_CONTRACT_VERSION = 5;
 
 /** @type {ReadonlyArray<{ key: string, label: string }>} */
 export const CERTIFICATION_STATUS = Object.freeze([
@@ -66,6 +71,7 @@ export const SOAK_PROPERTIES = Object.freeze([
   { key: 'attention_fairness', label: 'gave every settlement a fair share of the record' },
   { key: 'dark_controls', label: 'left gated movers truly dark when their controls were off' },
   { key: 'interaction_bounded', label: 'composed mover consequences without cascade storms' },
+  { key: 'war_convergence_instrumented', label: 'recorded how wars ended, what decided them, and which war-rulings flags spoke' },
   { key: 'chronicle_human_reviewed', label: 'remained legible when a person read the late Chronicle' },
 ]);
 /** @type {ReadonlyArray<string>} */

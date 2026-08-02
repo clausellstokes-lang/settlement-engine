@@ -269,7 +269,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/domain/aiSpendAlarm.test.js': 2,
   'tests/domain/applyDispatch.test.js': 3,
   'tests/domain/bandPolarity.test.js': 4,
-  'tests/domain/behavioralCertificationContract.test.js': 1,
   'tests/domain/briefs.test.js': 1,
   'tests/domain/calamity.kernel.integration.test.js': 5,
   'tests/domain/candidateTypeVoicePhrasing.walker.test.js': 1,

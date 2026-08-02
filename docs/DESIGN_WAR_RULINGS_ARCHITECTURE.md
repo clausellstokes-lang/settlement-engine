@@ -269,6 +269,14 @@ Own commit, after WR-0; changes lit-path behavior ⇒ disclosed shift discipline
   Fix: the escalation deposits a war INTENT (the W1 ledger — this is exactly what
   it is for) instead of minting a front; the opener then opens it with a real
   deployment, or refuses it through the same gates every war faces.
+  ⚠️ CORRECTED 2026-08-01 (self-audit, before build): the deposited intent must
+  NOT carry the CONQUEST_MARGIN waiver. That waiver exists because a REAL
+  DELIBERATION superseded the heuristic pre-filter (warIntent.js's own
+  rationale); a trade-war escalation is a grievance reflex, not a deliberation,
+  so its intent orders WHOM only — targeting priority without gate relief — and
+  every hard AND soft gate runs exactly as for an unordered candidate. Pin the
+  negative: an escalation intent against a target failing CONQUEST_MARGIN does
+  not open.
 
 > **Progress — WR-0c complete, 2026-08-01.** The chooser and opener now share one
 > treaty-eligibility read; a zero war factor removes deploy from the move space;

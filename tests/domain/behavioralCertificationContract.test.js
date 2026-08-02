@@ -1,11 +1,19 @@
 import { describe, expect, it } from 'vitest';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import {
   BEHAVIORAL_CONTRACT_VERSION,
   BEHAVIORAL_MOVER_FAMILIES,
   BEHAVIORAL_OBSERVATION_VERSION,
   CERTIFICATION_HORIZONS,
+  SOAK_RECEIPT_SCHEMA_VERSION,
+  WAR_CONVERGENCE_OBSERVATION_VERSION,
+  WAR_ENDING_KEYS,
+  WAR_RULINGS_FLAG_KEYS,
+  WAR_TERMINATION_DECIDING_TERM_KEYS,
+  createEmptyWarConvergenceObservation,
   evaluateBehavioralCertification,
   validateHumanChronicleReview,
+  validateWarConvergenceObservation,
 } from '../../src/domain/certification/behavioralContract.js';
 
 const SOURCE_COMMIT = 'a'.repeat(40);
@@ -76,6 +84,7 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
     (_, index) => `${caseId}-s${index}`,
   );
   return {
+    schemaVersion: SOAK_RECEIPT_SCHEMA_VERSION,
     caseId,
     seed: `contract-${caseId}`,
     years,
@@ -106,6 +115,19 @@ function behavioralReceipt(years, settlements, seed, { controls = false } = {}) 
             },
           }
         : {},
+    },
+    warConvergence: {
+      schemaVersion: WAR_CONVERGENCE_OBSERVATION_VERSION,
+      kind: 'war_convergence_observation',
+      endingsMix: Object.fromEntries(WAR_ENDING_KEYS.map((key) => [key, 1])),
+      terminationDecidingTermHistogram: Object.fromEntries(
+        WAR_TERMINATION_DECIDING_TERM_KEYS.map((key) => [key, 1]),
+      ),
+      flagCertificationRows: WAR_RULINGS_FLAG_KEYS.map((rule) => ({
+        rule,
+        ruleState: 'on',
+        verdict: 'ALIVE',
+      })),
     },
   };
 }
@@ -148,6 +170,7 @@ function passingInput() {
 
 describe('behavioral certification contract', () => {
   it('fixes the useful, release, and research horizon roles', () => {
+    expect(BEHAVIORAL_CONTRACT_VERSION).toBe(5);
     expect(CERTIFICATION_HORIZONS.useful).toMatchObject({
       years: 30,
       productGate: false,
@@ -180,6 +203,7 @@ describe('behavioral certification contract', () => {
       'attention_fairness',
       'dark_controls',
       'interaction_bounded',
+      'war_convergence_instrumented',
       'stressor_rhythm',
       'no_stasis',
       'chronicle_human_reviewed',
@@ -199,6 +223,40 @@ describe('behavioral certification contract', () => {
     expect(result.passed).toBe(false);
   });
 
+  it('keeps v4 receipts readable but ineligible for WR-9 certification', () => {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.schemaVersion = 4;
+      delete receipt.warConvergence;
+    }
+    const result = evaluateBehavioralCertification(input);
+    expect(result.observationsComplete).toBe(true);
+    expect(result.automatedPassed).toBe(false);
+    expect(result.failures).toContain('war_convergence.receipt_shape');
+    expectAbsentWithAnchor(
+      result.propertiesEarned,
+      'war_convergence_instrumented',
+      'event_tempo_diversity',
+      'stale receipts cannot earn the WR-9 property',
+    );
+  });
+
+  it('rejects vacuous WR-9 histograms and flag rows that never earned ALIVE', () => {
+    const input = passingInput();
+    for (const receipt of input.receipts) {
+      receipt.warConvergence = createEmptyWarConvergenceObservation();
+      for (const row of receipt.warConvergence.flagCertificationRows) {
+        row.ruleState = 'on';
+        row.verdict = 'SILENT';
+      }
+    }
+    const result = evaluateBehavioralCertification(input);
+    expect(result.failures).toEqual(expect.arrayContaining([
+      'war_convergence.non_vacuous',
+      'war_convergence.flag_coverage',
+    ]));
+  });
+
   it('fails closed when a mover goes dark in the final decade', () => {
     const input = passingInput();
     for (const receipt of input.receipts) {
@@ -209,7 +267,12 @@ describe('behavioral certification contract', () => {
     const result = evaluateBehavioralCertification(input);
     expect(result.automatedPassed).toBe(false);
     expect(result.failures).toContain('mover.faith.tail');
-    expect(result.propertiesEarned).not.toContain('mover_activity');
+    expectAbsentWithAnchor(
+      result.propertiesEarned,
+      'mover_activity',
+      'event_tempo_diversity',
+      'one dark mover removes only the mover-activity property',
+    );
   });
 
   it('does not let pending succession proposals satisfy applied-attempt gates', () => {
@@ -266,6 +329,70 @@ describe('behavioral certification contract', () => {
       expect(result.passed).toBe(false);
       expect(result.claimBoundary).toMatch(/cannot earn/);
     }
+  });
+});
+
+describe('WR-9 war-convergence receipt contract', () => {
+  it('exports one closed vocabulary and a builder-safe empty observation', () => {
+    expect(WAR_ENDING_KEYS).toEqual([
+      'terms',
+      'exhaustion',
+      'ruler_change',
+      'fragmentation',
+      'annihilation',
+      'conquest',
+      'punitive_sack_initiation',
+      'punitive_sack_vengeance',
+    ]);
+    expect(WAR_TERMINATION_DECIDING_TERM_KEYS).toEqual([
+      'cause',
+      'cost_to_continue',
+      'cost_to_stop',
+      'momentum',
+    ]);
+    expect(WAR_RULINGS_FLAG_KEYS).toEqual([
+      'warTerminationEnabled',
+      'dispositionChannelsEnabled',
+      'lineageClaimEnabled',
+      'coalitionLedgerEnabled',
+      'envoyDiplomacyEnabled',
+      'conquestDoctrineEnabled',
+      'sovereigntyTradeEnabled',
+    ]);
+
+    const empty = createEmptyWarConvergenceObservation();
+    expect(validateWarConvergenceObservation(empty)).toMatchObject({ ok: true, errors: [] });
+    expect(Object.values(empty.endingsMix).every((count) => count === 0)).toBe(true);
+    expect(empty.flagCertificationRows).toHaveLength(WAR_RULINGS_FLAG_KEYS.length);
+    expect(empty.flagCertificationRows.every((row) => (
+      row.ruleState === 'unknown' && row.verdict === 'UNOBSERVED'
+    ))).toBe(true);
+  });
+
+  it('fails closed on missing, unknown, duplicate, or malformed evidence', () => {
+    const malformed = createEmptyWarConvergenceObservation();
+    delete malformed.endingsMix.terms;
+    malformed.endingsMix.decorative_victory = 1;
+    malformed.terminationDecidingTermHistogram.cause = -1;
+    malformed.flagCertificationRows[1] = {
+      ...malformed.flagCertificationRows[0],
+      ruleState: 'off',
+      verdict: 'ALIVE',
+    };
+
+    const result = validateWarConvergenceObservation(malformed);
+    expect(result.ok).toBe(false);
+    expect(result.errors.join(' ')).toMatch(/missing terms/);
+    expect(result.errors.join(' ')).toMatch(/unknown key decorative_victory/);
+    expect(result.errors.join(' ')).toMatch(/cause must be a non-negative integer/);
+    expect(result.errors.join(' ')).toMatch(/duplicates warTerminationEnabled/);
+    expect(result.errors.join(' ')).toMatch(/off with DORMANT_BY_CONFIG/);
+    expect(result.errors.join(' ')).toMatch(/missing dispositionChannelsEnabled/);
+
+    const unknownAlive = createEmptyWarConvergenceObservation();
+    unknownAlive.flagCertificationRows[0].verdict = 'ALIVE';
+    expect(validateWarConvergenceObservation(unknownAlive).errors.join(' '))
+      .toMatch(/cannot claim ALIVE from an unknown rule state/);
   });
 });
 

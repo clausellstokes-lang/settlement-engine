@@ -30,6 +30,7 @@ import {
   evaluateBehavioralCertification,
 } from '../../src/domain/certification/behavioralContract.js';
 import { CERTIFICATION_REQUIRED_PROPERTY_KEYS } from '../../src/domain/certification/certificationSchema.js';
+import { isPassingStoryMixDivergenceEvidence } from './story-mix-divergence.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WHOLE_WORLD_SOAK = resolve(ROOT, 'scripts/audit/whole-world-soak.mjs');
@@ -243,12 +244,14 @@ export function summarizeRealmScaleReceipts(receipts) {
 }
 
 /**
- * Fail closed on the worker-evidence portion of a child receipt.
+ * Fail closed on the admission evidence of a child receipt.
  *
  * Schema version alone is insufficient: a hand-edited or truncated v3 receipt
  * must not count as an actual isolate measurement. Output parity, distinct
  * thread identity, a complete one-year progress sequence, and honest transport
- * labels are all part of the admissible shape.
+ * labels are all part of the admissible shape. Current v5 receipts must also
+ * carry the A-4 distribution verdict; legacy v4 receipts remain readable here
+ * but the behavioral-v5 oracle makes them ineligible for certification.
  *
  * @param {Record<string, unknown>} receipt
  */
@@ -258,9 +261,8 @@ export function isPassingWholeWorldReceipt(receipt) {
     Array.isArray(receipt?.properties) ? receipt.properties : [],
   );
   return (
-    // Envelope v4 and v5 are both admissible: v5 only ADDS the subsystems section
-    // and changes no field this predicate reads. Pinning a single version here
-    // would have silently rejected every receipt written after the bump.
+    // Envelope v4 remains readable for old evidence. A current v5 child must
+    // additionally prove the distribution instrument's complete PASS shape.
     SUPPORTED_SOAK_RECEIPT_SCHEMA_VERSIONS.includes(receipt?.schemaVersion)
     && receipt?.kind === 'whole_world_soak'
     && receipt?.passed === true
@@ -268,6 +270,10 @@ export function isPassingWholeWorldReceipt(receipt) {
     && receipt?.behavioral?.kind === 'whole_world_behavioral_observation'
     && Array.isArray(receipt?.behavioral?.yearly)
     && receipt.behavioral.yearly.length === receipt?.years
+    && (
+      receipt?.schemaVersion === 4
+      || isPassingStoryMixDivergenceEvidence(receipt?.seedDivergence)
+    )
     && properties.has('isolated_worker_executed')
     && properties.has('isolated_worker_output_identical')
     && worker?.kind === 'isolated_advance_worker_measurement'
@@ -399,7 +405,7 @@ function loadHumanReview(path) {
   }
 }
 
-function evidenceDigestFor(receipts) {
+export function evidenceDigestFor(receipts) {
   const evidence = receipts.map((receipt) => ({
     caseId: receipt.caseId,
     seed: receipt.seed,
@@ -415,6 +421,8 @@ function evidenceDigestFor(receipts) {
     structuredCloneMs: receipt.structuredCloneMs,
     isolatedWorker: receipt.isolatedWorker,
     peakHeapUsedBytes: receipt.peakHeapUsedBytes,
+    seedDivergence: receipt.seedDivergence,
+    warConvergence: receipt.warConvergence,
     behavioral: receipt.behavioral,
   }));
   return sha256(JSON.stringify(evidence));
