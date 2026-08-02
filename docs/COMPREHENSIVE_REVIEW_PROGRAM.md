@@ -158,6 +158,22 @@ ledger — never from a session digest.
 >   committed across ~30 minifold commits. Successor: finish the FP corrections per the memory
 >   map, deliver the accounting, then Sol's queue stands: sim-proof path first, FP corpus behind
 >   it, commons/landing parallel.
+> - 2026-08-02 (~12:45, THE FP CORRECTION PASS COMPLETE — the successor's landing). Re-dispatched
+>   the banked script as run wf_76214688-ba0 (7 volume correctors + the cohesion fixer; all 8
+>   returned, 0 errors): 162 changes; 368 [CORRECTED 2026-08-02 (fp-audit)] markers final
+>   (SPINE 9 / TRADE 46 / FAITH 50 / POP 46 / INFO 37 / GRAMMAR 66 / INTERIOR 59 / COUPLINGS 55);
+>   landed @ minifold 36862650 (pathspec, 10 files, +3807/−1109, survival check clean). The 19
+>   unresolved forks triaged in FABLE_VALIDATION_QUEUE.md's new FP block: 13 verified landed by
+>   grep receipt, 1 chair-repaired (FAITH WF-2b's pilgrim-widening deferral twin of COUPLINGS §10
+>   row 11), 4 ruled vetoably (CR-1 J-INT-13 dark prose-version-flag default, re-record
+>   owner-elective; CR-2 applyWorldPulse:322 second-fold consolidation pre-ruled for TR-4 build
+>   behind a no-behavior-change pin; CR-3 the machine-readable band registry DECLINED — SP-6's
+>   reconciliation walker is the adopted form, SP-8 stays THE AGE LAYER; CR-4 FAITH's seatBooks
+>   deferral stands as reconciled). WR-10's graceful-degradation twin note landed in the war
+>   volume. THE CORPUS NOW SHIPS TO SOL AUDITED AND CORRECTED END TO END. Budget note: the pass
+>   ran all-Fable by model inheritance (owner-flagged ~15%+ of weekly); staffing rule recorded
+>   (memory fable-budget-workflow-staffing) — bulk correctors ride Opus henceforth. Accounting
+>   delivered to the owner this session.
 > - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
 >   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
 >   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
