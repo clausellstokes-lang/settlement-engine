@@ -193,3 +193,66 @@ explicitly waives legibility at miniature scale; exactness is the goal.
    generation output legitimately shifts (golden-regen = the signal), or the
    miniature will visibly drift from what the button forges — the drift the facsimile
    could hide, the miniature exposes. That exposure is a feature.
+
+---
+
+## LD-2 — NAV DIVIDERS: LINES FOR SECTIONS, CHEVRONS FOR THE JOURNEY (owner-ordered
+## 2026-08-01; implementation = the external implementer)
+
+**The order (owner, on the header nav):** items separated by vertical lines extending
+top-to-bottom of the bar — EXCEPT within the Create → Library → Realm trio, whose
+dividers become full-height ARROWS: two strokes from the bar's top and bottom edges
+converging to a mid-height apex (pointing right, the journey's direction), open at
+the base/back. Sections read as sections; the journey reads as flow.
+
+**Spec:**
+- One `NavDivider` leaf, parameterized `{ kind: 'line' | 'chevron' }` — an inline
+  SVG spanning the header height (`height: 100%`, viewBox-scaled): `line` = one
+  1px vertical stroke; `chevron` = two strokes (top-edge → mid-right apex,
+  bottom-edge → mid-right apex). Stroke color from design tokens (the muted
+  divider register; no-raw-color law applies), stroke-width matched between kinds.
+- Placement: line dividers at WELCOME|CREATE, REALM|COMPENDIUM, COMPENDIUM|GALLERY,
+  GALLERY|ABOUT; chevron dividers at CREATE|LIBRARY and LIBRARY|REALM (replacing
+  the current small `›` glyphs entirely).
+  ⚠️ ONE TASTE CALL for the owner's eye at the walk: whether the trio's OUTER
+  boundaries (WELCOME|CREATE, REALM|COMPENDIUM) stay plain lines (specced default)
+  or also become chevrons (journey entry/exit). Default ships; the eye rules.
+- Apex clearance: nav item padding adjusts so the chevron apex never collides with
+  label text at any viewport where the full nav renders.
+- The active-tab underline is untouched; the SIGN IN button region carries no
+  divider; mobile/collapsed nav is untouched (dividers are desktop-nav only).
+- A11y: dividers are pure decoration — `aria-hidden`, zero focus stops; the
+  existing `›` glyphs' removal must not change the accessible name of any link.
+- Pin: a DOM census asserting divider kind-by-boundary (the exact placement map
+  above), so a future nav item insertion cannot silently misfile a divider.
+
+---
+
+## LD-3 — THE PAGE ENDS ON THE PAINTING (owner-ordered 2026-08-01; implementation =
+## the external implementer)
+
+**The order (owner, at the landing bottom):** the landing page currently stacks TWO
+footers — its own §06 artwork-band footer (the painted create scene + brand row),
+then the GLOBAL app footer strip below it (Pricing | Feedback & support | Terms |
+Privacy + © + "Simulated, not AI-generated"). Replace the bottom with the default
+band and go no deeper: THE ARTWORK IS THE END OF THE PAGE.
+
+**Spec:**
+- Suppress the global app footer ON THE LANDING ROUTE ONLY (route-scoped condition
+  at the App.jsx mount — never a global deletion; every other page keeps it).
+- MIGRATE, never delete (binding): `Terms`, `Privacy`, and the
+  `© 2026 SettlementForge · Simulated, not AI-generated.` line move INTO the
+  landing band's dark flush region as a modest final row (existing LandingFooter,
+  one row added; token typography; links reuse the global footer's copy keys from
+  copy/footer.js — one copy truth, two renderers is FORBIDDEN: extract the shared
+  row into one component or import the same keys). `Feedback & support` joins the
+  same row (the widget entry must stay reachable from first contact).
+- The band's bottom edge = document end: no margin/padding artifact below the
+  artwork (pin: the landing document's scrollHeight ends within the band's
+  bounding box; no sibling renders after LandingFooter).
+- The `:461` comment ("sits flush against the global app footer") updates to the
+  new truth.
+- Pins: route-scoped suppression (landing lacks the global footer, Compendium
+  still has it); legal-links presence ON the landing (Terms+Privacy reachable —
+  an absence regression here is a legal defect, treated as such); welcomeJourney
+  suite green.
