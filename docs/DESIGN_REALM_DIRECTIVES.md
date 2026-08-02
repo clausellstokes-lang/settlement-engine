@@ -1387,6 +1387,21 @@
    becomes an invariant). ROAMER TRAVEL PHYSICS: roaming NPCs move at most ONE
    route-hop per tick, only on routes connected to their current settlement, and may
    be MID-ROUTE at any pause (the armyTransit ledger pattern).
+11. PORTS OF POSITION + ORGANIC WATERWAYS (added 2026-08-01, owner dictation):
+    (a) A canonized settlement NOT designated port-trade, sitting in close
+    proximity to a river or the ocean BY MAP POSITION, holds INCREASED
+    OPPORTUNITY to found a port institution over simulated time — it may
+    participate in sea/river routes without water being its main trade. The
+    proximity read derives from the map rasters in SCALED real distance,
+    never a stored designation. (b) THE SCALE LAW: this — and walking, and
+    every other travel and route for time advancement — scales with the
+    map's real miles/km. One calibration, all movers. (c) Where at least two
+    settlements hold ports (never "always" — embargoes and organic route
+    creation/destruction apply), naval/sea/river routes MUST NOT BE
+    NEGLECTED: water routes form and fade ORGANICALLY exactly as land routes
+    do. [Closes the registered ports-totality-genesis-only gap — review
+    register 2026-08-01.]
+
 10. THE MAGIC-ECONOMY DISASTER BUFFER (added 2026-07-31) — high magic and high economy
     each buffer catastrophe individually, and their COMBINATION is the strong buffer:
     damage reduction against, repair acceleration following. THE DEPENDENCY ASYMMETRY
@@ -1525,6 +1540,37 @@
   strategic need persists even after trade dies (the garrison-road asymmetry — the
   war layer writes strategic need into the same ledger). Charter events name their
   dominant flow class so every road tells its origin story.
+- **J-D11 (ports of position + organic waterways — Fable architecture, veto open):**
+  (a) THE EARNED PORT is a PLAN-BUILT INSTITUTION: the §5c plan lane proposes it
+  (banded opportunity weight from scaled-km water proximity — closed water-access
+  vocabulary derived from the rasters: coastal | riverine | inland; port classes
+  closed: river_quay | harbor, banded by water class × tier), K1's status
+  vocabulary governs its life (operational/impaired/shell), and the digest's
+  generation-time `isPort` is UNTOUCHED — port-capability becomes
+  `isPort OR earned-port-operational` at exactly one read seam (single writer;
+  DESIGN_NAVY's navy-capability read inherits it for free, so an earned harbor
+  can eventually float a navy). Generation is byte-untouched (THE PROMISE);
+  pulse-time only; dark behind `portOpportunityEnabled`.
+  (b) ONE MODE-SPEED CALIBRATION TABLE (km/week per mode: foot | cart | river |
+  coastal | sea), consumed by EVERY mover — armies, envoys, wanderers, columns,
+  caravans — through the one transit kernel (the WR-7a single-writer walker is
+  the enforcement seam); amendment M's one-week floor is the snap. ⚠️ SUBSTRATE
+  CHECK: whether the map's declared km scale threads into the engine today; if
+  it does not, the table's scale constant becomes the canonical definition,
+  owner-signed as a tuning band.
+  (c) WATER CORRIDORS JOIN J-D9's LIFECYCLE WHOLE: the same three-class demand
+  ledger, water's own cost profile (bulk-cheap per km, slow to establish,
+  PORT-GATED at both endpoints — the ≥2-ports condition is structural, not a
+  rule), the same hysteresis and charter/decay events with address chains, and
+  embargo/interdiction/blockade apply (the navy design's blockade law reads the
+  same arteries). THE REMNANT LAW MAPS TO HARBORS, NOT LANES: the sea keeps no
+  track — a decayed water route's memory is the QUIET QUAY (the shell port),
+  the infrastructure-remembers law's fourth instance, cartography-visible.
+  (d) NEGLECT IS MEASURED, NEVER HOPED: a soak observation for water-share of
+  corridor flow where geography permits (a coastal realm whose sea lanes carry
+  nothing while land roads duplicate their paths is a TUNING RED), plus the
+  reachability pin — a two-port corpus world charters at least one organic
+  water route or the wave is not done.
 - **J-D10 (disaster buffer — Fable refinements, veto open):** (a) THE BUFFER SPENDS
   ITSELF: mitigation CONVERTS damage into economic drain (treasury, stocks, magical
   reserves draw down) — damage transmutes, never vanishes; a spent buffer is a
