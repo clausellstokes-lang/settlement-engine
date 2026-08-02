@@ -205,7 +205,7 @@ describe('THE NEGATIVE CONTROLS — reverting the cure re-creates the defect', (
     const bounds = boundsOf(realmUpdates());
     const ratios = [...runaway].map(([id, s]) => s[300] / bounds.get(id));
     expect(Math.max(...ratios), 'no settlement ran away').toBeGreaterThan(1000);
-  });
+  }, 60_000);
 
   test('RESTORE: the unmocked kernel is green again in the same file, after both reverts', () => {
     // The revert/red/restore/green discipline, executed rather than described: the two

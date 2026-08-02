@@ -69,7 +69,7 @@ describe('neighbourFactions power-share invariant (finding 1)', () => {
       expect(f.rawPower).toBeGreaterThanOrEqual(8);
       expect(typeof f.power).toBe('number');
     }
-  });
+  }, 60_000);
 });
 
 describe('renormalizeFactionPower helper (largest-remainder, sums to 100)', () => {

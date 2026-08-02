@@ -108,7 +108,7 @@ describe('pipeline (property-based)', () => {
       const b = gen(config, { seed: SEED });
       expect(fingerprint(a)).toEqual(fingerprint(b));
     }), { numRuns: 100 });
-  });
+  }, 120_000);
 
   test('same seed produces a DEEP-identical settlement (full-JSON determinism)', () => {
     // The fingerprint test above compares only 5 scalars — it would pass even

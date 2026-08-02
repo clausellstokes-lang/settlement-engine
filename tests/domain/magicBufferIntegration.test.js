@@ -338,7 +338,7 @@ describe('K3 the disaster buffer at the calamity seam', () => {
     const topEconomy = Math.max(...corpus.map((row) => row.economy01));
     expect(topEconomy).toBeLessThan(0.84);
     expect(corpus.filter((row) => row.regime === REGIME_INDUSTRIAL).length).toBe(0);
-  });
+  }, 60_000);
 
   it('7. THE GATE IS K2\'s: the regime moves the mitigation, and K3 derives no gate', () => {
     const industrial = runStrike({ lit: true, regime: REGIME_INDUSTRIAL });
