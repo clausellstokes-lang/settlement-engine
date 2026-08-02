@@ -90,6 +90,16 @@ volumes corrected @ 36862650 + fdf43790):
     guard's block/veil · operator messages · LD-1..LD-11 · the About split ·
     DESIGN_GALLERY_SHOWCASE · DESIGN_AI_CHAT_SURFACE · the Bound Book register.
     Order within this block is Sol's to optimize (independent surfaces).
+22. **THE RECEIPT-POOL ANNEXES ARE PRE-AUTHORED (2026-08-02)** — docs/content/
+    RECEIPT_POOLS_{WAR,TRADE,FAITH,POPULATIONS,INFORMATION,GRAMMAR,INTERIOR,
+    COUPLINGS}.md: 676 phrased kinds, ~3,000 angle-distinct variants, authored
+    and adversarially verified under SP-6's voice contract and content-depth
+    floor (284 violations caught in the verify pass). Sol WIRES these pools at
+    each wave's WHAT_PHRASES/heraldRouting registration rather than authoring
+    prose; the floor walker still gates at registration; a pool the build
+    finds wanting or unspecced is a STOP-and-report, never a silent rewrite.
+    The annex headers carry the slot convention; volume exemplars are variant
+    1 verbatim wherever the volume speaks one.
 
 ## §3 CHAIR CHECKPOINTS (report, don't rule — the chair answers fast)
 
