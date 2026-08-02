@@ -120,6 +120,28 @@ ledger — never from a session digest.
 >   — attribution evidence in flight. IN FLIGHT: 13-agent validation-evidence workflow (all 33 queue
 >   rows) + 10-dimension holistic review with Opus verifiers. Queue verdicts + WR-0 landing ruling
 >   follow in this ledger and FABLE_VALIDATION_QUEUE.md when evidence returns.
+> - 2026-08-02 (~02:15, THE SELF-AUDIT VERDICT + AN INCIDENT). Owner asked whether the chair's
+>   architecture was exhaustive; NINE Opus verifiers answered: NO — ~134 confirmed findings
+>   across the session corpus, concentrated in the dictation-speed specs (stale-substrate drift:
+>   maps/campaigns galleries ALREADY SHIPPED, the Account six-tab IA ALREADY EXISTS, no GSAP in
+>   the film, nav parents are buttons) and in incomplete amendment propagation (the WR volume's
+>   §3/§4 still carried the vetoed disposition ledger; amendment B orphaned entirely). What HELD:
+>   the 33 validation rulings ("largely survive re-derivation" — batch-6 claims independently
+>   re-verified, the golden adjudication confirmed), P5b honest to spec, Sol's builds "stronger
+>   than specced in places," and Sol independently corrected the chair's desert arithmetic to
+>   0.55 — though the audit found the CRITERION itself equilibrium-blind (neither desert nor
+>   mountain promotes at fixed point; the interlock was a ceiling artifact). Money-shaped finds:
+>   annual invoices earn ZERO credits (price-id-gated), unknown product keys pay-and-get-nothing,
+>   live Terms PROMISE auto-refunds against the new no-refunds ruling. TWO URGENT CORRECTIONS
+>   LANDED @ e1db8fff (WR-0c(3) margin-waiver removed while Sol is mid-build there; the lighting
+>   batch gains demographicsEnabled). ⚠️ INCIDENT, honestly: that commit fired the RECORDED
+>   shared-index race IN REVERSE — it swept 11 of Sol's staged WR-9 files (warConvergenceContract,
+>   story-mix-divergence) under the chair's message; work SAFE, attribution wrong, slice possibly
+>   split across two commits; no rewrite in a live tree — recorded here instead. Cause: the chair
+>   skipped pathspec-commit discipline under urgency, hours after re-reading the hazard. RULE
+>   REAFFIRMED: every minifold commit is `git commit -- <explicit paths>` from now on. NEXT: the
+>   full correction pass over all ~134 findings (both journals preserved; crux rulings chair-held);
+>   NOTHING uncorrected ships to Sol.
 > - 2026-08-01 (⭐⭐ THE FABLE VALIDATION PASS COMPLETE — @ minifold d38595c1). Both workflows
 >   landed (14 + 23 agents, 6.4M tokens, 0 errors). ALL 33 queue rows RULED: 27 CONFIRMED /
 >   6 ADJUSTED / 0 engineering reversals — the Opus era's engineering judgments HOLD; the one
