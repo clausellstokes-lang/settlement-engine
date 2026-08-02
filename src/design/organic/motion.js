@@ -8,31 +8,24 @@
  * gesture. The vocabulary is CLOSED: a new behavior is a design-law change,
  * not a convenience (whimsy repeated becomes a system — law §5).
  *
- * TOKEN-PINNED: durations/easings live here (JS canonical), project to
- * --oc-motion-* / --oc-ease-* via organicCssVars → organicVars.css, and the
- * CSS classes in organic.css consume ONLY the vars. tests/design/
+ * TOKEN-PINNED: duration/easing values live in design/tokens.js (JS canonical),
+ * are re-exported here beside the behavior grammar, and project to --oc-motion-*
+ * / --oc-ease-* via organicCssVars → organicVars.css. The CSS classes in
+ * organic.css consume ONLY those vars. tests/design/
  * organicMotion.test.js pins: all twelve class names exist, reduced-motion
  * collapses them to instant states, no duration exceeds 700ms, and keyframes
  * animate transform/opacity only (GPU-cheap, permanently).
  *
- * Token-definition file — lazy, never eager.
+ * Behavior-definition bridge — lazy, never eager.
  */
 
+import { MOTION_PRIMITIVES } from '../tokens.js';
+
 /** Durations (ms). Ceiling 700 — pinned by test; raises are a law change. */
-export const MOTION_DURATION = Object.freeze({
-  press: '120ms',   // instrument press — machined, immediate
-  ink: '180ms',     // hover ink-darken — a breath of ink, not a spotlight
-  strike: '300ms',  // tally-strike — one decisive stroke
-  settle: '420ms',  // unfold · slip-in · draft-settle · warm-dim
-  lay: '640ms',     // lay-down · page-turn · rule-draw · impress · ink-pulse
-});
+export const MOTION_DURATION = MOTION_PRIMITIVES.duration;
 
 /** Easings. No overshoot anywhere (bounce/spring are BANNED — annex). */
-export const MOTION_EASE = Object.freeze({
-  ink: 'cubic-bezier(0.33, 0, 0.2, 1)',    // ink wicking: fast bite, soft finish
-  settle: 'cubic-bezier(0.22, 1, 0.36, 1)', // paper settling: decisive then still
-  press: 'cubic-bezier(0.4, 0, 0.6, 1)',    // machined symmetric in/out
-});
+export const MOTION_EASE = MOTION_PRIMITIVES.easing;
 
 /**
  * The twelve behaviors: name → { className, means }. The className is the

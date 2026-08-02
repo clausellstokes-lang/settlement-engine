@@ -478,7 +478,60 @@ export const elevation = Object.freeze({
   '3': '0 12px 32px rgba(27,20,8,0.18)', // modals, popovers
 });
 
+// ── Bound Book surface steps ───────────────────────────────────────────────
+// The three authored parchment grounds. AE-1 only establishes the vocabulary;
+// existing semantic/legacy card aliases are deliberately NOT repointed until
+// the elevation sweep can be judged as a visual change.
+export const PARCHMENT_STEPS = Object.freeze({
+  page:   color['parchment-50'],
+  card:   color['parchment-100'],
+  nested: color['parchment-200'],
+});
+
 // ── Motion ─────────────────────────────────────────────────────────────────
+// Primitive values for the already-live twelve-behavior paper-physics grammar.
+// `design/organic/motion.js` re-exports these names; keeping their values here
+// satisfies the token-home law without changing a class, CSS variable, or pixel.
+export const MOTION_PRIMITIVES = Object.freeze({
+  duration: Object.freeze({
+    press: '120ms',
+    ink: '180ms',
+    strike: '300ms',
+    settle: '420ms',
+    lay: '640ms',
+  }),
+  easing: Object.freeze({
+    ink: 'cubic-bezier(0.33, 0, 0.2, 1)',
+    settle: 'cubic-bezier(0.22, 1, 0.36, 1)',
+    press: 'cubic-bezier(0.4, 0, 0.6, 1)',
+  }),
+});
+
+// High-level SURFACE orchestration. This closed vocabulary classifies whether a
+// composed surface resolves once, follows scroll, or stays still. It does not
+// replace the lower-level organic gestures above; AE-4 will map declarations to
+// those gestures. Every moving entry names an equal static composition.
+export const MOTION = Object.freeze({
+  none: Object.freeze({
+    owner: 'static', durationMs: 0, easing: 'linear', iterations: 1,
+    staticComposition: 'present',
+  }),
+  settle: Object.freeze({
+    owner: 'time', durationMs: 320, easing: 'cubic-bezier(.2,.7,.3,1)', iterations: 1,
+    staticComposition: 'settled', translateYPx: 6,
+  }),
+  reveal: Object.freeze({
+    owner: 'time', durationMs: 640, easing: 'cubic-bezier(0.22,1,0.36,1)', iterations: 1,
+    staticComposition: 'resolved',
+  }),
+  scrub: Object.freeze({
+    owner: 'scroll', durationMs: null, easing: 'linear', iterations: 1,
+    staticComposition: 'poster',
+  }),
+});
+
+// Deprecated compatibility table. It has no live in-repo consumers, but AE-1 is
+// data-only and therefore preserves the public export until a dedicated cleanup.
 export const motion = Object.freeze({
   quick:   { duration: 120, easing: 'ease-out' },                       // hover, focus
   base:    { duration: 220, easing: 'cubic-bezier(.2,.7,.3,1)' },       // modal open, tab switch
@@ -525,6 +578,12 @@ export function emitCssTokens(target = document.documentElement) {
   for (const [k, v] of Object.entries(space))     set(`--${k}`, `${v}px`);
   for (const [k, v] of Object.entries(radius))    set(`--radius-${k}`, typeof v === 'number' ? `${v}px` : v);
   for (const [k, v] of Object.entries(elevation)) set(`--elevation-${k}`, v);
+  for (const [k, v] of Object.entries(PARCHMENT_STEPS)) set(`--parchment-step-${k}`, v);
+  for (const [k, v] of Object.entries(MOTION)) {
+    if (v.durationMs !== null) set(`--motion-${k}-duration`, `${v.durationMs}ms`);
+    set(`--motion-${k}-easing`, v.easing);
+    if ('translateYPx' in v) set(`--motion-${k}-translate-y`, `${v.translateYPx}px`);
+  }
 }
 
 // ── Backward-compat shim ───────────────────────────────────────────────────

@@ -37,6 +37,10 @@
    "label": "epistemic/distribution bound collapsed to zero margin",
    "what": "Standing plant makes a registered upper bound sit exactly on its expected count while loosenPending keeps its tighter-than-derived shape admissible; the gate must red on zero margin and the under-2-sigma power floor. Fold 5f8dc783 made the manifest target tracked and clean."
   },
+  "tests/lint/boundBookReport.test.js": {
+   "kind": "rationale",
+   "ref": "self-proving-meta"
+  },
   "tests/lint/negativeAssertionAnchor.walker.test.js": {
    "kind": "mutation",
    "label": "epistemic/unanchored negative assertion planted",
@@ -197,6 +201,10 @@
   },
   "tests/design/atlasSamples.test.js": {
    "kind": "uncovered"
+  },
+  "tests/design/boundBookSubstrate.test.js": {
+   "kind": "rationale",
+   "rationale": "Closed declarative design substrate: exact-key, exact-value, deep-freeze, contrast, live-owner, and cross-module identity assertions import both authorities directly. The report walker carries executed hostile fixtures separately; a transient mutation of the shared token source would repeat these exact equalities while risking concurrent visual work."
   },
   "tests/design/contrast.test.js": {
    "kind": "uncovered"
