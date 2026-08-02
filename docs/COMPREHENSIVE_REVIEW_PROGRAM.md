@@ -142,6 +142,17 @@ ledger — never from a session digest.
 >   REAFFIRMED: every minifold commit is `git commit -- <explicit paths>` from now on. NEXT: the
 >   full correction pass over all ~134 findings (both journals preserved; crux rulings chair-held);
 >   NOTHING uncorrected ships to Sol.
+> - 2026-08-02 (~04:30, THE NIGHT CLOSES WHOLE). CORRECTION PASS COMPLETE: 134 corrections
+>   across 11 docs by 7 agents (six correctors + the coherence sweeper), 20+3 unresolved
+>   forks all chair-ruled (2 routed to owner: annual credit cadence · WR-9 gate reading);
+>   landed @ minifold cca61099 + follow-ups. THE DICTATION CORPUS of 2026-08-02 fully
+>   architected: Founders' Hall (9 rulings: all-invited 30, no-trade, petition letters,
+>   alphabetical filled-only roll, bio drawers, role rings, ceremonial removal),
+>   DESIGN_PROFILE_IMAGE (+ the civility guard's block/veil two-mode), DESIGN_ABOUT_PAGES,
+>   DESIGN_GALLERY_SHOWCASE (corrected), DESIGN_AI_CHAT_SURFACE (corrected), LD-1..LD-11.
+>   Sol's queue is AUDITED CORPUS end to end. Remaining: Sol executes; owner holds soaks/
+>   tuning/lighting + the routed pair + the legal packet (Terms refunds · covenant ·
+>   consent-regionality · sponsored disclosure).
 > - 2026-08-01 (⭐⭐ THE FABLE VALIDATION PASS COMPLETE — @ minifold d38595c1). Both workflows
 >   landed (14 + 23 agents, 6.4M tokens, 0 errors). ALL 33 queue rows RULED: 27 CONFIRMED /
 >   6 ADJUSTED / 0 engineering reversals — the Opus era's engineering judgments HOLD; the one
