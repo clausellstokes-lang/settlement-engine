@@ -40,11 +40,35 @@ a chair is granted or open, and the counter never implies a sale.
   rename) — deep-linkable, linked from the pricing Founder card and the About
   journey. Not a modal, not a section: a place.
 - **THIRTY NUMBERED CHAIRS, Roman numerals I–XXX.** The seat number is permanent
-  and belongs to the CHAIR, not the holder. Held chairs show the founder's
-  chosen display (opt-in name; otherwise the numeral alone — "Seat XVII is
-  held" is already grand). Open chairs stand honestly open ("Seat
-  XXIV stands open — the Hall invites"). Every chair is invitational; there
-  is no purchasable class and the hall never implies one.
+  and belongs to the CHAIR, not the holder — MINTED IN SEATING ORDER and shown
+  on every plate, even though display order is not numeric (below). Held chairs
+  show the founder's chosen display (opt-in name; otherwise the numeral alone —
+  "Seat XVII is held" is already grand). Every chair is invitational; there is
+  no purchasable class and the hall never implies one.
+- **DISPLAY LAW (owner orders 2026-08-02, superseding the open-chair rhetoric):**
+  the roll renders HELD CHAIRS ONLY — an unfilled slot does not appear at all;
+  the Hall looks complete at every stage of its life (three founders is a hall
+  of three, never a hall of twenty-seven vacancies). ORDER IS ALPHABETICAL by
+  display name; numeral-only chairs follow the named, in numeral order (chair
+  ruling, vetoable). Scarcity lives in the counter and the Request letterbox,
+  never in vacant pedestals.
+- **THE BIO DRAWER (owner order 2026-08-02):** clicking a founder's card opens
+  a RIGHT-SIDE PANEL with the founder's bio — OPTIONAL, written and updated by
+  the founder from Account ▸ Profile (a Founder block that exists ONLY when the
+  account holds a chair — the presence discipline). The bio is authored-public
+  text: the civility guard's BLOCK mode runs on save; an authored length band
+  keeps plates from becoming blogs; it rides the SAME single display-identity
+  opt-in as name and image (one consent, everywhere); the drawer is
+  keyboard-reachable (card = button; Escape closes; focus returns) and renders
+  the §2b register in miniature.
+- **ROLE RINGS (owner order 2026-08-02 — roles and chairs COEXIST):** a founder
+  who is also staff wears the role as a ring around the plate: BLUE for
+  Developer, PURPLISH-PINK for Admin — named tokens (`founderRingDeveloper`,
+  `founderRingAdmin`; values from the owner's two hues through tokens.js — the
+  no-raw-color law holds even here), visually distinct from the ceremonial gold
+  so staff marks never read as purchasable prestige. Role is what you are to
+  the product; the chair is an honor you hold; the two compose without
+  collision and the ring is the composition made visible.
 - **PERMANENCE IS THE GRANDEUR (owner order, same session: seats are NOT
   traded — that piece is removed entirely):** a chair is bound to its founder
   PERMANENTLY — "Seat IX · NAME" is a sentence that will never change. One
@@ -69,9 +93,10 @@ a chair is granted or open, and the counter never implies a sale.
   (the reduced experience is a different grandeur, never a lesser one).
 - **A CHAIR IS AN OBJECT, NOT A LIST ROW.** Each chair renders as an
   illuminated plate — the wax-seal motif the pricing artwork already speaks —
-  numeral engraved, gold-on-dark. HELD chairs are lit; OPEN chairs stand
-  unlit, and the unlit chair is the page's whole rhetoric: "Seat XXIV stands
-  open — the Hall invites." Scarcity as image, not as countdown timer.
+  numeral engraved, gold-on-dark. [SUPERSEDED 2026-08-02 by the §2 display
+  law: unfilled chairs no longer render at all — the unlit-chair rhetoric
+  retires; the plates that exist carry the whole ceremony, and the roll only
+  ever grows. Scarcity lives in the counter and the letterbox.]
 - **A held chair opens to its plate:** the name (or the numeral standing
   alone, set just as formally), and the seating date in the covenant's own
   tense ("Seated MMXXVI"). The optional founder-authored dedication line
@@ -124,6 +149,18 @@ a chair is granted or open, and the counter never implies a sale.
   entitlement minted without payment — the Stripe webhook is not involved;
   the grant writes the same seat ledger the purchase path writes, one seat
   truth). No payment fields, no checkout theater, for an honor.
+- **THE REMOVAL VERB (owner order 2026-08-02 — "an admin could remove them,
+  but this is ceremonial and we don't know what happens"):** REMOVE CHAIR
+  exists, admin-only, TWO-KEY like issuance (symmetric stakes), audit-rowed.
+  Its DOWNSTREAM is deliberately under-ruled per the owner's own words —
+  recorded defaults, vetoable, until the first removal (if ever) forces the
+  ruling: the entitlement leaves with the chair; remaining chairs never
+  renumber; the removed chair simply stops rendering (no tombstone); whether
+  a vacated numeral re-issues or retires forever is PARKED (§10). One
+  dividend arrives free: the Request letterbox's presence derives from the
+  live ledger, so a removal reopens it with zero code changes. The §2b
+  permanence law rewords to the new truth: chairs are never TRADED — the
+  owner's ceremonial hand was never bound by it.
 - **TRANSFERS ARE ABOLISHED (owner order):** no post-acceptance transfer path
   exists. RETIREMENT WORK ITEM: the founder-transfer machinery (code-complete,
   key-inert, never legally activated — migration 160's cases, the transfer
@@ -206,9 +243,19 @@ withdrawal reverts the chair to numeral-only immediately.
 - COPY: no surface says "payment", "buy", "remaining for sale", or a price in
   the same breath as Founder — pinned against the rewritten copy keys.
 - CONSENT: no name renders without its opt-in flag; withdrawal round-trips.
-- PERMANENCE: no code path reassigns a granted chair's holder (the
+- PERMANENCE: no code path REASSIGNS a granted chair's holder (the
   never-traded structural pin — walk the entitlement writers and assert the
-  absence; the negative case pins hardest).
+  absence; the negative case pins hardest). The two-key REMOVE verb VACATES,
+  never reassigns — asserted in the same walk.
+- DISPLAY LAW: the roll renders held chairs only, alphabetical among named,
+  numeral-order after; zero unfilled slots in the DOM (both arms on one
+  ledger fixture).
+- THE BIO: guard-blocked on save, band-bounded, absent without the identity
+  opt-in, drawer keyboard-reachable, and editing exists only for
+  chair-holding accounts (presence pin on the Account block).
+- ROLE RINGS: developer/admin founders render their ring from the named
+  tokens; a non-staff founder renders none; a staff non-founder renders
+  nothing here at all (three arms, one fixture).
 
 ## §8 ACTIVATION GATES (unchanged by this design)
 The founder-transfer lane is RETIRED (owner order — see §4); its legal gate
