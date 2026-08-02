@@ -298,3 +298,44 @@ voice; the miniature will EXPOSE it on the landing page. Correct response: the
 legacy receipt sweep (register R-refs; the prose-numerics/authoring walls Sol
 already landed are its enforcement half) graduates to LAUNCH-VISIBLE priority —
 the voice is fixed at the SOURCE, never faked on the landing.
+
+---
+
+## LD-3b — THE TWO RIBBONS (owner amendment 2026-08-01 to LD-3; supersedes LD-3's
+## document-end model with a stronger one)
+
+**The owner's observation + solution:** at scroll-top, the hero shader visibly fails
+to reach the viewport bottom (a floating seam mid-artwork). Rather than retune the
+shader: the LD-3 bottom ribbon behaves like the TOP ribbon — persistent chrome —
+and everything else scrolls BETWEEN the two ribbons. The shader then terminates at
+the bottom ribbon at scroll-top, by construction.
+
+**Why this is the right cure (recorded):** the seam is a HEIGHT-ASSUMPTION defect —
+a scrim sized to an assumed viewport lands mid-artwork on other aspect ratios.
+Tuning gradient stops fixes one screen; the ribbon model deletes the CLASS: the
+scrim's terminus becomes a hard chrome edge at every aspect ratio. Letterboxing —
+the scroll film plays between two fixed rails, and the page's end is always
+visible.
+
+**Binding constraints:**
+1. **WINDOW SCROLL IS PRESERVED.** Both ribbons are `position: fixed`; the body
+   remains the scroll container. A nested scroll region is FORBIDDEN — the
+   landing's scroll-scrubbed film math (pins/triggers) survives fixed chrome but
+   not a re-parented scroller. Re-derive only the viewport-height offsets.
+2. **Chrome heights are layout tokens** (`LANDING_HEADER_H`, `LANDING_RIBBON_H`,
+   tokens.js): the hero/scrim heights become
+   `calc(100dvh - LANDING_HEADER_H - LANDING_RIBBON_H)` — termination at the
+   ribbon by construction, zero per-aspect tuning. Root-cause the current seam's
+   exact line at build and delete its assumption rather than layering over it.
+3. **The ribbon is SLIM** — one modest row (LD-3's migrated legal line: Terms ·
+   Privacy · Feedback · © · "Simulated, not AI-generated"), visibly lighter than
+   the header; the film's vertical budget on laptop viewports is the scarce
+   resource.
+4. **Mobile/safe-area:** fixed bottom bars fight collapsing browser chrome; below
+   the mobile breakpoint the ribbon is NOT fixed — it reverts to LD-3's
+   document-end placement with `env(safe-area-inset-bottom)` padding. Desktop
+   letterboxes; mobile ends on the band.
+5. LD-3's pins update: no sibling ever renders below the ribbon (trivial when
+   fixed); the scrim-terminus pin is new — at scroll-top the hero paint region's
+   bottom edge equals the ribbon's top edge (a computed-style assertion at two
+   viewport heights, the seam's regression test).
