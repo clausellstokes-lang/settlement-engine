@@ -60,6 +60,37 @@ a chair is granted or open, and the counter never implies a sale.
   legibility ladder holds (glance: thirty chairs and how many stand open;
   sentence: any chair's line; table: the roll).
 
+## §2b THE GRANDEUR SPEC (owner emphasis: "still make the page more grand" —
+## the ceremony is architecture, not decoration; every element token-derived)
+- **THE HALL IS ENTERED, NOT LOADED.** The route opens on a dark ceremonial
+  field (the house artwork register at its most formal) and the thirty chairs
+  RESOLVE into place as the page settles — one restrained reveal, once per
+  visit, honoring prefers-reduced-motion with a dignified static composition
+  (the reduced experience is a different grandeur, never a lesser one).
+- **A CHAIR IS AN OBJECT, NOT A LIST ROW.** Each chair renders as an
+  illuminated plate — the wax-seal motif the pricing artwork already speaks —
+  numeral engraved, gold-on-dark. HELD chairs are lit; OPEN chairs stand
+  unlit, and the unlit chair is the page's whole rhetoric: "Seat XXIV stands
+  open — the Hall invites." Scarcity as image, not as countdown timer.
+- **A held chair opens to its plate:** the name (or the numeral standing
+  alone, set just as formally), and the seating date in the covenant's own
+  tense ("Seated MMXXVI"). The optional founder-authored dedication line
+  stays PARKED (§9.3) — the plate's design reserves the space for it.
+- **THE COVENANT is an illuminated document block** — the treaty-artifact
+  aesthetic the product already owns (a treaty renders as a document a DM can
+  read; the covenant is the house's own treaty with its founders, rendered by
+  the same discipline).
+- **Typography and color:** the serif display register at full formality; the
+  roll set like a charter, not a table; every value from tokens (the A-9 law —
+  grandeur through restraint; the no-raw-color lint applies to the hall like
+  any surface). No gradients-of-the-week, no glow effects: candlelight, not
+  neon.
+- **THE LADDER HOLDS EVEN HERE:** glance — thirty chairs, how many lit;
+  sentence — any plate read aloud; table — the roll as a real, screen-reader-
+  honest list beneath the ceremony (the hall is never the only path to the
+  facts). Lazy route, zero eager bytes, the artwork under the image-weight
+  discipline.
+
 ## §3 ENTITLEMENTS + STANDING (one tier, two doors)
 - One tier, ONE DOOR: every founder is invited; entitlements are everything
   Cartographer runs, forever (the covenant's language survives; only the
